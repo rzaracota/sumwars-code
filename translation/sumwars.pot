@@ -1,0 +1,820 @@
+# ITEM - NAMES
+msgid "noitem"
+msgstr ""
+
+msgid "leather_armor"
+msgstr ""
+
+msgid "tiled_armor"
+msgstr ""
+
+msgid "heavy_armor"
+msgstr ""
+
+msgid "armor"
+msgstr ""
+
+msgid "steel_helmet"
+msgstr ""
+
+msgid "divine_helmet"
+msgstr ""
+
+msgid "helmet"
+msgstr ""
+
+msgid "gloves"
+msgstr ""
+
+msgid "short_sword"
+msgstr ""
+
+msgid "long_sword"
+msgstr ""
+
+msgid "wooden_bow"
+msgstr ""
+
+msgid "long_bow"
+msgstr ""
+
+msgid "burning_bow"
+msgstr ""
+
+msgid "battle_axe"
+msgstr ""
+
+msgid "holy_flail"
+msgstr ""
+
+msgid "weapon"
+msgstr ""
+
+msgid "wooden_shield"
+msgstr ""
+
+msgid "iron_shield"
+msgstr ""
+
+msgid "shield"
+msgstr ""
+
+msgid "small_heal_potion"
+msgstr ""
+
+msgid "big_heal_potion"
+msgstr ""
+
+msgid "heal_blind_potion"
+msgstr ""
+
+msgid "instant_unfreeze_potion"
+msgstr ""
+
+msgid "potion"
+msgstr ""
+
+msgid "ring"
+msgstr ""
+
+msgid "amulet"
+msgstr ""
+
+msgid "unknown"
+msgstr ""
+
+
+
+# ACTION - NAMES
+msgid "noaction"
+msgstr ""
+
+msgid "walk"
+msgstr ""
+
+msgid "attack"
+msgstr ""
+
+msgid "range_attack"
+msgstr ""
+
+msgid "magic_attack"
+msgstr ""
+
+msgid "holy_attack"
+msgstr ""
+
+msgid "bash"
+msgstr ""
+
+msgid "hammer_bash"
+msgstr ""
+
+msgid "around_blow"
+msgstr ""
+
+msgid "whirl_blow"
+msgstr ""
+
+msgid "smash"
+msgstr ""
+
+msgid "hate_mage"
+msgstr ""
+
+msgid "charge"
+msgstr ""
+
+msgid "storm_charge"
+msgstr ""
+
+msgid "decoy"
+msgstr ""
+
+msgid "scare"
+msgstr ""
+
+msgid "firesword"
+msgstr ""
+
+msgid "flamesword"
+msgstr ""
+
+msgid "flamearmor"
+msgstr ""
+
+msgid "berserk"
+msgstr ""
+
+msgid "warcry"
+msgstr ""
+
+msgid "regenerate"
+msgstr ""
+
+msgid "anger"
+msgstr ""
+
+msgid "fury"
+msgstr ""
+
+msgid "steadfast"
+msgstr ""
+
+msgid "block"
+msgstr ""
+
+msgid "weaponmaster"
+msgstr ""
+
+msgid "monster_hunter"
+msgstr ""
+
+msgid "monster_slayer"
+msgstr ""
+
+msgid "endurance"
+msgstr ""
+
+msgid "fire_bolt"
+msgstr ""
+
+msgid "fire_strike"
+msgstr ""
+
+msgid "fire_wave"
+msgstr ""
+
+msgid "fire_storm"
+msgstr ""
+
+msgid "fire_ball"
+msgstr ""
+
+msgid "inferno_ball"
+msgstr ""
+
+msgid "fire_wall"
+msgstr ""
+
+msgid "inflame"
+msgstr ""
+
+msgid "ice_bolt"
+msgstr ""
+
+msgid "ice_spike"
+msgstr ""
+
+msgid "snow_storm"
+msgstr ""
+
+msgid "blizzard"
+msgstr ""
+
+msgid "ice_ring"
+msgstr ""
+
+msgid "frost_ring"
+msgstr ""
+
+msgid "freeze"
+msgstr ""
+
+msgid "chill"
+msgstr ""
+
+msgid "lightning"
+msgstr ""
+
+msgid "lightning_strike"
+msgstr ""
+
+msgid "thunderstorm"
+msgstr ""
+
+msgid "thunderstorm2"
+msgstr ""
+
+msgid "chain_lightning"
+msgstr ""
+
+msgid "chain_lightning2"
+msgstr ""
+
+msgid "static_shield"
+msgstr ""
+
+msgid "ionisation"
+msgstr ""
+
+msgid "triple_shot"
+msgstr ""
+
+msgid "guided_triple_shot"
+msgstr ""
+
+msgid "multishot"
+msgstr ""
+
+msgid "volley_shot"
+msgstr ""
+
+msgid "pierce"
+msgstr ""
+
+msgid "weak_point"
+msgstr ""
+
+msgid "blind_rage"
+msgstr ""
+
+msgid "vacuum"
+msgstr ""
+
+msgid "death_roulette"
+msgstr ""
+
+msgid "exploding_arrow"
+msgstr ""
+
+msgid "exploding_cascade"
+msgstr ""
+
+msgid "aimed_shot"
+msgstr ""
+
+msgid "bow_spirit"
+msgstr ""
+
+msgid "ice_arrows"
+msgstr ""
+
+msgid "freezing_arrows"
+msgstr ""
+
+msgid "wind_arrows"
+msgstr ""
+
+msgid "storm_arrows"
+msgstr ""
+
+msgid "wind_walk"
+msgstr ""
+
+msgid "evade"
+msgstr ""
+
+msgid "critical_strike"
+msgstr ""
+
+msgid "concentration"
+msgstr ""
+
+msgid "mental_wall"
+msgstr ""
+
+msgid "resist_ice"
+msgstr ""
+
+msgid "resist_air"
+msgstr ""
+
+msgid "holy_light"
+msgstr ""
+
+msgid "holy_fire"
+msgstr ""
+
+msgid "burning_rage"
+msgstr ""
+
+msgid "cure_blind_mute"
+msgstr ""
+
+msgid "cure_blind_mute_party"
+msgstr ""
+
+msgid "blazing_shield"
+msgstr ""
+
+msgid "light_beam"
+msgstr ""
+
+msgid "burning_sun"
+msgstr ""
+
+msgid "break_binding"
+msgstr ""
+
+msgid "disrupt_binding"
+msgstr ""
+
+msgid "magic_shield"
+msgstr ""
+
+msgid "cure_pois_burn"
+msgstr ""
+
+msgid "cure_pois_burn_party"
+msgstr ""
+
+msgid "acid"
+msgstr ""
+
+msgid "heal"
+msgstr ""
+
+msgid "heal_party"
+msgstr ""
+
+msgid "divine_wind"
+msgstr ""
+
+msgid "divine_storm"
+msgstr ""
+
+msgid "blade_storm"
+msgstr ""
+
+msgid "cure_conf_bsrk"
+msgstr ""
+
+msgid "cure_conf_bsrk_party"
+msgstr ""
+
+msgid "hypnosis"
+msgstr ""
+
+msgid "hypnosis2"
+msgstr ""
+
+msgid "keen_mind"
+msgstr ""
+
+
+
+# ACTION - DESCRIPTIONS
+msgid "descr_noaction"
+msgstr ""
+
+msgid "descr_walk"
+msgstr ""
+
+msgid "descr_take_item"
+msgstr ""
+
+msgid "descr_attack"
+msgstr ""
+
+msgid "descr_range_attack"
+msgstr ""
+
+msgid "descr_magic_attack"
+msgstr ""
+
+msgid "descr_holy_attack"
+msgstr ""
+
+msgid "descr_bash"
+msgstr ""
+
+msgid "descr_hammer_bash"
+msgstr ""
+
+msgid "descr_around_blow"
+msgstr ""
+
+msgid "descr_whirl_blow"
+msgstr ""
+
+msgid "descr_smash"
+msgstr ""
+
+msgid "descr_hate_mage"
+msgstr ""
+
+msgid "descr_charge"
+msgstr ""
+
+msgid "descr_storm_charge"
+msgstr ""
+
+msgid "descr_decoy"
+msgstr ""
+
+msgid "descr_scare"
+msgstr ""
+
+msgid "descr_firesword"
+msgstr ""
+
+msgid "descr_flamesword"
+msgstr ""
+
+msgid "descr_flamearmor"
+msgstr ""
+
+msgid "descr_berserk"
+msgstr ""
+
+msgid "descr_warcry"
+msgstr ""
+
+msgid "descr_regenerate"
+msgstr ""
+
+msgid "descr_anger"
+msgstr ""
+
+msgid "descr_fury"
+msgstr ""
+
+msgid "descr_steadfast"
+msgstr ""
+
+msgid "descr_block"
+msgstr ""
+
+msgid "descr_weaponmaster"
+msgstr ""
+
+msgid "descr_monster_hunter"
+msgstr ""
+
+msgid "descr_monster_slayer"
+msgstr ""
+
+msgid "descr_endurance"
+msgstr ""
+
+msgid "descr_fire_bolt"
+msgstr ""
+
+msgid "descr_fire_strike"
+msgstr ""
+
+msgid "descr_fire_wave"
+msgstr ""
+
+msgid "descr_fire_storm"
+msgstr ""
+
+msgid "descr_fire_ball"
+msgstr ""
+
+msgid "descr_inferno_ball"
+msgstr ""
+
+msgid "descr_fire_wall"
+msgstr ""
+
+msgid "descr_inflame"
+msgstr ""
+
+msgid "descr_ice_bolt"
+msgstr ""
+
+msgid "descr_ice_spike"
+msgstr ""
+
+msgid "descr_snow_storm"
+msgstr ""
+
+msgid "descr_blizzard"
+msgstr ""
+
+msgid "descr_ice_ring"
+msgstr ""
+
+msgid "descr_frost_ring"
+msgstr ""
+
+msgid "descr_freeze"
+msgstr ""
+
+msgid "descr_chill"
+msgstr ""
+
+msgid "descr_lightning"
+msgstr ""
+
+msgid "descr_lightning_strike"
+msgstr ""
+
+msgid "descr_thunderstorm"
+msgstr ""
+
+msgid "descr_thunderstorm2"
+msgstr ""
+
+msgid "descr_chain_lightning"
+msgstr ""
+
+msgid "descr_chain_lightning2"
+msgstr ""
+
+msgid "descr_static_shield"
+msgstr ""
+
+msgid "descr_ionisation"
+msgstr ""
+
+msgid "descr_triple_shot"
+msgstr ""
+
+msgid "descr_guided_triple_shot"
+msgstr ""
+
+msgid "descr_multishot"
+msgstr ""
+
+msgid "descr_volley_shot"
+msgstr ""
+
+msgid "descr_pierce"
+msgstr ""
+
+msgid "descr_weak_point"
+msgstr ""
+
+msgid "descr_blind_rage"
+msgstr ""
+
+msgid "descr_vacuum"
+msgstr ""
+
+msgid "descr_death_roulette"
+msgstr ""
+
+msgid "descr_exploding_arrow"
+msgstr ""
+
+msgid "descr_exploding_cascade"
+msgstr ""
+
+msgid "descr_aimed_shot"
+msgstr ""
+
+msgid "descr_bow_spirit"
+msgstr ""
+
+msgid "descr_ice_arrows"
+msgstr ""
+
+msgid "descr_freezing_arrows"
+msgstr ""
+
+msgid "descr_wind_arrows"
+msgstr ""
+
+msgid "descr_storm_arrows"
+msgstr ""
+
+msgid "descr_wind_walk"
+msgstr ""
+
+msgid "descr_evade"
+msgstr ""
+
+msgid "descr_critical_strike"
+msgstr ""
+
+msgid "descr_concentration"
+msgstr ""
+
+msgid "descr_mental_wall"
+msgstr ""
+
+msgid "descr_resist_ice"
+msgstr ""
+
+msgid "descr_resist_air"
+msgstr ""
+
+msgid "descr_holy_light"
+msgstr ""
+
+msgid "descr_holy_fire"
+msgstr ""
+
+msgid "descr_burning_rage"
+msgstr ""
+
+msgid "descr_cure_blind_mute"
+msgstr ""
+
+msgid "descr_cure_blind_mute_party"
+msgstr ""
+
+msgid "descr_blazing_shield"
+msgstr ""
+
+msgid "descr_light_beam"
+msgstr ""
+
+msgid "descr_burning_sun"
+msgstr ""
+
+msgid "descr_break_binding"
+msgstr ""
+
+msgid "descr_disrupt_binding"
+msgstr ""
+
+msgid "descr_magic_shield"
+msgstr ""
+
+msgid "descr_cure_pois_burn"
+msgstr ""
+
+msgid "descr_cure_pois_burn_party"
+msgstr ""
+
+msgid "descr_acid"
+msgstr ""
+
+msgid "descr_heal"
+msgstr ""
+
+msgid "descr_heal_party"
+msgstr ""
+
+msgid "descr_divine_wind"
+msgstr ""
+
+msgid "descr_divine_storm"
+msgstr ""
+
+msgid "descr_blade_storm"
+msgstr ""
+
+msgid "descr_cure_conf_bsrk"
+msgstr ""
+
+msgid "descr_cure_conf_bsrk_party"
+msgstr ""
+
+msgid "descr_hypnosis"
+msgstr ""
+
+msgid "descr_hypnosis2"
+msgstr ""
+
+msgid "descr_keen_mind"
+msgstr ""
+
+
+
+# MAINWINDOW - CHARACTER
+msgid "main_power"
+msgstr ""
+
+msgid "main_dexterity"
+msgstr ""
+
+msgid "main_willpower"
+msgstr ""
+
+msgid "main_magic_power"
+msgstr ""
+
+msgid "main_credits"
+msgstr ""
+
+msgid "main_experience"
+msgstr ""
+
+msgid "main_healthpoints"
+msgstr ""
+
+msgid "main_attack"
+msgstr ""
+
+msgid "main_attacks_per_second"
+msgstr ""
+
+msgid "main_range"
+msgstr ""
+
+msgid "main_penetration_power"
+msgstr ""
+
+msgid "main_armour"
+msgstr ""
+
+msgid "main_block"
+msgstr ""
+
+msgid "main_base_damage"
+msgstr ""
+
+msgid "main_physical_resistance"
+msgstr ""
+
+msgid "main_fire_resistance"
+msgstr ""
+
+msgid "main_air_resistance"
+msgstr ""
+
+msgid "main_ice_resistance"
+msgstr ""
+
+
+
+# MAINWINDOW - SKILLTREE
+msgid "main_firemagic"
+msgstr ""
+
+msgid "main_icemagic"
+msgstr ""
+
+msgid "main_airmagic"
+msgstr ""
+
+msgid "main_lightmagic"
+msgstr ""
+
+msgid "main_watermagic"
+msgstr ""
+
+msgid "main_windmagic"
+msgstr ""
+
+
+
+# MAINWINDOW - MAIN
+msgid "main_saveexit"
+msgstr ""
+
+msgid "main_options"
+msgstr ""
+
+msgid "main_warrior"
+msgstr ""
+
+msgid "main_magician"
+msgstr ""
+
+msgid "main_archer"
+msgstr ""
+
+msgid "main_priest"
+msgstr ""
+
+
+
+# DOCUMENT - ABILITY DESCRIPTION
+msgid "doc_description"
+msgstr ""
+
+msgid "doc_minimum_level"
+msgstr ""
+
+msgid "doc_timer"
+msgstr ""
+
+msgid "doc_timer_runtime"
+msgstr ""
+

@@ -1,0 +1,63 @@
+<?xml version="1.0" ?>
+
+<!-- Bei Gegenstaenden, die keine Waffen sind kann "WeaponAttribute" weggelassen werden. -->
+
+<!-- general
+<Item type="weapon" subtype="short_sw" size="medium">
+	<Mesh file="sword.mesh" />
+	<Attribute
+		level_requirement="char"
+		character_requirement="char"
+		price="int"
+		min_enchant="30"
+		max_enchant="120"
+	/>
+	<UseupEffect />
+	<EquipEffect />
+	<WeaponAttribute
+		damage_min_physical="5"
+		damage_max_physical="10"
+		damage_min_air="0"
+		damage_max_air="0"
+		damage_min_ice="0"
+		damage_max_ice="0"
+		damage_min_fire="0"
+		damage_max_fire="0"
+		damage_attack="20"
+		damage_power="30"
+		attack_range="1.0"
+		two_handed="no"
+		dattack_speed="500"
+	/>
+	<DropChance
+		level="int"
+		probability="float"
+	/>
+</Item>
+-->
+
+
+<!-- Short Sword -->
+<Item type="weapon" subtype="short_sw" size="medium">
+	<Mesh file="sword.mesh" />
+	<Attribute
+		price="150"
+		min_enchant="30"
+		max_enchant="120"
+	/>
+	<EquipEffect />
+	<WeaponAttribute
+		damage_min_physical="5"
+		damage_max_physical="10"
+		damage_attack="20"
+		damage_power="30"
+		attack_range="1.0"
+		two_handed="no"
+		dattack_speed="500"
+	/>
+	<DropChance
+		level="0"
+		probability="1.0"
+	/>
+</Item>
+
