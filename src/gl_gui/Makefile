@@ -11,19 +11,19 @@ RUN = client_app
 
 LDFLAGS =
 LOADLIBES =
-LIBS = OIS RakNet
+LIBS = RakNet
 LDLIBS = `pkg-config  $(LIBS) --libs`
 LDLIBS += -lm -lrt  -lGL -lglut
 #LDLIBS += -L../../server/trunk
 
-CFLAGS = -m32 -O3
+CFLAGS = -m32 -g
 CXXFLAGS = $(CFLAGS) 
 CXXFLAGS += `pkg-config  $(LIBS) --cflags`
-#CXXFLAGS += -I../../shared -I..
+CXXFLAGS += -I../core
 CXXFLAGS += -DDEBUG_LEVEL=$(DEBUG_LEVEL)
 
 
-OBJS = $(shell cat ./Makefile.objs )
+OBJS = $(shell cat ./Makefile.objs ) $(shell cat ../core/Makefile.objs )
 DIRS = $(shell find . -mindepth 1 -maxdepth 1 -type d -not -iname .svn )
 
 build: compile $(RUN)

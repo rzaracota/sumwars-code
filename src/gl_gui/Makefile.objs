@@ -1,17 +1,2 @@
-../document.o
-../../shared/action.o
-../../shared/worldobject.o
-../../shared/networkstruct.o
-../../shared/projectile.o
-../../shared/party.o
-../../shared/debug.o
-../../shared/itemlist.o
-../../shared/item.o
-../../shared/dropitem.o
-../../shared/serveritem.o
-../../shared/damage.o
-../clientnetwork.o
-../clientwobject.o
-../clientmplayer.o
 main.o
 window_main_gl.o

@@ -25,7 +25,7 @@ class WindowMain
 #pragma message("WinMain definiert")
 
 #include <GL/glut.h>
-#include "../document.h"
+#include "document.h"
 
 #include <stdlib.h>
 #include <math.h>

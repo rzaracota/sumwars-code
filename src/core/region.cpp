@@ -19,7 +19,7 @@ Region::Region(short dimx, short dimy)
 	m_players = new map<int,ServerWObject*>;
 	
 	// Baum fuer Projektile anlegen
-	m_projectiles = new list<DmgProjectile*>;
+	m_projectiles = new map<int,DmgProjectile*>;
 	
 	// Liste der Gegenstaende
 	m_drop_items = new map<int,DropItem*>;
@@ -40,10 +40,10 @@ Region::~Region()
 		delete i->second;
 	}
 	
-	list<DmgProjectile*>::iterator j;
+	map<int,DmgProjectile*>::iterator j;
 	for (j =  m_projectiles->begin(); j != m_projectiles->end(); j++)
 	{
-		delete (*j);
+		delete (j->second);
 	}
 	
 	
@@ -509,12 +509,12 @@ void Region::getSWObjectsOnLine( float xstart, float ystart, float xend, float y
 
 void Region::getProjectilesOnScreen(float center_x,float center_y, list<DmgProjectile*>* result)
 {
-	list<DmgProjectile*>::iterator i;
+	map<int,DmgProjectile*>::iterator i;
 	float dx,dy,r;
 	DmgProjectile* pr;
 	for (i=m_projectiles->begin();i!=m_projectiles->end();++i)
 	{
-		pr = (*i);
+		pr = (i->second);
 		
 		r=pr->getGeometry()->m_radius;
 		// Abstaende, in dem die Effekte von ihrem Zentrum entfernt sichtbar sind
@@ -595,7 +595,7 @@ bool Region::insertSWObject (ServerWObject* object, float x, float y)
 
 bool  Region::insertProjectile(DmgProjectile* object, float x, float y)
 {
-	m_projectiles->push_back(object);
+	m_projectiles->insert(make_pair(object->getId(),object));
 	object->getGeometry()->m_coordinate_x = x;
 	object->getGeometry()->m_coordinate_y = y;
 	return true;
@@ -717,34 +717,35 @@ void Region::update(float time)
 		DEBUG5("\nObjekt: %f %f key: %i layer %x",wob->m_shape.m_coordinate_x,wob->m_shape.m_coordinate_y ,object->getId(),object->getGeometry()->m_layer);	
 		if (object->getDestroyed()==true)
 		{
-			++iter;
+			
 			DEBUG5("Objekt gelöscht: %i \n",object->getId());
 			object->destroy();
 			deleteSWObject(object);
 			delete object;
+			m_objects->erase(iter++);
 			continue;
 		}
 		else
 		{
 			// Polymorpher Funktionsaufruf
 			object->update(time);
+			++iter;
 		}
-		++iter;
 		
 	}
 	DEBUG5("Update aller WeltObjekte abgeschlossen\n\n");
 	
 	// alle Projektile updaten
-	list<DmgProjectile*>::iterator it3;
+	map<int,DmgProjectile*>::iterator it3;
 	DmgProjectile* pr =0;
 	
 	for (it3 = m_projectiles->begin(); it3 !=m_projectiles->end();)
 	{
-		pr = (*it3);
+		pr = (it3->second);
 		if (pr->getState() == Projectile::DESTROYED)
 		{
 			DEBUG5("deleting projectile %p",pr);
-			it3 = m_projectiles->erase(it3);
+			m_projectiles->erase(it3++);
 			delete pr;
 			DEBUG5("loesche projektil");
 			

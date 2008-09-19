@@ -298,6 +298,11 @@ class Region
 		{
 			return m_drop_items;
 		}
+		
+		map<int,DmgProjectile*>* getProjectiles()
+		{
+			return m_projectiles;
+		}
 				
 	private:
 	/**
@@ -340,7 +345,7 @@ class Region
 	 * \var map<int, DmgProjectile>* m_projectiles
 	 * \brief Liste aller Projektile in der Region
 	 */
-	list<DmgProjectile*>* m_projectiles;
+	map<int,DmgProjectile*>* m_projectiles;
 	
 	/**
 	 * \var map<int,ServerWObject*>* m_object_bintree

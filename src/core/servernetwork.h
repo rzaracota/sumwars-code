@@ -136,11 +136,6 @@ class ServerNetwork: public Network
 		virtual NetStatus init( int auth_port=REQ_PORT );
 
 
-		/**
-		* \fn NetStatus kill()
-		* \brief Schliesst den Server
-		*/
-		void kill();
 
 		/**
 		 * \fn NetStatus getSlotStatus( int slot=0 )

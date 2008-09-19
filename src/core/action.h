@@ -215,6 +215,13 @@ public:
 	 */
 	struct ActionInfo
 	{
+		ActionInfo()
+		{
+			m_animation[NO_WEAPON].clear();
+			m_animation[ONE_HANDED].clear();
+			m_animation[TWO_HANDED].clear();
+			
+		}
 		/**
 		 * \var m_timer_nr
 		 * \brief Nummer des Timers, der bei benutzen der Aktion gestartet wird. Moegliche Werte sind 0,1,2

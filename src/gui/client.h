@@ -1,6 +1,6 @@
 
-#ifndef CLIENT_H
-#define CLIENT_H
+#ifndef APPLICATION_H
+#define APPLICATION_H
 
 
 
@@ -27,25 +27,25 @@
 
 
 /**
- * \class Client
+ * \class Application
  * \brief Basisklasse der Anwendung
  */
 
-class Client
+class Application
 {
 	
 	public:
 		/**
-		 * \fn Client()
+		 * \fn Application()
 		 * \brief Konstruktor
 		 */
-		Client();
+		Application();
 	
 		/**
-		 * \fn ~Client()
+		 * \fn ~Application()
 		 * \brief Destruktor
 		 */
-		~Client();
+		~Application();
 		
 		/**
 		 * \fn run()
@@ -172,7 +172,6 @@ class Client
 		 * \brief Hauptfenster der Applikation
 		 */
 		MainWindow* m_main_window;
-		
 };
 
 

@@ -203,7 +203,7 @@ void ItemLoader::searchItemBasicData(TiXmlNode* pParent)
 		{
 			m_item_list->push_back(m_item_data);
 			m_item_data = 0;
-			DEBUG("Item loaded");
+			DEBUG5("Item loaded");
 		}
 	}
 }
@@ -235,9 +235,9 @@ list<ItemBasicData*>* ItemLoader::loadItemBasicData(const char* pFilename)
 	
 	if (loadOkay)
 	{
-		DEBUG("Loading %s", pFilename);
+		DEBUG5("Loading %s", pFilename);
 		searchItemBasicData(&doc);
-		DEBUG("Loading %s finished", pFilename);
+		DEBUG5("Loading %s finished", pFilename);
 		return m_item_list;
 	}
 	else
@@ -367,7 +367,7 @@ void ItemLoader::searchDropChanceData(TiXmlNode* pParent)
 		{
 			m_drop_chance_data_list->push_back(m_drop_chance_data);
 			m_drop_chance_data = 0;
-			DEBUG("DropChance loaded");
+			DEBUG5("DropChance loaded");
 		}
 	}
 }
@@ -383,9 +383,9 @@ list<DropChanceData*>* ItemLoader::loadDropChanceData(const char* pFilename)
 	
 	if (loadOkay)
 	{
-		DEBUG("Loading %s", pFilename);
+		DEBUG5("Loading %s", pFilename);
 		searchDropChanceData(&doc);
-		DEBUG("Loading %s finished", pFilename);
+		DEBUG5("Loading %s finished", pFilename);
 		return m_drop_chance_data_list;
 	}
 	else

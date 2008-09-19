@@ -22,7 +22,8 @@
 
 #include "document.h"
 #include "scene.h"
-#include "../shared/gettext.h"
+#include "gettext.h"
+#include "player.h"
 
 // Sample sub-class for ListboxTextItem that auto-sets the selection brush
 // image.  This saves doing it manually every time in the code.
@@ -173,16 +174,17 @@ class MainWindow :
 	void updateSkilltree();
 
 	/**
-	 * \fn void updateItemTooltip()
+	 * \fn void updateItemTooltip(unsigned int pos)
 	 * \brief Aktualisiert den Tooltip fuer das Item ueber dem die Maus ist
+	 * \param pos Nummer des zu aktualisierenden Items
 	 */
-	void updateItemTooltip();
+	void updateItemTooltip(unsigned int pos);
 
 	/**
-	 * \fn void updateAbilityTooltip()
+	 * \fn void updateAbilityTooltip(unsigned int pos)
 	 * \brief Aktualisiert den Tooltip fuer die Faehigkeit ueber der die Maus ist
 	 */
-	void updateAbilityTooltip();
+	void updateAbilityTooltip(unsigned int pos);
 
 	/**
 	 * \fn void updateObjectInfo()

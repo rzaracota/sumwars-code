@@ -28,6 +28,8 @@ void Action::init()
 	a->m_animation[NO_WEAPON].push_back("idle");
 	a->m_animation[ONE_HANDED].push_back("attack");
 	a->m_animation[TWO_HANDED].push_back("idle");
+	
+	
 
 	a = &(Action::m_base_info[Action::WALK]);
 	a->m_timer_nr=0;

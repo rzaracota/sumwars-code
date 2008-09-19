@@ -2265,7 +2265,7 @@ bool Creature::update (float time)
 		if (i->m_time <=0)
 		{
 			// Zeit abgelaufen, Modifikation deaktivieren
-			DEBUG("removing base attr mod");
+			DEBUG5("removing base attr mod");
 			recalc |= removeBaseAttrMod((CreatureBaseAttrMod*) &(*i));
 			i=m_dyn_attr.m_temp_mods.erase(i);
 		}
@@ -2428,7 +2428,9 @@ bool Creature::update (float time)
 					setDestroyed(true);
 				}
 
-			default: time=0 ;
+			default: 
+				DEBUG5("unknown state: %i",getState());
+				time=0 ;
 		}
 
 	}
@@ -3835,5 +3837,26 @@ bool Creature::checkAbilityLearnable(Action::ActionType at)
 		}
 	}
 	return true;
+}
+
+float Creature::getTimerPercent(int timer)
+{
+	if (timer ==1)
+	{
+		if (m_timer1_max ==0)
+			return 0;
+		
+		return m_timer1 / m_timer1_max;
+	}
+	
+	if (timer ==2)
+	{
+		if (m_timer2_max ==0)
+			return 0;
+		
+		return m_timer2 / m_timer2_max;
+	}
+	
+	return 0;
 }
 

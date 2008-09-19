@@ -19,6 +19,7 @@
 
 
 #include "world.h"
+#include "player.h"
 
 /**
  * Constructors/Destructors
@@ -28,9 +29,11 @@
  */
  World::World(bool server)
 {
+	m_server = server;
+	
 	// diverse Initialisierungen
 	
-	m_player_slots = new map<int,int>;
+	m_player_slots = new map<int,ServerWObject*>;
 	
 	// Baum fuer die Handelsvorgaenge anlegen	
 	m_trades = new map<int, Trade* >;
@@ -48,8 +51,10 @@
 	 for (int i=0;i<WORLD_MAX_REGIONS;i++)
 		 m_regions[i]=0;
 	 
+	 m_local_player =0;
 	
 }
+
 
 bool World::init()
 {
@@ -64,12 +69,18 @@ bool World::init()
 	
 	if (m_server)
 	{
+		DEBUG("server");
 		m_network = new ServerNetwork(m_max_nr_players);
 	}
 	else
 	{
+		DEBUG("client");
 		m_network = new ClientNetwork();
 	}
+	
+	long sec;
+	time(&sec);
+	srand(sec);
 	
 	if( m_network->init( REQ_PORT )!=NET_OK )
 	{
@@ -77,13 +88,14 @@ bool World::init()
 		return false;
 	}
 	
-	long sec;
-	time(&sec);
-	srand(sec);
+	
 }
 
-void World::generate(int type)
+
+void World::createRegion(short region)
 {
+	DEBUG5("creating region %i",region);
+	int type = 2;
 	if (type==1)
 	{
 
@@ -91,7 +103,7 @@ void World::generate(int type)
 	else if(type==2)
 	{
 		Region* reg = new Region(25,25);
-		short rid = insertRegion(reg);
+		short rid = insertRegion(reg,region);
 
 
 
@@ -253,6 +265,7 @@ void World::acceptLogins()
 	}
 }
 
+
 void World::updateLogins()
 {
 	list<int>::iterator i;
@@ -272,35 +285,7 @@ void World::updateLogins()
 			if (header.m_content == PTYPE_C2S_SAVEGAME)
 			{
 				DEBUG("got savegame from slot %i",(*i));
-				char binsave;
-				cv.fromBuffer<char>(binsave);
-				short version;
-				cv.fromBuffer<short>(version);
-				int len;
-				cv.fromBuffer<int>(len);
-				WorldObject::TypeInfo::ObjectSubtype ot;
-				char tmp[11];
-				tmp[10] = '\0';
-				cv.fromBuffer(tmp,10);
-				for (int u=0;u<10;u++)
-					printf("%i ",tmp[u]);
-				ot = tmp;
-				ServerWObject* pl =0;
-
 				
-				pl=ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_PLAYER, ot);
-				
-
-				if (pl!=0)
-				{
-					//pl->fromSavegame(bp2);
-					insertSWObject(pl,6,11,0);
-					m_player_slots->insert(make_pair(pl->getId(), *i));
-
-					//pl->getDynAttr()->m_status_mod_time[Damage::CONFUSED] = 100000;
-					//pl->getDynAttr()->m_status_mod_time[Damage::BERSERK] = 100000;
-
-				}
 				i = m_logins.erase(i);
 			}
 			else
@@ -320,9 +305,7 @@ void World::updateLogins()
 }
 
 
-/**
- *
- */
+
 World::~World()
 {
 
@@ -341,22 +324,15 @@ World::~World()
 	delete[] m_parties; 
 	delete m_player_slots;
 }	
-/**
- * Methods
- */
+
+
  
-short World::insertRegion(Region* region)
+short World::insertRegion(Region* region, int rnr)
 {
-	short i=0;
-	while (i<WORLD_MAX_REGIONS)
-	{
-		if (m_regions[i]==0)
-		{
-			m_regions[i]=region;
-			return i;
-		}
-	}
-	return -1;
+	
+	m_regions[rnr]=region;
+	return rnr;
+	
 }
 
 WorldObject::Relation World::getRelation(WorldObject::TypeInfo::Fraction frac, ServerWObject* wo)
@@ -399,6 +375,7 @@ WorldObject::Relation World::getRelation(WorldObject::TypeInfo::Fraction frac, S
 	}
 }
 
+
 Party* World::getEmptyParty()
 {
 	int i;
@@ -409,6 +386,7 @@ Party* World::getEmptyParty()
 	}
 	return 0;
 }
+
 
 bool World::intersect(Shape* s1, Shape* s2)
 {
@@ -492,6 +470,7 @@ bool World::intersect(Shape* s1, Shape* s2)
 
 }
 	
+	
 float World::getDistance(Shape& s1, Shape& s2)
 {
 	return (sqrt(sqr(s1.m_coordinate_x-s2.m_coordinate_x) +sqr(s1.m_coordinate_y-s2.m_coordinate_y)) - s1.m_radius - s2.m_radius);
@@ -499,9 +478,8 @@ float World::getDistance(Shape& s1, Shape& s2)
 	
 
 
-/**
- * 
- */
+
+
 ServerWObject* World::getSWObject ( int id,short rid) 
 {
 	return m_regions[rid]->getSWObject(id);
@@ -527,6 +505,7 @@ Trade* World::getTrade ( int id)
 		return iter->second;
 	}
 }	
+
 
 int World::newTrade(int trader1_id, int trader2_id)
 {
@@ -554,6 +533,7 @@ int World::newTrade(int trader1_id, int trader2_id)
 	// ID ausgeben
 	return id;
 }
+
 
 bool World:: getSWObjectsInShape( Shape* shape, short region, list<ServerWObject*>* result,short layer, short group, ServerWObject* omit )
 {
@@ -598,6 +578,7 @@ void World::getSWObjectsOnLine( float xstart, float ystart, float xend, float ye
 	
 }
 
+
 void World::getProjectilesOnScreen(float center_x,float center_y,short region, list<DmgProjectile*>* result)
 {
 	Region* r = m_regions[region];
@@ -606,6 +587,7 @@ void World::getProjectilesOnScreen(float center_x,float center_y,short region, l
 	
 	r->getProjectilesOnScreen(center_x,center_y,result);
 }
+
 
 bool World::lineIntersect(float xstart, float ystart, float xend,float yend ,float dir[2],Shape* s)
 {
@@ -796,9 +778,8 @@ bool World::getClosestFreeSquare(float x_coordinate, float y_coordinate, float &
 
 }
 */
-/**
- * 
- */
+
+
  bool World::insertSWObject (ServerWObject* object, float x, float y, short region) 
 {
 	DEBUG5("inserting Object at %f %f into region %i",x,y,region);
@@ -808,27 +789,45 @@ bool World::getClosestFreeSquare(float x_coordinate, float y_coordinate, float &
 	 if (object == 0)
 		 return false;
 	 
+	 object->getGridLocation()->m_region = region;
+	 object->getGeometry()->m_shape.m_coordinate_x=x;
+	 object->getGeometry()->m_shape.m_coordinate_y=y;
+	 
 	 Region* r = m_regions[region];
 	 if (r==0)
-		 return false;
-	 
-	 /*
-	 if (object->getTypeInfo()->m_type == WorldObject::TypeInfo::TYPE_PLAYER)
 	 {
-		 result &= (m_players->insert(make_pair(object->getId(),object))).second;
+		 // Region existiert nicht
+		 
+		 
+		 // Serverseite: Region erzeugen
+		 if (m_server)
+		 {
+			 createRegion(region);
+			 r = m_regions[region];
+			
+			 // wenn das Objekt nicht lokal ist
+			 if (object != m_local_player)
+			 {
+				 // Daten zu dem Spieler senden, der die Informationen benoetigt
+			 }
+		 }
 	 }
-	 */
-	 
-	 object->getGridLocation()->m_region = region;
-	 result &= r->insertSWObject(object,x,y);
+	
+	 if (r!=0)
+	 {
+	 	result &= r->insertSWObject(object,x,y);
+	 }
 
 	 return result;
 }
 
 
-/**
-*
-*/
+bool World::insertPlayer(ServerWObject* player, int slot)
+{
+	m_player_slots->insert(make_pair(slot,player));
+}
+
+
 bool World::moveSWObject(ServerWObject* object, float x, float y)
 {
 	bool result;
@@ -845,9 +844,8 @@ bool World::moveSWObject(ServerWObject* object, float x, float y)
 	
 	return result;
 }
-/**
- * 
- */
+
+
  bool World::deleteSWObject (ServerWObject* object) {
 	 
 	 bool result=true;
@@ -873,6 +871,7 @@ bool World::moveSWObject(ServerWObject* object, float x, float y)
 	
 }
 
+
 bool  World::insertProjectile(DmgProjectile* object, float x, float y, short region)
 {
 	m_regions[region]->insertProjectile(object,x,y);
@@ -881,50 +880,124 @@ bool  World::insertProjectile(DmgProjectile* object, float x, float y, short reg
 }
 
 
-/**
- * 
- */
+
+void World::handleSavegame(char* data, int slot)
+{
+	// Spieler aus dem Savegame erzeugen
+	CharConv cv((unsigned char*) data,18);
+	char binsave;
+	cv.fromBuffer<char>(binsave);
+	short version;
+	cv.fromBuffer<short>(version);
+	int len;
+	cv.fromBuffer<int>(len);
+	WorldObject::TypeInfo::ObjectSubtype ot;
+	char tmp[11];
+	tmp[10] = '\0';
+	cv.fromBuffer(tmp,10);
+	ot = tmp;
+	ServerWObject* pl =0;
+
+				
+	pl=ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_PLAYER, ot);
+	
+	// Spieler zur Welt hinzufuegen
+	if (pl!=0)
+	{
+		insertPlayer(pl,slot);
+		insertSWObject(pl,6,11,0);
 
 
-/**
-*
-*/
+	}
+	
+	// Wenn man sich auf Serverseite befindet
+	if (m_server)
+	{
+		// Event hinzufuegen, dass dieser Spieler die Welt betreten hat
+	}
+
+	// Spieler ist lokal
+	if (slot == -1)
+	{
+		m_local_player = pl;
+		
+		if (!m_server)
+		{
+			// Savegame dem Server senden
+			// Savegame an den Server senden
+			ClientHeader header;
+			header.m_content = PTYPE_C2S_SAVEGAME; 	// Savegame von Client zu Server
+			header.m_chatmessage = false;			// keine Chatnachricht
+			CharConv save;
+			header.toString(&save);
+			save.toBuffer(data,len);
+			m_network->pushSlotMessage(save.getBitStream());
+		}
+	}
+
+}
+
+
+void World::handleCommand(ClientCommand* comm, int slot)
+{
+	DEBUG5("Kommando (%f %f) button: %i id: %i action: %i",comm->m_coordinate_x,comm->m_coordinate_y,comm->m_button, comm->m_id,comm->m_action);
+
+	
+	// Wenn man sich nicht auf Serverseite befindet
+	if (!m_server)
+	{
+		// Kommando an den Server senden
+		CharConv cv;
+
+		// Header anlegen
+		ClientHeader header;
+		header.m_content = PTYPE_C2S_DATA; 	// Daten von Client zu Server
+		header.m_chatmessage = false;			// keine Chatnachricht
+
+
+		// Header in den Puffer schreiben
+		header.toString(&cv);
+		// Kommando in den Puffer schreiben
+		comm->toString(&cv);
+		
+
+
+	 	// Datenpaket zum Server senden
+		getNetwork()->pushSlotMessage(cv.getBitStream());
+	}
+	
+	Player* pl = static_cast<Player*> ((*m_player_slots)[slot]);
+	if (pl == 0)
+	{
+		ERRORMSG("no player in slot %i",slot);
+	}
+	else
+	{
+		pl->onClientCommand(comm);
+	}
+	
+	
+}
+
 int World::getValidId()
 {
 	// zufällige ID erzeugen;
-	int id = 0;
-	ServerWObject* wo;
-	while (id == 0)
-	{
-		id=rand();
-		/*
-		wo=getSWObject(id);
-		if (wo!=0)
-		{
-			id=0;
-		}
-		*/
-	}
-	return id;
+	static int j=0;
+	return j++;
 }
+
 
 int World::getValidProjectileId()
 {
 	// zufällige ID erzeugen;
-	int id = 0;
-	while (id == 0)
-	{
-		id=rand();
-	}
-	return id;
+	static int i=0;
+	return i++;
 }
 
-/**
-*
-*/
+
 void World::update(float time)
 {
-	
+	DEBUG5("update %f",time);
 	for (int i=0;i<WORLD_MAX_REGIONS;i++)
 	{
 		if (m_regions[i]!=0)
@@ -973,9 +1046,25 @@ void World::update(float time)
 		acceptLogins();
 	}
 	
+	// Schleife ueber die Spieler
+	map<int,ServerWObject*>::iterator it;
+	Player* pl;
+	for (it = m_player_slots->begin(); it != m_player_slots->end(); ++it)
+	{
+		
+		pl = static_cast<Player*>(it->second);
+		
+		// TODO: weitere Bedingungen damit ein Spieler in einer Region aktiviert wird
+		if (pl->getState() == WorldObject::STATE_REGION_ENTERED && pl->getRegion() !=0 )
+		{
+			pl->setState(WorldObject::STATE_ACTIVE);
+		}
+	}
+	
 	m_network->update();
 	
 }
+
 
 bool World::calcBlockmat(PathfindInfo * pathinfo)
 {

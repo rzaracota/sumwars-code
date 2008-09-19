@@ -6,8 +6,8 @@
 #include <string>
 
 #include "document.h"
+#include "serverwobject.h"
 // TODO : include anpassen (es wird nur ein Spieler allgemein benoetigt)
-#include "clientmplayer.h"
 
 
 using namespace std;
@@ -133,10 +133,10 @@ class Scene
 	void updateObjects();
 
 	/**
-	 * \fn void updateObject(ClientWObject* obj);
+	 * \fn void updateObject(ServerWObject* obj);
 	 * \brief Fuegt das Objekt in die Szene ein
 	 */
-	void updateObject(ClientWObject* obj);
+	void updateObject(ServerWObject* obj);
 
 
 	/**
@@ -350,6 +350,12 @@ class Scene
 	 * \brief Dokument, dessen Daten dargestellt werden sollen
 	 */
 	Document* m_document;
+	
+	/**
+	 * \var short m_region_id
+	 * \brief ID der Region, die gerade angezeigt wird
+	 */
+	short m_region_id;
 
 	/**
 	 * \var Ogre::RenderWindow* m_window

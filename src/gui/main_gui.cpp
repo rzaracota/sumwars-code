@@ -13,7 +13,7 @@ int main (int argc, char *argv[]) {
 
 
 	// Applikation anlegen
-	Client* app = new Client();
+	Application* app = new Application();
 
 	// Debugging: Kommandozeilen Parameter auslesen und Savefile setzen
 	string save;
@@ -24,18 +24,21 @@ int main (int argc, char *argv[]) {
 	}
 	else
 	{
-		save = "save/default.sav";
+		save = "default.sav";
 	}
 	#else
-        save = "save/default.sav";
+        save = "default.sav";
     #endif
 	Document* doc = app->getDocument();
 	doc->setSaveFile(save);
-	doc->setState(Document::CONNECT_REQUEST);
+	
+	doc->setServer(true);
+	doc->setState(Document::START_GAME);
 	doc->getGUIState()->m_sheet= Document::GAME_SCREEN;
 	doc->getGUIState()->m_shown_windows = Document::NO_WINDOWS;
 
 	// laufen lassen
+	
 	try
 	{
 

@@ -39,8 +39,8 @@ void WindowMain::KeyboardFunc (unsigned char key, int xin, int yin)
 
 	int n =0;
 	WorldObject::TypeInfo::ObjectSubtype i;
-	if (global_doc->getMainPlayer()!=0)
-		i = global_doc->getMainPlayer()->getTypeInfo()->m_subtype;
+	if (global_doc->getLocalPlayer()!=0)
+		i = global_doc->getLocalPlayer()->getTypeInfo()->m_subtype;
 
 	if (i=="warrior")
 		n=32;
@@ -84,7 +84,7 @@ void WindowMain::KeyboardFunc (unsigned char key, int xin, int yin)
 	// ESC
 	if (key == 27)
 	{
-		global_doc ->onKeyPress(OIS::KC_ESCAPE);
+		//global_doc ->onKeyPress(OIS::KC_ESCAPE);
 	}
 
 }
@@ -110,7 +110,7 @@ void WindowMain::TimerFunc(int dummy)
 	if (global_doc->getState() == Document::SHUTDOWN)
 		exit(0);
 	
-	global_doc->update();
+	global_doc->update(25);
 
 	glutTimerFunc(25,TimerFunc,0);
 	glutPostRedisplay();
@@ -130,11 +130,18 @@ void WindowMain::MouseFunc (int button, int state, int xin, int yin)
 	y=y_dim-(y/fielddim);
 	if (state == GLUT_DOWN)
 	{
+		if (global_doc->getLocalPlayer() ==0)
+			return;
+		
+		float dx,dy;
+		dx = global_doc->getLocalPlayer()->getGeometry()->m_shape.m_coordinate_x;
+		dy = global_doc->getLocalPlayer()->getGeometry()->m_shape.m_coordinate_y;
+		
 		if (button==0)
 		{
 
 			global_doc->getGUIState()->m_left_mouse_hold=true;
-			global_doc->onLeftMouseButtonClick(x, y);
+			global_doc->onLeftMouseButtonClick(x+dx, y+dy);
 
 			DEBUG5("Left Button press");
 		}
@@ -143,7 +150,7 @@ void WindowMain::MouseFunc (int button, int state, int xin, int yin)
 		if (button==2)
 		{
 			global_doc->getGUIState()->m_right_mouse_hold=true;
-			global_doc->onRightMouseButtonClick(x, y);
+			global_doc->onRightMouseButtonClick(x+dx, y+dy);
 
 			DEBUG5("right Button press");
 
@@ -206,8 +213,14 @@ void WindowMain::DisplayFunc ()
 	glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glLoadIdentity ();
 
+	if (global_doc->getLocalPlayer() ==0)
+		return;
+	
+	
+	Region* region = global_doc->getLocalPlayer()->getRegion();
+	if (region ==0)
+		return;
 
-	static std::map<int,ClientWObject*>::iterator i;
 
 	static float x = 0;
 	static float y = 0;
@@ -216,7 +229,7 @@ void WindowMain::DisplayFunc ()
 
 	glDisable(GL_BLEND);
 
-	if (global_doc->getMainPlayer()==0)
+	if (global_doc->getLocalPlayer()==0)
 	{
 		glFlush ();				// Daten an Server (fuer die Darstellung)
 							// schicken
@@ -229,18 +242,16 @@ void WindowMain::DisplayFunc ()
 	global_doc->lock();
 
 
-	x = global_doc->getMainPlayer()->getGeometry()->m_shape.m_coordinate_x;
-	y = global_doc->getMainPlayer()->getGeometry()->m_shape.m_coordinate_y;
-
+	x = global_doc->getLocalPlayer()->getGeometry()->m_shape.m_coordinate_x;
+	y = global_doc->getLocalPlayer()->getGeometry()->m_shape.m_coordinate_y;
 
 
 	int action_idx ;
-	ClientWObject* cwo;
-	WorldObject* wo;
 
 	float c[3];
 
-
+	// Tiles zeichnen
+	/*
 	Matrix2d<char>* mat = global_doc->getRegionData()->m_tiles;
 	int dimx = global_doc->getRegionData()->m_dimx;
 	int dimy = global_doc->getRegionData()->m_dimy;
@@ -290,16 +301,29 @@ void WindowMain::DisplayFunc ()
 		}
 
 	}
+*/
 
+	list<ServerWObject*> stat_objs;
+	list<ServerWObject*> obj;
+	list<ServerWObject*>::iterator it;
+	Shape s;
+	s.m_coordinate_x = x;
+	s.m_coordinate_y = y;
+	s.m_type = Shape::RECT;
+	s.m_extent_x = 10;
+	s.m_extent_y = 10;
+	
+	ServerWObject* wo, *cwo;
+	Creature* cr;
+	
+	region->getSWObjectsInShape(&s,&stat_objs, WorldObject::Geometry::LAYER_ALL,WorldObject::FIXED);
+	region->getSWObjectsInShape(&s,&obj, WorldObject::Geometry::LAYER_ALL,WorldObject::GROUP_ALL & ~WorldObject::FIXED);
 
-	map<int,WorldObject*>::iterator it;
-	map<int,WorldObject*>* stat_objs = (global_doc->getRegionData()->m_static_objects);
-
-	for (it = stat_objs->begin(); it !=stat_objs->end();++it)
+	for (it = stat_objs.begin(); it !=stat_objs.end();++it)
 	{
 		glPushMatrix();
 
-		wo = it->second;
+		wo = *it;
 
 		cx = wo->getGeometry()->m_shape.m_coordinate_x;
 		cy = wo->getGeometry()->m_shape.m_coordinate_y;
@@ -347,11 +371,11 @@ void WindowMain::DisplayFunc ()
 		glPopMatrix();
 	}
 
-	for (i = global_doc->getObjects()->begin(); i != global_doc->getObjects()->end(); ++i)
+	for (it = obj.begin(); it != obj.end(); ++it)
 	{
 		glPushMatrix();
 
-		cwo = i->second;
+		cwo = *it;
 		//DEBUG("displaying obj %i",cwo->getId());
 		c[0]=0;
 		c[1]=0;
@@ -434,6 +458,7 @@ void WindowMain::DisplayFunc ()
 
 			if (cwo->getTypeInfo()->m_type != WorldObject::TypeInfo::TYPE_FIXED_OBJECT)
 			{
+				cr = static_cast<Creature*> (cwo);
 				glColor3f(0,0,0);
 				glBegin(GL_QUADS);
 				glVertex3f(-0.8*r,-0.2*r,0.1);
@@ -443,8 +468,9 @@ void WindowMain::DisplayFunc ()
 				glEnd();
 
 
-				DEBUG5("health percent %f",cwo->m_health_perc);
-				float p = cwo->m_health_perc;
+				//DEBUG5("health percent %f",cwo->m_health_perc);
+				float p = cr->getDynAttr()->m_health / cr->getBaseAttrMod()->m_max_health;
+				float* status_mods = cr->getDynAttr()->m_status_mod_time;
 				if (p<=0)
 					p=0;
 				glColor3f(c[0],c[1],c[2]);
@@ -456,7 +482,7 @@ void WindowMain::DisplayFunc ()
 
 				glEnd();
 
-				if (cwo->m_status_mods & 1)
+				if (status_mods[0] >0)
 				{
 					glColor3f(1,1,1);
 					glBegin(GL_QUADS);
@@ -468,7 +494,7 @@ void WindowMain::DisplayFunc ()
 					glEnd();
 				}
 
-				if (cwo->m_status_mods & 2)
+				if (status_mods[1] >0)
 				{
 					glColor3f(0,0.6,0);
 					glBegin(GL_QUADS);
@@ -480,7 +506,7 @@ void WindowMain::DisplayFunc ()
 					glEnd();
 				}
 
-				if (cwo->m_status_mods & 4)
+				if (status_mods[2] >0)
 				{
 					glColor3f(0.7,0,0);
 					glBegin(GL_QUADS);
@@ -492,7 +518,7 @@ void WindowMain::DisplayFunc ()
 					glEnd();
 				}
 
-				if (cwo->m_status_mods & 8)
+				if (status_mods[3] >0)
 				{
 					glColor3f(0.5,0.5,0.5);
 					glBegin(GL_QUADS);
@@ -504,7 +530,7 @@ void WindowMain::DisplayFunc ()
 					glEnd();
 				}
 
-				if (cwo->m_status_mods & 16)
+				if (status_mods[4] >0)
 				{
 					glColor3f(0.7,0,0.7);
 					glBegin(GL_QUADS);
@@ -516,7 +542,7 @@ void WindowMain::DisplayFunc ()
 					glEnd();
 				}
 
-				if (cwo->m_status_mods & 32)
+				if (status_mods[5] >0)
 				{
 					glColor3f(1,1,0);
 					glBegin(GL_QUADS);
@@ -528,7 +554,7 @@ void WindowMain::DisplayFunc ()
 					glEnd();
 				}
 
-				if (cwo->m_status_mods & 64)
+				if (status_mods[6] >0)
 				{
 					glColor3f(0.6,0.6,1);
 					glBegin(GL_QUADS);
@@ -540,7 +566,7 @@ void WindowMain::DisplayFunc ()
 					glEnd();
 				}
 
-				if (cwo->m_status_mods & 128)
+				if (status_mods[7] >0)
 				{
 					glColor3f(1,0.8,0.3);
 					glBegin(GL_QUADS);
@@ -562,11 +588,14 @@ void WindowMain::DisplayFunc ()
 
 	}
 
-	map<int,Projectile*>::iterator i2;
+	list<DmgProjectile*> proj;
+	list<DmgProjectile*>::iterator i2;
+	
+	region->getProjectilesOnScreen(x,y,&proj);
 	Projectile* pr;
-	for (i2=global_doc->getProjectiles()->begin(); i2 != global_doc->getProjectiles()->end(); ++i2)
+	for (i2=proj.begin(); i2 != proj.end(); ++i2)
 	{
-		pr = (i2->second);
+		pr = *i2;
 		glPushMatrix();
 		c[0]=0;
 		c[1]=0;
@@ -680,7 +709,7 @@ void WindowMain::DisplayFunc ()
 		glPopMatrix();
 	}
 
-
+/*
 	r=0.5;
 	glPushMatrix();
 	glTranslatef(-8,-4,0);
@@ -689,7 +718,7 @@ void WindowMain::DisplayFunc ()
 	glBegin(GL_TRIANGLE_FAN);
 	glVertex3f(0, 0,0.8);
 
-	for (float a=0;a<=(1-global_doc->getMainPlayer()->m_timer1_perc)*6.3;a+=0.1)
+	for (float a=0;a<=(1-global_doc->getLocalPlayer()->m_timer1_perc)*6.3;a+=0.1)
 	{
 		glVertex3f(cos(a)*r, sin(a)*r,0.8);
 	}
@@ -704,14 +733,14 @@ void WindowMain::DisplayFunc ()
 	glBegin(GL_TRIANGLE_FAN);
 	glVertex3f(0, 0,0.8);
 
-	for (float a=0;a<=(1-global_doc->getMainPlayer()->m_timer2_perc)*6.3;a+=0.1)
+	for (float a=0;a<=(1-global_doc->getLocalPlayer()->m_timer2_perc)*6.3;a+=0.1)
 	{
 		glVertex3f(cos(a)*r, sin(a)*r,0.8);
 	}
 	glEnd();
 	glPopMatrix();
 
-
+*/
 	// Daten entsperren
 	global_doc->unlock();
 

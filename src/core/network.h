@@ -7,6 +7,7 @@
 #include "raknet/RakPeerInterface.h"
 #include "raknet/RakNetTypes.h"
 #include "raknet/BitStream.h"
+#include "debug.h"
 
 #define REQ_PORT 5331
 
@@ -48,7 +49,8 @@ class Network
 		 */
 		virtual NetStatus init( int auth_port=REQ_PORT )
 		{
-			
+			DEBUG("test");
+			return NET_OK;
 		};
 		
 		/**

@@ -54,12 +54,8 @@
 */
 
 #include "networkstruct.h"
-#include "constants.h"
 #include "projectile.h"
 #include "party.h"
-#include "clientwobject.h"
-#include "clientmplayer.h"
-#include "clientnetwork.h"
 #include "debug.h"
 #include "damage.h"
 #include "itemlist.h"
@@ -68,6 +64,9 @@
 #include "matrix2d.h"
 #include "tiles.h"
 #include "dropitem.h"
+#include "world.h"
+#include "player.h"
+#include "timer.h"
 #include <pthread.h>
 
 #include "gettext.h"
@@ -79,7 +78,7 @@
  * 
  */
 
-#typedef int KeyCode
+typedef int KeyCode;
 
 class Document
 {
@@ -98,11 +97,11 @@ class Document
 	{
 		INACTIVE =0,
 
-		CONNECT_REQUEST =1,
+		START_GAME =1,
 
-		CONNECTING =2,
+		LOAD_SAVEGAME =2,
 
-		CONNECTED =3,
+		RUNNING =3,
 
 		SHUTDOWN_REQUEST =4,
   
@@ -170,54 +169,13 @@ class Document
 		SHOW_SKILLTREE =3,
 		SHOW_PARTYMENU=4,
 		SHOW_CHATBOX =5,
+		CLOSE_ALL=9,
 		SWAP_EQUIP=10,
 		USE_POTION = 30,
 		USE_SKILL_LEFT=100,
 		USE_SKILL_RIGHT=300,
 	};
 
-	/**
-	 * \struct NetworkInfo
-	 * \brief Struktur fuer die Daten zum Netzwerk auf Clientseite
-	 */
-	struct NetworkInfo
-	{
-		/**
-		 * \var m_network_error
-		 * \brief false, wenn ein Netzwerkfehler aufgetreten ist
-		 */
-		bool m_network_error;
-
-		/**
-		 * \var m_server_ip[16]
-		 * \brief Speichert die IP des Servers
-		 */
-		char m_server_ip[16];
-
-		/**
-		 * \var m_network_slot
-		 * \brief Speichert den verwendeten Netzwerk-Slot
-		 */
-		int m_network_slot;
-
-		/**
-		 * \var ClientNetwork* m_network
-		 * \brief Objekt für die Netzwerkanbindung des Clients
-		 */
-		ClientNetwork* m_network;
-
-		/**
-		 * \var int m_timeout_counter
-		 * \brief Zaehler fuer Timeouts
-		 */
-		int m_timeout_counter;
-
-		/**
-		 * \var bool m_host
-		 * \brief Gibt an, ob der eigene Rechner der Host ist
-		 */
-		bool m_host;
-	};
 
 	
 	/**
@@ -374,16 +332,7 @@ class Document
 	 */
 	static void* writeSaveFile(void* doc_ptr);
 
-	/**
-	 * \fn NetworkInfo* getNetworkInfo()
-	 * \brief Gibt Zeiger auf die Netzwerkinformationen zurueck
-	 * return Netzwerkinformation
-	 */
-	NetworkInfo* getNetworkInfo()
-	{
-		return &m_network_info;
-	}
-
+	
 	/**
 	 * \fn GUISTate* getGUIState()
 	 * \brief Gibt Zustand der GUI Datenfelder zurueck
@@ -433,25 +382,8 @@ class Document
 		m_modified = mod;
 	}
 
-	/**
-	 * \fn map<int, ServerWObject*>* getModifiedObjects()
-	 * \brief Gibt Datenstruktur mit allen modifizierten Objekten aus
-	 * \return Objekte
-	 */
-	map<int, ServerWObject*>* getModifiedObjects()
-	{
-		return m_modified_objects;
-	}
-
-	/**
-	 * \fn list<Projectile>* getProjectiles()
-	 * \brief Gibt die Liste mit den Geschossen aus
-	 * \return Liste der Geschosse
-	 */
-	map<int,Projectile*>* getProjectiles()
-	{
-		return m_projectiles;
-	}
+	
+	
 	
 	
 
@@ -460,40 +392,30 @@ class Document
 	 * \fn ServerItem* getDetailedItem()
 	 * \brief Gibt Zeiger auf das Item, das aktuell per Tooltip genauer angezeigt wird zurueck
 	 */
-	ServerItem* getDetailedItem()
-	{
-		return m_detailed_item;
-	}
+	//ServerItem* getDetailedItem();
 
 	
 	/**
 	 * \fn ServerItem* getDetailedItem()
 	 * \brief Gibt Position des Items, das aktuell per Tooltip genauer angezeigt wird zurueck
 	 */
-	short getDetailedItemPos()
+	/*short getDetailedItemPos()
 	{
-		return m_detailed_item_pos;
+		return 0;
 	}
-
+*/
 	
 	/**
 	 * \fn Action::ActionType getAbilityPos()
 	 * \brief Gibt die Position der Aktion die gerade als Tooltip angezeigt zurueck
 	 */
+	/*
 	Action::ActionType getAbilityPos()
 	{
-		return m_ability_pos;
+		return Action::NOACTION;
 	}
+	*/
 
-	/**
-	 * \fn ClientMPlayer* getMainPlayer()
-	 * \brief Gibt Zeiger auf die Spielerfigur zurueck
-	 * \return Spielerobjekt
-	 */
-	ClientMPlayer* getMainPlayer()
-	{
-		return m_main_player;
-	}
 
 	/**
 	 * \fn Party* getParty()
@@ -502,7 +424,7 @@ class Document
 	 */
 	Party* getParty()
 	{
-		return m_party;
+		return 0;
 	}
 
 	/**
@@ -516,10 +438,12 @@ class Document
 	 * \fn Action::ActionType getLeftAction()
 	 * \brief Gibt die Aktion, die durch die linke Maustaste ausgeloest wird, zurueck
 	 */
+	/*
 	Action::ActionType getLeftAction()
 	{
 		return m_left_action;
 	}
+	*/
 
 	/**
 	 * \fn void setRightAction(Action::ActionType a)
@@ -532,26 +456,38 @@ class Document
 	 * \fn Action::ActionType getRightAction()
 	 * \brief Gibt die Aktion, die durch die rechte Maustaste ausgeloest wird, zurueck
 	 */
+	/*
 	Action::ActionType getRightAction()
 	{
 		return m_right_action;
 	}
+	*/
 
 	/**
 	 * \fn map<int,DropItem>* getDropItems()
 	 * \brief Gibt die Liste aller fuer den Spieler sichtbaren Gegenstaende am Boden zurueck
 	 */
+	/*
 	map<int,DropItem>* getDropItems()
 	{
 		return m_drop_items;
 	}
-
+*/
+	
+	/**
+	/* \fn void setServer(bool server)
+	 * \brief Stellt ein ob das Spiel der Server ist
+	 */
+	void setServer(bool server)
+	{
+		m_server = server;
+	}
 
 	/**
-	 * \fn std:.string getAbilityDescription()
+	 * \fn std:.string getAbilityDescription(Action::ActionType ability)
 	 * \brief Gibt die Beschreibung der Faehigkeit, ueber der Mauszeiger ist, aus
 	 */
-	std::string getAbilityDescription();
+	std::string getAbilityDescription(Action::ActionType ability);
 
 	/**
 	 * \fn KeyCode getMappedKey(ShortkeyDestination sd)
@@ -662,13 +598,13 @@ class Document
 	 * \fn void requestItemDetailedInfo( short pos)
 	 * \brief Fordert vom Server weitere Informationen zu einem Item an
 	 */
-	void requestItemDetailedInfo( short pos);
+	//void requestItemDetailedInfo( short pos);
 
 	/**
 	 * \fn void requestAbilityDamage(Action::ActionType abl)
 	 * \brief Fordert vom Server den Schaden einer Faehigkeit an
 	 */
-	void requestAbilityDamage(Action::ActionType abl);
+	//void requestAbilityDamage(Action::ActionType abl);
 
 	/**
 	 * \fn void increaseAttribute(CreatureBaseAttr::Attribute attr)
@@ -708,16 +644,37 @@ class Document
 	void emitDebugSignal(int i=0);
 
 	/**
-	 * \fn void update( )
+	 * \fn void update( float time=0)
 	 * \brief Aktualisiert den Inhalt der GUI, holt alle Daten neu vom Netzwerk
 	 */
 	void update(float time=0);
 
 	/**
-	 * \fn void serverConnect()
+	 * \fn void startGame(bool server)
 	 * \brief Baut Verbindung zum Server auf
 	 */
-	void serverConnect();
+	void startGame(bool server);
+	
+	/**
+	 * \fn Player* getLocalPlayer()
+	 * \brief Gibt den Spieler aus, der lokal an dem Rechner ist
+	 */
+	Player* getLocalPlayer()
+	{
+		if (m_world ==0)
+			return 0;
+		
+		return static_cast<Player*>(m_world->getLocalPlayer());
+	}
+	
+	/**
+	 * \fn World* getWorld()
+	 * \brief gibt Zeiger auf die Spielwelt aus
+	 */
+	World* getWorld()
+	{
+		return m_world;
+	}
 
 
 	// Private stuff
@@ -732,10 +689,10 @@ class Document
 		void sendCommand(ClientCommand* comm);
 
 		/**
-		 * \fn void sendSavegame()
-		 * \brief Sendet ein Savegame zum Server
+		 * \fn void loadSavegame()
+		 * \brief laedt ein Savegame
 		 */
-		void sendSavegame();
+		void loadSavegame();
 		
 		/**
 		 * \fn void updateContent(float time)
@@ -749,7 +706,7 @@ class Document
 		 * \param headerp Zeiger auf den Header des Datenpaketes
 		 * \brief Behandlung von Datenpaketen
 	 	*/
-		void handleDataPkg(CharConv* cv,ServerHeader* headerp);
+		//void handleDataPkg(CharConv* cv,ServerHeader* headerp);
 
 
 		/**
@@ -757,28 +714,28 @@ class Document
 		 * \brief Behandlung von Savegamepaketen
 		 * \param datap Zeiger auf die Daten
 	 	*/
-		void handleSavegame(CharConv* cv);
+		//void handleSavegame(CharConv* cv);
 
 		/**
 		 * \fn void handleDetailedItem(CharConv* cv)
 		 * \brief Behandlung von Informationen zu einem Item
 		 * \param datap Zeiger auf die Daten
 	 	*/
-		void handleDetailedItem(CharConv* cv);
+		//void handleDetailedItem(CharConv* cv);
 
 		/**
 		 * \fn void handleRegionData(CharConv* cv)
 		 * \brief Behandlung der Daten einer Region
 	 	 */
-		void handleRegionData(CharConv* cv);
+		//void handleRegionData(CharConv* cv);
 
-	/**
+		/**
 		 * \fn void handleDatapkg(CharConv* cv)
-	 * \param datap Zeiger auf das Datenpaket
-	 * \param headerp Zeiger auf den Header des Datenpaketes
-	 * \brief Behandlung von informationen zum Schaden einer Aktion
-	 */
-		void handleAbilityDamage(CharConv* cv, ServerHeader* headerp);
+		 * \param datap Zeiger auf das Datenpaket
+		 * \param headerp Zeiger auf den Header des Datenpaketes
+		 * \brief Behandlung von informationen zum Schaden einer Aktion
+		 */
+		//void handleAbilityDamage(CharConv* cv, ServerHeader* headerp);
 
 	/**
 	 * \fn int getObjectAt(float x,float y)
@@ -787,10 +744,8 @@ class Document
 	 */
 	int getObjectAt(float x,float y);
 
-	/** \var NetworkInfo m_network_info
-	 * \brief Enthaelt Daten zum Netzwerk
-	 */
-		NetworkInfo m_network_info;
+	
+	
 
 	/**
 	 * \var GUIState m_gui_state
@@ -798,90 +753,6 @@ class Document
 	 */
 		GUIState m_gui_state;
 
-
-	/**
-	 * \var  m_modified_objects
-	 * \brief Speichert die an den Client &uuml;bertragenen Objekte in einem Bin&auml;rbaum
-	 */
-	map<int, ServerWObject*>* m_modified_objects;
-
-	/**
-	 * \var list<int> m_removed_objects
-	 * \brief Liste mit den IDs geloeschter Objekte
-	 */
-	list<int> m_removed_objects;
-	
-	/**
-	 * \var list<int> m_removed_projectiles
-	 * \brief Liste mit den IDs geloeschter Objekte Projektile
-	 */
-	list<int> m_removed_projectiles;
-
-	/**
-	 * \var RegionData m_region_data
-	 * \brief Statische Daten zur aktuellen Region
-	 */
-	RegionData m_region_data;
-
-	/**
-	 * \var m_main_player
-	 * \brief Zeiger auf das Spielerobjekt das der Nutzer kontrolliert
-	 */
-		ClientMPlayer* m_main_player;
-
-	/**
-	 * \var Party* m_party
-	 * \brief Zeiger auf die Party der der Spieler angehoert
-	 */
-		Party* m_party;
-
-	/**
-	 * \var Action::ActionType m_left_action
-	 * \brief Aktion die auf linke Maustaste ausgefuehrt wird
-	 */
-		Action::ActionType m_left_action;
-
-	/**
-	 * \var Action::ActionType m_right_action
-	 * \brief Aktion die auf rechte Maustaste ausgefuehrt wird
-	 */
-		Action::ActionType m_right_action;
-
-	/**
-	 * \var map<int,Projectile*> m_projectiles
-	 * \brief Liste der Projektil
-	 */
-	map<int,Projectile*>* m_projectiles;
-
-	/**
-	 * \var map<int,DropItem>* m_drop_items;
-	 * \brief Liste der Items am Boden
-	 */
-	map<int,DropItem>* m_drop_items;
-
-	/**
-	 * \var ServerItem* m_detailed_item
-	 * \brief Item mit detaillierten Informationen
-	 */
-		ServerItem* m_detailed_item;
-
-	/**
-	 * \var short m_detailed_item_pos
-	 * \brief Position des Items mit detaillierten Informationen
-	 */
-		short m_detailed_item_pos;
-
-	/**
-	 * \var Damage m_ability_damage
-	 * \brief Schaden der Faehigkeit auf die der Mauszeiger zeigt
-	 */
-		Damage m_ability_damage;
-
-	/**
-	 * \var short m_ability_pos
-	 * \brief Faehigkeit auf die der Mauszeiger zeigt
-	 */
-		Action::ActionType m_ability_pos;
 
 	/**
 	 * \var m_data_locks
@@ -927,12 +798,26 @@ class Document
 		set<KeyCode> m_special_keys;
 
 
-	/**
-	* \var float m_save_timer
-	* \brief Timer, der der die Zeit zaehlt, die auf ein Savegame gewartet wird
-	 */
-		float m_save_timer;
 
+	char m_server_ip[16];
+		
+	/**
+	 * \var World* m_world
+	 * \brief Welt die von dem Spiel simuliert wird
+	 */
+	World* m_world;
+	
+	/**
+	 * \var bool m_server
+	 * \brief true, wenn der aktuelle Rechner der Server ist
+	 */
+	bool m_server;
+	
+	/**
+	 * \var Timer m_timer
+	 * \brief Timer fuer die Updatezyklen der Spielwelt
+	 */
+	Timer m_timer;	
 
 };
 

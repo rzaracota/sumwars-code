@@ -30,7 +30,6 @@ using namespace std;
 #include <algorithm>
 #include <iostream>
 
-//#include "player.h"
 #include "serverwobject.h"
 #include "dmgprojectile.h"
 #include "trade.h"
@@ -95,7 +94,7 @@ public:
 	 */
 	bool init();
 	
-	void generate(int type);
+	void createRegion(short region);
 	
 	
 	/**
@@ -112,12 +111,12 @@ public:
 	
 	//Accessor Methods
 	/**
-	 * \fn short insertRegion(Region* region)
+	 * \fn short insertRegion(Region* region, int rnr)
 	 * \brief Fuegt eine neue Region in die Welt ein
 	 * \param region Einzufuegende Region
 	 * \return gibt die ID der Region an, die an allen Objekten in der Region gespeichert wird. Im Falle eines Fehlers wird -1 zurueckgegeben.
 	 */
-	short insertRegion(Region* region);
+	short insertRegion(Region* region, int rnr);
 
 	//Operations
 	/**
@@ -243,6 +242,12 @@ public:
 	 * Wenn ein NULL-Zeiger &uuml;bergeben wird, so wird false ausgegeben.
 	 */
 	bool  insertSWObject (ServerWObject* object, float x, float y, short region);
+	
+	/**
+	 * \fn bool insertPlayer(ServerWObject* player, int slot)
+	 * \brief Fuegt einen neuen Spieler hinzu
+	 */
+	bool insertPlayer(ServerWObject* player, int slot);
 
 	/**
 	 * \fn bool  insertProjectile(DmgProjectile* object, float x, float y, short region)
@@ -253,7 +258,8 @@ public:
 	 */
 	bool  insertProjectile(DmgProjectile* object, float x, float y, short region);
 
-
+	
+	
 	/**
 	 * \fn deleteServerWObject(ServerWObject* object)
 	 * \brief L&ouml;scht ServerWObject
@@ -385,7 +391,14 @@ public:
 		return &(m_parties[frac - WorldObject::TypeInfo::FRAC_PLAYER_PARTY]);
 	}
 
-
+	/**
+	 * \fn ServerWObject* getLocalPlayer()
+	 * \brief Gibt den Spieler aus, der sich an dem Rechner befindet, auf dem diese Welt simuliert wird
+	 */
+	ServerWObject* getLocalPlayer()
+	{
+		return m_local_player;
+	}
 
 	/**
 	 * \fn Party* getEmptyParty()
@@ -408,7 +421,21 @@ public:
 	 */
 	static float getDistance(Shape& s1, Shape& s2);
 
-
+	/**
+	 * \fn void handleSavegame(char* data, int slot=-1)
+	 * \brief Behandelt den Empfang eines Savegames
+	 * \param data Savegame
+	 * \param slot Slot ueber den das Savegame empfangen wurde. Wenn das Savegame nicht ueber das Netzwerk uebertragen wurde -1
+	 */
+	void handleSavegame(char* data, int slot=-1);
+	
+	/**
+	 * \fn void handleCommand(ClientCommand* cmd, int slot=-1)
+	 * \brief Behandelt ein erhaltenes Kommmando
+	 * \param cmd Kommando
+	 * \param slot Slot ueber den das Kommando empfangen wurde. Wenn das Kommando nicht ueber das Netzwerk uebertragen wurde -1
+	 */
+	void handleCommand(ClientCommand* cmd, int slot=-1);
 
 	// debug only
 
@@ -447,7 +474,7 @@ private:
 	 * \var m_players
 	 * Liste der Spieler in der Welt
 	 */
-	map<int,int>* m_player_slots;
+	map<int,ServerWObject*>* m_player_slots;
 
 	/**
 	 * \var int m_max_nr_players
@@ -460,6 +487,11 @@ private:
 	 * \brief Netzwerkanbindung
 	 */
 	Network* m_network;
+	
+	/**
+	 * \var ServerWObject* m_local_player
+	 */
+	ServerWObject* m_local_player;
 	
 	/**
 	 * \var list<int> m_logins

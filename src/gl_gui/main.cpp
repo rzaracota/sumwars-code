@@ -36,18 +36,21 @@ int main (int argc, char *argv[])
 	}
 	else
 	{
-		save = "../save/warrior.sav";
+		save = "warrior.sav";
 	}
 
 	// Globales Document anlegen
-	global_doc = new Document(Document::GL_GUI);
+	global_doc = new Document();
 	global_doc->setSaveFile(save);
-	global_doc->serverConnect();
+	
+	global_doc->installShortkey(27,Document::CLOSE_ALL);
+	
+	global_doc->startGame(true);
 
 	//Gtk::Main mn( argc,argv );
 	//Gtk::GL::init( argc,argv );
 
-
+	
 
 	if ( true )
 	{

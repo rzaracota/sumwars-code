@@ -1,6 +1,8 @@
 #ifndef DROPSLOT_H
 #define DROPSLOT_H
 
+#include "item.h"
+
 /**
  * \struct DropSlot
  * \brief charakterisiert ein Item, das ein Monster droppen kann

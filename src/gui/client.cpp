@@ -1,6 +1,6 @@
 #include "client.h"
 
-Client::Client()
+Application::Application()
 {
 	// Anwendung initialisieren
 	bool ret = init();
@@ -13,7 +13,7 @@ Client::Client()
 
 }
 
-bool Client::init()
+bool Application::init()
 {
 	bool ret = true;
 
@@ -94,7 +94,7 @@ bool Client::init()
 }
 
 
-Client::~Client()
+Application::~Application()
 {
 	// dynamisch angelegte Objekte in umgekehrter Reihenfolge freigeben
 
@@ -105,12 +105,12 @@ Client::~Client()
 	delete m_ogre_root;
 }
 
-void Client::run()
+void Application::run()
 {
 	printf("started\n");
 	Ogre::Timer timer;
 	unsigned long ltime;
-	float time=0;
+	float time=0,ftime;
 	float uptime =0;
 	//m_ogre_root->startRendering();
 	float timesum=0;
@@ -121,32 +121,38 @@ void Client::run()
 	{
 
 		ltime =timer.getMicroseconds ();
-		time = ltime / ( 1000000.0);
+		ftime = ltime / ( 1000000.0);
 		timer.reset();
 
-        if (time>0.025)
-       {
-            DEBUG5("frame time was %f",time*1000);
-       }
-
+         DEBUG5("overall frame time was %f",ftime*1000);
+       
+	  	timer2.reset();
+		
 		update();
 
-        ltime =timer.getMicroseconds ();
-		uptime = ltime / ( 1000000.0);
-        if (uptime>0.025)
-        {
-            DEBUG("update time was %f",time*1000);
-        }
+		ltime =timer2.getMicroseconds ();
+		time = ltime / ( 1000000.0);
+		
+         DEBUG5("update time was %f",time*1000);
 
 
+		 timer2.reset();
 		// run the message pump
 		Ogre::WindowEventUtilities::messagePump();
-
+		ltime =timer2.getMicroseconds ();
+		time = ltime / ( 1000000.0);
+		DEBUG5("message pump time was %f",time*1000);
+		
+		timer2.reset();
+		
 		// Document aktualisieren
-		DEBUG5("document update");
-		m_document->update(time*1000);
-		DEBUG5("done");
-
+		m_document->update(ftime*1000);
+		
+		ltime =timer2.getMicroseconds ();
+		time = ltime / ( 1000000.0);
+		DEBUG5("document update time was %f",time*1000);
+	
+	/*
 		count ++;
 		timesum += time;
 		if (count ==100)
@@ -156,12 +162,19 @@ void Client::run()
 			DEBUG5("frame time is %f",timesum);
 			timesum =0;
 		}
+		*/
 
 		try
 		{
+			timer2.reset();
+		
 			// View aktualisieren
 			DEBUG5("main window update");
 			m_main_window->update();
+			
+			ltime =timer2.getMicroseconds ();
+			time = ltime / ( 1000000.0);
+			DEBUG5("view update time was %f",time*1000);
 		}
 		catch (CEGUI::Exception e)
 		{
@@ -170,31 +183,25 @@ void Client::run()
 
 
 		//DEBUG("frame time in s %f",time);
-		m_cegui_system->injectTimePulse(time);
+		m_cegui_system->injectTimePulse(ftime);
 
 
 		// rendern
-		DEBUG5("ogre frame");
 		timer2.reset();
 
 		m_ogre_root->renderOneFrame();
 
-		ltime =timer.getMicroseconds ();
+		ltime =timer2.getMicroseconds ();
 		time = ltime / ( 1000000.0);
-
-        if (time>0.025)
-        {
-            DEBUG5("ogre frame time was %f",time*1000);
-        }
-
-		DEBUG5("ogre frame end");
+         DEBUG5("ogre frame time was %f",time*1000);
+      
 	}
 
 	
 
 }
 
-bool Client::initOgre()
+bool Application::initOgre()
 {
 	DEBUG("init ogre");
 	// Fenster anlegen, Ogre initialisieren
@@ -207,7 +214,7 @@ bool Client::initOgre()
 
 }
 
-bool Client::configureOgre()
+bool Application::configureOgre()
 {
 	DEBUG("configure ogre");
 	// Logging nur fuer Fehlermeldungen verwenden
@@ -219,7 +226,7 @@ bool Client::configureOgre()
 	renderSystems = m_ogre_root->getAvailableRenderers();
 	if (renderSystems->empty())
 	{
-		// ERRORMSG("no rendering system available");
+		 ERRORMSG("no rendering system available");
 		return false;
 	}
 	r_it = renderSystems->begin();
@@ -240,26 +247,26 @@ bool Client::configureOgre()
 	return true;
 }
 
-bool Client::setupResources()
+bool Application::setupResources()
 {
 	DEBUG("initalizing resources");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../client/resources/models", "FileSystem", "General");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../client/resources/materials/scripts", "FileSystem", "General");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../client/resources/materials/textures", "FileSystem", "General");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../client/resources/particle", "FileSystem", "General");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../../resources/models", "FileSystem", "General");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../../resources/materials/scripts", "FileSystem", "General");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../../resources/materials/textures", "FileSystem", "General");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../../resources/particle", "FileSystem", "General");
 
 	// CEGUI Resourcen laden
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../client/resources/gui/configs", "FileSystem", "GUI");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../client/resources/gui/fonts", "FileSystem", "GUI");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../../resources/gui/configs", "FileSystem", "GUI");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../../resources/gui/fonts", "FileSystem", "GUI");
 
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../client/resources/gui/imagesets", "FileSystem", "GUI");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../client/resources/gui/layouts", "FileSystem", "GUI");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../client/resources/gui/looknfeel", "FileSystem", "GUI");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../client/resources/gui/schemes", "FileSystem", "GUI");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../../resources/gui/imagesets", "FileSystem", "GUI");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../../resources/gui/layouts", "FileSystem", "GUI");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../../resources/gui/looknfeel", "FileSystem", "GUI");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../../resources/gui/schemes", "FileSystem", "GUI");
 
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../client/resources/gui/schemes", "FileSystem", "GUI");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../../resources/gui/schemes", "FileSystem", "GUI");
 
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../client/save", "FileSystem", "Savegame");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../../save", "FileSystem", "Savegame");
 
 
 #if defined(WIN32)
@@ -285,7 +292,7 @@ bool Client::setupResources()
 	return true;
 }
 
-bool Client::initGettext()
+bool Application::initGettext()
 {
 	DEBUG("initializing internationalisation");
 	#ifndef WIN32
@@ -318,7 +325,7 @@ bool Client::initGettext()
 	return true;
 }
 
-bool Client::initCEGUI()
+bool Application::initCEGUI()
 {
 	DEBUG("init CEGUI\n");
 	m_ogre_cegui_renderer = new CEGUI::OgreCEGUIRenderer(
@@ -368,16 +375,33 @@ bool Client::initCEGUI()
 	return true;
 }
 
-bool Client::createDocument()
+bool Application::createDocument()
 {
 	DEBUG("create document\n");
 	m_document = new Document();
-
+	
+	m_document->installShortkey(OIS::KC_ESCAPE,Document::CLOSE_ALL);
+	m_document->installShortkey(OIS::KC_I,Document::SHOW_INVENTORY);
+	m_document->installShortkey(OIS::KC_C,Document::SHOW_CHARINFO);
+	m_document->installShortkey(OIS::KC_T,Document::SHOW_SKILLTREE);
+	m_document->installShortkey(OIS::KC_P,Document::SHOW_PARTYMENU);
+	m_document->installShortkey(OIS::KC_M,Document::SHOW_CHATBOX);
+	m_document->installShortkey(OIS::KC_W,Document::SWAP_EQUIP);
+	m_document->installShortkey(OIS::KC_1,Document::USE_POTION);
+	m_document->installShortkey(OIS::KC_2,(Document::ShortkeyDestination) (Document::USE_POTION+1));
+	m_document->installShortkey(OIS::KC_3,(Document::ShortkeyDestination) (Document::USE_POTION+2));
+	m_document->installShortkey(OIS::KC_4,(Document::ShortkeyDestination) (Document::USE_POTION+3));
+	m_document->installShortkey(OIS::KC_5,(Document::ShortkeyDestination) (Document::USE_POTION+4));
+	m_document->installShortkey(OIS::KC_6,(Document::ShortkeyDestination) (Document::USE_POTION+5));
+	m_document->installShortkey(OIS::KC_7,(Document::ShortkeyDestination) (Document::USE_POTION+6));
+	m_document->installShortkey(OIS::KC_8,(Document::ShortkeyDestination) (Document::USE_POTION+7));
+	m_document->installShortkey(OIS::KC_9,(Document::ShortkeyDestination) (Document::USE_POTION+8));
+	m_document->installShortkey(OIS::KC_0,(Document::ShortkeyDestination) (Document::USE_POTION+9));
 
 	return true;
 }
 
-bool Client::createView()
+bool Application::createView()
 {
 	DEBUG("create view\n");
 	m_main_window = new MainWindow(m_ogre_root, m_cegui_system,m_window,m_document);
@@ -386,7 +410,7 @@ bool Client::createView()
 	return true;
 }
 
-void  Client::update()
+void  Application::update()
 {
 
 }

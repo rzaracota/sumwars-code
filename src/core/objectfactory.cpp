@@ -17,7 +17,7 @@ map<WorldObject::TypeInfo::ObjectSubtype, MonsterBasicData*> ObjectFactory::m_mo
 
 void ObjectFactory::registerMonster(WorldObject::TypeInfo::ObjectSubtype subtype, MonsterBasicData* data)
 {
-	DEBUG("registered monster for subtype %s",subtype.c_str());
+	DEBUG5("registered monster for subtype %s",subtype.c_str());
 	m_monster_data.insert(make_pair(subtype,data));
 }
 
@@ -264,7 +264,7 @@ ServerWObject* ObjectFactory::createObject(WorldObject::TypeInfo::ObjectType typ
 	{
 		WorldObject::Geometry* wob;
 		Shape* sp;
-		DEBUG("create fixed object: %s",subtype.c_str());
+		DEBUG5("create fixed object: %s",subtype.c_str());
 		ret = new FixedObject(m_world,id,subtype);
 
 		wob=ret->getGeometry();

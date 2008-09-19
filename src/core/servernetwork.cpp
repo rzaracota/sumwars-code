@@ -44,6 +44,8 @@ ServerNetwork::ServerNetwork(int max_slots)
 
 NetStatus ServerNetwork::init( int auth_port )
 {
+	DEBUG("init servernetwork");
+	
 	m_peer = RakNetworkFactory::GetRakPeerInterface();
 	SocketDescriptor sock(auth_port,0);
 

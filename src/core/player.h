@@ -269,6 +269,63 @@ public:
 	 * \brief Gibt aus, ob die Aktion einhaendig oder zweihaendig ausgefuehrt wird
 	 */
 	virtual Action::ActionEquip getActionEquip();
+	
+	/**
+	 * \fn Action::ActionType getRightAction()
+	 */
+	Action::ActionType getRightAction()
+	{
+		return m_right_action;
+	}
+	
+	/**
+	 * \fn Action::ActionType getLeftAction()
+	 */
+	Action::ActionType getLeftAction()
+	{
+		return m_left_action;
+	}
+	
+	/**
+	 * \fn short getAttributePoints()
+	 */
+	short getAttributePoints()
+	{
+		return m_attribute_points;
+	}
+	
+	/**
+	 * \fn short getSkillPoints()
+	 */
+	short getSkillPoints()
+	{
+		return m_skill_points;
+	}
+	
+	/**
+	 * \fn Damage& getBaseDamage()
+	 */
+	Damage& getBaseDamage()
+	{
+		return m_base_damage;
+	}
+	
+	/**
+	 * \fn Damage& getLeftDamage()
+	 */
+	Damage& getLeftDamage()
+	{
+		return m_left_damage;
+	}
+	
+	/**
+	 * \fn Damage& getRightDamage()
+	 */
+	Damage& getRightDamage()
+	{
+		return m_right_damage;
+	}
+	
 
 //Protected stuff
 protected:

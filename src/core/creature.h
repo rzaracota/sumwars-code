@@ -176,6 +176,12 @@ public:
 		m_trade_id = trade_id;
 	}
 	
+	/**
+	 * \fn float getTimerPercent(int timer)
+	 * \brief Gibt den Prozentsatz des gewaehlten Timers aus
+	 */
+	float getTimerPercent(int timer);
+	
 	
 	//Operations
 	/**
@@ -286,7 +292,37 @@ public:
 		 */
 	virtual void toString(CharConv* cv);
 
+	/**
+	 * \fn bool checkAbility(Action::ActionType at)
+	 * \brief Prueft ob die Kreatur ueber die angegebene Faehigkeit verfuegt
+	 * \param at Faehigkeit
+	 * \return true, wenn die Faehigkeit verfuegbar ist
+	 */
+	bool checkAbility(Action::ActionType at);
+
 	
+		/**
+	 * \fn bool checkAbilityLearnable(Action::ActionType at)
+	 * \brief Testet ob eine Faehigkeit erlernbar ist
+	 * \param at Faehigkeit
+	 * \return true, wenn die Faehigkeit erlernbar ist
+		 */
+	bool checkAbilityLearnable(Action::ActionType at);
+	
+	/**
+	 * \fn virtual void calcDamage(ActionType type,Damage& dmg)
+	 * \brief Berechnet den Schaden fuer die aktuell ausgefuehrte Aktion
+	 */
+	virtual void calcDamage(Action::ActionType act,Damage& dmg);
+	
+	/**
+	 * \fn virtual Action::ActionEquip getActionEquip()
+	 * \brief Gibt aus, ob die Aktion einhaendig oder zweihaendig ausgefuehrt wird
+	 */
+	virtual Action::ActionEquip getActionEquip()
+	{
+		return Action::ONE_HANDED;
+	}
 	
 protected:
 	
@@ -302,11 +338,7 @@ protected:
 	 */
 	virtual void calcBaseAttrMod();
 	
-	/**
-	 * \fn virtual void calcDamage(ActionType type,Damage& dmg)
-	 * \brief Berechnet den Schaden fuer die aktuell ausgefuehrte Aktion
-	 */
-	virtual void calcDamage(Action::ActionType act,Damage& dmg);
+	
 	
 	/**
 	 * \fn virtual void recalcDamage();
@@ -389,28 +421,9 @@ protected:
 	 */
 	void collisionDetection(float time);
 	
-	/**
-	 * \fn bool checkAbility(Action::ActionType at)
-	 * \brief Prueft ob die Kreatur ueber die angegebene Faehigkeit verfuegt
-	 * \param at Faehigkeit
-	 * \return true, wenn die Faehigkeit verfuegbar ist
-	 */
-	bool checkAbility(Action::ActionType at);
-
 	
-		/**
-	 * \fn bool checkAbilityLearnable(Action::ActionType at)
-	 * \brief Testet ob eine Faehigkeit erlernbar ist
-	 * \param at Faehigkeit
-	 * \return true, wenn die Faehigkeit erlernbar ist
-		 */
-	bool checkAbilityLearnable(Action::ActionType at);
 	
-	/**
-	 * \fn virtual Action::ActionEquip getActionEquip()
-	 * \brief Gibt aus, ob die Aktion einhaendig oder zweihaendig ausgefuehrt wird
-	 */
-	virtual Action::ActionEquip getActionEquip() =0;
+	
 			
 
 //Private stuff

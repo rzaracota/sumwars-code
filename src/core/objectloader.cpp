@@ -283,7 +283,7 @@ void ObjectLoader::searchXml(TiXmlNode* pParent)
 			//registerMonster(WorldObject::TypeInfo::SUBTYPE_GOBLIN, m_monster_data); FIXME
 			m_monster_list->push_back(m_monster_data);
 			m_monster_data = 0;
-			DEBUG("Object loaded");
+			DEBUG5("Object loaded");
 		}
 	}
 }
@@ -310,9 +310,9 @@ list<MonsterBasicData*>* ObjectLoader::loadObjects(const char* pFilename) // TOD
 	
 	if (loadOkay)
 	{
-		DEBUG("Loading %s", pFilename);
+		DEBUG5("Loading %s", pFilename);
 		searchXml(&doc);
-		DEBUG("Loading %s finished", pFilename);
+		DEBUG5("Loading %s finished", pFilename);
 		return m_monster_list;
 	}
 	else

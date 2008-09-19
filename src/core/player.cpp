@@ -49,7 +49,7 @@ bool Player::destroy()
 
 bool Player::init()
 {
-	DEBUG("Player::init");
+	DEBUG5("Player::init");
 	//eigene Initialisierung
 	m_network_slot=-1;
 	m_package_number =0;
@@ -322,6 +322,8 @@ bool Player::onGamefieldClick(ClientCommand* command)
 			}
 		}
 	}
+	
+	DEBUG5("resulting command %i goal %f %f id %i",com->m_type,com->m_goal_coordinate_x,com->m_goal_coordinate_y, com->m_goal_object_id);
 }
 
 
@@ -891,6 +893,8 @@ bool Player::update(float time)
 	//return true;
 
 	Trade* trade = 0;
+	
+	/*
 	// handle inputs form network
 	ServerNetwork* net = getWorld()->getNetwork();
 	if( net->getSlotStatus( m_network_slot )!=NET_CONNECTED )
@@ -949,10 +953,10 @@ bool Player::update(float time)
 			comp.fromString(cv);
 			DEBUG5("Kommando (%f %f) %i %i",comp.m_coordinate_x,comp.m_coordinate_y,comp.m_button, comp.m_id);
 
-			/*for (char* c =(char*) comp; c< sizeof(ClientCommand) + (char*) comp; c++)
-				printf("%02x",*c);
-			printf("\n");
-			*/
+			//for (char* c =(char*) comp; c< sizeof(ClientCommand) + (char*) comp; c++)
+			//	printf("%02x",*c);
+			//printf("\n");
+			
 			onClientCommand( &comp );
 
 		}
@@ -962,11 +966,8 @@ bool Player::update(float time)
 		if(  headerp.m_content == PTYPE_C2S_DATA && headerp.m_chatmessage	)
 		{
 			DEBUG("Chatmessage erhalten");
-			/*for (int i=0;i<len;i++)
-				printf("%c",data[i]);
-			printf("\n");
-			*/
-			/*
+			
+			
 			char* msgp = data + sizeof(ClientHeader);
 			int len = sizeof(PackageHeader)+sizeof(Chatmessage);
 			char sendmsg[len];
@@ -1017,14 +1018,14 @@ bool Player::update(float time)
 					}
 			}
 			DEBUG3("Senden abgeschlossen");
-			*/
+			
 		}
 
 		delete cv;
 		net->deallocatePacket(data);
 
 	}
-
+*/
 
 	// Behandlung des Handels
 	if (getTradeId() !=0)
@@ -1122,6 +1123,7 @@ bool Player::update(float time)
 	net->pushSlotMessage( m_network_slot,tmp,len);
 	*/
 
+	/*
 	sendGameData();
 
 
@@ -1133,7 +1135,7 @@ bool Player::update(float time)
 		m_save_timer = 10000;
 		sendSavegame();
 	}
-
+*/
 	return true;
 }
 
@@ -1165,7 +1167,7 @@ void Player::performActionCritPart(float goalx, float goaly, ServerWObject* goal
 
 void Player::sendGameData()
 {
-	
+	/*
 	// handle inputs form network
 	ServerNetwork* net = getWorld()->getNetwork();
 
@@ -1288,34 +1290,26 @@ void Player::sendGameData()
 	}
 
 	DEBUG5("anzahl gedroppter items %i",header.m_drop_items);
-/*
-	int len = ch.getBitStream()->GetNumberOfBytesUsed();
-	cv.backToStart();
-	header.toString(&cv);
-	ch.getBitStream()->
-*/
+
+//	int len = ch.getBitStream()->GetNumberOfBytesUsed();
+//	cv.backToStart();
+//	header.toString(&cv);
+//	ch.getBitStream()->
+
 	//DEBUG5("sending %i byte of data",len);
 	//DEBUG5("objects %i projectiles %i",header.m_objects,header.m_projectiles);
 
-	/*
-	for (int j=0;buf+j< bp;j++)
-	{
-	cp = (unsigned char*) buf+j;
-		 //if (i%10==8)
-		//	 printf("\n %p\n",cp);
-
-	printf("%c%c ",hex(*cp/16),hex(*cp%16));
-}
-	printf("\n\n");
-	*/
+	
 	
 	DEBUG5("sending %i bytes",cv.getBitStream()->GetNumberOfBytesUsed());
 	net->pushSlotMessage(m_network_slot, cv.getBitStream(),HIGH_PRIORITY, UNRELIABLE_SEQUENCED);
+	*/
 
 }
 
 void Player::sendDetailedItem(short pos)
 {
+	/*
 	ServerItem* it = static_cast<ServerItem*>(m_equipement->getItem(pos));
 
 	if (it!=0)
@@ -1335,11 +1329,13 @@ void Player::sendDetailedItem(short pos)
 		net->pushSlotMessage(m_network_slot, cv.getBitStream());
 
 	}
+	*/
 }
 
 
 void Player::sendAbilityDamage(Action::ActionType act)
 {
+	/*
 	// Wertebereich fuer Aktionen pruefen
 	if (act<0 || act >=192)
 		return;
@@ -1366,11 +1362,12 @@ void Player::sendAbilityDamage(Action::ActionType act)
 	dmg.toString(&cv);
 	net->pushSlotMessage(m_network_slot, cv.getBitStream());
 
-
+	*/
 }
 
 void Player::sendSavegame()
 {
+	/*
 	ServerNetwork* net = getWorld()->getNetwork();
 	int len;
 
@@ -1383,7 +1380,7 @@ void Player::sendSavegame()
 	header.toString(&cv);
 	toSavegame(&cv);
 	net->pushSlotMessage(m_network_slot,  cv.getBitStream());
-
+	*/
 	
 }
 

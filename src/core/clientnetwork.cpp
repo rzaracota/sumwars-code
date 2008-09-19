@@ -4,7 +4,7 @@
 ClientNetwork::ClientNetwork()
 	: Network()
 {
-	
+	m_server_address = UNASSIGNED_SYSTEM_ADDRESS;
 	m_status = NET_CLOSE;
 }
 
@@ -96,33 +96,27 @@ void ClientNetwork::update()
 }
 
 
-int ClientNetwork::numberSlotMessages()
+int ClientNetwork::numberSlotMessages(int slot)
 {
 	return m_received_packets.size();
 }
 
 
-void ClientNetwork::popSlotMessage( Packet* &data)
+void ClientNetwork::popSlotMessage( Packet* &data,int slot)
 {
 	data = m_received_packets.front();
 	m_received_packets.pop();
 }
 
-void ClientNetwork::pushSlotMessage( RakNet::BitStream * data,PacketPriority prio,PacketReliability reliability)
+void ClientNetwork::pushSlotMessage( RakNet::BitStream * data,int slot,PacketPriority prio,PacketReliability reliability)
 {
 	m_peer->Send(data,prio,reliability , 0,m_server_address, false);
 }
 
-NetStatus ClientNetwork::getSlotStatus()
+NetStatus ClientNetwork::getSlotStatus(int slot)
 {
 	return m_status;
 }
 
-void ClientNetwork::deallocatePacket(Packet* packet)
-{
-	static int nr =0;
-	nr++;
-	DEBUG5("packets deallocated: %i",nr);
-	m_peer->DeallocatePacket(packet);
-}
+
 

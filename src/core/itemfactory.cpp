@@ -607,6 +607,8 @@ void ItemFactory::init()
 	list<ItemBasicData*>* item_list;
 	item_list = itemloader->loadItemBasicData("../../data/items.xml");
 	
+	// Debugging: Anzeigen der geladenen Items
+	/*
 	if (item_list != 0)
 	{
 		list<ItemBasicData*>::iterator iter = item_list->begin();
@@ -642,7 +644,7 @@ void ItemFactory::init()
 			*iter++;
 		}
 	}
-	
+	*/
 	
 	list<DropChanceData*>* drop_chance_list;
 	drop_chance_list = itemloader->loadDropChanceData("../../data/items.xml");

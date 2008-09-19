@@ -26,38 +26,28 @@ Document::Document()
 	: m_special_keys() , m_shortkey_map()
 {
 
-	DEBUG("reading ip");
+	DEBUG5("reading ip");
 	// IP aus Konfigurationsdatei einlesen
 	{
 		ifstream file("config");
-		DEBUG("file opened");
+		DEBUG5("file opened");
 		if ( file.is_open() )
 		{
-			file >> getNetworkInfo()->m_server_ip;
-			ERRORMSG("Server-IP: %s", getNetworkInfo()->m_server_ip);
+			file >> m_server_ip;
+			DEBUG5("Server-IP: %s", m_server_ip);
 		}
 		else
 		{
 			ERRORMSG("config nicht gefunden");
 		}
 	}
+	
+	m_world =0;
 
 	bool network_error = false;
 
 	// Informationen zu Aktionen initialisieren
 	Action::init();
-
-	// Datenstrukturen fuer Objekte und Projektile anlegen
-	m_objects_bintree= new map<int, ClientWObject*>;
-	m_projectiles = new map<int,Projectile*>;
-	m_drop_items = new map<int,DropItem>;
-
-	m_region_data.m_static_objects = new map<int,WorldObject*>;
-	m_region_data.m_static_objects->clear();
-	m_region_data.m_tiles =0;
-
-	// Netzwerk initialisieren
-	getNetworkInfo()->m_network = new ClientNetwork();
 
 
 	// Status der GUI setzen
@@ -66,7 +56,8 @@ Document::Document()
 	getGUIState()->m_shift_hold = false;
 	getGUIState()->m_sheet= MAIN_MENU;
 	getGUIState()->m_shown_windows = SAVEGAME_LIST;
-	getGUIState()->m_pressed_key = OIS::KC_UNASSIGNED;
+	//getGUIState()->m_pressed_key = OIS::KC_UNASSIGNED;
+	getGUIState()->m_pressed_key =0;
 	getGUIState()->m_cursor_object ="";
 	getGUIState()->m_cursor_object_id =0;
 	getGUIState()->m_cursor_item_id =0;
@@ -76,11 +67,7 @@ Document::Document()
 	// Pointer/Inhalte mit 0 initialisieren
 	m_gui_state.m_chat_window_content = "";
 	m_data_locks=0;
-	m_main_player =0;
-	m_party =0;
 	m_savegame =0;
-	m_detailed_item=0;
-	m_ability_pos=Action::NOACTION;
 
 
 	// aktuell eingestellte Aktionen setzen
@@ -92,6 +79,7 @@ Document::Document()
 
 	// Shortkeys einstellen
 	m_shortkey_map.clear();
+	/*
 	installShortkey(OIS::KC_I,SHOW_INVENTORY);
 	installShortkey(OIS::KC_C,SHOW_CHARINFO);
 	installShortkey(OIS::KC_T,SHOW_SKILLTREE);
@@ -114,34 +102,48 @@ Document::Document()
 	m_special_keys.insert(OIS::KC_ESCAPE);
 	m_special_keys.insert(OIS::KC_LSHIFT);
 	m_special_keys.insert(OIS::KC_LCONTROL);
+	*/
 
 }
 
-void Document::serverConnect()
+void Document::startGame(bool server)
 {
-	// Verbindung aufbauen
-	NetStatus ret;
-	getNetworkInfo()->m_network->serverConnect( getNetworkInfo()->m_server_ip,REQ_PORT);
-	m_state = CONNECTING;
-
-
-
-
+	m_server = server;
+	
+	
+	
+	m_world = new World(server);
+	m_world->init();
+	
+	if (server)
+	{
+		
+	}
+	else
+	{
+		ClientNetwork* net = static_cast<ClientNetwork*>(m_world->getNetwork());
+		net->serverConnect(m_server_ip,REQ_PORT);
+		
+	}
+	m_state = LOAD_SAVEGAME;
 }
 
-void Document::sendSavegame()
+
+void Document::loadSavegame()
 {
 	// Savegame einlesen
 	DEBUG5("lese savegame");
 	char head[8];
 	int i;
 	char* bp = head;
-	string fname = "../client/";
+	string fname = "../../save/";
 	fname += m_save_file;
+	/*
 	if (m_gui_type == GL_GUI)
 	{
 		fname =  m_save_file;
 	}
+	*/
 	DEBUG5("savegame is %s",fname.c_str());
 	
 	ifstream file(fname.c_str(),ios::in| ios::binary);
@@ -151,7 +153,7 @@ void Document::sendSavegame()
 		{
 			file.get(head[i]);
 		}
-		CharConv cv((unsigned char*) head,8);
+		CharConv cv((unsigned char*) head,18);
 		char binsave;
 		cv.fromBuffer<char>(binsave);
 		short version;
@@ -167,16 +169,8 @@ void Document::sendSavegame()
 		{
 			file.get(data[i]);
 		}
-		//hexwrite(data+45,len-45);
-
-		// Savegame an den Server senden
-		ClientHeader header;
-		header.m_content = PTYPE_C2S_SAVEGAME; 	// Savegame von Client zu Server
-		header.m_chatmessage = false;			// keine Chatnachricht
-		CharConv save;
-		header.toString(&save);
-		save.toBuffer(data,len);
-		getNetworkInfo()->m_network->pushSlotMessage(save.getBitStream());
+		
+		m_world->handleSavegame(data);
 
 
 		// aktuelle Aktion setzen
@@ -204,16 +198,18 @@ void Document::sendSavegame()
 		setRightAction((Action::ActionType) n);
 		m_right_action=(Action::ActionType) n;
 */
+		/*
 		setRightAction(Action::ATTACK) ;
 		m_left_action = Action::ATTACK;
 		setLeftAction(Action::ATTACK);
 		m_right_action = Action::ATTACK;
+*/
 
-
-		m_state = CONNECTED;
+		m_state =RUNNING;
 		m_gui_state.m_shown_windows = NO_WINDOWS;
 		m_gui_state.m_sheet = GAME_SCREEN;
 		m_modified = WINDOWS_MODIFIED | GUISHEET_MODIFIED;
+		m_timer.start();
 
 
 		delete data;
@@ -227,11 +223,6 @@ void Document::sendSavegame()
 
 Document::~Document()
 {
-	delete m_region_data.m_static_objects;
-	delete m_projectiles;
-	delete m_objects_bintree;
-	delete getNetworkInfo()->m_network;
-	delete m_drop_items;
 
 }
 // Methods
@@ -260,24 +251,7 @@ ClientWorldObject* Document::getWorldObject(int id)
 
 void Document::sendCommand(ClientCommand* comm)
 {
-	CharConv cv;
-
-	// Header anlegen
-	ClientHeader header;
-	header.m_content = PTYPE_C2S_DATA; 	// Daten von Client zu Server
-	header.m_chatmessage = false;			// keine Chatnachricht
-
-
-	// Header in den Puffer schreiben
-	 header.toString(&cv);
-	// Kommando in den Puffer schreiben
-	comm->toString(&cv);
-	DEBUG4("Kommando (%f %f) button: %i id: %i action: %i",comm->m_coordinate_x,comm->m_coordinate_y,comm->m_button, comm->m_id,comm->m_action);
-
-
-
-	 // Datenpaket zum Server senden
-	m_network_info.m_network->pushSlotMessage(cv.getBitStream());
+	m_world->handleCommand(comm);
 
 }
 
@@ -298,9 +272,9 @@ void Document::unlock()
 		ERRORMSG("kritischer Abschnitt verletzt");
 }
 
-OIS::KeyCode Document::getMappedKey(ShortkeyDestination sd)
+KeyCode Document::getMappedKey(ShortkeyDestination sd)
 {
-	map<OIS::KeyCode, ShortkeyDestination>::iterator it;
+	map<KeyCode, ShortkeyDestination>::iterator it;
 	for (it=m_shortkey_map.begin(); it!= m_shortkey_map.end();++it)
 	{
 		if (it->second == sd)
@@ -309,15 +283,15 @@ OIS::KeyCode Document::getMappedKey(ShortkeyDestination sd)
 		}
 	}
 
-	return OIS::KC_UNASSIGNED;
+	return 0;
 }
 
-void Document::installShortkey(OIS::KeyCode key,ShortkeyDestination dest)
+void Document::installShortkey(KeyCode key,ShortkeyDestination dest)
 {
 	// Taste auf die das Ereignis bisher gemappt war
-	OIS::KeyCode oldkey = getMappedKey(dest);
+	KeyCode oldkey = getMappedKey(dest);
 	// entfernen
-	if (oldkey != OIS::KC_UNASSIGNED)
+	if (oldkey != 0)
 	{
 		m_shortkey_map.erase(oldkey);
 	}
@@ -374,8 +348,6 @@ void Document::onButtonSendMessageClicked ( )
 
 void Document::onButtonSaveExitClicked ( )
 {
-	m_save_timer=0;
-
 	if (m_state!=SHUTDOWN_REQUEST)
 	{
 		setState(SHUTDOWN_REQUEST);
@@ -407,21 +379,21 @@ void Document::onRightMouseButtonClick(float x, float y)
 {
 	ClientCommand command;
 
-
-	ClientWObject* cwo;
-	map<int,ClientWObject*>::iterator iter;
+	// der lokale Spieler
+	Player* pl = static_cast<Player*> (m_world->getLocalPlayer());
+	if (pl==0)
+		return;
+	
 
 	// herstellen der Koordinaten im Koordinatensystem des Spiels
-	x += m_main_player->getGeometry()->m_shape.m_coordinate_x;
-	y += m_main_player->getGeometry()->m_shape.m_coordinate_y;
-	m_gui_state. m_clicked_x =x;
-	m_gui_state. m_clicked_y =y;
+	m_gui_state.m_clicked_x =x;
+	m_gui_state.m_clicked_y =y;
 
 	// Paket mit Daten fuellen
 	command.m_button=RIGHT_MOUSE_BUTTON;
 	command.m_coordinate_x=x;
 	command.m_coordinate_y=y;
-	command.m_action = m_right_action;
+	command.m_action = pl->getRightAction();
 
 	m_gui_state.m_left_mouse_hold=false;
 	m_gui_state.m_right_mouse_hold_time=0;
@@ -430,11 +402,12 @@ void Document::onRightMouseButtonClick(float x, float y)
 
 	m_gui_state.m_clicked_object_id=0;
 	command.m_id=0;
-	lock();
+
 	int id = getObjectAt(x,y);
+	
 	m_gui_state.m_clicked_object_id = id;
 	command.m_id =id;
-	unlock();
+	
 	command.m_number=0;
 
 	if (command.m_id!=0)
@@ -442,10 +415,7 @@ void Document::onRightMouseButtonClick(float x, float y)
 
 
 	// Paket an den Server senden
-	 sendCommand(&command);
-
-
-
+	sendCommand(&command);
 
 }
 
@@ -454,13 +424,13 @@ void Document::onLeftMouseButtonClick(float x, float y)
 
 	ClientCommand command;
 
-
-	ClientWObject* cwo;
-	map<int,ClientWObject*>::iterator iter;
+	// der lokale Spieler
+	Player* pl = static_cast<Player*> (m_world->getLocalPlayer());
+	if (pl==0)
+		return;
 
 	// herstellen der Koordinaten im Koordinatensystem des Spiels
-	x += m_main_player->getGeometry()->m_shape.m_coordinate_x;
-	y += m_main_player->getGeometry()->m_shape.m_coordinate_y;
+
 	m_gui_state. m_clicked_x =x;
 	m_gui_state. m_clicked_y =y;
 
@@ -472,7 +442,7 @@ void Document::onLeftMouseButtonClick(float x, float y)
 	}
 	command.m_coordinate_x=x;
 	command.m_coordinate_y=y;
-	command.m_action = m_left_action;
+	command.m_action = pl->getLeftAction();
 
 	m_gui_state.m_right_mouse_hold=false;
 	m_gui_state.m_left_mouse_hold_time=0;
@@ -481,17 +451,15 @@ void Document::onLeftMouseButtonClick(float x, float y)
 	DEBUG4("angeklickte Koordinaten: %f %f",x,y);
 
 	//TODO: suchen welches objekt angeklickt wurde
-	map<int,ClientWObject*>::iterator i;
-	ClientWObject* wo =0;
+	
 	m_gui_state.m_clicked_object_id=0;
 	command.m_id=0;
-	Shape* s=0;
-	float sx,sy;
-	lock();
+	
+	
 	int id = getObjectAt(x,y);
+	
 	m_gui_state.m_clicked_object_id = id;
 	command.m_id =id;
-	unlock();
 	command.m_number=0;
 
 	if (command.m_id!=0)
@@ -514,45 +482,21 @@ void Document::onLeftMouseButtonClick(float x, float y)
 
 int Document::getObjectAt(float x,float y)
 {
-	if (m_gui_type == GL_GUI)
-	{
-		map<int,ClientWObject*>::iterator i;
-		ClientWObject* wo =0;
-		Shape* s=0;
-		float sx,sy;
-
-		for (i=m_objects_bintree->begin();i!=m_objects_bintree->end();++i)
-		{
-			wo = i->second;
-			s = &(wo->getGeometry()->m_shape);
-			sx = s->m_coordinate_x;
-			sy = s->m_coordinate_y;
-
-			if (s->m_type == Shape::CIRCLE)
-			{
-				if ((sx-x)*(sx-x) + (sy-y)*(sy-y) < s->m_radius*s->m_radius)
-				{
-					return wo->getId();
-				}
-			}
-			else
-			{
-				float ex = s->m_extent_x;
-				float ey = s->m_extent_y;
-
-				if (x>=sx -ex && x<=sx +ex && y>=sy -ey && y<=sy +ey)
-				{
-					return wo->getId();
-				}
-			}
-
-		}
+	// der lokale Spieler
+	ServerWObject* pl = m_world->getLocalPlayer();
+	if (pl==0)
 		return 0;
-	}
-	else
-	{
-		return m_gui_state.m_cursor_object_id;
-	}
+	
+	// Region in der sich der lokale Spieler befindet
+	Region* reg = pl->getRegion();
+	if (reg ==0)
+		return 0;
+	
+	ServerWObject* obj = reg->getSWObjectAt(x,y);
+	if (obj != 0)
+		return obj->getId();
+	
+	return 0;
 
 }
 
@@ -569,9 +513,15 @@ void Document::onButtonPartyAccept(int cnr)
 {
 	ClientCommand command;
 	command.m_button = BUTTON_PARTY_ACCEPT;
-	if (m_party->getNrCandidates() > cnr)
+	
+	// Party in der der Spieler Mitglied ist
+	Party* party = getParty();
+	if (party ==0)
+		return;
+	
+	if (party->getNrCandidates() > cnr)
 	{
-		command.m_id = m_party->getCandidates()[cnr];
+		command.m_id = party->getCandidates()[cnr];
 		sendCommand(&command);
 	}
 }
@@ -594,6 +544,7 @@ void Document::onItemRightClick(short pos)
 
 }
 
+/*
 void Document::requestItemDetailedInfo( short pos)
 {
 	ClientCommand command;
@@ -609,6 +560,7 @@ void Document::requestAbilityDamage(Action::ActionType abl)
 	command.m_id = abl;
 	sendCommand(&command);
 }
+*/
 
 void Document::increaseAttribute(CreatureBaseAttr::Attribute attr)
 {
@@ -649,9 +601,14 @@ void Document::onButtonInventoryClicked()
 	{
 
 		getGUIState()->m_shown_windows &= ~INVENTORY;
+		
+		// der lokale Spieler
+		Player* pl = static_cast<Player*>( m_world->getLocalPlayer());
+		if (pl==0)
+			return;
 
 		// Item das aktuell in der Hand ist fallen lassen
-		if (getMainPlayer()->m_equipement->getItem(Equipement::CURSOR_ITEM)!=0)
+		if (pl->getEquipement()->getItem(Equipement::CURSOR_ITEM)!=0)
 		{
 			dropCursorItem();
 		}
@@ -660,7 +617,7 @@ void Document::onButtonInventoryClicked()
 	{
 		// wenn Inventar geoeffnet wird, dann Skilltree schliessen
 		getGUIState()->m_shown_windows &= ~SKILLTREE;
-		m_gui_state.m_pressed_key = OIS::KC_UNASSIGNED;
+		m_gui_state.m_pressed_key = 0;
 
 		getGUIState()->m_shown_windows |= INVENTORY;
 
@@ -704,7 +661,7 @@ void Document::onButtonSkilltreeClicked()
 		getGUIState()->m_shown_windows |= SKILLTREE;
 	}
 
-	m_gui_state.m_pressed_key = OIS::KC_UNASSIGNED;
+	m_gui_state.m_pressed_key = 0;
 
 	// Geoeffnete Fenster haben sich geaendert
 	m_modified |= WINDOWS_MODIFIED;
@@ -735,21 +692,26 @@ void Document::onSwapEquip()
 
 void Document::setLeftAction(Action::ActionType act)
 {
-	if (m_gui_state.m_pressed_key != OIS::KC_UNASSIGNED)
+	if (m_gui_state.m_pressed_key != 0)
 	{
 		// Im Skilltree wird Kurztaste ausgewaehlt
 		installShortkey(m_gui_state.m_pressed_key,(ShortkeyDestination) (USE_SKILL_LEFT+act));
 		return;
 	}
+	
+	
 	// wenn kein Spieler gesetzt ist, dann keine Faehigkeit setzen
-	if (m_main_player ==0)
+	// der lokale Spieler
+	Player* player = static_cast<Player*>(m_world->getLocalPlayer());
+	if (player==0)
 		return;
+	
 
 	int acti = (int) act;
 	Action::ActionInfo* aci = Action::getActionInfo(act);
 
 	// Testen ob die Faehigkeit zur Verfuegung steht
-	if (!m_main_player->checkAbility(act))
+	if (!player->checkAbility(act))
 	{
 		// Faehigkeit steht nicht zur Verfuegung, abbrechen
 		return;
@@ -765,8 +727,6 @@ void Document::setLeftAction(Action::ActionType act)
 
 	DEBUG("Setting Action %i",act);
 	m_gui_state.m_left_mouse_hold = false;
-	m_left_action = act;
-
 
 
 	ClientCommand command;
@@ -777,7 +737,7 @@ void Document::setLeftAction(Action::ActionType act)
 
 void Document::setRightAction(Action::ActionType act)
 {
-	if (m_gui_state.m_pressed_key != OIS::KC_UNASSIGNED)
+	if (m_gui_state.m_pressed_key != 0)
 	{
 		// Im Skilltree wird Kurztaste ausgewaehlt
 		installShortkey(m_gui_state.m_pressed_key,(ShortkeyDestination) (USE_SKILL_RIGHT+act));
@@ -786,14 +746,16 @@ void Document::setRightAction(Action::ActionType act)
 	}
 
 	// wenn kein Spieler gesetzt ist, dann keine Faehigkeit setzen
-	if (m_main_player ==0)
+	// der lokale Spieler
+	Player* player = static_cast<Player*>(m_world->getLocalPlayer());
+	if (player==0)
 		return;
-
+	
 	int acti = (int) act;
 	Action::ActionInfo* aci = Action::getActionInfo(act);
 
 	// Testen ob die Faehigkeit zur Verfuegung steht
-	if (!m_main_player->checkAbility(act))
+	if (!player->checkAbility(act))
 	{
 		// Faehigkeit steht nicht zur Verfuegung, abbrechen
 		return;
@@ -806,7 +768,6 @@ void Document::setRightAction(Action::ActionType act)
 
 	DEBUG("Setting Action %i",act);
 	m_gui_state.m_right_mouse_hold = false;
-	m_right_action = act;
 
 	ClientCommand command;
 	command.m_button = BUTTON_SET_RIGHT_ACTION;
@@ -814,28 +775,31 @@ void Document::setRightAction(Action::ActionType act)
 	sendCommand(&command);
 }
 
-std::string Document::getAbilityDescription()
+std::string Document::getAbilityDescription(Action::ActionType ability)
 {
 	ostringstream out_stream;
 	out_stream.str("");
 
-	if (m_main_player !=0 && m_ability_pos != Action::NOACTION)
+	// der lokale Spieler
+	Player* player = static_cast<Player*>(m_world->getLocalPlayer());
+	
+	if (player !=0 )
 	{
 		// Struktur mit Informationen zur Aktion
-		Action::ActionInfo* aci = Action::getActionInfo(m_ability_pos);
+		Action::ActionInfo* aci = Action::getActionInfo(ability);
 
 		// Name der Faehigkeit
-		out_stream << Action::getName(m_ability_pos);
+		out_stream << Action::getName(ability);
 		// out_stream << Action::getName(m_ability_pos);
 
 		// Beschreibung
 		//out_stream << "\n" << "Beschreibung: bla blubb";
-		out_stream << "\n" << gettext("doc_description") << Action::getDescription(m_ability_pos);
+		out_stream << "\n" << gettext("doc_description") << Action::getDescription(ability);
 
 		// Gibt an, ob der Spieler die Faehigkeit besitzt
 		bool avlb = true;
-		short ac = m_ability_pos;
-		if ((m_main_player->m_abilities[ac/32] & (1 << (ac %32))) ==0)
+		short ac = ability;
+		if (!player->checkAbility(ability))
 		{
 			// Spieler besitzt Faehigkeit nicht
 			avlb = false;
@@ -852,7 +816,9 @@ std::string Document::getAbilityDescription()
 		}
 
 		// Schaden
-		std::string dmgstring = m_ability_damage.getDamageString(Damage::ABILITY);
+		Damage dmg;
+		player->calcDamage(ability,dmg);
+		std::string dmgstring = dmg.getDamageString(Damage::ABILITY);
 		if (dmgstring !="")
 		{
 			out_stream << "\n" << dmgstring;
@@ -863,22 +829,8 @@ std::string Document::getAbilityDescription()
 	return out_stream.str();
 }
 
-bool Document::onKeyPress(OIS::KeyCode key)
+bool Document::onKeyPress(KeyCode key)
 {
-
-	if (key == OIS::KC_ESCAPE)
-	{
-		if (m_gui_state.m_shown_windows == NO_WINDOWS)
-		{
-			onButtonSaveExitClicked();
-		}
-		else
-		{
-			m_gui_state.m_shown_windows =  NO_WINDOWS;
-			// Geoeffnete Fenster haben sich geaendert
-			m_modified |= WINDOWS_MODIFIED;
-		}
-	}
 
 	if (m_gui_state.m_shown_windows & SKILLTREE)
 	{
@@ -900,7 +852,7 @@ bool Document::onKeyPress(OIS::KeyCode key)
 
 	}
 
-	map<OIS::KeyCode, ShortkeyDestination>::iterator it = m_shortkey_map.find(key);
+	map<KeyCode, ShortkeyDestination>::iterator it = m_shortkey_map.find(key);
 
 	if (it == m_shortkey_map.end())
 	{
@@ -947,6 +899,19 @@ bool Document::onKeyPress(OIS::KeyCode key)
 		{
 			emitDebugSignal(3);
 		}
+		else if (dest == CLOSE_ALL)
+		{
+			if (m_gui_state.m_shown_windows == NO_WINDOWS)
+			{
+				onButtonSaveExitClicked();
+			}
+			else
+			{
+				m_gui_state.m_shown_windows =  NO_WINDOWS;
+			// Geoeffnete Fenster haben sich geaendert
+				m_modified |= WINDOWS_MODIFIED;
+			}
+		}
 		else
 		{
 			return false;
@@ -957,11 +922,11 @@ bool Document::onKeyPress(OIS::KeyCode key)
 	}
 }
 
-bool  Document::onKeyRelease(OIS::KeyCode key)
+bool  Document::onKeyRelease(KeyCode key)
 {
-	if (m_gui_state.m_pressed_key != OIS::KC_UNASSIGNED)
+	if (m_gui_state.m_pressed_key != 0)
 	{
-		m_gui_state.m_pressed_key = OIS::KC_UNASSIGNED;
+		m_gui_state.m_pressed_key = 0;
 	}
 }
 
@@ -974,28 +939,22 @@ void Document::update(float time)
 		case INACTIVE:
 			break;
 
-		case CONNECT_REQUEST:
-			serverConnect();
+		case START_GAME:
+			startGame(m_server);
 			break;
 
-		case CONNECTING:
-			if (m_network_info.m_network->getSlotStatus() == NET_CONNECTED)
+		case LOAD_SAVEGAME:
+			if (m_server || m_world->getNetwork()->getSlotStatus() == NET_CONNECTED)
 			{
-				sendSavegame();
+				loadSavegame();
 			}
 
-		case CONNECTED:
+		case RUNNING:
 			updateContent(time);
 			break;
 
 		case SHUTDOWN_REQUEST:
 			updateContent(time);
-			m_save_timer += time;
-			if (m_save_timer >3000)
-			{
-				ERRORMSG("no savegame received, shutdown");
-				m_state = SHUTDOWN;
-			}
 			break;
 
 		case SHUTDOWN_WRITE_SAVEGAME:
@@ -1005,9 +964,11 @@ void Document::update(float time)
 			pthread_create(&thread,0,&Document::writeSaveFile,this);
 			pthread_join(thread, &ret);
 
-			// Verbindung zum Server schliessen
-			m_network_info.m_network->serverDisconnect();
-			m_network_info.m_network->kill();
+			// Spielwelt abschalten
+			delete m_world;
+			m_world =0;
+			
+			
 			m_state = SHUTDOWN;
 			break;
 
@@ -1021,6 +982,13 @@ void Document::updateContent(float time)
 {
 	DEBUG5("update content");
 
+	Player* player = static_cast<Player*>(m_world->getLocalPlayer());
+	if (player==0)
+	{
+		DEBUG5("no local player");
+		return;
+	}
+	
 	if (m_gui_state.m_left_mouse_hold)
 	{
 		DEBUG5("linke Maustaste festgehalten");
@@ -1037,7 +1005,7 @@ void Document::updateContent(float time)
 			command.m_coordinate_x=m_gui_state.m_clicked_x;
 			command.m_coordinate_y=m_gui_state.m_clicked_y;
 			command.m_id = m_gui_state.m_clicked_object_id;
-			command.m_action = m_left_action;
+			command.m_action = player->getLeftAction();
 			command.m_number=0;
 
 			m_gui_state.m_left_mouse_hold_time=0;
@@ -1059,7 +1027,7 @@ void Document::updateContent(float time)
 			command.m_coordinate_x=m_gui_state.m_clicked_x;
 			command.m_coordinate_y=m_gui_state.m_clicked_y;
 			command.m_id = m_gui_state.m_clicked_object_id;
-			command.m_action = m_right_action;
+			command.m_action = player->getRightAction();
 			command.m_number=0;
 
 			m_gui_state.m_right_mouse_hold_time=0;
@@ -1068,7 +1036,11 @@ void Document::updateContent(float time)
 		}
 
 	}
-
+	
+	// Welt eine Zeitscheibe weiter laufen lassen
+	m_world->update(time);
+	
+	/*
 	ServerHeader headerp;
 
 	Packet* data=0;
@@ -1149,12 +1121,15 @@ void Document::updateContent(float time)
 	}
 
 	DEBUG5("update finished");
+	*/
 }
 
+
+/*
 void Document::handleDataPkg(CharConv* cv, ServerHeader* headerp)
 {
 	//DEBUG("read bits: %i bytes",cv->getBitStream()->GetReadOffset());
-	
+	/*
 	map<int, ClientWObject*>::iterator iter;
 	ClientWObject* cwo=0;
 	map<int,Projectile*>::iterator it;
@@ -1277,28 +1252,7 @@ void Document::handleDataPkg(CharConv* cv, ServerHeader* headerp)
 		unlock();
 		
 	}
-	else
-	{
-		/*
-		int i;
-		short len =cv->fromBuffer<short>(datap);
-		int count = 0;
-		string::size_type position = 0;
-		while (count < 3 && m_gui_state.m_chat_window_content.find('\n', position) != string::npos)
-		{
-			position = m_gui_state.m_chat_window_content.find('\n', position+1);
-			count++;
-			DEBUG5("Count: %i", count);
-			DEBUG5("Pos: %i", position);
-		}
-		if (count >= 3)
-		{
-			position = m_gui_state.m_chat_window_content.find('\n', 0);
-			m_gui_state.m_chat_window_content.erase(0, position+1);
-		}
-		m_gui_state.m_chat_window_content = m_gui_state.m_chat_window_content + '\n' + datap;
-		*/
-	}
+	
 
 	DEBUG5("objects modified");
 	m_modified |= OBJECTS_MODIFIED;
@@ -1425,6 +1379,7 @@ void Document::handleRegionData(CharConv* cv)
 	m_modified |= REGION_MODIFIED;
 
 }
+*/
 
 void* Document::writeSaveFile(void* doc_ptr)
 {
@@ -1458,3 +1413,6 @@ void* Document::writeSaveFile(void* doc_ptr)
 
 	return 0;
 }
+
+
+

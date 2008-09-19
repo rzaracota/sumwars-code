@@ -38,7 +38,7 @@ bool MainWindow::init()
 	result &= setupGameScreen();
 
 	// Aktuelle Ebene setzen
-	CEGUI::System::getSingleton().setGUISheet(m_game_screen);
+	CEGUI::System::getSingleton().setGUISheet(m_main_menu);
 
 
 	return result;
@@ -262,11 +262,11 @@ void MainWindow::update()
 			inventory->setVisible(false);
 		}
 
-		if (m_document->getMainPlayer()!=0)
+		if (m_document->getLocalPlayer()!=0)
 		{
 			// Skilltree anzeigen wenn entsprechendes Flag gesetzt
 			CEGUI::TabControl* skilltree = (CEGUI::TabControl*) win_mgr.getWindow("SkilltreeMage");
-			ClientMPlayer* player = m_document->getMainPlayer();
+			Player* player = m_document->getLocalPlayer();
 
 			// Skilltree einstellen der der Spielerklasse entspricht
 			if (player->getTypeInfo()->m_subtype == "warrior")
@@ -289,25 +289,15 @@ void MainWindow::update()
 	}
 
 
-	if (m_document->getModified() & Document::ITEM_MODIFIED)
-	{
-		// Tooltip fuer das Item ueber dem die Maus ist neu setzen
-		updateItemTooltip();
-		m_document->setModified(m_document->getModified() & ~Document::ITEM_MODIFIED);
-	}
-
-	if (m_document->getModified() & Document::ABILITY_MODIFIED)
-	{
-		// Tooltip fuer die Faehigkeit ueber der die Maus ist neu setzen
-		updateAbilityTooltip();
-		m_document->setModified(m_document->getModified() & ~Document::ABILITY_MODIFIED);
-	}
-
 	// Objekte aus dem Dokument darstellen
-	if (m_document->getMainPlayer()!=0)
+	if (m_document->getLocalPlayer()!=0)
 	{
+		
+		
 		// Szene aktualisieren
 		m_scene->update();
+		
+		
 
 		// ObjectInfo aktualisieren
 		updateObjectInfo();
@@ -2125,7 +2115,7 @@ void  MainWindow::updateMainMenu()
 		DEBUG("file found %s",it->c_str());
 		//File oeffnen
 
-		file.open(("../client/save/"+(*it)).c_str(),ios::in| ios::binary);
+		file.open(("../../save/"+(*it)).c_str(),ios::in| ios::binary);
 		if (file.is_open())
 		{
 			savelist->addRow();
@@ -2166,7 +2156,7 @@ void  MainWindow::updateMainMenu()
 			savelist->setItem(new ListItem(classname),1,n);
 
 			name = bp;
-			savelist->setItem(new SaveListItem(name,"save/"+(*it)),0,n);
+			savelist->setItem(new SaveListItem(name,(*it)),0,n);
 			n++;
 
 			file.close();
@@ -2178,7 +2168,7 @@ void  MainWindow::updateMainMenu()
 void MainWindow::updateCharInfo()
 {
 	// Spielerobjekt
-	ClientMPlayer* player = m_document->getMainPlayer();
+	Player* player = m_document->getLocalPlayer();
 
 	std::string tooltip;
 
@@ -2225,7 +2215,7 @@ void MainWindow::updateCharInfo()
 	// Label Level
 	label =  win_mgr.getWindow("LevelLabel");
 	out_stream.str("");
-	out_stream << "Level "<<(int) player->m_level;
+	out_stream << "Level "<<(int) player->getBaseAttr()->m_level;
 	if (label->getText()!=out_stream.str())
 	{
 		label->setText(out_stream.str());
@@ -2234,7 +2224,7 @@ void MainWindow::updateCharInfo()
 	// Label Staerke
 	label =  win_mgr.getWindow("StrengthValueLabel");
 	out_stream.str("");
-	out_stream << player->m_strength;
+	out_stream << player->getBaseAttrMod()->m_strength;
 	if (label->getText()!=out_stream.str())
 	{
 		label->setText(out_stream.str());
@@ -2243,7 +2233,7 @@ void MainWindow::updateCharInfo()
 	// Label Zauberkraft
 	label =  win_mgr.getWindow("MagicpowerValueLabel");
 	out_stream.str("");
-	out_stream << player->m_magic_power;
+	out_stream << player->getBaseAttrMod()->m_magic_power;
 	if (label->getText()!=out_stream.str())
 	{
 		label->setText(out_stream.str());
@@ -2252,7 +2242,7 @@ void MainWindow::updateCharInfo()
 	// Label Willenskraft
 	label =  win_mgr.getWindow("WillpowerValueLabel");
 	out_stream.str("");
-	out_stream << player->m_willpower;
+	out_stream << player->getBaseAttrMod()->m_willpower;
 	if (label->getText()!=out_stream.str())
 	{
 		label->setText(out_stream.str());
@@ -2261,7 +2251,7 @@ void MainWindow::updateCharInfo()
 	// Label Geschick
 	label =  win_mgr.getWindow("DexterityValueLabel");
 	out_stream.str("");
-	out_stream << player->m_dexterity;
+	out_stream << player->getBaseAttrMod()->m_dexterity;
 	if (label->getText()!=out_stream.str())
 	{
 		label->setText(out_stream.str());
@@ -2269,7 +2259,7 @@ void MainWindow::updateCharInfo()
 
 	// Buttons zum erhoehen von Attributen sind nur sichtbar wenn Attributpunkt zu verteilen sind
 	bool add_but_vis = false;
-	if ( player->m_attribute_points>0)
+	if ( player->getAttributePoints()>0)
 	{
 		add_but_vis=true;
 	}
@@ -2287,7 +2277,7 @@ void MainWindow::updateCharInfo()
 	// Label freie Attributspunkte
 	label =  win_mgr.getWindow("AttrPointsValueLabel");
 	out_stream.str("");
-	out_stream << player->m_attribute_points;;
+	out_stream << player->getAttributePoints();
 	//label->setVisible(add_but_vis);
 	if (label->getText()!=out_stream.str())
 	{
@@ -2297,7 +2287,7 @@ void MainWindow::updateCharInfo()
 	// Label Ruestung
 	label =  win_mgr.getWindow("ArmorValueLabel");
 	out_stream.str("");
-	out_stream << player->m_armor;
+	out_stream << player->getBaseAttrMod()->m_armor;
 	if (label->getText()!=out_stream.str())
 	{
 		label->setText(out_stream.str());
@@ -2306,7 +2296,7 @@ void MainWindow::updateCharInfo()
 	// Label Attacke
 	label =  win_mgr.getWindow("AttackValueLabel");
 	out_stream.str("");
-	out_stream << player->m_base_damage.m_attack;
+	out_stream << player->getBaseDamage().m_attack;
 	if (label->getText()!=out_stream.str())
 	{
 		label->setText(out_stream.str());
@@ -2315,7 +2305,7 @@ void MainWindow::updateCharInfo()
 	// Label Block
 	label =  win_mgr.getWindow("BlockValueLabel");
 	out_stream.str("");
-	out_stream << player->m_block;
+	out_stream << player->getBaseAttrMod()->m_block;
 	if (label->getText()!=out_stream.str())
 	{
 		label->setText(out_stream.str());
@@ -2324,7 +2314,7 @@ void MainWindow::updateCharInfo()
 	// Label HP
 	label =  win_mgr.getWindow("HitpointsValueLabel");
 	out_stream.str("");
-	out_stream << (int) player->m_health <<"/" <<(int) player->m_max_health;
+	out_stream << (int) player->getDynAttr()->m_health <<"/" <<(int) player->getBaseAttrMod()->m_max_health;
 	if (label->getText()!=out_stream.str())
 	{
 		label->setText(out_stream.str());
@@ -2333,7 +2323,7 @@ void MainWindow::updateCharInfo()
 	// Label Exp
 	label =  win_mgr.getWindow("ExperienceValueLabel");
 	out_stream.str("");
-	out_stream << (int) player->m_experience <<"/" <<(int) player->m_max_experience;
+	out_stream << (int) player->getDynAttr()->m_experience <<"/" <<(int) player->getBaseAttr()->m_max_experience;
 	if (label->getText()!=out_stream.str())
 	{
 		label->setText(out_stream.str());
@@ -2342,7 +2332,7 @@ void MainWindow::updateCharInfo()
 	// Label Phys Resistenz
 	label =  win_mgr.getWindow("ResistPhysValueLabel");
 	out_stream.str("");
-	out_stream << player->m_resistances[Damage::PHYSICAL];
+	out_stream << player->getBaseAttrMod()->m_resistances[Damage::PHYSICAL];
 	if (label->getText()!=out_stream.str())
 	{
 		label->setText(out_stream.str());
@@ -2351,7 +2341,7 @@ void MainWindow::updateCharInfo()
 	// Label Feuer Resistenz
 	label =  win_mgr.getWindow("ResistFireValueLabel");
 	out_stream.str("");
-		out_stream << player->m_resistances[Damage::FIRE];
+	out_stream << player->getBaseAttrMod()->m_resistances[Damage::FIRE];
 	if (label->getText()!=out_stream.str())
 	{
 		label->setText(out_stream.str());
@@ -2360,7 +2350,7 @@ void MainWindow::updateCharInfo()
 	// Label Eis Resistenz
 	label =  win_mgr.getWindow("ResistIceValueLabel");
 	out_stream.str("");
-	out_stream << player->m_resistances[Damage::ICE];
+	out_stream << player->getBaseAttrMod()->m_resistances[Damage::ICE];
 	if (label->getText()!=out_stream.str())
 	{
 		label->setText(out_stream.str());
@@ -2369,7 +2359,7 @@ void MainWindow::updateCharInfo()
 	// Label Luft Resistenz
 	label =  win_mgr.getWindow("ResistAirValueLabel");
 	out_stream.str("");
-	out_stream << player->m_resistances[Damage::AIR];
+	out_stream << player->getBaseAttrMod()->m_resistances[Damage::AIR];
 	if (label->getText()!=out_stream.str())
 	{
 		label->setText(out_stream.str());
@@ -2378,7 +2368,7 @@ void MainWindow::updateCharInfo()
 	// Label Angriffsgeschwindigkeit
 	label =  win_mgr.getWindow("AttackSpeedValueLabel");
 	out_stream.str("");
-	out_stream << player->m_attack_speed;
+	out_stream << player->getBaseAttrMod()->m_attack_speed;
 	if (label->getText()!=out_stream.str())
 	{
 		label->setText(out_stream.str());
@@ -2387,7 +2377,7 @@ void MainWindow::updateCharInfo()
 	// Label Reichweite
 	label =  win_mgr.getWindow("RangeValueLabel");
 	out_stream.str("");
-	out_stream << player->m_attack_range;
+	out_stream << player->getBaseAttrMod()->m_attack_range;
 	if (label->getText()!=out_stream.str())
 	{
 		label->setText(out_stream.str());
@@ -2396,21 +2386,21 @@ void MainWindow::updateCharInfo()
 	// Label Durchschlagskraft
 	label =  win_mgr.getWindow("PowerValueLabel");
 	out_stream.str("");
-	out_stream << player->m_base_damage.m_power;
+	out_stream << player->getBaseDamage().m_power;
 	if (label->getText()!=out_stream.str())
 	{
 		label->setText(out_stream.str());
 	}
 
 	// Schaden Basisattacke
-	float minb=player->m_base_damage.getSumMinDamage();
-	float maxb=player->m_base_damage.getSumMaxDamage();
+	float minb=player->getBaseDamage().getSumMinDamage();
+	float maxb=player->getBaseDamage().getSumMaxDamage();
 	// Schaden Attacke links
-	float minl=player->m_left_damage.getSumMinDamage();
-	float maxl=player->m_left_damage.getSumMaxDamage();
+	float minl=player->getLeftDamage().getSumMinDamage();
+	float maxl=player->getLeftDamage().getSumMaxDamage();
 	// Schaden Attacke rechts
-	float minr=player->m_right_damage.getSumMinDamage();
-	float maxr=player->m_right_damage.getSumMaxDamage();
+	float minr=player->getRightDamage().getSumMinDamage();
+	float maxr=player->getRightDamage().getSumMaxDamage();
 
 
 
@@ -2439,7 +2429,7 @@ void MainWindow::updateCharInfo()
 	{
 		label->setText(out_stream.str());
 	}
-	tooltip = player->m_base_damage.getDamageString();
+	tooltip = player->getBaseDamage().getDamageString();
 	if (tooltip != label->getTooltipText())
 	{
 		label->setTooltipText(tooltip);
@@ -2448,7 +2438,7 @@ void MainWindow::updateCharInfo()
 	// Label Attacke links
 	label =  win_mgr.getWindow( "Skill1DmgLabel");
 	out_stream.str("");
-	out_stream << Action::getName(m_document->getLeftAction());
+	out_stream << Action::getName(player->getLeftAction());
 	if (label->getText()!=out_stream.str())
 	{
 		label->setText(out_stream.str());
@@ -2463,7 +2453,7 @@ void MainWindow::updateCharInfo()
 	{
 		label->setText(out_stream.str());
 	}
-	tooltip = player->m_left_damage.getDamageString();
+	tooltip = player->getLeftDamage().getDamageString();
 	if (tooltip != label->getTooltipText())
 	{
 		label->setTooltipText(tooltip);
@@ -2474,7 +2464,7 @@ void MainWindow::updateCharInfo()
 	// Label Attacke rechts
 	label =  win_mgr.getWindow( "Skill2DmgLabel");
 	out_stream.str("");
-	out_stream << Action::getName(m_document->getRightAction());
+	out_stream << Action::getName(player->getRightAction());
 	if (label->getText()!=out_stream.str())
 	{
 		label->setText(out_stream.str());
@@ -2489,7 +2479,7 @@ void MainWindow::updateCharInfo()
 	{
 		label->setText(out_stream.str());
 	}
-	tooltip = player->m_right_damage.getDamageString();
+	tooltip = player->getRightDamage().getDamageString();
 	if (tooltip != label->getTooltipText())
 	{
 		label->setTooltipText(tooltip);
@@ -2506,9 +2496,11 @@ void MainWindow::updateControlPanel()
 	float perc=0;
 	std::string name;
 
+	Player* player = m_document->getLocalPlayer();
+	
 	// Balken fuer HP
 	CEGUI::ProgressBar* bar = static_cast<CEGUI::ProgressBar*>(win_mgr.getWindow( "HealthProgressBar"));
-	float hperc = m_document->getMainPlayer()->getHealthPerc();
+	float hperc = player->getDynAttr()->m_health / player->getBaseAttrMod()->m_max_health;
 	if (bar->getProgress() != hperc)
 	{
 		bar->setProgress(hperc);
@@ -2516,7 +2508,7 @@ void MainWindow::updateControlPanel()
 
 	// Image Schaden Attacke links
 	label =  win_mgr.getWindow( "LeftClickAbilityImage");
-	name = Action::getActionInfo((Action::ActionType) m_document->getLeftAction())->m_enum_name;
+	name = Action::getActionInfo((Action::ActionType) player->getLeftAction())->m_enum_name;
 	if (("set:skills image:" + name) != label->getProperty("Image"))
 	{
 		label->setProperty("Image", "set:skills image:" + name);
@@ -2524,16 +2516,9 @@ void MainWindow::updateControlPanel()
 
 	// Balken fuer Schaden Attacke links
 	bar = static_cast<CEGUI::ProgressBar*>(win_mgr.getWindow( "LeftClickAbilityProgressBar"));
-	timernr =  Action::getActionInfo(m_document->getLeftAction())->m_timer_nr;
-	if (timernr==1)
-	{
-		perc = m_document->getMainPlayer()->m_timer1_perc;
-	}
-	if (timernr==2)
-	{
-		perc = m_document->getMainPlayer()->m_timer2_perc;
-	}
-
+	timernr =  Action::getActionInfo(player->getLeftAction())->m_timer_nr;
+	perc = player->getTimerPercent(timernr);
+	
 	if (bar->getProgress() != perc)
 	{
 		bar->setProgress(perc);
@@ -2543,7 +2528,7 @@ void MainWindow::updateControlPanel()
 
 	// Image Attacke rechts
 	label =  win_mgr.getWindow( "RightClickAbilityImage");
-	name = Action::getActionInfo((Action::ActionType) m_document->getRightAction())->m_enum_name;
+	name = Action::getActionInfo((Action::ActionType) player->getRightAction())->m_enum_name;
 	if (("set:skills image:" + name) != label->getProperty("Image"))
 	{
 		label->setProperty("Image", "set:skills image:" + name);
@@ -2551,15 +2536,8 @@ void MainWindow::updateControlPanel()
 
 	// Balken fuer Schaden Attacke rechts
 	bar = static_cast<CEGUI::ProgressBar*>(win_mgr.getWindow( "RightClickAbilityProgressBar"));
-	timernr =  Action::getActionInfo(m_document->getRightAction())->m_timer_nr;
-	if (timernr==1)
-	{
-		perc = m_document->getMainPlayer()->m_timer1_perc;
-	}
-	if (timernr==2)
-	{
-		perc = m_document->getMainPlayer()->m_timer2_perc;
-	}
+	timernr =  Action::getActionInfo(player->getRightAction())->m_timer_nr;
+	perc = player->getTimerPercent(timernr);
 
 	if (bar->getProgress() != perc)
 	{
@@ -2567,7 +2545,7 @@ void MainWindow::updateControlPanel()
 	}
 
 	Item* it;
-	Equipement* equ = m_document->getMainPlayer()->m_equipement;
+	Equipement* equ = player->getEquipement();
 
 	// Guertel
 	for (int i=0;i<10;i++)
@@ -2594,10 +2572,12 @@ void MainWindow::updateInventory()
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::Window* label;
 	ostringstream out_stream;
+	
+	Player* player = m_document->getLocalPlayer();
 
 	// Label Ruestung
 	out_stream.str("");
-	Equipement* equ = m_document->getMainPlayer()->m_equipement;
+	Equipement* equ = player->getEquipement();
 	if (equ->getItem(Equipement::ARMOR)!=0)
 	{
 		out_stream << equ->getItem(Equipement::ARMOR)->getName();
@@ -2610,9 +2590,9 @@ void MainWindow::updateInventory()
 
 	// Label Waffe
 	out_stream.str("");
-	if (equ->getItem(Equipement::WEAPON)!=0)
+	if (player->getWeapon()!=0)
 	{
-		out_stream << equ->getItem(Equipement::WEAPON)->getName();
+		out_stream << player->getWeapon()->getName();
 	}
 	label =  win_mgr.getWindow("WeaponItemLabel");
 	if (label->getText()!=out_stream.str())
@@ -2634,9 +2614,9 @@ void MainWindow::updateInventory()
 
 	// Label Schild
 	out_stream.str("");
-	if (equ->getItem(Equipement::SHIELD)!=0)
+	if (player->getShield()!=0)
 	{
-		out_stream << equ->getItem(Equipement::SHIELD)->getName();
+		out_stream << player->getShield()->getName();
 	}
 	label =  win_mgr.getWindow("ShieldItemLabel");
 	if (label->getText()!=out_stream.str())
@@ -2670,7 +2650,6 @@ void MainWindow::updateInventory()
 
 	// Label Ring rechts
 	out_stream.str("");
-	equ = m_document->getMainPlayer()->m_equipement;
 	if (equ->getItem(Equipement::RING_RIGHT)!=0)
 	{
 		out_stream << equ->getItem(Equipement::RING_RIGHT)->getName();
@@ -2680,9 +2659,9 @@ void MainWindow::updateInventory()
 	{
 		label->setText(out_stream.str());
 	}
+	
 	// Label Amulet
 	out_stream.str("");
-	equ = m_document->getMainPlayer()->m_equipement;
 	if (equ->getItem(Equipement::AMULET)!=0)
 	{
 		out_stream << equ->getItem(Equipement::AMULET)->getName();
@@ -2758,7 +2737,7 @@ void MainWindow::updateSkilltree()
 	CEGUI::Window* label;
 	ostringstream out_stream;
 
-	ClientMPlayer* player = m_document->getMainPlayer();
+	Player* player = m_document->getLocalPlayer();
 
 	// Enum Wert bei dem die Skillz des Spielers anfangen
 	int i=Action::BASH;
@@ -2800,84 +2779,92 @@ void MainWindow::updateSkilltree()
 	}
 }
 
-void MainWindow::updateItemTooltip()
+void MainWindow::updateItemTooltip(unsigned int pos)
 {
-	if (m_document->getDetailedItem())
+	ServerItem* item = static_cast<ServerItem*>(m_document->getLocalPlayer()->getEquipement()->getItem(pos));
+	if (item ==0)
+		return;
+	
+	DEBUG5("setting tool tip for item at %i",pos);
+	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
+	CEGUI::Window* label;
+	ostringstream out_stream;
+	out_stream.str("");
+	if (pos == Equipement::ARMOR)
+		out_stream << "ArmorItemLabel";
+	if (pos == Equipement::WEAPON || pos == Equipement::WEAPON2)
+		out_stream << "WeaponItemLabel";
+	if (pos == Equipement::HELMET)
+		out_stream << "HelmetItemLabel";
+	if (pos == Equipement::SHIELD || pos == Equipement::SHIELD2)
+		out_stream << "ShieldItemLabel";
+	if (pos == Equipement::GLOVES)
+		out_stream << "GlovesItemLabel";
+	if (pos == Equipement::RING_LEFT)
+		out_stream << "RingLeftLabel";
+	if (pos == Equipement::RING_RIGHT)
+		out_stream << "RingRightItemLabel";
+	if (pos == Equipement::AMULET)
+		out_stream << "AmuletItemLabel";
+	if (pos>= Equipement::BIG_ITEMS && pos <  Equipement::MEDIUM_ITEMS)
 	{
-		short pos= m_document->getDetailedItemPos();
-		DEBUG5("setting tool tip for item at %i",pos);
-		CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-		CEGUI::Window* label;
-		ostringstream out_stream;
-		out_stream.str("");
-		if (pos == Equipement::ARMOR)
-			out_stream << "ArmorItemLabel";
-		if (pos == Equipement::WEAPON || pos == Equipement::WEAPON2)
-			out_stream << "WeaponItemLabel";
-		if (pos == Equipement::HELMET)
-			out_stream << "HelmetItemLabel";
-		if (pos == Equipement::SHIELD || pos == Equipement::SHIELD2)
-			out_stream << "ShieldItemLabel";
-		if (pos == Equipement::GLOVES)
-			out_stream << "GlovesItemLabel";
-		if (pos == Equipement::RING_LEFT)
-			out_stream << "RingLeftLabel";
-		if (pos == Equipement::RING_RIGHT)
-			out_stream << "RingRightItemLabel";
-		if (pos == Equipement::AMULET)
-			out_stream << "AmuletItemLabel";
-		if (pos>= Equipement::BIG_ITEMS && pos <  Equipement::MEDIUM_ITEMS)
-		{
-			out_stream << "BigItem"<<pos-Equipement::BIG_ITEMS<<"Label";
-		}
-		if (pos>= Equipement::MEDIUM_ITEMS && pos < Equipement::SMALL_ITEMS)
-		{
-			out_stream << "MediumItem"<<pos-Equipement::MEDIUM_ITEMS<<"Label";
-		}
-		if (pos>= Equipement::SMALL_ITEMS)
-		{
-			out_stream << "SmallItem"<<pos-Equipement::SMALL_ITEMS<<"Label";
-		}
-		label = win_mgr.getWindow(out_stream.str());
-
-
-		std::string msg =m_document->getDetailedItem()->getDescription();
-		label->setTooltipText(msg);
-
-		if (pos>= Equipement::SMALL_ITEMS && pos< Equipement::SMALL_ITEMS+10)
-		{
-			// Item befindet sich im Guertel
-			out_stream.str("");
-			out_stream << "InventoryItem"<<pos-Equipement::SMALL_ITEMS;
-			label = win_mgr.getWindow(out_stream.str());
-			label->setTooltipText(msg);
-		}
+		out_stream << "BigItem"<<pos-Equipement::BIG_ITEMS<<"Label";
 	}
+	if (pos>= Equipement::MEDIUM_ITEMS && pos < Equipement::SMALL_ITEMS)
+	{
+		out_stream << "MediumItem"<<pos-Equipement::MEDIUM_ITEMS<<"Label";
+	}
+	if (pos>= Equipement::SMALL_ITEMS)
+	{
+		out_stream << "SmallItem"<<pos-Equipement::SMALL_ITEMS<<"Label";
+	}
+	label = win_mgr.getWindow(out_stream.str());
+
+	
+
+	std::string msg =item->getDescription();
+	label->setTooltipText(msg);
+	
+	DEBUG5("Label: %s \ndescription: \n%s",out_stream.str().c_str(),msg.c_str());
+
+	if (pos>= Equipement::SMALL_ITEMS && pos< Equipement::SMALL_ITEMS+10)
+	{
+		// Item befindet sich im Guertel
+		out_stream.str("");
+		out_stream << "InventoryItem"<<pos-Equipement::SMALL_ITEMS;
+		label = win_mgr.getWindow(out_stream.str());
+		label->setTooltipText(msg);
+	}
+	
 }
 
-void MainWindow::updateAbilityTooltip()
+void MainWindow::updateAbilityTooltip(unsigned int pos)
 {
-	if (m_document->getAbilityPos()!=Action::NOACTION)
+	
+	if (pos!=Action::NOACTION)
 	{
-		DEBUG("update tooltip for %i", m_document->getAbilityPos());
+		DEBUG("update tooltip for %i", pos);
 
 		CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 		CEGUI::Window* label;
 		ostringstream out_stream;
 		out_stream.str("");
-		out_stream << Action::getActionInfo(m_document->getAbilityPos())->m_enum_name << "Label";
+		out_stream << Action::getActionInfo((Action::ActionType) pos)->m_enum_name << "Label";
 
 		label = win_mgr.getWindow(out_stream.str());
 
-		std::string tooltip = m_document->getAbilityDescription();
+		std::string tooltip = m_document->getAbilityDescription((Action::ActionType) pos);
 
 		label->setTooltipText(tooltip);
 
 	}
+	
 }
 
 void MainWindow::updateObjectInfo()
 {
+	Player* player = m_document->getLocalPlayer();
+	
 	// Ogre Name des Objektes auf das der Mauszeiger zeigt
 	std::string objname = "";
 
@@ -2921,12 +2908,12 @@ void MainWindow::updateObjectInfo()
 		map<int,string>* objects = m_scene->getObjects();
 		map<int,string>::iterator it;
 
-		// minimale Distanz eine Objektes im Kamerastrahl
+		// minimale Distanz eines Objektes im Kamerastrahl
 		float mindist = 1000000;
 
 		for (it = objects->begin();it != objects->end();++it)
 		{
-			if (m_document->getMainPlayer()->getId() == it->first)
+			if (m_document->getLocalPlayer()->getId() == it->first)
 			{
 				// Spieler selbst ueberspringen
 				continue;
@@ -2964,6 +2951,7 @@ void MainWindow::updateObjectInfo()
 
 	std::string name;
 	std::ostringstream string_stream;
+	short rid = player->getGridLocation()->m_region;
 
 	if (objname!="")
 	{
@@ -2982,20 +2970,21 @@ void MainWindow::updateObjectInfo()
 		string_stream<<name;
 
 		// zur ID gehoerendes Objekt
-		ClientWObject* cwo;
-		map<int, ClientWObject*>::iterator it2 =m_document->getObjects()->find(id);
-		if (it2 != m_document->getObjects()->end())
+		ServerWObject* cwo;
+		cwo = m_document->getWorld()->getSWObject(id,rid);
+		Creature* cr;
+		
+		if (cwo !=0)
 		{
 		// Objekt existiert
 			m_document->getGUIState()->m_cursor_object_id = id;
 
-			cwo = it2->second;
 			if (cwo->getTypeInfo()->m_type != WorldObject::TypeInfo::TYPE_FIXED_OBJECT)
 			{
-			// Objekt ist ein Lebewesen
-			// Lebenspunkte anfuegen
-
-				string_stream << " " << max(0,(int) (cwo->getHealthPerc()*100)) <<"%";
+				// Objekt ist ein Lebewesen
+				// Lebenspunkte anfuegen
+				cr = static_cast<Creature*>(cwo);
+				string_stream << " " << max(0,(int) (cr->getDynAttr()->m_health / cr->getBaseAttrMod()->m_max_health*100)) <<"%";
 			}
 		}
 		else
@@ -3043,9 +3032,9 @@ void MainWindow::updateObjectInfo()
 			stream >> id;
 			string_stream<<name;
 
-			map<int,DropItem>::iterator it3 =m_document->getDropItems()->find(id);
+			Item* itm = player->getRegion()->getItem(id);
 
-			if (it3 != m_document->getDropItems()->end())
+			if (itm !=0)
 			{
 				// Objekt existiert
 				m_document->getGUIState()->m_cursor_item_id = id;
@@ -3104,8 +3093,8 @@ bool MainWindow::mousePressed(const OIS::MouseEvent &evt, OIS::MouseButtonID btn
 	int y =evt.state.Y.abs;
 	DEBUG5("maus %i %i",x,y);
 
-	ClientMPlayer* m_pl = m_document->getMainPlayer();
-	if (m_pl!=0)
+	Player* player = m_document->getLocalPlayer();
+	if (player!=0)
 	{
 		// Spiel ist mit Server verbunden
 
@@ -3113,7 +3102,7 @@ bool MainWindow::mousePressed(const OIS::MouseEvent &evt, OIS::MouseButtonID btn
 		// TODO: vernuenftige Vorgehensweise um Klicks auf GUI Elemente zu erkennen
 		if (not m_gui_hit && not ret)
 		{
-			if (m_document->getMainPlayer()->m_equipement->getItem(Equipement::CURSOR_ITEM)!=0)
+			if (player->getEquipement()->getItem(Equipement::CURSOR_ITEM)!=0)
 			{
 				// Spieler hat Item in der Hand, fallen lassen
 				m_document->dropCursorItem();
@@ -3122,8 +3111,8 @@ bool MainWindow::mousePressed(const OIS::MouseEvent &evt, OIS::MouseButtonID btn
 			{
 
 				// Koordinaten des Spielers
-				float mpx=m_pl->getGeometry()->m_shape.m_coordinate_x;
-				float mpy=m_pl->getGeometry()->m_shape.m_coordinate_y;
+				float mpx=player->getGeometry()->m_shape.m_coordinate_x;
+				float mpy=player->getGeometry()->m_shape.m_coordinate_y;
 
 				// Position des Mausklicks relativ zum Viewport
 				Ogre::Viewport* viewport = m_scene->getViewport();
@@ -3156,8 +3145,8 @@ bool MainWindow::mousePressed(const OIS::MouseEvent &evt, OIS::MouseButtonID btn
 					DEBUG5("Punkt in Spielkoordinaten %f %f",gx,gy);
 
 					// Koordinaten relativ zum Spieler
-					gx -= mpx;
-					gy -= mpy;
+					//gx -= mpx;
+					//gy -= mpy;
 
 					if (btn == OIS::MB_Left)
 					{
@@ -3306,9 +3295,9 @@ bool MainWindow::onSkillMouseClicked(const CEGUI::EventArgs& evt)
 	if (we.button == CEGUI::LeftButton)
 	{
 		DEBUG("left button pressed on skill %i",id);
-		if (m_document->getMainPlayer())
+		if (m_document->getLocalPlayer())
 		{
-			if (m_document->getMainPlayer()->checkAbility((Action::ActionType) id))
+			if (m_document->getLocalPlayer()->checkAbility((Action::ActionType) id))
 			{
 				// Faehigkeit ist verfuegbar, setzen
 				m_document->setLeftAction((Action::ActionType) id);
@@ -3337,20 +3326,23 @@ bool MainWindow::onSwapEquipClicked(const CEGUI::EventArgs& evt)
 
 bool MainWindow::onItemHover(const CEGUI::EventArgs& evt)
 {
+	
 	const CEGUI::MouseEventArgs& we =
 			static_cast<const CEGUI::MouseEventArgs&>(evt);
 	unsigned int id = we.window->getID();
-	DEBUG5("mouse entered Item %i",id);
-	m_document->requestItemDetailedInfo((short) id);
+	updateItemTooltip(id);
+	
 }
 
 bool MainWindow::onAbilityHover(const CEGUI::EventArgs& evt)
 {
+	
 	const CEGUI::MouseEventArgs& we =
 			static_cast<const CEGUI::MouseEventArgs&>(evt);
 	unsigned int id = we.window->getID();
 	DEBUG5("mouse entered Ability %i",id);
-	m_document->requestAbilityDamage((Action::ActionType) id);
+	updateAbilityTooltip(id);
+	
 }
 
 bool MainWindow::onIncreaseAttributeButtonClicked(const CEGUI::EventArgs& evt)
@@ -3407,39 +3399,32 @@ bool MainWindow::onStartSinglePlayer(const CEGUI::EventArgs& evt)
 {
 	DEBUG("start single player game");
 	// Spieler ist selbst der Host
-	m_document->getNetworkInfo()->m_host = true;
-	// Server laeuft auf dem eigenen Rechner
-	strcpy(m_document->getNetworkInfo()->m_server_ip,"127.0.0.1");
-
+	m_document->setServer(true);
+	
 	// Verbindung aufbauen
-	m_document->setState(Document::START_SERVER);
+	m_document->setState(Document::START_GAME);
 }
 
 bool MainWindow::onStartMultiPlayer(const CEGUI::EventArgs& evt)
 {
 	DEBUG("start multi player game");
-	// Spieler ist selbst der Host
-	m_document->getNetworkInfo()->m_host = false;
 
-	// Server laeuft auf dem entferntem Rechner
-	// IP setzen...
-	strcpy(m_document->getNetworkInfo()->m_server_ip,"127.0.0.1");;
+	m_document->setServer(false);
+
 
 	// Verbindung aufbauen
-	m_document->setState(Document::CONNECT_REQUEST);
+	m_document->setState(Document::START_GAME);
 }
 
 bool MainWindow::onStartMultiPlayerHost(const CEGUI::EventArgs& evt)
 {
 	DEBUG("start single player game");
 	// Spieler ist selbst der Host
-	m_document->getNetworkInfo()->m_host = true;
+	m_document->setServer(true);
 
-	// Server laeuft auf dem eigenen Rechner
-	strcpy(m_document->getNetworkInfo()->m_server_ip,"127.0.0.1");
-
+	
 	// Verbindung aufbauen
-	m_document->setState(Document::START_SERVER);
+	m_document->setState(Document::START_GAME);
 }
 
 
