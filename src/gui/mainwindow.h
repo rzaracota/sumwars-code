@@ -10,7 +10,6 @@
 
 // CEGUI includes
 #include "CEGUI.h"
-#include "numberedwindow.h"
 
 
 // OIS

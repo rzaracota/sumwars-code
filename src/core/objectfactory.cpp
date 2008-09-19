@@ -6,7 +6,6 @@
 #include "priest.h"
 #include "fixedobject.h"
 #include "monster.h"
-#include "goblin.h"
 
 #define USE_OBJECTLOADER
 

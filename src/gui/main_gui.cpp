@@ -1,6 +1,6 @@
 
 #include <stdio.h>
-#include "client.h"
+#include "application.h"
 
 #if defined(WIN32)
 #include "windows.h"

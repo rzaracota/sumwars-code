@@ -998,7 +998,6 @@ void MainWindow::setupInventory()
 	// Bestandteile des Charakterfensters hinzufuegen
 	CEGUI::PushButton* btn;
 	CEGUI::Window* label;
-	NumberedWindow* numlabel;
 
 	int i,j;
 

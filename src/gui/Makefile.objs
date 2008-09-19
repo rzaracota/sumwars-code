@@ -1,4 +1,4 @@
 main_gui.o
 mainwindow.o
 scene.o
-client.o
+application.o

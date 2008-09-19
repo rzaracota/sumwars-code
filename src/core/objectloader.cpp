@@ -6,7 +6,6 @@
 #include "priest.h"
 #include "fixedobject.h"
 #include "monster.h"
-#include "goblin.h"
 
 
 int ObjectLoader::generateObjects(TiXmlElement* pElement, string element)
