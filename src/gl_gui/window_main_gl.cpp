@@ -84,7 +84,7 @@ void WindowMain::KeyboardFunc (unsigned char key, int xin, int yin)
 	// ESC
 	if (key == 27)
 	{
-		//global_doc ->onKeyPress(OIS::KC_ESCAPE);
+		global_doc ->onKeyPress(27);
 	}
 
 }

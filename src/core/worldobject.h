@@ -314,7 +314,9 @@ class WorldObject {
 			STATE_ACTIVE =1,
 			STATE_DIEING =2,
 			STATE_DEAD =3,
-			STATE_REGION_ENTERED =5,
+			STATE_REGION_DATA_REQUEST=6,
+			STATE_REGION_DATA_WAITING=4,
+			STATE_ENTER_REGION =5,
 			STATE_STATIC = 10,
 	};
 
@@ -428,6 +430,15 @@ class WorldObject {
 	int getId()
 	{
 		return m_id;
+	}
+	
+	/**
+	 * \fn void setId(int id)
+	 * \brief Setzt die ID eines Objektes
+	 */
+	void setId(int id)
+	{
+		m_id = id;
 	}
 
 	/**

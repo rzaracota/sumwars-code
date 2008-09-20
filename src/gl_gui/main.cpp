@@ -38,6 +38,16 @@ int main (int argc, char *argv[])
 	{
 		save = "warrior.sav";
 	}
+	
+	bool server = true;
+	
+	if (argc>=3)
+	{
+		if (std::string(argv[2]) == "-c")
+		{
+			server = false;
+		}
+	}
 
 	// Globales Document anlegen
 	global_doc = new Document();
@@ -45,7 +55,7 @@ int main (int argc, char *argv[])
 	
 	global_doc->installShortkey(27,Document::CLOSE_ALL);
 	
-	global_doc->startGame(true);
+	global_doc->startGame(server);
 
 	//Gtk::Main mn( argc,argv );
 	//Gtk::GL::init( argc,argv );

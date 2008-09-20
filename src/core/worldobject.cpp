@@ -26,20 +26,30 @@ void WorldObject::toString(CharConv* cv)
 	cv->toBuffer((char) m_geometry.m_layer);
 	cv->toBuffer(m_geometry.m_angle);
 
+	cv->toBuffer((char) m_state);
 	
 }
 
 void WorldObject::fromString(CharConv* cv)
 {
+	int itmp;
 	short tmp;
 	char ctmp;
+	
+	// Typ, Subtyp und ID werden extern gelesen
+	/*
 	cv->fromBuffer<char>(ctmp);
 	m_type_info.m_type = (TypeInfo::ObjectType) ctmp;
+	
 	char stmp[11];
 	stmp[10] ='\0';
 	cv->fromBuffer(stmp,10);
-	m_type_info.m_subtype = stmp;	
+	m_type_info.m_subtype = stmp;
+	
+	
 	cv->fromBuffer<int>(m_id);
+	
+	*/
 	cv->fromBuffer<float>(m_geometry.m_shape.m_coordinate_x) ;
 	cv->fromBuffer<float>(m_geometry.m_shape.m_coordinate_y);
 	cv->fromBuffer<char>(ctmp);
@@ -58,6 +68,8 @@ void WorldObject::fromString(CharConv* cv)
 	m_geometry.m_layer  = (Geometry::Layer) ctmp;
 	cv->fromBuffer<float>(m_geometry.m_angle);
 	
+	cv->fromBuffer<char>(ctmp);
+	m_state = (State) ctmp;
 }
 
 string WorldObject::getName()

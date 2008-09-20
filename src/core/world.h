@@ -87,6 +87,8 @@ public:
 	 */
 	~World();
 	
+	
+	
 	/**
 	 * \fn bool init()
 	 * \brief initialisiert die Welt
@@ -117,6 +119,12 @@ public:
 	 * \return gibt die ID der Region an, die an allen Objekten in der Region gespeichert wird. Im Falle eines Fehlers wird -1 zurueckgegeben.
 	 */
 	short insertRegion(Region* region, int rnr);
+	
+	/**
+	 * \fn bool insertPlayerIntoRegion(ServerWObject* player, short region)
+	 * \brief Versucht einen Spieler in eine Region einzufuegen
+	 */
+	bool insertPlayerIntoRegion(ServerWObject* player, short region);
 
 	//Operations
 	/**
@@ -244,10 +252,10 @@ public:
 	bool  insertSWObject (ServerWObject* object, float x, float y, short region);
 	
 	/**
-	 * \fn bool insertPlayer(ServerWObject* player, int slot)
+	 * \fn bool insertPlayer(ServerWObject* player, int slot = NOSLOT)
 	 * \brief Fuegt einen neuen Spieler hinzu
 	 */
-	bool insertPlayer(ServerWObject* player, int slot);
+	bool insertPlayer(ServerWObject* player, int slot= NOSLOT);
 
 	/**
 	 * \fn bool  insertProjectile(DmgProjectile* object, float x, float y, short region)
@@ -336,10 +344,16 @@ public:
 
 	/**
 	 * \fn update(float time)
-	 * \brief Lässt für alle Objekte in der Welt die angegebene Zeitspanne verstreichen
+	 * \brief Laesst für alle Objekte in der Welt die angegebene Zeitspanne verstreichen
 	 * \param time Zeit um die in der Welt vergeht in Millisekunden
 	 */
 	void update(float time);
+	
+	/**
+	 * \fn void updatePlayers()
+	 * \brief Aktualisiert die Spielerobjekte
+	 */
+	void updatePlayers();
 
 	/**
 	 * \fn void calcBlockArray(PathfindInfo* p)
@@ -422,20 +436,28 @@ public:
 	static float getDistance(Shape& s1, Shape& s2);
 
 	/**
-	 * \fn void handleSavegame(char* data, int slot=-1)
+	 * \fn void handleSavegame(CharConv *cv, int slot=LOCAL_SLOT)
 	 * \brief Behandelt den Empfang eines Savegames
 	 * \param data Savegame
 	 * \param slot Slot ueber den das Savegame empfangen wurde. Wenn das Savegame nicht ueber das Netzwerk uebertragen wurde -1
 	 */
-	void handleSavegame(char* data, int slot=-1);
+	void handleSavegame(CharConv *cv , int slot=LOCAL_SLOT);
 	
 	/**
-	 * \fn void handleCommand(ClientCommand* cmd, int slot=-1)
+	 * \fn void handleCommand(ClientCommand* cmd, int slot=LOCAL_SLOT)
 	 * \brief Behandelt ein erhaltenes Kommmando
 	 * \param cmd Kommando
 	 * \param slot Slot ueber den das Kommando empfangen wurde. Wenn das Kommando nicht ueber das Netzwerk uebertragen wurde -1
 	 */
-	void handleCommand(ClientCommand* cmd, int slot=-1);
+	void handleCommand(ClientCommand* cmd, int slot=LOCAL_SLOT);
+	
+	/**
+	 * \fn void handleDataRequest(ClientDataRequest* request, int slot  = LOCAL_SLOT)
+	 * \brief Behandelt eine Anfrage nach Daten vom Client
+	 * \param request beschreibt welche Daten gefordert werden
+	 * \param slot Ziel der Daten
+	 */
+	void handleDataRequest(ClientDataRequest* request, int slot  = LOCAL_SLOT);
 
 	// debug only
 
@@ -472,9 +494,16 @@ private:
 
 	/**
 	 * \var m_players
-	 * Liste der Spieler in der Welt
+	 * \brief Liste der Spieler in der Welt mit ihren Slots
 	 */
 	map<int,ServerWObject*>* m_player_slots;
+	
+	/**
+	 * \var map<int,ServerWObject*>* m_players
+	 * \brief Liste der Spieler in der Welt sortiert nach ID
+	 */
+	map<int,ServerWObject*>* m_players;
+	
 
 	/**
 	 * \var int m_max_nr_players

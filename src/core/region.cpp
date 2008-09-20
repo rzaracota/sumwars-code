@@ -2,7 +2,7 @@
 #include "world.h"
 
 
-Region::Region(short dimx, short dimy)
+Region::Region(short dimx, short dimy, short id)
 {
 	DEBUG5("creating region");
 	m_data_grid = new Matrix2d<Gridunit>(dimx,dimy);
@@ -24,7 +24,7 @@ Region::Region(short dimx, short dimy)
 	// Liste der Gegenstaende
 	m_drop_items = new map<int,DropItem*>;
 	
-	
+	m_id = id;
 }
 
 Region::~Region()
@@ -539,12 +539,14 @@ bool Region::insertSWObject (ServerWObject* object, float x, float y)
 	bool result = true;
 	if (object->getTypeInfo()->m_type == WorldObject::TypeInfo::TYPE_PLAYER)
 	{
-		DEBUG("player entered Region");
+		DEBUG5("player entered Region");
 		result &= (m_players->insert(make_pair(object->getId(),object))).second;
 		
 		// Daten der Region zum Server senden
-		object->setState(WorldObject::STATE_REGION_ENTERED);
+		//object->setState(WorldObject::STATE_REGION_ENTERED);
 	}
+	
+	object->getGridLocation()->m_region = m_id;
 	 
 	 // Einfügen in den Binärbaum
 	if (object->getState() != WorldObject::STATE_STATIC)
@@ -598,6 +600,7 @@ bool  Region::insertProjectile(DmgProjectile* object, float x, float y)
 	m_projectiles->insert(make_pair(object->getId(),object));
 	object->getGeometry()->m_coordinate_x = x;
 	object->getGeometry()->m_coordinate_y = y;
+	object->setRegion( m_id);
 	return true;
 }
 
@@ -759,23 +762,11 @@ void Region::update(float time)
 	DEBUG5("update projektile abgeschlossen");
 }
 
-void Region::getRegionDataString(CharConv* cv)
+void Region::getRegionData(CharConv* cv)
 {
 	// Dimension des Feldes angeben
 	cv->toBuffer((short) m_dimx);
 	cv->toBuffer((short) m_dimy);
-	
-	// Anzahl der Objekte eintragen
-	DEBUG("static objects: %i",m_static_objects->size());
-	cv->toBuffer<short>((short) m_static_objects->size());
-	
-	// statische Objekte in den Puffer eintragen
-	map<int,ServerWObject*>::iterator it;
-	for (it = m_static_objects->begin();it!=m_static_objects->end();++it)
-	{
-		(it->second)->toString(cv);
-		DEBUG("static object: %s",(it->second)->getNameId().c_str());
-	}
 	
 	// Tiles eintragen
 	int i,j;
@@ -787,6 +778,158 @@ void Region::getRegionDataString(CharConv* cv)
 		}
 	}
 	
+	// Anzahl der statischen Objekte eintragen
+	DEBUG("static objects: %i",m_static_objects->size());
+	cv->toBuffer<short>((short) m_static_objects->size());
+	
+	// statische Objekte in den Puffer eintragen
+	map<int,ServerWObject*>::iterator it;
+	for (it = m_static_objects->begin();it!=m_static_objects->end();++it)
+	{
+		(it->second)->toString(cv);
+		DEBUG5("static object: %s",(it->second)->getNameId().c_str());
+	}
+	
+	
+	// Anzahl der nicht  statischen Objekte eintragen
+	DEBUG("nonstatic objects: %i",m_objects->size());
+	cv->toBuffer<short>((short) m_objects->size());
+	
+	// nicht statische Objekte in den Puffer eintragen
+	map<int,ServerWObject*>::iterator jt;
+	for (jt = m_objects->begin();jt!=m_objects->end();++jt)
+	{
+		DEBUG5("write offset: %i",cv->getBitStream()->GetNumberOfBitsUsed());
+		(jt->second)->toString(cv);
+		
+		DEBUG5("object: %s",(jt->second)->getNameId().c_str());
+	}
+	
+	
+	
+}
+
+void Region::setRegionData(CharConv* cv,map<int,ServerWObject*>* players)
+{
+	// Groesse der Region wird schon vorher eingelesen
+	// Tiles eintragen
+	int i,j;
+	for (i =0;i<m_dimx*2;i++)
+	{
+		for (j=0;j<m_dimy*2;j++)
+		{
+			cv->fromBuffer(*(m_tiles->ind(i,j)));
+		}
+	}
+	
+	
+	// alle bisherigen statischen Objekte entfernen
+	map<int,ServerWObject*>::iterator it;
+	for (it = m_static_objects->begin();it!=m_static_objects->end();it++)
+	{
+		it->second->destroy();
+		deleteSWObject(it->second);
+		delete it->second;
+	}
+	m_static_objects->clear();
+	
+	char type;
+	char subt[11];
+	subt[10] ='\0';
+	int id;
+	
+	// statische Objekte einlesen
+	short nr_stat;
+	cv->fromBuffer<short>(nr_stat);
+	DEBUG("static objects: %i",nr_stat);
+	
+	ServerWObject* obj;
+	float x,y;
+	for (int i=0; i<nr_stat;i++)
+	{
+		cv->fromBuffer(type);
+		cv->fromBuffer(subt,10);
+		cv->fromBuffer(id);
+		
+		obj = ObjectFactory::createObject((WorldObject::TypeInfo::ObjectType) type, std::string(subt),id);
+			
+		obj->fromString(cv);
+		
+		x = obj->getGeometry()->m_shape.m_coordinate_x;
+		y = obj->getGeometry()->m_shape.m_coordinate_y;
+		
+		insertSWObject(obj,x,y);
+		
+	}
+		
+	// alle bisherigen nichtstatischen Objekte entfernen
+	// die SpielerObjekte bleiben erhalten, alle anderen werden geloescht
+	map<int,ServerWObject*>::iterator jt;
+	for (jt = m_objects->begin();jt!=m_objects->end();jt++)
+	{
+		if (jt->second->getTypeInfo()->m_type != WorldObject::TypeInfo::TYPE_PLAYER)
+		{
+			jt->second->destroy();
+			deleteSWObject(jt->second);
+			delete jt->second;
+		}
+	}
+	m_objects->clear();
+	m_players->clear();
+	
+	// neue Objekte einlesen
+	short nr_nonstat;
+	cv->fromBuffer<short>(nr_nonstat);
+	DEBUG("nonstatic objects: %i",nr_nonstat);
+	
+	for (int i=0; i<nr_nonstat;i++)
+	{
+		DEBUG5("read offset: %i",cv->getBitStream()->GetReadOffset());
+
+		cv->fromBuffer(type);
+		cv->fromBuffer(subt,10);
+		cv->fromBuffer(id);
+		
+		DEBUG("object %s id %i",subt,id);
+		
+		// alle Objekte ausser den Spielern werden neu angelegt
+		// die Spieler existieren schon
+		if (type != WorldObject::TypeInfo::TYPE_PLAYER)
+		{
+			obj = ObjectFactory::createObject((WorldObject::TypeInfo::ObjectType) type, std::string(subt),id);
+		}
+		else
+		{
+			if (players->count(id) ==0)
+			{
+				ERRORMSG("player (%s) with id %i does not exist",subt,id);
+			}
+			obj = (*players)[id];
+		}
+		
+		obj->fromString(cv);
+		
+		x = obj->getGeometry()->m_shape.m_coordinate_x;
+		y = obj->getGeometry()->m_shape.m_coordinate_y;
+		
+		
+		insertSWObject(obj,x,y);
+		
+	}
+	
+	/*
+	DEBUG("objects");
+	map<int,ServerWObject*>::iterator mt;
+	for (mt = m_static_objects->begin();mt!=m_static_objects->end();mt++)
+	{
+		DEBUG("%s id %i at %f %f",mt->second->getTypeInfo()->m_subtype.c_str(),mt->second->getId(), mt->second->getGeometry()->m_shape.m_coordinate_x,mt->second->getGeometry()->m_shape.m_coordinate_y);
+	}
+	
+	for (mt = m_objects->begin();mt!=m_objects->end();mt++)
+	{
+		DEBUG("%s id %i at %f %f",mt->second->getTypeInfo()->m_subtype.c_str(),mt->second->getId(), mt->second->getGeometry()->m_shape.m_coordinate_x,mt->second->getGeometry()->m_shape.m_coordinate_y);
+	}
+	*/
 }
 
 void Region::setTile(Tile tile,short x, short y)

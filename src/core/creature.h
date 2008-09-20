@@ -284,13 +284,21 @@ public:
 	 */
 	void calcWalkDir(float goalx,float goaly,ServerWObject* goal);
 	
-		/**
+	/**
 	 * \fn void toString(CharConv* cv)
 	 * \brief Konvertiert das Objekt in einen String und schreibt ihn in der Puffer
 	 * \param buf Ausgabepuffer
 	 * \return Zeiger hinter den beschriebenen Datenbereich
 		 */
 	virtual void toString(CharConv* cv);
+	
+	/**
+	 * \fn void fromString(char* buf)
+	 * \brief Erzeugt das Objekt aus einem String
+	 * \param buf Objekt als String
+	 * \return Zeiger hinter den gelesenen Datenbereich
+	 */
+	virtual void fromString(CharConv* cv);
 
 	/**
 	 * \fn bool checkAbility(Action::ActionType at)

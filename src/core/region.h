@@ -49,12 +49,12 @@ class Region
 {
 	public:
 		/**
-	 	 * \fn Region(short dimx, short dimy)
+	 	 * \fn Region(short dimx, short dimy, short id)
 		 * \brief Konstruktor
 		 * \param dimx Ausdehnung in x-Richtung
 	 	 * \param dimy Ausdehnung in y-Richtung
 	 	 */
-		Region(short dimx, short dimy);
+		Region(short dimx, short dimy, short id);
 		
 		
 		/**
@@ -255,21 +255,18 @@ class Region
 		void getItemsOnScreen(float center_x,float center_y, list<DropItem*>* result);
 		
 		/**
-		 * \fn void getRegionDataString(CharConv* cv)
-		 * \brief Schreibt alle statischen Objekte sowie Tiles  in einen String. Der Puffer wird in der Funktion angelegt
+		 * \fn void getRegionData(CharConv* cv)
+		 * \brief Schreibt alle Objekte, Projektile, Items und Tiles in einen String
 		 * \param buf Eingabepuffer
 		 * \return Zeiger hinter den beschriebenen Bereich
 		 */
-		void getRegionDataString(CharConv* cv);
+		void getRegionData(CharConv* cv);
 		
 		/**
-		 * \fn int getRegionDataStringLength()
-		 * \brief Gibt die zu erwartende Laenge des Strings aus
+		 * \fn void setRegionData(CharConv* cv)
+		 * \brief Liest die Objekte, Projektile, Items und Tiles aus einem String ein
 		 */
-		int getRegionDataStringLength()
-		{
-			return m_static_objects->size()*30+10+m_dimx*m_dimy*4;
-		}
+		void setRegionData(CharConv* cv, map<int,ServerWObject*>* players);
 		
 		/**
 		 * \fn  setTile(Tile tile,short x, short y)
@@ -364,6 +361,12 @@ class Region
 	 * \brief Liste der Gegenstaende, die auf dem Boden liegen
 	 */
 	map<int,DropItem*>* m_drop_items;
+	
+	/**
+	/* \var short m_id
+	 * \brief Nummer der Region
+	 */
+	short m_id;
 	
 };
 

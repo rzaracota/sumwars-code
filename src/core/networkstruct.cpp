@@ -1,52 +1,24 @@
 #include "networkstruct.h"
 #include "charconv.h"
 
-void ServerHeader::toString(CharConv* cv)
+
+	
+	
+void PackageHeader::toString(CharConv* cv)
 {
-	
 	cv->toBuffer<unsigned char>((unsigned char) m_content);
-	cv->toBuffer(m_objects);
-	cv->toBuffer(m_projectiles);
-	cv->toBuffer(m_items);
-	cv->toBuffer(m_drop_items);	
-	cv->toBuffer(m_chatmessage);
-	cv->toBuffer(m_trade);
-	cv->toBuffer(m_detailed_item);
-	
+	cv->toBuffer(m_number);
 	
 }
 
-void ServerHeader::fromString(CharConv* cv)
+
+void PackageHeader::fromString(CharConv* cv)
 {
 	unsigned char tmp;
 	cv->fromBuffer(tmp);
 	m_content = (PackageType) tmp;
-	cv->fromBuffer<short>(m_objects);
-	cv->fromBuffer<short>(m_projectiles);	
-	cv->fromBuffer<short>(m_items);
-	cv->fromBuffer<short>(m_drop_items);
-	cv->fromBuffer<bool>(m_chatmessage);
-	cv->fromBuffer<bool>(m_trade);
-	cv->fromBuffer<short>(m_detailed_item);
 	
-	
-}
-	
-	
-void ClientHeader::toString(CharConv* cv)
-{
-	cv->toBuffer<unsigned char>((unsigned char) m_content);
-	cv->toBuffer(m_chatmessage);
-	
-}
-
-
-void ClientHeader::fromString(CharConv* cv)
-{
-	unsigned char tmp;
-	cv->fromBuffer(tmp);
-	m_content = (PackageType) tmp;
-	cv->fromBuffer<bool>(m_chatmessage);
+	cv->fromBuffer(m_number);
 	
 }
 

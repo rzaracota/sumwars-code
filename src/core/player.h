@@ -218,6 +218,14 @@ public:
 	virtual void toString(CharConv* cv);
 	
 	/**
+	 * \fn void fromString(char* buf)
+	 * \brief Erzeugt das Objekt aus einem String
+	 * \param buf Objekt als String
+	 * \return Zeiger hinter den gelesenen Datenbereich
+	 */
+	virtual void fromString(CharConv* cv);
+	
+	/**
 	 * \fn void toString(v oi buf)
 	 * \brief Konvertiert das Objekt in einen String und schreibt ihn in der Puffer
 	 * \param buf Ausgabepuffer

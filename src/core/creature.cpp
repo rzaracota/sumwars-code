@@ -2149,7 +2149,7 @@ void Creature::calcWalkDir(float goalx,float goaly,ServerWObject* goal)
 		else
 		{
 			// direkte Verbindung als Richtung verwenden
-			DEBUG("using direct way");
+			DEBUG5("using direct way");
 			dir[0] = goalx-x;
 			dir[1] = goaly-y;
 		}
@@ -3750,10 +3750,18 @@ void Creature::toString(CharConv* cv)
 {
 	DEBUG5("Creature::tostring");
 	WorldObject::toString(cv);
-	cv->toBuffer((char) getTypeInfo()->m_category);
+	cv->toBuffer((short) getTypeInfo()->m_category);
 	cv->toBuffer((char) getTypeInfo()->m_fraction);
+	
 	m_action.toString(cv);
-	cv->toBuffer((float) (m_dyn_attr.m_health / m_base_attr_mod.m_max_health));
+	m_command.toString(cv);
+	m_next_command.toString(cv);
+	
+	cv->toBuffer(m_dyn_attr.m_health);
+	cv->toBuffer(m_base_attr_mod.m_max_health);
+	
+	DEBUG5("write offset: %i",cv->getBitStream()->GetNumberOfBitsUsed());
+
 	// Statusveraenderungen
 	char c=0;
 	for (int i=0;i<NR_STATUS_MODS;i++)
@@ -3764,33 +3772,64 @@ void Creature::toString(CharConv* cv)
 		}
 	}
 	cv->toBuffer(c);
-
+	for (int i=0;i<NR_STATUS_MODS;i++)
+	{
+		if (m_dyn_attr.m_status_mod_time[i]>0)
+		{
+			cv->toBuffer(m_dyn_attr.m_status_mod_time[i]);
+		}	
+	}
+	
 	// Effekte
-	c=0;
 	for (int i=0;i<NR_EFFECTS;i++)
 	{
-		if (m_dyn_attr.m_effect_time[i]>0)
+		cv->toBuffer(m_dyn_attr.m_effect_time[i]);
+	}
+	
+	cv->toBuffer(getBaseAttrMod()->m_special_flags);
+	
+}
+
+void Creature::fromString(CharConv* cv)
+{
+	WorldObject::fromString(cv);
+	char ctmp;
+	short stmp;
+	cv->fromBuffer<short>(stmp);
+	getTypeInfo()->m_category = (TypeInfo::Category) stmp;
+	
+	cv->fromBuffer<char>(ctmp);
+	getTypeInfo()->m_fraction = (TypeInfo::Fraction) ctmp;
+	
+	m_action.fromString(cv);
+	m_command.fromString(cv);
+	m_next_command.fromString(cv);
+	
+	cv->fromBuffer(m_dyn_attr.m_health);
+	cv->fromBuffer(m_base_attr_mod.m_max_health);
+	DEBUG5("read offset: %i",cv->getBitStream()->GetReadOffset());
+
+	
+	// Statusveraenderungen
+	cv->fromBuffer<char>(ctmp);
+	char c=0;
+	for (int i=0;i<NR_STATUS_MODS;i++)
+	{
+		if (c & (1 <<i ))
 		{
-			c |= (1 <<i );
+			cv->fromBuffer<float>(m_dyn_attr.m_status_mod_time[i]);
 		}
 	}
-	cv->toBuffer(c);
-	 /*
-	#define hex(a) ((a)>=10) ? (a)-10+'a' : (a)+'0'
-	 unsigned char* cp;
-	 for (int i=-12;buf+i<(char*) bp;i++)
-	 {
-		 cp = (unsigned char*) buf+i;
-		 //if (i%10==8)
-		//	 printf("\n %p\n",cp);
+	
 
-		 printf("%c%c ",hex(*cp/16),hex(*cp%16));
-
-	 }
-	 printf("\n\n");
-*/
-
-
+	
+	for (int i=0;i<NR_EFFECTS;i++)
+	{
+		cv->fromBuffer<float>(m_dyn_attr.m_effect_time[i]);
+	}
+	
+	cv->fromBuffer(getBaseAttrMod()->m_special_flags);
+	
 }
 
 bool Creature::checkAbility(Action::ActionType at)

@@ -65,27 +65,92 @@ enum PackageType
 	PTYPE_S2C_DATA ,
  
  /**
-  * \brief Normale daten vom Client zum Server
+  * \brief Kommando vom Client zum Server
   */
-	PTYPE_C2S_DATA,
+	PTYPE_C2S_COMMAND,
  
- /**
-  * \brief Detailierte Daten zu einem Item vom Server zum Client
-  */
-	PTYPE_S2C_ITEM ,
+ 	/**
+	 * \brief Anfrage nach Daten die beim Client fehlen / inkorrekt sind
+	 */
+	PTYPE_C2S_DATA_REQUEST,
  
-  /**
-  * \brief Detailierte Daten zum Schaden einer Faehigkeit vom Server zum Client
+	/**
+	* \brief Daten zu einer Region (feste Objekte und Untergrund)
 	*/
- PTYPE_S2C_DAMAGE ,
+	PTYPE_S2C_REGION ,
  
- /**
-  * \brief Daten zu einer Region (feste Objekte und Untergrund)
-  */
- PTYPE_S2C_REGION ,
+	/**
+	 * \brief Daten ueber Spieler
+	 */
+ 	PTYPE_S2C_PLAYER,
+  
+  	/**
+	 * \brief Informationen zur Initialisierung
+	 */
+	PTYPE_S2C_INITIALISATION,
 };
+
+/**
+ * \struct ClientDataRequest
+ * \brief Beschreibt Anfrage des Client nach Daten vom Server
+ */
+struct ClientDataRequest
+{
+	/**
+	 * \enum Data
+	 * \brief Zaehlt verschiedene Datenanfragen auf
+	 */
+	enum Data
+	{
+		REGION_STATIC=1,
+		REGION_NONSTATIC=2,
+		REGION_ALL=3,
+		ITEM = 0x10,
+		PLAYERS = 0x20,
+		OBJECT = 0x30,
+ 		PROJECTILE = 0x40,
+	};
 	
+	/**
+	 * \var Data m_data
+	 * \brief Art der geforderten Daten
+	 */
+	Data m_data;
 	
+	/**
+	/* \var int m_id
+	 * \brief ID des geforderten Objektes
+	 */
+	int m_id;
+	
+	/**
+	 * \fn void toString(char* buf)
+	 * \brief Konvertiert das Objekt in einen String und schreibt ihn in der Puffer
+	 * \param buf Ausgabepuffer
+	 * \return Zeiger hinter den beschriebenen Datenbereich
+	 */
+	virtual void toString(CharConv* cv)
+	{
+		cv->toBuffer((char) m_data);
+		cv->toBuffer(m_id);
+	}
+			
+			
+	/**
+	 * \fn void fromString(char* buf)
+	 * \brief Erzeugt das Objekt aus einem String
+	 * \param buf Objekt als String
+	 * \return Zeiger hinter den gelesenen Datenbereich
+	 */
+	virtual void fromString(CharConv* cv)
+	{
+		char tmp;
+		cv->fromBuffer(tmp);
+		m_data = (Data) tmp;
+		cv->fromBuffer(m_id);
+	}
+};
+		
 
 /**
  * \enum Button
@@ -225,7 +290,11 @@ enum ItemLocation
 
 
 
-struct ServerHeader
+/**
+ * \struct PackageHeader
+ * \brief Struktur fuer den Header jedes gesendeten Paketes
+ */
+struct PackageHeader
 {
 	/**
 	 * \var PackageType m_content
@@ -234,78 +303,10 @@ struct ServerHeader
 	PackageType m_content;
 	
 	/**
-	 * \var short m_objects
-	 * \brief Anzahl der enthaltenen Objekte
+	 * \var short m_number
+	 * \brief Zaehler fuer die Art der gleichartigen Objekte
 	 */
-	short m_objects;
-	
-	/**
-	 * \var short m_projectiles
-	 * \brief Anzahl der Geschosse
-	 */
-	short m_projectiles;
-	
-	/**
-	 * \var short m_items
-	 * \brief Anzahl der enthaltenen Gegenstaende
-	 */
-	short m_items;
-	
-	/**
-	 * \var short m_drop_items
-	 * \brief Anzahl am Boden liegender Gegenstaende
-	 */
-	short m_drop_items;
-	
-	/**
-	 * \var bool m_chatmessage
-	 * \brief true, wenn die Nachricht eine Chatnachricht ist
-	 */
-	bool m_chatmessage;
-	
-	/**
-	 * \var bool m_trade
-	 * \brief true, wenn Handelsinformationen enthalten sind
-	 */
-	bool m_trade;
-	
-	/**
-	 * \var short m_detailed_item
-	 * \brief ID des mit detaillierten Informationen uebertragenen Items (wenn kein Item detailliert gesendet wird gleich 0 )
-	 */
-	short m_detailed_item;
-	
-	/**
-	 * \fn void toString(CharConv* cv)
-	 * \brief Konvertiert das Objekt in einen String und schreibt ihn in der Puffer
-	 * \param buf Ausgabepuffer
-	 * \return Zeiger hinter den beschriebenen Datenbereich
-	 */
-	virtual void toString(CharConv* cv);
-			
-			
-	/**
-	 * \fn void fromString(CharConv* cv)
-	 * \brief Erzeugt das Objekt aus einem String
-	 * \param buf Objekt als String
-	 * \return Zeiger hinter den gelesenen Datenbereich
-	 */
-	virtual void fromString(CharConv* cv);
-};
-	
-struct ClientHeader
-{
-	/**
-	 * \var PackageType m_content
-	 * \brief Art der Nachricht
-	 */
-	PackageType m_content;
-	
-	/**
-	 * \var bool m_chatmessage
-	 * \brief true, wenn die Nachricht eine Chatnachricht ist
-	 */
-	bool m_chatmessage;
+	short m_number;
 	
 	/**
 	 * \fn void toString(CharConv* cv)

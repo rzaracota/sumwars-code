@@ -132,7 +132,7 @@ void Document::startGame(bool server)
 void Document::loadSavegame()
 {
 	// Savegame einlesen
-	DEBUG5("lese savegame");
+	DEBUG("lese savegame");
 	char head[8];
 	int i;
 	char* bp = head;
@@ -170,7 +170,9 @@ void Document::loadSavegame()
 			file.get(data[i]);
 		}
 		
-		m_world->handleSavegame(data);
+		CharConv cv2((unsigned char*) data,len);
+		
+		m_world->handleSavegame(&cv2);
 
 
 		// aktuelle Aktion setzen
@@ -932,8 +934,12 @@ bool  Document::onKeyRelease(KeyCode key)
 
 void Document::update(float time)
 {
+	// Welt eine Zeitscheibe weiter laufen lassen
+	m_world->update(time);
+	
 	DEBUG5("modified is %i",m_modified);
 	DEBUG5("State is %i",m_state);
+	NetStatus status;
 	switch (m_state)
 	{
 		case INACTIVE:
@@ -944,10 +950,17 @@ void Document::update(float time)
 			break;
 
 		case LOAD_SAVEGAME:
+			status = m_world->getNetwork()->getSlotStatus();
 			if (m_server || m_world->getNetwork()->getSlotStatus() == NET_CONNECTED)
 			{
 				loadSavegame();
 			}
+			if (status == NET_REJECTED || status == NET_SLOTS_FULL || status == NET_TIMEOUT)
+			{
+				// Verbindung abgelehnt
+				m_state = SHUTDOWN;	
+			}
+			
 
 		case RUNNING:
 			updateContent(time);
@@ -1037,8 +1050,7 @@ void Document::updateContent(float time)
 
 	}
 	
-	// Welt eine Zeitscheibe weiter laufen lassen
-	m_world->update(time);
+	
 	
 	/*
 	ServerHeader headerp;

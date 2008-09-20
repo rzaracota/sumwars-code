@@ -28,6 +28,16 @@ enum NetStatus
 };
 
 /**
+ * \enum SpecialSlot
+ * \brief besondere Slotnummern
+ */
+enum SpecialSlot
+{
+	LOCAL_SLOT = -1,
+	NOSLOT = -2,
+};
+
+/**
  * \class Network
  * \brief Basisklasse fuer Netzwerkinterface
  */
@@ -49,7 +59,6 @@ class Network
 		 */
 		virtual NetStatus init( int auth_port=REQ_PORT )
 		{
-			DEBUG("test");
 			return NET_OK;
 		};
 		

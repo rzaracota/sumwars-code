@@ -217,13 +217,17 @@ void ObjectFactory::init()
 	registerMonster("gob_dog",mdata);
 }
 
-ServerWObject* ObjectFactory::createObject(WorldObject::TypeInfo::ObjectType type, WorldObject::TypeInfo::ObjectSubtype subtype)
+ServerWObject* ObjectFactory::createObject(WorldObject::TypeInfo::ObjectType type, WorldObject::TypeInfo::ObjectSubtype subtype, int id)
 {
 	// Zeiger auf erzeugtes Objekt
 	ServerWObject* ret=0;
 
 	// ID des Objektes
-	int id = m_world->getValidId();
+	if (id ==0)
+	{
+		id = m_world->getValidId();
+	}
+	
 	if (type ==WorldObject::TypeInfo::TYPE_PLAYER)
 	{
 		if (subtype == "warrior")

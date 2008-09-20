@@ -1534,8 +1534,22 @@ void Player::toString(CharConv* cv)
 {
 	DEBUG5("Player::tostring");
 	Creature::toString(cv);
-
+		
 	cv->toBuffer((char*) m_name.c_str(),32);
+	
+	cv->toBuffer(getBaseAttr()->m_level);
+	cv->toBuffer(getBaseAttr()->m_step_length);
+	cv->toBuffer(getBaseAttrMod()->m_attack_speed);
+	cv->toBuffer(getBaseAttrMod()->m_walk_speed);
+	cv->toBuffer(m_timer1);
+	cv->toBuffer(m_timer1_max);
+	cv->toBuffer(m_timer2);
+	cv->toBuffer(m_timer2_max);
+	for (int i=0; i<6; i++)
+	{
+		cv->toBuffer(getBaseAttrMod()->m_abilities[i]);	
+	}
+		
 
 	/*
 #define hex(a) ((a)>=10) ? (a)-10+'a' : (a)+'0'
@@ -1553,6 +1567,31 @@ void Player::toString(CharConv* cv)
 */
 
 }
+
+
+void Player::fromString(CharConv* cv)
+{
+	Creature::fromString(cv);
+	
+	char tmp[32];
+	cv->fromBuffer(tmp,32);
+	m_name = tmp;
+	
+	cv->fromBuffer(getBaseAttr()->m_level);
+	cv->fromBuffer(getBaseAttr()->m_step_length);
+	cv->fromBuffer(getBaseAttrMod()->m_attack_speed);
+	cv->fromBuffer(getBaseAttrMod()->m_walk_speed);
+	cv->fromBuffer(m_timer1);
+	cv->fromBuffer(m_timer1_max);
+	cv->fromBuffer(m_timer2);
+	cv->fromBuffer(m_timer2_max);
+	for (int i=0; i<6; i++)
+	{
+		cv->fromBuffer(getBaseAttrMod()->m_abilities[i]);	
+	}
+	
+}
+
 
 void Player::toStringComplete(CharConv* cv)
 {

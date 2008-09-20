@@ -34,6 +34,7 @@
 	// diverse Initialisierungen
 	
 	m_player_slots = new map<int,ServerWObject*>;
+	m_players = new map<int,ServerWObject*>;;
 	
 	// Baum fuer die Handelsvorgaenge anlegen	
 	m_trades = new map<int, Trade* >;
@@ -102,7 +103,7 @@ void World::createRegion(short region)
 	}
 	else if(type==2)
 	{
-		Region* reg = new Region(25,25);
+		Region* reg = new Region(25,25,region);
 		short rid = insertRegion(reg,region);
 
 
@@ -271,7 +272,7 @@ void World::updateLogins()
 	list<int>::iterator i;
 	Packet* data;
 	int lend;
-	ClientHeader header;
+	PackageHeader header;
 	DEBUG5("update logins");
 	for (i=m_logins.begin();i!=m_logins.end();)
 	{
@@ -284,9 +285,10 @@ void World::updateLogins()
 			header.fromString(&cv);
 			if (header.m_content == PTYPE_C2S_SAVEGAME)
 			{
-				DEBUG("got savegame from slot %i",(*i));
-				
+				DEBUG5("got savegame from slot %i",(*i));
+				handleSavegame(&cv,*i);
 				i = m_logins.erase(i);
+				
 			}
 			else
 			{
@@ -323,6 +325,7 @@ World::~World()
 
 	delete[] m_parties; 
 	delete m_player_slots;
+	delete m_players;
 }	
 
 
@@ -794,28 +797,14 @@ bool World::getClosestFreeSquare(float x_coordinate, float y_coordinate, float &
 	 object->getGeometry()->m_shape.m_coordinate_y=y;
 	 
 	 Region* r = m_regions[region];
-	 if (r==0)
-	 {
-		 // Region existiert nicht
-		 
-		 
-		 // Serverseite: Region erzeugen
-		 if (m_server)
-		 {
-			 createRegion(region);
-			 r = m_regions[region];
-			
-			 // wenn das Objekt nicht lokal ist
-			 if (object != m_local_player)
-			 {
-				 // Daten zu dem Spieler senden, der die Informationen benoetigt
-			 }
-		 }
-	 }
 	
 	 if (r!=0)
 	 {
 	 	result &= r->insertSWObject(object,x,y);
+	 }
+	 else
+	 {
+		 return false;
 	 }
 
 	 return result;
@@ -824,7 +813,21 @@ bool World::getClosestFreeSquare(float x_coordinate, float y_coordinate, float &
 
 bool World::insertPlayer(ServerWObject* player, int slot)
 {
-	m_player_slots->insert(make_pair(slot,player));
+	if (slot != NOSLOT)
+	{
+		m_player_slots->insert(make_pair(slot,player));
+	}
+	m_players->insert(make_pair(player->getId(),player));
+	
+	/*
+	DEBUG("all players: ");
+	map<int,ServerWObject*>::iterator it;
+	
+	for (it = m_players->begin(); it != m_players->end(); ++it)
+	{
+		DEBUG("%s with id %i",it->second->getTypeInfo()->m_subtype.c_str(), it->second->getId());
+	}
+	*/
 }
 
 
@@ -879,45 +882,99 @@ bool  World::insertProjectile(DmgProjectile* object, float x, float y, short reg
 		
 }
 
-
-
-void World::handleSavegame(char* data, int slot)
+bool World::insertPlayerIntoRegion(ServerWObject* player, short region)
 {
+	Region* reg = m_regions[region];
+	
+	// Testen ob alle Daten vorhanden sind
+	int data_missing =0;
+	if (reg ==0)
+	{
+		data_missing =1;
+	}
+	
+
+		 
+	// Serverseite: Region erzeugen
+	if (player->getState() != WorldObject::STATE_ENTER_REGION)
+	{
+		if (m_server)
+		{
+			if (data_missing !=0)
+			{
+				createRegion(region);
+				reg = m_regions[region];
+			}
+			
+			if (player == m_local_player)
+			{
+				// Spieler in die Region einfuegen
+				player->setState(WorldObject::STATE_ENTER_REGION);
+				DEBUG("player can enter region");
+			}
+			else 
+			{
+				// Auf Datenanfrage seitens des Client warten
+				player->setState(WorldObject::STATE_REGION_DATA_WAITING);
+				DEBUG("waiting for a client data request");
+			}
+			
+			
+		}
+		else
+		{
+			// Clientseite
+			if (player == m_local_player)
+			{
+				// Server nach den fehlenden Informationen fragen
+				player->setState(WorldObject::STATE_REGION_DATA_REQUEST);
+				
+			}
+			else
+			{
+				// anderer Spieler wurde in unbekannte Region eingefuegt, ignorieren
+				player->setState(WorldObject::STATE_INACTIVE);
+			}
+		
+		}
+	}
+	
+	if (player->getState() == WorldObject::STATE_ENTER_REGION)
+	{
+		DEBUG("player %i entered region %i",player->getId(), region);
+		// Daten sind vollständig
+		float x,y;
+		x = player->getGeometry()->m_shape.m_coordinate_x;
+		y = player->getGeometry()->m_shape.m_coordinate_y;
+		reg->getFreePlace(&(player->getGeometry()->m_shape),player->getGeometry()->m_layer , x, y);
+		insertSWObject(player, x,y,region);
+		player->setState(WorldObject::STATE_ACTIVE);
+		
+	}
+}
+
+void World::handleSavegame(CharConv *cv, int slot)
+{
+	DEBUG("got savegame from slot %i",slot);
 	// Spieler aus dem Savegame erzeugen
-	CharConv cv((unsigned char*) data,18);
 	char binsave;
-	cv.fromBuffer<char>(binsave);
+	cv->fromBuffer<char>(binsave);
 	short version;
-	cv.fromBuffer<short>(version);
+	cv->fromBuffer<short>(version);
 	int len;
-	cv.fromBuffer<int>(len);
+	cv->fromBuffer<int>(len);
 	WorldObject::TypeInfo::ObjectSubtype ot;
 	char tmp[11];
 	tmp[10] = '\0';
-	cv.fromBuffer(tmp,10);
+	cv->fromBuffer(tmp,10);
 	ot = tmp;
 	ServerWObject* pl =0;
 
-				
+	DEBUG("type %s",tmp);	
 	pl=ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_PLAYER, ot);
 	
-	// Spieler zur Welt hinzufuegen
-	if (pl!=0)
-	{
-		insertPlayer(pl,slot);
-		insertSWObject(pl,6,11,0);
-
-
-	}
-	
-	// Wenn man sich auf Serverseite befindet
-	if (m_server)
-	{
-		// Event hinzufuegen, dass dieser Spieler die Welt betreten hat
-	}
-
 	// Spieler ist lokal
-	if (slot == -1)
+	if (slot == LOCAL_SLOT)
 	{
 		m_local_player = pl;
 		
@@ -925,15 +982,97 @@ void World::handleSavegame(char* data, int slot)
 		{
 			// Savegame dem Server senden
 			// Savegame an den Server senden
-			ClientHeader header;
+			PackageHeader header;
 			header.m_content = PTYPE_C2S_SAVEGAME; 	// Savegame von Client zu Server
-			header.m_chatmessage = false;			// keine Chatnachricht
+			header.m_number =1;
 			CharConv save;
 			header.toString(&save);
-			save.toBuffer(data,len);
+			
+			save.toBuffer((char*) cv->getBitStream()->GetData(),len);
 			m_network->pushSlotMessage(save.getBitStream());
 		}
 	}
+	
+	// Spieler zur Welt hinzufuegen
+	if (pl!=0)
+	{
+		DEBUG("insert player");
+		insertPlayer(pl,slot);
+		// Daten aus dem Savegame laden
+		
+		pl->setState(WorldObject::STATE_ACTIVE);
+		
+		// Debugging: Region, Koordinaten setzen
+		pl->getGridLocation()->m_region =0;
+		pl->getGeometry()->m_shape.m_coordinate_x = 6;
+		pl->getGeometry()->m_shape.m_coordinate_y = 11;
+		
+		insertPlayerIntoRegion(pl,pl->getGridLocation()->m_region);
+
+		if (m_server)
+		{
+			map<int,ServerWObject*>::iterator it;
+			
+			if (slot != LOCAL_SLOT)
+			{
+				// Daten zur Initialisierung
+				PackageHeader header3;
+				header3.m_content =PTYPE_S2C_INITIALISATION;
+				header3.m_number =1;
+				
+				CharConv msg2;
+				header3.toString(&msg2);
+				
+				// die eigene ID auf Serverseite
+				msg2.toBuffer(pl->getId());
+				
+				m_network->pushSlotMessage(msg2.getBitStream(),slot);
+				
+				// Dem Spieler Informationen ueber alle anderen Spieler in der Welt senden	
+				PackageHeader header;
+				header.m_content = PTYPE_S2C_PLAYER;		// Spielerdaten vom Server zum Client
+				header.m_number = m_player_slots->size()-1;	// alle Spieler bis auf den eigenen
+				
+				CharConv msg;
+				header.toString(&msg);
+				
+				// Informationen ueber die Spieler
+				for (it = m_player_slots->begin(); it != m_player_slots->end(); ++it)
+				{
+					// Nur senden, wenn es nicht der eigene Spieler ist
+					if (it->first != slot)
+					{
+						it->second->toString(&msg);
+					}
+				}
+				
+				// Nachricht an den Client senden
+				if (header.m_number>0)
+				{
+					m_network->pushSlotMessage(msg.getBitStream(),slot);
+				}
+			}
+			
+			// Nachricht von dem neuen Spieler an alle anderen Spieler senden
+			// ausser dem Spieler selbst und dem Server
+			PackageHeader header2;
+			header2.m_content = PTYPE_S2C_PLAYER;	// Spielerdaten vom Server zum Client
+			header2.m_number = 1;					// der neue Spieler
+			
+			CharConv msg2;
+			header2.toString(&msg2);
+			pl->toString(&msg2);
+			
+			for (it = m_player_slots->begin(); it != m_player_slots->end(); ++it)
+			{
+				if (it->first != slot && it->first != LOCAL_SLOT)
+				{
+					m_network->pushSlotMessage(msg2.getBitStream(),it->first);
+				}
+			}
+		}
+	}
+	
 
 }
 
@@ -950,9 +1089,9 @@ void World::handleCommand(ClientCommand* comm, int slot)
 		CharConv cv;
 
 		// Header anlegen
-		ClientHeader header;
-		header.m_content = PTYPE_C2S_DATA; 	// Daten von Client zu Server
-		header.m_chatmessage = false;			// keine Chatnachricht
+		PackageHeader header;
+		header.m_content = PTYPE_C2S_COMMAND; 	// Daten von Client zu Server
+		header.m_number = 1;
 
 
 		// Header in den Puffer schreiben
@@ -982,7 +1121,7 @@ void World::handleCommand(ClientCommand* comm, int slot)
 int World::getValidId()
 {
 	// zufällige ID erzeugen;
-	static int j=0;
+	static int j=1;
 	return j++;
 }
 
@@ -990,8 +1129,7 @@ int World::getValidId()
 int World::getValidProjectileId()
 {
 	// zufällige ID erzeugen;
-	static int i=0;
-	return i++;
+	return getValidId();
 }
 
 
@@ -1040,31 +1178,250 @@ void World::update(float time)
 	}
 	DEBUG5("Trades behandeln abgeschlossen");
 	
+	m_network->update();
+	
+	
 	if (m_server)
 	{
 		updateLogins();
 		acceptLogins();
 	}
 	
-	// Schleife ueber die Spieler
-	map<int,ServerWObject*>::iterator it;
-	Player* pl;
-	for (it = m_player_slots->begin(); it != m_player_slots->end(); ++it)
-	{
-		
-		pl = static_cast<Player*>(it->second);
-		
-		// TODO: weitere Bedingungen damit ein Spieler in einer Region aktiviert wird
-		if (pl->getState() == WorldObject::STATE_REGION_ENTERED && pl->getRegion() !=0 )
-		{
-			pl->setState(WorldObject::STATE_ACTIVE);
-		}
-	}
+	
+	updatePlayers();
 	
 	m_network->update();
 	
 }
 
+void World::updatePlayers()
+{
+	// Schleife ueber die Spieler
+	map<int,ServerWObject*>::iterator it;
+	Player* pl;
+	int slot;
+	for (it = m_player_slots->begin(); it != m_player_slots->end(); ++it)
+	{
+		slot = it->first;
+		pl = static_cast<Player*>(it->second);
+		
+		if (pl->getState() == WorldObject::STATE_REGION_DATA_REQUEST)
+		{
+			DEBUG("send data request to server");
+			// Client wartet auf Daten zur Region
+			pl->setState(WorldObject::STATE_REGION_DATA_WAITING);
+			
+			// fehlende Daten zur Region anfordern
+			PackageHeader header;
+			header.m_content = PTYPE_C2S_DATA_REQUEST; 	// Data Request von Client zu Server
+			header.m_number =1;
+			
+			ClientDataRequest datareq;
+			datareq.m_data = ClientDataRequest::REGION_ALL;
+			datareq.m_id = pl->getGridLocation()->m_region;
+			
+			CharConv msg;
+			header.toString(&msg);
+			datareq.toString(&msg);
+			
+			m_network->pushSlotMessage(msg.getBitStream());
+		}
+		
+		if (pl->getState() == WorldObject::STATE_ENTER_REGION && pl->getRegion() !=0 )
+		{
+			insertPlayerIntoRegion(pl,pl->getGridLocation()->m_region);
+			pl->setState(WorldObject::STATE_ACTIVE);
+		}
+		
+		
+		if (m_server && slot != -1)
+		{
+			// Nachrichten fuer die Spieler abholen und Verteilen
+			PackageHeader headerp;
+			Packet* data;
+			CharConv* cv;
+			
+			if (m_network->getSlotStatus( slot )!=NET_CONNECTED)
+			{
+				// disconnect
+			}
+			else
+			{
+				while (m_network->numberSlotMessages( slot )>0)
+				{
+					m_network->popSlotMessage( data ,slot);
+		
+					cv = new CharConv(data);
+
+					headerp.fromString(cv);
+					
+					if (headerp.m_content ==  PTYPE_C2S_COMMAND)
+					{
+						// Kommando Daten erhalten
+						ClientCommand com;
+
+						// Spielerobjekt die Daten senden
+						com.fromString(cv);	
+						
+						handleCommand(&com,slot);
+					}
+					
+					if (headerp.m_content == PTYPE_C2S_DATA_REQUEST)
+					{
+						// Datenanfrage erhalten
+						ClientDataRequest req;
+						req.fromString(cv);
+							
+						handleDataRequest(&req,slot);
+					}
+					
+					delete cv;
+				}
+			}
+		}
+		
+	}
+	
+	if (!m_server)
+	{
+		// Daten vom Server empfangen und verarbeiten
+		if (m_network->getSlotStatus()!=NET_CONNECTED)
+		{
+			// disconnect
+		}
+		else
+		{
+			PackageHeader headerp;
+			Packet* data;
+			CharConv* cv;
+			
+			while (m_network->numberSlotMessages()>0)
+			{
+				m_network->popSlotMessage( data ,slot);
+		
+				cv = new CharConv(data);
+
+				headerp.fromString(cv);
+				
+				if (headerp.m_content == PTYPE_S2C_PLAYER)
+				{
+					for (int n=0; n< headerp.m_number;n++)
+					{
+						// Daten zu Spielern erhalten
+						// Typ Spieler (schon bekannt)
+						char tmp;
+						cv->fromBuffer(tmp);
+						
+						// Subtyp
+						char subt[11];
+						subt[10] ='\0';
+						cv->fromBuffer(subt,10);
+						
+						int id;
+						cv->fromBuffer(id);
+						ServerWObject* player;
+						
+						DEBUG("got data for player %s id %i",subt,id);
+						
+						// Spieler entweder neu anlegen oder aus den existierenden herraussuchen
+						if (m_players->count(id)==0)
+						{
+							// Spieler existiert noch nicht
+							player = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_PLAYER, std::string(subt),id);
+							insertPlayer(player);
+						}
+						else
+						{
+							player = (*m_players)[id];
+						}
+						
+						// Daten aktualisieren
+						player->fromString(cv);
+						
+					}
+					
+				}
+				
+				if (headerp.m_content == PTYPE_S2C_REGION)
+				{
+					// Daten zu einer Region erhalten
+					DEBUG("got data for region %i",headerp.m_number);
+					short dimx, dimy;
+						
+					// Groesse der Region
+					cv->fromBuffer(dimx);
+					cv->fromBuffer(dimy);
+					
+					// Region anlegen wenn sie noch nicht existiert
+					if (m_regions[headerp.m_number] ==0)
+					{
+						m_regions[headerp.m_number] = new Region(dimx,dimy,headerp.m_number);	
+					}
+					
+					// Daten schreiben
+					m_regions[headerp.m_number]->setRegionData(cv,m_players);
+					
+					// lokalen Spieler fuer die Region freischalten
+					m_local_player->setState(WorldObject::STATE_ENTER_REGION);
+				}
+				
+				if (headerp.m_content == PTYPE_S2C_INITIALISATION)
+				{
+					int id;
+					cv->fromBuffer(id);
+					DEBUG("ID at server %i",id);
+					m_players->clear();
+					m_local_player->setId(id);
+					insertPlayer(m_local_player, LOCAL_SLOT);
+				}
+				
+				delete cv;
+			}
+		}
+	}
+}
+
+void World::handleDataRequest(ClientDataRequest* request, int slot )
+{
+	// Spieler von dem die Anfrage ausging
+	ServerWObject* player;
+
+	// Spieler in dem betreffenden Slot aktivieren
+	if (m_player_slots->count(slot)==0)
+	{
+		ERRORMSG("got request from an empty slot %i",slot);
+		return;
+	}
+	else
+	{
+		player = (*m_player_slots)[slot];
+	}
+	
+	if (request->m_data <= ClientDataRequest::REGION_ALL)
+	{
+		DEBUG("Daten zur Region %i gefordert",request->m_id);
+		Region* region = m_regions[request->m_id];
+		
+		if (region!=0)
+		{
+			// Daten der Region senden
+			PackageHeader header;
+			header.m_content = PTYPE_S2C_REGION; 	
+			header.m_number =request->m_id;
+			
+			CharConv msg;
+			header.toString(&msg);
+			
+			region->getRegionData(&msg);
+			
+			m_network->pushSlotMessage(msg.getBitStream(),slot);
+			
+			player->setState(WorldObject::STATE_ENTER_REGION);
+			
+		}
+		
+	}
+}
 
 bool World::calcBlockmat(PathfindInfo * pathinfo)
 {
