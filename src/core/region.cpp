@@ -2,7 +2,7 @@
 #include "world.h"
 
 
-Region::Region(short dimx, short dimy, short id)
+Region::Region(short dimx, short dimy, short id, World* world, bool server)
 {
 	DEBUG5("creating region");
 	m_data_grid = new Matrix2d<Gridunit>(dimx,dimy);
@@ -25,6 +25,12 @@ Region::Region(short dimx, short dimy, short id)
 	m_drop_items = new map<int,DropItem*>;
 	
 	m_id = id;
+	
+	m_events = new list<Event>;
+	
+	m_server = server;
+	
+	m_world = world;
 }
 
 Region::~Region()
@@ -61,6 +67,9 @@ Region::~Region()
 	delete m_data_grid;
 	delete m_tiles;
 	delete m_drop_items;
+	
+	delete m_events;
+	
 }
 
 ServerWObject* Region::getSWObject ( int id)
@@ -72,6 +81,26 @@ ServerWObject* Region::getSWObject ( int id)
 	
 	// Testen ob ein Objekt gefunden wurde
 	if (iter == m_objects->end())
+	{
+		// keins gefunden, NULL ausgeben
+		return 0;
+	}
+	else
+	{
+		// Zeiger auf Objekt ausgeben
+		return iter->second;
+	}
+}
+
+DmgProjectile* Region::getProjectile(int id)
+{
+	map<int,DmgProjectile*>::iterator iter;
+	
+	// Objekt im Binärbaum suchen
+	iter = m_projectiles->find(id);
+	
+	// Testen ob ein Objekt gefunden wurde
+	if (iter == m_projectiles->end())
 	{
 		// keins gefunden, NULL ausgeben
 		return 0;
@@ -537,14 +566,7 @@ void Region::getProjectilesOnScreen(float center_x,float center_y, list<DmgProje
 bool Region::insertSWObject (ServerWObject* object, float x, float y)
 {
 	bool result = true;
-	if (object->getTypeInfo()->m_type == WorldObject::TypeInfo::TYPE_PLAYER)
-	{
-		DEBUG5("player entered Region");
-		result &= (m_players->insert(make_pair(object->getId(),object))).second;
-		
-		// Daten der Region zum Server senden
-		//object->setState(WorldObject::STATE_REGION_ENTERED);
-	}
+	
 	
 	object->getGridLocation()->m_region = m_id;
 	 
@@ -561,7 +583,26 @@ bool Region::insertSWObject (ServerWObject* object, float x, float y)
 	 
 	 // Wenn das Element bereits existiert ist die Antwort false
 	if (result==false)
+	{
 		return result;
+	}
+	
+	if (object->getTypeInfo()->m_type == WorldObject::TypeInfo::TYPE_PLAYER)
+	{
+		DEBUG5("player entered Region");
+		result &= (m_players->insert(make_pair(object->getId(),object))).second;
+		
+		// Daten der Region zum Server senden
+		//object->setState(WorldObject::STATE_REGION_ENTERED);
+	}
+	else
+	{
+		// fuer Nicht Spieler Event erzeugen, dass das Objekt erschaffen wurde
+		Event event;
+		event.m_type = Event::OBJECT_CREATED;
+		event.m_id = object->getId();
+		insertEvent(event);	
+	}
 	 
 	 // Koordinaten setzen
 	object->getGeometry()->m_shape.m_coordinate_x=x;
@@ -601,6 +642,13 @@ bool  Region::insertProjectile(DmgProjectile* object, float x, float y)
 	object->getGeometry()->m_coordinate_x = x;
 	object->getGeometry()->m_coordinate_y = y;
 	object->setRegion( m_id);
+	
+	// Event erzeugen: neues Projektil in der Region
+	Event event;
+	event.m_type = Event::PROJECTILE_CREATED;
+	event.m_id = object->getId();
+	insertEvent(event);
+	
 	return true;
 }
 
@@ -693,7 +741,7 @@ bool Region::changeObjectGroup(ServerWObject* object,WorldObject::Group group )
 	 
 	int x = object->getGridLocation()->m_grid_x;
 	int y = object->getGridLocation()->m_grid_y;
-	DEBUG("changing object in grid tile %i %i",x,y);
+	DEBUG5("changing object in grid tile %i %i",x,y);
 	 
 	Gridunit *gu = (m_data_grid->ind(x,y));
 	result = gu->moveObject(object,group);
@@ -701,6 +749,16 @@ bool Region::changeObjectGroup(ServerWObject* object,WorldObject::Group group )
 	
 	return result;
 	
+}
+
+void Region::deleteProjectile(DmgProjectile* proj)
+{
+	int id = proj->getId();
+	
+	if (m_projectiles->count(id)!=0)
+	{
+		m_projectiles->erase(m_projectiles->find(id));
+	}
 }
 
 void Region::update(float time)
@@ -711,7 +769,23 @@ void Region::update(float time)
 	map<int,ServerWObject*>::iterator iter;
 	ServerWObject* object;
 	WorldObject::Geometry* wob;
-		 
+	map<int,DmgProjectile*>::iterator it3;
+	
+	
+	// alle bisherigen Events loeschen
+	m_events->clear();
+	
+	// alle Eventsmasken loeschen
+	for (iter =m_objects->begin(); iter!=m_objects->end(); ++iter)
+	{
+		iter->second->clearEventMask();
+	}
+	
+	for (it3 = m_projectiles->begin(); it3 !=m_projectiles->end();++it3)
+	{
+		it3->second->clearEventMask();
+	}
+	
 	// Durchmustern aller ServerWObjects
 	for (iter =m_objects->begin(); iter!=m_objects->end(); )
 	{
@@ -720,13 +794,25 @@ void Region::update(float time)
 		DEBUG5("\nObjekt: %f %f key: %i layer %x",wob->m_shape.m_coordinate_x,wob->m_shape.m_coordinate_y ,object->getId(),object->getGeometry()->m_layer);	
 		if (object->getDestroyed()==true)
 		{
-			
-			DEBUG5("Objekt gelöscht: %i \n",object->getId());
-			object->destroy();
-			deleteSWObject(object);
-			delete object;
-			m_objects->erase(iter++);
-			continue;
+			// Objekte selbststaendig loeschen darf nur der Server
+			if (m_server)
+			{
+				DEBUG5("Objekt gelöscht: %i \n",object->getId());
+				Event event;
+				event.m_type = Event::OBJECT_DESTROYED;
+				event.m_id = object->getId();
+				insertEvent(event);
+				
+				++iter;
+				object->destroy();
+				deleteSWObject(object);
+				delete object;
+				continue;
+			}
+			else
+			{
+				++iter;
+			}
 		}
 		else
 		{
@@ -739,7 +825,6 @@ void Region::update(float time)
 	DEBUG5("Update aller WeltObjekte abgeschlossen\n\n");
 	
 	// alle Projektile updaten
-	map<int,DmgProjectile*>::iterator it3;
 	DmgProjectile* pr =0;
 	
 	for (it3 = m_projectiles->begin(); it3 !=m_projectiles->end();)
@@ -747,10 +832,23 @@ void Region::update(float time)
 		pr = (it3->second);
 		if (pr->getState() == Projectile::DESTROYED)
 		{
-			DEBUG5("deleting projectile %p",pr);
-			m_projectiles->erase(it3++);
-			delete pr;
-			DEBUG5("loesche projektil");
+			// Projektile selbststaendig loeschen darf nur der Server
+			if (m_server)
+			{
+				Event event;
+				event.m_type = Event::PROJECTILE_DESTROYED;
+				event.m_id = pr->getId();
+				insertEvent(event);
+				
+				DEBUG5("deleting projectile %p",pr);
+				m_projectiles->erase(it3++);
+				delete pr;
+				DEBUG5("loesche projektil");
+			}
+			else
+			{
+			 	++it3;
+			}
 			
 		}
 		else
@@ -760,6 +858,43 @@ void Region::update(float time)
 		}
 	}
 	DEBUG5("update projektile abgeschlossen");
+	
+	if (m_server)
+	{
+		// Events fuer geaenderte Objekte / Projektile erzeugen
+		for (iter =m_objects->begin(); iter!=m_objects->end(); ++iter)
+		{
+			object = iter->second;
+			
+			// Events durch Spieler werden global behandelt, daher hier nicht beruecksichtigen
+			if (object->getTypeInfo()->m_type == WorldObject::TypeInfo::TYPE_PLAYER)
+			{
+				continue;
+			}
+			
+			if (object->getEventMask() !=0)
+			{
+				Event event;
+				event.m_type = Event::OBJECT_STAT_CHANGED;
+				event.m_data = object->getEventMask();
+				event.m_id = object->getId();
+				insertEvent(event);
+			}
+		}
+		
+		for (it3 = m_projectiles->begin(); it3 !=m_projectiles->end();++it3)
+		{
+			pr = (it3->second);
+			if (pr->getEventMask() !=0)
+			{
+				Event event;
+				event.m_type = Event::PROJECTILE_STAT_CHANGED;
+				event.m_data = pr->getEventMask();
+				event.m_id = pr->getId();
+				insertEvent(event);
+			}
+		}
+	}
 }
 
 void Region::getRegionData(CharConv* cv)
@@ -805,8 +940,86 @@ void Region::getRegionData(CharConv* cv)
 		DEBUG5("object: %s",(jt->second)->getNameId().c_str());
 	}
 	
+	// Anzahl der Projektile eintragen
+	cv->toBuffer<short>((short) m_projectiles->size());
+	DEBUG("projectiles: %i",m_projectiles->size());
+	
+	// Projektile in den Puffer eintragen
+	map<int,DmgProjectile*>::iterator kt;
+	for (kt = m_projectiles->begin(); kt != m_projectiles->end(); ++kt)
+	{
+		kt->second->toString(cv);	
+	}
+	
+}
+
+
+void Region::createObjectFromString(CharConv* cv, map<int,ServerWObject*>* players)
+{
+	char type;
+	char subt[11];
+	subt[10] ='\0';
+	int id;
+	
+	ServerWObject* obj;
+	float x,y;
 	
 	
+	DEBUG5("read offset: %i",cv->getBitStream()->GetReadOffset());
+
+	cv->fromBuffer(type);
+	cv->fromBuffer(subt,10);
+	cv->fromBuffer(id);
+		
+	DEBUG5("object %s id %i",subt,id);
+		
+		// alle Objekte ausser den Spielern werden neu angelegt
+		// die Spieler existieren schon
+	if (type != WorldObject::TypeInfo::TYPE_PLAYER)
+	{
+		obj = ObjectFactory::createObject((WorldObject::TypeInfo::ObjectType) type, std::string(subt),id);
+	}
+	else
+	{
+		if (players->count(id) ==0)
+		{
+			ERRORMSG("player (%s) with id %i does not exist",subt,id);
+		}
+		obj = (*players)[id];
+	}
+		
+	obj->fromString(cv);
+		
+	x = obj->getGeometry()->m_shape.m_coordinate_x;
+	y = obj->getGeometry()->m_shape.m_coordinate_y;
+		
+		
+	insertSWObject(obj,x,y);
+}
+
+
+void Region::createProjectileFromString(CharConv* cv)
+{
+	
+	char type,frac;
+	int id;
+	DmgProjectile* proj;
+	float x,y;
+	
+	cv->fromBuffer(type);
+	cv->fromBuffer(frac);
+	cv->fromBuffer(id);
+	
+	DEBUG5("new projectile %i frac %i id %i",type,frac,id);
+		
+	proj = new DmgProjectile(m_world, (Projectile::ProjectileType) type, (WorldObject::TypeInfo::Fraction) frac, id);
+		
+	proj->fromString(cv);
+		
+	x = proj->getGeometry()->m_coordinate_x;
+	y = proj->getGeometry()->m_coordinate_y;
+		
+	insertProjectile(proj,x,y);
 }
 
 void Region::setRegionData(CharConv* cv,map<int,ServerWObject*>* players)
@@ -833,35 +1046,6 @@ void Region::setRegionData(CharConv* cv,map<int,ServerWObject*>* players)
 	}
 	m_static_objects->clear();
 	
-	char type;
-	char subt[11];
-	subt[10] ='\0';
-	int id;
-	
-	// statische Objekte einlesen
-	short nr_stat;
-	cv->fromBuffer<short>(nr_stat);
-	DEBUG("static objects: %i",nr_stat);
-	
-	ServerWObject* obj;
-	float x,y;
-	for (int i=0; i<nr_stat;i++)
-	{
-		cv->fromBuffer(type);
-		cv->fromBuffer(subt,10);
-		cv->fromBuffer(id);
-		
-		obj = ObjectFactory::createObject((WorldObject::TypeInfo::ObjectType) type, std::string(subt),id);
-			
-		obj->fromString(cv);
-		
-		x = obj->getGeometry()->m_shape.m_coordinate_x;
-		y = obj->getGeometry()->m_shape.m_coordinate_y;
-		
-		insertSWObject(obj,x,y);
-		
-	}
-		
 	// alle bisherigen nichtstatischen Objekte entfernen
 	// die SpielerObjekte bleiben erhalten, alle anderen werden geloescht
 	map<int,ServerWObject*>::iterator jt;
@@ -877,6 +1061,18 @@ void Region::setRegionData(CharConv* cv,map<int,ServerWObject*>* players)
 	m_objects->clear();
 	m_players->clear();
 	
+	// statische Objekte einlesen
+	short nr_stat;
+	cv->fromBuffer<short>(nr_stat);
+	DEBUG("static objects: %i",nr_stat);
+	
+	for (int i=0; i<nr_stat;i++)
+	{
+		createObjectFromString(cv,players);
+	}
+		
+	
+	
 	// neue Objekte einlesen
 	short nr_nonstat;
 	cv->fromBuffer<short>(nr_nonstat);
@@ -884,37 +1080,7 @@ void Region::setRegionData(CharConv* cv,map<int,ServerWObject*>* players)
 	
 	for (int i=0; i<nr_nonstat;i++)
 	{
-		DEBUG5("read offset: %i",cv->getBitStream()->GetReadOffset());
-
-		cv->fromBuffer(type);
-		cv->fromBuffer(subt,10);
-		cv->fromBuffer(id);
-		
-		DEBUG("object %s id %i",subt,id);
-		
-		// alle Objekte ausser den Spielern werden neu angelegt
-		// die Spieler existieren schon
-		if (type != WorldObject::TypeInfo::TYPE_PLAYER)
-		{
-			obj = ObjectFactory::createObject((WorldObject::TypeInfo::ObjectType) type, std::string(subt),id);
-		}
-		else
-		{
-			if (players->count(id) ==0)
-			{
-				ERRORMSG("player (%s) with id %i does not exist",subt,id);
-			}
-			obj = (*players)[id];
-		}
-		
-		obj->fromString(cv);
-		
-		x = obj->getGeometry()->m_shape.m_coordinate_x;
-		y = obj->getGeometry()->m_shape.m_coordinate_y;
-		
-		
-		insertSWObject(obj,x,y);
-		
+		createObjectFromString(cv,players);
 	}
 	
 	/*
@@ -930,7 +1096,20 @@ void Region::setRegionData(CharConv* cv,map<int,ServerWObject*>* players)
 		DEBUG("%s id %i at %f %f",mt->second->getTypeInfo()->m_subtype.c_str(),mt->second->getId(), mt->second->getGeometry()->m_shape.m_coordinate_x,mt->second->getGeometry()->m_shape.m_coordinate_y);
 	}
 	*/
+	
+	// Anzahl der Projektile einlesen
+	short nr_proj;
+	cv->fromBuffer<short>(nr_proj);
+	DEBUG("projectiles: %i",nr_proj);
+	// Projektile einlesen
+	for (int i=0; i<nr_proj;i++)
+	{
+		createProjectileFromString(cv);
+	}
+	
 }
+
+
 
 void Region::setTile(Tile tile,short x, short y)
 {

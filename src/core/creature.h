@@ -430,7 +430,19 @@ protected:
 	void collisionDetection(float time);
 	
 	
+	/**
+	 * \fn virtual void writeEvent(Event* event, CharConv* cv)
+	 * \brief Schreibt die Daten zu einem Event in den Bitstream
+	 * \param event Event das beschrieben wird
+	 * \param cv Bitstream
+	 */
+	virtual void writeEvent(Event* event, CharConv* cv);
 	
+	/**
+	 * \fn virtual void processEvent(Event* event, CharConv* cv)
+	 * \brief Fuehrt die Wirkung eines Events auf das Objekt aus. Weitere Daten werden aus dem Bitstream gelesen
+	 */
+	virtual void processEvent(Event* event, CharConv* cv);
 	
 			
 

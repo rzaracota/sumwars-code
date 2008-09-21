@@ -61,7 +61,7 @@ Region* ServerWObject::getRegion()
 
 bool  ServerWObject::destroy()
 {
-	DEBUG("destroy");
+	DEBUG5("destroy");
 	return true;
 }
 

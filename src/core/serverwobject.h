@@ -23,6 +23,7 @@
 #include <string>
 #include "worldobject.h"
 #include "damage.h"
+#include "event.h"
 
 class World;
 class Region;
@@ -203,8 +204,49 @@ public:
 	virtual void takeDamage(Damage* damage)
 	{
 	}
-
 	
+	/**
+	 * \fn virtual void writeEvent(Event* event, CharConv* cv)
+	 * \brief Schreibt die Daten zu einem Event in den Bitstream
+	 * \param event Event das beschrieben wird
+	 * \param cv Bitstream
+	 */
+	virtual void writeEvent(Event* event, CharConv* cv)
+	{
+	}
+	
+	/**
+	 * \fn virtual void processEvent(Event* event, CharConv* cv)
+	 * \brief Fuehrt die Wirkung eines Events auf das Objekt aus. Weitere Daten werden aus dem Bitstream gelesen
+	 */
+	virtual void processEvent(Event* event, CharConv* cv)
+	{
+	}
+	
+	/**
+	 * \fn int getEventMask()
+	 * \brief Gibt die Bitmaske der Events aus#
+	 */
+	int getEventMask()
+	{
+		return m_event_mask;
+	}
+	
+	/**
+	 * \fn void clearEventMask()
+	 */
+	void clearEventMask()
+	{
+		m_event_mask =0;
+	}
+
+	protected:
+		
+		/**
+		* \var int m_event_mask
+		* \brief Bitmaske mit den Events die das Objekt seit dem letzten Update erlebt hat
+		*/
+		int m_event_mask;
 
 //Private stuff
 private:
@@ -233,6 +275,8 @@ private:
 	 * \brief Zeiger auf das World Objekt, in dem das aktuelle Objekt eingeordnet ist
 	 */
 	World* m_world;
+	
+	
 };
 
 #include "world.h"

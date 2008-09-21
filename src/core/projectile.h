@@ -161,22 +161,7 @@ class Projectile
 	}
 	
 	
-	/**
-	 * \fn void toString(CharConv* cv)
-	 * \brief Konvertiert das Objekt in einen String und schreibt ihn in der Puffer
-	 * \param buf Ausgabepuffer
-	 * \return Zeiger hinter den beschriebenen Datenbereich
-	 */
-	virtual void toString(CharConv* cv);
-			
-			
-	/**
-	 * \fn void fromString(CharConv* cv)
-	 * \brief Erzeugt das Objekt aus einem String
-	 * \param buf Objekt als String
-	 * \return Zeiger hinter den gelesenen Datenbereich
-	 */
-	virtual void fromString(CharConv* cv);
+	
 	
 	/**
 	 * \fn int getId()
@@ -187,6 +172,22 @@ class Projectile
 		return m_id;
 	}
 	
+	/**
+	 * \fn int getEventMask()
+	 * \brief Gibt die Bitmaske der Events aus#
+	 */
+	int getEventMask()
+	{
+		return m_event_mask;
+	}
+	
+	/**
+	 * \fn void clearEventMask()
+	 */
+	void clearEventMask()
+	{
+		m_event_mask =0;
+	}
 	
 	/**
 	 * \fn virtual void update()
@@ -238,6 +239,12 @@ class Projectile
 	  * \brief ID des Projektils
 	  */
 	 int m_id;
+	 
+	 /**
+	  * \var int m_event_mask
+	  * \brief Bitmaske mit den beim aktuellen updaten aufgetretenen Events
+	  */
+	 int m_event_mask;
 	 
 
 };

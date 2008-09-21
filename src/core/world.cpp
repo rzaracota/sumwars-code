@@ -53,6 +53,8 @@
 		 m_regions[i]=0;
 	 
 	 m_local_player =0;
+	 
+	 m_events = new list<Event>;
 	
 }
 
@@ -103,7 +105,7 @@ void World::createRegion(short region)
 	}
 	else if(type==2)
 	{
-		Region* reg = new Region(25,25,region);
+		Region* reg = new Region(25,25,region,this, m_server);
 		short rid = insertRegion(reg,region);
 
 
@@ -326,6 +328,7 @@ World::~World()
 	delete[] m_parties; 
 	delete m_player_slots;
 	delete m_players;
+	delete m_events;
 }	
 
 
@@ -932,8 +935,16 @@ bool World::insertPlayerIntoRegion(ServerWObject* player, short region)
 			}
 			else
 			{
-				// anderer Spieler wurde in unbekannte Region eingefuegt, ignorieren
-				player->setState(WorldObject::STATE_INACTIVE);
+				if (data_missing != 0)
+				{
+					// Region unbekannt, ignorieren
+					player->setState(WorldObject::STATE_INACTIVE);
+				}
+				else
+				{
+					// Spieler in die Region einfuegen
+					player->setState(WorldObject::STATE_ENTER_REGION);	
+				}
 			}
 		
 		}
@@ -949,6 +960,16 @@ bool World::insertPlayerIntoRegion(ServerWObject* player, short region)
 		reg->getFreePlace(&(player->getGeometry()->m_shape),player->getGeometry()->m_layer , x, y);
 		insertSWObject(player, x,y,region);
 		player->setState(WorldObject::STATE_ACTIVE);
+		
+		if (m_server)
+		{
+			Event event;
+			event.m_type = Event::PLAYER_CHANGED_REGION;
+			event.m_id = player->getId();
+			event.m_data =region ;
+			
+			insertEvent(event);
+		}
 		
 	}
 }
@@ -1008,6 +1029,7 @@ void World::handleSavegame(CharConv *cv, int slot)
 		pl->getGeometry()->m_shape.m_coordinate_y = 11;
 		
 		insertPlayerIntoRegion(pl,pl->getGridLocation()->m_region);
+		
 
 		if (m_server)
 		{
@@ -1135,6 +1157,8 @@ int World::getValidProjectileId()
 
 void World::update(float time)
 {
+	m_events->clear();
+	
 	DEBUG5("update %f",time);
 	for (int i=0;i<WORLD_MAX_REGIONS;i++)
 	{
@@ -1234,7 +1258,7 @@ void World::updatePlayers()
 		}
 		
 		
-		if (m_server && slot != -1)
+		if (m_server && slot != LOCAL_SLOT)
 		{
 			// Nachrichten fuer die Spieler abholen und Verteilen
 			PackageHeader headerp;
@@ -1280,6 +1304,21 @@ void World::updatePlayers()
 			}
 		}
 		
+		if (m_server)
+		{
+			// Events fuer die Spieler generieren
+			if (pl->getEventMask() !=0)
+			{
+				Event event;
+				event.m_type = Event::OBJECT_STAT_CHANGED;
+				event.m_data = pl->getEventMask();
+				event.m_id = pl->getId();
+				insertEvent(event);	
+				
+				pl->clearEventMask();
+			}
+		}
+		
 	}
 	
 	if (!m_server)
@@ -1295,6 +1334,7 @@ void World::updatePlayers()
 			Packet* data;
 			CharConv* cv;
 			
+			// Nachrichten vom Server empfangen
 			while (m_network->numberSlotMessages()>0)
 			{
 				m_network->popSlotMessage( data ,slot);
@@ -1355,7 +1395,7 @@ void World::updatePlayers()
 					// Region anlegen wenn sie noch nicht existiert
 					if (m_regions[headerp.m_number] ==0)
 					{
-						m_regions[headerp.m_number] = new Region(dimx,dimy,headerp.m_number);	
+						m_regions[headerp.m_number] = new Region(dimx,dimy,headerp.m_number,this,m_server);	
 					}
 					
 					// Daten schreiben
@@ -1375,11 +1415,212 @@ void World::updatePlayers()
 					insertPlayer(m_local_player, LOCAL_SLOT);
 				}
 				
+				if (headerp.m_content == PTYPE_S2C_EVENT)
+				{
+					Region* reg = m_local_player->getRegion();
+					
+					for (int n=0; n< headerp.m_number;n++)
+					{
+						processEvent(reg,cv);
+					}
+
+				}
+				
 				delete cv;
+			}
+		
+		}
+	}
+	
+	
+	if (m_server)
+	{
+		// Nachrichten ueber die Events zur den Clients senden
+		short nr_events;
+		Region* reg;
+		list<Event>::iterator lt;
+		for (it = m_player_slots->begin(); it != m_player_slots->end(); ++it)
+		{
+			slot = it->first;
+			pl = static_cast<Player*>(it->second);
+			
+			if (slot != LOCAL_SLOT)
+			{
+				// Anzahl der Events
+				nr_events = m_events->size();
+				reg = pl->getRegion();
+				if (pl->getState() != WorldObject::STATE_ACTIVE && pl->getState() != WorldObject::STATE_DEAD && pl->getState() != WorldObject::STATE_DIEING)
+				{
+					reg =0;
+				}
+				
+				if (reg !=0)
+				{
+					nr_events += reg->getEvents()->size();
+				}
+				
+				CharConv msg;
+				PackageHeader header;
+				header.m_content = PTYPE_S2C_EVENT;
+				header.m_number =nr_events;
+				
+				header.toString(&msg);
+				
+				// globale Events
+				for (lt = m_events->begin(); lt != m_events->end(); ++lt)
+				{
+					writeEvent(reg,&(*lt),&msg);
+				}
+				
+				// Events der Region in der der Spieler ist
+				if (reg !=0)
+				{
+					for (lt = reg->getEvents()->begin(); lt != reg->getEvents()->end(); ++lt)
+					{
+						writeEvent(reg,&(*lt),&msg);
+					}
+				}
+				
+				m_network->pushSlotMessage(msg.getBitStream(),slot);
+				
+			}
+		}
+		
+		
+	}
+}
+
+void World::writeEvent(Region* region,Event* event, CharConv* cv)
+{
+	event->toString(cv);
+	
+	DEBUG5("sending event %i  id %i  data %i",event->m_type, event->m_id, event->m_data);
+	
+	
+	ServerWObject* object;
+	DmgProjectile* proj;
+	if (event->m_type == Event::OBJECT_CREATED)
+	{
+		object =region->getSWObject(event->m_id);
+		object->toString(cv);
+	}
+	
+	if (event->m_type == Event::OBJECT_STAT_CHANGED)
+	{
+		object =region->getSWObject(event->m_id);
+		object->writeEvent(event,cv);
+	}
+	
+	if (event->m_type == Event::PROJECTILE_CREATED)
+	{
+		proj = region->getProjectile(event->m_id);
+		proj->toString(cv);
+	}
+	
+	if (event->m_type == Event::PROJECTILE_STAT_CHANGED)
+	{
+		proj = region->getProjectile(event->m_id);
+		proj->writeEvent(event,cv);
+	}
+	
+	if (event->m_type == Event::PLAYER_CHANGED_REGION)
+	{
+		object = (*m_players)[event->m_id];
+		cv->toBuffer(object->getGeometry()->m_shape.m_coordinate_x);
+		cv->toBuffer(object->getGeometry()->m_shape.m_coordinate_y);
+				
+	}
+}
+
+
+void World::processEvent(Region* region,CharConv* cv)
+{
+	Event event;
+	event.fromString(cv);
+	
+	DEBUG5("got event %i  id %i  data %i",event.m_type, event.m_id, event.m_data);
+	
+	ServerWObject* object;
+	DmgProjectile* proj;
+	
+	if (event.m_type == Event::OBJECT_CREATED)
+	{
+		region->createObjectFromString(cv, m_players);
+	}
+	
+	if (event.m_type == Event::OBJECT_STAT_CHANGED)
+	{
+		object =region->getSWObject(event.m_id);
+		if (object !=0)
+		{
+		
+			object->processEvent(&event,cv);
+		}
+		else
+		{
+			// Event erhalten zu dem kein Objekt gehoert
+			DEBUG("object %i for event does not exist",event.m_id);
+		}
+	}
+	
+	if (event.m_type == Event::OBJECT_DESTROYED)
+	{
+		object =region->getSWObject(event.m_id);
+		if (object !=0)
+		{
+			object->destroy();
+			region->deleteSWObject(object);
+			delete object;
+		}
+		else
+		{
+			// Event erhalten zu dem kein Objekt gehoert
+		}
+	}
+	
+	if (event.m_type == Event::PROJECTILE_CREATED)
+	{
+		region->createProjectileFromString(cv);
+	}
+	
+	if (event.m_type == Event::PROJECTILE_STAT_CHANGED)
+	{
+		proj = region->getProjectile(event.m_id);
+		if (proj !=0)
+		{
+			proj->processEvent(&event,cv);
+		}
+	}
+	
+	if (event.m_type == Event::PROJECTILE_DESTROYED)
+	{
+		proj = region->getProjectile(event.m_id);
+		if (proj != 0)
+		{
+			region->deleteProjectile(proj);
+			delete proj;
+		}
+		
+	}
+	
+	if (event.m_type == Event::PLAYER_CHANGED_REGION)
+	{
+		if (m_players->count (event.m_id)>0)
+		{
+			object = (*m_players)[event.m_id];
+			
+			cv->fromBuffer(object->getGeometry()->m_shape.m_coordinate_x);
+			cv->fromBuffer(object->getGeometry()->m_shape.m_coordinate_y);
+			
+			// Lokaler Spieler wird schon vorher in die Region eingefuegt
+			if (object != m_local_player)
+			{
+				insertPlayerIntoRegion(object,event.m_data);
 			}
 		}
 	}
 }
+
 
 void World::handleDataRequest(ClientDataRequest* request, int slot )
 {

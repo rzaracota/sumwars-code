@@ -5,6 +5,7 @@
 #include "serverwobject.h"
 #include "tiles.h"
 #include "dropitem.h"
+#include "event.h"
 
 
 #include <string>
@@ -49,12 +50,12 @@ class Region
 {
 	public:
 		/**
-	 	 * \fn Region(short dimx, short dimy, short id)
+		 * \fn Region(short dimx, short dimy, short id, bool server)
 		 * \brief Konstruktor
 		 * \param dimx Ausdehnung in x-Richtung
 	 	 * \param dimy Ausdehnung in y-Richtung
 	 	 */
-		Region(short dimx, short dimy, short id);
+		Region(short dimx, short dimy, short id, World* world, bool server);
 		
 		
 		/**
@@ -185,6 +186,12 @@ class Region
 		bool  insertProjectile(DmgProjectile* object, float x, float y);
 		
 		/**
+		 * \fn DmgProjectile* getProjectile(int id)
+		 * \brief Gibt das Projektil mit der angegebenen ID aus
+		 */
+		DmgProjectile* getProjectile(int id);
+		
+		/**
 		 * \fn deleteServerWObject(ServerWObject* object)
 		 * \brief L&ouml;scht ServerWObject
 		 * \param object Zeiger auf das Objekt, welches gel&ouml;scht werden soll
@@ -204,6 +211,26 @@ class Region
 		 * \return bool, welcher angibt, ob das Verschieben erfolgreich war
 		  */
 		bool moveSWObject(ServerWObject* object, float x, float y);
+		
+		/**
+		 * \fn void createObjectFromString(CharConv* cv, map<int,ServerWObject*>* players)
+		 * \brief liest die Daten zu einem Objekt aus dem Bitstream und erzeugt es
+		 * \param cv Bitstream aus dem die Daten gelesen werden
+		 * \param players Spielerdaten (Spieler werden nicht neu erzeugt sondern nur in die Region verschoben)
+		 */
+		void createObjectFromString(CharConv* cv, map<int,ServerWObject*>* players);
+		
+		/**
+		 * \fn void createProjectileFromString(CharConv* cv)
+		 * \brief liest die Daten zu einem Projektil aus dem Bitstream und erzeugt es
+		 */
+		void createProjectileFromString(CharConv* cv);
+		
+		/**
+		 * \fn void deleteProjectile(DmgProjectile* proj)
+		 * \brief Entfernt das Projektil aus der Region
+		 */
+		void deleteProjectile(DmgProjectile* proj);
 		
 		/**
 		 * \fn update(float time)
@@ -296,9 +323,29 @@ class Region
 			return m_drop_items;
 		}
 		
+		/**
+		 * \fn map<int,DmgProjectile*>* getProjectiles()
+		 */
 		map<int,DmgProjectile*>* getProjectiles()
 		{
 			return m_projectiles;
+		}
+		
+		/**
+		 * \fn void insertEvent(Event &event)
+		 * \brief Fuegt ein neues Event in die Eventliste ein
+		 */
+		void insertEvent(Event &event)
+		{
+			m_events->push_back(event);
+		}
+		
+		/**
+		 * \fn list<Event>* getEvents()
+		 */
+		list<Event>* getEvents()
+		{
+			return m_events;
 		}
 				
 	private:
@@ -367,6 +414,24 @@ class Region
 	 * \brief Nummer der Region
 	 */
 	short m_id;
+	
+	/**
+	 * \var std::queue<Event> m_events
+	 * \brief Liste der lokalen Events beim aktuellen update
+	 */
+	list<Event>* m_events;
+	
+	/**
+	 * \var bool m_server
+	 * \brief true, wenn der Rechner der Server ist
+	 */
+	bool m_server;
+	
+	/**
+	 * \var World* m_world
+	 * \brief Zeiger auf die Welt
+	 */
+	World* m_world;
 	
 };
 

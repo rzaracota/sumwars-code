@@ -171,6 +171,8 @@ void Monster::updateCommand()
 		cmd->m_goal_coordinate_y = m_ai.m_command.m_goal_coordinate_y;
 		cmd->m_goal_object_id = m_ai.m_command.m_goal_object_id;
 		cmd->m_range = m_ai.m_command.m_range;
+		
+		m_event_mask |= Event::DATA_COMMAND;
 
 	}
 	else
@@ -340,60 +342,62 @@ void Monster::evalCommand(Action::ActionType act)
 
 void Monster::die()
 {
-	DEBUG("die");
-	Geometry* geom = getGeometry();
-	//Zeiger auf letzten Angreifer per ID  holen
-
-	int id = getDynAttr()->m_last_attacker_id;
-	//schauen ob dieser noch lebt, wenn ja gainExperience bei ihm aufrufen mit der _experience dieser Instanz
-
-	// Object per ID von der World holen
-	ServerWObject* object;
-	object = getWorld()->getSWObject(id,getGridLocation()->m_region);
-
-	if (object!=0)
+	DEBUG5("die");	
+	if (getWorld()->isServer())
 	{
-		if (object->getState() == STATE_ACTIVE && object->getTypeInfo()->m_type==TypeInfo::TYPE_PLAYER)
+		Geometry* geom = getGeometry();
+		//Zeiger auf letzten Angreifer per ID  holen
+	
+		int id = getDynAttr()->m_last_attacker_id;
+		//schauen ob dieser noch lebt, wenn ja gainExperience bei ihm aufrufen mit der _experience dieser Instanz
+	
+		// Object per ID von der World holen
+		ServerWObject* object;
+		object = getWorld()->getSWObject(id,getGridLocation()->m_region);
+	
+		if (object!=0)
 		{
-			Creature* pl = (Creature*) object;
-
-			// Für Erfahrungspunkte bitte noch eine vernünftige Formel einfallen lassen...
-			//pl->gainExperience((int) ceil(pow(1.5,getLevel()-1)*4));
-			// Verteilen der Exp auf Spieler in der Nähe
-			// TODO: XP nur auf spieler in der Party verteilen
-
-			pl->gainExperience((int) ceil(pow(1.5,min(pl->getBaseAttrMod()->m_level,getBaseAttr()->m_level)-1)*2));
-
-			list<ServerWObject*> ret;
-			Shape s;
-			s.m_type = Shape::CIRCLE;
-			s.m_radius = 20;
-			s.m_coordinate_x = geom->m_shape.m_coordinate_x;
-			s.m_coordinate_y = geom->m_shape.m_coordinate_y;
-
-			getWorld()->getSWObjectsInShape(&s, getGridLocation()->m_region, &ret, Geometry::LAYER_AIR, CREATURE);
-
-			list<ServerWObject*>::iterator i;
-			
-			for (i=ret.begin();i!=ret.end();i++)
+			if (object->getState() == STATE_ACTIVE && object->getTypeInfo()->m_type==TypeInfo::TYPE_PLAYER)
 			{
-				pl = (Creature*) (*i);
-				pl->gainExperience((int) ceil(pow(1.5,getBaseAttr()->m_level-1)*2/ret.size()));
+				Creature* pl = (Creature*) object;
+	
+				// Für Erfahrungspunkte bitte noch eine vernünftige Formel einfallen lassen...
+				//pl->gainExperience((int) ceil(pow(1.5,getLevel()-1)*4));
+				// Verteilen der Exp auf Spieler in der Nähe
+				// TODO: XP nur auf spieler in der Party verteilen
+	
+				pl->gainExperience((int) ceil(pow(1.5,min(pl->getBaseAttrMod()->m_level,getBaseAttr()->m_level)-1)*2));
+	
+				list<ServerWObject*> ret;
+				Shape s;
+				s.m_type = Shape::CIRCLE;
+				s.m_radius = 20;
+				s.m_coordinate_x = geom->m_shape.m_coordinate_x;
+				s.m_coordinate_y = geom->m_shape.m_coordinate_y;
+	
+				getWorld()->getSWObjectsInShape(&s, getGridLocation()->m_region, &ret, Geometry::LAYER_AIR, CREATURE);
+	
+				list<ServerWObject*>::iterator i;
+				
+				for (i=ret.begin();i!=ret.end();i++)
+				{
+					pl = (Creature*) (*i);
+					pl->gainExperience((int) ceil(pow(1.5,getBaseAttr()->m_level-1)*2/ret.size()));
+				}
+	
 			}
-
 		}
-	}
-
-	ServerItem* si;
-	for (int i=0;i<4;i++)
-	{
-		si = ItemFactory::createItem(m_drop_slots[i]);
-		if (si!=0)
+	
+		ServerItem* si;
+		for (int i=0;i<4;i++)
 		{
-			getRegion()->dropItem(si,getGeometry()->m_shape.m_coordinate_x,getGeometry()->m_shape.m_coordinate_y);
+			si = ItemFactory::createItem(m_drop_slots[i]);
+			if (si!=0)
+			{
+				getRegion()->dropItem(si,getGeometry()->m_shape.m_coordinate_x,getGeometry()->m_shape.m_coordinate_y);
+			}
 		}
 	}
-
 	Creature::die();
 }
 

@@ -173,7 +173,6 @@ bool Player::onGamefieldClick(ClientCommand* command)
 					com->m_goal_object_id = command->m_id;
 					com->m_range = 0.5;
 					DEBUG5("action range %f",getCommand()->m_range);
-
 				}
 						/*
 				if (wo->getObjectType().getObjectType()==OBJECTTYPE_TRADER)
@@ -205,6 +204,7 @@ bool Player::onGamefieldClick(ClientCommand* command)
 					
 					meleedir = true;
 				}
+				m_event_mask |= Event::DATA_NEXT_COMMAND;
 			}
 		}
 		else
@@ -323,6 +323,7 @@ bool Player::onGamefieldClick(ClientCommand* command)
 		}
 	}
 	
+	m_event_mask |= Event::DATA_NEXT_COMMAND;
 	DEBUG5("resulting command %i goal %f %f id %i",com->m_type,com->m_goal_coordinate_x,com->m_goal_coordinate_y, com->m_goal_object_id);
 }
 
@@ -622,10 +623,12 @@ void Player::increaseAttribute(CreatureBaseAttr::Attribute attr)
 			getBaseAttr()->m_strength++;
 			getBaseAttr()->m_max_health += 5;
 			getDynAttr()->m_health +=5;
+			m_event_mask |= Event::DATA_HP | Event::DATA_MAX_HP;
 			break;
 		case (CreatureBaseAttr::DEXTERITY):
 			getBaseAttr()->m_dexterity++;
 			getBaseAttr()->m_attack_speed +=3;
+			m_event_mask |= Event::DATA_ATTACK_SPEED;
 			break;
 		case (CreatureBaseAttr::WILLPOWER):
 			getBaseAttr()->m_willpower++;
@@ -640,6 +643,8 @@ void Player::increaseAttribute(CreatureBaseAttr::Attribute attr)
 
 void Player::gainLevel()
 {
+	Creature::gainLevel();
+	
 	// Level um 1 erhöhen
 	getBaseAttr()->m_level++;
 
@@ -671,6 +676,7 @@ void Player::gainLevel()
 	// Schaden neu berechnen
 	recalcDamage();
 
+	m_event_mask |= Event::DATA_LEVEL | Event::DATA_HP | Event::DATA_MAX_HP | Event::DATA_EXPERIENCE;
 }
 
 
@@ -1440,6 +1446,11 @@ void Player::calcBaseAttrMod()
 		{
 			getBaseAttrMod()->m_attack_speed += si->m_weapon_attr ->m_dattack_speed;
 			getBaseAttrMod()->m_attack_range = si->m_weapon_attr ->m_attack_range;
+			
+			if (si->m_weapon_attr ->m_dattack_speed!=0)
+			{
+				m_event_mask |= Event::DATA_ATTACK_SPEED;
+			}
 		}
 	}
 
@@ -1538,17 +1549,7 @@ void Player::toString(CharConv* cv)
 	cv->toBuffer((char*) m_name.c_str(),32);
 	
 	cv->toBuffer(getBaseAttr()->m_level);
-	cv->toBuffer(getBaseAttr()->m_step_length);
-	cv->toBuffer(getBaseAttrMod()->m_attack_speed);
-	cv->toBuffer(getBaseAttrMod()->m_walk_speed);
-	cv->toBuffer(m_timer1);
-	cv->toBuffer(m_timer1_max);
-	cv->toBuffer(m_timer2);
-	cv->toBuffer(m_timer2_max);
-	for (int i=0; i<6; i++)
-	{
-		cv->toBuffer(getBaseAttrMod()->m_abilities[i]);	
-	}
+	
 		
 
 	/*
@@ -1578,17 +1579,7 @@ void Player::fromString(CharConv* cv)
 	m_name = tmp;
 	
 	cv->fromBuffer(getBaseAttr()->m_level);
-	cv->fromBuffer(getBaseAttr()->m_step_length);
-	cv->fromBuffer(getBaseAttrMod()->m_attack_speed);
-	cv->fromBuffer(getBaseAttrMod()->m_walk_speed);
-	cv->fromBuffer(m_timer1);
-	cv->fromBuffer(m_timer1_max);
-	cv->fromBuffer(m_timer2);
-	cv->fromBuffer(m_timer2_max);
-	for (int i=0; i<6; i++)
-	{
-		cv->fromBuffer(getBaseAttrMod()->m_abilities[i]);	
-	}
+	
 	
 }
 

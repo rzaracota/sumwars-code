@@ -114,6 +114,16 @@ class CharConv
 	{
 		return &m_bitstream;
 	}
+	
+	int readBits()
+	{
+		return m_bitstream.GetReadOffset();
+	}
+	
+	int writeBits()
+	{
+		return m_bitstream.GetNumberOfBitsUsed();
+	}
 			
 	
 	private:

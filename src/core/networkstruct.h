@@ -62,7 +62,7 @@ enum PackageType
  /**
   * \brief Normale Daten vom Server zum Client
   */
-	PTYPE_S2C_DATA ,
+	PTYPE_S2C_EVENT ,
  
  /**
   * \brief Kommando vom Client zum Server

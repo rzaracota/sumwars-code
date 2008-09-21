@@ -29,6 +29,7 @@ using namespace std;
 #include <cstdlib>
 #include <algorithm>
 #include <iostream>
+#include <queue>
 
 #include "serverwobject.h"
 #include "dmgprojectile.h"
@@ -40,6 +41,7 @@ using namespace std;
 #include "party.h"
 #include "itemfactory.h"
 #include "objectfactory.h"
+#include "event.h"
 
 /**
  * \def WORLD_MAX_REGIONS
@@ -354,6 +356,23 @@ public:
 	 * \brief Aktualisiert die Spielerobjekte
 	 */
 	void updatePlayers();
+	
+	/**
+	 * \fn void writeEvent(Region* region, Event* event, CharConv* cv)
+	 * \brief Schreib die Daten zu dem Event in den Bitstream
+	 * \param region Region in der das Event aufgetreten ist
+	 * \param event Event das geschrieben wird
+	 * \param cv Bitstream zum Schreiben
+	 */
+	void writeEvent(Region* region, Event* event, CharConv* cv);
+	
+	/**
+	 * \fn void processEvent(CharConv* cv)
+	 * \brief Liest ein Event aus dem Bitstream und fuehrt es aus
+	 * \param region Region in der das Event aufgetreten ist
+	 * \param cv Bitstream
+	 */
+	void processEvent(Region* region,CharConv* cv);
 
 	/**
 	 * \fn void calcBlockArray(PathfindInfo* p)
@@ -459,8 +478,23 @@ public:
 	 */
 	void handleDataRequest(ClientDataRequest* request, int slot  = LOCAL_SLOT);
 
-	// debug only
-
+	/**
+	 * \fn void insertEvent(Event &event)
+	 * \brief Fuegt ein neues Event in die Eventliste ein
+	 */
+	void insertEvent(Event &event)
+	{
+		m_events->push_back(event);
+	}
+	
+	/**
+	 * \fn bool isServer()
+	 * \brief gibt true aus, wenn die Welt der Server ist
+	 */
+	bool isServer()
+	{
+		return m_server;
+	}
 
 //Private stuff
 private:
@@ -527,5 +561,11 @@ private:
 	 * \brief Liste der Spieler die sich gerade einloggen wollen
 	 */
 	list<int> m_logins;
+	
+	/**
+	 * \var list<Event> m_events
+	 * \brief Liste der globalen Events beim aktuellen update
+	 */
+	list<Event>* m_events;
 };
 #endif //WORLD_H

@@ -169,63 +169,67 @@ bool DmgProjectile::update(float time)
 				if (m_timer >= m_timer_limit)
 				{
 					m_state = DESTROYED;
-					Shape s;
-					s.m_coordinate_x = x;
-					s.m_coordinate_y = y;
-					s.m_type = Shape::CIRCLE;
-					s.m_radius = m_geometry.m_radius;
-
-					// Alle Objekte im Explosionsradius suchen
-					hitobj.clear();
-					m_world->getSWObjectsInShape(&s,m_region,&hitobj,getGeometry()->m_layer,WorldObject::CREATURE,0);
-					for (i=hitobj.begin();i!=hitobj.end();++i)
+					
+					if (m_world->isServer())
 					{
-						// Schaden austeilen
-							(*i)->takeDamage(&m_damage);
-					}
-
-					if (m_flags & MULTI_EXPLODES)
-					{
-						// Flag mehrfach explodierend gesetzt
-						DEBUG("multiexploding");
-						d= 1/sqrt(sqr(m_speed_x)+sqr(m_speed_y));
-						dir[0] = m_speed_x * d;
-						dir[1] = m_speed_y * d;
-
-						// Schaden halbieren
-						Damage dmg;
-						memcpy(&dmg,&m_damage,sizeof(Damage));
-						for (int i=0;i<4;i++)
+						Shape s;
+						s.m_coordinate_x = x;
+						s.m_coordinate_y = y;
+						s.m_type = Shape::CIRCLE;
+						s.m_radius = m_geometry.m_radius;
+	
+						// Alle Objekte im Explosionsradius suchen
+						hitobj.clear();
+						m_world->getSWObjectsInShape(&s,m_region,&hitobj,getGeometry()->m_layer,WorldObject::CREATURE,0);
+						for (i=hitobj.begin();i!=hitobj.end();++i)
 						{
-							dmg.m_multiplier[i] *= 0.5;
+							// Schaden austeilen
+							(*i)->takeDamage(&m_damage);
 						}
-
-						// vier neue Projektile erzeugen
-						DmgProjectile* pr;
-						pr = new DmgProjectile(m_world,m_type,m_creator_fraction, m_world->getValidProjectileId());
-						memcpy(pr->getDamage(),&dmg,sizeof(Damage));
-						pr->setFlags(DmgProjectile::EXPLODES);
-						pr->setMaxRadius(1);
-						m_world->insertProjectile(pr,x+dir[0]*s.m_radius,y+dir[1]*s.m_radius,m_region);
-
-						pr = new DmgProjectile(m_world,m_type,m_creator_fraction, m_world->getValidProjectileId());
-						memcpy(pr->getDamage(),&dmg,sizeof(Damage));
-						pr->setFlags(DmgProjectile::EXPLODES);
-						pr->setMaxRadius(1);
-						m_world->insertProjectile(pr,x-dir[1]*s.m_radius,y+dir[0]*s.m_radius,m_region);
-
-						pr = new DmgProjectile(m_world,m_type,m_creator_fraction, m_world->getValidProjectileId());
-						memcpy(pr->getDamage(),&dmg,sizeof(Damage));
-						pr->setFlags(DmgProjectile::EXPLODES);
-						pr->setMaxRadius(1);
-						m_world->insertProjectile(pr,x-dir[0]*s.m_radius,y-dir[1]*s.m_radius,m_region);
-
-						pr = new DmgProjectile(m_world,m_type,m_creator_fraction, m_world->getValidProjectileId());
-						memcpy(pr->getDamage(),&dmg,sizeof(Damage));
-						pr->setFlags(DmgProjectile::EXPLODES);
-						pr->setMaxRadius(1);
-						m_world->insertProjectile(pr,x+dir[1]*s.m_radius,y-dir[0]*s.m_radius,m_region);
-
+	
+						if (m_flags & MULTI_EXPLODES)
+						{
+							// Flag mehrfach explodierend gesetzt
+							DEBUG("multiexploding");
+							d= 1/sqrt(sqr(m_speed_x)+sqr(m_speed_y));
+							dir[0] = m_speed_x * d;
+							dir[1] = m_speed_y * d;
+	
+							// Schaden halbieren
+							Damage dmg;
+							memcpy(&dmg,&m_damage,sizeof(Damage));
+							for (int i=0;i<4;i++)
+							{
+								dmg.m_multiplier[i] *= 0.5;
+							}
+	
+							// vier neue Projektile erzeugen
+							DmgProjectile* pr;
+							pr = new DmgProjectile(m_world,m_type,m_creator_fraction, m_world->getValidProjectileId());
+							memcpy(pr->getDamage(),&dmg,sizeof(Damage));
+							pr->setFlags(DmgProjectile::EXPLODES);
+							pr->setMaxRadius(1);
+							m_world->insertProjectile(pr,x+dir[0]*s.m_radius,y+dir[1]*s.m_radius,m_region);
+	
+							pr = new DmgProjectile(m_world,m_type,m_creator_fraction, m_world->getValidProjectileId());
+							memcpy(pr->getDamage(),&dmg,sizeof(Damage));
+							pr->setFlags(DmgProjectile::EXPLODES);
+							pr->setMaxRadius(1);
+							m_world->insertProjectile(pr,x-dir[1]*s.m_radius,y+dir[0]*s.m_radius,m_region);
+	
+							pr = new DmgProjectile(m_world,m_type,m_creator_fraction, m_world->getValidProjectileId());
+							memcpy(pr->getDamage(),&dmg,sizeof(Damage));
+							pr->setFlags(DmgProjectile::EXPLODES);
+							pr->setMaxRadius(1);
+							m_world->insertProjectile(pr,x-dir[0]*s.m_radius,y-dir[1]*s.m_radius,m_region);
+	
+							pr = new DmgProjectile(m_world,m_type,m_creator_fraction, m_world->getValidProjectileId());
+							memcpy(pr->getDamage(),&dmg,sizeof(Damage));
+							pr->setFlags(DmgProjectile::EXPLODES);
+							pr->setMaxRadius(1);
+							m_world->insertProjectile(pr,x+dir[1]*s.m_radius,y-dir[0]*s.m_radius,m_region);
+	
+						}
 					}
 				}
 				break;
@@ -255,7 +259,9 @@ bool DmgProjectile::update(float time)
 					m_geometry.m_radius -= 2* dtime/(m_timer_limit);
 				}
 				if (m_timer >= m_timer_limit)
+				{
 						m_state = DESTROYED;
+				}
 
 
 
@@ -448,6 +454,7 @@ void DmgProjectile::handleFlying(float dtime)
 				m_speed_x=newdir[0];
 				m_speed_y=newdir[1];
 			}
+			m_event_mask |= Event::DATA_SPEED;
 		}
 		hitobj.clear();
 		
@@ -513,7 +520,10 @@ void DmgProjectile::handleFlying(float dtime)
 				m_state = DESTROYED;
 				m_timer=0;
 			}
-			hit->takeDamage(&m_damage);
+			if (m_world->isServer())
+			{
+				hit->takeDamage(&m_damage);
+			}
 
 		}
 		else
@@ -535,6 +545,8 @@ void DmgProjectile::handleFlying(float dtime)
 
 			m_timer=0;
 			m_timer_limit=200;
+			
+			m_event_mask |= Event::DATA_PROJ_STATE | Event::DATA_TYPE | Event::DATA_MAX_RADIUS;
 		}
 
 		// true, wenn das Projektil zu einem weiteren Ziel weiterspringt
@@ -542,7 +554,7 @@ void DmgProjectile::handleFlying(float dtime)
 		if (m_flags & BOUNCING)
 			bounce = true;
 
-		if (m_flags & PROB_BOUNCING)
+		if (m_flags & PROB_BOUNCING && m_world->isServer())
 		{
 			// zufaelliges weiterspringen, Chance 50%
 			if (rand()<RAND_MAX*0.5)
@@ -621,6 +633,7 @@ void DmgProjectile::handleFlying(float dtime)
 				m_speed_x = dir[0] *speed;
 				m_speed_y = dir[1] *speed;
 
+				m_event_mask |= Event::DATA_SPEED;
 
 				DEBUG5("koord %f %f to %f %f",xnew,ynew,x2,y2);
 				DEBUG5("dir %f %f",dir[0],dir[1]);
@@ -677,7 +690,7 @@ void DmgProjectile::handleGrowing(float dtime)
 	// Radius erhoehen
 	m_geometry.m_radius += m_max_radius* dtime/(m_timer_limit);
 
-	if (m_type == FIRE_WAVE || m_type == ICE_RING)
+	if ((m_type == FIRE_WAVE || m_type == ICE_RING) && m_world->isServer())
 	{
 		// Schaden an die neu getroffenen Lebewesen austeilen
 		rnew = m_geometry.m_radius;
@@ -743,6 +756,8 @@ void DmgProjectile::handleGrowing(float dtime)
 			m_timer =0;
 			m_timer_limit=5000;
 			m_state = STABLE;
+			
+			m_event_mask |= Event::DATA_PROJ_STATE | Event::DATA_PROJ_TIMER;
 		}
 	}
 
@@ -765,7 +780,7 @@ void DmgProjectile::handleStable(float dtime)
 	float x2,y2;
 	DmgProjectile* pr;
 
-	if (m_timer >= m_timer_limit)
+	if (m_timer >= m_timer_limit && m_world->isServer())
 	{
 		// Timer Limit erreicht
 		m_state = DESTROYED;
@@ -894,6 +909,7 @@ void DmgProjectile::handleStable(float dtime)
 			m_timer =0;
 			m_timer_limit=200;
 			m_state = VANISHING;
+			m_event_mask |= Event::DATA_PROJ_STATE | Event::DATA_PROJ_TIMER;
 		}
 
 		if (m_type == LIGHTNING || m_type ==LIGHT_BEAM  || m_type ==ELEM_EXPLOSION || m_type ==ACID || m_type ==DIVINE_BEAM  || m_type ==HYPNOSIS)
@@ -913,5 +929,130 @@ void DmgProjectile::handleStable(float dtime)
 }
 
 
+void DmgProjectile::toString(CharConv* cv)
+{
+	cv->toBuffer((char) m_type);
+	cv->toBuffer((char) m_creator_fraction);
+	cv->toBuffer( m_id);
+	cv->toBuffer((char) m_state);
+	cv->toBuffer(m_geometry.m_coordinate_x);
+	cv->toBuffer(m_geometry.m_coordinate_y);
+	cv->toBuffer(m_geometry.m_radius);
+	cv->toBuffer(m_geometry.m_angle);
+	cv->toBuffer(m_geometry.m_layer);
+	cv->toBuffer(m_timer);
+	cv->toBuffer(m_timer_limit);
+	cv->toBuffer(m_speed_x);
+	cv->toBuffer(m_speed_y);
+	cv->toBuffer(m_flags);
+	cv->toBuffer(m_max_radius);
+	cv->toBuffer(m_goal_object);
+
+}
+
+void DmgProjectile::fromString(CharConv* cv)
+{
+	// Typ, Fraktion und ID werden schon vorher eingelesen..
+	
+	char tmp;
+	cv->fromBuffer<char>(tmp);
+	m_state = (ProjectileState) tmp;
+	cv->fromBuffer<float>(m_geometry.m_coordinate_x);
+	cv->fromBuffer<float>(m_geometry.m_coordinate_y);
+	cv->fromBuffer<float>(m_geometry.m_radius);
+	cv->fromBuffer<float>(m_geometry.m_angle);
+	cv->fromBuffer<short>(m_geometry.m_layer);
+	cv->fromBuffer<float>(m_timer);
+	cv->fromBuffer<float>(m_timer_limit);
+	cv->fromBuffer(m_speed_x);
+	cv->fromBuffer(m_speed_y);
+	cv->fromBuffer(m_flags);
+	cv->fromBuffer(m_max_radius);
+	cv->fromBuffer(m_goal_object);
+}
+
+void DmgProjectile::writeEvent(Event* event, CharConv* cv)
+{
+	if (event->m_data & Event::DATA_SPEED)
+	{
+		cv->toBuffer(m_geometry.m_coordinate_x);
+		cv->toBuffer(m_geometry.m_coordinate_y);
+		cv->toBuffer(m_speed_x);
+		cv->toBuffer(m_speed_y);
+	}
+	
+	if (event->m_data & Event::DATA_PROJ_STATE)
+	{
+		cv->toBuffer((char) m_state);
+	}
+	
+	if (event->m_data & Event::DATA_GOAL_OBJECT)
+	{
+		cv->toBuffer(m_goal_object);
+	}
+	
+	if (event->m_data & Event::DATA_TYPE)
+	{
+		cv->toBuffer((char) m_type);
+	}
+	
+	if (event->m_data & Event::DATA_PROJ_TIMER)
+	{
+		cv->toBuffer(m_timer_limit);
+	}
+	
+	if (event->m_data & Event::DATA_MAX_RADIUS)
+	{
+		cv->toBuffer(m_max_radius);
+		cv->toBuffer<float>(m_geometry.m_radius);
+	}
+}
+
+void DmgProjectile::processEvent(Event* event, CharConv* cv)
+{
+	if (event->m_data & Event::DATA_SPEED)
+	{
+		cv->fromBuffer(m_geometry.m_coordinate_x);
+		cv->fromBuffer(m_geometry.m_coordinate_y);
+		cv->fromBuffer(m_speed_x);
+		cv->fromBuffer(m_speed_y);
+		
+		if (m_speed_y!=0 || m_speed_x !=0)
+		{
+			m_geometry.m_angle = atan2(m_speed_y,m_speed_x);
+		}
+	}
+	
+	if (event->m_data & Event::DATA_PROJ_STATE)
+	{
+		char ctmp;
+		cv->fromBuffer(ctmp);
+		m_state = (ProjectileState) ctmp;
+	}
+	
+	if (event->m_data & Event::DATA_GOAL_OBJECT)
+	{
+		cv->fromBuffer(m_goal_object);
+	}
+	
+	if (event->m_data & Event::DATA_TYPE)
+	{
+		char ctmp;
+		cv->fromBuffer(ctmp);
+		m_type = (ProjectileType) ctmp;
+	}
+	
+	if (event->m_data & Event::DATA_PROJ_TIMER)
+	{
+		cv->fromBuffer(m_timer_limit);
+		m_timer =0;
+	}
+	
+	if (event->m_data & Event::DATA_MAX_RADIUS)
+	{
+		cv->fromBuffer(m_max_radius);
+		cv->fromBuffer<float>(m_geometry.m_radius);
+	}
+}
 
 

@@ -1707,3 +1707,33 @@ string Action::getDescription(ActionType type)
     #endif
 }
 
+void Action::toString(CharConv* cv)
+{
+
+	/*
+	*((short*) buf) = (short) m_type;
+	*((float* ) (buf+sizeof(short))) = m_elapsed_time / m_time;
+	return buf+sizeof(short)+sizeof(float);
+	*/
+	cv->toBuffer((short) m_type);
+	cv->toBuffer(m_time);
+	cv->toBuffer((char) m_action_equip);
+	cv->toBuffer(m_animation_number);
+	cv->toBuffer(m_elapsed_time);	
+
+	
+}
+
+void Action::fromString(CharConv* cv)
+{
+	short tmp;
+	char ctmp;
+	cv->fromBuffer(tmp);
+	m_type = (ActionType) tmp;
+	cv->fromBuffer(m_time);
+	cv->fromBuffer(ctmp);
+	m_action_equip = (ActionEquip) ctmp;
+	cv->fromBuffer(m_animation_number);
+	cv->fromBuffer(m_elapsed_time);
+}
+

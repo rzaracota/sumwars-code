@@ -383,19 +383,8 @@ public:
 	 * \param buf Ausgabepuffer
 	 * \return Zeiger hinter den beschriebenen Datenbereich
 	 */
-	void toString(CharConv* cv)
-	{
-		/*
-		*((short*) buf) = (short) m_type;
-		*((float* ) (buf+sizeof(short))) = m_elapsed_time / m_time;
-		return buf+sizeof(short)+sizeof(float);
-		*/
-		cv->toBuffer((short) m_type);
-		cv->toBuffer(m_elapsed_time / m_time);
-		cv->toBuffer((char) m_action_equip);
-		cv->toBuffer((char) m_animation_number);		
-
-	}
+	void toString(CharConv* cv);
+	
 
 	/**
 	 * \fn void fromString(CharConv* cv)
@@ -403,20 +392,8 @@ public:
 	 * \param buf Objekt als String
 	 * \return Zeiger hinter den gelesenen Datenbereich
 	 */
-	void fromString(CharConv* cv)
-	{
-		short tmp;
-		char ctmp;
-		cv->fromBuffer(tmp);
-		m_type = (ActionType) tmp;
-		cv->fromBuffer(m_elapsed_time);
-		cv->fromBuffer(ctmp);
-		m_action_equip = (ActionEquip) ctmp;
-		cv->fromBuffer(m_animation_number);
-		
-		
-		m_time=1;
-	}
+	void fromString(CharConv* cv);
+	
 
 	//Fields
 	/**

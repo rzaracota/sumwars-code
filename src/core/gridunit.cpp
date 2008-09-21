@@ -198,7 +198,7 @@ bool Gridunit::deleteObject(ServerWObject* object, short index)
 	}
 
 	// Objekt nicht gefunden, Fehler anzeigen
-	ERRORMSG("Object %s not found ind group %i",object->getNameId().c_str(),g);
+	ERRORMSG("Object %s not found in group %i",object->getNameId().c_str(),g);
 	return false;
 
 }
