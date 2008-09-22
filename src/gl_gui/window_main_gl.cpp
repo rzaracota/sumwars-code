@@ -709,7 +709,7 @@ void WindowMain::DisplayFunc ()
 		glPopMatrix();
 	}
 
-/*
+
 	r=0.5;
 	glPushMatrix();
 	glTranslatef(-8,-4,0);
@@ -718,7 +718,7 @@ void WindowMain::DisplayFunc ()
 	glBegin(GL_TRIANGLE_FAN);
 	glVertex3f(0, 0,0.8);
 
-	for (float a=0;a<=(1-global_doc->getLocalPlayer()->m_timer1_perc)*6.3;a+=0.1)
+	for (float a=0;a<=(1-global_doc->getLocalPlayer()->getTimerPercent(1))*6.3;a+=0.1)
 	{
 		glVertex3f(cos(a)*r, sin(a)*r,0.8);
 	}
@@ -733,14 +733,14 @@ void WindowMain::DisplayFunc ()
 	glBegin(GL_TRIANGLE_FAN);
 	glVertex3f(0, 0,0.8);
 
-	for (float a=0;a<=(1-global_doc->getLocalPlayer()->m_timer2_perc)*6.3;a+=0.1)
+	for (float a=0;a<=(1-global_doc->getLocalPlayer()->getTimerPercent(2))*6.3;a+=0.1)
 	{
 		glVertex3f(cos(a)*r, sin(a)*r,0.8);
 	}
 	glEnd();
 	glPopMatrix();
 
-*/
+
 	// Daten entsperren
 	global_doc->unlock();
 

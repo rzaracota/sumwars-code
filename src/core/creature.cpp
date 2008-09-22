@@ -4087,7 +4087,12 @@ void Creature::writeEvent(Event* event, CharConv* cv)
 		
 
 		if (m_action.m_type!=0)
-			DEBUG5("sending action: %i at %f %f, dir %f %f",m_action.m_type, getGeometry()->m_shape.m_coordinate_x,	getGeometry()->m_shape.m_coordinate_y, getMoveInfo()->m_speed_x,getMoveInfo()->m_speed_y);
+		{
+			float acttime = m_action.m_time - m_action.m_elapsed_time;
+			float goalx = getGeometry()->m_shape.m_coordinate_x + getMoveInfo()->m_speed_x*(acttime);
+			float goaly = getGeometry()->m_shape.m_coordinate_y + getMoveInfo()->m_speed_y*(acttime);
+			DEBUG5("sending action: %i at %f %f, dir %f %f goal %f %f",m_action.m_type, getGeometry()->m_shape.m_coordinate_x,	getGeometry()->m_shape.m_coordinate_y, getMoveInfo()->m_speed_x,getMoveInfo()->m_speed_y,goalx,goaly);
+		}
 	}
 	
 	if (event->m_data & Event::DATA_HP)
@@ -4142,7 +4147,6 @@ void Creature::writeEvent(Event* event, CharConv* cv)
 	
 	if (event->m_data & Event::DATA_WALK_SPEED)
 	{
-		DEBUG("walk changed for %i",getId());
 		cv->toBuffer(getBaseAttrMod()->m_walk_speed);
 	}
 	
@@ -4196,13 +4200,16 @@ void Creature::processEvent(Event* event, CharConv* cv)
 		DEBUG5("got Command %i",m_command.m_type);
 	}
 	
-	char tmp = m_action.m_type;
+	char oldact = m_action.m_type;
 	float posx = getGeometry()->m_shape.m_coordinate_x;
 	float posy = getGeometry()->m_shape.m_coordinate_y;
 	float movex = getMoveInfo()->m_speed_x;
 	float movey = getMoveInfo()->m_speed_y;
+	float newx = getGeometry()->m_shape.m_coordinate_x,newy= getGeometry()->m_shape.m_coordinate_y;
+	float newmovex,newmovey;
 	
-	
+	bool newact= false;
+	bool newmove = false;
 	if (event->m_data & Event::DATA_ACTION)
 	{
 		
@@ -4210,11 +4217,9 @@ void Creature::processEvent(Event* event, CharConv* cv)
 		m_action.fromString(cv);
 		
 		float x,y;
-		cv->fromBuffer(x);
-		cv->fromBuffer(y);
-		moveTo(x,y);
-		if (m_action.m_type!=0)
-			DEBUG5("new Action %i at %f %f",m_action.m_type,x,y);
+		cv->fromBuffer(newx);
+		cv->fromBuffer(newy);
+		newact = true;
 	}
 	
 	
@@ -4277,7 +4282,6 @@ void Creature::processEvent(Event* event, CharConv* cv)
 	
 	if (event->m_data & Event::DATA_WALK_SPEED)
 	{
-		DEBUG("walk speed changed for %i",getId());
 		cv->fromBuffer(getBaseAttrMod()->m_walk_speed);
 	}
 	
@@ -4311,15 +4315,56 @@ void Creature::processEvent(Event* event, CharConv* cv)
 	
 	if (event->m_data & Event::DATA_MOVE_INFO)
 	{
-		cv->fromBuffer(getMoveInfo()->m_speed_x);	
-		cv->fromBuffer(getMoveInfo()->m_speed_y);
-		DEBUG5("old action: %i at %f %f, dir %f %f",tmp,posx,posy,movex,movey);
-		DEBUG5("received action: %i at %f %f, dir %f %f",m_action.m_type, getGeometry()->m_shape.m_coordinate_x,	getGeometry()->m_shape.m_coordinate_y, getMoveInfo()->m_speed_x,getMoveInfo()->m_speed_y);
+		cv->fromBuffer(newmovex);	
+		cv->fromBuffer(newmovey);
+		newmove = true;
+		
 	}
 	
 	if (event->m_data & Event::DATA_LEVEL)
 	{
 		cv->fromBuffer(getBaseAttr()->m_level);	
+	}
+	
+	if (newmove)
+	{
+		// Zielort der Aktion berechnen
+		float acttime = m_action.m_time - m_action.m_elapsed_time;
+		float goalx = newx + newmovex*(acttime);
+		float goaly = newy + newmovey*(acttime);
+		
+		DEBUG5("goal %f %f current pos %f %f",goalx,goaly,getGeometry()->m_shape.m_coordinate_x,getGeometry()->m_shape.m_coordinate_y);
+		
+		// Zeit die zum erreichen des Zieles uebrig ist
+		float goaltime = acttime;
+		if (event->m_data & Event::DATA_ACTION)
+		{
+			goaltime -= cv->getDelay();
+		}
+		DEBUG5("time to reach goal %f",goaltime);
+		
+		if (goaltime <0)
+		{
+			// wenn man schon lange da sein muesste, Objekt an den Zielort versetzen
+			moveTo(goalx,goaly);
+		}
+		else
+		{
+			// Bewegungsgeschwindigkeit so setzen, dass
+			getMoveInfo()->m_speed_x = (goalx-getGeometry()->m_shape.m_coordinate_x) / goaltime;
+			getMoveInfo()->m_speed_y = (goaly-getGeometry()->m_shape.m_coordinate_y) / goaltime;
+			DEBUG5("new speed %f %f",getMoveInfo()->m_speed_x,getMoveInfo()->m_speed_y);
+		}
+			
+	}
+	
+	if (newact)
+	{
+		m_action.m_elapsed_time += cv->getDelay();	
+		if (!newmove)
+		{
+			moveTo(newx,newy);
+		}
 	}
 }
 

@@ -8,6 +8,8 @@ Network::Network()
 	
 	m_peer->Startup(1,10,&sock, 1);
 	
+	m_peer->ApplyNetworkSimulator( 0, 200, 0);
+	
 }
 
 

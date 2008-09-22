@@ -1025,8 +1025,8 @@ void World::handleSavegame(CharConv *cv, int slot)
 		
 		// Debugging: Region, Koordinaten setzen
 		pl->getGridLocation()->m_region =0;
-		pl->getGeometry()->m_shape.m_coordinate_x = 6;
-		pl->getGeometry()->m_shape.m_coordinate_y = 11;
+		pl->getGeometry()->m_shape.m_coordinate_x = 8;
+		pl->getGeometry()->m_shape.m_coordinate_y = 8;
 		
 		insertPlayerIntoRegion(pl,pl->getGridLocation()->m_region);
 		

@@ -2,6 +2,8 @@
 #define CHARCONV_H
 #include "raknet/RakNetTypes.h"
 #include "raknet/BitStream.h"
+#include "raknet/GetTime.h"
+#include "raknet/MessageIdentifiers.h"
 
 /**
  * \class CharConv
@@ -18,7 +20,9 @@ class CharConv
 	CharConv()
 	: m_bitstream()
 	{
-		
+		m_timestamp = RakNet::GetTime();
+		m_bitstream.Write((char) ID_TIMESTAMP);
+		m_bitstream.Write(m_timestamp);
 	}
 	
 	/**
@@ -30,7 +34,7 @@ class CharConv
 	CharConv(unsigned char* data, unsigned int size)
 	: m_bitstream(data, size, false)
 	{
-		
+		m_timestamp = RakNet::GetTime();
 	}
 	
 	/**
@@ -41,6 +45,16 @@ class CharConv
 	CharConv(Packet* packet)
 	: m_bitstream(packet->data, packet->length, false)
 	{
+		if (packet->data[0] == ID_TIMESTAMP)
+		{
+			char tmp;
+			fromBuffer(tmp);
+			fromBuffer(m_timestamp);
+		}
+		else
+		{
+			m_timestamp = RakNet::GetTime();
+		}
 		
 	}
 	
@@ -124,7 +138,12 @@ class CharConv
 	{
 		return m_bitstream.GetNumberOfBitsUsed();
 	}
-			
+	
+	unsigned long getDelay()
+	{
+		return RakNet::GetTime()-m_timestamp;
+	}
+	
 	
 	private:
 		/**
@@ -132,6 +151,12 @@ class CharConv
 		 * \brief enthaelt die Daten als Zeichenkette
 		 */
 		RakNet::BitStream m_bitstream;
+		
+		/**
+		 * \var unsigned long m_timestamp
+		 * \brief Zeit zur das Paket erstellt bzw erhalten wurde
+		 */
+		unsigned long m_timestamp;
 	
 };
 

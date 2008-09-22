@@ -95,7 +95,7 @@ public:
 		ANGER = 54,		//v
 		FURY = 55,		//w
 
-
+		// Schuetze Faehigkeiten
 		TRIPLE_SHOT = 64,	//a
 		GUIDED_TRIPLE_SHOT = 65,//b
 		MULTISHOT = 66,		//c
