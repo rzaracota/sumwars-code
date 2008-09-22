@@ -495,6 +495,12 @@ public:
 	{
 		return m_server;
 	}
+	
+	bool timerLimit(int i)
+	{
+		return m_timer_limit[i];
+	}
+			
 
 //Private stuff
 private:
@@ -567,5 +573,17 @@ private:
 	 * \brief Liste der globalen Events beim aktuellen update
 	 */
 	list<Event>* m_events;
+	
+	/**
+	 * \var float m_timer[3]
+	 * \brief Timer a 250, 500 und 1000 ms
+	 */
+	float m_timer[3];
+	
+	/**
+	 * \var  bool m_timer_limit[3]
+	 * \brief ist true, wenn der betreffende Timer gerade in dem Tick abgelaufen ist
+	 */
+	bool m_timer_limit[3];
 };
 #endif //WORLD_H

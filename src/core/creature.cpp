@@ -2365,15 +2365,17 @@ bool Creature::update (float time)
 	// besondere zeitabhaengige Effekte berechnen
 	if (getWorld()->isServer())
 	{
-		if (m_base_attr_mod.m_special_flags & FLAMEARMOR)
+		if (m_base_attr_mod.m_special_flags & FLAMEARMOR && getWorld()->timerLimit(2))
 		{
 			// Flammenruestung
-	
+			
+			
 			// Schaden fuer Flammenruestung setzen
 			Damage d;
-			d.m_min_damage[Damage::FIRE] = time*m_base_attr_mod.m_magic_power*0.0003;
-			d.m_max_damage[Damage::FIRE] = time*m_base_attr_mod.m_magic_power*0.0005;
+			d.m_min_damage[Damage::FIRE] = 500*m_base_attr_mod.m_magic_power*0.0003;
+			d.m_max_damage[Damage::FIRE] = 500*m_base_attr_mod.m_magic_power*0.0005;
 			d.m_multiplier[Damage::FIRE]=1;
+			d.m_attacker_fraction = getTypeInfo()->m_fraction;
 	
 			list<ServerWObject*> res;
 			res.clear();
@@ -2407,14 +2409,14 @@ bool Creature::update (float time)
 	// Statusmods behandeln
 	if (getState()==STATE_ACTIVE)
 	{
-		if (getWorld()->isServer())
+		if (getWorld()->isServer() && getWorld()->timerLimit(2))
 		{
 			// Vergiftet
 			if (m_dyn_attr.m_status_mod_time[Damage::POISONED]>0)
 			{
 				// Schaden pro Sekunde 1/60 der HP
 				DEBUG5("poisoned");
-				m_dyn_attr.m_health -= time*m_base_attr_mod.m_max_health / 60000;
+				m_dyn_attr.m_health -= 500*m_base_attr_mod.m_max_health / 60000;
 				m_event_mask |= Event::DATA_HP;
 			}
 	
@@ -2423,7 +2425,7 @@ bool Creature::update (float time)
 			{
 				// Schaden pro Sekunde 1/90 der HP (bei 0 Feuerresistenz)
 				DEBUG5("burning");
-				m_dyn_attr.m_health -= (100-m_base_attr_mod.m_resistances[Damage::FIRE])*time*m_base_attr_mod.m_max_health / 9000000;
+				m_dyn_attr.m_health -= (100-m_base_attr_mod.m_resistances[Damage::FIRE])*500*m_base_attr_mod.m_max_health / 9000000;
 				m_event_mask |= Event::DATA_HP;
 			}
 		}
@@ -3398,7 +3400,7 @@ void Creature::takeDamage(Damage* d)
 	if (getState() != STATE_ACTIVE)
 		return;
 
-	DEBUG4("take Damage %i",getId());
+	DEBUG5("take Damage %i",getId());
 	// Testen ob der Verursacher des Schadens feindlich gesinnt ist
 	if (getWorld()->getRelation(d->m_attacker_fraction,this) != HOSTILE)
 	{
@@ -3599,22 +3601,19 @@ void Creature::applyBaseAttrMod(CreatureBaseAttrMod* mod, bool add)
 	m_base_attr_mod.m_max_health += mod->m_dstrength*5;
 	m_base_attr_mod.m_attack_speed += mod->m_ddexterity*3;
 
-	if (mod->m_dmagic_power>0)
-	{
-		DEBUG("magic power mod %i",mod->m_dmagic_power);
-	}
+	
 	m_base_attr_mod.m_attack_speed +=mod->m_dattack_speed;
 	
 	// Modifikationen feststellen
-	if (mod->m_dwalk_speed!=0)
+	if (mod->m_dwalk_speed!=0 )
 	{
 		m_event_mask |= Event::DATA_WALK_SPEED;
 	}
-	if (mod->m_dattack_speed !=0)
+	if (mod->m_dattack_speed !=0 || mod->m_ddexterity!=0)
 	{
 		m_event_mask |= Event::DATA_ATTACK_SPEED;
 	}
-	if (mod->m_dmax_health !=0)
+	if (mod->m_dmax_health !=0 || mod->m_dstrength!=0)
 	{
 		m_event_mask |= Event::DATA_MAX_HP;
 	}
@@ -3688,11 +3687,11 @@ bool Creature::removeBaseAttrMod(CreatureBaseAttrMod* mod)
 	{
 		m_event_mask |= Event::DATA_WALK_SPEED;
 	}
-	if (mod->m_dattack_speed !=0)
+	if (mod->m_dattack_speed !=0 || mod->m_ddexterity!=0)
 	{
 		m_event_mask |= Event::DATA_ATTACK_SPEED;
 	}
-	if (mod->m_dmax_health !=0)
+	if (mod->m_dmax_health !=0 || mod->m_dstrength!=0)
 	{
 		m_event_mask |= Event::DATA_MAX_HP;
 	}
@@ -4143,6 +4142,7 @@ void Creature::writeEvent(Event* event, CharConv* cv)
 	
 	if (event->m_data & Event::DATA_WALK_SPEED)
 	{
+		DEBUG("walk changed for %i",getId());
 		cv->toBuffer(getBaseAttrMod()->m_walk_speed);
 	}
 	
@@ -4277,6 +4277,7 @@ void Creature::processEvent(Event* event, CharConv* cv)
 	
 	if (event->m_data & Event::DATA_WALK_SPEED)
 	{
+		DEBUG("walk speed changed for %i",getId());
 		cv->fromBuffer(getBaseAttrMod()->m_walk_speed);
 	}
 	

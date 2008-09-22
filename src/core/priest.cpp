@@ -41,7 +41,7 @@ bool Priest::init ()
 	
 	dyn->m_experience=0;
 	dyn->m_health = 200;
-	dyn->m_health = 1000;
+	dyn->m_health = 200;
 	
 	bas->m_max_experience = 100;
 //	bas->m_level =1;

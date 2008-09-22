@@ -272,7 +272,7 @@ bool DmgProjectile::update(float time)
 		}
 	}
 
-	if (m_type == FIRE_WALL)
+	if (m_type == FIRE_WALL && m_world->timerLimit(2))
 	{
 		// Typ Feuersaeule
 
@@ -290,7 +290,7 @@ bool DmgProjectile::update(float time)
 			// Schaden austeilen
 			hit = (*i);
 			float m = m_damage.m_multiplier[Damage::FIRE];
-			m_damage.m_multiplier[Damage::FIRE] *= dtime;
+			m_damage.m_multiplier[Damage::FIRE] *= 500;
 			hit->takeDamage(&m_damage);
 			m_damage.m_multiplier[Damage::FIRE] = m;
 		}

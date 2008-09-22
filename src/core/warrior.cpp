@@ -70,7 +70,7 @@ bool Warrior::init ()
 	for (i=1;i<6;i++)
 		bas->m_abilities[i]=0;
 
-	bas->m_abilities[0] = 0x3f1f;
+	bas->m_abilities[0] = 0xffffff;
 	bas->m_attack_range =1;
 
 	bas->m_special_flags=0;

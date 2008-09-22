@@ -1157,6 +1157,21 @@ int World::getValidProjectileId()
 
 void World::update(float time)
 {
+	// Timer weiterzaehlen und Limits feststellen
+	float timer_max[3];
+	timer_max[0] = 250; timer_max[2] = 500; timer_max[3] = 1000; 
+	for (int i=0; i<3; i++)
+	{
+		m_timer[i] += time;
+		m_timer_limit[i] = false;
+		if (m_timer[i] > timer_max[i])
+		{
+			m_timer[i] -= timer_max[i];
+			m_timer_limit[i] = true;
+		}
+	}	
+	
+	
 	m_events->clear();
 	
 	DEBUG5("update %f",time);
