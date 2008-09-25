@@ -772,9 +772,6 @@ void Region::update(float time)
 	map<int,DmgProjectile*>::iterator it3;
 	
 	
-	// alle bisherigen Events loeschen
-	m_events->clear();
-	
 	// alle Eventsmasken loeschen
 	for (iter =m_objects->begin(); iter!=m_objects->end(); ++iter)
 	{
@@ -951,6 +948,17 @@ void Region::getRegionData(CharConv* cv)
 		kt->second->toString(cv);	
 	}
 	
+	cv->toBuffer<short>((short) m_drop_items->size());
+	DEBUG("dropped items: %i",m_drop_items->size());
+	
+	//  Items in den Puffer eintragen
+	map<int,DropItem*>::iterator lt;
+	for (lt = m_drop_items->begin(); lt != m_drop_items->end(); ++lt)
+	{
+		cv->toBuffer(lt->second->m_x);
+		cv->toBuffer(lt->second->m_y);
+		lt->second->m_item->toString(cv);
+	}
 }
 
 
@@ -1022,6 +1030,36 @@ void Region::createProjectileFromString(CharConv* cv)
 	insertProjectile(proj,x,y);
 }
 
+void Region::createItemFromString(CharConv* cv, int id)
+{
+	char type;
+	char subtype[11];
+	subtype[10] ='\0';
+	Item* item;
+	
+	cv->fromBuffer<char>(type);
+	cv->fromBuffer(subtype,10);
+		
+	item = ItemFactory::createItem((Item::Type) type, std::string(subtype));
+	item->fromString(cv);
+	
+	short sx = id / 10000;
+	short sy = id % 10000;
+	
+	DropItem* di = new DropItem;
+	di->m_item = item;
+	di->m_x = sx;
+	di->m_y = sy;
+	DEBUG5("dropped item %i", sx*10000+sy);
+	di->m_time = 0;
+			
+	Gridunit* gu = (m_data_grid->ind(sx/8,sy/8));
+			
+	gu->insertItem(di);
+	m_drop_items->insert(make_pair(id,di));
+}
+
+
 void Region::setRegionData(CharConv* cv,map<int,ServerWObject*>* players)
 {
 	// Groesse der Region wird schon vorher eingelesen
@@ -1082,20 +1120,7 @@ void Region::setRegionData(CharConv* cv,map<int,ServerWObject*>* players)
 	{
 		createObjectFromString(cv,players);
 	}
-	
-	/*
-	DEBUG("objects");
-	map<int,ServerWObject*>::iterator mt;
-	for (mt = m_static_objects->begin();mt!=m_static_objects->end();mt++)
-	{
-		DEBUG("%s id %i at %f %f",mt->second->getTypeInfo()->m_subtype.c_str(),mt->second->getId(), mt->second->getGeometry()->m_shape.m_coordinate_x,mt->second->getGeometry()->m_shape.m_coordinate_y);
-	}
-	
-	for (mt = m_objects->begin();mt!=m_objects->end();mt++)
-	{
-		DEBUG("%s id %i at %f %f",mt->second->getTypeInfo()->m_subtype.c_str(),mt->second->getId(), mt->second->getGeometry()->m_shape.m_coordinate_x,mt->second->getGeometry()->m_shape.m_coordinate_y);
-	}
-	*/
+
 	
 	// Anzahl der Projektile einlesen
 	short nr_proj;
@@ -1105,6 +1130,20 @@ void Region::setRegionData(CharConv* cv,map<int,ServerWObject*>* players)
 	for (int i=0; i<nr_proj;i++)
 	{
 		createProjectileFromString(cv);
+	}
+	
+	// Anzahl Gegenstaende einlesen
+	short nr_items;
+	cv->fromBuffer<short>(nr_items);
+	DEBUG("items: %i",nr_items);
+	// Gegenstaende einlesen
+	short sx,sy;
+	for (int i=0; i<nr_items;i++)
+	{
+		cv->fromBuffer(sx);
+		cv->fromBuffer(sy);
+		createItemFromString(cv, sx*10000+sy);
+			
 	}
 	
 }
@@ -1183,6 +1222,15 @@ bool  Region::dropItem(Item* item, float x, float y)
 			m_drop_items->insert(make_pair(i,di));
 			
 			DEBUG5("items dropped at %i %i",sx,sy);
+			
+			if (m_world->isServer())
+			{
+				Event event;
+				event.m_type = Event::ITEM_DROPPED;
+				event.m_id = i;
+				
+				insertEvent(event);
+			}
 			
 			return true;
 			
@@ -1313,6 +1361,16 @@ bool Region::deleteItem(int id)
 		delete (it->second);
 		
 		m_drop_items->erase(it);
+		
+		// Event einfuegen, dass das Item entfernt wurde
+		if (m_world->isServer())
+		{
+			Event event;
+			event.m_type = Event::ITEM_REMOVED;
+			event.m_id = id;
+			
+			insertEvent(event);
+		}
 		
 		return true;
 	}

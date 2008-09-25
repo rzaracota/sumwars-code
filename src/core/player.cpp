@@ -420,7 +420,7 @@ bool Player::onItemClick(ClientCommand* command)
 			else
 			{
 			// Item soll im Inventar abgelegt werden
-			DEBUG("swap in inventory");
+			DEBUG5("swap in inventory");
 
 			// Groesse die das Item haben muss
 				Item::Size size = Item::BIG;
@@ -456,6 +456,25 @@ bool Player::onItemClick(ClientCommand* command)
 
 		// Vertauschen von Cursoritem und angeklicktem Item
 		m_equipement->swapCursorItem(pos);
+		
+		if (getWorld()->isServer() && pos <Equipement::CURSOR_ITEM)
+		{
+			// Ausruestungsgegenstand wurde getauscht
+			Event event;
+			event.m_id = getId();
+			event.m_data = pos;
+			
+			if (m_equipement->getItem(pos) == 0)
+			{
+				event.m_type = Event::PLAYER_NOITEM_EQUIPED;
+			}
+			else
+			{
+				event.m_type = Event::PLAYER_ITEM_EQUIPED;
+			}
+			DEBUG("event: %i at %i",event.m_type,event.m_data);
+			getWorld()->insertEvent(event);
+		}
 
 		Item* itm;
 		if (pos==Equipement::WEAPON || pos == Equipement::WEAPON2)
@@ -472,6 +491,18 @@ bool Player::onItemClick(ClientCommand* command)
 					if (pos == Equipement::WEAPON2)
 						shpos = Equipement::SHIELD2;
 					
+					if (getWorld()->isServer())
+					{
+						Event event;
+						event.m_type =  Event::PLAYER_NOITEM_EQUIPED;
+						event.m_data = shpos;
+						event.m_id = getId();
+							
+						DEBUG5("event: no item at %i",shpos);
+							
+						getWorld()->insertEvent(event);
+					}
+					
 					// Wenn aktuell kein Item am Cursor gehalten wird
 					if (m_equipement->getItem(Equipement::CURSOR_ITEM)==0)
 					{
@@ -484,6 +515,9 @@ bool Player::onItemClick(ClientCommand* command)
 						itm =0;
 						// Schild aus dem Schildslot holen
 						m_equipement->swapItem( itm,shpos);
+						
+						// wenn man sich auf Serverseite befindet: Event generieren
+						
 						
 						if (!getEquipement()->insertItem(itm))
 						{
@@ -508,6 +542,18 @@ bool Player::onItemClick(ClientCommand* command)
 				short wpos= Equipement::WEAPON;
 				if (pos == Equipement::SHIELD2)
 					wpos = Equipement::WEAPON2;
+				
+				if (getWorld()->isServer())
+				{
+					Event event;
+					event.m_type =  Event::PLAYER_NOITEM_EQUIPED;
+					event.m_data = wpos;
+					event.m_id = getId();
+							
+					DEBUG5("event: no item at %i",wpos);
+							
+					getWorld()->insertEvent(event);
+				}
 			
 				m_equipement->swapCursorItem(wpos);
 			}
@@ -680,7 +726,7 @@ void Player::gainLevel()
 }
 
 
-bool Player::onClientCommand( ClientCommand* command)
+bool Player::onClientCommand( ClientCommand* command, float delay)
 {
 	DEBUG5("Kommando (%f %f) button: %i id: %i action: %i",command->m_coordinate_x,command->m_coordinate_y,command->m_button,command->m_id, command->m_action);
 
@@ -694,6 +740,10 @@ bool Player::onClientCommand( ClientCommand* command)
 	
 	// prob_size, min level, max_level, prob_magic, magic_power
 	ds.init(prob, 0,20, 0.3, 2000);
+	
+	// Kopie des aktuellen Kommandos anlegen
+	Command oldcommand;
+	memcpy(&oldcommand,getNextCommand(),sizeof(Command));
 
 	switch(command->m_button)
 	{
@@ -748,8 +798,8 @@ bool Player::onClientCommand( ClientCommand* command)
 			break;
 
 		case BUTTON_SAVE_QUIT:
-			DEBUG("players wants to quit, sending savegame");
-			sendSavegame();
+			setState(STATE_QUIT);
+			DEBUG("player wants to quit");
 			break;
 
 		case BUTTON_SWAP_EQUIP:
@@ -885,6 +935,73 @@ bool Player::onClientCommand( ClientCommand* command)
 
 		default: ;
 	}
+	
+	if (oldcommand != *getNextCommand() && delay>0)
+	{
+		// naechstes Kommando hat sich geaendert
+		// die aktuelle Aktion basiert eventuell auf einem veralteten Kommando
+		
+		if (getAction()->m_type == Action::NOACTION || getAction()->m_elapsed_time < delay)
+		{
+			// Aktion basiert auf veraltetem Kommando
+			// abbrechen
+			abortAction();
+			
+			// neue Aktion berechnen
+			calcAction();
+			initAction();
+			calcDamage(getAction()->m_type,*(getDamage()));
+			
+			DEBUG5("new action %i time %f",getAction()->m_type,getAction()->m_time);
+			
+			// Action entsprechend der Verzoegerung schneller ausfuehren
+			// aber maximal doppelt so schnell
+			float mult = std::max(getAction()->m_time-delay, getAction()->m_time/2)/getAction()->m_time;
+			DEBUG5("delay %f mult %f",delay,mult);
+			if (getAction()->m_type == Action::WALK)
+			{
+				// Laufgeschwindigkeit entsprechend erhoehen
+				getMoveInfo()->m_speed_x /= mult;
+				getMoveInfo()->m_speed_y /= mult;
+					
+			}
+			getAction()->m_time *= mult;
+			DEBUG5("faster action time %i",getAction()->m_time);
+		}
+		
+	}
+}
+
+
+void Player::abortAction()
+{
+	float time = getAction()->m_elapsed_time;
+	Action::ActionInfo* aci = Action::getActionInfo(getAction()->m_type);
+
+	DEBUG5("abort Action %i (elapsed time %f)",getAction()->m_type, time);
+
+	
+	if (getAction()->m_type == Action::WALK)
+	{
+		// Position zurueck setzen
+		getGeometry()->m_shape.m_coordinate_x -= getMoveInfo()->m_speed_x*time;
+		getGeometry()->m_shape.m_coordinate_y -= getMoveInfo()->m_speed_y*time;
+	}
+	
+	// Timer wieder zuruecksetzen
+	if (aci->m_timer_nr==1)
+	{
+		 m_timer1=0;
+		 m_timer1_max=0;
+	}
+	
+	if (aci->m_timer_nr==2)
+	{
+		m_timer2=0;
+		m_timer2_max=0;
+	}
+	
+	m_event_mask |= Event::DATA_ACTION;
 }
 
 bool Player::update(float time)
@@ -1550,22 +1667,29 @@ void Player::toString(CharConv* cv)
 	
 	cv->toBuffer(getBaseAttr()->m_level);
 	
-		
-
-	/*
-#define hex(a) ((a)>=10) ? (a)-10+'a' : (a)+'0'
-	unsigned char* cp;
-	for (int i=-12;i<25;i++)
+	// Items
+	char cnt =0;
+	Item* item;
+	for ( short i = Equipement::ARMOR; i<= Equipement::SHIELD2; i++)
 	{
-		cp = (unsigned char*) buf+i;
-		//if (i%10==8)
-		//	printf("\n %p\n",cp);
-
-		printf("%c%c ",hex(*cp/16),hex(*cp%16));
-
+		item = getEquipement()->getItem(i);
+		if (item !=0)
+			cnt++;
 	}
-	printf("\n\n");
-*/
+	DEBUG5("number of items: %i",cnt);
+	cv->toBuffer(cnt);
+	
+	
+	for ( short i = Equipement::ARMOR; i<= Equipement::SHIELD2; i++)
+	{
+		item = getEquipement()->getItem(i);
+		if (item !=0)
+		{
+			cv->toBuffer(i);
+			item->toString(cv);
+			
+		}
+	}
 
 }
 
@@ -1580,9 +1704,38 @@ void Player::fromString(CharConv* cv)
 	
 	cv->fromBuffer(getBaseAttr()->m_level);
 	
+	char cnt;
+	cv->fromBuffer(cnt);
+	DEBUG5("number of items: %i",cnt);
+	
+	
+	for ( short i = 0; i< cnt; i++)
+	{
+		readItem(cv);
+	}
 	
 }
 
+void Player::readItem(CharConv* cv)
+{
+	short pos;
+	char type;
+	char subtype[11];
+	subtype[10] ='\0';
+	Item* item;
+	
+	cv->fromBuffer<short>(pos);
+	cv->fromBuffer<char>(type);
+	cv->fromBuffer(subtype,10);
+	
+		
+	item = ItemFactory::createItem((Item::Type) type, std::string(subtype));
+	item->fromString(cv);
+	getEquipement()->swapItem(item,pos);
+		
+	if (item !=0)
+		delete item;
+}
 
 void Player::toStringComplete(CharConv* cv)
 {
@@ -1810,6 +1963,7 @@ void Player::fromSavegame(CharConv* cv)
 
 void Player::writeEquipement(CharConv* cv)
 {
+	/*
 	ServerItem* it;
 
 	short nr=0;
@@ -1835,11 +1989,12 @@ void Player::writeEquipement(CharConv* cv)
 	}
 
 	DEBUG5("written %i items",nr);
-
+	*/
 }
 
 void Player::loadEquipement(CharConv* cv)
 {
+	/*
 	m_equipement->clear();
 	ServerItem* it;
 	Item* itm;
@@ -1858,7 +2013,7 @@ void Player::loadEquipement(CharConv* cv)
 		itm  = it;
 		m_equipement->swapItem(itm,pos);
 	}
-
+	*/
 }
 
 

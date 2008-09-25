@@ -20,5 +20,16 @@ void Command::fromString(CharConv* cv)
 	cv->fromBuffer(m_range);
 	m_damage_mult =1;	
 }
+		
+		
+bool Command::operator!=(Command& other)
+{
+	return (m_type != other.m_type || m_goal_object_id != other.m_goal_object_id 
+			|| m_goal_coordinate_x != other.m_goal_coordinate_x
+			|| m_goal_coordinate_y != other.m_goal_coordinate_y);
+			
+	
+}
+
 
 

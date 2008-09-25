@@ -107,6 +107,12 @@ void WindowMain::SpecialKeyboardFunc (int key, int x, int y)
 
 void WindowMain::TimerFunc(int dummy)
 {
+	/*
+	timeval tv;
+	gettimeofday(&tv, NULL);
+	DEBUG("system time %i",tv.tv_usec/1000);
+	*/
+	
 	if (global_doc->getState() == Document::SHUTDOWN)
 		exit(0);
 	

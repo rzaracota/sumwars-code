@@ -347,7 +347,6 @@ class MainWindow :
 	 */
 	bool consumeEvent(const CEGUI::EventArgs& evt)
 	{
-		DEBUG("consumed");
 		m_gui_hit = true;
 		return true;
 	}

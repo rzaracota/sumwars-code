@@ -22,6 +22,9 @@
 
 using namespace std;
 
+
+#include <sys/time.h>
+
 #include <string>
 #include <list>
 #include <map>
@@ -367,12 +370,12 @@ public:
 	void writeEvent(Region* region, Event* event, CharConv* cv);
 	
 	/**
-	 * \fn void processEvent(CharConv* cv)
+	 * \fn bool processEvent(CharConv* cv)
 	 * \brief Liest ein Event aus dem Bitstream und fuehrt es aus
 	 * \param region Region in der das Event aufgetreten ist
 	 * \param cv Bitstream
 	 */
-	void processEvent(Region* region,CharConv* cv);
+	bool processEvent(Region* region,CharConv* cv);
 
 	/**
 	 * \fn void calcBlockArray(PathfindInfo* p)
@@ -467,8 +470,9 @@ public:
 	 * \brief Behandelt ein erhaltenes Kommmando
 	 * \param cmd Kommando
 	 * \param slot Slot ueber den das Kommando empfangen wurde. Wenn das Kommando nicht ueber das Netzwerk uebertragen wurde -1
+	 * \param delay Millisekunden die das Kommando verspaetet erhalten wurde
 	 */
-	void handleCommand(ClientCommand* cmd, int slot=LOCAL_SLOT);
+	void handleCommand(ClientCommand* cmd, int slot=LOCAL_SLOT, float delay=0);
 	
 	/**
 	 * \fn void handleDataRequest(ClientDataRequest* request, int slot  = LOCAL_SLOT)
@@ -482,10 +486,7 @@ public:
 	 * \fn void insertEvent(Event &event)
 	 * \brief Fuegt ein neues Event in die Eventliste ein
 	 */
-	void insertEvent(Event &event)
-	{
-		m_events->push_back(event);
-	}
+	void insertEvent(Event &event);
 	
 	/**
 	 * \fn bool isServer()
@@ -500,6 +501,8 @@ public:
 	{
 		return m_timer_limit[i];
 	}
+	
+	
 			
 
 //Private stuff

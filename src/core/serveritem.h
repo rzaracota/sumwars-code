@@ -231,7 +231,7 @@ struct ServerItem : public Item
 	 * \param buf Ausgabepuffer
 	 * \return Zeiger hinter den beschriebenen Datenbereich
 	 */
-	void toStringComplete(CharConv* cv, short pos);
+	void toStringComplete(CharConv* cv);
 
 
 	/**
@@ -240,7 +240,7 @@ struct ServerItem : public Item
 	 * \param buf Zeiger auf Savegame
 	 * \return Zeiger hinter den Datenbereich
 	 */
-	void fromStringComplete(CharConv* cv, short& pos);
+	void fromStringComplete(CharConv* cv);
 
 
 	/**

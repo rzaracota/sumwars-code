@@ -4,12 +4,12 @@
 Network::Network()
 {
 	m_peer = RakNetworkFactory::GetRakPeerInterface();
-	SocketDescriptor sock;
 	
-	m_peer->Startup(1,10,&sock, 1);
+	m_peer->SetOccasionalPing(true);
 	
-	m_peer->ApplyNetworkSimulator( 0, 200, 0);
-	
+	// m_peer->ApplyNetworkSimulator( 0, 100, 0);
+	// m_peer->ApplyNetworkSimulator( 0, 100, 500);
+	// m_peer->ApplyNetworkSimulator( 0, 100, 2000);
 }
 
 

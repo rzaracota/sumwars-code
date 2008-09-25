@@ -350,6 +350,7 @@ void Document::onButtonSendMessageClicked ( )
 
 void Document::onButtonSaveExitClicked ( )
 {
+	
 	if (m_state!=SHUTDOWN_REQUEST)
 	{
 		setState(SHUTDOWN_REQUEST);
@@ -358,6 +359,8 @@ void Document::onButtonSaveExitClicked ( )
 	{
 		setState(SHUTDOWN);
 	}
+	
+	m_shutdown_timer =0;
 
 	ClientCommand command;
 
@@ -459,6 +462,10 @@ void Document::onLeftMouseButtonClick(float x, float y)
 	
 	
 	int id = getObjectAt(x,y);
+	if (getGUIState()->m_cursor_object_id != 0)
+	{
+		id = getGUIState()->m_cursor_object_id;
+	}
 	
 	m_gui_state.m_clicked_object_id = id;
 	command.m_id =id;
@@ -466,7 +473,7 @@ void Document::onLeftMouseButtonClick(float x, float y)
 
 	if (command.m_id!=0)
 	{
-		DEBUG5("angeklicktes Objekt %i",command.m_id);
+		DEBUG("angeklicktes Objekt %i",command.m_id);
 	}
 
 	if (command.m_id ==0 && m_gui_state.m_cursor_item_id!=0)
@@ -935,7 +942,10 @@ bool  Document::onKeyRelease(KeyCode key)
 void Document::update(float time)
 {
 	// Welt eine Zeitscheibe weiter laufen lassen
-	m_world->update(time);
+	if (m_world != 0)
+	{
+		m_world->update(time);
+	}
 	
 	DEBUG5("modified is %i",m_modified);
 	DEBUG5("State is %i",m_state);
@@ -968,6 +978,11 @@ void Document::update(float time)
 
 		case SHUTDOWN_REQUEST:
 			updateContent(time);
+			m_shutdown_timer += time;
+			if (m_shutdown_timer>400)
+			{
+				setState(SHUTDOWN);
+			}
 			break;
 
 		case SHUTDOWN_WRITE_SAVEGAME:

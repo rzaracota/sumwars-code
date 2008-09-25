@@ -498,7 +498,7 @@ int Equipement::getNumberItems(bool secondary_equip)
 	
 void Equipement::toString(CharConv* cv, int & nr, bool secondary_equip)
 {
-
+/*
 	nr=0;
 	// Ausruestungsgegenstaende
 	if (m_armor)
@@ -601,7 +601,7 @@ void Equipement::toString(CharConv* cv, int & nr, bool secondary_equip)
 			nr++;
 		}
 	}
-	
+*/
 	
 
 }
@@ -609,7 +609,7 @@ void Equipement::toString(CharConv* cv, int & nr, bool secondary_equip)
 void Equipement::fromString(CharConv* cv, int nr)
 {	
 
-	
+/*
 	int i;
 	short pos;
 	Item* it;
@@ -625,7 +625,7 @@ void Equipement::fromString(CharConv* cv, int nr)
 		swapItem(it,pos);
 	}
 	
-	
+	*/
 
 }
 

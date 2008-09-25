@@ -82,6 +82,12 @@ public:
 	 * \return Zeiger hinter den gelesenen Datenbereich
 	 */
 	virtual void fromString(CharConv* cv);
+	
+	/**
+	 * \fn bool operator!=(Command& other)
+	 * \brief Vergleichsoperator auf Ungleichheit
+	 */
+	bool operator!=(Command& other);
 
 	/**
 	 * \fn Command()

@@ -161,9 +161,10 @@ public:
 	 * \fn bool onClientCommand( ClientCommand* command)
 	 * \brief  Reaktion auf eine Anweisung des Nutzers
 	 * \param command Kommando des Nutzers
+	 * \param delay Millisekunden die das Kommando verspaetet erhalten wurde
 	 * \return bool gibt an, ob die Behandlung fehlerfrei verlaufen ist
 	 */
-	bool onClientCommand( ClientCommand* command);
+	bool onClientCommand( ClientCommand* command, float delay =0);
 	
 	/**
 	 * \fn bool onGamefieldClick(ClientCommand* command)
@@ -180,6 +181,12 @@ public:
 	 * \return gibt an, ob die Behandlung fehlerfrei verlaufen ist
 	 */
 	bool onItemClick(ClientCommand* command);
+	
+	/**
+	 * \fn void abortAction()
+	 * \brief Bricht die aktuell angefangene Aktion ab
+	 */
+	void abortAction();
 	
 	
 	/**
@@ -232,6 +239,12 @@ public:
 	 * \return Zeiger hinter den beschriebenen Datenbereich
 	 */
 	virtual void toStringComplete(CharConv* cv);
+	
+	/**
+	 * \fn void readItem(CharConv* cv)
+	 * \brief Liest ein Item aus dem Bitstream und fuegt es ins Inventar ein
+	 */
+	void readItem(CharConv* cv);
 	
 	/**
 	 * \fn void writeEquipement(CharConv* cv)

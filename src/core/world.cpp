@@ -866,14 +866,6 @@ bool World::moveSWObject(ServerWObject* object, float x, float y)
 		 return false;
 	 
 	 result &= r->deleteSWObject(object);
-	 
-	 /*
-	 if (object->getTypeInfo()->m_type == WorldObject::TypeInfo::TYPE_PLAYER)
-	 {
-		 DEBUG("Player deleted");
-		 m_players->erase(object->getId());
-	 }
-	 */
 	
 }
 
@@ -1025,7 +1017,7 @@ void World::handleSavegame(CharConv *cv, int slot)
 		
 		// Debugging: Region, Koordinaten setzen
 		pl->getGridLocation()->m_region =0;
-		pl->getGeometry()->m_shape.m_coordinate_x = 8;
+		pl->getGeometry()->m_shape.m_coordinate_x = 12;
 		pl->getGeometry()->m_shape.m_coordinate_y = 8;
 		
 		insertPlayerIntoRegion(pl,pl->getGridLocation()->m_region);
@@ -1099,7 +1091,7 @@ void World::handleSavegame(CharConv *cv, int slot)
 }
 
 
-void World::handleCommand(ClientCommand* comm, int slot)
+void World::handleCommand(ClientCommand* comm, int slot, float delay)
 {
 	DEBUG5("Kommando (%f %f) button: %i id: %i action: %i",comm->m_coordinate_x,comm->m_coordinate_y,comm->m_button, comm->m_id,comm->m_action);
 
@@ -1121,8 +1113,12 @@ void World::handleCommand(ClientCommand* comm, int slot)
 		// Kommando in den Puffer schreiben
 		comm->toString(&cv);
 		
+		/*
+		timeval tv;
+		gettimeofday(&tv, NULL);
+		DEBUG("timestamp %i system time %i",cv.getTimestamp(),tv.tv_usec/1000);
 
-
+		*/
 	 	// Datenpaket zum Server senden
 		getNetwork()->pushSlotMessage(cv.getBitStream());
 	}
@@ -1134,7 +1130,7 @@ void World::handleCommand(ClientCommand* comm, int slot)
 	}
 	else
 	{
-		pl->onClientCommand(comm);
+		pl->onClientCommand(comm,delay);
 	}
 	
 	
@@ -1159,7 +1155,7 @@ void World::update(float time)
 {
 	// Timer weiterzaehlen und Limits feststellen
 	float timer_max[3];
-	timer_max[0] = 250; timer_max[2] = 500; timer_max[3] = 1000; 
+	timer_max[0] = 200; timer_max[2] = 500; timer_max[3] = 1000; 
 	for (int i=0; i<3; i++)
 	{
 		m_timer[i] += time;
@@ -1171,8 +1167,6 @@ void World::update(float time)
 		}
 	}	
 	
-	
-	m_events->clear();
 	
 	DEBUG5("update %f",time);
 	for (int i=0;i<WORLD_MAX_REGIONS;i++)
@@ -1229,6 +1223,16 @@ void World::update(float time)
 	
 	updatePlayers();
 	
+	m_events->clear();
+	
+	for (int i=0;i<WORLD_MAX_REGIONS;i++)
+	{
+		if (m_regions[i]!=0)
+		{
+			m_regions[i]->getEvents()->clear();
+		}
+	}
+	
 	m_network->update();
 	
 }
@@ -1239,10 +1243,29 @@ void World::updatePlayers()
 	map<int,ServerWObject*>::iterator it;
 	Player* pl;
 	int slot;
-	for (it = m_player_slots->begin(); it != m_player_slots->end(); ++it)
+	for (it = m_player_slots->begin(); it != m_player_slots->end(); )
 	{
 		slot = it->first;
 		pl = static_cast<Player*>(it->second);
+		
+		if (m_server && slot != LOCAL_SLOT &&  
+				  (m_network->getSlotStatus( slot )!=NET_CONNECTED || pl->getState() == WorldObject::STATE_QUIT))
+		{
+			Event event;
+			event.m_type = Event::PLAYER_QUIT;
+			event.m_id = pl->getId();
+			
+			insertEvent(event);
+			
+			deleteSWObject(pl);
+			m_players->erase( pl->getId());
+			m_player_slots->erase(it++);
+			
+			DEBUG("player %i has quit",pl->getId());
+			
+			delete pl;
+			continue;
+		}
 		
 		if (pl->getState() == WorldObject::STATE_REGION_DATA_REQUEST)
 		{
@@ -1280,43 +1303,44 @@ void World::updatePlayers()
 			Packet* data;
 			CharConv* cv;
 			
-			if (m_network->getSlotStatus( slot )!=NET_CONNECTED)
+			
+			while (m_network->numberSlotMessages( slot )>0)
 			{
-				// disconnect
-			}
-			else
-			{
-				while (m_network->numberSlotMessages( slot )>0)
+				m_network->popSlotMessage( data ,slot);
+	
+				cv = new CharConv(data);
+
+				headerp.fromString(cv);
+				
+				if (headerp.m_content ==  PTYPE_C2S_COMMAND)
 				{
-					m_network->popSlotMessage( data ,slot);
-		
-					cv = new CharConv(data);
+					// Kommando Daten erhalten
+					ClientCommand com;
 
-					headerp.fromString(cv);
+					// Spielerobjekt die Daten senden
+					com.fromString(cv);
 					
-					if (headerp.m_content ==  PTYPE_C2S_COMMAND)
-					{
-						// Kommando Daten erhalten
-						ClientCommand com;
-
-						// Spielerobjekt die Daten senden
-						com.fromString(cv);	
-						
-						handleCommand(&com,slot);
-					}
+					/*
+					timeval tv;
+					gettimeofday(&tv, NULL);
+					DEBUG("timestamp %i delay %i  system time %i",cv->getTimestamp(), cv->getDelay(),tv.tv_usec/1000);
+					*/
 					
-					if (headerp.m_content == PTYPE_C2S_DATA_REQUEST)
-					{
-						// Datenanfrage erhalten
-						ClientDataRequest req;
-						req.fromString(cv);
-							
-						handleDataRequest(&req,slot);
-					}
-					
-					delete cv;
+					handleCommand(&com,slot,cv->getDelay());
 				}
+				
+				if (headerp.m_content == PTYPE_C2S_DATA_REQUEST)
+				{
+					// Datenanfrage erhalten
+					ClientDataRequest req;
+					req.fromString(cv);
+						
+					handleDataRequest(&req,slot);
+				}
+				
+				delete cv;
 			}
+			
 		}
 		
 		if (m_server)
@@ -1334,6 +1358,7 @@ void World::updatePlayers()
 			}
 		}
 		
+		++it;
 	}
 	
 	if (!m_server)
@@ -1434,9 +1459,13 @@ void World::updatePlayers()
 				{
 					Region* reg = m_local_player->getRegion();
 					
+					bool ret;
 					for (int n=0; n< headerp.m_number;n++)
 					{
-						processEvent(reg,cv);
+						ret = processEvent(reg,cv);
+						
+						if (ret == false)
+							break;
 					}
 
 				}
@@ -1448,6 +1477,8 @@ void World::updatePlayers()
 	}
 	
 	
+	
+
 	if (m_server)
 	{
 		// Nachrichten ueber die Events zur den Clients senden
@@ -1484,6 +1515,7 @@ void World::updatePlayers()
 				// globale Events
 				for (lt = m_events->begin(); lt != m_events->end(); ++lt)
 				{
+					DEBUG5(" send global event %i id %i",lt->m_type,lt->m_id);
 					writeEvent(reg,&(*lt),&msg);
 				}
 				
@@ -1514,28 +1546,40 @@ void World::writeEvent(Region* region,Event* event, CharConv* cv)
 	
 	ServerWObject* object;
 	DmgProjectile* proj;
-	if (event->m_type == Event::OBJECT_CREATED)
+	Item* item;
+	if (region !=0)
 	{
-		object =region->getSWObject(event->m_id);
-		object->toString(cv);
-	}
-	
-	if (event->m_type == Event::OBJECT_STAT_CHANGED)
-	{
-		object =region->getSWObject(event->m_id);
-		object->writeEvent(event,cv);
-	}
-	
-	if (event->m_type == Event::PROJECTILE_CREATED)
-	{
-		proj = region->getProjectile(event->m_id);
-		proj->toString(cv);
-	}
-	
-	if (event->m_type == Event::PROJECTILE_STAT_CHANGED)
-	{
-		proj = region->getProjectile(event->m_id);
-		proj->writeEvent(event,cv);
+		if (event->m_type == Event::OBJECT_CREATED)
+		{
+			object =region->getSWObject(event->m_id);
+			object->toString(cv);
+		}
+		
+		if (event->m_type == Event::OBJECT_STAT_CHANGED)
+		{
+			
+			object =region->getSWObject(event->m_id);
+			object->writeEvent(event,cv);
+			
+		}
+		
+		if (event->m_type == Event::PROJECTILE_CREATED)
+		{
+			proj = region->getProjectile(event->m_id);
+			proj->toString(cv);
+		}
+		
+		if (event->m_type == Event::PROJECTILE_STAT_CHANGED)
+		{
+			proj = region->getProjectile(event->m_id);
+			proj->writeEvent(event,cv);
+		}
+		
+		if (event->m_type == Event::ITEM_DROPPED)
+		{
+			item = region->getItem(event->m_id);
+			item->toString(cv);
+		}
 	}
 	
 	if (event->m_type == Event::PLAYER_CHANGED_REGION)
@@ -1545,10 +1589,18 @@ void World::writeEvent(Region* region,Event* event, CharConv* cv)
 		cv->toBuffer(object->getGeometry()->m_shape.m_coordinate_y);
 				
 	}
+	
+	if (event->m_type == Event::PLAYER_ITEM_EQUIPED)
+	{
+		DEBUG("send event: player equiped item");
+		object = (*m_players)[event->m_id];
+		cv->toBuffer<short>((short) event->m_data);
+		static_cast<Player*>(object)->getEquipement()->getItem(event->m_data)->toString(cv);
+	}
 }
 
 
-void World::processEvent(Region* region,CharConv* cv)
+bool World::processEvent(Region* region,CharConv* cv)
 {
 	Event event;
 	event.fromString(cv);
@@ -1575,6 +1627,7 @@ void World::processEvent(Region* region,CharConv* cv)
 		{
 			// Event erhalten zu dem kein Objekt gehoert
 			DEBUG("object %i for event does not exist",event.m_id);
+			return false;
 		}
 	}
 	
@@ -1605,6 +1658,10 @@ void World::processEvent(Region* region,CharConv* cv)
 		{
 			proj->processEvent(&event,cv);
 		}
+		else
+		{
+			return false;
+		}
 	}
 	
 	if (event.m_type == Event::PROJECTILE_DESTROYED)
@@ -1634,6 +1691,72 @@ void World::processEvent(Region* region,CharConv* cv)
 			}
 		}
 	}
+	
+	if (event.m_type == Event::PLAYER_QUIT)
+	{
+		if (m_players->count(event.m_id)>0)
+		{
+			object = (*m_players)[event.m_id];
+			if (object != m_local_player)
+			{
+				deleteSWObject(object);
+				m_players->erase( object->getId());
+				
+				map<int,ServerWObject*>::iterator it;
+				for (it = m_player_slots->begin(); it != m_player_slots->end(); ++it)
+				{
+					if (it->second == object)
+					{
+						m_player_slots->erase(it);
+						break;
+					}
+
+				}
+				
+				delete object;
+			}
+		}
+	}
+	
+	if (event.m_type == Event::ITEM_DROPPED)
+	{
+		region->createItemFromString(cv,event.m_id);	
+	}
+	
+	if (event.m_type == Event::ITEM_REMOVED)
+	{
+		region->deleteItem(event.m_id);
+	}
+	
+	if (event.m_type == Event::PLAYER_NOITEM_EQUIPED)
+	{
+		if (m_players->count(event.m_id)>0)
+		{
+			object = (*m_players)[event.m_id];
+			if (object != m_local_player)
+			{
+				Item* item =0;
+				static_cast<Player*>(object)->getEquipement()->swapItem(item,event.m_data);
+				
+				if (item !=0)
+					delete item;
+			}
+		}
+	}
+	
+	if (event.m_type == Event::PLAYER_ITEM_EQUIPED)
+	{
+		if (m_players->count(event.m_id)>0)
+		{
+			object = (*m_players)[event.m_id];
+			if (object != m_local_player)
+			{
+				static_cast<Player*>(object)->readItem(cv);
+			}
+		}
+	}
+	
+	return true;
 }
 
 
@@ -1931,6 +2054,11 @@ void World::calcPathDirection(PathfindInfo* pathinfo, float x_start, float y_sta
 	}
 }
 
-
+void World::insertEvent(Event &event)
+{
+	
+	m_events->push_back(event);
+	
+}
 
 

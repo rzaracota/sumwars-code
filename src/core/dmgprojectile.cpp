@@ -272,7 +272,7 @@ bool DmgProjectile::update(float time)
 		}
 	}
 
-	if (m_type == FIRE_WALL && m_world->timerLimit(2))
+	if (m_type == FIRE_WALL && m_world->timerLimit(1))
 	{
 		// Typ Feuersaeule
 
@@ -454,7 +454,11 @@ void DmgProjectile::handleFlying(float dtime)
 				m_speed_x=newdir[0];
 				m_speed_y=newdir[1];
 			}
-			m_event_mask |= Event::DATA_SPEED;
+			
+			if (m_world->timerLimit(0))
+			{
+				m_event_mask |= Event::DATA_SPEED;
+			}
 		}
 		hitobj.clear();
 		
@@ -559,7 +563,7 @@ void DmgProjectile::handleFlying(float dtime)
 			// zufaelliges weiterspringen, Chance 50%
 			if (rand()<RAND_MAX*0.5)
 			{
-
+				DEBUG("prob bounce");
 				bounce = true;
 			}
 		}
@@ -633,7 +637,7 @@ void DmgProjectile::handleFlying(float dtime)
 				m_speed_x = dir[0] *speed;
 				m_speed_y = dir[1] *speed;
 
-				m_event_mask |= Event::DATA_SPEED;
+				m_event_mask |= Event::DATA_SPEED | Event::DATA_PROJ_STATE;
 
 				DEBUG5("koord %f %f to %f %f",xnew,ynew,x2,y2);
 				DEBUG5("dir %f %f",dir[0],dir[1]);

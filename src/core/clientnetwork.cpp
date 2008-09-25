@@ -4,6 +4,10 @@
 ClientNetwork::ClientNetwork()
 	: Network()
 {
+	SocketDescriptor sock;
+	
+	m_peer->Startup(1,10,&sock, 1);
+	
 	m_server_address = UNASSIGNED_SYSTEM_ADDRESS;
 	m_status = NET_CLOSE;
 }

@@ -3,7 +3,7 @@
 void DropItem::toString(CharConv* cv)
 {
 
-	m_item->toString(cv,0);
+	m_item->toString(cv);
 	cv->toBuffer(m_x);
 	cv->toBuffer(m_y);
 	
@@ -15,7 +15,7 @@ void DropItem::fromString(CharConv* cv)
 {
 	short pos;
 	
-	m_item->fromString(cv,pos);
+	m_item->fromString(cv);
 	cv->fromBuffer<short>(m_x );
 	cv->fromBuffer<short>(m_y);
 	

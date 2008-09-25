@@ -2365,7 +2365,7 @@ bool Creature::update (float time)
 	// besondere zeitabhaengige Effekte berechnen
 	if (getWorld()->isServer())
 	{
-		if (m_base_attr_mod.m_special_flags & FLAMEARMOR && getWorld()->timerLimit(2))
+		if (m_base_attr_mod.m_special_flags & FLAMEARMOR && getWorld()->timerLimit(1))
 		{
 			// Flammenruestung
 			
@@ -2409,7 +2409,7 @@ bool Creature::update (float time)
 	// Statusmods behandeln
 	if (getState()==STATE_ACTIVE)
 	{
-		if (getWorld()->isServer() && getWorld()->timerLimit(2))
+		if (getWorld()->isServer() && getWorld()->timerLimit(1))
 		{
 			// Vergiftet
 			if (m_dyn_attr.m_status_mod_time[Damage::POISONED]>0)
@@ -4200,16 +4200,24 @@ void Creature::processEvent(Event* event, CharConv* cv)
 		DEBUG5("got Command %i",m_command.m_type);
 	}
 	
+	float  atime = m_action.m_time - m_action.m_elapsed_time;
+	float etime = m_action.m_elapsed_time;
 	char oldact = m_action.m_type;
 	float posx = getGeometry()->m_shape.m_coordinate_x;
 	float posy = getGeometry()->m_shape.m_coordinate_y;
 	float movex = getMoveInfo()->m_speed_x;
 	float movey = getMoveInfo()->m_speed_y;
+	float oldgoalx = posx + movex*atime;
+	float oldgoaly = posy + movey*atime;
+	
 	float newx = getGeometry()->m_shape.m_coordinate_x,newy= getGeometry()->m_shape.m_coordinate_y;
 	float newmovex,newmovey;
 	
 	bool newact= false;
 	bool newmove = false;
+	
+	
+	
 	if (event->m_data & Event::DATA_ACTION)
 	{
 		
@@ -4335,13 +4343,24 @@ void Creature::processEvent(Event* event, CharConv* cv)
 		
 		DEBUG5("goal %f %f current pos %f %f",goalx,goaly,getGeometry()->m_shape.m_coordinate_x,getGeometry()->m_shape.m_coordinate_y);
 		
+		/*
+		timeval tv;
+		gettimeofday(&tv, NULL);
+		DEBUG("time elapsed ingame %f delay %i system time %i",etime,cv->getDelay(),tv.tv_usec/1000);
+		*/
 		// Zeit die zum erreichen des Zieles uebrig ist
 		float goaltime = acttime;
 		if (event->m_data & Event::DATA_ACTION)
 		{
 			goaltime -= cv->getDelay();
 		}
-		DEBUG5("time to reach goal %f",goaltime);
+		if (goaltime < 100)
+		{
+			
+			DEBUG5("time to reach goal %f (prev time %f) delay %i",goaltime,atime,cv->getDelay());
+			
+		}
+		DEBUG5("previously planned time %f",atime);
 		
 		if (goaltime <0)
 		{
@@ -4361,9 +4380,25 @@ void Creature::processEvent(Event* event, CharConv* cv)
 	if (newact)
 	{
 		m_action.m_elapsed_time += cv->getDelay();	
-		if (!newmove)
+		if (!newmove && m_action.m_type != Action::NOACTION)
 		{
 			moveTo(newx,newy);
+		}
+		
+		if (Action::getActionInfo(m_action.m_type)->m_distance != Action::SELF)
+		{
+			float x = getGeometry()->m_shape.m_coordinate_x;
+			float y = getGeometry()->m_shape.m_coordinate_y;
+			float goalx =  m_action.m_goal_coordinate_x;
+			float goaly =  m_action.m_goal_coordinate_y;
+
+			getGeometry()->m_angle = atan2(goaly-y,goalx-x);
+
+		}
+		if (Action::getActionInfo(m_action.m_type)->m_base_action == Action::WALK)
+		{
+			getGeometry()->m_angle = atan2(getMoveInfo()->m_speed_y,getMoveInfo()->m_speed_x);
+
 		}
 	}
 }

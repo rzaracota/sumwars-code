@@ -65,6 +65,9 @@ bool MainWindow::initInputs()
 	m_window->getCustomAttribute("WINDOW", &hWnd);
 	// OIS mitteilen fuer welches Fenster die Eingaben abgefangen werden sollen
 	pl.insert(OIS::ParamList::value_type("WINDOW", Ogre::StringConverter::toString(hWnd)));
+	pl.insert( std::make_pair(std::string("x11_mouse_grab"), std::string("false") ) ); 
+	pl.insert( std::make_pair(std::string("x11_keyboard_grab"), std::string("false"))); 
+	
 	m_ois = OIS::InputManager::createInputSystem( pl );
 
 	// Maus initialisieren
@@ -3280,7 +3283,7 @@ bool MainWindow::onItemMouseButtonReleased(const CEGUI::EventArgs& evt)
 	unsigned int id = we.window->getID();
 	if (we.button == CEGUI::LeftButton)
 	{
-		DEBUG("left button released on Item %i",id);
+		DEBUG5("left button released on Item %i",id);
 	}
 
 }

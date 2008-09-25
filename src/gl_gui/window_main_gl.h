@@ -1,6 +1,9 @@
 #ifndef WINMAIN_H
 #define WINMAIN_H
 
+
+#include <sys/time.h>
+
 class WindowMain
 {
 	public:

@@ -48,8 +48,8 @@ class CharConv
 		if (packet->data[0] == ID_TIMESTAMP)
 		{
 			char tmp;
-			fromBuffer(tmp);
-			fromBuffer(m_timestamp);
+			m_bitstream.Read(tmp);
+			m_bitstream.Read(m_timestamp);
 		}
 		else
 		{
@@ -142,6 +142,11 @@ class CharConv
 	unsigned long getDelay()
 	{
 		return RakNet::GetTime()-m_timestamp;
+	}
+	
+	unsigned long getTimestamp()
+	{
+		return m_timestamp;
 	}
 	
 	

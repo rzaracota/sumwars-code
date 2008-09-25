@@ -227,6 +227,12 @@ class Region
 		void createProjectileFromString(CharConv* cv);
 		
 		/**
+		 * \fn void createItemFromString(CharConv* cv, int id)
+		 * \brief liest die Daten zu einem Gegenstand aus dem Bitstream und erzeugt es
+		 */
+		void createItemFromString(CharConv* cv, int id);
+		
+		/**
 		 * \fn void deleteProjectile(DmgProjectile* proj)
 		 * \brief Entfernt das Projektil aus der Region
 		 */

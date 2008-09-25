@@ -29,10 +29,19 @@ int main (int argc, char *argv[]) {
 	#else
         save = "default.sav";
     #endif
+	
+	bool server = true;
+	if (argc>=3)
+	{
+		if (std::string(argv[2]) == "-c")
+		{
+			server = false;
+		}
+	}
 	Document* doc = app->getDocument();
 	doc->setSaveFile(save);
 	
-	doc->setServer(true);
+	doc->setServer(server);
 	doc->setState(Document::START_GAME);
 	doc->getGUIState()->m_sheet= Document::GAME_SCREEN;
 	doc->getGUIState()->m_shown_windows = Document::NO_WINDOWS;

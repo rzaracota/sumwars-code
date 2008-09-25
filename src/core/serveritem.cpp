@@ -84,10 +84,10 @@ ServerItem::~ServerItem()
 	if (m_weapon_attr) delete  m_weapon_attr;
 }
 
-void ServerItem::toStringComplete(CharConv* cv, short pos)
+void ServerItem::toStringComplete(CharConv* cv)
 {
 
-	Item::toString(cv,pos);
+	Item::toString(cv);
 	
 	cv->toBuffer(m_price);
 	cv->toBuffer(m_level_req);
@@ -166,9 +166,9 @@ void ServerItem::toStringComplete(CharConv* cv, short pos)
 	
 }
 
-void ServerItem::fromStringComplete(CharConv* cv, short& pos)
+void ServerItem::fromStringComplete(CharConv* cv)
 {
-	Item::fromString(cv,pos);	
+	Item::fromString(cv);	
 	
 	cv->fromBuffer<int>(m_price);
 	cv->fromBuffer<char>(m_level_req);
@@ -181,16 +181,25 @@ void ServerItem::fromStringComplete(CharConv* cv, short& pos)
 	
 	if (mask & USEUP_INFO)
 	{
+		if (m_useup_effect !=0)
+			delete m_useup_effect;
+		
 		m_useup_effect= new CreatureDynAttrMod();
 	}
 	
 	if (mask & EQUIP_INFO)
 	{
+		if (m_equip_effect !=0)
+			delete m_equip_effect;
+		
 		m_equip_effect=new CreatureBaseAttrMod();
 	}
 
 	if (mask & WEAPON_INFO)
 	{
+		if (m_weapon_attr !=0)
+			delete m_weapon_attr;
+		
 		m_weapon_attr = new WeaponAttr();
 	}
 	

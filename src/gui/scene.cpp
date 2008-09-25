@@ -201,6 +201,9 @@ void Scene::update(float ms)
 	
 	if (player ==0)
 		return;
+	if (player->getRegion() ==0)
+		return;
+	
 	// Nummer der region in der sich der Spieler befindet
 	short region_nr = player->getGridLocation()->m_region;
 	
@@ -210,13 +213,15 @@ void Scene::update(float ms)
 	if (region_nr != m_region_id)
 	{
 		// Spieler hat eine neue Region betreten
-		m_region_id = region_nr;
 		if (player->getState() == WorldObject::STATE_ACTIVE)
 		{
 			// Szene komplett neu aufbauen
 			createScene();
 
 			m_document->setModified(m_document->getModified() & ~Document::REGION_MODIFIED);
+			
+			m_region_id = region_nr;
+		
 		}
 		else
 		{
@@ -532,7 +537,7 @@ void Scene::updateObject(ServerWObject* obj)
                 if (old_ent_name != jt->second)
                 {
                     // Es soll ein anderes Mesh angehaengt werden als aktuell angehaengt ist
-                    DEBUG("replaced mesh %s by %s at bone %s",old_ent_name.c_str(),jt->second.c_str(),bone.c_str());
+                    DEBUG5("replaced mesh %s by %s at bone %s",old_ent_name.c_str(),jt->second.c_str(),bone.c_str());
 
 
                     // altes Mesh entfernen, neues anhaengen
@@ -1082,6 +1087,8 @@ void Scene::createScene()
 	{
 		name = (*it)->getNameId();
 
+		DEBUG5("create static object %s",name.c_str());
+		
 		// Objekt in der Szene erzeugen
 		createObject((*it),name,true);
 

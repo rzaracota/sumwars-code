@@ -155,21 +155,21 @@ struct Item {
 	virtual string getString();
 
 	/**
-	 * \fn void toString(CharConv* cv, short pos)
+	 * \fn void toString(CharConv* cv)
 	 * \brief Konvertiert das Objekt in einen String und schreibt ihn in der Puffer
 	 * \param buf Ausgabepuffer
 	 * \return Zeiger hinter den beschriebenen Datenbereich
 	 */
-	virtual void toString(CharConv* cv, short pos);
+	virtual void toString(CharConv* cv);
 
 
 	/**
-	 * \fn void fromString(void CharConv* cv, short& pos)
+	 * \fn void fromString(void CharConv* cv)
 	 * \brief Erzeugt das Objekt aus einem String
 	 * \param buf Objekt als String
 	 * \return Zeiger hinter den gelesenen Datenbereich
 	 */
-	virtual void fromString(CharConv* cv,short& pos);
+	virtual void fromString(CharConv* cv);
 
 
 	/**

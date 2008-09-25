@@ -817,7 +817,13 @@ class Document
 	 * \var Timer m_timer
 	 * \brief Timer fuer die Updatezyklen der Spielwelt
 	 */
-	Timer m_timer;	
+	Timer m_timer;
+	
+	/**
+	 * \var m_shutdown_timer
+	 * \brief Timer fuer Shutdown
+	 */
+	float m_shutdown_timer;
 
 };
 
