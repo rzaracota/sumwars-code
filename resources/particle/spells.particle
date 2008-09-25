@@ -1,0 +1,680 @@
+Fireball
+{
+    material Examples/Flare
+    particle_width 20
+    particle_height 20
+    cull_each false
+    quota 10000
+    billboard_type oriented_self
+ 
+
+   emitter Point
+{
+        angle 360
+        emission_rate 275
+        time_to_live 0.2
+        direction 1 0 0
+        velocity_min 250
+        velocity_max 300
+        colour_range_start 1 0 0
+        colour_range_end 1 0 0
+}
+}
+
+Magic_Arrow
+{
+	material 		Examples/Flare
+	particle_width 	25
+	particle_height	25
+	cull_each		false
+	quota			200
+	billboard_type	point
+
+	emitter Point
+{
+		angle 5
+		emission_rate 100
+        time_to_live    0.05
+        direction       0 0 0
+        velocity_min    250
+        velocity_max    300
+        colour_range_start  1 0 1
+        colour_range_end    0 0 1
+		
+}
+	affector ColourFader
+{
+		red -0.25
+		green -1
+		blue -1
+}
+	
+}
+
+Firebolt
+{
+    material Examples/Flare
+    particle_width 20
+    particle_height 20
+    cull_each false
+    quota 10000
+    billboard_type oriented_self
+ 
+
+   emitter Point
+{
+        angle 25
+        emission_rate 275
+        time_to_live 0.1
+        direction 1 1 1
+        velocity_min 250
+        velocity_max 300
+        colour_range_start 1 0 0
+        colour_range_end 1 0.5 0
+}
+}
+
+Firewall
+{
+    material        Examples/FlarePointSprite
+    point_rendering	true
+    particle_width  30
+    particle_height 30
+    cull_each       false
+	cull_each       false
+    quota           10000
+    billboard_type  point
+    
+    // Area emitter
+    emitter Cylinder
+{
+        angle           30
+        emission_rate   30
+        time_to_live    5
+        direction       0 1 0
+        velocity    	0
+        colour_range_start  1 0 0
+        colour_range_end    0.5 0.5 0
+        width           120
+        height          120
+        depth           60
+}
+
+    // Make em float upwards
+    affector LinearForce
+{
+        force_vector      0 100 0
+        force_application add
+}
+
+    // Fader
+    affector ColourFader
+{
+        red -0.25
+        green -0.25
+        blue -0.25
+}
+
+
+}
+
+
+Firewave
+{
+    material Examples/Flare
+    particle_width 20
+    particle_height 20
+    cull_each false
+    quota 10000
+    billboard_type oriented_self
+ 
+
+   emitter Point
+{
+        angle 360
+        emission_rate 275
+        time_to_live 0.2
+        direction 1 0 0
+        velocity_min 250
+        velocity_max 300
+        colour_range_start 1 0 0
+        colour_range_end 1 0 0
+}
+}
+
+Icebolt
+{
+    material Examples/Flare
+    particle_width 20
+    particle_height 20
+    cull_each false
+    quota 10000
+    billboard_type oriented_self
+ 
+
+   emitter Point
+{
+        angle 25
+        emission_rate 275
+        time_to_live 0.1
+        direction 1 1 1
+        velocity_min 250
+        velocity_max 300
+        colour_range_start 0.6 0.6 1
+        colour_range_end 0.2 0.2 0.6
+}
+}
+
+Blizzard
+{
+    material        Examples/FlarePointSprite
+    point_rendering	true
+    particle_width  30
+    particle_height 30
+    cull_each       false
+	cull_each       false
+    quota           10000
+    billboard_type  point
+    
+    // Area emitter
+    emitter Cylinder
+{
+        angle           30
+        emission_rate   30
+        time_to_live    5
+        direction       0 1 0
+        velocity    	0
+        colour_range_start  0.6 0.6 1
+        colour_range_end    0.2 0.2 0.6
+        width           120
+        height          120
+        depth           60
+}
+
+    // Make em float upwards
+    affector LinearForce
+{
+        force_vector      0 100 0
+        force_application add
+}
+
+    // Fader
+    affector ColourFader
+{
+        red -0.25
+        green -0.25
+        blue -0.25
+}
+}
+
+Icering
+{
+    material Examples/Flare
+    particle_width 20
+    particle_height 20
+    cull_each false
+    quota 10000
+    billboard_type oriented_self
+ 
+
+   emitter Ring
+{
+        angle 25
+        emission_rate 275
+        time_to_live 0.2
+        direction 0 1 0
+        velocity_min 250
+        velocity_max 300
+        colour_range_start  0.6 0.6 1
+        colour_range_end    0.2 0.2 0.6
+        width           120
+        height          120
+        depth           60
+}
+}
+
+Freeze
+{
+    material        Examples/Aureola
+    particle_width  200
+    particle_height 200
+    cull_each       false
+    quota           100
+    billboard_type  perpendicular_common
+    common_direction 0 1 0
+    common_up_vector 0 0 1
+
+    // Area emitter
+    emitter Box
+{
+        angle           30
+        emission_rate   4
+        time_to_live    5
+        position        0 -100 0
+        direction       0 1 0
+        velocity_min  	0
+        velocity_max  	30
+        colour_range_start  0.3 0.3 0.3 0.0
+        colour_range_end    0.8 0.8 0.8 0.0
+        width           10
+        height          10
+        depth           30
+}
+}
+
+Lightning
+{
+    material Examples/Flare
+    particle_width 20
+    particle_height 20
+    cull_each false
+    quota 10000
+    billboard_type oriented_self
+ 
+
+   emitter Point
+{
+        angle 360
+        emission_rate 275
+        time_to_live 0.2
+        direction 1 0 0
+        velocity_min 250
+        velocity_max 300
+        colour_range_start 1 1 0
+        colour_range_end 1 1 0
+}
+}
+
+Thunderstorm
+{
+    material        Examples/Droplet
+    particle_width  20
+    particle_height 100
+    cull_each       true
+    quota           10000
+    // Make common direction straight down (faster than self oriented)
+    billboard_type  oriented_common
+    common_direction 0 -1 0
+    
+    // Area emitter
+    emitter Cylinder
+{
+        angle           0
+        emission_rate   100
+        time_to_live    5
+        direction       0 -10 0
+        velocity    	100
+        colour_range_start  0.3 1 0.3
+        colour_range_end    0.7 1 0.7
+        width           1000
+        height          1000
+        depth           0
+}
+
+    // Gravity
+    affector LinearForce
+{
+        force_vector      0 -200 0
+        force_application add
+}
+}
+
+Chainlightning
+{
+    material Examples/Flare
+    particle_width 20
+    particle_height 20
+    cull_each false
+    quota 10000
+    billboard_type oriented_self
+ 
+
+   emitter Point
+{
+        angle 360
+        emission_rate 275
+        time_to_live 0.2
+        direction 1 0 0
+        velocity_min 250
+        velocity_max 300
+        colour_range_start 1 1 0
+        colour_range_end 1 1 0
+}
+}
+
+Static_Shield
+{
+    material Examples/Flare
+    particle_width 20
+    particle_height 20
+    cull_each false
+    quota 10000
+    billboard_type oriented_self
+ 
+
+   emitter Ring
+{
+        angle 360
+        emission_rate 275
+        time_to_live 0.2
+        direction 1 0 0
+        velocity_min 250
+        velocity_max 300
+        colour_range_start 1 1 0
+        colour_range_end 1 1 0
+        width           120
+        height          120
+        depth           0
+}
+}
+
+Fire_Arrow
+{
+    material Examples/Flare
+    particle_width 20
+    particle_height 20
+    cull_each false
+    quota 10000
+    billboard_type oriented_self
+ 
+
+   emitter Point
+{
+        angle 360
+        emission_rate 275
+        time_to_live 0.2
+        direction 1 0 0
+        velocity_min 250
+        velocity_max 300
+        colour_range_start 1 0 0
+        colour_range_end 1 0 0
+}
+}
+
+Ice_Arrow
+{
+    material Examples/Flare
+    particle_width 20
+    particle_height 20
+    cull_each false
+    quota 10000
+    billboard_type oriented_self
+ 
+
+   emitter Point
+{
+        angle 360
+        emission_rate 275
+        time_to_live 0.2
+        direction 1 0 0
+        velocity_min 250
+        velocity_max 300
+        colour_range_start 0.6 0.6 1
+        colour_range_end 0.2 0.2 0.6
+}
+}
+
+Wind_Arrow
+{
+    material Examples/Flare
+    particle_width 20
+    particle_height 20
+    cull_each false
+    quota 10000
+    billboard_type oriented_self
+ 
+
+   emitter Point
+{
+        angle 360
+        emission_rate 275
+        time_to_live 0.2
+        direction 1 0 0
+        velocity_min 250
+        velocity_max 300
+        colour_range_start 1 1 0
+        colour_range_end 1 1 0
+}
+}
+
+Guided_Arrow
+{
+    material Examples/Flare
+    particle_width 20
+    particle_height 20
+    cull_each false
+    quota 10000
+    billboard_type oriented_self
+ 
+
+   emitter Point
+{
+        angle 360
+        emission_rate 275
+        time_to_live 0.02
+        direction 1 0 0
+        velocity_min 250
+        velocity_max 300
+        colour_range_start 1 0 1
+        colour_range_end 1 0 1
+}
+}
+
+Explosion
+{
+    material Examples/Flare
+    particle_width 20
+    particle_height 20
+    cull_each false
+    quota 10000
+    billboard_type oriented_self
+ 
+
+   emitter Cylinder
+{
+        angle 360
+        emission_rate 275
+        time_to_live 0.2
+        direction 1 0 0
+        velocity_min 250
+        velocity_max 300
+        colour_range_start 1 0 1
+        colour_range_end 1 0 1
+        width	240
+        heigt	240
+        depth	120
+}
+}
+
+Fire_Explosion
+{
+    material Examples/Flare
+    particle_width 20
+    particle_height 20
+    cull_each false
+    quota 10000
+    billboard_type oriented_self
+ 
+
+   emitter Cylinder
+{
+        angle 360
+        emission_rate 275
+        time_to_live 0.2
+        direction 1 0 0
+        velocity_min 250
+        velocity_max 300
+        colour_range_start 1 0 0
+        colour_range_end 1 0 0
+        width	240
+        heigt	240
+        depth	120
+}
+}
+
+Ice_Explosion
+{
+    material Examples/Flare
+    particle_width 20
+    particle_height 20
+    cull_each false
+    quota 10000
+    billboard_type oriented_self
+ 
+
+   emitter Cylinder
+{
+        angle 360
+        emission_rate 275
+        time_to_live 0.2
+        direction 1 0 0
+        velocity_min 250
+        velocity_max 300
+        colour_range_start 0.6 0.6 1
+        colour_range_end 0.2 0.2 0.6
+        width	240
+        heigt	240
+        depth	120
+}
+}
+
+Wind_Explosion
+{
+    material Examples/Flare
+    particle_width 20
+    particle_height 20
+    cull_each false
+    quota 10000
+    billboard_type oriented_self
+ 
+
+   emitter Cylinder
+{
+        angle 360
+        emission_rate 275
+        time_to_live 0.2
+        direction 1 0 0
+        velocity_min 250
+        velocity_max 300
+        colour_range_start 1 1 0
+        colour_range_end 1 1 0
+        width	240
+        heigt	240
+        depth	120
+}
+}
+
+Lightbeam
+{
+    material Examples/Flare
+    particle_width 20
+    particle_height 20
+    cull_each false
+    quota 10000
+    billboard_type oriented_self
+ 
+
+   emitter Point
+{
+        angle 360
+        emission_rate 275
+        time_to_live 0.2
+        direction 1 0 0
+        velocity_min 250
+        velocity_max 300
+        colour_range_start 1 1 1
+        colour_range_end 1 1 1
+}
+}
+
+ElemExplosion
+{
+    material Examples/Flare
+    particle_width 20
+    particle_height 20
+    cull_each false
+    quota 10000
+    billboard_type oriented_self
+ 
+
+   emitter Point
+{
+        angle 360
+        emission_rate 275
+        time_to_live 0.2
+        direction 1 0 0
+        velocity_min 250
+        velocity_max 300
+        colour_range_start 1 0 0
+        colour_range_end 1 0 0
+}
+}
+
+Acid
+{
+    material Examples/Flare
+    particle_width 20
+    particle_height 20
+    cull_each false
+    quota 10000
+    billboard_type oriented_self
+ 
+
+   emitter Point
+{
+        angle 360
+        emission_rate 275
+        time_to_live 0.2
+        direction 1 0 0
+        velocity_min 250
+        velocity_max 300
+        colour_range_start 0 1 0
+        colour_range_end 0.7 0.9 0
+}
+}
+
+Divine_Beam
+{
+    material Examples/Flare
+    particle_width 20
+    particle_height 20
+    cull_each false
+    quota 10000
+    billboard_type oriented_self
+ 
+
+   emitter Point
+{
+        angle 360
+        emission_rate 275
+        time_to_live 0.2
+        direction 1 0 0
+        velocity_min 250
+        velocity_max 300
+        colour_range_start 1 1 1
+        colour_range_end 1 1 1
+}
+}
+
+Hypnosis
+{
+    material Examples/Flare
+    particle_width 20
+    particle_height 20
+    cull_each false
+    quota 10000
+    billboard_type oriented_self
+ 
+
+   emitter Point
+{
+        angle 360
+        emission_rate 275
+        time_to_live 0.2
+        direction 1 0 0
+        velocity_min 250
+        velocity_max 300
+        colour_range_start 1 0 1
+        colour_range_end 0.9 0 0.6
+}
+}
