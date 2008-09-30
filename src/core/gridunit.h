@@ -56,7 +56,7 @@ struct Gridunit
 	short m_nr_creature;
 
 	/**
-	 * \var list<ServerItem*>* m_items
+	 * \var list<DropItem*>* m_items
 	 * \brief Liste der Items auf dem Feld
 	 */
 	list<DropItem*> m_items;

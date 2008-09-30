@@ -2,7 +2,7 @@
 #define ITEMFACTORY_H
 
 
-#include "serveritem.h"
+#include "item.h"
 #include "random.h"
 #include <map>
 #include "dropslot.h"
@@ -57,16 +57,16 @@ public:
 	ItemFactory();
 
 	/**
-	 * \fn ServerItem* createItem(Item::Type type, Item::Subtype subtype)
+	 * \fn Item* createItem(Item::Type type, Item::Subtype subtype)
 	 * \brief Erzeugt Objekt anhand zweier Parameter
 	 * \param type Typ des Items
 	 * \param subtype Untertyp des Items
 	 * \return Neues ServerItem
 	 */
-	static ServerItem* createItem(Item::Type type, Item::Subtype subtype, float magic_power =0);
+	static Item* createItem(Item::Type type, Item::Subtype subtype, float magic_power =0);
 
 	/**
-	 * \fn static void createMagicMods(ServerItem* item, float* modchance, float magic_power, float min_enchant, float max_enchant)
+	 * \fn static void createMagicMods(Item* item, float* modchance, float magic_power, float min_enchant, float max_enchant)
 	 * \brief Belegt einen Gegenstanden mit magischen Attributen
 	 * \param item Gegenstand der die magischen Eigenschaften erhaelt
 	 * \param modchance Array mit Wahrscheinlichkeiten fuer das Auftreten der einzelnen Modifikationen
@@ -74,7 +74,7 @@ public:
 	 * \param min_enchant minimale Starke einer einzelnen Verzauberung
 	 * \param max_enchant maximale Starke einer einzelnen Verzauberung
 	 */
-	static void createMagicMods(ServerItem* item, float* modchance, float magic_power, float min_enchant, float max_enchant);
+	static void createMagicMods(Item* item, float* modchance, float magic_power, float min_enchant, float max_enchant);
 
 	/**
 	 * \fn static void registerItem(Item::Subtype subtype, ItemBasicData* data)
@@ -95,10 +95,10 @@ public:
 	static void registerItemDrop(Item::Type type, Item::Subtype subtype, DropChance chance);
 
 	/**
-	 * \fn static ServerItem* createItem(DropSlot &slot)
+	 * \fn static Item* createItem(DropSlot &slot)
 	 * \brief Erzeugt einen Gegenstand anhand eines Dropslots. Wenn kein Item entsteht wird NULL ausgegeben
 	 */
-	static ServerItem* createItem(DropSlot &slot);
+	static Item* createItem(DropSlot &slot);
 
 	/**
 	 * \fn static void init()

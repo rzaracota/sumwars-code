@@ -16,12 +16,12 @@ ItemFactory::ItemFactory()
 }
 
 
-ServerItem* ItemFactory::createItem(Item::Type type, Item::Subtype subtype,float magic_power)
+Item* ItemFactory::createItem(Item::Type type, Item::Subtype subtype,float magic_power)
 {
 	DEBUG5("creating item %i / %s",type, subtype.c_str());
 	map<Item::Subtype,ItemBasicData*>::iterator it;
 	it = m_item_data.find(subtype);
-	ServerItem * item;
+	Item * item;
 	float min_enchant =30;
 	float max_enchant =100;
 
@@ -29,7 +29,7 @@ ServerItem* ItemFactory::createItem(Item::Type type, Item::Subtype subtype,float
 	{
 		DEBUG("found item data for subtype %s",subtype.c_str());
 		ItemBasicData* idata = it->second;
-		item = new ServerItem(*idata);
+		item = new Item(*idata);
 
 		//createMagicMods(item,idata->m_modchance,magic_power, idata->m_min_enchant, idata->m_max_enchant);
 
@@ -41,7 +41,7 @@ ServerItem* ItemFactory::createItem(Item::Type type, Item::Subtype subtype,float
 
 
 
-	item = new ServerItem;
+	item = new Item;
 
 	item->m_type = type;
 	item->m_subtype = subtype;
@@ -413,7 +413,7 @@ ServerItem* ItemFactory::createItem(Item::Type type, Item::Subtype subtype,float
 }
 
 
-void ItemFactory::createMagicMods(ServerItem* item, float* modchance, float magic_power, float min_enchant, float max_enchant)
+void ItemFactory::createMagicMods(Item* item, float* modchance, float magic_power, float min_enchant, float max_enchant)
 {
 	// Modifikationen des Items auswuerfeln
 	DEBUG4("mods auswuerfeln");
@@ -743,7 +743,7 @@ void ItemFactory::init()
 
 }
 
-ServerItem* ItemFactory::createItem(DropSlot &slot)
+Item* ItemFactory::createItem(DropSlot &slot)
 {
 	DEBUG5("get item by dropslot");
 	// wenn maximales Level unter 0 liegt kein Item ausgeben
@@ -757,12 +757,12 @@ ServerItem* ItemFactory::createItem(DropSlot &slot)
 		return 0;
 
 	DEBUG("item size: %i",size);
-	ServerItem* item =0;
+	Item* item =0;
 	if (size  == Item::GOLD)
 	{
 		return 0;
 		// Gold gedroppt
-		item = new ServerItem;
+		item = new Item;
 		item->m_size = Item::GOLD;
 		item->m_price = Random::randrangei((slot.m_max_level*slot.m_max_level)*5, (slot.m_max_level*slot.m_max_level)*29);
 

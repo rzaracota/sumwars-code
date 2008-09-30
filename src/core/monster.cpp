@@ -388,7 +388,7 @@ void Monster::die()
 			}
 		}
 	
-		ServerItem* si;
+		Item* si;
 		for (int i=0;i<4;i++)
 		{
 			si = ItemFactory::createItem(m_drop_slots[i]);

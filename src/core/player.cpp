@@ -227,7 +227,7 @@ bool Player::onGamefieldClick(ClientCommand* command)
 			{
 				com->m_type = Action::TAKE_ITEM;
 				com->m_goal_object_id =command->m_id;
-				DEBUG("take item");
+				DEBUG5("take item");
 			}
 			else
 			{
@@ -343,7 +343,7 @@ bool Player::onItemClick(ClientCommand* command)
 	}
 
 	// das Item welches, des Spieler aktuell *in der Hand* hat
-	ServerItem* it = static_cast<ServerItem*>(m_equipement->getItem(Equipement::CURSOR_ITEM));
+	Item* it = m_equipement->getItem(Equipement::CURSOR_ITEM);
 
 	DEBUG5("got Item %p",it);
 
@@ -472,7 +472,7 @@ bool Player::onItemClick(ClientCommand* command)
 			{
 				event.m_type = Event::PLAYER_ITEM_EQUIPED;
 			}
-			DEBUG("event: %i at %i",event.m_type,event.m_data);
+			DEBUG5("event: %i at %i",event.m_type,event.m_data);
 			getWorld()->insertEvent(event);
 		}
 
@@ -480,7 +480,7 @@ bool Player::onItemClick(ClientCommand* command)
 		if (pos==Equipement::WEAPON || pos == Equipement::WEAPON2)
 		{
 			// Waffe wurde angelegt, bei zweihaendig testen ob der Schild Slot frei ist
-			ServerItem* weapon = getWeapon();
+			Item* weapon = getWeapon();
 			if (weapon!=0 && weapon->m_weapon_attr->m_two_handed)
 			{
 				if (getShield()!=0)
@@ -534,7 +534,7 @@ bool Player::onItemClick(ClientCommand* command)
 		if (pos==Equipement::SHIELD || pos == Equipement::SHIELD2)
 		{
 			// Schild soll verwendet werden, testen dass keine zweihaendige Waffe benutzt wird
-			ServerItem* weapon = getWeapon();
+			Item* weapon = getWeapon();
 			if (weapon!=0 && weapon->m_weapon_attr->m_two_handed)
 			{
 				
@@ -569,7 +569,7 @@ bool Player::onItemClick(ClientCommand* command)
 	else
 	{
 		// Item soll verbraucht werden
-		it = static_cast<ServerItem*>(m_equipement->getItem(pos));
+		it = m_equipement->getItem(pos);
 		if (it!=0)
 		{
 			if (it->m_useup_effect==0)
@@ -598,7 +598,7 @@ bool Player::onItemClick(ClientCommand* command)
 				// suchen nach einem aehnlichen Item zum nachruecken
 				for (int i=10;i<30;i++)
 				{
-					it = static_cast<ServerItem*>(m_equipement->getItem(Equipement::SMALL_ITEMS+i));
+					it = m_equipement->getItem(Equipement::SMALL_ITEMS+i);
 
 					if (it==0)
 						continue;
@@ -622,29 +622,47 @@ bool Player::onItemClick(ClientCommand* command)
 	return true;
 }
 
-ServerItem* Player::getWeapon()
+short Player::insertItem(Item* itm)
 {
-	ServerItem* si = static_cast<ServerItem*>(m_equipement->getItem(Equipement::WEAPON));
+	short pos = getEquipement()->insertItem(itm);
+	
+	if (getWorld()->isServer())
+	{
+		Event event;
+		event.m_type =  Event::PLAYER_ITEM_PICKED_UP ;
+		event.m_data = pos;
+		event.m_id = getId();
+							
+		DEBUG5("event: item picked up %i",pos);
+							
+		getWorld()->insertEvent(event);
+	}
+	return pos;
+}
+
+Item* Player::getWeapon()
+{
+	Item* si = m_equipement->getItem(Equipement::WEAPON);
 	if (m_secondary_equip)
 	{
-		si = static_cast<ServerItem*>(m_equipement->getItem(Equipement::WEAPON2));
+		si = m_equipement->getItem(Equipement::WEAPON2);
 	}
 	return si;
 }
 
-ServerItem* Player::getShield()
+Item* Player::getShield()
 {
-	ServerItem* si = static_cast<ServerItem*>(m_equipement->getItem(Equipement::SHIELD));
+	Item* si = m_equipement->getItem(Equipement::SHIELD);
 		if (m_secondary_equip)
 	{
-		si = static_cast<ServerItem*>(m_equipement->getItem(Equipement::SHIELD2));
+		si = m_equipement->getItem(Equipement::SHIELD2);
 	}
 	return si;
 }
 
 Action::ActionEquip Player::getActionEquip()
 {
-	ServerItem* weapon = getWeapon();
+	Item* weapon = getWeapon();
 	if (weapon ==0)
 	{
 		return Action::NO_WEAPON;
@@ -1266,13 +1284,15 @@ void Player::performActionCritPart(float goalx, float goaly, ServerWObject* goal
 {
 	if (getAction()->m_type == Action::TAKE_ITEM)
 	{
+		// Item suchen
 		Item* itm = getRegion()->getItem(getCommand()->m_goal_object_id);
 
 		if (itm !=0)
 		{
-			bool ret = getEquipement()->insertItem(itm);
+			// Item einfuegen
+			short pos = insertItem(itm);
 
-			if (ret ==true)
+			if (pos != Equipement::NONE)
 			{
 				getRegion()->deleteItem(getCommand()->m_goal_object_id);
 			}
@@ -1433,7 +1453,7 @@ void Player::sendGameData()
 void Player::sendDetailedItem(short pos)
 {
 	/*
-	ServerItem* it = static_cast<ServerItem*>(m_equipement->getItem(pos));
+	Item* it = static_cast<Item*>(m_equipement->getItem(pos));
 
 	if (it!=0)
 	{
@@ -1512,7 +1532,7 @@ void Player::calcBaseDamage(Action::ActionType act,Damage& dmg)
 	Creature::calcBaseDamage(act,dmg);
 
 
-	ServerItem* weapon = getWeapon();
+	Item* weapon = getWeapon();
 
 	if (weapon!=0)
 	{
@@ -1546,7 +1566,7 @@ void Player::calcBaseDamage(Action::ActionType act,Damage& dmg)
 void Player::calcBaseAttrMod()
 {
 	Creature::calcBaseAttrMod();
-	ServerItem* si;
+	Item* si;
 
 	// Wirkung der Ausruestungsgegenstaende einfuegen
 
@@ -1574,14 +1594,14 @@ void Player::calcBaseAttrMod()
 
 
 	// Ruestung
-	si = static_cast<ServerItem*>(m_equipement->getItem(Equipement::ARMOR));
+	si = m_equipement->getItem(Equipement::ARMOR);
 	if (si!=0 && si->m_equip_effect !=0)
 	{
 		applyBaseAttrMod(si->m_equip_effect,false);
 	}
 
 	// Helm
-	si = static_cast<ServerItem*>(m_equipement->getItem(Equipement::HELMET));
+	si = m_equipement->getItem(Equipement::HELMET);
 	if (si!=0 && si->m_equip_effect !=0)
 	{
 		applyBaseAttrMod(si->m_equip_effect,false);
@@ -1595,28 +1615,28 @@ void Player::calcBaseAttrMod()
 	}
 
 	// Handschuhe
-	si = static_cast<ServerItem*>(m_equipement->getItem(Equipement::GLOVES));
+	si = m_equipement->getItem(Equipement::GLOVES);
 	if (si!=0 && si->m_equip_effect !=0)
 	{
 		applyBaseAttrMod(si->m_equip_effect,false);
 	}
 
 	// Ring links
-	si = static_cast<ServerItem*>(m_equipement->getItem(Equipement::RING_LEFT));
+	si = m_equipement->getItem(Equipement::RING_LEFT);
 	if (si!=0 && si->m_equip_effect !=0)
 	{
 		applyBaseAttrMod(si->m_equip_effect,false);
 	}
 
 	// Ring rechts
-	si = static_cast<ServerItem*>(m_equipement->getItem(Equipement::RING_RIGHT));
+	si = m_equipement->getItem(Equipement::RING_RIGHT);
 	if (si!=0 && si->m_equip_effect !=0)
 	{
 		applyBaseAttrMod(si->m_equip_effect,false);
 	}
 
 	// Amulett
-	si = static_cast<ServerItem*>(m_equipement->getItem(Equipement::AMULET));
+	si = m_equipement->getItem(Equipement::AMULET);
 	if (si!=0 && si->m_equip_effect !=0)
 	{
 		applyBaseAttrMod(si->m_equip_effect,false);
@@ -1964,7 +1984,7 @@ void Player::fromSavegame(CharConv* cv)
 void Player::writeEquipement(CharConv* cv)
 {
 	/*
-	ServerItem* it;
+	Item* it;
 
 	short nr=0;
 	short i;
@@ -1980,7 +2000,7 @@ void Player::writeEquipement(CharConv* cv)
 
 	for (i=1;i<=Equipement::SMALL_ITEMS+30;i++)
 	{
-		it = static_cast<ServerItem*>(m_equipement->getItem(i));
+		it = static_cast<Item*>(m_equipement->getItem(i));
 		if (it!=0)
 		{
 			DEBUG5("saving item at pos %i",i);
@@ -1996,7 +2016,7 @@ void Player::loadEquipement(CharConv* cv)
 {
 	/*
 	m_equipement->clear();
-	ServerItem* it;
+	Item* it;
 	Item* itm;
 	short pos;
 
@@ -2007,7 +2027,7 @@ void Player::loadEquipement(CharConv* cv)
 	DEBUG5("reading %i items",nr);
 	for (i=0;i<nr;i++)
 	{
-		it = new ServerItem();
+		it = new Item();
 		it->fromStringComplete(cv,pos);
 		DEBUG5("loaded Item at pos %i",pos);
 		itm  = it;

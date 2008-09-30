@@ -763,7 +763,7 @@ void Scene::deleteItem(std::string name)
 {
 	std::string node_name = name + "Node";
 
-	DEBUG("deleting item %s",name.c_str());
+	DEBUG5("deleting item %s",name.c_str());
 
 	destroySceneNode(node_name);
 

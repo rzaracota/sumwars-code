@@ -255,12 +255,12 @@ class Equipement
 	Item* getItem(int pos);
 
 	/**
-	 * \fn bool insertItem(Item* item)
+	 * \fn short insertItem(Item* item)
 	 * \brief Fuegt Gegenstand ins Inventar ein
 	 * \param item Zeiger auf den Gegenstand
-	 * \return Gibt an ob das Item aufgenommen werden konnte
+	 * \return Gibt an, wo das item eingefuegt wurde
 	 */
-	bool insertItem(Item* item);
+	short insertItem(Item* item);
 	
 	/**
 	 * \fn bool swapCursorItem(int pos)

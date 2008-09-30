@@ -471,9 +471,15 @@ void Document::onLeftMouseButtonClick(float x, float y)
 	command.m_id =id;
 	command.m_number=0;
 
+	// Linksklick auf die eigene Figur unnoetig
+	if (command.m_id == getLocalPlayer()->getId())
+	{
+		command.m_id=0;
+	}
+	
 	if (command.m_id!=0)
 	{
-		DEBUG("angeklicktes Objekt %i",command.m_id);
+		DEBUG5("angeklicktes Objekt %i",command.m_id);
 	}
 
 	if (command.m_id ==0 && m_gui_state.m_cursor_item_id!=0)
@@ -481,6 +487,8 @@ void Document::onLeftMouseButtonClick(float x, float y)
 		// Item angeklickt
 		command.m_action = Action::TAKE_ITEM;
 		command.m_id = m_gui_state.m_cursor_item_id;
+		
+		DEBUG5("clicked at item %i",m_gui_state.m_cursor_item_id);
 	}
 
 	// Paket an den Server senden
@@ -1150,263 +1158,6 @@ void Document::updateContent(float time)
 	DEBUG5("update finished");
 	*/
 }
-
-
-/*
-void Document::handleDataPkg(CharConv* cv, ServerHeader* headerp)
-{
-	//DEBUG("read bits: %i bytes",cv->getBitStream()->GetReadOffset());
-	/*
-	map<int, ClientWObject*>::iterator iter;
-	ClientWObject* cwo=0;
-	map<int,Projectile*>::iterator it;
-	Projectile* pr=0;
-
-	if (!headerp->m_chatmessage)
-	{
-		
-			//usleep( 25000 );
-			//INFO( "get_ob %i",  m_temp_objects_bintree->size() );
-		DEBUG5( "Got a begin of update" );
-
-			// Daten sperren
-		lock();
-		if (m_main_player)
-		{
-			DEBUG5("mainplayer %i, pointer %p",m_main_player->getId(),m_main_player);
-		}
-
-			//Datenstrukturen leeren
-			// Anmerkung: main_player wird mit geloescht
-		for (iter = m_objects_bintree->begin(); iter!=m_objects_bintree->end(); iter++)
-		{
-			cwo = iter->second;
-			DEBUG5("Speicher freigeben: obj %i at %p", cwo->getId(),cwo);
-			if (cwo!=0)
-				delete cwo;
-		}
-
-		m_objects_bintree->clear();
-
-		for (it=m_projectiles->begin();it!=m_projectiles->end();++it)
-		{
-			pr = (it->second);
-			if (pr)
-				delete pr;
-		}
-		m_projectiles->clear();
-		DEBUG5("data cleared");
-		// Neue Daten einlesen
-		
-		m_main_player = new ClientMPlayer(0);
-			// Daten aus dem Startpaket auslesen
-		m_main_player->fromString(cv);
-		cwo = m_main_player;
-		DEBUG5("inserting object %i, pointer %p",cwo->getId(),cwo);
-		m_objects_bintree->insert(make_pair(cwo->getId(),cwo));
-
-		// TODO: QuestInformationen auslesen
-
-		// Partyinformationen
-		if (m_party !=0)
-		{
-			delete m_party;
-			m_party=0;
-		}
-		m_party = new Party();
-		m_party->fromString(cv);
-
-
-		
-
-		
-
-		int i;
-		DEBUG5("number of objects %i",headerp->m_objects);
-		for (i=0;i<headerp->m_objects;i++)
-		{
-			cwo = new ClientWObject(0);
-			cwo->fromString(cv);
-
-
-			DEBUG5("inserting object %i, pointer %p",cwo->getId(),cwo);
-
-			// WorldObject in die temporaeren Datenstrukturen einfuegen
-			m_objects_bintree->insert(make_pair(cwo->getId(),cwo));
-
-				//DEBUG4( "got (%f,%f) [%i] type %i subtype %i",cwo->m_coordinate_x,cwo->m_coordinate_y,cwo->m_id,cwo->m_type,cwo->m_subtype );
-
-		}
-
-		// Geschosse einlesen
-		DEBUG5("Number of projectiles %i",headerp->m_projectiles);
-		for (i=0;i<headerp->m_projectiles;i++)
-		{
-			pr = new Projectile();
-			pr->fromString(cv);
-			DEBUG5("got Projectile %i %f %f",pr->getType(),pr->getGeometry()->m_coordinate_x,pr->getGeometry()->m_coordinate_y);
-
-
-			m_projectiles->insert(make_pair(pr->getId(),pr));
-		}
-
-		
-		// Items einlesen
-		DEBUG5("Number of Items %i",headerp->m_items);
-		m_main_player->m_equipement->fromString(cv,headerp->m_items);
-
-		
-		
-		
-		
-		// Items am Boden einlesen
-		DropItem di;
-		map<int,DropItem>::iterator it3;
-		for (it3 = m_drop_items->begin(); it3 != m_drop_items->end(); ++it3)
-		{
-			delete it3->second.m_item;
-		}
-		m_drop_items->clear();
-		DEBUG5("Number of dropped Items %i",headerp->m_drop_items);
-		for (i=0;i<headerp->m_drop_items;i++)
-		{
-			di.m_item = new Item;
-			di.fromString(cv);
-			m_drop_items->insert(make_pair(di.m_x*10000+di.m_y,di));
-		}
-		
-		// Daten entsperren
-		unlock();
-		
-	}
-	
-
-	DEBUG5("objects modified");
-	m_modified |= OBJECTS_MODIFIED;
-
-
-}
-
-
-void Document::handleSavegame(CharConv* cv)
-{
-	DEBUG5("received Save file");
-	if (m_savegame!=0)
-		delete m_savegame;
-
-	int len = cv->getBitStream()->GetNumberOfUnreadBits()/8;
-	DEBUG5("savegame length %i",len);
-	m_savegame = new char[len];
-	cv->getBitStream()->Read(m_savegame, len);
-	
-	//hexwrite(datap,len);
-
-
-	if (m_state ==SHUTDOWN_REQUEST)
-	{
-		// Savegame erhalten, Shutdown
-		m_state = SHUTDOWN_WRITE_SAVEGAME;
-	}
-
-}
-
-void Document::handleDetailedItem(CharConv* cv)
-{
-	if (m_detailed_item !=0)
-	{
-		delete m_detailed_item;
-	}
-
-	// Daten des Items einlesen
-	m_detailed_item = new ServerItem();
-	m_detailed_item->fromStringComplete(cv, m_detailed_item_pos);
-	DEBUG4("received item at %i",m_detailed_item_pos);
-
-	// Itemdaten wurden geaendert
-	m_modified |= ITEM_MODIFIED;
-	DEBUG5("m_modified %i",m_modified);
-
-}
-
-void Document::handleAbilityDamage(CharConv* cv, ServerHeader* headerp)
-{
-	// Feld fuer detailliertes Item wird missbraucht fuer den Aktionstyp...
-	m_ability_pos = (Action::ActionType) headerp->m_detailed_item;
-
-	// Schaden einlesen
-	m_ability_damage.init();
-	m_ability_damage.fromString(cv);
-
-	// geaenderte Daten anzeigen
-	m_modified |= ABILITY_MODIFIED;
-}
-
-void Document::handleRegionData(CharConv* cv)
-{
-	DEBUG("got region data");
-
-	// Groesse der Region einlesen
-	cv->fromBuffer<short>(m_region_data.m_dimx);
-	cv->fromBuffer<short>(m_region_data.m_dimy);
-
-	// Anzahl der Objekte
-	short nr;
-	 cv->fromBuffer<short>(nr);
-
-	DEBUG("receiving %i objects",nr);
-
-	map<int,WorldObject*>::iterator it;
-
-	// alte Objekte loeschen
-	for (it = m_region_data.m_static_objects->begin(); it!=m_region_data.m_static_objects->end();++it)
-	{
-		delete (it->second);
-	}
-	m_region_data.m_static_objects->clear();
-
-	if (m_region_data.m_tiles!=0)
-	{
-		delete m_region_data.m_static_objects;
-	}
-	WorldObject* wo;
-
-	// neue Objekte einlesen
-	int i,j;
-	for (i=0;i<nr;i++)
-	{
-		wo = new WorldObject(0);
-		wo->fromString(cv);
-
-		// einfuegen in Binaerbaum
-		m_region_data.m_static_objects->insert(make_pair(wo->getId(),wo));
-
-		DEBUG("got WorldObject %s %p",wo->getNameId().c_str(),wo);
-	}
-
-	// Matrix fuer die Tiles anlegen
-	if (m_region_data.m_tiles!=0)
-		delete (m_region_data.m_tiles);
-
-
-	m_region_data.m_tiles = new Matrix2d<char>(2*m_region_data.m_dimx,2*m_region_data.m_dimy);
-
-	// Tiles einlesen
-	for (i=0;i<m_region_data.m_dimx*2;i++)
-	{
-		for (j=0;j<m_region_data.m_dimy*2;j++)
-		{
-			cv->fromBuffer<char>(*(m_region_data.m_tiles->ind(i,j)));
-			//printf("%i ",*(m_region_data.m_tiles->ind(i,j)));
-		}
-		//printf("\n");
-	}
-
-
-	// Daten zur Region wurden geaendert
-	m_modified |= REGION_MODIFIED;
-
-}
-*/
 
 void* Document::writeSaveFile(void* doc_ptr)
 {

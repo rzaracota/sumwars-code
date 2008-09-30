@@ -26,7 +26,7 @@ void Action::init()
 	a->m_description = "descr_noaction";
 	a->m_enum_name = "noaction";
 	a->m_animation[NO_WEAPON].push_back("idle");
-	a->m_animation[ONE_HANDED].push_back("attack");
+	a->m_animation[ONE_HANDED].push_back("idle");
 	a->m_animation[TWO_HANDED].push_back("idle");
 	
 	
@@ -52,7 +52,7 @@ void Action::init()
 
 	a = &(Action::m_base_info[Action::TAKE_ITEM]);
 	a->m_timer_nr=0;
-	a->m_standard_time=50;
+	a->m_standard_time=20;
 	a->m_timer=0;
 	a->m_base_action = Action::WALK;
 	a->m_critical_perc=0.7;

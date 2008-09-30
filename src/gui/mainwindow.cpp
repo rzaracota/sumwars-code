@@ -2783,7 +2783,7 @@ void MainWindow::updateSkilltree()
 
 void MainWindow::updateItemTooltip(unsigned int pos)
 {
-	ServerItem* item = static_cast<ServerItem*>(m_document->getLocalPlayer()->getEquipement()->getItem(pos));
+	Item* item = m_document->getLocalPlayer()->getEquipement()->getItem(pos);
 	if (item ==0)
 		return;
 	
@@ -3044,9 +3044,12 @@ void MainWindow::updateObjectInfo()
 			}
 			else
 			{
-				m_document->getGUIState()->m_cursor_object_id =0;
-				m_document->getGUIState()->m_cursor_object="";
+				m_document->getGUIState()->m_cursor_item_id =0;
 			}
+		}
+		else
+		{
+			m_document->getGUIState()->m_cursor_item_id =0;
 		}
 
 

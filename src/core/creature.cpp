@@ -1683,7 +1683,7 @@ void Creature::calcAction()
 		range =getGeometry()->m_shape.m_radius;
 
 	if (m_command.m_type == Action::TAKE_ITEM)
-		range = 1;
+		range = 2;
 
 	// Koordinaten des Zielpunktes
 	float goalx = m_command.m_goal_coordinate_x;

@@ -1248,6 +1248,8 @@ void World::updatePlayers()
 		slot = it->first;
 		pl = static_cast<Player*>(it->second);
 		
+		// feststellen, ob ein Spieler das Spiel verlassen hat
+		// ggf Event erstellen
 		if (m_server && slot != LOCAL_SLOT &&  
 				  (m_network->getSlotStatus( slot )!=NET_CONNECTED || pl->getState() == WorldObject::STATE_QUIT))
 		{
@@ -1267,6 +1269,7 @@ void World::updatePlayers()
 			continue;
 		}
 		
+		// Spielern die auf Daten zur aktuellen Region warten, Daten senden
 		if (pl->getState() == WorldObject::STATE_REGION_DATA_REQUEST)
 		{
 			DEBUG("send data request to server");
@@ -1289,13 +1292,15 @@ void World::updatePlayers()
 			m_network->pushSlotMessage(msg.getBitStream());
 		}
 		
+		// Spieler, deren Regionen komplett geladen wurden aktivieren
 		if (pl->getState() == WorldObject::STATE_ENTER_REGION && pl->getRegion() !=0 )
 		{
 			insertPlayerIntoRegion(pl,pl->getGridLocation()->m_region);
 			pl->setState(WorldObject::STATE_ACTIVE);
 		}
 		
-		
+		// Wenn aktuelle Instanz Server ist:
+		// Daten von allen verbundenen Client annehmen und verarbeiten
 		if (m_server && slot != LOCAL_SLOT)
 		{
 			// Nachrichten fuer die Spieler abholen und Verteilen
@@ -1303,7 +1308,7 @@ void World::updatePlayers()
 			Packet* data;
 			CharConv* cv;
 			
-			
+			// Schleife ueber die Nachrichten
 			while (m_network->numberSlotMessages( slot )>0)
 			{
 				m_network->popSlotMessage( data ,slot);
@@ -1312,6 +1317,7 @@ void World::updatePlayers()
 
 				headerp.fromString(cv);
 				
+				// Kommando bearbeiten
 				if (headerp.m_content ==  PTYPE_C2S_COMMAND)
 				{
 					// Kommando Daten erhalten
@@ -1329,6 +1335,7 @@ void World::updatePlayers()
 					handleCommand(&com,slot,cv->getDelay());
 				}
 				
+				// Datenanfrage bearbeiten
 				if (headerp.m_content == PTYPE_C2S_DATA_REQUEST)
 				{
 					// Datenanfrage erhalten

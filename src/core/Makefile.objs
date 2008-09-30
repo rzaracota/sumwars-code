@@ -26,7 +26,6 @@
 ../core/priest.o
 ../core/itemfactory.o
 ../core/itemloader.o
-../core/serveritem.o
 ../core/damage.o
 ../core/random.o
 ../core/region.o

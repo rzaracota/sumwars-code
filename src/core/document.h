@@ -60,7 +60,7 @@
 #include "damage.h"
 #include "itemlist.h"
 #include "random.h"
-#include "serveritem.h"
+#include "item.h"
 #include "matrix2d.h"
 #include "tiles.h"
 #include "dropitem.h"
@@ -381,40 +381,6 @@ class Document
 	{
 		m_modified = mod;
 	}
-
-	
-	
-	
-	
-
-	
-	/**
-	 * \fn ServerItem* getDetailedItem()
-	 * \brief Gibt Zeiger auf das Item, das aktuell per Tooltip genauer angezeigt wird zurueck
-	 */
-	//ServerItem* getDetailedItem();
-
-	
-	/**
-	 * \fn ServerItem* getDetailedItem()
-	 * \brief Gibt Position des Items, das aktuell per Tooltip genauer angezeigt wird zurueck
-	 */
-	/*short getDetailedItemPos()
-	{
-		return 0;
-	}
-*/
-	
-	/**
-	 * \fn Action::ActionType getAbilityPos()
-	 * \brief Gibt die Position der Aktion die gerade als Tooltip angezeigt zurueck
-	 */
-	/*
-	Action::ActionType getAbilityPos()
-	{
-		return Action::NOACTION;
-	}
-	*/
 
 
 	/**

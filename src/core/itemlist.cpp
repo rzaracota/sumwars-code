@@ -408,10 +408,10 @@ bool Equipement::swapCursorItem(int pos)
 	return swapItem(m_cursor_item,pos);
 }
 	
-bool  Equipement::insertItem(Item* item)
+short  Equipement::insertItem(Item* item)
 {
 	if (item ==0)
-		return true;
+		return NONE;
 	
 	Item* itm = item;
 	int pos;
@@ -421,23 +421,25 @@ bool  Equipement::insertItem(Item* item)
 	
 	if (pos ==-1)
 	{
-		return false;
+		return NONE;
 	}
 	
 	if (item->m_size == Item::SMALL)
 	{
 		swapItem(itm,pos+SMALL_ITEMS);
+		return pos+SMALL_ITEMS;
 	}
 	if (item->m_size == Item::MEDIUM)
 	{
 		swapItem(itm,pos+MEDIUM_ITEMS);
+		return pos+MEDIUM_ITEMS;
 	}
 	if (item->m_size == Item::BIG)
 	{
 		swapItem(itm,pos+BIG_ITEMS);
+		return pos+BIG_ITEMS;
 	}
 	
-	return true;
 }
 	
 int Equipement::getNumberItems(bool secondary_equip)

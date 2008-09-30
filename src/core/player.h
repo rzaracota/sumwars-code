@@ -36,7 +36,7 @@
 #include "dropitem.h"
 #include "networkstruct.h"
 #include "servernetwork.h"
-#include "serveritem.h"
+#include "item.h"
 
 /**
  * \class Player
@@ -145,16 +145,16 @@ public:
 	virtual void calcBaseAttrMod();
 	
 	/**
-	 * \fn ServerItem* getWeapon()
+	 * \fn Item* getWeapon()
 	 * \brief Gibt die aktuell genutzte Waffe zurueck
 	 */
-	ServerItem* getWeapon();
+	Item* getWeapon();
 	
 	/**
-	 * \fn ServerItem* getShield()
+	 * \fn Item* getShield()
 	 * \brief Gibt das aktuell genutzte Schild zurueck
 	 */
-	ServerItem* getShield();
+	Item* getShield();
 	
 	
 	/**
@@ -181,6 +181,14 @@ public:
 	 * \return gibt an, ob die Behandlung fehlerfrei verlaufen ist
 	 */
 	bool onItemClick(ClientCommand* command);
+	
+	/**
+	 * \fn bool insertItem(Item* itm)
+	 * \brief Fuegt ein Items in das Inventar ein
+	 * \param itm einzufuegendes Item
+	 * \return Position an der das Item eingefuegt wurde
+	 */
+	short insertItem(Item* itm);
 	
 	/**
 	 * \fn void abortAction()

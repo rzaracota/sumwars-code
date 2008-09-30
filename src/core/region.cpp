@@ -1050,7 +1050,7 @@ void Region::createItemFromString(CharConv* cv, int id)
 	di->m_item = item;
 	di->m_x = sx;
 	di->m_y = sy;
-	DEBUG5("dropped item %i", sx*10000+sy);
+	DEBUG("dropped item %i", sx*10000+sy);
 	di->m_time = 0;
 			
 	Gridunit* gu = (m_data_grid->ind(sx/8,sy/8));
@@ -1371,6 +1371,8 @@ bool Region::deleteItem(int id)
 			
 			insertEvent(event);
 		}
+		
+		DEBUG("item deleted %i",id);
 		
 		return true;
 	}

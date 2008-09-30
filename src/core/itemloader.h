@@ -1,7 +1,7 @@
 #ifndef ITEMLOADER_H
 #define ITEMLOADER_H
 
-#include "serveritem.h"
+#include "item.h"
 #include "itemfactory.h"
 #include <map>
 #include "dropslot.h"

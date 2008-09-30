@@ -40,7 +40,67 @@
 #include "charconv.h"
 #include "debug.h"
 
+#include "damage.h"
+#include "creaturestruct.h"
+
+#include <math.h>
+
+
 using namespace std;
+
+/**
+ * \struct WeaponAttr
+ * \brief Eigenschaften und Attribute einer Waffe
+ */
+struct WeaponAttr
+{
+	/**
+	 * \var m_damage
+	 * \brief Schaden, den die Waffe austeilt
+	 */
+	Damage m_damage;
+
+	/**
+	 * \var m_attack_range
+	 * \brief Gibt die Reichweite der Waffe an. Fuer Schusswaffen auf  ITEM_BOW_RANGE setzen
+	 */
+	float m_attack_range;
+
+	/**
+	 * \var m_two_handed
+	 * \brief Ist auf true gesetzt, wenn die Waffe beidhaendig benutzt wird.
+	 */
+	bool m_two_handed;
+
+	/**
+	 * \var m_dattack_speed
+	 * \brief Gibt die Aenderung der Angriffsgeschwindigkeit bei Benutzen dieser Waffe an
+	 */
+	short m_dattack_speed;
+
+	/**
+	 * \fn void init()
+	 * \brief initialisiert die Datenfelder
+	 */
+	void init()
+	{
+		m_attack_range=1;
+		m_dattack_speed=0;
+		m_two_handed=false;
+		m_damage.init();
+	}
+
+	/**
+	 * \fn WeaponAttr()
+	 * \brief Konstruktor
+	 */
+	WeaponAttr()
+	{
+		init();
+	}
+};
+
+struct ItemBasicData;
 
 
 /**
@@ -83,44 +143,7 @@ struct Item {
 	 * \var  Subtype
 	 */
 	typedef std::string Subtype;
-/*
-	enum Subtype
-	{
-		NOSUBTYPE = 0,
 
-		SHORT_SWORD = 1,
-		LONG_SWORD = 2,
-		WOODEN_BOW = 3,
-		LONG_BOW = 4,
-		BURNING_BOW = 5,
-		BATTLE_AXE = 6,
-		HOLY_FLAIL = 7,
-		FROZEN_MAGIC_WAND = 14,
-
-
-		LEATHER_ARMOR = 1000,
-		TILED_ARMOR = 1001,
-		HEAVY_ARMOR = 1002,
-
-		STEEL_HELMET = 2000,
-		DIVINE_HELMET =2001,
-
-		MAGIC_RING = 3000,
-
-		SMALL_HEAL_POTION = 4000,
-		BIG_HEAL_POTION = 4001,
-		HEAL_BLIND_POTION = 4002,
-		UNFREEZE_POTION = 4003,
-
-
-		WOODEN_SHIELD = 5000,
-		IRON_SHIELD=5001,
-
-		LEATHER_GLOVES = 6000,
-
-		MAGIC_AMULET = 7000,
-	};
-*/
 	/**
 	 * \enum CharRequirement
 	 * \brief Aufzaehlung der Charakterklassen als Vorraussetzung fuer das Verwendung eines Gegenstandes
@@ -133,14 +156,39 @@ struct Item {
 		REQ_PRIEST=8,
 		REQ_NONE=15,
 	};
+	
+	/**
+	 * \fn enum InfoFlags
+	 * \brief Zaehlt auf, welche Informationen zu einem Item vorliegen koennen
+	 */
+	enum InfoFlags
+	{
+		NOINFO=0,
+		USEUP_INFO=1,
+		EQUIP_INFO=2,
+		WEAPON_INFO=4,
+	};
 
+	/**
+	 * \fn Item()
+	 * \brief Konstruktor
+	 */
+	Item();
+
+	
+	/**
+	 * \fn Item(ItemBasicData& data)
+	 * \brief erzeugt ein neuen Gegenstand mit den vorgegebenen Daten
+	 * \param data Daten auf deren Basis der Gegenstand erzeugt wird
+	 */
+	Item(ItemBasicData& data);
+	
 	/**
 	 * \fn virtual ~Item()
 	 * \brief Destruktor
 	 */
-	virtual ~Item()
-	{
-	}
+	virtual ~Item();
+	
 
 	/**
 	 * \fn String getName()
@@ -170,7 +218,37 @@ struct Item {
 	 * \return Zeiger hinter den gelesenen Datenbereich
 	 */
 	virtual void fromString(CharConv* cv);
+	
+	
+	/**
+	 * \fn char* toSavegame(CharConv* cv)
+	 * \brief Schreibt das Item inklusive allen Extradaten in den Puffer
+	 * \param buf Ausgabepuffer
+	 * \return Zeiger hinter den beschriebenen Datenbereich
+	 */
+	void toStringComplete(CharConv* cv);
 
+
+	/**
+	 * \fn char* fromSavegame(CharConv* cv)
+	 * \brief Laedt das Item inklusive allen Extradaten aus dem Puffer
+	 * \param buf Zeiger auf Savegame
+	 * \return Zeiger hinter den Datenbereich
+	 */
+	void fromStringComplete(CharConv* cv);
+
+	/**
+	 * \fn std::string getDescription()
+	 * \brief Gibt eine Beschreibung in Textform aus
+	 */
+	std::string getDescription();
+
+	/**
+	 * \fn calcPrice()
+	 * \brief Berechnet den Wert des Items
+	 */
+	void calcPrice();
+	
 
 	/**
 	* \var m_subtype;
@@ -192,13 +270,133 @@ struct Item {
 	Size m_size;
 
 
+/**
+	 * \var m_price;
+	 * \brief Gibt Preis des Gegenstands an
+ */
+	int m_price;
 
+	/**
+	 * \var m_useup_effect
+	 * \brief Gibt die Veraenderung der dynamischen Attribute an, die beim verbrauchen des Gegenstandes eintritt. Wenn der Zeiger auf NULL gesetzt ist, kann der Gegenstand nicht verbraucht werden.
+	 */
+	CreatureDynAttrMod* m_useup_effect;
+
+	/**
+	 * \var m_equip_effect
+	 * \brief Gibt die Veraenderung der Basisattribute an, die beim verwenden des Gegenstandes aus Ausruestungsgegenstand eintritt. Wenn der Zeiger auf NULL gesetzt ist, kann der Gegenstand nicht auf diese Weise verwendet werden.
+	 */
+	CreatureBaseAttrMod* m_equip_effect;
+
+	/**
+	 * \var m_weapon_attr
+	 * \brief Gibt den Attribute des Gegenstandes als Waffe an. Sollte bei allen Gegenstaenden, die nicht Waffen sind auf NULL gesetzt sein
+	 */
+	WeaponAttr* m_weapon_attr;
+
+	/**
+	 * \var char m_level_req
+	 * \brief Erforderliches Level um das Item zu verwenden
+	 */
+	char m_level_req;
+
+	/**
+	 * \var char m_char_req
+	 * \brief Anforderungen an die Charakterklasse
+	 */
+	char m_char_req;
+
+	/**
+	 * \var float m_magic_power
+	 * \brief Gibt Verzauberungsstärke an
+	 */
+	float m_magic_power;
 
 };
 
-/*
 
-*/
+/**
+ * \struct ItemBasicData
+ *  \brief Informationen die noetig sind, um ein bestimmtes Item zu erzeugen
+ */
+struct ItemBasicData
+{
+    /**
+	 * \var m_useup_effect
+	 * \brief Gibt die Veraenderung der dynamischen Attribute an, die beim verbrauchen des Gegenstandes eintritt. Wenn der Zeiger auf NULL gesetzt ist, kann der Gegenstand nicht verbraucht werden.
+	 */
+	CreatureDynAttrMod* m_useup_effect;
+
+	/**
+	 * \var m_equip_effect
+	 * \brief Gibt die Veraenderung der Basisattribute an, die beim verwenden des Gegenstandes aus Ausruestungsgegenstand eintritt. Wenn der Zeiger auf NULL gesetzt ist, kann der Gegenstand nicht auf diese Weise verwendet werden.
+	 */
+	CreatureBaseAttrMod* m_equip_effect;
+
+	/**
+	 * \var m_weapon_attr
+	 * \brief Gibt den Attribute des Gegenstandes als Waffe an. Sollte bei allen Gegenstaenden, die nicht Waffen sind auf NULL gesetzt sein
+	 */
+	WeaponAttr* m_weapon_attr;
+
+	/**
+	 * \var char m_level_req
+	 * \brief Erforderliches Level um das Item zu verwenden
+	 */
+	char m_level_req;
+
+	/**
+	 * \var char m_char_req
+	 * \brief Anforderungen an die Charakterklasse
+	 */
+	char m_char_req;
+
+	/**
+	 * \var m_subtype;
+	 * \brief Gibt die Unterart eines Gegenstands an ((Langschwert, Dolch usw)
+	 */
+	Item::Subtype m_subtype;
+
+
+	/**
+	 * \var m_type;
+	 * \brief Gibt Typ des Gegenstands an (Waffe, Helm usw...)
+	 */
+	Item::Type m_type;
+
+	/**
+	 * \var m_size
+	\brief Gibt die Groesse des Gegenstandes (klein,mittel, gross) an
+	 */
+	Item::Size m_size;
+	
+	/**
+	 * \var int m_price
+	 * \brief Wert des Gegenstandes
+	 */
+	int m_price;
+
+	/**
+	 * \var float m_modchance[31]
+	 * \brief relative Chance auf die verschiedenen Modifikationen
+	 */
+	float m_modchance[31];
+
+	/**
+	 * \var float m_min_enchant
+	 * \brief minimale Starke einer Verzauberung des Items
+	 */
+	float m_min_enchant;
+
+	/**
+	 * \var float m_max_enchant
+	 * \brief maximale Starke einer Verzauberung des Items
+	 */
+	float m_max_enchant;
+
+	ItemBasicData();
+
+};
 
 
 
