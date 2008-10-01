@@ -3609,6 +3609,8 @@ void Creature::applyBaseAttrMod(CreatureBaseAttrMod* mod, bool add)
 {
 	int i;
 	// Deltawerte dazu addieren
+	float oldmaxhp = m_base_attr_mod.m_max_health;
+	
 	m_base_attr_mod.m_armor +=mod->m_darmor;
 	m_base_attr_mod.m_block +=mod->m_dblock;
 	m_base_attr_mod.m_strength +=mod->m_dstrength;
@@ -3619,6 +3621,7 @@ void Creature::applyBaseAttrMod(CreatureBaseAttrMod* mod, bool add)
 	m_base_attr_mod.m_max_health += mod->m_dmax_health;
 	m_base_attr_mod.m_max_health += mod->m_dstrength*5;
 	m_base_attr_mod.m_attack_speed += mod->m_ddexterity*3;
+	m_dyn_attr.m_health *= m_base_attr_mod.m_max_health /oldmaxhp;
 
 	
 	m_base_attr_mod.m_attack_speed +=mod->m_dattack_speed;
@@ -3688,7 +3691,8 @@ bool Creature::removeBaseAttrMod(CreatureBaseAttrMod* mod)
 {
 	int i;
 	bool ret = false;
-
+	float oldmaxhp = m_base_attr_mod.m_max_health;
+	
 	// Deltas abziehen
 	m_base_attr_mod.m_armor -=mod->m_darmor;
 	m_base_attr_mod.m_block -=mod->m_dblock;
@@ -3700,6 +3704,9 @@ bool Creature::removeBaseAttrMod(CreatureBaseAttrMod* mod)
 	m_base_attr_mod.m_attack_speed -=mod->m_dattack_speed;
 	m_base_attr_mod.m_max_health -= mod->m_dstrength*5;
 	m_base_attr_mod.m_attack_speed -= mod->m_ddexterity*3;
+	
+	m_dyn_attr.m_health *= m_base_attr_mod.m_max_health /oldmaxhp;
+
 	
 	// Modifikationen feststellen
 	if (mod->m_dwalk_speed!=0)
