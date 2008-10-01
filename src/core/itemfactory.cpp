@@ -1,4 +1,5 @@
 #include "itemfactory.h"
+#include "itemloader.h"
 
 #define USE_ITEMLOADER
 
@@ -612,13 +613,13 @@ void ItemFactory::init()
 	list<ItemBasicData*>* item_list;
 	item_list = itemloader->loadItemBasicData("../../data/items.xml");
 	
-	// Debugging: Anzeigen der geladenen Items
-	/*
 	if (item_list != 0)
 	{
 		list<ItemBasicData*>::iterator iter = item_list->begin();
 		while (iter != item_list->end())
 		{
+			// Debugging: Anzeigen der geladenen Items
+			/*
 			cout << "m_useup_effect" << " = " << (*iter)->m_useup_effect << endl;
 			cout << "m_equip_effect" << " = " << (*iter)->m_equip_effect << endl;
 			cout << "m_weapon_attr" << " = " << (*iter)->m_weapon_attr << endl;
@@ -644,27 +645,41 @@ void ItemFactory::init()
 			cout << "m_min_enchant" << " = " << (*iter)->m_min_enchant << endl;
 			cout << "m_max_enchant" << " = " << (*iter)->m_max_enchant << endl;
 			cout << "------------------------------------------------" << endl;
-			
+			*/
 			registerItem((*iter)->m_type, (*iter)->m_subtype, *iter);
 			*iter++;
 		}
 	}
-	*/
+	
 	
 	list<DropChanceData*>* drop_chance_list;
 	drop_chance_list = itemloader->loadDropChanceData("../../data/items.xml");
 	
 	if (drop_chance_list != 0)
 	{
+		// Daten auslesen und registrieren
 		list<DropChanceData*>::iterator iter = drop_chance_list->begin();
 		while (iter != drop_chance_list->end())
 		{
 			registerItemDrop( (*iter)->m_type, (*iter)->m_subtype, DropChance( (*iter)->m_level, (*iter)->m_probability, (*iter)->m_size) );
 			*iter++;
 		}
+		
+		// Liste aus Speicher loeschen
+		iter = drop_chance_list->begin();
+		while (iter != drop_chance_list->end())
+		{
+			delete *iter;
+			*iter++;
+		}
 	}
 	
+	delete item_list;
+	item_list = 0;
+	delete drop_chance_list;
+	drop_chance_list = 0;
 	delete itemloader;
+	itemloader = 0;
 #endif
 
 #ifndef USE_ITEMLOADER

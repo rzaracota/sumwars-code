@@ -123,8 +123,8 @@ class ItemLoader
 	DropChanceData* m_drop_chance_data;
 	list<DropChanceData*>* m_drop_chance_data_list;
 	
-	//ItemMeshData* m_item_data;
-	//list<ItemMeshData*>* m_item_list;
+	ItemMeshData* m_item_mesh_data;
+	list<ItemMeshData*>* m_item_mesh_list;
 	
 	float m_weapon_mod[31];
 };

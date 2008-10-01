@@ -104,6 +104,61 @@ int ItemLoader::generateItemBasicData(TiXmlElement* pElement, string element)
 		
 		while (element == "EquipEffect" && pAttrib)
 		{
+			if (!strcmp(pAttrib->Name(), "darmor") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
+				m_item_data->m_equip_effect->m_darmor = static_cast<short>(ival);
+			else if (!strcmp(pAttrib->Name(), "dblock") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
+				m_item_data->m_equip_effect->m_dblock = static_cast<short>(ival);
+			else if (!strcmp(pAttrib->Name(), "dmax_health") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
+				m_item_data->m_equip_effect->m_dmax_health = static_cast<float>(dval);
+			else if (!strcmp(pAttrib->Name(), "dattack") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
+				m_item_data->m_equip_effect->m_dattack = static_cast<short>(ival);
+			else if (!strcmp(pAttrib->Name(), "dstrength") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
+				m_item_data->m_equip_effect->m_dstrength = static_cast<short>(ival);
+			else if (!strcmp(pAttrib->Name(), "ddexterity") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
+				m_item_data->m_equip_effect->m_ddexterity = static_cast<short>(ival);
+			else if (!strcmp(pAttrib->Name(), "dmagic_power") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
+				m_item_data->m_equip_effect->m_dmagic_power = static_cast<short>(ival);
+			else if (!strcmp(pAttrib->Name(), "dwillpower") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
+				m_item_data->m_equip_effect->m_dwillpower = static_cast<short>(ival);
+			else if (!strcmp(pAttrib->Name(), "dresistances_physical") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
+				m_item_data->m_equip_effect->m_dresistances[Damage::PHYSICAL] = static_cast<short>(ival);
+			else if (!strcmp(pAttrib->Name(), "dresistances_air") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
+				m_item_data->m_equip_effect->m_dresistances[Damage::AIR] = static_cast<short>(ival);
+			else if (!strcmp(pAttrib->Name(), "dresistances_ice") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
+				m_item_data->m_equip_effect->m_dresistances[Damage::ICE] = static_cast<short>(ival);
+			else if (!strcmp(pAttrib->Name(), "dresistances_fire") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
+				m_item_data->m_equip_effect->m_dresistances[Damage::FIRE] = static_cast<short>(ival);
+			else if (!strcmp(pAttrib->Name(), "dresistances_cap_physical") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
+				m_item_data->m_equip_effect->m_dresistances_cap[Damage::PHYSICAL] = static_cast<short>(ival);
+			else if (!strcmp(pAttrib->Name(), "dresistances_cap_air") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
+				m_item_data->m_equip_effect->m_dresistances_cap[Damage::AIR] = static_cast<short>(ival);
+			else if (!strcmp(pAttrib->Name(), "dresistances_cap_ice") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
+				m_item_data->m_equip_effect->m_dresistances_cap[Damage::ICE] = static_cast<short>(ival);
+			else if (!strcmp(pAttrib->Name(), "dresistances_cap_fire") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
+				m_item_data->m_equip_effect->m_dresistances_cap[Damage::FIRE] = static_cast<short>(ival);
+			else if (!strcmp(pAttrib->Name(), "dwalk_speed") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
+				m_item_data->m_equip_effect->m_dwalk_speed = static_cast<short>(ival);
+			else if (!strcmp(pAttrib->Name(), "dattack_speed") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
+				m_item_data->m_equip_effect->m_dattack_speed = static_cast<short>(ival);
+			else if (!strcmp(pAttrib->Name(), "xspecial_flags") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
+				m_item_data->m_equip_effect->m_xspecial_flags = ival;
+			else if (!strcmp(pAttrib->Name(), "time") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
+				m_item_data->m_equip_effect->m_time = static_cast<float>(dval);
+			else if (!strcmp(pAttrib->Name(), "xabilities0") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
+				m_item_data->m_equip_effect->m_xabilities[0] = ival;
+			else if (!strcmp(pAttrib->Name(), "xabilities1") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
+				m_item_data->m_equip_effect->m_xabilities[1] = ival;
+			else if (!strcmp(pAttrib->Name(), "xabilities2") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
+				m_item_data->m_equip_effect->m_xabilities[2] = ival;
+			else if (!strcmp(pAttrib->Name(), "xabilities3") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
+				m_item_data->m_equip_effect->m_xabilities[3] = ival;
+			else if (!strcmp(pAttrib->Name(), "xabilities4") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
+				m_item_data->m_equip_effect->m_xabilities[4] = ival;
+			else if (!strcmp(pAttrib->Name(), "xabilities5") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
+				m_item_data->m_equip_effect->m_xabilities[5] = ival;
+			else if (!strcmp(pAttrib->Name(), "ximmunity") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
+				m_item_data->m_equip_effect->m_ximmunity = static_cast<char>(ival);
+			
 			i++;
 			pAttrib=pAttrib->Next();
 		}
@@ -155,7 +210,6 @@ int ItemLoader::generateItemBasicData(TiXmlElement* pElement, string element)
 	
 	if (element == "Attribute" && pAttrib)
 	{
-	
 		while (element == "Attribute" && pAttrib)
 		{
 			if (!strcmp(pAttrib->Name(), "level_requirement") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
@@ -414,18 +468,126 @@ list<DropChanceData*>* ItemLoader::loadDropChanceData(const char* pFilename)
 	}
 }
 
+//##############################################################################
 
+int ItemLoader::generateItemMeshData(TiXmlElement* pElement, string element)
+{
+	if ( !pElement ) return 0;
+	
+	TiXmlAttribute* pAttrib=pElement->FirstAttribute();
+	int i=0;
+	int ival;
+	double dval;
+	
+	if (element == "Item" && pAttrib)
+	{
+		if (m_item_mesh_data == 0)
+		{
+			m_item_mesh_data = new ItemMeshData;
+		}
+		
+		while (element == "Item" && pAttrib)
+		{
+			if (!strcmp(pAttrib->Name(), "subtype"))
+				m_item_mesh_data->m_subtype = pAttrib->Value();
+			
+			i++;
+			pAttrib=pAttrib->Next();
+		}
+	}
+	
+	if (element == "Mesh" && pAttrib)
+	{
+		while (element == "Mesh" && pAttrib)
+		{
+			if (!strcmp(pAttrib->Name(), "file"))
+				m_item_mesh_data->m_mesh = pAttrib->Value();
+			
+			i++;
+			pAttrib=pAttrib->Next();
+		}
+	}
+	
+	return i;
+}
+
+
+void ItemLoader::searchItemMeshData(TiXmlNode* pParent)
+{
+	if ( !pParent ) return;
+	
+	TiXmlNode* pChild;
+	TiXmlText* pText;
+	
+	int t = pParent->Type();
+	int num;
+	
+	switch ( t )
+	{
+	case TiXmlNode::ELEMENT:
+		//printf( "Element [%s]", pParent->Value() );
+		num = generateItemMeshData(pParent->ToElement(), pParent->Value());
+		/*switch(num)
+		{
+			case 0:  printf( " (No attributes)"); break;
+			case 1:  printf( "%s1 attribute", getIndentAlt(indent)); break;
+			default: printf( "%s%d attributes", getIndentAlt(indent), num); break;
+		}*/
+		break;
+	/*
+	case TiXmlNode::TEXT:
+		pText = pParent->ToText();
+		printf( "Text: [%s]", pText->Value() );
+		break;
+	*/
+	default:
+		break;
+	}
+	
+	for ( pChild = pParent->FirstChild(); pChild != 0; pChild = pChild->NextSibling())
+	{
+		searchItemMeshData(pChild);
+		
+		if ( !strcmp(pChild->Value(), "Item") && pChild->Type() == TiXmlNode::ELEMENT)
+		{
+			m_item_mesh_list->push_back(m_item_mesh_data);
+			m_item_mesh_data = 0;
+			DEBUG5("Item Mesh loaded");
+		}
+	}
+}
+
+
+list<ItemMeshData*>* ItemLoader::loadItemMeshData(const char* pFilename)
+{
+	m_item_mesh_data = 0;
+	m_item_mesh_list = new list<ItemMeshData*>;
+	
+	TiXmlDocument doc(pFilename);
+	bool loadOkay = doc.LoadFile();
+	
+	if (loadOkay)
+	{
+		DEBUG5("Loading %s", pFilename);
+		searchItemMeshData(&doc);
+		DEBUG5("Loading %s finished", pFilename);
+		return m_item_mesh_list;
+	}
+	else
+	{
+		DEBUG("Failed to load file %s", pFilename);
+		return 0;
+	}
+}
 
 
 
 
 ItemLoader::~ItemLoader()
 {
-	for (list<DropChanceData*>::iterator iter = m_drop_chance_data_list->begin(); iter != m_drop_chance_data_list->end(); iter++)
-	{
-		delete (*iter);
-	}
-	delete m_drop_chance_data_list;
-	m_drop_chance_data_list = 0;
+	// FIXME Löschen der Listen erfolgt nach dem Aufruf der Methoden manuell
+	//       in der rufenden Funktion. Dies eventuell hier implementieren.
+	//       Daten in m_item_list (list<ItemBasicData*>) duerfen nicht geloescht
+	//       werden!
 }
 

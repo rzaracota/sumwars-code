@@ -50,7 +50,10 @@ void ObjectFactory::init()
 		}
 	}
 	
+	delete monster_list;
+	monster_list = 0;
 	delete objectloader;
+	objectloader = 0;
 #endif
 
 #ifndef USE_OBJECTLOADER

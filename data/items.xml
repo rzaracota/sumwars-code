@@ -33,12 +33,12 @@
 		dmagic_power="short"
 		dwillpower="short"
 		dresistances_physical="short"
-		dresistances_air="short"
-		dresistances_ice="short"
-		dresistances_fire="short"
 		dresistances_cap_physical="short"
+		dresistances_air="short"
 		dresistances_cap_air="short"
+		dresistances_ice="short"
 		dresistances_cap_ice="short"
+		dresistances_fire="short"
 		dresistances_cap_fire="short"
 		dwalk_speed="short"
 		dattack_speed="short"
@@ -86,10 +86,10 @@
 	<EquipEffect />
 	<WeaponAttribute
 		damage_min_physical="5"
-		damage_max_physical="10"
+		damage_max_physical="12"
 		damage_attack="20"
 		damage_power="30"
-		attack_range="1.0"
+		attack_range="1.4"
 		two_handed="no"
 		dattack_speed="500"
 	/>

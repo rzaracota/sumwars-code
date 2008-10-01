@@ -1,4 +1,7 @@
 #include "scene.h"
+#include "itemloader.h"
+
+#define USE_ITEMLOADER
 
 Scene::Scene(Document* doc,Ogre::RenderWindow* window)
 {
@@ -91,7 +94,42 @@ void Scene::registerMeshes()
 	registerProjectile(Projectile::HYPNOSIS,"","Hypnosis");
 
 	// Items
+#ifdef USE_ITEMLOADER
+	// Item Meshes aus XML-Datei Laden
+	ItemLoader* itemloader = 0;
+	itemloader = new ItemLoader;
+	
+	list<ItemMeshData*>* item_mesh_list;
+	item_mesh_list = itemloader->loadItemMeshData("../../data/items.xml");
+	
+	if (item_mesh_list != 0)
+	{
+		// Daten auslesen und registrieren
+		list<ItemMeshData*>::iterator iter = item_mesh_list->begin();
+		while (iter != item_mesh_list->end())
+		{
+			registerItem((*iter)->m_subtype, (*iter)->m_mesh);
+			*iter++;
+		}
+		
+		// Liste aus Speicher loeschen
+		iter = item_mesh_list->begin();
+		while (iter != item_mesh_list->end())
+		{
+			delete *iter;
+			*iter++;
+		}
+	}
+	
+	delete item_mesh_list;
+	item_mesh_list = 0;
+	delete itemloader;
+	itemloader = 0;
+#endif
+
+#ifndef USE_ITEMLOADER
 	registerItem("short_sw","sword.mesh");
+#endif
 	registerItem("long_sw","sword.mesh");
 	registerItem("wood_bow","sword.mesh");
 	registerItem("long_bow","sword.mesh");
@@ -114,8 +152,6 @@ void Scene::registerMeshes()
 	registerItem("heal_2","potion.mesh");
 	registerItem("heal_bl","potion.mesh");
 	registerItem("heal_fr","potion.mesh");
-
-
 }
 
 void Scene::registerObject(WorldObject::TypeInfo::ObjectSubtype subtype, std::string mesh, std::string particle_system, float scaling_factor)
