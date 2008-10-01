@@ -73,6 +73,25 @@ int ItemLoader::generateItemBasicData(TiXmlElement* pElement, string element)
 		
 		while (element == "UseupEffect" && pAttrib)
 		{
+			if (!strcmp(pAttrib->Name(), "dhealth") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
+				m_item_data->m_useup_effect->m_dhealth = static_cast<float>(dval);
+			else if (!strcmp(pAttrib->Name(), "dstatus_mod_immune_time0") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
+				m_item_data->m_useup_effect->m_dstatus_mod_immune_time[0] = static_cast<float>(dval);
+			else if (!strcmp(pAttrib->Name(), "dstatus_mod_immune_time1") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
+				m_item_data->m_useup_effect->m_dstatus_mod_immune_time[1] = static_cast<float>(dval);
+			else if (!strcmp(pAttrib->Name(), "dstatus_mod_immune_time2") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
+				m_item_data->m_useup_effect->m_dstatus_mod_immune_time[2] = static_cast<float>(dval);
+			else if (!strcmp(pAttrib->Name(), "dstatus_mod_immune_time3") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
+				m_item_data->m_useup_effect->m_dstatus_mod_immune_time[3] = static_cast<float>(dval);
+			else if (!strcmp(pAttrib->Name(), "dstatus_mod_immune_time4") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
+				m_item_data->m_useup_effect->m_dstatus_mod_immune_time[4] = static_cast<float>(dval);
+			else if (!strcmp(pAttrib->Name(), "dstatus_mod_immune_time5") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
+				m_item_data->m_useup_effect->m_dstatus_mod_immune_time[5] = static_cast<float>(dval);
+			else if (!strcmp(pAttrib->Name(), "dstatus_mod_immune_time6") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
+				m_item_data->m_useup_effect->m_dstatus_mod_immune_time[6] = static_cast<float>(dval);
+			else if (!strcmp(pAttrib->Name(), "dstatus_mod_immune_time7") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
+				m_item_data->m_useup_effect->m_dstatus_mod_immune_time[7] = static_cast<float>(dval);
+			
 			i++;
 			pAttrib=pAttrib->Next();
 		}
