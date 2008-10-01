@@ -10,6 +10,7 @@
 
 using namespace std;
 
+class World;
 
 
 /**
@@ -57,13 +58,13 @@ public:
 	ItemFactory();
 
 	/**
-	 * \fn Item* createItem(Item::Type type, Item::Subtype subtype)
+	 * \fn Item* createItem(Item::Type type, Item::Subtype subtype,int id=0,float magic_power =0)
 	 * \brief Erzeugt Objekt anhand zweier Parameter
 	 * \param type Typ des Items
 	 * \param subtype Untertyp des Items
 	 * \return Neues ServerItem
 	 */
-	static Item* createItem(Item::Type type, Item::Subtype subtype, float magic_power =0);
+	static Item* createItem(Item::Type type, Item::Subtype subtype, int id=0, float magic_power =0);
 
 	/**
 	 * \fn static void createMagicMods(Item* item, float* modchance, float magic_power, float min_enchant, float max_enchant)
@@ -118,7 +119,7 @@ public:
 			return Item::WEAPON;
 		}
 	}
-*/
+	*/
 
 	private:
 		/**
@@ -138,10 +139,17 @@ public:
          * \brief enthaelt Basisdaten zu allen Items
          */
 		static map<Item::Subtype,ItemBasicData*> m_item_data;
-
-
+		
+	public:
+		
+		/**
+		 * \var static World* m_world
+		 * \brief Welt fuer die die Items generiert werden
+		 */
+		static World* m_world;
 };
 
+#include "world.h"
 
 #endif //ITEMFACTORY_H
 

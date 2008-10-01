@@ -106,6 +106,7 @@ void Item::toString(CharConv* cv)
 	stmp[10] = '\0';
 	strncpy(stmp,m_subtype.c_str(),10);
 	cv->toBuffer(stmp,10);
+	cv->toBuffer(m_id);
 
 
 }

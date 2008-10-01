@@ -23,6 +23,7 @@ Region::Region(short dimx, short dimy, short id, World* world, bool server)
 	
 	// Liste der Gegenstaende
 	m_drop_items = new map<int,DropItem*>;
+	m_drop_item_locations = new map<int,DropItem*>;
 	
 	m_id = id;
 	
@@ -67,6 +68,7 @@ Region::~Region()
 	delete m_data_grid;
 	delete m_tiles;
 	delete m_drop_items;
+	delete m_drop_item_locations;
 	
 	delete m_events;
 	
@@ -763,6 +765,7 @@ void Region::deleteProjectile(DmgProjectile* proj)
 
 void Region::update(float time)
 {
+		
 	DEBUG5("\nUpdate aller WeltObjekte starten\n");
 	//DEBUG("m_players %p",m_players);
 	// Iterator zum durchmustern einer solchen Liste
@@ -816,6 +819,7 @@ void Region::update(float time)
 			// Polymorpher Funktionsaufruf
 			object->update(time);
 			++iter;
+
 		}
 		
 	}
@@ -1030,33 +1034,34 @@ void Region::createProjectileFromString(CharConv* cv)
 	insertProjectile(proj,x,y);
 }
 
-void Region::createItemFromString(CharConv* cv, int id)
+void Region::createItemFromString(CharConv* cv)
 {
 	char type;
 	char subtype[11];
 	subtype[10] ='\0';
 	Item* item;
+	int id;
+	short sx,sy;
+	cv->fromBuffer(sx);
+	cv->fromBuffer(sy);
 	
 	cv->fromBuffer<char>(type);
 	cv->fromBuffer(subtype,10);
+	cv->fromBuffer(id);
 		
-	item = ItemFactory::createItem((Item::Type) type, std::string(subtype));
+	item = ItemFactory::createItem((Item::Type) type, std::string(subtype),id);
 	item->fromString(cv);
-	
-	short sx = id / 10000;
-	short sy = id % 10000;
 	
 	DropItem* di = new DropItem;
 	di->m_item = item;
 	di->m_x = sx;
 	di->m_y = sy;
-	DEBUG("dropped item %i", sx*10000+sy);
+	DEBUG("dropped item %i at %i %i", id,sx,sy);
 	di->m_time = 0;
 			
-	Gridunit* gu = (m_data_grid->ind(sx/8,sy/8));
-			
-	gu->insertItem(di);
 	m_drop_items->insert(make_pair(id,di));
+	m_drop_item_locations->insert(make_pair(sx*10000+sy,di));
+	
 }
 
 
@@ -1137,12 +1142,9 @@ void Region::setRegionData(CharConv* cv,map<int,ServerWObject*>* players)
 	cv->fromBuffer<short>(nr_items);
 	DEBUG("items: %i",nr_items);
 	// Gegenstaende einlesen
-	short sx,sy;
 	for (int i=0; i<nr_items;i++)
 	{
-		cv->fromBuffer(sx);
-		cv->fromBuffer(sy);
-		createItemFromString(cv, sx*10000+sy);
+		createItemFromString(cv);
 			
 	}
 	
@@ -1204,7 +1206,7 @@ bool  Region::dropItem(Item* item, float x, float y)
 		}
 		
 		// Testen, ob dort nicht schon ein Item liegt
-		if (m_drop_items->find(i) == m_drop_items->end())
+		if (m_drop_item_locations->find(i) == m_drop_item_locations->end())
 		{
 			DEBUG5("field is free");
 			// Stelle ist frei
@@ -1216,10 +1218,9 @@ bool  Region::dropItem(Item* item, float x, float y)
 			DEBUG5("dropped item %i", sx*10000+sy);
 			di->m_time = 0;
 			
-			Gridunit* gu = (m_data_grid->ind(sx/8,sy/8));
+			m_drop_items->insert(make_pair(di->m_item->m_id,di));
+			m_drop_item_locations->insert(make_pair(i,di));
 			
-			gu->insertItem(di);
-			m_drop_items->insert(make_pair(i,di));
 			
 			DEBUG5("items dropped at %i %i",sx,sy);
 			
@@ -1227,7 +1228,7 @@ bool  Region::dropItem(Item* item, float x, float y)
 			{
 				Event event;
 				event.m_type = Event::ITEM_DROPPED;
-				event.m_id = i;
+				event.m_id = di->m_item->m_id;
 				
 				insertEvent(event);
 			}
@@ -1286,38 +1287,14 @@ bool  Region::dropItem(Item* item, float x, float y)
 	
 }
 
-bool Region::deleteItemAt(float x, float y)
-{
-	map<int,DropItem*>::iterator it;
-	short sx = (int) (x*2);
-	short sy = (int) (y*2);
-	it = m_drop_items->find((sx)*10000 + sy);
-	if (it == m_drop_items->end())
-	{
-		return false;
-	}
-	else
-	{
-		Gridunit* gu = (m_data_grid->ind(sx/8,sy/8));
-		// Gegenstand aus der Gridunit entfernen
-		gu->deleteItem(it->second);
-		// Item Wrapper loeschen
-		delete (it->second);
-		
-		m_drop_items->erase(it);
-		
-		return true;
-	}
-}
-
 Item*  Region::getItemAt(float x, float y)
 {
 	map<int,DropItem*>::iterator it;
 	short sx = (int) (x*2);
 	short sy = (int) (y*2);
-	int id = sx*10000 + sy;
-	DEBUG("searching ID %i", id);
-	it = m_drop_items->find(id);
+	int pos = sx*10000 + sy;
+	
+	it = m_drop_item_locations->find(pos);
 	if (it == m_drop_items->end())
 	{
 		return 0;
@@ -1342,11 +1319,26 @@ Item* Region::getItem(int id)
 	}
 }
 
-bool Region::deleteItem(int id)
+DropItem* Region::getDropItem(int id)
 {
 	map<int,DropItem*>::iterator it;
-	short sx = id /10000;
-	short sy = id%10000;
+	it = m_drop_items->find(id);
+	if (it == m_drop_items->end())
+	{
+		return 0;
+	}
+	else
+	{
+		return it->second;
+	}
+}
+
+
+bool Region::deleteItem(int id, bool delitem)
+{
+
+	map<int,DropItem*>::iterator it;
+	map<int,DropItem*>::iterator it2;
 	it = m_drop_items->find(id);
 	if (it == m_drop_items->end())
 	{
@@ -1354,64 +1346,30 @@ bool Region::deleteItem(int id)
 	}
 	else
 	{
-		Gridunit* gu = (m_data_grid->ind(sx/8,sy/8));
-		// Gegenstand aus der Gridunit entfernen
-		gu->deleteItem(it->second);
 		// Item Wrapper loeschen
+		int pos = 10000* it->second->m_x + it->second->m_y;
+		it2 = m_drop_item_locations->find(pos);
+		
+		Event event;
+		event.m_type = Event::ITEM_REMOVED;
+		event.m_id = it->second->m_item->m_id;
+		insertEvent(event);
+		
+		if (delitem)
+		{
+			delete it->second->m_item;
+		}
 		delete (it->second);
 		
 		m_drop_items->erase(it);
+		m_drop_item_locations->erase(it2);
 		
-		// Event einfuegen, dass das Item entfernt wurde
-		if (m_world->isServer())
-		{
-			Event event;
-			event.m_type = Event::ITEM_REMOVED;
-			event.m_id = id;
-			
-			insertEvent(event);
-		}
 		
-		DEBUG("item deleted %i",id);
 		
 		return true;
 	}
 }
 
-
-void Region::getItemsOnScreen(float center_x,float center_y, list<DropItem*>* result)
-{
-	// Grenzen des Bereichs in dem Items ausgegeben werden (in 4x4 Feldern)
-	int xmin = max(0,(int) floor(center_x/4-3));
-	int ymin = max(0,(int) floor(center_y/4-3));
-	int xmax = min(m_dimx-1,(int) ceil(center_x/4+3));
-	int ymax = min(m_dimy-1,(int) ceil(center_y/4+3));
-	
-	list<DropItem*>* lst;
-	list<DropItem*>::iterator it;
-	
-	DEBUG5("x %i %i y %i %i",xmin, xmax,ymin,ymax);
-	
-	int i,j;
-	Gridunit* gu;
-	// Schleifen ueber die betrachteten Gridunits
-	for (i=xmin; i<= xmax;i++)
-	{
-		for (j=ymin; j<= ymax; j++)
-		{
-			gu = m_data_grid->ind(i,j);
-			
-			// Schleife ueber die Items der Gridunit
-			lst = gu->getItems();
-			for (it = lst->begin(); it != lst->end(); ++it)
-			{
-				result->push_back((*it));
-			}
-			
-		}
-	}
-	
-}
 
 
 

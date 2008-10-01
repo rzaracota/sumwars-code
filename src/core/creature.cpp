@@ -322,6 +322,7 @@ void Creature::performAction(float &time)
 		return;
 	}
 
+	
 	// Reziprokes des Ausfuehrungszeit
 	float rezt = 1/m_action.m_time;
 
@@ -348,7 +349,6 @@ void Creature::performAction(float &time)
 		dtime = m_action.m_time-m_action.m_elapsed_time;
 		time -= dtime;
 		finish = true;
-
 	}
 	else
 	{
@@ -2255,6 +2255,16 @@ void Creature::calcWalkDir(float goalx,float goaly,ServerWObject* goal)
 
 bool Creature::update (float time)
 {
+	Timer timer;
+	timer.start();
+	
+	if (m_action.m_elapsed_time> m_action.m_time)
+	{
+		DEBUG("elapsed time %f all time %f",m_action.m_elapsed_time,	m_action.m_time);
+	}
+	
+	float ptime = time;
+
 	// CreatureDynAttr* dynattr = getDynAttr();
 	DEBUG5("Update des Creatureobjekts [%i] wird gestartet", getId());
 	// interne Variable um Fehler zu speichern
@@ -2361,7 +2371,6 @@ bool Creature::update (float time)
 
 
 
-
 	// besondere zeitabhaengige Effekte berechnen
 	if (getWorld()->isServer())
 	{
@@ -2452,7 +2461,6 @@ bool Creature::update (float time)
 		}
 	}
 
-
 	// Solange noch Zeit zur Verfügung steht Aktionen ausfuehren lassen
 	while (time>0)
 	{
@@ -2486,7 +2494,13 @@ bool Creature::update (float time)
 
 						// Aktion ausfuehren
 						performAction(time);
-
+						
+						if (ptime < 1000 && time > 1000)
+						{
+							DEBUG("prev time %f time set to %f",ptime, time);
+							ptime = time;
+						}
+			
 
 					}
 				}
@@ -2520,6 +2534,11 @@ bool Creature::update (float time)
 				time=0 ;
 		}
 
+	}
+	
+	if (timer.getTime()>10)
+	{
+		DEBUG("object %i update time %f",getId(), timer.getTime());
 	}
 	return result;
 }
@@ -3525,7 +3544,7 @@ void Creature::takeDamage(Damage* d)
 					m_event_mask |= Event::DATA_STATUS_MODS;
 				}
 
-				DEBUG("applying status mod %i for %f ms",i,t);
+				DEBUG5("applying status mod %i for %f ms",i,t);
 			}
 		}
 	}
@@ -4215,8 +4234,13 @@ void Creature::processEvent(Event* event, CharConv* cv)
 	
 	bool newact= false;
 	bool newmove = false;
+	float delay = cv->getDelay();
 	
-	
+	if (delay>1000)
+	{
+		DEBUG("got packet with delay %f %f",cv->getDelay(),delay);
+	}
+
 	
 	if (event->m_data & Event::DATA_ACTION)
 	{
@@ -4352,7 +4376,7 @@ void Creature::processEvent(Event* event, CharConv* cv)
 		float goaltime = acttime;
 		if (event->m_data & Event::DATA_ACTION)
 		{
-			goaltime -= cv->getDelay();
+			goaltime -= delay;
 		}
 		if (goaltime < 100)
 		{
@@ -4379,26 +4403,42 @@ void Creature::processEvent(Event* event, CharConv* cv)
 	
 	if (newact)
 	{
-		m_action.m_elapsed_time += cv->getDelay();	
-		if (!newmove && m_action.m_type != Action::NOACTION)
-		{
-			moveTo(newx,newy);
-		}
+	
+		m_action.m_elapsed_time += delay;
 		
-		if (Action::getActionInfo(m_action.m_type)->m_distance != Action::SELF)
+		
+		if (m_action.m_elapsed_time> m_action.m_time)
 		{
-			float x = getGeometry()->m_shape.m_coordinate_x;
-			float y = getGeometry()->m_shape.m_coordinate_y;
-			float goalx =  m_action.m_goal_coordinate_x;
-			float goaly =  m_action.m_goal_coordinate_y;
-
-			getGeometry()->m_angle = atan2(goaly-y,goalx-x);
-
+			// Aktion sollte schon beenden sein
+			moveTo(newx,newy);
+			
+			m_action.m_type = Action::NOACTION;
+			m_action.m_elapsed_time =0;
+			
 		}
-		if (Action::getActionInfo(m_action.m_type)->m_base_action == Action::WALK)
+		else
 		{
-			getGeometry()->m_angle = atan2(getMoveInfo()->m_speed_y,getMoveInfo()->m_speed_x);
-
+		
+			if (!newmove && m_action.m_type != Action::NOACTION)
+			{
+				moveTo(newx,newy);
+			}
+			
+			if (Action::getActionInfo(m_action.m_type)->m_distance != Action::SELF)
+			{
+				float x = getGeometry()->m_shape.m_coordinate_x;
+				float y = getGeometry()->m_shape.m_coordinate_y;
+				float goalx =  m_action.m_goal_coordinate_x;
+				float goaly =  m_action.m_goal_coordinate_y;
+	
+				getGeometry()->m_angle = atan2(goaly-y,goalx-x);
+	
+			}
+			if (Action::getActionInfo(m_action.m_type)->m_base_action == Action::WALK)
+			{
+				getGeometry()->m_angle = atan2(getMoveInfo()->m_speed_y,getMoveInfo()->m_speed_x);
+	
+			}
 		}
 	}
 }

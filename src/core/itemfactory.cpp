@@ -11,13 +11,19 @@ map<Item::Subtype, Item::Type> ItemFactory::m_item_types;
 
 map<Item::Subtype,ItemBasicData*> ItemFactory::m_item_data;
 
+World* ItemFactory::m_world;
+
 ItemFactory::ItemFactory()
 {
 }
 
 
-Item* ItemFactory::createItem(Item::Type type, Item::Subtype subtype,float magic_power)
+Item* ItemFactory::createItem(Item::Type type, Item::Subtype subtype, int id, float magic_power)
 {
+	if (id ==0)
+	{
+		id = m_world->getValidId();
+	}
 	DEBUG5("creating item %i / %s",type, subtype.c_str());
 	map<Item::Subtype,ItemBasicData*>::iterator it;
 	it = m_item_data.find(subtype);
@@ -30,6 +36,7 @@ Item* ItemFactory::createItem(Item::Type type, Item::Subtype subtype,float magic
 		DEBUG("found item data for subtype %s",subtype.c_str());
 		ItemBasicData* idata = it->second;
 		item = new Item(*idata);
+		item->m_id = id;
 
 		//createMagicMods(item,idata->m_modchance,magic_power, idata->m_min_enchant, idata->m_max_enchant);
 
@@ -42,6 +49,7 @@ Item* ItemFactory::createItem(Item::Type type, Item::Subtype subtype,float magic
 
 
 	item = new Item;
+	item->m_id = id;
 
 	item->m_type = type;
 	item->m_subtype = subtype;
@@ -185,26 +193,25 @@ Item* ItemFactory::createItem(Item::Type type, Item::Subtype subtype,float magic
 					item->m_equip_effect->m_dblock = 20;
 			
 			}
-			else if (type == Item::RING)
-			{
-				modchance[WILLPOWER_MOD]=0.2;
-				modchance[MAGIC_POWER_MOD]=0.25;
-				modchance[RESIST_FIRE_MOD]=0.10;
-				modchance[RESIST_ICE_MOD]=0.10;
-				modchance[RESIST_AIR_MOD]=0.10;
-				modchance[RESIST_ALL_MOD]=0.10;
-				modchance[DAMAGE_MULT_FIRE_MOD]=0.05;
-				modchance[DAMAGE_MULT_ICE_MOD]=0.05;
-				modchance[DAMAGE_MULT_AIR_MOD]=0.05;
-			}
-			else if (subtype =="ring")
-			{
-				min_enchant = min(200.0,magic_power*0.2);
-					max_enchant= min(850.0,magic_power*1.5);
-					item->m_price = 350;
-					item->m_size = Item::SMALL;
-					
-			}
+			
+			
+		}
+		else if (type == Item::RING)
+		{
+			modchance[WILLPOWER_MOD]=0.2;
+			modchance[MAGIC_POWER_MOD]=0.25;
+			modchance[RESIST_FIRE_MOD]=0.10;
+			modchance[RESIST_ICE_MOD]=0.10;
+			modchance[RESIST_AIR_MOD]=0.10;
+			modchance[RESIST_ALL_MOD]=0.10;
+			modchance[DAMAGE_MULT_FIRE_MOD]=0.05;
+			modchance[DAMAGE_MULT_ICE_MOD]=0.05;
+			modchance[DAMAGE_MULT_AIR_MOD]=0.05;
+				
+			min_enchant = min(200.0,magic_power*0.2);
+			max_enchant= min(850.0,magic_power*1.5);
+			item->m_price = 350;
+			item->m_size = Item::SMALL;
 		}
 		else if (type == Item::AMULET)
 		{
@@ -214,12 +221,10 @@ Item* ItemFactory::createItem(Item::Type type, Item::Subtype subtype,float magic
 			modchance[RESIST_ICE_MOD]=0.10;
 			modchance[RESIST_AIR_MOD]=0.10;
 			modchance[RESIST_ALL_MOD]=0.30;
-			if (subtype =="amulet")
-			{
-				min_enchant = min(200.0,magic_power*0.2);
-					max_enchant= min(850.0,magic_power*1.5);
-					item->m_size = Item::SMALL;
-			}
+			min_enchant = min(200.0,magic_power*0.2);
+			max_enchant= min(850.0,magic_power*1.5);
+			item->m_size = Item::SMALL;
+			
 		}
 	}
 	else if (type == Item::WEAPON)
@@ -756,7 +761,7 @@ Item* ItemFactory::createItem(DropSlot &slot)
 	if (size ==4)
 		return 0;
 
-	DEBUG("item size: %i",size);
+	DEBUG5("item size: %i",size);
 	Item* item =0;
 	if (size  == Item::GOLD)
 	{
@@ -815,17 +820,17 @@ Item* ItemFactory::createItem(DropSlot &slot)
 		Item::Subtype subtype= types[res];
 		Item::Type type = m_item_types.find(subtype)->second;
 
-		DEBUG("item type %i  subtype %s",type,subtype.c_str());
+		DEBUG5("item type %i  subtype %s",type,subtype.c_str());
 
 		// Magiestaerke berechnen
 		float magic =0;
 		if (Random::random() < slot.m_magic_probability || type == Item::RING  || type == Item::AMULET)
 		{
 			magic = Random::randrangef(slot.m_magic_power/4,slot.m_magic_power);
-			DEBUG("magic power %f",magic);
+			DEBUG5("magic power %f",magic);
 		}
 
-		item = createItem(type,subtype,magic);
+		item = createItem(type,subtype,0,magic);
 		return item;
 	}
 	return 0;

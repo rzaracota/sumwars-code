@@ -238,7 +238,6 @@ void Scene::update(float ms)
 	// Kamera auf Spieler ausrichten
 	m_camera->setPosition(Ogre::Vector3(x*50, 1000, y*50+300));
 	m_camera->lookAt(Ogre::Vector3(x*50,0,y*50));
-
 	
 	// alle Objekte aktualisieren
 	updateObjects();
@@ -250,10 +249,14 @@ void Scene::update(float ms)
 	
 
 	updateProjectiles();
+	
 }
 
 void  Scene::updateObjects()
 {
+	Timer timer;
+	timer.start();
+	
 	DEBUG5("update objects");
 	// Spielerobjekt
 	Player* player = m_document->getLocalPlayer();
@@ -301,6 +304,7 @@ void  Scene::updateObjects()
 			++it2;
 		}
 	}
+	
 
 	// aller Objekte im Dokument durchmustern
 	for (it = objs.begin();it != objs.end(); ++it)
@@ -309,6 +313,7 @@ void  Scene::updateObjects()
 		// Darstellung fuer das Objekt aktualisieren
 		updateObject(obj);
 	}
+	
 }
 
 void Scene::updateItems()
@@ -359,6 +364,18 @@ void Scene::updateItems()
 
 			createItem(di,name);
 
+		}
+		else
+		{
+			// Koordinaten des Objektes
+			float x=di->m_x;
+			float y=di->m_y;
+			
+			// Ortsvektor des Objektes
+			Ogre::Vector3 vec(x*25,0,y*25);
+			
+			// an die richtige Stelle verschieben
+			m_scene_manager->getSceneNode(node_name)->setPosition(vec);
 		}
 	}
 }
@@ -631,7 +648,7 @@ void Scene::deleteObject(std::string name)
 {
 	std::string node_name = name + "Node";
 
-	DEBUG("deleting object %s",name.c_str());
+	DEBUG5("deleting object %s",name.c_str());
 
 	destroySceneNode(node_name);
 
@@ -639,6 +656,9 @@ void Scene::deleteObject(std::string name)
 
 void Scene::createObject(WorldObject* obj,std::string& name, bool is_static)
 {
+	Timer timer;
+	timer.start();
+	
 	DEBUG5("creating object %s",name.c_str());
 	std::string node_name = name + "Node";
 
@@ -684,8 +704,6 @@ void Scene::createObject(WorldObject* obj,std::string& name, bool is_static)
 
 
 	// eventuelle Partikeleffekte einfuegen
-
-
 
 	if (!is_static)
 	{
@@ -741,7 +759,7 @@ void Scene::createItem(DropItem* di, std::string& name)
 	Ogre::Vector3 vec(di->m_x*25,0,di->m_y*25);
 
 	// in die Liste einfuegen
-	m_drop_items->insert(make_pair(di->getId(),name));
+	m_drop_items->insert(make_pair(di->m_item->m_id,name));
 
 	// Node anlegen
 	Ogre::SceneNode* obj_node;

@@ -66,6 +66,7 @@ bool World::init()
 		
 	// Items initialisieren
 	ItemFactory::init();
+	ItemFactory::m_world = this;
 	
 	ObjectFactory::init();
 	ObjectFactory::m_world = this;
@@ -1153,9 +1154,10 @@ int World::getValidProjectileId()
 
 void World::update(float time)
 {
+	
 	// Timer weiterzaehlen und Limits feststellen
 	float timer_max[3];
-	timer_max[0] = 200; timer_max[2] = 500; timer_max[3] = 1000; 
+	timer_max[0] = 200; timer_max[1] = 500; timer_max[2] = 1000; 
 	for (int i=0; i<3; i++)
 	{
 		m_timer[i] += time;
@@ -1167,7 +1169,6 @@ void World::update(float time)
 		}
 	}	
 	
-	
 	DEBUG5("update %f",time);
 	for (int i=0;i<WORLD_MAX_REGIONS;i++)
 	{
@@ -1176,8 +1177,8 @@ void World::update(float time)
 			m_regions[i]->update(time);
 		}
 	}
-	// Durchmustern alle Handelsvorgänge
 	
+	// Durchmustern alle Handelsvorgänge
 	map<int,Trade*>::iterator iter2;
 	Trade* trade=0;
 	
@@ -1235,6 +1236,8 @@ void World::update(float time)
 	
 	m_network->update();
 	
+
+
 }
 
 void World::updatePlayers()
@@ -1314,6 +1317,10 @@ void World::updatePlayers()
 				m_network->popSlotMessage( data ,slot);
 	
 				cv = new CharConv(data);
+				if (cv->getDelay()>1000)
+				{
+					DEBUG("got packet with delay %f",cv->getDelay());
+				}
 
 				headerp.fromString(cv);
 				
@@ -1472,7 +1479,10 @@ void World::updatePlayers()
 						ret = processEvent(reg,cv);
 						
 						if (ret == false)
+						{
 							break;
+							
+						}
 					}
 
 				}
@@ -1489,7 +1499,6 @@ void World::updatePlayers()
 	if (m_server)
 	{
 		// Nachrichten ueber die Events zur den Clients senden
-		short nr_events;
 		Region* reg;
 		list<Event>::iterator lt;
 		for (it = m_player_slots->begin(); it != m_player_slots->end(); ++it)
@@ -1500,30 +1509,30 @@ void World::updatePlayers()
 			if (slot != LOCAL_SLOT)
 			{
 				// Anzahl der Events
-				nr_events = m_events->size();
+				
 				reg = pl->getRegion();
 				if (pl->getState() != WorldObject::STATE_ACTIVE && pl->getState() != WorldObject::STATE_DEAD && pl->getState() != WorldObject::STATE_DIEING)
 				{
 					reg =0;
 				}
 				
-				if (reg !=0)
-				{
-					nr_events += reg->getEvents()->size();
-				}
-				
-				CharConv msg;
+				CharConv* msg;
 				PackageHeader header;
 				header.m_content = PTYPE_S2C_EVENT;
-				header.m_number =nr_events;
+				header.m_number =1;
 				
-				header.toString(&msg);
+				
 				
 				// globale Events
 				for (lt = m_events->begin(); lt != m_events->end(); ++lt)
 				{
+					msg = new CharConv;
 					DEBUG5(" send global event %i id %i",lt->m_type,lt->m_id);
-					writeEvent(reg,&(*lt),&msg);
+					
+					header.toString(msg);
+					writeEvent(reg,&(*lt),msg);
+					m_network->pushSlotMessage(msg->getBitStream(),slot);
+					delete msg;
 				}
 				
 				// Events der Region in der der Spieler ist
@@ -1531,11 +1540,17 @@ void World::updatePlayers()
 				{
 					for (lt = reg->getEvents()->begin(); lt != reg->getEvents()->end(); ++lt)
 					{
-						writeEvent(reg,&(*lt),&msg);
+						msg = new CharConv;
+				
+						header.toString(msg);
+						writeEvent(reg,&(*lt),msg);
+						
+						m_network->pushSlotMessage(msg->getBitStream(),slot);
+						delete msg;
 					}
 				}
 				
-				m_network->pushSlotMessage(msg.getBitStream(),slot);
+				
 				
 			}
 		}
@@ -1584,8 +1599,11 @@ void World::writeEvent(Region* region,Event* event, CharConv* cv)
 		
 		if (event->m_type == Event::ITEM_DROPPED)
 		{
-			item = region->getItem(event->m_id);
-			item->toString(cv);
+			DropItem* di;
+			di = region->getDropItem(event->m_id);
+			cv->toBuffer(di->m_x);
+			cv->toBuffer(di->m_y);
+			di->m_item->toString(cv);
 		}
 	}
 	
@@ -1599,10 +1617,24 @@ void World::writeEvent(Region* region,Event* event, CharConv* cv)
 	
 	if (event->m_type == Event::PLAYER_ITEM_EQUIPED)
 	{
-		DEBUG("send event: player equiped item");
 		object = (*m_players)[event->m_id];
 		cv->toBuffer<short>((short) event->m_data);
 		static_cast<Player*>(object)->getEquipement()->getItem(event->m_data)->toString(cv);
+	}
+	
+	if (event->m_type == Event::PLAYER_ITEM_PICKED_UP)
+	{
+		object = (*m_players)[event->m_id];
+		cv->toBuffer<short>((short) event->m_data);
+		if (static_cast<Player*>(object)->getEquipement()->getItem(event->m_data) ==0)
+			ERRORMSG("no item at pos %i",event->m_data);
+		static_cast<Player*>(object)->getEquipement()->getItem(event->m_data)->toStringComplete(cv);
+
+	}
+	
+	if (event->m_type == Event:: Event::ITEM_REMOVED)
+	{
+		DEBUG("removing item %i",event->m_id);
 	}
 }
 
@@ -1612,155 +1644,191 @@ bool World::processEvent(Region* region,CharConv* cv)
 	Event event;
 	event.fromString(cv);
 	
+	
 	DEBUG5("got event %i  id %i  data %i",event.m_type, event.m_id, event.m_data);
 	
 	ServerWObject* object;
 	DmgProjectile* proj;
 	
-	if (event.m_type == Event::OBJECT_CREATED)
+	switch(event.m_type)
 	{
-		region->createObjectFromString(cv, m_players);
-	}
+		case Event::OBJECT_CREATED:
+			region->createObjectFromString(cv, m_players);
+			break;
 	
-	if (event.m_type == Event::OBJECT_STAT_CHANGED)
-	{
-		object =region->getSWObject(event.m_id);
-		if (object !=0)
-		{
-		
-			object->processEvent(&event,cv);
-		}
-		else
-		{
-			// Event erhalten zu dem kein Objekt gehoert
-			DEBUG("object %i for event does not exist",event.m_id);
-			return false;
-		}
-	}
-	
-	if (event.m_type == Event::OBJECT_DESTROYED)
-	{
-		object =region->getSWObject(event.m_id);
-		if (object !=0)
-		{
-			object->destroy();
-			region->deleteSWObject(object);
-			delete object;
-		}
-		else
-		{
-			// Event erhalten zu dem kein Objekt gehoert
-		}
-	}
-	
-	if (event.m_type == Event::PROJECTILE_CREATED)
-	{
-		region->createProjectileFromString(cv);
-	}
-	
-	if (event.m_type == Event::PROJECTILE_STAT_CHANGED)
-	{
-		proj = region->getProjectile(event.m_id);
-		if (proj !=0)
-		{
-			proj->processEvent(&event,cv);
-		}
-		else
-		{
-			return false;
-		}
-	}
-	
-	if (event.m_type == Event::PROJECTILE_DESTROYED)
-	{
-		proj = region->getProjectile(event.m_id);
-		if (proj != 0)
-		{
-			region->deleteProjectile(proj);
-			delete proj;
-		}
-		
-	}
-	
-	if (event.m_type == Event::PLAYER_CHANGED_REGION)
-	{
-		if (m_players->count (event.m_id)>0)
-		{
-			object = (*m_players)[event.m_id];
-			
-			cv->fromBuffer(object->getGeometry()->m_shape.m_coordinate_x);
-			cv->fromBuffer(object->getGeometry()->m_shape.m_coordinate_y);
-			
-			// Lokaler Spieler wird schon vorher in die Region eingefuegt
-			if (object != m_local_player)
+		case Event::OBJECT_STAT_CHANGED:
+			object =region->getSWObject(event.m_id);
+			if (object !=0)
 			{
-				insertPlayerIntoRegion(object,event.m_data);
+			
+				object->processEvent(&event,cv);
 			}
-		}
-	}
-	
-	if (event.m_type == Event::PLAYER_QUIT)
-	{
-		if (m_players->count(event.m_id)>0)
-		{
-			object = (*m_players)[event.m_id];
-			if (object != m_local_player)
+			else
 			{
-				deleteSWObject(object);
-				m_players->erase( object->getId());
-				
-				map<int,ServerWObject*>::iterator it;
-				for (it = m_player_slots->begin(); it != m_player_slots->end(); ++it)
-				{
-					if (it->second == object)
-					{
-						m_player_slots->erase(it);
-						break;
-					}
-
-				}
-				
+				// Event erhalten zu dem kein Objekt gehoert
+				DEBUG("object %i for event does not exist",event.m_id);
+				return false;
+			}
+			break;
+	
+		
+		case Event::OBJECT_DESTROYED:
+			object =region->getSWObject(event.m_id);
+			if (object !=0)
+			{
+				object->destroy();
+				region->deleteSWObject(object);
 				delete object;
 			}
-		}
-	}
-	
-	if (event.m_type == Event::ITEM_DROPPED)
-	{
-		region->createItemFromString(cv,event.m_id);	
-	}
-	
-	if (event.m_type == Event::ITEM_REMOVED)
-	{
-		region->deleteItem(event.m_id);
-	}
-	
-	if (event.m_type == Event::PLAYER_NOITEM_EQUIPED)
-	{
-		if (m_players->count(event.m_id)>0)
-		{
-			object = (*m_players)[event.m_id];
-			if (object != m_local_player)
+			else
 			{
-				Item* item =0;
-				static_cast<Player*>(object)->getEquipement()->swapItem(item,event.m_data);
+				// Event erhalten zu dem kein Objekt gehoert
+			}
+			break;
+	
+		case Event::PROJECTILE_CREATED:
+			region->createProjectileFromString(cv);
+			break;
+		
+		case Event::PROJECTILE_STAT_CHANGED:
+			proj = region->getProjectile(event.m_id);
+			if (proj !=0)
+			{
+				proj->processEvent(&event,cv);
+			}
+			else
+			{
+				DEBUG("projectile %i for event does not exist",event.m_id);
+				return false;
+			}
+			break;
+		
+		case Event::PROJECTILE_DESTROYED:
+			proj = region->getProjectile(event.m_id);
+			if (proj != 0)
+			{
+				region->deleteProjectile(proj);
+				delete proj;
+			}
+			break;
+		
+	
+		case Event::PLAYER_CHANGED_REGION:
+			if (m_players->count (event.m_id)>0)
+			{
+				object = (*m_players)[event.m_id];
 				
-				if (item !=0)
-					delete item;
+				cv->fromBuffer(object->getGeometry()->m_shape.m_coordinate_x);
+				cv->fromBuffer(object->getGeometry()->m_shape.m_coordinate_y);
+				
+				// Lokaler Spieler wird schon vorher in die Region eingefuegt
+				if (object != m_local_player)
+				{
+					insertPlayerIntoRegion(object,event.m_data);
+				}
 			}
-		}
-	}
-	
-	if (event.m_type == Event::PLAYER_ITEM_EQUIPED)
-	{
-		if (m_players->count(event.m_id)>0)
-		{
-			object = (*m_players)[event.m_id];
-			if (object != m_local_player)
+			break;
+			
+		case Event::PLAYER_QUIT:
+			if (m_players->count(event.m_id)>0)
 			{
-				static_cast<Player*>(object)->readItem(cv);
+				object = (*m_players)[event.m_id];
+				if (object != m_local_player)
+				{
+					deleteSWObject(object);
+					m_players->erase( object->getId());
+					
+					map<int,ServerWObject*>::iterator it;
+					for (it = m_player_slots->begin(); it != m_player_slots->end(); ++it)
+					{
+						if (it->second == object)
+						{
+							m_player_slots->erase(it);
+							break;
+						}
+	
+					}
+					
+					delete object;
+				}
 			}
-		}
+			break;
+	
+		case Event::ITEM_DROPPED:
+			region->createItemFromString(cv);	
+			break;
+	
+		case Event::ITEM_REMOVED:
+			DEBUG("remove item %i",event.m_id);
+			region->deleteItem(event.m_id,true);
+			break;
+	
+		case Event::PLAYER_NOITEM_EQUIPED:
+		
+			if (m_players->count(event.m_id)>0)
+			{
+				object = (*m_players)[event.m_id];
+				if (object != m_local_player)
+				{
+					Item* item =0;
+					static_cast<Player*>(object)->getEquipement()->swapItem(item,event.m_data);
+					
+					if (item !=0)
+						delete item;
+				}
+				else
+				{
+					return false;
+				}
+			}
+			else
+			{
+				return false;
+			}
+			break;
+	
+	
+		case Event::PLAYER_ITEM_EQUIPED:
+			if (m_players->count(event.m_id)>0)
+			{
+				object = (*m_players)[event.m_id];
+				if (object != m_local_player)
+				{
+					static_cast<Player*>(object)->readItem(cv);
+				}
+				else
+				{
+					return false;
+				}
+			}
+			else
+			{
+				return false;
+			}
+			break;
+			
+		case Event::PLAYER_ITEM_PICKED_UP:
+			if (m_players->count(event.m_id)>0)
+			{
+				object = (*m_players)[event.m_id];
+				if (object == m_local_player)
+				{
+					static_cast<Player*>(object)->readItemComplete(cv);
+				}
+				else
+				{
+					return false;
+				}
+			}
+			else
+			{
+				return false;
+			}
+			break;
+			
+		default:
+			ERRORMSG("unknown event type %i",event.m_type);
+	
 	}
 	
 	return true;

@@ -32,6 +32,6 @@ string DropItem::getNameId()
 	ostringstream out_stream;
 	
 	out_stream.str("");
-	out_stream << m_item->getName() << ":" << getId();
+	out_stream << m_item->getName() << ":" << m_item->m_id;
 	return out_stream.str();
 }

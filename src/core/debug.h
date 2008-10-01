@@ -30,7 +30,7 @@
  */
 
 #include <stdio.h>
-//#include "timer.h"
+#include "timer.h"
 
 /**
  * \brief Gibt Informationen aus

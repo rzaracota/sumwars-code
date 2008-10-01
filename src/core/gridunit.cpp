@@ -1,7 +1,6 @@
 #include "gridunit.h"
 
 Gridunit::Gridunit()
-	: m_items()
 {
 	DEBUG5("initialising Gridunit at %p",this);
 	// Anzahl Objekte aller Sorten auf 0 setzen
@@ -203,25 +202,6 @@ bool Gridunit::deleteObject(ServerWObject* object, short index)
 
 }
 
-bool Gridunit::insertItem(DropItem* item)
-{
-	m_items.push_back(item);
-	return true;
-}
-
-bool Gridunit::deleteItem(DropItem* item)
-{
-	list<DropItem*>::iterator it;
-	for (it = m_items.begin();it != m_items.end();++it)
-	{
-		if ((*it)==item)
-		{
-			m_items.erase(it);
-			return true;
-		}
-	}
-	return false;
-}
 
 short&  Gridunit::getObjectsNr(WorldObject::Group group)
 {

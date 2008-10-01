@@ -440,6 +440,9 @@ short  Equipement::insertItem(Item* item)
 		return pos+BIG_ITEMS;
 	}
 	
+	ERRORMSG("unknown item size item type %i subtype %s",item->m_type,item->m_subtype.c_str());
+	return NONE;
+	
 }
 	
 int Equipement::getNumberItems(bool secondary_equip)

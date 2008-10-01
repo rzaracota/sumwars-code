@@ -117,6 +117,7 @@ void Application::run()
 	int count=0;
     Ogre::Timer timer2;
 
+	timer.reset();
 	while (m_document->getState() != Document::SHUTDOWN)
 	{
 
@@ -124,7 +125,10 @@ void Application::run()
 		ftime = ltime / ( 1000000.0);
 		timer.reset();
 
-         DEBUG5("overall frame time was %f",ftime*1000);
+		if (ftime*1000 >50)
+		{
+        	DEBUG5("overall frame time was %f",ftime*1000);
+		}
        
 	  	timer2.reset();
 		
@@ -132,8 +136,10 @@ void Application::run()
 
 		ltime =timer2.getMicroseconds ();
 		time = ltime / ( 1000000.0);
-		
-         DEBUG5("update time was %f",time*1000);
+		if (time*1000 > 20)
+		{
+        	DEBUG("update time was %f",time*1000);
+		}
 
 
 		 timer2.reset();
@@ -141,7 +147,10 @@ void Application::run()
 		Ogre::WindowEventUtilities::messagePump();
 		ltime =timer2.getMicroseconds ();
 		time = ltime / ( 1000000.0);
-		DEBUG5("message pump time was %f",time*1000);
+		if (time*1000>20)
+		{
+			DEBUG("message pump time was %f",time*1000);
+		}
 		
 		timer2.reset();
 		
@@ -150,7 +159,10 @@ void Application::run()
 		
 		ltime =timer2.getMicroseconds ();
 		time = ltime / ( 1000000.0);
-		DEBUG5("document update time was %f",time*1000);
+		if (time*1000 > 20)
+		{
+			DEBUG("document update time was %f",time*1000);
+		}
 	
 	/*
 		count ++;
@@ -174,17 +186,26 @@ void Application::run()
 			
 			ltime =timer2.getMicroseconds ();
 			time = ltime / ( 1000000.0);
-			DEBUG5("view update time was %f",time*1000);
+			if (time*1000 > 20)
+			{
+				DEBUG("view update time was %f",time*1000);
+			}
 		}
 		catch (CEGUI::Exception e)
 		{
 			ERRORMSG("Error message: %s",e.getMessage().c_str());
 		}
 
-
+		timer2.reset();
 		//DEBUG("frame time in s %f",time);
 		m_cegui_system->injectTimePulse(ftime);
-
+		
+		ltime =timer2.getMicroseconds ();
+		time = ltime / ( 1000000.0);
+		if (time*1000 > 20)
+		{
+			DEBUG("cegui update time was %f",time*1000);
+		}
 
 		// rendern
 		timer2.reset();
@@ -193,7 +214,10 @@ void Application::run()
 
 		ltime =timer2.getMicroseconds ();
 		time = ltime / ( 1000000.0);
-         DEBUG5("ogre frame time was %f",time*1000);
+		if (time*1000 > 50)
+		{
+	         DEBUG("ogre frame time was %f",time*1000);
+		}
       
 	}
 
@@ -277,6 +301,11 @@ bool Application::setupResources()
 	Ogre::ResourceGroupManager::getSingleton().initialiseResourceGroup("General");
 	Ogre::ResourceGroupManager::getSingleton().initialiseResourceGroup("Savegame");
 	Ogre::ResourceGroupManager::getSingleton().initialiseResourceGroup("GUI");
+	
+	Ogre::ResourceGroupManager::getSingleton().loadResourceGroup("General");
+	Ogre::ResourceGroupManager::getSingleton().loadResourceGroup("Savegame");
+	Ogre::ResourceGroupManager::getSingleton().loadResourceGroup("GUI");
+	
 
 	// Debugging: Meshes direkt anlegen
 

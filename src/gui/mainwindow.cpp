@@ -295,12 +295,9 @@ void MainWindow::update()
 	// Objekte aus dem Dokument darstellen
 	if (m_document->getLocalPlayer()!=0)
 	{
-		
-		
+
 		// Szene aktualisieren
 		m_scene->update();
-		
-		
 
 		// ObjectInfo aktualisieren
 		updateObjectInfo();
@@ -2845,7 +2842,7 @@ void MainWindow::updateAbilityTooltip(unsigned int pos)
 	
 	if (pos!=Action::NOACTION)
 	{
-		DEBUG("update tooltip for %i", pos);
+		DEBUG5("update tooltip for %i", pos);
 
 		CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 		CEGUI::Window* label;
@@ -3033,6 +3030,8 @@ void MainWindow::updateObjectInfo()
 			int id;
 			stream >> id;
 			string_stream<<name;
+			
+			DEBUG5("item hover id %i",id);
 
 			Item* itm = player->getRegion()->getItem(id);
 
@@ -3299,7 +3298,7 @@ bool MainWindow::onSkillMouseClicked(const CEGUI::EventArgs& evt)
 
 	if (we.button == CEGUI::LeftButton)
 	{
-		DEBUG("left button pressed on skill %i",id);
+		DEBUG5("left button pressed on skill %i",id);
 		if (m_document->getLocalPlayer())
 		{
 			if (m_document->getLocalPlayer()->checkAbility((Action::ActionType) id))
@@ -3318,7 +3317,7 @@ bool MainWindow::onSkillMouseClicked(const CEGUI::EventArgs& evt)
 
 	if (we.button == CEGUI::RightButton)
 	{
-		DEBUG("right button pressed on skill %i",id);
+		DEBUG5("right button pressed on skill %i",id);
 		m_document->setRightAction((Action::ActionType) id);
 	}
 

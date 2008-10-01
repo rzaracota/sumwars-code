@@ -403,7 +403,7 @@ void Document::onRightMouseButtonClick(float x, float y)
 	m_gui_state.m_left_mouse_hold=false;
 	m_gui_state.m_right_mouse_hold_time=0;
 
-	DEBUG("angeklickte Koordinaten: %f %f",x,y);
+	DEBUG5("angeklickte Koordinaten: %f %f",x,y);
 
 	m_gui_state.m_clicked_object_id=0;
 	command.m_id=0;
@@ -742,7 +742,7 @@ void Document::setLeftAction(Action::ActionType act)
 	if (aci->m_base_action== Action::NOACTION)
 		return;
 
-	DEBUG("Setting Action %i",act);
+	DEBUG5("Setting Action %i",act);
 	m_gui_state.m_left_mouse_hold = false;
 
 
@@ -783,7 +783,7 @@ void Document::setRightAction(Action::ActionType act)
 		return;
 
 
-	DEBUG("Setting Action %i",act);
+	DEBUG5("Setting Action %i",act);
 	m_gui_state.m_right_mouse_hold = false;
 
 	ClientCommand command;
@@ -914,7 +914,7 @@ bool Document::onKeyPress(KeyCode key)
 		}
 		else if(dest == SHOW_CHATBOX)
 		{
-			emitDebugSignal(3);
+			emitDebugSignal(1);
 		}
 		else if (dest == CLOSE_ALL)
 		{
@@ -953,6 +953,7 @@ void Document::update(float time)
 	if (m_world != 0)
 	{
 		m_world->update(time);
+		
 	}
 	
 	DEBUG5("modified is %i",m_modified);

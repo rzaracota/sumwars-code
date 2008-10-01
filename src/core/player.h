@@ -255,6 +255,12 @@ public:
 	void readItem(CharConv* cv);
 	
 	/**
+	 * \fn void readItem(CharConv* cv)
+	 * \brief Liest ein Item mit allen Details aus dem Bitstream und fuegt es ins Inventar ein
+	 */
+	void readItemComplete(CharConv* cv);
+	
+	/**
 	 * \fn void writeEquipement(CharConv* cv)
 	 * \brief Schreibt des Inventar in den Puffer
 	 * \param buf Ausgabepuffer

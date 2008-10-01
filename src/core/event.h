@@ -81,7 +81,7 @@ struct Event
 	 * \brief ID des Objektes, das das Ereignis erzeugt hat
 	 */
 	int m_id;
-	
+		
 	/**
 	 * \fn void toString(CharConv* cv)
 	 * \brief Konvertiert das Objekt in einen String und schreibt ihn in der Puffer

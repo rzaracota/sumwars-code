@@ -33,7 +33,7 @@ class ObjectFactory
 	
 	/**
 	 * \var static World* m_world
-	 * \brief Welt in fuer die die Objekte generiert werden
+	 * \brief Welt fuer die die Objekte generiert werden
 	 */
 	static World* m_world;
 		

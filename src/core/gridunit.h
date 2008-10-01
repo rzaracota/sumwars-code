@@ -3,6 +3,7 @@
 
 #include "serverwobject.h"
 #include <list>
+#include <map>
 #include "dropitem.h"
 #include "debug.h"
 
@@ -55,11 +56,6 @@ struct Gridunit
 	 */
 	short m_nr_creature;
 
-	/**
-	 * \var list<DropItem*>* m_items
-	 * \brief Liste der Items auf dem Feld
-	 */
-	list<DropItem*> m_items;
 
 
 	public:
@@ -141,28 +137,6 @@ struct Gridunit
 		 */
 		bool moveObject(ServerWObject* object,WorldObject::Group group );
 		
-		/**
-		 * \fn void insertItem(DropItem* item)
-		 * \brief Fuegt Gegenstand ein
-		 * \param item einzufuegender Gegenstand
-		 */
-		bool insertItem(DropItem* item);
-
-		/**
-		 * \fn void deleteItem(short x, short y)
-		 * \brief Loescht einen Gegenstand aus dem Feld
-		 * \param item zu loeschender Gegenstand
-		 */
-		bool deleteItem(DropItem* item);
-
-		/**
-		 * \fn list<DropItem*>* getItems()
-		 * \brief Gibt die Liste der Items aus
-		 */
-		list<DropItem*>* getItems()
-		{
-			return &m_items;
-		}
 
 };
 

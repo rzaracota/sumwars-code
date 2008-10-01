@@ -4,6 +4,7 @@
 #include "raknet/BitStream.h"
 #include "raknet/GetTime.h"
 #include "raknet/MessageIdentifiers.h"
+#include <algorithm>
 
 /**
  * \class CharConv
@@ -139,9 +140,9 @@ class CharConv
 		return m_bitstream.GetNumberOfBitsUsed();
 	}
 	
-	unsigned long getDelay()
+	float getDelay()
 	{
-		return RakNet::GetTime()-m_timestamp;
+		return std::max(0.0f,static_cast<float>(RakNet::GetTime())-static_cast<float>(m_timestamp));
 	}
 	
 	unsigned long getTimestamp()

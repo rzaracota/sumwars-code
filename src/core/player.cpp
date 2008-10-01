@@ -624,18 +624,30 @@ bool Player::onItemClick(ClientCommand* command)
 
 short Player::insertItem(Item* itm)
 {
+	if (itm ==0)
+		ERRORMSG("tried to insert null item");
 	short pos = getEquipement()->insertItem(itm);
 	
-	if (getWorld()->isServer())
+	if (pos != Equipement::NONE)
 	{
-		Event event;
-		event.m_type =  Event::PLAYER_ITEM_PICKED_UP ;
-		event.m_data = pos;
-		event.m_id = getId();
-							
-		DEBUG5("event: item picked up %i",pos);
-							
-		getWorld()->insertEvent(event);
+		// Gegenstand ins Inventar aufgenommen
+		if (getWorld()->isServer())
+		{
+			Event event;
+			event.m_type =  Event::PLAYER_ITEM_PICKED_UP ;
+			event.m_data = pos;
+			event.m_id = getId();
+								
+			DEBUG("event: item picked up %i",pos);
+								
+			getWorld()->insertEvent(event);
+		}
+	}
+	else
+	{
+		// Gegenstand passt nicht ins Inventar
+		// wieder fallen lassen
+		getRegion()->dropItem(itm,getGeometry()->m_shape.m_coordinate_x,getGeometry()->m_shape.m_coordinate_y);
 	}
 	return pos;
 }
@@ -884,53 +896,53 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 			}
 			if (command->m_id==2)
 			{
-				si = ItemFactory::createItem(Item::WEAPON,"short_sw",1000);
+				si = ItemFactory::createItem(Item::WEAPON,"short_sw",0,1000);
 				getRegion()->dropItem(si,10,20);
 			}
 			if (command->m_id==1)
 			{
 				// Debugging 2
-				si = ItemFactory::createItem(Item::WEAPON,"short_sw",1000);
+				si = ItemFactory::createItem(Item::WEAPON,"short_sw",0,1000);
 				getEquipement()->swapItem(si,Equipement::MEDIUM_ITEMS+4);
 				if (si!=0)
 					delete si;
 
-				si = ItemFactory::createItem(Item::HELMET,"steel_hlm",100);
+				si = ItemFactory::createItem(Item::HELMET,"steel_hlm",0,100);
 				getEquipement()->swapItem(si,Equipement::MEDIUM_ITEMS+5);
 				if (si!=0)
 					delete si;
 
-				si = ItemFactory::createItem(Item::GLOVES,"leath_gl",100);
+				si = ItemFactory::createItem(Item::GLOVES,"leath_gl",0,100);
 				getEquipement()->swapItem(si,Equipement::MEDIUM_ITEMS+6);
 				if (si!=0)
 					delete si;
 
-				si = ItemFactory::createItem(Item::ARMOR,"heavy_arm",500);
+				si = ItemFactory::createItem(Item::ARMOR,"heavy_arm",0,500);
 				getEquipement()->swapItem(si,Equipement::BIG_ITEMS+3);
 				if (si!=0)
 					delete si;
 
-				si = ItemFactory::createItem(Item::SHIELD,"iron_sh",100);
+				si = ItemFactory::createItem(Item::SHIELD,"iron_sh",0,100);
 				getEquipement()->swapItem(si,Equipement::BIG_ITEMS+4);
 				if (si!=0)
 					delete si;
 
-				si = ItemFactory::createItem(Item::RING,"ring",100);
+				si = ItemFactory::createItem(Item::RING,"ring",0,100);
 				getEquipement()->swapItem(si,Equipement::SMALL_ITEMS+15);
 				if (si!=0)
 					delete si;
 
-				si = ItemFactory::createItem(Item::RING,"ring",400);
+				si = ItemFactory::createItem(Item::RING,"ring",0,400);
 				getEquipement()->swapItem(si,Equipement::SMALL_ITEMS+16);
 				if (si!=0)
 					delete si;
 
-				si = ItemFactory::createItem(Item::AMULET,"amulet",100);
+				si = ItemFactory::createItem(Item::AMULET,"amulet",0,100);
 				getEquipement()->swapItem(si,Equipement::SMALL_ITEMS+17);
 				if (si!=0)
 					delete si;
 
-				si = ItemFactory::createItem(Item::AMULET,"amulet",800);
+				si = ItemFactory::createItem(Item::AMULET,"amulet",0,800);
 				getEquipement()->swapItem(si,Equipement::SMALL_ITEMS+18);
 				if (si!=0)
 					delete si;
@@ -1289,13 +1301,12 @@ void Player::performActionCritPart(float goalx, float goaly, ServerWObject* goal
 
 		if (itm !=0)
 		{
+			// aus der Region entfernen
+			getRegion()->deleteItem(getCommand()->m_goal_object_id);
+			
 			// Item einfuegen
 			short pos = insertItem(itm);
 
-			if (pos != Equipement::NONE)
-			{
-				getRegion()->deleteItem(getCommand()->m_goal_object_id);
-			}
 		}
 		else
 		{
@@ -1741,16 +1752,41 @@ void Player::readItem(CharConv* cv)
 	short pos;
 	char type;
 	char subtype[11];
+	int id;
 	subtype[10] ='\0';
 	Item* item;
 	
 	cv->fromBuffer<short>(pos);
 	cv->fromBuffer<char>(type);
 	cv->fromBuffer(subtype,10);
+	cv->fromBuffer(id);
 	
 		
-	item = ItemFactory::createItem((Item::Type) type, std::string(subtype));
+	item = ItemFactory::createItem((Item::Type) type, std::string(subtype),id);
 	item->fromString(cv);
+	getEquipement()->swapItem(item,pos);
+		
+	if (item !=0)
+		delete item;
+}
+
+void Player::readItemComplete(CharConv* cv)
+{
+	short pos;
+	char type;
+	char subtype[11];
+	int id;
+	subtype[10] ='\0';
+	Item* item;
+	
+	cv->fromBuffer<short>(pos);
+	cv->fromBuffer<char>(type);
+	cv->fromBuffer(subtype,10);
+	cv->fromBuffer(id);
+	
+	DEBUG("reading Item for pos %i type %i subtype %s",pos,type,subtype);
+	item = ItemFactory::createItem((Item::Type) type, std::string(subtype),id);
+	item->fromStringComplete(cv);
 	getEquipement()->swapItem(item,pos);
 		
 	if (item !=0)

@@ -177,7 +177,7 @@ struct Item {
 
 	
 	/**
-	 * \fn Item(ItemBasicData& data)
+	 * \fn Item(int id, ItemBasicData& data)
 	 * \brief erzeugt ein neuen Gegenstand mit den vorgegebenen Daten
 	 * \param data Daten auf deren Basis der Gegenstand erzeugt wird
 	 */
@@ -256,6 +256,11 @@ struct Item {
 	*/
 	Subtype m_subtype;
 
+	/**
+	 * \var int m_id
+	 * \brief Id
+	 */
+	int m_id;
 
 	/**
 	 * \var m_type;

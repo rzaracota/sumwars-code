@@ -227,10 +227,10 @@ class Region
 		void createProjectileFromString(CharConv* cv);
 		
 		/**
-		 * \fn void createItemFromString(CharConv* cv, int id)
+		 * \fn void createItemFromString(CharConv* cv)
 		 * \brief liest die Daten zu einem Gegenstand aus dem Bitstream und erzeugt es
 		 */
-		void createItemFromString(CharConv* cv, int id);
+		void createItemFromString(CharConv* cv);
 		
 		/**
 		 * \fn void deleteProjectile(DmgProjectile* proj)
@@ -254,11 +254,6 @@ class Region
 		 */
 		bool dropItem(Item* item, float x, float y);
 		
-		/**
-		 * \fn bool deleteItemAt(float x, float y)
-		 * \brief Entfernt Item an der angegebenen Stelle aus der Region
-		 */
-		bool deleteItemAt(float x, float y);
 		
 		/**
 		 * \fn Item* getItemAt(float x, float y)
@@ -267,10 +262,12 @@ class Region
 		Item* getItemAt(float x, float y);
 		
 		/**
-		 * \fn bool deleteItem(int id)
+		 * \fn bool deleteItem(int id, bool delitem)
 		 * \brief Entfernt Item aus der Region
+		 * \param id ID des items
+		 * \param delitem Wenn true, wird das Item geloescht, sonst nur aus der Region entfernt
 		 */
-		bool deleteItem(int id);
+		bool deleteItem(int id, bool delitem=false);
 		
 		/**
 		 * \fn Item* getItem(int id)
@@ -279,13 +276,10 @@ class Region
 		Item* getItem(int id);
 		
 		/**
-		 * \fn void getItemsOnScreen(float center_x,float center_y, list<DropItem*>* result)
-		 * \brief Fuegt alle Gegenstaende auf dem Bildschirm in die Liste eine
-		 * \param center_x x-Koordinate Zentrum
-		 * \param center_y y-Koordinate Zentrum
-		 * \param result Liste in die die Objekte eingeordnet werden
+		 * \fn Item* getDropItem(int id)
+		 * \brief Gibt Item mit den Information wo es liegt aus. Gibt NULL aus, wenn dort kein Item ist
 		 */
-		void getItemsOnScreen(float center_x,float center_y, list<DropItem*>* result);
+		DropItem* getDropItem(int id);
 		
 		/**
 		 * \fn void getRegionData(CharConv* cv)
@@ -414,6 +408,13 @@ class Region
 	 * \brief Liste der Gegenstaende, die auf dem Boden liegen
 	 */
 	map<int,DropItem*>* m_drop_items;
+	
+	/**
+	 * \var map<int,DropItem*>* m_drop_item_locations
+	 * \brief Orte der Gegenstaende, die auf dem Boden liegen
+	 */
+	map<int,DropItem*>* m_drop_item_locations;
+	
 	
 	/**
 	/* \var short m_id
