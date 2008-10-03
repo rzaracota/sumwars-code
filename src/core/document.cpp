@@ -220,7 +220,8 @@ void Document::loadSavegame()
 	}
 	else
 	{
-		ERRORMSG("konnte Savegame nicht oeffnen");
+		ERRORMSG("konnte Savegame nicht oeffnen: %s",fname.c_str());
+		m_state =SHUTDOWN;
 	}
 	DEBUG5("done");
 }

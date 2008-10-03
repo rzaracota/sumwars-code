@@ -62,7 +62,7 @@ void Scene::registerMeshes()
 	objectloader = new ObjectLoader;
 	
 	list<MonsterMeshData*>* monster_mesh_list;
-	monster_mesh_list = objectloader->loadMonsterMeshData("../../data/monsters.xml");
+	monster_mesh_list = objectloader->loadMonsterMeshData("../data/monsters.xml");
 	
 	if (monster_mesh_list != 0)
 	{

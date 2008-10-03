@@ -7,16 +7,17 @@
 DEBUG_LEVEL = 5 
 
 # executable file for project
-START    = server_app
+START    = sumwars
 RUN      = ./$(START)
 
 
-LIBS = RakNet OIS
+LIBS = OGRE OIS CEGUI CEGUI-OGRE RakNet
 LDFLAGS = $(shell pkg-config --libs $(LIBS))
 LOADLIBES =
 LDLIBS = $(LDFLAGS) -lm -lrt
 CFLAGS = -g
 CXXFLAGS = $(shell pkg-config --cflags $(LIBS)) $(CFLAGS)
+CXXFLAGS += -I./core -I./gui -I./tinyxml
 OBJS = $(shell cat ./Makefile.objs )
 DIRS = $(shell find . -mindepth 1 -maxdepth 1 -type d -not -iname .svn )
 
@@ -26,11 +27,6 @@ build: compile $(RUN)
 
 
 compile: $(OBJS)
-	@for dir in $(DIRS) ; do \
-		cd $$dir ; \
-		$(MAKE) $(TARGET) ; \
-		cd .. ; \
-	done
 	
 link: compile
 	$(CXX) $(CXXFLAGS) -o $(RUN) $(OBJS) $(LDLIBS)
