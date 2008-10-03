@@ -156,7 +156,7 @@ Item* ItemFactory::createItem(Item::Type type, Item::Subtype subtype, int id, fl
 			modchance[RESIST_ICE_MOD]=0.033;
 			modchance[RESIST_AIR_MOD]=0.033;
 			modchance[ATTACK_SPEED_MOD]=0.2;
-					
+
 			if (subtype =="leath_gl")
 			{
 				min_enchant = 20;
@@ -191,10 +191,10 @@ Item* ItemFactory::createItem(Item::Type type, Item::Subtype subtype, int id, fl
 					item->m_price = 45;
 					item->m_size = Item::BIG;
 					item->m_equip_effect->m_dblock = 20;
-			
+
 			}
-			
-			
+
+
 		}
 		else if (type == Item::RING)
 		{
@@ -207,7 +207,7 @@ Item* ItemFactory::createItem(Item::Type type, Item::Subtype subtype, int id, fl
 			modchance[DAMAGE_MULT_FIRE_MOD]=0.05;
 			modchance[DAMAGE_MULT_ICE_MOD]=0.05;
 			modchance[DAMAGE_MULT_AIR_MOD]=0.05;
-				
+
 			min_enchant = min(200.0,magic_power*0.2);
 			max_enchant= min(850.0,magic_power*1.5);
 			item->m_price = 350;
@@ -224,7 +224,7 @@ Item* ItemFactory::createItem(Item::Type type, Item::Subtype subtype, int id, fl
 			min_enchant = min(200.0,magic_power*0.2);
 			max_enchant= min(850.0,magic_power*1.5);
 			item->m_size = Item::SMALL;
-			
+
 		}
 	}
 	else if (type == Item::WEAPON)
@@ -277,7 +277,7 @@ Item* ItemFactory::createItem(Item::Type type, Item::Subtype subtype, int id, fl
 		}
 		else if (subtype =="wood_bow")
 		{
-				
+
 				min_enchant = 50;
 				max_enchant= 200;
 				item->m_price = 100;
@@ -608,10 +608,10 @@ void ItemFactory::init()
 	// Items aus XML Laden
 	ItemLoader* itemloader = 0;
 	itemloader = new ItemLoader;
-	
+
 	list<ItemBasicData*>* item_list;
-	item_list = itemloader->loadItemBasicData("../../data/items.xml");
-	
+	item_list = itemloader->loadItemBasicData("../data/items.xml");
+
 	if (item_list != 0)
 	{
 		list<ItemBasicData*>::iterator iter = item_list->begin();
@@ -622,7 +622,7 @@ void ItemFactory::init()
 			cout << "m_useup_effect" << " = " << (*iter)->m_useup_effect << endl;
 			cout << "m_equip_effect" << " = " << (*iter)->m_equip_effect << endl;
 			cout << "m_weapon_attr" << " = " << (*iter)->m_weapon_attr << endl;
-			
+
 			cout << "     m_damage.m_min_damage[Damage::PHYSICAL]" << " = " << (*iter)->m_weapon_attr->m_damage.m_min_damage[Damage::PHYSICAL] << endl;
 			cout << "     m_damage.m_max_damage[Damage::PHYSICAL]" << " = " << (*iter)->m_weapon_attr->m_damage.m_min_damage[Damage::PHYSICAL] << endl;
 			cout << "     m_damage.m_min_damage[Damage::AIR]" << " = " << (*iter)->m_weapon_attr->m_damage.m_min_damage[Damage::AIR] << endl;
@@ -634,7 +634,7 @@ void ItemFactory::init()
 			cout << "     m_attack_range" << " = " << (*iter)->m_weapon_attr->m_attack_range << endl;
 			cout << "     m_two_handed" << " = " << (*iter)->m_weapon_attr->m_two_handed << endl;
 			cout << "     m_dattack_speed" << " = " << (*iter)->m_weapon_attr->m_dattack_speed << endl;
-			
+
 			cout << "m_level_req" << " = " << static_cast<int>((*iter)->m_level_req) << endl;
 			cout << "m_char_req" << " = " << static_cast<int>((*iter)->m_char_req) << endl;
 			cout << "m_subtype" << " = " << (*iter)->m_subtype << endl;
@@ -649,11 +649,11 @@ void ItemFactory::init()
 			*iter++;
 		}
 	}
-	
-	
+
+
 	list<DropChanceData*>* drop_chance_list;
-	drop_chance_list = itemloader->loadDropChanceData("../../data/items.xml");
-	
+	drop_chance_list = itemloader->loadDropChanceData("../data/items.xml");
+
 	if (drop_chance_list != 0)
 	{
 		// Daten auslesen und registrieren
@@ -663,7 +663,7 @@ void ItemFactory::init()
 			registerItemDrop( (*iter)->m_type, (*iter)->m_subtype, DropChance( (*iter)->m_level, (*iter)->m_probability, (*iter)->m_size) );
 			*iter++;
 		}
-		
+
 		// Liste aus Speicher loeschen
 		iter = drop_chance_list->begin();
 		while (iter != drop_chance_list->end())
@@ -672,7 +672,7 @@ void ItemFactory::init()
 			*iter++;
 		}
 	}
-	
+
 	delete item_list;
 	item_list = 0;
 	delete drop_chance_list;

@@ -25,7 +25,7 @@
 Document::Document()
 	: m_special_keys() , m_shortkey_map()
 {
-
+    /*
 	DEBUG5("reading ip");
 	// IP aus Konfigurationsdatei einlesen
 	{
@@ -41,7 +41,9 @@ Document::Document()
 			ERRORMSG("config nicht gefunden");
 		}
 	}
-	
+	*/
+	strcpy(m_server_ip,"127.0.0.1");
+
 	m_world =0;
 
 	bool network_error = false;
@@ -109,21 +111,21 @@ Document::Document()
 void Document::startGame(bool server)
 {
 	m_server = server;
-	
-	
-	
+
+
+
 	m_world = new World(server);
 	m_world->init();
-	
+
 	if (server)
 	{
-		
+
 	}
 	else
 	{
 		ClientNetwork* net = static_cast<ClientNetwork*>(m_world->getNetwork());
 		net->serverConnect(m_server_ip,REQ_PORT);
-		
+
 	}
 	m_state = LOAD_SAVEGAME;
 }
@@ -136,7 +138,7 @@ void Document::loadSavegame()
 	char head[8];
 	int i;
 	char* bp = head;
-	string fname = "../../save/";
+	string fname = "../save/";
 	fname += m_save_file;
 	/*
 	if (m_gui_type == GL_GUI)
@@ -145,7 +147,7 @@ void Document::loadSavegame()
 	}
 	*/
 	DEBUG5("savegame is %s",fname.c_str());
-	
+
 	ifstream file(fname.c_str(),ios::in| ios::binary);
 	if (file.is_open())
 	{
@@ -169,15 +171,15 @@ void Document::loadSavegame()
 		{
 			file.get(data[i]);
 		}
-		
+
 		CharConv cv2((unsigned char*) data,len);
-		
+
 		m_world->handleSavegame(&cv2);
 
 
 		// aktuelle Aktion setzen
 		// TODO: aus dem Savegame einlesen
-		
+
 		/*int n=0;
 		if (c==WorldObje)
 			n=4;
@@ -350,7 +352,7 @@ void Document::onButtonSendMessageClicked ( )
 
 void Document::onButtonSaveExitClicked ( )
 {
-	
+
 	if (m_state!=SHUTDOWN_REQUEST)
 	{
 		setState(SHUTDOWN_REQUEST);
@@ -359,7 +361,7 @@ void Document::onButtonSaveExitClicked ( )
 	{
 		setState(SHUTDOWN);
 	}
-	
+
 	m_shutdown_timer =0;
 
 	ClientCommand command;
@@ -388,7 +390,7 @@ void Document::onRightMouseButtonClick(float x, float y)
 	Player* pl = static_cast<Player*> (m_world->getLocalPlayer());
 	if (pl==0)
 		return;
-	
+
 
 	// herstellen der Koordinaten im Koordinatensystem des Spiels
 	m_gui_state.m_clicked_x =x;
@@ -409,10 +411,10 @@ void Document::onRightMouseButtonClick(float x, float y)
 	command.m_id=0;
 
 	int id = getObjectAt(x,y);
-	
+
 	m_gui_state.m_clicked_object_id = id;
 	command.m_id =id;
-	
+
 	command.m_number=0;
 
 	if (command.m_id!=0)
@@ -456,17 +458,17 @@ void Document::onLeftMouseButtonClick(float x, float y)
 	DEBUG4("angeklickte Koordinaten: %f %f",x,y);
 
 	//TODO: suchen welches objekt angeklickt wurde
-	
+
 	m_gui_state.m_clicked_object_id=0;
 	command.m_id=0;
-	
-	
+
+
 	int id = getObjectAt(x,y);
 	if (getGUIState()->m_cursor_object_id != 0)
 	{
 		id = getGUIState()->m_cursor_object_id;
 	}
-	
+
 	m_gui_state.m_clicked_object_id = id;
 	command.m_id =id;
 	command.m_number=0;
@@ -476,7 +478,7 @@ void Document::onLeftMouseButtonClick(float x, float y)
 	{
 		command.m_id=0;
 	}
-	
+
 	if (command.m_id!=0)
 	{
 		DEBUG5("angeklicktes Objekt %i",command.m_id);
@@ -487,7 +489,7 @@ void Document::onLeftMouseButtonClick(float x, float y)
 		// Item angeklickt
 		command.m_action = Action::TAKE_ITEM;
 		command.m_id = m_gui_state.m_cursor_item_id;
-		
+
 		DEBUG5("clicked at item %i",m_gui_state.m_cursor_item_id);
 	}
 
@@ -503,16 +505,16 @@ int Document::getObjectAt(float x,float y)
 	ServerWObject* pl = m_world->getLocalPlayer();
 	if (pl==0)
 		return 0;
-	
+
 	// Region in der sich der lokale Spieler befindet
 	Region* reg = pl->getRegion();
 	if (reg ==0)
 		return 0;
-	
+
 	ServerWObject* obj = reg->getSWObjectAt(x,y);
 	if (obj != 0)
 		return obj->getId();
-	
+
 	return 0;
 
 }
@@ -530,12 +532,12 @@ void Document::onButtonPartyAccept(int cnr)
 {
 	ClientCommand command;
 	command.m_button = BUTTON_PARTY_ACCEPT;
-	
+
 	// Party in der der Spieler Mitglied ist
 	Party* party = getParty();
 	if (party ==0)
 		return;
-	
+
 	if (party->getNrCandidates() > cnr)
 	{
 		command.m_id = party->getCandidates()[cnr];
@@ -618,7 +620,7 @@ void Document::onButtonInventoryClicked()
 	{
 
 		getGUIState()->m_shown_windows &= ~INVENTORY;
-		
+
 		// der lokale Spieler
 		Player* pl = static_cast<Player*>( m_world->getLocalPlayer());
 		if (pl==0)
@@ -715,14 +717,14 @@ void Document::setLeftAction(Action::ActionType act)
 		installShortkey(m_gui_state.m_pressed_key,(ShortkeyDestination) (USE_SKILL_LEFT+act));
 		return;
 	}
-	
-	
+
+
 	// wenn kein Spieler gesetzt ist, dann keine Faehigkeit setzen
 	// der lokale Spieler
 	Player* player = static_cast<Player*>(m_world->getLocalPlayer());
 	if (player==0)
 		return;
-	
+
 
 	int acti = (int) act;
 	Action::ActionInfo* aci = Action::getActionInfo(act);
@@ -767,7 +769,7 @@ void Document::setRightAction(Action::ActionType act)
 	Player* player = static_cast<Player*>(m_world->getLocalPlayer());
 	if (player==0)
 		return;
-	
+
 	int acti = (int) act;
 	Action::ActionInfo* aci = Action::getActionInfo(act);
 
@@ -799,7 +801,7 @@ std::string Document::getAbilityDescription(Action::ActionType ability)
 
 	// der lokale Spieler
 	Player* player = static_cast<Player*>(m_world->getLocalPlayer());
-	
+
 	if (player !=0 )
 	{
 		// Struktur mit Informationen zur Aktion
@@ -953,9 +955,9 @@ void Document::update(float time)
 	if (m_world != 0)
 	{
 		m_world->update(time);
-		
+
 	}
-	
+
 	DEBUG5("modified is %i",m_modified);
 	DEBUG5("State is %i",m_state);
 	NetStatus status;
@@ -977,9 +979,9 @@ void Document::update(float time)
 			if (status == NET_REJECTED || status == NET_SLOTS_FULL || status == NET_TIMEOUT)
 			{
 				// Verbindung abgelehnt
-				m_state = SHUTDOWN;	
+				m_state = SHUTDOWN;
 			}
-			
+
 
 		case RUNNING:
 			updateContent(time);
@@ -1004,8 +1006,8 @@ void Document::update(float time)
 			// Spielwelt abschalten
 			delete m_world;
 			m_world =0;
-			
-			
+
+
 			m_state = SHUTDOWN;
 			break;
 
@@ -1025,7 +1027,7 @@ void Document::updateContent(float time)
 		DEBUG5("no local player");
 		return;
 	}
-	
+
 	if (m_gui_state.m_left_mouse_hold)
 	{
 		DEBUG5("linke Maustaste festgehalten");
@@ -1073,9 +1075,9 @@ void Document::updateContent(float time)
 		}
 
 	}
-	
-	
-	
+
+
+
 	/*
 	ServerHeader headerp;
 
@@ -1113,10 +1115,10 @@ void Document::updateContent(float time)
 
 		if (headerp.m_content == PTYPE_S2C_DATA)
 		{
-			
+
 			DEBUG5("got data pkg");
 			handleDataPkg(cv,&headerp);
-			
+
 		}
 		else if (headerp.m_content == PTYPE_S2C_SAVEGAME)
 		{
@@ -1143,9 +1145,9 @@ void Document::updateContent(float time)
 			// TODO: do something to fix this....
 
 		}
-		
+
 		delete cv;
-		
+
 		m_network_info.m_network->deallocatePacket(data);
 
 	}

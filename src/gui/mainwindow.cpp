@@ -65,9 +65,9 @@ bool MainWindow::initInputs()
 	m_window->getCustomAttribute("WINDOW", &hWnd);
 	// OIS mitteilen fuer welches Fenster die Eingaben abgefangen werden sollen
 	pl.insert(OIS::ParamList::value_type("WINDOW", Ogre::StringConverter::toString(hWnd)));
-	pl.insert( std::make_pair(std::string("x11_mouse_grab"), std::string("false") ) ); 
-	pl.insert( std::make_pair(std::string("x11_keyboard_grab"), std::string("false"))); 
-	
+	pl.insert( std::make_pair(std::string("x11_mouse_grab"), std::string("false") ) );
+	pl.insert( std::make_pair(std::string("x11_keyboard_grab"), std::string("false")));
+
 	m_ois = OIS::InputManager::createInputSystem( pl );
 
 	// Maus initialisieren
@@ -2114,7 +2114,7 @@ void  MainWindow::updateMainMenu()
 		DEBUG("file found %s",it->c_str());
 		//File oeffnen
 
-		file.open(("../../save/"+(*it)).c_str(),ios::in| ios::binary);
+		file.open(("../save/"+(*it)).c_str(),ios::in| ios::binary);
 		if (file.is_open())
 		{
 			savelist->addRow();
@@ -2127,7 +2127,7 @@ void  MainWindow::updateMainMenu()
 
 			// nicht benoetigte Headerdaten ueberspringen
 			bp = head+7;
-			
+
 			char ctmp[11];
 			ctmp[10] = '\0';
 			strncpy(ctmp,bp,10);
@@ -2496,7 +2496,7 @@ void MainWindow::updateControlPanel()
 	std::string name;
 
 	Player* player = m_document->getLocalPlayer();
-	
+
 	// Balken fuer HP
 	CEGUI::ProgressBar* bar = static_cast<CEGUI::ProgressBar*>(win_mgr.getWindow( "HealthProgressBar"));
 	float hperc = player->getDynAttr()->m_health / player->getBaseAttrMod()->m_max_health;
@@ -2517,7 +2517,7 @@ void MainWindow::updateControlPanel()
 	bar = static_cast<CEGUI::ProgressBar*>(win_mgr.getWindow( "LeftClickAbilityProgressBar"));
 	timernr =  Action::getActionInfo(player->getLeftAction())->m_timer_nr;
 	perc = player->getTimerPercent(timernr);
-	
+
 	if (bar->getProgress() != perc)
 	{
 		bar->setProgress(perc);
@@ -2571,7 +2571,7 @@ void MainWindow::updateInventory()
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::Window* label;
 	ostringstream out_stream;
-	
+
 	Player* player = m_document->getLocalPlayer();
 
 	// Label Ruestung
@@ -2658,7 +2658,7 @@ void MainWindow::updateInventory()
 	{
 		label->setText(out_stream.str());
 	}
-	
+
 	// Label Amulet
 	out_stream.str("");
 	if (equ->getItem(Equipement::AMULET)!=0)
@@ -2783,7 +2783,7 @@ void MainWindow::updateItemTooltip(unsigned int pos)
 	Item* item = m_document->getLocalPlayer()->getEquipement()->getItem(pos);
 	if (item ==0)
 		return;
-	
+
 	DEBUG5("setting tool tip for item at %i",pos);
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::Window* label;
@@ -2819,11 +2819,11 @@ void MainWindow::updateItemTooltip(unsigned int pos)
 	}
 	label = win_mgr.getWindow(out_stream.str());
 
-	
+
 
 	std::string msg =item->getDescription();
 	label->setTooltipText(msg);
-	
+
 	DEBUG5("Label: %s \ndescription: \n%s",out_stream.str().c_str(),msg.c_str());
 
 	if (pos>= Equipement::SMALL_ITEMS && pos< Equipement::SMALL_ITEMS+10)
@@ -2834,12 +2834,12 @@ void MainWindow::updateItemTooltip(unsigned int pos)
 		label = win_mgr.getWindow(out_stream.str());
 		label->setTooltipText(msg);
 	}
-	
+
 }
 
 void MainWindow::updateAbilityTooltip(unsigned int pos)
 {
-	
+
 	if (pos!=Action::NOACTION)
 	{
 		DEBUG5("update tooltip for %i", pos);
@@ -2857,13 +2857,13 @@ void MainWindow::updateAbilityTooltip(unsigned int pos)
 		label->setTooltipText(tooltip);
 
 	}
-	
+
 }
 
 void MainWindow::updateObjectInfo()
 {
 	Player* player = m_document->getLocalPlayer();
-	
+
 	// Ogre Name des Objektes auf das der Mauszeiger zeigt
 	std::string objname = "";
 
@@ -2972,7 +2972,7 @@ void MainWindow::updateObjectInfo()
 		ServerWObject* cwo;
 		cwo = m_document->getWorld()->getSWObject(id,rid);
 		Creature* cr;
-		
+
 		if (cwo !=0)
 		{
 		// Objekt existiert
@@ -3030,7 +3030,7 @@ void MainWindow::updateObjectInfo()
 			int id;
 			stream >> id;
 			string_stream<<name;
-			
+
 			DEBUG5("item hover id %i",id);
 
 			Item* itm = player->getRegion()->getItem(id);
@@ -3330,23 +3330,23 @@ bool MainWindow::onSwapEquipClicked(const CEGUI::EventArgs& evt)
 
 bool MainWindow::onItemHover(const CEGUI::EventArgs& evt)
 {
-	
+
 	const CEGUI::MouseEventArgs& we =
 			static_cast<const CEGUI::MouseEventArgs&>(evt);
 	unsigned int id = we.window->getID();
 	updateItemTooltip(id);
-	
+
 }
 
 bool MainWindow::onAbilityHover(const CEGUI::EventArgs& evt)
 {
-	
+
 	const CEGUI::MouseEventArgs& we =
 			static_cast<const CEGUI::MouseEventArgs&>(evt);
 	unsigned int id = we.window->getID();
 	DEBUG5("mouse entered Ability %i",id);
 	updateAbilityTooltip(id);
-	
+
 }
 
 bool MainWindow::onIncreaseAttributeButtonClicked(const CEGUI::EventArgs& evt)
@@ -3404,7 +3404,7 @@ bool MainWindow::onStartSinglePlayer(const CEGUI::EventArgs& evt)
 	DEBUG("start single player game");
 	// Spieler ist selbst der Host
 	m_document->setServer(true);
-	
+
 	// Verbindung aufbauen
 	m_document->setState(Document::START_GAME);
 }
@@ -3426,7 +3426,7 @@ bool MainWindow::onStartMultiPlayerHost(const CEGUI::EventArgs& evt)
 	// Spieler ist selbst der Host
 	m_document->setServer(true);
 
-	
+
 	// Verbindung aufbauen
 	m_document->setState(Document::START_GAME);
 }

@@ -25,14 +25,14 @@ void ObjectFactory::init()
 	MonsterBasicData* mdata;
 	int i;
 	float p[4];
-	
+
 #ifdef USE_OBJECTLOADER
 	// Objekte bzw. Monster aus XML Laden
 	ObjectLoader* objectloader = 0;
 	objectloader = new ObjectLoader;
 	list<MonsterBasicData*>* monster_list;
-	monster_list = objectloader->loadObjects("../../data/monsters.xml");
-	
+	monster_list = objectloader->loadObjects("../data/monsters.xml");
+
 	if (monster_list != 0)
 	{
 		list<MonsterBasicData*>::iterator forward_iterator = monster_list->begin();
@@ -49,7 +49,7 @@ void ObjectFactory::init()
 			*forward_iterator++;
 		}
 	}
-	
+
 	delete monster_list;
 	monster_list = 0;
 	delete objectloader;
@@ -230,7 +230,7 @@ ServerWObject* ObjectFactory::createObject(WorldObject::TypeInfo::ObjectType typ
 	{
 		id = m_world->getValidId();
 	}
-	
+
 	if (type ==WorldObject::TypeInfo::TYPE_PLAYER)
 	{
 		if (subtype == "warrior")
@@ -247,7 +247,7 @@ ServerWObject* ObjectFactory::createObject(WorldObject::TypeInfo::ObjectType typ
 		}
 		else if(subtype == "priest")
 		{
-			ret = new Priest( m_world, id );				
+			ret = new Priest( m_world, id );
 		}
 	}
 	else if (type ==WorldObject::TypeInfo::TYPE_MONSTER)
@@ -288,7 +288,7 @@ ServerWObject* ObjectFactory::createObject(WorldObject::TypeInfo::ObjectType typ
 		}
 		else if (subtype =="tree")
 		{
-			
+
 				sp->m_type = Shape::CIRCLE;
 				sp->m_radius = 2.8;
 		}

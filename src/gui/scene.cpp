@@ -29,7 +29,7 @@ Scene::Scene(Document* doc,Ogre::RenderWindow* window)
 	m_projectiles = new map<int,std::string>;
 
 	registerMeshes();
-	
+
 	m_region_id = -1;
 
 }
@@ -133,10 +133,10 @@ void Scene::registerMeshes()
 	// Item Meshes aus XML-Datei Laden
 	ItemLoader* itemloader = 0;
 	itemloader = new ItemLoader;
-	
+
 	list<ItemMeshData*>* item_mesh_list;
-	item_mesh_list = itemloader->loadItemMeshData("../../data/items.xml");
-	
+	item_mesh_list = itemloader->loadItemMeshData("../data/items.xml");
+
 	if (item_mesh_list != 0)
 	{
 		// Daten auslesen und registrieren
@@ -146,7 +146,7 @@ void Scene::registerMeshes()
 			registerItem((*iter)->m_subtype, (*iter)->m_mesh);
 			*iter++;
 		}
-		
+
 		// Liste aus Speicher loeschen
 		iter = item_mesh_list->begin();
 		while (iter != item_mesh_list->end())
@@ -155,7 +155,7 @@ void Scene::registerMeshes()
 			*iter++;
 		}
 	}
-	
+
 	delete item_mesh_list;
 	item_mesh_list = 0;
 	delete itemloader;
@@ -266,20 +266,20 @@ RenderInfo  Scene::getProjectileRenderInfo(Projectile::ProjectileType type)
 void Scene::update(float ms)
 {
 	DEBUG5("update scene");
-	
+
 	// Spielerobjekt
 	Player* player = m_document->getLocalPlayer();
-	
+
 	if (player ==0)
 		return;
 	if (player->getRegion() ==0)
 		return;
-	
+
 	// Nummer der region in der sich der Spieler befindet
 	short region_nr = player->getGridLocation()->m_region;
-	
-	
-	
+
+
+
 
 	if (region_nr != m_region_id)
 	{
@@ -290,9 +290,9 @@ void Scene::update(float ms)
 			createScene();
 
 			m_document->setModified(m_document->getModified() & ~Document::REGION_MODIFIED);
-			
+
 			m_region_id = region_nr;
-		
+
 		}
 		else
 		{
@@ -300,43 +300,43 @@ void Scene::update(float ms)
 			return;
 		}
 	}
-	
+
 	// Koordinaten des Spielers
 	float x=player->getGeometry()->m_shape.m_coordinate_x;
 	float y=player->getGeometry()->m_shape.m_coordinate_y;
 
-	
+
 	// Kamera auf Spieler ausrichten
 	m_camera->setPosition(Ogre::Vector3(x*50, 1000, y*50+300));
 	m_camera->lookAt(Ogre::Vector3(x*50,0,y*50));
-	
+
 	// alle Objekte aktualisieren
 	updateObjects();
-	
+
 
 	DEBUG5("update items");
 	// alle Items aktualisieren
 	updateItems();
-	
+
 
 	updateProjectiles();
-	
+
 }
 
 void  Scene::updateObjects()
 {
 	Timer timer;
 	timer.start();
-	
+
 	DEBUG5("update objects");
 	// Spielerobjekt
 	Player* player = m_document->getLocalPlayer();
-	
+
 	// aktuelle Liste der Objekte holen
 	float x,y;
 	x = player->getGeometry()->m_shape.m_coordinate_x;
 	y = player->getGeometry()->m_shape.m_coordinate_y;
-	
+
 	list<ServerWObject*> objs;
 	ServerWObject* obj;
 	list<ServerWObject*>::iterator it;
@@ -346,14 +346,14 @@ void  Scene::updateObjects()
 	s.m_type = Shape::RECT;
 	s.m_extent_x = 20;
 	s.m_extent_y = 20;
-	
+
 	ServerWObject* wo, *cwo;
 	Creature* cr;
-	
+
 	player->getRegion()->getSWObjectsInShape(&s,&objs, WorldObject::Geometry::LAYER_ALL,WorldObject::CREATURE);
 	player->getRegion()->getSWObjectsInShape(&s,&objs, WorldObject::Geometry::LAYER_ALL,WorldObject::DEAD);
-	
-	
+
+
 	// Liste der aktuell in der Szene vorhanden Objekte durchmustern
 	map<int, string>::iterator it2;
 	int id;
@@ -375,7 +375,7 @@ void  Scene::updateObjects()
 			++it2;
 		}
 	}
-	
+
 
 	// aller Objekte im Dokument durchmustern
 	for (it = objs.begin();it != objs.end(); ++it)
@@ -384,13 +384,13 @@ void  Scene::updateObjects()
 		// Darstellung fuer das Objekt aktualisieren
 		updateObject(obj);
 	}
-	
+
 }
 
 void Scene::updateItems()
 {
 	Player* player = m_document->getLocalPlayer();
-	
+
 	// Liste der aktuell in der Szene vorhandenen Items durchmustern
 	map<int,DropItem*>* itms;
 	map<int,DropItem*>::iterator it;
@@ -441,10 +441,10 @@ void Scene::updateItems()
 			// Koordinaten des Objektes
 			float x=di->m_x;
 			float y=di->m_y;
-			
+
 			// Ortsvektor des Objektes
 			Ogre::Vector3 vec(x*25,0,y*25);
-			
+
 			// an die richtige Stelle verschieben
 			m_scene_manager->getSceneNode(node_name)->setPosition(vec);
 		}
@@ -496,13 +496,13 @@ void Scene::updateObject(ServerWObject* obj)
 	std::string mod_name;
 	int i;
 	Ogre::ParticleSystem *mod_part;
-	
-	
+
+
 	// Animation anpassen
 	// Status der Animation
 	Ogre::AnimationState* anim;
     Ogre::AnimationStateSet* anim_set;
-	
+
 	DEBUG5("animation");
 	// Aktion des Objeks
 	Creature* cr=0;
@@ -518,25 +518,25 @@ void Scene::updateObject(ServerWObject* obj)
 		{
 			anim_name = animations[cr->getAction()->m_animation_number % animations.size()];
 		}
-		
+
 		obj_ent = m_scene_manager->getEntity(name);
 		if (obj_ent == 0)
 		{
 				ERRORMSG("object %s not found",name.c_str());
 		}
-		
+
 		if (anim_name != "")
 		{
 			// status der Animation setzen
 			//Iterator ueber alle aktiven Animationen
 			anim_set = obj_ent->getAllAnimationStates();
-	
+
 			// Testen ob das Objekt animiert ist
 			if (anim_set != 0)
 			{
-	
+
 				Ogre::ConstEnabledAnimationStateIterator anim_it = anim_set->getEnabledAnimationStateIterator();
-	
+
 				//deaktiviert alle animationen, die gerade nicht verwendet werden
 				while(anim_it.hasMoreElements())
 				{
@@ -545,14 +545,14 @@ void Scene::updateObject(ServerWObject* obj)
 					//if(anim->getAnimationName!=anim_name)
 						anim->setEnabled(false);
 				}
-	
+
 				try
 				{
 					if (anim_set->hasAnimationState(anim_name))
 					{
 						anim = obj_ent->getAnimationState(anim_name);
 						anim->setEnabled(true);
-	
+
 						// prozentsatz zu dem die Animation fortgeschritten ist
 						float perc = cr->getAction()->m_elapsed_time / cr->getAction()->m_time  ;
 						DEBUG5("setting animation %s to %f",anim_name.c_str(),perc);
@@ -570,7 +570,7 @@ void Scene::updateObject(ServerWObject* obj)
 			//keine Animation
 		}
 	}
-	
+
 	DEBUG5("extra meshes");
     // angehaengte Meshes an die verwendeten Items anpassen
     if (obj->getTypeInfo()->m_type == WorldObject::TypeInfo::TYPE_PLAYER)
@@ -682,31 +682,31 @@ void Scene::updateObject(ServerWObject* obj)
 		{
 			num.str("");
 			num <<"mod"<< i;
-	
+
 			mod_name = name + num.str();
-			
+
 			mod_part = m_scene_manager->getParticleSystem(mod_name);
 			vis = mod_part->isVisible();
-	
+
 			if ( (status_mods[i]>0) ^ vis)
 			{
 				mod_part->setVisible(!vis);
 			}
 		}
-	
+
 		// weitere Effekte anpassen
 		float* effects =  cr->getDynAttr()->m_effect_time;
-	
+
 		for (i=0;i<NR_EFFECTS;i++)
 		{
 			num.str("");
 			num <<"effect"<< i;
-	
+
 			mod_name = name + num.str();
-	
+
 			mod_part = m_scene_manager->getParticleSystem(mod_name);
 			vis = mod_part->isVisible();
-	
+
 			if ( (effects[i]>0) ^ vis)
 			{
 				mod_part->setVisible(!vis);
@@ -729,7 +729,7 @@ void Scene::createObject(WorldObject* obj,std::string& name, bool is_static)
 {
 	Timer timer;
 	timer.start();
-	
+
 	DEBUG5("creating object %s",name.c_str());
 	std::string node_name = name + "Node";
 
@@ -861,7 +861,7 @@ void Scene::deleteItem(std::string name)
 void Scene::updateProjectiles()
 {
 	Player* player = m_document->getLocalPlayer();
-	
+
 	map<int,DmgProjectile*>* projectiles;
 	map<int,DmgProjectile*>::iterator it;
 	projectiles = player->getRegion()->getProjectiles();
@@ -1158,17 +1158,17 @@ void Scene::createScene()
 	clearObjects();
 
 	// Liste der statischen Objekte
-	list<ServerWObject*> stat_objs; 
-	
+	list<ServerWObject*> stat_objs;
+
 	Region* region = m_document->getLocalPlayer()->getRegion();
-	
+
 	Shape s;
 	s.m_coordinate_x = 0;
 	s.m_coordinate_y = 0;
 	s.m_type = Shape::RECT;
 	s.m_extent_x = 10000;
 	s.m_extent_y = 10000;
-	
+
 	region->getSWObjectsInShape(&s,&stat_objs, WorldObject::Geometry::LAYER_ALL,WorldObject::FIXED);
 	list<ServerWObject*>::iterator it;
 	std::string name;
@@ -1177,7 +1177,7 @@ void Scene::createScene()
 		name = (*it)->getNameId();
 
 		DEBUG5("create static object %s",name.c_str());
-		
+
 		// Objekt in der Szene erzeugen
 		createObject((*it),name,true);
 

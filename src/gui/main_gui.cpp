@@ -5,11 +5,9 @@
 #if defined(WIN32)
 #include "windows.h"
 
-
-INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) {
-#else
-int main (int argc, char *argv[]) {
 #endif
+//INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) {
+int main (int argc, char *argv[]) {
 
 
 	// Applikation anlegen
@@ -24,12 +22,12 @@ int main (int argc, char *argv[]) {
 	}
 	else
 	{
-		save = "default.sav";
+		save = "../save/default.sav";
 	}
 	#else
-        save = "default.sav";
+        save = "../save/default.sav";
     #endif
-	
+
 	bool server = true;
 	if (argc>=3)
 	{
@@ -40,14 +38,14 @@ int main (int argc, char *argv[]) {
 	}
 	Document* doc = app->getDocument();
 	doc->setSaveFile(save);
-	
+
 	doc->setServer(server);
 	doc->setState(Document::START_GAME);
 	doc->getGUIState()->m_sheet= Document::GAME_SCREEN;
 	doc->getGUIState()->m_shown_windows = Document::NO_WINDOWS;
 
 	// laufen lassen
-	
+
 	try
 	{
 

@@ -21,7 +21,11 @@ bool Application::init()
 	// pluginfile: plugins.cfg
 	// configfile: keines
 	#ifdef WIN32
-        m_ogre_root = new Ogre::Root("plugins_win.cfg", "ogre.cfg");
+        #ifdef DEBUG
+            m_ogre_root = new Ogre::Root("plugins_win_d.cfg", "ogre.cfg");
+        #else
+            m_ogre_root = new Ogre::Root("plugins_win.cfg", "ogre.cfg");
+        #endif
     #else
         m_ogre_root = new Ogre::Root("plugins.cfg", "ogre.cfg");
     #endif
@@ -129,9 +133,9 @@ void Application::run()
 		{
         	DEBUG5("overall frame time was %f",ftime*1000);
 		}
-       
+
 	  	timer2.reset();
-		
+
 		update();
 
 		ltime =timer2.getMicroseconds ();
@@ -151,19 +155,19 @@ void Application::run()
 		{
 			DEBUG("message pump time was %f",time*1000);
 		}
-		
+
 		timer2.reset();
-		
+
 		// Document aktualisieren
 		m_document->update(ftime*1000);
-		
+
 		ltime =timer2.getMicroseconds ();
 		time = ltime / ( 1000000.0);
 		if (time*1000 > 20)
 		{
 			DEBUG("document update time was %f",time*1000);
 		}
-	
+
 	/*
 		count ++;
 		timesum += time;
@@ -179,11 +183,11 @@ void Application::run()
 		try
 		{
 			timer2.reset();
-		
+
 			// View aktualisieren
 			DEBUG5("main window update");
 			m_main_window->update();
-			
+
 			ltime =timer2.getMicroseconds ();
 			time = ltime / ( 1000000.0);
 			if (time*1000 > 20)
@@ -199,7 +203,7 @@ void Application::run()
 		timer2.reset();
 		//DEBUG("frame time in s %f",time);
 		m_cegui_system->injectTimePulse(ftime);
-		
+
 		ltime =timer2.getMicroseconds ();
 		time = ltime / ( 1000000.0);
 		if (time*1000 > 20)
@@ -218,10 +222,10 @@ void Application::run()
 		{
 	         DEBUG("ogre frame time was %f",time*1000);
 		}
-      
+
 	}
 
-	
+
 
 }
 
@@ -274,23 +278,23 @@ bool Application::configureOgre()
 bool Application::setupResources()
 {
 	DEBUG("initalizing resources");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../../resources/models", "FileSystem", "General");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../../resources/materials/scripts", "FileSystem", "General");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../../resources/materials/textures", "FileSystem", "General");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../../resources/particle", "FileSystem", "General");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../resources/models", "FileSystem", "General");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../resources/materials/scripts", "FileSystem", "General");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../resources/materials/textures", "FileSystem", "General");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../resources/particle", "FileSystem", "General");
 
 	// CEGUI Resourcen laden
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../../resources/gui/configs", "FileSystem", "GUI");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../../resources/gui/fonts", "FileSystem", "GUI");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../resources/gui/configs", "FileSystem", "GUI");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../resources/gui/fonts", "FileSystem", "GUI");
 
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../../resources/gui/imagesets", "FileSystem", "GUI");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../../resources/gui/layouts", "FileSystem", "GUI");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../../resources/gui/looknfeel", "FileSystem", "GUI");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../../resources/gui/schemes", "FileSystem", "GUI");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../resources/gui/imagesets", "FileSystem", "GUI");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../resources/gui/layouts", "FileSystem", "GUI");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../resources/gui/looknfeel", "FileSystem", "GUI");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../resources/gui/schemes", "FileSystem", "GUI");
 
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../../resources/gui/schemes", "FileSystem", "GUI");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../resources/gui/schemes", "FileSystem", "GUI");
 
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../../save", "FileSystem", "Savegame");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../save", "FileSystem", "Savegame");
 
 
 #if defined(WIN32)
@@ -301,11 +305,11 @@ bool Application::setupResources()
 	Ogre::ResourceGroupManager::getSingleton().initialiseResourceGroup("General");
 	Ogre::ResourceGroupManager::getSingleton().initialiseResourceGroup("Savegame");
 	Ogre::ResourceGroupManager::getSingleton().initialiseResourceGroup("GUI");
-	
+
 	Ogre::ResourceGroupManager::getSingleton().loadResourceGroup("General");
 	Ogre::ResourceGroupManager::getSingleton().loadResourceGroup("Savegame");
 	Ogre::ResourceGroupManager::getSingleton().loadResourceGroup("GUI");
-	
+
 
 	// Debugging: Meshes direkt anlegen
 
@@ -408,7 +412,7 @@ bool Application::createDocument()
 {
 	DEBUG("create document\n");
 	m_document = new Document();
-	
+
 	m_document->installShortkey(OIS::KC_ESCAPE,Document::CLOSE_ALL);
 	m_document->installShortkey(OIS::KC_I,Document::SHOW_INVENTORY);
 	m_document->installShortkey(OIS::KC_C,Document::SHOW_CHARINFO);
