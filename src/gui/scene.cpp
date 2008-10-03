@@ -1,6 +1,6 @@
 #include "scene.h"
-#include "itemloader.h"
 
+#define USE_OBJECTLOADER
 #define USE_ITEMLOADER
 
 Scene::Scene(Document* doc,Ogre::RenderWindow* window)
@@ -56,7 +56,42 @@ void Scene::registerMeshes()
 	registerObject("archer","warrior.mesh",""); // TODO
 
 	// Monster
+#ifdef USE_OBJECTLOADER
+	// Monster Meshes aus XML-Datei Laden
+	ObjectLoader* objectloader = 0;
+	objectloader = new ObjectLoader;
+	
+	list<MonsterMeshData*>* monster_mesh_list;
+	monster_mesh_list = objectloader->loadMonsterMeshData("../../data/monsters.xml");
+	
+	if (monster_mesh_list != 0)
+	{
+		// Daten auslesen und registrieren
+		list<MonsterMeshData*>::iterator iter = monster_mesh_list->begin();
+		while (iter != monster_mesh_list->end())
+		{
+			registerObject((*iter)->m_subtype, (*iter)->m_mesh, "");
+			*iter++;
+		}
+		
+		// Liste aus Speicher loeschen
+		iter = monster_mesh_list->begin();
+		while (iter != monster_mesh_list->end())
+		{
+			delete *iter;
+			*iter++;
+		}
+	}
+	
+	delete monster_mesh_list;
+	monster_mesh_list = 0;
+	delete objectloader;
+	objectloader = 0;
+#endif
+
+#ifndef USE_OBJECTLOADER
 	registerObject("goblin","goblin.mesh","");
+#endif
 	registerObject("gob_dog","gobDog.mesh","");
 	registerObject("lich","lich.mesh","");
 

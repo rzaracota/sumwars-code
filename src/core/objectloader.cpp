@@ -34,9 +34,11 @@ int ObjectLoader::generateObjects(TiXmlElement* pElement, string element)
 			}
 			else if (!strcmp(pAttrib->Name(), "subtype"))
 			{
-				if (!strcmp(pAttrib->Value(), "GOBLIN"))
+				m_monster_data->m_type_info.m_subtype = pAttrib->Value();
+				//Veraltet, da Enum hier auf String umgestellt ist
+				/*if (!strcmp(pAttrib->Value(), "GOBLIN"))
 					m_monster_data->m_type_info.m_subtype = "goblin";
-					//m_monster_data->m_type_info.m_subtype = WorldObject::TypeInfo::SUBTYPE_GOBLIN;
+					//m_monster_data->m_type_info.m_subtype = WorldObject::TypeInfo::SUBTYPE_GOBLIN;*/
 			}
 			else if (!strcmp(pAttrib->Name(), "fraction"))
 			{
@@ -288,7 +290,7 @@ void ObjectLoader::searchXml(TiXmlNode* pParent)
 }
 
 
-list<MonsterBasicData*>* ObjectLoader::loadObjects(const char* pFilename) // TODO Noch nicht benutzen!
+list<MonsterBasicData*>* ObjectLoader::loadObjects(const char* pFilename)
 {
 	for (int i=0; i<4; i++)
 	{
@@ -321,4 +323,115 @@ list<MonsterBasicData*>* ObjectLoader::loadObjects(const char* pFilename) // TOD
 	}
 }
 
+//##############################################################################
+
+int ObjectLoader::generateMonsterMeshData(TiXmlElement* pElement, string element)
+{
+	if ( !pElement ) return 0;
+	
+	TiXmlAttribute* pAttrib=pElement->FirstAttribute();
+	int i=0;
+	int ival;
+	double dval;
+	
+	if (element == "Monster" && pAttrib)
+	{
+		if (m_monster_mesh_data == 0)
+		{
+			m_monster_mesh_data = new MonsterMeshData;
+		}
+		
+		while (element == "Monster" && pAttrib)
+		{
+			if (!strcmp(pAttrib->Name(), "subtype"))
+				m_monster_mesh_data->m_subtype = pAttrib->Value();
+			
+			i++;
+			pAttrib=pAttrib->Next();
+		}
+	}
+	
+	if (element == "Mesh" && pAttrib)
+	{
+		while (element == "Mesh" && pAttrib)
+		{
+			if (!strcmp(pAttrib->Name(), "file"))
+				m_monster_mesh_data->m_mesh = pAttrib->Value();
+			
+			i++;
+			pAttrib=pAttrib->Next();
+		}
+	}
+	
+	return i;
+}
+
+
+void ObjectLoader::searchMonsterMeshData(TiXmlNode* pParent)
+{
+	if ( !pParent ) return;
+	
+	TiXmlNode* pChild;
+	TiXmlText* pText;
+	
+	int t = pParent->Type();
+	int num;
+	
+	switch ( t )
+	{
+	case TiXmlNode::ELEMENT:
+		//printf( "Element [%s]", pParent->Value() );
+		num = generateMonsterMeshData(pParent->ToElement(), pParent->Value());
+		/*switch(num)
+		{
+			case 0:  printf( " (No attributes)"); break;
+			case 1:  printf( "%s1 attribute", getIndentAlt(indent)); break;
+			default: printf( "%s%d attributes", getIndentAlt(indent), num); break;
+		}*/
+		break;
+	/*
+	case TiXmlNode::TEXT:
+		pText = pParent->ToText();
+		printf( "Text: [%s]", pText->Value() );
+		break;
+	*/
+	default:
+		break;
+	}
+	
+	for ( pChild = pParent->FirstChild(); pChild != 0; pChild = pChild->NextSibling())
+	{
+		searchMonsterMeshData(pChild);
+		
+		if ( !strcmp(pChild->Value(), "Monster") && pChild->Type() == TiXmlNode::ELEMENT)
+		{
+			m_monster_mesh_list->push_back(m_monster_mesh_data);
+			m_monster_mesh_data = 0;
+			DEBUG5("Monster Mesh loaded");
+		}
+	}
+}
+
+
+list<MonsterMeshData*>* ObjectLoader::loadMonsterMeshData(const char* pFilename)
+{
+	m_monster_mesh_data = 0;
+	m_monster_mesh_list = new list<MonsterMeshData*>;
+	
+	TiXmlDocument doc(pFilename);
+	bool loadOkay = doc.LoadFile();
+	
+	if (loadOkay)
+	{
+		DEBUG5("Loading %s", pFilename);
+		searchMonsterMeshData(&doc);
+		DEBUG5("Loading %s finished", pFilename);
+		return m_monster_mesh_list;
+	}
+	else
+	{
+		DEBUG("Failed to load file %s", pFilename);
+		return 0;
+	}
+}
 

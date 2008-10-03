@@ -1,5 +1,4 @@
 #include "itemfactory.h"
-#include "itemloader.h"
 
 #define USE_ITEMLOADER
 

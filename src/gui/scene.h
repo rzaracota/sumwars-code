@@ -5,6 +5,8 @@
 #include "Ogre.h"
 #include <string>
 
+#include "itemloader.h"
+#include "objectloader.h"
 #include "document.h"
 #include "serverwobject.h"
 // TODO : include anpassen (es wird nur ein Spieler allgemein benoetigt)
