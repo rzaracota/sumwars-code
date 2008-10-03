@@ -3,7 +3,8 @@
 
 <!-- Goblin -->
 <!-- 3871 = 0xf1f -->
-<Monster type="MONSTER" subtype="GOBLIN" fraction="MONSTER" category="GOBLIN">
+<Monster type="MONSTER" subtype="goblin" fraction="MONSTER" category="GOBLIN">
+	<Mesh file="goblin.mesh" />
 	<Dropslots p0="0.1" p1="0.2" p2="0.2" p3="0.2" />
 	<Dropslot0 min_level="0" max_level="20" magic_prob="0.3" magic_power="500" />
 	<Dropslot1 min_level="0" max_level="10" magic_prob="0.3" magic_power="1000" />

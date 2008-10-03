@@ -86,10 +86,10 @@
 	<EquipEffect />
 	<WeaponAttribute
 		damage_min_physical="5"
-		damage_max_physical="12"
+		damage_max_physical="10"
 		damage_attack="20"
 		damage_power="30"
-		attack_range="1.4"
+		attack_range="1.0"
 		two_handed="no"
 		dattack_speed="500"
 	/>
