@@ -143,7 +143,7 @@ void Monster::updateCommand()
 
 			// Testen, ob der Weg zum Spieler frei ist
 			ret.clear();
-			getWorld()->getSWObjectsOnLine(x,y,goal_x,goal_y,rid,&ret,Geometry::LAYER_AIR, CREATURE | FIXED,0);
+			getWorld()->getObjectsOnLine(x,y,goal_x,goal_y,rid,&ret,Geometry::LAYER_AIR, CREATURE | FIXED,0);
 
 			if (ret.empty())
 			{
@@ -353,7 +353,7 @@ void Monster::die()
 	
 		// Object per ID von der World holen
 		WorldObject* object;
-		object = getWorld()->getSWObject(id,getGridLocation()->m_region);
+		object = getWorld()->getObject(id,getGridLocation()->m_region);
 	
 		if (object!=0)
 		{
@@ -375,7 +375,7 @@ void Monster::die()
 				s.m_coordinate_x = geom->m_shape.m_coordinate_x;
 				s.m_coordinate_y = geom->m_shape.m_coordinate_y;
 	
-				getWorld()->getSWObjectsInShape(&s, getGridLocation()->m_region, &ret, Geometry::LAYER_AIR, CREATURE);
+				getWorld()->getObjectsInShape(&s, getGridLocation()->m_region, &ret, Geometry::LAYER_AIR, CREATURE);
 	
 				list<WorldObject*>::iterator i;
 				

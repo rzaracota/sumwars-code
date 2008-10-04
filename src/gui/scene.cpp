@@ -350,8 +350,8 @@ void  Scene::updateObjects()
 	WorldObject* wo, *cwo;
 	Creature* cr;
 
-	player->getRegion()->getSWObjectsInShape(&s,&objs, WorldObject::Geometry::LAYER_ALL,WorldObject::CREATURE);
-	player->getRegion()->getSWObjectsInShape(&s,&objs, WorldObject::Geometry::LAYER_ALL,WorldObject::DEAD);
+	player->getRegion()->getObjectsInShape(&s,&objs, WorldObject::Geometry::LAYER_ALL,WorldObject::CREATURE);
+	player->getRegion()->getObjectsInShape(&s,&objs, WorldObject::Geometry::LAYER_ALL,WorldObject::DEAD);
 
 
 	// Liste der aktuell in der Szene vorhanden Objekte durchmustern
@@ -360,7 +360,7 @@ void  Scene::updateObjects()
 	for (it2 = m_objects->begin();it2 != m_objects->end();)
 	{
 		id = it2->first;
-		if (player->getRegion()->getSWObject(id) == 0)
+		if (player->getRegion()->getObject(id) == 0)
 		{
 			// Objekt existiert nicht in der Liste im Dokument
 
@@ -1169,7 +1169,7 @@ void Scene::createScene()
 	s.m_extent_x = 10000;
 	s.m_extent_y = 10000;
 
-	region->getSWObjectsInShape(&s,&stat_objs, WorldObject::Geometry::LAYER_ALL,WorldObject::FIXED);
+	region->getObjectsInShape(&s,&stat_objs, WorldObject::Geometry::LAYER_ALL,WorldObject::FIXED);
 	list<WorldObject*>::iterator it;
 	std::string name;
 	for (it = stat_objs.begin(); it !=stat_objs.end();++it)

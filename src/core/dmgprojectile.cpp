@@ -180,7 +180,7 @@ bool DmgProjectile::update(float time)
 	
 						// Alle Objekte im Explosionsradius suchen
 						hitobj.clear();
-						m_world->getSWObjectsInShape(&s,m_region,&hitobj,getGeometry()->m_layer,WorldObject::CREATURE,0);
+						m_world->getObjectsInShape(&s,m_region,&hitobj,getGeometry()->m_layer,WorldObject::CREATURE,0);
 						for (i=hitobj.begin();i!=hitobj.end();++i)
 						{
 							// Schaden austeilen
@@ -284,7 +284,7 @@ bool DmgProjectile::update(float time)
 		s.m_radius = m_geometry.m_radius;
 
 		// Objekte suchen die die Saeule beruehren
-		m_world->getSWObjectsInShape(&s,m_region,&hitobj,getGeometry()->m_layer,WorldObject::CREATURE,0);
+		m_world->getObjectsInShape(&s,m_region,&hitobj,getGeometry()->m_layer,WorldObject::CREATURE,0);
 		for (i=hitobj.begin();i!=hitobj.end();++i)
 		{
 			// Schaden austeilen
@@ -328,7 +328,7 @@ void DmgProjectile::handleFlying(float dtime)
 		if (m_goal_object!=0)
 		{
 			// Zielobjekt ist per ID vorgegeben, Objekt von der Welt holen
-			hit = m_world->getSWObject(m_goal_object,getRegion());
+			hit = m_world->getObject(m_goal_object,getRegion());
 		}
 
 		if (hit==0)
@@ -347,7 +347,7 @@ void DmgProjectile::handleFlying(float dtime)
 			newdir[1]=0;
 
 			// alle Objekte im Kreis suchen
-			m_world->getSWObjectsInShape(&s,m_region,&hitobj,getGeometry()->m_layer, WorldObject::CREATURE,0);
+			m_world->getObjectsInShape(&s,m_region,&hitobj,getGeometry()->m_layer, WorldObject::CREATURE,0);
 
 			// alle Objekte als potentielle Ziele loeschen, die dem Erschaffer des Projektils nicht feindlich gesinnt sind
 			if (!hitobj.empty())
@@ -482,7 +482,7 @@ void DmgProjectile::handleFlying(float dtime)
 
 	// Objekt an der aktuellen Position suchen
 	DEBUG5("getting objects on Line %f %f %f %f",x,y,xnew,ynew);
-	m_world->getSWObjectsOnLine(x,y,xnew,ynew,m_region,&hitobj,getGeometry()->m_layer,WorldObject::CREATURE | WorldObject::FIXED,0);
+	m_world->getObjectsOnLine(x,y,xnew,ynew,m_region,&hitobj,getGeometry()->m_layer,WorldObject::CREATURE | WorldObject::FIXED,0);
 
 	// Alle Objekte herausfiltern die verbuendet sind, sowie das zuletzt gerade getroffene Objekt
 	if (!hitobj.empty())
@@ -583,7 +583,7 @@ void DmgProjectile::handleFlying(float dtime)
 
 			// Alle Objekte im Kreis suchen
 			hitobj.clear();
-			m_world->getSWObjectsInShape(&s,m_region,&hitobj,WorldObject::Geometry::LAYER_AIR,WorldObject::CREATURE,0);
+			m_world->getObjectsInShape(&s,m_region,&hitobj,WorldObject::Geometry::LAYER_AIR,WorldObject::CREATURE,0);
 			rmin = sqr(s.m_radius);
 			lid = hit->getId();
 			hit =0;
@@ -706,7 +706,7 @@ void DmgProjectile::handleGrowing(float dtime)
 		s.m_radius = rnew;
 
 		// Alle Objekte suchen die sich in dem Kreis befinden
-		m_world->getSWObjectsInShape(&s,m_region,&hitobj,getGeometry()->m_layer,WorldObject::CREATURE,0);
+		m_world->getObjectsInShape(&s,m_region,&hitobj,getGeometry()->m_layer,WorldObject::CREATURE,0);
 		lid = m_last_hit_object_id;
 		DEBUG5("last hit id = %i",lid);
 		rmin =0;
@@ -799,7 +799,7 @@ void DmgProjectile::handleStable(float dtime)
 			s.m_radius = m_geometry.m_radius;
 
 			// Alle Objekte in der Flaeche suchen
-			m_world->getSWObjectsInShape(&s,m_region,&hitobj,getGeometry()->m_layer,WorldObject::CREATURE,0);
+			m_world->getObjectsInShape(&s,m_region,&hitobj,getGeometry()->m_layer,WorldObject::CREATURE,0);
 			for (i=hitobj.begin();i!=hitobj.end();++i)
 			{
 				// Schaden austeilen
@@ -828,7 +828,7 @@ void DmgProjectile::handleStable(float dtime)
 			s.m_radius = m_geometry.m_radius;
 
 			// Alle Objekte in der Flaeche suchen
-			m_world->getSWObjectsInShape(&s,m_region,&hitobj,getGeometry()->m_layer,WorldObject::CREATURE,0);
+			m_world->getObjectsInShape(&s,m_region,&hitobj,getGeometry()->m_layer,WorldObject::CREATURE,0);
 			for (i=hitobj.begin();i!=hitobj.end();++i)
 			{
 				// Schaden austeilen
@@ -858,7 +858,7 @@ void DmgProjectile::handleStable(float dtime)
 			hitobj.clear();
 
 			// Alle Objekte in dem Kreis suchen
-			m_world->getSWObjectsInShape(&s,m_region,&hitobj,getGeometry()->m_layer,WorldObject::CREATURE,0);
+			m_world->getObjectsInShape(&s,m_region,&hitobj,getGeometry()->m_layer,WorldObject::CREATURE,0);
 
 			DEBUG5("center %f %f",s.m_coordinate_x,s.m_coordinate_y);
 
@@ -919,7 +919,7 @@ void DmgProjectile::handleStable(float dtime)
 		if (m_type == LIGHTNING || m_type ==LIGHT_BEAM  || m_type ==ELEM_EXPLOSION || m_type ==ACID || m_type ==DIVINE_BEAM  || m_type ==HYPNOSIS)
 		{
 			// Objekt an der Stelle suchen an der der Zauber wirkt
-			hit = m_world->getSWObjectAt( getGeometry()->m_coordinate_x,getGeometry()->m_coordinate_y,m_region,getGeometry()->m_layer );
+			hit = m_world->getObjectAt( getGeometry()->m_coordinate_x,getGeometry()->m_coordinate_y,m_region,getGeometry()->m_layer );
 
 			if (hit !=0)
 			{

@@ -2970,7 +2970,7 @@ void MainWindow::updateObjectInfo()
 
 		// zur ID gehoerendes Objekt
 		WorldObject* cwo;
-		cwo = m_document->getWorld()->getSWObject(id,rid);
+		cwo = m_document->getWorld()->getObject(id,rid);
 		Creature* cr;
 
 		if (cwo !=0)

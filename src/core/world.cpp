@@ -129,56 +129,56 @@ void World::createRegion(short region)
 		}
 
 		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "fence");
-		insertSWObject(wo, 4,6,rid);
+		insertObject(wo, 4,6,rid);
 
 
 		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "tree");
-		insertSWObject(wo, 9,13,rid);
+		insertObject(wo, 9,13,rid);
 
 
 		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_MONSTER, "goblin");
-		insertSWObject(wo, 13,8,rid);
+		insertObject(wo, 13,8,rid);
 
 
 		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_MONSTER, "gob_dog");
-		insertSWObject(wo, 14.2,8.2,rid);
+		insertObject(wo, 14.2,8.2,rid);
 
 		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_MONSTER, "goblin");
-		insertSWObject(wo, 14.5,6.7,rid);
+		insertObject(wo, 14.5,6.7,rid);
 
 		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_MONSTER, "goblin");
-		insertSWObject(wo, 14.8,5.7,rid);
+		insertObject(wo, 14.8,5.7,rid);
 
 		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_MONSTER, "goblin");
-		insertSWObject(wo, 14,10.9,rid);
+		insertObject(wo, 14,10.9,rid);
 
 		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_MONSTER, "goblin");
-		insertSWObject(wo, 17,8.2,rid);
+		insertObject(wo, 17,8.2,rid);
 
 		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_MONSTER, "lich");
-		insertSWObject(wo, 7,5,rid);
+		insertObject(wo, 7,5,rid);
 
 		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_MONSTER, "goblin");
-		insertSWObject(wo, 18.5,7,rid);
+		insertObject(wo, 18.5,7,rid);
 
 		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_MONSTER, "goblin");
-		insertSWObject(wo, 17.2,6.6,rid);
+		insertObject(wo, 17.2,6.6,rid);
 
 		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_MONSTER, "goblin");
-		insertSWObject(wo, 19.9,6.9,rid);
+		insertObject(wo, 19.9,6.9,rid);
 
 /*
 		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_MONSTER, "goblin");
-		insertSWObject(wo, 16.2,3,rid);
+		insertObject(wo, 16.2,3,rid);
 
 		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_MONSTER, "goblin");
-		insertSWObject(wo, 19.2,3.1,rid);
+		insertObject(wo, 19.2,3.1,rid);
 
 		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_MONSTER, "goblin");
-		insertSWObject(wo, 6.5,6.4,rid);
+		insertObject(wo, 6.5,6.4,rid);
 
 		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_MONSTER, "goblin");
-		insertSWObject(wo, 8.5,6.4,rid);
+		insertObject(wo, 8.5,6.4,rid);
 		*/
 /*
 
@@ -186,7 +186,7 @@ void World::createRegion(short region)
 		spawn = new Spawnpoint(m_world,1);
 		spawn->setRespawnTime(10000);
 		spawn->addMonsterGroup(mg);
-		insertSWObject(spawn,9,9,rid);
+		insertObject(spawn,9,9,rid);
 */
 /*
 		int i,j;
@@ -215,41 +215,41 @@ void World::createRegion(short region)
 		spawn = new Spawnpoint(m_world,1);
 		spawn->setRespawnTime(100000);
 		spawn->addMonsterGroup(gob);
-		insertSWObject(spawn,9,9,rid);
+		insertObject(spawn,9,9,rid);
 
 		spawn = new Spawnpoint(m_world,2);
 		spawn->setRespawnTime(100000);
 		spawn->addMonsterGroup(gob);
-		insertSWObject(spawn,6,18,rid);
+		insertObject(spawn,6,18,rid);
 
 		spawn = new Spawnpoint(m_world,3);
 		spawn->setRespawnTime(100000);
 		spawn->addMonsterGroup(gob2);
 		spawn->addMonsterGroup(dog);
-		insertSWObject(spawn,22,14,rid);
+		insertObject(spawn,22,14,rid);
 
 		spawn = new Spawnpoint(m_world,4);
 		spawn->setRespawnTime(100000);
 		spawn->addMonsterGroup(gob);
 		spawn->addMonsterGroup(lich);
-		insertSWObject(spawn,16,25,rid);
+		insertObject(spawn,16,25,rid);
 
 		spawn = new Spawnpoint(m_world,5);
 		spawn->setRespawnTime(100000);
 		spawn->addMonsterGroup(gob2);
 		spawn->addMonsterGroup(lich);
 		spawn->addMonsterGroup(dog);
-		insertSWObject(spawn,30,27,rid);
+		insertObject(spawn,30,27,rid);
 
 		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "tree");
-		insertSWObject(wo, 24,26,rid);
+		insertObject(wo, 24,26,rid);
 
 
 		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "tree");
-		insertSWObject(wo, 10,13,rid);
+		insertObject(wo, 10,13,rid);
 
 		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "tree");
-		insertSWObject(wo, 20,18,rid);
+		insertObject(wo, 20,18,rid);
 */
 
 	}
@@ -487,9 +487,9 @@ float World::getDistance(Shape& s1, Shape& s2)
 
 
 
-WorldObject* World::getSWObject ( int id,short rid) 
+WorldObject* World::getObject ( int id,short rid) 
 {
-	return m_regions[rid]->getSWObject(id);
+	return m_regions[rid]->getObject(id);
 }
 
 
@@ -542,7 +542,7 @@ int World::newTrade(int trader1_id, int trader2_id)
 }
 
 
-bool World:: getSWObjectsInShape( Shape* shape, short region, list<WorldObject*>* result,short layer, short group, WorldObject* omit )
+bool World:: getObjectsInShape( Shape* shape, short region, list<WorldObject*>* result,short layer, short group, WorldObject* omit )
 {
 
 	 
@@ -554,14 +554,14 @@ bool World:: getSWObjectsInShape( Shape* shape, short region, list<WorldObject*>
 	}
 	
 	
-	bool res = r->getSWObjectsInShape(shape,result,layer,group,omit);
+	bool res = r->getObjectsInShape(shape,result,layer,group,omit);
 	
 	return res;
 	 
 }
 
 
-WorldObject* World::getSWObjectAt(float x_coordinate, float y_coordinate,  short region,short layer, short group )
+WorldObject* World::getObjectAt(float x_coordinate, float y_coordinate,  short region,short layer, short group )
 {
 	// Region ermitteln, wenn gleich 0, Fehler ausgeben
 	Region* r = m_regions[region];
@@ -571,17 +571,17 @@ WorldObject* World::getSWObjectAt(float x_coordinate, float y_coordinate,  short
 		return false;
 	}
 	
-	return r->getSWObjectAt(x_coordinate,y_coordinate,layer,group);
+	return r->getObjectAt(x_coordinate,y_coordinate,layer,group);
 }
 
-void World::getSWObjectsOnLine( float xstart, float ystart, float xend, float yend,  short region, list<WorldObject*>* result,short layer, short group, WorldObject* omit)
+void World::getObjectsOnLine( float xstart, float ystart, float xend, float yend,  short region, list<WorldObject*>* result,short layer, short group, WorldObject* omit)
 {
 	// Region ermitteln, wenn gleich 0 beenden
 	Region* r = m_regions[region];
 	if (r == 0)
 		return;
 	
-	r->getSWObjectsOnLine(xstart,ystart,xend,yend,result,layer,group,omit);
+	r->getObjectsOnLine(xstart,ystart,xend,yend,result,layer,group,omit);
 	
 }
 
@@ -787,7 +787,7 @@ bool World::getClosestFreeSquare(float x_coordinate, float y_coordinate, float &
 */
 
 
- bool World::insertSWObject (WorldObject* object, float x, float y, short region) 
+ bool World::insertObject (WorldObject* object, float x, float y, short region) 
 {
 	DEBUG5("inserting Object at %f %f into region %i",x,y,region);
 	 bool result=true;
@@ -804,7 +804,7 @@ bool World::getClosestFreeSquare(float x_coordinate, float y_coordinate, float &
 	
 	 if (r!=0)
 	 {
-	 	result &= r->insertSWObject(object,x,y);
+	 	result &= r->insertObject(object,x,y);
 	 }
 	 else
 	 {
@@ -835,7 +835,7 @@ bool World::insertPlayer(WorldObject* player, int slot)
 }
 
 
-bool World::moveSWObject(WorldObject* object, float x, float y)
+bool World::moveObject(WorldObject* object, float x, float y)
 {
 	bool result;
 
@@ -847,13 +847,13 @@ bool World::moveSWObject(WorldObject* object, float x, float y)
 		return false;
 	}
 	
-	result &= r->moveSWObject(object,x,y);
+	result &= r->moveObject(object,x,y);
 	
 	return result;
 }
 
 
- bool World::deleteSWObject (WorldObject* object) {
+ bool World::deleteObject (WorldObject* object) {
 	 
 	 bool result=true;
 	 
@@ -866,7 +866,7 @@ bool World::moveSWObject(WorldObject* object, float x, float y)
 	 if (object == 0)
 		 return false;
 	 
-	 result &= r->deleteSWObject(object);
+	 result &= r->deleteObject(object);
 	
 }
 
@@ -951,7 +951,7 @@ bool World::insertPlayerIntoRegion(WorldObject* player, short region)
 		x = player->getGeometry()->m_shape.m_coordinate_x;
 		y = player->getGeometry()->m_shape.m_coordinate_y;
 		reg->getFreePlace(&(player->getGeometry()->m_shape),player->getGeometry()->m_layer , x, y);
-		insertSWObject(player, x,y,region);
+		insertObject(player, x,y,region);
 		player->setState(WorldObject::STATE_ACTIVE);
 		
 		if (m_server)
@@ -1262,7 +1262,7 @@ void World::updatePlayers()
 			
 			insertEvent(event);
 			
-			deleteSWObject(pl);
+			deleteObject(pl);
 			m_players->erase( pl->getId());
 			m_player_slots->erase(it++);
 			
@@ -1573,14 +1573,14 @@ void World::writeEvent(Region* region,Event* event, CharConv* cv)
 	{
 		if (event->m_type == Event::OBJECT_CREATED)
 		{
-			object =region->getSWObject(event->m_id);
+			object =region->getObject(event->m_id);
 			object->toString(cv);
 		}
 		
 		if (event->m_type == Event::OBJECT_STAT_CHANGED)
 		{
 			
-			object =region->getSWObject(event->m_id);
+			object =region->getObject(event->m_id);
 			object->writeEvent(event,cv);
 			
 		}
@@ -1657,7 +1657,7 @@ bool World::processEvent(Region* region,CharConv* cv)
 			break;
 	
 		case Event::OBJECT_STAT_CHANGED:
-			object =region->getSWObject(event.m_id);
+			object =region->getObject(event.m_id);
 			if (object !=0)
 			{
 			
@@ -1673,11 +1673,11 @@ bool World::processEvent(Region* region,CharConv* cv)
 	
 		
 		case Event::OBJECT_DESTROYED:
-			object =region->getSWObject(event.m_id);
+			object =region->getObject(event.m_id);
 			if (object !=0)
 			{
 				object->destroy();
-				region->deleteSWObject(object);
+				region->deleteObject(object);
 				delete object;
 			}
 			else
@@ -1735,7 +1735,7 @@ bool World::processEvent(Region* region,CharConv* cv)
 				object = (*m_players)[event.m_id];
 				if (object != m_local_player)
 				{
-					deleteSWObject(object);
+					deleteObject(object);
 					m_players->erase( object->getId());
 					
 					map<int,WorldObject*>::iterator it;
@@ -1906,7 +1906,7 @@ bool World::calcBlockmat(PathfindInfo * pathinfo)
 	DEBUG5("parameter %f %f sqs %f hb %f",c_x,c_y,sqs,hb);
 	
 	// Alle Objekte in dem Gebiet suchen
-	getSWObjectsInShape(&s, pathinfo->m_region, &ret,pathinfo->m_layer);
+	getObjectsInShape(&s, pathinfo->m_region, &ret,pathinfo->m_layer);
 	WorldObject* wo=0;
 	pathinfo->m_block->clear();
 	

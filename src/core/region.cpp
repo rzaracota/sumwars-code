@@ -74,7 +74,7 @@ Region::~Region()
 	
 }
 
-WorldObject* Region::getSWObject ( int id)
+WorldObject* Region::getObject ( int id)
 {
 	map<int,WorldObject*>::iterator iter;
 	
@@ -152,7 +152,7 @@ bool Region::getFreePlace(Shape* shape, short layer, float& x, float&y)
 		s.m_coordinate_y = sy*c;
 		
 		res.clear();
-		getSWObjectsInShape(&s,&res,layer,WorldObject::FIXED,0,true);
+		getObjectsInShape(&s,&res,layer,WorldObject::FIXED,0,true);
 		
 		if (!res.empty())
 		{
@@ -163,7 +163,7 @@ bool Region::getFreePlace(Shape* shape, short layer, float& x, float&y)
 		
 		DEBUG5("no fixed obstacle");
 		// Testen, ob dort nicht gerade eine Kreatur steht
-		getSWObjectsInShape(&s,&res,layer,WorldObject::CREATURE,0,true);
+		getObjectsInShape(&s,&res,layer,WorldObject::CREATURE,0,true);
 		if (res.empty())
 		{
 			DEBUG5("field is free");
@@ -307,7 +307,7 @@ bool Region::addObjectsOnLineFromGridunit(float xstart, float ystart, float xend
 }
 
 
-bool Region::getSWObjectsInShape( Shape* shape,  list<WorldObject*>* result,short layer, short group, WorldObject* omit, bool empty_test)
+bool Region::getObjectsInShape( Shape* shape,  list<WorldObject*>* result,short layer, short group, WorldObject* omit, bool empty_test)
 {
 	
 	DEBUG5("shape %f %f %f",shape->m_coordinate_x,shape->m_coordinate_y,shape->m_radius);
@@ -425,7 +425,7 @@ bool Region::getSWObjectsInShape( Shape* shape,  list<WorldObject*>* result,shor
 }
 
 
-WorldObject* Region::getSWObjectAt(float x_coordinate, float y_coordinate, short layer, short group)
+WorldObject* Region::getObjectAt(float x_coordinate, float y_coordinate, short layer, short group)
 {
 	Shape s;
 	s.m_type = Shape::CIRCLE;
@@ -435,7 +435,7 @@ WorldObject* Region::getSWObjectAt(float x_coordinate, float y_coordinate, short
 	
 	list<WorldObject*> l;
 	l.clear();
-	getSWObjectsInShape ( &s, &l,layer,group );
+	getObjectsInShape ( &s, &l,layer,group );
 	if (l.empty())
 	{
 		return 0;
@@ -448,7 +448,7 @@ WorldObject* Region::getSWObjectAt(float x_coordinate, float y_coordinate, short
 
 
 
-void Region::getSWObjectsOnLine( float xstart, float ystart, float xend, float yend,  list<WorldObject*>* result,short layer, short group , WorldObject* omit)
+void Region::getObjectsOnLine( float xstart, float ystart, float xend, float yend,  list<WorldObject*>* result,short layer, short group , WorldObject* omit)
 {
 	Gridunit* gu=0;
 	WorldObject* wo=0;
@@ -565,7 +565,7 @@ void Region::getProjectilesOnScreen(float center_x,float center_y, list<DmgProje
 	}
 }
 
-bool Region::insertSWObject (WorldObject* object, float x, float y)
+bool Region::insertObject (WorldObject* object, float x, float y)
 {
 	bool result = true;
 	
@@ -654,7 +654,7 @@ bool  Region::insertProjectile(DmgProjectile* object, float x, float y)
 	return true;
 }
 
-bool  Region::deleteSWObject (WorldObject* object)
+bool  Region::deleteObject (WorldObject* object)
 {
 	bool result = true;
 	 
@@ -694,7 +694,7 @@ bool  Region::deleteSWObject (WorldObject* object)
 	return result;
 }
 
-bool Region::moveSWObject(WorldObject* object, float x, float y)
+bool Region::moveObject(WorldObject* object, float x, float y)
 {
 	bool result = true;
 	// Wenn NULL Zeiger übergeben -> Fehler anzeigen
@@ -805,7 +805,7 @@ void Region::update(float time)
 				
 				++iter;
 				object->destroy();
-				deleteSWObject(object);
+				deleteObject(object);
 				delete object;
 				continue;
 			}
@@ -1006,7 +1006,7 @@ void Region::createObjectFromString(CharConv* cv, map<int,WorldObject*>* players
 	y = obj->getGeometry()->m_shape.m_coordinate_y;
 		
 		
-	insertSWObject(obj,x,y);
+	insertObject(obj,x,y);
 }
 
 
@@ -1084,7 +1084,7 @@ void Region::setRegionData(CharConv* cv,map<int,WorldObject*>* players)
 	for (it = m_static_objects->begin();it!=m_static_objects->end();it++)
 	{
 		it->second->destroy();
-		deleteSWObject(it->second);
+		deleteObject(it->second);
 		delete it->second;
 	}
 	m_static_objects->clear();
@@ -1097,7 +1097,7 @@ void Region::setRegionData(CharConv* cv,map<int,WorldObject*>* players)
 		if (jt->second->getTypeInfo()->m_type != WorldObject::TypeInfo::TYPE_PLAYER)
 		{
 			jt->second->destroy();
-			deleteSWObject(jt->second);
+			deleteObject(jt->second);
 			delete jt->second;
 		}
 	}
@@ -1196,7 +1196,7 @@ bool  Region::dropItem(Item* item, float x, float y)
 		s.m_coordinate_y = sy*0.5;
 		
 		res.clear();
-		getSWObjectsInShape(&s,&res,WorldObject::Geometry::LAYER_BASE,WorldObject::FIXED,0,true);
+		getObjectsInShape(&s,&res,WorldObject::Geometry::LAYER_BASE,WorldObject::FIXED,0,true);
 		
 		if (!res.empty())
 		{

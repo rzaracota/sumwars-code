@@ -66,7 +66,7 @@ class Region
 		~Region();
 		
 		/**
-		 * \fn insertSWObject (WorldObject* object, float x, float y)
+		 * \fn insertObject (WorldObject* object, float x, float y)
 		 * \brief F&uuml;gt WorldObject ein
 		 * \param object Zeiger auf das Objekt, welches eingef&uuml;gt werden soll
 		 * \return bool, der angibt, ob die Operation erfolgreich war
@@ -74,10 +74,10 @@ class Region
 		 * F&uuml;gt das WorldObject in die internen Datenstrukturen ein. Wenn das Einf&uuml;gen erfolgreich war, so wird true zur&uuml;ckgegeben, sonst false.
 		 * Wenn ein NULL-Zeiger &uuml;bergeben wird, so wird false ausgegeben.
 		 */
-		bool  insertSWObject (WorldObject* object, float x, float y);
+		bool  insertObject (WorldObject* object, float x, float y);
 		
 		/**
-		 * \fn bool getSWObjectsInShape( Shape* shape,  list<WorldObject*>* result,short layer=WorldObject::Geometry::LAYER_ALL, short group = WorldObject::GROUP_ALL, WorldObject* omit=0, bool empty_test = false );
+		 * \fn bool getObjectsInShape( Shape* shape,  list<WorldObject*>* result,short layer=WorldObject::Geometry::LAYER_ALL, short group = WorldObject::GROUP_ALL, WorldObject* omit=0, bool empty_test = false );
 		 * \brief Sucht WorldObjects innerhalb eines Gebietes
 		 * \param shape Form des Gebietes
 		 * \param layer Ebene in der gesucht wird
@@ -91,7 +91,7 @@ class Region
 		 * Wenn f&uuml;r selector ein NULL-Zeiger &uuml;bergeben wird, so werden die Objekte nicht selektiert.
 		 * Wenn f&uuml;r result ein NULL-Zeiger &uuml;bergeben wird, oder ein anderer Fehler auftritt, so wird false zur&uuml;ckgegeben, sonst true.
  		 */
-		bool getSWObjectsInShape( Shape* shape,  list<WorldObject*>* result,short layer=WorldObject::Geometry::LAYER_ALL, short group = WorldObject::GROUP_ALL, WorldObject* omit=0, bool empty_test = false );
+		bool getObjectsInShape( Shape* shape,  list<WorldObject*>* result,short layer=WorldObject::Geometry::LAYER_ALL, short group = WorldObject::GROUP_ALL, WorldObject* omit=0, bool empty_test = false );
 		
 		/**
 		 * \fn bool getFreePlace(Shape* shape, short layer, float& x, float&y)
@@ -137,14 +137,14 @@ class Region
 		bool changeObjectGroup(WorldObject* object,WorldObject::Group group );
 		
 		/**
-		 * \fn WorldObject* getSWObject ( int id)
+		 * \fn WorldObject* getObject ( int id)
 		 * \brief Sucht Objekt anhand seiner ID heraus
 		 * \return Objekt, Nullzeiger wenn das Objekt nicht existiert
 		 */
-		WorldObject* getSWObject ( int id);
+		WorldObject* getObject ( int id);
 		
 		/** 
-		 * \fn WorldObject* getSWObjectAt(float x_coordinate, float y_coordinate, short layer=WorldObject::Geomety::LAYER_ALL, short group = WorldObject::GROUP_ALL);
+		 * \fn WorldObject* getObjectAt(float x_coordinate, float y_coordinate, short layer=WorldObject::Geomety::LAYER_ALL, short group = WorldObject::GROUP_ALL);
 		 * \brief Sucht WorldObject an den gegebenen Koordinaten
 		 * \param x_coordinate x-Koordinate des Punktes
 		 * \param y_coordinate y-Koordinate des Punktes
@@ -152,10 +152,10 @@ class Region
 		 * \param group Gruppen die durchsucht werden sollen
 		 * \return Zeiger auf das WorldObject, wenn sich an dem Punkt eines befindet, sonst NULL
 		 */
-		WorldObject* getSWObjectAt(float x_coordinate, float y_coordinate, short layer=WorldObject::Geometry::LAYER_ALL, short group = WorldObject::GROUP_ALL);
+		WorldObject* getObjectAt(float x_coordinate, float y_coordinate, short layer=WorldObject::Geometry::LAYER_ALL, short group = WorldObject::GROUP_ALL);
 		
 		/**
-		 * \fn void getSWObjectsOnLine( float xstart, float ystart, float xend, float yend,  list<WorldObject*>* result,short layer=WorldObject::Geometry::LAYER_ALL, short group = WorldObject::GROUP_ALL, WorldObject* omit=0 )
+		 * \fn void getObjectsOnLine( float xstart, float ystart, float xend, float yend,  list<WorldObject*>* result,short layer=WorldObject::Geometry::LAYER_ALL, short group = WorldObject::GROUP_ALL, WorldObject* omit=0 )
 		 * \brief Sucht alle Objekte die auf der angegebenen Linie liegen
 		 * \param xstart x-Koordinate Startpunkt
 		 * \param ystart y-Koordinate Startpunkt
@@ -166,7 +166,7 @@ class Region
 		 * \param group Gruppen die durchsucht werden sollen
 		 * \param omit Objekt, das ausgelassen wird
 		 */
-		void getSWObjectsOnLine( float xstart, float ystart, float xend, float yend,  list<WorldObject*>* result,short layer=WorldObject::Geometry::LAYER_ALL, short group = WorldObject::GROUP_ALL, WorldObject* omit=0 );
+		void getObjectsOnLine( float xstart, float ystart, float xend, float yend,  list<WorldObject*>* result,short layer=WorldObject::Geometry::LAYER_ALL, short group = WorldObject::GROUP_ALL, WorldObject* omit=0 );
 		
 		/**
 		 * \fn void getProjectilesOnScreen(float center_x,float center_y, list<DmgProjectile*>* result)
@@ -193,7 +193,7 @@ class Region
 		DmgProjectile* getProjectile(int id);
 		
 		/**
-		 * \fn deleteWorldObject(WorldObject* object)
+		 * \fn deleteObject(WorldObject* object)
 		 * \brief L&ouml;scht WorldObject
 		 * \param object Zeiger auf das Objekt, welches gel&ouml;scht werden soll
 		 * \return bool, der angibt, ob die Operation erfolgreich war
@@ -201,7 +201,7 @@ class Region
 		 * L&ouml;scht das WorldObject aus den internen Datenstrukturen. Das Objekt selbst wird nicht gel&ouml;scht, es wird nur die Einbindung in die Datenstrukturen entfernt. Wenn das L&ouml;schen erfolgreich war, so wird true zur&uuml;ckgegeben, sonst false.
 		 * Wenn ein NULL-Zeiger &uuml;bergeben wird, so wird false ausgegeben.
 		 */
-		bool  deleteSWObject (WorldObject* object);
+		bool  deleteObject (WorldObject* object);
 		
 		 /**
 		 * \fn moveWorldObject(WorldObject* object, float x, float y)
@@ -211,7 +211,7 @@ class Region
 		 * \param y y-Koordinate des Zielpunktes, zu dem das Objekt verschoben werden soll
 		 * \return bool, welcher angibt, ob das Verschieben erfolgreich war
 		  */
-		bool moveSWObject(WorldObject* object, float x, float y);
+		bool moveObject(WorldObject* object, float x, float y);
 		
 		/**
 		 * \fn void createObjectFromString(CharConv* cv, map<int,WorldObject*>* players)

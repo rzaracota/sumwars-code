@@ -441,7 +441,7 @@ void Creature::performAction(float &time)
 		if (m_action.m_goal_object_id!=0 && m_action.m_type!= Action::TAKE_ITEM)
 		{
 			// Zielobjekt durch ID gegeben, Objekt von der Welt holen
-			goal = getWorld()->getSWObject(m_action.m_goal_object_id,getGridLocation()->m_region);
+			goal = getWorld()->getObject(m_action.m_goal_object_id,getGridLocation()->m_region);
 		}
 		else
 		{
@@ -451,7 +451,7 @@ void Creature::performAction(float &time)
 			if (Action::getActionInfo(m_action.m_type)->m_distance == Action::MELEE && m_action.m_type!= Action::TAKE_ITEM)
 			{
 				DEBUG5("Searching goal %f %f",goalx,goaly);
-				goal = getWorld()->getSWObjectAt(goalx,goaly,getGridLocation()->m_region,Geometry::LAYER_AIR);
+				goal = getWorld()->getObjectAt(goalx,goaly,getGridLocation()->m_region,Geometry::LAYER_AIR);
 				DEBUG5("got object %p",goal);
 			}
 		}
@@ -465,7 +465,7 @@ void Creature::performAction(float &time)
 		// Zielobjekt im Nahkampf suchen an der Stelle an der die Waffe trifft
 		if (goal ==0 && Action::getActionInfo(m_action.m_type)->m_distance == Action::MELEE && m_action.m_type!= Action::TAKE_ITEM)
 		{
-			goal = getWorld()->getSWObjectAt(goalx,goaly,getGridLocation()->m_region,Geometry::LAYER_AIR);
+			goal = getWorld()->getObjectAt(goalx,goaly,getGridLocation()->m_region,Geometry::LAYER_AIR);
 		}
 
 		// Wenn ein Zielobjekt existiert
@@ -640,7 +640,7 @@ void Creature::performActionCritPart(float goalx, float goaly, WorldObject* goal
 			s.m_coordinate_x = goalx;
 			s.m_coordinate_y = goaly;
 			s.m_radius = 1.5;
-			getWorld()->getSWObjectsInShape(&s,reg, &res,Geometry::LAYER_AIR,CREATURE,this);
+			getWorld()->getObjectsInShape(&s,reg, &res,Geometry::LAYER_AIR,CREATURE,this);
 
 			// an alle einfachen Schaden austeilen
 			for (it=res.begin();it!=res.end();++it)
@@ -659,7 +659,7 @@ void Creature::performActionCritPart(float goalx, float goaly, WorldObject* goal
 			// alle Lebewesen im Umkreis um den Ausfuehrenden auswaehlen
 			// Radius gleich Waffenreichweite
 			s.m_radius += m_command.m_range;
-			getWorld()->getSWObjectsInShape(&s, reg, &res,Geometry::LAYER_AIR,CREATURE,this);
+			getWorld()->getObjectsInShape(&s, reg, &res,Geometry::LAYER_AIR,CREATURE,this);
 
 			// an alle Schaden austeilen
 			for (it=res.begin();it!=res.end();++it)
@@ -1039,7 +1039,7 @@ void Creature::performActionCritPart(float goalx, float goaly, WorldObject* goal
 			s.m_coordinate_x = x;
 			s.m_coordinate_y = y;
 			s.m_radius = 12;
-			getWorld()->getSWObjectsInShape(&s,reg, &res, Geometry::LAYER_AIR,CREATURE,0);
+			getWorld()->getObjectsInShape(&s,reg, &res, Geometry::LAYER_AIR,CREATURE,0);
 			for (it=res.begin();it!=res.end();++it)
 			{
 				if (getWorld()->getRelation(fr,(*it)) == WorldObject::ALLIED)
@@ -1077,7 +1077,7 @@ void Creature::performActionCritPart(float goalx, float goaly, WorldObject* goal
 			s.m_coordinate_x = x;
 			s.m_coordinate_y = y;
 			s.m_radius = 12;
-			getWorld()->getSWObjectsInShape(&s, reg, &res,Geometry::LAYER_AIR,CREATURE,0);
+			getWorld()->getObjectsInShape(&s, reg, &res,Geometry::LAYER_AIR,CREATURE,0);
 			for (it=res.begin();it!=res.end();++it)
 			{
 				if (getWorld()->getRelation(fr,(*it)) == WorldObject::ALLIED)
@@ -1101,7 +1101,7 @@ void Creature::performActionCritPart(float goalx, float goaly, WorldObject* goal
 			s.m_coordinate_x = goalx;
 			s.m_coordinate_y = goaly;
 			s.m_radius = 6;
-			getWorld()->getSWObjectsInShape(&s, reg, &res,0);
+			getWorld()->getObjectsInShape(&s, reg, &res,0);
 			for (it=res.begin();it!=res.end();++it)
 			{
 				if (getWorld()->getRelation(fr,(*it)) == WorldObject::ALLIED)
@@ -1127,7 +1127,7 @@ void Creature::performActionCritPart(float goalx, float goaly, WorldObject* goal
 			s.m_coordinate_x = goalx;
 			s.m_coordinate_y = goaly;
 			s.m_radius = 3;
-			getWorld()->getSWObjectsInShape(&s, reg, &res,Geometry::LAYER_AIR,CREATURE,this);
+			getWorld()->getObjectsInShape(&s, reg, &res,Geometry::LAYER_AIR,CREATURE,this);
 			for (it=res.begin();it!=res.end();++it)
 			{
 				if ((*it)->getTypeInfo()->m_type != TypeInfo::TYPE_FIXED_OBJECT)
@@ -1160,7 +1160,7 @@ void Creature::performActionCritPart(float goalx, float goaly, WorldObject* goal
 			s.m_coordinate_x = x;
 			s.m_coordinate_y = y;
 			s.m_radius = 12;
-			getWorld()->getSWObjectsInShape(&s, reg, &res,Geometry::LAYER_AIR,CREATURE,0);
+			getWorld()->getObjectsInShape(&s, reg, &res,Geometry::LAYER_AIR,CREATURE,0);
 			for (it=res.begin();it!=res.end();++it)
 			{
 				if (getWorld()->getRelation(fr,(*it)) == WorldObject::ALLIED)
@@ -1198,7 +1198,7 @@ void Creature::performActionCritPart(float goalx, float goaly, WorldObject* goal
 			s.m_coordinate_x = goalx;
 			s.m_coordinate_y = goaly;
 			s.m_radius = 6;
-			getWorld()->getSWObjectsInShape(&s, reg, &res,Geometry::LAYER_AIR,CREATURE,0);
+			getWorld()->getObjectsInShape(&s, reg, &res,Geometry::LAYER_AIR,CREATURE,0);
 			for (it=res.begin();it!=res.end();++it)
 			{
 				if (getWorld()->getRelation(fr,(*it)) == WorldObject::ALLIED)
@@ -1241,7 +1241,7 @@ void Creature::performActionCritPart(float goalx, float goaly, WorldObject* goal
 			s.m_coordinate_x = goalx;
 			s.m_coordinate_y = goaly;
 			s.m_radius = 6;
-			getWorld()->getSWObjectsInShape(&s, reg, &res,Geometry::LAYER_AIR,CREATURE,0);
+			getWorld()->getObjectsInShape(&s, reg, &res,Geometry::LAYER_AIR,CREATURE,0);
 			for (it=res.begin();it!=res.end();++it)
 			{
 				if (getWorld()->getRelation(fr,(*it)) == WorldObject::ALLIED)
@@ -1268,7 +1268,7 @@ void Creature::performActionCritPart(float goalx, float goaly, WorldObject* goal
 			s.m_coordinate_x = goalx;
 			s.m_coordinate_y = goaly;
 			s.m_radius = 3;
-			getWorld()->getSWObjectsInShape(&s, reg, &res,Geometry::LAYER_AIR,CREATURE,this);
+			getWorld()->getObjectsInShape(&s, reg, &res,Geometry::LAYER_AIR,CREATURE,this);
 			for (it=res.begin();it!=res.end();++it)
 			{
 				// fuer alle Lebewesen ein Projektil heiliger Strahl erzeugen
@@ -1293,7 +1293,7 @@ void Creature::performActionCritPart(float goalx, float goaly, WorldObject* goal
 			s.m_coordinate_x = x;
 			s.m_coordinate_y = y;
 			s.m_radius = 12;
-			getWorld()->getSWObjectsInShape(&s, reg, &res,Geometry::LAYER_AIR,CREATURE,0);
+			getWorld()->getObjectsInShape(&s, reg, &res,Geometry::LAYER_AIR,CREATURE,0);
 			for (it=res.begin();it!=res.end();++it)
 			{
 				if (getWorld()->getRelation(fr,(*it)) == WorldObject::ALLIED)
@@ -1331,7 +1331,7 @@ void Creature::performActionCritPart(float goalx, float goaly, WorldObject* goal
 			s.m_coordinate_x = goalx;
 			s.m_coordinate_y = goaly;
 			s.m_radius = 6;
-			getWorld()->getSWObjectsInShape(&s, reg, &res,Geometry::LAYER_AIR,CREATURE,0);
+			getWorld()->getObjectsInShape(&s, reg, &res,Geometry::LAYER_AIR,CREATURE,0);
 			for (it=res.begin();it!=res.end();++it)
 			{
 				if (getWorld()->getRelation(fr,(*it)) == WorldObject::ALLIED)
@@ -1357,7 +1357,7 @@ void Creature::performActionCritPart(float goalx, float goaly, WorldObject* goal
 			s.m_coordinate_x = goalx;
 			s.m_coordinate_y = goaly;
 			s.m_radius = 2;
-			getWorld()->getSWObjectsInShape(&s, reg, &res,Geometry::LAYER_AIR,CREATURE,this);
+			getWorld()->getObjectsInShape(&s, reg, &res,Geometry::LAYER_AIR,CREATURE,this);
 			for (it=res.begin();it!=res.end();++it)
 			{
 				// Fuer alle Lebewesen ein Projektil Hypnose erzeugen
@@ -1382,7 +1382,7 @@ void Creature::performActionCritPart(float goalx, float goaly, WorldObject* goal
 			s.m_coordinate_x = x;
 			s.m_coordinate_y = y;
 			s.m_radius = 12;
-			getWorld()->getSWObjectsInShape(&s, reg, &res,Geometry::LAYER_AIR,CREATURE,0);
+			getWorld()->getObjectsInShape(&s, reg, &res,Geometry::LAYER_AIR,CREATURE,0);
 			for (it=res.begin();it!=res.end();++it)
 			{
 				if (getWorld()->getRelation(fr,(*it)) == WorldObject::ALLIED)
@@ -1438,7 +1438,7 @@ void Creature::collisionDetection(float time)
 	short layer = getGeometry()->m_layer;
 
 	// Alle kollidierenden Objekte suchen
-	getWorld()->getSWObjectsInShape(&(scopy),getGridLocation()->m_region,&result,layer, CREATURE | FIXED,this);
+	getWorld()->getObjectsInShape(&(scopy),getGridLocation()->m_region,&result,layer, CREATURE | FIXED,this);
 
 	if (result.size()!=0)
 	{
@@ -1491,7 +1491,7 @@ void Creature::collisionDetection(float time)
 		result.clear();
 
 		// Suchen der Objekte um den neuen Zielpunkt
-		getWorld()->getSWObjectsInShape(&(scopy),getGridLocation()->m_region,&result,layer, CREATURE | FIXED,this);
+		getWorld()->getObjectsInShape(&(scopy),getGridLocation()->m_region,&result,layer, CREATURE | FIXED,this);
 
 		// Wenn immer noch Kollision vorliegt Bewegung beenden
 		if (result.size()!=0)
@@ -1710,7 +1710,7 @@ void Creature::calcAction()
 	{
 		DEBUG5("goal ID: %i",m_command.m_goal_object_id);
 		// Zielobjekt holen
-		goal = getWorld()->getSWObject(m_command.m_goal_object_id,getGridLocation()->m_region);
+		goal = getWorld()->getObject(m_command.m_goal_object_id,getGridLocation()->m_region);
 
 
 
@@ -1958,7 +1958,7 @@ void Creature::calcStatusModCommand()
 		list<WorldObject*>::iterator it;
 
 		// ermitteln der Objekte mit denen bei der Bewegung kollidiert wird
-		getWorld()->getSWObjectsInShape(&s,getGridLocation()->m_region,&res,Geometry::LAYER_AIR,CREATURE | FIXED,this);
+		getWorld()->getObjectsInShape(&s,getGridLocation()->m_region,&res,Geometry::LAYER_AIR,CREATURE | FIXED,this);
 
 		// Zufallszahl fuer zufaellige Angriffe
 		float r = rand()*1.0/RAND_MAX;
@@ -2036,7 +2036,7 @@ void Creature::calcStatusModCommand()
 		res.clear();
 
 		// Suchen aller Objekte im Kreis
-		getWorld()->getSWObjectsInShape(&s,getGridLocation()->m_region, &res,Geometry::LAYER_AIR,CREATURE,this);
+		getWorld()->getObjectsInShape(&s,getGridLocation()->m_region, &res,Geometry::LAYER_AIR,CREATURE,this);
 		for (i=res.begin();i!= res.end();++i)
 		{
 			// nur aktive Lebewesen beruecksichtigen
@@ -2400,7 +2400,7 @@ bool Creature::update (float time)
 			short reg = getGridLocation()->m_region;
 	
 			// Alle Objekte im Kreis suchen
-			getWorld()->getSWObjectsInShape(&s, reg, &res,Geometry::LAYER_AIR,CREATURE,this);
+			getWorld()->getObjectsInShape(&s, reg, &res,Geometry::LAYER_AIR,CREATURE,this);
 			for (it=res.begin();it!=res.end();++it)
 			{
 				// Schaden austeilen

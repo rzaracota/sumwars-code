@@ -512,7 +512,7 @@ int Document::getObjectAt(float x,float y)
 	if (reg ==0)
 		return 0;
 
-	WorldObject* obj = reg->getSWObjectAt(x,y);
+	WorldObject* obj = reg->getObjectAt(x,y);
 	if (obj != 0)
 		return obj->getId();
 

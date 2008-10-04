@@ -20,7 +20,7 @@ bool WorldObject::moveTo(float x, float y)
 	}
 	else
 	{
-		return m_world->moveSWObject(this, x,y);
+		return m_world->moveObject(this, x,y);
 	}
 }
 
