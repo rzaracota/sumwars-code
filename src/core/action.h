@@ -425,6 +425,30 @@ public:
 	 * \brief Nummer der Animation (falls mehrere fuer dieselbe Situation vorhanden sind)
 	 */
 	char m_animation_number;
+	
+	/**
+	 * \var m_type;
+	 * \brief Typ der vorhergehenden Aktion
+	 */
+	ActionType m_prev_type;
+	
+	/**
+	 * \var m_goal_coordinate_x;
+	 * \brief x-Koordinate des Zieles
+	 */
+	float m_goal_coordinate_x;
+	
+	/**
+	 * \var m_goal_coordinate_y;
+	 * \brief y-Koordinate des Zieles
+	 */
+	float m_goal_coordinate_y;
+	
+	/**
+	 * \var m_goal_object_id;
+	 * \brief ID des Zielobjekts
+	 */
+	int  m_goal_object_id;
 
 	/**
 	 * \var static const ActionInfo m_base_info[192]

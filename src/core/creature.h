@@ -34,7 +34,7 @@
 #include <algorithm>
 #include "world.h"
 #include "serverwobject.h"
-#include "serveraction.h"
+#include "action.h"
 #include "command.h"
 #include "damage.h"
 #include "itemlist.h"
@@ -86,11 +86,11 @@ public:
 	
 	
 	/**
-	 * \fn ServerAction* getAction()
+	 * \fn Action* getAction()
 	 * \brief Gibt einen Zeiger auf die aktuelle Aktion zur&uuml;ck
 	 * \return Action*, Zeiger auf die aktuelle Aktion
 	 */
-	ServerAction* getAction()
+	Action* getAction()
 	{
 		return &m_action;
 	}
@@ -457,7 +457,7 @@ private:
 	 * \var m_action;
 	 * \brief Aktion die gerade ausgef&uuml;hrt wird
 	 */
-	ServerAction m_action;
+	Action m_action;
 	
 	/**
 	 * \var m_command;
