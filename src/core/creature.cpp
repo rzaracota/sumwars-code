@@ -20,7 +20,7 @@
 #include <sys/time.h>
 
 //Constructors/Destructors
-Creature::Creature(World* world, unsigned int id) : ServerWObject(world, id)
+Creature::Creature(World* world, unsigned int id) : WorldObject(world, id)
 {
 	if (!Creature::init())
 	{
@@ -146,7 +146,7 @@ bool Creature::destroy()
 
 	DEBUG5("destroy");
 
-	ServerWObject::destroy();
+	WorldObject::destroy();
     return true;
 }
 
@@ -405,7 +405,7 @@ void Creature::performAction(float &time)
 		DEBUG5("critical point %f %f %f",p1,pct,p2);
 
 		// Zielobjekt der Aktion
-		ServerWObject* goal =0;
+		WorldObject* goal =0;
 
 		float goalx =  m_action.m_goal_coordinate_x;
 		float goaly =  m_action.m_goal_coordinate_y;
@@ -538,7 +538,7 @@ void Creature::performAction(float &time)
 
 }
 
-void Creature::performActionCritPart(float goalx, float goaly, ServerWObject* goal)
+void Creature::performActionCritPart(float goalx, float goaly, WorldObject* goal)
 {
 	// Zielobjekt als Creature* pointer
 	// null, wenn das Objekt kein Lebewesen ist
@@ -566,9 +566,9 @@ void Creature::performActionCritPart(float goalx, float goaly, ServerWObject* go
 
 
 
-	list<ServerWObject*> res;
+	list<WorldObject*> res;
 	res.clear();
-	list<ServerWObject*>::iterator it;
+	list<WorldObject*>::iterator it;
 
 	// Koordinaten das ausfuehrenden Objektes
 	float x = getGeometry()->m_shape.m_coordinate_x;
@@ -1427,7 +1427,7 @@ void Creature::collisionDetection(float time)
 	float ynew = getGeometry()->m_shape.m_coordinate_y+getMoveInfo()->m_speed_y * time;
 
 	// Kreis um den Zielpunkt
-	list<ServerWObject*> result;
+	list<WorldObject*> result;
 	Shape scopy;
 	scopy.m_radius = getGeometry()->m_shape.m_radius*1.05;
 	scopy.m_coordinate_x = xnew;
@@ -1444,7 +1444,7 @@ void Creature::collisionDetection(float time)
 	{
 		// es gibt kollidierende Objekte
 		DEBUG5("aktuelle Koordinaten %f %f",getGeometry()->m_shape.m_coordinate_x,getGeometry()->m_shape.m_coordinate_y);
-		list<ServerWObject*>::iterator i;
+		list<WorldObject*>::iterator i;
 
 		Shape* s2;
         // Liste der kollidierenden Objekte durchgehen
@@ -1692,7 +1692,7 @@ void Creature::calcAction()
 	m_action.m_goal_coordinate_y = goaly;
 
 	// Zeiger auf das Zielobjekt
-	ServerWObject* goal=0;
+	WorldObject* goal=0;
 
 	// eigene Position
 	float x = getGeometry()->m_shape.m_coordinate_x;
@@ -1953,9 +1953,9 @@ void Creature::calcStatusModCommand()
 		s.m_coordinate_y =y;
 		s.m_type = Shape::CIRCLE;
 		s.m_radius = getGeometry()->m_shape.m_radius;
-		ServerWObject* wo =0;
-		list<ServerWObject*> res;
-		list<ServerWObject*>::iterator it;
+		WorldObject* wo =0;
+		list<WorldObject*> res;
+		list<WorldObject*>::iterator it;
 
 		// ermitteln der Objekte mit denen bei der Bewegung kollidiert wird
 		getWorld()->getSWObjectsInShape(&s,getGridLocation()->m_region,&res,Geometry::LAYER_AIR,CREATURE | FIXED,this);
@@ -2031,8 +2031,8 @@ void Creature::calcStatusModCommand()
 		s.m_radius =8;
 		s.m_coordinate_x = x;
 		s.m_coordinate_y = y;
-		list<ServerWObject*> res;
-		list<ServerWObject*>::iterator i;
+		list<WorldObject*> res;
+		list<WorldObject*>::iterator i;
 		res.clear();
 
 		// Suchen aller Objekte im Kreis
@@ -2093,7 +2093,7 @@ void Creature::calcStatusModCommand()
 	}
 }
 
-void Creature::calcWalkDir(float goalx,float goaly,ServerWObject* goal)
+void Creature::calcWalkDir(float goalx,float goaly,WorldObject* goal)
 {
 	// eigene Position
 	float x = getGeometry()->m_shape.m_coordinate_x;
@@ -2386,9 +2386,9 @@ bool Creature::update (float time)
 			d.m_multiplier[Damage::FIRE]=1;
 			d.m_attacker_fraction = getTypeInfo()->m_fraction;
 	
-			list<ServerWObject*> res;
+			list<WorldObject*> res;
 			res.clear();
-			list<ServerWObject*>::iterator it;
+			list<WorldObject*>::iterator it;
 	
 			// Kreis um eigenen Mittelpunkt mit Radius eigener Radius plus 1
 			Shape s;
@@ -2560,7 +2560,7 @@ void  Creature::onTrade (int id) {
 	{
 		// Es existiert bislang kein Handel
 		DEBUG5("Handelsinitialisierung starten");
-		ServerWObject* wo = getWorld()->getWorldObject(id);
+		WorldObject* wo = getWorld()->getWorldObject(id);
 		// Wenn das Ziel nicht existiert Aktion beenden
 		if (wo ==0 || wo->getObjectType().getObjectType()==OBJECTTYPE_FIXED_OBJECT)
 		{

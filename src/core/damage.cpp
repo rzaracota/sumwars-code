@@ -152,7 +152,7 @@ float Damage::getSumMaxDamage()
 
 std::string Damage::getDamageString(Damage::Usage usage)
 {
-	ostringstream out_stream;
+	std::ostringstream out_stream;
 	out_stream.str("");
 	bool first = true;
 	int i;

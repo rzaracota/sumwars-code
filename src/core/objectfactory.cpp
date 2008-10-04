@@ -220,10 +220,10 @@ void ObjectFactory::init()
 	registerMonster("gob_dog",mdata);
 }
 
-ServerWObject* ObjectFactory::createObject(WorldObject::TypeInfo::ObjectType type, WorldObject::TypeInfo::ObjectSubtype subtype, int id)
+WorldObject* ObjectFactory::createObject(WorldObject::TypeInfo::ObjectType type, WorldObject::TypeInfo::ObjectSubtype subtype, int id)
 {
 	// Zeiger auf erzeugtes Objekt
-	ServerWObject* ret=0;
+	WorldObject* ret=0;
 
 	// ID des Objektes
 	if (id ==0)

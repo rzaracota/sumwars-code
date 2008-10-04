@@ -2,10 +2,11 @@
 #define REGION_H
 
 #include "matrix2d.h"
-#include "serverwobject.h"
+#include "worldobject.h"
 #include "tiles.h"
 #include "dropitem.h"
 #include "event.h"
+#include "dmgprojectile.h"
 
 
 #include <string>
@@ -65,19 +66,19 @@ class Region
 		~Region();
 		
 		/**
-		 * \fn insertSWObject (ServerWObject* object, float x, float y)
-		 * \brief F&uuml;gt ServerWObject ein
+		 * \fn insertSWObject (WorldObject* object, float x, float y)
+		 * \brief F&uuml;gt WorldObject ein
 		 * \param object Zeiger auf das Objekt, welches eingef&uuml;gt werden soll
 		 * \return bool, der angibt, ob die Operation erfolgreich war
 		 * 
-		 * F&uuml;gt das ServerWObject in die internen Datenstrukturen ein. Wenn das Einf&uuml;gen erfolgreich war, so wird true zur&uuml;ckgegeben, sonst false.
+		 * F&uuml;gt das WorldObject in die internen Datenstrukturen ein. Wenn das Einf&uuml;gen erfolgreich war, so wird true zur&uuml;ckgegeben, sonst false.
 		 * Wenn ein NULL-Zeiger &uuml;bergeben wird, so wird false ausgegeben.
 		 */
-		bool  insertSWObject (ServerWObject* object, float x, float y);
+		bool  insertSWObject (WorldObject* object, float x, float y);
 		
 		/**
-		 * \fn bool getSWObjectsInShape( Shape* shape,  list<ServerWObject*>* result,short layer=WorldObject::Geometry::LAYER_ALL, short group = WorldObject::GROUP_ALL, ServerWObject* omit=0, bool empty_test = false );
-		 * \brief Sucht ServerWObjects innerhalb eines Gebietes
+		 * \fn bool getSWObjectsInShape( Shape* shape,  list<WorldObject*>* result,short layer=WorldObject::Geometry::LAYER_ALL, short group = WorldObject::GROUP_ALL, WorldObject* omit=0, bool empty_test = false );
+		 * \brief Sucht WorldObjects innerhalb eines Gebietes
 		 * \param shape Form des Gebietes
 		 * \param layer Ebene in der gesucht wird
 		 * \param result Liste, an die die gefundenen Objekte angehangen werden
@@ -90,7 +91,7 @@ class Region
 		 * Wenn f&uuml;r selector ein NULL-Zeiger &uuml;bergeben wird, so werden die Objekte nicht selektiert.
 		 * Wenn f&uuml;r result ein NULL-Zeiger &uuml;bergeben wird, oder ein anderer Fehler auftritt, so wird false zur&uuml;ckgegeben, sonst true.
  		 */
-		bool getSWObjectsInShape( Shape* shape,  list<ServerWObject*>* result,short layer=WorldObject::Geometry::LAYER_ALL, short group = WorldObject::GROUP_ALL, ServerWObject* omit=0, bool empty_test = false );
+		bool getSWObjectsInShape( Shape* shape,  list<WorldObject*>* result,short layer=WorldObject::Geometry::LAYER_ALL, short group = WorldObject::GROUP_ALL, WorldObject* omit=0, bool empty_test = false );
 		
 		/**
 		 * \fn bool getFreePlace(Shape* shape, short layer, float& x, float&y)
@@ -104,7 +105,7 @@ class Region
 		bool getFreePlace(Shape* shape, short layer, float& x, float&y);
 		
 		/**
-		 * \fn bool addObjectsInShapeFromGridunit(Shape* shape, Gridunit* gu, list<ServerWObject*>* result, short layer=WorldObject::Geometry::LAYER_ALL, short group = WorldObject::GROUP_ALL,ServerWObject* omit=0, bool empty_test = false )
+		 * \fn bool addObjectsInShapeFromGridunit(Shape* shape, Gridunit* gu, list<WorldObject*>* result, short layer=WorldObject::Geometry::LAYER_ALL, short group = WorldObject::GROUP_ALL,WorldObject* omit=0, bool empty_test = false )
 		 * \brief Fuegt alle Objekte aus der Gridunit, die sich mit dem Gebiet befinden zu der Liste hinzu
 		 * \param layer Ebene in der gesucht wird
 		 * \param result Liste, an die die gefundenen Objekte angehangen werden
@@ -113,10 +114,10 @@ class Region
 		 * \param group Gruppen die durchsucht werden sollen
 		 * \return bool, der angibt, ob die Operation erfolgreich war
 		 **/
-		bool addObjectsInShapeFromGridunit(Shape* shape, Gridunit* gu, list<ServerWObject*>* result, short layer=WorldObject::Geometry::LAYER_ALL, short group = WorldObject::GROUP_ALL,ServerWObject* omit=0, bool empty_test = false );
+		bool addObjectsInShapeFromGridunit(Shape* shape, Gridunit* gu, list<WorldObject*>* result, short layer=WorldObject::Geometry::LAYER_ALL, short group = WorldObject::GROUP_ALL,WorldObject* omit=0, bool empty_test = false );
 		
 		/**
-		 * \fn bool addObjectsOnLineFromGridunit(float xstart, float ystart, float xend,float yend, Gridunit* gu, list<ServerWObject*>* result, short layer=WorldObject::Geometry::LAYER_ALL, short group = WorldObject::GROUP_ALL,ServerWObject* omit=0, bool empty_test = false )
+		 * \fn bool addObjectsOnLineFromGridunit(float xstart, float ystart, float xend,float yend, Gridunit* gu, list<WorldObject*>* result, short layer=WorldObject::Geometry::LAYER_ALL, short group = WorldObject::GROUP_ALL,WorldObject* omit=0, bool empty_test = false )
 		 * \brief Fuegt alle Objekte aus der Gridunit, die sich auf der Linie befinden zu der Liste hinzu
 		 *  \param layer Ebene in der gesucht wird
 		 * \param result Liste, an die die gefundenen Objekte angehangen werden
@@ -125,36 +126,36 @@ class Region
 		 * \param group Gruppen die durchsucht werden sollen
 		 * \return bool, der angibt, ob die Operation erfolgreich war
 		 **/
-		bool addObjectsOnLineFromGridunit(float xstart, float ystart, float xend,float yend, Gridunit* gu, list<ServerWObject*>* result, short layer=WorldObject::Geometry::LAYER_ALL, short group = WorldObject::GROUP_ALL,ServerWObject* omit=0, bool empty_test = false );
+		bool addObjectsOnLineFromGridunit(float xstart, float ystart, float xend,float yend, Gridunit* gu, list<WorldObject*>* result, short layer=WorldObject::Geometry::LAYER_ALL, short group = WorldObject::GROUP_ALL,WorldObject* omit=0, bool empty_test = false );
 		
 		/**
-		 * \fn bool changeObjectGroup(ServerWObject* object,WorldObject::Group group )
+		 * \fn bool changeObjectGroup(WorldObject* object,WorldObject::Group group )
 		 * \brief Veraendert die Gruppe des Objektes
 		 * \param object Objekt fuer das die Gruppe geaendert werden soll
 		 * \param group neue Gruppe des Objektes
 		 */
-		bool changeObjectGroup(ServerWObject* object,WorldObject::Group group );
+		bool changeObjectGroup(WorldObject* object,WorldObject::Group group );
 		
 		/**
-		 * \fn ServerWObject* getSWObject ( int id)
+		 * \fn WorldObject* getSWObject ( int id)
 		 * \brief Sucht Objekt anhand seiner ID heraus
 		 * \return Objekt, Nullzeiger wenn das Objekt nicht existiert
 		 */
-		ServerWObject* getSWObject ( int id);
+		WorldObject* getSWObject ( int id);
 		
 		/** 
-		 * \fn ServerWObject* getSWObjectAt(float x_coordinate, float y_coordinate, short layer=WorldObject::Geomety::LAYER_ALL, short group = WorldObject::GROUP_ALL);
-		 * \brief Sucht ServerWObject an den gegebenen Koordinaten
+		 * \fn WorldObject* getSWObjectAt(float x_coordinate, float y_coordinate, short layer=WorldObject::Geomety::LAYER_ALL, short group = WorldObject::GROUP_ALL);
+		 * \brief Sucht WorldObject an den gegebenen Koordinaten
 		 * \param x_coordinate x-Koordinate des Punktes
 		 * \param y_coordinate y-Koordinate des Punktes
 		 * \param layer Ebene in der gesucht wird
 		 * \param group Gruppen die durchsucht werden sollen
-		 * \return Zeiger auf das ServerWObject, wenn sich an dem Punkt eines befindet, sonst NULL
+		 * \return Zeiger auf das WorldObject, wenn sich an dem Punkt eines befindet, sonst NULL
 		 */
-		ServerWObject* getSWObjectAt(float x_coordinate, float y_coordinate, short layer=WorldObject::Geometry::LAYER_ALL, short group = WorldObject::GROUP_ALL);
+		WorldObject* getSWObjectAt(float x_coordinate, float y_coordinate, short layer=WorldObject::Geometry::LAYER_ALL, short group = WorldObject::GROUP_ALL);
 		
 		/**
-		 * \fn void getSWObjectsOnLine( float xstart, float ystart, float xend, float yend,  list<ServerWObject*>* result,short layer=WorldObject::Geometry::LAYER_ALL, short group = WorldObject::GROUP_ALL, ServerWObject* omit=0 )
+		 * \fn void getSWObjectsOnLine( float xstart, float ystart, float xend, float yend,  list<WorldObject*>* result,short layer=WorldObject::Geometry::LAYER_ALL, short group = WorldObject::GROUP_ALL, WorldObject* omit=0 )
 		 * \brief Sucht alle Objekte die auf der angegebenen Linie liegen
 		 * \param xstart x-Koordinate Startpunkt
 		 * \param ystart y-Koordinate Startpunkt
@@ -165,7 +166,7 @@ class Region
 		 * \param group Gruppen die durchsucht werden sollen
 		 * \param omit Objekt, das ausgelassen wird
 		 */
-		void getSWObjectsOnLine( float xstart, float ystart, float xend, float yend,  list<ServerWObject*>* result,short layer=WorldObject::Geometry::LAYER_ALL, short group = WorldObject::GROUP_ALL, ServerWObject* omit=0 );
+		void getSWObjectsOnLine( float xstart, float ystart, float xend, float yend,  list<WorldObject*>* result,short layer=WorldObject::Geometry::LAYER_ALL, short group = WorldObject::GROUP_ALL, WorldObject* omit=0 );
 		
 		/**
 		 * \fn void getProjectilesOnScreen(float center_x,float center_y, list<DmgProjectile*>* result)
@@ -192,33 +193,33 @@ class Region
 		DmgProjectile* getProjectile(int id);
 		
 		/**
-		 * \fn deleteServerWObject(ServerWObject* object)
-		 * \brief L&ouml;scht ServerWObject
+		 * \fn deleteWorldObject(WorldObject* object)
+		 * \brief L&ouml;scht WorldObject
 		 * \param object Zeiger auf das Objekt, welches gel&ouml;scht werden soll
 		 * \return bool, der angibt, ob die Operation erfolgreich war
 		 * 
-		 * L&ouml;scht das ServerWObject aus den internen Datenstrukturen. Das Objekt selbst wird nicht gel&ouml;scht, es wird nur die Einbindung in die Datenstrukturen entfernt. Wenn das L&ouml;schen erfolgreich war, so wird true zur&uuml;ckgegeben, sonst false.
+		 * L&ouml;scht das WorldObject aus den internen Datenstrukturen. Das Objekt selbst wird nicht gel&ouml;scht, es wird nur die Einbindung in die Datenstrukturen entfernt. Wenn das L&ouml;schen erfolgreich war, so wird true zur&uuml;ckgegeben, sonst false.
 		 * Wenn ein NULL-Zeiger &uuml;bergeben wird, so wird false ausgegeben.
 		 */
-		bool  deleteSWObject (ServerWObject* object);
+		bool  deleteSWObject (WorldObject* object);
 		
 		 /**
-		 * \fn moveServerWObject(ServerWObject* object, float x, float y)
-		 * \brief verschiebt ein ServerWObject an den Punkt (x,y)
+		 * \fn moveWorldObject(WorldObject* object, float x, float y)
+		 * \brief verschiebt ein WorldObject an den Punkt (x,y)
 		 * \param object Zeiger auf das Objekt, welches verschoben werden soll
 		 * \param x x-Koordinate des Zielpunktes, zu dem das Objekt verschoben werden soll
 		 * \param y y-Koordinate des Zielpunktes, zu dem das Objekt verschoben werden soll
 		 * \return bool, welcher angibt, ob das Verschieben erfolgreich war
 		  */
-		bool moveSWObject(ServerWObject* object, float x, float y);
+		bool moveSWObject(WorldObject* object, float x, float y);
 		
 		/**
-		 * \fn void createObjectFromString(CharConv* cv, map<int,ServerWObject*>* players)
+		 * \fn void createObjectFromString(CharConv* cv, map<int,WorldObject*>* players)
 		 * \brief liest die Daten zu einem Objekt aus dem Bitstream und erzeugt es
 		 * \param cv Bitstream aus dem die Daten gelesen werden
 		 * \param players Spielerdaten (Spieler werden nicht neu erzeugt sondern nur in die Region verschoben)
 		 */
-		void createObjectFromString(CharConv* cv, map<int,ServerWObject*>* players);
+		void createObjectFromString(CharConv* cv, map<int,WorldObject*>* players);
 		
 		/**
 		 * \fn void createProjectileFromString(CharConv* cv)
@@ -293,7 +294,7 @@ class Region
 		 * \fn void setRegionData(CharConv* cv)
 		 * \brief Liest die Objekte, Projektile, Items und Tiles aus einem String ein
 		 */
-		void setRegionData(CharConv* cv, map<int,ServerWObject*>* players);
+		void setRegionData(CharConv* cv, map<int,WorldObject*>* players);
 		
 		/**
 		 * \fn  setTile(Tile tile,short x, short y)
@@ -305,10 +306,10 @@ class Region
 		void setTile(Tile tile,short x, short y);
 		
 		/**
-		 * \fn map<int,ServerWObject*>* getPlayers()
+		 * \fn map<int,WorldObject*>* getPlayers()
 		 * \brief Gibt alle Spieler in der Region aus
 		 */
-		map<int,ServerWObject*>* getPlayers()
+		map<int,WorldObject*>* getPlayers()
 		{
 			return m_players;
 		}
@@ -383,7 +384,7 @@ class Region
 	 * \var m_players
 	 * Liste der Spieler in der Region
 	 */
-	map<int,ServerWObject*>* m_players;
+	map<int,WorldObject*>* m_players;
 	
 	/**
 	 * \var map<int, DmgProjectile>* m_projectiles
@@ -392,16 +393,16 @@ class Region
 	map<int,DmgProjectile*>* m_projectiles;
 	
 	/**
-	 * \var map<int,ServerWObject*>* m_object_bintree
+	 * \var map<int,WorldObject*>* m_object_bintree
 	 * \brief organisiert alle nicht statischen Objekte in einem Bin&auml;rbaum
 	 */
-	map<int,ServerWObject*>* m_objects;
+	map<int,WorldObject*>* m_objects;
 	
 	/**
-	 * \var map<int,ServerWObject*>* m_object_bintree
+	 * \var map<int,WorldObject*>* m_object_bintree
 	 * \brief organisiert statische Objekte in einem Bin&auml;rbaum
 	 */
-	map<int,ServerWObject*>* m_static_objects;
+	map<int,WorldObject*>* m_static_objects;
 	
 	/**
 	 * \var map<int,DropItem*>* m_drop_items

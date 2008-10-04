@@ -337,9 +337,9 @@ void  Scene::updateObjects()
 	x = player->getGeometry()->m_shape.m_coordinate_x;
 	y = player->getGeometry()->m_shape.m_coordinate_y;
 
-	list<ServerWObject*> objs;
-	ServerWObject* obj;
-	list<ServerWObject*>::iterator it;
+	list<WorldObject*> objs;
+	WorldObject* obj;
+	list<WorldObject*>::iterator it;
 	Shape s;
 	s.m_coordinate_x = x;
 	s.m_coordinate_y = y;
@@ -347,7 +347,7 @@ void  Scene::updateObjects()
 	s.m_extent_x = 20;
 	s.m_extent_y = 20;
 
-	ServerWObject* wo, *cwo;
+	WorldObject* wo, *cwo;
 	Creature* cr;
 
 	player->getRegion()->getSWObjectsInShape(&s,&objs, WorldObject::Geometry::LAYER_ALL,WorldObject::CREATURE);
@@ -451,7 +451,7 @@ void Scene::updateItems()
 	}
 }
 
-void Scene::updateObject(ServerWObject* obj)
+void Scene::updateObject(WorldObject* obj)
 {
 	std::string name = obj->getNameId();
 	DEBUG5("handle obj %s",name.c_str());
@@ -1158,7 +1158,7 @@ void Scene::createScene()
 	clearObjects();
 
 	// Liste der statischen Objekte
-	list<ServerWObject*> stat_objs;
+	list<WorldObject*> stat_objs;
 
 	Region* region = m_document->getLocalPlayer()->getRegion();
 
@@ -1170,7 +1170,7 @@ void Scene::createScene()
 	s.m_extent_y = 10000;
 
 	region->getSWObjectsInShape(&s,&stat_objs, WorldObject::Geometry::LAYER_ALL,WorldObject::FIXED);
-	list<ServerWObject*>::iterator it;
+	list<WorldObject*>::iterator it;
 	std::string name;
 	for (it = stat_objs.begin(); it !=stat_objs.end();++it)
 	{

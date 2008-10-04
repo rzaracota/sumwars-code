@@ -33,8 +33,8 @@
 	
 	// diverse Initialisierungen
 	
-	m_player_slots = new map<int,ServerWObject*>;
-	m_players = new map<int,ServerWObject*>;;
+	m_player_slots = new map<int,WorldObject*>;
+	m_players = new map<int,WorldObject*>;;
 	
 	// Baum fuer die Handelsvorgaenge anlegen	
 	m_trades = new map<int, Trade* >;
@@ -113,7 +113,7 @@ void World::createRegion(short region)
 
 
 		// Objekte anlegen
-		ServerWObject* wo=0,*wo2=0;
+		WorldObject* wo=0,*wo2=0;
 		WorldObject::Geometry* wob=0;
 		Shape* sp=0;
 
@@ -342,7 +342,7 @@ short World::insertRegion(Region* region, int rnr)
 	
 }
 
-WorldObject::Relation World::getRelation(WorldObject::TypeInfo::Fraction frac, ServerWObject* wo)
+WorldObject::Relation World::getRelation(WorldObject::TypeInfo::Fraction frac, WorldObject* wo)
 {
 	WorldObject::TypeInfo::Fraction f = wo->getTypeInfo()->m_fraction;
 	
@@ -487,7 +487,7 @@ float World::getDistance(Shape& s1, Shape& s2)
 
 
 
-ServerWObject* World::getSWObject ( int id,short rid) 
+WorldObject* World::getSWObject ( int id,short rid) 
 {
 	return m_regions[rid]->getSWObject(id);
 }
@@ -542,7 +542,7 @@ int World::newTrade(int trader1_id, int trader2_id)
 }
 
 
-bool World:: getSWObjectsInShape( Shape* shape, short region, list<ServerWObject*>* result,short layer, short group, ServerWObject* omit )
+bool World:: getSWObjectsInShape( Shape* shape, short region, list<WorldObject*>* result,short layer, short group, WorldObject* omit )
 {
 
 	 
@@ -561,7 +561,7 @@ bool World:: getSWObjectsInShape( Shape* shape, short region, list<ServerWObject
 }
 
 
-ServerWObject* World::getSWObjectAt(float x_coordinate, float y_coordinate,  short region,short layer, short group )
+WorldObject* World::getSWObjectAt(float x_coordinate, float y_coordinate,  short region,short layer, short group )
 {
 	// Region ermitteln, wenn gleich 0, Fehler ausgeben
 	Region* r = m_regions[region];
@@ -574,7 +574,7 @@ ServerWObject* World::getSWObjectAt(float x_coordinate, float y_coordinate,  sho
 	return r->getSWObjectAt(x_coordinate,y_coordinate,layer,group);
 }
 
-void World::getSWObjectsOnLine( float xstart, float ystart, float xend, float yend,  short region, list<ServerWObject*>* result,short layer, short group, ServerWObject* omit)
+void World::getSWObjectsOnLine( float xstart, float ystart, float xend, float yend,  short region, list<WorldObject*>* result,short layer, short group, WorldObject* omit)
 {
 	// Region ermitteln, wenn gleich 0 beenden
 	Region* r = m_regions[region];
@@ -696,17 +696,17 @@ bool World::getClosestFreeSquare(float x_coordinate, float y_coordinate, float &
 	queue<int>* quy = new queue<int>;
 	
 	// Liste für Objekte die im Weg sind
-	list<ServerWObject*>* ret = new  list<ServerWObject*>;
+	list<WorldObject*>* ret = new  list<WorldObject*>;
 	
 
 	// Selektor für fixe Objekte
-	ServerWObjectSelector* fixsel = new ServerWObjectSelector;
+	WorldObjectSelector* fixsel = new WorldObjectSelector;
 	fixsel->getObjectType().setObjectType(OBJECTTYPE_FIXED_OBJECT);
 	fixsel->setSelectObjectType(true);
 	
 	
 	// nach Objekten suchen die im Weg sind
-	getServerWObjectsInRect(x+px-0.9999,y+py-0.9999,x+px+0.9999,y+py+0.99990,0, ret);
+	getWorldObjectsInRect(x+px-0.9999,y+py-0.9999,x+px+0.9999,y+py+0.99990,0, ret);
 	
 	qux->push(px);
 	quy->push(py);	
@@ -721,7 +721,7 @@ bool World::getClosestFreeSquare(float x_coordinate, float y_coordinate, float &
 		quy->pop();
 		
 		// nach fixen Objekten suchen die im Weg sind
-		getServerWObjectsInRect(x+px-0.9999,y+py-0.9999,x+px+0.9999,y+py+0.99990,fixsel, ret);
+		getWorldObjectsInRect(x+px-0.9999,y+py-0.9999,x+px+0.9999,y+py+0.99990,fixsel, ret);
 		
 		DEBUG5("untersuche: %f , %f",x+px,y+py);
 
@@ -729,7 +729,7 @@ bool World::getClosestFreeSquare(float x_coordinate, float y_coordinate, float &
 		if (ret->empty() || (px==0 && py ==0))
 		{
 			// allgemein nach Hindernissen suchen
-			getServerWObjectsInRect(x+px-0.9999,y+py-0.9999,x+px+0.9999,y+py+0.99990,0, ret);
+			getWorldObjectsInRect(x+px-0.9999,y+py-0.9999,x+px+0.9999,y+py+0.99990,0, ret);
 			
 			// umliegende Felder in die Queue schieben, wenn sie noch nicht untersucht wurden
 			if (px < 10 && field[px+11][py+10]==false)
@@ -787,7 +787,7 @@ bool World::getClosestFreeSquare(float x_coordinate, float y_coordinate, float &
 */
 
 
- bool World::insertSWObject (ServerWObject* object, float x, float y, short region) 
+ bool World::insertSWObject (WorldObject* object, float x, float y, short region) 
 {
 	DEBUG5("inserting Object at %f %f into region %i",x,y,region);
 	 bool result=true;
@@ -815,7 +815,7 @@ bool World::getClosestFreeSquare(float x_coordinate, float y_coordinate, float &
 }
 
 
-bool World::insertPlayer(ServerWObject* player, int slot)
+bool World::insertPlayer(WorldObject* player, int slot)
 {
 	if (slot != NOSLOT)
 	{
@@ -825,7 +825,7 @@ bool World::insertPlayer(ServerWObject* player, int slot)
 	
 	/*
 	DEBUG("all players: ");
-	map<int,ServerWObject*>::iterator it;
+	map<int,WorldObject*>::iterator it;
 	
 	for (it = m_players->begin(); it != m_players->end(); ++it)
 	{
@@ -835,7 +835,7 @@ bool World::insertPlayer(ServerWObject* player, int slot)
 }
 
 
-bool World::moveSWObject(ServerWObject* object, float x, float y)
+bool World::moveSWObject(WorldObject* object, float x, float y)
 {
 	bool result;
 
@@ -853,7 +853,7 @@ bool World::moveSWObject(ServerWObject* object, float x, float y)
 }
 
 
- bool World::deleteSWObject (ServerWObject* object) {
+ bool World::deleteSWObject (WorldObject* object) {
 	 
 	 bool result=true;
 	 
@@ -878,7 +878,7 @@ bool  World::insertProjectile(DmgProjectile* object, float x, float y, short reg
 		
 }
 
-bool World::insertPlayerIntoRegion(ServerWObject* player, short region)
+bool World::insertPlayerIntoRegion(WorldObject* player, short region)
 {
 	Region* reg = m_regions[region];
 	
@@ -982,7 +982,7 @@ void World::handleSavegame(CharConv *cv, int slot)
 	tmp[10] = '\0';
 	cv->fromBuffer(tmp,10);
 	ot = tmp;
-	ServerWObject* pl =0;
+	WorldObject* pl =0;
 
 	DEBUG("type %s",tmp);	
 	pl=ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_PLAYER, ot);
@@ -1026,7 +1026,7 @@ void World::handleSavegame(CharConv *cv, int slot)
 
 		if (m_server)
 		{
-			map<int,ServerWObject*>::iterator it;
+			map<int,WorldObject*>::iterator it;
 			
 			if (slot != LOCAL_SLOT)
 			{
@@ -1243,7 +1243,7 @@ void World::update(float time)
 void World::updatePlayers()
 {
 	// Schleife ueber die Spieler
-	map<int,ServerWObject*>::iterator it;
+	map<int,WorldObject*>::iterator it;
 	Player* pl;
 	int slot;
 	for (it = m_player_slots->begin(); it != m_player_slots->end(); )
@@ -1413,7 +1413,7 @@ void World::updatePlayers()
 						
 						int id;
 						cv->fromBuffer(id);
-						ServerWObject* player;
+						WorldObject* player;
 						
 						DEBUG("got data for player %s id %i",subt,id);
 						
@@ -1566,7 +1566,7 @@ void World::writeEvent(Region* region,Event* event, CharConv* cv)
 	DEBUG5("sending event %i  id %i  data %i",event->m_type, event->m_id, event->m_data);
 	
 	
-	ServerWObject* object;
+	WorldObject* object;
 	DmgProjectile* proj;
 	Item* item;
 	if (region !=0)
@@ -1647,7 +1647,7 @@ bool World::processEvent(Region* region,CharConv* cv)
 	
 	DEBUG5("got event %i  id %i  data %i",event.m_type, event.m_id, event.m_data);
 	
-	ServerWObject* object;
+	WorldObject* object;
 	DmgProjectile* proj;
 	
 	switch(event.m_type)
@@ -1738,7 +1738,7 @@ bool World::processEvent(Region* region,CharConv* cv)
 					deleteSWObject(object);
 					m_players->erase( object->getId());
 					
-					map<int,ServerWObject*>::iterator it;
+					map<int,WorldObject*>::iterator it;
 					for (it = m_player_slots->begin(); it != m_player_slots->end(); ++it)
 					{
 						if (it->second == object)
@@ -1838,7 +1838,7 @@ bool World::processEvent(Region* region,CharConv* cv)
 void World::handleDataRequest(ClientDataRequest* request, int slot )
 {
 	// Spieler von dem die Anfrage ausging
-	ServerWObject* player;
+	WorldObject* player;
 
 	// Spieler in dem betreffenden Slot aktivieren
 	if (m_player_slots->count(slot)==0)
@@ -1880,8 +1880,8 @@ void World::handleDataRequest(ClientDataRequest* request, int slot )
 bool World::calcBlockmat(PathfindInfo * pathinfo)
 {
 	float sqs = pathinfo->m_base_size / pathinfo->m_quality;
-	list<ServerWObject*> ret;
-	list<ServerWObject*>::iterator it;
+	list<WorldObject*> ret;
+	list<WorldObject*>::iterator it;
 	int i,j,is,ie,js,je;
 	Shape s;
 	s.m_coordinate_x = pathinfo->m_center_x;
@@ -1907,7 +1907,7 @@ bool World::calcBlockmat(PathfindInfo * pathinfo)
 	
 	// Alle Objekte in dem Gebiet suchen
 	getSWObjectsInShape(&s, pathinfo->m_region, &ret,pathinfo->m_layer);
-	ServerWObject* wo=0;
+	WorldObject* wo=0;
 	pathinfo->m_block->clear();
 	
 	// durchmustern der Objekte

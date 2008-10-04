@@ -1,4 +1,38 @@
 #include "worldobject.h"
+#include "world.h"
+
+WorldObject::WorldObject(World* world, int id)
+{
+	m_id = id;
+	m_state = STATE_ACTIVE;
+	m_world = world;
+	init();
+}
+
+bool WorldObject::moveTo(float x, float y)
+{
+	if (m_world==0)
+	{
+		WorldObject::Geometry* geom = getGeometry();
+		geom->m_shape.m_coordinate_x=x;
+		geom->m_shape.m_coordinate_y=y;
+		return true;
+	}
+	else
+	{
+		return m_world->moveSWObject(this, x,y);
+	}
+}
+
+Region* WorldObject::getRegion()
+{
+	return m_world->getRegion(m_grid_location.m_region);
+}
+
+bool  WorldObject::destroy()
+{
+	return true;
+}
 
 void WorldObject::toString(CharConv* cv)
 {
@@ -50,6 +84,8 @@ void WorldObject::fromString(CharConv* cv)
 	cv->fromBuffer<int>(m_id);
 	
 	*/
+	
+	
 	cv->fromBuffer<float>(m_geometry.m_shape.m_coordinate_x) ;
 	cv->fromBuffer<float>(m_geometry.m_shape.m_coordinate_y);
 	cv->fromBuffer<char>(ctmp);
@@ -74,26 +110,6 @@ void WorldObject::fromString(CharConv* cv)
 
 string WorldObject::getName()
 {
-	/*
-	if (m_type_info.m_type==TypeInfo::TYPE_MONSTER)
-	{
-		switch (m_type_info.m_subtype)
-		{
-			case TypeInfo::SUBTYPE_GOBLIN:
-				return "Goblin";
-				break;
-		}
-		return "Monster";
-	}
-	else if (m_type_info.m_type==TypeInfo::TYPE_PLAYER)
-	{
-		return "Player";
-	}
-	else if (m_type_info.m_type==TypeInfo::TYPE_FIXED_OBJECT)
-	{
-		return "Fixed";
-	}
-	*/
 	
 	return m_type_info.m_subtype;
 }

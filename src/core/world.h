@@ -34,7 +34,7 @@ using namespace std;
 #include <iostream>
 #include <queue>
 
-#include "serverwobject.h"
+#include "worldobject.h"
 #include "dmgprojectile.h"
 #include "trade.h"
 #include "servernetwork.h"
@@ -70,7 +70,7 @@ using namespace std;
  * \class World
  * \brief Hauptobjekt der Anwendung
  *
- * Dieses Objekt ist das Hauptobjekt der Anwendung. Die wesentliche Aufgabe liegt in der Verwaltung der ServerWObject Objekte.
+ * Dieses Objekt ist das Hauptobjekt der Anwendung. Die wesentliche Aufgabe liegt in der Verwaltung der WorldObject Objekte.
  */
 class World {
 //Public stuff
@@ -126,10 +126,10 @@ public:
 	short insertRegion(Region* region, int rnr);
 	
 	/**
-	 * \fn bool insertPlayerIntoRegion(ServerWObject* player, short region)
+	 * \fn bool insertPlayerIntoRegion(WorldObject* player, short region)
 	 * \brief Versucht einen Spieler in eine Region einzufuegen
 	 */
-	bool insertPlayerIntoRegion(ServerWObject* player, short region);
+	bool insertPlayerIntoRegion(WorldObject* player, short region);
 
 	//Operations
 	/**
@@ -163,20 +163,20 @@ public:
 	int newTrade(int trader1_id, int trader2_id);
 
 	/**
-	 * \fn ServerWObject*  getSWObject ( int id);
-	 * \brief Sucht ServerWObject anhand seiner ID
-	 * \param id ID des gesuchten ServerWObjects
+	 * \fn WorldObject*  getSWObject ( int id);
+	 * \brief Sucht WorldObject anhand seiner ID
+	 * \param id ID des gesuchten WorldObjects
 	 * \param rid ID der Region
-	 * \return Zeiger auf das gefundene ServerWObject
+	 * \return Zeiger auf das gefundene WorldObject
 	 *
-	 * W&auml;hlt ein ServerWObject anhand seiner ID aus. Gibt einen Zeiger auf das Objekt zur&uuml;ck, beziehungsweise NULL wenn das Objekt nicht gefunden wurde.
+	 * W&auml;hlt ein WorldObject anhand seiner ID aus. Gibt einen Zeiger auf das Objekt zur&uuml;ck, beziehungsweise NULL wenn das Objekt nicht gefunden wurde.
 	 */
-	ServerWObject* getSWObject ( int id, short rid);
+	WorldObject* getSWObject ( int id, short rid);
 
 
 	/**
-	 * \fn bool getSWObjectsInShape( Shape* shape, short region, list<ServerWObject*>* result,short layer=WorldObject::Geometry::LAYER_ALL, short group = WorldObject::GROUP_ALL, ServerWObject* omit=0 )
-	 * \brief Sucht ServerWObjects innerhalb eines Gebietes
+	 * \fn bool getSWObjectsInShape( Shape* shape, short region, list<WorldObject*>* result,short layer=WorldObject::Geometry::LAYER_ALL, short group = WorldObject::GROUP_ALL, WorldObject* omit=0 )
+	 * \brief Sucht WorldObjects innerhalb eines Gebietes
 	 * \param shape Form des Gebietes
 	 * \param layer Ebene in der gesucht wird
 	 * \param region Region in der gesucht wird
@@ -190,24 +190,24 @@ public:
 	 * Wenn f&uuml;r selector ein NULL-Zeiger &uuml;bergeben wird, so werden die Objekte nicht selektiert.
 	 * Wenn f&uuml;r result ein NULL-Zeiger &uuml;bergeben wird, oder ein anderer Fehler auftritt, so wird false zur&uuml;ckgegeben, sonst true.
 	 */
-	bool getSWObjectsInShape( Shape* shape, short region, list<ServerWObject*>* result,short layer=WorldObject::Geometry::LAYER_ALL, short group = WorldObject::GROUP_ALL, ServerWObject* omit=0 );
+	bool getSWObjectsInShape( Shape* shape, short region, list<WorldObject*>* result,short layer=WorldObject::Geometry::LAYER_ALL, short group = WorldObject::GROUP_ALL, WorldObject* omit=0 );
 
 
 	/**
-	 * \fn ServerWObject* getSWObjectAt(float x_coordinate, float y_coordinate,  short region,short layer=WorldObject::Geometry::LAYER_ALL, short group = WorldObject::GROUP_ALL)
-	 * \brief Sucht ServerWObject an den gegebenen Koordinaten
+	 * \fn WorldObject* getSWObjectAt(float x_coordinate, float y_coordinate,  short region,short layer=WorldObject::Geometry::LAYER_ALL, short group = WorldObject::GROUP_ALL)
+	 * \brief Sucht WorldObject an den gegebenen Koordinaten
 	 * \param x_coordinate x-Koordinate des Punktes
 	 * \param y_coordinate y-Koordinate des Punktes
 	 * \param layer Ebene in der gesucht wird
 	 * \param region Region in der gesucht wird
 	 * \param layer Ebene in der gesucht wird
 	 * \param group Gruppen die durchsucht werden sollen
-	 * \return Zeiger auf das ServerWObject, wenn sich an dem Punkt eines befindet, sonst NULL
+	 * \return Zeiger auf das WorldObject, wenn sich an dem Punkt eines befindet, sonst NULL
 	 */
-	ServerWObject* getSWObjectAt(float x_coordinate, float y_coordinate,  short region,short layer=WorldObject::Geometry::LAYER_ALL, short group = WorldObject::GROUP_ALL);
+	WorldObject* getSWObjectAt(float x_coordinate, float y_coordinate,  short region,short layer=WorldObject::Geometry::LAYER_ALL, short group = WorldObject::GROUP_ALL);
 
 	/**
-	 * \fn getSWObjectsOnLine( float xstart, float ystart, float xend, float yend,  short region, list<ServerWObject*>* result,,short layer=WorldObject::Geometry::LAYER_ALL, short group = WorldObject::GROUP_ALL ServerWObject* omit=0 )
+	 * \fn getSWObjectsOnLine( float xstart, float ystart, float xend, float yend,  short region, list<WorldObject*>* result,,short layer=WorldObject::Geometry::LAYER_ALL, short group = WorldObject::GROUP_ALL WorldObject* omit=0 )
 	 * \brief Sucht alle Objekte die auf der angegebenen Linie liegen
 	 * \param xstart x-Koordinate Startpunkt
 	 * \param ystart y-Koordinate Startpunkt
@@ -219,7 +219,7 @@ public:
 	 * \param group Gruppen die durchsucht werden sollen
 	 * \param omit Objekt, das ausgelassen wird
 	 */
-	void getSWObjectsOnLine( float xstart, float ystart, float xend, float yend,  short region, list<ServerWObject*>* result,short layer=WorldObject::Geometry::LAYER_ALL, short group = WorldObject::GROUP_ALL, ServerWObject* omit=0 );
+	void getSWObjectsOnLine( float xstart, float ystart, float xend, float yend,  short region, list<WorldObject*>* result,short layer=WorldObject::Geometry::LAYER_ALL, short group = WorldObject::GROUP_ALL, WorldObject* omit=0 );
 
 	/**
 	 * \fn void getProjectilesOnScreen(float center_x,float center_y,short region, list<DmgProjectile*>* result)
@@ -246,21 +246,21 @@ public:
 
 
 	/**
-	 * \fn insertSWObject(ServerWObject* object)
-	 * \brief F&uuml;gt ServerWObject ein
+	 * \fn insertSWObject(WorldObject* object)
+	 * \brief F&uuml;gt WorldObject ein
 	 * \param object Zeiger auf das Objekt, welches eingef&uuml;gt werden soll
 	 * \return bool, der angibt, ob die Operation erfolgreich war
 	 *
-	 * F&uuml;gt das ServerWObject in die internen Datenstrukturen ein. Wenn das Einf&uuml;gen erfolgreich war, so wird true zur&uuml;ckgegeben, sonst false.
+	 * F&uuml;gt das WorldObject in die internen Datenstrukturen ein. Wenn das Einf&uuml;gen erfolgreich war, so wird true zur&uuml;ckgegeben, sonst false.
 	 * Wenn ein NULL-Zeiger &uuml;bergeben wird, so wird false ausgegeben.
 	 */
-	bool  insertSWObject (ServerWObject* object, float x, float y, short region);
+	bool  insertSWObject (WorldObject* object, float x, float y, short region);
 	
 	/**
-	 * \fn bool insertPlayer(ServerWObject* player, int slot = NOSLOT)
+	 * \fn bool insertPlayer(WorldObject* player, int slot = NOSLOT)
 	 * \brief Fuegt einen neuen Spieler hinzu
 	 */
-	bool insertPlayer(ServerWObject* player, int slot= NOSLOT);
+	bool insertPlayer(WorldObject* player, int slot= NOSLOT);
 
 	/**
 	 * \fn bool  insertProjectile(DmgProjectile* object, float x, float y, short region)
@@ -274,25 +274,25 @@ public:
 	
 	
 	/**
-	 * \fn deleteServerWObject(ServerWObject* object)
-	 * \brief L&ouml;scht ServerWObject
+	 * \fn deleteWorldObject(WorldObject* object)
+	 * \brief L&ouml;scht WorldObject
 	 * \param object Zeiger auf das Objekt, welches gel&ouml;scht werden soll
 	 * \return bool, der angibt, ob die Operation erfolgreich war
 	 *
-	 * L&ouml;scht das ServerWObject aus den internen Datenstrukturen. Das Objekt selbst wird nicht gel&ouml;scht, es wird nur die Einbindung in die Datenstrukturen entfernt. Wenn das L&ouml;schen erfolgreich war, so wird true zur&uuml;ckgegeben, sonst false.
+	 * L&ouml;scht das WorldObject aus den internen Datenstrukturen. Das Objekt selbst wird nicht gel&ouml;scht, es wird nur die Einbindung in die Datenstrukturen entfernt. Wenn das L&ouml;schen erfolgreich war, so wird true zur&uuml;ckgegeben, sonst false.
 	 * Wenn ein NULL-Zeiger &uuml;bergeben wird, so wird false ausgegeben.
 	 */
-	bool  deleteSWObject (ServerWObject* object);
+	bool  deleteSWObject (WorldObject* object);
 
 	 /**
-	  * \fn moveServerWObject(ServerWObject* object, float x, float y)
-	  * \brief verschiebt ein ServerWObject an den Punkt (x,y)
+	  * \fn moveWorldObject(WorldObject* object, float x, float y)
+	  * \brief verschiebt ein WorldObject an den Punkt (x,y)
 	  * \param object Zeiger auf das Objekt, welches verschoben werden soll
 	  * \param x x-Koordinate des Zielpunktes, zu dem das Objekt verschoben werden soll
 	  * \param y y-Koordinate des Zielpunktes, zu dem das Objekt verschoben werden soll
 	  * \return bool, welcher angibt, ob das Verschieben erfolgreich war
 	  */
-	bool moveSWObject(ServerWObject* object, float x, float y);
+	bool moveSWObject(WorldObject* object, float x, float y);
 
 	/**
 	 * \fn bool lineIntersect(float xstart, float xstart, float xend,float yend float dir[2],Shape* s)
@@ -335,8 +335,8 @@ public:
 
 	/**
 	 * \fn getValidId()
-	 * \brief Gibt eine zul&auml;ssige ID f&uuml;r ein ServerWObject aus
-	 * \return zul&auml;ssige ID f&uuml;r ein ServerWObject
+	 * \brief Gibt eine zul&auml;ssige ID f&uuml;r ein WorldObject aus
+	 * \return zul&auml;ssige ID f&uuml;r ein WorldObject
 	 */
 	int getValidId();
 
@@ -428,10 +428,10 @@ public:
 	}
 
 	/**
-	 * \fn ServerWObject* getLocalPlayer()
+	 * \fn WorldObject* getLocalPlayer()
 	 * \brief Gibt den Spieler aus, der sich an dem Rechner befindet, auf dem diese Welt simuliert wird
 	 */
-	ServerWObject* getLocalPlayer()
+	WorldObject* getLocalPlayer()
 	{
 		return m_local_player;
 	}
@@ -443,12 +443,12 @@ public:
 	Party* getEmptyParty();
 
 	/**
-	 * \fn Party::Relation getRelation(WorldObject::TypeInfo::Fraction frac, ServerWObject* wo)
+	 * \fn Party::Relation getRelation(WorldObject::TypeInfo::Fraction frac, WorldObject* wo)
 	 * \brief Gibt die Beziehung eines Lebewesens zu einer Fraktion
 	 * \param frac Fraktion
 	 * \param wo Objekt
 	 */
-	WorldObject::Relation getRelation(WorldObject::TypeInfo::Fraction frac, ServerWObject* wo);
+	WorldObject::Relation getRelation(WorldObject::TypeInfo::Fraction frac, WorldObject* wo);
 
 	/**
 	 * \brief Gibt die Distanz zwischen den beiden Flaechen quadriert aus
@@ -539,13 +539,13 @@ private:
 	 * \var m_players
 	 * \brief Liste der Spieler in der Welt mit ihren Slots
 	 */
-	map<int,ServerWObject*>* m_player_slots;
+	map<int,WorldObject*>* m_player_slots;
 	
 	/**
-	 * \var map<int,ServerWObject*>* m_players
+	 * \var map<int,WorldObject*>* m_players
 	 * \brief Liste der Spieler in der Welt sortiert nach ID
 	 */
-	map<int,ServerWObject*>* m_players;
+	map<int,WorldObject*>* m_players;
 	
 
 	/**
@@ -561,9 +561,9 @@ private:
 	Network* m_network;
 	
 	/**
-	 * \var ServerWObject* m_local_player
+	 * \var WorldObject* m_local_player
 	 */
-	ServerWObject* m_local_player;
+	WorldObject* m_local_player;
 	
 	/**
 	 * \var list<int> m_logins

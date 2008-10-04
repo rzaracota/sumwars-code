@@ -1,6 +1,6 @@
 #include "spawnpoint.h"
 
-Spawnpoint::Spawnpoint(World* world, int id) : ServerWObject(world, id)
+Spawnpoint::Spawnpoint(World* world, int id) : WorldObject(world, id)
 {
 	bool tmp=Spawnpoint::init();
 	
@@ -37,7 +37,7 @@ bool Spawnpoint::update (float time)
 {
 	m_time -= time;
 	int i;
-	ServerWObject* wo;
+	WorldObject* wo;
 	float x,y;
 	bool ret;
 	if (m_time <= 0)

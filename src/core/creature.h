@@ -33,7 +33,7 @@
 #include <list>
 #include <algorithm>
 #include "world.h"
-#include "serverwobject.h"
+#include "worldobject.h"
 #include "action.h"
 #include "command.h"
 #include "damage.h"
@@ -57,7 +57,7 @@
  * \fn class Creature
  * \brief Klasse fuer Lebewesen
  */
-class Creature : public ServerWObject 
+class Creature : public WorldObject 
  {
 //Public stuff
 public:
@@ -276,13 +276,13 @@ public:
 	
 		
 	/**
-	 * \fn void calcWalkDir(float goalx,goaly,ServerWObject* goal)
+	 * \fn void calcWalkDir(float goalx,goaly,WorldObject* goal)
 	 * \brief Sucht den Weg zu einem Punkt und setzt die Bewegungsgeschwindigkeit entspechend
 	 * \param goalx x-Koordinate des Zieles
 	 * \param goaly y-Koordinate des Zieles
 	 * \param goal Zeiger auf das Zielobject
 	 */
-	void calcWalkDir(float goalx,float goaly,ServerWObject* goal);
+	void calcWalkDir(float goalx,float goaly,WorldObject* goal);
 	
 	/**
 	 * \fn void toString(CharConv* cv)
@@ -407,7 +407,7 @@ protected:
 	 * \param goaly x-Koordinate des Zieles
 	 * \param goal Zeiger auf der Zielobjekt, ist NULL wenn kein Zielobjekt existiert
 	 */
-	virtual void performActionCritPart(float goalx, float goaly, ServerWObject* goal);
+	virtual void performActionCritPart(float goalx, float goaly, WorldObject* goal);
 	
 	/**
 	 * \fn virtual void die()

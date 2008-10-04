@@ -31,13 +31,13 @@
 #define FIXEDOBJECT_H
 #include <string>
 
-#include "serverwobject.h"
+#include "worldobject.h"
 
 /**
  * \class FixedObject
  * \brief Dieses Objekt stellt ein fixes Objekt dar. Es kann seine Position in der Welt nicht ver&auml;ndern.
  */
-class FixedObject : public ServerWObject {
+class FixedObject : public WorldObject {
 /**
  * Public stuff
  */

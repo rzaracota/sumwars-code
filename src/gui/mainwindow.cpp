@@ -2969,7 +2969,7 @@ void MainWindow::updateObjectInfo()
 		string_stream<<name;
 
 		// zur ID gehoerendes Objekt
-		ServerWObject* cwo;
+		WorldObject* cwo;
 		cwo = m_document->getWorld()->getSWObject(id,rid);
 		Creature* cr;
 

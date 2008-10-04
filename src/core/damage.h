@@ -5,7 +5,6 @@
 #include "worldobject.h"
 #include <stdlib.h>
 #include <string>
-#include <string.h>
 
 #define NR_STATUS_MODS 8
 

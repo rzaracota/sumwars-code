@@ -20,7 +20,7 @@
 #include "fixedobject.h"
 
 //Constructors/Destructors
-FixedObject::FixedObject(World* world, int id) : ServerWObject(world, id)
+FixedObject::FixedObject(World* world, int id) : WorldObject(world, id)
 {
 	bool tmp=FixedObject::init();
 	if (!tmp)
@@ -31,7 +31,7 @@ FixedObject::FixedObject(World* world, int id) : ServerWObject(world, id)
 
 
 
-FixedObject::FixedObject(World* world, int id,  TypeInfo::ObjectSubtype object_subtype)  : ServerWObject(world, id)
+FixedObject::FixedObject(World* world, int id,  TypeInfo::ObjectSubtype object_subtype)  : WorldObject(world, id)
 {
 	getTypeInfo()->m_subtype = object_subtype;
 	bool tmp=FixedObject::init();

@@ -12,11 +12,11 @@ Region::Region(short dimx, short dimy, short id, World* world, bool server)
 	m_tiles = new Matrix2d<char>(dimx*2,dimy*2);
 	m_tiles->clear();
 	
-	// Binärbaum fuer ServerWObjects anlegen
-	m_objects = new map<int,ServerWObject*>;
-	m_static_objects = new map<int,ServerWObject*>;
+	// Binärbaum fuer WorldObjects anlegen
+	m_objects = new map<int,WorldObject*>;
+	m_static_objects = new map<int,WorldObject*>;
 	
-	m_players = new map<int,ServerWObject*>;
+	m_players = new map<int,WorldObject*>;
 	
 	// Baum fuer Projektile anlegen
 	m_projectiles = new map<int,DmgProjectile*>;
@@ -36,7 +36,7 @@ Region::Region(short dimx, short dimy, short id, World* world, bool server)
 
 Region::~Region()
 {
-	map<int,ServerWObject*>::iterator i;
+	map<int,WorldObject*>::iterator i;
 	for (i=m_objects->begin(); i!=m_objects->end();i++)
 	{
 		delete i->second;
@@ -74,9 +74,9 @@ Region::~Region()
 	
 }
 
-ServerWObject* Region::getSWObject ( int id)
+WorldObject* Region::getSWObject ( int id)
 {
-	map<int,ServerWObject*>::iterator iter;
+	map<int,WorldObject*>::iterator iter;
 	
 	// Objekt im Binärbaum suchen
 	iter = m_objects->find(id);
@@ -133,7 +133,7 @@ bool Region::getFreePlace(Shape* shape, short layer, float& x, float&y)
 	Shape s;
 	memcpy(&s,shape,sizeof(Shape));
 	
-	list<ServerWObject*> res;
+	list<WorldObject*> res;
 	res.clear();
 	
 	// eine Stelle suchen an der das Objekt passt
@@ -177,7 +177,7 @@ bool Region::getFreePlace(Shape* shape, short layer, float& x, float&y)
 		}
 		else
 		{
-			ServerWObject* obs = *(res.begin());
+			WorldObject* obs = *(res.begin());
 			DEBUG5("obstacle is %s at %f %f",obs->getNameId().c_str(), obs->getGeometry()->m_shape.m_coordinate_x,obs->getGeometry()->m_shape.m_coordinate_y);
 			// Stelle ist besetzt
 			tfields.insert(i);
@@ -228,10 +228,10 @@ bool Region::getFreePlace(Shape* shape, short layer, float& x, float&y)
 	
 }
 
-bool  Region::addObjectsInShapeFromGridunit(Shape* shape, Gridunit* gu, list<ServerWObject*>* result, short layer, short group,ServerWObject* omit, bool empty_test )
+bool  Region::addObjectsInShapeFromGridunit(Shape* shape, Gridunit* gu, list<WorldObject*>* result, short layer, short group,WorldObject* omit, bool empty_test )
 {
-	ServerWObject* wo=0;
-	ServerWObject** arr=0;
+	WorldObject* wo=0;
+	WorldObject** arr=0;
 	WorldObject::Geometry* wob=0;
 	Shape* s=0;
 	arr = gu->getObjects((WorldObject::Group) group);
@@ -267,10 +267,10 @@ bool  Region::addObjectsInShapeFromGridunit(Shape* shape, Gridunit* gu, list<Ser
 	return true;
 }
 
-bool Region::addObjectsOnLineFromGridunit(float xstart, float ystart, float xend,float yend, Gridunit* gu, list<ServerWObject*>* result, short layer, short group ,ServerWObject* omit, bool empty_test )
+bool Region::addObjectsOnLineFromGridunit(float xstart, float ystart, float xend,float yend, Gridunit* gu, list<WorldObject*>* result, short layer, short group ,WorldObject* omit, bool empty_test )
 {
-	ServerWObject* wo=0;
-	ServerWObject** arr=0;
+	WorldObject* wo=0;
+	WorldObject** arr=0;
 	WorldObject::Geometry* wob=0;
 	Shape* s=0;
 	arr = gu->getObjects((WorldObject::Group) group);
@@ -307,7 +307,7 @@ bool Region::addObjectsOnLineFromGridunit(float xstart, float ystart, float xend
 }
 
 
-bool Region::getSWObjectsInShape( Shape* shape,  list<ServerWObject*>* result,short layer, short group, ServerWObject* omit, bool empty_test)
+bool Region::getSWObjectsInShape( Shape* shape,  list<WorldObject*>* result,short layer, short group, WorldObject* omit, bool empty_test)
 {
 	
 	DEBUG5("shape %f %f %f",shape->m_coordinate_x,shape->m_coordinate_y,shape->m_radius);
@@ -336,7 +336,7 @@ bool Region::getSWObjectsInShape( Shape* shape,  list<ServerWObject*>* result,sh
 		// TODO: Player umbenennen, einbauen
 		for (i=m_players->begin();i!=m_player->end();++i)
 		{
-		wo= (ServerWObject*) *i;
+		wo= (WorldObject*) *i;
 		s = &(wo->getGeometry()->m_shape);
 		if (World::intersect(shape,s ))
 		{
@@ -425,7 +425,7 @@ bool Region::getSWObjectsInShape( Shape* shape,  list<ServerWObject*>* result,sh
 }
 
 
-ServerWObject* Region::getSWObjectAt(float x_coordinate, float y_coordinate, short layer, short group)
+WorldObject* Region::getSWObjectAt(float x_coordinate, float y_coordinate, short layer, short group)
 {
 	Shape s;
 	s.m_type = Shape::CIRCLE;
@@ -433,7 +433,7 @@ ServerWObject* Region::getSWObjectAt(float x_coordinate, float y_coordinate, sho
 	s.m_coordinate_x=x_coordinate;
 	s.m_coordinate_y=y_coordinate;
 	
-	list<ServerWObject*> l;
+	list<WorldObject*> l;
 	l.clear();
 	getSWObjectsInShape ( &s, &l,layer,group );
 	if (l.empty())
@@ -448,11 +448,11 @@ ServerWObject* Region::getSWObjectAt(float x_coordinate, float y_coordinate, sho
 
 
 
-void Region::getSWObjectsOnLine( float xstart, float ystart, float xend, float yend,  list<ServerWObject*>* result,short layer, short group , ServerWObject* omit)
+void Region::getSWObjectsOnLine( float xstart, float ystart, float xend, float yend,  list<WorldObject*>* result,short layer, short group , WorldObject* omit)
 {
 	Gridunit* gu=0;
-	ServerWObject* wo=0;
-	ServerWObject** arr=0;
+	WorldObject* wo=0;
+	WorldObject** arr=0;
 	WorldObject::Geometry* wob=0;
 	Shape* s=0;
 	int k;
@@ -565,7 +565,7 @@ void Region::getProjectilesOnScreen(float center_x,float center_y, list<DmgProje
 	}
 }
 
-bool Region::insertSWObject (ServerWObject* object, float x, float y)
+bool Region::insertSWObject (WorldObject* object, float x, float y)
 {
 	bool result = true;
 	
@@ -654,7 +654,7 @@ bool  Region::insertProjectile(DmgProjectile* object, float x, float y)
 	return true;
 }
 
-bool  Region::deleteSWObject (ServerWObject* object)
+bool  Region::deleteSWObject (WorldObject* object)
 {
 	bool result = true;
 	 
@@ -694,7 +694,7 @@ bool  Region::deleteSWObject (ServerWObject* object)
 	return result;
 }
 
-bool Region::moveSWObject(ServerWObject* object, float x, float y)
+bool Region::moveSWObject(WorldObject* object, float x, float y)
 {
 	bool result = true;
 	// Wenn NULL Zeiger übergeben -> Fehler anzeigen
@@ -737,7 +737,7 @@ bool Region::moveSWObject(ServerWObject* object, float x, float y)
 }
 
 
-bool Region::changeObjectGroup(ServerWObject* object,WorldObject::Group group )
+bool Region::changeObjectGroup(WorldObject* object,WorldObject::Group group )
 {
 	bool result = true;
 	 
@@ -769,8 +769,8 @@ void Region::update(float time)
 	DEBUG5("\nUpdate aller WeltObjekte starten\n");
 	//DEBUG("m_players %p",m_players);
 	// Iterator zum durchmustern einer solchen Liste
-	map<int,ServerWObject*>::iterator iter;
-	ServerWObject* object;
+	map<int,WorldObject*>::iterator iter;
+	WorldObject* object;
 	WorldObject::Geometry* wob;
 	map<int,DmgProjectile*>::iterator it3;
 	
@@ -786,7 +786,7 @@ void Region::update(float time)
 		it3->second->clearEventMask();
 	}
 	
-	// Durchmustern aller ServerWObjects
+	// Durchmustern aller WorldObjects
 	for (iter =m_objects->begin(); iter!=m_objects->end(); )
 	{
 		object = iter->second;
@@ -919,7 +919,7 @@ void Region::getRegionData(CharConv* cv)
 	cv->toBuffer<short>((short) m_static_objects->size());
 	
 	// statische Objekte in den Puffer eintragen
-	map<int,ServerWObject*>::iterator it;
+	map<int,WorldObject*>::iterator it;
 	for (it = m_static_objects->begin();it!=m_static_objects->end();++it)
 	{
 		(it->second)->toString(cv);
@@ -932,7 +932,7 @@ void Region::getRegionData(CharConv* cv)
 	cv->toBuffer<short>((short) m_objects->size());
 	
 	// nicht statische Objekte in den Puffer eintragen
-	map<int,ServerWObject*>::iterator jt;
+	map<int,WorldObject*>::iterator jt;
 	for (jt = m_objects->begin();jt!=m_objects->end();++jt)
 	{
 		DEBUG5("write offset: %i",cv->getBitStream()->GetNumberOfBitsUsed());
@@ -966,14 +966,14 @@ void Region::getRegionData(CharConv* cv)
 }
 
 
-void Region::createObjectFromString(CharConv* cv, map<int,ServerWObject*>* players)
+void Region::createObjectFromString(CharConv* cv, map<int,WorldObject*>* players)
 {
 	char type;
 	char subt[11];
 	subt[10] ='\0';
 	int id;
 	
-	ServerWObject* obj;
+	WorldObject* obj;
 	float x,y;
 	
 	
@@ -1065,7 +1065,7 @@ void Region::createItemFromString(CharConv* cv)
 }
 
 
-void Region::setRegionData(CharConv* cv,map<int,ServerWObject*>* players)
+void Region::setRegionData(CharConv* cv,map<int,WorldObject*>* players)
 {
 	// Groesse der Region wird schon vorher eingelesen
 	// Tiles eintragen
@@ -1080,7 +1080,7 @@ void Region::setRegionData(CharConv* cv,map<int,ServerWObject*>* players)
 	
 	
 	// alle bisherigen statischen Objekte entfernen
-	map<int,ServerWObject*>::iterator it;
+	map<int,WorldObject*>::iterator it;
 	for (it = m_static_objects->begin();it!=m_static_objects->end();it++)
 	{
 		it->second->destroy();
@@ -1091,7 +1091,7 @@ void Region::setRegionData(CharConv* cv,map<int,ServerWObject*>* players)
 	
 	// alle bisherigen nichtstatischen Objekte entfernen
 	// die SpielerObjekte bleiben erhalten, alle anderen werden geloescht
-	map<int,ServerWObject*>::iterator jt;
+	map<int,WorldObject*>::iterator jt;
 	for (jt = m_objects->begin();jt!=m_objects->end();jt++)
 	{
 		if (jt->second->getTypeInfo()->m_type != WorldObject::TypeInfo::TYPE_PLAYER)
@@ -1178,7 +1178,7 @@ bool  Region::dropItem(Item* item, float x, float y)
 	s.m_extent_x = 0.5;
 	s.m_extent_y = 0.5;
 	
-	list<ServerWObject*> res;
+	list<WorldObject*> res;
 	
 	// eine Stelle suchen an der das Item fallen gelassen werden kann
 	while (!fields.empty())

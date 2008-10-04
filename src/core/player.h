@@ -415,7 +415,7 @@ protected:
  * \param goaly x-Koordinate des Zieles
  * \param goal Zeiger auf der Zielobjekt, ist NULL wenn kein Zielobjekt existiert
 	 */
-	virtual void performActionCritPart(float goalx, float goaly, ServerWObject* goal);
+	virtual void performActionCritPart(float goalx, float goaly, WorldObject* goal);
 	
 	/**
 	 * \var std::string m_name

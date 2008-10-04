@@ -50,8 +50,8 @@ Monster::Monster(World* world, unsigned int id,MonsterBasicData& data)
 	getGeometry()->m_layer = data.m_layer;
 	getGeometry()->m_angle =0;
 
-	m_ai.m_goals = new list<pair<ServerWObject*,float> >;
-	m_ai.m_visible_goals = new list<pair<ServerWObject*,float> >;
+	m_ai.m_goals = new list<pair<WorldObject*,float> >;
+	m_ai.m_visible_goals = new list<pair<WorldObject*,float> >;
 	m_ai.m_state = Ai::INACTIVE;
 	calcBaseAttrMod();
 }
@@ -71,8 +71,8 @@ bool Monster::destroy()
 bool Monster::init()
 {
 	//eigene Initialisierung
-	m_ai.m_goals = new list<pair<ServerWObject*,float> >;
-	m_ai.m_visible_goals = new list<pair<ServerWObject*,float> >;
+	m_ai.m_goals = new list<pair<WorldObject*,float> >;
+	m_ai.m_visible_goals = new list<pair<WorldObject*,float> >;
 
 	// Basistyp setzen
 	getTypeInfo()->m_type = TypeInfo::TYPE_MONSTER;
@@ -122,14 +122,14 @@ void Monster::updateCommand()
 	// moegliche Ziele ermitteln
 
 	// Liste der Spieler
-	map<int,ServerWObject*>* players = getRegion()->getPlayers();
-	list<ServerWObject*> ret;
+	map<int,WorldObject*>* players = getRegion()->getPlayers();
+	list<WorldObject*> ret;
 
-	ServerWObject* pl;
+	WorldObject* pl;
 
 	// Entfernungen und Sichtbarkeit der Ziele ermitteln
 	float dist;
-	for (map<int,ServerWObject*>::iterator it = players->begin(); it!=players->end(); ++it)
+	for (map<int,WorldObject*>::iterator it = players->begin(); it!=players->end(); ++it)
 	{
 		pl = it->second;
 		dist = World::getDistance(getGeometry()->m_shape, pl->getGeometry()->m_shape);
@@ -234,8 +234,8 @@ void Monster::calcBestCommand()
 
 void Monster::evalCommand(Action::ActionType act)
 {
-	list<pair<ServerWObject*,float> >::iterator it;
-	list<pair<ServerWObject*,float> >* goal_list;
+	list<pair<WorldObject*,float> >::iterator it;
+	list<pair<WorldObject*,float> >* goal_list;
 	Creature* cgoal=0;
 
 	float dist;
@@ -352,7 +352,7 @@ void Monster::die()
 		//schauen ob dieser noch lebt, wenn ja gainExperience bei ihm aufrufen mit der _experience dieser Instanz
 	
 		// Object per ID von der World holen
-		ServerWObject* object;
+		WorldObject* object;
 		object = getWorld()->getSWObject(id,getGridLocation()->m_region);
 	
 		if (object!=0)
@@ -368,7 +368,7 @@ void Monster::die()
 	
 				pl->gainExperience((int) ceil(pow(1.5,min(pl->getBaseAttrMod()->m_level,getBaseAttr()->m_level)-1)*2));
 	
-				list<ServerWObject*> ret;
+				list<WorldObject*> ret;
 				Shape s;
 				s.m_type = Shape::CIRCLE;
 				s.m_radius = 20;
@@ -377,7 +377,7 @@ void Monster::die()
 	
 				getWorld()->getSWObjectsInShape(&s, getGridLocation()->m_region, &ret, Geometry::LAYER_AIR, CREATURE);
 	
-				list<ServerWObject*>::iterator i;
+				list<WorldObject*>::iterator i;
 				
 				for (i=ret.begin();i!=ret.end();i++)
 				{

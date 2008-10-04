@@ -17,7 +17,6 @@
 ./core/creature.o
 ./core/pathfind.o
 ./core/fixedobject.o
-./core/serverwobject.o
 ./core/player.o
 ./core/warrior.o
 ./core/monster.o

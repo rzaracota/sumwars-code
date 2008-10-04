@@ -10,13 +10,13 @@ Gridunit::Gridunit()
 
 }
 
-bool Gridunit::insertObject(ServerWObject* object)
+bool Gridunit::insertObject(WorldObject* object)
 {
 	// Ebene in der das Objekt eingeordnet wird
 	WorldObject::Group g = getObjectGroup(object);
 
 	// Zeiger auf Array in das eingefuegt wird
-	ServerWObject ** arr = getObjects(g);
+	WorldObject ** arr = getObjects(g);
 	
 	// Zeiger auf Anzahl der Objekte in der Ebene
 	short &  np = getObjectsNr(g);
@@ -94,14 +94,14 @@ bool Gridunit::insertObject(ServerWObject* object)
 	*/
 }
 
-bool  Gridunit::moveObject(ServerWObject* object,WorldObject::Group group )
+bool  Gridunit::moveObject(WorldObject* object,WorldObject::Group group )
 {
 	bool ret = deleteObject(object);
 	if (ret==false)
 		return false;
 	
 	// Zeiger auf Array in das eingefuegt wird
-	ServerWObject ** arr = getObjects(group);
+	WorldObject ** arr = getObjects(group);
 	
 	// Zeiger auf Anzahl der Objekte in der Ebene
 	short &  np = getObjectsNr(group);
@@ -120,13 +120,13 @@ bool  Gridunit::moveObject(ServerWObject* object,WorldObject::Group group )
 	}
 }
 
-bool Gridunit::deleteObject(ServerWObject* object, short index)
+bool Gridunit::deleteObject(WorldObject* object, short index)
 {
 	// Ebene aus der geloescht werden soll
 	WorldObject::Group g = getObjectGroup(object);
 	
 	// Zeiger auf Array aus dem geloescht wird
-	ServerWObject ** arr = getObjects(g);
+	WorldObject ** arr = getObjects(g);
 	
 	// Zeiger auf Anzahl der Objekte in der Ebene
 	short &  np = getObjectsNr(g);

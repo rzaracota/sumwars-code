@@ -503,7 +503,7 @@ void Document::onLeftMouseButtonClick(float x, float y)
 int Document::getObjectAt(float x,float y)
 {
 	// der lokale Spieler
-	ServerWObject* pl = m_world->getLocalPlayer();
+	WorldObject* pl = m_world->getLocalPlayer();
 	if (pl==0)
 		return 0;
 
@@ -512,7 +512,7 @@ int Document::getObjectAt(float x,float y)
 	if (reg ==0)
 		return 0;
 
-	ServerWObject* obj = reg->getSWObjectAt(x,y);
+	WorldObject* obj = reg->getSWObjectAt(x,y);
 	if (obj != 0)
 		return obj->getId();
 

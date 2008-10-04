@@ -309,9 +309,9 @@ void WindowMain::DisplayFunc ()
 	}
 */
 
-	list<ServerWObject*> stat_objs;
-	list<ServerWObject*> obj;
-	list<ServerWObject*>::iterator it;
+	list<WorldObject*> stat_objs;
+	list<WorldObject*> obj;
+	list<WorldObject*>::iterator it;
 	Shape s;
 	s.m_coordinate_x = x;
 	s.m_coordinate_y = y;
@@ -319,7 +319,7 @@ void WindowMain::DisplayFunc ()
 	s.m_extent_x = 10;
 	s.m_extent_y = 10;
 	
-	ServerWObject* wo, *cwo;
+	WorldObject* wo, *cwo;
 	Creature* cr;
 	
 	region->getSWObjectsInShape(&s,&stat_objs, WorldObject::Geometry::LAYER_ALL,WorldObject::FIXED);

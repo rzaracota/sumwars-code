@@ -2,7 +2,7 @@
 #define SPAWNPOINT_H
 #include <string>
 
-#include "serverwobject.h"
+#include "worldobject.h"
 #include "random.h"
 #include "objectfactory.h"
 #include <list>
@@ -11,7 +11,7 @@
  * \class Spawnpoint
  * \brief Dieses Objekt stellt einen Ort dar, an dem Monster die Welt betreten
  */
-class Spawnpoint : public ServerWObject {
+class Spawnpoint : public WorldObject {
 /**
 	 * Public stuff
  */

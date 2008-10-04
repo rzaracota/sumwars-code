@@ -1,7 +1,7 @@
 #ifndef GRIDUNIT_H
 #define GRIDUNIT_H
 
-#include "serverwobject.h"
+#include "worldobject.h"
 #include <list>
 #include <map>
 #include "dropitem.h"
@@ -23,7 +23,7 @@ struct Gridunit
 	 * \var m_dead[20]
 	 * \brief Liste der toten Spieler auf dem Feld
 	 */
-	ServerWObject* m_dead[MAX_GRIDUNIT_OBJ];
+	WorldObject* m_dead[MAX_GRIDUNIT_OBJ];
 
 	/**
 	 * \var m_nr_dead
@@ -36,7 +36,7 @@ struct Gridunit
 	 * \brief Liste der festen Objekte auf dem Feld
 	 */
 
-	ServerWObject* m_fixed[MAX_GRIDUNIT_OBJ];
+	WorldObject* m_fixed[MAX_GRIDUNIT_OBJ];
 
 	/**
 	 * \var m_nr_fixed
@@ -48,7 +48,7 @@ struct Gridunit
 	 * \var m_creature
 	 * \brief Liste der Kreaturen auf dem Feld
 	 */
-	ServerWObject* m_creature[MAX_GRIDUNIT_OBJ];
+	WorldObject* m_creature[MAX_GRIDUNIT_OBJ];
 
 	/**
 	 * \var m_nr_creature
@@ -104,7 +104,7 @@ struct Gridunit
 		 * \param layer Schicht, deren Objekte ausgegeben werden sollen. Muss eines der folgenden sein: LAYER_FIXED, LAYER_CREATURE,LAYER_DEAD
 		 * \return Array mit Zeigern auf die Objekte
 		 */
-		ServerWObject** getObjects(WorldObject::Group group)
+		WorldObject** getObjects(WorldObject::Group group)
 		{
 			if (group == WorldObject::CREATURE) return m_creature;
 			else if (group == WorldObject::FIXED) return m_fixed;
@@ -113,29 +113,29 @@ struct Gridunit
 		}
 
 		/**
-		 * \fn bool insertObject(ServerWObject* object)
+		 * \fn bool insertObject(WorldObject* object)
 		 * \brief Fuegt das angegebenen Objekt in das Feld ein
 		 * \param object einzufuegendes Objekt
 		 * return gibt an, ob die Operation erfolgreich war
 		 */
-		bool insertObject(ServerWObject* object);
+		bool insertObject(WorldObject* object);
 
 		/**
-		 * \fn deleteObject(ServerWObject* object, short index=-1)
+		 * \fn deleteObject(WorldObject* object, short index=-1)
 		 * \brief Loescht das angegebene Objekt aus dem Feld
 		 * \param object zu loeschendes Objekt
 		 * \param index Index des Objektes im Array. Angabe beschleunigt die Funktion, ist aber optional
 		 * \return gibt an, ob die Operation erfolgreich war
 		 */
-		bool deleteObject(ServerWObject* object, short index=-1);
+		bool deleteObject(WorldObject* object, short index=-1);
 
 		/**
-		 * \fn bool moveObject(ServerWObject* object,WorldObject::Group group )
+		 * \fn bool moveObject(WorldObject* object,WorldObject::Group group )
 		 * \brief verschiebt das Objekt in die angegebene Gruppe
 		 * \param object das zu verschiebende Objekt
 		 * \param group Gruppe in die das Objekt verschoben wird
 		 */
-		bool moveObject(ServerWObject* object,WorldObject::Group group );
+		bool moveObject(WorldObject* object,WorldObject::Group group );
 		
 
 };

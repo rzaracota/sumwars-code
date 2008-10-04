@@ -16,20 +16,20 @@ class World;
 
 /**
  * \class ObjectFactory
- * \brief Erzeugt Objekte vom Typ ServerWObject
+ * \brief Erzeugt Objekte vom Typ WorldObject
  */
 class ObjectFactory
 {
 	public:
 		
 	/**
-	 * \fn static ServerWObject* createObject(WorldObject::TypeInfo::ObjectType type, WorldObject::TypeInfo::ObjectSubtype subtype, int id=0)
+	 * \fn static WorldObject* createObject(WorldObject::TypeInfo::ObjectType type, WorldObject::TypeInfo::ObjectSubtype subtype, int id=0)
 	 * \brief Erzeugt ein Objekt des angefordertens Typs/Subtyps
 	 * \param type Typ des Objektes
 	 * \param subtype Subtyp des Objektes
 	 * \param id ID des Objektes. Wenn id==0 wird eine neue ID generiert
 	 */
-		static ServerWObject* createObject(WorldObject::TypeInfo::ObjectType type, WorldObject::TypeInfo::ObjectSubtype subtype, int id=0);
+	static WorldObject* createObject(WorldObject::TypeInfo::ObjectType type, WorldObject::TypeInfo::ObjectSubtype subtype, int id=0);
 	
 	/**
 	 * \var static World* m_world

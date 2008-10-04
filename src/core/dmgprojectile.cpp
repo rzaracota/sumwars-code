@@ -111,9 +111,9 @@ bool DmgProjectile::update(float time)
 	// true, wenn Timer die Grenze erreicht
 	bool lim = false;
 	// Liste der getroffenen Objekte
-	list<ServerWObject*> hitobj;
-	list<ServerWObject*>::iterator i;
-	ServerWObject* hit;
+	list<WorldObject*> hitobj;
+	list<WorldObject*>::iterator i;
+	WorldObject* hit;
 
 	// aktuelle Position
 	float x;
@@ -303,9 +303,9 @@ bool DmgProjectile::update(float time)
 
 void DmgProjectile::handleFlying(float dtime)
 {
-	list<ServerWObject*> hitobj;
-	list<ServerWObject*>::iterator i;
-	ServerWObject* hit;
+	list<WorldObject*> hitobj;
+	list<WorldObject*>::iterator i;
+	WorldObject* hit;
 	float x;
 	float y;
 	float xnew, ynew;
@@ -675,9 +675,9 @@ void DmgProjectile::handleFlying(float dtime)
 
 void DmgProjectile::handleGrowing(float dtime)
 {
-	list<ServerWObject*> hitobj;
-	list<ServerWObject*>::iterator i;
-	ServerWObject* hit;
+	list<WorldObject*> hitobj;
+	list<WorldObject*>::iterator i;
+	WorldObject* hit;
 	float x;
 	float y;
 	float xnew, ynew;
@@ -770,9 +770,9 @@ void DmgProjectile::handleGrowing(float dtime)
 void DmgProjectile::handleStable(float dtime)
 {
 
-	list<ServerWObject*> hitobj;
-	list<ServerWObject*>::iterator i;
-	ServerWObject* hit;
+	list<WorldObject*> hitobj;
+	list<WorldObject*>::iterator i;
+	WorldObject* hit;
 
 	// aktuelle Position
 	float x;

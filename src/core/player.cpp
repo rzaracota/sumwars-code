@@ -99,7 +99,7 @@ bool Player::onGamefieldClick(ClientCommand* command)
 	int dist;
 	bool meleedir = false;
 	Party* p, *p2;
-	ServerWObject* wo;
+	WorldObject* wo;
 	WorldObject::Relation rel;
 
 	// Actionen auf self brauchen kein Zielobjekt
@@ -761,7 +761,7 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 	DEBUG5("Kommando (%f %f) button: %i id: %i action: %i",command->m_coordinate_x,command->m_coordinate_y,command->m_button,command->m_id, command->m_action);
 
 	Party* p, *p2;
-	ServerWObject* wo;
+	WorldObject* wo;
 
 	Item* si;
 	DropSlot ds;
@@ -1292,7 +1292,7 @@ bool Player::update(float time)
 	return true;
 }
 
-void Player::performActionCritPart(float goalx, float goaly, ServerWObject* goal)
+void Player::performActionCritPart(float goalx, float goaly, WorldObject* goal)
 {
 	if (getAction()->m_type == Action::TAKE_ITEM)
 	{
@@ -1345,7 +1345,7 @@ void Player::sendGameData()
 	CharConv cv;
 	//DEBUG5("packed bytes: %i bytes",cv.getBitStream()->GetNumberOfBitsUsed());
 	
-	list<ServerWObject*> wobjs;
+	list<WorldObject*> wobjs;
 	wobjs.clear();
 
 	// Ausschnitt der Welt, der fuer den Spieler sichtbar ist
@@ -1365,7 +1365,7 @@ void Player::sendGameData()
 	
 	
 	// Objekte einpacken
-	for( list<ServerWObject*>::iterator i=wobjs.begin() ; i!=wobjs.end() ; )
+	for( list<WorldObject*>::iterator i=wobjs.begin() ; i!=wobjs.end() ; )
 	{
 		// Objekt in das Paket packen
 		obj = (WorldObject*) (*i);
@@ -1411,7 +1411,7 @@ void Player::sendGameData()
 
 
 	// Objekte einpacken
-	for( list<ServerWObject*>::iterator i=wobjs.begin() ; i!=wobjs.end() ; ++i)
+	for( list<WorldObject*>::iterator i=wobjs.begin() ; i!=wobjs.end() ; ++i)
 	{
 		// Objekt in das Paket packen
 		obj = (WorldObject*) (*i);

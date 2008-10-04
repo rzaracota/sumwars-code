@@ -8,7 +8,7 @@
 #include "itemloader.h"
 #include "objectloader.h"
 #include "document.h"
-#include "serverwobject.h"
+#include "worldobject.h"
 // TODO : include anpassen (es wird nur ein Spieler allgemein benoetigt)
 
 
@@ -135,10 +135,10 @@ class Scene
 	void updateObjects();
 
 	/**
-	 * \fn void updateObject(ServerWObject* obj);
+	 * \fn void updateObject(WorldObject* obj);
 	 * \brief Fuegt das Objekt in die Szene ein
 	 */
-	void updateObject(ServerWObject* obj);
+	void updateObject(WorldObject* obj);
 
 
 	/**

@@ -10,7 +10,7 @@
 #include "event.h"
 
 class World;
-class ServerWObject;
+class WorldObject;
 
 /**
  * \class DmgProjectile
@@ -265,7 +265,7 @@ class DmgProjectile : public  Projectile
 };
 
 
-#include "serverwobject.h"
+#include "worldobject.h"
 #include "world.h"
 
 
