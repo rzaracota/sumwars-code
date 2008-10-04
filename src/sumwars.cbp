@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="sumwars" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output=".\sumwars" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj\Debug\" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+					<Add option="-D_DEBUG" />
+					<Add option="-DDEBUG_LEVEL=5" />
+				</Compiler>
+				<Linker>
+					<Add library="OgreMain_d" />
+					<Add library="OIS_d" />
+					<Add library="OgreGUIRenderer_d" />
+					<Add library="CEGUIBase_d" />
+				</Linker>
+			</Target>
+			<Target title="Release">
+				<Option output=".\sumwars" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj\Release\" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add option="-DNDEBUG" />
+					<Add option="-DDEBUG_LEVEL=1" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add library="OgreMain" />
+					<Add library="OIS" />
+					<Add library="OgreGUIRenderer" />
+					<Add library="CEGUIBase" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-mthreads" />
+			<Add option="-fmessage-length=0" />
+			<Add option="-fexceptions" />
+			<Add option="-fident" />
+			<Add option="-DWIN32" />
+			<Add option="-D_WINDOWS" />
+			<Add directory="$(OGRE_HOME)\include" />
+			<Add directory="$(OGRE_HOME)\samples\include" />
+			<Add directory="$(OGRE_HOME)\samples\refapp\include" />
+			<Add directory=".\core" />
+			<Add directory=".\gui" />
+		</Compiler>
+		<Linker>
+			<Add option="-Wl,--enable-runtime-pseudo-reloc" />
+			<Add option="-Wl,--enable-auto-image-base" />
+			<Add option="-Wl,--add-stdcall-alias" />
+			<Add library="libpthreadGCE2.a" />
+			<Add library="libRakNet.a" />
+			<Add library="libwsock32.a" />
+			<Add library="libws2_32.a" />
+			<Add directory="$(OGRE_HOME)\lib" />
+			<Add directory="$(OGRE_HOME)\bin\Debug" />
+			<Add directory="$(OGRE_HOME)\bin\Release" />
+		</Linker>
+		<Unit filename="core\action.cpp" />
+		<Unit filename="core\action.h" />
+		<Unit filename="core\archer.cpp" />
+		<Unit filename="core\archer.h" />
+		<Unit filename="core\charconv.h" />
+		<Unit filename="core\clientnetwork.cpp" />
+		<Unit filename="core\clientnetwork.h" />
+		<Unit filename="core\command.cpp" />
+		<Unit filename="core\command.h" />
+		<Unit filename="core\creature.cpp" />
+		<Unit filename="core\creature.h" />
+		<Unit filename="core\creaturestruct.h" />
+		<Unit filename="core\damage.cpp" />
+		<Unit filename="core\damage.h" />
+		<Unit filename="core\debug.cpp" />
+		<Unit filename="core\debug.h" />
+		<Unit filename="core\dmgprojectile.cpp" />
+		<Unit filename="core\dmgprojectile.h" />
+		<Unit filename="core\document.cpp" />
+		<Unit filename="core\document.h" />
+		<Unit filename="core\dropitem.cpp" />
+		<Unit filename="core\dropitem.h" />
+		<Unit filename="core\dropslot.h" />
+		<Unit filename="core\event.h" />
+		<Unit filename="core\fixedobject.cpp" />
+		<Unit filename="core\fixedobject.h" />
+		<Unit filename="core\gettext.h" />
+		<Unit filename="core\gridunit.cpp" />
+		<Unit filename="core\gridunit.h" />
+		<Unit filename="core\item.cpp" />
+		<Unit filename="core\item.h" />
+		<Unit filename="core\itemfactory.cpp" />
+		<Unit filename="core\itemfactory.h" />
+		<Unit filename="core\itemlist.cpp" />
+		<Unit filename="core\itemlist.h" />
+		<Unit filename="core\itemloader.cpp" />
+		<Unit filename="core\itemloader.h" />
+		<Unit filename="core\mage.cpp" />
+		<Unit filename="core\mage.h" />
+		<Unit filename="core\matrix2d.h" />
+		<Unit filename="core\monster.cpp" />
+		<Unit filename="core\monster.h" />
+		<Unit filename="core\monsterbase.h" />
+		<Unit filename="core\network.cpp" />
+		<Unit filename="core\network.h" />
+		<Unit filename="core\networkstruct.cpp" />
+		<Unit filename="core\networkstruct.h" />
+		<Unit filename="core\objectfactory.cpp" />
+		<Unit filename="core\objectfactory.h" />
+		<Unit filename="core\objectloader.cpp" />
+		<Unit filename="core\objectloader.h" />
+		<Unit filename="core\party.cpp" />
+		<Unit filename="core\party.h" />
+		<Unit filename="core\pathfind.cpp" />
+		<Unit filename="core\pathfind.h" />
+		<Unit filename="core\player.cpp" />
+		<Unit filename="core\player.h" />
+		<Unit filename="core\priest.cpp" />
+		<Unit filename="core\priest.h" />
+		<Unit filename="core\projectile.cpp" />
+		<Unit filename="core\projectile.h" />
+		<Unit filename="core\random.cpp" />
+		<Unit filename="core\random.h" />
+		<Unit filename="core\region.cpp" />
+		<Unit filename="core\region.h" />
+		<Unit filename="core\serveraction.h" />
+		<Unit filename="core\servernetwork.cpp" />
+		<Unit filename="core\servernetwork.h" />
+		<Unit filename="core\serverwobject.cpp" />
+		<Unit filename="core\serverwobject.h" />
+		<Unit filename="core\spawnpoint.cpp" />
+		<Unit filename="core\spawnpoint.h" />
+		<Unit filename="core\tiles.h" />
+		<Unit filename="core\timer.h" />
+		<Unit filename="core\trade.cpp" />
+		<Unit filename="core\trade.h" />
+		<Unit filename="core\warrior.cpp" />
+		<Unit filename="core\warrior.h" />
+		<Unit filename="core\world.cpp" />
+		<Unit filename="core\world.h" />
+		<Unit filename="core\worldobject.cpp" />
+		<Unit filename="core\worldobject.h" />
+		<Unit filename="gui\application.cpp" />
+		<Unit filename="gui\application.h" />
+		<Unit filename="gui\main_gui.cpp" />
+		<Unit filename="gui\mainwindow.cpp" />
+		<Unit filename="gui\mainwindow.h" />
+		<Unit filename="gui\scene.cpp" />
+		<Unit filename="gui\scene.h" />
+		<Unit filename="tinyxml\tinystr.cpp" />
+		<Unit filename="tinyxml\tinystr.h" />
+		<Unit filename="tinyxml\tinyxml.cpp" />
+		<Unit filename="tinyxml\tinyxml.h" />
+		<Unit filename="tinyxml\tinyxmlerror.cpp" />
+		<Unit filename="tinyxml\tinyxmlparser.cpp" />
+		<Extensions>
+			<code_completion />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
