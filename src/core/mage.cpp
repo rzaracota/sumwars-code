@@ -22,9 +22,9 @@
 
 Mage::Mage(World* world, int id) : Player(world, id)
 {
-	bool tmp = init();
+	init();
 }
-	
+
 
 
 Mage::~Mage()
@@ -38,11 +38,11 @@ bool Mage::init ()
 
 	CreatureBaseAttr* bas = getBaseAttr();
 	CreatureDynAttr* dyn = getDynAttr();
-	
-	
+
+
 	dyn->m_experience=0;
 	dyn->m_health = 100;
-	
+
 	bas->m_max_experience = 100;
 	bas->m_level =60;
 	bas->m_max_health = 100;
@@ -69,7 +69,7 @@ bool Mage::init ()
 	int i;
 	for (i=1;i<6;i++)
 		bas->m_abilities[i]=0;
-	
+
 	// Debugging
 	bas->m_abilities[3] = 0xffffff;
 	// entzuenden
@@ -78,22 +78,22 @@ bool Mage::init ()
 	//bas->m_abilities[3] = 0x7fff7f;
 	// Ionisierung
 	//bas->m_abilities[3] = 0xff7f7f;
-	
+
 	// Basisfaehigkeiten (normaler Angriff etc) erlauben
 	bas->m_abilities[0] = 0x3f4f;
 	bas->m_attack_range =20;
-	
+
 	m_base_action = Action::MAGIC_ATTACK;
 	m_left_action = Action::MAGIC_ATTACK;
 	m_right_action = Action::MAGIC_ATTACK;
-	
-	
+
+
 	bas->m_special_flags=0;
 
 	m_name.assign("Gandalf");
 	// Modifizierte Basisattribute erzeugen
 	calcBaseAttrMod();
-	
+
 	return true;
 }
 
@@ -101,7 +101,7 @@ bool Mage::init ()
 bool Mage::update(float time)
 {
 	// Magespezifische update Routine
-	
+
 	// update von User aufrufen
 	Player::update(time);
 	return true;

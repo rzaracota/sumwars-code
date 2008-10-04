@@ -75,7 +75,7 @@
  * \class Document
  * \brief Diese Klasse enthaelt alle Daten fuer Repraesentation der Spielwelt auf der Clientseite.
  *
- * 
+ *
  */
 
 typedef int KeyCode;
@@ -86,7 +86,7 @@ class Document
 
 	public:
 
-	
+
 
 
 	/**
@@ -104,13 +104,13 @@ class Document
 		RUNNING =3,
 
 		SHUTDOWN_REQUEST =4,
-  
+
 		SHUTDOWN_WRITE_SAVEGAME=8,
 
 		SHUTDOWN =5,
 
 		DISCONNECTED =6,
-  
+
  		START_SERVER =7,
 	};
 
@@ -177,7 +177,7 @@ class Document
 	};
 
 
-	
+
 	/**
 	 * \struct GUIState
 	 * \brief Informationen zum aktuellen Zustand der GUI
@@ -295,8 +295,8 @@ class Document
 	 * Legt ein neues Document-Objekt an
 	 */
 	Document();
-	
-	
+
+
 	/**
 	 * \fn ~Document()
 	 * \brief Destruktor
@@ -332,7 +332,7 @@ class Document
 	 */
 	static void* writeSaveFile(void* doc_ptr);
 
-	
+
 	/**
 	 * \fn GUISTate* getGUIState()
 	 * \brief Gibt Zustand der GUI Datenfelder zurueck
@@ -399,7 +399,7 @@ class Document
 	 */
 	void setLeftAction(Action::ActionType a);
 
-	
+
 	/**
 	 * \fn Action::ActionType getLeftAction()
 	 * \brief Gibt die Aktion, die durch die linke Maustaste ausgeloest wird, zurueck
@@ -417,7 +417,7 @@ class Document
 	 */
 	void setRightAction(Action::ActionType a);
 
-	
+
 	/**
 	 * \fn Action::ActionType getRightAction()
 	 * \brief Gibt die Aktion, die durch die rechte Maustaste ausgeloest wird, zurueck
@@ -439,9 +439,9 @@ class Document
 		return m_drop_items;
 	}
 */
-	
+
 	/**
-	/* \fn void setServer(bool server)
+	 * \fn void setServer(bool server)
 	 * \brief Stellt ein ob das Spiel der Server ist
 	 */
 	void setServer(bool server)
@@ -620,7 +620,7 @@ class Document
 	 * \brief Baut Verbindung zum Server auf
 	 */
 	void startGame(bool server);
-	
+
 	/**
 	 * \fn Player* getLocalPlayer()
 	 * \brief Gibt den Spieler aus, der lokal an dem Rechner ist
@@ -629,10 +629,10 @@ class Document
 	{
 		if (m_world ==0)
 			return 0;
-		
+
 		return static_cast<Player*>(m_world->getLocalPlayer());
 	}
-	
+
 	/**
 	 * \fn World* getWorld()
 	 * \brief gibt Zeiger auf die Spielwelt aus
@@ -659,7 +659,7 @@ class Document
 		 * \brief laedt ein Savegame
 		 */
 		void loadSavegame();
-		
+
 		/**
 		 * \fn void updateContent(float time)
 		 * \brief Aktualisiert den Inhalt des Dokuments
@@ -710,8 +710,8 @@ class Document
 	 */
 	int getObjectAt(float x,float y);
 
-	
-	
+
+
 
 	/**
 	 * \var GUIState m_gui_state
@@ -761,30 +761,30 @@ class Document
 	 * \var set<KeyCode> m_special_keys
 	 * \brief Menge der Tasten, die eine besondere Bedeutung haben und die deswegen nicht frei zugewiesen werden koennen
 	 */
-		set<KeyCode> m_special_keys;
+    set<KeyCode> m_special_keys;
 
 
 
 	char m_server_ip[16];
-		
+
 	/**
 	 * \var World* m_world
 	 * \brief Welt die von dem Spiel simuliert wird
 	 */
 	World* m_world;
-	
+
 	/**
 	 * \var bool m_server
 	 * \brief true, wenn der aktuelle Rechner der Server ist
 	 */
 	bool m_server;
-	
+
 	/**
 	 * \var Timer m_timer
 	 * \brief Timer fuer die Updatezyklen der Spielwelt
 	 */
 	Timer m_timer;
-	
+
 	/**
 	 * \var m_shutdown_timer
 	 * \brief Timer fuer Shutdown

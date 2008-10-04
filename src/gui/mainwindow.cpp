@@ -1215,7 +1215,6 @@ void MainWindow::setupSkilltree()
 	// Rahmen fuer Skilltree Fenster
 
 	// Bestandteile des Charakterfensters hinzufuegen
-	CEGUI::PushButton* btn;
 	CEGUI::Window* label;
 	CEGUI::DefaultWindow* tab;
 
@@ -2099,7 +2098,6 @@ void  MainWindow::updateMainMenu()
 
 	ifstream file;
 	char head[50];
-	int len;
 	int n=0;
 	string name;
 	char lev;
@@ -2998,8 +2996,6 @@ void MainWindow::updateObjectInfo()
 		map<int,string>* itms = m_scene->getDropItems();
 		map<int,string>::iterator it;
 
-		int id=0;
-
 		for (it = itms->begin();it != itms->end();++it)
 		{
 			ent = m_scene_manager->getEntity(it->second);
@@ -3113,10 +3109,6 @@ bool MainWindow::mousePressed(const OIS::MouseEvent &evt, OIS::MouseButtonID btn
 			}
 			else
 			{
-
-				// Koordinaten des Spielers
-				float mpx=player->getGeometry()->m_shape.m_coordinate_x;
-				float mpy=player->getGeometry()->m_shape.m_coordinate_y;
 
 				// Position des Mausklicks relativ zum Viewport
 				Ogre::Viewport* viewport = m_scene->getViewport();
@@ -3276,6 +3268,7 @@ bool MainWindow::onItemMouseButtonPressed(const CEGUI::EventArgs& evt)
 	}
 
 
+    return true;
 }
 
 bool MainWindow::onItemMouseButtonReleased(const CEGUI::EventArgs& evt)
@@ -3287,7 +3280,7 @@ bool MainWindow::onItemMouseButtonReleased(const CEGUI::EventArgs& evt)
 	{
 		DEBUG5("left button released on Item %i",id);
 	}
-
+    return true;
 }
 
 bool MainWindow::onSkillMouseClicked(const CEGUI::EventArgs& evt)
@@ -3320,12 +3313,13 @@ bool MainWindow::onSkillMouseClicked(const CEGUI::EventArgs& evt)
 		DEBUG5("right button pressed on skill %i",id);
 		m_document->setRightAction((Action::ActionType) id);
 	}
-
+    return true;
 }
 
 bool MainWindow::onSwapEquipClicked(const CEGUI::EventArgs& evt)
 {
 	m_document->onSwapEquip();
+    return true;
 }
 
 bool MainWindow::onItemHover(const CEGUI::EventArgs& evt)
@@ -3335,7 +3329,7 @@ bool MainWindow::onItemHover(const CEGUI::EventArgs& evt)
 			static_cast<const CEGUI::MouseEventArgs&>(evt);
 	unsigned int id = we.window->getID();
 	updateItemTooltip(id);
-
+    return true;
 }
 
 bool MainWindow::onAbilityHover(const CEGUI::EventArgs& evt)
@@ -3346,7 +3340,7 @@ bool MainWindow::onAbilityHover(const CEGUI::EventArgs& evt)
 	unsigned int id = we.window->getID();
 	DEBUG5("mouse entered Ability %i",id);
 	updateAbilityTooltip(id);
-
+    return true;
 }
 
 bool MainWindow::onIncreaseAttributeButtonClicked(const CEGUI::EventArgs& evt)
@@ -3356,19 +3350,21 @@ bool MainWindow::onIncreaseAttributeButtonClicked(const CEGUI::EventArgs& evt)
 	unsigned int id = we.window->getID();
 	DEBUG("left button pressed on skill %i",id);
 	m_document->increaseAttribute((CreatureBaseAttr::Attribute) id);
-
+    return true;
 }
 
 bool MainWindow::onButtonPartyClicked(const CEGUI::EventArgs& evt)
 {
 	// Debugging
 	m_document->emitDebugSignal(0);
+	return true;
 }
 
 bool MainWindow::onButtonOpenChatClicked(const CEGUI::EventArgs& evt)
 {
 	// Debugging
 	m_document->emitDebugSignal(1);
+	return true;
 }
 
 bool MainWindow::onSavegameChosen(const CEGUI::EventArgs& evt)
@@ -3387,6 +3383,7 @@ bool MainWindow::onSavegameChosen(const CEGUI::EventArgs& evt)
 		DEBUG("selected Savegame %s", sitm->m_filename.c_str());
 	}
 
+    return true;
 }
 
 bool MainWindow::onSavegameSelected(const CEGUI::EventArgs& evt)
@@ -3397,6 +3394,7 @@ bool MainWindow::onSavegameSelected(const CEGUI::EventArgs& evt)
 		m_document->getGUIState()->m_shown_windows = Document::START_MENU;
 		m_document->setModified(Document::WINDOWS_MODIFIED);
 	}
+    return true;
 }
 
 bool MainWindow::onStartSinglePlayer(const CEGUI::EventArgs& evt)
@@ -3407,6 +3405,7 @@ bool MainWindow::onStartSinglePlayer(const CEGUI::EventArgs& evt)
 
 	// Verbindung aufbauen
 	m_document->setState(Document::START_GAME);
+    return true;
 }
 
 bool MainWindow::onStartMultiPlayer(const CEGUI::EventArgs& evt)
@@ -3418,6 +3417,7 @@ bool MainWindow::onStartMultiPlayer(const CEGUI::EventArgs& evt)
 
 	// Verbindung aufbauen
 	m_document->setState(Document::START_GAME);
+    return true;
 }
 
 bool MainWindow::onStartMultiPlayerHost(const CEGUI::EventArgs& evt)
@@ -3429,6 +3429,7 @@ bool MainWindow::onStartMultiPlayerHost(const CEGUI::EventArgs& evt)
 
 	// Verbindung aufbauen
 	m_document->setState(Document::START_GAME);
+    return true;
 }
 
 

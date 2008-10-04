@@ -26,32 +26,32 @@ class NetworkSlot
 		* Null-String zu
 		*/
 		NetworkSlot(SystemAddress client_adress,RakPeerInterface* peer);
-		
+
 		/**
 		 * \fn ~NetworkSlot()
 		 * \brief Destruktor
 		 */
 		~NetworkSlot();
-		
+
 		/**
 		 * \fn void pushReceivedPacket(Packet* packet)
 		 * \brief Fuegt ein empfangenes Paket in die Warteschlange fuer empfangene Pakete ein
 		 * \param packet empfangenes Paket
 		 */
 		void pushReceivedPacket(Packet* packet);
-		
+
 		/**
 		 * \fn Packet* popReceivedPacket()
 		 * \brief Entnimmt das erste noch nicht abgeholte Paket aus der Warteschlange. Gibt Null zurueck, wenn die Warteschlange leer ist
 		 */
 		Packet* popReceivedPacket();
-		
+
 		/**
 		 * \fn int numberMessages()
 		 * \brief Gibt die Anzahl der empfangenen, noch nicht abgeholten Pakete aus
 		 */
 		int numberMessages();
-		
+
 		/**
 		 * \fn SystemAddress getSystemAddress()
 		 * \brief Gibt die Adresse des mit diesem Slot verbundenen Client aus
@@ -60,7 +60,7 @@ class NetworkSlot
 		{
 			return m_system_address;
 		}
-		
+
 		/**
 		 * \fn NetStatus getStatus()
 		 * \brief Gibt die Status des Slots aus
@@ -69,7 +69,7 @@ class NetworkSlot
 		{
 			return m_status;
 		}
-		
+
 		/**
 		 * \fn void setStatus(NetStatus s)
 		 * \brief Setzt den Status des Slots.
@@ -79,26 +79,26 @@ class NetworkSlot
 		{
 			m_status = s;
 		}
-		
+
 	private:
 		/**
 		* \var queue<Packet*> m_received_packets
 		 * \brief Liste der empfangenen Packete
 		 */
 		queue<Packet*> m_received_packets;
-		
+
 		/**
 		 * \var SystemAddress m_system_adress
 		 * \brief Adresse des Clients der zu diesem Slot gehoert
 		 */
 		SystemAddress m_system_address;
-		
+
 		/**
 		 * \var RakPeerInterface* m_peer
 		 * \brief Netzwerkschnittstelle von RakNet
 		 */
 		RakPeerInterface* m_peer;
-		
+
 		/**
 		 * \var NetStatus m_status
 		 * \brief Status des Slots
@@ -119,12 +119,12 @@ class ServerNetwork: public Network
 		 * \param max_slots maximale Anzahl Clients die der Server akzeptiert
 		 */
 		ServerNetwork(int max_slots);
-		
+
 		/**
-		/* \fn ~ServerNetwork()
+		 * \fn ~ServerNetwork()
 		 * \brief Destruktor
 		 */
-		~ServerNetwork();
+		virtual ~ServerNetwork();
 
 		/**
 		* \fn NetStatus init( int auth_port )
@@ -189,41 +189,41 @@ class ServerNetwork: public Network
 		 * \fn int popNewLoginSlot();
 		* \brief Prueft ob in login Logindaten vorliegen, sonst gibt die Funktion false zurueck
 		* \param login Enthaelt die Login Informationen
-		* \return 
+		* \return
 		*/
 		int popNewLoginSlot();
 
-		
+
 
 
 	private:
-		
+
 		/**
 		 * \fn void pushNewLoginSlot(int slot)
 		 * \brief Fuegt einen Slot der Liste der Slots in denen neu angemeldete Clienten warten hinzu
 		 */
 		void pushNewLoginSlot(int slot);
-		
+
 		/**
 		 * \fn unsigned char getPacketIdentifier(Packet *p)
 		 * \brief Extrahiert aus einem Paket die Identifikationsnummer
 		 */
 		unsigned char getPacketIdentifier(Packet *p);
-		
+
 		/**
 		 * \fn int insertNewSlot(SystemAddress addr)
 		 * \brief Fuegt einen neuen Client hinzu
 		 * \param addr Netzwerkadresse des Client
 		 */
 		int insertNewSlot(SystemAddress addr);
-		
+
 		/**
 		 * \fn int getSlotByAddress(SystemAddress address)
 		 * \brief ermittelt auf der Netzwerkadresse einen Client den Slot auf dem er angemeldet ist
 		 * \param address Netzwerkadresse des Client
 		 */
 		int getSlotByAddress(SystemAddress address);
-		
+
 		/**
 		* \var m_active
 		* \brief Ist der Server gerade in Betrieb
@@ -242,11 +242,11 @@ class ServerNetwork: public Network
 		 */
         int m_max_slots;
 
-		
-		
-		
+
+
+
 		/**
-		/* \var queue<int> m_new_login_slots
+		 * \var queue<int> m_new_login_slots
 		 * \brief Warteliste der Clienten die sich schon angemeldet haben, aber noch nicht in die Welt eingefuegt worden sind
 		 */
 		queue<int> m_new_login_slots;

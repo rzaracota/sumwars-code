@@ -22,7 +22,7 @@
 
 Warrior::Warrior(World* world, int id) : Player(world, id)
 {
-	bool tmp = init();
+	init();
 }
 
 

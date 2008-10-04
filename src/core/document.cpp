@@ -23,7 +23,7 @@
 // Constructors/Destructors
 // Initialisiert Document zu Testzwecken
 Document::Document()
-	: m_special_keys() , m_shortkey_map()
+	:  m_shortkey_map(), m_special_keys()
 {
     /*
 	DEBUG5("reading ip");
@@ -45,8 +45,6 @@ Document::Document()
 	strcpy(m_server_ip,"127.0.0.1");
 
 	m_world =0;
-
-	bool network_error = false;
 
 	// Informationen zu Aktionen initialisieren
 	Action::init();
@@ -137,7 +135,6 @@ void Document::loadSavegame()
 	DEBUG("lese savegame");
 	char head[8];
 	int i;
-	char* bp = head;
 	string fname = "../save/";
 	fname += m_save_file;
 	/*
@@ -727,7 +724,6 @@ void Document::setLeftAction(Action::ActionType act)
 		return;
 
 
-	int acti = (int) act;
 	Action::ActionInfo* aci = Action::getActionInfo(act);
 
 	// Testen ob die Faehigkeit zur Verfuegung steht
@@ -771,7 +767,6 @@ void Document::setRightAction(Action::ActionType act)
 	if (player==0)
 		return;
 
-	int acti = (int) act;
 	Action::ActionInfo* aci = Action::getActionInfo(act);
 
 	// Testen ob die Faehigkeit zur Verfuegung steht
@@ -818,7 +813,6 @@ std::string Document::getAbilityDescription(Action::ActionType ability)
 
 		// Gibt an, ob der Spieler die Faehigkeit besitzt
 		bool avlb = true;
-		short ac = ability;
 		if (!player->checkAbility(ability))
 		{
 			// Spieler besitzt Faehigkeit nicht
@@ -948,6 +942,7 @@ bool  Document::onKeyRelease(KeyCode key)
 	{
 		m_gui_state.m_pressed_key = 0;
 	}
+	return true;
 }
 
 void Document::update(float time)

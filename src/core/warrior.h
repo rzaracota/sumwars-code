@@ -50,8 +50,8 @@ public:
 	 * Legt ein neues Warrior Objekt an.
 	 */
 	Warrior(World* world, int id);
-	
-	
+
+
 	/**
 	 * \fn ~Warrior()
 	 * \brief Destruktor
@@ -63,11 +63,11 @@ public:
 	//Operations
 	/**
 	 * \fn virtual bool init ()
-	 * \brief Initialisiert den Krieger. 
+	 * \brief Initialisiert den Krieger.
 	 * \return bool, der angibt ob die initialisierung erfolgreich war
 	 */
 	virtual bool init ();
-	
+
 	/**
 	 * \fn virtual bool destroy ()
 	 * \brief Zerstoert das Objekt. Die Funktion ist virtuell und wird durch die abgeleiteten Klassen &uuml;berschrieben.
@@ -75,9 +75,9 @@ public:
 	 */
 	virtual bool destroy()
 	{
-		Player::destroy();
+		return Player::destroy();
 	}
-	
+
 	/**
 	 * \fn virtual void calcDamage(ActionType type,Damage& dmg)
 	 * \brief Berechnet den Basisschaden einer Aktion
@@ -86,7 +86,7 @@ public:
 	{
 		Player::calcBaseDamage(act,dmg);
 	}
-	
+
 	/**
 	 * \fn virtual void calcBaseAttrMod()
 	 * \brief Die modifizierten Basisattribute werden neu berechnet. Verwendet die Basisattribute, verwendete Items, sowie temporaere Modifikationen.
@@ -95,8 +95,8 @@ public:
 	{
 		Player::calcBaseAttrMod();
 	}
-	
-	
+
+
 	/**
 	 * \fn bool update (float time)
 	 * \brief Updatefunktion des Kriegers
@@ -106,9 +106,9 @@ public:
 	 * Die Updatefunktion des Kriegers wird in regelm&auml;ssigen Abst&auml;nden von der World aufgerufen und ben&ouml;tigt die Angabe, wie viel Zeit f&uuml;r das Update zur Verf&uuml;gung gestellt wird. Der R&uuml;ckgabewert gibt an ob die Funktion erfolgreich ausgef&uuml;hrt wurde.
 	 */
 	bool update(float time);
-	
+
 	protected:
-	
+
 	/**
 	 * \fn virtual void gainLevel()
 	 * \brief Wird aufgerufen, wenn das Lebewesen ein Levelup erhält. Passt Erfahrung und alle Basisattribute an.
@@ -117,6 +117,6 @@ public:
 	{
 		Player::gainLevel();
 	}
-			
+
 };
 #endif //WARRIOR_H

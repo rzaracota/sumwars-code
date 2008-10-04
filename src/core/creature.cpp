@@ -117,7 +117,7 @@ bool Creature::init()
 
 	//Lebenspunkts auf 1 (debugging)
 	m_dyn_attr.m_health = 1;
-	
+
 	m_event_mask =0;
 
 	return tmp;
@@ -161,7 +161,7 @@ void Creature::die()
 	DEBUG5("object died: %p",this);
 	m_action.m_time =1000;
 	m_action.m_elapsed_time =0;
-	
+
 	m_event_mask |= Event::DATA_ACTION | Event::DATA_STATE;
 }
 
@@ -322,7 +322,7 @@ void Creature::performAction(float &time)
 		return;
 	}
 
-	
+
 	// Reziprokes des Ausfuehrungszeit
 	float rezt = 1/m_action.m_time;
 
@@ -517,7 +517,7 @@ void Creature::performAction(float &time)
 			m_command.m_type = Action::NOACTION;
 			m_action.m_elapsed_time=0;
 			m_command.m_damage_mult = 1;
-			
+
 
 			// Schaden neu berechnen
 			recalcDamage();
@@ -1616,7 +1616,7 @@ void Creature::handleCollision(Shape* s2)
 		getMoveInfo()->m_speed_x *= d*getBaseAttr()->m_step_length/m_action.m_time;
 		getMoveInfo()->m_speed_y *= d*getBaseAttr()->m_step_length/m_action.m_time;
 		DEBUG5("speed %f %f",getMoveInfo()->m_speed_x,getMoveInfo()->m_speed_y);
-		
+
 
 	}
 	m_event_mask |= Event::DATA_MOVE_INFO;
@@ -1639,10 +1639,10 @@ void Creature::updateCommand()
 
 		// Naechstes Kommando auf nichts setzen
 		m_next_command.m_type = Action::NOACTION;
-		
+
 		m_event_mask |= Event::DATA_COMMAND;
 		m_event_mask |= Event::DATA_NEXT_COMMAND;
-			
+
 	}
 
 	// Kommando ausrechnen das evtl aus einem Statusmod resultiert
@@ -1792,9 +1792,9 @@ void Creature::calcAction()
 			}
 			else
 			{
-				m_action.m_type = Action::NOACTION;	
+				m_action.m_type = Action::NOACTION;
 			}
-			
+
 			// Kommando damit abgeschlossen
 			m_command.m_type = Action::NOACTION;
 			m_command.m_damage_mult = 1;
@@ -1885,7 +1885,7 @@ void Creature::calcAction()
 		m_command.m_damage_mult = 1;
 		m_event_mask |= Event::DATA_COMMAND;
 	}
-	
+
 	if (m_action.m_type !=0)
 	{
 		DEBUG5("calc action: %i at %f %f, dir %f %f",m_action.m_type, getGeometry()->m_shape.m_coordinate_x,	getGeometry()->m_shape.m_coordinate_y, getMoveInfo()->m_speed_x,getMoveInfo()->m_speed_y);
@@ -2249,7 +2249,7 @@ void Creature::calcWalkDir(float goalx,float goaly,WorldObject* goal)
 			getMoveInfo()->m_speed_x = dir[0] /l;
 			getMoveInfo()->m_speed_y = dir[1]/l;
 		}
-		
+
 	}
 }
 
@@ -2257,12 +2257,12 @@ bool Creature::update (float time)
 {
 	Timer timer;
 	timer.start();
-	
+
 	if (m_action.m_elapsed_time> m_action.m_time)
 	{
 		DEBUG("elapsed time %f all time %f",m_action.m_elapsed_time,	m_action.m_time);
 	}
-	
+
 	float ptime = time;
 
 	// CreatureDynAttr* dynattr = getDynAttr();
@@ -2377,19 +2377,19 @@ bool Creature::update (float time)
 		if (m_base_attr_mod.m_special_flags & FLAMEARMOR && getWorld()->timerLimit(1))
 		{
 			// Flammenruestung
-			
-			
+
+
 			// Schaden fuer Flammenruestung setzen
 			Damage d;
 			d.m_min_damage[Damage::FIRE] = 500*m_base_attr_mod.m_magic_power*0.0003;
 			d.m_max_damage[Damage::FIRE] = 500*m_base_attr_mod.m_magic_power*0.0005;
 			d.m_multiplier[Damage::FIRE]=1;
 			d.m_attacker_fraction = getTypeInfo()->m_fraction;
-	
+
 			list<WorldObject*> res;
 			res.clear();
 			list<WorldObject*>::iterator it;
-	
+
 			// Kreis um eigenen Mittelpunkt mit Radius eigener Radius plus 1
 			Shape s;
 			s.m_coordinate_x = getGeometry()->m_shape.m_coordinate_x;
@@ -2398,7 +2398,7 @@ bool Creature::update (float time)
 			s.m_radius = getGeometry()->m_shape.m_radius+1;
 			Creature* cr;
 			short reg = getGridLocation()->m_region;
-	
+
 			// Alle Objekte im Kreis suchen
 			getWorld()->getObjectsInShape(&s, reg, &res,Geometry::LAYER_AIR,CREATURE,this);
 			for (it=res.begin();it!=res.end();++it)
@@ -2408,13 +2408,13 @@ bool Creature::update (float time)
 				{
 					cr = (Creature*) (*it);
 					cr->takeDamage(&d);
-	
+
 				}
 			}
-	
+
 		}
 	}
-	
+
 	// Statusmods behandeln
 	if (getState()==STATE_ACTIVE)
 	{
@@ -2428,7 +2428,7 @@ bool Creature::update (float time)
 				m_dyn_attr.m_health -= 500*m_base_attr_mod.m_max_health / 60000;
 				m_event_mask |= Event::DATA_HP;
 			}
-	
+
 			// brennend
 			if (m_dyn_attr.m_status_mod_time[Damage::BURNING]>0)
 			{
@@ -2494,13 +2494,13 @@ bool Creature::update (float time)
 
 						// Aktion ausfuehren
 						performAction(time);
-						
+
 						if (ptime < 1000 && time > 1000)
 						{
 							DEBUG("prev time %f time set to %f",ptime, time);
 							ptime = time;
 						}
-			
+
 
 					}
 				}
@@ -2517,7 +2517,7 @@ bool Creature::update (float time)
 					setState(STATE_DEAD);
 					m_action.m_type = Action::DEAD;
 					m_action.m_time = 1000;
-					
+
 					m_event_mask |= Event::DATA_STATE | Event::DATA_ACTION;
 				}
 				break;
@@ -2529,13 +2529,13 @@ bool Creature::update (float time)
 					setDestroyed(true);
 				}
 
-			default: 
+			default:
 				DEBUG5("unknown state: %i",getState());
 				time=0 ;
 		}
 
 	}
-	
+
 	if (timer.getTime()>10)
 	{
 		DEBUG("object %i update time %f",getId(), timer.getTime());
@@ -3480,7 +3480,7 @@ void Creature::takeDamage(Damage* d)
 		d->m_multiplier[Damage::PHYSICAL] *= 3;
 	}
 
-	
+
 	// Berechnen des Schadens
 
 	// physischer Schaden
@@ -3587,7 +3587,7 @@ void Creature::applyDynAttrMod(CreatureDynAttrMod* mod)
 	{
 		m_dyn_attr.m_health=m_base_attr_mod.m_max_health;
 	}
-	
+
 	if (mod->m_dhealth !=0)
 	{
 		m_event_mask |= Event::DATA_HP;
@@ -3610,7 +3610,7 @@ void Creature::applyBaseAttrMod(CreatureBaseAttrMod* mod, bool add)
 	int i;
 	// Deltawerte dazu addieren
 	float oldmaxhp = m_base_attr_mod.m_max_health;
-	
+
 	m_base_attr_mod.m_armor +=mod->m_darmor;
 	m_base_attr_mod.m_block +=mod->m_dblock;
 	m_base_attr_mod.m_strength +=mod->m_dstrength;
@@ -3623,9 +3623,9 @@ void Creature::applyBaseAttrMod(CreatureBaseAttrMod* mod, bool add)
 	m_base_attr_mod.m_attack_speed += mod->m_ddexterity*3;
 	m_dyn_attr.m_health *= m_base_attr_mod.m_max_health /oldmaxhp;
 
-	
+
 	m_base_attr_mod.m_attack_speed +=mod->m_dattack_speed;
-	
+
 	// Modifikationen feststellen
 	if (mod->m_dwalk_speed!=0 )
 	{
@@ -3669,7 +3669,7 @@ void Creature::applyBaseAttrMod(CreatureBaseAttrMod* mod, bool add)
 	// Flags mit OR hinzufuegen
 	m_base_attr_mod.m_special_flags |= mod->m_xspecial_flags;
 	m_base_attr_mod.m_immunity |= mod->m_ximmunity;
-	
+
 	if (mod->m_xspecial_flags!=0)
 	{
 		m_event_mask |= Event::DATA_FLAGS;
@@ -3692,7 +3692,7 @@ bool Creature::removeBaseAttrMod(CreatureBaseAttrMod* mod)
 	int i;
 	bool ret = false;
 	float oldmaxhp = m_base_attr_mod.m_max_health;
-	
+
 	// Deltas abziehen
 	m_base_attr_mod.m_armor -=mod->m_darmor;
 	m_base_attr_mod.m_block -=mod->m_dblock;
@@ -3704,10 +3704,10 @@ bool Creature::removeBaseAttrMod(CreatureBaseAttrMod* mod)
 	m_base_attr_mod.m_attack_speed -=mod->m_dattack_speed;
 	m_base_attr_mod.m_max_health -= mod->m_dstrength*5;
 	m_base_attr_mod.m_attack_speed -= mod->m_ddexterity*3;
-	
+
 	m_dyn_attr.m_health *= m_base_attr_mod.m_max_health /oldmaxhp;
 
-	
+
 	// Modifikationen feststellen
 	if (mod->m_dwalk_speed!=0)
 	{
@@ -3920,14 +3920,14 @@ void Creature::toString(CharConv* cv)
 	WorldObject::toString(cv);
 	cv->toBuffer((short) getTypeInfo()->m_category);
 	cv->toBuffer((char) getTypeInfo()->m_fraction);
-	
+
 	m_action.toString(cv);
 	m_command.toString(cv);
 	m_next_command.toString(cv);
-	
+
 	cv->toBuffer(m_dyn_attr.m_health);
 	cv->toBuffer(m_base_attr_mod.m_max_health);
-	
+
 	DEBUG5("write offset: %i",cv->getBitStream()->GetNumberOfBitsUsed());
 
 	// Statusveraenderungen
@@ -3945,17 +3945,17 @@ void Creature::toString(CharConv* cv)
 		if (m_dyn_attr.m_status_mod_time[i]>0)
 		{
 			cv->toBuffer(m_dyn_attr.m_status_mod_time[i]);
-		}	
+		}
 	}
-	
+
 	// Effekte
 	for (int i=0;i<NR_EFFECTS;i++)
 	{
 		cv->toBuffer(m_dyn_attr.m_effect_time[i]);
 	}
-	
+
 	cv->toBuffer(getBaseAttrMod()->m_special_flags);
-	
+
 	cv->toBuffer(getBaseAttr()->m_step_length);
 	cv->toBuffer(getBaseAttrMod()->m_attack_speed);
 	cv->toBuffer(getBaseAttrMod()->m_walk_speed);
@@ -3965,12 +3965,12 @@ void Creature::toString(CharConv* cv)
 	cv->toBuffer(m_timer2_max);
 	for (int i=0; i<6; i++)
 	{
-		cv->toBuffer(getBaseAttrMod()->m_abilities[i]);	
+		cv->toBuffer(getBaseAttrMod()->m_abilities[i]);
 	}
 
 	cv->toBuffer(getMoveInfo()->m_speed_x);
 	cv->toBuffer(getMoveInfo()->m_speed_y);
-		
+
 
 }
 
@@ -3981,19 +3981,19 @@ void Creature::fromString(CharConv* cv)
 	short stmp;
 	cv->fromBuffer<short>(stmp);
 	getTypeInfo()->m_category = (TypeInfo::Category) stmp;
-	
+
 	cv->fromBuffer<char>(ctmp);
 	getTypeInfo()->m_fraction = (TypeInfo::Fraction) ctmp;
-	
+
 	m_action.fromString(cv);
 	m_command.fromString(cv);
 	m_next_command.fromString(cv);
-	
+
 	cv->fromBuffer(m_dyn_attr.m_health);
 	cv->fromBuffer(m_base_attr_mod.m_max_health);
 	DEBUG5("read offset: %i",cv->getBitStream()->GetReadOffset());
 
-	
+
 	// Statusveraenderungen
 	cv->fromBuffer<char>(ctmp);
 	char c=0;
@@ -4004,16 +4004,16 @@ void Creature::fromString(CharConv* cv)
 			cv->fromBuffer<float>(m_dyn_attr.m_status_mod_time[i]);
 		}
 	}
-	
 
-	
+
+
 	for (int i=0;i<NR_EFFECTS;i++)
 	{
 		cv->fromBuffer<float>(m_dyn_attr.m_effect_time[i]);
 	}
-	
+
 	cv->fromBuffer(getBaseAttrMod()->m_special_flags);
-	
+
 	cv->fromBuffer(getBaseAttr()->m_step_length);
 	cv->fromBuffer(getBaseAttrMod()->m_attack_speed);
 	cv->fromBuffer(getBaseAttrMod()->m_walk_speed);
@@ -4023,9 +4023,9 @@ void Creature::fromString(CharConv* cv)
 	cv->fromBuffer(m_timer2_max);
 	for (int i=0; i<6; i++)
 	{
-		cv->fromBuffer(getBaseAttrMod()->m_abilities[i]);	
+		cv->fromBuffer(getBaseAttrMod()->m_abilities[i]);
 	}
-	
+
 	cv->fromBuffer(getMoveInfo()->m_speed_x);
 	cv->fromBuffer(getMoveInfo()->m_speed_y);
 }
@@ -4082,18 +4082,18 @@ float Creature::getTimerPercent(int timer)
 	{
 		if (m_timer1_max ==0)
 			return 0;
-		
+
 		return m_timer1 / m_timer1_max;
 	}
-	
+
 	if (timer ==2)
 	{
 		if (m_timer2_max ==0)
 			return 0;
-		
+
 		return m_timer2 / m_timer2_max;
 	}
-	
+
 	return 0;
 }
 
@@ -4104,13 +4104,13 @@ void Creature::writeEvent(Event* event, CharConv* cv)
 	{
 		m_command.toString(cv);
 	}
-	
+
 	if (event->m_data & Event::DATA_ACTION)
 	{
 		m_action.toString(cv);
 		cv->toBuffer(getGeometry()->m_shape.m_coordinate_x);
 		cv->toBuffer(getGeometry()->m_shape.m_coordinate_y);
-		
+
 
 		if (m_action.m_type!=0)
 		{
@@ -4120,17 +4120,17 @@ void Creature::writeEvent(Event* event, CharConv* cv)
 			DEBUG5("sending action: %i at %f %f, dir %f %f goal %f %f",m_action.m_type, getGeometry()->m_shape.m_coordinate_x,	getGeometry()->m_shape.m_coordinate_y, getMoveInfo()->m_speed_x,getMoveInfo()->m_speed_y,goalx,goaly);
 		}
 	}
-	
+
 	if (event->m_data & Event::DATA_HP)
 	{
 		cv->toBuffer(getDynAttr()->m_health);
 	}
-	
+
 	if (event->m_data & Event::DATA_MAX_HP)
 	{
 		cv->toBuffer(getBaseAttrMod()->m_max_health);
 	}
-	
+
 	if (event->m_data & Event::DATA_EFFECTS)
 	{
 		for (int i=0;i<NR_EFFECTS;i++)
@@ -4150,69 +4150,69 @@ void Creature::writeEvent(Event* event, CharConv* cv)
 			}
 		}
 		cv->toBuffer(c);
-		
+
 		for (int i=0;i<NR_STATUS_MODS;i++)
 		{
 			if (m_dyn_attr.m_status_mod_time[i]>0)
 			{
 				cv->toBuffer(m_dyn_attr.m_status_mod_time[i]);
-			}	
+			}
 		}
 	}
-	
+
 	if (event->m_data & Event::DATA_TIMER)
 	{
 		cv->toBuffer(m_timer1_max);
 		cv->toBuffer(m_timer2_max);
 	}
-	
+
 	if (event->m_data & Event::DATA_STATE)
 	{
 		cv->toBuffer((char) getState());
 	}
-	
+
 	if (event->m_data & Event::DATA_WALK_SPEED)
 	{
 		cv->toBuffer(getBaseAttrMod()->m_walk_speed);
 	}
-	
+
 	if (event->m_data & Event::DATA_ATTACK_SPEED)
 	{
 		cv->toBuffer(getBaseAttrMod()->m_attack_speed);
 	}
-	
+
 	if (event->m_data & Event::DATA_NEXT_COMMAND)
 	{
 		m_next_command.toString(cv);
 	}
-	
+
 	if (event->m_data & Event::DATA_ABILITIES)
 	{
 		for (int i=0; i<6; i++)
 		{
-			cv->toBuffer(getBaseAttrMod()->m_abilities[i]);	
-		}	
+			cv->toBuffer(getBaseAttrMod()->m_abilities[i]);
+		}
 	}
-	
+
 	if (event->m_data & Event::DATA_FLAGS )
 	{
 		cv->toBuffer(getBaseAttrMod()->m_special_flags);
 	}
-	
+
 	if (event->m_data & Event::DATA_EXPERIENCE)
 	{
 		cv->toBuffer(getDynAttr()->m_experience);
 	}
-	
+
 	if (event->m_data & Event::DATA_MOVE_INFO)
 	{
-		cv->toBuffer(getMoveInfo()->m_speed_x);	
-		cv->toBuffer(getMoveInfo()->m_speed_y);	
+		cv->toBuffer(getMoveInfo()->m_speed_x);
+		cv->toBuffer(getMoveInfo()->m_speed_y);
 	}
-	
+
 	if (event->m_data & Event::DATA_LEVEL)
 	{
-		cv->toBuffer(getBaseAttr()->m_level);	
+		cv->toBuffer(getBaseAttr()->m_level);
 	}
 }
 
@@ -4225,54 +4225,45 @@ void Creature::processEvent(Event* event, CharConv* cv)
 		m_command.fromString(cv);
 		DEBUG5("got Command %i",m_command.m_type);
 	}
-	
+
 	float  atime = m_action.m_time - m_action.m_elapsed_time;
-	float etime = m_action.m_elapsed_time;
-	char oldact = m_action.m_type;
-	float posx = getGeometry()->m_shape.m_coordinate_x;
-	float posy = getGeometry()->m_shape.m_coordinate_y;
-	float movex = getMoveInfo()->m_speed_x;
-	float movey = getMoveInfo()->m_speed_y;
-	float oldgoalx = posx + movex*atime;
-	float oldgoaly = posy + movey*atime;
-	
+
 	float newx = getGeometry()->m_shape.m_coordinate_x,newy= getGeometry()->m_shape.m_coordinate_y;
 	float newmovex,newmovey;
-	
+
 	bool newact= false;
 	bool newmove = false;
 	float delay = cv->getDelay();
-	
+
 	if (delay>1000)
 	{
 		DEBUG("got packet with delay %f %f",cv->getDelay(),delay);
 	}
 
-	
+
 	if (event->m_data & Event::DATA_ACTION)
 	{
-		
-		
+
+
 		m_action.fromString(cv);
-		
-		float x,y;
+
 		cv->fromBuffer(newx);
 		cv->fromBuffer(newy);
 		newact = true;
 	}
-	
-	
-	
+
+
+
 	if (event->m_data & Event::DATA_HP)
 	{
 		cv->fromBuffer(getDynAttr()->m_health);
 	}
-	
+
 	if (event->m_data & Event::DATA_MAX_HP)
 	{
 		cv->fromBuffer(getBaseAttrMod()->m_max_health);
 	}
-	
+
 	if (event->m_data & Event::DATA_EFFECTS)
 	{
 		for (int i=0;i<NR_EFFECTS;i++)
@@ -4293,87 +4284,87 @@ void Creature::processEvent(Event* event, CharConv* cv)
 			}
 		}
 	}
-	
+
 	if (event->m_data & Event::DATA_TIMER)
 	{
 		cv->fromBuffer(m_timer1_max);
 		cv->fromBuffer(m_timer2_max);
 		m_timer1 = m_timer1_max;
 		m_timer2 = m_timer2_max;
-			
+
 	}
-	
+
 	if (event->m_data & Event::DATA_STATE)
 	{
 		State oldstate = getState();
 		char ctmp;
 		cv->fromBuffer(ctmp);
-		
+
 		if (oldstate != STATE_DIEING && oldstate != STATE_DEAD && (ctmp==STATE_DIEING || ctmp == STATE_DEAD))
 		{
 			die();
 		}
 		setState((State) ctmp);
 		DEBUG5("object %i changed state from %i to %i",getId(),oldstate,ctmp);
-		
-		
+
+
 	}
-	
+
 	if (event->m_data & Event::DATA_WALK_SPEED)
 	{
 		cv->fromBuffer(getBaseAttrMod()->m_walk_speed);
 	}
-	
+
 	if (event->m_data & Event::DATA_ATTACK_SPEED)
 	{
 		cv->fromBuffer(getBaseAttrMod()->m_attack_speed);
 	}
-	
+
 	if (event->m_data & Event::DATA_NEXT_COMMAND)
 	{
 		m_next_command.fromString(cv);
 	}
-	
+
 	if (event->m_data & Event::DATA_ABILITIES)
 	{
 		for (int i=0; i<6; i++)
 		{
-			cv->fromBuffer(getBaseAttrMod()->m_abilities[i]);	
-		}	
+			cv->fromBuffer(getBaseAttrMod()->m_abilities[i]);
+		}
 	}
-	
+
 	if (event->m_data & Event::DATA_FLAGS )
 	{
 		cv->fromBuffer(getBaseAttrMod()->m_special_flags);
 	}
-	
+
 	if (event->m_data & Event::DATA_EXPERIENCE)
 	{
 		cv->fromBuffer(getDynAttr()->m_experience);
 	}
-	
+
 	if (event->m_data & Event::DATA_MOVE_INFO)
 	{
-		cv->fromBuffer(newmovex);	
+		cv->fromBuffer(newmovex);
 		cv->fromBuffer(newmovey);
 		newmove = true;
-		
+
 	}
-	
+
 	if (event->m_data & Event::DATA_LEVEL)
 	{
-		cv->fromBuffer(getBaseAttr()->m_level);	
+		cv->fromBuffer(getBaseAttr()->m_level);
 	}
-	
+
 	if (newmove)
 	{
 		// Zielort der Aktion berechnen
 		float acttime = m_action.m_time - m_action.m_elapsed_time;
 		float goalx = newx + newmovex*(acttime);
 		float goaly = newy + newmovey*(acttime);
-		
+
 		DEBUG5("goal %f %f current pos %f %f",goalx,goaly,getGeometry()->m_shape.m_coordinate_x,getGeometry()->m_shape.m_coordinate_y);
-		
+
 		/*
 		timeval tv;
 		gettimeofday(&tv, NULL);
@@ -4387,12 +4378,12 @@ void Creature::processEvent(Event* event, CharConv* cv)
 		}
 		if (goaltime < 100)
 		{
-			
-			DEBUG5("time to reach goal %f (prev time %f) delay %i",goaltime,atime,cv->getDelay());
-			
+
+			DEBUG5("time to reach goal %f (prev time %f) delay %f",goaltime,atime,cv->getDelay());
+
 		}
 		DEBUG5("previously planned time %f",atime);
-		
+
 		if (goaltime <0)
 		{
 			// wenn man schon lange da sein muesste, Objekt an den Zielort versetzen
@@ -4405,46 +4396,46 @@ void Creature::processEvent(Event* event, CharConv* cv)
 			getMoveInfo()->m_speed_y = (goaly-getGeometry()->m_shape.m_coordinate_y) / goaltime;
 			DEBUG5("new speed %f %f",getMoveInfo()->m_speed_x,getMoveInfo()->m_speed_y);
 		}
-			
+
 	}
-	
+
 	if (newact)
 	{
-	
+
 		m_action.m_elapsed_time += delay;
-		
-		
+
+
 		if (m_action.m_elapsed_time> m_action.m_time)
 		{
 			// Aktion sollte schon beenden sein
 			moveTo(newx,newy);
-			
+
 			m_action.m_type = Action::NOACTION;
 			m_action.m_elapsed_time =0;
-			
+
 		}
 		else
 		{
-		
+
 			if (!newmove && m_action.m_type != Action::NOACTION)
 			{
 				moveTo(newx,newy);
 			}
-			
+
 			if (Action::getActionInfo(m_action.m_type)->m_distance != Action::SELF)
 			{
 				float x = getGeometry()->m_shape.m_coordinate_x;
 				float y = getGeometry()->m_shape.m_coordinate_y;
 				float goalx =  m_action.m_goal_coordinate_x;
 				float goaly =  m_action.m_goal_coordinate_y;
-	
+
 				getGeometry()->m_angle = atan2(goaly-y,goalx-x);
-	
+
 			}
 			if (Action::getActionInfo(m_action.m_type)->m_base_action == Action::WALK)
 			{
 				getGeometry()->m_angle = atan2(getMoveInfo()->m_speed_y,getMoveInfo()->m_speed_x);
-	
+
 			}
 		}
 	}

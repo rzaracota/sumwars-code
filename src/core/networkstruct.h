@@ -43,47 +43,47 @@ enum PackageType
 	 * \brief Anfrage des Clients an den Server
 	 */
 	PTYPE_C2S_REQUEST =ID_USER_PACKET_ENUM,
- 
+
  /**
   * \brief Antwort des Servers auf eine Anfrage des Clients
   */
 	PTYPE_S2C_RESPONSE ,
- 
+
  /**
   * \brief Savegame vom Server an den Client
   */
 	PTYPE_S2C_SAVEGAME ,
- 
+
  	/**
   	* \brief Savegame vom Client an den Server
   	*/
  	PTYPE_C2S_SAVEGAME ,
- 
+
  /**
   * \brief Normale Daten vom Server zum Client
   */
 	PTYPE_S2C_EVENT ,
- 
+
  /**
   * \brief Kommando vom Client zum Server
   */
 	PTYPE_C2S_COMMAND,
- 
+
  	/**
 	 * \brief Anfrage nach Daten die beim Client fehlen / inkorrekt sind
 	 */
 	PTYPE_C2S_DATA_REQUEST,
- 
+
 	/**
 	* \brief Daten zu einer Region (feste Objekte und Untergrund)
 	*/
 	PTYPE_S2C_REGION ,
- 
+
 	/**
 	 * \brief Daten ueber Spieler
 	 */
  	PTYPE_S2C_PLAYER,
-  
+
   	/**
 	 * \brief Informationen zur Initialisierung
 	 */
@@ -110,19 +110,19 @@ struct ClientDataRequest
 		OBJECT = 0x30,
  		PROJECTILE = 0x40,
 	};
-	
+
 	/**
 	 * \var Data m_data
 	 * \brief Art der geforderten Daten
 	 */
 	Data m_data;
-	
+
 	/**
-	/* \var int m_id
+	 * \var int m_id
 	 * \brief ID des geforderten Objektes
 	 */
 	int m_id;
-	
+
 	/**
 	 * \fn void toString(char* buf)
 	 * \brief Konvertiert das Objekt in einen String und schreibt ihn in der Puffer
@@ -134,8 +134,8 @@ struct ClientDataRequest
 		cv->toBuffer((char) m_data);
 		cv->toBuffer(m_id);
 	}
-			
-			
+
+
 	/**
 	 * \fn void fromString(char* buf)
 	 * \brief Erzeugt das Objekt aus einem String
@@ -150,7 +150,7 @@ struct ClientDataRequest
 		cv->fromBuffer(m_id);
 	}
 };
-		
+
 
 /**
  * \enum Button
@@ -167,42 +167,42 @@ enum Button
  	 * \brief Eingabe durch Klicken mit linker Maustaste und Shift ins Spielfeld
  	 */
  	LEFT_SHIFT_MOUSE_BUTTON =1,
-  
+
  	 /**
 	* \brief Eingabe durch Klicken mit rechter Maustaste und Shift ins Spielfeld
 	*/
   	RIGHT_MOUSE_BUTTON =2,
-  
+
 
 	/**
 	 * \brief Eingabe durch Speichern+Beenden Schaltfläche oder Schliessen-Kreuz
 	 */
 	BUTTON_SAVE_QUIT =3,
-	
+
 	BUTTON_PARTY_APPLY =4,
- 
+
 	BUTTON_PARTY_ACCEPT =5,
-		
+
 	BUTTON_SET_LEFT_ACTION =6,
- 
+
 	BUTTON_SET_RIGHT_ACTION=7,
- 
+
 	BUTTON_ITEM_LEFT=8,
-	
+
 	BUTTON_ITEM_RIGHT=9,
- 
+
 	BUTTON_SWAP_EQUIP = 10,
- 
+
 	REQUEST_DETAILED_ITEM = 11,
- 
+
 	REQUEST_ABILITY_DAMAGE=12,
- 
+
 	BUTTON_INCREASE_ATTRIBUTE=13,
- 
+
 	BUTTON_LEARN_ABILITY = 14,
- 
+
 	DROP_ITEM = 20,
- 
+
 	DEBUG_SIGNAL=100,
 };
 
@@ -220,15 +220,15 @@ struct ClientCommand
 	 * \brief Gibt den angelickten Button an
 	 */
 	Button m_button;
-	
+
 	/**
 	 * \var Action::ActionType m_action
 	 * \brief Action die ausgefuehrt werden soll
 	 */
-	
+
 	Action::ActionType m_action;
-	
-	
+
+
 	/**
 	 * \var m_coordinate_x;
 	 * \brief Gibt x-Koordinate an, auf die der Spieler gelickt hat
@@ -246,7 +246,7 @@ struct ClientCommand
 	int m_id;
 	/**
 	 * \var m_number;
-		 * \brief Gibt Anzahl der Gegenst&auml;nde an, falls die Aktionen einen Gegenstand betrifft 
+		 * \brief Gibt Anzahl der Gegenst&auml;nde an, falls die Aktionen einen Gegenstand betrifft
 	 */
 	int m_number;
 	/**
@@ -254,7 +254,7 @@ struct ClientCommand
 	 * \brief Gibt an, in welche Richtung ein Gegenstand verschoben wird, wenn die Aktion einen Handel betrifft
 	 */
 	short m_direction;
-	
+
 	/**
 	 * \fn void toString(char* buf)
 	 * \brief Konvertiert das Objekt in einen String und schreibt ihn in der Puffer
@@ -262,8 +262,8 @@ struct ClientCommand
 	 * \return Zeiger hinter den beschriebenen Datenbereich
 	 */
 	virtual void toString(CharConv* cv);
-			
-			
+
+
 	/**
 	 * \fn void fromString(char* buf)
 	 * \brief Erzeugt das Objekt aus einem String
@@ -301,13 +301,13 @@ struct PackageHeader
 	 * \brief Art der Nachricht
 	 */
 	PackageType m_content;
-	
+
 	/**
 	 * \var short m_number
 	 * \brief Zaehler fuer die Art der gleichartigen Objekte
 	 */
 	short m_number;
-	
+
 	/**
 	 * \fn void toString(CharConv* cv)
 	 * \brief Konvertiert das Objekt in einen String und schreibt ihn in der Puffer
@@ -315,8 +315,8 @@ struct PackageHeader
 	 * \return Zeiger hinter den beschriebenen Datenbereich
 	 */
 	virtual void toString(CharConv* cv);
-			
-			
+
+
 	/**
 	 * \fn void fromString(CharConv* cv)
 	 * \brief Erzeugt das Objekt aus einem String
@@ -325,5 +325,5 @@ struct PackageHeader
 	 */
 	virtual void fromString(CharConv* cv);
 };
-	
+
 #endif //NETWORKSTRUCT_H

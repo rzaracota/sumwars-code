@@ -30,7 +30,7 @@ class ClientNetwork : public Network
 	 * \fn ~ClientNetwork()
 	 * \brief Destruktor
 	 */
-	~ClientNetwork();
+	virtual ~ClientNetwork();
 
 
 	/**
@@ -101,7 +101,7 @@ class ClientNetwork : public Network
 	 */
 	NetStatus getSlotStatus( int slot=0 );
 
-	
+
 
 	private:
 	/**
@@ -111,14 +111,14 @@ class ClientNetwork : public Network
 	queue<Packet*> m_received_packets;
 
 
-	
+
 	/**
 	 * \var NetStatus m_status
 	 * \brief Status der Netzwerkschnittstelle
 	 */
 	NetStatus m_status;
 
-	
+
 	/**
 	 * \var SystemAddress m_server_address
 	 * \brief Adresse des Servers

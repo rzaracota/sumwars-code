@@ -60,10 +60,10 @@ void Scene::registerMeshes()
 	// Monster Meshes aus XML-Datei Laden
 	ObjectLoader* objectloader = 0;
 	objectloader = new ObjectLoader;
-	
+
 	list<MonsterMeshData*>* monster_mesh_list;
 	monster_mesh_list = objectloader->loadMonsterMeshData("../data/monsters.xml");
-	
+
 	if (monster_mesh_list != 0)
 	{
 		// Daten auslesen und registrieren
@@ -73,7 +73,7 @@ void Scene::registerMeshes()
 			registerObject((*iter)->m_subtype, (*iter)->m_mesh, "");
 			*iter++;
 		}
-		
+
 		// Liste aus Speicher loeschen
 		iter = monster_mesh_list->begin();
 		while (iter != monster_mesh_list->end())
@@ -82,7 +82,7 @@ void Scene::registerMeshes()
 			*iter++;
 		}
 	}
-	
+
 	delete monster_mesh_list;
 	monster_mesh_list = 0;
 	delete objectloader;
@@ -347,9 +347,6 @@ void  Scene::updateObjects()
 	s.m_extent_x = 20;
 	s.m_extent_y = 20;
 
-	WorldObject* wo, *cwo;
-	Creature* cr;
-
 	player->getRegion()->getObjectsInShape(&s,&objs, WorldObject::Geometry::LAYER_ALL,WorldObject::CREATURE);
 	player->getRegion()->getObjectsInShape(&s,&objs, WorldObject::Geometry::LAYER_ALL,WorldObject::DEAD);
 
@@ -459,10 +456,6 @@ void Scene::updateObject(WorldObject* obj)
 
 	// Ogre::Entity des Objektes
 	Ogre::Entity* obj_ent;
-
-	// Node des Objektes
-	Ogre::SceneNode* obj_node;
-
 
 	if (!m_scene_manager->hasSceneNode(node_name))
 	{

@@ -7,27 +7,27 @@ PathfindInfo::~PathfindInfo()
 {
 	if (m_pot)
 		delete m_pot;
-	
+
 	if (m_block)
 		delete m_block;
 }
 
 SearchField::SearchField(int dim)
 {
-	
+
 	m_dim = dim;
 	// Heap ist zum Beginn leer
 	m_heap_dimension=0;
-	
+
 	// Anzahl Felder = Kantenlänge^2
 	int sqdim=dim*dim;
-	
+
 	// Feld für Array anlegen
 	m_heap = new SearchFieldEntry*[sqdim];
-	
+
 	// Array mit den Suchfeldeintraegen
 	m_array = new Matrix2d<SearchFieldEntry>(dim,dim) ;
-	
+
 	// Bei allen Suchfeldeintraegen die Koordinaten eintragen
 	for (int i=0;i<m_dim;++i)
 	{
@@ -37,7 +37,7 @@ SearchField::SearchField(int dim)
 			m_array->ind(i,j)->m_y =j;
 		}
 	}
-	
+
 
 }
 
@@ -55,38 +55,38 @@ void SearchField::init(Matrix2d<float>* pot, Matrix2d<char>* block)
 
 void SearchField::heapPush(SearchFieldEntry* fentry)
 {
-	
+
 	// größe des Heap inkrementieren
 	m_heap_dimension++;
-			
+
 	// Feld an letzte Position speichern
 	m_heap[m_heap_dimension]=fentry;
-	
+
 	// speichern, wo im Heap sich das Feld befindet
 	fentry->m_heapref=m_heap_dimension;
-	
+
 	//Feld korrekt einordnen
 	reOrder(fentry);
 }
-	
+
 SearchFieldEntry* SearchField::heapPop()
 {
 	// Wenn der Heap leer ist NULL ausgebe
 	if (m_heap_dimension==0)
 		return 0;
-	
+
 	// Erstes Element im Heap ausgeben
 	SearchFieldEntry* result = m_heap[1];
 	// Element wird aus dem Heap entfernt
 	result->m_heapref=0;
-	
+
 	// Letztes Element an die Spitze des Heap setzen
 	m_heap[1]=m_heap[m_heap_dimension];
 	m_heap[1]->m_heapref=1;
-	
+
 	// Dimension dekrementieren
 	m_heap_dimension--;
-	
+
 	// Ab hier: Element einsickern lassen
 	int pos=-1,newpos=1;
 	SearchFieldEntry* swap=0;
@@ -99,35 +99,35 @@ SearchFieldEntry* SearchField::heapPop()
 			// Knoten hat zwei Kinder
 			// Wenn einer der Kindknoten einen kleineren Wert hat
 			// Kindknoten mit den kleinsten Wert als neue Position auswaehlen
-			if (m_heap[pos]->m_f > m_heap[2*pos]->m_f) 
+			if (m_heap[pos]->m_f > m_heap[2*pos]->m_f)
 				newpos=2*pos;
-			if (m_heap[newpos]->m_f > m_heap[2*pos+1]->m_f) 
+			if (m_heap[newpos]->m_f > m_heap[2*pos+1]->m_f)
 				newpos=2*pos+1;
 		}
 		else if (2*pos==m_heap_dimension)
 		{
 			// Knoten hat ein Kind
 			// Wenn Kindknoten kleineren Wert hat, Element weiter einsickern lassen
-			if (m_heap[pos]->m_f > m_heap[2*pos]->m_f) 
+			if (m_heap[pos]->m_f > m_heap[2*pos]->m_f)
 				newpos=2*pos;
 		}
-		
+
 		if (newpos!=pos)
 		{
 			//Element einsickern lassen
-			
+
 			// Vertauschen mit dem ausgesuchen Kindknoten
 			swap=m_heap[newpos];
 			m_heap[newpos]=m_heap[pos];
 			m_heap[pos]=swap;
-			
+
 			// aktualisieren der Indizee die in den Heap zeigen
 			m_heap[pos]->m_heapref=pos;
-			m_heap[newpos]->m_heapref=newpos;		
+			m_heap[newpos]->m_heapref=newpos;
 		}
-		
+
 	}
-		
+
 	return result;
 }
 
@@ -139,18 +139,18 @@ void SearchField::reOrder(SearchFieldEntry* fentry)
 	while	(i>1 && m_heap[i]->m_f <= m_heap[i/2]->m_f)
 	{
 		// Element hat einen kleineren Wert als der Vaterknoten
-		
+
 		// tauschen mit dem Vater
 		swap=m_heap[i/2];
 		m_heap[i/2]=m_heap[i];
 		m_heap[i]=swap;
-		
+
 		// aktualisieren der Indizee die in den Heap zeigen
 		m_heap[i]->m_heapref=i;
 		m_heap[i/2]->m_heapref=i/2;
 		i=i/2;
 	}
-	
+
 }
 
 SearchFieldEntry* SearchField::getSearchFieldEntry(int x, int y)
@@ -161,17 +161,15 @@ SearchFieldEntry* SearchField::getSearchFieldEntry(int x, int y)
 	{
 		SearchFieldEntry* ret =m_array->ind(x,y);
 		return ret;
-		
+
 	}
-	
+
 	// Koordinaten ausserhalb angegeben, NULL Zeiger ausgeben
 	return 0;
 }
 
 void SearchField::createPotential(int start_x, int start_y)
 {
-	int sqdim=m_dim*m_dim;
-	
 	// Felder initialisieren
 	int i,j;
 	/*for (i=0; i<sqdim;i++)
@@ -179,32 +177,32 @@ void SearchField::createPotential(int start_x, int start_y)
 		m_heap[i]=0;
 	}*/
 	memset(m_heap,0,sizeof(m_heap));
-	
+
 	for (i=0;i<m_dim;++i)
 	{
 		for (j=0;j<m_dim;++j)
 		{
 			m_array->ind(i,j)->m_heapref=0;
 			m_array->ind(i,j)->m_state=0;
-			
+
 		}
 	}
-	
+
 	//printf("initialized\n");
 	const int adj[4][2] = {{0,1},{1,0},{0,-1},{-1,0}};
-	
+
 	SearchFieldEntry* fentry,*fentry_adj;
 	fentry=getSearchFieldEntry(start_x,start_y);
 	fentry->m_f =0;
 	fentry->m_state =1;
 	//printf("start: %i %i\n",start_x,start_y);
-	
+
 	heapPush(fentry);
 	int x,y,xa,ya,s;
-	float f,fa,p,po,f1,f2,t;
-	
-	
-	
+	float f,fa,p,po,t;
+
+
+
 	while (m_heap_dimension>0)
 	{
 		fentry=heapPop();
@@ -212,35 +210,35 @@ void SearchField::createPotential(int start_x, int start_y)
 		y=fentry->m_y;
 		f=fentry->m_f;
 		//printf("processing (%i %i) : %f\n",x,y,f);
-		po = penalty[*(m_block->ind(x,y))];
-		
+		po = penalty[(int) *(m_block->ind(x,y))];
+
 		for (i=0;i<4;++i)
 		{
 			xa = x+adj[i][0];
 			ya = y+adj[i][1];
-			
+
 			fentry_adj = getSearchFieldEntry(xa, ya);
 			if (!fentry_adj)
 				continue;
-			
+
 			if (*(m_block->ind(xa,ya))=='X')
 				continue;
 			else
 			{
 				//p = penalty[*(m_block->ind(xa,ya))-'0'];
-				p = penalty[*(m_block->ind(xa,ya))];
-				
+				p = penalty[(int) *(m_block->ind(xa,ya))];
+
 			}
-			
-			
-			
+
+
+
 			fa = fentry_adj->m_f;
-			
+
 			s= fentry_adj->m_state;
 			if (s ==0)
 			{
-				
-				
+
+
 				fentry_adj->m_f = f+p;
 				fentry_adj->m_state =1;
 				//printf("adding (%i %i) : %f\n",xa,ya,f+1);
@@ -259,17 +257,17 @@ void SearchField::createPotential(int start_x, int start_y)
 				}
 				else
 				{
-					
+
 					fentry_adj->m_f = f+p;
 					reOrder(fentry_adj);
 				}
 			}
-			
+
 		}
 		fentry->m_state =2;
 		*(m_pot->ind(x,y)) = fentry->m_f;
 	}
-		
+
 	/*
 	for (i=0;i<m_dim;++i)
 	{
@@ -306,62 +304,62 @@ void SearchField::createGradient(Matrix2d<float[2]>* grad)
 				ja1 = j+adj[k][1];
 				ia2 = i+adj[(k+1)%4][0];
 				ja2 = j+adj[(k+1)%4][1];
-				
+
 				if (ia1 <0 || ia2<0 || ja1 <0 || ja2<0 || ia1>=m_dim || ia2>=m_dim || ja1>=m_dim || ja2>=m_dim)
 				{
 					continue;
-					
+
 				}
-				
-			
+
+
 				id = i+diag[k][0];
 				jd = j+diag[k][1];
-				
+
 				if (*(m_block->ind(ia1,ja1))=='X' || *(m_block->ind(ia2,ja2))=='X' || *(m_block->ind(id,jd))=='X')
 				{
 					continue;
-				} 
-				
+				}
+
 				fa1 = *(m_pot->ind(ia1,ja1));
 				fa2 = *(m_pot->ind(ia2,ja2));
 				fd = *(m_pot->ind(id,jd));
-				
+
 
 				if (fa1<f && fa2<f && fd<fa1 && fd < fa2)
 				{
 					f1 = (f-fa1)*adj[k][0]+(f-fa2)*adj[(k+1)%4][0];
 					f2 = (f-fa1)*adj[k][1]+(f-fa2)*adj[(k+1)%4][1];
-					
+
 					q = f1*f1+f2*f2;
 					if (q>qmax)
 					{
-						
+
 						(*(grad->ind(i,j)))[0] = f1;
 						(*(grad->ind(i,j)))[1] = f2;
 						q=qmax;
-						
+
 					}
 					b=true;
 				}
 			}
-			
+
 			if (!b)
 			{
 				for (k=0;k<4;++k)
 				{
 					ia1 = i+adj[k][0];
 					ja1 = j+adj[k][1];
-					
+
 					if (ia1 <0 || ja1 <0 || ia1>=m_dim || ja1>=m_dim)
 						continue;
-					
+
 					fa1 = *(m_pot->ind(ia1,ja1));
 					if (fa1 <f && *(m_block->ind(ia1,ja1))!='X')
 					{
 						f1 = (f-fa1)*adj[k][0];
 						f2 = (f-fa1)*adj[k][1];
-						
-						
+
+
 						q = f1*f1+f2*f2;
 						if (q>qmax)
 						{
@@ -373,29 +371,29 @@ void SearchField::createGradient(Matrix2d<float[2]>* grad)
 					}
 				}
 			}
-			
+
 			if (!b)
 			{
 				(*(grad->ind(i,j)))[0] = 0;
 				(*(grad->ind(i,j)))[1] = 0;
 			}
-			
-			
+
+
 		}
 	}
-	
-	
-	
-	
-	
+
+
+
+
+
 }
 
  void SearchField::getGradient(Matrix2d<float>* m_pot,Matrix2d<char>* m_block,int m_dim, float grad[2], int x, int y)
 {
-	
+
 	const int adj[4][2] = {{0,1},{1,0},{0,-1},{-1,0}};
 	const int diag[4][2] = {{1,1},{1,-1},{-1,-1},{-1,1}};
-	
+
 	int k,ia1,ja1,ia2,ja2,id,jd;
 	bool b;
 	float fa1,fa2,fd,f1,f2;
@@ -405,9 +403,9 @@ void SearchField::createGradient(Matrix2d<float[2]>* grad)
 	b=false;
 	i =x;
 	j=y;
-	
+
 	f=*(m_pot->ind(i,j));
-	
+
 	if ((*(m_block->ind(i,j))=='X'))
 	{
 		DEBUG("blockiertes Feld betreten");
@@ -421,18 +419,18 @@ void SearchField::createGradient(Matrix2d<float[2]>* grad)
 				continue;
 			}
 			fa1 = *(m_pot->ind(ia1,ja1));
-		
+
 			q = fabs(fa1);
 			DEBUG5("coord %i %i val %f",ia1,ja1,q);
 			if (q<qmax && q!=0)
 			{
-				
+
 				qmax = q;
 				grad[0] = adj[k][0];
 				grad[1] = adj[k][1];
 				b = true;
 			}
-			
+
 		}
 	}
 	else
@@ -448,7 +446,7 @@ void SearchField::createGradient(Matrix2d<float[2]>* grad)
 			printf("\n");
 		}
 		*/
-		
+
 		for (k=0;k<4;++k)
 		{
 			qmax =0;
@@ -456,62 +454,62 @@ void SearchField::createGradient(Matrix2d<float[2]>* grad)
 			ja1 = j+adj[k][1];
 			ia2 = i+adj[(k+1)%4][0];
 			ja2 = j+adj[(k+1)%4][1];
-					
+
 			if (ia1 <0 || ia2<0 || ja1 <0 || ja2<0 || ia1>=m_dim || ia2>=m_dim || ja1>=m_dim || ja2>=m_dim)
 			{
 				continue;
-				
+
 			}
-			
-				
+
+
 			id = i+diag[k][0];
 			jd = j+diag[k][1];
-					
+
 			if (*(m_block->ind(ia1,ja1))=='X' || *(m_block->ind(ia2,ja2))=='X' || *(m_block->ind(id,jd))=='X')
 			{
 				continue;
-			} 
-					
+			}
+
 			fa1 = *(m_pot->ind(ia1,ja1));
 			fa2 = *(m_pot->ind(ia2,ja2));
 			fd = *(m_pot->ind(id,jd));
-					
-	
+
+
 			if (fa1<f && fa2<f && fd<fa1 && fd < fa2)
 			{
 				f1 = (f-fa1)*adj[k][0]+(f-fa2)*adj[(k+1)%4][0];
 				f2 = (f-fa1)*adj[k][1]+(f-fa2)*adj[(k+1)%4][1];
-						
+
 				q = f1*f1+f2*f2;
 				if (q>qmax)
 				{
-							
+
 					grad[0] = f1;
 					grad[1] = f2;
 					q=qmax;
-							
+
 				}
 				b=true;
 			}
 		}
-				
+
 		if (!b)
 		{
 			for (k=0;k<4;++k)
 			{
 				ia1 = i+adj[k][0];
 				ja1 = j+adj[k][1];
-						
+
 				if (ia1 <0 || ja1 <0 || ia1>=m_dim || ja1>=m_dim)
 					continue;
-						
+
 				fa1 = *(m_pot->ind(ia1,ja1));
 				if (fa1 <f && *(m_block->ind(ia1,ja1))!='X')
 				{
 					f1 = (f-fa1)*adj[k][0];
 					f2 = (f-fa1)*adj[k][1];
-							
-							
+
+
 					q = f1*f1+f2*f2;
 					if (q>qmax)
 					{
@@ -524,13 +522,13 @@ void SearchField::createGradient(Matrix2d<float[2]>* grad)
 			}
 		}
 	}
-		
+
 	if (!b)
 	{
 		grad[0] = 0;
 		grad[1] = 0;
 	}
-	
+
 }
 
 

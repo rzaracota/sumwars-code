@@ -11,6 +11,7 @@ int Random::randDiscrete(float* distribution,int nr, float sum)
 			return i;
 		}
 	}
+	return 0;
 }
 
 
@@ -33,6 +34,7 @@ int Random::randDiscrete(vector<float> distribution)
 		}
 		res++;
 	}
+	return 0;
 }
 
 

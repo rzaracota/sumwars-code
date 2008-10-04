@@ -26,22 +26,22 @@ ItemList::ItemList(short max_small, short max_medium, short max_big)
 	m_max_small = max_small;
 	m_max_medium = max_medium;
 	m_max_big = max_big;
-	
+
 	m_small_items = new Item*[max_small];
 	m_medium_items = new Item*[max_medium];
 	m_big_items = new Item*[max_big];
-	
+
 	 int i;
 	 for (i=0; i<max_small;i++)
 	 {
 		 m_small_items[i]=0;
 	 }
-	 
+
 	 for (i=0; i<max_medium;i++)
 	 {
 		 m_medium_items[i]=0;
 	 }
-	 
+
 	 for (i=0; i<max_big;i++)
 	 {
 		 m_big_items[i]=0;
@@ -54,24 +54,24 @@ ItemList::ItemList(ItemList* itemlist)
 	m_max_small = itemlist->m_max_small;
 	m_max_medium = itemlist->m_max_medium;
 	m_max_big = itemlist->m_max_big;
-	
+
 	m_small_items = new Item*[m_max_small];
-	
+
 	m_medium_items = new Item*[m_max_medium];
-	
+
 	m_big_items = new Item*[m_max_big];
-	
+
 	int i;
 	for (i=0; i<m_max_small;i++)
 	{
 		m_small_items[i]=itemlist->m_small_items[i];
 	}
-	 
+
 	for (i=0; i<m_max_medium;i++)
 	{
 		m_medium_items[i]=itemlist->m_medium_items[i];
 	}
-	 
+
 	for (i=0; i<m_max_big;i++)
 	{
 		m_big_items[i]=itemlist->m_big_items[i];
@@ -96,7 +96,7 @@ void ItemList::clear()
 			delete m_small_items[i];
 		m_small_items[i]=0;
 	}
-	 
+
 	for (i=0; i<m_max_medium;i++)
 	{
 		if (m_medium_items[i])
@@ -105,7 +105,7 @@ void ItemList::clear()
 		}
 		m_medium_items[i]=0;
 	}
-	 
+
 	for (i=0; i<m_max_big;i++)
 	{
 		if (m_big_items[i])
@@ -120,13 +120,13 @@ Item* ItemList::getItem(Item::Size m_size, int index)
 {
 	if (m_size == Item::SMALL && index < m_max_small)
 		return m_small_items[index];
-	
+
 	if (m_size == Item::MEDIUM && index < m_max_medium)
 		return m_medium_items[index];
-	
+
 	if (m_size == Item::BIG && index < m_max_big)
 		return m_big_items[index];
-	
+
 	return 0;
 }
 
@@ -134,19 +134,19 @@ int ItemList::getFreePlace(Item::Size m_size)
 {
 	Item** arr = m_small_items;
 	short k = m_max_small;
-	
+
 	if (m_size == Item::MEDIUM)
 	{
 		arr = m_medium_items;
 		k = m_max_medium;
 	}
-	
+
 	if (m_size == Item::BIG)
 	{
 		arr = m_big_items;
 		k = m_max_big;
 	}
-	
+
 	int i;
 	for (i=0;i<k;i++)
 	{
@@ -161,22 +161,22 @@ void ItemList::swapItem(Item* &item,Item::Size size, int index)
 	DEBUG5("swapping %p of size %i at %i",item,size,index);
 	Item** arr = m_small_items;
 	short k = m_max_small;
-	
+
 	if (size == Item::MEDIUM)
 	{
 		arr = m_medium_items;
-		short k = m_max_medium;
+		k = m_max_medium;
 	}
-	
+
 	if (size == Item::BIG)
 	{
 		arr = m_big_items;
-		short k = m_max_big;
+		k = m_max_big;
 	}
-	
+
 	if (index >=k)
 		return;
-	
+
 	Item* t;
 	t=arr[index];
 	arr[index]=item;
@@ -207,7 +207,7 @@ Equipement::~Equipement()
 
 void Equipement::clear()
 {
-	if (m_helmet !=0) 
+	if (m_helmet !=0)
 	{
 		delete m_helmet;
 		m_helmet=0;
@@ -222,33 +222,33 @@ void Equipement::clear()
 		delete m_gloves;
 		m_gloves=0;
 	}
-	
+
 	if (m_weapon!=0)
 	{
 		delete m_weapon;
 		m_weapon=0;
 	}
-	
+
 	if (m_weapon2!=0)
 	{
 		delete m_weapon2;
 		m_weapon=0;
 	}
-	
-	
+
+
 	if (m_shield!=0)
 	{
 		delete m_shield;
 		m_shield=0;
 	}
-	
+
 	if (m_shield2!=0)
 	{
 		delete m_shield2;
 		m_shield=0;
 	}
 
-	
+
 	if (m_ring_left!=0)
 	{
 		delete m_ring_left;
@@ -280,55 +280,55 @@ Item* Equipement::getItem(int pos)
 	{
 		case ARMOR:
 			return m_armor;
-			
+
 		case WEAPON:
 			return m_weapon;
-			
+
 		case WEAPON2:
 			return m_weapon2;
-			
+
 		case SHIELD:
 			return m_shield;
-			
+
 		case SHIELD2:
 			return m_shield2;
-			
+
 		case HELMET:
 			return m_helmet;
-			
+
 		case GLOVES:
 			return m_gloves;
-			
+
 		case RING_LEFT:
 			return m_ring_left;
-			
+
 		case RING_RIGHT:
 			return m_ring_right;
-			
+
 		case AMULET:
 			return m_amulet;
-			
+
 		case CURSOR_ITEM:
 			return m_cursor_item;
-	}	
-	
+	}
+
 	if (pos>=BIG_ITEMS && pos < MEDIUM_ITEMS)
 	{
 		return m_inventory.getItem(Item::BIG,pos-BIG_ITEMS);
 	}
-	
+
 	if (pos>=MEDIUM_ITEMS && pos < SMALL_ITEMS)
 	{
 		return m_inventory.getItem(Item::MEDIUM,pos-MEDIUM_ITEMS);
 	}
-	
+
 	if (pos>=SMALL_ITEMS)
 	{
 		return m_inventory.getItem(Item::SMALL,pos-SMALL_ITEMS);
 	}
-	
+
 	return 0;
-	
+
 }
 
 
@@ -338,36 +338,36 @@ Item* &  Equipement::getItemRef(int pos)
 	{
 		case ARMOR:
 			return m_armor;
-			
+
 		case WEAPON:
 			return m_weapon;
-			
+
 		case WEAPON2:
 			return m_weapon2;
-			
+
 		case SHIELD:
 			return m_shield;
-			
+
 		case SHIELD2:
 			return m_shield2;
 
-			
+
 		case HELMET:
 			return m_helmet;
-			
+
 		case GLOVES:
 			return m_gloves;
-			
+
 		case RING_LEFT:
 			return m_ring_left;
-			
+
 		case RING_RIGHT:
 			return m_ring_right;
-			
+
 		case AMULET:
 			return m_amulet;
-	}	
-	
+	}
+
 	return m_cursor_item;
 }
 
@@ -377,7 +377,7 @@ bool Equipement::swapItem(Item* &item,int pos)
 	if (pos>= ARMOR && pos<=CURSOR_ITEM )
 	{
 		// Tausch mit einem Ausruestungsgegenstand
-		std::swap(item, getItemRef(pos));	
+		std::swap(item, getItemRef(pos));
 		return true;
 	}
 	else
@@ -385,45 +385,45 @@ bool Equipement::swapItem(Item* &item,int pos)
 		// Index berechnen bei dem getauscht werden soll
 		int idx = pos-BIG_ITEMS;
 		Item::Size size= Item::BIG;
-		
+
 		if (pos>= MEDIUM_ITEMS)
 		{
 			idx = pos - MEDIUM_ITEMS;
 			size = Item::MEDIUM;
 		}
 		if (pos>=SMALL_ITEMS)
-		{	
+		{
 			idx = pos - SMALL_ITEMS;
 			size = Item::SMALL;
 		}
-		
+
 		// Tausch mit Gegenstand im Inventar
 		m_inventory.swapItem(item,size,idx);
 		return true;
-	}		
+	}
 }
 
 bool Equipement::swapCursorItem(int pos)
 {
 	return swapItem(m_cursor_item,pos);
 }
-	
+
 short  Equipement::insertItem(Item* item)
 {
 	if (item ==0)
 		return NONE;
-	
+
 	Item* itm = item;
 	int pos;
 	pos = m_inventory.getFreePlace(item->m_size);
 	DEBUG5("free pos: %i",pos);
-	
-	
+
+
 	if (pos ==-1)
 	{
 		return NONE;
 	}
-	
+
 	if (item->m_size == Item::SMALL)
 	{
 		swapItem(itm,pos+SMALL_ITEMS);
@@ -439,12 +439,12 @@ short  Equipement::insertItem(Item* item)
 		swapItem(itm,pos+BIG_ITEMS);
 		return pos+BIG_ITEMS;
 	}
-	
+
 	ERRORMSG("unknown item size item type %i subtype %s",item->m_type,item->m_subtype.c_str());
 	return NONE;
-	
+
 }
-	
+
 int Equipement::getNumberItems(bool secondary_equip)
 {
 	int nr =0;
@@ -476,31 +476,31 @@ int Equipement::getNumberItems(bool secondary_equip)
 		nr++;
 	if (m_cursor_item)
 		nr++;
-	
+
 	int i;
 	for (i=0;i<m_inventory.getMaxBig();i++)
 	{
 		if (m_inventory.getItem(Item::BIG,i))
 			nr++;
 	}
-	
+
 	for (i=0;i<m_inventory.getMaxMedium();i++)
 	{
 		if (m_inventory.getItem(Item::MEDIUM,i))
 			nr++;
 	}
-	
+
 	for (i=0;i<m_inventory.getMaxSmall();i++)
 	{
 		if (m_inventory.getItem(Item::SMALL,i))
 			nr++;
 	}
-	
-	
-	
+
+
+
 	return nr;
 }
-	
+
 void Equipement::toString(CharConv* cv, int & nr, bool secondary_equip)
 {
 /*
@@ -511,7 +511,7 @@ void Equipement::toString(CharConv* cv, int & nr, bool secondary_equip)
 		m_armor->toString(cv,ARMOR);
 		nr++;
 	}
-	
+
 	Item* weapon = m_weapon;
 	if (secondary_equip)
 	{
@@ -522,13 +522,13 @@ void Equipement::toString(CharConv* cv, int & nr, bool secondary_equip)
 		weapon->toString(cv,WEAPON);
 		nr++;
 	}
-	
+
 	if (m_helmet)
 	{
 		 m_helmet->toString(cv,HELMET);
 		nr++;
 	}
-	
+
 	Item* shield = m_shield;
 	if (secondary_equip)
 	{
@@ -539,40 +539,40 @@ void Equipement::toString(CharConv* cv, int & nr, bool secondary_equip)
 		shield->toString(cv,SHIELD);
 		nr++;
 	}
-	
+
 	if (m_gloves)
 	{
 		m_gloves->toString(cv,GLOVES);
 		nr++;
 	}
-	
+
 	if (m_ring_left)
 	{
 		m_ring_left->toString(cv,RING_LEFT);
 		nr++;
 	}
-	
+
 	if (m_ring_right)
 	{
 		 m_ring_right->toString(cv,RING_RIGHT);
 		nr++;
 	}
-	
+
 	if (m_amulet)
 	{
 		 m_amulet->toString(cv,AMULET);
 		nr++;
 	}
-	
+
 	if (m_cursor_item)
 	{
 		m_cursor_item->toString(cv,CURSOR_ITEM);
 		nr++;
 	}
-	
-	
+
+
 	int i;
-	
+
 	// grosse Items
 	Item* it;
 	for (i=0;i<m_inventory.getMaxBig();i++)
@@ -584,7 +584,7 @@ void Equipement::toString(CharConv* cv, int & nr, bool secondary_equip)
 			nr++;
 		}
 	}
-	
+
 	// mittlere Items
 	for (i=0;i<m_inventory.getMaxMedium();i++)
 	{
@@ -595,7 +595,7 @@ void Equipement::toString(CharConv* cv, int & nr, bool secondary_equip)
 			nr++;
 		}
 	}
-	
+
 	// grosse Items
 	for (i=0;i<m_inventory.getMaxSmall();i++)
 	{
@@ -607,12 +607,12 @@ void Equipement::toString(CharConv* cv, int & nr, bool secondary_equip)
 		}
 	}
 */
-	
+
 
 }
 
 void Equipement::fromString(CharConv* cv, int nr)
-{	
+{
 
 /*
 	int i;
@@ -623,13 +623,13 @@ void Equipement::fromString(CharConv* cv, int nr)
 		it = new Item;
 		// Datenfelder des Items belegen
 		it->fromString(cv,pos);
-		
+
 		DEBUG5("creating item %p",it);
-		
+
 		// Item ins Inventar tauschen
 		swapItem(it,pos);
 	}
-	
+
 	*/
 
 }

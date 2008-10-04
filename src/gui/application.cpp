@@ -115,10 +115,8 @@ void Application::run()
 	Ogre::Timer timer;
 	unsigned long ltime;
 	float time=0,ftime;
-	float uptime =0;
-	//m_ogre_root->startRendering();
-	float timesum=0;
-	int count=0;
+	// float timesum=0;
+	// int count=0;
     Ogre::Timer timer2;
 
 	timer.reset();
@@ -384,7 +382,7 @@ bool Application::initCEGUI()
 
 	// Imagesets laden
 	//CEGUI::Imageset* imgset = CEGUI::ImagesetManager::getSingleton().createImageset("test.imageset");
-	CEGUI::Imageset* imgset = CEGUI::ImagesetManager::getSingleton().createImageset("skills.imageset");
+	CEGUI::ImagesetManager::getSingleton().createImageset("skills.imageset");
 
 	// Mauscursor setzen (evtl eher in View auslagern ? )
 	m_cegui_system->setDefaultMouseCursor((CEGUI::utf8*)"TaharezLook", (CEGUI::utf8*)"MouseArrow");

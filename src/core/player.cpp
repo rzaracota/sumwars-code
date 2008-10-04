@@ -42,7 +42,7 @@ bool Player::destroy()
 	DEBUG5("leave Party");
 	DEBUG5("destroy");
 	getWorld()->getParty(getTypeInfo()->m_fraction)->removeMember(getId());
-	Creature::destroy();
+	return Creature::destroy();
 }
 
 //Operations
@@ -98,7 +98,6 @@ bool Player::onGamefieldClick(ClientCommand* command)
 	Command* com = getNextCommand();
 	int dist;
 	bool meleedir = false;
-	Party* p, *p2;
 	WorldObject* wo;
 	WorldObject::Relation rel;
 
@@ -106,7 +105,7 @@ bool Player::onGamefieldClick(ClientCommand* command)
 	dist = Action::getActionInfo(command->m_action)->m_distance;
 	if ( dist == Action::SELF || dist == Action::PARTY_MULTI)
 		command->m_id=0;
-	
+
 	// TODO ???
 	if (dist == Action::PARTY)
 		command->m_id = getId();
@@ -122,11 +121,11 @@ bool Player::onGamefieldClick(ClientCommand* command)
 		if (wo !=0)
 		{
 			rel = getWorld()->getRelation(getTypeInfo()->m_fraction,wo);
-			
+
 			if (command->m_button == LEFT_MOUSE_BUTTON)
 			{
 				// Linke Maustaste: Aktion nur ausfuehren, wenn tatsaechlich ein passendenes Objekt vorhanden ist
-				
+
 				// Fuer Aktionen der Art Nah oder Fernkampf braucht man eine feindliche Kreatur
 				if (rel == WorldObject::HOSTILE && (dist == Action::MELEE || dist == Action::RANGED))
 				{
@@ -201,7 +200,7 @@ bool Player::onGamefieldClick(ClientCommand* command)
 				com->m_goal_object_id =0;
 				if (dist == Action::MELEE)
 				{
-					
+
 					meleedir = true;
 				}
 				m_event_mask |= Event::DATA_NEXT_COMMAND;
@@ -322,9 +321,11 @@ bool Player::onGamefieldClick(ClientCommand* command)
 			}
 		}
 	}
-	
+
 	m_event_mask |= Event::DATA_NEXT_COMMAND;
 	DEBUG5("resulting command %i goal %f %f id %i",com->m_type,com->m_goal_coordinate_x,com->m_goal_coordinate_y, com->m_goal_object_id);
+
+	return true;
 }
 
 
@@ -414,7 +415,7 @@ bool Player::onItemClick(ClientCommand* command)
 					req= false;
 				}
 
-				
+
 
 			}
 			else
@@ -456,14 +457,14 @@ bool Player::onItemClick(ClientCommand* command)
 
 		// Vertauschen von Cursoritem und angeklicktem Item
 		m_equipement->swapCursorItem(pos);
-		
+
 		if (getWorld()->isServer() && pos <Equipement::CURSOR_ITEM)
 		{
 			// Ausruestungsgegenstand wurde getauscht
 			Event event;
 			event.m_id = getId();
 			event.m_data = pos;
-			
+
 			if (m_equipement->getItem(pos) == 0)
 			{
 				event.m_type = Event::PLAYER_NOITEM_EQUIPED;
@@ -490,19 +491,19 @@ bool Player::onItemClick(ClientCommand* command)
 					short shpos= Equipement::SHIELD;
 					if (pos == Equipement::WEAPON2)
 						shpos = Equipement::SHIELD2;
-					
+
 					if (getWorld()->isServer())
 					{
 						Event event;
 						event.m_type =  Event::PLAYER_NOITEM_EQUIPED;
 						event.m_data = shpos;
 						event.m_id = getId();
-							
+
 						DEBUG5("event: no item at %i",shpos);
-							
+
 						getWorld()->insertEvent(event);
 					}
-					
+
 					// Wenn aktuell kein Item am Cursor gehalten wird
 					if (m_equipement->getItem(Equipement::CURSOR_ITEM)==0)
 					{
@@ -515,15 +516,15 @@ bool Player::onItemClick(ClientCommand* command)
 						itm =0;
 						// Schild aus dem Schildslot holen
 						m_equipement->swapItem( itm,shpos);
-						
+
 						// wenn man sich auf Serverseite befindet: Event generieren
-						
-						
+
+
 						if (!getEquipement()->insertItem(itm))
 						{
 							// Einfuegen ins Inventar fehlgeschlagen
 							// Item fallen lassen
-							getRegion()->dropItem(itm,getGeometry()->m_shape.m_coordinate_x,getGeometry()->m_shape.m_coordinate_y);	
+							getRegion()->dropItem(itm,getGeometry()->m_shape.m_coordinate_x,getGeometry()->m_shape.m_coordinate_y);
 						}
 					}
 				}
@@ -537,28 +538,28 @@ bool Player::onItemClick(ClientCommand* command)
 			Item* weapon = getWeapon();
 			if (weapon!=0 && weapon->m_weapon_attr->m_two_handed)
 			{
-				
+
 				// zweihaendige Waffe wird verwendet, muss entfernt werden
 				short wpos= Equipement::WEAPON;
 				if (pos == Equipement::SHIELD2)
 					wpos = Equipement::WEAPON2;
-				
+
 				if (getWorld()->isServer())
 				{
 					Event event;
 					event.m_type =  Event::PLAYER_NOITEM_EQUIPED;
 					event.m_data = wpos;
 					event.m_id = getId();
-							
+
 					DEBUG5("event: no item at %i",wpos);
-							
+
 					getWorld()->insertEvent(event);
 				}
-			
+
 				m_equipement->swapCursorItem(wpos);
 			}
 		}
-		
+
 		// Wenn an der Ausruestung etwas geaendert wurde
 		if (pos <Equipement::CURSOR_ITEM)
 		{
@@ -627,7 +628,7 @@ short Player::insertItem(Item* itm)
 	if (itm ==0)
 		ERRORMSG("tried to insert null item");
 	short pos = getEquipement()->insertItem(itm);
-	
+
 	if (pos != Equipement::NONE)
 	{
 		// Gegenstand ins Inventar aufgenommen
@@ -637,9 +638,9 @@ short Player::insertItem(Item* itm)
 			event.m_type =  Event::PLAYER_ITEM_PICKED_UP ;
 			event.m_data = pos;
 			event.m_id = getId();
-								
+
 			DEBUG("event: item picked up %i",pos);
-								
+
 			getWorld()->insertEvent(event);
 		}
 	}
@@ -679,7 +680,7 @@ Action::ActionEquip Player::getActionEquip()
 	{
 		return Action::NO_WEAPON;
 	}
-	
+
 	if (weapon->m_weapon_attr->m_two_handed)
 	{
 		return Action::TWO_HANDED;
@@ -688,7 +689,7 @@ Action::ActionEquip Player::getActionEquip()
 	{
 		return Action::	ONE_HANDED;
 	}
-	
+
 }
 
 void Player::increaseAttribute(CreatureBaseAttr::Attribute attr)
@@ -720,7 +721,7 @@ void Player::increaseAttribute(CreatureBaseAttr::Attribute attr)
 void Player::gainLevel()
 {
 	Creature::gainLevel();
-	
+
 	// Level um 1 erhöhen
 	getBaseAttr()->m_level++;
 
@@ -767,10 +768,10 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 	DropSlot ds;
 	// Wahrscheinlichkeiten BIG, MEDIUM, SMALL, GOLD
 	float prob[4] = {0.1, 0.2, 0.2, 0.2};
-	
+
 	// prob_size, min level, max_level, prob_magic, magic_power
 	ds.init(prob, 0,20, 0.3, 2000);
-	
+
 	// Kopie des aktuellen Kommandos anlegen
 	Command oldcommand;
 	memcpy(&oldcommand,getNextCommand(),sizeof(Command));
@@ -950,40 +951,40 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 			}
 			else if (command->m_id==3)
 			{
-				
+
 				si = ItemFactory::createItem(ds);
 				bool ret = getEquipement()->insertItem(si);
-				
+
 				if (ret == false)
 				{
 					getEquipement()->clear();
 					getEquipement()->insertItem(si);
 				}
-				
+
 			}
 			break;
 
 		default: ;
 	}
-	
+
 	if (oldcommand != *getNextCommand() && delay>0)
 	{
 		// naechstes Kommando hat sich geaendert
 		// die aktuelle Aktion basiert eventuell auf einem veralteten Kommando
-		
+
 		if (getAction()->m_type == Action::NOACTION || getAction()->m_elapsed_time < delay)
 		{
 			// Aktion basiert auf veraltetem Kommando
 			// abbrechen
 			abortAction();
-			
+
 			// neue Aktion berechnen
 			calcAction();
 			initAction();
 			calcDamage(getAction()->m_type,*(getDamage()));
-			
+
 			DEBUG5("new action %i time %f",getAction()->m_type,getAction()->m_time);
-			
+
 			// Action entsprechend der Verzoegerung schneller ausfuehren
 			// aber maximal doppelt so schnell
 			float mult = std::max(getAction()->m_time-delay, getAction()->m_time/2)/getAction()->m_time;
@@ -993,13 +994,15 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 				// Laufgeschwindigkeit entsprechend erhoehen
 				getMoveInfo()->m_speed_x /= mult;
 				getMoveInfo()->m_speed_y /= mult;
-					
+
 			}
 			getAction()->m_time *= mult;
-			DEBUG5("faster action time %i",getAction()->m_time);
+			DEBUG5("faster action time %f",getAction()->m_time);
 		}
-		
+
 	}
+
+	return true;
 }
 
 
@@ -1010,27 +1013,27 @@ void Player::abortAction()
 
 	DEBUG5("abort Action %i (elapsed time %f)",getAction()->m_type, time);
 
-	
+
 	if (getAction()->m_type == Action::WALK)
 	{
 		// Position zurueck setzen
 		getGeometry()->m_shape.m_coordinate_x -= getMoveInfo()->m_speed_x*time;
 		getGeometry()->m_shape.m_coordinate_y -= getMoveInfo()->m_speed_y*time;
 	}
-	
+
 	// Timer wieder zuruecksetzen
 	if (aci->m_timer_nr==1)
 	{
 		 m_timer1=0;
 		 m_timer1_max=0;
 	}
-	
+
 	if (aci->m_timer_nr==2)
 	{
 		m_timer2=0;
 		m_timer2_max=0;
 	}
-	
+
 	m_event_mask |= Event::DATA_ACTION;
 }
 
@@ -1046,7 +1049,7 @@ bool Player::update(float time)
 	//return true;
 
 	Trade* trade = 0;
-	
+
 	/*
 	// handle inputs form network
 	ServerNetwork* net = getWorld()->getNetwork();
@@ -1069,7 +1072,7 @@ bool Player::update(float time)
 		// Spieler hat Region betreten und ist in der Region noch nicht aktiviert
 
 		Region* reg = getRegion();
-		
+
 		ServerHeader header;
 
 		CharConv cv;
@@ -1094,7 +1097,7 @@ bool Player::update(float time)
 		DEBUG5("received msg");
 		data=0;
 		net->popSlotMessage( m_network_slot,data );
-		
+
 		cv = new CharConv(data);
 
 		headerp.fromString(cv);
@@ -1109,18 +1112,18 @@ bool Player::update(float time)
 			//for (char* c =(char*) comp; c< sizeof(ClientCommand) + (char*) comp; c++)
 			//	printf("%02x",*c);
 			//printf("\n");
-			
+
 			onClientCommand( &comp );
 
 		}
-		
+
 
 		// Chatmessage erhalten
 		if(  headerp.m_content == PTYPE_C2S_DATA && headerp.m_chatmessage	)
 		{
 			DEBUG("Chatmessage erhalten");
-			
-			
+
+
 			char* msgp = data + sizeof(ClientHeader);
 			int len = sizeof(PackageHeader)+sizeof(Chatmessage);
 			char sendmsg[len];
@@ -1171,7 +1174,7 @@ bool Player::update(float time)
 					}
 			}
 			DEBUG3("Senden abgeschlossen");
-			
+
 		}
 
 		delete cv;
@@ -1303,9 +1306,9 @@ void Player::performActionCritPart(float goalx, float goaly, WorldObject* goal)
 		{
 			// aus der Region entfernen
 			getRegion()->deleteItem(getCommand()->m_goal_object_id);
-			
+
 			// Item einfuegen
-			short pos = insertItem(itm);
+			insertItem(itm);
 
 		}
 		else
@@ -1344,7 +1347,7 @@ void Player::sendGameData()
 
 	CharConv cv;
 	//DEBUG5("packed bytes: %i bytes",cv.getBitStream()->GetNumberOfBitsUsed());
-	
+
 	list<WorldObject*> wobjs;
 	wobjs.clear();
 
@@ -1361,9 +1364,9 @@ void Player::sendGameData()
 	// alle sichtbaren Objekte holen
 	if( !getWorld()->getObjectsInShape(&shs,getGridLocation()->m_region,&wobjs ) )
 		return;
-	
-	
-	
+
+
+
 	// Objekte einpacken
 	for( list<WorldObject*>::iterator i=wobjs.begin() ; i!=wobjs.end() ; )
 	{
@@ -1386,28 +1389,28 @@ void Player::sendGameData()
 
 	}
 	header.m_objects= wobjs.size();
-	
+
 	list<DmgProjectile*> res2;
 	list<DmgProjectile*>::iterator i2;
 	// Liste der sichtbaren Projektile
 	getWorld()->getProjectilesOnScreen(sh->m_coordinate_x,sh->m_coordinate_y,getGridLocation()->m_region,&res2);
 	header.m_projectiles = res2.size();
-	
+
 	header.m_items = m_equipement->getNumberItems(m_secondary_equip);
-	
+
 	// am Boden liegende Gegenstaende
 	list<DropItem*> res3;
 	list<DropItem*>::iterator it3;
 	getRegion()->getItemsOnScreen(sh->m_coordinate_x,sh->m_coordinate_y,&res3);
 	header.m_drop_items = res3.size();
 	header.toString(&cv);
-		
+
 	// Begin packet erstellen
 	toStringComplete(&cv);
 
 	//DEBUG("bits written %i",cv.getBitStream()->GetNumberOfBitsUsed());
-	
-	
+
+
 
 
 	// Objekte einpacken
@@ -1434,9 +1437,9 @@ void Player::sendGameData()
 	// Inventar
 	int nr;
 	m_equipement->toString(&cv,nr,m_secondary_equip);
-	
-	
-	
+
+
+
 	// Gegenstaende am Boden senden
 	for (it3 = res3.begin(); it3 != res3.end(); ++it3)
 	{
@@ -1453,8 +1456,8 @@ void Player::sendGameData()
 	//DEBUG5("sending %i byte of data",len);
 	//DEBUG5("objects %i projectiles %i",header.m_objects,header.m_projectiles);
 
-	
-	
+
+
 	DEBUG5("sending %i bytes",cv.getBitStream()->GetNumberOfBytesUsed());
 	net->pushSlotMessage(m_network_slot, cv.getBitStream(),HIGH_PRIORITY, UNRELIABLE_SEQUENCED);
 	*/
@@ -1535,7 +1538,7 @@ void Player::sendSavegame()
 	toSavegame(&cv);
 	net->pushSlotMessage(m_network_slot,  cv.getBitStream());
 	*/
-	
+
 }
 
 void Player::calcBaseDamage(Action::ActionType act,Damage& dmg)
@@ -1594,7 +1597,7 @@ void Player::calcBaseAttrMod()
 		{
 			getBaseAttrMod()->m_attack_speed += si->m_weapon_attr ->m_dattack_speed;
 			getBaseAttrMod()->m_attack_range = si->m_weapon_attr ->m_attack_range;
-			
+
 			if (si->m_weapon_attr ->m_dattack_speed!=0)
 			{
 				m_event_mask |= Event::DATA_ATTACK_SPEED;
@@ -1693,11 +1696,11 @@ void Player::toString(CharConv* cv)
 {
 	DEBUG5("Player::tostring");
 	Creature::toString(cv);
-		
+
 	cv->toBuffer((char*) m_name.c_str(),32);
-	
+
 	cv->toBuffer(getBaseAttr()->m_level);
-	
+
 	// Items
 	char cnt =0;
 	Item* item;
@@ -1709,8 +1712,8 @@ void Player::toString(CharConv* cv)
 	}
 	DEBUG5("number of items: %i",cnt);
 	cv->toBuffer(cnt);
-	
-	
+
+
 	for ( short i = Equipement::ARMOR; i<= Equipement::SHIELD2; i++)
 	{
 		item = getEquipement()->getItem(i);
@@ -1718,7 +1721,7 @@ void Player::toString(CharConv* cv)
 		{
 			cv->toBuffer(i);
 			item->toString(cv);
-			
+
 		}
 	}
 
@@ -1728,23 +1731,23 @@ void Player::toString(CharConv* cv)
 void Player::fromString(CharConv* cv)
 {
 	Creature::fromString(cv);
-	
+
 	char tmp[32];
 	cv->fromBuffer(tmp,32);
 	m_name = tmp;
-	
+
 	cv->fromBuffer(getBaseAttr()->m_level);
-	
+
 	char cnt;
 	cv->fromBuffer(cnt);
 	DEBUG5("number of items: %i",cnt);
-	
-	
+
+
 	for ( short i = 0; i< cnt; i++)
 	{
 		readItem(cv);
 	}
-	
+
 }
 
 void Player::readItem(CharConv* cv)
@@ -1755,17 +1758,17 @@ void Player::readItem(CharConv* cv)
 	int id;
 	subtype[10] ='\0';
 	Item* item;
-	
+
 	cv->fromBuffer<short>(pos);
 	cv->fromBuffer<char>(type);
 	cv->fromBuffer(subtype,10);
 	cv->fromBuffer(id);
-	
-		
+
+
 	item = ItemFactory::createItem((Item::Type) type, std::string(subtype),id);
 	item->fromString(cv);
 	getEquipement()->swapItem(item,pos);
-		
+
 	if (item !=0)
 		delete item;
 }
@@ -1778,17 +1781,17 @@ void Player::readItemComplete(CharConv* cv)
 	int id;
 	subtype[10] ='\0';
 	Item* item;
-	
+
 	cv->fromBuffer<short>(pos);
 	cv->fromBuffer<char>(type);
 	cv->fromBuffer(subtype,10);
 	cv->fromBuffer(id);
-	
+
 	DEBUG("reading Item for pos %i type %i subtype %s",pos,type,subtype);
 	item = ItemFactory::createItem((Item::Type) type, std::string(subtype),id);
 	item->fromStringComplete(cv);
 	getEquipement()->swapItem(item,pos);
-		
+
 	if (item !=0)
 		delete item;
 }
@@ -1804,8 +1807,8 @@ void Player::toStringComplete(CharConv* cv)
 	cv->toBuffer(getBaseAttrMod()->m_magic_power);
 	cv->toBuffer(getBaseAttrMod()->m_willpower);
 	cv->toBuffer(m_attribute_points);
-	
-	
+
+
 	int i;
 	for (i=0;i<4;i++)
 		cv->toBuffer(getBaseAttrMod()->m_resistances[i]);
@@ -1851,10 +1854,10 @@ void Player::toStringComplete(CharConv* cv)
 	cv->toBuffer(trel1);
 	cv->toBuffer(trel2);
 	// TODO: Questinformationen
-	
-	
-	
-	
+
+
+
+
 	// Party Informationen
 	getWorld()->getParty(getTypeInfo()->m_fraction)->toString(cv);
 
@@ -1882,14 +1885,14 @@ void Player::recalcDamage()
 
 void Player::toSavegame(CharConv* cvin)
 {
-	
+
 	int i;
 	// immer binaere Speicherung
 	cvin->toBuffer((char) 1);
 	// TODO Version richtig setzen
 	cvin->toBuffer((short) 1);
 	// Laenge der Datei
-	
+
 	CharConv* cv = new CharConv;
 	char stmp[11];
 	stmp[10] = '\0';
@@ -1927,30 +1930,30 @@ void Player::toSavegame(CharConv* cvin)
 	cv->toBuffer((short) m_left_action);
 	cv->toBuffer((short) m_right_action);
 
-	
+
 	// TODO: Questinformationen
 
 	// Items
 	writeEquipement(cv);
-	
+
 	int len = cv->getBitStream()->GetNumberOfBytesUsed();
 	DEBUG5("length of savegame %i",len+7);
 	cvin->toBuffer(len+7);
-	
+
 	cvin->toBuffer((char*) cv->getBitStream()->GetData() , len);
-	
+
 	delete cv;
-	
+
 	//int len = bp - buf;
 	//cv->toBuffer(bp2,len);
-	
-	
+
+
 }
 
 
 void Player::fromSavegame(CharConv* cv)
 {
-	
+
 	char binsave;
 	cv->fromBuffer<char>(binsave);
 	short version;
@@ -1984,7 +1987,7 @@ void Player::fromSavegame(CharConv* cv)
 	cv->fromBuffer<short>(getBaseAttr()->m_resistances[1]);
 	cv->fromBuffer<short>(getBaseAttr()->m_resistances[2]);
 	cv->fromBuffer<short>(getBaseAttr()->m_resistances[3]);
-	
+
 	cv->fromBuffer<float>(getBaseAttr()->m_max_experience);
 	cv->fromBuffer<float>(getDynAttr()->m_experience);
 
@@ -2010,7 +2013,7 @@ void Player::fromSavegame(CharConv* cv)
 	// Items
 	loadEquipement(cv);
 
-	
+
 	//DEBUG("size of savegame %i",len);
 
 	calcBaseAttrMod();
@@ -2029,10 +2032,10 @@ void Player::writeEquipement(CharConv* cv)
 		if (m_equipement->getItem(i)!=0)
 			nr++;
 	}
-	
+
 	// Platz fuer die Anzahl
 	cv->toBuffer(nr);
-	
+
 
 	for (i=1;i<=Equipement::SMALL_ITEMS+30;i++)
 	{

@@ -17,7 +17,7 @@ bool Gridunit::insertObject(WorldObject* object)
 
 	// Zeiger auf Array in das eingefuegt wird
 	WorldObject ** arr = getObjects(g);
-	
+
 	// Zeiger auf Anzahl der Objekte in der Ebene
 	short &  np = getObjectsNr(g);
 
@@ -33,65 +33,8 @@ bool Gridunit::insertObject(WorldObject* object)
 		np++;
 		DEBUG5("inserted object %p, as number %i in group %i",object,np,g);
 	}
-	
-	/*
-	if ((layer & WorldObject::Geometry::LAYER_FIXED) == layer)
-	{
-		// Objekt wird in Ebene FIXED eingeordnet
-		DEBUG5("inserting into fixed layer");
 
-		i = m_nr_fixed;
-		if (i== MAX_GRIDUNIT_OBJ)
-		{
-			// Maximale Anzahl in der Ebene erreicht, Fehler anzeigen
-			return false;
-		}
-		else
-		{
-			// Element einfuegen, Zahler erhoehen
-			m_fixed[i] = object;
-			m_nr_fixed++;
-		}
-	}
-	else if ((layer & WorldObject::Geometry::LAYER_DEAD) == layer)
-	{
-		DEBUG5("inserting into dead layer");
-		// Objekt wird in Ebene DEAD eingeordnet
-		i = m_nr_dead;
-		if (i== MAX_GRIDUNIT_OBJ)
-		{
-			// Maximale Anzahl in der Ebene erreicht, Fehler anzeigen
-			return false;
-		}
-		else
-		{
-			// Element einfuegen, Zahler erhoehen
-			m_dead[i] = object;
-			m_nr_dead++;
-		}
-	}
-	else if (layer == WorldObject::Geometry::LAYER_SPECIAL)
-	{
-		return true;
-	}
-	else
-	{
-		DEBUG5("inserting into creature layer");
-		// Objekt wird in Ebene CREATURE eingeordnet
-		i = m_nr_creature;
-		if (i== MAX_GRIDUNIT_OBJ)
-		{
-			// Maximale Anzahl in der Ebene erreicht, Fehler anzeigen
-			return false;
-		}
-		else
-		{
-			// Maximale Anzahl in der Ebene erreicht, Fehler anzeigen
-			m_creature[i] = object;
-			m_nr_creature++;
-		}
-	}
-	*/
+    return true;
 }
 
 bool  Gridunit::moveObject(WorldObject* object,WorldObject::Group group )
@@ -99,10 +42,10 @@ bool  Gridunit::moveObject(WorldObject* object,WorldObject::Group group )
 	bool ret = deleteObject(object);
 	if (ret==false)
 		return false;
-	
+
 	// Zeiger auf Array in das eingefuegt wird
 	WorldObject ** arr = getObjects(group);
-	
+
 	// Zeiger auf Anzahl der Objekte in der Ebene
 	short &  np = getObjectsNr(group);
 
@@ -118,45 +61,20 @@ bool  Gridunit::moveObject(WorldObject* object,WorldObject::Group group )
 		np++;
 		DEBUG5("inserted object %p, as number %i in group %i",object,np,group);
 	}
+    return true;
 }
 
 bool Gridunit::deleteObject(WorldObject* object, short index)
 {
 	// Ebene aus der geloescht werden soll
 	WorldObject::Group g = getObjectGroup(object);
-	
+
 	// Zeiger auf Array aus dem geloescht wird
 	WorldObject ** arr = getObjects(g);
-	
+
 	// Zeiger auf Anzahl der Objekte in der Ebene
 	short &  np = getObjectsNr(g);
-	/*
-	if ((layer & WorldObject::Geometry::LAYER_FIXED )== layer)
-	{
-		// Loeschen aus FIXED Ebene
-		arr = m_fixed;
-		np = &m_nr_fixed;
-		DEBUG5("deleting from fixed layer");
 
-
-	}
-	else if ((layer & WorldObject::Geometry::LAYER_DEAD )== layer)
-	{
-		// Loeschen aus DEAD Ebene
-		arr = m_dead;
-		np = &m_nr_dead;
-		DEBUG5("deleting from dead layer");
-
-	}
-	else
-	{
-		// Loeschen aus CREATURE ebene
-		arr = m_creature;
-		np = &m_nr_creature;
-		DEBUG5("deleting from creature layer");
-
-	}
-	*/
 	DEBUG5("deleting obj %p from group %i",object,g);
 	if (index != -1)
 	{
@@ -188,7 +106,7 @@ bool Gridunit::deleteObject(WorldObject* object, short index)
 				// Objekt gefunden
 				// Anzahl Objekte in dem Array reduzieren
 				np--;
-				
+
 				// Letztes Objekt an die Stelle des geloeschten kopieren
 				arr[i] = arr[np];
 				return true;

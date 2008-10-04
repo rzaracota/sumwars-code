@@ -11,12 +11,12 @@
 int ObjectLoader::generateObjects(TiXmlElement* pElement, string element)
 {
 	if ( !pElement ) return 0;
-	
+
 	TiXmlAttribute* pAttrib=pElement->FirstAttribute();
 	int i=0;
 	int ival;
 	double dval;
-	
+
 	if (element == "Monster" && pAttrib)
 	{
 		if (m_monster_data == 0)
@@ -24,7 +24,7 @@ int ObjectLoader::generateObjects(TiXmlElement* pElement, string element)
 			m_monster_data = new MonsterBasicData;
 			m_monster_data->m_layer = (WorldObject::Geometry::LAYER_BASE | WorldObject::Geometry::LAYER_AIR);
 		}
-		
+
 		while (element == "Monster" && pAttrib)
 		{
 			if (!strcmp(pAttrib->Name(), "type"))
@@ -50,12 +50,12 @@ int ObjectLoader::generateObjects(TiXmlElement* pElement, string element)
 				if (!strcmp(pAttrib->Value(), "GOBLIN"))
 					m_monster_data->m_type_info.m_category = WorldObject::TypeInfo::GOBLIN;
 			}
-			
+
 			i++;
 			pAttrib=pAttrib->Next();
 		}
 	}
-	
+
 	if (element == "Dropslots" && pAttrib)
 	{
 		while (element == "Dropslots" && pAttrib)
@@ -68,12 +68,12 @@ int ObjectLoader::generateObjects(TiXmlElement* pElement, string element)
 				m_size_prob[2] = static_cast<float>(dval);
 			else if (!strcmp(pAttrib->Name(), "p3") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
 				m_size_prob[3] = static_cast<float>(dval);
-			
+
 			i++;
 			pAttrib=pAttrib->Next();
 		}
 	}
-	
+
 	if (element == "Dropslot0" && pAttrib)
 	{
 		while (element == "Dropslot0" && pAttrib)
@@ -86,12 +86,12 @@ int ObjectLoader::generateObjects(TiXmlElement* pElement, string element)
 				m_magic_prob[0] = static_cast<float>(dval);
 			else if (!strcmp(pAttrib->Name(), "magic_power") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
 				m_magic_power[0] = static_cast<float>(dval);
-			
+
 			i++;
 			pAttrib=pAttrib->Next();
 		}
 	}
-	
+
 	if (element == "Dropslot1" && pAttrib)
 	{
 		while (element == "Dropslot1" && pAttrib)
@@ -104,25 +104,25 @@ int ObjectLoader::generateObjects(TiXmlElement* pElement, string element)
 				m_magic_prob[1] = static_cast<float>(dval);
 			else if (!strcmp(pAttrib->Name(), "magic_power") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
 				m_magic_power[1] = static_cast<float>(dval);
-			
+
 			i++;
 			pAttrib=pAttrib->Next();
 		}
 	}
-	
+
 	if (element == "BasicAttributes" && pAttrib)
 	{
 		for (int k=0; k<6; k++)
 			m_monster_data->m_base_attr.m_abilities[k]=0;
-		
+
 		while (element == "BasicAttributes" && pAttrib)
 		{
 			/*printf( "%s: value=[%s]", pAttrib->Name(), pAttrib->Value());*/
-			
+
 			/*cout << "<<< " << element << " >>>" << endl;
 			if (pAttrib)
 				cout << "+++ " << pAttrib->Name() << " +++" << endl;*/
-			
+
 			if (!strcmp(pAttrib->Name(), "max_experience") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
 				m_monster_data->m_base_attr.m_max_experience = static_cast<float>(dval);
 			else if (!strcmp(pAttrib->Name(), "level") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
@@ -188,11 +188,11 @@ int ObjectLoader::generateObjects(TiXmlElement* pElement, string element)
 			{
 				// Enum name der Aktion
 				std::string aname = pAttrib->Name();
-				
+
 				// Suche in der Liste der registrierten Aktionen
 				map<std::string, Action::ActionType>::iterator it;
 				it = Action::m_enum_string_to_type.find(aname);
-				
+
 				if (it != Action::m_enum_string_to_type.end())
 				{
 					// in der Liste gefunden
@@ -200,40 +200,40 @@ int ObjectLoader::generateObjects(TiXmlElement* pElement, string element)
 					int anr =it->second;
 					// Bit setzen
 					m_monster_data->m_base_attr.m_abilities[anr /32] |= (1 << (anr %32));
-					
+
 				}
 			}
 			*/
-			
+
 			i++;
 			pAttrib=pAttrib->Next();
 		}
 	}
-	
+
 	if (element == "Geometry" && pAttrib)
 	{
 		while (element == "Geometry" && pAttrib)
 		{
 			if (!strcmp(pAttrib->Name(), "radius") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
 				m_monster_data->m_radius = static_cast<float>(dval);
-			
+
 			i++;
 			pAttrib=pAttrib->Next();
 		}
 	}
-	
+
 	if (element == "AI" && pAttrib)
 	{
 		while (element == "AI" && pAttrib)
 		{
 			if (!strcmp(pAttrib->Name(), "ai_sight_range") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
 				m_monster_data->m_ai_sight_range = static_cast<float>(dval);
-			
+
 			i++;
 			pAttrib=pAttrib->Next();
 		}
 	}
-	
+
 	return i;
 }
 
@@ -241,13 +241,13 @@ int ObjectLoader::generateObjects(TiXmlElement* pElement, string element)
 void ObjectLoader::searchXml(TiXmlNode* pParent)
 {
 	if ( !pParent ) return;
-	
+
 	TiXmlNode* pChild;
-	TiXmlText* pText;
-	
+//	TiXmlText* pText;
+
 	int t = pParent->Type();
 	int num;
-	
+
 	switch ( t )
 	{
 	case TiXmlNode::ELEMENT:
@@ -269,7 +269,7 @@ void ObjectLoader::searchXml(TiXmlNode* pParent)
 	default:
 		break;
 	}
-	
+
 	for ( pChild = pParent->FirstChild(); pChild != 0; pChild = pChild->NextSibling())
 	{
 		searchXml(pChild);
@@ -305,10 +305,10 @@ list<MonsterBasicData*>* ObjectLoader::loadObjects(const char* pFilename)
 	}
 	m_monster_data = 0;
 	m_monster_list = new list<MonsterBasicData*>;
-	
+
 	TiXmlDocument doc(pFilename);
 	bool loadOkay = doc.LoadFile();
-	
+
 	if (loadOkay)
 	{
 		DEBUG5("Loading %s", pFilename);
@@ -328,41 +328,39 @@ list<MonsterBasicData*>* ObjectLoader::loadObjects(const char* pFilename)
 int ObjectLoader::generateMonsterMeshData(TiXmlElement* pElement, string element)
 {
 	if ( !pElement ) return 0;
-	
+
 	TiXmlAttribute* pAttrib=pElement->FirstAttribute();
 	int i=0;
-	int ival;
-	double dval;
-	
+
 	if (element == "Monster" && pAttrib)
 	{
 		if (m_monster_mesh_data == 0)
 		{
 			m_monster_mesh_data = new MonsterMeshData;
 		}
-		
+
 		while (element == "Monster" && pAttrib)
 		{
 			if (!strcmp(pAttrib->Name(), "subtype"))
 				m_monster_mesh_data->m_subtype = pAttrib->Value();
-			
+
 			i++;
 			pAttrib=pAttrib->Next();
 		}
 	}
-	
+
 	if (element == "Mesh" && pAttrib)
 	{
 		while (element == "Mesh" && pAttrib)
 		{
 			if (!strcmp(pAttrib->Name(), "file"))
 				m_monster_mesh_data->m_mesh = pAttrib->Value();
-			
+
 			i++;
 			pAttrib=pAttrib->Next();
 		}
 	}
-	
+
 	return i;
 }
 
@@ -370,13 +368,13 @@ int ObjectLoader::generateMonsterMeshData(TiXmlElement* pElement, string element
 void ObjectLoader::searchMonsterMeshData(TiXmlNode* pParent)
 {
 	if ( !pParent ) return;
-	
+
 	TiXmlNode* pChild;
-	TiXmlText* pText;
-	
+//	TiXmlText* pText;
+
 	int t = pParent->Type();
 	int num;
-	
+
 	switch ( t )
 	{
 	case TiXmlNode::ELEMENT:
@@ -398,11 +396,11 @@ void ObjectLoader::searchMonsterMeshData(TiXmlNode* pParent)
 	default:
 		break;
 	}
-	
+
 	for ( pChild = pParent->FirstChild(); pChild != 0; pChild = pChild->NextSibling())
 	{
 		searchMonsterMeshData(pChild);
-		
+
 		if ( !strcmp(pChild->Value(), "Monster") && pChild->Type() == TiXmlNode::ELEMENT)
 		{
 			m_monster_mesh_list->push_back(m_monster_mesh_data);
@@ -417,10 +415,10 @@ list<MonsterMeshData*>* ObjectLoader::loadMonsterMeshData(const char* pFilename)
 {
 	m_monster_mesh_data = 0;
 	m_monster_mesh_list = new list<MonsterMeshData*>;
-	
+
 	TiXmlDocument doc(pFilename);
 	bool loadOkay = doc.LoadFile();
-	
+
 	if (loadOkay)
 	{
 		DEBUG5("Loading %s", pFilename);

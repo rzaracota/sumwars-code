@@ -22,9 +22,9 @@
 
 Priest::Priest(World* world, int id) : Player(world, id)
 {
-	bool tmp = init();
+	init();
 }
-	
+
 
 
 Priest::~Priest()
@@ -37,12 +37,12 @@ bool Priest::init ()
 
 	CreatureBaseAttr* bas = getBaseAttr();
 	CreatureDynAttr* dyn = getDynAttr();
-	
-	
+
+
 	dyn->m_experience=0;
 	dyn->m_health = 200;
 	dyn->m_health = 200;
-	
+
 	bas->m_max_experience = 100;
 //	bas->m_level =1;
 	bas->m_level =61;
@@ -65,29 +65,29 @@ bool Priest::init ()
 	bas->m_resistances_cap[3] =50;
 	bas->m_walk_speed = 3000;
 	bas->m_attack_speed=2000;
-	
+
 	m_base_action = Action::HOLY_ATTACK;
 	m_left_action = Action::HOLY_ATTACK;
 	m_right_action = Action::HOLY_ATTACK;
-	
 
-	
+
+
 	int i;
 	for (i=1;i<6;i++)
 		bas->m_abilities[i]=0;
-	
+
 	// Debugging
 	bas->m_abilities[4] = 0xffffff;
-	
-	
+
+
 	bas->m_abilities[0] = 0x3f8f;
 	bas->m_attack_range =1;
-	
+
 	bas->m_special_flags=0;
 
 	m_name.assign("Elrond");
 	calcBaseAttrMod();
-	
+
 	return true;
 }
 
@@ -95,7 +95,7 @@ bool Priest::init ()
 bool Priest::update(float time)
 {
 	// Priestspezifische update Routine
-	
+
 	// update von User aufrufen
 	Player::update(time);
 	return true;

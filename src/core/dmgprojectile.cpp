@@ -118,18 +118,8 @@ bool DmgProjectile::update(float time)
 	// aktuelle Position
 	float x;
 	float y;
-
-	// neue Position
-	float xnew, ynew;
-
-	float rnew,rmin,rc;
-	float rold;
-	float x2,y2;
-
 	// zuletzt getroffenes Objekt (ID)
-	int lid;
 	float dir[2],d;
-	DmgProjectile* pr;
 	while (time>0)
 	{
 		hitobj.clear();
@@ -169,7 +159,7 @@ bool DmgProjectile::update(float time)
 				if (m_timer >= m_timer_limit)
 				{
 					m_state = DESTROYED;
-					
+
 					if (m_world->isServer())
 					{
 						Shape s;
@@ -177,7 +167,7 @@ bool DmgProjectile::update(float time)
 						s.m_coordinate_y = y;
 						s.m_type = Shape::CIRCLE;
 						s.m_radius = m_geometry.m_radius;
-	
+
 						// Alle Objekte im Explosionsradius suchen
 						hitobj.clear();
 						m_world->getObjectsInShape(&s,m_region,&hitobj,getGeometry()->m_layer,WorldObject::CREATURE,0);
@@ -186,7 +176,7 @@ bool DmgProjectile::update(float time)
 							// Schaden austeilen
 							(*i)->takeDamage(&m_damage);
 						}
-	
+
 						if (m_flags & MULTI_EXPLODES)
 						{
 							// Flag mehrfach explodierend gesetzt
@@ -194,7 +184,7 @@ bool DmgProjectile::update(float time)
 							d= 1/sqrt(sqr(m_speed_x)+sqr(m_speed_y));
 							dir[0] = m_speed_x * d;
 							dir[1] = m_speed_y * d;
-	
+
 							// Schaden halbieren
 							Damage dmg;
 							memcpy(&dmg,&m_damage,sizeof(Damage));
@@ -202,7 +192,7 @@ bool DmgProjectile::update(float time)
 							{
 								dmg.m_multiplier[i] *= 0.5;
 							}
-	
+
 							// vier neue Projektile erzeugen
 							DmgProjectile* pr;
 							pr = new DmgProjectile(m_world,m_type,m_creator_fraction, m_world->getValidProjectileId());
@@ -210,25 +200,25 @@ bool DmgProjectile::update(float time)
 							pr->setFlags(DmgProjectile::EXPLODES);
 							pr->setMaxRadius(1);
 							m_world->insertProjectile(pr,x+dir[0]*s.m_radius,y+dir[1]*s.m_radius,m_region);
-	
+
 							pr = new DmgProjectile(m_world,m_type,m_creator_fraction, m_world->getValidProjectileId());
 							memcpy(pr->getDamage(),&dmg,sizeof(Damage));
 							pr->setFlags(DmgProjectile::EXPLODES);
 							pr->setMaxRadius(1);
 							m_world->insertProjectile(pr,x-dir[1]*s.m_radius,y+dir[0]*s.m_radius,m_region);
-	
+
 							pr = new DmgProjectile(m_world,m_type,m_creator_fraction, m_world->getValidProjectileId());
 							memcpy(pr->getDamage(),&dmg,sizeof(Damage));
 							pr->setFlags(DmgProjectile::EXPLODES);
 							pr->setMaxRadius(1);
 							m_world->insertProjectile(pr,x-dir[0]*s.m_radius,y-dir[1]*s.m_radius,m_region);
-	
+
 							pr = new DmgProjectile(m_world,m_type,m_creator_fraction, m_world->getValidProjectileId());
 							memcpy(pr->getDamage(),&dmg,sizeof(Damage));
 							pr->setFlags(DmgProjectile::EXPLODES);
 							pr->setMaxRadius(1);
 							m_world->insertProjectile(pr,x+dir[1]*s.m_radius,y-dir[0]*s.m_radius,m_region);
-	
+
 						}
 					}
 				}
@@ -312,7 +302,7 @@ void DmgProjectile::handleFlying(float dtime)
 	x = getGeometry()->m_coordinate_x;
 	y = getGeometry()->m_coordinate_y;
 	float dir[2],d;
-	float rnew,rmin,rc;
+	float rnew,rmin;
 	float x2,y2;
 	int lid;
 	float newdir[2];
@@ -454,14 +444,14 @@ void DmgProjectile::handleFlying(float dtime)
 				m_speed_x=newdir[0];
 				m_speed_y=newdir[1];
 			}
-			
+
 			if (m_world->timerLimit(0))
 			{
 				m_event_mask |= Event::DATA_SPEED;
 			}
 		}
 		hitobj.clear();
-		
+
 		if (m_speed_y!=0 || m_speed_x !=0)
 		{
 			m_geometry.m_angle = atan2(m_speed_y,m_speed_x);
@@ -489,7 +479,7 @@ void DmgProjectile::handleFlying(float dtime)
 	{
 		i = hitobj.begin();
 		hit = (*i);
-		
+
 		while (!hitobj.empty() && (m_world->getRelation(m_creator_fraction,hit) == WorldObject:: ALLIED || hit->getId() == m_last_hit_object_id ))
 		{
 			i=hitobj.erase(i);
@@ -504,7 +494,7 @@ void DmgProjectile::handleFlying(float dtime)
 		i = hitobj.begin();
 		hit = (*i);
 		//DEBUG("hit object %p",hit);
-		
+
 		//DEBUG("hit object %i at %f %f",hit->getId(),hit->getGeometry()->m_shape.m_coordinate_x,hit->getGeometry()->m_shape.m_coordinate_y);
 		if (!(m_flags & (EXPLODES | MULTI_EXPLODES) ))
 		{
@@ -549,7 +539,7 @@ void DmgProjectile::handleFlying(float dtime)
 
 			m_timer=0;
 			m_timer_limit=200;
-			
+
 			m_event_mask |= Event::DATA_PROJ_STATE | Event::DATA_TYPE | Event::DATA_MAX_RADIUS;
 		}
 
@@ -646,7 +636,7 @@ void DmgProjectile::handleFlying(float dtime)
 				// bei Kettenblitz Schaden pro Sprung um 20% reduzieren
 				if (m_type == CHAIN_LIGHTNING)
 					m_damage.m_multiplier[Damage::AIR] *= 0.8;
-				
+
 				if (m_speed_y!=0 || m_speed_x !=0)
 				{
 					m_geometry.m_angle = atan2(m_speed_y,m_speed_x);
@@ -680,10 +670,8 @@ void DmgProjectile::handleGrowing(float dtime)
 	WorldObject* hit;
 	float x;
 	float y;
-	float xnew, ynew;
-	float rnew,rmin,rc;
+	float rnew,rmin;
 	float rold;
-	float x2,y2;
 	int lid;
 
 	// aktuelle Position
@@ -760,7 +748,7 @@ void DmgProjectile::handleGrowing(float dtime)
 			m_timer =0;
 			m_timer_limit=5000;
 			m_state = STABLE;
-			
+
 			m_event_mask |= Event::DATA_PROJ_STATE | Event::DATA_PROJ_TIMER;
 		}
 	}
@@ -780,7 +768,7 @@ void DmgProjectile::handleStable(float dtime)
 	x = getGeometry()->m_coordinate_x;
 	y = getGeometry()->m_coordinate_y;
 
-	float dir[2],d;
+	float dir[2];
 	float x2,y2;
 	DmgProjectile* pr;
 
@@ -903,7 +891,7 @@ void DmgProjectile::handleStable(float dtime)
 				m_state = STABLE;
 
 			}
-			
+
 		}
 
 		if (m_type == FIRE_WALL)
@@ -957,7 +945,7 @@ void DmgProjectile::toString(CharConv* cv)
 void DmgProjectile::fromString(CharConv* cv)
 {
 	// Typ, Fraktion und ID werden schon vorher eingelesen..
-	
+
 	char tmp;
 	cv->fromBuffer<char>(tmp);
 	m_state = (ProjectileState) tmp;
@@ -984,27 +972,27 @@ void DmgProjectile::writeEvent(Event* event, CharConv* cv)
 		cv->toBuffer(m_speed_x);
 		cv->toBuffer(m_speed_y);
 	}
-	
+
 	if (event->m_data & Event::DATA_PROJ_STATE)
 	{
 		cv->toBuffer((char) m_state);
 	}
-	
+
 	if (event->m_data & Event::DATA_GOAL_OBJECT)
 	{
 		cv->toBuffer(m_goal_object);
 	}
-	
+
 	if (event->m_data & Event::DATA_TYPE)
 	{
 		cv->toBuffer((char) m_type);
 	}
-	
+
 	if (event->m_data & Event::DATA_PROJ_TIMER)
 	{
 		cv->toBuffer(m_timer_limit);
 	}
-	
+
 	if (event->m_data & Event::DATA_MAX_RADIUS)
 	{
 		cv->toBuffer(m_max_radius);
@@ -1020,38 +1008,38 @@ void DmgProjectile::processEvent(Event* event, CharConv* cv)
 		cv->fromBuffer(m_geometry.m_coordinate_y);
 		cv->fromBuffer(m_speed_x);
 		cv->fromBuffer(m_speed_y);
-		
+
 		if (m_speed_y!=0 || m_speed_x !=0)
 		{
 			m_geometry.m_angle = atan2(m_speed_y,m_speed_x);
 		}
 	}
-	
+
 	if (event->m_data & Event::DATA_PROJ_STATE)
 	{
 		char ctmp;
 		cv->fromBuffer(ctmp);
 		m_state = (ProjectileState) ctmp;
 	}
-	
+
 	if (event->m_data & Event::DATA_GOAL_OBJECT)
 	{
 		cv->fromBuffer(m_goal_object);
 	}
-	
+
 	if (event->m_data & Event::DATA_TYPE)
 	{
 		char ctmp;
 		cv->fromBuffer(ctmp);
 		m_type = (ProjectileType) ctmp;
 	}
-	
+
 	if (event->m_data & Event::DATA_PROJ_TIMER)
 	{
 		cv->fromBuffer(m_timer_limit);
 		m_timer =0;
 	}
-	
+
 	if (event->m_data & Event::DATA_MAX_RADIUS)
 	{
 		cv->fromBuffer(m_max_radius);

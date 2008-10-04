@@ -3,12 +3,12 @@
 int ItemLoader::generateItemBasicData(TiXmlElement* pElement, string element)
 {
 	if ( !pElement ) return 0;
-	
+
 	TiXmlAttribute* pAttrib=pElement->FirstAttribute();
 	int i=0;
 	int ival;
 	double dval;
-	
+
 	if (element == "Item" && pAttrib)
 	{
 		if (m_item_data == 0)
@@ -21,7 +21,7 @@ int ItemLoader::generateItemBasicData(TiXmlElement* pElement, string element)
 			for (int i=0; i<31; i++)
 				m_item_data->m_modchance[i] = m_weapon_mod[i];
 		}
-		
+
 		while (element == "Item" && pAttrib)
 		{
 			if (!strcmp(pAttrib->Name(), "type"))
@@ -60,17 +60,17 @@ int ItemLoader::generateItemBasicData(TiXmlElement* pElement, string element)
 				else if (!strcmp(pAttrib->Value(), "big"))
 					m_item_data->m_size = Item::BIG;
 			}
-			
+
 			i++;
 			pAttrib=pAttrib->Next();
 		}
 	}
-	
+
 	if (element == "UseupEffect" && pAttrib)
 	{
 		if (m_item_data->m_useup_effect == 0)
 			m_item_data->m_useup_effect = new CreatureDynAttrMod;
-		
+
 		while (element == "UseupEffect" && pAttrib)
 		{
 			if (!strcmp(pAttrib->Name(), "dhealth") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
@@ -91,17 +91,17 @@ int ItemLoader::generateItemBasicData(TiXmlElement* pElement, string element)
 				m_item_data->m_useup_effect->m_dstatus_mod_immune_time[6] = static_cast<float>(dval);
 			else if (!strcmp(pAttrib->Name(), "dstatus_mod_immune_time7") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
 				m_item_data->m_useup_effect->m_dstatus_mod_immune_time[7] = static_cast<float>(dval);
-			
+
 			i++;
 			pAttrib=pAttrib->Next();
 		}
 	}
-	
+
 	if (element == "EquipEffect" /*&& pAttrib*/)
 	{
 		if (m_item_data->m_equip_effect == 0)
 			m_item_data->m_equip_effect = new CreatureBaseAttrMod;
-		
+
 		while (element == "EquipEffect" && pAttrib)
 		{
 			if (!strcmp(pAttrib->Name(), "darmor") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
@@ -158,17 +158,17 @@ int ItemLoader::generateItemBasicData(TiXmlElement* pElement, string element)
 				m_item_data->m_equip_effect->m_xabilities[5] = ival;
 			else if (!strcmp(pAttrib->Name(), "ximmunity") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
 				m_item_data->m_equip_effect->m_ximmunity = static_cast<char>(ival);
-			
+
 			i++;
 			pAttrib=pAttrib->Next();
 		}
 	}
-	
+
 	if (element == "WeaponAttribute" && pAttrib)
 	{
 		if (m_item_data->m_weapon_attr == 0)
 			m_item_data->m_weapon_attr = new WeaponAttr;
-		
+
 		while (element == "WeaponAttribute" && pAttrib)
 		{
 			if (!strcmp(pAttrib->Name(), "damage_min_physical") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
@@ -202,12 +202,12 @@ int ItemLoader::generateItemBasicData(TiXmlElement* pElement, string element)
 			}
 			else if (!strcmp(pAttrib->Name(), "dattack_speed") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
 				m_item_data->m_weapon_attr->m_dattack_speed = static_cast<short>(ival);
-			
+
 			i++;
 			pAttrib=pAttrib->Next();
 		}
 	}
-	
+
 	if (element == "Attribute" && pAttrib)
 	{
 		while (element == "Attribute" && pAttrib)
@@ -226,12 +226,12 @@ int ItemLoader::generateItemBasicData(TiXmlElement* pElement, string element)
 			{
 				m_item_data->m_max_enchant = static_cast<float>(dval);
 			}
-			
+
 			i++;
 			pAttrib=pAttrib->Next();
 		}
 	}
-	
+
 	return i;
 }
 
@@ -239,13 +239,13 @@ int ItemLoader::generateItemBasicData(TiXmlElement* pElement, string element)
 void ItemLoader::searchItemBasicData(TiXmlNode* pParent)
 {
 	if ( !pParent ) return;
-	
+
 	TiXmlNode* pChild;
-	TiXmlText* pText;
-	
+//	TiXmlText* pText;
+
 	int t = pParent->Type();
 	int num;
-	
+
 	switch ( t )
 	{
 	case TiXmlNode::ELEMENT:
@@ -267,11 +267,11 @@ void ItemLoader::searchItemBasicData(TiXmlNode* pParent)
 	default:
 		break;
 	}
-	
+
 	for ( pChild = pParent->FirstChild(); pChild != 0; pChild = pChild->NextSibling())
 	{
 		searchItemBasicData(pChild);
-		
+
 		if ( !strcmp(pChild->Value(), "Item") && pChild->Type() == TiXmlNode::ELEMENT)
 		{
 			m_item_list->push_back(m_item_data);
@@ -299,13 +299,13 @@ list<ItemBasicData*>* ItemLoader::loadItemBasicData(const char* pFilename)
 	m_weapon_mod[ItemFactory::ATTACK_MOD] = 0.1;
 	m_weapon_mod[ItemFactory::POWER_MOD] = 0.1;
 	m_weapon_mod[ItemFactory::DAMAGE_MULT_PHYS_MOD] = 0.1;
-	
+
 	m_item_data = 0;
 	m_item_list = new list<ItemBasicData*>;
-	
+
 	TiXmlDocument doc(pFilename);
 	bool loadOkay = doc.LoadFile();
-	
+
 	if (loadOkay)
 	{
 		DEBUG5("Loading %s", pFilename);
@@ -325,19 +325,19 @@ list<ItemBasicData*>* ItemLoader::loadItemBasicData(const char* pFilename)
 int ItemLoader::generateDropChanceData(TiXmlElement* pElement, string element)
 {
 	if ( !pElement ) return 0;
-	
+
 	TiXmlAttribute* pAttrib=pElement->FirstAttribute();
 	int i=0;
 	int ival;
 	double dval;
-	
+
 	if (element == "Item" && pAttrib)
 	{
 		if (m_item_data == 0)
 		{
 			m_drop_chance_data = new DropChanceData;
 		}
-		
+
 		while (element == "Item" && pAttrib)
 		{
 			if (!strcmp(pAttrib->Name(), "type"))
@@ -376,12 +376,12 @@ int ItemLoader::generateDropChanceData(TiXmlElement* pElement, string element)
 				else if (!strcmp(pAttrib->Value(), "big"))
 					m_drop_chance_data->m_size = Item::BIG;
 			}
-			
+
 			i++;
 			pAttrib=pAttrib->Next();
 		}
 	}
-	
+
 	if (element == "DropChance" && pAttrib)
 	{
 		while (element == "DropChance" && pAttrib)
@@ -390,12 +390,12 @@ int ItemLoader::generateDropChanceData(TiXmlElement* pElement, string element)
 				m_drop_chance_data->m_level = ival;
 			else if (!strcmp(pAttrib->Name(), "probability") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
 				m_drop_chance_data->m_probability = static_cast<float>(dval);
-			
+
 			i++;
 			pAttrib=pAttrib->Next();
 		}
 	}
-	
+
 	return i;
 }
 
@@ -403,13 +403,13 @@ int ItemLoader::generateDropChanceData(TiXmlElement* pElement, string element)
 void ItemLoader::searchDropChanceData(TiXmlNode* pParent)
 {
 	if ( !pParent ) return;
-	
+
 	TiXmlNode* pChild;
-	TiXmlText* pText;
-	
+//	TiXmlText* pText;
+
 	int t = pParent->Type();
 	int num;
-	
+
 	switch ( t )
 	{
 	case TiXmlNode::ELEMENT:
@@ -431,11 +431,11 @@ void ItemLoader::searchDropChanceData(TiXmlNode* pParent)
 	default:
 		break;
 	}
-	
+
 	for ( pChild = pParent->FirstChild(); pChild != 0; pChild = pChild->NextSibling())
 	{
 		searchDropChanceData(pChild);
-		
+
 		if ( !strcmp(pChild->Value(), "Item") && pChild->Type() == TiXmlNode::ELEMENT)
 		{
 			m_drop_chance_data_list->push_back(m_drop_chance_data);
@@ -450,10 +450,10 @@ list<DropChanceData*>* ItemLoader::loadDropChanceData(const char* pFilename)
 {
 	m_drop_chance_data = 0;
 	m_drop_chance_data_list = new list<DropChanceData*>;
-	
+
 	TiXmlDocument doc(pFilename);
 	bool loadOkay = doc.LoadFile();
-	
+
 	if (loadOkay)
 	{
 		DEBUG5("Loading %s", pFilename);
@@ -473,41 +473,39 @@ list<DropChanceData*>* ItemLoader::loadDropChanceData(const char* pFilename)
 int ItemLoader::generateItemMeshData(TiXmlElement* pElement, string element)
 {
 	if ( !pElement ) return 0;
-	
+
 	TiXmlAttribute* pAttrib=pElement->FirstAttribute();
 	int i=0;
-	int ival;
-	double dval;
-	
+
 	if (element == "Item" && pAttrib)
 	{
 		if (m_item_mesh_data == 0)
 		{
 			m_item_mesh_data = new ItemMeshData;
 		}
-		
+
 		while (element == "Item" && pAttrib)
 		{
 			if (!strcmp(pAttrib->Name(), "subtype"))
 				m_item_mesh_data->m_subtype = pAttrib->Value();
-			
+
 			i++;
 			pAttrib=pAttrib->Next();
 		}
 	}
-	
+
 	if (element == "Mesh" && pAttrib)
 	{
 		while (element == "Mesh" && pAttrib)
 		{
 			if (!strcmp(pAttrib->Name(), "file"))
 				m_item_mesh_data->m_mesh = pAttrib->Value();
-			
+
 			i++;
 			pAttrib=pAttrib->Next();
 		}
 	}
-	
+
 	return i;
 }
 
@@ -515,13 +513,13 @@ int ItemLoader::generateItemMeshData(TiXmlElement* pElement, string element)
 void ItemLoader::searchItemMeshData(TiXmlNode* pParent)
 {
 	if ( !pParent ) return;
-	
+
 	TiXmlNode* pChild;
-	TiXmlText* pText;
-	
+//	TiXmlText* pText;
+
 	int t = pParent->Type();
 	int num;
-	
+
 	switch ( t )
 	{
 	case TiXmlNode::ELEMENT:
@@ -543,11 +541,11 @@ void ItemLoader::searchItemMeshData(TiXmlNode* pParent)
 	default:
 		break;
 	}
-	
+
 	for ( pChild = pParent->FirstChild(); pChild != 0; pChild = pChild->NextSibling())
 	{
 		searchItemMeshData(pChild);
-		
+
 		if ( !strcmp(pChild->Value(), "Item") && pChild->Type() == TiXmlNode::ELEMENT)
 		{
 			m_item_mesh_list->push_back(m_item_mesh_data);
@@ -562,10 +560,10 @@ list<ItemMeshData*>* ItemLoader::loadItemMeshData(const char* pFilename)
 {
 	m_item_mesh_data = 0;
 	m_item_mesh_list = new list<ItemMeshData*>;
-	
+
 	TiXmlDocument doc(pFilename);
 	bool loadOkay = doc.LoadFile();
-	
+
 	if (loadOkay)
 	{
 		DEBUG5("Loading %s", pFilename);
