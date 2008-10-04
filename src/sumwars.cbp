@@ -136,8 +136,6 @@
 		<Unit filename="core\serveraction.h" />
 		<Unit filename="core\servernetwork.cpp" />
 		<Unit filename="core\servernetwork.h" />
-		<Unit filename="core\serverwobject.cpp" />
-		<Unit filename="core\serverwobject.h" />
 		<Unit filename="core\spawnpoint.cpp" />
 		<Unit filename="core\spawnpoint.h" />
 		<Unit filename="core\tiles.h" />
