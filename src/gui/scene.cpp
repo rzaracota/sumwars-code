@@ -51,7 +51,7 @@ void Scene::registerMeshes()
 	// Spieler
 	registerObject("warrior","warrior.mesh","");
 	registerAttachedMesh("warrior","itemRightHand","sword.mesh");
-	registerObject("mage","warrior.mesh","");
+	registerObject("mage","warrior.mesh","");	// TODO
 	registerObject("priest","warrior.mesh",""); // TODO
 	registerObject("archer","warrior.mesh",""); // TODO
 
@@ -855,8 +855,8 @@ void Scene::updateProjectiles()
 {
 	Player* player = m_document->getLocalPlayer();
 
-	map<int,DmgProjectile*>* projectiles;
-	map<int,DmgProjectile*>::iterator it;
+	map<int,Projectile*>* projectiles;
+	map<int,Projectile*>::iterator it;
 	projectiles = player->getRegion()->getProjectiles();
 	Projectile* pr;
 

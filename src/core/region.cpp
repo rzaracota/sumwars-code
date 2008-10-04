@@ -19,7 +19,7 @@ Region::Region(short dimx, short dimy, short id, World* world, bool server)
 	m_players = new map<int,WorldObject*>;
 
 	// Baum fuer Projektile anlegen
-	m_projectiles = new map<int,DmgProjectile*>;
+	m_projectiles = new map<int,Projectile*>;
 
 	// Liste der Gegenstaende
 	m_drop_items = new map<int,DropItem*>;
@@ -47,7 +47,7 @@ Region::~Region()
 		delete i->second;
 	}
 
-	map<int,DmgProjectile*>::iterator j;
+	map<int,Projectile*>::iterator j;
 	for (j =  m_projectiles->begin(); j != m_projectiles->end(); j++)
 	{
 		delete (j->second);
@@ -94,9 +94,9 @@ WorldObject* Region::getObject ( int id)
 	}
 }
 
-DmgProjectile* Region::getProjectile(int id)
+Projectile* Region::getProjectile(int id)
 {
-	map<int,DmgProjectile*>::iterator iter;
+	map<int,Projectile*>::iterator iter;
 
 	// Objekt im Binärbaum suchen
 	iter = m_projectiles->find(id);
@@ -534,11 +534,11 @@ void Region::getObjectsOnLine( float xstart, float ystart, float xend, float yen
 	}
 }
 
-void Region::getProjectilesOnScreen(float center_x,float center_y, list<DmgProjectile*>* result)
+void Region::getProjectilesOnScreen(float center_x,float center_y, list<Projectile*>* result)
 {
-	map<int,DmgProjectile*>::iterator i;
+	map<int,Projectile*>::iterator i;
 	float dx,dy,r;
-	DmgProjectile* pr;
+	Projectile* pr;
 	for (i=m_projectiles->begin();i!=m_projectiles->end();++i)
 	{
 		pr = (i->second);
@@ -634,7 +634,7 @@ bool Region::insertObject (WorldObject* object, float x, float y)
 }
 
 
-bool  Region::insertProjectile(DmgProjectile* object, float x, float y)
+bool  Region::insertProjectile(Projectile* object, float x, float y)
 {
 	m_projectiles->insert(make_pair(object->getId(),object));
 	object->getGeometry()->m_coordinate_x = x;
@@ -749,7 +749,7 @@ bool Region::changeObjectGroup(WorldObject* object,WorldObject::Group group )
 
 }
 
-void Region::deleteProjectile(DmgProjectile* proj)
+void Region::deleteProjectile(Projectile* proj)
 {
 	int id = proj->getId();
 
@@ -768,7 +768,7 @@ void Region::update(float time)
 	map<int,WorldObject*>::iterator iter;
 	WorldObject* object;
 	WorldObject::Geometry* wob;
-	map<int,DmgProjectile*>::iterator it3;
+	map<int,Projectile*>::iterator it3;
 
 
 	// alle Eventsmasken loeschen
@@ -822,7 +822,7 @@ void Region::update(float time)
 	DEBUG5("Update aller WeltObjekte abgeschlossen\n\n");
 
 	// alle Projektile updaten
-	DmgProjectile* pr =0;
+	Projectile* pr =0;
 
 	for (it3 = m_projectiles->begin(); it3 !=m_projectiles->end();)
 	{
@@ -942,7 +942,7 @@ void Region::getRegionData(CharConv* cv)
 	DEBUG("projectiles: %i",m_projectiles->size());
 
 	// Projektile in den Puffer eintragen
-	map<int,DmgProjectile*>::iterator kt;
+	map<int,Projectile*>::iterator kt;
 	for (kt = m_projectiles->begin(); kt != m_projectiles->end(); ++kt)
 	{
 		kt->second->toString(cv);
@@ -1011,7 +1011,7 @@ void Region::createProjectileFromString(CharConv* cv)
 
 	char type,frac;
 	int id;
-	DmgProjectile* proj;
+	Projectile* proj;
 	float x,y;
 
 	cv->fromBuffer(type);
@@ -1020,7 +1020,7 @@ void Region::createProjectileFromString(CharConv* cv)
 
 	DEBUG5("new projectile %i frac %i id %i",type,frac,id);
 
-	proj = new DmgProjectile(m_world, (Projectile::ProjectileType) type, (WorldObject::TypeInfo::Fraction) frac, id);
+	proj = new Projectile(m_world, (Projectile::ProjectileType) type, (WorldObject::TypeInfo::Fraction) frac, id);
 
 	proj->fromString(cv);
 

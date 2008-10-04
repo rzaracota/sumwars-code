@@ -222,14 +222,14 @@ public:
 	void getObjectsOnLine( float xstart, float ystart, float xend, float yend,  short region, list<WorldObject*>* result,short layer=WorldObject::Geometry::LAYER_ALL, short group = WorldObject::GROUP_ALL, WorldObject* omit=0 );
 
 	/**
-	 * \fn void getProjectilesOnScreen(float center_x,float center_y,short region, list<DmgProjectile*>* result)
+	 * \fn void getProjectilesOnScreen(float center_x,float center_y,short region, list<Projectile*>* result)
 	 * \brief Gibt alle Projektile auf dem Bildschirm aus
 	 * \param center_x x-Koordinate Zentrum
 	 * \param center_y y-Koordinate Zentrum
 	 * \param region Region
 	 * \param result Liste in die die Objekte eingeordnet werden
 	 */
-	void getProjectilesOnScreen(float center_x,float center_y,short region, list<DmgProjectile*>* result);
+	void getProjectilesOnScreen(float center_x,float center_y,short region, list<Projectile*>* result);
 
 
 	/**
@@ -250,13 +250,13 @@ public:
 	bool insertPlayer(WorldObject* player, int slot= NOSLOT);
 
 	/**
-	 * \fn bool  insertProjectile(DmgProjectile* object, float x, float y, short region)
+	 * \fn bool  insertProjectile(Projectile* object, float x, float y, short region)
 	 * \brief Fuegt ein Projektil ein
 	 * \param object Zeiger auf das Objekt, welches eingef&uuml;gt werden soll
 	 * \return bool, der angibt, ob die Operation erfolgreich war
 	 *
 	 */
-	bool  insertProjectile(DmgProjectile* object, float x, float y, short region);
+	bool  insertProjectile(Projectile* object, float x, float y, short region);
 
 	
 	

@@ -587,7 +587,7 @@ void Creature::performActionCritPart(float goalx, float goaly, WorldObject* goal
 	// Struktur fuer Basisattributmods, initialisiert mit Nullen
 	CreatureBaseAttrMod cbam;
 
-	DmgProjectile* pr =0;
+	Projectile* pr =0;
 
 	// Struktur fuer Modifikationen der dyn. Attribute, initialisiert mit Nullen
 	CreatureDynAttrMod cdam;
@@ -731,7 +731,7 @@ void Creature::performActionCritPart(float goalx, float goaly, WorldObject* goal
 		// Magierfaehigkeiten
 		case Action::MAGIC_ATTACK:
 			// Projektil magischer Pfeil erzeugen
-			pr = new DmgProjectile(getWorld(),Projectile::MAGIC_ARROW,fr, getWorld()->getValidProjectileId());
+			pr = new Projectile(getWorld(),Projectile::MAGIC_ARROW,fr, getWorld()->getValidProjectileId());
 			memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
 			pr->setSpeedX(dir[0]/70);
 			pr->setSpeedY(dir[1]/70);
@@ -741,7 +741,7 @@ void Creature::performActionCritPart(float goalx, float goaly, WorldObject* goal
 		case Action::FIRE_BOLT:
 		case Action::FIRE_STRIKE:
 			// Projektil Feuerblitz erzeugen
-			pr = new DmgProjectile(getWorld(),Projectile::FIRE_BOLT,fr, getWorld()->getValidProjectileId());
+			pr = new Projectile(getWorld(),Projectile::FIRE_BOLT,fr, getWorld()->getValidProjectileId());
 			memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
 			pr->setSpeedX(dir[0]/70);
 			pr->setSpeedY(dir[1]/70);
@@ -751,7 +751,7 @@ void Creature::performActionCritPart(float goalx, float goaly, WorldObject* goal
 		case Action::FIRE_BALL:
 		case Action::INFERNO_BALL:
 			// Projektil Feuerball erzeugen
-			pr = new DmgProjectile(getWorld(),Projectile::FIRE_BALL,fr, getWorld()->getValidProjectileId());
+			pr = new Projectile(getWorld(),Projectile::FIRE_BALL,fr, getWorld()->getValidProjectileId());
 			memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
 			pr->setSpeedX(dir[0]/70);
 			pr->setSpeedY(dir[1]/70);
@@ -761,14 +761,14 @@ void Creature::performActionCritPart(float goalx, float goaly, WorldObject* goal
 		case Action::FIRE_WAVE:
 		case Action::FIRE_STORM:
 			// Projektil Feuerwelle erzeugen
-			pr = new DmgProjectile(getWorld(),Projectile::FIRE_WAVE,fr, getWorld()->getValidProjectileId());
+			pr = new Projectile(getWorld(),Projectile::FIRE_WAVE,fr, getWorld()->getValidProjectileId());
 			memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
 			getWorld()->insertProjectile(pr,x,y,reg);
 			break;
 
 		case Action::FIRE_WALL:
 			// Projektil Feuersaeule erzeugen
-			pr = new DmgProjectile(getWorld(),Projectile::FIRE_WALL,fr, getWorld()->getValidProjectileId());
+			pr = new Projectile(getWorld(),Projectile::FIRE_WALL,fr, getWorld()->getValidProjectileId());
 			memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
 			getWorld()->insertProjectile(pr,goalx,goaly,reg);
 			break;
@@ -776,7 +776,7 @@ void Creature::performActionCritPart(float goalx, float goaly, WorldObject* goal
 		case Action::ICE_BOLT:
 		case Action::ICE_SPIKE:
 			// Projektil Eisblitz erzeugen
-			pr = new DmgProjectile(getWorld(),Projectile::ICE_BOLT,fr, getWorld()->getValidProjectileId());
+			pr = new Projectile(getWorld(),Projectile::ICE_BOLT,fr, getWorld()->getValidProjectileId());
 			memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
 			pr->setSpeedX(dir[0]/70);
 			pr->setSpeedY(dir[1]/70);
@@ -786,7 +786,7 @@ void Creature::performActionCritPart(float goalx, float goaly, WorldObject* goal
 		case Action::SNOW_STORM:
 		case Action::BLIZZARD:
 			// Projektil Blizzard erzeugen
-			pr = new DmgProjectile(getWorld(),Projectile::BLIZZARD,fr, getWorld()->getValidProjectileId());
+			pr = new Projectile(getWorld(),Projectile::BLIZZARD,fr, getWorld()->getValidProjectileId());
 			memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
 			getWorld()->insertProjectile(pr,goalx,goaly,reg);
 			break;
@@ -794,14 +794,14 @@ void Creature::performActionCritPart(float goalx, float goaly, WorldObject* goal
 		case Action::ICE_RING:
 		case Action::FROST_RING:
 			// Projektil Eisring erzeugen
-			pr = new DmgProjectile(getWorld(),Projectile::ICE_RING,fr, getWorld()->getValidProjectileId());
+			pr = new Projectile(getWorld(),Projectile::ICE_RING,fr, getWorld()->getValidProjectileId());
 			memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
 			getWorld()->insertProjectile(pr,x,y,reg);
 			break;
 
 		case Action::FREEZE:
 			// Projektil Einfrieren erzeugen
-			pr = new DmgProjectile(getWorld(),Projectile::FREEZE,fr, getWorld()->getValidProjectileId());
+			pr = new Projectile(getWorld(),Projectile::FREEZE,fr, getWorld()->getValidProjectileId());
 			memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
 			getWorld()->insertProjectile(pr,goalx,goaly,reg);
 			break;
@@ -809,7 +809,7 @@ void Creature::performActionCritPart(float goalx, float goaly, WorldObject* goal
 		case Action::LIGHTNING:
 		case Action::LIGHTNING_STRIKE:
 			// Projektil Blitz erzeugen
-			pr = new DmgProjectile(getWorld(),Projectile::LIGHTNING,fr, getWorld()->getValidProjectileId());
+			pr = new Projectile(getWorld(),Projectile::LIGHTNING,fr, getWorld()->getValidProjectileId());
 			memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
 			getWorld()->insertProjectile(pr,goalx,goaly,reg);
 			break;
@@ -817,7 +817,7 @@ void Creature::performActionCritPart(float goalx, float goaly, WorldObject* goal
 		case Action::THUNDERSTORM:
 		case Action::THUNDERSTORM2:
 			// Projektil Gewitter erzeugen
-			pr = new DmgProjectile(getWorld(),Projectile::THUNDERSTORM,fr, getWorld()->getValidProjectileId());
+			pr = new Projectile(getWorld(),Projectile::THUNDERSTORM,fr, getWorld()->getValidProjectileId());
 			memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
 			getWorld()->insertProjectile(pr,goalx,goaly,reg);
 			break;
@@ -825,7 +825,7 @@ void Creature::performActionCritPart(float goalx, float goaly, WorldObject* goal
 		case Action::CHAIN_LIGHTNING:
 		case Action::CHAIN_LIGHTNING2:
 			// Projektil Kettenblitz erzeugen
-			pr = new DmgProjectile(getWorld(),Projectile::CHAIN_LIGHTNING,fr, getWorld()->getValidProjectileId());
+			pr = new Projectile(getWorld(),Projectile::CHAIN_LIGHTNING,fr, getWorld()->getValidProjectileId());
 			memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
 			if (m_action.m_type == Action::CHAIN_LIGHTNING2)
 			{
@@ -851,7 +851,7 @@ void Creature::performActionCritPart(float goalx, float goaly, WorldObject* goal
 		case Action::WEAK_POINT:
 		case Action::BLIND_RAGE:
 			// Projektil Pfeil erzeugen
-			pr = new DmgProjectile(getWorld(),arrow,fr, getWorld()->getValidProjectileId());
+			pr = new Projectile(getWorld(),arrow,fr, getWorld()->getValidProjectileId());
 			memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
 			pr->setSpeedX(dir[0]/80);
 			pr->setSpeedY(dir[1]/80);
@@ -860,7 +860,7 @@ void Creature::performActionCritPart(float goalx, float goaly, WorldObject* goal
 
 		case Action::GUIDED_TRIPLE_SHOT:
 			// Projektil gelenkter Pfeil erzeugen
-			pr = new DmgProjectile(getWorld(),Projectile::GUIDED_ARROW,fr, getWorld()->getValidProjectileId());
+			pr = new Projectile(getWorld(),Projectile::GUIDED_ARROW,fr, getWorld()->getValidProjectileId());
 			memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
 			pr->setSpeedX(dir[0]/100);
 			pr->setSpeedY(dir[1]/100);
@@ -885,7 +885,7 @@ void Creature::performActionCritPart(float goalx, float goaly, WorldObject* goal
 
 				sx = x+dir2[0] * 1.05 * s.m_radius;
 				sy = y+dir2[1] * 1.05 * s.m_radius;
-				pr = new DmgProjectile(getWorld(),arrow,fr, getWorld()->getValidProjectileId());
+				pr = new Projectile(getWorld(),arrow,fr, getWorld()->getValidProjectileId());
 				memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
 				pr->setSpeedX(dir2[0]/80);
 				pr->setSpeedY(dir2[1]/80);
@@ -906,7 +906,7 @@ void Creature::performActionCritPart(float goalx, float goaly, WorldObject* goal
 
 				sx = x+dir2[0] * 1.05 * s.m_radius;
 				sy = y+dir2[1] * 1.05 * s.m_radius;
-				pr = new DmgProjectile(getWorld(),arrow,fr, getWorld()->getValidProjectileId());
+				pr = new Projectile(getWorld(),arrow,fr, getWorld()->getValidProjectileId());
 				memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
 				pr->setSpeedX(dir2[0]/80);
 				pr->setSpeedY(dir2[1]/80);
@@ -916,18 +916,18 @@ void Creature::performActionCritPart(float goalx, float goaly, WorldObject* goal
 
 		case Action::PIERCE:
 			// Projektil Pfeil erzeugen
-			pr = new DmgProjectile(getWorld(),arrow,fr, getWorld()->getValidProjectileId());
+			pr = new Projectile(getWorld(),arrow,fr, getWorld()->getValidProjectileId());
 			memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
 			pr->setSpeedX(dir[0]/80);
 			pr->setSpeedY(dir[1]/80);
 			// Flag durchschlagend setzen
-			pr->setFlags(DmgProjectile::PIERCING);
+			pr->setFlags(Projectile::PIERCING);
 			getWorld()->insertProjectile(pr,sx,sy,reg);
 			break;
 
 		case Action::VACUUM:
 			// Projektil Windpfeil erzeugen
-			pr = new DmgProjectile(getWorld(),Projectile::WIND_ARROW,fr, getWorld()->getValidProjectileId());
+			pr = new Projectile(getWorld(),Projectile::WIND_ARROW,fr, getWorld()->getValidProjectileId());
 			memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
 			pr->setSpeedX(dir[0]/80);
 			pr->setSpeedY(dir[1]/80);
@@ -937,28 +937,28 @@ void Creature::performActionCritPart(float goalx, float goaly, WorldObject* goal
 		case Action::EXPLODING_ARROW:
 		case Action::EXPLOSION_CASCADE:
 			// Projektil Pfeil erzeugen
-			pr = new DmgProjectile(getWorld(),arrow,fr, getWorld()->getValidProjectileId());
+			pr = new Projectile(getWorld(),arrow,fr, getWorld()->getValidProjectileId());
 			memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
 			pr->setSpeedX(dir[0]/80);
 			pr->setSpeedY(dir[1]/80);
 			// Flag explodierend setzen
-			pr->setFlags(DmgProjectile::EXPLODES);
+			pr->setFlags(Projectile::EXPLODES);
 			// bei verbesserter Version Flag mehrfach explodierend setzen
 			if (m_action.m_type==Action::EXPLOSION_CASCADE)
-				pr->setFlags(DmgProjectile::MULTI_EXPLODES);
+				pr->setFlags(Projectile::MULTI_EXPLODES);
 			getWorld()->insertProjectile(pr,sx,sy,reg);
 			break;
 
 		case Action::DEATH_ROULETTE:
 			// Projektil Pfeil erzeugen
-			pr = new DmgProjectile(getWorld(),arrow,fr, getWorld()->getValidProjectileId());
+			pr = new Projectile(getWorld(),arrow,fr, getWorld()->getValidProjectileId());
 			memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
 			pr->setSpeedX(dir[0]/80);
 			pr->setSpeedY(dir[1]/80);
 			// Maximale Anzahl der Spruenge
 			pr->setCounter(-20);
 			// Flag zufaellig weiterspringen setzen
-			pr->setFlags(DmgProjectile::PROB_BOUNCING);
+			pr->setFlags(Projectile::PROB_BOUNCING);
 			getWorld()->insertProjectile(pr,sx,sy,reg);
 			break;
 
@@ -1024,7 +1024,7 @@ void Creature::performActionCritPart(float goalx, float goaly, WorldObject* goal
 		case Action::HOLY_LIGHT:
 		case Action::HOLY_FIRE:
 			// Projektil Lichtstrahl erzeugen
-			pr = new DmgProjectile(getWorld(),Projectile::LIGHT_BEAM,fr, getWorld()->getValidProjectileId());
+			pr = new Projectile(getWorld(),Projectile::LIGHT_BEAM,fr, getWorld()->getValidProjectileId());
 			memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
 			getWorld()->insertProjectile(pr,goalx,goaly,reg);
 			break;
@@ -1117,7 +1117,7 @@ void Creature::performActionCritPart(float goalx, float goaly, WorldObject* goal
 
 		case Action::LIGHT_BEAM:
 			// Projektil Lichtstrahl erzeugen
-			pr = new DmgProjectile(getWorld(),Projectile::LIGHT_BEAM,fr, getWorld()->getValidProjectileId());
+			pr = new Projectile(getWorld(),Projectile::LIGHT_BEAM,fr, getWorld()->getValidProjectileId());
 			memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
 			getWorld()->insertProjectile(pr,goalx,goaly,reg);
 			break;
@@ -1135,7 +1135,7 @@ void Creature::performActionCritPart(float goalx, float goaly, WorldObject* goal
 					// Projektil Lichtstrahl fuer jedes Objekt erzeugen
 					goalx = (*it)->getGeometry()->m_shape.m_coordinate_x;
 					goaly = (*it)->getGeometry()->m_shape.m_coordinate_y;
-					pr = new DmgProjectile(getWorld(),Projectile::LIGHT_BEAM,fr, getWorld()->getValidProjectileId());
+					pr = new Projectile(getWorld(),Projectile::LIGHT_BEAM,fr, getWorld()->getValidProjectileId());
 					memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
 					getWorld()->insertProjectile(pr,goalx,goaly,reg);
 				}
@@ -1145,7 +1145,7 @@ void Creature::performActionCritPart(float goalx, float goaly, WorldObject* goal
 		case Action::BREAK_BINDING:
 		case Action::DISRUPT_BINDING:
 			// Projektil Elementarzerstoerung erzeugen
-			pr = new DmgProjectile(getWorld(),Projectile::ELEM_EXPLOSION,fr, getWorld()->getValidProjectileId());
+			pr = new Projectile(getWorld(),Projectile::ELEM_EXPLOSION,fr, getWorld()->getValidProjectileId());
 			memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
 			getWorld()->insertProjectile(pr,goalx,goaly,reg);
 			break;
@@ -1214,7 +1214,7 @@ void Creature::performActionCritPart(float goalx, float goaly, WorldObject* goal
 
 		case Action::ACID:
 			// Projektil Saeure erzeugen
-			pr = new DmgProjectile(getWorld(),Projectile::ACID,fr, getWorld()->getValidProjectileId());
+			pr = new Projectile(getWorld(),Projectile::ACID,fr, getWorld()->getValidProjectileId());
 			memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
 			getWorld()->insertProjectile(pr,goalx,goaly,reg);
 			break;
@@ -1257,7 +1257,7 @@ void Creature::performActionCritPart(float goalx, float goaly, WorldObject* goal
 
 		case Action::DIVINE_WIND:
 			// Projektil heiliger Strahl erzeugen
-			pr = new DmgProjectile(getWorld(),Projectile::DIVINE_BEAM,fr, getWorld()->getValidProjectileId());
+			pr = new Projectile(getWorld(),Projectile::DIVINE_BEAM,fr, getWorld()->getValidProjectileId());
 			memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
 			getWorld()->insertProjectile(pr,goalx,goaly,reg);
 			break;
@@ -1276,7 +1276,7 @@ void Creature::performActionCritPart(float goalx, float goaly, WorldObject* goal
 				{
 					goalx = (*it)->getGeometry()->m_shape.m_coordinate_x;
 					goaly = (*it)->getGeometry()->m_shape.m_coordinate_y;
-					pr = new DmgProjectile(getWorld(),Projectile::DIVINE_BEAM,fr, getWorld()->getValidProjectileId());
+					pr = new Projectile(getWorld(),Projectile::DIVINE_BEAM,fr, getWorld()->getValidProjectileId());
 					memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
 					getWorld()->insertProjectile(pr,goalx,goaly,reg);
 				}
@@ -1347,7 +1347,7 @@ void Creature::performActionCritPart(float goalx, float goaly, WorldObject* goal
 
 		case Action::HYPNOSIS:
 			// Projektil Hypnose erzeugen
-			pr = new DmgProjectile(getWorld(),Projectile::HYPNOSIS,fr, getWorld()->getValidProjectileId());
+			pr = new Projectile(getWorld(),Projectile::HYPNOSIS,fr, getWorld()->getValidProjectileId());
 			memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
 			getWorld()->insertProjectile(pr,goalx,goaly,reg);
 			break;
@@ -1365,7 +1365,7 @@ void Creature::performActionCritPart(float goalx, float goaly, WorldObject* goal
 				{
 					goalx = (*it)->getGeometry()->m_shape.m_coordinate_x;
 					goaly = (*it)->getGeometry()->m_shape.m_coordinate_y;
-					pr = new DmgProjectile(getWorld(),Projectile::HYPNOSIS,fr, getWorld()->getValidProjectileId());
+					pr = new Projectile(getWorld(),Projectile::HYPNOSIS,fr, getWorld()->getValidProjectileId());
 					memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
 					getWorld()->insertProjectile(pr,goalx,goaly,reg);
 				}
@@ -3564,7 +3564,7 @@ void Creature::takeDamage(Damage* d)
 	if ((m_base_attr_mod.m_special_flags & STATIC_SHIELD) && dmg > m_base_attr_mod.m_max_health * 0.02)
 	{
 		// Projektil Statikschild erzeugen
-		DmgProjectile* pr = new DmgProjectile(getWorld(),Projectile::STATIC_SHIELD,getTypeInfo()->m_fraction, getWorld()->getValidProjectileId());
+		Projectile* pr = new Projectile(getWorld(),Projectile::STATIC_SHIELD,getTypeInfo()->m_fraction, getWorld()->getValidProjectileId());
 
 		// Schaden festlegen
 		Damage dmg;

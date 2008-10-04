@@ -594,8 +594,8 @@ void WindowMain::DisplayFunc ()
 
 	}
 
-	list<DmgProjectile*> proj;
-	list<DmgProjectile*>::iterator i2;
+	list<Projectile*> proj;
+	list<Projectile*>::iterator i2;
 	
 	region->getProjectilesOnScreen(x,y,&proj);
 	Projectile* pr;

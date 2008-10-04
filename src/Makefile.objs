@@ -13,7 +13,6 @@
 ./core/debug.o
 ./core/item.o
 ./core/dropitem.o
-./core/dmgprojectile.o
 ./core/creature.o
 ./core/pathfind.o
 ./core/fixedobject.o

@@ -169,28 +169,28 @@ class Region
 		void getObjectsOnLine( float xstart, float ystart, float xend, float yend,  list<WorldObject*>* result,short layer=WorldObject::Geometry::LAYER_ALL, short group = WorldObject::GROUP_ALL, WorldObject* omit=0 );
 
 		/**
-		 * \fn void getProjectilesOnScreen(float center_x,float center_y, list<DmgProjectile*>* result)
+		 * \fn void getProjectilesOnScreen(float center_x,float center_y, list<Projectile*>* result)
 		 * \brief Gibt alle Projektile auf dem Bildschirm aus
 		 * \param center_x x-Koordinate Zentrum
 		 * \param center_y y-Koordinate Zentrum
 		 * \param result Liste in die die Objekte eingeordnet werden
 		 */
-		void getProjectilesOnScreen(float center_x,float center_y, list<DmgProjectile*>* result);
+		void getProjectilesOnScreen(float center_x,float center_y, list<Projectile*>* result);
 
 		/**
-		 * \fn bool  insertProjectile(DmgProjectile* object, float x, float y)
+		 * \fn bool  insertProjectile(Projectile* object, float x, float y)
 		 * \brief Fuegt ein Projektil ein
 		 * \param object Zeiger auf das Objekt, welches eingef&uuml;gt werden soll
 		 * \return bool, der angibt, ob die Operation erfolgreich war
 		 *
 		 */
-		bool  insertProjectile(DmgProjectile* object, float x, float y);
+		bool  insertProjectile(Projectile* object, float x, float y);
 
 		/**
-		 * \fn DmgProjectile* getProjectile(int id)
+		 * \fn Projectile* getProjectile(int id)
 		 * \brief Gibt das Projektil mit der angegebenen ID aus
 		 */
-		DmgProjectile* getProjectile(int id);
+		Projectile* getProjectile(int id);
 
 		/**
 		 * \fn deleteObject(WorldObject* object)
@@ -234,10 +234,10 @@ class Region
 		void createItemFromString(CharConv* cv);
 
 		/**
-		 * \fn void deleteProjectile(DmgProjectile* proj)
+		 * \fn void deleteProjectile(Projectile* proj)
 		 * \brief Entfernt das Projektil aus der Region
 		 */
-		void deleteProjectile(DmgProjectile* proj);
+		void deleteProjectile(Projectile* proj);
 
 		/**
 		 * \fn update(float time)
@@ -325,9 +325,9 @@ class Region
 		}
 
 		/**
-		 * \fn map<int,DmgProjectile*>* getProjectiles()
+		 * \fn map<int,Projectile*>* getProjectiles()
 		 */
-		map<int,DmgProjectile*>* getProjectiles()
+		map<int,Projectile*>* getProjectiles()
 		{
 			return m_projectiles;
 		}
@@ -387,10 +387,10 @@ class Region
 	map<int,WorldObject*>* m_players;
 
 	/**
-	 * \var map<int, DmgProjectile>* m_projectiles
+	 * \var map<int, Projectile>* m_projectiles
 	 * \brief Liste aller Projektile in der Region
 	 */
-	map<int,DmgProjectile*>* m_projectiles;
+	map<int,Projectile*>* m_projectiles;
 
 	/**
 	 * \var map<int,WorldObject*>* m_object_bintree

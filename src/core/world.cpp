@@ -583,7 +583,7 @@ void World::getObjectsOnLine( float xstart, float ystart, float xend, float yend
 }
 
 
-void World::getProjectilesOnScreen(float center_x,float center_y,short region, list<DmgProjectile*>* result)
+void World::getProjectilesOnScreen(float center_x,float center_y,short region, list<Projectile*>* result)
 {
 	Region* r = m_regions[region];
 	if (r==0)
@@ -861,7 +861,7 @@ bool World::moveObject(WorldObject* object, float x, float y)
 }
 
 
-bool  World::insertProjectile(DmgProjectile* object, float x, float y, short region)
+bool  World::insertProjectile(Projectile* object, float x, float y, short region)
 {
 	m_regions[region]->insertProjectile(object,x,y);
 	object->setRegion(region);
@@ -1558,7 +1558,7 @@ void World::writeEvent(Region* region,Event* event, CharConv* cv)
 
 
 	WorldObject* object;
-	DmgProjectile* proj;
+	Projectile* proj;
 	if (region !=0)
 	{
 		if (event->m_type == Event::OBJECT_CREATED)
@@ -1638,7 +1638,7 @@ bool World::processEvent(Region* region,CharConv* cv)
 	DEBUG5("got event %i  id %i  data %i",event.m_type, event.m_id, event.m_data);
 
 	WorldObject* object;
-	DmgProjectile* proj;
+	Projectile* proj;
 
 	switch(event.m_type)
 	{
