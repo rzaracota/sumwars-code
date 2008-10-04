@@ -104,10 +104,10 @@ class ClientNetwork : public Network
 
 	private:
 	/**
-	 * \var std::queue<Packet*> m_received_packets
+	 * \var PacketQueue m_received_packets
 	 * \brief Liste der empfangenen Packete
 	 */
-	std::queue<Packet*> m_received_packets;
+	PacketQueue m_received_packets;
 
 
 

@@ -176,6 +176,7 @@ class Document
 		USE_SKILL_RIGHT=300,
 	};
 
+	typedef std::map<KeyCode,ShortkeyDestination> ShortkeyMap;
 
 
 	/**
@@ -417,28 +418,7 @@ class Document
 	 */
 	void setRightAction(Action::ActionType a);
 
-
-	/**
-	 * \fn Action::ActionType getRightAction()
-	 * \brief Gibt die Aktion, die durch die rechte Maustaste ausgeloest wird, zurueck
-	 */
-	/*
-	Action::ActionType getRightAction()
-	{
-		return m_right_action;
-	}
-	*/
-
-	/**
-	 * \fn std::map<int,DropItem>* getDropItems()
-	 * \brief Gibt die Liste aller fuer den Spieler sichtbaren Gegenstaende am Boden zurueck
-	 */
-	/*
-	std::map<int,DropItem>* getDropItems()
-	{
-		return m_drop_items;
-	}
-*/
+	
 
 	/**
 	 * \fn void setServer(bool server)
@@ -560,17 +540,6 @@ class Document
 	 */
 	void onItemRightClick(short pos);
 
-	/**
-	 * \fn void requestItemDetailedInfo( short pos)
-	 * \brief Fordert vom Server weitere Informationen zu einem Item an
-	 */
-	//void requestItemDetailedInfo( short pos);
-
-	/**
-	 * \fn void requestAbilityDamage(Action::ActionType abl)
-	 * \brief Fordert vom Server den Schaden einer Faehigkeit an
-	 */
-	//void requestAbilityDamage(Action::ActionType abl);
 
 	/**
 	 * \fn void increaseAttribute(CreatureBaseAttr::Attribute attr)
@@ -752,10 +721,10 @@ class Document
 		State m_state;
 
 	/**
-	 * \var std::map<unsigned int,ShortkeyDestination> m_shortkey_map
+	* \var ShortkeyMap m_shortkey_map
 	 * \brief Bildet Taste auf Ereignis, das per Shortkey ausgeloest werden kann ab
 	 */
-		std::map<KeyCode,ShortkeyDestination> m_shortkey_map;
+	ShortkeyMap m_shortkey_map;
 
 	/**
 	 * \var std::set<KeyCode> m_special_keys

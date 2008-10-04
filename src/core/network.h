@@ -8,6 +8,7 @@
 #include "raknet/RakNetTypes.h"
 #include "raknet/BitStream.h"
 #include "debug.h"
+#include <queue>
 
 #define REQ_PORT 5331
 
@@ -137,6 +138,8 @@ class Network
 		RakPeerInterface* m_peer;
 		
 };
+
+typedef std::queue<Packet*> PacketQueue;
 
 #endif
 

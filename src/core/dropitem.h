@@ -4,6 +4,7 @@
 #include "item.h"
 #include "itemlist.h"
 #include <sstream>
+#include <map>
 
 /**
  * \struct DropItem
@@ -66,6 +67,6 @@ struct DropItem
 	
 };
 
-
+typedef std::map<int,DropItem*> DropItemMap;
 
 #endif

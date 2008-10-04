@@ -79,30 +79,7 @@ Document::Document()
 
 	// Shortkeys einstellen
 	m_shortkey_map.clear();
-	/*
-	installShortkey(OIS::KC_I,SHOW_INVENTORY);
-	installShortkey(OIS::KC_C,SHOW_CHARINFO);
-	installShortkey(OIS::KC_T,SHOW_SKILLTREE);
-	installShortkey(OIS::KC_P,SHOW_PARTYMENU);
-	installShortkey(OIS::KC_M,SHOW_CHATBOX);
-	installShortkey(OIS::KC_W,SWAP_EQUIP);
-	installShortkey(OIS::KC_1,USE_POTION);
-	installShortkey(OIS::KC_2,(ShortkeyDestination) (USE_POTION+1));
-	installShortkey(OIS::KC_3,(ShortkeyDestination) (USE_POTION+2));
-	installShortkey(OIS::KC_4,(ShortkeyDestination) (USE_POTION+3));
-	installShortkey(OIS::KC_5,(ShortkeyDestination) (USE_POTION+4));
-	installShortkey(OIS::KC_6,(ShortkeyDestination) (USE_POTION+5));
-	installShortkey(OIS::KC_7,(ShortkeyDestination) (USE_POTION+6));
-	installShortkey(OIS::KC_8,(ShortkeyDestination) (USE_POTION+7));
-	installShortkey(OIS::KC_9,(ShortkeyDestination) (USE_POTION+8));
-	installShortkey(OIS::KC_0,(ShortkeyDestination) (USE_POTION+9));
-
-	// besondere Tasten festlegen
-	m_special_keys.clear();
-	m_special_keys.insert(OIS::KC_ESCAPE);
-	m_special_keys.insert(OIS::KC_LSHIFT);
-	m_special_keys.insert(OIS::KC_LCONTROL);
-	*/
+	
 
 }
 
@@ -229,27 +206,6 @@ Document::~Document()
 }
 // Methods
 
-/*
-ClientWorldObject* Document::getWorldObject(int id)
-{
-	 std::map<int,ClientWorldObject*>::iterator iter;
-
-    // Objekt im Binaerbaum suchen
-     iter = m_objects_bintree->find(id);
-
-    // Testen ob ein Objekt gefunden wurde
-    if (iter == m_objects_bintree->end())
-     {
-         // keins gefunden, NULL ausgeben
-        return 0;
-     }
-   else
-    {
-        // Zeiger auf Objekt ausgeben
-        return iter->second;
-    }
-}
-*/
 
 void Document::sendCommand(ClientCommand* comm)
 {
@@ -561,23 +517,6 @@ void Document::onItemRightClick(short pos)
 
 }
 
-/*
-void Document::requestItemDetailedInfo( short pos)
-{
-	ClientCommand command;
-	command.m_button = REQUEST_DETAILED_ITEM;
-	command.m_id = pos;
-	sendCommand(&command);
-}
-
-void Document::requestAbilityDamage(Action::ActionType abl)
-{
-	ClientCommand command;
-	command.m_button = REQUEST_ABILITY_DAMAGE;
-	command.m_id = abl;
-	sendCommand(&command);
-}
-*/
 
 void Document::increaseAttribute(CreatureBaseAttr::Attribute attr)
 {

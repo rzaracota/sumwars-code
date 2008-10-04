@@ -1136,11 +1136,11 @@ bool Player::update(float time)
 			sel->getObjectType().setObjectType(OBJECTTYPE_USER);
 			sel->setSelectObjectType(true);
 
-			std::list<WorldObject*>* ret = new std::list<WorldObject*>;
+			WorldObjectList* ret = new WorldObjectList;
 
 			getWorld()->getWorldObjectsInCircle(getCoordinateX(),getCoordinateY(),1000, sel,ret);
 
-			std::list<WorldObject*>::iterator i;
+			WorldObjectList::iterator i;
 
 
 			header.m_chatmessages++;
@@ -1348,7 +1348,7 @@ void Player::sendGameData()
 	CharConv cv;
 	//DEBUG5("packed bytes: %i bytes",cv.getBitStream()->GetNumberOfBitsUsed());
 
-	std::list<WorldObject*> wobjs;
+	WorldObjectList wobjs;
 	wobjs.clear();
 
 	// Ausschnitt der Welt, der fuer den Spieler sichtbar ist
@@ -1368,7 +1368,7 @@ void Player::sendGameData()
 
 
 	// Objekte einpacken
-	for( std::list<WorldObject*>::iterator i=wobjs.begin() ; i!=wobjs.end() ; )
+	for( WorldObjectList::iterator i=wobjs.begin() ; i!=wobjs.end() ; )
 	{
 		// Objekt in das Paket packen
 		obj = (WorldObject*) (*i);
@@ -1414,7 +1414,7 @@ void Player::sendGameData()
 
 
 	// Objekte einpacken
-	for( std::list<WorldObject*>::iterator i=wobjs.begin() ; i!=wobjs.end() ; ++i)
+	for( WorldObjectList::iterator i=wobjs.begin() ; i!=wobjs.end() ; ++i)
 	{
 		// Objekt in das Paket packen
 		obj = (WorldObject*) (*i);

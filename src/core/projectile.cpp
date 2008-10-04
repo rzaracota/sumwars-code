@@ -116,8 +116,8 @@ bool Projectile::update(float time)
 	// true, wenn Timer die Grenze erreicht
 	bool lim = false;
 	// Liste der getroffenen Objekte
-	std::list<WorldObject*> hitobj;
-	std::list<WorldObject*>::iterator i;
+	WorldObjectList hitobj;
+	WorldObjectList::iterator i;
 	WorldObject* hit;
 
 	// aktuelle Position
@@ -298,8 +298,8 @@ bool Projectile::update(float time)
 
 void Projectile::handleFlying(float dtime)
 {
-	std::list<WorldObject*> hitobj;
-	std::list<WorldObject*>::iterator i;
+	WorldObjectList hitobj;
+	WorldObjectList::iterator i;
 	WorldObject* hit;
 	float x;
 	float y;
@@ -670,8 +670,8 @@ void Projectile::handleFlying(float dtime)
 
 void Projectile::handleGrowing(float dtime)
 {
-	std::list<WorldObject*> hitobj;
-	std::list<WorldObject*>::iterator i;
+	WorldObjectList hitobj;
+	WorldObjectList::iterator i;
 	WorldObject* hit;
 	float x;
 	float y;
@@ -763,8 +763,8 @@ void Projectile::handleGrowing(float dtime)
 void Projectile::handleStable(float dtime)
 {
 
-	std::list<WorldObject*> hitobj;
-	std::list<WorldObject*>::iterator i;
+	WorldObjectList hitobj;
+	WorldObjectList::iterator i;
 	WorldObject* hit;
 
 	// aktuelle Position

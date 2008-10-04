@@ -65,6 +65,8 @@
  */
 //Forward Declarations
 
+typedef std::list<int> LoginList;
+
 /**
  * \class World
  * \brief Hauptobjekt der Anwendung
@@ -174,7 +176,7 @@ public:
 
 
 	/**
-	 * \fn bool getObjectsInShape( Shape* shape, short region, std::list<WorldObject*>* result,short layer=WorldObject::Geometry::LAYER_ALL, short group = WorldObject::GROUP_ALL, WorldObject* omit=0 )
+	 * \fn bool getObjectsInShape( Shape* shape, short region, WorldObjectList* result,short layer=WorldObject::Geometry::LAYER_ALL, short group = WorldObject::GROUP_ALL, WorldObject* omit=0 )
 	 * \brief Sucht WorldObjects innerhalb eines Gebietes
 	 * \param shape Form des Gebietes
 	 * \param layer Ebene in der gesucht wird
@@ -189,7 +191,7 @@ public:
 	 * Wenn f&uuml;r selector ein NULL-Zeiger &uuml;bergeben wird, so werden die Objekte nicht selektiert.
 	 * Wenn f&uuml;r result ein NULL-Zeiger &uuml;bergeben wird, oder ein anderer Fehler auftritt, so wird false zur&uuml;ckgegeben, sonst true.
 	 */
-	bool getObjectsInShape( Shape* shape, short region, std::list<WorldObject*>* result,short layer=WorldObject::Geometry::LAYER_ALL, short group = WorldObject::GROUP_ALL, WorldObject* omit=0 );
+	bool getObjectsInShape( Shape* shape, short region, WorldObjectList* result,short layer=WorldObject::Geometry::LAYER_ALL, short group = WorldObject::GROUP_ALL, WorldObject* omit=0 );
 
 
 	/**
@@ -206,7 +208,7 @@ public:
 	WorldObject* getObjectAt(float x_coordinate, float y_coordinate,  short region,short layer=WorldObject::Geometry::LAYER_ALL, short group = WorldObject::GROUP_ALL);
 
 	/**
-	 * \fn getObjectsOnLine( float xstart, float ystart, float xend, float yend,  short region, std::list<WorldObject*>* result,,short layer=WorldObject::Geometry::LAYER_ALL, short group = WorldObject::GROUP_ALL WorldObject* omit=0 )
+	 * \fn getObjectsOnLine( float xstart, float ystart, float xend, float yend,  short region, WorldObjectList* result,,short layer=WorldObject::Geometry::LAYER_ALL, short group = WorldObject::GROUP_ALL WorldObject* omit=0 )
 	 * \brief Sucht alle Objekte die auf der angegebenen Linie liegen
 	 * \param xstart x-Koordinate Startpunkt
 	 * \param ystart y-Koordinate Startpunkt
@@ -218,7 +220,7 @@ public:
 	 * \param group Gruppen die durchsucht werden sollen
 	 * \param omit Objekt, das ausgelassen wird
 	 */
-	void getObjectsOnLine( float xstart, float ystart, float xend, float yend,  short region, std::list<WorldObject*>* result,short layer=WorldObject::Geometry::LAYER_ALL, short group = WorldObject::GROUP_ALL, WorldObject* omit=0 );
+	void getObjectsOnLine( float xstart, float ystart, float xend, float yend,  short region, WorldObjectList* result,short layer=WorldObject::Geometry::LAYER_ALL, short group = WorldObject::GROUP_ALL, WorldObject* omit=0 );
 
 	/**
 	 * \fn void getProjectilesOnScreen(float center_x,float center_y,short region, std::list<Projectile*>* result)
@@ -525,13 +527,13 @@ private:
 	 * \var m_players
 	 * \brief Liste der Spieler in der Welt mit ihren Slots
 	 */
-	std::map<int,WorldObject*>* m_player_slots;
+	WorldObjectMap* m_player_slots;
 	
 	/**
-	 * \var std::map<int,WorldObject*>* m_players
+	 * \var WorldObjectMap* m_players
 	 * \brief Liste der Spieler in der Welt sortiert nach ID
 	 */
-	std::map<int,WorldObject*>* m_players;
+	WorldObjectMap* m_players;
 	
 
 	/**
@@ -552,16 +554,16 @@ private:
 	WorldObject* m_local_player;
 	
 	/**
-	 * \var std::list<int> m_logins
+	 * \var LoginList m_logins
 	 * \brief Liste der Spieler die sich gerade einloggen wollen
 	 */
-	std::list<int> m_logins;
+	LoginList m_logins;
 	
 	/**
-	 * \var std::list<Event> m_events
+	 * \var EventList m_events
 	 * \brief Liste der globalen Events beim aktuellen update
 	 */
-	std::list<Event>* m_events;
+	EventList* m_events;
 	
 	/**
 	 * \var float m_timer[3]

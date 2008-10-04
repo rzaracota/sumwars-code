@@ -566,9 +566,9 @@ void Creature::performActionCritPart(float goalx, float goaly, WorldObject* goal
 
 
 
-	std::list<WorldObject*> res;
+	WorldObjectList res;
 	res.clear();
-	std::list<WorldObject*>::iterator it;
+	WorldObjectList::iterator it;
 
 	// Koordinaten das ausfuehrenden Objektes
 	float x = getGeometry()->m_shape.m_coordinate_x;
@@ -1427,7 +1427,7 @@ void Creature::collisionDetection(float time)
 	float ynew = getGeometry()->m_shape.m_coordinate_y+getMoveInfo()->m_speed_y * time;
 
 	// Kreis um den Zielpunkt
-	std::list<WorldObject*> result;
+	WorldObjectList result;
 	Shape scopy;
 	scopy.m_radius = getGeometry()->m_shape.m_radius*1.05;
 	scopy.m_coordinate_x = xnew;
@@ -1444,7 +1444,7 @@ void Creature::collisionDetection(float time)
 	{
 		// es gibt kollidierende Objekte
 		DEBUG5("aktuelle Koordinaten %f %f",getGeometry()->m_shape.m_coordinate_x,getGeometry()->m_shape.m_coordinate_y);
-		std::list<WorldObject*>::iterator i;
+		WorldObjectList::iterator i;
 
 		Shape* s2;
         // Liste der kollidierenden Objekte durchgehen
@@ -1954,8 +1954,8 @@ void Creature::calcStatusModCommand()
 		s.m_type = Shape::CIRCLE;
 		s.m_radius = getGeometry()->m_shape.m_radius;
 		WorldObject* wo =0;
-		std::list<WorldObject*> res;
-		std::list<WorldObject*>::iterator it;
+		WorldObjectList res;
+		WorldObjectList::iterator it;
 
 		// ermitteln der Objekte mit denen bei der Bewegung kollidiert wird
 		getWorld()->getObjectsInShape(&s,getGridLocation()->m_region,&res,Geometry::LAYER_AIR,CREATURE | FIXED,this);
@@ -2031,8 +2031,8 @@ void Creature::calcStatusModCommand()
 		s.m_radius =8;
 		s.m_coordinate_x = x;
 		s.m_coordinate_y = y;
-		std::list<WorldObject*> res;
-		std::list<WorldObject*>::iterator i;
+		WorldObjectList res;
+		WorldObjectList::iterator i;
 		res.clear();
 
 		// Suchen aller Objekte im Kreis
@@ -2386,9 +2386,9 @@ bool Creature::update (float time)
 			d.m_multiplier[Damage::FIRE]=1;
 			d.m_attacker_fraction = getTypeInfo()->m_fraction;
 
-			std::list<WorldObject*> res;
+			WorldObjectList res;
 			res.clear();
-			std::list<WorldObject*>::iterator it;
+			WorldObjectList::iterator it;
 
 			// Kreis um eigenen Mittelpunkt mit Radius eigener Radius plus 1
 			Shape s;

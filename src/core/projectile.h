@@ -480,6 +480,7 @@ class Projectile
 
 };
 
+typedef std::map<int,Projectile*> ProjectileMap;
 
 #include "world.h"
 

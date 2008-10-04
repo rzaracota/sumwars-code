@@ -50,8 +50,8 @@ Monster::Monster(World* world, unsigned int id,MonsterBasicData& data)
 	getGeometry()->m_layer = data.m_layer;
 	getGeometry()->m_angle =0;
 
-	m_ai.m_goals = new std::list<std::pair<WorldObject*,float> >;
-	m_ai.m_visible_goals = new std::list<std::pair<WorldObject*,float> >;
+	m_ai.m_goals = new WorldObjectValueList;
+	m_ai.m_visible_goals = new WorldObjectValueList;
 	m_ai.m_state = Ai::INACTIVE;
 	calcBaseAttrMod();
 }
@@ -71,8 +71,8 @@ bool Monster::destroy()
 bool Monster::init()
 {
 	//eigene Initialisierung
-	m_ai.m_goals = new std::list<std::pair<WorldObject*,float> >;
-	m_ai.m_visible_goals = new std::list<std::pair<WorldObject*,float> >;
+	m_ai.m_goals = new WorldObjectValueList;
+	m_ai.m_visible_goals = new WorldObjectValueList;
 
 	// Basistyp setzen
 	getTypeInfo()->m_type = TypeInfo::TYPE_MONSTER;
@@ -122,14 +122,14 @@ void Monster::updateCommand()
 	// moegliche Ziele ermitteln
 
 	// Liste der Spieler
-	std::map<int,WorldObject*>* players = getRegion()->getPlayers();
-	std::list<WorldObject*> ret;
+	WorldObjectMap* players = getRegion()->getPlayers();
+	WorldObjectList ret;
 
 	WorldObject* pl;
 
 	// Entfernungen und Sichtbarkeit der Ziele ermitteln
 	float dist;
-	for (std::map<int,WorldObject*>::iterator it = players->begin(); it!=players->end(); ++it)
+	for (WorldObjectMap::iterator it = players->begin(); it!=players->end(); ++it)
 	{
 		pl = it->second;
 		dist = World::getDistance(getGeometry()->m_shape, pl->getGeometry()->m_shape);
@@ -234,8 +234,8 @@ void Monster::calcBestCommand()
 
 void Monster::evalCommand(Action::ActionType act)
 {
-	std::list<std::pair<WorldObject*,float> >::iterator it;
-	std::list<std::pair<WorldObject*,float> >* goal_list;
+	WorldObjectValueList::iterator it;
+	WorldObjectValueList* goal_list;
 	Creature* cgoal=0;
 
 	float dist;
@@ -368,7 +368,7 @@ void Monster::die()
 
 				pl->gainExperience((int) ceil(pow(1.5,std::min(pl->getBaseAttrMod()->m_level,getBaseAttr()->m_level)-1)*2));
 
-				std::list<WorldObject*> ret;
+				WorldObjectList ret;
 				Shape s;
 				s.m_type = Shape::CIRCLE;
 				s.m_radius = 20;
@@ -377,7 +377,7 @@ void Monster::die()
 
 				getWorld()->getObjectsInShape(&s, getGridLocation()->m_region, &ret, Geometry::LAYER_AIR, CREATURE);
 
-				std::list<WorldObject*>::iterator i;
+				WorldObjectList::iterator i;
 
 				for (i=ret.begin();i!=ret.end();i++)
 				{

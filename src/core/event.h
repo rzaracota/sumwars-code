@@ -2,6 +2,7 @@
 #define EVENT_H
 
 #include "charconv.h"
+#include <list>
 
 /**
  * \struct Event
@@ -112,7 +113,7 @@ struct Event
 	
 };
 
-
+typedef std::list<Event> EventList;
 
 #endif
 

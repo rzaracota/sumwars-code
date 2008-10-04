@@ -33,7 +33,7 @@
 #include "dropslot.h"
 #include "monsterbase.h"
 
-
+typedef std::list<std::pair<WorldObject*,float> > WorldObjectValueList;
 
 /**
  * \struct Ai
@@ -59,16 +59,16 @@ struct Ai
 	float m_sight_range;
 	
 	/**
-	 * \var std::list<std::pair<WorldObject*,float> >* m_goals;
+	 * \var WorldObjectValueList* m_goals;
 	 * \brief Liste der moeglichen Ziele
 	 */
-	std::list<std::pair<WorldObject*,float> >* m_goals;
+	WorldObjectValueList* m_goals;
 	
 	/**
-	 * \var std::list< std::pair<WorldObject*,float> >* m_visible_goals;
+	 * \var WorldObjectValueList* m_visible_goals;
 	 * \brief Liste der sichtbaren Ziele
 	 */
-	std::list< std::pair<WorldObject*,float> >* m_visible_goals;
+	WorldObjectValueList* m_visible_goals;
 	
 	/**
 	 * \var float m_command_value

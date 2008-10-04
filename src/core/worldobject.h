@@ -26,6 +26,8 @@
 #include "debug.h"
 #include "charconv.h"
 #include "event.h"
+#include <map>
+#include <list>
 
 class World;
 class Region;
@@ -693,4 +695,8 @@ private:
 
 #include "damage.h"
 
+typedef std::map<int,WorldObject*> WorldObjectMap;
+		 
+typedef std::list<WorldObject*> WorldObjectList;
+				 
 #endif //WORLDOBJECT_H

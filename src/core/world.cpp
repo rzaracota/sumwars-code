@@ -17,7 +17,6 @@
 	51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
 
-
 #include "world.h"
 #include "player.h"
 
@@ -33,8 +32,8 @@
 
 	// diverse Initialisierungen
 
-	m_player_slots = new std::map<int,WorldObject*>;
-	m_players = new std::map<int,WorldObject*>;;
+	m_player_slots = new WorldObjectMap;
+	m_players = new WorldObjectMap;;
 
 	// Baum fuer die Handelsvorgaenge anlegen
 	m_trades = new std::map<int, Trade* >;
@@ -54,7 +53,7 @@
 
 	 m_local_player =0;
 
-	 m_events = new std::list<Event>;
+	 m_events = new EventList;
 
 }
 
@@ -539,7 +538,7 @@ int World::newTrade(int trader1_id, int trader2_id)
 }
 
 
-bool World:: getObjectsInShape( Shape* shape, short region, std::list<WorldObject*>* result,short layer, short group, WorldObject* omit )
+bool World:: getObjectsInShape( Shape* shape, short region, WorldObjectList* result,short layer, short group, WorldObject* omit )
 {
 
 
@@ -571,7 +570,7 @@ WorldObject* World::getObjectAt(float x_coordinate, float y_coordinate,  short r
 	return r->getObjectAt(x_coordinate,y_coordinate,layer,group);
 }
 
-void World::getObjectsOnLine( float xstart, float ystart, float xend, float yend,  short region, std::list<WorldObject*>* result,short layer, short group, WorldObject* omit)
+void World::getObjectsOnLine( float xstart, float ystart, float xend, float yend,  short region, WorldObjectList* result,short layer, short group, WorldObject* omit)
 {
 	// Region ermitteln, wenn gleich 0 beenden
 	Region* r = m_regions[region];
@@ -693,7 +692,7 @@ bool World::getClosestFreeSquare(float x_coordinate, float y_coordinate, float &
 	queue<int>* quy = new queue<int>;
 
 	// Liste für Objekte die im Weg sind
-	std::list<WorldObject*>* ret = new  std::list<WorldObject*>;
+	WorldObjectList* ret = new  WorldObjectList;
 
 
 	// Selektor für fixe Objekte
@@ -1017,7 +1016,7 @@ void World::handleSavegame(CharConv *cv, int slot)
 
 		if (m_server)
 		{
-			std::map<int,WorldObject*>::iterator it;
+			WorldObjectMap::iterator it;
 
 			if (slot != LOCAL_SLOT)
 			{
@@ -1234,7 +1233,7 @@ void World::update(float time)
 void World::updatePlayers()
 {
 	// Schleife ueber die Spieler
-	std::map<int,WorldObject*>::iterator it;
+	WorldObjectMap::iterator it;
 	Player* pl;
 	int slot;
 	for (it = m_player_slots->begin(); it != m_player_slots->end(); )
@@ -1491,7 +1490,7 @@ void World::updatePlayers()
 	{
 		// Nachrichten ueber die Events zur den Clients senden
 		Region* reg;
-		std::list<Event>::iterator lt;
+		EventList::iterator lt;
 		for (it = m_player_slots->begin(); it != m_player_slots->end(); ++it)
 		{
 			slot = it->first;
@@ -1728,7 +1727,7 @@ bool World::processEvent(Region* region,CharConv* cv)
 					deleteObject(object);
 					m_players->erase( object->getId());
 
-					std::map<int,WorldObject*>::iterator it;
+					WorldObjectMap::iterator it;
 					for (it = m_player_slots->begin(); it != m_player_slots->end(); ++it)
 					{
 						if (it->second == object)
@@ -1870,8 +1869,8 @@ void World::handleDataRequest(ClientDataRequest* request, int slot )
 bool World::calcBlockmat(PathfindInfo * pathinfo)
 {
 	float sqs = pathinfo->m_base_size / pathinfo->m_quality;
-	std::list<WorldObject*> ret;
-	std::list<WorldObject*>::iterator it;
+	WorldObjectList ret;
+	WorldObjectList::iterator it;
 	int is,js;
 	Shape s;
 	s.m_coordinate_x = pathinfo->m_center_x;

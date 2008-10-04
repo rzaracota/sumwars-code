@@ -13,21 +13,21 @@ Region::Region(short dimx, short dimy, short id, World* world, bool server)
 	m_tiles->clear();
 
 	// Binärbaum fuer WorldObjects anlegen
-	m_objects = new std::map<int,WorldObject*>;
-	m_static_objects = new std::map<int,WorldObject*>;
+	m_objects = new WorldObjectMap;
+	m_static_objects = new WorldObjectMap;
 
-	m_players = new std::map<int,WorldObject*>;
+	m_players = new WorldObjectMap;
 
 	// Baum fuer Projektile anlegen
-	m_projectiles = new std::map<int,Projectile*>;
+	m_projectiles = new ProjectileMap;
 
 	// Liste der Gegenstaende
-	m_drop_items = new std::map<int,DropItem*>;
-	m_drop_item_locations = new std::map<int,DropItem*>;
+	m_drop_items = new DropItemMap;
+	m_drop_item_locations = new DropItemMap;
 
 	m_id = id;
 
-	m_events = new std::list<Event>;
+	m_events = new EventList;
 
 	m_server = server;
 
@@ -36,7 +36,7 @@ Region::Region(short dimx, short dimy, short id, World* world, bool server)
 
 Region::~Region()
 {
-	std::map<int,WorldObject*>::iterator i;
+	WorldObjectMap::iterator i;
 	for (i=m_objects->begin(); i!=m_objects->end();i++)
 	{
 		delete i->second;
@@ -47,14 +47,14 @@ Region::~Region()
 		delete i->second;
 	}
 
-	std::map<int,Projectile*>::iterator j;
+	ProjectileMap::iterator j;
 	for (j =  m_projectiles->begin(); j != m_projectiles->end(); j++)
 	{
 		delete (j->second);
 	}
 
 
-	std::map<int,DropItem*>::iterator k;
+	DropItemMap::iterator k;
 			for (k =  m_drop_items->begin(); k != m_drop_items->end(); k++)
 	{
 		delete k->second;
@@ -76,7 +76,7 @@ Region::~Region()
 
 WorldObject* Region::getObject ( int id)
 {
-	std::map<int,WorldObject*>::iterator iter;
+	WorldObjectMap::iterator iter;
 
 	// Objekt im Binärbaum suchen
 	iter = m_objects->find(id);
@@ -96,7 +96,7 @@ WorldObject* Region::getObject ( int id)
 
 Projectile* Region::getProjectile(int id)
 {
-	std::map<int,Projectile*>::iterator iter;
+	ProjectileMap::iterator iter;
 
 	// Objekt im Binärbaum suchen
 	iter = m_projectiles->find(id);
@@ -133,7 +133,7 @@ bool Region::getFreePlace(Shape* shape, short layer, float& x, float&y)
 	Shape s;
 	memcpy(&s,shape,sizeof(Shape));
 
-	std::list<WorldObject*> res;
+	WorldObjectList res;
 	res.clear();
 
 	// eine Stelle suchen an der das Objekt passt
@@ -228,7 +228,7 @@ bool Region::getFreePlace(Shape* shape, short layer, float& x, float&y)
 
 }
 
-bool  Region::addObjectsInShapeFromGridunit(Shape* shape, Gridunit* gu, std::list<WorldObject*>* result, short layer, short group,WorldObject* omit, bool empty_test )
+bool  Region::addObjectsInShapeFromGridunit(Shape* shape, Gridunit* gu, WorldObjectList* result, short layer, short group,WorldObject* omit, bool empty_test )
 {
 	WorldObject* wo=0;
 	WorldObject** arr=0;
@@ -267,7 +267,7 @@ bool  Region::addObjectsInShapeFromGridunit(Shape* shape, Gridunit* gu, std::lis
 	return true;
 }
 
-bool Region::addObjectsOnLineFromGridunit(float xstart, float ystart, float xend,float yend, Gridunit* gu, std::list<WorldObject*>* result, short layer, short group ,WorldObject* omit, bool empty_test )
+bool Region::addObjectsOnLineFromGridunit(float xstart, float ystart, float xend,float yend, Gridunit* gu, WorldObjectList* result, short layer, short group ,WorldObject* omit, bool empty_test )
 {
 	WorldObject* wo=0;
 	WorldObject** arr=0;
@@ -308,7 +308,7 @@ bool Region::addObjectsOnLineFromGridunit(float xstart, float ystart, float xend
 }
 
 
-bool Region::getObjectsInShape( Shape* shape,  std::list<WorldObject*>* result,short layer, short group, WorldObject* omit, bool empty_test)
+bool Region::getObjectsInShape( Shape* shape,  WorldObjectList* result,short layer, short group, WorldObject* omit, bool empty_test)
 {
 
 	DEBUG5("shape %f %f %f",shape->m_coordinate_x,shape->m_coordinate_y,shape->m_radius);
@@ -434,7 +434,7 @@ WorldObject* Region::getObjectAt(float x_coordinate, float y_coordinate, short l
 	s.m_coordinate_x=x_coordinate;
 	s.m_coordinate_y=y_coordinate;
 
-	std::list<WorldObject*> l;
+	WorldObjectList l;
 	l.clear();
 	getObjectsInShape ( &s, &l,layer,group );
 	if (l.empty())
@@ -449,7 +449,7 @@ WorldObject* Region::getObjectAt(float x_coordinate, float y_coordinate, short l
 
 
 
-void Region::getObjectsOnLine( float xstart, float ystart, float xend, float yend,  std::list<WorldObject*>* result,short layer, short group , WorldObject* omit)
+void Region::getObjectsOnLine( float xstart, float ystart, float xend, float yend,  WorldObjectList* result,short layer, short group , WorldObject* omit)
 {
 	Gridunit* gu=0;
 
@@ -536,7 +536,7 @@ void Region::getObjectsOnLine( float xstart, float ystart, float xend, float yen
 
 void Region::getProjectilesOnScreen(float center_x,float center_y, std::list<Projectile*>* result)
 {
-	std::map<int,Projectile*>::iterator i;
+	ProjectileMap::iterator i;
 	float dx,dy,r;
 	Projectile* pr;
 	for (i=m_projectiles->begin();i!=m_projectiles->end();++i)
@@ -765,10 +765,10 @@ void Region::update(float time)
 	DEBUG5("\nUpdate aller WeltObjekte starten\n");
 	//DEBUG("m_players %p",m_players);
 	// Iterator zum durchmustern einer solchen Liste
-	std::map<int,WorldObject*>::iterator iter;
+	WorldObjectMap::iterator iter;
 	WorldObject* object;
 	WorldObject::Geometry* wob;
-	std::map<int,Projectile*>::iterator it3;
+	ProjectileMap::iterator it3;
 
 
 	// alle Eventsmasken loeschen
@@ -915,7 +915,7 @@ void Region::getRegionData(CharConv* cv)
 	cv->toBuffer<short>((short) m_static_objects->size());
 
 	// statische Objekte in den Puffer eintragen
-	std::map<int,WorldObject*>::iterator it;
+	WorldObjectMap::iterator it;
 	for (it = m_static_objects->begin();it!=m_static_objects->end();++it)
 	{
 		(it->second)->toString(cv);
@@ -928,7 +928,7 @@ void Region::getRegionData(CharConv* cv)
 	cv->toBuffer<short>((short) m_objects->size());
 
 	// nicht statische Objekte in den Puffer eintragen
-	std::map<int,WorldObject*>::iterator jt;
+	WorldObjectMap::iterator jt;
 	for (jt = m_objects->begin();jt!=m_objects->end();++jt)
 	{
 		DEBUG5("write offset: %i",cv->getBitStream()->GetNumberOfBitsUsed());
@@ -942,7 +942,7 @@ void Region::getRegionData(CharConv* cv)
 	DEBUG("projectiles: %i",m_projectiles->size());
 
 	// Projektile in den Puffer eintragen
-	std::map<int,Projectile*>::iterator kt;
+	ProjectileMap::iterator kt;
 	for (kt = m_projectiles->begin(); kt != m_projectiles->end(); ++kt)
 	{
 		kt->second->toString(cv);
@@ -952,7 +952,7 @@ void Region::getRegionData(CharConv* cv)
 	DEBUG("dropped items: %i",m_drop_items->size());
 
 	//  Items in den Puffer eintragen
-	std::map<int,DropItem*>::iterator lt;
+	DropItemMap::iterator lt;
 	for (lt = m_drop_items->begin(); lt != m_drop_items->end(); ++lt)
 	{
 		cv->toBuffer(lt->second->m_x);
@@ -962,7 +962,7 @@ void Region::getRegionData(CharConv* cv)
 }
 
 
-void Region::createObjectFromString(CharConv* cv, std::map<int,WorldObject*>* players)
+void Region::createObjectFromString(CharConv* cv, WorldObjectMap* players)
 {
 	char type;
 	char subt[11];
@@ -1061,7 +1061,7 @@ void Region::createItemFromString(CharConv* cv)
 }
 
 
-void Region::setRegionData(CharConv* cv,std::map<int,WorldObject*>* players)
+void Region::setRegionData(CharConv* cv,WorldObjectMap* players)
 {
 	// Groesse der Region wird schon vorher eingelesen
 	// Tiles eintragen
@@ -1076,7 +1076,7 @@ void Region::setRegionData(CharConv* cv,std::map<int,WorldObject*>* players)
 
 
 	// alle bisherigen statischen Objekte entfernen
-	std::map<int,WorldObject*>::iterator it;
+	WorldObjectMap::iterator it;
 	for (it = m_static_objects->begin();it!=m_static_objects->end();it++)
 	{
 		it->second->destroy();
@@ -1087,7 +1087,7 @@ void Region::setRegionData(CharConv* cv,std::map<int,WorldObject*>* players)
 
 	// alle bisherigen nichtstatischen Objekte entfernen
 	// die SpielerObjekte bleiben erhalten, alle anderen werden geloescht
-	std::map<int,WorldObject*>::iterator jt;
+	WorldObjectMap::iterator jt;
 	for (jt = m_objects->begin();jt!=m_objects->end();jt++)
 	{
 		if (jt->second->getTypeInfo()->m_type != WorldObject::TypeInfo::TYPE_PLAYER)
@@ -1174,7 +1174,7 @@ bool  Region::dropItem(Item* item, float x, float y)
 	s.m_extent_x = 0.5;
 	s.m_extent_y = 0.5;
 
-	std::list<WorldObject*> res;
+	WorldObjectList res;
 
 	// eine Stelle suchen an der das Item fallen gelassen werden kann
 	while (!fields.empty())
@@ -1285,7 +1285,7 @@ bool  Region::dropItem(Item* item, float x, float y)
 
 Item*  Region::getItemAt(float x, float y)
 {
-	std::map<int,DropItem*>::iterator it;
+	DropItemMap::iterator it;
 	short sx = (int) (x*2);
 	short sy = (int) (y*2);
 	int pos = sx*10000 + sy;
@@ -1303,7 +1303,7 @@ Item*  Region::getItemAt(float x, float y)
 
 Item* Region::getItem(int id)
 {
-	std::map<int,DropItem*>::iterator it;
+	DropItemMap::iterator it;
 	it = m_drop_items->find(id);
 	if (it == m_drop_items->end())
 	{
@@ -1317,7 +1317,7 @@ Item* Region::getItem(int id)
 
 DropItem* Region::getDropItem(int id)
 {
-	std::map<int,DropItem*>::iterator it;
+	DropItemMap::iterator it;
 	it = m_drop_items->find(id);
 	if (it == m_drop_items->end())
 	{
@@ -1333,8 +1333,8 @@ DropItem* Region::getDropItem(int id)
 bool Region::deleteItem(int id, bool delitem)
 {
 
-	std::map<int,DropItem*>::iterator it;
-	std::map<int,DropItem*>::iterator it2;
+	DropItemMap::iterator it;
+	DropItemMap::iterator it2;
 	it = m_drop_items->find(id);
 	if (it == m_drop_items->end())
 	{
