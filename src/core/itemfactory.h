@@ -8,7 +8,6 @@
 #include "dropslot.h"
 #include "itemloader.h"
 
-using namespace std;
 
 class World;
 
@@ -123,22 +122,22 @@ public:
 
 	private:
 		/**
-		* \var static map<Item::Subtype, DropChance> m_item_probabilities
+		* \var static std::map<Item::Subtype, DropChance> m_item_probabilities
 		 * \brief Gibt fuer jeden Gegenstand die relative Dropchance an
 		 */
-		static map<Item::Subtype, DropChance> m_item_probabilities;
+		static std::map<Item::Subtype, DropChance> m_item_probabilities;
 		
 		/**
-		 * \var static map<Item::Subtype, Item::Type> m_item_types
+		 * \var static std::map<Item::Subtype, Item::Type> m_item_types
 		 * \brief Mappt bekannt Subtypen auf den zugehoerigen Typ
 		 */
-		static map<Item::Subtype, Item::Type> m_item_types;
+		static std::map<Item::Subtype, Item::Type> m_item_types;
 
         /**
-         * \var static map<Item::Subtype,ItemBasicData*> m_item_data
+         * \var static std::map<Item::Subtype,ItemBasicData*> m_item_data
          * \brief enthaelt Basisdaten zu allen Items
          */
-		static map<Item::Subtype,ItemBasicData*> m_item_data;
+		static std::map<Item::Subtype,ItemBasicData*> m_item_data;
 		
 	public:
 		

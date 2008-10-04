@@ -10,7 +10,7 @@
 #include "../tinyxml/tinyxml.h"
 #include <string>
 #include <list>
-using namespace std;
+
 
 class World;
 
@@ -38,10 +38,10 @@ class ObjectFactory
 	static World* m_world;
 		
 	/**
-	 * \var static map<WorldObject::TypeInfo::ObjectSubtype, MonsterBasicData*> m_monster_data
+	 * \var static std::map<WorldObject::TypeInfo::ObjectSubtype, MonsterBasicData*> m_monster_data
 	 * \brief Basisdaten zu den Monstern
 	 */
-	static map<WorldObject::TypeInfo::ObjectSubtype, MonsterBasicData*> m_monster_data;
+	static std::map<WorldObject::TypeInfo::ObjectSubtype, MonsterBasicData*> m_monster_data;
 	
 	/**
 	 * \fn static init()

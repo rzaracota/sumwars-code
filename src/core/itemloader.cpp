@@ -282,7 +282,7 @@ void ItemLoader::searchItemBasicData(TiXmlNode* pParent)
 }
 
 
-list<ItemBasicData*>* ItemLoader::loadItemBasicData(const char* pFilename)
+std::list<ItemBasicData*>* ItemLoader::loadItemBasicData(const char* pFilename)
 {
 	// Standard Modifikator Verteilung fuer Waffen
 	for (int i=0; i<31; i++)
@@ -301,7 +301,7 @@ list<ItemBasicData*>* ItemLoader::loadItemBasicData(const char* pFilename)
 	m_weapon_mod[ItemFactory::DAMAGE_MULT_PHYS_MOD] = 0.1;
 
 	m_item_data = 0;
-	m_item_list = new list<ItemBasicData*>;
+	m_item_list = new std::list<ItemBasicData*>;
 
 	TiXmlDocument doc(pFilename);
 	bool loadOkay = doc.LoadFile();
@@ -446,10 +446,10 @@ void ItemLoader::searchDropChanceData(TiXmlNode* pParent)
 }
 
 
-list<DropChanceData*>* ItemLoader::loadDropChanceData(const char* pFilename)
+std::list<DropChanceData*>* ItemLoader::loadDropChanceData(const char* pFilename)
 {
 	m_drop_chance_data = 0;
-	m_drop_chance_data_list = new list<DropChanceData*>;
+	m_drop_chance_data_list = new std::list<DropChanceData*>;
 
 	TiXmlDocument doc(pFilename);
 	bool loadOkay = doc.LoadFile();
@@ -556,10 +556,10 @@ void ItemLoader::searchItemMeshData(TiXmlNode* pParent)
 }
 
 
-list<ItemMeshData*>* ItemLoader::loadItemMeshData(const char* pFilename)
+std::list<ItemMeshData*>* ItemLoader::loadItemMeshData(const char* pFilename)
 {
 	m_item_mesh_data = 0;
-	m_item_mesh_list = new list<ItemMeshData*>;
+	m_item_mesh_list = new std::list<ItemMeshData*>;
 
 	TiXmlDocument doc(pFilename);
 	bool loadOkay = doc.LoadFile();
@@ -585,7 +585,7 @@ ItemLoader::~ItemLoader()
 {
 	// FIXME Löschen der Listen erfolgt nach dem Aufruf der Methoden manuell
 	//       in der rufenden Funktion. Dies eventuell hier implementieren.
-	//       Daten in m_item_list (list<ItemBasicData*>) duerfen nicht geloescht
+	//       Daten in m_item_list (std::list<ItemBasicData*>) duerfen nicht geloescht
 	//       werden!
 }
 

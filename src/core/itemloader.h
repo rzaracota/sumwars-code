@@ -10,7 +10,6 @@
 #include "../tinyxml/tinyxml.h"
 #include <string>
 #include <cstring>
-using namespace std;
 
 /**
  * \struct ItemMeshData
@@ -19,16 +18,16 @@ using namespace std;
 struct ItemMeshData
 {
 	/**
-	 * \var string m_subtype
+	 * \var std::string m_subtype
 	 * \brief Subtyp des Gegenstandes
 	 */
-	string m_subtype;
+	std::string m_subtype;
 	
 	/**
-	 * \var string m_mesh
+	 * \var std::string m_mesh
 	 * \brief Name des Meshes
 	 */
-	string m_mesh;
+	std::string m_mesh;
 };
 
 /**
@@ -40,7 +39,7 @@ struct DropChanceData
 	int m_level;
 	float m_probability;
 	Item::Size m_size;
-	string m_subtype;
+	std::string m_subtype;
 	Item::Type m_type;
 };
 
@@ -65,9 +64,9 @@ class ItemLoader
 	 * \param pFilename Pfad zu einer XML-Datei, die Items enthaelt
 	 * \return Liste der geladenen Items
 	 */
-	list<ItemBasicData*>* loadItemBasicData(const char* pFilename);
+	std::list<ItemBasicData*>* loadItemBasicData(const char* pFilename);
 	
-	list<DropChanceData*>* loadDropChanceData(const char* pFilename);
+	std::list<DropChanceData*>* loadDropChanceData(const char* pFilename);
 	
 	/**
 	 * \fn void loadItemMeshData(const char* pFilename)
@@ -75,30 +74,30 @@ class ItemLoader
 	 * \param pFilename Pfad zu einer XML-Datei, die Items enthaelt
 	 * \return Liste der geladenen Items
 	 */
-	list<ItemMeshData*>* loadItemMeshData(const char* pFilename);
+	std::list<ItemMeshData*>* loadItemMeshData(const char* pFilename);
 	
 	
 	private:
 	
 	/**
-	 * \fn int generateItemBasicData(TiXmlElement* pElement, string element)
+	 * \fn int generateItemBasicData(TiXmlElement* pElement, std::string element)
 	 * \brief Legt Items im Speicher anhand von Daten an, die als Parameter uebergeben wurden. Diese Daten stammen aus einer XML-Datei.
 	 * \param pElement Zeiger auf ein Element der XML-Datei
 	 * \param element Name des Elements
 	 * \return Anzahl der Attribute des bearbeiteten Elements
 	 */
-	int generateItemBasicData(TiXmlElement* pElement, string element);
+	int generateItemBasicData(TiXmlElement* pElement, std::string element);
 	
-	int generateDropChanceData(TiXmlElement* pElement, string element);
+	int generateDropChanceData(TiXmlElement* pElement, std::string element);
 	
 	/**
-	 * \fn int generateItemMeshData(TiXmlElement* pElement, string element)
+	 * \fn int generateItemMeshData(TiXmlElement* pElement, std::string element)
 	 * \brief Legt ItemMeshData im Speicher anhand von Daten an, die als Parameter uebergeben wurden. Diese Daten stammen aus einer XML-Datei.
 	 * \param pElement Zeiger auf ein Element der XML-Datei
 	 * \param element Name des Elements
 	 * \return Anzahl der Attribute des bearbeiteten Elements
 	 */
-	int generateItemMeshData(TiXmlElement* pElement, string element);
+	int generateItemMeshData(TiXmlElement* pElement, std::string element);
 	
 	/**
 	 * \fn void searchItemBasicData( TiXmlNode* pParent )
@@ -118,13 +117,13 @@ class ItemLoader
 	
 	
 	ItemBasicData* m_item_data;
-	list<ItemBasicData*>* m_item_list;
+	std::list<ItemBasicData*>* m_item_list;
 	
 	DropChanceData* m_drop_chance_data;
-	list<DropChanceData*>* m_drop_chance_data_list;
+	std::list<DropChanceData*>* m_drop_chance_data_list;
 	
 	ItemMeshData* m_item_mesh_data;
-	list<ItemMeshData*>* m_item_mesh_list;
+	std::list<ItemMeshData*>* m_item_mesh_list;
 	
 	float m_weapon_mod[31];
 };

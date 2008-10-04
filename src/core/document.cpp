@@ -145,7 +145,7 @@ void Document::loadSavegame()
 	*/
 	DEBUG5("savegame is %s",fname.c_str());
 
-	ifstream file(fname.c_str(),ios::in| ios::binary);
+	std::ifstream file(fname.c_str(),std::ios::in| std::ios::binary);
 	if (file.is_open())
 	{
 		for (i=0;i<8;i++)
@@ -232,7 +232,7 @@ Document::~Document()
 /*
 ClientWorldObject* Document::getWorldObject(int id)
 {
-	 map<int,ClientWorldObject*>::iterator iter;
+	 std::map<int,ClientWorldObject*>::iterator iter;
 
     // Objekt im Binaerbaum suchen
      iter = m_objects_bintree->find(id);
@@ -276,7 +276,7 @@ void Document::unlock()
 
 KeyCode Document::getMappedKey(ShortkeyDestination sd)
 {
-	map<KeyCode, ShortkeyDestination>::iterator it;
+	std::map<KeyCode, ShortkeyDestination>::iterator it;
 	for (it=m_shortkey_map.begin(); it!= m_shortkey_map.end();++it)
 	{
 		if (it->second == sd)
@@ -792,7 +792,7 @@ void Document::setRightAction(Action::ActionType act)
 
 std::string Document::getAbilityDescription(Action::ActionType ability)
 {
-	ostringstream out_stream;
+	std::ostringstream out_stream;
 	out_stream.str("");
 
 	// der lokale Spieler
@@ -866,7 +866,7 @@ bool Document::onKeyPress(KeyCode key)
 
 	}
 
-	map<KeyCode, ShortkeyDestination>::iterator it = m_shortkey_map.find(key);
+	std::map<KeyCode, ShortkeyDestination>::iterator it = m_shortkey_map.find(key);
 
 	if (it == m_shortkey_map.end())
 	{
@@ -1174,7 +1174,7 @@ void* Document::writeSaveFile(void* doc_ptr)
 		int i;
 		bp = doc->m_savegame;
 		// Daten byteweise in Datei schreiben
-		ofstream file(doc->m_save_file.c_str(),ios::out | ios::binary);
+		std::ofstream file(doc->m_save_file.c_str(),std::ios::out | std::ios::binary);
 		DEBUG("length of file %i",len);
 		//hexwrite(bp,len);
 		if ( file.is_open() )

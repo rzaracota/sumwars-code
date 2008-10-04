@@ -6,7 +6,6 @@
 #include "debug.h"
 #include <vector>
 
-using namespace std;
 
 /**
  * \class Random
@@ -74,12 +73,12 @@ class Random
 	static int randDiscrete(float* distribution,int nr, float sum=1);
 	
 	/**
-	 * \fn static int randDiscrete(vector<float> distribution)
+	 * \fn static int randDiscrete(std::vector<float> distribution)
 	 * \brief Sucht unter eine Menge von Ereignissen mit einer gewissen Wahrscheinlichkeit eines aus
 	 * \param distribution Liste der Wahrscheinlichkeiten der Ereignisse
 	 * \return Nummer des eingetreteten Ereignisses
 	 */
-	static int randDiscrete(vector<float> distribution);
+	static int randDiscrete(std::vector<float> distribution);
 };
 
 //float Random::rez_rand_max = 1.0 / RAND_MAX;

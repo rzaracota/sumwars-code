@@ -59,10 +59,10 @@ struct DropItem
 	int getId();
 	
 	/**
-	 * \fn string getNameId()
+	 * \fn std::string getNameId()
 	 * \brief Gibt Name es Items mit angehaengter ID aus
 	 */
-	string getNameId();
+	std::string getNameId();
 	
 };
 

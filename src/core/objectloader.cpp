@@ -290,7 +290,7 @@ void ObjectLoader::searchXml(TiXmlNode* pParent)
 }
 
 
-list<MonsterBasicData*>* ObjectLoader::loadObjects(const char* pFilename)
+std::list<MonsterBasicData*>* ObjectLoader::loadObjects(const char* pFilename)
 {
 	for (int i=0; i<4; i++)
 	{
@@ -304,7 +304,7 @@ list<MonsterBasicData*>* ObjectLoader::loadObjects(const char* pFilename)
 		m_magic_power[i] = 0.0;
 	}
 	m_monster_data = 0;
-	m_monster_list = new list<MonsterBasicData*>;
+	m_monster_list = new std::list<MonsterBasicData*>;
 
 	TiXmlDocument doc(pFilename);
 	bool loadOkay = doc.LoadFile();
@@ -411,10 +411,10 @@ void ObjectLoader::searchMonsterMeshData(TiXmlNode* pParent)
 }
 
 
-list<MonsterMeshData*>* ObjectLoader::loadMonsterMeshData(const char* pFilename)
+std::list<MonsterMeshData*>* ObjectLoader::loadMonsterMeshData(const char* pFilename)
 {
 	m_monster_mesh_data = 0;
-	m_monster_mesh_list = new list<MonsterMeshData*>;
+	m_monster_mesh_list = new std::list<MonsterMeshData*>;
 
 	TiXmlDocument doc(pFilename);
 	bool loadOkay = doc.LoadFile();

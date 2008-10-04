@@ -430,11 +430,11 @@ class Document
 	*/
 
 	/**
-	 * \fn map<int,DropItem>* getDropItems()
+	 * \fn std::map<int,DropItem>* getDropItems()
 	 * \brief Gibt die Liste aller fuer den Spieler sichtbaren Gegenstaende am Boden zurueck
 	 */
 	/*
-	map<int,DropItem>* getDropItems()
+	std::map<int,DropItem>* getDropItems()
 	{
 		return m_drop_items;
 	}
@@ -752,16 +752,16 @@ class Document
 		State m_state;
 
 	/**
-	 * \var map<unsigned int,ShortkeyDestination> m_shortkey_map
+	 * \var std::map<unsigned int,ShortkeyDestination> m_shortkey_map
 	 * \brief Bildet Taste auf Ereignis, das per Shortkey ausgeloest werden kann ab
 	 */
-		map<KeyCode,ShortkeyDestination> m_shortkey_map;
+		std::map<KeyCode,ShortkeyDestination> m_shortkey_map;
 
 	/**
-	 * \var set<KeyCode> m_special_keys
+	 * \var std::set<KeyCode> m_special_keys
 	 * \brief Menge der Tasten, die eine besondere Bedeutung haben und die deswegen nicht frei zugewiesen werden koennen
 	 */
-    set<KeyCode> m_special_keys;
+    std::set<KeyCode> m_special_keys;
 
 
 

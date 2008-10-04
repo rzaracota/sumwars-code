@@ -204,8 +204,8 @@ void Trade::onTrade(int index, ClientCommand* trade_command) {
 		// Nach ändern der Handelssituation beide Partner auf nicht akzeptierend setzen
 		m_accept[0]=false;
 		m_accept[1]=false;
-		map< int, Item >::iterator iter;
-		map< int, Item >* itemmap = m_inventory[0]->getItems();
+		std::map< int, Item >::iterator iter;
+		std::map< int, Item >* itemmap = m_inventory[0]->getItems();
 		// Verschieben vom eigenen Inventar zum Angebot
 		if (trade_command->m_direction== INVENTORY_TO_OFFER)
 		{

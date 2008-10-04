@@ -20,7 +20,6 @@
 #ifndef WORLD_H
 #define WORLD_H
 
-using namespace std;
 
 
 #include <sys/time.h>
@@ -35,7 +34,7 @@ using namespace std;
 #include <queue>
 
 #include "worldobject.h"
-#include "dmgprojectile.h"
+#include "projectile.h"
 #include "trade.h"
 #include "servernetwork.h"
 #include "clientnetwork.h"
@@ -175,7 +174,7 @@ public:
 
 
 	/**
-	 * \fn bool getObjectsInShape( Shape* shape, short region, list<WorldObject*>* result,short layer=WorldObject::Geometry::LAYER_ALL, short group = WorldObject::GROUP_ALL, WorldObject* omit=0 )
+	 * \fn bool getObjectsInShape( Shape* shape, short region, std::list<WorldObject*>* result,short layer=WorldObject::Geometry::LAYER_ALL, short group = WorldObject::GROUP_ALL, WorldObject* omit=0 )
 	 * \brief Sucht WorldObjects innerhalb eines Gebietes
 	 * \param shape Form des Gebietes
 	 * \param layer Ebene in der gesucht wird
@@ -190,7 +189,7 @@ public:
 	 * Wenn f&uuml;r selector ein NULL-Zeiger &uuml;bergeben wird, so werden die Objekte nicht selektiert.
 	 * Wenn f&uuml;r result ein NULL-Zeiger &uuml;bergeben wird, oder ein anderer Fehler auftritt, so wird false zur&uuml;ckgegeben, sonst true.
 	 */
-	bool getObjectsInShape( Shape* shape, short region, list<WorldObject*>* result,short layer=WorldObject::Geometry::LAYER_ALL, short group = WorldObject::GROUP_ALL, WorldObject* omit=0 );
+	bool getObjectsInShape( Shape* shape, short region, std::list<WorldObject*>* result,short layer=WorldObject::Geometry::LAYER_ALL, short group = WorldObject::GROUP_ALL, WorldObject* omit=0 );
 
 
 	/**
@@ -207,7 +206,7 @@ public:
 	WorldObject* getObjectAt(float x_coordinate, float y_coordinate,  short region,short layer=WorldObject::Geometry::LAYER_ALL, short group = WorldObject::GROUP_ALL);
 
 	/**
-	 * \fn getObjectsOnLine( float xstart, float ystart, float xend, float yend,  short region, list<WorldObject*>* result,,short layer=WorldObject::Geometry::LAYER_ALL, short group = WorldObject::GROUP_ALL WorldObject* omit=0 )
+	 * \fn getObjectsOnLine( float xstart, float ystart, float xend, float yend,  short region, std::list<WorldObject*>* result,,short layer=WorldObject::Geometry::LAYER_ALL, short group = WorldObject::GROUP_ALL WorldObject* omit=0 )
 	 * \brief Sucht alle Objekte die auf der angegebenen Linie liegen
 	 * \param xstart x-Koordinate Startpunkt
 	 * \param ystart y-Koordinate Startpunkt
@@ -219,17 +218,17 @@ public:
 	 * \param group Gruppen die durchsucht werden sollen
 	 * \param omit Objekt, das ausgelassen wird
 	 */
-	void getObjectsOnLine( float xstart, float ystart, float xend, float yend,  short region, list<WorldObject*>* result,short layer=WorldObject::Geometry::LAYER_ALL, short group = WorldObject::GROUP_ALL, WorldObject* omit=0 );
+	void getObjectsOnLine( float xstart, float ystart, float xend, float yend,  short region, std::list<WorldObject*>* result,short layer=WorldObject::Geometry::LAYER_ALL, short group = WorldObject::GROUP_ALL, WorldObject* omit=0 );
 
 	/**
-	 * \fn void getProjectilesOnScreen(float center_x,float center_y,short region, list<Projectile*>* result)
+	 * \fn void getProjectilesOnScreen(float center_x,float center_y,short region, std::list<Projectile*>* result)
 	 * \brief Gibt alle Projektile auf dem Bildschirm aus
 	 * \param center_x x-Koordinate Zentrum
 	 * \param center_y y-Koordinate Zentrum
 	 * \param region Region
 	 * \param result Liste in die die Objekte eingeordnet werden
 	 */
-	void getProjectilesOnScreen(float center_x,float center_y,short region, list<Projectile*>* result);
+	void getProjectilesOnScreen(float center_x,float center_y,short region, std::list<Projectile*>* result);
 
 
 	/**
@@ -510,10 +509,10 @@ private:
 
 
 	/**
-	 * \var map<int, Trade* >* m_trades
+	 * \var std::map<int, Trade* >* m_trades
 	 * \brief Speichert alle Handelsvorgänge
 	 */
-	map<int, Trade* >* m_trades;
+	std::map<int, Trade* >* m_trades;
 
 
 	/**
@@ -526,13 +525,13 @@ private:
 	 * \var m_players
 	 * \brief Liste der Spieler in der Welt mit ihren Slots
 	 */
-	map<int,WorldObject*>* m_player_slots;
+	std::map<int,WorldObject*>* m_player_slots;
 	
 	/**
-	 * \var map<int,WorldObject*>* m_players
+	 * \var std::map<int,WorldObject*>* m_players
 	 * \brief Liste der Spieler in der Welt sortiert nach ID
 	 */
-	map<int,WorldObject*>* m_players;
+	std::map<int,WorldObject*>* m_players;
 	
 
 	/**
@@ -553,16 +552,16 @@ private:
 	WorldObject* m_local_player;
 	
 	/**
-	 * \var list<int> m_logins
+	 * \var std::list<int> m_logins
 	 * \brief Liste der Spieler die sich gerade einloggen wollen
 	 */
-	list<int> m_logins;
+	std::list<int> m_logins;
 	
 	/**
-	 * \var list<Event> m_events
+	 * \var std::list<Event> m_events
 	 * \brief Liste der globalen Events beim aktuellen update
 	 */
-	list<Event>* m_events;
+	std::list<Event>* m_events;
 	
 	/**
 	 * \var float m_timer[3]

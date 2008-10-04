@@ -46,7 +46,6 @@
 #include <math.h>
 
 
-using namespace std;
 
 /**
  * \struct WeaponAttr
@@ -194,13 +193,13 @@ struct Item {
 	 * \fn String getName()
 	 * \brief Gibt den lesbaren Name des Objektes aus
 	 */
-	virtual string getName();
+	virtual std::string getName();
 
 	/**
 	 * \fn String getString()
 	 * \brief Gibt den Name des Objektes aus
 	 */
-	virtual string getString();
+	virtual std::string getString();
 
 	/**
 	 * \fn void toString(CharConv* cv)

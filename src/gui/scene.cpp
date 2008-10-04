@@ -22,11 +22,11 @@ Scene::Scene(Document* doc,Ogre::RenderWindow* window)
 	m_viewport->setBackgroundColour(Ogre::ColourValue(0,0,0));
 	m_camera->setAspectRatio(Ogre::Real(m_viewport->getActualWidth()) / Ogre::Real(m_viewport->getActualHeight()));
 
-	m_objects = new map<int,std::string>;
+	m_objects = new std::map<int,std::string>;
 
-	m_drop_items = new map<int,std::string>;
+	m_drop_items = new std::map<int,std::string>;
 
-	m_projectiles = new map<int,std::string>;
+	m_projectiles = new std::map<int,std::string>;
 
 	registerMeshes();
 
@@ -61,13 +61,13 @@ void Scene::registerMeshes()
 	ObjectLoader* objectloader = 0;
 	objectloader = new ObjectLoader;
 
-	list<MonsterMeshData*>* monster_mesh_list;
+	std::list<MonsterMeshData*>* monster_mesh_list;
 	monster_mesh_list = objectloader->loadMonsterMeshData("../data/monsters.xml");
 
 	if (monster_mesh_list != 0)
 	{
 		// Daten auslesen und registrieren
-		list<MonsterMeshData*>::iterator iter = monster_mesh_list->begin();
+		std::list<MonsterMeshData*>::iterator iter = monster_mesh_list->begin();
 		while (iter != monster_mesh_list->end())
 		{
 			registerObject((*iter)->m_subtype, (*iter)->m_mesh, "");
@@ -134,13 +134,13 @@ void Scene::registerMeshes()
 	ItemLoader* itemloader = 0;
 	itemloader = new ItemLoader;
 
-	list<ItemMeshData*>* item_mesh_list;
+	std::list<ItemMeshData*>* item_mesh_list;
 	item_mesh_list = itemloader->loadItemMeshData("../data/items.xml");
 
 	if (item_mesh_list != 0)
 	{
 		// Daten auslesen und registrieren
-		list<ItemMeshData*>::iterator iter = item_mesh_list->begin();
+		std::list<ItemMeshData*>::iterator iter = item_mesh_list->begin();
 		while (iter != item_mesh_list->end())
 		{
 			registerItem((*iter)->m_subtype, (*iter)->m_mesh);
@@ -191,38 +191,38 @@ void Scene::registerMeshes()
 
 void Scene::registerObject(WorldObject::TypeInfo::ObjectSubtype subtype, std::string mesh, std::string particle_system, float scaling_factor)
 {
-	m_object_render_info.insert(make_pair(subtype,RenderInfo(mesh,particle_system,scaling_factor)));
+	m_object_render_info.insert(std::make_pair(subtype,RenderInfo(mesh,particle_system,scaling_factor)));
 }
 
 void Scene::registerAttachedMesh(WorldObject::TypeInfo::ObjectSubtype subtype, std::string bone, std::string mesh)
 {
     // Renderinformationen suchen
-    map<WorldObject::TypeInfo::ObjectSubtype, RenderInfo>::iterator it = m_object_render_info.find(subtype);
+    std::map<WorldObject::TypeInfo::ObjectSubtype, RenderInfo>::iterator it = m_object_render_info.find(subtype);
     if (it != m_object_render_info.end())
     {
         // gefunden
-        it->second.m_extra_meshes.push_back(make_pair(bone,mesh));
+        it->second.m_extra_meshes.push_back(std::make_pair(bone,mesh));
     }
 }
 void Scene::registerItem(Item::Subtype subtype, std::string mesh, std::string particle_system, float scaling_factor)
 {
-	m_item_render_info.insert(make_pair(subtype,RenderInfo(mesh,particle_system,scaling_factor)));
+	m_item_render_info.insert(std::make_pair(subtype,RenderInfo(mesh,particle_system,scaling_factor)));
 }
 
 void Scene::registerTile(Tile tile, std::string mesh, std::string particle_system, float scaling_factor)
 {
-	m_tile_render_info.insert(make_pair(tile,RenderInfo(mesh,particle_system,scaling_factor)));
+	m_tile_render_info.insert(std::make_pair(tile,RenderInfo(mesh,particle_system,scaling_factor)));
 }
 
 
 void Scene::registerProjectile(Projectile::ProjectileType type, std::string mesh, std::string particle_system, float scaling_factor)
 {
-	m_projectile_render_info.insert(make_pair(type,RenderInfo(mesh,particle_system,scaling_factor)));
+	m_projectile_render_info.insert(std::make_pair(type,RenderInfo(mesh,particle_system,scaling_factor)));
 }
 
 RenderInfo  Scene::getObjectRenderInfo(WorldObject::TypeInfo::ObjectSubtype subtype)
 {
-	map<WorldObject::TypeInfo::ObjectSubtype, RenderInfo>::iterator i= m_object_render_info.find(subtype);
+	std::map<WorldObject::TypeInfo::ObjectSubtype, RenderInfo>::iterator i= m_object_render_info.find(subtype);
 	if (i != m_object_render_info.end())
 	{
 		return i->second;
@@ -236,7 +236,7 @@ RenderInfo  Scene::getObjectRenderInfo(WorldObject::TypeInfo::ObjectSubtype subt
 
 RenderInfo  Scene::getItemRenderInfo(Item::Subtype subtype)
 {
-	map<Item::Subtype, RenderInfo>::iterator i= m_item_render_info.find(subtype);
+	std::map<Item::Subtype, RenderInfo>::iterator i= m_item_render_info.find(subtype);
 	if (i != m_item_render_info.end())
 	{
 		return i->second;
@@ -250,7 +250,7 @@ RenderInfo  Scene::getItemRenderInfo(Item::Subtype subtype)
 
 RenderInfo  Scene::getProjectileRenderInfo(Projectile::ProjectileType type)
 {
-	map<Projectile::ProjectileType, RenderInfo>::iterator i= m_projectile_render_info.find(type);
+	std::map<Projectile::ProjectileType, RenderInfo>::iterator i= m_projectile_render_info.find(type);
 	if (i != m_projectile_render_info.end())
 	{
 		return i->second;
@@ -337,9 +337,9 @@ void  Scene::updateObjects()
 	x = player->getGeometry()->m_shape.m_coordinate_x;
 	y = player->getGeometry()->m_shape.m_coordinate_y;
 
-	list<WorldObject*> objs;
+	std::list<WorldObject*> objs;
 	WorldObject* obj;
-	list<WorldObject*>::iterator it;
+	std::list<WorldObject*>::iterator it;
 	Shape s;
 	s.m_coordinate_x = x;
 	s.m_coordinate_y = y;
@@ -352,7 +352,7 @@ void  Scene::updateObjects()
 
 
 	// Liste der aktuell in der Szene vorhanden Objekte durchmustern
-	map<int, string>::iterator it2;
+	std::map<int, string>::iterator it2;
 	int id;
 	for (it2 = m_objects->begin();it2 != m_objects->end();)
 	{
@@ -389,12 +389,12 @@ void Scene::updateItems()
 	Player* player = m_document->getLocalPlayer();
 
 	// Liste der aktuell in der Szene vorhandenen Items durchmustern
-	map<int,DropItem*>* itms;
-	map<int,DropItem*>::iterator it;
+	std::map<int,DropItem*>* itms;
+	std::map<int,DropItem*>::iterator it;
 	itms = player->getRegion()->getDropItems();
 	DropItem* di;
 
-	map<int, string>::iterator it2;
+	std::map<int, string>::iterator it2;
 	int id;
 
 	for (it2= m_drop_items->begin(); it2 != m_drop_items->end(); )
@@ -462,7 +462,7 @@ void Scene::updateObject(WorldObject* obj)
 		// Objekt existiert noch nicht in der Szene
 
 		// in die Liste der Objekte einfuegen
-		m_objects->insert(make_pair(obj->getId(),name));
+		m_objects->insert(std::make_pair(obj->getId(),name));
 
 		//Objekt anlegen
 		createObject(obj,name);
@@ -590,15 +590,15 @@ void Scene::updateObject(WorldObject* obj)
         // Schleife ueber die angehaengten Meshes
         Ogre::Entity::ChildObjectListIterator it = obj_ent->getAttachedObjectIterator();
         // mappt Namen von Knochen auf die daran anzuhaengenen Meshes
-        map<std::string, std::string> goal_atch;
-        map<std::string, std::string>::iterator jt;
+        std::map<std::string, std::string> goal_atch;
+        std::map<std::string, std::string>::iterator jt;
 
         itm = equ->getItem(Equipement::WEAPON);
         if (itm !=0)
         {
             itmsubtype = itm->m_subtype;
             new_ent_name = getItemRenderInfo(itmsubtype).m_mesh;
-            goal_atch.insert(make_pair("itemRightHand",new_ent_name));
+            goal_atch.insert(std::make_pair("itemRightHand",new_ent_name));
         }
 
         // Schleife ueber die aktuell angehaengten Meshes
@@ -751,7 +751,7 @@ void Scene::createObject(WorldObject* obj,std::string& name, bool is_static)
     obj_node->attachObject(obj_ent);
 
     // weitere Meshes anfuegen
-    std::list<pair<std::string,std::string> >::iterator it;
+    std::list<std::pair<std::string,std::string> >::iterator it;
     // Entity fuer ein angefuegtes Mesh
     Ogre::Entity* extr_m_ent;
 
@@ -823,7 +823,7 @@ void Scene::createItem(DropItem* di, std::string& name)
 	Ogre::Vector3 vec(di->m_x*25,0,di->m_y*25);
 
 	// in die Liste einfuegen
-	m_drop_items->insert(make_pair(di->m_item->m_id,name));
+	m_drop_items->insert(std::make_pair(di->m_item->m_id,name));
 
 	// Node anlegen
 	Ogre::SceneNode* obj_node;
@@ -855,12 +855,12 @@ void Scene::updateProjectiles()
 {
 	Player* player = m_document->getLocalPlayer();
 
-	map<int,Projectile*>* projectiles;
-	map<int,Projectile*>::iterator it;
+	std::map<int,Projectile*>* projectiles;
+	std::map<int,Projectile*>::iterator it;
 	projectiles = player->getRegion()->getProjectiles();
 	Projectile* pr;
 
-	map<int, string>::iterator it2;
+	std::map<int, string>::iterator it2;
 	int id;
 
 	// Liste der aktuell in der Szene vorhandenen Projektile durchmustern
@@ -926,7 +926,7 @@ void Scene::createProjectile(Projectile* pr, std::string& name)
 	Ogre::Vector3 vec(pr->getGeometry()->m_coordinate_x*50,50,pr->getGeometry()->m_coordinate_y*50);
 
 	// in die Liste einfuegen
-	m_projectiles->insert(make_pair(pr->getId(),name));
+	m_projectiles->insert(std::make_pair(pr->getId(),name));
 
 	// Node anlegen
 	Ogre::SceneNode* obj_node;
@@ -1109,8 +1109,8 @@ void Scene::destroySceneNode(std::string& node_name)
 
 	std::string name;
 	Ogre::MovableObject* obj;
-	list<Ogre::MovableObject*> objects;
-	list<Ogre::MovableObject*>::iterator i;
+	std::list<Ogre::MovableObject*> objects;
+	std::list<Ogre::MovableObject*>::iterator i;
 
 	while (it.hasMoreElements())
 	{
@@ -1151,7 +1151,7 @@ void Scene::createScene()
 	clearObjects();
 
 	// Liste der statischen Objekte
-	list<WorldObject*> stat_objs;
+	std::list<WorldObject*> stat_objs;
 
 	Region* region = m_document->getLocalPlayer()->getRegion();
 
@@ -1163,7 +1163,7 @@ void Scene::createScene()
 	s.m_extent_y = 10000;
 
 	region->getObjectsInShape(&s,&stat_objs, WorldObject::Geometry::LAYER_ALL,WorldObject::FIXED);
-	list<WorldObject*>::iterator it;
+	std::list<WorldObject*>::iterator it;
 	std::string name;
 	for (it = stat_objs.begin(); it !=stat_objs.end();++it)
 	{

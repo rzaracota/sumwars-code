@@ -309,9 +309,9 @@ void WindowMain::DisplayFunc ()
 	}
 */
 
-	list<WorldObject*> stat_objs;
-	list<WorldObject*> obj;
-	list<WorldObject*>::iterator it;
+	std::list<WorldObject*> stat_objs;
+	std::list<WorldObject*> obj;
+	std::list<WorldObject*>::iterator it;
 	Shape s;
 	s.m_coordinate_x = x;
 	s.m_coordinate_y = y;
@@ -594,8 +594,8 @@ void WindowMain::DisplayFunc ()
 
 	}
 
-	list<Projectile*> proj;
-	list<Projectile*>::iterator i2;
+	std::list<Projectile*> proj;
+	std::list<Projectile*>::iterator i2;
 	
 	region->getProjectilesOnScreen(x,y,&proj);
 	Projectile* pr;

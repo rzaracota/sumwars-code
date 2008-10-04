@@ -12,7 +12,6 @@
 // TODO : include anpassen (es wird nur ein Spieler allgemein benoetigt)
 
 
-using namespace std;
 
 /**
  * \struct RenderInfo
@@ -27,12 +26,12 @@ struct RenderInfo
 	std::string m_mesh;
 
 	/**
-	* \var std::list<pair<std::string,std::string> > m_extra_meshes
+	* \var std::std::list<pair<std::string,std::string> > m_extra_meshes
 	* \brief Liste der weiteren Meshes die an das Hauptmesh angefuegt werden
 	* erster Teil des Wertepaares: Name des Knochens
 	* zweiter Teil des Wertepaares: Name des Meshes
 	*/
-	std::list<pair<std::string,std::string> > m_extra_meshes;
+	std::list<std::pair<std::string,std::string> > m_extra_meshes;
 
 	/**
 	 * \var std::string m_particle_system
@@ -109,19 +108,19 @@ class Scene
 
 
 	/**
-	 * \fn map<int,string>* getObjects()
+	 * \fn std::map<int,string>* getObjects()
 	 * \brief Gibt die Liste der in der Szene dargestellten nicht statischen Objekte aus
 	 */
-	map<int,string>* getObjects()
+	std::map<int,string>* getObjects()
 	{
 		return m_objects;
 	}
 
 	/**
-	 * \fn map<int,string>* getDropItems()
+	 * \fn std::map<int,string>* getDropItems()
 	 * \brief Gibt die Liste der in der Szene dargestellen Gegenstaende aus
 	 */
-	map<int,string>* getDropItems()
+	std::map<int,string>* getDropItems()
 	{
 		return m_drop_items;
 	}
@@ -304,46 +303,46 @@ class Scene
 
 
 	/**
-	 * \var map<int,string>* m_objects
+	 * \var std::map<int,string>* m_objects
 	 * \brief IDs der objekte, die aktuell dargestellt werden, sowie deren Namen in Ogre
 	 */
-	map<int,string>* m_objects;
+	std::map<int,string>* m_objects;
 
 	/**
-	 * \var map<int,string>* m_drop_items
+	 * \var std::map<int,string>* m_drop_items
 	 * \brief IDs der Gegenstaende, die aktuell dargestellt werden, sowie deren Namen in Ogre
 	 */
-	map<int,string>* m_drop_items;
+	std::map<int,string>* m_drop_items;
 
 	/**
-	 * \var map<int,string>* m_projectiles
+	 * \var std::map<int,string>* m_projectiles
 	 * \brief IDs der Projektile, die aktuell dargestellt werden, sowie deren Namen in Ogre
 	 */
-	map<int,string>* m_projectiles;
+	std::map<int,string>* m_projectiles;
 
 	/**
-	 * \var map<Projectile::ProjectileType, RenderInfo> m_projectile_render_info
+	 * \var std::map<Projectile::ProjectileType, RenderInfo> m_projectile_render_info
 	 *  \brief Speichert fuer die Projektile die Information zum Rendern
 	 */
-	map<Projectile::ProjectileType, RenderInfo> m_projectile_render_info;
+	std::map<Projectile::ProjectileType, RenderInfo> m_projectile_render_info;
 
 	/**
-	 * \var map<WorldObject::TypeInfo::ObjectSubtype, RenderInfo> m_object_render_info
+	 * \var std::map<WorldObject::TypeInfo::ObjectSubtype, RenderInfo> m_object_render_info
 	 *  \brief Speichert fuer die Objekte die Information zum Rendern
 	 */
-	map<WorldObject::TypeInfo::ObjectSubtype, RenderInfo> m_object_render_info;
+	std::map<WorldObject::TypeInfo::ObjectSubtype, RenderInfo> m_object_render_info;
 
 	/**
-	 * \var map<Item::Subtype, RenderInfo> m_item_render_info
+	 * \var std::map<Item::Subtype, RenderInfo> m_item_render_info
 	 *  \brief Speichert fuer die Projektile die Information zum Rendern
 	 */
-	map<Item::Subtype, RenderInfo> m_item_render_info;
+	std::map<Item::Subtype, RenderInfo> m_item_render_info;
 
 	/**
-	 * \var map<Tile, RenderInfo> m_tile_render_info
+	 * \var std::map<Tile, RenderInfo> m_tile_render_info
 	 *  \brief Speichert fuer die Tiles die Information zum Rendern
 	 */
-	map<Tile, RenderInfo> m_tile_render_info;
+	std::map<Tile, RenderInfo> m_tile_render_info;
 
 
 

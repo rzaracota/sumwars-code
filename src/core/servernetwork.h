@@ -8,7 +8,7 @@
 
 // Debuggin
 #include "debug.h"
-using namespace std;
+
 
 
 /**
@@ -82,10 +82,10 @@ class NetworkSlot
 
 	private:
 		/**
-		* \var queue<Packet*> m_received_packets
+		* \var std::queue<Packet*> m_received_packets
 		 * \brief Liste der empfangenen Packete
 		 */
-		queue<Packet*> m_received_packets;
+		std::queue<Packet*> m_received_packets;
 
 		/**
 		 * \var SystemAddress m_system_adress
@@ -246,10 +246,10 @@ class ServerNetwork: public Network
 
 
 		/**
-		 * \var queue<int> m_new_login_slots
+		 * \var std::queue<int> m_new_login_slots
 		 * \brief Warteliste der Clienten die sich schon angemeldet haben, aber noch nicht in die Welt eingefuegt worden sind
 		 */
-		queue<int> m_new_login_slots;
+		std::queue<int> m_new_login_slots;
 
 
 

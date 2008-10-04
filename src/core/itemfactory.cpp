@@ -3,13 +3,12 @@
 #define USE_ITEMLOADER
 
 #include <iostream>
-using namespace std;
 
-map<Item::Subtype, DropChance> ItemFactory::m_item_probabilities;
+std::map<Item::Subtype, DropChance> ItemFactory::m_item_probabilities;
 
-map<Item::Subtype, Item::Type> ItemFactory::m_item_types;
+std::map<Item::Subtype, Item::Type> ItemFactory::m_item_types;
 
-map<Item::Subtype,ItemBasicData*> ItemFactory::m_item_data;
+std::map<Item::Subtype,ItemBasicData*> ItemFactory::m_item_data;
 
 World* ItemFactory::m_world;
 
@@ -25,7 +24,7 @@ Item* ItemFactory::createItem(Item::Type type, Item::Subtype subtype, int id, fl
 		id = m_world->getValidId();
 	}
 	DEBUG5("creating item %i / %s",type, subtype.c_str());
-	map<Item::Subtype,ItemBasicData*>::iterator it;
+	std::map<Item::Subtype,ItemBasicData*>::iterator it;
 	it = m_item_data.find(subtype);
 	Item * item;
 	float min_enchant =30;
@@ -208,8 +207,8 @@ Item* ItemFactory::createItem(Item::Type type, Item::Subtype subtype, int id, fl
 			modchance[DAMAGE_MULT_ICE_MOD]=0.05;
 			modchance[DAMAGE_MULT_AIR_MOD]=0.05;
 
-			min_enchant = min(200.0,magic_power*0.2);
-			max_enchant= min(850.0,magic_power*1.5);
+			min_enchant = std::min(200.0,magic_power*0.2);
+			max_enchant= std::min(850.0,magic_power*1.5);
 			item->m_price = 350;
 			item->m_size = Item::SMALL;
 		}
@@ -221,8 +220,8 @@ Item* ItemFactory::createItem(Item::Type type, Item::Subtype subtype, int id, fl
 			modchance[RESIST_ICE_MOD]=0.10;
 			modchance[RESIST_AIR_MOD]=0.10;
 			modchance[RESIST_ALL_MOD]=0.30;
-			min_enchant = min(200.0,magic_power*0.2);
-			max_enchant= min(850.0,magic_power*1.5);
+			min_enchant = std::min(200.0,magic_power*0.2);
+			max_enchant= std::min(850.0,magic_power*1.5);
 			item->m_size = Item::SMALL;
 
 		}
@@ -465,8 +464,8 @@ void ItemFactory::createMagicMods(Item* item, float* modchance, float magic_powe
 
 		num_mods++;
 
-		levelreq = max(levelreq,(int) (mp*0.06-1));
-		levelreq = min(80,levelreq);
+		levelreq = std::max(levelreq,(int) (mp*0.06-1));
+		levelreq = std::min(80,levelreq);
 
 		dmgavg = mp*0.06;
 
@@ -609,12 +608,12 @@ void ItemFactory::init()
 	ItemLoader* itemloader = 0;
 	itemloader = new ItemLoader;
 
-	list<ItemBasicData*>* item_list;
+	std::list<ItemBasicData*>* item_list;
 	item_list = itemloader->loadItemBasicData("../data/items.xml");
 
 	if (item_list != 0)
 	{
-		list<ItemBasicData*>::iterator iter = item_list->begin();
+		std::list<ItemBasicData*>::iterator iter = item_list->begin();
 		while (iter != item_list->end())
 		{
 			// Debugging: Anzeigen der geladenen Items
@@ -651,13 +650,13 @@ void ItemFactory::init()
 	}
 
 
-	list<DropChanceData*>* drop_chance_list;
+	std::list<DropChanceData*>* drop_chance_list;
 	drop_chance_list = itemloader->loadDropChanceData("../data/items.xml");
 
 	if (drop_chance_list != 0)
 	{
 		// Daten auslesen und registrieren
-		list<DropChanceData*>::iterator iter = drop_chance_list->begin();
+		std::list<DropChanceData*>::iterator iter = drop_chance_list->begin();
 		while (iter != drop_chance_list->end())
 		{
 			registerItemDrop( (*iter)->m_type, (*iter)->m_subtype, DropChance( (*iter)->m_level, (*iter)->m_probability, (*iter)->m_size) );
@@ -792,14 +791,14 @@ Item* ItemFactory::createItem(DropSlot &slot)
 		// *richtiges* Item gedroppt
 
 		// Vector fuer die moeglichen Items
-		vector<Item::Subtype> types;
+		std::vector<Item::Subtype> types;
 
 		// Vector fuer die Wahrscheinlickeit
-		vector<float> prob;
+		std::vector<float> prob;
 
 		float p;
 
-		map<Item::Subtype, DropChance>::iterator i;
+		std::map<Item::Subtype, DropChance>::iterator i;
 		for (i= m_item_probabilities.begin();i!=m_item_probabilities.end();++i)
 		{
 			// Testen ob die Groesse passt

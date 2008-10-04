@@ -566,9 +566,9 @@ void Creature::performActionCritPart(float goalx, float goaly, WorldObject* goal
 
 
 
-	list<WorldObject*> res;
+	std::list<WorldObject*> res;
 	res.clear();
-	list<WorldObject*>::iterator it;
+	std::list<WorldObject*>::iterator it;
 
 	// Koordinaten das ausfuehrenden Objektes
 	float x = getGeometry()->m_shape.m_coordinate_x;
@@ -1427,7 +1427,7 @@ void Creature::collisionDetection(float time)
 	float ynew = getGeometry()->m_shape.m_coordinate_y+getMoveInfo()->m_speed_y * time;
 
 	// Kreis um den Zielpunkt
-	list<WorldObject*> result;
+	std::list<WorldObject*> result;
 	Shape scopy;
 	scopy.m_radius = getGeometry()->m_shape.m_radius*1.05;
 	scopy.m_coordinate_x = xnew;
@@ -1444,7 +1444,7 @@ void Creature::collisionDetection(float time)
 	{
 		// es gibt kollidierende Objekte
 		DEBUG5("aktuelle Koordinaten %f %f",getGeometry()->m_shape.m_coordinate_x,getGeometry()->m_shape.m_coordinate_y);
-		list<WorldObject*>::iterator i;
+		std::list<WorldObject*>::iterator i;
 
 		Shape* s2;
         // Liste der kollidierenden Objekte durchgehen
@@ -1954,8 +1954,8 @@ void Creature::calcStatusModCommand()
 		s.m_type = Shape::CIRCLE;
 		s.m_radius = getGeometry()->m_shape.m_radius;
 		WorldObject* wo =0;
-		list<WorldObject*> res;
-		list<WorldObject*>::iterator it;
+		std::list<WorldObject*> res;
+		std::list<WorldObject*>::iterator it;
 
 		// ermitteln der Objekte mit denen bei der Bewegung kollidiert wird
 		getWorld()->getObjectsInShape(&s,getGridLocation()->m_region,&res,Geometry::LAYER_AIR,CREATURE | FIXED,this);
@@ -2031,8 +2031,8 @@ void Creature::calcStatusModCommand()
 		s.m_radius =8;
 		s.m_coordinate_x = x;
 		s.m_coordinate_y = y;
-		list<WorldObject*> res;
-		list<WorldObject*>::iterator i;
+		std::list<WorldObject*> res;
+		std::list<WorldObject*>::iterator i;
 		res.clear();
 
 		// Suchen aller Objekte im Kreis
@@ -2342,7 +2342,7 @@ bool Creature::update (float time)
 	// Zeit fuer temporaere Effekte reduzieren und ggf deaktivieren
 	// true, wenn die modifizierten Attribute neu berechnet werden muessen
 	bool recalc = false;
-	list<CreatureBaseAttrMod>::iterator i;
+	std::list<CreatureBaseAttrMod>::iterator i;
 	for (i=m_dyn_attr.m_temp_mods.begin();i!=m_dyn_attr.m_temp_mods.end();)
 	{
 
@@ -2386,9 +2386,9 @@ bool Creature::update (float time)
 			d.m_multiplier[Damage::FIRE]=1;
 			d.m_attacker_fraction = getTypeInfo()->m_fraction;
 
-			list<WorldObject*> res;
+			std::list<WorldObject*> res;
 			res.clear();
-			list<WorldObject*>::iterator it;
+			std::list<WorldObject*>::iterator it;
 
 			// Kreis um eigenen Mittelpunkt mit Radius eigener Radius plus 1
 			Shape s;
@@ -2953,8 +2953,8 @@ void Creature::calcAbilityDamage(Action::ActionType act,Damage& dmg)
 		dmg.m_min_damage[Damage::PHYSICAL]*=0.75;
 		dmg.m_max_damage[Damage::PHYSICAL]*=0.75;
 		// Feuerschaden hinzufuegen
-		dmg.m_min_damage[Damage::FIRE] += min(m_base_attr_mod.m_magic_power*2.0f,dmg.m_min_damage[Damage::PHYSICAL]);
-		dmg.m_max_damage[Damage::FIRE] += min(m_base_attr_mod.m_magic_power*3.0f,dmg.m_max_damage[Damage::PHYSICAL]);
+		dmg.m_min_damage[Damage::FIRE] += std::min(m_base_attr_mod.m_magic_power*2.0f,dmg.m_min_damage[Damage::PHYSICAL]);
+		dmg.m_max_damage[Damage::FIRE] += std::min(m_base_attr_mod.m_magic_power*3.0f,dmg.m_max_damage[Damage::PHYSICAL]);
 
 		// kein Eisschaden
 		dmg.m_min_damage[Damage::ICE]=0;
@@ -2977,8 +2977,8 @@ void Creature::calcAbilityDamage(Action::ActionType act,Damage& dmg)
 	// Eispfeile
 	if (m_base_attr_mod.m_special_flags & ICE_ARROWS)
 	{
-		dmg.m_min_damage[Damage::ICE] += min(m_base_attr_mod.m_magic_power*2.0f,dmg.m_min_damage[Damage::PHYSICAL]);
-		dmg.m_max_damage[Damage::ICE] += min(m_base_attr_mod.m_magic_power*3.0f,dmg.m_max_damage[Damage::PHYSICAL]);
+		dmg.m_min_damage[Damage::ICE] += std::min(m_base_attr_mod.m_magic_power*2.0f,dmg.m_min_damage[Damage::PHYSICAL]);
+		dmg.m_max_damage[Damage::ICE] += std::min(m_base_attr_mod.m_magic_power*3.0f,dmg.m_max_damage[Damage::PHYSICAL]);
 		dmg.m_min_damage[Damage::PHYSICAL]*=0.5;
 		dmg.m_max_damage[Damage::PHYSICAL]*=0.5;
 		dmg.m_min_damage[Damage::FIRE]=0;
@@ -2994,8 +2994,8 @@ void Creature::calcAbilityDamage(Action::ActionType act,Damage& dmg)
 	// Windpfeile
 	if (m_base_attr_mod.m_special_flags & WIND_ARROWS)
 	{
-		dmg.m_min_damage[Damage::AIR] += min(m_base_attr_mod.m_magic_power*2.0f,dmg.m_min_damage[Damage::PHYSICAL]);
-		dmg.m_max_damage[Damage::AIR] += min(m_base_attr_mod.m_magic_power*3.0f,dmg.m_max_damage[Damage::PHYSICAL]);
+		dmg.m_min_damage[Damage::AIR] += std::min(m_base_attr_mod.m_magic_power*2.0f,dmg.m_min_damage[Damage::PHYSICAL]);
+		dmg.m_max_damage[Damage::AIR] += std::min(m_base_attr_mod.m_magic_power*3.0f,dmg.m_max_damage[Damage::PHYSICAL]);
 		dmg.m_min_damage[Damage::PHYSICAL]*=0.5;
 		dmg.m_max_damage[Damage::PHYSICAL]*=0.5;
 
@@ -3246,8 +3246,8 @@ void Creature::calcAbilityDamage(Action::ActionType act,Damage& dmg)
 			dmg.m_max_damage[Damage::PHYSICAL]=0;
 			dmg.m_min_damage[Damage::FIRE] +=m_base_attr_mod.m_willpower/3;
 			dmg.m_max_damage[Damage::FIRE] +=m_base_attr_mod.m_willpower/2;
-			dmg.m_min_damage[Damage::FIRE] += min(m_base_attr_mod.m_willpower/6,m_base_attr_mod.m_magic_power*2);
-			dmg.m_max_damage[Damage::FIRE] += min(m_base_attr_mod.m_willpower/4,m_base_attr_mod.m_magic_power*3);
+			dmg.m_min_damage[Damage::FIRE] += std::min(m_base_attr_mod.m_willpower/6,m_base_attr_mod.m_magic_power*2);
+			dmg.m_max_damage[Damage::FIRE] += std::min(m_base_attr_mod.m_willpower/4,m_base_attr_mod.m_magic_power*3);
 			dmg.m_min_damage[Damage::ICE]=0;
 			dmg.m_max_damage[Damage::ICE]=0;
 			dmg.m_special_flags |= Damage::UNBLOCKABLE;
@@ -3260,8 +3260,8 @@ void Creature::calcAbilityDamage(Action::ActionType act,Damage& dmg)
 			dmg.m_max_damage[Damage::PHYSICAL]=0;
 			dmg.m_min_damage[Damage::FIRE] +=m_base_attr_mod.m_willpower/2;
 			dmg.m_max_damage[Damage::FIRE] +=m_base_attr_mod.m_willpower/1.33;
-			dmg.m_min_damage[Damage::FIRE] += min(m_base_attr_mod.m_willpower/6,m_base_attr_mod.m_magic_power*2);
-			dmg.m_max_damage[Damage::FIRE] += min(m_base_attr_mod.m_willpower/4,m_base_attr_mod.m_magic_power*3);
+			dmg.m_min_damage[Damage::FIRE] += std::min(m_base_attr_mod.m_willpower/6,m_base_attr_mod.m_magic_power*2);
+			dmg.m_max_damage[Damage::FIRE] += std::min(m_base_attr_mod.m_willpower/4,m_base_attr_mod.m_magic_power*3);
 			dmg.m_min_damage[Damage::ICE]=0;
 			dmg.m_max_damage[Damage::ICE]=0;
 			dmg.m_special_flags |= Damage::UNBLOCKABLE;
@@ -3287,8 +3287,8 @@ void Creature::calcAbilityDamage(Action::ActionType act,Damage& dmg)
 		case Action::BREAK_BINDING:
 			dmg.m_min_damage[Damage::ICE] =m_base_attr_mod.m_willpower/6;
 			dmg.m_max_damage[Damage::ICE] =m_base_attr_mod.m_willpower/4;
-			dmg.m_min_damage[Damage::PHYSICAL] += min(m_base_attr_mod.m_willpower/3,m_base_attr_mod.m_magic_power*2);
-			dmg.m_max_damage[Damage::PHYSICAL] += min(m_base_attr_mod.m_willpower/2,m_base_attr_mod.m_magic_power*3);
+			dmg.m_min_damage[Damage::PHYSICAL] += std::min(m_base_attr_mod.m_willpower/3,m_base_attr_mod.m_magic_power*2);
+			dmg.m_max_damage[Damage::PHYSICAL] += std::min(m_base_attr_mod.m_willpower/2,m_base_attr_mod.m_magic_power*3);
 			dmg.m_special_flags |= Damage::UNBLOCKABLE;
 			dmg.m_special_flags |= Damage::EXTRA_SUMMONED_DMG;
 			break;
@@ -3298,8 +3298,8 @@ void Creature::calcAbilityDamage(Action::ActionType act,Damage& dmg)
 			dmg.m_max_damage[Damage::ICE]=0;
 			dmg.m_min_damage[Damage::ICE] +=m_base_attr_mod.m_willpower/3;
 			dmg.m_max_damage[Damage::ICE] +=m_base_attr_mod.m_willpower/2;
-			dmg.m_min_damage[Damage::PHYSICAL] += min(m_base_attr_mod.m_willpower/2,m_base_attr_mod.m_magic_power*2);
-			dmg.m_max_damage[Damage::PHYSICAL] += min(m_base_attr_mod.m_willpower/1.33,m_base_attr_mod.m_magic_power*3.0);
+			dmg.m_min_damage[Damage::PHYSICAL] += std::min(m_base_attr_mod.m_willpower/2,m_base_attr_mod.m_magic_power*2);
+			dmg.m_max_damage[Damage::PHYSICAL] += std::min(m_base_attr_mod.m_willpower/1.33,m_base_attr_mod.m_magic_power*3.0);
 			dmg.m_special_flags |= Damage::UNBLOCKABLE;
 			dmg.m_special_flags |= Damage::EXTRA_SUMMONED_DMG;
 			break;
@@ -3392,7 +3392,7 @@ void Creature::calcBaseAttrMod()
 	m_base_attr_mod.m_special_flags = m_base_attr.m_special_flags;
 
 	// Alle Modifikationen neu anwenden, aber nicht neu in die Liste aufnehmen
-	list<CreatureBaseAttrMod>::iterator j;
+	std::list<CreatureBaseAttrMod>::iterator j;
 	for (j=m_dyn_attr.m_temp_mods.begin(); j!= m_dyn_attr.m_temp_mods.end();++j)
 	{
 		applyBaseAttrMod(&(*j),false);
@@ -3488,7 +3488,7 @@ void Creature::takeDamage(Damage* d)
 	dmgt *= d->m_multiplier[Damage::PHYSICAL];
 
 	// Resistenz anwenden
-	res = min (m_base_attr_mod.m_resistances_cap[Damage::PHYSICAL],m_base_attr_mod.m_resistances[Damage::PHYSICAL]);
+	res = std::min (m_base_attr_mod.m_resistances_cap[Damage::PHYSICAL],m_base_attr_mod.m_resistances[Damage::PHYSICAL]);
 	dmgt *= 0.01*(100-res);
 
 	// Ruestung anwenden
@@ -3517,7 +3517,7 @@ void Creature::takeDamage(Damage* d)
 		dmgt *= d->m_multiplier[i];
 
 		// Resistenz anwenden
-		res = min(m_base_attr_mod.m_resistances_cap[i],m_base_attr_mod.m_resistances[i]);
+		res = std::min(m_base_attr_mod.m_resistances_cap[i],m_base_attr_mod.m_resistances[i]);
 		dmgt *=0.01*(100-res);
 
 		DEBUG5("dmg %i min %f max %f real %f",i,d->m_min_damage[i],d->m_max_damage[i],dmgt);
@@ -3556,7 +3556,7 @@ void Creature::takeDamage(Damage* d)
 
 	if (dmg>0)
 	{
-		m_dyn_attr.m_effect_time[CreatureDynAttr::BLEEDING] = max(m_dyn_attr.m_effect_time[CreatureDynAttr::BLEEDING],150.0f);
+		m_dyn_attr.m_effect_time[CreatureDynAttr::BLEEDING] = std::max(m_dyn_attr.m_effect_time[CreatureDynAttr::BLEEDING],150.0f);
 		m_event_mask |= Event::DATA_HP | Event::DATA_EFFECTS;
 	}
 
@@ -3598,7 +3598,7 @@ void Creature::applyDynAttrMod(CreatureDynAttrMod* mod)
 	{
 		if (mod->m_dstatus_mod_immune_time[i]>0)
 		{
-			m_dyn_attr.m_status_mod_immune_time[i] = max(m_dyn_attr.m_status_mod_immune_time[i],mod->m_dstatus_mod_immune_time[i]);
+			m_dyn_attr.m_status_mod_immune_time[i] = std::max(m_dyn_attr.m_status_mod_immune_time[i],mod->m_dstatus_mod_immune_time[i]);
 			m_dyn_attr.m_status_mod_time[i]=0;
 			m_event_mask |= Event::DATA_STATUS_MODS;
 		}
@@ -3641,12 +3641,12 @@ void Creature::applyBaseAttrMod(CreatureBaseAttrMod* mod, bool add)
 	}
 
 	// einige Untergrenzen pruefen
-	m_base_attr_mod.m_strength = max(m_base_attr_mod.m_strength,(short) 1);
-	m_base_attr_mod.m_dexterity = max(m_base_attr_mod.m_dexterity,(short) 1);
-	m_base_attr_mod.m_willpower = max(m_base_attr_mod.m_willpower,(short) 1);
-	m_base_attr_mod.m_magic_power = max(m_base_attr_mod.m_magic_power,(short) 1);
-	m_base_attr_mod.m_walk_speed = max(m_base_attr_mod.m_walk_speed,(short) 200);
-	m_base_attr_mod.m_attack_speed = max(m_base_attr_mod.m_attack_speed,(short) 200);
+	m_base_attr_mod.m_strength = std::max(m_base_attr_mod.m_strength,(short) 1);
+	m_base_attr_mod.m_dexterity = std::max(m_base_attr_mod.m_dexterity,(short) 1);
+	m_base_attr_mod.m_willpower = std::max(m_base_attr_mod.m_willpower,(short) 1);
+	m_base_attr_mod.m_magic_power = std::max(m_base_attr_mod.m_magic_power,(short) 1);
+	m_base_attr_mod.m_walk_speed = std::max(m_base_attr_mod.m_walk_speed,(short) 200);
+	m_base_attr_mod.m_attack_speed = std::max(m_base_attr_mod.m_attack_speed,(short) 200);
 
 	// Resiszenzen dazu addieren
 	for (i=0;i<4;i++)

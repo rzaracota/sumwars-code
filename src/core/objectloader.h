@@ -10,7 +10,6 @@
 #include "../tinyxml/tinyxml.h"
 #include <string>
 #include <cstring>
-using namespace std;
 
 /**
  * \struct ItemMeshData
@@ -45,7 +44,7 @@ class ObjectLoader
 	 * \param pFilename Pfad zu einer XML-Datei, die Objekte enthaelt
 	 * \return Liste der geladenen Items
 	 */
-	list<MonsterBasicData*>* loadObjects(const char* pFilename);
+	std::list<MonsterBasicData*>* loadObjects(const char* pFilename);
 	
 	/**
 	 * \fn void loadMonsterMeshData(const char* pFilename)
@@ -53,7 +52,7 @@ class ObjectLoader
 	 * \param pFilename Pfad zu einer XML-Datei, die Monster enthaelt
 	 * \return Liste der geladenen Monster
 	 */
-	list<MonsterMeshData*>* loadMonsterMeshData(const char* pFilename);
+	std::list<MonsterMeshData*>* loadMonsterMeshData(const char* pFilename);
 	
 	private:
 	
@@ -91,10 +90,10 @@ class ObjectLoader
 	
 	
 	MonsterBasicData* m_monster_data;
-	list<MonsterBasicData*>* m_monster_list;
+	std::list<MonsterBasicData*>* m_monster_list;
 	
 	MonsterMeshData* m_monster_mesh_data;
-	list<MonsterMeshData*>* m_monster_mesh_list;
+	std::list<MonsterMeshData*>* m_monster_mesh_list;
 	
 	float m_size_prob[4];
 	int m_min_level[2];

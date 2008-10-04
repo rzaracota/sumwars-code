@@ -6,7 +6,7 @@
 #include "tiles.h"
 #include "dropitem.h"
 #include "event.h"
-#include "dmgprojectile.h"
+#include "projectile.h"
 
 
 #include <string>
@@ -19,8 +19,6 @@
 
 class Gridunit;
 
-
-using namespace std;
 
 struct NBRegion
 {
@@ -77,7 +75,7 @@ class Region
 		bool  insertObject (WorldObject* object, float x, float y);
 
 		/**
-		 * \fn bool getObjectsInShape( Shape* shape,  list<WorldObject*>* result,short layer=WorldObject::Geometry::LAYER_ALL, short group = WorldObject::GROUP_ALL, WorldObject* omit=0, bool empty_test = false );
+		 * \fn bool getObjectsInShape( Shape* shape,  std::list<WorldObject*>* result,short layer=WorldObject::Geometry::LAYER_ALL, short group = WorldObject::GROUP_ALL, WorldObject* omit=0, bool empty_test = false );
 		 * \brief Sucht WorldObjects innerhalb eines Gebietes
 		 * \param shape Form des Gebietes
 		 * \param layer Ebene in der gesucht wird
@@ -91,7 +89,7 @@ class Region
 		 * Wenn f&uuml;r selector ein NULL-Zeiger &uuml;bergeben wird, so werden die Objekte nicht selektiert.
 		 * Wenn f&uuml;r result ein NULL-Zeiger &uuml;bergeben wird, oder ein anderer Fehler auftritt, so wird false zur&uuml;ckgegeben, sonst true.
  		 */
-		bool getObjectsInShape( Shape* shape,  list<WorldObject*>* result,short layer=WorldObject::Geometry::LAYER_ALL, short group = WorldObject::GROUP_ALL, WorldObject* omit=0, bool empty_test = false );
+		bool getObjectsInShape( Shape* shape,  std::list<WorldObject*>* result,short layer=WorldObject::Geometry::LAYER_ALL, short group = WorldObject::GROUP_ALL, WorldObject* omit=0, bool empty_test = false );
 
 		/**
 		 * \fn bool getFreePlace(Shape* shape, short layer, float& x, float&y)
@@ -105,7 +103,7 @@ class Region
 		bool getFreePlace(Shape* shape, short layer, float& x, float&y);
 
 		/**
-		 * \fn bool addObjectsInShapeFromGridunit(Shape* shape, Gridunit* gu, list<WorldObject*>* result, short layer=WorldObject::Geometry::LAYER_ALL, short group = WorldObject::GROUP_ALL,WorldObject* omit=0, bool empty_test = false )
+		 * \fn bool addObjectsInShapeFromGridunit(Shape* shape, Gridunit* gu, std::list<WorldObject*>* result, short layer=WorldObject::Geometry::LAYER_ALL, short group = WorldObject::GROUP_ALL,WorldObject* omit=0, bool empty_test = false )
 		 * \brief Fuegt alle Objekte aus der Gridunit, die sich mit dem Gebiet befinden zu der Liste hinzu
 		 * \param layer Ebene in der gesucht wird
 		 * \param result Liste, an die die gefundenen Objekte angehangen werden
@@ -114,10 +112,10 @@ class Region
 		 * \param group Gruppen die durchsucht werden sollen
 		 * \return bool, der angibt, ob die Operation erfolgreich war
 		 **/
-		bool addObjectsInShapeFromGridunit(Shape* shape, Gridunit* gu, list<WorldObject*>* result, short layer=WorldObject::Geometry::LAYER_ALL, short group = WorldObject::GROUP_ALL,WorldObject* omit=0, bool empty_test = false );
+		bool addObjectsInShapeFromGridunit(Shape* shape, Gridunit* gu, std::list<WorldObject*>* result, short layer=WorldObject::Geometry::LAYER_ALL, short group = WorldObject::GROUP_ALL,WorldObject* omit=0, bool empty_test = false );
 
 		/**
-		 * \fn bool addObjectsOnLineFromGridunit(float xstart, float ystart, float xend,float yend, Gridunit* gu, list<WorldObject*>* result, short layer=WorldObject::Geometry::LAYER_ALL, short group = WorldObject::GROUP_ALL,WorldObject* omit=0, bool empty_test = false )
+		 * \fn bool addObjectsOnLineFromGridunit(float xstart, float ystart, float xend,float yend, Gridunit* gu, std::list<WorldObject*>* result, short layer=WorldObject::Geometry::LAYER_ALL, short group = WorldObject::GROUP_ALL,WorldObject* omit=0, bool empty_test = false )
 		 * \brief Fuegt alle Objekte aus der Gridunit, die sich auf der Linie befinden zu der Liste hinzu
 		 *  \param layer Ebene in der gesucht wird
 		 * \param result Liste, an die die gefundenen Objekte angehangen werden
@@ -126,7 +124,7 @@ class Region
 		 * \param group Gruppen die durchsucht werden sollen
 		 * \return bool, der angibt, ob die Operation erfolgreich war
 		 **/
-		bool addObjectsOnLineFromGridunit(float xstart, float ystart, float xend,float yend, Gridunit* gu, list<WorldObject*>* result, short layer=WorldObject::Geometry::LAYER_ALL, short group = WorldObject::GROUP_ALL,WorldObject* omit=0, bool empty_test = false );
+		bool addObjectsOnLineFromGridunit(float xstart, float ystart, float xend,float yend, Gridunit* gu, std::list<WorldObject*>* result, short layer=WorldObject::Geometry::LAYER_ALL, short group = WorldObject::GROUP_ALL,WorldObject* omit=0, bool empty_test = false );
 
 		/**
 		 * \fn bool changeObjectGroup(WorldObject* object,WorldObject::Group group )
@@ -155,7 +153,7 @@ class Region
 		WorldObject* getObjectAt(float x_coordinate, float y_coordinate, short layer=WorldObject::Geometry::LAYER_ALL, short group = WorldObject::GROUP_ALL);
 
 		/**
-		 * \fn void getObjectsOnLine( float xstart, float ystart, float xend, float yend,  list<WorldObject*>* result,short layer=WorldObject::Geometry::LAYER_ALL, short group = WorldObject::GROUP_ALL, WorldObject* omit=0 )
+		 * \fn void getObjectsOnLine( float xstart, float ystart, float xend, float yend,  std::list<WorldObject*>* result,short layer=WorldObject::Geometry::LAYER_ALL, short group = WorldObject::GROUP_ALL, WorldObject* omit=0 )
 		 * \brief Sucht alle Objekte die auf der angegebenen Linie liegen
 		 * \param xstart x-Koordinate Startpunkt
 		 * \param ystart y-Koordinate Startpunkt
@@ -166,16 +164,16 @@ class Region
 		 * \param group Gruppen die durchsucht werden sollen
 		 * \param omit Objekt, das ausgelassen wird
 		 */
-		void getObjectsOnLine( float xstart, float ystart, float xend, float yend,  list<WorldObject*>* result,short layer=WorldObject::Geometry::LAYER_ALL, short group = WorldObject::GROUP_ALL, WorldObject* omit=0 );
+		void getObjectsOnLine( float xstart, float ystart, float xend, float yend,  std::list<WorldObject*>* result,short layer=WorldObject::Geometry::LAYER_ALL, short group = WorldObject::GROUP_ALL, WorldObject* omit=0 );
 
 		/**
-		 * \fn void getProjectilesOnScreen(float center_x,float center_y, list<Projectile*>* result)
+		 * \fn void getProjectilesOnScreen(float center_x,float center_y, std::list<Projectile*>* result)
 		 * \brief Gibt alle Projektile auf dem Bildschirm aus
 		 * \param center_x x-Koordinate Zentrum
 		 * \param center_y y-Koordinate Zentrum
 		 * \param result Liste in die die Objekte eingeordnet werden
 		 */
-		void getProjectilesOnScreen(float center_x,float center_y, list<Projectile*>* result);
+		void getProjectilesOnScreen(float center_x,float center_y, std::list<Projectile*>* result);
 
 		/**
 		 * \fn bool  insertProjectile(Projectile* object, float x, float y)
@@ -214,12 +212,12 @@ class Region
 		bool moveObject(WorldObject* object, float x, float y);
 
 		/**
-		 * \fn void createObjectFromString(CharConv* cv, map<int,WorldObject*>* players)
+		 * \fn void createObjectFromString(CharConv* cv, std::map<int,WorldObject*>* players)
 		 * \brief liest die Daten zu einem Objekt aus dem Bitstream und erzeugt es
 		 * \param cv Bitstream aus dem die Daten gelesen werden
 		 * \param players Spielerdaten (Spieler werden nicht neu erzeugt sondern nur in die Region verschoben)
 		 */
-		void createObjectFromString(CharConv* cv, map<int,WorldObject*>* players);
+		void createObjectFromString(CharConv* cv, std::map<int,WorldObject*>* players);
 
 		/**
 		 * \fn void createProjectileFromString(CharConv* cv)
@@ -294,7 +292,7 @@ class Region
 		 * \fn void setRegionData(CharConv* cv)
 		 * \brief Liest die Objekte, Projektile, Items und Tiles aus einem String ein
 		 */
-		void setRegionData(CharConv* cv, map<int,WorldObject*>* players);
+		void setRegionData(CharConv* cv, std::map<int,WorldObject*>* players);
 
 		/**
 		 * \fn  setTile(Tile tile,short x, short y)
@@ -306,28 +304,28 @@ class Region
 		void setTile(Tile tile,short x, short y);
 
 		/**
-		 * \fn map<int,WorldObject*>* getPlayers()
+		 * \fn std::map<int,WorldObject*>* getPlayers()
 		 * \brief Gibt alle Spieler in der Region aus
 		 */
-		map<int,WorldObject*>* getPlayers()
+		std::map<int,WorldObject*>* getPlayers()
 		{
 			return m_players;
 		}
 
 
 		/**
-		 * \fn map<int,DropItem*>* getDropItems()
+		 * \fn std::map<int,DropItem*>* getDropItems()
 		 * \brief Gibt alle auf dem Boden liegenden Items aus
 		 */
-		map<int,DropItem*>* getDropItems()
+		std::map<int,DropItem*>* getDropItems()
 		{
 			return m_drop_items;
 		}
 
 		/**
-		 * \fn map<int,Projectile*>* getProjectiles()
+		 * \fn std::map<int,Projectile*>* getProjectiles()
 		 */
-		map<int,Projectile*>* getProjectiles()
+		std::map<int,Projectile*>* getProjectiles()
 		{
 			return m_projectiles;
 		}
@@ -342,9 +340,9 @@ class Region
 		}
 
 		/**
-		 * \fn list<Event>* getEvents()
+		 * \fn std::list<Event>* getEvents()
 		 */
-		list<Event>* getEvents()
+		std::list<Event>* getEvents()
 		{
 			return m_events;
 		}
@@ -384,37 +382,37 @@ class Region
 	 * \var m_players
 	 * Liste der Spieler in der Region
 	 */
-	map<int,WorldObject*>* m_players;
+	std::map<int,WorldObject*>* m_players;
 
 	/**
-	 * \var map<int, Projectile>* m_projectiles
+	 * \var std::map<int, Projectile>* m_projectiles
 	 * \brief Liste aller Projektile in der Region
 	 */
-	map<int,Projectile*>* m_projectiles;
+	std::map<int,Projectile*>* m_projectiles;
 
 	/**
-	 * \var map<int,WorldObject*>* m_object_bintree
+	 * \var std::map<int,WorldObject*>* m_object_bintree
 	 * \brief organisiert alle nicht statischen Objekte in einem Bin&auml;rbaum
 	 */
-	map<int,WorldObject*>* m_objects;
+	std::map<int,WorldObject*>* m_objects;
 
 	/**
-	 * \var map<int,WorldObject*>* m_object_bintree
+	 * \var std::map<int,WorldObject*>* m_object_bintree
 	 * \brief organisiert statische Objekte in einem Bin&auml;rbaum
 	 */
-	map<int,WorldObject*>* m_static_objects;
+	std::map<int,WorldObject*>* m_static_objects;
 
 	/**
-	 * \var map<int,DropItem*>* m_drop_items
+	 * \var std::map<int,DropItem*>* m_drop_items
 	 * \brief Liste der Gegenstaende, die auf dem Boden liegen
 	 */
-	map<int,DropItem*>* m_drop_items;
+	std::map<int,DropItem*>* m_drop_items;
 
 	/**
-	 * \var map<int,DropItem*>* m_drop_item_locations
+	 * \var std::map<int,DropItem*>* m_drop_item_locations
 	 * \brief Orte der Gegenstaende, die auf dem Boden liegen
 	 */
-	map<int,DropItem*>* m_drop_item_locations;
+	std::map<int,DropItem*>* m_drop_item_locations;
 
 
 	/**
@@ -427,7 +425,7 @@ class Region
 	 * \var std::queue<Event> m_events
 	 * \brief Liste der lokalen Events beim aktuellen update
 	 */
-	list<Event>* m_events;
+	std::list<Event>* m_events;
 
 	/**
 	 * \var bool m_server

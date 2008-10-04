@@ -1136,11 +1136,11 @@ bool Player::update(float time)
 			sel->getObjectType().setObjectType(OBJECTTYPE_USER);
 			sel->setSelectObjectType(true);
 
-			list<WorldObject*>* ret = new list<WorldObject*>;
+			std::list<WorldObject*>* ret = new std::list<WorldObject*>;
 
 			getWorld()->getWorldObjectsInCircle(getCoordinateX(),getCoordinateY(),1000, sel,ret);
 
-			list<WorldObject*>::iterator i;
+			std::list<WorldObject*>::iterator i;
 
 
 			header.m_chatmessages++;
@@ -1348,7 +1348,7 @@ void Player::sendGameData()
 	CharConv cv;
 	//DEBUG5("packed bytes: %i bytes",cv.getBitStream()->GetNumberOfBitsUsed());
 
-	list<WorldObject*> wobjs;
+	std::list<WorldObject*> wobjs;
 	wobjs.clear();
 
 	// Ausschnitt der Welt, der fuer den Spieler sichtbar ist
@@ -1368,7 +1368,7 @@ void Player::sendGameData()
 
 
 	// Objekte einpacken
-	for( list<WorldObject*>::iterator i=wobjs.begin() ; i!=wobjs.end() ; )
+	for( std::list<WorldObject*>::iterator i=wobjs.begin() ; i!=wobjs.end() ; )
 	{
 		// Objekt in das Paket packen
 		obj = (WorldObject*) (*i);
@@ -1390,8 +1390,8 @@ void Player::sendGameData()
 	}
 	header.m_objects= wobjs.size();
 
-	list<DmgProjectile*> res2;
-	list<DmgProjectile*>::iterator i2;
+	std::list<DmgProjectile*> res2;
+	std::list<DmgProjectile*>::iterator i2;
 	// Liste der sichtbaren Projektile
 	getWorld()->getProjectilesOnScreen(sh->m_coordinate_x,sh->m_coordinate_y,getGridLocation()->m_region,&res2);
 	header.m_projectiles = res2.size();
@@ -1399,8 +1399,8 @@ void Player::sendGameData()
 	header.m_items = m_equipement->getNumberItems(m_secondary_equip);
 
 	// am Boden liegende Gegenstaende
-	list<DropItem*> res3;
-	list<DropItem*>::iterator it3;
+	std::list<DropItem*> res3;
+	std::list<DropItem*>::iterator it3;
 	getRegion()->getItemsOnScreen(sh->m_coordinate_x,sh->m_coordinate_y,&res3);
 	header.m_drop_items = res3.size();
 	header.toString(&cv);
@@ -1414,7 +1414,7 @@ void Player::sendGameData()
 
 
 	// Objekte einpacken
-	for( list<WorldObject*>::iterator i=wobjs.begin() ; i!=wobjs.end() ; ++i)
+	for( std::list<WorldObject*>::iterator i=wobjs.begin() ; i!=wobjs.end() ; ++i)
 	{
 		// Objekt in das Paket packen
 		obj = (WorldObject*) (*i);

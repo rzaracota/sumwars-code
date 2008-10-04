@@ -11,7 +11,6 @@
 #include <windows.h>
 #endif
 
-using namespace std;
 
 /**
  * \class ClientNetwork
@@ -105,10 +104,10 @@ class ClientNetwork : public Network
 
 	private:
 	/**
-	 * \var queue<Packet*> m_received_packets
+	 * \var std::queue<Packet*> m_received_packets
 	 * \brief Liste der empfangenen Packete
 	 */
-	queue<Packet*> m_received_packets;
+	std::queue<Packet*> m_received_packets;
 
 
 

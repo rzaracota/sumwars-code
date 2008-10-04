@@ -2,8 +2,6 @@
 #ifndef CREATURESTRUCT_H
 #define CREATURESTRUCT_H
 
-using namespace std;
-
 
 #include <list>
 #include <string.h>
@@ -335,7 +333,7 @@ struct CreatureDynAttr
 	 * \var m_temp_mods
 	 * \brief Vektor mit alle aktuell wirkenden temporaeren Modifikation auf die Basisattribute
 	 */
-	list<CreatureBaseAttrMod> m_temp_mods;
+	std::list<CreatureBaseAttrMod> m_temp_mods;
 };
 
 /**

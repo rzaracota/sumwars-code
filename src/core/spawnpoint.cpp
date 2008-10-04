@@ -45,7 +45,7 @@ bool Spawnpoint::update (float time)
 		// Zeit abgelaufen: Monster generieren
 
 		// Schleife ueber die Monstergruppen
-		list<SpawnedMonsterGroup>::iterator it;
+		std::list<SpawnedMonsterGroup>::iterator it;
 		for (it = m_spawned_groups.begin(); it !=  m_spawned_groups.end(); it++)
 		{
 			// Schleife ueber die Monster

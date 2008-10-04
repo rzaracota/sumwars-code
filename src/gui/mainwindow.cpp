@@ -3,8 +3,6 @@
 #include <string>
 #include <sstream>
 
-using namespace std;
-
 
 MainWindow::MainWindow(Ogre::Root* ogreroot, CEGUI::System* ceguisystem,Ogre::RenderWindow* window,Document* doc)
 {
@@ -497,7 +495,7 @@ void MainWindow::setupControlPanel()
 
 	// Inventar Guertel
 	int i;
-	ostringstream outStream;
+	std::ostringstream outStream;
 	for (i=0;i<10;i++)
 	{
 		outStream.str("");
@@ -1002,7 +1000,7 @@ void MainWindow::setupInventory()
 	int i,j;
 
 	// Label fuer grosse Items
-	ostringstream outStream;
+	std::ostringstream outStream;
 	for (i=0;i<5;i++)
 	{
 		outStream.str("");
@@ -1218,7 +1216,7 @@ void MainWindow::setupSkilltree()
 	CEGUI::Window* label;
 	CEGUI::DefaultWindow* tab;
 
-	ostringstream outStream;
+	std::ostringstream outStream;
 	std::string name;
 	std::string lname;
 	unsigned int act;
@@ -2096,7 +2094,7 @@ void  MainWindow::updateMainMenu()
 	// Liste aller Files im Save Ordner der Form *.sav
 	Ogre::StringVectorPtr files = Ogre::ResourceGroupManager::getSingleton().findResourceNames("Savegame","*.sav");
 
-	ifstream file;
+	std::ifstream file;
 	char head[50];
 	int n=0;
 	string name;
@@ -2112,7 +2110,7 @@ void  MainWindow::updateMainMenu()
 		DEBUG("file found %s",it->c_str());
 		//File oeffnen
 
-		file.open(("../save/"+(*it)).c_str(),ios::in| ios::binary);
+		file.open(("../save/"+(*it)).c_str(),std::ios::in| std::ios::binary);
 		if (file.is_open())
 		{
 			savelist->addRow();
@@ -2174,7 +2172,7 @@ void MainWindow::updateCharInfo()
 
 	CEGUI::PushButton* btn;
 	CEGUI::Window* label;
-	ostringstream out_stream;
+	std::ostringstream out_stream;
 
 	// Label Name
 	label =  win_mgr.getWindow("NameLabel");
@@ -2488,7 +2486,7 @@ void MainWindow::updateControlPanel()
 	// Fenstermanager
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::Window* label;
-	ostringstream out_stream;
+	std::ostringstream out_stream;
 	int timernr;
 	float perc=0;
 	std::string name;
@@ -2568,7 +2566,7 @@ void MainWindow::updateInventory()
 {
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::Window* label;
-	ostringstream out_stream;
+	std::ostringstream out_stream;
 
 	Player* player = m_document->getLocalPlayer();
 
@@ -2732,7 +2730,7 @@ void MainWindow::updateSkilltree()
 {
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::Window* label;
-	ostringstream out_stream;
+	std::ostringstream out_stream;
 
 	Player* player = m_document->getLocalPlayer();
 
@@ -2785,7 +2783,7 @@ void MainWindow::updateItemTooltip(unsigned int pos)
 	DEBUG5("setting tool tip for item at %i",pos);
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::Window* label;
-	ostringstream out_stream;
+	std::ostringstream out_stream;
 	out_stream.str("");
 	if (pos == Equipement::ARMOR)
 		out_stream << "ArmorItemLabel";
@@ -2844,7 +2842,7 @@ void MainWindow::updateAbilityTooltip(unsigned int pos)
 
 		CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 		CEGUI::Window* label;
-		ostringstream out_stream;
+		std::ostringstream out_stream;
 		out_stream.str("");
 		out_stream << Action::getActionInfo((Action::ActionType) pos)->m_enum_name << "Label";
 
@@ -2897,13 +2895,13 @@ void MainWindow::updateObjectInfo()
 	else
 	{
 
-		ostringstream out_stream;
+		std::ostringstream out_stream;
 		out_stream.str("");
 
 
 		// Objekte in der Szene
-		map<int,string>* objects = m_scene->getObjects();
-		map<int,string>::iterator it;
+		std::map<int,string>* objects = m_scene->getObjects();
+		std::map<int,string>::iterator it;
 
 		// minimale Distanz eines Objektes im Kamerastrahl
 		float mindist = 1000000;
@@ -2981,7 +2979,7 @@ void MainWindow::updateObjectInfo()
 				// Objekt ist ein Lebewesen
 				// Lebenspunkte anfuegen
 				cr = static_cast<Creature*>(cwo);
-				string_stream << " " << max(0,(int) (cr->getDynAttr()->m_health / cr->getBaseAttrMod()->m_max_health*100)) <<"%";
+				string_stream << " " << std::max(0,(int) (cr->getDynAttr()->m_health / cr->getBaseAttrMod()->m_max_health*100)) <<"%";
 			}
 		}
 		else
@@ -2993,8 +2991,8 @@ void MainWindow::updateObjectInfo()
 	else
 	{
 		// Nach Items unterm Mauszeiger suchen
-		map<int,string>* itms = m_scene->getDropItems();
-		map<int,string>::iterator it;
+		std::map<int,string>* itms = m_scene->getDropItems();
+		std::map<int,string>::iterator it;
 
 		for (it = itms->begin();it != itms->end();++it)
 		{

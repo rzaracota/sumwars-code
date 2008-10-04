@@ -50,8 +50,8 @@ Monster::Monster(World* world, unsigned int id,MonsterBasicData& data)
 	getGeometry()->m_layer = data.m_layer;
 	getGeometry()->m_angle =0;
 
-	m_ai.m_goals = new list<pair<WorldObject*,float> >;
-	m_ai.m_visible_goals = new list<pair<WorldObject*,float> >;
+	m_ai.m_goals = new std::list<std::pair<WorldObject*,float> >;
+	m_ai.m_visible_goals = new std::list<std::pair<WorldObject*,float> >;
 	m_ai.m_state = Ai::INACTIVE;
 	calcBaseAttrMod();
 }
@@ -71,8 +71,8 @@ bool Monster::destroy()
 bool Monster::init()
 {
 	//eigene Initialisierung
-	m_ai.m_goals = new list<pair<WorldObject*,float> >;
-	m_ai.m_visible_goals = new list<pair<WorldObject*,float> >;
+	m_ai.m_goals = new std::list<std::pair<WorldObject*,float> >;
+	m_ai.m_visible_goals = new std::list<std::pair<WorldObject*,float> >;
 
 	// Basistyp setzen
 	getTypeInfo()->m_type = TypeInfo::TYPE_MONSTER;
@@ -122,21 +122,21 @@ void Monster::updateCommand()
 	// moegliche Ziele ermitteln
 
 	// Liste der Spieler
-	map<int,WorldObject*>* players = getRegion()->getPlayers();
-	list<WorldObject*> ret;
+	std::map<int,WorldObject*>* players = getRegion()->getPlayers();
+	std::list<WorldObject*> ret;
 
 	WorldObject* pl;
 
 	// Entfernungen und Sichtbarkeit der Ziele ermitteln
 	float dist;
-	for (map<int,WorldObject*>::iterator it = players->begin(); it!=players->end(); ++it)
+	for (std::map<int,WorldObject*>::iterator it = players->begin(); it!=players->end(); ++it)
 	{
 		pl = it->second;
 		dist = World::getDistance(getGeometry()->m_shape, pl->getGeometry()->m_shape);
 		if ( dist< m_ai.m_sight_range)
 		{
 			// Spieler ist in Sichtweite
-			m_ai.m_goals->push_back(make_pair(pl,dist));
+			m_ai.m_goals->push_back(std::make_pair(pl,dist));
 
 			goal_x = pl->getGeometry()->m_shape.m_coordinate_x;
 			goal_y = pl->getGeometry()->m_shape.m_coordinate_y;
@@ -148,7 +148,7 @@ void Monster::updateCommand()
 			if (ret.empty())
 			{
 				// Keine Objekte auf der Linie vom Monster zum Ziel
-				m_ai.m_visible_goals->push_back(make_pair(pl,dist));
+				m_ai.m_visible_goals->push_back(std::make_pair(pl,dist));
 
 			}
 		}
@@ -234,8 +234,8 @@ void Monster::calcBestCommand()
 
 void Monster::evalCommand(Action::ActionType act)
 {
-	list<pair<WorldObject*,float> >::iterator it;
-	list<pair<WorldObject*,float> >* goal_list;
+	std::list<std::pair<WorldObject*,float> >::iterator it;
+	std::list<std::pair<WorldObject*,float> >* goal_list;
 	Creature* cgoal=0;
 
 	float dist;
@@ -366,9 +366,9 @@ void Monster::die()
 				// Verteilen der Exp auf Spieler in der Nähe
 				// TODO: XP nur auf spieler in der Party verteilen
 
-				pl->gainExperience((int) ceil(pow(1.5,min(pl->getBaseAttrMod()->m_level,getBaseAttr()->m_level)-1)*2));
+				pl->gainExperience((int) ceil(pow(1.5,std::min(pl->getBaseAttrMod()->m_level,getBaseAttr()->m_level)-1)*2));
 
-				list<WorldObject*> ret;
+				std::list<WorldObject*> ret;
 				Shape s;
 				s.m_type = Shape::CIRCLE;
 				s.m_radius = 20;
@@ -377,7 +377,7 @@ void Monster::die()
 
 				getWorld()->getObjectsInShape(&s, getGridLocation()->m_region, &ret, Geometry::LAYER_AIR, CREATURE);
 
-				list<WorldObject*>::iterator i;
+				std::list<WorldObject*>::iterator i;
 
 				for (i=ret.begin();i!=ret.end();i++)
 				{

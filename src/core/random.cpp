@@ -15,9 +15,9 @@ int Random::randDiscrete(float* distribution,int nr, float sum)
 }
 
 
-int Random::randDiscrete(vector<float> distribution)
+int Random::randDiscrete(std::vector<float> distribution)
 {
-	vector<float>::iterator i;
+	std::vector<float>::iterator i;
 	float sum =0;
 	for (i= distribution.begin(); i!=distribution.end(); ++i)
 	{

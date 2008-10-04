@@ -33,11 +33,11 @@
 
 	// diverse Initialisierungen
 
-	m_player_slots = new map<int,WorldObject*>;
-	m_players = new map<int,WorldObject*>;;
+	m_player_slots = new std::map<int,WorldObject*>;
+	m_players = new std::map<int,WorldObject*>;;
 
 	// Baum fuer die Handelsvorgaenge anlegen
-	m_trades = new map<int, Trade* >;
+	m_trades = new std::map<int, Trade* >;
 	m_trades->clear();
 
 
@@ -54,7 +54,7 @@
 
 	 m_local_player =0;
 
-	 m_events = new list<Event>;
+	 m_events = new std::list<Event>;
 
 }
 
@@ -270,7 +270,7 @@ void World::acceptLogins()
 
 void World::updateLogins()
 {
-	list<int>::iterator i;
+	std::list<int>::iterator i;
 	Packet* data;
 	PackageHeader header;
 	DEBUG5("update logins");
@@ -311,7 +311,7 @@ void World::updateLogins()
 World::~World()
 {
 
-	map<int, Trade* >::iterator j;
+	std::map<int, Trade* >::iterator j;
 	for (j=m_trades->begin(); j!=m_trades->end();j++)
 		delete j->second;
 
@@ -461,8 +461,8 @@ bool World::intersect(Shape* s1, Shape* s2)
 				return true;
 
 			// Kreis liegt auf dem Reckteck, wenn Abstand zu einer der Ecken kleiner als r1
-			float mx = min (fabs(x1-x2+xe2), fabs(x1-x2-xe2));
-			float my = min (fabs(y1-y2+ye2), fabs(y1-y2-ye2));
+			float mx = std::min (fabs(x1-x2+xe2), fabs(x1-x2-xe2));
+			float my = std::min (fabs(y1-y2+ye2), fabs(y1-y2-ye2));
 			if (sqr(mx)+sqr(my) < sqr(r1))
 				return true;
 			else
@@ -492,7 +492,7 @@ WorldObject* World::getObject ( int id,short rid)
 
 Trade* World::getTrade ( int id)
 {
-	map<int,Trade*>::iterator iter;
+	std::map<int,Trade*>::iterator iter;
 
 	//Handel suchen
 	iter = m_trades->find(id);
@@ -533,13 +533,13 @@ int World::newTrade(int trader1_id, int trader2_id)
 		return 0;
 	}
 
-	m_trades->insert(make_pair(id,trade));
+	m_trades->insert(std::make_pair(id,trade));
 	// ID ausgeben
 	return id;
 }
 
 
-bool World:: getObjectsInShape( Shape* shape, short region, list<WorldObject*>* result,short layer, short group, WorldObject* omit )
+bool World:: getObjectsInShape( Shape* shape, short region, std::list<WorldObject*>* result,short layer, short group, WorldObject* omit )
 {
 
 
@@ -571,7 +571,7 @@ WorldObject* World::getObjectAt(float x_coordinate, float y_coordinate,  short r
 	return r->getObjectAt(x_coordinate,y_coordinate,layer,group);
 }
 
-void World::getObjectsOnLine( float xstart, float ystart, float xend, float yend,  short region, list<WorldObject*>* result,short layer, short group, WorldObject* omit)
+void World::getObjectsOnLine( float xstart, float ystart, float xend, float yend,  short region, std::list<WorldObject*>* result,short layer, short group, WorldObject* omit)
 {
 	// Region ermitteln, wenn gleich 0 beenden
 	Region* r = m_regions[region];
@@ -583,7 +583,7 @@ void World::getObjectsOnLine( float xstart, float ystart, float xend, float yend
 }
 
 
-void World::getProjectilesOnScreen(float center_x,float center_y,short region, list<Projectile*>* result)
+void World::getProjectilesOnScreen(float center_x,float center_y,short region, std::list<Projectile*>* result)
 {
 	Region* r = m_regions[region];
 	if (r==0)
@@ -693,7 +693,7 @@ bool World::getClosestFreeSquare(float x_coordinate, float y_coordinate, float &
 	queue<int>* quy = new queue<int>;
 
 	// Liste für Objekte die im Weg sind
-	list<WorldObject*>* ret = new  list<WorldObject*>;
+	std::list<WorldObject*>* ret = new  std::list<WorldObject*>;
 
 
 	// Selektor für fixe Objekte
@@ -816,9 +816,9 @@ bool World::insertPlayer(WorldObject* player, int slot)
 {
 	if (slot != NOSLOT)
 	{
-		m_player_slots->insert(make_pair(slot,player));
+		m_player_slots->insert(std::make_pair(slot,player));
 	}
-	m_players->insert(make_pair(player->getId(),player));
+	m_players->insert(std::make_pair(player->getId(),player));
 
 	return true;
 }
@@ -1017,7 +1017,7 @@ void World::handleSavegame(CharConv *cv, int slot)
 
 		if (m_server)
 		{
-			map<int,WorldObject*>::iterator it;
+			std::map<int,WorldObject*>::iterator it;
 
 			if (slot != LOCAL_SLOT)
 			{
@@ -1170,7 +1170,7 @@ void World::update(float time)
 	}
 
 	// Durchmustern alle Handelsvorgänge
-	map<int,Trade*>::iterator iter2;
+	std::map<int,Trade*>::iterator iter2;
 	Trade* trade=0;
 
 	for (iter2 =m_trades->begin(); iter2!=m_trades->end();)
@@ -1234,7 +1234,7 @@ void World::update(float time)
 void World::updatePlayers()
 {
 	// Schleife ueber die Spieler
-	map<int,WorldObject*>::iterator it;
+	std::map<int,WorldObject*>::iterator it;
 	Player* pl;
 	int slot;
 	for (it = m_player_slots->begin(); it != m_player_slots->end(); )
@@ -1491,7 +1491,7 @@ void World::updatePlayers()
 	{
 		// Nachrichten ueber die Events zur den Clients senden
 		Region* reg;
-		list<Event>::iterator lt;
+		std::list<Event>::iterator lt;
 		for (it = m_player_slots->begin(); it != m_player_slots->end(); ++it)
 		{
 			slot = it->first;
@@ -1728,7 +1728,7 @@ bool World::processEvent(Region* region,CharConv* cv)
 					deleteObject(object);
 					m_players->erase( object->getId());
 
-					map<int,WorldObject*>::iterator it;
+					std::map<int,WorldObject*>::iterator it;
 					for (it = m_player_slots->begin(); it != m_player_slots->end(); ++it)
 					{
 						if (it->second == object)
@@ -1870,8 +1870,8 @@ void World::handleDataRequest(ClientDataRequest* request, int slot )
 bool World::calcBlockmat(PathfindInfo * pathinfo)
 {
 	float sqs = pathinfo->m_base_size / pathinfo->m_quality;
-	list<WorldObject*> ret;
-	list<WorldObject*>::iterator it;
+	std::list<WorldObject*> ret;
+	std::list<WorldObject*>::iterator it;
 	int is,js;
 	Shape s;
 	s.m_coordinate_x = pathinfo->m_center_x;
@@ -1915,8 +1915,8 @@ bool World::calcBlockmat(PathfindInfo * pathinfo)
 			// Rand des Objektes mit X zeichnen
 			js = (int) floor((wos->m_coordinate_y-c_y)/sqs);
 			is = (int) floor((wos->m_coordinate_x-c_x)/sqs);
-			is = max(min(is,pathinfo->m_dim-1),0);
-			js = max(min(js,pathinfo->m_dim-1),0);
+			is = std::max(std::min(is,pathinfo->m_dim-1),0);
+			js = std::max(std::min(js,pathinfo->m_dim-1),0);
 			s2.m_coordinate_y = (js+0.5)*sqs+c_y;
 			s2.m_coordinate_x = (is+0.5)*sqs+c_x;
 

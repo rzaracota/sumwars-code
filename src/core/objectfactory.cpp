@@ -12,7 +12,7 @@
 
 World* ObjectFactory::m_world;
 
-map<WorldObject::TypeInfo::ObjectSubtype, MonsterBasicData*> ObjectFactory::m_monster_data;
+std::map<WorldObject::TypeInfo::ObjectSubtype, MonsterBasicData*> ObjectFactory::m_monster_data;
 
 void ObjectFactory::registerMonster(WorldObject::TypeInfo::ObjectSubtype subtype, MonsterBasicData* data)
 {
@@ -30,12 +30,12 @@ void ObjectFactory::init()
 	// Objekte bzw. Monster aus XML Laden
 	ObjectLoader* objectloader = 0;
 	objectloader = new ObjectLoader;
-	list<MonsterBasicData*>* monster_list;
+	std::list<MonsterBasicData*>* monster_list;
 	monster_list = objectloader->loadObjects("../data/monsters.xml");
 
 	if (monster_list != 0)
 	{
-		list<MonsterBasicData*>::iterator forward_iterator = monster_list->begin();
+		std::list<MonsterBasicData*>::iterator forward_iterator = monster_list->begin();
 		while (forward_iterator != monster_list->end())
 		{
 			/*cout << "> > >  Testwert: " << (*forward_iterator)->m_base_attr.m_abilities[0] << "  < < <" << endl;
@@ -254,7 +254,7 @@ WorldObject* ObjectFactory::createObject(WorldObject::TypeInfo::ObjectType type,
 	{
 		DEBUG5("requested subtype: %s",subtype.c_str());
 		MonsterBasicData* mdata;
-		map<WorldObject::TypeInfo::ObjectSubtype, MonsterBasicData*>::iterator i;
+		std::map<WorldObject::TypeInfo::ObjectSubtype, MonsterBasicData*>::iterator i;
 
 		i = m_monster_data.find(subtype);
 		if (i== m_monster_data.end())

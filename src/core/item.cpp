@@ -82,7 +82,7 @@ Item::~Item()
 }
 
 
-string Item::getName()
+std::string Item::getName()
 {
     #ifndef WIN32
         return (gettext((getString()).c_str()));
@@ -92,7 +92,7 @@ string Item::getName()
 }
 
 
-string Item::getString()
+std::string Item::getString()
 {
 	return m_subtype;
 }
@@ -297,7 +297,7 @@ std::string Item::getDescription()
 {
 	
 	// String fuer die Beschreibung
-	ostringstream out_stream;
+	std::ostringstream out_stream;
 	out_stream.str("");
 	out_stream<<getName()<<"\n";
 	int i;
@@ -448,7 +448,7 @@ void Item::calcPrice()
 		float dvalue=0;
 		// Multiplikator des Schadens
 		float dmult =1;
-		dmult *= min(2.0,sqrt(m_weapon_attr->m_attack_range));
+		dmult *= std::min(2.0,sqrt(m_weapon_attr->m_attack_range));
 		dmult *= (1+m_weapon_attr->m_dattack_speed/2000.0);
 		
 		// Schaden der Waffe
@@ -523,7 +523,7 @@ void Item::calcPrice()
 
 	
 	value = ceil(mult*value*value);
-	value = min (value,1000000.0f);
+	value = std::min (value,1000000.0f);
 	m_price = (int) value;
 }
 

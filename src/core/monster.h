@@ -59,16 +59,16 @@ struct Ai
 	float m_sight_range;
 	
 	/**
-	 * \var list<WorldObject*>* m_goals
+	 * \var std::list<std::pair<WorldObject*,float> >* m_goals;
 	 * \brief Liste der moeglichen Ziele
 	 */
-	list<pair<WorldObject*,float> >* m_goals;
+	std::list<std::pair<WorldObject*,float> >* m_goals;
 	
 	/**
-	 * \var list<WorldObject*>* m_visible_goals
+	 * \var std::list< std::pair<WorldObject*,float> >* m_visible_goals;
 	 * \brief Liste der sichtbaren Ziele
 	 */
-	list< pair<WorldObject*,float> >* m_visible_goals;
+	std::list< std::pair<WorldObject*,float> >* m_visible_goals;
 	
 	/**
 	 * \var float m_command_value

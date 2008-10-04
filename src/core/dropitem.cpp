@@ -25,9 +25,9 @@ int DropItem::getId()
 	return 10000* m_x + m_y;
 }
 
-string DropItem::getNameId()
+std::string DropItem::getNameId()
 {
-	ostringstream out_stream;
+	std::ostringstream out_stream;
 
 	out_stream.str("");
 	out_stream << m_item->getName() << ":" << m_item->m_id;

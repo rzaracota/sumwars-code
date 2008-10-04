@@ -36,7 +36,6 @@
 
 #include "item.h"
 
-using namespace std;
 
 /**
  * \class ItemList

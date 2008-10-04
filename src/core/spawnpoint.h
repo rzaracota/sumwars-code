@@ -103,10 +103,10 @@ class Spawnpoint : public WorldObject {
 
 	private:
 		/**
-	 * \var list<SpawnedMonsterGroup> m_spawned_groups
+	 * \var std::list<SpawnedMonsterGroup> m_spawned_groups
 		 * \brief Liste der verschiedenen Monstergruppen die der Spawnpoint erzeugen kann
 		 */
-		list<SpawnedMonsterGroup> m_spawned_groups;
+		std::list<SpawnedMonsterGroup> m_spawned_groups;
 		
 		/**
 		 * \var float m_time
