@@ -42,7 +42,7 @@ public:
 	//Fields
 	//Constructors
 	/**
-	 * \fn Warrior(World* world, unsigned int id)
+	 * \fn Warrior(World* world, int id)
 	 * \brief Konstruktor
 	 * \param world Welt
 	 * \param id Objekt-ID
@@ -79,7 +79,7 @@ public:
 	}
 
 	/**
-	 * \fn virtual void calcDamage(ActionType type,Damage& dmg)
+	 * \fn virtual void calcBaseDamage(Action::ActionType act,Damage& dmg)
 	 * \brief Berechnet den Basisschaden einer Aktion
 	 */
 	virtual void calcBaseDamage(Action::ActionType act,Damage& dmg)

@@ -97,154 +97,116 @@ struct Ai
  * 
  */
 class Monster : public Creature {
-/**
- * Public stuff
- */
-public:
-	/**
-	 * Fields
-	 */
-	/**
-	 * Constructors
-	 */
-	/**
-	 * \fn Monster(World* world, unsigned int id)
-	 * \brief Konstruktor
-	 * \param world 
-	 * \param id 
-	 *
-	 * Legt ein neues Monster Objekt an.
-	 */
-	Monster(World* world, unsigned int id);
+
+	public:
 	
-	/**
-	 * \fn Monster(World* world, unsigned int id,MonsterBasicData& data)
-	 * \brief Erzeugt ein Monster auf Basis der gegebenen Daten
-	 * \param world 
-	 * \param id 
-	 * \param data Daten fuer die Erzeugung des Monsters
-	 */
-	Monster(World* world, unsigned int id,MonsterBasicData& data);
+		/**
+		* \fn Monster(World* world, int id)
+		* \brief Konstruktor
+		* \param world 
+		* \param id 
+		*
+		* Legt ein neues Monster Objekt an.
+		*/
+		Monster(World* world, int id);
+		
+		/**
+		* \fn Monster(World* world, int id,MonsterBasicData& data)
+		* \brief Erzeugt ein Monster auf Basis der gegebenen Daten
+		* \param world 
+		* \param id 
+		* \param data Daten fuer die Erzeugung des Monsters
+		*/
+		Monster(World* world, int id,MonsterBasicData& data);
+		
+		/**
+		* \fn ~Monster()
+		* \brief Destruktor
+		*
+		* Gibt den Allokierten Speicher wieder frei
+		*/
+		~Monster();
+		/**
+		* Accessor Methods
+		*/
+		/**
+		* Operations
+		*/
+		/**
+		* \fn virtual bool init()
+		* \brief Initialisierung des Monsters
+		* \return bool Gibt an ob die Initialisierung erfolgreich war
+		*/
+		virtual bool init();
+		/**
+		* \fn virtual bool update (float time)
+		* \brief Updatefunktion des Monsters
+		* \param time Verstrichene Zeit
+		* \return bool, Erfolgreiches Update?
+		*
+		* Die Updatefunktion des Monsters wird in regelm&auml;ssigen Abst&auml;nden von der World aufgerufen und ben&ouml;tigt die Angabe, wie viel Zeit f&uuml;r das Update zur Verf&uuml;gung gestellt wird. Der R&uuml;ckgabewert gibt an ob die Funktion erfolgreich ausgef&uuml;hrt wurde. Da die Funktion hier virtuell definiert wird, wird sie erst in den abgeleiteten Klassen implementiert.
+		*/
+		virtual bool update(float time);
+		
+		
+		/**
+		* \fn virtual bool destroy ()
+		* \brief Zerstoert das Objekt. Die Funktion ist virtuell und wird durch die abgeleiteten Klassen &uuml;berschrieben.
+		* \return bool, der angibt ob die Zerstoerung erfolgreich war
+		*/
+		virtual bool destroy();
+		
+		/**
+		* \fn virtual void updateCommand()
+		* \brief aktualisiert das aktuelle Kommando
+		*/
+		virtual void updateCommand();
+		
+		/**
+		* \fn virtual void calcBestCommand()
+		* \brief Berechnet das aus Sicht der AI beste Kommando
+		*/
+		virtual void calcBestCommand();
+		
+		/**
+		* \fn virtual void evalCommand(Action::ActionType act)
+		* \brief Bewertet das Kommando. Die Bewertung wird in der AI Struktur gespeichert, falls das Kommando besser ist, als das aktuell dort gespeicherte
+		* \param act zu bewertende Aktion
+		*/
+		virtual void evalCommand(Action::ActionType act);
+		
+		/**
+		* \fn virtual void die()
+		* \brief Wird aufgerufen, wenn das Monster stirbt. Verteilt Erfahrungspunkte und droppt die Items.
+		*/
+		virtual void die();
+		
+		/**
+		* \fn virtual Action::ActionEquip getActionEquip()
+		* \brief Gibt aus, ob die Aktion einhaendig oder zweihaendig ausgefuehrt wird
+		*/
+		virtual Action::ActionEquip getActionEquip()
+		{
+			// Monster per default immer einhaendig;
+			return Action::ONE_HANDED;
+		}
 	
-	/**
-	 * \fn ~Monster()
-	 * \brief Destruktor
-	 *
-	 * Gibt den Allokierten Speicher wieder frei
-	 */
-	~Monster();
-	/**
-	 * Accessor Methods
-	 */
-	/**
-	 * Operations
-	 */
-	/**
-	* \fn virtual bool init()
-	* \brief Initialisierung des Monsters
-	* \return bool Gibt an ob die Initialisierung erfolgreich war
-	*/
-	virtual bool init();
-	/**
-	 * \fn virtual bool update (float time)
-	 * \brief Updatefunktion des Monsters
-	 * \param time Verstrichene Zeit
-	 * \return bool, Erfolgreiches Update?
-	 *
-	 * Die Updatefunktion des Monsters wird in regelm&auml;ssigen Abst&auml;nden von der World aufgerufen und ben&ouml;tigt die Angabe, wie viel Zeit f&uuml;r das Update zur Verf&uuml;gung gestellt wird. Der R&uuml;ckgabewert gibt an ob die Funktion erfolgreich ausgef&uuml;hrt wurde. Da die Funktion hier virtuell definiert wird, wird sie erst in den abgeleiteten Klassen implementiert.
-	 */
-	virtual bool update(float time);
-	 
-	
-	/**
-	 * \fn virtual bool destroy ()
-	 * \brief Zerstoert das Objekt. Die Funktion ist virtuell und wird durch die abgeleiteten Klassen &uuml;berschrieben.
-	 * \return bool, der angibt ob die Zerstoerung erfolgreich war
-	 */
-	virtual bool destroy();
-	
-	/**
-	 * \fn virtual void updateCommand()
-	 * \brief aktualisiert das aktuelle Kommando
-	 */
-	virtual void updateCommand();
-	
-	/**
-	 * \fn virtual void calcBestCommand()
-	 * \brief Berechnet das aus Sicht der AI beste Kommando
-	 */
-	virtual void calcBestCommand();
-	
-	/**
-	 * \fn virtual void evalCommand(Action::ActionType act)
-	 * \brief Bewertet das Kommando. Die Bewertung wird in der AI Struktur gespeichert, falls das Kommando besser ist, als das aktuell dort gespeicherte
-	 * \param act zu bewertende Aktion
-	 */
-	virtual void evalCommand(Action::ActionType act);
-	
-	/**
-	 * \fn virtual void die()
-	 * \brief Wird aufgerufen, wenn das Monster stirbt. Verteilt Erfahrungspunkte und droppt die Items.
-	 */
-	virtual void die();
-	
-	/**
-	 * \fn virtual Action::ActionEquip getActionEquip()
-	 * \brief Gibt aus, ob die Aktion einhaendig oder zweihaendig ausgefuehrt wird
-	 */
-	virtual Action::ActionEquip getActionEquip()
-	{
-		// Monster per default immer einhaendig;
-		return Action::ONE_HANDED;
-	}
-	
-/**
- * Protected stuff
- */
-protected:
-	/**
-	 * Fields
-	 */
-	
-	/**
-	* \var Ai m_ai
-	 * \brief Alle Daten fuer die Ai
-	 */
-	Ai m_ai;
-	
-	/**
-	 * \var DropSlot m_drop_slots[4]
-	 * \brief Beschreibung der Items die das Monster droppen kann, wenn es stirbt
-	 */
-	DropSlot m_drop_slots[4];
-	
-	/**
-	 * Constructors
-	 */
-	/**
-	 * Accessor Methods
-	 */
-	/**
-	 * Operations
-	 */
-/**
- * Private stuff
- */
-private:
-	/**
-	 * Fields
-	 */
+	protected:
+		
+		
+		/**
+		* \var Ai m_ai
+		* \brief Alle Daten fuer die Ai
+		*/
+		Ai m_ai;
+		
+		/**
+		* \var DropSlot m_drop_slots[4]
+		* \brief Beschreibung der Items die das Monster droppen kann, wenn es stirbt
+		*/
+		DropSlot m_drop_slots[4];
 	
 	
-	/**
-	 * Constructors
-	 */
-	/**
-	 * Accessor Methods
-	 */
-	/**
-	 * Operations
-	 */
 	
 };
 #endif //MONSTER_H

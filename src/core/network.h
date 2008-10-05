@@ -82,7 +82,8 @@ class Network
 		unsigned char getPacketIdentifier(Packet *p);
 		
 		/**
-		 * \fn int numberSlotMessages()
+		 * \fn virtual int numberSlotMessages(int slot=0) =0;
+		 * \param slot Slot
 		 * \brief Anzahl der Packete im Empfangspuffer
 		 * \return Anzahl der Packete
 		 *

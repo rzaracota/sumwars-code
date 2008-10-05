@@ -241,7 +241,7 @@ public:
 	void applyBaseAttrMod(CreatureBaseAttrMod* mod, bool add = true);
 	
 	/**
-	 * \fn applyDynAttrMod(CreatureBaseAttrMod* mod);
+	 * \fn applyDynAttrMod(CreatureDynAttrMod* mod);
 	 * \brief Wendet eine Modifikation der Dynamischen Attribute an
 	 * \param mod Modifikation
 	 */
@@ -256,15 +256,8 @@ public:
 	bool removeBaseAttrMod(CreatureBaseAttrMod* mod);
 	
 
-	/*
-	 *\fn useItem(Item* item)
-	 *\brief Verwendet einen Gegenstand. Der angegebene Gegenstand wird dabei veraendert, insbesondere ist item nach nach der Ausfuehrung der Funktion ein Nullzeiger, wenn das Item verbraucht wird.
-	 *\param item Gegenstand der verwendet werden soll
-	 */
-	//void useItem(Item* &item);
-	
 	/**
-	 * \fn getPathDirection(float dir[2])
+	 * \fn void getPathDirection(float x_start, float  y_start,short region, float base_size, short layer,  float dir[2])
 	 * \brief Gibt die Richtung zurueck, in die man vom Startpunkt aus gehen muss um zu dem Lebewesen zu gelangen
 	 * \param x_start x-Koordinate des Startpunktes
 	 * \param y_start y-Koordinate des Startpunktes
@@ -276,7 +269,7 @@ public:
 	
 		
 	/**
-	 * \fn void calcWalkDir(float goalx,goaly,WorldObject* goal)
+	 * \fn void calcWalkDir(float goalx,float goaly,WorldObject* goal)
 	 * \brief Sucht den Weg zu einem Punkt und setzt die Bewegungsgeschwindigkeit entspechend
 	 * \param goalx x-Koordinate des Zieles
 	 * \param goaly y-Koordinate des Zieles
@@ -285,17 +278,17 @@ public:
 	void calcWalkDir(float goalx,float goaly,WorldObject* goal);
 	
 	/**
-	 * \fn void toString(CharConv* cv)
+	 * \fn virtual void toString(CharConv* cv)
 	 * \brief Konvertiert das Objekt in einen String und schreibt ihn in der Puffer
-	 * \param buf Ausgabepuffer
+	 * \param cv Ausgabepuffer
 	 * \return Zeiger hinter den beschriebenen Datenbereich
 		 */
 	virtual void toString(CharConv* cv);
 	
 	/**
-	 * \fn void fromString(char* buf)
+	 * \fn virtual void fromString(CharConv* cv)
 	 * \brief Erzeugt das Objekt aus einem String
-	 * \param buf Objekt als String
+	 * \param cv Eingabepuffer
 	 * \return Zeiger hinter den gelesenen Datenbereich
 	 */
 	virtual void fromString(CharConv* cv);
@@ -318,8 +311,10 @@ public:
 	bool checkAbilityLearnable(Action::ActionType at);
 	
 	/**
-	 * \fn virtual void calcDamage(ActionType type,Damage& dmg)
+	 * \fn virtual void calcDamage(Action::ActionType act,Damage& dmg)
 	 * \brief Berechnet den Schaden fuer die aktuell ausgefuehrte Aktion
+	 * \param act Aktion, die ausgefuehrt wird
+	 * \param dmg Schaden der Aktion
 	 */
 	virtual void calcDamage(Action::ActionType act,Damage& dmg);
 	
@@ -355,13 +350,17 @@ protected:
 	virtual void recalcDamage();
 	
 	/**
-	 * \fn virtual void calcDamage(ActionType type,Damage& dmg)
+	 * \fn virtual void calcBaseDamage(Action::ActionType act,Damage& dmg)
+	 * \param act Aktion, die ausgefuehrt wird
+	 * \param dmg Schaden der Aktion
 	 * \brief Berechnet den Basisschaden einer Aktion
 	 */
 	virtual void calcBaseDamage(Action::ActionType act,Damage& dmg);
 	
 	/**
-	 * \fn virtual void calcDamage(ActionType type,Damage& dmg)
+	 * \fn virtual void calcAbilityDamage(Action::ActionType act,Damage& dmg)
+	 * \param act Aktion, die ausgefuehrt wird
+	 * \param dmg Schaden der Aktion
 	 * \brief Berechnet den Schaden mit Modifikationen durch Faehigkeiten aus dem Basisschaden
 	 */
 	virtual void calcAbilityDamage(Action::ActionType act,Damage& dmg);
@@ -393,7 +392,7 @@ protected:
 	virtual void initAction();
 	
 	/**
-	 * \fn virtual float performAction(float time)
+	 * \fn virtual float performAction(float &time)
 	 * \brief Fuehrt die aktuell gesetzte Aktion fuer die Zeit time aus. Falls der Abschluss der Aktion weniger Zeit in Anspruch nimmt, wird die restliche Zeit zurueckgegeben.
 	 * \param time zur Verfuegung stehende Zeit in ms
 	 * \return Restzeit
@@ -401,7 +400,7 @@ protected:
 	virtual void performAction(float &time);
 	
 	/**
-	 * \fn virtual void performActionCritPart(float dtime, float goalx, float goaly, Creature* cgoal)
+	 * \fn virtual void performActionCritPart(float goalx, float goaly, WorldObject* goal)
 	 * \brief Fuehrt den entscheidenden Part einer Action (Schaden austeilen, Status veraendern usw aus
 	 * \param goalx x-Koordinate des Zieles
 	 * \param goaly x-Koordinate des Zieles
@@ -536,14 +535,37 @@ private:
 	 */
 	Action::ActionType m_base_action;
 	
-
+	/**
+	 * \var PathfindInfo* m_small_path_info
+	 * \brief Wegsucheinformationen fuer kleine Kreaturen (Information ueber den Weg zu diesem Objekt)
+	 */
 	PathfindInfo* m_small_path_info;
+	
+	/**
+	 * \var PathfindInfo* m_small_flying_path_info
+	 * \brief Wegsucheinformationen fuer kleine fliegende Kreaturen (Information ueber den Weg zu diesem Objekt)
+	 */
 	PathfindInfo* m_small_flying_path_info;
+	
+	
+	/**
+	 * \var PathfindInfo* m_medium_path_info
+	 * \brief Wegsucheinformationen fuer mittelgrosse Kreaturen (Information ueber den Weg zu diesem Objekt)
+	 */
 	PathfindInfo* m_medium_path_info;
+	
+	
+	/**
+	 * \var PathfindInfo* m_big_path_info
+	 * \brief Wegsucheinformationen fuer grosse Kreaturen (Information ueber den Weg zu diesem Objekt)
+	 */
 	PathfindInfo* m_big_path_info;
 	
 	
-
+	/**
+	 * \var PathfindInfo* m_small_path_info
+	 * \brief eigene Wegsucheinformationen, wenn das Zielobjekt keine Kreatur ist
+	 */
 	PathfindInfo* m_path_info;
 	
 

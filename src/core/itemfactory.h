@@ -20,6 +20,10 @@ class ItemFactory
 {
 public:
 
+	/**
+	 * \enum ItemMod
+	 * \brief moegliche Modifikationen von Items
+	 */
 	enum ItemMod
 	{
 		HEALTH_MOD=0,
@@ -77,7 +81,7 @@ public:
 	static void createMagicMods(Item* item, float* modchance, float magic_power, float min_enchant, float max_enchant);
 
 	/**
-	 * \fn static void registerItem(Item::Subtype subtype, ItemBasicData* data)
+	 * \fn static void registerItem(Item::Type type, Item::Subtype subtype, ItemBasicData* data)
 	 * \brief Registriert ein Item
 	 * \param type Typ des Items
 	 * \param subtype Subtype des items
@@ -86,7 +90,7 @@ public:
 	static void registerItem(Item::Type type, Item::Subtype subtype, ItemBasicData* data);
 	
 	/**
-	 * \fn static registerItemDrop(Item::Subtype subtype, DropChance chance)
+	 * \fn static void registerItemDrop(Item::Type type, Item::Subtype subtype, DropChance chance)
 	 * \brief Registriert ein Item, das gedroppt werden kann
 	 * \param type Typ des Items
 	 * \param subtype Subtyp des Items
@@ -106,19 +110,6 @@ public:
 	 */
 	static void init();
 
-	/*
-	static Item::Type subtypeToType(Item::Subtype subtype)
-	{
-		if (subtype >=1000)
-		{
-			return (Item::Type) (subtype/1000);
-		}
-		else
-		{
-			return Item::WEAPON;
-		}
-	}
-	*/
 
 	private:
 		/**

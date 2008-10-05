@@ -19,13 +19,12 @@ class NetworkSlot
 {
 	public:
 		/**
-		 * \fn NetworkSlot(SystemAddress client_adress)
-		* \brief Standard-Konstructor
-		*
-		* Setzt sock auf einen ungueltigen Status, loest alle Locks und weist account einen
-		* Null-String zu
-		*/
-		NetworkSlot(SystemAddress client_adress,RakPeerInterface* peer);
+		 * \fn NetworkSlot(SystemAddress client_address,RakPeerInterface* peer);
+		 * \brief Initialisiert den Slot
+		 * \param client_address Netzwerkadresse des angeschlossenen Client
+		 * \param peer Interface von RakNet
+		 */
+		NetworkSlot(SystemAddress client_address,RakPeerInterface* peer);
 
 		/**
 		 * \fn ~NetworkSlot()
@@ -88,7 +87,7 @@ class NetworkSlot
 		PacketQueue m_received_packets;
 
 		/**
-		 * \var SystemAddress m_system_adress
+		 * \var SystemAddress m_system_address
 		 * \brief Adresse des Clients der zu diesem Slot gehoert
 		 */
 		SystemAddress m_system_address;
@@ -155,8 +154,9 @@ class ServerNetwork: public Network
 
 
 		/**
-		 * \fn int numberSlotMessages()
-		 * \brief Anzahl der Packete im Empfangspuffer
+		 * \fn virtual int numberSlotMessages(int slot=0)
+		 * \param slot Slot dessen Pakete gezaehlt werden
+		 * \brief  Gibt Anzahl der Packete im Empfangspuffer aus
 		 * \return Anzahl der Packete
 		 *
 		 * Ist der Slot ungeultig wird Null geliefert, sonst die Anzahl der Packete im Empfangspuffers

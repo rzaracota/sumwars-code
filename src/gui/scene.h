@@ -68,7 +68,7 @@ class Scene
 	public:
 
 	/**
-	 * \fn Scene(Document* doc)
+	 * \fn Scene(Document* doc,Ogre::RenderWindow* window)
 	 * \brief Konstruktor
 	 * \param doc Dokument dessen Daten dargestellt werden sollen
 	 * \param window Fenster in das gerendert wird
@@ -176,7 +176,7 @@ class Scene
 	void deleteItem(std::string name);
 
 	/**
-	 * \fn void update Projectiles()
+	 * \fn void updateProjectiles()
 	 * \brief Aktualisiert die Darstellung Projektile
 	 */
 	void updateProjectiles();
@@ -229,11 +229,12 @@ class Scene
 
 
 	/**
-	 * \fn void registerObject(WorldObject::TypeInfo::ObjectType, std::string mesh, std::string particle_system, float scaling_factor =1.0)
+	 * \fn void registerObject(WorldObject::TypeInfo::ObjectSubtype subtype, std::string mesh, std::string particle_system= "", float scaling_factor =1.0)
 	 * \brief Registriert fuer ein Objekt das zugehoerige Mesh, Partikelsystem, Skalierungsfaktor
 	 * \param subtype Subtyp des Objektes
 	 * \param mesh Mesh fuer das Objekt. Leerer String, wenn kein Mesh verwendet wird
 	 * \param particle_system Name des Partikelsystems. Leerer string, wenn kein Partikelsystem verwendet wird
+	 * \param scaling_factor Faktor um den das Mesh und alle Partikelsystem skaliert werden
 	 */
 	void registerObject(WorldObject::TypeInfo::ObjectSubtype subtype, std::string mesh, std::string particle_system= "", float scaling_factor =1.0);
 
@@ -256,11 +257,12 @@ class Scene
 	void registerItem(Item::Subtype subtype, std::string mesh, std::string particle_system= "", float scaling_factor =1.0);
 
 	/**
-	 * \fn void registerProjectile(, std::string mesh, std::string particle_system, float scaling_factor =1.0)
+	 * \fn void registerProjectile(Projectile::ProjectileType type, std::string mesh, std::string particle_system = "", float scaling_factor =1.0)
 	 * \brief Registriert fuer ein Projektil das zugehoerige Mesh, Partikelsystem, Skalierungsfaktor
 	 * \param type Subtyp des Projektil
 	 * \param mesh Mesh fuer das Projektil. Leerer String, wenn kein Mesh verwendet wird
 	 * \param particle_system Name des Partikelsystems. Leerer string, wenn kein Partikelsystem verwendet wird
+	 * \param scaling_factor Faktor um den das Mesh und alle Partikelsystem skaliert werden
 	 */
 	void registerProjectile(Projectile::ProjectileType type, std::string mesh, std::string particle_system = "", float scaling_factor =1.0);
 
@@ -287,11 +289,11 @@ class Scene
 	 */
 	RenderInfo getItemRenderInfo(Item::Subtype subtype);
 
-		/**
-	 * \fn RenderInfo getProjectileRenderInfo( (Projectile::ProjectileType type)
+	/**
+	 * \fn RenderInfo getProjectileRenderInfo(Projectile::ProjectileType subtype)
 	 * \brief Gibt die Informationen zum rendern eines Objektes aus
 	 * \param subtype Subtyp des Objektes
-		 */
+	 */
 	RenderInfo getProjectileRenderInfo(Projectile::ProjectileType subtype);
 
 	/**

@@ -162,7 +162,7 @@ struct CreatureBaseAttrMod
 	short m_darmor;
 	
 	/**
-	 * \var m_block;
+	 * \var m_dblock;
 	 * \brief Aenderung des Blockwerts, beeinflusst die Chance Angriffe abzuwehren
 	 */
 	short m_dblock;
@@ -174,7 +174,7 @@ struct CreatureBaseAttrMod
 	float m_dmax_health;
 	
 	/**
-	 * \var m_attack;
+	 * \var m_dattack;
 	 * \brief Aenderung des Attackewertes, beeinflusst die Chance zu treffen
 	 */
 	short m_dattack;
@@ -312,7 +312,7 @@ struct CreatureDynAttr
 	int m_last_attacker_id;
 	
 	/**
-	 * \var float m_status_mod_time[NR_EFFECTS]
+	 * \var float m_effect_time[NR_EFFECTS]
 	 * \brief Gibt an wielange verschiedene Effekte noch wirksam sind
 	 */
 	float m_effect_time[NR_EFFECTS];

@@ -23,7 +23,7 @@ struct DropSlot
 	int m_min_level;
 	
 	/**
-	 * \var int max_level
+	 * \var int m_max_level
 	 * \brief maximales Level das das gedroppte Item haben darf
 	 */
 	int m_max_level;
@@ -108,9 +108,16 @@ struct DropChance
 	 */
 	Item::Size m_size;
 	
-	DropChance(int lev, float prob, Item::Size size)
+	/**
+	 * \fn DropChance(int lev, float prob, Item::Size size)
+	 * \brief Erzeugt neue DropChance Struktur
+	 * \param int level Level ab dem das Item droppen kann
+	 * \param prob relative Wahrscheinlichkeit
+	 * \param size Groesse des Items
+	 */
+	DropChance(int level, float prob, Item::Size size)
 	{
-		m_level = lev;
+		m_level = level;
 		m_probability = prob;
 		m_size = size;
 	}

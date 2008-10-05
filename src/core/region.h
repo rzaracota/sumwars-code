@@ -49,10 +49,13 @@ class Region
 {
 	public:
 		/**
-		 * \fn Region(short dimx, short dimy, short id, bool server)
+	 * \fn Region(short dimx, short dimy, short id, World* world, bool server)
 		 * \brief Konstruktor
 		 * \param dimx Ausdehnung in x-Richtung
 	 	 * \param dimy Ausdehnung in y-Richtung
+		 * \param id ID der Region
+		 * \param world Zeiger auf die Welt
+		 * \param server gibt an, ob der Rechner der Server ist
 	 	 */
 		Region(short dimx, short dimy, short id, World* world, bool server);
 
@@ -202,7 +205,7 @@ class Region
 		bool  deleteObject (WorldObject* object);
 
 		 /**
-		 * \fn moveWorldObject(WorldObject* object, float x, float y)
+		 * \fn moveObject(WorldObject* object, float x, float y)
 		 * \brief verschiebt ein WorldObject an den Punkt (x,y)
 		 * \param object Zeiger auf das Objekt, welches verschoben werden soll
 		 * \param x x-Koordinate des Zielpunktes, zu dem das Objekt verschoben werden soll
@@ -289,8 +292,10 @@ class Region
 		void getRegionData(CharConv* cv);
 
 		/**
-		 * \fn void setRegionData(CharConv* cv)
+		 * \fn void setRegionData(CharConv* cv, WorldObjectMap* players)
 		 * \brief Liest die Objekte, Projektile, Items und Tiles aus einem String ein
+		 * \param cv Eingabepuffer
+		 * \param Liste der Spieler (die Spieler werden nicht neu erzeugt, sondern nur eingefuegt)
 		 */
 		void setRegionData(CharConv* cv, WorldObjectMap* players);
 
@@ -324,6 +329,7 @@ class Region
 
 		/**
 		 * \fn ProjectileMap* getProjectiles()
+		 * \return Gibt alle Projektile in der Region aus
 		 */
 		ProjectileMap* getProjectiles()
 		{
@@ -341,6 +347,7 @@ class Region
 
 		/**
 		 * \fn EventList* getEvents()
+		 * \brief Gibt die Liste der Events aus
 		 */
 		EventList* getEvents()
 		{
@@ -348,96 +355,96 @@ class Region
 		}
 
 	private:
-	/**
-	 * \var m_dimx
-	 * \brief Ausdehnung der Region in x-Richtung
-	 */
-	short m_dimx;
-
-	/**
-		* \var m_dimy
-		* \brief Ausdehnung der Region in y-Richtung
+		/**
+		* \var m_dimx
+		* \brief Ausdehnung der Region in x-Richtung
 		*/
-	short m_dimy;
-
-	/**
-		* \var m_data_grid
-		* \brief Das Array, welches die Daten der Region enthaelt. Jeder Eintrag im Array entspricht einem 4*4 Quadrat
+		short m_dimx;
+	
+		/**
+			* \var m_dimy
+			* \brief Ausdehnung der Region in y-Richtung
+			*/
+		short m_dimy;
+	
+		/**
+			* \var m_data_grid
+			* \brief Das Array, welches die Daten der Region enthaelt. Jeder Eintrag im Array entspricht einem 4*4 Quadrat
+			*/
+		Matrix2d<Gridunit>* m_data_grid;
+	
+		/**
+			* \var m_neighbour_region[4]
+			* \brief Gibt die vier Nachbarregionen an
+			*/
+		NBRegion m_neighbour_region[4];
+	
+		/**
+		* \var Matrix2d<char> m_tiles
+		* \brief Matrix der Tiles
 		*/
-	Matrix2d<Gridunit>* m_data_grid;
-
-	/**
-		* \var m_neighbour_region[4]
-		* \brief Gibt die vier Nachbarregionen an
+		Matrix2d<char>* m_tiles;
+	
+		/**
+		* \var m_players
+		* Liste der Spieler in der Region
 		*/
-	NBRegion m_neighbour_region[4];
-
-	/**
-	 * \var Matrix2d<char> m_tiles
-	 * \brief Matrix der Tiles
-	 */
-	Matrix2d<char>* m_tiles;
-
-	/**
-	 * \var m_players
-	 * Liste der Spieler in der Region
-	 */
-	WorldObjectMap* m_players;
-
-	/**
-	 * \var ProjectileMap* m_projectiles
-	 * \brief Liste aller Projektile in der Region
-	 */
-	ProjectileMap* m_projectiles;
-
-	/**
-	 * \var WorldObjectMap* m_object_bintree
-	 * \brief organisiert alle nicht statischen Objekte in einem Bin&auml;rbaum
-	 */
-	WorldObjectMap* m_objects;
-
-	/**
-	 * \var WorldObjectMap* m_object_bintree
-	 * \brief organisiert statische Objekte in einem Bin&auml;rbaum
-	 */
-	WorldObjectMap* m_static_objects;
-
-	/**
-	 * \var DropItemMap* m_drop_items
-	 * \brief Liste der Gegenstaende, die auf dem Boden liegen
-	 */
-	DropItemMap* m_drop_items;
-
-	/**
-	 * \var DropItemMap* m_drop_item_locations
-	 * \brief Orte der Gegenstaende, die auf dem Boden liegen
-	 */
-	DropItemMap* m_drop_item_locations;
-
-
-	/**
-	 * \var short m_id
-	 * \brief Nummer der Region
-	 */
-	short m_id;
-
-	/**
-	 * \var EventList* m_events
-	 * \brief Liste der lokalen Events beim aktuellen update
-	 */
-	EventList* m_events;
-
-	/**
-	 * \var bool m_server
-	 * \brief true, wenn der Rechner der Server ist
-	 */
-	bool m_server;
-
-	/**
-	 * \var World* m_world
-	 * \brief Zeiger auf die Welt
-	 */
-	World* m_world;
+		WorldObjectMap* m_players;
+	
+		/**
+		* \var ProjectileMap* m_projectiles
+		* \brief Liste aller Projektile in der Region
+		*/
+		ProjectileMap* m_projectiles;
+	
+		/**
+		* \var WorldObjectMap* m_objects
+		* \brief organisiert alle nicht statischen Objekte in einem Bin&auml;rbaum
+		*/
+		WorldObjectMap* m_objects;
+	
+		/**
+		 * \var WorldObjectMap* m_static_objects;
+		 * \brief organisiert statische Objekte in einem Bin&auml;rbaum
+		 */
+		WorldObjectMap* m_static_objects;
+	
+		/**
+		* \var DropItemMap* m_drop_items
+		* \brief Liste der Gegenstaende, die auf dem Boden liegen
+		*/
+		DropItemMap* m_drop_items;
+	
+		/**
+		* \var DropItemMap* m_drop_item_locations
+		* \brief Orte der Gegenstaende, die auf dem Boden liegen
+		*/
+		DropItemMap* m_drop_item_locations;
+	
+	
+		/**
+		* \var short m_id
+		* \brief Nummer der Region
+		*/
+		short m_id;
+	
+		/**
+		* \var EventList* m_events
+		* \brief Liste der lokalen Events beim aktuellen update
+		*/
+		EventList* m_events;
+	
+		/**
+		* \var bool m_server
+		* \brief true, wenn der Rechner der Server ist
+		*/
+		bool m_server;
+	
+		/**
+		* \var World* m_world
+		* \brief Zeiger auf die Welt
+		*/
+		World* m_world;
 
 };
 

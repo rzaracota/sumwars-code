@@ -18,7 +18,7 @@
 */
 #include "monster.h"
 
-Monster::Monster(World* world, unsigned int id) : Creature( world,  id)
+Monster::Monster(World* world, int id) : Creature( world,  id)
 {
 	bool tmp=Monster::init();
 	if(!tmp)
@@ -28,7 +28,7 @@ Monster::Monster(World* world, unsigned int id) : Creature( world,  id)
 }
 
 
-Monster::Monster(World* world, unsigned int id,MonsterBasicData& data)
+Monster::Monster(World* world, int id,MonsterBasicData& data)
 	: Creature( world,  id)
 {
 	memcpy(getBaseAttr(),&data.m_base_attr, sizeof(data.m_base_attr));

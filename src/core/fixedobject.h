@@ -21,7 +21,7 @@
  * \defgroup Fixedobject \ Fixes Objekt
  * \ingroup worldobject
  * \brief Stellt ein unbewegliches Objekt dar
- * \author Daniel Erler
+ * \author Hans Wulf
  * \version 1.0
  * \date 2007/05/28
  * \note Beinhaltet die Klasse FixedObject
@@ -42,33 +42,19 @@ class FixedObject : public WorldObject {
  * Public stuff
  */
 public:
+	
 	/**
-	 * Fields
-	 */
-	/**
-	 * 
-	 */
-	/**
-	 * Constructors
-	 */
-	/**
-	 * \fn FixedObject(World* world, unsigned int id)
+	 * \fn FixedObject(World* world, int id)
 	 * \brief Konstruktor
 	 */
 	FixedObject(World* world, int id);
+	
 	/**
-	 * \fn FixedObject(World* world, float coordinate_x, float coordinate_y, unsigned int id)
+	 * \fn FixedObject(World* world,  int id, TypeInfo::ObjectSubtype object_subtype)
 	 * \brief Konstruktor
 	 */
-	
-	
 	FixedObject(World* world,  int id, TypeInfo::ObjectSubtype object_subtype);
-	/**
-	 * Accessor Methods
-	 */
-	/**
-	 * Operations
-	 */
+	
 	/**
 	* \fn virtual bool init()
 	* \brief Initialisierung von unbewegten Gegenständen
@@ -84,44 +70,6 @@ public:
 	virtual bool  update (float time);
 
 
-/**
- * Protected stuff
- */
-protected:
-	/**
-	 * Fields
-	 */
-	/**
-	 * 
-	 */
-	/**
-	 * Constructors
-	 */
-	/**
-	 * Accessor Methods
-	 */
-	/**
-	 * Operations
-	 */
-/**
- * Private stuff
- */
-private:
-	/**
-	 * Fields
-	 */
-	/**
-	 * 
-	 */
-	/**
-	 * Constructors
-	 */
-	/**
-	 * Accessor Methods
-	 */
-	/**
-	 * Operations
-	 */
 };
 #endif //FIXEDOBJECT_H
 

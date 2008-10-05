@@ -188,7 +188,7 @@ class Party
 	char m_nr_candidates;
 
 	/**
-	 * \var int* candidates
+	 * \var int* m_candidates
 	 * \brief Feld mit den IDs der Bewerber
 	 */
 	int* m_candidates;

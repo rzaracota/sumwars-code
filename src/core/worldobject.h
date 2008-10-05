@@ -516,7 +516,7 @@ class WorldObject {
 	
 	/**
 	 * \fn int getEventMask()
-	 * \brief Gibt die Bitmaske der Events aus#
+	 * \brief Gibt die Bitmaske der Events aus
 	 */
 	int getEventMask()
 	{
@@ -525,6 +525,7 @@ class WorldObject {
 	
 	/**
 	 * \fn void clearEventMask()
+	 * \brief Setzt die Bitmaske der Events auf 0
 	 */
 	void clearEventMask()
 	{
@@ -605,17 +606,15 @@ class WorldObject {
 	/**
 	 * \fn void toString(CharConv* cv)
 	 * \brief Konvertiert das Objekt in einen String und schreibt ihn in der Puffer
-	 * \param buf Ausgabepuffer
-	 * \return Zeiger hinter den beschriebenen Datenbereich
+	 * \param cv Ausgabepuffer
 	 */
 	virtual void toString(CharConv* cv);
 
 
 	/**
-	 * \fn void fromString(char* buf)
+	 * \fn virtual void fromString(CharConv* cv)
 	 * \brief Erzeugt das Objekt aus einem String
-	 * \param buf Objekt als String
-	 * \return Zeiger hinter den gelesenen Datenbereich
+	 * \param cv Eingabepuffer
 	 */
 	virtual void fromString(CharConv* cv);
 
@@ -644,13 +643,13 @@ class WorldObject {
 private:
 
 	/**
-	 * \var m_base_info
-	 * \brief Beinhaltet alle zur Geometrie Objekt
+	 * \var Geometry m_geometry
+	 * \brief Beinhaltet alle  Daten zur Geometrie des  Objekts
 	 */
 	Geometry m_geometry;
 
 	/**
-	 * \var WOTypeInfo m_type_info
+	 * \var TypeInfo m_type_info
 	 * \brief Beeinhaltet alle Informationen zum Typ des Objektes
 	 */
 	TypeInfo m_type_info;

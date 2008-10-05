@@ -48,7 +48,7 @@ public:
 	//Fields
 	//Constructors
 	/**
-	 * \fn Player(World* world, unsigned int id)
+	 * \fn Player(World* world,int id)
 	 * \brief Konstruktor
 	 * \param world Welt
 	 * \param id Objekt-ID
@@ -133,7 +133,9 @@ public:
 	virtual void recalcDamage();
 	
 	/**
-	 * \fn virtual void calcDamage(ActionType type,Damage& dmg)
+	 * \fn virtual void calcBaseDamage(Action::ActionType act,Damage& dmg)
+	 * \param act Aktion, die ausgefuehrt wird
+	 * \param dmg Schaden der Aktion
 	 * \brief Berechnet den Basisschaden einer Aktion
 	 */
 	virtual void calcBaseDamage(Action::ActionType act,Damage& dmg);
@@ -158,7 +160,7 @@ public:
 	
 	
 	/**
-	 * \fn bool onClientCommand( ClientCommand* command)
+	 * \fn bool onClientCommand( ClientCommand* command, float delay =0)
 	 * \brief  Reaktion auf eine Anweisung des Nutzers
 	 * \param command Kommando des Nutzers
 	 * \param delay Millisekunden die das Kommando verspaetet erhalten wurde
@@ -204,7 +206,7 @@ public:
 	void sendSavegame();
 	
 	/**
-	 * \fn void sendGameDate()
+	 * \fn void sendGameData()
 	 * \brief Sendet ein Datenpaket an den Client
 	 */
 	void sendGameData();
@@ -218,33 +220,30 @@ public:
 	
 	
 	/**
-	 * \fn sendAbilityDamage((Action::ActionType act)
+	 * \fn void sendAbilityDamage(Action::ActionType act)
 	 * \brief Sendet den Schaden einer Aktion
 	 * \param act Aktionstyp
 	 */
 	void sendAbilityDamage(Action::ActionType act);
 	
 	/**
-	 * \fn void toString(CharConv* cv)
-	 * \brief Konvertiert das Objekt in einen String und schreibt ihn in der Puffer
-	 * \param buf Ausgabepuffer
-	 * \return Zeiger hinter den beschriebenen Datenbereich
-		 */
+	 * \fn virtual void toString(CharConv* cv)
+	 * \brief Konvertiert das Objekt in einen String und schreibt es in der Puffer
+	 * \param cv Ausgabepuffer
+	 */
 	virtual void toString(CharConv* cv);
 	
 	/**
-	 * \fn void fromString(char* buf)
+	 * \fn virtual void fromString(CharConv* cv)
 	 * \brief Erzeugt das Objekt aus einem String
-	 * \param buf Objekt als String
-	 * \return Zeiger hinter den gelesenen Datenbereich
+	 * \param cv Eingabepuffer
 	 */
 	virtual void fromString(CharConv* cv);
 	
 	/**
-	 * \fn void toString(v oi buf)
-	 * \brief Konvertiert das Objekt in einen String und schreibt ihn in der Puffer
-	 * \param buf Ausgabepuffer
-	 * \return Zeiger hinter den beschriebenen Datenbereich
+	 * \fn virtual void toStringComplete(CharConv* cv)
+	 * \brief Konvertiert das Objekt in einen String und schreibt es in der Puffer
+	 * \param cv Ausgabepuffer
 	 */
 	virtual void toStringComplete(CharConv* cv);
 	
@@ -263,33 +262,29 @@ public:
 	/**
 	 * \fn void writeEquipement(CharConv* cv)
 	 * \brief Schreibt des Inventar in den Puffer
-	 * \param buf Ausgabepuffer
-	 * \return Zeiger hinter den beschriebenen Datenbereich
+	 * \param cv Ausgabepuffer
 	 */
 	void writeEquipement(CharConv* cv);
 	
 	/**
 	 * \fn void loadEquipement(CharConv* cv)
 	 * \brief Laedt das Inventar aus dem Puffer
-	 * \param buf Ausgabepuffer
-	 * \return Zeiger hinter den beschriebenen Datenbereich
+	 * \param cv Eingabepuffer
 	 */
 	void loadEquipement(CharConv* cv);
 	
 	/**
-	 * \fn char* toSavegame(char* buf)
+	 * \fn void toSavegame(CharConv* cv)
 	 * \brief Erzeugt ein binaeres Savegame und schreibt es in den Puffer
-	 * \param buf Ausgabepuffer
-	 * \return Zeiger hinter den beschriebenen Datenbereich
+	 * \param cv Ausgabepuffer
 	 */	 
 	void toSavegame(CharConv* cv);
 	
 	
 	/**
-	 * \fn void fromSavegame(char* buf)
+	 * \fn void fromSavegame(CharConv* cv)
 	 * \brief Laedt die Daten aus einem Savegame
-	 * \param buf Zeiger auf Savegame
-	 * \return Zeiger hinter den Datenbereich
+	 * \param cv Eingabepuffer
 	 */
 	void fromSavegame(CharConv* cv);
 	
@@ -307,6 +302,7 @@ public:
 	
 	/**
 	 * \fn Action::ActionType getRightAction()
+	 * \brief Gibt Aktion, die auf die rechte Maustaste gelegt ist, aus
 	 */
 	Action::ActionType getRightAction()
 	{
@@ -315,6 +311,7 @@ public:
 	
 	/**
 	 * \fn Action::ActionType getLeftAction()
+	 * \brief Gibt Aktion, die auf die linke Maustaste gelegt ist, aus
 	 */
 	Action::ActionType getLeftAction()
 	{
@@ -323,6 +320,7 @@ public:
 	
 	/**
 	 * \fn short getAttributePoints()
+	 * \brief Gibt die Anzahl der zu verteilenden Attributpunkte aus
 	 */
 	short getAttributePoints()
 	{
@@ -331,6 +329,7 @@ public:
 	
 	/**
 	 * \fn short getSkillPoints()
+	 * \brief Gibt die Anzahl der zu verteilenden Skillpunkte aus
 	 */
 	short getSkillPoints()
 	{
@@ -339,6 +338,7 @@ public:
 	
 	/**
 	 * \fn Damage& getBaseDamage()
+	 * \brief Gibt Basisschaden aus
 	 */
 	Damage& getBaseDamage()
 	{
@@ -347,6 +347,7 @@ public:
 	
 	/**
 	 * \fn Damage& getLeftDamage()
+	 * \brief Gibt Schaden der mit der Aktion auf der linken Maustaste angerichtet wird aus
 	 */
 	Damage& getLeftDamage()
 	{
@@ -355,6 +356,7 @@ public:
 	
 	/**
 	 * \fn Damage& getRightDamage()
+	 * \brief Gibt Schaden der mit der Aktion auf der rechten Maustaste angerichtet wird aus
 	 */
 	Damage& getRightDamage()
 	{
@@ -409,11 +411,11 @@ protected:
 	
 	
 	/**
- * \fn virtual void performActionCritPart(float dtime, float goalx, float goaly, Creature* cgoal)
- * \brief Fuehrt den entscheidenden Part einer Action (Schaden austeilen, Status veraendern usw aus
- * \param goalx x-Koordinate des Zieles
- * \param goaly x-Koordinate des Zieles
- * \param goal Zeiger auf der Zielobjekt, ist NULL wenn kein Zielobjekt existiert
+	 * \fn  virtual void performActionCritPart(float goalx, float goaly, WorldObject* goal)
+	 * \brief Fuehrt den entscheidenden Part einer Action (Schaden austeilen, Status veraendern usw aus
+	 * \param goalx x-Koordinate des Zieles
+	 * \param goaly x-Koordinate des Zieles
+	 * \param goal Zeiger auf der Zielobjekt, ist NULL wenn kein Zielobjekt existiert
 	 */
 	virtual void performActionCritPart(float goalx, float goaly, WorldObject* goal);
 	

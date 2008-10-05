@@ -12,31 +12,31 @@ class Priest : public Player {
 	public:
 	//Fields
 	//Constructors
-	/**
-	 * \fn Priest(World* world, unsigned int id)
-	 * \brief Konstruktor
-	 * \param world Welt
-	 * \param id Objekt-ID
-	 *
-	 * Legt ein neues Priest Objekt an.
-	 */
+		/**
+		* \fn Priest(World* world, int id)
+		* \brief Konstruktor
+		* \param world Welt
+		* \param id Objekt-ID
+		*
+		* Legt ein neues Priest Objekt an.
+		*/
 		Priest(World* world, int id);
 
 
-	/**
+		/**
 		 * \fn ~Priest()
 		 * \brief Destruktor
 		 *
 		 * Gibt den Allokierten Speicher wieder frei
-	 */
+		 */
 		~Priest();
 	//Accessor Methods
 	//Operations
-	/**
+		/**
 		 * \fn virtual bool init ()
 		 * \brief Initialisiert den Priester
 		 * \return bool, der angibt ob die initialisierung erfolgreich war
-	 */
+		 */
 		virtual bool init ();
 
 		/**
@@ -50,7 +50,7 @@ class Priest : public Player {
 		}
 
 		/**
-		 * \fn virtual void calcDamage(ActionType type,Damage& dmg)
+		 * \fn virtual void calcBaseDamage(Action::ActionType act,Damage& dmg)
 		 * \brief Berechnet den Basisschaden einer Aktion
 		 */
 		virtual void calcBaseDamage(Action::ActionType act,Damage& dmg)

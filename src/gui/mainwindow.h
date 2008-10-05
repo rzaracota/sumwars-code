@@ -91,7 +91,7 @@ class MainWindow :
 	void update();
 
 	/**
-	 * \fn bool setupMainScreen()
+	 * \fn bool setupGameScreen()
 	 * \brief Erstellt den Hauptspielbildschirm
 	 * \return true, wenn erfolgreich, sonst false
 	 */
@@ -268,13 +268,13 @@ class MainWindow :
 	bool onButtonSaveExitClicked(const CEGUI::EventArgs& evt);
 
 	/**
-	 * \fn void onButtonInventoryClicked()
+	 * \fn void onButtonInventoryClicked(const CEGUI::EventArgs& evt)
 	 * \brief Behandelt Klick auf Inventar Button
 	 */
 	bool onButtonInventoryClicked(const CEGUI::EventArgs& evt);
 
 	/**
-	 * \fn void onButtonCharInfoClicked()
+	 * \fn void onButtonCharInfoClicked(const CEGUI::EventArgs& evt)
 	 * \brief Behandelt Klick auf CharakterInfo Button
 	 */
 	bool onButtonCharInfoClicked(const CEGUI::EventArgs& evt);
@@ -286,13 +286,13 @@ class MainWindow :
 	bool onButtonPartyClicked(const CEGUI::EventArgs& evt);
 
 	/**
-	 * \fn void onButtonSkilltreeClicked()
+	 * \fn void onButtonSkilltreeClicked(const CEGUI::EventArgs& evt)
 	 * \brief Behandelt Klick auf Skilltree Button
 	 */
 	bool onButtonSkilltreeClicked(const CEGUI::EventArgs& evt);
 
 	/**
-	 * \fn void onButtonOpenChatClicked()
+	 * \fn void onButtonOpenChatClicked(const CEGUI::EventArgs& evt)
 	 * \brief Behandelt Klick auf Chat oeffnen Button
 	 */
 	bool onButtonOpenChatClicked(const CEGUI::EventArgs& evt);
@@ -369,7 +369,7 @@ class MainWindow :
 	CEGUI::System* m_cegui_system;
 
 	/**
-	 * \var Ogre::RenderWindow *window
+	 * \var Ogre::RenderWindow *m_window
 	 * \brief Fenster der Applikation
 	 */
 	Ogre::RenderWindow *m_window;

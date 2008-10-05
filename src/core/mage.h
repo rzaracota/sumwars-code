@@ -12,31 +12,31 @@ class Mage : public Player {
 	public:
 	//Fields
 	//Constructors
-	/**
-	 * \fn Mage(World* world, unsigned int id)
-	 * \brief Konstruktor
-	 * \param world Welt
-	 * \param id Objekt-ID
-	 *
-	 * Legt ein neues Mage Objekt an.
-	 */
+		/**
+		* \fn Mage(World* world, int id)
+		* \brief Konstruktor
+		* \param world Welt
+		* \param id Objekt-ID
+		*
+		* Legt ein neues Mage Objekt an.
+		*/
 		Mage(World* world, int id);
 
 
-	/**
+		/**
 		 * \fn ~Mage()
 		 * \brief Destruktor
 		 *
 		 * Gibt den Allokierten Speicher wieder frei
-	 */
+		 */
 		~Mage();
 	//Accessor Methods
 	//Operations
-	/**
+		/**
 		 * \fn virtual bool init ()
 		 * \brief Initialisiert den Magier
 		 * \return bool, der angibt ob die initialisierung erfolgreich war
-	 */
+		 */
 		virtual bool init ();
 
 
@@ -51,7 +51,7 @@ class Mage : public Player {
 		}
 
 		/**
-		 * \fn virtual void calcDamage(ActionType type,Damage& dmg)
+		 * \fn virtual void calcBaseDamage(Action::ActionType act,Damage& dmg)
 		 * \brief Berechnet den Basisschaden einer Aktion
 		 */
 		virtual void calcBaseDamage(Action::ActionType act,Damage& dmg)
@@ -79,10 +79,10 @@ class Mage : public Player {
 
 	protected:
 
-	/**
-	 * \fn virtual void gainLevel()
-	 * \brief Wird aufgerufen, wenn das Lebewesen ein Levelup erhält. Passt Erfahrung und alle Basisattribute an.
-	 */
+		/**
+		 * \fn virtual void gainLevel()
+		 * \brief Wird aufgerufen, wenn das Lebewesen ein Levelup erhält. Passt Erfahrung und alle Basisattribute an.
+		 */
 		virtual void gainLevel()
 		{
 			Player::gainLevel();

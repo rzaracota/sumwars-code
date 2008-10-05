@@ -116,6 +116,10 @@ struct PathfindInfo
  */
 struct SearchFieldEntry {
 	
+	/**
+	 * \var float m_f
+	 * \brief Entfernung des Suchfeldes von der Senke
+	 */
 	float m_f;
 	
 	/**

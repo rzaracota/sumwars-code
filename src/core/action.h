@@ -223,31 +223,31 @@ public:
 			
 		}
 		/**
-		 * \var m_timer_nr
+		 * \var int m_timer_nr
 		 * \brief Nummer des Timers, der bei benutzen der Aktion gestartet wird. Moegliche Werte sind 0,1,2
 		 */
 		int m_timer_nr;
 
 		/**
-		 * \var m_standard_tim
+		 * \var float m_standard_time
 		 * \brief Zeit in ms, die die Aktion ohne Modifikatoren in Anspruch nimmt
 		 */
 		float m_standard_time;
 
 		/**
-		 * \var m_timer
+		 * \var float m_timer
 		 * \brief Gibt die Zeitdauer in ms an, die der Timer laeuft, der beim Benutzen dieser Aktion gestartet wird.
 		 */
 		float m_timer;
 
 		/**
-		 * \var m_base_action
+		 * \var ActionType m_base_action
 		 * \brief Gibt die Aktion an, die stattdessen ausgefuehrt wird, wenn die Aktion selbst nicht benutzt werden kann weil der Timer noch lauft
 		 */
 		ActionType m_base_action;
 
 		/**
-		 * \var m_critial_perc
+		 * \var float m_critial_perc
 		 * \brief Prozentsatz zu dem die Aktion abgeschlossen ist, wenn der eigentliche Effekt der Aktion ausgeloest wird
 		 */
 		float m_critical_perc;
@@ -317,13 +317,9 @@ public:
 	//Fields
 	//Constructors
 	/**
-	 * \fn Action(ActionType type, float goal_coordinate_x, float goal_coordinate_y, int goal_object_id, float time)
+	 * \fn Action(ActionType type)
 	 * \brief Legt ein neues Action Objekt an
 	 * \param type initialisiert den Typ der Aktion
-	 * \param goal_coordinate_x initialisiert die x-Koordinate des Zielpunkts
-	 * \param goal_coordinate_y initialisiert die y-Koordinate des Zielpunkts
-	 * \param goal_object_id initialisiert ID des Zielobjekts
-	 * \param time initialisiert Gesamtdauer der Aktion
 	 */
 	Action(ActionType type)
 	{
@@ -427,7 +423,7 @@ public:
 	char m_animation_number;
 	
 	/**
-	 * \var m_type;
+	 * \var ActionType m_prev_type
 	 * \brief Typ der vorhergehenden Aktion
 	 */
 	ActionType m_prev_type;
@@ -457,7 +453,7 @@ public:
 	static ActionInfo m_base_info[192];
 
 	/**
-	 * \var static map<std::string, ActionType> m_enum_string_to type
+	 * \var static std::map<std::string, ActionType> m_enum_string_to type
 	 * \brief Bildet den Name der Aktion auf den Aktionstyp ab
 	 */
 	static std::map<std::string, ActionType> m_enum_string_to_type;

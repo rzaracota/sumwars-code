@@ -176,7 +176,7 @@ struct Item {
 
 	
 	/**
-	 * \fn Item(int id, ItemBasicData& data)
+	 * \fn Item(ItemBasicData& data)
 	 * \brief erzeugt ein neuen Gegenstand mit den vorgegebenen Daten
 	 * \param data Daten auf deren Basis der Gegenstand erzeugt wird
 	 */
@@ -202,37 +202,33 @@ struct Item {
 	virtual std::string getString();
 
 	/**
-	 * \fn void toString(CharConv* cv)
+	 * \fn virtual void toString(CharConv* cv)
 	 * \brief Konvertiert das Objekt in einen String und schreibt ihn in der Puffer
-	 * \param buf Ausgabepuffer
-	 * \return Zeiger hinter den beschriebenen Datenbereich
+	 * \param cv Ausgabepuffer
 	 */
 	virtual void toString(CharConv* cv);
 
 
 	/**
-	 * \fn void fromString(void CharConv* cv)
+	 * \fn virtual void fromString(CharConv* cv)
 	 * \brief Erzeugt das Objekt aus einem String
-	 * \param buf Objekt als String
-	 * \return Zeiger hinter den gelesenen Datenbereich
+	 * \param cv Eingabepuffer
 	 */
 	virtual void fromString(CharConv* cv);
 	
 	
 	/**
-	 * \fn char* toSavegame(CharConv* cv)
+	 * \fn void toSavegame(CharConv* cv)
 	 * \brief Schreibt das Item inklusive allen Extradaten in den Puffer
-	 * \param buf Ausgabepuffer
-	 * \return Zeiger hinter den beschriebenen Datenbereich
+	 * \param cv Ausgabepuffer
 	 */
 	void toStringComplete(CharConv* cv);
 
 
 	/**
-	 * \fn char* fromSavegame(CharConv* cv)
+	 * \fn void fromStringComplete(CharConv* cv)
 	 * \brief Laedt das Item inklusive allen Extradaten aus dem Puffer
-	 * \param buf Zeiger auf Savegame
-	 * \return Zeiger hinter den Datenbereich
+	 * \param cv Eingabepuffer
 	 */
 	void fromStringComplete(CharConv* cv);
 
@@ -274,10 +270,10 @@ struct Item {
 	Size m_size;
 
 
-/**
+	/**
 	 * \var m_price;
 	 * \brief Gibt Preis des Gegenstands an
- */
+	 */
 	int m_price;
 
 	/**
@@ -398,6 +394,10 @@ struct ItemBasicData
 	 */
 	float m_max_enchant;
 
+	/**
+	 * \fn ItemBasicData()
+	 * \brief Konstruktor
+	 */
 	ItemBasicData();
 
 };

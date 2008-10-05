@@ -130,21 +130,37 @@ class CharConv
 		return &m_bitstream;
 	}
 	
+	/**
+	 * \fn int readBits()
+	 * \brief Gibt die Anzahl der bisher gelesenen Bits aus
+	 */
 	int readBits()
 	{
 		return m_bitstream.GetReadOffset();
 	}
 	
+	/**
+	 * \fn int writeBits()
+	 * \brief Gibt die Anzahl der bisher geschriebenen Bits aus
+	 */
 	int writeBits()
 	{
 		return m_bitstream.GetNumberOfBitsUsed();
 	}
 	
+	/**
+	 * \fn float getDelay()
+	 * \brief Gibt die Verzoegerung des Paketes in Millisekunden an
+	 */
 	float getDelay()
 	{
 		return std::max(0.0f,static_cast<float>(RakNet::GetTime())-static_cast<float>(m_timestamp));
 	}
 	
+	/**
+	 * \fn unsigned long getTimestamp()
+	 * \brief Gibt den Zeitstempel des Paketes aus
+	 */
 	unsigned long getTimestamp()
 	{
 		return m_timestamp;

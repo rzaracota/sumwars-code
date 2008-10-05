@@ -26,7 +26,7 @@ class ClientNetwork : public Network
 	ClientNetwork();
 
 	/**
-	 * \fn ~ClientNetwork()
+	 * \fn virtual  ~ClientNetwork()
 	 * \brief Destruktor
 	 */
 	virtual ~ClientNetwork();
@@ -55,13 +55,13 @@ class ClientNetwork : public Network
 
 
 	/**
-	 * \fn  NetStatus update()
+	 * \fn  virtual void update()
 	 * \brief Fuehrt fuer den Client-Slot die Abarbeitung durch
 	*/
 	virtual void update();
 
 	/**
-	 * \fn int numberSlotMessages()
+	 * \fn virtual int numberSlotMessages(int slot=0)
 	 * \brief Anzahl der Packete im Empfangspuffer
 	 * \return Anzahl der Packete
 	 *
@@ -71,34 +71,34 @@ class ClientNetwork : public Network
 
 
 	/**
-	 * \fn void popSlotMessage(Packet* &data, int slot=0)
+	 * \fn virtual void popSlotMessage(Packet* &data, int slot=0)
 	 * \brief Fuehrt net_pop_slot_message auf den Client-Slots
 	 * \param data Puffer fuer die zu kopierenden Daten
 	 * \param size Groesse des Datenblocks
 	 * \return Status der Methode
 	 *
 	 */
-	void popSlotMessage( Packet* &data, int slot=0);
+	virtual void popSlotMessage( Packet* &data, int slot=0);
 
 
 	/**
-	 * \fn void pushSlotMessage( RakNet::BitStream * data,int slot=0, PacketPriority prio= HIGH_PRIORITY,PacketReliability reliability = RELIABLE )
+	 * \fnvirtual  void pushSlotMessage( RakNet::BitStream * data,int slot=0, PacketPriority prio= HIGH_PRIORITY,PacketReliability reliability = RELIABLE )
 	 * \brief Fuehrt net_push_slot_message auf einen Server-Slots aus
 	 * \param data Puffer fuer die zu kopierenden Daten
 	 * \param slot Slot des Empfaengers
 	 * \return Status der Methode
 	 *
 	 */
-	void pushSlotMessage( RakNet::BitStream * data, int slot=0, PacketPriority prio= HIGH_PRIORITY,PacketReliability reliability = RELIABLE) ;
+	virtual void pushSlotMessage( RakNet::BitStream * data, int slot=0, PacketPriority prio= HIGH_PRIORITY,PacketReliability reliability = RELIABLE) ;
 
 	/**
-	 * \fn NetStatus getSlotStatus( int slot=0 )
+	 * \fn virtual NetStatus getSlotStatus( int slot=0 )
 	 * \brief Liefert den Status eines Server-Slots
 	 * \param slot Slotnummer des Servers
 	 * \return Status des Slots
 	 *
 	 */
-	NetStatus getSlotStatus( int slot=0 );
+	virtual NetStatus getSlotStatus( int slot=0 );
 
 
 

@@ -127,6 +127,7 @@ struct Damage
 	
 	/**
 	 * \enum Usage
+	 * \brief Verwendung der Beschreibung von Schaden (unterschiedlich ausfuehrlich)
 	 */
 	enum Usage
 	{
@@ -197,7 +198,7 @@ struct Damage
 	/**
 	 * \fn std::string getDamageString((Usage usage= NORMAL)
 	 * \brief Erzeugt einen String der den angegebenen Schaden anzeigt
-	 * \param complete Wenn true, werden alle Daten ausgegeben
+	 * \param usage Gibt an wofuer die Beschreibung verwendet wird (beeinflusst welche Daten angegeben werden)
 	 */
 	std::string getDamageString(Usage usage= NORMAL);
 };

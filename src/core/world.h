@@ -102,6 +102,11 @@ public:
 	 */
 	bool init();
 	
+	/**
+	 * \fn void createRegion(short region)
+	 * \brief Erzeugt die Region mit der angegebenen Nummer
+	 * \param region Nummer der Region, die erzeugt werden soll
+	 */
 	void createRegion(short region);
 	
 	
@@ -164,7 +169,7 @@ public:
 	int newTrade(int trader1_id, int trader2_id);
 
 	/**
-	 * \fn WorldObject*  getObject ( int id);
+	 * \fn WorldObject* getObject ( int id, short rid)
 	 * \brief Sucht WorldObject anhand seiner ID
 	 * \param id ID des gesuchten WorldObjects
 	 * \param rid ID der Region
@@ -208,7 +213,7 @@ public:
 	WorldObject* getObjectAt(float x_coordinate, float y_coordinate,  short region,short layer=WorldObject::Geometry::LAYER_ALL, short group = WorldObject::GROUP_ALL);
 
 	/**
-	 * \fn getObjectsOnLine( float xstart, float ystart, float xend, float yend,  short region, WorldObjectList* result,,short layer=WorldObject::Geometry::LAYER_ALL, short group = WorldObject::GROUP_ALL WorldObject* omit=0 )
+	 * \fn void getObjectsOnLine( float xstart, float ystart, float xend, float yend,  short region, WorldObjectList* result,short layer=WorldObject::Geometry::LAYER_ALL, short group = WorldObject::GROUP_ALL, WorldObject* omit=0 )
 	 * \brief Sucht alle Objekte die auf der angegebenen Linie liegen
 	 * \param xstart x-Koordinate Startpunkt
 	 * \param ystart y-Koordinate Startpunkt
@@ -234,7 +239,7 @@ public:
 
 
 	/**
-	 * \fn insertObject(WorldObject* object)
+	 * \fn bool  insertObject (WorldObject* object, float x, float y, short region)
 	 * \brief F&uuml;gt WorldObject ein
 	 * \param object Zeiger auf das Objekt, welches eingef&uuml;gt werden soll
 	 * \return bool, der angibt, ob die Operation erfolgreich war
@@ -273,7 +278,7 @@ public:
 	bool  deleteObject (WorldObject* object);
 
 	 /**
-	  * \fn moveWorldObject(WorldObject* object, float x, float y)
+	  * \fn moveObject(WorldObject* object, float x, float y)
 	  * \brief verschiebt ein WorldObject an den Punkt (x,y)
 	  * \param object Zeiger auf das Objekt, welches verschoben werden soll
 	  * \param x x-Koordinate des Zielpunktes, zu dem das Objekt verschoben werden soll
@@ -283,7 +288,7 @@ public:
 	bool moveObject(WorldObject* object, float x, float y);
 
 	/**
-	 * \fn bool lineIntersect(float xstart, float xstart, float xend,float yend float dir[2],Shape* s)
+	 * \fn bool lineIntersect(float xstart, float xstart, float xend,float yend, float dir[2],Shape* s)
 	 * \brief Prueft ob sich die Form auf der Linie befindet
 	 * \param xstart x-Koordinate Startpunkt
 	 * \param ystart y-Koordinate Startpunkt
@@ -358,7 +363,7 @@ public:
 	void writeEvent(Region* region, Event* event, CharConv* cv);
 	
 	/**
-	 * \fn bool processEvent(CharConv* cv)
+	 * \fn bool processEvent(Region* region,CharConv* cv)
 	 * \brief Liest ein Event aus dem Bitstream und fuehrt es aus
 	 * \param region Region in der das Event aufgetreten ist
 	 * \param cv Bitstream
@@ -454,7 +459,7 @@ public:
 	void handleSavegame(CharConv *cv , int slot=LOCAL_SLOT);
 	
 	/**
-	 * \fn void handleCommand(ClientCommand* cmd, int slot=LOCAL_SLOT)
+	 * \fn void handleCommand(ClientCommand* cmd, int slot=LOCAL_SLOT, float delay=0)
 	 * \brief Behandelt ein erhaltenes Kommmando
 	 * \param cmd Kommando
 	 * \param slot Slot ueber den das Kommando empfangen wurde. Wenn das Kommando nicht ueber das Netzwerk uebertragen wurde -1
@@ -485,6 +490,11 @@ public:
 		return m_server;
 	}
 	
+	/**
+	 * \fn bool timerLimit(int i)
+	 * \param i Nummer des Timers
+	 * \brief Gibt true aus, wenn der Timer beim aktuellen update das Limit erreicht hat
+	 */
 	bool timerLimit(int i)
 	{
 		return m_timer_limit[i];
@@ -524,7 +534,7 @@ private:
 	Party* m_parties;
 
 	/**
-	 * \var m_players
+	 * \var m_player_slots
 	 * \brief Liste der Spieler in der Welt mit ihren Slots
 	 */
 	WorldObjectMap* m_player_slots;
@@ -550,6 +560,7 @@ private:
 	
 	/**
 	 * \var WorldObject* m_local_player
+	 * \brief lokaler Spieler
 	 */
 	WorldObject* m_local_player;
 	

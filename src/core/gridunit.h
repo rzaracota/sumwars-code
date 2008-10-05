@@ -19,42 +19,42 @@ struct Gridunit
 	
 	private:
 
-	/**
-	 * \var m_dead[20]
-	 * \brief Liste der toten Spieler auf dem Feld
-	 */
-	WorldObject* m_dead[MAX_GRIDUNIT_OBJ];
-
-	/**
-	 * \var m_nr_dead
-	 * \brief Anzahl der toten Spieler auf dem Feld
-	 */
-	short m_nr_dead;
-
-	/**
-	 * \var m_fixed[20]
-	 * \brief Liste der festen Objekte auf dem Feld
-	 */
-
-	WorldObject* m_fixed[MAX_GRIDUNIT_OBJ];
-
-	/**
-	 * \var m_nr_fixed
-	 * \brief Anzahl der festen Objekte auf dem Feld
-	 */
-	short m_nr_fixed;
-
-	/**
-	 * \var m_creature
-	 * \brief Liste der Kreaturen auf dem Feld
-	 */
-	WorldObject* m_creature[MAX_GRIDUNIT_OBJ];
-
-	/**
-	 * \var m_nr_creature
-	 * \brief Anzahl der Kreaturen auf dem Feld
-	 */
-	short m_nr_creature;
+		/**
+		* \var m_dead[20]
+		* \brief Liste der toten Spieler auf dem Feld
+		*/
+		WorldObject* m_dead[MAX_GRIDUNIT_OBJ];
+	
+		/**
+		* \var m_nr_dead
+		* \brief Anzahl der toten Spieler auf dem Feld
+		*/
+		short m_nr_dead;
+	
+		/**
+		* \var m_fixed[20]
+		* \brief Liste der festen Objekte auf dem Feld
+		*/
+	
+		WorldObject* m_fixed[MAX_GRIDUNIT_OBJ];
+	
+		/**
+		* \var m_nr_fixed
+		* \brief Anzahl der festen Objekte auf dem Feld
+		*/
+		short m_nr_fixed;
+	
+		/**
+		* \var m_creature
+		* \brief Liste der Kreaturen auf dem Feld
+		*/
+		WorldObject* m_creature[MAX_GRIDUNIT_OBJ];
+	
+		/**
+		* \var m_nr_creature
+		* \brief Anzahl der Kreaturen auf dem Feld
+		*/
+		short m_nr_creature;
 
 
 
@@ -77,9 +77,9 @@ struct Gridunit
 
 
 		/**
-		 * \fn short getObjectNr(WorldObject::Geometry::Layer layer)
-		 * \brief Gibt die Anzahl der Objekte in einer der Schichten aus.
-		 * \param layer Schicht, deren Objektanzahl ausgegeben werden soll. Muss eines der folgenden sein: LAYER_FIXED, LAYER_CREATURE,LAYER_DEAD
+		 * \fn short&  getObjectsNr(WorldObject::Group group)
+		 * \brief Gibt die Anzahl der Objekte in einer der Gruppen aus.
+		 * \param group Gruppe deren Objekte ausgegeben werden
 		 */
 		short&  getObjectsNr(WorldObject::Group group);
 		
@@ -99,9 +99,9 @@ struct Gridunit
 		}
 
 		/**
-		 * \fn getObjects(short layer)
-		 * \brief Gibt die Objekte einer Schicht als Array aus
-		 * \param layer Schicht, deren Objekte ausgegeben werden sollen. Muss eines der folgenden sein: LAYER_FIXED, LAYER_CREATURE,LAYER_DEAD
+		 * \fn WorldObject** getObjects(WorldObject::Group group)
+		 * \brief Gibt die Objekte einer Gruppe als Array aus
+		 * \param group Gruppe deren Objekte ausgegeben werden
 		 * \return Array mit Zeigern auf die Objekte
 		 */
 		WorldObject** getObjects(WorldObject::Group group)

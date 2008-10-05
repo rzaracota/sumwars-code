@@ -10,6 +10,10 @@
  */
 struct Event
 {
+	/**
+	 * \enum EventType
+	 * \brief verschiedene Eventarten
+	 */
 	enum EventType
 	{
 		OBJECT_CREATED =1,
@@ -39,6 +43,10 @@ struct Event
 	 */
 	EventType m_type;
 	
+	/**
+	 * \enum ObjectData
+	 * \brief Objektdaten die mit dem Event versendet werden
+	 */
 	enum ObjectData
 	{
 		DATA_COMMAND =0x1,
@@ -60,6 +68,10 @@ struct Event
  		DATA_LEVEL = 0x10000,
 	};
 	
+	/**
+	 * \enum ProjectileData
+	 * \brief Projektildaten, die mit dem Event versendet werden
+	 */
 	enum ProjectileData
 	{
 		DATA_GEOMETRY = 0x1,

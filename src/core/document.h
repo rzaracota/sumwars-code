@@ -36,23 +36,6 @@
 #include <set>
 
 
-// OIS
-/*
-#ifdef WIN32
-    #include "ois\OISEvents.h"
-    #include "ois\OISInputManager.h"
-    #include "ois\OISMouse.h"
-    #include "ois\OISKeyboard.h"
-    #include "ois\OISJoyStick.h"
-#else
-    #include "OISEvents.h"
-    #include "OISInputManager.h"
-    #include "OISMouse.h"
-    #include "OISKeyboard.h"
-    #include "OISJoyStick.h"
-#endif
-*/
-
 #include "networkstruct.h"
 #include "projectile.h"
 #include "party.h"
@@ -212,7 +195,7 @@ class Document
 		bool m_right_mouse_hold;
 
 		/**
-		 * \var m_mouse_hold
+		 * \var m_shift_hold
 		 * \brief Gibt an, ob die Shift-Taste festgehalten wird
 		 */
 		bool m_shift_hold;
@@ -493,7 +476,7 @@ class Document
 
 
 	/**
-	 * \fn void onButtonSkillTreeClicked()
+	 * \fn void onButtonSkilltreeClicked()
 	 * \brief Behandelt Klick auf Skilltree Button
 	 */
 	void onButtonSkilltreeClicked();
@@ -572,10 +555,25 @@ class Document
 	 */
 	bool onKeyRelease(KeyCode key);
 
+	/**
+	 * \fn void onButtonPartyApply(int pnr)
+	 * \brief Behandelt Druck auf Button Bei einer Party bewerben
+	 * \param pnr Nummer der Party
+	 */
 	void onButtonPartyApply(int pnr);
 
+	/**
+	 * \fn void onButtonPartyAccept(int cnr)
+	 * \brief Behandelt Druck auf Button Partymitglied annehmen
+	 * \param cnr ID des Bewerbers
+	 */
 	void onButtonPartyAccept(int cnr);
 
+	/**
+	 * \fn void emitDebugSignal(int i=0)
+	 * \brief Sendet ein Signal zu Debugging Zwecken
+	 * \param i Nummer des Debugereignisses
+	 */
 	void emitDebugSignal(int i=0);
 
 	/**
@@ -733,7 +731,10 @@ class Document
     std::set<KeyCode> m_special_keys;
 
 
-
+	/**
+	 * \var char m_server_ip[16]
+	 * \brief IP des Servers
+	 */
 	char m_server_ip[16];
 
 	/**

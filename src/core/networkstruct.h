@@ -124,12 +124,11 @@ struct ClientDataRequest
 	int m_id;
 
 	/**
-	 * \fn void toString(char* buf)
+	 * \fn void toString(CharConv* buf)
 	 * \brief Konvertiert das Objekt in einen String und schreibt ihn in der Puffer
-	 * \param buf Ausgabepuffer
-	 * \return Zeiger hinter den beschriebenen Datenbereich
+	 * \param cv Ausgabepuffer
 	 */
-	virtual void toString(CharConv* cv)
+	void toString(CharConv* cv)
 	{
 		cv->toBuffer((char) m_data);
 		cv->toBuffer(m_id);
@@ -137,12 +136,11 @@ struct ClientDataRequest
 
 
 	/**
-	 * \fn void fromString(char* buf)
+	 * \fn void fromString(CharConv* buf)
 	 * \brief Erzeugt das Objekt aus einem String
-	 * \param buf Objekt als String
-	 * \return Zeiger hinter den gelesenen Datenbereich
+	 * \param cv Eingabepuffer
 	 */
-	virtual void fromString(CharConv* cv)
+	void fromString(CharConv* cv)
 	{
 		char tmp;
 		cv->fromBuffer(tmp);
@@ -256,21 +254,19 @@ struct ClientCommand
 	short m_direction;
 
 	/**
-	 * \fn void toString(char* buf)
+	 * \fn virtual void toString(CharConv* cv)
 	 * \brief Konvertiert das Objekt in einen String und schreibt ihn in der Puffer
-	 * \param buf Ausgabepuffer
-	 * \return Zeiger hinter den beschriebenen Datenbereich
+	 * \param cv Ausgabepuffer
 	 */
 	virtual void toString(CharConv* cv);
 
 
 	/**
-	 * \fn void fromString(char* buf)
+	 * \fn virtual void fromString(CharConv*  buf)
 	 * \brief Erzeugt das Objekt aus einem String
-	 * \param buf Objekt als String
-	 * \return Zeiger hinter den gelesenen Datenbereich
+	 * \param cv Eingabepuffer
 	 */
-	virtual void fromString(CharConv* cv);
+	virtual void fromString(CharConv*  cv);
 };
 
 /**
@@ -314,7 +310,7 @@ struct PackageHeader
 	 * \param buf Ausgabepuffer
 	 * \return Zeiger hinter den beschriebenen Datenbereich
 	 */
-	virtual void toString(CharConv* cv);
+	void toString(CharConv* cv);
 
 
 	/**
@@ -323,7 +319,7 @@ struct PackageHeader
 	 * \param buf Objekt als String
 	 * \return Zeiger hinter den gelesenen Datenbereich
 	 */
-	virtual void fromString(CharConv* cv);
+	void fromString(CharConv* cv);
 };
 
 #endif //NETWORKSTRUCT_H

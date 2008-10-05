@@ -48,7 +48,7 @@ public:
 	//Fields
 	//Constructors
    /**
-	 * \fn ItemList()
+	 * \fn ItemList(short max_small, short max_medium, short max_big)
 	 * \brief Konstruktor
 	 *
 	 * Legt ein neues ItemList Objekt an
@@ -81,7 +81,7 @@ public:
 
 
 	/**
-	 * \fn Item* getItem(char m_size, int index)
+	 * \fn Item* getItem(Item::Size m_size, int index);
 	 * \brief Gibt einen Zeiger auf das Item der Groesse m_size an der Position index zurueck. Gibt NULL zurueck, wenn der Index die Listengroesse ueberschreitet.
 	 * \param m_size Groesse des Items
 	 * \param indes Index
@@ -89,7 +89,7 @@ public:
 	Item* getItem(Item::Size m_size, int index);
 
 	/**
-	 * \fn int getFreePlace(char m_size)
+	 * \fn int getFreePlace(Item::Size m_size)
 	 * \brief Gibt den Indes  des ersten freien Platzes fuer ein Item der angegebenen Groesse aus.
 	 * \param m_size Groesse des Items
 	 * \return Index fuer einen freien Platz
@@ -235,8 +235,11 @@ class Equipement
 	};
 
 	/**
-	 * \fn Equipement()
+	 * \fn Equipement(short max_small, short max_medium, short max_big)
 	 * \brief Konstruktor
+	 * \param max_small maximale Anzahl kleiner Items
+	 * \param max_medium maximale Anzahl mittlegrosser Items
+	 * \param max_big maximale Anzahl grosser Items	
 	 */
 	Equipement(short max_small, short max_medium, short max_big);
 

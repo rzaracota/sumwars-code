@@ -10,48 +10,48 @@
 class Archer : public Player {
 //Public stuff
 	public:
-	//Fields
-	//Constructors
-	/**
-	 * \fn Archer(World* world, unsigned int id)
-	 * \brief Konstruktor
-	 * \param world Welt
-	 * \param id Objekt-ID
-	 *
-	 * Legt ein neues Archer Objekt an.
-	 */
+		//Fields
+		//Constructors
+		/**
+		* \fn Archer(World* world, int id)
+		* \brief Konstruktor
+		* \param world Welt
+		* \param id Objekt-ID
+		*
+		* Legt ein neues Archer Objekt an.
+		*/
 		Archer(World* world, int id);
-
-
-	/**
-		 * \fn ~Archer()
-		 * \brief Destruktor
-		 *
-		 * Gibt den Allokierten Speicher wieder frei
-	 */
-		~Archer();
-	//Accessor Methods
-	//Operations
-	/**
-		 * \fn virtual bool init ()
-		 * \brief Initialisiert den Magier
-		 * \return bool, der angibt ob die initialisierung erfolgreich war
-	 */
-		virtual bool init ();
-
-	/**
-		 * \fn virtual bool destroy ()
-		 * \brief Zerstoert das Objekt. Die Funktion ist virtuell und wird durch die abgeleiteten Klassen &uuml;berschrieben.
-		 * \return bool, der angibt ob die Zerstoerung erfolgreich war
-	 */
+	
+	
+		/**
+		* \fn ~Archer()
+		* \brief Destruktor
+		*
+		* Gibt den Allokierten Speicher wieder frei
+		*/
+			~Archer();
+		//Accessor Methods
+		//Operations
+		/**
+		* \fn virtual bool init ()
+		* \brief Initialisiert den Magier
+		* \return bool, der angibt ob die initialisierung erfolgreich war
+		*/
+			virtual bool init ();
+	
+		/**
+		* \fn virtual bool destroy ()
+		* \brief Zerstoert das Objekt. Die Funktion ist virtuell und wird durch die abgeleiteten Klassen &uuml;berschrieben.
+		* \return bool, der angibt ob die Zerstoerung erfolgreich war
+		*/
 		virtual bool destroy()
 		{
 			Player::destroy();
 			return true;
 		}
-
+	
 		/**
-		 * \fn virtual void calcDamage(ActionType type,Damage& dmg)
+		 * \fn virtual void calcBaseDamage(Action::ActionType act,Damage& dmg)
 		 * \brief Berechnet den Basisschaden einer Aktion
 		 */
 		virtual void calcBaseDamage(Action::ActionType act,Damage& dmg)
@@ -79,10 +79,10 @@ class Archer : public Player {
 
 	protected:
 
-	/**
-	 * \fn virtual void gainLevel()
-	 * \brief Wird aufgerufen, wenn das Lebewesen ein Levelup erhält. Passt Erfahrung und alle Basisattribute an.
-	 */
+		/**
+		 * \fn virtual void gainLevel()
+		 * \brief Wird aufgerufen, wenn das Lebewesen ein Levelup erhält. Passt Erfahrung und alle Basisattribute an.
+		 */
 		virtual void gainLevel()
 		{
 			Player::gainLevel();

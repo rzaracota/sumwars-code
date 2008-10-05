@@ -36,7 +36,7 @@
 
 /**
  * \class Command
- * \brief Beschreibt ein Kommando, welches eine Figur erhalten kann. Zur Ausf&uuml;hrung des Kommandos wird die Anweisung in mehrere Aktionen unterteilt, die hintereinander ausgef&uuml;hrt werden.
+ * \brief Beschreibt ein Kommando, welches eine Figur erhalten kann. Zur Ausf&uuml;hrung des Kommandos wird die Anweisung in mehrere Aktionen unterteilt, die hintereinander ausgefuehrt werden.
  */
 class Command {
 /**
@@ -50,7 +50,7 @@ public:
 	 * Constructors
 	 */
 	/**
-	 * \fn Command(CommandType type, float goal_coordinate_x, float goal_coordinate_y, int goal_object_id)
+	 * \fn Command(Action::ActionType type, float goal_coordinate_x, float goal_coordinate_y, int goal_object_id)
 	 * \brief Konstruktor
 	 * \param type initialisiert den Typ des Kommandos
 	 * \param goal_coordinate_x initialisiert die x-Koordinate des Zielpunkts
@@ -73,15 +73,15 @@ public:
 	 * \param buf Ausgabepuffer
 	 * \return Zeiger hinter den beschriebenen Datenbereich
 	 */
-	virtual void toString(CharConv* cv);
+	void toString(CharConv* cv);
 	
 	/**
-	 * \fn void fromString(char* buf)
+	 * \fn void fromString(CharConv* buf)
 	 * \brief Erzeugt das Objekt aus einem String
 	 * \param buf Objekt als String
 	 * \return Zeiger hinter den gelesenen Datenbereich
 	 */
-	virtual void fromString(CharConv* cv);
+	void fromString(CharConv* cv);
 	
 	/**
 	 * \fn bool operator!=(Command& other)

@@ -238,19 +238,17 @@ class Projectile
 	}
 	
 	/**
-	 * \fn void toString(CharConv* cv)
+	 * \fn virtual void toString(CharConv* cv)
 	 * \brief Konvertiert das Objekt in einen String und schreibt ihn in der Puffer
-	 * \param buf Ausgabepuffer
-	 * \return Zeiger hinter den beschriebenen Datenbereich
+	 * \param cv Ausgabepuffer
 	 */
 	virtual void toString(CharConv* cv);
 			
 			
 	/**
-	 * \fn void fromString(CharConv* cv)
+	 * \fn virtual void fromString(CharConv* cv)
 	 * \brief Erzeugt das Objekt aus einem String
-	 * \param buf Objekt als String
-	 * \return Zeiger hinter den gelesenen Datenbereich
+	 * \param cv Eingabepuffer
 	 */
 	virtual void fromString(CharConv* cv);
 	
@@ -327,7 +325,7 @@ class Projectile
 	
 	/**
 	 * \fn int getEventMask()
-	 * \brief Gibt die Bitmaske der Events aus#
+	 * \brief Gibt die Bitmaske der Events aus
 	 */
 	int getEventMask()
 	{
@@ -336,6 +334,7 @@ class Projectile
 	
 	/**
 	 * \fn void clearEventMask()
+	 * \brief Setzt die Bitmaske der Events auf 0 
 	 */
 	void clearEventMask()
 	{
@@ -351,131 +350,131 @@ class Projectile
 	
 	protected:
 		
-	/**
-	 * \fn void handleFlying(float dtime)
-	 * \brief Fuehrt update fuer Objekt im Zustand FLYING aus
-	 */
-	void handleFlying(float dtime);
-		
-	/**
-	 * \fn void handleFlying(float dtime)
-	 * \brief Fuehrt update fuer Objekt im Zustand GROWING aus
-	 */
-		void handleGrowing(float dtime);
-	
-	/**
-	 * \fn void handleFlying(float dtime)
-	 * \brief Fuehrt update fuer Objekt im Zustand STABLE aus
-	 */
-	void handleStable(float dtime);
-	
-	/**
-	 * \var float m_speed_x
-	 * \brief Geschwindigkeit in x-Richtung
-	 */
-	float m_speed_x;
-	
-	/**
-	 * \var float m_speed_y
-	 * \brief Geschwindigkeit in y-Richtung
-	 */
-	float m_speed_y;
-	
-	/**
-	 * \var short m_region
-	 * \brief Region in der sich das Projektil befindet
-	 */
-	short m_region;
-	
-	/**
-	 * \var Damage m_damage
-	 * \brief Schaden den das Projektil anrichtet
-	 */
-	Damage m_damage;
-	
-	/**
-	 * \var World* m_world
-	 * \brief Zeiger auf die Welt
-	 */
-		World* m_world;
-	
-	/**
-	 * \var int m_last_hit_object_id
-	 * \brief Zeiger auf das zuletzt getroffene Objekt
-	 */
-	int m_last_hit_object_id;
-	
-	/**
-	 * \var int m_creator
-	 * \brief Erzeuger des Geschosses (wird nicht getroffen)
-	 */
-	WorldObject::TypeInfo::Fraction m_creator_fraction;
-	
-	/**
-	 * \var char m_flags
-	 * \brief einige Einstellungen
-	 */
-	char m_flags;
-	
-	/**
-	 * \var float m_max_radius
-	 * \brief maximaler Radius den das Objekt erreicht
-	 */
-	float m_max_radius;
-	
-	/**
-	 * \var int m_goal_object
-	 * \brief Zielobjekt
-	 */
-	int m_goal_object;
-		
-	/**
-	 * \fn Geometry m_geometry
-	 * \brief Beschreibung der Geometrie
-	 */	
-	Geometry m_geometry;
-	
-	/**
-	 * \fn ProjectileType m_type
-	 * \brief Typ des Projektils
-	 */
-	ProjectileType m_type;
+		/**
+		* \fn void handleFlying(float dtime)
+		* \brief Fuehrt update fuer Objekt im Zustand FLYING aus
+		*/
+		void handleFlying(float dtime);
 			
-	/**
-	 * \fn ProjectileState m_state
-	 * \brief Status des Projektils
-	 */
-	ProjectileState m_state;
-			 
-	/**
-	 * \fn float m_timer
-	 * \brief Timer, Verwendung je nach Art des Projektils und aktuellem Zustand
-	 */
-	float m_timer;
-	
-	/**
-	 * \fn float m_timer_limit
-	 * \brief Wert, bei dessen Erreichen durch den Timer eine Statusveraenderung eintritt
-	 */
-	float m_timer_limit;
-	
-	/**
-	 * \fn m_counter
-	 * \brief Zaehler, Verwendung je Art des Projektils und aktuellem Zustand
-	 */
-	 int m_counter;
-	 
-	 /**
-	  * \var int m_id
-	  * \brief ID des Projektils
-	  */
-	 int m_id;
-	 
-	 /**
-	  * \var int m_event_mask
-	  * \brief Bitmaske mit den beim aktuellen updaten aufgetretenen Events
-	  */
-	 int m_event_mask;
+		/**
+		* \fn void handleFlying(float dtime)
+		* \brief Fuehrt update fuer Objekt im Zustand GROWING aus
+		*/
+		void handleGrowing(float dtime);
+		
+		/**
+		* \fn void handleFlying(float dtime)
+		* \brief Fuehrt update fuer Objekt im Zustand STABLE aus
+		*/
+		void handleStable(float dtime);
+		
+		/**
+		* \var float m_speed_x
+		* \brief Geschwindigkeit in x-Richtung
+		*/
+		float m_speed_x;
+		
+		/**
+		* \var float m_speed_y
+		* \brief Geschwindigkeit in y-Richtung
+		*/
+		float m_speed_y;
+		
+		/**
+		* \var short m_region
+		* \brief Region in der sich das Projektil befindet
+		*/
+		short m_region;
+		
+		/**
+		* \var Damage m_damage
+		* \brief Schaden den das Projektil anrichtet
+		*/
+		Damage m_damage;
+		
+		/**
+		* \var World* m_world
+		* \brief Zeiger auf die Welt
+		*/
+		World* m_world;
+		
+		/**
+		* \var int m_last_hit_object_id
+		* \brief Zeiger auf das zuletzt getroffene Objekt
+		*/
+		int m_last_hit_object_id;
+		
+		/**
+		* \var WorldObject::TypeInfo::Fraction m_creator_fraction
+		* \brief Fraktion des Erzeugers des Geschosses (wird nicht getroffen)
+		*/
+		WorldObject::TypeInfo::Fraction m_creator_fraction;
+		
+		/**
+		* \var char m_flags
+		* \brief einige Einstellungen
+		*/
+		char m_flags;
+		
+		/**
+		* \var float m_max_radius
+		* \brief maximaler Radius den das Objekt erreicht
+		*/
+		float m_max_radius;
+		
+		/**
+		* \var int m_goal_object
+		* \brief Zielobjekt
+		*/
+		int m_goal_object;
+			
+		/**
+		* \fn Geometry m_geometry
+		* \brief Beschreibung der Geometrie
+		*/	
+		Geometry m_geometry;
+		
+		/**
+		* \fn ProjectileType m_type
+		* \brief Typ des Projektils
+		*/
+		ProjectileType m_type;
+				
+		/**
+		* \fn ProjectileState m_state
+		* \brief Status des Projektils
+		*/
+		ProjectileState m_state;
+				
+		/**
+		* \fn float m_timer
+		* \brief Timer, Verwendung je nach Art des Projektils und aktuellem Zustand
+		*/
+		float m_timer;
+		
+		/**
+		* \fn float m_timer_limit
+		* \brief Wert, bei dessen Erreichen durch den Timer eine Statusveraenderung eintritt
+		*/
+		float m_timer_limit;
+		
+		/**
+		* \fn m_counter
+		* \brief Zaehler, Verwendung je Art des Projektils und aktuellem Zustand
+		*/
+		int m_counter;
+		
+		/**
+		* \var int m_id
+		* \brief ID des Projektils
+		*/
+		int m_id;
+		
+		/**
+		* \var int m_event_mask
+		* \brief Bitmaske mit den beim aktuellen updaten aufgetretenen Events
+		*/
+		int m_event_mask;
 	 
 
 };

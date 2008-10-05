@@ -69,7 +69,7 @@ class Spawnpoint : public WorldObject {
 	};
 	
 	/**
-	 * \fn Spawnpoint(World* world, unsigned int id)
+	 * \fn Spawnpoint(World* world, int id)
 	 * \brief Konstruktor
 	 */
 	Spawnpoint(World* world, int id);

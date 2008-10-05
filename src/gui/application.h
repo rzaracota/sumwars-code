@@ -53,7 +53,10 @@ class Application
 		 */
 		void run();
 
-		// nur zum debuggen
+		/**
+		 * \fn Document* getDocument()
+		 * \brief Gibt einen Zeiger auf das Dokument aus
+		 */
 		Document* getDocument()
 		{
 			return m_document;
@@ -135,7 +138,7 @@ class Application
 		CEGUI::OgreCEGUIRenderer* m_ogre_cegui_renderer;
 
 		/**
-		 * \var Ogre::RenderWindow *window
+		 * \var Ogre::RenderWindow *m_window
 		 * \brief Fenster der Applikation
 		 */
 		Ogre::RenderWindow *m_window;
@@ -146,19 +149,13 @@ class Application
 		 */
  		Ogre::SceneManager *m_scene_manager;
 
-		// Kamera
-		// temporaer, wird spaeter View zugeordnet
-		Ogre::Camera *m_camera;
-
+		
 		/**
 		 * \var bool m_shutdown
 		 * \brief true, wenn die Anwendung beendet werden soll
 		 */
 		bool m_shutdown;
 
-		// zum testen
-
-		//CEGUI::Window* pLayout;		// pseudo view
 
 	protected:
 		/**

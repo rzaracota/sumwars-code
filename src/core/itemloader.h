@@ -36,11 +36,35 @@ struct ItemMeshData
  */
 struct DropChanceData
 {
-	int m_level;
-	float m_probability;
-	Item::Size m_size;
-	std::string m_subtype;
+	/**
+	 * \var Item::Type m_type
+	 * \brief Typ des Items
+	 */
 	Item::Type m_type;
+	
+	/**
+	 * \var Item::Subtype m_subtype
+	 * \brief Subtype des Items
+	 */
+	Item::Subtype m_subtype;
+
+	/**
+	 * \var int m_level
+	 * \brief Level des Items
+	 */
+	int m_level;
+	
+	/**
+	 * \var float m_probability
+	 * \brief relative Dropchance
+	 */
+	float m_probability;
+	
+	/**
+	 * \var Item::Size m_size
+	 * \brief Groesse des Items
+	 */
+	Item::Size m_size;
 };
 
 
