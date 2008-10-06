@@ -366,12 +366,6 @@ class Region
 		Matrix2d<Gridunit>* m_data_grid;
 	
 		/**
-			* \var m_neighbour_region[4]
-			* \brief Gibt die vier Nachbarregionen an
-			*/
-		NBRegion m_neighbour_region[4];
-	
-		/**
 		* \var Matrix2d<char> m_tiles
 		* \brief Matrix der Tiles
 		*/
