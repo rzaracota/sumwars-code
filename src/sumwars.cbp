@@ -84,8 +84,6 @@
 		<Unit filename="core\damage.h" />
 		<Unit filename="core\debug.cpp" />
 		<Unit filename="core\debug.h" />
-		<Unit filename="core\dmgprojectile.cpp" />
-		<Unit filename="core\dmgprojectile.h" />
 		<Unit filename="core\document.cpp" />
 		<Unit filename="core\document.h" />
 		<Unit filename="core\dropitem.cpp" />
@@ -133,7 +131,6 @@
 		<Unit filename="core\random.h" />
 		<Unit filename="core\region.cpp" />
 		<Unit filename="core\region.h" />
-		<Unit filename="core\serveraction.h" />
 		<Unit filename="core\servernetwork.cpp" />
 		<Unit filename="core\servernetwork.h" />
 		<Unit filename="core\spawnpoint.cpp" />

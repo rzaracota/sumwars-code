@@ -219,7 +219,7 @@ class SearchField
 		 * \fn void createPotential(int start_x, int start_y)
 		 * \brief Berechnet das Potentialfeld
 		 * \param start_x x-Koordinate der Senke
-		 * \param start_x x-Koordinate der Senke
+		 * \param start_y y-Koordinate der Senke
 		 */
 		void createPotential(int start_x, int start_y);
 		

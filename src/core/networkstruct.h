@@ -18,8 +18,8 @@
 */
 
 /**
- * \file clientstructures.h
- * \defgroup clientstructures \ Strukturen zur Netzwerk&uuml;bertragung
+ * \file networkstruct.h
+ * \defgroup networkstruct \ Strukturen zur Netzwerk&uuml;bertragung
  * \author Hans Wulf
  * \version 1.0
  * \date 2007-05-31
@@ -124,7 +124,7 @@ struct ClientDataRequest
 	int m_id;
 
 	/**
-	 * \fn void toString(CharConv* buf)
+	 * \fn void toString(CharConv* cv)
 	 * \brief Konvertiert das Objekt in einen String und schreibt ihn in der Puffer
 	 * \param cv Ausgabepuffer
 	 */
@@ -136,7 +136,7 @@ struct ClientDataRequest
 
 
 	/**
-	 * \fn void fromString(CharConv* buf)
+	 * \fn void fromString(CharConv* cv)
 	 * \brief Erzeugt das Objekt aus einem String
 	 * \param cv Eingabepuffer
 	 */
@@ -307,8 +307,7 @@ struct PackageHeader
 	/**
 	 * \fn void toString(CharConv* cv)
 	 * \brief Konvertiert das Objekt in einen String und schreibt ihn in der Puffer
-	 * \param buf Ausgabepuffer
-	 * \return Zeiger hinter den beschriebenen Datenbereich
+	 * \param cv Ausgabepuffer
 	 */
 	void toString(CharConv* cv);
 
@@ -316,8 +315,7 @@ struct PackageHeader
 	/**
 	 * \fn void fromString(CharConv* cv)
 	 * \brief Erzeugt das Objekt aus einem String
-	 * \param buf Objekt als String
-	 * \return Zeiger hinter den gelesenen Datenbereich
+	 * \param cv Eingabepuffer
 	 */
 	void fromString(CharConv* cv);
 };

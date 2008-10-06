@@ -63,8 +63,10 @@
  * \version 1.0
  * \date 2007/05/28
  */
-//Forward Declarations
 
+/**
+ * Liste von Slotnommern auf denen neue Logins eingegangen sind
+ */
 typedef std::list<int> LoginList;
 
 /**
@@ -80,6 +82,7 @@ public:
 	//Constructors
 	/**
 	 * \fn World(bool server)
+	 * \param server Gibt an, ob der Rechner der Server ist
 	 * \brief Konstruktor
 	 *
 	 * Legt ein neues World Objekt an
@@ -127,6 +130,7 @@ public:
 	 * \fn short insertRegion(Region* region, int rnr)
 	 * \brief Fuegt eine neue Region in die Welt ein
 	 * \param region Einzufuegende Region
+	 * \param rnr ID der Region
 	 * \return gibt die ID der Region an, die an allen Objekten in der Region gespeichert wird. Im Falle eines Fehlers wird -1 zurueckgegeben.
 	 */
 	short insertRegion(Region* region, int rnr);
@@ -242,6 +246,9 @@ public:
 	 * \fn bool  insertObject (WorldObject* object, float x, float y, short region)
 	 * \brief F&uuml;gt WorldObject ein
 	 * \param object Zeiger auf das Objekt, welches eingef&uuml;gt werden soll
+	 * \param x x-Koordinate
+	 * \param y y-Koordinate
+	 * \param region Region in der sich das Projektil befindet
 	 * \return bool, der angibt, ob die Operation erfolgreich war
 	 *
 	 * F&uuml;gt das WorldObject in die internen Datenstrukturen ein. Wenn das Einf&uuml;gen erfolgreich war, so wird true zur&uuml;ckgegeben, sonst false.
@@ -259,6 +266,9 @@ public:
 	 * \fn bool  insertProjectile(Projectile* object, float x, float y, short region)
 	 * \brief Fuegt ein Projektil ein
 	 * \param object Zeiger auf das Objekt, welches eingef&uuml;gt werden soll
+	 * \param x x-Koordinate
+	 * \param y y-Koordinate
+	 * \param region Region in der sich das Projektil befindet
 	 * \return bool, der angibt, ob die Operation erfolgreich war
 	 *
 	 */
@@ -288,7 +298,7 @@ public:
 	bool moveObject(WorldObject* object, float x, float y);
 
 	/**
-	 * \fn bool lineIntersect(float xstart, float xstart, float xend,float yend, float dir[2],Shape* s)
+	 * \fn static bool lineIntersect(float xstart, float ystart, float xend,float yend ,float dir[2],Shape* s)
 	 * \brief Prueft ob sich die Form auf der Linie befindet
 	 * \param xstart x-Koordinate Startpunkt
 	 * \param ystart y-Koordinate Startpunkt
@@ -315,7 +325,7 @@ public:
 	bool calcPotential(PathfindInfo* pathinfo);
 
 	/**
-	 * \fn void calcPathDirection(PathfindInfo* pathfinfo, float x_coordinate, float y_coordinate, float dir[2])
+	 * \fn void calcPathDirection(PathfindInfo* pathinfo, float x_coordinate, float y_coordinate, float dir[2])
 	 * \brief Berechnet die Bewegungsrichtung auf Basis der gegebenen Wegfindeinformation
 	 * \param pathinfo verwendete Wegfindeinformation
 	 * \param x_coordinate Standpunkt, x-Koordinate
@@ -453,7 +463,7 @@ public:
 	/**
 	 * \fn void handleSavegame(CharConv *cv, int slot=LOCAL_SLOT)
 	 * \brief Behandelt den Empfang eines Savegames
-	 * \param data Savegame
+	 * \param cv Eingabepuffer
 	 * \param slot Slot ueber den das Savegame empfangen wurde. Wenn das Savegame nicht ueber das Netzwerk uebertragen wurde -1
 	 */
 	void handleSavegame(CharConv *cv , int slot=LOCAL_SLOT);

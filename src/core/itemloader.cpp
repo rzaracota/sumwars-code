@@ -1,6 +1,6 @@
 #include "itemloader.h"
 
-int ItemLoader::generateItemBasicData(TiXmlElement* pElement, string element)
+int ItemLoader::generateItemBasicData(TiXmlElement* pElement, std::string element)
 {
 	if ( !pElement ) return 0;
 
@@ -322,7 +322,7 @@ std::list<ItemBasicData*>* ItemLoader::loadItemBasicData(const char* pFilename)
 
 //##############################################################################
 
-int ItemLoader::generateDropChanceData(TiXmlElement* pElement, string element)
+int ItemLoader::generateDropChanceData(TiXmlElement* pElement, std::string element)
 {
 	if ( !pElement ) return 0;
 
@@ -470,7 +470,7 @@ std::list<DropChanceData*>* ItemLoader::loadDropChanceData(const char* pFilename
 
 //##############################################################################
 
-int ItemLoader::generateItemMeshData(TiXmlElement* pElement, string element)
+int ItemLoader::generateItemMeshData(TiXmlElement* pElement, std::string element)
 {
 	if ( !pElement ) return 0;
 

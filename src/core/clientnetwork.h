@@ -63,6 +63,7 @@ class ClientNetwork : public Network
 	/**
 	 * \fn virtual int numberSlotMessages(int slot=0)
 	 * \brief Anzahl der Packete im Empfangspuffer
+	 * \param slot Nummer des Slots dessen Paketanzahl abgefragt wird -  beim Client immer 0
 	 * \return Anzahl der Packete
 	 *
 	 * Ist der Slot ungeultig wird Null geliefert, sonst die Anzahl der Packete im Empfangspuffers
@@ -74,7 +75,7 @@ class ClientNetwork : public Network
 	 * \fn virtual void popSlotMessage(Packet* &data, int slot=0)
 	 * \brief Fuehrt net_pop_slot_message auf den Client-Slots
 	 * \param data Puffer fuer die zu kopierenden Daten
-	 * \param size Groesse des Datenblocks
+	 * \param slot Nummer des Slots aus dem ein Paket entnommen wird -  beim Client immer 0
 	 * \return Status der Methode
 	 *
 	 */
@@ -82,19 +83,19 @@ class ClientNetwork : public Network
 
 
 	/**
-	 * \fnvirtual  void pushSlotMessage( RakNet::BitStream * data,int slot=0, PacketPriority prio= HIGH_PRIORITY,PacketReliability reliability = RELIABLE )
+	 * \fn virtual  void pushSlotMessage( RakNet::BitStream * data,int slot=0, PacketPriority prio= HIGH_PRIORITY,PacketReliability reliability = RELIABLE )
 	 * \brief Fuehrt net_push_slot_message auf einen Server-Slots aus
 	 * \param data Puffer fuer die zu kopierenden Daten
 	 * \param slot Slot des Empfaengers
-	 * \return Status der Methode
-	 *
+	 * \param prio Prioritaet mit der das Paket gesendet wird
+	 * \param reliability Verlaesslichkeit mit der das Paket gesendet wird
 	 */
 	virtual void pushSlotMessage( RakNet::BitStream * data, int slot=0, PacketPriority prio= HIGH_PRIORITY,PacketReliability reliability = RELIABLE) ;
 
 	/**
 	 * \fn virtual NetStatus getSlotStatus( int slot=0 )
 	 * \brief Liefert den Status eines Server-Slots
-	 * \param slot Slotnummer des Servers
+	 * \param slot Slotnummer des Servers (immer 0)
 	 * \return Status des Slots
 	 *
 	 */

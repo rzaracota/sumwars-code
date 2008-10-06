@@ -109,9 +109,9 @@ struct DropChance
 	Item::Size m_size;
 	
 	/**
-	 * \fn DropChance(int lev, float prob, Item::Size size)
+	 * \fn DropChance(int level, float prob, Item::Size size)
 	 * \brief Erzeugt neue DropChance Struktur
-	 * \param int level Level ab dem das Item droppen kann
+	 * \param level Level ab dem das Item droppen kann
 	 * \param prob relative Wahrscheinlichkeit
 	 * \param size Groesse des Items
 	 */

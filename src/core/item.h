@@ -139,7 +139,7 @@ struct Item {
 	};
 
 	/**
-	 * \var  Subtype
+	 * Subtype
 	 */
 	typedef std::string Subtype;
 

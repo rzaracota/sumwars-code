@@ -139,7 +139,7 @@ class ServerNetwork: public Network
 		/**
 		 * \fn NetStatus getSlotStatus( int slot=0 )
 		* \brief Liefert den Status eines Server-Slots
-		* \param slot Slotnummer des Servers
+		* \param slot Slotnummer
 		* \return Status des Slots
 		*
 		*/
@@ -155,7 +155,7 @@ class ServerNetwork: public Network
 
 		/**
 		 * \fn virtual int numberSlotMessages(int slot=0)
-		 * \param slot Slot dessen Pakete gezaehlt werden
+		 * \param slot Nummer des Slots dessen Paketanzahl abgefragt wird
 		 * \brief  Gibt Anzahl der Packete im Empfangspuffer aus
 		 * \return Anzahl der Packete
 		 *
@@ -169,7 +169,7 @@ class ServerNetwork: public Network
 		 * \fn void popSlotMessage(Packet* &data, int slot=0)
 		 * \brief Fuehrt net_pop_slot_message auf den Client-Slots
 		 * \param data Puffer fuer die zu kopierenden Daten
-		 * \param size Groesse des Datenblocks
+		 * \param slot Nummer des Slots aus dem ein Paket entnommen wird 
 		 * \return Status der Methode
 		 *
 		 */
@@ -180,6 +180,8 @@ class ServerNetwork: public Network
 		 * \brief Fuehrt net_push_slot_message auf einen Server-Slots aus
 		 * \param data Puffer fuer die zu kopierenden Daten
 		 * \param slot Slot des Empfaengers
+		 * \param prio Prioritaet mit der das Paket gesendet wird
+		 * \param reliability Verlaesslichkeit mit der das Paket gesendet wird
 		 * \return Status der Methode
 		 *
 		 */
@@ -188,8 +190,7 @@ class ServerNetwork: public Network
 		/**
 		 * \fn int popNewLoginSlot();
 		* \brief Prueft ob in login Logindaten vorliegen, sonst gibt die Funktion false zurueck
-		* \param login Enthaelt die Login Informationen
-		* \return
+		* \return Slot auf dem sich ein Spieler eingeloggt hat.
 		*/
 		int popNewLoginSlot();
 

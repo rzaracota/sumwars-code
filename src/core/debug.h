@@ -122,6 +122,12 @@
 
 extern "C"
 {
+	/**
+	 * \fn void hexwrite(char* data,int len)
+	 * \brief Schreibt String hexadezimal auf cout
+	 * \param data String
+	 * \param len Laenge des Strings
+	 */
 	void hexwrite(char* data,int len);
 
 

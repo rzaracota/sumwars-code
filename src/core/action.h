@@ -376,8 +376,7 @@ public:
 	/**
 	 * \fn void toString(CharConv* cv)
 	 * \brief Konvertiert das Objekt in einen String und schreibt ihn in der Puffer
-	 * \param buf Ausgabepuffer
-	 * \return Zeiger hinter den beschriebenen Datenbereich
+	 * \param cvAusgabepuffer
 	 */
 	void toString(CharConv* cv);
 	
@@ -385,8 +384,7 @@ public:
 	/**
 	 * \fn void fromString(CharConv* cv)
 	 * \brief Erzeugt das Objekt aus einem String
-	 * \param buf Objekt als String
-	 * \return Zeiger hinter den gelesenen Datenbereich
+	 * \param cv Eingabepuffer
 	 */
 	void fromString(CharConv* cv);
 	

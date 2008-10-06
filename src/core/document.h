@@ -61,6 +61,9 @@
  *
  */
 
+/**
+ * Code fuer eine Taste
+ */
 typedef int KeyCode;
 
 class Document
@@ -159,6 +162,9 @@ class Document
 		USE_SKILL_RIGHT=300,
 	};
 
+	/**
+	 * Bildet von Tastencodes auf eine Wirkung ab
+	 */
 	typedef std::map<KeyCode,ShortkeyDestination> ShortkeyMap;
 
 
@@ -384,16 +390,6 @@ class Document
 	void setLeftAction(Action::ActionType a);
 
 
-	/**
-	 * \fn Action::ActionType getLeftAction()
-	 * \brief Gibt die Aktion, die durch die linke Maustaste ausgeloest wird, zurueck
-	 */
-	/*
-	Action::ActionType getLeftAction()
-	{
-		return m_left_action;
-	}
-	*/
 
 	/**
 	 * \fn void setRightAction(Action::ActionType a)
@@ -633,133 +629,99 @@ class Document
 		 */
 		void updateContent(float time);
 
-		/**
-		 * \fn void handleDatapkg(CharConv* cv)
-		 * \param datap Zeiger auf das Datenpaket
-		 * \param headerp Zeiger auf den Header des Datenpaketes
-		 * \brief Behandlung von Datenpaketen
-	 	*/
-		//void handleDataPkg(CharConv* cv,ServerHeader* headerp);
-
 
 		/**
-		 * \fn void handleSavegame(CharConv* cv)
-		 * \brief Behandlung von Savegamepaketen
-		 * \param datap Zeiger auf die Daten
-	 	*/
-		//void handleSavegame(CharConv* cv);
-
+		* \fn int getObjectAt(float x,float y)
+		* \brief Ermittelt die ID des Objektes an den angegebenen Koordinaten
+		 * \param x x-Koordinate
+		 * \param y y-Koordinate
+		* \return ID
+		*/
+		int getObjectAt(float x,float y);
+	
+	
+	
+	
 		/**
-		 * \fn void handleDetailedItem(CharConv* cv)
-		 * \brief Behandlung von Informationen zu einem Item
-		 * \param datap Zeiger auf die Daten
-	 	*/
-		//void handleDetailedItem(CharConv* cv);
-
-		/**
-		 * \fn void handleRegionData(CharConv* cv)
-		 * \brief Behandlung der Daten einer Region
-	 	 */
-		//void handleRegionData(CharConv* cv);
-
-		/**
-		 * \fn void handleDatapkg(CharConv* cv)
-		 * \param datap Zeiger auf das Datenpaket
-		 * \param headerp Zeiger auf den Header des Datenpaketes
-		 * \brief Behandlung von informationen zum Schaden einer Aktion
-		 */
-		//void handleAbilityDamage(CharConv* cv, ServerHeader* headerp);
-
-	/**
-	 * \fn int getObjectAt(float x,float y)
-	 * \brief Ermittelt die ID des Objektes an den angegebenen Koordinaten
-	 * \return ID
-	 */
-	int getObjectAt(float x,float y);
-
-
-
-
-	/**
-	 * \var GUIState m_gui_state
-	 * \brief Enthaelt alle Informationen zum Zustand der GUI
-	 */
+		* \var GUIState m_gui_state
+		* \brief Enthaelt alle Informationen zum Zustand der GUI
+		*/
 		GUIState m_gui_state;
-
-
-	/**
-	 * \var m_data_locks
-	 * \brief Gibt die Anzahl der Locks auf den Daten des Dokuments an. Die Daten koennen nur veraendert und von aussen gelesen werden, wenn die Anzahl gleich 0 ist
-	 */
+	
+	
+		/**
+		* \var m_data_locks
+		* \brief Gibt die Anzahl der Locks auf den Daten des Dokuments an. Die Daten koennen nur veraendert und von aussen gelesen werden, wenn die Anzahl gleich 0 ist
+		*/
 		int m_data_locks;
-
-	/**
-	 * \var char* m_savegame
-	 * \brief Aktueller Spielstand in Binaerformat
-	 */
+	
+		/**
+		* \var char* m_savegame
+		* \brief Aktueller Spielstand in Binaerformat
+		*/
 		char* m_savegame;
-
-
-	/**
-	 * \var int m_modified
-	 * \brief Bitmaske welche angibt welche Teile des Dokuments veraendert wurden
-	 */
+	
+	
+		/**
+		* \var int m_modified
+		* \brief Bitmaske welche angibt welche Teile des Dokuments veraendert wurden
+		*/
 		int m_modified;
-
-	/**
-	 * \var string m_save_file
-	 * \brief Dateiname des Savefiles
-	 */
+	
+		/**
+		* \var string m_save_file
+		* \brief Dateiname des Savefiles
+		*/
 		string m_save_file;
-
-	/**
-	 * \var State m_state
-	 * \brief Status des Dokuments
-	 */
+	
+		/**
+		* \var State m_state
+		* \brief Status des Dokuments
+		*/
 		State m_state;
-
-	/**
-	* \var ShortkeyMap m_shortkey_map
-	 * \brief Bildet Taste auf Ereignis, das per Shortkey ausgeloest werden kann ab
-	 */
-	ShortkeyMap m_shortkey_map;
-
-	/**
-	 * \var std::set<KeyCode> m_special_keys
-	 * \brief Menge der Tasten, die eine besondere Bedeutung haben und die deswegen nicht frei zugewiesen werden koennen
-	 */
-    std::set<KeyCode> m_special_keys;
-
-
-	/**
-	 * \var char m_server_ip[16]
-	 * \brief IP des Servers
-	 */
-	char m_server_ip[16];
-
-	/**
-	 * \var World* m_world
-	 * \brief Welt die von dem Spiel simuliert wird
-	 */
-	World* m_world;
-
-	/**
-	 * \var bool m_server
-	 * \brief true, wenn der aktuelle Rechner der Server ist
-	 */
-	bool m_server;
-
-	/**
-	 * \var Timer m_timer
-	 * \brief Timer fuer die Updatezyklen der Spielwelt
-	 */
-	Timer m_timer;
-
-	/**
-	 * \var m_shutdown_timer
-	 * \brief Timer fuer Shutdown
-	 */
-	float m_shutdown_timer;
+	
+		/**
+		* \var ShortkeyMap m_shortkey_map
+		* \brief Bildet Taste auf Ereignis, das per Shortkey ausgeloest werden kann ab
+		*/
+		ShortkeyMap m_shortkey_map;
+	
+		/**
+		* \var std::set<KeyCode> m_special_keys
+		* \brief Menge der Tasten, die eine besondere Bedeutung haben und die deswegen nicht frei zugewiesen werden koennen
+		*/
+		std::set<KeyCode> m_special_keys;
+	
+	
+		/**
+		* \var char m_server_ip[16]
+		* \brief IP des Servers
+		*/
+		char m_server_ip[16];
+	
+		/**
+		* \var World* m_world
+		* \brief Welt die von dem Spiel simuliert wird
+		*/
+		World* m_world;
+	
+		/**
+		* \var bool m_server
+		* \brief true, wenn der aktuelle Rechner der Server ist
+		*/
+		bool m_server;
+	
+		/**
+		* \var Timer m_timer
+		* \brief Timer fuer die Updatezyklen der Spielwelt
+		*/
+		Timer m_timer;
+	
+		/**
+		* \var m_shutdown_timer
+		* \brief Timer fuer Shutdown
+		*/
+		float m_shutdown_timer;
 
 };
 

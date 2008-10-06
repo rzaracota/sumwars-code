@@ -18,29 +18,7 @@
 #include <algorithm>
 
 class Gridunit;
-
-
-struct NBRegion
-{
-	/**
-	 * \var m_region_id
-	 * \brief ID der Region
-	 */
-	short m_region_id;
-
-	/**
-	 * \var m_dx
-	 * \brief Aenderung der x-Koordinate beim Uebertritt in diese Region
-	 */
-	float m_dx;
-
-	/**
-	 * \var m_dy
-	 * \brief Aenderung der y-Koordinate beim Uebertritt in diese Region
-	 */
-	float m_dy;
-};
-
+	
 /**
  * \class Region
  * \brief Eine Region ist ein rechteckiges Teilstueck der Spielwelt. Monster und Geschosse koennen nicht zwischen Regionen wechseln
@@ -70,6 +48,8 @@ class Region
 		 * \fn insertObject (WorldObject* object, float x, float y)
 		 * \brief F&uuml;gt WorldObject ein
 		 * \param object Zeiger auf das Objekt, welches eingef&uuml;gt werden soll
+		 * \param x x-Koordinate
+		 * \param y y-Koordinate
 		 * \return bool, der angibt, ob die Operation erfolgreich war
 		 *
 		 * F&uuml;gt das WorldObject in die internen Datenstrukturen ein. Wenn das Einf&uuml;gen erfolgreich war, so wird true zur&uuml;ckgegeben, sonst false.
@@ -113,18 +93,25 @@ class Region
 		 * \param omit Objekt, das ausgelassen wird
 		 * \param empty_test wenn true, wird nach dem ersten gefundenen Objekt abgebrochen
 		 * \param group Gruppen die durchsucht werden sollen
+		 * \param shape Es werden nur Objekte hinzugefuegt die diese Flaeche beruehren
+		 * \param gu Gridunit aus der Objekte hinzugefuegt werden
 		 * \return bool, der angibt, ob die Operation erfolgreich war
 		 **/
 		bool addObjectsInShapeFromGridunit(Shape* shape, Gridunit* gu, WorldObjectList* result, short layer=WorldObject::Geometry::LAYER_ALL, short group = WorldObject::GROUP_ALL,WorldObject* omit=0, bool empty_test = false );
 
 		/**
 		 * \fn bool addObjectsOnLineFromGridunit(float xstart, float ystart, float xend,float yend, Gridunit* gu, WorldObjectList* result, short layer=WorldObject::Geometry::LAYER_ALL, short group = WorldObject::GROUP_ALL,WorldObject* omit=0, bool empty_test = false )
-		 * \brief Fuegt alle Objekte aus der Gridunit, die sich auf der Linie befinden zu der Liste hinzu
+		 * \brief Fuegt alle Objekte aus der Gridunit, die sich in einer Flaeche befinden zu der Liste hinzu (intern)
 		 *  \param layer Ebene in der gesucht wird
 		 * \param result Liste, an die die gefundenen Objekte angehangen werden
 		 * \param omit Objekt, das ausgelassen wird
 		 * \param empty_test wenn true, wird nach dem ersten gefundenen Objekt abgebrochen
 		 * \param group Gruppen die durchsucht werden sollen
+		 * \param xstart Startpunkt der Linie (x)
+		 * \param xstart Startpunkt der Linie (y)
+		 * \param xend Endpunkt der Linie (x)
+		 * \param yend Endpunkt der Linie (y)
+		 * \param gu Gridunit aus der Objekte hinzugefuegt werden
 		 * \return bool, der angibt, ob die Operation erfolgreich war
 		 **/
 		bool addObjectsOnLineFromGridunit(float xstart, float ystart, float xend,float yend, Gridunit* gu, WorldObjectList* result, short layer=WorldObject::Geometry::LAYER_ALL, short group = WorldObject::GROUP_ALL,WorldObject* omit=0, bool empty_test = false );
@@ -140,6 +127,7 @@ class Region
 		/**
 		 * \fn WorldObject* getObject ( int id)
 		 * \brief Sucht Objekt anhand seiner ID heraus
+		 * \param id ID des Objekts
 		 * \return Objekt, Nullzeiger wenn das Objekt nicht existiert
 		 */
 		WorldObject* getObject ( int id);
@@ -182,6 +170,8 @@ class Region
 		 * \fn bool  insertProjectile(Projectile* object, float x, float y)
 		 * \brief Fuegt ein Projektil ein
 		 * \param object Zeiger auf das Objekt, welches eingef&uuml;gt werden soll
+		 * \param x x-Koordinate
+		 * \param y y-Koordinate
 		 * \return bool, der angibt, ob die Operation erfolgreich war
 		 *
 		 */
@@ -248,7 +238,7 @@ class Region
 		void update(float time);
 
 		/**
-		 * \fn bool dropItem(Item*, float x, float y)
+		 * \fn bool dropItem(Item* item, float x, float y)
 		 * \brief Laesst Item in der Region fallen
 		 * \param item Gegenstand
 		 * \param x x-Koordinate
@@ -259,6 +249,8 @@ class Region
 
 		/**
 		 * \fn Item* getItemAt(float x, float y)
+		 * \param x x-Koordinate
+		 * \param y y-Koordinate
 		 * \brief Gibt Item an der angegebenen Position aus. Gibt NULL aus, wenn dort kein Item ist
 		 */
 		Item* getItemAt(float x, float y);
@@ -286,7 +278,7 @@ class Region
 		/**
 		 * \fn void getRegionData(CharConv* cv)
 		 * \brief Schreibt alle Objekte, Projektile, Items und Tiles in einen String
-		 * \param buf Eingabepuffer
+		 * \param cv Eingabepuffer
 		 * \return Zeiger hinter den beschriebenen Bereich
 		 */
 		void getRegionData(CharConv* cv);
@@ -295,7 +287,7 @@ class Region
 		 * \fn void setRegionData(CharConv* cv, WorldObjectMap* players)
 		 * \brief Liest die Objekte, Projektile, Items und Tiles aus einem String ein
 		 * \param cv Eingabepuffer
-		 * \param Liste der Spieler (die Spieler werden nicht neu erzeugt, sondern nur eingefuegt)
+		 * \param players Liste der Spieler (die Spieler werden nicht neu erzeugt, sondern nur eingefuegt)
 		 */
 		void setRegionData(CharConv* cv, WorldObjectMap* players);
 

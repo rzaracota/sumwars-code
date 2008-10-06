@@ -45,6 +45,8 @@ public:
 	
 	/**
 	 * \fn FixedObject(World* world, int id)
+	 * \param world Zeiger auf die Welt
+	 * \param id ID des Objekts
 	 * \brief Konstruktor
 	 */
 	FixedObject(World* world, int id);

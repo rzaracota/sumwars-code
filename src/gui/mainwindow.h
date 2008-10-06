@@ -24,8 +24,10 @@
 #include "gettext.h"
 #include "player.h"
 
-// Sample sub-class for ListboxTextItem that auto-sets the selection brush
-// image.  This saves doing it manually every time in the code.
+/**
+ * \class ListItem
+ * \brief Eintrag einer CEGUI Auswahlliste
+ */
 class ListItem : public CEGUI::ListboxTextItem
 {
 	public:
@@ -35,7 +37,10 @@ class ListItem : public CEGUI::ListboxTextItem
 		}
 };
 
-
+/**
+ * \class SaveListItem
+ * \brief Eintrag der Auswahlliste der Savegames
+ */
 class SaveListItem : public ListItem
 {
 	public:
@@ -342,8 +347,7 @@ class MainWindow :
 
 	/**
 	 * \fn bool consumeEvent(const CEGUI::EventArgs& evt)
-	 * \brief Funktion die Events verbraucht
-	 * \fn gibt immer true zurueck
+	 * \brief Funktion die Events verbraucht, gibt immer true zurueck
 	 */
 	bool consumeEvent(const CEGUI::EventArgs& evt)
 	{

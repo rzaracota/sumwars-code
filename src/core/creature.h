@@ -17,7 +17,7 @@
 	51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
 /**
- * \file Creature.h
+ * \file creature.h
  * \defgroup Creature \ Lebewesen
  * \ingroup worldobject
  * \brief Klasse Creature
@@ -54,7 +54,7 @@
 
 // forward declaration
 /**
- * \fn class Creature
+ * \class Creature
  * \brief Klasse fuer Lebewesen
  */
 class Creature : public WorldObject 
@@ -237,6 +237,7 @@ public:
 	 * \fn void applyBaseAttrMod(CreatureBaseAttrMod* mod,bool add = true)
 	 * \brief Wendet fuer die Zeitdauer time die temporaere Modifikation mod auf das Lebewesen an. Falls time gleich 0 so wird die Veraenderung permanent angewendet
 	 * \param mod Modifikation
+	 * \param add Gibt an, ob die die Modifikation zur Liste der wirksamen Modifikationen hinzugefuegt werden soll
 	 */
 	void applyBaseAttrMod(CreatureBaseAttrMod* mod, bool add = true);
 	
@@ -263,6 +264,7 @@ public:
 	 * \param y_start y-Koordinate des Startpunktes
 	 * \param base_size Durchmesser der Standflaeche des Weg suchenden Lebewesens
 	 * \param layer Ebene in der auf Kollisionen getestet werden soll
+	 * \param region Region in der gesucht werden soll
 	 * \param dir Rueckgabevektor
 	 */
 	void getPathDirection(float x_start, float  y_start,short region, float base_size, short layer,  float dir[2]);

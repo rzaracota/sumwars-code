@@ -124,6 +124,9 @@ class Projectile
 	/**
 	 * \fn Projectile(World* w, ProjectileType type, WorldObject::TypeInfo::Fraction fr, int id)
 	 * \param type Typ des Projektils
+	 * \param w Welt
+	 * \param fr Fraktion des Spielers der das Projektil erzeugt hat
+	 * \param id ID des Projektils
 	 * \brief Konstruktor
 	 */
 	Projectile(World* w, ProjectileType type, WorldObject::TypeInfo::Fraction fr, int id);
@@ -341,12 +344,6 @@ class Projectile
 		m_event_mask =0;
 	}
 	
-	/**
-	 * \fn virtual void update()
-	 * \brief Berechnet die Veraenderungen am Object waerend der letzten time Millisekunden
-	 * \param time vergangene Zeit in Millisekunden
-	 */
-	//virtual void update(float& time) =0;
 	
 	protected:
 		
@@ -479,6 +476,9 @@ class Projectile
 
 };
 
+/**
+ * Liste von Projektilen sortiert nach ihrer ID
+ */
 typedef std::map<int,Projectile*> ProjectileMap;
 
 #include "world.h"

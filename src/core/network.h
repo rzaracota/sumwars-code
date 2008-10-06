@@ -77,13 +77,14 @@ class Network
 		
 		/**
 		 * \fn unsigned char getPacketIdentifier(Packet *p)
+		 * \param p Paket
 		 * \brief Extrahier aus einem Packet die Identifikationsnummer
 		 */
 		unsigned char getPacketIdentifier(Packet *p);
 		
 		/**
 		 * \fn virtual int numberSlotMessages(int slot=0) =0;
-		 * \param slot Slot
+		 * \param slot Nummer des Slots dessen Paketanzahl abgefragt wird 
 		 * \brief Anzahl der Packete im Empfangspuffer
 		 * \return Anzahl der Packete
 		 *
@@ -96,9 +97,7 @@ class Network
 		 * \fn void popSlotMessage(Packet* &data, int slot=0)
 		 * \brief Fuehrt net_pop_slot_message auf den Client-Slots
 		 * \param data Puffer fuer die zu kopierenden Daten
-		 * \param size Groesse des Datenblocks
-		 * \return Status der Methode
-		 *
+		 * \param slot Nummer des Slots aus dem ein Paket entnommen wird 
 		 */
 		virtual void popSlotMessage( Packet* &data, int slot=0) =0;
 		
@@ -107,13 +106,15 @@ class Network
 		 * \brief Fuehrt net_push_slot_message auf einen Server-Slots aus
 		 * \param data Puffer fuer die zu kopierenden Daten
 		 * \param slot Slot des Empfaengers
-		 * \return Status der Methode
+		 * \param prio Prioritaet mit der das Paket gesendet wird
+		 * \param reliability Verlaesslichkeit mit der das Paket gesendet wird
 		 *
 		 */
 		virtual void pushSlotMessage( RakNet::BitStream * data, int slot=0, PacketPriority prio= HIGH_PRIORITY,PacketReliability reliability = RELIABLE) =0;
 		
 		/**
 		 * \fn void deallocatePacket(Packet* packet)
+		 * \param packet zu loeschendes Paket
 		 * \brief Loescht ein nicht mehr benoetigtes Paket. Um Speicherlecks zu vermeiden sollten alle Paket auf mit dieser Funktion entfernt werden
 		 */
 		void deallocatePacket(Packet* packet)
@@ -124,7 +125,7 @@ class Network
 		/**
 		 * \fn NetStatus getSlotStatus( int slot=0 )
 		 * \brief Liefert den Status eines Server-Slots
-		 * \param slot Slotnummer des Servers
+		 * \param slot Slotnummer
 		 * \return Status des Slots
 		 *
 		 */
@@ -140,6 +141,9 @@ class Network
 		
 };
 
+/**
+ * Warteschlange von Netzwerkpaketen
+ */
 typedef std::queue<Packet*> PacketQueue;
 
 #endif

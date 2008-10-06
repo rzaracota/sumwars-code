@@ -52,7 +52,7 @@ class ObjectFactory
 	/**
 	 * \fn static registerMonster(WorldObject::TypeInfo::ObjectSubtype subtype, MonsterBasicData* data)
 	 * \brief Registriert die Daten fuer ein bestimmten Monstertyp
-	 * \param subtyp Subtyp des Monsters
+	 * \param subtype Subtyp des Monsters
 	 * \param data Daten des Monsters
 	 */
 	static void registerMonster(WorldObject::TypeInfo::ObjectSubtype subtype, MonsterBasicData* data);

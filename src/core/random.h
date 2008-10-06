@@ -28,6 +28,7 @@ class Random
 	
 	/**
 	 * \fn static float randf(float f)
+	 * \param f Obergrenze
 	 * \return Zufallszahl zwischen 0 und f
 	 */
 	static float randf(float f)
@@ -37,6 +38,7 @@ class Random
 	
 	/**
 	 * \fn static int randi(int i)
+	 * \param i Obergrenze
 	 * \return Zufallszahl zwischen 0 und i-1
 	 */
 	static int randi(int i)
@@ -46,6 +48,8 @@ class Random
 	
 	/**
 	 * \fn static float randrangef(float f1, float f2)
+	 * \param f1 Untergrenze
+	 * \param f2 Obergrenze
 	 * \return Zufallszahl zwischen f1 und f2
 	 */
 	static float randrangef(float f1, float f2)
@@ -55,6 +59,8 @@ class Random
 	
 	/**
 	 * \fn static int randrangei(int i1, int i2)
+	 * \param i1 Untergrenze
+	 * \param i2 Obergrenze
 	 * \return Zufallszahl zwischen i2 und i2
 	 */
 	static int randrangei(int i1, int i2)

@@ -81,25 +81,26 @@ public:
 
 
 	/**
-	 * \fn Item* getItem(Item::Size m_size, int index);
+	 * \fn Item* getItem(Item::Size size, int index);
 	 * \brief Gibt einen Zeiger auf das Item der Groesse m_size an der Position index zurueck. Gibt NULL zurueck, wenn der Index die Listengroesse ueberschreitet.
-	 * \param m_size Groesse des Items
-	 * \param indes Index
+	 * \param size Groesse des Items
+	 * \param index Index
 	 */
-	Item* getItem(Item::Size m_size, int index);
+	Item* getItem(Item::Size size, int index);
 
 	/**
-	 * \fn int getFreePlace(Item::Size m_size)
+	 * \fn int getFreePlace(Item::Size size)
 	 * \brief Gibt den Indes  des ersten freien Platzes fuer ein Item der angegebenen Groesse aus.
-	 * \param m_size Groesse des Items
+	 * \param size Groesse des Items
 	 * \return Index fuer einen freien Platz
 	 */
-	int getFreePlace(Item::Size m_size);
+	int getFreePlace(Item::Size size);
 
 	/**
-	 * \fn void swapItem(Item* item, int index)
+	 * \fn  swapItem(Item* &item,Item::Size size, int index)
 	 * \brief vertauscht den angegebene Gegenstand mit dem gleichgrossen an Position index. Ein Gegenstand wird aus der Liste entfernt, indem man ihn mit einem leeren Gegenstand austauscht. Ein Gegenstand wird in die Liste eingefuegt, indem man einen leeren Platz der richtigen Groesse sucht und damit austauscht.
 	 * \param item Zeiger auf den zu tauschenden Gegenstand
+	 * \param size Groesse des Items
 	 * \param index Position des Gegenstandes in der Liste, mit dem getauscht werden soll
 	 */
 	void swapItem(Item* &item,Item::Size size, int index);
@@ -274,7 +275,7 @@ class Equipement
 	/**
 	 * \fn bool swapItem(Item* &item, int pos)
 	 * \param pos Position des Items
-	 * \param Item Zeiger auf das Item das getauscht wird. Nach beenden der Funktion Zeiger auf das Item das aus dem Inventar herrausgetauscht wurde
+	 * \param item Zeiger auf das Item das getauscht wird. Nach beenden der Funktion Zeiger auf das Item das aus dem Inventar herrausgetauscht wurde
 	 * \brief Tauscht das angegebene Item mit dem an der angegebenen Position
 	 */
 	bool swapItem(Item* &item, int pos);
@@ -289,10 +290,9 @@ class Equipement
 	/**
 	 * \fn virtual void toString(CharConv* cv,int& nr, bool secondary_equip)
 	 * \brief Konvertiert das Objekt in einen String und schreibt ihn in der Puffer
-	 * \param buf Ausgabepuffer
+	 * \param cv Ausgabepuffer
 	 * \param nr Anzahl der Items
 	 * \param secondary_equip Wenn true, wird die zweite Ausruestung geschrieben
-	 * \return Zeiger hinter den beschriebenen Datenbereich
 	 */
 	virtual void toString(CharConv* cv,int& nr, bool secondary_equip);
 
@@ -300,9 +300,8 @@ class Equipement
 	/**
 	 * \fn virtual void fromString(CharConv* cv,int nr)
 	 * \brief Erzeugt das Objekt aus einem String
-	 * \param buf Objekt als String
+	 * \param cv Eingabepuffer
 	 * \param nr Anzahl der Items
-	 * \return Zeiger hinter den gelesenen Datenbereich
 	 */
 	virtual void fromString(CharConv* cv,int nr);
 

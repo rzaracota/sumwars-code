@@ -20,7 +20,6 @@
 /**
  * \file player.h
  * \defgroup Player \ Menschlicher Nutzer
- * \ingroup Player
  * \brief Steuerung eines nutzerkontrollierten Spielers
  * \author Hans Wulf
  * \version 1.0
@@ -31,7 +30,6 @@
 #define PLAYER_H
 #include <string>
 #include "creature.h"
-//#include "trade.h"
 #include "itemlist.h"
 #include "dropitem.h"
 #include "networkstruct.h"

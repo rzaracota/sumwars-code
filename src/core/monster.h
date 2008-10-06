@@ -33,6 +33,9 @@
 #include "dropslot.h"
 #include "monsterbase.h"
 
+/**
+ * Liste von WorldObject Zeiger mit jeweils einer Bewertung
+ */
 typedef std::list<std::pair<WorldObject*,float> > WorldObjectValueList;
 
 /**

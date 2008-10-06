@@ -694,8 +694,14 @@ private:
 
 #include "damage.h"
 
+/**
+ * Liste von WorldObject Zeigern sortiert nach ihrer ID
+ */
 typedef std::map<int,WorldObject*> WorldObjectMap;
-		 
+	
+/**
+ * Liste von WorldObject Zeigern
+ */
 typedef std::list<WorldObject*> WorldObjectList;
 				 
 #endif //WORLDOBJECT_H

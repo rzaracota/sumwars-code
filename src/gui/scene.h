@@ -144,6 +144,8 @@ class Scene
 	 * \fn void  createObject(WorldObject* obj,std::string& name, bool is_static)
 	 * \brief Erzeugt auf Basis eines Objektes eine Ogre Objekt
 	 * \param obj Objekt fuer das eine Ogre Entity erzeugt werden soll
+	 * \param name Name des Objektes
+	 * \param is_static gibt an, ob das Objekt statisch ist
 	 */
 	void  createObject(WorldObject* obj,std::string& name, bool is_static = false);
 
@@ -163,7 +165,7 @@ class Scene
 	/**
 	 * \fn void createItem(DropItem* di, std::string& name)
 	 * \brief Erzeugt auf Basis eines Items eine Ogre Entity mit dem angegebenen Name
-	 * \param itm Gegenstand fuer den die Entity erzeugt werden soll
+	 * \param di Gegenstand fuer den die Entity erzeugt werden soll
 	 * \param name der Entitiy
 	 */
 	 void createItem(DropItem* di, std::string& name);
@@ -184,7 +186,7 @@ class Scene
 	/**
 	 * \fn void createProjectile(Projectile* pr, std::string& name)
 	 * \brief Erzeugt auf Basis eines Projektiles eine Ogre Entity mit dem angegebenen Name
-	 * \param itm Projektil fuer das die Entity erzeugt werden soll
+	 * \param pr Projektil fuer das die Entity erzeugt werden soll
 	 * \param name der Entitiy
 	 */
 	void createProjectile(Projectile* pr, std::string& name);
@@ -299,7 +301,7 @@ class Scene
 	/**
 	 * \fn RenderInfo getTileRenderInfo(Tile tile)
 	 * \brief Gibt die Informationen zum rendern eines Tiles aus
-	 * \param Tile Type des Tiles
+	 * \param tile Type des Tiles
 	 */
 	RenderInfo getTileRenderInfo(Tile tile);
 

@@ -65,6 +65,8 @@ public:
 	 * \brief Erzeugt Objekt anhand zweier Parameter
 	 * \param type Typ des Items
 	 * \param subtype Untertyp des Items
+	 * \param id ID des neuen Items. Wenn 0 angegeben wird, dann wird eine neue ID erzeugt
+	 * \param magic_power Verzauberungsstaerke
 	 * \return Neues ServerItem
 	 */
 	static Item* createItem(Item::Type type, Item::Subtype subtype, int id=0, float magic_power =0);
