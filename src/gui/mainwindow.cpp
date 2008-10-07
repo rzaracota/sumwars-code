@@ -1566,7 +1566,7 @@ void MainWindow::setupSkilltree()
 
 	tab = (CEGUI::DefaultWindow*) win_mgr.createWindow("TaharezLook/TabContentPane", "SkilltreeWarrior_3");
 	skilltree_warrior->addTab(tab);
-	tab->setText("??????");
+	tab->setText("Willenskraft");
 
 	name =Action::getActionInfo(Action::DECOY)->m_enum_name;
 	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
@@ -1785,7 +1785,7 @@ void MainWindow::setupSkilltree()
 	// Tab3 <hier Name einsetzen>
 	tab = (CEGUI::DefaultWindow*) win_mgr.createWindow("TaharezLook/TabContentPane", "SkilltreeArcher_3");
 	skilltree_archer->addTab(tab);
-	tab->setText("hmm was hier");
+	tab->setText("Jagdmagie");
 
 	name =Action::getActionInfo(Action::AIMED_SHOT)->m_enum_name;
 	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
