@@ -96,8 +96,20 @@ void Scene::registerMeshes()
 	registerObject("lich","lich.mesh","");
 
 	// feste Objekte
-	registerObject("tree","tree.mesh","");
-	registerObject("fence","fence.mesh","");
+	registerObject("tree1","tree1.mesh","");
+    registerObject("tree2","tree2.mesh","");
+    registerObject("tree3","tree3.mesh","");
+	registerObject("fence1","fence1.mesh","");
+	registerObject("fence2","fence2.mesh","");
+	registerObject("fence3","fence3.mesh","");
+	registerObject("fence4","fence4.mesh","");
+	registerObject("fence5","fence5.mesh","");
+	registerObject("wall1","wall1.mesh","");
+	registerObject("wall2","wall2.mesh","");
+	registerObject("wall3","wall3.mesh","");
+	registerObject("smallWall1","smallWall1.mesh","");
+	registerObject("smallWall2","smallWall2.mesh","");
+	registerObject("stones3","stones3.mesh","");
 
 	// Geschosse
 	registerProjectile(Projectile::ARROW,"arrow.mesh","");
@@ -166,18 +178,18 @@ void Scene::registerMeshes()
 	registerItem("short_sw","sword.mesh");
 #endif
 	registerItem("long_sw","sword.mesh");
-	registerItem("wood_bow","sword.mesh");
-	registerItem("long_bow","sword.mesh");
-	registerItem("fire_bow","sword.mesh");
-	registerItem("battle_axe","greatAxe.mesh");
+	registerItem("wood_bow","shortbow.mesh");
+	registerItem("long_bow","shortbow.mesh");
+	registerItem("fire_bow","shortbow.mesh");
+	registerItem("battle_axe","battleaxe.mesh");
 	registerItem("holy_flail","warhammer.mesh");
-	registerItem("ice_wand","sword.mesh");
+	registerItem("ice_wand","basicStaff.mesh");
 
 	registerItem("leath_arm","armor.mesh");
 	registerItem("tiled_arm","armor.mesh");
 	registerItem("heavy_arm","armor.mesh");
 
-	registerItem("wood_sh","shield.mesh");
+	registerItem("wood_sh","buckler.mesh");
 	registerItem("iron_sh","shield.mesh");
 
 	registerItem("steel_hlm","helmet.mesh");

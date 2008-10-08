@@ -280,17 +280,47 @@ WorldObject* ObjectFactory::createObject(WorldObject::TypeInfo::ObjectType type,
 		ret->setState(WorldObject::STATE_STATIC);
 		wob->m_layer = (WorldObject::Geometry::LAYER_BASE | WorldObject::Geometry::LAYER_AIR);
 
-		if (subtype =="fence")
+		if (subtype =="fence1" || subtype =="fence2" || subtype =="fence3" || subtype =="fence4" || subtype =="fence5")
 		{
 			sp->m_type = Shape::RECT;
-			sp->m_extent_x = 0.3;
-			sp->m_extent_y = 2.5;
+			sp->m_extent_x = 3.84;
+			sp->m_extent_y = 0.15;
 		}
-		else if (subtype =="tree")
+		else if (subtype =="wall1" || subtype =="wall2" || subtype =="wall3")
+		{
+				sp->m_type = Shape::RECT;
+				sp->m_extent_x = 3.04;
+                sp->m_extent_y = 0.61;
+		}
+		else if (subtype =="smallWall1" || subtype == "smallWall2")
+		{
+				sp->m_type = Shape::RECT;
+				sp->m_extent_x = 0.46;
+                sp->m_extent_y = 0.61;
+		}
+		else if (subtype =="tree1")
 		{
 
 				sp->m_type = Shape::CIRCLE;
-				sp->m_radius = 2.8;
+				sp->m_radius = 0.16;
+		}
+        else if (subtype =="tree2")
+		{
+
+				sp->m_type = Shape::CIRCLE;
+				sp->m_radius = 0.14;
+		}
+        else if (subtype =="tree3")
+		{
+
+				sp->m_type = Shape::CIRCLE;
+				sp->m_radius = 0.13;
+		}
+		else if (subtype =="stones3")
+		{
+				sp->m_type = Shape::RECT;
+				sp->m_extent_x = 3.18;
+                sp->m_extent_y = 2.11;
 		}
 	}
 	return ret;

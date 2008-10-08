@@ -125,13 +125,45 @@ void World::createRegion(short region)
 			reg->setTile(TILE_WATER,i,6);
 		}
 
-		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "fence");
-		insertObject(wo, 4,6,rid);
+		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "fence1");
+		insertObject(wo, 4,2,rid);
+		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "fence2");
+		insertObject(wo, 12,2,rid);
+		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "fence3");
+		insertObject(wo, 20,2,rid);
+		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "fence4");
+		insertObject(wo, 28,2,rid);
+		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "fence5");
+		insertObject(wo, 3,22,rid);
+
+        wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "smallWall2");
+		insertObject(wo, 7.5,22,rid);
+
+		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "wall1");
+		insertObject(wo, 11,22,rid);
+		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "wall2");
+		insertObject(wo, 17,22,rid);
+		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "wall3");
+		insertObject(wo, 23,22,rid);
+
+		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "smallWall1");
+		insertObject(wo, 26.5,22,rid);
+
+        wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "stones3");
+		insertObject(wo, 20,6,rid);
 
 
-		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "tree");
+		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "tree1");
 		insertObject(wo, 9,13,rid);
 
+		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "tree2");
+		insertObject(wo, 10,2,rid);
+
+        wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "tree2");
+		insertObject(wo, 0,0,rid);
+
+		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "tree3");
+		insertObject(wo, 1,2,rid);
 
 		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_MONSTER, "goblin");
 		insertObject(wo, 13,8,rid);

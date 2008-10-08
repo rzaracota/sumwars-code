@@ -28,8 +28,8 @@ void Action::init()
 	a->m_animation[NO_WEAPON].push_back("idle");
 	a->m_animation[ONE_HANDED].push_back("idle");
 	a->m_animation[TWO_HANDED].push_back("idle");
-	
-	
+
+
 
 	a = &(Action::m_base_info[Action::WALK]);
 	a->m_timer_nr=0;
@@ -81,6 +81,7 @@ void Action::init()
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_description = "descr_attack";
 	a->m_enum_name = "attack";
+	a->m_animation[NO_WEAPON].push_back("attackUnarmed");
 	a->m_animation[ONE_HANDED].push_back("attack");
 	a->m_animation[TWO_HANDED].push_back("attackTwoHands");
 
@@ -99,6 +100,9 @@ void Action::init()
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_description = "descr_range_attack";
 	a->m_enum_name = "range_attack";
+    a->m_animation[NO_WEAPON].push_back("attackRangedUnarmed");
+	a->m_animation[ONE_HANDED].push_back("attackRangedUnarmed");
+	a->m_animation[TWO_HANDED].push_back("attackRangedBow");
 
 	a = &(Action::m_base_info[Action::MAGIC_ATTACK]);
 	a->m_timer_nr=0;
@@ -115,6 +119,9 @@ void Action::init()
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_description = "descr_magic_attack";
 	a->m_enum_name = "magic_attack";
+    a->m_animation[NO_WEAPON].push_back("attackMagicUnarmed");
+	a->m_animation[ONE_HANDED].push_back("attackMagicOneHand");
+	a->m_animation[TWO_HANDED].push_back("attackMagicTwoHands");
 
 	a = &(Action::m_base_info[Action::HOLY_ATTACK]);
 	a->m_timer_nr=0;
@@ -131,7 +138,9 @@ void Action::init()
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_description = "descr_holy_attack";
 	a->m_enum_name = "holy_attack";
-
+	a->m_animation[NO_WEAPON].push_back("attackUnarmed");
+	a->m_animation[ONE_HANDED].push_back("attack");
+	a->m_animation[TWO_HANDED].push_back("attackTwoHands");
 
 	// Faehigkeiten des Kriegers
 	a = &(Action::m_base_info[Action::BASH]);
@@ -1714,9 +1723,9 @@ void Action::toString(CharConv* cv)
 	cv->toBuffer(m_time);
 	cv->toBuffer((char) m_action_equip);
 	cv->toBuffer(m_animation_number);
-	cv->toBuffer(m_elapsed_time);	
+	cv->toBuffer(m_elapsed_time);
 
-	
+
 }
 
 void Action::fromString(CharConv* cv)
