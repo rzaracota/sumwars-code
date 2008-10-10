@@ -21,7 +21,7 @@ bool Application::init()
 	// pluginfile: plugins.cfg
 	// configfile: keines
 	#ifdef WIN32
-        #ifdef DEBUG
+        #ifdef _DEBUG
             m_ogre_root = new Ogre::Root("plugins_win_d.cfg", "ogre.cfg");
         #else
             m_ogre_root = new Ogre::Root("plugins_win.cfg", "ogre.cfg");
@@ -114,7 +114,7 @@ void Application::run()
 	printf("started\n");
 	Ogre::Timer timer;
 	unsigned long ltime;
-	float time=0,ftime;
+	float time=0,ftime=0;
 	// float timesum=0;
 	// int count=0;
     Ogre::Timer timer2;
