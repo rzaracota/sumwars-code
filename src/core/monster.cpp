@@ -52,7 +52,8 @@ Monster::Monster(World* world, int id,MonsterBasicData& data)
 
 	m_ai.m_goals = new WorldObjectValueList;
 	m_ai.m_visible_goals = new WorldObjectValueList;
-	m_ai.m_state = Ai::INACTIVE;
+	m_ai.m_state = Ai::ACTIVE;
+	m_ai.m_sight_range = 10;
 	calcBaseAttrMod();
 }
 
@@ -135,6 +136,8 @@ void Monster::updateCommand()
 		dist = World::getDistance(getGeometry()->m_shape, pl->getGeometry()->m_shape);
 		if ( dist< m_ai.m_sight_range)
 		{
+			
+		
 			// Spieler ist in Sichtweite
 			m_ai.m_goals->push_back(std::make_pair(pl,dist));
 
@@ -143,13 +146,37 @@ void Monster::updateCommand()
 
 			// Testen, ob der Weg zum Spieler frei ist
 			ret.clear();
-			getWorld()->getObjectsOnLine(x,y,goal_x,goal_y,rid,&ret,Geometry::LAYER_AIR, CREATURE | FIXED,0);
+			getWorld()->getObjectsOnLine(x,y,goal_x,goal_y,rid,&ret,Geometry::LAYER_AIR, CREATURE | FIXED,pl);
+			
+			// alle verbuendeten Objekte loeschen, weil durch diese *durchgeschossen* werden kann
+			WorldObjectList::iterator it;
+			for (it = ret.begin(); it != ret.end();)
+			{
+				if (getWorld()->getRelation(getTypeInfo()->m_fraction,*it) == ALLIED )
+				{
+					it = ret.erase(it);
+				}
+				else
+				{
+					++it;
+				}
+			}
 
 			if (ret.empty())
 			{
 				// Keine Objekte auf der Linie vom Monster zum Ziel
 				m_ai.m_visible_goals->push_back(std::make_pair(pl,dist));
 
+			}
+			else
+			{
+				/*
+				WorldObjectList::iterator it;
+				for (it = ret.begin(); it != ret.end();++it)
+				{
+					DEBUG("blocking obj %i",(*it)->getId());
+				}
+				*/
 			}
 		}
 	}
@@ -164,13 +191,15 @@ void Monster::updateCommand()
 	if ((m_ai.m_state & Ai::ACTIVE) && m_ai.m_command_value>0)
 	{
 		// berechnetes Kommando uebernehmen
-		DEBUG5("calculated command %i",m_ai.m_command.m_type);
 		Command* cmd = getCommand();
-		cmd-> m_type = m_ai.m_command.m_type;
+		cmd->m_type = m_ai.m_command.m_type;
 		cmd->m_goal_coordinate_x = m_ai.m_command.m_goal_coordinate_x;
 		cmd->m_goal_coordinate_y = m_ai.m_command.m_goal_coordinate_y;
 		cmd->m_goal_object_id = m_ai.m_command.m_goal_object_id;
 		cmd->m_range = m_ai.m_command.m_range;
+		
+		DEBUG5("calculated command %i",m_ai.m_command.m_type);
+		
 
 		m_event_mask |= Event::DATA_COMMAND;
 
@@ -235,7 +264,7 @@ void Monster::calcBestCommand()
 void Monster::evalCommand(Action::ActionType act)
 {
 	WorldObjectValueList::iterator it;
-	WorldObjectValueList* goal_list;
+	WorldObjectValueList* goal_list=0;
 	Creature* cgoal=0;
 
 	float dist;
@@ -307,9 +336,13 @@ void Monster::evalCommand(Action::ActionType act)
 			{
 				value *= 3/(3+dist);
 			}
+			
+			
 
 			if (value > m_ai.m_command_value)
 			{
+				DEBUG5("set new command %i value %f",act,value);
+				
 				// aktuelle Aktion ist besser als alle vorher bewerteten
 				m_ai.m_command_value = value;
 				m_ai.m_command.m_type = act;
@@ -324,12 +357,11 @@ void Monster::evalCommand(Action::ActionType act)
 				{
 					m_ai.m_command.m_range = 20;
 				}
-
+								
 				if (ranged_move)
 				{
 					m_ai.m_command.m_type = Action::WALK;
 				}
-
 			}
 		}
 	}

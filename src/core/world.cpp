@@ -165,10 +165,13 @@ void World::createRegion(short region)
 		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "tree3");
 		insertObject(wo, 1,2,rid);
 
+		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_MONSTER, "lich");
+		insertObject(wo, 7,5,rid);
+		
+		/*
 		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_MONSTER, "goblin");
 		insertObject(wo, 13,8,rid);
-
-
+// 		
 		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_MONSTER, "gob_dog");
 		insertObject(wo, 14.2,8.2,rid);
 
@@ -184,8 +187,7 @@ void World::createRegion(short region)
 		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_MONSTER, "goblin");
 		insertObject(wo, 17,8.2,rid);
 
-		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_MONSTER, "lich");
-		insertObject(wo, 7,5,rid);
+		
 
 		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_MONSTER, "goblin");
 		insertObject(wo, 18.5,7,rid);
@@ -195,6 +197,7 @@ void World::createRegion(short region)
 
 		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_MONSTER, "goblin");
 		insertObject(wo, 19.9,6.9,rid);
+		*/
 
 /*
 		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_MONSTER, "goblin");
