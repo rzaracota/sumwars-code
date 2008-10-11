@@ -7,7 +7,7 @@
 DEBUG_LEVEL = 5 
 
 # executable file for project
-RUN = client_app
+RUN = ../gl_sumwars
 
 LDFLAGS =
 LOADLIBES =
@@ -16,14 +16,14 @@ LDLIBS = `pkg-config  $(LIBS) --libs`
 LDLIBS += -lm -lrt  -lGL -lglut
 #LDLIBS += -L../../server/trunk
 
-CFLAGS = -m32 -g
+CFLAGS = -m32 -O3
 CXXFLAGS = $(CFLAGS) 
 CXXFLAGS += `pkg-config  $(LIBS) --cflags`
 CXXFLAGS += -I../core
 CXXFLAGS += -DDEBUG_LEVEL=$(DEBUG_LEVEL)
 
 
-OBJS = $(shell cat ./Makefile.objs ) $(shell cat ../core/Makefile.objs )
+OBJS = $(shell cat ./Makefile.objs ) 
 DIRS = $(shell find . -mindepth 1 -maxdepth 1 -type d -not -iname .svn )
 
 build: compile $(RUN)
@@ -43,7 +43,7 @@ $(RUN): link
 	
 	
 run: $(RUN)
-	./$(RUN)
+	./$(RUN);
 
 %.o : %.c
 	$(CC) $(CFLAGS) -o $@ -c $<

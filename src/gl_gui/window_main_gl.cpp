@@ -322,8 +322,8 @@ void WindowMain::DisplayFunc ()
 	WorldObject* wo, *cwo;
 	Creature* cr;
 	
-	region->getSWObjectsInShape(&s,&stat_objs, WorldObject::Geometry::LAYER_ALL,WorldObject::FIXED);
-	region->getSWObjectsInShape(&s,&obj, WorldObject::Geometry::LAYER_ALL,WorldObject::GROUP_ALL & ~WorldObject::FIXED);
+	region->getObjectsInShape(&s,&stat_objs, WorldObject::Geometry::LAYER_ALL,WorldObject::FIXED);
+	region->getObjectsInShape(&s,&obj, WorldObject::Geometry::LAYER_ALL,WorldObject::GROUP_ALL & ~WorldObject::FIXED);
 
 	for (it = stat_objs.begin(); it !=stat_objs.end();++it)
 	{

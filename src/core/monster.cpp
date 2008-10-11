@@ -52,7 +52,7 @@ Monster::Monster(World* world, int id,MonsterBasicData& data)
 
 	m_ai.m_goals = new WorldObjectValueList;
 	m_ai.m_visible_goals = new WorldObjectValueList;
-	m_ai.m_state = Ai::ACTIVE;
+	m_ai.m_state = Ai::INACTIVE;
 	m_ai.m_sight_range = 10;
 	calcBaseAttrMod();
 }
