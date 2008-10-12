@@ -13,7 +13,7 @@ bool Spawnpoint::init()
 	//eigene Initialisierung
 	getTypeInfo()->m_type = TypeInfo::TYPE_FIXED_OBJECT;
 	getTypeInfo()->m_subtype = "spawnpoint";
-	getGeometry()->m_layer = Geometry::LAYER_SPECIAL;
+	m_layer = LAYER_SPECIAL;
 
 	setState(STATE_ACTIVE);
 
@@ -40,6 +40,7 @@ bool Spawnpoint::update (float time)
 	WorldObject* wo;
 	float x,y;
 	bool ret;
+	Vector pos;
 	if (m_time <= 0)
 	{
 		// Zeit abgelaufen: Monster generieren
@@ -57,11 +58,11 @@ bool Spawnpoint::update (float time)
 
 					// Monster erzeugen
 					wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_MONSTER, it->m_subtype);
-					x= getGeometry()->m_shape.m_coordinate_x;
-					y= getGeometry()->m_shape.m_coordinate_y;
+					pos = getShape()->m_center;
+					
 
 					// freien Platz suchen
-					ret = getRegion()->getFreePlace(&(wo->getGeometry()->m_shape),wo->getGeometry()->m_layer , x, y);
+					ret = getRegion()->getFreePlace(wo->getShape(),wo->getLayer() , pos);
 					if (ret == false)
 					{
 						ERRORMSG("keinen Platz gefunden um das Monster %s zu platzieren",wo->getNameId().c_str());
@@ -69,7 +70,7 @@ bool Spawnpoint::update (float time)
 					}
 					else
 					{
-						getWorld()->insertObject(wo, x,y,getGridLocation()->m_region);
+						getWorld()->insertObject(wo, pos,getGridLocation()->m_region);
 					}
 				}
 			}

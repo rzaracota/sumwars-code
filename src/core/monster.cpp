@@ -45,10 +45,10 @@ Monster::Monster(World* world, int id,MonsterBasicData& data)
 	getDynAttr()->m_health = getBaseAttr()->m_max_health;
 
 	// Standardform setzen
-	getGeometry()->m_shape.m_type = Shape::CIRCLE;
-	getGeometry()->m_shape.m_radius = data.m_radius;
-	getGeometry()->m_layer = data.m_layer;
-	getGeometry()->m_angle =0;
+	getShape()->m_type = Shape::CIRCLE;
+	getShape()->m_radius = data.m_radius;
+	m_layer = data.m_layer;
+	getShape()->m_angle =0;
 
 	m_ai.m_goals = new WorldObjectValueList;
 	m_ai.m_visible_goals = new WorldObjectValueList;
@@ -79,10 +79,10 @@ bool Monster::init()
 	getTypeInfo()->m_type = TypeInfo::TYPE_MONSTER;
 
 	// Standardform setzen
-	getGeometry()->m_shape.m_type = Shape::CIRCLE;
-	getGeometry()->m_shape.m_radius = 0.5;
-	getGeometry()->m_layer = (Geometry::LAYER_BASE | Geometry::LAYER_AIR);
-	getGeometry()->m_angle =0;
+	getShape()->m_type = Shape::CIRCLE;
+	getShape()->m_radius = 0.5;
+	m_layer = (LAYER_BASE | LAYER_AIR);
+	getShape()->m_angle =0;
 
 	getBaseAttr()->m_step_length=0.5;
 
@@ -112,13 +112,11 @@ void Monster::updateCommand()
 	m_ai.m_visible_goals->clear();
 
 	// eigene Koordinaten
-	float x = getGeometry()->m_shape.m_coordinate_x;
-	float y = getGeometry()->m_shape.m_coordinate_y;
+	Vector &pos = getShape()->m_center;
+	
 	// Nummer der Region
 	short rid = getGridLocation()->m_region;
 
-	// Koordinaten eines zieles
-	float goal_x,goal_y;
 
 	// moegliche Ziele ermitteln
 
@@ -127,13 +125,16 @@ void Monster::updateCommand()
 	WorldObjectList ret;
 
 	WorldObject* pl;
+	
+	// Linie vom Monster zum Ziel
+	Line gline(pos,Vector(0,0));
 
 	// Entfernungen und Sichtbarkeit der Ziele ermitteln
 	float dist;
 	for (WorldObjectMap::iterator it = players->begin(); it!=players->end(); ++it)
 	{
 		pl = it->second;
-		dist = World::getDistance(getGeometry()->m_shape, pl->getGeometry()->m_shape);
+		dist = getShape()->getDistance(*(pl->getShape()));
 		if ( dist< m_ai.m_sight_range)
 		{
 			
@@ -141,12 +142,11 @@ void Monster::updateCommand()
 			// Spieler ist in Sichtweite
 			m_ai.m_goals->push_back(std::make_pair(pl,dist));
 
-			goal_x = pl->getGeometry()->m_shape.m_coordinate_x;
-			goal_y = pl->getGeometry()->m_shape.m_coordinate_y;
+			gline.m_end = pl->getShape()->m_center;
 
 			// Testen, ob der Weg zum Spieler frei ist
 			ret.clear();
-			getWorld()->getObjectsOnLine(x,y,goal_x,goal_y,rid,&ret,Geometry::LAYER_AIR, CREATURE | FIXED,pl);
+			getWorld()->getObjectsOnLine(gline,rid,&ret,LAYER_AIR, CREATURE | FIXED,pl);
 			
 			// alle verbuendeten Objekte loeschen, weil durch diese *durchgeschossen* werden kann
 			WorldObjectList::iterator it;
@@ -193,8 +193,7 @@ void Monster::updateCommand()
 		// berechnetes Kommando uebernehmen
 		Command* cmd = getCommand();
 		cmd->m_type = m_ai.m_command.m_type;
-		cmd->m_goal_coordinate_x = m_ai.m_command.m_goal_coordinate_x;
-		cmd->m_goal_coordinate_y = m_ai.m_command.m_goal_coordinate_y;
+		cmd->m_goal = m_ai.m_command.m_goal;
 		cmd->m_goal_object_id = m_ai.m_command.m_goal_object_id;
 		cmd->m_range = m_ai.m_command.m_range;
 		
@@ -346,8 +345,7 @@ void Monster::evalCommand(Action::ActionType act)
 				// aktuelle Aktion ist besser als alle vorher bewerteten
 				m_ai.m_command_value = value;
 				m_ai.m_command.m_type = act;
-				m_ai.m_command.m_goal_coordinate_x =cgoal->getGeometry()->m_shape.m_coordinate_x;
-				m_ai.m_command.m_goal_coordinate_y =cgoal->getGeometry()->m_shape.m_coordinate_y;
+				m_ai.m_command.m_goal =cgoal->getShape()->m_center;
 				m_ai.m_command.m_goal_object_id =cgoal->getId();
 				if (aci->m_distance == Action::MELEE)
 				{
@@ -377,7 +375,6 @@ void Monster::die()
 	DEBUG5("die");
 	if (getWorld()->isServer())
 	{
-		Geometry* geom = getGeometry();
 		//Zeiger auf letzten Angreifer per ID  holen
 
 		int id = getDynAttr()->m_last_attacker_id;
@@ -404,10 +401,9 @@ void Monster::die()
 				Shape s;
 				s.m_type = Shape::CIRCLE;
 				s.m_radius = 20;
-				s.m_coordinate_x = geom->m_shape.m_coordinate_x;
-				s.m_coordinate_y = geom->m_shape.m_coordinate_y;
+				s.m_center = getShape()->m_center;
 
-				getWorld()->getObjectsInShape(&s, getGridLocation()->m_region, &ret, Geometry::LAYER_AIR, CREATURE);
+				getWorld()->getObjectsInShape(&s, getGridLocation()->m_region, &ret, LAYER_AIR, CREATURE);
 
 				WorldObjectList::iterator i;
 
@@ -426,7 +422,7 @@ void Monster::die()
 			si = ItemFactory::createItem(m_drop_slots[i]);
 			if (si!=0)
 			{
-				getRegion()->dropItem(si,getGeometry()->m_shape.m_coordinate_x,getGeometry()->m_shape.m_coordinate_y);
+				getRegion()->dropItem(si,getShape()->m_center);
 			}
 		}
 	}

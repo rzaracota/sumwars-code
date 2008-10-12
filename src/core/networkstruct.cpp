@@ -26,8 +26,8 @@ void ClientCommand::toString(CharConv* cv)
 {
 	cv->toBuffer<char>((char) m_button);
 	cv->toBuffer<short>((short) m_action);
-	cv->toBuffer(m_coordinate_x);
-	cv->toBuffer(m_coordinate_y);
+	cv->toBuffer(m_goal.m_x);
+	cv->toBuffer(m_goal.m_y);
 	cv->toBuffer(m_id);
 	cv->toBuffer(m_number);
 	cv->toBuffer<short>(m_direction);
@@ -43,8 +43,8 @@ void ClientCommand::fromString(CharConv* cv)
 	m_button = (Button) ctmp;
 	cv->fromBuffer<short>(tmp);
 	m_action = (Action::ActionType) tmp;
-	cv->fromBuffer<float>(m_coordinate_x);
-	cv->fromBuffer<float>(m_coordinate_y);
+	cv->fromBuffer<float>(m_goal.m_x);
+	cv->fromBuffer<float>(m_goal.m_y);
 	cv->fromBuffer<int>(m_id);
 	cv->fromBuffer<int>(m_number);
 	cv->fromBuffer<short>(m_direction );

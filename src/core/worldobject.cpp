@@ -9,18 +9,17 @@ WorldObject::WorldObject(World* world, int id)
 	init();
 }
 
-bool WorldObject::moveTo(float x, float y)
+bool WorldObject::moveTo(Vector newpos)
 {
 	if (m_world==0)
 	{
-		WorldObject::Geometry* geom = getGeometry();
-		geom->m_shape.m_coordinate_x=x;
-		geom->m_shape.m_coordinate_y=y;
+		m_shape.m_center = newpos;
+		
 		return true;
 	}
 	else
 	{
-		return m_world->moveObject(this, x,y);
+		return m_world->moveObject(this, newpos);
 	}
 }
 
@@ -44,21 +43,21 @@ void WorldObject::toString(CharConv* cv)
 	strncpy(stmp,m_type_info.m_subtype.c_str(),10);
 	cv->toBuffer(stmp,10);
 	cv->toBuffer(m_id);
-	cv->toBuffer(m_geometry.m_shape.m_coordinate_x);
-	cv->toBuffer(m_geometry.m_shape.m_coordinate_y);
-	cv->toBuffer((char) m_geometry.m_shape.m_type);
-	if (m_geometry.m_shape.m_type==Shape::RECT)
+	cv->toBuffer(m_shape.m_center.m_x);
+	cv->toBuffer(m_shape.m_center.m_y);
+	cv->toBuffer((char) m_shape.m_type);
+	if (m_shape.m_type==Shape::RECT)
 	{
-		cv->toBuffer(m_geometry.m_shape.m_extent_x);
-		cv->toBuffer(m_geometry.m_shape.m_extent_y);
+		cv->toBuffer(m_shape.m_extent.m_x);
+		cv->toBuffer(m_shape.m_extent.m_y);
 	}
 	else
 	{
-		cv->toBuffer(m_geometry.m_shape.m_radius);
-		cv->toBuffer(m_geometry.m_shape.m_radius);
+		cv->toBuffer(m_shape.m_radius);
+		cv->toBuffer(m_shape.m_radius);
 	}
-	cv->toBuffer((char) m_geometry.m_layer);
-	cv->toBuffer(m_geometry.m_angle);
+	cv->toBuffer((char) m_layer);
+	cv->toBuffer(m_shape.m_angle);
 
 	cv->toBuffer((char) m_state);
 
@@ -84,23 +83,23 @@ void WorldObject::fromString(CharConv* cv)
 	*/
 
 
-	cv->fromBuffer<float>(m_geometry.m_shape.m_coordinate_x) ;
-	cv->fromBuffer<float>(m_geometry.m_shape.m_coordinate_y);
+	cv->fromBuffer<float>(m_shape.m_center.m_x) ;
+	cv->fromBuffer<float>(m_shape.m_center.m_y);
 	cv->fromBuffer<char>(ctmp);
-	m_geometry.m_shape.m_type = (Shape::ShapeType) ctmp;
-	if (m_geometry.m_shape.m_type==Shape::RECT)
+	m_shape.m_type = (Shape::ShapeType) ctmp;
+	if (m_shape.m_type==Shape::RECT)
 	{
-		cv->fromBuffer<float>(m_geometry.m_shape.m_extent_x);
-		cv->fromBuffer<float>(m_geometry.m_shape.m_extent_y);
+		cv->fromBuffer<float>(m_shape.m_extent.m_x);
+		cv->fromBuffer<float>(m_shape.m_extent.m_y);
 	}
 	else
 	{
-		cv->fromBuffer<float>(m_geometry.m_shape.m_radius);
-		cv->fromBuffer<float>(m_geometry.m_shape.m_radius);
+		cv->fromBuffer<float>(m_shape.m_radius);
+		cv->fromBuffer<float>(m_shape.m_radius);
 	}
 	cv->fromBuffer<char>(ctmp);
-	m_geometry.m_layer  = (Geometry::Layer) ctmp;
-	cv->fromBuffer<float>(m_geometry.m_angle);
+	m_layer  = (Layer) ctmp;
+	cv->fromBuffer<float>(m_shape.m_angle);
 
 	cv->fromBuffer<char>(ctmp);
 	m_state = (State) ctmp;

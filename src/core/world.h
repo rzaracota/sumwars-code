@@ -141,14 +141,6 @@ public:
 	 */
 	bool insertPlayerIntoRegion(WorldObject* player, short region);
 
-	//Operations
-	/**
-	 * \fn static bool intersect(Shape* s1, Shape* s2)
-	 * \brief Gibt true aus, wenn die angegebenen Formen sich ueberschneiden, sonst false
-	 * \param s1 erste Form
-	 * \param s2 zweite Form
-	 */
-	static bool intersect(Shape* s1, Shape* s2);
 
 
 	/**
@@ -185,7 +177,7 @@ public:
 
 
 	/**
-	 * \fn bool getObjectsInShape( Shape* shape, short region, WorldObjectList* result,short layer=WorldObject::Geometry::LAYER_ALL, short group = WorldObject::GROUP_ALL, WorldObject* omit=0 )
+	 * \fn bool getObjectsInShape( Shape* shape, short region, WorldObjectList* result,short layer=WorldObject::LAYER_ALL, short group = WorldObject::GROUP_ALL, WorldObject* omit=0 )
 	 * \brief Sucht WorldObjects innerhalb eines Gebietes
 	 * \param shape Form des Gebietes
 	 * \param layer Ebene in der gesucht wird
@@ -200,61 +192,44 @@ public:
 	 * Wenn f&uuml;r selector ein NULL-Zeiger &uuml;bergeben wird, so werden die Objekte nicht selektiert.
 	 * Wenn f&uuml;r result ein NULL-Zeiger &uuml;bergeben wird, oder ein anderer Fehler auftritt, so wird false zur&uuml;ckgegeben, sonst true.
 	 */
-	bool getObjectsInShape( Shape* shape, short region, WorldObjectList* result,short layer=WorldObject::Geometry::LAYER_ALL, short group = WorldObject::GROUP_ALL, WorldObject* omit=0 );
+	bool getObjectsInShape( Shape* shape, short region, WorldObjectList* result,short layer=WorldObject::LAYER_ALL, short group = WorldObject::GROUP_ALL, WorldObject* omit=0 );
 
 
 	/**
-	 * \fn WorldObject* getObjectAt(float x_coordinate, float y_coordinate,  short region,short layer=WorldObject::Geometry::LAYER_ALL, short group = WorldObject::GROUP_ALL)
+	 * \fn WorldObject* getObjectAt(Vector pos,  short region,short layer=WorldObject::LAYER_ALL, short group = WorldObject::GROUP_ALL)
 	 * \brief Sucht WorldObject an den gegebenen Koordinaten
-	 * \param x_coordinate x-Koordinate des Punktes
-	 * \param y_coordinate y-Koordinate des Punktes
+	 * \param pos Position
 	 * \param layer Ebene in der gesucht wird
 	 * \param region Region in der gesucht wird
 	 * \param layer Ebene in der gesucht wird
 	 * \param group Gruppen die durchsucht werden sollen
 	 * \return Zeiger auf das WorldObject, wenn sich an dem Punkt eines befindet, sonst NULL
 	 */
-	WorldObject* getObjectAt(float x_coordinate, float y_coordinate,  short region,short layer=WorldObject::Geometry::LAYER_ALL, short group = WorldObject::GROUP_ALL);
+	WorldObject* getObjectAt(Vector pos,  short region,short layer=WorldObject::LAYER_ALL, short group = WorldObject::GROUP_ALL);
 
 	/**
-	 * \fn void getObjectsOnLine( float xstart, float ystart, float xend, float yend,  short region, WorldObjectList* result,short layer=WorldObject::Geometry::LAYER_ALL, short group = WorldObject::GROUP_ALL, WorldObject* omit=0 )
+	 * \fn void getObjectsOnLine( Line& line,  short region, WorldObjectList* result,short layer=WorldObject::LAYER_ALL, short group = WorldObject::GROUP_ALL, WorldObject* omit=0 )
 	 * \brief Sucht alle Objekte die auf der angegebenen Linie liegen
-	 * \param xstart x-Koordinate Startpunkt
-	 * \param ystart y-Koordinate Startpunkt
-	 * \param xend x-Koordinate Endpunkt
-	 * \param yend y-Koordinate Endpunkt
+	 * \param line Linie
 	 * \param region Region in der gesucht wird
 	 * \param result Liste, an die die gefundenen Objekte angehangen werden
 	 * \param layer Ebene in der gesucht wird
 	 * \param group Gruppen die durchsucht werden sollen
 	 * \param omit Objekt, das ausgelassen wird
 	 */
-	void getObjectsOnLine( float xstart, float ystart, float xend, float yend,  short region, WorldObjectList* result,short layer=WorldObject::Geometry::LAYER_ALL, short group = WorldObject::GROUP_ALL, WorldObject* omit=0 );
-
-	/**
-	 * \fn void getProjectilesOnScreen(float center_x,float center_y,short region, std::list<Projectile*>* result)
-	 * \brief Gibt alle Projektile auf dem Bildschirm aus
-	 * \param center_x x-Koordinate Zentrum
-	 * \param center_y y-Koordinate Zentrum
-	 * \param region Region
-	 * \param result Liste in die die Objekte eingeordnet werden
-	 */
-	void getProjectilesOnScreen(float center_x,float center_y,short region, std::list<Projectile*>* result);
+	void getObjectsOnLine(Line& line ,  short region, WorldObjectList* result,short layer=WorldObject::LAYER_ALL, short group = WorldObject::GROUP_ALL, WorldObject* omit=0 );
 
 
 	/**
-	 * \fn bool  insertObject (WorldObject* object, float x, float y, short region)
-	 * \brief F&uuml;gt WorldObject ein
-	 * \param object Zeiger auf das Objekt, welches eingef&uuml;gt werden soll
-	 * \param x x-Koordinate
-	 * \param y y-Koordinate
+	 * \fn bool  insertObject (WorldObject* object, Vector pos, short region)
+	 * \brief Fuegt WorldObject ein
+	 * \param object Zeiger auf das Objekt, welches eingefuegt werden soll
+	 * \param pos Ort an dem das Objekt eingefuegt wird
 	 * \param region Region in der sich das Projektil befindet
 	 * \return bool, der angibt, ob die Operation erfolgreich war
 	 *
-	 * F&uuml;gt das WorldObject in die internen Datenstrukturen ein. Wenn das Einf&uuml;gen erfolgreich war, so wird true zur&uuml;ckgegeben, sonst false.
-	 * Wenn ein NULL-Zeiger &uuml;bergeben wird, so wird false ausgegeben.
 	 */
-	bool  insertObject (WorldObject* object, float x, float y, short region);
+	bool  insertObject (WorldObject* object, Vector pos, short region);
 	
 	/**
 	 * \fn bool insertPlayer(WorldObject* player, int slot = NOSLOT)
@@ -263,52 +238,37 @@ public:
 	bool insertPlayer(WorldObject* player, int slot= NOSLOT);
 
 	/**
-	 * \fn bool  insertProjectile(Projectile* object, float x, float y, short region)
+	 * \fn bool  insertProjectile(Projectile* object, Vector pos, short region)
 	 * \brief Fuegt ein Projektil ein
-	 * \param object Zeiger auf das Objekt, welches eingef&uuml;gt werden soll
-	 * \param x x-Koordinate
-	 * \param y y-Koordinate
+	 * \param object Zeiger auf das Objekt, welches eingefuegt werden soll
+	 * \param pos Ort an dem das Objekt eingefuegt wird
 	 * \param region Region in der sich das Projektil befindet
 	 * \return bool, der angibt, ob die Operation erfolgreich war
 	 *
 	 */
-	bool  insertProjectile(Projectile* object, float x, float y, short region);
+	bool  insertProjectile(Projectile* object, Vector pos, short region);
 
 	
 	
 	/**
 	 * \fn deleteObject(WorldObject* object)
-	 * \brief L&ouml;scht WorldObject
+	 * \brief Loescht WorldObject
 	 * \param object Zeiger auf das Objekt, welches gel&ouml;scht werden soll
 	 * \return bool, der angibt, ob die Operation erfolgreich war
 	 *
 	 * L&ouml;scht das WorldObject aus den internen Datenstrukturen. Das Objekt selbst wird nicht gel&ouml;scht, es wird nur die Einbindung in die Datenstrukturen entfernt. Wenn das L&ouml;schen erfolgreich war, so wird true zur&uuml;ckgegeben, sonst false.
-	 * Wenn ein NULL-Zeiger &uuml;bergeben wird, so wird false ausgegeben.
 	 */
 	bool  deleteObject (WorldObject* object);
 
 	 /**
-	  * \fn moveObject(WorldObject* object, float x, float y)
+	  * \fn moveObject(WorldObject* object, Vector newpos)
 	  * \brief verschiebt ein WorldObject an den Punkt (x,y)
 	  * \param object Zeiger auf das Objekt, welches verschoben werden soll
-	  * \param x x-Koordinate des Zielpunktes, zu dem das Objekt verschoben werden soll
-	  * \param y y-Koordinate des Zielpunktes, zu dem das Objekt verschoben werden soll
+	  * \param newpos neue Position des Objektes
 	  * \return bool, welcher angibt, ob das Verschieben erfolgreich war
 	  */
-	bool moveObject(WorldObject* object, float x, float y);
+	bool moveObject(WorldObject* object, Vector newpos);
 
-	/**
-	 * \fn static bool lineIntersect(float xstart, float ystart, float xend,float yend ,float dir[2],Shape* s)
-	 * \brief Prueft ob sich die Form auf der Linie befindet
-	 * \param xstart x-Koordinate Startpunkt
-	 * \param ystart y-Koordinate Startpunkt
-	 * \param xend x-Koordinate Endpunkt
-	 * \param yend y-Koordinate Endpunkt
-	 * \param dir Richtung der Linie
-	 * \param s Form, gegen die geprueft wird
-	 * \return true, wenn die Linie die Form schneidet
-	 */
-	static bool lineIntersect(float xstart, float ystart, float xend,float yend ,float dir[2],Shape* s);
 
 	/**
 	 * \fn bool calcBlockmat(PathfindInfo * pathinfo)
@@ -325,14 +285,13 @@ public:
 	bool calcPotential(PathfindInfo* pathinfo);
 
 	/**
-	 * \fn void calcPathDirection(PathfindInfo* pathinfo, float x_coordinate, float y_coordinate, float dir[2])
+	 * \fn void calcPathDirection(PathfindInfo* pathinfo, Vector pos, Vector& dir)
 	 * \brief Berechnet die Bewegungsrichtung auf Basis der gegebenen Wegfindeinformation
 	 * \param pathinfo verwendete Wegfindeinformation
-	 * \param x_coordinate Standpunkt, x-Koordinate
-	 * \param y_coordinate Standpunkt, y-Koordinate
+	 * \param pos Standpunkt
 	 * \param dir erhaltene Bewegungsrichtung
 	 */
-	void calcPathDirection(PathfindInfo* pathfinfo, float x_coordinate, float y_coordinate, float dir[2]);
+	void calcPathDirection(PathfindInfo* pathfinfo, Vector pos, Vector& dir);
 
 
 
@@ -453,12 +412,6 @@ public:
 	 */
 	WorldObject::Relation getRelation(WorldObject::TypeInfo::Fraction frac, WorldObject* wo);
 
-	/**
-	 * \brief Gibt die Distanz zwischen den beiden Flaechen quadriert aus
-	 * \param s1 erste Flaeche
-	 * \param s2  zweite Flaeche
-	 */
-	static float getDistance(Shape& s1, Shape& s2);
 
 	/**
 	 * \fn void handleSavegame(CharConv *cv, int slot=LOCAL_SLOT)

@@ -66,10 +66,10 @@ bool Player::init()
 	getTypeInfo()->m_fraction = (TypeInfo::Fraction) (p->getId() + TypeInfo::FRAC_PLAYER_PARTY);
 	DEBUG("opened Party %i",p->getId());
 
-	getGeometry()->m_shape.m_type = Shape::CIRCLE;
-	getGeometry()->m_shape.m_radius = 0.5;
-	getGeometry()->m_layer = (Geometry::LAYER_BASE | Geometry::LAYER_AIR);
-	getGeometry()->m_angle =0;
+	getShape()->m_type = Shape::CIRCLE;
+	getShape()->m_radius = 0.5;
+	m_layer = (LAYER_BASE | LAYER_AIR);
+	getShape()->m_angle =0;
 
 	getBaseAttr()->m_step_length=1.5;
 	getBaseAttr()->m_attack_range=0.5;
@@ -136,8 +136,7 @@ bool Player::onGamefieldClick(ClientCommand* command)
 						com->m_type =command->m_action;
 
 						com->m_goal_object_id = command->m_id;
-						com->m_goal_coordinate_x =command->m_coordinate_x;
-						com->m_goal_coordinate_y =command->m_coordinate_y;
+						com->m_goal = command->m_goal;
 						com->m_range = getBaseAttr()->m_attack_range;
 						DEBUG5("action range %f",getCommand()->m_range);
 					}
@@ -160,8 +159,7 @@ bool Player::onGamefieldClick(ClientCommand* command)
 						com->m_type =command->m_action;
 
 						com->m_goal_object_id = command->m_id;
-						com->m_goal_coordinate_x =command->m_coordinate_x;
-						com->m_goal_coordinate_y =command->m_coordinate_y;
+						com->m_goal = command->m_goal;
 						com->m_range = getBaseAttr()->m_attack_range;
 					}
 				}
@@ -186,16 +184,14 @@ bool Player::onGamefieldClick(ClientCommand* command)
 			{
 				com->m_type =command->m_action;
 				com->m_goal_object_id = command->m_id;
-				com->m_goal_coordinate_x =command->m_coordinate_x;
-				com->m_goal_coordinate_y =command->m_coordinate_y;
+				com->m_goal = command->m_goal;
 				com->m_range = getBaseAttr()->m_attack_range;
 				com->m_goal_object_id = command->m_id;
 			}
 			else if (command->m_button == LEFT_SHIFT_MOUSE_BUTTON)
 			{
 				com->m_type = command->m_action;
-				com->m_goal_coordinate_x =command->m_coordinate_x;
-				com->m_goal_coordinate_y =command->m_coordinate_y;
+				com->m_goal = command->m_goal;
 				com->m_range = getBaseAttr()->m_attack_range;
 				com->m_goal_object_id =0;
 				if (dist == Action::MELEE)
@@ -216,7 +212,7 @@ bool Player::onGamefieldClick(ClientCommand* command)
 	else
 	{
 		// Kein Zielobjekt gegeben
-		DEBUG5("Kommando erhalten, Ziel (%f,%f) button %i action %i dist %i",command->m_coordinate_x, command->m_coordinate_y,command->m_button,command->m_action,dist);
+		DEBUG5("Kommando erhalten, Ziel (%f,%f) button %i action %i dist %i",command->m_goal.m_x, command->m_goal.m_y,command->m_button,command->m_action,dist);
 
 		if (command->m_button == LEFT_MOUSE_BUTTON)
 		{
@@ -233,31 +229,27 @@ bool Player::onGamefieldClick(ClientCommand* command)
 				com->m_type = Action::WALK;
 				com->m_goal_object_id =0;
 			}
-			com->m_goal_coordinate_x =command->m_coordinate_x;
-			com->m_goal_coordinate_y =command->m_coordinate_y;
+			com->m_goal = command->m_goal;
 
 		}
 		else if (dist == Action::SELF)
 		{
 			// Aktionen auf selbst auf left_shift und rechts ausfuehren
 			com->m_type = command->m_action;
-			com->m_goal_coordinate_x =0;
-			com->m_goal_coordinate_y =0;
+			com->m_goal = Vector(0,0);
 			com->m_goal_object_id =0;
 		}
 		else if (dist == Action::PARTY_MULTI)
 		{
 			com->m_type = command->m_action;
-			com->m_goal_coordinate_x =command->m_coordinate_x;
-			com->m_goal_coordinate_y =command->m_coordinate_y;
+			com->m_goal = command->m_goal;
 			com->m_goal_object_id =0;
 		}
 		else if (dist == Action::PARTY)
 		{
 			// Aktionen auf Party nie ausfuehren, wenn kein Ziel angegeben
 			com->m_type =Action::NOACTION;
-			com->m_goal_coordinate_x =0;
-			com->m_goal_coordinate_y =0;
+			com->m_goal = Vector(0,0);
 			com->m_goal_object_id =0;
 
 		}
@@ -265,8 +257,7 @@ bool Player::onGamefieldClick(ClientCommand* command)
 		{
 			// Fernkampf immer starten
 			com->m_type = command->m_action;
-			com->m_goal_coordinate_x =command->m_coordinate_x;
-			com->m_goal_coordinate_y =command->m_coordinate_y;
+			com->m_goal = command->m_goal;
 			com->m_range = getBaseAttr()->m_attack_range;
 			com->m_goal_object_id =0;
 		}
@@ -274,8 +265,7 @@ bool Player::onGamefieldClick(ClientCommand* command)
 		{
 			// Nahkampf nur dann starten, wenn shift gedrueckt wurde
 			com->m_type = command->m_action;
-			com->m_goal_coordinate_x =command->m_coordinate_x;
-			com->m_goal_coordinate_y =command->m_coordinate_y;
+			com->m_goal = command->m_goal;
 			com->m_range = getBaseAttr()->m_attack_range;
 			com->m_goal_object_id =0;
 			meleedir = true;
@@ -296,34 +286,19 @@ bool Player::onGamefieldClick(ClientCommand* command)
 	if (meleedir)
 	{
 		DEBUG5("meleedir");
-		float dir[2];
-		float d;
-		float x = getGeometry()->m_shape.m_coordinate_x;
-		float y = getGeometry()->m_shape.m_coordinate_y;
-		dir[0] = com->m_goal_coordinate_x-x;
-		dir[1] = com->m_goal_coordinate_y-y;
-		d = sqr(dir[0]) + sqr(dir[1]);
-		float range = com->m_range + getGeometry()->m_shape.m_radius;
-		if ( d>= sqr(range))
+		Vector dir;
+		dir = com->m_goal - getShape()->m_center;
+		float range = com->m_range + getShape()->m_radius;
+		if ( dir.getLength()>= range)
 		{
-			if (d>0)
-			{
-				d = 1/sqrt(d);
-				dir[0]*= d*0.95*range;
-				dir[1]*= d*0.95*range;
-				com->m_goal_coordinate_x = x+dir[0];
-				com->m_goal_coordinate_y = y+dir[1];
-				DEBUG5("new goal %f %f", com->m_goal_coordinate_x,com->m_goal_coordinate_y);
-			}
-			else
-			{
-				com->m_type =Action::NOACTION;
-			}
+			dir.normalize();
+			dir *= 0.95*range;
+			com->m_goal = getShape()->m_center + dir;
 		}
 	}
 
 	m_event_mask |= Event::DATA_NEXT_COMMAND;
-	DEBUG5("resulting command %i goal %f %f id %i",com->m_type,com->m_goal_coordinate_x,com->m_goal_coordinate_y, com->m_goal_object_id);
+	DEBUG5("resulting command %i goal %f %f id %i",com->m_type,com->m_goal.m_x,com->m_goal.m_y, com->m_goal_object_id);
 
 	return true;
 }
@@ -524,7 +499,7 @@ bool Player::onItemClick(ClientCommand* command)
 						{
 							// Einfuegen ins Inventar fehlgeschlagen
 							// Item fallen lassen
-							getRegion()->dropItem(itm,getGeometry()->m_shape.m_coordinate_x,getGeometry()->m_shape.m_coordinate_y);
+							getRegion()->dropItem(itm,getShape()->m_center);
 						}
 					}
 				}
@@ -648,7 +623,7 @@ short Player::insertItem(Item* itm)
 	{
 		// Gegenstand passt nicht ins Inventar
 		// wieder fallen lassen
-		getRegion()->dropItem(itm,getGeometry()->m_shape.m_coordinate_x,getGeometry()->m_shape.m_coordinate_y);
+		getRegion()->dropItem(itm,getShape()->m_center);
 	}
 	return pos;
 }
@@ -759,7 +734,7 @@ void Player::gainLevel()
 
 bool Player::onClientCommand( ClientCommand* command, float delay)
 {
-	DEBUG5("Kommando (%f %f) button: %i id: %i action: %i",command->m_coordinate_x,command->m_coordinate_y,command->m_button,command->m_id, command->m_action);
+	DEBUG5("Kommando (%f %f) button: %i id: %i action: %i",command->m_goal.m_x,command->m_goal.m_y,command->m_button,command->m_id, command->m_action);
 
 	Party* p, *p2;
 	WorldObject* wo;
@@ -886,7 +861,7 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 			{
 				si=0;
 				getEquipement()->swapItem(si,Equipement::CURSOR_ITEM);
-				getRegion()->dropItem(si,getGeometry()->m_shape.m_coordinate_x,getGeometry()->m_shape.m_coordinate_y);
+				getRegion()->dropItem(si,getShape()->m_center);
 			}
 
 		case DEBUG_SIGNAL:
@@ -898,7 +873,7 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 			if (command->m_id==2)
 			{
 				si = ItemFactory::createItem(Item::WEAPON,"short_sw",0,1000);
-				getRegion()->dropItem(si,10,20);
+				getRegion()->dropItem(si,Vector(10,20));
 			}
 			if (command->m_id==1)
 			{
@@ -992,8 +967,7 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 			if (getAction()->m_type == Action::WALK)
 			{
 				// Laufgeschwindigkeit entsprechend erhoehen
-				getMoveInfo()->m_speed_x /= mult;
-				getMoveInfo()->m_speed_y /= mult;
+				m_speed *= (1/mult);
 
 			}
 			getAction()->m_time *= mult;
@@ -1017,8 +991,7 @@ void Player::abortAction()
 	if (getAction()->m_type == Action::WALK)
 	{
 		// Position zurueck setzen
-		getGeometry()->m_shape.m_coordinate_x -= getMoveInfo()->m_speed_x*time;
-		getGeometry()->m_shape.m_coordinate_y -= getMoveInfo()->m_speed_y*time;
+		getShape()->m_center -= m_speed*time;
 	}
 
 	// Timer wieder zuruecksetzen
@@ -1295,7 +1268,7 @@ bool Player::update(float time)
 	return true;
 }
 
-void Player::performActionCritPart(float goalx, float goaly, WorldObject* goal)
+void Player::performActionCritPart(Vector goal, WorldObject* goalobj)
 {
 	if (getAction()->m_type == Action::TAKE_ITEM)
 	{
@@ -1313,12 +1286,12 @@ void Player::performActionCritPart(float goalx, float goaly, WorldObject* goal)
 		}
 		else
 		{
-			DEBUG("no item found at %f %f",goalx,goaly);
+			DEBUG("no item found at %f %f",goal.m_x,goal.m_y);
 		}
 	}
 	else
 	{
-		Creature::performActionCritPart(goalx,goaly,goal);
+		Creature::performActionCritPart(goal,goalobj);
 	}
 }
 

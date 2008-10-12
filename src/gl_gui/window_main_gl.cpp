@@ -140,8 +140,8 @@ void WindowMain::MouseFunc (int button, int state, int xin, int yin)
 			return;
 		
 		float dx,dy;
-		dx = global_doc->getLocalPlayer()->getGeometry()->m_shape.m_coordinate_x;
-		dy = global_doc->getLocalPlayer()->getGeometry()->m_shape.m_coordinate_y;
+		dx = global_doc->getLocalPlayer()->getShape()->m_center.m_x;
+		dy = global_doc->getLocalPlayer()->getShape()->m_center.m_y;
 		
 		if (button==0)
 		{
@@ -248,8 +248,8 @@ void WindowMain::DisplayFunc ()
 	global_doc->lock();
 
 
-	x = global_doc->getLocalPlayer()->getGeometry()->m_shape.m_coordinate_x;
-	y = global_doc->getLocalPlayer()->getGeometry()->m_shape.m_coordinate_y;
+	x = global_doc->getLocalPlayer()->getShape()->m_center.m_x;
+	y = global_doc->getLocalPlayer()->getShape()->m_center.m_y;
 
 
 	int action_idx ;
@@ -313,17 +313,17 @@ void WindowMain::DisplayFunc ()
 	std::list<WorldObject*> obj;
 	std::list<WorldObject*>::iterator it;
 	Shape s;
-	s.m_coordinate_x = x;
-	s.m_coordinate_y = y;
+	s.m_center.m_x = x;
+	s.m_center.m_y = y;
 	s.m_type = Shape::RECT;
-	s.m_extent_x = 10;
-	s.m_extent_y = 10;
+	s.m_extent.m_x = 10;
+	s.m_extent.m_y = 10;
 	
 	WorldObject* wo, *cwo;
 	Creature* cr;
 	
-	region->getObjectsInShape(&s,&stat_objs, WorldObject::Geometry::LAYER_ALL,WorldObject::FIXED);
-	region->getObjectsInShape(&s,&obj, WorldObject::Geometry::LAYER_ALL,WorldObject::GROUP_ALL & ~WorldObject::FIXED);
+	region->getObjectsInShape(&s,&stat_objs, WorldObject::LAYER_ALL,WorldObject::FIXED);
+	region->getObjectsInShape(&s,&obj, WorldObject::LAYER_ALL,WorldObject::GROUP_ALL & ~WorldObject::FIXED);
 
 	for (it = stat_objs.begin(); it !=stat_objs.end();++it)
 	{
@@ -331,23 +331,23 @@ void WindowMain::DisplayFunc ()
 
 		wo = *it;
 
-		cx = wo->getGeometry()->m_shape.m_coordinate_x;
-		cy = wo->getGeometry()->m_shape.m_coordinate_y;
+		cx = wo->getShape()->m_center.m_x;
+		cy = wo->getShape()->m_center.m_y;
 
 		glTranslatef(cx-x,cy-y,0);
-		glRotatef( wo->getGeometry()->m_angle*180/3.141,0,0,1);
-		if (wo->getGeometry()->m_angle !=0)
+		glRotatef( wo->getShape()->m_angle*180/3.141,0,0,1);
+		if (wo->getShape()->m_angle !=0)
 		{
-			DEBUG5("angle %f",wo->getGeometry()->m_angle);
+			DEBUG5("angle %f",wo->getShape()->m_angle);
 		}
 		glColor3f(0,0,1);
 
-		if (wo->getGeometry()->m_shape.m_type == Shape::RECT)
+		if (wo->getShape()->m_type == Shape::RECT)
 		{
 
 
-			ex = wo->getGeometry()->m_shape.m_extent_x;
-			ey = wo->getGeometry()->m_shape.m_extent_y;
+			ex = wo->getShape()->m_extent.m_x;
+			ey = wo->getShape()->m_extent.m_y;
 
 
 			glBegin(GL_QUADS);
@@ -359,10 +359,10 @@ void WindowMain::DisplayFunc ()
 			glEnd();
 		}
 
-		if (wo->getGeometry()->m_shape.m_type == Shape::CIRCLE)
+		if (wo->getShape()->m_type == Shape::CIRCLE)
 		{
 
-			r = wo->getGeometry()->m_shape.m_radius;
+			r = wo->getShape()->m_radius;
 
 			glBegin(GL_TRIANGLE_FAN);
 			glVertex3f(0, 0,0);
@@ -387,14 +387,14 @@ void WindowMain::DisplayFunc ()
 		c[1]=0;
 		c[2]=0;
 
-		cx = cwo->getGeometry()->m_shape.m_coordinate_x;
-		cy = cwo->getGeometry()->m_shape.m_coordinate_y;
+		cx = cwo->getShape()->m_center.m_x;
+		cy = cwo->getShape()->m_center.m_y;
 
 		glTranslatef(cx-x,cy-y,0);
-		glRotatef( cwo->getGeometry()->m_angle*180/3.141,0,0,1);
-		if (wo->getGeometry()->m_angle !=0)
+		glRotatef( cwo->getShape()->m_angle*180/3.141,0,0,1);
+		if (wo->getShape()->m_angle !=0)
 		{
-			DEBUG5("angle %f",cwo->getGeometry()->m_angle);
+			DEBUG5("angle %f",cwo->getShape()->m_angle);
 		}
 
 		switch( cwo->getTypeInfo()->m_type )
@@ -431,12 +431,12 @@ void WindowMain::DisplayFunc ()
 				break;
 		}
 		glColor3f(c[0],c[1],c[2]);
-		if (cwo->getGeometry()->m_shape.m_type == Shape::RECT)
+		if (cwo->getShape()->m_type == Shape::RECT)
 		{
 
 
-			ex = cwo->getGeometry()->m_shape.m_extent_x;
-			ey = cwo->getGeometry()->m_shape.m_extent_y;
+			ex = cwo->getShape()->m_extent.m_x;
+			ey = cwo->getShape()->m_extent.m_y;
 
 
 			glBegin(GL_QUADS);
@@ -448,10 +448,10 @@ void WindowMain::DisplayFunc ()
 			glEnd();
 		}
 
-		if (cwo->getGeometry()->m_shape.m_type == Shape::CIRCLE)
+		if (cwo->getShape()->m_type == Shape::CIRCLE)
 		{
 
-			r = cwo->getGeometry()->m_shape.m_radius;
+			r = cwo->getShape()->m_radius;
 
 			glBegin(GL_TRIANGLE_FAN);
 			glVertex3f(0, 0, 0.05);
@@ -594,22 +594,22 @@ void WindowMain::DisplayFunc ()
 
 	}
 
-	std::list<Projectile*> proj;
-	std::list<Projectile*>::iterator i2;
+	ProjectileMap proj;
+	ProjectileMap::iterator i2;
 	
-	region->getProjectilesOnScreen(x,y,&proj);
+	region->getProjectiles();
 	Projectile* pr;
 	for (i2=proj.begin(); i2 != proj.end(); ++i2)
 	{
-		pr = *i2;
+		pr = i2->second;
 		glPushMatrix();
 		c[0]=0;
 		c[1]=0;
 		c[2]=0;
 
-		cx = pr->getGeometry()->m_coordinate_x;
-		cy = pr->getGeometry()->m_coordinate_y;
-		r = pr->getGeometry()->m_radius;
+		cx = pr->getShape()->m_center.m_x;
+		cy = pr->getShape()->m_center.m_y;
+		r = pr->getShape()->m_radius;
 		DEBUG5("draw projectile %f %f %f",cx,cy,r);
 
 		glTranslatef(cx-x,cy-y,0);
@@ -682,7 +682,7 @@ void WindowMain::DisplayFunc ()
 		}
 
 		glColor3f(c[0],c[1],c[2]);
-		r = pr->getGeometry()->m_radius;
+		r = pr->getShape()->m_radius;
 
 		if (r<0.5)
 		{

@@ -22,7 +22,7 @@ int ObjectLoader::generateObjects(TiXmlElement* pElement, string element)
 		if (m_monster_data == 0)
 		{
 			m_monster_data = new MonsterBasicData;
-			m_monster_data->m_layer = (WorldObject::Geometry::LAYER_BASE | WorldObject::Geometry::LAYER_AIR);
+			m_monster_data->m_layer = (WorldObject::LAYER_BASE | WorldObject::LAYER_AIR);
 		}
 
 		while (element == "Monster" && pAttrib)

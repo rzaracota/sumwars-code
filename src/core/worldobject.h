@@ -29,6 +29,8 @@
 #include <map>
 #include <list>
 
+#include "geometry.h"
+
 class World;
 class Region;
 struct Damage;
@@ -74,60 +76,6 @@ struct GridLocation
 
 
 /**
- * \struct Shape
- * \brief Repraesentiert eine Geometrische Form, moeglich sind Rechteck und Kreis
- */
-
-struct Shape
-{
-	/**
-	 * \enum ShapeType
-	 * \brief Typ der geometrischen Form
-	 */
-	enum ShapeType
-	{
-		RECT=1,
-		CIRCLE=2
-	};
-	/**
-	 * \var m_coordinate_x
-	 * \brief x-Koordinate des Objekts (Mittelpunkt)
-	 */
-	float m_coordinate_x;
-
-	/**
-	 * \var m_coordinate_y
-	 * \brief x-Koordinate des Objekts (Mittelpunkt)
-	 */
-	float m_coordinate_y;
-
-
-	/**
-	 * \var m_type
-	 * \brief Form des Objektes (kreis / rechteckfoermig)
-	 */
-	ShapeType m_type;
-
-	/**
-	 * \var m_extent_x
-	 * \brief Ausdehnung in x-Richtung (nur bei recheckigen Objekten verwendet)
-	 */
-	float m_extent_x;
-
-	/**
-	 * \var m_extent_y
-	 * \brief Ausdehnung in y-Richtung (nur bei recheckigen Objekten verwendet)
-	 */
-	float m_extent_y;
-
-	/**
-	 * \var m_radius
-	 * \brief Radius des Objektes ( nur bei kreisfoermigen Objekten verwendet)
-	 */
-	float m_radius;
-};
-
-/**
  * \class WorldObject
  * \brief ein Objekt, welches sich in der Spielwelt befindet
  */
@@ -162,53 +110,19 @@ class WorldObject {
 	};
 	
 	/**
-	* \struct Geometry
-	* \brief Informationen zur Geometrie eines Objektes
-	*/
-	struct Geometry
+	 * \enum Layer
+	 * \brief TODO
+	 */
+	enum Layer
 	{
-		/**
-		* \enum Layer
-		* \brief TODO
-		*/
-		enum Layer
-		{
-			LAYER_BASE =0x01,
-			LAYER_AIR = 0x02,
-			LAYER_DEAD = 0x04,
-   /*
-			LAYER_FIXED =  0x1F,
-			LAYER_CREATURE = 0x6F,
-			LAYER_MONSTER=  0x2F,
-			LAYER_PLAYER = 0x4F,
-   */
-			LAYER_ALL = 0x0F,
+		LAYER_BASE =0x01,
+		LAYER_AIR = 0x02,
+		LAYER_DEAD = 0x04,
+		LAYER_ALL = 0x0F,
    
-	//		LAYER_ALL_TYPES = 0xF0,
-			LAYER_SPECIAL = 0x10,
-		};
-
-
-		//Fields
-		/**
-		* \var m_shape
-		* \brief Form des Objektes
-		*/
-		Shape m_shape;
-
-		/**
-		* \var m_angle
-		* \brief Winkel um den das Objekt gegenueber dem Koordinatensystem gedreht ist
-		*/
-		float m_angle;
-
-		/**
-		* \var m_layer
-		* \brief Ebene in der sich das Objekt befindet
-		*/
-		short m_layer;
+		LAYER_SPECIAL = 0x10,
 	};
-
+	
 	/**
 	 * \struct TypeInfo
 	 * \brief Enthaelt alle Informationen zum Typ eines Objektes
@@ -297,24 +211,6 @@ class WorldObject {
 
 	};
 
-	/**
-	 * \struct MoveInfo
-	 * \brief Informationen zum aktuelle Bewegungszustand eines Objektes
-	 */
-	struct MoveInfo
-	{
-			/**
-		* \var m_speed_x
-		* \brief TODO
-			*/
-		float m_speed_x;
-
-		/**
-		* \var m_speed_y
-		* \brief TODO
-		*/
-		float m_speed_y;
-	};
 
 	/**
 	 * \enum State
@@ -405,15 +301,6 @@ class WorldObject {
 		return &m_grid_location;
 	}
 	
-	/**
-	 * \fn MoveInfo* getMoveInfo()
-	 * \brief Gibt Zeiger auf aktuellen Bewegungszustand zurueck
-	 * \return aktueller Bewegungszustand
-	 */
-	MoveInfo* getMoveInfo()
-	{
-		return &m_move_info;
-	}
 	
 	//Operations
 	/**
@@ -467,14 +354,12 @@ class WorldObject {
 	}
 	
 	/**
-	 * \fn void moveTo(float x, float y)
-	 * \brief setzt die x- und die y-Koordinate
-	 * \param x x-Koordinate
-	 * \param y y-Koordinate
+	 * \fn bool moveTo(Vector newpos )
+	 * \brief Verschiebt das Objekt an einen neuen Ort
+	 * \param newpos neue Position
 	 * 
-	 * Diese Funktion verschiebt das Objekt an einen anderen Ort. Wenn das Objekt in einem Quadtree eingeordnet ist, so muss bei jeder &Auml;nderung der Koordinaten getestet werden, ob das Objekt im Quadtree neu angeordnet werden muss. Diese Funktion teilt dem Quadtree die &Auml;nderung der Koordinanten mit und l&ouml;st damit ebentuell eine Reorganisation aus. Daher sollte ausserhalb des Quadtree diese Funktion zum ver&auml;ndern der Koordinaten verwendet werden.
 	 */
-	bool moveTo(float x, float y);
+	bool moveTo(Vector newpos);
 	
 	/**
 	 * \fn void takeDamage(Damage* damage)
@@ -543,15 +428,32 @@ class WorldObject {
         m_type_info.m_subtype =t;
     }
 
-
 	/**
-	 * \fn Geometry* getGeometry()
-	 * \brief Gibt einen Zeiger auf die Struktur mit den Basisinformationen zurueck
-	 * \return Zeiger auf die Struktur
+	 * \fn Shape* getShape()
+	 * \brief Gibt die Form des Objektes aus
 	 */
-	Geometry* getGeometry()
+	Shape* getShape()
 	{
-		return &m_geometry;
+		return &m_shape;
+	}
+	
+	/**
+	 * \fn short getLayer()
+	 * \brief Gibt die Ebene des Objektes aus
+	 */
+	short getLayer()
+	{
+		return m_layer;
+	}
+	
+	/**
+	/* \fn void setLayer(short layer)
+	 * \brief Setzt die Ebene des Objektes
+	 * \param layer Ebene
+	 */
+	void setLayer(short layer)
+	{
+		m_layer = layer;
 	}
 
 	/**
@@ -602,6 +504,15 @@ class WorldObject {
 	{
 		m_id = id;
 	}
+	
+	/**
+	 * \fn Vector& getSpeed()
+	 * \brief Gibt die Geschwindigkeit des Objektes aus
+	 */
+	Vector& getSpeed()
+	{
+		return m_speed;
+	}
 
 	/**
 	 * \fn void toString(CharConv* cv)
@@ -638,16 +549,30 @@ class WorldObject {
 	 * \brief Bitmaske mit den Events die das Objekt seit dem letzten Update erlebt hat
 	 */
 	int m_event_mask;
+	
+	/**
+	/* \var short m_layer
+	 * \brief Gibt die Ebene an, in der sich das Objekt befindet
+	 */
+	short m_layer;
+	
+	/**
+	 * \var Vector m_speed
+	 * \brief Gibt die Geschwindigkeit des Objektes an
+	 */
+	Vector m_speed;
 		
 //Private stuff
 private:
 
 	/**
-	 * \var Geometry m_geometry
-	 * \brief Beinhaltet alle  Daten zur Geometrie des  Objekts
+	 * \var Shape m_shape
+	 * \brief Gibt die Form des Objektes an
 	 */
-	Geometry m_geometry;
+	Shape m_shape;
 
+	
+	
 	/**
 	 * \var TypeInfo m_type_info
 	 * \brief Beeinhaltet alle Informationen zum Typ des Objektes
@@ -672,11 +597,8 @@ private:
 	 */
 	
 	GridLocation m_grid_location;
-	 /**
-	 * \var m_move_info
-	 * \brief Information ueber den Bewegungszustand
-	  **/
-	MoveInfo m_move_info;
+	
+	
 	
 	/**
 	 * \var m_destroyed

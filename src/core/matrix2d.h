@@ -69,6 +69,16 @@ class Matrix2d
 	}
 	
 	/**
+	 * \fn Element* operator[](int x)
+	 * \brief Indexoperator
+	 * \param x Index
+	 */
+	Element* operator[](int x)
+	{
+		return &(m_data[x*m_dimy]);
+	}
+	
+	/**
 	 * \fn void clear()
 	 * \brief Schreibt 0 in alle Elemente des Feldes
 	 */

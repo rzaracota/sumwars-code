@@ -34,6 +34,7 @@
 #include "gettext.h"
 #include "charconv.h"
 #include "debug.h"
+#include "geometry.h"
 #include <map>
 #include <vector>
 
@@ -427,16 +428,10 @@ public:
 	ActionType m_prev_type;
 	
 	/**
-	 * \var m_goal_coordinate_x;
-	 * \brief x-Koordinate des Zieles
+	 * \var Vector m_goal
+	 * \brief Ziel der Aktion
 	 */
-	float m_goal_coordinate_x;
-	
-	/**
-	 * \var m_goal_coordinate_y;
-	 * \brief y-Koordinate des Zieles
-	 */
-	float m_goal_coordinate_y;
+	Vector m_goal;
 	
 	/**
 	 * \var m_goal_object_id;

@@ -35,6 +35,7 @@ window_main_gl.o
 ../core/network.o
 ../core/action.o
 ../core/command.o
+../core/geometry.o
 
 ../tinyxml/tinyxml.o
 ../tinyxml/tinyxmlparser.o

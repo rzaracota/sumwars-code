@@ -388,9 +388,27 @@ void SearchField::createGradient(Matrix2d<float[2]>* grad)
 
 }
 
- void SearchField::getGradient(Matrix2d<float>* m_pot,Matrix2d<char>* m_block,int m_dim, float grad[2], int x, int y)
+ void SearchField::getGradient(PathfindInfo* pathinfo,Vector pos, Vector& dir )
 {
 
+	float sqs = pathinfo->m_base_size / pathinfo->m_quality;
+	float l = 0.5*sqs * pathinfo->m_dim;
+	
+	if (fabs(pos.m_x-pathinfo->m_center.m_x) >l  || fabs(pos.m_y-pathinfo->m_center.m_y) >l)
+	{
+		dir = pathinfo->m_start -  pos;
+		return;
+	}
+	
+	Matrix2d<float>& pot = *(pathinfo->m_pot);
+	Matrix2d<char>& block = *(pathinfo->m_block);
+	int dim = pathinfo->m_dim;
+	
+	
+	int x,y;
+	x = (int) ((pos.m_x - pathinfo->m_center.m_x + l) / sqs);
+	y = (int) ((pos.m_y - pathinfo->m_center.m_y + l) / sqs);
+	
 	const int adj[4][2] = {{0,1},{1,0},{0,-1},{-1,0}};
 	const int diag[4][2] = {{1,1},{1,-1},{-1,-1},{-1,1}};
 
@@ -404,9 +422,9 @@ void SearchField::createGradient(Matrix2d<float[2]>* grad)
 	i =x;
 	j=y;
 
-	f=*(m_pot->ind(i,j));
+	f=pot[i][j];
 
-	if ((*(m_block->ind(i,j))=='X'))
+	if (block[i][j]=='X')
 	{
 		DEBUG("blockiertes Feld betreten");
 		qmax = 1000000;
@@ -414,20 +432,20 @@ void SearchField::createGradient(Matrix2d<float[2]>* grad)
 		{
 			ia1 = i+adj[k][0];
 			ja1 = j+adj[k][1];
-			if (ia1 <0 ||  ja1 <0 || ia1>=m_dim ||  ja1>=m_dim )
+			if (ia1 <0 ||  ja1 <0 || ia1>=dim ||  ja1>=dim )
 			{
 				continue;
 			}
-			fa1 = *(m_pot->ind(ia1,ja1));
-
+			fa1 = pot[ia1][ia2];
+			
 			q = fabs(fa1);
 			DEBUG5("coord %i %i val %f",ia1,ja1,q);
 			if (q<qmax && q!=0)
 			{
 
 				qmax = q;
-				grad[0] = adj[k][0];
-				grad[1] = adj[k][1];
+				dir.m_x = adj[k][0];
+				dir.m_y = adj[k][1];
 				b = true;
 			}
 
@@ -455,7 +473,7 @@ void SearchField::createGradient(Matrix2d<float[2]>* grad)
 			ia2 = i+adj[(k+1)%4][0];
 			ja2 = j+adj[(k+1)%4][1];
 
-			if (ia1 <0 || ia2<0 || ja1 <0 || ja2<0 || ia1>=m_dim || ia2>=m_dim || ja1>=m_dim || ja2>=m_dim)
+			if (ia1 <0 || ia2<0 || ja1 <0 || ja2<0 || ia1>=dim || ia2>=dim || ja1>=dim || ja2>=dim)
 			{
 				continue;
 
@@ -465,14 +483,14 @@ void SearchField::createGradient(Matrix2d<float[2]>* grad)
 			id = i+diag[k][0];
 			jd = j+diag[k][1];
 
-			if (*(m_block->ind(ia1,ja1))=='X' || *(m_block->ind(ia2,ja2))=='X' || *(m_block->ind(id,jd))=='X')
+			if (block[ia1][ja1]=='X' || block[ia2][ja2]=='X' || block[id][jd]=='X')
 			{
 				continue;
 			}
 
-			fa1 = *(m_pot->ind(ia1,ja1));
-			fa2 = *(m_pot->ind(ia2,ja2));
-			fd = *(m_pot->ind(id,jd));
+			fa1 = pot[ia1][ja1];
+			fa2 = pot[ia2][ja2];
+			fd = pot[id][jd];
 
 
 			if (fa1<f && fa2<f && fd<fa1 && fd < fa2)
@@ -484,8 +502,8 @@ void SearchField::createGradient(Matrix2d<float[2]>* grad)
 				if (q>qmax)
 				{
 
-					grad[0] = f1;
-					grad[1] = f2;
+					dir.m_x = f1;
+					dir.m_y = f2;
 					q=qmax;
 
 				}
@@ -500,11 +518,11 @@ void SearchField::createGradient(Matrix2d<float[2]>* grad)
 				ia1 = i+adj[k][0];
 				ja1 = j+adj[k][1];
 
-				if (ia1 <0 || ja1 <0 || ia1>=m_dim || ja1>=m_dim)
+				if (ia1 <0 || ja1 <0 || ia1>=dim || ja1>=dim)
 					continue;
 
-				fa1 = *(m_pot->ind(ia1,ja1));
-				if (fa1 <f && *(m_block->ind(ia1,ja1))!='X')
+				fa1 = pot[ia1][ja1];
+				if (fa1 <f && block[ia1][ja1]!='X')
 				{
 					f1 = (f-fa1)*adj[k][0];
 					f2 = (f-fa1)*adj[k][1];
@@ -513,8 +531,8 @@ void SearchField::createGradient(Matrix2d<float[2]>* grad)
 					q = f1*f1+f2*f2;
 					if (q>qmax)
 					{
-						grad[0] = f1;
-						grad[1] = f2;
+						dir.m_x = f1;
+						dir.m_y = f2;
 						qmax=q;
 						b=true;
 					}
@@ -525,8 +543,8 @@ void SearchField::createGradient(Matrix2d<float[2]>* grad)
 
 	if (!b)
 	{
-		grad[0] = 0;
-		grad[1] = 0;
+		dir.m_x = 0;
+		dir.m_y = 0;
 	}
 
 }

@@ -212,18 +212,12 @@ class Document
 	 	 */
 		int m_clicked_object_id;
 
-		 /**
-		 * \var m_clicked_x
-		 * \brief angeklickte x-Koordinate
-		  */
-		float m_clicked_x;
-
-		 /**
-		 * \var m_clicked_y
-		 * \brief angeklickte y-Koordinate
-		  */
-		float m_clicked_y;
-
+		/**
+		 * \var Vector m_clicked;
+		 * \brief zuletzt angeclickter Punkt
+		 */
+		Vector m_clicked;
+		
 		/**
 		 * \var float m_left_mouse_hold_time
 		 * \brief Zaehler der die Anzahl Frames zaehlt die die linke Maustaste festgehalten wurde

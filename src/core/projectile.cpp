@@ -5,7 +5,7 @@ Projectile::Projectile(World* w,ProjectileType type, WorldObject::TypeInfo::Frac
 	m_id = id;
 	m_type = type;
 	m_timer =0;
-	m_geometry.m_layer = WorldObject::Geometry::LAYER_AIR;
+	m_layer = WorldObject::LAYER_AIR;
 	
 	m_world =w;
 	m_last_hit_object_id =0;
@@ -101,15 +101,13 @@ Projectile::Projectile(World* w,ProjectileType type, WorldObject::TypeInfo::Frac
 	}
 
 
-	m_geometry.m_radius =r;
+	m_shape.m_radius =r;
 	m_creator_fraction = fr;
 
 }
 
 bool Projectile::update(float time)
 {
-	DEBUG5("projektile type %i coord %f %f time %f , %f/ %f", m_type,getGeometry()->m_coordinate_x,getGeometry()->m_coordinate_y,time,m_timer, m_timer_limit);
-	DEBUG5("speed %f %f",m_speed_x,m_speed_y);
 
 	// Zeit die beim aktuellen Durchlauf der Schleife verbraucht wird
 	float dtime;
@@ -124,13 +122,11 @@ bool Projectile::update(float time)
 	float x;
 	float y;
 	// zuletzt getroffenes Objekt (ID)
-	float dir[2],d;
+	float v;
 	while (time>0)
 	{
 		hitobj.clear();
 		dtime = time;
-		x = getGeometry()->m_coordinate_x;
-		y = getGeometry()->m_coordinate_y;
 
 		// Timer erhoehen
 		if (dtime > m_timer_limit-m_timer)
@@ -158,7 +154,7 @@ bool Projectile::update(float time)
 			case EXPLODING:
 				DEBUG5("exploding");
 				// Radius vergroessern
-				m_geometry.m_radius += (m_max_radius)*dtime/(m_timer_limit);
+				m_shape.m_radius += (m_max_radius)*dtime/(m_timer_limit);
 
 				// Wenn Timer Limit erreicht
 				if (m_timer >= m_timer_limit)
@@ -167,15 +163,10 @@ bool Projectile::update(float time)
 
 					if (m_world->isServer())
 					{
-						Shape s;
-						s.m_coordinate_x = x;
-						s.m_coordinate_y = y;
-						s.m_type = Shape::CIRCLE;
-						s.m_radius = m_geometry.m_radius;
 
 						// Alle Objekte im Explosionsradius suchen
 						hitobj.clear();
-						m_world->getObjectsInShape(&s,m_region,&hitobj,getGeometry()->m_layer,WorldObject::CREATURE,0);
+						m_world->getObjectsInShape(&m_shape,m_region,&hitobj,m_layer,WorldObject::CREATURE,0);
 						for (i=hitobj.begin();i!=hitobj.end();++i)
 						{
 							// Schaden austeilen
@@ -186,10 +177,10 @@ bool Projectile::update(float time)
 						{
 							// Flag mehrfach explodierend gesetzt
 							DEBUG("multiexploding");
-							d= 1/sqrt(sqr(m_speed_x)+sqr(m_speed_y));
-							dir[0] = m_speed_x * d;
-							dir[1] = m_speed_y * d;
-
+							Vector dir = m_speed;
+							dir.normalize();
+							dir *= m_shape.m_radius;
+							
 							// Schaden halbieren
 							Damage dmg;
 							memcpy(&dmg,&m_damage,sizeof(Damage));
@@ -204,25 +195,28 @@ bool Projectile::update(float time)
 							memcpy(pr->getDamage(),&dmg,sizeof(Damage));
 							pr->setFlags(Projectile::EXPLODES);
 							pr->setMaxRadius(1);
-							m_world->insertProjectile(pr,x+dir[0]*s.m_radius,y+dir[1]*s.m_radius,m_region);
-
+							m_world->insertProjectile(pr,m_shape.m_center + dir ,m_region);
+							
+							dir.m_x = -dir.m_x;
 							pr = new Projectile(m_world,m_type,m_creator_fraction, m_world->getValidProjectileId());
 							memcpy(pr->getDamage(),&dmg,sizeof(Damage));
 							pr->setFlags(Projectile::EXPLODES);
 							pr->setMaxRadius(1);
-							m_world->insertProjectile(pr,x-dir[1]*s.m_radius,y+dir[0]*s.m_radius,m_region);
+							m_world->insertProjectile(pr,m_shape.m_center + dir,m_region);
 
+							dir.m_y = -dir.m_y;
 							pr = new Projectile(m_world,m_type,m_creator_fraction, m_world->getValidProjectileId());
 							memcpy(pr->getDamage(),&dmg,sizeof(Damage));
 							pr->setFlags(Projectile::EXPLODES);
 							pr->setMaxRadius(1);
-							m_world->insertProjectile(pr,x-dir[0]*s.m_radius,y-dir[1]*s.m_radius,m_region);
+							m_world->insertProjectile(pr,m_shape.m_center + dir,m_region);
 
+							dir.m_x = -dir.m_x;
 							pr = new Projectile(m_world,m_type,m_creator_fraction, m_world->getValidProjectileId());
 							memcpy(pr->getDamage(),&dmg,sizeof(Damage));
 							pr->setFlags(Projectile::EXPLODES);
 							pr->setMaxRadius(1);
-							m_world->insertProjectile(pr,x+dir[1]*s.m_radius,y-dir[0]*s.m_radius,m_region);
+							m_world->insertProjectile(pr,m_shape.m_center + dir,m_region);
 
 						}
 					}
@@ -251,7 +245,7 @@ bool Projectile::update(float time)
 				if (m_type == FIRE_WALL)
 				{
 					// Radius reduzieren
-					m_geometry.m_radius -= 2* dtime/(m_timer_limit);
+					m_shape.m_radius -= 2* dtime/(m_timer_limit);
 				}
 				if (m_timer >= m_timer_limit)
 				{
@@ -271,15 +265,9 @@ bool Projectile::update(float time)
 	{
 		// Typ Feuersaeule
 
-		// Flache der Feuersaeule
-		Shape s;
-		s.m_coordinate_x = m_geometry.m_coordinate_x;
-		s.m_coordinate_y = m_geometry.m_coordinate_y;
-		s.m_type = Shape::CIRCLE;
-		s.m_radius = m_geometry.m_radius;
 
 		// Objekte suchen die die Saeule beruehren
-		m_world->getObjectsInShape(&s,m_region,&hitobj,getGeometry()->m_layer,WorldObject::CREATURE,0);
+		m_world->getObjectsInShape(&m_shape,m_region,&hitobj,m_layer,WorldObject::CREATURE,0);
 		for (i=hitobj.begin();i!=hitobj.end();++i)
 		{
 			// Schaden austeilen
@@ -303,15 +291,13 @@ void Projectile::handleFlying(float dtime)
 	WorldObject* hit;
 	float x;
 	float y;
-	float xnew, ynew;
-	x = getGeometry()->m_coordinate_x;
-	y = getGeometry()->m_coordinate_y;
-	float dir[2],d;
+	Vector dir,newdir(0,0);
+	Vector sdir,hitpos,ndir;
+	Vector &pos = m_shape.m_center, newpos;
+	float d;
 	float rnew,rmin;
 	float x2,y2;
 	int lid;
-	float newdir[2];
-	float ndir[0],sdir[2];
 
 	if (m_type == GUIDED_ARROW)
 	{
@@ -332,17 +318,13 @@ void Projectile::handleFlying(float dtime)
 
 			// Kreis um aktuelle Position mit Umkreis 5
 			Shape s;
-			s.m_coordinate_x = x;
-			s.m_coordinate_y = y;
+			s.m_center = pos;
 			s.m_type = Shape::CIRCLE;
 			s.m_radius = 5;
 
-			// neue Flugrichtung
-			newdir[0]=0;
-			newdir[1]=0;
 
 			// alle Objekte im Kreis suchen
-			m_world->getObjectsInShape(&s,m_region,&hitobj,getGeometry()->m_layer, WorldObject::CREATURE,0);
+			m_world->getObjectsInShape(&s,m_region,&hitobj,m_layer, WorldObject::CREATURE,0);
 
 			// alle Objekte als potentielle Ziele loeschen, die dem Erschaffer des Projektils nicht feindlich gesinnt sind
 			if (!hitobj.empty())
@@ -362,37 +344,27 @@ void Projectile::handleFlying(float dtime)
 			if (!hitobj.empty())
 			{
 				// normieren der aktuellen Geschwindigkeit
-				d= 1/sqrt(sqr(m_speed_x)+sqr(m_speed_y));
-				sdir[0]= m_speed_x *d;
-				sdir[1]= m_speed_y *d;
+				sdir = m_speed;
+				sdir.normalize();
 
-				DEBUG5("old speed %f %f",m_speed_x,m_speed_y);
 				// Durchmustern der potentiellen Ziele
 				for (i=hitobj.begin();i!=hitobj.end();++i)
 				{
 
 					hit= (*i);
-					// TODO: die nicht feindlichen sollten eigentlich schon rausgefiltern sein...
-					if (m_world->getRelation(m_creator_fraction,hit) != WorldObject::HOSTILE)
-						continue;
 
-					//DEBUG("calc obj %i",hit->getId());
 					// Koordinaten des Potentiellen Zieles
-					x2 = hit->getGeometry()->m_shape.m_coordinate_x;
-					y2 = hit->getGeometry()->m_shape.m_coordinate_y;
+					hitpos = hit->getShape()->m_center;
 
 					// Richtung von aktueller Position zum Ziel, normiert
-					dir[0] = x2-x;
-					dir[1] = y2-y;
-					d = 1/sqrt(sqr(dir[0]) + sqr(dir[1]));
-					ndir[0] = dir[0]*d;
-					ndir[1] = dir[1]*d;
+					dir = hitpos - pos;
+					ndir = dir;
+					ndir.normalize();
 
-					//DEBUG("dir %f %f",dir[0],dir[1]);
 					// effektiver Abstand: normaler Abstand minus 4* skalarprodukt(aktuelle Flugrichtung, Zielrichtung)
 					// Ziele fuer die eine scharfe Wendung noetig ist, werden schlechter bewertet
-					rnew = -4*(ndir[0]*sdir[0]+ndir[1]*sdir[1]);
-					rnew += sqr(dir[0]) + sqr(dir[1]);
+					rnew = -4*(ndir*sdir);
+					rnew += sqr(dir.m_x) + sqr(dir.m_y);
 
 					//DEBUG("rnew %f",rnew);
 					// Wenn aktuelles Objekt besser ist als bisher bestes
@@ -400,8 +372,7 @@ void Projectile::handleFlying(float dtime)
 					{
 						// neue Richtung setzen
 						rmin = rnew;
-						newdir[0]=dir[0];
-						newdir[1]=dir[1];
+						newdir = dir;
 
 					}
 
@@ -410,57 +381,43 @@ void Projectile::handleFlying(float dtime)
 		}
 		else
 		{
-			// es gibt ein Zielobjekt
+			// es gibt ein vorgegebenes Zielobjekt
 			// Richtung ist Richtung zum Zielobjekt
-			newdir[0] = hit->getGeometry()->m_shape.m_coordinate_x-x;
-			newdir[1] = hit->getGeometry()->m_shape.m_coordinate_y-y;
+			newdir = hit->getShape()->m_center - pos;
 
 		}
 
-		d = sqr(newdir[0]) + sqr(newdir[1]);
-		if (d>0)
+		// aktuelle absolute Geschwindigkeit
+		float v = m_speed.getLength();
+		
+		
+		// normieren der Zielrichtung
+		newdir.normalize();
+		newdir *= v;
+
+		float p =0.3*dtime / 50;
+		if (p>1)
+			p=1;
+		DEBUG5("p = %f",p);
+		DEBUG5("newdir %f %f",newdir.m_x,newdir.m_y);
+		
+		// Neue Richtung ergibt sich aus Linearkombination von aktueller Richtung und Zielrichtung
+		m_speed = m_speed*(1-p) + newdir*p;
+		DEBUG5("new speed %f %f",m_speed.m_x,m_speed.m_y);
+
+		// neue Richtung normieren
+		m_speed.normalize();
+		m_speed *= v;
+
+		if (m_world->timerLimit(0))
 		{
-			// normieren der Zielrichtung
-			d= 0.01/sqrt(d);
-			newdir[0]*=d;
-			newdir[1]*=d;
-
-			float p =0.3*dtime / 50;
-			if (p>1)
-				p=1;
-			DEBUG5("p = %f",p);
-			DEBUG5("newdir %f %f",newdir[0],newdir[1]);
-			// Neue Richtung ergibt sich aus Linearkombination von aktueller Richtung und Zielrichtung
-			m_speed_x = (1-p)*m_speed_x+(p)*newdir[0];
-			m_speed_y = (1-p)*m_speed_y+(p)*newdir[1];
-			DEBUG5("new speed %f %f",m_speed_x,m_speed_y);
-
-			// neue Richtung normieren
-			d = sqr(m_speed_x) + sqr(m_speed_y);
-			if (d>0)
-			{
-				d= 0.01/sqrt(d);
-				m_speed_x *=d;
-				m_speed_y *=d;
-
-			}
-			else
-			{
-				m_speed_x=newdir[0];
-				m_speed_y=newdir[1];
-			}
-
-			if (m_world->timerLimit(0))
-			{
-				m_event_mask |= Event::DATA_SPEED;
-			}
+			m_event_mask |= Event::DATA_SPEED;
 		}
+		
 		hitobj.clear();
 
-		if (m_speed_y!=0 || m_speed_x !=0)
-		{
-			m_geometry.m_angle = atan2(m_speed_y,m_speed_x);
-		}
+		m_shape.m_angle = m_speed.angle();
+		
 	}
 
 	if (m_timer >= m_timer_limit)
@@ -470,14 +427,14 @@ void Projectile::handleFlying(float dtime)
 	}
 
 	// neue Koordinaten nach Ablauf des Zeitquantums
-	xnew = x+m_speed_x*dtime;
-	ynew = y+m_speed_y*dtime;
+	newpos = pos + m_speed*dtime;
 
+	// Linie zwischen alter und neuer Position
+	Line line(pos,newpos);
 
 
 	// Objekt an der aktuellen Position suchen
-	DEBUG5("getting objects on Line %f %f %f %f",x,y,xnew,ynew);
-	m_world->getObjectsOnLine(x,y,xnew,ynew,m_region,&hitobj,getGeometry()->m_layer,WorldObject::CREATURE | WorldObject::FIXED,0);
+	m_world->getObjectsOnLine(line,m_region,&hitobj,m_layer,WorldObject::CREATURE | WorldObject::FIXED,0);
 
 	// Alle Objekte herausfiltern die verbuendet sind, sowie das zuletzt gerade getroffene Objekt
 	if (!hitobj.empty())
@@ -567,18 +524,17 @@ void Projectile::handleFlying(float dtime)
 		{
 			// Projektil hat ein Lebewesen getroffen, springt weiter
 			m_state = FLYING;
-			float speed = sqrt(sqr(m_speed_x)+sqr(m_speed_y));
+			float speed = m_speed.getLength();
 
 			// Kreis mit Radius 5 um aktuelle Position
 			Shape s;
-			s.m_coordinate_x = m_geometry.m_coordinate_x;
-			s.m_coordinate_y = m_geometry.m_coordinate_y;
+			s.m_center = pos;
 			s.m_type = Shape::CIRCLE;
 			s.m_radius = 5;
 
 			// Alle Objekte im Kreis suchen
 			hitobj.clear();
-			m_world->getObjectsInShape(&s,m_region,&hitobj,WorldObject::Geometry::LAYER_AIR,WorldObject::CREATURE,0);
+			m_world->getObjectsInShape(&s,m_region,&hitobj,WorldObject::LAYER_AIR,WorldObject::CREATURE,0);
 			rmin = sqr(s.m_radius);
 			lid = hit->getId();
 			hit =0;
@@ -601,10 +557,9 @@ void Projectile::handleFlying(float dtime)
 					continue;
 
 				// Abstand zur aktuellen Position ermitteln
-				x2 = (*i)->getGeometry()->m_shape.m_coordinate_x;
-				y2 = (*i)->getGeometry()->m_shape.m_coordinate_y;
+				hitpos = (*i)->getShape()->m_center - newpos;
 
-				rnew = sqr(x2-xnew)+sqr(y2-ynew);
+				rnew = sqr(hitpos.m_x)+sqr(hitpos.m_y);
 				DEBUG5("radius %f",rnew);
 				// Das Objekt herraussuchen, welches den minimalen Abstand aufweist
 				if (rnew < rmin)
@@ -622,30 +577,20 @@ void Projectile::handleFlying(float dtime)
 				DEBUG5("counter %i",m_counter);
 
 				// Neue Richtung ist Vektor von aktueller Position zum neuen Ziel
-				x2 = hit->getGeometry()->m_shape.m_coordinate_x;
-				y2 = hit->getGeometry()->m_shape.m_coordinate_y;
-				dir[0] = x2-xnew;
-				dir[1] = y2-ynew;
-				d = 1/sqrt(sqr(dir[0])+sqr(dir[1]));
-				dir[0] *=d;
-				dir[1] *=d;
-				m_speed_x = dir[0] *speed;
-				m_speed_y = dir[1] *speed;
+				dir = hit->getShape()->m_center - newpos;
+				dir.normalize();
+				m_speed = dir *speed;
 
 				m_event_mask |= Event::DATA_SPEED | Event::DATA_PROJ_STATE;
 
-				DEBUG5("koord %f %f to %f %f",xnew,ynew,x2,y2);
-				DEBUG5("dir %f %f",dir[0],dir[1]);
+				DEBUG5("dir %f %f",dir.m_x,dir.m_y);
 				m_timer =0;
 
 				// bei Kettenblitz Schaden pro Sprung um 20% reduzieren
 				if (m_type == CHAIN_LIGHTNING)
 					m_damage.m_multiplier[Damage::AIR] *= 0.8;
 
-				if (m_speed_y!=0 || m_speed_x !=0)
-				{
-					m_geometry.m_angle = atan2(m_speed_y,m_speed_x);
-				}
+				m_shape.m_angle = m_speed.angle();
 			}
 			else
 			{
@@ -662,9 +607,9 @@ void Projectile::handleFlying(float dtime)
 		}
 
 	}
+	
 	// neue Koordinaten setzen
-	getGeometry()->m_coordinate_x = xnew;
-	getGeometry()->m_coordinate_y = ynew;
+	m_shape.m_center = newpos;
 
 }
 
@@ -678,28 +623,25 @@ void Projectile::handleGrowing(float dtime)
 	float rnew,rmin;
 	float rold;
 	int lid;
+	Vector& pos= m_shape.m_center;
 
-	// aktuelle Position
-	x = getGeometry()->m_coordinate_x;
-	y = getGeometry()->m_coordinate_y;
 
-	rold = m_geometry.m_radius;
+	rold = m_shape.m_radius;
 	// Radius erhoehen
-	m_geometry.m_radius += m_max_radius* dtime/(m_timer_limit);
+	m_shape.m_radius += m_max_radius* dtime/(m_timer_limit);
 
 	if ((m_type == FIRE_WAVE || m_type == ICE_RING) && m_world->isServer())
 	{
 		// Schaden an die neu getroffenen Lebewesen austeilen
-		rnew = m_geometry.m_radius;
-		// Flaeche die der Kreis nach dem Update ueberdeckt
+		rnew = m_shape.m_radius;
+		
 		Shape s;
-		s.m_coordinate_x = m_geometry.m_coordinate_x;
-		s.m_coordinate_y = m_geometry.m_coordinate_y;
+		s.m_center = m_shape.m_center;
 		s.m_type = Shape::CIRCLE;
-		s.m_radius = rnew;
+		s.m_radius = m_shape.m_radius;
 
 		// Alle Objekte suchen die sich in dem Kreis befinden
-		m_world->getObjectsInShape(&s,m_region,&hitobj,getGeometry()->m_layer,WorldObject::CREATURE,0);
+		m_world->getObjectsInShape(&m_shape,m_region,&hitobj,m_layer,WorldObject::CREATURE,0);
 		lid = m_last_hit_object_id;
 		DEBUG5("last hit id = %i",lid);
 		rmin =0;
@@ -720,7 +662,7 @@ void Projectile::handleGrowing(float dtime)
 					continue;
 
 				// kein Schaden an Objekte austeilen, die sich im inneren Kreis befinden
-				if (World::intersect(&(hit->getGeometry()->m_shape),&s))
+				if (hit->getShape()->intersects(s))
 				{
 					DEBUG5("is inside inner circle");
 					continue;
@@ -768,12 +710,8 @@ void Projectile::handleStable(float dtime)
 	WorldObject* hit;
 
 	// aktuelle Position
-	float x;
-	float y;
-	x = getGeometry()->m_coordinate_x;
-	y = getGeometry()->m_coordinate_y;
-
-	float dir[2];
+	Vector& pos= m_shape.m_center;
+	Vector dir;
 	float x2,y2;
 	Projectile* pr;
 
@@ -784,15 +722,9 @@ void Projectile::handleStable(float dtime)
 
 		if (m_type == BLIZZARD)
 		{
-			// Flaeche die vom Blizzard bedeckt wird
-			Shape s;
-			s.m_coordinate_x = m_geometry.m_coordinate_x;
-			s.m_coordinate_y = m_geometry.m_coordinate_y;
-			s.m_type = Shape::CIRCLE;
-			s.m_radius = m_geometry.m_radius;
 
 			// Alle Objekte in der Flaeche suchen
-			m_world->getObjectsInShape(&s,m_region,&hitobj,getGeometry()->m_layer,WorldObject::CREATURE,0);
+			m_world->getObjectsInShape(&m_shape,m_region,&hitobj,m_layer,WorldObject::CREATURE,0);
 			for (i=hitobj.begin();i!=hitobj.end();++i)
 			{
 				// Schaden austeilen
@@ -813,15 +745,8 @@ void Projectile::handleStable(float dtime)
 
 		if (m_type == FREEZE || m_type == STATIC_SHIELD)
 		{
-			// vom Zauber ueberdeckte Flaeche
-			Shape s;
-			s.m_coordinate_x = m_geometry.m_coordinate_x;
-			s.m_coordinate_y = m_geometry.m_coordinate_y;
-			s.m_type = Shape::CIRCLE;
-			s.m_radius = m_geometry.m_radius;
-
 			// Alle Objekte in der Flaeche suchen
-			m_world->getObjectsInShape(&s,m_region,&hitobj,getGeometry()->m_layer,WorldObject::CREATURE,0);
+			m_world->getObjectsInShape(&m_shape,m_region,&hitobj,m_layer,WorldObject::CREATURE,0);
 			for (i=hitobj.begin();i!=hitobj.end();++i)
 			{
 				// Schaden austeilen
@@ -833,27 +758,23 @@ void Projectile::handleStable(float dtime)
 		if (m_type ==  THUNDERSTORM)
 		{
 			// Punkt in der Flaeche des Zaubers auswuerfeln
-			dir[0] = m_geometry.m_radius;
-			dir[1] = m_geometry.m_radius;
+			dir = Vector(m_shape.m_radius , m_shape.m_radius);
 
-			while (sqr(dir[0]) + dir[1] > sqr(m_geometry.m_radius))
+			while (dir.getLength() > m_shape.m_radius)
 			{
-				dir[0] = m_geometry.m_radius - 2*m_geometry.m_radius*rand()*1.0/RAND_MAX;
-				dir[1] = m_geometry.m_radius - 2*m_geometry.m_radius*rand()*1.0/RAND_MAX;
+				dir.m_x = m_shape.m_radius*(1 - 2*rand()*1.0/RAND_MAX);
+				dir.m_y = m_shape.m_radius*(1 - 2*rand()*1.0/RAND_MAX);
 			}
 
 			// Kreis um den ausgewuerfelten Punkt mit Radius 1.5
 			Shape s;
-			s.m_coordinate_x = dir[0]+x;
-			s.m_coordinate_y = dir[1]+y;
+			s.m_center = dir+pos;
 			s.m_type = Shape::CIRCLE;
 			s.m_radius = 1.5;
 			hitobj.clear();
 
 			// Alle Objekte in dem Kreis suchen
-			m_world->getObjectsInShape(&s,m_region,&hitobj,getGeometry()->m_layer,WorldObject::CREATURE,0);
-
-			DEBUG5("center %f %f",s.m_coordinate_x,s.m_coordinate_y);
+			m_world->getObjectsInShape(&s,m_region,&hitobj,m_layer,WorldObject::CREATURE,0);
 
 			// Alle nicht feindlichen Objekte aus der Liste entfernen
 			if (!hitobj.empty())
@@ -877,14 +798,10 @@ void Projectile::handleStable(float dtime)
 
 				DEBUG5("hit obj %i",hit->getId());
 
-				// Position des gefundenen Zieles
-				x2 = hit->getGeometry()->m_shape.m_coordinate_x;
-				y2 = hit->getGeometry()->m_shape.m_coordinate_y;
-
 				// beim Ziel Projektil vom Typ Blitz erzeugen
 				pr = new Projectile(m_world,Projectile::LIGHTNING,m_creator_fraction, m_world->getValidProjectileId());
 				memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
-				m_world->insertProjectile(pr,x2,y2,m_region);
+				m_world->insertProjectile(pr,hit->getShape()->m_center,m_region);
 			}
 
 			// Gewitter besteht aus 30 Blitzen
@@ -912,7 +829,7 @@ void Projectile::handleStable(float dtime)
 		if (m_type == LIGHTNING || m_type ==LIGHT_BEAM  || m_type ==ELEM_EXPLOSION || m_type ==ACID || m_type ==DIVINE_BEAM  || m_type ==HYPNOSIS)
 		{
 			// Objekt an der Stelle suchen an der der Zauber wirkt
-			hit = m_world->getObjectAt( getGeometry()->m_coordinate_x,getGeometry()->m_coordinate_y,m_region,getGeometry()->m_layer );
+			hit = m_world->getObjectAt( pos,m_region, m_layer );
 
 			if (hit !=0)
 			{
@@ -932,15 +849,15 @@ void Projectile::toString(CharConv* cv)
 	cv->toBuffer((char) m_creator_fraction);
 	cv->toBuffer( m_id);
 	cv->toBuffer((char) m_state);
-	cv->toBuffer(m_geometry.m_coordinate_x);
-	cv->toBuffer(m_geometry.m_coordinate_y);
-	cv->toBuffer(m_geometry.m_radius);
-	cv->toBuffer(m_geometry.m_angle);
-	cv->toBuffer(m_geometry.m_layer);
+	cv->toBuffer(m_shape.m_center.m_x);
+	cv->toBuffer(m_shape.m_center.m_y);
+	cv->toBuffer(m_shape.m_radius);
+	cv->toBuffer(m_shape.m_angle);
+	cv->toBuffer(m_layer);
 	cv->toBuffer(m_timer);
 	cv->toBuffer(m_timer_limit);
-	cv->toBuffer(m_speed_x);
-	cv->toBuffer(m_speed_y);
+	cv->toBuffer(m_speed.m_x);
+	cv->toBuffer(m_speed.m_y);
 	cv->toBuffer(m_flags);
 	cv->toBuffer(m_max_radius);
 	cv->toBuffer(m_goal_object);
@@ -954,15 +871,15 @@ void Projectile::fromString(CharConv* cv)
 	char tmp;
 	cv->fromBuffer<char>(tmp);
 	m_state = (ProjectileState) tmp;
-	cv->fromBuffer<float>(m_geometry.m_coordinate_x);
-	cv->fromBuffer<float>(m_geometry.m_coordinate_y);
-	cv->fromBuffer<float>(m_geometry.m_radius);
-	cv->fromBuffer<float>(m_geometry.m_angle);
-	cv->fromBuffer<short>(m_geometry.m_layer);
+	cv->fromBuffer<float>(m_shape.m_center.m_x);
+	cv->fromBuffer<float>(m_shape.m_center.m_y);
+	cv->fromBuffer<float>(m_shape.m_radius);
+	cv->fromBuffer<float>(m_shape.m_angle);
+	cv->fromBuffer<short>(m_layer);
 	cv->fromBuffer<float>(m_timer);
 	cv->fromBuffer<float>(m_timer_limit);
-	cv->fromBuffer(m_speed_x);
-	cv->fromBuffer(m_speed_y);
+	cv->fromBuffer(m_speed.m_x);
+	cv->fromBuffer(m_speed.m_y);
 	cv->fromBuffer(m_flags);
 	cv->fromBuffer(m_max_radius);
 	cv->fromBuffer(m_goal_object);
@@ -972,10 +889,10 @@ void Projectile::writeEvent(Event* event, CharConv* cv)
 {
 	if (event->m_data & Event::DATA_SPEED)
 	{
-		cv->toBuffer(m_geometry.m_coordinate_x);
-		cv->toBuffer(m_geometry.m_coordinate_y);
-		cv->toBuffer(m_speed_x);
-		cv->toBuffer(m_speed_y);
+		cv->toBuffer(m_shape.m_center.m_x);
+		cv->toBuffer(m_shape.m_center.m_y);
+		cv->toBuffer(m_speed.m_x);
+		cv->toBuffer(m_speed.m_y);
 	}
 
 	if (event->m_data & Event::DATA_PROJ_STATE)
@@ -1001,7 +918,7 @@ void Projectile::writeEvent(Event* event, CharConv* cv)
 	if (event->m_data & Event::DATA_MAX_RADIUS)
 	{
 		cv->toBuffer(m_max_radius);
-		cv->toBuffer<float>(m_geometry.m_radius);
+		cv->toBuffer<float>(m_shape.m_radius);
 	}
 }
 
@@ -1009,14 +926,14 @@ void Projectile::processEvent(Event* event, CharConv* cv)
 {
 	if (event->m_data & Event::DATA_SPEED)
 	{
-		cv->fromBuffer(m_geometry.m_coordinate_x);
-		cv->fromBuffer(m_geometry.m_coordinate_y);
-		cv->fromBuffer(m_speed_x);
-		cv->fromBuffer(m_speed_y);
+		cv->fromBuffer(m_shape.m_center.m_x);
+		cv->fromBuffer(m_shape.m_center.m_y);
+		cv->fromBuffer(m_speed.m_x);
+		cv->fromBuffer(m_speed.m_y);
 
-		if (m_speed_y!=0 || m_speed_x !=0)
+		if (m_speed.m_y!=0 || m_speed.m_x !=0)
 		{
-			m_geometry.m_angle = atan2(m_speed_y,m_speed_x);
+			m_shape.m_angle = m_speed.angle();
 		}
 	}
 
@@ -1048,7 +965,7 @@ void Projectile::processEvent(Event* event, CharConv* cv)
 	if (event->m_data & Event::DATA_MAX_RADIUS)
 	{
 		cv->fromBuffer(m_max_radius);
-		cv->fromBuffer<float>(m_geometry.m_radius);
+		cv->fromBuffer<float>(m_shape.m_radius);
 	}
 }
 

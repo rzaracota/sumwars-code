@@ -409,13 +409,12 @@ protected:
 	
 	
 	/**
-	 * \fn  virtual void performActionCritPart(float goalx, float goaly, WorldObject* goal)
+	 * \fn virtual void performActionCritPart(Vector goal, WorldObject* goalobj)
 	 * \brief Fuehrt den entscheidenden Part einer Action (Schaden austeilen, Status veraendern usw aus
-	 * \param goalx x-Koordinate des Zieles
-	 * \param goaly x-Koordinate des Zieles
-	 * \param goal Zeiger auf der Zielobjekt, ist NULL wenn kein Zielobjekt existiert
+	 * \param goal Zielpunkt
+	 * \param goalobj Zeiger auf der Zielobjekt, ist NULL wenn kein Zielobjekt existiert
 	 */
-	virtual void performActionCritPart(float goalx, float goaly, WorldObject* goal);
+	virtual void performActionCritPart(Vector goal, WorldObject* goalobj);
 	
 	/**
 	 * \var std::string m_name

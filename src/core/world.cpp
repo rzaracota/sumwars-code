@@ -124,93 +124,101 @@ void World::createRegion(short region)
 		{
 			reg->setTile(TILE_WATER,i,6);
 		}
+		
+		/*
+		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "fence2");
+		insertObject(wo, Vector(12,12),rid);
+		wo->getShape()->m_angle = 0.4;
+		*/
 
 		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "fence1");
-		insertObject(wo, 4,2,rid);
+		insertObject(wo, Vector(4,2),rid);
 		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "fence2");
-		insertObject(wo, 12,2,rid);
+		insertObject(wo, Vector(12,2),rid);
+		
+		
 		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "fence3");
-		insertObject(wo, 20,2,rid);
+		insertObject(wo, Vector(20,2),rid);
 		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "fence4");
-		insertObject(wo, 28,2,rid);
+		insertObject(wo, Vector(28,2),rid);
 		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "fence5");
-		insertObject(wo, 3,22,rid);
+		insertObject(wo, Vector(3,22),rid);
 
         wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "smallWall2");
-		insertObject(wo, 7.5,22,rid);
+		insertObject(wo, Vector(7.5,22),rid);
 
 		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "wall1");
-		insertObject(wo, 11,22,rid);
+		insertObject(wo, Vector(11,22),rid);
 		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "wall2");
-		insertObject(wo, 17,22,rid);
+		insertObject(wo, Vector(17,22),rid);
 		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "wall3");
-		insertObject(wo, 23,22,rid);
+		insertObject(wo, Vector(23,22),rid);
 
 		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "smallWall1");
-		insertObject(wo, 26.5,22,rid);
+		insertObject(wo, Vector(26.5,22),rid);
 
         wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "stones3");
-		insertObject(wo, 20,6,rid);
+		insertObject(wo, Vector(20,6),rid);
 
 
 		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "tree1");
-		insertObject(wo, 9,13,rid);
+		insertObject(wo, Vector(9,13),rid);
 
 		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "tree2");
-		insertObject(wo, 10,2,rid);
+		insertObject(wo, Vector(10,2),rid);
 
         wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "tree2");
-		insertObject(wo, 0,0,rid);
+		insertObject(wo, Vector(0,0),rid);
 
 		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "tree3");
-		insertObject(wo, 1,2,rid);
+		insertObject(wo, Vector(1,2),rid);
 
 		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_MONSTER, "lich");
-		insertObject(wo, 7,5,rid);
+		insertObject(wo, Vector(7,5),rid);
 		
 		/*
 		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_MONSTER, "goblin");
-		insertObject(wo, 13,8,rid);
+		insertObject(wo, Vector(13,8),rid);
 // 		
 		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_MONSTER, "gob_dog");
-		insertObject(wo, 14.2,8.2,rid);
+		insertObject(wo, Vector(14.2,8.2),rid);
 
 		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_MONSTER, "goblin");
-		insertObject(wo, 14.5,6.7,rid);
+		insertObject(wo, Vector(14.5,6.7),rid);
 
 		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_MONSTER, "goblin");
-		insertObject(wo, 14.8,5.7,rid);
+		insertObject(wo, Vector(14.8,5.7),rid);
 
 		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_MONSTER, "goblin");
-		insertObject(wo, 14,10.9,rid);
+		insertObject(wo, Vector(14,10.9),rid);
 
 		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_MONSTER, "goblin");
-		insertObject(wo, 17,8.2,rid);
+		insertObject(wo, Vector(17,8.2),rid);
 
 		
 
 		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_MONSTER, "goblin");
-		insertObject(wo, 18.5,7,rid);
+		insertObject(wo, Vector(18.5,7),rid);
 
 		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_MONSTER, "goblin");
-		insertObject(wo, 17.2,6.6,rid);
+		insertObject(wo, Vector(17.2,6.6),rid);
 
 		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_MONSTER, "goblin");
-		insertObject(wo, 19.9,6.9,rid);
+		insertObject(wo, Vector(19.9,6.9),rid);
 		*/
 
 /*
 		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_MONSTER, "goblin");
-		insertObject(wo, 16.2,3,rid);
+		insertObject(wo, Vector(16.2,3),rid);
 
 		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_MONSTER, "goblin");
-		insertObject(wo, 19.2,3.1,rid);
+		insertObject(wo, Vector(19.2,3.1),rid);
 
 		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_MONSTER, "goblin");
-		insertObject(wo, 6.5,6.4,rid);
+		insertObject(wo, Vector(6.5,6.4),rid);
 
 		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_MONSTER, "goblin");
-		insertObject(wo, 8.5,6.4,rid);
+		insertObject(wo, Vector(8.5,6.4),rid);
 		*/
 /*
 
@@ -218,7 +226,7 @@ void World::createRegion(short region)
 		spawn = new Spawnpoint(m_world,1);
 		spawn->setRespawnTime(10000);
 		spawn->addMonsterGroup(mg);
-		insertObject(spawn,9,9,rid);
+		insertObject(spawn,Vector(9,9),rid);
 */
 /*
 		int i,j;
@@ -247,41 +255,41 @@ void World::createRegion(short region)
 		spawn = new Spawnpoint(m_world,1);
 		spawn->setRespawnTime(100000);
 		spawn->addMonsterGroup(gob);
-		insertObject(spawn,9,9,rid);
+		insertObject(spawn,Vector(9,9),rid);
 
 		spawn = new Spawnpoint(m_world,2);
 		spawn->setRespawnTime(100000);
 		spawn->addMonsterGroup(gob);
-		insertObject(spawn,6,18,rid);
+		insertObject(spawnVector(,6,18),rid);
 
 		spawn = new Spawnpoint(m_world,3);
 		spawn->setRespawnTime(100000);
 		spawn->addMonsterGroup(gob2);
 		spawn->addMonsterGroup(dog);
-		insertObject(spawn,22,14,rid);
+		insertObject(spawn,Vector(22,14),rid);
 
 		spawn = new Spawnpoint(m_world,4);
 		spawn->setRespawnTime(100000);
 		spawn->addMonsterGroup(gob);
 		spawn->addMonsterGroup(lich);
-		insertObject(spawn,16,25,rid);
+		insertObject(spawn,Vector(16,25),rid);
 
 		spawn = new Spawnpoint(m_world,5);
 		spawn->setRespawnTime(100000);
 		spawn->addMonsterGroup(gob2);
 		spawn->addMonsterGroup(lich);
 		spawn->addMonsterGroup(dog);
-		insertObject(spawn,30,27,rid);
+		insertObject(spawn,Vector(30,27),rid);
 
 		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "tree");
-		insertObject(wo, 24,26,rid);
+		insertObject(wo, Vector(24,26),rid);
 
 
 		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "tree");
-		insertObject(wo, 10,13,rid);
+		insertObject(wo, Vector(10,13),rid);
 
 		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "tree");
-		insertObject(wo, 20,18,rid);
+		insertObject(wo, Vector(20,18),rid);
 */
 
 	}
@@ -426,97 +434,6 @@ Party* World::getEmptyParty()
 }
 
 
-bool World::intersect(Shape* s1, Shape* s2)
-{
-	Shape* t=0;
-	float x1 = s1->m_coordinate_x;
-	float x2 = s2->m_coordinate_x;
-	float y1 = s1->m_coordinate_y;
-	float y2 = s2->m_coordinate_y;
-
-	if (s1->m_type == Shape::CIRCLE && s2->m_type == Shape::CIRCLE)
-	{
-		DEBUG5("checking circle-circle");
-
-		// Pruefen von Kreis gegen Kreis
-		// Ueberschneiden sich, wenn  Abstand der Mittelpunkte geringer als Summe der Radien
-		if (sqr(x1-x2) + sqr(y1-y2) < sqr(s1->m_radius + s2->m_radius))
-		{
-			DEBUG5("intersect %f %f %f %f",sqr(x1-x2),sqr(y1-y2),sqr(s1->m_radius + s2->m_radius),sqr(x1-x2) + sqr(y1-y2));
-			return true;
-		}
-		else
-			return false;
-	}
-	else if (s1->m_type == Shape::RECT && s2->m_type == Shape::RECT)
-	{
-		DEBUG5("checking rect-rect");
-
-		// Pruefen Rechteck gegen Rechteck
-		// Ueberschneiden sich, wenn Differenz der Mittelpunkt in beiden Koordinatenrichtungen geringer als die Summe der Ausdehnungen in den beiden Richtungen
-		float xe1 = s1->m_extent_x;
-		float xe2 = s2->m_extent_x;
-		float ye1 = s1->m_extent_y;
-		float ye2 = s2->m_extent_y;
-		if ( fabs(x1-x2) < xe1+xe2 && fabs(y1-y2) < ye1+ye2 )
-			return true;
-		else
-			return false;
-	}
-	else
-	{
-		// Pruefen Kreis gegen Rechteck
-		DEBUG5("checking circle-rect");
-
-		// So tauschen, dass s1 der Kreis ist
-		if (s1->m_type == Shape::RECT)
-		{
-			t = s1;
-			s1 = s2;
-			s2 = t;
-			x1 = s1->m_coordinate_x;
-			x2 = s2->m_coordinate_x;
-			y1 = s1->m_coordinate_y;
-			y2 = s2->m_coordinate_y;
-		}
-		float xe2 = s2->m_extent_x;
-		float ye2 = s2->m_extent_y;
-		float r1 = s1->m_radius;
-
-		// zuerst ein Test gegen das den Kreis umgebende Rechteck
-		if (fabs(x1-x2) > r1+xe2 || fabs(y1-y2) > r1+ye2 )
-		{
-			return false;
-		}
-		else
-		{
-			// Testen ob Kreismittelpunkt direkt im Rechteck liegt
-			if ( fabs(x1-x2) < xe2 || fabs(y1-y2) < ye2 )
-				return true;
-
-			// Kreis liegt auf dem Reckteck, wenn Abstand zu einer der Ecken kleiner als r1
-			float mx = std::min (fabs(x1-x2+xe2), fabs(x1-x2-xe2));
-			float my = std::min (fabs(y1-y2+ye2), fabs(y1-y2-ye2));
-			if (sqr(mx)+sqr(my) < sqr(r1))
-				return true;
-			else
-				return false;
-
-		}
-
-	}
-
-}
-
-
-float World::getDistance(Shape& s1, Shape& s2)
-{
-	return (sqrt(sqr(s1.m_coordinate_x-s2.m_coordinate_x) +sqr(s1.m_coordinate_y-s2.m_coordinate_y)) - s1.m_radius - s2.m_radius);
-}
-
-
-
-
 
 WorldObject* World::getObject ( int id,short rid)
 {
@@ -592,7 +509,7 @@ bool World:: getObjectsInShape( Shape* shape, short region, WorldObjectList* res
 }
 
 
-WorldObject* World::getObjectAt(float x_coordinate, float y_coordinate,  short region,short layer, short group )
+WorldObject* World::getObjectAt(Vector pos,  short region,short layer, short group )
 {
 	// Region ermitteln, wenn gleich 0, Fehler ausgeben
 	Region* r = m_regions[region];
@@ -602,225 +519,23 @@ WorldObject* World::getObjectAt(float x_coordinate, float y_coordinate,  short r
 		return false;
 	}
 
-	return r->getObjectAt(x_coordinate,y_coordinate,layer,group);
+	return r->getObjectAt(pos,layer,group);
 }
 
-void World::getObjectsOnLine( float xstart, float ystart, float xend, float yend,  short region, WorldObjectList* result,short layer, short group, WorldObject* omit)
+void World::getObjectsOnLine(Line& line,  short region, WorldObjectList* result,short layer, short group, WorldObject* omit)
 {
 	// Region ermitteln, wenn gleich 0 beenden
 	Region* r = m_regions[region];
 	if (r == 0)
 		return;
 
-	r->getObjectsOnLine(xstart,ystart,xend,yend,result,layer,group,omit);
+	r->getObjectsOnLine(line,result,layer,group,omit);
 
 }
 
 
-void World::getProjectilesOnScreen(float center_x,float center_y,short region, std::list<Projectile*>* result)
+ bool World::insertObject (WorldObject* object, Vector pos, short region)
 {
-	Region* r = m_regions[region];
-	if (r==0)
-		return ;
-
-	r->getProjectilesOnScreen(center_x,center_y,result);
-}
-
-
-bool World::lineIntersect(float xstart, float ystart, float xend,float yend ,float dir[2],Shape* s)
-{
-	float p[2];
-	float proj[2];
-	float d;
-	float l=sqr(xend-xstart) +sqr(yend-ystart);
-	float cx = s->m_coordinate_x;
-	float cy = s->m_coordinate_y;
-
-	if (s->m_type == Shape::CIRCLE)
-	{
-
-		float r = s->m_radius;
-
-		// testen des Abstandes zu den Endpunkten
-		if (sqr(r)>sqr(cx-xstart)+sqr(cy-ystart))
-				  return true;
-
-		if (sqr(r)>sqr(cx-xend)+sqr(cy-yend))
-				  return true;
-
-
-		// Testen des Abstandes zur Linie
-		p[0] = cx-xstart;
-		p[1] = cy-ystart;
-		d=p[0]*dir[0]+p[1]*dir[1];
-		proj[0] = dir[0]*d;
-		proj[1] = dir[1]*d;
-		DEBUG5("proj on dir %f %f dist= %f %f",proj[0],proj[1],sqr(p[0]-proj[0])+sqr(p[1]-proj[1]),sqr(r));
-
-		// Kreis liegt nicht auf der Linie, wenn der Abstand zu gross ist
-		if (sqr(r)<sqr(p[0]-proj[0])+sqr(p[1]-proj[1]))
-			return false;
-
-		// Kreis muss ausserdem zwischen den zwei Punkten liegen
-		// geringer Abstand zur Linie ist nicht ausreichend
-		float l2 = sqr(proj[0])+sqr(proj[1]);
-		if (l2>=0 && l2<=l)
-			return true;
-
-	}
-	else
-	{
-		// testen ob Linie rechteck garantiert verfehlt
-		if (xstart<cx-s->m_extent_x && xend<cx-s->m_extent_x || xstart>cx+s->m_extent_x && xend>cx+s->m_extent_x || ystart<cy-s->m_extent_y && yend<cy-s->m_extent_y || ystart>cy+s->m_extent_y && yend>cy+s->m_extent_y)
-		{
-			return false;
-		}
-
-		// Kreuzprodukte bilden zwischen der Richtung und Vektor zu zwei gegenueberliegenden Ecken
-		// Auswahl des Eckenpaares so, dass die Diagonale gewaehlt wird, die einen grossen Winkel zur Linienrichtung hat
-		// Kreuzprodukt muss einmal positiv, einmal negativ sein
-
-		float p1,p2;
-		if (dir[0]*dir[1]>0)
-		{
-			p1 = (cx-s->m_extent_x-xstart)*dir[1] - (cy+s->m_extent_y-ystart)*dir[0];
-			p2 = (cx+s->m_extent_x-xstart)*dir[1] - (cy-s->m_extent_y-ystart)*dir[0];
-			if (p1*p2<0)
-				return true;
-
-		}
-		else
-		{
-			p1 = (cx+s->m_extent_x-xstart)*dir[1] - (cy+s->m_extent_y-ystart)*dir[0];
-			p2 = (cx-s->m_extent_x-xstart)*dir[1] - (cy-s->m_extent_y-ystart)*dir[0];
-			if (p1*p2<0)
-				return true;
-
-		}
-	}
-	return false;
-}
-
-/*
-//TODO: neu implementieren
-bool World::getClosestFreeSquare(float x_coordinate, float y_coordinate, float &x_ret_coordinate, float &y_ret_coordinate)
-{
-	bool result = true;
-	float x =x_coordinate;
-	float y =y_coordinate;
-
-	// Startpunkt ist der eingegebene Punkt
-	int px = 0;
-	int py = 0;
-
-	bool field[21][21];
-
-	int i,j;
-	for (i=0;i<=20;i++)
-		for (j=0;j<=20;j++)
-			field [i][j]=false;
-
-	field[10][10]=true;
-
-	// Queue für die durchsuchten Punkte
-	queue<int>* qux = new queue<int>;
-	queue<int>* quy = new queue<int>;
-
-	// Liste für Objekte die im Weg sind
-	WorldObjectList* ret = new  WorldObjectList;
-
-
-	// Selektor für fixe Objekte
-	WorldObjectSelector* fixsel = new WorldObjectSelector;
-	fixsel->getObjectType().setObjectType(OBJECTTYPE_FIXED_OBJECT);
-	fixsel->setSelectObjectType(true);
-
-
-	// nach Objekten suchen die im Weg sind
-	getWorldObjectsInRect(x+px-0.9999,y+py-0.9999,x+px+0.9999,y+py+0.99990,0, ret);
-
-	qux->push(px);
-	quy->push(py);
-
-	// Solange noch Punkte zum durchsuchen existieren und der aktuelle Punkt blockiert ist
-	while (qux -> empty() != true && ret->empty()!=true)
-	{
-		ret->clear();
-		px = qux->front();
-		py = quy->front();
-		qux->pop();
-		quy->pop();
-
-		// nach fixen Objekten suchen die im Weg sind
-		getWorldObjectsInRect(x+px-0.9999,y+py-0.9999,x+px+0.9999,y+py+0.99990,fixsel, ret);
-
-		DEBUG5("untersuche: %f , %f",x+px,y+py);
-
-		// Wenn keine fixen Objekte im Weg
-		if (ret->empty() || (px==0 && py ==0))
-		{
-			// allgemein nach Hindernissen suchen
-			getWorldObjectsInRect(x+px-0.9999,y+py-0.9999,x+px+0.9999,y+py+0.99990,0, ret);
-
-			// umliegende Felder in die Queue schieben, wenn sie noch nicht untersucht wurden
-			if (px < 10 && field[px+11][py+10]==false)
-			{
-				field[px+11][py+10]=true;
-				qux->push(px+1);
-				quy->push(py);
-			}
-
-			if (px > -10 && field[px+9][py+10]==false)
-			{
-				field[px+9][py+10]=true;
-				qux->push(px-1);
-				quy->push(py);
-			}
-
-			if (py < 10 &&field[px+10][py+11]==false)
-			{
-				field[px+10][py+11]=true;
-				qux->push(px);
-				quy->push(py+1);
-			}
-
-			if (py >-10 && field[px+10][py+9]==false)
-			{
-				field[px+10][py+9]=true;
-				qux->push(px);
-				quy->push(py-1);
-			}
-
-
-		}
-	}
-
-	if (qux->empty())
-	{
-		// keinen Punkt gefunden
-		result=false;
-	}
-	else
-	{
-		// Ausgabekoordinaten setzen
-		x_ret_coordinate = x+ px;
-		y_ret_coordinate = y+ py;
-	}
-
-	delete ret;
-	delete qux;
-	delete quy;
-	delete fixsel;
-
-	return result;
-
-}
-*/
-
-
- bool World::insertObject (WorldObject* object, float x, float y, short region)
-{
-	DEBUG5("inserting Object at %f %f into region %i",x,y,region);
 	 bool result=true;
 
 	 // Wenn NULL Zeiger übergeben -> Fehler anzeigen
@@ -828,14 +543,14 @@ bool World::getClosestFreeSquare(float x_coordinate, float y_coordinate, float &
 		 return false;
 
 	 object->getGridLocation()->m_region = region;
-	 object->getGeometry()->m_shape.m_coordinate_x=x;
-	 object->getGeometry()->m_shape.m_coordinate_y=y;
+	 object->getShape()->m_center = pos;
+	 
 
 	 Region* r = m_regions[region];
 
 	 if (r!=0)
 	 {
-	 	result &= r->insertObject(object,x,y);
+	 	result &= r->insertObject(object,pos);
 	 }
 	 else
 	 {
@@ -858,7 +573,7 @@ bool World::insertPlayer(WorldObject* player, int slot)
 }
 
 
-bool World::moveObject(WorldObject* object, float x, float y)
+bool World::moveObject(WorldObject* object, Vector newpos)
 {
 	bool result;
 
@@ -870,7 +585,7 @@ bool World::moveObject(WorldObject* object, float x, float y)
 		return false;
 	}
 
-	result &= r->moveObject(object,x,y);
+	result &= r->moveObject(object,newpos);
 
 	return result;
 }
@@ -895,9 +610,9 @@ bool World::moveObject(WorldObject* object, float x, float y)
 }
 
 
-bool  World::insertProjectile(Projectile* object, float x, float y, short region)
+bool  World::insertProjectile(Projectile* object, Vector pos, short region)
 {
-	m_regions[region]->insertProjectile(object,x,y);
+	m_regions[region]->insertProjectile(object,pos);
 	object->setRegion(region);
     return true;
 }
@@ -971,11 +686,10 @@ bool World::insertPlayerIntoRegion(WorldObject* player, short region)
 	{
 		DEBUG("player %i entered region %i",player->getId(), region);
 		// Daten sind vollständig
-		float x,y;
-		x = player->getGeometry()->m_shape.m_coordinate_x;
-		y = player->getGeometry()->m_shape.m_coordinate_y;
-		reg->getFreePlace(&(player->getGeometry()->m_shape),player->getGeometry()->m_layer , x, y);
-		insertObject(player, x,y,region);
+		Vector pos = player->getShape()->m_center;
+		// TODO
+		reg->getFreePlace(player->getShape(),player->getLayer() , pos);
+		insertObject(player, pos,region);
 		player->setState(WorldObject::STATE_ACTIVE);
 
 		if (m_server)
@@ -1043,8 +757,7 @@ void World::handleSavegame(CharConv *cv, int slot)
 
 		// Debugging: Region, Koordinaten setzen
 		pl->getGridLocation()->m_region =0;
-		pl->getGeometry()->m_shape.m_coordinate_x = 12;
-		pl->getGeometry()->m_shape.m_coordinate_y = 8;
+		pl->getShape()->m_center = Vector(9,10);
 
 		insertPlayerIntoRegion(pl,pl->getGridLocation()->m_region);
 
@@ -1119,7 +832,7 @@ void World::handleSavegame(CharConv *cv, int slot)
 
 void World::handleCommand(ClientCommand* comm, int slot, float delay)
 {
-	DEBUG5("Kommando (%f %f) button: %i id: %i action: %i",comm->m_coordinate_x,comm->m_coordinate_y,comm->m_button, comm->m_id,comm->m_action);
+	DEBUG5("Kommando (%f %f) button: %i id: %i action: %i",comm->m_goal.m_x,comm->m_goal.m_y,comm->m_button, comm->m_id,comm->m_action);
 
 
 	// Wenn man sich nicht auf Serverseite befindet
@@ -1634,8 +1347,8 @@ void World::writeEvent(Region* region,Event* event, CharConv* cv)
 	if (event->m_type == Event::PLAYER_CHANGED_REGION)
 	{
 		object = (*m_players)[event->m_id];
-		cv->toBuffer(object->getGeometry()->m_shape.m_coordinate_x);
-		cv->toBuffer(object->getGeometry()->m_shape.m_coordinate_y);
+		cv->toBuffer(object->getShape()->m_center.m_x);
+		cv->toBuffer(object->getShape()->m_center.m_y);
 
 	}
 
@@ -1742,8 +1455,8 @@ bool World::processEvent(Region* region,CharConv* cv)
 			{
 				object = (*m_players)[event.m_id];
 
-				cv->fromBuffer(object->getGeometry()->m_shape.m_coordinate_x);
-				cv->fromBuffer(object->getGeometry()->m_shape.m_coordinate_y);
+				cv->fromBuffer(object->getShape()->m_center.m_x);
+				cv->fromBuffer(object->getShape()->m_center.m_y);
 
 				// Lokaler Spieler wird schon vorher in die Region eingefuegt
 				if (object != m_local_player)
@@ -1908,25 +1621,24 @@ bool World::calcBlockmat(PathfindInfo * pathinfo)
 	WorldObjectList::iterator it;
 	int is,js;
 	Shape s;
-	s.m_coordinate_x = pathinfo->m_center_x;
-	s.m_coordinate_y = pathinfo->m_center_y;
+	s.m_center = pathinfo->m_center;
 	s.m_type = Shape::RECT;
-	s.m_extent_y =s.m_extent_x = 0.5*sqs * pathinfo->m_dim;
-	float c_x = pathinfo->m_center_x-s.m_extent_x;
-	float c_y = pathinfo->m_center_y-s.m_extent_y;
-	float e_x = pathinfo->m_center_x+s.m_extent_x;
-	float e_y = pathinfo->m_center_y+s.m_extent_y;
+	s.m_extent.m_y =s.m_extent.m_x = 0.5*sqs * pathinfo->m_dim;
+	
+	// die beiden Ecken des Suchbereiches
+	Vector c1 = pathinfo->m_center - s.m_extent;
+	Vector c2 = pathinfo->m_center + s.m_extent;
+	
+
 	float hb = pathinfo->m_base_size * 0.5;
 
-	DEBUG5("Calc blockmat %f %f", pathinfo->m_center_x,pathinfo->m_center_y);
+	DEBUG5("Calc blockmat %f %f", pathinfo->m_center.m_x,pathinfo->m_center.m_y);
 
 	Shape s2;
 	s2.m_type = Shape::CIRCLE;
 	s2.m_radius = hb;
 
 	Shape* wos=0;
-
-	DEBUG5("parameter %f %f sqs %f hb %f",c_x,c_y,sqs,hb);
 
 	// Alle Objekte in dem Gebiet suchen
 	getObjectsInShape(&s, pathinfo->m_region, &ret,pathinfo->m_layer);
@@ -1941,37 +1653,43 @@ bool World::calcBlockmat(PathfindInfo * pathinfo)
 		if (wo->getId() != pathinfo->m_id)
 		{
 			DEBUG5("found obstacle %i",wo->getId());
-			wos = &(wo->getGeometry()->m_shape);
-			DEBUG5("shape %i %f %f %f",wos->m_type,wos->m_radius,wos->m_extent_x,wos->m_extent_y);
+			wos = wo->getShape();
+			DEBUG5("shape %i %f %f %f",wos->m_type,wos->m_radius,wos->m_extent.m_x,wos->m_extent.m_y);
 
 
 
 			// Rand des Objektes mit X zeichnen
-			js = (int) floor((wos->m_coordinate_y-c_y)/sqs);
-			is = (int) floor((wos->m_coordinate_x-c_x)/sqs);
+			
+			// Mittelpunkt des Objektes im Grid
+			js = (int) floor((wos->m_center.m_y - c1.m_y)/sqs);
+			is = (int) floor((wos->m_center.m_x - c1.m_x)/sqs);
 			is = std::max(std::min(is,pathinfo->m_dim-1),0);
 			js = std::max(std::min(js,pathinfo->m_dim-1),0);
-			s2.m_coordinate_y = (js+0.5)*sqs+c_y;
-			s2.m_coordinate_x = (is+0.5)*sqs+c_x;
+			
+			// Form zum Testen auf Kollisionen
+			s2.m_center.m_y = (js+0.5)*sqs+c1.m_y;
+			s2.m_center.m_x = (is+0.5)*sqs+c1.m_x;
 
 
-			DEBUG5("start %i %i %f %f",is,js,s2.m_coordinate_x,s2.m_coordinate_y);
+			DEBUG5("start %i %i %f %f",is,js,s2.m_center.m_x,s2.m_center.m_y);
 			float dir[12][2] = {{sqs,sqs},{sqs,0},{sqs,-sqs},{0,-sqs},{-sqs,-sqs},{-sqs,0},{-sqs,sqs},{0,sqs},{sqs,sqs},{sqs,0},{sqs,-sqs},{0,-sqs}};
 			int idir[12][2] = {{1,1},{1,0},{1,-1},{0,-1},{-1,-1},{-1,0},{-1,1},{0,1},{1,1},{1,0},{1,-1},{0,-1}};
 
 			float x,y;
-			while (s2.m_coordinate_y< e_y && intersect(&s2, wos))
+			// Vom Mittelpunkt des Hindernisses *nach unten* bis zum Rand gehen
+			while (s2.m_center.m_y< c2.m_y && wos->intersects(s2))
 			{
-				s2.m_coordinate_y += sqs;
+				s2.m_center.m_y += sqs;
 				js++;
 			}
 			js--;
-			s2.m_coordinate_y -= sqs;
-			int d=1;
+			s2.m_center.m_y -= sqs;
+			
+			// Wertigkeit des Hindernisses bestimmen
 			char val = 9;
 			if (wo->getTypeInfo()->m_type == WorldObject::TypeInfo::TYPE_MONSTER || wo->getTypeInfo()->m_type == WorldObject::TypeInfo::TYPE_PLAYER)
 			{
-				if (sqr(wo->getMoveInfo()->m_speed_x) + sqr(wo->getMoveInfo()->m_speed_y) == 0)
+				if (wo->getSpeed().getLength() == 0)
 				{
 					// fest stehendes Lebewesen
 					val = 6;
@@ -1982,133 +1700,134 @@ bool World::calcBlockmat(PathfindInfo * pathinfo)
 					val = 4;
 				}
 			}
-
-
-
+			// Hindernis eintragen
 			if (*(pathinfo->m_block->ind(is,js))<val)
 				*(pathinfo->m_block->ind(is,js)) = val;
+			
 
-			DEBUG5("start2 %i %i %f %f",is,js,s2.m_coordinate_x,s2.m_coordinate_y);
+			DEBUG5("start2 %i %i %f %f",is,js,s2.m_center.m_x,s2.m_center.m_y);
+			
+			// Hindernis dem Rand entlang umrunden
+			// d ist ein Zaehler fuer die aktuelle Suchrichtung
+			// wenn d 10 erreicht ist das Objekt einmal umrundet
+			int d=1;
 			while (d<10)
 			{
-				x = s2.m_coordinate_x;
-				y = s2.m_coordinate_y;
+				x = s2.m_center.m_x;
+				y = s2.m_center.m_y;
 
-				s2.m_coordinate_x += dir[d][0];
-				s2.m_coordinate_y += dir[d][1];
-				while ((d<=10) && (s2.m_coordinate_x<c_x || s2.m_coordinate_y<c_y ||
-				s2.m_coordinate_x>e_x || s2.m_coordinate_y>e_y))
+				s2.m_center.m_x += dir[d][0];
+				s2.m_center.m_y += dir[d][1];
+				
+				// solange Richtung weiterdrehen bis ein Punkt im Suchraum gefunden wird
+				while ((d<=10) && (s2.m_center.m_x<c1.m_x || s2.m_center.m_y<c1.m_y ||
+				s2.m_center.m_x>c2.m_x || s2.m_center.m_y>c2.m_y))
 				{
 					d++;
-					s2.m_coordinate_x = x+dir[d][0];
-					s2.m_coordinate_y = y+dir[d][1];
+					s2.m_center.m_x = x+dir[d][0];
+					s2.m_center.m_y = y+dir[d][1];
+					DEBUG5("trying %f %f",s2.m_center.m_x,s2.m_center.m_y);
 				}
 
 				if (d==10)
 					break;
 
-				if (intersect(&s2, wos))
+				
+				if (wos->intersects(s2))
 				{
-					DEBUG5("intersecting: %i %i %f %f",is+idir[d][0],js+idir[d][1],s2.m_coordinate_x,s2.m_coordinate_y);
+					// wenn in der aktuellen Richtung man im Objekt bleibt
+					// Richtung testweise eins zurueck setzen
+					// damit werden auch nicht konvexe Objekte korrekt behandelt
+					DEBUG5("intersecting: %i %i %f %f",is+idir[d][0],js+idir[d][1],s2.m_center.m_x,s2.m_center.m_y);
 					d--;
-					s2.m_coordinate_x = x+dir[d][0];
-					s2.m_coordinate_y = y+dir[d][1];
-					if (s2.m_coordinate_x<c_x || s2.m_coordinate_y<c_y ||
-						 s2.m_coordinate_x>e_x || s2.m_coordinate_y>e_y || !intersect(&s2, wos))
+					s2.m_center.m_x = x+dir[d][0];
+					s2.m_center.m_y = y+dir[d][1];
+					if (s2.m_center.m_x<c1.m_x || s2.m_center.m_y<c1.m_y ||
+					s2.m_center.m_x> c2.m_x|| s2.m_center.m_y>c2.m_y || !wos->intersects(s2))
 					{
 						d++;
-						s2.m_coordinate_x = x+dir[d][0];
-						s2.m_coordinate_y = y+dir[d][1];
+						s2.m_center.m_x = x+dir[d][0];
+						s2.m_center.m_y = y+dir[d][1];
 					}
 				}
 				else
 				{
-					DEBUG5("not intersecting: %i %i %f %f",is+idir[d][0],js+idir[d][1],s2.m_coordinate_x,s2.m_coordinate_y);
+					// Suchrichtung solange weiter drehen bis ein zulaessiger Punkt im Objekt gefunden wurde
+					DEBUG5("not intersecting: %i %i %f %f",is+idir[d][0],js+idir[d][1],s2.m_center.m_x,s2.m_center.m_y);
 					do
 					{
 						d++;
-						s2.m_coordinate_x = x+dir[d][0];
-						s2.m_coordinate_y = y+dir[d][1];
-					} while (d<=10 && (s2.m_coordinate_x<c_x || s2.m_coordinate_y<c_y ||
-											 s2.m_coordinate_x>e_x || s2.m_coordinate_y>e_y || !intersect(&s2, wos)));
+						s2.m_center.m_x = x+dir[d][0];
+						s2.m_center.m_y = y+dir[d][1];
+					} while (d<=10 && (s2.m_center.m_x<c1.m_x || s2.m_center.m_y<c1.m_y ||
+											s2.m_center.m_x>c2.m_x || s2.m_center.m_y>c2.m_y || !wos->intersects(s2)));
 
 				}
 				if (d<10)
 				{
+					// Hindernis eintragen
 					DEBUG5("d: %i",d);
 					is += idir[d][0];
 					js += idir[d][1];
-					DEBUG5("intersecting: %i %i %f %f",is,js,s2.m_coordinate_x,s2.m_coordinate_y);
+					DEBUG5("intersecting: %i %i %f %f",is,js,s2.m_center.m_x,s2.m_center.m_y);
 					if (*(pathinfo->m_block->ind(is,js))<val)
 						*(pathinfo->m_block->ind(is,js)) = val;
-
+					
 					/*
-					cout << "  001122334455667788990011223344556677889900\n";
+					std::cout << "  001122334455667788990011223344556677889900001122334455667788990011223344556677889900\n";
 
-					for (j=pathinfo->m_dim-1;j>=0;j--)
+					for (int j=pathinfo->m_dim-1;j>=0;j--)
 					{
-						cout << j%10 << j%10;
-						for (i=0;i<pathinfo->m_dim;i++)
+						std::cout << j%10 << j%10;
+						for (int i=0;i<pathinfo->m_dim;i++)
 						{
 
 							if (*(pathinfo->m_block->ind(i,j))!=0)
 							{
 								if (*(pathinfo->m_block->ind(i,j))=='X')
-									cout << *(pathinfo->m_block->ind(i,j)) << *(pathinfo->m_block->ind(i,j));
+									std::cout << *(pathinfo->m_block->ind(i,j)) << *(pathinfo->m_block->ind(i,j));
 								else
-									cout << *(pathinfo->m_block->ind(i,j))+'0' << *(pathinfo->m_block->ind(i,j))+'0';
+									std::cout <<(char) ( *(pathinfo->m_block->ind(i,j))+'0') << (char) (*(pathinfo->m_block->ind(i,j))+'0');
 							}
 							else
-								cout << "  ";
+								std::cout << "  ";
 						}
-						cout << "\n";
+						std::cout << "\n";
 					}
-					cout << "---------------------\n";
+					std::cout << "---------------------\n";
 
 					char c;
-					cin >> c;
+					std::cin >> c;
 					*/
 				}
 			}
-			// Die jenigen Felder alsblockiert markieren, auf deren Mittelpunkt kein Objekt der Grösse base_size Platz hat
-			/*
-			for (i=is; i<=ie;i++)
-			{
-				for (j=js;j<=je; j++)
-				{
-					s2.m_coordinate_x = (i+0.5) * sqs + c_x;
-					s2.m_coordinate_y = (j+0.5) * sqs + c_y;
-					if (intersect(&s2, wos ))
-						*(pathinfo->m_block->ind(i,j)) = 'X';
-
-				}
-			}
-			*/
 		}
 	}
+	
 	/*
-	cout << "  001122334455667788990011223344556677889900\n";
+	std::cout << "  001122334455667788990011223344556677889900001122334455667788990011223344556677889900\n";
 
-	for (j=pathinfo->m_dim-1;j>=0;j--)
+	for (int j=pathinfo->m_dim-1;j>=0;j--)
 	{
-		cout << j%10 << j%10;
-		for (i=0;i<pathinfo->m_dim;i++)
+		std::cout << j%10 << j%10;
+		for (int i=0;i<pathinfo->m_dim;i++)
 		{
 
 			if (*(pathinfo->m_block->ind(i,j))!=0)
 			{
 				if (*(pathinfo->m_block->ind(i,j))=='X')
-					cout << *(pathinfo->m_block->ind(i,j)) << *(pathinfo->m_block->ind(i,j));
+					std::cout << *(pathinfo->m_block->ind(i,j)) << *(pathinfo->m_block->ind(i,j));
 				else
-					cout <<(char) ( *(pathinfo->m_block->ind(i,j))+'0') << (char) (*(pathinfo->m_block->ind(i,j))+'0');
+					std::cout <<(char) ( *(pathinfo->m_block->ind(i,j))+'0') << (char) (*(pathinfo->m_block->ind(i,j))+'0');
 			}
 			else
-				cout << "  ";
+				std::cout << "  ";
 		}
-		cout << "\n";
+		std::cout << "\n";
 	}
-	cout << "---------------------\n";
+	std::cout << "---------------------\n";
 	*/
+	
 	return true;
 }
 
@@ -2121,9 +1840,9 @@ bool World::calcPotential(PathfindInfo* pathinfo)
 	float l = 0.5*sqs * pathinfo->m_dim;
 	SearchField * sf = new SearchField(pathinfo->m_dim);
 	sf->init(pathinfo->m_pot, pathinfo->m_block);
-	int sx = (int) ((pathinfo->m_start_x - pathinfo->m_center_x + l) / sqs);
-	int sy = (int) ((pathinfo->m_start_y - pathinfo->m_center_y + l) / sqs);
-	DEBUG5("goal: %f %f",pathinfo->m_start_x,pathinfo->m_start_y);
+	int sx = (int) ((pathinfo->m_start.m_x - pathinfo->m_center.m_x + l) / sqs);
+	int sy = (int) ((pathinfo->m_start.m_y - pathinfo->m_center.m_y + l) / sqs);
+	DEBUG5("goal: %f %f",pathinfo->m_start.m_x,pathinfo->m_start.m_y);
 	DEBUG5("Calc potential %i %i", sx,sy);
 
 	sf->createPotential(sx,sy);
@@ -2134,22 +1853,9 @@ bool World::calcPotential(PathfindInfo* pathinfo)
 
 
 
-void World::calcPathDirection(PathfindInfo* pathinfo, float x_start, float y_start, float dir[2])
+void World::calcPathDirection(PathfindInfo* pathinfo, Vector pos, Vector& dir)
 {
-	float sqs = pathinfo->m_base_size / pathinfo->m_quality;
-	float l = 0.5*sqs * pathinfo->m_dim;
-	if (fabs(x_start-pathinfo->m_center_x) >l  || fabs(y_start-pathinfo->m_center_y) >l)
-	{
-		dir[0] = pathinfo->m_start_x -  x_start;
-		dir[1] = pathinfo->m_start_y -  y_start;
-	}
-	else
-	{
-		int sx = (int) ((x_start - pathinfo->m_center_x + l) / sqs);
-		int sy = (int) ((y_start - pathinfo->m_center_y + l) / sqs);
-		DEBUG5("Calc direction from %i %i", sx,sy);
-		SearchField::getGradient(pathinfo->m_pot,pathinfo->m_block,pathinfo->m_dim, dir, sx, sy);
-	}
+	SearchField::getGradient(pathinfo, pos,dir);
 }
 
 void World::insertEvent(Event &event)

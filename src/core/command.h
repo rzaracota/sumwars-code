@@ -50,19 +50,17 @@ public:
 	 * Constructors
 	 */
 	/**
-	 * \fn Command(Action::ActionType type, float goal_coordinate_x, float goal_coordinate_y, int goal_object_id)
+	 * \fn Command(Action::ActionType type, Vector goal, int goal_object_id)
 	 * \brief Konstruktor
 	 * \param type initialisiert den Typ des Kommandos
-	 * \param goal_coordinate_x initialisiert die x-Koordinate des Zielpunkts
-	 * \param goal_coordinate_y initialisiert die y-Koordinate des Zielpunkts
+	 * \param goal Zielpunkt der Aktion
 	 * \param goal_object_id initialisiert ID des Zielobjekts
 	 * Legt ein neues Command Objekt an
 	 */
-	Command(Action::ActionType type, float goal_coordinate_x, float goal_coordinate_y, int goal_object_id)
+	Command(Action::ActionType type, Vector goal, int goal_object_id)
 	{
 		m_type = type;
-		m_goal_coordinate_x= goal_coordinate_x;
-		m_goal_coordinate_y = goal_coordinate_y;
+		m_goal = goal;
 		m_goal_object_id= goal_object_id;
 	
 	}
@@ -106,15 +104,11 @@ public:
 	 Action::ActionType m_type;
 	 
 	/**
-	 * \var m_goal_coordinate_x
-	 * \brief x-Koordinate des Zieles
+	 * \var Vector m_goal
+	 * \brief Ziel des Kommandos
 	 */
-	float m_goal_coordinate_x;
-	/**
-	 * \var m_goal_coordinate_y
-	 * \brief y-Koordinate des Zieles
-	 */
-	float m_goal_coordinate_y;
+	Vector m_goal;
+			
 	/**
 	 * \var m_goal_object_id
 	 * \brief ID des Zielobjekts

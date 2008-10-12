@@ -16,7 +16,7 @@ LDLIBS = `pkg-config  $(LIBS) --libs`
 LDLIBS += -lm -lrt  -lGL -lglut
 #LDLIBS += -L../../server/trunk
 
-CFLAGS = -m32 -O3
+CFLAGS = -m32 -g
 CXXFLAGS = $(CFLAGS) 
 CXXFLAGS += `pkg-config  $(LIBS) --cflags`
 CXXFLAGS += -I../core

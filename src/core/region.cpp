@@ -114,7 +114,7 @@ Projectile* Region::getProjectile(int id)
 	}
 }
 
-bool Region::getFreePlace(Shape* shape, short layer, float& x, float&y)
+bool Region::getFreePlace(Shape* shape, short layer, Vector & pos)
 {
 	// Menge der bereits getesteten Felder
 	std::set<int> tfields;
@@ -124,8 +124,8 @@ bool Region::getFreePlace(Shape* shape, short layer, float& x, float&y)
 
 	float c = 1.1;
 	// Position in 0.5 x 0.5 Feldern
-	int sx = (int) (x/c);
-	int sy = (int) (y/c);
+	int sx = (int) (pos.m_x/c);
+	int sy = (int) (pos.m_y/c);
 	int i;
 	fields.push(sx*10000+sy);
 
@@ -148,8 +148,7 @@ bool Region::getFreePlace(Shape* shape, short layer, float& x, float&y)
 		DEBUG5("testing field %f %f",sx*c,sy*c);
 
 		// Testen ob dort keine festen Objekte sind
-		s.m_coordinate_x = sx*c;
-		s.m_coordinate_y = sy*c;
+		s.m_center = Vector(sx*c,sy*c);
 
 		res.clear();
 		getObjectsInShape(&s,&res,layer,WorldObject::FIXED,0,true);
@@ -168,9 +167,7 @@ bool Region::getFreePlace(Shape* shape, short layer, float& x, float&y)
 		{
 			DEBUG5("field is free");
 			// Stelle ist frei
-			x = sx*c ;
-			y = sy*c ;
-
+			pos = s.m_center;
 
 			return true;
 
@@ -178,7 +175,7 @@ bool Region::getFreePlace(Shape* shape, short layer, float& x, float&y)
 		else
 		{
 			WorldObject* obs = *(res.begin());
-			DEBUG5("obstacle is %s at %f %f",obs->getNameId().c_str(), obs->getGeometry()->m_shape.m_coordinate_x,obs->getGeometry()->m_shape.m_coordinate_y);
+			DEBUG5("obstacle is %s at %f %f",obs->getNameId().c_str(), obs->getShape()->m_center.m_x,obs->getShape()->m_center.m_y);
 			// Stelle ist besetzt
 			tfields.insert(i);
 
@@ -232,27 +229,27 @@ bool  Region::addObjectsInShapeFromGridunit(Shape* shape, Gridunit* gu, WorldObj
 {
 	WorldObject* wo=0;
 	WorldObject** arr=0;
-	WorldObject::Geometry* wob=0;
 	Shape* s=0;
+	
+	
 	arr = gu->getObjects((WorldObject::Group) group);
 
 	int n = gu->getObjectsNr((WorldObject::Group) group);
 
 	DEBUG5("%i objects in layer %i, group %i",n,layer,group);
+	
+	// Schleife ueber alle Objekte
+	// geprueft wird: Ebene, Schnitt mit der Flaeche
 	for (int k=0;k< n;k++)
 	{
 
 		wo = arr[k];
-		wob = wo->getGeometry();
-		if (shape->m_type == Shape::CIRCLE)
-		{
-			DEBUG5("testing object %s at %f %f",wo->getNameId().c_str(),wob->m_shape.m_coordinate_x,wob->m_shape.m_coordinate_y);
-		}
-		s = &(wo->getGeometry()->m_shape);
+		
+		s = wo->getShape();
 
-		if (wob->m_layer & layer)
+		if (wo->getLayer() & layer)
 		{
-			if (((shape ==0) || World::intersect(shape,s )))
+			if ((shape ==0) || shape->intersects(*s))
 			{
 				if (wo != omit)
 				{
@@ -264,35 +261,36 @@ bool  Region::addObjectsInShapeFromGridunit(Shape* shape, Gridunit* gu, WorldObj
 			}
 		}
 	}
+		
 	return true;
 }
 
-bool Region::addObjectsOnLineFromGridunit(float xstart, float ystart, float xend,float yend, Gridunit* gu, WorldObjectList* result, short layer, short group ,WorldObject* omit, bool empty_test )
+bool Region::addObjectsOnLineFromGridunit(Line& line, Gridunit* gu, WorldObjectList* result, short layer, short group ,WorldObject* omit, bool empty_test )
 {
 	WorldObject* wo=0;
 	WorldObject** arr=0;
-	WorldObject::Geometry* wob=0;
 	Shape* s=0;
+	short groups[3] = {WorldObject::CREATURE, group == WorldObject::FIXED, group == WorldObject::DEAD};
+	
+	
 	arr = gu->getObjects((WorldObject::Group) group);
 
 	int n = gu->getObjectsNr((WorldObject::Group) group);
 
 	DEBUG5("%i objects in layer %i, group %i",n,layer,group);
-	float  dir[2];
-	dir[0] = xstart-xend;
-	dir[1] = ystart-yend;
-
+	// Schleife ueber alle Objekte
+	// geprueft wird: Ebene, Schnitt mit der Linie
 	for (int k=0;k< n;k++)
 	{
 
 		wo = arr[k];
 		DEBUG5("testing %s %p",wo->getNameId().c_str(),wo->getNameId().c_str())
 		DEBUG5("testing %p",wo);
-		wob = wo->getGeometry();
-		s = &(wo->getGeometry()->m_shape);
-		if (wob->m_layer & layer)
+		s = wo->getShape();
+		
+		if (wo->getLayer() & layer)
 		{
-			if (World::lineIntersect(xstart, ystart,  xend,yend ,dir, s))
+			if (s->intersects(line))
 			{
 				if (wo != omit)
 				{
@@ -304,6 +302,7 @@ bool Region::addObjectsOnLineFromGridunit(float xstart, float ystart, float xend
 			}
 		}
 	}
+		
 	return true;
 }
 
@@ -311,7 +310,7 @@ bool Region::addObjectsOnLineFromGridunit(float xstart, float ystart, float xend
 bool Region::getObjectsInShape( Shape* shape,  WorldObjectList* result,short layer, short group, WorldObject* omit, bool empty_test)
 {
 
-	DEBUG5("shape %f %f %f",shape->m_coordinate_x,shape->m_coordinate_y,shape->m_radius);
+	DEBUG5("shape %f %f %f",shape->m_center.m_x,shape->m_center.m_y,shape->m_radius);
 
 	 // Wenn der Resultat Zeiger 0 ist: Fehler ausgeben
 	if (result == 0)
@@ -322,7 +321,7 @@ bool Region::getObjectsInShape( Shape* shape,  WorldObjectList* result,short lay
 
 	if (shape == 0)
 	{
-		DEBUG("no shape given");
+		ERRORMSG("no shape given");
 		return false;
 	}
 
@@ -333,18 +332,9 @@ bool Region::getObjectsInShape( Shape* shape,  WorldObjectList* result,short lay
 	if (group == WorldObject::PLAYER)
 	{
 		// Wenn nur nach Spielern gesucht ist, dann nur die Liste der Spieler durchsuchen
-		/*std::list<Player*>::iterator i;
-		// TODO: Player umbenennen, einbauen
-		for (i=m_players->begin();i!=m_player->end();++i)
-		{
-		wo= (WorldObject*) *i;
-		s = &(wo->getGeometry()->m_shape);
-		if (World::intersect(shape,s ))
-		{
-		result->push_back(wo);
-	}
-	}
-		*/
+		
+		// TODO: einbauen
+		
 	}
 	else
 	{
@@ -352,22 +342,17 @@ bool Region::getObjectsInShape( Shape* shape,  WorldObjectList* result,short lay
 		Gridunit* gu=0;
 		// durchmustere alle 4*4 Felder die von dem Suchrechteck plus 4 Felder bedeckt werden
 		float xe,ye;
-		if (shape->m_type == Shape::CIRCLE)
-		{
-			xe = shape->m_radius;
-			ye = shape->m_radius;
-		}
-		else
-		{
-			xe = shape->m_extent_x;
-			ye = shape->m_extent_y;
-		}
+		
+		// Maximale Ausdehnung der Flaeche in Richtung der Koordinatenaxen
+		Vector ext = shape->getAxisExtent();
+		Vector d1 = shape->m_center +ext;
+		Vector d2 = shape->m_center -ext;
+			
 
-		int xmin = (int) floor(0.25*(shape->m_coordinate_x-xe-2));
-		int ymin = (int) floor(0.25*(shape->m_coordinate_y-ye-2));
-		int xmax = (int) floor(0.25*(shape->m_coordinate_x+xe+2));
-		int ymax = (int) floor(0.25*(shape->m_coordinate_y+ye+2));
-
+		int xmin = (int) floor(0.25*(d2.m_x-4));
+		int ymin = (int) floor(0.25*(d2.m_y-4));
+		int xmax = (int) floor(0.25*(d1.m_x+4));
+		int ymax = (int) floor(0.25*(d1.m_y+4));
 		DEBUG5("searching square (%i %i) (%i %i)",xmin,ymin,xmax,ymax);
 		// Pruefen ob die Suchanfrage nicht aus der Region herauslaeuft
 		bool ret = false;
@@ -384,7 +369,7 @@ bool Region::getObjectsInShape( Shape* shape,  WorldObjectList* result,short lay
 
 				DEBUG5("searching in Grid Tile %i %i",i,j);
 				// Durchmustern der Listen im 4x4-Feld
-				gu = (m_data_grid->ind(i,j));
+				gu = &(*m_data_grid)[i][j];
 
 				// Totenebene
 				if (group & WorldObject::DEAD)
@@ -412,7 +397,7 @@ bool Region::getObjectsInShape( Shape* shape,  WorldObjectList* result,short lay
 				if (group & WorldObject::CREATURE)
 				{
 
-					ret =  addObjectsInShapeFromGridunit(shape, gu, result, layer,group & WorldObject::CREATURE, omit, empty_test);
+					ret =  addObjectsInShapeFromGridunit(shape, gu, result, layer,WorldObject::CREATURE, omit, empty_test);
 					if (!result->empty() && empty_test)
 						return true;
 
@@ -426,13 +411,12 @@ bool Region::getObjectsInShape( Shape* shape,  WorldObjectList* result,short lay
 }
 
 
-WorldObject* Region::getObjectAt(float x_coordinate, float y_coordinate, short layer, short group)
+WorldObject* Region::getObjectAt(Vector pos, short layer, short group)
 {
 	Shape s;
 	s.m_type = Shape::CIRCLE;
 	s.m_radius =0;
-	s.m_coordinate_x=x_coordinate;
-	s.m_coordinate_y=y_coordinate;
+	s.m_center = pos;
 
 	WorldObjectList l;
 	l.clear();
@@ -449,32 +433,21 @@ WorldObject* Region::getObjectAt(float x_coordinate, float y_coordinate, short l
 
 
 
-void Region::getObjectsOnLine( float xstart, float ystart, float xend, float yend,  WorldObjectList* result,short layer, short group , WorldObject* omit)
+void Region::getObjectsOnLine(Line& line,  WorldObjectList* result,short layer, short group , WorldObject* omit)
 {
 	Gridunit* gu=0;
 
-	int xmin = (short) floor(0.25*(std::min(xstart,xend)-2));
-	int ymin = (short) floor(0.25*(std::min(ystart,yend)-2));
-	int xmax = (short) floor(0.25*(std::max(xstart,xend)+2));
-	int ymax = (short) floor(0.25*(std::max(ystart,yend)+2));
+	int xmin = (short) floor(0.25*(std::min(line.m_start.m_x,line.m_end.m_x)-4));
+	int ymin = (short) floor(0.25*(std::min(line.m_start.m_y,line.m_end.m_y)-4));
+	int xmax = (short) floor(0.25*(std::max(line.m_start.m_x,line.m_end.m_x)+4));
+	int ymax = (short) floor(0.25*(std::max(line.m_start.m_y,line.m_end.m_y)+4));
 	int i,j;
-	float p[2];
-	float proj[2];
 	float d;
-	float dir[2];
-
+	
 	// Richtung der Linie
-	dir[0] = xend-xstart;
-	dir[1] = yend-ystart;
-	d = sqr(dir[0])+sqr(dir[1]);
-	if (d<=0)
-		return;
-
-	d = 1/sqrt(d);
-	dir[0] *=d;
-	dir[1] *=d;
-
-
+	Vector dir = line.getDirection();
+	dir.normalize();
+	Vector p;
 
 	for (i = std::max (xmin,0);i<=std::min(xmax,m_dimx-1);i++)
 	{
@@ -483,32 +456,28 @@ void Region::getObjectsOnLine( float xstart, float ystart, float xend, float yen
 			DEBUG5("searching in Grid Tile %i %i",i,j);
 
 			// Herausfiltern jener Felder die zu weit von der Linie entfernt sind
-			p[0] = i*4.0+2;
-			p[1] = j*4.0+2;
-			p[0] -= xstart;
-			p[1] -= ystart;
+			p.m_x = i*4.0+2;
+			p.m_y = j*4.0+2;
+			p -= line.m_start;
 
-			d=p[0]*dir[0]+p[1]*dir[1];
-			proj[0] = dir[0]*d;
-			proj[1] = dir[1]*d;
+			p.normalPartTo(dir);
 
-			d = sqr(p[0]-proj[0])+sqr(p[1]-proj[1]);
+			d = p.getLength();
 			if (d>32)
 			{
 				DEBUG5("aborted");
 				continue;
 			}
 
-				// Durchmustern der Listen im 4x4-Feld
-			gu = (m_data_grid->ind(i,j));
+			// Durchmustern der Listen im 4x4-Feld
+			gu = &(*m_data_grid)[i][j];
 
-			// Totenebene
 			// Totenebene
 			if (group & WorldObject::DEAD)
 			{
 				DEBUG5("searching dead layer");
 
-				addObjectsOnLineFromGridunit(xstart,ystart,xend,yend, gu, result, layer,WorldObject::DEAD, omit);
+				addObjectsOnLineFromGridunit(line, gu, result, layer,WorldObject::DEAD, omit);
 			}
 
 				// feste Objekte
@@ -517,7 +486,7 @@ void Region::getObjectsOnLine( float xstart, float ystart, float xend, float yen
 				DEBUG5("searching fixed layer");
 
 
-				addObjectsOnLineFromGridunit(xstart,ystart,xend,yend, gu, result, layer,WorldObject::FIXED, omit);
+				addObjectsOnLineFromGridunit(line, gu, result, layer,WorldObject::FIXED, omit);
 			}
 
 				// lebende Objekte
@@ -525,7 +494,7 @@ void Region::getObjectsOnLine( float xstart, float ystart, float xend, float yen
 			{
 
 
-				addObjectsOnLineFromGridunit(xstart,ystart,xend,yend, gu, result, layer,WorldObject::CREATURE, omit);
+				addObjectsOnLineFromGridunit(line, gu, result, layer,WorldObject::CREATURE, omit);
 			}
 
 
@@ -534,34 +503,8 @@ void Region::getObjectsOnLine( float xstart, float ystart, float xend, float yen
 	}
 }
 
-void Region::getProjectilesOnScreen(float center_x,float center_y, std::list<Projectile*>* result)
-{
-	ProjectileMap::iterator i;
-	float dx,dy,r;
-	Projectile* pr;
-	for (i=m_projectiles->begin();i!=m_projectiles->end();++i)
-	{
-		pr = (i->second);
 
-		r=pr->getGeometry()->m_radius;
-		// Abstaende, in dem die Effekte von ihrem Zentrum entfernt sichtbar sind
-
-		dx = fabs(pr->getGeometry()->m_coordinate_x-center_x)-r;
-		dy = fabs(pr->getGeometry()->m_coordinate_y-center_y)-r;
-
-		if (dx<=12 && dy <=12)
-		{
-			result->push_back(pr);
-		}
-		else
-		{
-			DEBUG5("out of screen");
-		}
-
-	}
-}
-
-bool Region::insertObject (WorldObject* object, float x, float y)
+bool Region::insertObject (WorldObject* object, Vector pos)
 {
 	bool result = true;
 
@@ -590,8 +533,6 @@ bool Region::insertObject (WorldObject* object, float x, float y)
 		DEBUG5("player entered Region");
 		result &= (m_players->insert(std::make_pair(object->getId(),object))).second;
 
-		// Daten der Region zum Server senden
-		//object->setState(WorldObject::STATE_REGION_ENTERED);
 	}
 	else
 	{
@@ -603,12 +544,11 @@ bool Region::insertObject (WorldObject* object, float x, float y)
 	}
 
 	 // Koordinaten setzen
-	object->getGeometry()->m_shape.m_coordinate_x=x;
-	object->getGeometry()->m_shape.m_coordinate_y=y;
+	object->getShape()->m_center = pos;
 
 	 // Einfuegen in das Grid
-	int x_g = (int) floor(0.25*x);
-	int y_g = (int) floor(0.25*y);
+	int x_g = (int) floor(0.25*pos.m_x);
+	int y_g = (int) floor(0.25*pos.m_y);
 	object->getGridLocation()->m_grid_x = x_g;
 	object->getGridLocation()->m_grid_y = y_g;
 
@@ -621,7 +561,7 @@ bool Region::insertObject (WorldObject* object, float x, float y)
 	}
 	else
 	{
-		if (object->getGeometry()->m_layer != WorldObject::Geometry::LAYER_SPECIAL)
+		if (object->getLayer() != WorldObject::LAYER_SPECIAL)
 		{
 			Gridunit *gu = (m_data_grid->ind(x_g,y_g));
 
@@ -634,11 +574,10 @@ bool Region::insertObject (WorldObject* object, float x, float y)
 }
 
 
-bool  Region::insertProjectile(Projectile* object, float x, float y)
+bool  Region::insertProjectile(Projectile* object, Vector pos)
 {
 	m_projectiles->insert(std::make_pair(object->getId(),object));
-	object->getGeometry()->m_coordinate_x = x;
-	object->getGeometry()->m_coordinate_y = y;
+	object->getShape()->m_center = pos;
 	object->setRegion( m_id);
 
 	// Event erzeugen: neues Projektil in der Region
@@ -659,7 +598,7 @@ bool  Region::deleteObject (WorldObject* object)
 	int y = object->getGridLocation()->m_grid_y;
 	DEBUG5("deleting object in grid tile %i %i",x,y);
 
-	if (object->getGeometry()->m_layer != WorldObject::Geometry::LAYER_SPECIAL)
+	if (object->getLayer() != WorldObject::LAYER_SPECIAL)
 	{
 		Gridunit *gu = (m_data_grid->ind(x,y));
 		result = gu->deleteObject(object);
@@ -690,7 +629,7 @@ bool  Region::deleteObject (WorldObject* object)
 	return result;
 }
 
-bool Region::moveObject(WorldObject* object, float x, float y)
+bool Region::moveObject(WorldObject* object, Vector pos)
 {
 	bool result = true;
 	// Wenn NULL Zeiger übergeben -> Fehler anzeigen
@@ -700,13 +639,12 @@ bool Region::moveObject(WorldObject* object, float x, float y)
 	// Testen ob das Objekt innerhalb des 4*4 Grid in ein neues Feld kommt
 	int x_old = object->getGridLocation()->m_grid_x;
 	int y_old = object->getGridLocation()->m_grid_y;
-	int x_new = (int) floor(0.25*x);
-	int y_new = (int) floor(0.25*y);
+	int x_new = (int) floor(0.25*pos.m_x);
+	int y_new = (int) floor(0.25*pos.m_y);
 
 	if (x_old == x_new && y_old == y_new)
 	{
-		object->getGeometry()->m_shape.m_coordinate_x=x;
-		object->getGeometry()->m_shape.m_coordinate_y=y;
+		object->getShape()->m_center = pos;
 		return true;
 	}
 	// Testen ob das Objekt in der Region liegt
@@ -717,16 +655,15 @@ bool Region::moveObject(WorldObject* object, float x, float y)
 	}
 	else
 	{
-		Gridunit *gu = (m_data_grid->ind(x_old,y_old));
+		Gridunit *gu = &(*m_data_grid)[x_old][y_old];
 		result =gu->deleteObject(object);
-		gu = (m_data_grid->ind(x_new,y_new));
+		gu = &(*m_data_grid)[x_new][y_new];
 		result = gu->insertObject(object);
 
 		object->getGridLocation()->m_grid_x=x_new;
 		object->getGridLocation()->m_grid_y=y_new;
 
-		object->getGeometry()->m_shape.m_coordinate_x=x;
-		object->getGeometry()->m_shape.m_coordinate_y=y;
+		object->getShape()->m_center = pos;
 	}
 
 	return result;
@@ -767,7 +704,6 @@ void Region::update(float time)
 	// Iterator zum durchmustern einer solchen Liste
 	WorldObjectMap::iterator iter;
 	WorldObject* object;
-	WorldObject::Geometry* wob;
 	ProjectileMap::iterator it3;
 
 
@@ -786,8 +722,7 @@ void Region::update(float time)
 	for (iter =m_objects->begin(); iter!=m_objects->end(); )
 	{
 		object = iter->second;
-		wob = object->getGeometry();
-		DEBUG5("\nObjekt: %f %f key: %i layer %x",wob->m_shape.m_coordinate_x,wob->m_shape.m_coordinate_y ,object->getId(),object->getGeometry()->m_layer);
+		
 		if (object->getDestroyed()==true)
 		{
 			// Objekte selbststaendig loeschen darf nur der Server
@@ -998,11 +933,8 @@ void Region::createObjectFromString(CharConv* cv, WorldObjectMap* players)
 
 	obj->fromString(cv);
 
-	x = obj->getGeometry()->m_shape.m_coordinate_x;
-	y = obj->getGeometry()->m_shape.m_coordinate_y;
-
-
-	insertObject(obj,x,y);
+	
+	insertObject(obj,obj->getShape()->m_center);
 }
 
 
@@ -1024,10 +956,7 @@ void Region::createProjectileFromString(CharConv* cv)
 
 	proj->fromString(cv);
 
-	x = proj->getGeometry()->m_coordinate_x;
-	y = proj->getGeometry()->m_coordinate_y;
-
-	insertProjectile(proj,x,y);
+	insertProjectile(proj,proj->getShape()->m_center);
 }
 
 void Region::createItemFromString(CharConv* cv)
@@ -1153,7 +1082,7 @@ void Region::setTile(Tile tile,short x, short y)
 	*(m_tiles->ind(x,y)) = (char) tile;
 }
 
-bool  Region::dropItem(Item* item, float x, float y)
+bool  Region::dropItem(Item* item, Vector pos)
 {
 	// Menge der bereits getesteten Felder
 	std::set<int> tfields;
@@ -1162,8 +1091,8 @@ bool  Region::dropItem(Item* item, float x, float y)
 	std::queue<int> fields;
 
 	// Position in 0.5 x 0.5 Feldern
-	int sx = (int) (x*2);
-	int sy = (int) (y*2);
+	int sx = (int) (pos.m_x*2);
+	int sy = (int) (pos.m_y*2);
 	int i;
 	fields.push(sx*10000+sy);
 
@@ -1171,8 +1100,8 @@ bool  Region::dropItem(Item* item, float x, float y)
 	// Flaeche auf die das Item gedroppt wird
 	Shape s;
 	s.m_type= Shape::RECT;
-	s.m_extent_x = 0.5;
-	s.m_extent_y = 0.5;
+	s.m_extent = Vector(0.5,0.5);
+	
 
 	WorldObjectList res;
 
@@ -1188,11 +1117,11 @@ bool  Region::dropItem(Item* item, float x, float y)
 		DEBUG5("testing field %i %i",sx,sy);
 
 		// Testen ob dort keine festen Objekte sind
-		s.m_coordinate_x = sx*0.5;
-		s.m_coordinate_y = sy*0.5;
+		s.m_center = Vector(sx*0.5, sy*0.5);
+		
 
 		res.clear();
-		getObjectsInShape(&s,&res,WorldObject::Geometry::LAYER_BASE,WorldObject::FIXED,0,true);
+		getObjectsInShape(&s,&res,WorldObject::LAYER_BASE,WorldObject::FIXED,0,true);
 
 		if (!res.empty())
 		{
@@ -1283,14 +1212,14 @@ bool  Region::dropItem(Item* item, float x, float y)
 
 }
 
-Item*  Region::getItemAt(float x, float y)
+Item*  Region::getItemAt(Vector pos)
 {
 	DropItemMap::iterator it;
-	short sx = (int) (x*2);
-	short sy = (int) (y*2);
-	int pos = sx*10000 + sy;
+	short sx = (int) (pos.m_x*2);
+	short sy = (int) (pos.m_y*2);
+	int id = sx*10000 + sy;
 
-	it = m_drop_item_locations->find(pos);
+	it = m_drop_item_locations->find(id);
 	if (it == m_drop_items->end())
 	{
 		return 0;

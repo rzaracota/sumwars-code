@@ -3,6 +3,7 @@
 #define PATH2_H
 
 #include "matrix2d.h"
+#include "geometry.h"
 #include <string>
 #include <stdio.h>
 #include <iostream>
@@ -40,29 +41,17 @@ struct PathfindInfo
 	~PathfindInfo();
 	
 	/**
-	 * \var float m_start_x
-	 * \brief x-Koordinate des Zielpunktes
+	 * \var Vector m_start;
+	 * \brief Zielpunkt
 	 * Da die Suche rueckwarts laeuft hier als Startpunkt bezeichnet
 	 */
-	float m_start_x;
+	Vector m_start;
 	
 	/**
-	 * \var float m_start_y
-	 * \brief y-Koordinate des Zielpunktes
+	 * \var Vector m_center
+	 * \brief Mittelpunkt des Suchbereiches
 	 */
-	float m_start_y;
-	
-	/**
-	 * \var float m_center_x
-	 * \brief x-Koordinate des Mittelpunktes des Suchbereiches
-	 */
-	float m_center_x;
-	
-	/**
-	 * \var float m_center_y
-	 * \brief y-Koordinate des Mittelpunktes des Suchbereiches
-	 */
-	float m_center_y;
+	Vector m_center;
 	
 	/**
 	 * \var int m_dim
@@ -231,16 +220,13 @@ class SearchField
 		void createGradient(Matrix2d<float[2]>* grad);
 		
 		/**
-		 * \fn static void getGradient(Matrix2d<float>* m_pot,Matrix2d<char>* m_block,int m_dim, float grad[2], int x, int y)
+		 * \fn static void getGradient(PathfindInfo* pathinfo, Vector pos, Vector& dir)
 		 * \brief Berechnet den Gradienten an einer gegebenen Stelle
-		 * \param m_pot Potentialfeld
-		 * \param m_block dem Potentialfeld zugrunde liegende Matrix der blockierten Felder
-		 * \param m_dim Dimension der Potentialfeld-, sowie Blockadematrix
-		 * \param grad Ausgabeparameter fuer den Gradienten
-		 * \param x x-Koordinate des Punktes an dem der Gradient gesucht ist
-		 * \param y y-Koordinate des Punktes an dem der Gradient gesucht ist
+		 * \param pinfo Wegfindeinformation
+		 * \param pos Position an der die Richtung gesucht ist
+		 * \param dir Ausgabeparameter fuer die Richtung
 		 */
-		static void getGradient(Matrix2d<float>* m_pot,Matrix2d<char>* m_block,int m_dim, float grad[2], int x, int y);
+		static void getGradient(PathfindInfo* pathinfo,Vector pos, Vector& dir );
 
 	private:
 	

@@ -157,7 +157,7 @@ void ObjectFactory::init()
 	mdata->m_base_attr.m_immunity =0xa;
 
 	// Lich Geometrie Informationen
-	mdata->m_layer = (WorldObject::Geometry::LAYER_BASE | WorldObject::Geometry::LAYER_AIR);
+	mdata->m_layer = (WorldObject::LAYER_BASE | WorldObject::LAYER_AIR);
 	mdata->m_radius = 1.0;
 
 	// Lich AI Informationen
@@ -211,7 +211,7 @@ void ObjectFactory::init()
 	mdata->m_base_attr.m_immunity =0;
 
 	// Goblin dogGeometrie Informationen
-	mdata->m_layer = (WorldObject::Geometry::LAYER_BASE | WorldObject::Geometry::LAYER_AIR);
+	mdata->m_layer = (WorldObject::LAYER_BASE | WorldObject::LAYER_AIR);
 	mdata->m_radius = 0.5;
 
 	// Goblin dog AI Informationen
@@ -268,35 +268,30 @@ WorldObject* ObjectFactory::createObject(WorldObject::TypeInfo::ObjectType type,
 	}
 	else if (type ==WorldObject::TypeInfo::TYPE_FIXED_OBJECT)
 	{
-		WorldObject::Geometry* wob;
 		Shape* sp;
 		DEBUG5("create fixed object: %s",subtype.c_str());
 		ret = new FixedObject(m_world,id,subtype);
 
-		wob=ret->getGeometry();
-		sp=&(wob->m_shape);
-		wob->m_angle =0;
+		sp=ret->getShape();
+		sp->m_angle =0;
 
 		ret->setState(WorldObject::STATE_STATIC);
-		wob->m_layer = (WorldObject::Geometry::LAYER_BASE | WorldObject::Geometry::LAYER_AIR);
+		ret->setLayer((WorldObject::LAYER_BASE | WorldObject::LAYER_AIR));
 
 		if (subtype =="fence1" || subtype =="fence2" || subtype =="fence3" || subtype =="fence4" || subtype =="fence5")
 		{
 			sp->m_type = Shape::RECT;
-			sp->m_extent_x = 3.84;
-			sp->m_extent_y = 0.15;
+			sp->m_extent = Vector(3.84,0.15);
 		}
 		else if (subtype =="wall1" || subtype =="wall2" || subtype =="wall3")
 		{
 				sp->m_type = Shape::RECT;
-				sp->m_extent_x = 3.04;
-                sp->m_extent_y = 0.61;
+				sp->m_extent = Vector(3.04,0.61);
 		}
 		else if (subtype =="smallWall1" || subtype == "smallWall2")
 		{
 				sp->m_type = Shape::RECT;
-				sp->m_extent_x = 0.46;
-                sp->m_extent_y = 0.61;
+				sp->m_extent = Vector(0.46,0.6);
 		}
 		else if (subtype =="tree1")
 		{
@@ -319,8 +314,7 @@ WorldObject* ObjectFactory::createObject(WorldObject::TypeInfo::ObjectType type,
 		else if (subtype =="stones3")
 		{
 				sp->m_type = Shape::RECT;
-				sp->m_extent_x = 3.18;
-                sp->m_extent_y = 2.11;
+				sp->m_extent = Vector(3.18,2.11);
 		}
 	}
 	return ret;

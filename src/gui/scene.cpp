@@ -314,8 +314,8 @@ void Scene::update(float ms)
 	}
 
 	// Koordinaten des Spielers
-	float x=player->getGeometry()->m_shape.m_coordinate_x;
-	float y=player->getGeometry()->m_shape.m_coordinate_y;
+	float x=player->getShape()->m_center.m_x;
+	float y=player->getShape()->m_center.m_y;
 
 
 	// Kamera auf Spieler ausrichten
@@ -346,21 +346,19 @@ void  Scene::updateObjects()
 
 	// aktuelle Liste der Objekte holen
 	float x,y;
-	x = player->getGeometry()->m_shape.m_coordinate_x;
-	y = player->getGeometry()->m_shape.m_coordinate_y;
+	x = player->getShape()->m_center.m_x;
+	y = player->getShape()->m_center.m_y;
 
 	std::list<WorldObject*> objs;
 	WorldObject* obj;
 	std::list<WorldObject*>::iterator it;
 	Shape s;
-	s.m_coordinate_x = x;
-	s.m_coordinate_y = y;
+	s.m_center = player->getShape()->m_center;
 	s.m_type = Shape::RECT;
-	s.m_extent_x = 20;
-	s.m_extent_y = 20;
+	s.m_extent = Vector(20,20);
 
-	player->getRegion()->getObjectsInShape(&s,&objs, WorldObject::Geometry::LAYER_ALL,WorldObject::CREATURE);
-	player->getRegion()->getObjectsInShape(&s,&objs, WorldObject::Geometry::LAYER_ALL,WorldObject::DEAD);
+	player->getRegion()->getObjectsInShape(&s,&objs, WorldObject::LAYER_ALL,WorldObject::CREATURE);
+	player->getRegion()->getObjectsInShape(&s,&objs, WorldObject::LAYER_ALL,WorldObject::DEAD);
 
 
 	// Liste der aktuell in der Szene vorhanden Objekte durchmustern
@@ -482,8 +480,8 @@ void Scene::updateObject(WorldObject* obj)
 
 
 	// Koordinaten des Objektes
-	float x=obj->getGeometry()->m_shape.m_coordinate_x;
-	float y=obj->getGeometry()->m_shape.m_coordinate_y;
+	float x=obj->getShape()->m_center.m_x;
+	float y=obj->getShape()->m_center.m_y;
 
 	// Ortsvektor des Objektes
 	Ogre::Vector3 vec(x*50,0,y*50);
@@ -492,7 +490,7 @@ void Scene::updateObject(WorldObject* obj)
 	// an die richtige Stelle verschieben
 	m_scene_manager->getSceneNode(node_name)->setPosition(vec);
 
-	float angle = obj->getGeometry()->m_angle;
+	float angle = obj->getShape()->m_angle;
 	// Objekt drehen
 	m_scene_manager->getSceneNode(node_name)->setDirection(cos(angle),0,sin(angle),Ogre::Node::TS_WORLD);
 
@@ -739,8 +737,8 @@ void Scene::createObject(WorldObject* obj,std::string& name, bool is_static)
 	std::string node_name = name + "Node";
 
 	// Koordinaten des Objektes
-	float x=obj->getGeometry()->m_shape.m_coordinate_x;
-	float y=obj->getGeometry()->m_shape.m_coordinate_y;
+	float x=obj->getShape()->m_center.m_x;
+	float y=obj->getShape()->m_center.m_y;
 
 	// Ortsvektor des Objektes
 	Ogre::Vector3 vec(x*50,0,y*50);
@@ -749,7 +747,7 @@ void Scene::createObject(WorldObject* obj,std::string& name, bool is_static)
 	Ogre::SceneNode* obj_node;
 	obj_node =m_scene_manager->getRootSceneNode()->createChildSceneNode(node_name,vec);
 
-	float angle = obj->getGeometry()->m_angle;
+	float angle = obj->getShape()->m_angle;
 	// Objekt drehen
 	obj_node->setDirection(cos(angle),0,sin(angle),Ogre::Node::TS_WORLD);
 
@@ -915,13 +913,13 @@ void Scene::updateProjectiles()
 		}
 
 		// Ortsvektor des Projektils
-		Ogre::Vector3 vec(pr->getGeometry()->m_coordinate_x*50,50,pr->getGeometry()->m_coordinate_y*50);
+		Ogre::Vector3 vec(pr->getShape()->m_center.m_x*50,50,pr->getShape()->m_center.m_y*50);
 
 		// an die richtige Stelle verschieben
 		m_scene_manager->getSceneNode(node_name)->setPosition(vec);
 
 		// Objekt drehen
-		float angle = pr->getGeometry()->m_angle;
+		float angle = pr->getShape()->m_angle;
 		m_scene_manager->getSceneNode(node_name)->setDirection(cos(angle),0,sin(angle),Ogre::Node::TS_WORLD);
 
 
@@ -935,7 +933,7 @@ void Scene::createProjectile(Projectile* pr, std::string& name)
 	std::string node_name = name + "Node";
 
 	// Ortsvektor des Projektils
-	Ogre::Vector3 vec(pr->getGeometry()->m_coordinate_x*50,50,pr->getGeometry()->m_coordinate_y*50);
+	Ogre::Vector3 vec(pr->getShape()->m_center.m_x*50,50,pr->getShape()->m_center.m_y*50);
 
 	// in die Liste einfuegen
 	m_projectiles->insert(std::make_pair(pr->getId(),name));
@@ -1168,13 +1166,11 @@ void Scene::createScene()
 	Region* region = m_document->getLocalPlayer()->getRegion();
 
 	Shape s;
-	s.m_coordinate_x = 0;
-	s.m_coordinate_y = 0;
+	s.m_center = Vector(0,0);
 	s.m_type = Shape::RECT;
-	s.m_extent_x = 10000;
-	s.m_extent_y = 10000;
+	s.m_extent = Vector(10000,10000);
 
-	region->getObjectsInShape(&s,&stat_objs, WorldObject::Geometry::LAYER_ALL,WorldObject::FIXED);
+	region->getObjectsInShape(&s,&stat_objs, WorldObject::LAYER_ALL,WorldObject::FIXED);
 	std::list<WorldObject*>::iterator it;
 	std::string name;
 	for (it = stat_objs.begin(); it !=stat_objs.end();++it)

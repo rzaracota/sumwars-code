@@ -323,8 +323,7 @@ void Document::onButtonSaveExitClicked ( )
 	// Paket mit Daten fuellen
 	// Button ist Speichern+Beenden, alle anderen Daten gleich 0
 	command.m_button=BUTTON_SAVE_QUIT;
-	command.m_coordinate_x=0;
-	command.m_coordinate_y=0;
+	command.m_goal = Vector(0,0);
 	command.m_id=0;
 	command.m_number=0;
 
@@ -347,13 +346,12 @@ void Document::onRightMouseButtonClick(float x, float y)
 
 
 	// herstellen der Koordinaten im Koordinatensystem des Spiels
-	m_gui_state.m_clicked_x =x;
-	m_gui_state.m_clicked_y =y;
+	m_gui_state.m_clicked.m_x =x;
+	m_gui_state.m_clicked.m_y =y;
 
 	// Paket mit Daten fuellen
 	command.m_button=RIGHT_MOUSE_BUTTON;
-	command.m_coordinate_x=x;
-	command.m_coordinate_y=y;
+	command.m_goal = m_gui_state.m_clicked;
 	command.m_action = pl->getRightAction();
 
 	m_gui_state.m_left_mouse_hold=false;
@@ -392,8 +390,9 @@ void Document::onLeftMouseButtonClick(float x, float y)
 
 	// herstellen der Koordinaten im Koordinatensystem des Spiels
 
-	m_gui_state. m_clicked_x =x;
-	m_gui_state. m_clicked_y =y;
+	m_gui_state.m_clicked.m_x =x;
+	m_gui_state.m_clicked.m_y =y;
+
 
 	// Paket mit Daten fuellen
 	command.m_button=LEFT_MOUSE_BUTTON;
@@ -401,8 +400,7 @@ void Document::onLeftMouseButtonClick(float x, float y)
 	{
 		command.m_button=LEFT_SHIFT_MOUSE_BUTTON;
 	}
-	command.m_coordinate_x=x;
-	command.m_coordinate_y=y;
+	command.m_goal = m_gui_state.m_clicked;
 	command.m_action = pl->getLeftAction();
 
 	m_gui_state.m_right_mouse_hold=false;
@@ -465,7 +463,7 @@ int Document::getObjectAt(float x,float y)
 	if (reg ==0)
 		return 0;
 
-	WorldObject* obj = reg->getObjectAt(x,y);
+	WorldObject* obj = reg->getObjectAt(Vector(x,y));
 	if (obj != 0)
 		return obj->getId();
 
@@ -976,8 +974,7 @@ void Document::updateContent(float time)
 			{
 				command.m_button=LEFT_SHIFT_MOUSE_BUTTON;
 			}
-			command.m_coordinate_x=m_gui_state.m_clicked_x;
-			command.m_coordinate_y=m_gui_state.m_clicked_y;
+			command.m_goal = m_gui_state.m_clicked;
 			command.m_id = m_gui_state.m_clicked_object_id;
 			command.m_action = player->getLeftAction();
 			command.m_number=0;
@@ -998,8 +995,7 @@ void Document::updateContent(float time)
 			ClientCommand command;
 
 			command.m_button=RIGHT_MOUSE_BUTTON;
-			command.m_coordinate_x=m_gui_state.m_clicked_x;
-			command.m_coordinate_y=m_gui_state.m_clicked_y;
+			command.m_goal = m_gui_state.m_clicked;
 			command.m_id = m_gui_state.m_clicked_object_id;
 			command.m_action = player->getRightAction();
 			command.m_number=0;

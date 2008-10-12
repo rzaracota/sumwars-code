@@ -258,26 +258,24 @@ public:
 	
 
 	/**
-	 * \fn void getPathDirection(float x_start, float  y_start,short region, float base_size, short layer,  float dir[2])
+	 * \fn void getPathDirection(Vector pos,short region, float base_size, short layer,  Vector& dir)
 	 * \brief Gibt die Richtung zurueck, in die man vom Startpunkt aus gehen muss um zu dem Lebewesen zu gelangen
-	 * \param x_start x-Koordinate des Startpunktes
-	 * \param y_start y-Koordinate des Startpunktes
+	 * \param pos Startpunkt
 	 * \param base_size Durchmesser der Standflaeche des Weg suchenden Lebewesens
 	 * \param layer Ebene in der auf Kollisionen getestet werden soll
 	 * \param region Region in der gesucht werden soll
 	 * \param dir Rueckgabevektor
 	 */
-	void getPathDirection(float x_start, float  y_start,short region, float base_size, short layer,  float dir[2]);
+	void getPathDirection(Vector pos,short region, float base_size, short layer,  Vector& dir);
 	
 		
 	/**
-	 * \fn void calcWalkDir(float goalx,float goaly,WorldObject* goal)
+	 * \fn void calcWalkDir(Vector goal,WorldObject* goalobj)
 	 * \brief Sucht den Weg zu einem Punkt und setzt die Bewegungsgeschwindigkeit entspechend
-	 * \param goalx x-Koordinate des Zieles
-	 * \param goaly y-Koordinate des Zieles
-	 * \param goal Zeiger auf das Zielobject
+	 * \param goal Zielpunkt
+	 * \param goalobj Zeiger auf das Zielobject
 	 */
-	void calcWalkDir(float goalx,float goaly,WorldObject* goal);
+	void calcWalkDir(Vector goal,WorldObject* goalobj);
 	
 	/**
 	 * \fn virtual void toString(CharConv* cv)
@@ -402,13 +400,12 @@ protected:
 	virtual void performAction(float &time);
 	
 	/**
-	 * \fn virtual void performActionCritPart(float goalx, float goaly, WorldObject* goal)
+	 * \fn virtual void performActionCritPart(Vector goal, WorldObject* goalobj)
 	 * \brief Fuehrt den entscheidenden Part einer Action (Schaden austeilen, Status veraendern usw aus
-	 * \param goalx x-Koordinate des Zieles
-	 * \param goaly x-Koordinate des Zieles
-	 * \param goal Zeiger auf der Zielobjekt, ist NULL wenn kein Zielobjekt existiert
+	 * \param goal Zielpunkt
+	 * \param goalobj Zeiger auf der Zielobjekt, ist NULL wenn kein Zielobjekt existiert
 	 */
-	virtual void performActionCritPart(float goalx, float goaly, WorldObject* goal);
+	virtual void performActionCritPart(Vector goal, WorldObject* goalobj);
 	
 	/**
 	 * \fn virtual void die()

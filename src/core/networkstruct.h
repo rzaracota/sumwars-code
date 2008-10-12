@@ -32,6 +32,7 @@
 #include "network.h"
 #include "action.h"
 #include "worldobject.h"
+#include "geometry.h"
 
 /**
  * \enum PackageType
@@ -226,17 +227,12 @@ struct ClientCommand
 
 	Action::ActionType m_action;
 
+	/**
+	/* \var Vector m_goal
+	 * \brief Zielpunkt der Aktion
+	 */
+	Vector m_goal;
 
-	/**
-	 * \var m_coordinate_x;
-	 * \brief Gibt x-Koordinate an, auf die der Spieler gelickt hat
-	 */
-	float m_coordinate_x;
-	/**
-	 * \var m_coordinate_y;
-	 * \brief Gibt y-Koordinate an, auf die der Spieler gelickt hat
-	 */
-	float m_coordinate_y;
 	/**
 	 * \var m_id;
 	 * \brief Gibt Typ des Gegenstands an, falls die Aktionen einen Gegenstand betrifft Gibt Id des ZielObjekts an, wenn die Aktion ein Objekt betrifft

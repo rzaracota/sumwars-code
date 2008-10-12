@@ -81,8 +81,7 @@ bool Creature::init()
 	m_trade_id=0;
 
 	// Bewegung auf 0 setzen
-	getMoveInfo()->m_speed_x=0;
-	getMoveInfo()->m_speed_y=0;
+	m_speed = Vector(0,0);
 
 	// Wegfindeinformationen auf 0 setzen
 	m_small_path_info=0;
@@ -252,18 +251,16 @@ void Creature::initAction()
 	{
 			// Bei Aktion laufen die Laufgeschwindigkeit einrechnen
 			m_action.m_time = 1000000 / getBaseAttrMod()->m_walk_speed;
-			getMoveInfo()->m_speed_x *= getBaseAttr()->m_step_length/m_action.m_time;
-			getMoveInfo()->m_speed_y *= getBaseAttr()->m_step_length/m_action.m_time;
+			m_speed *= getBaseAttr()->m_step_length/m_action.m_time;
 			m_event_mask |= Event::DATA_MOVE_INFO;
 			//collisionDetection(m_action.m_time);
 
 			DEBUG5("walk time %f walk speed %i",m_action.m_time,getBaseAttrMod()->m_walk_speed);
-			DEBUG5("speed %f %f",getMoveInfo()->m_speed_x,getMoveInfo()->m_speed_y);
+			DEBUG5("speed %f %f",m_speed.m_x,m_speed.m_y);
 	}
 	else
 	{
-		getMoveInfo()->m_speed_x=0;
-		getMoveInfo()->m_speed_y=0;
+		m_speed = Vector(0,0);
 	}
 
 
@@ -287,17 +284,13 @@ void Creature::initAction()
 	// Drehwinkel setzen
 	if (aci->m_distance != Action::SELF)
 	{
-		float x = getGeometry()->m_shape.m_coordinate_x;
-		float y = getGeometry()->m_shape.m_coordinate_y;
-		float goalx =  m_action.m_goal_coordinate_x;
-		float goaly =  m_action.m_goal_coordinate_y;
-
-		getGeometry()->m_angle = atan2(goaly-y,goalx-x);
+		
+		getShape()->m_angle = (m_action.m_goal - getShape()->m_center).angle();
 
 	}
 	if (baseact == Action::WALK)
 	{
-		getGeometry()->m_angle = atan2(getMoveInfo()->m_speed_y,getMoveInfo()->m_speed_x);
+		getShape()->m_angle = m_speed.angle();
 
 	}
 
@@ -373,12 +366,10 @@ void Creature::performAction(float &time)
 		collisionDetection(dtime);
 
 		// neue Koordinaten ausrechnen
-		float xnew = getGeometry()->m_shape.m_coordinate_x+getMoveInfo()->m_speed_x * dtime;
-		float ynew = getGeometry()->m_shape.m_coordinate_y+getMoveInfo()->m_speed_y * dtime;
+		Vector newpos = getShape()->m_center + m_speed*dtime;
 
-		DEBUG5("new coord %f %f",xnew,ynew);
 		// Bewegung ausfuehren
-		moveTo(xnew,ynew);
+		moveTo(newpos);
 
 	}
 
@@ -398,17 +389,15 @@ void Creature::performAction(float &time)
 		if (p1>0.6)
 			pct = 0.9;
 	}
-
+	
+	// Zielobjekt der Aktion
+	WorldObject* goalobj =0;
+	Vector goal = m_action.m_goal;
+	
 	// Testen ob der kritische Prozentsatz durch das aktuelle Zeitquantum ueberschritten wurde
 	if (p1<pct && pct <=p2 && getWorld()->isServer())
 	{
 		DEBUG5("critical point %f %f %f",p1,pct,p2);
-
-		// Zielobjekt der Aktion
-		WorldObject* goal =0;
-
-		float goalx =  m_action.m_goal_coordinate_x;
-		float goaly =  m_action.m_goal_coordinate_y;
 
 		// Statusmod blind behandeln
 		// TODO: aktuell wird die Richtung beim austeilen des Schadens ausgewuerfelt
@@ -420,20 +409,17 @@ void Creature::performAction(float &time)
 			// Waehle in dem Kreis einen Punkt der der neue Zielpunkt wird
 			// konkretes Objekt kann nicht Ziel der Aktion sein
 			m_action.m_goal_object_id =0;
-			float dir[2];
-			dir[0] = goalx - getGeometry()->m_shape.m_coordinate_x;
-			dir[1] = goaly - getGeometry()->m_shape.m_coordinate_y;
-			float d = sqrt(sqr(dir[0])+sqr(dir[1]));
+			Vector dir;
+			dir = goal - getShape()->m_center;
+			float d = dir.getLength();
 			float r = 0.5*d;
-			float dx = r, dy =r;
-			while (sqr(r)<sqr(dx)+sqr(dy))
+			Vector gadd(r,r);
+			while (gadd.getLength() > r)
 			{
-				dx = r-2*r*rand()*1.0/RAND_MAX;
-				dy = r-2*r*rand()*1.0/RAND_MAX;
+				gadd.m_x = r-2*r*rand()*1.0/RAND_MAX;
+				gadd.m_y = r-2*r*rand()*1.0/RAND_MAX;
 			}
-			goalx += dx;
-			goaly += dy;
-
+			goal += gadd;
 
 		}
 
@@ -441,7 +427,7 @@ void Creature::performAction(float &time)
 		if (m_action.m_goal_object_id!=0 && m_action.m_type!= Action::TAKE_ITEM)
 		{
 			// Zielobjekt durch ID gegeben, Objekt von der Welt holen
-			goal = getWorld()->getObject(m_action.m_goal_object_id,getGridLocation()->m_region);
+			goalobj = getWorld()->getObject(m_action.m_goal_object_id,getGridLocation()->m_region);
 		}
 		else
 		{
@@ -450,9 +436,9 @@ void Creature::performAction(float &time)
 			// Im Falle von Nahkampf Ziel anhand des Zielpunktes suchen
 			if (Action::getActionInfo(m_action.m_type)->m_distance == Action::MELEE && m_action.m_type!= Action::TAKE_ITEM)
 			{
-				DEBUG5("Searching goal %f %f",goalx,goaly);
-				goal = getWorld()->getObjectAt(goalx,goaly,getGridLocation()->m_region,Geometry::LAYER_AIR);
-				DEBUG5("got object %p",goal);
+				DEBUG5("Searching goal %f %f",goal.m_x,goal.m_y);
+				goalobj = getWorld()->getObjectAt(goal,getGridLocation()->m_region,LAYER_AIR);
+				DEBUG5("got object %p",goalobj);
 			}
 		}
 
@@ -463,15 +449,15 @@ void Creature::performAction(float &time)
 		Creature* cgoal=0;
 
 		// Zielobjekt im Nahkampf suchen an der Stelle an der die Waffe trifft
-		if (goal ==0 && Action::getActionInfo(m_action.m_type)->m_distance == Action::MELEE && m_action.m_type!= Action::TAKE_ITEM)
+		if (goalobj ==0 && Action::getActionInfo(m_action.m_type)->m_distance == Action::MELEE && m_action.m_type!= Action::TAKE_ITEM)
 		{
-			goal = getWorld()->getObjectAt(goalx,goaly,getGridLocation()->m_region,Geometry::LAYER_AIR);
+			goalobj = getWorld()->getObjectAt(goal,getGridLocation()->m_region,LAYER_AIR);
 		}
 
 		// Wenn ein Zielobjekt existiert
-		if (goal !=0)
+		if (goalobj !=0)
 		{
-			if (goal->getTypeInfo()->m_type == TypeInfo::TYPE_FIXED_OBJECT)
+			if (goalobj->getTypeInfo()->m_type == TypeInfo::TYPE_FIXED_OBJECT)
 			{
 				cgoal =0;
 				// Ziel existiert nicht mehr, evtl abbrechen
@@ -479,17 +465,16 @@ void Creature::performAction(float &time)
 			else
 			{
 				// umwandeln in Creature* Pointer
-				cgoal = (Creature*) goal;
+				cgoal = (Creature*) goalobj;
 				// anpassen des Zielpunktes
-				goalx = cgoal->getGeometry()->m_shape.m_coordinate_x;
-				goaly = cgoal->getGeometry()->m_shape.m_coordinate_y;
+				goal = cgoal->getShape()->m_center;
 
 				DEBUG5("goal object %p",cgoal);
 			}
 		}
 
 		// ausfuehren des kritischen Teiles der Aktion
-		performActionCritPart(goalx, goaly, goal);
+		performActionCritPart(goal, goalobj);
 
 	}
 
@@ -502,12 +487,12 @@ void Creature::performAction(float &time)
 			m_action.m_prev_type = m_action.m_type;
 		}
 
-		DEBUG5("distance to goal %f",sqr(m_command.m_goal_coordinate_x -getGeometry()->m_shape.m_coordinate_x) +  sqr(m_command.m_goal_coordinate_y -getGeometry()->m_shape.m_coordinate_y));
 
 		// Kommando ist beendet wenn die gleichnamige Aktion beendet wurde
 		// Ausnahme: Bewegungskommando ist beendet wenn das Ziel erreicht ist
 		if (m_action.m_type == m_command.m_type && m_action.m_type != Action::WALK ||
-				  m_action.m_type == Action::WALK && sqr(getGeometry()->m_shape.m_radius) > sqr(m_command.m_goal_coordinate_x -getGeometry()->m_shape.m_coordinate_x) +  sqr(m_command.m_goal_coordinate_y -getGeometry()->m_shape.m_coordinate_y) && !(m_command.m_type == Action::CHARGE || m_command.m_type == Action::STORM_CHARGE))
+				  m_action.m_type == Action::WALK && getShape()->m_center.distanceTo(goal) < getBaseAttr()->m_step_length 
+				  && !(m_command.m_type == Action::CHARGE || m_command.m_type == Action::STORM_CHARGE))
 		{
 			DEBUG5("finished command");
 			if (m_command.m_type != Action::NOACTION)
@@ -538,18 +523,18 @@ void Creature::performAction(float &time)
 
 }
 
-void Creature::performActionCritPart(float goalx, float goaly, WorldObject* goal)
+void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 {
 	// Zielobjekt als Creature* pointer
 	// null, wenn das Objekt kein Lebewesen ist
 	Creature* cgoal =0;
-	if (goal!=0 && goal->getTypeInfo()->m_type == TypeInfo::TYPE_FIXED_OBJECT)
+	if (goalobj!=0 && goalobj->getTypeInfo()->m_type == TypeInfo::TYPE_FIXED_OBJECT)
 	{
 		cgoal =0;
 	}
 	else
 	{
-		cgoal = (Creature*) goal;
+		cgoal = (Creature*) goalobj;
 	}
 
     //	Action::ActionType baseact = Action::getActionInfo(m_action.m_type)->m_base_action;
@@ -571,15 +556,13 @@ void Creature::performActionCritPart(float goalx, float goaly, WorldObject* goal
 	WorldObjectList::iterator it;
 
 	// Koordinaten das ausfuehrenden Objektes
-	float x = getGeometry()->m_shape.m_coordinate_x;
-	float y = getGeometry()->m_shape.m_coordinate_y;
+	Vector &pos = getShape()->m_center;
 
 	// Form, wird initialisiert mit der Form des Ausfuehrenden
 	Shape s;
-	s.m_coordinate_x = x;
-	s.m_coordinate_y = y;
+	s.m_center = pos;
 	s.m_type = Shape::CIRCLE;
-	s.m_radius = getGeometry()->m_shape.m_radius;
+	s.m_radius = getShape()->m_radius;
 
 	short reg = getGridLocation()->m_region;
 	Creature* cr =0;
@@ -594,24 +577,15 @@ void Creature::performActionCritPart(float goalx, float goaly, WorldObject* goal
 
 
 	// Daten fuer Geschosse: Zielrichtung und Startpunkt
-	float dir[2],dir2[2];
-	dir[0] = goalx - getGeometry()->m_shape.m_coordinate_x;
-	dir[1] = goaly - getGeometry()->m_shape.m_coordinate_y;
-	float d = sqr(dir[0])+sqr(dir[1]);
-
+	Vector dir = goal - pos;
+	Vector dir2;
+	dir.normalize();
+	
 	// Startpunkt fuer Geschosse
 	// aeusserer Rand des Ausfuehrenden plus 5%
-	float sy,sx;
+	Vector sproj;
 	TypeInfo::Fraction fr = getTypeInfo()->m_fraction;
-	int i;
-	if (d>0)
-	{
-		d= 1/sqrt(d);
-		dir[0] *=d;
-		dir[1] *=d;
-		sx = x+dir[0] * 1.05 * s.m_radius;
-		sy = y+dir[1] * 1.05 * s.m_radius;
-	}
+	sproj = pos + dir*1.05*s.m_radius;
 
 	// Standardtyp fuer Pfeile festlegen
 	Projectile::ProjectileType arrow = Projectile::ARROW;
@@ -630,17 +604,16 @@ void Creature::performActionCritPart(float goalx, float goaly, WorldObject* goal
 	{
 		case Action::USE:
 			if (cgoal)
-				goal->reactOnUse(getId());
+				goalobj->reactOnUse(getId());
 			break;
 
 		// Kriegerfaehigkeiten
 		case Action::HAMMER_BASH:
 			// alle Lebewesen im Umkreis von 1.5 um den Zielpunkt auswaehlen
 			m_damage.m_multiplier[Damage::PHYSICAL]=1;
-			s.m_coordinate_x = goalx;
-			s.m_coordinate_y = goaly;
+			s.m_center = goal;
 			s.m_radius = 1.5;
-			getWorld()->getObjectsInShape(&s,reg, &res,Geometry::LAYER_AIR,CREATURE,this);
+			getWorld()->getObjectsInShape(&s,reg, &res,LAYER_AIR,CREATURE,this);
 
 			// an alle einfachen Schaden austeilen
 			for (it=res.begin();it!=res.end();++it)
@@ -659,7 +632,7 @@ void Creature::performActionCritPart(float goalx, float goaly, WorldObject* goal
 			// alle Lebewesen im Umkreis um den Ausfuehrenden auswaehlen
 			// Radius gleich Waffenreichweite
 			s.m_radius += m_command.m_range;
-			getWorld()->getObjectsInShape(&s, reg, &res,Geometry::LAYER_AIR,CREATURE,this);
+			getWorld()->getObjectsInShape(&s, reg, &res,LAYER_AIR,CREATURE,this);
 
 			// an alle Schaden austeilen
 			for (it=res.begin();it!=res.end();++it)
@@ -733,9 +706,9 @@ void Creature::performActionCritPart(float goalx, float goaly, WorldObject* goal
 			// Projektil magischer Pfeil erzeugen
 			pr = new Projectile(getWorld(),Projectile::MAGIC_ARROW,fr, getWorld()->getValidProjectileId());
 			memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
-			pr->setSpeedX(dir[0]/70);
-			pr->setSpeedY(dir[1]/70);
-			getWorld()->insertProjectile(pr,sx,sy,reg);
+			pr->setSpeed(dir*(1/70));
+			
+			getWorld()->insertProjectile(pr,sproj,reg);
 			break;
 
 		case Action::FIRE_BOLT:
@@ -743,9 +716,9 @@ void Creature::performActionCritPart(float goalx, float goaly, WorldObject* goal
 			// Projektil Feuerblitz erzeugen
 			pr = new Projectile(getWorld(),Projectile::FIRE_BOLT,fr, getWorld()->getValidProjectileId());
 			memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
-			pr->setSpeedX(dir[0]/70);
-			pr->setSpeedY(dir[1]/70);
-			getWorld()->insertProjectile(pr,sx,sy,reg);
+			pr->setSpeed(dir*(1/70));
+			
+			getWorld()->insertProjectile(pr,sproj,reg);
 			break;
 
 		case Action::FIRE_BALL:
@@ -753,9 +726,8 @@ void Creature::performActionCritPart(float goalx, float goaly, WorldObject* goal
 			// Projektil Feuerball erzeugen
 			pr = new Projectile(getWorld(),Projectile::FIRE_BALL,fr, getWorld()->getValidProjectileId());
 			memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
-			pr->setSpeedX(dir[0]/70);
-			pr->setSpeedY(dir[1]/70);
-			getWorld()->insertProjectile(pr,sx,sy,reg);
+			pr->setSpeed(dir*(1/70));
+			getWorld()->insertProjectile(pr,sproj,reg);
 			break;
 
 		case Action::FIRE_WAVE:
@@ -763,14 +735,14 @@ void Creature::performActionCritPart(float goalx, float goaly, WorldObject* goal
 			// Projektil Feuerwelle erzeugen
 			pr = new Projectile(getWorld(),Projectile::FIRE_WAVE,fr, getWorld()->getValidProjectileId());
 			memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
-			getWorld()->insertProjectile(pr,x,y,reg);
+			getWorld()->insertProjectile(pr,pos,reg);
 			break;
 
 		case Action::FIRE_WALL:
 			// Projektil Feuersaeule erzeugen
 			pr = new Projectile(getWorld(),Projectile::FIRE_WALL,fr, getWorld()->getValidProjectileId());
 			memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
-			getWorld()->insertProjectile(pr,goalx,goaly,reg);
+			getWorld()->insertProjectile(pr,goal,reg);
 			break;
 
 		case Action::ICE_BOLT:
@@ -778,9 +750,8 @@ void Creature::performActionCritPart(float goalx, float goaly, WorldObject* goal
 			// Projektil Eisblitz erzeugen
 			pr = new Projectile(getWorld(),Projectile::ICE_BOLT,fr, getWorld()->getValidProjectileId());
 			memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
-			pr->setSpeedX(dir[0]/70);
-			pr->setSpeedY(dir[1]/70);
-			getWorld()->insertProjectile(pr,sx,sy,reg);
+			pr->setSpeed(dir*(1/70));
+			getWorld()->insertProjectile(pr,sproj,reg);
 			break;
 
 		case Action::SNOW_STORM:
@@ -788,7 +759,7 @@ void Creature::performActionCritPart(float goalx, float goaly, WorldObject* goal
 			// Projektil Blizzard erzeugen
 			pr = new Projectile(getWorld(),Projectile::BLIZZARD,fr, getWorld()->getValidProjectileId());
 			memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
-			getWorld()->insertProjectile(pr,goalx,goaly,reg);
+			getWorld()->insertProjectile(pr,goal,reg);
 			break;
 
 		case Action::ICE_RING:
@@ -796,14 +767,14 @@ void Creature::performActionCritPart(float goalx, float goaly, WorldObject* goal
 			// Projektil Eisring erzeugen
 			pr = new Projectile(getWorld(),Projectile::ICE_RING,fr, getWorld()->getValidProjectileId());
 			memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
-			getWorld()->insertProjectile(pr,x,y,reg);
+			getWorld()->insertProjectile(pr,pos,reg);
 			break;
 
 		case Action::FREEZE:
 			// Projektil Einfrieren erzeugen
 			pr = new Projectile(getWorld(),Projectile::FREEZE,fr, getWorld()->getValidProjectileId());
 			memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
-			getWorld()->insertProjectile(pr,goalx,goaly,reg);
+			getWorld()->insertProjectile(pr,goal,reg);
 			break;
 
 		case Action::LIGHTNING:
@@ -811,7 +782,7 @@ void Creature::performActionCritPart(float goalx, float goaly, WorldObject* goal
 			// Projektil Blitz erzeugen
 			pr = new Projectile(getWorld(),Projectile::LIGHTNING,fr, getWorld()->getValidProjectileId());
 			memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
-			getWorld()->insertProjectile(pr,goalx,goaly,reg);
+			getWorld()->insertProjectile(pr,goal,reg);
 			break;
 
 		case Action::THUNDERSTORM:
@@ -819,7 +790,7 @@ void Creature::performActionCritPart(float goalx, float goaly, WorldObject* goal
 			// Projektil Gewitter erzeugen
 			pr = new Projectile(getWorld(),Projectile::THUNDERSTORM,fr, getWorld()->getValidProjectileId());
 			memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
-			getWorld()->insertProjectile(pr,goalx,goaly,reg);
+			getWorld()->insertProjectile(pr,goal,reg);
 			break;
 
 		case Action::CHAIN_LIGHTNING:
@@ -832,9 +803,8 @@ void Creature::performActionCritPart(float goalx, float goaly, WorldObject* goal
 				// Verbesserte Version springt noch viermal extra, daher einfach bei -4 anfangen zu zaehlen
 				pr->setCounter(-4);
 			}
-			pr->setSpeedX(dir[0]/50);
-			pr->setSpeedY(dir[1]/50);
-			getWorld()->insertProjectile(pr,sx,sy,reg);
+			pr->setSpeed(dir*(1/50));
+			getWorld()->insertProjectile(pr,sproj,reg);
 			break;
 
 		case Action::STATIC_SHIELD:
@@ -853,64 +823,59 @@ void Creature::performActionCritPart(float goalx, float goaly, WorldObject* goal
 			// Projektil Pfeil erzeugen
 			pr = new Projectile(getWorld(),arrow,fr, getWorld()->getValidProjectileId());
 			memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
-			pr->setSpeedX(dir[0]/80);
-			pr->setSpeedY(dir[1]/80);
-			getWorld()->insertProjectile(pr,sx,sy,reg);
+			pr->setSpeed(dir*(1/80));
+			
+			getWorld()->insertProjectile(pr,sproj,reg);
 			break;
 
 		case Action::GUIDED_TRIPLE_SHOT:
 			// Projektil gelenkter Pfeil erzeugen
 			pr = new Projectile(getWorld(),Projectile::GUIDED_ARROW,fr, getWorld()->getValidProjectileId());
 			memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
-			pr->setSpeedX(dir[0]/100);
-			pr->setSpeedY(dir[1]/100);
+			pr->setSpeed(dir*(1/100));
+			
 			if (cgoal!=0)
 			{
 				DEBUG5("has goal");
 				pr->setGoalObject(cgoal->getId());
 			}
-			getWorld()->insertProjectile(pr,sx,sy,reg);
+			getWorld()->insertProjectile(pr,sproj,reg);
 			break;
 
 		case Action::MULTISHOT:
 			// 5 Pfeile erzeugen
 			// mittlerer Pfeil erhaelt die Zielrichtung
-			for (i=-2;i<=2;i++)
+			for (int i=-2;i<=2;i++)
 			{
-				dir2[0] = dir[0] + i*0.2*dir[1];
-				dir2[1] = dir[1] - i*0.2*dir[0];
-				d= 1/sqrt(sqr(dir2[0])+sqr(dir2[1]));
-				dir2[0] *=d;
-				dir2[1] *=d;
+				dir2 = dir;
+				dir2.m_x += i*0.2*dir.m_y;
+				dir2.m_y += i*0.2*dir.m_x;
+				dir2.normalize();
 
-				sx = x+dir2[0] * 1.05 * s.m_radius;
-				sy = y+dir2[1] * 1.05 * s.m_radius;
+				sproj = pos+dir2* 1.05 * s.m_radius;
 				pr = new Projectile(getWorld(),arrow,fr, getWorld()->getValidProjectileId());
 				memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
-				pr->setSpeedX(dir2[0]/80);
-				pr->setSpeedY(dir2[1]/80);
-				getWorld()->insertProjectile(pr,sx,sy,reg);
+				pr->setSpeed(dir2*(1/80));
+				
+				getWorld()->insertProjectile(pr,sproj,reg);
 			}
 			break;
 
 		case Action::VOLLEY_SHOT:
 			// 7 Pfeile erzeugen
 			// mittlerer Pfeil erhaelt die Zielrichtung
-			for (i=-3;i<=3;i++)
+			for (int i=-3;i<=3;i++)
 			{
-				dir2[0] = dir[0] + i*0.15*dir[1];
-				dir2[1] = dir[1] - i*0.15*dir[0];
-				d= 1/sqrt(sqr(dir2[0])+sqr(dir2[1]));
-				dir2[0] *=d;
-				dir2[1] *=d;
+				dir2 = dir;
+				dir2.m_x += i*0.2*dir.m_y;
+				dir2.m_y += i*0.2*dir.m_x;
+				dir2.normalize();
 
-				sx = x+dir2[0] * 1.05 * s.m_radius;
-				sy = y+dir2[1] * 1.05 * s.m_radius;
+				sproj = pos+dir2* 1.05 * s.m_radius;
 				pr = new Projectile(getWorld(),arrow,fr, getWorld()->getValidProjectileId());
 				memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
-				pr->setSpeedX(dir2[0]/80);
-				pr->setSpeedY(dir2[1]/80);
-				getWorld()->insertProjectile(pr,sx,sy,reg);
+				pr->setSpeed(dir2*(1/80));
+				getWorld()->insertProjectile(pr,sproj,reg);
 			}
 			break;
 
@@ -918,20 +883,20 @@ void Creature::performActionCritPart(float goalx, float goaly, WorldObject* goal
 			// Projektil Pfeil erzeugen
 			pr = new Projectile(getWorld(),arrow,fr, getWorld()->getValidProjectileId());
 			memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
-			pr->setSpeedX(dir[0]/80);
-			pr->setSpeedY(dir[1]/80);
+			pr->setSpeed(dir*(1/80));
+			
 			// Flag durchschlagend setzen
 			pr->setFlags(Projectile::PIERCING);
-			getWorld()->insertProjectile(pr,sx,sy,reg);
+			getWorld()->insertProjectile(pr,sproj,reg);
 			break;
 
 		case Action::VACUUM:
 			// Projektil Windpfeil erzeugen
 			pr = new Projectile(getWorld(),Projectile::WIND_ARROW,fr, getWorld()->getValidProjectileId());
 			memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
-			pr->setSpeedX(dir[0]/80);
-			pr->setSpeedY(dir[1]/80);
-			getWorld()->insertProjectile(pr,sx,sy,reg);
+			pr->setSpeed(dir*(1/80));
+			
+			getWorld()->insertProjectile(pr,sproj,reg);
 			break;
 
 		case Action::EXPLODING_ARROW:
@@ -939,27 +904,27 @@ void Creature::performActionCritPart(float goalx, float goaly, WorldObject* goal
 			// Projektil Pfeil erzeugen
 			pr = new Projectile(getWorld(),arrow,fr, getWorld()->getValidProjectileId());
 			memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
-			pr->setSpeedX(dir[0]/80);
-			pr->setSpeedY(dir[1]/80);
+			pr->setSpeed(dir*(1/80));
+			
 			// Flag explodierend setzen
 			pr->setFlags(Projectile::EXPLODES);
 			// bei verbesserter Version Flag mehrfach explodierend setzen
 			if (m_action.m_type==Action::EXPLOSION_CASCADE)
 				pr->setFlags(Projectile::MULTI_EXPLODES);
-			getWorld()->insertProjectile(pr,sx,sy,reg);
+			getWorld()->insertProjectile(pr,sproj,reg);
 			break;
 
 		case Action::DEATH_ROULETTE:
 			// Projektil Pfeil erzeugen
 			pr = new Projectile(getWorld(),arrow,fr, getWorld()->getValidProjectileId());
 			memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
-			pr->setSpeedX(dir[0]/80);
-			pr->setSpeedY(dir[1]/80);
+			pr->setSpeed(dir*(1/80));
+			
 			// Maximale Anzahl der Spruenge
 			pr->setCounter(-20);
 			// Flag zufaellig weiterspringen setzen
 			pr->setFlags(Projectile::PROB_BOUNCING);
-			getWorld()->insertProjectile(pr,sx,sy,reg);
+			getWorld()->insertProjectile(pr,sproj,reg);
 			break;
 
 		case Action::AIMED_SHOT:
@@ -1026,7 +991,7 @@ void Creature::performActionCritPart(float goalx, float goaly, WorldObject* goal
 			// Projektil Lichtstrahl erzeugen
 			pr = new Projectile(getWorld(),Projectile::LIGHT_BEAM,fr, getWorld()->getValidProjectileId());
 			memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
-			getWorld()->insertProjectile(pr,goalx,goaly,reg);
+			getWorld()->insertProjectile(pr,goal,reg);
 			break;
 
 		case Action::BURNING_RAGE:
@@ -1036,10 +1001,9 @@ void Creature::performActionCritPart(float goalx, float goaly, WorldObject* goal
 			cbam.m_xspecial_flags |= BURNING_RAGE;
 
 			// alle Verbuendeten im Umkreis von 12 suchen und Modifikation anwenden
-			s.m_coordinate_x = x;
-			s.m_coordinate_y = y;
+			s.m_center = pos;
 			s.m_radius = 12;
-			getWorld()->getObjectsInShape(&s,reg, &res, Geometry::LAYER_AIR,CREATURE,0);
+			getWorld()->getObjectsInShape(&s,reg, &res, LAYER_AIR,CREATURE,0);
 			for (it=res.begin();it!=res.end();++it)
 			{
 				if (getWorld()->getRelation(fr,(*it)) == WorldObject::ALLIED)
@@ -1074,10 +1038,9 @@ void Creature::performActionCritPart(float goalx, float goaly, WorldObject* goal
 			cbam.m_dblock = m_base_attr_mod.m_willpower /2;
 
 			// alle Verbuendeten im Umkreis von 12 suchen und Modifikation anwenden
-			s.m_coordinate_x = x;
-			s.m_coordinate_y = y;
+			s.m_center = pos;
 			s.m_radius = 12;
-			getWorld()->getObjectsInShape(&s, reg, &res,Geometry::LAYER_AIR,CREATURE,0);
+			getWorld()->getObjectsInShape(&s, reg, &res,LAYER_AIR,CREATURE,0);
 			for (it=res.begin();it!=res.end();++it)
 			{
 				if (getWorld()->getRelation(fr,(*it)) == WorldObject::ALLIED)
@@ -1098,8 +1061,7 @@ void Creature::performActionCritPart(float goalx, float goaly, WorldObject* goal
 			cdam.m_dstatus_mod_immune_time[Damage::MUTE] = 30000;
 
 			// alle Verbuendeten im Umkreis von 6 um den Zielpunkt suchen und Modifikation anwenden
-			s.m_coordinate_x = goalx;
-			s.m_coordinate_y = goaly;
+			s.m_center = goal;
 			s.m_radius = 6;
 			getWorld()->getObjectsInShape(&s, reg, &res,0);
 			for (it=res.begin();it!=res.end();++it)
@@ -1119,25 +1081,23 @@ void Creature::performActionCritPart(float goalx, float goaly, WorldObject* goal
 			// Projektil Lichtstrahl erzeugen
 			pr = new Projectile(getWorld(),Projectile::LIGHT_BEAM,fr, getWorld()->getValidProjectileId());
 			memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
-			getWorld()->insertProjectile(pr,goalx,goaly,reg);
+			getWorld()->insertProjectile(pr,goal,reg);
 			break;
 
 		case Action::BURNING_SUN:
 			// alle Lebewesen im Umkreis von 3 um den Zielpunkt suchen
-			s.m_coordinate_x = goalx;
-			s.m_coordinate_y = goaly;
+			s.m_center = goal;
 			s.m_radius = 3;
-			getWorld()->getObjectsInShape(&s, reg, &res,Geometry::LAYER_AIR,CREATURE,this);
+			getWorld()->getObjectsInShape(&s, reg, &res,LAYER_AIR,CREATURE,this);
 			for (it=res.begin();it!=res.end();++it)
 			{
 				if ((*it)->getTypeInfo()->m_type != TypeInfo::TYPE_FIXED_OBJECT)
 				{
 					// Projektil Lichtstrahl fuer jedes Objekt erzeugen
-					goalx = (*it)->getGeometry()->m_shape.m_coordinate_x;
-					goaly = (*it)->getGeometry()->m_shape.m_coordinate_y;
+					goal = (*it)->getShape()->m_center;
 					pr = new Projectile(getWorld(),Projectile::LIGHT_BEAM,fr, getWorld()->getValidProjectileId());
 					memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
-					getWorld()->insertProjectile(pr,goalx,goaly,reg);
+					getWorld()->insertProjectile(pr,goal,reg);
 				}
 			}
 			break;
@@ -1147,7 +1107,7 @@ void Creature::performActionCritPart(float goalx, float goaly, WorldObject* goal
 			// Projektil Elementarzerstoerung erzeugen
 			pr = new Projectile(getWorld(),Projectile::ELEM_EXPLOSION,fr, getWorld()->getValidProjectileId());
 			memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
-			getWorld()->insertProjectile(pr,goalx,goaly,reg);
+			getWorld()->insertProjectile(pr,goal,reg);
 			break;
 
 		case Action::MAGIC_SHIELD:
@@ -1157,10 +1117,9 @@ void Creature::performActionCritPart(float goalx, float goaly, WorldObject* goal
 			cbam.m_dwillpower = m_base_attr_mod.m_willpower /2;
 
 			// alle Verbuendeten im Umkreis von 12 suchen und Modifikation anwenden
-			s.m_coordinate_x = x;
-			s.m_coordinate_y = y;
+			s.m_center = pos;
 			s.m_radius = 12;
-			getWorld()->getObjectsInShape(&s, reg, &res,Geometry::LAYER_AIR,CREATURE,0);
+			getWorld()->getObjectsInShape(&s, reg, &res,LAYER_AIR,CREATURE,0);
 			for (it=res.begin();it!=res.end();++it)
 			{
 				if (getWorld()->getRelation(fr,(*it)) == WorldObject::ALLIED)
@@ -1195,10 +1154,9 @@ void Creature::performActionCritPart(float goalx, float goaly, WorldObject* goal
 			cdam.m_dstatus_mod_immune_time[Damage::BURNING] = 30000;
 
 			// alle Verbuendeten im Umkreis von 6 um den Zielpunkt suchen und Modifikation anwenden
-			s.m_coordinate_x = goalx;
-			s.m_coordinate_y = goaly;
+			s.m_center = goal;
 			s.m_radius = 6;
-			getWorld()->getObjectsInShape(&s, reg, &res,Geometry::LAYER_AIR,CREATURE,0);
+			getWorld()->getObjectsInShape(&s, reg, &res,LAYER_AIR,CREATURE,0);
 			for (it=res.begin();it!=res.end();++it)
 			{
 				if (getWorld()->getRelation(fr,(*it)) == WorldObject::ALLIED)
@@ -1216,7 +1174,7 @@ void Creature::performActionCritPart(float goalx, float goaly, WorldObject* goal
 			// Projektil Saeure erzeugen
 			pr = new Projectile(getWorld(),Projectile::ACID,fr, getWorld()->getValidProjectileId());
 			memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
-			getWorld()->insertProjectile(pr,goalx,goaly,reg);
+			getWorld()->insertProjectile(pr,goal,reg);
 			break;
 
 		case Action::HEAL:
@@ -1238,10 +1196,9 @@ void Creature::performActionCritPart(float goalx, float goaly, WorldObject* goal
 			cdam.m_dhealth = 2* m_base_attr_mod.m_willpower;
 
 			// alle Verbuendeten im Umkreis von 6 um den Zielpunkt suchen und Modifikation anwenden
-			s.m_coordinate_x = goalx;
-			s.m_coordinate_y = goaly;
+			s.m_center = goal;
 			s.m_radius = 6;
-			getWorld()->getObjectsInShape(&s, reg, &res,Geometry::LAYER_AIR,CREATURE,0);
+			getWorld()->getObjectsInShape(&s, reg, &res,LAYER_AIR,CREATURE,0);
 			for (it=res.begin();it!=res.end();++it)
 			{
 				if (getWorld()->getRelation(fr,(*it)) == WorldObject::ALLIED)
@@ -1259,26 +1216,24 @@ void Creature::performActionCritPart(float goalx, float goaly, WorldObject* goal
 			// Projektil heiliger Strahl erzeugen
 			pr = new Projectile(getWorld(),Projectile::DIVINE_BEAM,fr, getWorld()->getValidProjectileId());
 			memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
-			getWorld()->insertProjectile(pr,goalx,goaly,reg);
+			getWorld()->insertProjectile(pr,goal,reg);
 			break;
 
 
 		case Action::DIVINE_STORM:
 			// Alle Objekte im Umkreis von 3 um den Zielpunkt suchen
-			s.m_coordinate_x = goalx;
-			s.m_coordinate_y = goaly;
+			s.m_center = goal;
 			s.m_radius = 3;
-			getWorld()->getObjectsInShape(&s, reg, &res,Geometry::LAYER_AIR,CREATURE,this);
+			getWorld()->getObjectsInShape(&s, reg, &res,LAYER_AIR,CREATURE,this);
 			for (it=res.begin();it!=res.end();++it)
 			{
 				// fuer alle Lebewesen ein Projektil heiliger Strahl erzeugen
 				if ((*it)->getTypeInfo()->m_type != TypeInfo::TYPE_FIXED_OBJECT)
 				{
-					goalx = (*it)->getGeometry()->m_shape.m_coordinate_x;
-					goaly = (*it)->getGeometry()->m_shape.m_coordinate_y;
+					goal = (*it)->getShape()->m_center;
 					pr = new Projectile(getWorld(),Projectile::DIVINE_BEAM,fr, getWorld()->getValidProjectileId());
 					memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
-					getWorld()->insertProjectile(pr,goalx,goaly,reg);
+					getWorld()->insertProjectile(pr,goal,reg);
 				}
 			}
 			break;
@@ -1290,10 +1245,9 @@ void Creature::performActionCritPart(float goalx, float goaly, WorldObject* goal
 			cbam.m_dattack_speed = 1500;
 
 			// alle Verbuendeten im Umkreis von 12 suchen und Modifikation anwenden
-			s.m_coordinate_x = x;
-			s.m_coordinate_y = y;
+			s.m_center = pos;
 			s.m_radius = 12;
-			getWorld()->getObjectsInShape(&s, reg, &res,Geometry::LAYER_AIR,CREATURE,0);
+			getWorld()->getObjectsInShape(&s, reg, &res,LAYER_AIR,CREATURE,0);
 			for (it=res.begin();it!=res.end();++it)
 			{
 				if (getWorld()->getRelation(fr,(*it)) == WorldObject::ALLIED)
@@ -1328,10 +1282,9 @@ void Creature::performActionCritPart(float goalx, float goaly, WorldObject* goal
 			cdam.m_dstatus_mod_immune_time[Damage::BERSERK] = 30000;
 
 			// alle Verbuendeten im Umkreis von 6 um den Zielpunkt suchen und Modifikation anwenden
-			s.m_coordinate_x = goalx;
-			s.m_coordinate_y = goaly;
+			s.m_center = goal;
 			s.m_radius = 6;
-			getWorld()->getObjectsInShape(&s, reg, &res,Geometry::LAYER_AIR,CREATURE,0);
+			getWorld()->getObjectsInShape(&s, reg, &res,LAYER_AIR,CREATURE,0);
 			for (it=res.begin();it!=res.end();++it)
 			{
 				if (getWorld()->getRelation(fr,(*it)) == WorldObject::ALLIED)
@@ -1349,25 +1302,23 @@ void Creature::performActionCritPart(float goalx, float goaly, WorldObject* goal
 			// Projektil Hypnose erzeugen
 			pr = new Projectile(getWorld(),Projectile::HYPNOSIS,fr, getWorld()->getValidProjectileId());
 			memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
-			getWorld()->insertProjectile(pr,goalx,goaly,reg);
+			getWorld()->insertProjectile(pr,goal,reg);
 			break;
 
 		case Action::HYPNOSIS2:
 			// Alle Objekte im Umkreis von 2 um den Zielpunkt suchen
-			s.m_coordinate_x = goalx;
-			s.m_coordinate_y = goaly;
+			s.m_center = goal;
 			s.m_radius = 2;
-			getWorld()->getObjectsInShape(&s, reg, &res,Geometry::LAYER_AIR,CREATURE,this);
+			getWorld()->getObjectsInShape(&s, reg, &res,LAYER_AIR,CREATURE,this);
 			for (it=res.begin();it!=res.end();++it)
 			{
 				// Fuer alle Lebewesen ein Projektil Hypnose erzeugen
 				if ((*it)->getTypeInfo()->m_type != TypeInfo::TYPE_FIXED_OBJECT)
 				{
-					goalx = (*it)->getGeometry()->m_shape.m_coordinate_x;
-					goaly = (*it)->getGeometry()->m_shape.m_coordinate_y;
+					goal = (*it)->getShape()->m_center;
 					pr = new Projectile(getWorld(),Projectile::HYPNOSIS,fr, getWorld()->getValidProjectileId());
 					memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
-					getWorld()->insertProjectile(pr,goalx,goaly,reg);
+					getWorld()->insertProjectile(pr,goal,reg);
 				}
 			}
 			break;
@@ -1379,10 +1330,9 @@ void Creature::performActionCritPart(float goalx, float goaly, WorldObject* goal
 			cbam.m_dmagic_power = m_base_attr_mod.m_willpower/2;
 
 			// alle Verbuendeten im Umkreis von 12 suchen und Modifikation anwenden
-			s.m_coordinate_x = x;
-			s.m_coordinate_y = y;
+			s.m_center = pos;
 			s.m_radius = 12;
-			getWorld()->getObjectsInShape(&s, reg, &res,Geometry::LAYER_AIR,CREATURE,0);
+			getWorld()->getObjectsInShape(&s, reg, &res,LAYER_AIR,CREATURE,0);
 			for (it=res.begin();it!=res.end();++it)
 			{
 				if (getWorld()->getRelation(fr,(*it)) == WorldObject::ALLIED)
@@ -1422,20 +1372,18 @@ void Creature::performActionCritPart(float goalx, float goaly, WorldObject* goal
 
 void Creature::collisionDetection(float time)
 {
+	WorldObjectList result;
 	// Punkt zu dem das Objekt bewegt werden soll
-	float xnew = getGeometry()->m_shape.m_coordinate_x+getMoveInfo()->m_speed_x * time;
-	float ynew = getGeometry()->m_shape.m_coordinate_y+getMoveInfo()->m_speed_y * time;
+	Vector newpos = getShape()->m_center + m_speed*time;
 
 	// Kreis um den Zielpunkt
-	WorldObjectList result;
 	Shape scopy;
-	scopy.m_radius = getGeometry()->m_shape.m_radius*1.05;
-	scopy.m_coordinate_x = xnew;
-	scopy.m_coordinate_y = ynew;
+	scopy.m_radius = getShape()->m_radius*1.05;
+	scopy.m_center = newpos;
 	scopy.m_type = Shape::CIRCLE;
 
 	// Ebene in der gesucht werden soll
-	short layer = getGeometry()->m_layer;
+	short layer = m_layer;
 
 	// Alle kollidierenden Objekte suchen
 	getWorld()->getObjectsInShape(&(scopy),getGridLocation()->m_region,&result,layer, CREATURE | FIXED,this);
@@ -1443,7 +1391,7 @@ void Creature::collisionDetection(float time)
 	if (result.size()!=0)
 	{
 		// es gibt kollidierende Objekte
-		DEBUG5("aktuelle Koordinaten %f %f",getGeometry()->m_shape.m_coordinate_x,getGeometry()->m_shape.m_coordinate_y);
+		DEBUG5("aktuelle Koordinaten %f %f",getShape()->m_center.m_x, getShape()->m_center.m_y);
 		WorldObjectList::iterator i;
 
 		Shape* s2;
@@ -1451,12 +1399,11 @@ void Creature::collisionDetection(float time)
 		for (i= result.begin();i!=result.end();++i)
 		{
 			DEBUG5("Kollision %i",(*i)->getId());
-			s2 =&((*i)->getGeometry()->m_shape);
+			s2 =(*i)->getShape();
 			// wenn mit dem Zielobjekt kollidiert Bewegung beenden
 			if ((*i)->getId() == getCommand()->m_goal_object_id)
 			{
-				getMoveInfo()->m_speed_x =0;
-				getMoveInfo()->m_speed_y =0;
+				m_speed = Vector(0,0);
 				m_event_mask |= Event::DATA_MOVE_INFO;
 				break;
 			}
@@ -1466,8 +1413,7 @@ void Creature::collisionDetection(float time)
 			{
 				// Behandlung von *Charge*
 				m_command.m_goal_object_id = (*i)->getId();
-				getMoveInfo()->m_speed_x =0;
-				getMoveInfo()->m_speed_y =0;
+				m_speed = Vector(0,0);
 				m_event_mask |= Event::DATA_MOVE_INFO;
 				return;
 			}
@@ -1480,14 +1426,13 @@ void Creature::collisionDetection(float time)
 		}
 
 		// neuen erreichten Punkt ausrechnen und testen ob dieser akzeptabel ist
-		xnew = getGeometry()->m_shape.m_coordinate_x+getMoveInfo()->m_speed_x * time;
-		ynew = getGeometry()->m_shape.m_coordinate_y+getMoveInfo()->m_speed_y * time;
+		newpos = getShape()->m_center + m_speed*time;
+		
 
 		// Kreis um den neuen Zielpunkt
-		scopy.m_coordinate_x = xnew;
-		scopy.m_coordinate_y = ynew;
-		DEBUG5("neue Koordinaten %f %f",xnew,ynew);
-		scopy.m_radius = getGeometry()->m_shape.m_radius;
+		scopy.m_center = newpos;
+		DEBUG5("neue Koordinaten %f %f",newpos.m_x, newpos.m_y);
+		scopy.m_radius = getShape()->m_radius;
 		result.clear();
 
 		// Suchen der Objekte um den neuen Zielpunkt
@@ -1498,8 +1443,7 @@ void Creature::collisionDetection(float time)
 		{
 			DEBUG5("still colliding");
 
-			getMoveInfo()->m_speed_x =0;
-			getMoveInfo()->m_speed_y =0;
+			m_speed = Vector(0,0);
 			m_event_mask |= Event::DATA_MOVE_INFO;
 		}
 
@@ -1510,43 +1454,48 @@ void Creature::handleCollision(Shape* s2)
 {
 	float dx,dy,x1,x2,y1,y2,d;
 
-	// Koordinaten des kollidierenden Objektes
-	x1 = getGeometry()->m_shape.m_coordinate_x;
-	y1 = getGeometry()->m_shape.m_coordinate_y;
-
 	// eigene Koordinaten
-	x2 = s2->m_coordinate_x;
-	y2 = s2->m_coordinate_y;
+	Vector pos = getShape()->m_center;
+	
+	// Koordinaten des kollidierenden Objektes
+	Vector cpos = s2->m_center;
+	
 	bool circ = true;
 
-
+	DEBUG5("old speed %f %f", m_speed.m_x, m_speed.m_y);
 	if (s2->m_type==Shape::RECT)
 	{
 		// Kollision mit Rechteckt
+		// Drehen des Bezugssystems, sodass das Rechteck ausgerichtet ist
+		
+		Vector locpos = pos - cpos;
+		locpos.rotate(-s2->m_angle);
+		
+		Vector locspeed = m_speed;
+		locspeed.rotate(-s2->m_angle);
+		
 		circ = false;
 		DEBUG5("Rechteck");
 
 		// Ausdehnung des Rechtseckes
-		float ex = s2->m_extent_x;
-		float ey = s2->m_extent_y;
-		float r = getGeometry()->m_shape.m_radius;
-		DEBUG5("koll %f %f %f %f %f %f",x1,y1,x2,y2,ex,ey);
+		Vector ext = s2->m_extent;
+		float r = getShape()->m_radius;
 
-		if ((x1<x2-ex-r) || (x1>x2+ex+r))
+		if (fabs(locpos.m_x) > ext.m_x+r)
 		{
 			// Kollision mit einer senkrechten Kante
 			// x-Anteil der Bewegung auf 0 setzen
-			getMoveInfo()->m_speed_x=0;
+			locspeed.m_x =0;
 			DEBUG5("x-anteil genullt");
 		}
 		else
 		{
-			if (y1<y2-ey-r || y1>y2+ey+r)
+			if (fabs(locpos.m_y) >ext.m_y+r)
 			{
 				// Kollision mit einer waagerechten Kante
 				// y-Anteil der Bewegung auf 0 setzen
 				DEBUG5("y-anteil genullt");
-				getMoveInfo()->m_speed_y=0;
+				locspeed.m_y =0;
 			}
 			else
 			{
@@ -1554,71 +1503,69 @@ void Creature::handleCollision(Shape* s2)
 				DEBUG5("kollision an einer Ecke");
 
 				// ermitteln der Ecke an der die Kollision stattfand
-				if (x1>x2)
-					x2 = x2+ex;
-				else
-					x2 = x2-ex;
+				if (locpos.m_x>0)
+				{
+					cpos.m_x += ext.m_x*cos(s2->m_angle);
+					cpos.m_y += ext.m_x*sin(s2->m_angle);
 
-				if (y1>y2)
-					y2 = y2+ey;
+				}
 				else
-					y2 = y2-ey;
+				{
+					cpos.m_x -= ext.m_x*cos(s2->m_angle);
+					cpos.m_y -= ext.m_x*sin(s2->m_angle);
+				}
+				if (locpos.m_y>0)
+				{
+					cpos.m_x -= ext.m_y*sin(s2->m_angle);
+					cpos.m_y += ext.m_y*cos(s2->m_angle);
+				}
+				else
+				{
+					cpos.m_x += ext.m_y*sin(s2->m_angle);
+					cpos.m_y -= ext.m_y*cos(s2->m_angle);
+				}
 
 				// Problem behandeln wie einen Kreis um diese Ecke
 				circ = true;
 			}
 		}
+		
+		
+		if (!circ)
+		{
+			DEBUG5("locspeed %f %f",locspeed.m_x, locspeed.m_y);
+			locspeed.rotate(s2->m_angle);
+			m_speed = locspeed;
+			
+		}
+	
 	}
 
 	if (circ)
 	{
 		// Behandlung Kollision mit Kreis
-
+		DEBUG5("obj pos %f %f", pos.m_x, pos.m_y);
+		DEBUG5("collision pos %f %f", cpos.m_x, cpos.m_y);
+		
+		
 		// Vektor vom eigenen Mittelpunkt zum Mittelpunkt des kollidierenden Objektes (normiert)
-		dx = x2-x1;
-		dy = y2-y1;
-		d = 1/sqrt(dx*dx+dy*dy);
-		DEBUG5("speed %f %f",getMoveInfo()->m_speed_x,getMoveInfo()->m_speed_y);
-		dx *= d;
-		dy *= d;
-
-		// Projektion des Geschwindigkeitsvektors auf diesen Vektor
-		DEBUG5("Richtung k1 k2 %f %f",dx,dy);
-		d = dx*getMoveInfo()->m_speed_x +dy*getMoveInfo()->m_speed_y;
-		DEBUG5("Skalarprodukt %f",d);
-		dx *=d;
-		dy *=d;
-		DEBUG5("Projektion k1 k2 %f %f",dx,dy);
-
-		// Abziehen vom Geschwindigkeitsvektor (es bleibt nur der Anteil senkrecht zur Verbindungslinie der Mittelpunkt erhalten)
-		getMoveInfo()->m_speed_x -= dx;
-		getMoveInfo()->m_speed_y -= dy;
-		DEBUG5("speed neu %f %f",getMoveInfo()->m_speed_x,getMoveInfo()->m_speed_y);
-		/*
-		dx = x2-x1;
-		dy = y2-y1;
-		d = sqrt(dx*dx+dy*dy);
-		if (d!=0)
-		{
-			d= 1/d;
-			d = dx*getMoveInfo()->m_speed_x +dy*getMoveInfo()->m_speed_y;
-			DEBUG5("Skalarprodukt neu %f",d);
-		}
-		*/
+		Vector dir = cpos - pos;
+		dir.normalize();
+		DEBUG5("normal dir %f %f", dir.m_x, dir.m_y);
+		
+		
+		// vom Geschwindigkeitsvektor nur den zu dieser Richtung senkrechten Teil uebrig lassen
+		m_speed.normalPartTo(dir);
 
 	}
 
 	// neue Geschwindigkeit normieren
-	d =(sqrt(getMoveInfo()->m_speed_x*getMoveInfo()->m_speed_x+getMoveInfo()->m_speed_y*getMoveInfo()->m_speed_y));
-	if (d!=0)
-	{
-		d= 1/d;
-		getMoveInfo()->m_speed_x *= d*getBaseAttr()->m_step_length/m_action.m_time;
-		getMoveInfo()->m_speed_y *= d*getBaseAttr()->m_step_length/m_action.m_time;
-		DEBUG5("speed %f %f",getMoveInfo()->m_speed_x,getMoveInfo()->m_speed_y);
-
-
-	}
+	m_speed.normalize();
+	DEBUG5("new speed %f %f", m_speed.m_x, m_speed.m_y);
+	m_speed *= getBaseAttr()->m_step_length/m_action.m_time;
+	
+	
+	
 	m_event_mask |= Event::DATA_MOVE_INFO;
 
 }
@@ -1631,8 +1578,7 @@ void Creature::updateCommand()
 	{
 		// Naechstes Kommando uebernehmen
 		m_command.m_type=m_next_command.m_type;
-		m_command.m_goal_coordinate_x=m_next_command.m_goal_coordinate_x;
-		m_command.m_goal_coordinate_y=m_next_command.m_goal_coordinate_y;
+		m_command.m_goal = m_next_command.m_goal;
 		m_command.m_goal_object_id=m_next_command.m_goal_object_id;
 		m_command.m_range=m_next_command.m_range;
 		m_command.m_damage_mult = 1;
@@ -1680,29 +1626,23 @@ void Creature::calcAction()
 	float range = m_command.m_range;
 
 	if (m_command.m_type == Action::WALK)
-		range =getGeometry()->m_shape.m_radius;
+		range =getShape()->m_radius;
 
 	if (m_command.m_type == Action::TAKE_ITEM)
 		range = 2;
 
 	// Koordinaten des Zielpunktes
-	float goalx = m_command.m_goal_coordinate_x;
-	float goaly = m_command.m_goal_coordinate_y;
-	m_action.m_goal_coordinate_x = goalx;
-	m_action.m_goal_coordinate_y = goaly;
+	Vector goal = m_command.m_goal;
+	m_action.m_goal = goal;
 
 	// Zeiger auf das Zielobjekt
-	WorldObject* goal=0;
+	WorldObject* goalobj=0;
 
 	// eigene Position
-	float x = getGeometry()->m_shape.m_coordinate_x;
-	float y = getGeometry()->m_shape.m_coordinate_y;
+	Vector& pos = getShape()->m_center;
 
-	// Koordinatenn/ Radius des Zieles bei Behandlung als Kreis
-	// noetig fuer Abstandsberechnung
-	float cx = goalx;
-	float cy = goaly;
-	float r = getGeometry()->m_shape.m_radius+range;
+	// Abstand zum Ziel
+	float dist = pos.distanceTo(goal)-getShape()->m_radius;
 
 	// Wenn Zielobjekt per ID gegeben
 
@@ -1710,11 +1650,11 @@ void Creature::calcAction()
 	{
 		DEBUG5("goal ID: %i",m_command.m_goal_object_id);
 		// Zielobjekt holen
-		goal = getWorld()->getObject(m_command.m_goal_object_id,getGridLocation()->m_region);
+		goalobj = getWorld()->getObject(m_command.m_goal_object_id,getGridLocation()->m_region);
 
 
 
-		if (goal ==0)
+		if (goalobj ==0)
 		{
 			// Zielobjekt existiert nicht mehr, abbrechen
 			m_command.m_type = Action::NOACTION;
@@ -1726,9 +1666,9 @@ void Creature::calcAction()
 		}
 
 		// Ziel muss aktiv sein
-		if (goal->getState() != STATE_ACTIVE)
+		if (goalobj->getState() != STATE_ACTIVE)
 		{
-			DEBUG5("refused to interakt with inactive objekt %i",m_command.m_goal_object_id);
+			DEBUG5("refused to interact with inactive objekt %i",m_command.m_goal_object_id);
 			m_command.m_type = Action::NOACTION;
 			m_action.m_type = Action::NOACTION;
 			m_command.m_damage_mult=1;
@@ -1738,39 +1678,16 @@ void Creature::calcAction()
 		}
 
 		// Zielkoordinaten neu setzen (Koordinaten des Zielobjektes)
-		goalx = goal->getGeometry()->m_shape.m_coordinate_x;
-		goaly = goal->getGeometry()->m_shape.m_coordinate_y;
-
-		// Berechnen der Koordinaten fuer Abstandsberechnung
-		if (goal->getGeometry()->m_shape.m_type == Shape::CIRCLE)
-		{
-			// Ziel hat Kreisform, Koordinaten uebernehmen
-			cx = goalx;
-			cy = goaly;
-			r += goal->getGeometry()->m_shape.m_radius;
-		}
-		else
-		{
-			// Ziel ist rechteckig
-			// die am naechsten gelegene Ecke suchen und als Mittelpunkt behandeln
-			if (x>goalx)
-				cx +=  goal->getGeometry()->m_shape.m_extent_x;
-			else
-				cx -=  goal->getGeometry()->m_shape.m_extent_x;
-			if (y>goaly)
-				cy +=  goal->getGeometry()->m_shape.m_extent_y;
-			else
-				cy -=  goal->getGeometry()->m_shape.m_extent_y;
-		}
+		goal = goalobj->getShape()->m_center;
+		
+		// Abstandsberechnung
+		dist = getShape()->getDistance(*(goalobj->getShape()));
 	}
-
-	DEBUG5("goal of command: %f %f", goalx,goaly);
-	DEBUG5("start %f %f ziel %f %f range %f",x,y,cx,cy,r);
 
 	// Stuermen ohne Zielobjekt hat keinen Zielradius
 	if ((m_command.m_type == Action::CHARGE || m_command.m_type == Action::STORM_CHARGE) &&  m_command.m_goal_object_id==0)
 	{
-		r=0;
+		range=0;
 	}
 
 
@@ -1780,15 +1697,14 @@ void Creature::calcAction()
 		// Aktion fuer die man an das Ziel hinreichend nahe herankommen muss
 
 		// Testen ob das Ziel in Reichweite ist
-		if ((sqr(r) > sqr(cx-x)+sqr(cy-y)))
+		if (range > dist)
 		{
 			// Ziel ist in Reichweite, geplante Aktion ausfuehren
 			if (m_command.m_type != Action::WALK)
 			{
 				m_action.m_type = m_command.m_type;
 				m_action.m_goal_object_id = m_command.m_goal_object_id;
-				m_action.m_goal_coordinate_x = goalx;
-				m_action.m_goal_coordinate_y = goaly;
+				m_action.m_goal = goal;
 			}
 			else
 			{
@@ -1817,8 +1733,7 @@ void Creature::calcAction()
 				{
 					// Richtung nicht neu ausrechnen, beschleunigen
 					// Geschwindigkeit normieren, mit Schadensmultiplikator multiplizieren
-					d = 1/sqrt( getMoveInfo()->m_speed_x*getMoveInfo()->m_speed_x+getMoveInfo()->m_speed_y*getMoveInfo()->m_speed_y);
-					m_command.m_damage_mult = (m_command.m_damage_mult+2);
+					m_speed.normalize();
 
 					if (m_command.m_type == Action::CHARGE)
 						m_command.m_damage_mult *= 0.85;
@@ -1828,25 +1743,19 @@ void Creature::calcAction()
 					// Schaden neu berechnen
 					recalcDamage();
 
-					d *= sqrt(m_command.m_damage_mult);
-					getMoveInfo()->m_speed_x *= d;
-					getMoveInfo()->m_speed_y *= d;
+					m_speed *= sqrt(m_command.m_damage_mult);
 					m_event_mask |= Event::DATA_MOVE_INFO;
-					DEBUG(" dir %f %f dmg mult %f",getMoveInfo()->m_speed_x,getMoveInfo()->m_speed_y,m_command.m_damage_mult);
 				}
 				else
 				{
 					// Richtung: direct zum Ziel;
 					DEBUG("calc charge dir");
 					// Vektor von der eigenen Position zum Ziel, normieren
-					getMoveInfo()->m_speed_x = goalx-x;
-					getMoveInfo()->m_speed_y = goaly-y;
-					d = sqrt( getMoveInfo()->m_speed_x*getMoveInfo()->m_speed_x+getMoveInfo()->m_speed_y*getMoveInfo()->m_speed_y);
-					if (d!=0)
+					Vector dir = goal-pos;
+					dir.normalize();
+					
+					if (dir.getLength()!=0)
 					{
-						d= 1/d;
-						getMoveInfo()->m_speed_x *= d;
-						getMoveInfo()->m_speed_y *= d;
 						m_command.m_damage_mult = (m_command.m_damage_mult+0.1);
 					}
 					else
@@ -1867,7 +1776,7 @@ void Creature::calcAction()
 			else
 			{
 				// Berechnen der Bewegungsrichtung
-				calcWalkDir(goalx,goaly, goal);
+				calcWalkDir(goal, goalobj);
 
 			}
 		}
@@ -1878,87 +1787,58 @@ void Creature::calcAction()
 		// keine Nahkampfaktion bzw laufen -> Action direkt ausfuehren
 		m_action.m_type = m_command.m_type;
 		m_action.m_goal_object_id = m_command.m_goal_object_id;
-		m_action.m_goal_coordinate_x = goalx;
-		m_action.m_goal_coordinate_y = goaly;
+		m_action.m_goal = goal;
+
 
 		m_command.m_type = Action::NOACTION;
 		m_command.m_damage_mult = 1;
 		m_event_mask |= Event::DATA_COMMAND;
 	}
 
-	if (m_action.m_type !=0)
-	{
-		DEBUG5("calc action: %i at %f %f, dir %f %f",m_action.m_type, getGeometry()->m_shape.m_coordinate_x,	getGeometry()->m_shape.m_coordinate_y, getMoveInfo()->m_speed_x,getMoveInfo()->m_speed_y);
-	}
 
 }
 
 void Creature::calcStatusModCommand()
 {
+	// eigene Position
+	Vector& pos = getShape()->m_center;
+	
 	// Statusmod verwirrt
 	// diese Aktion nur vom Server ausloesen lassen
 	if (m_dyn_attr.m_status_mod_time[Damage::CONFUSED]>0 && getWorld()->isServer())
 	{
-		// eigene Position
-		float x=getGeometry()->m_shape.m_coordinate_x;
-		float y=getGeometry()->m_shape.m_coordinate_y;
 		// aktuelle Bewegungsrichtung
-		float sx = getMoveInfo()->m_speed_x;
-		float sy = getMoveInfo()->m_speed_y;
+		Vector v = m_speed;
 		float range = m_base_attr.m_step_length;
 		float nx,ny;
 
 		// Normieren der Bewegungsgeschwindigkeit
-		float d;
-		d = sqr(sx)+sqr(sy);
-		if (d>0)
-		{
-			d = 1/sqrt(d);
-			sx *= d;
-			sy *= d;
-		}
-		DEBUG5("old speed %f %f",sx,sy);
+		v.normalize();
+		
 		// zufaellige Richtung auswuerfeln und normieren
-		float newsx =1-rand()*2.0/RAND_MAX;
-		float newsy =1-rand()*2.0/RAND_MAX;
-		d = 1/sqrt(sqr(newsx)+sqr(newsy));
-		newsx *= d;
-		newsy *= d;
+		Vector dir(1-rand()*2.0/RAND_MAX, 1-rand()*2.0/RAND_MAX) ;
+		dir.normalize();
 
 		// neue Bewegungsrichtung = 70% der alten + 30% der zufaellig ausgewaehlten
-		sx = 0.7*sx+0.3*newsx;
-		sy = 0.7*sy+0.3*newsy;
+		v = v*0.7+dir*0.3;
 
 		// neue Bewegungsrichtung normieren
-		d = sqrt(sqr(sx)+sqr(sy));
-		if (d>0)
-		{
-			d= 1/d;
-			sx *= d;
-			sy *= d;
-		}
+		v.normalize();
 
-		DEBUG5("new speed %f %f",sx,sy);
-		DEBUG5("pos of player %f %f",x,y);
 		// Berechnen den Punktes der bei dieser Bewegung erreicht wird
-		nx = x;
-		ny = y;
-		x += sx *range;
-		y += sy *range;
-		DEBUG5("pos of goal %f %f",x,y);
+		Vector npos = pos + v*range;
 
 		// Kreis um den Zielpunkt, Radius gleich Radius des Lebewesens
 		Shape s;
-		s.m_coordinate_x =x;
-		s.m_coordinate_y =y;
+		s.m_center =npos;
 		s.m_type = Shape::CIRCLE;
-		s.m_radius = getGeometry()->m_shape.m_radius;
+		s.m_radius = getShape()->m_radius;
 		WorldObject* wo =0;
 		WorldObjectList res;
 		WorldObjectList::iterator it;
 
 		// ermitteln der Objekte mit denen bei der Bewegung kollidiert wird
-		getWorld()->getObjectsInShape(&s,getGridLocation()->m_region,&res,Geometry::LAYER_AIR,CREATURE | FIXED,this);
+		getWorld()->getObjectsInShape(&s,getGridLocation()->m_region,&res,LAYER_AIR,CREATURE | FIXED,this);
 
 		// Zufallszahl fuer zufaellige Angriffe
 		float r = rand()*1.0/RAND_MAX;
@@ -1966,8 +1846,7 @@ void Creature::calcStatusModCommand()
 		{
 			// Es gibt ein kollidierendes Objekt, als Zielobjekt setzen
 			wo = *(res.begin());
-			x = wo->getGeometry()->m_shape.m_coordinate_x;
-			y = wo->getGeometry()->m_shape.m_coordinate_y;
+			npos = wo->getShape()->m_center;
 
 		}
 		else
@@ -1976,9 +1855,7 @@ void Creature::calcStatusModCommand()
 			if (r>0.7)
 			{
 				range += m_base_attr_mod.m_attack_range;
-				x= nx + sx *range;
-				y= ny + sy *range;
-
+				npos = pos + v*range;
 			}
 		}
 		DEBUG5("entscheidung durch %p, %f",wo,r);
@@ -1987,8 +1864,7 @@ void Creature::calcStatusModCommand()
 		{
 			// Angriff
 			m_command.m_type = m_base_action;
-			m_command.m_goal_coordinate_x =x;
-			m_command.m_goal_coordinate_y =y;
+			m_command.m_goal = npos;
 			m_command.m_goal_object_id =0;
 			m_command.m_range = getBaseAttr()->m_attack_range;
 			m_event_mask |= Event::DATA_COMMAND;
@@ -2007,8 +1883,7 @@ void Creature::calcStatusModCommand()
 		{
 			// Laufen
 			m_command.m_type = Action::WALK;
-			getMoveInfo()->m_speed_x =sx;
-			getMoveInfo()->m_speed_y = sy;
+			m_speed = v;
 			m_event_mask |= Event::DATA_COMMAND | Event::DATA_MOVE_INFO;
 			return;
 		}
@@ -2019,24 +1894,20 @@ void Creature::calcStatusModCommand()
 		// Behandlung von Berserker
 		int id =0;
 		float rmin =1000;
-		// eigene Position
-		float x=getGeometry()->m_shape.m_coordinate_x;
-		float y=getGeometry()->m_shape.m_coordinate_y;
 
-		float wx,wy,gx=0,gy=0;
+		Vector wpos , goal(0,0);
 
 		// Kreis mit Radius 8 um eigenen Mittelpunkt
 		Shape s;
 		s.m_type = Shape::CIRCLE;
 		s.m_radius =8;
-		s.m_coordinate_x = x;
-		s.m_coordinate_y = y;
+		s.m_center = pos;
 		WorldObjectList res;
 		WorldObjectList::iterator i;
 		res.clear();
 
 		// Suchen aller Objekte im Kreis
-		getWorld()->getObjectsInShape(&s,getGridLocation()->m_region, &res,Geometry::LAYER_AIR,CREATURE,this);
+		getWorld()->getObjectsInShape(&s,getGridLocation()->m_region, &res,LAYER_AIR,CREATURE,this);
 		for (i=res.begin();i!= res.end();++i)
 		{
 			// nur aktive Lebewesen beruecksichtigen
@@ -2051,15 +1922,14 @@ void Creature::calcStatusModCommand()
 			{
 				// Abstand zum eigenen Mittelpunkt berechnen
 				DEBUG5("hostile");
-				wx = (*i)->getGeometry()->m_shape.m_coordinate_x;
-				wy = (*i)->getGeometry()->m_shape.m_coordinate_y;
+				wpos = (*i)->getShape()->m_center;
+				
 				// Objekt mit dem kleinsten Abstand als Zielobjekt setzen
-				if (sqr(wx-x)+sqr(wy-y)<rmin)
+				if (pos.distanceTo(wpos)<rmin)
 				{
-					rmin = sqr(wx-x)+sqr(wy-y);
+					rmin =pos.distanceTo(wpos);
 					id = (*i)->getId();
-					gx = wx;
-					gy = wy;
+					goal = wpos;
 				}
 
 			}
@@ -2072,8 +1942,7 @@ void Creature::calcStatusModCommand()
 			// Angriff
 			m_command.m_type = Action::ATTACK;
 			m_command.m_goal_object_id = id;
-			m_command.m_goal_coordinate_x = gx;
-			m_command.m_goal_coordinate_y = gy;
+			m_command.m_goal = goal;
 			m_command.m_range = getBaseAttr()->m_attack_range;
 
 			// nur Nahkampf, daher Reichweite die von Fernwaffen kommt reduzieren
@@ -2093,27 +1962,23 @@ void Creature::calcStatusModCommand()
 	}
 }
 
-void Creature::calcWalkDir(float goalx,float goaly,WorldObject* goal)
+void Creature::calcWalkDir(Vector goal,WorldObject* goalobj)
 {
 	// eigene Position
-	float x = getGeometry()->m_shape.m_coordinate_x;
-	float y = getGeometry()->m_shape.m_coordinate_y;
-	float dir[2];
+	Vector& pos = getShape()->m_center;
+	Vector dir;
 
 	// wenn als Ziel ein Lebenwesen angegeben ist
-	if (goal !=0 && goal->getTypeInfo()->m_type != TypeInfo::TYPE_FIXED_OBJECT )
+	if (goalobj !=0 && goalobj->getTypeInfo()->m_type != TypeInfo::TYPE_FIXED_OBJECT )
 	{
-		DEBUG5("using pot field of object %i",goal->getId());
-		Creature* cr = (Creature*) goal;
+		DEBUG5("using pot field of object %i",goalobj->getId());
+		Creature* cr = (Creature*) goalobj;
 		// Potentialfeld des Ziellebewesens verwenden
-		cr->getPathDirection(x,y,getGridLocation()->m_region,2*getGeometry()->m_shape.m_radius, getGeometry()->m_layer,dir);
+		cr->getPathDirection(pos,getGridLocation()->m_region,2*getShape()->m_radius, m_layer,dir);
 	}
 	else
 	{
 		DEBUG5("using own pot field");
-		float x = getGeometry()->m_shape.m_coordinate_x;
-		float y = getGeometry()->m_shape.m_coordinate_y;
-
 		// Bewegung zu einem Punkt oder festen Objekt
 		// eigenes Potentialfeld verwenden
 
@@ -2124,7 +1989,7 @@ void Creature::calcWalkDir(float goalx,float goaly,WorldObject* goal)
 		bool direct = false;
 
 		// Wenn in einer Koordinatenrichtung Abstand groesser 10 ist direkte Verbindung benutzen
-		if (fabs(x-goalx)>10 || fabs(y-goaly)>10)
+		if (fabs(pos.m_x-goal.m_x)>10 || fabs(pos.m_y-goal.m_y)>10)
 		{
 			direct = true;
 		}
@@ -2135,7 +2000,7 @@ void Creature::calcWalkDir(float goalx,float goaly,WorldObject* goal)
 			DEBUG5("allocating new pot field");
 			m_path_info = new PathfindInfo;
 
-			// Qualitaet der Suche, gehe quadratisch in die Laufzeit ein
+			// Qualitaet der Suche, geht quadratisch in die Laufzeit ein
 			int qual=4;
 			int dim = 20*qual+1;
 
@@ -2148,13 +2013,12 @@ void Creature::calcWalkDir(float goalx,float goaly,WorldObject* goal)
 			//float sqs =  getGeometry()->m_shape.m_radius*2/ qual;
 
 			// Senke des Feldes ist der Zielpunkt
-			m_path_info->m_start_x= goalx;
-			m_path_info->m_start_y= goaly;
+			m_path_info->m_start= goal;
 
 			m_path_info->m_dim = dim;
-			m_path_info->m_layer= Geometry::LAYER_BASE | Geometry::LAYER_AIR;
+			m_path_info->m_layer= LAYER_BASE | LAYER_AIR;
 			m_path_info->m_region=getGridLocation()->m_region;
-			m_path_info->m_base_size = getGeometry()->m_shape.m_radius*2;
+			m_path_info->m_base_size = getShape()->m_radius*2;
 			m_path_info->m_quality=qual;
 			m_path_info->m_id = getId();
 			// neu berechnen noetig
@@ -2173,7 +2037,7 @@ void Creature::calcWalkDir(float goalx,float goaly,WorldObject* goal)
 			}
 
 			// Ziel hat sich deutlich bewegt, neuen Weg suchen
-			float d = sqr(m_path_info->m_start_x -goalx) +sqr(m_path_info->m_start_y -goaly);
+			float d = m_path_info->m_start.distanceTo(goal);
 			if (d>1)
 				recalc = true;
 
@@ -2190,11 +2054,11 @@ void Creature::calcWalkDir(float goalx,float goaly,WorldObject* goal)
 				// neu berechnen notwendig
 
 				// Zentrum ist die eigene Position
-				m_path_info->m_center_x= goalx +roundf(x-goalx);
-				m_path_info->m_center_y=goaly +roundf(y-goaly);
+				m_path_info->m_center.m_x= goal.m_x +roundf(pos.m_x-goal.m_x);
+				m_path_info->m_center.m_y=goal.m_y +roundf(pos.m_y-goal.m_y);
 				// Senke ist der Zielpunkt
-				m_path_info->m_start_x= goalx;
-				m_path_info->m_start_y= goaly;
+				m_path_info->m_start= goal;
+
 
 				// Timer auf 0 setzen
 				m_path_info->m_timer=0;
@@ -2209,23 +2073,22 @@ void Creature::calcWalkDir(float goalx,float goaly,WorldObject* goal)
 
 			}
 
-			DEBUG5("calcing direction from %f %f",x,y);
 			// Richtung auf Basis des eigenen Potentialfeldes berechnen
-			getWorld()->calcPathDirection(m_path_info, x, y, dir);
+			getWorld()->calcPathDirection(m_path_info, pos, dir);
 		}
 		else
 		{
 			// direkte Verbindung als Richtung verwenden
 			DEBUG5("using direct way");
-			dir[0] = goalx-x;
-			dir[1] = goaly-y;
+			dir = goal - pos;
 		}
 
 	}
 
 	// Richtung normieren
-	float l = sqrt(dir[0]*dir[0]+dir[1]*dir[1]);
-	if (l==0)
+	dir.normalize();
+	
+	if (dir.getLength() ==0)
 	{
 		m_command.m_type = Action::NOACTION;
 		m_action.m_type = Action::NOACTION;
@@ -2238,17 +2101,7 @@ void Creature::calcWalkDir(float goalx,float goaly,WorldObject* goal)
 	{
 		m_event_mask |= Event::DATA_MOVE_INFO;
 		// TODO: Wende über 90 Grad behandeln
-		if (getMoveInfo()->m_speed_x*dir[0]+getMoveInfo()->m_speed_y*dir[1]>0)
-		{
-			getMoveInfo()->m_speed_x = dir[0] /l;
-			getMoveInfo()->m_speed_y = dir[1]/l;
-		}
-		else
-		{
-			DEBUG5("wenden");
-			getMoveInfo()->m_speed_x = dir[0] /l;
-			getMoveInfo()->m_speed_y = dir[1]/l;
-		}
+		m_speed = dir;
 
 	}
 }
@@ -2392,15 +2245,14 @@ bool Creature::update (float time)
 
 			// Kreis um eigenen Mittelpunkt mit Radius eigener Radius plus 1
 			Shape s;
-			s.m_coordinate_x = getGeometry()->m_shape.m_coordinate_x;
-			s.m_coordinate_y = getGeometry()->m_shape.m_coordinate_y;
+			s.m_center  = getShape()->m_center;
 			s.m_type = Shape::CIRCLE;
-			s.m_radius = getGeometry()->m_shape.m_radius+1;
+			s.m_radius = getShape()->m_radius+1;
 			Creature* cr;
 			short reg = getGridLocation()->m_region;
 
 			// Alle Objekte im Kreis suchen
-			getWorld()->getObjectsInShape(&s, reg, &res,Geometry::LAYER_AIR,CREATURE,this);
+			getWorld()->getObjectsInShape(&s, reg, &res,LAYER_AIR,CREATURE,this);
 			for (it=res.begin();it!=res.end();++it)
 			{
 				// Schaden austeilen
@@ -2538,7 +2390,7 @@ bool Creature::update (float time)
 
 	if (timer.getTime()>10)
 	{
-		DEBUG("object %i update time %f",getId(), timer.getTime());
+		DEBUG5("object %i update time %f",getId(), timer.getTime());
 	}
 	return result;
 }
@@ -3574,8 +3426,8 @@ void Creature::takeDamage(Damage* d)
 		dmg.m_multiplier[Damage::AIR]=1;
 		dmg.m_attacker_fraction = getTypeInfo()->m_fraction;
 		memcpy(pr->getDamage(),&dmg,sizeof(Damage));
-		pr->getGeometry()->m_radius =getGeometry()->m_shape.m_radius+1;
-		getWorld()->insertProjectile(pr,getGeometry()->m_shape.m_coordinate_x,getGeometry()->m_shape.m_coordinate_y,getGridLocation()->m_region);
+		pr->getShape()->m_radius =getShape()->m_radius+1;
+		getWorld()->insertProjectile(pr,getShape()->m_center,getGridLocation()->m_region);
 	}
 }
 
@@ -3755,7 +3607,7 @@ bool Creature::removeBaseAttrMod(CreatureBaseAttrMod* mod)
 	return ret;
 }
 
-void Creature::getPathDirection(float x_start, float y_start,short region, float base_size, short layer, float dir[2])
+void Creature::getPathDirection(Vector pos,short region, float base_size, short layer, Vector& dir)
 {
 	PathfindInfo** pi= &m_small_path_info;
 	int bsize =1;
@@ -3776,7 +3628,7 @@ void Creature::getPathDirection(float x_start, float y_start,short region, float
 		bsize=4;
 	}
 
-	if ((layer & Geometry::LAYER_AIR) ==0)
+	if ((layer & LAYER_AIR) ==0)
 	{
 		DEBUG5("switching to flying info");
 		pi = &m_small_flying_path_info;
@@ -3784,16 +3636,14 @@ void Creature::getPathDirection(float x_start, float y_start,short region, float
 		fly = true;
 	}
 
-	Geometry* geom = getGeometry();
 	// true, wenn einfach direkter Weg zum Ziel gewaehlt werden soll
 	bool direct = false;
 
 	// true, wenn Wegfindeinformation neu berechnet werden muss
 	bool recalc = false;
 
-	// Position es Wegsuchenden Objekts
-	float x = geom->m_shape.m_coordinate_x;
-	float y = geom->m_shape.m_coordinate_y;
+	// Position des Zielobjekts
+	Vector goal = getShape()->m_center;
 
 
 	if (*pi == 0)
@@ -3812,17 +3662,17 @@ void Creature::getPathDirection(float x_start, float y_start,short region, float
 		(*pi)->m_dim = dim;
 
 		// Ebene ist Base und Air fuer normale, nur AIR fuer fliegende Lebewesen
-		(*pi)->m_layer= Geometry::LAYER_BASE | Geometry::LAYER_AIR;
+		(*pi)->m_layer= LAYER_BASE | LAYER_AIR;
 		if (fly)
 		{
-			(*pi)->m_layer= Geometry::LAYER_AIR;
+			(*pi)->m_layer= LAYER_AIR;
 		}
 		(*pi)->m_region=getGridLocation()->m_region;
 		(*pi)->m_base_size = bsize;
 		(*pi)->m_quality=qual;
 		(*pi)->m_id = getId();
 		recalc = true;
-		DEBUG5("recalc: not pathinfo so far");
+		DEBUG5("recalc: no pathinfo so far");
 	}
 	else
 	{
@@ -3838,17 +3688,17 @@ void Creature::getPathDirection(float x_start, float y_start,short region, float
 		// Ziel befindet sich in einer anderen Region, keinen Weg angeben
 		if ( region != getGridLocation()->m_region)
 		{
-			dir[0] =0;
-			dir[1] =0;
+			dir = Vector(0,0);
 			return;
 		}
 
 		// Abstand aktuelle Position zu Position fuer die die Wegfindeinformation erstellt wurde
-		float d = sqr((*pi)->m_start_x -x) +sqr((*pi)->m_start_y -y);
-
+		float d = (*pi)->m_start.distanceTo(goal);
+		
 		// Abstand des wegsuchenden Objektes zur einen Position
-		float d2 = sqr((*pi)->m_start_x -x_start) +sqr((*pi)->m_start_y -y_start);
-		if (fabs((*pi)->m_center_x -x_start)>10 || fabs((*pi)->m_center_y -y_start)>10)
+		float d2 = (*pi)->m_start.distanceTo(pos);
+		
+		if (fabs((*pi)->m_center.m_x - pos.m_x)>10 || fabs((*pi)->m_center.m_y - pos.m_y)>10)
 		{
 			// Direkte Wegsuche wenn das Ziel in einer Richtung mehr als 10 entfernt ist
 			direct = true;
@@ -3874,10 +3724,8 @@ void Creature::getPathDirection(float x_start, float y_start,short region, float
 		// neu berechnen
 
 		// Zentrum und Senke sind die aktuelle Position
-		(*pi)->m_start_x= x;
-		(*pi)->m_start_y= y;
-		(*pi)->m_center_x= x;
-		(*pi)->m_center_y= y;
+		(*pi)->m_start= goal;
+		(*pi)->m_center= goal;
 		(*pi)->m_timer =0;
 
 		// Blockmatrix berechnen
@@ -3898,19 +3746,14 @@ void Creature::getPathDirection(float x_start, float y_start,short region, float
 	{
 		// Direkte Richtung
 		// Vektor vom Start zum Ziel, normiert
-		dir[0] = x-x_start;
-		dir[1] = y-y_start;
-
-		float rezsq = 1/(sqr(dir[0]) + sqr(dir[1]));
-		dir[0] *= rezsq;
-		dir[1] *= rezsq;
+		dir = goal - pos;
+		dir.normalize();
 
 	}
 	else
 	{
 		// Potentialfeld verwenden um die Richtung zu berechnen
-		DEBUG5("calcing direction from %f %f",x_start,y_start);
-		getWorld()->calcPathDirection(*pi, x_start, y_start, dir);
+		getWorld()->calcPathDirection(*pi, pos, dir);
 	}
 }
 
@@ -3968,8 +3811,8 @@ void Creature::toString(CharConv* cv)
 		cv->toBuffer(getBaseAttrMod()->m_abilities[i]);
 	}
 
-	cv->toBuffer(getMoveInfo()->m_speed_x);
-	cv->toBuffer(getMoveInfo()->m_speed_y);
+	cv->toBuffer(m_speed.m_x);
+	cv->toBuffer(m_speed.m_y);
 
 
 }
@@ -4026,8 +3869,8 @@ void Creature::fromString(CharConv* cv)
 		cv->fromBuffer(getBaseAttrMod()->m_abilities[i]);
 	}
 
-	cv->fromBuffer(getMoveInfo()->m_speed_x);
-	cv->fromBuffer(getMoveInfo()->m_speed_y);
+	cv->fromBuffer(m_speed.m_x);
+	cv->fromBuffer(m_speed.m_y);
 }
 
 bool Creature::checkAbility(Action::ActionType at)
@@ -4108,16 +3951,14 @@ void Creature::writeEvent(Event* event, CharConv* cv)
 	if (event->m_data & Event::DATA_ACTION)
 	{
 		m_action.toString(cv);
-		cv->toBuffer(getGeometry()->m_shape.m_coordinate_x);
-		cv->toBuffer(getGeometry()->m_shape.m_coordinate_y);
+		cv->toBuffer(getShape()->m_center.m_x);
+		cv->toBuffer(getShape()->m_center.m_y);
 
 
 		if (m_action.m_type!=0)
 		{
 			float acttime = m_action.m_time - m_action.m_elapsed_time;
-			float goalx = getGeometry()->m_shape.m_coordinate_x + getMoveInfo()->m_speed_x*(acttime);
-			float goaly = getGeometry()->m_shape.m_coordinate_y + getMoveInfo()->m_speed_y*(acttime);
-			DEBUG5("sending action: %i at %f %f, dir %f %f goal %f %f",m_action.m_type, getGeometry()->m_shape.m_coordinate_x,	getGeometry()->m_shape.m_coordinate_y, getMoveInfo()->m_speed_x,getMoveInfo()->m_speed_y,goalx,goaly);
+			Vector goal = getShape()->m_center + m_speed * acttime;
 		}
 	}
 
@@ -4206,8 +4047,8 @@ void Creature::writeEvent(Event* event, CharConv* cv)
 
 	if (event->m_data & Event::DATA_MOVE_INFO)
 	{
-		cv->toBuffer(getMoveInfo()->m_speed_x);
-		cv->toBuffer(getMoveInfo()->m_speed_y);
+		cv->toBuffer(m_speed.m_x);
+		cv->toBuffer(m_speed.m_y);
 	}
 
 	if (event->m_data & Event::DATA_LEVEL)
@@ -4228,8 +4069,9 @@ void Creature::processEvent(Event* event, CharConv* cv)
 
 	float  atime = m_action.m_time - m_action.m_elapsed_time;
 
-	float newx = getGeometry()->m_shape.m_coordinate_x,newy= getGeometry()->m_shape.m_coordinate_y;
-	float newmovex,newmovey;
+	Vector newpos= getShape()->m_center;
+	Vector newspeed;
+	Vector goal = newpos;
 
 	bool newact= false;
 	bool newmove = false;
@@ -4247,8 +4089,8 @@ void Creature::processEvent(Event* event, CharConv* cv)
 
 		m_action.fromString(cv);
 
-		cv->fromBuffer(newx);
-		cv->fromBuffer(newy);
+		cv->fromBuffer(newpos.m_x);
+		cv->fromBuffer(newpos.m_y);
 		newact = true;
 	}
 
@@ -4345,8 +4187,8 @@ void Creature::processEvent(Event* event, CharConv* cv)
 
 	if (event->m_data & Event::DATA_MOVE_INFO)
 	{
-		cv->fromBuffer(newmovex);
-		cv->fromBuffer(newmovey);
+		cv->fromBuffer(newspeed.m_x);
+		cv->fromBuffer(newspeed.m_y);
 		newmove = true;
 
 	}
@@ -4360,10 +4202,7 @@ void Creature::processEvent(Event* event, CharConv* cv)
 	{
 		// Zielort der Aktion berechnen
 		float acttime = m_action.m_time - m_action.m_elapsed_time;
-		float goalx = newx + newmovex*(acttime);
-		float goaly = newy + newmovey*(acttime);
-
-		DEBUG5("goal %f %f current pos %f %f",goalx,goaly,getGeometry()->m_shape.m_coordinate_x,getGeometry()->m_shape.m_coordinate_y);
+		goal = newpos + newspeed * acttime;
 
 		/*
 		timeval tv;
@@ -4387,14 +4226,12 @@ void Creature::processEvent(Event* event, CharConv* cv)
 		if (goaltime <0)
 		{
 			// wenn man schon lange da sein muesste, Objekt an den Zielort versetzen
-			moveTo(goalx,goaly);
+			moveTo(goal);
 		}
 		else
 		{
-			// Bewegungsgeschwindigkeit so setzen, dass
-			getMoveInfo()->m_speed_x = (goalx-getGeometry()->m_shape.m_coordinate_x) / goaltime;
-			getMoveInfo()->m_speed_y = (goaly-getGeometry()->m_shape.m_coordinate_y) / goaltime;
-			DEBUG5("new speed %f %f",getMoveInfo()->m_speed_x,getMoveInfo()->m_speed_y);
+			// Bewegungsgeschwindigkeit so setzen, dass Ziel in der richtigen Zeit erreicht wird
+			m_speed = (goal - getShape()->m_center) * (1/goaltime);
 		}
 
 	}
@@ -4408,7 +4245,8 @@ void Creature::processEvent(Event* event, CharConv* cv)
 		if (m_action.m_elapsed_time> m_action.m_time)
 		{
 			// Aktion sollte schon beenden sein
-			moveTo(newx,newy);
+			if (!newmove)
+				moveTo(newpos);
 
 			m_action.m_type = Action::NOACTION;
 			m_action.m_elapsed_time =0;
@@ -4419,22 +4257,18 @@ void Creature::processEvent(Event* event, CharConv* cv)
 
 			if (!newmove && m_action.m_type != Action::NOACTION)
 			{
-				moveTo(newx,newy);
+				moveTo(newpos);
 			}
 
 			if (Action::getActionInfo(m_action.m_type)->m_distance != Action::SELF)
 			{
-				float x = getGeometry()->m_shape.m_coordinate_x;
-				float y = getGeometry()->m_shape.m_coordinate_y;
-				float goalx =  m_action.m_goal_coordinate_x;
-				float goaly =  m_action.m_goal_coordinate_y;
 
-				getGeometry()->m_angle = atan2(goaly-y,goalx-x);
+				getShape()->m_angle = (m_action.m_goal - newpos).angle();
 
 			}
 			if (Action::getActionInfo(m_action.m_type)->m_base_action == Action::WALK)
 			{
-				getGeometry()->m_angle = atan2(getMoveInfo()->m_speed_y,getMoveInfo()->m_speed_x);
+				getShape()->m_angle = m_speed.angle();
 
 			}
 		}

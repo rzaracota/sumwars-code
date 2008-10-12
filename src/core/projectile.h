@@ -21,43 +21,6 @@ class Projectile
 	public:
 		
 	/**
-	 * \struct Geometry
-	 * \brief Struktur zum Speichern des Ortes bzw der Lage eines Projektils
-	 */
-	struct Geometry
-	{
-		/**
-		 * \var m_coordinate_x
-		 * \brief x-Koordinate des Objekts (Mittelpunkt)
-		 */
-		float m_coordinate_x;
-	
-	/**
-		 * \var m_coordinate_y
-		 * \brief x-Koordinate des Objekts (Mittelpunkt)
-	 */
-		float m_coordinate_y;
-		
-		/**
-		 * \var float m_radius
-		 * \brief Radius in dem der Effekt sichtbar ist
-		 */
-		float m_radius;
-		
-		/**
-		 * \var m_angle
-		 * \brief Winkel um den das Objekt gegenueber dem Koordinatensystem gedreht ist
-		 */
-		float m_angle;
-		
-		/**
-		 * \var m_layer
-		 * \brief Ebene in der sich das Objekt befindet
-		 */
-		short m_layer;
-	};
-	
-	/**
 	 * \enum ProjectileType
 	 * \brief Aufzaehlung verschiedener Typen von Projektilen
 	 */
@@ -141,31 +104,13 @@ class Projectile
 
 	
 	/**
-	 * \fn void setSpeedX(float sx)
-	 * \brief Setzt die Geschwindigkeit in x-Richtung
-	 * \param sx Geschwindigkeit in x-Richtung
+	 * \fn void setSpeed(Vector speed)
+	 * \brief Setzt die Geschwindigkeit des Projektils
+	 * \param speed Geschwindigkeit
 	 */
-	void setSpeedX(float sx)
+	void setSpeed(Vector speed)
 	{
-		m_speed_x = sx;
-		if (m_speed_y!=0 || m_speed_x !=0)
-		{
-			m_geometry.m_angle = atan2(m_speed_y,m_speed_x);
-		}
-	}
-	
-	/**
-	 * \fn void setSpeedY(float sy)
-	 * \brief Setzt die Geschwindigkeit in Y-Richtung
-	 * \param sy Geschwindigkeit in y-Richtung
-	 */
-	void setSpeedY(float sy)
-	{
-		m_speed_y = sy;
-		if (m_speed_y!=0 || m_speed_x !=0)
-		{
-			m_geometry.m_angle = atan2(m_speed_y,m_speed_x);
-		}
+		m_speed = speed;
 	}
 	
 	/**
@@ -270,13 +215,14 @@ class Projectile
 	virtual void processEvent(Event* event, CharConv* cv);
 	
 	/**
-	 * \fn Geometry* getGeometry()
-	 * \brief gibt Informationen zur Geometrie aus
+	 * \fn Shape* getShape()
+	 * \brief Gibt die Form des Projektils aus
 	 */
-	Geometry* getGeometry()
+	Shape* getShape()
 	{
-		return &m_geometry;
+		return &m_shape;
 	}
+	
 	
 	/**
 	 * \fn ProjectileType getType()
@@ -365,17 +311,12 @@ class Projectile
 		*/
 		void handleStable(float dtime);
 		
-		/**
-		* \var float m_speed_x
-		* \brief Geschwindigkeit in x-Richtung
-		*/
-		float m_speed_x;
 		
 		/**
-		* \var float m_speed_y
-		* \brief Geschwindigkeit in y-Richtung
-		*/
-		float m_speed_y;
+		 * \var Vector m_speed
+		 * \brief Geschwindigkeit, mit der sich das Projektil bewegt
+		 */
+		Vector m_speed;
 		
 		/**
 		* \var short m_region
@@ -426,10 +367,16 @@ class Projectile
 		int m_goal_object;
 			
 		/**
-		* \fn Geometry m_geometry
-		* \brief Beschreibung der Geometrie
-		*/	
-		Geometry m_geometry;
+		 * \var Shape m_shape
+		 * \brief Form des Projektils
+		 */
+		Shape m_shape;
+		
+		/**
+		 * \var short m_layer
+		 * \brief Ebene
+		 */
+		short m_layer;
 		
 		/**
 		* \fn ProjectileType m_type
