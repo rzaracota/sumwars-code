@@ -183,7 +183,8 @@ void Scene::registerMeshes()
 	registerItem("fire_bow","shortbow.mesh");
 	registerItem("battle_axe","battleaxe.mesh");
 	registerItem("holy_flail","warhammer.mesh");
-	registerItem("ice_wand","basicStaff.mesh");
+	registerItem("ice_wand","basicWand.mesh");
+	registerItem("ice_staff","basicStaff.mesh");
 
 	registerItem("leath_arm","armor.mesh");
 	registerItem("tiled_arm","armor.mesh");
@@ -937,6 +938,9 @@ void Scene::createProjectile(Projectile* pr, std::string& name)
 
 	// in die Liste einfuegen
 	m_projectiles->insert(std::make_pair(pr->getId(),name));
+	
+	DEBUG5("speed %f %f",pr->getSpeed().m_x, pr->getSpeed().m_y);
+	DEBUG5("angle %f ",pr->getShape()->m_angle*180/3.14);
 
 	// Node anlegen
 	Ogre::SceneNode* obj_node;
@@ -944,7 +948,7 @@ void Scene::createProjectile(Projectile* pr, std::string& name)
 
 	Projectile::ProjectileType type = pr->getType();
 	Ogre::Entity *ent =0;
-	//Partikelsystem Feuer anlegen
+	//Partikelsystem anlegen
 	std::string particle_name = name + "Particle";
 	Ogre::ParticleSystem *part = 0;
 

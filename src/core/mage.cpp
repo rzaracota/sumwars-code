@@ -64,6 +64,14 @@ bool Mage::init ()
 	bas->m_walk_speed = 3000;
 	bas->m_attack_speed=1500;
 	m_base_action = Action::MAGIC_ATTACK;
+	
+	Item* si;
+	Equipement* equ = getEquipement();
+	
+	si = ItemFactory::createItem(Item::WEAPON,"ice_wand");
+	insertItem(si);
+	si = ItemFactory::createItem(Item::WEAPON,"ice_staff");
+	insertItem(si);
 
 	// Alle Faehigkeiten deaktivieren
 	int i;

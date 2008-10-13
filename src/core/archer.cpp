@@ -61,7 +61,7 @@ bool Archer::init ()
 	bas->m_resistances_cap[2] =50;
 	bas->m_resistances_cap[3] =50;
 	bas->m_walk_speed = 3000;
-	bas->m_attack_speed=2000;
+	bas->m_attack_speed=1000;
 	m_base_action = Action::RANGE_ATTACK;
 
 	// Alle Faehigkeiten deaktivieren
@@ -72,7 +72,12 @@ bool Archer::init ()
 	// Debugging
 	bas->m_abilities[2] = 0xffffff;
 
-
+	Item* si;
+	Equipement* equ = getEquipement();
+	
+	si = ItemFactory::createItem(Item::WEAPON,"wood_bow");
+	insertItem(si);
+	
 	// Basisfaehigkeiten (normaler Angriff etc) erlauben
 	bas->m_abilities[0] = 0x3f2f;
 	bas->m_attack_range =20;

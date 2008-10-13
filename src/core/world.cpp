@@ -176,7 +176,7 @@ void World::createRegion(short region)
 		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_MONSTER, "lich");
 		insertObject(wo, Vector(7,5),rid);
 		
-		/*
+		
 		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_MONSTER, "goblin");
 		insertObject(wo, Vector(13,8),rid);
 // 		
@@ -205,7 +205,7 @@ void World::createRegion(short region)
 
 		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_MONSTER, "goblin");
 		insertObject(wo, Vector(19.9,6.9),rid);
-		*/
+		
 
 /*
 		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_MONSTER, "goblin");

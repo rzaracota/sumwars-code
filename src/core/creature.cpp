@@ -172,8 +172,11 @@ void Creature::initAction()
 		return;
 
 	}
+	
+	
 	DEBUG5("init Action %i", m_action.m_type);
 
+	
 
 	m_action.m_elapsed_time = 0;
 	Action::ActionInfo* aci = Action::getActionInfo(m_action.m_type);
@@ -291,7 +294,6 @@ void Creature::initAction()
 	if (baseact == Action::WALK)
 	{
 		getShape()->m_angle = m_speed.angle();
-
 	}
 
 	// Daten fuer die Animation setzen
@@ -578,7 +580,7 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 
 	// Daten fuer Geschosse: Zielrichtung und Startpunkt
 	Vector dir = goal - pos;
-	Vector dir2;
+	Vector dir2,tdir;
 	dir.normalize();
 	
 	// Startpunkt fuer Geschosse
@@ -706,7 +708,7 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 			// Projektil magischer Pfeil erzeugen
 			pr = new Projectile(getWorld(),Projectile::MAGIC_ARROW,fr, getWorld()->getValidProjectileId());
 			memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
-			pr->setSpeed(dir*(1/70));
+			pr->setSpeed(dir/70);
 			
 			getWorld()->insertProjectile(pr,sproj,reg);
 			break;
@@ -716,7 +718,7 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 			// Projektil Feuerblitz erzeugen
 			pr = new Projectile(getWorld(),Projectile::FIRE_BOLT,fr, getWorld()->getValidProjectileId());
 			memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
-			pr->setSpeed(dir*(1/70));
+			pr->setSpeed(dir/70);
 			
 			getWorld()->insertProjectile(pr,sproj,reg);
 			break;
@@ -726,7 +728,7 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 			// Projektil Feuerball erzeugen
 			pr = new Projectile(getWorld(),Projectile::FIRE_BALL,fr, getWorld()->getValidProjectileId());
 			memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
-			pr->setSpeed(dir*(1/70));
+			pr->setSpeed(dir/70);
 			getWorld()->insertProjectile(pr,sproj,reg);
 			break;
 
@@ -750,7 +752,7 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 			// Projektil Eisblitz erzeugen
 			pr = new Projectile(getWorld(),Projectile::ICE_BOLT,fr, getWorld()->getValidProjectileId());
 			memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
-			pr->setSpeed(dir*(1/70));
+			pr->setSpeed(dir/70);
 			getWorld()->insertProjectile(pr,sproj,reg);
 			break;
 
@@ -803,7 +805,7 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 				// Verbesserte Version springt noch viermal extra, daher einfach bei -4 anfangen zu zaehlen
 				pr->setCounter(-4);
 			}
-			pr->setSpeed(dir*(1/50));
+			pr->setSpeed(dir/50);
 			getWorld()->insertProjectile(pr,sproj,reg);
 			break;
 
@@ -823,7 +825,9 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 			// Projektil Pfeil erzeugen
 			pr = new Projectile(getWorld(),arrow,fr, getWorld()->getValidProjectileId());
 			memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
-			pr->setSpeed(dir*(1/80));
+			pr->setSpeed(dir/80);
+			tdir = dir*(1/80);
+			DEBUG5("set speed %f %f",tdir.m_x, tdir.m_y);
 			
 			getWorld()->insertProjectile(pr,sproj,reg);
 			break;
@@ -832,7 +836,7 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 			// Projektil gelenkter Pfeil erzeugen
 			pr = new Projectile(getWorld(),Projectile::GUIDED_ARROW,fr, getWorld()->getValidProjectileId());
 			memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
-			pr->setSpeed(dir*(1/100));
+			pr->setSpeed(dir/100);
 			
 			if (cgoal!=0)
 			{
@@ -855,7 +859,7 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 				sproj = pos+dir2* 1.05 * s.m_radius;
 				pr = new Projectile(getWorld(),arrow,fr, getWorld()->getValidProjectileId());
 				memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
-				pr->setSpeed(dir2*(1/80));
+				pr->setSpeed(dir2/80);
 				
 				getWorld()->insertProjectile(pr,sproj,reg);
 			}
@@ -874,7 +878,7 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 				sproj = pos+dir2* 1.05 * s.m_radius;
 				pr = new Projectile(getWorld(),arrow,fr, getWorld()->getValidProjectileId());
 				memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
-				pr->setSpeed(dir2*(1/80));
+				pr->setSpeed(dir2/80);
 				getWorld()->insertProjectile(pr,sproj,reg);
 			}
 			break;
@@ -883,7 +887,7 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 			// Projektil Pfeil erzeugen
 			pr = new Projectile(getWorld(),arrow,fr, getWorld()->getValidProjectileId());
 			memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
-			pr->setSpeed(dir*(1/80));
+			pr->setSpeed(dir/80);
 			
 			// Flag durchschlagend setzen
 			pr->setFlags(Projectile::PIERCING);
@@ -894,7 +898,7 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 			// Projektil Windpfeil erzeugen
 			pr = new Projectile(getWorld(),Projectile::WIND_ARROW,fr, getWorld()->getValidProjectileId());
 			memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
-			pr->setSpeed(dir*(1/80));
+			pr->setSpeed(dir/80);
 			
 			getWorld()->insertProjectile(pr,sproj,reg);
 			break;
@@ -904,7 +908,7 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 			// Projektil Pfeil erzeugen
 			pr = new Projectile(getWorld(),arrow,fr, getWorld()->getValidProjectileId());
 			memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
-			pr->setSpeed(dir*(1/80));
+			pr->setSpeed(dir/80);
 			
 			// Flag explodierend setzen
 			pr->setFlags(Projectile::EXPLODES);
@@ -918,7 +922,7 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 			// Projektil Pfeil erzeugen
 			pr = new Projectile(getWorld(),arrow,fr, getWorld()->getValidProjectileId());
 			memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
-			pr->setSpeed(dir*(1/80));
+			pr->setSpeed(dir/80);
 			
 			// Maximale Anzahl der Spruenge
 			pr->setCounter(-20);
@@ -1602,7 +1606,6 @@ void Creature::calcAction()
 {
 
 
-
 	updateCommand();
 
 	// wenn kein Kommando existiert keine Aktion ausfuehren, beenden
@@ -1617,6 +1620,7 @@ void Creature::calcAction()
 
 	}
 
+	
 
 	DEBUG5("calc action for command %i",m_command.m_type);
 	m_event_mask |= Event::DATA_ACTION;
@@ -1684,17 +1688,20 @@ void Creature::calcAction()
 		dist = getShape()->getDistance(*(goalobj->getShape()));
 	}
 
+	
 	// Stuermen ohne Zielobjekt hat keinen Zielradius
+	// TODO: nachfragen
+	
 	if ((m_command.m_type == Action::CHARGE || m_command.m_type == Action::STORM_CHARGE) &&  m_command.m_goal_object_id==0)
 	{
 		range=0;
 	}
-
-
+	
 
 	if (Action::getActionInfo(m_command.m_type)->m_distance == Action::MELEE || Action::getActionInfo(m_command.m_type)->m_base_action == Action::WALK)
 	{
 		// Aktion fuer die man an das Ziel hinreichend nahe herankommen muss
+		DEBUG("range %f dist %f",range,dist);
 
 		// Testen ob das Ziel in Reichweite ist
 		if (range > dist)
@@ -1713,7 +1720,6 @@ void Creature::calcAction()
 
 			// Kommando damit abgeschlossen
 			m_command.m_type = Action::NOACTION;
-			m_command.m_damage_mult = 1;
 			m_event_mask |= Event::DATA_COMMAND;
 		}
 		else
@@ -1724,7 +1730,7 @@ void Creature::calcAction()
 			if ((m_command.m_type == Action::CHARGE || m_command.m_type == Action::STORM_CHARGE)  )
 			{
 				// Sturmangriff
-				DEBUG("Charge");
+				DEBUG5("Charge");
 				float d;
 
 				// beim ersten Mal richtung neu ausrechnen, das ist der Fall wenn der Schadensmultiplikator gleich 1 ist
@@ -1732,6 +1738,8 @@ void Creature::calcAction()
 				if (m_command.m_damage_mult>1)
 				{
 					// Richtung nicht neu ausrechnen, beschleunigen
+					m_command.m_damage_mult += 2;
+					
 					// Geschwindigkeit normieren, mit Schadensmultiplikator multiplizieren
 					m_speed.normalize();
 
@@ -1749,10 +1757,11 @@ void Creature::calcAction()
 				else
 				{
 					// Richtung: direct zum Ziel;
-					DEBUG("calc charge dir");
+					DEBUG5("calc charge dir");
 					// Vektor von der eigenen Position zum Ziel, normieren
 					Vector dir = goal-pos;
 					dir.normalize();
+					m_speed = dir;
 					
 					if (dir.getLength()!=0)
 					{
@@ -1794,7 +1803,6 @@ void Creature::calcAction()
 		m_command.m_damage_mult = 1;
 		m_event_mask |= Event::DATA_COMMAND;
 	}
-
 
 }
 
@@ -2895,6 +2903,7 @@ void Creature::calcAbilityDamage(Action::ActionType act,Damage& dmg)
 			break;
 
 		case Action::STORM_CHARGE:
+
 			dmg.m_multiplier[Damage::PHYSICAL] *= m_command.m_damage_mult;
 			dmg.m_attack *=m_command.m_damage_mult*0.5;
 			dmg.m_status_mod_power[Damage::PARALYZED] += (short)  (m_base_attr_mod.m_strength*m_command.m_damage_mult*0.2);

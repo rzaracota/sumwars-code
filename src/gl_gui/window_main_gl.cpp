@@ -594,12 +594,12 @@ void WindowMain::DisplayFunc ()
 
 	}
 
-	ProjectileMap proj;
+	ProjectileMap* proj;
 	ProjectileMap::iterator i2;
 	
-	region->getProjectiles();
+	proj = region->getProjectiles();
 	Projectile* pr;
-	for (i2=proj.begin(); i2 != proj.end(); ++i2)
+	for (i2=proj->begin(); i2 != proj->end(); ++i2)
 	{
 		pr = i2->second;
 		glPushMatrix();
@@ -610,7 +610,7 @@ void WindowMain::DisplayFunc ()
 		cx = pr->getShape()->m_center.m_x;
 		cy = pr->getShape()->m_center.m_y;
 		r = pr->getShape()->m_radius;
-		DEBUG5("draw projectile %f %f %f",cx,cy,r);
+		DEBUG("draw projectile %f %f %f",cx,cy,r);
 
 		glTranslatef(cx-x,cy-y,0);
 

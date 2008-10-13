@@ -23,6 +23,7 @@ Item* ItemFactory::createItem(Item::Type type, Item::Subtype subtype, int id, fl
 	{
 		id = m_world->getValidId();
 	}
+	
 	DEBUG5("creating item %i / %s",type, subtype.c_str());
 	std::map<Item::Subtype,ItemBasicData*>::iterator it;
 	it = m_item_data.find(subtype);
@@ -32,7 +33,7 @@ Item* ItemFactory::createItem(Item::Type type, Item::Subtype subtype, int id, fl
 
 	if (it != m_item_data.end())
 	{
-		DEBUG("found item data for subtype %s",subtype.c_str());
+		DEBUG5("found item data for subtype %s",subtype.c_str());
 		ItemBasicData* idata = it->second;
 		item = new Item(*idata);
 		item->m_id = id;
@@ -270,7 +271,7 @@ Item* ItemFactory::createItem(Item::Type type, Item::Subtype subtype, int id, fl
 				item->m_weapon_attr->m_damage.m_max_damage[Damage::PHYSICAL] = 20;
 				item->m_weapon_attr->m_damage.m_attack = 30;
 				item->m_weapon_attr->m_damage.m_power = 40;
-				item->m_weapon_attr->m_attack_range = 2.0;
+				item->m_weapon_attr->m_attack_range = 1.5;
 				item->m_weapon_attr->m_two_handed = false;
 				item->m_weapon_attr->m_dattack_speed = 0;
 		}
@@ -329,7 +330,7 @@ Item* ItemFactory::createItem(Item::Type type, Item::Subtype subtype, int id, fl
 				item->m_weapon_attr->m_damage.m_max_damage[Damage::PHYSICAL] = 40;
 				item->m_weapon_attr->m_damage.m_attack = 50;
 				item->m_weapon_attr->m_damage.m_power = 60;
-				item->m_weapon_attr->m_attack_range = 1.5;
+				item->m_weapon_attr->m_attack_range = 2.0;
 				item->m_weapon_attr->m_two_handed = true;
 				item->m_weapon_attr->m_dattack_speed = -500;
 		}
@@ -347,6 +348,21 @@ Item* ItemFactory::createItem(Item::Type type, Item::Subtype subtype, int id, fl
 				item->m_weapon_attr->m_attack_range = 4.0;
 				item->m_weapon_attr->m_two_handed = false;
 				item->m_weapon_attr->m_dattack_speed = 0;
+		}
+		else if (subtype =="ice_staff")
+		{
+			item->m_price = 700;
+			item->m_size = Item::BIG;
+			item->m_equip_effect->m_dmagic_power = 70;
+			item->m_weapon_attr->m_damage.m_min_damage[Damage::ICE] = 10;
+			item->m_weapon_attr->m_damage.m_max_damage[Damage::ICE] = 30;
+			item->m_weapon_attr->m_damage.m_attack = 30;
+			item->m_weapon_attr->m_damage.m_power = 70;
+			item->m_weapon_attr->m_damage.m_special_flags = Damage::EXTRA_UNDEAD_DMG;
+			item->m_weapon_attr->m_damage.m_special_flags = Damage::EXTRA_DEMON_DMG;
+			item->m_weapon_attr->m_attack_range = 4.0;
+			item->m_weapon_attr->m_two_handed = true;
+			item->m_weapon_attr->m_dattack_speed = 0;
 		}
 		else if (subtype =="holy_flail")
 		{

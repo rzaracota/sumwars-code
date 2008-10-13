@@ -137,7 +137,7 @@ bool Player::onGamefieldClick(ClientCommand* command)
 
 						com->m_goal_object_id = command->m_id;
 						com->m_goal = command->m_goal;
-						com->m_range = getBaseAttr()->m_attack_range;
+						com->m_range = getBaseAttrMod()->m_attack_range;
 						DEBUG5("action range %f",getCommand()->m_range);
 					}
 					else
@@ -160,7 +160,7 @@ bool Player::onGamefieldClick(ClientCommand* command)
 
 						com->m_goal_object_id = command->m_id;
 						com->m_goal = command->m_goal;
-						com->m_range = getBaseAttr()->m_attack_range;
+						com->m_range = getBaseAttrMod()->m_attack_range;
 					}
 				}
 				if (wo->getTypeInfo()->m_type==TypeInfo::TYPE_FIXED_OBJECT )
@@ -185,14 +185,14 @@ bool Player::onGamefieldClick(ClientCommand* command)
 				com->m_type =command->m_action;
 				com->m_goal_object_id = command->m_id;
 				com->m_goal = command->m_goal;
-				com->m_range = getBaseAttr()->m_attack_range;
+				com->m_range = getBaseAttrMod()->m_attack_range;
 				com->m_goal_object_id = command->m_id;
 			}
 			else if (command->m_button == LEFT_SHIFT_MOUSE_BUTTON)
 			{
 				com->m_type = command->m_action;
 				com->m_goal = command->m_goal;
-				com->m_range = getBaseAttr()->m_attack_range;
+				com->m_range = getBaseAttrMod()->m_attack_range;
 				com->m_goal_object_id =0;
 				if (dist == Action::MELEE)
 				{
@@ -258,7 +258,7 @@ bool Player::onGamefieldClick(ClientCommand* command)
 			// Fernkampf immer starten
 			com->m_type = command->m_action;
 			com->m_goal = command->m_goal;
-			com->m_range = getBaseAttr()->m_attack_range;
+			com->m_range = getBaseAttrMod()->m_attack_range;
 			com->m_goal_object_id =0;
 		}
 		else if (dist == Action::MELEE && command->m_button == LEFT_SHIFT_MOUSE_BUTTON)
@@ -266,7 +266,7 @@ bool Player::onGamefieldClick(ClientCommand* command)
 			// Nahkampf nur dann starten, wenn shift gedrueckt wurde
 			com->m_type = command->m_action;
 			com->m_goal = command->m_goal;
-			com->m_range = getBaseAttr()->m_attack_range;
+			com->m_range = getBaseAttrMod()->m_attack_range;
 			com->m_goal_object_id =0;
 			meleedir = true;
 		}
@@ -1570,6 +1570,8 @@ void Player::calcBaseAttrMod()
 		{
 			getBaseAttrMod()->m_attack_speed += si->m_weapon_attr ->m_dattack_speed;
 			getBaseAttrMod()->m_attack_range = si->m_weapon_attr ->m_attack_range;
+			
+			DEBUG5("attack range %f speed %f",getBaseAttrMod()->m_attack_range,getBaseAttrMod()->m_attack_speed);
 
 			if (si->m_weapon_attr ->m_dattack_speed!=0)
 			{

@@ -102,6 +102,7 @@ Projectile::Projectile(World* w,ProjectileType type, WorldObject::TypeInfo::Frac
 
 
 	m_shape.m_radius =r;
+	m_shape.m_angle =0;
 	m_creator_fraction = fr;
 
 }
@@ -426,6 +427,9 @@ void Projectile::handleFlying(float dtime)
 		m_state = DESTROYED;
 	}
 
+	DEBUG5("pos %f %f",pos.m_x, pos.m_y);
+	DEBUG5("speed %f %f time %f ",m_speed.m_x, m_speed.m_y, time);
+	
 	// neue Koordinaten nach Ablauf des Zeitquantums
 	newpos = pos + m_speed*dtime;
 

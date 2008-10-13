@@ -111,6 +111,16 @@ class Projectile
 	void setSpeed(Vector speed)
 	{
 		m_speed = speed;
+		getShape()->m_angle = m_speed.angle();
+	}
+	
+	/**
+	 * \fn Vector getSpeed()
+	 * \brief Gibt die Geschwindigkeit aus
+	 */
+	Vector getSpeed()
+	{
+		return m_speed;
 	}
 	
 	/**

@@ -123,6 +123,16 @@ struct Vector
 	}
 	
 	/**
+	 * \fn Vector operator/(float mul)
+	 * \brief Gibt ein Bruchteil des Vektors aus
+	 * \param mul Faktor
+	 */
+	Vector operator/(float mul)
+	{
+		return Vector(m_x/mul, m_y/mul);
+	}
+	
+	/**
 	 * \fn float operator*=(float mul)
 	 * \brief Skaliert den Vektor
 	 * \param mul Skalierungsfaktor

@@ -262,6 +262,7 @@ void Monster::calcBestCommand()
 
 void Monster::evalCommand(Action::ActionType act)
 {
+	DEBUG5("evaluation command %i",act);
 	WorldObjectValueList::iterator it;
 	WorldObjectValueList* goal_list=0;
 	Creature* cgoal=0;
