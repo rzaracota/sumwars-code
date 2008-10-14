@@ -1701,7 +1701,7 @@ void Creature::calcAction()
 	if (Action::getActionInfo(m_command.m_type)->m_distance == Action::MELEE || Action::getActionInfo(m_command.m_type)->m_base_action == Action::WALK)
 	{
 		// Aktion fuer die man an das Ziel hinreichend nahe herankommen muss
-		DEBUG("range %f dist %f",range,dist);
+		DEBUG5("range %f dist %f",range,dist);
 
 		// Testen ob das Ziel in Reichweite ist
 		if (range > dist)
@@ -1874,7 +1874,7 @@ void Creature::calcStatusModCommand()
 			m_command.m_type = m_base_action;
 			m_command.m_goal = npos;
 			m_command.m_goal_object_id =0;
-			m_command.m_range = getBaseAttr()->m_attack_range;
+			m_command.m_range = getBaseAttrMod()->m_attack_range;
 			m_event_mask |= Event::DATA_COMMAND;
 
 			// Im Falle von Beserker nur Nahkampf
@@ -1951,7 +1951,7 @@ void Creature::calcStatusModCommand()
 			m_command.m_type = Action::ATTACK;
 			m_command.m_goal_object_id = id;
 			m_command.m_goal = goal;
-			m_command.m_range = getBaseAttr()->m_attack_range;
+			m_command.m_range = getBaseAttrMod()->m_attack_range;
 
 			// nur Nahkampf, daher Reichweite die von Fernwaffen kommt reduzieren
 			if (m_command.m_range >4)
@@ -3235,6 +3235,7 @@ void Creature::calcBaseAttrMod()
 	m_base_attr_mod.m_magic_power =m_base_attr.m_magic_power;
 	m_base_attr_mod.m_walk_speed =m_base_attr.m_walk_speed;
 	m_base_attr_mod.m_attack_speed =m_base_attr.m_attack_speed;
+	m_base_attr_mod.m_attack_range =m_base_attr.m_attack_range;
 	m_base_attr_mod.m_level =m_base_attr.m_level;
 	m_base_attr_mod.m_max_health =m_base_attr.m_max_health;
 
