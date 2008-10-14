@@ -74,6 +74,31 @@
 </Item>
 -->
 
+<!-- SWORDS -->
+<!-- ONE HANDED SWORDS -->
+<!-- Dagger -->
+<Item type="weapon" subtype="dagger_sw" size="medium">
+	<Mesh file="sword.mesh" />
+	<Attribute
+		price="50"
+		min_enchant="10"
+		max_enchant="40"
+	/>
+	<EquipEffect />
+	<WeaponAttribute
+		damage_min_physical="3"
+		damage_max_physical="6"
+		damage_attack="20"
+		damage_power="10"
+		attack_range="0.8"
+		two_handed="no"
+		dattack_speed="1000"
+	/>
+	<DropChance
+		level="1"
+		probability="1.0"
+	/>
+</Item>
 
 <!-- Short Sword -->
 <Item type="weapon" subtype="short_sw" size="medium">
@@ -85,8 +110,8 @@
 	/>
 	<EquipEffect />
 	<WeaponAttribute
-		damage_min_physical="5"
-		damage_max_physical="10"
+		damage_min_physical="6"
+		damage_max_physical="11"
 		damage_attack="20"
 		damage_power="30"
 		attack_range="1.0"
@@ -94,8 +119,541 @@
 		dattack_speed="500"
 	/>
 	<DropChance
-		level="0"
+		level="3"
 		probability="1.0"
 	/>
 </Item>
 
+<!-- Bronze Sword -->
+<Item type="weapon" subtype="bronze_sw" size="medium">
+	<Mesh file="sword.mesh" />
+	<Attribute
+		price="400"
+		min_enchant="40"
+		max_enchant="150"
+	/>
+	<EquipEffect />
+	<WeaponAttribute
+		damage_min_physical="10"
+		damage_max_physical="17"
+		damage_attack="20"
+		damage_power="40"
+		attack_range="1.0"
+		two_handed="no"
+		dattack_speed="450"
+	/>
+	<DropChance
+		level="5"
+		probability="1.0"
+	/>
+</Item>
+
+<!-- -Sabre -->
+<Item type="weapon" subtype="sabre_sw" size="medium">
+	<Mesh file="sword.mesh" />
+	<Attribute
+		price="750"
+		min_enchant="50"
+		max_enchant="200"
+	/>
+	<EquipEffect />
+	<WeaponAttribute
+		damage_min_physical="14"
+		damage_max_physical="24"
+		damage_attack="30"
+		damage_power="35"
+		attack_range="1.3"
+		two_handed="no"
+		dattack_speed="400"
+	/>
+	<DropChance
+		level="8"
+		probability="1.0"
+	/>
+</Item>
+
+<!-- Legions Blade-->
+<Item type="weapon" subtype="legions_sw" size="medium">
+	<Mesh file="sword.mesh" />
+	<Attribute
+		price="1500"
+		min_enchant="80"
+		max_enchant="260"
+	/>
+	<EquipEffect />
+	<WeaponAttribute
+		damage_min_physical="23"
+		damage_max_physical="35"
+		damage_attack="20"
+		damage_power="40"
+		attack_range="1.3"
+		two_handed="no"
+		dattack_speed="300"
+	/>
+	<DropChance
+		level="13"
+		probability="1.0"
+	/>
+</Item>
+
+<!-- long sword  -->
+<Item type="weapon" subtype="long_sw" size="medium">
+	<Mesh file="sword.mesh" />
+	<Attribute
+		price="2000"
+		min_enchant="80"
+		max_enchant="270"
+	/>
+	<EquipEffect />
+	<WeaponAttribute
+		damage_min_physical="34"
+		damage_max_physical="47"
+		damage_attack="30"
+		damage_power="40"
+		attack_range="2.0"
+		two_handed="no"
+		dattack_speed="0"
+	/>
+	<DropChance
+		level="19"
+		probability="1.0"
+	/>
+</Item>
+
+<!-- coastal sword-->
+<Item type="weapon" subtype="coast_sw" size="medium">
+	<Mesh file="sword.mesh" />
+	<Attribute
+		price="3300"
+		min_enchant="100"
+		max_enchant="300"
+	/>
+	<EquipEffect />
+	<WeaponAttribute
+		damage_min_physical="39"
+		damage_max_physical="54"
+		damage_attack="30"
+		damage_power="45"
+		attack_range="1.5"
+		two_handed="no"
+		dattack_speed="200"
+	/>
+	<DropChance
+		level="25"
+		probability="1.0"
+	/>
+</Item>
+
+<!-- scimitar-->
+<Item type="weapon" subtype="scimita_sw" size="medium">
+	<Mesh file="sword.mesh" />
+	<Attribute
+		price="3700"
+		min_enchant="130"
+		max_enchant="350"
+	/>
+	<EquipEffect />
+	<WeaponAttribute
+		damage_min_physical="46"
+		damage_max_physical="62"
+		damage_attack="30"
+		damage_power="40"
+		attack_range="1.4"
+		two_handed="no"
+		dattack_speed="500"
+	/>
+	<DropChance
+		level="30"
+		probability="1.0"
+	/>
+</Item>
+
+<!-- barbar sword-->
+<Item type="weapon" subtype="barbar_sw" size="medium">
+	<Mesh file="sword.mesh" />
+	<Attribute
+		price="4000"
+		min_enchant="140"
+		max_enchant="375"
+	/>
+	<EquipEffect />
+	<WeaponAttribute
+		damage_min_physical="51"
+		damage_max_physical="68"
+		damage_attack="30"
+		damage_power="40"
+		attack_range="1.3"
+		two_handed="no"
+		dattack_speed="400"
+	/>
+	<DropChance
+		level="35"
+		probability="1.0"
+	/>
+</Item>
+
+<!-- northlings blade -->
+<Item type="weapon" subtype="northli_sw" size="medium">
+	<Mesh file="sword.mesh" />
+	<Attribute
+		price="5000"
+		min_enchant="150"
+		max_enchant="375"
+	/>
+	<EquipEffect />
+	<WeaponAttribute
+		damage_min_physical="23"
+		damage_max_physical="37"
+		damage_min_ice="35"
+		damage_max_ice="48"
+		damage_attack="35"
+		damage_power="35"
+		attack_range="1.4"
+		two_handed="no"
+		dattack_speed="0"
+	/>
+	<DropChance
+		level="40"
+		probability="1.0"
+	/>
+</Item>
+
+<!-- steel sword-->
+<Item type="weapon" subtype="steel_sw" size="medium">
+	<Mesh file="sword.mesh" />
+	<Attribute
+		price="5500"
+		min_enchant="160"
+		max_enchant="400"
+	/>
+	<EquipEffect />
+	<WeaponAttribute
+		damage_min_physical="60"
+		damage_max_physical="81"
+		damage_attack="30"
+		damage_power="45"
+		attack_range="1.3"
+		two_handed="no"
+		dattack_speed="0"
+	/>
+	<DropChance
+		level="45"
+		probability="1.0"
+	/>
+</Item>
+
+<!-- assassins blade-->
+<Item type="weapon" subtype="assassi_sw" size="medium">
+	<Mesh file="sword.mesh" />
+	<Attribute
+		price="6000"
+		min_enchant="190"
+		max_enchant="450"
+	/>
+	<EquipEffect />
+	<WeaponAttribute
+		damage_min_physical="70"
+		damage_max_physical="97"
+		damage_attack="20"
+		damage_power="60"
+		attack_range="1.3"
+		two_handed="no"
+		dattack_speed="-200"
+	/>
+	<DropChance
+		level="50"
+		probability="1.0"
+	/>
+</Item>
+
+<!-- diamond sword-->
+<Item type="weapon" subtype="diamond_sw" size="medium">
+	<Mesh file="sword.mesh" />
+	<Attribute
+		price="9000"
+		min_enchant="220"
+		max_enchant="500"
+	/>
+	<EquipEffect />
+	<WeaponAttribute
+		damage_min_physical="69"
+		damage_max_physical="95"
+		damage_attack="35"
+		damage_power="60"
+		attack_range="1.2"
+		two_handed="no"
+		dattack_speed="200"
+	/>
+	<DropChance
+		level="55"
+		probability="1.0"
+	/>
+</Item>
+
+<!-- dwarf steel sword-->
+<Item type="weapon" subtype="dwarfst_sw" size="medium">
+	<Mesh file="sword.mesh" />
+	<Attribute
+		price="11000"
+		min_enchant="250"
+		max_enchant="550"
+	/>
+	<EquipEffect />
+	<WeaponAttribute
+		damage_min_physical="75"
+		damage_max_physical="100"
+		damage_attack="30"
+		damage_power="65"
+		attack_range="1.4"
+		two_handed="no"
+		dattack_speed="250"
+	/>
+	<DropChance
+		level="60"
+		probability="1.0"
+	/>
+</Item>
+
+<!-- demon blade -->
+<Item type="weapon" subtype="demon_sw" size="medium">
+	<Mesh file="sword.mesh" />
+	<Attribute
+		price="15000"
+		min_enchant="280"
+		max_enchant="600"
+	/>
+	<EquipEffect />
+	<WeaponAttribute
+		damage_min_physical="36"
+		damage_max_physical="43"
+		damage_min_fire="50"
+		damage_max_fire="76"
+		damage_attack="40"
+		damage_power="55"
+		attack_range="1.4"
+		two_handed="no"
+		dattack_speed="-700"
+	/>
+	<DropChance
+		level="65"
+		probability="1.0"
+	/>
+</Item>
+
+<!-- heroe blade -->
+<Item type="weapon" subtype="heroe_sw" size="medium">
+	<Mesh file="sword.mesh" />
+	<Attribute
+		price="15000"
+		min_enchant="310"
+		max_enchant="650"
+	/>
+	<EquipEffect />
+	<WeaponAttribute
+		damage_min_physical="84"
+		damage_max_physical="112"
+		damage_attack="50"
+		damage_power="65"
+		attack_range="1.6"
+		two_handed="no"
+		dattack_speed="-100"
+	/>
+	<DropChance
+		level="70"
+		probability="1.0"
+	/>
+</Item>
+
+<!-- angels blade -->
+<Item type="weapon" subtype="angels_sw" size="medium">
+	<Mesh file="sword.mesh" />
+	<Attribute
+		price="25000"
+		min_enchant="340"
+		max_enchant="700"
+	/>
+	<EquipEffect />
+	<WeaponAttribute
+		damage_min_physical="88"
+		damage_max_physical="118"
+		damage_attack="60"
+		damage_power="70"
+		attack_range="1.5"
+		two_handed="no"
+		dattack_speed="200"
+	/>
+	<DropChance
+		level="75"
+		probability="1.0"
+	/>
+</Item>
+
+<!-- gods blade -->
+<Item type="weapon" subtype="gods_sw" size="medium">
+	<Mesh file="sword.mesh" />
+	<Attribute
+		price="50000"
+		min_enchant="370"
+		max_enchant="750"
+	/>
+	<EquipEffect />
+	<WeaponAttribute
+		damage_min_physical="93"
+		damage_max_physical="125"
+		damage_attack="60"
+		damage_power="60"
+		attack_range="1.6"
+		two_handed="no"
+		dattack_speed="500"
+	/>
+	<DropChance
+		level="80"
+		probability="1.0"
+	/>
+</Item>
+
+<!-- TWO HANDED SWORDS -->
+<!-- bauernzweihaender -->
+<Item type="weapon" subtype="2h_sw" size="large">
+	<Mesh file="sword.mesh" />
+	<Attribute
+		price="100"
+		min_enchant="10"
+		max_enchant="40"
+	/>
+	<EquipEffect />
+	<WeaponAttribute
+		damage_min_physical="5"
+		damage_max_physical="10"
+		damage_attack="20"
+		damage_power="10"
+		attack_range="1.2"
+		two_handed="yes"
+		dattack_speed="1000"
+	/>
+	<DropChance
+		level="1"
+		probability="1.0"
+	/>
+</Item>
+
+<!-- soeldnerklinge -->
+<Item type="weapon" subtype="l3_2h_sw" size="large">
+	<Mesh file="sword.mesh" />
+	<Attribute
+		price="300"
+		min_enchant="30"
+		max_enchant="120"
+	/>
+	<EquipEffect />
+	<WeaponAttribute
+		damage_min_physical="9"
+		damage_max_physical="17"
+		damage_attack="20"
+		damage_power="30"
+		attack_range="1.5"
+		two_handed="yes"
+		dattack_speed="500"
+	/>
+	<DropChance
+		level="3"
+		probability="1.0"
+	/>
+</Item>
+
+<!-- stahlzweihaender -->
+<Item type="weapon" subtype="steel2h_sw" size="large">
+	<Mesh file="sword.mesh" />
+	<Attribute
+		price="800"
+		min_enchant="40"
+		max_enchant="150"
+	/>
+	<EquipEffect />
+	<WeaponAttribute
+		damage_min_physical="15"
+		damage_max_physical="26"
+		damage_attack="20"
+		damage_power="40"
+		attack_range="1.5"
+		two_handed="yes"
+		dattack_speed="450"
+	/>
+	<DropChance
+		level="5"
+		probability="1.0"
+	/>
+</Item>
+
+<!-- smash sword -->
+<Item type="weapon" subtype="smash_sw" size="large">
+	<Mesh file="sword.mesh" />
+	<Attribute
+		price="1500"
+		min_enchant="50"
+		max_enchant="200"
+	/>
+	<EquipEffect />
+	<WeaponAttribute
+		damage_min_physical="21"
+		damage_max_physical="36"
+		damage_attack="15"
+		damage_power="60"
+		attack_range="1.5"
+		two_handed="yes"
+		dattack_speed="-400"
+	/>
+	<DropChance
+		level="8"
+		probability="1.0"
+	/>
+</Item>
+
+<!-- horse killer -->
+<Item type="weapon" subtype="horse_sw" size="large">
+	<Mesh file="sword.mesh" />
+	<Attribute
+		price="1500"
+		min_enchant="50"
+		max_enchant="200"
+	/>
+	<EquipEffect />
+	<WeaponAttribute
+		damage_min_physical="21"
+		damage_max_physical="36"
+		damage_attack="15"
+		damage_power="60"
+		attack_range="1.5"
+		two_handed="yes"
+		dattack_speed="-400"
+	/>
+	<DropChance
+		level="8"
+		probability="1.0"
+	/>
+</Item>
+
+<!-- AXES-->
+<!-- ONE HANDED AXES -->
+<Item type="weapon" subtype="dagger_sw" size="medium">
+	<Mesh file="battleaxe.mesh" />
+	<Attribute
+		price="50"
+		min_enchant="10"
+		max_enchant="40"
+	/>
+	<EquipEffect />
+	<WeaponAttribute
+		damage_min_physical="3"
+		damage_max_physical="6"
+		damage_attack="20"
+		damage_power="10"
+		attack_range="0.8"
+		two_handed="no"
+		dattack_speed="1000"
+	/>
+	<DropChance
+		level="1"
+		probability="1.0"
+	/>
+</Item>
