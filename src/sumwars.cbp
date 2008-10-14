@@ -92,6 +92,8 @@
 		<Unit filename="core\event.h" />
 		<Unit filename="core\fixedobject.cpp" />
 		<Unit filename="core\fixedobject.h" />
+		<Unit filename="core\geometry.cpp" />
+		<Unit filename="core\geometry.h" />
 		<Unit filename="core\gettext.h" />
 		<Unit filename="core\gridunit.cpp" />
 		<Unit filename="core\gridunit.h" />
