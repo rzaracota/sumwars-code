@@ -21,7 +21,7 @@ CXXFLAGS += -I./core -I./gui -I./tinyxml
 OBJS = $(shell cat ./Makefile.objs )
 DIRS = $(shell find . -mindepth 1 -maxdepth 1 -type d -not -iname .svn )
 
-CXXFLAGS += -DDEBUG_LEVEL=$(DEBUG_LEVEL)
+CXXFLAGS += -DDEBUG_LEVEL=$(DEBUG_LEVEL)  $(shell cat ./defines)
 
 build: compile $(RUN)
 
