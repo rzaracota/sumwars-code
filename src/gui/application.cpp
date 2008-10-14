@@ -349,7 +349,7 @@ bool Application::initGettext()
 			result = setlocale (LC_MESSAGES, "en_NZ");
 	}
 
-	bindtextdomain ("sumwars","../../translation/");
+	bindtextdomain ("sumwars","../translation/");
 	textdomain ("sumwars");
 	return result;
 	#endif
