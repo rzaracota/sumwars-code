@@ -47,4 +47,56 @@
 	<AI ai_sight_range="8" />
 </Monster>
 
-
+<!--
+	<Object type="MONSTER" subtype="goblin" >
+		<Mesh file="goblin.mesh" />
+		<Geometry type="CIRCLE" radius="0.5" />
+		
+		<SinnvollerTag fraction="MONSTER" category="GOBLIN" />
+		<Dropslots p0="0.1" p1="0.2" p2="0.2" p3="0.2" />
+		<Dropslot0 min_level="0" max_level="20" magic_prob="0.3" magic_power="500" />
+		<Dropslot1 min_level="0" max_level="10" magic_prob="0.3" magic_power="1000" />
+		
+		<BasicAttributes
+						max_experience="100000"
+						level="1"
+						max_health="15"
+						armor="10"
+						block="0"
+						attack="10"
+						strength="15"
+						dexterity="10"
+						magic_power="5"
+						willpower="10"
+						resistances_physical="0"
+						resistances_air="0"
+						resistances_ice="0"
+						resistances_fire="0"
+						resistances_cap_physical="50"
+						resistances_cap_air="50"
+						resistances_cap_ice="50"
+						resistances_cap_fire="50"
+						walk_speed="2000"
+						attack_speed="1500"
+						step_length="0.5"
+						abilities0="3871"
+						abilities1="0"
+						abilities2="0"
+						abilities3="0"
+						abilities4="0"
+						abilities5="0"
+						attack_range="1"
+						special_flags="0"
+						immunity="0"
+						/>
+		
+		
+		
+		<AI ai_sight_range="8" />
+	</Object>	
+	
+	<Object type="FIXED_OBJECT" subtype="fence1" >
+		<Mesh file="fence1.mesh" />
+		<Geometry type="RECT" extent_x="4" extent_y ="0.2"/>
+	</Object>	
+-->
