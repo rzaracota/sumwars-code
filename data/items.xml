@@ -178,6 +178,7 @@
 	/>
 </Item>
 
+
 <!-- Bronze Sword -->
 <Item type="weapon" subtype="bronze_sw" size="medium">
 	<Mesh file="sword.mesh" />

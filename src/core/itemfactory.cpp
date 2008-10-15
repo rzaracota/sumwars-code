@@ -33,7 +33,6 @@ Item* ItemFactory::createItem(Item::Type type, Item::Subtype subtype, int id, fl
 
 	if (it != m_item_data.end())
 	{
-		DEBUG5("found item data for subtype %s",subtype.c_str());
 		ItemBasicData* idata = it->second;
 		item = new Item(*idata);
 		item->m_id = id;
@@ -611,6 +610,7 @@ void ItemFactory::registerItemDrop(Item::Type type,Item::Subtype subtype, DropCh
 
 void ItemFactory::registerItem(Item::Type type,Item::Subtype subtype, ItemBasicData* data)
 {
+	DEBUG5("registered item %s %p",subtype.c_str(), data->m_weapon_attr);
 	m_item_data.insert(make_pair(subtype, data));
 	m_item_types.insert(make_pair(subtype,type));
 }
@@ -660,8 +660,8 @@ void ItemFactory::init()
 			cout << "m_max_enchant" << " = " << (*iter)->m_max_enchant << endl;
 			cout << "------------------------------------------------" << endl;
 			*/
-			DEBUG1("m_attack_range = %f", (*iter)->m_weapon_attr->m_attack_range);
-			DEBUG1("m_damage.m_min_damage[Damage::PHYSICAL] = %f", (*iter)->m_weapon_attr->m_damage.m_min_damage[Damage::PHYSICAL]);
+			DEBUG5("m_attack_range %s = %f",(*iter)->m_subtype.c_str(), (*iter)->m_weapon_attr->m_attack_range);
+			DEBUG5("m_damage.m_min_damage[Damage::PHYSICAL] = %f", (*iter)->m_weapon_attr->m_damage.m_min_damage[Damage::PHYSICAL]);
 			registerItem((*iter)->m_type, (*iter)->m_subtype, *iter);
 			*iter++;
 		}

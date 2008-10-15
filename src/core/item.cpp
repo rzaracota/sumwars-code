@@ -38,7 +38,7 @@ Item::Item(ItemBasicData& data)
 	{
 		DEBUG5("copy useup effect");
 		m_useup_effect = new CreatureDynAttrMod;
-		memcpy(m_useup_effect,data.m_useup_effect,sizeof(m_useup_effect));
+		memcpy(m_useup_effect,data.m_useup_effect,sizeof(CreatureDynAttrMod));
 	}
 	else
 	{
@@ -49,7 +49,7 @@ Item::Item(ItemBasicData& data)
 	{
 		DEBUG5("copy equip effect");
 		m_equip_effect = new CreatureBaseAttrMod;
-		memcpy(m_equip_effect,data.m_equip_effect,sizeof(m_equip_effect));
+		memcpy(m_equip_effect,data.m_equip_effect,sizeof(CreatureBaseAttrMod));
 	}
 	else
 	{
@@ -61,7 +61,7 @@ Item::Item(ItemBasicData& data)
 		DEBUG5("copy weapon attr");
 		
 		m_weapon_attr = new WeaponAttr;
-		memcpy(m_weapon_attr,data.m_weapon_attr,sizeof(m_weapon_attr));
+		memcpy(m_weapon_attr,data.m_weapon_attr,sizeof(WeaponAttr));
 		memcpy(&(m_weapon_attr->m_damage) , &(data.m_weapon_attr->m_damage),sizeof(Damage));
 		
 	}

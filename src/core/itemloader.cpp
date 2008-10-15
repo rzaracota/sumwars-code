@@ -360,8 +360,11 @@ void ItemLoader::searchItemBasicData(TiXmlNode* pParent)
 		if ( !strcmp(pChild->Value(), "Item") && pChild->Type() == TiXmlNode::ELEMENT)
 		{
 			m_item_list->push_back(m_item_data);
+			
 			m_item_data = 0;
 			DEBUG5("Item loaded");
+			
+			
 		}
 	}
 }
