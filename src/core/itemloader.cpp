@@ -18,8 +18,8 @@ int ItemLoader::generateItemBasicData(TiXmlElement* pElement, std::string elemen
 			//m_item_data->m_useup_effect = 0;
 			//m_item_data->m_equip_effect = 0;
 			//m_item_data->m_weapon_attr = 0;
-			for (int i=0; i<31; i++)
-				m_item_data->m_modchance[i] = m_weapon_mod[i];
+			/*for (int i=0; i<31; i++)
+				m_item_data->m_modchance[i] = m_weapon_mod[i];*/
 		}
 
 		while (element == "Item" && pAttrib)
@@ -187,10 +187,36 @@ int ItemLoader::generateItemBasicData(TiXmlElement* pElement, std::string elemen
 				m_item_data->m_weapon_attr->m_damage.m_min_damage[Damage::FIRE] = static_cast<float>(dval);
 			else if (!strcmp(pAttrib->Name(), "damage_max_fire") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
 				m_item_data->m_weapon_attr->m_damage.m_max_damage[Damage::FIRE] = static_cast<float>(dval);
+			else if (!strcmp(pAttrib->Name(), "multiplier_physical") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
+				m_item_data->m_weapon_attr->m_damage.m_multiplier[Damage::PHYSICAL] = static_cast<float>(dval);
+			else if (!strcmp(pAttrib->Name(), "multiplier_air") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
+				m_item_data->m_weapon_attr->m_damage.m_multiplier[Damage::AIR] = static_cast<float>(dval);
+			else if (!strcmp(pAttrib->Name(), "multiplier_ice") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
+				m_item_data->m_weapon_attr->m_damage.m_multiplier[Damage::ICE] = static_cast<float>(dval);
+			else if (!strcmp(pAttrib->Name(), "multiplier_fire") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
+				m_item_data->m_weapon_attr->m_damage.m_multiplier[Damage::FIRE] = static_cast<float>(dval);
 			else if (!strcmp(pAttrib->Name(), "damage_attack") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
 				m_item_data->m_weapon_attr->m_damage.m_attack = static_cast<float>(dval);
 			else if (!strcmp(pAttrib->Name(), "damage_power") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
 				m_item_data->m_weapon_attr->m_damage.m_power = static_cast<float>(dval);
+			else if (!strcmp(pAttrib->Name(), "status_mod_power0") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
+				m_item_data->m_weapon_attr->m_damage.m_status_mod_power[0] = static_cast<short>(ival);
+			else if (!strcmp(pAttrib->Name(), "status_mod_power1") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
+				m_item_data->m_weapon_attr->m_damage.m_status_mod_power[1] = static_cast<short>(ival);
+			else if (!strcmp(pAttrib->Name(), "status_mod_power2") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
+				m_item_data->m_weapon_attr->m_damage.m_status_mod_power[2] = static_cast<short>(ival);
+			else if (!strcmp(pAttrib->Name(), "status_mod_power3") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
+				m_item_data->m_weapon_attr->m_damage.m_status_mod_power[3] = static_cast<short>(ival);
+			else if (!strcmp(pAttrib->Name(), "status_mod_power4") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
+				m_item_data->m_weapon_attr->m_damage.m_status_mod_power[4] = static_cast<short>(ival);
+			else if (!strcmp(pAttrib->Name(), "status_mod_power5") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
+				m_item_data->m_weapon_attr->m_damage.m_status_mod_power[5] = static_cast<short>(ival);
+			else if (!strcmp(pAttrib->Name(), "status_mod_power6") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
+				m_item_data->m_weapon_attr->m_damage.m_status_mod_power[6] = static_cast<short>(ival);
+			else if (!strcmp(pAttrib->Name(), "status_mod_power7") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
+				m_item_data->m_weapon_attr->m_damage.m_status_mod_power[7] = static_cast<short>(ival);
+			else if (!strcmp(pAttrib->Name(), "special_flags") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
+				m_item_data->m_weapon_attr->m_damage.m_special_flags = static_cast<short>(ival);
 			else if (!strcmp(pAttrib->Name(), "attack_range") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
 				m_item_data->m_weapon_attr->m_attack_range = static_cast<float>(dval);
 			else if (!strcmp(pAttrib->Name(), "two_handed"))
@@ -219,13 +245,72 @@ int ItemLoader::generateItemBasicData(TiXmlElement* pElement, std::string elemen
 			else if (!strcmp(pAttrib->Name(), "price") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
 				m_item_data->m_price = ival;
 			else if (!strcmp(pAttrib->Name(), "min_enchant") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
-			{
 				m_item_data->m_min_enchant = static_cast<float>(dval);
-			}
 			else if (!strcmp(pAttrib->Name(), "max_enchant") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
-			{
 				m_item_data->m_max_enchant = static_cast<float>(dval);
-			}
+			
+			else if (!strcmp(pAttrib->Name(), "modchance_health_mod") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
+				m_item_data->m_modchance[ItemFactory::HEALTH_MOD] = static_cast<float>(dval);
+			else if (!strcmp(pAttrib->Name(), "modchance_armor_mod") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
+				m_item_data->m_modchance[ItemFactory::ARMOR_MOD] = static_cast<float>(dval);
+			else if (!strcmp(pAttrib->Name(), "modchance_block_mod") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
+				m_item_data->m_modchance[ItemFactory::BLOCK_MOD] = static_cast<float>(dval);
+			else if (!strcmp(pAttrib->Name(), "modchance_strength_mod") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
+				m_item_data->m_modchance[ItemFactory::STRENGTH_MOD] = static_cast<float>(dval);
+			else if (!strcmp(pAttrib->Name(), "modchance_dexterity_mod") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
+				m_item_data->m_modchance[ItemFactory::DEXTERITY_MOD] = static_cast<float>(dval);
+			else if (!strcmp(pAttrib->Name(), "modchance_magic_power_mod") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
+				m_item_data->m_modchance[ItemFactory::MAGIC_POWER_MOD] = static_cast<float>(dval);
+			else if (!strcmp(pAttrib->Name(), "modchance_willpower_mod") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
+				m_item_data->m_modchance[ItemFactory::WILLPOWER_MOD] = static_cast<float>(dval);
+			else if (!strcmp(pAttrib->Name(), "modchance_resist_phys_mod") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
+				m_item_data->m_modchance[ItemFactory::RESIST_PHYS_MOD] = static_cast<float>(dval);
+			else if (!strcmp(pAttrib->Name(), "modchance_resist_fire_mod") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
+				m_item_data->m_modchance[ItemFactory::RESIST_FIRE_MOD] = static_cast<float>(dval);
+			else if (!strcmp(pAttrib->Name(), "modchance_resist_ice_mod") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
+				m_item_data->m_modchance[ItemFactory::RESIST_ICE_MOD] = static_cast<float>(dval);
+			else if (!strcmp(pAttrib->Name(), "modchance_resist_air_mod") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
+				m_item_data->m_modchance[ItemFactory::RESIST_AIR_MOD] = static_cast<float>(dval);
+			else if (!strcmp(pAttrib->Name(), "modchance_resist_all_mod") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
+				m_item_data->m_modchance[ItemFactory::RESIST_ALL_MOD] = static_cast<float>(dval);
+			else if (!strcmp(pAttrib->Name(), "modchance_damage_phys_mod") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
+				m_item_data->m_modchance[ItemFactory::DAMAGE_PHYS_MOD] = static_cast<float>(dval);
+			else if (!strcmp(pAttrib->Name(), "modchance_damage_fire_mod") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
+				m_item_data->m_modchance[ItemFactory::DAMAGE_FIRE_MOD] = static_cast<float>(dval);
+			else if (!strcmp(pAttrib->Name(), "modchance_damage_ice_mod") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
+				m_item_data->m_modchance[ItemFactory::DAMAGE_ICE_MOD] = static_cast<float>(dval);
+			else if (!strcmp(pAttrib->Name(), "modchance_damage_air_mod") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
+				m_item_data->m_modchance[ItemFactory::DAMAGE_AIR_MOD] = static_cast<float>(dval);
+			else if (!strcmp(pAttrib->Name(), "modchance_damage_mult_phys_mod") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
+				m_item_data->m_modchance[ItemFactory::DAMAGE_MULT_PHYS_MOD] = static_cast<float>(dval);
+			else if (!strcmp(pAttrib->Name(), "modchance_damage_mult_fire_mod") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
+				m_item_data->m_modchance[ItemFactory::DAMAGE_MULT_FIRE_MOD] = static_cast<float>(dval);
+			else if (!strcmp(pAttrib->Name(), "modchance_damage_mult_ice_mod") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
+				m_item_data->m_modchance[ItemFactory::DAMAGE_MULT_ICE_MOD] = static_cast<float>(dval);
+			else if (!strcmp(pAttrib->Name(), "modchance_damage_mult_air_mod") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
+				m_item_data->m_modchance[ItemFactory::DAMAGE_MULT_AIR_MOD] = static_cast<float>(dval);
+			else if (!strcmp(pAttrib->Name(), "modchance_attack_speed_mod") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
+				m_item_data->m_modchance[ItemFactory::ATTACK_SPEED_MOD] = static_cast<float>(dval);
+			else if (!strcmp(pAttrib->Name(), "modchance21") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
+				m_item_data->m_modchance[21] = static_cast<float>(dval);
+			else if (!strcmp(pAttrib->Name(), "modchance_attack_mod") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
+				m_item_data->m_modchance[ItemFactory::ATTACK_MOD] = static_cast<float>(dval);
+			else if (!strcmp(pAttrib->Name(), "modchance_power_mod") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
+				m_item_data->m_modchance[ItemFactory::POWER_MOD] = static_cast<float>(dval);
+			else if (!strcmp(pAttrib->Name(), "modchance_mage_fire_skills_mod") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
+				m_item_data->m_modchance[ItemFactory::MAGE_FIRE_SKILLS_MOD] = static_cast<float>(dval);
+			else if (!strcmp(pAttrib->Name(), "modchance_mage_ice_skills_mod") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
+				m_item_data->m_modchance[ItemFactory::MAGE_ICE_SKILLS_MOD] = static_cast<float>(dval);
+			else if (!strcmp(pAttrib->Name(), "modchance_mage_air_skills_mod") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
+				m_item_data->m_modchance[ItemFactory::MAGE_AIR_SKILLS_MOD] = static_cast<float>(dval);
+			else if (!strcmp(pAttrib->Name(), "modchance27") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
+				m_item_data->m_modchance[27] = static_cast<float>(dval);
+			else if (!strcmp(pAttrib->Name(), "modchance28") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
+				m_item_data->m_modchance[28] = static_cast<float>(dval);
+			else if (!strcmp(pAttrib->Name(), "modchance29") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
+				m_item_data->m_modchance[29] = static_cast<float>(dval);
+			else if (!strcmp(pAttrib->Name(), "modchance39") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
+				m_item_data->m_modchance[30] = static_cast<float>(dval);
 
 			i++;
 			pAttrib=pAttrib->Next();
@@ -285,7 +370,7 @@ void ItemLoader::searchItemBasicData(TiXmlNode* pParent)
 std::list<ItemBasicData*>* ItemLoader::loadItemBasicData(const char* pFilename)
 {
 	// Standard Modifikator Verteilung fuer Waffen
-	for (int i=0; i<31; i++)
+	/*for (int i=0; i<31; i++)
 	{
 		m_weapon_mod[i] = 0;
 	}
@@ -298,8 +383,8 @@ std::list<ItemBasicData*>* ItemLoader::loadItemBasicData(const char* pFilename)
 	m_weapon_mod[ItemFactory::DAMAGE_AIR_MOD] = 0.10;
 	m_weapon_mod[ItemFactory::ATTACK_MOD] = 0.1;
 	m_weapon_mod[ItemFactory::POWER_MOD] = 0.1;
-	m_weapon_mod[ItemFactory::DAMAGE_MULT_PHYS_MOD] = 0.1;
-
+	m_weapon_mod[ItemFactory::DAMAGE_MULT_PHYS_MOD] = 0.1;*/
+	
 	m_item_data = 0;
 	m_item_list = new std::list<ItemBasicData*>;
 

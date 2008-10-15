@@ -660,6 +660,8 @@ void ItemFactory::init()
 			cout << "m_max_enchant" << " = " << (*iter)->m_max_enchant << endl;
 			cout << "------------------------------------------------" << endl;
 			*/
+			DEBUG1("m_attack_range = %f", (*iter)->m_weapon_attr->m_attack_range);
+			DEBUG1("m_damage.m_min_damage[Damage::PHYSICAL] = %f", (*iter)->m_weapon_attr->m_damage.m_min_damage[Damage::PHYSICAL]);
 			registerItem((*iter)->m_type, (*iter)->m_subtype, *iter);
 			*iter++;
 		}

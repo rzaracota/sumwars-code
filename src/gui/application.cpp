@@ -276,6 +276,9 @@ bool Application::configureOgre()
 bool Application::setupResources()
 {
 	DEBUG("initalizing resources");
+#ifdef NOMIPMAPS
+	Ogre::TextureManager::getSingleton().setDefaultNumMipmaps(0);
+#endif
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../resources/models", "FileSystem", "General");
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../resources/materials/scripts", "FileSystem", "General");
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../resources/materials/textures", "FileSystem", "General");
