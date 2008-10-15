@@ -106,10 +106,10 @@ void Scene::registerMeshes()
 	registerObject("fence5","fence5.mesh","");
 	registerObject("wall1","wall1.mesh","");
 	registerObject("wall2","wall2.mesh","");
-	registerObject("wall3","wall3.mesh","");
+	registerObject("wall3","rect81","");
 	registerObject("smallWall1","smallWall1.mesh","");
 	registerObject("smallWall2","smallWall2.mesh","");
-	registerObject("stones3","stones3.mesh","");
+	registerObject("stones3","square44","");
 
 	// Geschosse
 	registerProjectile(Projectile::ARROW,"arrow.mesh","");

@@ -313,10 +313,10 @@ bool Application::setupResources()
 
 	Ogre::Plane plane(Ogre::Vector3::UNIT_Y, 0);
 
-	Ogre::MeshManager::getSingleton().createPlane("Tile", Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME, plane,100,100,1,1,true,1,1,1,Ogre::Vector3::UNIT_X);
+	Ogre::MeshManager::getSingleton().createPlane("square44", Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME, plane,200,200,1,1,true,1,1,1,Ogre::Vector3::UNIT_X);
 
 
-	Ogre::MeshManager::getSingleton().createPlane("Item", Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME, plane,25,25,1,1,true,1,1,1,Ogre::Vector3::UNIT_X);
+	Ogre::MeshManager::getSingleton().createPlane("rect81", Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME, plane,400,50,1,1,true,1,1,1,Ogre::Vector3::UNIT_X);
 
 
 
