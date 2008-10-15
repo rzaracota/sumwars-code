@@ -43,12 +43,12 @@ int ObjectLoader::generateObjects(TiXmlElement* pElement, string element)
 			else if (!strcmp(pAttrib->Name(), "fraction"))
 			{
 				if (!strcmp(pAttrib->Value(), "MONSTER"))
-					m_monster_data->m_type_info.m_fraction = WorldObject::TypeInfo::FRAC_MONSTER;
+					m_monster_data->m_fraction = WorldObject::FRAC_MONSTER;
 			}
 			else if (!strcmp(pAttrib->Name(), "category"))
 			{
 				if (!strcmp(pAttrib->Value(), "GOBLIN"))
-					m_monster_data->m_type_info.m_category = WorldObject::TypeInfo::GOBLIN;
+					m_monster_data->m_category = WorldObject::GOBLIN;
 			}
 
 			i++;

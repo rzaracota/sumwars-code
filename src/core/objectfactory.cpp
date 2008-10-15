@@ -117,8 +117,8 @@ void ObjectFactory::init()
 	// Lich Type Informationen
 	mdata->m_type_info.m_type = WorldObject::TypeInfo::TYPE_MONSTER;
 	mdata->m_type_info.m_subtype = "lich";
-	mdata->m_type_info.m_fraction = WorldObject::TypeInfo::FRAC_UNDEAD;
-	mdata->m_type_info.m_category = WorldObject::TypeInfo::UNDEAD;
+	mdata->m_fraction = WorldObject::FRAC_UNDEAD;
+	mdata->m_category = WorldObject::UNDEAD;
 
 	// Lich Drop Informationen
 	p[0] = 0.1; p[1] = 0.2; p[2] = 0.2; p[3] = 0.2;
@@ -172,8 +172,8 @@ void ObjectFactory::init()
 	// Goblin dog Informationen
 	mdata->m_type_info.m_type = WorldObject::TypeInfo::TYPE_MONSTER;
 	mdata->m_type_info.m_subtype ="gob_dog";
-	mdata->m_type_info.m_fraction = WorldObject::TypeInfo::FRAC_MONSTER;
-	mdata->m_type_info.m_category = WorldObject::TypeInfo::ANIMAL;
+	mdata->m_fraction = WorldObject::FRAC_MONSTER;
+	mdata->m_category = WorldObject::ANIMAL;
 
 	// Goblin dog Drop Informationen
 	p[0] = 0.1; p[1] = 0.2; p[2] = 0.2; p[3] = 0.2;

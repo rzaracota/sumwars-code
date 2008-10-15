@@ -41,7 +41,7 @@ bool Player::destroy()
 {
 	DEBUG5("leave Party");
 	DEBUG5("destroy");
-	getWorld()->getParty(getTypeInfo()->m_fraction)->removeMember(getId());
+	getWorld()->getParty(m_fraction)->removeMember(getId());
 	return Creature::destroy();
 }
 
@@ -55,7 +55,7 @@ bool Player::init()
 	m_package_number =0;
 	setTradeId(0);
 	getTypeInfo()->m_type = TypeInfo::TYPE_PLAYER;
-	getTypeInfo()->m_category = TypeInfo::HUMAN;
+	m_category = HUMAN;
 	Party* p = getWorld()->getEmptyParty();
 	if (p==0)
 	{
@@ -63,7 +63,7 @@ bool Player::init()
 	}
 	p->clear();
 	p->addMember(getId());
-	getTypeInfo()->m_fraction = (TypeInfo::Fraction) (p->getId() + TypeInfo::FRAC_PLAYER_PARTY);
+	m_fraction = (Fraction) (p->getId() + FRAC_PLAYER_PARTY);
 	DEBUG("opened Party %i",p->getId());
 
 	getShape()->m_type = Shape::CIRCLE;
@@ -120,7 +120,7 @@ bool Player::onGamefieldClick(ClientCommand* command)
 		// Unterscheidung Zielobject vs kein Zielobject
 		if (wo !=0)
 		{
-			rel = getWorld()->getRelation(getTypeInfo()->m_fraction,wo);
+			rel = getWorld()->getRelation(m_fraction,wo);
 
 			if (command->m_button == LEFT_MOUSE_BUTTON)
 			{
@@ -765,7 +765,7 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 
 		case BUTTON_PARTY_APPLY:
 			DEBUG("apply to party %i",command->m_id);
-			p = getWorld()->getParty((WorldObject::TypeInfo::Fraction) (command->m_id + TypeInfo::FRAC_PLAYER_PARTY));
+			p = getWorld()->getParty((WorldObject::Fraction) (command->m_id + FRAC_PLAYER_PARTY));
 			if (p->getNrMembers()==0)
 				break;
 			p->addCandidate(getId());
@@ -775,15 +775,15 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 		case BUTTON_PARTY_ACCEPT:
 			DEBUG("accept %i",command->m_id)
 
-			p = getWorld()->getParty(getTypeInfo()->m_fraction);
+			p = getWorld()->getParty(m_fraction);
 			p ->acceptCandidate(command->m_id);
 			// FIXME: Spieler ausgeben lassen !
 			wo = getWorld()->getObject(command->m_id,getGridLocation()->m_region);
 			if (wo !=0)
 			{
-				p2 = getWorld()->getParty(wo->getTypeInfo()->m_fraction);
+				p2 = getWorld()->getParty(wo->getFraction());
 				p2->removeMember(command->m_id);
-				wo->getTypeInfo()->m_fraction = getTypeInfo()->m_fraction;
+				wo->setFraction(m_fraction);
 			}
 
 			break;
@@ -1834,7 +1834,7 @@ void Player::toStringComplete(CharConv* cv)
 
 
 	// Party Informationen
-	getWorld()->getParty(getTypeInfo()->m_fraction)->toString(cv);
+	getWorld()->getParty(m_fraction)->toString(cv);
 
 }
 

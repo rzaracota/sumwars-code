@@ -381,9 +381,9 @@ short World::insertRegion(Region* region, int rnr)
 
 }
 
-WorldObject::Relation World::getRelation(WorldObject::TypeInfo::Fraction frac, WorldObject* wo)
+WorldObject::Relation World::getRelation(WorldObject::Fraction frac, WorldObject* wo)
 {
-	WorldObject::TypeInfo::Fraction f = wo->getTypeInfo()->m_fraction;
+	WorldObject::Fraction f = wo->getFraction();
 
 	DEBUG5("frac1 %i frac2 %i",frac,f);
 
@@ -392,31 +392,31 @@ WorldObject::Relation World::getRelation(WorldObject::TypeInfo::Fraction frac, W
 		return 	WorldObject::NEUTRAL;
 	}
 
-	if (frac == WorldObject::TypeInfo::NOFRACTION)
+	if (frac == WorldObject::NOFRACTION)
 		return WorldObject::NEUTRAL;
-	else if (frac <=  WorldObject::TypeInfo::FRAC_MONSTER)
+	else if (frac <=  WorldObject::FRAC_MONSTER)
 	{
-		if (frac ==  wo->getTypeInfo()->m_fraction)
+		if (frac ==  wo->getFraction())
 			return WorldObject::ALLIED;
-		else if (wo->getTypeInfo()->m_fraction==WorldObject::TypeInfo::NOFRACTION)
+		else if (wo->getFraction()==WorldObject::NOFRACTION)
 			return WorldObject::NEUTRAL;
 		else
 			return WorldObject::HOSTILE;
 	}
-	else if (frac ==WorldObject::TypeInfo::FRAC_HOSTILE_TO_ALL)
+	else if (frac ==WorldObject::FRAC_HOSTILE_TO_ALL)
 	{
 		return WorldObject::HOSTILE;
 	}
 	else
 	{
 
-		if (f == WorldObject::TypeInfo::NOFRACTION)
+		if (f == WorldObject::NOFRACTION)
 			return WorldObject::NEUTRAL;
-		else if (f <=  WorldObject::TypeInfo::FRAC_HOSTILE_TO_ALL)
+		else if (f <=  WorldObject::FRAC_HOSTILE_TO_ALL)
 			return WorldObject::HOSTILE;
 		else
 		{
-			return (m_parties[frac - WorldObject::TypeInfo::FRAC_PLAYER_PARTY].getRelations())[f- WorldObject::TypeInfo::FRAC_PLAYER_PARTY];
+			return (m_parties[frac - WorldObject::FRAC_PLAYER_PARTY].getRelations())[f- WorldObject::FRAC_PLAYER_PARTY];
 		}
 	}
 }

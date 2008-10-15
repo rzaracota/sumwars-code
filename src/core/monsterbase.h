@@ -25,6 +25,18 @@ struct MonsterBasicData
 	WorldObject::TypeInfo m_type_info;
 	
 	/**
+	 * \var WorldObject::Category m_category
+	 * \brief Kategorie des Objektes
+	 */
+	WorldObject::Category m_category;
+
+	/**
+	 * \var WorldObject::Fraction m_fraction
+	 * \brief Fraktion des Objektes
+	 */
+	WorldObject::Fraction m_fraction;
+	
+	/**
 	 * \var DropSlot m_drop_slots[4]
 	 * \brief Beschreibung der Items die das Monster droppen kann, wenn es stirbt
 	 */

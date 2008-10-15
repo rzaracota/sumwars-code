@@ -1,6 +1,6 @@
 #include "projectile.h"
 
-Projectile::Projectile(World* w,ProjectileType type, WorldObject::TypeInfo::Fraction fr, int id)
+Projectile::Projectile(World* w,ProjectileType type, WorldObject::Fraction fr, int id)
 {
 	m_id = id;
 	m_type = type;

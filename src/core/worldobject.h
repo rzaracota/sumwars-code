@@ -148,40 +148,7 @@ class WorldObject {
 		 */
 		typedef std::string ObjectSubtype;
 
-		/**
-		 * \enum Category
-		 * \brief Verschiedene Kategorien von Lebewesen
-		 */
-		enum Category
-		{
-			NOCATEGORY =0,
-			HUMAN = 0x10,
-			DEMON = 0x20,
-			UNDEAD = 0x40,
-			DWARF = 0x80,
-			DRAKE = 0x100,
-			FAIRY = 0x200,
-			GOBLIN = 0x400,
-			ANIMAL = 0x800,
-			SUMMONED = 0x1000
-		};
-
-		/**
-		 * \enum Fraction
-		 * \brief Parteien fuer die Lebewesen kaempfen koennen
-		 */
-		enum Fraction
-		{
-			NOFRACTION = 0,
-			FRAC_HUMAN = 1,
-			FRAC_DEMON = 2,
-			FRAC_UNDEAD = 3,
-			FRAC_DWARF = 4,
-			FRAC_SUMMONER = 5,
-			FRAC_MONSTER = 6,
-			FRAC_HOSTILE_TO_ALL=9,
-			FRAC_PLAYER_PARTY = 10,
-		};
+		
 
 
 
@@ -197,21 +164,46 @@ class WorldObject {
 		*/
 		ObjectSubtype m_subtype;
 
-		/**
-		 * \var Category m_category
-		 * \brief Kategorie des Objektes
-		 */
-		Category m_category;
-
-		/**
-		 * \var Fraction m_fraction
-		 * \brief Fraktion des Objektes
-		 */
-		Fraction m_fraction;
+		
 
 	};
 
 
+	/**
+	 * \enum Category
+	 * \brief Verschiedene Kategorien von Lebewesen
+	 */
+	enum Category
+	{
+		NOCATEGORY =0,
+		HUMAN = 0x10,
+		DEMON = 0x20,
+		UNDEAD = 0x40,
+		DWARF = 0x80,
+		DRAKE = 0x100,
+		FAIRY = 0x200,
+		GOBLIN = 0x400,
+		ANIMAL = 0x800,
+		SUMMONED = 0x1000
+	};
+
+	/**
+	 * \enum Fraction
+	 * \brief Parteien fuer die Lebewesen kaempfen koennen
+	*/
+	enum Fraction
+	{
+		NOFRACTION = 0,
+		FRAC_HUMAN = 1,
+		FRAC_DEMON = 2,
+		FRAC_UNDEAD = 3,
+		FRAC_DWARF = 4,
+		FRAC_SUMMONER = 5,
+		FRAC_MONSTER = 6,
+		FRAC_HOSTILE_TO_ALL=9,
+		FRAC_PLAYER_PARTY = 10,
+	};
+	
 	/**
 	 * \enum State
 	 * \brief zaehlt Zustaende von Objekten auf
@@ -497,6 +489,35 @@ class WorldObject {
 	}
 	
 	/**
+	/* \fn Fraction getFraction()
+	 * \brief Gibt die Fraktion aus
+	 */
+	Fraction getFraction()
+	{
+		return m_fraction;
+	}
+	
+	/**
+	/* \fn void setFraction(Fraction fr)
+	 * \brief setzt die Fraktion
+	 * \param fr Fraktion
+	 */
+	void setFraction(Fraction fr)
+	{
+		m_fraction = fr;
+	}
+	
+	/**
+	 * \fn Category getCategory()
+	 * \brief Gibt die Kategorie aus
+	 */
+	Category getCategory()
+	{
+		return m_category;
+	}
+	
+	
+	/**
 	 * \fn void setId(int id)
 	 * \brief Setzt die ID eines Objektes
 	 */
@@ -561,6 +582,18 @@ class WorldObject {
 	 * \brief Gibt die Geschwindigkeit des Objektes an
 	 */
 	Vector m_speed;
+	
+	/**
+	 * \var Category m_category
+	 * \brief Kategorie des Objektes
+	 */
+	Category m_category;
+
+	/**
+	 * \var Fraction m_fraction
+	 * \brief Fraktion des Objektes
+	 */
+	Fraction m_fraction;
 		
 //Private stuff
 private:

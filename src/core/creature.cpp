@@ -586,7 +586,7 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 	// Startpunkt fuer Geschosse
 	// aeusserer Rand des Ausfuehrenden plus 5%
 	Vector sproj;
-	TypeInfo::Fraction fr = getTypeInfo()->m_fraction;
+	Fraction fr = m_fraction;
 	sproj = pos + dir*1.05*s.m_radius;
 
 	// Standardtyp fuer Pfeile festlegen
@@ -1926,7 +1926,7 @@ void Creature::calcStatusModCommand()
 
 			DEBUG5("checking obj %i",(*i)->getId());
 			// Fuer feindliche Lebewesen
-			if (getWorld()->getRelation(getTypeInfo()->m_fraction,*i) == WorldObject::HOSTILE)
+			if (getWorld()->getRelation(m_fraction,*i) == WorldObject::HOSTILE)
 			{
 				// Abstand zum eigenen Mittelpunkt berechnen
 				DEBUG5("hostile");
@@ -2245,7 +2245,7 @@ bool Creature::update (float time)
 			d.m_min_damage[Damage::FIRE] = 500*m_base_attr_mod.m_magic_power*0.0003;
 			d.m_max_damage[Damage::FIRE] = 500*m_base_attr_mod.m_magic_power*0.0005;
 			d.m_multiplier[Damage::FIRE]=1;
-			d.m_attacker_fraction = getTypeInfo()->m_fraction;
+			d.m_attacker_fraction = m_fraction;
 
 			WorldObjectList res;
 			res.clear();
@@ -2664,7 +2664,7 @@ void Creature::calcDamage(Action::ActionType act,Damage& dmg)
 	dmg.init();
 
 	dmg.m_attacker_id = getId();
-	dmg.m_attacker_fraction = getTypeInfo()->m_fraction;
+	dmg.m_attacker_fraction = m_fraction;
 
 	DEBUG5("Calc Damage for action %i",m_action.m_type);
 	for (int i=0;i<4;i++)
@@ -2693,7 +2693,7 @@ void Creature::calcDamage(Action::ActionType act,Damage& dmg)
 	if (m_dyn_attr.m_status_mod_time[Damage::CONFUSED]>0)
 	{
 		// Fraktion auf feindlich gegen alle setzen
-		dmg.m_attacker_fraction = TypeInfo::FRAC_HOSTILE_TO_ALL;
+		dmg.m_attacker_fraction = FRAC_HOSTILE_TO_ALL;
 	}
 }
 
@@ -3132,7 +3132,7 @@ void Creature::calcAbilityDamage(Action::ActionType act,Damage& dmg)
 		case Action::LIGHT_BEAM:
 		case Action::BURNING_SUN:
 			dmg.init();
-			dmg.m_attacker_fraction = getTypeInfo()->m_fraction;
+			dmg.m_attacker_fraction = m_fraction;
 			dmg.m_special_flags |= Damage::UNBLOCKABLE;
 			dmg.m_status_mod_power[Damage::BLIND] = (short) (1.5*m_base_attr_mod.m_willpower);
 			break;
@@ -3140,7 +3140,7 @@ void Creature::calcAbilityDamage(Action::ActionType act,Damage& dmg)
 		case Action::HYPNOSIS:
 		case Action::HYPNOSIS2:
 			dmg.init();
-			dmg.m_attacker_fraction = getTypeInfo()->m_fraction;
+			dmg.m_attacker_fraction = m_fraction;
 			dmg.m_special_flags |= Damage::UNBLOCKABLE;
 			dmg.m_status_mod_power[Damage::CONFUSED] = m_base_attr_mod.m_willpower;
 			break;
@@ -3167,7 +3167,7 @@ void Creature::calcAbilityDamage(Action::ActionType act,Damage& dmg)
 
 		case Action::ACID:
 			dmg.init();
-			dmg.m_attacker_fraction = getTypeInfo()->m_fraction;
+			dmg.m_attacker_fraction = m_fraction;
 			dmg.m_special_flags |= Damage::UNBLOCKABLE;
 			dmg.m_status_mod_power[Damage::POISONED] = 2*m_base_attr_mod.m_willpower;
 			break;
@@ -3426,7 +3426,7 @@ void Creature::takeDamage(Damage* d)
 	if ((m_base_attr_mod.m_special_flags & STATIC_SHIELD) && dmg > m_base_attr_mod.m_max_health * 0.02)
 	{
 		// Projektil Statikschild erzeugen
-		Projectile* pr = new Projectile(getWorld(),Projectile::STATIC_SHIELD,getTypeInfo()->m_fraction, getWorld()->getValidProjectileId());
+		Projectile* pr = new Projectile(getWorld(),Projectile::STATIC_SHIELD,m_fraction, getWorld()->getValidProjectileId());
 
 		// Schaden festlegen
 		Damage dmg;
@@ -3434,7 +3434,7 @@ void Creature::takeDamage(Damage* d)
 		dmg.m_min_damage[Damage::AIR] = m_base_attr_mod.m_magic_power*0.2;
 		dmg.m_max_damage[Damage::AIR] = m_base_attr_mod.m_magic_power*0.3;
 		dmg.m_multiplier[Damage::AIR]=1;
-		dmg.m_attacker_fraction = getTypeInfo()->m_fraction;
+		dmg.m_attacker_fraction = m_fraction;
 		memcpy(pr->getDamage(),&dmg,sizeof(Damage));
 		pr->getShape()->m_radius =getShape()->m_radius+1;
 		getWorld()->insertProjectile(pr,getShape()->m_center,getGridLocation()->m_region);
@@ -3771,8 +3771,8 @@ void Creature::toString(CharConv* cv)
 {
 	DEBUG5("Creature::tostring");
 	WorldObject::toString(cv);
-	cv->toBuffer((short) getTypeInfo()->m_category);
-	cv->toBuffer((char) getTypeInfo()->m_fraction);
+	cv->toBuffer((short) m_category);
+	cv->toBuffer((char) m_fraction);
 
 	m_action.toString(cv);
 	m_command.toString(cv);
@@ -3833,10 +3833,10 @@ void Creature::fromString(CharConv* cv)
 	char ctmp;
 	short stmp;
 	cv->fromBuffer<short>(stmp);
-	getTypeInfo()->m_category = (TypeInfo::Category) stmp;
+	m_category = (Category) stmp;
 
 	cv->fromBuffer<char>(ctmp);
-	getTypeInfo()->m_fraction = (TypeInfo::Fraction) ctmp;
+	m_fraction = (Fraction) ctmp;
 
 	m_action.fromString(cv);
 	m_command.fromString(cv);

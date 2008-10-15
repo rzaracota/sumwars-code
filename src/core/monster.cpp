@@ -35,8 +35,8 @@ Monster::Monster(World* world, int id,MonsterBasicData& data)
 
 	getTypeInfo()->m_type = data.m_type_info.m_type;
 	getTypeInfo()->m_subtype = data.m_type_info.m_subtype;
-	getTypeInfo()->m_category = data.m_type_info.m_category;
-	getTypeInfo()->m_fraction = data.m_type_info.m_fraction;
+	m_category = data.m_category;
+	m_fraction = data.m_fraction;
 
 
 	memcpy(m_drop_slots,&data.m_drop_slots, 4*sizeof(DropSlot));
@@ -152,7 +152,7 @@ void Monster::updateCommand()
 			WorldObjectList::iterator it;
 			for (it = ret.begin(); it != ret.end();)
 			{
-				if (getWorld()->getRelation(getTypeInfo()->m_fraction,*it) == ALLIED )
+				if (getWorld()->getRelation(m_fraction,*it) == ALLIED )
 				{
 					it = ret.erase(it);
 				}

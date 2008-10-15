@@ -380,13 +380,13 @@ public:
 	}
 
 	/**
-	 * \fn Party* getParty(WorldObject::TypeInfo::Fraction frac)
+	 * \fn Party* getParty(WorldObject::Fraction frac)
 	 * \brief Gibt die Party zurueck, welche zu der angegebenen Fraktion gehoert
 	 * \param frac Fraktion eines Spielers
 	 */
-	Party* getParty(WorldObject::TypeInfo::Fraction frac)
+	Party* getParty(WorldObject::Fraction frac)
 	{
-		return &(m_parties[frac - WorldObject::TypeInfo::FRAC_PLAYER_PARTY]);
+		return &(m_parties[frac - WorldObject::FRAC_PLAYER_PARTY]);
 	}
 
 	/**
@@ -405,12 +405,12 @@ public:
 	Party* getEmptyParty();
 
 	/**
-	 * \fn Party::Relation getRelation(WorldObject::TypeInfo::Fraction frac, WorldObject* wo)
+	 * \fn Party::Relation getRelation(WorldObject::Fraction frac, WorldObject* wo)
 	 * \brief Gibt die Beziehung eines Lebewesens zu einer Fraktion
 	 * \param frac Fraktion
 	 * \param wo Objekt
 	 */
-	WorldObject::Relation getRelation(WorldObject::TypeInfo::Fraction frac, WorldObject* wo);
+	WorldObject::Relation getRelation(WorldObject::Fraction frac, WorldObject* wo);
 
 
 	/**
