@@ -713,7 +713,7 @@
 </Item>
 <!-- AXES-->
 <!-- ONE HANDED AXES -->
-<Item type="weapon" subtype="dagger_sw" size="medium">
+<Item type="weapon" subtype="hammer_axe" size="medium">
 	<Mesh file="battleaxe.mesh" />
 	<Attribute
 		price="50"
