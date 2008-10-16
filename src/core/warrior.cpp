@@ -121,7 +121,7 @@ bool Warrior::init ()
 	equ->swapItem(si,Equipement::ARMOR);
 
 	si = ItemFactory::createItem(Item::WEAPON,"horse_sw");
-	equ->swapItem(si,Equipement::MEDIUM_ITEMS+1);
+	equ->swapItem(si,Equipement::BIG_ITEMS+1);
 
 	si = ItemFactory::createItem(Item::WEAPON,"battle_axe");
 	equ->swapItem(si,Equipement::BIG_ITEMS);
