@@ -568,8 +568,8 @@
 </Item>
 
 <!-- TWO HANDED SWORDS -->
-<!-- bauernzweihaender -->
-<Item type="weapon" subtype="2h_sw" size="large">
+<!-- farmers two hand sword-->
+<Item type="weapon" subtype="farm2h_sw" size="big">
 	<Mesh file="sword.mesh" />
 	<Attribute
 		price="100"
@@ -592,8 +592,8 @@
 	/>
 </Item>
 
-<!-- soeldnerklinge -->
-<Item type="weapon" subtype="l3_2h_sw" size="large">
+<!-- mercenary blade -->
+<Item type="weapon" subtype="merc2h_sw" size="big">
 	<Mesh file="sword.mesh" />
 	<Attribute
 		price="300"
@@ -616,8 +616,8 @@
 	/>
 </Item>
 
-<!-- stahlzweihaender -->
-<Item type="weapon" subtype="steel2h_sw" size="large">
+<!-- two handed steelsword -->
+<Item type="weapon" subtype="steel2h_sw" size="big">
 	<Mesh file="sword.mesh" />
 	<Attribute
 		price="800"
@@ -641,7 +641,7 @@
 </Item>
 
 <!-- smash sword -->
-<Item type="weapon" subtype="smash_sw" size="large">
+<Item type="weapon" subtype="smash_sw" size="big">
 	<Mesh file="sword.mesh" />
 	<Attribute
 		price="1500"
@@ -665,7 +665,7 @@
 </Item>
 
 <!-- horse killer -->
-<Item type="weapon" subtype="horse_sw" size="large">
+<Item type="weapon" subtype="horse_sw" size="big">
 	<Mesh file="sword.mesh" />
 	<Attribute
 		price="1500"
@@ -688,6 +688,29 @@
 	/>
 </Item>
 
+<!-- Bastardschwert -->
+<Item type="weapon" subtype="bast_sw" size="big">
+	<Mesh file="sword.mesh" />
+	<Attribute
+		price="1500"
+		min_enchant="50"
+		max_enchant="200"
+	/>
+	<EquipEffect />
+	<WeaponAttribute
+		damage_min_physical="21"
+		damage_max_physical="36"
+		damage_attack="15"
+		damage_power="60"
+		attack_range="1.5"
+		two_handed="yes"
+		dattack_speed="-400"
+	/>
+	<DropChance
+		level="13"
+		probability="1.0"
+	/>
+</Item>
 <!-- AXES-->
 <!-- ONE HANDED AXES -->
 <Item type="weapon" subtype="dagger_sw" size="medium">
