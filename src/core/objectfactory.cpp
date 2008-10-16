@@ -14,10 +14,17 @@ World* ObjectFactory::m_world;
 
 std::map<WorldObject::TypeInfo::ObjectSubtype, MonsterBasicData*> ObjectFactory::m_monster_data;
 
+std::map<WorldObject::TypeInfo::ObjectSubtype, FixedObjectData*> ObjectFactory::m_fixed_object_data;
+
 void ObjectFactory::registerMonster(WorldObject::TypeInfo::ObjectSubtype subtype, MonsterBasicData* data)
 {
 	DEBUG5("registered monster for subtype %s",subtype.c_str());
 	m_monster_data.insert(make_pair(subtype,data));
+}
+
+void ObjectFactory::registerFixedObject(WorldObject::TypeInfo::ObjectSubtype subtype, FixedObjectData* data)
+{
+	m_fixed_object_data.insert(std::make_pair(subtype,data));
 }
 
 void ObjectFactory::init()
@@ -218,6 +225,98 @@ void ObjectFactory::init()
 	mdata->m_ai_sight_range = 8;
 
 	registerMonster("gob_dog",mdata);
+	
+	FixedObjectData* fdata;
+	
+	fdata = new FixedObjectData;
+	fdata->m_layer = WorldObject::LAYER_BASE | WorldObject::LAYER_AIR;
+	fdata->m_shape.m_type = Shape::CIRCLE;
+	fdata->m_shape.m_radius = 0.15;
+	registerFixedObject("tree1",fdata);
+	
+	fdata = new FixedObjectData;
+	fdata->m_layer = WorldObject::LAYER_BASE | WorldObject::LAYER_AIR;
+	fdata->m_shape.m_type = Shape::CIRCLE;
+	fdata->m_shape.m_radius = 0.15;
+	registerFixedObject("tree2",fdata);
+	
+	fdata = new FixedObjectData;
+	fdata->m_layer = WorldObject::LAYER_BASE | WorldObject::LAYER_AIR;
+	fdata->m_shape.m_type = Shape::CIRCLE;
+	fdata->m_shape.m_radius = 0.15;
+	registerFixedObject("tree3",fdata);
+	
+	fdata = new FixedObjectData;
+	fdata->m_layer = WorldObject::LAYER_BASE | WorldObject::LAYER_AIR;
+	fdata->m_shape.m_type = Shape::CIRCLE;
+	fdata->m_shape.m_radius = 0.15;
+	registerFixedObject("tree1",fdata);
+	
+
+	fdata = new FixedObjectData;
+	fdata->m_layer = WorldObject::LAYER_BASE | WorldObject::LAYER_AIR;
+	fdata->m_shape.m_type = Shape::RECT;
+	fdata->m_shape.m_extent = Vector(3.84,0.15);
+	registerFixedObject("fence1",fdata);
+	
+	fdata = new FixedObjectData;
+	fdata->m_shape.m_type = Shape::RECT;
+	fdata->m_shape.m_extent = Vector(3.84,0.15);
+	registerFixedObject("fence2",fdata);
+	
+	fdata = new FixedObjectData;
+	fdata->m_layer = WorldObject::LAYER_BASE | WorldObject::LAYER_AIR;
+	fdata->m_shape.m_type = Shape::RECT;
+	fdata->m_shape.m_extent = Vector(3.84,0.15);
+	registerFixedObject("fence3",fdata);
+	
+	fdata = new FixedObjectData;
+	fdata->m_layer = WorldObject::LAYER_BASE | WorldObject::LAYER_AIR;
+	fdata->m_shape.m_type = Shape::RECT;
+	fdata->m_shape.m_extent = Vector(3.84,0.15);
+	registerFixedObject("fence4",fdata);
+	
+	fdata = new FixedObjectData;
+	fdata->m_layer = WorldObject::LAYER_BASE | WorldObject::LAYER_AIR;
+	fdata->m_shape.m_type = Shape::RECT;
+	fdata->m_shape.m_extent = Vector(3.84,0.15);
+	registerFixedObject("fence5",fdata);
+	
+	fdata = new FixedObjectData;
+	fdata->m_layer = WorldObject::LAYER_BASE | WorldObject::LAYER_AIR;
+	fdata->m_shape.m_type = Shape::RECT;
+	fdata->m_shape.m_extent = Vector(3.04,0.61);
+	registerFixedObject("wall1",fdata);
+	
+	fdata = new FixedObjectData;
+	fdata->m_layer = WorldObject::LAYER_BASE | WorldObject::LAYER_AIR;
+	fdata->m_shape.m_type = Shape::RECT;
+	fdata->m_shape.m_extent = Vector(3.04,0.61);
+	registerFixedObject("wall2",fdata);
+	
+	fdata = new FixedObjectData;
+	fdata->m_layer = WorldObject::LAYER_BASE | WorldObject::LAYER_AIR;
+	fdata->m_shape.m_type = Shape::RECT;
+	fdata->m_shape.m_extent = Vector(3.04,0.61);
+	registerFixedObject("wall3",fdata);
+	
+	fdata = new FixedObjectData;
+	fdata->m_layer = WorldObject::LAYER_BASE | WorldObject::LAYER_AIR;
+	fdata->m_shape.m_type = Shape::RECT;
+	fdata->m_shape.m_extent = Vector(0.46,0.6);
+	registerFixedObject("smallWall1",fdata);
+	
+	fdata = new FixedObjectData;
+	fdata->m_layer = WorldObject::LAYER_BASE | WorldObject::LAYER_AIR;
+	fdata->m_shape.m_type = Shape::RECT;
+	fdata->m_shape.m_extent = Vector(0.46,0.6);
+	registerFixedObject("smallWall2",fdata);
+	
+	fdata = new FixedObjectData;
+	fdata->m_layer = WorldObject::LAYER_BASE | WorldObject::LAYER_AIR;
+	fdata->m_shape.m_type = Shape::RECT;
+	fdata->m_shape.m_extent = Vector(3.18,2.11);
+	registerFixedObject("stones3",fdata);
 }
 
 WorldObject* ObjectFactory::createObject(WorldObject::TypeInfo::ObjectType type, WorldObject::TypeInfo::ObjectSubtype subtype, int id)
@@ -268,16 +367,31 @@ WorldObject* ObjectFactory::createObject(WorldObject::TypeInfo::ObjectType type,
 	}
 	else if (type ==WorldObject::TypeInfo::TYPE_FIXED_OBJECT)
 	{
+	
+		DEBUG5("requested subtype: %s",subtype.c_str());
+		FixedObjectData* data;
+		std::map<WorldObject::TypeInfo::ObjectSubtype, FixedObjectData*>::iterator i;
+
+		i = m_fixed_object_data.find(subtype);
+		if (i== m_fixed_object_data.end())
+		{
+			ERRORMSG("subtype not found: %s",subtype.c_str());
+			i = m_fixed_object_data.find("tree1");
+		}
+		data = i->second;
+		
 		Shape* sp;
 		DEBUG5("create fixed object: %s",subtype.c_str());
 		ret = new FixedObject(m_world,id,subtype);
 
-		sp=ret->getShape();
+		sp=ret->getShape();		
+		memcpy(sp,&(data->m_shape),sizeof(Shape));
 		sp->m_angle =0;
 
-		ret->setState(WorldObject::STATE_STATIC);
-		ret->setLayer((WorldObject::LAYER_BASE | WorldObject::LAYER_AIR));
 
+		ret->setState(WorldObject::STATE_STATIC);
+		ret->setLayer(data->m_layer);
+/*
 		if (subtype =="fence1" || subtype =="fence2" || subtype =="fence3" || subtype =="fence4" || subtype =="fence5")
 		{
 			sp->m_type = Shape::RECT;
@@ -316,6 +430,7 @@ WorldObject* ObjectFactory::createObject(WorldObject::TypeInfo::ObjectType type,
 				sp->m_type = Shape::RECT;
 				sp->m_extent = Vector(3.18,2.11);
 		}
+		*/
 	}
 	return ret;
 }

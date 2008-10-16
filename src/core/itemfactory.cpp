@@ -663,7 +663,7 @@ void ItemFactory::init()
 			DEBUG5("m_attack_range %s = %f",(*iter)->m_subtype.c_str(), (*iter)->m_weapon_attr->m_attack_range);
 			DEBUG5("m_damage.m_min_damage[Damage::PHYSICAL] = %f", (*iter)->m_weapon_attr->m_damage.m_min_damage[Damage::PHYSICAL]);
 			registerItem((*iter)->m_type, (*iter)->m_subtype, *iter);
-			*iter++;
+			iter++;
 		}
 	}
 
@@ -678,7 +678,7 @@ void ItemFactory::init()
 		while (iter != drop_chance_list->end())
 		{
 			registerItemDrop( (*iter)->m_type, (*iter)->m_subtype, DropChance( (*iter)->m_level, (*iter)->m_probability, (*iter)->m_size) );
-			*iter++;
+			iter++;
 		}
 
 		// Liste aus Speicher loeschen
@@ -686,7 +686,7 @@ void ItemFactory::init()
 		while (iter != drop_chance_list->end())
 		{
 			delete *iter;
-			*iter++;
+			iter++;
 		}
 	}
 

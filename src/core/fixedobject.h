@@ -33,6 +33,17 @@
 
 #include "worldobject.h"
 
+struct FixedObjectData
+{
+	short m_layer;
+	
+	Shape m_shape;
+};
+	
+	
+
+
+
 /**
  * \class FixedObject
  * \brief Dieses Objekt stellt ein fixes Objekt dar. Es kann seine Position in der Welt nicht ver&auml;ndern.

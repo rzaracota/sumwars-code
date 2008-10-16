@@ -6,6 +6,7 @@
 #include <map>
 #include "monsterbase.h"
 #include "objectloader.h"
+#include "fixedobject.h"
 
 #include "../tinyxml/tinyxml.h"
 #include <string>
@@ -44,6 +45,12 @@ class ObjectFactory
 	static std::map<WorldObject::TypeInfo::ObjectSubtype, MonsterBasicData*> m_monster_data;
 	
 	/**
+	 * \var static std::map<WorldObject::TypeInfo::ObjectSubtype, FixedObjectData*> m_fixed_object_data
+	 * \brief Basisdaten zu den festen Objekten
+	 */
+	static std::map<WorldObject::TypeInfo::ObjectSubtype, FixedObjectData*> m_fixed_object_data;
+	
+	/**
 	 * \fn static init()
 	 * \brief registriert die Daten der Monster
 	 */
@@ -56,6 +63,15 @@ class ObjectFactory
 	 * \param data Daten des Monsters
 	 */
 	static void registerMonster(WorldObject::TypeInfo::ObjectSubtype subtype, MonsterBasicData* data);
+	
+	/**
+	 * \fn static void registerFixedObject(WorldObject::TypeInfo::ObjectSubtype subtype, FixedObjectData* data)
+	 * \brief Registriert die Daten fuer ein bestimmten Monstertyp
+	 * \param subtype Subtyp des Objektes
+	 * \param data Daten des festen Objekts
+	 */
+	static void registerFixedObject(WorldObject::TypeInfo::ObjectSubtype subtype, FixedObjectData* data);
+	
 };
 
 
