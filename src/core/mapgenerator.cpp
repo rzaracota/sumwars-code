@@ -175,7 +175,7 @@ void MapGenerator::createBaseMap(MapData* mdata, RegionData* rdata)
 	borderqu.push(std::make_pair(-1,-1));
 	
 	
-	while (!borderqu.empty() && markercnt <5)
+	while (!borderqu.empty() && markercnt <6)
 	{
 		// Feld entnehmen
 		point = borderqu.front();
@@ -231,6 +231,16 @@ void MapGenerator::createBorder(MapData* mdata, RegionData* rdata)
 	Matrix2d<char> bmap(hdimx,hdimy);
 	bmap.clear();
 	
+	// Orte fuer den Ausgang in den vier Richtungen
+	int exit[4][2];
+	int exitcount[4];
+	for (int i=0; i<4; i++)
+	{
+		exit[i][0] = nb[i][0]*-1000;
+		exit[i][1] = nb[i][1]*-1000;
+		exitcount[i] =1;
+	}
+	
 	for (int i=0; i<hdimx; i++)
 	{
 		for (int j=0; j< hdimy;j++)
@@ -251,6 +261,7 @@ void MapGenerator::createBorder(MapData* mdata, RegionData* rdata)
 			}
 			else
 			{
+				// wenn mindestens ein Feld betretbar ist, Gesamtfeld als betretbar markieren
 				if (*(mdata->m_base_map->ind(2*i,2*j)) >= 1 ||  *(mdata->m_base_map->ind(2*i+1,2*j))>= 1
 								  || *(mdata->m_base_map->ind(2*i,2*j+1)) >=1  || *(mdata->m_base_map->ind(2*i+1,2*j+1)) >= 1)
 				{
@@ -260,8 +271,51 @@ void MapGenerator::createBorder(MapData* mdata, RegionData* rdata)
 					*(mdata->m_base_map->ind(2*i+1,2*j+1)) =1;
 					
 					*(bmap.ind(i,j)) = -1;
+					
+					// Testen ob das Feld als Ausgang in Frage kommt
+					// Also am noerdlichsten, westlichsten usw liegt
+					for (int k=0; k<4; k++)
+					{
+						if (exit[k][0]*nb[k][0] + exit[k][1]*nb[k][1] < i*nb[k][0] + j*nb[k][1])
+						{
+							exit[k][0] =i;
+							exit[k][1] =j;
+							exitcount[k] =1;
+						}
+						if (exit[k][0]*nb[k][0] + exit[k][1]*nb[k][1] == i*nb[k][0] + j*nb[k][1] && Random::randi(exitcount[k]) ==0)
+						{
+							exit[k][0] =i;
+							exit[k][1] =j;
+							exitcount[k] ++;
+						}
+					}
 				}
 				
+			}
+		}
+	}
+	
+	// Ausgaenge platzieren
+	for (int k=0; k<4; k++)
+	{
+		std::string dirname[4] = {"west","east","north","south"};
+		std::string locname;
+		if (rdata->m_exit_directions[k])
+		{
+			int i = exit[k][0];
+			int j = exit[k][1];
+			 
+			i+= nb[k][0];
+			j+= nb[k][1];
+			locname = "exit_";
+			locname += dirname[k];
+			mdata->m_region->addLocation(locname,Vector(i*8+4,j*8+4));
+			
+			while (i>=0 && j>=0 && i< hdimx && j<hdimy)
+			{
+				*(bmap.ind(i,j)) = -1;
+				i+= nb[k][0];
+				j+= nb[k][1];
 			}
 		}
 	}
@@ -318,7 +372,17 @@ void MapGenerator::createBorder(MapData* mdata, RegionData* rdata)
 					mask +=1;
 				}
 				
+				// Wenn eines der Nachbarfelder im *leeren Raum* liegt
+				// dann keine Objekte setzen 
+				if (*(bmap.ind(nbi,nbj)) == 0)
+				{
+					skip = true;
+				}
+				
 			}
+			
+			if (skip)
+				continue;
 			
 			// Template und dessen Winkel bestimmen
 			templ = borders[bmask[mask]];
@@ -436,16 +500,16 @@ void MapGenerator::createPerlinNoise(Matrix2d<float> *data, int dimx, int dimy,i
 	// Raender anlegen
 	if (bounds)
 	{
-		float bnd = 0.1;
+		float bnd = 10;
 		float dist;
 		for (int i=0;i<dimx;i++)
 		{
 			for (int j=0;j<dimy;j++)
 			{
-				dist = (bnd + std::max(fabs(i-dimx/2)/dimx,fabs(j-dimy/2)/dimy)-0.5);
-				if (dist>0)
+				dist = std::min(std::min(i,dimx-i-1),std::min(j,dimy-j-1));
+				if (dist<bnd)
 				{
-					*(data->ind(i,j)) = *(data->ind(i,j))*(bnd-dist)/bnd + 1*dist/bnd;
+					*(data->ind(i,j)) = *(data->ind(i,j))*(dist)/bnd + (bnd-dist)/bnd;
 				}
 			}
 		}

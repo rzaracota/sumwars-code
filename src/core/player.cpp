@@ -115,7 +115,7 @@ bool Player::onGamefieldClick(ClientCommand* command)
 	{
 
 		DEBUG4("Kommando erhalten, zielid: %i",command->m_id);
-		wo = World::getWorld()->getObject(command->m_id,getGridLocation()->m_region);
+		wo = getRegion()->getObject(command->m_id);
 
 		// Unterscheidung Zielobject vs kein Zielobject
 		if (wo !=0)
@@ -778,7 +778,7 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 			p = World::getWorld()->getParty(m_fraction);
 			p ->acceptCandidate(command->m_id);
 			// FIXME: Spieler ausgeben lassen !
-			wo = World::getWorld()->getObject(command->m_id,getGridLocation()->m_region);
+			wo =getRegion()->getObject(command->m_id);
 			if (wo !=0)
 			{
 				p2 = World::getWorld()->getParty(wo->getFraction());

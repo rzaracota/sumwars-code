@@ -164,72 +164,6 @@ public:
 	 */
 	int newTrade(int trader1_id, int trader2_id);
 
-	/**
-	 * \fn WorldObject* getObject ( int id, short rid)
-	 * \brief Sucht WorldObject anhand seiner ID
-	 * \param id ID des gesuchten WorldObjects
-	 * \param rid ID der Region
-	 * \return Zeiger auf das gefundene WorldObject
-	 *
-	 * W&auml;hlt ein WorldObject anhand seiner ID aus. Gibt einen Zeiger auf das Objekt zur&uuml;ck, beziehungsweise NULL wenn das Objekt nicht gefunden wurde.
-	 */
-	WorldObject* getObject ( int id, short rid);
-
-
-	/**
-	 * \fn bool getObjectsInShape( Shape* shape, short region, WorldObjectList* result,short layer=WorldObject::LAYER_ALL, short group = WorldObject::GROUP_ALL, WorldObject* omit=0 )
-	 * \brief Sucht WorldObjects innerhalb eines Gebietes
-	 * \param shape Form des Gebietes
-	 * \param layer Ebene in der gesucht wird
-	 * \param region Region in der gesucht wird
-	 * \param result Liste, an die die gefundenen Objekte angehangen werden
-	 * \param layer Ebene in der gesucht wird
-	 * \param group Gruppen die durchsucht werden sollen
-	 * \param omit Objekt, das ausgelassen wird
-	 * \return bool, der angibt, ob die Operation erfolgreich war
-	 *
-	 * Alle gefundenen Objekte werden an das Ende der Liste result angehangen.
-	 * Wenn f&uuml;r selector ein NULL-Zeiger &uuml;bergeben wird, so werden die Objekte nicht selektiert.
-	 * Wenn f&uuml;r result ein NULL-Zeiger &uuml;bergeben wird, oder ein anderer Fehler auftritt, so wird false zur&uuml;ckgegeben, sonst true.
-	 */
-	bool getObjectsInShape( Shape* shape, short region, WorldObjectList* result,short layer=WorldObject::LAYER_ALL, short group = WorldObject::GROUP_ALL, WorldObject* omit=0 );
-
-
-	/**
-	 * \fn WorldObject* getObjectAt(Vector pos,  short region,short layer=WorldObject::LAYER_ALL, short group = WorldObject::GROUP_ALL)
-	 * \brief Sucht WorldObject an den gegebenen Koordinaten
-	 * \param pos Position
-	 * \param layer Ebene in der gesucht wird
-	 * \param region Region in der gesucht wird
-	 * \param layer Ebene in der gesucht wird
-	 * \param group Gruppen die durchsucht werden sollen
-	 * \return Zeiger auf das WorldObject, wenn sich an dem Punkt eines befindet, sonst NULL
-	 */
-	WorldObject* getObjectAt(Vector pos,  short region,short layer=WorldObject::LAYER_ALL, short group = WorldObject::GROUP_ALL);
-
-	/**
-	 * \fn void getObjectsOnLine( Line& line,  short region, WorldObjectList* result,short layer=WorldObject::LAYER_ALL, short group = WorldObject::GROUP_ALL, WorldObject* omit=0 )
-	 * \brief Sucht alle Objekte die auf der angegebenen Linie liegen
-	 * \param line Linie
-	 * \param region Region in der gesucht wird
-	 * \param result Liste, an die die gefundenen Objekte angehangen werden
-	 * \param layer Ebene in der gesucht wird
-	 * \param group Gruppen die durchsucht werden sollen
-	 * \param omit Objekt, das ausgelassen wird
-	 */
-	void getObjectsOnLine(Line& line ,  short region, WorldObjectList* result,short layer=WorldObject::LAYER_ALL, short group = WorldObject::GROUP_ALL, WorldObject* omit=0 );
-
-
-	/**
-	 * \fn bool  insertObject (WorldObject* object, Vector pos, short region)
-	 * \brief Fuegt WorldObject ein
-	 * \param object Zeiger auf das Objekt, welches eingefuegt werden soll
-	 * \param pos Ort an dem das Objekt eingefuegt wird
-	 * \param region Region in der sich das Projektil befindet
-	 * \return bool, der angibt, ob die Operation erfolgreich war
-	 *
-	 */
-	bool  insertObject (WorldObject* object, Vector pos, short region);
 	
 	/**
 	 * \fn bool insertPlayer(WorldObject* player, int slot = NOSLOT)
@@ -237,39 +171,7 @@ public:
 	 */
 	bool insertPlayer(WorldObject* player, int slot= NOSLOT);
 
-	/**
-	 * \fn bool  insertProjectile(Projectile* object, Vector pos, short region)
-	 * \brief Fuegt ein Projektil ein
-	 * \param object Zeiger auf das Objekt, welches eingefuegt werden soll
-	 * \param pos Ort an dem das Objekt eingefuegt wird
-	 * \param region Region in der sich das Projektil befindet
-	 * \return bool, der angibt, ob die Operation erfolgreich war
-	 *
-	 */
-	bool  insertProjectile(Projectile* object, Vector pos, short region);
-
 	
-	
-	/**
-	 * \fn deleteObject(WorldObject* object)
-	 * \brief Loescht WorldObject
-	 * \param object Zeiger auf das Objekt, welches gel&ouml;scht werden soll
-	 * \return bool, der angibt, ob die Operation erfolgreich war
-	 *
-	 * L&ouml;scht das WorldObject aus den internen Datenstrukturen. Das Objekt selbst wird nicht gel&ouml;scht, es wird nur die Einbindung in die Datenstrukturen entfernt. Wenn das L&ouml;schen erfolgreich war, so wird true zur&uuml;ckgegeben, sonst false.
-	 */
-	bool  deleteObject (WorldObject* object);
-
-	 /**
-	  * \fn moveObject(WorldObject* object, Vector newpos)
-	  * \brief verschiebt ein WorldObject an den Punkt (x,y)
-	  * \param object Zeiger auf das Objekt, welches verschoben werden soll
-	  * \param newpos neue Position des Objektes
-	  * \return bool, welcher angibt, ob das Verschieben erfolgreich war
-	  */
-	bool moveObject(WorldObject* object, Vector newpos);
-
-
 	/**
 	 * \fn bool calcBlockmat(PathfindInfo * pathinfo)
 	 * \brief Berechnet die Matrix der blockierten Felder

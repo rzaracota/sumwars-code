@@ -70,7 +70,7 @@ bool Spawnpoint::update (float time)
 					}
 					else
 					{
-						World::getWorld()->insertObject(wo, pos,getGridLocation()->m_region);
+						getRegion()->insertObject(wo, pos);
 					}
 				}
 			}

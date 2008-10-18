@@ -836,7 +836,7 @@ void Region::update(float time)
 		if (object->getDestroyed()==true)
 		{
 			// Objekte selbststaendig loeschen darf nur der Server
-			if (m_world->isServer())
+			if (World::getWorld()->isServer())
 			{
 				DEBUG5("Objekt gelöscht: %i \n",object->getId());
 				Event event;
@@ -875,7 +875,7 @@ void Region::update(float time)
 		if (pr->getState() == Projectile::DESTROYED)
 		{
 			// Projektile selbststaendig loeschen darf nur der Server
-			if (m_world->isServer())
+			if (World::getWorld()->isServer())
 			{
 				Event event;
 				event.m_type = Event::PROJECTILE_DESTROYED;
@@ -901,7 +901,7 @@ void Region::update(float time)
 	}
 	DEBUG5("update projektile abgeschlossen");
 
-	if (m_world->isServer())
+	if (World::getWorld()->isServer())
 	{
 		// Events fuer geaenderte Objekte / Projektile erzeugen
 		for (iter =m_objects->begin(); iter!=m_objects->end(); ++iter)
@@ -1259,7 +1259,7 @@ bool  Region::dropItem(Item* item, Vector pos)
 
 			DEBUG5("items dropped at %i %i",sx,sy);
 
-			if (m_world->isServer())
+			if (World::getWorld()->isServer())
 			{
 				Event event;
 				event.m_type = Event::ITEM_DROPPED;
@@ -1425,5 +1425,16 @@ EnvironmentName Region::getEnvironment(Vector pos)
 	return m_environments.rbegin()->second;
 }
 
-
+Vector Region::getLocation(LocationName name)
+{
+	std::map<LocationName, Vector>::iterator it;
+	it = m_locations.find(name);
+	
+	if (it == m_locations.end())
+	{
+		return Vector(-1,-1);
+	}
+	
+	return it->second;
+}
 

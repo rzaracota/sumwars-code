@@ -146,7 +146,7 @@ void Monster::updateCommand()
 
 			// Testen, ob der Weg zum Spieler frei ist
 			ret.clear();
-			World::getWorld()->getObjectsOnLine(gline,rid,&ret,LAYER_AIR, CREATURE | FIXED,pl);
+			getRegion()->getObjectsOnLine(gline,&ret,LAYER_AIR, CREATURE | FIXED,pl);
 			
 			// alle verbuendeten Objekte loeschen, weil durch diese *durchgeschossen* werden kann
 			WorldObjectList::iterator it;
@@ -383,7 +383,7 @@ void Monster::die()
 
 		// Object per ID von der World holen
 		WorldObject* object;
-		object = World::getWorld()->getObject(id,getGridLocation()->m_region);
+		object = getRegion()->getObject(id);
 
 		if (object!=0)
 		{
@@ -404,7 +404,7 @@ void Monster::die()
 				s.m_radius = 20;
 				s.m_center = getShape()->m_center;
 
-				World::getWorld()->getObjectsInShape(&s, getGridLocation()->m_region, &ret, LAYER_AIR, CREATURE);
+				getRegion()->getObjectsInShape(&s, &ret, LAYER_AIR, CREATURE);
 
 				WorldObjectList::iterator i;
 

@@ -132,6 +132,9 @@ class Projectile
 		return m_region;
 	}
 	
+	Region* getRegionPtr();
+	
+	
 	/**
 	 * \fn void setRegion(short r)
 	 * \brief setzt die Region

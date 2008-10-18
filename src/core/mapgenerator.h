@@ -47,13 +47,7 @@ class MapGenerator
 		 */
 		std::list<std::pair<int,int> > m_border;
 		
-		
-		/**
-		 * \var std::map<LocationName, Vector> m_locations
-		 * \brief Liste der Orte
-		 */
-		std::map<LocationName, Vector> m_locations;
-		
+
 		/**
 		 * \var Region* m_region
 		 * \brief die Region die erstellt wird

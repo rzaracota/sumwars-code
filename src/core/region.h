@@ -21,6 +21,18 @@
 class Gridunit;
 
 /**
+ * \enum ExitDirection
+ * \brief Verschiedene Richtungen in denen man die Region verlassen kann
+ */
+enum ExitDirection
+{
+	SOUTH = 3,
+	NORTH = 2,
+	WEST = 0, 
+	EAST = 1,
+};
+
+/**
  * \class RegionData
  * \brief enthaelt alle Daten die noetig sind um die Region zu erstellen
  */
@@ -68,6 +80,12 @@ class RegionData
 		 * \brief Groesse der groessten Strukturen - muss eine Zweierpotenz sein
 		 */
 		int m_granularity;
+		
+		/**
+		 * \var bool m_exit_directions[4]
+		 * \brief Richtungen in denen ein Ausgang aus der Region erstellt wird
+		 */
+		bool m_exit_directions[4];
 		
 		/**
 		 * \struct ObjectGroupTemplateSet
@@ -481,6 +499,24 @@ class Region
 		 */
 		EnvironmentName getEnvironment(Vector pos);
 		
+		/**
+		 * \fn void addLocation(LocationName name, Vector pos)
+		 * \brief Fuegt einen neuen Ort ein
+		 * \param name Name des Ortes
+		 * \param pos Koordinaten des Ortes
+		 */
+		void addLocation(LocationName name, Vector pos)
+		{
+			m_locations.insert(std::make_pair(name,pos));
+		}
+		
+		/**
+		 * \fn Vector getLocation(LocationName name)
+		 * \brief Gibt die Position eines Ortes aus
+		 * \param name Name des Ortes
+		 */
+		Vector getLocation(LocationName name);
+		
 	private:
 		/**
 		* \var m_dimx
@@ -566,12 +602,12 @@ class Region
 		* \brief Liste der lokalen Events beim aktuellen update
 		*/
 		EventList* m_events;
-	
+		
 		/**
-		* \var World* m_world
-		* \brief Zeiger auf die Welt
-		*/
-		World* m_world;
+		 * \var std::map<LocationName, Vector> m_locations
+		 * \brief Liste der Orte
+		 */
+		std::map<LocationName, Vector> m_locations;
 
 };
 

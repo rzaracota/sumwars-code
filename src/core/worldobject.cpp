@@ -18,7 +18,7 @@ bool WorldObject::moveTo(Vector newpos)
 	}
 	else
 	{
-		return World::getWorld()->moveObject(this, newpos);
+		return getRegion()->moveObject(this, newpos);
 	}
 }
 

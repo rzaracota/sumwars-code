@@ -407,13 +407,6 @@ Party* World::getEmptyParty()
 }
 
 
-
-WorldObject* World::getObject ( int id,short rid)
-{
-	return m_regions[rid]->getObject(id);
-}
-
-
 Trade* World::getTrade ( int id)
 {
 	std::map<int,Trade*>::iterator iter;
@@ -463,76 +456,6 @@ int World::newTrade(int trader1_id, int trader2_id)
 }
 
 
-bool World:: getObjectsInShape( Shape* shape, short region, WorldObjectList* result,short layer, short group, WorldObject* omit )
-{
-
-
-	// Region ermitteln, wenn gleich 0, Fehler ausgeben
-	Region* r = m_regions[region];
-	if (r == 0)
-	{
-		return false;
-	}
-
-
-	bool res = r->getObjectsInShape(shape,result,layer,group,omit);
-
-	return res;
-
-}
-
-
-WorldObject* World::getObjectAt(Vector pos,  short region,short layer, short group )
-{
-	// Region ermitteln, wenn gleich 0, Fehler ausgeben
-	Region* r = m_regions[region];
-	if (r == 0)
-	{
-		ERRORMSG("cant find region %i",region);
-		return false;
-	}
-
-	return r->getObjectAt(pos,layer,group);
-}
-
-void World::getObjectsOnLine(Line& line,  short region, WorldObjectList* result,short layer, short group, WorldObject* omit)
-{
-	// Region ermitteln, wenn gleich 0 beenden
-	Region* r = m_regions[region];
-	if (r == 0)
-		return;
-
-	r->getObjectsOnLine(line,result,layer,group,omit);
-
-}
-
-
- bool World::insertObject (WorldObject* object, Vector pos, short region)
-{
-	 bool result=true;
-
-	 // Wenn NULL Zeiger übergeben -> Fehler anzeigen
-	 if (object == 0)
-		 return false;
-
-	 object->getGridLocation()->m_region = region;
-	 object->getShape()->m_center = pos;
-	 
-
-	 Region* r = m_regions[region];
-
-	 if (r!=0)
-	 {
-	 	result &= r->insertObject(object,pos);
-	 }
-	 else
-	 {
-		 return false;
-	 }
-
-	 return result;
-}
-
 
 bool World::insertPlayer(WorldObject* player, int slot)
 {
@@ -545,50 +468,6 @@ bool World::insertPlayer(WorldObject* player, int slot)
 	return true;
 }
 
-
-bool World::moveObject(WorldObject* object, Vector newpos)
-{
-	bool result;
-
-
-
-	Region* r = m_regions[object->getGridLocation()->m_region];
-	if (r==0)
-	{
-		return false;
-	}
-
-	result &= r->moveObject(object,newpos);
-
-	return result;
-}
-
-
- bool World::deleteObject (WorldObject* object) {
-
-	 bool result=true;
-
-	 // Region ermitteln
-	 Region* r = m_regions[object->getGridLocation()->m_region];
-	 if (r==0)
-		 return false;
-
-	 // Wenn NULL Zeiger übergeben -> Fehler anzeigen
-	 if (object == 0)
-		 return false;
-
-	 result &= r->deleteObject(object);
-
-	 return result;
-}
-
-
-bool  World::insertProjectile(Projectile* object, Vector pos, short region)
-{
-	m_regions[region]->insertProjectile(object,pos);
-	object->setRegion(region);
-    return true;
-}
 
 bool World::insertPlayerIntoRegion(WorldObject* player, short region)
 {
@@ -662,7 +541,7 @@ bool World::insertPlayerIntoRegion(WorldObject* player, short region)
 		Vector pos = player->getShape()->m_center;
 		// TODO
 		reg->getFreePlace(player->getShape(),player->getLayer() , pos);
-		insertObject(player, pos,region);
+		reg->insertObject(player, pos,region);
 		player->setState(WorldObject::STATE_ACTIVE);
 
 		if (m_server)
@@ -973,7 +852,10 @@ void World::updatePlayers()
 
 			insertEvent(event);
 
-			deleteObject(pl);
+			if (pl->getRegion() !=0)
+			{
+				pl->getRegion()->deleteObject(pl);
+			}
 			m_players->erase( pl->getId());
 			m_player_slots->erase(it++);
 
@@ -1445,7 +1327,10 @@ bool World::processEvent(Region* region,CharConv* cv)
 				object = (*m_players)[event.m_id];
 				if (object != m_local_player)
 				{
-					deleteObject(object);
+					if (object->getRegion() !=0)
+					{
+						object->getRegion()->deleteObject(object);
+					}
 					m_players->erase( object->getId());
 
 					WorldObjectMap::iterator it;
@@ -1614,7 +1499,7 @@ bool World::calcBlockmat(PathfindInfo * pathinfo)
 	Shape* wos=0;
 
 	// Alle Objekte in dem Gebiet suchen
-	getObjectsInShape(&s, pathinfo->m_region, &ret,pathinfo->m_layer);
+	getRegion(pathinfo->m_region)->getObjectsInShape(&s, &ret,pathinfo->m_layer);
 	WorldObject* wo=0;
 	pathinfo->m_block->clear();
 

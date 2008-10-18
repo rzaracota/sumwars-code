@@ -1,5 +1,10 @@
 #include "projectile.h"
 
+Region* Projectile::getRegionPtr()
+{
+	return World::getWorld()->getRegion(m_region);
+}
+
 Projectile::Projectile(ProjectileType type, WorldObject::Fraction fr, int id)
 {
 	m_id = id;
@@ -166,7 +171,7 @@ bool Projectile::update(float time)
 
 						// Alle Objekte im Explosionsradius suchen
 						hitobj.clear();
-						World::getWorld()->getObjectsInShape(&m_shape,m_region,&hitobj,m_layer,WorldObject::CREATURE,0);
+						getRegionPtr()->getObjectsInShape(&m_shape,&hitobj,m_layer,WorldObject::CREATURE,0);
 						for (i=hitobj.begin();i!=hitobj.end();++i)
 						{
 							// Schaden austeilen
@@ -191,32 +196,32 @@ bool Projectile::update(float time)
 
 							// vier neue Projektile erzeugen
 							Projectile* pr;
-							pr = new Projectile(m_type,m_creator_fraction, World::getWorld()->getValidProjectileId());
+							pr = new Projectile(m_type,m_creator_fraction, World::getWorld()->getValidId());
 							memcpy(pr->getDamage(),&dmg,sizeof(Damage));
 							pr->setFlags(Projectile::EXPLODES);
 							pr->setMaxRadius(1);
-							World::getWorld()->insertProjectile(pr,m_shape.m_center + dir ,m_region);
+							getRegionPtr()->insertProjectile(pr,m_shape.m_center + dir );
 							
 							dir.m_x = -dir.m_x;
-							pr = new Projectile(m_type,m_creator_fraction, World::getWorld()->getValidProjectileId());
+							pr = new Projectile(m_type,m_creator_fraction, World::getWorld()->getValidId());
 							memcpy(pr->getDamage(),&dmg,sizeof(Damage));
 							pr->setFlags(Projectile::EXPLODES);
 							pr->setMaxRadius(1);
-							World::getWorld()->insertProjectile(pr,m_shape.m_center + dir,m_region);
+							getRegionPtr()->insertProjectile(pr,m_shape.m_center + dir);
 
 							dir.m_y = -dir.m_y;
-							pr = new Projectile(m_type,m_creator_fraction, World::getWorld()->getValidProjectileId());
+							pr = new Projectile(m_type,m_creator_fraction, World::getWorld()->getValidId());
 							memcpy(pr->getDamage(),&dmg,sizeof(Damage));
 							pr->setFlags(Projectile::EXPLODES);
 							pr->setMaxRadius(1);
-							World::getWorld()->insertProjectile(pr,m_shape.m_center + dir,m_region);
+							getRegionPtr()->insertProjectile(pr,m_shape.m_center + dir);
 
 							dir.m_x = -dir.m_x;
-							pr = new Projectile(m_type,m_creator_fraction, World::getWorld()->getValidProjectileId());
+							pr = new Projectile(m_type,m_creator_fraction, World::getWorld()->getValidId());
 							memcpy(pr->getDamage(),&dmg,sizeof(Damage));
 							pr->setFlags(Projectile::EXPLODES);
 							pr->setMaxRadius(1);
-							World::getWorld()->insertProjectile(pr,m_shape.m_center + dir,m_region);
+							getRegionPtr()->insertProjectile(pr,m_shape.m_center + dir);
 
 						}
 					}
@@ -267,7 +272,7 @@ bool Projectile::update(float time)
 
 
 		// Objekte suchen die die Saeule beruehren
-		World::getWorld()->getObjectsInShape(&m_shape,m_region,&hitobj,m_layer,WorldObject::CREATURE,0);
+		getRegionPtr()->getObjectsInShape(&m_shape,&hitobj,m_layer,WorldObject::CREATURE,0);
 		for (i=hitobj.begin();i!=hitobj.end();++i)
 		{
 			// Schaden austeilen
@@ -309,7 +314,7 @@ void Projectile::handleFlying(float dtime)
 		if (m_goal_object!=0)
 		{
 			// Zielobjekt ist per ID vorgegeben, Objekt von der Welt holen
-			hit = World::getWorld()->getObject(m_goal_object,getRegion());
+			hit = getRegionPtr()->getObject(m_goal_object);
 		}
 
 		if (hit==0)
@@ -324,7 +329,7 @@ void Projectile::handleFlying(float dtime)
 
 
 			// alle Objekte im Kreis suchen
-			World::getWorld()->getObjectsInShape(&s,m_region,&hitobj,m_layer, WorldObject::CREATURE,0);
+			getRegionPtr()->getObjectsInShape(&s,&hitobj,m_layer, WorldObject::CREATURE,0);
 
 			// alle Objekte als potentielle Ziele loeschen, die dem Erschaffer des Projektils nicht feindlich gesinnt sind
 			if (!hitobj.empty())
@@ -437,7 +442,7 @@ void Projectile::handleFlying(float dtime)
 
 
 	// Objekt an der aktuellen Position suchen
-	World::getWorld()->getObjectsOnLine(line,m_region,&hitobj,m_layer,WorldObject::CREATURE | WorldObject::FIXED,0);
+	getRegionPtr()->getObjectsOnLine(line,&hitobj,m_layer,WorldObject::CREATURE | WorldObject::FIXED,0);
 
 	// Alle Objekte herausfiltern die verbuendet sind, sowie das zuletzt gerade getroffene Objekt
 	if (!hitobj.empty())
@@ -537,7 +542,7 @@ void Projectile::handleFlying(float dtime)
 
 			// Alle Objekte im Kreis suchen
 			hitobj.clear();
-			World::getWorld()->getObjectsInShape(&s,m_region,&hitobj,WorldObject::LAYER_AIR,WorldObject::CREATURE,0);
+			getRegionPtr()->getObjectsInShape(&s,&hitobj,WorldObject::LAYER_AIR,WorldObject::CREATURE,0);
 			rmin = sqr(s.m_radius);
 			lid = hit->getId();
 			hit =0;
@@ -644,7 +649,7 @@ void Projectile::handleGrowing(float dtime)
 		s.m_radius = m_shape.m_radius;
 
 		// Alle Objekte suchen die sich in dem Kreis befinden
-		World::getWorld()->getObjectsInShape(&m_shape,m_region,&hitobj,m_layer,WorldObject::CREATURE,0);
+		getRegionPtr()->getObjectsInShape(&m_shape,&hitobj,m_layer,WorldObject::CREATURE,0);
 		lid = m_last_hit_object_id;
 		DEBUG5("last hit id = %i",lid);
 		rmin =0;
@@ -727,7 +732,7 @@ void Projectile::handleStable(float dtime)
 		{
 
 			// Alle Objekte in der Flaeche suchen
-			World::getWorld()->getObjectsInShape(&m_shape,m_region,&hitobj,m_layer,WorldObject::CREATURE,0);
+			getRegionPtr()->getObjectsInShape(&m_shape,&hitobj,m_layer,WorldObject::CREATURE,0);
 			for (i=hitobj.begin();i!=hitobj.end();++i)
 			{
 				// Schaden austeilen
@@ -749,7 +754,7 @@ void Projectile::handleStable(float dtime)
 		if (m_type == FREEZE || m_type == STATIC_SHIELD)
 		{
 			// Alle Objekte in der Flaeche suchen
-			World::getWorld()->getObjectsInShape(&m_shape,m_region,&hitobj,m_layer,WorldObject::CREATURE,0);
+			getRegionPtr()->getObjectsInShape(&m_shape,&hitobj,m_layer,WorldObject::CREATURE,0);
 			for (i=hitobj.begin();i!=hitobj.end();++i)
 			{
 				// Schaden austeilen
@@ -777,7 +782,7 @@ void Projectile::handleStable(float dtime)
 			hitobj.clear();
 
 			// Alle Objekte in dem Kreis suchen
-			World::getWorld()->getObjectsInShape(&s,m_region,&hitobj,m_layer,WorldObject::CREATURE,0);
+			getRegionPtr()->getObjectsInShape(&s,&hitobj,m_layer,WorldObject::CREATURE,0);
 
 			// Alle nicht feindlichen Objekte aus der Liste entfernen
 			if (!hitobj.empty())
@@ -802,9 +807,9 @@ void Projectile::handleStable(float dtime)
 				DEBUG5("hit obj %i",hit->getId());
 
 				// beim Ziel Projektil vom Typ Blitz erzeugen
-				pr = new Projectile(Projectile::LIGHTNING,m_creator_fraction, World::getWorld()->getValidProjectileId());
+				pr = new Projectile(Projectile::LIGHTNING,m_creator_fraction, World::getWorld()->getValidId());
 				memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
-				World::getWorld()->insertProjectile(pr,hit->getShape()->m_center,m_region);
+				getRegionPtr()->insertProjectile(pr,hit->getShape()->m_center);
 			}
 
 			// Gewitter besteht aus 30 Blitzen
@@ -832,7 +837,7 @@ void Projectile::handleStable(float dtime)
 		if (m_type == LIGHTNING || m_type ==LIGHT_BEAM  || m_type ==ELEM_EXPLOSION || m_type ==ACID || m_type ==DIVINE_BEAM  || m_type ==HYPNOSIS)
 		{
 			// Objekt an der Stelle suchen an der der Zauber wirkt
-			hit = World::getWorld()->getObjectAt( pos,m_region, m_layer );
+			hit = getRegionPtr()->getObjectAt( pos,m_region, m_layer );
 
 			if (hit !=0)
 			{
