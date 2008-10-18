@@ -7,6 +7,9 @@
 #include "fixedobject.h"
 #include "monster.h"
 
+
+
+
 #define USE_OBJECTLOADER
 
 
@@ -15,6 +18,52 @@ World* ObjectFactory::m_world;
 std::map<WorldObject::TypeInfo::ObjectSubtype, MonsterBasicData*> ObjectFactory::m_monster_data;
 
 std::map<WorldObject::TypeInfo::ObjectSubtype, FixedObjectData*> ObjectFactory::m_fixed_object_data;
+
+std::map<ObjectTemplateType, ObjectTemplate*> ObjectFactory::m_object_templates;
+
+std::map<ObjectGroupTemplateName, ObjectGroupTemplate*> ObjectFactory::m_object_group_templates;
+
+
+WorldObject::TypeInfo::ObjectSubtype ObjectTemplate::getObject(EnvironmentName env)
+{
+	// Daten aus der Map suchen
+	std::map<EnvironmentName, WorldObjectTypeList >::iterator it;
+	it = m_env_objects.find(env);
+	
+	if (it == m_env_objects.end() || it->second.empty())
+	{
+		// nichts gefunden
+		return "";
+	}
+	else
+	{
+		WorldObjectTypeList::iterator jt;
+		int r = Random::randi(it->second.size());
+		
+		jt = it->second.begin();
+		for (int i=0; i<r; ++i)
+		{
+			++jt;
+		}
+	
+		return *jt;
+		
+	}
+}
+
+void ObjectGroupTemplate::addObject(ObjectTemplateType objtype, Vector pos, float angle, float probability )
+{
+	GroupObject gobj;
+	gobj.m_type = objtype;
+	gobj.m_center = pos;
+	gobj.m_angle = angle;
+	gobj.m_probability = probability;
+	m_objects.push_back(gobj);
+}
+
+
+
+
 
 void ObjectFactory::registerMonster(WorldObject::TypeInfo::ObjectSubtype subtype, MonsterBasicData* data)
 {
@@ -25,6 +74,55 @@ void ObjectFactory::registerMonster(WorldObject::TypeInfo::ObjectSubtype subtype
 void ObjectFactory::registerFixedObject(WorldObject::TypeInfo::ObjectSubtype subtype, FixedObjectData* data)
 {
 	m_fixed_object_data.insert(std::make_pair(subtype,data));
+}
+
+void ObjectFactory::registerObjectTemplate(ObjectTemplateType type, ObjectTemplate* templ)
+{
+	if (m_object_templates.count(type)>0)
+	{
+		ERRORMSG("Object template with name %s already exists",type.c_str());
+	}
+	else
+	{
+		m_object_templates[type] = templ;
+	}
+}
+
+void ObjectFactory::registerObjectGroupTemplate(ObjectGroupTemplateName name, ObjectGroupTemplate* data)
+{
+	
+	if (m_object_group_templates.count(name)>0)
+	{
+		ERRORMSG("Object group template with name %s already exists",name.c_str());
+	}
+	else
+	{
+		m_object_group_templates[name] = data;
+	}
+}
+
+
+
+WorldObject::TypeInfo::ObjectSubtype ObjectFactory::getObjectType(ObjectTemplateType generictype, EnvironmentName env)
+{
+	// Namen die nicht mit $ anfangen sind normale Typen
+	if (generictype[0] != '$')
+	{
+		DEBUG5("simple subtype %s",generictype.c_str());
+		return generictype;
+	}
+	
+	// Suchen in der Datenbank
+	std::map<ObjectTemplateType, ObjectTemplate*>::iterator it;
+	it = m_object_templates.find(generictype);
+	if (it == m_object_templates.end())
+	{
+		return "";
+	}
+	else
+	{
+		return it->second->getObject(env);
+	}
 }
 
 void ObjectFactory::init()
@@ -226,6 +324,8 @@ void ObjectFactory::init()
 
 	registerMonster("gob_dog",mdata);
 	
+	
+	// Daten fuer feste Objekte
 	FixedObjectData* fdata;
 	
 	fdata = new FixedObjectData;
@@ -317,6 +417,73 @@ void ObjectFactory::init()
 	fdata->m_shape.m_type = Shape::RECT;
 	fdata->m_shape.m_extent = Vector(3.18,2.11);
 	registerFixedObject("stones3",fdata);
+	
+	
+	
+	
+	
+	
+	// Daten fuer generische Objekte
+	
+	// Objekt Templates
+	ObjectTemplate* objtempl;
+	
+	objtempl =new ObjectTemplate;
+	objtempl->addObject("meadow","tree1");
+	objtempl->addObject("meadow","tree2");
+	objtempl->addObject("meadow","tree3");
+	objtempl->addObject("hills","tree3");
+	objtempl->m_type = WorldObject::TypeInfo::TYPE_FIXED_OBJECT;
+	registerObjectTemplate("$tree",objtempl);
+	
+	objtempl =new ObjectTemplate;
+	objtempl->addObject("meadow","fence1");
+	objtempl->addObject("meadow","fence2");
+	objtempl->addObject("meadow","fence3");
+	objtempl->addObject("meadow","fence4");
+	objtempl->addObject("meadow","fence5");
+	objtempl->addObject("hills","wall1");
+	objtempl->addObject("hills","wall2");
+	objtempl->addObject("hills","wall3");
+	objtempl->m_type = WorldObject::TypeInfo::TYPE_FIXED_OBJECT;
+	registerObjectTemplate("$border",objtempl);
+	
+	objtempl =new ObjectTemplate;
+	objtempl->addObject("meadow","tree1");
+	objtempl->addObject("hills","tree3");
+	objtempl->m_type = WorldObject::TypeInfo::TYPE_FIXED_OBJECT;
+	registerObjectTemplate("$single_block",objtempl);
+	
+	// Objektgruppen Templates
+	ObjectGroupTemplate* grouptempl;
+	
+	grouptempl = new ObjectGroupTemplate;
+	grouptempl->addObject("$border",Vector(0,3.8),0);
+	registerObjectGroupTemplate("border(side)",grouptempl);
+	
+	grouptempl = new ObjectGroupTemplate;
+	grouptempl->addObject("$border",Vector(0,3.8),0);
+	grouptempl->addObject("$border",Vector(3.8,0),-90*PI/180);
+	registerObjectGroupTemplate("border(corner)",grouptempl);
+	
+	grouptempl = new ObjectGroupTemplate;
+	grouptempl->addObject("$border",Vector(0,3.8),0);
+	grouptempl->addObject("$border",Vector(0,-3.8),-180*PI/180);
+	registerObjectGroupTemplate("border(twoside)",grouptempl);
+	
+	grouptempl = new ObjectGroupTemplate;
+	grouptempl->addObject("$border",Vector(0,3.8),0);
+	grouptempl->addObject("$border",Vector(3.8,0),-90*PI/180);
+	grouptempl->addObject("$border",Vector(0,-3.8),-180*PI/180);
+	registerObjectGroupTemplate("border(twocorner)",grouptempl);
+	
+	grouptempl = new ObjectGroupTemplate;
+	grouptempl->addObject("$tree",Vector(0,0),0);
+	registerObjectGroupTemplate("border(single_block)",grouptempl);
+	
+	grouptempl = new ObjectGroupTemplate;
+	grouptempl->addObject("$tree",Vector(0,1),0,0.5);
+	registerObjectGroupTemplate("border(filled)",grouptempl);
 }
 
 WorldObject* ObjectFactory::createObject(WorldObject::TypeInfo::ObjectType type, WorldObject::TypeInfo::ObjectSubtype subtype, int id)
@@ -391,48 +558,19 @@ WorldObject* ObjectFactory::createObject(WorldObject::TypeInfo::ObjectType type,
 
 		ret->setState(WorldObject::STATE_STATIC);
 		ret->setLayer(data->m_layer);
-/*
-		if (subtype =="fence1" || subtype =="fence2" || subtype =="fence3" || subtype =="fence4" || subtype =="fence5")
-		{
-			sp->m_type = Shape::RECT;
-			sp->m_extent = Vector(3.84,0.15);
-		}
-		else if (subtype =="wall1" || subtype =="wall2" || subtype =="wall3")
-		{
-				sp->m_type = Shape::RECT;
-				sp->m_extent = Vector(3.04,0.61);
-		}
-		else if (subtype =="smallWall1" || subtype == "smallWall2")
-		{
-				sp->m_type = Shape::RECT;
-				sp->m_extent = Vector(0.46,0.6);
-		}
-		else if (subtype =="tree1")
-		{
-
-				sp->m_type = Shape::CIRCLE;
-				sp->m_radius = 0.16;
-		}
-        else if (subtype =="tree2")
-		{
-
-				sp->m_type = Shape::CIRCLE;
-				sp->m_radius = 0.14;
-		}
-        else if (subtype =="tree3")
-		{
-
-				sp->m_type = Shape::CIRCLE;
-				sp->m_radius = 0.13;
-		}
-		else if (subtype =="stones3")
-		{
-				sp->m_type = Shape::RECT;
-				sp->m_extent = Vector(3.18,2.11);
-		}
-		*/
 	}
 	return ret;
 }
 
-
+ObjectGroupTemplate* ObjectFactory::getObjectGroupTemplate(ObjectGroupTemplateName name)
+{
+	std::map<ObjectGroupTemplateName, ObjectGroupTemplate*>::iterator it;
+	it = m_object_group_templates.find(name);
+	
+	if (it == m_object_group_templates.end())
+	{
+		return 0;
+	}
+	
+	return it->second;
+}

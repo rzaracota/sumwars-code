@@ -534,6 +534,20 @@ class WorldObject {
 	{
 		return m_speed;
 	}
+	
+	/**
+	 * \fn WorldObject::Group getGroup()
+	 * \brief Gibt aus zu welcher Gruppierung ein Objekt gehoert
+	 */
+	WorldObject::Group getGroup()
+	{
+		if (getTypeInfo()->m_type == WorldObject::TypeInfo::TYPE_FIXED_OBJECT)
+			return WorldObject::FIXED;
+		if (getState() == WorldObject::STATE_DEAD || getState() == WorldObject::STATE_DIEING )
+			return WorldObject::DEAD;
+		return WorldObject::CREATURE;
+			
+	}
 
 	/**
 	 * \fn void toString(CharConv* cv)

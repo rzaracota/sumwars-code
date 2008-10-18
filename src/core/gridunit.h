@@ -83,20 +83,6 @@ struct Gridunit
 		 */
 		short&  getObjectsNr(WorldObject::Group group);
 		
-		
-		/**
-		 * \fn WorldObject::Group getObjectGroup(WorldObject* object)
-		 * \brief Gibt aus zu welcher Gruppierung ein Objekt gehoert
-		 */
-		WorldObject::Group getObjectGroup(WorldObject* object)
-		{
-			if (object->getTypeInfo()->m_type == WorldObject::TypeInfo::TYPE_FIXED_OBJECT)
-				return WorldObject::FIXED;
-			if (object->getState() == WorldObject::STATE_DEAD || object->getState() == WorldObject::STATE_DIEING )
-				return WorldObject::DEAD;
-			return WorldObject::CREATURE;
-			
-		}
 
 		/**
 		 * \fn WorldObject** getObjects(WorldObject::Group group)

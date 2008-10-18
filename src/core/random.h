@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include "debug.h"
 #include <vector>
-
+#include <list>
 
 /**
  * \class Random
@@ -13,7 +13,7 @@
  */
 class Random
 {
-#define rez_rand_max  1.0 / RAND_MAX
+#define rez_rand_max  1.0 / (1.0 + RAND_MAX)
 	
 	public:
 		
@@ -43,7 +43,7 @@ class Random
 	 */
 	static int randi(int i)
 	{
-		return (int) random()*i;
+		return int(random()*i);
 	}
 	
 	/**
@@ -85,6 +85,8 @@ class Random
 	 * \return Nummer des eingetreteten Ereignisses
 	 */
 	static int randDiscrete(std::vector<float> distribution);
+	
+
 };
 
 //float Random::rez_rand_max = 1.0 / RAND_MAX;

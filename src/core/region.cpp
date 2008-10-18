@@ -1,14 +1,28 @@
 #include "region.h"
 #include "world.h"
 
+void RegionData::addObjectGroupTemplate(ObjectGroupTemplateName group_name, int prio, int number,float probability)
+{
+	ObjectGroupTemplateSet newgroup;
+	newgroup.m_group_name = group_name;
+	newgroup.m_probability = probability;
+	newgroup.m_number = number;
+	newgroup.m_probability = probability;
+	
+	
+}
 
-Region::Region(short dimx, short dimy, short id, World* world, bool server)
+
+Region::Region(short dimx, short dimy, short id, World* world)
 {
 	DEBUG5("creating region");
 	m_data_grid = new Matrix2d<Gridunit>(dimx,dimy);
 	m_dimx = dimx;
 	m_dimy = dimy;
 
+	m_height = new Matrix2d<float>(dimx,dimy);
+	m_height->clear();
+	
 	m_tiles = new Matrix2d<char>(dimx*2,dimy*2);
 	m_tiles->clear();
 
@@ -29,8 +43,7 @@ Region::Region(short dimx, short dimy, short id, World* world, bool server)
 
 	m_events = new EventList;
 
-	m_server = server;
-
+	
 	m_world = world;
 }
 
@@ -504,7 +517,7 @@ void Region::getObjectsOnLine(Line& line,  WorldObjectList* result,short layer, 
 }
 
 
-bool Region::insertObject (WorldObject* object, Vector pos)
+bool Region::insertObject (WorldObject* object, Vector pos, float angle, bool collision_test)
 {
 	bool result = true;
 
@@ -543,6 +556,14 @@ bool Region::insertObject (WorldObject* object, Vector pos)
 		insertEvent(event);
 	}
 
+	object->getShape()->m_angle = angle;
+	
+	// Test auf Kollisionen und eventuelle Verschiebung
+	if (collision_test)
+	{
+		getFreePlace(object->getShape(), object->getLayer(), pos);
+	}
+	
 	 // Koordinaten setzen
 	object->getShape()->m_center = pos;
 
@@ -571,6 +592,71 @@ bool Region::insertObject (WorldObject* object, Vector pos)
 	}
 
 	return result;
+}
+
+int Region::createObject(WorldObject::TypeInfo::ObjectType type, ObjectTemplateType generictype, Vector pos, float angle, bool collision_test)
+{
+	// Umgebung erfahren
+	EnvironmentName env = getEnvironment(pos);
+	
+	// genauen Subtyp ermitteln
+	WorldObject::TypeInfo::ObjectSubtype subtype = ObjectFactory::getObjectType(generictype, env);
+	if (subtype == "")
+	{
+		return 0;
+	}
+	
+	// Objekt erstellen
+	WorldObject* object = ObjectFactory::createObject(type,subtype);
+	if (object ==0)
+	{
+		return 0;
+	}
+	
+	// Objekt einfuegen
+	insertObject(object,pos,angle,false);
+	
+	return object->getId();
+	
+}
+
+
+int Region::createObjectGroup(ObjectGroupTemplateName templname, Vector position, float angle)
+{
+	// Template aus der Datenbank heraussuchen
+	std::map<ObjectGroupTemplateName, ObjectGroupTemplate*>::iterator it;
+	
+	ObjectGroupTemplate* templ = ObjectFactory::getObjectGroupTemplate(templname);
+	
+	if (templ != 0)
+	{
+		// Template wurde gefunden
+		DEBUG("found template");
+		// Objekte platzieren
+		std::list<ObjectGroupTemplate::GroupObject>::iterator gt;
+		Vector pos;
+		
+		for (gt = templ->getObjects()->begin(); gt != templ->getObjects()->end(); ++gt)
+		{
+			if (Random::random() < gt->m_probability)
+			{
+				
+				pos = gt->m_center;
+				pos.rotate(angle);
+				pos += position;
+				
+				DEBUG("inserting object %s at %f %f",gt->m_type.c_str(),pos.m_x, pos.m_y);
+				
+				createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT,gt->m_type, pos, angle+gt->m_angle);
+			}
+		}
+		
+		// Orte einfuegen
+	}
+	else
+	{
+		ERRORMSG("object group template %s not found",templname.c_str());
+	}
 }
 
 
@@ -726,7 +812,7 @@ void Region::update(float time)
 		if (object->getDestroyed()==true)
 		{
 			// Objekte selbststaendig loeschen darf nur der Server
-			if (m_server)
+			if (m_world->isServer())
 			{
 				DEBUG5("Objekt gelöscht: %i \n",object->getId());
 				Event event;
@@ -765,7 +851,7 @@ void Region::update(float time)
 		if (pr->getState() == Projectile::DESTROYED)
 		{
 			// Projektile selbststaendig loeschen darf nur der Server
-			if (m_server)
+			if (m_world->isServer())
 			{
 				Event event;
 				event.m_type = Event::PROJECTILE_DESTROYED;
@@ -791,7 +877,7 @@ void Region::update(float time)
 	}
 	DEBUG5("update projektile abgeschlossen");
 
-	if (m_server)
+	if (m_world->isServer())
 	{
 		// Events fuer geaenderte Objekte / Projektile erzeugen
 		for (iter =m_objects->begin(); iter!=m_objects->end(); ++iter)
@@ -934,7 +1020,7 @@ void Region::createObjectFromString(CharConv* cv, WorldObjectMap* players)
 	obj->fromString(cv);
 
 	
-	insertObject(obj,obj->getShape()->m_center);
+	insertObject(obj,obj->getShape()->m_center,obj->getShape()->m_angle);
 }
 
 
@@ -1295,6 +1381,21 @@ bool Region::deleteItem(int id, bool delitem)
 	}
 }
 
+EnvironmentName Region::getEnvironment(Vector pos)
+{
+	// Hoehe an der angegebenen Stelle
+	float height = *(m_height->ind(int(pos.m_x/4),int(pos.m_y/4)));
+	
+	std::map<float, EnvironmentName>::iterator it;
+	
+	for (it = m_environments.begin(); it !=m_environments.end();++it)
+	{
+		if (height < it->first)
+			return it->second;
+	}
+	
+	return m_environments.rbegin()->second;
+}
 
 
 

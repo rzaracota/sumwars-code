@@ -1701,7 +1701,7 @@ void Creature::calcAction()
 	if (Action::getActionInfo(m_command.m_type)->m_distance == Action::MELEE || Action::getActionInfo(m_command.m_type)->m_base_action == Action::WALK)
 	{
 		// Aktion fuer die man an das Ziel hinreichend nahe herankommen muss
-		DEBUG("range %f dist %f",range,dist);
+		DEBUG5("range %f dist %f",range,dist);
 
 		// Testen ob das Ziel in Reichweite ist
 		if (range > dist)

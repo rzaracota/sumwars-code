@@ -1,7 +1,9 @@
 #ifndef GEOMETRY_H
 #define GEOMETRY_H
 
-
+#ifndef PI
+#define PI 3.14159
+#endif
 
 #include <math.h>
 #include <algorithm>

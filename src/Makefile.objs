@@ -33,6 +33,8 @@
 ./core/action.o
 ./core/command.o
 ./core/geometry.o
+./core/mapgenerator.o
+./core/unionfindtree.o
 
 ./tinyxml/tinyxml.o
 ./tinyxml/tinyxmlparser.o

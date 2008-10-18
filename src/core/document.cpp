@@ -87,8 +87,6 @@ void Document::startGame(bool server)
 {
 	m_server = server;
 
-
-
 	m_world = new World(server);
 	m_world->init();
 

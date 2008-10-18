@@ -7,6 +7,7 @@
 #include "dropitem.h"
 #include "event.h"
 #include "projectile.h"
+#include "objectfactory.h"
 
 
 #include <string>
@@ -18,6 +19,118 @@
 #include <algorithm>
 
 class Gridunit;
+
+/**
+ * \class RegionData
+ * \brief enthaelt alle Daten die noetig sind um die Region zu erstellen
+ */
+class RegionData
+{
+	public:
+		/**
+	 * \var short m_id
+	 * \brief Nummer der Region
+		 */
+		short m_id;
+		
+		/**
+		/* \var std::string m_name
+		 * \brief Name der Region
+		 */
+		std::string m_name;
+		
+		/**
+		 * \var m_dimx
+		 * \brief Ausdehnung der Region in x-Richtung
+		 */
+		short m_dimx;
+	
+		/**
+		 * \var m_dimy
+		 * \brief Ausdehnung der Region in y-Richtung
+		 */
+		short m_dimy;
+		
+		/**
+		 * \var float m_area_percent
+		 * \brief Gibt Anteil der Flaeche an, die tatsaechlich zugaenglich sein soll
+		 */
+		float m_area_percent;
+		
+		/**
+		 * \var float m_complexity
+		 * \brief Komplexitaet der Berandung (Wert zwischen 0 und 1)
+		 */
+		float m_complexity;
+		
+		/**
+		 * \var int m_granularity
+		 * \brief Groesse der groessten Strukturen - muss eine Zweierpotenz sein
+		 */
+		int m_granularity;
+		
+		/**
+		 * \struct ObjectGroupTemplateSet
+		 * \brief Struktur fuer eine Gruppe von Objekten die mehrmals in die Region eingefuegt werden soll
+		 */
+		struct ObjectGroupTemplateSet
+		{
+			/**
+			 * \var ObjectGroupTemplateName m_group_name
+			 * \brief Name der Gruppe
+			 */
+			ObjectGroupTemplateName m_group_name;
+			
+			/**
+			 * \var int m_number
+			 * \brief Anzahl wie oft man versuchen soll, eine Gruppe eingefuegen
+			 */
+			int m_number;
+			
+			/**
+			 * \var float m_probability
+			 * \brief Wahrscheinlichkeit mit der eine Gruppe eingefuegt wird
+			 * es werden m_number viele Orte ausgewaehlt, aber fuer jeden nur mit dieser Warscheinlichkeit wirklich die Gruppe eingefuegt
+			 */
+			float m_probability;
+		};
+		
+		/**
+		 * \fn void addObjectGroupTemplate(ObjectGroupTemplateName m_group_name, int prio, int number =1, float probability=1.0)
+		 * \brief Fuegt eine neue Objektgruppe ein
+		 * \param group_name Name der Gruppe
+		 * \param prio Prioritaet der Gruppe
+		 * \param number Anzahl wie oft die Gruppe eingefuegt wird
+		 * \param probability Wahrscheinlichkeit mit der die Gruppe eingefuegt wird
+		 */
+		void addObjectGroupTemplate(ObjectGroupTemplateName group_name, int prio=0, int number =1, float probability=1.0);
+		
+		/**
+		 * \fn void addEnvironment(EnvironmentName name, float percentage)
+		 * \brief Fuegt eine neue Umgebung hinzu
+		 * \param name Name der Umgebug
+		 * \param percentage Prozentsatz zu dem diese Umgebung erzeugt wird
+		 */
+		void addEnvironment(EnvironmentName name, float percentage)
+		{
+			m_environments.push_back(std::make_pair(percentage,name));
+		}
+		
+		/**
+		 * \var std::multimap<int,ObjectGroupTemplateSet> m_object_groups
+		 * \brief die Patterns sortiert nach einer Prioritaet
+		 */
+		std::multimap<int,ObjectGroupTemplateSet> m_object_groups;
+		
+		/**
+		 * \var std::list<std::pair<float, EnvironmentName> > m_environments
+		 * \brief Liste von moeglichen Umgebungen mit ihren Hoehenlinien
+		 */
+		std::list<std::pair<float, EnvironmentName> > m_environments;
+};
+
+
+
 	
 /**
  * \class Region
@@ -27,7 +140,7 @@ class Region
 {
 	public:
 		/**
-	 * \fn Region(short dimx, short dimy, short id, World* world, bool server)
+	 * \fn Region(short dimx, short dimy, short id, World* world)
 		 * \brief Konstruktor
 		 * \param dimx Ausdehnung in x-Richtung
 	 	 * \param dimy Ausdehnung in y-Richtung
@@ -35,7 +148,7 @@ class Region
 		 * \param world Zeiger auf die Welt
 		 * \param server gibt an, ob der Rechner der Server ist
 	 	 */
-		Region(short dimx, short dimy, short id, World* world, bool server);
+		Region(short dimx, short dimy, short id, World* world);
 
 
 		/**
@@ -45,16 +158,36 @@ class Region
 		~Region();
 
 		/**
-		 * \fn insertObject (WorldObject* object, Vector pos)
-		 * \brief F&uuml;gt WorldObject ein
+		 * \fn insertObject (WorldObject* object, Vector pos, float angle=0, bool collision_test =false)
+		 * \brief Fuegt ein bereits existierendes WorldObject ein
 		 * \param object Zeiger auf das Objekt, welches eingefuegt werden soll
-		 * \param pos Position an der das objekt eingefuegt wird
+		 * \param pos Position an der das Objekt eingefuegt wird
+		 * \param angle Drehwinkel des Objektes
+		 * \param collision_test wenn auf true gesetzt, wird geprueft ob das Objekt mit einem anderen kollidiert und die Positions in dem Fall leicht geaendert
 		 * \return bool, der angibt, ob die Operation erfolgreich war
-		 *
-		 * F&uuml;gt das WorldObject in die internen Datenstrukturen ein. Wenn das Einf&uuml;gen erfolgreich war, so wird true zur&uuml;ckgegeben, sonst false.
-		 * Wenn ein NULL-Zeiger &uuml;bergeben wird, so wird false ausgegeben.
 		 */
-		bool  insertObject (WorldObject* object, Vector pos);
+		bool insertObject (WorldObject* object, Vector pos, float angle=0, bool collision_test =false);
+		
+		/**
+		 * \fn int createObject(WorldObject::TypeInfo::ObjectType type, ObjectTemplateType generictype, Vector pos, float angle=0, bool collision_test =false)
+		 * \brief Erstellt ein neues Objekt und fuegt es an der angegebenen Stelle ein
+		 * \param type Typ des neuen Objekts
+		 * \param generictype Subtyp des neuen Objekts, kann generisch sein
+		 * \param pos Position an der das Objekt eingefuegt wird
+		 * \param angle Drehwinkel des Objektes
+		 * \param collision_test wenn auf true gesetzt, wird geprueft ob das Objekt mit einem anderen kollidiert und die Positions in dem Fall leicht geaendert
+		 * \return ID des neu erstellten Objekts
+		 */
+		int createObject(WorldObject::TypeInfo::ObjectType type, ObjectTemplateType generictype, Vector pos, float angle=0, bool collision_test =false);
+		
+		/**
+		 * \fn int createObjectGroup(ObjectGroupTemplateName name, Vector position, float angle=0)
+		 * \brief erzeugt eine Gruppe von Objekten und fuegt sie in die Region ein
+		 * \param templname Name des Templates aus dem die Gruppe erzeugt wird
+		 * \param position Ort an dem die Gruppe eingefuegt wird
+		 * \param angle Drehwinkel mit dem die Gruppe eingefuegt wird
+		 */
+		int createObjectGroup(ObjectGroupTemplateName templname, Vector position, float angle=0);
 
 		/**
 		 * \fn bool getObjectsInShape( Shape* shape,  WorldObjectList* result,short layer=WorldObject::LAYER_ALL, short group = WorldObject::GROUP_ALL, WorldObject* omit=0, bool empty_test = false );
@@ -312,6 +445,17 @@ class Region
 		{
 			m_events->push_back(event);
 		}
+		
+		/**
+		 * \fn void insertEnvironment(float maxheight, EnvironmentName env)
+		 * \brief Fuegt eine neue Umgebung in die Region ein
+		 * \param maxheight maximale Hoehe bis zu der diese Umgebung verwendet wird
+		 * \param env Name der Umgebung
+		 */
+		void insertEnvironment(float maxheight, EnvironmentName env)
+		{
+			m_environments.insert(std::make_pair(maxheight,env));
+		}
 
 		/**
 		 * \fn EventList* getEvents()
@@ -321,6 +465,22 @@ class Region
 		{
 			return m_events;
 		}
+		
+		/**
+		 * \fn Matrix2d<float>* getHeight()
+		 * \brief Gibt die Hoehenkarte aus
+		 */
+		Matrix2d<float>* getHeight()
+		{
+			return m_height;
+		}
+		
+		/**
+		 * \fn EnvironmentName getEnvironment(Vector pos)
+		 * \brief Gibt die Umgebung aus, die an der angegebenen Stelle vorherrscht
+		 * \param pos Ort
+		 */
+		EnvironmentName getEnvironment(Vector pos);
 
 	private:
 		/**
@@ -346,6 +506,18 @@ class Region
 		* \brief Matrix der Tiles
 		*/
 		Matrix2d<char>* m_tiles;
+		
+		/**
+		 * \var Matrix2d<float>* m_height
+		 * \brief Hoehenkarte in 4x4 Kaestchen
+		 */
+		Matrix2d<float>* m_height;
+		
+		/**
+		 * \var std::map<float, EnvironmentName> m_environments
+		 * \brief Liste von moeglichen Umgebungen mit ihren Hoehenlinien (Obergrenzen)
+		 */
+		std::map<float, EnvironmentName> m_environments;
 	
 		/**
 		* \var m_players
@@ -395,12 +567,6 @@ class Region
 		* \brief Liste der lokalen Events beim aktuellen update
 		*/
 		EventList* m_events;
-	
-		/**
-		* \var bool m_server
-		* \brief true, wenn der Rechner der Server ist
-		*/
-		bool m_server;
 	
 		/**
 		* \var World* m_world

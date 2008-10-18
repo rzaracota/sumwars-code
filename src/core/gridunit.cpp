@@ -13,7 +13,7 @@ Gridunit::Gridunit()
 bool Gridunit::insertObject(WorldObject* object)
 {
 	// Ebene in der das Objekt eingeordnet wird
-	WorldObject::Group g = getObjectGroup(object);
+	WorldObject::Group g = object->getGroup();
 
 	// Zeiger auf Array in das eingefuegt wird
 	WorldObject ** arr = getObjects(g);
@@ -67,7 +67,7 @@ bool  Gridunit::moveObject(WorldObject* object,WorldObject::Group group )
 bool Gridunit::deleteObject(WorldObject* object, short index)
 {
 	// Ebene aus der geloescht werden soll
-	WorldObject::Group g = getObjectGroup(object);
+	WorldObject::Group g = object->getGroup();
 
 	// Zeiger auf Array aus dem geloescht wird
 	WorldObject ** arr = getObjects(g);

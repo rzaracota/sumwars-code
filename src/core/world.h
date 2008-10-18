@@ -463,7 +463,21 @@ public:
 		return m_timer_limit[i];
 	}
 	
+	static World* getWorld()
+	{
+		return m_world;
+	}
 	
+	/**
+	 * \fn static void createWorld(bool server)
+	 * \brief Erzeugt die Spielwelt
+	 * \param server auf true gesetzt, wenn der Rechner der Server ist
+	 */
+	static void createWorld(bool server)
+	{
+		m_world = new World(server);
+		m_world->init();
+	}
 			
 
 //Private stuff
@@ -550,5 +564,12 @@ private:
 	 * \brief ist true, wenn der betreffende Timer gerade in dem Tick abgelaufen ist
 	 */
 	bool m_timer_limit[3];
+	
+	
+	/**
+	 * \var  static World* m_world
+	 * \brief Objekt fuer die Spielwelt
+	 */
+	static World* m_world;
 };
 #endif //WORLD_H

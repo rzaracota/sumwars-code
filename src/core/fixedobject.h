@@ -33,15 +33,6 @@
 
 #include "worldobject.h"
 
-struct FixedObjectData
-{
-	short m_layer;
-	
-	Shape m_shape;
-};
-	
-	
-
 
 
 /**

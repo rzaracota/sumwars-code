@@ -6,7 +6,6 @@
 #include <map>
 #include "monsterbase.h"
 #include "objectloader.h"
-#include "fixedobject.h"
 
 #include "../tinyxml/tinyxml.h"
 #include <string>
@@ -14,6 +13,198 @@
 
 
 class World;
+
+
+
+
+/**
+ * Bezeichnung fuer eine Umgebung
+ */
+typedef std::string EnvironmentName;
+
+/**
+ * Liste von Typbezeichnungen fuer Objekte
+ */
+typedef std::list<WorldObject::TypeInfo::ObjectSubtype> WorldObjectTypeList;
+
+/**
+ * Name fuer ein Objekt in einem Template
+ * kann entweder ein Objektname sein oder ein generischer Name
+ * generische Name beginnen mit $
+ */
+typedef std::string ObjectTemplateType;
+
+/**
+ * \class ObjectTemplate
+ * \brief Platzhalter fuer ein Objekt. Das Objekt das daraus tatsaechlich erzeugt wird ist von der Umgebung abhaengig
+ */
+class ObjectTemplate
+{
+	private:
+		/**
+	 * \var std::map<EnvironmentName, WorldObjectTypeList > m_env_objects
+	 * \brief Gibt fuer jede Umgebung eine Liste von Objekten an, die den Platzhalter ersetzen
+		 */
+		std::map<EnvironmentName, WorldObjectTypeList > m_env_objects;
+		
+	
+	public:
+		
+		/**
+		 * \var WorldObject::TypeInfo::ObjectType m_type
+		 * \brief Basistyp des Objekts
+		 */
+		WorldObject::TypeInfo::ObjectType m_type;
+		
+		/**
+		 * \fn void addObject(EnvironmentName env, WorldObject::TypeInfo::ObjectSubtype object)
+		 * \brief Fuegt fuer die Umgebung ein Objekt hinzu
+		 * \param env Name der Umgebung
+		 * \param object Typ des Objekts
+		 */
+		void addObject(EnvironmentName env, WorldObject::TypeInfo::ObjectSubtype object)
+		{
+			m_env_objects[env].push_back(object);
+		}
+		
+		/**
+		 * \fn WorldObject::TypeInfo::ObjectSubtype getObject(EnvironmentName env)
+		 * \brief Gibt fuer eine gegebene Umgebung ein passendes Objekt aus
+		 * \param env Umgebung
+		 */
+		WorldObject::TypeInfo::ObjectSubtype getObject(EnvironmentName env);
+};
+
+
+/**
+ * Name einer Gruppe von Objekten
+ */
+typedef std::string ObjectGroupTemplateName;
+
+/**
+ * Name eines Ortes
+ */
+typedef std::string LocationName;
+
+
+/**
+ * \class ObjectGroupTemplate
+ * \brief Gruppe von Objekten in einer vorgegebenen Anordnung
+ */
+class ObjectGroupTemplate
+{
+	public:
+		/**
+	 * \struct GroupObject
+	 * \brief Objekt das Bestandteil der Gruppe ist
+		 */
+		struct GroupObject
+		{
+			/**
+			 * \var ObjectTemplateType m_type
+			 * \brief Typ des Objektes. Beginnt mit $ fuer generische Objekte
+			 */
+			ObjectTemplateType m_type;
+			
+			/**
+			 * \var Vector m_center
+			 * \brief Ortsvektor des Mittelpunktes relativ zum Mittelpunkt des Templates
+			 */
+			Vector m_center;
+			
+			/**
+			 * \var float m_angle
+			 * \brief Drehwinkel
+			 */
+			float m_angle;
+			
+			/**
+			 * \var float m_probability
+			 * \brief Chance, dass das Objekt eingesetzt wird
+			 */
+			float m_probability;
+		};
+	
+		/**
+		 * \fn Shape* getShape()
+		 * \brief Gibt die Form aus
+		 */
+		Shape* getShape()
+		{
+			return &m_shape;
+		}
+		
+		/**
+		 * \fn std::list<GroupObject>* getObjects()
+		 * \brief Gibt die Objekte aus
+		 */
+		std::list<GroupObject>* getObjects()
+		{
+			return &m_objects;
+		}
+		
+		/**
+		 * \fn std::map<std::string, Vector>* getLocations()
+		 * \brief Gibt die Orte aus
+		 */
+		std::map<std::string, Vector>* getLocations()
+		{
+			return &m_locations;
+		}
+		
+		/**
+		 * \fn void addLocation(LocationName name, Vector pos)
+		 * \brief Fuegt einen benannten Ort in das Template ein
+		 * \param name Name des Ortes
+		 * \param pos Position relativ zum Mittelpunkt
+		 */
+		void addLocation(LocationName name, Vector pos)
+		{
+			m_locations[name] = pos;
+		}
+		
+		/**
+		 * \fn void addObject(GroupObject gobj)
+		 * \brief Fuegt ein Objekt dem Template hinzu
+		 * \param gobj Objekt
+		 */
+		void addObject(GroupObject gobj)
+		{
+			m_objects.push_back(gobj);
+		}
+		
+		/**
+		 * \fn void addObject(ObjectTemplateType objtype, Vector pos, float angle=0, float probability = 1.0)
+		 * \brief Fuegt ein neues Objekt in die Gruppe ein
+		 * \param objtype Typ des eingefuegten Objekts
+		 * \param pos Position relativ zum Mittelpunkt
+		 * \param angle Drehwinkel
+		 * \param m_probability Wahrscheinlichkeit, dass das Objekt vertreten ist
+		 */
+		void addObject(ObjectTemplateType objtype, Vector pos, float angle=0, float probability =1.0);
+	
+	private:
+		/**
+	 * \var Shape m_shape
+	 * \brief Form der Gruppe
+		 */
+		Shape m_shape;
+		
+		/**
+		 * \var std::list<GroupObject> m_objects
+		 * \brief Liste der Objekte in der Gruppe
+		 */
+		std::list<GroupObject> m_objects;
+		
+		/**
+		 * \var std::map<LocationName, Vector> m_locations
+		 * \brief Orte mit Namen
+		 */
+		std::map<LocationName, Vector> m_locations;
+};
+
+
+
 
 /**
  * \class ObjectFactory
@@ -32,6 +223,15 @@ class ObjectFactory
 	 */
 	static WorldObject* createObject(WorldObject::TypeInfo::ObjectType type, WorldObject::TypeInfo::ObjectSubtype subtype, int id=0);
 	
+	
+	/**
+	 * \fn static WorldObject::TypeInfo::ObjectSubtype getObjectType(ObjectTemplateType generictype, EnvironmentName env)
+	 * \brief erzeugt aus einem ObjektTemplate einen Objekttyp passend zu seiner Umgebung
+	 * \param generictype generischer Typ des Objekts
+	 * \param env Umgebung
+	 */
+	static WorldObject::TypeInfo::ObjectSubtype getObjectType(ObjectTemplateType generictype, EnvironmentName env);
+	
 	/**
 	 * \var static World* m_world
 	 * \brief Welt fuer die die Objekte generiert werden
@@ -49,6 +249,18 @@ class ObjectFactory
 	 * \brief Basisdaten zu den festen Objekten
 	 */
 	static std::map<WorldObject::TypeInfo::ObjectSubtype, FixedObjectData*> m_fixed_object_data;
+	
+	/**
+	 * \var static std::map<ObjectTemplateType, ObjectTemplate*> m_object_templates
+	 * \brief Datenbank fuer die Objekttemplates, indexiert nach Typ
+	 */
+	static std::map<ObjectTemplateType, ObjectTemplate*> m_object_templates;
+	
+	/**
+	 * \var static std::map<ObjectGroupTemplateName, ObjectGroupTemplate> m_object_group_templates
+	 * \brief Datenbank fuer die Objektgruppen indexiert nach Name
+	 */
+	static std::map<ObjectGroupTemplateName, ObjectGroupTemplate*> m_object_group_templates;
 	
 	/**
 	 * \fn static init()
@@ -72,6 +284,29 @@ class ObjectFactory
 	 */
 	static void registerFixedObject(WorldObject::TypeInfo::ObjectSubtype subtype, FixedObjectData* data);
 	
+	/**
+	 * \fn static registerObjectTemplate(ObjectTemplateType type, ObjectTemplate* templ)
+	 * \brief Registriert ein neues Objekttemplate
+	 * \param type Typ des Templates
+	 * \param templ die Daten
+	 */
+	static void registerObjectTemplate(ObjectTemplateType type, ObjectTemplate* templ);
+	
+	
+	/**
+	 * \fn static registerObjectGroupTemplate(ObjectGroupTemplateName name, ObjectGroupTemplate* data)
+	 * \brief Registriert ein neues Template fuer eine Objektgruppe
+	 * \param name der Name des Templates
+	 * \param data die Daten
+	 */
+	static void registerObjectGroupTemplate(ObjectGroupTemplateName name, ObjectGroupTemplate* data);
+	
+	/**
+	 * \fn static ObjectGroupTemplate* getObjectGroupTemplate(ObjectGroupTemplateName name)
+	 * \brief sucht zu dem betreffenden Name das passende Template heraus
+	 * \param name Name der Objektgruppe
+	 */
+	static ObjectGroupTemplate* getObjectGroupTemplate(ObjectGroupTemplateName name);
 };
 
 

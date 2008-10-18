@@ -2,7 +2,6 @@
 #define OBJECTLOADER_H
 
 
-#include "world.h"
 #include <map>
 #include <list>
 #include "monsterbase.h"
@@ -18,17 +17,37 @@
 struct MonsterMeshData
 {
 	/**
-	 * \var string m_subtype
+	 * \var std::string m_subtype
 	 * \brief Subtyp des Monsters
 	 */
-	string m_subtype;
+	std::string m_subtype;
 	
 	/**
 	 * \var string m_mesh
 	 * \brief Name des Meshes
 	 */
-	string m_mesh;
+	std::string m_mesh;
 };
+
+/**
+ * \struct FixedObjectData
+ * \brief Struktur mit den Daten von festen Objekten
+ */
+struct FixedObjectData
+{
+	/**
+	 * \var short m_layer
+	 * \brief Ebene in der sich das Objekt befindet
+	 */
+	short m_layer;
+	
+	/**
+	 * \var Shape m_shape
+	 * \brief Form des Objektes
+	 */
+	Shape m_shape;
+};
+
 
 /**
  * \class ObjectLoader
@@ -57,13 +76,13 @@ class ObjectLoader
 	private:
 	
 	/**
-	 * \fn int generateObjects(TiXmlElement* pElement, string element)
+	 * \fn int generateObjects(TiXmlElement* pElement, std::string element)
 	 * \brief Legt Objekte im Speicher anhand von Daten an, die als Parameter uebergeben wurden. Diese Daten stammen aus einer XML-Datei.
 	 * \param pElement Zeiger auf ein Element der XML-Datei
 	 * \param element Name des Elements
 	 * \return Anzahl der Attribute des bearbeiteten Elements
 	 */
-	int generateObjects(TiXmlElement* pElement, string element);
+	int generateObjects(TiXmlElement* pElement, std::string element);
 	
 	/**
 	 * \fn void searchXml( TiXmlNode* pParent )
@@ -73,13 +92,13 @@ class ObjectLoader
 	void searchXml(TiXmlNode* pParent);
 	
 	/**
-	 * \fn int generateMonsterMeshData(TiXmlElement* pElement, string element)
+	 * \fn int generateMonsterMeshData(TiXmlElement* pElement, std::string element)
 	 * \brief Legt ItemMonsterData im Speicher anhand von Daten an, die als Parameter uebergeben wurden. Diese Daten stammen aus einer XML-Datei.
 	 * \param pElement Zeiger auf ein Element der XML-Datei
 	 * \param element Name des Elements
 	 * \return Anzahl der Attribute des bearbeiteten Elements
 	 */
-	int generateMonsterMeshData(TiXmlElement* pElement, string element);
+	int generateMonsterMeshData(TiXmlElement* pElement, std::string element);
 	
 	/**
 	 * \fn void searchMonsterMeshData( TiXmlNode* pParent )

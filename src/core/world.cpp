@@ -105,11 +105,14 @@ void World::createRegion(short region)
 	}
 	else if(type==2)
 	{
-		Region* reg = new Region(25,25,region,this, m_server);
+		Region* reg = new Region(25,25,region,this);
 		short rid = insertRegion(reg,region);
 
 
-
+		// Umgebungen erstellen
+		reg->insertEnvironment(0.6,"meadow");
+		reg->insertEnvironment(1.0,"hills");
+			
 
 		// Objekte anlegen
 		WorldObject* wo=0;
@@ -125,53 +128,27 @@ void World::createRegion(short region)
 			reg->setTile(TILE_WATER,i,6);
 		}
 		
+		
+		reg->createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "fence1", Vector(4,2));
+		reg->createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "fence2", Vector(12,2));
+		reg->createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "fence3", Vector(20,2));
+		reg->createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "fence4", Vector(28,2));
+		reg->createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "fence5", Vector(3,22));
+		
+		reg->createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "smallWall2", Vector(7.5,22));
+		reg->createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "wall1", Vector(11,22));
+		reg->createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "wall2", Vector(17,22));
+		reg->createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "wall3", Vector(23,22));
+		reg->createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "smallWall1", Vector(26.5,22));
+		
+		reg->createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "tree1", Vector(9,13));
+		reg->createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "tree2", Vector(10,2));
+		reg->createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "tree3", Vector(1,2));
+		
+		reg->createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "$tree", Vector(1,8));
+		
+	
 		/*
-		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "fence2");
-		insertObject(wo, Vector(12,12),rid);
-		wo->getShape()->m_angle = 0.4;
-		*/
-
-		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "fence1");
-		insertObject(wo, Vector(4,2),rid);
-		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "fence2");
-		insertObject(wo, Vector(12,2),rid);
-		
-		
-		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "fence3");
-		insertObject(wo, Vector(20,2),rid);
-		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "fence4");
-		insertObject(wo, Vector(28,2),rid);
-		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "fence5");
-		insertObject(wo, Vector(3,22),rid);
-
-        wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "smallWall2");
-		insertObject(wo, Vector(7.5,22),rid);
-
-		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "wall1");
-		insertObject(wo, Vector(11,22),rid);
-		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "wall2");
-		insertObject(wo, Vector(17,22),rid);
-		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "wall3");
-		insertObject(wo, Vector(23,22),rid);
-
-		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "smallWall1");
-		insertObject(wo, Vector(26.5,22),rid);
-
-        wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "stones3");
-		insertObject(wo, Vector(20,6),rid);
-
-
-		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "tree1");
-		insertObject(wo, Vector(9,13),rid);
-
-		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "tree2");
-		insertObject(wo, Vector(10,2),rid);
-
-        wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "tree2");
-		insertObject(wo, Vector(0,0),rid);
-
-		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "tree3");
-		insertObject(wo, Vector(1,2),rid);
 
 		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_MONSTER, "lich");
 		insertObject(wo, Vector(7,5),rid);
@@ -179,7 +156,7 @@ void World::createRegion(short region)
 		
 		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_MONSTER, "goblin");
 		insertObject(wo, Vector(13,8),rid);
-// 		
+		
 		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_MONSTER, "gob_dog");
 		insertObject(wo, Vector(14.2,8.2),rid);
 
@@ -205,7 +182,7 @@ void World::createRegion(short region)
 
 		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_MONSTER, "goblin");
 		insertObject(wo, Vector(19.9,6.9),rid);
-		
+		*/
 
 /*
 		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_MONSTER, "goblin");
@@ -1187,7 +1164,7 @@ void World::updatePlayers()
 					// Region anlegen wenn sie noch nicht existiert
 					if (m_regions[headerp.m_number] ==0)
 					{
-						m_regions[headerp.m_number] = new Region(dimx,dimy,headerp.m_number,this,m_server);
+						m_regions[headerp.m_number] = new Region(dimx,dimy,headerp.m_number,this);
 					}
 
 					// Daten schreiben
