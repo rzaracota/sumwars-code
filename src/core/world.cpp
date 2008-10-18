@@ -81,10 +81,6 @@ bool World::init()
 		m_network = new ClientNetwork();
 	}
 
-	long sec;
-	time(&sec);
-	srand(sec);
-
 	if( m_network->init( REQ_PORT )!=NET_OK )
 	{
 		ERRORMSG( "Error occured in network" );
@@ -105,7 +101,7 @@ void World::createRegion(short region)
 	}
 	else if(type==2)
 	{
-		Region* reg = new Region(25,25,region,this);
+		Region* reg = new Region(25,25,region);
 		short rid = insertRegion(reg,region);
 
 
@@ -1164,7 +1160,7 @@ void World::updatePlayers()
 					// Region anlegen wenn sie noch nicht existiert
 					if (m_regions[headerp.m_number] ==0)
 					{
-						m_regions[headerp.m_number] = new Region(dimx,dimy,headerp.m_number,this);
+						m_regions[headerp.m_number] = new Region(dimx,dimy,headerp.m_number);
 					}
 
 					// Daten schreiben

@@ -106,14 +106,14 @@ class RegionData
 		void addObjectGroupTemplate(ObjectGroupTemplateName group_name, int prio=0, int number =1, float probability=1.0);
 		
 		/**
-		 * \fn void addEnvironment(EnvironmentName name, float percentage)
-		 * \brief Fuegt eine neue Umgebung hinzu
-		 * \param name Name der Umgebug
-		 * \param percentage Prozentsatz zu dem diese Umgebung erzeugt wird
+		 * \fn void addEnvironment(float maxheight, EnvironmentName env)
+		 * \brief Fuegt eine neue Umgebung fuer die Region ein
+		 * \param maxheight maximale Hoehe bis zu der diese Umgebung verwendet wird
+		 * \param env Name der Umgebung
 		 */
-		void addEnvironment(EnvironmentName name, float percentage)
+		void addEnvironment(float maxheight, EnvironmentName env)
 		{
-			m_environments.push_back(std::make_pair(percentage,name));
+			m_environments.push_back(std::make_pair(maxheight,env));
 		}
 		
 		/**
@@ -140,15 +140,14 @@ class Region
 {
 	public:
 		/**
-	 * \fn Region(short dimx, short dimy, short id, World* world)
+	 * \fn Region(short dimx, short dimy, short id)
 		 * \brief Konstruktor
 		 * \param dimx Ausdehnung in x-Richtung
 	 	 * \param dimy Ausdehnung in y-Richtung
 		 * \param id ID der Region
-		 * \param world Zeiger auf die Welt
 		 * \param server gibt an, ob der Rechner der Server ist
 	 	 */
-		Region(short dimx, short dimy, short id, World* world);
+		Region(short dimx, short dimy, short id);
 
 
 		/**
@@ -481,7 +480,7 @@ class Region
 		 * \param pos Ort
 		 */
 		EnvironmentName getEnvironment(Vector pos);
-
+		
 	private:
 		/**
 		* \var m_dimx

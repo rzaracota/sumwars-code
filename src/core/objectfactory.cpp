@@ -358,6 +358,7 @@ void ObjectFactory::init()
 	registerFixedObject("fence1",fdata);
 	
 	fdata = new FixedObjectData;
+	fdata->m_layer = WorldObject::LAYER_BASE | WorldObject::LAYER_AIR;
 	fdata->m_shape.m_type = Shape::RECT;
 	fdata->m_shape.m_extent = Vector(3.84,0.15);
 	registerFixedObject("fence2",fdata);
@@ -413,7 +414,7 @@ void ObjectFactory::init()
 	fdata = new FixedObjectData;
 	fdata->m_layer = WorldObject::LAYER_BASE | WorldObject::LAYER_AIR;
 	fdata->m_shape.m_type = Shape::RECT;
-	fdata->m_shape.m_extent = Vector(3.18,2.11);
+	fdata->m_shape.m_extent = Vector(4,4);
 	registerFixedObject("stones3",fdata);
 	
 	
@@ -457,22 +458,31 @@ void ObjectFactory::init()
 	
 	grouptempl = new ObjectGroupTemplate;
 	grouptempl->addObject("$border",Vector(0,3.8),0);
+	grouptempl->addObject("$tree",Vector(-1.84,3.2),0,0.5);
+	grouptempl->addObject("$tree",Vector(-1.6,0.3),0,0.5);
+	grouptempl->addObject("$tree",Vector(1.1,0.82),0,0.5);
 	registerObjectGroupTemplate("border(side)",grouptempl);
 	
 	grouptempl = new ObjectGroupTemplate;
 	grouptempl->addObject("$border",Vector(0,3.8),0);
 	grouptempl->addObject("$border",Vector(3.8,0),-90*PI/180);
+	grouptempl->addObject("$tree",Vector(0.57,-2.78),0,0.5);
+	grouptempl->addObject("$tree",Vector(-2.5,2.3),0,0.5);
 	registerObjectGroupTemplate("border(corner)",grouptempl);
 	
 	grouptempl = new ObjectGroupTemplate;
 	grouptempl->addObject("$border",Vector(0,3.8),0);
 	grouptempl->addObject("$border",Vector(0,-3.8),-180*PI/180);
+	grouptempl->addObject("$tree",Vector(-0.43,1.6),0,0.5);
+	grouptempl->addObject("$tree",Vector(3.5,-0.85),0,0.5);
 	registerObjectGroupTemplate("border(twoside)",grouptempl);
 	
 	grouptempl = new ObjectGroupTemplate;
 	grouptempl->addObject("$border",Vector(0,3.8),0);
 	grouptempl->addObject("$border",Vector(3.8,0),-90*PI/180);
 	grouptempl->addObject("$border",Vector(0,-3.8),-180*PI/180);
+	grouptempl->addObject("$tree",Vector(-0.86,1.9),0,0.5);
+	grouptempl->addObject("$tree",Vector(3,-1.3),0,0.5);
 	registerObjectGroupTemplate("border(twocorner)",grouptempl);
 	
 	grouptempl = new ObjectGroupTemplate;
@@ -480,7 +490,10 @@ void ObjectFactory::init()
 	registerObjectGroupTemplate("border(single_block)",grouptempl);
 	
 	grouptempl = new ObjectGroupTemplate;
-	grouptempl->addObject("$tree",Vector(0,1),0,0.5);
+	grouptempl->addObject("$tree",Vector(0,3.6),0,0.5);
+	grouptempl->addObject("$tree",Vector(-1,-2.3),0,0.5);
+	grouptempl->addObject("$tree",Vector(-1.2,3.3),0,0.5);
+	grouptempl->addObject("$tree",Vector(0,-1.7),0,0.5);
 	registerObjectGroupTemplate("border(filled)",grouptempl);
 }
 

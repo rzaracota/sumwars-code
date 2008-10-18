@@ -4,6 +4,7 @@
 #include "matrix2d.h"
 #include "unionfindtree.h"
 #include "objectfactory.h"
+#include <iomanip>
 
 #include "region.h"
 #include <queue>
@@ -32,6 +33,7 @@ class MapGenerator
 		 * \brief die grundlegende Karte. Freie Felder sind mit 1 markiert, blockierte mit -1
 		 */
 		Matrix2d<char>* m_base_map;
+		
 
 		/**
 		 * \var Matrix2d<float>* m_environment

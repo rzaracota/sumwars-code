@@ -13,7 +13,7 @@ void RegionData::addObjectGroupTemplate(ObjectGroupTemplateName group_name, int 
 }
 
 
-Region::Region(short dimx, short dimy, short id, World* world)
+Region::Region(short dimx, short dimy, short id)
 {
 	DEBUG5("creating region");
 	m_data_grid = new Matrix2d<Gridunit>(dimx,dimy);
@@ -43,8 +43,7 @@ Region::Region(short dimx, short dimy, short id, World* world)
 
 	m_events = new EventList;
 
-	
-	m_world = world;
+
 }
 
 Region::~Region()
@@ -92,18 +91,31 @@ WorldObject* Region::getObject ( int id)
 	WorldObjectMap::iterator iter;
 
 	// Objekt im Binärbaum suchen
+	
 	iter = m_objects->find(id);
-
+	
 	// Testen ob ein Objekt gefunden wurde
 	if (iter == m_objects->end())
 	{
-		// keins gefunden, NULL ausgeben
-		return 0;
+		// unter den statischen Objekten suchen
+		iter = m_static_objects->find(id);
+	
+		// Testen ob ein Objekt gefunden wurde
+		if (iter == m_static_objects->end())
+		{
+			// keins gefunden, NULL ausgeben
+			return 0;
+		}
+		else
+		{
+			// Zeiger auf Objekt ausgeben
+			return iter->second;
+		}
 	}
 	else
 	{
-		// Zeiger auf Objekt ausgeben
-		return iter->second;
+			// Zeiger auf Objekt ausgeben
+			return iter->second;
 	}
 }
 
@@ -257,15 +269,19 @@ bool  Region::addObjectsInShapeFromGridunit(Shape* shape, Gridunit* gu, WorldObj
 	{
 
 		wo = arr[k];
+		DEBUG5("testing obj %i layer %i",wo->getId(),wo->getLayer());
 		
 		s = wo->getShape();
 
 		if (wo->getLayer() & layer)
 		{
+			DEBUG5("adding obj %i layer %i",wo->getId(), wo->getLayer());
 			if ((shape ==0) || shape->intersects(*s))
 			{
+				
 				if (wo != omit)
 				{
+					
 					result->push_back(wo);
 
 					if (empty_test)
@@ -366,7 +382,6 @@ bool Region::getObjectsInShape( Shape* shape,  WorldObjectList* result,short lay
 		int ymin = (int) floor(0.25*(d2.m_y-4));
 		int xmax = (int) floor(0.25*(d1.m_x+4));
 		int ymax = (int) floor(0.25*(d1.m_y+4));
-		DEBUG5("searching square (%i %i) (%i %i)",xmin,ymin,xmax,ymax);
 		// Pruefen ob die Suchanfrage nicht aus der Region herauslaeuft
 		bool ret = false;
 		int is = std::max (xmin,0);
@@ -374,6 +389,8 @@ bool Region::getObjectsInShape( Shape* shape,  WorldObjectList* result,short lay
 		int js = std::max(ymin,0);
 		int je = std::min(ymax,m_dimy-1);
 
+		DEBUG5("searching square (%i %i) (%i %i)",is,ie,js,je);
+		
 		// Alle 4x4 Felder durchmustern
 		for (i = is;i<=ie;i++)
 		{
@@ -521,7 +538,6 @@ bool Region::insertObject (WorldObject* object, Vector pos, float angle, bool co
 {
 	bool result = true;
 
-
 	object->getGridLocation()->m_region = m_id;
 
 	 // Einfügen in den Binärbaum
@@ -591,6 +607,7 @@ bool Region::insertObject (WorldObject* object, Vector pos, float angle, bool co
 
 	}
 
+	//DEBUG("object inserted %s at %f %f",object->getTypeInfo()->m_subtype.c_str(),
 	return result;
 }
 
@@ -603,18 +620,25 @@ int Region::createObject(WorldObject::TypeInfo::ObjectType type, ObjectTemplateT
 	WorldObject::TypeInfo::ObjectSubtype subtype = ObjectFactory::getObjectType(generictype, env);
 	if (subtype == "")
 	{
+		DEBUG("no subtype found for generictype %s",generictype.c_str());
 		return 0;
 	}
 	
 	// Objekt erstellen
 	WorldObject* object = ObjectFactory::createObject(type,subtype);
+	
 	if (object ==0)
 	{
+		DEBUG("could not create object for generictype %s",generictype.c_str());
 		return 0;
 	}
 	
 	// Objekt einfuegen
-	insertObject(object,pos,angle,false);
+	bool ret = insertObject(object,pos,angle,false);
+	if (!ret)
+	{
+		DEBUG("insertion failed");
+	}
 	
 	return object->getId();
 	
@@ -631,7 +655,6 @@ int Region::createObjectGroup(ObjectGroupTemplateName templname, Vector position
 	if (templ != 0)
 	{
 		// Template wurde gefunden
-		DEBUG("found template");
 		// Objekte platzieren
 		std::list<ObjectGroupTemplate::GroupObject>::iterator gt;
 		Vector pos;
@@ -645,9 +668,10 @@ int Region::createObjectGroup(ObjectGroupTemplateName templname, Vector position
 				pos.rotate(angle);
 				pos += position;
 				
-				DEBUG("inserting object %s at %f %f",gt->m_type.c_str(),pos.m_x, pos.m_y);
 				
-				createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT,gt->m_type, pos, angle+gt->m_angle);
+				int id = createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT,gt->m_type, pos, angle+gt->m_angle);
+				DEBUG5("inserting object %s at %f %f with id %i",gt->m_type.c_str(),pos.m_x, pos.m_y,id);
+
 			}
 		}
 		
@@ -1383,6 +1407,10 @@ bool Region::deleteItem(int id, bool delitem)
 
 EnvironmentName Region::getEnvironment(Vector pos)
 {
+	if (m_environments.empty())
+	{
+		ERRORMSG("no environments defined");
+	}
 	// Hoehe an der angegebenen Stelle
 	float height = *(m_height->ind(int(pos.m_x/4),int(pos.m_y/4)));
 	
