@@ -20,7 +20,7 @@
 #include <sys/time.h>
 
 //Constructors/Destructors
-Creature::Creature(World* world, unsigned int id) : WorldObject(world, id)
+Creature::Creature(int id) : WorldObject(id)
 {
 	if (!Creature::init())
 	{
@@ -127,7 +127,7 @@ bool Creature::destroy()
 	// Wenn Spieler geloescht wird, automatisch Handel abbrechen
 	if (getTradeId() !=0)
 	{
-		Trade* trade = getWorld()->getTrade(getTradeId());
+		Trade* trade = World::getWorld()->getTrade(getTradeId());
 
 		// eigene Position bei dem Handel bestimmen
 		int idx = trade->getPlayerIndex(getId());
@@ -354,7 +354,7 @@ void Creature::performAction(float &time)
 		p2 = rezt * m_action.m_elapsed_time;
 	}
 
-	if (!getWorld()->isServer() && m_action.m_type != Action::NOACTION)
+	if (!World::getWorld()->isServer() && m_action.m_type != Action::NOACTION)
 	{
 		DEBUG5("perform Action %i for %f msec, %f / %f done", m_action.m_type,dtime,m_action.m_elapsed_time,m_action.m_time);
 	}
@@ -397,7 +397,7 @@ void Creature::performAction(float &time)
 	Vector goal = m_action.m_goal;
 	
 	// Testen ob der kritische Prozentsatz durch das aktuelle Zeitquantum ueberschritten wurde
-	if (p1<pct && pct <=p2 && getWorld()->isServer())
+	if (p1<pct && pct <=p2 && World::getWorld()->isServer())
 	{
 		DEBUG5("critical point %f %f %f",p1,pct,p2);
 
@@ -429,7 +429,7 @@ void Creature::performAction(float &time)
 		if (m_action.m_goal_object_id!=0 && m_action.m_type!= Action::TAKE_ITEM)
 		{
 			// Zielobjekt durch ID gegeben, Objekt von der Welt holen
-			goalobj = getWorld()->getObject(m_action.m_goal_object_id,getGridLocation()->m_region);
+			goalobj = World::getWorld()->getObject(m_action.m_goal_object_id,getGridLocation()->m_region);
 		}
 		else
 		{
@@ -439,7 +439,7 @@ void Creature::performAction(float &time)
 			if (Action::getActionInfo(m_action.m_type)->m_distance == Action::MELEE && m_action.m_type!= Action::TAKE_ITEM)
 			{
 				DEBUG5("Searching goal %f %f",goal.m_x,goal.m_y);
-				goalobj = getWorld()->getObjectAt(goal,getGridLocation()->m_region,LAYER_AIR);
+				goalobj = World::getWorld()->getObjectAt(goal,getGridLocation()->m_region,LAYER_AIR);
 				DEBUG5("got object %p",goalobj);
 			}
 		}
@@ -453,7 +453,7 @@ void Creature::performAction(float &time)
 		// Zielobjekt im Nahkampf suchen an der Stelle an der die Waffe trifft
 		if (goalobj ==0 && Action::getActionInfo(m_action.m_type)->m_distance == Action::MELEE && m_action.m_type!= Action::TAKE_ITEM)
 		{
-			goalobj = getWorld()->getObjectAt(goal,getGridLocation()->m_region,LAYER_AIR);
+			goalobj = World::getWorld()->getObjectAt(goal,getGridLocation()->m_region,LAYER_AIR);
 		}
 
 		// Wenn ein Zielobjekt existiert
@@ -615,7 +615,7 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 			m_damage.m_multiplier[Damage::PHYSICAL]=1;
 			s.m_center = goal;
 			s.m_radius = 1.5;
-			getWorld()->getObjectsInShape(&s,reg, &res,LAYER_AIR,CREATURE,this);
+			World::getWorld()->getObjectsInShape(&s,reg, &res,LAYER_AIR,CREATURE,this);
 
 			// an alle einfachen Schaden austeilen
 			for (it=res.begin();it!=res.end();++it)
@@ -634,7 +634,7 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 			// alle Lebewesen im Umkreis um den Ausfuehrenden auswaehlen
 			// Radius gleich Waffenreichweite
 			s.m_radius += m_command.m_range;
-			getWorld()->getObjectsInShape(&s, reg, &res,LAYER_AIR,CREATURE,this);
+			World::getWorld()->getObjectsInShape(&s, reg, &res,LAYER_AIR,CREATURE,this);
 
 			// an alle Schaden austeilen
 			for (it=res.begin();it!=res.end();++it)
@@ -706,99 +706,99 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 		// Magierfaehigkeiten
 		case Action::MAGIC_ATTACK:
 			// Projektil magischer Pfeil erzeugen
-			pr = new Projectile(getWorld(),Projectile::MAGIC_ARROW,fr, getWorld()->getValidProjectileId());
+			pr = new Projectile(Projectile::MAGIC_ARROW,fr, World::getWorld()->getValidProjectileId());
 			memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
 			pr->setSpeed(dir/70);
 			
-			getWorld()->insertProjectile(pr,sproj,reg);
+			World::getWorld()->insertProjectile(pr,sproj,reg);
 			break;
 
 		case Action::FIRE_BOLT:
 		case Action::FIRE_STRIKE:
 			// Projektil Feuerblitz erzeugen
-			pr = new Projectile(getWorld(),Projectile::FIRE_BOLT,fr, getWorld()->getValidProjectileId());
+			pr = new Projectile(Projectile::FIRE_BOLT,fr, World::getWorld()->getValidProjectileId());
 			memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
 			pr->setSpeed(dir/70);
 			
-			getWorld()->insertProjectile(pr,sproj,reg);
+			World::getWorld()->insertProjectile(pr,sproj,reg);
 			break;
 
 		case Action::FIRE_BALL:
 		case Action::INFERNO_BALL:
 			// Projektil Feuerball erzeugen
-			pr = new Projectile(getWorld(),Projectile::FIRE_BALL,fr, getWorld()->getValidProjectileId());
+			pr = new Projectile(Projectile::FIRE_BALL,fr, World::getWorld()->getValidProjectileId());
 			memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
 			pr->setSpeed(dir/70);
-			getWorld()->insertProjectile(pr,sproj,reg);
+			World::getWorld()->insertProjectile(pr,sproj,reg);
 			break;
 
 		case Action::FIRE_WAVE:
 		case Action::FIRE_STORM:
 			// Projektil Feuerwelle erzeugen
-			pr = new Projectile(getWorld(),Projectile::FIRE_WAVE,fr, getWorld()->getValidProjectileId());
+			pr = new Projectile(Projectile::FIRE_WAVE,fr, World::getWorld()->getValidProjectileId());
 			memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
-			getWorld()->insertProjectile(pr,pos,reg);
+			World::getWorld()->insertProjectile(pr,pos,reg);
 			break;
 
 		case Action::FIRE_WALL:
 			// Projektil Feuersaeule erzeugen
-			pr = new Projectile(getWorld(),Projectile::FIRE_WALL,fr, getWorld()->getValidProjectileId());
+			pr = new Projectile(Projectile::FIRE_WALL,fr, World::getWorld()->getValidProjectileId());
 			memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
-			getWorld()->insertProjectile(pr,goal,reg);
+			World::getWorld()->insertProjectile(pr,goal,reg);
 			break;
 
 		case Action::ICE_BOLT:
 		case Action::ICE_SPIKE:
 			// Projektil Eisblitz erzeugen
-			pr = new Projectile(getWorld(),Projectile::ICE_BOLT,fr, getWorld()->getValidProjectileId());
+			pr = new Projectile(Projectile::ICE_BOLT,fr, World::getWorld()->getValidProjectileId());
 			memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
 			pr->setSpeed(dir/70);
-			getWorld()->insertProjectile(pr,sproj,reg);
+			World::getWorld()->insertProjectile(pr,sproj,reg);
 			break;
 
 		case Action::SNOW_STORM:
 		case Action::BLIZZARD:
 			// Projektil Blizzard erzeugen
-			pr = new Projectile(getWorld(),Projectile::BLIZZARD,fr, getWorld()->getValidProjectileId());
+			pr = new Projectile(Projectile::BLIZZARD,fr, World::getWorld()->getValidProjectileId());
 			memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
-			getWorld()->insertProjectile(pr,goal,reg);
+			World::getWorld()->insertProjectile(pr,goal,reg);
 			break;
 
 		case Action::ICE_RING:
 		case Action::FROST_RING:
 			// Projektil Eisring erzeugen
-			pr = new Projectile(getWorld(),Projectile::ICE_RING,fr, getWorld()->getValidProjectileId());
+			pr = new Projectile(Projectile::ICE_RING,fr, World::getWorld()->getValidProjectileId());
 			memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
-			getWorld()->insertProjectile(pr,pos,reg);
+			World::getWorld()->insertProjectile(pr,pos,reg);
 			break;
 
 		case Action::FREEZE:
 			// Projektil Einfrieren erzeugen
-			pr = new Projectile(getWorld(),Projectile::FREEZE,fr, getWorld()->getValidProjectileId());
+			pr = new Projectile(Projectile::FREEZE,fr, World::getWorld()->getValidProjectileId());
 			memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
-			getWorld()->insertProjectile(pr,goal,reg);
+			World::getWorld()->insertProjectile(pr,goal,reg);
 			break;
 
 		case Action::LIGHTNING:
 		case Action::LIGHTNING_STRIKE:
 			// Projektil Blitz erzeugen
-			pr = new Projectile(getWorld(),Projectile::LIGHTNING,fr, getWorld()->getValidProjectileId());
+			pr = new Projectile(Projectile::LIGHTNING,fr, World::getWorld()->getValidProjectileId());
 			memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
-			getWorld()->insertProjectile(pr,goal,reg);
+			World::getWorld()->insertProjectile(pr,goal,reg);
 			break;
 
 		case Action::THUNDERSTORM:
 		case Action::THUNDERSTORM2:
 			// Projektil Gewitter erzeugen
-			pr = new Projectile(getWorld(),Projectile::THUNDERSTORM,fr, getWorld()->getValidProjectileId());
+			pr = new Projectile(Projectile::THUNDERSTORM,fr, World::getWorld()->getValidProjectileId());
 			memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
-			getWorld()->insertProjectile(pr,goal,reg);
+			World::getWorld()->insertProjectile(pr,goal,reg);
 			break;
 
 		case Action::CHAIN_LIGHTNING:
 		case Action::CHAIN_LIGHTNING2:
 			// Projektil Kettenblitz erzeugen
-			pr = new Projectile(getWorld(),Projectile::CHAIN_LIGHTNING,fr, getWorld()->getValidProjectileId());
+			pr = new Projectile(Projectile::CHAIN_LIGHTNING,fr, World::getWorld()->getValidProjectileId());
 			memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
 			if (m_action.m_type == Action::CHAIN_LIGHTNING2)
 			{
@@ -806,7 +806,7 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 				pr->setCounter(-4);
 			}
 			pr->setSpeed(dir/50);
-			getWorld()->insertProjectile(pr,sproj,reg);
+			World::getWorld()->insertProjectile(pr,sproj,reg);
 			break;
 
 		case Action::STATIC_SHIELD:
@@ -823,18 +823,18 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 		case Action::WEAK_POINT:
 		case Action::BLIND_RAGE:
 			// Projektil Pfeil erzeugen
-			pr = new Projectile(getWorld(),arrow,fr, getWorld()->getValidProjectileId());
+			pr = new Projectile(arrow,fr, World::getWorld()->getValidProjectileId());
 			memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
 			pr->setSpeed(dir/80);
 			tdir = dir*(1/80);
 			DEBUG5("set speed %f %f",tdir.m_x, tdir.m_y);
 			
-			getWorld()->insertProjectile(pr,sproj,reg);
+			World::getWorld()->insertProjectile(pr,sproj,reg);
 			break;
 
 		case Action::GUIDED_TRIPLE_SHOT:
 			// Projektil gelenkter Pfeil erzeugen
-			pr = new Projectile(getWorld(),Projectile::GUIDED_ARROW,fr, getWorld()->getValidProjectileId());
+			pr = new Projectile(Projectile::GUIDED_ARROW,fr, World::getWorld()->getValidProjectileId());
 			memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
 			pr->setSpeed(dir/100);
 			
@@ -843,7 +843,7 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 				DEBUG5("has goal");
 				pr->setGoalObject(cgoal->getId());
 			}
-			getWorld()->insertProjectile(pr,sproj,reg);
+			World::getWorld()->insertProjectile(pr,sproj,reg);
 			break;
 
 		case Action::MULTISHOT:
@@ -857,11 +857,11 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 				dir2.normalize();
 
 				sproj = pos+dir2* 1.05 * s.m_radius;
-				pr = new Projectile(getWorld(),arrow,fr, getWorld()->getValidProjectileId());
+				pr = new Projectile(arrow,fr, World::getWorld()->getValidProjectileId());
 				memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
 				pr->setSpeed(dir2/80);
 				
-				getWorld()->insertProjectile(pr,sproj,reg);
+				World::getWorld()->insertProjectile(pr,sproj,reg);
 			}
 			break;
 
@@ -876,37 +876,37 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 				dir2.normalize();
 
 				sproj = pos+dir2* 1.05 * s.m_radius;
-				pr = new Projectile(getWorld(),arrow,fr, getWorld()->getValidProjectileId());
+				pr = new Projectile(arrow,fr, World::getWorld()->getValidProjectileId());
 				memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
 				pr->setSpeed(dir2/80);
-				getWorld()->insertProjectile(pr,sproj,reg);
+				World::getWorld()->insertProjectile(pr,sproj,reg);
 			}
 			break;
 
 		case Action::PIERCE:
 			// Projektil Pfeil erzeugen
-			pr = new Projectile(getWorld(),arrow,fr, getWorld()->getValidProjectileId());
+			pr = new Projectile(arrow,fr, World::getWorld()->getValidProjectileId());
 			memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
 			pr->setSpeed(dir/80);
 			
 			// Flag durchschlagend setzen
 			pr->setFlags(Projectile::PIERCING);
-			getWorld()->insertProjectile(pr,sproj,reg);
+			World::getWorld()->insertProjectile(pr,sproj,reg);
 			break;
 
 		case Action::VACUUM:
 			// Projektil Windpfeil erzeugen
-			pr = new Projectile(getWorld(),Projectile::WIND_ARROW,fr, getWorld()->getValidProjectileId());
+			pr = new Projectile(Projectile::WIND_ARROW,fr, World::getWorld()->getValidProjectileId());
 			memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
 			pr->setSpeed(dir/80);
 			
-			getWorld()->insertProjectile(pr,sproj,reg);
+			World::getWorld()->insertProjectile(pr,sproj,reg);
 			break;
 
 		case Action::EXPLODING_ARROW:
 		case Action::EXPLOSION_CASCADE:
 			// Projektil Pfeil erzeugen
-			pr = new Projectile(getWorld(),arrow,fr, getWorld()->getValidProjectileId());
+			pr = new Projectile(arrow,fr, World::getWorld()->getValidProjectileId());
 			memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
 			pr->setSpeed(dir/80);
 			
@@ -915,12 +915,12 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 			// bei verbesserter Version Flag mehrfach explodierend setzen
 			if (m_action.m_type==Action::EXPLOSION_CASCADE)
 				pr->setFlags(Projectile::MULTI_EXPLODES);
-			getWorld()->insertProjectile(pr,sproj,reg);
+			World::getWorld()->insertProjectile(pr,sproj,reg);
 			break;
 
 		case Action::DEATH_ROULETTE:
 			// Projektil Pfeil erzeugen
-			pr = new Projectile(getWorld(),arrow,fr, getWorld()->getValidProjectileId());
+			pr = new Projectile(arrow,fr, World::getWorld()->getValidProjectileId());
 			memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
 			pr->setSpeed(dir/80);
 			
@@ -928,7 +928,7 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 			pr->setCounter(-20);
 			// Flag zufaellig weiterspringen setzen
 			pr->setFlags(Projectile::PROB_BOUNCING);
-			getWorld()->insertProjectile(pr,sproj,reg);
+			World::getWorld()->insertProjectile(pr,sproj,reg);
 			break;
 
 		case Action::AIMED_SHOT:
@@ -993,9 +993,9 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 		case Action::HOLY_LIGHT:
 		case Action::HOLY_FIRE:
 			// Projektil Lichtstrahl erzeugen
-			pr = new Projectile(getWorld(),Projectile::LIGHT_BEAM,fr, getWorld()->getValidProjectileId());
+			pr = new Projectile(Projectile::LIGHT_BEAM,fr, World::getWorld()->getValidProjectileId());
 			memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
-			getWorld()->insertProjectile(pr,goal,reg);
+			World::getWorld()->insertProjectile(pr,goal,reg);
 			break;
 
 		case Action::BURNING_RAGE:
@@ -1007,10 +1007,10 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 			// alle Verbuendeten im Umkreis von 12 suchen und Modifikation anwenden
 			s.m_center = pos;
 			s.m_radius = 12;
-			getWorld()->getObjectsInShape(&s,reg, &res, LAYER_AIR,CREATURE,0);
+			World::getWorld()->getObjectsInShape(&s,reg, &res, LAYER_AIR,CREATURE,0);
 			for (it=res.begin();it!=res.end();++it)
 			{
-				if (getWorld()->getRelation(fr,(*it)) == WorldObject::ALLIED)
+				if (World::getWorld()->getRelation(fr,(*it)) == WorldObject::ALLIED)
 				{
 					if ((*it)->getTypeInfo()->m_type != TypeInfo::TYPE_FIXED_OBJECT)
 					{
@@ -1028,7 +1028,7 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 			{
 				cdam.m_dstatus_mod_immune_time[Damage::BLIND] = 1;
 				cdam.m_dstatus_mod_immune_time[Damage::MUTE] = 1;
-				if (getWorld()->getRelation(fr,cgoal) == WorldObject::ALLIED)
+				if (World::getWorld()->getRelation(fr,cgoal) == WorldObject::ALLIED)
 				{
 					cgoal->applyDynAttrMod(&cdam);
 				}
@@ -1044,10 +1044,10 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 			// alle Verbuendeten im Umkreis von 12 suchen und Modifikation anwenden
 			s.m_center = pos;
 			s.m_radius = 12;
-			getWorld()->getObjectsInShape(&s, reg, &res,LAYER_AIR,CREATURE,0);
+			World::getWorld()->getObjectsInShape(&s, reg, &res,LAYER_AIR,CREATURE,0);
 			for (it=res.begin();it!=res.end();++it)
 			{
-				if (getWorld()->getRelation(fr,(*it)) == WorldObject::ALLIED)
+				if (World::getWorld()->getRelation(fr,(*it)) == WorldObject::ALLIED)
 				{
 					if ((*it)->getTypeInfo()->m_type != TypeInfo::TYPE_FIXED_OBJECT)
 					{
@@ -1067,10 +1067,10 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 			// alle Verbuendeten im Umkreis von 6 um den Zielpunkt suchen und Modifikation anwenden
 			s.m_center = goal;
 			s.m_radius = 6;
-			getWorld()->getObjectsInShape(&s, reg, &res,0);
+			World::getWorld()->getObjectsInShape(&s, reg, &res,0);
 			for (it=res.begin();it!=res.end();++it)
 			{
-				if (getWorld()->getRelation(fr,(*it)) == WorldObject::ALLIED)
+				if (World::getWorld()->getRelation(fr,(*it)) == WorldObject::ALLIED)
 				{
 					if ((*it)->getTypeInfo()->m_type != TypeInfo::TYPE_FIXED_OBJECT)
 					{
@@ -1083,25 +1083,25 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 
 		case Action::LIGHT_BEAM:
 			// Projektil Lichtstrahl erzeugen
-			pr = new Projectile(getWorld(),Projectile::LIGHT_BEAM,fr, getWorld()->getValidProjectileId());
+			pr = new Projectile(Projectile::LIGHT_BEAM,fr, World::getWorld()->getValidProjectileId());
 			memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
-			getWorld()->insertProjectile(pr,goal,reg);
+			World::getWorld()->insertProjectile(pr,goal,reg);
 			break;
 
 		case Action::BURNING_SUN:
 			// alle Lebewesen im Umkreis von 3 um den Zielpunkt suchen
 			s.m_center = goal;
 			s.m_radius = 3;
-			getWorld()->getObjectsInShape(&s, reg, &res,LAYER_AIR,CREATURE,this);
+			World::getWorld()->getObjectsInShape(&s, reg, &res,LAYER_AIR,CREATURE,this);
 			for (it=res.begin();it!=res.end();++it)
 			{
 				if ((*it)->getTypeInfo()->m_type != TypeInfo::TYPE_FIXED_OBJECT)
 				{
 					// Projektil Lichtstrahl fuer jedes Objekt erzeugen
 					goal = (*it)->getShape()->m_center;
-					pr = new Projectile(getWorld(),Projectile::LIGHT_BEAM,fr, getWorld()->getValidProjectileId());
+					pr = new Projectile(Projectile::LIGHT_BEAM,fr, World::getWorld()->getValidProjectileId());
 					memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
-					getWorld()->insertProjectile(pr,goal,reg);
+					World::getWorld()->insertProjectile(pr,goal,reg);
 				}
 			}
 			break;
@@ -1109,9 +1109,9 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 		case Action::BREAK_BINDING:
 		case Action::DISRUPT_BINDING:
 			// Projektil Elementarzerstoerung erzeugen
-			pr = new Projectile(getWorld(),Projectile::ELEM_EXPLOSION,fr, getWorld()->getValidProjectileId());
+			pr = new Projectile(Projectile::ELEM_EXPLOSION,fr, World::getWorld()->getValidProjectileId());
 			memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
-			getWorld()->insertProjectile(pr,goal,reg);
+			World::getWorld()->insertProjectile(pr,goal,reg);
 			break;
 
 		case Action::MAGIC_SHIELD:
@@ -1123,10 +1123,10 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 			// alle Verbuendeten im Umkreis von 12 suchen und Modifikation anwenden
 			s.m_center = pos;
 			s.m_radius = 12;
-			getWorld()->getObjectsInShape(&s, reg, &res,LAYER_AIR,CREATURE,0);
+			World::getWorld()->getObjectsInShape(&s, reg, &res,LAYER_AIR,CREATURE,0);
 			for (it=res.begin();it!=res.end();++it)
 			{
-				if (getWorld()->getRelation(fr,(*it)) == WorldObject::ALLIED)
+				if (World::getWorld()->getRelation(fr,(*it)) == WorldObject::ALLIED)
 				{
 					if ((*it)->getTypeInfo()->m_type != TypeInfo::TYPE_FIXED_OBJECT)
 					{
@@ -1144,7 +1144,7 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 			{
 				cdam.m_dstatus_mod_immune_time[Damage::POISONED] = 1;
 				cdam.m_dstatus_mod_immune_time[Damage::BURNING] = 1;
-				if (getWorld()->getRelation(fr,cgoal) == WorldObject::ALLIED)
+				if (World::getWorld()->getRelation(fr,cgoal) == WorldObject::ALLIED)
 				{
 					cgoal->applyDynAttrMod(&cdam);
 				}
@@ -1160,10 +1160,10 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 			// alle Verbuendeten im Umkreis von 6 um den Zielpunkt suchen und Modifikation anwenden
 			s.m_center = goal;
 			s.m_radius = 6;
-			getWorld()->getObjectsInShape(&s, reg, &res,LAYER_AIR,CREATURE,0);
+			World::getWorld()->getObjectsInShape(&s, reg, &res,LAYER_AIR,CREATURE,0);
 			for (it=res.begin();it!=res.end();++it)
 			{
-				if (getWorld()->getRelation(fr,(*it)) == WorldObject::ALLIED)
+				if (World::getWorld()->getRelation(fr,(*it)) == WorldObject::ALLIED)
 				{
 					if ((*it)->getTypeInfo()->m_type != TypeInfo::TYPE_FIXED_OBJECT)
 					{
@@ -1176,9 +1176,9 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 
 		case Action::ACID:
 			// Projektil Saeure erzeugen
-			pr = new Projectile(getWorld(),Projectile::ACID,fr, getWorld()->getValidProjectileId());
+			pr = new Projectile(Projectile::ACID,fr, World::getWorld()->getValidProjectileId());
 			memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
-			getWorld()->insertProjectile(pr,goal,reg);
+			World::getWorld()->insertProjectile(pr,goal,reg);
 			break;
 
 		case Action::HEAL:
@@ -1187,7 +1187,7 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 			if (cgoal !=0)
 			{
 				cdam.m_dhealth = 3* m_base_attr_mod.m_willpower;
-				if (getWorld()->getRelation(fr,cgoal) == WorldObject::ALLIED)
+				if (World::getWorld()->getRelation(fr,cgoal) == WorldObject::ALLIED)
 				{
 					cgoal->applyDynAttrMod(&cdam);
 				}
@@ -1202,10 +1202,10 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 			// alle Verbuendeten im Umkreis von 6 um den Zielpunkt suchen und Modifikation anwenden
 			s.m_center = goal;
 			s.m_radius = 6;
-			getWorld()->getObjectsInShape(&s, reg, &res,LAYER_AIR,CREATURE,0);
+			World::getWorld()->getObjectsInShape(&s, reg, &res,LAYER_AIR,CREATURE,0);
 			for (it=res.begin();it!=res.end();++it)
 			{
-				if (getWorld()->getRelation(fr,(*it)) == WorldObject::ALLIED)
+				if (World::getWorld()->getRelation(fr,(*it)) == WorldObject::ALLIED)
 				{
 					if ((*it)->getTypeInfo()->m_type != TypeInfo::TYPE_FIXED_OBJECT)
 					{
@@ -1218,9 +1218,9 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 
 		case Action::DIVINE_WIND:
 			// Projektil heiliger Strahl erzeugen
-			pr = new Projectile(getWorld(),Projectile::DIVINE_BEAM,fr, getWorld()->getValidProjectileId());
+			pr = new Projectile(Projectile::DIVINE_BEAM,fr, World::getWorld()->getValidProjectileId());
 			memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
-			getWorld()->insertProjectile(pr,goal,reg);
+			World::getWorld()->insertProjectile(pr,goal,reg);
 			break;
 
 
@@ -1228,16 +1228,16 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 			// Alle Objekte im Umkreis von 3 um den Zielpunkt suchen
 			s.m_center = goal;
 			s.m_radius = 3;
-			getWorld()->getObjectsInShape(&s, reg, &res,LAYER_AIR,CREATURE,this);
+			World::getWorld()->getObjectsInShape(&s, reg, &res,LAYER_AIR,CREATURE,this);
 			for (it=res.begin();it!=res.end();++it)
 			{
 				// fuer alle Lebewesen ein Projektil heiliger Strahl erzeugen
 				if ((*it)->getTypeInfo()->m_type != TypeInfo::TYPE_FIXED_OBJECT)
 				{
 					goal = (*it)->getShape()->m_center;
-					pr = new Projectile(getWorld(),Projectile::DIVINE_BEAM,fr, getWorld()->getValidProjectileId());
+					pr = new Projectile(Projectile::DIVINE_BEAM,fr, World::getWorld()->getValidProjectileId());
 					memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
-					getWorld()->insertProjectile(pr,goal,reg);
+					World::getWorld()->insertProjectile(pr,goal,reg);
 				}
 			}
 			break;
@@ -1251,10 +1251,10 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 			// alle Verbuendeten im Umkreis von 12 suchen und Modifikation anwenden
 			s.m_center = pos;
 			s.m_radius = 12;
-			getWorld()->getObjectsInShape(&s, reg, &res,LAYER_AIR,CREATURE,0);
+			World::getWorld()->getObjectsInShape(&s, reg, &res,LAYER_AIR,CREATURE,0);
 			for (it=res.begin();it!=res.end();++it)
 			{
-				if (getWorld()->getRelation(fr,(*it)) == WorldObject::ALLIED)
+				if (World::getWorld()->getRelation(fr,(*it)) == WorldObject::ALLIED)
 				{
 					if ((*it)->getTypeInfo()->m_type != TypeInfo::TYPE_FIXED_OBJECT)
 					{
@@ -1272,7 +1272,7 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 			{
 				cdam.m_dstatus_mod_immune_time[Damage::CONFUSED] = 1;
 				cdam.m_dstatus_mod_immune_time[Damage::BERSERK] = 1;
-				if (getWorld()->getRelation(fr,cgoal) == WorldObject::ALLIED)
+				if (World::getWorld()->getRelation(fr,cgoal) == WorldObject::ALLIED)
 				{
 					cgoal->applyDynAttrMod(&cdam);
 				}
@@ -1288,10 +1288,10 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 			// alle Verbuendeten im Umkreis von 6 um den Zielpunkt suchen und Modifikation anwenden
 			s.m_center = goal;
 			s.m_radius = 6;
-			getWorld()->getObjectsInShape(&s, reg, &res,LAYER_AIR,CREATURE,0);
+			World::getWorld()->getObjectsInShape(&s, reg, &res,LAYER_AIR,CREATURE,0);
 			for (it=res.begin();it!=res.end();++it)
 			{
-				if (getWorld()->getRelation(fr,(*it)) == WorldObject::ALLIED)
+				if (World::getWorld()->getRelation(fr,(*it)) == WorldObject::ALLIED)
 				{
 					if ((*it)->getTypeInfo()->m_type != TypeInfo::TYPE_FIXED_OBJECT)
 					{
@@ -1304,25 +1304,25 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 
 		case Action::HYPNOSIS:
 			// Projektil Hypnose erzeugen
-			pr = new Projectile(getWorld(),Projectile::HYPNOSIS,fr, getWorld()->getValidProjectileId());
+			pr = new Projectile(Projectile::HYPNOSIS,fr, World::getWorld()->getValidProjectileId());
 			memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
-			getWorld()->insertProjectile(pr,goal,reg);
+			World::getWorld()->insertProjectile(pr,goal,reg);
 			break;
 
 		case Action::HYPNOSIS2:
 			// Alle Objekte im Umkreis von 2 um den Zielpunkt suchen
 			s.m_center = goal;
 			s.m_radius = 2;
-			getWorld()->getObjectsInShape(&s, reg, &res,LAYER_AIR,CREATURE,this);
+			World::getWorld()->getObjectsInShape(&s, reg, &res,LAYER_AIR,CREATURE,this);
 			for (it=res.begin();it!=res.end();++it)
 			{
 				// Fuer alle Lebewesen ein Projektil Hypnose erzeugen
 				if ((*it)->getTypeInfo()->m_type != TypeInfo::TYPE_FIXED_OBJECT)
 				{
 					goal = (*it)->getShape()->m_center;
-					pr = new Projectile(getWorld(),Projectile::HYPNOSIS,fr, getWorld()->getValidProjectileId());
+					pr = new Projectile(Projectile::HYPNOSIS,fr, World::getWorld()->getValidProjectileId());
 					memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
-					getWorld()->insertProjectile(pr,goal,reg);
+					World::getWorld()->insertProjectile(pr,goal,reg);
 				}
 			}
 			break;
@@ -1336,10 +1336,10 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 			// alle Verbuendeten im Umkreis von 12 suchen und Modifikation anwenden
 			s.m_center = pos;
 			s.m_radius = 12;
-			getWorld()->getObjectsInShape(&s, reg, &res,LAYER_AIR,CREATURE,0);
+			World::getWorld()->getObjectsInShape(&s, reg, &res,LAYER_AIR,CREATURE,0);
 			for (it=res.begin();it!=res.end();++it)
 			{
-				if (getWorld()->getRelation(fr,(*it)) == WorldObject::ALLIED)
+				if (World::getWorld()->getRelation(fr,(*it)) == WorldObject::ALLIED)
 				{
 					if ((*it)->getTypeInfo()->m_type != TypeInfo::TYPE_FIXED_OBJECT)
 					{
@@ -1390,7 +1390,7 @@ void Creature::collisionDetection(float time)
 	short layer = m_layer;
 
 	// Alle kollidierenden Objekte suchen
-	getWorld()->getObjectsInShape(&(scopy),getGridLocation()->m_region,&result,layer, CREATURE | FIXED,this);
+	World::getWorld()->getObjectsInShape(&(scopy),getGridLocation()->m_region,&result,layer, CREATURE | FIXED,this);
 
 	if (result.size()!=0)
 	{
@@ -1440,7 +1440,7 @@ void Creature::collisionDetection(float time)
 		result.clear();
 
 		// Suchen der Objekte um den neuen Zielpunkt
-		getWorld()->getObjectsInShape(&(scopy),getGridLocation()->m_region,&result,layer, CREATURE | FIXED,this);
+		World::getWorld()->getObjectsInShape(&(scopy),getGridLocation()->m_region,&result,layer, CREATURE | FIXED,this);
 
 		// Wenn immer noch Kollision vorliegt Bewegung beenden
 		if (result.size()!=0)
@@ -1654,7 +1654,7 @@ void Creature::calcAction()
 	{
 		DEBUG5("goal ID: %i",m_command.m_goal_object_id);
 		// Zielobjekt holen
-		goalobj = getWorld()->getObject(m_command.m_goal_object_id,getGridLocation()->m_region);
+		goalobj = World::getWorld()->getObject(m_command.m_goal_object_id,getGridLocation()->m_region);
 
 
 
@@ -1813,7 +1813,7 @@ void Creature::calcStatusModCommand()
 	
 	// Statusmod verwirrt
 	// diese Aktion nur vom Server ausloesen lassen
-	if (m_dyn_attr.m_status_mod_time[Damage::CONFUSED]>0 && getWorld()->isServer())
+	if (m_dyn_attr.m_status_mod_time[Damage::CONFUSED]>0 && World::getWorld()->isServer())
 	{
 		// aktuelle Bewegungsrichtung
 		Vector v = m_speed;
@@ -1846,7 +1846,7 @@ void Creature::calcStatusModCommand()
 		WorldObjectList::iterator it;
 
 		// ermitteln der Objekte mit denen bei der Bewegung kollidiert wird
-		getWorld()->getObjectsInShape(&s,getGridLocation()->m_region,&res,LAYER_AIR,CREATURE | FIXED,this);
+		World::getWorld()->getObjectsInShape(&s,getGridLocation()->m_region,&res,LAYER_AIR,CREATURE | FIXED,this);
 
 		// Zufallszahl fuer zufaellige Angriffe
 		float r = rand()*1.0/RAND_MAX;
@@ -1915,7 +1915,7 @@ void Creature::calcStatusModCommand()
 		res.clear();
 
 		// Suchen aller Objekte im Kreis
-		getWorld()->getObjectsInShape(&s,getGridLocation()->m_region, &res,LAYER_AIR,CREATURE,this);
+		World::getWorld()->getObjectsInShape(&s,getGridLocation()->m_region, &res,LAYER_AIR,CREATURE,this);
 		for (i=res.begin();i!= res.end();++i)
 		{
 			// nur aktive Lebewesen beruecksichtigen
@@ -1926,7 +1926,7 @@ void Creature::calcStatusModCommand()
 
 			DEBUG5("checking obj %i",(*i)->getId());
 			// Fuer feindliche Lebewesen
-			if (getWorld()->getRelation(m_fraction,*i) == WorldObject::HOSTILE)
+			if (World::getWorld()->getRelation(m_fraction,*i) == WorldObject::HOSTILE)
 			{
 				// Abstand zum eigenen Mittelpunkt berechnen
 				DEBUG5("hostile");
@@ -2073,16 +2073,16 @@ void Creature::calcWalkDir(Vector goal,WorldObject* goalobj)
 
 
 				// Blockmatrix berechnen
-				getWorld()->calcBlockmat(m_path_info);
+				World::getWorld()->calcBlockmat(m_path_info);
 
 
 				// Potentialfeld berechnen
-				getWorld()->calcPotential(m_path_info);
+				World::getWorld()->calcPotential(m_path_info);
 
 			}
 
 			// Richtung auf Basis des eigenen Potentialfeldes berechnen
-			getWorld()->calcPathDirection(m_path_info, pos, dir);
+			World::getWorld()->calcPathDirection(m_path_info, pos, dir);
 		}
 		else
 		{
@@ -2233,9 +2233,9 @@ bool Creature::update (float time)
 
 
 	// besondere zeitabhaengige Effekte berechnen
-	if (getWorld()->isServer())
+	if (World::getWorld()->isServer())
 	{
-		if (m_base_attr_mod.m_special_flags & FLAMEARMOR && getWorld()->timerLimit(1))
+		if (m_base_attr_mod.m_special_flags & FLAMEARMOR && World::getWorld()->timerLimit(1))
 		{
 			// Flammenruestung
 
@@ -2260,7 +2260,7 @@ bool Creature::update (float time)
 			short reg = getGridLocation()->m_region;
 
 			// Alle Objekte im Kreis suchen
-			getWorld()->getObjectsInShape(&s, reg, &res,LAYER_AIR,CREATURE,this);
+			World::getWorld()->getObjectsInShape(&s, reg, &res,LAYER_AIR,CREATURE,this);
 			for (it=res.begin();it!=res.end();++it)
 			{
 				// Schaden austeilen
@@ -2278,7 +2278,7 @@ bool Creature::update (float time)
 	// Statusmods behandeln
 	if (getState()==STATE_ACTIVE)
 	{
-		if (getWorld()->isServer() && getWorld()->timerLimit(1))
+		if (World::getWorld()->isServer() && World::getWorld()->timerLimit(1))
 		{
 			// Vergiftet
 			if (m_dyn_attr.m_status_mod_time[Damage::POISONED]>0)
@@ -2420,7 +2420,7 @@ void  Creature::onTrade (int id) {
 	{
 		// Es existiert bislang kein Handel
 		DEBUG5("Handelsinitialisierung starten");
-		WorldObject* wo = getWorld()->getWorldObject(id);
+		WorldObject* wo = World::getWorld()->getWorldObject(id);
 		// Wenn das Ziel nicht existiert Aktion beenden
 		if (wo ==0 || wo->getObjectType().getObjectType()==OBJECTTYPE_FIXED_OBJECT)
 		{
@@ -2458,18 +2458,18 @@ void  Creature::onTrade (int id) {
 		}
 
 		getObjectType().setActionType(ACTION_TRADE);	//Handel treiben
-		getObjectType().setDirection(getWorld()->getDirection(getCoordinateX(),getCoordinateY(),pl->getCoordinateX(),pl->getCoordinateY()));
+		getObjectType().setDirection(World::getWorld()->getDirection(getCoordinateX(),getCoordinateY(),pl->getCoordinateX(),pl->getCoordinateY()));
 		m_action->setType(ACTION_TRADE);
 		m_action->setTime(200);				//200ms Zeit
 		m_action->setProgress(0);			//noch kein Fortschritt
 		m_action->setGoalObjectId(id);
 
 		if (pl->getState() == STATES_ACTIVE)
-			pl->getObjectType().setDirection(getWorld()->getDirection(pl->getCoordinateX(),pl->getCoordinateY(),getCoordinateX(),getCoordinateY()));
+			pl->getObjectType().setDirection(World::getWorld()->getDirection(pl->getCoordinateX(),pl->getCoordinateY(),getCoordinateX(),getCoordinateY()));
 
-		int trade_id = getWorld()->newTrade(wobase->m_id,id);
+		int trade_id = World::getWorld()->newTrade(wobase->m_id,id);
 		m_trade_id=trade_id;
-		Trade* trade = getWorld()->getTrade(trade_id);
+		Trade* trade = World::getWorld()->getTrade(trade_id);
 		if (trade_id==0 || trade ==0)
 		{
 			// Fehler aufgetreten, kein Trade Objekt initialisiert
@@ -3283,7 +3283,7 @@ void Creature::takeDamage(Damage* d)
 
 	DEBUG5("take Damage %i",getId());
 	// Testen ob der Verursacher des Schadens feindlich gesinnt ist
-	if (getWorld()->getRelation(d->m_attacker_fraction,this) != HOSTILE)
+	if (World::getWorld()->getRelation(d->m_attacker_fraction,this) != HOSTILE)
 	{
 		// Verursacher ist nicht feindlich, kein Schaden
 		DEBUG5("not hostile, no dmg");
@@ -3426,7 +3426,7 @@ void Creature::takeDamage(Damage* d)
 	if ((m_base_attr_mod.m_special_flags & STATIC_SHIELD) && dmg > m_base_attr_mod.m_max_health * 0.02)
 	{
 		// Projektil Statikschild erzeugen
-		Projectile* pr = new Projectile(getWorld(),Projectile::STATIC_SHIELD,m_fraction, getWorld()->getValidProjectileId());
+		Projectile* pr = new Projectile(Projectile::STATIC_SHIELD,m_fraction, World::getWorld()->getValidProjectileId());
 
 		// Schaden festlegen
 		Damage dmg;
@@ -3437,7 +3437,7 @@ void Creature::takeDamage(Damage* d)
 		dmg.m_attacker_fraction = m_fraction;
 		memcpy(pr->getDamage(),&dmg,sizeof(Damage));
 		pr->getShape()->m_radius =getShape()->m_radius+1;
-		getWorld()->insertProjectile(pr,getShape()->m_center,getGridLocation()->m_region);
+		World::getWorld()->insertProjectile(pr,getShape()->m_center,getGridLocation()->m_region);
 	}
 }
 
@@ -3740,13 +3740,13 @@ void Creature::getPathDirection(Vector pos,short region, float base_size, short 
 
 		// Blockmatrix berechnen
 		bool suc;
-		suc = getWorld()->calcBlockmat(*pi);
+		suc = World::getWorld()->calcBlockmat(*pi);
 		if (suc!=true)
 			direct = true;
 		else
 		{
 			// Potentialfeld berechnen
-			suc = getWorld()->calcPotential(*pi);
+			suc = World::getWorld()->calcPotential(*pi);
 			if (suc!=true)
 				direct = true;
 		}
@@ -3763,7 +3763,7 @@ void Creature::getPathDirection(Vector pos,short region, float base_size, short 
 	else
 	{
 		// Potentialfeld verwenden um die Richtung zu berechnen
-		getWorld()->calcPathDirection(*pi, pos, dir);
+		World::getWorld()->calcPathDirection(*pi, pos, dir);
 	}
 }
 

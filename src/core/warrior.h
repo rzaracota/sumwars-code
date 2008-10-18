@@ -42,14 +42,13 @@ public:
 	//Fields
 	//Constructors
 	/**
-	 * \fn Warrior(World* world, int id)
+	 * \fn Warrior(int id)
 	 * \brief Konstruktor
-	 * \param world Welt
 	 * \param id Objekt-ID
 	 *
 	 * Legt ein neues Warrior Objekt an.
 	 */
-	Warrior(World* world, int id);
+	Warrior( int id);
 
 
 	/**

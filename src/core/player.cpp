@@ -22,7 +22,7 @@
 
 //Constructors/Destructors
 
-Player::Player(World* world, int id) : Creature(world,  id)
+Player::Player( int id) : Creature( id)
 {
 	bool tmp=Player::init();
 	if (!tmp)
@@ -41,7 +41,7 @@ bool Player::destroy()
 {
 	DEBUG5("leave Party");
 	DEBUG5("destroy");
-	getWorld()->getParty(m_fraction)->removeMember(getId());
+	World::getWorld()->getParty(m_fraction)->removeMember(getId());
 	return Creature::destroy();
 }
 
@@ -56,7 +56,7 @@ bool Player::init()
 	setTradeId(0);
 	getTypeInfo()->m_type = TypeInfo::TYPE_PLAYER;
 	m_category = HUMAN;
-	Party* p = getWorld()->getEmptyParty();
+	Party* p = World::getWorld()->getEmptyParty();
 	if (p==0)
 	{
 //		ERROR("cant open new party");
@@ -115,12 +115,12 @@ bool Player::onGamefieldClick(ClientCommand* command)
 	{
 
 		DEBUG4("Kommando erhalten, zielid: %i",command->m_id);
-		wo = getWorld()->getObject(command->m_id,getGridLocation()->m_region);
+		wo = World::getWorld()->getObject(command->m_id,getGridLocation()->m_region);
 
 		// Unterscheidung Zielobject vs kein Zielobject
 		if (wo !=0)
 		{
-			rel = getWorld()->getRelation(m_fraction,wo);
+			rel = World::getWorld()->getRelation(m_fraction,wo);
 
 			if (command->m_button == LEFT_MOUSE_BUTTON)
 			{
@@ -433,7 +433,7 @@ bool Player::onItemClick(ClientCommand* command)
 		// Vertauschen von Cursoritem und angeklicktem Item
 		m_equipement->swapCursorItem(pos);
 
-		if (getWorld()->isServer() && pos <Equipement::CURSOR_ITEM)
+		if (World::getWorld()->isServer() && pos <Equipement::CURSOR_ITEM)
 		{
 			// Ausruestungsgegenstand wurde getauscht
 			Event event;
@@ -449,7 +449,7 @@ bool Player::onItemClick(ClientCommand* command)
 				event.m_type = Event::PLAYER_ITEM_EQUIPED;
 			}
 			DEBUG5("event: %i at %i",event.m_type,event.m_data);
-			getWorld()->insertEvent(event);
+			World::getWorld()->insertEvent(event);
 		}
 
 		Item* itm;
@@ -467,7 +467,7 @@ bool Player::onItemClick(ClientCommand* command)
 					if (pos == Equipement::WEAPON2)
 						shpos = Equipement::SHIELD2;
 
-					if (getWorld()->isServer())
+					if (World::getWorld()->isServer())
 					{
 						Event event;
 						event.m_type =  Event::PLAYER_NOITEM_EQUIPED;
@@ -476,7 +476,7 @@ bool Player::onItemClick(ClientCommand* command)
 
 						DEBUG5("event: no item at %i",shpos);
 
-						getWorld()->insertEvent(event);
+						World::getWorld()->insertEvent(event);
 					}
 
 					// Wenn aktuell kein Item am Cursor gehalten wird
@@ -519,7 +519,7 @@ bool Player::onItemClick(ClientCommand* command)
 				if (pos == Equipement::SHIELD2)
 					wpos = Equipement::WEAPON2;
 
-				if (getWorld()->isServer())
+				if (World::getWorld()->isServer())
 				{
 					Event event;
 					event.m_type =  Event::PLAYER_NOITEM_EQUIPED;
@@ -528,7 +528,7 @@ bool Player::onItemClick(ClientCommand* command)
 
 					DEBUG5("event: no item at %i",wpos);
 
-					getWorld()->insertEvent(event);
+					World::getWorld()->insertEvent(event);
 				}
 
 				m_equipement->swapCursorItem(wpos);
@@ -607,7 +607,7 @@ short Player::insertItem(Item* itm)
 	if (pos != Equipement::NONE)
 	{
 		// Gegenstand ins Inventar aufgenommen
-		if (getWorld()->isServer())
+		if (World::getWorld()->isServer())
 		{
 			Event event;
 			event.m_type =  Event::PLAYER_ITEM_PICKED_UP ;
@@ -616,7 +616,7 @@ short Player::insertItem(Item* itm)
 
 			DEBUG("event: item picked up %i",pos);
 
-			getWorld()->insertEvent(event);
+			World::getWorld()->insertEvent(event);
 		}
 	}
 	else
@@ -765,7 +765,7 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 
 		case BUTTON_PARTY_APPLY:
 			DEBUG("apply to party %i",command->m_id);
-			p = getWorld()->getParty((WorldObject::Fraction) (command->m_id + FRAC_PLAYER_PARTY));
+			p = World::getWorld()->getParty((WorldObject::Fraction) (command->m_id + FRAC_PLAYER_PARTY));
 			if (p->getNrMembers()==0)
 				break;
 			p->addCandidate(getId());
@@ -775,13 +775,13 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 		case BUTTON_PARTY_ACCEPT:
 			DEBUG("accept %i",command->m_id)
 
-			p = getWorld()->getParty(m_fraction);
+			p = World::getWorld()->getParty(m_fraction);
 			p ->acceptCandidate(command->m_id);
 			// FIXME: Spieler ausgeben lassen !
-			wo = getWorld()->getObject(command->m_id,getGridLocation()->m_region);
+			wo = World::getWorld()->getObject(command->m_id,getGridLocation()->m_region);
 			if (wo !=0)
 			{
-				p2 = getWorld()->getParty(wo->getFraction());
+				p2 = World::getWorld()->getParty(wo->getFraction());
 				p2->removeMember(command->m_id);
 				wo->setFraction(m_fraction);
 			}
@@ -1025,7 +1025,7 @@ bool Player::update(float time)
 
 	/*
 	// handle inputs form network
-	ServerNetwork* net = getWorld()->getNetwork();
+	ServerNetwork* net = World::getWorld()->getNetwork();
 	if( net->getSlotStatus( m_network_slot )!=NET_CONNECTED )
 	{
 		// disconnect, Spieler sichern und aus der Welt entfernen
@@ -1111,7 +1111,7 @@ bool Player::update(float time)
 
 			WorldObjectList* ret = new WorldObjectList;
 
-			getWorld()->getWorldObjectsInCircle(getCoordinateX(),getCoordinateY(),1000, sel,ret);
+			World::getWorld()->getWorldObjectsInCircle(getCoordinateX(),getCoordinateY(),1000, sel,ret);
 
 			WorldObjectList::iterator i;
 
@@ -1159,7 +1159,7 @@ bool Player::update(float time)
 	// Behandlung des Handels
 	if (getTradeId() !=0)
 	{
-		trade = getWorld()->getTrade(getTradeId());
+		trade = World::getWorld()->getTrade(getTradeId());
 
 		/*
 		// Wenn der Handel nicht existiert Fehler ausgeben
@@ -1233,7 +1233,7 @@ bool Player::update(float time)
 		// aktuell gibts nen Fehler wenn (0,0) nicht frei ist
 
 		float x,y;
-		getWorld()->getClosestFreeSquare(0,0,x,y);
+		World::getWorld()->getClosestFreeSquare(0,0,x,y);
 
 		MoveTo(x,y);
 
@@ -1299,7 +1299,7 @@ void Player::sendGameData()
 {
 	/*
 	// handle inputs form network
-	ServerNetwork* net = getWorld()->getNetwork();
+	ServerNetwork* net = World::getWorld()->getNetwork();
 
 	Trade* trade = 0;
 	WorldObject* obj=0;
@@ -1335,7 +1335,7 @@ void Player::sendGameData()
 	shs.m_extent_y = 12;
 
 	// alle sichtbaren Objekte holen
-	if( !getWorld()->getObjectsInShape(&shs,getGridLocation()->m_region,&wobjs ) )
+	if( !World::getWorld()->getObjectsInShape(&shs,getGridLocation()->m_region,&wobjs ) )
 		return;
 
 
@@ -1366,7 +1366,7 @@ void Player::sendGameData()
 	std::list<DmgProjectile*> res2;
 	std::list<DmgProjectile*>::iterator i2;
 	// Liste der sichtbaren Projektile
-	getWorld()->getProjectilesOnScreen(sh->m_coordinate_x,sh->m_coordinate_y,getGridLocation()->m_region,&res2);
+	World::getWorld()->getProjectilesOnScreen(sh->m_coordinate_x,sh->m_coordinate_y,getGridLocation()->m_region,&res2);
 	header.m_projectiles = res2.size();
 
 	header.m_items = m_equipement->getNumberItems(m_secondary_equip);
@@ -1444,7 +1444,7 @@ void Player::sendDetailedItem(short pos)
 
 	if (it!=0)
 	{
-		ServerNetwork* net = getWorld()->getNetwork();
+		ServerNetwork* net = World::getWorld()->getNetwork();
 		int len;
 
 		// Puffer fuer Item
@@ -1470,7 +1470,7 @@ void Player::sendAbilityDamage(Action::ActionType act)
 	if (act<0 || act >=192)
 		return;
 
-	ServerNetwork* net = getWorld()->getNetwork();
+	ServerNetwork* net = World::getWorld()->getNetwork();
 	int len;
 
 	// Puffer
@@ -1498,7 +1498,7 @@ void Player::sendAbilityDamage(Action::ActionType act)
 void Player::sendSavegame()
 {
 	/*
-	ServerNetwork* net = getWorld()->getNetwork();
+	ServerNetwork* net = World::getWorld()->getNetwork();
 	int len;
 
 	// Puffer fuer Savegame
@@ -1834,7 +1834,7 @@ void Player::toStringComplete(CharConv* cv)
 
 
 	// Party Informationen
-	getWorld()->getParty(m_fraction)->toString(cv);
+	World::getWorld()->getParty(m_fraction)->toString(cv);
 
 }
 

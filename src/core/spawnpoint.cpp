@@ -1,6 +1,6 @@
 #include "spawnpoint.h"
 
-Spawnpoint::Spawnpoint(World* world, int id) : WorldObject(world, id)
+Spawnpoint::Spawnpoint( int id) : WorldObject( id)
 {
 	Spawnpoint::init();
 
@@ -70,7 +70,7 @@ bool Spawnpoint::update (float time)
 					}
 					else
 					{
-						getWorld()->insertObject(wo, pos,getGridLocation()->m_region);
+						World::getWorld()->insertObject(wo, pos,getGridLocation()->m_region);
 					}
 				}
 			}

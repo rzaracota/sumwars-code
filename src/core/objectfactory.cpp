@@ -13,8 +13,6 @@
 #define USE_OBJECTLOADER
 
 
-World* ObjectFactory::m_world;
-
 std::map<WorldObject::TypeInfo::ObjectSubtype, MonsterBasicData*> ObjectFactory::m_monster_data;
 
 std::map<WorldObject::TypeInfo::ObjectSubtype, FixedObjectData*> ObjectFactory::m_fixed_object_data;
@@ -494,26 +492,26 @@ WorldObject* ObjectFactory::createObject(WorldObject::TypeInfo::ObjectType type,
 	// ID des Objektes
 	if (id ==0)
 	{
-		id = m_world->getValidId();
+		id = World::getWorld()->getValidId();
 	}
 
 	if (type ==WorldObject::TypeInfo::TYPE_PLAYER)
 	{
 		if (subtype == "warrior")
 		{
-			ret = new Warrior( m_world, id );
+			ret = new Warrior(  id );
 		}
 		else if (subtype == "mage")
 		{
-			ret = new Mage( m_world, id );
+			ret = new Mage( id );
 		}
 		else if (subtype == "archer")
 		{
-			ret = new Archer( m_world, id );
+			ret = new Archer( id );
 		}
 		else if(subtype == "priest")
 		{
-			ret = new Priest( m_world, id );
+			ret = new Priest( id );
 		}
 	}
 	else if (type ==WorldObject::TypeInfo::TYPE_MONSTER)
@@ -529,7 +527,7 @@ WorldObject* ObjectFactory::createObject(WorldObject::TypeInfo::ObjectType type,
 			i = m_monster_data.find("goblin");
 		}
 		mdata = i->second;
-		ret = new Monster(m_world, id,*mdata);
+		ret = new Monster( id,*mdata);
 		DEBUG5("Monster created");
 	}
 	else if (type ==WorldObject::TypeInfo::TYPE_FIXED_OBJECT)
@@ -549,7 +547,7 @@ WorldObject* ObjectFactory::createObject(WorldObject::TypeInfo::ObjectType type,
 		
 		Shape* sp;
 		DEBUG5("create fixed object: %s",subtype.c_str());
-		ret = new FixedObject(m_world,id,subtype);
+		ret = new FixedObject(id,subtype);
 
 		sp=ret->getShape();		
 		memcpy(sp,&(data->m_shape),sizeof(Shape));

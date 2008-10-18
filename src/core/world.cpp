@@ -20,6 +20,8 @@
 #include "world.h"
 #include "player.h"
 
+World* World::m_world=0;
+
 /**
  * Constructors/Destructors
  */
@@ -65,11 +67,9 @@ bool World::init()
 
 	// Items initialisieren
 	ItemFactory::init();
-	ItemFactory::m_world = this;
-
+	
 	ObjectFactory::init();
-	ObjectFactory::m_world = this;
-
+	
 	if (m_server)
 	{
 		DEBUG("server");

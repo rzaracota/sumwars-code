@@ -44,8 +44,6 @@ Document::Document()
 	*/
 	strcpy(m_server_ip,"127.0.0.1");
 
-	m_world =0;
-
 	// Informationen zu Aktionen initialisieren
 	Action::init();
 
@@ -87,8 +85,7 @@ void Document::startGame(bool server)
 {
 	m_server = server;
 
-	m_world = new World(server);
-	m_world->init();
+	World::createWorld(server);
 
 	if (server)
 	{
@@ -96,7 +93,7 @@ void Document::startGame(bool server)
 	}
 	else
 	{
-		ClientNetwork* net = static_cast<ClientNetwork*>(m_world->getNetwork());
+		ClientNetwork* net = static_cast<ClientNetwork*>(World::getWorld()->getNetwork());
 		net->serverConnect(m_server_ip,REQ_PORT);
 
 	}
@@ -146,7 +143,7 @@ void Document::loadSavegame()
 
 		CharConv cv2((unsigned char*) data,len);
 
-		m_world->handleSavegame(&cv2);
+		World::getWorld()->handleSavegame(&cv2);
 
 
 		// aktuelle Aktion setzen
@@ -207,7 +204,7 @@ Document::~Document()
 
 void Document::sendCommand(ClientCommand* comm)
 {
-	m_world->handleCommand(comm);
+	World::getWorld()->handleCommand(comm);
 
 }
 
@@ -338,7 +335,7 @@ void Document::onRightMouseButtonClick(float x, float y)
 	ClientCommand command;
 
 	// der lokale Spieler
-	Player* pl = static_cast<Player*> (m_world->getLocalPlayer());
+	Player* pl = static_cast<Player*> (World::getWorld()->getLocalPlayer());
 	if (pl==0)
 		return;
 
@@ -382,7 +379,7 @@ void Document::onLeftMouseButtonClick(float x, float y)
 	ClientCommand command;
 
 	// der lokale Spieler
-	Player* pl = static_cast<Player*> (m_world->getLocalPlayer());
+	Player* pl = static_cast<Player*> (World::getWorld()->getLocalPlayer());
 	if (pl==0)
 		return;
 
@@ -452,7 +449,7 @@ void Document::onLeftMouseButtonClick(float x, float y)
 int Document::getObjectAt(float x,float y)
 {
 	// der lokale Spieler
-	WorldObject* pl = m_world->getLocalPlayer();
+	WorldObject* pl = World::getWorld()->getLocalPlayer();
 	if (pl==0)
 		return 0;
 
@@ -555,7 +552,7 @@ void Document::onButtonInventoryClicked()
 		getGUIState()->m_shown_windows &= ~INVENTORY;
 
 		// der lokale Spieler
-		Player* pl = static_cast<Player*>( m_world->getLocalPlayer());
+		Player* pl = static_cast<Player*>( World::getWorld()->getLocalPlayer());
 		if (pl==0)
 			return;
 
@@ -654,7 +651,7 @@ void Document::setLeftAction(Action::ActionType act)
 
 	// wenn kein Spieler gesetzt ist, dann keine Faehigkeit setzen
 	// der lokale Spieler
-	Player* player = static_cast<Player*>(m_world->getLocalPlayer());
+	Player* player = static_cast<Player*>(World::getWorld()->getLocalPlayer());
 	if (player==0)
 		return;
 
@@ -698,7 +695,7 @@ void Document::setRightAction(Action::ActionType act)
 
 	// wenn kein Spieler gesetzt ist, dann keine Faehigkeit setzen
 	// der lokale Spieler
-	Player* player = static_cast<Player*>(m_world->getLocalPlayer());
+	Player* player = static_cast<Player*>(World::getWorld()->getLocalPlayer());
 	if (player==0)
 		return;
 
@@ -731,7 +728,7 @@ std::string Document::getAbilityDescription(Action::ActionType ability)
 	out_stream.str("");
 
 	// der lokale Spieler
-	Player* player = static_cast<Player*>(m_world->getLocalPlayer());
+	Player* player = static_cast<Player*>(World::getWorld()->getLocalPlayer());
 
 	if (player !=0 )
 	{
@@ -883,9 +880,9 @@ bool  Document::onKeyRelease(KeyCode key)
 void Document::update(float time)
 {
 	// Welt eine Zeitscheibe weiter laufen lassen
-	if (m_world != 0)
+	if (World::getWorld() != 0)
 	{
-		m_world->update(time);
+		World::getWorld()->update(time);
 
 	}
 
@@ -902,8 +899,8 @@ void Document::update(float time)
 			break;
 
 		case LOAD_SAVEGAME:
-			status = m_world->getNetwork()->getSlotStatus();
-			if (m_server || m_world->getNetwork()->getSlotStatus() == NET_CONNECTED)
+			status = World::getWorld()->getNetwork()->getSlotStatus();
+			if (m_server || World::getWorld()->getNetwork()->getSlotStatus() == NET_CONNECTED)
 			{
 				loadSavegame();
 			}
@@ -935,8 +932,7 @@ void Document::update(float time)
 			pthread_join(thread, &ret);
 
 			// Spielwelt abschalten
-			delete m_world;
-			m_world =0;
+			World::deleteWorld();
 
 
 			m_state = SHUTDOWN;
@@ -952,7 +948,7 @@ void Document::updateContent(float time)
 {
 	DEBUG5("update content");
 
-	Player* player = static_cast<Player*>(m_world->getLocalPlayer());
+	Player* player = static_cast<Player*>(World::getWorld()->getLocalPlayer());
 	if (player==0)
 	{
 		DEBUG5("no local player");

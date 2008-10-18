@@ -46,14 +46,13 @@ public:
 	//Fields
 	//Constructors
 	/**
-	 * \fn Player(World* world,int id)
+	 * \fn Player(int id)
 	 * \brief Konstruktor
-	 * \param world Welt
 	 * \param id Objekt-ID
 	 *
 	 * Legt ein neues Player Objekt an.
 	 */
-	Player(World* world, int id);
+	Player( int id);
 	
 	
 	

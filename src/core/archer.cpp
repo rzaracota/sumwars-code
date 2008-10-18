@@ -20,7 +20,7 @@
 #include <string>
 #include "archer.h"
 
-Archer::Archer(World* world, int id) : Player(world, id)
+Archer::Archer(int id) : Player( id)
 {
 	init();
 }

@@ -18,7 +18,7 @@
 */
 #include "monster.h"
 
-Monster::Monster(World* world, int id) : Creature( world,  id)
+Monster::Monster( int id) : Creature( id)
 {
 	bool tmp=Monster::init();
 	if(!tmp)
@@ -28,8 +28,8 @@ Monster::Monster(World* world, int id) : Creature( world,  id)
 }
 
 
-Monster::Monster(World* world, int id,MonsterBasicData& data)
-	: Creature( world,  id)
+Monster::Monster( int id,MonsterBasicData& data)
+	: Creature(   id)
 {
 	memcpy(getBaseAttr(),&data.m_base_attr, sizeof(data.m_base_attr));
 
@@ -146,13 +146,13 @@ void Monster::updateCommand()
 
 			// Testen, ob der Weg zum Spieler frei ist
 			ret.clear();
-			getWorld()->getObjectsOnLine(gline,rid,&ret,LAYER_AIR, CREATURE | FIXED,pl);
+			World::getWorld()->getObjectsOnLine(gline,rid,&ret,LAYER_AIR, CREATURE | FIXED,pl);
 			
 			// alle verbuendeten Objekte loeschen, weil durch diese *durchgeschossen* werden kann
 			WorldObjectList::iterator it;
 			for (it = ret.begin(); it != ret.end();)
 			{
-				if (getWorld()->getRelation(m_fraction,*it) == ALLIED )
+				if (World::getWorld()->getRelation(m_fraction,*it) == ALLIED )
 				{
 					it = ret.erase(it);
 				}
@@ -374,7 +374,7 @@ void Monster::evalCommand(Action::ActionType act)
 void Monster::die()
 {
 	DEBUG5("die");
-	if (getWorld()->isServer())
+	if (World::getWorld()->isServer())
 	{
 		//Zeiger auf letzten Angreifer per ID  holen
 
@@ -383,7 +383,7 @@ void Monster::die()
 
 		// Object per ID von der World holen
 		WorldObject* object;
-		object = getWorld()->getObject(id,getGridLocation()->m_region);
+		object = World::getWorld()->getObject(id,getGridLocation()->m_region);
 
 		if (object!=0)
 		{
@@ -404,7 +404,7 @@ void Monster::die()
 				s.m_radius = 20;
 				s.m_center = getShape()->m_center;
 
-				getWorld()->getObjectsInShape(&s, getGridLocation()->m_region, &ret, LAYER_AIR, CREATURE);
+				World::getWorld()->getObjectsInShape(&s, getGridLocation()->m_region, &ret, LAYER_AIR, CREATURE);
 
 				WorldObjectList::iterator i;
 

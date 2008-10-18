@@ -13,14 +13,13 @@ class Archer : public Player {
 		//Fields
 		//Constructors
 		/**
-		* \fn Archer(World* world, int id)
+		* \fn Archer( int id)
 		* \brief Konstruktor
-		* \param world Welt
 		* \param id Objekt-ID
 		*
 		* Legt ein neues Archer Objekt an.
 		*/
-		Archer(World* world, int id);
+		Archer( int id);
 	
 	
 		/**

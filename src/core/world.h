@@ -478,6 +478,15 @@ public:
 		m_world = new World(server);
 		m_world->init();
 	}
+	
+	/**
+	 * \fn static void deleteWorld()
+	 * \brief entfernt die Spielwelt
+	 */
+	static void deleteWorld()
+	{
+		delete m_world;
+	}
 			
 
 //Private stuff

@@ -69,10 +69,11 @@ class Spawnpoint : public WorldObject {
 	};
 	
 	/**
-	 * \fn Spawnpoint(World* world, int id)
+	 * \fn Spawnpoint( int id)
+	 * \param id Objekt-ID
 	 * \brief Konstruktor
 	 */
-	Spawnpoint(World* world, int id);
+	Spawnpoint( int id);
 	
 	/**
 	 * \fn virtual bool init()

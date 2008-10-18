@@ -111,16 +111,15 @@ class Monster : public Creature {
 		*
 		* Legt ein neues Monster Objekt an.
 		*/
-		Monster(World* world, int id);
+		Monster(int id);
 		
 		/**
 		* \fn Monster(World* world, int id,MonsterBasicData& data)
 		* \brief Erzeugt ein Monster auf Basis der gegebenen Daten
-		* \param world 
 		* \param id 
 		* \param data Daten fuer die Erzeugung des Monsters
 		*/
-		Monster(World* world, int id,MonsterBasicData& data);
+		Monster(int id,MonsterBasicData& data);
 		
 		/**
 		* \fn ~Monster()

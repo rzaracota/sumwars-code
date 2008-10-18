@@ -1,17 +1,16 @@
 #include "worldobject.h"
 #include "world.h"
 
-WorldObject::WorldObject(World* world, int id)
+WorldObject::WorldObject( int id)
 {
 	m_id = id;
 	m_state = STATE_ACTIVE;
-	m_world = world;
 	init();
 }
 
 bool WorldObject::moveTo(Vector newpos)
 {
-	if (m_world==0)
+	if (World::getWorld()==0)
 	{
 		m_shape.m_center = newpos;
 		
@@ -19,13 +18,13 @@ bool WorldObject::moveTo(Vector newpos)
 	}
 	else
 	{
-		return m_world->moveObject(this, newpos);
+		return World::getWorld()->moveObject(this, newpos);
 	}
 }
 
 Region* WorldObject::getRegion()
 {
-	return m_world->getRegion(m_grid_location.m_region);
+	return World::getWorld()->getRegion(m_grid_location.m_region);
 }
 
 bool  WorldObject::destroy()

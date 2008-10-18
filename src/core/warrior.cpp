@@ -20,7 +20,7 @@
 #include <string>
 #include "warrior.h"
 
-Warrior::Warrior(World* world, int id) : Player(world, id)
+Warrior::Warrior(int id) : Player( id)
 {
 	init();
 }

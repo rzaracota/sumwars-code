@@ -13,14 +13,13 @@ class Priest : public Player {
 	//Fields
 	//Constructors
 		/**
-		* \fn Priest(World* world, int id)
+		* \fn Priest( int id)
 		* \brief Konstruktor
-		* \param world Welt
 		* \param id Objekt-ID
 		*
 		* Legt ein neues Priest Objekt an.
 		*/
-		Priest(World* world, int id);
+		Priest( int id);
 
 
 		/**

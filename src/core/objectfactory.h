@@ -232,11 +232,6 @@ class ObjectFactory
 	 */
 	static WorldObject::TypeInfo::ObjectSubtype getObjectType(ObjectTemplateType generictype, EnvironmentName env);
 	
-	/**
-	 * \var static World* m_world
-	 * \brief Welt fuer die die Objekte generiert werden
-	 */
-	static World* m_world;
 		
 	/**
 	 * \var static std::map<WorldObject::TypeInfo::ObjectSubtype, MonsterBasicData*> m_monster_data

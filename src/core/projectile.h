@@ -85,14 +85,13 @@ class Projectile
 	};
 	
 	/**
-	 * \fn Projectile(World* w, ProjectileType type, WorldObject::Fraction fr, int id)
+	 * \fn Projectile( ProjectileType type, WorldObject::Fraction fr, int id)
 	 * \param type Typ des Projektils
-	 * \param w Welt
 	 * \param fr Fraktion des Spielers der das Projektil erzeugt hat
 	 * \param id ID des Projektils
 	 * \brief Konstruktor
 	 */
-	Projectile(World* w, ProjectileType type, WorldObject::Fraction fr, int id);
+	Projectile( ProjectileType type, WorldObject::Fraction fr, int id);
 	
 /**
 	 * \fn virtual update ( float time)
@@ -339,12 +338,6 @@ class Projectile
 		* \brief Schaden den das Projektil anrichtet
 		*/
 		Damage m_damage;
-		
-		/**
-		* \var World* m_world
-		* \brief Zeiger auf die Welt
-		*/
-		World* m_world;
 		
 		/**
 		* \var int m_last_hit_object_id

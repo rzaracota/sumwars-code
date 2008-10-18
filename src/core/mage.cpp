@@ -20,7 +20,7 @@
 #include <string>
 #include "mage.h"
 
-Mage::Mage(World* world, int id) : Player(world, id)
+Mage::Mage( int id) : Player( id)
 {
 	init();
 }

@@ -1038,7 +1038,7 @@ void Region::createProjectileFromString(CharConv* cv)
 
 	DEBUG5("new projectile %i frac %i id %i",type,frac,id);
 
-	proj = new Projectile(m_world, (Projectile::ProjectileType) type, (WorldObject::Fraction) frac, id);
+	proj = new Projectile((Projectile::ProjectileType) type, (WorldObject::Fraction) frac, id);
 
 	proj->fromString(cv);
 

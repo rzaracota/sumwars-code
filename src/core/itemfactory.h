@@ -9,7 +9,6 @@
 #include "itemloader.h"
 
 
-class World;
 
 
 /**
@@ -132,13 +131,7 @@ public:
          */
 		static std::map<Item::Subtype,ItemBasicData*> m_item_data;
 		
-	public:
-		
-		/**
-		 * \var static World* m_world
-		 * \brief Welt fuer die die Items generiert werden
-		 */
-		static World* m_world;
+	
 };
 
 #include "world.h"

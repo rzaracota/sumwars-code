@@ -584,10 +584,10 @@ class Document
 	 */
 	Player* getLocalPlayer()
 	{
-		if (m_world ==0)
+		if (World::getWorld() ==0)
 			return 0;
 
-		return static_cast<Player*>(m_world->getLocalPlayer());
+		return static_cast<Player*>(World::getWorld()->getLocalPlayer());
 	}
 
 	/**
@@ -596,7 +596,7 @@ class Document
 	 */
 	World* getWorld()
 	{
-		return m_world;
+		return World::getWorld();
 	}
 
 
@@ -693,11 +693,6 @@ class Document
 		*/
 		char m_server_ip[16];
 	
-		/**
-		* \var World* m_world
-		* \brief Welt die von dem Spiel simuliert wird
-		*/
-		World* m_world;
 	
 		/**
 		* \var bool m_server

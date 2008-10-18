@@ -10,7 +10,6 @@ std::map<Item::Subtype, Item::Type> ItemFactory::m_item_types;
 
 std::map<Item::Subtype,ItemBasicData*> ItemFactory::m_item_data;
 
-World* ItemFactory::m_world;
 
 ItemFactory::ItemFactory()
 {
@@ -21,7 +20,7 @@ Item* ItemFactory::createItem(Item::Type type, Item::Subtype subtype, int id, fl
 {
 	if (id ==0)
 	{
-		id = m_world->getValidId();
+		id = World::getWorld()->getValidId();
 	}
 	
 	DEBUG5("creating item %i / %s",type, subtype.c_str());

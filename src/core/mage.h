@@ -13,14 +13,13 @@ class Mage : public Player {
 	//Fields
 	//Constructors
 		/**
-		* \fn Mage(World* world, int id)
+		* \fn Mage( int id)
 		* \brief Konstruktor
-		* \param world Welt
 		* \param id Objekt-ID
 		*
 		* Legt ein neues Mage Objekt an.
 		*/
-		Mage(World* world, int id);
+		Mage( int id);
 
 
 		/**

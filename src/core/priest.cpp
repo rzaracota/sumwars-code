@@ -20,7 +20,7 @@
 #include <string>
 #include "priest.h"
 
-Priest::Priest(World* world, int id) : Player(world, id)
+Priest::Priest( int id) : Player( id)
 {
 	init();
 }

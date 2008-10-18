@@ -64,14 +64,13 @@ public:
 	//Fields
 	//Constructors
 	/**
-	 * \fn Creature(World* world, unsigned int id)
+	 * \fn Creature(int id)
 	 * \brief Konstruktor
-	 * \param world Zeiger auf die Welt
 	 * \param id Id des Objekts
 	 *
 	 * Legt ein neues Creature Objekt an.
 	 */
-	Creature(World* world, unsigned int id);
+	Creature(int id);
 	
 	/**
 	 * \fn ~Creature();

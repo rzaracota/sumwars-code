@@ -250,14 +250,13 @@ class WorldObject {
 	//Fields
 	//Constructors
 	/**
-	 * \fn WorldObject(World* world,int id)
+	 * \fn WorldObject(int id)
 	 * \brief Konstruktor
-	 * \param world World Objekt, in dem sich das neue WorldObject befindet
-	 * \param id ID des WorlObject
+	  * \param id ID des WorlObject
 	 *
 	 * Erstellt ein neues WorldObject
 	 */
-	WorldObject(World* world, int id);
+	WorldObject( int id);
 
 	/**
 	 * \fn virtual ~WorldObject()
@@ -267,15 +266,6 @@ class WorldObject {
 	{
 	}
 	
-	/**
-	 * \fn getWorld()
-	 * \brief Gibt einen Zeiger auf die Welt zurueck
-	 * \return Zeiger auf die Welt
-	 */
-	World* getWorld()
-	{
-		return m_world;
-	}
 	
 	/**
 	 * \fn Region* getRegion()
@@ -653,12 +643,7 @@ private:
 	 */
 	bool m_destroyed;
 	
-	/**
-	 * \var m_world
-	 * \brief Zeiger auf das World Objekt, in dem das aktuelle Objekt eingeordnet ist
-	 */
-	World* m_world;
-
+	
 };
 
 #include "damage.h"

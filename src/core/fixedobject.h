@@ -46,18 +46,17 @@ class FixedObject : public WorldObject {
 public:
 	
 	/**
-	 * \fn FixedObject(World* world, int id)
-	 * \param world Zeiger auf die Welt
+	 * \fn FixedObject( int id)
 	 * \param id ID des Objekts
 	 * \brief Konstruktor
 	 */
-	FixedObject(World* world, int id);
+	FixedObject( int id);
 	
 	/**
-	 * \fn FixedObject(World* world,  int id, TypeInfo::ObjectSubtype object_subtype)
+	 * \fn FixedObject( int id, TypeInfo::ObjectSubtype object_subtype)
 	 * \brief Konstruktor
 	 */
-	FixedObject(World* world,  int id, TypeInfo::ObjectSubtype object_subtype);
+	FixedObject( int id, TypeInfo::ObjectSubtype object_subtype);
 	
 	/**
 	* \fn virtual bool init()
