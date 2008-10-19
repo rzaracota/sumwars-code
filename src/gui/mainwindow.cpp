@@ -2966,7 +2966,7 @@ void MainWindow::updateObjectInfo()
 
 		// zur ID gehoerendes Objekt
 		WorldObject* cwo;
-		cwo = m_document->getWorld()->getObject(id,rid);
+		cwo = World::getWorld()->getRegion(rid)->getObject(id);
 		Creature* cr;
 
 		if (cwo !=0)

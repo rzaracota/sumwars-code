@@ -19,6 +19,7 @@
 
 #include "world.h"
 #include "player.h"
+#include "mapgenerator.h"
 
 World* World::m_world=0;
 
@@ -94,10 +95,31 @@ bool World::init()
 void World::createRegion(short region)
 {
 	DEBUG5("creating region %i",region);
-	int type = 2;
+	int type = 1;
 	if (type==1)
 	{
-
+		
+		RegionData rdata;
+		
+		// Karte generieren
+		rdata.m_dimx = 64;
+		rdata.m_dimy = 64;
+		rdata.m_complexity = 0.4;
+		rdata.m_granularity = 8;
+		rdata.m_area_percent = 0.35;
+		rdata.m_id = 0;
+	
+		rdata.addEnvironment(0.6,"meadow");
+		rdata.addEnvironment(1.0,"hills");
+	
+		rdata.m_exit_directions[NORTH] = true;
+		rdata.m_exit_directions[SOUTH] = true;
+		rdata.m_exit_directions[WEST] = false;
+		rdata.m_exit_directions[EAST] = true;
+		
+		Region* reg = MapGenerator::createRegion(&rdata);
+		DEBUG("region created %p for id %i",reg,region);
+		short rid = insertRegion(reg,region);
 	}
 	else if(type==2)
 	{
@@ -109,7 +131,7 @@ void World::createRegion(short region)
 		reg->insertEnvironment(0.6,"meadow");
 		reg->insertEnvironment(1.0,"hills");
 			
-
+		reg->addLocation("entry_south",Vector(10,10));
 		// Objekte anlegen
 		WorldObject* wo=0;
 
@@ -536,10 +558,12 @@ bool World::insertPlayerIntoRegion(WorldObject* player, short region)
 
 	if (player->getState() == WorldObject::STATE_ENTER_REGION)
 	{
-		DEBUG("player %i entered region %i",player->getId(), region);
 		// Daten sind vollständig
 		Vector pos = player->getShape()->m_center;
 		// TODO
+		pos = reg->getLocation("entry_south");
+		DEBUG("entry position %f %f",pos.m_x, pos.m_y);
+		
 		reg->getFreePlace(player->getShape(),player->getLayer() , pos);
 		reg->insertObject(player, pos,region);
 		player->setState(WorldObject::STATE_ACTIVE);
@@ -553,6 +577,9 @@ bool World::insertPlayerIntoRegion(WorldObject* player, short region)
 
 			insertEvent(event);
 		}
+		
+		DEBUG("player %i %p entered region %i %p",player->getId(),player, region,getRegion(region));
+		
 
 	}
 	return true;

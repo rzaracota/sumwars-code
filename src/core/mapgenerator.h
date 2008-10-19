@@ -79,6 +79,13 @@ class MapGenerator
 	 */
 	static void createBorder(MapData* mdata, RegionData* rdata);
 	
+	/**
+	 * \fn static Region* createRegion(RegionData* rdata)
+	 * \brief erzeugt aus den angegebenen Daten eine Region
+	 * \param rdata Daten zur Erzeugung der Region
+	 */
+	static Region* createRegion(RegionData* rdata);
+	
 	
 	/**
 	 * \fn createPerlinNoise(Matrix2d<float> *data, int dimx, int dimy,int startfreq,float persistance, bool bounds)

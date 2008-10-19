@@ -1419,7 +1419,10 @@ EnvironmentName Region::getEnvironment(Vector pos)
 	for (it = m_environments.begin(); it !=m_environments.end();++it)
 	{
 		if (height < it->first)
+		{
+			DEBUG5("environment %s", it->second.c_str());
 			return it->second;
+		}
 	}
 	
 	return m_environments.rbegin()->second;

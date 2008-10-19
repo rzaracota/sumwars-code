@@ -7,15 +7,31 @@ bool operator<(WeightedLocation first, WeightedLocation second)
 	return first.m_value< second.m_value;
 }
 
-
+Region* MapGenerator::createRegion(RegionData* rdata)
+{
+	// temporaere Daten fuer die Erzeugung der Region
+	MapGenerator::MapData mdata;
+	
+	// Speicher anfordern
+	MapGenerator::createMapData(&mdata,rdata);
+	
+	// grundlegende Karte anfertigen
+	MapGenerator::createBaseMap(&mdata,rdata);
+	
+	// Berandungen einfuegen
+	MapGenerator::createBorder(&mdata,rdata);
+	
+	// Speicher freigeben
+	delete mdata.m_base_map;
+	
+	return mdata.m_region;
+}
 
 void MapGenerator::createMapData(MapData* mdata, RegionData* rdata)
 {
 	mdata->m_base_map = new Matrix2d<char>(rdata->m_dimx,rdata->m_dimy);
 	mdata->m_base_map->clear();
-	mdata->m_environment = new Matrix2d<float>(rdata->m_dimx,rdata->m_dimy);
 	mdata->m_region = new Region(rdata->m_dimx,rdata->m_dimy,rdata->m_id);
-
 }
 
 void MapGenerator::createBaseMap(MapData* mdata, RegionData* rdata)
@@ -215,7 +231,7 @@ void MapGenerator::createBaseMap(MapData* mdata, RegionData* rdata)
 	}
 	
 	// Umgebungskarte generieren
-	//createPerlinNoise(mdata->m_environment, dimx, dimy,4 , 0.4,false);
+	createPerlinNoise(mdata->m_region->getHeight(), dimx, dimy,4 , 0.4,false);
 }
 
 void MapGenerator::createBorder(MapData* mdata, RegionData* rdata)
@@ -305,6 +321,10 @@ void MapGenerator::createBorder(MapData* mdata, RegionData* rdata)
 			int i = exit[k][0];
 			int j = exit[k][1];
 			 
+			locname = "entry_";
+			locname += dirname[k];
+			mdata->m_region->addLocation(locname,Vector(i*8+4,j*8+4));
+			
 			i+= nb[k][0];
 			j+= nb[k][1];
 			locname = "exit_";
