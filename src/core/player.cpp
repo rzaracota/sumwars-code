@@ -408,8 +408,13 @@ bool Player::onItemClick(ClientCommand* command)
 
 				if (it->m_size != size)
 				{
-				// Groesse stimmt nicht
-					DEBUG("wrong size");
+					// Groesse stimmt nicht
+					// Item vom Cursor nehmen
+					Item* itm =0;
+					m_equipement->swapItem(itm, Equipement::CURSOR_ITEM);
+					
+					// ins Inventar einfuegen
+					insertItem(itm);
 					req = false;
 				}
 
@@ -417,7 +422,9 @@ bool Player::onItemClick(ClientCommand* command)
 				{
 					// Guertel, nur Traenke zulassen
 					if (it->m_type != Item::POTION)
+					{
 						req = false;
+					}
 				}
 
 			}
@@ -614,7 +621,7 @@ short Player::insertItem(Item* itm)
 			event.m_data = pos;
 			event.m_id = getId();
 
-			DEBUG("event: item picked up %i",pos);
+			DEBUG5("event: item picked up %i",pos);
 
 			World::getWorld()->insertEvent(event);
 		}
