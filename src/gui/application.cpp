@@ -294,6 +294,7 @@ bool Application::setupResources()
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../resources/gui/schemes", "FileSystem", "GUI");
 
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../resources/gui/schemes", "FileSystem", "GUI");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../resources/itempictures", "FileSystem", "GUI");
 
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../save", "FileSystem", "Savegame");
 
@@ -386,6 +387,26 @@ bool Application::initCEGUI()
 	// Imagesets laden
 	//CEGUI::Imageset* imgset = CEGUI::ImagesetManager::getSingleton().createImageset("test.imageset");
 	CEGUI::ImagesetManager::getSingleton().createImageset("skills.imageset");
+	
+	// TODO: Dateien laden
+	CEGUI::ImagesetManager::getSingleton().createImagesetFromImageFile ("Armbrust.png","Armbrust.png",(CEGUI::utf8*)"GUI");
+	CEGUI::ImagesetManager::getSingleton().createImagesetFromImageFile ("Axt.png","Axt.png",(CEGUI::utf8*)"GUI");
+	CEGUI::ImagesetManager::getSingleton().createImagesetFromImageFile ("Bogen.png","Bogen.png",(CEGUI::utf8*)"GUI");
+	CEGUI::ImagesetManager::getSingleton().createImagesetFromImageFile ("doppelaxt.png","doppelaxt.png",(CEGUI::utf8*)"GUI");
+	CEGUI::ImagesetManager::getSingleton().createImagesetFromImageFile ("Hellebarde.png","Hellebarde.png",(CEGUI::utf8*)"GUI");
+	CEGUI::ImagesetManager::getSingleton().createImagesetFromImageFile ("Schild_dmg.png","Schild_dmg.png",(CEGUI::utf8*)"GUI");
+	CEGUI::ImagesetManager::getSingleton().createImagesetFromImageFile ("Schild.png","Schild.png",(CEGUI::utf8*)"GUI");
+	CEGUI::ImagesetManager::getSingleton().createImagesetFromImageFile ("Schwert.png","Schwert.png",(CEGUI::utf8*)"GUI");
+	
+	MainWindow::registerItemImage("short_sw","set:Schwert.png image:full_image");
+	MainWindow::registerItemImage("long_sw","set:Schwert.png image:full_image");
+	MainWindow::registerItemImage("battle_axe","set:doppelaxt.png  image:full_image");
+	MainWindow::registerItemImage("wood_sh","set:Schild_dmg.png  image:full_image");
+	MainWindow::registerItemImage("iron_sh","set:Schild.png  image:full_image");
+	
+
+	
+	
 
 	// Mauscursor setzen (evtl eher in View auslagern ? )
 	m_cegui_system->setDefaultMouseCursor((CEGUI::utf8*)"TaharezLook", (CEGUI::utf8*)"MouseArrow");
@@ -400,12 +421,6 @@ bool Application::initCEGUI()
 	ttip->setDisplayTime(0);
 
 	// eigene Factorys einfuegen
-	/*
-	CEGUI::WindowFactoryManager& win_fact_man = CEGUI::WindowFactoryManager::getSingleton();
-	NumberedWindowFactory* num_win_fac = new NumberedWindowFactory();
-	win_fact_man.addFactory(num_win_fac);
-	win_fact_man.addFalagardWindowMapping("Taharez/NumberedStaticText","NumberedWindow","TaharezLook/StaticText",win_fact_man.getMappedRendererForType ("TaharezLook/StaticText"));
-	*/
 	return true;
 }
 

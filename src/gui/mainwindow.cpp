@@ -3,6 +3,8 @@
 #include <string>
 #include <sstream>
 
+std::map<Item::Subtype, std::string> MainWindow::m_item_images;
+
 
 MainWindow::MainWindow(Ogre::Root* ogreroot, CEGUI::System* ceguisystem,Ogre::RenderWindow* window,Document* doc)
 {
@@ -500,15 +502,12 @@ void MainWindow::setupControlPanel()
 	{
 		outStream.str("");
 		outStream << "InventoryItem" << i;
-		label = win_mgr.createWindow("TaharezLook/StaticText", outStream.str());
+		label = win_mgr.createWindow("TaharezLook/StaticImage", outStream.str());
 		ctrl_panel->addChildWindow(label);
 		label->setProperty("FrameEnabled", "true");
 		label->setProperty("BackgroundEnabled", "true");
 		label->setPosition(CEGUI::UVector2(cegui_reldim(0.225f+i*0.05f), cegui_reldim( 0.05f)));
 		label->setSize(CEGUI::UVector2(cegui_reldim(0.045f), cegui_reldim( 0.5f)));
-		outStream.str("");
-		outStream << "I" << i;
-		label->setText(outStream.str());
 		label->setID(Equipement::SMALL_ITEMS+i);
 		label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&MainWindow::onItemMouseButtonPressed, this));
 		label->subscribeEvent(CEGUI::Window::EventMouseButtonUp, CEGUI::Event::Subscriber(&MainWindow::onItemMouseButtonReleased, this));
@@ -1005,15 +1004,12 @@ void MainWindow::setupInventory()
 	{
 		outStream.str("");
 		outStream << "BigItem" << i<< "Label";
-		label = win_mgr.createWindow("TaharezLook/StaticText", outStream.str());
+		label = win_mgr.createWindow("TaharezLook/StaticImage", outStream.str());
 		inventory->addChildWindow(label);
 		label->setProperty("FrameEnabled", "true");
 		label->setProperty("BackgroundEnabled", "true");
 		label->setPosition(CEGUI::UVector2(cegui_reldim(0.05f+i*0.18f), cegui_reldim( 0.5f)));
 		label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-		outStream.str("");
-		outStream << "B" << i;
-		label->setText(outStream.str());
 		label->setID(Equipement::BIG_ITEMS+i);
 		label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&MainWindow::onItemMouseButtonPressed, this));
 		label->subscribeEvent(CEGUI::Window::EventMouseButtonUp, CEGUI::Event::Subscriber(&MainWindow::onItemMouseButtonReleased, this));
@@ -1027,15 +1023,12 @@ void MainWindow::setupInventory()
 		{
 			outStream.str("");
 			outStream << "MediumItem" << j*7+i<< "Label";
-			label = win_mgr.createWindow("TaharezLook/StaticText", outStream.str());
+			label = win_mgr.createWindow("TaharezLook/StaticImage", outStream.str());
 			inventory->addChildWindow(label);
 			label->setProperty("FrameEnabled", "true");
 			label->setProperty("BackgroundEnabled", "true");
 			label->setPosition(CEGUI::UVector2(cegui_reldim(0.05f+i*0.13f), cegui_reldim( 0.61f+0.09*j)));
 			label->setSize(CEGUI::UVector2(cegui_reldim(0.115f), cegui_reldim( 0.08f)));
-			outStream.str("");
-			outStream << "M" << j*7+i;
-			label->setText(outStream.str());
 			label->setID(Equipement::MEDIUM_ITEMS+j*7+i);
 			label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&MainWindow::onItemMouseButtonPressed, this));
 			label->subscribeEvent(CEGUI::Window::EventMouseButtonUp, CEGUI::Event::Subscriber(&MainWindow::onItemMouseButtonReleased, this));
@@ -1049,15 +1042,12 @@ void MainWindow::setupInventory()
 		{
 			outStream.str("");
 			outStream << "SmallItem" << j*10+i<< "Label";
-			label = win_mgr.createWindow("TaharezLook/StaticText", outStream.str());
+			label = win_mgr.createWindow("TaharezLook/StaticImage", outStream.str());
 			inventory->addChildWindow(label);
 			label->setProperty("FrameEnabled", "true");
 			label->setProperty("BackgroundEnabled", "true");
 			label->setPosition(CEGUI::UVector2(cegui_reldim(0.02f+i*0.096f), cegui_reldim( 0.79f+0.07*j)));
 			label->setSize(CEGUI::UVector2(cegui_reldim(0.086f), cegui_reldim( 0.06f)));
-			outStream.str("");
-			outStream << "S" << j*10+i;
-			label->setText(outStream.str());
 			label->setID(Equipement::SMALL_ITEMS+j*10+i);
 			label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&MainWindow::onItemMouseButtonPressed, this));
 			label->subscribeEvent(CEGUI::Window::EventMouseButtonUp, CEGUI::Event::Subscriber(&MainWindow::onItemMouseButtonReleased, this));
@@ -1066,13 +1056,12 @@ void MainWindow::setupInventory()
 	}
 
 	// Label Ruestung
-	label = win_mgr.createWindow("TaharezLook/StaticText", "ArmorItemLabel");
+	label = win_mgr.createWindow("TaharezLook/StaticImage", "ArmorItemLabel");
 	inventory->addChildWindow(label);
 	label->setProperty("FrameEnabled", "true");
 	label->setProperty("BackgroundEnabled", "true");
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.35f)));
 	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-	label->setText("Ruestung");
 	label->setID(Equipement::ARMOR);
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&MainWindow::onItemMouseButtonPressed, this));
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonUp, CEGUI::Event::Subscriber(&MainWindow::onItemMouseButtonReleased, this));
@@ -1083,7 +1072,7 @@ void MainWindow::setupInventory()
 	/*
 	try
 	{
-		numlabel = (NumberedWindow*) win_mgr.createWindow("Taharez/NumberedStaticText", "ArmorItemLabel");
+		numlabel = (NumberedWindow*) win_mgr.createWindow("Taharez/NumberedStaticImage", "ArmorItemLabel");
 		inventory->addChildWindow(numlabel);
 		numlabel->setProperty("FrameEnabled", "true");
 		numlabel->setProperty("BackgroundEnabled", "true");
@@ -1099,91 +1088,84 @@ void MainWindow::setupInventory()
 	*/
 
 	// Label Waffe
-	label = win_mgr.createWindow("TaharezLook/StaticText", "WeaponItemLabel");
+	label = win_mgr.createWindow("TaharezLook/StaticImage", "WeaponItemLabel");
 	inventory->addChildWindow(label);
 	label->setProperty("FrameEnabled", "true");
 	label->setProperty("BackgroundEnabled", "true");
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.14f)));
 	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-	label->setText("Waffe");
 	label->setID(Equipement::WEAPON);
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&MainWindow::onItemMouseButtonPressed, this));
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonUp, CEGUI::Event::Subscriber(&MainWindow::onItemMouseButtonReleased, this));
 	label->subscribeEvent(CEGUI::Window::EventMouseEnters, CEGUI::Event::Subscriber(&MainWindow::onItemHover, this));
 
 	// Label Helm
-	label = win_mgr.createWindow("TaharezLook/StaticText", "HelmetItemLabel");
+	label = win_mgr.createWindow("TaharezLook/StaticImage", "HelmetItemLabel");
 	inventory->addChildWindow(label);
 	label->setProperty("FrameEnabled", "true");
 	label->setProperty("BackgroundEnabled", "true");
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.07f), cegui_reldim( 0.05f)));
 	label->setSize(CEGUI::UVector2(cegui_reldim(0.1f), cegui_reldim( 0.07f)));
-	label->setText("Helm");
 	label->setID(Equipement::HELMET);
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&MainWindow::onItemMouseButtonPressed, this));
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonUp, CEGUI::Event::Subscriber(&MainWindow::onItemMouseButtonReleased, this));
 	label->subscribeEvent(CEGUI::Window::EventMouseEnters, CEGUI::Event::Subscriber(&MainWindow::onItemHover, this));
 
 	// Label Schild
-	label = win_mgr.createWindow("TaharezLook/StaticText", "ShieldItemLabel");
+	label = win_mgr.createWindow("TaharezLook/StaticImage", "ShieldItemLabel");
 	inventory->addChildWindow(label);
 	label->setProperty("FrameEnabled", "true");
 	label->setProperty("BackgroundEnabled", "true");
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.8f), cegui_reldim( 0.14f)));
 	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-	label->setText("Schild");
 	label->setID(Equipement::SHIELD);
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&MainWindow::onItemMouseButtonPressed, this));
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonUp, CEGUI::Event::Subscriber(&MainWindow::onItemMouseButtonReleased, this));
 	label->subscribeEvent(CEGUI::Window::EventMouseEnters, CEGUI::Event::Subscriber(&MainWindow::onItemHover, this));
 
 	// Label Handschuhe
-	label = win_mgr.createWindow("TaharezLook/StaticText", "GlovesItemLabel");
+	label = win_mgr.createWindow("TaharezLook/StaticImage", "GlovesItemLabel");
 	inventory->addChildWindow(label);
 	label->setProperty("FrameEnabled", "true");
 	label->setProperty("BackgroundEnabled", "true");
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.83f), cegui_reldim( 0.35f)));
 	label->setSize(CEGUI::UVector2(cegui_reldim(0.1f), cegui_reldim( 0.07f)));
-	label->setText("Handschuhe");
 	label->setID(Equipement::GLOVES);
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&MainWindow::onItemMouseButtonPressed, this));
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonUp, CEGUI::Event::Subscriber(&MainWindow::onItemMouseButtonReleased, this));
 	label->subscribeEvent(CEGUI::Window::EventMouseEnters, CEGUI::Event::Subscriber(&MainWindow::onItemHover, this));
 
 	// Ring links
-	label = win_mgr.createWindow("TaharezLook/StaticText", "RingLeftItemLabel");
+	label = win_mgr.createWindow("TaharezLook/StaticImage", "RingLeftItemLabel");
 	inventory->addChildWindow(label);
 	label->setProperty("FrameEnabled", "true");
 	label->setProperty("BackgroundEnabled", "true");
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.85f), cegui_reldim( 0.26f)));
 	label->setSize(CEGUI::UVector2(cegui_reldim(0.086f), cegui_reldim( 0.06f)));
-	label->setText("Ring1");
 	label->setID(Equipement::RING_LEFT);
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&MainWindow::onItemMouseButtonPressed, this));
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonUp, CEGUI::Event::Subscriber(&MainWindow::onItemMouseButtonReleased, this));
 	label->subscribeEvent(CEGUI::Window::EventMouseEnters, CEGUI::Event::Subscriber(&MainWindow::onItemHover, this));
 
 	// Ring rechts
-	label = win_mgr.createWindow("TaharezLook/StaticText", "RingRightItemLabel");
+	label = win_mgr.createWindow("TaharezLook/StaticImage", "RingRightItemLabel");
 	inventory->addChildWindow(label);
 	label->setProperty("FrameEnabled", "true");
 	label->setProperty("BackgroundEnabled", "true");
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.1f), cegui_reldim( 0.26f)));
 	label->setSize(CEGUI::UVector2(cegui_reldim(0.086f), cegui_reldim( 0.06f)));
-	label->setText("Ring2");
 	label->setID(Equipement::RING_RIGHT);
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&MainWindow::onItemMouseButtonPressed, this));
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonUp, CEGUI::Event::Subscriber(&MainWindow::onItemMouseButtonReleased, this));
 	label->subscribeEvent(CEGUI::Window::EventMouseEnters, CEGUI::Event::Subscriber(&MainWindow::onItemHover, this));
 
 	// Amulett
-	label = win_mgr.createWindow("TaharezLook/StaticText", "AmuletItemLabel");
+	label = win_mgr.createWindow("TaharezLook/StaticImage", "AmuletItemLabel");
 	inventory->addChildWindow(label);
 	label->setProperty("FrameEnabled", "true");
 	label->setProperty("BackgroundEnabled", "true");
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.85f), cegui_reldim( 0.06f)));
 	label->setSize(CEGUI::UVector2(cegui_reldim(0.086f), cegui_reldim( 0.06f)));
-	label->setText("Amulett");
 	label->setID(Equipement::AMULET);
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&MainWindow::onItemMouseButtonPressed, this));
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonUp, CEGUI::Event::Subscriber(&MainWindow::onItemMouseButtonReleased, this));
@@ -1446,7 +1428,7 @@ void MainWindow::setupSkilltree()
 
 	/*
 	name =Action::getActionInfo(Action::ATTACK)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticText", name.append( "Label") );
+	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
 	tab->addChildWindow(label);
 	label->setProperty("FrameEnabled", "true");
 	label->setProperty("BackgroundEnabled", "true");
@@ -2485,7 +2467,7 @@ void MainWindow::updateControlPanel()
 {
 	// Fenstermanager
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-	CEGUI::Window* label;
+	CEGUI::Window* label, *img;
 	std::ostringstream out_stream;
 	int timernr;
 	float perc=0;
@@ -2547,16 +2529,16 @@ void MainWindow::updateControlPanel()
 	{
 		out_stream.str("");
 		out_stream << "InventoryItem" << i;
-		label =  win_mgr.getWindow(out_stream.str().c_str());
+		img =  win_mgr.getWindow(out_stream.str().c_str());
 		it = equ->getItem(Equipement::SMALL_ITEMS+i);
 		out_stream.str("");
 		if (it!=0)
 		{
-			out_stream<< (it->getName());
+			out_stream<< getItemImage(it->m_subtype);;
 		}
-		if (label->getText()!=out_stream.str())
+		if (img->getProperty("Image")!=out_stream.str())
 		{
-			label->setText(out_stream.str());
+			img->setProperty("Image", out_stream.str());
 		}
 	}
 
@@ -2564,107 +2546,111 @@ void MainWindow::updateControlPanel()
 
 void MainWindow::updateInventory()
 {
+	
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-	CEGUI::Window* label;
+	CEGUI::Window* img;
 	std::ostringstream out_stream;
 
 	Player* player = m_document->getLocalPlayer();
 
+	
+	// Label Waffe
+	out_stream.str("");
+	if (player->getWeapon()!=0)
+	{
+		out_stream << getItemImage(player->getWeapon()->m_subtype);
+	}
+	img =  win_mgr.getWindow("WeaponItemLabel");
+	if (img->getProperty("Image")!=out_stream.str())
+	{
+		img->setProperty("Image", out_stream.str());
+	}
+
+
+	
 	// Label Ruestung
 	out_stream.str("");
 	Equipement* equ = player->getEquipement();
 	if (equ->getItem(Equipement::ARMOR)!=0)
 	{
-		out_stream << equ->getItem(Equipement::ARMOR)->getName();
+		out_stream << getItemImage(equ->getItem(Equipement::ARMOR)->m_subtype);
 	}
-	label =  win_mgr.getWindow("ArmorItemLabel");
-	if (label->getText()!=out_stream.str())
+	img =  win_mgr.getWindow("ArmorItemLabel");
+	if (img->getProperty("Image")!=out_stream.str())
 	{
-		label->setText(out_stream.str());
-	}
-
-	// Label Waffe
-	out_stream.str("");
-	if (player->getWeapon()!=0)
-	{
-		out_stream << player->getWeapon()->getName();
-	}
-	label =  win_mgr.getWindow("WeaponItemLabel");
-	if (label->getText()!=out_stream.str())
-	{
-		label->setText(out_stream.str());
+		img->setProperty("Image", out_stream.str());
 	}
 
 	// Label Helm
 	out_stream.str("");
 	if (equ->getItem(Equipement::HELMET)!=0)
 	{
-		out_stream << equ->getItem(Equipement::HELMET)->getName();
+		out_stream << getItemImage(equ->getItem(Equipement::HELMET)->m_subtype);
 	}
-	label =  win_mgr.getWindow("HelmetItemLabel");
-	if (label->getText()!=out_stream.str())
+	img =  win_mgr.getWindow("HelmetItemLabel");
+	if (img->getProperty("Image")!=out_stream.str())
 	{
-		label->setText(out_stream.str());
+		img->setProperty("Image", out_stream.str());
 	}
 
 	// Label Schild
 	out_stream.str("");
 	if (player->getShield()!=0)
 	{
-		out_stream << player->getShield()->getName();
+		out_stream << getItemImage(player->getShield()->m_subtype);
 	}
-	label =  win_mgr.getWindow("ShieldItemLabel");
-	if (label->getText()!=out_stream.str())
+	img =  win_mgr.getWindow("ShieldItemLabel");
+	if (img->getProperty("Image")!=out_stream.str())
 	{
-		label->setText(out_stream.str());
+		img->setProperty("Image", out_stream.str());
 	}
 
 	// Label Handschuhe
 	out_stream.str("");
 	if (equ->getItem(Equipement::GLOVES)!=0)
 	{
-		out_stream << equ->getItem(Equipement::GLOVES)->getName();
+		out_stream << getItemImage(equ->getItem(Equipement::GLOVES)->m_subtype);
 	}
-	label =  win_mgr.getWindow("GlovesItemLabel");
-	if (label->getText()!=out_stream.str())
+	img =  win_mgr.getWindow("GlovesItemLabel");
+	if (img->getProperty("Image")!=out_stream.str())
 	{
-		label->setText(out_stream.str());
+		img->setProperty("Image", out_stream.str());
 	}
 
 	// Label Ring links
 	out_stream.str("");
 	if (equ->getItem(Equipement::RING_LEFT)!=0)
 	{
-		out_stream << equ->getItem(Equipement::RING_LEFT)->getName();
+		out_stream << getItemImage(equ->getItem(Equipement::RING_LEFT)->m_subtype);
 	}
-	label =  win_mgr.getWindow("RingLeftItemLabel");
-	if (label->getText()!=out_stream.str())
+	img =  win_mgr.getWindow("RingLeftItemLabel");
+	if (img->getProperty("Image")!=out_stream.str())
 	{
-		label->setText(out_stream.str());
+		img->setProperty("Image", out_stream.str());
 	}
 
 	// Label Ring rechts
 	out_stream.str("");
 	if (equ->getItem(Equipement::RING_RIGHT)!=0)
 	{
-		out_stream << equ->getItem(Equipement::RING_RIGHT)->getName();
+		out_stream << getItemImage(equ->getItem(Equipement::RING_RIGHT)->m_subtype);
 	}
-	label =  win_mgr.getWindow("RingRightItemLabel");
-	if (label->getText()!=out_stream.str())
+	img =  win_mgr.getWindow("RingRightItemLabel");
+	if (img->getProperty("Image")!=out_stream.str())
 	{
-		label->setText(out_stream.str());
+		img->setProperty("Image", out_stream.str());
 	}
 
 	// Label Amulet
 	out_stream.str("");
 	if (equ->getItem(Equipement::AMULET)!=0)
 	{
-		out_stream << equ->getItem(Equipement::AMULET)->getName();
+		out_stream << getItemImage(equ->getItem(Equipement::AMULET)->m_subtype);
 	}
-	label =  win_mgr.getWindow("AmuletItemLabel");
-	if (label->getText()!=out_stream.str())
+	img =  win_mgr.getWindow("AmuletItemLabel");
+	if (img->getProperty("Image")!=out_stream.str())
 	{
-		label->setText(out_stream.str());
+		img->setProperty("Image", out_stream.str());
 	}
 
 	int i;
@@ -2674,16 +2660,16 @@ void MainWindow::updateInventory()
 	{
 		out_stream.str("");
 		out_stream << "BigItem" << i<< "Label";
-		label =  win_mgr.getWindow(out_stream.str().c_str());
+		img =  win_mgr.getWindow(out_stream.str().c_str());
 		it = equ->getItem(Equipement::BIG_ITEMS+i);
 		out_stream.str("");
 		if (it!=0)
 		{
-			out_stream<< (it->getName());
+			out_stream<< getItemImage(it->m_subtype);
 		}
-		if (label->getText()!=out_stream.str())
+		if (img->getProperty("Image")!=out_stream.str())
 		{
-			label->setText(out_stream.str());
+			img->setProperty("Image", out_stream.str());
 		}
 	}
 
@@ -2692,16 +2678,16 @@ void MainWindow::updateInventory()
 	{
 		out_stream.str("");
 		out_stream << "MediumItem" << i<< "Label";
-		label =  win_mgr.getWindow(out_stream.str().c_str());
+		img =  win_mgr.getWindow(out_stream.str().c_str());
 		it = equ->getItem(Equipement::MEDIUM_ITEMS+i);
 		out_stream.str("");
 		if (it!=0)
 		{
-			out_stream<< (it->getName());
+			out_stream<< getItemImage(it->m_subtype);
 		}
-		if (label->getText()!=out_stream.str())
+		if (img->getProperty("Image")!=out_stream.str())
 		{
-			label->setText(out_stream.str());
+			img->setProperty("Image", out_stream.str());
 		}
 	}
 
@@ -2710,16 +2696,16 @@ void MainWindow::updateInventory()
 	{
 		out_stream.str("");
 		out_stream << "SmallItem" << i<< "Label";
-		label =  win_mgr.getWindow(out_stream.str().c_str());
+		img =  win_mgr.getWindow(out_stream.str().c_str());
 		it = equ->getItem(Equipement::SMALL_ITEMS+i);
 		out_stream.str("");
 		if (it!=0)
 		{
-			out_stream<< (it->getName());
+			out_stream<< getItemImage(it->m_subtype);
 		}
-		if (label->getText()!=out_stream.str())
+		if (img->getProperty("Image")!=out_stream.str())
 		{
-			label->setText(out_stream.str());
+			img->setProperty("Image", out_stream.str());
 		}
 	}
 
@@ -3430,7 +3416,18 @@ bool MainWindow::onStartMultiPlayerHost(const CEGUI::EventArgs& evt)
     return true;
 }
 
-
+std::string MainWindow::getItemImage(Item::Subtype type)
+{
+	std::map<Item::Subtype, std::string>::iterator it;
+	it = m_item_images.find(type);
+	 
+	if (it != m_item_images.end())
+	{
+		return it->second;
+	}
+	
+	return "set: Axt.png image: full_image";
+}
 
 
 

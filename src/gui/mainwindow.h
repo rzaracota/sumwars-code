@@ -355,8 +355,23 @@ class MainWindow :
 		return true;
 	}
 
-
-
+	/**
+	/* \fn static void registerItemImage(Item::Subtype type, std::string image)
+	 * \brief registiert ein Bild fuer ein bestimmten Itemtyp
+	 * \param type Typ des Gegenstandes
+	 * \param image Bild der Form set: ... image: ...
+	 */
+	static void registerItemImage(Item::Subtype type, std::string image)
+	{
+		m_item_images[type] = image;
+	}
+	
+	/**
+	 * \fn static std::string getItemImage(Item::Subtype type)
+	 * \brief Gibt zu dem angegebenen Itemtyp das zugehoerige Bild aus
+	 */
+	static std::string getItemImage(Item::Subtype type);
+	
 
 	private:
 
@@ -433,6 +448,12 @@ class MainWindow :
 	 * \brief wird auf true gesetzt, wenn bei einem Mausklick ein GUI Element getroffen wird
 	 */
 	bool m_gui_hit;
+	
+	/**
+	/* \var static std::map<Item::Subtype, std::string> m_item_images
+	 * \brief Enthaelt fuer jeden Itemtyp das passende Bild
+	 */
+	static std::map<Item::Subtype, std::string> m_item_images;
 
 };
 
