@@ -14,19 +14,19 @@
 		modchance_health_mod="float"
 		modchance_armor_mod="float"
 		modchance_block_mod="float"
-		modchance_strength_mod="float"
-		modchance_dexterity_mod="float"
-		modchance_magic_power_mod="float"
+s		modchance_strength_mod="float"
+s		modchance_dexterity_mod="float"
+s		modchance_magic_power_mod="float"
 		modchance_willpower_mod="float"
 		modchance_resist_phys_mod="float"
 		modchance_resist_fire_mod="float"
 		modchance_resist_ice_mod="float"
 		modchance_resist_air_mod="float"
 		modchance_resist_all_mod="float"
-		modchance_damage_phys_mod="float"
-		modchance_damage_fire_mod="float"
-		modchance_damage_ice_mod="float"
-		modchance_damage_air_mod="float"
+s		modchance_damage_phys_mod="float"
+s		modchance_damage_fire_mod="float"
+s		modchance_damage_ice_mod="float"
+s		modchance_damage_air_mod="float"
 		modchance_damage_mult_phys_mod="float"
 		modchance_damage_mult_fire_mod="float"
 		modchance_damage_mult_ice_mod="float"
@@ -127,6 +127,16 @@
 		price="50"
 		min_enchant="10"
 		max_enchant="40"
+		modchance_strength_mod="0.1"
+		modchance_dexterity_mod="0.1"
+		modchance_magic_power_mod="0.05"
+		modchance_damage_phys_mod="0.15"
+		modchance_damage_fire_mod="0.10"
+		modchance_damage_ice_mod="0.10"
+		modchance_damage_air_mod="0.10"
+		modchance_damage_mult_phys_mod="0.1"
+		modchance_attack_mod="0.1"
+		modchance_power_mod="0.1"
 	/>
 	<EquipEffect />
 	<WeaponAttribute
@@ -178,7 +188,6 @@
 	/>
 </Item>
 
-
 <!-- Bronze Sword -->
 <Item type="weapon" subtype="bronze_sw" size="medium">
 	<Mesh file="sword.mesh" />
@@ -186,6 +195,16 @@
 		price="400"
 		min_enchant="40"
 		max_enchant="150"
+		modchance_strength_mod="0.1"
+		modchance_dexterity_mod="0.1"
+		modchance_magic_power_mod="0.05"
+		modchance_damage_phys_mod="0.15"
+		modchance_damage_fire_mod="0.10"
+		modchance_damage_ice_mod="0.10"
+		modchance_damage_air_mod="0.10"
+		modchance_damage_mult_phys_mod="0.1"
+		modchance_attack_mod="0.1"
+		modchance_power_mod="0.1"
 	/>
 	<EquipEffect />
 	<WeaponAttribute
@@ -210,6 +229,16 @@
 		price="750"
 		min_enchant="50"
 		max_enchant="200"
+		modchance_strength_mod="0.1"
+		modchance_dexterity_mod="0.1"
+		modchance_magic_power_mod="0.05"
+		modchance_damage_phys_mod="0.15"
+		modchance_damage_fire_mod="0.10"
+		modchance_damage_ice_mod="0.10"
+		modchance_damage_air_mod="0.10"
+		modchance_damage_mult_phys_mod="0.1"
+		modchance_attack_mod="0.1"
+		modchance_power_mod="0.1"
 	/>
 	<EquipEffect />
 	<WeaponAttribute
@@ -234,6 +263,16 @@
 		price="1500"
 		min_enchant="80"
 		max_enchant="260"
+		modchance_strength_mod="0.1"
+		modchance_dexterity_mod="0.1"
+		modchance_magic_power_mod="0.05"
+		modchance_damage_phys_mod="0.15"
+		modchance_damage_fire_mod="0.10"
+		modchance_damage_ice_mod="0.10"
+		modchance_damage_air_mod="0.10"
+		modchance_damage_mult_phys_mod="0.1"
+		modchance_attack_mod="0.1"
+		modchance_power_mod="0.1"
 	/>
 	<EquipEffect />
 	<WeaponAttribute
@@ -258,6 +297,16 @@
 		price="2000"
 		min_enchant="80"
 		max_enchant="270"
+		modchance_strength_mod="0.1"
+		modchance_dexterity_mod="0.1"
+		modchance_magic_power_mod="0.05"
+		modchance_damage_phys_mod="0.15"
+		modchance_damage_fire_mod="0.10"
+		modchance_damage_ice_mod="0.10"
+		modchance_damage_air_mod="0.10"
+		modchance_damage_mult_phys_mod="0.1"
+		modchance_attack_mod="0.1"
+		modchance_power_mod="0.1"
 	/>
 	<EquipEffect />
 	<WeaponAttribute
@@ -282,6 +331,16 @@
 		price="3300"
 		min_enchant="100"
 		max_enchant="300"
+		modchance_strength_mod="0.1"
+		modchance_dexterity_mod="0.1"
+		modchance_magic_power_mod="0.05"
+		modchance_damage_phys_mod="0.15"
+		modchance_damage_fire_mod="0.10"
+		modchance_damage_ice_mod="0.10"
+		modchance_damage_air_mod="0.10"
+		modchance_damage_mult_phys_mod="0.1"
+		modchance_attack_mod="0.1"
+		modchance_power_mod="0.1"
 	/>
 	<EquipEffect />
 	<WeaponAttribute
@@ -306,6 +365,16 @@
 		price="3700"
 		min_enchant="130"
 		max_enchant="350"
+		modchance_strength_mod="0.1"
+		modchance_dexterity_mod="0.1"
+		modchance_magic_power_mod="0.05"
+		modchance_damage_phys_mod="0.15"
+		modchance_damage_fire_mod="0.10"
+		modchance_damage_ice_mod="0.10"
+		modchance_damage_air_mod="0.10"
+		modchance_damage_mult_phys_mod="0.1"
+		modchance_attack_mod="0.1"
+		modchance_power_mod="0.1"
 	/>
 	<EquipEffect />
 	<WeaponAttribute
@@ -330,6 +399,16 @@
 		price="4000"
 		min_enchant="140"
 		max_enchant="375"
+		modchance_strength_mod="0.1"
+		modchance_dexterity_mod="0.1"
+		modchance_magic_power_mod="0.05"
+		modchance_damage_phys_mod="0.15"
+		modchance_damage_fire_mod="0.10"
+		modchance_damage_ice_mod="0.10"
+		modchance_damage_air_mod="0.10"
+		modchance_damage_mult_phys_mod="0.1"
+		modchance_attack_mod="0.1"
+		modchance_power_mod="0.1"
 	/>
 	<EquipEffect />
 	<WeaponAttribute
@@ -354,6 +433,16 @@
 		price="5000"
 		min_enchant="150"
 		max_enchant="375"
+		modchance_strength_mod="0.1"
+		modchance_dexterity_mod="0.1"
+		modchance_magic_power_mod="0.05"
+		modchance_damage_phys_mod="0.15"
+		modchance_damage_fire_mod="0.0"
+		modchance_damage_ice_mod="0.10"
+		modchance_damage_air_mod="0.10"
+		modchance_damage_mult_phys_mod="0.1"
+		modchance_attack_mod="0.1"
+		modchance_power_mod="0.1"
 	/>
 	<EquipEffect />
 	<WeaponAttribute
@@ -380,6 +469,16 @@
 		price="5500"
 		min_enchant="160"
 		max_enchant="400"
+		modchance_strength_mod="0.1"
+		modchance_dexterity_mod="0.1"
+		modchance_magic_power_mod="0.05"
+		modchance_damage_phys_mod="0.15"
+		modchance_damage_fire_mod="0.10"
+		modchance_damage_ice_mod="0.10"
+		modchance_damage_air_mod="0.10"
+		modchance_damage_mult_phys_mod="0.1"
+		modchance_attack_mod="0.1"
+		modchance_power_mod="0.1"
 	/>
 	<EquipEffect />
 	<WeaponAttribute
@@ -404,6 +503,16 @@
 		price="6000"
 		min_enchant="190"
 		max_enchant="450"
+		modchance_strength_mod="0.1"
+		modchance_dexterity_mod="0.1"
+		modchance_magic_power_mod="0.05"
+		modchance_damage_phys_mod="0.15"
+		modchance_damage_fire_mod="0.10"
+		modchance_damage_ice_mod="0.10"
+		modchance_damage_air_mod="0.10"
+		modchance_damage_mult_phys_mod="0.1"
+		modchance_attack_mod="0.1"
+		modchance_power_mod="0.1"
 	/>
 	<EquipEffect />
 	<WeaponAttribute
@@ -428,6 +537,16 @@
 		price="9000"
 		min_enchant="220"
 		max_enchant="500"
+		modchance_strength_mod="0.1"
+		modchance_dexterity_mod="0.1"
+		modchance_magic_power_mod="0.05"
+		modchance_damage_phys_mod="0.15"
+		modchance_damage_fire_mod="0.10"
+		modchance_damage_ice_mod="0.10"
+		modchance_damage_air_mod="0.10"
+		modchance_damage_mult_phys_mod="0.1"
+		modchance_attack_mod="0.1"
+		modchance_power_mod="0.1"
 	/>
 	<EquipEffect />
 	<WeaponAttribute
@@ -452,6 +571,16 @@
 		price="11000"
 		min_enchant="250"
 		max_enchant="550"
+		modchance_strength_mod="0.1"
+		modchance_dexterity_mod="0.1"
+		modchance_magic_power_mod="0.05"
+		modchance_damage_phys_mod="0.15"
+		modchance_damage_fire_mod="0.10"
+		modchance_damage_ice_mod="0.10"
+		modchance_damage_air_mod="0.10"
+		modchance_damage_mult_phys_mod="0.1"
+		modchance_attack_mod="0.1"
+		modchance_power_mod="0.1"
 	/>
 	<EquipEffect />
 	<WeaponAttribute
@@ -476,6 +605,16 @@
 		price="15000"
 		min_enchant="280"
 		max_enchant="600"
+		modchance_strength_mod="0.1"
+		modchance_dexterity_mod="0.1"
+		modchance_magic_power_mod="0.05"
+		modchance_damage_phys_mod="0.15"
+		modchance_damage_fire_mod="0.10"
+		modchance_damage_ice_mod="0.0"
+		modchance_damage_air_mod="0.10"
+		modchance_damage_mult_phys_mod="0.1"
+		modchance_attack_mod="0.1"
+		modchance_power_mod="0.1"
 	/>
 	<EquipEffect />
 	<WeaponAttribute
@@ -502,6 +641,16 @@
 		price="15000"
 		min_enchant="310"
 		max_enchant="650"
+		modchance_strength_mod="0.1"
+		modchance_dexterity_mod="0.1"
+		modchance_magic_power_mod="0.05"
+		modchance_damage_phys_mod="0.15"
+		modchance_damage_fire_mod="0.10"
+		modchance_damage_ice_mod="0.10"
+		modchance_damage_air_mod="0.10"
+		modchance_damage_mult_phys_mod="0.1"
+		modchance_attack_mod="0.1"
+		modchance_power_mod="0.1"
 	/>
 	<EquipEffect />
 	<WeaponAttribute
@@ -526,6 +675,16 @@
 		price="25000"
 		min_enchant="340"
 		max_enchant="700"
+		modchance_strength_mod="0.1"
+		modchance_dexterity_mod="0.1"
+		modchance_magic_power_mod="0.05"
+		modchance_damage_phys_mod="0.15"
+		modchance_damage_fire_mod="0.10"
+		modchance_damage_ice_mod="0.10"
+		modchance_damage_air_mod="0.10"
+		modchance_damage_mult_phys_mod="0.1"
+		modchance_attack_mod="0.1"
+		modchance_power_mod="0.1"
 	/>
 	<EquipEffect />
 	<WeaponAttribute
@@ -550,6 +709,16 @@
 		price="50000"
 		min_enchant="370"
 		max_enchant="750"
+		modchance_strength_mod="0.1"
+		modchance_dexterity_mod="0.1"
+		modchance_magic_power_mod="0.05"
+		modchance_damage_phys_mod="0.15"
+		modchance_damage_fire_mod="0.10"
+		modchance_damage_ice_mod="0.10"
+		modchance_damage_air_mod="0.10"
+		modchance_damage_mult_phys_mod="0.1"
+		modchance_attack_mod="0.1"
+		modchance_power_mod="0.1"
 	/>
 	<EquipEffect />
 	<WeaponAttribute
@@ -575,6 +744,16 @@
 		price="100"
 		min_enchant="10"
 		max_enchant="40"
+		modchance_strength_mod="0.1"
+		modchance_dexterity_mod="0.1"
+		modchance_magic_power_mod="0.05"
+		modchance_damage_phys_mod="0.15"
+		modchance_damage_fire_mod="0.10"
+		modchance_damage_ice_mod="0.10"
+		modchance_damage_air_mod="0.10"
+		modchance_damage_mult_phys_mod="0.1"
+		modchance_attack_mod="0.1"
+		modchance_power_mod="0.1"
 	/>
 	<EquipEffect />
 	<WeaponAttribute
@@ -599,6 +778,16 @@
 		price="300"
 		min_enchant="30"
 		max_enchant="120"
+		modchance_strength_mod="0.1"
+		modchance_dexterity_mod="0.1"
+		modchance_magic_power_mod="0.05"
+		modchance_damage_phys_mod="0.15"
+		modchance_damage_fire_mod="0.10"
+		modchance_damage_ice_mod="0.10"
+		modchance_damage_air_mod="0.10"
+		modchance_damage_mult_phys_mod="0.1"
+		modchance_attack_mod="0.1"
+		modchance_power_mod="0.1"
 	/>
 	<EquipEffect />
 	<WeaponAttribute
@@ -623,6 +812,16 @@
 		price="800"
 		min_enchant="40"
 		max_enchant="150"
+		modchance_strength_mod="0.1"
+		modchance_dexterity_mod="0.1"
+		modchance_magic_power_mod="0.05"
+		modchance_damage_phys_mod="0.15"
+		modchance_damage_fire_mod="0.10"
+		modchance_damage_ice_mod="0.10"
+		modchance_damage_air_mod="0.10"
+		modchance_damage_mult_phys_mod="0.1"
+		modchance_attack_mod="0.1"
+		modchance_power_mod="0.1"
 	/>
 	<EquipEffect />
 	<WeaponAttribute
@@ -647,6 +846,16 @@
 		price="1500"
 		min_enchant="50"
 		max_enchant="200"
+		modchance_strength_mod="0.1"
+		modchance_dexterity_mod="0.1"
+		modchance_magic_power_mod="0.05"
+		modchance_damage_phys_mod="0.15"
+		modchance_damage_fire_mod="0.10"
+		modchance_damage_ice_mod="0.10"
+		modchance_damage_air_mod="0.10"
+		modchance_damage_mult_phys_mod="0.1"
+		modchance_attack_mod="0.1"
+		modchance_power_mod="0.1"
 	/>
 	<EquipEffect />
 	<WeaponAttribute
@@ -669,39 +878,25 @@
 	<Mesh file="sword.mesh" />
 	<Attribute
 		price="1500"
-		min_enchant="50"
-		max_enchant="200"
+		min_enchant="80"
+		max_enchant="260"
+		modchance_strength_mod="0.1"
+		modchance_dexterity_mod="0.1"
+		modchance_magic_power_mod="0.05"
+		modchance_damage_phys_mod="0.15"
+		modchance_damage_fire_mod="0.10"
+		modchance_damage_ice_mod="0.10"
+		modchance_damage_air_mod="0.10"
+		modchance_damage_mult_phys_mod="0.1"
+		modchance_attack_mod="0.1"
+		modchance_power_mod="0.1"
 	/>
 	<EquipEffect />
 	<WeaponAttribute
-		damage_min_physical="21"
-		damage_max_physical="36"
-		damage_attack="15"
-		damage_power="60"
-		attack_range="1.5"
-		two_handed="yes"
-		dattack_speed="-400"
-	/>
-	<DropChance
-		level="8"
-		probability="1.0"
-	/>
-</Item>
-
-<!-- Bastardschwert -->
-<Item type="weapon" subtype="bast_sw" size="big">
-	<Mesh file="sword.mesh" />
-	<Attribute
-		price="1500"
-		min_enchant="50"
-		max_enchant="200"
-	/>
-	<EquipEffect />
-	<WeaponAttribute
-		damage_min_physical="21"
-		damage_max_physical="36"
-		damage_attack="15"
-		damage_power="60"
+		damage_min_physical="35"
+		damage_max_physical="53"
+		damage_attack="25"
+		damage_power="40"
 		attack_range="1.5"
 		two_handed="yes"
 		dattack_speed="-400"
@@ -711,14 +906,73 @@
 		probability="1.0"
 	/>
 </Item>
+
+<!-- bastard sword -->
+<Item type="weapon" subtype="bast_sw" size="big">
+	<Mesh file="sword.mesh" />
+	<Attribute
+		price="1500"
+		min_enchant="80"
+		max_enchant="260"
+		modchance_strength_mod="0.1"
+		modchance_dexterity_mod="0.1"
+		modchance_magic_power_mod="0.05"
+		modchance_damage_phys_mod="0.15"
+		modchance_damage_fire_mod="0.10"
+		modchance_damage_ice_mod="0.10"
+		modchance_damage_air_mod="0.10"
+		modchance_damage_mult_phys_mod="0.1"
+		modchance_attack_mod="0.1"
+		modchance_power_mod="0.1"
+	/>
+	<EquipEffect />
+	<WeaponAttribute
+		damage_min_physical="51"
+		damage_max_physical="71"
+		damage_attack="30"
+		damage_power="30"
+		attack_range="1.5"
+		two_handed="yes"
+		dattack_speed="-400"
+	/>
+	<DropChance
+		level="19"
+		probability="1.0"
+	/>
+</Item>
+
+<!-- Ogerdolch -->
+<!-- Goblintöter -->
+<!-- Richtschwert -->
+<!-- Gardistenzweihänder -->
+<!-- Flamberg -->
+<!-- Aisener Kriegsschwert -->
+<!-- Monsterschwert -->
+<!-- Tränenschwert -->
+<!-- Todeswind -->
+<!-- Schreckensschwert -->
+<!-- Großschwert -->
+<!-- Engelsschwert -->
+
 <!-- AXES-->
 <!-- ONE HANDED AXES -->
-<Item type="weapon" subtype="hammer_axe" size="medium">
+<!-- hatchet -->
+<Item type="weapon" subtype="hatch_axe" size="medium">
 	<Mesh file="battleaxe.mesh" />
 	<Attribute
 		price="50"
 		min_enchant="10"
 		max_enchant="40"
+		modchance_strength_mod="0.1"
+		modchance_dexterity_mod="0.1"
+		modchance_magic_power_mod="0.05"
+		modchance_damage_phys_mod="0.15"
+		modchance_damage_fire_mod="0.10"
+		modchance_damage_ice_mod="0.10"
+		modchance_damage_air_mod="0.10"
+		modchance_damage_mult_phys_mod="0.1"
+		modchance_attack_mod="0.1"
+		modchance_power_mod="0.1"
 	/>
 	<EquipEffect />
 	<WeaponAttribute
@@ -735,3 +989,292 @@
 		probability="1.0"
 	/>
 </Item>
+
+<!-- bronze_axe-->
+<Item type="weapon" subtype="bronze_axe" size="medium">
+	<Mesh file="battleaxe.mesh" />
+	<Attribute
+		price="50"
+		min_enchant="10"
+		max_enchant="40"
+		modchance_strength_mod="0.1"
+		modchance_dexterity_mod="0.1"
+		modchance_magic_power_mod="0.05"
+		modchance_damage_phys_mod="0.15"
+		modchance_damage_fire_mod="0.10"
+		modchance_damage_ice_mod="0.10"
+		modchance_damage_air_mod="0.10"
+		modchance_damage_mult_phys_mod="0.1"
+		modchance_attack_mod="0.1"
+		modchance_power_mod="0.1"
+	/>
+	<EquipEffect />
+	<WeaponAttribute
+		damage_min_physical="3"
+		damage_max_physical="6"
+		damage_attack="20"
+		damage_power="10"
+		attack_range="0.8"
+		two_handed="no"
+		dattack_speed="1000"
+	/>
+	<DropChance
+		level="1"
+		probability="1.0"
+	/>
+</Item>
+	<!-- Axt, Beil=axe-->
+	<!-- kleine Axt, handbeil=hatchet-->
+	<!-- Kriegsbeil, Streitaxt=tomahawk-->
+<!-- Schlachtebeil -->
+<!-- Eisenbeil -->
+<!-- Eisenaxt -->
+<!-- Söldneraxt -->
+<!-- Stahlaxt -->
+<!-- Kampfaxt -->
+<!-- Wächteraxt -->
+<!-- Minotaurenaxt -->
+<!-- Donneraxt -->
+<!-- Dämonenaxt -->
+<!-- Obsidianaxt -->
+<!-- Vulkanaxt -->
+<!-- Berserkeraxt -->
+<!-- Diamantaxt -->
+<!-- Zwergenaxt -->
+<!-- Höllenaxt -->
+
+<!-- TWO HANDED AXES -->
+<!-- Holzfälleraxt -->
+<!-- Großaxt-->
+<!-- Reisseraxt -->
+<!-- Henkersaxt -->
+<!-- Schmetteraxt -->
+<!-- Ogerbeil -->
+<!-- Sensenaxt -->
+<!-- Barbarenstreitaxt-->
+<!-- Knochenbrecher -->
+<!-- Riesenaxt -->
+<!-- Schlachtaxt -->
+<!-- Ogerreißer -->
+<!-- Zwergenstahlaxt -->
+<!-- Sternenaxt -->
+<!-- Königsaxt -->
+<!-- Folteraxt -->
+<!-- Eislandaxt -->
+<!-- Todesaxt-->
+
+<!-- HAMMER -->
+<!-- ONE HANDED HAMMER -->
+<!-- hammer -->
+<!-- Zeremonienhammer -->
+<!-- Eisenhammer -->
+<!-- Schlägel -->
+<!-- Morgenstern -->
+<!-- Krähenkopf -->
+<!-- Reiterhammer -->
+<!-- Streitkolben -->
+<!-- Stahlhammer -->
+<!-- Kriegshammer -->
+<!-- Schmetterkopf -->
+<!-- Stahlstreitkolben -->
+<!-- Stahlschlägel -->
+<!-- Sechskantstreitkolben -->
+<!-- Silberhammer -->
+<!-- Diamanthammer -->
+<!-- Priesterstreitkolben -->
+<!-- Heiliger Hammer -->
+
+<!-- TWO HANDED HAMMER-->
+<!-- Vorschlaghammer -->
+<!-- Bronzehammer -->
+<!-- Langstiel -->
+<!-- Wächterhammer -->
+<!-- Silberschrecken -->
+<!-- Glimmhammer -->
+<!-- Knochenbrecher -->
+<!-- Trümmerkopf -->
+<!-- Aisener Kriegshammer -->
+<!-- Urteilshammer -->
+<!-- Priesterhammer -->
+<!-- Obsidianhammer -->
+<!-- Richthammer -->
+<!-- Zyklopenhammer -->
+<!-- Zwergenstahlhammer -->
+<!-- Elementenjäger -->
+<!-- Exorzistenhammer -->
+<!-- Welterschütterer -->
+
+<!-- BOWS -->
+<!-- SHORT BOWS -->
+<!-- Übungsbogen -->
+<!-- Eibenkurzbogen -->
+<!-- Kurzbogen -->
+<!-- Jagdbogen -->
+<!-- Rattanbogen -->
+<!-- Banditenbogen -->
+<!-- Nordauge -->
+<!-- Kriegskurzbogen -->
+<!-- Kompositbogen -->
+<!-- Reiterbogen -->
+<!-- Kohlebogen -->
+<!-- Eschenbogen -->
+<!-- Fluchbogen -->
+<!-- Eichenkurzbogen -->
+<!-- Seelenbogen -->
+<!-- Sucher -->
+<!-- Chaosbogen -->
+<!-- Feenbogen -->
+
+<!-- LONG BOWS -->
+<!-- Turnierbogen -->
+<!-- Orkbogen -->
+<!-- Eibenbogen -->
+<!-- Langbogen -->
+<!-- Soldatenbogen -->
+<!-- Hornbogen -->
+<!-- Ahornbogen -->
+<!-- Kriegsbogen -->
+<!-- Kompositlangbogen -->
+<!-- Sturmsänger -->
+<!-- Eichenbogen -->
+<!-- Dämonenhornbogen -->
+<!-- Waldläuferbogen -->
+<!-- Eschenlangbogen -->
+<!-- Engelsbogen -->
+<!-- Dämonenkompositbogen -->
+<!-- Heldenbogen -->
+<!-- Elfenbogen -->
+<!-- ARMBRUST -->
+<!-- Übungsarmbrust -->
+<!-- Leichte Armbrust -->
+<!-- Eibenarmbrust -->
+<!-- Armbrust -->
+<!-- Kriegsarmbrust -->
+<!-- Arbaleste -->
+<!-- Klingenwerfer -->
+<!-- Repetierarmbrust -->
+<!-- Windenarmbrust -->
+<!-- Bärentöter -->
+<!-- Schwarze Armbrust -->
+<!-- Belagerungsarmbrust -->
+<!-- Donnerschlag -->
+<!-- Leichte Zwergenarmbrust -->
+<!-- Todesholzarmbrust -->
+<!-- Assasinenarmbrust -->
+<!-- Zerstörerarmbrust -->
+<!-- Zwergenarmbrust -->
+
+<!-- SHIELDS -->
+<!-- Tartsche -->
+<!-- Buckler -->
+<!-- Holzschild -->
+<!-- Bronzeschild -->
+<!-- Eisenschild -->
+<!-- Stahlschild -->
+<!-- Verstärkter Rundschild -->
+<!-- Glühender Schild -->
+<!-- Klingenschild -->
+<!-- Ogerteller -->
+<!-- Turmschild -->
+<!-- Legionsschild -->
+<!-- Zwergenstahlschild -->
+<!-- Nordlingsschild -->
+<!-- Windschild -->
+<!-- Engelsschild -->
+<!-- Heldenschild -->
+<!-- Götterschild -->
+
+<!-- ARMOR -->
+<!-- Tuchrüstung -->
+<!-- Lederrüstung -->
+<!-- Nietenrüstung -->
+<!-- Banditenrüstung -->
+<!-- Novizenrüstung -->
+<!-- Söldnerrüstung -->
+<!-- Waldläuferhemd -->
+<!-- Assasinenrüstung -->
+<!-- Tempelrüstung -->
+<!-- Kettenhemd -->
+<!-- Räubergewand -->
+<!-- Brigandine -->
+<!-- Schwarzlederrüstung -->
+<!-- Aisener Legionsrüstung -->
+<!-- Aisener Wildhütergewand -->
+<!-- Kohlerüstung -->
+<!-- Waldläuferrüstung -->
+<!-- Drachenlederrüstung -->
+<!-- Zwergenkettenhemd -->
+<!-- Dämonenlederrüstung -->
+<!-- Plattenrüstung -->
+<!-- Elfenhemd -->
+<!-- Dämonenplatte -->
+<!-- Dämonenjägerrüstung -->
+<!-- Ritterrüstung -->
+<!-- Engelshemd -->
+<!-- Zwergenstahlplatte -->
+<!-- Tränenrüstung -->
+<!-- Heldenplatte -->
+<!-- Drachenschuppengewand -->
+<!-- Heilige Platte -->
+<!-- Götterrüstung -->
+<!-- Elfenrüstung -->
+
+<!-- MAGICIAN ROBES -->
+<!-- Flickenrobe -->
+<!-- Lehrlingsrobe -->
+<!-- Novizenrobe -->
+<!-- Alchemistenrobe -->
+<!-- Gelehrtenrobe -->
+<!-- Magierrobe -->
+<!-- Beschwörergewand -->
+<!-- Allwetterrobe/Himmelsrobe -->
+<!-- Nekromantenrobe -->
+<!-- Firnrobe -->
+<!-- Feenhaarrobe -->
+<!-- Vulkanrobe -->
+<!-- Zirkelrobe -->
+<!-- Magisterrobe -->
+<!-- Geisterrobe -->
+<!-- Todesrobe -->
+<!-- Elementrobe -->
+<!-- Erzmagierrobe -->
+
+<!-- WANDS -->
+<!-- Fichtenzauberstab -->
+<!-- Lehrlingszauberstab -->
+<!-- Novizenzauberstab -->
+<!-- Felszauberstab -->
+<!-- Erlenzauberstab -->
+<!-- Magierzauberstab -->
+<!-- Silberzauberstab -->
+<!-- Eichenzauberstab -->
+<!-- Phönixzauberstab -->
+<!-- Frostzauberstab -->
+<!-- Gewitterzauberstab -->
+<!-- Eschenzauberstab -->
+<!-- Beschwörerzauberstab -->
+<!-- Magisterzauberstab -->
+<!-- Nekromantenzauberstab -->
+<!-- Dämonenzauberstab -->
+<!-- Feenzauberstab -->
+<!-- Erzmagierzauberstab -->
+
+<!-- STAFFS -->
+<!-- Fichtenstab -->
+<!-- Lehrlingsstab -->
+<!-- Novizenstab -->
+<!-- Felsenstab -->
+<!-- Erlenstab -->
+<!-- Magierstab -->
+<!-- Silberstab -->
+<!-- Eichenstab -->
+<!-- Phönixstab -->
+<!-- Froststab -->
+<!-- Gewitterstab -->
+<!-- Eschenstab -->
+<!-- Beschwörerstab -->
+<!-- Magisterstab -->
+<!-- Nekromantenstab -->
+<!-- Dämonenstab -->
+<!-- Feenstab -->
+<!-- Erzmagierstab -->
