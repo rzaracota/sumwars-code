@@ -31,20 +31,20 @@ struct MonsterMeshData
 
 /**
  * \struct FixedObjectData
- * \brief Struktur mit den Daten von festen Objekten
+ * \brief Struktur mit den Daten von fixenObjekten
  */
 struct FixedObjectData
 {
 	/**
-	 * \var short m_layer
-	 * \brief Ebene in der sich das Objekt befindet
-	 */
+	* \var short m_layer
+	* \brief Ebene in der sich das Objekt befindet
+	*/
 	short m_layer;
-	
+
 	/**
-	 * \var Shape m_shape
-	 * \brief Form des Objektes
-	 */
+	* \var Shape m_shape
+	* \brief Form des Objektes
+	*/
 	Shape m_shape;
 };
 
@@ -58,12 +58,12 @@ class ObjectLoader
 	public:
 	
 	/**
-	 * \fn void loadObjects(const char* pFilename)
-	 * \brief Sorgt fuer das Anlegen von Objekten, die in einer XML-Datei gespeichert sind
+	 * \fn void loadMonsterBasicData(const char* pFilename)
+	 * \brief Sorgt fuer das Anlegen von MonsterBasicData, die in einer XML-Datei gespeichert sind
 	 * \param pFilename Pfad zu einer XML-Datei, die Objekte enthaelt
 	 * \return Liste der geladenen Items
 	 */
-	std::list<MonsterBasicData*>* loadObjects(const char* pFilename);
+	std::list<MonsterBasicData*>* loadMonsterBasicData(const char* pFilename);
 	
 	/**
 	 * \fn void loadMonsterMeshData(const char* pFilename)
@@ -73,27 +73,35 @@ class ObjectLoader
 	 */
 	std::list<MonsterMeshData*>* loadMonsterMeshData(const char* pFilename);
 	
+	/**
+	 * \fn void loadFixedObjectData(const char* pFilename)
+	 * \brief Sorgt fuer das Anlegen von FixedObjectData, die in einer XML-Datei gespeichert sind
+	 * \param pFilename Pfad zu einer XML-Datei, die feste Objekte enthaelt
+	 * \return Liste der geladenen festen Objekte
+	 */
+	bool loadFixedObjectData(const char* pFilename, std::list<FixedObjectData*>* &object_list, std::list<std::string>* &subtype_list);
+	
 	private:
 	
 	/**
-	 * \fn int generateObjects(TiXmlElement* pElement, std::string element)
-	 * \brief Legt Objekte im Speicher anhand von Daten an, die als Parameter uebergeben wurden. Diese Daten stammen aus einer XML-Datei.
+	 * \fn int generateMonsterBasicData(TiXmlElement* pElement, std::string element)
+	 * \brief Legt Monster im Speicher anhand von Daten an, die als Parameter uebergeben wurden. Diese Daten stammen aus einer XML-Datei.
 	 * \param pElement Zeiger auf ein Element der XML-Datei
 	 * \param element Name des Elements
 	 * \return Anzahl der Attribute des bearbeiteten Elements
 	 */
-	int generateObjects(TiXmlElement* pElement, std::string element);
+	int generateMonsterBasicData(TiXmlElement* pElement, std::string element);
 	
 	/**
-	 * \fn void searchXml( TiXmlNode* pParent )
+	 * \fn void searchMonsterBasicData( TiXmlNode* pParent )
 	 * \brief Durchmustert eine XML-Datei und sucht nach Elementen.
 	 * \param pParent Zeiger auf eine XML-Datei
 	 */
-	void searchXml(TiXmlNode* pParent);
+	void searchMonsterBasicData(TiXmlNode* pParent);
 	
 	/**
 	 * \fn int generateMonsterMeshData(TiXmlElement* pElement, std::string element)
-	 * \brief Legt ItemMonsterData im Speicher anhand von Daten an, die als Parameter uebergeben wurden. Diese Daten stammen aus einer XML-Datei.
+	 * \brief Legt MonsterMeshData im Speicher anhand von Daten an, die als Parameter uebergeben wurden. Diese Daten stammen aus einer XML-Datei.
 	 * \param pElement Zeiger auf ein Element der XML-Datei
 	 * \param element Name des Elements
 	 * \return Anzahl der Attribute des bearbeiteten Elements
@@ -107,18 +115,99 @@ class ObjectLoader
 	 */
 	void searchMonsterMeshData(TiXmlNode* pParent);
 	
+	/**
+	 * \fn int generateFixedObjectData(TiXmlElement* pElement, std::string element)
+	 * \brief Legt FixedObjectData im Speicher anhand von Daten an, die als Parameter uebergeben wurden. Diese Daten stammen aus einer XML-Datei.
+	 * \param pElement Zeiger auf ein Element der XML-Datei
+	 * \param element Name des Elements
+	 * \return Anzahl der Attribute des bearbeiteten Elements
+	 */
+	int generateFixedObjectData(TiXmlElement* pElement, std::string element, std::list<FixedObjectData*>* object_list, std::list<std::string>* subtype_list);
 	
+	/**
+	 * \fn void searchFixedObjectData( TiXmlNode* pParent )
+	 * \brief Durchmustert eine XML-Datei und sucht nach Elementen.
+	 * \param pParent Zeiger auf eine XML-Datei
+	 */
+	void searchFixedObjectData(TiXmlNode* pParent, std::list<FixedObjectData*>* object_list, std::list<std::string>* subtype_list);
+	
+	/**
+	 * \var MonsterBasicData* m_monster_data
+	 * \brief Daten der Monster
+	 */
 	MonsterBasicData* m_monster_data;
+	/**
+	 * \var std::list<MonsterBasicData*>* m_monster_list
+	 * \brief Liste mit Daten der Monster
+	 */
 	std::list<MonsterBasicData*>* m_monster_list;
 	
+	/**
+	 * \var MonsterMeshData* m_monster_mesh_data
+	 * \brief Daten zu den Meshes der Monster
+	 */
 	MonsterMeshData* m_monster_mesh_data;
+	/**
+	 * \var std::list<MonsterMeshData*>* m_monster_mesh_list
+	 * \brief Liste mit Daten zu den Meshes der Monster
+	 */
 	std::list<MonsterMeshData*>* m_monster_mesh_list;
 	
+	/**
+	 * \var FixedObjectData* m_object_data
+	 * \brief Daten zu Objekten
+	 */
+	FixedObjectData* m_object_data;
+	/**
+	 * \var std::list<FixedObjectData*>* m_object_list
+	 * \brief Liste mit Daten zu Objekten
+	 */
+	//std::list<FixedObjectData*>* m_object_list;
+	
+	
+	/**
+	 * \var float m_size_prob[4]
+	 * \brief Wahrscheinlichkeit mit der ein Item einer bestimmten Groesse gedroppt wird (Zwischenspeicher-Variable)
+	 */
 	float m_size_prob[4];
+	/**
+	 * \var int m_min_level[2]
+	 * \brief minimales Level, das das gedroppte Item haben muss (Zwischenspeicher-Variable)
+	 */
 	int m_min_level[2];
+	/**
+	 * \var int m_max_level[2]
+	 * \brief maximales Level das das gedroppte Item haben darf (Zwischenspeicher-Variable)
+	 */
 	int m_max_level[2];
+	/**
+	 * \var float m_magic_prob[2]
+	 * \brief Chance, das der Gegenstand magisch wird (Zwischenspeicher-Variable)
+	 */
 	float m_magic_prob[2];
+	/**
+	 * \var float m_magic_power[2]
+	 * \brief Staerke der Verzauberung, falls der Gegenstand magisch wird (Zwischenspeicher-Variable)
+	 */
 	float m_magic_power[2];
+	
+	/**
+	 * \var float m_extend[2]
+	 * \brief Ausdehnung des Objekt-Grundrechteckes (Zwischenspeicher-Variable)
+	 */
+	float m_extent[2];
+	/**
+	 * \var float m_radius
+	 * \brief Radius des Objekt-Grundkreises (Zwischenspeicher-Variable)
+	 */
+	float m_radius;
+	
+	/**
+	 * \var string m_subtype
+	 * \brief Subtyp des Objektes (Zwischenspeicher-Variable)
+	 */
+	std::string m_subtype;
+
 };
 
 

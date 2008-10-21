@@ -8,7 +8,7 @@
 #include "monster.h"
 
 
-int ObjectLoader::generateObjects(TiXmlElement* pElement, string element)
+int ObjectLoader::generateMonsterBasicData(TiXmlElement* pElement, string element)
 {
 	if ( !pElement ) return 0;
 
@@ -238,7 +238,7 @@ int ObjectLoader::generateObjects(TiXmlElement* pElement, string element)
 }
 
 
-void ObjectLoader::searchXml(TiXmlNode* pParent)
+void ObjectLoader::searchMonsterBasicData(TiXmlNode* pParent)
 {
 	if ( !pParent ) return;
 
@@ -252,7 +252,7 @@ void ObjectLoader::searchXml(TiXmlNode* pParent)
 	{
 	case TiXmlNode::ELEMENT:
 		//printf( "Element [%s]", pParent->Value() );
-		num = generateObjects(pParent->ToElement(), pParent->Value());
+		num = generateMonsterBasicData(pParent->ToElement(), pParent->Value());
 		/*switch(num)
 		{
 			case 0:  printf( " (No attributes)"); break;
@@ -272,7 +272,7 @@ void ObjectLoader::searchXml(TiXmlNode* pParent)
 
 	for ( pChild = pParent->FirstChild(); pChild != 0; pChild = pChild->NextSibling())
 	{
-		searchXml(pChild);
+		searchMonsterBasicData(pChild);
 		//DEBUG("Searching Document");
 		//cout << "Immer:  " << pChild->Value() << endl;
 		//if (pChild->Type() == TiXmlNode::ELEMENT)
@@ -290,7 +290,7 @@ void ObjectLoader::searchXml(TiXmlNode* pParent)
 }
 
 
-std::list<MonsterBasicData*>* ObjectLoader::loadObjects(const char* pFilename)
+std::list<MonsterBasicData*>* ObjectLoader::loadMonsterBasicData(const char* pFilename)
 {
 	for (int i=0; i<4; i++)
 	{
@@ -312,7 +312,7 @@ std::list<MonsterBasicData*>* ObjectLoader::loadObjects(const char* pFilename)
 	if (loadOkay)
 	{
 		DEBUG5("Loading %s", pFilename);
-		searchXml(&doc);
+		searchMonsterBasicData(&doc);
 		DEBUG5("Loading %s finished", pFilename);
 		return m_monster_list;
 	}
@@ -430,6 +430,158 @@ std::list<MonsterMeshData*>* ObjectLoader::loadMonsterMeshData(const char* pFile
 	{
 		DEBUG("Failed to load file %s", pFilename);
 		return 0;
+	}
+}
+
+//##############################################################################
+
+int ObjectLoader::generateFixedObjectData(TiXmlElement* pElement, string element, std::list<FixedObjectData*>* object_list, std::list<string>* subtype_list)
+{
+	if ( !pElement ) return 0;
+
+	TiXmlAttribute* pAttrib=pElement->FirstAttribute();
+	int i=0;
+	double dval;
+
+	if (element == "Object" && pAttrib)
+	{
+		if (m_object_data == 0)
+		{
+			m_object_data = new FixedObjectData;
+		}
+
+		while (element == "Object" && pAttrib)
+		{
+			if (!strcmp(pAttrib->Name(), "subtype"))
+				m_subtype = pAttrib->Value();
+
+			i++;
+			pAttrib=pAttrib->Next();
+		}
+	}
+	
+	if (element == "Layer" && pAttrib)
+	{
+		while (element == "Layer" && pAttrib)
+		{
+			if (!strcmp(pAttrib->Name(), "layer"))
+			{
+				if (!strcmp(pAttrib->Value(), "NORMAL"))
+					m_object_data->m_layer = WorldObject::LAYER_BASE | WorldObject::LAYER_AIR;
+				else if (!strcmp(pAttrib->Value(), "GROUND"))
+					m_object_data->m_layer = WorldObject::LAYER_BASE;
+			}
+
+			i++;
+			pAttrib=pAttrib->Next();
+		}
+	}
+	
+	if (element == "Geometry" && pAttrib)
+	{
+		while (element == "Geometry" && pAttrib)
+		{
+			if (!strcmp(pAttrib->Name(), "shape"))
+			{
+				if (!strcmp(pAttrib->Value(), "RECT"))
+					m_object_data->m_shape.m_type = Shape::RECT;
+				else if (!strcmp(pAttrib->Value(), "CIRCLE"))
+					m_object_data->m_shape.m_type = Shape::CIRCLE;
+			}
+			else if (!strcmp(pAttrib->Name(), "extent_x") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
+				m_extent[0] = static_cast<float>(dval);
+			else if (!strcmp(pAttrib->Name(), "extent_y") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
+				m_extent[1] = static_cast<float>(dval);
+			else if (!strcmp(pAttrib->Name(), "radius") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
+				m_radius = static_cast<float>(dval);
+
+			i++;
+			pAttrib=pAttrib->Next();
+		}
+	}
+
+	return i;
+}
+
+
+void ObjectLoader::searchFixedObjectData(TiXmlNode* pParent, std::list<FixedObjectData*>* object_list, std::list<string>* subtype_list)
+{
+	if ( !pParent ) return;
+
+	TiXmlNode* pChild;
+//	TiXmlText* pText;
+
+	int t = pParent->Type();
+	int num;
+
+	switch ( t )
+	{
+	case TiXmlNode::ELEMENT:
+		//printf( "Element [%s]", pParent->Value() );
+		num = generateFixedObjectData(pParent->ToElement(), pParent->Value(), object_list, subtype_list);
+		/*switch(num)
+		{
+			case 0:  printf( " (No attributes)"); break;
+			case 1:  printf( "%s1 attribute", getIndentAlt(indent)); break;
+			default: printf( "%s%d attributes", getIndentAlt(indent), num); break;
+		}*/
+		break;
+	/*
+	case TiXmlNode::TEXT:
+		pText = pParent->ToText();
+		printf( "Text: [%s]", pText->Value() );
+		break;
+	*/
+	default:
+		break;
+	}
+
+	for ( pChild = pParent->FirstChild(); pChild != 0; pChild = pChild->NextSibling())
+	{
+		searchFixedObjectData(pChild, object_list, subtype_list);
+
+		if ( !strcmp(pChild->Value(), "Object") && pChild->Type() == TiXmlNode::ELEMENT)
+		{
+			if (m_object_data->m_shape.m_type == Shape::RECT)
+			{
+				m_object_data->m_shape.m_extent = Vector(m_extent[0],m_extent[1]);
+				m_object_data->m_shape.m_extent = Vector(m_extent[0],m_extent[1]);
+			}
+			else if (m_object_data->m_shape.m_type == Shape::CIRCLE)
+			{
+				m_object_data->m_shape.m_radius = m_radius;
+			}
+			object_list->push_back(m_object_data);
+			subtype_list->push_back(m_subtype);
+			m_object_data = 0;
+			DEBUG5("Object loaded");
+		}
+	}
+}
+
+
+bool ObjectLoader::loadFixedObjectData(const char* pFilename, std::list<FixedObjectData*>* &object_list, std::list<string>* &subtype_list)
+{
+	m_object_data = 0;
+	
+	object_list = new std::list<FixedObjectData*>;
+	subtype_list = new std::list<std::string>;
+
+	TiXmlDocument doc(pFilename);
+	bool loadOkay = doc.LoadFile();
+
+	if (loadOkay)
+	{
+		DEBUG5("Loading %s", pFilename);
+		searchFixedObjectData(&doc, object_list, subtype_list);
+		DEBUG5("Loading %s finished", pFilename);
+		//return m_object_list;
+		return true;
+	}
+	else
+	{
+		DEBUG("Failed to load file %s", pFilename);
+		return false;
 	}
 }
 

@@ -134,7 +134,7 @@ void ObjectFactory::init()
 	ObjectLoader* objectloader = 0;
 	objectloader = new ObjectLoader;
 	std::list<MonsterBasicData*>* monster_list;
-	monster_list = objectloader->loadObjects("../data/monsters.xml");
+	monster_list = objectloader->loadMonsterBasicData("../data/monsters.xml");
 
 	if (monster_list != 0)
 	{
@@ -323,7 +323,37 @@ void ObjectFactory::init()
 	registerMonster("gob_dog",mdata);
 	
 	
+#ifdef USE_OBJECTLOADER
 	// Daten fuer feste Objekte
+	//ObjectLoader* objectloader = 0;
+	objectloader = new ObjectLoader;
+	std::list<FixedObjectData*>* object_list = 0;
+	std::list<std::string>* subtype_list = 0;
+	
+	objectloader->loadFixedObjectData("../data/objects.xml", object_list, subtype_list);
+
+	if (object_list != 0)
+	{
+		std::list<FixedObjectData*>::iterator iter = object_list->begin();
+		std::list<std::string>::iterator itersub = subtype_list->begin();
+		
+		while (iter != object_list->end() && itersub != subtype_list->end())
+		{
+			registerFixedObject(*itersub,*iter);
+			*iter++;
+			*itersub++;
+		}
+	}
+
+	delete object_list;
+	object_list = 0;
+	delete subtype_list;
+	subtype_list = 0;
+	delete objectloader;
+	objectloader = 0;
+#endif
+
+
 	FixedObjectData* fdata;
 	
 	fdata = new FixedObjectData;
@@ -350,13 +380,13 @@ void ObjectFactory::init()
 	fdata->m_shape.m_radius = 0.15;
 	registerFixedObject("tree1",fdata);
 	
-
+#ifndef USE_OBJECTLOADER
 	fdata = new FixedObjectData;
 	fdata->m_layer = WorldObject::LAYER_BASE | WorldObject::LAYER_AIR;
 	fdata->m_shape.m_type = Shape::RECT;
 	fdata->m_shape.m_extent = Vector(3.84,0.15);
 	registerFixedObject("fence1",fdata);
-	
+#endif
 	fdata = new FixedObjectData;
 	fdata->m_layer = WorldObject::LAYER_BASE | WorldObject::LAYER_AIR;
 	fdata->m_shape.m_type = Shape::RECT;
