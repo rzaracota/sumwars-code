@@ -123,6 +123,12 @@ class ObjectGroupTemplate
 			 * \brief Chance, dass das Objekt eingesetzt wird
 			 */
 			float m_probability;
+			
+			/**
+			/* \var bool m_prob_angle
+			 * \brief Wenn auf true gesetzt, wird der winkel zufaellig gesetzt
+			 */
+			bool m_prob_angle;
 		};
 	
 		/**
@@ -189,6 +195,12 @@ class ObjectGroupTemplate
 	 * \brief Form der Gruppe
 		 */
 		Shape m_shape;
+		
+		/**
+		 * \var Vector m_waypoint
+		 * \brief der Punkt an dem das Template an das Wegenetz angebunden wird
+		 */
+		Vector m_waypoint;
 		
 		/**
 		 * \var std::list<GroupObject> m_objects
