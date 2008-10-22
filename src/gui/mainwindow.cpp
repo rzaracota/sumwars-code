@@ -1548,7 +1548,7 @@ void MainWindow::setupSkilltree()
 
 	tab = (CEGUI::DefaultWindow*) win_mgr.createWindow("TaharezLook/TabContentPane", "SkilltreeWarrior_3");
 	skilltree_warrior->addTab(tab);
-	tab->setText("Willenskraft");
+	tab->setText("Kriegsgeist");
 
 	name =Action::getActionInfo(Action::DECOY)->m_enum_name;
 	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
@@ -2546,14 +2546,14 @@ void MainWindow::updateControlPanel()
 
 void MainWindow::updateInventory()
 {
-	
+
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::Window* img;
 	std::ostringstream out_stream;
 
 	Player* player = m_document->getLocalPlayer();
 
-	
+
 	// Label Waffe
 	out_stream.str("");
 	if (player->getWeapon()!=0)
@@ -2567,7 +2567,7 @@ void MainWindow::updateInventory()
 	}
 
 
-	
+
 	// Label Ruestung
 	out_stream.str("");
 	Equipement* equ = player->getEquipement();
@@ -3420,12 +3420,12 @@ std::string MainWindow::getItemImage(Item::Subtype type)
 {
 	std::map<Item::Subtype, std::string>::iterator it;
 	it = m_item_images.find(type);
-	 
+
 	if (it != m_item_images.end())
 	{
 		return it->second;
 	}
-	
+
 	return "set: Axt.png image: full_image";
 }
 

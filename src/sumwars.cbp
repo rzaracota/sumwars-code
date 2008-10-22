@@ -107,6 +107,8 @@
 		<Unit filename="core\itemloader.h" />
 		<Unit filename="core\mage.cpp" />
 		<Unit filename="core\mage.h" />
+		<Unit filename="core\mapgenerator.cpp" />
+		<Unit filename="core\mapgenerator.h" />
 		<Unit filename="core\matrix2d.h" />
 		<Unit filename="core\monster.cpp" />
 		<Unit filename="core\monster.h" />
@@ -141,6 +143,8 @@
 		<Unit filename="core\timer.h" />
 		<Unit filename="core\trade.cpp" />
 		<Unit filename="core\trade.h" />
+		<Unit filename="core\unionfindtree.cpp" />
+		<Unit filename="core\unionfindtree.h" />
 		<Unit filename="core\warrior.cpp" />
 		<Unit filename="core\warrior.h" />
 		<Unit filename="core\world.cpp" />

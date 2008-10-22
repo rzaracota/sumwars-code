@@ -545,6 +545,9 @@ void Action::init()
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_description = "descr_fire_bolt";
 	a->m_enum_name = "fire_bolt";
+    a->m_animation[NO_WEAPON].push_back("castMagicWeak");
+	a->m_animation[ONE_HANDED].push_back("castMagicWeak");
+	a->m_animation[TWO_HANDED].push_back("castMagicWeak");
 
 	a = &(Action::m_base_info[Action::FIRE_STRIKE]);
 	a->m_timer_nr=1;
@@ -561,6 +564,9 @@ void Action::init()
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_description = "descr_fire_strike";
 	a->m_enum_name = "fire_strike";
+    a->m_animation[NO_WEAPON].push_back("castMagicWeak");
+	a->m_animation[ONE_HANDED].push_back("castMagicWeak");
+	a->m_animation[TWO_HANDED].push_back("castMagicWeak");
 
 	a = &(Action::m_base_info[Action::FIRE_WAVE]);
 	a->m_timer_nr=2;
@@ -577,6 +583,9 @@ void Action::init()
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_description = "descr_fire_wave";
 	a->m_enum_name = "fire_wave";
+    a->m_animation[NO_WEAPON].push_back("castMagicStrong");
+	a->m_animation[ONE_HANDED].push_back("castMagicStrong");
+	a->m_animation[TWO_HANDED].push_back("castMagicStrong");
 
 	a = &(Action::m_base_info[Action::FIRE_STORM]);
 	a->m_timer_nr=2;
@@ -593,6 +602,9 @@ void Action::init()
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_description = "descr_fire_storm";
 	a->m_enum_name = "fire_storm";
+	a->m_animation[NO_WEAPON].push_back("castMagicStrong");
+	a->m_animation[ONE_HANDED].push_back("castMagicStrong");
+	a->m_animation[TWO_HANDED].push_back("castMagicStrong");
 
 	a = &(Action::m_base_info[Action::FIRE_BALL]);
 	a->m_timer_nr=1;
@@ -609,6 +621,9 @@ void Action::init()
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_description = "descr_fire_ball";
 	a->m_enum_name = "fire_ball";
+	a->m_animation[NO_WEAPON].push_back("castMagicWeak");
+	a->m_animation[ONE_HANDED].push_back("castMagicWeak");
+	a->m_animation[TWO_HANDED].push_back("castMagicWeak");
 
 	a = &(Action::m_base_info[Action::INFERNO_BALL]);
 	a->m_timer_nr=1;
@@ -625,6 +640,9 @@ void Action::init()
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_description = "descr_inferno_ball";
 	a->m_enum_name = "inferno_ball";
+	a->m_animation[NO_WEAPON].push_back("castMagicWeak");
+	a->m_animation[ONE_HANDED].push_back("castMagicWeak");
+	a->m_animation[TWO_HANDED].push_back("castMagicWeak");
 
 	a = &(Action::m_base_info[Action::FIRE_WALL]);
 	a->m_timer_nr=2;
@@ -641,6 +659,9 @@ void Action::init()
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_description = "descr_fire_wall";
 	a->m_enum_name = "fire_wall";
+	a->m_animation[NO_WEAPON].push_back("castMagicStrong");
+	a->m_animation[ONE_HANDED].push_back("castMagicStrong");
+	a->m_animation[TWO_HANDED].push_back("castMagicStrong");
 
 	a = &(Action::m_base_info[Action::INFLAME]);
 	a->m_timer_nr=0;
@@ -673,6 +694,10 @@ void Action::init()
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_description = "descr_ice_bolt";
 	a->m_enum_name = "ice_bolt";
+	a->m_animation[NO_WEAPON].push_back("castMagicWeak");
+	a->m_animation[ONE_HANDED].push_back("castMagicWeak");
+	a->m_animation[TWO_HANDED].push_back("castMagicWeak");
+
 
 	a = &(Action::m_base_info[Action::ICE_SPIKE]);
 	a->m_timer_nr=1;
@@ -689,6 +714,9 @@ void Action::init()
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_description = "descr_ice_spike";
 	a->m_enum_name = "ice_spike";
+	a->m_animation[NO_WEAPON].push_back("castMagicWeak");
+	a->m_animation[ONE_HANDED].push_back("castMagicWeak");
+	a->m_animation[TWO_HANDED].push_back("castMagicWeak");
 
 	a = &(Action::m_base_info[Action::SNOW_STORM]);
 	a->m_timer_nr=2;
@@ -705,6 +733,9 @@ void Action::init()
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_description = "descr_snow_storm";
 	a->m_enum_name = "snow_storm";
+	a->m_animation[NO_WEAPON].push_back("castMagicStrong");
+	a->m_animation[ONE_HANDED].push_back("castMagicStrong");
+	a->m_animation[TWO_HANDED].push_back("castMagicStrong");
 
 	a = &(Action::m_base_info[Action::BLIZZARD]);
 	a->m_timer_nr=2;
@@ -721,6 +752,9 @@ void Action::init()
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_description = "descr_blizzard";
 	a->m_enum_name = "blizzard";
+	a->m_animation[NO_WEAPON].push_back("castMagicStrong");
+	a->m_animation[ONE_HANDED].push_back("castMagicStrong");
+	a->m_animation[TWO_HANDED].push_back("castMagicStrong");
 
 	a = &(Action::m_base_info[Action::ICE_RING]);
 	a->m_timer_nr=1;
@@ -737,6 +771,9 @@ void Action::init()
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_description = "descr_ice_ring";
 	a->m_enum_name = "ice_ring";
+	a->m_animation[NO_WEAPON].push_back("castMagicWeak");
+	a->m_animation[ONE_HANDED].push_back("castMagicWeak");
+	a->m_animation[TWO_HANDED].push_back("castMagicWeak");
 
 	a = &(Action::m_base_info[Action::FROST_RING]);
 	a->m_timer_nr=1;
@@ -753,6 +790,9 @@ void Action::init()
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_description = "descr_frost_ring";
 	a->m_enum_name = "frost_ring";
+	a->m_animation[NO_WEAPON].push_back("castMagicWeak");
+	a->m_animation[ONE_HANDED].push_back("castMagicWeak");
+	a->m_animation[TWO_HANDED].push_back("castMagicWeak");
 
 	a = &(Action::m_base_info[Action::FREEZE]);
 	a->m_timer_nr=2;
@@ -769,6 +809,9 @@ void Action::init()
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_description = "descr_freeze";
 	a->m_enum_name = "freeze";
+	a->m_animation[NO_WEAPON].push_back("castMagicWeak");
+	a->m_animation[ONE_HANDED].push_back("castMagicWeak");
+	a->m_animation[TWO_HANDED].push_back("castMagicWeak");
 
 	a = &(Action::m_base_info[Action::CHILL]);
 	a->m_timer_nr=0;
@@ -801,6 +844,9 @@ void Action::init()
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_description = "descr_lightning";
 	a->m_enum_name = "lightning";
+	a->m_animation[NO_WEAPON].push_back("castMagicWeak");
+	a->m_animation[ONE_HANDED].push_back("castMagicWeak");
+	a->m_animation[TWO_HANDED].push_back("castMagicWeak");
 
 	a = &(Action::m_base_info[Action::LIGHTNING_STRIKE]);
 	a->m_timer_nr=1;
@@ -817,6 +863,9 @@ void Action::init()
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_description = "descr_lightning_strike";
 	a->m_enum_name = "lightning_strike";
+	a->m_animation[NO_WEAPON].push_back("castMagicWeak");
+	a->m_animation[ONE_HANDED].push_back("castMagicWeak");
+	a->m_animation[TWO_HANDED].push_back("castMagicWeak");
 
 	a = &(Action::m_base_info[Action::THUNDERSTORM]);
 	a->m_timer_nr=2;
@@ -833,6 +882,9 @@ void Action::init()
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_description = "descr_thunderstorm";
 	a->m_enum_name = "thunderstorm";
+	a->m_animation[NO_WEAPON].push_back("castMagicStrong");
+	a->m_animation[ONE_HANDED].push_back("castMagicStrong");
+	a->m_animation[TWO_HANDED].push_back("castMagicStrong");
 
 	a = &(Action::m_base_info[Action::THUNDERSTORM2]);
 	a->m_timer_nr=2;
@@ -849,6 +901,9 @@ void Action::init()
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_description = "descr_thunderstorm2";
 	a->m_enum_name = "thunderstorm2";
+	a->m_animation[NO_WEAPON].push_back("castMagicStrong");
+	a->m_animation[ONE_HANDED].push_back("castMagicStrong");
+	a->m_animation[TWO_HANDED].push_back("castMagicStrong");
 
 	a = &(Action::m_base_info[Action::CHAIN_LIGHTNING]);
 	a->m_timer_nr=1;
@@ -865,6 +920,9 @@ void Action::init()
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_description = "descr_chain_lightning";
 	a->m_enum_name = "chain_lightning";
+	a->m_animation[NO_WEAPON].push_back("castMagicWeak");
+	a->m_animation[ONE_HANDED].push_back("castMagicWeak");
+	a->m_animation[TWO_HANDED].push_back("castMagicWeak");
 
 	a = &(Action::m_base_info[Action::CHAIN_LIGHTNING2]);
 	a->m_timer_nr=1;
@@ -881,6 +939,9 @@ void Action::init()
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_description = "descr_chain_lightning2";
 	a->m_enum_name = "chain_lightning2";
+	a->m_animation[NO_WEAPON].push_back("castMagicWeak");
+	a->m_animation[ONE_HANDED].push_back("castMagicWeak");
+	a->m_animation[TWO_HANDED].push_back("castMagicWeak");
 
 	a = &(Action::m_base_info[Action::STATIC_SHIELD]);
 	a->m_timer_nr=2;
@@ -897,6 +958,9 @@ void Action::init()
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_description = "descr_static_shield";
 	a->m_enum_name = "static_shield";
+	a->m_animation[NO_WEAPON].push_back("castMagicWeak");
+	a->m_animation[ONE_HANDED].push_back("castMagicWeak");
+	a->m_animation[TWO_HANDED].push_back("castMagicWeak");
 
 	a = &(Action::m_base_info[Action::IONISATION]);
 	a->m_timer_nr=0;
@@ -931,6 +995,10 @@ void Action::init()
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_description = "descr_triple_shot";
 	a->m_enum_name = "triple_shot";
+	a->m_animation[NO_WEAPON].push_back("attackRangedUnarmed");
+	a->m_animation[ONE_HANDED].push_back("attackRangedUnarmed");
+	a->m_animation[TWO_HANDED].push_back("attackRangedBow");
+
 
 	a = &(Action::m_base_info[Action::GUIDED_TRIPLE_SHOT]);
 	a->m_timer_nr=1;
@@ -947,6 +1015,9 @@ void Action::init()
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_description = "descr_guided_triple_shot";
 	a->m_enum_name = "guided_triple_shot";
+	a->m_animation[NO_WEAPON].push_back("attackRangedUnarmed");
+	a->m_animation[ONE_HANDED].push_back("attackRangedUnarmed");
+	a->m_animation[TWO_HANDED].push_back("attackRangedBow");
 
 	a = &(Action::m_base_info[Action::MULTISHOT]);
 	a->m_timer_nr=1;
@@ -963,6 +1034,9 @@ void Action::init()
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_description = "descr_multishot";
 	a->m_enum_name = "multishot";
+	a->m_animation[NO_WEAPON].push_back("attackRangedUnarmed");
+	a->m_animation[ONE_HANDED].push_back("attackRangedUnarmed");
+	a->m_animation[TWO_HANDED].push_back("attackRangedBow");
 
 	a = &(Action::m_base_info[Action::VOLLEY_SHOT]);
 	a->m_timer_nr=1;
@@ -979,6 +1053,9 @@ void Action::init()
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_description = "descr_volley_shot";
 	a->m_enum_name = "volley_shot";
+	a->m_animation[NO_WEAPON].push_back("attackRangedUnarmed");
+	a->m_animation[ONE_HANDED].push_back("attackRangedUnarmed");
+	a->m_animation[TWO_HANDED].push_back("attackRangedBow");
 
 	a = &(Action::m_base_info[Action::PIERCE]);
 	a->m_timer_nr=1;
@@ -995,6 +1072,9 @@ void Action::init()
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_description = "descr_pierce";
 	a->m_enum_name = "pierce";
+	a->m_animation[NO_WEAPON].push_back("attackRangedUnarmed");
+	a->m_animation[ONE_HANDED].push_back("attackRangedUnarmed");
+	a->m_animation[TWO_HANDED].push_back("attackRangedBow");
 
 	a = &(Action::m_base_info[Action::WEAK_POINT]);
 	a->m_timer_nr=1;
@@ -1011,6 +1091,9 @@ void Action::init()
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_description = "descr_weak_point";
 	a->m_enum_name = "weak_point";
+	a->m_animation[NO_WEAPON].push_back("attackRangedUnarmed");
+	a->m_animation[ONE_HANDED].push_back("attackRangedUnarmed");
+	a->m_animation[TWO_HANDED].push_back("attackRangedBow");
 
 	a = &(Action::m_base_info[Action::BLIND_RAGE]);
 	a->m_timer_nr=1;
@@ -1027,6 +1110,9 @@ void Action::init()
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_description = "descr_blind_rage";
 	a->m_enum_name = "blind_rage";
+	a->m_animation[NO_WEAPON].push_back("attackRangedUnarmed");
+	a->m_animation[ONE_HANDED].push_back("attackRangedUnarmed");
+	a->m_animation[TWO_HANDED].push_back("attackRangedBow");
 
 	a = &(Action::m_base_info[Action::VACUUM]);
 	a->m_timer_nr=1;
@@ -1043,6 +1129,9 @@ void Action::init()
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_description = "descr_vacuum";
 	a->m_enum_name = "vacuum";
+	a->m_animation[NO_WEAPON].push_back("attackRangedUnarmed");
+	a->m_animation[ONE_HANDED].push_back("attackRangedUnarmed");
+	a->m_animation[TWO_HANDED].push_back("attackRangedBow");
 
 	a = &(Action::m_base_info[Action::DEATH_ROULETTE]);
 	a->m_timer_nr=1;
@@ -1059,6 +1148,9 @@ void Action::init()
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_description = "descr_death_roulette";
 	a->m_enum_name = "death_roulette";
+	a->m_animation[NO_WEAPON].push_back("attackRangedUnarmed");
+	a->m_animation[ONE_HANDED].push_back("attackRangedUnarmed");
+	a->m_animation[TWO_HANDED].push_back("attackRangedBow");
 
 	a = &(Action::m_base_info[Action::EXPLODING_ARROW]);
 	a->m_timer_nr=1;
@@ -1075,6 +1167,9 @@ void Action::init()
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_description = "descr_exploding_arrow";
 	a->m_enum_name = "exploding_arrow";
+	a->m_animation[NO_WEAPON].push_back("attackRangedUnarmed");
+	a->m_animation[ONE_HANDED].push_back("attackRangedUnarmed");
+	a->m_animation[TWO_HANDED].push_back("attackRangedBow");
 
 	a = &(Action::m_base_info[Action::EXPLOSION_CASCADE]);
 	a->m_timer_nr=1;
@@ -1091,6 +1186,9 @@ void Action::init()
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_description = "descr_exploding_cascade";
 	a->m_enum_name = "exploding_cascade";
+	a->m_animation[NO_WEAPON].push_back("attackRangedUnarmed");
+	a->m_animation[ONE_HANDED].push_back("attackRangedUnarmed");
+	a->m_animation[TWO_HANDED].push_back("attackRangedBow");
 
 	a = &(Action::m_base_info[AIMED_SHOT]);
 	a->m_timer_nr=2;
@@ -1139,6 +1237,9 @@ void Action::init()
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_description = "descr_ice_arrows";
 	a->m_enum_name = "ice_arrows";
+	a->m_animation[NO_WEAPON].push_back("magicArrow");
+	a->m_animation[ONE_HANDED].push_back("magicArrow");
+	a->m_animation[TWO_HANDED].push_back("magicArrow");
 
 	a = &(Action::m_base_info[FREEZING_ARROWS]);
 	a->m_timer_nr=2;
@@ -1155,6 +1256,9 @@ void Action::init()
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_description = "descr_freezing_arrows";
 	a->m_enum_name = "freezing_arrows";
+	a->m_animation[NO_WEAPON].push_back("magicArrow");
+	a->m_animation[ONE_HANDED].push_back("magicArrow");
+	a->m_animation[TWO_HANDED].push_back("magicArrow");
 
 	a = &(Action::m_base_info[WIND_ARROWS]);
 	a->m_timer_nr=2;
@@ -1171,6 +1275,9 @@ void Action::init()
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_description = "descr_wind_arrows";
 	a->m_enum_name = "wind_arrows";
+	a->m_animation[NO_WEAPON].push_back("magicArrow");
+	a->m_animation[ONE_HANDED].push_back("magicArrow");
+	a->m_animation[TWO_HANDED].push_back("magicArrow");
 
 	a = &(Action::m_base_info[STORM_ARROWS]);
 	a->m_timer_nr=2;
@@ -1187,6 +1294,9 @@ void Action::init()
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_description = "descr_storm_arrows";
 	a->m_enum_name = "storm_arrows";
+	a->m_animation[NO_WEAPON].push_back("magicArrow");
+	a->m_animation[ONE_HANDED].push_back("magicArrow");
+	a->m_animation[TWO_HANDED].push_back("magicArrow");
 
 	a = &(Action::m_base_info[WIND_WALK]);
 	a->m_timer_nr=2;
@@ -1308,9 +1418,9 @@ void Action::init()
 	a->m_timer=4000;
 	a->m_base_action = Action::NOACTION;
 	a->m_critical_perc=0.66;
-	a->m_distance = RANGED;
+	a->m_distance = MELEE;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "reinigendes Licht";
+	a->m_name = "leuchtender Schlag";
 	a->m_req_level = 5;
 	a->m_req_ability[0] = Action::NOACTION;
 	a->m_req_ability[1] = Action::NOACTION;
@@ -1324,9 +1434,9 @@ void Action::init()
 	a->m_timer=4000;
 	a->m_base_action = Action::NOACTION;
 	a->m_critical_perc=0.66;
-	a->m_distance = RANGED;
+	a->m_distance = MELEE;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "reinigendes Feuer";
+	a->m_name = "geweihter Schlag";
 	a->m_req_level = 40;
 	a->m_req_ability[0] = Action::HOLY_LIGHT;
 	a->m_req_ability[1] = Action::NOACTION;
@@ -1436,9 +1546,9 @@ void Action::init()
 	a->m_timer=4000;
 	a->m_base_action = Action::NOACTION;
 	a->m_critical_perc=0.66;
-	a->m_distance = RANGED;
+	a->m_distance = MELEE;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "Bindung loesen";
+	a->m_name = "zerbrechender Schlag";
 	a->m_req_level = 20;
 	a->m_req_ability[0] = Action::NOACTION;
 	a->m_req_ability[1] = Action::NOACTION;
@@ -1452,9 +1562,9 @@ void Action::init()
 	a->m_timer=4000;
 	a->m_base_action = Action::NOACTION;
 	a->m_critical_perc=0.66;
-	a->m_distance = RANGED;
+	a->m_distance = MELEE;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "Bindung sprengen";
+	a->m_name = "auflösender Schlag";
 	a->m_req_level = 60;
 	a->m_req_ability[0] = Action::BREAK_BINDING;
 	a->m_req_ability[1] = Action::NOACTION;
@@ -1564,9 +1674,9 @@ void Action::init()
 	a->m_timer=3000;
 	a->m_base_action = Action::NOACTION;
 	a->m_critical_perc=0.66;
-	a->m_distance = RANGED;
+	a->m_distance = MELEE;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "zorniger Wind";
+	a->m_name = "Windschlag";
 	a->m_req_level = 5;
 	a->m_req_ability[0] = Action::NOACTION;
 	a->m_req_ability[1] = Action::NOACTION;
@@ -1580,9 +1690,9 @@ void Action::init()
 	a->m_timer=6000;
 	a->m_base_action = Action::NOACTION;
 	a->m_critical_perc=0.66;
-	a->m_distance = RANGED;
+	a->m_distance = MELEE;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "Goettlicher Sturm";
+	a->m_name = "Goettlicher Schlag";
 	a->m_req_level = 40;
 	a->m_req_ability[0] = Action::DIVINE_WIND;
 	a->m_req_ability[1] = Action::NOACTION;
