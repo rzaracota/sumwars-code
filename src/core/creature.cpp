@@ -3113,7 +3113,6 @@ void Creature::calcAbilityDamage(Action::ActionType act,Damage& dmg)
 			dmg.m_max_damage[Damage::ICE]=0;
 			dmg.m_special_flags |= Damage::UNBLOCKABLE;
 			dmg.m_special_flags |= Damage::EXTRA_UNDEAD_DMG;
-			DEBUG("min %f max %f",dmg.m_min_damage[Damage::FIRE],dmg.m_max_damage[Damage::FIRE]);
 			break;
 
 		case Action::HOLY_FIRE:

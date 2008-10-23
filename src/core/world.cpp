@@ -95,7 +95,7 @@ bool World::init()
 void World::createRegion(short region)
 {
 	DEBUG5("creating region %i",region);
-	int type = 1;
+	int type = 2;
 	if (type==1)
 	{
 		
@@ -166,41 +166,41 @@ void World::createRegion(short region)
 		reg->createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "$tree", Vector(1,8));
 		
 	
-		/*
+		
 
 		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_MONSTER, "lich");
-		insertObject(wo, Vector(7,5),rid);
+		reg->insertObject(wo, Vector(7,5));
 		
 		
 		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_MONSTER, "goblin");
-		insertObject(wo, Vector(13,8),rid);
+		reg->insertObject(wo, Vector(13,8));
 		
 		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_MONSTER, "gob_dog");
-		insertObject(wo, Vector(14.2,8.2),rid);
+		reg->insertObject(wo, Vector(14.2,8.2));
 
 		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_MONSTER, "goblin");
-		insertObject(wo, Vector(14.5,6.7),rid);
+		reg->insertObject(wo, Vector(14.5,6.7));
 
 		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_MONSTER, "goblin");
-		insertObject(wo, Vector(14.8,5.7),rid);
+		reg->insertObject(wo, Vector(14.8,5.7));
 
 		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_MONSTER, "goblin");
-		insertObject(wo, Vector(14,10.9),rid);
+		reg->insertObject(wo, Vector(14,10.9));
 
 		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_MONSTER, "goblin");
-		insertObject(wo, Vector(17,8.2),rid);
+		reg->insertObject(wo, Vector(17,8.2));
 
 		
 
 		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_MONSTER, "goblin");
-		insertObject(wo, Vector(18.5,7),rid);
+		reg->insertObject(wo, Vector(18.5,7));
 
 		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_MONSTER, "goblin");
-		insertObject(wo, Vector(17.2,6.6),rid);
+		reg->insertObject(wo, Vector(17.2,6.6));
 
 		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_MONSTER, "goblin");
-		insertObject(wo, Vector(19.9,6.9),rid);
-		*/
+		reg->insertObject(wo, Vector(19.9,6.9));
+		
 
 /*
 		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_MONSTER, "goblin");

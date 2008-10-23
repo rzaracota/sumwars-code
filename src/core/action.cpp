@@ -30,6 +30,25 @@ void Action::init()
 	a->m_animation[TWO_HANDED].push_back("idle");
 
 
+	a = &(Action::m_base_info[Action::DIE]);
+	a->m_timer_nr=0;
+	a->m_standard_time=1000;
+	a->m_timer=0;
+	a->m_base_action = Action::NOACTION;
+	a->m_critical_perc=-1;
+	a->m_distance = SELF;
+	a->m_flags =0;
+	a->m_name = "Sterben";
+	a->m_req_level = 0;
+	a->m_req_ability[0]= Action::NOACTION;
+	a->m_req_ability[1] = Action::NOACTION;
+	a->m_req_ability[2] = Action::NOACTION;
+	a->m_description = "descr_die";
+	a->m_enum_name = "die";
+	a->m_animation[NO_WEAPON].push_back("die");
+	a->m_animation[ONE_HANDED].push_back("die");
+	a->m_animation[TWO_HANDED].push_back("die");
+
 
 	a = &(Action::m_base_info[Action::WALK]);
 	a->m_timer_nr=0;
@@ -1416,7 +1435,7 @@ void Action::init()
 	a->m_timer_nr=1;
 	a->m_standard_time=1;
 	a->m_timer=4000;
-	a->m_base_action = Action::NOACTION;
+	a->m_base_action = Action::HOLY_ATTACK;
 	a->m_critical_perc=0.66;
 	a->m_distance = MELEE;
 	a->m_flags =MUTE_AFFECTED;
@@ -1432,7 +1451,7 @@ void Action::init()
 	a->m_timer_nr=1;
 	a->m_standard_time=1;
 	a->m_timer=4000;
-	a->m_base_action = Action::NOACTION;
+	a->m_base_action = Action::HOLY_ATTACK;
 	a->m_critical_perc=0.66;
 	a->m_distance = MELEE;
 	a->m_flags =MUTE_AFFECTED;
@@ -1544,7 +1563,7 @@ void Action::init()
 	a->m_timer_nr=1;
 	a->m_standard_time=1;
 	a->m_timer=4000;
-	a->m_base_action = Action::NOACTION;
+	a->m_base_action = Action::HOLY_ATTACK;
 	a->m_critical_perc=0.66;
 	a->m_distance = MELEE;
 	a->m_flags =MUTE_AFFECTED;
@@ -1560,11 +1579,11 @@ void Action::init()
 	a->m_timer_nr=1;
 	a->m_standard_time=1;
 	a->m_timer=4000;
-	a->m_base_action = Action::NOACTION;
+	a->m_base_action = Action::HOLY_ATTACK;
 	a->m_critical_perc=0.66;
 	a->m_distance = MELEE;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "auflösender Schlag";
+	a->m_name = "auflï¿½sender Schlag";
 	a->m_req_level = 60;
 	a->m_req_ability[0] = Action::BREAK_BINDING;
 	a->m_req_ability[1] = Action::NOACTION;
@@ -1672,7 +1691,7 @@ void Action::init()
 	a->m_timer_nr=1;
 	a->m_standard_time=1;
 	a->m_timer=3000;
-	a->m_base_action = Action::NOACTION;
+	a->m_base_action = Action::HOLY_ATTACK;
 	a->m_critical_perc=0.66;
 	a->m_distance = MELEE;
 	a->m_flags =MUTE_AFFECTED;
@@ -1688,7 +1707,7 @@ void Action::init()
 	a->m_timer_nr=1;
 	a->m_standard_time=1;
 	a->m_timer=6000;
-	a->m_base_action = Action::NOACTION;
+	a->m_base_action = Action::HOLY_ATTACK;
 	a->m_critical_perc=0.66;
 	a->m_distance = MELEE;
 	a->m_flags =MUTE_AFFECTED;

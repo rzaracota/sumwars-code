@@ -2763,8 +2763,6 @@ void MainWindow::updateSkilltree()
 void MainWindow::updateItemTooltip(unsigned int pos)
 {
 	Item* item = m_document->getLocalPlayer()->getEquipement()->getItem(pos);
-	if (item ==0)
-		return;
 
 	DEBUG5("setting tool tip for item at %i",pos);
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
@@ -2801,9 +2799,16 @@ void MainWindow::updateItemTooltip(unsigned int pos)
 	}
 	label = win_mgr.getWindow(out_stream.str());
 
-
-
-	std::string msg =item->getDescription();
+	std::string msg;
+	
+	if (item ==0)
+	{
+		msg = "";
+	}
+	else
+	{
+		msg =item->getDescription();
+	}
 	label->setTooltipText(msg);
 
 	DEBUG5("Label: %s \ndescription: \n%s",out_stream.str().c_str(),msg.c_str());
