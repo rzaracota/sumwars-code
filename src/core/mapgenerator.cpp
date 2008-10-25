@@ -26,14 +26,18 @@ Region* MapGenerator::createRegion(RegionData* rdata)
 	
 	// Speicher freigeben
 	delete mdata.m_base_map;
+	delete mdata.m_template_map;
+	
 	
 	return mdata.m_region;
 }
 
 void MapGenerator::createMapData(MapData* mdata, RegionData* rdata)
 {
-	mdata->m_base_map = new Matrix2d<char>(rdata->m_dimx,rdata->m_dimy);
+	mdata->m_base_map = new Matrix2d<char>(rdata->m_dimx/2,rdata->m_dimy/2);
 	mdata->m_base_map->clear();
+	mdata->m_template_map = new Matrix2d<char>(rdata->m_dimx,rdata->m_dimy);
+	mdata->m_template_map->clear();
 	mdata->m_region = new Region(rdata->m_dimx,rdata->m_dimy,rdata->m_id,rdata->m_name);
 }
 
@@ -50,8 +54,8 @@ void MapGenerator::createBaseMap(MapData* mdata, RegionData* rdata)
 	
 	float size = rdata->m_area_percent;
 			
-	int dimx = rdata->m_dimx;
-	int dimy = rdata->m_dimy;
+	int dimx = rdata->m_dimx/2;
+	int dimy = rdata->m_dimy/2;
 	
 	// temporaere Karte anlegen
 	Matrix2d<float>* hmap = new Matrix2d<float>(dimx, dimy);
@@ -160,8 +164,8 @@ void MapGenerator::createBaseMap(MapData* mdata, RegionData* rdata)
 			nbx = x + nb[i][0];
 			nby = y + nb[i][1];
 			
-			// Dimension pruefen
-			if (nbx<0 || nby<0 || nbx >= dimx || nby >= dimy)
+			// Dimension pruefen, die Randfelder werden auch generell nicht gewaehlt
+			if (nbx<1 || nby<1 || nbx >= dimx-1 || nby >= dimy-1)
 				continue;
 			
 			// nur noch nicht besuchte Felder
@@ -188,14 +192,14 @@ void MapGenerator::createBaseMap(MapData* mdata, RegionData* rdata)
 	}
 	//std::cout << "area percent: "<<cnt*1.0/(dimx*dimy)<<"\n";
 	
-	// nochmal 5 Runden Floodfill um den Rand zu ermitteln
+	// nochmal 3 Runden Floodfill um den Rand zu ermitteln
 	
 	// Marker einfuegen
 	int markercnt =0;
 	borderqu.push(std::make_pair(-1,-1));
 	
 	
-	while (!borderqu.empty() && markercnt <6)
+	while (!borderqu.empty() && markercnt <3)
 	{
 		// Feld entnehmen
 		point = borderqu.front();
@@ -235,21 +239,22 @@ void MapGenerator::createBaseMap(MapData* mdata, RegionData* rdata)
 	}
 	
 	// Umgebungskarte generieren
-	createPerlinNoise(mdata->m_region->getHeight(), dimx, dimy,4 , 0.4,false);
+	createPerlinNoise(mdata->m_region->getHeight(), rdata->m_dimx, rdata->m_dimy,4 , 0.4,false);
 }
 
 void MapGenerator::createBorder(MapData* mdata, RegionData* rdata)
 {
 	// Delta zu Nachbarfeldern
 	int nb[4][2] = {{-1,0},{1,0},{0,-1},{0,1}};
-	// int dnb[8][2] = {{-1,0},{1,0},{0,-1},{0,1},{-1,1},{1,1},{1,-1},{-1,-1}};
+	int dnb[8][2] = {{-1,0},{1,0},{0,-1},{0,1},{-1,1},{1,1},{1,-1},{-1,-1}};
+	
+	// moegliche Randfelder in den Nachbarfeldern
+	int nbr[4][4] = {{1,0,1,1},{0,0,0,1},{0,1,1,1},{0,0,1,0}};
 	
 	// Matrix die angibt, welche 8x8 Felder blockiert sind
 	// Felder werden markiert, wenn alle 4x4 Unterfelder blockiert sind
 	int hdimx = rdata->m_dimx/2;
 	int hdimy = rdata->m_dimy/2;
-	Matrix2d<char> bmap(hdimx,hdimy);
-	bmap.clear();
 	
 	// Orte fuer den Ausgang in den vier Richtungen
 	int exit[4][2];
@@ -261,57 +266,133 @@ void MapGenerator::createBorder(MapData* mdata, RegionData* rdata)
 		exitcount[i] =1;
 	}
 	
+	// Rand finden und in ein doppelt so genaues Feld uebertragen
+	std::queue<std::pair<int,int> > qu;
+	std::list<std::pair<int,int> >::iterator it;
+	
+	// Schleife ueber die Randfelder
+	for (it = mdata->m_border.begin(); it != mdata->m_border.end(); ++it)
+	{
+		int i,j,nbi,nbj;
+		i = it->first;
+		j = it->second;
+		
+		// der Rand selber wird mit -1 markiert
+		// ein Randfeld wird in dieser Matrix ein 2x2 Block
+		*(mdata->m_template_map->ind(i*2,j*2))= -1;
+		*(mdata->m_template_map->ind(i*2+1,j*2))= -1;
+		*(mdata->m_template_map->ind(i*2+1,j*2+1))= -1;
+		*(mdata->m_template_map->ind(i*2,j*2+1))= -1;
+		
+		// die 8 angrenzenden Felder werden mit 1 markiert, wenn sie frei sind
+		for (int k=0; k<4; k++)
+		{
+			nbi = i + nb[k][0];
+			nbj = j + nb[k][1];
+			
+			if (nbi<0 || nbj <0 || nbi >=hdimx || nbj >= hdimy)
+				continue;
+			
+			if (*(mdata->m_base_map->ind(nbi,nbj)) >=1)
+			{
+				if (*(mdata->m_template_map->ind(nbi*2+nbr[k][0],nbj*2+nbr[k][1])) == 0)
+				{
+					qu.push(std::make_pair(nbi*2+nbr[k][0],nbj*2+nbr[k][1]));
+					*(mdata->m_template_map->ind(nbi*2+nbr[k][0],nbj*2+nbr[k][1])) = 1;
+				}
+				
+				if (*(mdata->m_template_map->ind(nbi*2+nbr[k][2],nbj*2+nbr[k][3])) == 0)
+				{
+					qu.push(std::make_pair(nbi*2+nbr[k][2],nbj*2+nbr[k][3]));
+					*(mdata->m_template_map->ind(nbi*2+nbr[k][2],nbj*2+nbr[k][3])) = 1;
+				}
+
+			}
+			else
+			{
+				*(mdata->m_template_map->ind(nbi*2+nbr[k][0],nbj*2+nbr[k][1])) = -1;
+				*(mdata->m_template_map->ind(nbi*2+nbr[k][2],nbj*2+nbr[k][3])) = -1;
+			}
+				
+		}
+	}
+	
+	// Floodfill mit 8-Adjazenz um Ort mit viel Abstand zum Rand zu ermitteln
+	qu.push(std::make_pair(-1,-1));
+	int markercnt =2;
+	std::pair<int,int> point;
+	int x,y,nbx,nby;
+	
+	
+	while (!qu.empty())
+	{
+		// Feld entnehmen
+		point = qu.front();
+		qu.pop();
+		
+		x = point.first;
+		y = point.second;
+		
+		// Testen ob der Marker entnommen wurde
+		if (x==-1)
+		{
+			if (qu.empty())
+				break;
+			
+			markercnt ++;
+			qu.push(std::make_pair(-1,-1));
+			continue;
+		}
+		
+		// Schleife ueber die Nachbarfelder
+		for (int i=0; i<8; i++)
+		{
+			nbx = x + dnb[i][0];
+			nby = y + dnb[i][1];
+			
+			// Dimension pruefen
+			if (nbx<0 || nby<0 || nbx >= rdata->m_dimx || nby >= rdata->m_dimy)
+				continue;
+			
+			// nur noch nicht besuchte Felder
+			if ((*(mdata->m_template_map))[nbx][nby] != 0)
+				continue;
+			
+			
+			// Feld hinzufuegen
+			qu.push(std::make_pair(nbx,nby));
+			// als besucht markieren
+			(*(mdata->m_template_map))[nbx][nby]= markercnt;
+		}
+	}
+	
+	
+	// Ausgaenge suchen
 	for (int i=0; i<hdimx; i++)
 	{
 		for (int j=0; j< hdimy;j++)
 		{
 			
-			// Randfeld wird immer als blockiert markiert
-			if (i==0 || j==0 || i==hdimx-1 || j== hdimy-1)
-			{
-				*(bmap.ind(i,j)) = 1;
-				continue;
-			}
 			
-			// Feld wird als blockiert markiert, wenn alle 4x4 Unterfelder blockiert sind
-			if (*(mdata->m_base_map->ind(2*i,2*j)) == -1 &&  *(mdata->m_base_map->ind(2*i+1,2*j))== -1
-						   && *(mdata->m_base_map->ind(2*i,2*j+1)) == -1 && *(mdata->m_base_map->ind(2*i+1,2*j+1)) == -1)
-			{
-				*(bmap.ind(i,j)) = 1;
-			}
-			else
-			{
-				// wenn mindestens ein Feld betretbar ist, Gesamtfeld als betretbar markieren
-				if (*(mdata->m_base_map->ind(2*i,2*j)) >= 1 ||  *(mdata->m_base_map->ind(2*i+1,2*j))>= 1
-								  || *(mdata->m_base_map->ind(2*i,2*j+1)) >=1  || *(mdata->m_base_map->ind(2*i+1,2*j+1)) >= 1)
+			if (*(mdata->m_base_map->ind(i,j)) >=1 )
+				// Testen ob das Feld als Ausgang in Frage kommt
+				// Also am noerdlichsten, westlichsten usw liegt
+				for (int k=0; k<4; k++)
 				{
-					*(mdata->m_base_map->ind(2*i,2*j)) =1;
-					*(mdata->m_base_map->ind(2*i+1,2*j)) =1;
-					*(mdata->m_base_map->ind(2*i,2*j+1)) =1;
-					*(mdata->m_base_map->ind(2*i+1,2*j+1)) =1;
-					
-					*(bmap.ind(i,j)) = -1;
-					
-					// Testen ob das Feld als Ausgang in Frage kommt
-					// Also am noerdlichsten, westlichsten usw liegt
-					for (int k=0; k<4; k++)
+					if (exit[k][0]*nb[k][0] + exit[k][1]*nb[k][1] < i*nb[k][0] + j*nb[k][1])
 					{
-						if (exit[k][0]*nb[k][0] + exit[k][1]*nb[k][1] < i*nb[k][0] + j*nb[k][1])
-						{
-							exit[k][0] =i;
-							exit[k][1] =j;
-							exitcount[k] =1;
-						}
-						if (exit[k][0]*nb[k][0] + exit[k][1]*nb[k][1] == i*nb[k][0] + j*nb[k][1] && Random::randi(exitcount[k]) ==0)
-						{
-							exit[k][0] =i;
-							exit[k][1] =j;
-							exitcount[k] ++;
-						}
+						exit[k][0] =i;
+						exit[k][1] =j;
+						exitcount[k] =1;
+					}
+					if (exit[k][0]*nb[k][0] + exit[k][1]*nb[k][1] == i*nb[k][0] + j*nb[k][1] && Random::randi(exitcount[k]) ==0)
+					{
+						exit[k][0] =i;
+						exit[k][1] =j;
+						exitcount[k] ++;
 					}
 				}
-				
-			}
+			
 		}
 	}
 	
@@ -324,7 +405,8 @@ void MapGenerator::createBorder(MapData* mdata, RegionData* rdata)
 		{
 			int i = exit[k][0];
 			int j = exit[k][1];
-			 
+			
+			
 			locname = "entry_";
 			locname += dirname[k];
 			mdata->m_region->addLocation(locname,Vector(i*8+4,j*8+4));
@@ -338,7 +420,7 @@ void MapGenerator::createBorder(MapData* mdata, RegionData* rdata)
 			
 			while (i>=0 && j>=0 && i< hdimx && j<hdimy)
 			{
-				*(bmap.ind(i,j)) = -1;
+				*(mdata->m_base_map->ind(i,j)) = 1;
 				i+= nb[k][0];
 				j+= nb[k][1];
 			}
@@ -375,7 +457,7 @@ void MapGenerator::createBorder(MapData* mdata, RegionData* rdata)
 		for (int j=0; j< hdimy;j++)
 		{
 			skip = false;
-			if (*(bmap.ind(i,j)) != 1)
+			if (*(mdata->m_base_map->ind(i,j)) != -1)
 			{
 				continue;
 			}
@@ -393,14 +475,14 @@ void MapGenerator::createBorder(MapData* mdata, RegionData* rdata)
 					continue;
 				}
 				
-				if (*(bmap.ind(nbi,nbj)) == -1)
+				if (*(mdata->m_base_map->ind(nbi,nbj)) == 1)
 				{
 					mask +=1;
 				}
 				
 				// Wenn eines der Nachbarfelder im *leeren Raum* liegt
 				// dann keine Objekte setzen 
-				if (*(bmap.ind(nbi,nbj)) == 0)
+				if (*(mdata->m_base_map->ind(nbi,nbj)) == 0)
 				{
 					skip = true;
 				}
@@ -534,7 +616,7 @@ void MapGenerator::createPerlinNoise(Matrix2d<float> *data, int dimx, int dimy,i
 	// Raender anlegen
 	if (bounds)
 	{
-		float bnd = 10;
+		float bnd = 5;
 		float dist;
 		for (int i=0;i<dimx;i++)
 		{

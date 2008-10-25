@@ -7,8 +7,8 @@ using namespace std;
 
 float point_x, point_y;
 
-const int DIMX = 32;
-const int DIMY = 32;
+const int DIMX = 64;
+const int DIMY = 64;
 
 const int CENTERX = DIMX/2;
 const int CENTERY = DIMY/2;
@@ -119,7 +119,8 @@ int main (int argc,char **argv) {
 	// Fensterinitialisierung
 	long sec;
 	time(&sec);
-	
+	srand(time(NULL));
+
 	glutInit (&argc,argv);
 	glutInitWindowSize (960,960);
 	glutInitWindowPosition (WIN_POS_X,WIN_POS_Y);
@@ -196,7 +197,7 @@ int main (int argc,char **argv) {
 	rdata.m_exit_directions[EAST] = false;
 	*/
 	ObjectFactory::init();
-	srand(1000);
+	ObjectFactory::loadFixedObjectData("../data/objects/objects.xml");
 	
 	MapGenerator::createMapData(&mdata,&rdata);
 	MapGenerator::createBaseMap(&mdata,&rdata);
@@ -238,9 +239,9 @@ void DisplayFunc () {
 	float col[3];
 	float t,val,m;
 	
-	for (int i=0;i<DIMX;++i)
+	for (int i=0;i<DIMX/2;++i)
 	{
-		for (int j=0;j<DIMY;++j)
+		for (int j=0;j<DIMY/2;++j)
 		{
 			col[0] =1; col[1] =1; col[2] =1;
 			if (*(mdata.m_base_map->ind(i,j)) == 0)
@@ -256,10 +257,37 @@ void DisplayFunc () {
 			glColor3f(col[0],col[1],col[2]);
 			glBegin(GL_QUADS);
 			
-			glVertex3f(i-CENTERX,CENTERY-j,0);
-			glVertex3f(i-CENTERX+1,CENTERY-j,0);
-			glVertex3f(i-CENTERX+1,CENTERY-j-1,0);
-			glVertex3f(i-CENTERX,CENTERY-j-1,0);
+			glVertex3f(i*2-CENTERX,CENTERY-j*2,0);
+			glVertex3f(i*2-CENTERX+2,CENTERY-j*2,0);
+			glVertex3f(i*2-CENTERX+2,CENTERY-j*2-2,0);
+			glVertex3f(i*2-CENTERX,CENTERY-j*2-2,0);
+			
+			
+			glEnd();
+			
+		}
+		
+	}
+	
+	for (int i=0;i<DIMX;++i)
+	{
+		for (int j=0;j<DIMY;++j)
+		{
+			col[0] =1; col[1] =1; col[2] =1;
+			if (*(mdata.m_template_map->ind(i,j)) >= 1)
+			{
+				col[0] =*(mdata.m_template_map->ind(i,j)) * 0.1; col[1] =0; col[2] =0;
+			}
+			
+			
+		
+			glColor3f(col[0],col[1],col[2]);
+			glBegin(GL_QUADS);
+			
+			glVertex3f(i-CENTERX,CENTERY-j,0.1);
+			glVertex3f(i-CENTERX+1,CENTERY-j,0.1);
+			glVertex3f(i-CENTERX+1,CENTERY-j-1,0.1);
+			glVertex3f(i-CENTERX,CENTERY-j-1,0.1);
 			
 			
 			glEnd();
@@ -279,10 +307,10 @@ void DisplayFunc () {
 		glColor3f(1,0,0);
 		glBegin(GL_QUADS);
 			
-		glVertex3f(i-CENTERX+0.5,j-CENTERY+0.5,0.1);
-		glVertex3f(i-CENTERX+0.5,j-CENTERY-0.5,0.1);
-		glVertex3f(i-CENTERX-0.5,j-CENTERY-0.5,0.1);
-		glVertex3f(i-CENTERX-0.5,j-CENTERY+0.5,0.1);
+		glVertex3f(i*2-CENTERX,CENTERY-j*2,0.1);
+		glVertex3f(i*2-CENTERX+2,CENTERY-j*2,0.1);
+		glVertex3f(i*2-CENTERX+2,CENTERY-j*2-2,0.1);
+		glVertex3f(i*2-CENTERX,CENTERY-j*2-2,0.1);
 			
 			
 		glEnd();

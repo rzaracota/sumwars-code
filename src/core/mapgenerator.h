@@ -35,6 +35,12 @@ class MapGenerator
 		 */
 		Matrix2d<char>* m_base_map;
 		
+		
+		/**
+		 * \var Matrix2d<char>* m_template_map 
+		 * \brief Karte die angibt wie gross das groesste Template ist, das an diese Position passt
+		 */
+		Matrix2d<char>* m_template_map;
 
 		/**
 		 * \var Matrix2d<float>* m_environment
