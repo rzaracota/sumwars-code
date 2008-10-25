@@ -1,0 +1,39 @@
+<?xml version="1.0" ?>
+
+<ObjectTemplate name="$tree" type="FIXED_OBJECT">
+	<Environment name="meadow">
+		<Object name="tree1" />
+		<Object name="tree2" />
+		<Object name="tree3" />
+	</Environment>
+	<Environment name="hills">
+		<Object name="tree3" />
+	</Environment>
+</ObjectTemplate>
+
+<ObjectTemplate name="$border" type="FIXED_OBJECT">
+	<Environment name="meadow">
+		<Object name="fence1" />
+		<Object name="fence2" />
+		<Object name="fence3" />
+		<Object name="fence4" />
+		<Object name="fence5" />
+	</Environment>
+	<Environment name="hills">
+		<Object name="wall1" />
+		<Object name="wall2" />
+		<Object name="wall3" />
+	</Environment>
+</ObjectTemplate>
+
+
+<ObjectTemplate name="$single_block" type="FIXED_OBJECT">
+	<Environment name="meadow">
+		<Object name="tree1" />
+	</Environment>
+	<Environment name="hills">
+		<Object name="tree3" />
+	</Environment>
+</ObjectTemplate>
+
+

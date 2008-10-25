@@ -244,7 +244,47 @@ class ObjectFactory
 	 */
 	static WorldObject::TypeInfo::ObjectSubtype getObjectType(ObjectTemplateType generictype, EnvironmentName env);
 	
-		
+	/**
+	 * \fn static ObjectGroupTemplate* getObjectGroupTemplate(ObjectGroupTemplateName name)
+	 * \brief sucht zu dem betreffenden Name das passende Template heraus
+	 * \param name Name der Objektgruppe
+	 */
+	static ObjectGroupTemplate* getObjectGroupTemplate(ObjectGroupTemplateName name);
+	
+	/**
+	 * \fn Laedt die Daten zu Monstern aus der Datei
+	 * \param file Monster XML Datei
+	 */
+	static void loadMonsterData(std::string file);
+	
+	/**
+	 * \fn static void loadFixedObjectData(std::string file)
+	 * \brief Laedt Daten zu festen Objekten aus der Datei
+	 * \param file Objekte XML Datei
+	 */
+	static void loadFixedObjectData(std::string file);
+	
+	/**
+	 * \fn static void loadObjectTemplates(std::string file)
+	 * \brief Laedt Daten zu festen Objekten aus der Datei
+	 * \param file Objekttemplate XML Datei
+	 */
+	static void loadObjectTemplates(std::string file);
+	
+	/**
+	 * \fn static void loadObjectGroupTemplates(std::string file)
+	 * \brief Laedt Daten zu festen Objektgruppen aus der Datei
+	 * \param file Objektgruppentemplate XML Datei
+	 */
+	static void loadObjectGroupTemplates(std::string file);
+	
+	/**
+	 * \fn static init()
+	 * \brief registriert die Daten der Monster
+	 */
+	static void init();
+	
+	private:	
 	/**
 	 * \var static std::map<WorldObject::TypeInfo::ObjectSubtype, MonsterBasicData*> m_monster_data
 	 * \brief Basisdaten zu den Monstern
@@ -269,11 +309,7 @@ class ObjectFactory
 	 */
 	static std::map<ObjectGroupTemplateName, ObjectGroupTemplate*> m_object_group_templates;
 	
-	/**
-	 * \fn static init()
-	 * \brief registriert die Daten der Monster
-	 */
-	static void init();
+	
 	
 	/**
 	 * \fn static registerMonster(WorldObject::TypeInfo::ObjectSubtype subtype, MonsterBasicData* data)
@@ -308,12 +344,7 @@ class ObjectFactory
 	 */
 	static void registerObjectGroupTemplate(ObjectGroupTemplateName name, ObjectGroupTemplate* data);
 	
-	/**
-	 * \fn static ObjectGroupTemplate* getObjectGroupTemplate(ObjectGroupTemplateName name)
-	 * \brief sucht zu dem betreffenden Name das passende Template heraus
-	 * \param name Name der Objektgruppe
-	 */
-	static ObjectGroupTemplate* getObjectGroupTemplate(ObjectGroupTemplateName name);
+	
 };
 
 

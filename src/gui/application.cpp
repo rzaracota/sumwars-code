@@ -88,6 +88,13 @@ bool Application::init()
 		 ERRORMSG("cant create view");
 		return false;
 	}
+	
+	// Ressourcen laden
+	ret = loadResources();
+	if (ret == false)
+	{
+		ERRORMSG("could not load ressources");
+	}
 
 	DEBUG("application initialized");
 	// debugging
@@ -298,7 +305,11 @@ bool Application::setupResources()
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../resources/itempictures", "FileSystem", "GUI");
 
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../save", "FileSystem", "Savegame");
-
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../data/items", "FileSystem", "items");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../data/monsters", "FileSystem", "monsters");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../data/objects", "FileSystem", "objects");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../data/obj_templates", "FileSystem", "obj_templates");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../data/obj_group_templ", "FileSystem", "obj_group_templ");
 
 #if defined(WIN32)
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("c:\\windows\\fonts", "FileSystem", "GUI");
@@ -309,9 +320,7 @@ bool Application::setupResources()
 	Ogre::ResourceGroupManager::getSingleton().initialiseResourceGroup("Savegame");
 	Ogre::ResourceGroupManager::getSingleton().initialiseResourceGroup("GUI");
 
-	Ogre::ResourceGroupManager::getSingleton().loadResourceGroup("General");
-	Ogre::ResourceGroupManager::getSingleton().loadResourceGroup("Savegame");
-	Ogre::ResourceGroupManager::getSingleton().loadResourceGroup("GUI");
+	
 
 
 	// Debugging: Meshes direkt anlegen
@@ -457,6 +466,83 @@ bool Application::createView()
 	m_main_window = new MainWindow(m_ogre_root, m_cegui_system,m_window,m_document);
 
 	DEBUG("done");
+	return true;
+}
+
+bool Application::loadResources()
+{
+	Ogre::ResourceGroupManager::getSingleton().loadResourceGroup("General");
+	Ogre::ResourceGroupManager::getSingleton().loadResourceGroup("Savegame");
+	Ogre::ResourceGroupManager::getSingleton().loadResourceGroup("GUI");
+	
+	// Aktionen initialisieren
+	Action::init();
+
+	Ogre::FileInfoListPtr files;
+	Ogre::FileInfoList::iterator it;
+	std::string file;
+	
+	// Items initialisieren
+	ItemFactory::init();
+	files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("items","*.xml");
+	for (it = files->begin(); it != files->end(); ++it)
+	{
+		file = "../data/items/";
+		file += it->filename;
+		
+		ItemFactory::loadItemData(file);
+		Scene::loadItemData(file);
+		
+	}
+	
+	// Monster initialisieren
+	ObjectFactory::init();
+	files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("monsters","*.xml");
+	for (it = files->begin(); it != files->end(); ++it)
+	{
+		file = "../data/monsters/";
+		file += it->filename;
+		
+		ObjectFactory::loadMonsterData(file);
+		Scene::loadMonsterData(file);
+		
+	}
+	
+	// feste Objekte Initialisieren
+	files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("objects","*.xml");
+	for (it = files->begin(); it != files->end(); ++it)
+	{
+		file = "../data/objects/";
+		file += it->filename;
+		
+		ObjectFactory::loadFixedObjectData(file);
+		Scene::loadFixedObjectData(file);
+		
+	}
+	
+	// Objekt Templates
+	files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("obj_templates","*.xml");
+	for (it = files->begin(); it != files->end(); ++it)
+	{
+		file = "../data/obj_templates/";
+		file += it->filename;
+		
+		ObjectFactory::loadObjectTemplates(file);
+		
+	}
+	
+	// Objekt Gruppen Templates
+	files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("obj_group_templ","*.xml");
+	for (it = files->begin(); it != files->end(); ++it)
+	{
+		file = "../data/obj_group_templ/";
+		file += it->filename;
+		
+		ObjectFactory::loadObjectGroupTemplates(file);
+		
+	}
+	
+	
 	return true;
 }
 

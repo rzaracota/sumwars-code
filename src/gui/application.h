@@ -111,6 +111,12 @@ class Application
 		 * \brief Erzeugt das Document
 		 */
 		bool createDocument();
+		
+		/**
+		 * \fn bool loadResources()
+		 * \brief liest die Ressourcen
+		 */
+		bool loadResources();
 
 		/**
 		 * \fn virtual void update()

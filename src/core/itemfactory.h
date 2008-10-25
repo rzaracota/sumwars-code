@@ -110,6 +110,13 @@ public:
 	 * \brief Registriert die Items
 	 */
 	static void init();
+	
+	/**
+	 * \fn void loadItemData(std::string file)
+	 * \brief Laedt Daten zu Gegenstaenden aus der angegebenen Datei
+	 * \param file Item XML Datei
+	 */
+	static void loadItemData(std::string file);
 
 
 	private:

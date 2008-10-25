@@ -124,6 +124,26 @@ class Scene
 	{
 		return m_drop_items;
 	}
+	
+	/**
+	 * \fn static void loadItemData(std::string file)
+	 * \brief laedt die Informationen zum Darstellen der Items
+	 * \param file Items XML Datei
+	 */
+	static void loadItemData(std::string file);
+	
+	/**
+	 * \fn static void loadMonsterData(std::string file)
+	 * \brief Laedt die Informationen zum Darstellen der Monster
+	 */
+	static void loadMonsterData(std::string file);
+	
+	/**
+	 * \fn static void loadFixedObjectData(std::string file)
+	 * \brief Laedt Daten zu festen Objekten aus der Datei
+	 * \param file Objekte XML Datei
+	 */
+	static void loadFixedObjectData(std::string file);
 
 	private:
 
@@ -227,7 +247,7 @@ class Scene
 	 * \fn void registerMeshes()
 	 * \brief Registriert fuer alle Objekte, Projektile, Items und Tiles die zugehoerigen Meshes
 	 */
-	void registerMeshes();
+	static void registerMeshes();
 
 
 	/**
@@ -238,7 +258,7 @@ class Scene
 	 * \param particle_system Name des Partikelsystems. Leerer string, wenn kein Partikelsystem verwendet wird
 	 * \param scaling_factor Faktor um den das Mesh und alle Partikelsystem skaliert werden
 	 */
-	void registerObject(WorldObject::TypeInfo::ObjectSubtype subtype, std::string mesh, std::string particle_system= "", float scaling_factor =1.0);
+	static void registerObject(WorldObject::TypeInfo::ObjectSubtype subtype, std::string mesh, std::string particle_system= "", float scaling_factor =1.0);
 
     /**
      * \fn void registerAttachedMesh(WorldObject::TypeInfo::ObjectSubtype subtype, std::string bone, std::string mesh)
@@ -247,7 +267,7 @@ class Scene
      * \param bone Knochen an den Mesh gehaengt wird
      * \param mesh Mesh des angehaengten Objektes
      */
-    void registerAttachedMesh(WorldObject::TypeInfo::ObjectSubtype subtype, std::string bone, std::string mesh);
+	static void registerAttachedMesh(WorldObject::TypeInfo::ObjectSubtype subtype, std::string bone, std::string mesh);
 
 	/**
 	 * \fn void registerItem(Item::Subtype subtype, std::string mesh, std::string particle_system, float scaling_factor =1.0)
@@ -256,7 +276,7 @@ class Scene
 	 * \param mesh Mesh fuer das Item. Leerer String, wenn kein Mesh verwendet wird
 	 * \param particle_system Name des Partikelsystems. Leerer string, wenn kein Partikelsystem verwendet wird
 	 */
-	void registerItem(Item::Subtype subtype, std::string mesh, std::string particle_system= "", float scaling_factor =1.0);
+	static void registerItem(Item::Subtype subtype, std::string mesh, std::string particle_system= "", float scaling_factor =1.0);
 
 	/**
 	 * \fn void registerProjectile(Projectile::ProjectileType type, std::string mesh, std::string particle_system = "", float scaling_factor =1.0)
@@ -266,7 +286,7 @@ class Scene
 	 * \param particle_system Name des Partikelsystems. Leerer string, wenn kein Partikelsystem verwendet wird
 	 * \param scaling_factor Faktor um den das Mesh und alle Partikelsystem skaliert werden
 	 */
-	void registerProjectile(Projectile::ProjectileType type, std::string mesh, std::string particle_system = "", float scaling_factor =1.0);
+	static void registerProjectile(Projectile::ProjectileType type, std::string mesh, std::string particle_system = "", float scaling_factor =1.0);
 
 	/**
 	 * \fn void registerTile(Tile tile, std::string mesh, std::string particle_system, float scaling_factor =1.0)
@@ -275,35 +295,35 @@ class Scene
 	 * \param mesh Mesh fuer das Tile. Leerer String, wenn kein Mesh verwendet wird
 	 * \param particle_system Name des Partikelsystems. Leerer string, wenn kein Partikelsystem verwendet wird
 	 */
-	void registerTile(Tile tile, std::string mesh, std::string particle_system ="", float scaling_factor =1.0);
+	static void registerTile(Tile tile, std::string mesh, std::string particle_system ="", float scaling_factor =1.0);
 
 	/**
 	 * \fn RenderInfo getObjectRenderInfo(WorldObject::TypeInfo::ObjectSubtype subtype)
 	 * \brief Gibt die Informationen zum rendern eines Objektes aus
 	 * \param subtype Subtyp des Objektes
 	 */
-	RenderInfo getObjectRenderInfo(WorldObject::TypeInfo::ObjectSubtype subtype);
+	static RenderInfo getObjectRenderInfo(WorldObject::TypeInfo::ObjectSubtype subtype);
 
 	/**
 	 * \fn RenderInfo getItemRenderInfo(Item::Subtype subtype)
 	 * \brief Gibt die Informationen zum rendern eines Gegenstandes aus
 	 * \param subtype Subtyp des Gegenstandes
 	 */
-	RenderInfo getItemRenderInfo(Item::Subtype subtype);
+	static RenderInfo getItemRenderInfo(Item::Subtype subtype);
 
 	/**
 	 * \fn RenderInfo getProjectileRenderInfo(Projectile::ProjectileType subtype)
 	 * \brief Gibt die Informationen zum rendern eines Objektes aus
 	 * \param subtype Subtyp des Objektes
 	 */
-	RenderInfo getProjectileRenderInfo(Projectile::ProjectileType subtype);
+	static RenderInfo getProjectileRenderInfo(Projectile::ProjectileType subtype);
 
 	/**
 	 * \fn RenderInfo getTileRenderInfo(Tile tile)
 	 * \brief Gibt die Informationen zum rendern eines Tiles aus
 	 * \param tile Type des Tiles
 	 */
-	RenderInfo getTileRenderInfo(Tile tile);
+	static RenderInfo getTileRenderInfo(Tile tile);
 
 
 	/**
@@ -325,30 +345,30 @@ class Scene
 	std::map<int,string>* m_projectiles;
 
 	/**
-	 * \var std::map<Projectile::ProjectileType, RenderInfo> m_projectile_render_info
+	 * \var static std::map<Projectile::ProjectileType, RenderInfo> m_projectile_render_info
 	 *  \brief Speichert fuer die Projektile die Information zum Rendern
 	 */
-	std::map<Projectile::ProjectileType, RenderInfo> m_projectile_render_info;
+	static std::map<Projectile::ProjectileType, RenderInfo> m_projectile_render_info;
 
 	/**
-	 * \var std::map<WorldObject::TypeInfo::ObjectSubtype, RenderInfo> m_object_render_info
+	 * \var static std::map<WorldObject::TypeInfo::ObjectSubtype, RenderInfo> m_object_render_info
 	 *  \brief Speichert fuer die Objekte die Information zum Rendern
 	 */
-	std::map<WorldObject::TypeInfo::ObjectSubtype, RenderInfo> m_object_render_info;
+	static std::map<WorldObject::TypeInfo::ObjectSubtype, RenderInfo> m_object_render_info;
 
 	/**
-	 * \var std::map<Item::Subtype, RenderInfo> m_item_render_info
+	 * \var static std::map<Item::Subtype, RenderInfo> m_item_render_info
 	 *  \brief Speichert fuer die Projektile die Information zum Rendern
 	 */
-	std::map<Item::Subtype, RenderInfo> m_item_render_info;
+	static std::map<Item::Subtype, RenderInfo> m_item_render_info;
 
 	/**
-	 * \var std::map<Tile, RenderInfo> m_tile_render_info
+	 * \var static std::map<Tile, RenderInfo> m_tile_render_info
 	 *  \brief Speichert fuer die Tiles die Information zum Rendern
 	 */
-	std::map<Tile, RenderInfo> m_tile_render_info;
+	static std::map<Tile, RenderInfo> m_tile_render_info;
 
-
+	
 
 	/**
 	 * \var Document* m_document

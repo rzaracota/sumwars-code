@@ -3,6 +3,15 @@
 #define USE_OBJECTLOADER
 #define USE_ITEMLOADER
 
+std::map<Projectile::ProjectileType, RenderInfo> Scene::m_projectile_render_info;
+
+std::map<WorldObject::TypeInfo::ObjectSubtype, RenderInfo> Scene::m_object_render_info;
+
+std::map<Item::Subtype, RenderInfo> Scene::m_item_render_info;
+
+std::map<Tile, RenderInfo> Scene::m_tile_render_info;
+
+
 Scene::Scene(Document* doc,Ogre::RenderWindow* window)
 {
 	m_document = doc;
@@ -44,25 +53,48 @@ Scene::~Scene()
 	delete m_projectiles;
 }
 
-void Scene::registerMeshes()
+void Scene::loadItemData(std::string file)
 {
-	// Meshes fuer Objekte registrieren
+	// Item Meshes aus XML-Datei Laden
+	ItemLoader* itemloader = 0;
+	itemloader = new ItemLoader;
 
-	// Spieler
-	registerObject("warrior","warrior.mesh","");
-	registerAttachedMesh("warrior","itemRightHand","sword.mesh");
-	registerObject("mage","warrior.mesh","");	// TODO
-	registerObject("priest","warrior.mesh",""); // TODO
-	registerObject("archer","warrior.mesh",""); // TODO
+	std::list<ItemMeshData*>* item_mesh_list;
+	item_mesh_list = itemloader->loadItemMeshData(file.c_str());
 
-	// Monster
-#ifdef USE_OBJECTLOADER
+	if (item_mesh_list != 0)
+	{
+		// Daten auslesen und registrieren
+		std::list<ItemMeshData*>::iterator iter = item_mesh_list->begin();
+		while (iter != item_mesh_list->end())
+		{
+			registerItem((*iter)->m_subtype, (*iter)->m_mesh);
+			*iter++;
+		}
+
+		// Liste aus Speicher loeschen
+		iter = item_mesh_list->begin();
+		while (iter != item_mesh_list->end())
+		{
+			delete *iter;
+			*iter++;
+		}
+	}
+
+	delete item_mesh_list;
+	item_mesh_list = 0;
+	delete itemloader;
+	itemloader = 0;
+}
+
+void Scene::loadMonsterData(std::string file)
+{
 	// Monster Meshes aus XML-Datei Laden
 	ObjectLoader* objectloader = 0;
 	objectloader = new ObjectLoader;
 
 	std::list<MonsterMeshData*>* monster_mesh_list;
-	monster_mesh_list = objectloader->loadMonsterMeshData("../data/monsters.xml");
+	monster_mesh_list = objectloader->loadMonsterMeshData(file.c_str());
 
 	if (monster_mesh_list != 0)
 	{
@@ -87,11 +119,26 @@ void Scene::registerMeshes()
 	monster_mesh_list = 0;
 	delete objectloader;
 	objectloader = 0;
-#endif
+}
 
-#ifndef USE_OBJECTLOADER
-	registerObject("goblin","goblin.mesh","");
-#endif
+void Scene::loadFixedObjectData(std::string file)
+{
+	// TODO
+}
+
+
+void Scene::registerMeshes()
+{
+	// Meshes fuer Objekte registrieren
+
+	// Spieler
+	registerObject("warrior","warrior.mesh","");
+	registerAttachedMesh("warrior","itemRightHand","sword.mesh");
+	registerObject("mage","warrior.mesh","");	// TODO
+	registerObject("priest","warrior.mesh",""); // TODO
+	registerObject("archer","warrior.mesh",""); // TODO
+
+	// Monster
 	registerObject("gob_dog","gobDog.mesh","");
 	registerObject("lich","lich.mesh","");
 
@@ -140,43 +187,7 @@ void Scene::registerMeshes()
 	registerProjectile(Projectile::DIVINE_BEAM,"","Divine_Beam");
 	registerProjectile(Projectile::HYPNOSIS,"","Hypnosis");
 
-	// Items
-#ifdef USE_ITEMLOADER
-	// Item Meshes aus XML-Datei Laden
-	ItemLoader* itemloader = 0;
-	itemloader = new ItemLoader;
 
-	std::list<ItemMeshData*>* item_mesh_list;
-	item_mesh_list = itemloader->loadItemMeshData("../data/items.xml");
-
-	if (item_mesh_list != 0)
-	{
-		// Daten auslesen und registrieren
-		std::list<ItemMeshData*>::iterator iter = item_mesh_list->begin();
-		while (iter != item_mesh_list->end())
-		{
-			registerItem((*iter)->m_subtype, (*iter)->m_mesh);
-			*iter++;
-		}
-
-		// Liste aus Speicher loeschen
-		iter = item_mesh_list->begin();
-		while (iter != item_mesh_list->end())
-		{
-			delete *iter;
-			*iter++;
-		}
-	}
-
-	delete item_mesh_list;
-	item_mesh_list = 0;
-	delete itemloader;
-	itemloader = 0;
-#endif
-
-#ifndef USE_ITEMLOADER
-	registerItem("short_sw","sword.mesh");
-#endif
 	registerItem("long_sw","sword.mesh");
 	registerItem("wood_bow","shortbow.mesh");
 	registerItem("long_bow","shortbow.mesh");

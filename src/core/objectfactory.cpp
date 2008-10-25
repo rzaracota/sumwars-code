@@ -61,7 +61,116 @@ void ObjectGroupTemplate::addObject(ObjectTemplateType objtype, Vector pos, floa
 }
 
 
+WorldObject::TypeInfo::ObjectSubtype ObjectFactory::getObjectType(ObjectTemplateType generictype, EnvironmentName env)
+{
+	// Namen die nicht mit $ anfangen sind normale Typen
+	if (generictype[0] != '$')
+	{
+		DEBUG5("simple subtype %s",generictype.c_str());
+		return generictype;
+	}
+	
+	// Suchen in der Datenbank
+	std::map<ObjectTemplateType, ObjectTemplate*>::iterator it;
+	it = m_object_templates.find(generictype);
+	if (it == m_object_templates.end())
+	{
+		return "";
+	}
+	else
+	{
+		return it->second->getObject(env);
+	}
+}
 
+WorldObject* ObjectFactory::createObject(WorldObject::TypeInfo::ObjectType type, WorldObject::TypeInfo::ObjectSubtype subtype, int id)
+{
+	// Zeiger auf erzeugtes Objekt
+	WorldObject* ret=0;
+
+	// ID des Objektes
+	if (id ==0)
+	{
+		id = World::getWorld()->getValidId();
+	}
+
+	if (type ==WorldObject::TypeInfo::TYPE_PLAYER)
+	{
+		if (subtype == "warrior")
+		{
+			ret = new Warrior(  id );
+		}
+		else if (subtype == "mage")
+		{
+			ret = new Mage( id );
+		}
+		else if (subtype == "archer")
+		{
+			ret = new Archer( id );
+		}
+		else if(subtype == "priest")
+		{
+			ret = new Priest( id );
+		}
+	}
+	else if (type ==WorldObject::TypeInfo::TYPE_MONSTER)
+	{
+		DEBUG5("requested subtype: %s",subtype.c_str());
+		MonsterBasicData* mdata;
+		std::map<WorldObject::TypeInfo::ObjectSubtype, MonsterBasicData*>::iterator i;
+
+		i = m_monster_data.find(subtype);
+		if (i== m_monster_data.end())
+		{
+			ERRORMSG("subtype not found: %s",subtype.c_str());
+			i = m_monster_data.find("goblin");
+		}
+		mdata = i->second;
+		ret = new Monster( id,*mdata);
+		DEBUG5("Monster created");
+	}
+	else if (type ==WorldObject::TypeInfo::TYPE_FIXED_OBJECT)
+	{
+	
+		DEBUG5("requested subtype: %s",subtype.c_str());
+		FixedObjectData* data;
+		std::map<WorldObject::TypeInfo::ObjectSubtype, FixedObjectData*>::iterator i;
+
+		i = m_fixed_object_data.find(subtype);
+		if (i== m_fixed_object_data.end())
+		{
+			ERRORMSG("subtype not found: %s",subtype.c_str());
+			i = m_fixed_object_data.find("tree1");
+		}
+		data = i->second;
+		
+		Shape* sp;
+		DEBUG5("create fixed object: %s",subtype.c_str());
+		ret = new FixedObject(id,subtype);
+
+		sp=ret->getShape();		
+		memcpy(sp,&(data->m_shape),sizeof(Shape));
+		sp->m_angle =0;
+
+
+		ret->setState(WorldObject::STATE_STATIC);
+		ret->setLayer(data->m_layer);
+	}
+	return ret;
+}
+
+ObjectGroupTemplate* ObjectFactory::getObjectGroupTemplate(ObjectGroupTemplateName name)
+{
+	std::map<ObjectGroupTemplateName, ObjectGroupTemplate*>::iterator it;
+	it = m_object_group_templates.find(name);
+	
+	if (it == m_object_group_templates.end())
+	{
+		return 0;
+	}
+	
+	return it->second;
+}
 
 
 void ObjectFactory::registerMonster(WorldObject::TypeInfo::ObjectSubtype subtype, MonsterBasicData* data)
@@ -101,55 +210,20 @@ void ObjectFactory::registerObjectGroupTemplate(ObjectGroupTemplateName name, Ob
 }
 
 
-
-WorldObject::TypeInfo::ObjectSubtype ObjectFactory::getObjectType(ObjectTemplateType generictype, EnvironmentName env)
+void ObjectFactory::loadMonsterData(std::string file)
 {
-	// Namen die nicht mit $ anfangen sind normale Typen
-	if (generictype[0] != '$')
-	{
-		DEBUG5("simple subtype %s",generictype.c_str());
-		return generictype;
-	}
-	
-	// Suchen in der Datenbank
-	std::map<ObjectTemplateType, ObjectTemplate*>::iterator it;
-	it = m_object_templates.find(generictype);
-	if (it == m_object_templates.end())
-	{
-		return "";
-	}
-	else
-	{
-		return it->second->getObject(env);
-	}
-}
-
-void ObjectFactory::init()
-{
-	MonsterBasicData* mdata;
-	int i;
-	float p[4];
-
-#ifdef USE_OBJECTLOADER
 	// Objekte bzw. Monster aus XML Laden
 	ObjectLoader* objectloader = 0;
 	objectloader = new ObjectLoader;
 	std::list<MonsterBasicData*>* monster_list;
-	monster_list = objectloader->loadMonsterBasicData("../data/monsters.xml");
+	monster_list = objectloader->loadMonsterBasicData(file.c_str());
 
 	if (monster_list != 0)
 	{
 		std::list<MonsterBasicData*>::iterator forward_iterator = monster_list->begin();
 		while (forward_iterator != monster_list->end())
 		{
-			/*cout << "> > >  Testwert: " << (*forward_iterator)->m_base_attr.m_abilities[0] << "  < < <" << endl;
-			if ((*forward_iterator)->m_base_attr.m_abilities[0] == 0xf1f)
-				cout << "Wert stimmt ueberein" << endl;
-			else
-				cout << "Wert ist falsch" << endl;*/
-			// FIXME WorldObject::TypeInfo::SUBTYPE_GOBLIN  soll von loadObjects zurueckgegeben werden
-			registerMonster("goblin", *forward_iterator);
-			//registerMonster(WorldObject::TypeInfo::SUBTYPE_GOBLIN, *forward_iterator);
+			registerMonster((*forward_iterator)->m_type_info.m_subtype, *forward_iterator);
 			*forward_iterator++;
 		}
 	}
@@ -158,62 +232,58 @@ void ObjectFactory::init()
 	monster_list = 0;
 	delete objectloader;
 	objectloader = 0;
-#endif
+}
 
-#ifndef USE_OBJECTLOADER
-	// Goblin
-	mdata = new MonsterBasicData;
+void ObjectFactory::loadFixedObjectData(std::string file)
+{
+	// Daten fuer feste Objekte
+	ObjectLoader* objectloader = 0;
+	objectloader = new ObjectLoader;
+	std::list<FixedObjectData*>* object_list = 0;
+	std::list<std::string>* subtype_list = 0;
+	
+	objectloader->loadFixedObjectData(file.c_str(), object_list, subtype_list);
 
-	// Goblin Type Informationen
-	mdata->m_type_info.m_type = WorldObject::TypeInfo::TYPE_MONSTER;
-	mdata->m_type_info.m_subtype = "goblin";
-	mdata->m_type_info.m_fraction = WorldObject::TypeInfo::FRAC_MONSTER;
-	mdata->m_type_info.m_category = WorldObject::TypeInfo::GOBLIN;
+	if (object_list != 0)
+	{
+		std::list<FixedObjectData*>::iterator iter = object_list->begin();
+		std::list<std::string>::iterator itersub = subtype_list->begin();
+		
+		while (iter != object_list->end() && itersub != subtype_list->end())
+		{
+			registerFixedObject(*itersub,*iter);
+			*iter++;
+			*itersub++;
+		}
+	}
 
-	// Goblin Drop Informationen
-	p[0] = 0.1; p[1] = 0.2; p[2] = 0.2; p[3] = 0.2;
-	mdata->m_drop_slots[0].init(p, 0,20, 0.3, 500);
-	mdata->m_drop_slots[1].init(p,0, 10, 0.3, 1000);
+	delete object_list;
+	object_list = 0;
+	delete subtype_list;
+	subtype_list = 0;
+	delete objectloader;
+	objectloader = 0;
+}
 
-	// Goblin Attribut werte
-	mdata->m_base_attr.m_max_experience = 100000;
-	mdata->m_base_attr.m_level =1;
-	mdata->m_base_attr.m_max_health = 150;
-	mdata->m_base_attr.m_armor = 10;
-	mdata->m_base_attr.m_block=0;
-	mdata->m_base_attr.m_attack = 10;
-	mdata->m_base_attr.m_strength = 15;
-	mdata->m_base_attr.m_dexterity = 10;
-	mdata->m_base_attr.m_magic_power = 5;
-	mdata->m_base_attr.m_willpower = 10;
-	mdata->m_base_attr.m_resistances[Damage::PHYSICAL] =0;
-	mdata->m_base_attr.m_resistances[Damage::AIR] =0;
-	mdata->m_base_attr.m_resistances[Damage::ICE] =0;
-	mdata->m_base_attr.m_resistances[Damage::FIRE] =0;
-	mdata->m_base_attr.m_resistances_cap[Damage::PHYSICAL] =50;
-	mdata->m_base_attr.m_resistances_cap[Damage::AIR] =50;
-	mdata->m_base_attr.m_resistances_cap[Damage::ICE] =50;
-	mdata->m_base_attr.m_resistances_cap[Damage::FIRE] =50;
-	mdata->m_base_attr.m_walk_speed = 2000;
-	mdata->m_base_attr.m_attack_speed=1500;
-	mdata->m_base_attr.m_step_length = 0.5;
-	for (i=0;i<6;i++)
-		mdata->m_base_attr.m_abilities[i]=0;
+void ObjectFactory::loadObjectTemplates(std::string file)
+{
+	// TODO
+	DEBUG("reading file %s",file.c_str());
+}
 
-	mdata->m_base_attr.m_abilities[0] = 0xf1f;
-	mdata->m_base_attr.m_attack_range =1;
-	mdata->m_base_attr.m_special_flags=0;
-	mdata->m_base_attr.m_immunity =0;
 
-	// Goblin Geometrie Informationen
-	mdata->m_layer = (WorldObject::Geometry::LAYER_BASE | WorldObject::Geometry::LAYER_AIR)
-	mdata->m_radius = 0.5;
+void ObjectFactory::loadObjectGroupTemplates(std::string file)
+{
+	// TODO
+	DEBUG("reading file %s",file.c_str());
+}
 
-	// Goblin AI Informationen
-	mdata->m_ai_sight_range = 8;
+void ObjectFactory::init()
+{
+	MonsterBasicData* mdata;
+	int i;
+	float p[4];
 
-	registerMonster("goblin",mdata);
-#endif
 
 	// Lich
 	mdata = new MonsterBasicData;
@@ -324,35 +394,6 @@ void ObjectFactory::init()
 	registerMonster("gob_dog",mdata);
 	
 	
-#ifdef USE_OBJECTLOADER
-	// Daten fuer feste Objekte
-	//ObjectLoader* objectloader = 0;
-	objectloader = new ObjectLoader;
-	std::list<FixedObjectData*>* object_list = 0;
-	std::list<std::string>* subtype_list = 0;
-	
-	objectloader->loadFixedObjectData("../data/objects.xml", object_list, subtype_list);
-
-	if (object_list != 0)
-	{
-		std::list<FixedObjectData*>::iterator iter = object_list->begin();
-		std::list<std::string>::iterator itersub = subtype_list->begin();
-		
-		while (iter != object_list->end() && itersub != subtype_list->end())
-		{
-			registerFixedObject(*itersub,*iter);
-			*iter++;
-			*itersub++;
-		}
-	}
-
-	delete object_list;
-	object_list = 0;
-	delete subtype_list;
-	subtype_list = 0;
-	delete objectloader;
-	objectloader = 0;
-#endif
 
 
 	FixedObjectData* fdata;
@@ -381,13 +422,7 @@ void ObjectFactory::init()
 	fdata->m_shape.m_radius = 0.15;
 	registerFixedObject("tree1",fdata);
 	
-#ifndef USE_OBJECTLOADER
-	fdata = new FixedObjectData;
-	fdata->m_layer = WorldObject::LAYER_BASE | WorldObject::LAYER_AIR;
-	fdata->m_shape.m_type = Shape::RECT;
-	fdata->m_shape.m_extent = Vector(3.84,0.15);
-	registerFixedObject("fence1",fdata);
-#endif
+
 	fdata = new FixedObjectData;
 	fdata->m_layer = WorldObject::LAYER_BASE | WorldObject::LAYER_AIR;
 	fdata->m_shape.m_type = Shape::RECT;
@@ -528,91 +563,3 @@ void ObjectFactory::init()
 	registerObjectGroupTemplate("border(filled)",grouptempl);
 }
 
-WorldObject* ObjectFactory::createObject(WorldObject::TypeInfo::ObjectType type, WorldObject::TypeInfo::ObjectSubtype subtype, int id)
-{
-	// Zeiger auf erzeugtes Objekt
-	WorldObject* ret=0;
-
-	// ID des Objektes
-	if (id ==0)
-	{
-		id = World::getWorld()->getValidId();
-	}
-
-	if (type ==WorldObject::TypeInfo::TYPE_PLAYER)
-	{
-		if (subtype == "warrior")
-		{
-			ret = new Warrior(  id );
-		}
-		else if (subtype == "mage")
-		{
-			ret = new Mage( id );
-		}
-		else if (subtype == "archer")
-		{
-			ret = new Archer( id );
-		}
-		else if(subtype == "priest")
-		{
-			ret = new Priest( id );
-		}
-	}
-	else if (type ==WorldObject::TypeInfo::TYPE_MONSTER)
-	{
-		DEBUG5("requested subtype: %s",subtype.c_str());
-		MonsterBasicData* mdata;
-		std::map<WorldObject::TypeInfo::ObjectSubtype, MonsterBasicData*>::iterator i;
-
-		i = m_monster_data.find(subtype);
-		if (i== m_monster_data.end())
-		{
-			ERRORMSG("subtype not found: %s",subtype.c_str());
-			i = m_monster_data.find("goblin");
-		}
-		mdata = i->second;
-		ret = new Monster( id,*mdata);
-		DEBUG5("Monster created");
-	}
-	else if (type ==WorldObject::TypeInfo::TYPE_FIXED_OBJECT)
-	{
-	
-		DEBUG5("requested subtype: %s",subtype.c_str());
-		FixedObjectData* data;
-		std::map<WorldObject::TypeInfo::ObjectSubtype, FixedObjectData*>::iterator i;
-
-		i = m_fixed_object_data.find(subtype);
-		if (i== m_fixed_object_data.end())
-		{
-			ERRORMSG("subtype not found: %s",subtype.c_str());
-			i = m_fixed_object_data.find("tree1");
-		}
-		data = i->second;
-		
-		Shape* sp;
-		DEBUG5("create fixed object: %s",subtype.c_str());
-		ret = new FixedObject(id,subtype);
-
-		sp=ret->getShape();		
-		memcpy(sp,&(data->m_shape),sizeof(Shape));
-		sp->m_angle =0;
-
-
-		ret->setState(WorldObject::STATE_STATIC);
-		ret->setLayer(data->m_layer);
-	}
-	return ret;
-}
-
-ObjectGroupTemplate* ObjectFactory::getObjectGroupTemplate(ObjectGroupTemplateName name)
-{
-	std::map<ObjectGroupTemplateName, ObjectGroupTemplate*>::iterator it;
-	it = m_object_group_templates.find(name);
-	
-	if (it == m_object_group_templates.end())
-	{
-		return 0;
-	}
-	
-	return it->second;
-}

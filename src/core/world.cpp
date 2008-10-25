@@ -59,14 +59,7 @@ World* World::m_world=0;
 
 bool World::init()
 {
-	// Aktionen initialisieren
-	Action::init();
 
-	// Items initialisieren
-	ItemFactory::init();
-	
-	ObjectFactory::init();
-	
 	if (m_server)
 	{
 		DEBUG("server");
@@ -154,7 +147,7 @@ void World::createRegion(short region)
 {
 	
 	
-	DEBUG("creating region %i",region);
+	DEBUG5("creating region %i",region);
 	int type = 1;
 	if (type==1)
 	{
@@ -170,7 +163,7 @@ void World::createRegion(short region)
 		srand(1000);
 		
 		Region* reg = MapGenerator::createRegion(rdata);
-		DEBUG("region created %p for id %i",reg,region);
+		DEBUG5("region created %p for id %i",reg,region);
 		insertRegion(reg,region);
 	}
 	else if(type==2)
@@ -445,7 +438,7 @@ int World::getRegionId(std::string name)
 
 void World::insertRegion(Region* region, int rnr)
 {
-	DEBUG("inserting region %i %s %p",rnr, region->getName().c_str(),region);
+	DEBUG5("inserting region %i %s %p",rnr, region->getName().c_str(),region);
 	m_regions.insert(std::make_pair(rnr,region));	
 	
 }
@@ -602,7 +595,7 @@ bool World::insertPlayerIntoRegion(WorldObject* player, short region, LocationNa
 			{
 				// Spieler in die Region einfuegen
 				player->setState(WorldObject::STATE_ENTER_REGION);
-				DEBUG("player can enter region");
+				DEBUG5("player can enter region");
 			}
 			else
 			{
@@ -676,7 +669,7 @@ bool World::insertPlayerIntoRegion(WorldObject* player, short region, LocationNa
 			m_region_enter_loc.erase(player->getId());
 			
 		}
-		DEBUG("entry position %f %f",pos.m_x, pos.m_y);
+		DEBUG5("entry position %f %f",pos.m_x, pos.m_y);
 		reg->getFreePlace(player->getShape(),player->getLayer() , pos, player);
 		reg->insertObject(player, pos,player->getShape()->m_angle);
 		player->setState(WorldObject::STATE_ACTIVE);
@@ -694,7 +687,7 @@ bool World::insertPlayerIntoRegion(WorldObject* player, short region, LocationNa
 			insertEvent(event);
 		}
 		
-		DEBUG("player %i %p entered region %i %p",player->getId(),player, region,getRegion(region));
+		DEBUG5("player %i %p entered region %i %p",player->getId(),player, region,getRegion(region));
 		
 
 	}
@@ -703,7 +696,7 @@ bool World::insertPlayerIntoRegion(WorldObject* player, short region, LocationNa
 
 void World::handleSavegame(CharConv *cv, int slot)
 {
-	DEBUG("got savegame from slot %i",slot);
+	DEBUG5("got savegame from slot %i",slot);
 	// Spieler aus dem Savegame erzeugen
 	char binsave;
 	cv->fromBuffer<char>(binsave);
@@ -718,7 +711,6 @@ void World::handleSavegame(CharConv *cv, int slot)
 	ot = tmp;
 	WorldObject* pl =0;
 
-	DEBUG("type %s",tmp);
 	pl=ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_PLAYER, ot);
 
 	// Spieler ist lokal

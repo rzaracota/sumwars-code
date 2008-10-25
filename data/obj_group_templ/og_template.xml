@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ObjectGroupTemplate name = "border(side)" >
+  <Shape
+		type = "RECT"
+		radius = ""
+		extent_x = "4"
+		extent_y = "4"
+		angle ="0"
+		/>
+
+  <WayPoint pos_x="" pos_y=""/>
+
+  <ObjectContent>
+	  <object subType="$border"
+			center_x="0"
+			center_y="3.8"
+			angle = "0"
+			probability ="1"
+			prob_angle = "false"
+			/>
+	  
+	  <object subType="$tree"
+			  center_x="-1.84"
+			  center_y="3.2"
+			  angle = "0"
+			  probability ="0.5"
+			  prob_angle = "true"
+			/>
+	  
+	  <object subType="$tree"
+			  center_x="-1.6"
+			  center_y="0.3"
+			  angle = "0"
+			  probability ="0.5"
+			  prob_angle = "true"
+			  />
+	  
+	  <object subType="$tree"
+			  center_x="1.1"
+			  center_y="0.82"
+			  angle = "0"
+			  probability ="0.5"
+			  prob_angle = "true"
+			  />
+	  
+  </objectContent>
+
+  <Locations>
+	 <Location name = "" pos_x="" pos_y="" />
+	 <Location name = "" pos_x="" pos_y="" />	
+  </Locations>
+
+
+</ObjectGroupTemplate>

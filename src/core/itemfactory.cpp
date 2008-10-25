@@ -614,17 +614,14 @@ void ItemFactory::registerItem(Item::Type type,Item::Subtype subtype, ItemBasicD
 	m_item_types.insert(make_pair(subtype,type));
 }
 
-
-
-void ItemFactory::init()
+void ItemFactory::loadItemData(std::string file)
 {
-#ifdef USE_ITEMLOADER
 	// Items aus XML Laden
 	ItemLoader* itemloader = 0;
 	itemloader = new ItemLoader;
 
 	std::list<ItemBasicData*>* item_list;
-	item_list = itemloader->loadItemBasicData("../data/items.xml");
+	item_list = itemloader->loadItemBasicData(file.c_str());
 
 	if (item_list != 0)
 	{
@@ -659,16 +656,14 @@ void ItemFactory::init()
 			cout << "m_max_enchant" << " = " << (*iter)->m_max_enchant << endl;
 			cout << "------------------------------------------------" << endl;
 			*/
-			DEBUG5("m_attack_range %s = %f",(*iter)->m_subtype.c_str(), (*iter)->m_weapon_attr->m_attack_range);
-			DEBUG5("m_damage.m_min_damage[Damage::PHYSICAL] = %f", (*iter)->m_weapon_attr->m_damage.m_min_damage[Damage::PHYSICAL]);
-			registerItem((*iter)->m_type, (*iter)->m_subtype, *iter);
+			
 			iter++;
 		}
 	}
 
 
 	std::list<DropChanceData*>* drop_chance_list;
-	drop_chance_list = itemloader->loadDropChanceData("../data/items.xml");
+	drop_chance_list = itemloader->loadDropChanceData(file.c_str());
 
 	if (drop_chance_list != 0)
 	{
@@ -695,57 +690,10 @@ void ItemFactory::init()
 	drop_chance_list = 0;
 	delete itemloader;
 	itemloader = 0;
-#endif
+}
 
-#ifndef USE_ITEMLOADER
-	ItemBasicData* idata;
-
-	// Standard Modifikator verteilung fuer Waffen
-	float weapon_mod[31];
-	for (int i=0;i<31;i++)
-	{
-		weapon_mod[i] =0;
-	}
-	weapon_mod[DEXTERITY_MOD]=0.1;
-	weapon_mod[MAGIC_POWER_MOD]=0.05;
-	weapon_mod[STRENGTH_MOD]=0.1;
-	weapon_mod[DAMAGE_PHYS_MOD]=0.15;
-	weapon_mod[DAMAGE_FIRE_MOD]=0.10;
-	weapon_mod[DAMAGE_ICE_MOD]=0.10;
-	weapon_mod[DAMAGE_AIR_MOD]=0.10;
-	weapon_mod[ATTACK_MOD]= 0.1;
-	weapon_mod[POWER_MOD] = 0.1;
-	weapon_mod[DAMAGE_MULT_PHYS_MOD]=0.1;
-
-
-	// Kurzschwert
-	idata = new ItemBasicData;
-
-	idata->m_type = Item::WEAPON;
-	idata->m_subtype = "short_sw";
-	idata->m_size= Item:: MEDIUM;
-
-	idata->m_min_enchant = 30;
-	idata->m_max_enchant= 120;
-	for (int i=0;i<31;i++)
-		idata->m_modchance[i] = weapon_mod[i];
-	idata->m_weapon_attr = new WeaponAttr;
-	idata->m_weapon_attr->m_damage.m_min_damage[Damage::PHYSICAL] = 5;
-	idata->m_weapon_attr->m_damage.m_max_damage[Damage::PHYSICAL] = 10;
-	idata->m_weapon_attr->m_damage.m_attack = 20;
-	idata->m_weapon_attr->m_damage.m_power = 30;
-	idata->m_weapon_attr->m_attack_range = 1.0;
-	idata->m_weapon_attr->m_two_handed = false;
-	idata->m_weapon_attr->m_dattack_speed = 500;
-
-	idata->m_equip_effect = new CreatureBaseAttrMod;
-
-	registerItem(Item::WEAPON,"short_sw",idata);
-
-
-	registerItemDrop(Item::WEAPON,"short_sw",DropChance(0,1,Item::MEDIUM));
-#endif
-
+void ItemFactory::init()
+{
 
 	registerItemDrop(Item::WEAPON,"long_sw",DropChance(10,1,Item::MEDIUM));
 	registerItemDrop(Item::WEAPON,"wood_bow",DropChance(3,1,Item::MEDIUM));

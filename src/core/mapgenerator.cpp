@@ -329,7 +329,6 @@ void MapGenerator::createBorder(MapData* mdata, RegionData* rdata)
 			locname += dirname[k];
 			mdata->m_region->addLocation(locname,Vector(i*8+4,j*8+4));
 			
-			DEBUG("entry %s at %i %i",locname.c_str(), i*8+4, j*8+4);
 			
 			i+= nb[k][0];
 			j+= nb[k][1];
