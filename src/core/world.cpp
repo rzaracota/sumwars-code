@@ -50,10 +50,6 @@ World* World::m_world=0;
 		m_parties[i].init(m_max_nr_players,i);
 	}
 
-
-	 for (int i=0;i<WORLD_MAX_REGIONS;i++)
-		 m_regions[i]=0;
-
 	 m_local_player =0;
 
 	 m_events = new EventList;
@@ -94,7 +90,7 @@ bool World::init()
 
 void World::createRegion(short region)
 {
-	DEBUG5("creating region %i",region);
+	DEBUG("creating region %i",region);
 	int type = 2;
 	if (type==1)
 	{
@@ -108,6 +104,7 @@ void World::createRegion(short region)
 		rdata.m_granularity = 8;
 		rdata.m_area_percent = 0.35;
 		rdata.m_id = 0;
+		rdata.m_name = "test";
 	
 		rdata.addEnvironment(0.6,"meadow");
 		rdata.addEnvironment(1.0,"hills");
@@ -123,7 +120,7 @@ void World::createRegion(short region)
 	}
 	else if(type==2)
 	{
-		Region* reg = new Region(25,25,region);
+		Region* reg = new Region(25,25,region,"test");
 		short rid = insertRegion(reg,region);
 
 
@@ -354,11 +351,12 @@ World::~World()
 
 	delete m_trades;
 
-	for (int i=0;i<WORLD_MAX_REGIONS;i++)
+	std::map<int,Region*>::iterator rit;
+	for (rit = m_regions.begin(); rit != m_regions.end(); rit++)
 	{
-		if (m_regions[i]!=0)
-			delete m_regions[i];
+		delete rit->second;
 	}
+
 
 	delete[] m_parties;
 	delete m_player_slots;
@@ -366,14 +364,37 @@ World::~World()
 	delete m_events;
 }
 
+Region* World::getRegion(int rid)
+{
+	std::map<int,Region*>::iterator it;
+	it = m_regions.find(rid);
+	
+	if (it != m_regions.end())
+	{
+		return it->second;
+	}
+ 	return 0;
+}
 
+Region* World::getRegion(std::string name)
+{
+	std::map<std::string,Region*>::iterator it;
+	it = m_name_regions.find(name);
+	
+	if (it != m_name_regions.end())
+	{
+		return it->second;
+	}
+	return 0;
+}
 
 short World::insertRegion(Region* region, int rnr)
 {
-
-	m_regions[rnr]=region;
-	return rnr;
-
+	DEBUG("inserting region %i %s %p",rnr, region->getName().c_str(),region);
+	m_regions.insert(std::make_pair(rnr,region));
+	m_name_regions.insert(std::make_pair(region->getName(),region));
+	
+	
 }
 
 WorldObject::Relation World::getRelation(WorldObject::Fraction frac, WorldObject* wo)
@@ -493,7 +514,7 @@ bool World::insertPlayer(WorldObject* player, int slot)
 
 bool World::insertPlayerIntoRegion(WorldObject* player, short region)
 {
-	Region* reg = m_regions[region];
+	Region* reg = getRegion(region);
 
 	// Testen ob alle Daten vorhanden sind
 	int data_missing =0;
@@ -512,7 +533,7 @@ bool World::insertPlayerIntoRegion(WorldObject* player, short region)
 			if (data_missing !=0)
 			{
 				createRegion(region);
-				reg = m_regions[region];
+				return;
 			}
 
 			if (player == m_local_player)
@@ -787,12 +808,10 @@ void World::update(float time)
 	}
 
 	DEBUG5("update %f",time);
-	for (int i=0;i<WORLD_MAX_REGIONS;i++)
+	std::map<int,Region*>::iterator rit;
+	for (rit = m_regions.begin(); rit != m_regions.end(); rit++)
 	{
-		if (m_regions[i]!=0)
-		{
-			m_regions[i]->update(time);
-		}
+		rit->second->update(time);
 	}
 
 	// Durchmustern alle Handelsvorgänge
@@ -843,12 +862,10 @@ void World::update(float time)
 
 	m_events->clear();
 
-	for (int i=0;i<WORLD_MAX_REGIONS;i++)
+	std::map<int,Region*>::iterator rrit;
+	for (rrit = m_regions.begin(); rrit != m_regions.end(); rrit++)
 	{
-		if (m_regions[i]!=0)
-		{
-			m_regions[i]->getEvents()->clear();
-		}
+		rrit->second->getEvents()->clear();
 	}
 
 	m_network->update();
@@ -1066,17 +1083,28 @@ void World::updatePlayers()
 					cv->fromBuffer(dimx);
 					cv->fromBuffer(dimy);
 
-					// Region anlegen wenn sie noch nicht existiert
-					if (m_regions[headerp.m_number] ==0)
+					// TODO: Name setzen
+					Region* reg = getRegion(headerp.m_number);
+					if (reg ==0)
 					{
-						m_regions[headerp.m_number] = new Region(dimx,dimy,headerp.m_number);
+						reg = new Region(dimx,dimy,headerp.m_number,"test");
 					}
-
+					else
+					{
+						// Daten loeschen
+					}
+					
 					// Daten schreiben
-					m_regions[headerp.m_number]->setRegionData(cv,m_players);
+					reg->setRegionData(cv,m_players);
 
 					// lokalen Spieler fuer die Region freischalten
 					m_local_player->setState(WorldObject::STATE_ENTER_REGION);
+					
+					// Region einfuegen
+					if (getRegion(headerp.m_number) ==0)
+					{
+						insertRegion(reg, headerp.m_number);
+					}
 				}
 
 				if (headerp.m_content == PTYPE_S2C_INITIALISATION)
@@ -1476,7 +1504,7 @@ void World::handleDataRequest(ClientDataRequest* request, int slot )
 	if (request->m_data <= ClientDataRequest::REGION_ALL)
 	{
 		DEBUG("Daten zur Region %i gefordert",request->m_id);
-		Region* region = m_regions[request->m_id];
+		Region* region = getRegion(request->m_id);
 
 		if (region!=0)
 		{

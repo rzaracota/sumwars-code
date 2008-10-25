@@ -218,7 +218,7 @@ void Application::run()
 		time = ltime / ( 1000000.0);
 		if (time*1000 > 50)
 		{
-	         DEBUG("ogre frame time was %f",time*1000);
+	         DEBUG5("ogre frame time was %f",time*1000);
 		}
 
 	}
@@ -236,6 +236,7 @@ bool Application::initOgre()
 	// Szenemanager anlegen
 	m_scene_manager = m_ogre_root->createSceneManager(Ogre::ST_GENERIC,"DefaultSceneManager");
 
+	Ogre::LogManager::getSingleton().setLogDetail(Ogre::LL_LOW);
 	return true;
 
 }

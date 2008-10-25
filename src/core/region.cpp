@@ -13,12 +13,13 @@ void RegionData::addObjectGroupTemplate(ObjectGroupTemplateName group_name, int 
 }
 
 
-Region::Region(short dimx, short dimy, short id)
+Region::Region(short dimx, short dimy, short id, std::string name)
 {
 	DEBUG5("creating region");
 	m_data_grid = new Matrix2d<Gridunit>(dimx,dimy);
 	m_dimx = dimx;
 	m_dimy = dimy;
+	m_name = name;
 
 	m_height = new Matrix2d<float>(dimx,dimy);
 	m_height->clear();

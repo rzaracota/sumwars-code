@@ -158,14 +158,15 @@ class Region
 {
 	public:
 		/**
-	 * \fn Region(short dimx, short dimy, short id)
+	 * \fn Region(short dimx, short dimy, short id, std::string name)
 		 * \brief Konstruktor
 		 * \param dimx Ausdehnung in x-Richtung
 	 	 * \param dimy Ausdehnung in y-Richtung
 		 * \param id ID der Region
-		 * \param server gibt an, ob der Rechner der Server ist
+		 * \param name Name der Region
+		 * 
 	 	 */
-		Region(short dimx, short dimy, short id);
+		Region(short dimx, short dimy, short id, std::string name);
 
 
 		/**
@@ -517,6 +518,15 @@ class Region
 		 */
 		Vector getLocation(LocationName name);
 		
+		/**
+		 * \fn std::string getName()
+		 * \brief Gibt den Name der Region aus
+		 */
+		std::string getName()
+		{
+			return m_name;
+		}
+		
 	private:
 		/**
 		* \var m_dimx
@@ -596,6 +606,12 @@ class Region
 		* \brief Nummer der Region
 		*/
 		short m_id;
+		
+		/**
+		 * \var std::string m_name
+		 * \brief Name der Region
+		 */
+		std::string m_name;
 	
 		/**
 		* \var EventList* m_events

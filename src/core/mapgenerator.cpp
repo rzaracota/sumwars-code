@@ -31,7 +31,7 @@ void MapGenerator::createMapData(MapData* mdata, RegionData* rdata)
 {
 	mdata->m_base_map = new Matrix2d<char>(rdata->m_dimx,rdata->m_dimy);
 	mdata->m_base_map->clear();
-	mdata->m_region = new Region(rdata->m_dimx,rdata->m_dimy,rdata->m_id);
+	mdata->m_region = new Region(rdata->m_dimx,rdata->m_dimy,rdata->m_id,rdata->m_name);
 }
 
 void MapGenerator::createBaseMap(MapData* mdata, RegionData* rdata)

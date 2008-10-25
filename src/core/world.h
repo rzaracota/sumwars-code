@@ -265,10 +265,14 @@ public:
 	 * \brief Gibt die Region aus
 	 * \param rid ID der Region
 	 */
-	Region* getRegion(int rid)
-	{
-		return m_regions[rid];
-	}
+	Region* getRegion(int rid);
+	
+	/**
+	 * \fn Region* getRegion(std::string name)
+	 * \brief Gibt die Region mit dem angegebenen Name aus
+	 * \param name Name der Region
+	 */
+	Region* getRegion(std::string name);
 
 	/**
 	 * \fn Network* getNetwork()
@@ -402,11 +406,17 @@ private:
 	bool m_server;
 	
 	/**
-	 * \var m_regions
+	 * \var std::map<int, Region*> m_regions
 	 * \brief Speichert die Spielwelt in Form von Regionen. Eine Region ist ein rechteckiger Ausschnitt der Spielwelt
 	 */
-	Region* m_regions[WORLD_MAX_REGIONS];
-
+	std::map<int, Region*> m_regions;
+	
+	/**
+	 * \var std::map<std::string, Region*> m_name_regions
+	 * \brief Speichert die Regionen sortiert nach Name
+	 */
+	std::map<std::string, Region*> m_name_regions;
+	
 
 	/**
 	 * \var std::map<int, Trade* >* m_trades
