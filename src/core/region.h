@@ -33,6 +33,37 @@ enum ExitDirection
 };
 
 /**
+ * \struct RegionExit
+ * \brief Struktur die einen Ausgang aus der Region beschreibt
+ */
+struct RegionExit
+{
+	/**
+	 * \var Shape m_shape
+	 * \brief Form der Flaeche, in der der Spieler stehen muss um die Region zu verlassen
+	 */
+	Shape m_shape;
+	
+	/**
+	 * \var LocationName m_exit_name
+	 * \brief Name des Ortes, an dem sich der Ausgang befindet
+	 */
+	LocationName m_exit_name;
+	
+	/**
+	 * \var std::string m_destination_region
+	 * \brief Name der Zielregion
+	 */
+	std::string m_destination_region;
+	
+	/**
+	 * \var LocationName m_destination_location
+	 * \brief Name des Zielpunktes in der Zielregion
+	 */
+	LocationName m_destination_location;
+};
+
+/**
  * \class RegionData
  * \brief enthaelt alle Daten die noetig sind um die Region zu erstellen
  */
@@ -88,6 +119,12 @@ class RegionData
 		bool m_exit_directions[4];
 		
 		/**
+		 * \var std::list<RegionExit> m_region_exits
+		 * \brief Liste der Ausgaenge aus der Region
+		 */
+		std::list<RegionExit> m_exits;
+		
+		/**
 		 * \struct ObjectGroupTemplateSet
 		 * \brief Struktur fuer eine Gruppe von Objekten die mehrmals in die Region eingefuegt werden soll
 		 */
@@ -132,6 +169,16 @@ class RegionData
 		void addEnvironment(float maxheight, EnvironmentName env)
 		{
 			m_environments.push_back(std::make_pair(maxheight,env));
+		}
+		
+		/**
+		 * \fn void addExit(RegionExit exit)
+		 * \brief Fuegt einen Ausgang hinzu
+		 * \param exit Ausgang
+		 */
+		void addExit(RegionExit exit)
+		{
+			m_exits.push_back(exit);
 		}
 		
 		/**
@@ -222,14 +269,15 @@ class Region
 		bool getObjectsInShape( Shape* shape,  WorldObjectList* result,short layer=WorldObject::LAYER_ALL, short group = WorldObject::GROUP_ALL, WorldObject* omit=0, bool empty_test = false );
 
 		/**
-		 * \fn bool getFreePlace(Shape* shape, short layer, Vector& pos)
+		 * \fn bool getFreePlace(Shape* shape, short layer, Vector& pos, WorldObject* omit=0)
 		 * \brief Sucht nach einem freien Platz fuer ein Objekt moeglichst nahe an den angegebenen Koordinaten
 		 * \param shape Form des Objekts
 		 * \param layer Ebene des Objekts
 		 * \param pos Eingabe: Zielpunkt, Ausgabe, tatsaechlich gefundener Ort
+		 * \param omit Objekt, das ausgelassen wird
 		 * \return true, wenn ein freier Platz gefunden wurde, sonst false
 		 */
-		bool getFreePlace(Shape* shape, short layer, Vector& pos);
+		bool getFreePlace(Shape* shape, short layer, Vector& pos, WorldObject* omit=0);
 
 		/**
 		 * \fn bool addObjectsInShapeFromGridunit(Shape* shape, Gridunit* gu, WorldObjectList* result, short layer=WorldObject::LAYER_ALL, short group = WorldObject::GROUP_ALL,WorldObject* omit=0, bool empty_test = false )
@@ -527,6 +575,22 @@ class Region
 			return m_name;
 		}
 		
+		/**
+		 * \fn void addExit(RegionExit exit)
+		 * \brief Fuegt einen Ausgang hinzu
+		 * \param exit Ausgang
+		 */
+		void addExit(RegionExit exit);
+		
+		/**
+		 * \fn short getId()
+		 * \brief Gibt die ID der Region aus
+		 */
+		short getId()
+		{
+			return m_id;
+		}
+		
 	private:
 		/**
 		* \var m_dimx
@@ -624,6 +688,12 @@ class Region
 		 * \brief Liste der Orte
 		 */
 		std::map<LocationName, Vector> m_locations;
+		
+		/**
+		 * \var std::list<RegionExit> m_region_exits
+		 * \brief Liste der Ausgaenge aus der Region
+		 */
+		std::list<RegionExit> m_exits;
 
 };
 

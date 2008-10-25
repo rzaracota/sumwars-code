@@ -81,6 +81,14 @@ class MapGenerator
 	static void createBorder(MapData* mdata, RegionData* rdata);
 	
 	/**
+	 * \fn static void createExits(MapData* mdata, RegionData* rdata)
+	 * \brief Fuegt der Region die Ausgaenge hinzu
+	 * \param rdata Daten fuer die Region die erstellt werden soll
+	 * \param mdata temporaere Daten zum Aufbau der Region
+	 */
+	static void createExits(MapData* mdata, RegionData* rdata);
+	
+	/**
 	 * \fn static Region* createRegion(RegionData* rdata)
 	 * \brief erzeugt aus den angegebenen Daten eine Region
 	 * \param rdata Daten zur Erzeugung der Region

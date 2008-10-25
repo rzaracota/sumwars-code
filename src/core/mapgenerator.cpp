@@ -21,6 +21,9 @@ Region* MapGenerator::createRegion(RegionData* rdata)
 	// Berandungen einfuegen
 	MapGenerator::createBorder(&mdata,rdata);
 	
+	// Ausgaenge erzeugen
+	MapGenerator::createExits(&mdata,rdata);
+	
 	// Speicher freigeben
 	delete mdata.m_base_map;
 	
@@ -36,6 +39,7 @@ void MapGenerator::createMapData(MapData* mdata, RegionData* rdata)
 
 void MapGenerator::createBaseMap(MapData* mdata, RegionData* rdata)
 {
+	
 	// Umgebungen in die Region einfuegen
 	
 	std::list<std::pair<float, EnvironmentName> >::iterator et;
@@ -325,6 +329,8 @@ void MapGenerator::createBorder(MapData* mdata, RegionData* rdata)
 			locname += dirname[k];
 			mdata->m_region->addLocation(locname,Vector(i*8+4,j*8+4));
 			
+			DEBUG("entry %s at %i %i",locname.c_str(), i*8+4, j*8+4);
+			
 			i+= nb[k][0];
 			j+= nb[k][1];
 			locname = "exit_";
@@ -339,6 +345,7 @@ void MapGenerator::createBorder(MapData* mdata, RegionData* rdata)
 			}
 		}
 	}
+	
 	
 	// fuer jedes markierte werden die 4 Nachbarfelder angesehen
 	// die 4 Informationen werden als 4bit Zahl interpretiert
@@ -419,6 +426,15 @@ void MapGenerator::createBorder(MapData* mdata, RegionData* rdata)
 	
 	
 
+}
+
+void MapGenerator::createExits(MapData* mdata, RegionData* rdata)
+{
+	std::list<RegionExit>::iterator it;
+	for (it = rdata->m_exits.begin(); it != rdata->m_exits.end(); ++it)
+	{
+		mdata->m_region->addExit(*it);
+	}
 }
 
 void MapGenerator::createPerlinNoise(Matrix2d<float> *data, int dimx, int dimy,int startfreq, float persistance, bool bounds)

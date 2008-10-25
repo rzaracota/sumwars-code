@@ -259,7 +259,7 @@ void Creature::initAction()
 			//collisionDetection(m_action.m_time);
 
 			DEBUG5("walk time %f walk speed %i",m_action.m_time,getBaseAttrMod()->m_walk_speed);
-			DEBUG5("speed %f %f",m_speed.m_x,m_speed.m_y);
+			DEBUG5("pos %f %f speed %f %f",getShape()->m_center.m_x, getShape()->m_center.m_y, m_speed.m_x,m_speed.m_y);
 	}
 	else
 	{
@@ -381,7 +381,12 @@ void Creature::performAction(float &time)
 
 	// Prozentsatz bei dessen Erreichen die Wirkung der Aktion berechnet wird
 	float pct = Action::getActionInfo(m_action.m_type)->m_critical_perc;
-
+	
+	if (m_action.m_type != Action::NOACTION)
+	{
+		DEBUG5("pos %f %f  speed %f %f  pct %f",getShape()->m_center.m_x, getShape()->m_center.m_y, m_speed.m_x,m_speed.m_y,p1);
+	}
+	
 	// Triple Shot
 	if (m_action.m_type == Action::TRIPLE_SHOT || m_action.m_type == Action::GUIDED_TRIPLE_SHOT)
 	{
@@ -1658,23 +1663,18 @@ void Creature::calcAction()
 		if (goalobj ==0)
 		{
 			// Zielobjekt existiert nicht mehr, abbrechen
-			m_command.m_type = Action::NOACTION;
 			m_action.m_type = Action::NOACTION;
 			m_action.m_elapsed_time =0;
-			m_command.m_damage_mult=1;
-			m_event_mask |= Event::DATA_COMMAND;
-			return;
+			clearCommand();return;
 		}
 
 		// Ziel muss aktiv sein
 		if (goalobj->getState() != STATE_ACTIVE)
 		{
 			DEBUG5("refused to interact with inactive objekt %i",m_command.m_goal_object_id);
-			m_command.m_type = Action::NOACTION;
 			m_action.m_type = Action::NOACTION;
-			m_command.m_damage_mult=1;
 			m_action.m_elapsed_time =0;
-			m_event_mask |= Event::DATA_COMMAND;
+			clearCommand();
 			return;
 		}
 
@@ -1765,11 +1765,9 @@ void Creature::calcAction()
 					}
 					else
 					{
-						m_command.m_type = Action::NOACTION;
 						m_action.m_type = Action::NOACTION;
 						m_action.m_elapsed_time =0;
-						m_command.m_damage_mult = 1;
-						m_event_mask |= Event::DATA_COMMAND;
+						clearCommand();
 
 					}
 					m_event_mask |= Event::DATA_MOVE_INFO;
@@ -1794,10 +1792,7 @@ void Creature::calcAction()
 		m_action.m_goal_object_id = m_command.m_goal_object_id;
 		m_action.m_goal = goal;
 
-
-		m_command.m_type = Action::NOACTION;
-		m_command.m_damage_mult = 1;
-		m_event_mask |= Event::DATA_COMMAND;
+		clearCommand();
 	}
 
 }
@@ -2107,6 +2102,13 @@ void Creature::calcWalkDir(Vector goal,WorldObject* goalobj)
 		m_speed = dir;
 
 	}
+}
+
+void Creature::clearCommand()
+{
+	m_command.m_type = Action::NOACTION;
+	m_command.m_damage_mult = 1;
+	m_event_mask |= Event::DATA_COMMAND;
 }
 
 bool Creature::update (float time)
@@ -4233,8 +4235,10 @@ void Creature::processEvent(Event* event, CharConv* cv)
 		}
 		else
 		{
+			DEBUG5("pos %f %f speed %f %f", getShape()->m_center.m_x, getShape()->m_center.m_y, m_speed.m_x, m_speed.m_y); 
 			// Bewegungsgeschwindigkeit so setzen, dass Ziel in der richtigen Zeit erreicht wird
 			m_speed = (goal - getShape()->m_center) * (1/goaltime);
+			DEBUG5("goal %f %f newspeed %f %f", goal.m_x, goal.m_y, m_speed.m_x, m_speed.m_y); 
 		}
 
 	}

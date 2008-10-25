@@ -7,8 +7,8 @@ using namespace std;
 
 float point_x, point_y;
 
-const int DIMX = 64;
-const int DIMY = 64;
+const int DIMX = 32;
+const int DIMY = 32;
 
 const int CENTERX = DIMX/2;
 const int CENTERY = DIMY/2;
@@ -119,7 +119,6 @@ int main (int argc,char **argv) {
 	// Fensterinitialisierung
 	long sec;
 	time(&sec);
-	srand(sec);
 	
 	glutInit (&argc,argv);
 	glutInitWindowSize (960,960);
@@ -152,12 +151,15 @@ int main (int argc,char **argv) {
 	glEnable (GL_NORMALIZE);
 	
 
-	
 	rdata.m_dimx = DIMX;
 	rdata.m_dimy = DIMY;
+
+	
 	rdata.m_complexity = 0.4;
 	rdata.m_granularity = 8;
-	rdata.m_area_percent = 0.3;
+	rdata.m_area_percent = 0.35;
+	rdata.m_id = 0;
+	rdata.m_name = "region0";
 	
 	rdata.addEnvironment(0.6,"meadow");
 	rdata.addEnvironment(1.0,"hills");
@@ -167,8 +169,34 @@ int main (int argc,char **argv) {
 	rdata.m_exit_directions[WEST] = false;
 	rdata.m_exit_directions[EAST] = true;
 	
+	RegionExit exit;
+	exit.m_shape.m_type = Shape::RECT;
+	exit.m_shape.m_extent = Vector(4,4);
+	exit.m_exit_name = "exit_south";
+	exit.m_destination_region = "region1";
+	exit.m_destination_location = "entry_north";
 	
+	rdata.addExit(exit);
+	
+	/*
+	rdata.m_dimx = DIMX;
+	rdata.m_dimy = DIMY;
+	rdata.m_complexity = 0.4;
+	rdata.m_granularity = 8;
+	rdata.m_area_percent = 0.35;
+	rdata.m_id = 1;
+	rdata.m_name = "region1";
+	
+	rdata.addEnvironment(0.2,"meadow");
+	rdata.addEnvironment(1.0,"hills");
+	
+	rdata.m_exit_directions[NORTH] = true;
+	rdata.m_exit_directions[SOUTH] = false;
+	rdata.m_exit_directions[WEST] = false;
+	rdata.m_exit_directions[EAST] = false;
+	*/
 	ObjectFactory::init();
+	srand(1000);
 	
 	MapGenerator::createMapData(&mdata,&rdata);
 	MapGenerator::createBaseMap(&mdata,&rdata);
@@ -228,10 +256,10 @@ void DisplayFunc () {
 			glColor3f(col[0],col[1],col[2]);
 			glBegin(GL_QUADS);
 			
-			glVertex3f(i-CENTERX,j-CENTERY,0);
-			glVertex3f(i-CENTERX+1,j-CENTERY,0);
-			glVertex3f(i-CENTERX+1,j-CENTERY+1,0);
-			glVertex3f(i-CENTERX,j-CENTERY+1,0);
+			glVertex3f(i-CENTERX,CENTERY-j,0);
+			glVertex3f(i-CENTERX+1,CENTERY-j,0);
+			glVertex3f(i-CENTERX+1,CENTERY-j-1,0);
+			glVertex3f(i-CENTERX,CENTERY-j-1,0);
 			
 			
 			glEnd();
@@ -288,7 +316,7 @@ void DisplayFunc () {
 		cx = (wo->getShape()->m_center.m_x)/4;
 		cy = (wo->getShape()->m_center.m_y)/4;
 
-		glTranslatef(cx-x,cy-y,0);
+		glTranslatef(cx-x,y-cy,0);
 		glRotatef( wo->getShape()->m_angle*180/3.141,0,0,1);
 		if (wo->getShape()->m_angle !=0)
 		{

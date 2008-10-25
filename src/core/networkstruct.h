@@ -89,6 +89,11 @@ enum PackageType
 	 * \brief Informationen zur Initialisierung
 	 */
 	PTYPE_S2C_INITIALISATION,
+ 
+	/**
+	 * \brief Information, dass beim Server der Spieler die Region gewechselt hat
+	 */
+	PTYPE_S2C_REGION_CHANGED,
 };
 
 /**

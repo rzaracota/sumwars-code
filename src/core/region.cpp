@@ -140,7 +140,7 @@ Projectile* Region::getProjectile(int id)
 	}
 }
 
-bool Region::getFreePlace(Shape* shape, short layer, Vector & pos)
+bool Region::getFreePlace(Shape* shape, short layer, Vector & pos, WorldObject* omit)
 {
 	// Menge der bereits getesteten Felder
 	std::set<int> tfields;
@@ -177,7 +177,7 @@ bool Region::getFreePlace(Shape* shape, short layer, Vector & pos)
 		s.m_center = Vector(sx*c,sy*c);
 
 		res.clear();
-		getObjectsInShape(&s,&res,layer,WorldObject::FIXED,0,true);
+		getObjectsInShape(&s,&res,layer,WorldObject::FIXED,omit,true);
 
 		if (!res.empty())
 		{
@@ -188,7 +188,7 @@ bool Region::getFreePlace(Shape* shape, short layer, Vector & pos)
 
 		DEBUG5("no fixed obstacle");
 		// Testen, ob dort nicht gerade eine Kreatur steht
-		getObjectsInShape(&s,&res,layer,WorldObject::CREATURE,0,true);
+		getObjectsInShape(&s,&res,layer,WorldObject::CREATURE,omit,true);
 		if (res.empty())
 		{
 			DEBUG5("field is free");
@@ -806,7 +806,8 @@ void Region::deleteProjectile(Projectile* proj)
 
 void Region::update(float time)
 {
-
+	DEBUG5("update region %i",getId());
+	
 	DEBUG5("\nUpdate aller WeltObjekte starten\n");
 	//DEBUG("m_players %p",m_players);
 	// Iterator zum durchmustern einer solchen Liste
@@ -935,6 +936,41 @@ void Region::update(float time)
 			}
 		}
 	}
+	
+	// pruefen ob ein Spieler die Region verlassen hat
+	bool del = false;
+	for (iter = m_players->begin(); iter != m_players->end(); )
+	{
+		// Schleife ueber die Ausgaenge
+		std::list<RegionExit>::iterator eit;
+		for (eit = m_exits.begin(); eit != m_exits.end(); ++eit)
+		{
+			if (iter->second->getShape()->intersects(eit->m_shape))
+			{
+				// Spieler befindet sich im Ausgang
+				// ID der neuen Region
+				int id = World::getWorld()->getRegionId(eit->m_destination_region);
+				
+				WorldObjectMap::iterator iter2 = iter;
+				iter ++;
+				del = true;
+				
+				// Spieler aus der Region entfernen
+				WorldObject* pl = iter2->second;
+				deleteObject(pl);
+				
+				// Spieler in die neue Region einfuegen
+				World::getWorld()->insertPlayerIntoRegion(pl, id, eit->m_destination_location);
+				
+				break;
+			}
+		}
+		if (del == false)
+		{
+			++iter;
+		}
+		del = false;
+	}
 }
 
 void Region::getRegionData(CharConv* cv)
@@ -943,6 +979,12 @@ void Region::getRegionData(CharConv* cv)
 	cv->toBuffer((short) m_dimx);
 	cv->toBuffer((short) m_dimy);
 
+	// Name der Region
+	char stmp[21];
+	stmp[20] = '\0';
+	strncpy(stmp,m_name.c_str(),20);
+	cv->toBuffer(stmp,20);
+	
 	// Tiles eintragen
 	int i,j;
 	for (i =0;i<m_dimx*2;i++)
@@ -1098,6 +1140,14 @@ void Region::createItemFromString(CharConv* cv)
 void Region::setRegionData(CharConv* cv,WorldObjectMap* players)
 {
 	// Groesse der Region wird schon vorher eingelesen
+	
+	// Name der Region
+	char stmp[21];
+	stmp[20] ='\0';
+	cv->fromBuffer(stmp,20);
+	m_name = stmp;
+	DEBUG("name of region: %s",stmp);
+	
 	// Tiles eintragen
 	int i,j;
 	for (i =0;i<m_dimx*2;i++)
@@ -1435,4 +1485,12 @@ Vector Region::getLocation(LocationName name)
 	
 	return it->second;
 }
+
+void Region::addExit(RegionExit exit)
+{
+	exit.m_shape.m_center = getLocation(exit.m_exit_name);
+	m_exits.push_back(exit);
+}
+
+
 

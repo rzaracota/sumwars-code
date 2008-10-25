@@ -89,14 +89,13 @@ bool World::init()
 	
 	RegionData* rdata = new RegionData;
 		
-		// Karte generieren
 	rdata->m_dimx = 64;
 	rdata->m_dimy = 64;
 	rdata->m_complexity = 0.4;
 	rdata->m_granularity = 8;
 	rdata->m_area_percent = 0.35;
 	rdata->m_id = 0;
-	rdata->m_name = "test";
+	rdata->m_name = "region0";
 	
 	rdata->addEnvironment(0.6,"meadow");
 	rdata->addEnvironment(1.0,"hills");
@@ -106,7 +105,46 @@ bool World::init()
 	rdata->m_exit_directions[WEST] = false;
 	rdata->m_exit_directions[EAST] = true;
 	
+	RegionExit exit;
+	exit.m_shape.m_type = Shape::RECT;
+	exit.m_shape.m_extent = Vector(4,4);
+	exit.m_exit_name = "exit_south";
+	exit.m_destination_region = "region1";
+	exit.m_destination_location = "entry_north";
+	
+	rdata->addExit(exit);
+	
 	registerRegionData(rdata,0);
+	
+	
+	
+	rdata = new RegionData;
+		
+	rdata->m_dimx = 32;
+	rdata->m_dimy = 32;
+	rdata->m_complexity = 0.4;
+	rdata->m_granularity = 8;
+	rdata->m_area_percent = 0.35;
+	rdata->m_id = 1;
+	rdata->m_name = "region1";
+	
+	rdata->addEnvironment(0.2,"meadow");
+	rdata->addEnvironment(1.0,"hills");
+	
+	rdata->m_exit_directions[NORTH] = true;
+	rdata->m_exit_directions[SOUTH] = false;
+	rdata->m_exit_directions[WEST] = false;
+	rdata->m_exit_directions[EAST] = false;
+	
+	exit.m_shape.m_type = Shape::RECT;
+	exit.m_shape.m_extent = Vector(4,4);
+	exit.m_exit_name = "exit_north";
+	exit.m_destination_region = "region0";
+	exit.m_destination_location = "entry_south";
+	
+	rdata->addExit(exit);
+	
+	registerRegionData(rdata,1);
 	
 	return true;
 }
@@ -114,11 +152,12 @@ bool World::init()
 
 void World::createRegion(short region)
 {
+	
+	
 	DEBUG("creating region %i",region);
-	int type = 2;
+	int type = 1;
 	if (type==1)
 	{
-		
 		RegionData* rdata;
 		std::map<int, RegionData*>::iterator it;
 		it = m_region_data.find(region);
@@ -128,13 +167,15 @@ void World::createRegion(short region)
 		}
 		rdata = it->second;
 		
+		srand(1000);
+		
 		Region* reg = MapGenerator::createRegion(rdata);
 		DEBUG("region created %p for id %i",reg,region);
 		insertRegion(reg,region);
 	}
 	else if(type==2)
 	{
-		Region* reg = new Region(25,25,region,"test");
+		Region* reg = new Region(25,25,region,"region0");
 		insertRegion(reg,region);
 
 
@@ -390,24 +431,22 @@ Region* World::getRegion(int rid)
  	return 0;
 }
 
-Region* World::getRegion(std::string name)
+int World::getRegionId(std::string name)
 {
-	std::map<std::string,Region*>::iterator it;
-	it = m_name_regions.find(name);
+	std::map<std::string,int>::iterator it;
+	it = m_region_name_id.find(name);
 	
-	if (it != m_name_regions.end())
+	if (it != m_region_name_id.end())
 	{
 		return it->second;
 	}
-	return 0;
+	return -1;
 }
 
 void World::insertRegion(Region* region, int rnr)
 {
 	DEBUG("inserting region %i %s %p",rnr, region->getName().c_str(),region);
-	m_regions.insert(std::make_pair(rnr,region));
-	m_name_regions.insert(std::make_pair(region->getName(),region));
-	
+	m_regions.insert(std::make_pair(rnr,region));	
 	
 }
 
@@ -528,6 +567,7 @@ bool World::insertPlayer(WorldObject* player, int slot)
 
 bool World::insertPlayerIntoRegion(WorldObject* player, short region, LocationName loc)
 {
+	
 	Region* reg = getRegion(region);
 
 	// Testen ob alle Daten vorhanden sind
@@ -537,18 +577,27 @@ bool World::insertPlayerIntoRegion(WorldObject* player, short region, LocationNa
 		data_missing =1;
 	}
 
+	player->getGridLocation()->m_region = region;
 
 
-	// Serverseite: Region erzeugen
 	if (player->getState() != WorldObject::STATE_ENTER_REGION)
 	{
+		// Spieler kann noch nicht in die Region eingefuegt werden
+		
+		
 		if (m_server)
 		{
+			// Ort zwischenspeichern
+			m_region_enter_loc[player->getId()] = loc;
+	
+			// Wenn die Region noch nicht existiert: erzeugen
 			if (data_missing !=0)
 			{
 				createRegion(region);
 			}
 
+			// ein lokaler Spieler kann jetzt in die erzeugte region
+			// bei einem Client muss dieser erst noch die Daten anfordern die ihm fehlen
 			if (player == m_local_player)
 			{
 				// Spieler in die Region einfuegen
@@ -557,6 +606,25 @@ bool World::insertPlayerIntoRegion(WorldObject* player, short region, LocationNa
 			}
 			else
 			{
+				if (player->getState() !=WorldObject::STATE_REGION_DATA_WAITING)
+				{
+					// den Client benachrichtigen, dass sein Spieler die Region gewechselt hat
+					CharConv msg;
+					PackageHeader header;
+					header.m_content = PTYPE_S2C_REGION_CHANGED;
+					header.m_number =region;
+					header.toString(&msg);
+					
+					WorldObjectMap::iterator it;
+					for (it = m_player_slots->begin(); it != m_player_slots->end(); it++)
+					{
+						if (it->second == player)
+						{
+							m_network->pushSlotMessage(msg.getBitStream(), it->first);
+						}
+					}
+					
+				}
 				// Auf Datenanfrage seitens des Client warten
 				player->setState(WorldObject::STATE_REGION_DATA_WAITING);
 				DEBUG("waiting for a client data request");
@@ -575,6 +643,7 @@ bool World::insertPlayerIntoRegion(WorldObject* player, short region, LocationNa
 			}
 			else
 			{
+				DEBUG("player %i region %i data %i",player->getId(), region, data_missing);
 				if (data_missing != 0)
 				{
 					// Region unbekannt, ignorieren
@@ -588,7 +657,12 @@ bool World::insertPlayerIntoRegion(WorldObject* player, short region, LocationNa
 			}
 
 		}
-		return true;
+		
+		// auf Serverseite muss jetzt eventuell auf die Erzeugung der Region gewartet werden
+		if (m_server)
+		{
+			return true;
+		}
 	}
 
 	if (player->getState() == WorldObject::STATE_ENTER_REGION)
@@ -598,12 +672,17 @@ bool World::insertPlayerIntoRegion(WorldObject* player, short region, LocationNa
 		
 		if (m_server)
 		{
-			pos = reg->getLocation(loc);
+			pos = reg->getLocation(m_region_enter_loc[player->getId()] );
+			m_region_enter_loc.erase(player->getId());
+			
 		}
 		DEBUG("entry position %f %f",pos.m_x, pos.m_y);
-		reg->getFreePlace(player->getShape(),player->getLayer() , pos);
-		reg->insertObject(player, pos,region);
+		reg->getFreePlace(player->getShape(),player->getLayer() , pos, player);
+		reg->insertObject(player, pos,player->getShape()->m_angle);
 		player->setState(WorldObject::STATE_ACTIVE);
+		
+		// bisheriges Kommando abbrechen
+		static_cast<Creature*>(player)->clearCommand();
 
 		if (m_server)
 		{
@@ -1108,7 +1187,7 @@ void World::updatePlayers()
 					Region* reg = getRegion(headerp.m_number);
 					if (reg ==0)
 					{
-						reg = new Region(dimx,dimy,headerp.m_number,"test");
+						reg = new Region(dimx,dimy,headerp.m_number,"");
 					}
 					else
 					{
@@ -1136,6 +1215,19 @@ void World::updatePlayers()
 					m_players->clear();
 					m_local_player->setId(id);
 					insertPlayer(m_local_player, LOCAL_SLOT);
+				}
+				
+				if (headerp.m_content == PTYPE_S2C_REGION_CHANGED)
+				{
+					DEBUG("notified that region changed to %i",headerp.m_number);
+					// der lokale Spieler hat die Region gewechselt
+					// fehlende Daten anfordern
+					if (m_local_player->getRegion()!=0)
+					{
+						m_local_player->getRegion()->deleteObject(m_local_player);
+					}
+					m_local_player->setState(WorldObject::STATE_REGION_DATA_REQUEST);
+					m_local_player->getGridLocation()->m_region = headerp.m_number;
 				}
 
 				if (headerp.m_content == PTYPE_S2C_EVENT)
@@ -1205,6 +1297,7 @@ void World::updatePlayers()
 				}
 
 				// Events der Region in der der Spieler ist
+				bool ret;
 				if (reg !=0)
 				{
 					for (lt = reg->getEvents()->begin(); lt != reg->getEvents()->end(); ++lt)
@@ -1212,9 +1305,12 @@ void World::updatePlayers()
 						msg = new CharConv;
 
 						header.toString(msg);
-						writeEvent(reg,&(*lt),msg);
+						ret = writeEvent(reg,&(*lt),msg);
 
-						m_network->pushSlotMessage(msg->getBitStream(),slot);
+						if (ret)
+						{
+							m_network->pushSlotMessage(msg->getBitStream(),slot);
+						}
 						delete msg;
 					}
 				}
@@ -1228,7 +1324,7 @@ void World::updatePlayers()
 	}
 }
 
-void World::writeEvent(Region* region,Event* event, CharConv* cv)
+bool World::writeEvent(Region* region,Event* event, CharConv* cv)
 {
 	event->toString(cv);
 
@@ -1249,7 +1345,12 @@ void World::writeEvent(Region* region,Event* event, CharConv* cv)
 		{
 
 			object =region->getObject(event->m_id);
-			object->writeEvent(event,cv);
+			if (object !=0)
+			{
+				object->writeEvent(event,cv);
+			}
+			else
+				return false;
 
 		}
 
@@ -1262,48 +1363,76 @@ void World::writeEvent(Region* region,Event* event, CharConv* cv)
 		if (event->m_type == Event::PROJECTILE_STAT_CHANGED)
 		{
 			proj = region->getProjectile(event->m_id);
-			proj->writeEvent(event,cv);
+			if (proj !=0)
+			{
+				proj->writeEvent(event,cv);
+			}
+			else
+				return false;
 		}
 
 		if (event->m_type == Event::ITEM_DROPPED)
 		{
 			DropItem* di;
 			di = region->getDropItem(event->m_id);
-			cv->toBuffer(di->m_x);
-			cv->toBuffer(di->m_y);
-			di->m_item->toString(cv);
+			if (di !=0)
+			{
+				cv->toBuffer(di->m_x);
+				cv->toBuffer(di->m_y);
+				di->m_item->toString(cv);
+			}
+			else
+				return false;
 		}
 	}
 
 	if (event->m_type == Event::PLAYER_CHANGED_REGION)
 	{
+		
 		object = (*m_players)[event->m_id];
-		cv->toBuffer(object->getShape()->m_center.m_x);
-		cv->toBuffer(object->getShape()->m_center.m_y);
+		if (object !=0)
+		{
+			cv->toBuffer(object->getShape()->m_center.m_x);
+			cv->toBuffer(object->getShape()->m_center.m_y);
+		}
+		else
+			return false;
 
 	}
 
 	if (event->m_type == Event::PLAYER_ITEM_EQUIPED)
 	{
 		object = (*m_players)[event->m_id];
-		cv->toBuffer<short>((short) event->m_data);
-		static_cast<Player*>(object)->getEquipement()->getItem(event->m_data)->toString(cv);
+		if (object != 0)
+		{
+			cv->toBuffer<short>((short) event->m_data);
+			static_cast<Player*>(object)->getEquipement()->getItem(event->m_data)->toString(cv);
+		}
+		else
+			return false;
+		
 	}
 
 	if (event->m_type == Event::PLAYER_ITEM_PICKED_UP)
 	{
 		object = (*m_players)[event->m_id];
-		cv->toBuffer<short>((short) event->m_data);
-		if (static_cast<Player*>(object)->getEquipement()->getItem(event->m_data) ==0)
-			ERRORMSG("no item at pos %i",event->m_data);
-		static_cast<Player*>(object)->getEquipement()->getItem(event->m_data)->toStringComplete(cv);
-
+		if (object != 0)
+		{
+			cv->toBuffer<short>((short) event->m_data);
+			if (static_cast<Player*>(object)->getEquipement()->getItem(event->m_data) ==0)
+				ERRORMSG("no item at pos %i",event->m_data);
+			static_cast<Player*>(object)->getEquipement()->getItem(event->m_data)->toStringComplete(cv);
+		}
+		else
+			return false;
+		
 	}
 
-	if (event->m_type == Event:: Event::ITEM_REMOVED)
+	if (event->m_type ==  Event::ITEM_REMOVED)
 	{
 		DEBUG("removing item %i",event->m_id);
 	}
+	return true;
 }
 
 
@@ -1334,7 +1463,7 @@ bool World::processEvent(Region* region,CharConv* cv)
 			else
 			{
 				// Event erhalten zu dem kein Objekt gehoert
-				DEBUG("object %i for event does not exist",event.m_id);
+				DEBUG5("object %i for event does not exist",event.m_id);
 				return false;
 			}
 			break;
@@ -1382,13 +1511,22 @@ bool World::processEvent(Region* region,CharConv* cv)
 
 
 		case Event::PLAYER_CHANGED_REGION:
+			DEBUG("received event player %i changed region %i",event.m_id, event.m_data);
+
 			if (m_players->count (event.m_id)>0)
 			{
 				object = (*m_players)[event.m_id];
+				
+				// Spieler aus seiner bisherigen Region entfernen
+				if (object->getRegion() !=0)
+				{
+					object->getRegion()->deleteObject(object);
+				}
+				object->getGridLocation()->m_region = event.m_data;
 
 				cv->fromBuffer(object->getShape()->m_center.m_x);
 				cv->fromBuffer(object->getShape()->m_center.m_y);
-
+				
 				insertPlayerIntoRegion(object,event.m_data);
 			}
 			break;

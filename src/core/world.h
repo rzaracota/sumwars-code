@@ -227,13 +227,13 @@ public:
 	void updatePlayers();
 	
 	/**
-	 * \fn void writeEvent(Region* region, Event* event, CharConv* cv)
+	 * \fn bool writeEvent(Region* region, Event* event, CharConv* cv)
 	 * \brief Schreib die Daten zu dem Event in den Bitstream
 	 * \param region Region in der das Event aufgetreten ist
 	 * \param event Event das geschrieben wird
 	 * \param cv Bitstream zum Schreiben
 	 */
-	void writeEvent(Region* region, Event* event, CharConv* cv);
+	bool writeEvent(Region* region, Event* event, CharConv* cv);
 	
 	/**
 	 * \fn bool processEvent(Region* region,CharConv* cv)
@@ -270,11 +270,11 @@ public:
 	Region* getRegion(int rid);
 	
 	/**
-	 * \fn Region* getRegion(std::string name)
-	 * \brief Gibt die Region mit dem angegebenen Name aus
+	 * \fn int getRegion(std::string name)
+	 * \brief Gibt die ID Region mit dem angegebenen Name aus
 	 * \param name Name der Region
 	 */
-	Region* getRegion(std::string name);
+	int getRegionId(std::string name);
 
 	/**
 	 * \fn Network* getNetwork()
@@ -380,6 +380,7 @@ public:
 	void registerRegionData(RegionData* data, int id)
 	{
 		m_region_data.insert(std::make_pair(id,data));
+		m_region_name_id.insert(std::make_pair(data->m_name,id));
 	}
 	
 	static World* getWorld()
@@ -425,10 +426,10 @@ private:
 	std::map<int, Region*> m_regions;
 	
 	/**
-	 * \var std::map<std::string, Region*> m_name_regions
-	 * \brief Speichert die Regionen sortiert nach Name
+	 * \var std::map<std::string, int> m_region_name_id
+	 * \brief Bildet den Name einer Region auf die ID ab
 	 */
-	std::map<std::string, Region*> m_name_regions;
+	std::map<std::string, int> m_region_name_id;
 	
 	/**
 	 * \var std::map<int, RegionData*> m_region_data
@@ -504,6 +505,12 @@ private:
 	 * \brief ist true, wenn der betreffende Timer gerade in dem Tick abgelaufen ist
 	 */
 	bool m_timer_limit[3];
+	
+	/**
+	 * \fn std::map<int,LocationName> m_region_enter_loc
+	 * \brief Wenn ein Spieler nicht sofort in eine Region eingefuegt werden kann, wird hier der Ort zu einfuegen zwischengespeichert
+	 */
+	std::map<int,LocationName> m_region_enter_loc;
 	
 	
 	/**

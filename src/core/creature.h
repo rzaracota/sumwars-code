@@ -277,6 +277,12 @@ public:
 	void calcWalkDir(Vector goal,WorldObject* goalobj);
 	
 	/**
+	 * \fn void clearCommand()
+	 * \brief Bricht das aktuelle Kommando ab
+	 */
+	void clearCommand();
+	
+	/**
 	 * \fn virtual void toString(CharConv* cv)
 	 * \brief Konvertiert das Objekt in einen String und schreibt ihn in der Puffer
 	 * \param cv Ausgabepuffer
