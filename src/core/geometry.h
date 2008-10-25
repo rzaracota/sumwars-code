@@ -135,19 +135,19 @@ struct Vector
 	}
 	
 	/**
-	 * \fn float operator*=(float mul)
+	 * \fn void operator*=(float mul)
 	 * \brief Skaliert den Vektor
 	 * \param mul Skalierungsfaktor
 	 */
-	float operator*=(float mul)
+	void operator*=(float mul)
 	{
 		m_x *= mul;
 		m_y *= mul;
-	 
+	 	
 	}
 	
 	/**
-	/* \fn void operator=(Vector other)
+	 * \fn void operator=(Vector other)
 	 * \brief Kopieroperator
 	 * \param other zweiter Operand
 	 */
@@ -218,11 +218,11 @@ struct Vector
 	}
 	
 	/**
-	 * \fn float rotate(float angle)
+	 * \fn void rotate(float angle)
 	 * \brief rotiert den Vektor um den angegebenen Winkel
 	 * \param angle Rotationswinkel
 	 */
-	float rotate(float angle)
+	void rotate(float angle)
 	{
 		float x = m_x*cos(angle) - m_y*sin(angle);
 		float y = m_x*sin(angle) + m_y*cos(angle);
@@ -247,7 +247,7 @@ struct Line
 	Vector m_start;
 	
 	/**
-	/* \var Vector m_end
+	 * \var Vector m_end
 	 * \brief Endpunkt der Linie
 	 */
 	Vector m_end;

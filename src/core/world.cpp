@@ -84,6 +84,30 @@ bool World::init()
 		return false;
 	}
 
+	
+	// TODO: Daten werden aktuell fest gesetzt
+	
+	RegionData* rdata = new RegionData;
+		
+		// Karte generieren
+	rdata->m_dimx = 64;
+	rdata->m_dimy = 64;
+	rdata->m_complexity = 0.4;
+	rdata->m_granularity = 8;
+	rdata->m_area_percent = 0.35;
+	rdata->m_id = 0;
+	rdata->m_name = "test";
+	
+	rdata->addEnvironment(0.6,"meadow");
+	rdata->addEnvironment(1.0,"hills");
+	
+	rdata->m_exit_directions[NORTH] = true;
+	rdata->m_exit_directions[SOUTH] = true;
+	rdata->m_exit_directions[WEST] = false;
+	rdata->m_exit_directions[EAST] = true;
+	
+	registerRegionData(rdata,0);
+	
 	return true;
 }
 
@@ -95,33 +119,23 @@ void World::createRegion(short region)
 	if (type==1)
 	{
 		
-		RegionData rdata;
+		RegionData* rdata;
+		std::map<int, RegionData*>::iterator it;
+		it = m_region_data.find(region);
+		if (it == m_region_data.end())
+		{
+			ERRORMSG("no data for region %i",region);
+		}
+		rdata = it->second;
 		
-		// Karte generieren
-		rdata.m_dimx = 64;
-		rdata.m_dimy = 64;
-		rdata.m_complexity = 0.4;
-		rdata.m_granularity = 8;
-		rdata.m_area_percent = 0.35;
-		rdata.m_id = 0;
-		rdata.m_name = "test";
-	
-		rdata.addEnvironment(0.6,"meadow");
-		rdata.addEnvironment(1.0,"hills");
-	
-		rdata.m_exit_directions[NORTH] = true;
-		rdata.m_exit_directions[SOUTH] = true;
-		rdata.m_exit_directions[WEST] = false;
-		rdata.m_exit_directions[EAST] = true;
-		
-		Region* reg = MapGenerator::createRegion(&rdata);
+		Region* reg = MapGenerator::createRegion(rdata);
 		DEBUG("region created %p for id %i",reg,region);
-		short rid = insertRegion(reg,region);
+		insertRegion(reg,region);
 	}
 	else if(type==2)
 	{
 		Region* reg = new Region(25,25,region,"test");
-		short rid = insertRegion(reg,region);
+		insertRegion(reg,region);
 
 
 		// Umgebungen erstellen
@@ -388,7 +402,7 @@ Region* World::getRegion(std::string name)
 	return 0;
 }
 
-short World::insertRegion(Region* region, int rnr)
+void World::insertRegion(Region* region, int rnr)
 {
 	DEBUG("inserting region %i %s %p",rnr, region->getName().c_str(),region);
 	m_regions.insert(std::make_pair(rnr,region));
@@ -512,7 +526,7 @@ bool World::insertPlayer(WorldObject* player, int slot)
 }
 
 
-bool World::insertPlayerIntoRegion(WorldObject* player, short region)
+bool World::insertPlayerIntoRegion(WorldObject* player, short region, LocationName loc)
 {
 	Region* reg = getRegion(region);
 
@@ -533,7 +547,6 @@ bool World::insertPlayerIntoRegion(WorldObject* player, short region)
 			if (data_missing !=0)
 			{
 				createRegion(region);
-				return;
 			}
 
 			if (player == m_local_player)
@@ -575,16 +588,19 @@ bool World::insertPlayerIntoRegion(WorldObject* player, short region)
 			}
 
 		}
+		return true;
 	}
 
 	if (player->getState() == WorldObject::STATE_ENTER_REGION)
 	{
 		// Daten sind vollständig
 		Vector pos = player->getShape()->m_center;
-		// TODO
-		pos = reg->getLocation("entry_south");
-		DEBUG("entry position %f %f",pos.m_x, pos.m_y);
 		
+		if (m_server)
+		{
+			pos = reg->getLocation(loc);
+		}
+		DEBUG("entry position %f %f",pos.m_x, pos.m_y);
 		reg->getFreePlace(player->getShape(),player->getLayer() , pos);
 		reg->insertObject(player, pos,region);
 		player->setState(WorldObject::STATE_ACTIVE);
@@ -659,7 +675,7 @@ void World::handleSavegame(CharConv *cv, int slot)
 		pl->getGridLocation()->m_region =0;
 		pl->getShape()->m_center = Vector(9,10);
 
-		insertPlayerIntoRegion(pl,pl->getGridLocation()->m_region);
+		insertPlayerIntoRegion(pl,pl->getGridLocation()->m_region, "entry_south");
 
 
 		if (m_server)
@@ -933,12 +949,17 @@ void World::updatePlayers()
 		}
 
 		// Spieler, deren Regionen komplett geladen wurden aktivieren
-		if (pl->getState() == WorldObject::STATE_ENTER_REGION && pl->getRegion() !=0 )
+		if (m_server)
 		{
-			insertPlayerIntoRegion(pl,pl->getGridLocation()->m_region);
-			pl->setState(WorldObject::STATE_ACTIVE);
+			if (pl->getState() == WorldObject::STATE_ENTER_REGION && pl->getRegion() !=0 )
+			{
+				// TODO: Ort angeben
+				insertPlayerIntoRegion(pl,pl->getGridLocation()->m_region, "entry_south");
+				pl->setState(WorldObject::STATE_ACTIVE);
+			}
 		}
-
+		
+		
 		// Wenn aktuelle Instanz Server ist:
 		// Daten von allen verbundenen Client annehmen und verarbeiten
 		if (m_server && slot != LOCAL_SLOT)
@@ -1368,11 +1389,7 @@ bool World::processEvent(Region* region,CharConv* cv)
 				cv->fromBuffer(object->getShape()->m_center.m_x);
 				cv->fromBuffer(object->getShape()->m_center.m_y);
 
-				// Lokaler Spieler wird schon vorher in die Region eingefuegt
-				if (object != m_local_player)
-				{
-					insertPlayerIntoRegion(object,event.m_data);
-				}
+				insertPlayerIntoRegion(object,event.m_data);
 			}
 			break;
 

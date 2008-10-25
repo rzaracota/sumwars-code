@@ -73,7 +73,6 @@ bool Archer::init ()
 	bas->m_abilities[2] = 0xffffff;
 
 	Item* si;
-	Equipement* equ = getEquipement();
 	
 	si = ItemFactory::createItem(Item::WEAPON,"wood_bow");
 	insertItem(si);

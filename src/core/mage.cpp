@@ -66,7 +66,6 @@ bool Mage::init ()
 	m_base_action = Action::MAGIC_ATTACK;
 	
 	Item* si;
-	Equipement* equ = getEquipement();
 	
 	si = ItemFactory::createItem(Item::WEAPON,"ice_wand");
 	insertItem(si);

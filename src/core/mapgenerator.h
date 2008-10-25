@@ -7,6 +7,7 @@
 #include <iomanip>
 
 #include "region.h"
+#include "random.h"
 #include <queue>
 
 #ifndef PI

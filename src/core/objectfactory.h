@@ -125,7 +125,7 @@ class ObjectGroupTemplate
 			float m_probability;
 			
 			/**
-			/* \var bool m_prob_angle
+			 * \var bool m_prob_angle
 			 * \brief Wenn auf true gesetzt, wird der winkel zufaellig gesetzt
 			 */
 			bool m_prob_angle;
@@ -317,7 +317,6 @@ class ObjectFactory
 };
 
 
-#include "world.h"
 
 #endif
 

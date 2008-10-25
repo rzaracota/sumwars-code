@@ -300,8 +300,6 @@ bool Region::addObjectsOnLineFromGridunit(Line& line, Gridunit* gu, WorldObjectL
 	WorldObject* wo=0;
 	WorldObject** arr=0;
 	Shape* s=0;
-	short groups[3] = {WorldObject::CREATURE, group == WorldObject::FIXED, group == WorldObject::DEAD};
-	
 	
 	arr = gu->getObjects((WorldObject::Group) group);
 
@@ -371,7 +369,6 @@ bool Region::getObjectsInShape( Shape* shape,  WorldObjectList* result,short lay
 		int i,j;
 		Gridunit* gu=0;
 		// durchmustere alle 4*4 Felder die von dem Suchrechteck plus 4 Felder bedeckt werden
-		float xe,ye;
 		
 		// Maximale Ausdehnung der Flaeche in Richtung der Koordinatenaxen
 		Vector ext = shape->getAxisExtent();
@@ -646,7 +643,7 @@ int Region::createObject(WorldObject::TypeInfo::ObjectType type, ObjectTemplateT
 }
 
 
-int Region::createObjectGroup(ObjectGroupTemplateName templname, Vector position, float angle)
+void Region::createObjectGroup(ObjectGroupTemplateName templname, Vector position, float angle)
 {
 	// Template aus der Datenbank heraussuchen
 	std::map<ObjectGroupTemplateName, ObjectGroupTemplate*>::iterator it;
@@ -1016,8 +1013,6 @@ void Region::createObjectFromString(CharConv* cv, WorldObjectMap* players)
 	int id;
 
 	WorldObject* obj;
-	float x,y;
-
 
 	DEBUG5("read offset: %i",cv->getBitStream()->GetReadOffset());
 
@@ -1055,7 +1050,6 @@ void Region::createProjectileFromString(CharConv* cv)
 	char type,frac;
 	int id;
 	Projectile* proj;
-	float x,y;
 
 	cv->fromBuffer(type);
 	cv->fromBuffer(frac);

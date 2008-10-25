@@ -46,7 +46,7 @@ class RegionData
 		short m_id;
 		
 		/**
-		/* \var std::string m_name
+		 * \var std::string m_name
 		 * \brief Name der Region
 		 */
 		std::string m_name;
@@ -199,13 +199,13 @@ class Region
 		int createObject(WorldObject::TypeInfo::ObjectType type, ObjectTemplateType generictype, Vector pos, float angle=0, bool collision_test =false);
 		
 		/**
-		 * \fn int createObjectGroup(ObjectGroupTemplateName name, Vector position, float angle=0)
+		 * \fn void createObjectGroup(ObjectGroupTemplateName name, Vector position, float angle=0)
 		 * \brief erzeugt eine Gruppe von Objekten und fuegt sie in die Region ein
 		 * \param templname Name des Templates aus dem die Gruppe erzeugt wird
 		 * \param position Ort an dem die Gruppe eingefuegt wird
 		 * \param angle Drehwinkel mit dem die Gruppe eingefuegt wird
 		 */
-		int createObjectGroup(ObjectGroupTemplateName templname, Vector position, float angle=0);
+		void createObjectGroup(ObjectGroupTemplateName templname, Vector position, float angle=0);
 
 		/**
 		 * \fn bool getObjectsInShape( Shape* shape,  WorldObjectList* result,short layer=WorldObject::LAYER_ALL, short group = WorldObject::GROUP_ALL, WorldObject* omit=0, bool empty_test = false );

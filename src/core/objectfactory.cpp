@@ -6,6 +6,7 @@
 #include "priest.h"
 #include "fixedobject.h"
 #include "monster.h"
+#include "world.h"
 
 
 

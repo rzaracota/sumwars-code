@@ -131,15 +131,17 @@ public:
 	 * \brief Fuegt eine neue Region in die Welt ein
 	 * \param region Einzufuegende Region
 	 * \param rnr ID der Region
-	 * \return gibt die ID der Region an, die an allen Objekten in der Region gespeichert wird. Im Falle eines Fehlers wird -1 zurueckgegeben.
 	 */
-	short insertRegion(Region* region, int rnr);
+	void insertRegion(Region* region, int rnr);
 	
 	/**
-	 * \fn bool insertPlayerIntoRegion(WorldObject* player, short region)
+	 * \fn bool insertPlayerIntoRegion(WorldObject* player, short region, LocationName loc="")
+	 * \param player der Spieler
+	 * \param region ID der Region
+	 * \param loc Ort an dem der Spieler eingefuegt wird
 	 * \brief Versucht einen Spieler in eine Region einzufuegen
 	 */
-	bool insertPlayerIntoRegion(WorldObject* player, short region);
+	bool insertPlayerIntoRegion(WorldObject* player, short region, LocationName loc ="");
 
 
 
@@ -369,6 +371,17 @@ public:
 		return m_timer_limit[i];
 	}
 	
+	/**
+	 * \fn void registerRegionData(RegionData* data, int id)
+	 * \brief Registriert Daten fuer den Aufbau einer Region
+	 * \param data Daten
+	 * \param id ID der Region
+	 */
+	void registerRegionData(RegionData* data, int id)
+	{
+		m_region_data.insert(std::make_pair(id,data));
+	}
+	
 	static World* getWorld()
 	{
 		return m_world;
@@ -416,6 +429,12 @@ private:
 	 * \brief Speichert die Regionen sortiert nach Name
 	 */
 	std::map<std::string, Region*> m_name_regions;
+	
+	/**
+	 * \var std::map<int, RegionData*> m_region_data
+	 * \brief Daten fuer die Erzeugung der Regionen sortiert nach ID
+	 */
+	std::map<int, RegionData*> m_region_data;
 	
 
 	/**

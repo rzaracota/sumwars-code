@@ -52,6 +52,15 @@ class Network
 		Network();
 		
 		/**
+		 * \fn virtual ~Network()
+		 * \brief Destruktor
+		 */
+		virtual ~Network()
+		{
+			
+		}
+		
+		/**
 		 * \fn NetStatus init( int auth_port )
 		 * \brief Initialisiert den Server, oeffnet die Netzwerkschnittstelle
 		 * \param auth_port gibt den Port an, auf dem sich Clients anmelden koennen

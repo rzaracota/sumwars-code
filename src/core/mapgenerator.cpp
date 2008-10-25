@@ -238,7 +238,7 @@ void MapGenerator::createBorder(MapData* mdata, RegionData* rdata)
 {
 	// Delta zu Nachbarfeldern
 	int nb[4][2] = {{-1,0},{1,0},{0,-1},{0,1}};
-	int dnb[8][2] = {{-1,0},{1,0},{0,-1},{0,1},{-1,1},{1,1},{1,-1},{-1,-1}};
+	// int dnb[8][2] = {{-1,0},{1,0},{0,-1},{0,1},{-1,1},{1,1},{1,-1},{-1,-1}};
 	
 	// Matrix die angibt, welche 8x8 Felder blockiert sind
 	// Felder werden markiert, wenn alle 4x4 Unterfelder blockiert sind
@@ -427,9 +427,8 @@ void MapGenerator::createPerlinNoise(Matrix2d<float> *data, int dimx, int dimy,i
 	tmp->clear();
 	float* weightx = new float[dimx];
 	float* weighty = new float[dimy];
-	int freqy,px,py,x,y;
+	int freqy,px,py;
 	float ampl =1;
-	float amp = ampl;
 	
 	// Perlin Noise Algorithmus
 	for (int freq = startfreq; freq <= dimx;freq*=2)

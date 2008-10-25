@@ -114,10 +114,6 @@ void Monster::updateCommand()
 	// eigene Koordinaten
 	Vector &pos = getShape()->m_center;
 	
-	// Nummer der Region
-	short rid = getGridLocation()->m_region;
-
-
 	// moegliche Ziele ermitteln
 
 	// Liste der Spieler

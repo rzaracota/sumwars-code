@@ -228,7 +228,7 @@ struct ClientCommand
 	Action::ActionType m_action;
 
 	/**
-	/* \var Vector m_goal
+	 * \var Vector m_goal
 	 * \brief Zielpunkt der Aktion
 	 */
 	Vector m_goal;
@@ -250,19 +250,19 @@ struct ClientCommand
 	short m_direction;
 
 	/**
-	 * \fn virtual void toString(CharConv* cv)
+	 * \fn void toString(CharConv* cv)
 	 * \brief Konvertiert das Objekt in einen String und schreibt ihn in der Puffer
 	 * \param cv Ausgabepuffer
 	 */
-	virtual void toString(CharConv* cv);
+	void toString(CharConv* cv);
 
 
 	/**
-	 * \fn virtual void fromString(CharConv*  buf)
+	 * \fn void fromString(CharConv*  buf)
 	 * \brief Erzeugt das Objekt aus einem String
 	 * \param cv Eingabepuffer
 	 */
-	virtual void fromString(CharConv*  cv);
+	 void fromString(CharConv*  cv);
 };
 
 /**

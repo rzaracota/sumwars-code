@@ -356,7 +356,7 @@ class MainWindow :
 	}
 
 	/**
-	/* \fn static void registerItemImage(Item::Subtype type, std::string image)
+	 * \fn static void registerItemImage(Item::Subtype type, std::string image)
 	 * \brief registiert ein Bild fuer ein bestimmten Itemtyp
 	 * \param type Typ des Gegenstandes
 	 * \param image Bild der Form set: ... image: ...
@@ -450,7 +450,7 @@ class MainWindow :
 	bool m_gui_hit;
 	
 	/**
-	/* \var static std::map<Item::Subtype, std::string> m_item_images
+	 * \var static std::map<Item::Subtype, std::string> m_item_images
 	 * \brief Enthaelt fuer jeden Itemtyp das passende Bild
 	 */
 	static std::map<Item::Subtype, std::string> m_item_images;

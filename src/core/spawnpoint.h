@@ -5,6 +5,7 @@
 #include "worldobject.h"
 #include "random.h"
 #include "objectfactory.h"
+#include "region.h"
 #include <list>
 
 /**

@@ -93,6 +93,15 @@ class Projectile
 	 */
 	Projectile( ProjectileType type, WorldObject::Fraction fr, int id);
 	
+	/**
+	 * \fn virtual ~Projectile()
+	 * \brief Destruktor
+	 */
+	virtual ~Projectile()
+	{
+		
+	}
+	
 /**
 	 * \fn virtual update ( float time)
 	 * \brief Aktualisiert das Projektil, nachdem eine bestimmte Zeit vergangen ist. Alle Aktionen des Objekts werden auf diesem Weg ausgeloest. 
@@ -434,7 +443,6 @@ class Projectile
  */
 typedef std::map<int,Projectile*> ProjectileMap;
 
-#include "world.h"
 
 
 #endif

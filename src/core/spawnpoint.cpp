@@ -38,7 +38,6 @@ bool Spawnpoint::update (float time)
 	m_time -= time;
 	int i;
 	WorldObject* wo;
-	float x,y;
 	bool ret;
 	Vector pos;
 	if (m_time <= 0)

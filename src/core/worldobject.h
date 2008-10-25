@@ -429,7 +429,7 @@ class WorldObject {
 	}
 	
 	/**
-	/* \fn void setLayer(short layer)
+	 * \fn void setLayer(short layer)
 	 * \brief Setzt die Ebene des Objektes
 	 * \param layer Ebene
 	 */
@@ -479,7 +479,7 @@ class WorldObject {
 	}
 	
 	/**
-	/* \fn Fraction getFraction()
+	 * \fn Fraction getFraction()
 	 * \brief Gibt die Fraktion aus
 	 */
 	Fraction getFraction()
@@ -488,7 +488,7 @@ class WorldObject {
 	}
 	
 	/**
-	/* \fn void setFraction(Fraction fr)
+	 * \fn void setFraction(Fraction fr)
 	 * \brief setzt die Fraktion
 	 * \param fr Fraktion
 	 */
@@ -576,7 +576,7 @@ class WorldObject {
 	int m_event_mask;
 	
 	/**
-	/* \var short m_layer
+	 * \var short m_layer
 	 * \brief Gibt die Ebene an, in der sich das Objekt befindet
 	 */
 	short m_layer;
@@ -647,6 +647,7 @@ private:
 };
 
 #include "damage.h"
+
 
 /**
  * Liste von WorldObject Zeigern sortiert nach ihrer ID

@@ -1578,8 +1578,6 @@ void Player::calcBaseAttrMod()
 			getBaseAttrMod()->m_attack_speed += si->m_weapon_attr ->m_dattack_speed;
 			getBaseAttrMod()->m_attack_range = si->m_weapon_attr ->m_attack_range;
 			
-			DEBUG5("attack range %f speed %f",getBaseAttrMod()->m_attack_range,getBaseAttrMod()->m_attack_speed);
-
 			if (si->m_weapon_attr ->m_dattack_speed!=0)
 			{
 				m_event_mask |= Event::DATA_ATTACK_SPEED;

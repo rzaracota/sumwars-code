@@ -566,7 +566,6 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 	s.m_type = Shape::CIRCLE;
 	s.m_radius = getShape()->m_radius;
 
-	short reg = getGridLocation()->m_region;
 	Creature* cr =0;
 
 	// Struktur fuer Basisattributmods, initialisiert mit Nullen
@@ -1456,8 +1455,6 @@ void Creature::collisionDetection(float time)
 
 void Creature::handleCollision(Shape* s2)
 {
-	float dx,dy,x1,x2,y1,y2,d;
-
 	// eigene Koordinaten
 	Vector pos = getShape()->m_center;
 	
@@ -1731,8 +1728,7 @@ void Creature::calcAction()
 			{
 				// Sturmangriff
 				DEBUG5("Charge");
-				float d;
-
+				
 				// beim ersten Mal richtung neu ausrechnen, das ist der Fall wenn der Schadensmultiplikator gleich 1 ist
 				// sonst nur beschleunigen
 				if (m_command.m_damage_mult>1)
@@ -1818,7 +1814,6 @@ void Creature::calcStatusModCommand()
 		// aktuelle Bewegungsrichtung
 		Vector v = m_speed;
 		float range = m_base_attr.m_step_length;
-		float nx,ny;
 
 		// Normieren der Bewegungsgeschwindigkeit
 		v.normalize();
@@ -2257,8 +2252,7 @@ bool Creature::update (float time)
 			s.m_type = Shape::CIRCLE;
 			s.m_radius = getShape()->m_radius+1;
 			Creature* cr;
-			short reg = getGridLocation()->m_region;
-
+			
 			// Alle Objekte im Kreis suchen
 			getRegion()->getObjectsInShape(&s, &res,LAYER_AIR,CREATURE,this);
 			for (it=res.begin();it!=res.end();++it)

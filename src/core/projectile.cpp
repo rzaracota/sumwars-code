@@ -1,4 +1,6 @@
 #include "projectile.h"
+#include "world.h"
+
 
 Region* Projectile::getRegionPtr()
 {
@@ -123,11 +125,6 @@ bool Projectile::update(float time)
 	WorldObjectList::iterator i;
 	WorldObject* hit;
 
-	// aktuelle Position
-	float x;
-	float y;
-	// zuletzt getroffenes Objekt (ID)
-	float v;
 	while (time>0)
 	{
 		hitobj.clear();
@@ -294,14 +291,10 @@ void Projectile::handleFlying(float dtime)
 	WorldObjectList hitobj;
 	WorldObjectList::iterator i;
 	WorldObject* hit;
-	float x;
-	float y;
 	Vector dir,newdir(0,0);
 	Vector sdir,hitpos,ndir;
 	Vector &pos = m_shape.m_center, newpos;
-	float d;
 	float rnew,rmin;
-	float x2,y2;
 	int lid;
 
 	if (m_type == GUIDED_ARROW)
@@ -432,7 +425,6 @@ void Projectile::handleFlying(float dtime)
 	}
 
 	DEBUG5("pos %f %f",pos.m_x, pos.m_y);
-	DEBUG5("speed %f %f time %f ",m_speed.m_x, m_speed.m_y, time);
 	
 	// neue Koordinaten nach Ablauf des Zeitquantums
 	newpos = pos + m_speed*dtime;
@@ -626,13 +618,9 @@ void Projectile::handleGrowing(float dtime)
 	WorldObjectList hitobj;
 	WorldObjectList::iterator i;
 	WorldObject* hit;
-	float x;
-	float y;
 	float rnew,rmin;
 	float rold;
 	int lid;
-	Vector& pos= m_shape.m_center;
-
 
 	rold = m_shape.m_radius;
 	// Radius erhoehen
@@ -720,7 +708,6 @@ void Projectile::handleStable(float dtime)
 	// aktuelle Position
 	Vector& pos= m_shape.m_center;
 	Vector dir;
-	float x2,y2;
 	Projectile* pr;
 
 	if (m_timer >= m_timer_limit && World::getWorld()->isServer())
