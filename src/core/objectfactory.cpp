@@ -483,11 +483,7 @@ void ObjectFactory::init()
 	fdata->m_shape.m_extent = Vector(4,4);
 	registerFixedObject("stones3",fdata);
 	
-	
-	
-	
-	
-	
+
 	// Daten fuer generische Objekte
 	
 	// Objekt Templates

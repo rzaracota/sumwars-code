@@ -487,7 +487,8 @@ bool Application::loadResources()
 	files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("items","*.xml");
 	for (it = files->begin(); it != files->end(); ++it)
 	{
-		file = "../data/items/";
+		file = it->archive->getName();
+		file += "/";
 		file += it->filename;
 		
 		ItemFactory::loadItemData(file);
@@ -500,7 +501,8 @@ bool Application::loadResources()
 	files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("monsters","*.xml");
 	for (it = files->begin(); it != files->end(); ++it)
 	{
-		file = "../data/monsters/";
+		file = it->archive->getName();
+		file += "/";
 		file += it->filename;
 		
 		ObjectFactory::loadMonsterData(file);
@@ -512,7 +514,8 @@ bool Application::loadResources()
 	files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("objects","*.xml");
 	for (it = files->begin(); it != files->end(); ++it)
 	{
-		file = "../data/objects/";
+		file = it->archive->getName();
+		file += "/";
 		file += it->filename;
 		
 		ObjectFactory::loadFixedObjectData(file);
@@ -524,7 +527,8 @@ bool Application::loadResources()
 	files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("obj_templates","*.xml");
 	for (it = files->begin(); it != files->end(); ++it)
 	{
-		file = "../data/obj_templates/";
+		file = it->archive->getName();
+		file += "/";
 		file += it->filename;
 		
 		ObjectFactory::loadObjectTemplates(file);
@@ -535,9 +539,9 @@ bool Application::loadResources()
 	files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("obj_group_templ","*.xml");
 	for (it = files->begin(); it != files->end(); ++it)
 	{
-		file = "../data/obj_group_templ/";
+		file = it->archive->getName();
+		file += "/";
 		file += it->filename;
-		
 		ObjectFactory::loadObjectGroupTemplates(file);
 		
 	}
