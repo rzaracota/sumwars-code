@@ -70,9 +70,102 @@ struct RegionExit
 class RegionData
 {
 	public:
+		
 		/**
-	 * \var short m_id
-	 * \brief Nummer der Region
+		 * \struct ObjectGroupTemplateSet
+		 * \brief Struktur fuer eine Gruppe von Objekten die mehrmals in die Region eingefuegt werden soll
+		 */
+		struct ObjectGroupTemplateSet
+		{
+			/**
+			 * \var ObjectGroupTemplateName m_group_name
+			 * \brief Name der Gruppe
+			 */
+			ObjectGroupTemplateName m_group_name;
+			
+			/**
+			 * \var int m_number
+			 * \brief Anzahl wie oft man versuchen soll, eine Gruppe eingefuegen
+			 */
+			int m_number;
+			
+			/**
+			 * \var float m_probability
+			 * \brief Wahrscheinlichkeit mit der eine Gruppe eingefuegt wird
+			 * es werden m_number viele Orte ausgewaehlt, aber fuer jeden nur mit dieser Warscheinlichkeit wirklich die Gruppe eingefuegt
+			 */
+			float m_probability;
+		};
+		
+		/**
+		 * \fn struct NamedObjectGroupTemplate
+		 * \brief Struktur fuer eine Objektgruppe deren Instanz mit einem Namen versehen werden soll
+		 */
+		struct NamedObjectGroupTemplate
+		{
+			/**
+			 * \var ObjectGroupTemplateName m_group_name
+			 * \brief Name der Gruppe
+			 */
+			ObjectGroupTemplateName m_group_name;
+			
+			/**
+			 * \var std::string m_name
+			 * \brief Name der Gruppe
+			 */
+			std::string m_name;
+		};
+		
+		
+		/**
+		 * \fn void addObjectGroupTemplate(ObjectGroupTemplateName m_group_name, int prio, int number =1, float probability=1.0)
+		 * \brief Fuegt eine neue Objektgruppe ein
+		 * \param group_name Name der Gruppe
+		 * \param prio Prioritaet der Gruppe
+		 * \param number Anzahl wie oft die Gruppe eingefuegt wird
+		 * \param probability Wahrscheinlichkeit mit der die Gruppe eingefuegt wird
+		 */
+		void addObjectGroupTemplate(ObjectGroupTemplateName group_name, int prio=0, int number =1, float probability=1.0);
+		
+		/**
+		 * \fn void  addNamedObjectGroupTemplate(ObjectGroupTemplateName group_name, std::string name, int prio=0)
+		 * \brief Fuegt eine neue Objektgruppe ein
+		 * \param group_name Name der Gruppe
+		 * \param name Name unter dem die Gruppe eingefuegt wird
+		 * \param prio Prioritaet der Gruppe
+		 */
+		void addNamedObjectGroupTemplate(ObjectGroupTemplateName group_name, std::string name, int prio=0)
+		{
+			NamedObjectGroupTemplate og;
+			og.m_name = name;
+			og.m_group_name = group_name;
+			m_named_object_groups.insert( std::make_pair( prio, og));
+		}
+		
+		/**
+		 * \fn void addEnvironment(float maxheight, EnvironmentName env)
+		 * \brief Fuegt eine neue Umgebung fuer die Region ein
+		 * \param maxheight maximale Hoehe bis zu der diese Umgebung verwendet wird
+		 * \param env Name der Umgebung
+		 */
+		void addEnvironment(float maxheight, EnvironmentName env)
+		{
+			m_environments.push_back(std::make_pair(maxheight,env));
+		}
+		
+		/**
+		 * \fn void addExit(RegionExit exit)
+		 * \brief Fuegt einen Ausgang hinzu
+		 * \param exit Ausgang
+		 */
+		void addExit(RegionExit exit)
+		{
+			m_exits.push_back(exit);
+		}
+		
+		/**
+		 * \var short m_id
+		 * \brief Nummer der Region
 		 */
 		short m_id;
 		
@@ -125,67 +218,16 @@ class RegionData
 		std::list<RegionExit> m_exits;
 		
 		/**
-		 * \struct ObjectGroupTemplateSet
-		 * \brief Struktur fuer eine Gruppe von Objekten die mehrmals in die Region eingefuegt werden soll
-		 */
-		struct ObjectGroupTemplateSet
-		{
-			/**
-			 * \var ObjectGroupTemplateName m_group_name
-			 * \brief Name der Gruppe
-			 */
-			ObjectGroupTemplateName m_group_name;
-			
-			/**
-			 * \var int m_number
-			 * \brief Anzahl wie oft man versuchen soll, eine Gruppe eingefuegen
-			 */
-			int m_number;
-			
-			/**
-			 * \var float m_probability
-			 * \brief Wahrscheinlichkeit mit der eine Gruppe eingefuegt wird
-			 * es werden m_number viele Orte ausgewaehlt, aber fuer jeden nur mit dieser Warscheinlichkeit wirklich die Gruppe eingefuegt
-			 */
-			float m_probability;
-		};
-		
-		/**
-		 * \fn void addObjectGroupTemplate(ObjectGroupTemplateName m_group_name, int prio, int number =1, float probability=1.0)
-		 * \brief Fuegt eine neue Objektgruppe ein
-		 * \param group_name Name der Gruppe
-		 * \param prio Prioritaet der Gruppe
-		 * \param number Anzahl wie oft die Gruppe eingefuegt wird
-		 * \param probability Wahrscheinlichkeit mit der die Gruppe eingefuegt wird
-		 */
-		void addObjectGroupTemplate(ObjectGroupTemplateName group_name, int prio=0, int number =1, float probability=1.0);
-		
-		/**
-		 * \fn void addEnvironment(float maxheight, EnvironmentName env)
-		 * \brief Fuegt eine neue Umgebung fuer die Region ein
-		 * \param maxheight maximale Hoehe bis zu der diese Umgebung verwendet wird
-		 * \param env Name der Umgebung
-		 */
-		void addEnvironment(float maxheight, EnvironmentName env)
-		{
-			m_environments.push_back(std::make_pair(maxheight,env));
-		}
-		
-		/**
-		 * \fn void addExit(RegionExit exit)
-		 * \brief Fuegt einen Ausgang hinzu
-		 * \param exit Ausgang
-		 */
-		void addExit(RegionExit exit)
-		{
-			m_exits.push_back(exit);
-		}
-		
-		/**
 		 * \var std::multimap<int,ObjectGroupTemplateSet> m_object_groups
 		 * \brief die Patterns sortiert nach einer Prioritaet
 		 */
 		std::multimap<int,ObjectGroupTemplateSet> m_object_groups;
+		
+		/**
+		 * \var std::multimap<int, NamedObjectGroupTemplate > m_named_object_groups
+		 * \brief Objektgruppen mit einem Namen. Diese Objektgruppen werden immer zuerst eingefuegt und sind verpflichtend
+		 */
+		std::multimap<int, NamedObjectGroupTemplate > m_named_object_groups;
 		
 		/**
 		 * \var std::list<std::pair<float, EnvironmentName> > m_environments

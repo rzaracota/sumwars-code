@@ -9,7 +9,7 @@ void RegionData::addObjectGroupTemplate(ObjectGroupTemplateName group_name, int 
 	newgroup.m_number = number;
 	newgroup.m_probability = probability;
 	
-	
+	m_object_groups.insert(std::make_pair(prio,newgroup));
 }
 
 

@@ -18,6 +18,12 @@ Region* MapGenerator::createRegion(RegionData* rdata)
 	// grundlegende Karte anfertigen
 	MapGenerator::createBaseMap(&mdata,rdata);
 	
+	// ermitteln wo die Objektgruppen platziert werden koennen
+	MapGenerator::createTemplateMap(&mdata,rdata);
+	
+	// Objektgruppen platzieren
+	MapGenerator::insertGroupTemplates(&mdata,rdata);
+	
 	// Berandungen einfuegen
 	MapGenerator::createBorder(&mdata,rdata);
 	
@@ -27,7 +33,7 @@ Region* MapGenerator::createRegion(RegionData* rdata)
 	// Speicher freigeben
 	delete mdata.m_base_map;
 	delete mdata.m_template_map;
-	
+	delete mdata.m_template_index_map;
 	
 	return mdata.m_region;
 }
@@ -39,6 +45,7 @@ void MapGenerator::createMapData(MapData* mdata, RegionData* rdata)
 	mdata->m_template_map = new Matrix2d<char>(rdata->m_dimx,rdata->m_dimy);
 	mdata->m_template_map->clear();
 	mdata->m_region = new Region(rdata->m_dimx,rdata->m_dimy,rdata->m_id,rdata->m_name);
+	mdata->m_template_index_map = new Matrix2d<int>(rdata->m_dimx,rdata->m_dimy);
 }
 
 void MapGenerator::createBaseMap(MapData* mdata, RegionData* rdata)
@@ -242,29 +249,18 @@ void MapGenerator::createBaseMap(MapData* mdata, RegionData* rdata)
 	createPerlinNoise(mdata->m_region->getHeight(), rdata->m_dimx, rdata->m_dimy,4 , 0.4,false);
 }
 
-void MapGenerator::createBorder(MapData* mdata, RegionData* rdata)
+ void MapGenerator::createTemplateMap(MapData* mdata, RegionData* rdata)
 {
 	// Delta zu Nachbarfeldern
 	int nb[4][2] = {{-1,0},{1,0},{0,-1},{0,1}};
+	
+	int hdimx = rdata->m_dimx/2;
+	int hdimy = rdata->m_dimy/2;
+	
 	int dnb[8][2] = {{-1,0},{1,0},{0,-1},{0,1},{-1,1},{1,1},{1,-1},{-1,-1}};
 	
 	// moegliche Randfelder in den Nachbarfeldern
 	int nbr[4][4] = {{1,0,1,1},{0,0,0,1},{0,1,1,1},{0,0,1,0}};
-	
-	// Matrix die angibt, welche 8x8 Felder blockiert sind
-	// Felder werden markiert, wenn alle 4x4 Unterfelder blockiert sind
-	int hdimx = rdata->m_dimx/2;
-	int hdimy = rdata->m_dimy/2;
-	
-	// Orte fuer den Ausgang in den vier Richtungen
-	int exit[4][2];
-	int exitcount[4];
-	for (int i=0; i<4; i++)
-	{
-		exit[i][0] = nb[i][0]*-1000;
-		exit[i][1] = nb[i][1]*-1000;
-		exitcount[i] =1;
-	}
 	
 	// Rand finden und in ein doppelt so genaues Feld uebertragen
 	std::queue<std::pair<int,int> > qu;
@@ -274,6 +270,7 @@ void MapGenerator::createBorder(MapData* mdata, RegionData* rdata)
 	for (it = mdata->m_border.begin(); it != mdata->m_border.end(); ++it)
 	{
 		int i,j,nbi,nbj;
+		int nbif,nbjf;
 		i = it->first;
 		j = it->second;
 		
@@ -290,21 +287,26 @@ void MapGenerator::createBorder(MapData* mdata, RegionData* rdata)
 			nbi = i + nb[k][0];
 			nbj = j + nb[k][1];
 			
-			if (nbi<0 || nbj <0 || nbi >=hdimx || nbj >= hdimy)
+			if (nbi<1 || nbj <1 || nbi >=hdimx-1 || nbj >= hdimy-1)
 				continue;
 			
 			if (*(mdata->m_base_map->ind(nbi,nbj)) >=1)
 			{
-				if (*(mdata->m_template_map->ind(nbi*2+nbr[k][0],nbj*2+nbr[k][1])) == 0)
+				for (int l=0; l<4; l+=2)
 				{
-					qu.push(std::make_pair(nbi*2+nbr[k][0],nbj*2+nbr[k][1]));
-					*(mdata->m_template_map->ind(nbi*2+nbr[k][0],nbj*2+nbr[k][1])) = 1;
-				}
+					nbif = nbi*2+nbr[k][l];
+					nbjf = nbj*2+nbr[k][l+1];
+					
+					if (*(mdata->m_template_map->ind(nbif,nbjf)) == 0)
+					{
+						qu.push(std::make_pair(nbif,nbjf));
+						*(mdata->m_template_map->ind(nbif,nbjf)) = 1;
+						
+						mdata->m_template_places[1].push_back(nbif * 10000 + nbjf);
+						*(mdata->m_template_index_map->ind(nbif,nbjf)) = mdata->m_template_places[1].size()-1;
+					}
 				
-				if (*(mdata->m_template_map->ind(nbi*2+nbr[k][2],nbj*2+nbr[k][3])) == 0)
-				{
-					qu.push(std::make_pair(nbi*2+nbr[k][2],nbj*2+nbr[k][3]));
-					*(mdata->m_template_map->ind(nbi*2+nbr[k][2],nbj*2+nbr[k][3])) = 1;
+				
 				}
 
 			}
@@ -361,12 +363,119 @@ void MapGenerator::createBorder(MapData* mdata, RegionData* rdata)
 			
 			// Feld hinzufuegen
 			qu.push(std::make_pair(nbx,nby));
+			
 			// als besucht markieren
 			(*(mdata->m_template_map))[nbx][nby]= markercnt;
+			mdata->m_template_places[markercnt].push_back(nbx*10000+nby);
+			*(mdata->m_template_index_map->ind(nbx,nby)) = mdata->m_template_places[markercnt].size() -1;
 		}
+	}
+}
+
+bool MapGenerator::insertGroupTemplates(MapData* mdata, RegionData* rdata)
+{
+	// obligatorische Objektgruppen einfuegen
+	
+	std::multimap<int, RegionData::NamedObjectGroupTemplate >::reverse_iterator it;
+	ObjectGroupTemplate* templ;
+	Shape s;
+	Vector pos;
+	bool succ;
+	LocationName locname;
+	for (it = rdata->m_named_object_groups.rbegin(); it != rdata->m_named_object_groups.rend(); ++it)
+	{
+		// Objektgruppe anhand des Namens suchen
+		templ = ObjectFactory::getObjectGroupTemplate(it->second.m_group_name);
+		if (templ ==0)
+		{
+			ERRORMSG("unknown object group %s",it->second.m_group_name.c_str());
+			continue;
+		}
+		
+		// Grundform der Gruppe kopieren
+		memcpy(&s , templ->getShape(), sizeof(Shape));
+		
+		// Ort fuer das Template suchen
+		succ = getTemplatePlace(mdata,&s,pos);
+		
+		if (succ == false)
+		{
+			// Obligatorisches Template konnte nicht platziert werden
+			return false;
+		}
+		
+		// Objektgruppe einfuegen
+		// TODO: Winkel ?
+		DEBUG("placing group %s at %f %f",it->second.m_group_name.c_str(), pos.m_x, pos.m_y);
+		mdata->m_region->createObjectGroup(it->second.m_group_name,pos,0);
+		
+		// Mittelpunkt eintragen
+		locname = it->second.m_group_name;
+		locname += ":center";
+		mdata->m_region->addLocation(locname,pos);
 	}
 	
 	
+	// fakultative Objektgruppen einfuegen
+	std::multimap<int, RegionData::ObjectGroupTemplateSet >::reverse_iterator jt;
+	for (jt = rdata->m_object_groups.rbegin(); jt != rdata->m_object_groups.rend(); ++jt)
+	{
+		DEBUG("placing group %s", jt->second.m_group_name.c_str());
+		templ = ObjectFactory::getObjectGroupTemplate(jt->second.m_group_name);
+		if (templ ==0)
+		{
+			ERRORMSG("unknown object group %s",jt->second.m_group_name.c_str());
+			continue;
+		}
+		
+		// Grundform der Gruppe kopieren
+		memcpy(&s , templ->getShape(), sizeof(Shape));
+		
+		for (int i=0; i< jt->second.m_number; i++)
+		{
+			if (Random::random() > jt->second.m_probability)
+			{
+				continue;
+			}
+			
+			// Ort fuer das Template suchen
+			succ = getTemplatePlace(mdata,&s,pos);
+			
+			if (succ == false)
+			{
+				// Template konnte nicht platziert werden
+				break;
+			}
+			
+			// Objektgruppe einfuegen
+			// TODO: Winkel ?
+			DEBUG("placing group %s at %f %f",jt->second.m_group_name.c_str(), pos.m_x, pos.m_y);
+			mdata->m_region->createObjectGroup(jt->second.m_group_name,pos,0);
+		}
+	}
+	
+	return true;
+}
+
+
+void MapGenerator::createBorder(MapData* mdata, RegionData* rdata)
+{
+	// Delta zu Nachbarfeldern
+	int nb[4][2] = {{-1,0},{1,0},{0,-1},{0,1}};
+	
+	int hdimx = rdata->m_dimx/2;
+	int hdimy = rdata->m_dimy/2;
+	
+	// Orte fuer den Ausgang in den vier Richtungen
+	int exit[4][2];
+	int exitcount[4];
+	for (int i=0; i<4; i++)
+	{
+		exit[i][0] = nb[i][0]*-1000;
+		exit[i][1] = nb[i][1]*-1000;
+		exitcount[i] =1;
+	}
+
 	// Ausgaenge suchen
 	for (int i=0; i<hdimx; i++)
 	{
@@ -517,6 +626,205 @@ void MapGenerator::createExits(MapData* mdata, RegionData* rdata)
 		mdata->m_region->addExit(*it);
 	}
 }
+
+bool MapGenerator::getTemplatePlace(MapData* mdata, Shape* shape, Vector & place)
+{
+	bool success = false;
+	
+	// Groesse des Templates in 4x4 Feldern
+	Vector ext = shape->getAxisExtent();
+	int ex = int(ceil(ext.m_x/2));
+	int ey = int(ceil(ext.m_y/2));
+	
+	// Gibt an welche wie viele 4x4 Felder in jede Richtung frei sein muessen
+	int size = int(std::max(ex, ey))/2 +1;
+	
+	std::map< int, std::vector<int> >::iterator mt, mt2;
+	std::vector<int>::iterator st;
+	
+	int pi,pj;
+	int imin,jmin,imax,jmax;
+	int pl;
+	
+	while (!success)
+	{
+		int nr;
+		// Anzahl der in Frage kommenden Orte ermitteln
+		// alle Orte aufsummieren mit Abstandsindex mindens size
+		nr =0;
+		mt2 = mt = mdata->m_template_places.lower_bound(size);
+		
+		while (mt != mdata->m_template_places.end())
+		{
+			nr += mt->second.size();
+			++mt;
+		}
+		
+		if (nr == 0)
+		{
+			// kein Platz fuer das Template vorhanden
+			return false;
+		}
+		DEBUG5("%i places for template of size %i",nr,size);
+		// Ort auswuerfeln und ermitteln
+		nr = Random::randi(nr);
+		mt = mt2;
+		while (nr >= int(mt->second.size()))
+		{
+			nr -= mt->second.size();
+			++mt;
+		}
+		
+		pl = mt->second[nr];
+		
+		// Flaeche die durch das Template ueberdeckt wird bestimmen
+		pi = pl / 10000;
+		pj = pl % 10000;
+		imin = pi - (ex-1)/2;
+		jmin = pj - (ey-1)/2;
+		imax = imin + ex-1;
+		jmax = jmin + ey-1;
+		// Ort eines eventuellen Hindernisses
+		int obi = -1, obj= -1;
+			
+		// Pruefen ob die Flaeche keine Hindernisse enthaelt
+		for (int i = imin; i<= imax; i++)
+		{
+			for (int j= jmin; j<= jmax; j++)
+			{
+				if (*(mdata->m_template_map->ind(i,j)) <0)
+				{
+					obi = i; 
+					obj = j;
+					DEBUG5("found obstacle at %i %i",i,j);
+					break;
+				}
+			}
+			if (obi != -1)
+			{
+				break;
+			}
+		}
+		
+		int midx,vidx;
+		int b, bi, bj;
+		
+		if (obi != -1)
+		{
+			// Hindernis gefunden
+			
+			// dieses Hindernis verhindert das platzieren der Templates in seiner Umgebung
+			// in dieser Umgebung werden die Zahlen fuer den minimalen Abstand zum naechsten Hindernis aktualisiert
+			imin = obi - size+1;
+			jmin = obj - size+1;
+			imax = obi + size-1;
+			jmax = obj + size-1;
+			
+			int newd;
+			
+			// Schleife ueber die Umgebung des Hindernisses
+			for (int i = imin; i<= imax; i++)
+			{
+				for (int j= jmin; j<= jmax; j++)
+				{
+					newd = (int) std::max(fabs(obi-i) , fabs(obj-j));
+					if (newd < *(mdata->m_template_map->ind(i,j)))
+					{
+						// Feld gefunden dessen Abstandsindex aktualisiert werden muss
+						
+						// Indizee an welcher Stelle das Feld in der m_template_places Datenstruktur zu finden ist
+						midx = *(mdata->m_template_map->ind(i,j));
+						vidx = *(mdata->m_template_index_map->ind(i,j));
+						
+						if (midx<=0)
+						{
+							continue;
+						}
+						
+						// Entfernen aus der Datenstruktur
+						if (mdata->m_template_places[midx].size() >1)
+						{
+							b = mdata->m_template_places[midx].back();
+							mdata->m_template_places[midx][vidx] = b;
+							bi = b / 10000;
+							bj = b % 10000;
+							*(mdata->m_template_index_map->ind(bi,bj)) = vidx;
+							
+							mdata->m_template_places[midx].resize(mdata->m_template_places[midx].size() -1);
+							
+						}
+						else
+						{
+							mdata->m_template_places.erase(midx);
+						}
+						
+						
+						// wieder einfuegen an der richtigen Stelle
+						mdata->m_template_places[newd].push_back(i*10000+j);
+						*(mdata->m_template_map->ind(i,j)) = newd;
+						*(mdata->m_template_index_map->ind(i,j)) = mdata->m_template_places[newd].size()-1;
+					}
+					
+				}
+			}
+				
+		}
+		else
+		{
+			// Orte die von dem Template ueberdeckt werden aus der Liste der freien Orte entfernen
+
+			// Objekt auf der Template Karte eintragen
+			for (int i = imin; i<= imax; i++)
+			{
+				for (int j= jmin; j<= jmax; j++)
+				{
+					// Indizee an welcher Stelle das Feld in der m_template_places Datenstruktur zu finden ist
+					midx = *(mdata->m_template_map->ind(i,j));
+					vidx = *(mdata->m_template_index_map->ind(i,j));
+					
+					// Element aus der Liste der freien Ort entfernen
+					// letztes Element an die Stelle des geloeschten kopieren
+					if (mdata->m_template_places[midx].size() >1)
+					{
+						
+						// Eintragung in der index Karte korrigieren
+						b = mdata->m_template_places[midx].back();
+						mdata->m_template_places[midx][vidx] = b;
+						bi = b / 10000;
+						bj = b % 10000;
+						*(mdata->m_template_index_map->ind(bi,bj)) = vidx;
+						
+						mdata->m_template_places[midx].resize(mdata->m_template_places[midx].size() -1);
+						
+					}
+					else
+					{
+						mdata->m_template_places.erase(midx);
+					}
+					
+					// auf der Template Karte als blockiert eintragen
+					*(mdata->m_template_map->ind(i,j)) = -2;
+
+				}
+			}
+			
+			place.m_x = pi*4+2;
+			place.m_y = pj*4+2;
+			
+			if (ex %2 ==0)
+				place.m_x += 2;
+			if (ey %2 ==0)
+				place.m_y += 2;
+			
+			DEBUG5("found place %i %i",pi,pj);
+			
+			success = true;
+		}
+	}
+	
+	return true;
+}
+
 
 void MapGenerator::createPerlinNoise(Matrix2d<float> *data, int dimx, int dimy,int startfreq, float persistance, bool bounds)
 {

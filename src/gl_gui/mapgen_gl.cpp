@@ -7,8 +7,8 @@ using namespace std;
 
 float point_x, point_y;
 
-const int DIMX = 64;
-const int DIMY = 64;
+const int DIMX = 32;
+const int DIMY = 32;
 
 const int CENTERX = DIMX/2;
 const int CENTERY = DIMY/2;
@@ -154,7 +154,6 @@ int main (int argc,char **argv) {
 
 	rdata.m_dimx = DIMX;
 	rdata.m_dimy = DIMY;
-
 	
 	rdata.m_complexity = 0.4;
 	rdata.m_granularity = 8;
@@ -170,6 +169,16 @@ int main (int argc,char **argv) {
 	rdata.m_exit_directions[WEST] = false;
 	rdata.m_exit_directions[EAST] = true;
 	
+	rdata.addObjectGroupTemplate("trees3",4,1,1.0);
+	rdata.addObjectGroupTemplate("trees2",2,3,0.7);
+	rdata.addObjectGroupTemplate("trees1",1,10,0.5);
+	std::cout << rdata.m_object_groups.size() << "\n";
+	
+	rdata.addNamedObjectGroupTemplate("test2","ort1",4);
+	rdata.addNamedObjectGroupTemplate("test1","ort2",3);
+	rdata.addNamedObjectGroupTemplate("test1","ort3",2);
+	
+	
 	RegionExit exit;
 	exit.m_shape.m_type = Shape::RECT;
 	exit.m_shape.m_extent = Vector(4,4);
@@ -179,31 +188,21 @@ int main (int argc,char **argv) {
 	
 	rdata.addExit(exit);
 	
-	/*
-	rdata.m_dimx = DIMX;
-	rdata.m_dimy = DIMY;
-	rdata.m_complexity = 0.4;
-	rdata.m_granularity = 8;
-	rdata.m_area_percent = 0.35;
-	rdata.m_id = 1;
-	rdata.m_name = "region1";
-	
-	rdata.addEnvironment(0.2,"meadow");
-	rdata.addEnvironment(1.0,"hills");
-	
-	rdata.m_exit_directions[NORTH] = true;
-	rdata.m_exit_directions[SOUTH] = false;
-	rdata.m_exit_directions[WEST] = false;
-	rdata.m_exit_directions[EAST] = false;
-	*/
 	ObjectFactory::init();
 	ObjectFactory::loadFixedObjectData("../data/objects/objects.xml");
 	
 	MapGenerator::createMapData(&mdata,&rdata);
 	MapGenerator::createBaseMap(&mdata,&rdata);
-	//mdata.m_region->createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT,"stones3",Vector(12,12));
+	MapGenerator::createTemplateMap(&mdata,&rdata);
+	MapGenerator::insertGroupTemplates(&mdata,&rdata);
 	MapGenerator::createBorder(&mdata,&rdata);
-		
+	
+	/*
+	ObjectGroupTemplate* ogl = ObjectFactory::getObjectGroupTemplate("test2");
+	Vector pl;
+	for (int i=0; i<5; i++)
+		MapGenerator::getTemplatePlace(&mdata,ogl->getShape(),pl);
+	*/
 	
 	glutTimerFunc(20,TimerFunc,0);
 	// Die Hauptschleife
@@ -237,7 +236,6 @@ void DisplayFunc () {
 	SetCamera();
 	
 	float col[3];
-	float t,val,m;
 	
 	for (int i=0;i<DIMX/2;++i)
 	{
@@ -269,6 +267,30 @@ void DisplayFunc () {
 		
 	}
 	
+	
+	
+	std::vector<int>::iterator it;
+	for (it = mdata.m_template_places[3].begin(); it != mdata.m_template_places[3].end(); ++it)
+	{
+		int i,j;
+		i = *it / 10000;
+		j = *it % 10000;
+		
+		glColor3f(1,0,0);
+		glBegin(GL_QUADS);
+			
+		glVertex3f(i-CENTERX,CENTERY-j,0.2);
+		glVertex3f(i-CENTERX+1,CENTERY-j,0.2);
+		glVertex3f(i-CENTERX+1,CENTERY-j-1,0.2);
+		glVertex3f(i-CENTERX,CENTERY-j-1,0.2);
+			
+			
+		glEnd();
+		
+	}
+	
+	
+	
 	for (int i=0;i<DIMX;++i)
 	{
 		for (int j=0;j<DIMY;++j)
@@ -277,7 +299,7 @@ void DisplayFunc () {
 			if (*(mdata.m_template_map->ind(i,j)) >= 1)
 			{
 				col[0] =*(mdata.m_template_map->ind(i,j)) * 0.1; col[1] =0; col[2] =0;
-			}
+			
 			
 			
 		
@@ -291,10 +313,13 @@ void DisplayFunc () {
 			
 			
 			glEnd();
+			}
 			
 		}
 		
 	}
+	
+	
 	
 	/*
 	std::list<std::pair<int,int> >::iterator it;
@@ -361,10 +386,10 @@ void DisplayFunc () {
 
 
 			glBegin(GL_QUADS);
-			glVertex3f(-ex,-ey,0.2);
-			glVertex3f(+ex,-ey,0.2);
-			glVertex3f(+ex,+ey,0.2);
-			glVertex3f(-ex,+ey,0.2);
+			glVertex3f(-ex,-ey,0.5);
+			glVertex3f(+ex,-ey,0.5);
+			glVertex3f(+ex,+ey,0.5);
+			glVertex3f(-ex,+ey,0.5);
 
 			glEnd();
 		}

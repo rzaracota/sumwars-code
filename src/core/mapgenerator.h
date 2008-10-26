@@ -41,6 +41,12 @@ class MapGenerator
 		 * \brief Karte die angibt wie gross das groesste Template ist, das an diese Position passt
 		 */
 		Matrix2d<char>* m_template_map;
+		
+		/**
+		 * \var Matrix2d<int>* m_template_index_map
+		 * \brief enthaelt die Indizee der Punkte in der m_template_places Datenstruktur
+		 */
+		Matrix2d<int>* m_template_index_map;
 
 		/**
 		 * \var Matrix2d<float>* m_environment
@@ -53,6 +59,12 @@ class MapGenerator
 		 * \brief Menge der Punkte, die den Rand des betretbaren Gebietes bilden
 		 */
 		std::list<std::pair<int,int> > m_border;
+		
+		/**
+		 * \var std::map< int, std::vector<int> > m_template_places
+		 * \brief Orte an denen Templates platziert werden koennen
+		 */
+		std::map< int, std::vector<int> > m_template_places;
 		
 
 		/**
@@ -75,8 +87,27 @@ class MapGenerator
 	/**
 	 * \fn static void createBaseMap(MapData* mdata, RegionData* rdata)
 	 * \brief erstellt die grundlegende Karte
+	 * \param rdata Daten fuer die Region die erstellt werden soll
+	 * \param mdata temporaere Daten zum Aufbau der Region
 	 */
 	static void createBaseMap(MapData* mdata, RegionData* rdata);
+	
+	/**
+	 * \fn static void createTemplateMap(MapData* mdata, RegionData* rdata)
+	 * \brief erzeugt eine Karte die anzeigt wo die Templates platziert werden koennen
+	\param rdata Daten fuer die Region die erstellt werden soll
+	 * \param mdata temporaere Daten zum Aufbau der Region
+	 */
+	static void createTemplateMap(MapData* mdata, RegionData* rdata);
+	
+	/**
+	 * \fn static bool insertGroupTemplates(MapData* mdata, RegionData* rdata)
+	 * \brief Fuegt die Objektgruppen in die Region ein
+	 * \param rdata Daten fuer die Region die erstellt werden soll
+	 * \param mdata temporaere Daten zum Aufbau der Region
+	 * \return Gibt true zurueck, wenn alle obligatorischen Objektgruppen erfolgreich eingefuegt wurden
+	 */
+	static bool insertGroupTemplates(MapData* mdata, RegionData* rdata);
 	
 	/**
 	 * \fn static void createBorder(MapData* mdata, RegionData* rdata)
@@ -101,6 +132,15 @@ class MapGenerator
 	 */
 	static Region* createRegion(RegionData* rdata);
 	
+	/**
+	 * \fn static bool getTemplatePlace(MapData* mdata, Shape* shape, Vector & place)
+	 * \brief ermittelt einen Ort fuer das Template
+	 * \param mdata temporaere Daten zum Aufbau der Region
+	 * \param shape Grundflaeche des Templates
+	 * \param place Rueckgabewert fuer den Ort
+	 * \return gibt true aus, wenn ein Ort gefunden wurde, sonst false
+	 */
+	static bool getTemplatePlace(MapData* mdata, Shape* shape, Vector & place);
 	
 	/**
 	 * \fn createPerlinNoise(Matrix2d<float> *data, int dimx, int dimy,int startfreq,float persistance, bool bounds)

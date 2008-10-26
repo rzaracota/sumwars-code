@@ -557,5 +557,59 @@ void ObjectFactory::init()
 	grouptempl->addObject("$tree",Vector(-1.2,3.3),0,0.5);
 	grouptempl->addObject("$tree",Vector(0,-1.7),0,0.5);
 	registerObjectGroupTemplate("border(filled)",grouptempl);
+	
+	
+	
+	grouptempl = new ObjectGroupTemplate;
+	grouptempl->getShape()->m_type = Shape::RECT;
+	grouptempl->getShape()->m_extent = Vector(8,8);
+	grouptempl->addObject("$border",Vector(0,7),0);
+	grouptempl->addObject("$border",Vector(7,0),-90*PI/180);
+	grouptempl->addObject("$border",Vector(0,-7),0);
+	grouptempl->addObject("$border",Vector(-7,0),-90*PI/180);
+	registerObjectGroupTemplate("test1",grouptempl);
+	
+	grouptempl = new ObjectGroupTemplate;
+	grouptempl->getShape()->m_type = Shape::RECT;
+	grouptempl->getShape()->m_extent = Vector(10,10);
+	grouptempl->addObject("$border",Vector(0,9),0);
+	grouptempl->addObject("$border",Vector(9,0),-90*PI/180);
+	grouptempl->addObject("$border",Vector(0,-9),0);
+	grouptempl->addObject("$border",Vector(-9,0),-90*PI/180);
+	registerObjectGroupTemplate("test2",grouptempl);
+	
+	grouptempl = new ObjectGroupTemplate;
+	grouptempl->getShape()->m_type = Shape::RECT;
+	grouptempl->getShape()->m_extent = Vector(16,16);
+	grouptempl->addObject("$border",Vector(0,15),0);
+	grouptempl->addObject("$border",Vector(15,0),-90*PI/180);
+	grouptempl->addObject("$border",Vector(0,-15),0);
+	grouptempl->addObject("$border",Vector(-15,0),-90*PI/180);
+	registerObjectGroupTemplate("test3",grouptempl);
+	
+	
+	grouptempl = new ObjectGroupTemplate;
+	grouptempl->getShape()->m_type = Shape::RECT;
+	grouptempl->getShape()->m_extent = Vector(2,2);
+	grouptempl->addObject("$tree",Vector(0.8,-1.7),0,0.7);
+	registerObjectGroupTemplate("trees1",grouptempl);
+	
+	grouptempl = new ObjectGroupTemplate;
+	grouptempl->getShape()->m_type = Shape::RECT;
+	grouptempl->getShape()->m_extent = Vector(2,2);
+	grouptempl->addObject("$tree",Vector(1.5, 1.2),0,0.7);
+	grouptempl->addObject("$tree",Vector(-1.2, 1.7),0,0.7);
+	registerObjectGroupTemplate("trees2",grouptempl);
+	
+	grouptempl = new ObjectGroupTemplate;
+	grouptempl->getShape()->m_type = Shape::RECT;
+	grouptempl->getShape()->m_extent = Vector(4,4);
+	grouptempl->addObject("$tree",Vector(2.5,3.6),0,0.7);
+	grouptempl->addObject("$tree",Vector(-1,-2.3),0,0.7);
+	grouptempl->addObject("$tree",Vector(-1.7,3.3),0,0.7);
+	grouptempl->addObject("$tree",Vector(0.7,-1.7),0,0.7);
+	registerObjectGroupTemplate("trees3",grouptempl);
+	
+	
 }
 
