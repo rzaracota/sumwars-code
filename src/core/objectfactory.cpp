@@ -22,6 +22,8 @@ std::map<ObjectTemplateType, ObjectTemplate*> ObjectFactory::m_object_templates;
 
 std::map<ObjectGroupTemplateName, ObjectGroupTemplate*> ObjectFactory::m_object_group_templates;
 
+std::map< MonsterGroupName, MonsterGroup*>  ObjectFactory::m_monster_groups;
+
 
 WorldObject::TypeInfo::ObjectSubtype ObjectTemplate::getObject(EnvironmentName env)
 {
@@ -172,6 +174,19 @@ ObjectGroupTemplate* ObjectFactory::getObjectGroupTemplate(ObjectGroupTemplateNa
 	return it->second;
 }
 
+MonsterGroup* ObjectFactory::getMonsterGroup(MonsterGroupName name)
+{
+	std::map< MonsterGroupName,MonsterGroup*>::iterator it;
+	it = m_monster_groups.find(name);
+	
+	if (it == m_monster_groups.end())
+	{
+		return 0;
+	}
+	
+	return it->second;
+}
+
 
 void ObjectFactory::registerMonster(WorldObject::TypeInfo::ObjectSubtype subtype, MonsterBasicData* data)
 {
@@ -208,6 +223,20 @@ void ObjectFactory::registerObjectGroupTemplate(ObjectGroupTemplateName name, Ob
 		m_object_group_templates[name] = data;
 	}
 }
+
+void ObjectFactory::registerMonsterGroup(MonsterGroupName name, MonsterGroup* data)
+{
+	if (m_monster_groups.count(name)>0)
+	{
+		ERRORMSG("Monster group with name %s already exists",name.c_str());
+	}
+	else
+	{
+		m_monster_groups[name] = data;
+	}
+}
+
+
 
 
 void ObjectFactory::loadMonsterData(std::string file)
@@ -394,8 +423,26 @@ void ObjectFactory::init()
 	registerMonster("gob_dog",mdata);
 	
 	
-
-
+	// Monstergruppen
+	MonsterGroup* mgdata;
+	
+	mgdata = new MonsterGroup;
+	mgdata->addMonsters("goblin",10,0.7);
+	registerMonsterGroup("goblins", mgdata);
+	
+	
+	mgdata = new MonsterGroup;
+	mgdata->addMonsters("goblin",6,0.7);
+	mgdata->addMonsters("gob_dog",4,0.7);
+	registerMonsterGroup("goblins_dogs", mgdata);
+	
+	mgdata = new MonsterGroup;
+	mgdata->addMonsters("lich",1,1.0);
+	mgdata->addMonsters("goblin",7,0.7);
+	registerMonsterGroup("lich_goblins", mgdata);
+	
+	
+	// feste Objekte
 	FixedObjectData* fdata;
 	
 	fdata = new FixedObjectData;
@@ -576,6 +623,7 @@ void ObjectFactory::init()
 	grouptempl->addObject("$border",Vector(9,0),-90*PI/180);
 	grouptempl->addObject("$border",Vector(0,-9),0);
 	grouptempl->addObject("$border",Vector(-9,0),-90*PI/180);
+	grouptempl->addObject("$tree",Vector(0,0),0);
 	registerObjectGroupTemplate("test2",grouptempl);
 	
 	grouptempl = new ObjectGroupTemplate;
@@ -585,6 +633,7 @@ void ObjectFactory::init()
 	grouptempl->addObject("$border",Vector(15,0),-90*PI/180);
 	grouptempl->addObject("$border",Vector(0,-15),0);
 	grouptempl->addObject("$border",Vector(-15,0),-90*PI/180);
+	grouptempl->addObject("$tree",Vector(0,0),0);
 	registerObjectGroupTemplate("test3",grouptempl);
 	
 	
@@ -598,7 +647,7 @@ void ObjectFactory::init()
 	grouptempl->getShape()->m_type = Shape::RECT;
 	grouptempl->getShape()->m_extent = Vector(2,2);
 	grouptempl->addObject("$tree",Vector(1.5, 1.2),0,0.7);
-	grouptempl->addObject("$tree",Vector(-1.2, 1.7),0,0.7);
+	grouptempl->addObject("$tree",Vector(-1.2, -1.7),0,0.7);
 	registerObjectGroupTemplate("trees2",grouptempl);
 	
 	grouptempl = new ObjectGroupTemplate;

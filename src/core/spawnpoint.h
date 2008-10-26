@@ -18,63 +18,15 @@ class Spawnpoint : public WorldObject {
  */
 	public:
 	
-	/**
-	 * \struct SpawnedMonsterGroup
-	 * \brief Struktur fuer eine Gruppe von Monstern gleichen Typs die vom Spawnpoint erzeugt werden kann
-	 */
-	struct SpawnedMonsterGroup
-	{
-		/**
-		 * \fn SpawnedMonsterGroup(TypeInfo::ObjectSubtype s, float p, int n)
-		 * \brief Konstruktor
-		 * \param s Subtyp der zu erzeugenden Monster
-		 * \param p Wahrscheinlichkeit pro Monster, dass es erzeugt wird
-		 * \param n Anzahl der maximal erzeugten Monster
-		 */
-		SpawnedMonsterGroup(TypeInfo::ObjectSubtype s, float p, int n)
-		{
-			m_subtype =s;
-			m_prob = p;
-			m_number = n;
-		}
-		
-		
-		/**
-		 * \var TypeInfo::ObjectSubtype m_subtype
-		 * \brief Subtype der erzeugten Monster
-		 */
-		TypeInfo::ObjectSubtype m_subtype;
-		
-		/**
-		 * \var float m_prob
-		 * \brief Wahrscheinlichkeit mit der ein Monster erzeugt wird
-		 */
-		float m_prob;
-		
-		/**
-		 * \var int m_number
-		 * \brief Anzahl der Monster die maximal erzeugt werden. Jedes Monster wird gemaess der Wahrscheinlichkeit prob erzeugt. Im Erwartungswert also prob * number Monster
-		 */
-		int m_number;
-		
-		/**
-		 * \fn void operator=(SpawnedMonsterGroup & other)
-		 * \brief Zuweisungsoperator
-		 */
-		void operator=(SpawnedMonsterGroup & other)
-		{
-			m_subtype = other.m_subtype;
-			m_prob = other.m_prob;
-			m_number = other.m_number;
-		}
-	};
 	
 	/**
 	 * \fn Spawnpoint( int id)
 	 * \param id Objekt-ID
 	 * \brief Konstruktor
+	 * \param name Name der Monstergruppe die dieser Spawnpoint erzeugt
+	 * \param id ID des Spawnpoints
 	 */
-	Spawnpoint( int id);
+	Spawnpoint(MonsterGroupName name, int id);
 	
 	/**
 	 * \fn virtual bool init()
@@ -90,11 +42,6 @@ class Spawnpoint : public WorldObject {
 	 */
 	virtual bool  update (float time);
 	
-	/**
-	 * \fn void addMonsterGroup(SpawnedMonsterGroup& mgroup)
-	 * \brief Fuegt zum Spawnpunkt eine Monstergruppe hinzu
-	 */
-	void addMonsterGroup(SpawnedMonsterGroup& mgroup);
 	
 	/**
 	 * \fn void setRespawnTime(float t)
@@ -104,11 +51,12 @@ class Spawnpoint : public WorldObject {
 
 
 	private:
+		
 		/**
-	 * \var std::list<SpawnedMonsterGroup> m_spawned_groups
-		 * \brief Liste der verschiedenen Monstergruppen die der Spawnpoint erzeugen kann
+		 * \var MonsterGroupName m_spawned_monsters
+		 * \brief die Monster die von diesem Spawnpoint erzeugt werden
 		 */
-		std::list<SpawnedMonsterGroup> m_spawned_groups;
+		MonsterGroupName m_spawned_monsters;
 		
 		/**
 		 * \var float m_time

@@ -16,19 +16,19 @@ class Matrix2d
 	private:
 		/**
  		 * \var int m_dimx
- 		 * \brief TODO
+ 		 * \brief Anzahl Zeilen
  		 */
 		int m_dimx;
 		
         /**
          * \var int m_dimy
-         * \brief TODO
+         * \brief Anzahl Spalten
          */
 		int m_dimy;
 		
 		/**
  		 * \var Element* m_data
- 		 * \brief TODO
+ 		 * \brief Datenfeld
  		 */
 		Element* m_data;
 		
@@ -59,9 +59,9 @@ class Matrix2d
 	
 	/**
 	 * \fn Element* ind(int x, int y)
-	 * \brief TODO
-	 * \param x TODO
-	 * \param y TODO
+	 * \brief Gibt Referenz auf das Element an der angegebenen Position aus
+	 * \param x Index1
+	 * \param y Index2
 	 */
 	Element* ind(int x, int y)
 	{

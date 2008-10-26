@@ -82,7 +82,7 @@ Region::~Region()
 	delete m_tiles;
 	delete m_drop_items;
 	delete m_drop_item_locations;
-
+	delete m_height;
 	delete m_events;
 
 }
@@ -591,8 +591,7 @@ bool Region::insertObject (WorldObject* object, Vector pos, float angle, bool co
 	 // Testen ob das Objekt in der Region liegt
 	if (x_g<0 || y_g<0 || x_g>=m_dimx || y_g>=m_dimy)
 	{
-		 // TODO
-		 // Region neu setzen
+		 return false;
 	}
 	else
 	{
@@ -632,7 +631,7 @@ int Region::createObject(WorldObject::TypeInfo::ObjectType type, ObjectTemplateT
 	}
 	
 	// Objekt einfuegen
-	bool ret = insertObject(object,pos,angle,false);
+	bool ret = insertObject(object,pos,angle,collision_test);
 	if (!ret)
 	{
 		DEBUG("insertion failed");
@@ -674,10 +673,48 @@ void Region::createObjectGroup(ObjectGroupTemplateName templname, Vector positio
 		}
 		
 		// Orte einfuegen
+		std::map<LocationName, Vector>::iterator lt;
+		for (lt = templ->getLocations()->begin(); lt != templ->getLocations()->end(); ++lt)
+		{
+			pos = lt->second;
+			pos.rotate(angle);
+			pos += position;
+			
+			addLocation(lt->first,pos);
+		}
 	}
 	else
 	{
 		ERRORMSG("object group template %s not found",templname.c_str());
+	}
+}
+
+
+void Region::createMonsterGroup(MonsterGroupName mgname, Vector position)
+{
+	MonsterGroup * mgroup = ObjectFactory::getMonsterGroup(mgname);
+	
+	if (mgroup == 0)
+	{
+		DEBUG("monster group %s ot found",mgname.c_str());
+		return;
+	}
+	
+	std::list<MonsterGroup::SubGroup>::iterator mt;
+	Vector pos;
+	
+	for (mt = mgroup->m_monsters.begin(); mt != mgroup->m_monsters.end(); ++mt)
+	{
+		for (int i=0; i< mt->m_number; i++)
+		{
+			pos = position;
+				
+			if (Random::random() < mt->m_prob)
+			{
+				int id = createObject(WorldObject::TypeInfo::TYPE_MONSTER,mt->m_subtype, pos, 0 ,true);
+				DEBUG5("inserting monster %s at %f %f with id %i",mt->m_subtype.c_str(),pos.m_x, pos.m_y,id);
+			}
+		}
 	}
 }
 
@@ -758,8 +795,7 @@ bool Region::moveObject(WorldObject* object, Vector pos)
 	// Testen ob das Objekt in der Region liegt
 	if (x_new<0 || y_new<0 || x_new>=m_dimx || y_new>=m_dimy)
 	{
-		 // TODO
-		 // Region neu setzen
+		return false;
 	}
 	else
 	{

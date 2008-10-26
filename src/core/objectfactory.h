@@ -7,6 +7,7 @@
 #include "monsterbase.h"
 #include "objectloader.h"
 
+
 #include "../tinyxml/tinyxml.h"
 #include <string>
 #include <list>
@@ -252,6 +253,12 @@ class ObjectFactory
 	static ObjectGroupTemplate* getObjectGroupTemplate(ObjectGroupTemplateName name);
 	
 	/**
+	 * \fn static MonsterGroup* getMonsterGroup(MonsterGroupName name)
+	 * \brief Gibt die Monstergruppe zu dem angegebenen Name aus
+	 */
+	static MonsterGroup* getMonsterGroup(MonsterGroupName name);
+	
+	/**
 	 * \fn Laedt die Daten zu Monstern aus der Datei
 	 * \param file Monster XML Datei
 	 */
@@ -304,12 +311,16 @@ class ObjectFactory
 	static std::map<ObjectTemplateType, ObjectTemplate*> m_object_templates;
 	
 	/**
-	 * \var static std::map<ObjectGroupTemplateName, ObjectGroupTemplate> m_object_group_templates
+	 * \var static std::map<ObjectGroupTemplateName, ObjectGroupTemplate*> m_object_group_templates
 	 * \brief Datenbank fuer die Objektgruppen indexiert nach Name
 	 */
 	static std::map<ObjectGroupTemplateName, ObjectGroupTemplate*> m_object_group_templates;
 	
-	
+	/**
+	 * \var static std::map< MonsterGroupName, MonsterGroup*>  m_monster_groups
+	 * \brief Liste von Monstern die von Spawnpoints erzeugt werden
+	 */
+	static std::map< MonsterGroupName, MonsterGroup*>  m_monster_groups;
 	
 	/**
 	 * \fn static registerMonster(WorldObject::TypeInfo::ObjectSubtype subtype, MonsterBasicData* data)
@@ -343,6 +354,14 @@ class ObjectFactory
 	 * \param data die Daten
 	 */
 	static void registerObjectGroupTemplate(ObjectGroupTemplateName name, ObjectGroupTemplate* data);
+	
+	/**
+	 * \fn static void registerMonsterGroup(MonsterGroupName name, MonsterGroup data)
+	 * \brief Registriert eine Gruppe von Monstern
+	 * \param name Name der Gruppe
+	 * \param group Daten
+	 */
+	static void registerMonsterGroup(MonsterGroupName name, MonsterGroup* data);
 	
 	
 };

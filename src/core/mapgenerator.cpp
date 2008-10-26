@@ -1,5 +1,5 @@
 #include "mapgenerator.h"
-
+#include "world.h"
 
 
 bool operator<(WeightedLocation first, WeightedLocation second)
@@ -12,23 +12,41 @@ Region* MapGenerator::createRegion(RegionData* rdata)
 	// temporaere Daten fuer die Erzeugung der Region
 	MapGenerator::MapData mdata;
 	
-	// Speicher anfordern
-	MapGenerator::createMapData(&mdata,rdata);
-	
-	// grundlegende Karte anfertigen
-	MapGenerator::createBaseMap(&mdata,rdata);
-	
-	// ermitteln wo die Objektgruppen platziert werden koennen
-	MapGenerator::createTemplateMap(&mdata,rdata);
-	
-	// Objektgruppen platzieren
-	MapGenerator::insertGroupTemplates(&mdata,rdata);
+	bool success = false;
+	while (!success)
+	{
+		// Speicher anfordern
+		MapGenerator::createMapData(&mdata,rdata);
+		
+		// grundlegende Karte anfertigen
+		MapGenerator::createBaseMap(&mdata,rdata);
+		
+		// ermitteln wo die Objektgruppen platziert werden koennen
+		MapGenerator::createTemplateMap(&mdata,rdata);
+		
+		// Objektgruppen platzieren
+		success = MapGenerator::insertGroupTemplates(&mdata,rdata);
+		
+		// Wenn der Versuch nicht erfolgreich war alles loeschen und von vorn beginnen
+		if (!success)
+		{
+			DEBUG("not successful");
+			
+			delete mdata.m_base_map;
+			delete mdata.m_template_map;
+			delete mdata.m_template_index_map;
+			delete mdata.m_region;
+		}
+	}
 	
 	// Berandungen einfuegen
 	MapGenerator::createBorder(&mdata,rdata);
 	
 	// Ausgaenge erzeugen
 	MapGenerator::createExits(&mdata,rdata);
+	
+	// Monster einfuegen
+	MapGenerator::insertSpawnpoints(&mdata,rdata);
 	
 	// Speicher freigeben
 	delete mdata.m_base_map;
@@ -353,7 +371,7 @@ void MapGenerator::createBaseMap(MapData* mdata, RegionData* rdata)
 			nby = y + dnb[i][1];
 			
 			// Dimension pruefen
-			if (nbx<0 || nby<0 || nbx >= rdata->m_dimx || nby >= rdata->m_dimy)
+			if (nbx<2 || nby<2 || nbx >= rdata->m_dimx-2 || nby >= rdata->m_dimy-2)
 				continue;
 			
 			// nur noch nicht besuchte Felder
@@ -406,7 +424,7 @@ bool MapGenerator::insertGroupTemplates(MapData* mdata, RegionData* rdata)
 		
 		// Objektgruppe einfuegen
 		// TODO: Winkel ?
-		DEBUG("placing group %s at %f %f",it->second.m_group_name.c_str(), pos.m_x, pos.m_y);
+		DEBUG5("placing group %s at %f %f",it->second.m_group_name.c_str(), pos.m_x, pos.m_y);
 		mdata->m_region->createObjectGroup(it->second.m_group_name,pos,0);
 		
 		// Mittelpunkt eintragen
@@ -420,7 +438,6 @@ bool MapGenerator::insertGroupTemplates(MapData* mdata, RegionData* rdata)
 	std::multimap<int, RegionData::ObjectGroupTemplateSet >::reverse_iterator jt;
 	for (jt = rdata->m_object_groups.rbegin(); jt != rdata->m_object_groups.rend(); ++jt)
 	{
-		DEBUG("placing group %s", jt->second.m_group_name.c_str());
 		templ = ObjectFactory::getObjectGroupTemplate(jt->second.m_group_name);
 		if (templ ==0)
 		{
@@ -449,7 +466,7 @@ bool MapGenerator::insertGroupTemplates(MapData* mdata, RegionData* rdata)
 			
 			// Objektgruppe einfuegen
 			// TODO: Winkel ?
-			DEBUG("placing group %s at %f %f",jt->second.m_group_name.c_str(), pos.m_x, pos.m_y);
+			DEBUG5("placing group %s at %f %f",jt->second.m_group_name.c_str(), pos.m_x, pos.m_y);
 			mdata->m_region->createObjectGroup(jt->second.m_group_name,pos,0);
 		}
 	}
@@ -618,12 +635,65 @@ void MapGenerator::createBorder(MapData* mdata, RegionData* rdata)
 
 }
 
+void MapGenerator::insertSpawnpoints(MapData* mdata, RegionData* rdata)
+{
+	// Punkte an denen Spawnpoints möglich sind
+	std::vector< std::pair<int,int> > points;
+	
+	int hdimx = rdata->m_dimx/2;
+	int hdimy = rdata->m_dimy/2;
+	
+	// moegliche Orte fuer Spawnpoints ermitteln
+	for (int i=0; i<hdimx; i++)
+	{
+		for (int j=0; j< hdimy;j++)
+		{
+			// nur erreichbare Felder
+			if (*(mdata->m_base_map->ind(i,j)) !=1)
+			{
+				continue;
+			}
+			
+			points.push_back(std::make_pair(i,j));
+		}
+	}
+	
+ 
+	// Spawnpoints platzieren
+	std::list<RegionData::SpawnGroup>::iterator st;
+	WorldObject* wo;
+	for (st = rdata->m_monsters.begin(); st != rdata->m_monsters.end(); ++st)
+	{
+		DEBUG5("%s x %i",st->m_monsters.c_str(),st->m_number);
+		for (int i=0; i< st->m_number; i++)
+		{
+			int r = Random::randi(points.size());
+			wo = new Spawnpoint(st->m_monsters, World::getWorld()->getValidId());
+			
+			mdata->m_region->insertObject(wo,Vector(points[r].first*8+4, points[r].second*8+4));
+			
+			DEBUG5("placing spawnpoint for %s at %i %i",st->m_monsters.c_str(), points[r].first*8+4, points[r].second*8+4);
+			
+			points[r] = points.back();
+			points.resize(points.size() -1);
+			
+		}
+	}
+}
+
+
 void MapGenerator::createExits(MapData* mdata, RegionData* rdata)
 {
 	std::list<RegionExit>::iterator it;
+	Vector pos;
 	for (it = rdata->m_exits.begin(); it != rdata->m_exits.end(); ++it)
 	{
 		mdata->m_region->addExit(*it);
+		
+		// Bei den Ausgaengen keine Monster
+		pos = mdata->m_region->getLocation(it->m_exit_name);
+		*(mdata->m_base_map->ind(int(pos.m_x/8), int(pos.m_y/8))) = 2;
+
 	}
 }
 

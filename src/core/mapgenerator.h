@@ -4,6 +4,7 @@
 #include "matrix2d.h"
 #include "unionfindtree.h"
 #include "objectfactory.h"
+#include "spawnpoint.h"
 #include <iomanip>
 
 #include "region.h"
@@ -116,6 +117,14 @@ class MapGenerator
 	 * \param mdata temporaere Daten zum Aufbau der Region
 	 */
 	static void createBorder(MapData* mdata, RegionData* rdata);
+	
+	/**
+	 * \fn static void insertSpawnpoints(MapData* mdata, RegionData* rdata)
+	 * \brief Fuegt der Region die Spawnpoints hinzu
+	 * \param rdata Daten fuer die Region die erstellt werden soll
+	 * \param mdata temporaere Daten zum Aufbau der Region
+	 */
+	static void insertSpawnpoints(MapData* mdata, RegionData* rdata);
 	
 	/**
 	 * \fn static void createExits(MapData* mdata, RegionData* rdata)

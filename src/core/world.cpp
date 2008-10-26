@@ -20,6 +20,7 @@
 #include "world.h"
 #include "player.h"
 #include "mapgenerator.h"
+#include "spawnpoint.h"
 
 World* World::m_world=0;
 
@@ -129,6 +130,18 @@ bool World::init()
 	rdata->m_exit_directions[WEST] = false;
 	rdata->m_exit_directions[EAST] = false;
 	
+	rdata->addObjectGroupTemplate("trees3",4,2,1.0);
+	rdata->addObjectGroupTemplate("trees2",2,5,0.7);
+	rdata->addObjectGroupTemplate("trees1",1,50,0.5);
+	
+	rdata->addNamedObjectGroupTemplate("test2","ort1",4);
+	rdata->addNamedObjectGroupTemplate("test1","ort2",3);
+	rdata->addNamedObjectGroupTemplate("test1","ort3",2);
+	
+	rdata->addSpawnGroup("lich_goblins",1);
+	rdata->addSpawnGroup("goblins",10);
+	rdata->addSpawnGroup("goblins_dogs",10);
+	
 	exit.m_shape.m_type = Shape::RECT;
 	exit.m_shape.m_extent = Vector(4,4);
 	exit.m_exit_name = "exit_north";
@@ -210,8 +223,9 @@ void World::createRegion(short region)
 		
 		reg->createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "$tree", Vector(1,8));
 		
-	
-		
+		wo = new Spawnpoint("lich_goblins", World::getWorld()->getValidId());
+		reg->insertObject(wo, Vector(15,10));
+		/*
 
 		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_MONSTER, "lich");
 		reg->insertObject(wo, Vector(7,5));
@@ -245,7 +259,7 @@ void World::createRegion(short region)
 
 		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_MONSTER, "goblin");
 		reg->insertObject(wo, Vector(19.9,6.9));
-		
+		*/
 
 /*
 		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_MONSTER, "goblin");
@@ -260,77 +274,6 @@ void World::createRegion(short region)
 		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_MONSTER, "goblin");
 		insertObject(wo, Vector(8.5,6.4),rid);
 		*/
-/*
-
-		Spawnpoint::SpawnedMonsterGroup mg("goblin",1.0,1);
-		spawn = new Spawnpoint(m_world,1);
-		spawn->setRespawnTime(10000);
-		spawn->addMonsterGroup(mg);
-		insertObject(spawn,Vector(9,9),rid);
-*/
-/*
-		int i,j;
-		for (i=1;i<48;i++)
-		{
-		for (int j=1;j<48;j++)
-		{
-		reg->setTile(TILE_GRASS,i,j);
-	}
-	}
-
-		for (i=0;i<49;i++)
-		{
-		reg->setTile(TILE_WATER,i,0);
-		reg->setTile(TILE_WATER,i,49);
-		reg->setTile(TILE_WATER,49,i);
-		reg->setTile(TILE_WATER,0,i);
-
-	}
-
-		Spawnpoint::SpawnedMonsterGroup gob("goblin",0.6,6);
-		Spawnpoint::SpawnedMonsterGroup gob2("goblin",0.5,3);
-		Spawnpoint::SpawnedMonsterGroup lich("lich",0.7,1);
-		Spawnpoint::SpawnedMonsterGroup dog("gob_dog",0.4,4);
-
-		spawn = new Spawnpoint(m_world,1);
-		spawn->setRespawnTime(100000);
-		spawn->addMonsterGroup(gob);
-		insertObject(spawn,Vector(9,9),rid);
-
-		spawn = new Spawnpoint(m_world,2);
-		spawn->setRespawnTime(100000);
-		spawn->addMonsterGroup(gob);
-		insertObject(spawnVector(,6,18),rid);
-
-		spawn = new Spawnpoint(m_world,3);
-		spawn->setRespawnTime(100000);
-		spawn->addMonsterGroup(gob2);
-		spawn->addMonsterGroup(dog);
-		insertObject(spawn,Vector(22,14),rid);
-
-		spawn = new Spawnpoint(m_world,4);
-		spawn->setRespawnTime(100000);
-		spawn->addMonsterGroup(gob);
-		spawn->addMonsterGroup(lich);
-		insertObject(spawn,Vector(16,25),rid);
-
-		spawn = new Spawnpoint(m_world,5);
-		spawn->setRespawnTime(100000);
-		spawn->addMonsterGroup(gob2);
-		spawn->addMonsterGroup(lich);
-		spawn->addMonsterGroup(dog);
-		insertObject(spawn,Vector(30,27),rid);
-
-		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "tree");
-		insertObject(wo, Vector(24,26),rid);
-
-
-		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "tree");
-		insertObject(wo, Vector(10,13),rid);
-
-		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "tree");
-		insertObject(wo, Vector(20,18),rid);
-*/
 
 	}
 }

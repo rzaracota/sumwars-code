@@ -61,5 +61,68 @@ struct MonsterBasicData
 	short m_layer;
 };
 
+/**
+ * Name fuer eine Gruppe von Monstern die erzeugt wird
+ **/ 
+typedef std::string MonsterGroupName;
+
+/**
+ * \struct MonsterGroup
+ * \brief Struktur fuer eine Gruppe von Monstern
+ */
+class MonsterGroup
+{
+	/**
+	 * \struct SubGroup
+	 * \brief Untergruppe der Monster bei denen alle Monster den selben Typ haben
+	 */
+	struct SubGroup
+	{
+		/**
+		 * \var WorldObject::TypeInfo::ObjectSubtype m_subtype
+		 * \brief Subtype der erzeugten Monster
+		 */
+		WorldObject::TypeInfo::ObjectSubtype m_subtype;
+		
+		/**
+		 * \var float m_prob
+		 * \brief Wahrscheinlichkeit mit der ein Monster erzeugt wird
+		 */
+		float m_prob;
+		
+		/**
+		 * \var int m_number
+		 * \brief Anzahl der Monster die maximal erzeugt werden. Jedes Monster wird gemaess der Wahrscheinlichkeit prob erzeugt. Im Erwartungswert also prob * number Monster
+	 	 */
+		int m_number;
+	};
+	
+	
+	
+	public:
+		
+		/**
+		 * \fn void addMonsterGroup(WorldObject::TypeInfo::ObjectSubtype subtype, int number =1, float prob = 1.0)
+		 * \brief Fuegt der Monstergruppe eine Subgruppe hinzu
+		 * \param subtype Typ der Monster
+		 * \param number Anzahl der Monster
+		 * \param prob Wahrscheinlichkeit mit der ein Monster erzeugt wird
+		 */
+		void addMonsters(WorldObject::TypeInfo::ObjectSubtype subtype, int number =1, float prob = 1.0)
+		{
+			SubGroup sg;
+			sg.m_subtype = subtype;
+			sg.m_number = number;
+			sg.m_prob = prob;
+			m_monsters.push_back(sg);
+		}
+		
+		/**
+		 * \fn std::list<SubGroup> m_monsters
+		 * \brief die Monster die zu der Gruppe gehoeren
+		 */
+		std::list<SubGroup> m_monsters;
+};
+
 #endif
 

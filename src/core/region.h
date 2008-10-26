@@ -116,6 +116,26 @@ class RegionData
 			std::string m_name;
 		};
 		
+		/**
+		 * \fn struct SpawnGroup
+		 * \brief Gruppe von Monstern die in der Region auftaucht
+		 */
+		struct SpawnGroup
+		{
+			/**
+			 * \var MonsterGroupName m_monsters
+			 * \brief Name der Monstergruppe
+			 */
+			MonsterGroupName m_monsters;
+			
+			/**
+			 * \var int m_number
+			 * \brief Anzahl wie oft die Gruppe auftaucht
+			 */
+			int m_number;
+			
+		};
+		
 		
 		/**
 		 * \fn void addObjectGroupTemplate(ObjectGroupTemplateName m_group_name, int prio, int number =1, float probability=1.0)
@@ -140,6 +160,20 @@ class RegionData
 			og.m_name = name;
 			og.m_group_name = group_name;
 			m_named_object_groups.insert( std::make_pair( prio, og));
+		}
+		
+		/**
+		 * \fn void addSpawnGroup(MonsterGroupName group_name, int number =1)
+		 * \brief Fuegt eine neue Monstergruppe zu den in der Region auftauchenden Monstern hinzu
+		 * \param group_name Name der Monstergruppe
+		 * \param number Gibt an wie oft die Gruppe auftauchen soll
+		 */
+		void addSpawnGroup(MonsterGroupName group_name, int number =1)
+		{
+			SpawnGroup sg;
+			sg.m_monsters = group_name;
+			sg.m_number =number;
+			m_monsters.push_back(sg);
 		}
 		
 		/**
@@ -234,6 +268,13 @@ class RegionData
 		 * \brief Liste von moeglichen Umgebungen mit ihren Hoehenlinien
 		 */
 		std::list<std::pair<float, EnvironmentName> > m_environments;
+		
+		
+		/**
+		 * \var list<SpawnGroup> m_monsters
+		 * \brief Liste der Monster die in der Region auftauchen
+		 */
+		std::list<SpawnGroup> m_monsters;
 };
 
 
@@ -295,6 +336,14 @@ class Region
 		 * \param angle Drehwinkel mit dem die Gruppe eingefuegt wird
 		 */
 		void createObjectGroup(ObjectGroupTemplateName templname, Vector position, float angle=0);
+		
+		/**
+		 * \fn void createMonsterGroup(MonsterGroupName mgname, Vector position)
+		 * \brief erzeugt an der angegebenen Stelle eine Monstergruppe
+		 * \param mgname Name der Monstergruppe
+		 * \param position Ort an dem die Gruppe erzeugt wird
+		 */
+		void createMonsterGroup(MonsterGroupName mgname, Vector position);
 
 		/**
 		 * \fn bool getObjectsInShape( Shape* shape,  WorldObjectList* result,short layer=WorldObject::LAYER_ALL, short group = WorldObject::GROUP_ALL, WorldObject* omit=0, bool empty_test = false );

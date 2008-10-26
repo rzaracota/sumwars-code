@@ -172,11 +172,14 @@ int main (int argc,char **argv) {
 	rdata.addObjectGroupTemplate("trees3",4,1,1.0);
 	rdata.addObjectGroupTemplate("trees2",2,3,0.7);
 	rdata.addObjectGroupTemplate("trees1",1,10,0.5);
-	std::cout << rdata.m_object_groups.size() << "\n";
 	
 	rdata.addNamedObjectGroupTemplate("test2","ort1",4);
 	rdata.addNamedObjectGroupTemplate("test1","ort2",3);
 	rdata.addNamedObjectGroupTemplate("test1","ort3",2);
+	
+	rdata.addSpawnGroup("lich_goblins",1);
+	rdata.addSpawnGroup("goblin",10);
+	rdata.addSpawnGroup("goblins_dogs",10);
 	
 	
 	RegionExit exit;
@@ -196,7 +199,9 @@ int main (int argc,char **argv) {
 	MapGenerator::createTemplateMap(&mdata,&rdata);
 	MapGenerator::insertGroupTemplates(&mdata,&rdata);
 	MapGenerator::createBorder(&mdata,&rdata);
+	MapGenerator::createExits(&mdata,&rdata);
 	
+	MapGenerator::insertSpawnpoints(&mdata,&rdata);
 	/*
 	ObjectGroupTemplate* ogl = ObjectFactory::getObjectGroupTemplate("test2");
 	Vector pl;
@@ -268,7 +273,7 @@ void DisplayFunc () {
 	}
 	
 	
-	
+	/*
 	std::vector<int>::iterator it;
 	for (it = mdata.m_template_places[3].begin(); it != mdata.m_template_places[3].end(); ++it)
 	{
@@ -288,9 +293,9 @@ void DisplayFunc () {
 		glEnd();
 		
 	}
+	*/
 	
-	
-	
+	/*
 	for (int i=0;i<DIMX;++i)
 	{
 		for (int j=0;j<DIMY;++j)
@@ -318,7 +323,7 @@ void DisplayFunc () {
 		}
 		
 	}
-	
+	*/
 	
 	
 	/*
