@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" ?>
+<?xml version="1.0" ?>
 
 
 <!-- Goblin -->
@@ -47,6 +47,13 @@
 	<AI ai_sight_range="8" />
 </Monster>
 
+
+<!--
+	<MonsterGroup name="lich_goblins" >
+		<SubGroup subtype="lich" />
+		<SubGroup subtype="goblin" number="7" prob="0.7" />
+	</MonsterGroup>
+	-->
 <!--
 	<Object type="MONSTER" subtype="goblin" >
 		<Mesh file="goblin.mesh" />

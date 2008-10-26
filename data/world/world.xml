@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<World>
+	<Region id="1" name="region1">
+		<Settings dimx="32" dimy="32" area_percent="0.35" complexity="0.4" granularity="8" />
+		
+		<ExitDirections north="true" south="false" west="false" east="false" />
+		
+		<Exits>
+			<Exit name="exit_north" destination_region="region0" destination_location="entry_south" >
+				<Shape shape="RECT" extent_x="4.0" extent_y ="4.0" />
+			</Exit>
+		</Exits>
+		
+		<NamedObjectGroups>
+			<NameObjectGroup name="ort1" object_group="test2" priority="4" />
+			<NameObjectGroup name="ort2" object_group="test1" priority="3" />
+			<NameObjectGroup name="ort3" object_group="test1" priority="2" />
+		</NamedObjectGroups>
+	
+		<ObjectGroups>
+			<ObjectGroup object_group="trees3" priority="4" number="2" probability="1.0" />
+			<ObjectGroup object_group="trees2" priority="2" number="5" probability="0.7" />
+			<ObjectGroup object_group="trees1" priority="1" number="50" probability="0.5" />
+		</ObjectGroups>	
+		
+		<Environments>
+			<Environment height="0.2" name="meadow" />
+			<Environment height="1.0" name="hills" />
+		</Environments>
+		
+		<SpawnGroups>
+			<SpawnGroup group_name="lich_goblins" number="1" />
+			<SpawnGroup group_name="goblins" number="10" />
+			<SpawnGroup group_name="goblins_dogs" number="10" />
+		</SpawnGroups>
+		
+	</Region>
+</World>
+	
