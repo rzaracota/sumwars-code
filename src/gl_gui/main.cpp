@@ -49,6 +49,9 @@ int main (int argc, char *argv[])
 		}
 	}
 
+	ObjectFactory::init();
+	ObjectFactory::loadFixedObjectData("../data/objects/objects.xml");
+	
 	// Globales Document anlegen
 	global_doc = new Document();
 	global_doc->setSaveFile(save);
@@ -64,17 +67,13 @@ int main (int argc, char *argv[])
 
 	if ( true )
 	{
-		//win_main=new WindowMain(global_doc);
+		
 		win_main=new WindowMain();
-
-		DEBUG("starting main window");
-
-		//Gtk::Main::run( *win_main );
-
+		ObjectFactory::cleanup();
 		delete win_main;
 	}
-
-	delete global_doc;
+		
+	
 
 	return 0;
 }

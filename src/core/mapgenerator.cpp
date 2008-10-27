@@ -265,6 +265,8 @@ void MapGenerator::createBaseMap(MapData* mdata, RegionData* rdata)
 	
 	// Umgebungskarte generieren
 	createPerlinNoise(mdata->m_region->getHeight(), rdata->m_dimx, rdata->m_dimy,4 , 0.4,false);
+	
+	delete hmap;
 }
 
  void MapGenerator::createTemplateMap(MapData* mdata, RegionData* rdata)
@@ -411,7 +413,18 @@ bool MapGenerator::insertGroupTemplates(MapData* mdata, RegionData* rdata)
 		}
 		
 		// Grundform der Gruppe kopieren
-		memcpy(&s , templ->getShape(), sizeof(Shape));
+		/*
+		s.m_type = templ->getShape()->m_type;
+		s.m_extent = templ->getShape()->m_extent;
+		s.m_radius = templ->getShape()->m_radius;
+		
+		*/
+		
+		s.m_type = Shape::RECT;
+		s.m_extent = Vector(8,8);
+		s.m_extent.m_x =8;
+		s.m_extent.m_y =8;
+		s.m_radius =0;
 		
 		// Ort fuer das Template suchen
 		succ = getTemplatePlace(mdata,&s,pos);
@@ -699,6 +712,11 @@ void MapGenerator::createExits(MapData* mdata, RegionData* rdata)
 
 bool MapGenerator::getTemplatePlace(MapData* mdata, Shape* shape, Vector & place)
 {
+	if (shape ==0)
+	{
+		return false;
+	}
+	
 	bool success = false;
 	
 	// Groesse des Templates in 4x4 Feldern
@@ -1009,8 +1027,8 @@ void MapGenerator::createPerlinNoise(Matrix2d<float> *data, int dimx, int dimy,i
 		}
 	}
 	
-	delete weightx;
-	delete weighty;
+	delete[] weightx;
+	delete[] weighty;
 	delete tmp;		
 }
 

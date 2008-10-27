@@ -89,6 +89,8 @@ void KeyboardFunc (unsigned char key, int x, int y) {
 	switch (key) {
 		// Escape
 		case 27:
+			delete mdata.m_region;
+			ObjectFactory::cleanup();
 			exit (0);
 			break;
 			
@@ -151,7 +153,7 @@ int main (int argc,char **argv) {
 	//glEnable (GL_LIGHTING);
 	glEnable (GL_NORMALIZE);
 	
-
+	
 	rdata.m_dimx = DIMX;
 	rdata.m_dimy = DIMY;
 	
@@ -169,12 +171,12 @@ int main (int argc,char **argv) {
 	rdata.m_exit_directions[WEST] = false;
 	rdata.m_exit_directions[EAST] = true;
 	
-	rdata.addObjectGroupTemplate("trees3",4,1,1.0);
-	rdata.addObjectGroupTemplate("trees2",2,3,0.7);
-	rdata.addObjectGroupTemplate("trees1",1,10,0.5);
+	//rdata.addObjectGroupTemplate("trees3",4,1,1.0);
+	//rdata.addObjectGroupTemplate("trees2",2,3,0.7);
+	//rdata.addObjectGroupTemplate("trees1",1,10,0.5);
 	
-	rdata.addNamedObjectGroupTemplate("test2","ort1",4);
-	rdata.addNamedObjectGroupTemplate("test1","ort2",3);
+	//rdata.addNamedObjectGroupTemplate("test2","ort1",4);
+	//rdata.addNamedObjectGroupTemplate("test1","ort2",3);
 	rdata.addNamedObjectGroupTemplate("test1","ort3",2);
 	
 	rdata.addSpawnGroup("lich_goblins",1);

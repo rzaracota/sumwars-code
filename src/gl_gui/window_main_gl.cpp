@@ -114,7 +114,12 @@ void WindowMain::TimerFunc(int dummy)
 	*/
 	
 	if (global_doc->getState() == Document::SHUTDOWN)
+	{
+		delete global_doc;
+		
 		exit(0);
+		
+	}
 	
 	global_doc->update(25);
 
@@ -252,8 +257,7 @@ void WindowMain::DisplayFunc ()
 	y = global_doc->getLocalPlayer()->getShape()->m_center.m_y;
 
 
-	int action_idx ;
-
+	
 	float c[3];
 
 	// Tiles zeichnen

@@ -291,6 +291,12 @@ class ObjectFactory
 	 */
 	static void init();
 	
+	/**
+	 * \fn static void cleanup()
+	 * \brief Gibt den Speicher aller Daten frei
+	 */
+	static void cleanup();
+	
 	private:	
 	/**
 	 * \var static std::map<WorldObject::TypeInfo::ObjectSubtype, MonsterBasicData*> m_monster_data

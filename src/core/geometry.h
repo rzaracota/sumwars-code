@@ -305,6 +305,7 @@ struct Line
  */
 struct Shape
 {
+	
 	/**
 	 * \enum ShapeType
 	 * \brief Typ der geometrischen Form
@@ -314,6 +315,18 @@ struct Shape
 		RECT=1,
 		CIRCLE=2
 	};
+	
+	/**
+	 * \fn Shape()
+	 * \brief Konstruktor
+	 */
+	Shape()
+	{
+		m_type = CIRCLE;
+		m_radius=0;
+		m_angle=0;
+	}
+	
 	
 	/**
 	 * \var Vector m_center
@@ -399,9 +412,12 @@ struct Shape
 	Vector getAxisExtent()
 	{
 		if (m_type == RECT)
+		{
 			return (Vector(fabs(m_extent.m_x*cos(m_angle)) + fabs(m_extent.m_y*sin(m_angle)) , fabs(m_extent.m_y*cos(m_angle)) + fabs(m_extent.m_x*sin(m_angle))));
-		else
-			return Vector(m_radius,m_radius);
+		}
+		
+		return Vector(m_radius,m_radius);
+		
 	}
 	
 };

@@ -1,5 +1,4 @@
-window_main_gl.o
-main.o
+mapgen_gl.o
 
 ../core/trade.o
 ../core/world.o

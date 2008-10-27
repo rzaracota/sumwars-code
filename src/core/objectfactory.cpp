@@ -462,13 +462,6 @@ void ObjectFactory::init()
 	fdata->m_shape.m_type = Shape::CIRCLE;
 	fdata->m_shape.m_radius = 0.15;
 	registerFixedObject("tree3",fdata);
-	
-	fdata = new FixedObjectData;
-	fdata->m_layer = WorldObject::LAYER_BASE | WorldObject::LAYER_AIR;
-	fdata->m_shape.m_type = Shape::CIRCLE;
-	fdata->m_shape.m_radius = 0.15;
-	registerFixedObject("tree1",fdata);
-	
 
 	fdata = new FixedObjectData;
 	fdata->m_layer = WorldObject::LAYER_BASE | WorldObject::LAYER_AIR;
@@ -661,4 +654,42 @@ void ObjectFactory::init()
 	
 	
 }
+
+void ObjectFactory::cleanup()
+{
+	std::map<WorldObject::TypeInfo::ObjectSubtype, MonsterBasicData*>::iterator it1;
+	for (it1 = m_monster_data.begin(); it1 != m_monster_data.end(); ++it1)
+	{
+		delete it1->second;
+	}
+
+	std::map<WorldObject::TypeInfo::ObjectSubtype, FixedObjectData*>::iterator it2;
+	for (it2 = m_fixed_object_data.begin(); it2 != m_fixed_object_data.end(); ++it2)
+	{
+		delete it2->second;
+	} 
+	
+	
+	std::map<ObjectTemplateType, ObjectTemplate*>::iterator it3;
+	for (it3 = m_object_templates.begin(); it3 != m_object_templates.end(); ++it3)
+	{
+		delete it3->second;
+	} 
+	
+	std::map<ObjectGroupTemplateName, ObjectGroupTemplate*>::iterator it4;
+	for (it4 = m_object_group_templates.begin(); it4!= m_object_group_templates.end(); ++it4)
+	{
+		delete it4->second;
+	} 
+	
+	
+	std::map< MonsterGroupName, MonsterGroup*>::iterator it5;
+	for (it5 = m_monster_groups.begin(); it5!=m_monster_groups.end(); ++it5)
+	{
+		delete it5->second;
+	} 
+}
+
+
+
 

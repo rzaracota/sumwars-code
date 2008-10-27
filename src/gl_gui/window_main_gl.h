@@ -25,7 +25,6 @@ class WindowMain
 
 };
 
-#pragma message("WinMain definiert")
 
 #include <GL/glut.h>
 #include "document.h"
@@ -33,6 +32,5 @@ class WindowMain
 #include <stdlib.h>
 #include <math.h>
 
-#pragma message("header ende")
 
 #endif

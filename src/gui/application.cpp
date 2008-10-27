@@ -120,70 +120,77 @@ void Application::run()
 {
 	printf("started\n");
 	Ogre::Timer timer;
-	unsigned long ltime;
-	float time=0,ftime=0;
-	// float timesum=0;
-	// int count=0;
+	float time[7]={0,0,0,0,0,0,0},t;
+	float frametime;
+	int count=0;
     Ogre::Timer timer2;
 
+	int nr = 100;
 	timer.reset();
 	while (m_document->getState() != Document::SHUTDOWN)
 	{
 
-		ltime =timer.getMicroseconds ();
-		ftime = ltime / ( 1000000.0);
+		frametime =timer.getMicroseconds ()/1000.0;
+		time[0] += frametime;
 		timer.reset();
 
-		if (ftime*1000 >50)
+		
+		count ++;
+		if (count ==nr)
 		{
-        	DEBUG5("overall frame time was %f",ftime*1000);
+			count =0;
+			DEBUG("average stats over %i frames",nr);
+			DEBUG("frame time: %f",time[0]/nr);
+			DEBUG("app update time: %f",time[1]/nr);
+			DEBUG("message pump time: %f",time[2]/nr);
+			DEBUG("world update time: %f",time[3]/nr);
+			DEBUG("scene update time: %f",time[4]/nr);
+			DEBUG("gui update time: %f",time[5]/nr);
+			DEBUG("ogre  time: %f \n",time[6]/nr);
+			
+			
+			for (int i=0; i<7; i++)
+				time[i]=0;
 		}
 
 	  	timer2.reset();
 
 		update();
 
-		ltime =timer2.getMicroseconds ();
-		time = ltime / ( 1000000.0);
-		if (time*1000 > 20)
+		t =timer2.getMicroseconds ()/1000.0;
+		time[1] += t;
+		if (t > 20)
 		{
-        	DEBUG("update time was %f",time*1000);
+        	DEBUG("update time was %f",t);
 		}
 
 
 		 timer2.reset();
 		// run the message pump
 		Ogre::WindowEventUtilities::messagePump();
-		ltime =timer2.getMicroseconds ();
-		time = ltime / ( 1000000.0);
-		if (time*1000>20)
+		
+		t =timer2.getMicroseconds ()/1000.0;
+		time[2] += t;
+		if (t>20)
 		{
-			DEBUG("message pump time was %f",time*1000);
+			DEBUG("message pump time was %f",t);
 		}
 
 		timer2.reset();
 
 		// Document aktualisieren
-		m_document->update(ftime*1000);
+		m_document->update(frametime);
 
-		ltime =timer2.getMicroseconds ();
-		time = ltime / ( 1000000.0);
-		if (time*1000 > 20)
+		t =timer2.getMicroseconds ()/1000.0;
+		time[3] += t;
+		if (t> 20)
 		{
-			DEBUG("document update time was %f",time*1000);
+			DEBUG("document update time was %f",t);
 		}
 
-	/*
-		count ++;
-		timesum += time;
-		if (count ==100)
-		{
-			count =0;
-			timesum *=10;
-			DEBUG5("frame time is %f",timesum);
-			timesum =0;
-		}
-		*/
+	
+		
+		
 
 		try
 		{
@@ -193,11 +200,11 @@ void Application::run()
 			DEBUG5("main window update");
 			m_main_window->update();
 
-			ltime =timer2.getMicroseconds ();
-			time = ltime / ( 1000000.0);
-			if (time*1000 > 20)
+			t =timer2.getMicroseconds ()/1000.0;
+			time[4] += t;
+			if (t > 20)
 			{
-				DEBUG("view update time was %f",time*1000);
+				DEBUG("view update time was %f",t);
 			}
 		}
 		catch (CEGUI::Exception e)
@@ -206,14 +213,15 @@ void Application::run()
 		}
 
 		timer2.reset();
-		//DEBUG("frame time in s %f",time);
-		m_cegui_system->injectTimePulse(ftime);
+		
+		m_cegui_system->injectTimePulse(frametime/1000.0);
 
-		ltime =timer2.getMicroseconds ();
-		time = ltime / ( 1000000.0);
-		if (time*1000 > 20)
+		t =timer2.getMicroseconds ()/1000.0;
+		time[5] += t;
+		
+		if (t> 20)
 		{
-			DEBUG("cegui update time was %f",time*1000);
+			DEBUG("cegui update time was %f",t);
 		}
 
 		// rendern
@@ -221,11 +229,11 @@ void Application::run()
 
 		m_ogre_root->renderOneFrame();
 
-		ltime =timer2.getMicroseconds ();
-		time = ltime / ( 1000000.0);
-		if (time*1000 > 50)
+		t =timer2.getMicroseconds ()/1000.0;
+		time[6] += t;
+		if (t > 200)
 		{
-	         DEBUG5("ogre frame time was %f",time*1000);
+	         DEBUG("ogre frame time was %f",t);
 		}
 
 	}
