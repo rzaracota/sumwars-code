@@ -924,7 +924,7 @@ void World::updatePlayers()
 	// Schleife ueber die Spieler
 	WorldObjectMap::iterator it;
 	Player* pl;
-	int slot;
+	int slot = LOCAL_SLOT;
 	for (it = m_player_slots->begin(); it != m_player_slots->end(); )
 	{
 		slot = it->first;

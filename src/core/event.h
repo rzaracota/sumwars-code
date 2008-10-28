@@ -10,12 +10,14 @@
  */
 struct Event
 {
+	
 	/**
 	 * \enum EventType
 	 * \brief verschiedene Eventarten
 	 */
 	enum EventType
 	{
+		NOEVENT =0,
 		OBJECT_CREATED =1,
 		OBJECT_DESTROYED = 2,
 		OBJECT_STAT_CHANGED =3,
@@ -119,6 +121,17 @@ struct Event
 		m_type = (EventType) ctmp;
 		cv->fromBuffer(m_data);
 		cv->fromBuffer(m_id);
+	}
+	
+	/**
+	 * \fn Event()
+	 * \brief Konstruktor
+	 */
+	Event()
+	{
+		m_id =0;
+		m_data =0;
+		m_type = NOEVENT;
 	}
 	
 };

@@ -688,6 +688,7 @@ void Scene::updateObject(WorldObject* obj)
 	DEBUG5("particle");
 	//zeigt an ob ein Partikelsystem sichtbar is
 	bool vis;
+	/*
 	if (cr !=0)
 	{
 		// Feld das angibt, welche Mods gesetzt sind
@@ -728,6 +729,7 @@ void Scene::updateObject(WorldObject* obj)
 			}
 		}
 	}
+	*/
 }
 
 void Scene::deleteObject(std::string name)
@@ -790,7 +792,7 @@ void Scene::createObject(WorldObject* obj,std::string& name, bool is_static)
 
 
 	// eventuelle Partikeleffekte einfuegen
-
+/*
 	if (!is_static)
 	{
 		// Partikelsysteme anhaengen
@@ -834,6 +836,7 @@ void Scene::createObject(WorldObject* obj,std::string& name, bool is_static)
 		part = m_scene_manager->createParticleSystem(name+"effect0", "Hit");
 		obj_node->attachObject(part);
 	}
+	*/
 }
 
 void Scene::createItem(DropItem* di, std::string& name)

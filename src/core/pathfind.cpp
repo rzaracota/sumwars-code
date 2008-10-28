@@ -436,7 +436,7 @@ void SearchField::createGradient(Matrix2d<float[2]>* grad)
 			{
 				continue;
 			}
-			fa1 = pot[ia1][ia2];
+			fa1 = pot[ia1][ja1];
 			
 			q = fabs(fa1);
 			DEBUG5("coord %i %i val %f",ia1,ja1,q);

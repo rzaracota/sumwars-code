@@ -130,7 +130,7 @@ void Application::run()
 	int count=0;
     Ogre::Timer timer2;
 
-	int nr = 100;
+	int nr = 1000;
 	timer.reset();
 	while (m_document->getState() != Document::SHUTDOWN)
 	{
@@ -143,10 +143,10 @@ void Application::run()
 		count ++;
 		if (count ==nr)
 		{
-			/*
+			
 			count =0;
 			DEBUG("average stats over %i frames",nr);
-			DEBUG("frame time: %f",time[0]/nr);
+			DEBUG("frame time: %f (%f fps)",time[0]/nr, 1000/(time[0]/nr));
 			DEBUG("app update time: %f",time[1]/nr);
 			DEBUG("message pump time: %f",time[2]/nr);
 			DEBUG("world update time: %f",time[3]/nr);
@@ -157,7 +157,7 @@ void Application::run()
 			
 			for (int i=0; i<7; i++)
 				time[i]=0;
-			*/
+			
 		}
 
 	  	timer2.reset();
