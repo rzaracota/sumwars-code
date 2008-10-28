@@ -62,7 +62,8 @@ public:
 		m_type = type;
 		m_goal = goal;
 		m_goal_object_id= goal_object_id;
-	
+		m_damage_mult=1;
+		m_range=1;
 	}
 	
 	/**

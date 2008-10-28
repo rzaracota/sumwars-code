@@ -17,6 +17,19 @@ ItemBasicData::ItemBasicData()
 	
 }
 
+ItemBasicData::~ItemBasicData()
+{
+	if (m_useup_effect!=0)
+		delete m_useup_effect;
+	
+	if (m_equip_effect!=0)
+		delete m_equip_effect;
+	
+	if (m_weapon_attr!=0)
+		delete m_weapon_attr;
+	
+}
+
 
 Item::Item()
 {

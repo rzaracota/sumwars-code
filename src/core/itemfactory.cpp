@@ -382,7 +382,6 @@ Item* ItemFactory::createItem(Item::Type type, Item::Subtype subtype, int id, fl
 		magic_power =0;
 
 		m_creature_dyn_attr_mod = new CreatureDynAttrMod();
-		m_weaponattr = new WeaponAttr();
 		item->m_useup_effect = m_creature_dyn_attr_mod;
 		item->m_equip_effect = 0;
 		item->m_weapon_attr = 0;
@@ -656,6 +655,7 @@ void ItemFactory::loadItemData(std::string file)
 			cout << "m_max_enchant" << " = " << (*iter)->m_max_enchant << endl;
 			cout << "------------------------------------------------" << endl;
 			*/
+			registerItem((*iter)->m_type,(*iter)->m_subtype, *iter);
 			
 			iter++;
 		}
@@ -724,6 +724,18 @@ void ItemFactory::init()
 	registerItemDrop(Item::ARMOR,"heal_fr",DropChance(-1,0.5,Item::SMALL));
 
 
+}
+
+void ItemFactory::cleanup()
+{
+	DEBUG("cleanup");
+
+	std::map<Item::Subtype,ItemBasicData*>::iterator it;
+	for (it = m_item_data.begin(); it != m_item_data.end(); ++it)
+	{
+		DEBUG5("deleting item data %s",it->first.c_str());
+		delete it->second;
+	}
 }
 
 Item* ItemFactory::createItem(DropSlot &slot)

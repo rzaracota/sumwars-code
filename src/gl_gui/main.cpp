@@ -51,6 +51,11 @@ int main (int argc, char *argv[])
 
 	ObjectFactory::init();
 	ObjectFactory::loadFixedObjectData("../data/objects/objects.xml");
+	ObjectFactory::loadMonsterData("../data/monsters/monsters.xml");
+	ObjectFactory::loadObjectTemplates("../data/obj_templates/obj_templates.xml");
+	ObjectFactory::loadMonsterData("../data/obj_group_templ/og_template.xml");
+	
+	ItemFactory::loadItemData("../data/items/items.xml");
 	
 	// Globales Document anlegen
 	global_doc = new Document();

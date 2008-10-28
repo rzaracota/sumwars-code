@@ -44,7 +44,7 @@ SearchField::SearchField(int dim)
 SearchField::~SearchField()
 {
 	delete m_array;
-	delete m_heap;
+	delete[] m_heap;
 }
 
 void SearchField::init(Matrix2d<float>* pot, Matrix2d<char>* block)

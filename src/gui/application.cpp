@@ -114,6 +114,11 @@ Application::~Application()
 	delete m_document;
 	delete m_ogre_cegui_renderer;
 	delete m_ogre_root;
+	
+	World::deleteWorld();
+	ObjectFactory::cleanup();
+	ItemFactory::cleanup();
+
 }
 
 void Application::run()
@@ -138,6 +143,7 @@ void Application::run()
 		count ++;
 		if (count ==nr)
 		{
+			/*
 			count =0;
 			DEBUG("average stats over %i frames",nr);
 			DEBUG("frame time: %f",time[0]/nr);
@@ -151,6 +157,7 @@ void Application::run()
 			
 			for (int i=0; i<7; i++)
 				time[i]=0;
+			*/
 		}
 
 	  	timer2.reset();

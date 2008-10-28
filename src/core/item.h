@@ -399,6 +399,12 @@ struct ItemBasicData
 	 * \brief Konstruktor
 	 */
 	ItemBasicData();
+	
+	/**
+	 * \fn ~ItemBasicData()
+	 * \brief Destruktor
+	 */
+	~ItemBasicData();
 
 };
 

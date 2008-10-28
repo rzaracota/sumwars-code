@@ -116,7 +116,10 @@ void WindowMain::TimerFunc(int dummy)
 	if (global_doc->getState() == Document::SHUTDOWN)
 	{
 		delete global_doc;
-		
+		World::deleteWorld();
+		ObjectFactory::cleanup();
+		DEBUG("cleanup");
+		ItemFactory::cleanup();
 		exit(0);
 		
 	}

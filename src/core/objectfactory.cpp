@@ -125,7 +125,7 @@ WorldObject* ObjectFactory::createObject(WorldObject::TypeInfo::ObjectType type,
 		if (i== m_monster_data.end())
 		{
 			ERRORMSG("subtype not found: %s",subtype.c_str());
-			i = m_monster_data.find("goblin");
+			return 0;
 		}
 		mdata = i->second;
 		ret = new Monster( id,*mdata);
@@ -142,7 +142,7 @@ WorldObject* ObjectFactory::createObject(WorldObject::TypeInfo::ObjectType type,
 		if (i== m_fixed_object_data.end())
 		{
 			ERRORMSG("subtype not found: %s",subtype.c_str());
-			i = m_fixed_object_data.find("tree1");
+			return 0;
 		}
 		data = i->second;
 		

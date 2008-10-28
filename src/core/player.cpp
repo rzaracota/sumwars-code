@@ -34,7 +34,7 @@ Player::Player( int id) : Creature( id)
 
 Player::~Player()
 {
-
+	delete m_equipement;
 }
 
 bool Player::destroy()

@@ -112,6 +112,12 @@ public:
 	static void init();
 	
 	/**
+	 * \fn static void cleanup()
+	 * \brief Gibt allokierten Speicher frei
+	 */
+	static void cleanup();
+	
+	/**
 	 * \fn void loadItemData(std::string file)
 	 * \brief Laedt Daten zu Gegenstaenden aus der angegebenen Datei
 	 * \param file Item XML Datei

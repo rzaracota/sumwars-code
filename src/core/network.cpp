@@ -12,6 +12,10 @@ Network::Network()
 	// m_peer->ApplyNetworkSimulator( 0, 100, 2000);
 }
 
+Network::~Network()
+{
+	delete m_peer;
+}
 
 void Network::kill()
 {

@@ -55,10 +55,8 @@ class Network
 		 * \fn virtual ~Network()
 		 * \brief Destruktor
 		 */
-		virtual ~Network()
-		{
-			
-		}
+		virtual ~Network();
+		
 		
 		/**
 		 * \fn NetStatus init( int auth_port )

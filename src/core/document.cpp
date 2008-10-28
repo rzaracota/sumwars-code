@@ -185,7 +185,7 @@ void Document::loadSavegame()
 		m_timer.start();
 
 
-		delete data;
+		delete[] data;
 	}
 	else
 	{

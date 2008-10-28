@@ -93,6 +93,8 @@ bool Creature::init()
 	// Timer nullen
 	m_timer1 =0;
 	m_timer2 =0;
+	m_timer1_max =0;
+	m_timer2_max =0;
 
 	m_dyn_attr.m_last_attacker_id=0;
 	m_dyn_attr. m_experience=0;
@@ -113,6 +115,19 @@ bool Creature::init()
 	}
 
 	setState(STATE_ACTIVE);
+	clearCommand();
+	m_next_command.m_type = Action::NOACTION;
+	m_next_command.m_damage_mult = 1;
+	m_next_command.m_goal = Vector(0,0);
+	m_next_command.m_goal_object_id =0;
+	m_next_command.m_range =1;
+	
+	m_action.m_animation_number=0;
+	m_action.m_action_equip = Action::NO_WEAPON;
+	m_action.m_time =0;
+	m_action.m_elapsed_time =0;
+	
+	
 
 	//Lebenspunkts auf 1 (debugging)
 	m_dyn_attr.m_health = 1;
@@ -2108,6 +2123,9 @@ void Creature::clearCommand()
 {
 	m_command.m_type = Action::NOACTION;
 	m_command.m_damage_mult = 1;
+	m_command.m_goal = Vector(0,0);
+	m_command.m_goal_object_id =0;
+	m_command.m_range =1;
 	m_event_mask |= Event::DATA_COMMAND;
 }
 

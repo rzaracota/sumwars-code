@@ -70,6 +70,7 @@ Region::~Region()
 	DropItemMap::iterator k;
 			for (k =  m_drop_items->begin(); k != m_drop_items->end(); k++)
 	{
+		delete k->second->m_item;
 		delete k->second;
 	}
 

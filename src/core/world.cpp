@@ -78,6 +78,9 @@ bool World::init()
 		return false;
 	}
 
+	m_timer[0] =0;
+	m_timer[1] =0;
+	m_timer[2] =0;
 	
 	// TODO: Daten werden aktuell fest gesetzt
 	
@@ -336,11 +339,23 @@ void World::updateLogins()
 World::~World()
 {
 
+	delete m_network;
+	
+	
+	
 	std::map<int, Trade* >::iterator j;
 	for (j=m_trades->begin(); j!=m_trades->end();j++)
+	{
 		delete j->second;
-
+	}
 	delete m_trades;
+	
+	std::map<int, RegionData*>::iterator it;
+			
+	for (it = m_region_data.begin(); it != m_region_data.end(); ++it)
+	{
+		delete it->second;
+	}
 
 	std::map<int,Region*>::iterator rit;
 	for (rit = m_regions.begin(); rit != m_regions.end(); rit++)

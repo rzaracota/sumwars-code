@@ -98,7 +98,6 @@ bool Warrior::init ()
 	si = ItemFactory::createItem(Item::WEAPON,"short_sw");
 	equ->swapItem(si,Equipement::MEDIUM_ITEMS);
 
-
 	si = ItemFactory::createItem(Item::ARMOR,"leath_arm");
 	equ->swapItem(si,Equipement::ARMOR);
 
@@ -114,18 +113,13 @@ bool Warrior::init ()
 	si = ItemFactory::createItem(Item::SHIELD,"wood_sh");
 	equ->swapItem(si,Equipement::SHIELD);
 
-	si = ItemFactory::createItem(Item::SHIELD,"iron_sh");
-	equ->swapItem(si,Equipement::BIG_ITEMS+1);
-
-	si = ItemFactory::createItem(Item::ARMOR,"leath_arm");
-	equ->swapItem(si,Equipement::ARMOR);
-
 	si = ItemFactory::createItem(Item::WEAPON,"horse_sw");
 	equ->swapItem(si,Equipement::BIG_ITEMS+1);
 
 	si = ItemFactory::createItem(Item::WEAPON,"battle_axe");
 	equ->swapItem(si,Equipement::BIG_ITEMS);
 
+	// memleak?
 	si = ItemFactory::createItem(Item::POTION,"heal_1");
 	equ->swapItem(si,Equipement::SMALL_ITEMS);
 

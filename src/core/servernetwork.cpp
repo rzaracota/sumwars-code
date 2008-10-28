@@ -69,6 +69,7 @@ ServerNetwork::~ServerNetwork()
 			delete m_slots[i];
 	}
 	delete[] m_slots;
+	m_peer->Shutdown(100);
 }
 
 
