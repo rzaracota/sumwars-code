@@ -443,7 +443,8 @@ void ObjectFactory::init()
 	
 	
 	// feste Objekte
-	FixedObjectData* fdata;
+	// TODO entfernen, wenn keine Fehler beim Laden der festen Objekte aufgetreten sind
+/*	FixedObjectData* fdata;
 	
 	fdata = new FixedObjectData;
 	fdata->m_layer = WorldObject::LAYER_BASE | WorldObject::LAYER_AIR;
@@ -521,7 +522,7 @@ void ObjectFactory::init()
 	fdata->m_layer = WorldObject::LAYER_BASE | WorldObject::LAYER_AIR;
 	fdata->m_shape.m_type = Shape::RECT;
 	fdata->m_shape.m_extent = Vector(4,4);
-	registerFixedObject("stones3",fdata);
+	registerFixedObject("stones3",fdata);*/
 	
 
 	// Daten fuer generische Objekte

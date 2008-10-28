@@ -123,7 +123,36 @@ void Scene::loadMonsterData(std::string file)
 
 void Scene::loadFixedObjectData(std::string file)
 {
-	// TODO
+	// FixedObject Meshes aus XML-Datei Laden
+	ObjectLoader* objectloader = 0;
+	objectloader = new ObjectLoader;
+
+	std::list<FixedObjectMeshData*>* fixed_object_mesh_list;
+	fixed_object_mesh_list = objectloader->loadFixedObjectMeshData(file.c_str());
+
+	if (fixed_object_mesh_list != 0)
+	{
+		// Daten auslesen und registrieren
+		std::list<FixedObjectMeshData*>::iterator iter = fixed_object_mesh_list->begin();
+		while (iter != fixed_object_mesh_list->end())
+		{
+			registerObject((*iter)->m_subtype, (*iter)->m_mesh, "");
+			*iter++;
+		}
+
+		// Liste aus Speicher loeschen
+		iter = fixed_object_mesh_list->begin();
+		while (iter != fixed_object_mesh_list->end())
+		{
+			delete *iter;
+			*iter++;
+		}
+	}
+
+	delete fixed_object_mesh_list;
+	fixed_object_mesh_list = 0;
+	delete objectloader;
+	objectloader = 0;
 }
 
 
@@ -143,6 +172,8 @@ void Scene::registerMeshes()
 	registerObject("lich","lich.mesh","");
 
 	// feste Objekte
+	// TODO entfernen, wenn keine Fehler beim Laden der festen Objekte aufgetreten sind
+	/*
 	registerObject("tree1","tree1.mesh","");
     registerObject("tree2","tree2.mesh","");
     registerObject("tree3","tree3.mesh","");
@@ -154,6 +185,7 @@ void Scene::registerMeshes()
 	registerObject("wall1","wall1.mesh","");
 	registerObject("wall2","wall2.mesh","");
 	registerObject("wall3","wall3.mesh","");
+	*/
 	registerObject("smallWall1","smallWall1.mesh","");
 	registerObject("smallWall2","smallWall2.mesh","");
 	registerObject("stones3","stones3.mesh","");

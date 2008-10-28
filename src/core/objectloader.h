@@ -50,6 +50,26 @@ struct FixedObjectData
 
 
 /**
+ * \struct ItemMeshData
+ * \brief Enthaelt die Daten, die zum Laden des Meshs fuer ein Monster notwendig sind
+ */
+struct FixedObjectMeshData
+{
+	/**
+	 * \var std::string m_subtype
+	 * \brief Subtyp des festen Objekts
+	 */
+	std::string m_subtype;
+	
+	/**
+	 * \var string m_mesh
+	 * \brief Name des Meshes
+	 */
+	std::string m_mesh;
+};
+
+
+/**
  * \class ObjectLoader
  * \brief Laedt Objecte aus einer XML-Datei
  */
@@ -69,7 +89,7 @@ class ObjectLoader
 	 * \fn void loadMonsterMeshData(const char* pFilename)
 	 * \brief Sorgt fuer das Anlegen von MonsterMeshData, die in einer XML-Datei gespeichert sind
 	 * \param pFilename Pfad zu einer XML-Datei, die Monster enthaelt
-	 * \return Liste der geladenen Monster
+	 * \return Liste der geladenen Monster-Meshes
 	 */
 	std::list<MonsterMeshData*>* loadMonsterMeshData(const char* pFilename);
 	
@@ -80,6 +100,14 @@ class ObjectLoader
 	 * \return Liste der geladenen festen Objekte
 	 */
 	bool loadFixedObjectData(const char* pFilename, std::list<FixedObjectData*>* &object_list, std::list<std::string>* &subtype_list);
+	
+	/**
+	 * \fn void loadFixedObjectMeshData(const char* pFilename)
+	 * \brief Sorgt fuer das Anlegen von FixedObjectMeshData, die in einer XML-Datei gespeichert sind
+	 * \param pFilename Pfad zu einer XML-Datei, die Monster enthaelt
+	 * \return Liste der geladenen FixedObject-Meshes
+	 */
+	std::list<FixedObjectMeshData*>* loadFixedObjectMeshData(const char* pFilename);
 	
 	private:
 	
@@ -132,6 +160,22 @@ class ObjectLoader
 	void searchFixedObjectData(TiXmlNode* pParent, std::list<FixedObjectData*>* object_list, std::list<std::string>* subtype_list);
 	
 	/**
+	 * \fn int generateFixedObjectMeshData(TiXmlElement* pElement, std::string element)
+	 * \brief Legt FixedObjectMeshData im Speicher anhand von Daten an, die als Parameter uebergeben wurden. Diese Daten stammen aus einer XML-Datei.
+	 * \param pElement Zeiger auf ein Element der XML-Datei
+	 * \param element Name des Elements
+	 * \return Anzahl der Attribute des bearbeiteten Elements
+	 */
+	int generateFixedObjectMeshData(TiXmlElement* pElement, std::string element);
+	
+	/**
+	 * \fn void searchFixedObjectMeshData( TiXmlNode* pParent )
+	 * \brief Durchmustert eine XML-Datei und sucht nach Elementen.
+	 * \param pParent Zeiger auf eine XML-Datei
+	 */
+	void searchFixedObjectMeshData(TiXmlNode* pParent);
+	
+	/**
 	 * \var MonsterBasicData* m_monster_data
 	 * \brief Daten der Monster
 	 */
@@ -163,6 +207,17 @@ class ObjectLoader
 	 * \brief Liste mit Daten zu Objekten
 	 */
 	//std::list<FixedObjectData*>* m_object_list;
+	
+	/**
+	 * \var FixedObjectMeshData* m_fixed_object_mesh_data
+	 * \brief Daten zu den Meshes der festen Objekte
+	 */
+	FixedObjectMeshData* m_fixed_object_mesh_data;
+	/**
+	 * \var std::list<FixedObjectMeshData*>* m_fixed_object_mesh_list
+	 * \brief Liste mit Daten zu den Meshes der festen Objekte
+	 */
+	std::list<FixedObjectMeshData*>* m_fixed_object_mesh_list;
 	
 	
 	/**

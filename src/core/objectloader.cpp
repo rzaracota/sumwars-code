@@ -585,3 +585,112 @@ bool ObjectLoader::loadFixedObjectData(const char* pFilename, std::list<FixedObj
 	}
 }
 
+//##############################################################################
+
+int ObjectLoader::generateFixedObjectMeshData(TiXmlElement* pElement, string element)
+{
+	if ( !pElement ) return 0;
+
+	TiXmlAttribute* pAttrib=pElement->FirstAttribute();
+	int i=0;
+
+	if (element == "Object" && pAttrib)
+	{
+		if (m_fixed_object_mesh_data == 0)
+		{
+			m_fixed_object_mesh_data = new FixedObjectMeshData;
+		}
+
+		while (element == "Object" && pAttrib)
+		{
+			if (!strcmp(pAttrib->Name(), "subtype"))
+				m_fixed_object_mesh_data->m_subtype = pAttrib->Value();
+
+			i++;
+			pAttrib=pAttrib->Next();
+		}
+	}
+
+	if (element == "Mesh" && pAttrib)
+	{
+		while (element == "Mesh" && pAttrib)
+		{
+			if (!strcmp(pAttrib->Name(), "file"))
+				m_fixed_object_mesh_data->m_mesh = pAttrib->Value();
+
+			i++;
+			pAttrib=pAttrib->Next();
+		}
+	}
+
+	return i;
+}
+
+
+void ObjectLoader::searchFixedObjectMeshData(TiXmlNode* pParent)
+{
+	if ( !pParent ) return;
+
+	TiXmlNode* pChild;
+//	TiXmlText* pText;
+
+	int t = pParent->Type();
+	int num;
+
+	switch ( t )
+	{
+	case TiXmlNode::ELEMENT:
+		//printf( "Element [%s]", pParent->Value() );
+		num = generateFixedObjectMeshData(pParent->ToElement(), pParent->Value());
+		/*switch(num)
+		{
+			case 0:  printf( " (No attributes)"); break;
+			case 1:  printf( "%s1 attribute", getIndentAlt(indent)); break;
+			default: printf( "%s%d attributes", getIndentAlt(indent), num); break;
+		}*/
+		break;
+	/*
+	case TiXmlNode::TEXT:
+		pText = pParent->ToText();
+		printf( "Text: [%s]", pText->Value() );
+		break;
+	*/
+	default:
+		break;
+	}
+
+	for ( pChild = pParent->FirstChild(); pChild != 0; pChild = pChild->NextSibling())
+	{
+		searchFixedObjectMeshData(pChild);
+
+		if ( !strcmp(pChild->Value(), "Object") && pChild->Type() == TiXmlNode::ELEMENT)
+		{
+			m_fixed_object_mesh_list->push_back(m_fixed_object_mesh_data);
+			m_fixed_object_mesh_data = 0;
+			DEBUG5("FixedObject Mesh loaded");
+		}
+	}
+}
+
+
+std::list<FixedObjectMeshData*>* ObjectLoader::loadFixedObjectMeshData(const char* pFilename)
+{
+	m_fixed_object_mesh_data = 0;
+	m_fixed_object_mesh_list = new std::list<FixedObjectMeshData*>;
+
+	TiXmlDocument doc(pFilename);
+	bool loadOkay = doc.LoadFile();
+
+	if (loadOkay)
+	{
+		DEBUG5("Loading %s", pFilename);
+		searchFixedObjectMeshData(&doc);
+		DEBUG5("Loading %s finished", pFilename);
+		return m_fixed_object_mesh_list;
+	}
+	else
+	{
+		DEBUG("Failed to load file %s", pFilename);
+		return 0;
+	}
+}
