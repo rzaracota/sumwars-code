@@ -1,0 +1,736 @@
+<?xml version="1.0" ?>
+
+<!-- Bei Gegenstaenden, die keine Waffen sind kann "WeaponAttribute" weggelassen werden. -->
+
+<!-- general
+<Item type="weapon" subtype="short_sw" size="big">
+	<Mesh file="sword.mesh" />
+	<Attribute
+		level_requirement="char"
+		character_requirement="char"
+		price="int"
+		min_enchant="float"
+		max_enchant="float"
+		modchance_health_mod="float"
+		modchance_armor_mod="float"
+		modchance_block_mod="float"
+s		modchance_strength_mod="float"
+s		modchance_dexterity_mod="float"
+s		modchance_magic_power_mod="float"
+		modchance_willpower_mod="float"
+		modchance_resist_phys_mod="float"
+		modchance_resist_fire_mod="float"
+		modchance_resist_ice_mod="float"
+		modchance_resist_air_mod="float"
+		modchance_resist_all_mod="float"
+s		modchance_damage_phys_mod="float"
+s		modchance_damage_fire_mod="float"
+s		modchance_damage_ice_mod="float"
+s		modchance_damage_air_mod="float"
+		modchance_damage_mult_phys_mod="float"
+		modchance_damage_mult_fire_mod="float"
+		modchance_damage_mult_ice_mod="float"
+		modchance_damage_mult_air_mod="float"
+		modchance_attack_speed_mod="float"
+		modchance21="float"
+		modchance_attack_mod="float"
+		modchance_power_mod="float"
+		modchance_mage_fire_skills_mod="float"
+		modchance_mage_ice_skills_mod="float"
+		modchance_mage_air_skills_mod="float"
+		modchance27="float"
+		modchance28="float"
+		modchance29="float"
+		modchance30="float"
+	/>
+	<UseupEffect
+		dhealth="float"
+		dstatus_mod_immune_time0="float"
+		dstatus_mod_immune_time1="float"
+		dstatus_mod_immune_time2="float"
+		dstatus_mod_immune_time3="float"
+		dstatus_mod_immune_time4="float"
+		dstatus_mod_immune_time5="float"
+		dstatus_mod_immune_time6="float"
+		dstatus_mod_immune_time7="float"
+	/>
+	<EquipEffect
+		darmor="short"
+		dblock="short"
+		dmax_health="float"
+		dattack="short"
+		dstrength="short"
+		ddexterity="short"
+		dmagic_power="short"
+		dwillpower="short"
+		dresistances_physical="short"
+		dresistances_cap_physical="short"
+		dresistances_air="short"
+		dresistances_cap_air="short"
+		dresistances_ice="short"
+		dresistances_cap_ice="short"
+		dresistances_fire="short"
+		dresistances_cap_fire="short"
+		dwalk_speed="short"
+		dattack_speed="short"
+		xspecial_flags="int"
+		time="float"
+		xabilities0="int"
+		xabilities1="int"
+		xabilities2="int"
+		xabilities3="int"
+		xabilities4="int"
+		xabilities5="int"
+		ximmunity="char"
+	/>
+	<WeaponAttribute
+		damage_min_physical="float"
+		damage_max_physical="float"
+		damage_min_air="float"
+		damage_max_air="float"
+		damage_min_ice="float"
+		damage_max_ice="float"
+		damage_min_fire="float"
+		damage_max_fire="float"
+		multiplier_physical="float"
+		multiplier_air="float"
+		multiplier_ice="float"
+		multiplier_fire="float"
+		damage_attack="float"
+		damage_power="float"
+		status_mod_power0="short"
+		status_mod_power1="short"
+		status_mod_power2="short"
+		status_mod_power3="short"
+		status_mod_power4="short"
+		status_mod_power5="short"
+		status_mod_power6="short"
+		status_mod_power7="short"
+		special_flags="short"
+		attack_range="float"
+		two_handed="no"
+		dattack_speed="short"
+	/>
+	<DropChance
+		level="int"
+		probability="float"
+	/>
+</Item>
+-->
+
+<!-- TWO HANDED SWORDS -->
+<!-- farmers two hand sword-->
+<Item type="weapon" subtype="farm2h_sw" size="big">
+	<Mesh file="sword.mesh" />
+	<Attribute
+		price="100"
+		min_enchant="10"
+		max_enchant="40"
+		modchance_strength_mod="0.1"
+		modchance_dexterity_mod="0.1"
+		modchance_magic_power_mod="0.05"
+		modchance_damage_phys_mod="0.15"
+		modchance_damage_fire_mod="0.10"
+		modchance_damage_ice_mod="0.10"
+		modchance_damage_air_mod="0.10"
+		modchance_damage_mult_phys_mod="0.1"
+		modchance_attack_mod="0.1"
+		modchance_power_mod="0.1"
+	/>
+	<EquipEffect />
+	<WeaponAttribute
+		damage_min_physical="5"
+		damage_max_physical="10"
+		damage_attack="20"
+		damage_power="10"
+		attack_range="1.2"
+		two_handed="yes"
+		dattack_speed="1000"
+	/>
+	<DropChance
+		level="1"
+		probability="1.0"
+	/>
+</Item>
+
+<!-- mercenary blade -->
+<Item type="weapon" subtype="merc2h_sw" size="big">
+	<Mesh file="sword.mesh" />
+	<Attribute
+		price="300"
+		min_enchant="30"
+		max_enchant="120"
+		modchance_strength_mod="0.1"
+		modchance_dexterity_mod="0.1"
+		modchance_magic_power_mod="0.05"
+		modchance_damage_phys_mod="0.15"
+		modchance_damage_fire_mod="0.10"
+		modchance_damage_ice_mod="0.10"
+		modchance_damage_air_mod="0.10"
+		modchance_damage_mult_phys_mod="0.1"
+		modchance_attack_mod="0.1"
+		modchance_power_mod="0.1"
+	/>
+	<EquipEffect />
+	<WeaponAttribute
+		damage_min_physical="9"
+		damage_max_physical="17"
+		damage_attack="20"
+		damage_power="30"
+		attack_range="1.5"
+		two_handed="yes"
+		dattack_speed="500"
+	/>
+	<DropChance
+		level="3"
+		probability="1.0"
+	/>
+</Item>
+
+<!-- two handed steelsword -->
+<Item type="weapon" subtype="steel2h_sw" size="big">
+	<Mesh file="sword.mesh" />
+	<Attribute
+		price="800"
+		min_enchant="40"
+		max_enchant="150"
+		modchance_strength_mod="0.1"
+		modchance_dexterity_mod="0.1"
+		modchance_magic_power_mod="0.05"
+		modchance_damage_phys_mod="0.15"
+		modchance_damage_fire_mod="0.10"
+		modchance_damage_ice_mod="0.10"
+		modchance_damage_air_mod="0.10"
+		modchance_damage_mult_phys_mod="0.1"
+		modchance_attack_mod="0.1"
+		modchance_power_mod="0.1"
+	/>
+	<EquipEffect />
+	<WeaponAttribute
+		damage_min_physical="15"
+		damage_max_physical="26"
+		damage_attack="20"
+		damage_power="40"
+		attack_range="1.5"
+		two_handed="yes"
+		dattack_speed="450"
+	/>
+	<DropChance
+		level="5"
+		probability="1.0"
+	/>
+</Item>
+
+<!-- smash sword -->
+<Item type="weapon" subtype="smash_sw" size="big">
+	<Mesh file="sword.mesh" />
+	<Attribute
+		price="1500"
+		min_enchant="50"
+		max_enchant="200"
+		modchance_strength_mod="0.1"
+		modchance_dexterity_mod="0.1"
+		modchance_magic_power_mod="0.05"
+		modchance_damage_phys_mod="0.15"
+		modchance_damage_fire_mod="0.10"
+		modchance_damage_ice_mod="0.10"
+		modchance_damage_air_mod="0.10"
+		modchance_damage_mult_phys_mod="0.1"
+		modchance_attack_mod="0.1"
+		modchance_power_mod="0.1"
+	/>
+	<EquipEffect />
+	<WeaponAttribute
+		damage_min_physical="21"
+		damage_max_physical="36"
+		damage_attack="15"
+		damage_power="60"
+		attack_range="1.5"
+		two_handed="yes"
+		dattack_speed="-400"
+	/>
+	<DropChance
+		level="8"
+		probability="1.0"
+	/>
+</Item>
+
+<!-- horse killer -->
+<Item type="weapon" subtype="horse_sw" size="big">
+	<Mesh file="sword.mesh" />
+	<Attribute
+		price="2000"
+		min_enchant="80"
+		max_enchant="260"
+		modchance_strength_mod="0.1"
+		modchance_dexterity_mod="0.1"
+		modchance_magic_power_mod="0.05"
+		modchance_damage_phys_mod="0.15"
+		modchance_damage_fire_mod="0.10"
+		modchance_damage_ice_mod="0.10"
+		modchance_damage_air_mod="0.10"
+		modchance_damage_mult_phys_mod="0.1"
+		modchance_attack_mod="0.1"
+		modchance_power_mod="0.1"
+	/>
+	<EquipEffect />
+	<WeaponAttribute
+		damage_min_physical="35"
+		damage_max_physical="53"
+		damage_attack="25"
+		damage_power="40"
+		attack_range="1.5"
+		two_handed="yes"
+		dattack_speed="-400"
+	/>
+	<DropChance
+		level="13"
+		probability="1.0"
+	/>
+</Item>
+
+<!-- bastard sword -->
+<Item type="weapon" subtype="bast_sw" size="big">
+	<Mesh file="sword.mesh" />
+	<Attribute
+		price="2600"
+		min_enchant="80"
+		max_enchant="260"
+		modchance_strength_mod="0.1"
+		modchance_dexterity_mod="0.1"
+		modchance_magic_power_mod="0.05"
+		modchance_damage_phys_mod="0.15"
+		modchance_damage_fire_mod="0.10"
+		modchance_damage_ice_mod="0.10"
+		modchance_damage_air_mod="0.10"
+		modchance_damage_mult_phys_mod="0.1"
+		modchance_attack_mod="0.1"
+		modchance_power_mod="0.1"
+	/>
+	<EquipEffect />
+	<WeaponAttribute
+		damage_min_physical="51"
+		damage_max_physical="71"
+		damage_attack="30"
+		damage_power="30"
+		attack_range="1.5"
+		two_handed="yes"
+		dattack_speed="-400"
+	/>
+	<DropChance
+		level="19"
+		probability="1.0"
+	/>
+</Item>
+
+<!-- Ogerdolch -->
+<Item type="weapon" subtype="ogre_sw" size="big">
+	<Mesh file="sword.mesh" />
+	<Attribute
+			  price="3000"
+			  min_enchant="40"
+			  max_enchant="220"
+			  modchance_strength_mod="0.1"
+			  modchance_dexterity_mod="0.1"
+			  modchance_magic_power_mod="0.05"
+			  modchance_damage_phys_mod="0.15"
+			  modchance_damage_fire_mod="0.10"
+			  modchance_damage_ice_mod="0.10"
+			  modchance_damage_air_mod="0.10"
+			  modchance_damage_mult_phys_mod="0.1"
+			  modchance_attack_mod="0.1"
+			  modchance_power_mod="0.1"
+			  />
+	<EquipEffect />
+	<WeaponAttribute
+					damage_min_physical="68"
+					damage_max_physical="96"
+					damage_attack="30"
+					damage_power="40"
+					attack_range="1.5"
+					two_handed="yes"
+					dattack_speed="-400"
+					/>
+	<DropChance
+			   level="25"
+			   probability="1.0"
+			   />
+</Item>
+
+<!-- Goblint�ter -->
+<Item type="weapon" subtype="goblin_sw" size="big">
+	<Mesh file="sword.mesh" />
+	<Attribute
+			  price="3500"
+			  min_enchant="80"
+			  max_enchant="300"
+			  modchance_strength_mod="0.1"
+			  modchance_dexterity_mod="0.1"
+			  modchance_magic_power_mod="0.05"
+			  modchance_damage_phys_mod="0.15"
+			  modchance_damage_fire_mod="0.10"
+			  modchance_damage_ice_mod="0.10"
+			  modchance_damage_air_mod="0.10"
+			  modchance_damage_mult_phys_mod="0.1"
+			  modchance_attack_mod="0.1"
+			  modchance_power_mod="0.1"
+			  />
+	<EquipEffect />
+	<WeaponAttribute
+					damage_min_physical="87"
+					damage_max_physical="120"
+					damage_attack="35"
+					damage_power="45"
+					attack_range="1.5"
+					two_handed="yes"
+					dattack_speed="0"
+					/>
+	<DropChance
+			   level="30"
+			   probability="1.0"
+			   />
+</Item>
+
+<!-- Richtschwert -->
+<Item type="weapon" subtype="judge_sw" size="big">
+	<Mesh file="sword.mesh" />
+	<Attribute
+			  price="4000"
+			  min_enchant="100"
+			  max_enchant="300"
+			  modchance_strength_mod="0.1"
+			  modchance_dexterity_mod="0.1"
+			  modchance_magic_power_mod="0.05"
+			  modchance_damage_phys_mod="0.15"
+			  modchance_damage_fire_mod="0.10"
+			  modchance_damage_ice_mod="0.10"
+			  modchance_damage_air_mod="0.10"
+			  modchance_damage_mult_phys_mod="0.1"
+			  modchance_attack_mod="0.1"
+			  modchance_power_mod="0.1"
+			  />
+	<EquipEffect />
+	<WeaponAttribute
+					damage_min_physical="120"
+					damage_max_physical="175"
+					damage_attack="15"
+					damage_power="95"
+					attack_range="1.5"
+					two_handed="yes"
+					dattack_speed="-1000"
+					/>
+	<DropChance
+			   level="35"
+			   probability="1.0"
+			   />
+</Item>
+
+<!-- Gardistenzweih�nder -->
+<Item type="weapon" subtype="garde_sw" size="big">
+	<Mesh file="sword.mesh" />
+	<Attribute
+			  price="4500"
+			  min_enchant="100"
+			  max_enchant="350"
+			  modchance_strength_mod="0.1"
+			  modchance_dexterity_mod="0.1"
+			  modchance_magic_power_mod="0.05"
+			  modchance_damage_phys_mod="0.15"
+			  modchance_damage_fire_mod="0.10"
+			  modchance_damage_ice_mod="0.10"
+			  modchance_damage_air_mod="0.10"
+			  modchance_damage_mult_phys_mod="0.1"
+			  modchance_attack_mod="0.1"
+			  modchance_power_mod="0.1"
+			  />
+	<EquipEffect />
+	<WeaponAttribute
+					damage_min_physical="100"
+					damage_max_physical="155"
+					damage_attack="50"
+					damage_power="45"
+					attack_range="1.5"
+					two_handed="yes"
+					dattack_speed="0"
+					/>
+	<DropChance
+			   level="40"
+			   probability="1.0"
+			   />
+</Item>
+
+<!-- Flamberg -->
+<Item type="weapon" subtype="flame2h_sw" size="big">
+	<Mesh file="sword.mesh" />
+	<Attribute
+			  price="5000"
+			  min_enchant="110"
+			  max_enchant="370"
+			  modchance_strength_mod="0.1"
+			  modchance_dexterity_mod="0.1"
+			  modchance_magic_power_mod="0.05"
+			  modchance_damage_phys_mod="0.15"
+			  modchance_damage_fire_mod="0.20"
+			  modchance_damage_ice_mod="0.0"
+			  modchance_damage_air_mod="0.10"
+			  modchance_damage_mult_phys_mod="0.1"
+			  modchance_attack_mod="0.1"
+			  modchance_power_mod="0.1"
+			  />
+	<EquipEffect />
+	<WeaponAttribute
+					damage_min_physical="50"
+					damage_max_physical="75"
+					damage_min_fire="65"
+					damage_max_fire="90"
+					damage_attack="50"
+					damage_power="45"
+					attack_range="1.5"
+					two_handed="yes"
+					dattack_speed="0"
+					/>
+	<DropChance
+			   level="45"
+			   probability="1.0"
+			   />
+</Item>
+
+<!-- Aisener Kriegsschwert -->
+<Item type="weapon" subtype="aisen_sw" size="big">
+	<Mesh file="sword.mesh" />
+	<Attribute
+			  price="5500"
+			  min_enchant="110"
+			  max_enchant="370"
+			  modchance_strength_mod="0.1"
+			  modchance_dexterity_mod="0.1"
+			  modchance_magic_power_mod="0.05"
+			  modchance_damage_phys_mod="0.15"
+			  modchance_damage_fire_mod="0.10"
+			  modchance_damage_ice_mod="0.10"
+			  modchance_damage_air_mod="0.10"
+			  modchance_damage_mult_phys_mod="0.1"
+			  modchance_attack_mod="0.1"
+			  modchance_power_mod="0.1"
+			  />
+	<EquipEffect />
+	<WeaponAttribute
+					damage_min_physical="135"
+					damage_max_physical="160"
+					damage_attack="55"
+					damage_power="45"
+					attack_range="1.5"
+					two_handed="yes"
+					dattack_speed="0"
+					/>
+	<DropChance
+			   level="50"
+			   probability="1.0"
+			   />
+</Item>
+
+<!-- Monsterschwert -->
+<Item type="weapon" subtype="monster_sw" size="big">
+	<Mesh file="sword.mesh" />
+	<Attribute
+			  price="6000"
+			  min_enchant="80"
+			  max_enchant="390"
+			  modchance_strength_mod="0.1"
+			  modchance_dexterity_mod="0.1"
+			  modchance_magic_power_mod="0.05"
+			  modchance_damage_phys_mod="0.15"
+			  modchance_damage_fire_mod="0.10"
+			  modchance_damage_ice_mod="0.10"
+			  modchance_damage_air_mod="0.10"
+			  modchance_damage_mult_phys_mod="0.1"
+			  modchance_attack_mod="0.1"
+			  modchance_power_mod="0.1"
+			  />
+	<EquipEffect />
+	<WeaponAttribute
+					damage_min_physical="155"
+					damage_max_physical="200"
+					damage_attack="50"
+					damage_power="65"
+					attack_range="1.5"
+					two_handed="yes"
+					dattack_speed="-400"
+					/>
+	<DropChance
+			   level="55"
+			   probability="1.0"
+			   />
+</Item>
+
+<!-- Tr�nenschwert -->
+<Item type="weapon" subtype="tear_sw" size="big">
+	<Mesh file="sword.mesh" />
+	<Attribute
+			  price="6500"
+			  min_enchant="120"
+			  max_enchant="430"
+			  modchance_strength_mod="0.1"
+			  modchance_dexterity_mod="0.1"
+			  modchance_magic_power_mod="0.05"
+			  modchance_damage_phys_mod="0.15"
+			  modchance_damage_fire_mod="0.05"
+			  modchance_damage_ice_mod="0.15"
+			  modchance_damage_air_mod="0.10"
+			  modchance_damage_mult_phys_mod="0.1"
+			  modchance_attack_mod="0.1"
+			  modchance_power_mod="0.1"
+			  />
+	<EquipEffect />
+	<WeaponAttribute
+					damage_min_physical="175"
+					damage_max_physical="190"
+					damage_attack="75"
+					damage_power="60"
+					attack_range="1.5"
+					two_handed="yes"
+					dattack_speed="0"
+					/>
+	<DropChance
+			   level="60"
+			   probability="1.0"
+			   />
+</Item>
+
+<!-- Todeswind -->
+<Item type="weapon" subtype="death_sw" size="big">
+	<Mesh file="sword.mesh" />
+	<Attribute
+			  price="7000"
+			  min_enchant="140"
+			  max_enchant="470"
+			  modchance_strength_mod="0.1"
+			  modchance_dexterity_mod="0.1"
+			  modchance_magic_power_mod="0.05"
+			  modchance_damage_phys_mod="0.10"
+			  modchance_damage_fire_mod="0.05"
+			  modchance_damage_ice_mod="0.15"
+			  modchance_damage_air_mod="0.15"
+			  modchance_damage_mult_phys_mod="0.1"
+			  modchance_attack_mod="0.1"
+			  modchance_power_mod="0.1"
+			  />
+	<EquipEffect />
+	<WeaponAttribute
+					damage_min_physical="225"
+					damage_max_physical="290"
+					damage_min_air="10"
+					damage_max_air="25"
+					damage_attack="75"
+					damage_power="35"
+					attack_range="1.5"
+					two_handed="yes"
+					dattack_speed="0"
+					/>
+	<DropChance
+			   level="65"
+			   probability="1.0"
+			   />
+</Item>
+
+<!-- Schreckensschwert -->
+<Item type="weapon" subtype="dread_sw" size="big">
+	<Mesh file="sword.mesh" />
+	<Attribute
+			  price="7500"
+			  min_enchant="150"
+			  max_enchant="490"
+			  modchance_strength_mod="0.1"
+			  modchance_dexterity_mod="0.1"
+			  modchance_magic_power_mod="0.05"
+			  modchance_damage_phys_mod="0.15"
+			  modchance_damage_fire_mod="0.10"
+			  modchance_damage_ice_mod="0.10"
+			  modchance_damage_air_mod="0.10"
+			  modchance_damage_mult_phys_mod="0.1"
+			  modchance_attack_mod="0.1"
+			  modchance_power_mod="0.1"
+			  />
+	<EquipEffect />
+	<WeaponAttribute
+					damage_min_physical="185"
+					damage_max_physical="220"
+					damage_attack="75"
+					damage_power="85"
+					attack_range="1.5"
+					two_handed="yes"
+					dattack_speed="-500"
+					/>
+	<DropChance
+			   level="70"
+			   probability="1.0"
+			   />
+</Item>
+
+<!-- Gro�schwert -->
+<Item type="weapon" subtype="great_sw" size="big">
+	<Mesh file="sword.mesh" />
+	<Attribute
+			  price="8000"
+			  min_enchant="170"
+			  max_enchant="530"
+			  modchance_strength_mod="0.1"
+			  modchance_dexterity_mod="0.1"
+			  modchance_magic_power_mod="0.05"
+			  modchance_damage_phys_mod="0.15"
+			  modchance_damage_fire_mod="0.10"
+			  modchance_damage_ice_mod="0.10"
+			  modchance_damage_air_mod="0.10"
+			  modchance_damage_mult_phys_mod="0.1"
+			  modchance_attack_mod="0.1"
+			  modchance_power_mod="0.1"
+			  />
+	<EquipEffect />
+	<WeaponAttribute
+					damage_min_physical="195"
+					damage_max_physical="245"
+					damage_attack="80"
+					damage_power="80"
+					attack_range="1.5"
+					two_handed="yes"
+					dattack_speed="-200"
+					/>
+	<DropChance
+			   level="75"
+			   probability="1.0"
+			   />
+</Item>
+
+<!-- Engelsschwert -->
+<Item type="weapon" subtype="angl2h_sw" size="big">
+	<Mesh file="sword.mesh" />
+	<Attribute
+			  price="9000"
+			  min_enchant="200"
+			  max_enchant="700"
+			  modchance_strength_mod="0.1"
+			  modchance_dexterity_mod="0.1"
+			  modchance_magic_power_mod="0.05"
+			  modchance_damage_phys_mod="0.15"
+			  modchance_damage_fire_mod="0.10"
+			  modchance_damage_ice_mod="0.10"
+			  modchance_damage_air_mod="0.10"
+			  modchance_damage_mult_phys_mod="0.1"
+			  modchance_attack_mod="0.1"
+			  modchance_power_mod="0.1"
+			  />
+	<EquipEffect />
+	<WeaponAttribute
+					damage_min_physical="225"
+					damage_max_physical="265"
+					damage_attack="100"
+					damage_power="100"
+					attack_range="1.5"
+					two_handed="yes"
+					dattack_speed="0"
+					/>
+	<DropChance
+			   level="80"
+			   probability="1.0"
+			   />
+</Item>
