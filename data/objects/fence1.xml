@@ -1,10 +1,10 @@
-﻿<?xml version="1.0" ?>
+<?xml version="1.0" ?>
 
 
 <!-- general
 <Object type="FIXED_OBJECT" subtype="fence1">
 	<Mesh file="fence1.mesh" />
-	<Layer layer="NORMAL OR GROUND" />
+	<Layer layer="NORMAL OR BASE OR AIR" />
 	<Geometry shape="RECT" extent_x="float" extent_y ="float" />
 	OR
 	<Geometry shape="CIRCLE" radius="float" />

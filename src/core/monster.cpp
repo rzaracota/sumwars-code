@@ -52,8 +52,8 @@ Monster::Monster( int id,MonsterBasicData& data)
 
 	m_ai.m_goals = new WorldObjectValueList;
 	m_ai.m_visible_goals = new WorldObjectValueList;
-	m_ai.m_state = Ai::INACTIVE;
-	m_ai.m_sight_range = 10;
+	m_ai.m_state = Ai::ACTIVE;
+	m_ai.m_sight_range = 15;
 	calcBaseAttrMod();
 }
 
@@ -86,9 +86,9 @@ bool Monster::init()
 
 	getBaseAttr()->m_step_length=0.5;
 
-	m_ai.m_sight_range=8;
+	m_ai.m_sight_range=15;
 
-
+	m_ai.m_state = Ai::ACTIVE;
 	return true;
 }
 

@@ -616,11 +616,10 @@ void ItemFactory::registerItem(Item::Type type,Item::Subtype subtype, ItemBasicD
 void ItemFactory::loadItemData(std::string file)
 {
 	// Items aus XML Laden
-	ItemLoader* itemloader = 0;
-	itemloader = new ItemLoader;
+	ItemLoader itemloader;
 
 	std::list<ItemBasicData*>* item_list;
-	item_list = itemloader->loadItemBasicData(file.c_str());
+	item_list = itemloader.loadItemBasicData(file.c_str());
 
 	if (item_list != 0)
 	{
@@ -663,7 +662,7 @@ void ItemFactory::loadItemData(std::string file)
 
 
 	std::list<DropChanceData*>* drop_chance_list;
-	drop_chance_list = itemloader->loadDropChanceData(file.c_str());
+	drop_chance_list = itemloader.loadDropChanceData(file.c_str());
 
 	if (drop_chance_list != 0)
 	{
@@ -688,8 +687,6 @@ void ItemFactory::loadItemData(std::string file)
 	item_list = 0;
 	delete drop_chance_list;
 	drop_chance_list = 0;
-	delete itemloader;
-	itemloader = 0;
 }
 
 void ItemFactory::init()
