@@ -1377,7 +1377,7 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 	// Wenn das Ziel nach der Aktion unter 0 Lebenspunkte hat Bonus austeilen
 	if ((checkAbility(Action::MONSTER_HUNTER) || (checkAbility(Action::MONSTER_SLAYER))) && cgoal && cgoal->getDynAttr()->m_health<0)
 	{
-		DEBUG("monster killed, apply mod");
+		DEBUG5("monster killed, apply mod");
 		CreatureBaseAttrMod cbam;
 
 		// Modifikation:
@@ -3512,7 +3512,7 @@ void Creature::applyBaseAttrMod(CreatureBaseAttrMod* mod, bool add)
 	}
 	if (mod->m_dmax_health !=0 || mod->m_dstrength!=0)
 	{
-		m_event_mask |= Event::DATA_MAX_HP;
+		m_event_mask |= Event::DATA_MAX_HP | Event::DATA_HP;
 	}
 
 	// einige Untergrenzen pruefen
@@ -3594,7 +3594,7 @@ bool Creature::removeBaseAttrMod(CreatureBaseAttrMod* mod)
 	}
 	if (mod->m_dmax_health !=0 || mod->m_dstrength!=0)
 	{
-		m_event_mask |= Event::DATA_MAX_HP;
+		m_event_mask |= Event::DATA_MAX_HP | Event::DATA_HP;
 	}
 
 	for (i=0;i<4;i++)
@@ -3796,6 +3796,8 @@ void Creature::toString(CharConv* cv)
 
 	DEBUG5("write offset: %i",cv->getBitStream()->GetNumberOfBitsUsed());
 
+	
+	
 	// Statusveraenderungen
 	char c=0;
 	for (int i=0;i<NR_STATUS_MODS;i++)
@@ -3813,7 +3815,7 @@ void Creature::toString(CharConv* cv)
 			cv->toBuffer(m_dyn_attr.m_status_mod_time[i]);
 		}
 	}
-
+	
 	// Effekte
 	for (int i=0;i<NR_EFFECTS;i++)
 	{
@@ -3859,10 +3861,10 @@ void Creature::fromString(CharConv* cv)
 	cv->fromBuffer(m_base_attr_mod.m_max_health);
 	DEBUG5("read offset: %i",cv->getBitStream()->GetReadOffset());
 
-
 	// Statusveraenderungen
-	cv->fromBuffer<char>(ctmp);
 	char c=0;
+	cv->fromBuffer<char>(c);
+	
 	for (int i=0;i<NR_STATUS_MODS;i++)
 	{
 		if (c & (1 <<i ))
@@ -3870,7 +3872,6 @@ void Creature::fromString(CharConv* cv)
 			cv->fromBuffer<float>(m_dyn_attr.m_status_mod_time[i]);
 		}
 	}
-
 
 
 	for (int i=0;i<NR_EFFECTS;i++)

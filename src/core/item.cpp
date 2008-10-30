@@ -97,11 +97,19 @@ Item::~Item()
 
 std::string Item::getName()
 {
+	std::ostringstream ret;
+	
+	if (m_size == GOLD)
+	{
+		ret << m_price << " ";
+	}
     #ifndef WIN32
-        return (gettext((getString()).c_str()));
+        ret <<  (gettext((getString()).c_str()));
     #else
-        return getString();
+        ret << getString();
     #endif
+	
+	return ret.str();
 }
 
 
@@ -120,13 +128,20 @@ void Item::toString(CharConv* cv)
 	strncpy(stmp,m_subtype.c_str(),10);
 	cv->toBuffer(stmp,10);
 	cv->toBuffer(m_id);
-
+	if (m_type == GOLD_TYPE)
+	{
+		cv->toBuffer(m_price);
+	}
 
 }
 
 void Item::fromString(CharConv* cv)
 {
 	// Daten werden extern eingelesen
+	if (m_type == GOLD_TYPE)
+	{
+		cv->fromBuffer(m_price);
+	}
 }
 
 void Item::toStringComplete(CharConv* cv)

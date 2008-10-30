@@ -226,16 +226,20 @@ void World::createRegion(short region)
 		
 		reg->createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "$tree", Vector(1,8));
 		
-		wo = new Spawnpoint("lich_goblins", World::getWorld()->getValidId());
+		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_MONSTER, "goblin");
+		reg->insertObject(wo, Vector(13,8));
+		
+		
+		wo = new Spawnpoint("goblins", World::getWorld()->getValidId());
 		reg->insertObject(wo, Vector(15,10));
 		/*
-
+		
+		
 		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_MONSTER, "lich");
 		reg->insertObject(wo, Vector(7,5));
 		
 		
-		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_MONSTER, "goblin");
-		reg->insertObject(wo, Vector(13,8));
+		
 		
 		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_MONSTER, "gob_dog");
 		reg->insertObject(wo, Vector(14.2,8.2));
@@ -589,8 +593,7 @@ bool World::insertPlayerIntoRegion(WorldObject* player, short region, LocationNa
 			if (player == m_local_player)
 			{
 				// Server nach den fehlenden Informationen fragen
-				player->setState(WorldObject::STATE_REGION_DATA_REQUEST);
-
+				// wird vom Server initiiert
 			}
 			else
 			{
@@ -625,11 +628,11 @@ bool World::insertPlayerIntoRegion(WorldObject* player, short region, LocationNa
 		{
 			pos = reg->getLocation(m_region_enter_loc[player->getId()] );
 			m_region_enter_loc.erase(player->getId());
-			
 		}
-		DEBUG5("entry position %f %f",pos.m_x, pos.m_y);
 		reg->getFreePlace(player->getShape(),player->getLayer() , pos, player);
 		reg->insertObject(player, pos,player->getShape()->m_angle);
+		DEBUG5("entry position %f %f",pos.m_x, pos.m_y);
+		
 		player->setState(WorldObject::STATE_ACTIVE);
 		
 		// bisheriges Kommando abbrechen
@@ -713,6 +716,7 @@ void World::handleSavegame(CharConv *cv, int slot)
 
 			if (slot != LOCAL_SLOT)
 			{
+				DEBUG("sending player data ");
 				// Daten zur Initialisierung
 				PackageHeader header3;
 				header3.m_content =PTYPE_S2C_INITIALISATION;
@@ -740,6 +744,7 @@ void World::handleSavegame(CharConv *cv, int slot)
 					// Nur senden, wenn es nicht der eigene Spieler ist
 					if (it->first != slot)
 					{
+						DEBUG("writing player slot %i",slot);
 						it->second->toString(&msg);
 					}
 				}
@@ -1346,7 +1351,9 @@ bool World::writeEvent(Region* region,Event* event, CharConv* cv)
 			cv->toBuffer(object->getShape()->m_center.m_y);
 		}
 		else
+		{
 			return false;
+		}
 
 	}
 
@@ -1396,67 +1403,136 @@ bool World::processEvent(Region* region,CharConv* cv)
 
 	WorldObject* object;
 	Projectile* proj;
-
-	switch(event.m_type)
+	
+	// Objekt suchen dass zu dem Event gehoert
+	// Spieler werden aus der Spielerliste gesucht
+	// andere Objekte aus der Region
+	if (event.m_type == Event::OBJECT_CREATED || 
+		   event.m_type ==  Event::OBJECT_STAT_CHANGED ||
+		  event.m_type ==  Event::OBJECT_DESTROYED)
 	{
-		case Event::OBJECT_CREATED:
-			region->createObjectFromString(cv, m_players);
-			break;
-
-		case Event::OBJECT_STAT_CHANGED:
-			object =region->getObject(event.m_id);
-			if (object !=0)
+		if (m_players->count(event.m_id) ==1)
+		{
+			object = (*m_players)[event.m_id];
+		}
+		else
+		{
+			if (region !=0)
 			{
-
-				object->processEvent(&event,cv);
+				object =region->getObject(event.m_id);
+				if (object ==0)
+					return false;
 			}
 			else
 			{
-				// Event erhalten zu dem kein Objekt gehoert
-				DEBUG5("object %i for event does not exist",event.m_id);
 				return false;
 			}
+		}
+	}
+	
+	switch(event.m_type)
+	{
+		case Event::OBJECT_CREATED:
+			if (region !=0)
+			{
+				region->createObjectFromString(cv, m_players);
+			}
+			else
+			{
+				return false;
+			}
+			break;
+
+		case Event::OBJECT_STAT_CHANGED:
+			
+			if (m_players->count(event.m_id) ==1)
+			{
+				object = (*m_players)[event.m_id];
+			}
+			else
+			{
+				if (region !=0)
+				{
+					object =region->getObject(event.m_id);
+					if (object ==0)
+						return false;
+				}
+				else
+					return false;
+			}
+			object->processEvent(&event,cv);
 			break;
 
 
 		case Event::OBJECT_DESTROYED:
-			object =region->getObject(event.m_id);
-			if (object !=0)
+			if (m_players->count(event.m_id) ==1)
 			{
-				object->destroy();
-				region->deleteObject(object);
-				delete object;
+				object = (*m_players)[event.m_id];
 			}
 			else
 			{
-				// Event erhalten zu dem kein Objekt gehoert
+				if (region !=0)
+				{
+					object =region->getObject(event.m_id);
+					if (object ==0)
+						return false;
+				}
+				else
+					return false;
 			}
+			object->destroy();
+			if (region !=0)
+			{
+				region->deleteObject(object);
+			}
+			delete object;
+			
 			break;
 
 		case Event::PROJECTILE_CREATED:
-			region->createProjectileFromString(cv);
-			break;
-
-		case Event::PROJECTILE_STAT_CHANGED:
-			proj = region->getProjectile(event.m_id);
-			if (proj !=0)
+			if (region !=0)
 			{
-				proj->processEvent(&event,cv);
+				region->createProjectileFromString(cv);
 			}
 			else
 			{
-				DEBUG("projectile %i for event does not exist",event.m_id);
 				return false;
 			}
 			break;
 
-		case Event::PROJECTILE_DESTROYED:
-			proj = region->getProjectile(event.m_id);
-			if (proj != 0)
+		case Event::PROJECTILE_STAT_CHANGED:
+			if (region !=0)
 			{
-				region->deleteProjectile(proj);
-				delete proj;
+				proj = region->getProjectile(event.m_id);
+				if (proj !=0)
+				{
+					proj->processEvent(&event,cv);
+				}
+				else
+				{
+					DEBUG("projectile %i for event does not exist",event.m_id);
+					return false;
+				}
 			}
+			else
+			{
+				return false;
+			}
+			break;
+		case Event::PROJECTILE_DESTROYED:
+			if (region !=0)
+			{
+				proj = region->getProjectile(event.m_id);
+				if (proj != 0)
+				{
+					region->deleteProjectile(proj);
+					delete proj;
+				}
+			}
+			else
+			{
+				return false;
+			}	
 			break;
 
 
@@ -1468,7 +1544,7 @@ bool World::processEvent(Region* region,CharConv* cv)
 				object = (*m_players)[event.m_id];
 				
 				// Spieler aus seiner bisherigen Region entfernen
-				if (object->getRegion() !=0)
+				if (object->getRegion() !=0 && object != m_local_player)
 				{
 					object->getRegion()->deleteObject(object);
 				}
@@ -1476,7 +1552,6 @@ bool World::processEvent(Region* region,CharConv* cv)
 
 				cv->fromBuffer(object->getShape()->m_center.m_x);
 				cv->fromBuffer(object->getShape()->m_center.m_y);
-				
 				insertPlayerIntoRegion(object,event.m_data);
 			}
 			break;
@@ -1510,12 +1585,26 @@ bool World::processEvent(Region* region,CharConv* cv)
 			break;
 
 		case Event::ITEM_DROPPED:
-			region->createItemFromString(cv);
+			if (region !=0)
+			{
+				region->createItemFromString(cv);
+			}
+			else
+			{
+				return false;
+			}
 			break;
 
 		case Event::ITEM_REMOVED:
-			DEBUG("remove item %i",event.m_id);
-			region->deleteItem(event.m_id,true);
+			if (region !=0)
+			{
+				DEBUG("remove item %i",event.m_id);
+				region->deleteItem(event.m_id,true);
+			}
+			else
+			{
+				return false;
+			}	
 			break;
 
 		case Event::PLAYER_NOITEM_EQUIPED:

@@ -614,7 +614,7 @@ short Player::insertItem(Item* itm)
 	if (pos != Equipement::NONE)
 	{
 		// Gegenstand ins Inventar aufgenommen
-		if (World::getWorld()->isServer())
+		if (World::getWorld()->isServer() && pos != Equipement::GOLD)
 		{
 			Event event;
 			event.m_type =  Event::PLAYER_ITEM_PICKED_UP ;
@@ -1680,7 +1680,7 @@ void Player::toString(CharConv* cv)
 	cv->toBuffer((char*) m_name.c_str(),32);
 
 	cv->toBuffer(getBaseAttr()->m_level);
-
+	
 	// Items
 	char cnt =0;
 	Item* item;
@@ -1692,7 +1692,7 @@ void Player::toString(CharConv* cv)
 	}
 	DEBUG5("number of items: %i",cnt);
 	cv->toBuffer(cnt);
-
+	
 
 	for ( short i = Equipement::ARMOR; i<= Equipement::SHIELD2; i++)
 	{
@@ -1711,7 +1711,6 @@ void Player::toString(CharConv* cv)
 void Player::fromString(CharConv* cv)
 {
 	Creature::fromString(cv);
-
 	char tmp[32];
 	cv->fromBuffer(tmp,32);
 	m_name = tmp;
@@ -1721,7 +1720,7 @@ void Player::fromString(CharConv* cv)
 	char cnt;
 	cv->fromBuffer(cnt);
 	DEBUG5("number of items: %i",cnt);
-
+	
 
 	for ( short i = 0; i< cnt; i++)
 	{
@@ -1744,13 +1743,14 @@ void Player::readItem(CharConv* cv)
 	cv->fromBuffer(subtype,10);
 	cv->fromBuffer(id);
 
-
 	item = ItemFactory::createItem((Item::Type) type, std::string(subtype),id);
 	item->fromString(cv);
 	getEquipement()->swapItem(item,pos);
 
 	if (item !=0)
+	{
 		delete item;
+	}
 }
 
 void Player::readItemComplete(CharConv* cv)

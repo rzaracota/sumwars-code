@@ -24,6 +24,12 @@ Item* ItemFactory::createItem(Item::Type type, Item::Subtype subtype, int id, fl
 	}
 	
 	DEBUG5("creating item %i / %s",type, subtype.c_str());
+	
+	if (type == Item::GOLD_TYPE)
+	{
+		return createGold(0,id);
+	}
+	
 	std::map<Item::Subtype,ItemBasicData*>::iterator it;
 	it = m_item_data.find(subtype);
 	Item * item;
@@ -429,6 +435,23 @@ Item* ItemFactory::createItem(Item::Type type, Item::Subtype subtype, int id, fl
 
 }
 
+Item* ItemFactory::createGold(int value, int id)
+{
+	Item* item = new Item;
+	if (id ==0)
+	{
+		id = World::getWorld()->getValidId();
+	}
+	
+	item->m_size = Item::GOLD;
+	item->m_type = Item::GOLD_TYPE;
+	item->m_id = id;
+	item->m_subtype = "gold";
+	item->m_price = value;
+	
+	return item;
+}
+
 
 void ItemFactory::createMagicMods(Item* item, float* modchance, float magic_power, float min_enchant, float max_enchant)
 {
@@ -752,11 +775,9 @@ Item* ItemFactory::createItem(DropSlot &slot)
 	Item* item =0;
 	if (size  == Item::GOLD)
 	{
-		return 0;
+		
 		// Gold gedroppt
-		item = new Item;
-		item->m_size = Item::GOLD;
-		item->m_price = Random::randrangei((slot.m_max_level*slot.m_max_level)*5, (slot.m_max_level*slot.m_max_level)*29);
+		item = createGold(Random::randrangei((3+slot.m_max_level*slot.m_max_level)/5, 10+(slot.m_max_level*slot.m_max_level)));
 
 		return item;
 	}

@@ -198,6 +198,7 @@ Equipement::Equipement(short max_small, short max_medium, short max_big)
 	m_ring_right=0;
 	m_amulet=0;
 	m_cursor_item=0;
+	m_gold = 0;
 };
 
 Equipement::~Equipement()
@@ -413,6 +414,13 @@ short  Equipement::insertItem(Item* item)
 	if (item ==0)
 		return NONE;
 
+	if (item->m_size == Item::GOLD)
+	{
+		m_gold += item->m_price;
+		delete item;
+		return GOLD;
+	}
+	
 	Item* itm = item;
 	int pos;
 	pos = m_inventory.getFreePlace(item->m_size);

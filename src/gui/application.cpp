@@ -143,7 +143,7 @@ void Application::run()
 		count ++;
 		if (count ==nr)
 		{
-			
+			/*
 			count =0;
 			DEBUG("average stats over %i frames",nr);
 			DEBUG("frame time: %f (%f fps)",time[0]/nr, 1000/(time[0]/nr));
@@ -157,7 +157,7 @@ void Application::run()
 			
 			for (int i=0; i<7; i++)
 				time[i]=0;
-			
+			*/
 		}
 
 	  	timer2.reset();

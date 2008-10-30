@@ -151,8 +151,8 @@ bool Region::getFreePlace(Shape* shape, short layer, Vector & pos, WorldObject* 
 
 	float c = 1.1;
 	// Position in 0.5 x 0.5 Feldern
-	int sx = (int) (pos.m_x/c);
-	int sy = (int) (pos.m_y/c);
+	int sx = (int) ((pos.m_x/c) + 0.5);
+	int sy = (int) ((pos.m_y/c) + 0.5);
 	int i;
 	fields.push(sx*10000+sy);
 
@@ -1033,7 +1033,7 @@ void Region::getRegionData(CharConv* cv)
 	}
 
 	// Anzahl der statischen Objekte eintragen
-	DEBUG("static objects: %i",m_static_objects->size());
+	DEBUG5("static objects: %i",m_static_objects->size());
 	cv->toBuffer<short>((short) m_static_objects->size());
 
 	// statische Objekte in den Puffer eintragen
@@ -1046,22 +1046,32 @@ void Region::getRegionData(CharConv* cv)
 
 
 	// Anzahl der nicht  statischen Objekte eintragen
-	DEBUG("nonstatic objects: %i",m_objects->size());
-	cv->toBuffer<short>((short) m_objects->size());
-
-	// nicht statische Objekte in den Puffer eintragen
 	WorldObjectMap::iterator jt;
+	short nr=0;
 	for (jt = m_objects->begin();jt!=m_objects->end();++jt)
 	{
-		DEBUG5("write offset: %i",cv->getBitStream()->GetNumberOfBitsUsed());
-		(jt->second)->toString(cv);
+		if (jt->second->getLayer() != WorldObject::LAYER_SPECIAL)
+			nr++;	
+	}
+	DEBUG5("nonstatic objects: %i",nr);
+	cv->toBuffer<short>((short) nr);
 
-		DEBUG5("object: %s",(jt->second)->getNameId().c_str());
+	// nicht statische Objekte in den Puffer eintragen
+	
+	for (jt = m_objects->begin();jt!=m_objects->end();++jt)
+	{
+		if (jt->second->getLayer() != WorldObject::LAYER_SPECIAL)
+		{
+			DEBUG5("write offset: %i",cv->getBitStream()->GetNumberOfBitsUsed());
+			(jt->second)->toString(cv);
+	
+			DEBUG5("object: %s",(jt->second)->getNameId().c_str());
+		}
 	}
 
 	// Anzahl der Projektile eintragen
 	cv->toBuffer<short>((short) m_projectiles->size());
-	DEBUG("projectiles: %i",m_projectiles->size());
+	DEBUG5("projectiles: %i",m_projectiles->size());
 
 	// Projektile in den Puffer eintragen
 	ProjectileMap::iterator kt;
@@ -1071,7 +1081,7 @@ void Region::getRegionData(CharConv* cv)
 	}
 
 	cv->toBuffer<short>((short) m_drop_items->size());
-	DEBUG("dropped items: %i",m_drop_items->size());
+	DEBUG5("dropped items: %i",m_drop_items->size());
 
 	//  Items in den Puffer eintragen
 	DropItemMap::iterator lt;
@@ -1165,7 +1175,7 @@ void Region::createItemFromString(CharConv* cv)
 	di->m_item = item;
 	di->m_x = sx;
 	di->m_y = sy;
-	DEBUG("dropped item %i at %i %i", id,sx,sy);
+	DEBUG5("dropped item %i at %i %i", id,sx,sy);
 	di->m_time = 0;
 
 	m_drop_items->insert(std::make_pair(id,di));
@@ -1183,7 +1193,7 @@ void Region::setRegionData(CharConv* cv,WorldObjectMap* players)
 	stmp[20] ='\0';
 	cv->fromBuffer(stmp,20);
 	m_name = stmp;
-	DEBUG("name of region: %s",stmp);
+	DEBUG5("name of region: %s",stmp);
 	
 	// Tiles eintragen
 	int i,j;
@@ -1224,7 +1234,7 @@ void Region::setRegionData(CharConv* cv,WorldObjectMap* players)
 	// statische Objekte einlesen
 	short nr_stat;
 	cv->fromBuffer<short>(nr_stat);
-	DEBUG("static objects: %i",nr_stat);
+	DEBUG5("static objects: %i",nr_stat);
 
 	for (int i=0; i<nr_stat;i++)
 	{
@@ -1236,7 +1246,7 @@ void Region::setRegionData(CharConv* cv,WorldObjectMap* players)
 	// neue Objekte einlesen
 	short nr_nonstat;
 	cv->fromBuffer<short>(nr_nonstat);
-	DEBUG("nonstatic objects: %i",nr_nonstat);
+	DEBUG5("nonstatic objects: %i",nr_nonstat);
 
 	for (int i=0; i<nr_nonstat;i++)
 	{
@@ -1247,7 +1257,7 @@ void Region::setRegionData(CharConv* cv,WorldObjectMap* players)
 	// Anzahl der Projektile einlesen
 	short nr_proj;
 	cv->fromBuffer<short>(nr_proj);
-	DEBUG("projectiles: %i",nr_proj);
+	DEBUG5("projectiles: %i",nr_proj);
 	// Projektile einlesen
 	for (int i=0; i<nr_proj;i++)
 	{
@@ -1257,7 +1267,7 @@ void Region::setRegionData(CharConv* cv,WorldObjectMap* players)
 	// Anzahl Gegenstaende einlesen
 	short nr_items;
 	cv->fromBuffer<short>(nr_items);
-	DEBUG("items: %i",nr_items);
+	DEBUG5("items: %i",nr_items);
 	// Gegenstaende einlesen
 	for (int i=0; i<nr_items;i++)
 	{

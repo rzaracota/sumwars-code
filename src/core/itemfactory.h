@@ -69,6 +69,14 @@ public:
 	 * \return Neues ServerItem
 	 */
 	static Item* createItem(Item::Type type, Item::Subtype subtype, int id=0, float magic_power =0);
+	
+	/**
+	 * \fn static Item* createGold(int value, int id=0)
+	 * \brief Erzeugt Gold
+	 * \param id ID des neuen Items. Wenn 0 angegeben wird, dann wird eine neue ID erzeugt
+	 * \param value Wert des Goldes
+	 */
+	static Item* createGold(int value, int id=0);
 
 	/**
 	 * \fn static void createMagicMods(Item* item, float* modchance, float magic_power, float min_enchant, float max_enchant)

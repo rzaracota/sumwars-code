@@ -441,7 +441,8 @@ void ObjectFactory::init()
 	mgdata->addMonsters("goblin",7,0.7);
 	registerMonsterGroup("lich_goblins", mgdata);
 	
-	
+	mgdata = new MonsterGroup;
+	registerMonsterGroup("nothing", mgdata);
 
 	// Daten fuer generische Objekte
 	

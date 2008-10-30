@@ -232,7 +232,8 @@ class Equipement
 		CURSOR_ITEM=11,
 		BIG_ITEMS=20,
 		MEDIUM_ITEMS=30,
-		SMALL_ITEMS = 60
+		SMALL_ITEMS = 60,
+		GOLD = 120
 	};
 
 	/**
@@ -385,6 +386,11 @@ class Equipement
 	 */
 	ItemList m_inventory;
 
+	/**
+	 * \var int m_gold
+	 * \brief Gold
+	 */
+	int m_gold;
 
 	/**
 	 * \fn Item* getItemRef(int pos)
