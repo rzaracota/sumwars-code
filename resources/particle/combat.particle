@@ -1,6 +1,6 @@
 Hit
 {
-    material        Examples/Flare
+    material        Flare
     particle_width  20
     particle_height 40
     cull_each       false

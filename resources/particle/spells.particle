@@ -1,6 +1,6 @@
 Fireball
 {
-    material Examples/Flare
+    material Flare
     particle_width 20
     particle_height 20
     cull_each false
@@ -23,7 +23,7 @@ Fireball
 
 Magic_Arrow
 {
-	material 		Examples/Flare
+	material 		Flare
 	particle_width 	25
 	particle_height	25
 	cull_each		false
@@ -53,7 +53,7 @@ Magic_Arrow
 
 Firebolt
 {
-    material Examples/Flare
+    material Flare
     particle_width 20
     particle_height 20
     cull_each false
@@ -76,7 +76,7 @@ Firebolt
 
 Firewall
 {
-    material        Examples/FlarePointSprite
+    material        FlarePointSprite
     point_rendering	true
     particle_width  30
     particle_height 30
@@ -121,7 +121,7 @@ Firewall
 
 Firewave
 {
-    material Examples/Flare
+    material Flare
     particle_width 20
     particle_height 20
     cull_each false
@@ -144,7 +144,7 @@ Firewave
 
 Icebolt
 {
-    material Examples/Flare
+    material Flare
     particle_width 20
     particle_height 20
     cull_each false
@@ -167,7 +167,7 @@ Icebolt
 
 Blizzard
 {
-    material        Examples/FlarePointSprite
+    material        FlarePointSprite
     point_rendering	true
     particle_width  30
     particle_height 30
@@ -209,7 +209,7 @@ Blizzard
 
 Icering
 {
-    material Examples/Flare
+    material Flare
     particle_width 20
     particle_height 20
     cull_each false
@@ -235,7 +235,7 @@ Icering
 
 Freeze
 {
-    material        Examples/Aureola
+    material        Aureola
     particle_width  200
     particle_height 200
     cull_each       false
@@ -264,7 +264,7 @@ Freeze
 
 Lightning
 {
-    material Examples/Flare
+    material Flare
     particle_width 20
     particle_height 20
     cull_each false
@@ -287,7 +287,7 @@ Lightning
 
 Thunderstorm
 {
-    material        Examples/Droplet
+    material        Droplet
     particle_width  20
     particle_height 100
     cull_each       true
@@ -321,7 +321,7 @@ Thunderstorm
 
 Chainlightning
 {
-    material Examples/Flare
+    material Flare
     particle_width 20
     particle_height 20
     cull_each false
@@ -344,7 +344,7 @@ Chainlightning
 
 Static_Shield
 {
-    material Examples/Flare
+    material Flare
     particle_width 20
     particle_height 20
     cull_each false
@@ -370,7 +370,7 @@ Static_Shield
 
 Fire_Arrow
 {
-    material Examples/Flare
+    material Flare
     particle_width 20
     particle_height 20
     cull_each false
@@ -393,7 +393,7 @@ Fire_Arrow
 
 Ice_Arrow
 {
-    material Examples/Flare
+    material Flare
     particle_width 20
     particle_height 20
     cull_each false
@@ -416,7 +416,7 @@ Ice_Arrow
 
 Wind_Arrow
 {
-    material Examples/Flare
+    material Flare
     particle_width 20
     particle_height 20
     cull_each false
@@ -439,7 +439,7 @@ Wind_Arrow
 
 Guided_Arrow
 {
-    material Examples/Flare
+    material Flare
     particle_width 20
     particle_height 20
     cull_each false
@@ -462,7 +462,7 @@ Guided_Arrow
 
 Explosion
 {
-    material Examples/Flare
+    material Flare
     particle_width 20
     particle_height 20
     cull_each false
@@ -488,7 +488,7 @@ Explosion
 
 Fire_Explosion
 {
-    material Examples/Flare
+    material Flare
     particle_width 20
     particle_height 20
     cull_each false
@@ -514,7 +514,7 @@ Fire_Explosion
 
 Ice_Explosion
 {
-    material Examples/Flare
+    material Flare
     particle_width 20
     particle_height 20
     cull_each false
@@ -540,7 +540,7 @@ Ice_Explosion
 
 Wind_Explosion
 {
-    material Examples/Flare
+    material Flare
     particle_width 20
     particle_height 20
     cull_each false
@@ -566,7 +566,7 @@ Wind_Explosion
 
 Lightbeam
 {
-    material Examples/Flare
+    material Flare
     particle_width 20
     particle_height 20
     cull_each false
@@ -589,7 +589,7 @@ Lightbeam
 
 ElemExplosion
 {
-    material Examples/Flare
+    material Flare
     particle_width 20
     particle_height 20
     cull_each false
@@ -612,7 +612,7 @@ ElemExplosion
 
 Acid
 {
-    material Examples/Flare
+    material Flare
     particle_width 20
     particle_height 20
     cull_each false
@@ -635,7 +635,7 @@ Acid
 
 Divine_Beam
 {
-    material Examples/Flare
+    material Flare
     particle_width 20
     particle_height 20
     cull_each false
@@ -658,7 +658,7 @@ Divine_Beam
 
 Hypnosis
 {
-    material Examples/Flare
+    material Flare
     particle_width 20
     particle_height 20
     cull_each false

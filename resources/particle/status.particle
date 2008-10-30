@@ -1,6 +1,6 @@
 Blind
 {
-    material        Examples/FlarePointSprite
+    material        FlarePointSprite
 	point_rendering	true
 	// point rendering means size is controlled by material
 	// provide fallback sizes for hardware that doesn't support point sprite
@@ -47,7 +47,7 @@ Blind
 
 Poison
 {
-    material        Examples/FlarePointSprite
+    material        FlarePointSprite
 	point_rendering	true
 	// point rendering means size is controlled by material
 	// provide fallback sizes for hardware that doesn't support point sprite
@@ -94,7 +94,7 @@ Poison
 
 Berserk
 {
-    material Examples/Flare
+    material Flare
     particle_width 20
     particle_height 20
     cull_each false
@@ -118,7 +118,7 @@ Berserk
 
 Confuse
 {
-    material        Examples/FlarePointSprite
+    material        FlarePointSprite
 	point_rendering	true
 	// point rendering means size is controlled by material
 	// provide fallback sizes for hardware that doesn't support point sprite
@@ -165,7 +165,7 @@ Confuse
 
 Mute
 {
-    material        Examples/FlarePointSprite
+    material        FlarePointSprite
 	point_rendering	true
 	// point rendering means size is controlled by material
 	// provide fallback sizes for hardware that doesn't support point sprite
@@ -212,7 +212,7 @@ Mute
 
 Paralyze
 {
-    material Examples/Flare
+    material Flare
     particle_width 20
     particle_height 20
     cull_each false
@@ -236,7 +236,7 @@ Paralyze
 
 Frozen
 {
-    material        Examples/Aureola
+    material        Aureola
     particle_width  150
     particle_height 150
     cull_each       false
@@ -297,7 +297,7 @@ Frozen
 
 Burning
 {
-    material        Examples/FlarePointSprite
+    material        FlarePointSprite
 	point_rendering	true
 	// point rendering means size is controlled by material
 	// provide fallback sizes for hardware that doesn't support point sprite
