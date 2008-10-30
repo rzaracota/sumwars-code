@@ -177,7 +177,11 @@ void Action::init()
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_description = "descr_bash";
 	a->m_enum_name = "bash";
-
+	a->m_animation[NO_WEAPON].push_back("attackUnarmed");
+	a->m_animation[ONE_HANDED].push_back("attack");
+	a->m_animation[TWO_HANDED].push_back("attackTwoHands");
+	
+	
 	a = &(Action::m_base_info[Action::HAMMER_BASH]);
 	a->m_timer_nr=1;
 	a->m_standard_time=1;
@@ -193,7 +197,10 @@ void Action::init()
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_description = "descr_hammer_bash";
 	a->m_enum_name = "hammer_bash";
-
+	a->m_animation[NO_WEAPON].push_back("attackUnarmed");
+	a->m_animation[ONE_HANDED].push_back("attack");
+	a->m_animation[TWO_HANDED].push_back("attackTwoHands");
+	
 	a = &(Action::m_base_info[Action::AROUND_BLOW]);
 	a->m_timer_nr=1;
 	a->m_standard_time=1;
@@ -241,7 +248,10 @@ void Action::init()
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_description = "descr_smash";
 	a->m_enum_name = "smash";
-
+	a->m_animation[NO_WEAPON].push_back("attackUnarmed");
+	a->m_animation[ONE_HANDED].push_back("attack");
+	a->m_animation[TWO_HANDED].push_back("attackTwoHands");
+	
 	a = &(Action::m_base_info[Action::HATE_MAGE]);
 	a->m_timer_nr=1;
 	a->m_standard_time=1;
@@ -257,7 +267,10 @@ void Action::init()
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_description = "descr_hate_mage";
 	a->m_enum_name = "hate_mage";
-
+	a->m_animation[NO_WEAPON].push_back("attackUnarmed");
+	a->m_animation[ONE_HANDED].push_back("attack");
+	a->m_animation[TWO_HANDED].push_back("attackTwoHands");
+	
 
 	a = &(Action::m_base_info[Action::CHARGE]);
 	a->m_timer_nr=1;
@@ -274,7 +287,10 @@ void Action::init()
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_description = "descr_charge";
 	a->m_enum_name = "charge";
-
+	a->m_animation[NO_WEAPON].push_back("attackUnarmed");
+	a->m_animation[ONE_HANDED].push_back("attack");
+	a->m_animation[TWO_HANDED].push_back("attackTwoHands");
+	
 	a = &(Action::m_base_info[Action::STORM_CHARGE]);
 	a->m_timer_nr=1;
 	a->m_standard_time=0.5;
@@ -290,7 +306,10 @@ void Action::init()
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_description = "descr_storm_charge";
 	a->m_enum_name = "storm_charge";
-
+	a->m_animation[NO_WEAPON].push_back("attackUnarmed");
+	a->m_animation[ONE_HANDED].push_back("attack");
+	a->m_animation[TWO_HANDED].push_back("attackTwoHands");
+	
 	a = &(Action::m_base_info[Action::DECOY]);
 	a->m_timer_nr=2;
 	a->m_standard_time=501;

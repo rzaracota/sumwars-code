@@ -286,7 +286,7 @@ void Creature::initAction()
 	// Fuer Aktionen die auf physischen Angriffen beruhen sowie fuer den normalen Magieangriff Waffengeschwindigkeit einrechnen
 	if (baseact == Action::ATTACK || baseact == Action::RANGE_ATTACK || baseact == Action::HOLY_ATTACK || m_action.m_type == Action::MAGIC_ATTACK)
 	{
-		float atksp = getBaseAttrMod()->m_attack_speed;
+		float atksp = std::min((short) 5000,getBaseAttrMod()->m_attack_speed);
 
 
 		m_action.m_time *= 1000000/atksp;
@@ -3558,7 +3558,6 @@ void Creature::applyBaseAttrMod(CreatureBaseAttrMod* mod, bool add)
 		// Schaden neu berechnen
 		recalcDamage();
 	}
-
 
 }
 

@@ -226,17 +226,18 @@ void World::createRegion(short region)
 		
 		reg->createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "$tree", Vector(1,8));
 		
-		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_MONSTER, "goblin");
-		reg->insertObject(wo, Vector(13,8));
-		
-		
-		wo = new Spawnpoint("goblins", World::getWorld()->getValidId());
-		reg->insertObject(wo, Vector(15,10));
-		/*
-		
 		
 		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_MONSTER, "lich");
 		reg->insertObject(wo, Vector(7,5));
+		
+		/*
+		
+		wo = new Spawnpoint("goblins", World::getWorld()->getValidId());
+		reg->insertObject(wo, Vector(15,10));
+		
+		
+		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_MONSTER, "goblin");
+		reg->insertObject(wo, Vector(13,8));
 		
 		
 		

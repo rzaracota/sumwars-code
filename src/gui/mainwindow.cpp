@@ -2345,7 +2345,7 @@ void MainWindow::updateCharInfo()
 	// Label Angriffsgeschwindigkeit
 	label =  win_mgr.getWindow("AttackSpeedValueLabel");
 	out_stream.str("");
-	out_stream << player->getBaseAttrMod()->m_attack_speed;
+	out_stream << 0.001*std::min((short) 5000, player->getBaseAttrMod()->m_attack_speed);
 	if (label->getText()!=out_stream.str())
 	{
 		label->setText(out_stream.str());
