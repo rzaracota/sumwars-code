@@ -45,3 +45,10 @@
 ./gui/mainwindow.o
 ./gui/scene.o
 ./gui/application.o
+./gui/charinfo.o
+./gui/controlpanel.o
+./gui/inventory.o
+./gui/itemwindow.o
+./gui/skilltree.o
+./gui/mainmenu.o
+./gui/savegamelist.o

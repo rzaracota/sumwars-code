@@ -24,35 +24,12 @@
 #include "gettext.h"
 #include "player.h"
 
-/**
- * \class ListItem
- * \brief Eintrag einer CEGUI Auswahlliste
- */
-class ListItem : public CEGUI::ListboxTextItem
-{
-	public:
-		ListItem(const CEGUI::String& text) : ListboxTextItem(text)
-		{
-			setSelectionBrushImage("TaharezLook", "MultiListSelectionBrush");
-		}
-};
-
-/**
- * \class SaveListItem
- * \brief Eintrag der Auswahlliste der Savegames
- */
-class SaveListItem : public ListItem
-{
-	public:
-		SaveListItem(const CEGUI::String& text, std::string file) : ListItem(text)
-		{
-			setSelectionBrushImage("TaharezLook", "MultiListSelectionBrush");
-			m_filename = file;
-		}
-
-		std::string m_filename;
-};
-
+#include "charinfo.h"
+#include "controlpanel.h"
+#include "inventory.h"
+#include "skilltree.h"
+#include "mainmenu.h"
+#include "savegamelist.h"
 
 
 /**
@@ -153,42 +130,6 @@ class MainWindow :
 	 */
 	void updateMainMenu();
 
-	/**
-	 * \fn void updateCharInfo()
-	 * \brief Aktualisiert die Anzeigen des CharakterInfo Fensters
-	 */
-	void updateCharInfo();
-
-	/**
-	 * \fn void updateControlPanel()
-	 * \brief Aktualisiert die Kontrollleiste
-	 */
-	void updateControlPanel();
-
-	/**
-	 * \fn void updateInventory()
-	 * \brief Aktualisiert die Inventaranzeige
-	 */
-	void updateInventory();
-
-	/**
-	 * \fn void updateSkilltree()
-	 * \brief Aktualisiert Skilltree
-	 */
-	void updateSkilltree();
-
-	/**
-	 * \fn void updateItemTooltip(unsigned int pos)
-	 * \brief Aktualisiert den Tooltip fuer das Item ueber dem die Maus ist
-	 * \param pos Nummer des zu aktualisierenden Items
-	 */
-	void updateItemTooltip(unsigned int pos);
-
-	/**
-	 * \fn void updateAbilityTooltip(unsigned int pos)
-	 * \brief Aktualisiert den Tooltip fuer die Faehigkeit ueber der die Maus ist
-	 */
-	void updateAbilityTooltip(unsigned int pos);
 
 	/**
 	 * \fn void updateObjectInfo()
@@ -235,143 +176,6 @@ class MainWindow :
 	 */
 	void setWindowExtents(int width, int height);
 
-	/**
-	 * \fn bool onSavegameChosen(const CEGUI::EventArgs& evt)
-	 * \brief Behandelt Auswahl eines Savegames in der Liste
-	 */
-	bool onSavegameChosen(const CEGUI::EventArgs& evt);
-
-	/**
-	 * \fn bool onSavegameSelected(const CEGUI::EventArgs& evt)
-	 * \brief Behandelt Auswahl eines Savegames
-	 */
-	bool onSavegameSelected(const CEGUI::EventArgs& evt);
-
-
-	/**
-	 * \fn bool onStartSinglePlayer(const CEGUI::EventArgs& evt)
-	 * \brief Behandelt Start eines Einzelspielerspieles
-	 */
-	bool onStartSinglePlayer(const CEGUI::EventArgs& evt);
-
-	/**
-	 * \fn bool onStartMultiPlayer(const CEGUI::EventArgs& evt)
-	 * \brief Behandelt Start eines Einzelspielerspieles
-	 */
-	bool onStartMultiPlayer(const CEGUI::EventArgs& evt);
-
-	/**
-	 * \fn bool onStartMultiPlayerHost(const CEGUI::EventArgs& evt)
-	 * \brief Behandelt Start eines Einzelspielerspieles
-	 */
-	bool onStartMultiPlayerHost(const CEGUI::EventArgs& evt);
-
-	/**
-	 * \fn bool onButtonSaveExitClicked(const CEGUI::EventArgs& evt)
-	 * \brief Behandelt Klick auf Speichern/Beenden
-	 */
-	bool onButtonSaveExitClicked(const CEGUI::EventArgs& evt);
-
-	/**
-	 * \fn void onButtonInventoryClicked(const CEGUI::EventArgs& evt)
-	 * \brief Behandelt Klick auf Inventar Button
-	 */
-	bool onButtonInventoryClicked(const CEGUI::EventArgs& evt);
-
-	/**
-	 * \fn void onButtonCharInfoClicked(const CEGUI::EventArgs& evt)
-	 * \brief Behandelt Klick auf CharakterInfo Button
-	 */
-	bool onButtonCharInfoClicked(const CEGUI::EventArgs& evt);
-
-	/**
-	 *\fn bool onButtonPartyClicked(const CEGUI::EventArgs& evt)
-	 * \brief Behandelt Klick auf Party Button
-	 */
-	bool onButtonPartyClicked(const CEGUI::EventArgs& evt);
-
-	/**
-	 * \fn void onButtonSkilltreeClicked(const CEGUI::EventArgs& evt)
-	 * \brief Behandelt Klick auf Skilltree Button
-	 */
-	bool onButtonSkilltreeClicked(const CEGUI::EventArgs& evt);
-
-	/**
-	 * \fn void onButtonOpenChatClicked(const CEGUI::EventArgs& evt)
-	 * \brief Behandelt Klick auf Chat oeffnen Button
-	 */
-	bool onButtonOpenChatClicked(const CEGUI::EventArgs& evt);
-
-	/**
-	 * \fn bool onItemMouseButtonPressed(const CEGUI::EventArgs& evt)
-	 * \brief Behandelt Druecken der linken Maustaste ueber einen Item
-	 */
-	bool onItemMouseButtonPressed(const CEGUI::EventArgs& evt);
-
-	/**
-	 * \fn bool onItemMouseButtonReleased(const CEGUI::EventArgs& evt)
-	 * \brief Behandelt Loslassen der linken Maustaste ueber einen Item
-	 */
-	bool onItemMouseButtonReleased(const CEGUI::EventArgs& evt);
-
-	/**
-	 * \fn bool onSkillMouseClicked(const CEGUI::EventArgs& evt)
-	 * \brief Behandelt Mausklick auf eine Faehigkeit im Skilltree
-	 */
-	bool onSkillMouseClicked(const CEGUI::EventArgs& evt);
-
-	/**
-	 * \fn bool onSwapEquipClicked(const CEGUI::EventArgs& evt)
-	 * \brief Behandelt Mausklick auf Ausruestung wechseln
-	 */
-	bool onSwapEquipClicked(const CEGUI::EventArgs& evt);
-
-	/**
-	 * \fn bool onItemHover(const CEGUI::EventArgs& evt)
-	 * \brief Behandelt Eintritt der Maus in Bereich ueber einem Item
-	 */
-	bool onItemHover(const CEGUI::EventArgs& evt);
-
-
-	/**
-	 * \fn bool onAbilityHover(const CEGUI::EventArgs& evt)
-	 * \brief Behandelt Eintritt der Maus in Bereich ueber einer Faehigkeit
-	 */
-	bool onAbilityHover(const CEGUI::EventArgs& evt);
-
-	/**
-	 * \fn bool onIncreaseAttributeButtonClicked(const CEGUI::EventArgs& evt)
-	 * \brief Behandelt Klick auf Button Attribut erhoehen
-	 */
-	bool onIncreaseAttributeButtonClicked(const CEGUI::EventArgs& evt);
-
-	/**
-	 * \fn bool consumeEvent(const CEGUI::EventArgs& evt)
-	 * \brief Funktion die Events verbraucht, gibt immer true zurueck
-	 */
-	bool consumeEvent(const CEGUI::EventArgs& evt)
-	{
-		m_gui_hit = true;
-		return true;
-	}
-
-	/**
-	 * \fn static void registerItemImage(Item::Subtype type, std::string image)
-	 * \brief registiert ein Bild fuer ein bestimmten Itemtyp
-	 * \param type Typ des Gegenstandes
-	 * \param image Bild der Form set: ... image: ...
-	 */
-	static void registerItemImage(Item::Subtype type, std::string image)
-	{
-		m_item_images[type] = image;
-	}
-	
-	/**
-	 * \fn static std::string getItemImage(Item::Subtype type)
-	 * \brief Gibt zu dem angegebenen Itemtyp das zugehoerige Bild aus
-	 */
-	static std::string getItemImage(Item::Subtype type);
-	
 
 	private:
 
@@ -450,10 +254,12 @@ class MainWindow :
 	bool m_gui_hit;
 	
 	/**
-	 * \var static std::map<Item::Subtype, std::string> m_item_images
-	 * \brief Enthaelt fuer jeden Itemtyp das passende Bild
+	 * \var std::map<std::string, Window*> m_sub_windows
+	 * \brief Unterfenster sortiert nach Name
 	 */
-	static std::map<Item::Subtype, std::string> m_item_images;
+	std::map<std::string, Window*> m_sub_windows;
+	
+	
 
 };
 

@@ -423,11 +423,11 @@ bool Application::initCEGUI()
 	CEGUI::ImagesetManager::getSingleton().createImagesetFromImageFile ("Schild.png","Schild.png",(CEGUI::utf8*)"GUI");
 	CEGUI::ImagesetManager::getSingleton().createImagesetFromImageFile ("Schwert.png","Schwert.png",(CEGUI::utf8*)"GUI");
 	
-	MainWindow::registerItemImage("short_sw","set:Schwert.png image:full_image");
-	MainWindow::registerItemImage("long_sw","set:Schwert.png image:full_image");
-	MainWindow::registerItemImage("battle_axe","set:doppelaxt.png  image:full_image");
-	MainWindow::registerItemImage("wood_sh","set:Schild_dmg.png  image:full_image");
-	MainWindow::registerItemImage("iron_sh","set:Schild.png  image:full_image");
+	ItemWindow::registerItemImage("short_sw","set:Schwert.png image:full_image");
+	ItemWindow::registerItemImage("long_sw","set:Schwert.png image:full_image");
+	ItemWindow::registerItemImage("battle_axe","set:doppelaxt.png  image:full_image");
+	ItemWindow::registerItemImage("wood_sh","set:Schild_dmg.png  image:full_image");
+	ItemWindow::registerItemImage("iron_sh","set:Schild.png  image:full_image");
 	
 
 	
