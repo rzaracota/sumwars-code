@@ -219,6 +219,19 @@ class Scene
 	void deleteProjectile(std::string name);
 
 	/**
+	 * \fn Ogre::ParticleSystem* getParticleSystem(std::string type)
+	 * \brief Gibt aus dem Pool ein passendes Partikelsystem aus
+	 * \param type Typ des Partikelsystems
+	 */
+	Ogre::ParticleSystem* getParticleSystem(std::string type);
+	
+	/**
+	 * \fn void putBackParticleSystem(Ogre::ParticleSystem* part)
+	 * \brief Fuegt das Partikelsystem wieder in den Pool ein
+	 */
+	void putBackParticleSystem(Ogre::ParticleSystem* part);
+	
+	/**
 	 * \fn void destroySceneNode(std::string& node_name)
 	 * \brief Loescht einen Knoten mit allen angehaengten Objekten
 	 * \param node_name Name Knoten der geloescht werden soll
@@ -406,6 +419,12 @@ class Scene
 	 */
 	Ogre::SceneManager* m_scene_manager;
 
+	
+	/**
+	 * \var std::multimap<std::string, Ogre::ParticleSystem*> m_particle_system_pool
+	 * \brief interner Pool von Partikelsystem
+	 */
+	std::multimap<std::string, Ogre::ParticleSystem*> m_particle_system_pool;
 
 };
 

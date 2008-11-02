@@ -510,6 +510,7 @@ void Scene::updateObject(WorldObject* obj)
 
 	// Ogre::Entity des Objektes
 	Ogre::Entity* obj_ent;
+	Ogre::SceneNode* node;
 
 	if (!m_scene_manager->hasSceneNode(node_name))
 	{
@@ -532,17 +533,17 @@ void Scene::updateObject(WorldObject* obj)
 
 
 	// an die richtige Stelle verschieben
-	m_scene_manager->getSceneNode(node_name)->setPosition(vec);
+	node = m_scene_manager->getSceneNode(node_name);
+	node->setPosition(vec);
 
 	float angle = obj->getShape()->m_angle;
 	// Objekt drehen
-	m_scene_manager->getSceneNode(node_name)->setDirection(cos(angle),0,sin(angle),Ogre::Node::TS_WORLD);
+	node->setDirection(cos(angle),0,sin(angle),Ogre::Node::TS_WORLD);
 
 	// Statusmods anpassen
 	std::ostringstream num("");
 	std::string mod_name;
-	int i;
-	Ogre::ParticleSystem *mod_part;
+	
 
 
 	// Animation anpassen
@@ -641,9 +642,9 @@ void Scene::updateObject(WorldObject* obj)
 
         Ogre::Node* node;
 
-        // Schleife ueber die angehaengten Meshes
-        Ogre::Entity::ChildObjectListIterator it = obj_ent->getAttachedObjectIterator();
-        // mappt Namen von Knochen auf die daran anzuhaengenen Meshes
+       Ogre::Entity::ChildObjectListIterator it = obj_ent->getAttachedObjectIterator();
+        
+		// mappt Namen von Knochen auf die daran anzuhaengenen Meshes
         std::map<std::string, std::string> goal_atch;
         std::map<std::string, std::string>::iterator jt;
 
@@ -719,49 +720,126 @@ void Scene::updateObject(WorldObject* obj)
     }
 	DEBUG5("particle");
 	//zeigt an ob ein Partikelsystem sichtbar is
-	bool vis;
-	/*
+	
+	
+	// Ermitteln welche Partikelsysteme vorhanden sind
+	std::string modnames[8]  = {"Blind", "Poison", "Berserk", "Confuse", "Mute", "Paralyze", "Frozen", "Burning"};
+	std::string effectnames[1] = {"Hit"};
+	
+	std::list<Ogre::MovableObject*> rm_obj;
+	std::list<Ogre::MovableObject*>::iterator it;
+	
+	std::list<Ogre::MovableObject*> attach_obj;
+	
+	int i;
+	Ogre::ParticleSystem *mod_part;
 	if (cr !=0)
 	{
 		// Feld das angibt, welche Mods gesetzt sind
 		float * status_mods = cr->getDynAttr()->m_status_mod_time;
+		std::string mod;
+		
+		Ogre::MovableObject* obj;
+		
 
+		// Schleife ueber die Statusmods
 		for (i=0;i<NR_STATUS_MODS;i++)
 		{
-			num.str("");
-			num <<"mod"<< i;
-
-			mod_name = name + num.str();
-
-			mod_part = m_scene_manager->getParticleSystem(mod_name);
-			vis = mod_part->isVisible();
-
-			if ( (status_mods[i]>0) ^ vis)
+			mod_part =0;
+			
+			// Schleife ueber die angehaengten Objekte
+			for (int j=0; j< node->numAttachedObjects(); j++)
 			{
-				mod_part->setVisible(!vis);
+				obj = node->getAttachedObject(j);
+				
+				// pruefen ob das angehaengte Objekt das Partikelsystem fuer den aktuellen Statusmod ist
+				if (obj->getMovableType()== "ParticleSystem")
+				{
+					mod = Ogre::any_cast<std::string>(obj->getUserAny());
+					if (mod == modnames[i])
+					{
+						mod_part = static_cast<Ogre::ParticleSystem*> (obj);
+						break;
+					}
+				}
+			}
+			
+			if (mod_part !=0 && status_mods[i]<=0)
+			{
+				// Partikelsystem ist vorhanden, aber der zugehoerige Mod nicht aktiv
+				// Partikelsystem entfernen und in den Pool verschieben
+				
+				rm_obj.push_back(mod_part);
+				putBackParticleSystem(mod_part);
+			}
+			
+			if (mod_part ==0 && status_mods[i]>0)
+			{
+				// Partikelsystem ist nicht vorhanden, aber der zugehoerige Mod ist aktiv
+				// Partikelsystem aus dem Pool entnehmen und an den Knoten anfuegen
+				mod_part = getParticleSystem(modnames[i]);
+				attach_obj.push_back(mod_part);
+
 			}
 		}
 
+		
 		// weitere Effekte anpassen
 		float* effects =  cr->getDynAttr()->m_effect_time;
 
 		for (i=0;i<NR_EFFECTS;i++)
 		{
-			num.str("");
-			num <<"effect"<< i;
-
-			mod_name = name + num.str();
-
-			mod_part = m_scene_manager->getParticleSystem(mod_name);
-			vis = mod_part->isVisible();
-
-			if ( (effects[i]>0) ^ vis)
+			mod_part =0;
+			
+			// Schleife ueber die angehaengten Objekte
+			for (int j=0; j< node->numAttachedObjects(); j++)
 			{
-				mod_part->setVisible(!vis);
+				obj = node->getAttachedObject(j);
+				
+				// pruefen ob das angehaengte Objekt das Partikelsystem fuer den aktuellen Statusmod ist
+				if (obj->getMovableType()== "ParticleSystem")
+				{
+					mod = Ogre::any_cast<std::string>(obj->getUserAny());
+					if (mod == effectnames[i])
+					{
+						mod_part = static_cast<Ogre::ParticleSystem*> (obj);
+						break;
+					}
+				}
+			}
+			
+			if (mod_part !=0 && effects[i]<=0)
+			{
+				// Partikelsystem ist vorhanden, aber der zugehoerige Effekt nicht aktiv
+				// Partikelsystem entfernen und in den Pool verschieben
+				
+				rm_obj.push_back(mod_part);
+				putBackParticleSystem(mod_part);
+				
+			}
+			
+			if (mod_part ==0 && effects[i]>0)
+			{
+				// Partikelsystem ist nicht vorhanden, aber der zugehoerige Effekt ist aktiv
+				// Partikelsystem aus dem Pool entnehmen und an den Knoten anfuegen
+				mod_part = getParticleSystem(effectnames[i]);
+				attach_obj.push_back(mod_part);
+
 			}
 		}
+		
+		for (it = rm_obj.begin(); it != rm_obj.end(); ++it)
+		{
+			node->detachObject(*it);
+		}
+		
+		for (it = attach_obj.begin(); it != attach_obj.end(); ++it)
+		{
+			node->attachObject(*it);
+		}
+		
 	}
-	*/
+	
 }
 
 void Scene::deleteObject(std::string name)
@@ -769,6 +847,7 @@ void Scene::deleteObject(std::string name)
 	std::string node_name = name + "Node";
 
 	DEBUG5("deleting object %s",name.c_str());
+	
 
 	destroySceneNode(node_name);
 
@@ -822,53 +901,6 @@ void Scene::createObject(WorldObject* obj,std::string& name, bool is_static)
 
     }
 
-
-	// eventuelle Partikeleffekte einfuegen
-/*
-	if (!is_static)
-	{
-		// Partikelsysteme anhaengen
-		Ogre::ParticleSystem* part=0;
-
-		// TODO: richtige Partikelsystem benutzen
-		// blind
-		part = m_scene_manager->createParticleSystem(name+"mod0", "Blind");
-		obj_node->attachObject(part);
-
-		// vergiftet
-		part = m_scene_manager->createParticleSystem(name+"mod1", "Poison");
-		obj_node->attachObject(part);
-
-		//  Berserker
-		part = m_scene_manager->createParticleSystem(name+"mod2", "Berserk");
-		obj_node->attachObject(part);
-
-		// verwirrt
-		part = m_scene_manager->createParticleSystem(name+"mod3", "Confuse");
-		obj_node->attachObject(part);
-
-		// stumm
-		part = m_scene_manager->createParticleSystem(name+"mod4", "Mute");
-		obj_node->attachObject(part);
-
-		// gelaehmt
-		part = m_scene_manager->createParticleSystem(name+"mod5", "Paralyze");
-		obj_node->attachObject(part);
-
-		// eingefroren
-		part = m_scene_manager->createParticleSystem(name+"mod6", "Frozen");
-		obj_node->attachObject(part);
-
-		// brennend
-		part = m_scene_manager->createParticleSystem(name+"mod7", "Burning");
-		obj_node->attachObject(part);
-
-		// Partikelsysteme fuer weitere Effekte
-		// Bluteffekt
-		part = m_scene_manager->createParticleSystem(name+"effect0", "Hit");
-		obj_node->attachObject(part);
-	}
-	*/
 }
 
 void Scene::createItem(DropItem* di, std::string& name)
@@ -1008,140 +1040,9 @@ void Scene::createProjectile(Projectile* pr, std::string& name)
 
 	if (ri.m_particle_system != "")
 	{
-		part = m_scene_manager->createParticleSystem(particle_name, ri.m_particle_system);
+		part = getParticleSystem(ri.m_particle_system);
 		obj_node->attachObject(part);
 	}
-
-
-	/*
-	switch (type)
-	{
-		case Projectile::ARROW:
-			// Entity erzeugen
-			ent = m_scene_manager->createEntity(name,"arrow.mesh");
-			obj_node->attachObject(ent);
-		break;
-		case Projectile::MAGIC_ARROW:
-			part = m_scene_manager->createParticleSystem(particle_name, "Magic_Arrow");
-			obj_node->attachObject(part);
-		break;
-		case Projectile::FIRE_BOLT:
-			part = m_scene_manager->createParticleSystem(particle_name, "Firebolt");
-			obj_node->attachObject(part);
-			break;
-		case Projectile:: FIRE_BALL:
-			part = m_scene_manager->createParticleSystem(particle_name, "Fireball");
-			obj_node->attachObject(part);
-		break;
-		case Projectile:: FIRE_WALL:
-			part = m_scene_manager->createParticleSystem(particle_name, "Firewall");
-			obj_node->attachObject(part);
-			break;
-		case Projectile::FIRE_WAVE:
-			part = m_scene_manager->createParticleSystem(particle_name, "Firewave");
-			obj_node->attachObject(part);
-			break;
-		case Projectile::ICE_BOLT:
-			part = m_scene_manager->createParticleSystem(particle_name, "Icebolt");
-			obj_node->attachObject(part);
-			break;
-		case Projectile:: BLIZZARD:
-			part = m_scene_manager->createParticleSystem(particle_name, "Blizzard");
-			obj_node->attachObject(part);
-			break;
-		case Projectile::ICE_RING:
-			part = m_scene_manager->createParticleSystem(particle_name, "Icering");
-			obj_node->attachObject(part);
-			break;
-		case Projectile::FREEZE:
-			part = m_scene_manager->createParticleSystem(particle_name, "Freeze");
-			obj_node->attachObject(part);
-			break;
-		case Projectile::LIGHTNING:
-			part = m_scene_manager->createParticleSystem(particle_name, "Lightning");
-			obj_node->attachObject(part);
-			break;
-		case Projectile::THUNDERSTORM:
-			part = m_scene_manager->createParticleSystem(particle_name, "Thunderstorm");
-			obj_node->attachObject(part);
-			break;
-		case Projectile::CHAIN_LIGHTNING:
-			part = m_scene_manager->createParticleSystem(particle_name, "Chainlightning");
-			obj_node->attachObject(part);
-			break;
-		case Projectile::STATIC_SHIELD:
-			part = m_scene_manager->createParticleSystem(particle_name, "Static_Shield");
-			obj_node->attachObject(part);
-			break;
-		case Projectile::FIRE_ARROW:
-			ent = m_scene_manager->createEntity(name,"arrow.mesh");
-			obj_node->attachObject(ent);
-			part = m_scene_manager->createParticleSystem(particle_name, "Fire_Arrow");
-			obj_node->attachObject(part);
-			break;
-		case Projectile::ICE_ARROW:
-			ent = m_scene_manager->createEntity(name,"arrow.mesh");
-			obj_node->attachObject(ent);
-			part = m_scene_manager->createParticleSystem(particle_name, "Ice_Arrow");
-			obj_node->attachObject(part);
-			break;
-		case Projectile::WIND_ARROW:
-			ent = m_scene_manager->createEntity(name,"arrow.mesh");
-			obj_node->attachObject(ent);
-			part = m_scene_manager->createParticleSystem(particle_name, "Wind_Arrow");
-			obj_node->attachObject(part);
-			break;
-		case Projectile::GUIDED_ARROW:
-			ent = m_scene_manager->createEntity(name,"arrow.mesh");
-			obj_node->attachObject(ent);
-			part = m_scene_manager->createParticleSystem(particle_name, "Guided_Arrow");
-			obj_node->attachObject(part);
-			break;
-		case Projectile::EXPLOSION:
-			part = m_scene_manager->createParticleSystem(particle_name, "Explosion");
-			obj_node->attachObject(part);
-			break;
-		case Projectile::FIRE_EXPLOSION:
-			part = m_scene_manager->createParticleSystem(particle_name, "Fire_Explosion");
-			obj_node->attachObject(part);
-			break;
-		case Projectile::ICE_EXPLOSION:
-			part = m_scene_manager->createParticleSystem(particle_name, "Ice_Explosion");
-			obj_node->attachObject(part);
-			break;
-		case Projectile::WIND_EXPLOSION:
-			part = m_scene_manager->createParticleSystem(particle_name, "Wind_Explosion");
-			obj_node->attachObject(part);
-			break;
-		case Projectile::LIGHT_BEAM:
-			part = m_scene_manager->createParticleSystem(particle_name, "Lightbeam");
-			obj_node->attachObject(part);
-			break;
-		case Projectile::ELEM_EXPLOSION:
-			part = m_scene_manager->createParticleSystem(particle_name, "ElemExplosion");
-			obj_node->attachObject(part);
-			break;
-		case Projectile::ACID:
-			part = m_scene_manager->createParticleSystem(particle_name, "Acid");
-			obj_node->attachObject(part);
-			break;
-		case Projectile::DIVINE_BEAM:
-			part = m_scene_manager->createParticleSystem(particle_name, "Divine_Beam");
-			obj_node->attachObject(part);
-			break;
-		case Projectile:: HYPNOSIS:
-			part = m_scene_manager->createParticleSystem(particle_name, "Hypnosis");
-			obj_node->attachObject(part);
-			break;
-		default:
-				// Entity erzeugen
-				ent = m_scene_manager->createEntity(name,"sphere.mesh");
-				obj_node->attachObject(ent);
-	}
-
-*/
-
-
 
 
 }
@@ -1155,6 +1056,51 @@ void Scene::deleteProjectile(std::string name)
 	destroySceneNode(node_name);
 }
 
+Ogre::ParticleSystem* Scene::getParticleSystem(std::string type)
+{
+	// Im Pool nach einem passenden Partikelsystem suchen
+	std::multimap<std::string, Ogre::ParticleSystem*>::iterator it;
+	it = m_particle_system_pool.find(type);
+	
+	Ogre::ParticleSystem* part=0;
+	static int count =0;
+	
+	if (it == m_particle_system_pool.end())
+	{
+		// Kein Partikelsystem gefunden
+		// neues erzeugen
+		std::ostringstream name;
+		name << "ParticleSystem"<<count;
+		count ++;
+		
+		part = m_scene_manager->createParticleSystem(name.str(), type);
+		part->setUserAny(Ogre::Any(type));
+		part->setKeepParticlesInLocalSpace(true);
+		DEBUG5("created particlesystem %s for type %s",name.str().c_str(), type.c_str());
+	}
+	else
+	{
+		// Partikelsystem aus dem Pool nehmen
+		part = it->second;	
+		m_particle_system_pool.erase(it);
+		DEBUG5("took particlesystem %s for type %s",part->getName().c_str(), type.c_str());
+	}
+	
+	part->clear();
+	return part;
+}
+
+void Scene::putBackParticleSystem(Ogre::ParticleSystem* part)
+{
+	// Typ des Partikelsystems ermitteln
+	std::string type;
+	type = Ogre::any_cast<std::string>(part->getUserAny());
+	
+	DEBUG5("put back particlesystem %s for type %s",part->getName().c_str(), type.c_str());
+	
+	m_particle_system_pool.insert(std::make_pair(type,part));
+}
+
 void Scene::destroySceneNode(std::string& node_name)
 {
 
@@ -1163,12 +1109,38 @@ void Scene::destroySceneNode(std::string& node_name)
 	if (node==0)
 		return;
 
+	// Partikelsysteme werden nicht geloescht sondern wieder in den Pool eingefuegt
+	
+	std::list<Ogre::MovableObject*> rm_obj;
+	std::list<Ogre::MovableObject*>::iterator jt;
+	
+	std::string mod;
+	
+	// Schleife ueber die angehaengten Objekte
+	Ogre::MovableObject* obj;
+	for (int j=0; j< node->numAttachedObjects(); j++)
+	{
+		obj = node->getAttachedObject(j);
+				
+		// pruefen ob das angehaengte Objekt ein Partikelsystem ist
+		if (obj->getMovableType()== "ParticleSystem")
+		{
+			putBackParticleSystem(static_cast<Ogre::ParticleSystem*> (obj) );
+			rm_obj.push_back(obj);
+		}
+	}
+	
+	for (jt = rm_obj.begin(); jt != rm_obj.end(); ++jt)
+	{
+		node->detachObject(*jt);
+	}
+	
+
 
 	// Iterator ueber die angehaengten Objekte
 	Ogre::SceneNode::ObjectIterator it = node->getAttachedObjectIterator();
 
 	std::string name;
-	Ogre::MovableObject* obj;
 	std::list<Ogre::MovableObject*> objects;
 	std::list<Ogre::MovableObject*>::iterator i;
 
