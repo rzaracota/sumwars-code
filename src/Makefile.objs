@@ -52,3 +52,4 @@
 ./gui/skilltree.o
 ./gui/mainmenu.o
 ./gui/savegamelist.o
+./gui/chatline.o

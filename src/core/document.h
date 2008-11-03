@@ -558,6 +558,12 @@ class Document
 	 * \param cnr ID des Bewerbers
 	 */
 	void onButtonPartyAccept(int cnr);
+	
+	/**
+	 * \fn void sendChatMessage(std::string msg)
+	 * \brief sendet eine Chatnachricht an alle Spieler
+	 */
+	void sendChatMessage(std::string msg);
 
 	/**
 	 * \fn void emitDebugSignal(int i=0)

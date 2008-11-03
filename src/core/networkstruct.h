@@ -94,6 +94,16 @@ enum PackageType
 	 * \brief Information, dass beim Server der Spieler die Region gewechselt hat
 	 */
 	PTYPE_S2C_REGION_CHANGED,
+ 
+	/**
+	* \brief Nachricht vom Server an den Client
+	*/
+ 	PTYPE_S2C_MESSAGE,
+ 
+	/**
+	* \brief Nachricht vom Client an den Server
+	*/
+ 	PTYPE_C2S_MESSAGE,
 };
 
 /**

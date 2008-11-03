@@ -30,6 +30,7 @@
 #include "skilltree.h"
 #include "mainmenu.h"
 #include "savegamelist.h"
+#include "chatline.h"
 
 
 /**
@@ -103,6 +104,11 @@ class MainWindow :
 	 */
 	void setupSkilltree();
 
+	/**
+	 * \fn void setupChatWindow()
+	 * \brief Erzeugt das Fenster Chat
+	 */
+	void setupChatWindow();
 
 	/**
 	 * \fn bool setupMainMenu()

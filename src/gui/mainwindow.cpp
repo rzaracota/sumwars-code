@@ -191,6 +191,17 @@ void MainWindow::update()
 		{
 			inventory->setVisible(false);
 		}
+		
+		// Chat Fenster anzeigen wenn entsprechendes Flag gesetzt
+		CEGUI::FrameWindow* chat_window = (CEGUI::FrameWindow*) win_mgr.getWindow("ChatWindow");
+		if (wflags & Document::CHAT)
+		{
+			chat_window->setVisible(true);
+		}
+		else
+		{
+			chat_window->setVisible(false);
+		}
 
 		if (m_document->getLocalPlayer()!=0)
 		{
@@ -235,7 +246,13 @@ void MainWindow::update()
 			m_sub_windows["CharInfo"]->update();
 		}
 
+		if (wflags & Document::CHAT)
+		{
+			// Fenster CharacterInfo aktualisieren
+			m_sub_windows["ChatWindow"]->update();
+		}
 
+		
 		// Steuerleiste aktualisieren
 		m_sub_windows["ControlPanel"]->update();
 
@@ -282,6 +299,9 @@ bool MainWindow::setupGameScreen()
 
 		// Leiste fuer Objekt-Info anlegen
 		setupObjectInfo();
+		
+		// Chatfenster anlegen
+		setupChatWindow();
 	}
 	catch (CEGUI::Exception e)
 	{
@@ -343,6 +363,16 @@ void MainWindow::setupSkilltree()
 	wnd->getCEGUIWindow(2)->setVisible(false);
 	wnd->getCEGUIWindow(3)->setVisible(false);
 	
+}
+
+void MainWindow::setupChatWindow()
+{
+	Window* wnd = new ChatLine(m_document);
+	m_sub_windows["ChatWindow"] = wnd;
+	
+	// Inventar anfangs ausblenden
+	m_game_screen->addChildWindow(wnd->getCEGUIWindow());
+	wnd->getCEGUIWindow()->setVisible(false);
 }
 
 

@@ -360,6 +360,22 @@ public:
 		return m_right_damage;
 	}
 	
+	/**
+	 * \fn std::string& getMessages()
+	 * \brief Gibt die Nachrichten des Spielers aus
+	 */
+	std::string& getMessages()
+	{
+		return m_messages;
+	}
+	
+	/**
+	 * \fn void addMessage(std::string msg)
+	 * \brief Fuegt eine neue Nachricht fuer den Spieler hinzu
+	 * \param msg Nachricht
+	 */
+	void addMessage(std::string msg);
+	
 
 //Protected stuff
 protected:
@@ -475,6 +491,12 @@ protected:
 	 * \brief Aktion die auf mit rechten Maustaste ausgeloest wird
 	 */
 	Action::ActionType m_right_action;
+	
+	/**
+	 * \var std::string m_messages
+	 * \brief Nachrichten die dieser Spieler erhalten hat
+	 */
+	std::string m_messages;
 	
 	//Constructors
 	//Accessor Methods

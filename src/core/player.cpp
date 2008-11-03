@@ -1672,6 +1672,14 @@ void Player::calcBaseAttrMod()
 
 }
 
+void Player::addMessage(std::string msg)
+{
+	m_messages += msg;
+	m_messages += "\n";
+	
+}
+
+
 void Player::toString(CharConv* cv)
 {
 	DEBUG5("Player::tostring");

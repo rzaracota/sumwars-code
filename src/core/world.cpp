@@ -826,6 +826,54 @@ void World::handleCommand(ClientCommand* comm, int slot, float delay)
 
 }
 
+void World::handleMessage(std::string msg, int slot)
+{
+	// Nachricht einfuegen 
+	static_cast<Player*>(m_local_player)->addMessage(msg);
+	
+	
+	// als Server: Nachricht an alle Spieler versenden
+	// als Client: Nachricht an den Server senden
+	if (m_server)
+	{
+		CharConv cv;
+
+		// Header anlegen
+		PackageHeader header;
+		header.m_content = PTYPE_S2C_MESSAGE; 	// Daten von Server zum Client
+		header.m_number = msg.size();
+		
+		header.toString(&cv);
+		cv.toBuffer((char*) msg.c_str(),msg.size());
+		
+		// Nachricht an alle Spieler mit ausser dem Sender
+		WorldObjectMap::iterator it;
+		for (it = m_player_slots->begin(); it != m_player_slots->end(); ++it)
+		{
+			if (it->first != slot && it->first!=LOCAL_SLOT)
+			{
+				getNetwork()->pushSlotMessage(cv.getBitStream(),it->first);
+			}
+		}
+	}
+	else
+	{
+		CharConv cv;
+
+		// Header anlegen
+		PackageHeader header;
+		header.m_content = PTYPE_C2S_MESSAGE; 	// Daten von Client zu Server
+		header.m_number = msg.size();
+		
+		header.toString(&cv);
+		cv.toBuffer((char*) msg.c_str(),msg.size());
+		
+		getNetwork()->pushSlotMessage(cv.getBitStream());
+	}
+	
+	
+}
+
 int World::getValidId()
 {
 	// zufällige ID erzeugen;
@@ -1044,6 +1092,17 @@ void World::updatePlayers()
 
 					handleDataRequest(&req,slot);
 				}
+				
+				if (headerp.m_content == PTYPE_C2S_MESSAGE)
+				{
+					char* buf = new char[headerp.m_number+1];
+					buf[headerp.m_number] = 0;
+					cv->fromBuffer(buf, headerp.m_number);
+					
+					handleMessage(buf,slot);
+					
+					delete buf;
+				}
 
 				delete cv;
 			}
@@ -1202,6 +1261,17 @@ void World::updatePlayers()
 						}
 					}
 
+				}
+				
+				if (headerp.m_content == PTYPE_S2C_MESSAGE)
+				{
+					char* buf = new char[headerp.m_number+1];
+					buf[headerp.m_number] = 0;
+					cv->fromBuffer(buf, headerp.m_number);
+					
+					static_cast<Player*>(m_local_player)->addMessage(buf);
+					
+					delete buf;
 				}
 
 				delete cv;

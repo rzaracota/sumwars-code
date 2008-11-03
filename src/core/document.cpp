@@ -632,6 +632,13 @@ void Document::onButtonOpenChatClicked()
 	m_modified |= WINDOWS_MODIFIED;
 }
 
+void Document::sendChatMessage(std::string msg)
+{
+	
+	World::getWorld()->handleMessage(msg);
+}
+
+
 void Document::onSwapEquip()
 {
 	ClientCommand command;

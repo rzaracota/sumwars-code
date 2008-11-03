@@ -267,8 +267,7 @@ bool ControlPanel::onButtonPartyClicked(const CEGUI::EventArgs& evt)
 
 bool ControlPanel::onButtonOpenChatClicked(const CEGUI::EventArgs& evt)
 {
-	// Debugging
-	m_document->emitDebugSignal(1);
+	m_document->onButtonOpenChatClicked();
 	return true;
 }
 

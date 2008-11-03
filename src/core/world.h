@@ -339,6 +339,14 @@ public:
 	void handleCommand(ClientCommand* cmd, int slot=LOCAL_SLOT, float delay=0);
 	
 	/**
+	 * \fn void handleMessage(std::string msg, int slot=LOCAL_SLOT)
+	 * \brief Behandelt eine empfangene Nachricht
+	 * \param msg Nachricht
+	 * \param slot uebern den die Nachricht empfangen wurde
+	 */
+	void handleMessage(std::string msg, int slot=LOCAL_SLOT);
+	
+	/**
 	 * \fn void handleDataRequest(ClientDataRequest* request, int slot  = LOCAL_SLOT)
 	 * \brief Behandelt eine Anfrage nach Daten vom Client
 	 * \param request beschreibt welche Daten gefordert werden
