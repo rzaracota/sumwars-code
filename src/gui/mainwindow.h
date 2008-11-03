@@ -109,6 +109,12 @@ class MainWindow :
 	 * \brief Erzeugt das Fenster Chat
 	 */
 	void setupChatWindow();
+	
+	/**
+	 * \fn void setupCursorItemImage()
+	 * \brief Erzeugt das Bild fuer am Cursor befestigte Items
+	 */
+	void setupCursorItemImage();
 
 	/**
 	 * \fn bool setupMainMenu()
@@ -136,6 +142,11 @@ class MainWindow :
 	 */
 	void updateMainMenu();
 
+	/**
+	 * \fn void updateCursorItemImage()
+	 * \brief aktualisiert das Bild fuer den am Cursor befestigten Gegenstand
+	 */
+	void updateCursorItemImage();
 
 	/**
 	 * \fn void updateObjectInfo()

@@ -73,7 +73,7 @@ void ItemWindow::updateItemTooltip(unsigned int pos)
 	if (pos == Equipement::GLOVES)
 		out_stream << "GlovesItemLabel";
 	if (pos == Equipement::RING_LEFT)
-		out_stream << "RingLeftLabel";
+		out_stream << "RingLeftItemLabel";
 	if (pos == Equipement::RING_RIGHT)
 		out_stream << "RingRightItemLabel";
 	if (pos == Equipement::AMULET)
@@ -127,6 +127,6 @@ std::string ItemWindow::getItemImage(Item::Subtype type)
 		return it->second;
 	}
 
-	return "set: Axt.png image: full_image";
+	return "set: noMedia.png image: full_image";
 }
 

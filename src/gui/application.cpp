@@ -414,20 +414,23 @@ bool Application::initCEGUI()
 	CEGUI::ImagesetManager::getSingleton().createImageset("skills.imageset");
 	
 	// TODO: Dateien laden
-	CEGUI::ImagesetManager::getSingleton().createImagesetFromImageFile ("Armbrust.png","Armbrust.png",(CEGUI::utf8*)"GUI");
-	CEGUI::ImagesetManager::getSingleton().createImagesetFromImageFile ("Axt.png","Axt.png",(CEGUI::utf8*)"GUI");
-	CEGUI::ImagesetManager::getSingleton().createImagesetFromImageFile ("Bogen.png","Bogen.png",(CEGUI::utf8*)"GUI");
-	CEGUI::ImagesetManager::getSingleton().createImagesetFromImageFile ("doppelaxt.png","doppelaxt.png",(CEGUI::utf8*)"GUI");
-	CEGUI::ImagesetManager::getSingleton().createImagesetFromImageFile ("Hellebarde.png","Hellebarde.png",(CEGUI::utf8*)"GUI");
-	CEGUI::ImagesetManager::getSingleton().createImagesetFromImageFile ("Schild_dmg.png","Schild_dmg.png",(CEGUI::utf8*)"GUI");
-	CEGUI::ImagesetManager::getSingleton().createImagesetFromImageFile ("Schild.png","Schild.png",(CEGUI::utf8*)"GUI");
-	CEGUI::ImagesetManager::getSingleton().createImagesetFromImageFile ("Schwert.png","Schwert.png",(CEGUI::utf8*)"GUI");
+	CEGUI::ImagesetManager::getSingleton().createImagesetFromImageFile ("crossbow.png","crossbow.png",(CEGUI::utf8*)"GUI");
+	CEGUI::ImagesetManager::getSingleton().createImagesetFromImageFile ("axe.png","axe.png",(CEGUI::utf8*)"GUI");
+	CEGUI::ImagesetManager::getSingleton().createImagesetFromImageFile ("bow.png","bow.png",(CEGUI::utf8*)"GUI");
+	CEGUI::ImagesetManager::getSingleton().createImagesetFromImageFile ("axe2H.png","axe2H.png",(CEGUI::utf8*)"GUI");
+	CEGUI::ImagesetManager::getSingleton().createImagesetFromImageFile ("halberd.png","halberd.png",(CEGUI::utf8*)"GUI");
+	CEGUI::ImagesetManager::getSingleton().createImagesetFromImageFile ("shield.png","shield.png",(CEGUI::utf8*)"GUI");
+	CEGUI::ImagesetManager::getSingleton().createImagesetFromImageFile ("shield_dmg.png","shield_dmg.png",(CEGUI::utf8*)"GUI");
+	CEGUI::ImagesetManager::getSingleton().createImagesetFromImageFile ("sword.png","sword.png",(CEGUI::utf8*)"GUI");
+	CEGUI::ImagesetManager::getSingleton().createImagesetFromImageFile ("noMedia.png","noMedia.png",(CEGUI::utf8*)"GUI");
 	
-	ItemWindow::registerItemImage("short_sw","set:Schwert.png image:full_image");
-	ItemWindow::registerItemImage("long_sw","set:Schwert.png image:full_image");
-	ItemWindow::registerItemImage("battle_axe","set:doppelaxt.png  image:full_image");
-	ItemWindow::registerItemImage("wood_sh","set:Schild_dmg.png  image:full_image");
-	ItemWindow::registerItemImage("iron_sh","set:Schild.png  image:full_image");
+	ItemWindow::registerItemImage("short_sw","set:sword.png image:full_image");
+	ItemWindow::registerItemImage("long_sw","set:sword.png image:full_image");
+	ItemWindow::registerItemImage("long_bow","set:bow.png image:full_image");
+	ItemWindow::registerItemImage("wood_bow","set:bow.png image:full_image");
+	ItemWindow::registerItemImage("battle_axe","set:axe2H.png  image:full_image");
+	ItemWindow::registerItemImage("wood_sh","set:shield_dmg.png  image:full_image");
+	ItemWindow::registerItemImage("iron_sh","set:shield.png  image:full_image");
 	
 
 	

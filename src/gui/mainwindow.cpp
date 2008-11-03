@@ -239,6 +239,8 @@ void MainWindow::update()
 
 		// ObjectInfo aktualisieren
 		updateObjectInfo();
+		
+		updateCursorItemImage();
 
 		if (wflags & Document::CHARINFO)
 		{
@@ -302,6 +304,8 @@ bool MainWindow::setupGameScreen()
 		
 		// Chatfenster anlegen
 		setupChatWindow();
+		
+		setupCursorItemImage();
 	}
 	catch (CEGUI::Exception e)
 	{
@@ -375,6 +379,23 @@ void MainWindow::setupChatWindow()
 	wnd->getCEGUIWindow()->setVisible(false);
 }
 
+void MainWindow::setupCursorItemImage()
+{
+	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
+	
+	CEGUI::Window* label;
+	label = win_mgr.createWindow("TaharezLook/StaticImage", "CursorItemImage");
+	m_game_screen->addChildWindow(label);
+	label->setProperty("FrameEnabled", "false");
+	label->setProperty("BackgroundEnabled", "false");
+	label->setPosition(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.05)));
+	label->setSize(CEGUI::UVector2(cegui_reldim(0.04f), cegui_reldim( 0.06f)));
+	label->setProperty("Image", "set:TaharezLook image:CloseButtonNormal"); 
+	label->setVisible(false);
+	label->setAlwaysOnTop(true);
+	label->setMousePassThroughEnabled(true);
+	label->setID(0);
+}
 
 bool MainWindow::setupObjectInfo()
 {
@@ -413,7 +434,72 @@ void  MainWindow::updateMainMenu()
 
 }
 
-
+void MainWindow::updateCursorItemImage()
+{
+	Player* player = m_document->getLocalPlayer();
+	Item* item = player->getEquipement()->getItem(Equipement::CURSOR_ITEM);
+	
+	
+	
+	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
+	CEGUI::Window* label = win_mgr.getWindow("CursorItemImage");
+	
+	if (item ==0)
+	{
+		// Kein Item mehr am Cursor
+		// Bild verstecken
+		
+		if (label->isVisible())
+		{
+			label->setVisible(false);
+		}
+	}
+	else
+	{
+		// Es befindet sich ein Item am Cursor
+		// Bild zeigen
+		
+		if (! label->isVisible())
+		{
+			label->setVisible(true);
+		}	
+		
+		// Groesse des Items am Cursor ermitteln
+		unsigned int size = item->m_size;
+		
+			
+		if (size != label->getID())
+		{
+			// Groesse des Labels setzen
+			if (size == Item::BIG)
+			{
+				label->setSize(CEGUI::UVector2(cegui_reldim(0.060f), cegui_reldim( 0.075f)));
+			}
+			else if (size == Item::MEDIUM)
+			{
+				label->setSize(CEGUI::UVector2(cegui_reldim(0.045f), cegui_reldim( 0.05f)));
+			}
+			else if (size == Item::SMALL)
+			{
+				label->setSize(CEGUI::UVector2(cegui_reldim(0.033f), cegui_reldim( 0.043f)));
+			}
+			
+			label->setID(size);
+		}
+		
+		std::ostringstream out_stream("");
+		out_stream<< ItemWindow::getItemImage(item->m_subtype);
+		
+		if (label->getProperty("Image")!=out_stream.str())
+		{
+			label->setProperty("Image", out_stream.str());
+			OIS::MouseEvent me(m_mouse,m_mouse->getMouseState ());
+			
+			mouseMoved(me);
+		}
+		
+	}
+}
 
 void MainWindow::updateObjectInfo()
 {
@@ -625,6 +711,20 @@ bool MainWindow::mouseMoved(const OIS::MouseEvent &evt) {
 	m_cegui_system->injectMouseWheelChange(evt.state.Z.rel);
 	//return m_cegui_system->injectMouseMove(evt.state.X.rel, evt.state.Y.rel);
 	//DEBUG("injection position %i %i",evt.state.X.abs,evt.state.Y.abs);
+	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
+	CEGUI::Window* label = win_mgr.getWindow("CursorItemImage");
+	
+	int off = 0;
+	if (label->getID() == Item::BIG)
+		off = 24;
+	if (label->getID() == Item::MEDIUM)
+		off = 16;
+	if (label->getID() == Item::SMALL)
+		off = 12;
+	
+	label->setPosition(CEGUI::UVector2(CEGUI::UDim(0,std::max(0,evt.state.X.abs-off)),CEGUI::UDim(0,std::max(0,evt.state.Y.abs- off))));
+	
+	
 	return m_cegui_system->injectMousePosition(evt.state.X.abs,evt.state.Y.abs);
 }
 
