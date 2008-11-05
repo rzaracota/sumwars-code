@@ -123,7 +123,8 @@ s		modchance_damage_air_mod="float"
 <Item type="weapon" subtype="farm2h_sw" size="big">
 	<Mesh file="sword.mesh" />
 	<Attribute
-		price="100"
+		level_requirement="1"
+		character_requirement="15"
 		min_enchant="10"
 		max_enchant="40"
 		modchance_strength_mod="0.1"
@@ -157,7 +158,8 @@ s		modchance_damage_air_mod="float"
 <Item type="weapon" subtype="merc2h_sw" size="big">
 	<Mesh file="sword.mesh" />
 	<Attribute
-		price="300"
+		level_requirement="3"
+		character_requirement="15"
 		min_enchant="30"
 		max_enchant="120"
 		modchance_strength_mod="0.1"
@@ -191,7 +193,8 @@ s		modchance_damage_air_mod="float"
 <Item type="weapon" subtype="steel2h_sw" size="big">
 	<Mesh file="sword.mesh" />
 	<Attribute
-		price="800"
+		level_requirement="5"
+		character_requirement="15"
 		min_enchant="40"
 		max_enchant="150"
 		modchance_strength_mod="0.1"
@@ -225,7 +228,8 @@ s		modchance_damage_air_mod="float"
 <Item type="weapon" subtype="smash_sw" size="big">
 	<Mesh file="sword.mesh" />
 	<Attribute
-		price="1500"
+		level_requirement="8"
+		character_requirement="15"
 		min_enchant="50"
 		max_enchant="200"
 		modchance_strength_mod="0.1"
@@ -259,7 +263,8 @@ s		modchance_damage_air_mod="float"
 <Item type="weapon" subtype="horse_sw" size="big">
 	<Mesh file="sword.mesh" />
 	<Attribute
-		price="2000"
+		level_requirement="13"
+		character_requirement="15"
 		min_enchant="80"
 		max_enchant="260"
 		modchance_strength_mod="0.1"
@@ -293,7 +298,8 @@ s		modchance_damage_air_mod="float"
 <Item type="weapon" subtype="bast_sw" size="big">
 	<Mesh file="sword.mesh" />
 	<Attribute
-		price="2600"
+		level_requirement="19"
+		character_requirement="15"
 		min_enchant="80"
 		max_enchant="260"
 		modchance_strength_mod="0.1"
@@ -327,20 +333,21 @@ s		modchance_damage_air_mod="float"
 <Item type="weapon" subtype="ogre_sw" size="big">
 	<Mesh file="sword.mesh" />
 	<Attribute
-			  price="3000"
-			  min_enchant="40"
-			  max_enchant="220"
-			  modchance_strength_mod="0.1"
-			  modchance_dexterity_mod="0.1"
-			  modchance_magic_power_mod="0.05"
-			  modchance_damage_phys_mod="0.15"
-			  modchance_damage_fire_mod="0.10"
-			  modchance_damage_ice_mod="0.10"
-			  modchance_damage_air_mod="0.10"
-			  modchance_damage_mult_phys_mod="0.1"
-			  modchance_attack_mod="0.1"
-			  modchance_power_mod="0.1"
-			  />
+		level_requirement="25"
+		character_requirement="15"
+		min_enchant="40"
+		max_enchant="220"
+		modchance_strength_mod="0.1"
+		modchance_dexterity_mod="0.1"
+		modchance_magic_power_mod="0.05"
+		modchance_damage_phys_mod="0.15"
+		modchance_damage_fire_mod="0.10"
+		modchance_damage_ice_mod="0.10"
+		modchance_damage_air_mod="0.10"
+		modchance_damage_mult_phys_mod="0.1"
+		modchance_attack_mod="0.1"
+		modchance_power_mod="0.1"
+	/>
 	<EquipEffect />
 	<WeaponAttribute
 					damage_min_physical="68"
@@ -361,7 +368,8 @@ s		modchance_damage_air_mod="float"
 <Item type="weapon" subtype="goblin_sw" size="big">
 	<Mesh file="sword.mesh" />
 	<Attribute
-			  price="3500"
+			  level_requirement="30"
+			character_requirement="15"
 			  min_enchant="80"
 			  max_enchant="300"
 			  modchance_strength_mod="0.1"
@@ -395,7 +403,8 @@ s		modchance_damage_air_mod="float"
 <Item type="weapon" subtype="judge_sw" size="big">
 	<Mesh file="sword.mesh" />
 	<Attribute
-			  price="4000"
+			  level_requirement="35"
+			character_requirement="15"
 			  min_enchant="100"
 			  max_enchant="300"
 			  modchance_strength_mod="0.1"
@@ -429,7 +438,8 @@ s		modchance_damage_air_mod="float"
 <Item type="weapon" subtype="garde_sw" size="big">
 	<Mesh file="sword.mesh" />
 	<Attribute
-			  price="4500"
+			  level_requirement="40"
+		character_requirement="15"
 			  min_enchant="100"
 			  max_enchant="350"
 			  modchance_strength_mod="0.1"
@@ -463,7 +473,8 @@ s		modchance_damage_air_mod="float"
 <Item type="weapon" subtype="flame2h_sw" size="big">
 	<Mesh file="sword.mesh" />
 	<Attribute
-			  price="5000"
+			  level_requirement="45"
+		character_requirement="15"
 			  min_enchant="110"
 			  max_enchant="370"
 			  modchance_strength_mod="0.1"
@@ -499,7 +510,8 @@ s		modchance_damage_air_mod="float"
 <Item type="weapon" subtype="aisen_sw" size="big">
 	<Mesh file="sword.mesh" />
 	<Attribute
-			  price="5500"
+			  level_requirement="50"
+		character_requirement="15"
 			  min_enchant="110"
 			  max_enchant="370"
 			  modchance_strength_mod="0.1"
@@ -533,7 +545,8 @@ s		modchance_damage_air_mod="float"
 <Item type="weapon" subtype="monster_sw" size="big">
 	<Mesh file="sword.mesh" />
 	<Attribute
-			  price="6000"
+			  level_requirement="55"
+		character_requirement="15"
 			  min_enchant="80"
 			  max_enchant="390"
 			  modchance_strength_mod="0.1"
@@ -567,7 +580,8 @@ s		modchance_damage_air_mod="float"
 <Item type="weapon" subtype="tear_sw" size="big">
 	<Mesh file="sword.mesh" />
 	<Attribute
-			  price="6500"
+			  level_requirement="60"
+		character_requirement="15"
 			  min_enchant="120"
 			  max_enchant="430"
 			  modchance_strength_mod="0.1"
@@ -601,7 +615,8 @@ s		modchance_damage_air_mod="float"
 <Item type="weapon" subtype="death_sw" size="big">
 	<Mesh file="sword.mesh" />
 	<Attribute
-			  price="7000"
+			  level_requirement="65"
+		character_requirement="15"
 			  min_enchant="140"
 			  max_enchant="470"
 			  modchance_strength_mod="0.1"
@@ -637,7 +652,8 @@ s		modchance_damage_air_mod="float"
 <Item type="weapon" subtype="dread_sw" size="big">
 	<Mesh file="sword.mesh" />
 	<Attribute
-			  price="7500"
+			  level_requirement="70"
+		character_requirement="15"
 			  min_enchant="150"
 			  max_enchant="490"
 			  modchance_strength_mod="0.1"
@@ -671,7 +687,8 @@ s		modchance_damage_air_mod="float"
 <Item type="weapon" subtype="great_sw" size="big">
 	<Mesh file="sword.mesh" />
 	<Attribute
-			  price="8000"
+			  level_requirement="75"
+		character_requirement="15"
 			  min_enchant="170"
 			  max_enchant="530"
 			  modchance_strength_mod="0.1"
@@ -705,7 +722,8 @@ s		modchance_damage_air_mod="float"
 <Item type="weapon" subtype="angl2h_sw" size="big">
 	<Mesh file="sword.mesh" />
 	<Attribute
-			  price="9000"
+			  level_requirement="80"
+		character_requirement="15"
 			  min_enchant="200"
 			  max_enchant="700"
 			  modchance_strength_mod="0.1"
