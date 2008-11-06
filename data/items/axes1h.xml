@@ -177,7 +177,7 @@
 
 <!-- S�ldneraxt -->
 <Item type="weapon" subtype="merc_axe" size="medium">
-	<Mesh file="a.mesh" />
+	<Mesh file="axe.mesh" />
 	<Attribute
 		level_requirement="19"
 		character_requirement="15"
