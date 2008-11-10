@@ -35,6 +35,41 @@
 	/>
 </Item>
 
+<!-- Goblin Club -->
+<Item type="weapon" subtype="goblin_axe" size="medium">
+	<Mesh file="axe.mesh" />
+	<Attribute
+		level_requirement="1"
+		character_requirement="15"
+		min_enchant="20"
+		max_enchant="40"
+		modchance_strength_mod="0.1"
+		modchance_dexterity_mod="0.1"
+		modchance_magic_power_mod="0.05"
+		modchance_damage_phys_mod="0.15"
+		modchance_damage_fire_mod="0.10"
+		modchance_damage_ice_mod="0.10"
+		modchance_damage_air_mod="0.10"
+		modchance_damage_mult_phys_mod="0.1"
+		modchance_attack_mod="0.1"
+		modchance_power_mod="0.1"
+	/>
+	<EquipEffect />
+	<WeaponAttribute
+		damage_min_physical="2"
+		damage_max_physical="10"
+		damage_attack="20"
+		damage_power="25"
+		attack_range="0.8"
+		two_handed="no"
+		dattack_speed="500"
+	/>
+	<DropChance
+		level="1"
+		probability="1.0"
+	/>
+</Item>
+
 <!-- bronze_axe-->
 <Item type="weapon" subtype="bronze_axe" size="medium">
 	<Mesh file="axe.mesh" />

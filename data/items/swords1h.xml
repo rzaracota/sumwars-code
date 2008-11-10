@@ -154,6 +154,40 @@ s		modchance_damage_air_mod="float"
 	/>
 </Item>
 
+<Item type="weapon" subtype="crude_sw" size="medium">
+	<Mesh file="sword.mesh" />
+	<Attribute
+		level_requirement="1"
+		character_requirement="15"
+		min_enchant="20"
+		max_enchant="40"
+		modchance_strength_mod="0.1"
+		modchance_dexterity_mod="0.1"
+		modchance_magic_power_mod="0.05"
+		modchance_damage_phys_mod="0.15"
+		modchance_damage_fire_mod="0.10"
+		modchance_damage_ice_mod="0.10"
+		modchance_damage_air_mod="0.10"
+		modchance_damage_mult_phys_mod="0.1"
+		modchance_attack_mod="0.1"
+		modchance_power_mod="0.1"
+	/>
+	<EquipEffect />
+	<WeaponAttribute
+		damage_min_physical="3"
+		damage_max_physical="5"
+		damage_attack="30"
+		damage_power="25"
+		attack_range="0.8"
+		two_handed="no"
+		dattack_speed="700"
+	/>
+	<DropChance
+		level="1"
+		probability="1.0"
+	/>
+</Item>
+
 <!-- Short Sword -->
 <Item type="weapon" subtype="short_sw" size="medium">
 	<Mesh file="sword.mesh" />
