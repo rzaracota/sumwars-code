@@ -112,6 +112,13 @@ public:
 	 * \brief Erzeugt einen Gegenstand anhand eines Dropslots. Wenn kein Item entsteht wird NULL ausgegeben
 	 */
 	static Item* createItem(DropSlot &slot);
+	
+	/**
+	 * \fn static Item::Type getBaseType(Item::Subtype subtype)
+	 * \brief Gibt zu zum angegebenen Subtype den Basistyp aus
+	 * \param subtype Subtyp
+	 */
+	static Item::Type getBaseType(Item::Subtype subtype);
 
 	/**
 	 * \fn static void init()
@@ -151,6 +158,7 @@ public:
          * \brief enthaelt Basisdaten zu allen Items
          */
 		static std::map<Item::Subtype,ItemBasicData*> m_item_data;
+		
 		
 	
 };

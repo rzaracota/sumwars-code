@@ -196,11 +196,23 @@ void MainWindow::update()
 		CEGUI::FrameWindow* chat_window = (CEGUI::FrameWindow*) win_mgr.getWindow("ChatWindow");
 		if (wflags & Document::CHAT)
 		{
+			// Fokus setzen, wenn das Fenster gerade geoeffnet wurde
+			if (!chat_window->isVisible())
+			{
+				CEGUI::Editbox* chatline;
+				chatline = static_cast<CEGUI::Editbox*>(win_mgr.getWindow("Chatline"));
+				chatline->activate();
+			}
+			
 			chat_window->setVisible(true);
 		}
 		else
 		{
 			chat_window->setVisible(false);
+			// Chatzeile deaktivieren
+			CEGUI::Editbox* chatline;
+			chatline = static_cast<CEGUI::Editbox*>(win_mgr.getWindow("Chatline"));
+			chatline->deactivate();
 		}
 
 		if (m_document->getLocalPlayer()!=0)

@@ -25,23 +25,7 @@
 Document::Document()
 	:  m_shortkey_map(), m_special_keys()
 {
-    /*
-	DEBUG5("reading ip");
-	// IP aus Konfigurationsdatei einlesen
-	{
-		ifstream file("config");
-		DEBUG5("file opened");
-		if ( file.is_open() )
-		{
-			file >> m_server_ip;
-			DEBUG5("Server-IP: %s", m_server_ip);
-		}
-		else
-		{
-			ERRORMSG("config nicht gefunden");
-		}
-	}
-	*/
+   
 	strcpy(m_server_ip,"127.0.0.1");
 
 	// Informationen zu Aktionen initialisieren
@@ -850,7 +834,21 @@ bool Document::onKeyPress(KeyCode key)
 		}
 		else if(dest == SHOW_CHATBOX)
 		{
-			emitDebugSignal(1);
+			onButtonOpenChatClicked();
+	
+		}
+		else if(dest == SHOW_CHATBOX_NO_TOGGLE)
+		{
+			// Chatfenster oeffnen wenn es gerade geschlossen ist
+			if (!(getGUIState()->m_shown_windows & CHAT))
+			{
+				getGUIState()->m_shown_windows |= CHAT;
+				
+				// Geoeffnete Fenster haben sich geaendert
+				m_modified |= WINDOWS_MODIFIED;
+
+			}
+
 		}
 		else if (dest == CLOSE_ALL)
 		{

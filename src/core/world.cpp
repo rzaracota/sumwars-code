@@ -836,6 +836,37 @@ void World::handleMessage(std::string msg, int slot)
 	// als Client: Nachricht an den Server senden
 	if (m_server)
 	{
+		if (msg[0] == '$')
+		{
+			// Cheatcode eingegeben
+			Player* pl = static_cast<Player*>((*m_player_slots)[slot]);
+
+			std::stringstream stream;
+			stream << msg;
+			
+			// $ lesen
+			char dummy;
+			stream >> dummy;
+			
+			std::string obj;
+			stream >> obj;
+			if (obj == "item")
+			{
+				// Item erzeugen
+				std::string name="";
+				int val =0;
+				stream >> name >> val;
+				
+				Item::Type type = ItemFactory::getBaseType(name);
+				
+				Item* itm = ItemFactory::createItem(type, name,0,val);
+				if (itm != 0)
+				{
+					pl->insertItem(itm);
+				}
+			}
+			
+		}
 		CharConv cv;
 
 		// Header anlegen

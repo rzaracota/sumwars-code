@@ -42,7 +42,7 @@ Item* ItemFactory::createItem(Item::Type type, Item::Subtype subtype, int id, fl
 		item = new Item(*idata);
 		item->m_id = id;
 
-		//createMagicMods(item,idata->m_modchance,magic_power, idata->m_min_enchant, idata->m_max_enchant);
+		createMagicMods(item,idata->m_modchance,magic_power, idata->m_min_enchant, idata->m_max_enchant);
 
 		// Preis ausrechnen
 		item->calcPrice();
@@ -492,7 +492,7 @@ void ItemFactory::createMagicMods(Item* item, float* modchance, float magic_powe
 		sqrtmp = sqrt(mp);
 		logmp = log(mp);
 		magic_power -= mp;
-		DEBUG4("ausgewuerfelt: Starke der Verzauberung: %f",mp);
+		DEBUG5("ausgewuerfelt: Starke der Verzauberung: %f",mp);
 
 			// Modifikation auswuerfeln
 		mod = Random::randDiscrete(modchance,31,sum);
@@ -621,6 +621,19 @@ void ItemFactory::createMagicMods(Item* item, float* modchance, float magic_powe
 
 	item->m_level_req = std::max(item->m_level_req,(char) levelreq);
 	DEBUG5("level req %i",item->m_level_req);
+}
+
+Item::Type  ItemFactory::getBaseType(Item::Subtype subtype)
+{
+	std::map<Item::Subtype,Item::Type>::iterator it;
+	it = m_item_types.find(subtype);
+	
+	if (it != m_item_types.end())
+	{
+		return it->second;
+	}
+	
+	return Item::NOITEM;
 }
 
 void ItemFactory::registerItemDrop(Item::Type type,Item::Subtype subtype, DropChance chance)

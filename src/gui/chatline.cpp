@@ -29,7 +29,7 @@ ChatLine::ChatLine (Document* doc)
 	chatline->setWantsMultiClickEvents(false);
 	chatline->subscribeEvent(CEGUI::Editbox::EventTextAccepted, CEGUI::Event::Subscriber(&ChatLine::onSendMessage,  this));
 	
-	chatline->setText("test");
+	chatline->setText("");
 	
 	
 	chat_content = static_cast<CEGUI::MultiLineEditbox*>(win_mgr.createWindow("TaharezLook/MultiLineEditbox", "ChatContent"));
@@ -38,7 +38,7 @@ ChatLine::ChatLine (Document* doc)
 	chat_content->setSize(CEGUI::UVector2(cegui_reldim(1.0f), cegui_reldim( 0.78f)));
 	chat_content->setWantsMultiClickEvents(false);
 	chat_content->setReadOnly(true);
-	chat_content->setText("test2");
+	chat_content->setText("");
 	
 }
 
