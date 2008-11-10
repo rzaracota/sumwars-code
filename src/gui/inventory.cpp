@@ -12,7 +12,7 @@ Inventory::Inventory (Document* doc)
 	m_window = inventory;
 	
 	inventory->setPosition(CEGUI::UVector2(cegui_reldim(0.52f), cegui_reldim( 0.0f)));
-	inventory->setSize(CEGUI::UVector2(cegui_reldim(0.48f), cegui_reldim( 0.78f)));
+	inventory->setSize(CEGUI::UVector2(cegui_reldim(0.48f), cegui_reldim( 0.85f)));
 	inventory->setProperty("FrameEnabled","false");
 	inventory->setProperty("TitlebarEnabled","false");
 	inventory->setProperty("CloseButtonEnabled","false");
@@ -36,8 +36,8 @@ Inventory::Inventory (Document* doc)
 		inventory->addChildWindow(label);
 		label->setProperty("FrameEnabled", "true");
 		label->setProperty("BackgroundEnabled", "true");
-		label->setPosition(CEGUI::UVector2(cegui_reldim(0.05f+i*0.18f), cegui_reldim( 0.5f)));
-		label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
+		label->setPosition(CEGUI::UVector2(cegui_reldim(0.05f+i*0.18f), cegui_reldim( 0.47f)));
+		label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.09f)));
 		label->setID(Equipement::BIG_ITEMS+i);
 		label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonPressed, (ItemWindow*) this));
 		label->subscribeEvent(CEGUI::Window::EventMouseButtonUp, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonReleased, (ItemWindow*) this));
@@ -55,8 +55,8 @@ Inventory::Inventory (Document* doc)
 			inventory->addChildWindow(label);
 			label->setProperty("FrameEnabled", "true");
 			label->setProperty("BackgroundEnabled", "true");
-			label->setPosition(CEGUI::UVector2(cegui_reldim(0.05f+i*0.13f), cegui_reldim( 0.61f+0.09*j)));
-			label->setSize(CEGUI::UVector2(cegui_reldim(0.115f), cegui_reldim( 0.08f)));
+			label->setPosition(CEGUI::UVector2(cegui_reldim(0.05f+i*0.13f), cegui_reldim( 0.58f+0.085*j)));
+			label->setSize(CEGUI::UVector2(cegui_reldim(0.115f), cegui_reldim( 0.075f)));
 			label->setID(Equipement::MEDIUM_ITEMS+j*7+i);
 			label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonPressed, (ItemWindow*) this));
 			label->subscribeEvent(CEGUI::Window::EventMouseButtonUp, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonReleased, (ItemWindow*) this));
@@ -74,8 +74,8 @@ Inventory::Inventory (Document* doc)
 			inventory->addChildWindow(label);
 			label->setProperty("FrameEnabled", "true");
 			label->setProperty("BackgroundEnabled", "true");
-			label->setPosition(CEGUI::UVector2(cegui_reldim(0.02f+i*0.096f), cegui_reldim( 0.79f+0.07*j)));
-			label->setSize(CEGUI::UVector2(cegui_reldim(0.086f), cegui_reldim( 0.06f)));
+			label->setPosition(CEGUI::UVector2(cegui_reldim(0.02f+i*0.096f), cegui_reldim( 0.75f+0.065*j)));
+			label->setSize(CEGUI::UVector2(cegui_reldim(0.086f), cegui_reldim( 0.056f)));
 			label->setID(Equipement::SMALL_ITEMS+j*10+i);
 			label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonPressed, (ItemWindow*) this));
 			label->subscribeEvent(CEGUI::Window::EventMouseButtonUp, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonReleased, (ItemWindow*) this));
@@ -207,12 +207,32 @@ Inventory::Inventory (Document* doc)
 	btn->setText("1");
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&Inventory::onSwapEquipClicked, this));
 
+	
+	// Label Gold
+	label = win_mgr.createWindow("TaharezLook/StaticText", "GoldLabel");
+	inventory->addChildWindow(label);
+	label->setProperty("FrameEnabled", "true");
+	label->setProperty("BackgroundEnabled", "true");
+	label->setPosition(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.94f)));
+	label->setSize(CEGUI::UVector2(cegui_reldim(0.20f), cegui_reldim( 0.05f)));
+	label->setText(gettext("gold"));
+
+	// Label Gold (Wert)
+	label = win_mgr.createWindow("TaharezLook/StaticText", "GoldValueLabel");
+	inventory->addChildWindow(label);
+	label->setProperty("FrameEnabled", "true");
+	label->setProperty("BackgroundEnabled", "true");
+	label->setPosition(CEGUI::UVector2(cegui_reldim(0.27f), cegui_reldim( 0.94f)));
+	label->setSize(CEGUI::UVector2(cegui_reldim(0.1f), cegui_reldim( 0.05f)));
+	label->setText("0");
 }
 
 void Inventory::update()
 {
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::Window* img;
+	CEGUI::Window* label;
+	
 	std::ostringstream out_stream;
 
 	Player* player = m_document->getLocalPlayer();
@@ -372,6 +392,15 @@ void Inventory::update()
 			img->setProperty("Image", out_stream.str());
 		}
 	}
+	
+	label =  win_mgr.getWindow("GoldValueLabel");
+	out_stream.str("");
+	out_stream << equ->getGold();
+	if (label->getText()!=out_stream.str())
+	{
+		label->setText(out_stream.str());
+	}
+	
 }
 
 bool Inventory::onSwapEquipClicked(const CEGUI::EventArgs& evt)

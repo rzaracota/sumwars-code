@@ -311,6 +311,15 @@ class Equipement
 	 * \brief Loescht alle enthaltenen Item
 	 */
 	void clear();
+	
+	/**
+	 * \fn int getGold()
+	 * \brief Gibt die Menge Gold aus
+	 */
+	int getGold()
+	{
+		return m_gold;
+	}
 
 	private:
 
