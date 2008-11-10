@@ -155,6 +155,12 @@ bool World::init()
 	
 	registerRegionData(rdata,1);
 	
+	
+	// Templates aus XML Laden
+	TemplateLoader templateloader;
+	std::list<RegionData*>* region_list;
+	templateloader.loadRegionData("../data/world/world.xml", region_list);
+
 	return true;
 }
 

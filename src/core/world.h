@@ -45,6 +45,7 @@
 #include "itemfactory.h"
 #include "objectfactory.h"
 #include "event.h"
+#include "templateloader.h"
 
 /**
  * \def WORLD_MAX_REGIONS

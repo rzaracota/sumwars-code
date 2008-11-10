@@ -2,6 +2,7 @@
 ./core/world.o
 ./core/objectfactory.o
 ./core/objectloader.o
+./core/templateloader.o
 ./core/itemlist.o
 ./core/gridunit.o
 ./core/servernetwork.o
