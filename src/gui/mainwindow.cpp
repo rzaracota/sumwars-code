@@ -504,6 +504,8 @@ void MainWindow::updateCursorItemImage()
 void MainWindow::updateObjectInfo()
 {
 	Player* player = m_document->getLocalPlayer();
+	short rid = player->getGridLocation()->m_region;
+	Vector plpos = player->getShape()->m_center;
 
 	// Ogre Name des Objektes auf das der Mauszeiger zeigt
 	std::string objname = "";
@@ -550,9 +552,12 @@ void MainWindow::updateObjectInfo()
 
 		// minimale Distanz eines Objektes im Kamerastrahl
 		float mindist = 1000000;
-
+		float dist;
+		
 		for (it = objects->begin();it != objects->end();++it)
 		{
+			WorldObject* wo;
+			
 			if (m_document->getLocalPlayer()->getId() == it->first)
 			{
 				// Spieler selbst ueberspringen
@@ -567,13 +572,19 @@ void MainWindow::updateObjectInfo()
 
 			if (isec.first)
 			{
-
+				// nur aktive Objekte beruecksichtigen
+				wo = World::getWorld()->getRegion(rid)->getObject(it->first);
+				if (wo->getState() != WorldObject::STATE_ACTIVE)
+					continue;
+						
 				// Objekt wird vom Kamerastrahl geschnitten
-				if (isec.second<mindist)
+				// Distance zum Spieler ausrechnen
+				dist = plpos.distanceTo(wo->getShape()->m_center);
+				if (dist<mindist)
 				{
 					// Objekt ist das bisher naechste
 					objname = it->second;
-					mindist = isec.second;
+					mindist = dist;
 				}
 			}
 
@@ -591,7 +602,7 @@ void MainWindow::updateObjectInfo()
 
 	std::string name;
 	std::ostringstream string_stream;
-	short rid = player->getGridLocation()->m_region;
+	
 
 	if (objname!="")
 	{
