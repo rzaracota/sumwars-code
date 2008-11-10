@@ -89,12 +89,13 @@ public:
 	Item* getItem(Item::Size size, int index);
 
 	/**
-	 * \fn int getFreePlace(Item::Size size)
+	 * \fn int getFreePlace(Item::Size size, bool useup_possible = false)
 	 * \brief Gibt den Indes  des ersten freien Platzes fuer ein Item der angegebenen Groesse aus.
 	 * \param size Groesse des Items
+	 * \param useup_possible auf true gesetzt, wenn der Gegenstand verbraucht werden kann
 	 * \return Index fuer einen freien Platz
 	 */
-	int getFreePlace(Item::Size size);
+	int getFreePlace(Item::Size size, bool useup_possible = false);
 
 	/**
 	 * \fn  swapItem(Item* &item,Item::Size size, int index)

@@ -423,6 +423,13 @@ bool Player::onItemClick(ClientCommand* command)
 					// Guertel, nur Traenke zulassen
 					if (it->m_type != Item::POTION)
 					{
+						
+						// Item vom Cursor nehmen
+						Item* itm =0;
+						m_equipement->swapItem(itm, Equipement::CURSOR_ITEM);
+					
+						// ins Inventar einfuegen
+						insertItem(itm);
 						req = false;
 					}
 				}

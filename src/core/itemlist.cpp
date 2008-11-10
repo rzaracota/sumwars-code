@@ -130,25 +130,31 @@ Item* ItemList::getItem(Item::Size m_size, int index)
 	return 0;
 }
 
-int ItemList::getFreePlace(Item::Size m_size)
+int ItemList::getFreePlace(Item::Size size, bool useup_possible)
 {
 	Item** arr = m_small_items;
 	short k = m_max_small;
 
-	if (m_size == Item::MEDIUM)
+	if (size == Item::MEDIUM)
 	{
 		arr = m_medium_items;
 		k = m_max_medium;
 	}
 
-	if (m_size == Item::BIG)
+	if (size == Item::BIG)
 	{
 		arr = m_big_items;
 		k = m_max_big;
 	}
 
-	int i;
-	for (i=0;i<k;i++)
+	int i=0;
+	// im ersten drittel der kleinen Items duerfen nur verbrauchbare Gegenstaende sein
+	if (size == Item::SMALL && !useup_possible)
+	{
+		i = k/3;
+	}
+	
+	for (;i<k;i++)
 	{
 		if (arr[i]==0)
 			return i;
@@ -423,7 +429,8 @@ short  Equipement::insertItem(Item* item)
 	
 	Item* itm = item;
 	int pos;
-	pos = m_inventory.getFreePlace(item->m_size);
+	bool useup = (item->m_useup_effect != 0);
+	pos = m_inventory.getFreePlace(item->m_size,useup);
 	DEBUG5("free pos: %i",pos);
 
 

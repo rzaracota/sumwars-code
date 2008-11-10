@@ -625,7 +625,7 @@ void Scene::updateObject(WorldObject* obj)
     {
         // Objekt ist ein Spieler
         Player* cmp = static_cast<Player*>(obj);
-        Equipement* equ =  cmp->getEquipement();
+        //Equipement* equ =  cmp->getEquipement();
 
         // Schleife ueber alle angehaengten Entities
         Ogre::Entity* attch_ent;
@@ -648,7 +648,7 @@ void Scene::updateObject(WorldObject* obj)
         std::map<std::string, std::string> goal_atch;
         std::map<std::string, std::string>::iterator jt;
 
-        itm = equ->getItem(Equipement::WEAPON);
+        itm = cmp->getWeapon();
         if (itm !=0)
         {
             itmsubtype = itm->m_subtype;
