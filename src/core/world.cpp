@@ -82,7 +82,7 @@ bool World::init()
 	m_timer[1] =0;
 	m_timer[2] =0;
 	
-	// TODO: Daten werden aktuell fest gesetzt
+	// TODO: Daten der "region0" werden aktuell fest gesetzt
 	
 	RegionData* rdata = new RegionData;
 		
@@ -114,8 +114,8 @@ bool World::init()
 	registerRegionData(rdata,0);
 	
 	
-	
-	rdata = new RegionData;
+	// Wird schon aus XML geladen
+/*	rdata = new RegionData;
 		
 	rdata->m_dimx = 32;
 	rdata->m_dimy = 32;
@@ -153,13 +153,19 @@ bool World::init()
 	
 	rdata->addExit(exit);
 	
-	registerRegionData(rdata,1);
+	registerRegionData(rdata,1);*/
 	
 	
 	// Templates aus XML Laden
 	TemplateLoader templateloader;
-	std::list<RegionData*>* region_list;
+	std::list<RegionData*> region_list;
 	templateloader.loadRegionData("../data/world/world.xml", region_list);
+	
+	std::list<RegionData*>::iterator it;
+	for (it = region_list.begin(); it != region_list.end(); it++)
+	{
+		registerRegionData(*it, (*it)->m_id);
+	}
 
 	return true;
 }

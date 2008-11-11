@@ -1,5 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<!-- TEMPLATE
+<World>
+	<Region id="short" name="string">
+		<Settings dimx="short" dimy="short" area_percent="float" complexity="float" granularity="int" />
+		
+		<ExitDirections north="bool" south="bool" west="bool" east="bool" />
+		
+		<Exits>
+			<Exit name="string" destination_region="string" destination_location="string" >
+				<Shape shape="RECT" extent_x="float" extent_y="float" />
+				OR
+				<Shape shape="CIRCLE" radius="float" />
+			</Exit>
+			...
+		</Exits>
+		
+		<NamedObjectGroups>
+			<NameObjectGroup name="string" object_group="string" priority="int" />
+			...
+		</NamedObjectGroups>
+	
+		<ObjectGroups>
+			<ObjectGroup object_group="string" priority="int" number="int" probability="float" />
+			...
+		</ObjectGroups>	
+		
+		<Environments>
+			<Environment height="float" name="string" />
+			...
+		</Environments>
+		
+		<SpawnGroups>
+			<SpawnGroup group_name="string" number="int" />
+			...
+		</SpawnGroups>
+		
+	</Region>
+</World>
+-->
+
+
+
 <World>
 	<Region id="1" name="region1">
 		<Settings dimx="32" dimy="32" area_percent="0.35" complexity="0.4" granularity="8" />
@@ -38,52 +80,4 @@
 	</Region>
 </World>
 
-
-<!--
-<World>
-	<Region id="short" name="string">
-		<Settings dimx="short" dimy="short" area_percent="float" complexity="float" granularity="int" />
-		
-		<ExitDirections north="bool" south="bool" west="bool" east="bool" />
-		
-		<Exits>
-			<Exit name="string" destination_region="string" destination_location="string" >
-				<Shape shape="RECT" extent_x="float" extent_y ="float" />
-			</Exit>
-			.
-			.
-			.
-		</Exits>
-		
-		<NamedObjectGroups>
-			<NameObjectGroup name="string" object_group="string" priority="int" />
-			.
-			.
-			.
-		</NamedObjectGroups>
-	
-		<ObjectGroups>
-			<ObjectGroup object_group="string" priority="int" number="int" probability="float" />
-			.
-			.
-			.
-		</ObjectGroups>	
-		
-		<Environments>
-			<Environment height="float" name="string" />
-			.
-			.
-			.
-		</Environments>
-		
-		<SpawnGroups>
-			<SpawnGroup group_name="string" number="int" />
-			.
-			.
-			.
-		</SpawnGroups>
-		
-	</Region>
-</World>
--->
 

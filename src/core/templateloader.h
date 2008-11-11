@@ -11,6 +11,7 @@
 #include <cstring>
 
 
+// FIXME eventuell gar nicht benoetigt
 /**
  * \struct WorldData
  * \brief Enthaelt die Daten, die zum Laden von World-Templates notwendig sind
@@ -18,6 +19,58 @@
 struct WorldData
 {
 	// TODO
+};
+
+struct TempNameObjectGroup
+{
+	void init()
+	{
+		prio = 0;
+	}
+	ObjectGroupTemplateName group_name;
+	std::string name;
+	int prio;
+};
+
+struct TempObjectGroup
+{
+	void init()
+	{
+		prio=0;
+		number=1;
+		probability=1.0;
+	}
+	ObjectGroupTemplateName group_name;
+	int prio;
+	int number;
+	float probability;
+};
+
+struct TempEnvironment
+{
+	float maxheight;
+	EnvironmentName env;
+};
+
+struct TempSpawnGroup
+{
+	void init()
+	{
+		number=1;
+	}
+	MonsterGroupName group_name;
+	int number;
+};
+
+struct TempExit
+{
+	LocationName destination_location;
+	std::string destination_region;
+	LocationName exit_name;
+	Shape::ShapeType type;
+	float extent_x;
+	float extent_y;
+	float radius;
 };
 
 
@@ -36,7 +89,7 @@ class TemplateLoader
 	 * \return Liste der geladenen festen Objekte
 	 */
 	//bool loadWorldData(const char* pFilename, std::list<WorldData*>* &world_list, std::list<std::string>* &subtype_list);
-	bool loadRegionData(const char* pFilename, std::list<RegionData*>* &region_list);
+	bool loadRegionData(const char* pFilename, std::list<RegionData*> &region_list);
 
 	
 	private:
@@ -48,26 +101,31 @@ class TemplateLoader
 	 * \param element Name des Elements
 	 * \return Anzahl der Attribute des bearbeiteten Elements
 	 */
-	int generateRegionData(TiXmlElement* pElement, std::string element, std::list<RegionData*>* &region_list);
+	int generateRegionData(TiXmlElement* pElement, std::string element, std::list<RegionData*> &region_list);
 	
 	/**
 	 * \fn void searchWorldData( TiXmlNode* pParent )
 	 * \brief Durchmustert eine XML-Datei und sucht nach Elementen.
 	 * \param pParent Zeiger auf eine XML-Datei
 	 */
-	void searchRegionData(TiXmlNode* pParent, std::list<RegionData*>* &region_list);
+	void searchRegionData(TiXmlNode* pParent, std::list<RegionData*> &region_list);
 	
 	/**
 	 * \var WorldData* m_object_data
 	 * \brief Daten zu Objekten
 	 */
-	//WorldData* m_world_data; TODO wird vielleicht nicht mehr benoetigt
+	RegionData* m_region_data;
 	/**
 	 * \var std::list<FixedObjectData*>* m_object_list
 	 * \brief Liste mit Daten zu Objekten
 	 */
 	//std::list<FixedObjectData*>* m_object_list;
 	
+	TempNameObjectGroup m_temp_name_object_group;
+	TempObjectGroup m_temp_object_group;
+	TempEnvironment m_temp_environment;
+	TempSpawnGroup m_spawn_group;
+	TempExit m_temp_exit;
 
 };
 
