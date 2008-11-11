@@ -36,7 +36,7 @@
 </Item>
 
 <!-- Goblin Club -->
-<Item type="weapon" subtype="goblin_club" size="medium">
+<Item type="weapon" subtype="goblin_club_axe" size="medium">
 	<Mesh file="axe.mesh" />
 	<Attribute
 		level_requirement="1"
