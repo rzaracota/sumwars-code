@@ -96,13 +96,13 @@ bool Warrior::init ()
 	Item* si;
 	Equipement* equ = getEquipement();
 	si = ItemFactory::createItem(Item::WEAPON,"short_sw");
-	equ->swapItem(si,Equipement::MEDIUM_ITEMS);
+	insertItem(si);
 
 	si = ItemFactory::createItem(Item::ARMOR,"leath_arm");
 	equ->swapItem(si,Equipement::ARMOR);
 
 	si = ItemFactory::createItem(Item::ARMOR,"heavy_arm");
-	equ->swapItem(si,Equipement::BIG_ITEMS+2);
+	insertItem(si);
 
 	si = ItemFactory::createItem(Item::HELMET,"steel_hlm");
 	equ->swapItem(si,Equipement::HELMET);
@@ -114,36 +114,35 @@ bool Warrior::init ()
 	equ->swapItem(si,Equipement::SHIELD);
 
 	si = ItemFactory::createItem(Item::WEAPON,"horse_sw");
-	equ->swapItem(si,Equipement::BIG_ITEMS+1);
+	insertItem(si);
 
 	si = ItemFactory::createItem(Item::WEAPON,"battle_axe");
-	equ->swapItem(si,Equipement::BIG_ITEMS);
-
-	// memleak?
-	si = ItemFactory::createItem(Item::POTION,"heal_1");
-	equ->swapItem(si,Equipement::SMALL_ITEMS);
+	insertItem(si);
 
 	si = ItemFactory::createItem(Item::POTION,"heal_1");
-	equ->swapItem(si,Equipement::SMALL_ITEMS+5);
+	insertItem(si);
 
 	si = ItemFactory::createItem(Item::POTION,"heal_1");
-	equ->swapItem(si,Equipement::SMALL_ITEMS+10);
+	insertItem(si);
 
 	si = ItemFactory::createItem(Item::POTION,"heal_1");
-	equ->swapItem(si,Equipement::SMALL_ITEMS+11);
+	insertItem(si);
+
+	si = ItemFactory::createItem(Item::POTION,"heal_1");
+	insertItem(si);
 
 	si = ItemFactory::createItem(Item::POTION,"heal_bl");
-	equ->swapItem(si,Equipement::SMALL_ITEMS+12);
+	insertItem(si);
 
 	si = ItemFactory::createItem(Item::POTION,"heal_fr");
-	equ->swapItem(si,Equipement::SMALL_ITEMS+13);
+	insertItem(si);
 
 
 	si = ItemFactory::createItem(Item::POTION,"heal_2");
-	equ->swapItem(si,Equipement::SMALL_ITEMS+1);
+	insertItem(si);
 
 	si = ItemFactory::createItem(Item::POTION,"heal_2");
-	equ->swapItem(si,Equipement::SMALL_ITEMS+21);
+	insertItem(si);
 
 
 	calcBaseAttrMod();

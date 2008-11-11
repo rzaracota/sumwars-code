@@ -417,8 +417,7 @@ bool Player::onItemClick(ClientCommand* command)
 					insertItem(itm);
 					req = false;
 				}
-
-				if (pos >= Equipement::SMALL_ITEMS && pos < Equipement::SMALL_ITEMS+10)
+				else if (pos >= Equipement::SMALL_ITEMS && pos < Equipement::SMALL_ITEMS+10)
 				{
 					// Guertel, nur Traenke zulassen
 					if (it->m_type != Item::POTION)
