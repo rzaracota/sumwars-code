@@ -129,6 +129,12 @@ class MainWindow :
 	 * \brief Erstellt die Leiste mit Informationen zu einem Objekt
 	 */
 	bool setupObjectInfo();
+	
+	/**
+	 * \fn bool setupPartyInfo()
+	 * \brief erstellt die Fenster mit Informationen zur Party
+	 */
+	bool setupPartyInfo();
 
 	/**
 	 * \fn bool initInputs()
@@ -154,6 +160,11 @@ class MainWindow :
 	 */
 	void updateObjectInfo();
 
+	/**
+	 * \fn void updatePartyInfo()
+	 * \brief Aktualisiert die Informationen zu Partymitgliedern
+	 */
+	void updatePartyInfo();
 
 	/**
 	 * \fn bool mouseMoved(const OIS::MouseEvent &evt)

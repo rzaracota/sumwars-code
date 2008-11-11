@@ -180,7 +180,7 @@ void Application::run()
 		time[2] += t;
 		if (t>20)
 		{
-			DEBUG("message pump time was %f",t);
+			DEBUG4("message pump time was %f",t);
 		}
 
 		timer2.reset();
@@ -192,7 +192,7 @@ void Application::run()
 		time[3] += t;
 		if (t> 20)
 		{
-			DEBUG("document update time was %f",t);
+			DEBUG4("document update time was %f",t);
 		}
 
 	
@@ -211,7 +211,7 @@ void Application::run()
 			time[4] += t;
 			if (t > 20)
 			{
-				DEBUG("view update time was %f",t);
+				DEBUG4("view update time was %f",t);
 			}
 		}
 		catch (CEGUI::Exception e)
@@ -228,7 +228,7 @@ void Application::run()
 		
 		if (t> 20)
 		{
-			DEBUG("cegui update time was %f",t);
+			DEBUG4("cegui update time was %f",t);
 		}
 
 		// rendern
@@ -240,7 +240,7 @@ void Application::run()
 		time[6] += t;
 		if (t > 200)
 		{
-	         DEBUG("ogre frame time was %f",t);
+	         DEBUG4("ogre frame time was %f",t);
 		}
 
 	}

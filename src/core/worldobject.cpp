@@ -10,7 +10,7 @@ WorldObject::WorldObject( int id)
 
 bool WorldObject::moveTo(Vector newpos)
 {
-	if (World::getWorld()==0)
+	if (World::getWorld()==0 || getRegion()==0)
 	{
 		m_shape.m_center = newpos;
 		

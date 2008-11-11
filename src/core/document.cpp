@@ -69,7 +69,8 @@ void Document::startGame(bool server)
 {
 	m_server = server;
 
-	World::createWorld(server);
+	// momentan: alle Spiele sind kooperativ
+	World::createWorld(server, true);
 
 	if (server)
 	{
@@ -471,7 +472,7 @@ void Document::onButtonPartyAccept(int cnr)
 
 	if (party->getNrCandidates() > cnr)
 	{
-		command.m_id = party->getCandidates()[cnr];
+		command.m_id = cnr;
 		sendCommand(&command);
 	}
 }

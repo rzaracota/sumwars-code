@@ -30,9 +30,10 @@ World* World::m_world=0;
 /**
  *
  */
- World::World(bool server)
+ World::World(bool server, bool cooperative)
 {
 	m_server = server;
+	m_cooperative = cooperative;
 
 	// diverse Initialisierungen
 
@@ -48,7 +49,7 @@ World* World::m_world=0;
 	m_parties = new Party[m_max_nr_players];
 	for (int i =0;i<m_max_nr_players;i++)
 	{
-		m_parties[i].init(m_max_nr_players,i);
+		m_parties[i].init(i);
 	}
 
 	 m_local_player =0;
@@ -528,6 +529,29 @@ bool World::insertPlayer(WorldObject* player, int slot)
 		m_player_slots->insert(std::make_pair(slot,player));
 	}
 	m_players->insert(std::make_pair(player->getId(),player));
+	
+	// Spieler in Party einfuegen
+	if (m_server)
+	{
+		Party* p;
+		if (World::getWorld()->isCooperative())
+		{
+			// Spieler zur ersten (einzigen) Party hinzufuegen
+			p = World::getWorld()->getParty(0);
+		}
+		else
+		{
+			p = World::getWorld()->getEmptyParty();
+			if (p==0)
+			{
+				ERRORMSG("cant open new party");
+			}
+			p->clear();
+			DEBUG("opened Party %i",p->getId());
+		}
+		p->addMember(player->getId());
+		player->setFraction((WorldObject::Fraction) (p->getId() + WorldObject::FRAC_PLAYER_PARTY));
+	}
 
 	return true;
 }
@@ -610,7 +634,7 @@ bool World::insertPlayerIntoRegion(WorldObject* player, short region, LocationNa
 			}
 			else
 			{
-				DEBUG("player %i region %i data %i",player->getId(), region, data_missing);
+				DEBUG5("player %i region %i data %i",player->getId(), region, data_missing);
 				if (data_missing != 0)
 				{
 					// Region unbekannt, ignorieren
@@ -710,7 +734,7 @@ void World::handleSavegame(CharConv *cv, int slot)
 	// Spieler zur Welt hinzufuegen
 	if (pl!=0)
 	{
-		DEBUG("insert player");
+		DEBUG5("insert player");
 		insertPlayer(pl,slot);
 		// Daten aus dem Savegame laden
 
@@ -729,7 +753,7 @@ void World::handleSavegame(CharConv *cv, int slot)
 
 			if (slot != LOCAL_SLOT)
 			{
-				DEBUG("sending player data ");
+				DEBUG5("sending player data ");
 				// Daten zur Initialisierung
 				PackageHeader header3;
 				header3.m_content =PTYPE_S2C_INITIALISATION;
@@ -740,8 +764,13 @@ void World::handleSavegame(CharConv *cv, int slot)
 
 				// die eigene ID auf Serverseite
 				msg2.toBuffer(pl->getId());
+				
+				// die Fraktion auf Serverseite
+				msg2.toBuffer<char>(pl->getFraction());
+				
 
 				m_network->pushSlotMessage(msg2.getBitStream(),slot);
+				
 
 				// Dem Spieler Informationen ueber alle anderen Spieler in der Welt senden
 				PackageHeader header;
@@ -757,7 +786,7 @@ void World::handleSavegame(CharConv *cv, int slot)
 					// Nur senden, wenn es nicht der eigene Spieler ist
 					if (it->first != slot)
 					{
-						DEBUG("writing player slot %i",slot);
+						DEBUG5("writing player slot %i",slot);
 						it->second->toString(&msg);
 					}
 				}
@@ -784,6 +813,28 @@ void World::handleSavegame(CharConv *cv, int slot)
 				if (it->first != slot && it->first != LOCAL_SLOT)
 				{
 					m_network->pushSlotMessage(msg2.getBitStream(),it->first);
+				}
+			}
+			
+			if (slot != LOCAL_SLOT)
+			{
+				// Informationen ueber Parties senden
+				PackageHeader header4;
+				header4.m_content =PTYPE_S2C_PARTY;
+				
+				for (int i=0; i< m_max_nr_players; i++)
+				{
+					if (m_parties[i].getNrMembers() > 0)
+					{
+						DEBUG("sending data for party %i",i);
+						header4.m_number =i;
+						CharConv msg3;
+						header4.toString(&msg3);
+						
+						m_parties[i].toString(&msg3);
+						
+						m_network->pushSlotMessage(msg3.getBitStream(),slot);
+					}
 				}
 			}
 		}
@@ -1044,7 +1095,20 @@ void World::updatePlayers()
 			}
 			m_players->erase( pl->getId());
 			m_player_slots->erase(it++);
-
+			
+			// Spieler aus seiner Party entfernen
+			pl->getParty()->removeMember(pl->getId());
+			
+			// aus allen Partys als Bewerber loeschen
+			for (int i=0; i<m_max_nr_players; i++)
+			{
+				if (m_parties[i].getCandidates().count(pl->getId()) ==1)
+				{
+					m_parties[i].removeCandidate(pl->getId());
+				}
+			}
+			
+			
 			DEBUG("player %i has quit",pl->getId());
 
 			delete pl;
@@ -1272,7 +1336,19 @@ void World::updatePlayers()
 					DEBUG("ID at server %i",id);
 					m_players->clear();
 					m_local_player->setId(id);
+					
+					char frac;
+					cv->fromBuffer(frac);
+					m_local_player->setFraction((WorldObject::Fraction) frac);
+					DEBUG("fraction %i",frac);
+					
 					insertPlayer(m_local_player, LOCAL_SLOT);
+				}
+				
+				if (headerp.m_content == PTYPE_S2C_PARTY)
+				{
+					int id = headerp.m_number;
+					m_parties[id].fromString(cv);
 				}
 				
 				if (headerp.m_content == PTYPE_S2C_REGION_CHANGED)
@@ -1412,8 +1488,16 @@ bool World::writeEvent(Region* region,Event* event, CharConv* cv)
 
 		if (event->m_type == Event::OBJECT_STAT_CHANGED)
 		{
-
-			object =region->getObject(event->m_id);
+			
+			if (m_players->count(event->m_id) ==1)
+			{
+				object = (*m_players)[event->m_id];
+			}
+			else
+			{
+				object =region->getObject(event->m_id);
+			}
+			
 			if (object !=0)
 			{
 				object->writeEvent(event,cv);
@@ -1502,6 +1586,18 @@ bool World::writeEvent(Region* region,Event* event, CharConv* cv)
 	if (event->m_type ==  Event::ITEM_REMOVED)
 	{
 		DEBUG("removing item %i",event->m_id);
+	}
+	
+	if (event->m_type == Event::PLAYER_PARTY_CHANGED)
+	{
+		object = (*m_players)[event->m_id];
+		if (object != 0)
+		{
+			cv->toBuffer<char>(static_cast<Player*>(object)->getParty()->getId());
+			DEBUG("player %i changed party to %i",event->m_id, static_cast<Player*>(object)->getParty()->getId());
+		}
+		else
+			return false;
 	}
 	return true;
 }
@@ -1651,7 +1747,7 @@ bool World::processEvent(Region* region,CharConv* cv)
 
 
 		case Event::PLAYER_CHANGED_REGION:
-			DEBUG("received event player %i changed region %i",event.m_id, event.m_data);
+			DEBUG5("received event player %i changed region %i",event.m_id, event.m_data);
 
 			if (m_players->count (event.m_id)>0)
 			{
@@ -1783,6 +1879,24 @@ bool World::processEvent(Region* region,CharConv* cv)
 				return false;
 			}
 			break;
+			
+		case Event::PLAYER_PARTY_CHANGED:
+			if (m_players->count(event.m_id)>0)
+			{
+				object = (*m_players)[event.m_id];
+				
+				static_cast<Player*>(object)->getParty()->removeMember(object->getId());
+				char id;
+				cv->fromBuffer(id);
+				DEBUG("player %i changed party to %i",object->getId(),id);
+				World::getWorld()->getParty( id )->addMember(object->getId());
+				
+			}
+			else
+			{
+				return false;
+			}
+			break;
 
 		default:
 			ERRORMSG("unknown event type %i",event.m_type);
@@ -1811,7 +1925,7 @@ void World::handleDataRequest(ClientDataRequest* request, int slot )
 
 	if (request->m_data <= ClientDataRequest::REGION_ALL)
 	{
-		DEBUG("Daten zur Region %i gefordert",request->m_id);
+		DEBUG5("Daten zur Region %i gefordert",request->m_id);
 		Region* region = getRegion(request->m_id);
 
 		if (region!=0)
@@ -2086,4 +2200,14 @@ void World::insertEvent(Event &event)
 
 }
 
+WorldObject* World::getPlayer(int id)
+{
+	WorldObjectMap::iterator it;
+	it = m_players->find(id);
+	if (it != m_players->end())
+	{
+		return it->second;
+	}
+	return 0;
+}
 

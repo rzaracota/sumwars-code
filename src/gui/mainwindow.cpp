@@ -252,7 +252,11 @@ void MainWindow::update()
 		// ObjectInfo aktualisieren
 		updateObjectInfo();
 		
+		// Bild am Curso aktualisieren
 		updateCursorItemImage();
+		
+		// Informationen ueber Partymitglieder aktualisieren
+		updatePartyInfo();
 
 		if (wflags & Document::CHARINFO)
 		{
@@ -317,7 +321,12 @@ bool MainWindow::setupGameScreen()
 		// Chatfenster anlegen
 		setupChatWindow();
 		
+		// Fenster fuer Partyinfos
+		setupPartyInfo();
+		
+		// Bild fuer das Item am Cursor
 		setupCursorItemImage();
+		
 	}
 	catch (CEGUI::Exception e)
 	{
@@ -430,6 +439,47 @@ bool MainWindow::setupObjectInfo()
 
 	return true;
 }
+
+bool MainWindow::setupPartyInfo()
+{
+	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
+	
+	CEGUI::Window* img;
+	CEGUI::ProgressBar* bar;
+	
+	std::ostringstream stream;
+	
+	for (int i=0; i<7; i++)
+	{
+		stream.str("");
+		stream << "PartyMemberImage";
+		stream << i;
+		
+		img = win_mgr.createWindow("TaharezLook/StaticImage",stream.str());
+		m_game_screen->addChildWindow(img);
+		img->setProperty("FrameEnabled", "true");
+		img->setProperty("BackgroundEnabled", "true");
+		img->setPosition(CEGUI::UVector2(cegui_reldim(0.01f), cegui_reldim( 0.01f + 0.1f *i)));
+		img->setSize(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.07f)));
+		img->setID(i);
+		img->setVisible(false);
+		
+		stream.str("");
+		stream << "PartyMemberHealthBar";
+		stream << i;
+		
+		bar = static_cast<CEGUI::ProgressBar*>(win_mgr.createWindow("TaharezLook/ProgressBar", stream.str()));
+		m_game_screen->addChildWindow(bar);
+		m_game_screen->addChildWindow(bar);
+		bar->setPosition(CEGUI::UVector2(cegui_reldim(0.01f), cegui_reldim( 0.08f+ 0.1f *i)));
+		bar->setSize(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.02f)));
+		bar->setProgress(1.0);
+		bar->setVisible(false);
+	}
+	
+	return true;
+}
+
 
 
 void  MainWindow::setWindowExtents(int width, int height){
@@ -727,6 +777,87 @@ void MainWindow::updateObjectInfo()
 	}
 
 
+}
+
+void MainWindow::updatePartyInfo()
+{
+	
+	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
+	
+	CEGUI::Window* img;
+	CEGUI::ProgressBar* bar;
+	
+	std::ostringstream stream;
+	
+	int i=0;
+	float hperc;
+	Player* player = m_document->getLocalPlayer();
+	Player* pl;
+	Party* party = World::getWorld()->getPartyFrac(player->getFraction());
+	
+	std::set<int>::iterator it;
+	// Schleife ueber die Mitglieder der Party des Spielers
+	for (it =  party->getMembers().begin(); it!= party->getMembers().end(); it++)
+	{
+		// eigenen Spieler ueberspringen
+		if (*it == player->getId())
+			continue;
+		
+		pl =  static_cast<Player*>(World::getWorld()->getPlayer(*it));
+		
+		stream.str("");
+		stream << "PartyMemberImage";
+		stream << i;
+		img = win_mgr.getWindow(stream.str());
+		
+		// Bild setzen und anzeigen
+		if (!img->isVisible())
+		{
+			img->setVisible(true);
+		}
+		
+		stream.str("");
+		stream << "PartyMemberHealthBar";
+		stream << i;
+		bar = static_cast<CEGUI::ProgressBar*>(win_mgr.getWindow(stream.str()));
+		
+		// Fortschrittsbalken setzen und anzeigen
+		hperc = pl->getDynAttr()->m_health / pl->getBaseAttrMod()->m_max_health;
+		if (bar->getProgress() != hperc)
+		{
+			bar->setProgress(hperc);
+		}
+		
+		if (!bar->isVisible())
+		{
+			bar->setVisible(true);
+		}
+		
+		i++;
+	}
+	
+	// restliche Bilder verstecken
+	for (;i<7; i++)
+	{
+		stream.str("");
+		stream << "PartyMemberImage";
+		stream << i;
+		img = win_mgr.getWindow(stream.str());
+		if (img->isVisible())
+		{
+			img->setVisible(false);
+		}
+		
+		stream.str("");
+		stream << "PartyMemberHealthBar";
+		stream << i;
+		bar = static_cast<CEGUI::ProgressBar*>(win_mgr.getWindow(stream.str()));
+		if (bar->isVisible())
+		{
+			bar->setVisible(false);
+		}
+
+	}
 }
 
 // MouseListener

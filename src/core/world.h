@@ -83,13 +83,13 @@ public:
 	//Fields
 	//Constructors
 	/**
-	 * \fn World(bool server)
+	 * \fn World(bool server, bool cooperative)
 	 * \param server Gibt an, ob der Rechner der Server ist
 	 * \brief Konstruktor
-	 *
+	 * \param cooperative wenn auf true gesetzt, sind alle Spieler automatisch verbuendet
 	 * Legt ein neues World Objekt an
 	 */
-	World(bool server);
+	World(bool server , bool cooperative);
 	
 	
 	/**
@@ -290,11 +290,21 @@ public:
 	}
 
 	/**
-	 * \fn Party* getParty(WorldObject::Fraction frac)
+	 * \fn Party* getParty(int id)
+	 * \brief Gibt die Party mit der angegebenen ID
+	 * \param id ID
+	 */
+	Party* getParty(int id)
+	{
+		return &(m_parties[id]);
+	}
+	
+	/**
+	 * \fn Party* getPartyFrac(WorldObject::Fraction frac)
 	 * \brief Gibt die Party zurueck, welche zu der angegebenen Fraktion gehoert
 	 * \param frac Fraktion eines Spielers
 	 */
-	Party* getParty(WorldObject::Fraction frac)
+	Party* getPartyFrac(WorldObject::Fraction frac)
 	{
 		return &(m_parties[frac - WorldObject::FRAC_PLAYER_PARTY]);
 	}
@@ -363,12 +373,28 @@ public:
 	void insertEvent(Event &event);
 	
 	/**
+	 * \fn WorldObject* getPlayer(int id)
+	 * \brief Gibt Spieler mit der angegebenen ID aus
+	 * \param id ID
+	 */
+	WorldObject* getPlayer(int id);
+	
+	/**
 	 * \fn bool isServer()
 	 * \brief gibt true aus, wenn die Welt der Server ist
 	 */
 	bool isServer()
 	{
 		return m_server;
+	}
+	
+	/**
+	 * \fn bool isCooperative()
+	 * \brief Gibt aus ob die Welt im Modus kooperativ (alle Spieler sind verbuendet) ist
+	 */
+	bool isCooperative()
+	{
+		return m_cooperative;
 	}
 	
 	/**
@@ -399,13 +425,14 @@ public:
 	}
 	
 	/**
-	 * \fn static void createWorld(bool server)
+	 * \fn static void createWorld(bool server, bool cooperative)
 	 * \brief Erzeugt die Spielwelt
 	 * \param server auf true gesetzt, wenn der Rechner der Server ist
+	 * \param cooperative wenn auf true gesetzt, sind alle Spieler automatisch verbuendet
 	 */
-	static void createWorld(bool server)
+	static void createWorld(bool server, bool cooperative)
 	{
-		m_world = new World(server);
+		m_world = new World(server, cooperative);
 		m_world->init();
 	}
 	
@@ -428,6 +455,12 @@ private:
 	 * \brief true, wenn der Rechner der Server ist
 	 */
 	bool m_server;
+	
+	/**
+	 * \var bool m_cooperative
+	 * \brief wenn auf true gesetzt, sind alle Spieler automatisch verbuendet. Nur im kooperative Modus koennen Aufgaben erledigt werden.
+	 */
+	bool m_cooperative;
 	
 	/**
 	 * \var std::map<int, Region*> m_regions

@@ -41,7 +41,7 @@ bool Player::destroy()
 {
 	DEBUG5("leave Party");
 	DEBUG5("destroy");
-	World::getWorld()->getParty(m_fraction)->removeMember(getId());
+	World::getWorld()->getPartyFrac(m_fraction)->removeMember(getId());
 	return Creature::destroy();
 }
 
@@ -56,16 +56,7 @@ bool Player::init()
 	setTradeId(0);
 	getTypeInfo()->m_type = TypeInfo::TYPE_PLAYER;
 	m_category = HUMAN;
-	Party* p = World::getWorld()->getEmptyParty();
-	if (p==0)
-	{
-//		ERROR("cant open new party");
-	}
-	p->clear();
-	p->addMember(getId());
-	m_fraction = (Fraction) (p->getId() + FRAC_PLAYER_PARTY);
-	DEBUG("opened Party %i",p->getId());
-
+	
 	getShape()->m_type = Shape::CIRCLE;
 	getShape()->m_radius = 0.5;
 	m_layer = (LAYER_BASE | LAYER_AIR);
@@ -77,6 +68,8 @@ bool Player::init()
 
 	m_attribute_points=0;
 	m_skill_points=25;
+	
+	m_fraction = FRAC_PLAYER_PARTY;
 
 	m_secondary_equip = false;
 
@@ -778,7 +771,7 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 
 		case BUTTON_PARTY_APPLY:
 			DEBUG("apply to party %i",command->m_id);
-			p = World::getWorld()->getParty((WorldObject::Fraction) (command->m_id + FRAC_PLAYER_PARTY));
+			p = World::getWorld()->getParty(command->m_id);
 			if (p->getNrMembers()==0)
 				break;
 			p->addCandidate(getId());
@@ -788,13 +781,13 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 		case BUTTON_PARTY_ACCEPT:
 			DEBUG("accept %i",command->m_id)
 
-			p = World::getWorld()->getParty(m_fraction);
+			p = World::getWorld()->getPartyFrac(m_fraction);
 			p ->acceptCandidate(command->m_id);
 			// FIXME: Spieler ausgeben lassen !
 			wo =getRegion()->getObject(command->m_id);
 			if (wo !=0)
 			{
-				p2 = World::getWorld()->getParty(wo->getFraction());
+				p2 = World::getWorld()->getPartyFrac(wo->getFraction());
 				p2->removeMember(command->m_id);
 				wo->setFraction(m_fraction);
 			}
@@ -1781,7 +1774,7 @@ void Player::readItemComplete(CharConv* cv)
 	cv->fromBuffer(subtype,10);
 	cv->fromBuffer(id);
 
-	DEBUG("reading Item for pos %i type %i subtype %s",pos,type,subtype);
+	DEBUG5("reading Item for pos %i type %i subtype %s",pos,type,subtype);
 	item = ItemFactory::createItem((Item::Type) type, std::string(subtype),id);
 	item->fromStringComplete(cv);
 	getEquipement()->swapItem(item,pos);
@@ -1849,11 +1842,6 @@ void Player::toStringComplete(CharConv* cv)
 	cv->toBuffer(trel2);
 	// TODO: Questinformationen
 
-
-
-
-	// Party Informationen
-	World::getWorld()->getParty(m_fraction)->toString(cv);
 
 }
 

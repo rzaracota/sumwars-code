@@ -104,6 +104,11 @@ enum PackageType
 	* \brief Nachricht vom Client an den Server
 	*/
  	PTYPE_C2S_MESSAGE,
+  
+	/**
+	* \brief Partyinformationen vom Server an den Client
+	*/
+	PTYPE_S2C_PARTY,
 };
 
 /**

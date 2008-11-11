@@ -4,6 +4,8 @@
 #include "debug.h"
 #include "charconv.h"
 #include "worldobject.h"
+#include <set>
+#include <map>
 
 /**
  * \class Party
@@ -30,12 +32,11 @@ class Party
 	virtual ~Party();
 
 	/**
-	 * \fn init(char nr_parties, char id)
+	 * \fn init( int id)
 	 * \brief initialisiert das Objekt
-	 * \param nr_parties maximale Anzahl Parties
 	 * \param id ID
 	 */
-	void init(char nr_parties, char id);
+	void init( int id);
 
 
 	/**
@@ -46,58 +47,58 @@ class Party
 
 
 	/**
-	 * \fn int* getMembers()
+	 * \fn std::set<int>& getMembers()
 	 * \brief gibt Liste der Mitglieder zurueck
 	 */
-	int* getMembers()
+	std::set<int>& getMembers()
 	{
 		return m_members;
 	}
 
 	/**
-	 * \fn int* getCandidates()
+	 * \fn std::set<int>&  getCandidates()
 	 * \brief Gibt Liste der Kandidaten zurueck
 	 */
-	int* getCandidates()
+	std::set<int>& getCandidates()
 	{
 		return m_candidates;
 	}
 
 	/**
-	 * \fn Relation* getRelations()
+	 * \fn std::map<int, WorldObject::Relation>& getRelations()
 	 * \brief Gibt Beziehungen zu den anderen Parties aus
 	 */
-	WorldObject::Relation* getRelations()
+	std::map<int, WorldObject::Relation>& getRelations()
 	{
 		return m_relations;
 	}
 
 	/**
-	 * \fn char getId()
+	 * \fn int getId()
 	 * \brief Gibt die ID aus
 	 * \return ID
 	 */
-	char getId()
+	int getId()
 	{
 		return m_id;
 	}
 
 	/**
-	 * \fn char getNrMembers()
+	 * \fn int getNrMembers()
 	 * \brief Gibt Anzahl der Mitglieder aus
 	 */
-	char getNrMembers()
+	int getNrMembers()
 	{
-		return m_nr_members;
+		return m_members.size();
 	}
 
 	/**
-	 * \fn char getNrCandidates()
+	 * \fn int getNrCandidates()
 	 * \brief Gibt Anzahl der Bewerber aus
 	 */
-	char getNrCandidates()
+	int getNrCandidates()
 	{
-		return m_nr_candidates;
+		return m_candidates.size();
 	}
 
 	/**
@@ -135,6 +136,7 @@ class Party
 	 */
 	void removeCandidate(int id);
 
+	
 	/**
 	 * \fn void toString(CharConv* cv)
 	 * \brief Konvertiert das Objekt in einen String und schreibt ihn in der Puffer
@@ -155,46 +157,34 @@ class Party
 	private:
 
 	/**
-	 * \var char m_id
+	 * \var int m_id
 	 * \brief ID
 	 */
-	char m_id;
-
+	int m_id;
+	
 	/**
-	 * \var char m_nr_parties
-	 * \brief maximale Anzahl von Parties
+	 * \var int m_leader_id
+	 * \brief ID des Party Leiters
 	 */
-	char m_nr_parties;
+	int m_leader_id;
 
 	/**
-	 * \var int* m_members
-	 * \brief Feld mit den IDs der Mitglieder
+	 * \var std::set<int> m_members
+	 * \brief Menge der IDs der Mitglieder
 	 */
-	int* m_members;
+	std::set<int> m_members;
 
 	/**
-	 * \var char m_nr_members
-	 * \brief Anzahl der Mitglieder
+	 * \var std::set<int> m_candidates
+	 * \brief Menge der IDs der Bewerber
 	 */
-	char m_nr_members;
+	std::set<int> m_candidates;
 
 	/**
-	 * \var char m_nr_candidates
-	 * \brief Anzahl der Bewerber
-	 */
-	char m_nr_candidates;
-
-	/**
-	 * \var int* m_candidates
-	 * \brief Feld mit den IDs der Bewerber
-	 */
-	int* m_candidates;
-
-	/**
-	 * \var Relation* m_relations
+	 * \var std::map<int, WorldObject::Relation> m_relations
 	 * \brief Beziehungen zu anderen Parties
 	 */
-	WorldObject::Relation* m_relations;
+	std::map<int, WorldObject::Relation> m_relations;
 
 };
 

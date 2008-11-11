@@ -155,6 +155,14 @@ public:
 	 */
 	Item* getShield();
 	
+	/**
+	 * \fn Party* getParty()
+	 * \brief Gibt die Party aus, der der Spieler angehoert
+	 */
+	Party* getParty()
+	{
+		return World::getWorld()->getPartyFrac(getFraction());
+	}
 	
 	/**
 	 * \fn bool onClientCommand( ClientCommand* command, float delay =0)

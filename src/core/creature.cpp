@@ -4121,6 +4121,7 @@ void Creature::processEvent(Event* event, CharConv* cv)
 
 	if (event->m_data & Event::DATA_HP)
 	{
+		
 		cv->fromBuffer(getDynAttr()->m_health);
 	}
 
@@ -4271,7 +4272,9 @@ void Creature::processEvent(Event* event, CharConv* cv)
 		{
 			// Aktion sollte schon beenden sein
 			if (!newmove)
+			{
 				moveTo(newpos);
+			}
 
 			m_action.m_type = Action::NOACTION;
 			m_action.m_elapsed_time =0;
