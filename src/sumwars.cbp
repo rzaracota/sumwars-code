@@ -139,6 +139,8 @@
 		<Unit filename="core\servernetwork.h" />
 		<Unit filename="core\spawnpoint.cpp" />
 		<Unit filename="core\spawnpoint.h" />
+		<Unit filename="core\templateloader.cpp" />
+		<Unit filename="core\templateloader.h" />
 		<Unit filename="core\tiles.h" />
 		<Unit filename="core\timer.h" />
 		<Unit filename="core\trade.cpp" />

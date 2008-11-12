@@ -1,10 +1,10 @@
-material goblin2
+material humanoid
 {
 	technique
 	{
 		pass
 		{
-			ambient 1 1 1 1
+			ambient 0.5 0.5 0.5 1
 			diffuse 1 1 1 1
 			specular 0 0 0 1
 			emissive 0 0 0
