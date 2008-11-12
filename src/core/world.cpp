@@ -193,6 +193,9 @@ void World::createRegion(short region)
 		
 		Region* reg = MapGenerator::createRegion(rdata);
 		DEBUG5("region created %p for id %i",reg,region);
+		
+		// Debugging
+		reg->setReviveLocation("region0","entry_south");
 		insertRegion(reg,region);
 	}
 	else if(type==2)

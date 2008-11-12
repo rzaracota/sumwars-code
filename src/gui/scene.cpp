@@ -1076,7 +1076,7 @@ Ogre::ParticleSystem* Scene::getParticleSystem(std::string type)
 		part = m_scene_manager->createParticleSystem(name.str(), type);
 		part->setUserAny(Ogre::Any(type));
 		part->setKeepParticlesInLocalSpace(true);
-		DEBUG5("created particlesystem %s for type %s",name.str().c_str(), type.c_str());
+		DEBUG5("created particlesystem %p %s for type %s",part, name.str().c_str(), type.c_str());
 	}
 	else
 	{
@@ -1096,7 +1096,7 @@ void Scene::putBackParticleSystem(Ogre::ParticleSystem* part)
 	std::string type;
 	type = Ogre::any_cast<std::string>(part->getUserAny());
 	
-	DEBUG5("put back particlesystem %s for type %s",part->getName().c_str(), type.c_str());
+	DEBUG5("put back particlesystem %p %s for type %s",part, part->getName().c_str(), type.c_str());
 	
 	m_particle_system_pool.insert(std::make_pair(type,part));
 }
@@ -1178,6 +1178,16 @@ void Scene::clearObjects()
 void Scene::createScene()
 {
 	DEBUG5("create Scene");
+	
+	// alle Partikelsystem loeschen
+	std::multimap<std::string, Ogre::ParticleSystem*>::iterator kt;
+	for (kt = m_particle_system_pool.begin(); kt !=  m_particle_system_pool.end(); ++kt)
+	{
+		DEBUG5("destroy particle system %s",kt->second->getName().c_str()); 
+		m_scene_manager->destroyParticleSystem(kt->second);
+	}
+	m_particle_system_pool.clear();
+	
 	// alle bisherigen Objekte aus der Szene loeschen
 	m_scene_manager->clearScene();
 	clearObjects();

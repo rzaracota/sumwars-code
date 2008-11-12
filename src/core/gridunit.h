@@ -92,7 +92,7 @@ struct Gridunit
 		 */
 		WorldObject** getObjects(WorldObject::Group group)
 		{
-			if (group == WorldObject::CREATURE) return m_creature;
+			if (group & WorldObject::CREATURE) return m_creature;
 			else if (group == WorldObject::FIXED) return m_fixed;
 			else if (group == WorldObject::DEAD) return m_dead;
 			return 0;

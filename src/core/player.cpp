@@ -80,6 +80,68 @@ bool Player::init()
 	return true;
 }
 
+void  Player::revive()
+{
+	DEBUG("reviving");
+	
+	getRegion()->changeObjectGroup(this,PLAYER);
+	getDynAttr()->m_health = getBaseAttrMod()->m_max_health;
+	
+	// keine Aktion/Kommando
+	getAction()->m_type = Action::NOACTION;
+	getCommand()->m_type = Action::NOACTION;
+	getCommand()->m_damage_mult=1;
+	getNextCommand()->m_type = Action::NOACTION;
+
+	// Bewegung auf 0 setzen
+	m_speed = Vector(0,0);
+
+	// Wegfindeinformationen auf 0 setzen
+	m_small_path_info=0;
+	m_small_flying_path_info=0;
+	m_medium_path_info=0;
+	m_big_path_info=0;
+	m_path_info=0;
+
+	// Timer nullen
+	m_timer1 =0;
+	m_timer2 =0;
+	m_timer1_max =0;
+	m_timer2_max =0;
+
+	getDynAttr()->m_last_attacker_id=0;
+	
+	// Statusmods auf null setzen
+	int i;
+	for (i=0;i<NR_STATUS_MODS;i++)
+	{
+		getDynAttr()->m_status_mod_time[i]=0;
+		getDynAttr()->m_status_mod_immune_time[i]=0;
+
+	}
+	getDynAttr()->m_temp_mods.clear();
+
+	for (i=0;i<NR_EFFECTS;i++)
+	{
+		getDynAttr()->m_effect_time[i]=0;
+	}
+
+	setState(STATE_ACTIVE);
+	clearCommand();
+	getNextCommand()->m_type = Action::NOACTION;
+	getNextCommand()->m_damage_mult = 1;
+	getNextCommand()->m_goal = Vector(0,0);
+	getNextCommand()->m_goal_object_id =0;
+	getNextCommand()->m_range =1;
+	
+	getAction()->m_animation_number=0;
+	getAction()->m_action_equip = Action::NO_WEAPON;
+	getAction()->m_time =0;
+	getAction()->m_elapsed_time =0;
+	
+	calcBaseAttrMod();
+}
+
 bool Player::onGamefieldClick(ClientCommand* command)
 {
 	if (command->m_action>=192)

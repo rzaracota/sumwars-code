@@ -71,6 +71,12 @@ struct GridLocation
 	 * \brief Index des Objektes im Grid in y-Richtung
 	 */
 	int m_grid_y;
+	
+	/**
+	 * \var int m_index
+	 * \brief Index Stelle an der das Objekt zu finden ist
+	 */
+	int m_index;
 };
 
 

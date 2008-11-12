@@ -24,12 +24,15 @@ bool Gridunit::insertObject(WorldObject* object)
 	if (np== MAX_GRIDUNIT_OBJ)
 	{
 		// Maximale Anzahl in der Ebene erreicht, Fehler anzeigen
+		DEBUG("max number of objects per Gridunit");
 		return false;
 	}
 	else
 	{
 		// Element einfuegen, Zahler erhoehen
 		arr[np] = object;
+		object->getGridLocation()->m_index = np;
+		
 		np++;
 		DEBUG5("inserted object %p, as number %i in group %i",object,np,g);
 	}
@@ -75,7 +78,7 @@ bool Gridunit::deleteObject(WorldObject* object, short index)
 	// Zeiger auf Anzahl der Objekte in der Ebene
 	short &  np = getObjectsNr(g);
 
-	DEBUG5("deleting obj %p from group %i",object,g);
+	DEBUG5("deleting obj %i from group %i",object->getId(),g);
 	if (index != -1)
 	{
 		// Stelle an der geloescht werden soll ist explizit vorgegeben
@@ -90,7 +93,7 @@ bool Gridunit::deleteObject(WorldObject* object, short index)
 		else
 		{
 			// Objekt befindet sich nicht an der Stelle, Fehler ausgeben
-//			ERROR("Object not found at index %i",index);
+			ERRORMSG("Object not found at index %i",index);
 
 			return false;
 		}
@@ -115,7 +118,7 @@ bool Gridunit::deleteObject(WorldObject* object, short index)
 	}
 
 	// Objekt nicht gefunden, Fehler anzeigen
-	ERRORMSG("Object %s not found in group %i",object->getNameId().c_str(),g);
+	ERRORMSG("Object %s (%f %f) not found in group %i",object->getNameId().c_str(),object->getShape()->m_center.m_x,object->getShape()->m_center.m_y, g);
 	return false;
 
 }
@@ -123,9 +126,23 @@ bool Gridunit::deleteObject(WorldObject* object, short index)
 
 short&  Gridunit::getObjectsNr(WorldObject::Group group)
 {
-	if (group == WorldObject::CREATURE) return m_nr_creature;
-	else if (group == WorldObject::FIXED) return m_nr_fixed;
-	else return m_nr_dead;
+	if (group & WorldObject::CREATURE)
+	{
+		return m_nr_creature;
+	}
+	else if (group == WorldObject::FIXED)
+	{
+		return m_nr_fixed;
+	}
+	else if (group == WorldObject::DEAD)
+	{
+		return m_nr_dead;
+	}
+	else 
+	{
+		DEBUG("unknown group %i",group);
+	}
+	return m_nr_dead;
 }
 
 

@@ -20,6 +20,8 @@
 
 class Gridunit;
 
+typedef std::string RegionName;
+
 /**
  * \enum ExitDirection
  * \brief Verschiedene Richtungen in denen man die Region verlassen kann
@@ -275,6 +277,13 @@ class RegionData
 		 * \brief Liste der Monster die in der Region auftauchen
 		 */
 		std::list<SpawnGroup> m_monsters;
+		
+		
+		/**
+		 * \var std::pair<RegionName, LocationName> m_revive_location
+		 * \brief Ort an dem in dieser Region gestorbene Helden wiedererweckt werden
+		 */
+		std::pair<RegionName, LocationName> m_revive_location;
 };
 
 
@@ -682,6 +691,19 @@ class Region
 			return m_id;
 		}
 		
+		/**
+		 * \fn void setReviveLocation(RegionName reg, LocationName loc)
+		 * \brief Setzt den Ort an dem in dieser Region gestorbene Helden wiederbelebt werden
+		 * \param reg Name der Region
+		 * \param loc Name des Ortes
+		 */
+		void setReviveLocation(RegionName reg, LocationName loc)
+		{
+			m_revive_location.first = reg;
+			m_revive_location.second = loc;
+			
+		}
+		
 	private:
 		/**
 		* \var m_dimx
@@ -785,6 +807,12 @@ class Region
 		 * \brief Liste der Ausgaenge aus der Region
 		 */
 		std::list<RegionExit> m_exits;
+		
+		/**
+		 * \var std::pair<RegionName, LocationName> m_revive_location
+		 * \brief Ort an dem in dieser Region gestorbene Helden wiedererweckt werden
+		 */
+		std::pair<RegionName, LocationName> m_revive_location;
 
 };
 

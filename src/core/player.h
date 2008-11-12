@@ -114,6 +114,12 @@ public:
 	virtual  bool  destroy();
 	
 	/**
+	 * \fn void revive()
+	 * \brief Erweckt den Spieler wieder zum Leben
+	 */
+	void revive();
+	
+	/**
 	 * \fn virtual bool update (float time)
 	 * \brief Updatefunktion des Players
 	 * \param time Verstrichene Zeit

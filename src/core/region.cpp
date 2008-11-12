@@ -1,5 +1,6 @@
 #include "region.h"
 #include "world.h"
+#include "player.h"
 
 void RegionData::addObjectGroupTemplate(ObjectGroupTemplateName group_name, int prio, int number,float probability)
 {
@@ -767,7 +768,7 @@ bool  Region::deleteObject (WorldObject* object)
 
 	if (object->getTypeInfo()->m_type == WorldObject::TypeInfo::TYPE_PLAYER)
 	{
-		DEBUG("Player deleted");
+		DEBUG5("Player deleted");
 		m_players->erase(object->getId());
 
 	}
@@ -802,8 +803,18 @@ bool Region::moveObject(WorldObject* object, Vector pos)
 	{
 		Gridunit *gu = &(*m_data_grid)[x_old][y_old];
 		result =gu->deleteObject(object);
+		if (result == false)
+		{
+			ERRORMSG("failed to remove object %i from gridunit %i %i",object->getId(),x_old, y_old);
+		}
+		
 		gu = &(*m_data_grid)[x_new][y_new];
 		result = gu->insertObject(object);
+		if (result == false)
+		{
+			ERRORMSG("failed to insert object %i into gridunit %i %i",object->getId(),x_old, y_old);
+		}
+		
 
 		object->getGridLocation()->m_grid_x=x_new;
 		object->getGridLocation()->m_grid_y=y_new;
@@ -874,17 +885,23 @@ void Region::update(float time)
 			// Objekte selbststaendig loeschen darf nur der Server
 			if (World::getWorld()->isServer())
 			{
-				DEBUG5("Objekt gelöscht: %i \n",object->getId());
-				Event event;
-				event.m_type = Event::OBJECT_DESTROYED;
-				event.m_id = object->getId();
-				insertEvent(event);
-
-				++iter;
-				object->destroy();
-				deleteObject(object);
-				delete object;
-				continue;
+				// nur Nichtspieler Objekte loeschen
+				if (object->getTypeInfo()->m_type != WorldObject::TypeInfo::TYPE_PLAYER)
+				{
+					DEBUG5("Objekt gelöscht: %i \n",object->getId());
+					Event event;
+					event.m_type = Event::OBJECT_DESTROYED;
+					event.m_id = object->getId();
+					insertEvent(event);
+	
+					++iter;
+					object->destroy();
+					deleteObject(object);
+					delete object;
+					continue;
+				}
+				else
+					++iter;
 			}
 			else
 			{
@@ -1002,9 +1019,49 @@ void Region::update(float time)
 				break;
 			}
 		}
+		
+		
 		if (del == false)
 		{
-			++iter;
+			
+			// Pruefen ob der Spieler getoetet wurde
+			if (iter->second->getState() == WorldObject::STATE_DEAD)
+			{
+				// Lebenspunkte wieder fuellen etc
+				Player* pl = static_cast<Player*>(iter->second);
+				pl->revive();
+				
+				// Zielpunkt ermitteln
+				int id = World::getWorld()->getRegionId(m_revive_location.first);
+				
+				if (id == getId())
+				{
+					DEBUG5("revive in current region");
+					// Spieler bleibt in der aktuellen Region
+					Vector pos = getLocation(m_revive_location.second);
+					getFreePlace(pl->getShape(), pl->getLayer(), pos, pl);
+					
+					pl->moveTo(pos);
+				}
+				else
+				{
+					DEBUG5("revive in other region %i ", id);
+
+					// Spieler verlaesst die Region
+					WorldObjectMap::iterator iter2 = iter;
+					iter ++;
+					del = true;
+				
+					// Spieler aus der Region entfernen
+					deleteObject(pl);
+				
+					// Spieler in die neue Region einfuegen
+					World::getWorld()->insertPlayerIntoRegion(pl, id, m_revive_location.second);
+				}
+			}
+			
+			if (del == false)
+				++iter;
 		}
 		del = false;
 	}
