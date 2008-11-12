@@ -4,6 +4,7 @@
 
 <!-- general
 <Item type="weapon" subtype="short_sw" size="medium">
+	<Image image="set:sword.png image:full_image" />
 	<Mesh file="sword.mesh" />
 	<Attribute
 		level_requirement="char"

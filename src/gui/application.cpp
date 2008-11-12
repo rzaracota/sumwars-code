@@ -424,6 +424,25 @@ bool Application::initCEGUI()
 	CEGUI::ImagesetManager::getSingleton().createImagesetFromImageFile ("sword.png","sword.png",(CEGUI::utf8*)"GUI");
 	CEGUI::ImagesetManager::getSingleton().createImagesetFromImageFile ("noMedia.png","noMedia.png",(CEGUI::utf8*)"GUI");
 	
+	
+	// Mesh Images aus XML Laden // TODO Muss noch an richtige Stelle verschoben werden
+	/*
+	ImageLoader imageloader;
+	std::list<ItemImageData*> item_image_data_list;
+	imageloader.loadItemImageData(file.c_str(), object_template_list, name_list);
+	
+	for (it=item_image_data_list.begin(); it!=item_image_data_list.end(); it++)
+	{
+		ItemWindow::registerItemImage((*it)->subtype,(*it)->image);
+	}
+	
+	// Liste aus Speicher loeschen
+	for (it=item_image_data_list.begin(); it!=item_image_data_list.end(); it++)
+	{
+		delete *it;
+	}
+	*/
+	
 	ItemWindow::registerItemImage("short_sw","set:sword.png image:full_image");
 	ItemWindow::registerItemImage("long_sw","set:sword.png image:full_image");
 	ItemWindow::registerItemImage("long_bow","set:bow.png image:full_image");
@@ -431,8 +450,6 @@ bool Application::initCEGUI()
 	ItemWindow::registerItemImage("battle_axe","set:axe2H.png  image:full_image");
 	ItemWindow::registerItemImage("wood_sh","set:shield_dmg.png  image:full_image");
 	ItemWindow::registerItemImage("iron_sh","set:shield.png  image:full_image");
-	
-
 	
 	
 

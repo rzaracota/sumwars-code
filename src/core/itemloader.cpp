@@ -667,6 +667,123 @@ std::list<ItemMeshData*>* ItemLoader::loadItemMeshData(const char* pFilename)
 }
 
 
+//##############################  ItemImageData  ###############################
+
+int ItemLoader::generateItemImageData(TiXmlElement* pElement, std::string element, std::list<ItemImageData*> &item_image_data_list)
+{
+	if ( !pElement ) return 0;
+
+	TiXmlAttribute* pAttrib=pElement->FirstAttribute();
+	int i=0;
+	int ival;
+	double dval;
+	
+	if (element == "Item")
+	{
+		DEBUG5("Item");
+		
+		if (m_item_image_data == 0)
+		{
+			m_item_image_data = new ItemImageData;
+		}
+		
+		while (element == "Item" && pAttrib)
+		{
+			if (!strcmp(pAttrib->Name(), "subtype"))
+				m_item_image_data->m_subtype = pAttrib->Value();
+
+			i++;
+			pAttrib=pAttrib->Next();
+		}
+	}
+	
+	if (element == "Image")
+	{
+		DEBUG5("Image");
+		while (element == "Image" && pAttrib)
+		{
+			if (!strcmp(pAttrib->Name(), "image"))
+				m_item_image_data->m_image = pAttrib->Value();
+			
+			i++;
+			pAttrib=pAttrib->Next();
+		}
+	}
+	
+	return i;
+}
+
+
+void ItemLoader::searchItemImageData(TiXmlNode* pParent, std::list<ItemImageData*> &item_image_data_list)
+{
+	if ( !pParent ) return;
+
+	TiXmlNode* pChild;
+//	TiXmlText* pText;
+
+	int t = pParent->Type();
+	int num;
+
+	switch ( t )
+	{
+	case TiXmlNode::ELEMENT:
+		//printf( "Element [%s]", pParent->Value() );
+		num = generateItemImageData(pParent->ToElement(), pParent->Value(), item_image_data_list);
+		/*switch(num)
+		{
+			case 0:  printf( " (No attributes)"); break;
+			case 1:  printf( "%s1 attribute", getIndentAlt(indent)); break;
+			default: printf( "%s%d attributes", getIndentAlt(indent), num); break;
+		}*/
+		break;
+	/*
+	case TiXmlNode::TEXT:
+		pText = pParent->ToText();
+		printf( "Text: [%s]", pText->Value() );
+		break;
+	*/
+	default:
+		break;
+	}
+
+	for ( pChild = pParent->FirstChild(); pChild != 0; pChild = pChild->NextSibling())
+	{
+		searchItemImageData(pChild, item_image_data_list);
+		
+		if ( !strcmp(pChild->Value(), "Item") && pChild->Type() == TiXmlNode::ELEMENT)
+		{
+			item_image_data_list.push_back(m_item_image_data);
+			m_item_image_data = 0;
+			DEBUG5("Item Image loaded");
+		}
+	}
+}
+
+
+bool ItemLoader::loadItemImageData(const char* pFilename, std::list<ItemImageData*> &item_image_data_list)
+{
+	m_item_image_data = 0;
+	
+	/*object_list = new std::list<FixedObjectData*>;
+	subtype_list = new std::list<std::string>;*/
+
+	TiXmlDocument doc(pFilename);
+	bool loadOkay = doc.LoadFile();
+
+	if (loadOkay)
+	{
+		DEBUG5("Loading %s", pFilename);
+		searchItemImageData(&doc, item_image_data_list);
+		DEBUG5("Loading %s finished", pFilename);
+		return true;
+	}
+	else
+	{
+		DEBUG5("Failed to load file %s", pFilename);
+		return false;
+	}
+}
+
 
 
 ItemLoader::~ItemLoader()

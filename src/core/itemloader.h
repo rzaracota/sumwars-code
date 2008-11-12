@@ -67,6 +67,21 @@ struct DropChanceData
 	Item::Size m_size;
 };
 
+struct ItemImageData
+{
+	/**
+	 * \var std::string m_subtype
+	 * \brief Subtyp des Gegenstandes
+	 */
+	std::string m_subtype;
+	
+	/**
+	 * \var std::string m_image
+	 * \brief Bild des Meshes
+	 */
+	std::string m_image;
+};
+
 
 /**
  * \class ItemLoader
@@ -106,6 +121,7 @@ class ItemLoader
 	 */
 	std::list<ItemMeshData*>* loadItemMeshData(const char* pFilename);
 	
+	bool loadItemImageData(const char* pFilename, std::list<ItemImageData*> &item_image_data_list);
 	
 	private:
 	
@@ -157,6 +173,10 @@ class ItemLoader
 	 */
 	void searchItemMeshData(TiXmlNode* pParent);
 	
+	int generateItemImageData(TiXmlElement* pElement, std::string element, std::list<ItemImageData*> &item_image_data_list);
+	
+	void searchItemImageData(TiXmlNode* pParent, std::list<ItemImageData*> &item_image_data_list);
+	
 	
 	/**
 	 * \var ItemBasicData* m_item_data
@@ -190,6 +210,8 @@ class ItemLoader
 	 * \brief Liste mit Daten zu den Meshes der Items
 	 */
 	std::list<ItemMeshData*>* m_item_mesh_list;
+	
+	ItemImageData* m_item_image_data;
 	
 	/**
 	 * \var float m_weapon_mod[31]
