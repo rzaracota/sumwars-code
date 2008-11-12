@@ -1,18 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<!--
+<ObjectGroupTemplate name = "string" >
+  <Shape
+		type = "RECT"
+		extent_x = "float"
+		extent_y = "float"
+		angle ="float"
+		/>
+	OR
+  <Shape
+		type = "CIRCLE"
+		radius = "float"
+		angle ="float"
+		/>
+
+  <WayPoint pos_x="float" pos_y="float"/>
+  
+  <ObjectContent>
+	  <Object subtype="string"
+			center_x="float"
+			center_y="float"
+			angle = "float"
+			probability ="float"
+			prob_angle = "true/false"
+			/>
+			...
+  </ObjectContent>
+
+  <Locations>
+	 <Location name = "string" pos_x="float" pos_y="float" />
+	 ...
+  </Locations>
+
+</ObjectGroupTemplate>
+-->
+
+
 <ObjectGroupTemplate name = "border(side)" >
   <Shape
 		type = "RECT"
-		radius = ""
 		extent_x = "4"
 		extent_y = "4"
 		angle ="0"
 		/>
 
-  <WayPoint pos_x="" pos_y=""/>
-
   <ObjectContent>
-	  <object subType="$border"
+	  <Object subtype="$border"
 			center_x="0"
 			center_y="3.8"
 			angle = "0"
@@ -20,7 +54,7 @@
 			prob_angle = "false"
 			/>
 	  
-	  <object subType="$tree"
+	  <Object subtype="$tree"
 			  center_x="-1.84"
 			  center_y="3.2"
 			  angle = "0"
@@ -28,7 +62,7 @@
 			  prob_angle = "true"
 			/>
 	  
-	  <object subType="$tree"
+	  <Object subtype="$tree"
 			  center_x="-1.6"
 			  center_y="0.3"
 			  angle = "0"
@@ -36,7 +70,7 @@
 			  prob_angle = "true"
 			  />
 	  
-	  <object subType="$tree"
+	  <Object subtype="$tree"
 			  center_x="1.1"
 			  center_y="0.82"
 			  angle = "0"
@@ -44,12 +78,54 @@
 			  prob_angle = "true"
 			  />
 	  
-  </objectContent>
-
-  <Locations>
-	 <Location name = "" pos_x="" pos_y="" />
-	 <Location name = "" pos_x="" pos_y="" />	
-  </Locations>
-
+  </ObjectContent>
 
 </ObjectGroupTemplate>
+
+
+
+<ObjectGroupTemplate name = "trees3" >
+  <Shape
+		type = "RECT"
+		extent_x = "4.0"
+		extent_y = "4.0"
+		angle ="0"
+		/>
+
+  <ObjectContent>
+	  <Object subtype="$tree"
+			center_x="2.5"
+			center_y="3.6"
+			angle = "0"
+			probability ="0.7"
+			prob_angle = "false"
+			/>
+			
+	  <Object subtype="$tree"
+			center_x="-1"
+			center_y="-2.3"
+			angle = "0"
+			probability ="0.7"
+			prob_angle = "false"
+			/>
+			
+	  <Object subtype="$tree"
+			center_x="-1.7"
+			center_y="3.3"
+			angle = "0"
+			probability ="0.7"
+			prob_angle = "false"
+			/>
+			
+	  <Object subtype="$tree"
+			center_x="0.7"
+			center_y="-1.7"
+			angle = "0"
+			probability ="0.7"
+			prob_angle = "false"
+			/>
+  </ObjectContent>
+
+</ObjectGroupTemplate>
+
+

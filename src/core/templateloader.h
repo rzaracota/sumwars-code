@@ -23,6 +23,12 @@
 };*/
 // END FIXME
 
+struct TempReviveLocation
+{
+	std::string region;
+	std::string location;
+};
+
 struct TempNameObjectGroup
 {
 	void init()
@@ -75,6 +81,37 @@ struct TempExit
 	float radius;
 };
 
+struct TempShape
+{
+	Shape::ShapeType type;
+	float radius;
+	float extent_x;
+	float extent_y;
+	float angle;
+};
+
+struct TempWaypoint
+{
+	float pos_x;
+	float pos_y;
+};
+
+struct TempLocation
+{
+	std::string name;
+	float pos_x;
+	float pos_y;
+};
+
+struct TempGroupObject
+{
+	float angle;
+	float center_x;
+	float center_y;
+	bool prob_angle;
+	float probability;
+	ObjectTemplateType type;
+};
 
 /**
  * \class TemplateLoader
@@ -94,6 +131,8 @@ class TemplateLoader
 	bool loadRegionData(const char* pFilename, std::list<RegionData*> &region_list);
 
 	bool loadObjectTemplate(const char* pFilename, std::list<ObjectTemplate*> &object_template_list, std::list<std::string> &name_list);
+	
+	bool loadObjectGroupTemplate(const char* pFilename, std::list<ObjectGroupTemplate*> &object_group_template_list, std::list<std::string> &name_list);
 	
 	
 	private:
@@ -118,6 +157,10 @@ class TemplateLoader
 	
 	void searchObjectTemplate(TiXmlNode* pParent, std::list<ObjectTemplate*> &object_template_list, std::list<std::string> &name_list);
 	
+	int generateObjectGroupTemplate(TiXmlElement* pElement, std::string element, std::list<ObjectGroupTemplate*> &object_template_group_list, std::list<std::string> &name_list);
+	
+	void searchObjectGroupTemplate(TiXmlNode* pParent, std::list<ObjectGroupTemplate*> &object_group_template_list, std::list<std::string> &name_list);
+	
 	/**
 	 * \var WorldData* m_object_data
 	 * \brief Daten zu Objekten
@@ -125,18 +168,26 @@ class TemplateLoader
 	RegionData* m_region_data;
 	
 	ObjectTemplate* m_object_template;
+	
+	ObjectGroupTemplate* m_object_group_template;
+	
 	/**
 	 * \var std::list<FixedObjectData*>* m_object_list
 	 * \brief Liste mit Daten zu Objekten
 	 */
 	//std::list<FixedObjectData*>* m_object_list;
 	
+	TempReviveLocation m_temp_revive_location;
 	TempNameObjectGroup m_temp_name_object_group;
 	TempObjectGroup m_temp_object_group;
 	TempEnvironment m_temp_environment;
 	TempSpawnGroup m_spawn_group;
 	TempExit m_temp_exit;
 	
+	TempShape m_temp_shape;
+	TempWaypoint m_temp_waypoint;
+	TempLocation m_temp_location;
+	TempGroupObject m_temp_group_object;
 	std::string m_current_environment_name;
 
 };

@@ -296,7 +296,7 @@ void ObjectFactory::loadFixedObjectData(std::string file)
 
 void ObjectFactory::loadObjectTemplates(std::string file)
 {
-	// Templates aus XML Laden
+	// ObjectTemplates aus XML Laden
 	TemplateLoader templateloader;
 	std::list<ObjectTemplate*> object_template_list;
 	std::list<std::string> name_list;
@@ -315,8 +315,23 @@ void ObjectFactory::loadObjectTemplates(std::string file)
 
 void ObjectFactory::loadObjectGroupTemplates(std::string file)
 {
-	// TODO
-	DEBUG("reading file %s",file.c_str());
+	// ObjectGroupTemplates aus XML Laden
+	
+	TemplateLoader templateloader;
+	
+	std::list<ObjectGroupTemplate*> object_group_template_list;
+	std::list<std::string> name_list;
+	templateloader.loadObjectGroupTemplate(file.c_str(), object_group_template_list, name_list);
+	
+	std::list<ObjectGroupTemplate*>::iterator i = object_group_template_list.begin();
+	std::list<std::string>::iterator k = name_list.begin();
+	
+	while (i != object_group_template_list.end() && k != name_list.end())
+	{
+		registerObjectGroupTemplate(*k,*i);
+		i++;
+		k++;
+	}
 }
 
 void ObjectFactory::init()
@@ -488,15 +503,15 @@ void ObjectFactory::init()
 	objtempl->m_type = WorldObject::TypeInfo::TYPE_FIXED_OBJECT;
 	registerObjectTemplate("$single_block",objtempl);*/
 	
-	// Objektgruppen Templates
+	// Objektgruppen Templates  TODO in XML uebertragen
 	ObjectGroupTemplate* grouptempl;
 	
-	grouptempl = new ObjectGroupTemplate;
+	/*grouptempl = new ObjectGroupTemplate;
 	grouptempl->addObject("$border",Vector(0,3.8),0);
 	grouptempl->addObject("$tree",Vector(-1.84,3.2),0,0.5);
 	grouptempl->addObject("$tree",Vector(-1.6,0.3),0,0.5);
 	grouptempl->addObject("$tree",Vector(1.1,0.82),0,0.5);
-	registerObjectGroupTemplate("border(side)",grouptempl);
+	registerObjectGroupTemplate("border(side)",grouptempl);*/
 	
 	grouptempl = new ObjectGroupTemplate;
 	grouptempl->addObject("$border",Vector(0,3.8),0);
@@ -576,14 +591,14 @@ void ObjectFactory::init()
 	grouptempl->addObject("$tree",Vector(-1.2, -1.7),0,0.7);
 	registerObjectGroupTemplate("trees2",grouptempl);
 	
-	grouptempl = new ObjectGroupTemplate;
+	/*grouptempl = new ObjectGroupTemplate;
 	grouptempl->getShape()->m_type = Shape::RECT;
 	grouptempl->getShape()->m_extent = Vector(4,4);
 	grouptempl->addObject("$tree",Vector(2.5,3.6),0,0.7);
 	grouptempl->addObject("$tree",Vector(-1,-2.3),0,0.7);
 	grouptempl->addObject("$tree",Vector(-1.7,3.3),0,0.7);
 	grouptempl->addObject("$tree",Vector(0.7,-1.7),0,0.7);
-	registerObjectGroupTemplate("trees3",grouptempl);
+	registerObjectGroupTemplate("trees3",grouptempl);*/
 	
 	
 }

@@ -171,6 +171,16 @@ class ObjectGroupTemplate
 		}
 		
 		/**
+		 * \fn void addWaypoint(Vector pos)
+		 * \brief Fuegt einen Wegpunkt in das Template ein
+		 * \param pos Position
+		 */
+		void addWaypoint(Vector pos)
+		{
+			m_waypoint = pos;
+		}
+		
+		/**
 		 * \fn void addObject(GroupObject gobj)
 		 * \brief Fuegt ein Objekt dem Template hinzu
 		 * \param gobj Objekt

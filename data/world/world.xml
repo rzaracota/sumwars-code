@@ -36,6 +36,8 @@
 			...
 		</SpawnGroups>
 		
+		<ReviveLocation region="string", location="string" />
+		
 	</Region>
 </World>
 -->
