@@ -35,41 +35,6 @@
 	/>
 </Item>
 
-<!-- Goblin Club -->
-<Item type="weapon" subtype="goblin_club_axe" size="medium">
-	<Mesh file="axe.mesh" />
-	<Attribute
-		level_requirement="1"
-		character_requirement="15"
-		min_enchant="20"
-		max_enchant="40"
-		modchance_strength_mod="0.1"
-		modchance_dexterity_mod="0.1"
-		modchance_magic_power_mod="0.05"
-		modchance_damage_phys_mod="0.15"
-		modchance_damage_fire_mod="0.10"
-		modchance_damage_ice_mod="0.10"
-		modchance_damage_air_mod="0.10"
-		modchance_damage_mult_phys_mod="0.1"
-		modchance_attack_mod="0.1"
-		modchance_power_mod="0.1"
-	/>
-	<EquipEffect />
-	<WeaponAttribute
-		damage_min_physical="2"
-		damage_max_physical="10"
-		damage_attack="20"
-		damage_power="25"
-		attack_range="0.8"
-		two_handed="no"
-		dattack_speed="500"
-	/>
-	<DropChance
-		level="1"
-		probability="1.0"
-	/>
-</Item>
-
 <!-- bronze_axe-->
 <Item type="weapon" subtype="bronze_axe" size="medium">
 	<Mesh file="axe.mesh" />
@@ -105,41 +70,6 @@
 	/>
 </Item>
 
-<!-- Nagelkeule -->
-<Item type="weapon" subtype="nail_axe" size="medium">
-	<Mesh file="axe.mesh" />
-	<Attribute
-		level_requirement="4"
-		character_requirement="15"
-		min_enchant="25"
-		max_enchant="80"
-		modchance_strength_mod="0.1"
-		modchance_dexterity_mod="0.1"
-		modchance_magic_power_mod="0.05"
-		modchance_damage_phys_mod="0.15"
-		modchance_damage_fire_mod="0.10"
-		modchance_damage_ice_mod="0.10"
-		modchance_damage_air_mod="0.10"
-		modchance_damage_mult_phys_mod="0.1"
-		modchance_attack_mod="0.1"
-		modchance_power_mod="0.1"
-	/>
-	<EquipEffect />
-	<WeaponAttribute
-		damage_min_physical="9"
-		damage_max_physical="17"
-		damage_attack="26"
-		damage_power="40"
-		attack_range="0.8"
-		two_handed="no"
-		dattack_speed="800"
-	/>
-	<DropChance
-		level="1"
-		probability="1.0"
-	/>
-</Item>
-
 <!-- Eisenbeil -->
 <Item type="weapon" subtype="ironha_axe" size="medium">
 	<Mesh file="axe.mesh" />
@@ -165,41 +95,6 @@
 		damage_max_physical="19"
 		damage_attack="30"
 		damage_power="50"
-		attack_range="1.0"
-		two_handed="no"
-		dattack_speed="400"
-	/>
-	<DropChance
-		level="5"
-		probability="1.0"
-	/>
-</Item>
-
-<!-- Eisenbeschlagene Keule -->
-<Item type="weapon" subtype="iroclb_axe" size="medium">
-	<Mesh file="axe.mesh" />
-	<Attribute
-		level_requirement="7"
-		character_requirement="15"
-		min_enchant="45"
-		max_enchant="140"
-		modchance_strength_mod="0.1"
-		modchance_dexterity_mod="0.1"
-		modchance_magic_power_mod="0.05"
-		modchance_damage_phys_mod="0.15"
-		modchance_damage_fire_mod="0.10"
-		modchance_damage_ice_mod="0.10"
-		modchance_damage_air_mod="0.10"
-		modchance_damage_mult_phys_mod="0.1"
-		modchance_attack_mod="0.1"
-		modchance_power_mod="0.1"
-	/>
-	<EquipEffect />
-	<WeaponAttribute
-		damage_min_physical="12"
-		damage_max_physical="22"
-		damage_attack="32"
-		damage_power="53"
 		attack_range="1.0"
 		two_handed="no"
 		dattack_speed="400"

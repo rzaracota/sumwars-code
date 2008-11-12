@@ -1,0 +1,296 @@
+<!-- HAMMER -->
+<!-- ONE HANDED HAMMER -->
+
+<!-- hammer -->
+<Item type="weapon" subtype="hammer_hmr" size="medium">
+	<Mesh file="hammer.mesh" />
+	<Attribute
+		level_requirement="1"
+		character_requirement="15"
+		min_enchant="20"
+		max_enchant="40"
+		modchance_strength_mod="0.1"
+		modchance_dexterity_mod="0.1"
+		modchance_magic_power_mod="0.05"
+		modchance_damage_phys_mod="0.15"
+		modchance_damage_fire_mod="0.10"
+		modchance_damage_ice_mod="0.10"
+		modchance_damage_air_mod="0.10"
+		modchance_damage_mult_phys_mod="0.1"
+		modchance_attack_mod="0.1"
+		modchance_power_mod="0.1"
+	/>
+	<EquipEffect />
+	<WeaponAttribute
+		damage_min_physical="5"
+		damage_max_physical="7"
+		damage_attack="27"
+		damage_power="29"
+		attack_range="0.8"
+		two_handed="no"
+		dattack_speed="800"
+	/>
+	<DropChance
+		level="1"
+		probability="1.0"
+	/>
+</Item>
+
+<!-- Goblin Club -->
+<Item type="weapon" subtype="gobclb_hmr" size="medium">
+	<Mesh file="hammer.mesh" />
+	<Attribute
+		level_requirement="1"
+		character_requirement="15"
+		min_enchant="20"
+		max_enchant="40"
+		modchance_strength_mod="0.1"
+		modchance_dexterity_mod="0.1"
+		modchance_magic_power_mod="0.05"
+		modchance_damage_phys_mod="0.15"
+		modchance_damage_fire_mod="0.10"
+		modchance_damage_ice_mod="0.10"
+		modchance_damage_air_mod="0.10"
+		modchance_damage_mult_phys_mod="0.1"
+		modchance_attack_mod="0.1"
+		modchance_power_mod="0.1"
+	/>
+	<EquipEffect />
+	<WeaponAttribute
+		damage_min_physical="2"
+		damage_max_physical="10"
+		damage_attack="20"
+		damage_power="25"
+		attack_range="0.8"
+		two_handed="no"
+		dattack_speed="500"
+	/>
+	<DropChance
+		level="1"
+		probability="1.0"
+	/>
+</Item>
+
+<!-- Zeremonienhammer -->
+<Item type="weapon" subtype="cermon_hmr" size="medium">
+	<Mesh file="hammer.mesh" />
+	<Attribute
+			  level_requirement="3"
+			  character_requirement="15"
+			  min_enchant="30"
+			  max_enchant="80"
+			  modchance_strength_mod="0.1"
+			  modchance_dexterity_mod="0.1"
+			  modchance_magic_power_mod="0.05"
+			  modchance_damage_phys_mod="0.15"
+			  modchance_damage_fire_mod="0.10"
+			  modchance_damage_ice_mod="0.10"
+			  modchance_damage_air_mod="0.10"
+			  modchance_damage_mult_phys_mod="0.1"
+			  modchance_attack_mod="0.1"
+			  modchance_power_mod="0.1"
+			  />
+	<EquipEffect />
+	<WeaponAttribute
+					damage_min_physical="9"
+					damage_max_physical="16"
+					damage_attack="30"
+					damage_power="35"
+					attack_range="0.8"
+					two_handed="no"
+					dattack_speed="650"
+					/>
+	<DropChance
+			   level="1"
+			   probability="1.0"
+			   />
+</Item>
+
+<!-- Nagelkeule -->
+<Item type="weapon" subtype="nail_hmr" size="medium">
+	<Mesh file="hammer.mesh" />
+	<Attribute
+		level_requirement="4"
+		character_requirement="15"
+		min_enchant="25"
+		max_enchant="80"
+		modchance_strength_mod="0.1"
+		modchance_dexterity_mod="0.1"
+		modchance_magic_power_mod="0.05"
+		modchance_damage_phys_mod="0.15"
+		modchance_damage_fire_mod="0.10"
+		modchance_damage_ice_mod="0.10"
+		modchance_damage_air_mod="0.10"
+		modchance_damage_mult_phys_mod="0.1"
+		modchance_attack_mod="0.1"
+		modchance_power_mod="0.1"
+	/>
+	<EquipEffect />
+	<WeaponAttribute
+		damage_min_physical="9"
+		damage_max_physical="17"
+		damage_attack="26"
+		damage_power="40"
+		attack_range="0.8"
+		two_handed="no"
+		dattack_speed="800"
+	/>
+	<DropChance
+		level="1"
+		probability="1.0"
+	/>
+</Item>
+
+<!-- Eisenhammer -->
+<Item type="weapon" subtype="iron_hmr" size="medium">
+	<Mesh file="hammer.mesh" />
+	<Attribute
+		level_requirement="5"
+		character_requirement="15"
+		min_enchant="40"
+		max_enchant="130"
+		modchance_strength_mod="0.1"
+		modchance_dexterity_mod="0.1"
+		modchance_magic_power_mod="0.05"
+		modchance_damage_phys_mod="0.15"
+		modchance_damage_fire_mod="0.10"
+		modchance_damage_ice_mod="0.10"
+		modchance_damage_air_mod="0.10"
+		modchance_damage_mult_phys_mod="0.1"
+		modchance_attack_mod="0.1"
+		modchance_power_mod="0.1"
+	/>
+	<EquipEffect />
+	<WeaponAttribute
+		damage_min_physical="12"
+		damage_max_physical="18"
+		damage_attack="32"
+		damage_power="49"
+		attack_range="1.0"
+		two_handed="no"
+		dattack_speed="380"
+	/>
+	<DropChance
+		level="5"
+		probability="1.0"
+	/>
+</Item>
+
+<!-- Eisenbeschlagene Keule -->
+<Item type="weapon" subtype="iroclb_hmr" size="medium">
+	<Mesh file="hammer.mesh" />
+	<Attribute
+		level_requirement="7"
+		character_requirement="15"
+		min_enchant="45"
+		max_enchant="140"
+		modchance_strength_mod="0.1"
+		modchance_dexterity_mod="0.1"
+		modchance_magic_power_mod="0.05"
+		modchance_damage_phys_mod="0.15"
+		modchance_damage_fire_mod="0.10"
+		modchance_damage_ice_mod="0.10"
+		modchance_damage_air_mod="0.10"
+		modchance_damage_mult_phys_mod="0.1"
+		modchance_attack_mod="0.1"
+		modchance_power_mod="0.1"
+	/>
+	<EquipEffect />
+	<WeaponAttribute
+		damage_min_physical="12"
+		damage_max_physical="22"
+		damage_attack="32"
+		damage_power="53"
+		attack_range="1.0"
+		two_handed="no"
+		dattack_speed="400"
+	/>
+	<DropChance
+		level="5"
+		probability="1.0"
+	/>
+</Item>
+
+<!-- Schl�gel -->
+<Item type="weapon" subtype="maul_hmr" size="medium">
+	<Mesh file="hammer.mesh" />
+	<Attribute
+		level_requirement="8"
+		character_requirement="15"
+		min_enchant="40"
+		max_enchant="160"
+		modchance_strength_mod="0.1"
+		modchance_dexterity_mod="0.1"
+		modchance_magic_power_mod="0.05"
+		modchance_damage_phys_mod="0.15"
+		modchance_damage_fire_mod="0.10"
+		modchance_damage_ice_mod="0.10"
+		modchance_damage_air_mod="0.10"
+		modchance_damage_mult_phys_mod="0.1"
+		modchance_attack_mod="0.1"
+		modchance_power_mod="0.1"
+	/>
+	<EquipEffect />
+	<WeaponAttribute
+		damage_min_physical="13"
+		damage_max_physical="28"
+		damage_attack="28"
+		damage_power="61"
+		attack_range="1.3"
+		two_handed="no"
+		dattack_speed="300"
+	/>
+	<DropChance
+		level="8"
+		probability="1.0"
+	/>
+</Item>
+
+<!-- Morgenstern -->
+<Item type="weapon" subtype="mrnstr_hmr" size="medium">
+	<Mesh file="hammer.mesh" />
+	<Attribute
+		level_requirement="13"
+		character_requirement="15"
+		min_enchant="60"
+		max_enchant="200"
+		modchance_strength_mod="0.1"
+		modchance_dexterity_mod="0.1"
+		modchance_magic_power_mod="0.05"
+		modchance_damage_phys_mod="0.15"
+		modchance_damage_fire_mod="0.10"
+		modchance_damage_ice_mod="0.10"
+		modchance_damage_air_mod="0.10"
+		modchance_damage_mult_phys_mod="0.1"
+		modchance_attack_mod="0.1"
+		modchance_power_mod="0.1"
+	/>
+	<EquipEffect />
+	<WeaponAttribute
+		damage_min_physical="19"
+		damage_max_physical="25"
+		damage_attack="49"
+		damage_power="62"
+		attack_range="1.3"
+		two_handed="no"
+		dattack_speed="400"
+	/>
+	<DropChance
+		level="13"
+		probability="1.0"
+	/>
+</Item>
+
+<!-- Kr�henkopf -->
+<!-- Reiterhammer -->
+<!-- Streitkolben -->
+<!-- Stahlhammer -->
+<!-- Kriegshammer -->
+<!-- Schmetterkopf -->
+<!-- Stahlstreitkolben -->
+<!-- Stahlschl�gel -->
+<!-- Sechskantstreitkolben -->
+<!-- Silberhammer -->
+<!-- Diamanthammer -->
+<!-- Priesterstreitkolben -->
+<!-- Heiliger Hammer -->
