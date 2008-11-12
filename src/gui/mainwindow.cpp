@@ -92,6 +92,17 @@ bool MainWindow::setupMainMenu()
 
 		// Oberstes Fenster der Hauptmenue Schicht
 		m_main_menu = win_mgr.createWindow("DefaultWindow", "MainMenu");
+		
+		
+		CEGUI::Window* img;
+		img  = win_mgr.createWindow("TaharezLook/StaticImage", "StartScreenImage");
+		m_main_menu->addChildWindow(img);
+		img->setProperty("Image", "set:startscreen.png image:full_image");
+		img->moveToBack ();
+		img->setMousePassThroughEnabled(true);
+		
+		// m_main_menu->setProperty("BackgroundEnabled", "true");
+		//m_main_menu->setProperty("Image", "set:startscreen.png image:full_image");
 
 		Window* wnd = new SavegameList(m_document);
 		m_sub_windows["SavegameList"] = wnd;
@@ -898,6 +909,12 @@ bool MainWindow::mousePressed(const OIS::MouseEvent &evt, OIS::MouseButtonID btn
 		button = CEGUI::RightButton;
 
 	bool ret = m_cegui_system->injectMouseButtonDown(button);
+	
+	if (m_document->getGUIState()->m_sheet ==  Document::MAIN_MENU)
+	{
+		m_document->onStartScreenClicked();
+		return true;
+	}
 
 	// Koordinaten an denen der Mausklick stattfand
 	int x =evt.state.X.abs;

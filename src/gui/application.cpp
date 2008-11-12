@@ -318,7 +318,7 @@ bool Application::setupResources()
 
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../resources/gui/schemes", "FileSystem", "GUI");
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../resources/itempictures", "FileSystem", "GUI");
-
+	
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../save", "FileSystem", "Savegame");
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../data/items", "FileSystem", "items");
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../data/monsters", "FileSystem", "monsters");
@@ -412,6 +412,16 @@ bool Application::initCEGUI()
 	// Imagesets laden
 	//CEGUI::Imageset* imgset = CEGUI::ImagesetManager::getSingleton().createImageset("test.imageset");
 	CEGUI::ImagesetManager::getSingleton().createImageset("skills.imageset");
+	
+	try
+	{
+		CEGUI::ImagesetManager::getSingleton().createImagesetFromImageFile ("startscreen.png","startscreen.png",(CEGUI::utf8*)"GUI");
+	}
+	catch (CEGUI::Exception& e)
+	{	
+		DEBUG("CEGUI exception %s",e.getMessage().c_str());
+	}
+		
 	
 	// TODO: Dateien laden
 	CEGUI::ImagesetManager::getSingleton().createImagesetFromImageFile ("crossbow.png","crossbow.png",(CEGUI::utf8*)"GUI");

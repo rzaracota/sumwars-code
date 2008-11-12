@@ -37,7 +37,7 @@ Document::Document()
 	getGUIState()->m_right_mouse_hold= false;
 	getGUIState()->m_shift_hold = false;
 	getGUIState()->m_sheet= MAIN_MENU;
-	getGUIState()->m_shown_windows = SAVEGAME_LIST;
+	getGUIState()->m_shown_windows = NO_WINDOWS;
 	//getGUIState()->m_pressed_key = OIS::KC_UNASSIGNED;
 	getGUIState()->m_pressed_key =0;
 	getGUIState()->m_cursor_object ="";
@@ -429,6 +429,15 @@ void Document::onLeftMouseButtonClick(float x, float y)
 	sendCommand(&command);
 
 
+}
+
+void Document::onStartScreenClicked()
+{
+	if (getGUIState()->m_shown_windows == NO_WINDOWS)
+	{
+		getGUIState()->m_shown_windows = SAVEGAME_LIST;
+		m_modified =WINDOWS_MODIFIED;
+	}
 }
 
 int Document::getObjectAt(float x,float y)

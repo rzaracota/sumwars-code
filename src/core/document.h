@@ -501,7 +501,13 @@ class Document
 	 */
 	void onRightMouseButtonClick(float x, float y);
 
-
+	/**
+	 * \fn void onStartScreenClicked()
+	 * \brief Behandelt die Reaktion auf einen Klick im Startbildschirm
+	 */
+	void onStartScreenClicked();
+	
+	
 	/**
 	 * \fn void onItemLeftClick(short pos)
 	 * \brief Behandelt Linksklick auf ein Item
