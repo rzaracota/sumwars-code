@@ -9,7 +9,9 @@
 #include "monster.h"
 */
 
-#include <iostream>
+//#include <iostream>
+
+//######################  RegionData (world.xml)  ##############################
 
 //int ObjectLoader::generateFixedObjectData(TiXmlElement* pElement, string element, std::list<FixedObjectData*>* object_list, std::list<string>* subtype_list)
 int TemplateLoader::generateRegionData(TiXmlElement* pElement, std::string element, std::list<RegionData*> &region_list)
@@ -388,6 +390,151 @@ bool TemplateLoader::loadRegionData(const char* pFilename, std::list<RegionData*
 	{
 		DEBUG5("Loading %s", pFilename);
 		searchRegionData(&doc, region_list);
+		DEBUG5("Loading %s finished", pFilename);
+		//return m_object_list;
+		return true;
+	}
+	else
+	{
+		DEBUG5("Failed to load file %s", pFilename);
+		return false;
+	}
+}
+
+
+//#####################  ObjectTemplate (obj_templates)  #######################
+
+int TemplateLoader::generateObjectTemplate(TiXmlElement* pElement, std::string element, std::list<ObjectTemplate*> &object_template_list, std::list<std::string> &name_list)
+{
+	if ( !pElement ) return 0;
+
+	TiXmlAttribute* pAttrib=pElement->FirstAttribute();
+	int i=0;
+	int ival;
+	double dval;
+	
+	if (element == "ObjectTemplate")
+	{
+		DEBUG5("ObjectTemplate");
+		
+		if (m_object_template == 0)
+		{
+			m_object_template = new ObjectTemplate;
+		}
+		
+		while (element == "ObjectTemplate" && pAttrib)
+		{
+			if (!strcmp(pAttrib->Name(), "name"))
+				name_list.push_back(pAttrib->Value());
+			else if (!strcmp(pAttrib->Name(), "type"))
+			{
+				if (!strcmp(pAttrib->Value(), "NONE"))
+					m_object_template->m_type = WorldObject::TypeInfo::TYPE_NONE;
+				else if (!strcmp(pAttrib->Value(), "PLAYER"))
+					m_object_template->m_type = WorldObject::TypeInfo::TYPE_PLAYER;
+				else if (!strcmp(pAttrib->Value(), "MONSTER"))
+					m_object_template->m_type = WorldObject::TypeInfo::TYPE_MONSTER;
+				else if (!strcmp(pAttrib->Value(), "TRADER"))
+					m_object_template->m_type = WorldObject::TypeInfo::TYPE_TRADER;
+				else if (!strcmp(pAttrib->Value(), "FIXED_OBJECT"))
+					m_object_template->m_type = WorldObject::TypeInfo::TYPE_FIXED_OBJECT;
+			}
+
+			i++;
+			pAttrib=pAttrib->Next();
+		}
+	}
+	
+	if (element == "Environment")
+	{
+		DEBUG5("Environment");
+		while (element == "Environment" && pAttrib)
+		{
+			if (!strcmp(pAttrib->Name(), "name"))
+				m_current_environment_name = pAttrib->Value();
+
+			i++;
+			pAttrib=pAttrib->Next();
+		}
+	}
+	
+	if (element == "Object")
+	{
+		DEBUG5("Object");
+		while (element == "Object" && pAttrib)
+		{
+			if (!strcmp(pAttrib->Name(), "name"))
+				m_object_template->addObject(m_current_environment_name,pAttrib->Value());
+
+			i++;
+			pAttrib=pAttrib->Next();
+		}
+	}
+	
+	return i;
+}
+
+
+void TemplateLoader::searchObjectTemplate(TiXmlNode* pParent, std::list<ObjectTemplate*> &object_template_list, std::list<std::string> &name_list)
+{
+	if ( !pParent ) return;
+
+	TiXmlNode* pChild;
+//	TiXmlText* pText;
+
+	int t = pParent->Type();
+	int num;
+
+	switch ( t )
+	{
+	case TiXmlNode::ELEMENT:
+		//printf( "Element [%s]", pParent->Value() );
+		num = generateObjectTemplate(pParent->ToElement(), pParent->Value(), object_template_list, name_list);
+		/*switch(num)
+		{
+			case 0:  printf( " (No attributes)"); break;
+			case 1:  printf( "%s1 attribute", getIndentAlt(indent)); break;
+			default: printf( "%s%d attributes", getIndentAlt(indent), num); break;
+		}*/
+		break;
+	/*
+	case TiXmlNode::TEXT:
+		pText = pParent->ToText();
+		printf( "Text: [%s]", pText->Value() );
+		break;
+	*/
+	default:
+		break;
+	}
+
+	for ( pChild = pParent->FirstChild(); pChild != 0; pChild = pChild->NextSibling())
+	{
+		searchObjectTemplate(pChild, object_template_list, name_list);
+
+		if ( !strcmp(pChild->Value(), "ObjectTemplate") && pChild->Type() == TiXmlNode::ELEMENT)
+		{
+			object_template_list.push_back(m_object_template);
+			m_object_template = 0;
+			DEBUG5("ObjectTemplate loaded");
+		}
+	}
+}
+
+
+bool TemplateLoader::loadObjectTemplate(const char* pFilename, std::list<ObjectTemplate*> &object_template_list, std::list<std::string> &name_list)
+{
+	m_object_template = 0;
+	
+	/*object_list = new std::list<FixedObjectData*>;
+	subtype_list = new std::list<std::string>;*/
+
+	TiXmlDocument doc(pFilename);
+	bool loadOkay = doc.LoadFile();
+
+	if (loadOkay)
+	{
+		DEBUG5("Loading %s", pFilename);
+		searchObjectTemplate(&doc, object_template_list, name_list);
 		DEBUG5("Loading %s finished", pFilename);
 		//return m_object_list;
 		return true;

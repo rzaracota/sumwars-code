@@ -5,6 +5,7 @@
 #include <map>
 #include <list>
 #include "region.h"
+#include "objectfactory.h"
 
 #include "../tinyxml/tinyxml.h"
 #include <string>
@@ -16,10 +17,11 @@
  * \struct WorldData
  * \brief Enthaelt die Daten, die zum Laden von World-Templates notwendig sind
  */
-struct WorldData
+/*struct WorldData
 {
 	// TODO
-};
+};*/
+// END FIXME
 
 struct TempNameObjectGroup
 {
@@ -91,6 +93,8 @@ class TemplateLoader
 	//bool loadWorldData(const char* pFilename, std::list<WorldData*>* &world_list, std::list<std::string>* &subtype_list);
 	bool loadRegionData(const char* pFilename, std::list<RegionData*> &region_list);
 
+	bool loadObjectTemplate(const char* pFilename, std::list<ObjectTemplate*> &object_template_list, std::list<std::string> &name_list);
+	
 	
 	private:
 	
@@ -110,11 +114,17 @@ class TemplateLoader
 	 */
 	void searchRegionData(TiXmlNode* pParent, std::list<RegionData*> &region_list);
 	
+	int generateObjectTemplate(TiXmlElement* pElement, std::string element, std::list<ObjectTemplate*> &object_template_list, std::list<std::string> &name_list);
+	
+	void searchObjectTemplate(TiXmlNode* pParent, std::list<ObjectTemplate*> &object_template_list, std::list<std::string> &name_list);
+	
 	/**
 	 * \var WorldData* m_object_data
 	 * \brief Daten zu Objekten
 	 */
 	RegionData* m_region_data;
+	
+	ObjectTemplate* m_object_template;
 	/**
 	 * \var std::list<FixedObjectData*>* m_object_list
 	 * \brief Liste mit Daten zu Objekten
@@ -126,6 +136,8 @@ class TemplateLoader
 	TempEnvironment m_temp_environment;
 	TempSpawnGroup m_spawn_group;
 	TempExit m_temp_exit;
+	
+	std::string m_current_environment_name;
 
 };
 

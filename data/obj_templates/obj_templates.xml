@@ -1,5 +1,13 @@
 <?xml version="1.0" ?>
 
+<!--
+NONE
+PLAYER
+MONSTER
+TRADER
+FIXED_OBJECT
+-->
+
 <ObjectTemplate name="$tree" type="FIXED_OBJECT">
 	<Environment name="meadow">
 		<Object name="tree1" />

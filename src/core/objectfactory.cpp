@@ -296,8 +296,20 @@ void ObjectFactory::loadFixedObjectData(std::string file)
 
 void ObjectFactory::loadObjectTemplates(std::string file)
 {
-	// TODO
-	DEBUG("reading file %s",file.c_str());
+	// Templates aus XML Laden
+	TemplateLoader templateloader;
+	std::list<ObjectTemplate*> object_template_list;
+	std::list<std::string> name_list;
+	templateloader.loadObjectTemplate(file.c_str(), object_template_list, name_list);
+	
+	std::list<ObjectTemplate*>::iterator i = object_template_list.begin();
+	std::list<std::string>::iterator k = name_list.begin();
+	while (i != object_template_list.end() && k != name_list.end())
+	{
+		registerObjectTemplate(*k,*i);
+		i++;
+		k++;
+	}
 }
 
 
@@ -446,7 +458,8 @@ void ObjectFactory::init()
 
 	// Daten fuer generische Objekte
 	
-	// Objekt Templates
+	// Objekt Templates (werden aus xml geladen)
+	/*
 	ObjectTemplate* objtempl;
 	
 	objtempl =new ObjectTemplate;
@@ -473,7 +486,7 @@ void ObjectFactory::init()
 	objtempl->addObject("meadow","tree1");
 	objtempl->addObject("hills","tree3");
 	objtempl->m_type = WorldObject::TypeInfo::TYPE_FIXED_OBJECT;
-	registerObjectTemplate("$single_block",objtempl);
+	registerObjectTemplate("$single_block",objtempl);*/
 	
 	// Objektgruppen Templates
 	ObjectGroupTemplate* grouptempl;
