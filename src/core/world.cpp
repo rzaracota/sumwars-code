@@ -1564,7 +1564,14 @@ bool World::writeEvent(Region* region,Event* event, CharConv* cv)
 		if (object != 0)
 		{
 			cv->toBuffer<short>((short) event->m_data);
-			static_cast<Player*>(object)->getEquipement()->getItem(event->m_data)->toString(cv);
+			if (event->m_data != Equipement::GOLD)
+			{
+				static_cast<Player*>(object)->getEquipement()->getItem(event->m_data)->toString(cv);
+			}
+			else
+			{
+				cv->toBuffer<int>(static_cast<Player*>(object)->getEquipement()->getGold());
+			}
 		}
 		else
 			return false;
@@ -1870,7 +1877,16 @@ bool World::processEvent(Region* region,CharConv* cv)
 				object = (*m_players)[event.m_id];
 				if (object == m_local_player)
 				{
-					static_cast<Player*>(object)->readItemComplete(cv);
+					if (event.m_data != Equipement::GOLD)
+					{
+						static_cast<Player*>(object)->readItemComplete(cv);
+					}
+					else
+					{
+						int gold;
+						cv->fromBuffer(gold);
+						static_cast<Player*>(object)->getEquipement()->setGold(gold);
+					}
 				}
 				else
 				{

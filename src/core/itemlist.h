@@ -321,6 +321,16 @@ class Equipement
 	{
 		return m_gold;
 	}
+	
+	/**
+	 * \fn void setGold(int gold)
+	 * \brief Setzt die Menge Gold
+	 * \param gold Gold
+	 */
+	void setGold(int gold)
+	{
+		m_gold = gold;
+	}
 
 	private:
 

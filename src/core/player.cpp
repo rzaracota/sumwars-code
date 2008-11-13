@@ -675,8 +675,9 @@ short Player::insertItem(Item* itm)
 	if (pos != Equipement::NONE)
 	{
 		// Gegenstand ins Inventar aufgenommen
-		if (World::getWorld()->isServer() && pos != Equipement::GOLD)
+		if (World::getWorld()->isServer())
 		{
+			
 			Event event;
 			event.m_type =  Event::PLAYER_ITEM_PICKED_UP ;
 			event.m_data = pos;

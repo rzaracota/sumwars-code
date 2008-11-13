@@ -317,7 +317,7 @@ bool Application::setupResources()
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../resources/gui/schemes", "FileSystem", "GUI");
 
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../resources/gui/schemes", "FileSystem", "GUI");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../resources/itempictures", "FileSystem", "GUI");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../resources/itempictures", "FileSystem", "itempictures");
 	
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../save", "FileSystem", "Savegame");
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../data/items", "FileSystem", "items");
@@ -413,6 +413,7 @@ bool Application::initCEGUI()
 	//CEGUI::Imageset* imgset = CEGUI::ImagesetManager::getSingleton().createImageset("test.imageset");
 	CEGUI::ImagesetManager::getSingleton().createImageset("skills.imageset");
 	
+	
 	try
 	{
 		CEGUI::ImagesetManager::getSingleton().createImagesetFromImageFile ("startscreen.png","startscreen.png",(CEGUI::utf8*)"GUI");
@@ -421,37 +422,33 @@ bool Application::initCEGUI()
 	{	
 		DEBUG("CEGUI exception %s",e.getMessage().c_str());
 	}
+	
+	
+	// Bilder laden
+	
+	Ogre::FileInfoListPtr files;
+	Ogre::FileInfoList::iterator it;
+	std::string file;
+	
+	files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("itempictures","*.png");
+	for (it = files->begin(); it != files->end(); ++it)
+	{
 		
-	
-	// TODO: Dateien laden
-	CEGUI::ImagesetManager::getSingleton().createImagesetFromImageFile ("crossbow.png","crossbow.png",(CEGUI::utf8*)"GUI");
-	CEGUI::ImagesetManager::getSingleton().createImagesetFromImageFile ("axe.png","axe.png",(CEGUI::utf8*)"GUI");
-	CEGUI::ImagesetManager::getSingleton().createImagesetFromImageFile ("bow.png","bow.png",(CEGUI::utf8*)"GUI");
-	CEGUI::ImagesetManager::getSingleton().createImagesetFromImageFile ("axe2H.png","axe2H.png",(CEGUI::utf8*)"GUI");
-	CEGUI::ImagesetManager::getSingleton().createImagesetFromImageFile ("halberd.png","halberd.png",(CEGUI::utf8*)"GUI");
-	CEGUI::ImagesetManager::getSingleton().createImagesetFromImageFile ("shield.png","shield.png",(CEGUI::utf8*)"GUI");
-	CEGUI::ImagesetManager::getSingleton().createImagesetFromImageFile ("shield_dmg.png","shield_dmg.png",(CEGUI::utf8*)"GUI");
-	CEGUI::ImagesetManager::getSingleton().createImagesetFromImageFile ("sword.png","sword.png",(CEGUI::utf8*)"GUI");
-	CEGUI::ImagesetManager::getSingleton().createImagesetFromImageFile ("noMedia.png","noMedia.png",(CEGUI::utf8*)"GUI");
-	
-	
-	// Mesh Images aus XML Laden // TODO Muss noch an richtige Stelle verschoben werden
-	/*
-	ImageLoader imageloader;
-	std::list<ItemImageData*> item_image_data_list;
-	imageloader.loadItemImageData(file.c_str(), object_template_list, name_list);
-	
-	for (it=item_image_data_list.begin(); it!=item_image_data_list.end(); it++)
-	{
-		ItemWindow::registerItemImage((*it)->subtype,(*it)->image);
+		file = it->filename;
+		
+		CEGUI::ImagesetManager::getSingleton().createImagesetFromImageFile (file,file,(CEGUI::utf8*)"itempictures");
 	}
 	
-	// Liste aus Speicher loeschen
-	for (it=item_image_data_list.begin(); it!=item_image_data_list.end(); it++)
+	// Imagesets laden
+	files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("itempictures","*.imageset");
+	for (it = files->begin(); it != files->end(); ++it)
 	{
-		delete *it;
+		
+		file = it->filename;
+		
+		CEGUI::ImagesetManager::getSingleton().createImageset(file);
 	}
-	*/
+	
 	
 	ItemWindow::registerItemImage("short_sw","set:sword.png image:full_image");
 	ItemWindow::registerItemImage("long_sw","set:sword.png image:full_image");
@@ -539,6 +536,25 @@ bool Application::loadResources()
 		
 		ItemFactory::loadItemData(file);
 		Scene::loadItemData(file);
+		
+		// Mesh Images aus XML Laden // TODO Muss noch an richtige Stelle verschoben werden
+		/*
+			ImageLoader imageloader;
+			std::list<ItemImageData*> item_image_data_list;
+			imageloader.loadItemImageData(file.c_str(), object_template_list, name_list);
+		
+			for (it=item_image_data_list.begin(); it!=item_image_data_list.end(); it++)
+			{
+			ItemWindow::registerItemImage((*it)->subtype,(*it)->image);
+		}
+		
+		// Liste aus Speicher loeschen
+			for (it=item_image_data_list.begin(); it!=item_image_data_list.end(); it++)
+			{
+			delete *it;
+		}
+		*/
+	
 		
 	}
 	

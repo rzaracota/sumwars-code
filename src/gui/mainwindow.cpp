@@ -550,7 +550,7 @@ void MainWindow::updateCursorItemImage()
 			}
 			else if (size == Item::MEDIUM)
 			{
-				label->setSize(CEGUI::UVector2(cegui_reldim(0.045f), cegui_reldim( 0.05f)));
+				label->setSize(CEGUI::UVector2(cegui_reldim(0.045f), cegui_reldim( 0.06f)));
 			}
 			else if (size == Item::SMALL)
 			{
