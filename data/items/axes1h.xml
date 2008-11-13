@@ -175,8 +175,9 @@
 	/>
 </Item>
 
-<!-- S�ldneraxt -->
+<!-- Soeldneraxt -->
 <Item type="weapon" subtype="merc_axe" size="medium">
+	<Image image="set:axe.png image:full_image" />
 	<Mesh file="axe.mesh" />
 	<Attribute
 		level_requirement="19"
@@ -200,7 +201,7 @@
 		damage_max_physical="35"
 		damage_attack="64"
 		damage_power="76"
-		attack_range="2.0"
+		attack_range="1.3"
 		two_handed="no"
 		dattack_speed="-100"
 	/>
@@ -209,8 +210,10 @@
 		probability="1.0"
 	/>
 </Item>
+
 <!-- Stahlaxt -->
 <Item type="weapon" subtype="steel_axe" size="medium">
+	<Image image="set:axe.png image:full_image" />
 	<Mesh file="axe.mesh" />
 	<Attribute
 		level_requirement="25"
@@ -246,6 +249,7 @@
 
 <!-- Kampfaxt -->
 <Item type="weapon" subtype="battle_axe" size="medium">
+	<Image image="set:axe.png image:full_image" />
 	<Mesh file="axe.mesh" />
 	<Attribute
 		level_requirement="30"
@@ -279,8 +283,9 @@
 	/>
 </Item>
 
-<!-- W�chteraxt -->
+<!-- Waechteraxt -->
 <Item type="weapon" subtype="guard_axe" size="medium">
+	<Image image="set:axe.png image:full_image" />
 	<Mesh file="axe.mesh" />
 	<Attribute
 		level_requirement="35"
@@ -306,7 +311,7 @@
 		damage_power="105"
 		attack_range="1.3"
 		two_handed="no"
-		dattack_speed="0"
+		dattack_speed="-30"
 	/>
 	<DropChance
 		level="35"
@@ -316,6 +321,7 @@
 
 <!-- Minotaurenaxt -->
 <Item type="weapon" subtype="mino_axe" size="medium">
+	<Image image="set:axe.png image:full_image" />
 	<Mesh file="axe.mesh" />
 	<Attribute
 		level_requirement="40"
@@ -351,6 +357,7 @@
 
 <!-- Donneraxt -->
 <Item type="weapon" subtype="wind_axe" size="medium">
+	<Image image="set:axe.png image:full_image" />
 	<Mesh file="axe.mesh" />
 	<Attribute
 		level_requirement="45"
@@ -386,8 +393,9 @@
 	/>
 </Item>
 
-<!-- D�monenaxt -->
+<!-- Daemonenaxt -->
 <Item type="weapon" subtype="demon_axe" size="medium">
+	<Image image="set:axe.png image:full_image" />
 	<Mesh file="axe.mesh" />
 	<Attribute
 		level_requirement="50"
@@ -423,6 +431,7 @@
 
 <!-- Obsidianaxt -->
 <Item type="weapon" subtype="obsid_axe" size="medium">
+	<Image image="set:axe.png image:full_image" />
 	<Mesh file="axe.mesh" />
 	<Attribute
 		level_requirement="55"
@@ -458,6 +467,7 @@
 
 <!-- Vulkanaxt -->
 <Item type="weapon" subtype="vulcan_axe" size="medium">
+	<Image image="set:axe.png image:full_image" />
 	<Mesh file="axe.mesh" />
 	<Attribute
 		level_requirement="60"
@@ -495,6 +505,7 @@
 
 <!-- Berserkeraxt -->
 <Item type="weapon" subtype="bersrk_axe" size="medium">
+	<Image image="set:axe.png image:full_image" />
 	<Mesh file="axe.mesh" />
 	<Attribute
 		level_requirement="65"
@@ -530,6 +541,7 @@
 
 <!-- Diamantaxt -->
 <Item type="weapon" subtype="diamnt_axe" size="medium">
+	<Image image="set:axe.png image:full_image" />
 	<Mesh file="axe.mesh" />
 	<Attribute
 		level_requirement="70"
@@ -565,6 +577,7 @@
 
 <!-- Zwergenaxt -->
 <Item type="weapon" subtype="dwarf_axe" size="medium">
+	<Image image="set:axe.png image:full_image" />
 	<Mesh file="axe.mesh" />
 	<Attribute
 		level_requirement="75"
@@ -598,8 +611,9 @@
 	/>
 </Item>
 
-<!-- H�llenaxt -->
+<!-- Hoellenaxt -->
 <Item type="weapon" subtype="hell_axe" size="medium">
+	<Image image="set:axe.png image:full_image" />
 	<Mesh file="axe.mesh" />
 	<Attribute
 		level_requirement="80"

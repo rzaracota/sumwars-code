@@ -261,6 +261,7 @@ s		modchance_damage_air_mod="float"
 
 <!-- Old Sword -->
 <Item type="weapon" subtype="old_sw" size="medium">
+	<Image image="set:sword.png image:full_image" />
 	<Mesh file="sword.mesh" />
 	<Attribute
 		level_requirement="6"
@@ -296,6 +297,7 @@ s		modchance_damage_air_mod="float"
 
 <!-- -Sabre -->
 <Item type="weapon" subtype="sabre_sw" size="medium">
+	<Image image="set:sword.png image:full_image" />
 	<Mesh file="sword.mesh" />
 	<Attribute
 		level_requirement="8"
@@ -331,6 +333,7 @@ s		modchance_damage_air_mod="float"
 
 <!-- Legions Blade-->
 <Item type="weapon" subtype="legions_sw" size="medium">
+	<Image image="set:sword.png image:full_image" />
 	<Mesh file="sword.mesh" />
 	<Attribute
 		level_requirement="13"
@@ -366,6 +369,7 @@ s		modchance_damage_air_mod="float"
 
 <!-- long sword  -->
 <Item type="weapon" subtype="long_sw" size="medium">
+	<Image image="set:sword.png image:full_image" />
 	<Mesh file="sword.mesh" />
 	<Attribute
 		level_requirement="19"
@@ -401,6 +405,7 @@ s		modchance_damage_air_mod="float"
 
 <!-- coastal sword-->
 <Item type="weapon" subtype="coast_sw" size="medium">
+	<Image image="set:sword.png image:full_image" />
 	<Mesh file="sword.mesh" />
 	<Attribute
 		level_requirement="25"
@@ -436,6 +441,7 @@ s		modchance_damage_air_mod="float"
 
 <!-- scimitar-->
 <Item type="weapon" subtype="scimita_sw" size="medium">
+	<Image image="set:sword.png image:full_image" />
 	<Mesh file="sword.mesh" />
 	<Attribute
 		level_requirement="30"
@@ -471,6 +477,7 @@ s		modchance_damage_air_mod="float"
 
 <!-- barbar sword-->
 <Item type="weapon" subtype="barbar_sw" size="medium">
+	<Image image="set:sword.png image:full_image" />
 	<Mesh file="sword.mesh" />
 	<Attribute
 		level_requirement="35"
@@ -506,6 +513,7 @@ s		modchance_damage_air_mod="float"
 
 <!-- northlings blade -->
 <Item type="weapon" subtype="northli_sw" size="medium">
+	<Image image="set:sword.png image:full_image" />
 	<Mesh file="sword.mesh" />
 	<Attribute
 		level_requirement="40"
@@ -543,6 +551,7 @@ s		modchance_damage_air_mod="float"
 
 <!-- steel sword-->
 <Item type="weapon" subtype="steel_sw" size="medium">
+	<Image image="set:sword.png image:full_image" />
 	<Mesh file="sword.mesh" />
 	<Attribute
 		level_requirement="45"
@@ -578,6 +587,7 @@ s		modchance_damage_air_mod="float"
 
 <!-- assassins blade-->
 <Item type="weapon" subtype="assassi_sw" size="medium">
+	<Image image="set:sword.png image:full_image" />
 	<Mesh file="sword.mesh" />
 	<Attribute
 		level_requirement="50"
@@ -613,6 +623,7 @@ s		modchance_damage_air_mod="float"
 
 <!-- diamond sword-->
 <Item type="weapon" subtype="diamond_sw" size="medium">
+	<Image image="set:sword.png image:full_image" />
 	<Mesh file="sword.mesh" />
 	<Attribute
 		level_requirement="55"
@@ -648,6 +659,7 @@ s		modchance_damage_air_mod="float"
 
 <!-- dwarf steel sword-->
 <Item type="weapon" subtype="dwarfst_sw" size="medium">
+	<Image image="set:sword.png image:full_image" />
 	<Mesh file="sword.mesh" />
 	<Attribute
 		level_requirement="60"
@@ -683,6 +695,7 @@ s		modchance_damage_air_mod="float"
 
 <!-- demon blade -->
 <Item type="weapon" subtype="demon_sw" size="medium">
+	<Image image="set:sword.png image:full_image" />
 	<Mesh file="sword.mesh" />
 	<Attribute
 		level_requirement="65"
@@ -720,6 +733,7 @@ s		modchance_damage_air_mod="float"
 
 <!-- hero blade -->
 <Item type="weapon" subtype="heroe_sw" size="medium">
+	<Image image="set:sword.png image:full_image" />
 	<Mesh file="sword.mesh" />
 	<Attribute
 		level_requirement="70"
@@ -755,6 +769,7 @@ s		modchance_damage_air_mod="float"
 
 <!-- angel blade -->
 <Item type="weapon" subtype="angel_sw" size="medium">
+	<Image image="set:sword.png image:full_image" />
 	<Mesh file="sword.mesh" />
 	<Attribute
 		level_requirement="75"
@@ -790,6 +805,7 @@ s		modchance_damage_air_mod="float"
 
 <!-- gods blade -->
 <Item type="weapon" subtype="gods_sw" size="medium">
+	<Image image="set:sword.png image:full_image" />
 	<Mesh file="sword.mesh" />
 	<Attribute
 		level_requirement="80"

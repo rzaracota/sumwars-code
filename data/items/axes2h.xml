@@ -2,6 +2,7 @@
 
 <!-- Holzfälleraxt -->
 <Item type="weapon" subtype="lumber_axe" size="big">
+	<Image image="set:axe2H.png image:full_image" />
 	<Mesh file="battleaxe.mesh" />
 	<Attribute
 		level_requirement="1"
@@ -37,6 +38,7 @@
 
 <!-- Großaxt-->
 <Item type="weapon" subtype="great_axe" size="big">
+	<Image image="set:axe2H.png image:full_image" />
 	<Mesh file="battleaxe.mesh" />
 	<Attribute
 		level_requirement="3"
@@ -72,6 +74,7 @@
 
 <!-- Reißeraxt -->
 <Item type="weapon" subtype="riping_axe" size="big">
+	<Image image="set:axe2H.png image:full_image" />
 	<Mesh file="battleaxe.mesh" />
 	<Attribute
 		level_requirement="5"
@@ -107,6 +110,7 @@
 
 <!-- Henkersaxt -->
 <Item type="weapon" subtype="execut_axe" size="big">
+	<Image image="set:axe2H.png image:full_image" />
 	<Mesh file="battleaxe.mesh" />
 	<Attribute
 		level_requirement="8"
@@ -142,6 +146,7 @@
 
 <!-- Schmetteraxt -->
 <Item type="weapon" subtype="iron_axe" size="big">
+	<Image image="set:axe2H.png image:full_image" />
 	<Mesh file="battleaxe.mesh" />
 	<Attribute
 		level_requirement="13"
@@ -177,6 +182,7 @@
 
 <!-- Ogerbeil -->
 <Item type="weapon" subtype="ogrhac_axe" size="big">
+	<Image image="set:axe2H.png image:full_image" />
 	<Mesh file="battleaxe.mesh" />
 	<Attribute
 		level_requirement="19"
@@ -212,6 +218,7 @@
 
 <!-- Sensenaxt -->
 <Item type="weapon" subtype="scythe_axe" size="big">
+	<Image image="set:axe2H.png image:full_image" />
 	<Mesh file="battleaxe.mesh" />
 	<Attribute
 		level_requirement="25"
@@ -247,6 +254,7 @@
 
 <!-- Barbarenstreitaxt -->
 <Item type="weapon" subtype="barbar_axe" size="big">
+	<Image image="set:axe2H.png image:full_image" />
 	<Mesh file="battleaxe.mesh" />
 	<Attribute
 		level_requirement="30"
@@ -282,6 +290,7 @@
 
 <!-- Knochenbrecheraxt -->
 <Item type="weapon" subtype="bnebrk_axe" size="big">
+	<Image image="set:axe2H.png image:full_image" />
 	<Mesh file="battleaxe.mesh" />
 	<Attribute
 		level_requirement="35"
@@ -317,6 +326,7 @@
 
 <!-- Riesenaxt -->
 <Item type="weapon" subtype="giant_axe" size="big">
+	<Image image="set:axe2H.png image:full_image" />
 	<Mesh file="battleaxe.mesh" />
 	<Attribute
 		level_requirement="40"
@@ -352,6 +362,7 @@
 
 <!-- Schlachtaxt -->
 <Item type="weapon" subtype="slautr_axe" size="big">
+	<Image image="set:axe2H.png image:full_image" />
 	<Mesh file="battleaxe.mesh" />
 	<Attribute
 		level_requirement="45"
@@ -387,6 +398,7 @@
 
 <!-- Ogerreißer -->
 <Item type="weapon" subtype="ogrkil_axe" size="big">
+	<Image image="set:axe2H.png image:full_image" />
 	<Mesh file="battleaxe.mesh" />
 	<Attribute
 		level_requirement="50"
@@ -422,6 +434,7 @@
 
 <!-- Zwergenstahlaxt -->
 <Item type="weapon" subtype="dwfstl_axe" size="big">
+	<Image image="set:axe2H.png image:full_image" />
 	<Mesh file="battleaxe.mesh" />
 	<Attribute
 		level_requirement="55"
@@ -457,6 +470,7 @@
 
 <!-- Sternenaxt -->
 <Item type="weapon" subtype="star_axe" size="big">
+	<Image image="set:axe2H.png image:full_image" />
 	<Mesh file="battleaxe.mesh" />
 	<Attribute
 		level_requirement="60"
@@ -492,6 +506,7 @@
 
 <!-- Königsaxt -->
 <Item type="weapon" subtype="king_axe" size="big">
+	<Image image="set:axe2H.png image:full_image" />
 	<Mesh file="battleaxe.mesh" />
 	<Attribute
 		level_requirement="65"
@@ -527,6 +542,7 @@
 
 <!-- Folteraxt -->
 <Item type="weapon" subtype="tortur_axe" size="big">
+	<Image image="set:axe2H.png image:full_image" />
 	<Mesh file="battleaxe.mesh" />
 	<Attribute
 		level_requirement="70"
@@ -562,6 +578,7 @@
 
 <!-- Eislandaxt -->
 <Item type="weapon" subtype="ice_axe" size="big">
+	<Image image="set:axe2H.png image:full_image" />
 	<Mesh file="battleaxe.mesh" />
 	<Attribute
 		level_requirement="75"
@@ -599,6 +616,7 @@
 
 <!-- Todesaxt -->
 <Item type="weapon" subtype="death_axe" size="big">
+	<Image image="set:axe2H.png image:full_image" />
 	<Mesh file="battleaxe.mesh" />
 	<Attribute
 		level_requirement="80"
