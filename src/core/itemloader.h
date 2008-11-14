@@ -121,7 +121,7 @@ class ItemLoader
 	 */
 	std::list<ItemMeshData*>* loadItemMeshData(const char* pFilename);
 	
-	bool loadItemImageData(const char* pFilename, std::list<ItemImageData*> &item_image_data_list);
+	bool loadItemImageData(const char* pFilename, std::list<ItemImageData> &item_image_data_list);
 	
 	private:
 	
@@ -173,9 +173,9 @@ class ItemLoader
 	 */
 	void searchItemMeshData(TiXmlNode* pParent);
 	
-	int generateItemImageData(TiXmlElement* pElement, std::string element, std::list<ItemImageData*> &item_image_data_list);
+	int generateItemImageData(TiXmlElement* pElement, std::string element, std::list<ItemImageData> &item_image_data_list);
 	
-	void searchItemImageData(TiXmlNode* pParent, std::list<ItemImageData*> &item_image_data_list);
+	void searchItemImageData(TiXmlNode* pParent, std::list<ItemImageData> &item_image_data_list);
 	
 	
 	/**
@@ -211,7 +211,7 @@ class ItemLoader
 	 */
 	std::list<ItemMeshData*>* m_item_mesh_list;
 	
-	ItemImageData* m_item_image_data;
+	ItemImageData m_item_image_data;
 	
 	/**
 	 * \var float m_weapon_mod[31]

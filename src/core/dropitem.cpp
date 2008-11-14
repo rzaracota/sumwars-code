@@ -1,5 +1,10 @@
 #include "dropitem.h"
 
+DropItem::DropItem()
+{
+	m_angle = Random::random()*3.14159*2;
+}
+
 void DropItem::toString(CharConv* cv)
 {
 

@@ -677,6 +677,7 @@ bool World::insertPlayerIntoRegion(WorldObject* player, short region, LocationNa
 		
 		// bisheriges Kommando abbrechen
 		static_cast<Creature*>(player)->clearCommand();
+		static_cast<Creature*>(player)->getAction()->m_type = Action::NOACTION;
 
 		if (m_server)
 		{
@@ -1564,14 +1565,9 @@ bool World::writeEvent(Region* region,Event* event, CharConv* cv)
 		if (object != 0)
 		{
 			cv->toBuffer<short>((short) event->m_data);
-			if (event->m_data != Equipement::GOLD)
-			{
-				static_cast<Player*>(object)->getEquipement()->getItem(event->m_data)->toString(cv);
-			}
-			else
-			{
-				cv->toBuffer<int>(static_cast<Player*>(object)->getEquipement()->getGold());
-			}
+			static_cast<Player*>(object)->getEquipement()->getItem(event->m_data)->toString(cv);
+
+			
 		}
 		else
 			return false;
@@ -1584,9 +1580,16 @@ bool World::writeEvent(Region* region,Event* event, CharConv* cv)
 		if (object != 0)
 		{
 			cv->toBuffer<short>((short) event->m_data);
-			if (static_cast<Player*>(object)->getEquipement()->getItem(event->m_data) ==0)
-				ERRORMSG("no item at pos %i",event->m_data);
-			static_cast<Player*>(object)->getEquipement()->getItem(event->m_data)->toStringComplete(cv);
+			if (event->m_data != Equipement::GOLD)
+			{
+				if (static_cast<Player*>(object)->getEquipement()->getItem(event->m_data) ==0)
+					ERRORMSG("no item at pos %i",event->m_data);
+				static_cast<Player*>(object)->getEquipement()->getItem(event->m_data)->toStringComplete(cv);
+			}
+			else
+			{
+				cv->toBuffer<int>(static_cast<Player*>(object)->getEquipement()->getGold());
+			}
 		}
 		else
 			return false;

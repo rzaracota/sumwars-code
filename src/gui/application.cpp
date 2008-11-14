@@ -525,6 +525,10 @@ bool Application::loadResources()
 	Ogre::FileInfoList::iterator it;
 	std::string file;
 	
+	ItemLoader itemloader;
+	std::list<ItemImageData> item_image_data_list;
+	std::list<ItemImageData>::iterator jt;
+	
 	// Items initialisieren
 	ItemFactory::init();
 	files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("items","*.xml");
@@ -537,25 +541,15 @@ bool Application::loadResources()
 		ItemFactory::loadItemData(file);
 		Scene::loadItemData(file);
 		
-		// Mesh Images aus XML Laden // TODO Muss noch an richtige Stelle verschoben werden
-		/*
-			ImageLoader imageloader;
-			std::list<ItemImageData*> item_image_data_list;
-			imageloader.loadItemImageData(file.c_str(), object_template_list, name_list);
+		// Mesh Images aus XML Laden 
+		item_image_data_list.clear();
+		itemloader.loadItemImageData(file.c_str(), item_image_data_list);
 		
-			for (it=item_image_data_list.begin(); it!=item_image_data_list.end(); it++)
-			{
-			ItemWindow::registerItemImage((*it)->subtype,(*it)->image);
+		for (jt=item_image_data_list.begin(); jt!=item_image_data_list.end(); jt++)
+		{
+			DEBUG5("registering image %s for item %s",jt->m_image.c_str(), jt->m_subtype.c_str());
+			ItemWindow::registerItemImage(jt->m_subtype,jt->m_image);
 		}
-		
-		// Liste aus Speicher loeschen
-			for (it=item_image_data_list.begin(); it!=item_image_data_list.end(); it++)
-			{
-			delete *it;
-		}
-		*/
-	
-		
 	}
 	
 	// Monster initialisieren

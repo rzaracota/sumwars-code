@@ -122,6 +122,7 @@ s		modchance_damage_air_mod="float"
 <!-- Dagger -->
 <Item type="weapon" subtype="dagger_sw" size="medium">
 	<Mesh file="sword.mesh" />
+	<Image image="set:sword.png image:full_image" />
 	<Attribute
 		level_requirement="1"
 		character_requirement="15"

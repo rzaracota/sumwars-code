@@ -5,6 +5,7 @@
 #include "itemlist.h"
 #include <sstream>
 #include <map>
+#include "random.h"
 
 /**
  * \struct DropItem
@@ -13,22 +14,34 @@
 struct DropItem
 {
 	/**
+	 * \fn DropItem()
+	 * \brief Konstruktor
+	 */
+	DropItem();
+	
+	/**
 	 * \var Item* m_item
 	 * \brief Zeiger auf das Item
 	 */
 	Item* m_item;
 	
 	/**
-	 * \brief short m_x
+	 * \var short m_x
 	 * \brief Position (x-Richtung) in 0.5x0.5 Feldern
 	 */
 	short m_x;
 
 	/**
-	 * \brief short m_y
+	 * \var short m_y
 	 * \brief Position (y-Richtung) in 0.5x0.5 Feldern
 	 */
 	short m_y;
+	
+	/**
+	 * \var float m_angle
+	 * \brief Drehwinkel mit dem der Gegenstand dargestellt wird
+	 */
+	float m_angle;
 	
 	/**
 	 * \var float m_time

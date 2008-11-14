@@ -925,6 +925,10 @@ void Scene::createItem(DropItem* di, std::string& name)
 	// Je nach Typ das richtige Mesh benutzen
 	Ogre::Entity* ent;
 	ent = m_scene_manager->createEntity(name, ri.m_mesh);
+	
+	// Objekt drehen
+	float angle = di->m_angle;
+	obj_node->setDirection(cos(angle),0,sin(angle),Ogre::Node::TS_WORLD);
 
 	obj_node->attachObject(ent);
 

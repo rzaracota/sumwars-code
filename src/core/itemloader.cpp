@@ -669,28 +669,21 @@ std::list<ItemMeshData*>* ItemLoader::loadItemMeshData(const char* pFilename)
 
 //##############################  ItemImageData  ###############################
 
-int ItemLoader::generateItemImageData(TiXmlElement* pElement, std::string element, std::list<ItemImageData*> &item_image_data_list)
+int ItemLoader::generateItemImageData(TiXmlElement* pElement, std::string element, std::list<ItemImageData> &item_image_data_list)
 {
 	if ( !pElement ) return 0;
 
 	TiXmlAttribute* pAttrib=pElement->FirstAttribute();
 	int i=0;
-	int ival;
-	double dval;
 	
 	if (element == "Item")
 	{
 		DEBUG5("Item");
 		
-		if (m_item_image_data == 0)
-		{
-			m_item_image_data = new ItemImageData;
-		}
-		
 		while (element == "Item" && pAttrib)
 		{
 			if (!strcmp(pAttrib->Name(), "subtype"))
-				m_item_image_data->m_subtype = pAttrib->Value();
+				m_item_image_data.m_subtype = pAttrib->Value();
 
 			i++;
 			pAttrib=pAttrib->Next();
@@ -703,7 +696,7 @@ int ItemLoader::generateItemImageData(TiXmlElement* pElement, std::string elemen
 		while (element == "Image" && pAttrib)
 		{
 			if (!strcmp(pAttrib->Name(), "image"))
-				m_item_image_data->m_image = pAttrib->Value();
+				m_item_image_data.m_image = pAttrib->Value();
 			
 			i++;
 			pAttrib=pAttrib->Next();
@@ -714,12 +707,11 @@ int ItemLoader::generateItemImageData(TiXmlElement* pElement, std::string elemen
 }
 
 
-void ItemLoader::searchItemImageData(TiXmlNode* pParent, std::list<ItemImageData*> &item_image_data_list)
+void ItemLoader::searchItemImageData(TiXmlNode* pParent, std::list<ItemImageData> &item_image_data_list)
 {
 	if ( !pParent ) return;
 
 	TiXmlNode* pChild;
-//	TiXmlText* pText;
 
 	int t = pParent->Type();
 	int num;
@@ -753,16 +745,14 @@ void ItemLoader::searchItemImageData(TiXmlNode* pParent, std::list<ItemImageData
 		if ( !strcmp(pChild->Value(), "Item") && pChild->Type() == TiXmlNode::ELEMENT)
 		{
 			item_image_data_list.push_back(m_item_image_data);
-			m_item_image_data = 0;
 			DEBUG5("Item Image loaded");
 		}
 	}
 }
 
 
-bool ItemLoader::loadItemImageData(const char* pFilename, std::list<ItemImageData*> &item_image_data_list)
+bool ItemLoader::loadItemImageData(const char* pFilename, std::list<ItemImageData> &item_image_data_list)
 {
-	m_item_image_data = 0;
 	
 	/*object_list = new std::list<FixedObjectData*>;
 	subtype_list = new std::list<std::string>;*/

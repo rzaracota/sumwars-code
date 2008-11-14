@@ -431,8 +431,6 @@ int TemplateLoader::generateObjectTemplate(TiXmlElement* pElement, std::string e
 
 	TiXmlAttribute* pAttrib=pElement->FirstAttribute();
 	int i=0;
-	int ival;
-	double dval;
 	
 	if (element == "ObjectTemplate")
 	{
@@ -576,7 +574,6 @@ int TemplateLoader::generateObjectGroupTemplate(TiXmlElement* pElement, std::str
 
 	TiXmlAttribute* pAttrib=pElement->FirstAttribute();
 	int i=0;
-	int ival;
 	double dval;
 	
 	if (element == "ObjectGroupTemplate")
