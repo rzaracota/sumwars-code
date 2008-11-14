@@ -121,7 +121,7 @@ s		modchance_damage_air_mod="float"
 <!-- TWO HANDED SWORDS -->
 <!-- farmers two hand sword-->
 <Item type="weapon" subtype="farm2h_sw" size="big">
-	<Image image="set:sword.png image:full_image" />
+	<Image image="set:farm2h_sw.png image:full_image" />
 	<Mesh file="sword2h.mesh" />
 	<Attribute
 		level_requirement="1"
@@ -157,7 +157,7 @@ s		modchance_damage_air_mod="float"
 
 <!-- mercenary blade -->
 <Item type="weapon" subtype="merc2h_sw" size="big">
-	<Image image="set:sword.png image:full_image" />
+	<Image image="set:merc2h_sw.png image:full_image" />
 	<Mesh file="sword2h.mesh" />
 	<Attribute
 		level_requirement="3"

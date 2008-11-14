@@ -3,6 +3,7 @@
 <!-- hatchet / Beil -->
 <Item type="weapon" subtype="hatch_axe" size="medium">
 	<Mesh file="axe.mesh" />
+	<Image image="set:hatch_axe.png image:full_image" />
 	<Attribute
 		level_requirement="1"
 		character_requirement="15"
@@ -38,6 +39,7 @@
 <!-- bronze_axe-->
 <Item type="weapon" subtype="bronze_axe" size="medium">
 	<Mesh file="axe.mesh" />
+	<Image image="set:bronze_axe.png image:full_image" />
 	<Attribute
 		level_requirement="3"
 		character_requirement="15"
@@ -73,6 +75,7 @@
 <!-- Eisenbeil -->
 <Item type="weapon" subtype="ironha_axe" size="medium">
 	<Mesh file="axe.mesh" />
+	<Image image="set:ironha_axe.png image:full_image" />
 	<Attribute
 		level_requirement="5"
 		character_requirement="15"

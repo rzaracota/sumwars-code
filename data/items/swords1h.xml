@@ -6,7 +6,7 @@
 <Item type="weapon" subtype="short_sw" size="medium">
 	<Mesh file="sword.mesh" />
 	<Attribute
-		level_requirement="int" 
+		level_requirement="int"
 		character_requirement="char"
 		price="int"
 		min_enchant="float"
@@ -158,6 +158,7 @@ s		modchance_damage_air_mod="float"
 <!-- Rostiger Dolch-->
 <Item type="weapon" subtype="crude_sw" size="medium">
 	<Mesh file="sword.mesh" />
+	<Image image="set:crude_sw.png image:full_image" />
 	<Attribute
 		level_requirement="1"
 		character_requirement="15"
@@ -193,6 +194,7 @@ s		modchance_damage_air_mod="float"
 <!-- Short Sword -->
 <Item type="weapon" subtype="short_sw" size="medium">
 	<Mesh file="sword.mesh" />
+	<Image image="set:sword.png image:full_image" />
 	<Attribute
 		level_requirement="3"
 		character_requirement="15"
@@ -262,7 +264,7 @@ s		modchance_damage_air_mod="float"
 
 <!-- Old Sword -->
 <Item type="weapon" subtype="old_sw" size="medium">
-	<Image image="set:sword.png image:full_image" />
+	<Image image="set:old_sword.png image:full_image" />
 	<Mesh file="sword.mesh" />
 	<Attribute
 		level_requirement="6"
