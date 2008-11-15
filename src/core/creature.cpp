@@ -300,7 +300,7 @@ void Creature::initAction()
 
 	DEBUG5("resulting time %f",m_action.m_time);
 	// Drehwinkel setzen
-	if (aci->m_distance != Action::SELF)
+	if (aci->m_distance != Action::SELF && m_action.m_type != Action::TAKE_ITEM)
 	{
 		
 		getShape()->m_angle = (m_action.m_goal - getShape()->m_center).angle();

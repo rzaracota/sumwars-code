@@ -71,9 +71,9 @@ void Action::init()
 
 	a = &(Action::m_base_info[Action::TAKE_ITEM]);
 	a->m_timer_nr=0;
-	a->m_standard_time=20;
+	a->m_standard_time=1;
 	a->m_timer=0;
-	a->m_base_action = Action::WALK;
+	a->m_base_action = Action::NOACTION;
 	a->m_critical_perc=0.7;
 	a->m_distance = MELEE;
 	a->m_flags =0;
