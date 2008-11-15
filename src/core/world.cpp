@@ -1579,11 +1579,11 @@ bool World::writeEvent(Region* region,Event* event, CharConv* cv)
 		object = (*m_players)[event->m_id];
 		if (object != 0)
 		{
-			cv->toBuffer<short>((short) event->m_data);
 			if (event->m_data != Equipement::GOLD)
 			{
 				if (static_cast<Player*>(object)->getEquipement()->getItem(event->m_data) ==0)
 					ERRORMSG("no item at pos %i",event->m_data);
+				cv->toBuffer<short>((short) event->m_data);
 				static_cast<Player*>(object)->getEquipement()->getItem(event->m_data)->toStringComplete(cv);
 			}
 			else
@@ -1821,7 +1821,7 @@ bool World::processEvent(Region* region,CharConv* cv)
 		case Event::ITEM_REMOVED:
 			if (region !=0)
 			{
-				DEBUG("remove item %i",event.m_id);
+				DEBUG5("remove item %i",event.m_id);
 				region->deleteItem(event.m_id,true);
 			}
 			else
