@@ -67,7 +67,7 @@ bool Player::init()
 	getBaseAttr()->m_level=1;
 
 	m_attribute_points=0;
-	m_skill_points=25;
+	m_skill_points=0;
 	
 	m_fraction = FRAC_PLAYER_PARTY;
 

@@ -23,6 +23,18 @@ class ControlPanel : public ItemWindow
 		 */
 		virtual void update();
 		
+		/**
+		 * \fn void onButtonCharInfoClicked(const CEGUI::EventArgs& evt)
+		 * \brief Behandelt Klick auf CharakterInfo Button
+		 */
+		bool onButtonCharInfoClicked(const CEGUI::EventArgs& evt);
+		
+		/**
+		 * \fn void onButtonSkilltreeClicked(const CEGUI::EventArgs& evt)
+		 * \brief Behandelt Klick auf Skilltree Button
+		 */
+		bool onButtonSkilltreeClicked(const CEGUI::EventArgs& evt);
+		
 	private:
 		/**
 		* \fn bool onButtonSaveExitClicked(const CEGUI::EventArgs& evt)
@@ -37,22 +49,10 @@ class ControlPanel : public ItemWindow
 		bool onButtonInventoryClicked(const CEGUI::EventArgs& evt);
 
 		/**
-		 * \fn void onButtonCharInfoClicked(const CEGUI::EventArgs& evt)
-		 * \brief Behandelt Klick auf CharakterInfo Button
-		 */
-		bool onButtonCharInfoClicked(const CEGUI::EventArgs& evt);
-
-		/**
 		 *\fn bool onButtonPartyClicked(const CEGUI::EventArgs& evt)
 		 * \brief Behandelt Klick auf Party Button
 		 */
 		bool onButtonPartyClicked(const CEGUI::EventArgs& evt);
-
-		/**
-		 * \fn void onButtonSkilltreeClicked(const CEGUI::EventArgs& evt)
-		 * \brief Behandelt Klick auf Skilltree Button
-		 */
-		bool onButtonSkilltreeClicked(const CEGUI::EventArgs& evt);
 
 		/**
 		 * \fn void onButtonOpenChatClicked(const CEGUI::EventArgs& evt)

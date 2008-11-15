@@ -296,6 +296,32 @@ void MainWindow::update()
 			// Skilltree aktualisieren
 			m_sub_windows["SkillTree"]->update();
 		}
+		
+		// + Buttons fuer Levelup aktualisieren
+		bool vis = false;
+		CEGUI::PushButton* btn;
+		btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("CharInfoUpgradeButton"));
+		if (!(wflags & Document::CHARINFO) && m_document->getLocalPlayer()->getAttributePoints() >0)
+		{
+			vis = true;
+		}
+		
+		if (btn->isVisible() != vis)
+		{
+			btn->setVisible(vis);
+		}
+		
+		vis = false;
+		btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("SkillUpgradeButton"));
+		if (!(wflags & Document::SKILLTREE) && m_document->getLocalPlayer()->getSkillPoints() >0)
+		{
+			vis = true;
+		}
+		
+		if (btn->isVisible() != vis)
+		{
+			btn->setVisible(vis);
+		}
 	}
 }
 
@@ -355,6 +381,28 @@ void MainWindow::setupControlPanel()
 	
 	// Charakterinfo anfangs ausblenden
 	m_game_screen->addChildWindow(wnd->getCEGUIWindow());
+	
+	// zwei weitere Buttons die Skilltree bzw Charinfo oeffnen, wenn Punkte zu verteilen sind
+	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
+	CEGUI::PushButton* btn;
+	
+	btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", "CharInfoUpgradeButton"));
+	m_game_screen->addChildWindow(btn);
+	btn->setPosition(CEGUI::UVector2(cegui_reldim(0.02f), cegui_reldim( 0.65f)));
+	btn->setSize(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.07f)));
+	btn->setText("+");
+	btn->setWantsMultiClickEvents(false);
+	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&ControlPanel::onButtonCharInfoClicked, static_cast<ControlPanel*>(wnd)));
+	btn->setVisible(false);
+	
+	btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", "SkillUpgradeButton"));
+	m_game_screen->addChildWindow(btn);
+	btn->setPosition(CEGUI::UVector2(cegui_reldim(0.92f), cegui_reldim( 0.65f)));
+	btn->setSize(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.07f)));
+	btn->setText("+");
+	btn->setWantsMultiClickEvents(false);
+	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&ControlPanel::onButtonSkilltreeClicked, static_cast<ControlPanel*>(wnd)));
+	btn->setVisible(false);
 }
 
 void MainWindow::setupCharInfo()
@@ -493,6 +541,7 @@ bool MainWindow::setupPartyInfo()
 
 
 
+
 void  MainWindow::setWindowExtents(int width, int height){
 	//Set Mouse Region.. if window resizes, we should alter this to reflect as well
 	const OIS::MouseState &ms = m_mouse->getMouseState();
@@ -602,6 +651,17 @@ void MainWindow::updateObjectInfo()
 	Ogre::Ray ray = camera->getCameraToViewportRay(relx,rely);
 
 	Ogre::Entity* ent;
+	
+	// Ort an dem der Strahl den Boden beruehrt berechnen
+	const Ogre::Vector3& orig = ray.getOrigin();
+	const Ogre::Vector3& dir = ray.getDirection();
+	
+	// Schnittpunkt mit der Ebene y=0 ausrechnen
+	Ogre::Vector3 p = orig + dir*(orig.y/(-dir.y));
+	
+	// Umrechnen in Spielkoordinaten
+	float gx = p.x/50;
+	float gy = p.z/50;
 
 
 	// Ergebnispaar einer Intersection Abfrage
@@ -722,7 +782,12 @@ void MainWindow::updateObjectInfo()
 		// Nach Items unterm Mauszeiger suchen
 		std::map<int,string>* itms = m_scene->getDropItems();
 		std::map<int,string>::iterator it;
-
+		
+		float mindist = 1000000;
+		float dist;
+		float ix,iy;
+		DropItem* di;
+		
 		for (it = itms->begin();it != itms->end();++it)
 		{
 			ent = m_scene_manager->getEntity(it->second);
@@ -735,8 +800,21 @@ void MainWindow::updateObjectInfo()
 			{
 
 				// Objekt wird vom Kamerastrahl geschnitten
-				objname = it->second;
-				break;
+				// Das Objekt waehlen, dass am naechsten am Mauszeiger ist
+				di = World::getWorld()->getRegion(rid)->getDropItem(it->first);
+				if (di ==0)
+				{
+					continue;
+				}
+				
+				ix = di->m_x/2.0;
+				iy = di->m_y/2.0;
+				dist = (gx-ix)*(gx-ix) + (gy-iy)*(gy-iy);
+				if (dist < mindist)
+				{
+					mindist = dist;	
+					objname = it->second;
+				}
 
 			}
 
