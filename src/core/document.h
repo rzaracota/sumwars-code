@@ -206,6 +206,12 @@ class Document
 		 * \brief Gibt an, ob die Shift-Taste festgehalten wird
 		 */
 		bool m_shift_hold;
+		
+		/**
+		 * \var bool m_alt_hold
+		 * \brief Gibt an, ob die Alt-Taste festgehalten wird
+		 */
+		bool m_alt_hold;
 
 		 /**
 		 * \var m_clicked_object_id

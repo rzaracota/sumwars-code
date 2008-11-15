@@ -36,6 +36,7 @@ Document::Document()
 	getGUIState()->m_left_mouse_hold= false;
 	getGUIState()->m_right_mouse_hold= false;
 	getGUIState()->m_shift_hold = false;
+	getGUIState()->m_alt_hold = false;
 	getGUIState()->m_sheet= MAIN_MENU;
 	getGUIState()->m_shown_windows = NO_WINDOWS;
 	//getGUIState()->m_pressed_key = OIS::KC_UNASSIGNED;
@@ -510,7 +511,7 @@ void Document::increaseAttribute(CreatureBaseAttr::Attribute attr)
 	ClientCommand command;
 	command.m_button = BUTTON_INCREASE_ATTRIBUTE;
 	command.m_id = attr;
-	DEBUG("increasing attribute %i",attr);
+	DEBUG5("increasing attribute %i",attr);
 	sendCommand(&command);
 }
 

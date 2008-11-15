@@ -1111,6 +1111,17 @@ bool MainWindow::keyPressed(const OIS::KeyEvent &evt) {
 	m_cegui_system->injectKeyDown(evt.key);
 	DEBUG5("keycode %x",evt.key);
 	bool ret = m_cegui_system->injectChar(ch);
+	
+	if (evt.key == OIS::KC_RSHIFT || evt.key == OIS::KC_LSHIFT)
+	{
+		m_document->getGUIState()->m_shift_hold = true;
+	}
+	
+	if (evt.key == OIS::KC_LMENU)
+	{
+		m_document->getGUIState()->m_alt_hold = true;
+	}
+	
 	if (not ret)
 	{
 		ret = m_document->onKeyPress(evt.key);
@@ -1122,7 +1133,17 @@ bool MainWindow::keyReleased(const OIS::KeyEvent &evt)
 {
 
 	bool ret = m_cegui_system->injectKeyUp(evt.key);
+	
+	if (evt.key == OIS::KC_RSHIFT || evt.key == OIS::KC_LSHIFT)
+	{
+		m_document->getGUIState()->m_shift_hold = false;
+	}
 
+	if (evt.key == OIS::KC_LMENU)
+	{
+		m_document->getGUIState()->m_alt_hold = false;
+	}
+	
 	if (not ret)
 	{
 		ret = m_document->onKeyRelease(evt.key);
