@@ -1864,6 +1864,17 @@ string Action::getDescription(ActionType type)
     #endif
 }
 
+Action::ActionType Action::getActionType(std::string name)
+{
+	std::map<std::string, ActionType>::iterator it;
+	it = m_enum_string_to_type.find(name);
+	if (it != m_enum_string_to_type.end())
+	{
+		return it->second;
+	}
+	return NOACTION;
+}
+
 void Action::toString(CharConv* cv)
 {
 

@@ -219,6 +219,7 @@ void Application::run()
 			ERRORMSG("Error message: %s",e.getMessage().c_str());
 		}
 
+
 		timer2.reset();
 		
 		m_cegui_system->injectTimePulse(frametime/1000.0);

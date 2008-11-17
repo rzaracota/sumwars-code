@@ -373,6 +373,13 @@ public:
 	 * \return Beschreibung der Aktion
 	 */
 	static string getDescription(ActionType type);
+	
+	/**
+	 * \fn static ActionType getType(std::string name)
+	 * \brief Gibt zu einem Name einer Aktion den enum Wert aus
+	 * \param name Name der Aktion
+	 */
+	static ActionType getActionType(std::string name);
 
 	/**
 	 * \fn void toString(CharConv* cv)
