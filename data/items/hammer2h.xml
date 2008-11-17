@@ -22,6 +22,7 @@
 	/>
 	<EquipEffect />
 	<WeaponAttribute
+		weapon_type="hammer"
 		damage_min_physical="8"
 		damage_max_physical="14"
 		damage_attack="30"
@@ -58,6 +59,7 @@
 	/>
 	<EquipEffect />
 	<WeaponAttribute
+		weapon_type="hammer"
 		damage_min_physical="17"
 		damage_max_physical="33"
 		damage_attack="30"
@@ -95,6 +97,7 @@
 	/>
 	<EquipEffect />
 	<WeaponAttribute
+		weapon_type="hammer"
 		damage_min_physical="31"
 		damage_max_physical="37"
 		damage_attack="34"
@@ -132,6 +135,7 @@
 	/>
 	<EquipEffect />
 	<WeaponAttribute
+		weapon_type="hammer"
 		damage_min_physical="37"
 		damage_max_physical="42"
 		damage_attack="55"
@@ -169,6 +173,7 @@
 	/>
 	<EquipEffect />
 	<WeaponAttribute
+		weapon_type="hammer"
 		damage_min_physical="28"
 		damage_max_physical="36"
 		damage_attack="58"
@@ -206,6 +211,7 @@
 	/>
 	<EquipEffect />
 	<WeaponAttribute
+		weapon_type="hammer"
 		damage_min_physical="34"
 		damage_max_physical="36"
 		damage_min_fire="15"
@@ -244,6 +250,7 @@
 	/>
 	<EquipEffect />
 	<WeaponAttribute
+		weapon_type="hammer"
 		damage_min_physical="52"
 		damage_max_physical="91"
 		damage_attack="32"
@@ -280,6 +287,7 @@
 	/>
 	<EquipEffect />
 	<WeaponAttribute
+		weapon_type="hammer"
 		damage_min_physical="59"
 		damage_max_physical="81"
 		damage_attack="89"
@@ -317,6 +325,7 @@
 	/>
 	<EquipEffect />
 	<WeaponAttribute
+		weapon_type="hammer"
 		damage_min_physical="66"
 		damage_max_physical="88"
 		damage_attack="96"
@@ -354,6 +363,7 @@
 	/>
 	<EquipEffect/>
 	<WeaponAttribute
+		weapon_type="hammer"
 		damage_min_physical="107"
 		damage_max_physical="119"
 		damage_attack="73"
@@ -391,6 +401,7 @@
 	/>
 	<EquipEffect />
 	<WeaponAttribute
+		weapon_type="hammer"
 		damage_min_physical="81"
 		damage_max_physical="104"
 		damage_attack="122"
@@ -428,6 +439,7 @@
 	/>
 	<EquipEffect/>
 	<WeaponAttribute
+		weapon_type="hammer"
 		damage_min_physical="108"
 		damage_max_physical="153"
 		damage_attack="131"
@@ -465,6 +477,7 @@
 	/>
 	<EquipEffect />
 	<WeaponAttribute
+		weapon_type="hammer"
 		damage_min_physical="94"
 		damage_max_physical="124"
 		damage_attack="134"
@@ -501,6 +514,7 @@
 	/>
 	<EquipEffect />
 	<WeaponAttribute
+		weapon_type="hammer"
 		damage_min_physical="109"
 		damage_max_physical="138"
 		damage_attack="126"
@@ -538,6 +552,7 @@
 	/>
 	<EquipEffect/>
 	<WeaponAttribute
+		weapon_type="hammer"
 		damage_min_physical="106"
 		damage_max_physical="138"
 		damage_attack="158"
@@ -575,6 +590,7 @@
 	/>
 	<EquipEffect />
 	<WeaponAttribute
+		weapon_type="hammer"
 		damage_min_physical="112"
 		damage_max_physical="146"
 		damage_attack="168"
@@ -612,6 +628,7 @@
 	/>
 	<EquipEffect />
 	<WeaponAttribute
+		weapon_type="hammer"
 		damage_min_physical="121"
 		damage_max_physical="155"
 		damage_attack="189"
@@ -649,6 +666,7 @@
 	/>
 	<EquipEffect />
 	<WeaponAttribute
+		weapon_type="hammer"
 		damage_min_physical="134"
 		damage_max_physical="178"
 		damage_attack="217"

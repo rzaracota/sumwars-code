@@ -83,7 +83,8 @@ s		modchance_damage_air_mod="float"
 		xabilities5="int"
 		ximmunity="char"
 	/>
-	<WeaponAttribute
+		<WeaponAttribute
+		weapon_type="sword"
 		damage_min_physical="float"
 		damage_max_physical="float"
 		damage_min_air="float"
@@ -139,7 +140,8 @@ s		modchance_damage_air_mod="float"
 		modchance_power_mod="0.1"
 	/>
 	<EquipEffect />
-	<WeaponAttribute
+		<WeaponAttribute
+		weapon_type="sword"
 		damage_min_physical="4"
 		damage_max_physical="6"
 		damage_attack="30"
@@ -174,7 +176,8 @@ s		modchance_damage_air_mod="float"
 		modchance_power_mod="0.1"
 	/>
 	<EquipEffect />
-	<WeaponAttribute
+		<WeaponAttribute
+		weapon_type="sword"
 		damage_min_physical="3"
 		damage_max_physical="5"
 		damage_attack="30"
@@ -210,6 +213,7 @@ s		modchance_damage_air_mod="float"
 	/>
 	<EquipEffect />
 	<WeaponAttribute
+		weapon_type="sword"
 		damage_min_physical="9"
 		damage_max_physical="15"
 		damage_attack="35"
@@ -244,7 +248,8 @@ s		modchance_damage_air_mod="float"
 		modchance_power_mod="0.1"
 	/>
 	<EquipEffect />
-	<WeaponAttribute
+		<WeaponAttribute
+		weapon_type="sword"
 		damage_min_physical="12"
 		damage_max_physical="16"
 		damage_attack="44"
@@ -279,7 +284,8 @@ s		modchance_damage_air_mod="float"
 		modchance_power_mod="0.1"
 	/>
 	<EquipEffect />
-	<WeaponAttribute
+		<WeaponAttribute
+		weapon_type="sword"
 		damage_min_physical="11"
 		damage_max_physical="17"
 		damage_attack="38"
@@ -314,7 +320,8 @@ s		modchance_damage_air_mod="float"
 		modchance_power_mod="0.1"
 	/>
 	<EquipEffect />
-	<WeaponAttribute
+		<WeaponAttribute
+		weapon_type="sword"
 		damage_min_physical="17"
 		damage_max_physical="23"
 		damage_attack="45"
@@ -349,7 +356,8 @@ s		modchance_damage_air_mod="float"
 		modchance_power_mod="0.1"
 	/>
 	<EquipEffect />
-	<WeaponAttribute
+		<WeaponAttribute
+		weapon_type="sword"
 		damage_min_physical="18"
 		damage_max_physical="26"
 		damage_attack="55"
@@ -384,7 +392,8 @@ s		modchance_damage_air_mod="float"
 		modchance_power_mod="0.1"
 	/>
 	<EquipEffect />
-	<WeaponAttribute
+		<WeaponAttribute
+		weapon_type="sword"
 		damage_min_physical="22"
 		damage_max_physical="31"
 		damage_attack="65"
@@ -419,7 +428,8 @@ s		modchance_damage_air_mod="float"
 		modchance_power_mod="0.1"
 	/>
 	<EquipEffect />
-	<WeaponAttribute
+		<WeaponAttribute
+		weapon_type="sword"
 		damage_min_physical="27"
 		damage_max_physical="36"
 		damage_attack="70"
@@ -454,7 +464,8 @@ s		modchance_damage_air_mod="float"
 		modchance_power_mod="0.1"
 	/>
 	<EquipEffect />
-	<WeaponAttribute
+		<WeaponAttribute
+		weapon_type="sword"
 		damage_min_physical="27"
 		damage_max_physical="38"
 		damage_attack="100"
@@ -489,7 +500,8 @@ s		modchance_damage_air_mod="float"
 		modchance_power_mod="0.1"
 	/>
 	<EquipEffect />
-	<WeaponAttribute
+		<WeaponAttribute
+		weapon_type="sword"
 		damage_min_physical="38"
 		damage_max_physical="50"
 		damage_attack="90"
@@ -524,7 +536,8 @@ s		modchance_damage_air_mod="float"
 		modchance_power_mod="0.1"
 	/>
 	<EquipEffect/>
-	<WeaponAttribute
+		<WeaponAttribute
+		weapon_type="sword"
 		damage_min_physical="10"
 		damage_max_physical="20"
 		damage_min_ice="27"
@@ -561,7 +574,8 @@ s		modchance_damage_air_mod="float"
 		modchance_power_mod="0.1"
 	/>
 	<EquipEffect />
-	<WeaponAttribute
+		<WeaponAttribute
+		weapon_type="sword"
 		damage_min_physical="40"
 		damage_max_physical="53"
 		damage_attack="115"
@@ -596,7 +610,8 @@ s		modchance_damage_air_mod="float"
 		modchance_power_mod="0.1"
 	/>
 	<EquipEffect />
-	<WeaponAttribute
+		<WeaponAttribute
+		weapon_type="sword"
 		damage_min_physical="48"
 		damage_max_physical="53"
 		damage_attack="110"
@@ -631,7 +646,8 @@ s		modchance_damage_air_mod="float"
 		modchance_power_mod="0.1"
 	/>
 	<EquipEffect />
-	<WeaponAttribute
+		<WeaponAttribute
+		weapon_type="sword"
 		damage_min_physical="47"
 		damage_max_physical="63"
 		damage_attack="135"
@@ -666,7 +682,8 @@ s		modchance_damage_air_mod="float"
 		modchance_power_mod="0.1"
 	/>
 	<EquipEffect />
-	<WeaponAttribute
+		<WeaponAttribute
+		weapon_type="sword"
 		damage_min_physical="51"
 		damage_max_physical="67"
 		damage_attack="150"
@@ -701,7 +718,8 @@ s		modchance_damage_air_mod="float"
 		modchance_power_mod="0.1"
 	/>
 	<EquipEffect/>
-	<WeaponAttribute
+		<WeaponAttribute
+		weapon_type="sword"
 		damage_min_physical="25"
 		damage_max_physical="35"
 		damage_min_fire="29"
@@ -738,7 +756,8 @@ s		modchance_damage_air_mod="float"
 		modchance_power_mod="0.1"
 	/>
 	<EquipEffect />
-	<WeaponAttribute
+		<WeaponAttribute
+		weapon_type="sword"
 		damage_min_physical="57"
 		damage_max_physical="76"
 		damage_attack="165"
@@ -773,7 +792,8 @@ s		modchance_damage_air_mod="float"
 		modchance_power_mod="0.1"
 	/>
 	<EquipEffect />
-	<WeaponAttribute
+		<WeaponAttribute
+		weapon_type="sword"
 		damage_min_physical="60"
 		damage_max_physical="80"
 		damage_attack="190"
@@ -808,7 +828,8 @@ s		modchance_damage_air_mod="float"
 		modchance_power_mod="0.1"
 	/>
 	<EquipEffect />
-	<WeaponAttribute
+		<WeaponAttribute
+		weapon_type="sword"
 		damage_min_physical="67"
 		damage_max_physical="90"
 		damage_attack="210"

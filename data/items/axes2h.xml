@@ -22,6 +22,7 @@
 	/>
 	<EquipEffect />
 	<WeaponAttribute
+		weapon_type="axe"
 		damage_min_physical="6"
 		damage_max_physical="16"
 		damage_attack="25"
@@ -58,6 +59,7 @@
 	/>
 	<EquipEffect />
 	<WeaponAttribute
+		weapon_type="axe"
 		damage_min_physical="14"
 		damage_max_physical="36"
 		damage_attack="25"
@@ -94,6 +96,7 @@
 	/>
 	<EquipEffect />
 	<WeaponAttribute
+		weapon_type="axe"
 		damage_min_physical="26"
 		damage_max_physical="39"
 		damage_attack="30"
@@ -130,6 +133,7 @@
 	/>
 	<EquipEffect />
 	<WeaponAttribute
+		weapon_type="axe"
 		damage_min_physical="22"
 		damage_max_physical="61"
 		damage_attack="28"
@@ -166,6 +170,7 @@
 	/>
 	<EquipEffect />
 	<WeaponAttribute
+		weapon_type="axe"
 		damage_min_physical="32"
 		damage_max_physical="64"
 		damage_attack="45"
@@ -202,6 +207,7 @@
 	/>
 	<EquipEffect />
 	<WeaponAttribute
+		weapon_type="axe"
 		damage_min_physical="38"
 		damage_max_physical="71"
 		damage_attack="60"
@@ -238,6 +244,7 @@
 	/>
 	<EquipEffect />
 	<WeaponAttribute
+		weapon_type="axe"
 		damage_min_physical="48"
 		damage_max_physical="81"
 		damage_attack="68"
@@ -274,6 +281,7 @@
 	/>
 	<EquipEffect />
 	<WeaponAttribute
+		weapon_type="axe"
 		damage_min_physical="54"
 		damage_max_physical="85"
 		damage_attack="76"
@@ -310,6 +318,7 @@
 	/>
 	<EquipEffect />
 	<WeaponAttribute
+		weapon_type="axe"
 		damage_min_physical="60"
 		damage_max_physical="95"
 		damage_attack="70"
@@ -346,6 +355,7 @@
 	/>
 	<EquipEffect/>
 	<WeaponAttribute
+		weapon_type="axe"
 		damage_min_physical="70"
 		damage_max_physical="106"
 		damage_attack="98"
@@ -382,6 +392,7 @@
 	/>
 	<EquipEffect />
 	<WeaponAttribute
+		weapon_type="axe"
 		damage_min_physical="74"
 		damage_max_physical="124"
 		damage_attack="108"
@@ -418,6 +429,7 @@
 	/>
 	<EquipEffect/>
 	<WeaponAttribute
+		weapon_type="axe"
 		damage_min_physical="80"
 		damage_max_physical="126"
 		damage_attack="122"
@@ -454,6 +466,7 @@
 	/>
 	<EquipEffect />
 	<WeaponAttribute
+		weapon_type="axe"
 		damage_min_physical="107"
 		damage_max_physical="143"
 		damage_attack="144"
@@ -490,6 +503,7 @@
 	/>
 	<EquipEffect />
 	<WeaponAttribute
+		weapon_type="axe"
 		damage_min_physical="108"
 		damage_max_physical="149"
 		damage_attack="139"
@@ -526,6 +540,7 @@
 	/>
 	<EquipEffect/>
 	<WeaponAttribute
+		weapon_type="axe"
 		damage_min_physical="60"
 		damage_max_physical="75"
 		damage_attack="145"
@@ -562,6 +577,7 @@
 	/>
 	<EquipEffect />
 	<WeaponAttribute
+		weapon_type="axe"
 		damage_min_physical="65"
 		damage_max_physical="196"
 		damage_attack="162"
@@ -598,6 +614,7 @@
 	/>
 	<EquipEffect />
 	<WeaponAttribute
+		weapon_type="axe"
 		damage_min_physical="59"
 		damage_max_physical="83"
 		damage_min_ice="45"
@@ -636,6 +653,7 @@
 	/>
 	<EquipEffect />
 	<WeaponAttribute
+		weapon_type="axe"
 		damage_min_physical="126"
 		damage_max_physical="185"
 		damage_attack="194"
