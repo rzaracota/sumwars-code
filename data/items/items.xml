@@ -255,9 +255,9 @@ s		modchance_damage_air_mod="float"
 <!-- Erzmagierrobe -->
 
 <!-- WANDS -->
-<!-- Fichtenzauberstab -->
-<!-- Lehrlingszauberstab -->
-<!-- Novizenzauberstab -->
+<!-- Fichtenzauberstab spruce wand(spruce_wnd)-->
+<!-- Lehrlingszauberstab apprentice wand(aprnt_wnd) -->
+<!-- Novizenzauberstab novice wand(novice_wnd)-->
 <!-- Felszauberstab -->
 <!-- Erlenzauberstab -->
 <!-- Magierzauberstab -->
@@ -275,6 +275,7 @@ s		modchance_damage_air_mod="float"
 <!-- Erzmagierzauberstab -->
 
 <!-- STAFFS -->
+<!-- wie Wands, aber mit _stf-->
 <!-- Fichtenstab -->
 <!-- Lehrlingsstab -->
 <!-- Novizenstab -->
