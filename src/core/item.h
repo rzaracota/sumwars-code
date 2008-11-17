@@ -53,6 +53,26 @@
  */
 struct WeaponAttr
 {
+    /**
+     * \enum WeaponType
+     * \brief zaehlt verschiedene Arten von Waffen auf
+     */
+    enum WeaponType
+    {
+        SWORD = 1,
+        HAMMER = 2,
+        AXE = 2,
+        STAFF = 5,
+        BOW = 10,
+        CROSSBOW = 11,
+    };
+
+    /**
+     * \var WeaponType m_weapon_type
+     * \brief Gibt den Typ der Waffe an
+     */
+    WeaponType m_weapon_type;
+
 	/**
 	 * \var m_damage
 	 * \brief Schaden, den die Waffe austeilt
@@ -155,7 +175,7 @@ struct Item {
 		REQ_PRIEST=8,
 		REQ_NONE=15,
 	};
-	
+
 	/**
 	 * \fn enum InfoFlags
 	 * \brief Zaehlt auf, welche Informationen zu einem Item vorliegen koennen
@@ -174,20 +194,20 @@ struct Item {
 	 */
 	Item();
 
-	
+
 	/**
 	 * \fn Item(ItemBasicData& data)
 	 * \brief erzeugt ein neuen Gegenstand mit den vorgegebenen Daten
 	 * \param data Daten auf deren Basis der Gegenstand erzeugt wird
 	 */
 	Item(ItemBasicData& data);
-	
+
 	/**
 	 * \fn virtual ~Item()
 	 * \brief Destruktor
 	 */
 	virtual ~Item();
-	
+
 
 	/**
 	 * \fn String getName()
@@ -215,8 +235,8 @@ struct Item {
 	 * \param cv Eingabepuffer
 	 */
 	virtual void fromString(CharConv* cv);
-	
-	
+
+
 	/**
 	 * \fn void toSavegame(CharConv* cv)
 	 * \brief Schreibt das Item inklusive allen Extradaten in den Puffer
@@ -243,7 +263,7 @@ struct Item {
 	 * \brief Berechnet den Wert des Items
 	 */
 	void calcPrice();
-	
+
 
 	/**
 	* \var m_subtype;
@@ -369,7 +389,7 @@ struct ItemBasicData
 	\brief Gibt die Groesse des Gegenstandes (klein,mittel, gross) an
 	 */
 	Item::Size m_size;
-	
+
 	/**
 	 * \var int m_price
 	 * \brief Wert des Gegenstandes
@@ -399,7 +419,7 @@ struct ItemBasicData
 	 * \brief Konstruktor
 	 */
 	ItemBasicData();
-	
+
 	/**
 	 * \fn ~ItemBasicData()
 	 * \brief Destruktor

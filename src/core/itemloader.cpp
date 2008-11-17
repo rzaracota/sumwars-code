@@ -228,6 +228,22 @@ int ItemLoader::generateItemBasicData(TiXmlElement* pElement, std::string elemen
 			}
 			else if (!strcmp(pAttrib->Name(), "dattack_speed") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
 				m_item_data->m_weapon_attr->m_dattack_speed = static_cast<short>(ival);
+            else if (!strcmp(pAttrib->Name(), "weapon_type"))
+			{
+				if (!strcmp(pAttrib->Value(), "sword"))
+					m_item_data->m_weapon_attr->m_weapon_type = WeaponAttr::SWORD;
+                else if (!strcmp(pAttrib->Value(), "axe"))
+					m_item_data->m_weapon_attr->m_weapon_type = WeaponAttr::AXE;
+				else if (!strcmp(pAttrib->Value(), "hammer"))
+					m_item_data->m_weapon_attr->m_weapon_type = WeaponAttr::HAMMER;
+				else if (!strcmp(pAttrib->Value(), "staff"))
+					m_item_data->m_weapon_attr->m_weapon_type = WeaponAttr::STAFF;
+				else if (!strcmp(pAttrib->Value(), "bow"))
+					m_item_data->m_weapon_attr->m_weapon_type = WeaponAttr::BOW;
+				else if (!strcmp(pAttrib->Value(), "crossbow"))
+					m_item_data->m_weapon_attr->m_weapon_type = WeaponAttr::CROSSBOW;
+
+			}
 
 			i++;
 			pAttrib=pAttrib->Next();
@@ -248,7 +264,7 @@ int ItemLoader::generateItemBasicData(TiXmlElement* pElement, std::string elemen
 				m_item_data->m_min_enchant = static_cast<float>(dval);
 			else if (!strcmp(pAttrib->Name(), "max_enchant") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
 				m_item_data->m_max_enchant = static_cast<float>(dval);
-			
+
 			else if (!strcmp(pAttrib->Name(), "modchance_health_mod") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
 				m_item_data->m_modchance[ItemFactory::HEALTH_MOD] = static_cast<float>(dval);
 			else if (!strcmp(pAttrib->Name(), "modchance_armor_mod") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
@@ -360,11 +376,11 @@ void ItemLoader::searchItemBasicData(TiXmlNode* pParent)
 		if ( !strcmp(pChild->Value(), "Item") && pChild->Type() == TiXmlNode::ELEMENT)
 		{
 			m_item_list->push_back(m_item_data);
-			
+
 			m_item_data = 0;
 			DEBUG5("Item loaded");
-			
-			
+
+
 		}
 	}
 }
@@ -387,7 +403,7 @@ std::list<ItemBasicData*>* ItemLoader::loadItemBasicData(const char* pFilename)
 	m_weapon_mod[ItemFactory::ATTACK_MOD] = 0.1;
 	m_weapon_mod[ItemFactory::POWER_MOD] = 0.1;
 	m_weapon_mod[ItemFactory::DAMAGE_MULT_PHYS_MOD] = 0.1;*/
-	
+
 	m_item_data = 0;
 	m_item_list = new std::list<ItemBasicData*>;
 
@@ -675,11 +691,11 @@ int ItemLoader::generateItemImageData(TiXmlElement* pElement, std::string elemen
 
 	TiXmlAttribute* pAttrib=pElement->FirstAttribute();
 	int i=0;
-	
+
 	if (element == "Item")
 	{
 		DEBUG5("Item");
-		
+
 		while (element == "Item" && pAttrib)
 		{
 			if (!strcmp(pAttrib->Name(), "subtype"))
@@ -689,7 +705,7 @@ int ItemLoader::generateItemImageData(TiXmlElement* pElement, std::string elemen
 			pAttrib=pAttrib->Next();
 		}
 	}
-	
+
 	if (element == "Image")
 	{
 		DEBUG5("Image");
@@ -697,12 +713,12 @@ int ItemLoader::generateItemImageData(TiXmlElement* pElement, std::string elemen
 		{
 			if (!strcmp(pAttrib->Name(), "image"))
 				m_item_image_data.m_image = pAttrib->Value();
-			
+
 			i++;
 			pAttrib=pAttrib->Next();
 		}
 	}
-	
+
 	return i;
 }
 
@@ -741,7 +757,7 @@ void ItemLoader::searchItemImageData(TiXmlNode* pParent, std::list<ItemImageData
 	for ( pChild = pParent->FirstChild(); pChild != 0; pChild = pChild->NextSibling())
 	{
 		searchItemImageData(pChild, item_image_data_list);
-		
+
 		if ( !strcmp(pChild->Value(), "Item") && pChild->Type() == TiXmlNode::ELEMENT)
 		{
 			item_image_data_list.push_back(m_item_image_data);
@@ -753,7 +769,7 @@ void ItemLoader::searchItemImageData(TiXmlNode* pParent, std::list<ItemImageData
 
 bool ItemLoader::loadItemImageData(const char* pFilename, std::list<ItemImageData> &item_image_data_list)
 {
-	
+
 	/*object_list = new std::list<FixedObjectData*>;
 	subtype_list = new std::list<std::string>;*/
 
