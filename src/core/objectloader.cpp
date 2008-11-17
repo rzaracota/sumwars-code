@@ -468,8 +468,10 @@ int ObjectLoader::generateFixedObjectData(TiXmlElement* pElement, string element
 			{
 				if (!strcmp(pAttrib->Value(), "NORMAL"))
 					m_object_data->m_layer = WorldObject::LAYER_BASE | WorldObject::LAYER_AIR;
-				else if (!strcmp(pAttrib->Value(), "GROUND"))
+				else if (!strcmp(pAttrib->Value(), "BASE"))
 					m_object_data->m_layer = WorldObject::LAYER_BASE;
+				else if (!strcmp(pAttrib->Value(), "AIR"))
+					m_object_data->m_layer = WorldObject::LAYER_AIR;
 			}
 
 			i++;
