@@ -7,6 +7,132 @@ HINWEISE:
 * Flags werden durch Komma (,) getrennt eingegeben und duerfen keine anderen
   Zeichen als Trennung beinhalten (z.B. flag="FLAG1, FLAG2" funktioniert wegen
   dem Leerzeichen nach dem Komma nicht)
+
+* Moegliche Flags fuer xspecial_flags, special_flags:
+	noflags
+	unblockable
+	ignore_armor
+	extra_human_dmg
+	extra_demon_dmg
+	extra_undead_dmg
+	extra_dwarf_dmg
+	extra_drake_dmg
+	extra_fairy_dmg
+	extra_goblin_dmg
+	extra_animal_dmg
+	extra_summoned_dmg
+
+
+* Moegliche Flags fuer xabilities:
+	noaction
+	walk
+	use
+	trade
+	attack
+	range_attack
+	magic_attack
+	holy_attack
+	defend
+	wait
+	die
+	dead
+	take_item
+	bash
+	hammer_bash
+	around_blow
+	whirl_blow
+	smash
+	hate_mage
+	charge
+	storm_charge
+	block
+	steadfast
+	monster_hunter
+	monster_slayer
+	endurance
+	weaponmaster
+	firesword
+	flamesword
+	flamearmor
+	berserk
+	warcry
+	regenerate
+	decoy
+	scare
+	anger
+	fury
+	triple_shot
+	guided_triple_shot
+	multishot
+	volley_shot
+	pierce
+	weak_point
+	blind_rage
+	vacuum
+	death_roulette
+	exploding_arrow
+	explosion_cascade
+	evade
+	critical_strike
+	concentration
+	mental_wall
+	resist_ice
+	resist_air
+	aimed_shot
+	bow_spirit
+	ice_arrows
+	freezing_arrows
+	wind_arrows
+	storm_arrows
+	wind_walk
+	fire_bolt
+	fire_strike
+	fire_wave
+	fire_storm
+	fire_ball
+	inferno_ball
+	fire_wall
+	inflame
+	ice_bolt
+	ice_spike
+	snow_storm
+	blizzard
+	ice_ring
+	frost_ring
+	freeze
+	chill
+	lightning
+	lightning_strike
+	thunderstorm
+	thunderstorm2
+	chain_lightning
+	chain_lightning2
+	static_shield
+	ionisation
+	holy_light
+	holy_fire
+	burning_rage
+	cure_blind_mute
+	cure_blind_mute_party
+	blazing_shield
+	light_beam
+	burning_sun
+	break_binding
+	disrupt_binding
+	magic_shield
+	cure_pois_burn
+	cure_pois_burn_party
+	acid
+	heal
+	heal_party
+	divine_wind
+	divine_storm
+	blade_storm
+	cure_conf_bsrk
+	cure_conf_bsrk_party
+	hypnosis
+	hypnosis2
+	keen_mind
 -->
 
 <!-- general
@@ -81,15 +207,9 @@ s		modchance_damage_air_mod="float"
 		dresistances_cap_fire="short"
 		dwalk_speed="short"
 		dattack_speed="short"
-		xspecial_flags="NOFLAGS,UNBLOCKABLE,IGNORE_ARMOR,EXTRA_HUMAN_DMG,EXTRA_DEMON_DMG,EXTRA_UNDEAD_DMG,EXTRA_DWARF_DMG,EXTRA_DRAKE_DMG,
-EXTRA_FAIRY_DMG,EXTRA_GOBLIN_DMG,EXTRA_ANIMAL_DMG,EXTRA_SUMMONED_DMG"
+		xspecial_flags="moegliche Flags: siehe oben"
 		time="float"
-		xabilities0="int"
-		xabilities1="int"
-		xabilities2="int"
-		xabilities3="int"
-		xabilities4="int"
-		xabilities5="int"
+		xabilities="moegliche Flags: siehe oben"
 		ximmunity="char"
 	/>
 	<WeaponAttribute
@@ -115,8 +235,7 @@ EXTRA_FAIRY_DMG,EXTRA_GOBLIN_DMG,EXTRA_ANIMAL_DMG,EXTRA_SUMMONED_DMG"
 		status_mod_power5="short"
 		status_mod_power6="short"
 		status_mod_power7="short"
-		special_flags="NOFLAGS,UNBLOCKABLE,IGNORE_ARMOR,EXTRA_HUMAN_DMG,EXTRA_DEMON_DMG,EXTRA_UNDEAD_DMG,EXTRA_DWARF_DMG,EXTRA_DRAKE_DMG,
-EXTRA_FAIRY_DMG,EXTRA_GOBLIN_DMG,EXTRA_ANIMAL_DMG,EXTRA_SUMMONED_DMG"
+		special_flags="moegliche Flags: siehe oben"
 		attack_range="float"
 		two_handed="no"
 		dattack_speed="short"
