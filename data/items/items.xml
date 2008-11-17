@@ -1,6 +1,13 @@
 <?xml version="1.0" ?>
 
-<!-- Bei Gegenstaenden, die keine Waffen sind kann "WeaponAttribute" weggelassen werden. -->
+<!--
+HINWEISE:
+* Bei Gegenstaenden, die keine Waffen sind kann "WeaponAttribute" weggelassen
+  werden.
+* Flags werden durch Komma (,) getrennt eingegeben und duerfen keine anderen
+  Zeichen als Trennung beinhalten (z.B. flag="FLAG1, FLAG2" funktioniert wegen
+  dem Leerzeichen nach dem Komma nicht)
+-->
 
 <!-- general
 <Item type="weapon" subtype="short_sw" size="medium">
@@ -74,7 +81,8 @@ s		modchance_damage_air_mod="float"
 		dresistances_cap_fire="short"
 		dwalk_speed="short"
 		dattack_speed="short"
-		xspecial_flags="int"
+		xspecial_flags="NOFLAGS,UNBLOCKABLE,IGNORE_ARMOR,EXTRA_HUMAN_DMG,EXTRA_DEMON_DMG,EXTRA_UNDEAD_DMG,EXTRA_DWARF_DMG,EXTRA_DRAKE_DMG,
+EXTRA_FAIRY_DMG,EXTRA_GOBLIN_DMG,EXTRA_ANIMAL_DMG,EXTRA_SUMMONED_DMG"
 		time="float"
 		xabilities0="int"
 		xabilities1="int"
@@ -107,7 +115,8 @@ s		modchance_damage_air_mod="float"
 		status_mod_power5="short"
 		status_mod_power6="short"
 		status_mod_power7="short"
-		special_flags="short"
+		special_flags="NOFLAGS,UNBLOCKABLE,IGNORE_ARMOR,EXTRA_HUMAN_DMG,EXTRA_DEMON_DMG,EXTRA_UNDEAD_DMG,EXTRA_DWARF_DMG,EXTRA_DRAKE_DMG,
+EXTRA_FAIRY_DMG,EXTRA_GOBLIN_DMG,EXTRA_ANIMAL_DMG,EXTRA_SUMMONED_DMG"
 		attack_range="float"
 		two_handed="no"
 		dattack_speed="short"

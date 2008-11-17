@@ -140,8 +140,48 @@ int ItemLoader::generateItemBasicData(TiXmlElement* pElement, std::string elemen
 				m_item_data->m_equip_effect->m_dwalk_speed = static_cast<short>(ival);
 			else if (!strcmp(pAttrib->Name(), "dattack_speed") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
 				m_item_data->m_equip_effect->m_dattack_speed = static_cast<short>(ival);
-			else if (!strcmp(pAttrib->Name(), "xspecial_flags") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
-				m_item_data->m_equip_effect->m_xspecial_flags = ival;
+			else if (!strcmp(pAttrib->Name(), "xspecial_flags"))
+			{
+				std::string flaglist = pAttrib->Value();
+
+				// Flag auf neutralen Wert setzen
+				m_item_data->m_equip_effect->m_xspecial_flags = 0;
+				m_item_data->m_equip_effect->m_xspecial_flags |= Damage::NOFLAGS;
+
+				std::string::size_type pos = 0;
+				std::string delimiter = ",";
+
+				do
+				{
+					std::string part = flaglist.substr(pos, flaglist.find(delimiter, pos) - pos);
+					
+					if (part == "NOFLAGS")
+						m_item_data->m_equip_effect->m_xspecial_flags |= Damage::NOFLAGS;
+					else if (part == "UNBLOCKABLE")
+						m_item_data->m_equip_effect->m_xspecial_flags |= Damage::UNBLOCKABLE;
+					else if (part == "IGNORE_ARMOR")
+						m_item_data->m_equip_effect->m_xspecial_flags |= Damage::IGNORE_ARMOR;
+					else if (part == "EXTRA_HUMAN_DMG")
+						m_item_data->m_equip_effect->m_xspecial_flags |= Damage::EXTRA_HUMAN_DMG;
+					else if (part == "EXTRA_DEMON_DMG")
+						m_item_data->m_equip_effect->m_xspecial_flags |= Damage::EXTRA_DEMON_DMG;
+					else if (part == "EXTRA_UNDEAD_DMG")
+						m_item_data->m_equip_effect->m_xspecial_flags |= Damage::EXTRA_UNDEAD_DMG;
+					else if (part == "EXTRA_DWARF_DMG")
+						m_item_data->m_equip_effect->m_xspecial_flags |= Damage::EXTRA_DWARF_DMG;
+					else if (part == "EXTRA_DRAKE_DMG")
+						m_item_data->m_equip_effect->m_xspecial_flags |= Damage::EXTRA_DRAKE_DMG;
+					else if (part == "EXTRA_FAIRY_DMG")
+						m_item_data->m_equip_effect->m_xspecial_flags |= Damage::EXTRA_FAIRY_DMG;
+					else if (part == "EXTRA_GOBLIN_DMG")
+						m_item_data->m_equip_effect->m_xspecial_flags |= Damage::EXTRA_GOBLIN_DMG;
+					else if (part == "EXTRA_ANIMAL_DMG")
+						m_item_data->m_equip_effect->m_xspecial_flags |= Damage::EXTRA_ANIMAL_DMG;
+					else if (part == "EXTRA_SUMMONED_DMG")
+						m_item_data->m_equip_effect->m_xspecial_flags |= Damage::EXTRA_SUMMONED_DMG;
+				}
+				while( (pos = flaglist.find(delimiter, pos))++ != std::string::npos );
+			}
 			else if (!strcmp(pAttrib->Name(), "time") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
 				m_item_data->m_equip_effect->m_time = static_cast<float>(dval);
 			else if (!strcmp(pAttrib->Name(), "xabilities0") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
@@ -215,8 +255,48 @@ int ItemLoader::generateItemBasicData(TiXmlElement* pElement, std::string elemen
 				m_item_data->m_weapon_attr->m_damage.m_status_mod_power[6] = static_cast<short>(ival);
 			else if (!strcmp(pAttrib->Name(), "status_mod_power7") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
 				m_item_data->m_weapon_attr->m_damage.m_status_mod_power[7] = static_cast<short>(ival);
-			else if (!strcmp(pAttrib->Name(), "special_flags") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
-				m_item_data->m_weapon_attr->m_damage.m_special_flags = static_cast<short>(ival);
+			else if (!strcmp(pAttrib->Name(), "special_flags"))
+			{
+				std::string flaglist = pAttrib->Value();
+
+				// Flag auf neutralen Wert setzen
+				m_item_data->m_weapon_attr->m_damage.m_special_flags = 0;
+				m_item_data->m_weapon_attr->m_damage.m_special_flags |= Damage::NOFLAGS;
+
+				std::string::size_type pos = 0;
+				std::string delimiter = ",";
+
+				do
+				{
+					std::string part = flaglist.substr(pos, flaglist.find(delimiter, pos) - pos);
+					
+					if (part == "NOFLAGS")
+						m_item_data->m_weapon_attr->m_damage.m_special_flags |= Damage::NOFLAGS;
+					else if (part == "UNBLOCKABLE")
+						m_item_data->m_weapon_attr->m_damage.m_special_flags |= Damage::UNBLOCKABLE;
+					else if (part == "IGNORE_ARMOR")
+						m_item_data->m_weapon_attr->m_damage.m_special_flags |= Damage::IGNORE_ARMOR;
+					else if (part == "EXTRA_HUMAN_DMG")
+						m_item_data->m_weapon_attr->m_damage.m_special_flags |= Damage::EXTRA_HUMAN_DMG;
+					else if (part == "EXTRA_DEMON_DMG")
+						m_item_data->m_weapon_attr->m_damage.m_special_flags |= Damage::EXTRA_DEMON_DMG;
+					else if (part == "EXTRA_UNDEAD_DMG")
+						m_item_data->m_weapon_attr->m_damage.m_special_flags |= Damage::EXTRA_UNDEAD_DMG;
+					else if (part == "EXTRA_DWARF_DMG")
+						m_item_data->m_weapon_attr->m_damage.m_special_flags |= Damage::EXTRA_DWARF_DMG;
+					else if (part == "EXTRA_DRAKE_DMG")
+						m_item_data->m_weapon_attr->m_damage.m_special_flags |= Damage::EXTRA_DRAKE_DMG;
+					else if (part == "EXTRA_FAIRY_DMG")
+						m_item_data->m_weapon_attr->m_damage.m_special_flags |= Damage::EXTRA_FAIRY_DMG;
+					else if (part == "EXTRA_GOBLIN_DMG")
+						m_item_data->m_weapon_attr->m_damage.m_special_flags |= Damage::EXTRA_GOBLIN_DMG;
+					else if (part == "EXTRA_ANIMAL_DMG")
+						m_item_data->m_weapon_attr->m_damage.m_special_flags |= Damage::EXTRA_ANIMAL_DMG;
+					else if (part == "EXTRA_SUMMONED_DMG")
+						m_item_data->m_weapon_attr->m_damage.m_special_flags |= Damage::EXTRA_SUMMONED_DMG;
+				}
+				while( (pos = flaglist.find(delimiter, pos))++ != std::string::npos );
+			}
 			else if (!strcmp(pAttrib->Name(), "attack_range") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
 				m_item_data->m_weapon_attr->m_attack_range = static_cast<float>(dval);
 			else if (!strcmp(pAttrib->Name(), "two_handed"))
