@@ -1,14 +1,14 @@
-<!-- TWO HANDED AXES -->
+<!-- TWO HANDED HAMMER-->
 
-<!-- Holzfälleraxt -->
-<Item type="weapon" subtype="lumber_axe" size="big">
-	<Image image="set:axe2H.png image:full_image" />
-	<Mesh file="battleaxe.mesh" />
+<!-- Vorschlaghammer -->
+<Item type="weapon" subtype="sledge_hmr" size="big">
+	<Image image="set:sledgehammer.png image:full_image" />
+	<Mesh file="sledgehammer.mesh" />
 	<Attribute
 		level_requirement="1"
 		character_requirement="15"
-		min_enchant="35"
-		max_enchant="70"
+		min_enchant="40"
+		max_enchant="80"
 		modchance_strength_mod="0.1"
 		modchance_dexterity_mod="0.1"
 		modchance_magic_power_mod="0.05"
@@ -22,11 +22,11 @@
 	/>
 	<EquipEffect />
 	<WeaponAttribute
-		damage_min_physical="6"
-		damage_max_physical="16"
-		damage_attack="25"
-		damage_power="40"
-		attack_range="0.8"
+		damage_min_physical="8"
+		damage_max_physical="14"
+		damage_attack="30"
+		damage_power="38"
+		attack_range="1.0"
 		two_handed="yes"
 		dattack_speed="-500"
 	/>
@@ -36,15 +36,15 @@
 	/>
 </Item>
 
-<!-- Großaxt-->
-<Item type="weapon" subtype="great_axe" size="big">
-	<Image image="set:axe2H.png image:full_image" />
-	<Mesh file="battleaxe.mesh" />
+<!-- Bronzehammer -->
+<Item type="weapon" subtype="bronze_hmr" size="big">
+	<Image image="set:sledgehammer.png image:full_image" />
+	<Mesh file="sledgehammer.mesh" />
 	<Attribute
 		level_requirement="3"
 		character_requirement="15"
-		min_enchant="55"
-		max_enchant="160"
+		min_enchant="60"
+		max_enchant="170"
 		modchance_strength_mod="0.1"
 		modchance_dexterity_mod="0.1"
 		modchance_magic_power_mod="0.05"
@@ -58,11 +58,11 @@
 	/>
 	<EquipEffect />
 	<WeaponAttribute
-		damage_min_physical="14"
-		damage_max_physical="36"
-		damage_attack="25"
-		damage_power="48"
-		attack_range="0.8"
+		damage_min_physical="17"
+		damage_max_physical="33"
+		damage_attack="30"
+		damage_power="42"
+		attack_range="1.2"
 		two_handed="yes"
 		dattack_speed="-500"
 	/>
@@ -72,10 +72,10 @@
 	/>
 </Item>
 
-<!-- Reißeraxt -->
-<Item type="weapon" subtype="riping_axe" size="big">
-	<Image image="set:axe2H.png image:full_image" />
-	<Mesh file="battleaxe.mesh" />
+<!-- Langstiel -->
+<Item type="weapon" subtype="long_hmr" size="big">
+	<Image image="set:sledgehammer.png image:full_image" />
+	<Mesh file="sledgehammer.mesh" />
 	<Attribute
 		level_requirement="5"
 		character_requirement="15"
@@ -83,8 +83,9 @@
 		max_enchant="260"
 		modchance_strength_mod="0.1"
 		modchance_dexterity_mod="0.1"
+		modchance_willpower_mod="0.05"
 		modchance_magic_power_mod="0.05"
-		modchance_damage_phys_mod="0.15"
+		modchance_damage_phys_mod="0.10"
 		modchance_damage_fire_mod="0.10"
 		modchance_damage_ice_mod="0.10"
 		modchance_damage_air_mod="0.10"
@@ -94,13 +95,13 @@
 	/>
 	<EquipEffect />
 	<WeaponAttribute
-		damage_min_physical="26"
-		damage_max_physical="39"
-		damage_attack="30"
-		damage_power="30"
-		attack_range="1.0"
+		damage_min_physical="31"
+		damage_max_physical="37"
+		damage_attack="34"
+		damage_power="48"
+		attack_range="2.0"
 		two_handed="yes"
-		dattack_speed="-400"
+		dattack_speed="-600"
 	/>
 	<DropChance
 		level="5"
@@ -108,19 +109,20 @@
 	/>
 </Item>
 
-<!-- Henkersaxt -->
-<Item type="weapon" subtype="execut_axe" size="big">
-	<Image image="set:axe2H.png image:full_image" />
-	<Mesh file="battleaxe.mesh" />
+<!-- Waechterhammer -->
+<Item type="weapon" subtype="guard_hmr" size="big">
+	<Image image="set:sledgehammer.png image:full_image" />
+	<Mesh file="sledgehammer.mesh" />
 	<Attribute
 		level_requirement="8"
 		character_requirement="15"
-		min_enchant="75"
-		max_enchant="320"
+		min_enchant="80"
+		max_enchant="330"
 		modchance_strength_mod="0.1"
 		modchance_dexterity_mod="0.1"
+		modchance_willpower_mod="0.5"
 		modchance_magic_power_mod="0.05"
-		modchance_damage_phys_mod="0.15"
+		modchance_damage_phys_mod="0.10"
 		modchance_damage_fire_mod="0.10"
 		modchance_damage_ice_mod="0.10"
 		modchance_damage_air_mod="0.10"
@@ -130,13 +132,13 @@
 	/>
 	<EquipEffect />
 	<WeaponAttribute
-		damage_min_physical="22"
-		damage_max_physical="61"
-		damage_attack="28"
-		damage_power="74"
+		damage_min_physical="37"
+		damage_max_physical="42"
+		damage_attack="55"
+		damage_power="59"
 		attack_range="1.3"
 		two_handed="yes"
-		dattack_speed="-700"
+		dattack_speed="-400"
 	/>
 	<DropChance
 		level="8"
@@ -144,19 +146,20 @@
 	/>
 </Item>
 
-<!-- Schmetteraxt -->
-<Item type="weapon" subtype="iron_axe" size="big">
-	<Image image="set:axe2H.png image:full_image" />
-	<Mesh file="battleaxe.mesh" />
+<!-- Silberschrecken -->
+<Item type="weapon" subtype="silver_hmr" size="big">
+	<Image image="set:sledgehammer.png image:full_image" />
+	<Mesh file="sledgehammer.mesh" />
 	<Attribute
 		level_requirement="13"
 		character_requirement="15"
-		min_enchant="115"
-		max_enchant="400"
+		min_enchant="120"
+		max_enchant="410"
 		modchance_strength_mod="0.1"
 		modchance_dexterity_mod="0.1"
+		modchance_willpower_mod="0.05"
 		modchance_magic_power_mod="0.05"
-		modchance_damage_phys_mod="0.15"
+		modchance_damage_phys_mod="0.10"
 		modchance_damage_fire_mod="0.10"
 		modchance_damage_ice_mod="0.10"
 		modchance_damage_air_mod="0.10"
@@ -166,13 +169,13 @@
 	/>
 	<EquipEffect />
 	<WeaponAttribute
-		damage_min_physical="32"
-		damage_max_physical="64"
-		damage_attack="45"
-		damage_power="120"
-		attack_range="1.6"
+		damage_min_physical="28"
+		damage_max_physical="36"
+		damage_attack="58"
+		damage_power="64"
+		attack_range="1.2"
 		two_handed="yes"
-		dattack_speed="-1000"
+		dattack_speed="-300"
 	/>
 	<DropChance
 		level="13"
@@ -180,19 +183,20 @@
 	/>
 </Item>
 
-<!-- Ogerbeil -->
-<Item type="weapon" subtype="ogrhac_axe" size="big">
-	<Image image="set:axe2H.png image:full_image" />
-	<Mesh file="battleaxe.mesh" />
+<!-- Glimmhammer -->
+<Item type="weapon" subtype="glow_hmr" size="big">
+	<Image image="set:sledgehammer.png image:full_image" />
+	<Mesh file="sledgehammer.mesh" />
 	<Attribute
 		level_requirement="19"
 		character_requirement="15"
-		min_enchant="135"
-		max_enchant="500"
+		min_enchant="140"
+		max_enchant="510"
 		modchance_strength_mod="0.1"
 		modchance_dexterity_mod="0.1"
+		modchance_willpower_mod="0.05"
 		modchance_magic_power_mod="0.05"
-		modchance_damage_phys_mod="0.15"
+		modchance_damage_phys_mod="0.10"
 		modchance_damage_fire_mod="0.10"
 		modchance_damage_ice_mod="0.10"
 		modchance_damage_air_mod="0.10"
@@ -202,11 +206,13 @@
 	/>
 	<EquipEffect />
 	<WeaponAttribute
-		damage_min_physical="38"
-		damage_max_physical="71"
-		damage_attack="60"
-		damage_power="82"
-		attack_range="2.0"
+		damage_min_physical="34"
+		damage_max_physical="36"
+		damage_min_fire="15"
+		damage_max_fire="23"
+		damage_attack="72"
+		damage_power="81"
+		attack_range="1.4"
 		two_handed="yes"
 		dattack_speed="-600"
 	/>
@@ -216,14 +222,14 @@
 	/>
 </Item>
 
-<!-- Sensenaxt -->
-<Item type="weapon" subtype="scythe_axe" size="big">
-	<Image image="set:axe2H.png image:full_image" />
-	<Mesh file="battleaxe.mesh" />
+<!-- Knochenbrecher -->
+<Item type="weapon" subtype="bone_hmr" size="big">
+	<Image image="set:sledgehammer.png image:full_image" />
+	<Mesh file="sledgehammer.mesh" />
 	<Attribute
 		level_requirement="25"
 		character_requirement="15"
-		min_enchant="155"
+		min_enchant="160"
 		max_enchant="600"
 		modchance_strength_mod="0.1"
 		modchance_dexterity_mod="0.1"
@@ -238,13 +244,13 @@
 	/>
 	<EquipEffect />
 	<WeaponAttribute
-		damage_min_physical="48"
-		damage_max_physical="81"
-		damage_attack="68"
-		damage_power="96"
-		attack_range="1.5"
+		damage_min_physical="52"
+		damage_max_physical="91"
+		damage_attack="32"
+		damage_power="85"
+		attack_range="1.3"
 		two_handed="yes"
-		dattack_speed="0"
+		dattack_speed="-600"
 	/>
 	<DropChance
 		level="25"
@@ -252,14 +258,14 @@
 	/>
 </Item>
 
-<!-- Barbarenstreitaxt -->
-<Item type="weapon" subtype="barbar_axe" size="big">
-	<Image image="set:axe2H.png image:full_image" />
-	<Mesh file="battleaxe.mesh" />
+<!-- Truemmerkopf -->
+<Item type="weapon" subtype="smash_hmr" size="big">
+	<Image image="set:sledgehammer.png image:full_image" />
+	<Mesh file="sledgehammer.mesh" />
 	<Attribute
 		level_requirement="30"
 		character_requirement="15"
-		min_enchant="175"
+		min_enchant="180"
 		max_enchant="700"
 		modchance_strength_mod="0.1"
 		modchance_dexterity_mod="0.1"
@@ -274,13 +280,13 @@
 	/>
 	<EquipEffect />
 	<WeaponAttribute
-		damage_min_physical="54"
-		damage_max_physical="85"
-		damage_attack="76"
-		damage_power="106"
+		damage_min_physical="59"
+		damage_max_physical="81"
+		damage_attack="89"
+		damage_power="152"
 		attack_range="1.4"
 		two_handed="no"
-		dattack_speed="-600"
+		dattack_speed="-900"
 	/>
 	<DropChance
 		level="30"
@@ -288,19 +294,20 @@
 	/>
 </Item>
 
-<!-- Knochenbrecheraxt -->
-<Item type="weapon" subtype="bnebrk_axe" size="big">
-	<Image image="set:axe2H.png image:full_image" />
-	<Mesh file="battleaxe.mesh" />
+<!-- Aisener Kriegshammer -->
+<Item type="weapon" subtype="aisen_hmr" size="big">
+	<Image image="set:sledgehammer.png image:full_image" />
+	<Mesh file="sledgehammer.mesh" />
 	<Attribute
 		level_requirement="35"
 		character_requirement="15"
-		min_enchant="195"
-		max_enchant="800"
+		min_enchant="200"
+		max_enchant="810"
 		modchance_strength_mod="0.1"
 		modchance_dexterity_mod="0.1"
+		modchance_willpower_mod="0.05"
 		modchance_magic_power_mod="0.05"
-		modchance_damage_phys_mod="0.15"
+		modchance_damage_phys_mod="0.10"
 		modchance_damage_fire_mod="0.10"
 		modchance_damage_ice_mod="0.10"
 		modchance_damage_air_mod="0.10"
@@ -310,11 +317,11 @@
 	/>
 	<EquipEffect />
 	<WeaponAttribute
-		damage_min_physical="60"
-		damage_max_physical="95"
-		damage_attack="70"
-		damage_power="126"
-		attack_range="1.3"
+		damage_min_physical="66"
+		damage_max_physical="88"
+		damage_attack="96"
+		damage_power="108"
+		attack_range="1.5"
 		two_handed="yes"
 		dattack_speed="-400"
 	/>
@@ -324,19 +331,20 @@
 	/>
 </Item>
 
-<!-- Riesenaxt -->
-<Item type="weapon" subtype="giant_axe" size="big">
-	<Image image="set:axe2H.png image:full_image" />
-	<Mesh file="battleaxe.mesh" />
+<!-- Urteilshammer -->
+<Item type="weapon" subtype="jugmnt_hmr" size="big">
+	<Image image="set:sledgehammer.png image:full_image" />
+	<Mesh file="sledgehammer.mesh" />
 	<Attribute
 		level_requirement="40"
 		character_requirement="15"
-		min_enchant="215"
-		max_enchant="900"
+		min_enchant="220"
+		max_enchant="910"
 		modchance_strength_mod="0.1"
 		modchance_dexterity_mod="0.1"
+		modchance_dexterity_mod="0.05"
 		modchance_magic_power_mod="0.05"
-		modchance_damage_phys_mod="0.15"
+		modchance_damage_phys_mod="0.10"
 		modchance_damage_fire_mod="0.10"
 		modchance_damage_ice_mod="0.10"
 		modchance_damage_air_mod="0.10"
@@ -346,13 +354,13 @@
 	/>
 	<EquipEffect/>
 	<WeaponAttribute
-		damage_min_physical="70"
-		damage_max_physical="106"
-		damage_attack="98"
-		damage_power="126"
-		attack_range="1.4"
+		damage_min_physical="107"
+		damage_max_physical="119"
+		damage_attack="73"
+		damage_power="96"
+		attack_range="1.3"
 		two_handed="yes"
-		dattack_speed="-600"
+		dattack_speed="-500"
 	/>
 	<DropChance
 		level="40"
@@ -360,19 +368,20 @@
 	/>
 </Item>
 
-<!-- Schlachtaxt -->
-<Item type="weapon" subtype="slautr_axe" size="big">
-	<Image image="set:axe2H.png image:full_image" />
-	<Mesh file="battleaxe.mesh" />
+<!-- Priesterhammer -->
+<Item type="weapon" subtype="priest_hmr" size="big">
+	<Image image="set:sledgehammer.png image:full_image" />
+	<Mesh file="sledgehammer.mesh" />
 	<Attribute
 		level_requirement="45"
 		character_requirement="15"
-		min_enchant="235"
-		max_enchant="1000"
+		min_enchant="240"
+		max_enchant="1030"
 		modchance_strength_mod="0.1"
 		modchance_dexterity_mod="0.1"
+		modchance_willpower_mod="0.05"
 		modchance_magic_power_mod="0.05"
-		modchance_damage_phys_mod="0.15"
+		modchance_damage_phys_mod="0.10"
 		modchance_damage_fire_mod="0.1"
 		modchance_damage_ice_mod="0.1"
 		modchance_damage_air_mod="0.1"
@@ -382,13 +391,13 @@
 	/>
 	<EquipEffect />
 	<WeaponAttribute
-		damage_min_physical="74"
-		damage_max_physical="124"
-		damage_attack="108"
-		damage_power="132"
-		attack_range="1.3"
+		damage_min_physical="81"
+		damage_max_physical="104"
+		damage_attack="122"
+		damage_power="124"
+		attack_range="1.4"
 		two_handed="yes"
-		dattack_speed="-400"
+		dattack_speed="-300"
 	/>
 	<DropChance
 		level="45"
@@ -396,19 +405,20 @@
 	/>
 </Item>
 
-<!-- Ogerreißer -->
-<Item type="weapon" subtype="ogrkil_axe" size="big">
-	<Image image="set:axe2H.png image:full_image" />
-	<Mesh file="battleaxe.mesh" />
+<!-- Obsidianhammer -->
+<Item type="weapon" subtype="obsid_hmr" size="big">
+	<Image image="set:sledgehammer.png image:full_image" />
+	<Mesh file="sledgehammer.mesh" />
 	<Attribute
 		level_requirement="50"
 		character_requirement="15"
-		min_enchant="255"
-		max_enchant="1100"
+		min_enchant="160"
+		max_enchant="1130"
 		modchance_strength_mod="0.1"
 		modchance_dexterity_mod="0.1"
+		modchance_willpower_mod="0.05"
 		modchance_magic_power_mod="0.05"
-		modchance_damage_phys_mod="0.15"
+		modchance_damage_phys_mod="0.10"
 		modchance_damage_fire_mod="0.10"
 		modchance_damage_ice_mod="0.10"
 		modchance_damage_air_mod="0.10"
@@ -418,13 +428,13 @@
 	/>
 	<EquipEffect/>
 	<WeaponAttribute
-		damage_min_physical="80"
-		damage_max_physical="126"
-		damage_attack="122"
-		damage_power="148"
-		attack_range="1.3"
+		damage_min_physical="108"
+		damage_max_physical="153"
+		damage_attack="131"
+		damage_power="55"
+		attack_range="1.6"
 		two_handed="yes"
-		dattack_speed="-500"
+		dattack_speed="-600"
 	/>
 	<DropChance
 		level="50"
@@ -432,19 +442,20 @@
 	/>
 </Item>
 
-<!-- Zwergenstahlaxt -->
-<Item type="weapon" subtype="dwfstl_axe" size="big">
-	<Image image="set:axe2H.png image:full_image" />
-	<Mesh file="battleaxe.mesh" />
+<!-- Richthammer -->
+<Item type="weapon" subtype="judge_hmr" size="big">
+	<Image image="set:sledgehammer.png image:full_image" />
+	<Mesh file="sledgehammer.mesh" />
 	<Attribute
 		level_requirement="55"
 		character_requirement="15"
-		min_enchant="275"
-		max_enchant="1200"
+		min_enchant="280"
+		max_enchant="1230"
 		modchance_strength_mod="0.1"
 		modchance_dexterity_mod="0.1"
+		modchance_willpower_mod="0.05"
 		modchance_magic_power_mod="0.05"
-		modchance_damage_phys_mod="0.15"
+		modchance_damage_phys_mod="0.10"
 		modchance_damage_fire_mod="0.10"
 		modchance_damage_ice_mod="0.10"
 		modchance_damage_air_mod="0.10"
@@ -454,13 +465,13 @@
 	/>
 	<EquipEffect />
 	<WeaponAttribute
-		damage_min_physical="107"
-		damage_max_physical="143"
-		damage_attack="144"
-		damage_power="152"
-		attack_range="1.2"
+		damage_min_physical="94"
+		damage_max_physical="124"
+		damage_attack="134"
+		damage_power="149"
+		attack_range="1.3"
 		two_handed="yes"
-		dattack_speed="-300"
+		dattack_speed="-400"
 	/>
 	<DropChance
 		level="55"
@@ -468,15 +479,15 @@
 	/>
 </Item>
 
-<!-- Sternenaxt -->
-<Item type="weapon" subtype="star_axe" size="big">
+<!-- Zyklopenhammer -->
+<Item type="weapon" subtype="cyclps_hmr" size="big">
 	<Image image="set:axe2H.png image:full_image" />
 	<Mesh file="battleaxe.mesh" />
 	<Attribute
 		level_requirement="60"
 		character_requirement="15"
 		min_enchant="300"
-		max_enchant="1350"
+		max_enchant="1300"
 		modchance_strength_mod="0.1"
 		modchance_dexterity_mod="0.1"
 		modchance_magic_power_mod="0.05"
@@ -490,13 +501,13 @@
 	/>
 	<EquipEffect />
 	<WeaponAttribute
-		damage_min_physical="108"
-		damage_max_physical="149"
-		damage_attack="139"
-		damage_power="162"
+		damage_min_physical="109"
+		damage_max_physical="138"
+		damage_attack="126"
+		damage_power="164"
 		attack_range="1.4"
 		two_handed="yes"
-		dattack_speed="-550"
+		dattack_speed="-700"
 	/>
 	<DropChance
 		level="60"
@@ -504,19 +515,20 @@
 	/>
 </Item>
 
-<!-- Königsaxt -->
-<Item type="weapon" subtype="king_axe" size="big">
-	<Image image="set:axe2H.png image:full_image" />
-	<Mesh file="battleaxe.mesh" />
+<!-- Zwergenstahlhammer -->
+<Item type="weapon" subtype="dwfstl_hmr" size="big">
+	<Image image="set:sledgehammer.png image:full_image" />
+	<Mesh file="sledgehammer.mesh" />
 	<Attribute
 		level_requirement="65"
 		character_requirement="15"
-		min_enchant="315"
-		max_enchant="1400"
+		min_enchant="320"
+		max_enchant="1430"
 		modchance_strength_mod="0.1"
 		modchance_dexterity_mod="0.1"
+		modchance_willpower_mod="0.05"
 		modchance_magic_power_mod="0.05"
-		modchance_damage_phys_mod="0.15"
+		modchance_damage_phys_mod="0.10"
 		modchance_damage_fire_mod="0.10"
 		modchance_damage_ice_mod="0.10"
 		modchance_damage_air_mod="0.10"
@@ -526,13 +538,13 @@
 	/>
 	<EquipEffect/>
 	<WeaponAttribute
-		damage_min_physical="60"
-		damage_max_physical="75"
-		damage_attack="145"
-		damage_power="182"
+		damage_min_physical="106"
+		damage_max_physical="138"
+		damage_attack="158"
+		damage_power="167"
 		attack_range="1.4"
 		two_handed="yes"
-		dattack_speed="-600"
+		dattack_speed="-400"
 	/>
 	<DropChance
 		level="65"
@@ -540,19 +552,20 @@
 	/>
 </Item>
 
-<!-- Folteraxt -->
-<Item type="weapon" subtype="tortur_axe" size="big">
-	<Image image="set:axe2H.png image:full_image" />
-	<Mesh file="battleaxe.mesh" />
+<!-- Elementenjaeger -->
+<Item type="weapon" subtype="elem_hmr" size="big">
+	<Image image="set:sledgehammer.png image:full_image" />
+	<Mesh file="sledgehammer.mesh" />
 	<Attribute
 		level_requirement="70"
 		character_requirement="15"
-		min_enchant="335"
-		max_enchant="1500"
+		min_enchant="340"
+		max_enchant="1530"
 		modchance_strength_mod="0.1"
 		modchance_dexterity_mod="0.1"
+		modchance_willpower_mod="0.05"
 		modchance_magic_power_mod="0.05"
-		modchance_damage_phys_mod="0.15"
+		modchance_damage_phys_mod="0.10"
 		modchance_damage_fire_mod="0.10"
 		modchance_damage_ice_mod="0.10"
 		modchance_damage_air_mod="0.10"
@@ -562,13 +575,13 @@
 	/>
 	<EquipEffect />
 	<WeaponAttribute
-		damage_min_physical="65"
-		damage_max_physical="196"
-		damage_attack="162"
-		damage_power="186"
+		damage_min_physical="112"
+		damage_max_physical="146"
+		damage_attack="168"
+		damage_power="173"
 		attack_range="1.4"
 		two_handed="yes"
-		dattack_speed="-800"
+		dattack_speed="-500"
 	/>
 	<DropChance
 		level="70"
@@ -576,57 +589,20 @@
 	/>
 </Item>
 
-<!-- Eislandaxt -->
-<Item type="weapon" subtype="ice_axe" size="big">
-	<Image image="set:axe2H.png image:full_image" />
-	<Mesh file="battleaxe.mesh" />
+<!-- Exorzistenhammer -->
+<Item type="weapon" subtype="exocis_hmr" size="big">
+	<Image image="set:sledgehammer.png image:full_image" />
+	<Mesh file="sledgehammer.mesh" />
 	<Attribute
 		level_requirement="75"
 		character_requirement="15"
-		min_enchant="375"
-		max_enchant="1600"
+		min_enchant="380"
+		max_enchant="1680"
 		modchance_strength_mod="0.1"
 		modchance_dexterity_mod="0.1"
+		modchance_willpower_mod="0.05"
 		modchance_magic_power_mod="0.05"
-		modchance_damage_phys_mod="0.15"
-		modchance_damage_fire_mod="0.0"
-		modchance_damage_ice_mod="0.20"
-		modchance_damage_air_mod="0.10"
-		modchance_damage_mult_phys_mod="0.1"
-		modchance_attack_mod="0.1"
-		modchance_power_mod="0.1"
-	/>
-	<EquipEffect />
-	<WeaponAttribute
-		damage_min_physical="59"
-		damage_max_physical="83"
-		damage_min_ice="45"
-		damage_max_ice="85"
-		damage_attack="168"
-		damage_power="190"
-		attack_range="1.4"
-		two_handed="yes"
-		dattack_speed="-600"
-	/>
-	<DropChance
-		level="75"
-		probability="1.0"
-	/>
-</Item>
-
-<!-- Todesaxt -->
-<Item type="weapon" subtype="death_axe" size="big">
-	<Image image="set:axe2H.png image:full_image" />
-	<Mesh file="battleaxe.mesh" />
-	<Attribute
-		level_requirement="80"
-		character_requirement="15"
-		min_enchant="395"
-		max_enchant="2000"
-		modchance_strength_mod="0.1"
-		modchance_dexterity_mod="0.1"
-		modchance_magic_power_mod="0.05"
-		modchance_damage_phys_mod="0.15"
+		modchance_damage_phys_mod="0.10"
 		modchance_damage_fire_mod="0.10"
 		modchance_damage_ice_mod="0.10"
 		modchance_damage_air_mod="0.10"
@@ -636,13 +612,50 @@
 	/>
 	<EquipEffect />
 	<WeaponAttribute
-		damage_min_physical="126"
-		damage_max_physical="185"
-		damage_attack="194"
-		damage_power="245"
+		damage_min_physical="121"
+		damage_max_physical="155"
+		damage_attack="189"
+		damage_power="178"
+		attack_range="1.4"
+		two_handed="yes"
+		dattack_speed="-550"
+	/>
+	<DropChance
+		level="75"
+		probability="1.0"
+	/>
+</Item>
+
+<!-- Welterschuetterer -->
+<Item type="weapon" subtype="world_hmr" size="big">
+	<Image image="set:sledgehammer.png image:full_image" />
+	<Mesh file="sledgehammer.mesh" />
+	<Attribute
+		level_requirement="80"
+		character_requirement="15"
+		min_enchant="410"
+		max_enchant="2100"
+		modchance_strength_mod="0.1"
+		modchance_dexterity_mod="0.1"
+		modchance_willpower_mod="0.05"
+		modchance_magic_power_mod="0.05"
+		modchance_damage_phys_mod="0.10"
+		modchance_damage_fire_mod="0.10"
+		modchance_damage_ice_mod="0.10"
+		modchance_damage_air_mod="0.10"
+		modchance_damage_mult_phys_mod="0.1"
+		modchance_attack_mod="0.1"
+		modchance_power_mod="0.1"
+	/>
+	<EquipEffect />
+	<WeaponAttribute
+		damage_min_physical="134"
+		damage_max_physical="178"
+		damage_attack="217"
+		damage_power="232"
 		attack_range="1.6"
 		two_handed="no"
-		dattack_speed="-600"
+		dattack_speed="-800"
 	/>
 	<DropChance
 		level="80"
