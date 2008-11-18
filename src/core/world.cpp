@@ -434,15 +434,23 @@ WorldObject::Relation World::getRelation(WorldObject::Fraction frac, WorldObject
 	}
 
 	if (frac == WorldObject::NOFRACTION)
+	{
 		return WorldObject::NEUTRAL;
+	}
 	else if (frac <=  WorldObject::FRAC_MONSTER)
 	{
 		if (frac ==  wo->getFraction())
+		{
 			return WorldObject::ALLIED;
+		}
 		else if (wo->getFraction()==WorldObject::NOFRACTION)
+		{
 			return WorldObject::NEUTRAL;
+		}
 		else
+		{
 			return WorldObject::HOSTILE;
+		}
 	}
 	else if (frac ==WorldObject::FRAC_HOSTILE_TO_ALL)
 	{
@@ -452,12 +460,16 @@ WorldObject::Relation World::getRelation(WorldObject::Fraction frac, WorldObject
 	{
 
 		if (f == WorldObject::NOFRACTION)
+		{
 			return WorldObject::NEUTRAL;
+		}
 		else if (f <=  WorldObject::FRAC_HOSTILE_TO_ALL)
+		{
 			return WorldObject::HOSTILE;
+		}
 		else
 		{
-			return (m_parties[frac - WorldObject::FRAC_PLAYER_PARTY].getRelations())[f- WorldObject::FRAC_PLAYER_PARTY];
+			return std::min(m_parties[frac - WorldObject::FRAC_PLAYER_PARTY].getRelations()[f- WorldObject::FRAC_PLAYER_PARTY], m_parties[f - WorldObject::FRAC_PLAYER_PARTY].getRelations()[frac- WorldObject::FRAC_PLAYER_PARTY]);
 		}
 	}
 }
@@ -553,7 +565,6 @@ bool World::insertPlayer(WorldObject* player, int slot)
 			DEBUG("opened Party %i",p->getId());
 		}
 		p->addMember(player->getId());
-		player->setFraction((WorldObject::Fraction) (p->getId() + WorldObject::FRAC_PLAYER_PARTY));
 	}
 
 	return true;
@@ -1607,11 +1618,30 @@ bool World::writeEvent(Region* region,Event* event, CharConv* cv)
 		if (object != 0)
 		{
 			cv->toBuffer<char>(static_cast<Player*>(object)->getParty()->getId());
-			DEBUG("player %i changed party to %i",event->m_id, static_cast<Player*>(object)->getParty()->getId());
+			DEBUG5("player %i changed party to %i",event->m_id, static_cast<Player*>(object)->getParty()->getId());
 		}
 		else
 			return false;
 	}
+	
+	if (event->m_type == Event::PLAYER_PARTY_CANDIDATE)
+	{
+		object = (*m_players)[event->m_id];
+		if (object != 0)
+		{
+			cv->toBuffer<char>(static_cast<Player*>(object)->getCandidateParty());
+			DEBUG5("player %i candidate for party %i",event->m_id, static_cast<Player*>(object)->getCandidateParty());
+		}
+		else
+			return false;
+	}
+	
+	if (event->m_type == Event::PARTY_RELATION_CHANGED)
+	{
+		DEBUG("party %i changed relation to %i to %i",event->m_data, event->m_id, getParty(event->m_data)->getRelations()[event->m_id]);
+		cv->toBuffer<char>(getParty(event->m_data)->getRelations()[event->m_id]);
+	}
+	
 	return true;
 }
 
@@ -1626,6 +1656,7 @@ bool World::processEvent(Region* region,CharConv* cv)
 
 	WorldObject* object;
 	Projectile* proj;
+	int id;
 	
 	// Objekt suchen dass zu dem Event gehoert
 	// Spieler werden aus der Spielerliste gesucht
@@ -1910,7 +1941,7 @@ bool World::processEvent(Region* region,CharConv* cv)
 				static_cast<Player*>(object)->getParty()->removeMember(object->getId());
 				char id;
 				cv->fromBuffer(id);
-				DEBUG("player %i changed party to %i",object->getId(),id);
+				DEBUG5("player %i changed party to %i",object->getId(),id);
 				World::getWorld()->getParty( id )->addMember(object->getId());
 				
 			}
@@ -1919,7 +1950,35 @@ bool World::processEvent(Region* region,CharConv* cv)
 				return false;
 			}
 			break;
-
+			
+		case Event::PLAYER_PARTY_CANDIDATE:
+			if (m_players->count(event.m_id)>0)
+			{
+				object = (*m_players)[event.m_id];
+				// bisherige Bewerbung entfernen
+				id = static_cast<Player*>(object)->getCandidateParty();
+				if (id >= 0)
+				{
+					getParty(id)->removeCandidate(object->getId());
+				}
+				char id;
+				cv->fromBuffer(id);
+				DEBUG5("player %i candidate for party  %i",object->getId(),id);
+				World::getWorld()->getParty( id )->addCandidate(object->getId());
+				
+			}
+			else
+			{
+				return false;
+			}
+			break;
+		case Event::PARTY_RELATION_CHANGED:
+			char rel;
+			cv->fromBuffer(rel);
+			World::getWorld()->getParty( event.m_data )->setRelation(event.m_id, (WorldObject::Relation) rel);
+			DEBUG("party %i changed relation to %i to %i",event.m_data, event.m_id, rel);
+			break;
+			
 		default:
 			ERRORMSG("unknown event type %i",event.m_type);
 

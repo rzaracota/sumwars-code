@@ -390,6 +390,25 @@ public:
 	 */
 	void addMessage(std::string msg);
 	
+	/**
+	 * \fn int getCandidateParty()
+	 * \brief Gibt die Nummer der Party aus, bei der sich der Spieler bewirbt
+	 */
+	int getCandidateParty()
+	{
+		return m_candidate_party;
+	}
+	
+	/**
+	 * \fn void setCandidateParty(int id)
+	 * \brief Setzt die Nummer der Party, bei der sich der Spieler bewirbt
+	 * \param id ID der party
+	 */
+	void setCandidateParty(int id)
+	{
+		m_candidate_party  = id;
+	}
+	
 
 //Protected stuff
 protected:
@@ -511,6 +530,12 @@ protected:
 	 * \brief Nachrichten die dieser Spieler erhalten hat
 	 */
 	std::string m_messages;
+	
+	/**
+	 * \fn int m_candidate_party
+	 * \brief Nummer der Party bei der sich der Spieler bewirbt
+	 */
+	int m_candidate_party;
 	
 	//Constructors
 	//Accessor Methods

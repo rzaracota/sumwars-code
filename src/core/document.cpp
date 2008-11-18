@@ -462,29 +462,64 @@ int Document::getObjectAt(float x,float y)
 }
 
 
-void Document::onButtonPartyApply(int pnr)
+void Document::onButtonPartyApply(int id)
 {
 	ClientCommand command;
-	command.m_button = BUTTON_PARTY_APPLY;
-	command.m_id = pnr;
+	command.m_button = BUTTON_APPLY;
+	command.m_id = id;
 	sendCommand(&command);
 }
 
-void Document::onButtonPartyAccept(int cnr)
+void Document::onButtonPartyAccept(int id)
 {
 	ClientCommand command;
-	command.m_button = BUTTON_PARTY_ACCEPT;
+	command.m_button = BUTTON_MEMBER_ACCEPT;
+	command.m_id = id;
+	sendCommand(&command);
+	
+}
 
-	// Party in der der Spieler Mitglied ist
-	Party* party = getParty();
-	if (party ==0)
-		return;
+void Document::onButtonPartyReject(int id)
+{
+	ClientCommand command;
+	command.m_button = BUTTON_MEMBER_REJECT;
+	command.m_id = id;
+	sendCommand(&command);
+	
+}
 
-	if (party->getNrCandidates() > cnr)
-	{
-		command.m_id = cnr;
-		sendCommand(&command);
-	}
+void Document::onButtonPartyWar(int id)
+{
+	ClientCommand command;
+	command.m_button = BUTTON_WAR;
+	command.m_id = id;
+	sendCommand(&command);
+	
+}
+
+void Document::onButtonPartyPeace(int id)
+{
+	ClientCommand command;
+	command.m_button = BUTTON_PEACE;
+	command.m_id = id;
+	sendCommand(&command);
+	
+}
+
+
+void Document::onButtonKick(int id)
+{
+	ClientCommand command;
+	command.m_button = BUTTON_KICK;
+	command.m_id = id;
+	sendCommand(&command);
+}
+
+void Document::onButtonPartyLeave()
+{
+	ClientCommand command;
+	command.m_button = BUTTON_LEAVE;
+	sendCommand(&command);
 }
 
 void Document::onItemLeftClick(short pos)
@@ -583,8 +618,31 @@ void Document::onButtonCharInfoClicked()
 	}
 	else
 	{
+		getGUIState()->m_shown_windows &= ~PARTY;
+		
 		getGUIState()->m_shown_windows |= CHARINFO;
 	}
+
+	// Geoeffnete Fenster haben sich geaendert
+	m_modified |= WINDOWS_MODIFIED;
+}
+
+void Document::onButtonPartyInfoClicked()
+{
+	// PartyInfo oeffnen wenn es gerade geschlossen ist und schliessen, wenn er geoeffnet ist
+	if (getGUIState()->m_shown_windows & PARTY)
+	{
+		getGUIState()->m_shown_windows &= ~PARTY;
+	}
+	else
+	{
+		// wenn PartyInfo geoeffnet wird, dann CharInfo schliessen
+		getGUIState()->m_shown_windows &= ~CHARINFO;
+
+		getGUIState()->m_shown_windows |= PARTY;
+	}
+
+	m_gui_state.m_pressed_key = 0;
 
 	// Geoeffnete Fenster haben sich geaendert
 	m_modified |= WINDOWS_MODIFIED;
@@ -640,6 +698,8 @@ void Document::onSwapEquip()
 	command.m_button = BUTTON_SWAP_EQUIP;
 	sendCommand(&command);
 }
+
+
 
 void Document::setLeftAction(Action::ActionType act)
 {

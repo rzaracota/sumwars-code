@@ -225,6 +225,16 @@ void MainWindow::update()
 			chatline = static_cast<CEGUI::Editbox*>(win_mgr.getWindow("Chatline"));
 			chatline->deactivate();
 		}
+		
+		CEGUI::FrameWindow* party_info = (CEGUI::FrameWindow*) win_mgr.getWindow("PartyInfo");
+		if (wflags & Document::PARTY)
+		{
+			party_info->setVisible(true);
+		}
+		else
+		{
+			party_info->setVisible(false);
+		}
 
 		if (m_document->getLocalPlayer()!=0)
 		{
@@ -248,6 +258,8 @@ void MainWindow::update()
 			{
 				skilltree->setVisible(false);
 			}
+			
+			
 		}
 		m_document->setModified(m_document->getModified() & ~Document::WINDOWS_MODIFIED);
 	}
@@ -295,6 +307,12 @@ void MainWindow::update()
 		{
 			// Skilltree aktualisieren
 			m_sub_windows["SkillTree"]->update();
+		}
+		
+		if (wflags & Document::PARTY)
+		{
+			// Skilltree aktualisieren
+			m_sub_windows["PartyInfo"]->update();
 		}
 		
 		// + Buttons fuer Levelup aktualisieren
@@ -501,6 +519,14 @@ bool MainWindow::setupObjectInfo()
 
 bool MainWindow::setupPartyInfo()
 {
+	
+	Window* wnd = new PartyInfo(m_document);
+	m_sub_windows["PartyInfo"] = wnd;
+	
+	// PartyInfo anfangs ausblenden
+	m_game_screen->addChildWindow(wnd->getCEGUIWindow());
+	wnd->getCEGUIWindow()->setVisible(false);
+	
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	
 	CEGUI::Window* img;
@@ -870,6 +896,12 @@ void MainWindow::updateObjectInfo()
 
 void MainWindow::updatePartyInfo()
 {
+	int windows = m_document->getGUIState()->m_shown_windows;
+	if (windows & Document::PARTY)
+	{
+		// Fenster PartyInfo aktualisieren
+		m_sub_windows["PartyInfo"]->update();
+	}
 	
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	
@@ -879,51 +911,55 @@ void MainWindow::updatePartyInfo()
 	std::ostringstream stream;
 	
 	int i=0;
-	float hperc;
-	Player* player = m_document->getLocalPlayer();
-	Player* pl;
-	Party* party = World::getWorld()->getPartyFrac(player->getFraction());
-	
-	std::set<int>::iterator it;
-	// Schleife ueber die Mitglieder der Party des Spielers
-	for (it =  party->getMembers().begin(); it!= party->getMembers().end(); it++)
+	if (!( windows & Document::PARTY || windows & Document::CHARINFO)) 
 	{
-		// eigenen Spieler ueberspringen
-		if (*it == player->getId())
-			continue;
+		float hperc;
+		Player* player = m_document->getLocalPlayer();
+		Player* pl;
+		Party* party = World::getWorld()->getPartyFrac(player->getFraction());
 		
-		pl =  static_cast<Player*>(World::getWorld()->getPlayer(*it));
-		
-		stream.str("");
-		stream << "PartyMemberImage";
-		stream << i;
-		img = win_mgr.getWindow(stream.str());
-		
-		// Bild setzen und anzeigen
-		if (!img->isVisible())
+		std::set<int>::iterator it;
+		// Schleife ueber die Mitglieder der Party des Spielers
+		for (it =  party->getMembers().begin(); it!= party->getMembers().end(); it++)
 		{
-			img->setVisible(true);
+			// eigenen Spieler ueberspringen
+			if (*it == player->getId())
+				continue;
+			
+			pl =  static_cast<Player*>(World::getWorld()->getPlayer(*it));
+			
+			stream.str("");
+			stream << "PartyMemberImage";
+			stream << i;
+			img = win_mgr.getWindow(stream.str());
+			
+			// Bild setzen und anzeigen
+			if (!img->isVisible())
+			{
+				img->setVisible(true);
+			}
+			
+			stream.str("");
+			stream << "PartyMemberHealthBar";
+			stream << i;
+			bar = static_cast<CEGUI::ProgressBar*>(win_mgr.getWindow(stream.str()));
+			
+			// Fortschrittsbalken setzen und anzeigen
+			hperc = pl->getDynAttr()->m_health / pl->getBaseAttrMod()->m_max_health;
+			if (bar->getProgress() != hperc)
+			{
+				bar->setProgress(hperc);
+			}
+			
+			if (!bar->isVisible())
+			{
+				bar->setVisible(true);
+			}
+			
+			i++;
 		}
-		
-		stream.str("");
-		stream << "PartyMemberHealthBar";
-		stream << i;
-		bar = static_cast<CEGUI::ProgressBar*>(win_mgr.getWindow(stream.str()));
-		
-		// Fortschrittsbalken setzen und anzeigen
-		hperc = pl->getDynAttr()->m_health / pl->getBaseAttrMod()->m_max_health;
-		if (bar->getProgress() != hperc)
-		{
-			bar->setProgress(hperc);
-		}
-		
-		if (!bar->isVisible())
-		{
-			bar->setVisible(true);
-		}
-		
-		i++;
 	}
+	
 	
 	// restliche Bilder verstecken
 	for (;i<7; i++)

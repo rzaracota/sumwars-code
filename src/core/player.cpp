@@ -76,6 +76,8 @@ bool Player::init()
 	m_equipement = new Equipement(5,14,30);
 
 	m_save_timer= 3000;
+	
+	m_candidate_party = -1;
 
 	return true;
 }
@@ -805,8 +807,9 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 {
 	DEBUG5("Kommando (%f %f) button: %i id: %i action: %i",command->m_goal.m_x,command->m_goal.m_y,command->m_button,command->m_id, command->m_action);
 
-	Party* p, *p2;
+	Party* 	p;
 	WorldObject* wo;
+	Player* pl;
 
 	Item* si;
 	DropSlot ds;
@@ -832,29 +835,57 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 			onGamefieldClick(command);
 			break;
 
-		case BUTTON_PARTY_APPLY:
-			DEBUG("apply to party %i",command->m_id);
-			p = World::getWorld()->getParty(command->m_id);
-			if (p->getNrMembers()==0)
-				break;
-			p->addCandidate(getId());
-
-			break;
-
-		case BUTTON_PARTY_ACCEPT:
-			DEBUG("accept %i",command->m_id)
-
-			p = World::getWorld()->getPartyFrac(m_fraction);
-			p ->acceptCandidate(command->m_id);
-			// FIXME: Spieler ausgeben lassen !
-			wo =getRegion()->getObject(command->m_id);
-			if (wo !=0)
+		case BUTTON_APPLY:
+		case BUTTON_PEACE:	
+		case BUTTON_WAR:
+			pl = static_cast<Player*>(World::getWorld()->getPlayer(command->m_id));
+			if (pl !=0)
 			{
-				p2 = World::getWorld()->getPartyFrac(wo->getFraction());
-				p2->removeMember(command->m_id);
-				wo->setFraction(m_fraction);
+				p = pl->getParty();
+				if (command->m_button == BUTTON_APPLY)
+				{
+					p->addCandidate(getId());
+				}
+				else if (command->m_button == BUTTON_WAR)
+				{
+					getParty()->setRelation(p->getId() , HOSTILE);
+				}
+				else if (command->m_button == BUTTON_PEACE)	
+				{
+					getParty()->setRelation(p->getId() , NEUTRAL);
+				}
 			}
-
+			break;
+		case BUTTON_MEMBER_REJECT:
+			getParty()->removeCandidate(command->m_id);
+			break;
+			
+			
+		case BUTTON_MEMBER_ACCEPT:
+			pl = static_cast<Player*>(World::getWorld()->getPlayer(command->m_id));
+			if (pl !=0)
+			{
+				pl->getParty()->removeMember(pl->getId());
+				getParty()->acceptCandidate(command->m_id);
+			}
+			break;
+			
+		case BUTTON_KICK:
+			getParty()->removeMember(command->m_id);
+			World::getWorld()->getEmptyParty()->addMember(command->m_id);
+			break;
+			
+		case BUTTON_LEAVE:
+			if (getParty()->getNrMembers() ==1)
+			{
+				if (m_candidate_party >=0)
+					World::getWorld()->getParty(m_candidate_party)->removeCandidate(getId());
+			}
+			else
+			{
+				getParty()->removeMember(getId());
+				World::getWorld()->getEmptyParty()->addMember(getId());
+			}
 			break;
 
 		case BUTTON_SET_LEFT_ACTION:
@@ -1008,7 +1039,8 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 			}
 			break;
 
-		default: ;
+		default: 
+			DEBUG("unknown command: %i",command->m_button);
 	}
 
 	if (oldcommand != *getNextCommand() && delay>0)

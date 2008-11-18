@@ -470,6 +470,12 @@ class Document
 	 * \brief Behandelt Klick auf CharakterInfo Button
 	 */
 	void onButtonCharInfoClicked();
+	
+	/**
+	 * \fn void onButtonPartyInfoClicked()
+	 * \brief Behandelt Klick auf CharakterInfo Button
+	 */
+	void onButtonPartyInfoClicked();
 
 
 	/**
@@ -489,6 +495,8 @@ class Document
 	 * \brief Wechselt die Ausruestung
 	 */
 	void onSwapEquip();
+	
+	
 
 	/**
 	 * \fn void onLeftMouseButtonClick (float x, float y)
@@ -559,18 +567,52 @@ class Document
 	bool onKeyRelease(KeyCode key);
 
 	/**
-	 * \fn void onButtonPartyApply(int pnr)
-	 * \brief Behandelt Druck auf Button Bei einer Party bewerben
-	 * \param pnr Nummer der Party
+	 * \fn void onButtonKick(int id)
+	 * \brief Behandelt Klick auf Button Spieler kicken
+	 * \param id ID des Spielers
 	 */
-	void onButtonPartyApply(int pnr);
+	void onButtonKick(int id);
+	
+	/**
+	 * \fn void onButtonPartyApply(int id)
+	 * \brief Behandelt Druck auf Button Bei einer Party bewerben
+	 * \param id ID des Partyleiters
+	 */
+	void onButtonPartyApply(int id);
 
 	/**
-	 * \fn void onButtonPartyAccept(int cnr)
+	 * \fn void onButtonPartyAccept(int id)
 	 * \brief Behandelt Druck auf Button Partymitglied annehmen
-	 * \param cnr ID des Bewerbers
+	 * \param id ID des Bewerbers
 	 */
-	void onButtonPartyAccept(int cnr);
+	void onButtonPartyAccept(int id);
+	
+	/**
+	 * \fn void onButtonPartyReject(int id)
+	 * \brief Behandelt Druck auf Button Partymitglied ablehnen
+	 * \param id ID des Bewerbers
+	 */
+	void onButtonPartyReject(int id);
+	
+	/**
+	 * \fn void onButtonPartyWar(int id)
+	 * \brief Behandelt Druck auf Button Krieg erklaeren
+	 * \param id ID des Partyleiters
+	 */
+	void onButtonPartyWar(int id);
+	
+	/**
+	 * \fn void onButtonPartyPeace(int id)
+	 * \brief Behandelt Druck auf Button Frieden schliessen
+	 * \param id ID des Partyleiters
+	 */
+	void onButtonPartyPeace(int id);
+	
+	/**
+	 * \fn void onButtonPartyLeave()
+	 * \brief Behandelt Druck auf Button Partymitglied ablehnen
+	 */
+	void onButtonPartyLeave();
 	
 	/**
 	 * \fn void sendChatMessage(std::string msg)

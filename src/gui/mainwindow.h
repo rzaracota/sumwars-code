@@ -31,7 +31,7 @@
 #include "mainmenu.h"
 #include "savegamelist.h"
 #include "chatline.h"
-
+#include "partyinfo.h"
 
 /**
  * \class MainWindow

@@ -260,8 +260,7 @@ bool ControlPanel::onButtonSkilltreeClicked(const CEGUI::EventArgs& evt)
 
 bool ControlPanel::onButtonPartyClicked(const CEGUI::EventArgs& evt)
 {
-	// Debugging
-	m_document->emitDebugSignal(0);
+	m_document->onButtonPartyInfoClicked();
 	return true;
 }
 

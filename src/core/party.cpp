@@ -1,11 +1,13 @@
 #include "party.h"
 #include "world.h"
+#include "player.h"
 
 void Party::init(int id)
 {
 	
 	m_leader_id =0;
 	m_id = id;
+	m_relations[id] = WorldObject::ALLIED;
 }
 
 
@@ -24,37 +26,69 @@ void Party::clear()
 
 void Party::addMember(int id)
 {
-	DEBUG5("adding member %i to party %i",id, m_id);
+	WorldObject* player = World::getWorld()->getPlayer(id);
+	if (player ==0)
+		return;
+	
+	DEBUG("adding member %i to party %i",id, m_id);
+	if (m_members.empty())
+	{
+		m_leader_id = id;
+	}
 	m_members.insert(id);
+	
+	player->setFraction((WorldObject::Fraction) (getId() + WorldObject::FRAC_PLAYER_PARTY));
 	
 	if (World::getWorld()->isServer())
 	{
+		
 		Event event;
 		event.m_id = id;
 		event.m_type = Event::PLAYER_PARTY_CHANGED;
 		
 		World::getWorld()->insertEvent(event);
 	}
+	
+	
 }
 
 void Party::addCandidate(int id)
 {
 	DEBUG("adding candidate %i to party %i",id, m_id);
-
+	Player* pl = static_cast<Player*>( World::getWorld()->getPlayer(id));
+	if (pl !=0)
+	{
+		pl->setCandidateParty(getId());
+	}
 	m_candidates.insert(id);
+	
+	if (World::getWorld()->isServer())
+	{
+		
+		Event event;
+		event.m_id = id;
+		event.m_type = Event::PLAYER_PARTY_CANDIDATE;
+		
+		World::getWorld()->insertEvent(event);
+	}
 }
 
 void Party::removeMember(int id)
 {
-	DEBUG5("removing member %i from party %i",id, m_id);
+	DEBUG("removing member %i from party %i",id, m_id);
 
 	m_members.erase(id);
+	DEBUG("number of members %i",m_members.size());
 }
 
 void Party::removeCandidate(int id)
 {	
 	DEBUG("removing candidate %i from party %i",id, m_id);
-
+	Player* pl = static_cast<Player*>( World::getWorld()->getPlayer(id));
+	if (pl !=0)
+	{
+		pl->setCandidateParty(-1);
+	}
 	m_candidates.erase(id);
 }
 
@@ -65,6 +99,21 @@ void Party::acceptCandidate(int id)
 	addMember(id);
 }
 
+void Party::setRelation(int id, WorldObject::Relation rel)
+{
+	m_relations[id] = rel;
+	
+	if (World::getWorld()->isServer())
+	{
+		
+		Event event;
+		event.m_id = id;
+		event.m_data = getId();
+		event.m_type = Event::PARTY_RELATION_CHANGED;
+		
+		World::getWorld()->insertEvent(event);
+	}
+}
 
 void Party::toString(CharConv* cv)
 {

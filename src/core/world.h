@@ -380,6 +380,15 @@ public:
 	WorldObject* getPlayer(int id);
 	
 	/**
+	 * \fn WorldObjectMap* getPlayers()
+	 * \brief Gibt die Liste aller Spieler aus
+	 */
+	WorldObjectMap* getPlayers()
+	{
+		return m_players;
+	}
+	
+	/**
 	 * \fn bool isServer()
 	 * \brief gibt true aus, wenn die Welt der Server ist
 	 */

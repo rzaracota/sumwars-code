@@ -54,3 +54,4 @@
 ./gui/mainmenu.o
 ./gui/savegamelist.o
 ./gui/chatline.o
+./gui/partyinfo.o

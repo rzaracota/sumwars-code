@@ -72,6 +72,14 @@ class Party
 	{
 		return m_relations;
 	}
+	
+	/**
+	 * \fn void setRelation(int id, WorldObject::Relation rel)
+	 * \brief Setzt die Beziehung zwischen zwei Parties
+	 * \param id Id der Party
+	 * \param rel Beziehung
+	 */
+	void setRelation(int id, WorldObject::Relation rel);
 
 	/**
 	 * \fn int getId()
@@ -99,6 +107,15 @@ class Party
 	int getNrCandidates()
 	{
 		return m_candidates.size();
+	}
+	
+	/**
+	 * \fn int getLeader()
+	 * \brief Gibt die ID des Leaders aus
+	 */
+	int getLeader()
+	{
+		return m_leader_id;
 	}
 
 	/**
