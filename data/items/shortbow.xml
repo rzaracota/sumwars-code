@@ -1,0 +1,339 @@
+<!-- SHORT BOWS -->
+<!-- TODO ersetze twohanded="no", ersetze weapontype="sword, ersetze set:sword.png"-->
+<!-- Uebungsbogen -->
+<Item type="weapon" subtype="trainy_sbw" size="medium">
+	<Mesh file="bow.mesh" />
+	<Image image="set:bow.png image:full_image" />
+	<Attribute
+		level_requirement="1"
+		character_requirement="15"
+		min_enchant="30"
+		max_enchant="60"
+		modchance_strength_mod="0.1"
+		modchance_dexterity_mod="0.15"
+		modchance_damage_phys_mod="0.15"
+		modchance_damage_fire_mod="0.10"
+		modchance_damage_ice_mod="0.10"
+		modchance_damage_air_mod="0.10"
+		modchance_damage_mult_phys_mod="0.1"
+		modchance_attack_mod="0.1"
+		modchance_power_mod="0.1"
+	/>
+	<EquipEffect />
+		<WeaponAttribute
+		weapon_type="bow"
+		damage_min_physical="3"
+		damage_max_physical="5"
+		damage_attack="45"
+		damage_power="20"
+		attack_range="8"
+		two_handed="yes"
+		dattack_speed="600"
+	/>
+	<DropChance
+		level="1"
+		probability="1.0"
+	/>
+</Item>
+
+<!-- Goblinbogen -->
+<Item type="weapon" subtype="goblin_sbw" size="medium">
+	<Mesh file="bow.mesh" />
+	<Image image="set:goblin_sbw.png image:full_image" />
+	<Attribute
+		level_requirement="2"
+		character_requirement="4"
+		min_enchant="20"
+		max_enchant="50"
+		modchance_strength_mod="0.1"
+		modchance_dexterity_mod="0.15"
+		modchance_damage_phys_mod="0.15"
+		modchance_damage_fire_mod="0.10"
+		modchance_damage_ice_mod="0.10"
+		modchance_damage_air_mod="0.10"
+		modchance_damage_mult_phys_mod="0.1"
+		modchance_attack_mod="0.1"
+		modchance_power_mod="0.1"
+	/>
+	<EquipEffect />
+		<WeaponAttribute
+		weapon_type="bow"
+		damage_min_physical="4"
+		damage_max_physical="7"
+		damage_attack="38"
+		damage_power="27"
+		attack_range="8"
+		two_handed="yes"
+		dattack_speed="700"
+	/>
+	<DropChance
+		level="1"
+		probability="1.0"
+	/>
+</Item>
+
+<!-- Eibenkurzbogen -->
+<Item type="weapon" subtype="yew_sbw" size="medium">
+	<Mesh file="bow.mesh" />
+	<Image image="set:bow.png image:full_image" />
+	<Attribute
+		level_requirement="3"
+		character_requirement="15"
+		min_enchant="45"
+		max_enchant="120"
+		modchance_strength_mod="0.10"
+		modchance_dexterity_mod="0.15"
+		modchance_damage_phys_mod="0.15"
+		modchance_damage_fire_mod="0.10"
+		modchance_damage_ice_mod="0.10"
+		modchance_damage_air_mod="0.10"
+		modchance_damage_mult_phys_mod="0.1"
+		modchance_attack_mod="0.1"
+		modchance_power_mod="0.1"
+	/>
+	<EquipEffect />
+	<WeaponAttribute
+		weapon_type="bow"
+		damage_min_physical="7"
+		damage_max_physical="13"
+		damage_attack="35"
+		damage_power="30"
+		attack_range="1.0"
+		two_handed="yes"
+		dattack_speed="500"
+	/>
+	<DropChance
+		level="3"
+		probability="1.0"
+	/>
+</Item>
+
+<!-- Kurzbogen -->
+<Item type="weapon" subtype="short_sbw" size="medium">
+	<Mesh file="bow.mesh" />
+	<Image image="set:bow_sw.png image:full_image" />
+	<Attribute
+		level_requirement="5"
+		character_requirement="15"
+		min_enchant="60"
+		max_enchant="195"
+		modchance_strength_mod="0.1"
+		modchance_dexterity_mod="0.15"
+		modchance_damage_phys_mod="0.15"
+		modchance_damage_fire_mod="0.10"
+		modchance_damage_ice_mod="0.10"
+		modchance_damage_air_mod="0.10"
+		modchance_damage_mult_phys_mod="0.1"
+		modchance_attack_mod="0.1"
+		modchance_power_mod="0.1"
+	/>
+	<EquipEffect />
+		<WeaponAttribute
+		weapon_type="bow"
+		damage_min_physical="10"
+		damage_max_physical="14"
+		damage_attack="46"
+		damage_power="33"
+		attack_range="8"
+		two_handed="yes"
+		dattack_speed="450"
+	/>
+	<DropChance
+		level="5"
+		probability="1.0"
+	/>
+</Item>
+
+<!-- Jagdbogen -->
+<Item type="weapon" subtype="hunter_sbw" size="medium">
+	<Image image="set:bow.png image:full_image" />
+	<Mesh file="sword.mesh" />
+	<Attribute
+		level_requirement="8"
+		character_requirement="15"
+		min_enchant="75"
+		max_enchant="255"
+		modchance_strength_mod="0.1"
+		modchance_dexterity_mod="0.15"
+		modchance_damage_phys_mod="0.15"
+		modchance_damage_fire_mod="0.10"
+		modchance_damage_ice_mod="0.10"
+		modchance_damage_air_mod="0.10"
+		modchance_damage_mult_phys_mod="0.1"
+		modchance_attack_mod="0.1"
+		modchance_power_mod="0.1"
+	/>
+	<EquipEffect />
+		<WeaponAttribute
+		weapon_type="sword"
+		damage_min_physical="12"
+		damage_max_physical="18"
+		damage_attack="58"
+		damage_power="49"
+		special_flags="extra_animal_dmg"
+		attack_range="8"
+		two_handed="no"
+		dattack_speed="500"
+	/>
+	<DropChance
+		level="8"
+		probability="1.0"
+	/>
+</Item>
+
+<!-- Rattanbogen -->
+<Item type="weapon" subtype="rattan_sbw" size="medium">
+	<Image image="set:bow.png image:full_image" />
+	<Mesh file="sword.mesh" />
+	<Attribute
+		level_requirement="13"
+		character_requirement="15"
+		min_enchant="90"
+		max_enchant="300"
+		modchance_strength_mod="0.1"
+		modchance_dexterity_mod="0.15"
+		modchance_damage_phys_mod="0.15"
+		modchance_damage_fire_mod="0.10"
+		modchance_damage_ice_mod="0.10"
+		modchance_damage_air_mod="0.10"
+		modchance_damage_mult_phys_mod="0.1"
+		modchance_attack_mod="0.1"
+		modchance_power_mod="0.1"
+	/>
+	<EquipEffect />
+		<WeaponAttribute
+		weapon_type="sword"
+		damage_min_physical="16"
+		damage_max_physical="24"
+		damage_attack="67"
+		damage_power="54"
+		attack_range="8"
+		two_handed="no"
+		dattack_speed="450"
+	/>
+	<DropChance
+		level="13"
+		probability="1.0"
+	/>
+</Item>
+
+<!-- Banditenbogen -->
+<Item type="weapon" subtype="bandit_sbw" size="medium">
+	<Image image="set:sword.png image:full_image" />
+	<Mesh file="sword.mesh" />
+	<Attribute
+		level_requirement="19"
+		character_requirement="15"
+		min_enchant="70"
+		max_enchant="250"
+		modchance_strength_mod="0.1"
+		modchance_dexterity_mod="0.15"
+		modchance_damage_phys_mod="0.15"
+		modchance_damage_fire_mod="0.10"
+		modchance_damage_ice_mod="0.10"
+		modchance_damage_air_mod="0.10"
+		modchance_damage_mult_phys_mod="0.1"
+		modchance_attack_mod="0.1"
+		modchance_power_mod="0.1"
+	/>
+	<EquipEffect />
+		<WeaponAttribute
+		weapon_type="sword"
+		damage_min_physical="19"
+		damage_max_physical="27"
+		damage_attack="79"
+		damage_power="62"
+		attack_range="8"
+		two_handed="no"
+		dattack_speed="550"
+	/>
+	<DropChance
+		level="19"
+		probability="1.0"
+	/>
+</Item>
+
+<!-- Nordauge -->
+<Item type="weapon" subtype="ice_sbw" size="medium">
+	<Image image="set:sword.png image:full_image" />
+	<Mesh file="sword.mesh" />
+	<Attribute
+		level_requirement="25"
+		character_requirement="15"
+		min_enchant="120"
+		max_enchant="450"
+		modchance_strength_mod="0.1"
+		modchance_dexterity_mod="0.15"
+		modchance_damage_phys_mod="0.15"
+		modchance_damage_fire_mod="0.10"
+		modchance_damage_ice_mod="0.10"
+		modchance_damage_air_mod="0.10"
+		modchance_damage_mult_phys_mod="0.1"
+		modchance_attack_mod="0.1"
+		modchance_power_mod="0.1"
+	/>
+	<EquipEffect />
+		<WeaponAttribute
+		weapon_type="sword"
+		damage_min_physical="8"
+		damage_max_physical="10"
+		damage_min_ice="17"
+		damage_max_ice="24"
+		damage_attack="87"
+		damage_power="74"
+		attack_range="8"
+		two_handed="no"
+		dattack_speed="400"
+	/>
+	<DropChance
+		level="25"
+		probability="1.0"
+	/>
+</Item>
+
+<!-- Kriegskurzbogen -->
+<Item type="weapon" subtype="battle_sbw" size="medium">
+	<Image image="set:sword.png image:full_image" />
+	<Mesh file="sword.mesh" />
+	<Attribute
+		level_requirement="30"
+		character_requirement="15"
+		min_enchant="135"
+		max_enchant="525"
+		modchance_strength_mod="0.1"
+		modchance_dexterity_mod="0.15"
+		modchance_damage_phys_mod="0.15"
+		modchance_damage_fire_mod="0.10"
+		modchance_damage_ice_mod="0.10"
+		modchance_damage_air_mod="0.10"
+		modchance_damage_mult_phys_mod="0.1"
+		modchance_attack_mod="0.1"
+		modchance_power_mod="0.1"
+	/>
+	<EquipEffect />
+		<WeaponAttribute
+		weapon_type="sword"
+		damage_min_physical="25"
+		damage_max_physical="36"
+		damage_attack="102"
+		damage_power="92"
+		attack_range="8"
+		two_handed="no"
+		dattack_speed="450"
+	/>
+	<DropChance
+		level="30"
+		probability="1.0"
+	/>
+</Item>
+
+<!-- Kompositbogen -->
+<!-- Reiterbogen -->
+<!-- Kohlebogen -->
+<!-- Eschenbogen -->
+<!-- Fluchbogen -->
+<!-- Eichenkurzbogen -->
+<!-- Seelenbogen -->
+<!-- Sucher -->
+<!-- Chaosbogen -->
+<!-- Feenbogen -->
