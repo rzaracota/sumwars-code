@@ -39,7 +39,7 @@
 
 <!-- Bronzehammer -->
 <Item type="weapon" subtype="bronze_hmr" size="big">
-	<Image image="set:sledgehammer.png image:full_image" />
+	<Image image="set:bronze_hmr.png image:full_image" />
 	<Mesh file="sledgehammer.mesh" />
 	<Attribute
 		level_requirement="3"
@@ -76,7 +76,7 @@
 
 <!-- Langstiel -->
 <Item type="weapon" subtype="long_hmr" size="big">
-	<Image image="set:sledgehammer.png image:full_image" />
+	<Image image="set:long_hmr.png image:full_image" />
 	<Mesh file="sledgehammer.mesh" />
 	<Attribute
 		level_requirement="5"
@@ -302,7 +302,7 @@
 	/>
 </Item>
 
-<!-- Aisener Kriegshammer -->
+<!-- Aisen Kriegshammer -->
 <Item type="weapon" subtype="aisen_hmr" size="big">
 	<Image image="set:sledgehammer.png image:full_image" />
 	<Mesh file="sledgehammer.mesh" />

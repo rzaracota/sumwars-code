@@ -77,6 +77,7 @@
 
 <!-- Zeremonienhammer -->
 <Item type="weapon" subtype="cermon_hmr" size="medium">
+	<Image image="set:cermon_hmr.png image:full_image" />
 	<Mesh file="hammer.mesh" />
 	<Attribute
 			  level_requirement="3"
@@ -150,7 +151,7 @@
 
 <!-- Eisenhammer -->
 <Item type="weapon" subtype="iron_hmr" size="medium">
-	<Image image="set:hammer.png image:full_image" />
+	<Image image="set:iron_hmr.png image:full_image" />
 	<Mesh file="hammer.mesh" />
 	<Attribute
 		level_requirement="5"
