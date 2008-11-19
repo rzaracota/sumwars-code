@@ -901,7 +901,7 @@ bool Document::onKeyPress(KeyCode key)
 		}
 		else if(dest == SHOW_PARTYMENU)
 		{
-			emitDebugSignal(0);
+			onButtonPartyInfoClicked();
 		}
 		else if(dest == SHOW_CHATBOX)
 		{
@@ -933,6 +933,10 @@ bool Document::onKeyPress(KeyCode key)
 			// Geoeffnete Fenster haben sich geaendert
 				m_modified |= WINDOWS_MODIFIED;
 			}
+		}
+		else if (dest >= CHEAT && dest < CHEAT+10)
+		{
+			emitDebugSignal(dest-CHEAT);
 		}
 		else
 		{

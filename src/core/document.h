@@ -161,6 +161,7 @@ class Document
 		USE_POTION = 30,
 		USE_SKILL_LEFT=100,
 		USE_SKILL_RIGHT=300,
+		CHEAT = 1000,
 	};
 
 	/**
