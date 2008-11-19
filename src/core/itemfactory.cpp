@@ -286,6 +286,7 @@ Item* ItemFactory::createItem(Item::Type type, Item::Subtype subtype, int id, fl
 				max_enchant= 200;
 				item->m_price = 100;
 				item->m_size = Item::MEDIUM;
+				item->m_weapon_attr->m_weapon_type=WeaponAttr::BOW;
 				item->m_weapon_attr->m_damage.m_min_damage[Damage::PHYSICAL] = 5;
 				item->m_weapon_attr->m_damage.m_max_damage[Damage::PHYSICAL] = 15;
 				item->m_weapon_attr->m_damage.m_attack = 20;

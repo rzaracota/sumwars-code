@@ -653,8 +653,26 @@ void Scene::updateObject(WorldObject* obj)
         {
             itmsubtype = itm->m_subtype;
             new_ent_name = getItemRenderInfo(itmsubtype).m_mesh;
-            goal_atch.insert(std::make_pair("itemRightHand",new_ent_name));
+			
+			// einige Waffen werden in der Linken Hand getragen
+			if (itm->m_weapon_attr->m_weapon_type == WeaponAttr::BOW || itm->m_weapon_attr->m_weapon_type == WeaponAttr::CROSSBOW)
+			{
+				goal_atch.insert(std::make_pair("itemLeftHand",new_ent_name));
+			}
+			else
+			{
+            	goal_atch.insert(std::make_pair("itemRightHand",new_ent_name));
+			}
         }
+		
+		itm = cmp->getShield();
+		if (itm !=0)
+		{
+			itmsubtype = itm->m_subtype;
+			new_ent_name = getItemRenderInfo(itmsubtype).m_mesh;
+			
+			goal_atch.insert(std::make_pair("itemLeftHand",new_ent_name));
+		}
 
         // Schleife ueber die aktuell angehaengten Meshes
         while (it.hasMoreElements())
