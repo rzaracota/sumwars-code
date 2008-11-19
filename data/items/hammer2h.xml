@@ -1,9 +1,9 @@
-<!-- TWO HANDED HAMMER-->
+﻿<!-- TWO HANDED HAMMER-->
 
 <!-- Vorschlaghammer -->
 <Item type="weapon" subtype="sledge_hmr" size="big">
 	<Image image="set:sledgehammer.png image:full_image" />
-	<Mesh file="sledgehammer.mesh" />
+	<Mesh file="sledge_hmr.mesh" />
 	<Attribute
 		level_requirement="1"
 		character_requirement="15"
@@ -40,7 +40,7 @@
 <!-- Bronzehammer -->
 <Item type="weapon" subtype="bronze_hmr" size="big">
 	<Image image="set:bronze_hmr.png image:full_image" />
-	<Mesh file="sledgehammer.mesh" />
+	<Mesh file="bronze_hmr.mesh" />
 	<Attribute
 		level_requirement="3"
 		character_requirement="15"
@@ -77,7 +77,7 @@
 <!-- Langstiel -->
 <Item type="weapon" subtype="long_hmr" size="big">
 	<Image image="set:long_hmr.png image:full_image" />
-	<Mesh file="sledgehammer.mesh" />
+	<Mesh file="long_hmr.mesh" />
 	<Attribute
 		level_requirement="5"
 		character_requirement="15"

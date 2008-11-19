@@ -1,4 +1,4 @@
-<?xml version="1.0" ?>
+﻿<?xml version="1.0" ?>
 
 <!-- Bei Gegenstaenden, die keine Waffen sind kann "WeaponAttribute" weggelassen werden. -->
 
@@ -123,7 +123,7 @@ s		modchance_damage_air_mod="float"
 <!-- farmers two hand sword-->
 <Item type="weapon" subtype="farm2h_sw" size="big">
 	<Image image="set:farm2h_sw.png image:full_image" />
-	<Mesh file="sword2h.mesh" />
+	<Mesh file="farm2h_sw.mesh" />
 	<Attribute
 		level_requirement="1"
 		character_requirement="15"
@@ -160,7 +160,7 @@ s		modchance_damage_air_mod="float"
 <!-- mercenary blade -->
 <Item type="weapon" subtype="merc2h_sw" size="big">
 	<Image image="set:merc2h_sw.png image:full_image" />
-	<Mesh file="sword2h.mesh" />
+	<Mesh file="merc2h_sw.mesh" />
 	<Attribute
 		level_requirement="3"
 		character_requirement="15"

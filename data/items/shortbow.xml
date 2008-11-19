@@ -1,4 +1,4 @@
-<!-- SHORT BOWS -->
+﻿<!-- SHORT BOWS -->
 <!-- TODO ersetze twohanded="no", ersetze weapontype="sword, ersetze set:sword.png"-->
 <!-- Uebungsbogen -->
 <Item type="weapon" subtype="trainy_sbw" size="medium">
@@ -38,7 +38,7 @@
 
 <!-- Goblinbogen -->
 <Item type="weapon" subtype="goblin_sbw" size="medium">
-	<Mesh file="bow.mesh" />
+	<Mesh file="goblin_sbw.mesh" />
 	<Image image="set:goblin_sbw.png image:full_image" />
 	<Attribute
 		level_requirement="2"

@@ -1,10 +1,10 @@
-<!-- HAMMER -->
+﻿<!-- HAMMER -->
 <!-- ONE HANDED HAMMER -->
 
 <!-- hammer -->
 <Item type="weapon" subtype="hammer_hmr" size="medium">
 	<Image image="set:hammer.png image:full_image" />
-	<Mesh file="hammer.mesh" />
+	<Mesh file="hammer_hmr.mesh" />
 	<Attribute
 		level_requirement="1"
 		character_requirement="15"
@@ -41,7 +41,7 @@
 <!-- Goblin Club -->
 <Item type="weapon" subtype="goblin_hmr" size="medium">
 	<Image image="set:goblin_hmr.png image:full_image" />
-	<Mesh file="hammer.mesh" />
+	<Mesh file="goblin_hmr.mesh" />
 	<Attribute
 		level_requirement="1"
 		character_requirement="15"
@@ -78,7 +78,7 @@
 <!-- Zeremonienhammer -->
 <Item type="weapon" subtype="cermon_hmr" size="medium">
 	<Image image="set:cermon_hmr.png image:full_image" />
-	<Mesh file="hammer.mesh" />
+	<Mesh file="cermon_hmr.mesh" />
 	<Attribute
 			  level_requirement="3"
 			  character_requirement="15"
@@ -115,7 +115,7 @@
 <!-- Nagelkeule -->
 <Item type="weapon" subtype="nail_hmr" size="medium">
 	<Image image="set:nail_hmr.png image:full_image" />
-	<Mesh file="hammer.mesh" />
+	<Mesh file="nail_hmr.mesh" />
 	<Attribute
 		level_requirement="4"
 		character_requirement="15"
@@ -152,7 +152,7 @@
 <!-- Eisenhammer -->
 <Item type="weapon" subtype="iron_hmr" size="medium">
 	<Image image="set:iron_hmr.png image:full_image" />
-	<Mesh file="hammer.mesh" />
+	<Mesh file="iron_hmr.mesh" />
 	<Attribute
 		level_requirement="5"
 		character_requirement="15"
@@ -189,7 +189,7 @@
 <!-- Eisenbeschlagene Keule -->
 <Item type="weapon" subtype="iroclb_hmr" size="medium">
 	<Image image="set:iroclb_hmr.png image:full_image" />
-	<Mesh file="hammer.mesh" />
+	<Mesh file="iroclb_hmr.mesh" />
 	<Attribute
 		level_requirement="7"
 		character_requirement="15"
@@ -223,7 +223,7 @@
 	/>
 </Item>
 
-<!-- Schl�gel -->
+<!-- Schlaegel -->
 <Item type="weapon" subtype="maul_hmr" size="medium">
 	<Image image="set:hammer.png image:full_image" />
 	<Mesh file="hammer.mesh" />
