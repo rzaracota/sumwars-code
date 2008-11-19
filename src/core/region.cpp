@@ -954,6 +954,13 @@ void Region::update(float time)
 	}
 	DEBUG5("update projektile abgeschlossen");
 
+	// DropItems updaten
+	DropItemMap::iterator it4;
+	for (it4 = m_drop_items->begin(); it4 != m_drop_items->end(); ++it4)
+	{
+		it4->second->update(time);
+	}
+	
 	if (World::getWorld()->isServer())
 	{
 		// Events fuer geaenderte Objekte / Projektile erzeugen

@@ -492,12 +492,21 @@ void Scene::updateItems()
 			// Koordinaten des Objektes
 			float x=di->m_x;
 			float y=di->m_y;
+			float z = di->m_height;
 
 			// Ortsvektor des Objektes
-			Ogre::Vector3 vec(x*25,0,y*25);
+			Ogre::Vector3 vec(x*25,z*50,y*25);
 
 			// an die richtige Stelle verschieben
-			m_scene_manager->getSceneNode(node_name)->setPosition(vec);
+			Ogre::SceneNode* itm_node = m_scene_manager->getSceneNode(node_name);
+			itm_node->setPosition(vec);
+			
+			float angle = di->m_angle_z;
+			itm_node->setDirection(cos(angle),0,sin(angle),Ogre::Node::TS_WORLD);
+			
+			angle = di->m_angle_x;
+			itm_node->pitch(Ogre::Radian(angle));
+			
 		}
 	}
 }
@@ -945,7 +954,7 @@ void Scene::createItem(DropItem* di, std::string& name)
 	ent = m_scene_manager->createEntity(name, ri.m_mesh);
 	
 	// Objekt drehen
-	float angle = di->m_angle;
+	float angle = di->m_angle_z;
 	obj_node->setDirection(cos(angle),0,sin(angle),Ogre::Node::TS_WORLD);
 
 	obj_node->attachObject(ent);
