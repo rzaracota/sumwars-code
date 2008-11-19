@@ -26,16 +26,23 @@ void Party::clear()
 
 void Party::addMember(int id)
 {
-	WorldObject* player = World::getWorld()->getPlayer(id);
+	Player* player = static_cast<Player*>(World::getWorld()->getPlayer(id));
 	if (player ==0)
 		return;
 	
-	DEBUG("adding member %i to party %i",id, m_id);
+	DEBUG5("adding member %i to party %i",id, m_id);
 	if (m_members.empty())
 	{
 		m_leader_id = id;
 	}
 	m_members.insert(id);
+	
+	Party* p = player->getParty();
+	while (!p->getCandidates().empty())
+	{
+		p->removeCandidate(*(p->getCandidates().begin()));
+	}
+	
 	
 	player->setFraction((WorldObject::Fraction) (getId() + WorldObject::FRAC_PLAYER_PARTY));
 	
@@ -54,7 +61,7 @@ void Party::addMember(int id)
 
 void Party::addCandidate(int id)
 {
-	DEBUG("adding candidate %i to party %i",id, m_id);
+	DEBUG5("adding candidate %i to party %i",id, m_id);
 	Player* pl = static_cast<Player*>( World::getWorld()->getPlayer(id));
 	if (pl !=0)
 	{
@@ -75,15 +82,19 @@ void Party::addCandidate(int id)
 
 void Party::removeMember(int id)
 {
-	DEBUG("removing member %i from party %i",id, m_id);
+	DEBUG5("removing member %i from party %i",id, m_id);
 
 	m_members.erase(id);
-	DEBUG("number of members %i",m_members.size());
+	DEBUG5("number of members %i",m_members.size());
+	if (id == m_leader_id)
+	{
+		m_leader_id = *(m_members.begin());
+	}
 }
 
 void Party::removeCandidate(int id)
 {	
-	DEBUG("removing candidate %i from party %i",id, m_id);
+	DEBUG5("removing candidate %i from party %i",id, m_id);
 	Player* pl = static_cast<Player*>( World::getWorld()->getPlayer(id));
 	if (pl !=0)
 	{

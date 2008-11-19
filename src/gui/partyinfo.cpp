@@ -126,6 +126,19 @@ PartyInfo::PartyInfo (Document* doc)
 		btn->setWantsMultiClickEvents(false);
 		btn->setID(i);
 		
+		stream.str("");
+		stream << "LeavePartyButton";
+		stream << i;
+		
+		btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button",stream.str() ));
+		party_info->addChildWindow(btn);
+		btn->setPosition(CEGUI::UVector2(cegui_reldim(0.85), cegui_reldim( 0.02f + 0.12f *i)));
+		btn->setSize(CEGUI::UVector2(cegui_reldim(0.12f), cegui_reldim( 0.08f)));
+		btn->setText("L");
+		btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&PartyInfo::onLeavePartyButtonClicked, this));
+		btn->setWantsMultiClickEvents(false);
+		btn->setID(i);
+		
 		
 		
 		stream.str("");
@@ -316,7 +329,7 @@ void PartyInfo::update()
 		
 		// Bewerbung erlauben, wenn der andere Spieler ein Partyleiter und man selbst Solo
 		vis = false;
-		if (solo && leader2 && party->getId() != pl->getParty()->getId() && party->getCandidates().count(pl->getId())==0 && rel == WorldObject::NEUTRAL && rel2 == WorldObject::NEUTRAL)
+		if (solo && player->getCandidateParty() ==-1 && leader2 && party->getId() != pl->getParty()->getId() && party->getCandidates().count(pl->getId())==0 && rel == WorldObject::NEUTRAL && rel2 == WorldObject::NEUTRAL)
 		{
 			vis = true;
 		}
@@ -346,9 +359,24 @@ void PartyInfo::update()
 			btn->setVisible(vis);
 		}
 		
+		vis = false;
+		if ((!solo && pl->getId() == party->getLeader()) || (solo && pl->getParty()->getId() == player->getCandidateParty()))
+		{
+			vis = true;
+		}
+		stream.str("");
+		stream << "LeavePartyButton";
+		stream << nr;
+		
+		btn = win_mgr.getWindow(stream.str());
+		if (btn->isVisible()!=vis)
+		{
+			btn->setVisible(vis);
+		}
+		
 		// Frieden Button anbieten, wenn aktuelles Verhaeltnis feindlich ist
 		vis = false;
-		if (leader && rel == WorldObject::HOSTILE)
+		if (leader && leader2 && rel == WorldObject::HOSTILE)
 		{
 			vis = true;
 		}
@@ -364,7 +392,7 @@ void PartyInfo::update()
 		
 		// Krieg Button anbieten, wenn aktuelles Verhaeltnis neutral ist
 		vis = false;
-		if (leader && rel == WorldObject::NEUTRAL && player->getCandidateParty() != pl->getParty()->getId() && pl->getCandidateParty() != player->getParty()->getId())
+		if (leader && leader2 && rel == WorldObject::NEUTRAL && player->getCandidateParty() != pl->getParty()->getId() && pl->getCandidateParty() != player->getParty()->getId())
 		{
 			vis = true;
 		}
@@ -384,12 +412,12 @@ void PartyInfo::update()
 	}
 	
 	// alle GUI Elemente zu denen kein Spieler gehoehrt ausblenden
-	std::string elements[10] = {"PlayerImage","PlayerParty", "PlayerName", "PlayerClass", "AcceptMemberButton", "RejectMemberButton", "ApplyButton", "KickMemberButton", "PeaceButton", "DeclareWarButton"};
+	std::string elements[11] = {"PlayerImage","PlayerParty", "PlayerName", "PlayerClass", "AcceptMemberButton", "RejectMemberButton", "ApplyButton", "KickMemberButton", "PeaceButton", "DeclareWarButton","LeavePartyButton"};
 	
 	
 	for (int i=nr; i<7; i++)
 	{
-		for (int j=0; j<10; j++)
+		for (int j=0; j<11; j++)
 		{
 			stream.str("");
 			stream << elements[j];
