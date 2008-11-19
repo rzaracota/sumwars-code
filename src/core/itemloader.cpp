@@ -14,6 +14,7 @@ int ItemLoader::generateItemBasicData(TiXmlElement* pElement, std::string elemen
 		if (m_item_data == 0)
 		{
 			m_item_data = new ItemBasicData;
+			
 			//Folgendes wird schon im Konstruktor von ItemBasicData gesetzt
 			//m_item_data->m_useup_effect = 0;
 			//m_item_data->m_equip_effect = 0;
@@ -100,8 +101,18 @@ int ItemLoader::generateItemBasicData(TiXmlElement* pElement, std::string elemen
 	if (element == "EquipEffect" /*&& pAttrib*/)
 	{
 		if (m_item_data->m_equip_effect == 0)
+		{
 			m_item_data->m_equip_effect = new CreatureBaseAttrMod;
-
+			
+			// Flags auf neutrale Werte setzen
+			m_item_data->m_equip_effect->m_xspecial_flags = 0;
+			for (int i=0; i<6; i++)
+			{
+				m_item_data->m_equip_effect->m_xabilities[i] = 0;
+			}
+			m_item_data->m_equip_effect->m_ximmunity = 0;
+		}
+		
 		while (element == "EquipEffect" && pAttrib)
 		{
 			if (!strcmp(pAttrib->Name(), "darmor") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
@@ -144,10 +155,6 @@ int ItemLoader::generateItemBasicData(TiXmlElement* pElement, std::string elemen
 			{
 				std::string flaglist = pAttrib->Value();
 
-				// Flag auf neutralen Wert setzen
-				m_item_data->m_equip_effect->m_xspecial_flags = 0;
-				m_item_data->m_equip_effect->m_xspecial_flags |= Damage::NOFLAGS;
-
 				std::string::size_type pos = 0;
 				std::string delimiter = ",";
 
@@ -184,15 +191,9 @@ int ItemLoader::generateItemBasicData(TiXmlElement* pElement, std::string elemen
 			}
 			else if (!strcmp(pAttrib->Name(), "time") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
 				m_item_data->m_equip_effect->m_time = static_cast<float>(dval);
-			else if (!strcmp(pAttrib->Name(), "abilities"))
+			else if (!strcmp(pAttrib->Name(), "xabilities"))
 			{
 				std::string flaglist = pAttrib->Value();
-
-				// Flag auf neutralen Wert setzen
-				for (int i=0; i<6; i++)
-				{
-					m_item_data->m_equip_effect->m_xabilities[i] = 0;
-				}
 
 				std::string::size_type pos = 0;
 				std::string delimiter = ",";
@@ -201,12 +202,40 @@ int ItemLoader::generateItemBasicData(TiXmlElement* pElement, std::string elemen
 				{
 					std::string part = flaglist.substr(pos, flaglist.find(delimiter, pos) - pos);
 					
-					m_item_data->m_equip_effect->m_xabilities[Action::getActionType(part)/32] = Action::getActionType(part)%32;
+					m_item_data->m_equip_effect->m_xabilities[Action::getActionType(part)/32] |= 1<<(Action::getActionType(part)%32);
 				}
 				while( (pos = flaglist.find(delimiter, pos))++ != std::string::npos );
 			}
-			else if (!strcmp(pAttrib->Name(), "ximmunity") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
-				m_item_data->m_equip_effect->m_ximmunity = static_cast<char>(ival);
+			else if (!strcmp(pAttrib->Name(), "ximmunity"))
+			{
+				std::string flaglist = pAttrib->Value();
+
+				std::string::size_type pos = 0;
+				std::string delimiter = ",";
+
+				do
+				{
+					std::string part = flaglist.substr(pos, flaglist.find(delimiter, pos) - pos);
+					
+					if (part == "blind")
+						m_item_data->m_equip_effect->m_ximmunity |= 1<<Damage::BLIND;
+					else if (part == "poisoned")
+						m_item_data->m_equip_effect->m_ximmunity |= 1<<Damage::POISONED;
+					else if (part == "berserk")
+						m_item_data->m_equip_effect->m_ximmunity |= 1<<Damage::BERSERK;
+					else if (part == "confused")
+						m_item_data->m_equip_effect->m_ximmunity |= 1<<Damage::CONFUSED;
+					else if (part == "mute")
+						m_item_data->m_equip_effect->m_ximmunity |= 1<<Damage::MUTE;
+					else if (part == "paralyzed")
+						m_item_data->m_equip_effect->m_ximmunity |= 1<<Damage::PARALYZED;
+					else if (part == "frozen")
+						m_item_data->m_equip_effect->m_ximmunity |= 1<<Damage::FROZEN;
+					else if (part == "burning")
+						m_item_data->m_equip_effect->m_ximmunity |= 1<<Damage::BURNING;
+				}
+				while( (pos = flaglist.find(delimiter, pos))++ != std::string::npos );
+			}
 
 			i++;
 			pAttrib=pAttrib->Next();
@@ -216,8 +245,13 @@ int ItemLoader::generateItemBasicData(TiXmlElement* pElement, std::string elemen
 	if (element == "WeaponAttribute" && pAttrib)
 	{
 		if (m_item_data->m_weapon_attr == 0)
+		{
 			m_item_data->m_weapon_attr = new WeaponAttr;
-
+			
+			// Flags auf neutrale Werte setzen
+			m_item_data->m_weapon_attr->m_damage.m_special_flags = 0;
+		}
+		
 		while (element == "WeaponAttribute" && pAttrib)
 		{
 			if (!strcmp(pAttrib->Name(), "damage_min_physical") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
@@ -267,10 +301,6 @@ int ItemLoader::generateItemBasicData(TiXmlElement* pElement, std::string elemen
 			else if (!strcmp(pAttrib->Name(), "special_flags"))
 			{
 				std::string flaglist = pAttrib->Value();
-
-				// Flag auf neutralen Wert setzen
-				m_item_data->m_weapon_attr->m_damage.m_special_flags = 0;
-				m_item_data->m_weapon_attr->m_damage.m_special_flags |= Damage::NOFLAGS;
 
 				std::string::size_type pos = 0;
 				std::string delimiter = ",";

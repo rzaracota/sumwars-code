@@ -1,9 +1,184 @@
 <?xml version="1.0" ?>
 
+<!--
+HINWEISE:
+* Flags werden durch Komma (,) getrennt eingegeben und duerfen keine anderen
+  Zeichen als Trennung beinhalten (z.B. flag="FLAG1, FLAG2" funktioniert wegen
+  dem Leerzeichen nach dem Komma nicht)
 
-<!-- Goblin -->
-<!-- 3871 = 0xf1f -->
-<Monster type="MONSTER" subtype="goblin" fraction="MONSTER" category="GOBLIN">
+* Moegliche Werte fuer type:
+NONE
+PLAYER
+MONSTER
+TRADER
+
+* Moegliche Werte fuer fraction:
+NOFRACTION
+HUMAN
+DEMON
+UNDEAD
+DWARF
+SUMMONER
+MONSTER
+HOSTILE_TO_ALL
+PLAYER_PARTY
+
+* Moegliche Werte fuer category:
+NOCATEGORY
+HUMAN
+DEMON
+UNDEAD
+DWARF
+DRAKE
+FAIRY
+GOBLIN
+ANIMAL
+SUMMONED
+
+* Moegliche Werte fuer layer:
+NORMAL
+BASE
+AIR
+
+* Moegliche Flags fuer special_flags:
+	noflags
+	unblockable
+	ignore_armor
+	extra_human_dmg
+	extra_demon_dmg
+	extra_undead_dmg
+	extra_dwarf_dmg
+	extra_drake_dmg
+	extra_fairy_dmg
+	extra_goblin_dmg
+	extra_animal_dmg
+	extra_summoned_dmg
+
+* Moegliche Flags fuer immunity:
+	blind
+	poisoned
+	berserk
+	confused
+	mute
+	paralyzed
+	frozen
+	burning
+
+* Moegliche Flags fuer abilities:
+	noaction
+	walk
+	use
+	trade
+	attack
+	range_attack
+	magic_attack
+	holy_attack
+	defend
+	wait
+	die
+	dead
+	take_item
+	bash
+	hammer_bash
+	around_blow
+	whirl_blow
+	smash
+	hate_mage
+	charge
+	storm_charge
+	block
+	steadfast
+	monster_hunter
+	monster_slayer
+	endurance
+	weaponmaster
+	firesword
+	flamesword
+	flamearmor
+	berserk
+	warcry
+	regenerate
+	decoy
+	scare
+	anger
+	fury
+	triple_shot
+	guided_triple_shot
+	multishot
+	volley_shot
+	pierce
+	weak_point
+	blind_rage
+	vacuum
+	death_roulette
+	exploding_arrow
+	explosion_cascade
+	evade
+	critical_strike
+	concentration
+	mental_wall
+	resist_ice
+	resist_air
+	aimed_shot
+	bow_spirit
+	ice_arrows
+	freezing_arrows
+	wind_arrows
+	storm_arrows
+	wind_walk
+	fire_bolt
+	fire_strike
+	fire_wave
+	fire_storm
+	fire_ball
+	inferno_ball
+	fire_wall
+	inflame
+	ice_bolt
+	ice_spike
+	snow_storm
+	blizzard
+	ice_ring
+	frost_ring
+	freeze
+	chill
+	lightning
+	lightning_strike
+	thunderstorm
+	thunderstorm2
+	chain_lightning
+	chain_lightning2
+	static_shield
+	ionisation
+	holy_light
+	holy_fire
+	burning_rage
+	cure_blind_mute
+	cure_blind_mute_party
+	blazing_shield
+	light_beam
+	burning_sun
+	break_binding
+	disrupt_binding
+	magic_shield
+	cure_pois_burn
+	cure_pois_burn_party
+	acid
+	heal
+	heal_party
+	divine_wind
+	divine_storm
+	blade_storm
+	cure_conf_bsrk
+	cure_conf_bsrk_party
+	hypnosis
+	hypnosis2
+	keen_mind
+-->
+
+
+<!--
+<Monster type="MONSTER" subtype="goblin" fraction="MONSTER" category="GOBLIN" layer="NORMAL">
 	<Mesh file="goblin.mesh" />
 	<Dropslots p0="0.1" p1="0.2" p2="0.2" p3="0.2" />
 		<Dropslot0 min_level="0" max_level="20" magic_prob="0.3" magic_power="500" />
@@ -31,15 +206,53 @@
 		walk_speed="2000"
 		attack_speed="1500"
 		step_length="0.5"
-		abilities0="3871"
-		abilities1="0"
-		abilities2="0"
-		abilities3="0"
-		abilities4="0"
-		abilities5="0"
+		abilities="moegliche Flags: siehe oben"
 		attack_range="1"
-		special_flags="0"
-		immunity="0"
+		special_flags="moegliche Flags: siehe oben"
+		immunity="moegliche Flags: siehe oben"
+	/>
+	
+	<Geometry radius="0.5" />
+	
+	<AI ai_sight_range="8" />
+</Monster>
+-->
+
+
+<!-- Goblin -->
+<!-- 3871 = 0xf1f -->
+<Monster type="MONSTER" subtype="goblin" fraction="MONSTER" category="GOBLIN" layer="NORMAL">
+	<Mesh file="goblin.mesh" />
+	<Dropslots p0="0.1" p1="0.2" p2="0.2" p3="0.2" />
+		<Dropslot0 min_level="0" max_level="20" magic_prob="0.3" magic_power="500" />
+		<Dropslot1 min_level="0" max_level="10" magic_prob="0.3" magic_power="1000" />
+	
+	<BasicAttributes
+		max_experience="100000"
+		level="1"
+		max_health="55"
+		armor="10"
+		block="0"
+		attack="10"
+		strength="15"
+		dexterity="10"
+		magic_power="5"
+		willpower="10"
+		resistances_physical="0"
+		resistances_air="0"
+		resistances_ice="0"
+		resistances_fire="0"
+		resistances_cap_physical="50"
+		resistances_cap_air="50"
+		resistances_cap_ice="50"
+		resistances_cap_fire="50"
+		walk_speed="2000"
+		attack_speed="1500"
+		step_length="0.5"
+		abilities="walk,attack,die"
+		attack_range="1"
+		special_flags=""
+		immunity="berserk,confused"
 	/>
 	
 	<Geometry radius="0.5" />
@@ -48,7 +261,7 @@
 </Monster>
 
 <!-- Lich -->
-<Monster type="MONSTER" subtype="lich" fraction="UNDEAD" category="UNDEAD">
+<Monster type="MONSTER" subtype="lich" fraction="UNDEAD" category="UNDEAD" layer="NORMAL OR BASE OR AIR">
 	<Mesh file="lich.mesh" />
 	<Dropslots p0="0.1" p1="0.2" p2="0.2" p3="0.3" />
 	<Dropslot0 min_level="10" max_level="40" magic_prob="0.5" magic_power="1000" />
@@ -76,15 +289,10 @@
 					walk_speed="1500"
 					attack_speed="1000"
 					step_length="1.0"
-					abilities0="3871"
-					abilities1="0"
-					abilities2="0"
-					abilities3="0"
-					abilities4="0"
-					abilities5="0"
+					abilities="walk,attack,die,ice_bolt"
 					attack_range="2"
-					special_flags="0"
-					immunity="12"
+					special_flags=""
+					immunity="berserk,confused"
 					/>
 	
 	<Geometry radius="1.0" />
@@ -93,7 +301,7 @@
 </Monster>
 
 <!-- Goblin Dog -->
-<Monster type="MONSTER" subtype="gob_dog" fraction="MONSTER" category="ANIMAL">
+<Monster type="MONSTER" subtype="gob_dog" fraction="MONSTER" category="ANIMAL" layer="NORMAL OR BASE OR AIR">
 	<Mesh file="lich.mesh" />
 	<Dropslots p0="0.1" p1="0.2" p2="0.2" p3="0." />
 	<Dropslot0 min_level="10" max_level="40" magic_prob="0.5" magic_power="1000" />
@@ -121,15 +329,10 @@
 					walk_speed="2500"
 					attack_speed="2000"
 					step_length="0.5"
-					abilities0="3871"
-					abilities1="0"
-					abilities2="0"
-					abilities3="0"
-					abilities4="0"
-					abilities5="0"
+					abilities="walk,attack,die"
 					attack_range="0.5"
-					special_flags="0"
-					immunity="0"
+					special_flags=""
+					immunity=""
 					/>
 	
 	<Geometry radius="0.5" />

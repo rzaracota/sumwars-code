@@ -252,6 +252,12 @@ void ObjectFactory::loadMonsterData(std::string file)
 		std::list<MonsterBasicData*>::iterator forward_iterator = monster_list->begin();
 		while (forward_iterator != monster_list->end())
 		{
+			/*int b;
+			b = (*forward_iterator)->m_base_attr.m_immunity;
+			std::cout << "#### immunity " << b << " ####" << std::endl;
+			std::cout << "#### abilities " << (*forward_iterator)->m_base_attr.m_abilities[0] << " ####" << std::endl;
+			std::cout << "#### abilities " << (*forward_iterator)->m_base_attr.m_abilities[3] << " ####" << std::endl;*/
+
 			registerMonster((*forward_iterator)->m_type_info.m_subtype, *forward_iterator);
 			*forward_iterator++;
 		}

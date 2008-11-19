@@ -22,6 +22,15 @@ HINWEISE:
 	extra_animal_dmg
 	extra_summoned_dmg
 
+* Moegliche Flags fuer ximmunity:
+	blind
+	poisoned
+	berserk
+	confused
+	mute
+	paralyzed
+	frozen
+	burning
 
 * Moegliche Flags fuer xabilities:
 	noaction
@@ -210,7 +219,7 @@ s		modchance_damage_air_mod="float"
 		xspecial_flags="moegliche Flags: siehe oben"
 		time="float"
 		xabilities="moegliche Flags: siehe oben"
-		ximmunity="char"
+		ximmunity="moegliche Flags: siehe oben"
 	/>
 	<WeaponAttribute
 		damage_min_physical="float"
