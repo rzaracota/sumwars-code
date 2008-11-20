@@ -2,9 +2,6 @@
 
 <!--
 HINWEISE:
-* Flags werden durch Komma (,) getrennt eingegeben und duerfen keine anderen
-  Zeichen als Trennung beinhalten (z.B. flag="FLAG1, FLAG2" funktioniert wegen
-  dem Leerzeichen nach dem Komma nicht)
 
 * Moegliche Werte fuer type:
 NONE

@@ -4,9 +4,6 @@
 HINWEISE:
 * Bei Gegenstaenden, die keine Waffen sind kann "WeaponAttribute" weggelassen
   werden.
-* Flags werden durch Komma (,) getrennt eingegeben und duerfen keine anderen
-  Zeichen als Trennung beinhalten (z.B. flag="FLAG1, FLAG2" funktioniert wegen
-  dem Leerzeichen nach dem Komma nicht)
 
 * Moegliche Flags fuer XSpecialFlag, SpecialFlag:
 	noflags
