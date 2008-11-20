@@ -40,7 +40,7 @@ NORMAL
 BASE
 AIR
 
-* Moegliche Flags fuer special_flags:
+* Moegliche Flags fuer SpecialFlag:
 	noflags
 	unblockable
 	ignore_armor
@@ -54,7 +54,7 @@ AIR
 	extra_animal_dmg
 	extra_summoned_dmg
 
-* Moegliche Flags fuer immunity:
+* Moegliche Flags fuer Immunity:
 	blind
 	poisoned
 	berserk
@@ -64,7 +64,7 @@ AIR
 	frozen
 	burning
 
-* Moegliche Flags fuer abilities:
+* Moegliche Flags fuer Ability:
 	noaction
 	walk
 	use
@@ -180,10 +180,12 @@ AIR
 <!--
 <Monster type="MONSTER" subtype="goblin" fraction="MONSTER" category="GOBLIN" layer="NORMAL">
 	<Mesh file="goblin.mesh" />
-	<Dropslots p0="0.1" p1="0.2" p2="0.2" p3="0.2" />
+	<Dropslots p0="0.1" p1="0.2" p2="0.2" p3="0.2">
 		<Dropslot0 min_level="0" max_level="20" magic_prob="0.3" magic_power="500" />
 		<Dropslot1 min_level="0" max_level="10" magic_prob="0.3" magic_power="1000" />
-	
+		<Dropslot2 min_level="0" max_level="0" magic_prob="0" magic_power="0" />
+		<Dropslot3 min_level="0" max_level="0" magic_prob="0" magic_power="0" />
+	</Dropslots>
 	<BasicAttributes
 		max_experience="100000"
 		level="1"
@@ -210,7 +212,14 @@ AIR
 		attack_range="1"
 		special_flags="moegliche Flags: siehe oben"
 		immunity="moegliche Flags: siehe oben"
-	/>
+	>
+		<Ability type=""/>
+		...
+		<SpecialFlag type=""/>
+		...
+		<Immunity type=""/>
+		...
+	</BasicAttributes>
 	
 	<Geometry radius="0.5" />
 	
@@ -223,9 +232,10 @@ AIR
 <!-- 3871 = 0xf1f -->
 <Monster type="MONSTER" subtype="goblin" fraction="MONSTER" category="GOBLIN" layer="NORMAL">
 	<Mesh file="goblin.mesh" />
-	<Dropslots p0="0.1" p1="0.2" p2="0.2" p3="0.2" />
+	<Dropslots p0="0.1" p1="0.2" p2="0.2" p3="0.2">
 		<Dropslot0 min_level="0" max_level="20" magic_prob="0.3" magic_power="500" />
 		<Dropslot1 min_level="0" max_level="10" magic_prob="0.3" magic_power="1000" />
+	</Dropslots>
 	
 	<BasicAttributes
 		max_experience="100000"
@@ -249,11 +259,14 @@ AIR
 		walk_speed="2000"
 		attack_speed="1500"
 		step_length="0.5"
-		abilities="walk,attack,die"
 		attack_range="1"
-		special_flags=""
-		immunity="berserk,confused"
-	/>
+	>
+		<Ability type="walk"/>
+		<Ability type="attack"/>
+		<Ability type="die"/>
+		<Immunity type="berserk"/>
+		<Immunity type="confused"/>
+	</BasicAttributes>
 	
 	<Geometry radius="0.5" />
 	
@@ -263,37 +276,42 @@ AIR
 <!-- Lich -->
 <Monster type="MONSTER" subtype="lich" fraction="UNDEAD" category="UNDEAD" layer="NORMAL OR BASE OR AIR">
 	<Mesh file="lich.mesh" />
-	<Dropslots p0="0.1" p1="0.2" p2="0.2" p3="0.3" />
-	<Dropslot0 min_level="10" max_level="40" magic_prob="0.5" magic_power="1000" />
-	<Dropslot1 min_level="0" max_level="20" magic_prob="0.5" magic_power="1000" />
+	<Dropslots p0="0.1" p1="0.2" p2="0.2" p3="0.3">
+		<Dropslot0 min_level="10" max_level="40" magic_prob="0.5" magic_power="1000" />
+		<Dropslot1 min_level="0" max_level="20" magic_prob="0.5" magic_power="1000" />
+	</Dropslots>
 	
 	<BasicAttributes
-					max_experience="100000"
-					level="5"
-					max_health="250"
-					armor="20"
-					block="0"
-					attack="20"
-					strength="25"
-					dexterity="10"
-					magic_power="35"
-					willpower="30"
-					resistances_physical="30"
-					resistances_air="0"
-					resistances_ice="50"
-					resistances_fire="-50"
-					resistances_cap_physical="80"
-					resistances_cap_air="80"
-					resistances_cap_ice="80"
-					resistances_cap_fire="20"
-					walk_speed="1500"
-					attack_speed="1000"
-					step_length="1.0"
-					abilities="walk,attack,die,ice_bolt"
-					attack_range="2"
-					special_flags=""
-					immunity="berserk,confused"
-					/>
+		max_experience="100000"
+		level="5"
+		max_health="250"
+		armor="20"
+		block="0"
+		attack="20"
+		strength="25"
+		dexterity="10"
+		magic_power="35"
+		willpower="30"
+		resistances_physical="30"
+		resistances_air="0"
+		resistances_ice="50"
+		resistances_fire="-50"
+		resistances_cap_physical="80"
+		resistances_cap_air="80"
+		resistances_cap_ice="80"
+		resistances_cap_fire="20"
+		walk_speed="1500"
+		attack_speed="1000"
+		step_length="1.0"
+		attack_range="2"
+	>
+		<Ability type="walk"/>
+		<Ability type="attack"/>
+		<Ability type="die"/>
+		<Ability type="ice_bolt"/>
+		<Immunity type="berserk"/>
+		<Immunity type="confused"/>
+	</BasicAttributes>
 	
 	<Geometry radius="1.0" />
 	
@@ -303,37 +321,38 @@ AIR
 <!-- Goblin Dog -->
 <Monster type="MONSTER" subtype="gob_dog" fraction="MONSTER" category="ANIMAL" layer="NORMAL OR BASE OR AIR">
 	<Mesh file="lich.mesh" />
-	<Dropslots p0="0.1" p1="0.2" p2="0.2" p3="0." />
-	<Dropslot0 min_level="10" max_level="40" magic_prob="0.5" magic_power="1000" />
-	<Dropslot1 min_level="0" max_level="20" magic_prob="0.5" magic_power="1000" />
-	
+	<Dropslots p0="0.1" p1="0.2" p2="0.2" p3="0.0">
+		<Dropslot0 min_level="10" max_level="40" magic_prob="0.5" magic_power="1000" />
+		<Dropslot1 min_level="0" max_level="20" magic_prob="0.5" magic_power="1000" />
+	</Dropslots>
 	<BasicAttributes
-					max_experience="100000"
-					level="1"
-					max_health="100"
-					armor="10"
-					block="0"
-					attack="20"
-					strength="10"
-					dexterity="20"
-					magic_power="0"
-					willpower="10"
-					resistances_physical="0"
-					resistances_air="0"
-					resistances_ice="10"
-					resistances_fire="0"
-					resistances_cap_physical="50"
-					resistances_cap_air="50"
-					resistances_cap_ice="50"
-					resistances_cap_fire="50"
-					walk_speed="2500"
-					attack_speed="2000"
-					step_length="0.5"
-					abilities="walk,attack,die"
-					attack_range="0.5"
-					special_flags=""
-					immunity=""
-					/>
+		max_experience="100000"
+		level="1"
+		max_health="100"
+		armor="10"
+		block="0"
+		attack="20"
+		strength="10"
+		dexterity="20"
+		magic_power="0"
+		willpower="10"
+		resistances_physical="0"
+		resistances_air="0"
+		resistances_ice="10"
+		resistances_fire="0"
+		resistances_cap_physical="50"
+		resistances_cap_air="50"
+		resistances_cap_ice="50"
+		resistances_cap_fire="50"
+		walk_speed="2500"
+		attack_speed="2000"
+		step_length="0.5"
+		attack_range="0.5"
+	>
+		<Ability type="walk"/>
+		<Ability type="attack"/>
+		<Ability type="die"/>
+	</BasicAttributes>
 	
 	<Geometry radius="0.5" />
 	

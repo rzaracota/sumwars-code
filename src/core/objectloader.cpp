@@ -161,6 +161,42 @@ int ObjectLoader::generateMonsterBasicData(TiXmlElement* pElement, string elemen
 			pAttrib=pAttrib->Next();
 		}
 	}
+	
+	if (element == "Dropslot2" && pAttrib)
+	{
+		while (element == "Dropslot2" && pAttrib)
+		{
+			if (!strcmp(pAttrib->Name(), "min_level") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
+				m_min_level[2] = ival;
+			else if (!strcmp(pAttrib->Name(), "max_level") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
+				m_max_level[2] = ival;
+			else if (!strcmp(pAttrib->Name(), "magic_prob") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
+				m_magic_prob[2] = static_cast<float>(dval);
+			else if (!strcmp(pAttrib->Name(), "magic_power") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
+				m_magic_power[2] = static_cast<float>(dval);
+
+			i++;
+			pAttrib=pAttrib->Next();
+		}
+	}
+	
+	if (element == "Dropslot3" && pAttrib)
+	{
+		while (element == "Dropslot3" && pAttrib)
+		{
+			if (!strcmp(pAttrib->Name(), "min_level") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
+				m_min_level[3] = ival;
+			else if (!strcmp(pAttrib->Name(), "max_level") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
+				m_max_level[3] = ival;
+			else if (!strcmp(pAttrib->Name(), "magic_prob") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
+				m_magic_prob[3] = static_cast<float>(dval);
+			else if (!strcmp(pAttrib->Name(), "magic_power") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
+				m_magic_power[3] = static_cast<float>(dval);
+
+			i++;
+			pAttrib=pAttrib->Next();
+		}
+	}
 
 	if (element == "BasicAttributes" && pAttrib)
 	{
@@ -217,91 +253,8 @@ int ObjectLoader::generateMonsterBasicData(TiXmlElement* pElement, string elemen
 				m_monster_data->m_base_attr.m_attack_speed = static_cast<short>(ival);
 			else if (!strcmp(pAttrib->Name(), "step_length") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
 				m_monster_data->m_base_attr.m_step_length = static_cast<float>(dval);
-			else if (!strcmp(pAttrib->Name(), "abilities"))
-			{
-				std::string flaglist = pAttrib->Value();
-
-				std::string::size_type pos = 0;
-				std::string delimiter = ",";
-
-				do
-				{
-					std::string part = flaglist.substr(pos, flaglist.find(delimiter, pos) - pos);
-					
-					m_monster_data->m_base_attr.m_abilities[Action::getActionType(part)/32] |= 1<<(Action::getActionType(part)%32);
-				}
-				while( (pos = flaglist.find(delimiter, pos))++ != std::string::npos );
-			}
 			else if (!strcmp(pAttrib->Name(), "attack_range") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
 				m_monster_data->m_base_attr.m_attack_range = static_cast<float>(dval);
-			else if (!strcmp(pAttrib->Name(), "special_flags"))
-			{
-				std::string flaglist = pAttrib->Value();
-
-				std::string::size_type pos = 0;
-				std::string delimiter = ",";
-
-				do
-				{
-					std::string part = flaglist.substr(pos, flaglist.find(delimiter, pos) - pos);
-					
-					if (part == "noflags")
-						m_monster_data->m_base_attr.m_special_flags |= Damage::NOFLAGS;
-					else if (part == "unblockable")
-						m_monster_data->m_base_attr.m_special_flags |= Damage::UNBLOCKABLE;
-					else if (part == "ignore_armor")
-						m_monster_data->m_base_attr.m_special_flags |= Damage::IGNORE_ARMOR;
-					else if (part == "extra_human_dmg")
-						m_monster_data->m_base_attr.m_special_flags |= Damage::EXTRA_HUMAN_DMG;
-					else if (part == "extra_demon_dmg")
-						m_monster_data->m_base_attr.m_special_flags |= Damage::EXTRA_DEMON_DMG;
-					else if (part == "extra_undead_dmg")
-						m_monster_data->m_base_attr.m_special_flags |= Damage::EXTRA_UNDEAD_DMG;
-					else if (part == "extra_dwarf_dmg")
-						m_monster_data->m_base_attr.m_special_flags |= Damage::EXTRA_DWARF_DMG;
-					else if (part == "extra_drake_dmg")
-						m_monster_data->m_base_attr.m_special_flags |= Damage::EXTRA_DRAKE_DMG;
-					else if (part == "extra_fairy_dmg")
-						m_monster_data->m_base_attr.m_special_flags |= Damage::EXTRA_FAIRY_DMG;
-					else if (part == "extra_goblin_dmg")
-						m_monster_data->m_base_attr.m_special_flags |= Damage::EXTRA_GOBLIN_DMG;
-					else if (part == "extra_animal_dmg")
-						m_monster_data->m_base_attr.m_special_flags |= Damage::EXTRA_ANIMAL_DMG;
-					else if (part == "extra_summoned_dmg")
-						m_monster_data->m_base_attr.m_special_flags |= Damage::EXTRA_SUMMONED_DMG;
-				}
-				while( (pos = flaglist.find(delimiter, pos))++ != std::string::npos );
-			}
-			else if (!strcmp(pAttrib->Name(), "immunity"))
-			{
-				std::string flaglist = pAttrib->Value();
-
-				std::string::size_type pos = 0;
-				std::string delimiter = ",";
-
-				do
-				{
-					std::string part = flaglist.substr(pos, flaglist.find(delimiter, pos) - pos);
-					
-					if (part == "blind")
-						m_monster_data->m_base_attr.m_immunity |= 1<<Damage::BLIND;
-					else if (part == "poisoned")
-						m_monster_data->m_base_attr.m_immunity |= 1<<Damage::POISONED;
-					else if (part == "berserk")
-						m_monster_data->m_base_attr.m_immunity |= 1<<Damage::BERSERK;
-					else if (part == "confused")
-						m_monster_data->m_base_attr.m_immunity |= 1<<Damage::CONFUSED;
-					else if (part == "mute")
-						m_monster_data->m_base_attr.m_immunity |= 1<<Damage::MUTE;
-					else if (part == "paralyzed")
-						m_monster_data->m_base_attr.m_immunity |= 1<<Damage::PARALYZED;
-					else if (part == "frozen")
-						m_monster_data->m_base_attr.m_immunity |= 1<<Damage::FROZEN;
-					else if (part == "burning")
-						m_monster_data->m_base_attr.m_immunity |= 1<<Damage::BURNING;
-				}
-				while( (pos = flaglist.find(delimiter, pos))++ != std::string::npos );
-			}
 			/*
 			else if (!strcmp(pAttrib->Name(), "ability") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
 			{
@@ -323,6 +276,86 @@ int ObjectLoader::generateMonsterBasicData(TiXmlElement* pElement, string elemen
 				}
 			}
 			*/
+
+			i++;
+			pAttrib=pAttrib->Next();
+		}
+	}
+
+	if (element == "Ability" && pAttrib)
+	{
+		while (element == "Ability" && pAttrib)
+		{
+			if (!strcmp(pAttrib->Name(), "type"))
+			{
+					m_monster_data->m_base_attr.m_abilities[Action::getActionType(pAttrib->Value())/32] |= 1<<(Action::getActionType(pAttrib->Value())%32);
+			}
+
+			i++;
+			pAttrib=pAttrib->Next();
+		}
+	}
+	
+	if (element == "SpecialFlag" && pAttrib)
+	{
+		while (element == "SpecialFlag" && pAttrib)
+		{
+			if (!strcmp(pAttrib->Name(), "type"))
+			{
+				if (!strcmp(pAttrib->Value(), "noflags"))
+					m_monster_data->m_base_attr.m_special_flags |= Damage::NOFLAGS;
+				else if (!strcmp(pAttrib->Value(), "unblockable"))
+					m_monster_data->m_base_attr.m_special_flags |= Damage::UNBLOCKABLE;
+				else if (!strcmp(pAttrib->Value(), "ignore_armor"))
+					m_monster_data->m_base_attr.m_special_flags |= Damage::IGNORE_ARMOR;
+				else if (!strcmp(pAttrib->Value(), "extra_human_dmg"))
+					m_monster_data->m_base_attr.m_special_flags |= Damage::EXTRA_HUMAN_DMG;
+				else if (!strcmp(pAttrib->Value(), "extra_demon_dmg"))
+					m_monster_data->m_base_attr.m_special_flags |= Damage::EXTRA_DEMON_DMG;
+				else if (!strcmp(pAttrib->Value(), "extra_undead_dmg"))
+					m_monster_data->m_base_attr.m_special_flags |= Damage::EXTRA_UNDEAD_DMG;
+				else if (!strcmp(pAttrib->Value(), "extra_dwarf_dmg"))
+					m_monster_data->m_base_attr.m_special_flags |= Damage::EXTRA_DWARF_DMG;
+				else if (!strcmp(pAttrib->Value(), "extra_drake_dmg"))
+					m_monster_data->m_base_attr.m_special_flags |= Damage::EXTRA_DRAKE_DMG;
+				else if (!strcmp(pAttrib->Value(), "extra_fairy_dmg"))
+					m_monster_data->m_base_attr.m_special_flags |= Damage::EXTRA_FAIRY_DMG;
+				else if (!strcmp(pAttrib->Value(), "extra_goblin_dmg"))
+					m_monster_data->m_base_attr.m_special_flags |= Damage::EXTRA_GOBLIN_DMG;
+				else if (!strcmp(pAttrib->Value(), "extra_animal_dmg"))
+					m_monster_data->m_base_attr.m_special_flags |= Damage::EXTRA_ANIMAL_DMG;
+				else if (!strcmp(pAttrib->Value(), "extra_summoned_dmg"))
+					m_monster_data->m_base_attr.m_special_flags |= Damage::EXTRA_SUMMONED_DMG;
+			}
+
+			i++;
+			pAttrib=pAttrib->Next();
+		}
+	}
+	
+	if (element == "Immunity" && pAttrib)
+	{
+		while (element == "Immunity" && pAttrib)
+		{
+			if (!strcmp(pAttrib->Name(), "type"))
+			{
+				if (!strcmp(pAttrib->Value(), "blind"))
+					m_monster_data->m_base_attr.m_immunity |= 1<<Damage::BLIND;
+				else if (!strcmp(pAttrib->Value(), "poisoned"))
+					m_monster_data->m_base_attr.m_immunity |= 1<<Damage::POISONED;
+				else if (!strcmp(pAttrib->Value(), "berserk"))
+					m_monster_data->m_base_attr.m_immunity |= 1<<Damage::BERSERK;
+				else if (!strcmp(pAttrib->Value(), "confused"))
+					m_monster_data->m_base_attr.m_immunity |= 1<<Damage::CONFUSED;
+				else if (!strcmp(pAttrib->Value(), "mute"))
+					m_monster_data->m_base_attr.m_immunity |= 1<<Damage::MUTE;
+				else if (!strcmp(pAttrib->Value(), "paralyzed"))
+					m_monster_data->m_base_attr.m_immunity |= 1<<Damage::PARALYZED;
+				else if (!strcmp(pAttrib->Value(), "frozen"))
+					m_monster_data->m_base_attr.m_immunity |= 1<<Damage::FROZEN;
+				else if (!strcmp(pAttrib->Value(), "burning"))
+					m_monster_data->m_base_attr.m_immunity |= 1<<Damage::BURNING;
+			}
 
 			i++;
 			pAttrib=pAttrib->Next();
@@ -398,8 +431,16 @@ void ObjectLoader::searchMonsterBasicData(TiXmlNode* pParent)
 			//cout << "Element:" << pChild->Value() << endl;
 		if ( !strcmp(pChild->Value(), "Monster") && pChild->Type() == TiXmlNode::ELEMENT) //|| pChild->NextSibling() == 0) || monster_data == 0)
 		{
+			/*std::cout << "| " << m_size_prob[0] << " | " << m_size_prob[1] << " | " << m_size_prob[2] << " | " <<  m_size_prob[3] << " |" << std::endl;
+			std::cout << "# " << m_min_level[0] << " # " << m_max_level[0] << " # " << m_magic_prob[0] << " # " << m_magic_power[0] << " #" << std::endl;
+			std::cout << "# " << m_min_level[1] << " # " << m_max_level[1] << " # " << m_magic_prob[1] << " # " << m_magic_power[1] << " #" << std::endl;
+			std::cout << "# " << m_min_level[2] << " # " << m_max_level[2] << " # " << m_magic_prob[2] << " # " << m_magic_power[2] << " #" << std::endl;
+			std::cout << "# " << m_min_level[3] << " # " << m_max_level[3] << " # " << m_magic_prob[3] << " # " << m_magic_power[3] << " #" << std::endl;*/
+			
 			m_monster_data->m_drop_slots[0].init(m_size_prob, m_min_level[0], m_max_level[0], m_magic_prob[0], m_magic_power[0]);
 			m_monster_data->m_drop_slots[1].init(m_size_prob, m_min_level[1], m_max_level[1], m_magic_prob[1], m_magic_power[1]);
+			m_monster_data->m_drop_slots[2].init(m_size_prob, m_min_level[2], m_max_level[2], m_magic_prob[2], m_magic_power[2]);
+			m_monster_data->m_drop_slots[3].init(m_size_prob, m_min_level[3], m_max_level[3], m_magic_prob[3], m_magic_power[3]);
 			//registerMonster(WorldObject::TypeInfo::SUBTYPE_GOBLIN, m_monster_data); FIXME
 			m_monster_list->push_back(m_monster_data);
 			m_monster_data = 0;
@@ -415,7 +456,7 @@ std::list<MonsterBasicData*>* ObjectLoader::loadMonsterBasicData(const char* pFi
 	{
 		m_size_prob[i] = 0.0;
 	}
-	for (int i=0; i<2; i++)
+	for (int i=0; i<4; i++)
 	{
 		m_min_level[i] = 0;
 		m_max_level[i] = 0;

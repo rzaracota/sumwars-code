@@ -8,7 +8,7 @@ HINWEISE:
   Zeichen als Trennung beinhalten (z.B. flag="FLAG1, FLAG2" funktioniert wegen
   dem Leerzeichen nach dem Komma nicht)
 
-* Moegliche Flags fuer xspecial_flags, special_flags:
+* Moegliche Flags fuer XSpecialFlag, SpecialFlag:
 	noflags
 	unblockable
 	ignore_armor
@@ -22,7 +22,7 @@ HINWEISE:
 	extra_animal_dmg
 	extra_summoned_dmg
 
-* Moegliche Flags fuer ximmunity:
+* Moegliche Flags fuer XImmunity:
 	blind
 	poisoned
 	berserk
@@ -32,7 +32,7 @@ HINWEISE:
 	frozen
 	burning
 
-* Moegliche Flags fuer xabilities:
+* Moegliche Flags fuer XAbility:
 	noaction
 	walk
 	use
@@ -216,11 +216,15 @@ s		modchance_damage_air_mod="float"
 		dresistances_cap_fire="short"
 		dwalk_speed="short"
 		dattack_speed="short"
-		xspecial_flags="moegliche Flags: siehe oben"
 		time="float"
-		xabilities="moegliche Flags: siehe oben"
-		ximmunity="moegliche Flags: siehe oben"
-	/>
+	>
+		<XSpecialFlag type=""/>
+		...
+		<XAbility type=""/>
+		...
+		<XImmunity type=""/>
+		...
+	</EquipEffect>
 	<WeaponAttribute
 		damage_min_physical="float"
 		damage_max_physical="float"
@@ -248,7 +252,11 @@ s		modchance_damage_air_mod="float"
 		attack_range="float"
 		two_handed="no"
 		dattack_speed="short"
-	/>
+	>
+		<SpecialFlag type=""/>
+		...
+	</WeaponAttribute>
+	
 	<DropChance
 		level="int"
 		probability="float"

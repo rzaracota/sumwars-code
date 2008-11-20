@@ -226,25 +226,25 @@ class ObjectLoader
 	 */
 	float m_size_prob[4];
 	/**
-	 * \var int m_min_level[2]
+	 * \var int m_min_level[4]
 	 * \brief minimales Level, das das gedroppte Item haben muss (Zwischenspeicher-Variable)
 	 */
-	int m_min_level[2];
+	int m_min_level[4];
 	/**
-	 * \var int m_max_level[2]
+	 * \var int m_max_level[4]
 	 * \brief maximales Level das das gedroppte Item haben darf (Zwischenspeicher-Variable)
 	 */
-	int m_max_level[2];
+	int m_max_level[4];
 	/**
-	 * \var float m_magic_prob[2]
+	 * \var float m_magic_prob[4]
 	 * \brief Chance, das der Gegenstand magisch wird (Zwischenspeicher-Variable)
 	 */
-	float m_magic_prob[2];
+	float m_magic_prob[4];
 	/**
-	 * \var float m_magic_power[2]
+	 * \var float m_magic_power[4]
 	 * \brief Staerke der Verzauberung, falls der Gegenstand magisch wird (Zwischenspeicher-Variable)
 	 */
-	float m_magic_power[2];
+	float m_magic_power[4];
 	
 	/**
 	 * \var float m_extend[2]
