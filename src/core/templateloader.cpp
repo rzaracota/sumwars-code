@@ -353,7 +353,7 @@ void TemplateLoader::searchRegionData(TiXmlNode* pParent, std::list<RegionData*>
 			m_region_data->addEnvironment(m_temp_environment.maxheight, m_temp_environment.env);
 			DEBUG5("Environment loaded");
 		}
-		else if ( !strcmp(pChild->Value(), "SpawnGroups") && pChild->Type() == TiXmlNode::ELEMENT)
+		else if ( !strcmp(pChild->Value(), "SpawnGroup") && pChild->Type() == TiXmlNode::ELEMENT)
 		{
 			m_region_data->addSpawnGroup(m_spawn_group.group_name, m_spawn_group.number);
 			DEBUG5("SpawnGroups loaded");
