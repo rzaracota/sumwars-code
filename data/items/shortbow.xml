@@ -219,7 +219,7 @@
 
 <!-- Banditenbogen -->
 <Item type="weapon" subtype="bandit_sbw" size="medium">
-	<Image image="set:sword.png image:full_image" />
+	<Image image="set:bow.png image:full_image" />
 	<Mesh file="sword.mesh" />
 	<Attribute
 		level_requirement="19"
@@ -255,7 +255,7 @@
 
 <!-- Nordauge -->
 <Item type="weapon" subtype="ice_sbw" size="medium">
-	<Image image="set:sword.png image:full_image" />
+	<Image image="set:bow.png image:full_image" />
 	<Mesh file="sword.mesh" />
 	<Attribute
 		level_requirement="25"
@@ -293,7 +293,7 @@
 
 <!-- Kriegskurzbogen -->
 <Item type="weapon" subtype="battle_sbw" size="medium">
-	<Image image="set:sword.png image:full_image" />
+	<Image image="set:bow.png image:full_image" />
 	<Mesh file="sword.mesh" />
 	<Attribute
 		level_requirement="30"
