@@ -93,9 +93,9 @@ void SoundSystem::init()
 	SoundSystem::loadSoundFile("../resources/sound/drop_potion.wav", "drop_potion");
 	
 	// Ereignisse auf Soundfiles mappen
-	SoundSystem::registerSound("short_sw:atk", "sword");
+	SoundSystem::registerSound("short_sw:attack", "sword");
 	SoundSystem::registerSound("short_sw:drop", "drop_metal");
-	SoundSystem::registerSound("battle_axe:atk", "sword");
+	SoundSystem::registerSound("battle_axe:attack", "sword");
 	SoundSystem::registerSound("battle_axe:drop", "drop_metal");
 	SoundSystem::registerSound("heal_1:drop", "drop_potion");
 	SoundSystem::registerSound("heal_2:drop", "drop_potion");
@@ -105,7 +105,7 @@ void SoundSystem::init()
 	SoundSystem::registerSound("goblin:hit", "monster_hit");
 	SoundSystem::registerSound("goblin:die", "monster_die");
 	SoundSystem::registerSound("goblin:attack", "monster_attack");
-	
+
 	SoundSystem::registerSound("lich:hit", "lich_hit");
 	SoundSystem::registerSound("lich:die", "lich_die");
 	SoundSystem::registerSound("lich:attack", "lich_attack");
@@ -179,6 +179,19 @@ void SoundSystem::cleanup()
 		alDeleteBuffers(1,&(it->second));
 	}
 	m_sounds.clear();
+	
+	clearObjects();
+}
+
+void SoundSystem::clearObjects()
+{
+	std::map<std::string, SoundObject*>::iterator it;
+	for (it = m_sound_objects.begin(); it != m_sound_objects.end(); ++it)
+	{
+		delete it->second;
+	}
+	
+	m_sound_objects.clear();
 }
 
 

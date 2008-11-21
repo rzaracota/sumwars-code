@@ -854,10 +854,117 @@ void Scene::updateObject(WorldObject* obj)
 		
 	}
 	
+	// Sound aktualisieren
+	if (obj->getTypeInfo()->m_type == WorldObject::TypeInfo::TYPE_PLAYER)
+	{
+		std::string sname= name;
+		sname += ":weapon";
+		SoundObject* sobj = SoundSystem::getSoundObject(sname);
+		if (sobj !=0)
+		{
+			Player* pl = static_cast<Player*>(obj);
+			Action::ActionType act = pl->getAction()->m_type;
+			Action::ActionType baseact = Action::getActionInfo(act)->m_base_action;
+			
+			if ((baseact == Action::ATTACK || baseact == Action::HOLY_ATTACK || baseact == Action::RANGE_ATTACK|| baseact == Action::MAGIC_ATTACK) && pl->getAction()->m_elapsed_time <200)
+			{
+				SoundTarget target = "";
+				if (pl->getWeapon() != 0)
+				{
+					target = pl->getWeapon()->m_subtype;
+					target += ":attack";
+				}
+				
+				SoundName sound;
+				sound = SoundSystem::getSoundName(target);
+				sobj->setSound(sound);
+				
+			}
+			
+		}
+	}
+	
+	if (obj->getTypeInfo()->m_type != WorldObject::TypeInfo::TYPE_FIXED_OBJECT)
+	{
+		// Sound durch Aktion
+		std::string actsoundname = name;
+		actsoundname += ":action";
+		SoundObject* sobj = SoundSystem::getSoundObject(actsoundname);
+		if (sobj!=0)
+		{
+			Creature* cr = static_cast<Creature*>(obj);
+			if (cr->getAction()->m_elapsed_time < 200)
+			{
+				Action::ActionType act = cr->getAction()->m_type;
+				SoundTarget target = cr->getTypeInfo()->m_subtype;
+				
+				if (obj->getTypeInfo()->m_type == WorldObject::TypeInfo::TYPE_PLAYER)
+				{
+					target = "hero";
+				}
+				
+				target += ":";
+				target += Action::getActionInfo(act)->m_enum_name;
+				
+				SoundName sound;
+				sound = SoundSystem::getSoundName(target);
+				if (act == Action::DIE)
+				{
+					sobj->stop();
+				}
+				sobj->setSound(sound);
+			}
+		}
+		
+		// Sound durch Wirkung von aussen
+		std::string passoundname = name;
+		passoundname += ":passive";
+		SoundObject* sobj2 = SoundSystem::getSoundObject(passoundname);
+		float* effects =  cr->getDynAttr()->m_effect_time;
+		
+				
+		if (effects[CreatureDynAttr::BLEEDING]> 50)
+		{
+			SoundTarget target = cr->getTypeInfo()->m_subtype;
+				
+			if (obj->getTypeInfo()->m_type == WorldObject::TypeInfo::TYPE_PLAYER)
+			{
+				target = "hero";
+			}
+			
+			target += ":hit";
+			SoundName sound;
+			sound = SoundSystem::getSoundName(target);
+			sobj2->setSound(sound);
+		}
+		
+	}
+	
 }
 
 void Scene::deleteObject(std::string name)
 {
+	std::string sname= name;
+	sname += ":weapon";
+	if (SoundSystem::getSoundObject(sname)!=0)
+	{
+		SoundSystem::deleteSoundObject(sname);
+	}
+	
+	std::string actsoundname = name;
+	actsoundname += ":action";
+	if (SoundSystem::getSoundObject(actsoundname)!=0)
+	{
+		SoundSystem::deleteSoundObject(actsoundname);
+	}
+	
+	std::string passoundname = name;
+	passoundname += ":passive";
+	if (SoundSystem::getSoundObject(passoundname)!=0)
+	{
+		SoundSystem::deleteSoundObject(passoundname);
+	}
+	
 	std::string node_name = name + "Node";
 
 	DEBUG5("deleting object %s",name.c_str());
@@ -915,6 +1022,25 @@ void Scene::createObject(WorldObject* obj,std::string& name, bool is_static)
 
     }
 
+	// Fuer Spieler ein extra Soundobjekt fuer die Waffe anlegen
+	if (obj->getTypeInfo()->m_type == WorldObject::TypeInfo::TYPE_PLAYER)
+	{
+		std::string sname= name;
+		sname += ":weapon";
+		SoundSystem::createSoundObject(sname);
+	}
+	
+	if (!is_static)
+	{
+		std::string actsoundname = name;
+		actsoundname += ":action";
+		SoundSystem::createSoundObject(actsoundname);
+		
+		std::string passoundname = name;
+		passoundname += ":passive";
+		SoundSystem::createSoundObject(passoundname);
+	}
+	
 }
 
 void Scene::createItem(DropItem* di, std::string& name)
@@ -923,12 +1049,14 @@ void Scene::createItem(DropItem* di, std::string& name)
 	
 	// SoundObjekt anlegen
 	SoundObject* obj = SoundSystem::createSoundObject(name);
-	SoundTarget target = di->m_item->m_subtype;
-	target += ":drop";
-	SoundName sound = SoundSystem::getSoundName(target);
-	obj->setSound(sound);
-	obj->play();
-
+	if (di->m_height > 0)
+	{
+		SoundTarget target = di->m_item->m_subtype;
+		target += ":drop";
+		SoundName sound = SoundSystem::getSoundName(target);
+		obj->setSound(sound);
+		obj->play();
+	}
 	DEBUG5("created item %s",name.c_str());
 	// Ortsvektor des Items
 	Ogre::Vector3 vec(di->m_x*25,0,di->m_y*25);
@@ -1029,7 +1157,7 @@ void Scene::updateProjectiles()
 		float angle = pr->getShape()->m_angle;
 		m_scene_manager->getSceneNode(node_name)->setDirection(cos(angle),0,sin(angle),Ogre::Node::TS_WORLD);
 
-		if (pr->getTimer()<500)
+		if (pr->getTimer()<200)
 		{
 			SoundTarget target = SoundSystem::getProjectileSound(pr->getType());
 			SoundName sound;
@@ -1098,6 +1226,8 @@ void Scene::createProjectile(Projectile* pr, std::string& name)
 
 void Scene::deleteProjectile(std::string name)
 {
+	SoundSystem::deleteSoundObject(name);
+	
 	std::string node_name = name + "Node";
 
 	DEBUG5("deleting projectile %s",name.c_str());
@@ -1240,6 +1370,7 @@ void Scene::createScene()
 	// alle bisherigen Objekte aus der Szene loeschen
 	m_scene_manager->clearScene();
 	clearObjects();
+	SoundSystem::clearObjects();
 
 	// Liste der statischen Objekte
 	std::list<WorldObject*> stat_objs;

@@ -118,7 +118,7 @@ Application::~Application()
 	World::deleteWorld();
 	ObjectFactory::cleanup();
 	ItemFactory::cleanup();
-
+	SoundSystem::cleanup();
 }
 
 void Application::run()

@@ -70,6 +70,12 @@ class SoundSystem
 		static void cleanup();
 		
 		/**
+		 * \fn static void clearObjects()
+		 * \brief Loescht alle SoundObjekte
+		 */
+		static void clearObjects();
+		
+		/**
 		 * \fn SoundObject* getSoundObject(std::string name)
 		 * \brief Gibt das SoundObjekt mit dem angegebenen Name aus
 		 * \param name Name
