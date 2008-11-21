@@ -11,7 +11,7 @@ START    = sumwars
 RUN      = ./$(START)
 
 
-LIBS = OGRE OIS CEGUI CEGUI-OGRE RakNet
+LIBS = OGRE OIS CEGUI CEGUI-OGRE RakNet freealut openal
 LDFLAGS = $(shell pkg-config --libs $(LIBS))
 LOADLIBES =
 LDLIBS = $(LDFLAGS) -lm -lrt

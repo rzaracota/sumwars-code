@@ -9,8 +9,7 @@
 #include "objectloader.h"
 #include "document.h"
 #include "worldobject.h"
-// TODO : include anpassen (es wird nur ein Spieler allgemein benoetigt)
-
+#include "sound.h"
 
 
 /**
@@ -380,8 +379,6 @@ class Scene
 	 *  \brief Speichert fuer die Tiles die Information zum Rendern
 	 */
 	static std::map<Tile, RenderInfo> m_tile_render_info;
-
-	
 
 	/**
 	 * \var Document* m_document

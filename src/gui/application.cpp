@@ -524,6 +524,8 @@ bool Application::loadResources()
 	
 	// Aktionen initialisieren
 	Action::init();
+	SoundSystem::init();
+	
 
 	Ogre::FileInfoListPtr files;
 	Ogre::FileInfoList::iterator it;

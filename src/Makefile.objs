@@ -55,3 +55,4 @@
 ./gui/savegamelist.o
 ./gui/chatline.o
 ./gui/partyinfo.o
+./gui/sound.o

@@ -172,20 +172,7 @@ void Scene::registerMeshes()
 	registerObject("lich","lich.mesh","");
 
 	// feste Objekte
-	// TODO entfernen, wenn keine Fehler beim Laden der festen Objekte aufgetreten sind
-	/*
-	registerObject("tree1","tree1.mesh","");
-    registerObject("tree2","tree2.mesh","");
-    registerObject("tree3","tree3.mesh","");
-	registerObject("fence1","fence1.mesh","");
-	registerObject("fence2","fence2.mesh","");
-	registerObject("fence3","fence3.mesh","");
-	registerObject("fence4","fence4.mesh","");
-	registerObject("fence5","fence5.mesh","");
-	registerObject("wall1","wall1.mesh","");
-	registerObject("wall2","wall2.mesh","");
-	registerObject("wall3","wall3.mesh","");
-	*/
+	
 	registerObject("smallWall1","smallWall1.mesh","");
 	registerObject("smallWall2","smallWall2.mesh","");
 	registerObject("stones3","stones3.mesh","");
@@ -933,6 +920,14 @@ void Scene::createObject(WorldObject* obj,std::string& name, bool is_static)
 void Scene::createItem(DropItem* di, std::string& name)
 {
 	std::string node_name = name + "Node";
+	
+	// SoundObjekt anlegen
+	SoundObject* obj = SoundSystem::createSoundObject(name);
+	SoundTarget target = di->m_item->m_subtype;
+	target += ":drop";
+	SoundName sound = SoundSystem::getSoundName(target);
+	obj->setSound(sound);
+	obj->play();
 
 	DEBUG5("created item %s",name.c_str());
 	// Ortsvektor des Items
@@ -963,6 +958,8 @@ void Scene::createItem(DropItem* di, std::string& name)
 
 void Scene::deleteItem(std::string name)
 {
+	SoundSystem::deleteSoundObject(name);
+	
 	std::string node_name = name + "Node";
 
 	DEBUG5("deleting item %s",name.c_str());
@@ -1032,12 +1029,33 @@ void Scene::updateProjectiles()
 		float angle = pr->getShape()->m_angle;
 		m_scene_manager->getSceneNode(node_name)->setDirection(cos(angle),0,sin(angle),Ogre::Node::TS_WORLD);
 
+		if (pr->getTimer()<500)
+		{
+			SoundTarget target = SoundSystem::getProjectileSound(pr->getType());
+			SoundName sound;
+			sound = SoundSystem::getSoundName(target);
+			SoundObject* obj = SoundSystem::getSoundObject(name);
+			
+			if (sound =="")
+			{
+				DEBUG("no sound for target %s",target.c_str());
+			}
+			if (obj !=0)
+			{
+				
+				obj->setSound(sound);
+			}
+		}
 
 	}
 }
 
 void Scene::createProjectile(Projectile* pr, std::string& name)
 {
+	// SoundObjekt anlegen
+	SoundSystem::createSoundObject(name);
+	
+	
 	DEBUG5("creating projectile %s",name.c_str());
 
 	std::string node_name = name + "Node";

@@ -25,7 +25,6 @@
 #include "mainwindow.h"
 
 
-
 /**
  * \class Application
  * \brief Basisklasse der Anwendung
