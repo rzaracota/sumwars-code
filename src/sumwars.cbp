@@ -64,6 +64,8 @@
 			<Add library="libRakNet.a" />
 			<Add library="libwsock32.a" />
 			<Add library="libws2_32.a" />
+			<Add library="C:\MinGW\lib\alut.lib" />
+			<Add library="C:\MinGW\lib\OpenAL32.lib" />
 			<Add directory="$(OGRE_HOME)\lib" />
 			<Add directory="$(OGRE_HOME)\bin\Debug" />
 			<Add directory="$(OGRE_HOME)\bin\Release" />
@@ -170,12 +172,16 @@
 		<Unit filename="gui\mainmenu.h" />
 		<Unit filename="gui\mainwindow.cpp" />
 		<Unit filename="gui\mainwindow.h" />
+		<Unit filename="gui\partyinfo.cpp" />
+		<Unit filename="gui\partyinfo.h" />
 		<Unit filename="gui\savegamelist.cpp" />
 		<Unit filename="gui\savegamelist.h" />
 		<Unit filename="gui\scene.cpp" />
 		<Unit filename="gui\scene.h" />
 		<Unit filename="gui\skilltree.cpp" />
 		<Unit filename="gui\skilltree.h" />
+		<Unit filename="gui\sound.cpp" />
+		<Unit filename="gui\sound.h" />
 		<Unit filename="tinyxml\tinystr.cpp" />
 		<Unit filename="tinyxml\tinystr.h" />
 		<Unit filename="tinyxml\tinyxml.cpp" />
