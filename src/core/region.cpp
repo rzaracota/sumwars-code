@@ -9,7 +9,7 @@ void RegionData::addObjectGroupTemplate(ObjectGroupTemplateName group_name, int 
 	newgroup.m_probability = probability;
 	newgroup.m_number = number;
 	newgroup.m_probability = probability;
-	
+
 	m_object_groups.insert(std::make_pair(prio,newgroup));
 }
 
@@ -24,7 +24,7 @@ Region::Region(short dimx, short dimy, short id, std::string name)
 
 	m_height = new Matrix2d<float>(dimx,dimy);
 	m_height->clear();
-	
+
 	m_tiles = new Matrix2d<char>(dimx*2,dimy*2);
 	m_tiles->clear();
 
@@ -94,15 +94,15 @@ WorldObject* Region::getObject ( int id)
 	WorldObjectMap::iterator iter;
 
 	// Objekt im Binärbaum suchen
-	
+
 	iter = m_objects->find(id);
-	
+
 	// Testen ob ein Objekt gefunden wurde
 	if (iter == m_objects->end())
 	{
 		// unter den statischen Objekten suchen
 		iter = m_static_objects->find(id);
-	
+
 		// Testen ob ein Objekt gefunden wurde
 		if (iter == m_static_objects->end())
 		{
@@ -164,6 +164,9 @@ bool Region::getFreePlace(Shape* shape, short layer, Vector & pos, WorldObject* 
 	WorldObjectList res;
 	res.clear();
 
+    // true, solange alle Felder von festen Objekten blockiert sind
+    bool fixblock = true;
+
 	// eine Stelle suchen an der das Objekt passt
 	while (!fields.empty())
 	{
@@ -185,13 +188,20 @@ bool Region::getFreePlace(Shape* shape, short layer, Vector & pos, WorldObject* 
 		{
 			// Objekt im Weg
 			res.clear();
-			continue;
+
+			// wenn alle bisherigen Plaetze von festen Objekten blockiert warten trotzdem weitersuchen
+			if (!fixblock)
+                continue;
+		}
+		else
+		{
+		    fixblock = false;
 		}
 
 		DEBUG5("no fixed obstacle");
 		// Testen, ob dort nicht gerade eine Kreatur steht
 		getObjectsInShape(&s,&res,layer,WorldObject::CREATURE,omit,true);
-		if (res.empty())
+		if (res.empty() && !fixblock)
 		{
 			DEBUG5("field is free");
 			// Stelle ist frei
@@ -258,14 +268,14 @@ bool  Region::addObjectsInShapeFromGridunit(Shape* shape, Gridunit* gu, WorldObj
 	WorldObject* wo=0;
 	WorldObject** arr=0;
 	Shape* s=0;
-	
-	
+
+
 	arr = gu->getObjects((WorldObject::Group) group);
 
 	int n = gu->getObjectsNr((WorldObject::Group) group);
 
 	DEBUG5("%i objects in layer %i, group %i",n,layer,group);
-	
+
 	// Schleife ueber alle Objekte
 	// geprueft wird: Ebene, Schnitt mit der Flaeche
 	for (int k=0;k< n;k++)
@@ -273,7 +283,7 @@ bool  Region::addObjectsInShapeFromGridunit(Shape* shape, Gridunit* gu, WorldObj
 
 		wo = arr[k];
 		DEBUG5("testing obj %i layer %i",wo->getId(),wo->getLayer());
-		
+
 		s = wo->getShape();
 
 		if (wo->getLayer() & layer)
@@ -281,10 +291,10 @@ bool  Region::addObjectsInShapeFromGridunit(Shape* shape, Gridunit* gu, WorldObj
 			DEBUG5("adding obj %i layer %i",wo->getId(), wo->getLayer());
 			if ((shape ==0) || shape->intersects(*s))
 			{
-				
+
 				if (wo != omit)
 				{
-					
+
 					result->push_back(wo);
 
 					if (empty_test)
@@ -293,7 +303,7 @@ bool  Region::addObjectsInShapeFromGridunit(Shape* shape, Gridunit* gu, WorldObj
 			}
 		}
 	}
-		
+
 	return true;
 }
 
@@ -302,7 +312,7 @@ bool Region::addObjectsOnLineFromGridunit(Line& line, Gridunit* gu, WorldObjectL
 	WorldObject* wo=0;
 	WorldObject** arr=0;
 	Shape* s=0;
-	
+
 	arr = gu->getObjects((WorldObject::Group) group);
 
 	int n = gu->getObjectsNr((WorldObject::Group) group);
@@ -317,7 +327,7 @@ bool Region::addObjectsOnLineFromGridunit(Line& line, Gridunit* gu, WorldObjectL
 		DEBUG5("testing %s %p",wo->getNameId().c_str(),wo->getNameId().c_str())
 		DEBUG5("testing %p",wo);
 		s = wo->getShape();
-		
+
 		if (wo->getLayer() & layer)
 		{
 			if (s->intersects(line))
@@ -332,7 +342,7 @@ bool Region::addObjectsOnLineFromGridunit(Line& line, Gridunit* gu, WorldObjectL
 			}
 		}
 	}
-		
+
 	return true;
 }
 
@@ -362,21 +372,21 @@ bool Region::getObjectsInShape( Shape* shape,  WorldObjectList* result,short lay
 	if (group == WorldObject::PLAYER)
 	{
 		// Wenn nur nach Spielern gesucht ist, dann nur die Liste der Spieler durchsuchen
-		
+
 		// TODO: einbauen
-		
+
 	}
 	else
 	{
 		int i,j;
 		Gridunit* gu=0;
 		// durchmustere alle 4*4 Felder die von dem Suchrechteck plus 4 Felder bedeckt werden
-		
+
 		// Maximale Ausdehnung der Flaeche in Richtung der Koordinatenaxen
 		Vector ext = shape->getAxisExtent();
 		Vector d1 = shape->m_center +ext;
 		Vector d2 = shape->m_center -ext;
-			
+
 
 		int xmin = (int) floor(0.25*(d2.m_x-4));
 		int ymin = (int) floor(0.25*(d2.m_y-4));
@@ -390,7 +400,7 @@ bool Region::getObjectsInShape( Shape* shape,  WorldObjectList* result,short lay
 		int je = std::min(ymax,m_dimy-1);
 
 		DEBUG5("searching square (%i %i) (%i %i)",is,ie,js,je);
-		
+
 		// Alle 4x4 Felder durchmustern
 		for (i = is;i<=ie;i++)
 		{
@@ -473,7 +483,7 @@ void Region::getObjectsOnLine(Line& line,  WorldObjectList* result,short layer, 
 	int ymax = (short) floor(0.25*(std::max(line.m_start.m_y,line.m_end.m_y)+4));
 	int i,j;
 	float d;
-	
+
 	// Richtung der Linie
 	Vector dir = line.getDirection();
 	dir.normalize();
@@ -573,13 +583,13 @@ bool Region::insertObject (WorldObject* object, Vector pos, float angle, bool co
 	}
 
 	object->getShape()->m_angle = angle;
-	
+
 	// Test auf Kollisionen und eventuelle Verschiebung
 	if (collision_test)
 	{
 		getFreePlace(object->getShape(), object->getLayer(), pos);
 	}
-	
+
 	 // Koordinaten setzen
 	object->getShape()->m_center = pos;
 
@@ -614,7 +624,7 @@ int Region::createObject(WorldObject::TypeInfo::ObjectType type, ObjectTemplateT
 {
 	// Umgebung erfahren
 	EnvironmentName env = getEnvironment(pos);
-	
+
 	// genauen Subtyp ermitteln
 	WorldObject::TypeInfo::ObjectSubtype subtype = ObjectFactory::getObjectType(generictype, env);
 	if (subtype == "")
@@ -622,25 +632,25 @@ int Region::createObject(WorldObject::TypeInfo::ObjectType type, ObjectTemplateT
 		DEBUG("no subtype found for generictype %s",generictype.c_str());
 		return 0;
 	}
-	
+
 	// Objekt erstellen
 	WorldObject* object = ObjectFactory::createObject(type,subtype);
-	
+
 	if (object ==0)
 	{
 		DEBUG("could not create object for generictype %s",generictype.c_str());
 		return 0;
 	}
-	
+
 	// Objekt einfuegen
 	bool ret = insertObject(object,pos,angle,collision_test);
 	if (!ret)
 	{
 		DEBUG("insertion failed");
 	}
-	
+
 	return object->getId();
-	
+
 }
 
 
@@ -648,32 +658,32 @@ void Region::createObjectGroup(ObjectGroupTemplateName templname, Vector positio
 {
 	// Template aus der Datenbank heraussuchen
 	std::map<ObjectGroupTemplateName, ObjectGroupTemplate*>::iterator it;
-	
+
 	ObjectGroupTemplate* templ = ObjectFactory::getObjectGroupTemplate(templname);
-	
+
 	if (templ != 0)
 	{
 		// Template wurde gefunden
 		// Objekte platzieren
 		std::list<ObjectGroupTemplate::GroupObject>::iterator gt;
 		Vector pos;
-		
+
 		for (gt = templ->getObjects()->begin(); gt != templ->getObjects()->end(); ++gt)
 		{
 			if (Random::random() < gt->m_probability)
 			{
-				
+
 				pos = gt->m_center;
 				pos.rotate(angle);
 				pos += position;
-				
-				
+
+
 				int id = createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT,gt->m_type, pos, angle+gt->m_angle);
 				DEBUG5("inserting object %s at %f %f with id %i",gt->m_type.c_str(),pos.m_x, pos.m_y,id);
 
 			}
 		}
-		
+
 		// Orte einfuegen
 		std::map<LocationName, Vector>::iterator lt;
 		for (lt = templ->getLocations()->begin(); lt != templ->getLocations()->end(); ++lt)
@@ -681,7 +691,7 @@ void Region::createObjectGroup(ObjectGroupTemplateName templname, Vector positio
 			pos = lt->second;
 			pos.rotate(angle);
 			pos += position;
-			
+
 			addLocation(lt->first,pos);
 		}
 	}
@@ -695,22 +705,22 @@ void Region::createObjectGroup(ObjectGroupTemplateName templname, Vector positio
 void Region::createMonsterGroup(MonsterGroupName mgname, Vector position)
 {
 	MonsterGroup * mgroup = ObjectFactory::getMonsterGroup(mgname);
-	
+
 	if (mgroup == 0)
 	{
 		DEBUG("monster group %s ot found",mgname.c_str());
 		return;
 	}
-	
+
 	std::list<MonsterGroup::SubGroup>::iterator mt;
 	Vector pos;
-	
+
 	for (mt = mgroup->m_monsters.begin(); mt != mgroup->m_monsters.end(); ++mt)
 	{
 		for (int i=0; i< mt->m_number; i++)
 		{
 			pos = position;
-				
+
 			if (Random::random() < mt->m_prob)
 			{
 				int id = createObject(WorldObject::TypeInfo::TYPE_MONSTER,mt->m_subtype, pos, 0 ,true);
@@ -807,14 +817,14 @@ bool Region::moveObject(WorldObject* object, Vector pos)
 		{
 			ERRORMSG("failed to remove object %i from gridunit %i %i",object->getId(),x_old, y_old);
 		}
-		
+
 		gu = &(*m_data_grid)[x_new][y_new];
 		result = gu->insertObject(object);
 		if (result == false)
 		{
 			ERRORMSG("failed to insert object %i into gridunit %i %i",object->getId(),x_old, y_old);
 		}
-		
+
 
 		object->getGridLocation()->m_grid_x=x_new;
 		object->getGridLocation()->m_grid_y=y_new;
@@ -855,7 +865,7 @@ void Region::deleteProjectile(Projectile* proj)
 void Region::update(float time)
 {
 	DEBUG5("update region %i",getId());
-	
+
 	DEBUG5("\nUpdate aller WeltObjekte starten\n");
 	//DEBUG("m_players %p",m_players);
 	// Iterator zum durchmustern einer solchen Liste
@@ -879,7 +889,7 @@ void Region::update(float time)
 	for (iter =m_objects->begin(); iter!=m_objects->end(); )
 	{
 		object = iter->second;
-		
+
 		if (object->getDestroyed()==true)
 		{
 			// Objekte selbststaendig loeschen darf nur der Server
@@ -893,7 +903,7 @@ void Region::update(float time)
 					event.m_type = Event::OBJECT_DESTROYED;
 					event.m_id = object->getId();
 					insertEvent(event);
-	
+
 					++iter;
 					object->destroy();
 					deleteObject(object);
@@ -960,7 +970,7 @@ void Region::update(float time)
 	{
 		it4->second->update(time);
 	}
-	
+
 	if (World::getWorld()->isServer())
 	{
 		// Events fuer geaenderte Objekte / Projektile erzeugen
@@ -997,7 +1007,7 @@ void Region::update(float time)
 			}
 		}
 	}
-	
+
 	// pruefen ob ein Spieler die Region verlassen hat
 	bool del = false;
 	for (iter = m_players->begin(); iter != m_players->end(); )
@@ -1011,43 +1021,43 @@ void Region::update(float time)
 				// Spieler befindet sich im Ausgang
 				// ID der neuen Region
 				int id = World::getWorld()->getRegionId(eit->m_destination_region);
-				
+
 				WorldObjectMap::iterator iter2 = iter;
 				iter ++;
 				del = true;
-				
+
 				// Spieler aus der Region entfernen
 				WorldObject* pl = iter2->second;
 				deleteObject(pl);
-				
+
 				// Spieler in die neue Region einfuegen
 				World::getWorld()->insertPlayerIntoRegion(pl, id, eit->m_destination_location);
-				
+
 				break;
 			}
 		}
-		
-		
+
+
 		if (del == false)
 		{
-			
+
 			// Pruefen ob der Spieler getoetet wurde
 			if (iter->second->getState() == WorldObject::STATE_DEAD)
 			{
 				// Lebenspunkte wieder fuellen etc
 				Player* pl = static_cast<Player*>(iter->second);
 				pl->revive();
-				
+
 				// Zielpunkt ermitteln
 				int id = World::getWorld()->getRegionId(m_revive_location.first);
-				
+
 				if (id == getId())
 				{
 					DEBUG5("revive in current region");
 					// Spieler bleibt in der aktuellen Region
 					Vector pos = getLocation(m_revive_location.second);
 					getFreePlace(pl->getShape(), pl->getLayer(), pos, pl);
-					
+
 					pl->moveTo(pos);
 				}
 				else
@@ -1058,15 +1068,15 @@ void Region::update(float time)
 					WorldObjectMap::iterator iter2 = iter;
 					iter ++;
 					del = true;
-				
+
 					// Spieler aus der Region entfernen
 					deleteObject(pl);
-				
+
 					// Spieler in die neue Region einfuegen
 					World::getWorld()->insertPlayerIntoRegion(pl, id, m_revive_location.second);
 				}
 			}
-			
+
 			if (del == false)
 				++iter;
 		}
@@ -1085,7 +1095,7 @@ void Region::getRegionData(CharConv* cv)
 	stmp[20] = '\0';
 	strncpy(stmp,m_name.c_str(),20);
 	cv->toBuffer(stmp,20);
-	
+
 	// Tiles eintragen
 	int i,j;
 	for (i =0;i<m_dimx*2;i++)
@@ -1115,20 +1125,20 @@ void Region::getRegionData(CharConv* cv)
 	for (jt = m_objects->begin();jt!=m_objects->end();++jt)
 	{
 		if (jt->second->getLayer() != WorldObject::LAYER_SPECIAL)
-			nr++;	
+			nr++;
 	}
 	DEBUG5("nonstatic objects: %i",nr);
 	cv->toBuffer<short>((short) nr);
 
 	// nicht statische Objekte in den Puffer eintragen
-	
+
 	for (jt = m_objects->begin();jt!=m_objects->end();++jt)
 	{
 		if (jt->second->getLayer() != WorldObject::LAYER_SPECIAL)
 		{
 			DEBUG5("write offset: %i",cv->getBitStream()->GetNumberOfBitsUsed());
 			(jt->second)->toString(cv);
-	
+
 			DEBUG5("object: %s",(jt->second)->getNameId().c_str());
 		}
 	}
@@ -1192,7 +1202,7 @@ void Region::createObjectFromString(CharConv* cv, WorldObjectMap* players)
 
 	obj->fromString(cv);
 
-	
+
 	insertObject(obj,obj->getShape()->m_center,obj->getShape()->m_angle);
 }
 
@@ -1251,14 +1261,14 @@ void Region::createItemFromString(CharConv* cv)
 void Region::setRegionData(CharConv* cv,WorldObjectMap* players)
 {
 	// Groesse der Region wird schon vorher eingelesen
-	
+
 	// Name der Region
 	char stmp[21];
 	stmp[20] ='\0';
 	cv->fromBuffer(stmp,20);
 	m_name = stmp;
 	DEBUG5("name of region: %s",stmp);
-	
+
 	// Tiles eintragen
 	int i,j;
 	for (i =0;i<m_dimx*2;i++)
@@ -1367,7 +1377,7 @@ bool  Region::dropItem(Item* item, Vector pos)
 	Shape s;
 	s.m_type= Shape::RECT;
 	s.m_extent = Vector(0.5,0.5);
-	
+
 
 	WorldObjectList res;
 
@@ -1384,7 +1394,7 @@ bool  Region::dropItem(Item* item, Vector pos)
 
 		// Testen ob dort keine festen Objekte sind
 		s.m_center = Vector(sx*0.5, sy*0.5);
-		
+
 
 		res.clear();
 		getObjectsInShape(&s,&res,WorldObject::LAYER_BASE,WorldObject::FIXED,0,true);
@@ -1569,9 +1579,9 @@ EnvironmentName Region::getEnvironment(Vector pos)
 	}
 	// Hoehe an der angegebenen Stelle
 	float height = *(m_height->ind(int(pos.m_x/4),int(pos.m_y/4)));
-	
+
 	std::map<float, EnvironmentName>::iterator it;
-	
+
 	for (it = m_environments.begin(); it !=m_environments.end();++it)
 	{
 		if (height < it->first)
@@ -1580,7 +1590,7 @@ EnvironmentName Region::getEnvironment(Vector pos)
 			return it->second;
 		}
 	}
-	
+
 	return m_environments.rbegin()->second;
 }
 
@@ -1588,12 +1598,12 @@ Vector Region::getLocation(LocationName name)
 {
 	std::map<LocationName, Vector>::iterator it;
 	it = m_locations.find(name);
-	
+
 	if (it == m_locations.end())
 	{
 		return Vector(-1,-1);
 	}
-	
+
 	return it->second;
 }
 
