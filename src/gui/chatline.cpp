@@ -53,6 +53,11 @@ void ChatLine::update()
 	if (chat_content->getText() != pl->getMessages())
 	{
 		chat_content->setText(pl->getMessages());
+		CEGUI::Scrollbar* sb = chat_content->getVertScrollbar();
+		if (sb !=0)
+		{
+			sb->setScrollPosition(sb->getDocumentSize());
+		}
 	}
 }
 

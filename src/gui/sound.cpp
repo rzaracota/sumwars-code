@@ -195,6 +195,11 @@ void SoundSystem::clearObjects()
 }
 
 
+void SoundSystem::setSoundVolume(float vol)
+{
+	alListenerf(AL_GAIN,vol);
+}
+
 SoundObject* SoundSystem::createSoundObject(std::string name)
 {
 	if (m_sound_objects.count(name)>0)

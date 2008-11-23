@@ -116,6 +116,13 @@ class SoundSystem
 		 * \param ptype Typ des Projektils
 		 */
 		static SoundName getProjectileSound(Projectile::ProjectileType ptype);
+		
+		/**
+		 * \fn static void setSoundVolume(float vol)
+		 * \brief Stellt die Lautstaerke ein
+		 * \param vol Lautstaerke (0-1)
+		 */
+		static void setSoundVolume(float vol);
 	
 	private:
 		

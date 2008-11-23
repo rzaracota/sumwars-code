@@ -808,7 +808,6 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 	DEBUG5("Kommando (%f %f) button: %i id: %i action: %i",command->m_goal.m_x,command->m_goal.m_y,command->m_button,command->m_id, command->m_action);
 
 	Party* 	p;
-	WorldObject* wo;
 	Player* pl;
 
 	Item* si;
@@ -1768,9 +1767,28 @@ void Player::calcBaseAttrMod()
 
 void Player::addMessage(std::string msg)
 {
+	if (msg == "")
+		return;
+	
 	m_messages += msg;
 	m_messages += "\n";
 	
+	// Anzahl Newlines zaehlen
+	int cnt =0;
+	int pos = 0;
+	while (pos != -1)
+	{
+		
+		cnt ++;
+		pos=m_messages.find_first_of('\n',pos+1);
+	}
+	cnt --;
+	while (cnt >20)
+	{
+		pos=m_messages.find_first_of('\n');
+		m_messages = m_messages.substr(pos+1);
+		cnt --;
+	}
 }
 
 
