@@ -143,6 +143,12 @@ class Scene
 	 * \param file Objekte XML Datei
 	 */
 	static void loadFixedObjectData(std::string file);
+	
+	/**
+	 * \fn std::pair<float,float> getProjection(Vector pos)
+	 * \brief Gibt aus, an welcher Stelle ein Punkt in Spielkoordinaten auf dem Bildschirm erscheint
+	 */
+	std::pair<float,float> getProjection(Vector pos);
 
 	private:
 
@@ -336,6 +342,8 @@ class Scene
 	 * \param tile Type des Tiles
 	 */
 	static RenderInfo getTileRenderInfo(Tile tile);
+	
+	
 
 
 	/**

@@ -565,6 +565,17 @@ void Document::dropCursorItem()
 	sendCommand(&command);
 }
 
+void Document::onDropItemClick(int id)
+{
+	ClientCommand command;
+	command.m_button=LEFT_MOUSE_BUTTON;
+	command.m_action = Action::TAKE_ITEM;
+	command.m_id = id;
+	
+	// Paket an den Server senden
+	sendCommand(&command);
+}
+
 void Document::emitDebugSignal(int i)
 {
 	ClientCommand command;

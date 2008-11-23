@@ -131,6 +131,12 @@ class MainWindow :
 	bool setupObjectInfo();
 	
 	/**
+	 * \fn bool setupObjectInfo()
+	 * \brief Erstellt die Fenster mit Informationen zu Gegenstaenden
+	 */
+	bool setupItemInfo();
+	
+	/**
 	 * \fn bool setupPartyInfo()
 	 * \brief erstellt die Fenster mit Informationen zur Party
 	 */
@@ -159,6 +165,12 @@ class MainWindow :
 	 * \brief Aktualisiert die Leiste mit Informationen zu einem Objekt
 	 */
 	void updateObjectInfo();
+	
+	/**
+	 * \fn void updateObjectInfo()
+	 * \brief Aktualisiert die Fenster mit Informationen zu Gegenstaenden
+	 */
+	void updateItemInfo();
 
 	/**
 	 * \fn void updatePartyInfo()
@@ -183,6 +195,13 @@ class MainWindow :
 	 * \brief Behandelt Loslassen von Maustasten
 	 */
 	bool mouseReleased(const OIS::MouseEvent &evt, OIS::MouseButtonID);
+	
+	/**
+	 * \fn bool onDropItemClicked(const CEGUI::EventArgs& evt)
+	 * \brief Behandelt das Senden einer Nachricht
+	 * \param evt CEGUI Event Parameter
+	 */
+	bool onDropItemClicked(const CEGUI::EventArgs& evt);
 
 	/**
 	 * \fn bool keyPressed(const OIS::KeyEvent &evt)

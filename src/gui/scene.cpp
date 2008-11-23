@@ -306,6 +306,15 @@ RenderInfo  Scene::getProjectileRenderInfo(Projectile::ProjectileType type)
 }
 
 
+std::pair<float,float> Scene::getProjection(Vector pos)
+{
+	Ogre::Vector4 ipos(pos.m_x*50,0,pos.m_y*50,1);
+	Ogre::Vector4 projpos;
+	projpos = m_camera->getProjectionMatrix()*m_camera->getViewMatrix()*ipos; 
+	
+	return std::make_pair(0.5 + 0.5*projpos.x / projpos.w, 0.5 - 0.5*projpos.y / projpos.w);
+}
+
 void Scene::update(float ms)
 {
 	DEBUG5("update scene");

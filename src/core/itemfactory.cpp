@@ -791,7 +791,7 @@ Item* ItemFactory::createItem(DropSlot &slot)
 	{
 		
 		// Gold gedroppt
-		item = createGold(Random::randrangei((3+slot.m_max_level*slot.m_max_level)/5, 10+(slot.m_max_level*slot.m_max_level)));
+		item = createGold(Random::randrangei((3+slot.m_max_level*slot.m_max_level)/5+1, 10+(slot.m_max_level*slot.m_max_level+1)));
 
 		return item;
 	}

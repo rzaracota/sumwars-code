@@ -555,6 +555,12 @@ class Document
 	void dropCursorItem();
 
 	/**
+	 * \fn void onDropItemClick(int id)
+	 * \brief Behandelt Linksklick auf ein Item
+	 */
+	void onDropItemClick(int id);
+	
+	/**
 	 * \fn bool onKeyPress(KeyCode key)
 	 * \brief Behandelt einen Tastendruck
 	 * \param key Keycode der Taste

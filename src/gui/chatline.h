@@ -24,7 +24,7 @@ class ChatLine : public Window
 		
 	private:
 		/**
-		 * \fn boolonSendMessage(const CEGUI::EventArgs& evt)
+		 * \fn bool onSendMessage(const CEGUI::EventArgs& evt)
 		 * \brief Behandelt das Senden einer Nachricht
 		 * \param evt CEGUI Event Parameter
 		 */

@@ -1699,6 +1699,25 @@ void Creature::calcAction()
 		// Abstandsberechnung
 		dist = getShape()->getDistance(*(goalobj->getShape()));
 	}
+	
+	if (m_command.m_type == Action::TAKE_ITEM)
+	{
+		DropItem* di = getRegion()->getDropItem(m_command.m_goal_object_id);
+		if (di ==0)
+		{
+			// Zielobjekt existiert nicht mehr, abbrechen
+			m_action.m_type = Action::NOACTION;
+			m_action.m_elapsed_time =0;
+			clearCommand();
+			return;
+		}
+		else
+		{
+			Vector pos(di->m_x/2.0, di->m_y / 2.0);
+			goal = pos;
+			dist = getShape()->m_center.distanceTo(pos);
+		}
+	}
 
 	
 	// Stuermen ohne Zielobjekt hat keinen Zielradius

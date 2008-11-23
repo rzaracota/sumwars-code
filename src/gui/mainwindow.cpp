@@ -274,6 +274,7 @@ void MainWindow::update()
 
 		// ObjectInfo aktualisieren
 		updateObjectInfo();
+		updateItemInfo();
 		
 		// Bild am Curso aktualisieren
 		updateCursorItemImage();
@@ -370,8 +371,10 @@ bool MainWindow::setupGameScreen()
 		// Skilltree Fenster anlegen
 		setupSkilltree();
 
-		// Leiste fuer Objekt-Info anlegen
+		// Leiste fuer Item/Objekt-Info anlegen
 		setupObjectInfo();
+		setupItemInfo();
+		
 		
 		// Chatfenster anlegen
 		setupChatWindow();
@@ -516,6 +519,30 @@ bool MainWindow::setupObjectInfo()
 
 	return true;
 }
+
+bool MainWindow::setupItemInfo()
+{
+	DEBUG4("setup object info");
+
+	// Fenstermanager
+	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
+	CEGUI::Window* label;
+
+	// Leiste fuer Informationen
+	label = win_mgr.createWindow("TaharezLook/StaticText", "ItemInfoLabel");
+	m_game_screen->addChildWindow(label);
+	label->setProperty("FrameEnabled", "false");
+	label->setProperty("BackgroundEnabled", "false");
+	label->setPosition(CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim( 0.02f)));
+	label->setSize(CEGUI::UVector2(cegui_reldim(0.08f), cegui_reldim( 0.03f)));
+	label->setText("");
+	label->setVisible(false);
+	label->setAlpha(0.9);
+	label->setProperty("MousePassThroughEnabled","true");
+
+	return true;
+}
+
 
 bool MainWindow::setupPartyInfo()
 {
@@ -667,7 +694,7 @@ void MainWindow::updateObjectInfo()
 	float y = m_mouse->getMouseState().Y.abs;
 
 
-		// Position des Mausklicks relativ zum Viewport
+	// Position des Mausklicks relativ zum Viewport
 	Ogre::Viewport* viewport = m_scene->getViewport();
 	float relx = x*1.0/(viewport->getActualWidth());
 	float rely = y*1.0/(viewport->getActualHeight());
@@ -678,16 +705,9 @@ void MainWindow::updateObjectInfo()
 
 	Ogre::Entity* ent;
 	
-	// Ort an dem der Strahl den Boden beruehrt berechnen
-	const Ogre::Vector3& orig = ray.getOrigin();
-	const Ogre::Vector3& dir = ray.getDirection();
 	
-	// Schnittpunkt mit der Ebene y=0 ausrechnen
-	Ogre::Vector3 p = orig + dir*(orig.y/(-dir.y));
 	
-	// Umrechnen in Spielkoordinaten
-	float gx = p.x/50;
-	float gy = p.z/50;
+	
 
 
 	// Ergebnispaar einer Intersection Abfrage
@@ -803,84 +823,6 @@ void MainWindow::updateObjectInfo()
 			m_document->getGUIState()->m_cursor_object="";
 		}
 	}
-	else
-	{
-		// Nach Items unterm Mauszeiger suchen
-		std::map<int,string>* itms = m_scene->getDropItems();
-		std::map<int,string>::iterator it;
-		
-		float mindist = 1000000;
-		float dist;
-		float ix,iy;
-		DropItem* di;
-		
-		for (it = itms->begin();it != itms->end();++it)
-		{
-			ent = m_scene_manager->getEntity(it->second);
-
-			// Auf Ueberschneidung mit dem Kamerastrahl testen
-			const Ogre::AxisAlignedBox& box = ent->getWorldBoundingBox();
-			isec = ray.intersects(box);
-
-			if (isec.first)
-			{
-
-				// Objekt wird vom Kamerastrahl geschnitten
-				// Das Objekt waehlen, dass am naechsten am Mauszeiger ist
-				di = World::getWorld()->getRegion(rid)->getDropItem(it->first);
-				if (di ==0)
-				{
-					continue;
-				}
-				
-				ix = di->m_x/2.0;
-				iy = di->m_y/2.0;
-				dist = (gx-ix)*(gx-ix) + (gy-iy)*(gy-iy);
-				if (dist < mindist)
-				{
-					mindist = dist;	
-					objname = it->second;
-				}
-
-			}
-
-		}
-
-		if (objname!="")
-		{
-			// Item gefunden
-			// ID des Objektes ermitteln
-			int pos = objname.find(":");
-			std::string idstring = objname.substr(pos+1);
-			name = objname.substr(0,pos);
-			std::stringstream stream(idstring);
-			int id;
-			stream >> id;
-			string_stream<<name;
-
-			DEBUG5("item hover id %i",id);
-
-			Item* itm = player->getRegion()->getItem(id);
-
-			if (itm !=0)
-			{
-				// Objekt existiert
-				m_document->getGUIState()->m_cursor_item_id = id;
-				label->setVisible(true);
-			}
-			else
-			{
-				m_document->getGUIState()->m_cursor_item_id =0;
-			}
-		}
-		else
-		{
-			m_document->getGUIState()->m_cursor_item_id =0;
-		}
-
-
-	}
-
 
 
 	name = string_stream.str();
@@ -892,6 +834,239 @@ void MainWindow::updateObjectInfo()
 	}
 
 
+}
+
+void MainWindow::updateItemInfo()
+{
+	// Zaehler wie viele Labels fuer Items existieren
+	static int lcount =0;
+	
+	// Fenstermanager
+	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
+	CEGUI::Window* label = win_mgr.getWindow("ItemInfoLabel");
+	
+	std::map<int,string>* itms = m_scene->getDropItems();
+	std::map<int,string>::iterator it;
+	
+	DropItem* di;
+	
+	Player* player = m_document->getLocalPlayer();
+	short rid = player->getGridLocation()->m_region;
+	Vector plpos = player->getShape()->m_center;
+	
+	
+	
+	if (m_document->getGUIState()->m_cursor_object == "")
+	{
+		
+		// Ogre Name des Objektes auf das der Mauszeiger zeigt
+		std::string objname = "";
+	
+		// Position der Maus
+		float x = m_mouse->getMouseState().X.abs;
+		float y = m_mouse->getMouseState().Y.abs;
+	
+	
+		// Position des Mausklicks relativ zum Viewport
+		Ogre::Viewport* viewport = m_scene->getViewport();
+		float relx = x*1.0/(viewport->getActualWidth());
+		float rely = y*1.0/(viewport->getActualHeight());
+	
+		// Strahl von der Kamera durch den angeklickten Punkt
+		Ogre::Camera* camera = m_scene->getCamera();
+		Ogre::Ray ray = camera->getCameraToViewportRay(relx,rely);
+		
+		// Umrechnen in Spielkoordinaten
+		// Ort an dem der Strahl den Boden beruehrt berechnen
+		const Ogre::Vector3& orig = ray.getOrigin();
+		const Ogre::Vector3& dir = ray.getDirection();
+	
+		// Schnittpunkt mit der Ebene y=0 ausrechnen
+		Ogre::Vector3 p = orig + dir*(orig.y/(-dir.y));
+		float gx = p.x/50;
+		float gy = p.z/50;
+	
+		Ogre::Entity* ent;
+		
+		// Nach Items unterm Mauszeiger suchen
+		// Ergebnispaar einer Intersection Abfrage
+		std::pair<bool,Ogre::Real> isec;
+			
+		float mindist = 1000000;
+		float dist;
+		float ix,iy;
+		float mix,miy;
+		
+		
+		std::ostringstream out_stream;
+		out_stream.str("");
+			
+		for (it = itms->begin();it != itms->end();++it)
+		{
+			ent = m_scene_manager->getEntity(it->second);
+	
+				// Auf Ueberschneidung mit dem Kamerastrahl testen
+			const Ogre::AxisAlignedBox& box = ent->getWorldBoundingBox();
+			isec = ray.intersects(box);
+	
+			if (isec.first)
+			{
+	
+					// Objekt wird vom Kamerastrahl geschnitten
+					// Das Objekt waehlen, dass am naechsten am Mauszeiger ist
+				di = World::getWorld()->getRegion(rid)->getDropItem(it->first);
+				if (di ==0)
+				{
+					continue;
+				}
+					
+				ix = di->m_x/2.0;
+				iy = di->m_y/2.0;
+				dist = (gx-ix)*(gx-ix) + (gy-iy)*(gy-iy);
+				if (dist < mindist)
+				{
+					mindist = dist;	
+					objname = it->second;
+					mix=ix;
+					miy=iy;
+						
+				}
+	
+			}
+	
+		}
+	
+		if (objname!="")
+		{
+				// Item gefunden
+				// ID des Objektes ermitteln
+			int pos = objname.find(":");
+			std::string idstring = objname.substr(pos+1);
+			std::string name = objname.substr(0,pos);
+			std::stringstream stream(idstring);
+			int id;
+			stream >> id;
+	
+			DEBUG5("item hover %s id %i",name.c_str(),id);
+	
+			Item* itm = player->getRegion()->getItem(id);
+	
+			if (itm !=0)
+			{
+				// Objekt existiert
+				m_document->getGUIState()->m_cursor_item_id = id;
+				
+				if (!m_document->getGUIState()->m_alt_hold)
+				{
+					label->setVisible(true);
+				}
+				
+				if (label->getText() != name)
+				{
+
+					label->setText(name);
+				}
+				
+				
+				std::pair<float,float> rpos = m_scene->getProjection(Vector(mix,miy));
+				label->setPosition(CEGUI::UVector2(CEGUI::UDim(std::max(0.0,rpos.first-0.03),0), CEGUI::UDim(std::max(0.0,rpos.second-0.05),0)));
+			}
+			else
+			{
+				m_document->getGUIState()->m_cursor_item_id =0;
+				label->setVisible(false);
+			}
+		}
+		else
+		{
+			m_document->getGUIState()->m_cursor_item_id =0;
+			label->setVisible(false);
+		}
+	}
+	
+
+	if (m_document->getGUIState()->m_alt_hold)
+	{
+		label->setVisible(false);
+		
+		// Alt gedrueckt
+		// fuer alle Items ein Label erstellen
+		std::ostringstream stream;
+		int nr =0;
+		std::string name;
+		std::pair<float,float> rpos;
+		
+		for (it = itms->begin();it != itms->end();++it)
+		{
+			di = World::getWorld()->getRegion(rid)->getDropItem(it->first);
+			if (di ==0)
+			{
+				continue;
+			}
+			
+			stream.str("");
+			stream << "ItemLabel";
+			stream << nr;
+			
+			if (nr >= lcount)
+			{
+				lcount ++;
+				label = win_mgr.createWindow("TaharezLook/StaticText", stream.str());
+				m_game_screen->addChildWindow(label);
+				label->setProperty("FrameEnabled", "false");
+				label->setProperty("BackgroundEnabled", "false");
+				label->setPosition(CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim( 0.02f)));
+				label->setSize(CEGUI::UVector2(cegui_reldim(0.08f), cegui_reldim( 0.03f)));
+				label->setText("");
+				label->setAlpha(0.9);
+				label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&MainWindow::onDropItemClicked, this));
+				
+			}
+			else
+			{
+				label = win_mgr.getWindow(stream.str());
+			}
+			label->setVisible(true);
+			
+			name = di->m_item->getName();
+			if (label->getText() != name)
+			{
+	
+				label->setText(name);
+			}
+			
+			label->setID(it->first);
+			
+			rpos = m_scene->getProjection(Vector(di->m_x/2.0,di->m_y/2.0));
+			label->setPosition(CEGUI::UVector2(CEGUI::UDim(std::max(0.0,rpos.first-0.03),0), CEGUI::UDim(std::max(0.0,rpos.second-0.05),0)));
+			nr++;
+
+		}
+		
+		
+		for (; nr<lcount; nr++)
+		{
+			stream.str("");
+			stream << "ItemLabel";
+			stream << nr;
+			
+			label = win_mgr.getWindow(stream.str());
+			label->setVisible(false);
+		}
+		
+	}
+	else
+	{
+		std::ostringstream stream;
+		for (int i=0; i<lcount; i++)
+		{
+			stream.str("");
+			stream << "ItemLabel";
+			stream << i;
+			label = win_mgr.getWindow(stream.str());
+			label->setVisible(false);
+		}
+	}
 }
 
 void MainWindow::updatePartyInfo()
@@ -1188,7 +1363,16 @@ bool MainWindow::keyReleased(const OIS::KeyEvent &evt)
 	return ret;
 }
 
-
+bool MainWindow::onDropItemClicked(const CEGUI::EventArgs& evt)
+{
+	const CEGUI::MouseEventArgs& we =
+			static_cast<const CEGUI::MouseEventArgs&>(evt);
+	unsigned int id = we.window->getID();
+	
+	DEBUG5("pick up item %i",id);
+	m_document->onDropItemClick(id);
+	return true;
+}
 
 
 
