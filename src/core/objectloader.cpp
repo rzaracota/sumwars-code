@@ -458,8 +458,8 @@ std::list<MonsterBasicData*>* ObjectLoader::loadMonsterBasicData(const char* pFi
 	}
 	for (int i=0; i<4; i++)
 	{
-		m_min_level[i] = 0;
-		m_max_level[i] = 0;
+		m_min_level[i] = -1;
+		m_max_level[i] = -1;
 		m_magic_prob[i] = 0.0;
 		m_magic_power[i] = 0.0;
 	}

@@ -779,12 +779,15 @@ Item* ItemFactory::createItem(DropSlot &slot)
 	if (slot.m_max_level<0)
 		return 0;
 
+	DEBUG5("drop item %i %i",slot.m_min_level, slot.m_max_level);
 	int size = Random::randDiscrete(slot.m_size_probability,5);
 
 	// kein Item ausgewurfelt
 	if (size ==4)
 		return 0;
 
+	
+	
 	DEBUG5("item size: %i",size);
 	Item* item =0;
 	if (size  == Item::GOLD)
@@ -842,8 +845,6 @@ Item* ItemFactory::createItem(DropSlot &slot)
 		Item::Subtype subtype= types[res];
 		Item::Type type = m_item_types.find(subtype)->second;
 
-		DEBUG5("item type %i  subtype %s",type,subtype.c_str());
-
 		// Magiestaerke berechnen
 		float magic =0;
 		if (Random::random() < slot.m_magic_probability || type == Item::RING  || type == Item::AMULET)
@@ -853,6 +854,7 @@ Item* ItemFactory::createItem(DropSlot &slot)
 		}
 
 		item = createItem(type,subtype,0,magic);
+		DEBUG5("item type %i  subtype %s level %i",type,subtype.c_str(), item->m_level_req);
 		return item;
 	}
 	return 0;
