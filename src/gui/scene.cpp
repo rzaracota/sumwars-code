@@ -1387,15 +1387,15 @@ void Scene::createScene()
     m_scene_manager->setAmbientLight(Ogre::ColourValue(0.4,0.4,0.4));
     Ogre::Light *light = m_scene_manager->createLight("HeroLight");
     light->setType(Ogre::Light::LT_SPOTLIGHT);
-    light->setDiffuseColour(1.0, 0.0, 0.0);
-    light->setSpecularColour(1.0, 0.0, 0.0);
+    light->setDiffuseColour(0.8, 0.8, 0.8);
+    light->setSpecularColour(0.5, 0.5, 0.5);
     light->setDirection(0,-1,0);
 
     light = m_scene_manager->createLight("RegionLight");
     light->setType(Ogre::Light::LT_DIRECTIONAL);
-    light->setDiffuseColour(1.0, 1.0, 1.0);
+    light->setDiffuseColour(0.6, 0.6, 0.6);
     light->setSpecularColour(1.0, 1.0, 1.0);
-    light->setDirection(Ogre::Vector3(0,1000,300));
+    light->setDirection(Ogre::Vector3(400,1000,300));
 
 
 	// Liste der statischen Objekte
