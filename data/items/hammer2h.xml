@@ -341,12 +341,6 @@
 </Item>
 
 <!-- Urteilshammer -->
-<!-- FIXME
-hier standen folgende Zeilen, die den Itemloader ratlos zurueckliessen :-)
-	modchance_dexterity_mod="0.1"
-	modchance_dexterity_mod="0.05"
-Ich habe den Wert 0.1 eingetragen, wenn das stimmt kannst du diesen Kommentar loeschen.
--->
 <Item type="weapon" subtype="jugmnt_hmr" size="big">
 	<Image image="set:sledgehammer.png image:full_image" />
 	<Mesh file="sledgehammer.mesh" />
@@ -357,6 +351,7 @@ Ich habe den Wert 0.1 eingetragen, wenn das stimmt kannst du diesen Kommentar lo
 		max_enchant="910"
 		modchance_strength_mod="0.1"
 		modchance_dexterity_mod="0.1"
+		modchance_willpower_mod="0.5"
 		modchance_magic_power_mod="0.05"
 		modchance_damage_phys_mod="0.10"
 		modchance_damage_fire_mod="0.10"
