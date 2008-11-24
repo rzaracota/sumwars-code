@@ -172,7 +172,7 @@ void Scene::registerMeshes()
 	registerObject("lich","lich.mesh","");
 
 	// feste Objekte
-	
+
 	registerObject("smallWall1","smallWall1.mesh","");
 	registerObject("smallWall2","smallWall2.mesh","");
 	registerObject("stones3","stones3.mesh","");
@@ -310,8 +310,8 @@ std::pair<float,float> Scene::getProjection(Vector pos)
 {
 	Ogre::Vector4 ipos(pos.m_x*50,0,pos.m_y*50,1);
 	Ogre::Vector4 projpos;
-	projpos = m_camera->getProjectionMatrix()*m_camera->getViewMatrix()*ipos; 
-	
+	projpos = m_camera->getProjectionMatrix()*m_camera->getViewMatrix()*ipos;
+
 	return std::make_pair(0.5 + 0.5*projpos.x / projpos.w, 0.5 - 0.5*projpos.y / projpos.w);
 }
 
@@ -361,6 +361,9 @@ void Scene::update(float ms)
 	// Kamera auf Spieler ausrichten
 	m_camera->setPosition(Ogre::Vector3(x*50, 1000, y*50+300));
 	m_camera->lookAt(Ogre::Vector3(x*50,0,y*50));
+
+	Ogre::Light* light= m_scene_manager->getLight("HeroLight");
+	light->setPosition(Ogre::Vector3(x*50,1000,y*50));
 
 	// alle Objekte aktualisieren
 	updateObjects();
@@ -496,13 +499,13 @@ void Scene::updateItems()
 			// an die richtige Stelle verschieben
 			Ogre::SceneNode* itm_node = m_scene_manager->getSceneNode(node_name);
 			itm_node->setPosition(vec);
-			
+
 			float angle = di->m_angle_z;
 			itm_node->setDirection(cos(angle),0,sin(angle),Ogre::Node::TS_WORLD);
-			
+
 			angle = di->m_angle_x;
 			itm_node->pitch(Ogre::Radian(angle));
-			
+
 		}
 	}
 }
@@ -548,7 +551,7 @@ void Scene::updateObject(WorldObject* obj)
 	// Statusmods anpassen
 	std::ostringstream num("");
 	std::string mod_name;
-	
+
 
 
 	// Animation anpassen
@@ -648,7 +651,7 @@ void Scene::updateObject(WorldObject* obj)
         Ogre::Node* node;
 
        Ogre::Entity::ChildObjectListIterator it = obj_ent->getAttachedObjectIterator();
-        
+
 		// mappt Namen von Knochen auf die daran anzuhaengenen Meshes
         std::map<std::string, std::string> goal_atch;
         std::map<std::string, std::string>::iterator jt;
@@ -658,7 +661,7 @@ void Scene::updateObject(WorldObject* obj)
         {
             itmsubtype = itm->m_subtype;
             new_ent_name = getItemRenderInfo(itmsubtype).m_mesh;
-			
+
 			// einige Waffen werden in der Linken Hand getragen
 			if (itm->m_weapon_attr->m_weapon_type == WeaponAttr::BOW || itm->m_weapon_attr->m_weapon_type == WeaponAttr::CROSSBOW)
 			{
@@ -669,13 +672,13 @@ void Scene::updateObject(WorldObject* obj)
             	goal_atch.insert(std::make_pair("itemRightHand",new_ent_name));
 			}
         }
-		
+
 		itm = cmp->getShield();
 		if (itm !=0)
 		{
 			itmsubtype = itm->m_subtype;
 			new_ent_name = getItemRenderInfo(itmsubtype).m_mesh;
-			
+
 			goal_atch.insert(std::make_pair("itemLeftHand",new_ent_name));
 		}
 
@@ -743,17 +746,17 @@ void Scene::updateObject(WorldObject* obj)
     }
 	DEBUG5("particle");
 	//zeigt an ob ein Partikelsystem sichtbar is
-	
-	
+
+
 	// Ermitteln welche Partikelsysteme vorhanden sind
 	std::string modnames[8]  = {"Blind", "Poison", "Berserk", "Confuse", "Mute", "Paralyze", "Frozen", "Burning"};
 	std::string effectnames[1] = {"Hit"};
-	
+
 	std::list<Ogre::MovableObject*> rm_obj;
 	std::list<Ogre::MovableObject*>::iterator it;
-	
+
 	std::list<Ogre::MovableObject*> attach_obj;
-	
+
 	int i;
 	Ogre::ParticleSystem *mod_part;
 	if (cr !=0)
@@ -761,20 +764,20 @@ void Scene::updateObject(WorldObject* obj)
 		// Feld das angibt, welche Mods gesetzt sind
 		float * status_mods = cr->getDynAttr()->m_status_mod_time;
 		std::string mod;
-		
+
 		Ogre::MovableObject* obj;
-		
+
 
 		// Schleife ueber die Statusmods
 		for (i=0;i<NR_STATUS_MODS;i++)
 		{
 			mod_part =0;
-			
+
 			// Schleife ueber die angehaengten Objekte
 			for (int j=0; j< node->numAttachedObjects(); j++)
 			{
 				obj = node->getAttachedObject(j);
-				
+
 				// pruefen ob das angehaengte Objekt das Partikelsystem fuer den aktuellen Statusmod ist
 				if (obj->getMovableType()== "ParticleSystem")
 				{
@@ -786,16 +789,16 @@ void Scene::updateObject(WorldObject* obj)
 					}
 				}
 			}
-			
+
 			if (mod_part !=0 && status_mods[i]<=0)
 			{
 				// Partikelsystem ist vorhanden, aber der zugehoerige Mod nicht aktiv
 				// Partikelsystem entfernen und in den Pool verschieben
-				
+
 				rm_obj.push_back(mod_part);
 				putBackParticleSystem(mod_part);
 			}
-			
+
 			if (mod_part ==0 && status_mods[i]>0)
 			{
 				// Partikelsystem ist nicht vorhanden, aber der zugehoerige Mod ist aktiv
@@ -806,19 +809,19 @@ void Scene::updateObject(WorldObject* obj)
 			}
 		}
 
-		
+
 		// weitere Effekte anpassen
 		float* effects =  cr->getDynAttr()->m_effect_time;
 
 		for (i=0;i<NR_EFFECTS;i++)
 		{
 			mod_part =0;
-			
+
 			// Schleife ueber die angehaengten Objekte
 			for (int j=0; j< node->numAttachedObjects(); j++)
 			{
 				obj = node->getAttachedObject(j);
-				
+
 				// pruefen ob das angehaengte Objekt das Partikelsystem fuer den aktuellen Statusmod ist
 				if (obj->getMovableType()== "ParticleSystem")
 				{
@@ -830,17 +833,17 @@ void Scene::updateObject(WorldObject* obj)
 					}
 				}
 			}
-			
+
 			if (mod_part !=0 && effects[i]<=0)
 			{
 				// Partikelsystem ist vorhanden, aber der zugehoerige Effekt nicht aktiv
 				// Partikelsystem entfernen und in den Pool verschieben
-				
+
 				rm_obj.push_back(mod_part);
 				putBackParticleSystem(mod_part);
-				
+
 			}
-			
+
 			if (mod_part ==0 && effects[i]>0)
 			{
 				// Partikelsystem ist nicht vorhanden, aber der zugehoerige Effekt ist aktiv
@@ -850,19 +853,19 @@ void Scene::updateObject(WorldObject* obj)
 
 			}
 		}
-		
+
 		for (it = rm_obj.begin(); it != rm_obj.end(); ++it)
 		{
 			node->detachObject(*it);
 		}
-		
+
 		for (it = attach_obj.begin(); it != attach_obj.end(); ++it)
 		{
 			node->attachObject(*it);
 		}
-		
+
 	}
-	
+
 	// Sound aktualisieren
 	if (obj->getTypeInfo()->m_type == WorldObject::TypeInfo::TYPE_PLAYER)
 	{
@@ -874,7 +877,7 @@ void Scene::updateObject(WorldObject* obj)
 			Player* pl = static_cast<Player*>(obj);
 			Action::ActionType act = pl->getAction()->m_type;
 			Action::ActionType baseact = Action::getActionInfo(act)->m_base_action;
-			
+
 			if ((baseact == Action::ATTACK || baseact == Action::HOLY_ATTACK || baseact == Action::RANGE_ATTACK|| baseact == Action::MAGIC_ATTACK) && pl->getAction()->m_elapsed_time <200)
 			{
 				SoundTarget target = "";
@@ -883,16 +886,16 @@ void Scene::updateObject(WorldObject* obj)
 					target = pl->getWeapon()->m_subtype;
 					target += ":attack";
 				}
-				
+
 				SoundName sound;
 				sound = SoundSystem::getSoundName(target);
 				sobj->setSound(sound);
-				
+
 			}
-			
+
 		}
 	}
-	
+
 	if (obj->getTypeInfo()->m_type != WorldObject::TypeInfo::TYPE_FIXED_OBJECT)
 	{
 		// Sound durch Aktion
@@ -906,15 +909,15 @@ void Scene::updateObject(WorldObject* obj)
 			{
 				Action::ActionType act = cr->getAction()->m_type;
 				SoundTarget target = cr->getTypeInfo()->m_subtype;
-				
+
 				if (obj->getTypeInfo()->m_type == WorldObject::TypeInfo::TYPE_PLAYER)
 				{
 					target = "hero";
 				}
-				
+
 				target += ":";
 				target += Action::getActionInfo(act)->m_enum_name;
-				
+
 				SoundName sound;
 				sound = SoundSystem::getSoundName(target);
 				if (act == Action::DIE)
@@ -924,31 +927,31 @@ void Scene::updateObject(WorldObject* obj)
 				sobj->setSound(sound);
 			}
 		}
-		
+
 		// Sound durch Wirkung von aussen
 		std::string passoundname = name;
 		passoundname += ":passive";
 		SoundObject* sobj2 = SoundSystem::getSoundObject(passoundname);
 		float* effects =  cr->getDynAttr()->m_effect_time;
-		
-				
+
+
 		if (effects[CreatureDynAttr::BLEEDING]> 50)
 		{
 			SoundTarget target = cr->getTypeInfo()->m_subtype;
-				
+
 			if (obj->getTypeInfo()->m_type == WorldObject::TypeInfo::TYPE_PLAYER)
 			{
 				target = "hero";
 			}
-			
+
 			target += ":hit";
 			SoundName sound;
 			sound = SoundSystem::getSoundName(target);
 			sobj2->setSound(sound);
 		}
-		
+
 	}
-	
+
 }
 
 void Scene::deleteObject(std::string name)
@@ -959,25 +962,25 @@ void Scene::deleteObject(std::string name)
 	{
 		SoundSystem::deleteSoundObject(sname);
 	}
-	
+
 	std::string actsoundname = name;
 	actsoundname += ":action";
 	if (SoundSystem::getSoundObject(actsoundname)!=0)
 	{
 		SoundSystem::deleteSoundObject(actsoundname);
 	}
-	
+
 	std::string passoundname = name;
 	passoundname += ":passive";
 	if (SoundSystem::getSoundObject(passoundname)!=0)
 	{
 		SoundSystem::deleteSoundObject(passoundname);
 	}
-	
+
 	std::string node_name = name + "Node";
 
 	DEBUG5("deleting object %s",name.c_str());
-	
+
 
 	destroySceneNode(node_name);
 
@@ -1038,24 +1041,24 @@ void Scene::createObject(WorldObject* obj,std::string& name, bool is_static)
 		sname += ":weapon";
 		SoundSystem::createSoundObject(sname);
 	}
-	
+
 	if (!is_static)
 	{
 		std::string actsoundname = name;
 		actsoundname += ":action";
 		SoundSystem::createSoundObject(actsoundname);
-		
+
 		std::string passoundname = name;
 		passoundname += ":passive";
 		SoundSystem::createSoundObject(passoundname);
 	}
-	
+
 }
 
 void Scene::createItem(DropItem* di, std::string& name)
 {
 	std::string node_name = name + "Node";
-	
+
 	// SoundObjekt anlegen
 	SoundObject* obj = SoundSystem::createSoundObject(name);
 	if (di->m_height > 0)
@@ -1084,7 +1087,7 @@ void Scene::createItem(DropItem* di, std::string& name)
 	// Je nach Typ das richtige Mesh benutzen
 	Ogre::Entity* ent;
 	ent = m_scene_manager->createEntity(name, ri.m_mesh);
-	
+
 	// Objekt drehen
 	float angle = di->m_angle_z;
 	obj_node->setDirection(cos(angle),0,sin(angle),Ogre::Node::TS_WORLD);
@@ -1096,7 +1099,7 @@ void Scene::createItem(DropItem* di, std::string& name)
 void Scene::deleteItem(std::string name)
 {
 	SoundSystem::deleteSoundObject(name);
-	
+
 	std::string node_name = name + "Node";
 
 	DEBUG5("deleting item %s",name.c_str());
@@ -1172,14 +1175,14 @@ void Scene::updateProjectiles()
 			SoundName sound;
 			sound = SoundSystem::getSoundName(target);
 			SoundObject* obj = SoundSystem::getSoundObject(name);
-			
+
 			if (sound =="")
 			{
 				DEBUG("no sound for target %s",target.c_str());
 			}
 			if (obj !=0)
 			{
-				
+
 				obj->setSound(sound);
 			}
 		}
@@ -1191,8 +1194,8 @@ void Scene::createProjectile(Projectile* pr, std::string& name)
 {
 	// SoundObjekt anlegen
 	SoundSystem::createSoundObject(name);
-	
-	
+
+
 	DEBUG5("creating projectile %s",name.c_str());
 
 	std::string node_name = name + "Node";
@@ -1202,7 +1205,7 @@ void Scene::createProjectile(Projectile* pr, std::string& name)
 
 	// in die Liste einfuegen
 	m_projectiles->insert(std::make_pair(pr->getId(),name));
-	
+
 	DEBUG5("speed %f %f",pr->getSpeed().m_x, pr->getSpeed().m_y);
 	DEBUG5("angle %f ",pr->getShape()->m_angle*180/3.14);
 
@@ -1236,7 +1239,7 @@ void Scene::createProjectile(Projectile* pr, std::string& name)
 void Scene::deleteProjectile(std::string name)
 {
 	SoundSystem::deleteSoundObject(name);
-	
+
 	std::string node_name = name + "Node";
 
 	DEBUG5("deleting projectile %s",name.c_str());
@@ -1249,10 +1252,10 @@ Ogre::ParticleSystem* Scene::getParticleSystem(std::string type)
 	// Im Pool nach einem passenden Partikelsystem suchen
 	std::multimap<std::string, Ogre::ParticleSystem*>::iterator it;
 	it = m_particle_system_pool.find(type);
-	
+
 	Ogre::ParticleSystem* part=0;
 	static int count =0;
-	
+
 	if (it == m_particle_system_pool.end())
 	{
 		// Kein Partikelsystem gefunden
@@ -1260,7 +1263,7 @@ Ogre::ParticleSystem* Scene::getParticleSystem(std::string type)
 		std::ostringstream name;
 		name << "ParticleSystem"<<count;
 		count ++;
-		
+
 		part = m_scene_manager->createParticleSystem(name.str(), type);
 		part->setUserAny(Ogre::Any(type));
 		part->setKeepParticlesInLocalSpace(true);
@@ -1269,11 +1272,11 @@ Ogre::ParticleSystem* Scene::getParticleSystem(std::string type)
 	else
 	{
 		// Partikelsystem aus dem Pool nehmen
-		part = it->second;	
+		part = it->second;
 		m_particle_system_pool.erase(it);
 		DEBUG5("took particlesystem %s for type %s",part->getName().c_str(), type.c_str());
 	}
-	
+
 	part->clear();
 	return part;
 }
@@ -1283,9 +1286,9 @@ void Scene::putBackParticleSystem(Ogre::ParticleSystem* part)
 	// Typ des Partikelsystems ermitteln
 	std::string type;
 	type = Ogre::any_cast<std::string>(part->getUserAny());
-	
+
 	DEBUG5("put back particlesystem %p %s for type %s",part, part->getName().c_str(), type.c_str());
-	
+
 	m_particle_system_pool.insert(std::make_pair(type,part));
 }
 
@@ -1298,18 +1301,18 @@ void Scene::destroySceneNode(std::string& node_name)
 		return;
 
 	// Partikelsysteme werden nicht geloescht sondern wieder in den Pool eingefuegt
-	
+
 	std::list<Ogre::MovableObject*> rm_obj;
 	std::list<Ogre::MovableObject*>::iterator jt;
-	
+
 	std::string mod;
-	
+
 	// Schleife ueber die angehaengten Objekte
 	Ogre::MovableObject* obj;
 	for (int j=0; j< node->numAttachedObjects(); j++)
 	{
 		obj = node->getAttachedObject(j);
-				
+
 		// pruefen ob das angehaengte Objekt ein Partikelsystem ist
 		if (obj->getMovableType()== "ParticleSystem")
 		{
@@ -1317,12 +1320,12 @@ void Scene::destroySceneNode(std::string& node_name)
 			rm_obj.push_back(obj);
 		}
 	}
-	
+
 	for (jt = rm_obj.begin(); jt != rm_obj.end(); ++jt)
 	{
 		node->detachObject(*jt);
 	}
-	
+
 
 
 	// Iterator ueber die angehaengten Objekte
@@ -1366,20 +1369,34 @@ void Scene::clearObjects()
 void Scene::createScene()
 {
 	DEBUG5("create Scene");
-	
+
 	// alle Partikelsystem loeschen
 	std::multimap<std::string, Ogre::ParticleSystem*>::iterator kt;
 	for (kt = m_particle_system_pool.begin(); kt !=  m_particle_system_pool.end(); ++kt)
 	{
-		DEBUG5("destroy particle system %s",kt->second->getName().c_str()); 
+		DEBUG5("destroy particle system %s",kt->second->getName().c_str());
 		m_scene_manager->destroyParticleSystem(kt->second);
 	}
 	m_particle_system_pool.clear();
-	
+
 	// alle bisherigen Objekte aus der Szene loeschen
 	m_scene_manager->clearScene();
 	clearObjects();
 	SoundSystem::clearObjects();
+
+    m_scene_manager->setAmbientLight(Ogre::ColourValue(0.4,0.4,0.4));
+    Ogre::Light *light = m_scene_manager->createLight("HeroLight");
+    light->setType(Ogre::Light::LT_SPOTLIGHT);
+    light->setDiffuseColour(1.0, 0.0, 0.0);
+    light->setSpecularColour(1.0, 0.0, 0.0);
+    light->setDirection(0,-1,0);
+
+    light = m_scene_manager->createLight("RegionLight");
+    light->setType(Ogre::Light::LT_DIRECTIONAL);
+    light->setDiffuseColour(1.0, 1.0, 1.0);
+    light->setSpecularColour(1.0, 1.0, 1.0);
+    light->setDirection(Ogre::Vector3(0,1000,300));
+
 
 	// Liste der statischen Objekte
 	std::list<WorldObject*> stat_objs;
