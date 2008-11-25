@@ -69,6 +69,14 @@ struct FixedObjectMeshData
 };
 
 
+struct TempMonsterGroup
+{
+	int number;
+	float prob;
+	WorldObject::TypeInfo::ObjectSubtype subtype;
+};
+
+
 /**
  * \class ObjectLoader
  * \brief Laedt Objecte aus einer XML-Datei
@@ -108,6 +116,8 @@ class ObjectLoader
 	 * \return Liste der geladenen FixedObject-Meshes
 	 */
 	std::list<FixedObjectMeshData*>* loadFixedObjectMeshData(const char* pFilename);
+	
+	bool loadMonsterGroup(const char* pFilename, std::list<MonsterGroup*> &monster_group_list, std::list<std::string> &name_list);
 	
 	private:
 	
@@ -175,6 +185,11 @@ class ObjectLoader
 	 */
 	void searchFixedObjectMeshData(TiXmlNode* pParent);
 	
+	int generateMonsterGroup(TiXmlElement* pElement, std::string element, std::list<MonsterGroup*> &monster_group_list, std::list<std::string> &name_list);
+	
+	void searchMonsterGroup(TiXmlNode* pParent, std::list<MonsterGroup*> &monster_group_list, std::list<std::string> &name_list);
+	
+	
 	/**
 	 * \var MonsterBasicData* m_monster_data
 	 * \brief Daten der Monster
@@ -218,6 +233,10 @@ class ObjectLoader
 	 * \brief Liste mit Daten zu den Meshes der festen Objekte
 	 */
 	std::list<FixedObjectMeshData*>* m_fixed_object_mesh_list;
+	
+	MonsterGroup* m_monster_group;
+	
+	TempMonsterGroup m_temp_monster_group;
 	
 	
 	/**

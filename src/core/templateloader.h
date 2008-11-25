@@ -161,6 +161,7 @@ class TemplateLoader
 	
 	void searchObjectGroupTemplate(TiXmlNode* pParent, std::list<ObjectGroupTemplate*> &object_group_template_list, std::list<std::string> &name_list);
 	
+	
 	/**
 	 * \var WorldData* m_object_data
 	 * \brief Daten zu Objekten

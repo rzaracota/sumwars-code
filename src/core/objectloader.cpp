@@ -856,3 +856,133 @@ std::list<FixedObjectMeshData*>* ObjectLoader::loadFixedObjectMeshData(const cha
 		return 0;
 	}
 }
+
+
+//#######################  MonsterGroup (monster.xml)  #########################
+
+int ObjectLoader::generateMonsterGroup(TiXmlElement* pElement, std::string element, std::list<MonsterGroup*> &monster_group_list, std::list<std::string> &name_list)
+{
+	if ( !pElement ) return 0;
+
+	TiXmlAttribute* pAttrib=pElement->FirstAttribute();
+	int i=0;
+	int ival;
+	double dval;
+	
+	if (element == "MonsterGroup")
+	{
+		DEBUG5("MonsterGroup");
+		
+		if (m_monster_group == 0)
+		{
+			m_monster_group = new MonsterGroup;
+		}
+		
+		while (element == "MonsterGroup" && pAttrib)
+		{
+			if (!strcmp(pAttrib->Name(), "name"))
+				name_list.push_back(pAttrib->Value());
+
+			i++;
+			pAttrib=pAttrib->Next();
+		}
+	}
+	
+	if (element == "SubGroup")
+	{
+		DEBUG5("SubGroup");
+		while (element == "SubGroup" && pAttrib)
+		{
+			if (!strcmp(pAttrib->Name(), "number") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
+				m_temp_monster_group.number = ival;
+			else if (!strcmp(pAttrib->Name(), "prob") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
+				m_temp_monster_group.prob = static_cast<float>(dval);
+			else if (!strcmp(pAttrib->Name(), "subtype"))
+				m_temp_monster_group.subtype = pAttrib->Value();
+
+			i++;
+			pAttrib=pAttrib->Next();
+		}
+	}
+	
+	return i;
+}
+
+
+void ObjectLoader::searchMonsterGroup(TiXmlNode* pParent, std::list<MonsterGroup*> &monster_group_list, std::list<std::string> &name_list)
+{
+	if ( !pParent ) return;
+
+	TiXmlNode* pChild;
+//	TiXmlText* pText;
+
+	int t = pParent->Type();
+	int num;
+
+	switch ( t )
+	{
+	case TiXmlNode::ELEMENT:
+		//printf( "Element [%s]", pParent->Value() );
+		num = generateMonsterGroup(pParent->ToElement(), pParent->Value(), monster_group_list, name_list);
+		/*switch(num)
+		{
+			case 0:  printf( " (No attributes)"); break;
+			case 1:  printf( "%s1 attribute", getIndentAlt(indent)); break;
+			default: printf( "%s%d attributes", getIndentAlt(indent), num); break;
+		}*/
+		break;
+	/*
+	case TiXmlNode::TEXT:
+		pText = pParent->ToText();
+		printf( "Text: [%s]", pText->Value() );
+		break;
+	*/
+	default:
+		break;
+	}
+
+	for ( pChild = pParent->FirstChild(); pChild != 0; pChild = pChild->NextSibling())
+	{
+		searchMonsterGroup(pChild, monster_group_list, name_list);
+
+		if ( !strcmp(pChild->Value(), "SubGroup") && pChild->Type() == TiXmlNode::ELEMENT)
+		{
+			m_monster_group->addMonsters(m_temp_monster_group.subtype, m_temp_monster_group.number, m_temp_monster_group.prob);
+
+			DEBUG5("SubGroup loaded");
+		}
+		else if ( !strcmp(pChild->Value(), "MonsterGroup") && pChild->Type() == TiXmlNode::ELEMENT)
+		{
+			monster_group_list.push_back(m_monster_group);
+			m_monster_group = 0;
+			DEBUG5("MonsterGroup loaded");
+		}
+	}
+}
+
+
+bool ObjectLoader::loadMonsterGroup(const char* pFilename, std::list<MonsterGroup*> &monster_group_list, std::list<std::string> &name_list)
+{
+	m_monster_group = 0;
+	
+	/*object_list = new std::list<FixedObjectData*>;
+	subtype_list = new std::list<std::string>;*/
+
+	TiXmlDocument doc(pFilename);
+	bool loadOkay = doc.LoadFile();
+
+	if (loadOkay)
+	{
+		DEBUG5("Loading %s", pFilename);
+		searchMonsterGroup(&doc, monster_group_list, name_list);
+		DEBUG5("Loading %s finished", pFilename);
+		return true;
+	}
+	else
+	{
+		DEBUG5("Failed to load file %s", pFilename);
+		return false;
+	}
+}
+
+

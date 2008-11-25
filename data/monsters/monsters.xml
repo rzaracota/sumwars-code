@@ -225,6 +225,14 @@ AIR
 -->
 
 
+<!--
+<MonsterGroup name="lich_goblins" >
+	<SubGroup subtype="lich" />
+	<SubGroup subtype="goblin" number="int" prob="float" />
+</MonsterGroup>
+-->
+
+
 <!-- Goblin -->
 <!-- 3871 = 0xf1f -->
 <Monster type="MONSTER" subtype="goblin" fraction="MONSTER" category="GOBLIN" layer="NORMAL">
@@ -357,9 +365,23 @@ AIR
 </Monster>
 
 
-<!--
-	<MonsterGroup name="lich_goblins" >
-		<SubGroup subtype="lich" />
-		<SubGroup subtype="goblin" number="7" prob="0.7" />
-	</MonsterGroup>
-	-->
+<MonsterGroup name="goblins" >
+	<SubGroup subtype="goblin" number="10" prob="0.7" />
+</MonsterGroup>
+
+
+<MonsterGroup name="goblins_dogs" >
+	<SubGroup subtype="goblin" number="6" prob="0.7" />
+	<SubGroup subtype="gob_dog" number="4" prob="0.7" />
+</MonsterGroup>
+
+
+<MonsterGroup name="lich_goblins" >
+	<SubGroup subtype="lich" number="1" prob="1.0" />
+	<SubGroup subtype="goblin" number="7" prob="0.7" />
+</MonsterGroup>
+
+
+<MonsterGroup name="nothing" >
+</MonsterGroup>
+

@@ -456,8 +456,25 @@ void ObjectFactory::init()
 	registerMonster("gob_dog",mdata);
 	
 	
+	// MonsterGroups aus XML Laden
+	ObjectLoader objectloader;
+	
+	std::list<MonsterGroup*> monster_group_list;
+	std::list<std::string> name_list;
+	objectloader.loadMonsterGroup("../data/monsters/monsters.xml", monster_group_list, name_list);
+	
+	std::list<MonsterGroup*>::iterator j = monster_group_list.begin();
+	std::list<std::string>::iterator k = name_list.begin();
+	
+	while (j != monster_group_list.end() && k != name_list.end())
+	{
+		registerMonsterGroup(*k,*j);
+		j++;
+		k++;
+	}
+	
 	// Monstergruppen
-	MonsterGroup* mgdata;
+	/*MonsterGroup* mgdata;
 	
 	mgdata = new MonsterGroup;
 	mgdata->addMonsters("goblin",10,0.7);
@@ -475,7 +492,7 @@ void ObjectFactory::init()
 	registerMonsterGroup("lich_goblins", mgdata);
 	
 	mgdata = new MonsterGroup;
-	registerMonsterGroup("nothing", mgdata);
+	registerMonsterGroup("nothing", mgdata);*/
 
 	// Daten fuer generische Objekte
 	
