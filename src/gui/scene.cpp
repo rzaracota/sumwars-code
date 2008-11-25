@@ -161,11 +161,11 @@ void Scene::registerMeshes()
 	// Meshes fuer Objekte registrieren
 
 	// Spieler
-	registerObject("warrior","warrior.mesh","");
-	registerAttachedMesh("warrior","itemRightHand","sword.mesh");
-	registerObject("mage","warrior.mesh","");	// TODO
-	registerObject("priest","warrior.mesh",""); // TODO
-	registerObject("archer","warrior.mesh",""); // TODO
+	registerObject("warrior","warrior_m.mesh","");
+	//registerAttachedMesh("warrior","itemRightHand","sword.mesh");
+	registerObject("mage","mage_m.mesh","");	// TODO
+	registerObject("priest","priest_f.mesh",""); // TODO
+	registerObject("archer","archer_f.mesh",""); // TODO
 
 	// Monster
 	registerObject("gob_dog","gobDog.mesh","");

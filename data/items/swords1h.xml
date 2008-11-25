@@ -319,8 +319,10 @@ s		modchance_damage_air_mod="float"
 		modchance_attack_mod="0.1"
 		modchance_power_mod="0.1"
 	/>
+	
 	<EquipEffect />
-		<WeaponAttribute
+  
+  <WeaponAttribute
 		weapon_type="sword"
 		damage_min_physical="17"
 		damage_max_physical="23"

@@ -1,4 +1,4 @@
-<?xml version="1.0" ?>
+﻿<?xml version="1.0" ?>
 
 <!--
 HINWEISE:
@@ -261,25 +261,7 @@ s		modchance_damage_air_mod="float"
 </Item>
 -->
 
-<!-- LONG BOWS -->
-<!-- Turnierbogen -->
-<!-- Orkbogen -->
-<!-- Eibenbogen -->
-<!-- Langbogen -->
-<!-- Soldatenbogen -->
-<!-- Hornbogen -->
-<!-- Ahornbogen -->
-<!-- Kriegsbogen -->
-<!-- Kompositlangbogen -->
-<!-- Sturms�nger -->
-<!-- Eichenbogen -->
-<!-- D�monenhornbogen -->
-<!-- Waldl�uferbogen -->
-<!-- Eschenlangbogen -->
-<!-- Engelsbogen -->
-<!-- D�monenkompositbogen -->
-<!-- Heldenbogen -->
-<!-- Elfenbogen -->
+
 <!-- ARMBRUST -->
 <!-- �bungsarmbrust -->
 <!-- Leichte Armbrust -->
@@ -299,26 +281,6 @@ s		modchance_damage_air_mod="float"
 <!-- Assasinenarmbrust -->
 <!-- Zerst�rerarmbrust -->
 <!-- Zwergenarmbrust -->
-
-<!-- SHIELDS -->
-<!-- Tartsche -->
-<!-- Buckler -->
-<!-- Holzschild -->
-<!-- Bronzeschild -->
-<!-- Eisenschild -->
-<!-- Stahlschild -->
-<!-- Verst�rkter Rundschild -->
-<!-- Gl�hender Schild -->
-<!-- Klingenschild -->
-<!-- Ogerteller -->
-<!-- Turmschild -->
-<!-- Legionsschild -->
-<!-- Zwergenstahlschild -->
-<!-- Nordlingsschild -->
-<!-- Windschild -->
-<!-- Engelsschild -->
-<!-- Heldenschild -->
-<!-- G�tterschild -->
 
 <!-- ARMOR -->
 <!-- Tuchr�stung -->
