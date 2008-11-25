@@ -3739,7 +3739,7 @@ void Creature::getPathDirection(Vector pos,short region, float base_size, short 
 		// Abstand des wegsuchenden Objektes zur einen Position
 		float d2 = (*pi)->m_start.distanceTo(pos);
 		
-		if (fabs((*pi)->m_center.m_x - pos.m_x)>10 || fabs((*pi)->m_center.m_y - pos.m_y)>10)
+		if (fabs(goal.m_x - pos.m_x)>10 || fabs(goal.m_y - pos.m_y)>10)
 		{
 			// Direkte Wegsuche wenn das Ziel in einer Richtung mehr als 10 entfernt ist
 			direct = true;
@@ -3763,7 +3763,7 @@ void Creature::getPathDirection(Vector pos,short region, float base_size, short 
 	if (recalc && !direct)
 	{
 		// neu berechnen
-
+		DEBUG5("recalc");
 		// Zentrum und Senke sind die aktuelle Position
 		(*pi)->m_start= goal;
 		(*pi)->m_center= goal;
@@ -3785,6 +3785,7 @@ void Creature::getPathDirection(Vector pos,short region, float base_size, short 
 
 	if (direct)
 	{
+		DEBUG5("direct way");
 		// Direkte Richtung
 		// Vektor vom Start zum Ziel, normiert
 		dir = goal - pos;
@@ -3793,6 +3794,7 @@ void Creature::getPathDirection(Vector pos,short region, float base_size, short 
 	}
 	else
 	{
+		DEBUG5("use pot field");
 		// Potentialfeld verwenden um die Richtung zu berechnen
 		World::getWorld()->calcPathDirection(*pi, pos, dir);
 	}
