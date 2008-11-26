@@ -4324,4 +4324,24 @@ void Creature::processNetEvent(NetEvent* event, CharConv* cv)
 	}
 }
 
+void Creature::getMemberReference(VariableRef& ref, std::string member)
+{
+	m_base_attr.getMemberReference(ref,member);
+	if (ref.isValid())
+	{
+		return;
+	}
+	
+	m_dyn_attr.getMemberReference(ref,member);
+	if (ref.isValid())
+	{
+		return;
+	}
+	
+	
+
+	WorldObject::getMemberReference(ref, member);
+}
+
+
 

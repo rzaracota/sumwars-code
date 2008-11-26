@@ -40,6 +40,7 @@ sumwars_SOURCES = core/trade.cpp \
 	core/debug.cpp \
 	core/item.cpp \
 	core/dropitem.cpp \
+	core/creaturestruct.cpp \
 	core/creature.cpp \
 	core/pathfind.cpp \
 	core/fixedobject.cpp \
@@ -62,6 +63,7 @@ sumwars_SOURCES = core/trade.cpp \
 	core/geometry.cpp \
 	core/mapgenerator.cpp \
 	core/unionfindtree.cpp \
+	core/variable.cpp \
 	gui/main_gui.cpp \
 	gui/mainwindow.cpp \
 	gui/scene.cpp \

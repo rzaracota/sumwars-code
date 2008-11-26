@@ -121,4 +121,37 @@ string WorldObject::getNameId()
 }
 
 
+void WorldObject::getMemberReference(VariableRef& ref, std::string member)
+{
+	if (member =="subtype")
+	{
+		ref.setVariable(m_type_info.m_subtype);
+	}
+	else
+	{
+		ERRORMSG("unknown member %s requested",member.c_str());
+	}
+}
+
+
+void WorldObject::getMember(Variable& var, std::string member)
+{
+	VariableRef ref;
+	getMemberReference(ref,member);
+	
+	if (ref.isValid())
+	{
+		var.setType(ref.getType());
+		var.setData(ref.print());
+	}
+	else 
+	{
+		if (member == "id")
+		{
+			var.setType("int");
+			var.setData(m_id);
+		}
+	}
+}
+
 

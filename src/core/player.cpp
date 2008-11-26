@@ -2170,7 +2170,25 @@ void Player::loadEquipement(CharConv* cv)
 	*/
 }
 
-
+void Player::getMemberReference(VariableRef& ref, std::string member)
+{
+	if (member =="name")
+	{
+		ref.setVariable(m_name);
+	}
+	else if (member =="attribute_points")
+	{
+		ref.setVariable(m_attribute_points);
+	}
+	else if (member =="skill_points")
+	{
+		ref.setVariable(m_skill_points);
+	}
+	else
+	{
+		Creature::getMemberReference(ref,member);
+	}
+}
 
 
 

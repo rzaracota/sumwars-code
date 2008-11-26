@@ -5,7 +5,7 @@
 
 #include <list>
 #include <string.h>
-
+#include "variable.h"
 
 
 #define NR_STATUS_MODS 8
@@ -146,6 +146,12 @@ struct CreatureBaseAttr
 	 * \brief Bitmaske, welche angibt gegen welche Statusveraenderungen das Lebewesen immun ist
 	 */
 	char m_immunity;
+	
+	/**
+	 * \fn virtual void getMemberReference(VariableRef& ref, std::string member)
+	 * \brief Gibt eine Referenz fuer das Skriptsystem auf ein Datenelement aus
+	 **/
+	void getMemberReference(VariableRef& ref, std::string member);
 	
 };
 
@@ -334,6 +340,12 @@ struct CreatureDynAttr
 	 * \brief Vektor mit alle aktuell wirkenden temporaeren Modifikation auf die Basisattribute
 	 */
 	std::list<CreatureBaseAttrMod> m_temp_mods;
+	
+	/**
+	 * \fn virtual void getMemberReference(VariableRef& ref, std::string member)
+	 * \brief Gibt eine Referenz fuer das Skriptsystem auf ein Datenelement aus
+	 **/
+	void getMemberReference(VariableRef& ref, std::string member);
 };
 
 /**

@@ -409,6 +409,12 @@ public:
 		m_candidate_party  = id;
 	}
 	
+	/**
+	 * \fn virtual void getMemberReference(VariableRef& ref, std::string member)
+	 * \brief Gibt eine Referenz fuer das Skriptsystem auf ein Datenelement aus
+	 **/
+	void getMemberReference(VariableRef& ref, std::string member);
+	
 
 //Protected stuff
 protected:

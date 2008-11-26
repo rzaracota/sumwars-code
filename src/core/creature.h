@@ -332,6 +332,12 @@ public:
 		return Action::ONE_HANDED;
 	}
 	
+	/**
+	 * \fn virtual void getMemberReference(VariableRef& ref, std::string member)
+	 * \brief Gibt eine Referenz fuer das Skriptsystem auf ein Datenelement aus
+	 **/
+	virtual void getMemberReference(VariableRef& ref, std::string member);
+	
 protected:
 	
 	/**

@@ -944,6 +944,27 @@ void World::handleMessage(std::string msg, int slot)
 				}
 			}
 			
+			if (obj == "get")
+			{
+				std::string member;
+				stream >> member;
+				Variable var;
+				pl->getMember(var,member);
+				
+				pl->addMessage(var.getData());
+			}
+			
+			if (obj == "set")
+			{
+				std::string member, value;
+				stream >> member >> value;
+				VariableRef ref;
+				pl->getMemberReference(ref,member);
+				ref = value;
+				pl->calcBaseAttrMod();
+			}
+				
+			
 		}
 		CharConv cv;
 
