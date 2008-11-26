@@ -256,7 +256,7 @@ bool Player::onGamefieldClick(ClientCommand* command)
 
 					meleedir = true;
 				}
-				m_event_mask |= Event::DATA_NEXT_COMMAND;
+				m_event_mask |= NetEvent::DATA_NEXT_COMMAND;
 			}
 		}
 		else
@@ -354,7 +354,7 @@ bool Player::onGamefieldClick(ClientCommand* command)
 		}
 	}
 
-	m_event_mask |= Event::DATA_NEXT_COMMAND;
+	m_event_mask |= NetEvent::DATA_NEXT_COMMAND;
 	DEBUG5("resulting command %i goal %f %f id %i",com->m_type,com->m_goal.m_x,com->m_goal.m_y, com->m_goal_object_id);
 
 	return true;
@@ -506,20 +506,20 @@ bool Player::onItemClick(ClientCommand* command)
 		if (World::getWorld()->isServer() && pos <Equipement::CURSOR_ITEM)
 		{
 			// Ausruestungsgegenstand wurde getauscht
-			Event event;
+			NetEvent event;
 			event.m_id = getId();
 			event.m_data = pos;
 
 			if (m_equipement->getItem(pos) == 0)
 			{
-				event.m_type = Event::PLAYER_NOITEM_EQUIPED;
+				event.m_type = NetEvent::PLAYER_NOITEM_EQUIPED;
 			}
 			else
 			{
-				event.m_type = Event::PLAYER_ITEM_EQUIPED;
+				event.m_type = NetEvent::PLAYER_ITEM_EQUIPED;
 			}
 			DEBUG5("event: %i at %i",event.m_type,event.m_data);
-			World::getWorld()->insertEvent(event);
+			World::getWorld()->insertNetEvent(event);
 		}
 
 		Item* itm;
@@ -539,14 +539,14 @@ bool Player::onItemClick(ClientCommand* command)
 
 					if (World::getWorld()->isServer())
 					{
-						Event event;
-						event.m_type =  Event::PLAYER_NOITEM_EQUIPED;
+						NetEvent event;
+						event.m_type =  NetEvent::PLAYER_NOITEM_EQUIPED;
 						event.m_data = shpos;
 						event.m_id = getId();
 
 						DEBUG5("event: no item at %i",shpos);
 
-						World::getWorld()->insertEvent(event);
+						World::getWorld()->insertNetEvent(event);
 					}
 
 					// Wenn aktuell kein Item am Cursor gehalten wird
@@ -562,7 +562,7 @@ bool Player::onItemClick(ClientCommand* command)
 						// Schild aus dem Schildslot holen
 						m_equipement->swapItem( itm,shpos);
 
-						// wenn man sich auf Serverseite befindet: Event generieren
+						// wenn man sich auf Serverseite befindet: NetEvent generieren
 
 
 						if (!getEquipement()->insertItem(itm))
@@ -591,14 +591,14 @@ bool Player::onItemClick(ClientCommand* command)
 
 				if (World::getWorld()->isServer())
 				{
-					Event event;
-					event.m_type =  Event::PLAYER_NOITEM_EQUIPED;
+					NetEvent event;
+					event.m_type =  NetEvent::PLAYER_NOITEM_EQUIPED;
 					event.m_data = wpos;
 					event.m_id = getId();
 
 					DEBUG5("event: no item at %i",wpos);
 
-					World::getWorld()->insertEvent(event);
+					World::getWorld()->insertNetEvent(event);
 				}
 
 				m_equipement->swapCursorItem(wpos);
@@ -680,14 +680,14 @@ short Player::insertItem(Item* itm)
 		if (World::getWorld()->isServer())
 		{
 			
-			Event event;
-			event.m_type =  Event::PLAYER_ITEM_PICKED_UP ;
+			NetEvent event;
+			event.m_type =  NetEvent::PLAYER_ITEM_PICKED_UP ;
 			event.m_data = pos;
 			event.m_id = getId();
 
 			DEBUG5("event: item picked up %i",pos);
 
-			World::getWorld()->insertEvent(event);
+			World::getWorld()->insertNetEvent(event);
 		}
 	}
 	else
@@ -746,12 +746,12 @@ void Player::increaseAttribute(CreatureBaseAttr::Attribute attr)
 			getBaseAttr()->m_strength++;
 			getBaseAttr()->m_max_health += 5;
 			getDynAttr()->m_health +=5;
-			m_event_mask |= Event::DATA_HP | Event::DATA_MAX_HP;
+			m_event_mask |= NetEvent::DATA_HP | NetEvent::DATA_MAX_HP;
 			break;
 		case (CreatureBaseAttr::DEXTERITY):
 			getBaseAttr()->m_dexterity++;
 			getBaseAttr()->m_attack_speed +=3;
-			m_event_mask |= Event::DATA_ATTACK_SPEED;
+			m_event_mask |= NetEvent::DATA_ATTACK_SPEED;
 			break;
 		case (CreatureBaseAttr::WILLPOWER):
 			getBaseAttr()->m_willpower++;
@@ -799,7 +799,7 @@ void Player::gainLevel()
 	// Schaden neu berechnen
 	recalcDamage();
 
-	m_event_mask |= Event::DATA_LEVEL | Event::DATA_HP | Event::DATA_MAX_HP | Event::DATA_EXPERIENCE;
+	m_event_mask |= NetEvent::DATA_LEVEL | NetEvent::DATA_HP | NetEvent::DATA_MAX_HP | NetEvent::DATA_EXPERIENCE;
 }
 
 
@@ -1107,7 +1107,7 @@ void Player::abortAction()
 		m_timer2_max=0;
 	}
 
-	m_event_mask |= Event::DATA_ACTION;
+	m_event_mask |= NetEvent::DATA_ACTION;
 }
 
 bool Player::update(float time)
@@ -1673,7 +1673,7 @@ void Player::calcBaseAttrMod()
 			
 			if (si->m_weapon_attr ->m_dattack_speed!=0)
 			{
-				m_event_mask |= Event::DATA_ATTACK_SPEED;
+				m_event_mask |= NetEvent::DATA_ATTACK_SPEED;
 			}
 		}
 	}

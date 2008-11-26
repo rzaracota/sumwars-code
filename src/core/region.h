@@ -5,7 +5,7 @@
 #include "worldobject.h"
 #include "tiles.h"
 #include "dropitem.h"
-#include "event.h"
+#include "netevent.h"
 #include "projectile.h"
 #include "objectfactory.h"
 
@@ -604,10 +604,10 @@ class Region
 		}
 
 		/**
-		 * \fn void insertEvent(Event &event)
-		 * \brief Fuegt ein neues Event in die Eventliste ein
+		 * \fn void insertNetEvent(NetEvent &event)
+		 * \brief Fuegt ein neues NetEvent in die NetEventliste ein
 		 */
-		void insertEvent(Event &event)
+		void insertNetEvent(NetEvent &event)
 		{
 			m_events->push_back(event);
 		}
@@ -624,10 +624,10 @@ class Region
 		}
 
 		/**
-		 * \fn EventList* getEvents()
-		 * \brief Gibt die Liste der Events aus
+		 * \fn NetEventList* getNetEvents()
+		 * \brief Gibt die Liste der NetEvents aus
 		 */
-		EventList* getEvents()
+		NetEventList* getNetEvents()
 		{
 			return m_events;
 		}
@@ -791,10 +791,10 @@ class Region
 		std::string m_name;
 	
 		/**
-		* \var EventList* m_events
-		* \brief Liste der lokalen Events beim aktuellen update
+		* \var NetEventList* m_events
+		* \brief Liste der lokalen NetEvents beim aktuellen update
 		*/
-		EventList* m_events;
+		NetEventList* m_events;
 		
 		/**
 		 * \var std::map<LocationName, Vector> m_locations

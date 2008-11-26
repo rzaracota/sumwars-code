@@ -196,7 +196,7 @@ void Monster::updateCommand()
 		DEBUG5("calculated command %i",m_ai.m_command.m_type);
 		
 
-		m_event_mask |= Event::DATA_COMMAND;
+		m_event_mask |= NetEvent::DATA_COMMAND;
 
 	}
 	else

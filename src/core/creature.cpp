@@ -176,7 +176,7 @@ void Creature::die()
 	m_action.m_time =1000;
 	m_action.m_elapsed_time =0;
 
-	m_event_mask |= Event::DATA_ACTION | Event::DATA_STATE;
+	m_event_mask |= NetEvent::DATA_ACTION | NetEvent::DATA_STATE;
 }
 
 void Creature::initAction()
@@ -220,7 +220,7 @@ void Creature::initAction()
 			// Timer ist frei, Timer starten
 			m_timer1 = time;
 			m_timer1_max = time;
-			m_event_mask |= Event::DATA_TIMER;
+			m_event_mask |= NetEvent::DATA_TIMER;
 		}
 		else
 		{
@@ -237,7 +237,7 @@ void Creature::initAction()
 			// Timer ist frei, Timer starten
 			m_timer2 = time;
 			m_timer2_max = time;
-			m_event_mask |= Event::DATA_TIMER;
+			m_event_mask |= NetEvent::DATA_TIMER;
 		}
 		else
 		{
@@ -270,7 +270,7 @@ void Creature::initAction()
 			// Bei Aktion laufen die Laufgeschwindigkeit einrechnen
 			m_action.m_time = 1000000 / getBaseAttrMod()->m_walk_speed;
 			m_speed *= getBaseAttr()->m_step_length/m_action.m_time;
-			m_event_mask |= Event::DATA_MOVE_INFO;
+			m_event_mask |= NetEvent::DATA_MOVE_INFO;
 			//collisionDetection(m_action.m_time);
 
 			DEBUG5("walk time %f walk speed %i",m_action.m_time,getBaseAttrMod()->m_walk_speed);
@@ -321,7 +321,7 @@ void Creature::initAction()
 	{
 	}
 
-	m_event_mask |= Event::DATA_ACTION;
+	m_event_mask |= NetEvent::DATA_ACTION;
 }
 
 void Creature::performAction(float &time)
@@ -519,7 +519,7 @@ void Creature::performAction(float &time)
 			DEBUG5("finished command");
 			if (m_command.m_type != Action::NOACTION)
 			{
-				m_event_mask |= Event::DATA_COMMAND;
+				m_event_mask |= NetEvent::DATA_COMMAND;
 			}
 			m_command.m_type = Action::NOACTION;
 			m_action.m_elapsed_time=0;
@@ -533,11 +533,11 @@ void Creature::performAction(float &time)
 		// Aktion ist beendet
 		if (m_action.m_type != Action::NOACTION)
 		{
-			m_event_mask |= Event::DATA_ACTION;
+			m_event_mask |= NetEvent::DATA_ACTION;
 		}
 		m_action.m_type = Action::NOACTION;
 		m_action.m_elapsed_time =0;
-		m_event_mask |= Event::DATA_ACTION;
+		m_event_mask |= NetEvent::DATA_ACTION;
 	}
 
 
@@ -696,7 +696,7 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 		case Action::REGENERATE:
 			// 50% der Lebenspunkte wieder auffuellen
 			m_dyn_attr.m_health = std::min(m_dyn_attr.m_health+0.5f*m_base_attr_mod.m_max_health,m_base_attr_mod.m_max_health);
-			m_event_mask |= Event::DATA_HP;
+			m_event_mask |= NetEvent::DATA_HP;
 			break;
 
 		case Action::ANGER:
@@ -707,7 +707,7 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 			cbam.m_darmor = -m_base_attr_mod.m_armor /2;
 			applyBaseAttrMod(&cbam);
 			m_dyn_attr.m_status_mod_time[Damage::BERSERK] = 30000;
-			m_event_mask |= Event::DATA_STATUS_MODS;
+			m_event_mask |= NetEvent::DATA_STATUS_MODS;
 			break;
 
 		case Action::FURY:
@@ -719,7 +719,7 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 			cbam.m_dattack_speed = 1000;
 			applyBaseAttrMod(&cbam);
 			m_dyn_attr.m_status_mod_time[Damage::BERSERK] = 30000;
-			m_event_mask |= Event::DATA_STATUS_MODS;
+			m_event_mask |= NetEvent::DATA_STATUS_MODS;
 			break;
 
 		// Magierfaehigkeiten
@@ -1427,7 +1427,7 @@ void Creature::collisionDetection(float time)
 			if ((*i)->getId() == getCommand()->m_goal_object_id)
 			{
 				m_speed = Vector(0,0);
-				m_event_mask |= Event::DATA_MOVE_INFO;
+				m_event_mask |= NetEvent::DATA_MOVE_INFO;
 				break;
 			}
 
@@ -1437,7 +1437,7 @@ void Creature::collisionDetection(float time)
 				// Behandlung von *Charge*
 				m_command.m_goal_object_id = (*i)->getId();
 				m_speed = Vector(0,0);
-				m_event_mask |= Event::DATA_MOVE_INFO;
+				m_event_mask |= NetEvent::DATA_MOVE_INFO;
 				return;
 			}
 			else
@@ -1467,7 +1467,7 @@ void Creature::collisionDetection(float time)
 			DEBUG5("still colliding");
 
 			m_speed = Vector(0,0);
-			m_event_mask |= Event::DATA_MOVE_INFO;
+			m_event_mask |= NetEvent::DATA_MOVE_INFO;
 		}
 
 	}
@@ -1587,7 +1587,7 @@ void Creature::handleCollision(Shape* s2)
 	
 	
 	
-	m_event_mask |= Event::DATA_MOVE_INFO;
+	m_event_mask |= NetEvent::DATA_MOVE_INFO;
 
 }
 
@@ -1607,8 +1607,8 @@ void Creature::updateCommand()
 		// Naechstes Kommando auf nichts setzen
 		m_next_command.m_type = Action::NOACTION;
 
-		m_event_mask |= Event::DATA_COMMAND;
-		m_event_mask |= Event::DATA_NEXT_COMMAND;
+		m_event_mask |= NetEvent::DATA_COMMAND;
+		m_event_mask |= NetEvent::DATA_NEXT_COMMAND;
 
 	}
 
@@ -1630,7 +1630,7 @@ void Creature::calcAction()
 	{
 		if (m_action.m_type!= Action::NOACTION)
 		{
-			m_event_mask |= Event::DATA_ACTION;
+			m_event_mask |= NetEvent::DATA_ACTION;
 		}
 		m_action.m_type = Action::NOACTION;
 		return;
@@ -1640,7 +1640,7 @@ void Creature::calcAction()
 	
 
 	DEBUG5("calc action for command %i",m_command.m_type);
-	m_event_mask |= Event::DATA_ACTION;
+	m_event_mask |= NetEvent::DATA_ACTION;
 
 
 	// Reichweite der Aktion berechnen
@@ -1751,7 +1751,7 @@ void Creature::calcAction()
 
 			// Kommando damit abgeschlossen
 			m_command.m_type = Action::NOACTION;
-			m_event_mask |= Event::DATA_COMMAND;
+			m_event_mask |= NetEvent::DATA_COMMAND;
 		}
 		else
 		{
@@ -1782,7 +1782,7 @@ void Creature::calcAction()
 					recalcDamage();
 
 					m_speed *= sqrt(m_command.m_damage_mult);
-					m_event_mask |= Event::DATA_MOVE_INFO;
+					m_event_mask |= NetEvent::DATA_MOVE_INFO;
 				}
 				else
 				{
@@ -1804,7 +1804,7 @@ void Creature::calcAction()
 						clearCommand();
 
 					}
-					m_event_mask |= Event::DATA_MOVE_INFO;
+					m_event_mask |= NetEvent::DATA_MOVE_INFO;
 
 				}
 
@@ -1899,7 +1899,7 @@ void Creature::calcStatusModCommand()
 			m_command.m_goal = npos;
 			m_command.m_goal_object_id =0;
 			m_command.m_range = getBaseAttrMod()->m_attack_range;
-			m_event_mask |= Event::DATA_COMMAND;
+			m_event_mask |= NetEvent::DATA_COMMAND;
 
 			// Im Falle von Beserker nur Nahkampf
 			if (m_dyn_attr.m_status_mod_time[Damage::BERSERK]>0)
@@ -1916,7 +1916,7 @@ void Creature::calcStatusModCommand()
 			// Laufen
 			m_command.m_type = Action::WALK;
 			m_speed = v;
-			m_event_mask |= Event::DATA_COMMAND | Event::DATA_MOVE_INFO;
+			m_event_mask |= NetEvent::DATA_COMMAND | NetEvent::DATA_MOVE_INFO;
 			return;
 		}
 
@@ -1990,7 +1990,7 @@ void Creature::calcStatusModCommand()
 			// nichts machen
 			m_command.m_type = Action::NOACTION;
 		}
-		m_event_mask |= Event::DATA_COMMAND;
+		m_event_mask |= NetEvent::DATA_COMMAND;
 	}
 }
 
@@ -2126,12 +2126,12 @@ void Creature::calcWalkDir(Vector goal,WorldObject* goalobj)
 		m_action.m_type = Action::NOACTION;
 		m_action.m_elapsed_time =0;
 		m_command.m_damage_mult=1;
-		m_event_mask |= Event::DATA_COMMAND | Event::DATA_ACTION;
+		m_event_mask |= NetEvent::DATA_COMMAND | NetEvent::DATA_ACTION;
 		return;
 	}
 	else
 	{
-		m_event_mask |= Event::DATA_MOVE_INFO;
+		m_event_mask |= NetEvent::DATA_MOVE_INFO;
 		// TODO: Wende über 90 Grad behandeln
 		m_speed = dir;
 
@@ -2145,7 +2145,7 @@ void Creature::clearCommand()
 	m_command.m_goal = Vector(0,0);
 	m_command.m_goal_object_id =0;
 	m_command.m_range =1;
-	m_event_mask |= Event::DATA_COMMAND;
+	m_event_mask |= NetEvent::DATA_COMMAND;
 }
 
 bool Creature::update (float time)
@@ -2212,7 +2212,7 @@ bool Creature::update (float time)
 			if (i==Damage::BERSERK || i==Damage::CONFUSED)
 			{
 				m_command.m_type = Action::NOACTION;
-				m_event_mask |= Event::DATA_COMMAND;
+				m_event_mask |= NetEvent::DATA_COMMAND;
 			}
 		}
 
@@ -2319,7 +2319,7 @@ bool Creature::update (float time)
 				// Schaden pro Sekunde 1/60 der HP
 				DEBUG5("poisoned");
 				m_dyn_attr.m_health -= 500*m_base_attr_mod.m_max_health / 60000;
-				m_event_mask |= Event::DATA_HP;
+				m_event_mask |= NetEvent::DATA_HP;
 			}
 
 			// brennend
@@ -2328,7 +2328,7 @@ bool Creature::update (float time)
 				// Schaden pro Sekunde 1/90 der HP (bei 0 Feuerresistenz)
 				DEBUG5("burning");
 				m_dyn_attr.m_health -= (100-m_base_attr_mod.m_resistances[Damage::FIRE])*500*m_base_attr_mod.m_max_health / 9000000;
-				m_event_mask |= Event::DATA_HP;
+				m_event_mask |= NetEvent::DATA_HP;
 			}
 		}
 
@@ -2411,7 +2411,7 @@ bool Creature::update (float time)
 					m_action.m_type = Action::DEAD;
 					m_action.m_time = 1000;
 
-					m_event_mask |= Event::DATA_STATE | Event::DATA_ACTION;
+					m_event_mask |= NetEvent::DATA_STATE | NetEvent::DATA_ACTION;
 				}
 				break;
 
@@ -2546,7 +2546,7 @@ void Creature::gainExperience (int exp)
 
 	// Erfahrung dazu addieren
 	m_dyn_attr.m_experience += exp;
-	m_event_mask |= Event::DATA_EXPERIENCE;
+	m_event_mask |= NetEvent::DATA_EXPERIENCE;
 
 	// Solange Level aufsteigen, bis exp < max_exp
 	while (m_dyn_attr.m_experience>= m_base_attr.m_max_experience)
@@ -2557,7 +2557,7 @@ void Creature::gainExperience (int exp)
 
 void Creature::gainLevel()
 {
-	m_event_mask |= Event::DATA_LEVEL;
+	m_event_mask |= NetEvent::DATA_LEVEL;
 
 }
 
@@ -3435,7 +3435,7 @@ void Creature::takeDamage(Damage* d)
 				if (t>m_dyn_attr.m_status_mod_time[i])
 				{
 					m_dyn_attr.m_status_mod_time[i] =t;
-					m_event_mask |= Event::DATA_STATUS_MODS;
+					m_event_mask |= NetEvent::DATA_STATUS_MODS;
 				}
 
 				DEBUG5("applying status mod %i for %f ms",i,t);
@@ -3451,7 +3451,7 @@ void Creature::takeDamage(Damage* d)
 	if (dmg>0)
 	{
 		m_dyn_attr.m_effect_time[CreatureDynAttr::BLEEDING] = std::max(m_dyn_attr.m_effect_time[CreatureDynAttr::BLEEDING],150.0f);
-		m_event_mask |= Event::DATA_HP | Event::DATA_EFFECTS;
+		m_event_mask |= NetEvent::DATA_HP | NetEvent::DATA_EFFECTS;
 	}
 
 	// Statikschild wenn mehr als 2% der Lebenspunkte verloren
@@ -3484,7 +3484,7 @@ void Creature::applyDynAttrMod(CreatureDynAttrMod* mod)
 
 	if (mod->m_dhealth !=0)
 	{
-		m_event_mask |= Event::DATA_HP;
+		m_event_mask |= NetEvent::DATA_HP;
 	}
 
 
@@ -3494,7 +3494,7 @@ void Creature::applyDynAttrMod(CreatureDynAttrMod* mod)
 		{
 			m_dyn_attr.m_status_mod_immune_time[i] = std::max(m_dyn_attr.m_status_mod_immune_time[i],mod->m_dstatus_mod_immune_time[i]);
 			m_dyn_attr.m_status_mod_time[i]=0;
-			m_event_mask |= Event::DATA_STATUS_MODS;
+			m_event_mask |= NetEvent::DATA_STATUS_MODS;
 		}
 	}
 }
@@ -3523,15 +3523,15 @@ void Creature::applyBaseAttrMod(CreatureBaseAttrMod* mod, bool add)
 	// Modifikationen feststellen
 	if (mod->m_dwalk_speed!=0 )
 	{
-		m_event_mask |= Event::DATA_WALK_SPEED;
+		m_event_mask |= NetEvent::DATA_WALK_SPEED;
 	}
 	if (mod->m_dattack_speed !=0 || mod->m_ddexterity!=0)
 	{
-		m_event_mask |= Event::DATA_ATTACK_SPEED;
+		m_event_mask |= NetEvent::DATA_ATTACK_SPEED;
 	}
 	if (mod->m_dmax_health !=0 || mod->m_dstrength!=0)
 	{
-		m_event_mask |= Event::DATA_MAX_HP | Event::DATA_HP;
+		m_event_mask |= NetEvent::DATA_MAX_HP | NetEvent::DATA_HP;
 	}
 
 	// einige Untergrenzen pruefen
@@ -3556,7 +3556,7 @@ void Creature::applyBaseAttrMod(CreatureBaseAttrMod* mod, bool add)
 		m_base_attr_mod.m_abilities[i] |= mod->m_xabilities[i];
 		if (mod->m_xabilities[i]!=0)
 		{
-			m_event_mask |= Event::DATA_ABILITIES;
+			m_event_mask |= NetEvent::DATA_ABILITIES;
 		}
 	}
 
@@ -3566,7 +3566,7 @@ void Creature::applyBaseAttrMod(CreatureBaseAttrMod* mod, bool add)
 
 	if (mod->m_xspecial_flags!=0)
 	{
-		m_event_mask |= Event::DATA_FLAGS;
+		m_event_mask |= NetEvent::DATA_FLAGS;
 	}
 
 	// Wenn add == true in die Liste der wirksamen Modifikationen aufnehmen
@@ -3604,15 +3604,15 @@ bool Creature::removeBaseAttrMod(CreatureBaseAttrMod* mod)
 	// Modifikationen feststellen
 	if (mod->m_dwalk_speed!=0)
 	{
-		m_event_mask |= Event::DATA_WALK_SPEED;
+		m_event_mask |= NetEvent::DATA_WALK_SPEED;
 	}
 	if (mod->m_dattack_speed !=0 || mod->m_ddexterity!=0)
 	{
-		m_event_mask |= Event::DATA_ATTACK_SPEED;
+		m_event_mask |= NetEvent::DATA_ATTACK_SPEED;
 	}
 	if (mod->m_dmax_health !=0 || mod->m_dstrength!=0)
 	{
-		m_event_mask |= Event::DATA_MAX_HP | Event::DATA_HP;
+		m_event_mask |= NetEvent::DATA_MAX_HP | NetEvent::DATA_HP;
 	}
 
 	for (i=0;i<4;i++)
@@ -3628,14 +3628,14 @@ bool Creature::removeBaseAttrMod(CreatureBaseAttrMod* mod)
 		if ( mod->m_xabilities[i]!=0)
 		{
 			ret = true;
-			m_event_mask |= Event::DATA_ABILITIES;
+			m_event_mask |= NetEvent::DATA_ABILITIES;
 		}
 	}
 
 	// Wenn Flags veraendert wurden neu berechnen
 	if (mod->m_xspecial_flags!=0)
 	{
-		m_event_mask |= Event::DATA_FLAGS;
+		m_event_mask |= NetEvent::DATA_FLAGS;
 		ret = true;
 	}
 
@@ -3985,14 +3985,14 @@ float Creature::getTimerPercent(int timer)
 }
 
 
-void Creature::writeEvent(Event* event, CharConv* cv)
+void Creature::writeNetEvent(NetEvent* event, CharConv* cv)
 {
-	if (event->m_data & Event::DATA_COMMAND)
+	if (event->m_data & NetEvent::DATA_COMMAND)
 	{
 		m_command.toString(cv);
 	}
 
-	if (event->m_data & Event::DATA_ACTION)
+	if (event->m_data & NetEvent::DATA_ACTION)
 	{
 		m_action.toString(cv);
 		cv->toBuffer(getShape()->m_center.m_x);
@@ -4006,17 +4006,17 @@ void Creature::writeEvent(Event* event, CharConv* cv)
 		}
 	}
 
-	if (event->m_data & Event::DATA_HP)
+	if (event->m_data & NetEvent::DATA_HP)
 	{
 		cv->toBuffer(getDynAttr()->m_health);
 	}
 
-	if (event->m_data & Event::DATA_MAX_HP)
+	if (event->m_data & NetEvent::DATA_MAX_HP)
 	{
 		cv->toBuffer(getBaseAttrMod()->m_max_health);
 	}
 
-	if (event->m_data & Event::DATA_EFFECTS)
+	if (event->m_data & NetEvent::DATA_EFFECTS)
 	{
 		for (int i=0;i<NR_EFFECTS;i++)
 		{
@@ -4024,7 +4024,7 @@ void Creature::writeEvent(Event* event, CharConv* cv)
 		}
 	}
 
-	if (event->m_data & Event::DATA_STATUS_MODS)
+	if (event->m_data & NetEvent::DATA_STATUS_MODS)
 	{
 		char c=0;
 		for (int i=0;i<NR_STATUS_MODS;i++)
@@ -4045,33 +4045,33 @@ void Creature::writeEvent(Event* event, CharConv* cv)
 		}
 	}
 
-	if (event->m_data & Event::DATA_TIMER)
+	if (event->m_data & NetEvent::DATA_TIMER)
 	{
 		cv->toBuffer(m_timer1_max);
 		cv->toBuffer(m_timer2_max);
 	}
 
-	if (event->m_data & Event::DATA_STATE)
+	if (event->m_data & NetEvent::DATA_STATE)
 	{
 		cv->toBuffer((char) getState());
 	}
 
-	if (event->m_data & Event::DATA_WALK_SPEED)
+	if (event->m_data & NetEvent::DATA_WALK_SPEED)
 	{
 		cv->toBuffer(getBaseAttrMod()->m_walk_speed);
 	}
 
-	if (event->m_data & Event::DATA_ATTACK_SPEED)
+	if (event->m_data & NetEvent::DATA_ATTACK_SPEED)
 	{
 		cv->toBuffer(getBaseAttrMod()->m_attack_speed);
 	}
 
-	if (event->m_data & Event::DATA_NEXT_COMMAND)
+	if (event->m_data & NetEvent::DATA_NEXT_COMMAND)
 	{
 		m_next_command.toString(cv);
 	}
 
-	if (event->m_data & Event::DATA_ABILITIES)
+	if (event->m_data & NetEvent::DATA_ABILITIES)
 	{
 		for (int i=0; i<6; i++)
 		{
@@ -4079,33 +4079,33 @@ void Creature::writeEvent(Event* event, CharConv* cv)
 		}
 	}
 
-	if (event->m_data & Event::DATA_FLAGS )
+	if (event->m_data & NetEvent::DATA_FLAGS )
 	{
 		cv->toBuffer(getBaseAttrMod()->m_special_flags);
 	}
 
-	if (event->m_data & Event::DATA_EXPERIENCE)
+	if (event->m_data & NetEvent::DATA_EXPERIENCE)
 	{
 		cv->toBuffer(getDynAttr()->m_experience);
 	}
 
-	if (event->m_data & Event::DATA_MOVE_INFO)
+	if (event->m_data & NetEvent::DATA_MOVE_INFO)
 	{
 		cv->toBuffer(m_speed.m_x);
 		cv->toBuffer(m_speed.m_y);
 	}
 
-	if (event->m_data & Event::DATA_LEVEL)
+	if (event->m_data & NetEvent::DATA_LEVEL)
 	{
 		cv->toBuffer(getBaseAttr()->m_level);
 	}
 }
 
 
-void Creature::processEvent(Event* event, CharConv* cv)
+void Creature::processNetEvent(NetEvent* event, CharConv* cv)
 {
-	DEBUG5("object %i processing Event %i data %i",getId(),event->m_type, event->m_data);
-	if (event->m_data & Event::DATA_COMMAND)
+	DEBUG5("object %i processing NetEvent %i data %i",getId(),event->m_type, event->m_data);
+	if (event->m_data & NetEvent::DATA_COMMAND)
 	{
 		m_command.fromString(cv);
 		DEBUG5("got Command %i",m_command.m_type);
@@ -4127,7 +4127,7 @@ void Creature::processEvent(Event* event, CharConv* cv)
 	}
 
 
-	if (event->m_data & Event::DATA_ACTION)
+	if (event->m_data & NetEvent::DATA_ACTION)
 	{
 
 
@@ -4140,18 +4140,18 @@ void Creature::processEvent(Event* event, CharConv* cv)
 
 
 
-	if (event->m_data & Event::DATA_HP)
+	if (event->m_data & NetEvent::DATA_HP)
 	{
 		
 		cv->fromBuffer(getDynAttr()->m_health);
 	}
 
-	if (event->m_data & Event::DATA_MAX_HP)
+	if (event->m_data & NetEvent::DATA_MAX_HP)
 	{
 		cv->fromBuffer(getBaseAttrMod()->m_max_health);
 	}
 
-	if (event->m_data & Event::DATA_EFFECTS)
+	if (event->m_data & NetEvent::DATA_EFFECTS)
 	{
 		for (int i=0;i<NR_EFFECTS;i++)
 		{
@@ -4159,7 +4159,7 @@ void Creature::processEvent(Event* event, CharConv* cv)
 		}
 	}
 
-	if (event->m_data & Event::DATA_STATUS_MODS)
+	if (event->m_data & NetEvent::DATA_STATUS_MODS)
 	{
 		char ctmp;
 		cv->fromBuffer<char>(ctmp);
@@ -4172,7 +4172,7 @@ void Creature::processEvent(Event* event, CharConv* cv)
 		}
 	}
 
-	if (event->m_data & Event::DATA_TIMER)
+	if (event->m_data & NetEvent::DATA_TIMER)
 	{
 		cv->fromBuffer(m_timer1_max);
 		cv->fromBuffer(m_timer2_max);
@@ -4181,7 +4181,7 @@ void Creature::processEvent(Event* event, CharConv* cv)
 
 	}
 
-	if (event->m_data & Event::DATA_STATE)
+	if (event->m_data & NetEvent::DATA_STATE)
 	{
 		State oldstate = getState();
 		char ctmp;
@@ -4197,22 +4197,22 @@ void Creature::processEvent(Event* event, CharConv* cv)
 
 	}
 
-	if (event->m_data & Event::DATA_WALK_SPEED)
+	if (event->m_data & NetEvent::DATA_WALK_SPEED)
 	{
 		cv->fromBuffer(getBaseAttrMod()->m_walk_speed);
 	}
 
-	if (event->m_data & Event::DATA_ATTACK_SPEED)
+	if (event->m_data & NetEvent::DATA_ATTACK_SPEED)
 	{
 		cv->fromBuffer(getBaseAttrMod()->m_attack_speed);
 	}
 
-	if (event->m_data & Event::DATA_NEXT_COMMAND)
+	if (event->m_data & NetEvent::DATA_NEXT_COMMAND)
 	{
 		m_next_command.fromString(cv);
 	}
 
-	if (event->m_data & Event::DATA_ABILITIES)
+	if (event->m_data & NetEvent::DATA_ABILITIES)
 	{
 		for (int i=0; i<6; i++)
 		{
@@ -4220,17 +4220,17 @@ void Creature::processEvent(Event* event, CharConv* cv)
 		}
 	}
 
-	if (event->m_data & Event::DATA_FLAGS )
+	if (event->m_data & NetEvent::DATA_FLAGS )
 	{
 		cv->fromBuffer(getBaseAttrMod()->m_special_flags);
 	}
 
-	if (event->m_data & Event::DATA_EXPERIENCE)
+	if (event->m_data & NetEvent::DATA_EXPERIENCE)
 	{
 		cv->fromBuffer(getDynAttr()->m_experience);
 	}
 
-	if (event->m_data & Event::DATA_MOVE_INFO)
+	if (event->m_data & NetEvent::DATA_MOVE_INFO)
 	{
 		cv->fromBuffer(newspeed.m_x);
 		cv->fromBuffer(newspeed.m_y);
@@ -4238,7 +4238,7 @@ void Creature::processEvent(Event* event, CharConv* cv)
 
 	}
 
-	if (event->m_data & Event::DATA_LEVEL)
+	if (event->m_data & NetEvent::DATA_LEVEL)
 	{
 		cv->fromBuffer(getBaseAttr()->m_level);
 	}
@@ -4256,7 +4256,7 @@ void Creature::processEvent(Event* event, CharConv* cv)
 		*/
 		// Zeit die zum erreichen des Zieles uebrig ist
 		float goaltime = acttime;
-		if (event->m_data & Event::DATA_ACTION)
+		if (event->m_data & NetEvent::DATA_ACTION)
 		{
 			goaltime -= delay;
 		}

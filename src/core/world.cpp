@@ -54,7 +54,7 @@ World* World::m_world=0;
 
 	 m_local_player =0;
 
-	 m_events = new EventList;
+	 m_events = new NetEventList;
 
 }
 
@@ -692,12 +692,12 @@ bool World::insertPlayerIntoRegion(WorldObject* player, short region, LocationNa
 
 		if (m_server)
 		{
-			Event event;
-			event.m_type = Event::PLAYER_CHANGED_REGION;
+			NetEvent event;
+			event.m_type = NetEvent::PLAYER_CHANGED_REGION;
 			event.m_id = player->getId();
 			event.m_data =region ;
 
-			insertEvent(event);
+			insertNetEvent(event);
 		}
 		
 		DEBUG5("player %i %p entered region %i %p",player->getId(),player, region,getRegion(region));
@@ -1073,7 +1073,7 @@ void World::update(float time)
 	std::map<int,Region*>::iterator rrit;
 	for (rrit = m_regions.begin(); rrit != m_regions.end(); rrit++)
 	{
-		rrit->second->getEvents()->clear();
+		rrit->second->getNetEvents()->clear();
 	}
 
 	m_network->update();
@@ -1094,15 +1094,15 @@ void World::updatePlayers()
 		pl = static_cast<Player*>(it->second);
 
 		// feststellen, ob ein Spieler das Spiel verlassen hat
-		// ggf Event erstellen
+		// ggf NetEvent erstellen
 		if (m_server && slot != LOCAL_SLOT &&
 				  (m_network->getSlotStatus( slot )!=NET_CONNECTED || pl->getState() == WorldObject::STATE_QUIT))
 		{
-			Event event;
-			event.m_type = Event::PLAYER_QUIT;
+			NetEvent event;
+			event.m_type = NetEvent::PLAYER_QUIT;
 			event.m_id = pl->getId();
 
-			insertEvent(event);
+			insertNetEvent(event);
 
 			if (pl->getRegion() !=0)
 			{
@@ -1233,16 +1233,16 @@ void World::updatePlayers()
 
 		if (m_server)
 		{
-			// Events fuer die Spieler generieren
-			if (pl->getEventMask() !=0)
+			// NetEvents fuer die Spieler generieren
+			if (pl->getNetEventMask() !=0)
 			{
-				Event event;
-				event.m_type = Event::OBJECT_STAT_CHANGED;
-				event.m_data = pl->getEventMask();
+				NetEvent event;
+				event.m_type = NetEvent::OBJECT_STAT_CHANGED;
+				event.m_data = pl->getNetEventMask();
 				event.m_id = pl->getId();
-				insertEvent(event);
+				insertNetEvent(event);
 
-				pl->clearEventMask();
+				pl->clearNetEventMask();
 			}
 		}
 
@@ -1386,7 +1386,7 @@ void World::updatePlayers()
 					bool ret;
 					for (int n=0; n< headerp.m_number;n++)
 					{
-						ret = processEvent(reg,cv);
+						ret = processNetEvent(reg,cv);
 
 						if (ret == false)
 						{
@@ -1419,9 +1419,9 @@ void World::updatePlayers()
 
 	if (m_server)
 	{
-		// Nachrichten ueber die Events zur den Clients senden
+		// Nachrichten ueber die NetEvents zur den Clients senden
 		Region* reg;
-		EventList::iterator lt;
+		NetEventList::iterator lt;
 		for (it = m_player_slots->begin(); it != m_player_slots->end(); ++it)
 		{
 			slot = it->first;
@@ -1429,7 +1429,7 @@ void World::updatePlayers()
 
 			if (slot != LOCAL_SLOT)
 			{
-				// Anzahl der Events
+				// Anzahl der NetEvents
 
 				reg = pl->getRegion();
 				if (pl->getState() != WorldObject::STATE_ACTIVE && pl->getState() != WorldObject::STATE_DEAD && pl->getState() != WorldObject::STATE_DIEING)
@@ -1444,28 +1444,28 @@ void World::updatePlayers()
 
 
 
-				// globale Events
+				// globale NetEvents
 				for (lt = m_events->begin(); lt != m_events->end(); ++lt)
 				{
 					msg = new CharConv;
 					DEBUG5(" send global event %i id %i",lt->m_type,lt->m_id);
 
 					header.toString(msg);
-					writeEvent(reg,&(*lt),msg);
+					writeNetEvent(reg,&(*lt),msg);
 					m_network->pushSlotMessage(msg->getBitStream(),slot);
 					delete msg;
 				}
 
-				// Events der Region in der der Spieler ist
+				// NetEvents der Region in der der Spieler ist
 				bool ret;
 				if (reg !=0)
 				{
-					for (lt = reg->getEvents()->begin(); lt != reg->getEvents()->end(); ++lt)
+					for (lt = reg->getNetEvents()->begin(); lt != reg->getNetEvents()->end(); ++lt)
 					{
 						msg = new CharConv;
 
 						header.toString(msg);
-						ret = writeEvent(reg,&(*lt),msg);
+						ret = writeNetEvent(reg,&(*lt),msg);
 
 						if (ret)
 						{
@@ -1484,7 +1484,7 @@ void World::updatePlayers()
 	}
 }
 
-bool World::writeEvent(Region* region,Event* event, CharConv* cv)
+bool World::writeNetEvent(Region* region,NetEvent* event, CharConv* cv)
 {
 	event->toString(cv);
 
@@ -1495,13 +1495,13 @@ bool World::writeEvent(Region* region,Event* event, CharConv* cv)
 	Projectile* proj;
 	if (region !=0)
 	{
-		if (event->m_type == Event::OBJECT_CREATED)
+		if (event->m_type == NetEvent::OBJECT_CREATED)
 		{
 			object =region->getObject(event->m_id);
 			object->toString(cv);
 		}
 
-		if (event->m_type == Event::OBJECT_STAT_CHANGED)
+		if (event->m_type == NetEvent::OBJECT_STAT_CHANGED)
 		{
 			
 			if (m_players->count(event->m_id) ==1)
@@ -1515,31 +1515,31 @@ bool World::writeEvent(Region* region,Event* event, CharConv* cv)
 			
 			if (object !=0)
 			{
-				object->writeEvent(event,cv);
+				object->writeNetEvent(event,cv);
 			}
 			else
 				return false;
 
 		}
 
-		if (event->m_type == Event::PROJECTILE_CREATED)
+		if (event->m_type == NetEvent::PROJECTILE_CREATED)
 		{
 			proj = region->getProjectile(event->m_id);
 			proj->toString(cv);
 		}
 
-		if (event->m_type == Event::PROJECTILE_STAT_CHANGED)
+		if (event->m_type == NetEvent::PROJECTILE_STAT_CHANGED)
 		{
 			proj = region->getProjectile(event->m_id);
 			if (proj !=0)
 			{
-				proj->writeEvent(event,cv);
+				proj->writeNetEvent(event,cv);
 			}
 			else
 				return false;
 		}
 
-		if (event->m_type == Event::ITEM_DROPPED)
+		if (event->m_type == NetEvent::ITEM_DROPPED)
 		{
 			DropItem* di;
 			di = region->getDropItem(event->m_id);
@@ -1554,7 +1554,7 @@ bool World::writeEvent(Region* region,Event* event, CharConv* cv)
 		}
 	}
 
-	if (event->m_type == Event::PLAYER_CHANGED_REGION)
+	if (event->m_type == NetEvent::PLAYER_CHANGED_REGION)
 	{
 		
 		object = (*m_players)[event->m_id];
@@ -1570,7 +1570,7 @@ bool World::writeEvent(Region* region,Event* event, CharConv* cv)
 
 	}
 
-	if (event->m_type == Event::PLAYER_ITEM_EQUIPED)
+	if (event->m_type == NetEvent::PLAYER_ITEM_EQUIPED)
 	{
 		object = (*m_players)[event->m_id];
 		if (object != 0)
@@ -1585,7 +1585,7 @@ bool World::writeEvent(Region* region,Event* event, CharConv* cv)
 		
 	}
 
-	if (event->m_type == Event::PLAYER_ITEM_PICKED_UP)
+	if (event->m_type == NetEvent::PLAYER_ITEM_PICKED_UP)
 	{
 		object = (*m_players)[event->m_id];
 		if (object != 0)
@@ -1607,12 +1607,12 @@ bool World::writeEvent(Region* region,Event* event, CharConv* cv)
 		
 	}
 
-	if (event->m_type ==  Event::ITEM_REMOVED)
+	if (event->m_type ==  NetEvent::ITEM_REMOVED)
 	{
 		DEBUG("removing item %i",event->m_id);
 	}
 	
-	if (event->m_type == Event::PLAYER_PARTY_CHANGED)
+	if (event->m_type == NetEvent::PLAYER_PARTY_CHANGED)
 	{
 		object = (*m_players)[event->m_id];
 		if (object != 0)
@@ -1624,7 +1624,7 @@ bool World::writeEvent(Region* region,Event* event, CharConv* cv)
 			return false;
 	}
 	
-	if (event->m_type == Event::PLAYER_PARTY_CANDIDATE)
+	if (event->m_type == NetEvent::PLAYER_PARTY_CANDIDATE)
 	{
 		object = (*m_players)[event->m_id];
 		if (object != 0)
@@ -1636,7 +1636,7 @@ bool World::writeEvent(Region* region,Event* event, CharConv* cv)
 			return false;
 	}
 	
-	if (event->m_type == Event::PARTY_RELATION_CHANGED)
+	if (event->m_type == NetEvent::PARTY_RELATION_CHANGED)
 	{
 		DEBUG("party %i changed relation to %i to %i",event->m_data, event->m_id, getParty(event->m_data)->getRelations()[event->m_id]);
 		cv->toBuffer<char>(getParty(event->m_data)->getRelations()[event->m_id]);
@@ -1646,9 +1646,9 @@ bool World::writeEvent(Region* region,Event* event, CharConv* cv)
 }
 
 
-bool World::processEvent(Region* region,CharConv* cv)
+bool World::processNetEvent(Region* region,CharConv* cv)
 {
-	Event event;
+	NetEvent event;
 	event.fromString(cv);
 
 
@@ -1658,12 +1658,12 @@ bool World::processEvent(Region* region,CharConv* cv)
 	Projectile* proj;
 	int id;
 	
-	// Objekt suchen dass zu dem Event gehoert
+	// Objekt suchen dass zu dem NetEvent gehoert
 	// Spieler werden aus der Spielerliste gesucht
 	// andere Objekte aus der Region
-	if (event.m_type == Event::OBJECT_CREATED || 
-		   event.m_type ==  Event::OBJECT_STAT_CHANGED ||
-		  event.m_type ==  Event::OBJECT_DESTROYED)
+	if (event.m_type == NetEvent::OBJECT_CREATED || 
+		   event.m_type ==  NetEvent::OBJECT_STAT_CHANGED ||
+		  event.m_type ==  NetEvent::OBJECT_DESTROYED)
 	{
 		if (m_players->count(event.m_id) ==1)
 		{
@@ -1686,7 +1686,7 @@ bool World::processEvent(Region* region,CharConv* cv)
 	
 	switch(event.m_type)
 	{
-		case Event::OBJECT_CREATED:
+		case NetEvent::OBJECT_CREATED:
 			if (region !=0)
 			{
 				region->createObjectFromString(cv, m_players);
@@ -1697,7 +1697,7 @@ bool World::processEvent(Region* region,CharConv* cv)
 			}
 			break;
 
-		case Event::OBJECT_STAT_CHANGED:
+		case NetEvent::OBJECT_STAT_CHANGED:
 			
 			if (m_players->count(event.m_id) ==1)
 			{
@@ -1714,11 +1714,11 @@ bool World::processEvent(Region* region,CharConv* cv)
 				else
 					return false;
 			}
-			object->processEvent(&event,cv);
+			object->processNetEvent(&event,cv);
 			break;
 
 
-		case Event::OBJECT_DESTROYED:
+		case NetEvent::OBJECT_DESTROYED:
 			if (m_players->count(event.m_id) ==1)
 			{
 				object = (*m_players)[event.m_id];
@@ -1743,7 +1743,7 @@ bool World::processEvent(Region* region,CharConv* cv)
 			
 			break;
 
-		case Event::PROJECTILE_CREATED:
+		case NetEvent::PROJECTILE_CREATED:
 			if (region !=0)
 			{
 				region->createProjectileFromString(cv);
@@ -1754,13 +1754,13 @@ bool World::processEvent(Region* region,CharConv* cv)
 			}
 			break;
 
-		case Event::PROJECTILE_STAT_CHANGED:
+		case NetEvent::PROJECTILE_STAT_CHANGED:
 			if (region !=0)
 			{
 				proj = region->getProjectile(event.m_id);
 				if (proj !=0)
 				{
-					proj->processEvent(&event,cv);
+					proj->processNetEvent(&event,cv);
 				}
 				else
 				{
@@ -1773,7 +1773,7 @@ bool World::processEvent(Region* region,CharConv* cv)
 				return false;
 			}
 			break;
-		case Event::PROJECTILE_DESTROYED:
+		case NetEvent::PROJECTILE_DESTROYED:
 			if (region !=0)
 			{
 				proj = region->getProjectile(event.m_id);
@@ -1790,7 +1790,7 @@ bool World::processEvent(Region* region,CharConv* cv)
 			break;
 
 
-		case Event::PLAYER_CHANGED_REGION:
+		case NetEvent::PLAYER_CHANGED_REGION:
 			DEBUG5("received event player %i changed region %i",event.m_id, event.m_data);
 
 			if (m_players->count (event.m_id)>0)
@@ -1810,7 +1810,7 @@ bool World::processEvent(Region* region,CharConv* cv)
 			}
 			break;
 
-		case Event::PLAYER_QUIT:
+		case NetEvent::PLAYER_QUIT:
 			if (m_players->count(event.m_id)>0)
 			{
 				object = (*m_players)[event.m_id];
@@ -1838,7 +1838,7 @@ bool World::processEvent(Region* region,CharConv* cv)
 			}
 			break;
 
-		case Event::ITEM_DROPPED:
+		case NetEvent::ITEM_DROPPED:
 			if (region !=0)
 			{
 				region->createItemFromString(cv);
@@ -1849,7 +1849,7 @@ bool World::processEvent(Region* region,CharConv* cv)
 			}
 			break;
 
-		case Event::ITEM_REMOVED:
+		case NetEvent::ITEM_REMOVED:
 			if (region !=0)
 			{
 				DEBUG5("remove item %i",event.m_id);
@@ -1861,7 +1861,7 @@ bool World::processEvent(Region* region,CharConv* cv)
 			}	
 			break;
 
-		case Event::PLAYER_NOITEM_EQUIPED:
+		case NetEvent::PLAYER_NOITEM_EQUIPED:
 
 			if (m_players->count(event.m_id)>0)
 			{
@@ -1886,7 +1886,7 @@ bool World::processEvent(Region* region,CharConv* cv)
 			break;
 
 
-		case Event::PLAYER_ITEM_EQUIPED:
+		case NetEvent::PLAYER_ITEM_EQUIPED:
 			if (m_players->count(event.m_id)>0)
 			{
 				object = (*m_players)[event.m_id];
@@ -1905,7 +1905,7 @@ bool World::processEvent(Region* region,CharConv* cv)
 			}
 			break;
 
-		case Event::PLAYER_ITEM_PICKED_UP:
+		case NetEvent::PLAYER_ITEM_PICKED_UP:
 			if (m_players->count(event.m_id)>0)
 			{
 				object = (*m_players)[event.m_id];
@@ -1933,7 +1933,7 @@ bool World::processEvent(Region* region,CharConv* cv)
 			}
 			break;
 			
-		case Event::PLAYER_PARTY_CHANGED:
+		case NetEvent::PLAYER_PARTY_CHANGED:
 			if (m_players->count(event.m_id)>0)
 			{
 				object = (*m_players)[event.m_id];
@@ -1951,7 +1951,7 @@ bool World::processEvent(Region* region,CharConv* cv)
 			}
 			break;
 			
-		case Event::PLAYER_PARTY_CANDIDATE:
+		case NetEvent::PLAYER_PARTY_CANDIDATE:
 			if (m_players->count(event.m_id)>0)
 			{
 				object = (*m_players)[event.m_id];
@@ -1972,7 +1972,7 @@ bool World::processEvent(Region* region,CharConv* cv)
 				return false;
 			}
 			break;
-		case Event::PARTY_RELATION_CHANGED:
+		case NetEvent::PARTY_RELATION_CHANGED:
 			char rel;
 			cv->fromBuffer(rel);
 			World::getWorld()->getParty( event.m_data )->setRelation(event.m_id, (WorldObject::Relation) rel);
@@ -2274,7 +2274,7 @@ void World::calcPathDirection(PathfindInfo* pathinfo, Vector pos, Vector& dir)
 	SearchField::getGradient(pathinfo, pos,dir);
 }
 
-void World::insertEvent(Event &event)
+void World::insertNetEvent(NetEvent &event)
 {
 
 	m_events->push_back(event);

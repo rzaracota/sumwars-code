@@ -49,11 +49,11 @@ void Party::addMember(int id)
 	if (World::getWorld()->isServer())
 	{
 		
-		Event event;
+		NetEvent event;
 		event.m_id = id;
-		event.m_type = Event::PLAYER_PARTY_CHANGED;
+		event.m_type = NetEvent::PLAYER_PARTY_CHANGED;
 		
-		World::getWorld()->insertEvent(event);
+		World::getWorld()->insertNetEvent(event);
 	}
 	
 	
@@ -72,11 +72,11 @@ void Party::addCandidate(int id)
 	if (World::getWorld()->isServer())
 	{
 		
-		Event event;
+		NetEvent event;
 		event.m_id = id;
-		event.m_type = Event::PLAYER_PARTY_CANDIDATE;
+		event.m_type = NetEvent::PLAYER_PARTY_CANDIDATE;
 		
-		World::getWorld()->insertEvent(event);
+		World::getWorld()->insertNetEvent(event);
 	}
 }
 
@@ -117,12 +117,12 @@ void Party::setRelation(int id, WorldObject::Relation rel)
 	if (World::getWorld()->isServer())
 	{
 		
-		Event event;
+		NetEvent event;
 		event.m_id = id;
 		event.m_data = getId();
-		event.m_type = Event::PARTY_RELATION_CHANGED;
+		event.m_type = NetEvent::PARTY_RELATION_CHANGED;
 		
-		World::getWorld()->insertEvent(event);
+		World::getWorld()->insertNetEvent(event);
 	}
 }
 

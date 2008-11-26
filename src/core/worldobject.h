@@ -25,7 +25,7 @@
 #include <sstream>
 #include "debug.h"
 #include "charconv.h"
-#include "event.h"
+#include "netevent.h"
 #include <map>
 #include <list>
 
@@ -359,20 +359,20 @@ class WorldObject {
 	}
 	
 	/**
-	 * \fn virtual void writeEvent(Event* event, CharConv* cv)
-	 * \brief Schreibt die Daten zu einem Event in den Bitstream
-	 * \param event Event das beschrieben wird
+	 * \fn virtual void writeNetEvent(NetEvent* event, CharConv* cv)
+	 * \brief Schreibt die Daten zu einem NetEvent in den Bitstream
+	 * \param event NetEvent das beschrieben wird
 	 * \param cv Bitstream
 	 */
-	virtual void writeEvent(Event* event, CharConv* cv)
+	virtual void writeNetEvent(NetEvent* event, CharConv* cv)
 	{
 	}
 	
 	/**
-	 * \fn virtual void processEvent(Event* event, CharConv* cv)
-	 * \brief Fuehrt die Wirkung eines Events auf das Objekt aus. Weitere Daten werden aus dem Bitstream gelesen
+	 * \fn virtual void processNetEvent(NetEvent* event, CharConv* cv)
+	 * \brief Fuehrt die Wirkung eines NetEvents auf das Objekt aus. Weitere Daten werden aus dem Bitstream gelesen
 	 */
-	virtual void processEvent(Event* event, CharConv* cv)
+	virtual void processNetEvent(NetEvent* event, CharConv* cv)
 	{
 	}
 	
@@ -388,19 +388,19 @@ class WorldObject {
 	}
 	
 	/**
-	 * \fn int getEventMask()
-	 * \brief Gibt die Bitmaske der Events aus
+	 * \fn int getNetEventMask()
+	 * \brief Gibt die Bitmaske der NetEvents aus
 	 */
-	int getEventMask()
+	int getNetEventMask()
 	{
 		return m_event_mask;
 	}
 	
 	/**
-	 * \fn void clearEventMask()
-	 * \brief Setzt die Bitmaske der Events auf 0
+	 * \fn void clearNetEventMask()
+	 * \brief Setzt die Bitmaske der NetEvents auf 0
 	 */
-	void clearEventMask()
+	void clearNetEventMask()
 	{
 		m_event_mask =0;
 	}
@@ -577,7 +577,7 @@ class WorldObject {
 		
 	/**
 	 * \var int m_event_mask
-	 * \brief Bitmaske mit den Events die das Objekt seit dem letzten Update erlebt hat
+	 * \brief Bitmaske mit den NetEvents die das Objekt seit dem letzten Update erlebt hat
 	 */
 	int m_event_mask;
 	

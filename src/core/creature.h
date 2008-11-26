@@ -434,18 +434,18 @@ protected:
 	
 	
 	/**
-	 * \fn virtual void writeEvent(Event* event, CharConv* cv)
-	 * \brief Schreibt die Daten zu einem Event in den Bitstream
-	 * \param event Event das beschrieben wird
+	 * \fn virtual void writeNetEvent(NetEvent* event, CharConv* cv)
+	 * \brief Schreibt die Daten zu einem NetEvent in den Bitstream
+	 * \param event NetEvent das beschrieben wird
 	 * \param cv Bitstream
 	 */
-	virtual void writeEvent(Event* event, CharConv* cv);
+	virtual void writeNetEvent(NetEvent* event, CharConv* cv);
 	
 	/**
-	 * \fn virtual void processEvent(Event* event, CharConv* cv)
-	 * \brief Fuehrt die Wirkung eines Events auf das Objekt aus. Weitere Daten werden aus dem Bitstream gelesen
+	 * \fn virtual void processNetEvent(NetEvent* event, CharConv* cv)
+	 * \brief Fuehrt die Wirkung eines NetEvents auf das Objekt aus. Weitere Daten werden aus dem Bitstream gelesen
 	 */
-	virtual void processEvent(Event* event, CharConv* cv);
+	virtual void processNetEvent(NetEvent* event, CharConv* cv);
 	
 			
 

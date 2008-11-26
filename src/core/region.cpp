@@ -43,7 +43,7 @@ Region::Region(short dimx, short dimy, short id, std::string name)
 
 	m_id = id;
 
-	m_events = new EventList;
+	m_events = new NetEventList;
 
 
 }
@@ -575,11 +575,11 @@ bool Region::insertObject (WorldObject* object, Vector pos, float angle, bool co
 	}
 	else
 	{
-		// fuer Nicht Spieler Event erzeugen, dass das Objekt erschaffen wurde
-		Event event;
-		event.m_type = Event::OBJECT_CREATED;
+		// fuer Nicht Spieler NetEvent erzeugen, dass das Objekt erschaffen wurde
+		NetEvent event;
+		event.m_type = NetEvent::OBJECT_CREATED;
 		event.m_id = object->getId();
-		insertEvent(event);
+		insertNetEvent(event);
 	}
 
 	object->getShape()->m_angle = angle;
@@ -737,11 +737,11 @@ bool  Region::insertProjectile(Projectile* object, Vector pos)
 	object->getShape()->m_center = pos;
 	object->setRegion( m_id);
 
-	// Event erzeugen: neues Projektil in der Region
-	Event event;
-	event.m_type = Event::PROJECTILE_CREATED;
+	// NetEvent erzeugen: neues Projektil in der Region
+	NetEvent event;
+	event.m_type = NetEvent::PROJECTILE_CREATED;
 	event.m_id = object->getId();
-	insertEvent(event);
+	insertNetEvent(event);
 
 	return true;
 }
@@ -874,15 +874,15 @@ void Region::update(float time)
 	ProjectileMap::iterator it3;
 
 
-	// alle Eventsmasken loeschen
+	// alle NetEventsmasken loeschen
 	for (iter =m_objects->begin(); iter!=m_objects->end(); ++iter)
 	{
-		iter->second->clearEventMask();
+		iter->second->clearNetEventMask();
 	}
 
 	for (it3 = m_projectiles->begin(); it3 !=m_projectiles->end();++it3)
 	{
-		it3->second->clearEventMask();
+		it3->second->clearNetEventMask();
 	}
 
 	// Durchmustern aller WorldObjects
@@ -899,10 +899,10 @@ void Region::update(float time)
 				if (object->getTypeInfo()->m_type != WorldObject::TypeInfo::TYPE_PLAYER)
 				{
 					DEBUG5("Objekt gelöscht: %i \n",object->getId());
-					Event event;
-					event.m_type = Event::OBJECT_DESTROYED;
+					NetEvent event;
+					event.m_type = NetEvent::OBJECT_DESTROYED;
 					event.m_id = object->getId();
-					insertEvent(event);
+					insertNetEvent(event);
 
 					++iter;
 					object->destroy();
@@ -940,10 +940,10 @@ void Region::update(float time)
 			// Projektile selbststaendig loeschen darf nur der Server
 			if (World::getWorld()->isServer())
 			{
-				Event event;
-				event.m_type = Event::PROJECTILE_DESTROYED;
+				NetEvent event;
+				event.m_type = NetEvent::PROJECTILE_DESTROYED;
 				event.m_id = pr->getId();
-				insertEvent(event);
+				insertNetEvent(event);
 
 				DEBUG5("deleting projectile %p",pr);
 				m_projectiles->erase(it3++);
@@ -973,37 +973,37 @@ void Region::update(float time)
 
 	if (World::getWorld()->isServer())
 	{
-		// Events fuer geaenderte Objekte / Projektile erzeugen
+		// NetEvents fuer geaenderte Objekte / Projektile erzeugen
 		for (iter =m_objects->begin(); iter!=m_objects->end(); ++iter)
 		{
 			object = iter->second;
 
-			// Events durch Spieler werden global behandelt, daher hier nicht beruecksichtigen
+			// NetEvents durch Spieler werden global behandelt, daher hier nicht beruecksichtigen
 			if (object->getTypeInfo()->m_type == WorldObject::TypeInfo::TYPE_PLAYER)
 			{
 				continue;
 			}
 
-			if (object->getEventMask() !=0)
+			if (object->getNetEventMask() !=0)
 			{
-				Event event;
-				event.m_type = Event::OBJECT_STAT_CHANGED;
-				event.m_data = object->getEventMask();
+				NetEvent event;
+				event.m_type = NetEvent::OBJECT_STAT_CHANGED;
+				event.m_data = object->getNetEventMask();
 				event.m_id = object->getId();
-				insertEvent(event);
+				insertNetEvent(event);
 			}
 		}
 
 		for (it3 = m_projectiles->begin(); it3 !=m_projectiles->end();++it3)
 		{
 			pr = (it3->second);
-			if (pr->getEventMask() !=0)
+			if (pr->getNetEventMask() !=0)
 			{
-				Event event;
-				event.m_type = Event::PROJECTILE_STAT_CHANGED;
-				event.m_data = pr->getEventMask();
+				NetEvent event;
+				event.m_type = NetEvent::PROJECTILE_STAT_CHANGED;
+				event.m_data = pr->getNetEventMask();
 				event.m_id = pr->getId();
-				insertEvent(event);
+				insertNetEvent(event);
 			}
 		}
 	}
@@ -1427,11 +1427,11 @@ bool  Region::dropItem(Item* item, Vector pos)
 
 			if (World::getWorld()->isServer())
 			{
-				Event event;
-				event.m_type = Event::ITEM_DROPPED;
+				NetEvent event;
+				event.m_type = NetEvent::ITEM_DROPPED;
 				event.m_id = di->m_item->m_id;
 
-				insertEvent(event);
+				insertNetEvent(event);
 			}
 
 			return true;
@@ -1551,10 +1551,10 @@ bool Region::deleteItem(int id, bool delitem)
 		int pos = 10000* it->second->m_x + it->second->m_y;
 		it2 = m_drop_item_locations->find(pos);
 
-		Event event;
-		event.m_type = Event::ITEM_REMOVED;
+		NetEvent event;
+		event.m_type = NetEvent::ITEM_REMOVED;
 		event.m_id = it->second->m_item->m_id;
-		insertEvent(event);
+		insertNetEvent(event);
 
 		if (delitem)
 		{

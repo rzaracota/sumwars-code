@@ -44,7 +44,7 @@
 #include "party.h"
 #include "itemfactory.h"
 #include "objectfactory.h"
-#include "event.h"
+#include "netevent.h"
 #include "templateloader.h"
 
 /**
@@ -229,21 +229,21 @@ public:
 	void updatePlayers();
 	
 	/**
-	 * \fn bool writeEvent(Region* region, Event* event, CharConv* cv)
-	 * \brief Schreib die Daten zu dem Event in den Bitstream
-	 * \param region Region in der das Event aufgetreten ist
-	 * \param event Event das geschrieben wird
+	 * \fn bool writeNetEvent(Region* region, NetEvent* event, CharConv* cv)
+	 * \brief Schreib die Daten zu dem NetEvent in den Bitstream
+	 * \param region Region in der das NetEvent aufgetreten ist
+	 * \param event NetEvent das geschrieben wird
 	 * \param cv Bitstream zum Schreiben
 	 */
-	bool writeEvent(Region* region, Event* event, CharConv* cv);
+	bool writeNetEvent(Region* region, NetEvent* event, CharConv* cv);
 	
 	/**
-	 * \fn bool processEvent(Region* region,CharConv* cv)
-	 * \brief Liest ein Event aus dem Bitstream und fuehrt es aus
-	 * \param region Region in der das Event aufgetreten ist
+	 * \fn bool processNetEvent(Region* region,CharConv* cv)
+	 * \brief Liest ein NetEvent aus dem Bitstream und fuehrt es aus
+	 * \param region Region in der das NetEvent aufgetreten ist
 	 * \param cv Bitstream
 	 */
-	bool processEvent(Region* region,CharConv* cv);
+	bool processNetEvent(Region* region,CharConv* cv);
 
 	/**
 	 * \fn void calcBlockArray(PathfindInfo* p)
@@ -367,10 +367,10 @@ public:
 	void handleDataRequest(ClientDataRequest* request, int slot  = LOCAL_SLOT);
 
 	/**
-	 * \fn void insertEvent(Event &event)
-	 * \brief Fuegt ein neues Event in die Eventliste ein
+	 * \fn void insertNetEvent(NetEvent &event)
+	 * \brief Fuegt ein neues NetEvent in die NetEventliste ein
 	 */
-	void insertEvent(Event &event);
+	void insertNetEvent(NetEvent &event);
 	
 	/**
 	 * \fn WorldObject* getPlayer(int id)
@@ -541,10 +541,10 @@ private:
 	LoginList m_logins;
 	
 	/**
-	 * \var EventList m_events
-	 * \brief Liste der globalen Events beim aktuellen update
+	 * \var NetEventList m_events
+	 * \brief Liste der globalen NetEvents beim aktuellen update
 	 */
-	EventList* m_events;
+	NetEventList* m_events;
 	
 	/**
 	 * \var float m_timer[3]

@@ -409,7 +409,7 @@ void Projectile::handleFlying(float dtime)
 
 		if (World::getWorld()->timerLimit(0))
 		{
-			m_event_mask |= Event::DATA_SPEED;
+			m_event_mask |= NetEvent::DATA_SPEED;
 		}
 		
 		hitobj.clear();
@@ -502,7 +502,7 @@ void Projectile::handleFlying(float dtime)
 			m_timer=0;
 			m_timer_limit=200;
 
-			m_event_mask |= Event::DATA_PROJ_STATE | Event::DATA_TYPE | Event::DATA_MAX_RADIUS;
+			m_event_mask |= NetEvent::DATA_PROJ_STATE | NetEvent::DATA_TYPE | NetEvent::DATA_MAX_RADIUS;
 		}
 
 		// true, wenn das Projektil zu einem weiteren Ziel weiterspringt
@@ -581,7 +581,7 @@ void Projectile::handleFlying(float dtime)
 				dir.normalize();
 				m_speed = dir *speed;
 
-				m_event_mask |= Event::DATA_SPEED | Event::DATA_PROJ_STATE;
+				m_event_mask |= NetEvent::DATA_SPEED | NetEvent::DATA_PROJ_STATE;
 
 				DEBUG5("dir %f %f",dir.m_x,dir.m_y);
 				m_timer =0;
@@ -692,7 +692,7 @@ void Projectile::handleGrowing(float dtime)
 			m_timer_limit=5000;
 			m_state = STABLE;
 
-			m_event_mask |= Event::DATA_PROJ_STATE | Event::DATA_PROJ_TIMER;
+			m_event_mask |= NetEvent::DATA_PROJ_STATE | NetEvent::DATA_PROJ_TIMER;
 		}
 	}
 
@@ -818,7 +818,7 @@ void Projectile::handleStable(float dtime)
 			m_timer =0;
 			m_timer_limit=200;
 			m_state = VANISHING;
-			m_event_mask |= Event::DATA_PROJ_STATE | Event::DATA_PROJ_TIMER;
+			m_event_mask |= NetEvent::DATA_PROJ_STATE | NetEvent::DATA_PROJ_TIMER;
 		}
 
 		if (m_type == LIGHTNING || m_type ==LIGHT_BEAM  || m_type ==ELEM_EXPLOSION || m_type ==ACID || m_type ==DIVINE_BEAM  || m_type ==HYPNOSIS)
@@ -880,9 +880,9 @@ void Projectile::fromString(CharConv* cv)
 	cv->fromBuffer(m_goal_object);
 }
 
-void Projectile::writeEvent(Event* event, CharConv* cv)
+void Projectile::writeNetEvent(NetEvent* event, CharConv* cv)
 {
-	if (event->m_data & Event::DATA_SPEED)
+	if (event->m_data & NetEvent::DATA_SPEED)
 	{
 		cv->toBuffer(m_shape.m_center.m_x);
 		cv->toBuffer(m_shape.m_center.m_y);
@@ -890,36 +890,36 @@ void Projectile::writeEvent(Event* event, CharConv* cv)
 		cv->toBuffer(m_speed.m_y);
 	}
 
-	if (event->m_data & Event::DATA_PROJ_STATE)
+	if (event->m_data & NetEvent::DATA_PROJ_STATE)
 	{
 		cv->toBuffer((char) m_state);
 	}
 
-	if (event->m_data & Event::DATA_GOAL_OBJECT)
+	if (event->m_data & NetEvent::DATA_GOAL_OBJECT)
 	{
 		cv->toBuffer(m_goal_object);
 	}
 
-	if (event->m_data & Event::DATA_TYPE)
+	if (event->m_data & NetEvent::DATA_TYPE)
 	{
 		cv->toBuffer((char) m_type);
 	}
 
-	if (event->m_data & Event::DATA_PROJ_TIMER)
+	if (event->m_data & NetEvent::DATA_PROJ_TIMER)
 	{
 		cv->toBuffer(m_timer_limit);
 	}
 
-	if (event->m_data & Event::DATA_MAX_RADIUS)
+	if (event->m_data & NetEvent::DATA_MAX_RADIUS)
 	{
 		cv->toBuffer(m_max_radius);
 		cv->toBuffer<float>(m_shape.m_radius);
 	}
 }
 
-void Projectile::processEvent(Event* event, CharConv* cv)
+void Projectile::processNetEvent(NetEvent* event, CharConv* cv)
 {
-	if (event->m_data & Event::DATA_SPEED)
+	if (event->m_data & NetEvent::DATA_SPEED)
 	{
 		cv->fromBuffer(m_shape.m_center.m_x);
 		cv->fromBuffer(m_shape.m_center.m_y);
@@ -932,32 +932,32 @@ void Projectile::processEvent(Event* event, CharConv* cv)
 		}
 	}
 
-	if (event->m_data & Event::DATA_PROJ_STATE)
+	if (event->m_data & NetEvent::DATA_PROJ_STATE)
 	{
 		char ctmp;
 		cv->fromBuffer(ctmp);
 		m_state = (ProjectileState) ctmp;
 	}
 
-	if (event->m_data & Event::DATA_GOAL_OBJECT)
+	if (event->m_data & NetEvent::DATA_GOAL_OBJECT)
 	{
 		cv->fromBuffer(m_goal_object);
 	}
 
-	if (event->m_data & Event::DATA_TYPE)
+	if (event->m_data & NetEvent::DATA_TYPE)
 	{
 		char ctmp;
 		cv->fromBuffer(ctmp);
 		m_type = (ProjectileType) ctmp;
 	}
 
-	if (event->m_data & Event::DATA_PROJ_TIMER)
+	if (event->m_data & NetEvent::DATA_PROJ_TIMER)
 	{
 		cv->fromBuffer(m_timer_limit);
 		m_timer =0;
 	}
 
-	if (event->m_data & Event::DATA_MAX_RADIUS)
+	if (event->m_data & NetEvent::DATA_MAX_RADIUS)
 	{
 		cv->fromBuffer(m_max_radius);
 		cv->fromBuffer<float>(m_shape.m_radius);

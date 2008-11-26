@@ -5,10 +5,10 @@
 #include <list>
 
 /**
- * \struct Event
- * \brief beschreibt ein Ereignis in der Spielwelt
+ * \struct NetEvent
+ * \brief beschreibt ein Ereignis in der Spielwelt das ueber das Netzwerk mitgeteilt wird
  */
-struct Event
+struct NetEvent
 {
 	
 	/**
@@ -132,10 +132,10 @@ struct Event
 	}
 	
 	/**
-	 * \fn Event()
+	 * \fn NetEvent()
 	 * \brief Konstruktor
 	 */
-	Event()
+	NetEvent()
 	{
 		m_id =0;
 		m_data =0;
@@ -144,7 +144,7 @@ struct Event
 	
 };
 
-typedef std::list<Event> EventList;
+typedef std::list<NetEvent> NetEventList;
 
 #endif
 
