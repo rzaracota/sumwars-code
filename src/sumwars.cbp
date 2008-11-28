@@ -81,6 +81,7 @@
 		<Unit filename="core\command.h" />
 		<Unit filename="core\creature.cpp" />
 		<Unit filename="core\creature.h" />
+		<Unit filename="core\creaturestruct.cpp" />
 		<Unit filename="core\creaturestruct.h" />
 		<Unit filename="core\damage.cpp" />
 		<Unit filename="core\damage.h" />
@@ -149,6 +150,8 @@
 		<Unit filename="core\trade.h" />
 		<Unit filename="core\unionfindtree.cpp" />
 		<Unit filename="core\unionfindtree.h" />
+		<Unit filename="core\variable.cpp" />
+		<Unit filename="core\variable.h" />
 		<Unit filename="core\warrior.cpp" />
 		<Unit filename="core\warrior.h" />
 		<Unit filename="core\world.cpp" />
