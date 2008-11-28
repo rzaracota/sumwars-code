@@ -255,13 +255,8 @@
 
 <!-- Nordauge -->
 <Item type="weapon" subtype="ice_sbw" size="medium">
-<<<<<<< .mine
 	<Image image="set:bow.png image:full_image" />
 	<Mesh file="bow.mesh" />
-=======
-	<Image image="set:bow.png image:full_image" />
-	<Mesh file="sword.mesh" />
->>>>>>> .r609
 	<Attribute
 		level_requirement="25"
 		character_requirement="15"
@@ -298,13 +293,8 @@
 
 <!-- Kriegskurzbogen -->
 <Item type="weapon" subtype="battle_sbw" size="medium">
-<<<<<<< .mine
 	<Image image="set:bow.png image:full_image" />
 	<Mesh file="bow.mesh" />
-=======
-	<Image image="set:bow.png image:full_image" />
-	<Mesh file="sword.mesh" />
->>>>>>> .r609
 	<Attribute
 		level_requirement="30"
 		character_requirement="15"
@@ -628,7 +618,6 @@
 </Item>
 
 <!-- Chaosbogen -->
-<<<<<<< .mine
 <Item type="weapon" subtype="chaos_sbw" size="medium">
 	<Image image="set:bow.png image:full_image" />
 	<Mesh file="bow.mesh" />
