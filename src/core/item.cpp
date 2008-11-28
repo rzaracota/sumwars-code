@@ -80,7 +80,7 @@ Item::Item(ItemBasicData& data)
 	}
 	else
 	{
-		m_equip_effect =0;
+		m_weapon_attr =0;
 	}
 
 	m_level_req = data.m_level_req;

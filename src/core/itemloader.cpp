@@ -14,13 +14,6 @@ int ItemLoader::generateItemBasicData(TiXmlElement* pElement, std::string elemen
 		if (m_item_data == 0)
 		{
 			m_item_data = new ItemBasicData;
-			
-			//Folgendes wird schon im Konstruktor von ItemBasicData gesetzt
-			//m_item_data->m_useup_effect = 0;
-			//m_item_data->m_equip_effect = 0;
-			//m_item_data->m_weapon_attr = 0;
-			/*for (int i=0; i<31; i++)
-				m_item_data->m_modchance[i] = m_weapon_mod[i];*/
 		}
 
 		while (element == "Item" && pAttrib)
@@ -49,6 +42,8 @@ int ItemLoader::generateItemBasicData(TiXmlElement* pElement, std::string elemen
 			else if (!strcmp(pAttrib->Name(), "subtype"))
 			{
 				m_item_data->m_subtype = pAttrib->Value();
+				
+				DEBUG5("found item %s",m_item_data->m_subtype.c_str());
 			}
 			else if (!strcmp(pAttrib->Name(), "size"))
 			{
@@ -241,6 +236,8 @@ int ItemLoader::generateItemBasicData(TiXmlElement* pElement, std::string elemen
 	
 	if (element == "WeaponAttribute" && pAttrib)
 	{
+		
+		
 		if (m_item_data->m_weapon_attr == 0)
 		{
 			m_item_data->m_weapon_attr = new WeaponAttr;
@@ -490,6 +487,7 @@ void ItemLoader::searchItemBasicData(TiXmlNode* pParent)
 
 		if ( !strcmp(pChild->Value(), "Item") && pChild->Type() == TiXmlNode::ELEMENT)
 		{
+			
 			m_item_list->push_back(m_item_data);
 
 			m_item_data = 0;

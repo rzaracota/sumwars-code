@@ -1,4 +1,4 @@
-﻿<!--<Item type="gloves" subtype="leath_glv" size="medium">
+<Item type="gloves" subtype="leath_glv" size="medium">
 	<Image image="set:noMedia.png image:full_image" />
 	<Mesh file="potion.mesh" />
 	<Attribute
@@ -26,4 +26,4 @@
 		level="5"
 		probability="1.0"
 	/>
-</Item> -->
+</Item> 

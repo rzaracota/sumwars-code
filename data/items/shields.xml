@@ -1,10 +1,10 @@
-﻿<!-- SHIELDS -->
+<!-- SHIELDS -->
 
 <!-- Tartsche 1-->
 <!-- Buckler 3-->
 <!-- Holzschild 5 XX-->
 <Item type="shield" subtype="wood_shd" size="medium">
-	<!-- <Image image="set:shield.png image:full_image" />
+	 <Image image="set:shield.png image:full_image" />
 	<Mesh file="shield.mesh" />
 	<Attribute
 		level_requirement="5"
@@ -31,12 +31,12 @@
 		probability="1.0"
 	/>
 </Item>
--->
+
 
 <!-- Bronzeschild 8-->
 
 <!-- Eisenschild 13 XX-->
-<!-- <Item type="shield" subtype="iron_shd" size="medium">
+<Item type="shield" subtype="iron_shd" size="medium">
 	<Image image="set:shield.png image:full_image" />
 	<Mesh file="shield.mesh" />
 	<Attribute
@@ -64,7 +64,7 @@
 		probability="1.0"
 	/>
 </Item>
--->
+
 
 <!-- Stahlschild 19-->
 <!-- Verst�rkter Rundschild -->

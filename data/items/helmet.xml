@@ -1,4 +1,4 @@
-﻿<!--<Item type="helmet" subtype="steel_hlm" size="medium">
+<Item type="helmet" subtype="steel_hlm" size="medium">
 	<Image image="set:noMedia.png image:full_image" />
 	<Mesh file="helmet.mesh" />
 	<Attribute
@@ -25,4 +25,4 @@
 		level="5"
 		probability="1.0"
 	/>
-</Item> -->
+</Item> 
