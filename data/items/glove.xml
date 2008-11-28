@@ -1,0 +1,29 @@
+﻿<!--<Item type="gloves" subtype="leath_glv" size="medium">
+	<Image image="set:noMedia.png image:full_image" />
+	<Mesh file="potion.mesh" />
+	<Attribute
+		level_requirement="1"
+		character_requirement="15"
+		min_enchant="20"
+		max_enchant="40"
+		modchance_armor_mod="0.12"
+		modchance_resist_phys_mod="0.10"
+		modchance_resist_fire_mod="0.12"
+		modchance_resist_ice_mod="0.12"
+		modchance_resist_air_mod="0.12"
+		modchance_resist_all_mod="0.1"
+		modchance_strength_mod="0.1"
+    modchance_dexterity_mod="0.12"
+    modchance_magic_power_mod="0.1"
+	/>
+
+  <EquipEffect
+		darmor="2"
+  >
+	</EquipEffect>
+
+	<DropChance
+		level="5"
+		probability="1.0"
+	/>
+</Item> -->

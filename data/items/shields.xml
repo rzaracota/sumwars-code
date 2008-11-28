@@ -1,0 +1,81 @@
+﻿<!-- SHIELDS -->
+
+<!-- Tartsche 1-->
+<!-- Buckler 3-->
+<!-- Holzschild 5 XX-->
+<Item type="shield" subtype="wood_shd" size="medium">
+	<!-- <Image image="set:shield.png image:full_image" />
+	<Mesh file="shield.mesh" />
+	<Attribute
+		level_requirement="5"
+		character_requirement="15"
+		min_enchant="40"
+		max_enchant="130"
+		modchance_armor_mod="0.05"
+		modchance_block_mod="0.3"
+		modchance_resist_phys_mod="0.05"
+		modchance_resist_fire_mod="0.15"
+		modchance_resist_ice_mod="0.15"
+		modchance_resist_air_mod="0.15"
+		modchance_resist_all_mod="0.15"
+	/>
+
+  <EquipEffect
+		darmor="3"
+		dblock="15"
+  >
+	</EquipEffect>
+
+	<DropChance
+		level="5"
+		probability="1.0"
+	/>
+</Item>
+-->
+
+<!-- Bronzeschild 8-->
+
+<!-- Eisenschild 13 XX-->
+<!-- <Item type="shield" subtype="iron_shd" size="medium">
+	<Image image="set:shield.png image:full_image" />
+	<Mesh file="shield.mesh" />
+	<Attribute
+		level_requirement="8"
+		character_requirement="15"
+		min_enchant="50"
+		max_enchant="170"
+		modchance_armor_mod="0.05"
+		modchance_block_mod="0.3"
+		modchance_resist_phys_mod="0.05"
+		modchance_resist_fire_mod="0.15"
+		modchance_resist_ice_mod="0.15"
+		modchance_resist_air_mod="0.15"
+		modchance_resist_all_mod="0.15"
+	/>
+
+  <EquipEffect
+		darmor="8"
+		dblock="20"
+  >
+	</EquipEffect>
+
+	<DropChance
+		level="5"
+		probability="1.0"
+	/>
+</Item>
+-->
+
+<!-- Stahlschild 19-->
+<!-- Verst�rkter Rundschild -->
+<!-- Gl�hender Schild -->
+<!-- Klingenschild -->
+<!-- Ogerteller -->
+<!-- Turmschild -->
+<!-- Legionsschild -->
+<!-- Zwergenstahlschild -->
+<!-- Nordlingsschild -->
+<!-- Windschild -->
+<!-- Engelsschild -->
+<!-- Heldenschild -->
+<!-- G�tterschild -->

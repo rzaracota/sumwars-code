@@ -1,0 +1,55 @@
+﻿<!-- LONG BOWS -->
+
+<!-- Turnierbogen -->
+<!-- Orkbogen -->
+<!-- Eibenbogen -->
+<!-- Langbogen -->
+<Item type="weapon" subtype="long_lbw" size="medium">
+	<Image image="set:bow.png image:full_image" />
+	<Mesh file="bow.mesh" />
+	<Attribute
+		level_requirement="8"
+		character_requirement="15"
+		min_enchant="85"
+		max_enchant="260"
+		modchance_strength_mod="0.1"
+		modchance_dexterity_mod="0.15"
+		modchance_damage_phys_mod="0.15"
+		modchance_damage_fire_mod="0.10"
+		modchance_damage_ice_mod="0.10"
+		modchance_damage_air_mod="0.10"
+		modchance_damage_mult_phys_mod="0.1"
+		modchance_attack_mod="0.1"
+		modchance_power_mod="0.1"
+	/>
+	<EquipEffect />
+		<WeaponAttribute
+		weapon_type="bow"
+		damage_min_physical="16"
+		damage_max_physical="21"
+		damage_attack="54"
+		damage_power="53"
+		attack_range="8"
+		two_handed="no"
+		dattack_speed="-500"
+	/>
+	<DropChance
+		level="8"
+		probability="1.0"
+	/>
+</Item>
+
+<!-- Soldatenbogen -->
+<!-- Hornbogen -->
+<!-- Ahornbogen -->
+<!-- Kriegsbogen -->
+<!-- Kompositlangbogen -->
+<!-- Sturms�nger -->
+<!-- Eichenbogen -->
+<!-- D�monenhornbogen -->
+<!-- Waldl�uferbogen -->
+<!-- Eschenlangbogen -->
+<!-- Engelsbogen -->
+<!-- D�monenkompositbogen -->
+<!-- Heldenbogen -->
+<!-- Elfenbogen -->
