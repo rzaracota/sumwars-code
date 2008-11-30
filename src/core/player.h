@@ -415,6 +415,15 @@ public:
 	 **/
 	void getMemberReference(VariableRef& ref, std::string member);
 	
+	/**
+	 * \fn std::string getName()
+	 * \brief Gibt den Name des Objektes aus
+	 */
+	virtual std::string getName()
+	{
+		return m_name;
+	}
+	
 
 //Protected stuff
 protected:

@@ -906,75 +906,85 @@ void World::handleCommand(ClientCommand* comm, int slot, float delay)
 
 void World::handleMessage(std::string msg, int slot)
 {
-	// Nachricht einfuegen 
-	static_cast<Player*>(m_local_player)->addMessage(msg);
 	
+	
+	if (msg[0] == '$' && m_server)
+	{
+		// Cheatcode eingegeben
+		Player* pl = static_cast<Player*>((*m_player_slots)[slot]);
+
+		std::stringstream stream;
+		stream << msg;
+			
+			// $ lesen
+		char dummy;
+		stream >> dummy;
+			
+		std::string obj;
+		stream >> obj;
+		if (obj == "item")
+		{
+				// Item erzeugen
+			std::string name="";
+			int val =0;
+			stream >> name >> val;
+				
+			Item::Type type = ItemFactory::getBaseType(name);
+				
+			Item* itm = ItemFactory::createItem(type, name,0,val);
+			if (itm != 0)
+			{
+				pl->insertItem(itm);
+			}
+		}
+		else if (obj == "get")
+		{
+			std::string member;
+			stream >> member;
+			Variable var;
+			pl->getMember(var,member);
+				
+			pl->addMessage(var.getData());
+		}
+		else if (obj == "set")
+		{
+			std::string member, value;
+			stream >> member >> value;
+			VariableRef ref;
+			pl->getMemberReference(ref,member);
+			ref = value;
+			pl->calcBaseAttrMod();
+		}
+		else
+		{
+				
+		}
+	}
+	
+	std::string smsg;
 	
 	// als Server: Nachricht an alle Spieler versenden
 	// als Client: Nachricht an den Server senden
 	if (m_server)
 	{
-		if (msg[0] == '$')
+		// Name des Senders an die Nachricht haengen
+		smsg = "[";
+		if (m_player_slots->count(slot)>0)
 		{
-			// Cheatcode eingegeben
-			Player* pl = static_cast<Player*>((*m_player_slots)[slot]);
-
-			std::stringstream stream;
-			stream << msg;
-			
-			// $ lesen
-			char dummy;
-			stream >> dummy;
-			
-			std::string obj;
-			stream >> obj;
-			if (obj == "item")
-			{
-				// Item erzeugen
-				std::string name="";
-				int val =0;
-				stream >> name >> val;
-				
-				Item::Type type = ItemFactory::getBaseType(name);
-				
-				Item* itm = ItemFactory::createItem(type, name,0,val);
-				if (itm != 0)
-				{
-					pl->insertItem(itm);
-				}
-			}
-			
-			if (obj == "get")
-			{
-				std::string member;
-				stream >> member;
-				Variable var;
-				pl->getMember(var,member);
-				
-				pl->addMessage(var.getData());
-			}
-			
-			if (obj == "set")
-			{
-				std::string member, value;
-				stream >> member >> value;
-				VariableRef ref;
-				pl->getMemberReference(ref,member);
-				ref = value;
-				pl->calcBaseAttrMod();
-			}
-				
-			
+			smsg += (*m_player_slots)[slot]->getName();
 		}
+		smsg += "] ";
+		smsg += msg;
+		
 		CharConv cv;
 
 		// Header anlegen
 		PackageHeader header;
 		header.m_content = PTYPE_S2C_MESSAGE; 	// Daten von Server zum Client
-		header.m_number = msg.size();
+		header.m_number = smsg.size();
 		
 		header.toString(&cv);
-		cv.toBuffer((char*) msg.c_str(),msg.size());
+		cv.toBuffer((char*) smsg.c_str(),smsg.size());
 		
 		// Nachricht an alle Spieler mit ausser dem Sender
 		WorldObjectMap::iterator it;
@@ -999,9 +1009,15 @@ void World::handleMessage(std::string msg, int slot)
 		cv.toBuffer((char*) msg.c_str(),msg.size());
 		
 		getNetwork()->pushSlotMessage(cv.getBitStream());
+		
+		smsg = "[";
+		smsg += m_local_player->getName();
+		smsg += "] ";
+		smsg += msg;
 	}
 	
-	
+	// Nachricht einfuegen 
+	static_cast<Player*>(m_local_player)->addMessage(smsg);
 }
 
 int World::getValidId()
