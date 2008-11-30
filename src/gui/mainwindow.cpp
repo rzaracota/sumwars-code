@@ -1048,6 +1048,15 @@ void MainWindow::updateItemInfo()
 				continue;
 			}
 			
+			// Position auf dem Bildschirm ermitteln
+			rpos = m_scene->getProjection(Vector(di->m_x/2.0,di->m_y/2.0));
+			
+			// nur Items die wirklich sichtbar sind behandeln
+			if (rpos.first<0 || rpos.first>1 || rpos.second<0 || rpos.second>0.9)
+			{
+				continue;
+			}
+			
 			stream.str("");
 			stream << "ItemLabel";
 			stream << nr;
@@ -1081,7 +1090,7 @@ void MainWindow::updateItemInfo()
 			
 			label->setID(it->first);
 			
-			rpos = m_scene->getProjection(Vector(di->m_x/2.0,di->m_y/2.0));
+			
 			label->setPosition(CEGUI::UVector2(CEGUI::UDim(std::max(0.0,rpos.first-0.03),0), CEGUI::UDim(std::max(0.0,rpos.second-0.05),0)));
 			nr++;
 
