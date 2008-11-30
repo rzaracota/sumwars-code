@@ -1607,6 +1607,20 @@ Vector Region::getLocation(LocationName name)
 	return it->second;
 }
 
+Shape Region::getArea(AreaName name)
+{
+	std::map<AreaName, Shape>::iterator it;
+	it = m_areas.find(name);
+
+	if (it == m_areas.end())
+	{
+		return Shape();
+	}
+
+	return it->second;
+}
+
+
 void Region::addExit(RegionExit exit)
 {
 	exit.m_shape.m_center = getLocation(exit.m_exit_name);

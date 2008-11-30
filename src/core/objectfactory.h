@@ -87,6 +87,10 @@ typedef std::string ObjectGroupTemplateName;
  */
 typedef std::string LocationName;
 
+/**
+ * Name eines Gebietes
+ */
+typedef std::string AreaName;
 
 /**
  * \class ObjectGroupTemplate

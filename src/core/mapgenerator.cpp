@@ -52,7 +52,7 @@ Region* MapGenerator::createRegion(RegionData* rdata)
 	delete mdata.m_base_map;
 	delete mdata.m_template_map;
 	delete mdata.m_template_index_map;
-
+	
 	return mdata.m_region;
 }
 
@@ -401,7 +401,7 @@ bool MapGenerator::insertGroupTemplates(MapData* mdata, RegionData* rdata)
 	Shape s;
 	Vector pos;
 	bool succ;
-	LocationName locname;
+	LocationName locname, areaname;
 	for (it = rdata->m_named_object_groups.rbegin(); it != rdata->m_named_object_groups.rend(); ++it)
 	{
 		// Objektgruppe anhand des Namens suchen
@@ -413,21 +413,14 @@ bool MapGenerator::insertGroupTemplates(MapData* mdata, RegionData* rdata)
 		}
 
 		// Grundform der Gruppe kopieren
-		/*
 		s.m_type = templ->getShape()->m_type;
 		s.m_extent = templ->getShape()->m_extent;
 		s.m_radius = templ->getShape()->m_radius;
 
-		*/
-
-		s.m_type = Shape::RECT;
-		s.m_extent = Vector(8,8);
-		s.m_extent.m_x =8;
-		s.m_extent.m_y =8;
-		s.m_radius =0;
-
+		
 		// Ort fuer das Template suchen
 		succ = getTemplatePlace(mdata,&s,pos);
+		s.m_center = pos;
 
 		if (succ == false)
 		{
@@ -441,9 +434,14 @@ bool MapGenerator::insertGroupTemplates(MapData* mdata, RegionData* rdata)
 		mdata->m_region->createObjectGroup(it->second.m_group_name,pos,0);
 
 		// Mittelpunkt eintragen
-		locname = it->second.m_group_name;
+		locname = it->second.m_name;
 		locname += ":center";
 		mdata->m_region->addLocation(locname,pos);
+		
+		// Flaeche eintragen
+		areaname = it->second.m_name;
+		areaname += ":area";
+		mdata->m_region->addArea(areaname,s);
 	}
 
 

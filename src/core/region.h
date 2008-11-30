@@ -667,6 +667,21 @@ class Region
 		Vector getLocation(LocationName name);
 		
 		/**
+		 * \fn void addArea(AreaName name, Shape area)
+		 * \brief Fuegt eine neue Flaeche ein
+		 */
+		void addArea(AreaName name, Shape area)
+		{
+			m_areas.insert(std::make_pair(name,area));	
+		}
+		
+		/**
+		 * \fn Shape getArea(AreaName name)
+		 * \brief Gibt die Flaeche mit dem angegebenen Name aus
+		 */
+		Shape getArea(AreaName name);
+		
+		/**
 		 * \fn std::string getName()
 		 * \brief Gibt den Name der Region aus
 		 */
@@ -801,6 +816,12 @@ class Region
 		 * \brief Liste der Orte
 		 */
 		std::map<LocationName, Vector> m_locations;
+		
+		/**
+		 * \var std::map<AreaName, Shape> m_areas
+		 * \brief Liste der Orte
+		 */
+		std::map<AreaName, Shape> m_areas;
 		
 		/**
 		 * \var std::list<RegionExit> m_region_exits
