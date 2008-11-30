@@ -19,6 +19,8 @@ MainWindow::MainWindow(Ogre::Root* ogreroot, CEGUI::System* ceguisystem,Ogre::Re
 	{
 		ERRORMSG("GUI erzeugen fehlgeschlagen");
 	}
+	
+	m_key =0;
 }
 
 bool MainWindow::init()
@@ -127,6 +129,33 @@ void MainWindow::update()
 	// Eingaben abfangen
 	m_mouse->capture();
 	m_keyboard->capture();
+	
+	// Tastenwiederholung erzeugen
+	if (m_key !=0)
+	{
+		if (m_key_repeat)
+		{
+			if ( m_key_repeat_timer.getTime()>60)
+			{
+				m_key_repeat_timer.start();
+				m_cegui_system->injectChar(m_key);
+				
+				// Sonderbehandlung fuer Backspace
+				if (m_key == 8)
+				{
+					m_cegui_system->injectKeyDown(OIS::KC_BACK);
+				}
+			}
+		}
+		else
+		{
+			if ( m_key_repeat_timer.getTime()>400)
+			{
+				m_key_repeat_timer.start();
+				m_key_repeat = true;
+			}
+		}
+	}
 
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 
@@ -474,6 +503,21 @@ void MainWindow::setupChatWindow()
 {
 	Window* wnd = new ChatLine(m_document);
 	m_sub_windows["ChatWindow"] = wnd;
+	
+	/*
+	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
+	CEGUI::MultiLineEditbox* chat_content;
+	
+	chat_content = static_cast<CEGUI::MultiLineEditbox*>(win_mgr.createWindow("TaharezLook/MultiLineEditbox", "ChatContent"));
+	m_game_screen->addChildWindow(chat_content);
+	//chat_content->setProperty("FrameEnabled", "false");
+	chat_content->setProperty("BackgroundEnabled", "false");
+	chat_content->setPosition(CEGUI::UVector2(cegui_reldim(0.00f), cegui_reldim( 0.0f)));
+	chat_content->setSize(CEGUI::UVector2(cegui_reldim(1.0f), cegui_reldim( 0.78f)));
+	chat_content->setWantsMultiClickEvents(false);
+	chat_content->setReadOnly(true);
+	chat_content->setText("");
+	*/
 	
 	// Inventar anfangs ausblenden
 	m_game_screen->addChildWindow(wnd->getCEGUIWindow());
@@ -895,7 +939,7 @@ void MainWindow::updateItemInfo()
 		float mindist = 1000000;
 		float dist;
 		float ix,iy;
-		float mix,miy;
+		float mix=0,miy=0;
 		
 		
 		std::ostringstream out_stream;
@@ -1318,10 +1362,19 @@ bool MainWindow::mouseReleased(const OIS::MouseEvent &evt, OIS::MouseButtonID bt
 
 bool MainWindow::keyPressed(const OIS::KeyEvent &evt) {
 	unsigned int ch = evt.text;
-
-	m_cegui_system->injectKeyDown(evt.key);
+	
 	DEBUG5("keycode %x",evt.key);
-	bool ret = m_cegui_system->injectChar(ch);
+	bool ret =m_cegui_system->injectKeyDown(evt.key);
+	
+	ret |= m_cegui_system->injectChar(ch);
+	
+	if (ch != 0 &&  (m_document->getGUIState()->m_shown_windows & Document::CHAT))
+	{
+		m_key = ch;
+		m_key_repeat_timer.start();
+		m_key_repeat = false;
+	}
+	
 	
 	if (evt.key == OIS::KC_RSHIFT || evt.key == OIS::KC_LSHIFT)
 	{
@@ -1343,6 +1396,9 @@ bool MainWindow::keyPressed(const OIS::KeyEvent &evt) {
 bool MainWindow::keyReleased(const OIS::KeyEvent &evt)
 {
 
+	m_key =0;
+	m_key_repeat = false;
+	
 	bool ret = m_cegui_system->injectKeyUp(evt.key);
 	
 	if (evt.key == OIS::KC_RSHIFT || evt.key == OIS::KC_LSHIFT)

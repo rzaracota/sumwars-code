@@ -306,7 +306,23 @@ class MainWindow :
 	 */
 	std::map<std::string, Window*> m_sub_windows;
 	
+	/**
+	 * \var Timer m_key_repeat_timer
+	 * \brief Timer fuer Tastenwiederholung
+	 */
+	Timer m_key_repeat_timer;
 	
+	/**
+	 * \var bool m_key_repeat
+	 * \brief Zeigt an, ob fuer die gedrueckte Taste die Tastenwiederholung aktiv ist
+	 */
+	bool m_key_repeat;
+	
+	/**
+	 * \var unsigned int m_key
+	 * \brief gedrueckte Taste
+	 */
+	unsigned int m_key;
 
 };
 

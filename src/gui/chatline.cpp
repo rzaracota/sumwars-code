@@ -20,7 +20,6 @@ ChatLine::ChatLine (Document* doc)
 	chat->setAlpha(0.7);
 	
 	CEGUI::Editbox* chatline;
-	CEGUI::MultiLineEditbox* chat_content;
 	
 	chatline = static_cast<CEGUI::Editbox*>(win_mgr.createWindow("TaharezLook/Editbox", "Chatline"));
  	chat->addChildWindow(chatline);
@@ -31,6 +30,8 @@ ChatLine::ChatLine (Document* doc)
 	
 	chatline->setText("");
 	
+	
+	CEGUI::MultiLineEditbox* chat_content;
 	
 	chat_content = static_cast<CEGUI::MultiLineEditbox*>(win_mgr.createWindow("TaharezLook/MultiLineEditbox", "ChatContent"));
 	chat->addChildWindow(chat_content);

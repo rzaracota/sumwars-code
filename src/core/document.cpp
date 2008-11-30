@@ -699,7 +699,15 @@ void Document::onButtonOpenChatClicked()
 void Document::sendChatMessage(std::string msg)
 {
 	
-	World::getWorld()->handleMessage(msg);
+	if (msg =="")
+	{
+		getGUIState()->m_shown_windows &= ~CHAT;
+		m_modified |= WINDOWS_MODIFIED;
+	}
+	else
+	{
+		World::getWorld()->handleMessage(msg);
+	}
 }
 
 
