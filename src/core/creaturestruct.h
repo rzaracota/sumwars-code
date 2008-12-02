@@ -5,8 +5,7 @@
 
 #include <list>
 #include <string.h>
-#include "variable.h"
-
+#include "debug.h"
 
 #define NR_STATUS_MODS 8
 
@@ -148,10 +147,19 @@ struct CreatureBaseAttr
 	char m_immunity;
 	
 	/**
-	 * \fn virtual void getMemberReference(VariableRef& ref, std::string member)
-	 * \brief Gibt eine Referenz fuer das Skriptsystem auf ein Datenelement aus
-	 **/
-	void getMemberReference(VariableRef& ref, std::string member);
+	 * \fn int getValue(std::string valname)
+	 * \brief Schiebt den gewuenschten Attributwert eines Objektes auf den Lua Stack
+	 * \param valname Name des Wertes
+	 */
+	int getValue(std::string valname);
+	
+	/**
+	 * \fn virtual bool setValue(std::string valname, int& event_mask)
+	 * \brief Setzt den gewuenschten Attributwert eines Objektes
+	 * \param valname Name des Wertes
+	 * \param event_mask Bitmaske, die anzeigt, welche Daten neu uebertragen werden muessen
+	 */
+	bool setValue(std::string valname, int& event_mask);
 	
 };
 
@@ -341,11 +349,20 @@ struct CreatureDynAttr
 	 */
 	std::list<CreatureBaseAttrMod> m_temp_mods;
 	
+	
 	/**
-	 * \fn virtual void getMemberReference(VariableRef& ref, std::string member)
-	 * \brief Gibt eine Referenz fuer das Skriptsystem auf ein Datenelement aus
-	 **/
-	void getMemberReference(VariableRef& ref, std::string member);
+	 * \fn int getValue(std::string valname)
+	 * \brief Schiebt den gewuenschten Attributwert eines Objektes auf den Lua Stack
+	 */
+	int getValue(std::string valname);
+	
+	/**
+	 * \fn virtual bool setValue(std::string valname, int& event_mask)
+	 * \brief Setzt den gewuenschten Attributwert eines Objektes
+	 * \param valname Name des Wertes
+	 * \param event_mask Bitmaske, die anzeigt, welche Daten neu uebertragen werden muessen
+	 */
+	bool setValue(std::string valname, int& event_mask);
 };
 
 /**

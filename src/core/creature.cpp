@@ -18,6 +18,7 @@
 */
 #include "creature.h"
 #include <sys/time.h>
+#include "eventsystem.h"
 
 //Constructors/Destructors
 Creature::Creature(int id) : WorldObject(id)
@@ -4324,24 +4325,42 @@ void Creature::processNetEvent(NetEvent* event, CharConv* cv)
 	}
 }
 
-void Creature::getMemberReference(VariableRef& ref, std::string member)
+int Creature::getValue(std::string valname)
 {
-	m_base_attr.getMemberReference(ref,member);
-	if (ref.isValid())
+	int ret = m_base_attr.getValue(valname);
+	if (ret >0)
 	{
-		return;
+		return ret;
 	}
 	
-	m_dyn_attr.getMemberReference(ref,member);
-	if (ref.isValid())
+	ret = m_dyn_attr.getValue(valname);
+	if (ret >0)
 	{
-		return;
+		return ret;
 	}
 	
+	ret = WorldObject::getValue(valname);
+	return ret;
 	
-
-	WorldObject::getMemberReference(ref, member);
 }
 
-
+bool Creature::setValue(std::string valname)
+{
+	bool ret;
+	ret = m_base_attr.setValue(valname, m_event_mask);
+	if (ret >0)
+	{
+		calcBaseAttrMod();
+		return ret;
+	}
+	
+	ret = m_dyn_attr.setValue(valname, m_event_mask);
+	if (ret >0)
+	{
+		return ret;
+	}
+	
+	ret = WorldObject::getValue(valname);
+	return ret;
+}
 

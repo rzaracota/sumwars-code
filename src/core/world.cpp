@@ -21,6 +21,7 @@
 #include "player.h"
 #include "mapgenerator.h"
 #include "spawnpoint.h"
+#include "eventsystem.h"
 
 World* World::m_world=0;
 
@@ -61,7 +62,8 @@ World* World::m_world=0;
 
 bool World::init()
 {
-
+	EventSystem::init();
+	
 	if (m_server)
 	{
 		DEBUG("server");
@@ -907,61 +909,7 @@ void World::handleCommand(ClientCommand* comm, int slot, float delay)
 void World::handleMessage(std::string msg, int slot)
 {
 	
-	
-	if (msg[0] == '$' && m_server)
-	{
-		// Cheatcode eingegeben
-		Player* pl = static_cast<Player*>((*m_player_slots)[slot]);
-
-		std::stringstream stream;
-		stream << msg;
-			
-			// $ lesen
-		char dummy;
-		stream >> dummy;
-			
-		std::string obj;
-		stream >> obj;
-		if (obj == "item")
-		{
-				// Item erzeugen
-			std::string name="";
-			int val =0;
-			stream >> name >> val;
-				
-			Item::Type type = ItemFactory::getBaseType(name);
-				
-			Item* itm = ItemFactory::createItem(type, name,0,val);
-			if (itm != 0)
-			{
-				pl->insertItem(itm);
-			}
-		}
-		else if (obj == "get")
-		{
-			std::string member;
-			stream >> member;
-			Variable var;
-			pl->getMember(var,member);
-				
-			pl->addMessage(var.getData());
-		}
-		else if (obj == "set")
-		{
-			std::string member, value;
-			stream >> member >> value;
-			VariableRef ref;
-			pl->getMemberReference(ref,member);
-			ref = value;
-			pl->calcBaseAttrMod();
-		}
-		else
-		{
-				
-		}
-	}
-	
-	std::string smsg;
+	std::string smsg = msg;
 	
 	// als Server: Nachricht an alle Spieler versenden
 	// als Client: Nachricht an den Server senden
@@ -1018,6 +966,76 @@ void World::handleMessage(std::string msg, int slot)
 	
 	// Nachricht einfuegen 
 	static_cast<Player*>(m_local_player)->addMessage(smsg);
+	
+	if (msg[0] == '$' && m_server)
+	{
+		// Cheatcode eingegeben
+		Player* pl = static_cast<Player*>((*m_player_slots)[slot]);
+
+		std::stringstream stream;
+		stream << msg;
+			
+			// $ lesen
+		char dummy;
+		stream >> dummy;
+			
+		std::string obj;
+		stream >> obj;
+		if (obj == "item")
+		{
+				// Item erzeugen
+			std::string name="";
+			int val =0;
+			stream >> name >> val;
+				
+			Item::Type type = ItemFactory::getBaseType(name);
+				
+			Item* itm = ItemFactory::createItem(type, name,0,val);
+			if (itm != 0)
+			{
+				pl->insertItem(itm);
+			}
+		}
+		else if (obj == "get")
+		{
+			EventSystem::setRegion(m_local_player->getRegion());
+			std::string member;
+			stream >> member;
+			std::stringstream instr;
+			instr << "return getObjectValue(";
+			instr << m_local_player->getId();
+			instr << ", \"" << member << "\")";
+			EventSystem::doString((char*) instr.str().c_str());
+			std::string ret = EventSystem::getReturnValue();
+			if (ret != "")
+			{
+				static_cast<Player*>(m_local_player)->addMessage(ret);
+			}
+		}
+		else if (obj == "set")
+		{
+			EventSystem::setRegion(m_local_player->getRegion());
+			std::string member, val;
+			stream >> member >> val;
+			std::stringstream instr;
+			instr << "setObjectValue(";
+			instr << m_local_player->getId();
+			instr << ", \"" << member << "\","<<val<<")";
+			EventSystem::doString((char*) instr.str().c_str());
+		}
+		else
+		{
+			EventSystem::setRegion(m_local_player->getRegion());
+			std::string instr = "return ";
+			instr += msg.substr(1);
+			EventSystem::doString((char*) instr.c_str());
+			std::string ret = EventSystem::getReturnValue();
+			if (ret != "")
+			{
+				static_cast<Player*>(m_local_player)->addMessage(ret);
+			}
+		}
+	}
 }
 
 int World::getValidId()

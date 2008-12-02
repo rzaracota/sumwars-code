@@ -410,10 +410,19 @@ public:
 	}
 	
 	/**
-	 * \fn virtual void getMemberReference(VariableRef& ref, std::string member)
-	 * \brief Gibt eine Referenz fuer das Skriptsystem auf ein Datenelement aus
-	 **/
-	void getMemberReference(VariableRef& ref, std::string member);
+	 * \fn virtual int getValue(std::string valname)
+	 * \brief Schiebt den gewuenschten Attributwert eines Objektes auf den Lua Stack
+	 * \param valname Name des Wertes
+	 */
+	virtual int getValue(std::string valname);
+	
+	/**
+	 * \fn virtual bool setValue(std::string valname)
+	 * \brief Setzt den gewuenschten Attributwert eines Objektes
+	 * \param valname Name des Wertes
+	 */
+	virtual bool setValue(std::string valname);
+
 	
 	/**
 	 * \fn std::string getName()

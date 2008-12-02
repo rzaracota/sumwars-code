@@ -19,6 +19,7 @@
 */
 
 #include "player.h"
+#include "eventsystem.h"
 
 //Constructors/Destructors
 
@@ -2170,25 +2171,55 @@ void Player::loadEquipement(CharConv* cv)
 	*/
 }
 
-void Player::getMemberReference(VariableRef& ref, std::string member)
+
+int Player::getValue(std::string valname)
 {
-	if (member =="name")
+	if (valname == "name")
 	{
-		ref.setVariable(m_name);
+		lua_pushstring(EventSystem::getLuaState() , m_name.c_str() );
+		return 1;
 	}
-	else if (member =="attribute_points")
+	else if (valname =="attribute_points")
 	{
-		ref.setVariable(m_attribute_points);
+		lua_pushinteger(EventSystem::getLuaState() , m_attribute_points );
+		return 1;
 	}
-	else if (member =="skill_points")
+	else if (valname =="skill_points")
 	{
-		ref.setVariable(m_skill_points);
+		lua_pushinteger(EventSystem::getLuaState() , m_skill_points );
+		return 1;
 	}
 	else
 	{
-		Creature::getMemberReference(ref,member);
+		int ret = Creature::getValue(valname);
+		
+		return ret;
 	}
+	return 0;
 }
+
+bool Player::setValue(std::string valname)
+{
+	if (valname == "attribute_points")
+	{
+		m_attribute_points = lua_tointeger(EventSystem::getLuaState() ,-1);
+		lua_pop(EventSystem::getLuaState(), 1);
+		return true;
+	}
+	else if (valname =="skill_points")
+	{
+		m_skill_points = lua_tointeger(EventSystem::getLuaState() ,-1);
+		lua_pop(EventSystem::getLuaState(), 1);
+		return true;
+	}
+	else
+	{
+		return  Creature::setValue(valname);
+	}
+	
+	return false;
+}
+
 
 
 

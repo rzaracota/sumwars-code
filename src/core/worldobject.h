@@ -30,7 +30,6 @@
 #include <list>
 
 #include "geometry.h"
-#include "variable.h"
 
 class World;
 class Region;
@@ -575,16 +574,18 @@ class WorldObject {
 	std::string getNameId();
 	
 	/**
-	 * \fn virtual void getMemberReference(VariableRef& ref, std::string member)
-	 * \brief Gibt eine Referenz fuer das Skriptsystem auf ein Datenelement aus
-	 **/
-	virtual void getMemberReference(VariableRef& ref, std::string member);
+	 * \fn virtual int getValue(std::string valname)
+	 * \brief Schiebt den gewuenschten Attributwert eines Objektes auf den Lua Stack
+	 * \param valname Name des Wertes
+	 */
+	virtual int getValue(std::string valname);
 	
 	/**
-	 * \fn virtual void getMemberReference(Variable& var, std::string member)
-	 * \brief Gibt eine Variable fuer das Skriptsystem mit einer Kopie des Datenelements aus
-	 **/
-	virtual void getMember(Variable& var, std::string member);
+	 * \fn virtual bool setValue(std::string valname)
+	 * \brief Setzt den gewuenschten Attributwert eines Objektes
+	 * \param valname Name des Wertes
+	 */
+	virtual bool setValue(std::string valname);
 
 	protected:
 		

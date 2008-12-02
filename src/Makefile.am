@@ -13,14 +13,14 @@ bin_PROGRAMS = sumwars
 
 #LIBS = OGRE OIS CEGUI CEGUI-OGRE RakNet freealut openal
 #LDFLAGS = $(shell pkg-config --libs $(LIBS))
-LDFLAGS = $(shell pkg-config --libs OGRE OIS CEGUI CEGUI-OGRE RakNet freealut openal)
+LDFLAGS = $(shell pkg-config --libs OGRE OIS CEGUI CEGUI-OGRE RakNet freealut openal lua5.1)
 
 sumwars_LDFLAGS = $(LDFLAGS) -lm -lrt
 
 CFLAGS = -Wall -g
 
 #AM_CXXFLAGS = -DDEBUG_LEVEL=5 $(shell pkg-config --cflags $(LIBS)) $(CFLAGS) -I./core -I./gui -I./tinyxml
-AM_CXXFLAGS = -DDEBUG_LEVEL=5 $(shell pkg-config --cflags OGRE OIS CEGUI CEGUI-OGRE RakNet freealut openal) $(CFLAGS) -I./core -I./gui -I./tinyxml
+AM_CXXFLAGS = -DDEBUG_LEVEL=5 $(shell pkg-config --cflags OGRE OIS CEGUI CEGUI-OGRE RakNet freealut openal lua5.1) $(CFLAGS) -I./core -I./gui -I./tinyxml
 
 ##AM_CXXFLAGS = -g -O3 -DDEBUG_LEVEL=5
 
@@ -64,6 +64,8 @@ sumwars_SOURCES = core/trade.cpp \
 	core/mapgenerator.cpp \
 	core/unionfindtree.cpp \
 	core/variable.cpp \
+	core/event.cpp \
+	core/eventsystem.cpp \
 	gui/main_gui.cpp \
 	gui/mainwindow.cpp \
 	gui/scene.cpp \

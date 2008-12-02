@@ -1,5 +1,7 @@
 #include "worldobject.h"
 #include "world.h"
+#include "eventsystem.h"
+
 
 WorldObject::WorldObject( int id)
 {
@@ -121,37 +123,24 @@ string WorldObject::getNameId()
 }
 
 
-void WorldObject::getMemberReference(VariableRef& ref, std::string member)
+int WorldObject::getValue(std::string valname)
 {
-	if (member =="subtype")
-	{
-		ref.setVariable(m_type_info.m_subtype);
-	}
-	else
-	{
-		ERRORMSG("unknown member %s requested",member.c_str());
-	}
-}
-
-
-void WorldObject::getMember(Variable& var, std::string member)
-{
-	VariableRef ref;
-	getMemberReference(ref,member);
-	
-	if (ref.isValid())
-	{
-		var.setType(ref.getType());
-		var.setData(ref.print());
-	}
-	else 
-	{
-		if (member == "id")
+		if (valname =="id")
 		{
-			var.setType("int");
-			var.setData(m_id);
+			lua_pushinteger(EventSystem::getLuaState() , m_id );
+			return 1;
 		}
-	}
+		else if (valname == "subtype")
+		{
+			lua_pushstring(EventSystem::getLuaState() ,m_type_info.m_subtype.c_str() );
+			return 1;
+		}
+
+		return 0;
 }
 
 
+bool WorldObject::setValue(std::string valname)
+{
+	return false;
+}

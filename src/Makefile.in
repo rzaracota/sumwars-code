@@ -62,7 +62,8 @@ am_sumwars_OBJECTS = core/trade.$(OBJEXT) core/world.$(OBJEXT) \
 	core/network.$(OBJEXT) core/action.$(OBJEXT) \
 	core/command.$(OBJEXT) core/geometry.$(OBJEXT) \
 	core/mapgenerator.$(OBJEXT) core/unionfindtree.$(OBJEXT) \
-	core/variable.$(OBJEXT) gui/main_gui.$(OBJEXT) \
+	core/variable.$(OBJEXT) core/event.$(OBJEXT) \
+	core/eventsystem.$(OBJEXT) gui/main_gui.$(OBJEXT) \
 	gui/mainwindow.$(OBJEXT) gui/scene.$(OBJEXT) \
 	gui/application.$(OBJEXT) gui/charinfo.$(OBJEXT) \
 	gui/controlpanel.$(OBJEXT) gui/inventory.$(OBJEXT) \
@@ -120,7 +121,7 @@ INSTALL_STRIP_PROGRAM = @INSTALL_STRIP_PROGRAM@
 
 #LIBS = OGRE OIS CEGUI CEGUI-OGRE RakNet freealut openal
 #LDFLAGS = $(shell pkg-config --libs $(LIBS))
-LDFLAGS = $(shell pkg-config --libs OGRE OIS CEGUI CEGUI-OGRE RakNet freealut openal)
+LDFLAGS = $(shell pkg-config --libs OGRE OIS CEGUI CEGUI-OGRE RakNet freealut openal lua5.1)
 LIBOBJS = @LIBOBJS@
 LIBS = @LIBS@
 LTLIBOBJS = @LTLIBOBJS@
@@ -184,7 +185,7 @@ AUTOMAKE_OPTIONS = foreign subdir-objects
 sumwars_LDFLAGS = $(LDFLAGS) -lm -lrt
 
 #AM_CXXFLAGS = -DDEBUG_LEVEL=5 $(shell pkg-config --cflags $(LIBS)) $(CFLAGS) -I./core -I./gui -I./tinyxml
-AM_CXXFLAGS = -DDEBUG_LEVEL=5 $(shell pkg-config --cflags OGRE OIS CEGUI CEGUI-OGRE RakNet freealut openal) $(CFLAGS) -I./core -I./gui -I./tinyxml
+AM_CXXFLAGS = -DDEBUG_LEVEL=5 $(shell pkg-config --cflags OGRE OIS CEGUI CEGUI-OGRE RakNet freealut openal lua5.1) $(CFLAGS) -I./core -I./gui -I./tinyxml
 sumwars_SOURCES = core/trade.cpp \
 	core/world.cpp \
 	core/objectfactory.cpp \
@@ -225,6 +226,8 @@ sumwars_SOURCES = core/trade.cpp \
 	core/mapgenerator.cpp \
 	core/unionfindtree.cpp \
 	core/variable.cpp \
+	core/event.cpp \
+	core/eventsystem.cpp \
 	gui/main_gui.cpp \
 	gui/mainwindow.cpp \
 	gui/scene.cpp \
@@ -386,6 +389,10 @@ core/unionfindtree.$(OBJEXT): core/$(am__dirstamp) \
 	core/$(DEPDIR)/$(am__dirstamp)
 core/variable.$(OBJEXT): core/$(am__dirstamp) \
 	core/$(DEPDIR)/$(am__dirstamp)
+core/event.$(OBJEXT): core/$(am__dirstamp) \
+	core/$(DEPDIR)/$(am__dirstamp)
+core/eventsystem.$(OBJEXT): core/$(am__dirstamp) \
+	core/$(DEPDIR)/$(am__dirstamp)
 gui/$(am__dirstamp):
 	@$(MKDIR_P) gui
 	@: > gui/$(am__dirstamp)
@@ -448,6 +455,8 @@ mostlyclean-compile:
 	-rm -f core/debug.$(OBJEXT)
 	-rm -f core/document.$(OBJEXT)
 	-rm -f core/dropitem.$(OBJEXT)
+	-rm -f core/event.$(OBJEXT)
+	-rm -f core/eventsystem.$(OBJEXT)
 	-rm -f core/fixedobject.$(OBJEXT)
 	-rm -f core/geometry.$(OBJEXT)
 	-rm -f core/gridunit.$(OBJEXT)
@@ -510,6 +519,8 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@core/$(DEPDIR)/debug.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@core/$(DEPDIR)/document.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@core/$(DEPDIR)/dropitem.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@core/$(DEPDIR)/event.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@core/$(DEPDIR)/eventsystem.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@core/$(DEPDIR)/fixedobject.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@core/$(DEPDIR)/geometry.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@core/$(DEPDIR)/gridunit.Po@am__quote@
