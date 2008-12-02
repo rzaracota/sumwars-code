@@ -3,6 +3,7 @@
 
 #include <string>
 #include "debug.h"
+#include "event.h"
 
 extern "C"
 {
@@ -75,6 +76,14 @@ class EventSystem
 			return m_lua;
 		}
 		
+
+		/**
+		 * \fn static bool executeEvent(Event* event)
+		 * \brief Fuehrt das Event durch.
+		 * \return true, wenn das Event erfolgreich ausgefuehrt wurde
+		 */
+		static bool executeEvent(Event* event);
+		
 		/**
 		 * \fn static int getObjectValue(lua_State *L)
 		 * \brief Schiebt den gewuenschten Attributwert eines Objektes auf den Lua Stack
@@ -88,7 +97,19 @@ class EventSystem
 		 * \param L Lua Status
 		 */
 		static int setObjectValue(lua_State *L);
-	
+		
+		/**
+		 * \fn static int pointIsInArea(lua_State *L)
+		 * \brief prueft, ob ein Objekt sich in einem Gebiet befindet
+		 */
+		static int pointIsInArea(lua_State *L);
+		
+		/**
+		 * \fn static int createObject(lua_State *L);
+		 * \brief erzeugt ein neues Objekt
+		 */
+		static int createObject(lua_State *L);
+		
 	private:
 		/**
 		 * \var static lua_State * m_lua

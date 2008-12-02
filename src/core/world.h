@@ -31,7 +31,6 @@
 #include <math.h>
 #include <cstdlib>
 #include <algorithm>
-#include <iostream>
 #include <queue>
 
 #include "worldobject.h"

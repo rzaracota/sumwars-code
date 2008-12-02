@@ -1,6 +1,7 @@
 #include "region.h"
 #include "world.h"
 #include "player.h"
+#include "eventsystem.h"
 
 void RegionData::addObjectGroupTemplate(ObjectGroupTemplateName group_name, int prio, int number,float probability)
 {
@@ -43,9 +44,12 @@ Region::Region(short dimx, short dimy, short id, std::string name)
 
 	m_id = id;
 
-	m_events = new NetEventList;
+	m_netevents = new NetEventList;
 
 
+	Trigger* tr = new Trigger("create_region");
+	insertTrigger(tr);
+	
 }
 
 Region::~Region()
@@ -69,10 +73,22 @@ Region::~Region()
 
 
 	DropItemMap::iterator k;
-			for (k =  m_drop_items->begin(); k != m_drop_items->end(); k++)
+	for (k =  m_drop_items->begin(); k != m_drop_items->end(); k++)
 	{
 		delete k->second->m_item;
 		delete k->second;
+	}
+	
+	std::list<Trigger*>::iterator l;
+	for (l = m_triggers.begin(); l != m_triggers.end(); ++l)
+	{
+		delete *l;
+	}
+	
+	std::multimap<TriggerType, Event*>::iterator m;
+	for (m= m_events.begin(); m!= m_events.end(); ++m)
+	{
+		delete m->second;
 	}
 
 	delete m_objects;
@@ -85,7 +101,7 @@ Region::~Region()
 	delete m_drop_items;
 	delete m_drop_item_locations;
 	delete m_height;
-	delete m_events;
+	delete m_netevents;
 
 }
 
@@ -571,6 +587,10 @@ bool Region::insertObject (WorldObject* object, Vector pos, float angle, bool co
 	{
 		DEBUG5("player entered Region");
 		result &= (m_players->insert(std::make_pair(object->getId(),object))).second;
+		
+		Trigger* tr = new Trigger("enter_region");
+		tr->addVariable("player", object->getId());
+		insertTrigger(tr);
 
 	}
 	else
@@ -580,6 +600,13 @@ bool Region::insertObject (WorldObject* object, Vector pos, float angle, bool co
 		event.m_type = NetEvent::OBJECT_CREATED;
 		event.m_id = object->getId();
 		insertNetEvent(event);
+		
+		if (object->getGroup() == WorldObject::CREATURE)
+		{
+			Trigger* tr = new Trigger("create_unit");
+			tr->addVariable("unit", object->getId());
+			insertTrigger(tr);
+		}
 	}
 
 	object->getShape()->m_angle = angle;
@@ -1081,6 +1108,46 @@ void Region::update(float time)
 				++iter;
 		}
 		del = false;
+	}
+	
+	// Trigger & Events abarbeiten
+	// Schleife ueber die Trigger
+	EventSystem::setRegion(this);
+	
+	std::multimap<TriggerType, Event*>::iterator it, itend, jt;
+	
+	while (!m_triggers.empty())
+	{
+		TriggerType type;
+		type = m_triggers.front()->getType();
+		
+		DEBUG("trigger: %s",type.c_str());
+		
+		// Schleife ueber die ausgeloesten Events
+		it = m_events.lower_bound(type);
+		itend = m_events.upper_bound(type);
+		while (it != itend)
+		{
+			jt = it;
+			++it;
+			
+			// vom Trigger definierte Variablen einfuegen
+			EventSystem::doString((char*) m_triggers.front()->getLuaVariables().c_str());
+			
+			// Event ausfuehren
+			bool ret = EventSystem::executeEvent(jt->second);
+			
+			// einmalige Ereignisse loeschen, wenn erfolgreich ausgefuehrt
+			if (jt->second->getOnce() &&  ret)
+			{
+				delete jt->second;
+				m_events.erase(jt);
+			}
+			
+		}
+		
+		delete m_triggers.front();
+		m_triggers.pop_front();
 	}
 }
 
@@ -1627,5 +1694,13 @@ void Region::addExit(RegionExit exit)
 	m_exits.push_back(exit);
 }
 
+void Region::insertTrigger(Trigger* trigger)
+{
+	m_triggers.push_back(trigger);
+}
 
+void Region::addEvent(TriggerType trigger, Event* event)
+{
+	m_events.insert(std::make_pair(trigger,event));
+}
 

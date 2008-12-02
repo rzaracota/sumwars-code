@@ -135,6 +135,12 @@ int WorldObject::getValue(std::string valname)
 			lua_pushstring(EventSystem::getLuaState() ,m_type_info.m_subtype.c_str() );
 			return 1;
 		}
+		else if (valname == "position")
+		{
+			lua_pushnumber(EventSystem::getLuaState() , getShape()->m_center.m_x);
+			lua_pushnumber(EventSystem::getLuaState() , getShape()->m_center.m_y);
+			return 2;
+		}
 
 		return 0;
 }

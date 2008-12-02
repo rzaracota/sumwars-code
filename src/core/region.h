@@ -1,6 +1,7 @@
 #ifndef REGION_H
 #define REGION_H
 
+#include "event.h"
 #include "matrix2d.h"
 #include "worldobject.h"
 #include "tiles.h"
@@ -8,6 +9,7 @@
 #include "netevent.h"
 #include "projectile.h"
 #include "objectfactory.h"
+
 
 
 #include <string>
@@ -609,7 +611,7 @@ class Region
 		 */
 		void insertNetEvent(NetEvent &event)
 		{
-			m_events->push_back(event);
+			m_netevents->push_back(event);
 		}
 		
 		/**
@@ -629,7 +631,7 @@ class Region
 		 */
 		NetEventList* getNetEvents()
 		{
-			return m_events;
+			return m_netevents;
 		}
 		
 		/**
@@ -719,6 +721,21 @@ class Region
 			
 		}
 		
+		/**
+		 * \fn void insertTrigger(Trigger* trigger)
+		 * \brief Fuegt einen neuen Trigger in die Liste der aktuell aktivierten Trigger ein
+		 * \param trigger eingefuegter Trigger
+		 */
+		void insertTrigger(Trigger* trigger);
+		
+		/**
+		 * \fn void addEvent(TriggerType type, Event* event)
+		 * \brief Fuegt ein neues Event hinzu
+		 * \param trigger Typ des Triggers durch den das Event ausgeloest wird
+		 * \param event Event
+		 */
+		void addEvent(TriggerType trigger, Event* event);
+		
 	private:
 		/**
 		* \var m_dimx
@@ -806,10 +823,10 @@ class Region
 		std::string m_name;
 	
 		/**
-		* \var NetEventList* m_events
+		* \var NetEventList* m_netevents
 		* \brief Liste der lokalen NetEvents beim aktuellen update
 		*/
-		NetEventList* m_events;
+		NetEventList* m_netevents;
 		
 		/**
 		 * \var std::map<LocationName, Vector> m_locations
@@ -834,6 +851,18 @@ class Region
 		 * \brief Ort an dem in dieser Region gestorbene Helden wiedererweckt werden
 		 */
 		std::pair<RegionName, LocationName> m_revive_location;
+		
+		/**
+		 * \var std::list<Trigger*> m_triggers
+		 * \brief Trigger die waehrend dem aktuellen Event ausgeloest wurden
+		 */
+		std::list<Trigger*> m_triggers;
+		
+		/**
+		 * \var std::multimap<TriggerType, Event*> m_events
+		 * \brief Liste der registrierten Events, aufgelistet nach dem Trigger durch den sie ausgeloest werden
+		 */
+		std::multimap<TriggerType, Event*> m_events;
 
 };
 

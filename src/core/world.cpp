@@ -199,6 +199,23 @@ void World::createRegion(short region)
 		// Debugging
 		reg->setReviveLocation("region0","entry_south");
 		insertRegion(reg,region);
+		
+		// Debugging
+		if (region ==0)
+		{
+			Shape s;
+			s.m_center = Vector(130,215);
+			s.m_type = Shape::CIRCLE;
+			s.m_radius = 5;
+			reg->addArea("testArea",s);
+			
+			
+			Event* ev = new Event();
+			ev->setCondition("x,y = getObjectValue(player,'position') \n \
+					return (pointIsInArea(x,y,'testArea'))");
+			ev->setEffect("print(player .. ' moved to', getObjectValue(player,'position'))");
+ 			reg->addEvent("player_moved",ev);
+		}
 	}
 	else if(type==2)
 	{
@@ -1026,7 +1043,7 @@ void World::handleMessage(std::string msg, int slot)
 		else
 		{
 			EventSystem::setRegion(m_local_player->getRegion());
-			std::string instr = "return ";
+			std::string instr = "";
 			instr += msg.substr(1);
 			EventSystem::doString((char*) instr.c_str());
 			std::string ret = EventSystem::getReturnValue();

@@ -178,6 +178,10 @@ void Creature::die()
 	m_action.m_elapsed_time =0;
 
 	m_event_mask |= NetEvent::DATA_ACTION | NetEvent::DATA_STATE;
+	
+	Trigger* tr = new Trigger("unit_die");
+	tr->addVariable("unit",getId());
+	getRegion()->insertTrigger(tr);
 }
 
 void Creature::initAction()
@@ -509,7 +513,22 @@ void Creature::performAction(float &time)
 		{
 			m_action.m_prev_type = m_action.m_type;
 		}
-
+		
+		if (m_action.m_type == Action::WALK)
+		{
+			// Trigger erzeugen
+			Trigger* tr = new Trigger("unit_moved");
+			tr->addVariable("unit",getId());
+			getRegion()->insertTrigger(tr);
+			
+			if (getTypeInfo()->m_type == TypeInfo::TYPE_PLAYER)
+			{
+				Trigger* tr = new Trigger("player_moved");
+				tr->addVariable("player",getId());
+				getRegion()->insertTrigger(tr);
+			}
+	
+		}
 
 		// Kommando ist beendet wenn die gleichnamige Aktion beendet wurde
 		// Ausnahme: Bewegungskommando ist beendet wenn das Ziel erreicht ist
@@ -3472,6 +3491,13 @@ void Creature::takeDamage(Damage* d)
 		pr->getShape()->m_radius =getShape()->m_radius+1;
 		getRegion()->insertProjectile(pr,getShape()->m_center);
 	}
+	
+	// Trigger erzeugen
+	Trigger* tr = new Trigger("unit_hit");
+	tr->addVariable("defender",getId());
+	tr->addVariable("attacker",d->m_attacker_id);
+	tr->addVariable("damage",dmg);
+	getRegion()->insertTrigger(tr);
 }
 
 void Creature::applyDynAttrMod(CreatureDynAttrMod* mod)

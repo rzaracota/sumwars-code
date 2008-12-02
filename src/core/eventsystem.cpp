@@ -17,6 +17,8 @@ void EventSystem::init()
 	
 	lua_register(m_lua, "setObjectValue", setObjectValue);
 	lua_register(m_lua, "set", setObjectValue);
+	
+	lua_register(m_lua, "pointIsInArea", pointIsInArea);
 }
 
 void  EventSystem::cleanup()
@@ -53,6 +55,40 @@ std::string EventSystem::getReturnValue()
 		return ret;
 	}
 	return "";
+}
+
+bool EventSystem::executeEvent(Event* event)
+{
+	// Lua Code zum Bedingung pruefen ausfuehren
+	if (event->getCondition() != "")
+	{
+		doString((char*) event->getCondition().c_str());
+	
+		// Pruefen, ob true zurueck gegeben wurde
+		if (lua_gettop(m_lua) >0)
+		{
+			bool ret = lua_toboolean(m_lua, -1);
+			lua_pop(m_lua, 1);
+			
+			if (ret == false)
+			{
+				// Bedingung nicht erfuellt
+				return false;
+			}
+		}
+		else
+		{
+			ERRORMSG("condition lua code must return bool");
+			return false;
+		}
+	}
+	
+	if (event->getEffect() != "")
+	{
+		doString((char*) event->getEffect().c_str());
+	}
+	
+	return true;
 }
 
 int EventSystem::getObjectValue(lua_State *L)
@@ -113,3 +149,37 @@ int EventSystem::setObjectValue(lua_State *L)
 	return 0;
 }
 
+int EventSystem::pointIsInArea(lua_State *L)
+{
+	bool ret =false;
+	int argc = lua_gettop(L);
+	if (argc>=3)
+	{
+		float x = lua_tonumber(L, 1);	
+		float y = lua_tonumber(L, 2);	
+		AreaName area = lua_tostring(L, 3);
+		
+		Shape s;
+		s.m_center = Vector(x,y);
+		s.m_type = Shape::CIRCLE;
+		s.m_radius=0;
+		
+		if (m_region !=0)
+		{
+			ret = m_region->getArea(area).intersects(s);
+		}
+		
+	}
+	else
+	{
+		ERRORMSG("Syntax: pointIsInArea( float x, float y, string areaname)");
+	}
+	
+	lua_pushboolean(EventSystem::getLuaState() , ret);
+	return 1;
+}
+
+int EventSystem::createObject(lua_State *L)
+{
+	
+}

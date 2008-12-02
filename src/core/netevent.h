@@ -1,5 +1,5 @@
-#ifndef EVENT_H
-#define EVENT_H
+#ifndef NETEVENT_H
+#define NETEVENT_H
 
 #include "charconv.h"
 #include <list>
