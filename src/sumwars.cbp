@@ -66,6 +66,7 @@
 			<Add library="libws2_32.a" />
 			<Add library="C:\MinGW\lib\alut.lib" />
 			<Add library="C:\MinGW\lib\OpenAL32.lib" />
+			<Add library="C:\MinGW\lib\lua51.lib" />
 			<Add directory="$(OGRE_HOME)\lib" />
 			<Add directory="$(OGRE_HOME)\bin\Debug" />
 			<Add directory="$(OGRE_HOME)\bin\Release" />
@@ -92,7 +93,10 @@
 		<Unit filename="core\dropitem.cpp" />
 		<Unit filename="core\dropitem.h" />
 		<Unit filename="core\dropslot.h" />
+		<Unit filename="core\event.cpp" />
 		<Unit filename="core\event.h" />
+		<Unit filename="core\eventsystem.cpp" />
+		<Unit filename="core\eventsystem.h" />
 		<Unit filename="core\fixedobject.cpp" />
 		<Unit filename="core\fixedobject.h" />
 		<Unit filename="core\geometry.cpp" />

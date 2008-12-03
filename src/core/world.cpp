@@ -63,7 +63,7 @@ World* World::m_world=0;
 bool World::init()
 {
 	EventSystem::init();
-	
+
 	if (m_server)
 	{
 		DEBUG("server");
@@ -84,11 +84,11 @@ bool World::init()
 	m_timer[0] =0;
 	m_timer[1] =0;
 	m_timer[2] =0;
-	
+
 	// TODO: Daten der "region0" werden aktuell fest gesetzt
-	
+
 	RegionData* rdata = new RegionData;
-		
+
 	rdata->m_dimx = 64;
 	rdata->m_dimy = 64;
 	rdata->m_complexity = 0.4;
@@ -96,30 +96,30 @@ bool World::init()
 	rdata->m_area_percent = 0.35;
 	rdata->m_id = 0;
 	rdata->m_name = "region0";
-	
+
 	rdata->addEnvironment(0.6,"meadow");
 	rdata->addEnvironment(1.0,"hills");
-	
+
 	rdata->m_exit_directions[NORTH] = true;
 	rdata->m_exit_directions[SOUTH] = true;
 	rdata->m_exit_directions[WEST] = false;
 	rdata->m_exit_directions[EAST] = true;
-	
+
 	RegionExit exit;
 	exit.m_shape.m_type = Shape::RECT;
 	exit.m_shape.m_extent = Vector(4,4);
 	exit.m_exit_name = "exit_south";
 	exit.m_destination_region = "region1";
 	exit.m_destination_location = "entry_north";
-	
+
 	rdata->addExit(exit);
-	
+
 	registerRegionData(rdata,0);
-	
-	
+
+
 	// Wird schon aus XML geladen
 /*	rdata = new RegionData;
-		
+
 	rdata->m_dimx = 32;
 	rdata->m_dimy = 32;
 	rdata->m_complexity = 0.4;
@@ -127,43 +127,43 @@ bool World::init()
 	rdata->m_area_percent = 0.35;
 	rdata->m_id = 1;
 	rdata->m_name = "region1";
-	
+
 	rdata->addEnvironment(0.2,"meadow");
 	rdata->addEnvironment(1.0,"hills");
-	
+
 	rdata->m_exit_directions[NORTH] = true;
 	rdata->m_exit_directions[SOUTH] = false;
 	rdata->m_exit_directions[WEST] = false;
 	rdata->m_exit_directions[EAST] = false;
-	
+
 	rdata->addObjectGroupTemplate("trees3",4,2,1.0);
 	rdata->addObjectGroupTemplate("trees2",2,5,0.7);
 	rdata->addObjectGroupTemplate("trees1",1,50,0.5);
-	
+
 	rdata->addNamedObjectGroupTemplate("test2","ort1",4);
 	rdata->addNamedObjectGroupTemplate("test1","ort2",3);
 	rdata->addNamedObjectGroupTemplate("test1","ort3",2);
-	
+
 	rdata->addSpawnGroup("lich_goblins",1);
 	rdata->addSpawnGroup("goblins",10);
 	rdata->addSpawnGroup("goblins_dogs",10);
-	
+
 	exit.m_shape.m_type = Shape::RECT;
 	exit.m_shape.m_extent = Vector(4,4);
 	exit.m_exit_name = "exit_north";
 	exit.m_destination_region = "region0";
 	exit.m_destination_location = "entry_south";
-	
+
 	rdata->addExit(exit);
-	
+
 	registerRegionData(rdata,1);*/
-	
-	
+
+
 	// Templates aus XML Laden
 	TemplateLoader templateloader;
 	std::list<RegionData*> region_list;
 	templateloader.loadRegionData("../data/world/world.xml", region_list);
-	
+
 	std::list<RegionData*>::iterator it;
 	for (it = region_list.begin(); it != region_list.end(); it++)
 	{
@@ -176,8 +176,8 @@ bool World::init()
 
 void World::createRegion(short region)
 {
-	
-	
+
+
 	DEBUG5("creating region %i",region);
 	int type = 1;
 	if (type==1)
@@ -190,34 +190,34 @@ void World::createRegion(short region)
 			ERRORMSG("no data for region %i",region);
 		}
 		rdata = it->second;
-		
+
 		srand(1000);
-		
+
 		Region* reg = MapGenerator::createRegion(rdata);
 		DEBUG5("region created %p for id %i",reg,region);
-		
+
 		// Debugging
 		reg->setReviveLocation("region0","entry_south");
 		insertRegion(reg,region);
-		
+
 		// Debugging
 		if (region ==0)
 		{
 			Event* ev;
-			
+
 			Shape s;
-			s.m_center = Vector(130,215);
+			s.m_center = Vector(130,212);
 			s.m_type = Shape::CIRCLE;
 			s.m_radius = 5;
 			reg->addArea("LichArea",s);
-			reg->addLocation("LichLocation",Vector(130,215));
-			
+			reg->addLocation("LichLocation",Vector(130,212));
+
 			ev = new Event();
 			ev->setEffect("tree = createObject('$tree', getLocation('LichLocation'))");
 			ev->setOnce();
 			reg->addEvent("create_region",ev);
-			
-			
+
+
 			ev = new Event();
 			ev->setOnce();
 			ev->setCondition("x,y = getObjectValue(player,'position') \n \
@@ -225,7 +225,7 @@ void World::createRegion(short region)
 			ev->setEffect("deleteObject(tree) \n \
 					lich = createObject('lich', getLocation('LichLocation'))");
  			reg->addEvent("player_moved",ev);
-			
+
 			ev = new Event();
 			ev->setOnce();
 			ev->setCondition("return (unit == lich)");
@@ -242,10 +242,10 @@ void World::createRegion(short region)
 		// Umgebungen erstellen
 		reg->insertEnvironment(0.6,"meadow");
 		reg->insertEnvironment(1.0,"hills");
-			
+
 		reg->addLocation("entry_south",Vector(10,10));
 		// Objekte anlegen
-		
+
 
 		// Tiles Setzen
 		for (int i=1;i<5;i++)
@@ -257,39 +257,39 @@ void World::createRegion(short region)
 		{
 			reg->setTile(TILE_WATER,i,6);
 		}
-		
-		
+
+
 		reg->createObject( "fence1", Vector(4,2));
 		reg->createObject("fence2", Vector(12,2));
 		reg->createObject( "fence3", Vector(20,2));
 		reg->createObject("fence4", Vector(28,2));
 		reg->createObject("fence5", Vector(3,22));
-		
+
 		reg->createObject("smallWall2", Vector(7.5,22));
 		reg->createObject("wall1", Vector(11,22));
 		reg->createObject("wall2", Vector(17,22));
 		reg->createObject("wall3", Vector(23,22));
 		reg->createObject( "smallWall1", Vector(26.5,22));
-		
+
 		reg->createObject( "tree1", Vector(9,13));
 		reg->createObject("tree2", Vector(10,2));
 		reg->createObject( "tree3", Vector(1,2));
-		
+
 		reg->createObject("$tree", Vector(1,8));
-		
-		
+
+
 		/*
 		WorldObject* wo=0;
 		wo = new Spawnpoint("goblins", World::getWorld()->getValidId());
 		reg->insertObject(wo, Vector(15,10));
-		
-		
+
+
 		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_MONSTER, "goblin");
 		reg->insertObject(wo, Vector(13,8));
-		
-		
-		
-		
+
+
+
+
 		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_MONSTER, "gob_dog");
 		reg->insertObject(wo, Vector(14.2,8.2));
 
@@ -305,7 +305,7 @@ void World::createRegion(short region)
 		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_MONSTER, "goblin");
 		reg->insertObject(wo, Vector(17,8.2));
 
-		
+
 
 		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_MONSTER, "goblin");
 		reg->insertObject(wo, Vector(18.5,7));
@@ -393,18 +393,18 @@ World::~World()
 {
 
 	delete m_network;
-	
-	
-	
+
+
+
 	std::map<int, Trade* >::iterator j;
 	for (j=m_trades->begin(); j!=m_trades->end();j++)
 	{
 		delete j->second;
 	}
 	delete m_trades;
-	
+
 	std::map<int, RegionData*>::iterator it;
-			
+
 	for (it = m_region_data.begin(); it != m_region_data.end(); ++it)
 	{
 		delete it->second;
@@ -427,7 +427,7 @@ Region* World::getRegion(int rid)
 {
 	std::map<int,Region*>::iterator it;
 	it = m_regions.find(rid);
-	
+
 	if (it != m_regions.end())
 	{
 		return it->second;
@@ -439,7 +439,7 @@ int World::getRegionId(std::string name)
 {
 	std::map<std::string,int>::iterator it;
 	it = m_region_name_id.find(name);
-	
+
 	if (it != m_region_name_id.end())
 	{
 		return it->second;
@@ -450,8 +450,8 @@ int World::getRegionId(std::string name)
 void World::insertRegion(Region* region, int rnr)
 {
 	DEBUG5("inserting region %i %s %p",rnr, region->getName().c_str(),region);
-	m_regions.insert(std::make_pair(rnr,region));	
-	
+	m_regions.insert(std::make_pair(rnr,region));
+
 }
 
 WorldObject::Relation World::getRelation(WorldObject::Fraction frac, WorldObject* wo)
@@ -576,7 +576,7 @@ bool World::insertPlayer(WorldObject* player, int slot)
 		m_player_slots->insert(std::make_pair(slot,player));
 	}
 	m_players->insert(std::make_pair(player->getId(),player));
-	
+
 	// Spieler in Party einfuegen
 	if (m_server)
 	{
@@ -605,7 +605,7 @@ bool World::insertPlayer(WorldObject* player, int slot)
 
 bool World::insertPlayerIntoRegion(WorldObject* player, short region, LocationName loc)
 {
-	
+
 	Region* reg = getRegion(region);
 
 	// Testen ob alle Daten vorhanden sind
@@ -621,13 +621,13 @@ bool World::insertPlayerIntoRegion(WorldObject* player, short region, LocationNa
 	if (player->getState() != WorldObject::STATE_ENTER_REGION)
 	{
 		// Spieler kann noch nicht in die Region eingefuegt werden
-		
-		
+
+
 		if (m_server)
 		{
 			// Ort zwischenspeichern
 			m_region_enter_loc[player->getId()] = loc;
-	
+
 			// Wenn die Region noch nicht existiert: erzeugen
 			if (data_missing !=0)
 			{
@@ -652,7 +652,7 @@ bool World::insertPlayerIntoRegion(WorldObject* player, short region, LocationNa
 					header.m_content = PTYPE_S2C_REGION_CHANGED;
 					header.m_number =region;
 					header.toString(&msg);
-					
+
 					WorldObjectMap::iterator it;
 					for (it = m_player_slots->begin(); it != m_player_slots->end(); it++)
 					{
@@ -661,7 +661,7 @@ bool World::insertPlayerIntoRegion(WorldObject* player, short region, LocationNa
 							m_network->pushSlotMessage(msg.getBitStream(), it->first);
 						}
 					}
-					
+
 				}
 				// Auf Datenanfrage seitens des Client warten
 				player->setState(WorldObject::STATE_REGION_DATA_WAITING);
@@ -694,7 +694,7 @@ bool World::insertPlayerIntoRegion(WorldObject* player, short region, LocationNa
 			}
 
 		}
-		
+
 		// auf Serverseite muss jetzt eventuell auf die Erzeugung der Region gewartet werden
 		if (m_server)
 		{
@@ -706,7 +706,7 @@ bool World::insertPlayerIntoRegion(WorldObject* player, short region, LocationNa
 	{
 		// Daten sind vollständig
 		Vector pos = player->getShape()->m_center;
-		
+
 		if (m_server)
 		{
 			pos = reg->getLocation(m_region_enter_loc[player->getId()] );
@@ -715,9 +715,9 @@ bool World::insertPlayerIntoRegion(WorldObject* player, short region, LocationNa
 		reg->getFreePlace(player->getShape(),player->getLayer() , pos, player);
 		reg->insertObject(player, pos,player->getShape()->m_angle);
 		DEBUG5("entry position %f %f",pos.m_x, pos.m_y);
-		
+
 		player->setState(WorldObject::STATE_ACTIVE);
-		
+
 		// bisheriges Kommando abbrechen
 		static_cast<Creature*>(player)->clearCommand();
 		static_cast<Creature*>(player)->getAction()->m_type = Action::NOACTION;
@@ -731,9 +731,9 @@ bool World::insertPlayerIntoRegion(WorldObject* player, short region, LocationNa
 
 			insertNetEvent(event);
 		}
-		
+
 		DEBUG5("player %i %p entered region %i %p",player->getId(),player, region,getRegion(region));
-		
+
 
 	}
 	return true;
@@ -811,13 +811,13 @@ void World::handleSavegame(CharConv *cv, int slot)
 
 				// die eigene ID auf Serverseite
 				msg2.toBuffer(pl->getId());
-				
+
 				// die Fraktion auf Serverseite
 				msg2.toBuffer<char>(pl->getFraction());
-				
+
 
 				m_network->pushSlotMessage(msg2.getBitStream(),slot);
-				
+
 
 				// Dem Spieler Informationen ueber alle anderen Spieler in der Welt senden
 				PackageHeader header;
@@ -862,13 +862,13 @@ void World::handleSavegame(CharConv *cv, int slot)
 					m_network->pushSlotMessage(msg2.getBitStream(),it->first);
 				}
 			}
-			
+
 			if (slot != LOCAL_SLOT)
 			{
 				// Informationen ueber Parties senden
 				PackageHeader header4;
 				header4.m_content =PTYPE_S2C_PARTY;
-				
+
 				for (int i=0; i< m_max_nr_players; i++)
 				{
 					if (m_parties[i].getNrMembers() > 0)
@@ -877,9 +877,9 @@ void World::handleSavegame(CharConv *cv, int slot)
 						header4.m_number =i;
 						CharConv msg3;
 						header4.toString(&msg3);
-						
+
 						m_parties[i].toString(&msg3);
-						
+
 						m_network->pushSlotMessage(msg3.getBitStream(),slot);
 					}
 				}
@@ -938,9 +938,9 @@ void World::handleCommand(ClientCommand* comm, int slot, float delay)
 
 void World::handleMessage(std::string msg, int slot)
 {
-	
+
 	std::string smsg = msg;
-	
+
 	// als Server: Nachricht an alle Spieler versenden
 	// als Client: Nachricht an den Server senden
 	if (m_server)
@@ -953,17 +953,17 @@ void World::handleMessage(std::string msg, int slot)
 		}
 		smsg += "] ";
 		smsg += msg;
-		
+
 		CharConv cv;
 
 		// Header anlegen
 		PackageHeader header;
 		header.m_content = PTYPE_S2C_MESSAGE; 	// Daten von Server zum Client
 		header.m_number = smsg.size();
-		
+
 		header.toString(&cv);
 		cv.toBuffer((char*) smsg.c_str(),smsg.size());
-		
+
 		// Nachricht an alle Spieler mit ausser dem Sender
 		WorldObjectMap::iterator it;
 		for (it = m_player_slots->begin(); it != m_player_slots->end(); ++it)
@@ -982,21 +982,21 @@ void World::handleMessage(std::string msg, int slot)
 		PackageHeader header;
 		header.m_content = PTYPE_C2S_MESSAGE; 	// Daten von Client zu Server
 		header.m_number = msg.size();
-		
+
 		header.toString(&cv);
 		cv.toBuffer((char*) msg.c_str(),msg.size());
-		
+
 		getNetwork()->pushSlotMessage(cv.getBitStream());
-		
+
 		smsg = "[";
 		smsg += m_local_player->getName();
 		smsg += "] ";
 		smsg += msg;
 	}
-	
-	// Nachricht einfuegen 
+
+	// Nachricht einfuegen
 	static_cast<Player*>(m_local_player)->addMessage(smsg);
-	
+
 	if (msg[0] == '$' && m_server)
 	{
 		// Cheatcode eingegeben
@@ -1004,11 +1004,11 @@ void World::handleMessage(std::string msg, int slot)
 
 		std::stringstream stream;
 		stream << msg;
-			
+
 			// $ lesen
 		char dummy;
 		stream >> dummy;
-			
+
 		std::string obj;
 		stream >> obj;
 		if (obj == "item")
@@ -1017,9 +1017,9 @@ void World::handleMessage(std::string msg, int slot)
 			std::string name="";
 			int val =0;
 			stream >> name >> val;
-				
+
 			Item::Type type = ItemFactory::getBaseType(name);
-				
+
 			Item* itm = ItemFactory::createItem(type, name,0,val);
 			if (itm != 0)
 			{
@@ -1195,10 +1195,10 @@ void World::updatePlayers()
 			}
 			m_players->erase( pl->getId());
 			m_player_slots->erase(it++);
-			
+
 			// Spieler aus seiner Party entfernen
 			pl->getParty()->removeMember(pl->getId());
-			
+
 			// aus allen Partys als Bewerber loeschen
 			for (int i=0; i<m_max_nr_players; i++)
 			{
@@ -1207,8 +1207,8 @@ void World::updatePlayers()
 					m_parties[i].removeCandidate(pl->getId());
 				}
 			}
-			
-			
+
+
 			DEBUG("player %i has quit",pl->getId());
 
 			delete pl;
@@ -1248,8 +1248,8 @@ void World::updatePlayers()
 				pl->setState(WorldObject::STATE_ACTIVE);
 			}
 		}
-		
-		
+
+
 		// Wenn aktuelle Instanz Server ist:
 		// Daten von allen verbundenen Client annehmen und verarbeiten
 		if (m_server && slot != LOCAL_SLOT)
@@ -1299,15 +1299,15 @@ void World::updatePlayers()
 
 					handleDataRequest(&req,slot);
 				}
-				
+
 				if (headerp.m_content == PTYPE_C2S_MESSAGE)
 				{
 					char* buf = new char[headerp.m_number+1];
 					buf[headerp.m_number] = 0;
 					cv->fromBuffer(buf, headerp.m_number);
-					
+
 					handleMessage(buf,slot);
-					
+
 					delete buf;
 				}
 
@@ -1415,13 +1415,13 @@ void World::updatePlayers()
 					{
 						// Daten loeschen
 					}
-					
+
 					// Daten schreiben
 					reg->setRegionData(cv,m_players);
 
 					// lokalen Spieler fuer die Region freischalten
 					m_local_player->setState(WorldObject::STATE_ENTER_REGION);
-					
+
 					// Region einfuegen
 					if (getRegion(headerp.m_number) ==0)
 					{
@@ -1436,21 +1436,21 @@ void World::updatePlayers()
 					DEBUG("ID at server %i",id);
 					m_players->clear();
 					m_local_player->setId(id);
-					
+
 					char frac;
 					cv->fromBuffer(frac);
 					m_local_player->setFraction((WorldObject::Fraction) frac);
 					DEBUG("fraction %i",frac);
-					
+
 					insertPlayer(m_local_player, LOCAL_SLOT);
 				}
-				
+
 				if (headerp.m_content == PTYPE_S2C_PARTY)
 				{
 					int id = headerp.m_number;
 					m_parties[id].fromString(cv);
 				}
-				
+
 				if (headerp.m_content == PTYPE_S2C_REGION_CHANGED)
 				{
 					DEBUG("notified that region changed to %i",headerp.m_number);
@@ -1481,15 +1481,15 @@ void World::updatePlayers()
 					}
 
 				}
-				
+
 				if (headerp.m_content == PTYPE_S2C_MESSAGE)
 				{
 					char* buf = new char[headerp.m_number+1];
 					buf[headerp.m_number] = 0;
 					cv->fromBuffer(buf, headerp.m_number);
-					
+
 					static_cast<Player*>(m_local_player)->addMessage(buf);
-					
+
 					delete buf;
 				}
 
@@ -1588,7 +1588,7 @@ bool World::writeNetEvent(Region* region,NetEvent* event, CharConv* cv)
 
 		if (event->m_type == NetEvent::OBJECT_STAT_CHANGED)
 		{
-			
+
 			if (m_players->count(event->m_id) ==1)
 			{
 				object = (*m_players)[event->m_id];
@@ -1597,7 +1597,7 @@ bool World::writeNetEvent(Region* region,NetEvent* event, CharConv* cv)
 			{
 				object =region->getObject(event->m_id);
 			}
-			
+
 			if (object !=0)
 			{
 				object->writeNetEvent(event,cv);
@@ -1641,7 +1641,7 @@ bool World::writeNetEvent(Region* region,NetEvent* event, CharConv* cv)
 
 	if (event->m_type == NetEvent::PLAYER_CHANGED_REGION)
 	{
-		
+
 		object = (*m_players)[event->m_id];
 		if (object !=0)
 		{
@@ -1663,11 +1663,11 @@ bool World::writeNetEvent(Region* region,NetEvent* event, CharConv* cv)
 			cv->toBuffer<short>((short) event->m_data);
 			static_cast<Player*>(object)->getEquipement()->getItem(event->m_data)->toString(cv);
 
-			
+
 		}
 		else
 			return false;
-		
+
 	}
 
 	if (event->m_type == NetEvent::PLAYER_ITEM_PICKED_UP)
@@ -1689,14 +1689,14 @@ bool World::writeNetEvent(Region* region,NetEvent* event, CharConv* cv)
 		}
 		else
 			return false;
-		
+
 	}
 
 	if (event->m_type ==  NetEvent::ITEM_REMOVED)
 	{
 		DEBUG("removing item %i",event->m_id);
 	}
-	
+
 	if (event->m_type == NetEvent::PLAYER_PARTY_CHANGED)
 	{
 		object = (*m_players)[event->m_id];
@@ -1708,7 +1708,7 @@ bool World::writeNetEvent(Region* region,NetEvent* event, CharConv* cv)
 		else
 			return false;
 	}
-	
+
 	if (event->m_type == NetEvent::PLAYER_PARTY_CANDIDATE)
 	{
 		object = (*m_players)[event->m_id];
@@ -1720,13 +1720,13 @@ bool World::writeNetEvent(Region* region,NetEvent* event, CharConv* cv)
 		else
 			return false;
 	}
-	
+
 	if (event->m_type == NetEvent::PARTY_RELATION_CHANGED)
 	{
 		DEBUG("party %i changed relation to %i to %i",event->m_data, event->m_id, getParty(event->m_data)->getRelations()[event->m_id]);
 		cv->toBuffer<char>(getParty(event->m_data)->getRelations()[event->m_id]);
 	}
-	
+
 	return true;
 }
 
@@ -1742,11 +1742,11 @@ bool World::processNetEvent(Region* region,CharConv* cv)
 	WorldObject* object;
 	Projectile* proj;
 	int id;
-	
+
 	// Objekt suchen dass zu dem NetEvent gehoert
 	// Spieler werden aus der Spielerliste gesucht
 	// andere Objekte aus der Region
-	if (event.m_type == NetEvent::OBJECT_CREATED || 
+	if (event.m_type == NetEvent::OBJECT_CREATED ||
 		   event.m_type ==  NetEvent::OBJECT_STAT_CHANGED ||
 		  event.m_type ==  NetEvent::OBJECT_DESTROYED)
 	{
@@ -1768,7 +1768,7 @@ bool World::processNetEvent(Region* region,CharConv* cv)
 			}
 		}
 	}
-	
+
 	switch(event.m_type)
 	{
 		case NetEvent::OBJECT_CREATED:
@@ -1783,7 +1783,7 @@ bool World::processNetEvent(Region* region,CharConv* cv)
 			break;
 
 		case NetEvent::OBJECT_STAT_CHANGED:
-			
+
 			if (m_players->count(event.m_id) ==1)
 			{
 				object = (*m_players)[event.m_id];
@@ -1825,7 +1825,7 @@ bool World::processNetEvent(Region* region,CharConv* cv)
 				region->deleteObject(object);
 			}
 			delete object;
-			
+
 			break;
 
 		case NetEvent::PROJECTILE_CREATED:
@@ -1871,7 +1871,7 @@ bool World::processNetEvent(Region* region,CharConv* cv)
 			else
 			{
 				return false;
-			}	
+			}
 			break;
 
 
@@ -1881,7 +1881,7 @@ bool World::processNetEvent(Region* region,CharConv* cv)
 			if (m_players->count (event.m_id)>0)
 			{
 				object = (*m_players)[event.m_id];
-				
+
 				// Spieler aus seiner bisherigen Region entfernen
 				if (object->getRegion() !=0 && object != m_local_player)
 				{
@@ -1943,7 +1943,7 @@ bool World::processNetEvent(Region* region,CharConv* cv)
 			else
 			{
 				return false;
-			}	
+			}
 			break;
 
 		case NetEvent::PLAYER_NOITEM_EQUIPED:
@@ -2017,25 +2017,25 @@ bool World::processNetEvent(Region* region,CharConv* cv)
 				return false;
 			}
 			break;
-			
+
 		case NetEvent::PLAYER_PARTY_CHANGED:
 			if (m_players->count(event.m_id)>0)
 			{
 				object = (*m_players)[event.m_id];
-				
+
 				static_cast<Player*>(object)->getParty()->removeMember(object->getId());
 				char id;
 				cv->fromBuffer(id);
 				DEBUG5("player %i changed party to %i",object->getId(),id);
 				World::getWorld()->getParty( id )->addMember(object->getId());
-				
+
 			}
 			else
 			{
 				return false;
 			}
 			break;
-			
+
 		case NetEvent::PLAYER_PARTY_CANDIDATE:
 			if (m_players->count(event.m_id)>0)
 			{
@@ -2050,7 +2050,7 @@ bool World::processNetEvent(Region* region,CharConv* cv)
 				cv->fromBuffer(id);
 				DEBUG5("player %i candidate for party  %i",object->getId(),id);
 				World::getWorld()->getParty( id )->addCandidate(object->getId());
-				
+
 			}
 			else
 			{
@@ -2063,7 +2063,7 @@ bool World::processNetEvent(Region* region,CharConv* cv)
 			World::getWorld()->getParty( event.m_data )->setRelation(event.m_id, (WorldObject::Relation) rel);
 			DEBUG("party %i changed relation to %i to %i",event.m_data, event.m_id, rel);
 			break;
-			
+
 		default:
 			ERRORMSG("unknown event type %i",event.m_type);
 
@@ -2125,11 +2125,11 @@ bool World::calcBlockmat(PathfindInfo * pathinfo)
 	s.m_center = pathinfo->m_center;
 	s.m_type = Shape::RECT;
 	s.m_extent.m_y =s.m_extent.m_x = 0.5*sqs * pathinfo->m_dim;
-	
+
 	// die beiden Ecken des Suchbereiches
 	Vector c1 = pathinfo->m_center - s.m_extent;
 	Vector c2 = pathinfo->m_center + s.m_extent;
-	
+
 
 	float hb = pathinfo->m_base_size * 0.5;
 
@@ -2160,13 +2160,13 @@ bool World::calcBlockmat(PathfindInfo * pathinfo)
 
 
 			// Rand des Objektes mit X zeichnen
-			
+
 			// Mittelpunkt des Objektes im Grid
 			js = (int) floor((wos->m_center.m_y - c1.m_y)/sqs);
 			is = (int) floor((wos->m_center.m_x - c1.m_x)/sqs);
 			is = std::max(std::min(is,pathinfo->m_dim-1),0);
 			js = std::max(std::min(js,pathinfo->m_dim-1),0);
-			
+
 			// Form zum Testen auf Kollisionen
 			s2.m_center.m_y = (js+0.5)*sqs+c1.m_y;
 			s2.m_center.m_x = (is+0.5)*sqs+c1.m_x;
@@ -2185,7 +2185,7 @@ bool World::calcBlockmat(PathfindInfo * pathinfo)
 			}
 			js--;
 			s2.m_center.m_y -= sqs;
-			
+
 			// Wertigkeit des Hindernisses bestimmen
 			char val = 9;
 			if (wo->getTypeInfo()->m_type == WorldObject::TypeInfo::TYPE_MONSTER || wo->getTypeInfo()->m_type == WorldObject::TypeInfo::TYPE_PLAYER)
@@ -2204,10 +2204,10 @@ bool World::calcBlockmat(PathfindInfo * pathinfo)
 			// Hindernis eintragen
 			if (*(pathinfo->m_block->ind(is,js))<val)
 				*(pathinfo->m_block->ind(is,js)) = val;
-			
+
 
 			DEBUG5("start2 %i %i %f %f",is,js,s2.m_center.m_x,s2.m_center.m_y);
-			
+
 			// Hindernis dem Rand entlang umrunden
 			// d ist ein Zaehler fuer die aktuelle Suchrichtung
 			// wenn d 10 erreicht ist das Objekt einmal umrundet
@@ -2219,7 +2219,7 @@ bool World::calcBlockmat(PathfindInfo * pathinfo)
 
 				s2.m_center.m_x += dir[d][0];
 				s2.m_center.m_y += dir[d][1];
-				
+
 				// solange Richtung weiterdrehen bis ein Punkt im Suchraum gefunden wird
 				while ((d<=10) && (s2.m_center.m_x<c1.m_x || s2.m_center.m_y<c1.m_y ||
 				s2.m_center.m_x>c2.m_x || s2.m_center.m_y>c2.m_y))
@@ -2233,7 +2233,7 @@ bool World::calcBlockmat(PathfindInfo * pathinfo)
 				if (d==10)
 					break;
 
-				
+
 				if (wos->intersects(s2))
 				{
 					// wenn in der aktuellen Richtung man im Objekt bleibt
@@ -2273,7 +2273,7 @@ bool World::calcBlockmat(PathfindInfo * pathinfo)
 					DEBUG5("intersecting: %i %i %f %f",is,js,s2.m_center.m_x,s2.m_center.m_y);
 					if (*(pathinfo->m_block->ind(is,js))<val)
 						*(pathinfo->m_block->ind(is,js)) = val;
-					
+
 					/*
 					std::cout << "  001122334455667788990011223344556677889900001122334455667788990011223344556677889900\n";
 
@@ -2304,7 +2304,7 @@ bool World::calcBlockmat(PathfindInfo * pathinfo)
 			}
 		}
 	}
-	
+
 	/*
 	std::cout << "  001122334455667788990011223344556677889900001122334455667788990011223344556677889900\n";
 
@@ -2328,7 +2328,7 @@ bool World::calcBlockmat(PathfindInfo * pathinfo)
 	}
 	std::cout << "---------------------\n";
 	*/
-	
+
 	return true;
 }
 
