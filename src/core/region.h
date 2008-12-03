@@ -743,6 +743,14 @@ class Region
 		void insertTrigger(Trigger* trigger);
 		
 		/**
+		 * \fn void insertTimedTrigger(Trigger* trigger)
+		 * \brief Fuegt einen Trigger ein, der zeitverzoegert aktiv wird
+		 * \param trigger eingefuegter Trigger
+		 * \param time Zeit
+		 */
+		void insertTimedTrigger(Trigger* trigger, float time);
+		
+		/**
 		 * \fn void addEvent(TriggerType type, Event* event)
 		 * \brief Fuegt ein neues Event hinzu
 		 * \param trigger Typ des Triggers durch den das Event ausgeloest wird
@@ -871,6 +879,12 @@ class Region
 		 * \brief Trigger die waehrend dem aktuellen Event ausgeloest wurden
 		 */
 		std::list<Trigger*> m_triggers;
+		
+		/**
+		 * \var std::list<std::pair<float, Trigger*> > m_timed_trigger
+		 * \brief Liste der Trigger die mit Zeitverzoegerung ausgeloest werden
+		 */
+		std::list<std::pair<float, Trigger*> > m_timed_trigger;
 		
 		/**
 		 * \var std::multimap<TriggerType, Event*> m_events

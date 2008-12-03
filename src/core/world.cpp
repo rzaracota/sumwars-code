@@ -205,25 +205,22 @@ void World::createRegion(short region)
 		{
 			Event* ev;
 
-			Shape s;
-			s.m_center = Vector(130,212);
-			s.m_type = Shape::CIRCLE;
-			s.m_radius = 5;
-			reg->addArea("LichArea",s);
-			reg->addLocation("LichLocation",Vector(130,212));
-
 			ev = new Event();
-			ev->setEffect("tree = createObject('$tree', getLocation('LichLocation'))");
+			ev->setEffect("addLocation('LichLocation', 130,212) \n \
+					addArea('LichArea','circle',130,212,5) \n \
+					tree = createObject('$tree', getLocation('LichLocation')) \n \
+					");
 			ev->setOnce();
 			reg->addEvent("create_region",ev);
 
 
 			ev = new Event();
 			ev->setOnce();
-			ev->setCondition("x,y = getObjectValue(player,'position') \n \
-					return (pointIsInArea(x,y,'LichArea'))");
+			ev->setCondition("return (unitIsInArea(player,'LichArea'))");
 			ev->setEffect("deleteObject(tree) \n \
-					lich = createObject('lich', getLocation('LichLocation'))");
+					lich = createObject('lich', getLocation('LichLocation')) \n \
+					insertTrigger('testTimer') \n \
+					");
  			reg->addEvent("player_moved",ev);
 
 			ev = new Event();
@@ -231,6 +228,13 @@ void World::createRegion(short region)
 			ev->setCondition("return (unit == lich)");
 			ev->setEffect("dropItem('demon_sw', getObjectValue(lich,'position'))");
 			reg->addEvent("unit_die",ev);
+			
+			ev = new Event();
+			ev->setEffect("print('timer',var) \n \
+					startTimer('testTimer',1000) \n \
+					");
+			reg->addEvent("testTimer",ev);
+			
 		}
 	}
 	else if(type==2)

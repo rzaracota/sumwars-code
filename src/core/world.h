@@ -276,6 +276,16 @@ public:
 	 * \param name Name der Region
 	 */
 	int getRegionId(std::string name);
+	
+	/**
+	 * \fn 	Region* getRegion(std::string name)
+	 * \brief Gibt die Region aus
+	 * \param name Name der Region
+	 */
+	Region* getRegion(std::string name)
+	{
+		return getRegion(getRegionId(name));
+	}
 
 	/**
 	 * \fn Network* getNetwork()

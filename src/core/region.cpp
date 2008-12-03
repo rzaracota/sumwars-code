@@ -1168,6 +1168,21 @@ void Region::update(float time)
 	}
 	
 	// Trigger & Events abarbeiten
+	// Zeitverzoegerte Trigger
+	std::list<std::pair<float, Trigger*> > ::iterator tit, tjt;
+	for (tit = tjt = m_timed_trigger.begin(); tjt != m_timed_trigger.end(); )
+	{
+		tit = tjt;
+		++tjt;
+		
+		tit->first -= time;
+		if (tit->first<=0)
+		{
+			insertTrigger(tit->second);
+			m_timed_trigger.erase(tit);
+		}
+	}
+	
 	// Schleife ueber die Trigger
 	EventSystem::setRegion(this);
 	
@@ -1787,6 +1802,11 @@ void Region::addExit(RegionExit exit)
 void Region::insertTrigger(Trigger* trigger)
 {
 	m_triggers.push_back(trigger);
+}
+
+void Region::insertTimedTrigger(Trigger* trigger, float time)
+{
+	m_timed_trigger.push_back(std::make_pair(time,trigger));
 }
 
 void Region::addEvent(TriggerType trigger, Event* event)

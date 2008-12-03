@@ -4,7 +4,10 @@
 #include "item.h"
 
 lua_State * EventSystem::m_lua;
- Region* EventSystem::m_region;
+
+Region* EventSystem::m_region;
+ 
+Trigger*  EventSystem::m_trigger;
 
 void EventSystem::init()
 {
@@ -13,20 +16,23 @@ void EventSystem::init()
 	luaL_openlibs(m_lua);
 	
 	lua_register(m_lua, "getObjectValue", getObjectValue);
-	lua_register(m_lua, "get", getObjectValue);
-	
+	lua_register(m_lua, "get", getObjectValue);	
 	lua_register(m_lua, "setObjectValue", setObjectValue);
 	lua_register(m_lua, "set", setObjectValue);
-	
 	lua_register(m_lua, "pointIsInArea", pointIsInArea);
-	
+	lua_register(m_lua, "unitIsInArea", unitIsInArea);
 	lua_register(m_lua, "createObject", createObject);
-	
 	lua_register(m_lua, "deleteObject", deleteObject);
-	
 	lua_register(m_lua, "dropItem", dropItem);
-	
 	lua_register(m_lua, "getLocation", getLocation);
+	lua_register(m_lua, "addLocation", addLocation);
+	lua_register(m_lua, "addArea", addArea);
+	lua_register(m_lua, "startTimer",startTimer);
+	lua_register(m_lua, "insertTrigger",insertTrigger);
+	lua_register(m_lua, "addTriggerVariable", addTriggerVariable);
+	
+	m_region =0;
+	m_trigger =0;
 }
 
 void  EventSystem::cleanup()
@@ -157,6 +163,35 @@ int EventSystem::setObjectValue(lua_State *L)
 	return 0;
 }
 
+int EventSystem::unitIsInArea(lua_State *L)
+{
+	bool ret =false;
+	int argc = lua_gettop(L);
+	if (argc>=2)
+	{
+		int id = lua_tointeger(L, 1);
+		AreaName area = lua_tostring(L, 2);
+		
+		
+		if (m_region !=0)
+		{
+			WorldObject* wo = m_region->getObject(id);
+			if (wo !=0)
+			{
+				ret = m_region->getArea(area).intersects(*(wo->getShape()));
+			}
+		}
+		
+	}
+	else
+	{
+		ERRORMSG("Syntax: pointIsInArea( int unitid, string areaname)");
+	}
+	
+	lua_pushboolean(EventSystem::getLuaState() , ret);
+	return 1;
+}
+
 int EventSystem::pointIsInArea(lua_State *L)
 {
 	bool ret =false;
@@ -265,6 +300,27 @@ int EventSystem::dropItem(lua_State *L)
 	return 0;
 }
 	
+int EventSystem::addLocation(lua_State *L)
+{
+	int argc = lua_gettop(L);
+	if (argc>=3)
+	{
+		LocationName loc = lua_tostring(L, 1);
+		float x = lua_tonumber(L, 2);
+		float y = lua_tonumber(L, 3);
+		
+		if (m_region !=0)
+		{
+			m_region->addLocation(loc,Vector(x,y));
+		}
+	}
+	else
+	{
+		ERRORMSG("Syntax: addLocation(string locname, x, y)");
+	}
+	return 0;
+}
+	
 int EventSystem::getLocation(lua_State *L)
 {
 	int argc = lua_gettop(L);
@@ -283,6 +339,122 @@ int EventSystem::getLocation(lua_State *L)
 	else
 	{
 		ERRORMSG("Syntax: getLocation( string locationname");
+	}
+	return 0;
+}
+
+int EventSystem::addArea(lua_State *L)
+{
+	int argc = lua_gettop(L);
+	if (argc>=5)
+	{
+		AreaName area = lua_tostring(L, 1);
+		std::string type = lua_tostring(L, 2);
+		float x = lua_tonumber(L, 3);
+		float y = lua_tonumber(L, 4);
+		
+		Shape s;
+		s.m_center = Vector(x,y);
+		if (type == "rect" || type == "RECT")
+		{
+			float ex = lua_tonumber(L, 5);
+			float ey = lua_tonumber(L, 6);
+			s.m_type = Shape::RECT;
+			s.m_extent = Vector(ex,ey);
+		}
+		else
+		{
+			float r = lua_tonumber(L, 5);
+			s.m_type = Shape::CIRCLE;
+			s.m_radius = r;
+		}
+		
+		if (m_region !=0)
+		{
+			m_region->addArea(area,s);
+		}
+	}
+	else
+	{
+		ERRORMSG("Syntax: addLocation(string areaname, 'circle' , mx, my ,r) \n \
+				addLocation(string areaname, 'rect' , cx, cy ,ex, ey) ");
+	}
+	return 0;
+}
+
+int EventSystem::startTimer(lua_State *L)
+{
+	int argc = lua_gettop(L);
+	if (argc>=2)
+	{
+		std::string type = lua_tostring(L, 1);
+		float time = lua_tonumber(L, 2);
+		
+		if (m_region !=0)
+		{
+			m_trigger = new Trigger(type);
+			m_region->insertTimedTrigger(m_trigger,time);
+		}
+	}
+	else
+	{
+		ERRORMSG("Syntax: startTimer(triggername, time");
+	}
+	return 0;
+}
+
+int EventSystem::insertTrigger(lua_State *L)
+{
+	int argc = lua_gettop(L);
+	if (argc>=1)
+	{
+		std::string type = lua_tostring(L, 1);
+		Region* reg = m_region;
+		
+		if (argc >=2)
+		{
+			std::string regname = lua_tostring(L, 2);
+			reg = World::getWorld()->getRegion(regname);
+		}
+		
+		if (reg !=0)
+		{
+			m_trigger = new Trigger(type);
+			reg->insertTrigger(m_trigger);
+		}
+	}
+	else
+	{
+		ERRORMSG("Syntax: insertTrigger(triggername, [regionname]");
+	}
+	return 0;	
+}
+
+int EventSystem::addTriggerVariable(lua_State *L)
+{
+	int argc = lua_gettop(L);
+	if (argc>=2)
+	{
+		if (m_trigger !=0)
+		{
+			std::string name = lua_tostring(L, 1);
+			
+			if (lua_isnumber(L,2))
+			{
+				float f = lua_tonumber(L, 2);
+				m_trigger->addVariable(name,f);
+			}
+			else if (lua_isstring(L,2))
+			{
+				std::string s = lua_tostring(L, 2);
+				m_trigger->addVariable(name, s);
+			}
+			
+		}
+	}
+	else
+	{
+		ERRORMSG("Syntax: addTriggerVariable(string varname, value)");
 	}
 	return 0;
 }

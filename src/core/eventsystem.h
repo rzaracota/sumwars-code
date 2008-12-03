@@ -58,6 +58,7 @@ class EventSystem
 		static void setRegion(Region* region)
 		{
 			m_region = region;
+			m_trigger =0;
 		}
 		
 
@@ -105,6 +106,12 @@ class EventSystem
 		static int pointIsInArea(lua_State *L);
 		
 		/**
+		 * \fn static int unitIsInArea(lua_State *L)
+		 * \brief prueft, ob ein Objekt sich in einem Gebiet befindet
+		 */
+		static int unitIsInArea(lua_State *L);
+		
+		/**
 		 * \fn static int createObject(lua_State *L);
 		 * \brief erzeugt ein neues Objekt
 		 */
@@ -123,10 +130,40 @@ class EventSystem
 		static int dropItem(lua_State *L);
 		
 		/**
+		 * \fn static int addLocation(lua_State *L)
+		 * \brief Fuegt einen neuen Ort hinzu
+		 */
+		static int addLocation(lua_State *L);
+		
+		/**
 		 * \fn static int getLocation(lua_State *L)
 		 * \brief einen Ort aus
 		 */
 		static int getLocation(lua_State *L);
+		
+		/**
+		 * \fn static int addArea(lua_State *L)
+		 * \brief Fuegt einen neuen Bereich hinzu
+		 */
+		static int addArea(lua_State *L);
+		
+		/**
+		 * \fn static int startTimer(lua_State *L)
+		 * \brief startet einen Timer
+		 */
+		static int startTimer(lua_State *L);
+		
+		/**
+		 * \fn static int insertTrigger(lua_State *L)
+		 * \brief Fuegt einen Trigger ein
+		 */
+		static int insertTrigger(lua_State *L);
+		
+		/**
+		 * \fn static addTriggerVariable(lua_State *L)
+		 * \brief Fuegt zum zuletzt erzeugten Trigger eine Variable hinzu
+		 */
+		static int addTriggerVariable(lua_State *L);
 		
 	private:
 		/**
@@ -140,6 +177,12 @@ class EventSystem
 		 * \brief Region in der der aktuell alle Events ausgefuehrt werden
 		 */
 		static Region* m_region;
+		
+		/**
+		 * \var static Trigger* m_trigger
+		 * \brief der zuletzt vom Script eingefuegte Trigger
+		 */
+		static Trigger* m_trigger;
 };
 
 
