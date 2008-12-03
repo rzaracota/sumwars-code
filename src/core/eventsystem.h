@@ -110,6 +110,24 @@ class EventSystem
 		 */
 		static int createObject(lua_State *L);
 		
+		/**
+		 * \fn static int deleteObject(lua_State *L)
+		 * \brief Entfernt ein Objekt
+		 */
+		static int deleteObject(lua_State *L);
+		
+		/**
+		 * \fn static int dropItem(lua_State *L)
+		 * \brief Laesst einen Gegenstand fallen
+		 */
+		static int dropItem(lua_State *L);
+		
+		/**
+		 * \fn static int getLocation(lua_State *L)
+		 * \brief einen Ort aus
+		 */
+		static int getLocation(lua_State *L);
+		
 	private:
 		/**
 		 * \var static lua_State * m_lua

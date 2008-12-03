@@ -19,6 +19,14 @@ void EventSystem::init()
 	lua_register(m_lua, "set", setObjectValue);
 	
 	lua_register(m_lua, "pointIsInArea", pointIsInArea);
+	
+	lua_register(m_lua, "createObject", createObject);
+	
+	lua_register(m_lua, "deleteObject", deleteObject);
+	
+	lua_register(m_lua, "dropItem", dropItem);
+	
+	lua_register(m_lua, "getLocation", getLocation);
 }
 
 void  EventSystem::cleanup()
@@ -181,5 +189,101 @@ int EventSystem::pointIsInArea(lua_State *L)
 
 int EventSystem::createObject(lua_State *L)
 {
+	int ret =0;
+	int argc = lua_gettop(L);
+	if (argc>=3)
+	{
+		
+		
+		WorldObject::TypeInfo::ObjectSubtype subtype = lua_tostring(L, 1);
+		float x = lua_tonumber(L, 2);	
+		float y = lua_tonumber(L, 3);
+		
+		if (m_region!=0)
+		{
+			float angle =0;
+			if (argc>=4)
+			{
+				angle = lua_tonumber(L, 4);
+			}
+			
+			bool collcheck = true;
+			ret = m_region->createObject(subtype, Vector(x,y),angle,collcheck);
+		}
+		
+	}
+	else
+	{
+		ERRORMSG("Syntax: createObject( string subtype, float x, float y)");
+	}
 	
+	lua_pushinteger(EventSystem::getLuaState() , ret);
+	return 1;
+}
+
+int EventSystem::deleteObject(lua_State *L)
+{
+	int argc = lua_gettop(L);
+	if (argc>=1)
+	{
+		int id = lua_tointeger(L, 1);
+		if (m_region !=0)
+		{
+			m_region->deleteObject(id);
+		}
+	}
+	else
+	{
+		ERRORMSG("Syntax: deleteObject( int objectID)");
+	}
+	return 0;
+}
+	
+int EventSystem::dropItem(lua_State *L)
+{
+	int argc = lua_gettop(L);
+	if (argc>=3)
+	{
+		Item::Subtype subtype = lua_tostring(L, 1);
+		float x = lua_tonumber(L, 2);
+		float y = lua_tonumber(L, 3);
+		
+		float magic_power=0;
+		if (argc>=4)
+		{
+			magic_power= lua_tonumber(L, 4);
+		}
+		
+		if (m_region!=0)
+		{
+			m_region->dropItem(subtype, Vector(x,y), magic_power);
+		}
+	}
+	else
+	{
+		ERRORMSG("Syntax: :dropItem(string itemtype,float x,float y, [magic_power]");
+	}
+	return 0;
+}
+	
+int EventSystem::getLocation(lua_State *L)
+{
+	int argc = lua_gettop(L);
+	if (argc>=1)
+	{
+		LocationName loc = lua_tostring(L, 1);
+		if (m_region !=0)
+		{
+			Vector v = m_region->getLocation(loc);
+			lua_pushnumber(EventSystem::getLuaState() , v.m_x);
+			lua_pushnumber(EventSystem::getLuaState() , v.m_y);
+			
+			return 2;
+		}
+	}
+	else
+	{
+		ERRORMSG("Syntax: getLocation( string locationname");
+	}
+	return 0;
 }

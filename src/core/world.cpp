@@ -203,18 +203,34 @@ void World::createRegion(short region)
 		// Debugging
 		if (region ==0)
 		{
+			Event* ev;
+			
 			Shape s;
 			s.m_center = Vector(130,215);
 			s.m_type = Shape::CIRCLE;
 			s.m_radius = 5;
-			reg->addArea("testArea",s);
+			reg->addArea("LichArea",s);
+			reg->addLocation("LichLocation",Vector(130,215));
+			
+			ev = new Event();
+			ev->setEffect("tree = createObject('$tree', getLocation('LichLocation'))");
+			ev->setOnce();
+			reg->addEvent("create_region",ev);
 			
 			
-			Event* ev = new Event();
+			ev = new Event();
+			ev->setOnce();
 			ev->setCondition("x,y = getObjectValue(player,'position') \n \
-					return (pointIsInArea(x,y,'testArea'))");
-			ev->setEffect("print(player .. ' moved to', getObjectValue(player,'position'))");
+					return (pointIsInArea(x,y,'LichArea'))");
+			ev->setEffect("deleteObject(tree) \n \
+					lich = createObject('lich', getLocation('LichLocation'))");
  			reg->addEvent("player_moved",ev);
+			
+			ev = new Event();
+			ev->setOnce();
+			ev->setCondition("return (unit == lich)");
+			ev->setEffect("dropItem('demon_sw', getObjectValue(lich,'position'))");
+			reg->addEvent("unit_die",ev);
 		}
 	}
 	else if(type==2)
@@ -229,7 +245,7 @@ void World::createRegion(short region)
 			
 		reg->addLocation("entry_south",Vector(10,10));
 		// Objekte anlegen
-		WorldObject* wo=0;
+		
 
 		// Tiles Setzen
 		for (int i=1;i<5;i++)
@@ -243,30 +259,27 @@ void World::createRegion(short region)
 		}
 		
 		
-		reg->createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "fence1", Vector(4,2));
-		reg->createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "fence2", Vector(12,2));
-		reg->createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "fence3", Vector(20,2));
-		reg->createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "fence4", Vector(28,2));
-		reg->createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "fence5", Vector(3,22));
+		reg->createObject( "fence1", Vector(4,2));
+		reg->createObject("fence2", Vector(12,2));
+		reg->createObject( "fence3", Vector(20,2));
+		reg->createObject("fence4", Vector(28,2));
+		reg->createObject("fence5", Vector(3,22));
 		
-		reg->createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "smallWall2", Vector(7.5,22));
-		reg->createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "wall1", Vector(11,22));
-		reg->createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "wall2", Vector(17,22));
-		reg->createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "wall3", Vector(23,22));
-		reg->createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "smallWall1", Vector(26.5,22));
+		reg->createObject("smallWall2", Vector(7.5,22));
+		reg->createObject("wall1", Vector(11,22));
+		reg->createObject("wall2", Vector(17,22));
+		reg->createObject("wall3", Vector(23,22));
+		reg->createObject( "smallWall1", Vector(26.5,22));
 		
-		reg->createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "tree1", Vector(9,13));
-		reg->createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "tree2", Vector(10,2));
-		reg->createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "tree3", Vector(1,2));
+		reg->createObject( "tree1", Vector(9,13));
+		reg->createObject("tree2", Vector(10,2));
+		reg->createObject( "tree3", Vector(1,2));
 		
-		reg->createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT, "$tree", Vector(1,8));
+		reg->createObject("$tree", Vector(1,8));
 		
-		
-		wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_MONSTER, "lich");
-		reg->insertObject(wo, Vector(7,5));
 		
 		/*
-		
+		WorldObject* wo=0;
 		wo = new Spawnpoint("goblins", World::getWorld()->getValidId());
 		reg->insertObject(wo, Vector(15,10));
 		

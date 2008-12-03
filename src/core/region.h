@@ -328,7 +328,7 @@ class Region
 		bool insertObject (WorldObject* object, Vector pos, float angle=0, bool collision_test =false);
 		
 		/**
-		 * \fn int createObject(WorldObject::TypeInfo::ObjectType type, ObjectTemplateType generictype, Vector pos, float angle=0, bool collision_test =false)
+		 * \fn int createObject(ObjectTemplateType generictype, Vector pos, float angle=0, bool collision_test =false)
 		 * \brief Erstellt ein neues Objekt und fuegt es an der angegebenen Stelle ein
 		 * \param type Typ des neuen Objekts
 		 * \param generictype Subtyp des neuen Objekts, kann generisch sein
@@ -337,7 +337,7 @@ class Region
 		 * \param collision_test wenn auf true gesetzt, wird geprueft ob das Objekt mit einem anderen kollidiert und die Positions in dem Fall leicht geaendert
 		 * \return ID des neu erstellten Objekts
 		 */
-		int createObject(WorldObject::TypeInfo::ObjectType type, ObjectTemplateType generictype, Vector pos, float angle=0, bool collision_test =false);
+		int createObject(ObjectTemplateType generictype, Vector pos, float angle=0, bool collision_test =false);
 		
 		/**
 		 * \fn void createObjectGroup(ObjectGroupTemplateName name, Vector position, float angle=0)
@@ -474,6 +474,12 @@ class Region
 		 */
 		bool  deleteObject (WorldObject* object);
 
+		/**
+		 * \fn bool deleteObject(int id)
+		 * \brief Loescht das Objekt mit der angegebenen ID
+		 */
+		bool deleteObject(int id);
+		
 		 /**
 		 * \fn moveObject(WorldObject* object, Vector newpos)
 		 * \brief verschiebt ein WorldObject an den Punkt (x,y)
@@ -524,7 +530,15 @@ class Region
 		 */
 		bool dropItem(Item* item, Vector pos);
 
-
+		/**
+		 * \fn bool dropItem(Item::Subtype subtype, Vector pos,int magic_power=0)
+		 * \brief Erzeugt ein Item mit dem angegebenen Typ und laesst es fallen
+		 * \param subtype Typ des Gegenstandes
+		 * \param pos Position an der der Gegenstand fallen gelassen wird
+		 * \param magic_power Verzauberung des Gegenstandes
+		 */
+		bool dropItem(Item::Subtype subtype, Vector pos, int magic_power=0);
+		
 		/**
 		 * \fn Item* getItemAt(Vector pos)
 		 * \param pos Ort an dem gesucht wird

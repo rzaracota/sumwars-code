@@ -647,7 +647,7 @@ bool Region::insertObject (WorldObject* object, Vector pos, float angle, bool co
 	return result;
 }
 
-int Region::createObject(WorldObject::TypeInfo::ObjectType type, ObjectTemplateType generictype, Vector pos, float angle, bool collision_test)
+int Region::createObject(ObjectTemplateType generictype, Vector pos, float angle, bool collision_test)
 {
 	// Umgebung erfahren
 	EnvironmentName env = getEnvironment(pos);
@@ -657,6 +657,14 @@ int Region::createObject(WorldObject::TypeInfo::ObjectType type, ObjectTemplateT
 	if (subtype == "")
 	{
 		DEBUG("no subtype found for generictype %s",generictype.c_str());
+		return 0;
+	}
+	
+	// Basistyp ermitteln
+	WorldObject::TypeInfo::ObjectType type = ObjectFactory::getObjectBaseType(subtype);
+	if (type == WorldObject::TypeInfo::TYPE_NONE)
+	{
+		DEBUG("no base type for subtype %s",subtype.c_str());
 		return 0;
 	}
 
@@ -705,7 +713,7 @@ void Region::createObjectGroup(ObjectGroupTemplateName templname, Vector positio
 				pos += position;
 
 
-				int id = createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT,gt->m_type, pos, angle+gt->m_angle);
+				int id = createObject(gt->m_type, pos, angle+gt->m_angle);
 				DEBUG5("inserting object %s at %f %f with id %i",gt->m_type.c_str(),pos.m_x, pos.m_y,id);
 
 			}
@@ -750,7 +758,7 @@ void Region::createMonsterGroup(MonsterGroupName mgname, Vector position)
 
 			if (Random::random() < mt->m_prob)
 			{
-				int id = createObject(WorldObject::TypeInfo::TYPE_MONSTER,mt->m_subtype, pos, 0 ,true);
+				int id = createObject(mt->m_subtype, pos, 0 ,true);
 				DEBUG5("inserting monster %s at %f %f with id %i",mt->m_subtype.c_str(),pos.m_x, pos.m_y,id);
 			}
 		}
@@ -777,6 +785,17 @@ bool  Region::deleteObject (WorldObject* object)
 {
 	bool result = true;
 
+	if (object == 0)
+		return false;
+	
+	if (object->getTypeInfo()->m_type != WorldObject::TypeInfo::TYPE_PLAYER)
+	{
+		NetEvent event;
+		event.m_type = NetEvent::OBJECT_DESTROYED;
+		event.m_id = object->getId();
+		insertNetEvent(event);
+	}
+	
 	 // aus dem Grid loeschen
 	int x = object->getGridLocation()->m_grid_x;
 	int y = object->getGridLocation()->m_grid_y;
@@ -811,6 +830,20 @@ bool  Region::deleteObject (WorldObject* object)
 	}
 
 	return result;
+}
+
+bool Region::deleteObject(int id)
+{
+	WorldObject* wo = getObject(id);
+	if (wo !=0)
+	{
+		return deleteObject(wo);
+	}
+	else
+	{
+		DEBUG("no object with id %i",id);
+	}
+	return false;
 }
 
 bool Region::moveObject(WorldObject* object, Vector pos)
@@ -881,6 +914,9 @@ bool Region::changeObjectGroup(WorldObject* object,WorldObject::Group group )
 
 void Region::deleteProjectile(Projectile* proj)
 {
+	if (proj ==0)
+		return;
+	
 	int id = proj->getId();
 
 	if (m_projectiles->count(id)!=0)
@@ -926,11 +962,7 @@ void Region::update(float time)
 				if (object->getTypeInfo()->m_type != WorldObject::TypeInfo::TYPE_PLAYER)
 				{
 					DEBUG5("Objekt gelöscht: %i \n",object->getId());
-					NetEvent event;
-					event.m_type = NetEvent::OBJECT_DESTROYED;
-					event.m_id = object->getId();
-					insertNetEvent(event);
-
+					
 					++iter;
 					object->destroy();
 					deleteObject(object);
@@ -1121,7 +1153,7 @@ void Region::update(float time)
 		TriggerType type;
 		type = m_triggers.front()->getType();
 		
-		DEBUG("trigger: %s",type.c_str());
+		DEBUG5("trigger: %s",type.c_str());
 		
 		// Schleife ueber die ausgeloesten Events
 		it = m_events.lower_bound(type);
@@ -1136,6 +1168,9 @@ void Region::update(float time)
 			
 			// Event ausfuehren
 			bool ret = EventSystem::executeEvent(jt->second);
+			
+			if (ret)
+				DEBUG("event on trigger: %s",type.c_str());
 			
 			// einmalige Ereignisse loeschen, wenn erfolgreich ausgefuehrt
 			if (jt->second->getOnce() &&  ret)
@@ -1439,7 +1474,9 @@ bool  Region::dropItem(Item* item, Vector pos)
 	int i;
 	fields.push(sx*10000+sy);
 
-
+  	// true, solange alle Felder von festen Objekten blockiert sind
+	bool fixblock = true;
+	
 	// Flaeche auf die das Item gedroppt wird
 	Shape s;
 	s.m_type= Shape::RECT;
@@ -1470,11 +1507,18 @@ bool  Region::dropItem(Item* item, Vector pos)
 		{
 			// Objekt im Weg
 			res.clear();
-			continue;
+
+			// wenn alle bisherigen Plaetze von festen Objekten blockiert warten trotzdem weitersuchen
+			if (!fixblock)
+				continue;
+		}
+		else
+		{
+			fixblock = false;
 		}
 
 		// Testen, ob dort nicht schon ein Item liegt
-		if (m_drop_item_locations->find(i) == m_drop_item_locations->end())
+		if (!fixblock && m_drop_item_locations->find(i) == m_drop_item_locations->end())
 		{
 			DEBUG5("field is free");
 			// Stelle ist frei
@@ -1554,6 +1598,27 @@ bool  Region::dropItem(Item* item, Vector pos)
 	return false;
 
 }
+
+bool Region::dropItem(Item::Subtype subtype, Vector pos, int magic_power)
+{
+		
+	Item::Type type = ItemFactory::getBaseType(subtype);
+	if (type == Item::NOITEM)
+	{
+		return false;
+	}
+	
+	Item* item= ItemFactory::createItem(type,subtype,0,magic_power);
+	DEBUG("drop item %s at %f %f %p",subtype.c_str(),pos.m_x,pos.m_y,item);
+	
+	if (item !=0)
+	{
+		return dropItem(item, pos);
+	}
+	
+	return false;
+}
+
 
 Item*  Region::getItemAt(Vector pos)
 {

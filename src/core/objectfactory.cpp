@@ -24,6 +24,8 @@ std::map<ObjectGroupTemplateName, ObjectGroupTemplate*> ObjectFactory::m_object_
 
 std::map< MonsterGroupName, MonsterGroup*>  ObjectFactory::m_monster_groups;
 
+std::map<WorldObject::TypeInfo::ObjectSubtype, WorldObject::TypeInfo::ObjectType> ObjectFactory::m_object_types;
+
 
 WorldObject::TypeInfo::ObjectSubtype ObjectTemplate::getObject(EnvironmentName env)
 {
@@ -187,15 +189,28 @@ MonsterGroup* ObjectFactory::getMonsterGroup(MonsterGroupName name)
 	return it->second;
 }
 
+WorldObject::TypeInfo::ObjectType ObjectFactory::getObjectBaseType(WorldObject::TypeInfo::ObjectSubtype subtype)
+{
+	std::map<WorldObject::TypeInfo::ObjectSubtype, WorldObject::TypeInfo::ObjectType>::iterator it;
+	it = m_object_types.find(subtype);
+	if (it != m_object_types.end())
+		return it->second;
+	
+	return WorldObject::TypeInfo::TYPE_NONE;
+}
+
 
 void ObjectFactory::registerMonster(WorldObject::TypeInfo::ObjectSubtype subtype, MonsterBasicData* data)
 {
+	m_object_types.insert(std::make_pair(subtype, WorldObject::TypeInfo::TYPE_MONSTER));
+	
 	DEBUG5("registered monster for subtype %s",subtype.c_str());
-	m_monster_data.insert(make_pair(subtype,data));
+	m_monster_data.insert(std::make_pair(subtype,data));
 }
 
 void ObjectFactory::registerFixedObject(WorldObject::TypeInfo::ObjectSubtype subtype, FixedObjectData* data)
 {
+	m_object_types.insert(std::make_pair(subtype, WorldObject::TypeInfo::TYPE_FIXED_OBJECT));
 	m_fixed_object_data.insert(std::make_pair(subtype,data));
 }
 

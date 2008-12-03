@@ -273,6 +273,14 @@ class ObjectFactory
 	static MonsterGroup* getMonsterGroup(MonsterGroupName name);
 	
 	/**
+	 * \fn static WorldObject::TypeInfo::ObjectType getObjectBaseType(WorldObject::TypeInfo::Object
+	Subtype subtype)
+	 * \brief Gibt den Basistyp des Objekts aus
+	 * \param subtype Subtyp des Objekts
+	 */
+	static WorldObject::TypeInfo::ObjectType getObjectBaseType(WorldObject::TypeInfo::ObjectSubtype subtype);
+	
+	/**
 	 * \fn Laedt die Daten zu Monstern aus der Datei
 	 * \param file Monster XML Datei
 	 */
@@ -341,6 +349,12 @@ class ObjectFactory
 	 * \brief Liste von Monstern die von Spawnpoints erzeugt werden
 	 */
 	static std::map< MonsterGroupName, MonsterGroup*>  m_monster_groups;
+	
+	/**
+	 * \var static std::map<WorldObject::TypeInfo::ObjectSubtype, WorldObject::TypeInfo::ObjectType> m_object_types
+	 * \brief Typen der Objekte
+	 */
+	static std::map<WorldObject::TypeInfo::ObjectSubtype, WorldObject::TypeInfo::ObjectType> m_object_types;
 	
 	/**
 	 * \fn static registerMonster(WorldObject::TypeInfo::ObjectSubtype subtype, MonsterBasicData* data)
