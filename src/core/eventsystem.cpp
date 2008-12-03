@@ -207,8 +207,7 @@ int EventSystem::createObject(lua_State *L)
 				angle = lua_tonumber(L, 4);
 			}
 			
-			bool collcheck = true;
-			ret = m_region->createObject(subtype, Vector(x,y),angle,collcheck);
+			ret = m_region->createObject(subtype, Vector(x,y),angle, WorldObject::STATE_AUTO);
 		}
 		
 	}

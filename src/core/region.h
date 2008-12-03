@@ -328,16 +328,16 @@ class Region
 		bool insertObject (WorldObject* object, Vector pos, float angle=0, bool collision_test =false);
 		
 		/**
-		 * \fn int createObject(ObjectTemplateType generictype, Vector pos, float angle=0, bool collision_test =false)
+		 * \fn int createObject(ObjectTemplateType generictype, Vector pos, float angle=0, WorldObject::State state = WorldObject::STATE_ACTIVE)
 		 * \brief Erstellt ein neues Objekt und fuegt es an der angegebenen Stelle ein
 		 * \param type Typ des neuen Objekts
 		 * \param generictype Subtyp des neuen Objekts, kann generisch sein
 		 * \param pos Position an der das Objekt eingefuegt wird
 		 * \param angle Drehwinkel des Objektes
-		 * \param collision_test wenn auf true gesetzt, wird geprueft ob das Objekt mit einem anderen kollidiert und die Positions in dem Fall leicht geaendert
+		 * \param state Zustand in dem das Objekt erzeugt wird
 		 * \return ID des neu erstellten Objekts
 		 */
-		int createObject(ObjectTemplateType generictype, Vector pos, float angle=0, bool collision_test =false);
+		int createObject(ObjectTemplateType generictype, Vector pos, float angle=0, WorldObject::State state = WorldObject::STATE_NONE);
 		
 		/**
 		 * \fn void createObjectGroup(ObjectGroupTemplateName name, Vector position, float angle=0)

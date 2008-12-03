@@ -400,9 +400,9 @@ void  Scene::updateObjects()
 	s.m_type = Shape::RECT;
 	s.m_extent = Vector(20,20);
 
-	player->getRegion()->getObjectsInShape(&s,&objs, WorldObject::LAYER_ALL,WorldObject::CREATURE);
-	player->getRegion()->getObjectsInShape(&s,&objs, WorldObject::LAYER_ALL,WorldObject::DEAD);
-
+	//player->getRegion()->getObjectsInShape(&s,&objs, WorldObject::LAYER_ALL,WorldObject::CREATURE);
+	//player->getRegion()->getObjectsInShape(&s,&objs, WorldObject::LAYER_ALL,WorldObject::DEAD);
+	player->getRegion()->getObjectsInShape(&s,&objs);
 
 	// Liste der aktuell in der Szene vorhanden Objekte durchmustern
 	std::map<int, string>::iterator it2;
@@ -431,6 +431,11 @@ void  Scene::updateObjects()
 	for (it = objs.begin();it != objs.end(); ++it)
 	{
 		obj = *it;
+		
+		if (obj->getState() == WorldObject::STATE_STATIC)
+			continue;
+		
+		
 		// Darstellung fuer das Objekt aktualisieren
 		updateObject(obj);
 	}
@@ -524,8 +529,7 @@ void Scene::updateObject(WorldObject* obj)
 	{
 		// Objekt existiert noch nicht in der Szene
 
-		// in die Liste der Objekte einfuegen
-		m_objects->insert(std::make_pair(obj->getId(),name));
+		
 
 		//Objekt anlegen
 		createObject(obj,name);
@@ -988,6 +992,12 @@ void Scene::deleteObject(std::string name)
 
 void Scene::createObject(WorldObject* obj,std::string& name, bool is_static)
 {
+	if (!is_static)
+	{
+		// in die Liste der Objekte einfuegen
+		m_objects->insert(std::make_pair(obj->getId(),name));
+	}
+	
 	Timer timer;
 	timer.start();
 
@@ -1418,7 +1428,7 @@ void Scene::createScene()
 		DEBUG5("create static object %s",name.c_str());
 
 		// Objekt in der Szene erzeugen
-		createObject((*it),name,true);
+		createObject((*it),name, ((*it)->getState() == WorldObject::STATE_STATIC));
 
 	}
 

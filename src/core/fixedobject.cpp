@@ -47,6 +47,7 @@ bool FixedObject::init()
 	//eigene Initialisierung
 	getTypeInfo()->m_type = TypeInfo::TYPE_FIXED_OBJECT;
 
+	setState(STATE_STATIC);
 	return true;
 }
 

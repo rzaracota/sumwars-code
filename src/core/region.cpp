@@ -560,7 +560,7 @@ void Region::getObjectsOnLine(Line& line,  WorldObjectList* result,short layer, 
 }
 
 
-bool Region::insertObject (WorldObject* object, Vector pos, float angle, bool collision_test)
+bool Region::insertObject(WorldObject* object, Vector pos, float angle, bool collision_test)
 {
 	bool result = true;
 
@@ -647,7 +647,7 @@ bool Region::insertObject (WorldObject* object, Vector pos, float angle, bool co
 	return result;
 }
 
-int Region::createObject(ObjectTemplateType generictype, Vector pos, float angle, bool collision_test)
+int Region::createObject(ObjectTemplateType generictype, Vector pos, float angle, WorldObject::State state)
 {
 	// Umgebung erfahren
 	EnvironmentName env = getEnvironment(pos);
@@ -659,6 +659,8 @@ int Region::createObject(ObjectTemplateType generictype, Vector pos, float angle
 		DEBUG("no subtype found for generictype %s",generictype.c_str());
 		return 0;
 	}
+	
+	bool collision_test=true;
 	
 	// Basistyp ermitteln
 	WorldObject::TypeInfo::ObjectType type = ObjectFactory::getObjectBaseType(subtype);
@@ -677,6 +679,29 @@ int Region::createObject(ObjectTemplateType generictype, Vector pos, float angle
 		return 0;
 	}
 
+	if (state != WorldObject::STATE_NONE)
+	{
+		object->setState(state);
+	}
+	
+	if (state == WorldObject::STATE_AUTO)
+	{
+		if (object->getTypeInfo()->m_type == WorldObject::TypeInfo::TYPE_FIXED_OBJECT)
+		{
+			object->setState(WorldObject::STATE_INACTIVE);
+		}
+		else
+		{
+			object->setState(WorldObject::STATE_ACTIVE);
+		}
+	}
+	
+	if (object->getState() == WorldObject::STATE_STATIC)
+	{
+		collision_test= false;
+	}
+	
+	
 	// Objekt einfuegen
 	bool ret = insertObject(object,pos,angle,collision_test);
 	if (!ret)
@@ -758,7 +783,7 @@ void Region::createMonsterGroup(MonsterGroupName mgname, Vector position)
 
 			if (Random::random() < mt->m_prob)
 			{
-				int id = createObject(mt->m_subtype, pos, 0 ,true);
+				int id = createObject(mt->m_subtype, pos);
 				DEBUG5("inserting monster %s at %f %f with id %i",mt->m_subtype.c_str(),pos.m_x, pos.m_y,id);
 			}
 		}
@@ -1609,7 +1634,7 @@ bool Region::dropItem(Item::Subtype subtype, Vector pos, int magic_power)
 	}
 	
 	Item* item= ItemFactory::createItem(type,subtype,0,magic_power);
-	DEBUG("drop item %s at %f %f %p",subtype.c_str(),pos.m_x,pos.m_y,item);
+	DEBUG5("drop item %s at %f %f %p",subtype.c_str(),pos.m_x,pos.m_y,item);
 	
 	if (item !=0)
 	{
