@@ -3360,7 +3360,7 @@ void Creature::takeDamage(Damage* d)
 
 
 		// Chance zu blocken ist 1 - Attackewert / Blockwert
-		if (d->m_attack<block)
+		if (d->m_attack>0 && block>0 && d->m_attack<block)
 		{
 			if (rand()*rez>d->m_attack/block)
 			{
@@ -3413,7 +3413,7 @@ void Creature::takeDamage(Damage* d)
 		armor *=1.5;
 
 
-	if (armor>d->m_power && !(d->m_special_flags & Damage::IGNORE_ARMOR))
+	if (d->m_power>0 && armor>0 && armor>d->m_power && !(d->m_special_flags & Damage::IGNORE_ARMOR))
 	{
 		dmgt = dmgt*d->m_power/armor;
 	}

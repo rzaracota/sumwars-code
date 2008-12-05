@@ -758,6 +758,16 @@ class Region
 		 */
 		void addEvent(TriggerType trigger, Event* event);
 		
+		/**
+		 * \fn Damage& getDamageObject(std::string name)
+		 * \brief Gibt das Schadensobjekt mit dem angegebenen Name aus. Wenn das Objekt noch nicht existierte wird es angelegt
+		 * \param name Name
+		 */
+		Damage& getDamageObject(std::string name)
+		{
+			return m_damage_objects[name];
+		}
+		
 	private:
 		/**
 		* \var m_dimx
@@ -891,6 +901,12 @@ class Region
 		 * \brief Liste der registrierten Events, aufgelistet nach dem Trigger durch den sie ausgeloest werden
 		 */
 		std::multimap<TriggerType, Event*> m_events;
+		
+		/**
+		 * \var std::map<std::string,Damage> m_damage_objects
+		 * \brief Liste der Schadensobjekte
+		 */
+		std::map<std::string,Damage> m_damage_objects;
 
 };
 

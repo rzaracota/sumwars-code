@@ -30,6 +30,9 @@ void EventSystem::init()
 	lua_register(m_lua, "startTimer",startTimer);
 	lua_register(m_lua, "insertTrigger",insertTrigger);
 	lua_register(m_lua, "addTriggerVariable", addTriggerVariable);
+	lua_register(m_lua, "setDamageValue", setDamageValue);
+	lua_register(m_lua, "getDamageValue", getDamageValue);
+	lua_register(m_lua, "createProjectile", createProjectile);
 	
 	m_region =0;
 	m_trigger =0;
@@ -160,6 +163,148 @@ int EventSystem::setObjectValue(lua_State *L)
 		ERRORMSG("Syntax: setObjectValue( int id, string valname, value)");
 	}
 	
+	return 0;
+}
+
+int EventSystem::getDamageValue(lua_State *L)
+{
+	int ret =0;
+	int argc = lua_gettop(L);
+	if (argc>=2)
+	{
+		std::string dmgname = lua_tostring(L, 1);
+		std::string valname = lua_tostring(L, 2);
+		
+		if (m_region !=0)
+		{
+			ret = m_region->getDamageObject(dmgname).getValue(valname);
+		}
+	}
+	else
+	{
+		ERRORMSG("Syntax: getDamageValue( string damagename, string valname)");
+	}
+	
+	return ret;
+}
+
+int EventSystem::setDamageValue(lua_State *L)
+{
+	int argc = lua_gettop(L);
+	if (argc>=3)
+	{
+		std::string dmgname = lua_tostring(L, 1);
+		std::string valname = lua_tostring(L, 2);
+		
+		if (m_region !=0)
+		{
+			m_region->getDamageObject(dmgname).setValue(valname);
+		}
+	}
+	else
+	{
+		ERRORMSG("Syntax: setDamageValue( string damagename, string valname, value, [value])");
+	}
+	
+	return 0;
+}
+
+int EventSystem::createProjectile(lua_State *L)
+{
+	int argc = lua_gettop(L);
+	if (argc >= 4)
+	{
+		if (m_region !=0)
+		{
+			std::string tname = lua_tostring(L, 1);
+			std::string dmgname = lua_tostring(L, 2);
+			float sx = lua_tonumber(L, 3);
+			float sy = lua_tonumber(L, 4);
+		
+			float speed = 10.0;
+			Vector pos(sx,sy);
+			DEBUG("number of arguments %i",argc);
+			
+			DEBUG("name %s dmg %s %f %f",tname.c_str(), dmgname.c_str(),sx,sy);
+			
+			// Typ ermitteln
+			Projectile::ProjectileType type = Projectile::ARROW;
+			if (tname =="arrow") type = Projectile::ARROW;
+			else if (tname =="magic_arrow") type = Projectile::MAGIC_ARROW;
+			else if (tname =="fire_bolt") type = Projectile::FIRE_BOLT;
+			else if (tname =="fire_ball") type = Projectile::FIRE_BALL ;
+			else if (tname =="fire_wall") type = Projectile::FIRE_WALL;
+			else if (tname =="fire_wave") type = Projectile:: FIRE_WAVE;
+			else if (tname =="ice_bolt") type = Projectile::ICE_BOLT;
+			else if (tname =="blizzard") type = Projectile::BLIZZARD;
+			else if (tname =="ice_ring") type = Projectile:: ICE_RING;
+			else if (tname =="freeze") type = Projectile:: FREEZE;
+			else if (tname =="lightning") type = Projectile::LIGHTNING;
+			else if (tname =="thunderstorm") type = Projectile:: THUNDERSTORM ;
+			else if (tname =="chain_lightning") type = Projectile::CHAIN_LIGHTNING;
+			else if (tname =="static_shield") type = Projectile::STATIC_SHIELD;
+			else if (tname =="fire_arrow") type = Projectile::FIRE_ARROW;
+			else if (tname =="ice_arrow") type = Projectile::ICE_ARROW ;
+			else if (tname =="wind_arrow") type = Projectile::WIND_ARROW;
+			else if (tname =="guided_arrow") type = Projectile::GUIDED_ARROW;
+			else if (tname =="explosion") type = Projectile::EXPLOSION;
+			else if (tname =="fire_explosion") type = Projectile:: FIRE_EXPLOSION;
+			else if (tname =="ice_explosion") type = Projectile::ICE_EXPLOSION;
+			else if (tname =="wind_explosion") type = Projectile::WIND_EXPLOSION;
+			else if (tname =="light_beam") type = Projectile:: LIGHT_BEAM ;
+			else if (tname =="elem_explosion") type = Projectile::ELEM_EXPLOSION;
+			else if (tname =="acid") type = Projectile:: ACID;
+			else if (tname =="divine_beam") type = Projectile::DIVINE_BEAM;
+			else if (tname =="hypnosis") type = Projectile::HYPNOSIS;
+			
+			// Schaden
+			Damage* dmg = &(m_region->getDamageObject(dmgname));
+			
+			// Fraktion ermitteln
+			WorldObject::Fraction fr = WorldObject::FRAC_HOSTILE_TO_ALL;
+			WorldObject* wo = m_region->getObject(dmg->m_attacker_id);
+			if (wo !=0)
+			{
+				fr = wo->getFraction();
+			}
+			
+			// Projektil erzeugen
+			Projectile* pr = new Projectile(type, fr, World::getWorld()->getValidProjectileId());
+			memcpy(pr->getDamage(),dmg,sizeof(Damage));
+			
+			// Richtung, Geschwindigkeit ermitteln
+			if (argc>=6)
+			{
+				float gx = lua_tonumber(L, 5);
+				float gy = lua_tonumber(L, 6);
+				
+				Vector goal(gx,gy);
+				Vector dir = goal - pos;
+				dir.normalize();
+				
+				if (argc>=7)
+				{
+					speed = lua_tonumber(L, 7);
+				}
+				
+				// Geschwindigkeit wird in m/ms gemessen
+				pr->setSpeed(dir *speed/1000);
+				
+				if (argc>=8)
+				{
+					float dist = lua_tonumber(L, 8);
+					pos += dir*dist;
+				}
+			}
+			
+			m_region->insertProjectile(pr,pos);
+		}
+		
+	}
+	else
+	{
+		ERRORMSG("Syntax: createProjectile( string type, string dmgname, startx, starty, [goalx, goaly] , [speed], [dist])");
+	}
 	return 0;
 }
 

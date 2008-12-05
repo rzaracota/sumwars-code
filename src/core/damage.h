@@ -199,6 +199,20 @@ struct Damage
 	 * \param usage Gibt an wofuer die Beschreibung verwendet wird (beeinflusst welche Daten angegeben werden)
 	 */
 	std::string getDamageString(Usage usage= NORMAL);
+	
+	/**
+	 * \fn int getValue(std::string valname)
+	 * \brief Schiebt den gewuenschten Attributwert eines Objektes auf den Lua Stack
+	 * \param valname Name des Wertes
+	 */
+	int getValue(std::string valname);
+	
+	/**
+	 * \fn virtual bool setValue(std::string valname)
+	 * \brief Setzt den gewuenschten Attributwert eines Objektes
+	 * \param valname Name des Wertes
+	 */
+	bool setValue(std::string valname);
 };
 	
 #endif

@@ -100,6 +100,27 @@ class EventSystem
 		static int setObjectValue(lua_State *L);
 		
 		/**
+		 * \fn static int getDamageValue(lua_State *L)
+		 * \brief Setzt einen Wert des Schadensobjekts
+		 * \param L Lua Status
+		 */
+		static int getDamageValue(lua_State *L);
+		
+		/**
+		 * \fn static int getDamageValue(lua_State *L)
+		 * \brief Schiebt einen Wert des Schadensobjekts auf den Stack
+		 * \param L Lua Status
+		 */
+		static int setDamageValue(lua_State *L);
+		
+		/**
+		 * \fn static int createProjectile(lua_State *L)
+		 * \brief Erzeugt ein Projektil
+		 * \param L Lua Status
+		 */
+		static int createProjectile(lua_State *L);
+		
+		/**
 		 * \fn static int pointIsInArea(lua_State *L)
 		 * \brief prueft, ob ein Objekt sich in einem Gebiet befindet
 		 */

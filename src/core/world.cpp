@@ -207,13 +207,23 @@ void World::createRegion(short region)
 
 			ev = new Event();
 			ev->setEffect("addLocation('LichLocation', 130,212) \n \
-					addArea('LichArea','circle',130,212,5) \n \
+					addArea('LichArea','circle',130,212,6) \n \
 					tree = createObject('$tree', getLocation('LichLocation')) \n \
+					setDamageValue('trapdmg','fire_dmg',5,10) \n \
 					");
 			ev->setOnce();
 			reg->addEvent("create_region",ev);
 
-
+			ev = new Event();
+			ev->setOnce();
+			ev->setCondition("return (unitIsInArea(player,'LichArea'))");
+			ev->setEffect("setDamageValue('trapdmg','fire_dmg',5,10) \n \
+					createProjectile('fire_ball','trapdmg',getObjectValue(tree,'position')) \n \
+					deleteObject(tree) \n \
+					");
+			reg->addEvent("player_moved",ev);
+			
+			/*
 			ev = new Event();
 			ev->setOnce();
 			ev->setCondition("return (unitIsInArea(player,'LichArea'))");
@@ -228,13 +238,13 @@ void World::createRegion(short region)
 			ev->setCondition("return (unit == lich)");
 			ev->setEffect("dropItem('demon_sw', getObjectValue(lich,'position'))");
 			reg->addEvent("unit_die",ev);
+			*/
 			
 			ev = new Event();
 			ev->setEffect("print('timer',var) \n \
 					startTimer('testTimer',1000) \n \
 					");
 			reg->addEvent("testTimer",ev);
-			
 		}
 	}
 	else if(type==2)
