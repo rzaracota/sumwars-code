@@ -389,8 +389,14 @@ bool Region::getObjectsInShape( Shape* shape,  WorldObjectList* result,short lay
 	{
 		// Wenn nur nach Spielern gesucht ist, dann nur die Liste der Spieler durchsuchen
 
-		// TODO: einbauen
-
+		WorldObjectMap::iterator it;
+		for (it = m_players->begin(); it != m_players->end(); ++it)
+		{
+ 			if (shape->intersects(*(it->second->getShape()) ) && it->second != omit)
+			{
+				result->push_back(it->second);
+			}
+		}
 	}
 	else
 	{

@@ -33,6 +33,8 @@ void EventSystem::init()
 	lua_register(m_lua, "setDamageValue", setDamageValue);
 	lua_register(m_lua, "getDamageValue", getDamageValue);
 	lua_register(m_lua, "createProjectile", createProjectile);
+	lua_register(m_lua, "getObjectAt", getObjectAt);
+	lua_register(m_lua, "getObjectsInArea", getObjectsInArea);
 	
 	m_region =0;
 	m_trigger =0;
@@ -451,6 +453,7 @@ int EventSystem::getObjectAt(lua_State *L)
 		if (m_region !=0)
 		{
 			WorldObject* wo = m_region->getObjectAt(pos);
+			DEBUG("pos %f %f wo %p",pos.m_x, pos.m_y,wo);
 			if (wo !=0)
 			{
 				lua_pushnumber(L,wo->getId());
@@ -472,19 +475,61 @@ int EventSystem::getObjectsInArea(lua_State *L)
 	lua_newtable(L);
 	if (argc>=1 && lua_isstring(L,1))
 	{
-		AreaName area = lua_tostring(L, 2);
+		AreaName area = lua_tostring(L, 1);
 		if (m_region !=0)
 		{
 			WorldObjectList obj;
 			WorldObjectList::iterator it;
 			Shape s = m_region->getArea(area);
-			m_region->getObjectsInShape(&s,&obj);
+			
+			short layer = WorldObject::LAYER_ALL;
+			if (argc>=2 && lua_isstring(L,2))
+			{
+				std::string lstr = lua_tostring(L,2);
+				if (lstr == "base")
+				{
+					layer = WorldObject::LAYER_BASE;
+				}
+				else  if (lstr == "air")
+				{
+					layer = WorldObject::LAYER_AIR;
+				}
+				else  if (lstr == "dead")
+				{
+					layer = WorldObject::LAYER_DEAD;
+				}
+				else  if (lstr == "normal")
+				{
+					layer = WorldObject::LAYER_BASE | WorldObject::LAYER_AIR;
+				}
+			}
+			
+			short group = WorldObject::GROUP_ALL;
+			if (argc>=3 && lua_isstring(L,3))
+			{
+				
+				std::string gstr = lua_tostring(L,3);
+				if (gstr == "unit")
+				{
+					group = WorldObject::CREATURE;
+				}
+				else if (gstr == "player")
+				{
+					group = WorldObject::PLAYER;
+				}
+				else if (gstr == "fixed")
+				{
+					group = WorldObject::FIXED;
+				}
+			}
+			m_region->getObjectsInShape(&s,&obj,layer,group);
 			
 			int cnt =1;
 			for (it = obj.begin(); it!= obj.end(); ++it)
 			{
 				lua_pushnumber(L,(*it)->getId());
-				lua_rawseti (L, 1, cnt);
+				lua_rawseti (L, -2, cnt);
+				cnt++;
 			}
 		}
 	}

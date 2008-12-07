@@ -257,6 +257,14 @@ void World::createRegion(short region)
 			ev->setEffect("dropItem('demon_sw', getObjectValue(lich,'position'))");
 			reg->addEvent("unit_die",ev);
 			*/
+			
+			ev = new Event();
+			ev->setCondition("return (unitIsInArea(player,'LichArea'))");
+			ev->setEffect(" \n \
+					for i,unit in ipairs(getObjectsInArea('LichArea' , '','player')) do \n \
+						print(unit) \n \
+					end ");
+			reg->addEvent("player_moved",ev);
 		}
 	}
 	else if(type==2)
