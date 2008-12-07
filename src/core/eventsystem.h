@@ -150,6 +150,13 @@ class EventSystem
 		static int deleteObject(lua_State *L);
 		
 		/**
+		 * \fn static int addUnitCommand(lua_State *L)
+		 * \brief Fuegt zu einer Einheit ein Kommando hinzu
+		 * \param L Lua Status
+		 */
+		static int addUnitCommand(lua_State *L);
+		
+		/**
 		 * \fn static int getObjectAt(lua_State *L)
 		 * \brief Gibt das Objekt an der angegebenen Stelle aus
 		 * \param L Lua Status

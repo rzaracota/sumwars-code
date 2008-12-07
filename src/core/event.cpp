@@ -13,6 +13,23 @@ void Trigger::addVariable(std::string name, int value)
 	m_lua_variables += stream.str();
 }
 
+void Trigger::addVariable(std::string name, bool value)
+{
+	std::stringstream stream;
+	stream << name << " = ";
+	if (value)
+	{
+		 stream << "true"; 
+	}
+	else
+	{
+		 stream << "false"; 
+	}
+	
+	stream<< "\n";
+	m_lua_variables += stream.str();
+}
+
 void Trigger::addVariable(std::string name, float value)
 {
 	std::stringstream stream;

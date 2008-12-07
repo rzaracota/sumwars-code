@@ -35,6 +35,8 @@ void EventSystem::init()
 	lua_register(m_lua, "createProjectile", createProjectile);
 	lua_register(m_lua, "getObjectAt", getObjectAt);
 	lua_register(m_lua, "getObjectsInArea", getObjectsInArea);
+	lua_register(m_lua, "addUnitCommand", addUnitCommand);
+	
 	
 	m_region =0;
 	m_trigger =0;
@@ -442,6 +444,59 @@ int EventSystem::deleteObject(lua_State *L)
 		ERRORMSG("Syntax: deleteObject( int objectID)");
 	}
 	return 0;
+}
+
+int EventSystem::addUnitCommand(lua_State *L)
+{
+	int argc = lua_gettop(L);
+	if (argc>=2 && lua_isnumber(L,1) && lua_isstring(L,2) )
+	{
+		if (m_region ==0)
+			return 0;
+		
+		int id = lua_tonumber(L,1);
+		std::string actstr = lua_tostring(L,2);
+		
+		WorldObject* wo = m_region->getObject(id);
+		if (wo !=0)
+		{
+			if (wo->getTypeInfo()->m_type != WorldObject::TypeInfo::TYPE_FIXED_OBJECT)
+			{
+				Creature* cr = static_cast<Creature*>(wo);
+				
+				Action::ActionType act = Action::getActionType(actstr);
+				if (act != Action::NOACTION)
+				{
+					Command com;
+					com.m_type = act;
+					com.m_range = cr->getBaseAttrMod()->m_attack_range;
+					
+					if (act == Action::USE)
+						com.m_range = 0.5;
+					
+					if (argc >=4 && lua_isnumber(L,4))
+					{
+						com.m_goal_object_id = lua_tointeger(L,4);
+					}
+					else if (argc >=4 && lua_istable(L,4))
+					{
+						com.m_goal = getVector(L,4);
+					}
+					
+					float time = 50000;
+					if (argc>=3 && lua_isnumber(L,3))
+						time = lua_tonumber(L,3);
+					cr->insertScriptCommand(com,time);
+				}
+			}
+		}
+	}
+	else
+	{
+		ERRORMSG("Syntax: :addUnitCommand(int unitid, string command, float time, [goal_unitid | {goal_x,goal_y}])");
+	}
+	return 0;
+	
 }
 
 int EventSystem::getObjectAt(lua_State *L)

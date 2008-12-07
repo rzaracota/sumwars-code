@@ -67,6 +67,19 @@ public:
 	}
 	
 	/**
+	 * \fn Command()
+	 * \brief Konstruktor
+	 */
+	Command()
+	{
+		m_type = Action::NOACTION;
+		m_goal = Vector(0,0);
+		m_goal_object_id= 0;
+		m_damage_mult=1;
+		m_range=1;
+	}
+	
+	/**
 	 * \fn void toString(CharConv* cv)
 	 * \brief Konvertiert das Objekt in einen String und schreibt ihn in der Puffer
 	 * \param cv Eingabepuffer
@@ -85,15 +98,6 @@ public:
 	 * \brief Vergleichsoperator auf Ungleichheit
 	 */
 	bool operator!=(Command& other);
-
-	/**
-	 * \fn Command()
-	 * \brief Legt ein leeres Kommando an
-	 */
-	Command()
-	{
-		m_type = Action::NOACTION;
-	}
 	
 	/**
 	 * Fields

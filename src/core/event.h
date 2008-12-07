@@ -33,6 +33,14 @@ class Trigger
 		void addVariable(std::string name, int value);
 		
 		/**
+		 * \fn void addVariable(std::string name, bool value)
+		 * \brief Fuegt eine Integer Variable hinzu
+		 * \param name Name der Variable
+		 * \param value Wert der Variable
+		 */
+		void addVariable(std::string name, bool value);
+		
+		/**
 		 * \fn void addVariable(std::string name, float value)
 		 * \brief Fuegt eine float Variable hinzu
 		 * \param name Name der Variable

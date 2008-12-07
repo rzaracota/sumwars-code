@@ -192,7 +192,7 @@ void Creature::initAction()
 	}
 	
 	
-	DEBUG("init Action %i", m_action.m_type);
+	DEBUG5("init Action %i", m_action.m_type);
 
 	
 
@@ -352,6 +352,17 @@ void Creature::performAction(float &time)
 	if (m_action.m_type == Action::TRADE)
 	{
 		time=0;
+	}
+	
+	// Fuer gescriptete Kommandos Zeitschranken pruefen
+	if (m_script_command_timer>0)
+	{
+		m_script_command_timer -= time;
+		if (m_script_command_timer<=0)
+		{
+			m_script_command_timer += time;
+			clearCommand(false);
+		}
 	}
 
 	// Testen ob man die Aktion abschließen kann
@@ -1588,27 +1599,46 @@ bool Creature::hasScriptCommand()
 
 void Creature::insertScriptCommand(Command &cmd, float time)
 {
+	if (!hasScriptCommand())
+	{
+		clearCommand(false);
+	}
 	m_script_commands.push_back(std::make_pair(cmd,time));	
+	DEBUG5("insert script command %i",cmd.m_type);
 }
 
 void Creature::updateCommand()
 {
 	// Wenn aktuelles Kommando keine Aktion vorschreibt
 	DEBUG5("next command: %i ",m_next_command.m_type);
-	if (m_next_command.m_type != Action::NOACTION)
+	if ((!hasScriptCommand() && m_next_command.m_type != Action::NOACTION) || 
+			 (!m_script_commands.empty() && m_command.m_type == Action::NOACTION))
 	{
 		// Naechstes Kommando uebernehmen
-		m_command.m_type=m_next_command.m_type;
-		m_command.m_goal = m_next_command.m_goal;
-		m_command.m_goal_object_id=m_next_command.m_goal_object_id;
-		m_command.m_range=m_next_command.m_range;
-		m_command.m_damage_mult = 1;
-
-		// Naechstes Kommando auf nichts setzen
-		m_next_command.m_type = Action::NOACTION;
+		if (!m_script_commands.empty())
+		{
+			
+			m_command = m_script_commands.front().first;
+			m_script_command_timer = m_script_commands.front().second;
+			m_script_commands.pop_front();
+			DEBUG5("script command %i time %f",m_command.m_type, m_script_command_timer);
+		}
+		else
+		{
+			m_command.m_type=m_next_command.m_type;
+			m_command.m_goal = m_next_command.m_goal;
+			m_command.m_goal_object_id=m_next_command.m_goal_object_id;
+			m_command.m_range=m_next_command.m_range;
+			m_command.m_damage_mult = 1;
+	
+			// Naechstes Kommando auf nichts setzen
+			m_next_command.m_type = Action::NOACTION;
+			
+			m_event_mask |= NetEvent::DATA_NEXT_COMMAND;
+		}
 
 		m_event_mask |= NetEvent::DATA_COMMAND;
-		m_event_mask |= NetEvent::DATA_NEXT_COMMAND;
+		
 
 	}
 
@@ -1622,7 +1652,7 @@ void Creature::updateCommand()
 void Creature::calcAction()
 {
 
-
+	
 	updateCommand();
 
 	// wenn kein Kommando existiert keine Aktion ausfuehren, beenden
@@ -1666,7 +1696,6 @@ void Creature::calcAction()
 	float dist = pos.distanceTo(goal)-getShape()->m_radius;
 
 	// Wenn Zielobjekt per ID gegeben
-
 	if ( m_command.m_goal_object_id !=0 && m_command.m_type != Action::TAKE_ITEM)
 	{
 		DEBUG5("goal ID: %i",m_command.m_goal_object_id);
@@ -1703,6 +1732,7 @@ void Creature::calcAction()
 	
 	if (m_command.m_type == Action::TAKE_ITEM)
 	{
+		
 		DropItem* di = getRegion()->getDropItem(m_command.m_goal_object_id);
 		if (di ==0)
 		{
@@ -2141,13 +2171,22 @@ void Creature::calcWalkDir(Vector goal,WorldObject* goalobj)
 
 void Creature::clearCommand(bool success)
 {
-	DEBUG5("command %i ended with success %i",m_command.m_type, success);
 	
+	if (hasScriptCommand() && m_command.m_type!= Action::NOACTION)
+	{
+		DEBUG5("command %i ended with success %i",m_command.m_type, success);
+		Trigger* tr = new Trigger("command_complete");
+		tr->addVariable("unit",getId());
+		tr->addVariable("command",Action::getActionInfo(m_command.m_type)->m_enum_name);
+		tr->addVariable("success",success);
+		getRegion()->insertTrigger(tr);
+	}
 	m_command.m_type = Action::NOACTION;
 	m_command.m_damage_mult = 1;
 	m_command.m_goal = Vector(0,0);
 	m_command.m_goal_object_id =0;
 	m_command.m_range =1;
+	m_script_command_timer =0;
 	m_event_mask |= NetEvent::DATA_COMMAND;
 }
 

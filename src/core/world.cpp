@@ -214,7 +214,8 @@ void World::createRegion(short region)
 			reg->addEvent("create_region",ev);
 
 			/*
-			// Testevent2
+			// Testevent2: Feuerschiessender Baum
+			
 			ev = new Event();
 			ev->setEffect("setDamageValue('trapdmg','fire_dmg',5,10) \n \
 					active = false");
@@ -242,6 +243,8 @@ void World::createRegion(short region)
 			*/
 			
 			/*
+			// Testevent: getarnter Lich
+			
 			ev = new Event();
 			ev->setOnce();
 			ev->setCondition("return (unitIsInArea(player,'LichArea'))");
@@ -259,12 +262,27 @@ void World::createRegion(short region)
 			*/
 			
 			ev = new Event();
+			ev->setOnce();
 			ev->setCondition("return (unitIsInArea(player,'LichArea'))");
 			ev->setEffect(" \n \
-					for i,unit in ipairs(getObjectsInArea('LichArea' , '','player')) do \n \
-						print(unit) \n \
-					end ");
+					pos = getLocation('LichLocation') \n \
+					x = pos[1] \n \
+					y = pos[2] \n \
+					addUnitCommand(player,'walk',2000,{x+4,y}) \n \
+					addUnitCommand(player,'walk',1900,{x,y-4}) \n \
+					addUnitCommand(player,'walk',1800,{x-4,y}) \n \
+					addUnitCommand(player,'walk',1700,{x,y+4}) \n \
+					addUnitCommand(player,'walk',1700,{x,y}) \n \
+					addUnitCommand(player,'attack',1700,{x,y}) \n \
+					");
 			reg->addEvent("player_moved",ev);
+			
+			ev = new Event();
+			ev->setOnce();
+			ev->setCondition("return (command == 'attack')");
+			ev->setEffect("deleteObject(tree)");
+			reg->addEvent("command_complete",ev);
+			
 		}
 	}
 	else if(type==2)
