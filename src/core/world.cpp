@@ -206,22 +206,40 @@ void World::createRegion(short region)
 			Event* ev;
 
 			ev = new Event();
-			ev->setEffect("addLocation('LichLocation', 130,212) \n \
-					addArea('LichArea','circle',130,212,6) \n \
+			ev->setEffect("addLocation('LichLocation', {130,212}) \n \
+					addArea('LichArea','circle',{130,212},6) \n \
 					tree = createObject('$tree', getLocation('LichLocation')) \n \
-					setDamageValue('trapdmg','fire_dmg',5,10) \n \
 					");
 			ev->setOnce();
 			reg->addEvent("create_region",ev);
 
+			/*
+			// Testevent2
 			ev = new Event();
-			ev->setOnce();
-			ev->setCondition("return (unitIsInArea(player,'LichArea'))");
 			ev->setEffect("setDamageValue('trapdmg','fire_dmg',5,10) \n \
-					createProjectile('fire_ball','trapdmg',getObjectValue(tree,'position')) \n \
-					deleteObject(tree) \n \
-					");
+					active = false");
+			ev->setOnce();
+			reg->addEvent("create_region",ev);
+			
+			ev = new Event();
+			ev->setCondition("return (unitIsInArea(player,'LichArea') and active == false)");
+			ev->setEffect("insertTrigger('trap_fire'); \n \
+					addTriggerVariable('goal',player); ");
 			reg->addEvent("player_moved",ev);
+			
+			
+			ev = new Event();
+			ev->setEffect(" \
+					if unitIsInArea(goal,'LichArea') then \n \
+						createProjectile('fire_ball','trapdmg',getObjectValue(tree,'position'),getObjectValue(goal,'position'),10.0,0.3 ) \n \
+						startTimer('trap_fire',2000) \n \
+						addTriggerVariable('goal',goal) \n \
+						active = true \n \
+					else \n \
+						active = false \n  \
+					end ");
+			reg->addEvent("trap_fire",ev);
+			*/
 			
 			/*
 			ev = new Event();
@@ -239,12 +257,6 @@ void World::createRegion(short region)
 			ev->setEffect("dropItem('demon_sw', getObjectValue(lich,'position'))");
 			reg->addEvent("unit_die",ev);
 			*/
-			
-			ev = new Event();
-			ev->setEffect("print('timer',var) \n \
-					startTimer('testTimer',1000) \n \
-					");
-			reg->addEvent("testTimer",ev);
 		}
 	}
 	else if(type==2)
@@ -473,6 +485,8 @@ WorldObject::Relation World::getRelation(WorldObject::Fraction frac, WorldObject
 	WorldObject::Fraction f = wo->getFraction();
 
 	DEBUG5("frac1 %i frac2 %i",frac,f);
+	if (frac == WorldObject::FRAC_HOSTILE_TO_ALL)
+		return WorldObject::HOSTILE;
 
 	if (wo->getTypeInfo()->m_type > WorldObject::TypeInfo::TYPE_MONSTER)
 	{

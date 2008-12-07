@@ -85,13 +85,13 @@ class Projectile
 	};
 	
 	/**
-	 * \fn Projectile( ProjectileType type, WorldObject::Fraction fr, int id)
+	 * \fn Projectile( ProjectileType type, Damage* dmg,  int id)
 	 * \param type Typ des Projektils
-	 * \param fr Fraktion des Spielers der das Projektil erzeugt hat
+	 * \param dmg Schaden den das Projektil anrichtet
 	 * \param id ID des Projektils
 	 * \brief Konstruktor
 	 */
-	Projectile( ProjectileType type, WorldObject::Fraction fr, int id);
+	Projectile( ProjectileType type, Damage* dmg, int id);
 	
 	/**
 	 * \fn virtual ~Projectile()
@@ -356,12 +356,6 @@ class Projectile
 		* \brief Zeiger auf das zuletzt getroffene Objekt
 		*/
 		int m_last_hit_object_id;
-		
-		/**
-		* \var WorldObject::Fraction m_creator_fraction
-		* \brief Fraktion des Erzeugers des Geschosses (wird nicht getroffen)
-		*/
-		WorldObject::Fraction m_creator_fraction;
 		
 		/**
 		* \var char m_flags

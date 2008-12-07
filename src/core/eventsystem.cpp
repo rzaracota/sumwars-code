@@ -108,12 +108,41 @@ bool EventSystem::executeEvent(Event* event)
 	return true;
 }
 
+Vector EventSystem::getVector(lua_State *L, int index)
+{
+	float x,y;
+		
+	lua_pushinteger(L, 1);
+	lua_gettable(L, index);
+	x = lua_tonumber(L, -1);
+	lua_pop(L, 1);
+			
+	lua_pushinteger(L, 2);
+	lua_gettable(L, index);
+	y = lua_tonumber(L, -1);
+	lua_pop(L, 1);
+	
+	return Vector(x,y);
+}
+
+void EventSystem::pushVector(lua_State *L, Vector v)
+{
+	lua_newtable(L);
+	lua_pushinteger(L, 1);
+	lua_pushnumber(L, v.m_x);
+	lua_settable(L, -3);
+			
+	lua_pushinteger(L, 2);
+	lua_pushnumber(L,v.m_y);
+	lua_settable(L, -3);
+}
+
 int EventSystem::getObjectValue(lua_State *L)
 {
 	
 	int ret =0;
 	int argc = lua_gettop(L);
-	if (argc>=2)
+	if (argc>=2 && lua_isnumber(L,1) && lua_isstring(L,2))
 	{
 		int id = lua_tointeger(L, 1);
 		std::string valname = lua_tostring(L, 2);
@@ -127,6 +156,10 @@ int EventSystem::getObjectValue(lua_State *L)
 		if (wo !=0)
 		{
 			ret = wo->getValue(valname);
+		}
+		else
+		{
+			ERRORMSG("getObjectValue: Object doesnt exist");
 		}
 	}
 	else
@@ -142,7 +175,7 @@ int EventSystem::setObjectValue(lua_State *L)
 	
 	int ret =0;
 	int argc = lua_gettop(L);
-	if (argc>=3)
+	if (argc>=2 && lua_isnumber(L,1) && lua_isstring(L,2))
 	{
 		int id = lua_tointeger(L, 1);
 		std::string valname = lua_tostring(L, 2);
@@ -157,6 +190,10 @@ int EventSystem::setObjectValue(lua_State *L)
 		{
 			ret = wo->setValue(valname);
 		}
+		else
+		{
+			ERRORMSG("getObjectValue: Object doesnt exist");
+		}
 	}
 	else
 	{
@@ -170,7 +207,7 @@ int EventSystem::getDamageValue(lua_State *L)
 {
 	int ret =0;
 	int argc = lua_gettop(L);
-	if (argc>=2)
+	if (argc>=2 && lua_isstring(L,1) && lua_isstring(L,2))
 	{
 		std::string dmgname = lua_tostring(L, 1);
 		std::string valname = lua_tostring(L, 2);
@@ -191,7 +228,7 @@ int EventSystem::getDamageValue(lua_State *L)
 int EventSystem::setDamageValue(lua_State *L)
 {
 	int argc = lua_gettop(L);
-	if (argc>=3)
+	if (argc>=3 && lua_isstring(L,1) && lua_isstring(L,2) &&  lua_isnumber(L,3))
 	{
 		std::string dmgname = lua_tostring(L, 1);
 		std::string valname = lua_tostring(L, 2);
@@ -212,20 +249,16 @@ int EventSystem::setDamageValue(lua_State *L)
 int EventSystem::createProjectile(lua_State *L)
 {
 	int argc = lua_gettop(L);
-	if (argc >= 4)
+	if (argc >= 3 && lua_isstring(L,1) && lua_isstring(L,2)  && lua_istable(L,3))
 	{
 		if (m_region !=0)
 		{
 			std::string tname = lua_tostring(L, 1);
 			std::string dmgname = lua_tostring(L, 2);
-			float sx = lua_tonumber(L, 3);
-			float sy = lua_tonumber(L, 4);
+			Vector pos = getVector(L,3);
 		
 			float speed = 10.0;
-			Vector pos(sx,sy);
-			DEBUG("number of arguments %i",argc);
-			
-			DEBUG("name %s dmg %s %f %f",tname.c_str(), dmgname.c_str(),sx,sy);
+			DEBUG5("name %s dmg %s %f %f",tname.c_str(), dmgname.c_str(),pos.m_x,pos.m_y);
 			
 			// Typ ermitteln
 			Projectile::ProjectileType type = Projectile::ARROW;
@@ -260,39 +293,28 @@ int EventSystem::createProjectile(lua_State *L)
 			// Schaden
 			Damage* dmg = &(m_region->getDamageObject(dmgname));
 			
-			// Fraktion ermitteln
-			WorldObject::Fraction fr = WorldObject::FRAC_HOSTILE_TO_ALL;
-			WorldObject* wo = m_region->getObject(dmg->m_attacker_id);
-			if (wo !=0)
-			{
-				fr = wo->getFraction();
-			}
-			
 			// Projektil erzeugen
-			Projectile* pr = new Projectile(type, fr, World::getWorld()->getValidProjectileId());
-			memcpy(pr->getDamage(),dmg,sizeof(Damage));
+			Projectile* pr = new Projectile(type, dmg, World::getWorld()->getValidProjectileId());
 			
 			// Richtung, Geschwindigkeit ermitteln
-			if (argc>=6)
+			if (argc>=4 && lua_istable(L,4))
 			{
-				float gx = lua_tonumber(L, 5);
-				float gy = lua_tonumber(L, 6);
-				
-				Vector goal(gx,gy);
+
+				Vector goal = getVector(L,4);
 				Vector dir = goal - pos;
 				dir.normalize();
 				
-				if (argc>=7)
+				if (argc>=5  && lua_isnumber(L,5))
 				{
-					speed = lua_tonumber(L, 7);
+					speed = lua_tonumber(L, 5);
 				}
 				
 				// Geschwindigkeit wird in m/ms gemessen
 				pr->setSpeed(dir *speed/1000);
 				
-				if (argc>=8)
+				if (argc>=6 && lua_isnumber(L,6))
 				{
-					float dist = lua_tonumber(L, 8);
+					float dist = lua_tonumber(L, 6);
 					pos += dir*dist;
 				}
 			}
@@ -303,7 +325,7 @@ int EventSystem::createProjectile(lua_State *L)
 	}
 	else
 	{
-		ERRORMSG("Syntax: createProjectile( string type, string dmgname, startx, starty, [goalx, goaly] , [speed], [dist])");
+		ERRORMSG("Syntax: createProjectile( string type, string dmgname, {startx, starty}, [{goalx, goaly}] , [speed], [dist])");
 	}
 	return 0;
 }
@@ -312,7 +334,7 @@ int EventSystem::unitIsInArea(lua_State *L)
 {
 	bool ret =false;
 	int argc = lua_gettop(L);
-	if (argc>=2)
+	if (argc>=2 && lua_isnumber(L,1) && lua_isstring(L,2) )
 	{
 		int id = lua_tointeger(L, 1);
 		AreaName area = lua_tostring(L, 2);
@@ -324,6 +346,10 @@ int EventSystem::unitIsInArea(lua_State *L)
 			if (wo !=0)
 			{
 				ret = m_region->getArea(area).intersects(*(wo->getShape()));
+			}
+			else
+			{
+				ERRORMSG("unitIsInArea: Unit does not exist");
 			}
 		}
 		
@@ -341,14 +367,13 @@ int EventSystem::pointIsInArea(lua_State *L)
 {
 	bool ret =false;
 	int argc = lua_gettop(L);
-	if (argc>=3)
+	if (argc>=2 && lua_istable(L,1) && lua_isstring(L,2))
 	{
-		float x = lua_tonumber(L, 1);	
-		float y = lua_tonumber(L, 2);	
-		AreaName area = lua_tostring(L, 3);
+		Vector c = getVector(L,1);
+		AreaName area = lua_tostring(L, 2);
 		
 		Shape s;
-		s.m_center = Vector(x,y);
+		s.m_center = c;
 		s.m_type = Shape::CIRCLE;
 		s.m_radius=0;
 		
@@ -371,29 +396,28 @@ int EventSystem::createObject(lua_State *L)
 {
 	int ret =0;
 	int argc = lua_gettop(L);
-	if (argc>=3)
+	if (argc>=2 && lua_istable(L,2) && lua_isstring(L,1))
 	{
 		
 		
 		WorldObject::TypeInfo::ObjectSubtype subtype = lua_tostring(L, 1);
-		float x = lua_tonumber(L, 2);	
-		float y = lua_tonumber(L, 3);
+		Vector pos = getVector(L,2);
 		
 		if (m_region!=0)
 		{
 			float angle =0;
-			if (argc>=4)
+			if (argc>=3 && lua_isnumber(L,3))
 			{
-				angle = lua_tonumber(L, 4);
+				angle = lua_tonumber(L, 3);
 			}
 			
-			ret = m_region->createObject(subtype, Vector(x,y),angle, WorldObject::STATE_AUTO);
+			ret = m_region->createObject(subtype, pos,angle, WorldObject::STATE_AUTO);
 		}
 		
 	}
 	else
 	{
-		ERRORMSG("Syntax: createObject( string subtype, float x, float y)");
+		ERRORMSG("Syntax: createObject( string subtype, {float x, float y}, [angle])");
 	}
 	
 	lua_pushinteger(EventSystem::getLuaState() , ret);
@@ -403,7 +427,7 @@ int EventSystem::createObject(lua_State *L)
 int EventSystem::deleteObject(lua_State *L)
 {
 	int argc = lua_gettop(L);
-	if (argc>=1)
+	if (argc>=1 && lua_isnumber(L,1))
 	{
 		int id = lua_tointeger(L, 1);
 		if (m_region !=0)
@@ -417,30 +441,84 @@ int EventSystem::deleteObject(lua_State *L)
 	}
 	return 0;
 }
-	
-int EventSystem::dropItem(lua_State *L)
+
+int EventSystem::getObjectAt(lua_State *L)
 {
 	int argc = lua_gettop(L);
-	if (argc>=3)
+	if (argc>=1 && lua_istable(L,1))
 	{
-		Item::Subtype subtype = lua_tostring(L, 1);
-		float x = lua_tonumber(L, 2);
-		float y = lua_tonumber(L, 3);
-		
-		float magic_power=0;
-		if (argc>=4)
+		Vector pos = getVector(L,1);
+		if (m_region !=0)
 		{
-			magic_power= lua_tonumber(L, 4);
-		}
-		
-		if (m_region!=0)
-		{
-			m_region->dropItem(subtype, Vector(x,y), magic_power);
+			WorldObject* wo = m_region->getObjectAt(pos);
+			if (wo !=0)
+			{
+				lua_pushnumber(L,wo->getId());
+				return 1;
+			}
 		}
 	}
 	else
 	{
-		ERRORMSG("Syntax: :dropItem(string itemtype,float x,float y, [magic_power]");
+		ERRORMSG("Syntax: getObjectAt({float x, float x})");
+	}
+	
+	return 0;
+}
+
+int EventSystem::getObjectsInArea(lua_State *L)
+{
+	int argc = lua_gettop(L);
+	lua_newtable(L);
+	if (argc>=1 && lua_isstring(L,1))
+	{
+		AreaName area = lua_tostring(L, 2);
+		if (m_region !=0)
+		{
+			WorldObjectList obj;
+			WorldObjectList::iterator it;
+			Shape s = m_region->getArea(area);
+			m_region->getObjectsInShape(&s,&obj);
+			
+			int cnt =1;
+			for (it = obj.begin(); it!= obj.end(); ++it)
+			{
+				lua_pushnumber(L,(*it)->getId());
+				lua_rawseti (L, 1, cnt);
+			}
+		}
+	}
+	else
+	{
+		ERRORMSG("Syntax: getObjectsInArea(string areaname)")
+	}
+	
+	
+	return 1;
+}
+
+int EventSystem::dropItem(lua_State *L)
+{
+	int argc = lua_gettop(L);
+	if (argc>=2 && lua_istable(L,2) && lua_isstring(L,1))
+	{
+		Item::Subtype subtype = lua_tostring(L, 1);
+		Vector pos = getVector(L,2);
+		
+		float magic_power=0;
+		if (argc>=3 && lua_isnumber(L,3))
+		{
+			magic_power= lua_tonumber(L, 3);
+		}
+		
+		if (m_region!=0)
+		{
+			m_region->dropItem(subtype, pos, magic_power);
+		}
+	}
+	else
+	{
+		ERRORMSG("Syntax: :dropItem(string itemtype,{float x,float y}, [magic_power]");
 	}
 	return 0;
 }
@@ -448,20 +526,20 @@ int EventSystem::dropItem(lua_State *L)
 int EventSystem::addLocation(lua_State *L)
 {
 	int argc = lua_gettop(L);
-	if (argc>=3)
+	if (argc>=2 && lua_istable(L,2) && lua_isstring(L,1))
 	{
 		LocationName loc = lua_tostring(L, 1);
-		float x = lua_tonumber(L, 2);
-		float y = lua_tonumber(L, 3);
+		Vector v = getVector(L,2);
+		
 		
 		if (m_region !=0)
 		{
-			m_region->addLocation(loc,Vector(x,y));
+			m_region->addLocation(loc,v);
 		}
 	}
 	else
 	{
-		ERRORMSG("Syntax: addLocation(string locname, x, y)");
+		ERRORMSG("Syntax: addLocation(string locname, {x, y})");
 	}
 	return 0;
 }
@@ -469,16 +547,14 @@ int EventSystem::addLocation(lua_State *L)
 int EventSystem::getLocation(lua_State *L)
 {
 	int argc = lua_gettop(L);
-	if (argc>=1)
+	if (argc>=1 && lua_isstring(L,1))
 	{
 		LocationName loc = lua_tostring(L, 1);
 		if (m_region !=0)
 		{
-			Vector v = m_region->getLocation(loc);
-			lua_pushnumber(EventSystem::getLuaState() , v.m_x);
-			lua_pushnumber(EventSystem::getLuaState() , v.m_y);
+			pushVector(L,m_region->getLocation(loc));
 			
-			return 2;
+			return 1;
 		}
 	}
 	else
@@ -491,25 +567,21 @@ int EventSystem::getLocation(lua_State *L)
 int EventSystem::addArea(lua_State *L)
 {
 	int argc = lua_gettop(L);
-	if (argc>=5)
+	if (argc>=4 && lua_isstring(L,1) && lua_isstring(L,2) && lua_istable(L,3) )
 	{
 		AreaName area = lua_tostring(L, 1);
 		std::string type = lua_tostring(L, 2);
-		float x = lua_tonumber(L, 3);
-		float y = lua_tonumber(L, 4);
 		
 		Shape s;
-		s.m_center = Vector(x,y);
+		s.m_center = getVector(L,3);
 		if (type == "rect" || type == "RECT")
 		{
-			float ex = lua_tonumber(L, 5);
-			float ey = lua_tonumber(L, 6);
 			s.m_type = Shape::RECT;
-			s.m_extent = Vector(ex,ey);
+			s.m_extent = getVector(L,4);
 		}
 		else
 		{
-			float r = lua_tonumber(L, 5);
+			float r = lua_tonumber(L, 4);
 			s.m_type = Shape::CIRCLE;
 			s.m_radius = r;
 		}
@@ -521,8 +593,8 @@ int EventSystem::addArea(lua_State *L)
 	}
 	else
 	{
-		ERRORMSG("Syntax: addLocation(string areaname, 'circle' , mx, my ,r) \n \
-				addLocation(string areaname, 'rect' , cx, cy ,ex, ey) ");
+		ERRORMSG("Syntax: addLocation(string areaname, 'circle' , {mx, my} ,r) \n \
+				addLocation(string areaname, 'rect' , {cx, cy} ,{ex, ey}) ");
 	}
 	return 0;
 }
@@ -530,7 +602,7 @@ int EventSystem::addArea(lua_State *L)
 int EventSystem::startTimer(lua_State *L)
 {
 	int argc = lua_gettop(L);
-	if (argc>=2)
+	if (argc>=2 && lua_isstring(L,1) && lua_isnumber(L,2))
 	{
 		std::string type = lua_tostring(L, 1);
 		float time = lua_tonumber(L, 2);
@@ -551,12 +623,12 @@ int EventSystem::startTimer(lua_State *L)
 int EventSystem::insertTrigger(lua_State *L)
 {
 	int argc = lua_gettop(L);
-	if (argc>=1)
+	if (argc>=1 && lua_isstring(L,1))
 	{
 		std::string type = lua_tostring(L, 1);
 		Region* reg = m_region;
 		
-		if (argc >=2)
+		if (argc >=2 && lua_isstring(L,2))
 		{
 			std::string regname = lua_tostring(L, 2);
 			reg = World::getWorld()->getRegion(regname);
@@ -578,7 +650,7 @@ int EventSystem::insertTrigger(lua_State *L)
 int EventSystem::addTriggerVariable(lua_State *L)
 {
 	int argc = lua_gettop(L);
-	if (argc>=2)
+	if (argc>=2  && lua_isstring(L,1))
 	{
 		if (m_trigger !=0)
 		{

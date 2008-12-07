@@ -1357,12 +1357,11 @@ void Region::createProjectileFromString(CharConv* cv)
 	Projectile* proj;
 
 	cv->fromBuffer(type);
-	cv->fromBuffer(frac);
 	cv->fromBuffer(id);
 
 	DEBUG5("new projectile %i frac %i id %i",type,frac,id);
 
-	proj = new Projectile((Projectile::ProjectileType) type, (WorldObject::Fraction) frac, id);
+	proj = new Projectile((Projectile::ProjectileType) type,0, id);
 
 	proj->fromString(cv);
 

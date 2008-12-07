@@ -137,9 +137,8 @@ int WorldObject::getValue(std::string valname)
 		}
 		else if (valname == "position")
 		{
-			lua_pushnumber(EventSystem::getLuaState() , getShape()->m_center.m_x);
-			lua_pushnumber(EventSystem::getLuaState() , getShape()->m_center.m_y);
-			return 2;
+			EventSystem::pushVector(EventSystem::getLuaState(),getShape()->m_center);
+			return 1;
 		}
 
 		return 0;

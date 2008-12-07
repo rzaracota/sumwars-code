@@ -7,7 +7,7 @@ Region* Projectile::getRegionPtr()
 	return World::getWorld()->getRegion(m_region);
 }
 
-Projectile::Projectile(ProjectileType type, WorldObject::Fraction fr, int id)
+Projectile::Projectile(ProjectileType type, Damage* dmg, int id)
 {
 	m_id = id;
 	m_type = type;
@@ -109,7 +109,10 @@ Projectile::Projectile(ProjectileType type, WorldObject::Fraction fr, int id)
 
 	m_shape.m_radius =r;
 	m_shape.m_angle =0;
-	m_creator_fraction = fr;
+	if (dmg !=0)
+	{
+		memcpy(&m_damage, dmg,sizeof(Damage)); 
+	}
 
 }
 
@@ -193,29 +196,25 @@ bool Projectile::update(float time)
 
 							// vier neue Projektile erzeugen
 							Projectile* pr;
-							pr = new Projectile(m_type,m_creator_fraction, World::getWorld()->getValidId());
-							memcpy(pr->getDamage(),&dmg,sizeof(Damage));
+							pr = new Projectile(m_type,&dmg, World::getWorld()->getValidId());
 							pr->setFlags(Projectile::EXPLODES);
 							pr->setMaxRadius(1);
 							getRegionPtr()->insertProjectile(pr,m_shape.m_center + dir );
 							
 							dir.m_x = -dir.m_x;
-							pr = new Projectile(m_type,m_creator_fraction, World::getWorld()->getValidId());
-							memcpy(pr->getDamage(),&dmg,sizeof(Damage));
+							pr = new Projectile(m_type,&dmg, World::getWorld()->getValidId());
 							pr->setFlags(Projectile::EXPLODES);
 							pr->setMaxRadius(1);
 							getRegionPtr()->insertProjectile(pr,m_shape.m_center + dir);
 
 							dir.m_y = -dir.m_y;
-							pr = new Projectile(m_type,m_creator_fraction, World::getWorld()->getValidId());
-							memcpy(pr->getDamage(),&dmg,sizeof(Damage));
+							pr = new Projectile(m_type,&dmg, World::getWorld()->getValidId());
 							pr->setFlags(Projectile::EXPLODES);
 							pr->setMaxRadius(1);
 							getRegionPtr()->insertProjectile(pr,m_shape.m_center + dir);
 
 							dir.m_x = -dir.m_x;
-							pr = new Projectile(m_type,m_creator_fraction, World::getWorld()->getValidId());
-							memcpy(pr->getDamage(),&dmg,sizeof(Damage));
+							pr = new Projectile(m_type,&dmg, World::getWorld()->getValidId());
 							pr->setFlags(Projectile::EXPLODES);
 							pr->setMaxRadius(1);
 							getRegionPtr()->insertProjectile(pr,m_shape.m_center + dir);
@@ -329,7 +328,7 @@ void Projectile::handleFlying(float dtime)
 			{
 				i = hitobj.begin();
 				hit=(*i);
-				while (!hitobj.empty() && World::getWorld()->getRelation(m_creator_fraction,hit) != WorldObject::HOSTILE)
+				while (!hitobj.empty() && World::getWorld()->getRelation(m_damage.m_attacker_fraction,hit) != WorldObject::HOSTILE)
 				{
 					i=hitobj.erase(i);
 					if (i!=hitobj.end())
@@ -442,7 +441,7 @@ void Projectile::handleFlying(float dtime)
 		i = hitobj.begin();
 		hit = (*i);
 
-		while (!hitobj.empty() && (World::getWorld()->getRelation(m_creator_fraction,hit) == WorldObject:: ALLIED || hit->getId() == m_last_hit_object_id ))
+		while (!hitobj.empty() && (World::getWorld()->getRelation(m_damage.m_attacker_fraction,hit) == WorldObject:: ALLIED || hit->getId() == m_last_hit_object_id ))
 		{
 			i=hitobj.erase(i);
 			if (i!=hitobj.end())
@@ -549,7 +548,7 @@ void Projectile::handleFlying(float dtime)
 					continue;
 
 				// alle nicht feindlich gesinnten Objekte ausschliessen
-				if (World::getWorld()->getRelation(m_creator_fraction,(*i)) != WorldObject::HOSTILE)
+				if (World::getWorld()->getRelation(m_damage.m_attacker_fraction,(*i)) != WorldObject::HOSTILE)
 					continue;
 
 				// kein zurueckspringen zu dem davor zuletzt getroffenen Objekt
@@ -654,7 +653,7 @@ void Projectile::handleGrowing(float dtime)
 				DEBUG5("covering obj %i",hit->getId());
 
 				// Kein Schaden an nicht feindliche Objekte austeilen
-				if (World::getWorld()->getRelation(m_creator_fraction,hit) != WorldObject::HOSTILE)
+				if (World::getWorld()->getRelation(m_damage.m_attacker_fraction,hit) != WorldObject::HOSTILE)
 					continue;
 
 				// kein Schaden an Objekte austeilen, die sich im inneren Kreis befinden
@@ -776,7 +775,7 @@ void Projectile::handleStable(float dtime)
 			{
 				i = hitobj.begin();
 				hit = (*i);
-				while (i != hitobj.end() && World::getWorld()->getRelation(m_creator_fraction,hit) != WorldObject::HOSTILE)
+				while (i != hitobj.end() && World::getWorld()->getRelation(m_damage.m_attacker_fraction,hit) != WorldObject::HOSTILE)
 				{
 					i=hitobj.erase(i);
 					if (i!=hitobj.end())
@@ -794,8 +793,7 @@ void Projectile::handleStable(float dtime)
 				DEBUG5("hit obj %i",hit->getId());
 
 				// beim Ziel Projektil vom Typ Blitz erzeugen
-				pr = new Projectile(Projectile::LIGHTNING,m_creator_fraction, World::getWorld()->getValidId());
-				memcpy(pr->getDamage(),&m_damage,sizeof(Damage));
+				pr = new Projectile(Projectile::LIGHTNING,&m_damage, World::getWorld()->getValidId());
 				getRegionPtr()->insertProjectile(pr,hit->getShape()->m_center);
 			}
 
@@ -841,8 +839,8 @@ void Projectile::handleStable(float dtime)
 void Projectile::toString(CharConv* cv)
 {
 	cv->toBuffer((char) m_type);
-	cv->toBuffer((char) m_creator_fraction);
 	cv->toBuffer( m_id);
+	cv->toBuffer((char) m_damage.m_attacker_fraction);
 	cv->toBuffer((char) m_state);
 	cv->toBuffer(m_shape.m_center.m_x);
 	cv->toBuffer(m_shape.m_center.m_y);
@@ -861,9 +859,11 @@ void Projectile::toString(CharConv* cv)
 
 void Projectile::fromString(CharConv* cv)
 {
-	// Typ, Fraktion und ID werden schon vorher eingelesen..
+	// Typ und ID werden schon vorher eingelesen..
 
 	char tmp;
+	cv->fromBuffer<char>(tmp);
+	m_damage.m_attacker_fraction = (WorldObject::Fraction) tmp;
 	cv->fromBuffer<char>(tmp);
 	m_state = (ProjectileState) tmp;
 	cv->fromBuffer<float>(m_shape.m_center.m_x);

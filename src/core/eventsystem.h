@@ -4,6 +4,7 @@
 #include <string>
 #include "debug.h"
 #include "event.h"
+#include "geometry.h"
 
 extern "C"
 {
@@ -123,68 +124,108 @@ class EventSystem
 		/**
 		 * \fn static int pointIsInArea(lua_State *L)
 		 * \brief prueft, ob ein Objekt sich in einem Gebiet befindet
+		 * \param L Lua Status
 		 */
 		static int pointIsInArea(lua_State *L);
 		
 		/**
 		 * \fn static int unitIsInArea(lua_State *L)
 		 * \brief prueft, ob ein Objekt sich in einem Gebiet befindet
+		 * \param L Lua Status
 		 */
 		static int unitIsInArea(lua_State *L);
 		
 		/**
 		 * \fn static int createObject(lua_State *L);
 		 * \brief erzeugt ein neues Objekt
+		 * \param L Lua Status
 		 */
 		static int createObject(lua_State *L);
 		
 		/**
 		 * \fn static int deleteObject(lua_State *L)
 		 * \brief Entfernt ein Objekt
+		 * \param L Lua Status
 		 */
 		static int deleteObject(lua_State *L);
 		
 		/**
+		 * \fn static int getObjectAt(lua_State *L)
+		 * \brief Gibt das Objekt an der angegebenen Stelle aus
+		 * \param L Lua Status
+		 **/
+		static int getObjectAt(lua_State *L);
+		
+		/**
+		 * \fn static int getObjectsInArea(lua_State *L)
+		 * \brief Gibt die Objekte in der angegebenen Flaeche aus
+		 */
+		static int getObjectsInArea(lua_State *L);
+		
+		/**
 		 * \fn static int dropItem(lua_State *L)
 		 * \brief Laesst einen Gegenstand fallen
+		 * \param L Lua Status
 		 */
 		static int dropItem(lua_State *L);
 		
 		/**
 		 * \fn static int addLocation(lua_State *L)
 		 * \brief Fuegt einen neuen Ort hinzu
+		 * \param L Lua Status
 		 */
 		static int addLocation(lua_State *L);
 		
 		/**
 		 * \fn static int getLocation(lua_State *L)
 		 * \brief einen Ort aus
+		 * \param L Lua Status
 		 */
 		static int getLocation(lua_State *L);
 		
 		/**
 		 * \fn static int addArea(lua_State *L)
 		 * \brief Fuegt einen neuen Bereich hinzu
+		 * \param L Lua Status
 		 */
 		static int addArea(lua_State *L);
 		
 		/**
 		 * \fn static int startTimer(lua_State *L)
 		 * \brief startet einen Timer
+		 * \param L Lua Status
 		 */
 		static int startTimer(lua_State *L);
 		
 		/**
 		 * \fn static int insertTrigger(lua_State *L)
 		 * \brief Fuegt einen Trigger ein
+		 * \param L Lua Status
 		 */
 		static int insertTrigger(lua_State *L);
 		
 		/**
 		 * \fn static addTriggerVariable(lua_State *L)
 		 * \brief Fuegt zum zuletzt erzeugten Trigger eine Variable hinzu
+		 * \param L Lua Status
 		 */
 		static int addTriggerVariable(lua_State *L);
+		
+		/**
+		 * \fn static Vector getVector(lua_State *L, int index)
+		 * \brief Liest einen Vector vom Lua Stack
+		 * \param L Lua Status
+		 * \param index Index des Vektors auf dem Stack
+		 */
+		static Vector getVector(lua_State *L, int index);
+		
+		/**
+		 * \fn static void pushVector(lua_State *L, Vector v)
+		 * \brief Schiebt einen Vektor auf den Lua Stack
+		 * \param v Vector
+		 * \param L Lua Status
+		 **/
+		static void pushVector(lua_State *L, Vector v);
 		
 	private:
 		/**

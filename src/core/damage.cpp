@@ -82,6 +82,8 @@ void Damage::init()
 		// Multiplikatoren auf 1 setzen
 	for (i=0;i<4;i++)
 		m_multiplier[i]=1;
+	
+	m_attacker_fraction = WorldObject::FRAC_HOSTILE_TO_ALL;
 }
 
 std::string Damage::getDamageTypeName(DamageType dt)
