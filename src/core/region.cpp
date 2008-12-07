@@ -46,7 +46,8 @@ Region::Region(short dimx, short dimy, short id, std::string name)
 
 	m_netevents = new NetEventList;
 
-
+	m_cutscene_mode = false;
+	
 	Trigger* tr = new Trigger("create_region");
 	insertTrigger(tr);
 	
@@ -606,6 +607,7 @@ bool Region::insertObject(WorldObject* object, Vector pos, float angle, bool col
 		event.m_type = NetEvent::OBJECT_CREATED;
 		event.m_id = object->getId();
 		insertNetEvent(event);
+		DEBUG5("insert object %i",event.m_id);
 		
 		if (object->getGroup() == WorldObject::CREATURE)
 		{
@@ -1819,3 +1821,13 @@ void Region::addEvent(TriggerType trigger, Event* event)
 	m_events.insert(std::make_pair(trigger,event));
 }
 
+void Region::setCutsceneMode(bool mode)
+{
+	NetEvent event;
+	event.m_type = NetEvent::REGION_CUTSCENE;
+	event.m_id = getId();
+	event.m_data = (int) mode;
+	insertNetEvent(event);
+	
+	m_cutscene_mode = mode;
+}

@@ -768,6 +768,22 @@ class Region
 			return m_damage_objects[name];
 		}
 		
+		/**
+		 * \fn void setCutsceneMode(bool mode)
+		 * \brief Setzt den Cutscene Modus
+		 * \param mode Modus
+		 */
+		void setCutsceneMode(bool mode);
+		
+		/**
+		 * \fn bool getCutsceneMode()
+		 * \brief Gibt aus, ob die sich die Region aktuell im Cutscene Modus befindet
+		 */
+		bool getCutsceneMode()
+		{
+			return m_cutscene_mode;
+		}
+		
 	private:
 		/**
 		* \var m_dimx
@@ -853,6 +869,12 @@ class Region
 		 * \brief Name der Region
 		 */
 		std::string m_name;
+		
+		/**
+		 * \var bool m_cutscene_mode
+		 * \brief Gibt an, ob die Region sich aktuell im Cutszene Modus befindet. In diesem Modus werden nur per Script gesetzte Aktionen ausgefuehrt
+		 */
+		bool m_cutscene_mode;
 	
 		/**
 		* \var NetEventList* m_netevents

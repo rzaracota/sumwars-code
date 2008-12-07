@@ -43,7 +43,7 @@ struct NetEvent
 		ITEM_DROPPED = 30,
 		ITEM_REMOVED = 31,
   
- 
+		REGION_CUTSCENE = 40,
 		
 	};
 	

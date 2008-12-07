@@ -36,7 +36,7 @@ void EventSystem::init()
 	lua_register(m_lua, "getObjectAt", getObjectAt);
 	lua_register(m_lua, "getObjectsInArea", getObjectsInArea);
 	lua_register(m_lua, "addUnitCommand", addUnitCommand);
-	
+	lua_register(m_lua, "setCutsceneMode", setCutsceneMode);
 	
 	m_region =0;
 	m_trigger =0;
@@ -773,5 +773,24 @@ int EventSystem::addTriggerVariable(lua_State *L)
 	{
 		ERRORMSG("Syntax: addTriggerVariable(string varname, value)");
 	}
+	return 0;
+}
+
+int EventSystem::setCutsceneMode(lua_State *L)
+{
+	int argc = lua_gettop(L);
+	if (argc>=1  && lua_isboolean(L,1))
+	{
+		bool mode = lua_toboolean(L,1);
+		if (m_region!=0)
+		{
+			m_region->setCutsceneMode(mode);
+		}
+	}
+	else
+	{
+		ERRORMSG("Syntax: setCutsceneMode(bool mode) ");
+	}
+	
 	return 0;
 }

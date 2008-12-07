@@ -108,6 +108,10 @@ bool Monster::update(float time)
 
 void Monster::updateCommand()
 {
+	// bei Cutscenes keine AI verwenden
+	if (getRegion()->getCutsceneMode())
+		return;
+	
 	m_ai.m_goals->clear();
 	m_ai.m_visible_goals->clear();
 

@@ -1611,7 +1611,7 @@ void Creature::updateCommand()
 {
 	// Wenn aktuelles Kommando keine Aktion vorschreibt
 	DEBUG5("next command: %i ",m_next_command.m_type);
-	if ((!hasScriptCommand() && m_next_command.m_type != Action::NOACTION) || 
+	if ((!hasScriptCommand() && m_next_command.m_type != Action::NOACTION && !getRegion()->getCutsceneMode()) || 
 			 (!m_script_commands.empty() && m_command.m_type == Action::NOACTION))
 	{
 		// Naechstes Kommando uebernehmen

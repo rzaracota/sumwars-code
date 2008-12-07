@@ -261,13 +261,16 @@ void World::createRegion(short region)
 			reg->addEvent("unit_die",ev);
 			*/
 			
+			
 			ev = new Event();
 			ev->setOnce();
 			ev->setCondition("return (unitIsInArea(player,'LichArea'))");
 			ev->setEffect(" \n \
+					setCutsceneMode(true) \n \
 					pos = getLocation('LichLocation') \n \
 					x = pos[1] \n \
 					y = pos[2] \n \
+					createObject('lich' ,{x-8,y}) \n \
 					addUnitCommand(player,'walk',2000,{x+4,y}) \n \
 					addUnitCommand(player,'walk',1900,{x,y-4}) \n \
 					addUnitCommand(player,'walk',1800,{x-4,y}) \n \
@@ -280,7 +283,8 @@ void World::createRegion(short region)
 			ev = new Event();
 			ev->setOnce();
 			ev->setCondition("return (command == 'attack')");
-			ev->setEffect("deleteObject(tree)");
+			ev->setEffect("deleteObject(tree) \n \
+					setCutsceneMode(false) \n ");
 			reg->addEvent("command_complete",ev);
 			
 		}
@@ -1636,7 +1640,9 @@ bool World::writeNetEvent(Region* region,NetEvent* event, CharConv* cv)
 	{
 		if (event->m_type == NetEvent::OBJECT_CREATED)
 		{
+			
 			object =region->getObject(event->m_id);
+			DEBUG5("object created %s %i",object->getTypeInfo()->m_subtype.c_str(), object->getId());
 			object->toString(cv);
 		}
 
@@ -1796,12 +1802,12 @@ bool World::processNetEvent(Region* region,CharConv* cv)
 	WorldObject* object;
 	Projectile* proj;
 	int id;
+	bool mode;
 
 	// Objekt suchen dass zu dem NetEvent gehoert
 	// Spieler werden aus der Spielerliste gesucht
 	// andere Objekte aus der Region
-	if (event.m_type == NetEvent::OBJECT_CREATED ||
-		   event.m_type ==  NetEvent::OBJECT_STAT_CHANGED ||
+	if (event.m_type ==  NetEvent::OBJECT_STAT_CHANGED ||
 		  event.m_type ==  NetEvent::OBJECT_DESTROYED)
 	{
 		if (m_players->count(event.m_id) ==1)
@@ -2117,6 +2123,13 @@ bool World::processNetEvent(Region* region,CharConv* cv)
 			World::getWorld()->getParty( event.m_data )->setRelation(event.m_id, (WorldObject::Relation) rel);
 			DEBUG("party %i changed relation to %i to %i",event.m_data, event.m_id, rel);
 			break;
+			
+		case NetEvent::REGION_CUTSCENE:
+			mode = (bool) event.m_data;
+			if (region !=0)
+			{
+				region ->setCutsceneMode(mode);
+			}
 
 		default:
 			ERRORMSG("unknown event type %i",event.m_type);

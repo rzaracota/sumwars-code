@@ -219,6 +219,12 @@ class EventSystem
 		static int addTriggerVariable(lua_State *L);
 		
 		/**
+		 * \fn static int setCutsceneMode(lua_State *L)
+		 * \brief Setzt den Cutscene Modus der Region
+		 */
+		static int setCutsceneMode(lua_State *L);
+		
+		/**
 		 * \fn static Vector getVector(lua_State *L, int index)
 		 * \brief Liest einen Vector vom Lua Stack
 		 * \param L Lua Status
