@@ -277,10 +277,11 @@ public:
 	void calcWalkDir(Vector goal,WorldObject* goalobj);
 	
 	/**
-	 * \fn void clearCommand()
+	 * \fn void clearCommand(bool success)
 	 * \brief Bricht das aktuelle Kommando ab
+	 * \param success Gibt an, ob die Ausfuehrung erfolgreich war
 	 */
-	void clearCommand();
+	void clearCommand(bool success);
 	
 	/**
 	 * \fn virtual void toString(CharConv* cv)
@@ -345,7 +346,20 @@ public:
 	 * \param valname Name des Wertes
 	 */
 	virtual bool setValue(std::string valname);
+	
+	/**
+	 * \fn void insertScriptCommand(Command &cmd, float time=50000)
+	 * \brief Fuegt fuer die Kreatur ein neues Kommando per Script hinzu
+	 * \param cmd Kommando
+	 * \param time Zeit die bleibt um das Kommando zu beenden
+	 */
+	void insertScriptCommand(Command &cmd, float time=50000);
 
+	/**
+	 * \fn bool hasScriptCommand()
+	 * \brief Gibt true zurueck, wenn das aktuelle Kommando per Script gesetzt wurde
+	 */
+	bool hasScriptCommand();
 	
 protected:
 	
@@ -488,6 +502,18 @@ private:
 	 * \brief Kommando das als naechstes abgearbeitet wird
 	 */
 	Command m_next_command;
+	
+	/**
+	 * \var std::list<std::pair<Command,float> > m_script_commands
+	 * \brief Liste von Kommandos, die durch Scripte vorgeschrieben wurden
+	 **/
+	std::list<std::pair<Command,float> > m_script_commands;
+	
+	/**
+	 * \var float m_script_command_timer
+	 * \brief Zeigt an, wie lange das aktuelle Kommando noch dauern darf
+	 */
+	float m_script_command_timer;
 	
 	
 	/**

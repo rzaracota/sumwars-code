@@ -755,7 +755,7 @@ bool World::insertPlayerIntoRegion(WorldObject* player, short region, LocationNa
 		player->setState(WorldObject::STATE_ACTIVE);
 
 		// bisheriges Kommando abbrechen
-		static_cast<Creature*>(player)->clearCommand();
+		static_cast<Creature*>(player)->clearCommand(false);
 		static_cast<Creature*>(player)->getAction()->m_type = Action::NOACTION;
 
 		if (m_server)

@@ -116,12 +116,8 @@ bool Creature::init()
 	}
 
 	setState(STATE_ACTIVE);
-	clearCommand();
-	m_next_command.m_type = Action::NOACTION;
-	m_next_command.m_damage_mult = 1;
-	m_next_command.m_goal = Vector(0,0);
-	m_next_command.m_goal_object_id =0;
-	m_next_command.m_range =1;
+	m_script_command_timer =0;
+	clearCommand(true);
 	
 	m_action.m_animation_number=0;
 	m_action.m_action_equip = Action::NO_WEAPON;
@@ -134,6 +130,8 @@ bool Creature::init()
 	m_dyn_attr.m_health = 1;
 
 	m_event_mask =0;
+	
+	
 
 	return tmp;
 }
@@ -194,7 +192,7 @@ void Creature::initAction()
 	}
 	
 	
-	DEBUG5("init Action %i", m_action.m_type);
+	DEBUG("init Action %i", m_action.m_type);
 
 	
 
@@ -532,14 +530,15 @@ void Creature::performAction(float &time)
 
 		// Kommando ist beendet wenn die gleichnamige Aktion beendet wurde
 		// Ausnahme: Bewegungskommando ist beendet wenn das Ziel erreicht ist
-		if (m_action.m_type == m_command.m_type && m_action.m_type != Action::WALK ||
-				  m_action.m_type == Action::WALK && getShape()->m_center.distanceTo(goal) < getBaseAttr()->m_step_length 
+		Action::ActionType baseact = Action::getActionInfo(m_command.m_type)->m_base_action;
+		if (((m_action.m_type == m_command.m_type) || m_action.m_type == baseact) && m_action.m_type != Action::WALK || m_command.m_type == Action::WALK && getShape()->m_center.distanceTo(goal) < getBaseAttr()->m_step_length 
 				  && !(m_command.m_type == Action::CHARGE || m_command.m_type == Action::STORM_CHARGE))
 		{
-			DEBUG5("finished command");
+			DEBUG5("finished command %i (base %i) with action %i",m_command.m_type,baseact,m_action.m_type );
 			if (m_command.m_type != Action::NOACTION)
 			{
 				m_event_mask |= NetEvent::DATA_COMMAND;
+				clearCommand(true);
 			}
 			m_command.m_type = Action::NOACTION;
 			m_action.m_elapsed_time=0;
@@ -1582,6 +1581,16 @@ void Creature::handleCollision(Shape* s2)
 
 }
 
+bool Creature::hasScriptCommand()
+{
+	return (m_script_command_timer>0 || !m_script_commands.empty());
+}
+
+void Creature::insertScriptCommand(Command &cmd, float time)
+{
+	m_script_commands.push_back(std::make_pair(cmd,time));	
+}
+
 void Creature::updateCommand()
 {
 	// Wenn aktuelles Kommando keine Aktion vorschreibt
@@ -1671,7 +1680,8 @@ void Creature::calcAction()
 			// Zielobjekt existiert nicht mehr, abbrechen
 			m_action.m_type = Action::NOACTION;
 			m_action.m_elapsed_time =0;
-			clearCommand();return;
+			clearCommand(false);
+			return;
 		}
 
 		// Ziel muss aktiv sein
@@ -1680,7 +1690,7 @@ void Creature::calcAction()
 			DEBUG5("refused to interact with inactive objekt %i",m_command.m_goal_object_id);
 			m_action.m_type = Action::NOACTION;
 			m_action.m_elapsed_time =0;
-			clearCommand();
+			clearCommand(false);
 			return;
 		}
 
@@ -1699,7 +1709,7 @@ void Creature::calcAction()
 			// Zielobjekt existiert nicht mehr, abbrechen
 			m_action.m_type = Action::NOACTION;
 			m_action.m_elapsed_time =0;
-			clearCommand();
+			clearCommand(false);
 			return;
 		}
 		else
@@ -1741,8 +1751,8 @@ void Creature::calcAction()
 			}
 
 			// Kommando damit abgeschlossen
-			m_command.m_type = Action::NOACTION;
-			m_event_mask |= NetEvent::DATA_COMMAND;
+			// m_command.m_type = Action::NOACTION;
+			// m_event_mask |= NetEvent::DATA_COMMAND;
 		}
 		else
 		{
@@ -1792,7 +1802,7 @@ void Creature::calcAction()
 					{
 						m_action.m_type = Action::NOACTION;
 						m_action.m_elapsed_time =0;
-						clearCommand();
+						clearCommand(false);
 
 					}
 					m_event_mask |= NetEvent::DATA_MOVE_INFO;
@@ -1817,7 +1827,7 @@ void Creature::calcAction()
 		m_action.m_goal_object_id = m_command.m_goal_object_id;
 		m_action.m_goal = goal;
 
-		clearCommand();
+		//clearCommand(true);
 	}
 
 }
@@ -2129,8 +2139,10 @@ void Creature::calcWalkDir(Vector goal,WorldObject* goalobj)
 	}
 }
 
-void Creature::clearCommand()
+void Creature::clearCommand(bool success)
 {
+	DEBUG5("command %i ended with success %i",m_command.m_type, success);
+	
 	m_command.m_type = Action::NOACTION;
 	m_command.m_damage_mult = 1;
 	m_command.m_goal = Vector(0,0);

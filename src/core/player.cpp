@@ -130,7 +130,7 @@ void  Player::revive()
 	}
 
 	setState(STATE_ACTIVE);
-	clearCommand();
+	clearCommand(false);
 	getNextCommand()->m_type = Action::NOACTION;
 	getNextCommand()->m_damage_mult = 1;
 	getNextCommand()->m_goal = Vector(0,0);
@@ -1373,6 +1373,7 @@ void Player::performActionCritPart(Vector goal, WorldObject* goalobj)
 {
 	if (getAction()->m_type == Action::TAKE_ITEM)
 	{
+		DEBUG("take item");
 		// Item suchen
 		Item* itm = getRegion()->getItem(getCommand()->m_goal_object_id);
 
