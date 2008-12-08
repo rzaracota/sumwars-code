@@ -108,6 +108,12 @@ class Event
 		}
 		
 		/**
+		 * \fn ~Event()
+		 * \brief Destruktor
+		 */
+		~Event();
+		
+		/**
 		 * \fn void setCondition(char * cond)
 		 * \brief Setzt die Bedingung fuer die Ausfuehrung des Events
 		 * \param cond Bedingung als Folge von Lua Anweisungen

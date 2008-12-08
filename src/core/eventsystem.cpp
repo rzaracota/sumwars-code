@@ -114,19 +114,28 @@ bool EventSystem::executeEvent(Event* event)
 
 Vector EventSystem::getVector(lua_State *L, int index)
 {
-	float x,y;
-		
-	lua_pushinteger(L, 1);
-	lua_gettable(L, index);
-	x = lua_tonumber(L, -1);
-	lua_pop(L, 1);
+	if (lua_istable(L,index))
+	{
+		float x,y;
 			
-	lua_pushinteger(L, 2);
-	lua_gettable(L, index);
-	y = lua_tonumber(L, -1);
-	lua_pop(L, 1);
+		lua_pushinteger(L, 1);
+		lua_gettable(L, index);
+		x = lua_tonumber(L, -1);
+		lua_pop(L, 1);
+				
+		lua_pushinteger(L, 2);
+		lua_gettable(L, index);
+		y = lua_tonumber(L, -1);
+		lua_pop(L, 1);
 	
-	return Vector(x,y);
+		return Vector(x,y);
+	}
+	else if (lua_isstring(L,index))
+	{
+		LocationName loc = lua_tostring(L, index);
+		return m_region->getLocation(loc);
+	}
+	return Vector(0,0);
 }
 
 void EventSystem::pushVector(lua_State *L, Vector v)
@@ -253,7 +262,7 @@ int EventSystem::setDamageValue(lua_State *L)
 int EventSystem::createProjectile(lua_State *L)
 {
 	int argc = lua_gettop(L);
-	if (argc >= 3 && lua_isstring(L,1) && lua_isstring(L,2)  && lua_istable(L,3))
+	if (argc >= 3 && lua_isstring(L,1) && lua_isstring(L,2)  && (lua_istable(L,3) || lua_isstring(L,3)))
 	{
 		if (m_region !=0)
 		{
@@ -301,7 +310,7 @@ int EventSystem::createProjectile(lua_State *L)
 			Projectile* pr = new Projectile(type, dmg, World::getWorld()->getValidProjectileId());
 			
 			// Richtung, Geschwindigkeit ermitteln
-			if (argc>=4 && lua_istable(L,4))
+			if (argc>=4 && (lua_istable(L,4) || lua_isstring(L,4)))
 			{
 
 				Vector goal = getVector(L,4);
@@ -371,7 +380,7 @@ int EventSystem::pointIsInArea(lua_State *L)
 {
 	bool ret =false;
 	int argc = lua_gettop(L);
-	if (argc>=2 && lua_istable(L,1) && lua_isstring(L,2))
+	if (argc>=2 && (lua_istable(L,1) || lua_isstring(L,1)) && lua_isstring(L,2))
 	{
 		Vector c = getVector(L,1);
 		AreaName area = lua_tostring(L, 2);
@@ -400,7 +409,7 @@ int EventSystem::createObject(lua_State *L)
 {
 	int ret =0;
 	int argc = lua_gettop(L);
-	if (argc>=2 && lua_istable(L,2) && lua_isstring(L,1))
+	if (argc>=2 && (lua_istable(L,2) || lua_isstring(L,2)) && lua_isstring(L,1))
 	{
 		
 		
@@ -478,7 +487,7 @@ int EventSystem::addUnitCommand(lua_State *L)
 					{
 						com.m_goal_object_id = lua_tointeger(L,4);
 					}
-					else if (argc >=4 && lua_istable(L,4))
+					else if (argc >=4 && (lua_istable(L,4) || lua_isstring(L,4)))
 					{
 						com.m_goal = getVector(L,4);
 					}
@@ -502,7 +511,7 @@ int EventSystem::addUnitCommand(lua_State *L)
 int EventSystem::getObjectAt(lua_State *L)
 {
 	int argc = lua_gettop(L);
-	if (argc>=1 && lua_istable(L,1))
+	if (argc>=1 && (lua_istable(L,1) || lua_isstring(L,1)))
 	{
 		Vector pos = getVector(L,1);
 		if (m_region !=0)
@@ -600,7 +609,7 @@ int EventSystem::getObjectsInArea(lua_State *L)
 int EventSystem::dropItem(lua_State *L)
 {
 	int argc = lua_gettop(L);
-	if (argc>=2 && lua_istable(L,2) && lua_isstring(L,1))
+	if (argc>=2 && (lua_istable(L,2) || lua_isstring(L,2)) && lua_isstring(L,1))
 	{
 		Item::Subtype subtype = lua_tostring(L, 1);
 		Vector pos = getVector(L,2);
@@ -626,7 +635,7 @@ int EventSystem::dropItem(lua_State *L)
 int EventSystem::addLocation(lua_State *L)
 {
 	int argc = lua_gettop(L);
-	if (argc>=2 && lua_istable(L,2) && lua_isstring(L,1))
+	if (argc>=2 && (lua_istable(L,2) || lua_isstring(L,2)) && lua_isstring(L,1))
 	{
 		LocationName loc = lua_tostring(L, 1);
 		Vector v = getVector(L,2);
@@ -667,7 +676,7 @@ int EventSystem::getLocation(lua_State *L)
 int EventSystem::addArea(lua_State *L)
 {
 	int argc = lua_gettop(L);
-	if (argc>=4 && lua_isstring(L,1) && lua_isstring(L,2) && lua_istable(L,3) )
+	if (argc>=4 && lua_isstring(L,1) && lua_isstring(L,2) && (lua_istable(L,3) || lua_isstring(L,3)) )
 	{
 		AreaName area = lua_tostring(L, 1);
 		std::string type = lua_tostring(L, 2);

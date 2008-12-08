@@ -1,22 +1,23 @@
 #include "event.h"
+#include "debug.h"
 
 Trigger::Trigger(TriggerType type)
 {
 	m_type = type,
-	m_lua_variables = "";
+	m_lua_variables = "trigger = {} \n";
 }
 
 void Trigger::addVariable(std::string name, int value)
 {
 	std::stringstream stream;
-	stream << name << " = " << value << "\n";
+	stream <<"trigger."<< name << " = " << value << "\n";
 	m_lua_variables += stream.str();
 }
 
 void Trigger::addVariable(std::string name, bool value)
 {
 	std::stringstream stream;
-	stream << name << " = ";
+	stream <<"trigger."<< name << " = ";
 	if (value)
 	{
 		 stream << "true"; 
@@ -33,14 +34,18 @@ void Trigger::addVariable(std::string name, bool value)
 void Trigger::addVariable(std::string name, float value)
 {
 	std::stringstream stream;
-	stream << name << " = " << value << "\n";
+	stream <<"trigger."<< name << " = " << value << "\n";
 	m_lua_variables += stream.str();
 }
 
 void Trigger::addVariable(std::string name, std::string value)
 {
 	std::stringstream stream;
-	stream << name << " = \"" << value << "\"\n";
+	stream <<"trigger."<< name << " = \"" << value << "\"\n";
 	m_lua_variables += stream.str();
+}
+
+Event::~Event()
+{
 }
 

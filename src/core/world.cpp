@@ -115,6 +115,92 @@ bool World::init()
 	rdata->addExit(exit);
 
 	registerRegionData(rdata,0);
+	
+	Event* ev;
+
+	ev = new Event();
+	ev->setEffect("addLocation('LichLocation', {130,212}) \n \
+			addArea('LichArea','circle',{130,212},6) \n \
+			tree = createObject('$tree', 'LichLocation') \n \
+			");
+	ev->setOnce();
+	rdata->addEvent("create_region",ev);
+
+	// Debugging
+	/*
+	// Testevent2: Feuerschiessender Baum
+			
+	ev = new Event();
+	ev->setEffect("setDamageValue('trapdmg','fire_dmg',5,10) \n \
+	active = false");
+	ev->setOnce();
+	rdata->addEvent("create_region",ev);
+			
+	ev = new Event();
+	ev->setCondition("return (unitIsInArea(trigger.player,'LichArea') and active == false)");
+	ev->setEffect("insertTrigger('trap_fire'); \n \
+	addTriggerVariable('goal',trigger.player); ");
+	rdata->addEvent("player_moved",ev);
+			
+			
+	ev = new Event();
+	ev->setEffect(" \
+	if unitIsInArea(trigger.goal,'LichArea') then \n \
+	createProjectile('fire_ball','trapdmg',getObjectValue(tree,'position'),getObjectValue(trigger.goal,'position'),10.0,0.3 ) \n \
+	startTimer('trap_fire',2000) \n \
+	addTriggerVariable('goal',trigger.goal) \n \
+	active = true \n \
+	else \n \
+	active = false \n  \
+	end ");
+	rdata->addEvent("trap_fire",ev);
+			*/
+			
+			
+			// Testevent: getarnter Lich
+			
+	ev = new Event();
+	ev->setOnce();
+	ev->setCondition("return (unitIsInArea(trigger.player,'LichArea'))");
+	ev->setEffect("deleteObject(tree) \n \
+			lich = createObject('lich', 'LichLocation') \n \
+			insertTrigger('testTimer') \n \
+			");
+	rdata->addEvent("player_moved",ev);
+
+	ev = new Event();
+	ev->setOnce();
+	ev->setCondition("return (trigger.unit == lich)");
+	ev->setEffect("dropItem('demon_sw', getObjectValue(lich,'position'))");
+	rdata->addEvent("unit_die",ev);
+			
+			
+			/*
+	ev = new Event();
+	ev->setOnce();
+	ev->setCondition("return (unitIsInArea(trigger.player,'LichArea'))");
+	ev->setEffect(" \n \
+	setCutsceneMode(true) \n \
+	pos = getLocation('LichLocation') \n \
+	x = pos[1] \n \
+	y = pos[2] \n \
+	createObject('goblin' ,{x-8,y}) \n \
+	addUnitCommand(trigger.player,'walk',2000,{x+4,y}) \n \
+	addUnitCommand(trigger.player,'walk',1900,{x,y-4}) \n \
+	addUnitCommand(trigger.player,'walk',1800,{x-4,y}) \n \
+	addUnitCommand(trigger.player,'walk',1700,{x,y+4}) \n \
+	addUnitCommand(trigger.player,'walk',1700,{x,y}) \n \
+	addUnitCommand(trigger.player,'attack',1700,{x,y}) \n \
+	");
+	rdata->addEvent("player_moved",ev);
+			
+	ev = new Event();
+	ev->setOnce();
+	ev->setCondition("return (trigger.command == 'attack')");
+	ev->setEffect("deleteObject(tree) \n \
+	setCutsceneMode(false) \n ");
+	rdata->addEvent("command_complete",ev);
+			*/
 
 
 	// Wird schon aus XML geladen
@@ -203,89 +289,6 @@ void World::createRegion(short region)
 		// Debugging
 		if (region ==0)
 		{
-			Event* ev;
-
-			ev = new Event();
-			ev->setEffect("addLocation('LichLocation', {130,212}) \n \
-					addArea('LichArea','circle',{130,212},6) \n \
-					tree = createObject('$tree', getLocation('LichLocation')) \n \
-					");
-			ev->setOnce();
-			reg->addEvent("create_region",ev);
-
-			/*
-			// Testevent2: Feuerschiessender Baum
-			
-			ev = new Event();
-			ev->setEffect("setDamageValue('trapdmg','fire_dmg',5,10) \n \
-					active = false");
-			ev->setOnce();
-			reg->addEvent("create_region",ev);
-			
-			ev = new Event();
-			ev->setCondition("return (unitIsInArea(player,'LichArea') and active == false)");
-			ev->setEffect("insertTrigger('trap_fire'); \n \
-					addTriggerVariable('goal',player); ");
-			reg->addEvent("player_moved",ev);
-			
-			
-			ev = new Event();
-			ev->setEffect(" \
-					if unitIsInArea(goal,'LichArea') then \n \
-						createProjectile('fire_ball','trapdmg',getObjectValue(tree,'position'),getObjectValue(goal,'position'),10.0,0.3 ) \n \
-						startTimer('trap_fire',2000) \n \
-						addTriggerVariable('goal',goal) \n \
-						active = true \n \
-					else \n \
-						active = false \n  \
-					end ");
-			reg->addEvent("trap_fire",ev);
-			*/
-			
-			/*
-			// Testevent: getarnter Lich
-			
-			ev = new Event();
-			ev->setOnce();
-			ev->setCondition("return (unitIsInArea(player,'LichArea'))");
-			ev->setEffect("deleteObject(tree) \n \
-					lich = createObject('lich', getLocation('LichLocation')) \n \
-					insertTrigger('testTimer') \n \
-					");
- 			reg->addEvent("player_moved",ev);
-
-			ev = new Event();
-			ev->setOnce();
-			ev->setCondition("return (unit == lich)");
-			ev->setEffect("dropItem('demon_sw', getObjectValue(lich,'position'))");
-			reg->addEvent("unit_die",ev);
-			*/
-			
-			
-			ev = new Event();
-			ev->setOnce();
-			ev->setCondition("return (unitIsInArea(player,'LichArea'))");
-			ev->setEffect(" \n \
-					setCutsceneMode(true) \n \
-					pos = getLocation('LichLocation') \n \
-					x = pos[1] \n \
-					y = pos[2] \n \
-					createObject('goblin' ,{x-8,y}) \n \
-					addUnitCommand(player,'walk',2000,{x+4,y}) \n \
-					addUnitCommand(player,'walk',1900,{x,y-4}) \n \
-					addUnitCommand(player,'walk',1800,{x-4,y}) \n \
-					addUnitCommand(player,'walk',1700,{x,y+4}) \n \
-					addUnitCommand(player,'walk',1700,{x,y}) \n \
-					addUnitCommand(player,'attack',1700,{x,y}) \n \
-					");
-			reg->addEvent("player_moved",ev);
-			
-			ev = new Event();
-			ev->setOnce();
-			ev->setCondition("return (command == 'attack')");
-			ev->setEffect("deleteObject(tree) \n \
-					setCutsceneMode(false) \n ");
-			reg->addEvent("command_complete",ev);
 			
 		}
 	}

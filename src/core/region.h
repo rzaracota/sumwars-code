@@ -140,6 +140,11 @@ class RegionData
 			
 		};
 		
+		/**
+		 * \fn ~RegionData()
+		 * \brief Destruktor
+		 */
+		~RegionData();
 		
 		/**
 		 * \fn void addObjectGroupTemplate(ObjectGroupTemplateName m_group_name, int prio, int number =1, float probability=1.0)
@@ -200,6 +205,14 @@ class RegionData
 		{
 			m_exits.push_back(exit);
 		}
+		
+		/**
+		 * \fn void addEvent(TriggerType type, Event* event)
+		 * \brief Fuegt ein neues Event hinzu
+		 * \param trigger Typ des Triggers durch den das Event ausgeloest wird
+		 * \param event Event
+		 */
+		void addEvent(TriggerType trigger, Event* event);
 		
 		/**
 		 * \var short m_id
@@ -286,6 +299,12 @@ class RegionData
 		 * \brief Ort an dem in dieser Region gestorbene Helden wiedererweckt werden
 		 */
 		std::pair<RegionName, LocationName> m_revive_location;
+		
+		/**
+		 * \fn std::multimap<TriggerType, Event*> m_events
+		 * \brief Events der Region
+		 */
+		std::multimap<TriggerType, Event*> m_events;
 };
 
 
@@ -782,6 +801,15 @@ class Region
 		bool getCutsceneMode()
 		{
 			return m_cutscene_mode;
+		}
+		
+		/**
+		 * \fn std::multimap<TriggerType, Event*>& getEvents()
+		 * \brief Gibt Referenz auf die Eventliste aus
+		 */
+		std::multimap<TriggerType, Event*>& getEvents()
+		{
+			return m_events;
 		}
 		
 	private:

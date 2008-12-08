@@ -3,6 +3,11 @@
 #include "player.h"
 #include "eventsystem.h"
 
+RegionData::~RegionData()
+{
+	
+}
+
 void RegionData::addObjectGroupTemplate(ObjectGroupTemplateName group_name, int prio, int number,float probability)
 {
 	ObjectGroupTemplateSet newgroup;
@@ -14,6 +19,10 @@ void RegionData::addObjectGroupTemplate(ObjectGroupTemplateName group_name, int 
 	m_object_groups.insert(std::make_pair(prio,newgroup));
 }
 
+void RegionData::addEvent(TriggerType trigger, Event* event)
+{
+	m_events.insert(std::make_pair(trigger,event));
+}
 
 Region::Region(short dimx, short dimy, short id, std::string name)
 {
@@ -91,7 +100,7 @@ Region::~Region()
 	{
 		delete m->second;
 	}
-
+	
 	delete m_objects;
 	delete m_static_objects;
 	delete m_players;
@@ -1213,6 +1222,7 @@ void Region::update(float time)
 			
 			// vom Trigger definierte Variablen einfuegen
 			EventSystem::doString((char*) m_triggers.front()->getLuaVariables().c_str());
+			DEBUG5("lua code \n %s",m_triggers.front()->getLuaVariables().c_str());
 			
 			// Event ausfuehren
 			bool ret = EventSystem::executeEvent(jt->second);

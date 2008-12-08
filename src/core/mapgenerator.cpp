@@ -26,6 +26,8 @@ Region* MapGenerator::createRegion(RegionData* rdata)
 
 		// Objektgruppen platzieren
 		success = MapGenerator::insertGroupTemplates(&mdata,rdata);
+		
+		mdata.m_region->getEvents() = rdata->m_events;
 
 		// Wenn der Versuch nicht erfolgreich war alles loeschen und von vorn beginnen
 		if (!success)
