@@ -81,33 +81,11 @@ std::string EventSystem::getReturnValue()
 bool EventSystem::executeEvent(Event* event)
 {
 	// Lua Code zum Bedingung pruefen ausfuehren
-	if (event->getCondition() != "")
-	{
-		doString((char*) event->getCondition().c_str());
+	bool ret = event->checkCondition();
+	if (ret ==false)
+		return false;
 	
-		// Pruefen, ob true zurueck gegeben wurde
-		if (lua_gettop(m_lua) >0)
-		{
-			bool ret = lua_toboolean(m_lua, -1);
-			lua_pop(m_lua, 1);
-			
-			if (ret == false)
-			{
-				// Bedingung nicht erfuellt
-				return false;
-			}
-		}
-		else
-		{
-			ERRORMSG("condition lua code must return bool");
-			return false;
-		}
-	}
-	
-	if (event->getEffect() != "")
-	{
-		doString((char*) event->getEffect().c_str());
-	}
+	event->doEffect();
 	
 	return true;
 }

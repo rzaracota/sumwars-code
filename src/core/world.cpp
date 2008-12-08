@@ -286,11 +286,6 @@ void World::createRegion(short region)
 		reg->setReviveLocation("region0","entry_south");
 		insertRegion(reg,region);
 
-		// Debugging
-		if (region ==0)
-		{
-			
-		}
 	}
 	else if(type==2)
 	{

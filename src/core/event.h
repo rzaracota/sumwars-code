@@ -5,6 +5,14 @@
 #include <map>
 #include <sstream>
 
+extern "C"
+{
+	
+#include "lua.h"
+#include "lualib.h"
+#include "lauxlib.h"
+}
+
 /**
  * Typ eines Triggers
  */
@@ -103,8 +111,8 @@ class Event
 		Event()
 		{
 			m_once = false;
-			m_condition = "";
-			m_effect = "";
+			m_condition = LUA_NOREF;
+			m_effect = LUA_NOREF;
 		}
 		
 		/**
@@ -118,44 +126,26 @@ class Event
 		 * \brief Setzt die Bedingung fuer die Ausfuehrung des Events
 		 * \param cond Bedingung als Folge von Lua Anweisungen
 		 */
-		void setCondition(char * cond)
-		{
-			if (cond != 0)
-			{
-				m_condition = cond;
-			}
-		}
-		
+		void setCondition(char * cond);
+	
 		/**
-		 * \fn std::string& getCondition()
-		 * \brief Gibt die Bedingung fuer die Ausfuehrung des Events aus
+		 * \fn bool checkCondition();
+		 * \brief Testet die Bedingung fuer die Ausfuehrung des Events
 		 */
-		std::string& getCondition()
-		{
-			return m_condition;
-		}
+		bool checkCondition();
 		
 		/**
 		 * \fn void setEffect(char * effect)
 		 * \brief Setzt die Wirkung des Events
 		 * \param effect Wirkung als Folge von Lua Anweisungen
 		 */
-		void setEffect(char * effect)
-		{
-			if (effect != 0)
-			{
-				m_effect = effect;
-			}
-		}
+		void setEffect(char * effect);
 		
 		/**
-		 * \fn std::string& getEffect()
-		 * \brief Gibt die Wirkung des Events aus
+		 * \fn void doEffect();
+		 * \brief Fuehrt die Wirkung des Events aus
 		 */
-		std::string& getEffect()
-		{
-			return m_effect;
-		}
+		void doEffect();
 		
 		/**
 		 * \fn void setOnce(bool once = true)
@@ -178,10 +168,10 @@ class Event
 		
 	private:
 		/**
-	 	 * \var std::string m_condition
+	 	 * \var int m_condition
 		 * \brief Bedingung unter der das Event ausgefuehrt wird (Folge von Lua Anweisungen)
 		 */
-		std::string m_condition;
+		int m_condition;
 		
 		/**
 		 * \var bool m_once
@@ -190,10 +180,10 @@ class Event
 		bool m_once;
 		
 		/**
-		 * \var std::string m_effect
+		 * \var int m_effect
 		 * \brief Wirkung des Events (Folge von Lua Anweisungen)
 		 */
-		std::string m_effect;
+		int m_effect;
 };
 
 
