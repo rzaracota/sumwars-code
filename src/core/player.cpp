@@ -219,7 +219,7 @@ bool Player::onGamefieldClick(ClientCommand* command)
 	if ( command->m_id!=0 && command->m_action != Action::TAKE_ITEM)
 	{
 
-		DEBUG4("Kommando erhalten, zielid: %i",command->m_id);
+		DEBUG5("Kommando erhalten, zielid: %i",command->m_id);
 		wo = getRegion()->getObject(command->m_id);
 
 		// Unterscheidung Zielobject vs kein Zielobject
@@ -257,6 +257,7 @@ bool Player::onGamefieldClick(ClientCommand* command)
 						*/
 					}
 				}
+				
 				if (rel == WorldObject::ALLIED && dist == Action::PARTY)
 				{
 					if (wo->getState()==STATE_ACTIVE)
@@ -366,7 +367,7 @@ bool Player::onGamefieldClick(ClientCommand* command)
 			com->m_range = getBaseAttrMod()->m_attack_range;
 			com->m_goal_object_id =0;
 		}
-		else if (dist == Action::MELEE && command->m_button == LEFT_SHIFT_MOUSE_BUTTON)
+		else if (dist == Action::MELEE && (command->m_button == LEFT_SHIFT_MOUSE_BUTTON  || command->m_button == RIGHT_MOUSE_BUTTON))
 		{
 			// Nahkampf nur dann starten, wenn shift gedrueckt wurde
 			com->m_type = command->m_action;

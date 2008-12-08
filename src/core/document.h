@@ -506,32 +506,28 @@ class Document
 	
 
 	/**
-	 * \fn void onLeftMouseButtonClick (float x, float y)
+	 * \fn void onLeftMouseButtonClick (Vector pos)
 	 * \brief Behandelt die Reaktion auf einen Linksklick ins Spielfeld
-	 * \param x X-Koordinate
-	 * \param y Y-Koordinate
+	 * \param pos Position des Mausklicks
 	 */
-	void onLeftMouseButtonClick(float x, float y);
+	void onLeftMouseButtonClick(Vector pos);
 
 
 	/**
-	 * \fn void onRightMouseButtonClick (float x, float y)
+	 * \fn void onRightMouseButtonClick (Vector pos)
 	 * \brief Behandelt die Reaktion auf einen Rechtsklick ins Spielfeld
-	 * \param x X-Koordinate
-	 * \param y Y-Koordinate
+	 * \param pos Position des Mausklicks
 	 */
-	void onRightMouseButtonClick(float x, float y);
+	void onRightMouseButtonClick(Vector pos);
 	
 	/**
-	 * \fn void onMouseMove(float x, float y, float xrel, float yrel, float wheelrel)
+	 * \fn void onMouseMove(float xrel, float yrel, float wheelrel)
 	 * \brief Behandelt die Bewegung der Maus
-	 * \param x neue x-Koordinate
-	 * \param y neue y-Koordinate
 	 * \param xrel relative Bewegung in x-Richtung
 	 * \param yrel relative Bewegung in y-Richtung
 	 * \param wheelrel Bewegung des Mausrades
 	 */
-	void onMouseMove(float x, float y, float xrel, float yrel, float wheelrel);
+	void onMouseMove(float xrel, float yrel, float wheelrel);
 
 	/**
 	 * \fn void onStartScreenClicked()

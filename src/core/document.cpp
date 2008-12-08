@@ -317,7 +317,7 @@ void Document::onButtonSaveExitClicked ( )
 }
 
 
-void Document::onRightMouseButtonClick(float x, float y)
+void Document::onRightMouseButtonClick(Vector pos)
 {
 	ClientCommand command;
 
@@ -328,8 +328,7 @@ void Document::onRightMouseButtonClick(float x, float y)
 
 
 	// herstellen der Koordinaten im Koordinatensystem des Spiels
-	m_gui_state.m_clicked.m_x =x;
-	m_gui_state.m_clicked.m_y =y;
+	m_gui_state.m_clicked = pos;
 
 	// Paket mit Daten fuellen
 	command.m_button=RIGHT_MOUSE_BUTTON;
@@ -339,12 +338,16 @@ void Document::onRightMouseButtonClick(float x, float y)
 	m_gui_state.m_left_mouse_pressed=false;
 	m_gui_state.m_right_mouse_pressed_time=0;
 
-	DEBUG5("angeklickte Koordinaten: %f %f",x,y);
+	DEBUG5("angeklickte Koordinaten: %f %f",pos.m_x,pos.m_y);
 
 	m_gui_state.m_clicked_object_id=0;
 	command.m_id=0;
 
-	int id = getObjectAt(x,y);
+	int id = 0;
+	if (getGUIState()->m_cursor_object_id != 0)
+	{
+		id = getGUIState()->m_cursor_object_id;
+	}
 
 	m_gui_state.m_clicked_object_id = id;
 	command.m_id =id;
@@ -360,7 +363,7 @@ void Document::onRightMouseButtonClick(float x, float y)
 
 }
 
-void Document::onLeftMouseButtonClick(float x, float y)
+void Document::onLeftMouseButtonClick(Vector pos)
 {
 
 	ClientCommand command;
@@ -372,8 +375,7 @@ void Document::onLeftMouseButtonClick(float x, float y)
 
 	// herstellen der Koordinaten im Koordinatensystem des Spiels
 
-	m_gui_state.m_clicked.m_x =x;
-	m_gui_state.m_clicked.m_y =y;
+	m_gui_state.m_clicked = pos;
 
 
 	// Paket mit Daten fuellen
@@ -389,7 +391,7 @@ void Document::onLeftMouseButtonClick(float x, float y)
 	m_gui_state.m_left_mouse_pressed_time=0;
 
 
-	DEBUG4("angeklickte Koordinaten: %f %f",x,y);
+	DEBUG4("angeklickte Koordinaten: %f %f",pos.m_x,pos.m_y);
 
 	//TODO: suchen welches objekt angeklickt wurde
 
@@ -397,7 +399,7 @@ void Document::onLeftMouseButtonClick(float x, float y)
 	command.m_id=0;
 
 
-	int id = getObjectAt(x,y);
+	int id = 0;
 	if (getGUIState()->m_cursor_object_id != 0)
 	{
 		id = getGUIState()->m_cursor_object_id;
@@ -433,7 +435,7 @@ void Document::onLeftMouseButtonClick(float x, float y)
 
 }
 
-void Document::onMouseMove(float x, float y, float xrel, float yrel, float wheelrel)
+void Document::onMouseMove(float xrel, float yrel, float wheelrel)
 {
 	Player* player = getLocalPlayer();
 	if (player!=0)

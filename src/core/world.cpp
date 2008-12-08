@@ -270,7 +270,7 @@ void World::createRegion(short region)
 					pos = getLocation('LichLocation') \n \
 					x = pos[1] \n \
 					y = pos[2] \n \
-					createObject('lich' ,{x-8,y}) \n \
+					createObject('goblin' ,{x-8,y}) \n \
 					addUnitCommand(player,'walk',2000,{x+4,y}) \n \
 					addUnitCommand(player,'walk',1900,{x,y-4}) \n \
 					addUnitCommand(player,'walk',1800,{x-4,y}) \n \

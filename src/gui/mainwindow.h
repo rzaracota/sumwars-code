@@ -223,6 +223,13 @@ class MainWindow :
 	 */
 	void setWindowExtents(int width, int height);
 
+	/**
+	 * \fn Vector getIngamePos(float x, float y)
+	 * \brief Berechnet die Ingameposition zu gegebenen Koordinaten auf dem Bildschirm
+	 * \param screenx x-Position auf dem Bildschirm 
+	 * \param screeny y-Position auf dem Bildschirm
+	 */
+	Vector getIngamePos(float screenx, float screeny);
 
 	private:
 

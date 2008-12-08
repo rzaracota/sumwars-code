@@ -1213,6 +1213,47 @@ void MainWindow::updatePartyInfo()
 	}
 }
 
+Vector MainWindow::getIngamePos(float screenx, float screeny)
+{
+	// Position des Mausklicks relativ zum Viewport
+	Ogre::Viewport* viewport = m_scene->getViewport();
+	float relx = screenx*1.0/(viewport->getActualWidth());
+	float rely = screeny*1.0/(viewport->getActualHeight());
+	DEBUG5("relative Koordinaten %f %f",relx,rely);
+
+	// Strahl von der Kamera durch den angeklickten Punkt
+	Ogre::Camera* camera = m_scene->getCamera();
+	Ogre::Ray ray = camera->getCameraToViewportRay(relx,rely);
+
+	// Ursprung und Richtung des Strahles
+	const Ogre::Vector3& orig = ray.getOrigin();
+	DEBUG5("ray orig %f %f %f",orig.x,orig.y,orig.z);
+	const Ogre::Vector3& dir = ray.getDirection();
+	DEBUG5("ray dir %f %f %f",dir.x,dir.y,dir.z);
+
+	// Schnittpunkt mit der Ebene y=0 ausrechnen
+	
+	Vector ret;
+	float dy = dir.y;
+	if (dir.y>=0)
+	{
+		dy = -0.001;
+	}
+	
+	
+	// Durchstosspunkt durch die Ebene y=0
+	Ogre::Vector3 p = orig + dir*(orig.y/(-dy));
+	DEBUG5("schnittpunkt %f %f %f",p.x,p.y,p.z);
+
+	// Umrechnen in Spielkoordinaten
+	ret.m_x = p.x/50;
+	ret.m_y = p.z/50;
+	DEBUG5("Punkt in Spielkoordinaten %f %f",ret.m_x,ret.m_y);
+	
+	return ret;
+
+}
+
 // MouseListener
 bool MainWindow::mouseMoved(const OIS::MouseEvent &evt) {
 	m_cegui_system->injectMouseWheelChange(evt.state.Z.rel);
@@ -1220,7 +1261,14 @@ bool MainWindow::mouseMoved(const OIS::MouseEvent &evt) {
 	
 	//return m_cegui_system->injectMouseMove(evt.state.X.rel, evt.state.Y.rel);
 	//DEBUG("injection position %i %i",evt.state.X.abs,evt.state.Y.abs);
-	m_document->onMouseMove(evt.state.X.abs,evt.state.Y.abs,evt.state.X.rel, evt.state.Y.rel,evt.state.Z.rel); 
+	m_document->onMouseMove(evt.state.X.rel, evt.state.Y.rel,evt.state.Z.rel);
+	
+	if (m_document->getGUIState()->m_left_mouse_pressed || m_document->getGUIState()->m_right_mouse_pressed)
+	{
+		Vector pos = getIngamePos(evt.state.X.abs,evt.state.Y.abs);
+		m_document->getGUIState()->m_clicked = pos;
+	}
+	
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::Window* label = win_mgr.getWindow("CursorItemImage");
 	
@@ -1231,6 +1279,7 @@ bool MainWindow::mouseMoved(const OIS::MouseEvent &evt) {
 		off = 16;
 	if (label->getID() == Item::SMALL)
 		off = 12;
+	
 	
 	label->setPosition(CEGUI::UVector2(CEGUI::UDim(0,std::max(0,evt.state.X.abs-off)),CEGUI::UDim(0,std::max(0,evt.state.Y.abs- off))));
 	
@@ -1286,58 +1335,21 @@ bool MainWindow::mousePressed(const OIS::MouseEvent &evt, OIS::MouseButtonID btn
 			else
 			{
 
-				// Position des Mausklicks relativ zum Viewport
-				Ogre::Viewport* viewport = m_scene->getViewport();
-				float relx = x*1.0/(viewport->getActualWidth());
-				float rely = y*1.0/(viewport->getActualHeight());
-				DEBUG5("relative Koordinaten %f %f",relx,rely);
+				Vector pos = getIngamePos(x,y);
 
-				// Strahl von der Kamera durch den angeklickten Punkt
-				Ogre::Camera* camera = m_scene->getCamera();
-				Ogre::Ray ray = camera->getCameraToViewportRay(relx,rely);
-
-				// Ursprung und Richtung des Strahles
-				const Ogre::Vector3& orig = ray.getOrigin();
-				DEBUG5("ray orig %f %f %f",orig.x,orig.y,orig.z);
-				const Ogre::Vector3& dir = ray.getDirection();
-				DEBUG5("ray dir %f %f %f",dir.x,dir.y,dir.z);
-
-				// Schnittpunkt mit der Ebene y=0 ausrechnen
-				if (dir.y <0)
+				if (btn == OIS::MB_Left)
 				{
-					// Strahl zeigt *nach unten*
-
-					// Durchstosspunkt durch die Ebene y=0
-					Ogre::Vector3 p = orig + dir*(orig.y/(-dir.y));
-					DEBUG5("schnittpunkt %f %f %f",p.x,p.y,p.z);
-
-					// Umrechnen in Spielkoordinaten
-					float gx = p.x/50;
-					float gy = p.z/50;
-					DEBUG5("Punkt in Spielkoordinaten %f %f",gx,gy);
-
-					// Koordinaten relativ zum Spieler
-					//gx -= mpx;
-					//gy -= mpy;
-
-					if (btn == OIS::MB_Left)
-					{
-						m_document->getGUIState()->m_left_mouse_pressed=true;
-						m_document->onLeftMouseButtonClick(gx, gy);
-					}
-					else if (btn == OIS::MB_Right)
-					{
-						m_document->getGUIState()->m_right_mouse_pressed=true;
-						m_document->onRightMouseButtonClick(gx, gy);
-					}
-
-
+					m_document->getGUIState()->m_left_mouse_pressed=true;
+					m_document->onLeftMouseButtonClick(pos);
 				}
-				else
+				else if (btn == OIS::MB_Right)
 				{
-					// Strahl zeigt nach oben, ueber den Horizont
-					// sollte eigentlich nicht passieren
+					m_document->getGUIState()->m_right_mouse_pressed=true;
+					m_document->onRightMouseButtonClick(pos);
 				}
+
+
+				
 			}
 		}
 
