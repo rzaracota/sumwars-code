@@ -191,16 +191,22 @@ class Document
 		string m_chat_sendline_content;
 
 		 /**
-		 * \var m_left_mouse_hold
+		 * \var m_left_mouse_pressed
 		 * \brief Gibt an, ob die linke Maustaste festgehalten wird
 	 	 */
-		bool m_left_mouse_hold;
+		bool m_left_mouse_pressed;
 
 		 /**
-		 * \var m_right_mouse_hold
+		 * \var m_right_mouse_pressed
 		 * \brief Gibt an, ob die rechte Maustaste festgehalten wird
 	 	 */
-		bool m_right_mouse_hold;
+		bool m_right_mouse_pressed;
+		
+		 /**
+		 * \var m_middle_mouse_pressed
+		 * \brief Gibt an, ob die mittlere Maustaste festgehalten wird
+		 */
+		bool m_middle_mouse_pressed;
 
 		/**
 		 * \var m_shift_hold
@@ -227,17 +233,17 @@ class Document
 		Vector m_clicked;
 		
 		/**
-		 * \var float m_left_mouse_hold_time
+		 * \var float m_left_mouse_pressed_time
 		 * \brief Zaehler der die Anzahl Frames zaehlt die die linke Maustaste festgehalten wurde
 		 */
-		float m_left_mouse_hold_time;
+		float m_left_mouse_pressed_time;
 
 
 		/**
-		 * \var float m_right_mouse_hold_time
+		 * \var float m_right_mouse_pressed_time
 		 * \brief Zaehler der die Anzahl Frames zaehlt die die rechte Maustaste festgehalten wurde
 		 */
-		float m_right_mouse_hold_time;
+		float m_right_mouse_pressed_time;
 
 		/**
 		 * \var GUISheets* m_sheet
@@ -515,6 +521,17 @@ class Document
 	 * \param y Y-Koordinate
 	 */
 	void onRightMouseButtonClick(float x, float y);
+	
+	/**
+	 * \fn void onMouseMove(float x, float y, float xrel, float yrel, float wheelrel)
+	 * \brief Behandelt die Bewegung der Maus
+	 * \param x neue x-Koordinate
+	 * \param y neue y-Koordinate
+	 * \param xrel relative Bewegung in x-Richtung
+	 * \param yrel relative Bewegung in y-Richtung
+	 * \param wheelrel Bewegung des Mausrades
+	 */
+	void onMouseMove(float x, float y, float xrel, float yrel, float wheelrel);
 
 	/**
 	 * \fn void onStartScreenClicked()

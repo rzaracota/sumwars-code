@@ -1216,8 +1216,11 @@ void MainWindow::updatePartyInfo()
 // MouseListener
 bool MainWindow::mouseMoved(const OIS::MouseEvent &evt) {
 	m_cegui_system->injectMouseWheelChange(evt.state.Z.rel);
+	
+	
 	//return m_cegui_system->injectMouseMove(evt.state.X.rel, evt.state.Y.rel);
 	//DEBUG("injection position %i %i",evt.state.X.abs,evt.state.Y.abs);
+	m_document->onMouseMove(evt.state.X.abs,evt.state.Y.abs,evt.state.X.rel, evt.state.Y.rel,evt.state.Z.rel); 
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::Window* label = win_mgr.getWindow("CursorItemImage");
 	
@@ -1267,6 +1270,10 @@ bool MainWindow::mousePressed(const OIS::MouseEvent &evt, OIS::MouseButtonID btn
 	if (player!=0)
 	{
 		// Spiel ist mit Server verbunden
+		if (btn == OIS::MB_Middle)
+		{
+			m_document->getGUIState()->m_middle_mouse_pressed=true;
+		}
 
 		// Testet, dass man nicht auf die untere Steuerleiste geklickt hat
 		if (not ret)
@@ -1315,12 +1322,12 @@ bool MainWindow::mousePressed(const OIS::MouseEvent &evt, OIS::MouseButtonID btn
 
 					if (btn == OIS::MB_Left)
 					{
-						m_document->getGUIState()->m_left_mouse_hold=true;
+						m_document->getGUIState()->m_left_mouse_pressed=true;
 						m_document->onLeftMouseButtonClick(gx, gy);
 					}
 					else if (btn == OIS::MB_Right)
 					{
-						m_document->getGUIState()->m_right_mouse_hold=true;
+						m_document->getGUIState()->m_right_mouse_pressed=true;
 						m_document->onRightMouseButtonClick(gx, gy);
 					}
 
@@ -1345,15 +1352,20 @@ bool MainWindow::mouseReleased(const OIS::MouseEvent &evt, OIS::MouseButtonID bt
 	if (btn==OIS::MB_Left)
 	{
 		DEBUG5("Button release");
-		m_document->getGUIState()->m_left_mouse_hold=false;
+		m_document->getGUIState()->m_left_mouse_pressed=false;
 		m_document->getGUIState()->m_clicked_object_id=0;
 	}
 
 	if (btn==OIS::MB_Right)
 	{
 		DEBUG5("Right Button release");
-		m_document->getGUIState()->m_right_mouse_hold=false;
+		m_document->getGUIState()->m_right_mouse_pressed=false;
 		m_document->getGUIState()->m_clicked_object_id=0;
+	}
+	
+	if (btn == OIS::MB_Middle)
+	{
+		m_document->getGUIState()->m_middle_mouse_pressed=false;
 	}
 
 	if (btn == OIS::MB_Left)

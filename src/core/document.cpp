@@ -33,8 +33,9 @@ Document::Document()
 
 
 	// Status der GUI setzen
-	getGUIState()->m_left_mouse_hold= false;
-	getGUIState()->m_right_mouse_hold= false;
+	getGUIState()->m_left_mouse_pressed= false;
+	getGUIState()->m_right_mouse_pressed= false;
+	getGUIState()->m_middle_mouse_pressed= false;
 	getGUIState()->m_shift_hold = false;
 	getGUIState()->m_alt_hold = false;
 	getGUIState()->m_sheet= MAIN_MENU;
@@ -44,8 +45,8 @@ Document::Document()
 	getGUIState()->m_cursor_object ="";
 	getGUIState()->m_cursor_object_id =0;
 	getGUIState()->m_cursor_item_id =0;
-	getGUIState()->m_right_mouse_hold_time=0;
-	getGUIState()->m_left_mouse_hold_time=0;
+	getGUIState()->m_right_mouse_pressed_time=0;
+	getGUIState()->m_left_mouse_pressed_time=0;
 
 	// Pointer/Inhalte mit 0 initialisieren
 	m_gui_state.m_chat_window_content = "";
@@ -335,8 +336,8 @@ void Document::onRightMouseButtonClick(float x, float y)
 	command.m_goal = m_gui_state.m_clicked;
 	command.m_action = pl->getRightAction();
 
-	m_gui_state.m_left_mouse_hold=false;
-	m_gui_state.m_right_mouse_hold_time=0;
+	m_gui_state.m_left_mouse_pressed=false;
+	m_gui_state.m_right_mouse_pressed_time=0;
 
 	DEBUG5("angeklickte Koordinaten: %f %f",x,y);
 
@@ -384,8 +385,8 @@ void Document::onLeftMouseButtonClick(float x, float y)
 	command.m_goal = m_gui_state.m_clicked;
 	command.m_action = pl->getLeftAction();
 
-	m_gui_state.m_right_mouse_hold=false;
-	m_gui_state.m_left_mouse_hold_time=0;
+	m_gui_state.m_right_mouse_pressed=false;
+	m_gui_state.m_left_mouse_pressed_time=0;
 
 
 	DEBUG4("angeklickte Koordinaten: %f %f",x,y);
@@ -430,6 +431,19 @@ void Document::onLeftMouseButtonClick(float x, float y)
 	sendCommand(&command);
 
 
+}
+
+void Document::onMouseMove(float x, float y, float xrel, float yrel, float wheelrel)
+{
+	Player* player = getLocalPlayer();
+	if (player!=0)
+	{
+		if (! getGUIState()->m_middle_mouse_pressed)
+		{
+			xrel= yrel =0;
+		}
+		player->getCamera().moveRelative(wheelrel*0.01,yrel*0.5,-xrel*0.5);
+	}
 }
 
 void Document::onStartScreenClicked()
@@ -755,7 +769,7 @@ void Document::setLeftAction(Action::ActionType act)
 		return;
 
 	DEBUG5("Setting Action %i",act);
-	m_gui_state.m_left_mouse_hold = false;
+	m_gui_state.m_left_mouse_pressed = false;
 
 
 	ClientCommand command;
@@ -795,7 +809,7 @@ void Document::setRightAction(Action::ActionType act)
 
 
 	DEBUG5("Setting Action %i",act);
-	m_gui_state.m_right_mouse_hold = false;
+	m_gui_state.m_right_mouse_pressed = false;
 
 	ClientCommand command;
 	command.m_button = BUTTON_SET_RIGHT_ACTION;
@@ -1054,11 +1068,11 @@ void Document::updateContent(float time)
 		return;
 	}
 
-	if (m_gui_state.m_left_mouse_hold)
+	if (m_gui_state.m_left_mouse_pressed)
 	{
 		DEBUG5("linke Maustaste festgehalten");
-		m_gui_state.m_left_mouse_hold_time += time;
-		if (m_gui_state.m_left_mouse_hold_time>= 200)
+		m_gui_state.m_left_mouse_pressed_time += time;
+		if (m_gui_state.m_left_mouse_pressed_time>= 200)
 		{
 			ClientCommand command;
 
@@ -1072,18 +1086,18 @@ void Document::updateContent(float time)
 			command.m_action = player->getLeftAction();
 			command.m_number=0;
 
-			m_gui_state.m_left_mouse_hold_time=0;
+			m_gui_state.m_left_mouse_pressed_time=0;
 			sendCommand(&command);
 
 		}
 	}
 
-	if (m_gui_state.m_right_mouse_hold_time>= 200)
+	if (m_gui_state.m_right_mouse_pressed_time>= 200)
 	{
 		DEBUG("rechte Maustaste festgehalten");
-		m_gui_state.m_right_mouse_hold_time += time;
+		m_gui_state.m_right_mouse_pressed_time += time;
 
-		if (m_gui_state.m_right_mouse_hold_time>= 200)
+		if (m_gui_state.m_right_mouse_pressed_time>= 200)
 		{
 			ClientCommand command;
 
@@ -1093,7 +1107,7 @@ void Document::updateContent(float time)
 			command.m_action = player->getRightAction();
 			command.m_number=0;
 
-			m_gui_state.m_right_mouse_hold_time=0;
+			m_gui_state.m_right_mouse_pressed_time=0;
 			sendCommand(&command);
 
 		}

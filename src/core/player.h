@@ -37,6 +37,94 @@
 #include "item.h"
 
 /**
+ * \class PlayerCamera
+ * \brief Zeigt an, aus welchem Blickwinkel der Spieler die Szene betrachtet
+ */
+class PlayerCamera
+{
+	public:
+		
+		/**
+		 * \fn PlayerCamera()
+		 * \brief Konstruktor
+		 */
+		PlayerCamera();
+		
+		/**
+		 * \fn void moveTo(float distance, float theta, float phi, float time=0)
+		 * \brief Bewegt die Kamera
+		 * \param distance Zielabstand
+		 * \param theta Zielwinkel zum Boden
+		 * \param phi Zielwinkel um die z-Achse
+		 * \param time Zeit in der die Aenderung vollzogen wird
+		 */
+		void moveTo(float distance, float theta, float phi, float time=0);
+		
+		/**
+		 * \fn void moveRelative(float ddistance, float dtheta, float dphi, float time=0)
+		 * \brief Relative Bewegung der Kamera
+		 * \param ddistance Aenderung des Abstandes
+		 * \param dtheta Aenderung des Winkels zum Boden
+		 * \param dphi Aenderung des Winkels um die z-Achse
+		 * \param time Zeit in der die Aenderung vollzogen wird
+		 */
+		void moveRelative(float ddistance, float dtheta, float dphi, float time=0)
+		{
+			moveTo(m_distance + ddistance, m_theta + dtheta, m_phi + dphi, time);
+		}
+		
+		/**
+		 * \fn void update(float time)
+		 * \brief aktualisiert die Kamerastellung nachdem eine gewisse Zeit vergangen ist
+		 * \param time Zeit in ms
+		 */
+		void update(float time);
+		
+		/**
+		 * \var float m_distance
+		 * \brief Abstand zum Spieler
+		 */
+		float m_distance;
+		
+		/**
+		 * \var float m_theta
+		 * \brief Winkel zum Boden
+		 */
+		float m_theta;
+		
+		/**
+		 * \var float m_phi
+		 * \brief Drehwinkel um die z-Achse
+		 */
+		float m_phi;
+		
+		/**
+		 * \var float m_goal_distance
+		 * \brief Fuer Bewegungen der Kamera: Zielabstand zum Spieler
+		 */
+		float m_goal_distance;
+		
+		/**
+		 * \var float m_goal_theta
+		 * \brief Fuer Bewegungen der Kamera: Zielwinkel zum Boden
+		 */
+		float m_goal_theta;
+		
+		/**
+		 * \var float m_goal_phi
+		 * \brief Fuer Bewegungen der Kamera: Zieldrehwinkel um die z-Achse
+		 */
+		float m_goal_phi;
+		
+		/**
+		 * \var float m_time
+		 * \brief Zeit die zum Erreichen des Zielzustandes bleibt
+		 */
+		float m_time;
+		
+};
+
+/**
  * \class Player
  * \brief Klasse fuer Spielercharactere
  */
@@ -433,6 +521,11 @@ public:
 		return m_name;
 	}
 	
+	PlayerCamera& getCamera()
+	{
+		return m_camera;
+	}
+	
 
 //Protected stuff
 protected:
@@ -560,6 +653,12 @@ protected:
 	 * \brief Nummer der Party bei der sich der Spieler bewirbt
 	 */
 	int m_candidate_party;
+	
+	/**
+	 * \fn PlayerCamera m_camera
+	 * \brief Kameraposition durch die dieser Spieler die Szene sieht
+	 */
+	PlayerCamera m_camera;
 	
 	//Constructors
 	//Accessor Methods

@@ -21,6 +21,53 @@
 #include "player.h"
 #include "eventsystem.h"
 
+PlayerCamera::PlayerCamera()
+{
+	m_distance = 20;
+	m_theta = 70;
+	m_phi =270;
+	
+	m_goal_distance = 20;
+	m_goal_theta = 70;
+	m_goal_phi =270;
+	m_time =0;
+}
+
+void PlayerCamera::moveTo(float distance, float theta, float phi, float time)
+{
+	m_goal_distance = std::max(std::min(distance,50.0f),4.0f);
+	m_goal_theta = std::max(std::min(theta,90.0f),5.0f);
+	m_goal_phi = fmod(phi+360,360);
+	
+	// Phi so anpassen, dass jeweils der kuerzere Teilkreis genutzt wird
+	if (m_phi - m_goal_phi > 180)
+		m_phi -= 360;
+	
+	if (m_phi - m_goal_phi < -180)
+		m_phi += 360;
+	
+	m_time = time;
+}
+
+void PlayerCamera::update(float time)
+{
+	if (m_time <= time)
+	{
+		m_distance = m_goal_distance;
+		m_theta = m_goal_theta;
+		m_phi = m_goal_phi;
+	}
+	else
+	{
+		float frac = time/m_time;
+		m_distance = (1-frac)*m_distance + frac* m_goal_distance;
+		m_theta =  (1-frac)*m_theta + frac*m_goal_theta;
+		m_phi = (1-frac)*m_phi + frac* m_goal_phi;
+		
+		m_time -= time;
+	}
+}
+
 //Constructors/Destructors
 
 Player::Player( int id) : Creature( id)
@@ -1116,6 +1163,8 @@ bool Player::update(float time)
 	// Aufruf des updates für von Creature
 	Creature::update(time);
 
+	m_camera.update(time);
+	
 	// Player spezifische Updateroutine
 	DEBUG5("Update des Playerobjekts [%i] wird gestartet", getId());
 

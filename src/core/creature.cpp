@@ -325,6 +325,11 @@ void Creature::initAction()
 	}
 
 	m_event_mask |= NetEvent::DATA_ACTION;
+	
+	if (m_action.m_time ==0)
+	{
+		ERRORMSG("Aktion mit Dauer 0 erzeugt");
+	}
 }
 
 void Creature::performAction(float &time)
@@ -354,16 +359,7 @@ void Creature::performAction(float &time)
 		time=0;
 	}
 	
-	// Fuer gescriptete Kommandos Zeitschranken pruefen
-	if (m_script_command_timer>0)
-	{
-		m_script_command_timer -= time;
-		if (m_script_command_timer<=0)
-		{
-			m_script_command_timer += time;
-			clearCommand(false);
-		}
-	}
+	
 
 	// Testen ob man die Aktion abschließen kann
 	if (time >= m_action.m_time-m_action.m_elapsed_time)
@@ -381,6 +377,17 @@ void Creature::performAction(float &time)
 		dtime =time;
 		time=0;
 		p2 = rezt * m_action.m_elapsed_time;
+	}
+	
+	// Fuer gescriptete Kommandos Zeitschranken pruefen
+	if (m_script_command_timer>0)
+	{
+		m_script_command_timer -= time;
+		if (m_script_command_timer<=0)
+		{
+			m_script_command_timer += time;
+			clearCommand(false);
+		}
 	}
 
 	if (!World::getWorld()->isServer() && m_action.m_type != Action::NOACTION)
