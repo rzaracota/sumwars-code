@@ -1676,7 +1676,7 @@ void Creature::calcAction()
 
 	
 
-	DEBUG5("calc action for command %i",m_command.m_type);
+	DEBUG("calc action for command %i",m_command.m_type);
 	m_event_mask |= NetEvent::DATA_ACTION;
 
 
