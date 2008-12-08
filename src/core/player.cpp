@@ -35,7 +35,7 @@ PlayerCamera::PlayerCamera()
 
 void PlayerCamera::moveTo(float distance, float theta, float phi, float time)
 {
-	m_goal_distance = std::max(std::min(distance,50.0f),4.0f);
+	m_goal_distance = std::max(std::min(distance,50.0f),5.0f);
 	m_goal_theta = std::max(std::min(theta,90.0f),5.0f);
 	m_goal_phi = fmod(phi+360,360);
 	

@@ -364,7 +364,7 @@ void Scene::update(float ms)
 	float phi = player->getCamera().m_phi * 3.14159 / 180;
 	
 	m_camera->setPosition(Ogre::Vector3(x*50 + r*cos(theta)*cos(phi), r*sin(theta), y*50 - r*cos(theta)*sin(phi)));
-	m_camera->lookAt(Ogre::Vector3(x*50,50,y*50));
+	m_camera->lookAt(Ogre::Vector3(x*50,70,y*50));
 
 	Ogre::Light* light= m_scene_manager->getLight("HeroLight");
 	light->setPosition(Ogre::Vector3(x*50,1000,y*50));

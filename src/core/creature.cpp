@@ -330,6 +330,12 @@ void Creature::initAction()
 	{
 		ERRORMSG("Aktion mit Dauer 0 erzeugt");
 	}
+	
+	// wenn keine Aktion berechnet wurde, Kommando beenden
+	if (m_action.m_type == Action::NOACTION && m_command.m_type !=Action::NOACTION)
+	{
+		clearCommand(false);
+	}
 }
 
 void Creature::performAction(float &time)
@@ -1676,7 +1682,7 @@ void Creature::calcAction()
 
 	
 
-	DEBUG("calc action for command %i",m_command.m_type);
+	DEBUG5("calc action for command %i",m_command.m_type);
 	m_event_mask |= NetEvent::DATA_ACTION;
 
 
@@ -1785,11 +1791,9 @@ void Creature::calcAction()
 			else
 			{
 				m_action.m_type = Action::NOACTION;
+				clearCommand(true);
 			}
 
-			// Kommando damit abgeschlossen
-			// m_command.m_type = Action::NOACTION;
-			// m_event_mask |= NetEvent::DATA_COMMAND;
 		}
 		else
 		{
@@ -1839,8 +1843,6 @@ void Creature::calcAction()
 					{
 						m_action.m_type = Action::NOACTION;
 						m_action.m_elapsed_time =0;
-						clearCommand(false);
-
 					}
 					m_event_mask |= NetEvent::DATA_MOVE_INFO;
 
@@ -1863,10 +1865,13 @@ void Creature::calcAction()
 		m_action.m_type = m_command.m_type;
 		m_action.m_goal_object_id = m_command.m_goal_object_id;
 		m_action.m_goal = goal;
-
-		//clearCommand(true);
 	}
 
+	// wenn keine Aktion berechnet wurde, Kommando beenden
+	if (m_action.m_type == Action::NOACTION)
+	{
+		clearCommand(true);
+	}
 }
 
 void Creature::calcStatusModCommand()
