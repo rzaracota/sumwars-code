@@ -156,7 +156,7 @@ bool World::init()
 	rdata->addEvent("trap_fire",ev);
 			*/
 			
-			
+	/*
 	// Testevent: getarnter Lich
 			
 	ev = new Event();
@@ -173,9 +173,9 @@ bool World::init()
 	ev->setCondition("return (trigger.unit == lich)");
 	ev->setEffect("dropItem('demon_sw', getObjectValue(lich,'position'))");
 	rdata->addEvent("unit_die",ev);
+		*/
 			
-			
-			/*
+	
 	ev = new Event();
 	ev->setOnce();
 	ev->setCondition("return (unitIsInArea(trigger.player,'LichArea'))");
@@ -191,6 +191,12 @@ bool World::init()
 	addUnitCommand(trigger.player,'walk',1700,{x,y+4}) \n \
 	addUnitCommand(trigger.player,'walk',1700,{x,y}) \n \
 	addUnitCommand(trigger.player,'attack',1700,{x,y}) \n \
+	addCameraPosition(0,pos, 270,70, 20); \n \
+	addCameraPosition(1000,pos, 0,45, 10); \n \
+	addCameraPosition(1000,pos, 90,45, 10); \n \
+	addCameraPosition(1000,pos, 180,45, 10); \n \
+	addCameraPosition(1000,pos, 270,45, 10); \n \
+	addCameraPosition(2000,pos, 270,70, 20); \n \
 	");
 	rdata->addEvent("player_moved",ev);
 			
@@ -200,7 +206,7 @@ bool World::init()
 	ev->setEffect("deleteObject(tree) \n \
 	setCutsceneMode(false) \n ");
 	rdata->addEvent("command_complete",ev);
-			*/
+	
 
 
 	// Wird schon aus XML geladen

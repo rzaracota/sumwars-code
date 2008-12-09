@@ -38,6 +38,7 @@ void EventSystem::init()
 	lua_register(m_lua, "getObjectsInArea", getObjectsInArea);
 	lua_register(m_lua, "addUnitCommand", addUnitCommand);
 	lua_register(m_lua, "setCutsceneMode", setCutsceneMode);
+	lua_register(m_lua, "addCameraPosition", addCameraPosition);
 	
 	m_region =0;
 	m_trigger =0;
@@ -778,6 +779,62 @@ int EventSystem::setCutsceneMode(lua_State *L)
 	else
 	{
 		ERRORMSG("Syntax: setCutsceneMode(bool mode) ");
+	}
+	
+	return 0;
+}
+
+
+int EventSystem::addCameraPosition(lua_State *L)
+{
+	int argc = lua_gettop(L);
+	if (argc>=1)
+	{
+		if (m_region !=0)
+		{
+			RegionCamera& cam = m_region->getCamera();
+			RegionCamera::Position pos;
+			if (cam.m_next_positions.empty())
+			{
+				pos = cam.m_position;
+			}
+			else
+			{
+				pos = cam.m_next_positions.back().first;
+			}
+			
+			float time =0;
+			if (lua_isnumber(L,1))
+			{
+				time = lua_tonumber(L,1);
+			}
+			
+			if (lua_istable(L,2) || lua_isstring(L,2))
+			{
+				pos.m_focus = getVector(L,2);
+			}
+			
+			if (lua_isnumber(L,3))
+			{
+				pos.m_phi = lua_tonumber(L,3);
+			}
+			
+			if (lua_isnumber(L,4))
+			{
+				pos.m_theta = lua_tonumber(L,4);
+			}
+			
+			if (lua_isnumber(L,5))
+			{
+				pos.m_distance = lua_tonumber(L,5);
+			}
+			
+			cam.addPosition(pos,time);
+		}
+	}
+	else
+	{
+		ERRORMSG("Syntax: setCameraPosition(float time, {float x, float y}, float phi, float theta, float dist");
 	}
 	
 	return 0;

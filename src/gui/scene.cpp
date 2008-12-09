@@ -354,20 +354,27 @@ void Scene::update(float ms)
 	}
 
 	// Koordinaten des Spielers
-	float x=player->getShape()->m_center.m_x;
-	float y=player->getShape()->m_center.m_y;
-
+	Vector pos = player->getShape()->m_center;
 
 	// Kamera auf Spieler ausrichten
 	float r= player->getCamera().m_distance*50;
 	float theta = player->getCamera().m_theta * 3.14159 / 180;
 	float phi = player->getCamera().m_phi * 3.14159 / 180;
 	
-	m_camera->setPosition(Ogre::Vector3(x*50 + r*cos(theta)*cos(phi), r*sin(theta), y*50 - r*cos(theta)*sin(phi)));
-	m_camera->lookAt(Ogre::Vector3(x*50,70,y*50));
+	if (player->getRegion()->getCutsceneMode())
+	{
+		RegionCamera::Position& cam =player->getRegion()->getCamera().m_position;
+		pos = cam.m_focus;
+		r = cam.m_distance*50;
+		phi = cam.m_phi* 3.14159 / 180;
+		theta = cam.m_theta* 3.14159 / 180;
+	}
+	
+	m_camera->setPosition(Ogre::Vector3(pos.m_x*50 + r*cos(theta)*cos(phi), r*sin(theta), pos.m_y*50 - r*cos(theta)*sin(phi)));
+	m_camera->lookAt(Ogre::Vector3(pos.m_x*50,70,pos.m_y*50));
 
 	Ogre::Light* light= m_scene_manager->getLight("HeroLight");
-	light->setPosition(Ogre::Vector3(x*50,1000,y*50));
+	light->setPosition(Ogre::Vector3(pos.m_x*50,1000,pos.m_y*50));
 
 	// alle Objekte aktualisieren
 	updateObjects();

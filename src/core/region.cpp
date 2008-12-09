@@ -24,6 +24,39 @@ void RegionData::addEvent(TriggerType trigger, Event* event)
 	m_events.insert(std::make_pair(trigger,event));
 }
 
+void RegionCamera::update(float time)
+{
+	if (m_next_positions.empty())
+		return;
+	
+	Position& pos = m_next_positions.front().first;
+	float& rtime = m_next_positions.front().second;
+	
+	if (rtime <= time)
+	{
+		// naechstes Etappenziel wurde erreicht
+		m_position  = pos;
+		m_next_positions.pop_front();
+	}
+	else
+	{
+		// Phi so anpassen, dass jeweils der kuerzere Teilkreis genutzt wird
+		if (m_position.m_phi - pos.m_phi > 180)
+			m_position.m_phi -= 360;
+	
+		if (m_position.m_phi - pos.m_phi < -180)
+			m_position.m_phi += 360;
+		
+		float frac = time/rtime;
+		m_position.m_distance = (1-frac)*m_position.m_distance + frac* pos.m_distance;
+		m_position.m_phi = (1-frac)*m_position.m_phi + frac* pos.m_phi;
+		m_position.m_theta = (1-frac)*m_position.m_theta + frac* pos.m_theta;
+		m_position.m_focus = m_position.m_focus*(1-frac) + pos.m_focus*frac;
+		
+		rtime -= time;
+	}
+}
+
 Region::Region(short dimx, short dimy, short id, std::string name)
 {
 	DEBUG5("creating region");
@@ -1242,6 +1275,8 @@ void Region::update(float time)
 		delete m_triggers.front();
 		m_triggers.pop_front();
 	}
+	
+	m_camera.update(time);
 }
 
 void Region::getRegionData(CharConv* cv)

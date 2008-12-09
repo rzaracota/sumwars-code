@@ -307,7 +307,75 @@ class RegionData
 		std::multimap<TriggerType, Event*> m_events;
 };
 
-
+/**
+ * \class RegionCamera
+ * \brief Zeigt an, aus welcher Position die Szene bei Zwischenszenen betrachtet wird
+ */
+class RegionCamera
+{
+	public:
+		/**
+		* \struct Position
+		* \brief Speichert ein Position der Kamera
+		*/
+		struct Position
+		{
+			/**
+			* \var float m_distance
+			* \brief Abstand zum Spieler
+			*/
+			float m_distance;
+			
+			/**
+			* \var float m_theta
+			* \brief Winkel zum Boden
+			*/
+			float m_theta;
+			
+			/**
+			* \var float m_phi
+			* \brief Drehwinkel um die z-Achse
+			*/
+			float m_phi;
+		
+			/**
+			* \var Vector m_focus
+			* \brief Vector, auf den die Kamera fokussiert ist
+			*/
+			Vector m_focus;
+		};
+	
+		/**
+		 * \fn void addPosition(Position& pos, float time)
+		 * \brief Fuegt zur Kamerabewegung einen weiteren Punkt hinzu
+		 * \param pos Position die erreicht werden soll
+		 * \param time Zeit in ms, die vergeht, bis ausgehend von der vorhergehenden Position die angegebenen Position erreicht wird
+		 */
+		void addPosition(Position& pos, float time)
+		{
+			m_next_positions.push_back(std::make_pair(pos,time));
+		}
+	
+		/**
+		 * \fn void update(float time)
+		 * \brief aktualisiert die Kamerastellung nachdem eine gewisse Zeit vergangen ist
+		 * \param time Zeit in ms
+		 */
+		void update(float time);
+		
+		
+		/**
+		 * \var Position m_position
+		 * \brief aktuelle Position
+		 */
+		Position m_position;
+		
+		/**
+		 * \var std::list<std::pair<Position,float> > m_next_positions
+		 * \brief Positionen, die als naechstes eingenommen werden
+		 */
+		std::list<std::pair<Position,float> > m_next_positions;
+};
 
 	
 /**
@@ -812,6 +880,15 @@ class Region
 			return m_events;
 		}
 		
+		/**
+		 * \fn RegionCamera& getCamera()
+		 * \brief Gibt die Kamera aus
+		 */
+		RegionCamera& getCamera()
+		{
+			return m_camera;
+		}
+		
 	private:
 		/**
 		* \var m_dimx
@@ -957,6 +1034,12 @@ class Region
 		 * \brief Liste der Schadensobjekte
 		 */
 		std::map<std::string,Damage> m_damage_objects;
+		
+		/**
+		 * \var RegionCamera m_camera
+		 * \brief Kameraposition von der aus die Region bei Zwischenszenen gesehen wird
+		 */
+		RegionCamera m_camera;
 
 };
 
