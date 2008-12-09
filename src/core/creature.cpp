@@ -1448,6 +1448,7 @@ void Creature::collisionDetection(float time)
 			// Wenn die Faehigkeit Stuermen ist dann Bewegung beenden
 			if (m_command.m_type == Action::CHARGE || m_command.m_type == Action::STORM_CHARGE)
 			{
+				DEBUG5("charge goal object %i",(*i)->getId());
 				// Behandlung von *Charge*
 				m_command.m_goal_object_id = (*i)->getId();
 				m_speed = Vector(0,0);
@@ -1770,6 +1771,7 @@ void Creature::calcAction()
 	if ((m_command.m_type == Action::CHARGE || m_command.m_type == Action::STORM_CHARGE) &&  m_command.m_goal_object_id==0)
 	{
 		range=0;
+		dist =1;
 	}
 	
 
@@ -1837,7 +1839,7 @@ void Creature::calcAction()
 					
 					if (dir.getLength()!=0)
 					{
-						m_command.m_damage_mult = (m_command.m_damage_mult+0.1);
+						m_command.m_damage_mult = (m_command.m_damage_mult+2);
 					}
 					else
 					{
