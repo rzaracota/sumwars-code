@@ -21,6 +21,7 @@ void EventSystem::init()
 	lua_register(m_lua, "set", setObjectValue);
 	lua_register(m_lua, "pointIsInArea", pointIsInArea);
 	lua_register(m_lua, "unitIsInArea", unitIsInArea);
+	lua_register(m_lua, "objectIsInArea", unitIsInArea);
 	lua_register(m_lua, "createObject", createObject);
 	lua_register(m_lua, "deleteObject", deleteObject);
 	lua_register(m_lua, "dropItem", dropItem);
@@ -376,7 +377,7 @@ int EventSystem::pointIsInArea(lua_State *L)
 	}
 	else
 	{
-		ERRORMSG("Syntax: pointIsInArea( float x, float y, string areaname)");
+		ERRORMSG("Syntax: pointIsInArea( {float x, float y}, string areaname)");
 	}
 	
 	lua_pushboolean(EventSystem::getLuaState() , ret);
@@ -505,7 +506,7 @@ int EventSystem::getObjectAt(lua_State *L)
 	}
 	else
 	{
-		ERRORMSG("Syntax: getObjectAt({float x, float x})");
+		ERRORMSG("Syntax: getObjectAt({float x, float y})");
 	}
 	
 	return 0;
@@ -680,8 +681,8 @@ int EventSystem::addArea(lua_State *L)
 	}
 	else
 	{
-		ERRORMSG("Syntax: addLocation(string areaname, 'circle' , {mx, my} ,r) \n \
-				addLocation(string areaname, 'rect' , {cx, cy} ,{ex, ey}) ");
+		ERRORMSG("Syntax: addArea(string areaname, 'circle' , {mx, my} ,r) \n \
+				addArea(string areaname, 'rect' , {cx, cy} ,{ex, ey}) ");
 	}
 	return 0;
 }
