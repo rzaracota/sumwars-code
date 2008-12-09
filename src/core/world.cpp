@@ -157,7 +157,7 @@ bool World::init()
 			*/
 			
 			
-			// Testevent: getarnter Lich
+	// Testevent: getarnter Lich
 			
 	ev = new Event();
 	ev->setOnce();
