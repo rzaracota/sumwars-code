@@ -261,7 +261,7 @@ AIR
 		resistances_cap_air="50"
 		resistances_cap_ice="50"
 		resistances_cap_fire="50"
-		walk_speed="2000"
+		walk_speed="3000"
 		attack_speed="1500"
 		step_length="0.5"
 		attack_range="1"

@@ -1,1 +1,79 @@
-﻿
+﻿<!-- POTION -->
+<!-- small potion -->
+<Item type="potion" subtype="heal_1" size="small">
+	<Image image="set:potion_health.png image:full_image" />
+	<Mesh file="potion.mesh" />
+	<Attribute
+		character_requirement="15"
+		price = "20"
+  />
+  
+  <UseupEffect
+		dhealth="80"
+	/>
+  
+  
+	<DropChance
+		level="0"
+		probability="1.0"
+	/>
+</Item>
+
+<!-- medium potion -->
+<Item type="potion" subtype="heal_2" size="small">
+	<Image image="set:potion_health.png image:full_image" />
+	<Mesh file="potion.mesh" />
+	<Attribute
+		character_requirement="15"
+		price = "80"
+  />
+  
+  <UseupEffect
+		dhealth="200"
+	/>
+  
+  
+	<DropChance
+		level="-10"
+		probability="1.0"
+	/>
+</Item>
+
+
+<Item type="potion" subtype="heal_bl" size="small">
+	<Image image="set:potion_health.png image:full_image" />
+	<Mesh file="potion.mesh" />
+	<Attribute
+		character_requirement="15"
+		price = "100"
+  />
+  
+  <UseupEffect
+		dstatus_mod_immune_time0="8000"
+	/>
+  
+  
+	<DropChance
+		level="-1"
+		probability="0.5"
+	/>
+</Item>
+
+<Item type="potion" subtype="heal_fr" size="small">
+	<Image image="set:potion_health.png image:full_image" />
+	<Mesh file="potion.mesh" />
+	<Attribute
+		character_requirement="15"
+		price = "100"
+  />
+  
+  <UseupEffect
+		dstatus_mod_immune_time6="1000"
+	/>
+  
+  
+	<DropChance
+		level="-1"
+		probability="0.5"
+	/>
+</Item>
