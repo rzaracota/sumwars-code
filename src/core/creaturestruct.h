@@ -4,7 +4,8 @@
 
 
 #include <list>
-#include <string.h>
+#include <string>
+#include <memory.h>
 #include "debug.h"
 
 #define NR_STATUS_MODS 8
