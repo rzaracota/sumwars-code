@@ -437,6 +437,15 @@ public:
 		m_region_name_id.insert(std::make_pair(data->m_name,id));
 	}
 	
+	/**
+	 * \fn void addEvent(RegionName rname, TriggerType type, Event* event)
+	 * \brief Fuegt ein neues Event hinzu
+	 * \param rname Name der Region
+	 * \param trigger Typ des Triggers durch den das Event ausgeloest wird
+	 * \param event Event
+	 */
+	void addEvent(RegionName rname, TriggerType trigger, Event* event);
+	
 	static World* getWorld()
 	{
 		return m_world;

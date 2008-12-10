@@ -2437,6 +2437,23 @@ void World::insertNetEvent(NetEvent &event)
 
 }
 
+
+void  World::addEvent(RegionName rname, TriggerType trigger, Event* event)
+{
+	int id = getRegionId(rname);
+	
+	std::map<int, RegionData*>::iterator it;
+	it =  m_region_data.find(id);
+
+	if (it == m_region_data.end())
+	{
+		ERRORMSG("no data for region %s",rname.c_str());
+		return;
+	}
+	
+	it->second->addEvent(trigger,event);
+}
+		
 WorldObject* World::getPlayer(int id)
 {
 	WorldObjectMap::iterator it;
