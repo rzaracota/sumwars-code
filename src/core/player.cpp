@@ -26,7 +26,7 @@ PlayerCamera::PlayerCamera()
 	m_distance = 20;
 	m_theta = 70;
 	m_phi =270;
-	
+
 	m_goal_distance = 20;
 	m_goal_theta = 70;
 	m_goal_phi =270;
@@ -38,14 +38,14 @@ void PlayerCamera::moveTo(float distance, float theta, float phi, float time)
 	m_goal_distance = std::max(std::min(distance,50.0f),5.0f);
 	m_goal_theta = std::max(std::min(theta,90.0f),5.0f);
 	m_goal_phi = fmod(phi+360,360);
-	
+
 	// Phi so anpassen, dass jeweils der kuerzere Teilkreis genutzt wird
 	if (m_phi - m_goal_phi > 180)
 		m_phi -= 360;
-	
+
 	if (m_phi - m_goal_phi < -180)
 		m_phi += 360;
-	
+
 	m_time = time;
 }
 
@@ -63,7 +63,7 @@ void PlayerCamera::update(float time)
 		m_distance = (1-frac)*m_distance + frac* m_goal_distance;
 		m_theta =  (1-frac)*m_theta + frac*m_goal_theta;
 		m_phi = (1-frac)*m_phi + frac* m_goal_phi;
-		
+
 		m_time -= time;
 	}
 }
@@ -104,7 +104,7 @@ bool Player::init()
 	setTradeId(0);
 	getTypeInfo()->m_type = TypeInfo::TYPE_PLAYER;
 	m_category = HUMAN;
-	
+
 	getShape()->m_type = Shape::CIRCLE;
 	getShape()->m_radius = 0.5;
 	m_layer = (LAYER_BASE | LAYER_AIR);
@@ -116,7 +116,7 @@ bool Player::init()
 
 	m_attribute_points=0;
 	m_skill_points=0;
-	
+
 	m_fraction = FRAC_PLAYER_PARTY;
 
 	m_secondary_equip = false;
@@ -124,7 +124,7 @@ bool Player::init()
 	m_equipement = new Equipement(5,14,30);
 
 	m_save_timer= 3000;
-	
+
 	m_candidate_party = -1;
 
 	return true;
@@ -133,10 +133,10 @@ bool Player::init()
 void  Player::revive()
 {
 	DEBUG("reviving");
-	
+
 	getRegion()->changeObjectGroup(this,PLAYER);
 	getDynAttr()->m_health = getBaseAttrMod()->m_max_health;
-	
+
 	// keine Aktion/Kommando
 	getAction()->m_type = Action::NOACTION;
 	getCommand()->m_type = Action::NOACTION;
@@ -160,7 +160,7 @@ void  Player::revive()
 	m_timer2_max =0;
 
 	getDynAttr()->m_last_attacker_id=0;
-	
+
 	// Statusmods auf null setzen
 	int i;
 	for (i=0;i<NR_STATUS_MODS;i++)
@@ -183,12 +183,12 @@ void  Player::revive()
 	getNextCommand()->m_goal = Vector(0,0);
 	getNextCommand()->m_goal_object_id =0;
 	getNextCommand()->m_range =1;
-	
+
 	getAction()->m_animation_number=0;
 	getAction()->m_action_equip = Action::NO_WEAPON;
 	getAction()->m_time =0;
 	getAction()->m_elapsed_time =0;
-	
+
 	calcBaseAttrMod();
 }
 
@@ -257,7 +257,7 @@ bool Player::onGamefieldClick(ClientCommand* command)
 						*/
 					}
 				}
-				
+
 				if (rel == WorldObject::ALLIED && dist == Action::PARTY)
 				{
 					if (wo->getState()==STATE_ACTIVE)
@@ -518,7 +518,7 @@ bool Player::onItemClick(ClientCommand* command)
 					// Item vom Cursor nehmen
 					Item* itm =0;
 					m_equipement->swapItem(itm, Equipement::CURSOR_ITEM);
-					
+
 					// ins Inventar einfuegen
 					insertItem(itm);
 					req = false;
@@ -528,11 +528,11 @@ bool Player::onItemClick(ClientCommand* command)
 					// Guertel, nur Traenke zulassen
 					if (it->m_type != Item::POTION)
 					{
-						
+
 						// Item vom Cursor nehmen
 						Item* itm =0;
 						m_equipement->swapItem(itm, Equipement::CURSOR_ITEM);
-					
+
 						// ins Inventar einfuegen
 						insertItem(itm);
 						req = false;
@@ -728,7 +728,7 @@ short Player::insertItem(Item* itm)
 		// Gegenstand ins Inventar aufgenommen
 		if (World::getWorld()->isServer())
 		{
-			
+
 			NetEvent event;
 			event.m_type =  NetEvent::PLAYER_ITEM_PICKED_UP ;
 			event.m_data = pos;
@@ -884,7 +884,7 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 			break;
 
 		case BUTTON_APPLY:
-		case BUTTON_PEACE:	
+		case BUTTON_PEACE:
 		case BUTTON_WAR:
 			pl = static_cast<Player*>(World::getWorld()->getPlayer(command->m_id));
 			if (pl !=0)
@@ -898,7 +898,7 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 				{
 					getParty()->setRelation(p->getId() , HOSTILE);
 				}
-				else if (command->m_button == BUTTON_PEACE)	
+				else if (command->m_button == BUTTON_PEACE)
 				{
 					getParty()->setRelation(p->getId() , NEUTRAL);
 				}
@@ -907,8 +907,8 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 		case BUTTON_MEMBER_REJECT:
 			getParty()->removeCandidate(command->m_id);
 			break;
-			
-			
+
+
 		case BUTTON_MEMBER_ACCEPT:
 			pl = static_cast<Player*>(World::getWorld()->getPlayer(command->m_id));
 			if (pl !=0)
@@ -917,12 +917,12 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 				getParty()->acceptCandidate(command->m_id);
 			}
 			break;
-			
+
 		case BUTTON_KICK:
 			getParty()->removeMember(command->m_id);
 			World::getWorld()->getEmptyParty()->addMember(command->m_id);
 			break;
-			
+
 		case BUTTON_LEAVE:
 			if (getParty()->getNrMembers() ==1)
 			{
@@ -1011,11 +1011,15 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 				getEquipement()->swapItem(si,Equipement::CURSOR_ITEM);
 				getRegion()->dropItem(si,getShape()->m_center);
 			}
+			break;
 
 		case DEBUG_SIGNAL:
 			// Debugging
 			if (command->m_id==0)
 			{
+			    int *pi = 0;
+			    int i = *pi;
+			    DEBUG("%i",i);
 				gainLevel();
 			}
 			if (command->m_id==2)
@@ -1087,7 +1091,7 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 			}
 			break;
 
-		default: 
+		default:
 			DEBUG("unknown command: %i",command->m_button);
 	}
 
@@ -1165,7 +1169,7 @@ bool Player::update(float time)
 	Creature::update(time);
 
 	m_camera.update(time);
-	
+
 	// Player spezifische Updateroutine
 	DEBUG5("Update des Playerobjekts [%i] wird gestartet", getId());
 
@@ -1722,7 +1726,7 @@ void Player::calcBaseAttrMod()
 		{
 			getBaseAttrMod()->m_attack_speed += si->m_weapon_attr ->m_dattack_speed;
 			getBaseAttrMod()->m_attack_range = si->m_weapon_attr ->m_attack_range;
-			
+
 			if (si->m_weapon_attr ->m_dattack_speed!=0)
 			{
 				m_event_mask |= NetEvent::DATA_ATTACK_SPEED;
@@ -1821,16 +1825,16 @@ void Player::addMessage(std::string msg)
 {
 	if (msg == "")
 		return;
-	
+
 	m_messages += msg;
 	m_messages += "\n";
-	
+
 	// Anzahl Newlines zaehlen
 	int cnt =0;
 	int pos = 0;
 	while (pos != -1)
 	{
-		
+
 		cnt ++;
 		pos=m_messages.find_first_of('\n',pos+1);
 	}
@@ -1852,7 +1856,7 @@ void Player::toString(CharConv* cv)
 	cv->toBuffer((char*) m_name.c_str(),32);
 
 	cv->toBuffer(getBaseAttr()->m_level);
-	
+
 	// Items
 	char cnt =0;
 	Item* item;
@@ -1864,7 +1868,7 @@ void Player::toString(CharConv* cv)
 	}
 	DEBUG5("number of items: %i",cnt);
 	cv->toBuffer(cnt);
-	
+
 
 	for ( short i = Equipement::ARMOR; i<= Equipement::SHIELD2; i++)
 	{
@@ -1892,7 +1896,7 @@ void Player::fromString(CharConv* cv)
 	char cnt;
 	cv->fromBuffer(cnt);
 	DEBUG5("number of items: %i",cnt);
-	
+
 
 	for ( short i = 0; i< cnt; i++)
 	{
@@ -2243,7 +2247,7 @@ int Player::getValue(std::string valname)
 	else
 	{
 		int ret = Creature::getValue(valname);
-		
+
 		return ret;
 	}
 	return 0;
@@ -2267,7 +2271,7 @@ bool Player::setValue(std::string valname)
 	{
 		return  Creature::setValue(valname);
 	}
-	
+
 	return false;
 }
 
