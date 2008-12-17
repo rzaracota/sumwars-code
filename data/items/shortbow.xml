@@ -1,4 +1,4 @@
-<!-- SHORT BOWS -->
+﻿<!-- SHORT BOWS -->
 <!-- TODO ersetze twohanded="no", -->
 <!-- Uebungsbogen -->
 <Item type="weapon" subtype="trainy_sbw" size="medium">
@@ -693,6 +693,4 @@
 		level="80"
 		probability="1.0"
 	/>
-</Item>=======
-<!-- Feenbogen -->
->>>>>>> .r609
+</Item>

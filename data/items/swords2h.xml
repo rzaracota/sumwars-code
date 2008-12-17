@@ -149,7 +149,7 @@ s		modchance_damage_air_mod="float"
 		damage_power="40"
 		attack_range="1.2"
 		two_handed="yes"
-		dattack_speed="-200"
+		dattack_speed="-700"
 	/>
 	<DropChance
 		level="1"
@@ -186,7 +186,7 @@ s		modchance_damage_air_mod="float"
 		damage_power="45"
 		attack_range="1.5"
 		two_handed="yes"
-		dattack_speed="-300"
+		dattack_speed="-800"
 	/>
 	<DropChance
 		level="3"
@@ -223,7 +223,7 @@ s		modchance_damage_air_mod="float"
 		damage_power="50"
 		attack_range="1.5"
 		two_handed="yes"
-		dattack_speed="-300"
+		dattack_speed="-800"
 	/>
 	<DropChance
 		level="5"
@@ -260,7 +260,7 @@ s		modchance_damage_air_mod="float"
 		damage_power="80"
 		attack_range="1.5"
 		two_handed="yes"
-		dattack_speed="-700"
+		dattack_speed="-1000"
 	/>
 	<DropChance
 		level="8"
@@ -297,7 +297,7 @@ s		modchance_damage_air_mod="float"
 		damage_power="68"
 		attack_range="2.0"
 		two_handed="yes"
-		dattack_speed="-700"
+		dattack_speed="-800"
 	/>
 	<DropChance
 		level="13"
@@ -334,7 +334,7 @@ s		modchance_damage_air_mod="float"
 		damage_power="78"
 		attack_range="1.3"
 		two_handed="yes"
-		dattack_speed="-300"
+		dattack_speed="-800"
 	/>
 	<DropChance
 		level="19"
@@ -371,7 +371,7 @@ s		modchance_damage_air_mod="float"
 		damage_power="106"
 		attack_range="1.5"
 		two_handed="yes"
-		dattack_speed="-800"
+		dattack_speed="-1000"
 	/>
 	<DropChance
 		level="25"
@@ -408,7 +408,7 @@ s		modchance_damage_air_mod="float"
 		damage_power="95"
 		attack_range="1.5"
 		two_handed="yes"
-		dattack_speed="0"
+		dattack_speed="-500"
 	/>
 	<DropChance
 		level="30"
@@ -482,7 +482,7 @@ s		modchance_damage_air_mod="float"
 		damage_power="119"
 		attack_range="1.5"
 		two_handed="yes"
-		dattack_speed="-300"
+		dattack_speed="-800"
 	/>
 	<DropChance
 		level="40"
@@ -521,7 +521,7 @@ s		modchance_damage_air_mod="float"
 		damage_power="135"
 		attack_range="1.5"
 		two_handed="yes"
-		dattack_speed="-400"
+		dattack_speed="-900"
 	/>
 	<DropChance
 		level="45"
@@ -558,7 +558,7 @@ s		modchance_damage_air_mod="float"
 		damage_power="140"
 		attack_range="1.5"
 		two_handed="yes"
-		dattack_speed="0"
+		dattack_speed="-500"
 	/>
 	<DropChance
 		level="50"
@@ -595,7 +595,7 @@ s		modchance_damage_air_mod="float"
 		damage_power="150"
 		attack_range="1.5"
 		two_handed="yes"
-		dattack_speed="-400"
+		dattack_speed="-900"
 	/>
 	<DropChance
 		level="55"
@@ -632,7 +632,7 @@ s		modchance_damage_air_mod="float"
 		damage_power="155"
 		attack_range="1.5"
 		two_handed="yes"
-		dattack_speed="0"
+		dattack_speed="-500"
 	/>
 	<DropChance
 		level="60"
@@ -671,7 +671,7 @@ s		modchance_damage_air_mod="float"
 		damage_power="135"
 		attack_range="1.5"
 		two_handed="yes"
-		dattack_speed="-150"
+		dattack_speed="-650"
 	/>
 	<DropChance
 		level="65"
@@ -708,7 +708,7 @@ s		modchance_damage_air_mod="float"
 		damage_power="85"
 		attack_range="1.5"
 		two_handed="yes"
-		dattack_speed="-500"
+		dattack_speed="-1000"
 	/>
 	<DropChance
 		level="70"
@@ -745,7 +745,7 @@ s		modchance_damage_air_mod="float"
 		damage_power="190"
 		attack_range="1.5"
 		two_handed="yes"
-		dattack_speed="-400"
+		dattack_speed="-900"
 	/>
 	<DropChance
 		level="75"
@@ -782,7 +782,7 @@ s		modchance_damage_air_mod="float"
 		damage_power="210"
 		attack_range="1.5"
 		two_handed="yes"
-		dattack_speed="-300"
+		dattack_speed="-800"
 	/>
 	<DropChance
 		level="80"

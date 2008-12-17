@@ -1,4 +1,4 @@
-<!-- TWO HANDED AXES -->
+﻿<!-- TWO HANDED AXES -->
 
 <!-- Holzfälleraxt -->
 <Item type="weapon" subtype="lumber_axe" size="big">
@@ -29,7 +29,7 @@
 		damage_power="40"
 		attack_range="0.8"
 		two_handed="yes"
-		dattack_speed="-500"
+		dattack_speed="-1000"
 	/>
 	<DropChance
 		level="1"
@@ -66,7 +66,7 @@
 		damage_power="48"
 		attack_range="0.8"
 		two_handed="yes"
-		dattack_speed="-500"
+		dattack_speed="-1000"
 	/>
 	<DropChance
 		level="1"
@@ -103,7 +103,7 @@
 		damage_power="30"
 		attack_range="1.0"
 		two_handed="yes"
-		dattack_speed="-400"
+		dattack_speed="-900"
 	/>
 	<DropChance
 		level="5"
@@ -140,7 +140,7 @@
 		damage_power="74"
 		attack_range="1.3"
 		two_handed="yes"
-		dattack_speed="-700"
+		dattack_speed="-1000"
 	/>
 	<DropChance
 		level="8"
@@ -214,7 +214,7 @@
 		damage_power="82"
 		attack_range="2.0"
 		two_handed="yes"
-		dattack_speed="-600"
+		dattack_speed="-1000"
 	/>
 	<DropChance
 		level="19"
@@ -251,7 +251,7 @@
 		damage_power="96"
 		attack_range="1.5"
 		two_handed="yes"
-		dattack_speed="0"
+		dattack_speed="-500"
 	/>
 	<DropChance
 		level="25"
@@ -288,7 +288,7 @@
 		damage_power="106"
 		attack_range="1.4"
 		two_handed="no"
-		dattack_speed="-600"
+		dattack_speed="-1000"
 	/>
 	<DropChance
 		level="30"
@@ -325,7 +325,7 @@
 		damage_power="126"
 		attack_range="1.3"
 		two_handed="yes"
-		dattack_speed="-400"
+		dattack_speed="-900"
 	/>
 	<DropChance
 		level="35"
@@ -362,7 +362,7 @@
 		damage_power="126"
 		attack_range="1.4"
 		two_handed="yes"
-		dattack_speed="-600"
+		dattack_speed="-1000"
 	/>
 	<DropChance
 		level="40"
@@ -399,7 +399,7 @@
 		damage_power="132"
 		attack_range="1.3"
 		two_handed="yes"
-		dattack_speed="-400"
+		dattack_speed="-900"
 	/>
 	<DropChance
 		level="45"
@@ -436,7 +436,7 @@
 		damage_power="148"
 		attack_range="1.3"
 		two_handed="yes"
-		dattack_speed="-500"
+		dattack_speed="-1000"
 	/>
 	<DropChance
 		level="50"
@@ -473,7 +473,7 @@
 		damage_power="152"
 		attack_range="1.2"
 		two_handed="yes"
-		dattack_speed="-300"
+		dattack_speed="-800"
 	/>
 	<DropChance
 		level="55"
@@ -510,7 +510,7 @@
 		damage_power="162"
 		attack_range="1.4"
 		two_handed="yes"
-		dattack_speed="-550"
+		dattack_speed="-1000"
 	/>
 	<DropChance
 		level="60"
@@ -547,7 +547,7 @@
 		damage_power="182"
 		attack_range="1.4"
 		two_handed="yes"
-		dattack_speed="-600"
+		dattack_speed="-1000"
 	/>
 	<DropChance
 		level="65"
@@ -584,7 +584,7 @@
 		damage_power="186"
 		attack_range="1.4"
 		two_handed="yes"
-		dattack_speed="-800"
+		dattack_speed="-1000"
 	/>
 	<DropChance
 		level="70"
@@ -623,7 +623,7 @@
 		damage_power="190"
 		attack_range="1.4"
 		two_handed="yes"
-		dattack_speed="-600"
+		dattack_speed="-1000"
 	/>
 	<DropChance
 		level="75"
@@ -660,7 +660,7 @@
 		damage_power="245"
 		attack_range="1.6"
 		two_handed="no"
-		dattack_speed="-600"
+		dattack_speed="-1000"
 	/>
 	<DropChance
 		level="80"

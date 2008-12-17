@@ -31,7 +31,7 @@
 		damage_power="53"
 		attack_range="8"
 		two_handed="no"
-		dattack_speed="-500"
+		dattack_speed="-700"
 	/>
 	<DropChance
 		level="8"
