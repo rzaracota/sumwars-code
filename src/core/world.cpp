@@ -154,11 +154,11 @@ bool World::init()
 	active = false \n  \
 	end ");
 	rdata->addEvent("trap_fire",ev);
-			*/
+	*/		
 			
-	/*
+	
 	// Testevent: getarnter Lich
-			
+	/*		
 	ev = new Event();
 	ev->setOnce();
 	ev->setCondition("return (unitIsInArea(trigger.player,'LichArea'))");
@@ -173,7 +173,7 @@ bool World::init()
 	ev->setCondition("return (trigger.unit == lich)");
 	ev->setEffect("dropItem('demon_sw', getObjectValue(lich,'position'))");
 	rdata->addEvent("unit_die",ev);
-		*/
+	*/
 			
 	
 	ev = new Event();
@@ -184,7 +184,7 @@ bool World::init()
 	pos = getLocation('LichLocation') \n \
 	x = pos[1] \n \
 	y = pos[2] \n \
-	createObject('goblin' ,{x-8,y}) \n \
+	createObject('goblin' ,{x-5,y}) \n \
 	addUnitCommand(trigger.player,'walk',2000,{x+4,y}) \n \
 	addUnitCommand(trigger.player,'walk',1900,{x,y-4}) \n \
 	addUnitCommand(trigger.player,'walk',1800,{x-4,y}) \n \

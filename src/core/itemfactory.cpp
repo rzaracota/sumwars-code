@@ -459,7 +459,9 @@ void ItemFactory::createMagicMods(Item* item, float* modchance, float magic_powe
 	// Modifikationen des Items auswuerfeln
 	DEBUG4("mods auswuerfeln");
 
-		// bisher zugeteilte Staerke der Modifikation
+	magic_power = std::min(magic_power, max_enchant*4);
+	
+	// bisher zugeteilte Staerke der Modifikation
 	float mod_power[31];
 	memset(mod_power,0,31*sizeof(float));
 

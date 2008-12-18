@@ -1017,9 +1017,6 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 			// Debugging
 			if (command->m_id==0)
 			{
-			    int *pi = 0;
-			    int i = *pi;
-			    DEBUG("%i",i);
 				gainLevel();
 			}
 			if (command->m_id==2)
