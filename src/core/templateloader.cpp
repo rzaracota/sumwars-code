@@ -9,7 +9,7 @@
 #include "monster.h"
 */
 
-//#include <iostream>
+#include <iostream>
 
 //######################  RegionData (world.xml)  ##############################
 
@@ -579,7 +579,6 @@ int TemplateLoader::generateObjectGroupTemplate(TiXmlElement* pElement, std::str
 	if (element == "ObjectGroupTemplate")
 	{
 		DEBUG5("ObjectGroupTemplate");
-		
 		if (m_object_group_template == 0)
 		{
 			m_object_group_template = new ObjectGroupTemplate;
@@ -700,7 +699,6 @@ void TemplateLoader::searchObjectGroupTemplate(TiXmlNode* pParent, std::list<Obj
 	if ( !pParent ) return;
 
 	TiXmlNode* pChild;
-//	TiXmlText* pText;
 
 	int t = pParent->Type();
 	int num;
@@ -717,12 +715,7 @@ void TemplateLoader::searchObjectGroupTemplate(TiXmlNode* pParent, std::list<Obj
 			default: printf( "%s%d attributes", getIndentAlt(indent), num); break;
 		}*/
 		break;
-	/*
-	case TiXmlNode::TEXT:
-		pText = pParent->ToText();
-		printf( "Text: [%s]", pText->Value() );
-		break;
-	*/
+	
 	default:
 		break;
 	}
