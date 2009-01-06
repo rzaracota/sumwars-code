@@ -520,6 +520,36 @@ int ObjectLoader::generateMonsterMeshData(TiXmlElement* pElement, string element
 			pAttrib=pAttrib->Next();
 		}
 	}
+	
+	if (element == "Ability" && pAttrib)
+	{
+		while (element == "Ability" && pAttrib)
+		{
+			if (!strcmp(pAttrib->Name(), "type"))
+			{
+				m_action = Action::getActionType(pAttrib->Value());
+				
+			}
+			pAttrib=pAttrib->Next();
+		}
+	}
+	
+	if (element == "Animation" && pAttrib)
+	{
+		while (element == "Animation" && pAttrib)
+		{
+			if (!strcmp(pAttrib->Name(), "name"))
+			{
+				std::string enumname = Action::getActionInfo(m_action)->m_enum_name;
+				
+				//DEBUG("found animation %s for action %s (%s)",pAttrib->Value(), enumname.c_str(), m_monster_mesh_data->m_subtype.c_str());
+				
+				m_monster_mesh_data->m_animations[m_action].push_back(pAttrib->Value());
+				
+			}
+			pAttrib=pAttrib->Next();
+		}
+	}
 
 	return i;
 }
@@ -538,7 +568,7 @@ void ObjectLoader::searchMonsterMeshData(TiXmlNode* pParent)
 	switch ( t )
 	{
 	case TiXmlNode::ELEMENT:
-		//printf( "Element [%s]", pParent->Value() );
+		//printf( "Element [%s]\n", pParent->Value() );
 		num = generateMonsterMeshData(pParent->ToElement(), pParent->Value());
 		/*switch(num)
 		{

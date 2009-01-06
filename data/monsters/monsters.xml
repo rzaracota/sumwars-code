@@ -266,9 +266,19 @@ AIR
 		step_length="0.5"
 		attack_range="1"
 	>
-		<Ability type="walk"/>
-		<Ability type="attack"/>
-		<Ability type="die"/>
+		<Ability type="walk">
+			<Animation name="walkOneHand" />
+		</Ability>
+		
+		<Ability type="attack">
+			<Animation name="attack" />
+		</Ability>
+		
+		<Ability type="die">
+			<Animation name="die" />
+		</Ability>
+		
+		
 		<Immunity type="berserk"/>
 		<Immunity type="confused"/>
 	</BasicAttributes>
@@ -310,10 +320,22 @@ AIR
 		step_length="1.0"
 		attack_range="2"
 	>
-		<Ability type="walk"/>
-		<Ability type="attack"/>
-		<Ability type="die"/>
-		<Ability type="ice_bolt"/>
+		<Ability type="walk">
+			<Animation name="walkOneHand" />
+		</Ability>
+		
+		<Ability type="attack">
+			<Animation name="attack" />
+		</Ability>
+		
+		<Ability type="die">
+			<Animation name="die" />
+		</Ability>
+		
+		<Ability type="ice_bolt">
+			<Animation name="castMagicWeak" />
+		</Ability>
+		
 		<Immunity type="berserk"/>
 		<Immunity type="confused"/>
 	</BasicAttributes>
@@ -354,9 +376,18 @@ AIR
 		step_length="0.5"
 		attack_range="0.5"
 	>
-		<Ability type="walk"/>
-		<Ability type="attack"/>
-		<Ability type="die"/>
+		<Ability type="walk">
+			<Animation name="walkOneHand" />
+		</Ability>
+		
+		<Ability type="attack">
+			<Animation name="attack" />
+		</Ability>
+		
+		<Ability type="die">
+			<Animation name="die" />
+		</Ability>
+		
 	</BasicAttributes>
 	
 	<Geometry radius="0.5" />

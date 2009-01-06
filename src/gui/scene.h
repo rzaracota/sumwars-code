@@ -278,6 +278,14 @@ class Scene
 	 */
 	static void registerObject(WorldObject::TypeInfo::ObjectSubtype subtype, std::string mesh, std::string particle_system= "", float scaling_factor =1.0);
 
+	/**
+	 * \fn static void registerObjectAnimations(WorldObject::TypeInfo::ObjectSubtype subtype, std::map<Action::ActionType, std::vector<std::string> > &animations)
+	 * \brief Registriert die Animationen fuer ein Objekt
+	 * \param subtype Subtyp des Objektes
+	 * \param animations Liste der Animationen sortiert nach Aktionstyp
+	 */
+	static void registerObjectAnimations(WorldObject::TypeInfo::ObjectSubtype subtype, std::map<Action::ActionType, std::vector<std::string> > &animations);
+	
     /**
      * \fn void registerAttachedMesh(WorldObject::TypeInfo::ObjectSubtype subtype, std::string bone, std::string mesh)
      * \brief Registriert fuer ein bestehendes Objekt ein Mesh das an das Objekt angefuegt wird
@@ -375,6 +383,13 @@ class Scene
 	 *  \brief Speichert fuer die Objekte die Information zum Rendern
 	 */
 	static std::map<WorldObject::TypeInfo::ObjectSubtype, RenderInfo> m_object_render_info;
+	
+	/**
+	 * \var static std::map<WorldObject::TypeInfo::ObjectSubtype, std::map<Action::ActionType, std::vector<std::string> > > m_object_animations
+	 * \brief Animationen der Objekte (erster Schluessel: Objekttyp, zweiter Schluessel Aktionstyp)
+	 */
+	static std::map<WorldObject::TypeInfo::ObjectSubtype, std::map<Action::ActionType, std::vector<std::string> > > m_object_animations;
+	
 
 	/**
 	 * \var static std::map<Item::Subtype, RenderInfo> m_item_render_info

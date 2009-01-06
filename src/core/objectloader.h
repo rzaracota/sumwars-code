@@ -4,11 +4,15 @@
 
 #include <map>
 #include <list>
+#include <vector>
 #include "monsterbase.h"
+#include "action.h"
+
 
 #include "../tinyxml/tinyxml.h"
 #include <string>
 #include <cstring>
+
 
 /**
  * \struct ItemMeshData
@@ -27,6 +31,12 @@ struct MonsterMeshData
 	 * \brief Name des Meshes
 	 */
 	std::string m_mesh;
+	
+	/**
+	 * \fn std::map<Action::ActionType, std::list<std::string> > m_animations
+	 * \brief Animationen des Monsters sortiert nach Typ der Aktion
+	 */
+	std::map<Action::ActionType, std::vector<std::string> > m_animations;
 };
 
 /**
@@ -66,6 +76,8 @@ struct FixedObjectMeshData
 	 * \brief Name des Meshes
 	 */
 	std::string m_mesh;
+	
+	
 };
 
 
@@ -281,6 +293,12 @@ class ObjectLoader
 	 * \brief Subtyp des Objektes (Zwischenspeicher-Variable)
 	 */
 	std::string m_subtype;
+	
+	/**
+	 * \var Action::ActionType m_action
+	 * \brief Typ der Aktion (Zwischenspeicher-Variable)
+	 */
+	Action::ActionType m_action;
 
 };
 

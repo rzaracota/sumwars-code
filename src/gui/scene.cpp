@@ -11,6 +11,8 @@ std::map<Item::Subtype, RenderInfo> Scene::m_item_render_info;
 
 std::map<Tile, RenderInfo> Scene::m_tile_render_info;
 
+std::map<WorldObject::TypeInfo::ObjectSubtype, std::map<Action::ActionType, std::vector<std::string> > > Scene::m_object_animations;
+
 
 Scene::Scene(Document* doc,Ogre::RenderWindow* window)
 {
@@ -103,6 +105,7 @@ void Scene::loadMonsterData(std::string file)
 		while (iter != monster_mesh_list->end())
 		{
 			registerObject((*iter)->m_subtype, (*iter)->m_mesh, "");
+			registerObjectAnimations((*iter)->m_subtype,(*iter)->m_animations); 
 			*iter++;
 		}
 
@@ -235,6 +238,14 @@ void Scene::registerMeshes()
 void Scene::registerObject(WorldObject::TypeInfo::ObjectSubtype subtype, std::string mesh, std::string particle_system, float scaling_factor)
 {
 	m_object_render_info.insert(std::make_pair(subtype,RenderInfo(mesh,particle_system,scaling_factor)));
+}
+
+void Scene::registerObjectAnimations(WorldObject::TypeInfo::ObjectSubtype subtype, std::map<Action::ActionType, std::vector<std::string> > &animations)
+{
+	if (!animations.empty())
+	{
+		m_object_animations[subtype] = animations;
+	}
 }
 
 void Scene::registerAttachedMesh(WorldObject::TypeInfo::ObjectSubtype subtype, std::string bone, std::string mesh)
@@ -582,12 +593,21 @@ void Scene::updateObject(WorldObject* obj)
 		cr = static_cast<Creature*>(obj);
 		Action::ActionType act = cr->getAction()->m_type;
 		Action::ActionInfo* aci = Action::getActionInfo(act);
-		// Name der Animation
-		std::vector<std::string>& animations = aci->m_animation[cr->getActionEquip()];
-		std::string anim_name = "";
-		if (!animations.empty())
+		
+		// Name der Animation ermitteln
+		
+		// Wenn in der Datenbank ein Satz Animationen fuer die Aktion enthalten diesen diesen verwenden
+		// (sonst den Standardsatz
+		std::vector<std::string>* animations = &(aci->m_animation[cr->getActionEquip()]);
+		if (m_object_animations.count(cr->getTypeInfo()->m_subtype) != 0)
 		{
-			anim_name = animations[cr->getAction()->m_animation_number % animations.size()];
+			animations = &(m_object_animations[cr->getTypeInfo()->m_subtype][act]);
+		}
+		
+		std::string anim_name = "";
+		if (!animations->empty())
+		{
+			anim_name = (*animations)[cr->getAction()->m_animation_number % animations->size()];
 		}
 
 		obj_ent = m_scene_manager->getEntity(name);
