@@ -1040,14 +1040,34 @@ void MainWindow::updateItemInfo()
 		std::string name;
 		std::pair<float,float> rpos;
 		
+		float height = 0.03;
+		int num = (int) (0.9/height);
+		// fuer jede 0.025 hohe Spalte ein Element des Vektors
+		// fuer jede Spalte eine Liste von Wertepaaren: Anfang, Ende
+		std::vector< std::list < std::pair<float,float> > > itempos(num);
+		
+		DEBUG5("\nitems\n");
+		
+		// Distanz zur wahren Position
+		float optdist,dist;
+		int optrow;
+		float optcol;
+		float len;
+		// Begrenzung fuer den Schriftzug
+		float lbound=0,rbound =1;
+		int app;
 		for (it = itms->begin();it != itms->end();++it)
 		{
+			
 			di = World::getWorld()->getRegion(rid)->getDropItem(it->first);
 			if (di ==0)
 			{
 				continue;
 			}
 			
+			name = di->m_item->getName();
+			DEBUG5(" ");
+			DEBUG5(" %s %i",name.c_str(), di->getId());
 			// Position auf dem Bildschirm ermitteln
 			rpos = m_scene->getProjection(Vector(di->m_x/2.0,di->m_y/2.0));
 			
@@ -1056,6 +1076,140 @@ void MainWindow::updateItemInfo()
 			{
 				continue;
 			}
+			
+			// optimale Position ermitteln
+			// Distanz zur wahren Position
+			optdist = 1000000;
+			
+			// beste gefundene Platzierung
+			optrow= (int) (rpos.second/height+0.5);
+			optcol= rpos.first;
+			DEBUG5("optpos %i %f",optrow,optcol);
+			
+			// Laenge des Schriftzugs
+			len = 0.009*name.length();
+			app = 1;
+			
+			
+			std::list < std::pair<float,float> >::iterator it, optit;
+			
+			
+			// schleife ueber die Zeilen
+			int row, centerrow = optrow;
+			float col= rpos.second;
+			int i;
+			for (i=0; i<2*num; i++)
+			{
+				
+				lbound=0;
+				rbound =1;
+				
+				
+				
+				row = centerrow;
+				if (i%2 == 0)
+					row += (i+1)/2;
+				else
+					row -= (i+1)/2;
+				
+				if (row<0 || row >= num)
+					continue;
+				
+				// Zeilen ueberspringen die so weit wegliegen, dass garantiert schon eine bessere Platzierung gefunden ist
+				if ((rpos.second- row*height)*(rpos.second- row*height) > optdist)
+					continue;
+				
+				// iterieren ueber die Liste der Gegenstaende, die bisher in der Zeile liegen
+				// (genauer: die Luecken zwischen den Labels)
+				for (it = itempos[row].begin(); it != itempos[row].end(); it++)
+				{
+					rbound = it->first;
+					
+					// Test ob das Label in die Luecke passt
+					if (rbound -lbound < len)
+					{
+						lbound = it->second;
+						continue;
+					}
+					
+					// Optimale Platzierung des Labels in der Luecke ermitteln
+					if (rpos.first+len > rbound)
+					{
+						col = rbound-len;
+					}
+					else if (rpos.first<lbound)
+					{
+						col = lbound;
+					}
+					else
+						col = rpos.first;
+					
+					dist = (rpos.first-col)*(rpos.first-col) + (centerrow-row)*(centerrow-row)*height*height;
+					if (dist < optdist)
+					{
+						optdist = dist;
+						optcol = col;
+						optrow = row;
+						optit = it;
+						app = 0;
+					}
+					
+					lbound = it->second;
+				}
+				
+				// Option, das Label hinter dem letzten bestehenden Label einzufuegen
+				rbound = 1;
+				if (rbound-lbound >= len)
+				{
+					if (rpos.first<lbound)
+					{
+						col = lbound;
+					}
+					else
+						col = rpos.first;
+					
+					dist = (rpos.first-col)*(rpos.first-col) + (centerrow-row)*(centerrow-row)*height*height;
+					
+					if (dist < optdist)
+					{
+						app = 1;
+						optdist = dist;
+						optcol = col;
+						optrow = row;
+					}
+					
+				}
+				
+				
+				
+			}
+			
+			if (optdist > 10000)
+				continue;
+			
+			DEBUG5("center %i rpos %f  %f",centerrow,rpos.second, rpos.second-centerrow*height);
+			
+			rpos.first=optcol;
+			rpos.second=optrow*height + (rpos.second-centerrow*height);
+			
+			DEBUG5("optdist %f optrow %i pos %f %f  app %i",optdist, optrow, rpos.second, rpos.first,app);
+				
+			if (app == 1)
+			{
+				itempos[optrow].push_back(std::make_pair(optcol,optcol+len));
+			}
+			else
+			{
+				DEBUG5("insert before %f %f",optit->first, optit->second);
+				itempos[optrow].insert(optit,std::make_pair(optcol,optcol+len));
+			}
+			
+			/*
+			for (it = itempos[optrow].begin(); it != itempos[optrow].end(); it++)
+			{
+				DEBUG("%f - %f ",it->first,it->second);
+			}
+			*/
 			
 			stream.str("");
 			stream << "ItemLabel";
@@ -1081,7 +1235,7 @@ void MainWindow::updateItemInfo()
 			}
 			label->setVisible(true);
 			
-			name = di->m_item->getName();
+			
 			if (label->getText() != name)
 			{
 	
@@ -1091,7 +1245,7 @@ void MainWindow::updateItemInfo()
 			label->setID(it->first);
 			
 			
-			label->setPosition(CEGUI::UVector2(CEGUI::UDim(std::max(0.0,rpos.first-0.03),0), CEGUI::UDim(std::max(0.0,rpos.second-0.05),0)));
+			label->setPosition(CEGUI::UVector2(CEGUI::UDim(std::max(0.0f,rpos.first-len/2),0), CEGUI::UDim(std::max(0.0f,rpos.second-0.02f),0)));
 			nr++;
 
 		}
