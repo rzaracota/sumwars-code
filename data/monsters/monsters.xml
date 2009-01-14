@@ -395,6 +395,53 @@ AIR
 	<AI ai_sight_range="8" />
 </Monster>
 
+<Monster type="MONSTER" subtype="peasant" fraction="HUMAN" category="HUMAN" layer="NORMAL">
+	<Mesh file="warrior.mesh" />
+	<Dropslots p0="0.1" p1="0.2" p2="0.2" p3="0.0">
+		<Dropslot0 min_level="10" max_level="40" magic_prob="0.5" magic_power="1000" />
+		<Dropslot1 min_level="0" max_level="20" magic_prob="0.5" magic_power="1000" />
+	</Dropslots>
+	<BasicAttributes
+					max_experience="100000"
+					level="1"
+					max_health="100"
+					armor="10"
+					block="0"
+					attack="20"
+					strength="10"
+					dexterity="20"
+					magic_power="0"
+					willpower="10"
+					resistances_physical="0"
+					resistances_air="0"
+					resistances_ice="10"
+					resistances_fire="0"
+					resistances_cap_physical="50"
+					resistances_cap_air="50"
+					resistances_cap_ice="50"
+					resistances_cap_fire="50"
+					walk_speed="2500"
+					attack_speed="2000"
+					step_length="0.5"
+					attack_range="0.5"
+					>
+		<Ability type="walk">
+			<Animation name="walkOneHand" />
+		</Ability>
+		
+		
+		<Ability type="die">
+			<Animation name="die" />
+		</Ability>
+		
+	</BasicAttributes>
+	
+	<Geometry radius="0.5" />
+	
+	<AI ai_sight_range="8" />
+</Monster>
+
+
 
 <MonsterGroup name="goblins" >
 	<SubGroup subtype="goblin" number="10" prob="0.7" />
