@@ -340,6 +340,14 @@ public:
 	 * \param wo Objekt
 	 */
 	WorldObject::Relation getRelation(WorldObject::Fraction frac, WorldObject* wo);
+	
+	/**
+	 * \fn WorldObject::Relation getRelation(WorldObject::Fraction frac, WorldObject::Fraction frac2)
+	 * \brief Gibt die Beziehung zwischen zwei Fraktionen aus
+	 * \param frac erste Fraktion
+	 * \param frac2 zweite Fraktion
+	 */
+	WorldObject::Relation getRelation(WorldObject::Fraction frac, WorldObject::Fraction frac2);
 
 
 	/**

@@ -303,7 +303,9 @@ void MainWindow::update()
 
 		// ObjectInfo aktualisieren
 		updateObjectInfo();
+		
 		updateItemInfo();
+		updateSpeechBubbles();
 		
 		// Bild am Curso aktualisieren
 		updateCursorItemImage();
@@ -1273,6 +1275,103 @@ void MainWindow::updateItemInfo()
 			label = win_mgr.getWindow(stream.str());
 			label->setVisible(false);
 		}
+	}
+}
+
+void MainWindow::updateSpeechBubbles()
+{
+	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
+	
+	// Zaehler wie viele Labels fuer Items existieren
+	static int lcount =0;
+	
+	Player* player = m_document->getLocalPlayer();
+	
+	CEGUI::Window* label;
+	
+	// Objekte im Umkreis von 20 Meter holen
+	std::list<WorldObject*> objs;
+	std::list<WorldObject*>::iterator it;
+	
+	Shape s;
+	s.m_center = player->getShape()->m_center;
+	s.m_type = Shape::RECT;
+	s.m_extent = Vector(20,20);
+	player->getRegion()->getObjectsInShape(&s,&objs);
+	
+	std::pair<float,float> pos;
+	
+	Creature* cr;
+	
+	int nr =0;
+	std::string text;
+	
+	std::stringstream stream;
+	
+	for (it = objs.begin(); it != objs.end(); ++it)
+	{
+		// nur Kreaturen behandeln
+		if (!(*it)->isCreature())
+			continue;
+		
+		cr = static_cast<Creature*>(*it);
+		pos = m_scene->getProjection(cr->getShape()->m_center);
+		
+		// nur Kreaturen behandeln, die wirklich zu sehen sind
+		if (pos.first <0 || pos.first >1 || pos.second <0 || pos.second >1)
+			continue;
+		
+		text = cr->getSpeakText();
+		
+		if (text == "")
+			continue;
+		
+		stream.str("");
+		stream << "SpeechLabel";
+		stream << nr;
+		
+		if (nr >= lcount)
+		{
+			lcount ++;
+			label = win_mgr.createWindow("TaharezLook/StaticText", stream.str());
+			m_game_screen->addChildWindow(label);
+			label->setProperty("FrameEnabled", "True");
+			label->setProperty("BackgroundEnabled", "false");
+			label->setSize(CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim( 0.05f)));
+			label->setText("");
+			label->setAlpha(0.9);
+			//label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&MainWindow::onDropItemClicked, this));
+				
+		}
+		else
+		{
+			label = win_mgr.getWindow(stream.str());
+		}
+		label->setVisible(true);
+			
+			
+		if (label->getText() != text)
+		{
+	
+			label->setText(text);
+		}
+			
+		//label->setID(it->first);
+			
+			
+		label->setPosition(CEGUI::UVector2(CEGUI::UDim(std::max(0.0f,pos.first-0.1f),0), CEGUI::UDim(std::max(0.0f,pos.second-0.1f),0)));
+		nr++;
+		
+	}
+	
+	for (; nr<lcount; nr++)
+	{
+		stream.str("");
+		stream << "SpeechLabel";
+		stream << nr;
+			
+		label = win_mgr.getWindow(stream.str());
+		label->setVisible(false);
 	}
 }
 

@@ -177,6 +177,12 @@ class MainWindow :
 	 * \brief Aktualisiert die Informationen zu Partymitgliedern
 	 */
 	void updatePartyInfo();
+	
+	/**
+	 * \fn void updateSpeechBubbles()
+	 * \brief aktualisiert die Sprechblasen
+	 */
+	void updateSpeechBubbles();
 
 	/**
 	 * \fn bool mouseMoved(const OIS::MouseEvent &evt)
@@ -330,6 +336,7 @@ class MainWindow :
 	 * \brief gedrueckte Taste
 	 */
 	unsigned int m_key;
+	
 
 };
 

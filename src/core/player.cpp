@@ -269,6 +269,17 @@ bool Player::onGamefieldClick(ClientCommand* command)
 						com->m_range = getBaseAttrMod()->m_attack_range;
 					}
 				}
+				else if (wo->isCreature() && ( rel == WorldObject::ALLIED || rel == WorldObject::NEUTRAL))
+				{
+					com->m_type =Action::SPEAK;
+
+					com->m_goal_object_id = command->m_id;
+					com->m_goal = command->m_goal;
+					com->m_range = 3;
+					DEBUG("Speak");
+				}
+				
+				
 				if (wo->getTypeInfo()->m_type==TypeInfo::TYPE_FIXED_OBJECT )
 				{
 					// festes Objekt benutzen

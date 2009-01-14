@@ -361,6 +361,53 @@ public:
 	 */
 	bool hasScriptCommand();
 	
+	/**
+	 * \fn void addSpeakEvent(std::string topic, Event* event)
+	 * \brief Fuegt der Kreatur ein neues Thema hinzu ueber das sie Sprechen kann. Wenn das Thema angesprochen wird, wird das zugehoerige Event ausgeloest
+	 * \param topic Thema 
+	 * \param event Event das beim Ansprechen des Thema ausgeloest wird
+	 */
+	void addSpeakEvent(std::string topic, Event* event)
+	{
+		m_speak_events.insert(std::make_pair(topic,event));
+	}
+	
+	/**
+	 * \fn void speakText(std::string, float time, int speak_to=0)
+	 * \brief Laesst die Kreatur einen bestimmten Text sprechen
+	 * \param text Text der angezeigt wird
+	 * \param time Zeit, die der Text angezeigt wird in ms
+	 * \param speak_to ID der Kreatur an die sich der Text richtet
+	 **/
+	void speakText(std::string text, float time, int speak_to=0);
+	
+	/**
+	 * \fn void speakTopic(std::string topic, int speak_to=0)
+	 * \brief Spricht die Kreatur auf ein Thema an
+	 * \param topic Thema
+	 * \param speak_to ID der Kreatur an die sich der Text richtet
+	 */
+	void speakTopic(std::string topic, int speak_to=0);
+	
+	/**
+	 * \fn std::string getSpeakText()
+	 * \brief Gibt den aktuell gesprochenen Text aus
+	 */
+	std::string getSpeakText()
+	{
+		if (m_speak_text.empty())
+			return "";
+		
+		return m_speak_text.front().m_text;
+	}
+	
+	/**
+	 * \fn std::list < std::pair<std::string, std::string> >& getSpeakAnswers()
+	 * \brief Gibt die zum aktuellen Text moeglichen Antworten aus
+	 */
+	std::list < std::pair<std::string, std::string> >& getSpeakAnswers();
+	
+	
 protected:
 	
 	/**
@@ -508,6 +555,24 @@ private:
 	 * \brief Liste von Kommandos, die durch Scripte vorgeschrieben wurden
 	 **/
 	std::list<std::pair<Command,float> > m_script_commands;
+	
+	/**
+	 * \var std::list< CreatureSpeakText> m_speak_text
+	 * \brief Folge von Texten, die die Kreature sprechen soll
+	 */
+	std::list< CreatureSpeakText> m_speak_text;
+	
+	/**
+	 * \var std::map< std::string, Event* > m_speak_events
+	 * \brief Ordnet einem Thema auf das die Kreatur angesprochen wird ein Ereignis zu
+	 */
+	std::map< std::string, Event* > m_speak_events;
+	
+	/**
+	 * \var int m_speak_id
+	 * \brief ID der Person, zu der die Kreatur gerade spricht
+	 */
+	int m_speak_id;
 	
 	/**
 	 * \var float m_script_command_timer

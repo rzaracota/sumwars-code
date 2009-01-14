@@ -10,6 +10,11 @@ WorldObject::WorldObject( int id)
 	init();
 }
 
+bool WorldObject::isCreature()
+{
+	return m_type_info.m_type != TypeInfo::TYPE_FIXED_OBJECT;
+}
+
 bool WorldObject::moveTo(Vector newpos)
 {
 	if (World::getWorld()==0 || getRegion()==0)

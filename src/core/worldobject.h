@@ -587,6 +587,12 @@ class WorldObject {
 	 * \param valname Name des Wertes
 	 */
 	virtual bool setValue(std::string valname);
+	
+	/**
+	 * \fn virtual bool isCreature()
+	 * \brief Gibt aus, ob es sich um eine Kreatur handelt
+	 */
+	virtual bool isCreature();
 
 	protected:
 		

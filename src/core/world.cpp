@@ -125,6 +125,13 @@ bool World::init()
 			");
 	ev->setOnce();
 	rdata->addEvent("create_region",ev);
+	
+	
+	ev = new Event();
+	ev->setEffect("peasant = createObject('peasant', {130,217}) \n \
+			");
+	ev->setOnce();
+	rdata->addEvent("create_region",ev);
 
 	// Debugging
 	/*
@@ -175,7 +182,7 @@ bool World::init()
 	rdata->addEvent("unit_die",ev);
 	*/
 			
-	
+	/*
 	ev = new Event();
 	ev->setOnce();
 	ev->setCondition("return (unitIsInArea(trigger.player,'LichArea'))");
@@ -206,7 +213,7 @@ bool World::init()
 	ev->setEffect("deleteObject(tree) \n \
 	setCutsceneMode(false) \n ");
 	rdata->addEvent("command_complete",ev);
-	
+	*/
 
 
 	// Wird schon aus XML geladen
@@ -514,58 +521,46 @@ void World::insertRegion(Region* region, int rnr)
 
 }
 
-WorldObject::Relation World::getRelation(WorldObject::Fraction frac, WorldObject* wo)
+WorldObject::Relation World::getRelation(WorldObject::Fraction frac, WorldObject::Fraction frac2)
 {
-	WorldObject::Fraction f = wo->getFraction();
-
-	DEBUG5("frac1 %i frac2 %i",frac,f);
-	if (frac == WorldObject::FRAC_HOSTILE_TO_ALL)
+	if (frac > frac2)
+		return getRelation(frac2,frac);
+	
+	if (frac == WorldObject::FRAC_HOSTILE_TO_ALL || frac2 == WorldObject::FRAC_HOSTILE_TO_ALL)
 		return WorldObject::HOSTILE;
-
-	if (wo->getTypeInfo()->m_type > WorldObject::TypeInfo::TYPE_MONSTER)
-	{
-		return 	WorldObject::NEUTRAL;
-	}
-
+	
+	if (frac == frac2)
+		return WorldObject::ALLIED;
+	
 	if (frac == WorldObject::NOFRACTION)
+		return WorldObject::NEUTRAL;
+	
+	if (frac<=  WorldObject::FRAC_MONSTER && frac2<=  WorldObject::FRAC_MONSTER)
 	{
+		// Beziehung zwischen zwei Nicht -Spieler Parteien
 		return WorldObject::NEUTRAL;
 	}
-	else if (frac <=  WorldObject::FRAC_MONSTER)
+	else if (frac<=  WorldObject::FRAC_MONSTER)
 	{
-		if (frac ==  wo->getFraction())
-		{
-			return WorldObject::ALLIED;
-		}
-		else if (wo->getFraction()==WorldObject::NOFRACTION)
-		{
-			return WorldObject::NEUTRAL;
-		}
-		else
-		{
-			return WorldObject::HOSTILE;
-		}
-	}
-	else if (frac ==WorldObject::FRAC_HOSTILE_TO_ALL)
-	{
-		return WorldObject::HOSTILE;
+	
+		// Beziehung zwischen Spieler und Nicht-Spieler Partei
+		WorldObject::Relation data[7] = {WorldObject::NEUTRAL, WorldObject::ALLIED, WorldObject::HOSTILE,WorldObject::HOSTILE,  WorldObject::NEUTRAL, WorldObject::HOSTILE,WorldObject::HOSTILE};
+		
+		return data[frac];
 	}
 	else
 	{
-
-		if (f == WorldObject::NOFRACTION)
-		{
-			return WorldObject::NEUTRAL;
-		}
-		else if (f <=  WorldObject::FRAC_HOSTILE_TO_ALL)
-		{
-			return WorldObject::HOSTILE;
-		}
-		else
-		{
-			return std::min(m_parties[frac - WorldObject::FRAC_PLAYER_PARTY].getRelations()[f- WorldObject::FRAC_PLAYER_PARTY], m_parties[f - WorldObject::FRAC_PLAYER_PARTY].getRelations()[frac- WorldObject::FRAC_PLAYER_PARTY]);
-		}
+		// Beziehung zwischen Spielern
+		return std::min(m_parties[frac - WorldObject::FRAC_PLAYER_PARTY].getRelations()[frac2- WorldObject::FRAC_PLAYER_PARTY], m_parties[frac2 - WorldObject::FRAC_PLAYER_PARTY].getRelations()[frac- WorldObject::FRAC_PLAYER_PARTY]);
 	}
+	
+	
+}
+
+WorldObject::Relation World::getRelation(WorldObject::Fraction frac, WorldObject* wo)
+{
+	WorldObject::Fraction f = wo->getFraction();
+	return getRelation(frac,f);
 }
 
 

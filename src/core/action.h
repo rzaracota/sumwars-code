@@ -68,6 +68,7 @@ public:
 		DIE=11,
 		DEAD=12,
 		TAKE_ITEM =13,
+  		SPEAK =14,
 
 		BASH = 32,		//a
 		HAMMER_BASH=33,		//b

@@ -406,6 +406,30 @@ struct CreatureDynAttrMod
 	
 };
 
-
+/**
+ * \struct CreatureSpeakText
+ * \brief Struktur fuer den Text den eine Kreatur spricht
+ */
+struct CreatureSpeakText
+{
+	/**
+	 * \var std::string m_text
+	 * \brief Der Text
+	 */
+	std::string m_text;
+	
+	/**
+	 * \var float m_time
+	 * \brief Gibt an, wie lange der Text zu sehen ist
+	 */
+	float m_time;
+	
+	/**
+	 * \var std::list < std::pair<std::string, std::string> > m_answers
+	 * \brief Liste von moeglichen Antworten und  dem zugehoerigen Thema
+	 */
+	std::list < std::pair<std::string, std::string> > m_answers;
+	
+};
 
 #endif

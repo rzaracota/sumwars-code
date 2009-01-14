@@ -5,6 +5,7 @@
 #include "raknet/GetTime.h"
 #include "raknet/MessageIdentifiers.h"
 #include <algorithm>
+#include <string>
 
 /**
  * \class CharConv
@@ -78,14 +79,54 @@ class CharConv
 	}
 	
 	/**
-	 * \fn void toBuffer(char* data, unsigned int size)
+	 * \fn void toBuffer(const char* data, unsigned int size)
 	 * \brief Schreibt Daten in den Puffer
 	 * \param data zu schreibende Daten
 	 * \param size Laenge der zu schreibenden Daten
 	 */
-	void toBuffer(char* data, unsigned int size)
+	void toBuffer(const char* data, unsigned int size)
 	{
 		m_bitstream.Write(data,size);
+	}
+	
+	/**
+	 * \fn void fromBuffer(char* data, unsigned int size)
+	 * \brief Liest Daten als String aus dem Puffer
+	 * \param data  Ausgabeparameter fuer die Daten
+	 * \param size Anzahl der Zeichen die gelesen werden
+	 */
+	void fromBuffer(char* data, unsigned int size)
+	{
+		m_bitstream.Read(data,size);
+	}
+	
+	/**
+	 * \fn void toBuffer(std::string s, unsigned int size)
+	 * \brief Schreibt aus dem String die ersten size Zeichen in den Puffer
+	 * \param s String
+	 * \param size Anzahl Zeichen
+	 */
+	void toBuffer(std::string s, unsigned int size)
+	{
+		char * data = new char[size];
+		memset(data,0,size);
+		memcpy(data,s.data(), std::min(size,s.size()));
+		toBuffer(data, size);
+		delete data;
+	}
+	
+	/**
+	 * \fn void fromBuffer(std::string s, unsigned int size)
+	 * \brief Liest aus dem String size Zeichen und schreibt sie in den String
+	 * \param s String
+	 * \param size Anzahl Zeichen
+	 */
+	void fromBuffer(std::string s, unsigned int size)
+	{
+		char* data = new char[size];
+		fromBuffer(data,size);
+		s.assign(data,size);
+		delete data;
 	}
 	
 	/**
@@ -111,15 +152,32 @@ class CharConv
 	}
 	
 	/**
-	 * \fn void fromBuffer(char* data, unsigned int size)
-	 * \brief Liest Daten als String aus dem Puffer
-	 * \param data  Ausgabeparameter fuer die Daten
-	 * \param size Anzahl der Zeichen die gelesen werden
+	 * \fn void toBuffer(std::string s)
+	 * \brief Schreibt einen String in den Buffer, indem zuerst die Laenge und dann die Daten geschrieben werden
+	 * \param s String
 	 */
-	void fromBuffer(char* data, unsigned int size)
+	void toBuffer(std::string s)
 	{
-		m_bitstream.Read(data,size);
+		toBuffer(s.size());
+		toBuffer(s.data(), s.size());
 	}
+	
+	/**
+	 * \fn void fromBuffer(std::string s)
+	 * \brief liest einen String aus dem Puffer
+	 * \param s String
+	 */
+	void fromBuffer(std::string s)
+	{
+		int len;
+		fromBuffer<int>(len);
+		char * data = new char[len];
+		fromBuffer(data,len);
+		s.assign(data,len);
+		delete data;
+	}
+	
+	
 	
 	/**
 	 * \fn RakNet::BitStream* getBitStream()

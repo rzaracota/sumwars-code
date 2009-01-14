@@ -80,6 +80,7 @@ bool Creature::init()
 	m_next_command.m_type = Action::NOACTION;
 
 	m_trade_id=0;
+	m_speak_id =0;
 
 	// Bewegung auf 0 setzen
 	m_speed = Vector(0,0);
@@ -608,7 +609,9 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 	// Ausname: Rundumschlag
 	if (Action::getActionInfo(m_action.m_type)->m_distance == Action::MELEE)
 	{
-		if (cgoal && m_action.m_type!=Action::AROUND_BLOW &&  m_action.m_type!=Action::WHIRL_BLOW)
+		if (cgoal && m_action.m_type!=Action::AROUND_BLOW 
+				  &&  m_action.m_type!=Action::WHIRL_BLOW
+				  && m_action.m_type!=Action::SPEAK)
 		{
 			cgoal->takeDamage(&m_damage);
 		}
@@ -666,6 +669,10 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 		// Behandlung der Wirkung der Aktion nach Aktionstyp
 	switch(m_action.m_type)
 	{
+		case Action::SPEAK:
+			speakText("Hi",1000);
+			break;
+		
 		case Action::USE:
 			if (cgoal)
 				goalobj->reactOnUse(getId());
@@ -673,6 +680,8 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 
 		// Kriegerfaehigkeiten
 		case Action::HAMMER_BASH:
+			speakText("Ugh!",1000);
+			
 			// alle Lebewesen im Umkreis von 1.5 um den Zielpunkt auswaehlen
 			m_damage.m_multiplier[Damage::PHYSICAL]=1;
 			s.m_center = goal;
@@ -754,6 +763,10 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 			break;
 
 		case Action::FURY:
+			speakText("Jetzt",500);
+			speakText("gibts",500);
+			speakText("Haue",500);
+			
 			// Modifikationen:
 			// doppelte Staerke, -25% Ruestung, Berserker, erhoehte Angriffsgeschwindigkeit fuer 80 sec
 			cbam.m_time = 40000;
@@ -1621,6 +1634,40 @@ void Creature::insertScriptCommand(Command &cmd, float time)
 	DEBUG5("insert script command %i",cmd.m_type);
 }
 
+void Creature::speakText(std::string text, float time, int speak_to)
+{
+	m_speak_id = speak_to;
+	CreatureSpeakText txt;
+	txt.m_text = text;
+	txt.m_time = time;
+		
+	m_speak_text.push_back(txt);
+}
+
+
+void Creature::speakTopic(std::string topic, int speak_to)
+{
+	m_speak_id = speak_to;
+	
+	std::map< std::string, Event* >::iterator it;
+	it = m_speak_events.find(topic);
+	
+	if (it != m_speak_events.end())
+	{
+		EventSystem::executeEvent(it->second);
+	}
+}
+
+std::list < std::pair<std::string, std::string> >& Creature::getSpeakAnswers()
+{
+	if (m_speak_text.empty())
+	{
+		ERRORMSG("keine antworten verfuegbar!")
+	}
+	
+	return m_speak_text.front().m_answers;
+}
+
 void Creature::updateCommand()
 {
 	// Wenn aktuelles Kommando keine Aktion vorschreibt
@@ -2220,6 +2267,28 @@ bool Creature::update (float time)
 	DEBUG5("Update des Creatureobjekts [%i] wird gestartet", getId());
 	// interne Variable um Fehler zu speichern
 	bool result=true;
+
+	
+	// Timer fuer Sprache anpassen
+	float stime = time;
+	while (!m_speak_text.empty() && stime > 0)
+	{
+		// Sprechblasen mit Antworten bleiben immer bestehen
+		if (!m_speak_text.front().m_answers.empty())
+			break;
+		
+		if (m_speak_text.front().m_time > stime)
+		{
+			m_speak_text.front().m_time -= stime;
+			stime =0;
+		}
+		else
+		{
+			stime -= m_speak_text.front().m_time;
+			m_speak_text.pop_front();
+		}
+	}
+	
 
 
 	// Timer herunterzaehlen lassen
@@ -3375,8 +3444,10 @@ void Creature::takeDamage(Damage* d)
 	{
 		// Verursacher ist nicht feindlich, kein Schaden
 		DEBUG("not hostile, no dmg");
+		DEBUG("fractions %i %i",d->m_attacker_fraction, this->getFraction());
 		return;
 	}
+	
 
 	// Testen ob man selbst der Verursacher ist
 	// (man kann sich selbst generell nicht schaden)

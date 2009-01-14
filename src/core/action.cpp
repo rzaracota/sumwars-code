@@ -84,6 +84,22 @@ void Action::init()
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_description = "descr_take_item";
 	a->m_enum_name = "take_item";
+	
+	a = &(Action::m_base_info[Action::SPEAK]);
+	a->m_timer_nr=0;
+	a->m_standard_time=1;
+	a->m_timer=0;
+	a->m_base_action = Action::NOACTION;
+	a->m_critical_perc=0.7;
+	a->m_distance = MELEE;
+	a->m_flags =0;
+	a->m_name = "Sprechen";
+	a->m_req_level = 0;
+	a->m_req_ability[0] = Action::NOACTION;
+	a->m_req_ability[1] = Action::NOACTION;
+	a->m_req_ability[2] = Action::NOACTION;
+	a->m_description = "descr_speak";
+	a->m_enum_name = "speak";
 
 	a = &(Action::m_base_info[Action::ATTACK]);
 	a->m_timer_nr=0;
