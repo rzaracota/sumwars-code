@@ -1093,7 +1093,7 @@ void MainWindow::updateItemInfo()
 			app = 1;
 			
 			
-			std::list < std::pair<float,float> >::iterator it, optit;
+			std::list < std::pair<float,float> >::iterator jt, optjt;
 			
 			
 			// schleife ueber die Zeilen
@@ -1123,14 +1123,14 @@ void MainWindow::updateItemInfo()
 				
 				// iterieren ueber die Liste der Gegenstaende, die bisher in der Zeile liegen
 				// (genauer: die Luecken zwischen den Labels)
-				for (it = itempos[row].begin(); it != itempos[row].end(); it++)
+				for (jt = itempos[row].begin(); jt != itempos[row].end(); jt++)
 				{
-					rbound = it->first;
+					rbound = jt->first;
 					
 					// Test ob das Label in die Luecke passt
 					if (rbound -lbound < len)
 					{
-						lbound = it->second;
+						lbound = jt->second;
 						continue;
 					}
 					
@@ -1152,11 +1152,11 @@ void MainWindow::updateItemInfo()
 						optdist = dist;
 						optcol = col;
 						optrow = row;
-						optit = it;
+						optjt = jt;
 						app = 0;
 					}
 					
-					lbound = it->second;
+					lbound = jt->second;
 				}
 				
 				// Option, das Label hinter dem letzten bestehenden Label einzufuegen
@@ -1202,8 +1202,8 @@ void MainWindow::updateItemInfo()
 			}
 			else
 			{
-				DEBUG5("insert before %f %f",optit->first, optit->second);
-				itempos[optrow].insert(optit,std::make_pair(optcol,optcol+len));
+				DEBUG5("insert before %f %f",optjt->first, optjt->second);
+				itempos[optrow].insert(optjt,std::make_pair(optcol,optcol+len));
 			}
 			
 			/*

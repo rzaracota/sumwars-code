@@ -1435,7 +1435,7 @@ void Player::performActionCritPart(Vector goal, WorldObject* goalobj)
 {
 	if (getAction()->m_type == Action::TAKE_ITEM)
 	{
-		DEBUG("take item");
+		DEBUG5("take item");
 		// Item suchen
 		Item* itm = getRegion()->getItem(getCommand()->m_goal_object_id);
 
