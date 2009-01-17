@@ -593,10 +593,16 @@ void Scene::updateObject(WorldObject* obj)
 		cr = static_cast<Creature*>(obj);
 		Action::ActionType act = cr->getAction()->m_type;
 		Action::ActionInfo* aci = Action::getActionInfo(act);
+		float perc = cr->getAction()->m_elapsed_time / cr->getAction()->m_time  ;
 		
+		if (cr->getState() == WorldObject::STATE_DEAD)
+		{
+			act = Action::DIE;
+			perc = 1.0;
+		}
 		// Name der Animation ermitteln
 		
-		// Wenn in der Datenbank ein Satz Animationen fuer die Aktion enthalten diesen diesen verwenden
+		// Wenn in der Datenbank ein Satz Animationen fuer die Aktion enthalten diesen verwenden
 		// (sonst den Standardsatz
 		std::vector<std::string>* animations = &(aci->m_animation[cr->getActionEquip()]);
 		if (m_object_animations.count(cr->getTypeInfo()->m_subtype) != 0)
@@ -645,7 +651,7 @@ void Scene::updateObject(WorldObject* obj)
 						anim->setEnabled(true);
 
 						// prozentsatz zu dem die Animation fortgeschritten ist
-						float perc = cr->getAction()->m_elapsed_time / cr->getAction()->m_time  ;
+						
 						DEBUG5("setting animation %s to %f",anim_name.c_str(),perc);
 						anim->setTimePosition(perc);
 					}

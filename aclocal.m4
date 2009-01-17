@@ -185,22 +185,22 @@ ifelse([$1], CC,   [depcc="$CC"   am_compiler_list=],
 AC_CACHE_CHECK([dependency style of $depcc],
                [am_cv_$1_dependencies_compiler_type],
 [if test -z "$AMDEP_TRUE" && test -f "$am_depcomp"; then
-  # We make a subdir and do the tests there.  Otherwise we can end up
-  # making bogus files that we don't know about and never remove.  For
-  # instance it was reported that on HP-UX the gcc test will end up
-  # making a dummy file named `D' -- because `-MD' means `put the output
-  # in D'.
+# We make a subdir and do the tests there.  Otherwise we can end up
+# making bogus files that we don't know about and never remove.  For
+# instance it was reported that on HP-UX the gcc test will end up
+# making a dummy file named `D' -- because `-MD' means `put the output
+# in D'.
   mkdir conftest.dir
-  # Copy depcomp to subdir because otherwise we won't find it if we're
-  # using a relative directory.
+# Copy depcomp to subdir because otherwise we won't find it if we're
+# using a relative directory.
   cp "$am_depcomp" conftest.dir
   cd conftest.dir
-  # We will build objects and dependencies in a subdirectory because
-  # it helps to detect inapplicable dependency modes.  For instance
-  # both Tru64's cc and ICC support -MD to output dependencies as a
-  # side effect of compilation, but ICC will put the dependencies in
-  # the current directory while Tru64 will put them in the object
-  # directory.
+# We will build objects and dependencies in a subdirectory because
+# it helps to detect inapplicable dependency modes.  For instance
+# both Tru64's cc and ICC support -MD to output dependencies as a
+# side effect of compilation, but ICC will put the dependencies in
+# the current directory while Tru64 will put them in the object
+# directory.
   mkdir sub
 
   am_cv_$1_dependencies_compiler_type=none
@@ -208,26 +208,26 @@ AC_CACHE_CHECK([dependency style of $depcc],
      am_compiler_list=`sed -n ['s/^#*\([a-zA-Z0-9]*\))$/\1/p'] < ./depcomp`
   fi
   for depmode in $am_compiler_list; do
-    # Setup a source with many dependencies, because some compilers
-    # like to wrap large dependency lists on column 80 (with \), and
-    # we should not choose a depcomp mode which is confused by this.
-    #
-    # We need to recreate these files for each test, as the compiler may
-    # overwrite some of them when testing with obscure command lines.
-    # This happens at least with the AIX C compiler.
-    : > sub/conftest.c
+# Setup a source with many dependencies, because some compilers
+# like to wrap large dependency lists on column 80 (with \), and
+# we should not choose a depcomp mode which is confused by this.
+#
+# We need to recreate these files for each test, as the compiler may
+# overwrite some of them when testing with obscure command lines.
+# This happens at least with the AIX C compiler.
+	: > sub/conftest.c
     for i in 1 2 3 4 5 6; do
       echo '#include "conftst'$i'.h"' >> sub/conftest.c
-      # Using `: > sub/conftst$i.h' creates only sub/conftst1.h with
-      # Solaris 8's {/usr,}/bin/sh.
+# Using `: > sub/conftst$i.h' creates only sub/conftst1.h with
+# Solaris 8's {/usr,}/bin/sh.
       touch sub/conftst$i.h
     done
     echo "${am__include} ${am__quote}sub/conftest.Po${am__quote}" > confmf
 
     case $depmode in
     nosideeffect)
-      # after this tag, mechanisms are not by side-effect, so they'll
-      # only be used when explicitly requested
+# after this tag, mechanisms are not by side-effect, so they'll
+# only be used when explicitly requested
       if test "x$enable_dependency_tracking" = xyes; then
 	continue
       else
@@ -236,9 +236,9 @@ AC_CACHE_CHECK([dependency style of $depcc],
       ;;
     none) break ;;
     esac
-    # We check with `-c' and `-o' for the sake of the "dashmstdout"
-    # mode.  It turns out that the SunPro C++ compiler does not properly
-    # handle `-M -o', and we need to detect this.
+# We check with `-c' and `-o' for the sake of the "dashmstdout"
+# mode.  It turns out that the SunPro C++ compiler does not properly
+# handle `-M -o', and we need to detect this.
     if depmode=$depmode \
        source=sub/conftest.c object=sub/conftest.${OBJEXT-o} \
        depfile=sub/conftest.Po tmpdepfile=sub/conftest.TPo \
@@ -248,13 +248,13 @@ AC_CACHE_CHECK([dependency style of $depcc],
        grep sub/conftst6.h sub/conftest.Po > /dev/null 2>&1 &&
        grep sub/conftest.${OBJEXT-o} sub/conftest.Po > /dev/null 2>&1 &&
        ${MAKE-make} -s -f confmf > /dev/null 2>&1; then
-      # icc doesn't choke on unknown options, it will just issue warnings
-      # or remarks (even with -Werror).  So we grep stderr for any message
-      # that says an option was ignored or not supported.
-      # When given -MP, icc 7.0 and 7.1 complain thusly:
-      #   icc: Command line warning: ignoring option '-M'; no argument required
-      # The diagnosis changed in icc 8.0:
-      #   icc: Command line remark: option '-MP' not supported
+# icc doesn't choke on unknown options, it will just issue warnings
+# or remarks (even with -Werror).  So we grep stderr for any message
+# that says an option was ignored or not supported.
+# When given -MP, icc 7.0 and 7.1 complain thusly:
+#   icc: Command line warning: ignoring option '-M'; no argument required
+# The diagnosis changed in icc 8.0:
+#   icc: Command line remark: option '-MP' not supported
       if (grep 'ignoring option' conftest.err ||
           grep 'not supported' conftest.err) >/dev/null 2>&1; then :; else
         am_cv_$1_dependencies_compiler_type=$depmode
@@ -316,41 +316,41 @@ _AM_SUBST_NOTMAKE([AMDEPBACKSLASH])dnl
 # ------------------------------
 AC_DEFUN([_AM_OUTPUT_DEPENDENCY_COMMANDS],
 [for mf in $CONFIG_FILES; do
-  # Strip MF so we end up with the name of the file.
+# Strip MF so we end up with the name of the file.
   mf=`echo "$mf" | sed -e 's/:.*$//'`
-  # Check whether this is an Automake generated Makefile or not.
-  # We used to match only the files named `Makefile.in', but
-  # some people rename them; so instead we look at the file content.
-  # Grep'ing the first line is not enough: some people post-process
-  # each Makefile.in and add a new line on top of each file to say so.
-  # Grep'ing the whole file is not good either: AIX grep has a line
-  # limit of 2048, but all sed's we know have understand at least 4000.
+# Check whether this is an Automake generated Makefile or not.
+# We used to match only the files named `Makefile.in', but
+# some people rename them; so instead we look at the file content.
+# Grep'ing the first line is not enough: some people post-process
+# each Makefile.in and add a new line on top of each file to say so.
+# Grep'ing the whole file is not good either: AIX grep has a line
+# limit of 2048, but all sed's we know have understand at least 4000.
   if sed -n 's,^#.*generated by automake.*,X,p' "$mf" | grep X >/dev/null 2>&1; then
     dirpart=`AS_DIRNAME("$mf")`
   else
     continue
   fi
-  # Extract the definition of DEPDIR, am__include, and am__quote
-  # from the Makefile without running `make'.
+# Extract the definition of DEPDIR, am__include, and am__quote
+# from the Makefile without running `make'.
   DEPDIR=`sed -n 's/^DEPDIR = //p' < "$mf"`
   test -z "$DEPDIR" && continue
   am__include=`sed -n 's/^am__include = //p' < "$mf"`
   test -z "am__include" && continue
   am__quote=`sed -n 's/^am__quote = //p' < "$mf"`
-  # When using ansi2knr, U may be empty or an underscore; expand it
+# When using ansi2knr, U may be empty or an underscore; expand it
   U=`sed -n 's/^U = //p' < "$mf"`
-  # Find all dependency output files, they are included files with
-  # $(DEPDIR) in their names.  We invoke sed twice because it is the
-  # simplest approach to changing $(DEPDIR) to its actual value in the
-  # expansion.
+# Find all dependency output files, they are included files with
+# $(DEPDIR) in their names.  We invoke sed twice because it is the
+# simplest approach to changing $(DEPDIR) to its actual value in the
+# expansion.
   for file in `sed -n "
     s/^$am__include $am__quote\(.*(DEPDIR).*\)$am__quote"'$/\1/p' <"$mf" | \
        sed -e 's/\$(DEPDIR)/'"$DEPDIR"'/g' -e 's/\$U/'"$U"'/g'`; do
-    # Make sure the directory exists.
+# Make sure the directory exists.
     test -f "$dirpart/$file" && continue
     fdir=`AS_DIRNAME(["$file"])`
     AS_MKDIR_P([$dirpart/$fdir])
-    # echo "creating $dirpart/$file"
+# echo "creating $dirpart/$file"
     echo '# dummy' > "$dirpart/$file"
   done
 done
@@ -403,10 +403,10 @@ m4_pattern_allow([^AM_[A-Z]+FLAGS$])dnl
 AC_REQUIRE([AM_SET_CURRENT_AUTOMAKE_VERSION])dnl
 AC_REQUIRE([AC_PROG_INSTALL])dnl
 if test "`cd $srcdir && pwd`" != "`pwd`"; then
-  # Use -I$(srcdir) only when $(srcdir) != ., so that make's output
-  # is not polluted with repeated "-I."
+# Use -I$(srcdir) only when $(srcdir) != ., so that make's output
+# is not polluted with repeated "-I."
   AC_SUBST([am__isrc], [' -I$(srcdir)'])_AM_SUBST_NOTMAKE([am__isrc])dnl
-  # test to see if srcdir already configured
+# test to see if srcdir already configured
   if test -f $srcdir/config.status; then
     AC_MSG_ERROR([source directory already configured; run "make distclean" there first])
   fi
@@ -704,17 +704,17 @@ echo timestamp > conftest.file
 if (
    set X `ls -Lt $srcdir/configure conftest.file 2> /dev/null`
    if test "$[*]" = "X"; then
-      # -L didn't work.
+# -L didn't work.
       set X `ls -t $srcdir/configure conftest.file`
    fi
    rm -f conftest.file
    if test "$[*]" != "X $srcdir/configure conftest.file" \
       && test "$[*]" != "X conftest.file $srcdir/configure"; then
 
-      # If neither matched, then we have a broken ls.  This can happen
-      # if, for instance, CONFIG_SHELL is bash and it inherits a
-      # broken ls alias from the environment.  This has actually
-      # happened.  Such a system could not be considered "sane".
+# If neither matched, then we have a broken ls.  This can happen
+# if, for instance, CONFIG_SHELL is bash and it inherits a
+# broken ls alias from the environment.  This has actually
+# happened.  Such a system could not be considered "sane".
       AC_MSG_ERROR([ls -t appears to fail.  Make sure there is not a broken
 alias in your environment])
    fi
@@ -722,8 +722,8 @@ alias in your environment])
    test "$[2]" = conftest.file
    )
 then
-   # Ok.
-   :
+# Ok.
+	:
 else
    AC_MSG_ERROR([newly created file is older than distributed files!
 Check your system clock])
@@ -819,8 +819,8 @@ do
     am__untar="$_am_tar -xf -"
     ;;
   plaintar)
-    # Must skip GNU tar: if it does not support --format= it doesn't create
-    # ustar tarball either.
+# Must skip GNU tar: if it does not support --format= it doesn't create
+# ustar tarball either.
     (tar --version) >/dev/null 2>&1 && continue
     am__tar='tar chf - "$$tardir"'
     am__tar_='tar chf - "$tardir"'
@@ -843,11 +843,11 @@ do
     ;;
   esac
 
-  # If the value was cached, stop now.  We just wanted to have am__tar
-  # and am__untar set.
+# If the value was cached, stop now.  We just wanted to have am__tar
+# and am__untar set.
   test -n "${am_cv_prog_tar_$1}" && break
 
-  # tar/untar a dummy directory, and stop if the command works
+# tar/untar a dummy directory, and stop if the command works
   rm -rf conftest.dir
   mkdir conftest.dir
   echo GrepMe > conftest.dir/file
