@@ -234,8 +234,9 @@ class MainWindow :
 	 * \brief Berechnet die Ingameposition zu gegebenen Koordinaten auf dem Bildschirm
 	 * \param screenx x-Position auf dem Bildschirm 
 	 * \param screeny y-Position auf dem Bildschirm
+	 * \param relative wenn true, werden die Koordinaten als relative Koordinaten interpretiert (Bereich 0-1)
 	 */
-	Vector getIngamePos(float screenx, float screeny);
+	Vector getIngamePos(float screenx, float screeny, bool relative = false);
 
 	private:
 

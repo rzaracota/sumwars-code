@@ -1042,11 +1042,67 @@ void MainWindow::updateItemInfo()
 		std::string name;
 		std::pair<float,float> rpos;
 		
-		float height = 0.03;
+		float height = 0.030;
 		int num = (int) (0.9/height);
 		// fuer jede 0.025 hohe Spalte ein Element des Vektors
 		// fuer jede Spalte eine Liste von Wertepaaren: Anfang, Ende
 		std::vector< std::list < std::pair<float,float> > > itempos(num);
+		
+		// Lokales Koordinatensystem fuer die Items herstellen
+		Vector pu,pl,pll,pmr,pml,ox,oy;
+		pu = getIngamePos(0.5,0.1,true);
+		pl = getIngamePos(0.5,0.9,true);
+		pll = getIngamePos(0,0.9,true);
+		pmr = getIngamePos(1.0,0.5,true);
+		pml = getIngamePos(0,0.5,true);
+		
+		oy = pu - pl;
+		ox = pmr - pml;
+		
+		Vector po = pll - pml;
+		po.projectOn(ox);
+		po = pll - po;
+		
+		static Vector oldoy = Vector(0,-1);
+		
+		if (fabs(oldoy.angle(oy)) < 0.01 && fabs(oy.getLength() - oldoy.getLength())<0.01 )
+		{
+			oy = oldoy;
+		}
+		else
+		{
+			oldoy = oy;
+		}
+		DEBUG5("oy %f %f",oy.m_x, oy.m_y);
+		
+		// Skalierung der Achsen
+		float oxl = ox.getLength();
+		float oyl = oy.getLength();
+		
+		float xscal = oxl;
+		float yscal = oyl*height/0.9;
+		
+		ox.normalize();
+		oy.normalize();
+
+		DEBUG5("scal %f %f",xscal,yscal);
+		
+		// Ursprung des neuen Koordinatensystems
+		Vector ypart = po;
+		float ylen = ypart*oy;
+		ypart.projectOn(oy);
+		Vector xpart = po - ypart;
+		
+		DEBUG5("xpart %f %f",xpart.m_x, xpart.m_y);
+		DEBUG5("ypart %f %f",ypart.m_x, ypart.m_y);
+		float yoffs = ylen/yscal - roundf(ylen/yscal);
+		
+		
+		Vector o = xpart + oy*(yscal*( roundf(ylen/yscal)));
+		
+		DEBUG5("pll %f %f %f",pll.m_x, pll.m_y,ylen);
+		DEBUG5("o %f %f ", o.m_x, o.m_y);
+		
 		
 		DEBUG5("\nitems\n");
 		
@@ -1058,6 +1114,8 @@ void MainWindow::updateItemInfo()
 		// Begrenzung fuer den Schriftzug
 		float lbound=0,rbound =1;
 		int app;
+		
+		Vector tpos,pos;
 		for (it = itms->begin();it != itms->end();++it)
 		{
 			
@@ -1070,8 +1128,21 @@ void MainWindow::updateItemInfo()
 			name = di->m_item->getName();
 			DEBUG5(" ");
 			DEBUG5(" %s %i",name.c_str(), di->getId());
+			
+			tpos = Vector(di->m_x/2.0,di->m_y/2.0);
+			tpos -= o;
+			
+			pos.m_x = tpos*ox;
+ 			pos.m_y = tpos*oy;
+			
+			DEBUG5("tpos %f %f  %f",(tpos+o).m_x, (tpos+o).m_y,yscal);
+			DEBUG5("test %f %f %f   oy %f %f",o*oy/yscal, (tpos+o)*oy/yscal, pos.m_y/yscal,oy.m_x, oy.m_y);
+			
 			// Position auf dem Bildschirm ermitteln
-			rpos = m_scene->getProjection(Vector(di->m_x/2.0,di->m_y/2.0));
+			DEBUG5("pos %f %f  -- %f",pos.m_x, pos.m_y,pos.m_y/yscal);
+			rpos.first = pos.m_x / oxl;
+			rpos.second = 0.9-pos.m_y / oyl*0.9;
+			DEBUG5("rpos %f %f  - %f",rpos.first, rpos.second, rpos.second/height);
 			
 			// nur Items die wirklich sichtbar sind behandeln
 			if (rpos.first<0 || rpos.first>1 || rpos.second<0 || rpos.second>0.9)
@@ -1084,7 +1155,7 @@ void MainWindow::updateItemInfo()
 			optdist = 1000000;
 			
 			// beste gefundene Platzierung
-			optrow= (int) (rpos.second/height+0.5);
+			optrow= (int) (rpos.second/height);
 			optcol= rpos.first;
 			DEBUG5("optpos %i %f",optrow,optcol);
 			
@@ -1147,13 +1218,15 @@ void MainWindow::updateItemInfo()
 						col = rpos.first;
 					
 					dist = (rpos.first-col)*(rpos.first-col) + (centerrow-row)*(centerrow-row)*height*height;
-					if (dist < optdist)
+					if (dist+0.0001 < optdist)
 					{
 						optdist = dist;
 						optcol = col;
 						optrow = row;
 						optjt = jt;
 						app = 0;
+						
+						DEBUG5("optdist %f optrow %i pos %i %f  app %i",optdist, optrow, row, col,app);
 					}
 					
 					lbound = jt->second;
@@ -1172,12 +1245,14 @@ void MainWindow::updateItemInfo()
 					
 					dist = (rpos.first-col)*(rpos.first-col) + (centerrow-row)*(centerrow-row)*height*height;
 					
-					if (dist < optdist)
+					if (dist+0.0001 < optdist)
 					{
 						app = 1;
 						optdist = dist;
 						optcol = col;
 						optrow = row;
+						
+						DEBUG5("optdist %f optrow %i pos %i %f  app %i",optdist, optrow, row, col,app);
 					}
 					
 				}
@@ -1191,11 +1266,13 @@ void MainWindow::updateItemInfo()
 			
 			DEBUG5("center %i rpos %f  %f",centerrow,rpos.second, rpos.second-centerrow*height);
 			
-			rpos.first=optcol;
-			rpos.second=optrow*height + (rpos.second-centerrow*height);
+			rpos.first=optcol-len/2;
+			rpos.second=(optrow + yoffs) *height;
+			
+			
 			
 			DEBUG5("optdist %f optrow %i pos %f %f  app %i",optdist, optrow, rpos.second, rpos.first,app);
-				
+			
 			if (app == 1)
 			{
 				itempos[optrow].push_back(std::make_pair(optcol,optcol+len));
@@ -1206,12 +1283,8 @@ void MainWindow::updateItemInfo()
 				itempos[optrow].insert(optjt,std::make_pair(optcol,optcol+len));
 			}
 			
-			/*
-			for (it = itempos[optrow].begin(); it != itempos[optrow].end(); it++)
-			{
-				DEBUG("%f - %f ",it->first,it->second);
-			}
-			*/
+			if (rpos.first<0 || rpos.first+len>1 || rpos.second<0 || rpos.second+height>0.9)
+				continue;
 			
 			stream.str("");
 			stream << "ItemLabel";
@@ -1247,7 +1320,7 @@ void MainWindow::updateItemInfo()
 			label->setID(it->first);
 			
 			
-			label->setPosition(CEGUI::UVector2(CEGUI::UDim(std::max(0.0f,rpos.first-len/2),0), CEGUI::UDim(std::max(0.0f,rpos.second-0.02f),0)));
+			label->setPosition(CEGUI::UVector2(CEGUI::UDim(std::max(0.0f,rpos.first),0), CEGUI::UDim(std::max(0.0f,rpos.second),0)));
 			nr++;
 
 		}
@@ -1466,12 +1539,21 @@ void MainWindow::updatePartyInfo()
 	}
 }
 
-Vector MainWindow::getIngamePos(float screenx, float screeny)
+Vector MainWindow::getIngamePos(float screenx, float screeny, bool relative)
 {
 	// Position des Mausklicks relativ zum Viewport
 	Ogre::Viewport* viewport = m_scene->getViewport();
-	float relx = screenx*1.0/(viewport->getActualWidth());
-	float rely = screeny*1.0/(viewport->getActualHeight());
+	float relx,rely;
+	if (relative)
+	{
+		relx = screenx;
+		rely = screeny;
+	}
+	else
+	{
+		relx = screenx*1.0/(viewport->getActualWidth());
+		rely = screeny*1.0/(viewport->getActualHeight());
+	}
 	DEBUG5("relative Koordinaten %f %f",relx,rely);
 
 	// Strahl von der Kamera durch den angeklickten Punkt

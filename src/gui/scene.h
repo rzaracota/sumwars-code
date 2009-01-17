@@ -147,8 +147,10 @@ class Scene
 	/**
 	 * \fn std::pair<float,float> getProjection(Vector pos)
 	 * \brief Gibt aus, an welcher Stelle ein Punkt in Spielkoordinaten auf dem Bildschirm erscheint
+	 * \param pos Ort in Spielkoordinaten
 	 */
 	std::pair<float,float> getProjection(Vector pos);
+	
 
 	private:
 
