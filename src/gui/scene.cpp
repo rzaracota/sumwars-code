@@ -598,7 +598,7 @@ void Scene::updateObject(WorldObject* obj)
 		if (cr->getState() == WorldObject::STATE_DEAD)
 		{
 			act = Action::DIE;
-			perc = 1.0;
+			perc = 0.99;
 		}
 		// Name der Animation ermitteln
 		
@@ -653,7 +653,7 @@ void Scene::updateObject(WorldObject* obj)
 						// prozentsatz zu dem die Animation fortgeschritten ist
 						
 						DEBUG5("setting animation %s to %f",anim_name.c_str(),perc);
-						anim->setTimePosition(perc);
+						anim->setTimePosition(perc*anim->getLength());
 					}
 				}
 				catch (Ogre::Exception e)
