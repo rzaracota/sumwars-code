@@ -79,6 +79,34 @@
 			<SpawnGroup group_name="goblins_dogs" number="10" />
 		</SpawnGroups>
 		
+		<Event trigger ="create_region" once = "true">
+			<Effect>
+				lich = createObject("lich", "ort1:center");
+			</Effect>
+		</Event>
+		
+		<Event trigger ="create_region" once = "true">
+			<Effect>
+				lich = createObject("lich", "ort2:center");
+			</Effect>
+		</Event>
+		
+		<Event trigger ="create_region" once = "true">
+			<Effect>
+				lich = createObject("lich", "ort3:center");
+			</Effect>
+		</Event>
+		
+		<Event trigger ="player_moved" once = "true">
+			<Condition>
+				return (unitIsInArea(trigger.player,"LichArea"))
+			</Condition>
+			<Effect>
+				deleteObject(tree);
+				lich = createObject("lich", "LichLocation");
+			</Effect>
+		</Event>
+		
 	</Region>
 </World>
 

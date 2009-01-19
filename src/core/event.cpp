@@ -60,7 +60,7 @@ Event::~Event()
 
 }
 
-void Event::setEffect(char * effect)
+void Event::setEffect(const char * effect)
 {
 	if (m_effect != LUA_NOREF)
 	{
@@ -78,7 +78,7 @@ void Event::setEffect(char * effect)
 	}
 }
 
-void Event::setCondition(char * cond)
+void Event::setCondition(const char * cond)
 {
 	if (m_condition != LUA_NOREF)
 	{

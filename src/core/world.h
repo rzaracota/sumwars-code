@@ -44,6 +44,7 @@
 #include "itemfactory.h"
 #include "objectfactory.h"
 #include "netevent.h"
+#include "worldloader.h"
 #include "templateloader.h"
 
 /**

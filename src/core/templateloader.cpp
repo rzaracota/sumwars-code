@@ -12,7 +12,7 @@
 #include <iostream>
 
 //######################  RegionData (world.xml)  ##############################
-
+#ifdef abc
 //int ObjectLoader::generateFixedObjectData(TiXmlElement* pElement, string element, std::list<FixedObjectData*>* object_list, std::list<string>* subtype_list)
 int TemplateLoader::generateRegionData(TiXmlElement* pElement, std::string element, std::list<RegionData*> &region_list)
 {
@@ -421,7 +421,7 @@ bool TemplateLoader::loadRegionData(const char* pFilename, std::list<RegionData*
 		return false;
 	}
 }
-
+#endif
 
 //#####################  ObjectTemplate (obj_templates)  #######################
 

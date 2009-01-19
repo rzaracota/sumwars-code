@@ -122,11 +122,11 @@ class Event
 		~Event();
 		
 		/**
-		 * \fn void setCondition(char * cond)
+		 * \fn void setCondition(const char * cond)
 		 * \brief Setzt die Bedingung fuer die Ausfuehrung des Events
 		 * \param cond Bedingung als Folge von Lua Anweisungen
 		 */
-		void setCondition(char * cond);
+		void setCondition(const char * cond);
 	
 		/**
 		 * \fn bool checkCondition();
@@ -135,11 +135,11 @@ class Event
 		bool checkCondition();
 		
 		/**
-		 * \fn void setEffect(char * effect)
+		 * \fn void setEffect(const char * effect)
 		 * \brief Setzt die Wirkung des Events
 		 * \param effect Wirkung als Folge von Lua Anweisungen
 		 */
-		void setEffect(char * effect);
+		void setEffect(const char * effect);
 		
 		/**
 		 * \fn void doEffect();

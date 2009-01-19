@@ -216,52 +216,11 @@ bool World::init()
 	*/
 
 
-	// Wird schon aus XML geladen
-/*	rdata = new RegionData;
-
-	rdata->m_dimx = 32;
-	rdata->m_dimy = 32;
-	rdata->m_complexity = 0.4;
-	rdata->m_granularity = 8;
-	rdata->m_area_percent = 0.35;
-	rdata->m_id = 1;
-	rdata->m_name = "region1";
-
-	rdata->addEnvironment(0.2,"meadow");
-	rdata->addEnvironment(1.0,"hills");
-
-	rdata->m_exit_directions[NORTH] = true;
-	rdata->m_exit_directions[SOUTH] = false;
-	rdata->m_exit_directions[WEST] = false;
-	rdata->m_exit_directions[EAST] = false;
-
-	rdata->addObjectGroupTemplate("trees3",4,2,1.0);
-	rdata->addObjectGroupTemplate("trees2",2,5,0.7);
-	rdata->addObjectGroupTemplate("trees1",1,50,0.5);
-
-	rdata->addNamedObjectGroupTemplate("test2","ort1",4);
-	rdata->addNamedObjectGroupTemplate("test1","ort2",3);
-	rdata->addNamedObjectGroupTemplate("test1","ort3",2);
-
-	rdata->addSpawnGroup("lich_goblins",1);
-	rdata->addSpawnGroup("goblins",10);
-	rdata->addSpawnGroup("goblins_dogs",10);
-
-	exit.m_shape.m_type = Shape::RECT;
-	exit.m_shape.m_extent = Vector(4,4);
-	exit.m_exit_name = "exit_north";
-	exit.m_destination_region = "region0";
-	exit.m_destination_location = "entry_south";
-
-	rdata->addExit(exit);
-
-	registerRegionData(rdata,1);*/
-
-
-	// Templates aus XML Laden
-	TemplateLoader templateloader;
+	
+	// Regionen aus XML Laden
+	WorldLoader worldloader;
 	std::list<RegionData*> region_list;
-	templateloader.loadRegionData("../data/world/world.xml", region_list);
+	worldloader.loadRegionData("../data/world/world.xml", region_list);
 
 	std::list<RegionData*>::iterator it;
 	for (it = region_list.begin(); it != region_list.end(); it++)

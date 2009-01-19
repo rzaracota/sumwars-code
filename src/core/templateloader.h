@@ -22,8 +22,8 @@
 	// TODO
 };*/
 // END FIXME
-
-struct TempReviveLocation
+//FIXME
+/*struct TempReviveLocation
 {
 	std::string region;
 	std::string location;
@@ -79,7 +79,7 @@ struct TempExit
 	float extent_x;
 	float extent_y;
 	float radius;
-};
+};*/
 
 struct TempShape
 {
@@ -128,7 +128,7 @@ class TemplateLoader
 	 * \return Liste der geladenen festen Objekte
 	 */
 	//bool loadWorldData(const char* pFilename, std::list<WorldData*>* &world_list, std::list<std::string>* &subtype_list);
-	bool loadRegionData(const char* pFilename, std::list<RegionData*> &region_list);
+	//bool loadRegionData(const char* pFilename, std::list<RegionData*> &region_list);
 
 	bool loadObjectTemplate(const char* pFilename, std::list<ObjectTemplate*> &object_template_list, std::list<std::string> &name_list);
 	
@@ -144,14 +144,14 @@ class TemplateLoader
 	 * \param element Name des Elements
 	 * \return Anzahl der Attribute des bearbeiteten Elements
 	 */
-	int generateRegionData(TiXmlElement* pElement, std::string element, std::list<RegionData*> &region_list);
+	//int generateRegionData(TiXmlElement* pElement, std::string element, std::list<RegionData*> &region_list);
 	
 	/**
 	 * \fn void searchWorldData( TiXmlNode* pParent )
 	 * \brief Durchmustert eine XML-Datei und sucht nach Elementen.
 	 * \param pParent Zeiger auf eine XML-Datei
 	 */
-	void searchRegionData(TiXmlNode* pParent, std::list<RegionData*> &region_list);
+	//void searchRegionData(TiXmlNode* pParent, std::list<RegionData*> &region_list);
 	
 	int generateObjectTemplate(TiXmlElement* pElement, std::string element, std::list<ObjectTemplate*> &object_template_list, std::list<std::string> &name_list);
 	
@@ -177,13 +177,13 @@ class TemplateLoader
 	 * \brief Liste mit Daten zu Objekten
 	 */
 	//std::list<FixedObjectData*>* m_object_list;
-	
-	TempReviveLocation m_temp_revive_location;
+	//FIXME
+	/*TempReviveLocation m_temp_revive_location;
 	TempNameObjectGroup m_temp_name_object_group;
 	TempObjectGroup m_temp_object_group;
 	TempEnvironment m_temp_environment;
 	TempSpawnGroup m_spawn_group;
-	TempExit m_temp_exit;
+	TempExit m_temp_exit;*/
 	
 	TempShape m_temp_shape;
 	TempWaypoint m_temp_waypoint;
