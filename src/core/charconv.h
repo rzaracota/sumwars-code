@@ -6,6 +6,7 @@
 #include "raknet/MessageIdentifiers.h"
 #include <algorithm>
 #include <string>
+#include <cstring>
 
 /**
  * \class CharConv
