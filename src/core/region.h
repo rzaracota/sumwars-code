@@ -9,6 +9,7 @@
 #include "netevent.h"
 #include "projectile.h"
 #include "objectfactory.h"
+#include "dialogue.h"
 
 
 
@@ -889,6 +890,21 @@ class Region
 			return m_camera;
 		}
 		
+		/**
+		 * \fn Dialogue* getDialogue(int id)
+		 * \brief Gibt zu der die ID den Dialog aus
+		 * \param id ID
+		 */
+		Dialogue* getDialogue(int id);
+		
+		/**
+		 * \fn void insertDialogue(Dialogue* dia)
+		 * \brief Fuegt einen neuen Dialog ein
+		 * \param dia Dialog
+		 */
+		void insertDialogue(Dialogue* dia);
+		
+		
 	private:
 		/**
 		* \var m_dimx
@@ -1034,6 +1050,12 @@ class Region
 		 * \brief Liste der Schadensobjekte
 		 */
 		std::map<std::string,Damage> m_damage_objects;
+		
+		/**
+		 * \var std::map<int, Dialogue*> m_dialogues
+		 * \brief Liste der Dialoge
+		 */
+		std::map<int, Dialogue*> m_dialogues;
 		
 		/**
 		 * \var RegionCamera m_camera

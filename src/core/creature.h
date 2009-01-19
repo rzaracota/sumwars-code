@@ -40,8 +40,11 @@
 #include "itemlist.h"
 #include "creaturestruct.h"
 #include "itemfactory.h"
+#include "dialogue.h"
 // debugging
 #include <iostream>
+
+
 
 /**
  * \class Creature
@@ -360,52 +363,56 @@ public:
 	 * \brief Gibt true zurueck, wenn das aktuelle Kommando per Script gesetzt wurde
 	 */
 	bool hasScriptCommand();
+
 	
 	/**
-	 * \fn void addSpeakEvent(std::string topic, Event* event)
-	 * \brief Fuegt der Kreatur ein neues Thema hinzu ueber das sie Sprechen kann. Wenn das Thema angesprochen wird, wird das zugehoerige Event ausgeloest
-	 * \param topic Thema 
-	 * \param event Event das beim Ansprechen des Thema ausgeloest wird
-	 */
-	void addSpeakEvent(std::string topic, Event* event)
-	{
-		m_speak_events.insert(std::make_pair(topic,event));
-	}
-	
-	/**
-	 * \fn void speakText(std::string, float time, int speak_to=0)
+	 * \fn void speakText(CreatureSpeakText& text)
 	 * \brief Laesst die Kreatur einen bestimmten Text sprechen
 	 * \param text Text der angezeigt wird
-	 * \param time Zeit, die der Text angezeigt wird in ms
-	 * \param speak_to ID der Kreatur an die sich der Text richtet
 	 **/
-	void speakText(std::string text, float time, int speak_to=0);
-	
-	/**
-	 * \fn void speakTopic(std::string topic, int speak_to=0)
-	 * \brief Spricht die Kreatur auf ein Thema an
-	 * \param topic Thema
-	 * \param speak_to ID der Kreatur an die sich der Text richtet
-	 */
-	void speakTopic(std::string topic, int speak_to=0);
-	
-	/**
-	 * \fn std::string getSpeakText()
-	 * \brief Gibt den aktuell gesprochenen Text aus
-	 */
-	std::string getSpeakText()
+	void speakText(CreatureSpeakText& text)
 	{
-		if (m_speak_text.empty())
-			return "";
-		
-		return m_speak_text.front().m_text;
+		m_speak_text = text;
 	}
 	
 	/**
-	 * \fn std::list < std::pair<std::string, std::string> >& getSpeakAnswers()
-	 * \brief Gibt die zum aktuellen Text moeglichen Antworten aus
+	 * \fn  CreatureSpeakText& getSpeakText()
+	 * \brief Gibt den aktuell gesprochenen Text aus
 	 */
-	std::list < std::pair<std::string, std::string> >& getSpeakAnswers();
+	CreatureSpeakText& getSpeakText()
+	{
+		return m_speak_text;
+	}
+	
+	void clearSpeakText();
+	
+	/**
+	 * \fn Dialogue* getDialogue()
+	 * \brief Gibt den aktuellen Dialog der Kreatur aus
+	 */
+	Dialogue* getDialogue()
+	{
+		return getRegion()->getDialogue(m_dialogue_id);
+	}
+	
+	/**
+	 * \fn void setDialogue(int id)
+	 * \brief Setzt den aktuellen Dialog
+	 * \param id ID des Dialogs
+	 */
+	void setDialogue(int id)
+	{
+		m_dialogue_id = id;
+	}
+	
+	/**
+	 * \fn std::string getRefName()
+	 * \brief Gibt den Referenzname aus, mit dem bei Gespraechen auf die Person verwiesen wird
+	 */
+	std::string getRefName()
+	{
+		return getName();
+	}
 	
 	
 protected:
@@ -557,16 +564,10 @@ private:
 	std::list<std::pair<Command,float> > m_script_commands;
 	
 	/**
-	 * \var std::list< CreatureSpeakText> m_speak_text
+	 * \var CreatureSpeakText m_speak_text
 	 * \brief Folge von Texten, die die Kreature sprechen soll
 	 */
-	std::list< CreatureSpeakText> m_speak_text;
-	
-	/**
-	 * \var std::map< std::string, Event* > m_speak_events
-	 * \brief Ordnet einem Thema auf das die Kreatur angesprochen wird ein Ereignis zu
-	 */
-	std::map< std::string, Event* > m_speak_events;
+	CreatureSpeakText m_speak_text;
 	
 	/**
 	 * \var int m_speak_id
@@ -615,6 +616,12 @@ private:
 	protected:
 	
 	
+	/**
+	 * \var int m_dialogue_id
+	 * \brief ID des Dialogs, an dem sich die Kreatur beteiligt
+	 */
+	int m_dialogue_id;
+		
 	/**
 	 * \var m_timer1
 	 * \brief Gibt die Zeit in ms an, fuer welche Aktionen die Timer1 benoetigen nicht benutzt werden koennen

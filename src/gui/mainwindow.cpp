@@ -1394,7 +1394,7 @@ void MainWindow::updateSpeechBubbles()
 		if (pos.first <0 || pos.first >1 || pos.second <0 || pos.second >1)
 			continue;
 		
-		text = cr->getSpeakText();
+		text = cr->getSpeakText().m_text;
 		
 		if (text == "")
 			continue;

@@ -1276,6 +1276,22 @@ void Region::update(float time)
 		m_triggers.pop_front();
 	}
 	
+	// update der Dialoge
+	std::map<int, Dialogue*>::iterator it5;
+	for (it5 = m_dialogues.begin(); it5!= m_dialogues.end(); )
+	{
+		it5->second->update(time);
+		
+		if (it5->second->isFinished())
+		{
+			m_dialogues.erase(it5++);
+		}
+		else
+		{
+			++it5;
+		}
+	}
+	
 	m_camera.update(time);
 }
 
@@ -1876,3 +1892,21 @@ void Region::setCutsceneMode(bool mode)
 	
 	m_cutscene_mode = mode;
 }
+
+
+Dialogue* Region::getDialogue(int id)
+{
+	std::map<int, Dialogue*>::iterator it;
+	it = m_dialogues.find(id);
+	
+	if (it == m_dialogues.end())
+		return 0;
+	
+	return it->second;
+}
+
+void Region::insertDialogue(Dialogue* dia)
+{
+	m_dialogues.insert(std::make_pair(dia->getId(),dia));
+}
+

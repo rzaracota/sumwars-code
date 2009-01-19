@@ -367,4 +367,21 @@ bool CreatureDynAttr::setValue(std::string valname, int& event_mask)
 	return false;
 }
 
+void CreatureSpeakText::operator=( CreatureSpeakText& other)
+{
+	m_text = other.m_text;
+	m_time = other.m_time;
+	m_answers = other.m_answers;
+}
+
+bool CreatureSpeakText::empty()
+{
+	return (m_text == "" && m_answers.empty());
+}
+
+void CreatureSpeakText::clear()
+{
+	m_text = "";
+	m_answers.clear();
+}
 

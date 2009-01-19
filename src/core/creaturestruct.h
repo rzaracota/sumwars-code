@@ -430,6 +430,25 @@ struct CreatureSpeakText
 	 */
 	std::list < std::pair<std::string, std::string> > m_answers;
 	
+	/**
+	 * \fn void operator=( CreatureSpeakText& other)
+	 * \brief Zuweisungsoperator
+	 * \param other zugewiesene Struktur
+	 */
+	void operator=( CreatureSpeakText& other);
+	
+	/**
+	 * \fn bool empty()
+	 * \brief Gibt aus, ob Text vorhanden ist
+	 */
+	bool empty();
+	
+	/**
+	 * \fn void clear()
+	 * \brief Loescht den Text
+	 */
+	void clear();
+	
 };
 
 #endif
