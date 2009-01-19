@@ -32,6 +32,14 @@ ControlPanel::ControlPanel (Document* doc)
 	bar->setSize(CEGUI::UVector2(cegui_reldim(0.10f), cegui_reldim( 0.30f)));
 	bar->setWantsMultiClickEvents(false);
 	bar->setProgress(0.0);
+	
+	// Balken fuer Experience
+	bar = static_cast<CEGUI::ProgressBar*>(win_mgr.createWindow("TaharezLook/ProgressBar", "ExperienceProgressBar"));
+	ctrl_panel->addChildWindow(bar);
+	bar->setPosition(CEGUI::UVector2(cegui_reldim(0.01f), cegui_reldim( 0.50f)));
+	bar->setSize(CEGUI::UVector2(cegui_reldim(0.10f), cegui_reldim( 0.30f)));
+	bar->setWantsMultiClickEvents(false);
+	bar->setProgress(0.0);
 
 
 	// Button Inventar
@@ -171,6 +179,14 @@ void ControlPanel::update()
 	if (bar->getProgress() != hperc)
 	{
 		bar->setProgress(hperc);
+	}
+	
+	// Balken fuer Experience
+	bar = static_cast<CEGUI::ProgressBar*>(win_mgr.getWindow( "ExperienceProgressBar"));
+	float eperc = player->getDynAttr()->m_experience / player->getBaseAttr()->m_max_experience;
+	if (bar->getProgress() != eperc)
+	{
+		bar->setProgress(eperc);
 	}
 
 	// Image Schaden Attacke links
