@@ -295,7 +295,7 @@ void MainWindow::update()
 
 
 	// Objekte aus dem Dokument darstellen
-	if (m_document->getLocalPlayer()!=0)
+	if (m_document->getLocalPlayer()!=0 && m_document->getLocalPlayer()->getRegion()!=0)
 	{
 
 		// Szene aktualisieren
@@ -1358,9 +1358,16 @@ void MainWindow::updateSpeechBubbles()
 	// Zaehler wie viele Labels fuer Items existieren
 	static int lcount =0;
 	
+	// Zaehler, wie viele Antwortmoeglichkeiten existieren
+	static int acount =0;
+	
 	Player* player = m_document->getLocalPlayer();
 	
+	if (player ==0 || player->getRegion() ==0)
+		return;
+	
 	CEGUI::Window* label;
+	CEGUI::FrameWindow* ques;
 	
 	// Objekte im Umkreis von 20 Meter holen
 	std::list<WorldObject*> objs;
@@ -1381,6 +1388,8 @@ void MainWindow::updateSpeechBubbles()
 	
 	std::stringstream stream;
 	
+	CreatureSpeakText* question=0;
+	
 	for (it = objs.begin(); it != objs.end(); ++it)
 	{
 		// nur Kreaturen behandeln
@@ -1399,6 +1408,14 @@ void MainWindow::updateSpeechBubbles()
 		if (text == "")
 			continue;
 		
+		// Fragen werden gesondert behandelt
+		if (!cr->getSpeakText().m_answers.empty())
+		{
+			if (cr == player)
+				question = &(cr->getSpeakText());
+			continue;
+		}
+		
 		stream.str("");
 		stream << "SpeechLabel";
 		stream << nr;
@@ -1408,34 +1425,34 @@ void MainWindow::updateSpeechBubbles()
 			lcount ++;
 			label = win_mgr.createWindow("TaharezLook/StaticText", stream.str());
 			m_game_screen->addChildWindow(label);
-			label->setProperty("FrameEnabled", "True");
+			label->setProperty("FrameEnabled", "true");
 			label->setProperty("BackgroundEnabled", "false");
-			label->setSize(CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim( 0.05f)));
+			
 			label->setText("");
 			label->setAlpha(0.9);
-			//label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&MainWindow::onDropItemClicked, this));
-				
+			
 		}
 		else
 		{
 			label = win_mgr.getWindow(stream.str());
 		}
-		label->setVisible(true);
+		
 			
 			
 		if (label->getText() != text)
 		{
-	
+			float len = text.size()*0.01+0.03;
 			label->setText(text);
+			
+			label->setSize(CEGUI::UVector2(cegui_reldim(len), cegui_reldim( 0.06f)));
+			label->setPosition(CEGUI::UVector2(CEGUI::UDim(std::max(0.0f,pos.first-len/2),0), CEGUI::UDim(std::max(0.0f,pos.second-0.1f),0)));
 		}
-			
-		//label->setID(it->first);
-			
-			
-		label->setPosition(CEGUI::UVector2(CEGUI::UDim(std::max(0.0f,pos.first-0.1f),0), CEGUI::UDim(std::max(0.0f,pos.second-0.1f),0)));
+		label->setVisible(true);
+		
 		nr++;
 		
 	}
+	
 	
 	for (; nr<lcount; nr++)
 	{
@@ -1445,6 +1462,107 @@ void MainWindow::updateSpeechBubbles()
 			
 		label = win_mgr.getWindow(stream.str());
 		label->setVisible(false);
+	}
+	
+	if (question !=0)
+	{
+		if (acount ==0)
+		{
+			ques = (CEGUI::FrameWindow*) win_mgr.createWindow("TaharezLook/FrameWindow", "QuestionWindow");
+			ques->setProperty("FrameEnabled","false");
+			ques->setProperty("TitlebarEnabled","false");
+			ques->setProperty("CloseButtonEnabled","false");
+			m_game_screen->addChildWindow(ques);
+			ques->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&MainWindow::consumeEvent, this));
+			ques->setVisible(false);
+			
+			label = win_mgr.createWindow("TaharezLook/StaticText", "QuestionLabel");
+			ques->addChildWindow(label);
+			label->setProperty("FrameEnabled", "false");
+			label->setProperty("BackgroundEnabled", "false");
+
+		}
+		else
+		{
+			ques = (CEGUI::FrameWindow*)win_mgr.getWindow("QuestionWindow");
+			label = (CEGUI::Window*) win_mgr.getWindow("QuestionLabel");
+		}
+		
+		// Wenn das Frage Fenster schon sichtbar ist -> keine Aenderung
+		if (ques->isVisible())
+		{
+			return;
+		}
+		nr =0;
+		
+		float h = 0.07 + question->m_answers.size()*0.05;
+		float len =0;
+		float relh = 1/(1.5+question->m_answers.size());
+		
+		if (label->getText() != question->m_text)
+		{
+			label->setText(question->m_text);
+		}
+		
+		label->setPosition(CEGUI::UVector2(cegui_reldim(0.0f), cegui_reldim(0.1*relh)));
+		label->setSize(CEGUI::UVector2(cegui_reldim(1.0f), cegui_reldim(relh)));
+		
+		std::list < std::pair<std::string, std::string> >::iterator it;
+		for (it = question->m_answers.begin(); it != question->m_answers.end(); ++it)
+		{
+			len = std::max(len, it->first.size()*0.01f);
+			
+			stream.str("");
+			stream << "AnswerLabel";
+			stream << nr;
+			
+			if (nr >= acount)
+			{
+				acount ++;
+				label = win_mgr.createWindow("TaharezLook/StaticText", stream.str());
+				ques->addChildWindow(label);
+				label->setProperty("FrameEnabled", "false");
+				label->setProperty("BackgroundEnabled", "false");
+				label->setID(nr);
+				label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&MainWindow::onAnswerClicked, this));
+			}
+			else
+			{
+				label = win_mgr.getWindow(stream.str());
+			}
+			
+			if (label->getText() != it->first)
+			{
+				label->setText(it->first);
+			}
+			
+			label->setPosition(CEGUI::UVector2(cegui_reldim(0.0f), cegui_reldim((nr+1.4)*relh)));
+			label->setSize(CEGUI::UVector2(cegui_reldim(1.0f), cegui_reldim(relh)));
+			label->setVisible(true);
+			
+			nr++;
+		}
+		
+		ques->setPosition(CEGUI::UVector2(cegui_reldim(0.5f-len/2), cegui_reldim(0.2)));
+		ques->setSize(CEGUI::UVector2(cegui_reldim(len), cegui_reldim( h)));
+		ques->setVisible(true);
+		
+		for (; nr<acount; nr++)
+		{
+			stream.str("");
+			stream << "AnswerLabel";
+			stream << nr;
+			
+			label = win_mgr.getWindow(stream.str());
+			label->setVisible(false);
+		}
+	}
+	else if (acount !=0)
+	{
+		
+		ques = (CEGUI::FrameWindow*) win_mgr.getWindow("QuestionWindow");
+		ques->setVisible(false);
+		
 	}
 }
 
@@ -1795,6 +1913,22 @@ bool MainWindow::onDropItemClicked(const CEGUI::EventArgs& evt)
 	
 	DEBUG5("pick up item %i",id);
 	m_document->onDropItemClick(id);
+	return true;
+}
+
+
+bool MainWindow::onAnswerClicked(const CEGUI::EventArgs& evt)
+{
+	const CEGUI::MouseEventArgs& we =
+			static_cast<const CEGUI::MouseEventArgs&>(evt);
+	unsigned int id = we.window->getID();
+	
+	m_document->onAnswerClick(id);
+	return true;
+}
+
+bool MainWindow::consumeEvent(const CEGUI::EventArgs& evt)
+{
 	return true;
 }
 

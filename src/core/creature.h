@@ -370,10 +370,8 @@ public:
 	 * \brief Laesst die Kreatur einen bestimmten Text sprechen
 	 * \param text Text der angezeigt wird
 	 **/
-	void speakText(CreatureSpeakText& text)
-	{
-		m_speak_text = text;
-	}
+	void speakText(CreatureSpeakText& text);
+	
 	
 	/**
 	 * \fn  CreatureSpeakText& getSpeakText()

@@ -592,6 +592,18 @@ void Document::onDropItemClick(int id)
 	sendCommand(&command);
 }
 
+void Document::onAnswerClick(int id)
+{
+	ClientCommand command;
+	command.m_button=BUTTON_ANSWER;
+	command.m_action = Action::SPEAK_ANSWER;
+	command.m_id = id;
+	
+	// Paket an den Server senden
+	sendCommand(&command);
+}
+
+
 void Document::emitDebugSignal(int i)
 {
 	ClientCommand command;

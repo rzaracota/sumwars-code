@@ -217,6 +217,7 @@ void Application::run()
 		catch (CEGUI::Exception e)
 		{
 			ERRORMSG("Error message: %s",e.getMessage().c_str());
+			return;
 		}
 
 

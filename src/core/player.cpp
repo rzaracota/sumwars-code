@@ -276,7 +276,6 @@ bool Player::onGamefieldClick(ClientCommand* command)
 					com->m_goal_object_id = command->m_id;
 					com->m_goal = command->m_goal;
 					com->m_range = 3;
-					DEBUG("Speak");
 				}
 				
 				
@@ -869,6 +868,9 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 
 	Party* 	p;
 	Player* pl;
+	Dialogue* dia;
+	int i;
+	std::list< std::pair<std::string, std::string> >::iterator it;
 
 	Item* si;
 	DropSlot ds;
@@ -1022,6 +1024,35 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 				getEquipement()->swapItem(si,Equipement::CURSOR_ITEM);
 				getRegion()->dropItem(si,getShape()->m_center);
 			}
+			break;
+			
+		case BUTTON_ANSWER:
+			
+			dia = getDialogue();
+			if (dia ==0)
+			{
+				ERRORMSG("answer without dialogue");
+				break;
+			}
+			
+			i = command->m_id;
+			it = getSpeakText().m_answers.begin();
+			while (it != getSpeakText().m_answers.end() && i >0)
+			{
+				i--;
+				it++;
+			}
+			
+			if (it == getSpeakText().m_answers.end())
+			{
+				ERRORMSG("invalid answer %i",command->m_id);
+				dia->changeTopic("end");
+				break;
+			}
+			
+			DEBUG5("changing topic to %s",it->second.c_str());
+			getSpeakText().clear();
+			dia->changeTopic(it->second);
 			break;
 
 		case DEBUG_SIGNAL:

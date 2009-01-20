@@ -76,6 +76,7 @@ struct NetEvent
 		DATA_EXPERIENCE=0x4000,
  		DATA_MOVE_INFO = 0x8000,
  		DATA_LEVEL = 0x10000,
+		DATA_SPEAK_TEXT = 0x20000,
 	};
 	
 	/**

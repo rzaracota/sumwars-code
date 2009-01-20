@@ -2,12 +2,15 @@
 #include "region.h"
 #include "player.h"
 #include "item.h"
+#include "dialogue.h"
 
 lua_State * EventSystem::m_lua;
 
 Region* EventSystem::m_region;
  
 Trigger*  EventSystem::m_trigger;
+
+Dialogue*  EventSystem::m_dialogue;
 
 void EventSystem::init()
 {
@@ -39,9 +42,14 @@ void EventSystem::init()
 	lua_register(m_lua, "addUnitCommand", addUnitCommand);
 	lua_register(m_lua, "setCutsceneMode", setCutsceneMode);
 	lua_register(m_lua, "addCameraPosition", addCameraPosition);
+	lua_register(m_lua, "speak", speak);
+	lua_register(m_lua, "addQuestion", addQuestion);
+	lua_register(m_lua, "addAnswer", addAnswer);
+	lua_register(m_lua, "changeTopic", changeTopic);
 	
 	m_region =0;
 	m_trigger =0;
+	m_dialogue =0;
 }
 
 void  EventSystem::cleanup()
@@ -835,6 +843,96 @@ int EventSystem::addCameraPosition(lua_State *L)
 	else
 	{
 		ERRORMSG("Syntax: setCameraPosition(float time, {float x, float y}, float phi, float theta, float dist");
+	}
+	
+	return 0;
+}
+
+
+int EventSystem::speak(lua_State *L)
+{
+	if (m_dialogue ==0)
+		return 0;
+	
+	int argc = lua_gettop(L);
+	if (argc>=2 && lua_isstring(L,1) && lua_isstring(L,2))
+	{
+		std::string refname = lua_tostring(L, 1);
+		std::string text = lua_tostring(L, 2);
+		
+		float time = 1000;
+		if (argc>=3 && lua_isnumber(L,3))
+		{
+			time = lua_tonumber(L,3);
+		}
+		
+		m_dialogue->speak(refname,text,time);
+		
+	}
+	else
+	{
+		ERRORMSG("Syntax: speak(string refname, string text [,float time])");
+	}
+	
+	return 0;
+}
+
+int EventSystem::addQuestion(lua_State *L)
+{
+	if (m_dialogue ==0)
+		return 0;
+	
+	int argc = lua_gettop(L);
+	if (argc>=1 && lua_isstring(L,1))
+	{
+		std::string text = lua_tostring(L, 1);
+		m_dialogue->addQuestion(text);
+	}
+	else
+	{
+		ERRORMSG("Syntax: addQuestion(string text)");
+	}
+	
+	return 0;
+}
+
+
+int EventSystem::addAnswer(lua_State *L)
+{
+	if (m_dialogue ==0)
+		return 0;
+	
+	int argc = lua_gettop(L);
+	if (argc>=2 && lua_isstring(L,1) && lua_isstring(L,2))
+	{
+		std::string text = lua_tostring(L, 1);
+		std::string topic = lua_tostring(L, 2);
+		
+		m_dialogue->addAnswer(text,topic);
+	}
+	else
+	{
+		ERRORMSG("Syntax: addAnswer(string text, string topic)")
+	}
+	
+	return 0;
+}
+
+int EventSystem::changeTopic(lua_State *L)
+{
+	if (m_dialogue ==0)
+		return 0;
+	
+	int argc = lua_gettop(L);
+	if (argc>=1 && lua_isstring(L,1))
+	{
+		std::string topic = lua_tostring(L, 1);
+		m_dialogue->addQuestion("#change_topic#");
+		m_dialogue->addAnswer("",topic);
+	}
+	else
+	{
+		ERRORMSG("Syntax: addQuestion(string text)");
 	}
 	
 	return 0;

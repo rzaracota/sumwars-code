@@ -94,7 +94,7 @@ class Dialogue
 		 * \fn void init()
 		 * \brief Initialisierung
 		 */
-		void init();
+		static void init();
 		
 		/**
 		 * \fn void addSpeaker(int id, std::string refname)

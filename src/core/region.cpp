@@ -1280,10 +1280,13 @@ void Region::update(float time)
 	std::map<int, Dialogue*>::iterator it5;
 	for (it5 = m_dialogues.begin(); it5!= m_dialogues.end(); )
 	{
+		EventSystem::setDialogue(it5->second);
+		
 		it5->second->update(time);
 		
 		if (it5->second->isFinished())
 		{
+			delete it5->second;
 			m_dialogues.erase(it5++);
 		}
 		else

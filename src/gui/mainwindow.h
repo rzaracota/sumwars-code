@@ -141,7 +141,7 @@ class MainWindow :
 	 * \brief erstellt die Fenster mit Informationen zur Party
 	 */
 	bool setupPartyInfo();
-
+	
 	/**
 	 * \fn bool initInputs()
 	 * \brief Initialisiert die Eingabegeraete
@@ -208,6 +208,13 @@ class MainWindow :
 	 * \param evt CEGUI Event Parameter
 	 */
 	bool onDropItemClicked(const CEGUI::EventArgs& evt);
+	
+	/**
+	 * \fn bool onAnswerClicked(const CEGUI::EventArgs& evt);
+	 * \brief Behandelt das Klick auf eine Antwort in einem Gespraech
+	 * \param evt CEGUI Event Parameter
+	 */
+	bool onAnswerClicked(const CEGUI::EventArgs& evt);
 
 	/**
 	 * \fn bool keyPressed(const OIS::KeyEvent &evt)
@@ -237,6 +244,13 @@ class MainWindow :
 	 * \param relative wenn true, werden die Koordinaten als relative Koordinaten interpretiert (Bereich 0-1)
 	 */
 	Vector getIngamePos(float screenx, float screeny, bool relative = false);
+	
+	/**
+	 * \fn bool consumeEvent(const CEGUI::EventArgs& evt)
+	 * \brief Funktion die Events verbraucht, gibt immer true zurueck
+	 */
+	bool consumeEvent(const CEGUI::EventArgs& evt);
+	
 
 	private:
 

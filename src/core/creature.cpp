@@ -670,6 +670,17 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 	switch(m_action.m_type)
 	{
 		case Action::SPEAK:
+			DEBUG("speak");
+			if (goalobj->isCreature() && getDialogue() ==0)
+			{
+				cr = static_cast<Creature*>(goalobj);
+				Dialogue* dia = new Dialogue(getRegion(), cr->getRefName());
+				dia->addSpeaker(getId(),"player");
+				dia->addSpeaker(goalobj->getId(),cr->getRefName());
+				dia->changeTopic("start");
+				getRegion()->insertDialogue(dia);
+			}
+			
 			break;
 		
 		case Action::USE:
@@ -2232,9 +2243,9 @@ bool Creature::update (float time)
 
 	
 	// Timer fuer Sprache anpassen
-	if (!m_speak_text.empty())
+	if (!m_speak_text.empty() && m_speak_text.m_answers.empty())
 	{
-		if (m_speak_text.m_time > time)
+		if (m_speak_text.m_time < time)
 		{
 			m_speak_text.clear();
 		}
@@ -4188,6 +4199,22 @@ void Creature::writeNetEvent(NetEvent* event, CharConv* cv)
 	{
 		cv->toBuffer(getBaseAttr()->m_level);
 	}
+	
+	if (event->m_data & NetEvent::DATA_SPEAK_TEXT)
+	{
+		DEBUG("write speak text event");
+		cv->toBuffer(getSpeakText().m_text);
+		cv->toBuffer(getSpeakText().m_time);
+		
+		cv->toBuffer<short>(getSpeakText().m_answers.size());
+		
+		std::list< std::pair<std::string, std::string> >::iterator it;
+		for (it = getSpeakText().m_answers.begin(); it != getSpeakText().m_answers.end(); ++it)
+		{
+			cv->toBuffer(it->first);
+			cv->toBuffer(it->second);	
+		}
+	}
 }
 
 
@@ -4331,6 +4358,26 @@ void Creature::processNetEvent(NetEvent* event, CharConv* cv)
 	{
 		cv->fromBuffer(getBaseAttr()->m_level);
 	}
+	
+	if (event->m_data & NetEvent::DATA_SPEAK_TEXT)
+	{
+		DEBUG("read speak text event");
+
+		cv->fromBuffer(getSpeakText().m_text);
+		cv->fromBuffer(getSpeakText().m_time);
+		
+		short n;
+		cv->fromBuffer<short>(n);
+		
+		std::string text;
+		std::string topic;
+		for (int i=0; i<n; i++)
+		{
+			cv->fromBuffer(text);
+			cv->fromBuffer(topic);
+			getSpeakText().m_answers.push_back(std::make_pair(text,topic));
+		}
+	}
 
 	if (newmove)
 	{
@@ -4454,6 +4501,19 @@ bool Creature::setValue(std::string valname)
 
 void Creature::clearSpeakText()
 {
+	m_event_mask |= NetEvent::DATA_SPEAK_TEXT;
 	m_speak_text.clear();
 }
 
+void Creature::speakText(CreatureSpeakText& text)
+{
+	m_event_mask |= NetEvent::DATA_SPEAK_TEXT;
+	
+	m_speak_text = text;
+	DEBUG("speak %s for %f ms",text.m_text.c_str(), text.m_time);
+	std::list< std::pair<std::string, std::string> >::iterator it;
+	for (it = text.m_answers.begin(); it != text.m_answers.end(); ++it)
+	{
+		DEBUG("answer %s %s",it->first.c_str(), it->second.c_str());
+	}
+}

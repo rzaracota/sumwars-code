@@ -15,6 +15,7 @@ extern "C"
 }
 
 class Region;
+class Dialogue;
 
 /**
  * \class EventSystem
@@ -60,6 +61,16 @@ class EventSystem
 		{
 			m_region = region;
 			m_trigger =0;
+		}
+		
+		/**
+		 * \fn static void setDialogue(Dialogue* dialogue)
+		 * \brief Setzt den Dialog, dem die weiteren Antworten hinzugefuegt werden
+		 * \param dialogue Dialog
+		 */
+		static void setDialogue(Dialogue* dialogue)
+		{
+			m_dialogue = dialogue;
 		}
 		
 
@@ -221,14 +232,44 @@ class EventSystem
 		/**
 		 * \fn static int setCutsceneMode(lua_State *L)
 		 * \brief Setzt den Cutscene Modus der Region
+		 * \param L Lua Status
 		 */
 		static int setCutsceneMode(lua_State *L);
 		
 		/**
 		 * \fn static int addCameraPosition(lua_State *L)
 		 * \brief Fuegt der Kamerafahrt eine Position hinzu
+		 * \param L Lua Status
 		 */
 		static int addCameraPosition(lua_State *L);
+		
+		/**
+		 * \fn static int speak(lua_State *L);
+		 * \brief Fuegt dem aktuellen Dialog einen Text hinzu
+		 * \param L Lua Status
+		 */
+		static int speak(lua_State *L);
+		
+		/**
+		 * \fn static int addQuestion(lua_State *L);
+		 * \brief Fuegt dem aktuellen Dialog eine Frage
+		 * \param L Lua Status
+		 */
+		static int addQuestion(lua_State *L);
+		
+		/**
+		 * \fn static int addAnswer(lua_State *L);
+		 * \brief Fuegt dem aktuellen Dialog eine Antwort auf die Frage hinzu
+		 * \param L Lua Status
+		 */
+		static int addAnswer(lua_State *L);
+		
+		/**
+		 * \fn static int changeTopic(lua_State *L);
+		 * \brief Wechselt das Thema des aktuelle Dialogs
+		 * \param L Lua Status
+		 */
+		static int changeTopic(lua_State *L);
 		
 		/**
 		 * \fn static Vector getVector(lua_State *L, int index)
@@ -258,6 +299,12 @@ class EventSystem
 		 * \brief Region in der der aktuell alle Events ausgefuehrt werden
 		 */
 		static Region* m_region;
+		
+		/**
+		 * \var static Dialogue* m_dialogue
+		 * \brief aktueller Dialog
+		 */
+		static Dialogue* m_dialogue;
 		
 		/**
 		 * \var static Trigger* m_trigger

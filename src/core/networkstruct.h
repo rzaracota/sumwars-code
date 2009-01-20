@@ -218,6 +218,8 @@ enum Button
 
 	DROP_ITEM = 20,
  
+	BUTTON_ANSWER=21,
+ 
 	BUTTON_MEMBER_ACCEPT = 30,
  
  	BUTTON_MEMBER_REJECT = 31,
@@ -231,6 +233,8 @@ enum Button
 	BUTTON_WAR = 35,
  
 	BUTTON_LEAVE = 36,
+ 
+ 
 
 	DEBUG_SIGNAL=100,
 };

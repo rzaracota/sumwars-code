@@ -72,18 +72,18 @@ Dialogue::~Dialogue()
 void Dialogue::init()
 {
 	Event* top;
-			
+	
+	
 	top = new Event;
-	top->setEffect("speak('peasant', 'test1',800) ; speak('player','antwort1',800)");
+	top->setEffect("speak('peasant', 'blah',800) ; speak('player','blubb',800)");
 	getTopicList("peasant").addTopic("topic1",top);
 	getTopicList("peasant").addStartTopic("das erste Thema", "topic1");
 	
 	top = new Event;
-	top->setEffect(" neues =0; \
-			speak('player', 'frage2',1000) ; \
+	top->setEffect("speak('player', 'frage2',1000) ; \
 			speak('peasant','antwort2.1',1000); \
 			speak('peasant','antwort2.2',1000); \
-			addQuestion('und jetzt?'); \
+			addQuestion('Was jetzt?'); \
 			addAnswer('nochmal das ganze','start'); \
 			addAnswer('was neues','topic3'); \
 			addAnswer('was ganz neues ?','topic4'); \
@@ -141,6 +141,7 @@ void Dialogue::addSpeaker(int id, std::string refname)
 	if (m_main_player_id ==0 && cr->getTypeInfo()->m_type == WorldObject::TypeInfo::TYPE_PLAYER)
 	{
 		m_main_player_id = cr->getId();
+		m_speaker["main_player"] = m_main_player_id;
 	}
 	
 }
@@ -149,7 +150,7 @@ void Dialogue::speak(std::string refname, std::string text, float time)
 {
 	CreatureSpeakText txt;
 	txt.m_text = text;
-	txt.m_time = 500;
+	txt.m_time = time;
 	
 	m_speech.push_back(std::make_pair(refname,txt));
 }
@@ -169,6 +170,8 @@ void Dialogue::addAnswer(std::string text, std::string topic)
 	
 	if (checkTopic(topic))
 	{
+		DEBUG5("adding answer %s %s",text.c_str(), topic.c_str());
+
 		m_speech.back().second.m_answers.push_back(std::make_pair(text,topic));
 	}
 	
@@ -177,6 +180,8 @@ void Dialogue::addAnswer(std::string text, std::string topic)
 
 bool Dialogue::checkTopic(std::string topic)
 {
+	if (topic == "start" || topic == "end")
+		return true;
 	
 	Event* st = m_topics[m_topic_base].getSpeakTopic(topic);
 	
@@ -197,11 +202,14 @@ void Dialogue::changeTopic(std::string topic)
 		return ;
 	}
 	
+	m_speech.clear();
+	m_started = true;
+	
 	Event* st;
 	
 	if (topic == "start")
 	{
-		addQuestion("");
+		addQuestion("was ansprechen?");
 		
 		// Alle Antworten hinzufuegen, deren Themen freigeschaltet sind
 		
@@ -211,6 +219,7 @@ void Dialogue::changeTopic(std::string topic)
 		{
 			if (checkTopic(jt->second))
 			{
+				DEBUG5("added answer %s %s",jt->first.c_str(),jt->second.c_str());
 				addAnswer(jt->first, jt->second);
 			}
 		}
@@ -226,7 +235,7 @@ void Dialogue::changeTopic(std::string topic)
 		return ;
 	}
 	
-	if (!st->checkCondition())
+	if (st->checkCondition())
 	{
 		st->doEffect();
 	}
@@ -245,6 +254,7 @@ int Dialogue::getSpeaker(std::string refname)
 
 void Dialogue::update(float time)
 {
+	
 	if (m_finished)
 		return;
 	
@@ -257,7 +267,7 @@ void Dialogue::update(float time)
 		cst = &(m_speech.front().second);
 		
 		// Fragen bleiben generell stehen
-		if (! cst->m_answers.empty())
+		if (!m_started && ! cst->m_answers.empty())
 		{
 			stime =0;
 			break;
@@ -290,6 +300,7 @@ void Dialogue::update(float time)
 				
 				m_speech.pop_front();
 			}
+			m_started = false;
 			
 			// Naechsten zulaessigen Text suchen
 			cst =0;
@@ -299,6 +310,7 @@ void Dialogue::update(float time)
 				
 				if (wo ==0 || !wo->isCreature())
 				{
+					DEBUG("cant speak text %s %s",m_speech.front().first.c_str(),m_speech.front().second.m_text.c_str());
 					m_speech.pop_front();
 					continue;
 				}
@@ -307,11 +319,15 @@ void Dialogue::update(float time)
 
 			}
 			
+			
+			
 			if (cst ==0 || m_speech.empty())
 			{
 				m_finished = true;
 				return;
 			}
+			
+			DEBUG5("spoken text %s",cst->m_text.c_str());
 			
 			if (!cst->m_answers.empty() && cst->m_text == "#change_topic#")
 			{

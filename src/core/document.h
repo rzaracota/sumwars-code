@@ -547,7 +547,13 @@ class Document
 	 * \brief Behandelt Rechtsklick auf ein Item
 	 */
 	void onItemRightClick(short pos);
-
+	
+	/**
+	 * \fn void onAnswerClick(int id)
+	 * \brief Behandelt Klick auf eine Antwort bei einem Gespraech
+	 * \param id Nummer der Antwort
+	 */
+	void onAnswerClick(int id);
 
 	/**
 	 * \fn void increaseAttribute(CreatureBaseAttr::Attribute attr)

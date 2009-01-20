@@ -22,6 +22,7 @@
 #include "mapgenerator.h"
 #include "spawnpoint.h"
 #include "eventsystem.h"
+#include "dialogue.h"
 
 World* World::m_world=0;
 
@@ -63,6 +64,7 @@ World* World::m_world=0;
 bool World::init()
 {
 	EventSystem::init();
+	Dialogue::init();
 
 	if (m_server)
 	{
