@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 
 <!-- TEMPLATE
 <World>
@@ -74,7 +74,7 @@
 		</Environments>
 		
 		<SpawnGroups>
-			<SpawnGroup group_name="lich_goblins" number="1" />
+			<SpawnGroup group_name="lich_skeletons" number="1" />
 			<SpawnGroup group_name="goblins" number="10" />
 			<SpawnGroup group_name="goblins_dogs" number="10" />
 		</SpawnGroups>

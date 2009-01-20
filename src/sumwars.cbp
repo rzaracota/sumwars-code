@@ -88,6 +88,8 @@
 		<Unit filename="core\damage.h" />
 		<Unit filename="core\debug.cpp" />
 		<Unit filename="core\debug.h" />
+		<Unit filename="core\dialogue.cpp" />
+		<Unit filename="core\dialogue.h" />
 		<Unit filename="core\document.cpp" />
 		<Unit filename="core\document.h" />
 		<Unit filename="core\dropitem.cpp" />
@@ -160,6 +162,8 @@
 		<Unit filename="core\warrior.h" />
 		<Unit filename="core\world.cpp" />
 		<Unit filename="core\world.h" />
+		<Unit filename="core\worldloader.cpp" />
+		<Unit filename="core\worldloader.h" />
 		<Unit filename="core\worldobject.cpp" />
 		<Unit filename="core\worldobject.h" />
 		<Unit filename="gui\application.cpp" />
