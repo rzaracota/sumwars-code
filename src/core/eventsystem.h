@@ -244,32 +244,53 @@ class EventSystem
 		static int addCameraPosition(lua_State *L);
 		
 		/**
-		 * \fn static int speak(lua_State *L);
+		 * \fn static int speak(lua_State *L)
 		 * \brief Fuegt dem aktuellen Dialog einen Text hinzu
 		 * \param L Lua Status
 		 */
 		static int speak(lua_State *L);
 		
 		/**
-		 * \fn static int addQuestion(lua_State *L);
+		 * \fn static int addQuestion(lua_State *L)
 		 * \brief Fuegt dem aktuellen Dialog eine Frage
 		 * \param L Lua Status
 		 */
 		static int addQuestion(lua_State *L);
 		
 		/**
-		 * \fn static int addAnswer(lua_State *L);
+		 * \fn static int addAnswer(lua_State *L)
 		 * \brief Fuegt dem aktuellen Dialog eine Antwort auf die Frage hinzu
 		 * \param L Lua Status
 		 */
 		static int addAnswer(lua_State *L);
 		
 		/**
-		 * \fn static int changeTopic(lua_State *L);
+		 * \fn static int changeTopic(lua_State *L)
 		 * \brief Wechselt das Thema des aktuelle Dialogs
 		 * \param L Lua Status
 		 */
 		static int changeTopic(lua_State *L);
+		
+		/**
+		 * \fn static int createDialogue(lua_State *L)
+		 * \brief Erzeugt einen neuen Dialog
+		 * \param L Lua Status
+		 */
+		static int createDialogue(lua_State *L);
+		
+		/**
+		 * \fn static int addSpeaker(lua_State *L)
+		 * \brief fuegt dem Dialog einen Sprecher hinzu
+		 * \param L Lua Status
+		 */
+		static int addSpeaker(lua_State *L);
+		
+		/**
+		 * \fn static int setTopicBase(lua_State *L)
+		 * \brief Setzt den Basisbereich der Topics
+		 * \param L Lua Status
+		 */
+		static int setTopicBase(lua_State *L);
 		
 		/**
 		 * \fn static Vector getVector(lua_State *L, int index)

@@ -4202,7 +4202,7 @@ void Creature::writeNetEvent(NetEvent* event, CharConv* cv)
 	
 	if (event->m_data & NetEvent::DATA_SPEAK_TEXT)
 	{
-		DEBUG("write speak text event");
+		DEBUG("write speak text event, buffer pos %i",cv->writeBits());
 		cv->toBuffer(getSpeakText().m_text);
 		cv->toBuffer(getSpeakText().m_time);
 		
@@ -4361,7 +4361,7 @@ void Creature::processNetEvent(NetEvent* event, CharConv* cv)
 	
 	if (event->m_data & NetEvent::DATA_SPEAK_TEXT)
 	{
-		DEBUG("read speak text event");
+		DEBUG("read speak text event, buffer pos %i", cv->readBits());
 
 		cv->fromBuffer(getSpeakText().m_text);
 		cv->fromBuffer(getSpeakText().m_time);
@@ -4510,7 +4510,7 @@ void Creature::speakText(CreatureSpeakText& text)
 	m_event_mask |= NetEvent::DATA_SPEAK_TEXT;
 	
 	m_speak_text = text;
-	DEBUG("speak %s for %f ms",text.m_text.c_str(), text.m_time);
+	DEBUG5("speak %s for %f ms",text.m_text.c_str(), text.m_time);
 	std::list< std::pair<std::string, std::string> >::iterator it;
 	for (it = text.m_answers.begin(); it != text.m_answers.end(); ++it)
 	{

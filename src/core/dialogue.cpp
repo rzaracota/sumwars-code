@@ -109,6 +109,13 @@ void Dialogue::init()
 	getTopicList("peasant").addTopic("topic4",top);
 	
 	
+	
+	top = new Event;
+	top->setEffect("speak('warrior', 'ein toller Baum',1000) \
+			speak('lumberjack','Ich hole meine Axt',1000)");
+	getTopicList("global").addTopic("tree",top);
+	
+	
 }
 
 void Dialogue::addSpeaker(int id, std::string refname)
@@ -176,6 +183,11 @@ void Dialogue::addAnswer(std::string text, std::string topic)
 	}
 	
 	
+}
+
+void Dialogue::setTopicBase(std::string topic_base)
+{
+	m_topic_base = topic_base;
 }
 
 bool Dialogue::checkTopic(std::string topic)

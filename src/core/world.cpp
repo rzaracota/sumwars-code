@@ -130,10 +130,20 @@ bool World::init()
 	
 	
 	ev = new Event();
-	ev->setEffect("peasant = createObject('peasant', {130,217}) \n \
+	ev->setEffect("peasant = createObject('peasant', {130,220}) \n \
 			");
 	ev->setOnce();
 	rdata->addEvent("create_region",ev);
+	
+	ev = new Event();
+	ev->setCondition("return unitIsInArea(trigger.player,'LichArea')");
+	ev->setOnce();
+	ev->setEffect(" \
+			createDialogue(); \
+			addSpeaker(trigger.player,'warrior'); \
+			addSpeaker(peasant, 'lumberjack'); \
+			changeTopic('tree'); ");
+	rdata->addEvent("player_moved",ev);
 
 	// Debugging
 	/*

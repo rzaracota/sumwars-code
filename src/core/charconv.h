@@ -159,7 +159,7 @@ class CharConv
 	 */
 	void toBuffer(std::string s)
 	{
-		toBuffer(s.size());
+		toBuffer<int>(s.size());
 		toBuffer(s.data(), s.size());
 	}
 	

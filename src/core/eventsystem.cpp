@@ -46,6 +46,10 @@ void EventSystem::init()
 	lua_register(m_lua, "addQuestion", addQuestion);
 	lua_register(m_lua, "addAnswer", addAnswer);
 	lua_register(m_lua, "changeTopic", changeTopic);
+	lua_register(m_lua, "createDialog", createDialogue);
+	lua_register(m_lua, "createDialogue", createDialogue);
+	lua_register(m_lua, "setTopicBase",setTopicBase );
+	lua_register(m_lua, "addSpeaker", addSpeaker);
 	
 	m_region =0;
 	m_trigger =0;
@@ -937,3 +941,61 @@ int EventSystem::changeTopic(lua_State *L)
 	
 	return 0;
 }
+
+int EventSystem::createDialogue(lua_State *L)
+{
+	if (m_region ==0)
+		return 0;
+	
+	m_dialogue = new Dialogue(m_region, "global");
+	m_region->insertDialogue(m_dialogue);
+	
+	return 0;
+}
+
+int EventSystem::addSpeaker(lua_State *L)
+{
+	if (m_dialogue ==0)
+		return 0;
+	
+	int argc = lua_gettop(L);
+	if (argc>=1 && lua_isnumber(L,1))
+	{
+		int speaker = lua_tonumber(L, 1);
+		
+		string refname ="";
+		if (argc>=1 && lua_isstring(L,1))
+		{
+			refname = lua_tostring(L,2);
+		}
+		
+		m_dialogue->addSpeaker(speaker,refname);
+	}
+	else
+	{
+		ERRORMSG("Syntax: addSpeaker(int speaker, string refname)");
+	}
+	
+	return 0;
+}
+
+
+int EventSystem::setTopicBase(lua_State *L)
+{
+	if (m_dialogue ==0)
+		return 0;
+	
+	int argc = lua_gettop(L);
+	if (argc>=1 && lua_isstring(L,1))
+	{
+		std::string base = lua_tostring(L, 1);
+		m_dialogue->setTopicBase(base);
+	}
+	else
+	{
+		ERRORMSG("Syntax: setTopicBase(string text)");
+	}
+	
+	return 0;
+}
+
