@@ -2236,7 +2236,6 @@ bool Creature::update (float time)
 
 	float ptime = time;
 
-	// CreatureDynAttr* dynattr = getDynAttr();
 	DEBUG5("Update des Creatureobjekts [%i] wird gestartet", getId());
 	// interne Variable um Fehler zu speichern
 	bool result=true;
@@ -4202,7 +4201,6 @@ void Creature::writeNetEvent(NetEvent* event, CharConv* cv)
 	
 	if (event->m_data & NetEvent::DATA_SPEAK_TEXT)
 	{
-		DEBUG("write speak text event, buffer pos %i",cv->writeBits());
 		cv->toBuffer(getSpeakText().m_text);
 		cv->toBuffer(getSpeakText().m_time);
 		
@@ -4361,8 +4359,7 @@ void Creature::processNetEvent(NetEvent* event, CharConv* cv)
 	
 	if (event->m_data & NetEvent::DATA_SPEAK_TEXT)
 	{
-		DEBUG("read speak text event, buffer pos %i", cv->readBits());
-
+		getSpeakText().clear();
 		cv->fromBuffer(getSpeakText().m_text);
 		cv->fromBuffer(getSpeakText().m_time);
 		
@@ -4376,6 +4373,13 @@ void Creature::processNetEvent(NetEvent* event, CharConv* cv)
 			cv->fromBuffer(text);
 			cv->fromBuffer(topic);
 			getSpeakText().m_answers.push_back(std::make_pair(text,topic));
+		}
+		
+		DEBUG5("speak %s for %f ms",getSpeakText().m_text.c_str(), getSpeakText().m_time);
+		std::list< std::pair<std::string, std::string> >::iterator it;
+		for (it = getSpeakText().m_answers.begin(); it != getSpeakText().m_answers.end(); ++it)
+		{
+			DEBUG5("answer %s %s",it->first.c_str(), it->second.c_str());
 		}
 	}
 
@@ -4514,6 +4518,6 @@ void Creature::speakText(CreatureSpeakText& text)
 	std::list< std::pair<std::string, std::string> >::iterator it;
 	for (it = text.m_answers.begin(); it != text.m_answers.end(); ++it)
 	{
-		DEBUG("answer %s %s",it->first.c_str(), it->second.c_str());
+		DEBUG5("answer %s %s",it->first.c_str(), it->second.c_str());
 	}
 }

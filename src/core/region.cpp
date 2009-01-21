@@ -1011,18 +1011,6 @@ void Region::update(float time)
 	WorldObject* object;
 	ProjectileMap::iterator it3;
 
-
-	// alle NetEventsmasken loeschen
-	for (iter =m_objects->begin(); iter!=m_objects->end(); ++iter)
-	{
-		iter->second->clearNetEventMask();
-	}
-
-	for (it3 = m_projectiles->begin(); it3 !=m_projectiles->end();++it3)
-	{
-		it3->second->clearNetEventMask();
-	}
-
 	// Durchmustern aller WorldObjects
 	for (iter =m_objects->begin(); iter!=m_objects->end(); )
 	{
@@ -1120,11 +1108,14 @@ void Region::update(float time)
 
 			if (object->getNetEventMask() !=0)
 			{
+				DEBUG5("object %i has event mask %i",object->getId(), object->getNetEventMask());
 				NetEvent event;
 				event.m_type = NetEvent::OBJECT_STAT_CHANGED;
 				event.m_data = object->getNetEventMask();
 				event.m_id = object->getId();
 				insertNetEvent(event);
+				
+				object->clearNetEventMask();
 			}
 		}
 
@@ -1138,6 +1129,8 @@ void Region::update(float time)
 				event.m_data = pr->getNetEventMask();
 				event.m_id = pr->getId();
 				insertNetEvent(event);
+				
+				pr->clearNetEventMask();
 			}
 		}
 	}

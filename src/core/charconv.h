@@ -107,28 +107,17 @@ class CharConv
 	 * \param s String
 	 * \param size Anzahl Zeichen
 	 */
-	void toBuffer(std::string s, unsigned int size)
-	{
-		char * data = new char[size];
-		memset(data,0,size);
-		memcpy(data,s.data(), std::min(size,s.size()));
-		toBuffer(data, size);
-		delete data;
-	}
+	void toBuffer(std::string s, unsigned int size);
+	
 	
 	/**
-	 * \fn void fromBuffer(std::string s, unsigned int size)
+	 * \fn void fromBuffer(std::string& s, unsigned int size)
 	 * \brief Liest aus dem String size Zeichen und schreibt sie in den String
 	 * \param s String
 	 * \param size Anzahl Zeichen
 	 */
-	void fromBuffer(std::string s, unsigned int size)
-	{
-		char* data = new char[size];
-		fromBuffer(data,size);
-		s.assign(data,size);
-		delete data;
-	}
+	void fromBuffer(std::string& s, unsigned int size);
+	
 	
 	/**
 	 * \fn void toBuffer(T data)
@@ -157,26 +146,16 @@ class CharConv
 	 * \brief Schreibt einen String in den Buffer, indem zuerst die Laenge und dann die Daten geschrieben werden
 	 * \param s String
 	 */
-	void toBuffer(std::string s)
-	{
-		toBuffer<int>(s.size());
-		toBuffer(s.data(), s.size());
-	}
+	void toBuffer(std::string s);
+	
 	
 	/**
 	 * \fn void fromBuffer(std::string s)
 	 * \brief liest einen String aus dem Puffer
 	 * \param s String
 	 */
-	void fromBuffer(std::string s)
-	{
-		int len;
-		fromBuffer<int>(len);
-		char * data = new char[len];
-		fromBuffer(data,len);
-		s.assign(data,len);
-		delete data;
-	}
+	void fromBuffer(std::string& s);
+	
 	
 	
 	

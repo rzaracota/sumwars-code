@@ -1027,6 +1027,8 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 			break;
 			
 		case BUTTON_ANSWER:
+			if (!World::getWorld()->isServer())
+				break;
 			
 			dia = getDialogue();
 			if (dia ==0)
@@ -1051,7 +1053,7 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 			}
 			
 			DEBUG5("changing topic to %s",it->second.c_str());
-			getSpeakText().clear();
+			clearSpeakText();
 			dia->changeTopic(it->second);
 			break;
 

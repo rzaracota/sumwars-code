@@ -135,6 +135,7 @@ bool World::init()
 	ev->setOnce();
 	rdata->addEvent("create_region",ev);
 	
+	
 	ev = new Event();
 	ev->setCondition("return unitIsInArea(trigger.player,'LichArea')");
 	ev->setOnce();
@@ -146,9 +147,9 @@ bool World::init()
 	rdata->addEvent("player_moved",ev);
 
 	// Debugging
-	/*
+	
 	// Testevent2: Feuerschiessender Baum
-			
+	/*	
 	ev = new Event();
 	ev->setEffect("setDamageValue('trapdmg','fire_dmg',5,10) \n \
 	active = false");
@@ -173,17 +174,16 @@ bool World::init()
 	active = false \n  \
 	end ");
 	rdata->addEvent("trap_fire",ev);
-	*/		
+	*/
 			
 	
 	// Testevent: getarnter Lich
-	/*		
+	/*
 	ev = new Event();
 	ev->setOnce();
 	ev->setCondition("return (unitIsInArea(trigger.player,'LichArea'))");
 	ev->setEffect("deleteObject(tree) \n \
 			lich = createObject('lich', 'LichLocation') \n \
-			insertTrigger('testTimer') \n \
 			");
 	rdata->addEvent("player_moved",ev);
 
@@ -1237,7 +1237,7 @@ void World::updatePlayers()
 			}
 
 
-			DEBUG("player %i has quit",pl->getId());
+			DEBUG5("player %i has quit",pl->getId());
 
 			delete pl;
 			continue;
@@ -1561,7 +1561,7 @@ void World::updatePlayers()
 				for (lt = m_events->begin(); lt != m_events->end(); ++lt)
 				{
 					msg = new CharConv;
-					DEBUG5(" send global event %i id %i",lt->m_type,lt->m_id);
+					DEBUG5(" send global event %i id %i data %i",lt->m_type,lt->m_id, lt->m_data);
 
 					header.toString(msg);
 					writeNetEvent(reg,&(*lt),msg);
@@ -1576,6 +1576,7 @@ void World::updatePlayers()
 					for (lt = reg->getNetEvents()->begin(); lt != reg->getNetEvents()->end(); ++lt)
 					{
 						msg = new CharConv;
+						DEBUG5(" send local event %i id %i data %i",lt->m_type,lt->m_id, lt->m_data);
 
 						header.toString(msg);
 						ret = writeNetEvent(reg,&(*lt),msg);

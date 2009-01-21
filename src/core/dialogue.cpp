@@ -77,6 +77,7 @@ void Dialogue::init()
 	top = new Event;
 	top->setEffect("speak('peasant', 'blah',800) ; speak('player','blubb',800)");
 	getTopicList("peasant").addTopic("topic1",top);
+	
 	getTopicList("peasant").addStartTopic("das erste Thema", "topic1");
 	
 	top = new Event;
