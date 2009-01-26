@@ -526,6 +526,15 @@ public:
 		return m_camera;
 	}
 	
+	/**
+	 * \fn std::string getRefName()
+	 * \brief Gibt den Referenzname aus, mit dem bei Gespraechen auf die Person verwiesen wird
+	 */
+	virtual std::string getRefName()
+	{
+		return m_name;
+	}
+	
 
 //Protected stuff
 protected:

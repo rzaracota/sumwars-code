@@ -73,6 +73,7 @@
 		<Event trigger ="create_region" once = "true">
 			<Effect>
 				peasant = createObject('peasant', {130,220});
+				setRefName(peasant,'peasant');
 			</Effect>
 		</Event>
 		

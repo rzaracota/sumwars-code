@@ -132,7 +132,7 @@ bool Creature::init()
 
 	m_event_mask =0;
 	
-	
+	m_refname = getTypeInfo()->m_subtype;
 
 	return tmp;
 }

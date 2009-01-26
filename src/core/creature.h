@@ -407,9 +407,19 @@ public:
 	 * \fn std::string getRefName()
 	 * \brief Gibt den Referenzname aus, mit dem bei Gespraechen auf die Person verwiesen wird
 	 */
-	std::string getRefName()
+	virtual std::string getRefName()
 	{
-		return getName();
+		return m_refname;
+	}
+	
+	/**
+	 * \fn void setRefName(std::string name)
+	 * \brief Setzt den Referenzname
+	 * \param name Referenzname
+	 */
+	void setRefName(std::string name)
+	{
+		m_refname = name;
 	}
 	
 	
@@ -572,6 +582,12 @@ private:
 	 * \brief ID der Person, zu der die Kreatur gerade spricht
 	 */
 	int m_speak_id;
+	
+	/**
+	 * \var std::string m_refname
+	 * \brief Referenzname, mit dem die Kreatur bei Dialogen angesprochen wird
+	 */
+	std::string m_refname;
 	
 	/**
 	 * \var float m_script_command_timer

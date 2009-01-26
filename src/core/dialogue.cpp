@@ -73,6 +73,10 @@ void Dialogue::init()
 {
 	Event* top;
 	
+	top = new Event;
+	top->setEffect("speak('peasantX', 'blork',800) ; speak('player','oergs',800)");
+	getTopicList("peasantX").addTopic("topic1",top);
+	getTopicList("peasantX").addStartTopic("ARRRR", "topic1");
 	
 	top = new Event;
 	top->setEffect("speak('peasant', 'blah',800) ; speak('player','blubb',800)");

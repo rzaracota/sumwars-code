@@ -50,6 +50,7 @@ void EventSystem::init()
 	lua_register(m_lua, "createDialogue", createDialogue);
 	lua_register(m_lua, "setTopicBase",setTopicBase );
 	lua_register(m_lua, "addSpeaker", addSpeaker);
+	lua_register(m_lua, "setRefName", setRefName);
 	
 	m_region =0;
 	m_trigger =0;
@@ -994,6 +995,28 @@ int EventSystem::setTopicBase(lua_State *L)
 	else
 	{
 		ERRORMSG("Syntax: setTopicBase(string text)");
+	}
+	
+	return 0;
+}
+
+int EventSystem::setRefName(lua_State *L)
+{
+	int argc = lua_gettop(L);
+	if (argc>=2 && lua_isnumber(L,1) && lua_isstring(L,2))
+	{
+		int id = lua_tonumber(L,1);
+		std::string refname = lua_tostring(L,2);
+		
+		WorldObject* wo = m_region->getObject(id);
+		if (wo!=0 && wo->isCreature())
+		{
+			static_cast<Creature*>(wo)->setRefName(refname);
+		}
+	}
+	else
+	{
+		ERRORMSG("Syntax: setRefName(int id, string name)");
 	}
 	
 	return 0;

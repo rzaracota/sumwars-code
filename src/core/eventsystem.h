@@ -293,6 +293,13 @@ class EventSystem
 		static int setTopicBase(lua_State *L);
 		
 		/**
+		 * \fn static int setRefName(lua_State *L)
+		 * \brief Setzt den Referenznamen eines Objekts
+		 * \param L Lua Status
+		 */
+		static int setRefName(lua_State *L);
+		
+		/**
 		 * \fn static Vector getVector(lua_State *L, int index)
 		 * \brief Liest einen Vector vom Lua Stack
 		 * \param L Lua Status
