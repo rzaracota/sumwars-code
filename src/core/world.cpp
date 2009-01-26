@@ -68,6 +68,19 @@ bool World::init()
 
 	if (m_server)
 	{
+		WorldLoader worldloader;
+		std::list<RegionData*> region_list;
+		worldloader.loadRegionData("../data/world/world.xml", region_list);
+
+		std::list<RegionData*>::iterator it;
+		for (it = region_list.begin(); it != region_list.end(); it++)
+		{
+			registerRegionData(*it, (*it)->m_id);
+		}
+		
+		worldloader.loadNPCData("../data/npc/npc.xml");
+		
+		
 		DEBUG("server");
 		m_network = new ServerNetwork(m_max_nr_players);
 	}
@@ -88,15 +101,7 @@ bool World::init()
 	m_timer[2] =0;
 	
 	// Regionen aus XML Laden
-	WorldLoader worldloader;
-	std::list<RegionData*> region_list;
-	worldloader.loadRegionData("../data/world/world.xml", region_list);
-
-	std::list<RegionData*>::iterator it;
-	for (it = region_list.begin(); it != region_list.end(); it++)
-	{
-		registerRegionData(*it, (*it)->m_id);
-	}
+	
 
 	return true;
 }

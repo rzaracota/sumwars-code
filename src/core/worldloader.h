@@ -6,32 +6,60 @@
 #include <list>
 #include "region.h"
 #include "objectfactory.h"
-#include <event.h>
+#include "event.h"
+#include "dialogue.h"
 
 #include "../tinyxml/tinyxml.h"
 #include <string>
 #include <cstring>
 
-
+/**
+ * \class ElementAttrib
+ * \brief Helferklasse zum zwischenspeichert der Attribute eines Elements
+ */
 class ElementAttrib
 {
 	public:
-		
-	
-	
+		/**
+		 * \fn void parseElement(TiXmlElement* elem)
+		 * \brief Parst die Attribute des Elements
+		 * \param elem XML Element
+		 */
 		void parseElement(TiXmlElement* elem);
 	
-	
+		/**
+		 * \fn void getString(std::string attrib, std::string& data, std::string def ="")
+		 * \brief Gibt ein Attribut als String aus.
+		 * \param attrib Name des Attributs
+		 * \param data Ausgabeparameter fuer die Daten
+		 * \param def String, der ausgegeben wird, wenn das Attribut nicht existiert
+		 */
 		void getString(std::string attrib, std::string& data, std::string def ="");
 	
-	
+		/**
+		 * \fn void getInt(std::string attrib, int& data, int def =0)
+		 * \brief Gibt ein Attribut als Integer aus.
+		 * \param attrib Name des Attributs
+		 * \param data Ausgabeparameter fuer die Daten
+		 * \param def Zahl, die ausgegeben wird, wenn das Attribut nicht existiert oder sich nicht zu int konvertieren laesst
+		 */
 		void getInt(std::string attrib, int& data, int def =0);
 	
 	
-	
+		/**
+		 * \fn void getInt(std::string attrib, int& data, int def =0)
+		 * \brief Gibt ein Attribut als Float aus.
+		 * \param attrib Name des Attributs
+		 * \param data Ausgabeparameter fuer die Daten
+		 * \param def Zahl, die ausgegeben wird, wenn das Attribut nicht existiert oder sich nicht zu float konvertieren laesst
+		 */
 		void getFloat(std::string attrib, float& data, float def =0);
 	
 	private:
+		/**
+		 * \var std::map<std::string, TiXmlAttribute*> m_attribs
+		 * \brief Map zum zwischenspeichern der Attribute
+		 */
 		std::map<std::string, TiXmlAttribute*> m_attribs;
 };
 
@@ -108,13 +136,32 @@ class WorldLoader
 	 * \param pFilename Pfad zu einer XML-Datei, die feste Objekte enthaelt
 	 * \return Liste der geladenen festen Objekte
 	 */
-	//bool loadWorldData(const char* pFilename, std::list<WorldData*>* &world_list, std::list<std::string>* &subtype_list);
 	bool loadRegionData(const char* pFilename, std::list<RegionData*> &region_list);
 	
+	/**
+	 * \fn bool loadNPCData(const char* pFilename)
+	 * \brief Liest die Daten zu NPC's aus einer XML Datei
+	 * \param pFilename Name der XML Datei
+	 */
+	bool loadNPCData(const char* pFilename);
 	
 	private:
 	
+	/**
+	 * \fn void loadEvent( TiXmlNode* node, Event *ev, TriggerType &type)
+	 * \brief Laedt die Daten zu einem Event aus einem XML Knoten
+	 * \param node Knoten der die Daten enthaelt
+	 * \param ev Event in das die Daten geschrieben werden
+	 * \param type Typ des Triggers, der das Event ausloesen soll (Ausgabeparameter)
+	 */
 	void loadEvent( TiXmlNode* node, Event *ev, TriggerType &type);
+	
+	/**
+	 * \fn void loadNPC( TiXmlNode* node)
+	 * \brief Laedt die Daten zu einem NPC aus einem Knoten
+	 * \param node XML Knoten
+	 */
+	void loadNPC( TiXmlNode* node);
 	
 	/**
 	 * \fn int generateWorldData(TiXmlElement* pElement, std::string element)

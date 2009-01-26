@@ -77,7 +77,7 @@
 			</Effect>
 		</Event>
 		
-		<!--
+		
 		<Event trigger ="player_moved" once = "true">
 			<Condition>
 				return (unitIsInArea(trigger.player,"LichArea"))
@@ -89,7 +89,7 @@
 				changeTopic('tree');
 			</Effect>
 		</Event>
-		-->
+		
 		
 		<!--
 		<Event trigger ="player_moved" once = "true">

@@ -1,0 +1,56 @@
+<?xml version="1.0" ?>
+
+<NPC refname="peasant">
+	<Topic name="topic1" start_option="das erste Thema">
+		<Effect>
+			speak('peasant', 'blah',800);
+			speak('player','blubb',800);
+		</Effect>
+	</Topic>
+	
+	<Topic name="frage" start_option="dumme Fragen stellen">
+		<Effect>
+			speak('player', 'frage2',1000) ;
+			speak('peasant','antwort2.1',1000);
+			speak('peasant','antwort2.2',1000);
+			addQuestion('Was jetzt?');
+			addAnswer('nochmal das ganze','start'); 
+			addAnswer('was neues','neues');
+			addAnswer('was ganz neues ?','ganz_neues');
+			addAnswer('ciao','end'); 
+		</Effect>
+	</Topic>
+	
+	<Topic name="neues" >
+		<Effect>
+			speak('player', 'Gibts was neues?',1000)
+			speak('peasant','es gibt nix neues',1000);
+			speak('peasant','',1000);
+			speak('peasant','echt nicht',1000);
+			changeTopic('start');
+			neues = 1
+		</Effect>
+	</Topic>
+	
+	<Topic name="ganz_neues">
+		<Condition>
+			return (neues==1)
+		</Condition>
+		<Effect>
+			speak('player', 'Und Jetzt?',1000);
+			speak('peasant','du nervst!',1000);
+		</Effect>
+	</Topic>
+	
+</NPC>
+
+<NPC refname ="global">
+	<Topic name="tree">
+		<Effect>
+			speak('warrior', 'ein toller Baum',1000)
+			speak('lumberjack','Ich hole meine Axt',1000)
+		</Effect>
+	</Topic>
+</NPC>
+
+

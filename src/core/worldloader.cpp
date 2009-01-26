@@ -89,7 +89,7 @@ void WorldLoader::loadEvent( TiXmlNode* node, Event *ev, TriggerType &type)
 	attrib.getString("trigger", type);
 	
 	std::string once;
-	attrib.getString("once", once);
+	attrib.getString("once", once,"false");
 	ev->setOnce(once=="true");
 
 	for ( child = node->FirstChild(); child != 0; child = child->NextSibling())
@@ -417,7 +417,6 @@ void WorldLoader::searchRegionData(TiXmlNode* pParent, std::list<RegionData*> &r
 	if ( !pParent ) return;
 
 	TiXmlNode* pChild;
-	TiXmlNode* pChild2;
 //	TiXmlText* pText;
 
 	int t = pParent->Type();
@@ -561,4 +560,68 @@ bool WorldLoader::loadRegionData(const char* pFilename, std::list<RegionData*> &
 	}
 }
 
+bool  WorldLoader::loadNPCData(const char* pFilename)
+{
+	TiXmlDocument doc(pFilename);
+	bool loadOkay = doc.LoadFile();
+
+	if (loadOkay)
+	{
+		loadNPC(&doc);
+		return true;
+	}
+	else
+	{
+		DEBUG("Failed to load file %s", pFilename);
+		return false;
+	}
+}
+
+void  WorldLoader::loadNPC( TiXmlNode* node)
+{
+	TiXmlNode* child;
+	
+	if (node->Type()==TiXmlNode::ELEMENT && !strcmp(node->Value(), "NPC"))
+	{
+		ElementAttrib attr;
+		attr.parseElement(node->ToElement());
+		
+		std::string refname;
+		std::string topic;
+		std::string start_op;
+		Event* ev;
+		TriggerType dummy;
+		
+		attr.getString("refname",refname,"global");
+		
+		for ( child = node->FirstChild(); child != 0; child = child->NextSibling())
+		{
+			if (child->Type()==TiXmlNode::ELEMENT && !strcmp(child->Value(), "Topic"))
+			{
+				attr.parseElement(child->ToElement());
+				attr.getString("name",topic,"topic");
+				attr.getString("start_option",start_op);
+				
+				DEBUG5("found Topic %s for %s",topic.c_str(),refname.c_str());
+				
+				ev = new Event;
+				// Topic kann mit der selben Funktion geladen werden wie Events
+				loadEvent(child,ev,dummy);
+				
+				Dialogue::getTopicList(refname).addTopic(topic,ev);
+				if (start_op != "")
+				{
+					Dialogue::getTopicList(refname).addStartTopic(start_op, topic);
+				}
+			}
+		}
+	}
+	else
+	{
+		for ( child = node->FirstChild(); child != 0; child = child->NextSibling())
+		{
+			loadNPC(child);
+		}
+	}
+}
 

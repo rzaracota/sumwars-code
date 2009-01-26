@@ -71,55 +71,6 @@ Dialogue::~Dialogue()
 
 void Dialogue::init()
 {
-	Event* top;
-	
-	top = new Event;
-	top->setEffect("speak('peasantX', 'blork',800) ; speak('player','oergs',800)");
-	getTopicList("peasantX").addTopic("topic1",top);
-	getTopicList("peasantX").addStartTopic("ARRRR", "topic1");
-	
-	top = new Event;
-	top->setEffect("speak('peasant', 'blah',800) ; speak('player','blubb',800)");
-	getTopicList("peasant").addTopic("topic1",top);
-	
-	getTopicList("peasant").addStartTopic("das erste Thema", "topic1");
-	
-	top = new Event;
-	top->setEffect("speak('player', 'frage2',1000) ; \
-			speak('peasant','antwort2.1',1000); \
-			speak('peasant','antwort2.2',1000); \
-			addQuestion('Was jetzt?'); \
-			addAnswer('nochmal das ganze','start'); \
-			addAnswer('was neues','topic3'); \
-			addAnswer('was ganz neues ?','topic4'); \
-			addAnswer('ciao','end'); ");
-	getTopicList("peasant").addTopic("topic2",top);
-	getTopicList("peasant").addStartTopic("dumme Fragen stellen", "topic2");
-	
-	top = new Event;
-	top->setEffect("speak('player', 'Gibts was neues?',1000) \
-			speak('peasant','es gibt nix neues',1000); \
-			speak('peasant','',1000); \
-			speak('peasant','echt nicht',1000); \
-			changeTopic('start'); \
-			neues = 1");
-	getTopicList("peasant").addTopic("topic3",top);
-			
-				
-	
-	top = new Event;
-	top->setCondition("return (neues==1)");
-	top->setEffect("speak('player', 'Und Jetzt?',1000) \
-			speak('peasant','du nervst!',1000)");
-	getTopicList("peasant").addTopic("topic4",top);
-	
-	
-	
-	top = new Event;
-	top->setEffect("speak('warrior', 'ein toller Baum',1000) \
-			speak('lumberjack','Ich hole meine Axt',1000)");
-	getTopicList("global").addTopic("tree",top);
-	
 	
 }
 
