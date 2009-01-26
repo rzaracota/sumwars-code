@@ -1,4 +1,4 @@
-﻿<!-- SHORT BOWS -->
+<!-- SHORT BOWS -->
 <!-- TODO ersetze twohanded="no", -->
 <!-- Uebungsbogen -->
 <Item type="weapon" subtype="trainy_sbw" size="medium">
@@ -111,7 +111,7 @@
 <!-- Kurzbogen -->
 <Item type="weapon" subtype="short_sbw" size="medium">
 	<Mesh file="bow.mesh" />
-	<Image image="set:bow_sw.png image:full_image" />
+	<Image image="set:bow.png image:full_image" />
 	<Attribute
 		level_requirement="5"
 		character_requirement="15"
