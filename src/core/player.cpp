@@ -194,6 +194,12 @@ void  Player::revive()
 
 bool Player::onGamefieldClick(ClientCommand* command)
 {
+	// keine Aktionen waehrend eines Dialogs
+	if (getDialogue()!=0)
+	{
+		return true;
+	}
+	
 	if (command->m_action>=192)
 	{
 		ERRORMSG("invalid action");

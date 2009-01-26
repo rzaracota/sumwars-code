@@ -3400,7 +3400,8 @@ bool Creature::reactOnUse( int id)
 void Creature::takeDamage(Damage* d)
 {
 	// Lebewesen kann nur im Zustand aktiv Schaden nehmen
-	if (getState() != STATE_ACTIVE)
+	// und wenn es nicht gerade in einen Dialog verwickelt ist
+	if (getState() != STATE_ACTIVE || getDialogue() != 0)
 		return;
 
 	DEBUG5("take Damage %i",getId());

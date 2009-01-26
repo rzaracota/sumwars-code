@@ -225,6 +225,7 @@ class WorldObject {
 			STATE_ENTER_REGION =5,
 			STATE_QUIT=9,
 			STATE_STATIC = 10,
+			STATE_SPEAK= 20,
    			STATE_NONE = 30,
 	  		STATE_AUTO = 31,
 	};
