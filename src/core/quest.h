@@ -1,3 +1,6 @@
+#ifndef QUEST_H
+#define QUEST_H
+
 #include "debug.h"
 #include "eventsystem.h"
 
@@ -97,3 +100,5 @@ class Quest
 		int m_description;
 		
 };
+
+#endif

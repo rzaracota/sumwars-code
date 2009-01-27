@@ -79,14 +79,18 @@ bool World::init()
 		}
 		
 		worldloader.loadNPCData("../data/npc/npc.xml");
-		
+		worldloader.loadQuestsData("../data/quests/goblins.xml");
 		
 		DEBUG("server");
 		m_network = new ServerNetwork(m_max_nr_players);
 		
+		/*
 		Quest* qu = new Quest("Kill the goblins", "goblins");
 		qu->init();
 		addQuest("goblins",qu);
+		*/
+		
+		
 
 	}
 	else
@@ -2292,6 +2296,7 @@ void  World::addEvent(RegionName rname, TriggerType trigger, Event* event)
 		return;
 	}
 	
+	DEBUG5("adding Event for Region %s",rname.c_str());
 	it->second->addEvent(trigger,event);
 }
 		

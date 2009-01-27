@@ -235,7 +235,6 @@
 				lich = createObject("lich", "ort3:center");
 			</Effect>
 		</Event>
-		
 
 	</Region>
 </World>

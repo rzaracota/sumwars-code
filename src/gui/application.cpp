@@ -489,6 +489,33 @@ bool Application::createView()
 
 bool Application::loadResources()
 {
+	Ogre::FileInfoListPtr files;
+	Ogre::FileInfoList::iterator it;
+	std::string file;
+	
+	files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("itempictures","*.png");
+	for (it = files->begin(); it != files->end(); ++it)
+	{
+		
+		file = it->filename;
+		
+		CEGUI::ImagesetManager::getSingleton().createImagesetFromImageFile (file,file,(CEGUI::utf8*)"itempictures");
+		
+		updateStartScreen(0.8);
+	}
+	
+	// Imagesets laden
+	files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("itempictures","*.imageset");
+	for (it = files->begin(); it != files->end(); ++it)
+	{
+		
+		file = it->filename;
+		
+		CEGUI::ImagesetManager::getSingleton().createImageset(file);
+		
+		updateStartScreen(0.9);
+	}
+	
 	updateStartScreen(0.0);
 	Ogre::ResourceGroupManager::getSingleton().loadResourceGroup("General");
 	updateStartScreen(0.1);
@@ -501,9 +528,7 @@ bool Application::loadResources()
 	SoundSystem::init();
 	SoundSystem::setSoundVolume(0.0);
 
-	Ogre::FileInfoListPtr files;
-	Ogre::FileInfoList::iterator it;
-	std::string file;
+	
 	
 	ItemLoader itemloader;
 	std::list<ItemImageData> item_image_data_list;
@@ -588,30 +613,9 @@ bool Application::loadResources()
 		updateStartScreen(0.7);
 	}
 	
-	files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("itempictures","*.png");
-	for (it = files->begin(); it != files->end(); ++it)
-	{
-		
-		file = it->filename;
-		
-		CEGUI::ImagesetManager::getSingleton().createImagesetFromImageFile (file,file,(CEGUI::utf8*)"itempictures");
-		
-		updateStartScreen(0.8);
-	}
-	
-	// Imagesets laden
-	files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("itempictures","*.imageset");
-	for (it = files->begin(); it != files->end(); ++it)
-	{
-		
-		file = it->filename;
-		
-		CEGUI::ImagesetManager::getSingleton().createImageset(file);
-		
-		updateStartScreen(0.9);
-	}
 	
 	
+	/*
 	ItemWindow::registerItemImage("short_sw","set:sword.png image:full_image");
 	ItemWindow::registerItemImage("long_sw","set:sword.png image:full_image");
 	ItemWindow::registerItemImage("long_bow","set:bow.png image:full_image");
@@ -619,6 +623,7 @@ bool Application::loadResources()
 	ItemWindow::registerItemImage("battle_axe","set:axe2H.png  image:full_image");
 	ItemWindow::registerItemImage("wood_sh","set:shield_dmg.png  image:full_image");
 	ItemWindow::registerItemImage("iron_sh","set:shield.png  image:full_image");
+	*/
 	updateStartScreen(1.0);
 	
 	return true;

@@ -1,5 +1,5 @@
 #include "worldloader.h"
-
+#include "world.h"
 
 #include <iostream>
 
@@ -621,6 +621,104 @@ void  WorldLoader::loadNPC( TiXmlNode* node)
 		for ( child = node->FirstChild(); child != 0; child = child->NextSibling())
 		{
 			loadNPC(child);
+		}
+	}
+}
+
+bool WorldLoader::loadQuestsData(const char* pFilename)
+{
+	TiXmlDocument doc(pFilename);
+	bool loadOkay = doc.LoadFile();
+
+	if (loadOkay)
+	{
+		loadQuests(&doc);
+		return true;
+	}
+	else
+	{
+		DEBUG("Failed to load file %s", pFilename);
+		return false;
+	}
+}
+
+void WorldLoader::loadQuests(TiXmlNode* node)
+{
+	TiXmlNode* child;
+	Quest* qu;
+	if (node->Type()==TiXmlNode::ELEMENT && !strcmp(node->Value(), "Quest"))
+	{
+		ElementAttrib attr;
+		attr.parseElement(node->ToElement());
+		
+		std::string tabname,name;
+		attr.getString("table_name",tabname);
+		attr.getString("name",name);
+		
+		qu = new Quest(name,tabname);
+		
+		loadQuest(node,qu);
+		World::getWorld()->addQuest(tabname,qu);
+	}
+	else
+	{
+		for ( child = node->FirstChild(); child != 0; child = child->NextSibling())
+		{
+			loadQuests(child);
+		}
+	}
+}
+
+
+void WorldLoader::loadQuest(TiXmlNode* node, Quest* quest)
+{
+	TiXmlNode* child;
+	TiXmlText* text;
+	for ( child = node->FirstChild(); child != 0; child = child->NextSibling())
+	{
+		if (child->Type()==TiXmlNode::ELEMENT)
+		{
+			if (!strcmp(child->Value(), "Init"))
+			{
+				text = child->FirstChild()->ToText();
+				quest->setInit(text->Value());
+				quest->init();
+			}
+			
+			if (!strcmp(child->Value(), "Description"))
+			{
+				text = child->FirstChild()->ToText();
+				quest->setInit(text->Value());
+			}
+			
+			if (!strcmp(child->Value(), "NPC"))
+			{
+				loadNPC(child);
+			}
+			
+			if (!strcmp(child->Value(), "Region"))
+			{
+				TriggerType type;
+				std::string rname;
+				Event* ev;
+				TiXmlNode* child2;
+				
+				ElementAttrib attr;
+				attr.parseElement(child->ToElement());
+				attr.getString("name",rname);
+				DEBUG5("event for region %s",rname.c_str());
+				
+				for ( child2 = child->FirstChild(); child2 != 0; child2 = child2->NextSibling())
+				{
+					if (child2->Type()==TiXmlNode::ELEMENT && !strcmp(child2->Value(), "Event"))
+					{
+						ev = new Event;
+						loadEvent(child2, ev,type);
+						World::getWorld()->addEvent(rname,type,ev);
+					}
+				}
+				
+			}
 		}
 	}
 }

@@ -8,6 +8,7 @@
 #include "objectfactory.h"
 #include "event.h"
 #include "dialogue.h"
+#include "quest.h"
 
 #include "../tinyxml/tinyxml.h"
 #include <string>
@@ -140,10 +141,17 @@ class WorldLoader
 	
 	/**
 	 * \fn bool loadNPCData(const char* pFilename)
-	 * \brief Liest die Daten zu NPC's aus einer XML Datei
+	 * \brief Liest die Daten zu NPCs aus einer XML Datei
 	 * \param pFilename Name der XML Datei
 	 */
 	bool loadNPCData(const char* pFilename);
+	
+	/**
+	 * \fn loadQuestsData(const char* pFilename)
+	 * \brief Liest die Daten zu Quests aus einer XML Datei
+	 * \param pFilename Name der XML Datei
+	 */
+	bool loadQuestsData(const char* pFilename);
 	
 	private:
 	
@@ -162,6 +170,21 @@ class WorldLoader
 	 * \param node XML Knoten
 	 */
 	void loadNPC( TiXmlNode* node);
+	
+	/**
+	 * \fn void loadQuests(TiXmlNode* node)
+	 * \brief Liest die Daten zu Quests aus einer XML Datei
+	 * \param node XML Knoten
+	 */
+	void loadQuests(TiXmlNode* node);
+	
+	/**
+	 * \fn void loadQuest(TiXmlNode* node, Quest* quest)
+	 * \brief Laedt die Daten zu einem Quest
+	 * \param node Knoten, der die Daten enthaelt
+	 * \param quest Klasse, in die die Daten geschrieben werden
+	 */
+	void loadQuest(TiXmlNode* node, Quest* quest);
 	
 	/**
 	 * \fn int generateWorldData(TiXmlElement* pElement, std::string element)

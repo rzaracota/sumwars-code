@@ -1,0 +1,76 @@
+<Quest name="Der Goblinvernichter" table_name="goblins">
+	
+	<Init>
+		goblins.nr =0;
+	</Init>
+	
+	<Description>
+		if (goblins.finished) then
+			return 'Quest abgeschlossen';
+		end
+		if (goblins.nr >=10) then
+			return 'Genug Goblins getoetet';
+		end
+		return 'Noch '..(10-goblins.nr)..' Goblins';
+	</Description>
+	
+	<NPC refname="peasant">
+		<Topic name="goblins" start_option="Goblins">
+			<Condition>
+				return (not goblins.finished)
+			</Condition>
+			<Effect>
+				if (goblins.started) then
+					if (goblins.nr >=10) then
+						speak('player', 'Ich habe sie verhauen',1000)
+						speak('peasant','du bist toll',1000);
+						speak('peasant','ich gebe die einen goblin Hammer',1000);
+						changeTopic('finish_gob_quest');
+					else
+						speak('peasant','Du muss noch einige killen...',1000);
+					end
+				else
+					speak('peasant','Es gibt hier dumme Goblins',1000);
+					speak('peasant','Wenn du 10 umbringst bekommst du was',1000);
+					speak('peasant','Interesse?',1000);
+					addQuestion('Quest annehmen?');
+					addAnswer('ja','start_gob_quest'); 
+					addAnswer('nein','end');
+				end
+			</Effect>
+		</Topic>
+		
+		<Topic name="start_gob_quest" >
+			<Effect>
+				speak('player', 'So gut wie erledigt',1000)
+				speak('peasant','Viel Erfolg',1000);
+				goblins.started = true;
+				goblins.nr =0;
+			</Effect>	
+		</Topic>
+		
+		<Topic name="finish_gob_quest" >
+			<Effect>
+				npc = getSpeaker('peasant');
+				dropItem("goblin_hmr", getObjectValue(npc,'position'),500);
+				goblins.finished = true;
+			</Effect>
+		</Topic>
+	</NPC>
+	
+	<Region name="region1">
+		<Event trigger ="unit_die">
+			<Condition>
+				if (not goblins.started or goblins.nr >= 10) then
+					return false;
+				end
+				return (getObjectValue(trigger.unit,'subtype') == "goblin");
+			</Condition>
+			<Effect>
+				goblins.nr = goblins.nr +1;
+				print('goblins '..goblins.nr);
+			</Effect>
+		</Event>
+	</Region>
+	
+</Quest>
