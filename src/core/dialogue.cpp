@@ -205,6 +205,7 @@ void Dialogue::changeTopic(std::string topic)
 	
 	if (st->checkCondition())
 	{
+		EventSystem::setRegion(m_region);
 		st->doEffect();
 	}
 	

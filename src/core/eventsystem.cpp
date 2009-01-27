@@ -50,6 +50,7 @@ void EventSystem::init()
 	lua_register(m_lua, "createDialogue", createDialogue);
 	lua_register(m_lua, "setTopicBase",setTopicBase );
 	lua_register(m_lua, "addSpeaker", addSpeaker);
+	lua_register(m_lua, "getSpeaker", getSpeaker);
 	lua_register(m_lua, "setRefName", setRefName);
 	
 	m_region =0;
@@ -63,7 +64,7 @@ void  EventSystem::cleanup()
 }
 
 
-void EventSystem::doString(char* instructions)
+void EventSystem::doString(const char* instructions)
 {
 	int err  = luaL_dostring(m_lua, instructions);
 	
@@ -165,7 +166,7 @@ int EventSystem::getObjectValue(lua_State *L)
 		}
 		else
 		{
-			ERRORMSG("getObjectValue: Object doesnt exist");
+			ERRORMSG("getObjectValue: Object doesnt exist %i",id);
 		}
 	}
 	else
@@ -978,6 +979,27 @@ int EventSystem::addSpeaker(lua_State *L)
 	}
 	
 	return 0;
+}
+
+int EventSystem::getSpeaker(lua_State *L)
+{
+	if (m_dialogue ==0)
+		return 0;
+		
+	int argc = lua_gettop(L);
+	if (argc>=1 && lua_isstring(L,1))
+	{
+		std::string refname = lua_tostring(L,1);
+		int id = m_dialogue->getSpeaker(refname);
+		lua_pushnumber(L,id);
+	}
+	else
+	{
+		ERRORMSG("Syntax: int getSpeaker(string refname)");
+		return 0;
+	}
+	
+	return 1;
 }
 
 

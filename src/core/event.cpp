@@ -89,7 +89,7 @@ void Event::setCondition(const char * cond)
 	if (err ==0)
 	{
 		m_condition = luaL_ref(EventSystem::getLuaState(),LUA_REGISTRYINDEX);
-		DEBUG("condition reference %i",m_condition);
+		DEBUG5("condition reference %i",m_condition);
 	}
 	else
 	{

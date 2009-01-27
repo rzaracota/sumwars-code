@@ -1254,7 +1254,7 @@ void Region::update(float time)
 			bool ret = EventSystem::executeEvent(jt->second);
 			
 			if (ret)
-				DEBUG("event on trigger: %s",type.c_str());
+				DEBUG5("event on trigger: %s",type.c_str());
 			
 			// einmalige Ereignisse loeschen, wenn erfolgreich ausgefuehrt
 			if (jt->second->getOnce() &&  ret)

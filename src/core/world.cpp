@@ -83,6 +83,11 @@ bool World::init()
 		
 		DEBUG("server");
 		m_network = new ServerNetwork(m_max_nr_players);
+		
+		Quest* qu = new Quest("Kill the goblins", "goblins");
+		qu->init();
+		addQuest("goblins",qu);
+
 	}
 	else
 	{
@@ -315,6 +320,12 @@ World::~World()
 	for (rit = m_regions.begin(); rit != m_regions.end(); rit++)
 	{
 		delete rit->second;
+	}
+	
+	std::map<std::string, Quest*>::iterator qit;
+	for (qit = m_quests.begin(); qit != m_quests.end(); ++qit)
+	{
+		delete qit->second;
 	}
 
 

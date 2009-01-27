@@ -38,11 +38,11 @@ class EventSystem
 		static void cleanup();
 		
 		/**
-		 * \fn static void doString(char* instructions)
+		 * \fn static void doString(const char* instructions)
 		 * \brief Fuehrt die Anweisungen aus, die in dem String stehen
 		 * \param instructions String mit Lua Befehlen
 		 */
-		static void doString(char* instructions);
+		static void doString(const char* instructions);
 		
 		/**
 		 * \fn static void reportErrors(lua_State *L, int status)
@@ -284,6 +284,13 @@ class EventSystem
 		 * \param L Lua Status
 		 */
 		static int addSpeaker(lua_State *L);
+		
+		/**
+		 * \fn static int getSpeaker(lua_State *L)
+		 * \brief Gibt zu einem Sprecher das Objekt aus
+		 * \param L Lua Status
+		 */
+		static int getSpeaker(lua_State *L);
 		
 		/**
 		 * \fn static int setTopicBase(lua_State *L)

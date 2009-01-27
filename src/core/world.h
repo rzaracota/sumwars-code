@@ -46,6 +46,7 @@
 #include "netevent.h"
 #include "worldloader.h"
 #include "templateloader.h"
+#include "quest.h"
 
 /**
  * \def WORLD_MAX_REGIONS
@@ -455,6 +456,21 @@ public:
 	 */
 	void addEvent(RegionName rname, TriggerType trigger, Event* event);
 	
+	/**
+	 * \fn void addQuest(std::string questname, Quest* quest)
+	 * \brief Fuegt Quest hinzu
+	 * \param questname Name des Quests
+	 * \param quest Quest
+	 */
+	void addQuest(std::string questname, Quest* quest)
+	{
+		m_quests.insert(std::make_pair(questname,quest));
+	}
+	
+	/**
+	 * \fn static World* getWorld()
+	 * \brief Gibt den Zeiger auf das World Singleton Objekt zurueck
+	 */
 	static World* getWorld()
 	{
 		return m_world;
@@ -541,6 +557,12 @@ private:
 	 * \brief Liste der Spieler in der Welt sortiert nach ID
 	 */
 	WorldObjectMap* m_players;
+	
+	/**
+	 * \var std::map<std::string, Quest*> m_quests
+	 * \brief Liste der Quests
+	 */
+	std::map<std::string, Quest*> m_quests;
 	
 
 	/**
