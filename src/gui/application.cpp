@@ -1,5 +1,6 @@
 #include "application.h"
 
+
 Application::Application()
 {
 	// Anwendung initialisieren
@@ -15,6 +16,8 @@ Application::Application()
 
 bool Application::init()
 {
+	Timer tm;
+	m_timer.start();
 	bool ret = true;
 
 	// Ogre Root erzeugen
@@ -65,7 +68,7 @@ bool Application::init()
 		return false;
 	}
 
-
+	tm.start();
 	//CEGUI initialisieren
 	ret = initCEGUI();
 	if (ret==false)
@@ -88,6 +91,8 @@ bool Application::init()
 		 ERRORMSG("cant create view");
 		return false;
 	}
+	
+	DEBUG("time to start %f",tm.getTime());
 	
 	// Ressourcen laden
 	ret = loadResources();
@@ -426,42 +431,6 @@ bool Application::initCEGUI()
 	}
 	
 	
-	// Bilder laden
-	
-	Ogre::FileInfoListPtr files;
-	Ogre::FileInfoList::iterator it;
-	std::string file;
-	
-	files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("itempictures","*.png");
-	for (it = files->begin(); it != files->end(); ++it)
-	{
-		
-		file = it->filename;
-		
-		CEGUI::ImagesetManager::getSingleton().createImagesetFromImageFile (file,file,(CEGUI::utf8*)"itempictures");
-	}
-	
-	// Imagesets laden
-	files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("itempictures","*.imageset");
-	for (it = files->begin(); it != files->end(); ++it)
-	{
-		
-		file = it->filename;
-		
-		CEGUI::ImagesetManager::getSingleton().createImageset(file);
-	}
-	
-	
-	ItemWindow::registerItemImage("short_sw","set:sword.png image:full_image");
-	ItemWindow::registerItemImage("long_sw","set:sword.png image:full_image");
-	ItemWindow::registerItemImage("long_bow","set:bow.png image:full_image");
-	ItemWindow::registerItemImage("wood_bow","set:bow.png image:full_image");
-	ItemWindow::registerItemImage("battle_axe","set:axe2H.png  image:full_image");
-	ItemWindow::registerItemImage("wood_sh","set:shield_dmg.png  image:full_image");
-	ItemWindow::registerItemImage("iron_sh","set:shield.png  image:full_image");
-	
-	
-
 	// Mauscursor setzen (evtl eher in View auslagern ? )
 	m_cegui_system->setDefaultMouseCursor((CEGUI::utf8*)"TaharezLook", (CEGUI::utf8*)"MouseArrow");
 
@@ -520,8 +489,11 @@ bool Application::createView()
 
 bool Application::loadResources()
 {
+	updateStartScreen(0.0);
 	Ogre::ResourceGroupManager::getSingleton().loadResourceGroup("General");
+	updateStartScreen(0.1);
 	Ogre::ResourceGroupManager::getSingleton().loadResourceGroup("Savegame");
+	updateStartScreen(0.2);
 	Ogre::ResourceGroupManager::getSingleton().loadResourceGroup("GUI");
 	
 	// Aktionen initialisieren
@@ -558,6 +530,8 @@ bool Application::loadResources()
 			DEBUG5("registering image %s for item %s",jt->m_image.c_str(), jt->m_subtype.c_str());
 			ItemWindow::registerItemImage(jt->m_subtype,jt->m_image);
 		}
+		
+		updateStartScreen(0.3);
 	}
 	
 	// Monster initialisieren
@@ -571,7 +545,8 @@ bool Application::loadResources()
 		
 		ObjectFactory::loadMonsterData(file);
 		Scene::loadMonsterData(file);
-		
+
+		updateStartScreen(0.4);
 	}
 	
 	// feste Objekte Initialisieren
@@ -585,6 +560,7 @@ bool Application::loadResources()
 		ObjectFactory::loadFixedObjectData(file);
 		Scene::loadFixedObjectData(file);
 		
+		updateStartScreen(0.5);
 	}
 	
 	// Objekt Templates
@@ -597,6 +573,7 @@ bool Application::loadResources()
 		
 		ObjectFactory::loadObjectTemplates(file);
 		
+		updateStartScreen(0.6);
 	}
 	
 	// Objekt Gruppen Templates
@@ -608,8 +585,41 @@ bool Application::loadResources()
 		file += it->filename;
 		ObjectFactory::loadObjectGroupTemplates(file);
 		
+		updateStartScreen(0.7);
 	}
 	
+	files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("itempictures","*.png");
+	for (it = files->begin(); it != files->end(); ++it)
+	{
+		
+		file = it->filename;
+		
+		CEGUI::ImagesetManager::getSingleton().createImagesetFromImageFile (file,file,(CEGUI::utf8*)"itempictures");
+		
+		updateStartScreen(0.8);
+	}
+	
+	// Imagesets laden
+	files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("itempictures","*.imageset");
+	for (it = files->begin(); it != files->end(); ++it)
+	{
+		
+		file = it->filename;
+		
+		CEGUI::ImagesetManager::getSingleton().createImageset(file);
+		
+		updateStartScreen(0.9);
+	}
+	
+	
+	ItemWindow::registerItemImage("short_sw","set:sword.png image:full_image");
+	ItemWindow::registerItemImage("long_sw","set:sword.png image:full_image");
+	ItemWindow::registerItemImage("long_bow","set:bow.png image:full_image");
+	ItemWindow::registerItemImage("wood_bow","set:bow.png image:full_image");
+	ItemWindow::registerItemImage("battle_axe","set:axe2H.png  image:full_image");
+	ItemWindow::registerItemImage("wood_sh","set:shield_dmg.png  image:full_image");
+	ItemWindow::registerItemImage("iron_sh","set:shield.png  image:full_image");
+	updateStartScreen(1.0);
 	
 	return true;
 }
@@ -619,4 +629,20 @@ void  Application::update()
 
 }
 
-
+void Application::updateStartScreen(float percent)
+{
+	if (m_timer.getTime() < 50)
+	{
+		return;
+	}
+	
+	DEBUG5("update time %f  perc: %f",m_timer.getTime(), percent);
+	m_main_window->update();
+	
+	m_cegui_system->injectTimePulse(m_timer.getTime()/1000);
+	
+	Ogre::WindowEventUtilities::messagePump();
+	
+	m_ogre_root->renderOneFrame();
+	m_timer.start();
+}

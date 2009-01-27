@@ -23,7 +23,7 @@
 #include <stdio.h>
 
 #include "mainwindow.h"
-
+#include "timer.h"
 
 /**
  * \class Application
@@ -122,6 +122,13 @@ class Application
 		 * \brief Aktualisierungen
 		 */
 		virtual void update();
+		
+		/**
+		 * \fn void updateStartScreen(float percent)
+		 * \brief aktualisiert den Startbildschirm
+		 * \param percent Prozentsatz, zu dem das Laden der Daten fortgeschritten ist
+		 */
+		void updateStartScreen(float percent);
 
 		// Member
 		/**
@@ -174,6 +181,12 @@ class Application
 		 * \brief Hauptfenster der Applikation
 		 */
 		MainWindow* m_main_window;
+		
+		/**
+		 * \var Timer m_timer
+		 * \brief Timer fuer verschiedene Verwendungszwecke
+		 */
+		Timer m_timer;
 };
 
 
