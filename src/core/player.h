@@ -392,6 +392,14 @@ public:
 	 * \brief Erhoeht das angegebene Attribut
 	 */
 	void increaseAttribute(CreatureBaseAttr::Attribute attr);
+	
+	/**
+	 * \fn bool checkRole(std::string role)
+	 * \brief Prueft ob der Spieler fuer eine bestimmte Rolle geeignet ist
+	 * \param role Rolle
+	 */
+	bool checkRole(std::string role);
+	
 
 	/**
 	 * \fn virtual Action::ActionEquip getActionEquip()

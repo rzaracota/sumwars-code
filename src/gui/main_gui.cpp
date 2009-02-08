@@ -36,15 +36,16 @@ int main (int argc, char *argv[]) {
 			server = false;
 		}
 	}
+	
+	/*
 	Document* doc = app->getDocument();
 	doc->setSaveFile(save);
-
 	
 	doc->setServer(server);
 	doc->setState(Document::START_GAME);
 	doc->getGUIState()->m_sheet= Document::GAME_SCREEN;
 	doc->getGUIState()->m_shown_windows = Document::NO_WINDOWS;
-	
+	*/
 	// laufen lassen
 
 	try

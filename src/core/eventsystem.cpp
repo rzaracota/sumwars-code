@@ -52,6 +52,7 @@ void EventSystem::init()
 	lua_register(m_lua, "addSpeaker", addSpeaker);
 	lua_register(m_lua, "getSpeaker", getSpeaker);
 	lua_register(m_lua, "setRefName", setRefName);
+	lua_register(m_lua, "getRolePlayers", getRolePlayers);
 	
 	m_region =0;
 	m_trigger =0;
@@ -1052,5 +1053,44 @@ int EventSystem::setRefName(lua_State *L)
 	}
 	
 	return 0;
+}
+
+int EventSystem::getRolePlayers(lua_State *L)
+{
+	int argc = lua_gettop(L);
+	if (argc>=1 && lua_isstring(L,1))
+	{
+		lua_newtable(L);
+		
+		std::set< int >& members = World::getWorld()->getPartyFrac(WorldObject::FRAC_PLAYER_PARTY)->getMembers();
+		std::set< int >::iterator it;
+		
+		WorldObject* wo;
+		Player* pl;
+		
+		std::string role = lua_tostring(L,1);
+		
+		int cnt =1;
+		for (it = members.begin(); it != members.end(); ++it)
+		{
+			wo = World::getWorld()->getPlayer(*it);
+			pl = dynamic_cast<Player*>(wo);
+			if (pl !=0 && pl->checkRole(role))
+			{
+				lua_pushnumber(L,(*it));
+				lua_rawseti (L, -2, cnt);
+				cnt++;
+			}
+		}
+		
+		
+	}
+	else
+	{
+		ERRORMSG("Syntax: getRolePlayers(string role)");
+		return 0;
+	}
+	
+	return 1;
 }
 

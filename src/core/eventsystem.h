@@ -329,6 +329,13 @@ class EventSystem
 		 **/
 		static void pushVector(lua_State *L, Vector v);
 		
+		/**
+		 * \fn static int getRolePlayers(lua_State *L)
+		 * \brief Gibt eine Liste von Spielerd aus, die eine bestimmte Rolle erfuellen
+		 * \param L Lua Status
+		 **/
+		static int getRolePlayers(lua_State *L);
+		
 	private:
 		/**
 		 * \var static lua_State * m_lua

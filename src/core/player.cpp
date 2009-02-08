@@ -1498,6 +1498,34 @@ void Player::performActionCritPart(Vector goal, WorldObject* goalobj)
 	}
 }
 
+bool Player::checkRole(std::string role)
+{
+	// all trifft immer zu
+	if (role == "all" || role == "")
+	{
+		return true;
+	}
+	
+	if (role == getTypeInfo()->m_subtype)
+	{
+		return true;
+	}
+	
+	bool leader = getParty()->getLeader() == getId();
+	
+	if (leader && role =="leader")
+	{
+		return true;
+	}
+	
+	if (!leader && role == "non-leader")
+	{
+		return true;
+	}
+	
+	return false;
+}
+
 void Player::sendGameData()
 {
 	/*
