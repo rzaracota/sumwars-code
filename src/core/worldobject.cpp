@@ -146,6 +146,19 @@ int WorldObject::getValue(std::string valname)
 			EventSystem::pushVector(EventSystem::getLuaState(),getShape()->m_center);
 			return 1;
 		}
+		else if (valname == "type")
+		{
+			if (m_type_info.m_type == TypeInfo::TYPE_MONSTER)
+				lua_pushstring(EventSystem::getLuaState(),"monster");
+			
+			if (m_type_info.m_type == TypeInfo::TYPE_PLAYER)
+				lua_pushstring(EventSystem::getLuaState(),"player");
+			
+			if (m_type_info.m_type == TypeInfo::TYPE_FIXED_OBJECT)
+				lua_pushstring(EventSystem::getLuaState(),"fixed_object");
+			
+			return 1;
+		}
 
 		return 0;
 }
