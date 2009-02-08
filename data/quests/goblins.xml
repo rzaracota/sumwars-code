@@ -52,7 +52,7 @@
 		<Topic name="finish_gob_quest" >
 			<Effect>
 				npc = getSpeaker('peasant');
-				dropItem("goblin_hmr", getObjectValue(npc,'position'),500);
+				dropItem("goblin_hmr", getPosition(npc),500);
 				goblins.finished = true;
 			</Effect>
 		</Topic>
@@ -64,7 +64,7 @@
 				if (not goblins.started or goblins.nr >= 10) then
 					return false;
 				end
-				return (getObjectValue(trigger.unit,'subtype') == "goblin");
+				return (getType(trigger.unit) == "goblin");
 			</Condition>
 			<Effect>
 				goblins.nr = goblins.nr +1;

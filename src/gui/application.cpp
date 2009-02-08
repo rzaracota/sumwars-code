@@ -326,12 +326,16 @@ bool Application::setupResources()
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../resources/gui/schemes", "FileSystem", "GUI");
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../resources/itempictures", "FileSystem", "itempictures");
 	
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../data/world", "FileSystem", "world");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../data/npc", "FileSystem", "npc");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../data/quests", "FileSystem", "quests");
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../save", "FileSystem", "Savegame");
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../data/items", "FileSystem", "items");
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../data/monsters", "FileSystem", "monsters");
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../data/objects", "FileSystem", "objects");
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../data/obj_templates", "FileSystem", "obj_templates");
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../data/obj_group_templ", "FileSystem", "obj_group_templ");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../data/lua", "FileSystem", "lua");
 
 #if defined(WIN32)
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("c:\\windows\\fonts", "FileSystem", "GUI");

@@ -45,6 +45,13 @@ class EventSystem
 		static void doString(const char* instructions);
 		
 		/**
+		 * \fn static void doFile(const char* file)
+		 * \brief Fuehrt die Anweisungen aus, die in der Datei
+		 * \param file Datei mit Lua Befehlen
+		 */
+		static void doFile(const char* file);
+		
+		/**
 		 * \fn static void reportErrors(lua_State *L, int status)
 		 * \brief Funktion um Fehler bei der Ausfuehrung von Skripten zu melden
 		 * \param L Zustandsobjekt von Lua

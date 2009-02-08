@@ -74,6 +74,16 @@ void EventSystem::doString(const char* instructions)
 	}
 }
 
+void EventSystem::doFile(const char* file)
+{
+	int err  = luaL_dofile(m_lua, file);
+	
+	if (err!=0)
+	{
+		reportErrors(m_lua, err);
+	}
+}
+
 void EventSystem::reportErrors(lua_State *L, int status)
 {
 	if ( status!=0 )
@@ -457,7 +467,7 @@ int EventSystem::addUnitCommand(lua_State *L)
 		if (m_region ==0)
 			return 0;
 		
-		int id = lua_tonumber(L,1);
+		int id = int (lua_tonumber(L,1));
 		std::string actstr = lua_tostring(L,2);
 		
 		WorldObject* wo = m_region->getObject(id);
@@ -616,7 +626,7 @@ int EventSystem::dropItem(lua_State *L)
 		
 		if (m_region!=0)
 		{
-			m_region->dropItem(subtype, pos, magic_power);
+			m_region->dropItem(subtype, pos, int (magic_power));
 		}
 	}
 	else
@@ -963,7 +973,7 @@ int EventSystem::addSpeaker(lua_State *L)
 	int argc = lua_gettop(L);
 	if (argc>=1 && lua_isnumber(L,1))
 	{
-		int speaker = lua_tonumber(L, 1);
+		int speaker = int (lua_tonumber(L, 1));
 		
 		string refname ="";
 		if (argc>=1 && lua_isstring(L,1))
@@ -1027,7 +1037,7 @@ int EventSystem::setRefName(lua_State *L)
 	int argc = lua_gettop(L);
 	if (argc>=2 && lua_isnumber(L,1) && lua_isstring(L,2))
 	{
-		int id = lua_tonumber(L,1);
+		int id = int (lua_tonumber(L,1));
 		std::string refname = lua_tostring(L,2);
 		
 		WorldObject* wo = m_region->getObject(id);

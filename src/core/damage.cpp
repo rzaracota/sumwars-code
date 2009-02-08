@@ -424,56 +424,56 @@ bool Damage::setValue(std::string valname)
 	{
 		float f;
 		f = lua_tonumber(EventSystem::getLuaState(),3);
-		m_status_mod_power[BLIND] = f;
+		m_status_mod_power[BLIND] = short(f);
 		return true;
 	}
 	else if (valname =="poison")
 	{
 		float f;
 		f = lua_tonumber(EventSystem::getLuaState(),3);
-		m_status_mod_power[POISONED] = f;
+		m_status_mod_power[POISONED] = short(f);
 		return true;
 	}
 	else if (valname =="berserk")
 	{
 		float f;
 		f = lua_tonumber(EventSystem::getLuaState(),3);
-		m_status_mod_power[BERSERK] = f;
+		m_status_mod_power[BERSERK] = short(f);
 		return true;
 	}
 	else if (valname =="confuse")
 	{
 		float f;
 		f = lua_tonumber(EventSystem::getLuaState(),3);
-		m_status_mod_power[CONFUSED] = f;
+		m_status_mod_power[CONFUSED] = short(f);
 		return true;
 	}
 	else if (valname =="mute")
 	{
 		float f;
 		f = lua_tonumber(EventSystem::getLuaState(),3);
-		m_status_mod_power[MUTE] = f;
+		m_status_mod_power[MUTE] = short(f);
 		return true;
 	}
 	else if (valname =="paralyze")
 	{
 		float f;
 		f = lua_tonumber(EventSystem::getLuaState(),3);
-		m_status_mod_power[PARALYZED] = f;
+		m_status_mod_power[PARALYZED] = short(f);
 		return true;
 	}
 	else if (valname =="freeze")
 	{
 		float f;
 		f = lua_tonumber(EventSystem::getLuaState(),3);
-		m_status_mod_power[FROZEN] = f;
+		m_status_mod_power[FROZEN] = short(f);
 		return true;
 	}
 	else if (valname =="burning")
 	{
 		float f;
 		f = lua_tonumber(EventSystem::getLuaState(),3);
-		m_status_mod_power[BURNING] = f;
+		m_status_mod_power[BURNING] = short(f);
 		return true;
 	}
 	else if (valname =="blockable")

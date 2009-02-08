@@ -24,6 +24,8 @@
 #include "eventsystem.h"
 #include "dialogue.h"
 
+#include "OgreResourceGroupManager.h"
+
 World* World::m_world=0;
 
 /**
@@ -63,6 +65,10 @@ World* World::m_world=0;
 
 bool World::init()
 {
+	Ogre::FileInfoListPtr files;
+	Ogre::FileInfoList::iterator it;
+	std::string file;
+	
 	EventSystem::init();
 	Dialogue::init();
 
@@ -70,25 +76,51 @@ bool World::init()
 	{
 		WorldLoader worldloader;
 		std::list<RegionData*> region_list;
-		worldloader.loadRegionData("../data/world/world.xml", region_list);
-
-		std::list<RegionData*>::iterator it;
-		for (it = region_list.begin(); it != region_list.end(); it++)
+		files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("world","*.xml");
+		
+		for (it = files->begin(); it != files->end(); ++it)
 		{
-			registerRegionData(*it, (*it)->m_id);
+			file = it->archive->getName();
+			file += "/";
+			file += it->filename;
+			worldloader.loadRegionData(file.c_str(), region_list);
+		}
+
+		std::list<RegionData*>::iterator rt;
+		for (rt = region_list.begin(); rt != region_list.end();rt++)
+		{
+			registerRegionData(*rt, (*rt)->m_id);
 		}
 		
-		worldloader.loadNPCData("../data/npc/npc.xml");
-		worldloader.loadQuestsData("../data/quests/goblins.xml");
+		files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("npc","*.xml");
+		for (it = files->begin(); it != files->end(); ++it)
+		{
+			file = it->archive->getName();
+			file += "/";
+			file += it->filename;
+			worldloader.loadNPCData(file.c_str());
+		}
+		
+		files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("quests","*.xml");
+		for (it = files->begin(); it != files->end(); ++it)
+		{
+			file = it->archive->getName();
+			file += "/";
+			file += it->filename;
+			worldloader.loadQuestsData(file.c_str());
+		}
+		
+		files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("lua","*.lua");
+		for (it = files->begin(); it != files->end(); ++it)
+		{
+			file = it->archive->getName();
+			file += "/";
+			file += it->filename;
+			EventSystem::doFile(file.c_str());
+		}
 		
 		DEBUG("server");
 		m_network = new ServerNetwork(m_max_nr_players);
-		
-		/*
-		Quest* qu = new Quest("Kill the goblins", "goblins");
-		qu->init();
-		addQuest("goblins",qu);
-		*/
 		
 		
 
