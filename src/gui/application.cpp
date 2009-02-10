@@ -23,24 +23,24 @@ bool Application::init()
 	// Ogre Root erzeugen
 	// pluginfile: plugins.cfg
 	// configfile: keines
-	#ifdef WIN32
-        #ifdef _DEBUG
-            m_ogre_root = new Ogre::Root("plugins_win_d.cfg", "ogre.cfg");
-        #else
-            m_ogre_root = new Ogre::Root("plugins_win.cfg", "ogre.cfg");
-        #endif
-    #else
-        m_ogre_root = new Ogre::Root("plugins.cfg", "ogre.cfg");
-    #endif
+#ifdef WIN32
+#ifdef _DEBUG
+	m_ogre_root = new Ogre::Root("plugins_win_d.cfg", "ogre.cfg");
+#else
+	m_ogre_root = new Ogre::Root("plugins_win.cfg", "ogre.cfg");
+#endif
+#else
+	m_ogre_root = new Ogre::Root("plugins.cfg", "ogre.cfg");
+#endif
 
 	if (m_ogre_root ==0)
-			return false;
+		return false;
 
 	// Ogre configurieren
 	ret = configureOgre();
 	if (ret==false)
 	{
-		 ERRORMSG("Configuring Ogre failed");
+		ERRORMSG("Configuring Ogre failed");
 		return false;
 	}
 
@@ -48,7 +48,7 @@ bool Application::init()
 	ret = initOgre();
 	if (ret==false)
 	{
-		 ERRORMSG("Initialisation of Ogre failed");
+		ERRORMSG("Initialisation of Ogre failed");
 		return false;
 	}
 
@@ -56,7 +56,7 @@ bool Application::init()
 	ret = setupResources();
 	if (ret==false)
 	{
-		 ERRORMSG("Setting up Resources failed");
+		ERRORMSG("Setting up Resources failed");
 		return false;
 	}
 
@@ -73,7 +73,7 @@ bool Application::init()
 	ret = initCEGUI();
 	if (ret==false)
 	{
-		 ERRORMSG("Initialisation of CEGUI failed");
+		ERRORMSG("Initialisation of CEGUI failed");
 		return false;
 	}
 
@@ -81,14 +81,14 @@ bool Application::init()
 	ret = createDocument();
 	if (ret==false)
 	{
-		 ERRORMSG("cant create document");
+		ERRORMSG("cant create document");
 		return false;
 	}
 	// View anlegen
 	ret = createView();
 	if (ret==false)
 	{
-		 ERRORMSG("cant create view");
+		ERRORMSG("cant create view");
 		return false;
 	}
 	
@@ -133,7 +133,7 @@ void Application::run()
 	float time[7]={0,0,0,0,0,0,0},t;
 	float frametime;
 	int count=0;
-    Ogre::Timer timer2;
+	Ogre::Timer timer2;
 
 	int nr = 1000;
 	timer.reset();
@@ -161,11 +161,11 @@ void Application::run()
 			
 			
 			for (int i=0; i<7; i++)
-				time[i]=0;
+			time[i]=0;
 			*/
 		}
 
-	  	timer2.reset();
+		timer2.reset();
 
 		update();
 
@@ -173,11 +173,11 @@ void Application::run()
 		time[1] += t;
 		if (t > 20)
 		{
-        	DEBUG("update time was %f",t);
+			DEBUG("update time was %f",t);
 		}
 
 
-		 timer2.reset();
+		timer2.reset();
 		// run the message pump
 		Ogre::WindowEventUtilities::messagePump();
 		
@@ -247,7 +247,7 @@ void Application::run()
 		time[6] += t;
 		if (t > 200)
 		{
-	         DEBUG4("ogre frame time was %f",t);
+			DEBUG4("ogre frame time was %f",t);
 		}
 
 	}
@@ -282,7 +282,7 @@ bool Application::configureOgre()
 	renderSystems = m_ogre_root->getAvailableRenderers();
 	if (renderSystems->empty())
 	{
-		 ERRORMSG("no rendering system available");
+		ERRORMSG("no rendering system available");
 		return false;
 	}
 	r_it = renderSystems->begin();
@@ -366,13 +366,13 @@ bool Application::setupResources()
 bool Application::initGettext()
 {
 	DEBUG("initializing internationalisation");
-	#ifndef WIN32
+#ifndef WIN32
 	bool result = false;
 	char * language;
 	language = getenv("LANG");
 
 	if ((language[0] == 'd' && language[1] == 'e') ||
-		(language[0] == 'e' && language[1] == 'n'))
+			(language[0] == 'e' && language[1] == 'n'))
 	{
 		result = setlocale (LC_MESSAGES, "");
 		//result = setlocale (LC_MESSAGES, "de_DE");
@@ -392,7 +392,7 @@ bool Application::initGettext()
 	bindtextdomain ("sumwars","../translation/");
 	textdomain ("sumwars");
 	return result;
-	#endif
+#endif
 	return true;
 }
 
@@ -400,12 +400,12 @@ bool Application::initCEGUI()
 {
 	DEBUG("init CEGUI\n");
 	m_ogre_cegui_renderer = new CEGUI::OgreCEGUIRenderer(
-	m_window,							// Fenster in das CEGUi rendert
-	Ogre::RENDER_QUEUE_OVERLAY,	// Render Queue von CEGUI
-	false,								// CEGUI in der Render Queue zuerst bearbeitet
-	3000,									// max quads for the UI
- 	m_scene_manager						// verwendeter Szenemanager
-	);
+			m_window,							// Fenster in das CEGUi rendert
+   Ogre::RENDER_QUEUE_OVERLAY,	// Render Queue von CEGUI
+   false,								// CEGUI in der Render Queue zuerst bearbeitet
+   3000,									// max quads for the UI
+   m_scene_manager						// verwendeter Szenemanager
+														);
 
 	// Groesse festlegen
 	m_ogre_cegui_renderer->setDisplaySize(CEGUI::Size((int) m_window->getWidth(),(int) m_window->getHeight()));

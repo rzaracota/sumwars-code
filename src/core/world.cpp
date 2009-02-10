@@ -56,9 +56,9 @@ World* World::m_world=0;
 		m_parties[i].init(i);
 	}
 
-	 m_local_player =0;
+	m_local_player =0;
 
-	 m_events = new NetEventList;
+	m_events = new NetEventList;
 
 }
 
@@ -380,7 +380,7 @@ Region* World::getRegion(int rid)
 	{
 		return it->second;
 	}
- 	return 0;
+	return 0;
 }
 
 int World::getRegionId(std::string name)
@@ -1689,7 +1689,7 @@ bool World::processNetEvent(Region* region,CharConv* cv)
 	// Spieler werden aus der Spielerliste gesucht
 	// andere Objekte aus der Region
 	if (event.m_type ==  NetEvent::OBJECT_STAT_CHANGED ||
-		  event.m_type ==  NetEvent::OBJECT_DESTROYED)
+		   event.m_type ==  NetEvent::OBJECT_DESTROYED)
 	{
 		if (m_players->count(event.m_id) ==1)
 		{
@@ -2170,7 +2170,7 @@ bool World::calcBlockmat(PathfindInfo * pathinfo)
 
 				// solange Richtung weiterdrehen bis ein Punkt im Suchraum gefunden wird
 				while ((d<=10) && (s2.m_center.m_x<c1.m_x || s2.m_center.m_y<c1.m_y ||
-				s2.m_center.m_x>c2.m_x || s2.m_center.m_y>c2.m_y))
+									s2.m_center.m_x>c2.m_x || s2.m_center.m_y>c2.m_y))
 				{
 					d++;
 					s2.m_center.m_x = x+dir[d][0];
@@ -2192,7 +2192,7 @@ bool World::calcBlockmat(PathfindInfo * pathinfo)
 					s2.m_center.m_x = x+dir[d][0];
 					s2.m_center.m_y = y+dir[d][1];
 					if (s2.m_center.m_x<c1.m_x || s2.m_center.m_y<c1.m_y ||
-					s2.m_center.m_x> c2.m_x|| s2.m_center.m_y>c2.m_y || !wos->intersects(s2))
+									   s2.m_center.m_x> c2.m_x|| s2.m_center.m_y>c2.m_y || !wos->intersects(s2))
 					{
 						d++;
 						s2.m_center.m_x = x+dir[d][0];
@@ -2227,22 +2227,22 @@ bool World::calcBlockmat(PathfindInfo * pathinfo)
 
 					for (int j=pathinfo->m_dim-1;j>=0;j--)
 					{
-						std::cout << j%10 << j%10;
-						for (int i=0;i<pathinfo->m_dim;i++)
-						{
+					std::cout << j%10 << j%10;
+					for (int i=0;i<pathinfo->m_dim;i++)
+					{
 
-							if (*(pathinfo->m_block->ind(i,j))!=0)
-							{
-								if (*(pathinfo->m_block->ind(i,j))=='X')
-									std::cout << *(pathinfo->m_block->ind(i,j)) << *(pathinfo->m_block->ind(i,j));
-								else
-									std::cout <<(char) ( *(pathinfo->m_block->ind(i,j))+'0') << (char) (*(pathinfo->m_block->ind(i,j))+'0');
-							}
-							else
-								std::cout << "  ";
-						}
-						std::cout << "\n";
-					}
+					if (*(pathinfo->m_block->ind(i,j))!=0)
+					{
+					if (*(pathinfo->m_block->ind(i,j))=='X')
+					std::cout << *(pathinfo->m_block->ind(i,j)) << *(pathinfo->m_block->ind(i,j));
+					else
+					std::cout <<(char) ( *(pathinfo->m_block->ind(i,j))+'0') << (char) (*(pathinfo->m_block->ind(i,j))+'0');
+				}
+					else
+					std::cout << "  ";
+				}
+					std::cout << "\n";
+				}
 					std::cout << "---------------------\n";
 
 					char c;
@@ -2258,22 +2258,22 @@ bool World::calcBlockmat(PathfindInfo * pathinfo)
 
 	for (int j=pathinfo->m_dim-1;j>=0;j--)
 	{
-		std::cout << j%10 << j%10;
-		for (int i=0;i<pathinfo->m_dim;i++)
-		{
+	std::cout << j%10 << j%10;
+	for (int i=0;i<pathinfo->m_dim;i++)
+	{
 
-			if (*(pathinfo->m_block->ind(i,j))!=0)
-			{
-				if (*(pathinfo->m_block->ind(i,j))=='X')
-					std::cout << *(pathinfo->m_block->ind(i,j)) << *(pathinfo->m_block->ind(i,j));
-				else
-					std::cout <<(char) ( *(pathinfo->m_block->ind(i,j))+'0') << (char) (*(pathinfo->m_block->ind(i,j))+'0');
-			}
-			else
-				std::cout << "  ";
-		}
-		std::cout << "\n";
-	}
+	if (*(pathinfo->m_block->ind(i,j))!=0)
+	{
+	if (*(pathinfo->m_block->ind(i,j))=='X')
+	std::cout << *(pathinfo->m_block->ind(i,j)) << *(pathinfo->m_block->ind(i,j));
+	else
+	std::cout <<(char) ( *(pathinfo->m_block->ind(i,j))+'0') << (char) (*(pathinfo->m_block->ind(i,j))+'0');
+}
+	else
+	std::cout << "  ";
+}
+	std::cout << "\n";
+}
 	std::cout << "---------------------\n";
 	*/
 

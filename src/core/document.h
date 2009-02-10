@@ -30,6 +30,8 @@
 #ifndef DOCUMENT_H
 #define DOCUMENT_H
 
+#include "Ogre.h"
+
 #include <string>
 #include <list>
 #include <map>
@@ -53,6 +55,8 @@
 #include <pthread.h>
 
 #include "gettext.h"
+
+
 
 /**
  * \class Document

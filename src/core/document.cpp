@@ -76,7 +76,9 @@ void Document::startGame(bool server)
 
 	if (server)
 	{
-
+		
+		
+		
 	}
 	else
 	{
