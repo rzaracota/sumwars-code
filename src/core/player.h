@@ -136,13 +136,14 @@ public:
 	//Fields
 	//Constructors
 	/**
-	 * \fn Player(int id)
+	 * \fn Player(int id, TypeInfo::ObjectSubtype subtype)
 	 * \brief Konstruktor
 	 * \param id Objekt-ID
+	 * \param subtype Spielerklasse
 	 *
 	 * Legt ein neues Player Objekt an.
 	 */
-	Player( int id);
+	Player( int id, TypeInfo::ObjectSubtype subtype);
 	
 	
 	

@@ -70,8 +70,9 @@ void PlayerCamera::update(float time)
 
 //Constructors/Destructors
 
-Player::Player( int id) : Creature( id)
+Player::Player( int id, TypeInfo::ObjectSubtype subtype) : Creature( id)
 {
+	getTypeInfo()->m_subtype = subtype;
 	bool tmp=Player::init();
 	if (!tmp)
 	{
@@ -99,6 +100,9 @@ bool Player::init()
 {
 	DEBUG5("Player::init");
 	//eigene Initialisierung
+	CreatureBaseAttr* bas = getBaseAttr();
+	CreatureDynAttr* dyn = getDynAttr();
+	
 	m_network_slot=-1;
 	m_package_number =0;
 	setTradeId(0);
@@ -110,9 +114,9 @@ bool Player::init()
 	m_layer = (LAYER_BASE | LAYER_AIR);
 	getShape()->m_angle =0;
 
-	getBaseAttr()->m_step_length=1.5;
-	getBaseAttr()->m_attack_range=0.5;
-	getBaseAttr()->m_level=1;
+	bas->m_step_length=1.5;
+	bas->m_attack_range=0.5;
+	bas->m_level=1;
 
 	m_attribute_points=0;
 	m_skill_points=0;
@@ -126,7 +130,182 @@ bool Player::init()
 	m_save_timer= 3000;
 
 	m_candidate_party = -1;
+	
 
+	// Attribute auf Basiswerte setzen
+	int i;
+	for (i=1;i<6;i++)
+		bas->m_abilities[i]=0;
+	
+	dyn->m_experience=0;
+	
+	bas->m_max_experience = 100;
+	bas->m_level =1;
+	bas->m_block=0;
+	bas->m_resistances[0] =0;
+	bas->m_resistances[1] =0;
+	bas->m_resistances[2] =0;
+	bas->m_resistances[3] =0;
+	bas->m_resistances_cap[0] =50;
+	bas->m_resistances_cap[1] =50;
+	bas->m_resistances_cap[2] =50;
+	bas->m_resistances_cap[3] =50;
+	bas->m_special_flags=0;
+	bas->m_abilities[0] = 0xffffff;
+	
+	Item* si;
+	if (getTypeInfo()->m_subtype == "warrior")
+	{
+		dyn->m_health = 200;
+		bas->m_max_health = 200;
+		bas->m_armor = 20;
+		bas->m_attack = 40;
+		bas->m_strength = 50;
+		bas->m_dexterity = 20;
+		bas->m_magic_power = 10;
+		bas->m_willpower = 25;
+		bas->m_walk_speed = 3000;
+		bas->m_attack_speed=2000;
+		
+		m_base_action = Action::ATTACK;
+		
+		
+		bas->m_attack_range =20;
+		
+		m_base_action = Action::ATTACK;
+		m_left_action = Action::ATTACK;
+		m_right_action = Action::ATTACK;
+
+		// Debugging
+		m_look = "warrior_m";
+		m_name.assign("Boromir");
+		bas->m_abilities[1] = 0xffffff;
+		
+		Equipement* equ = getEquipement();
+		si = ItemFactory::createItem(Item::WEAPON,"short_sw");
+		insertItem(si);
+
+		si = ItemFactory::createItem(Item::ARMOR,"leath_arm");
+		equ->swapItem(si,Equipement::ARMOR);
+
+		si = ItemFactory::createItem(Item::ARMOR,"heavy_arm");
+		insertItem(si);
+
+		si = ItemFactory::createItem(Item::HELMET,"steel_hlm");
+		equ->swapItem(si,Equipement::HELMET);
+
+		si = ItemFactory::createItem(Item::GLOVES,"leath_gl");
+		equ->swapItem(si,Equipement::GLOVES);
+
+		si = ItemFactory::createItem(Item::SHIELD,"wood_sh");
+		equ->swapItem(si,Equipement::SHIELD);
+
+		si = ItemFactory::createItem(Item::WEAPON,"horse_sw");
+		insertItem(si);
+
+		si = ItemFactory::createItem(Item::WEAPON,"battle_axe");
+	}
+	else if (getTypeInfo()->m_subtype == "archer")
+	{
+		dyn->m_health = 150;
+		bas->m_max_health = 150;
+		bas->m_armor = 15;
+		bas->m_attack = 30;
+		bas->m_strength = 25;
+		bas->m_dexterity = 45;
+		bas->m_magic_power = 15;
+		bas->m_willpower = 15;
+		bas->m_walk_speed = 3000;
+		bas->m_attack_speed=1000;
+		
+		m_base_action = Action::RANGE_ATTACK;
+		
+		m_look = "archer_f";
+		
+		bas->m_attack_range =20;
+		
+		m_base_action = Action::RANGE_ATTACK;
+		m_left_action = Action::RANGE_ATTACK;
+		m_right_action = Action::RANGE_ATTACK;
+
+		
+		// Debugging
+		m_name.assign("Legolas");
+		bas->m_abilities[2] = 0xffffff;
+
+		
+		si = ItemFactory::createItem(Item::WEAPON,"wood_bow");
+		insertItem(si);
+		
+	}
+	else if (getTypeInfo()->m_subtype == "mage")
+	{
+		dyn->m_health = 100;
+		bas->m_max_health = 100;
+		bas->m_armor = 15;
+		bas->m_attack = 10;
+		bas->m_strength = 15;
+		bas->m_dexterity = 15;
+		bas->m_magic_power = 45;
+		bas->m_willpower = 25;
+		bas->m_attack_range =20;
+
+		m_name.assign("Gandalf");
+		bas->m_walk_speed = 3000;
+		bas->m_attack_speed=1500;
+		m_base_action = Action::MAGIC_ATTACK;
+		m_base_action = Action::MAGIC_ATTACK;
+		m_left_action = Action::MAGIC_ATTACK;
+		m_right_action = Action::MAGIC_ATTACK;
+		m_look = "mage_m";
+	
+		
+	
+		si = ItemFactory::createItem(Item::WEAPON,"ice_wand");
+		insertItem(si);
+		si = ItemFactory::createItem(Item::WEAPON,"ice_staff");
+		insertItem(si);
+
+		// Debugging
+		bas->m_abilities[3] = 0xffffff;
+	}
+	else if (getTypeInfo()->m_subtype == "priest")
+	{
+		dyn->m_health = 200;
+		bas->m_max_experience = 100;
+		bas->m_level =1;
+		bas->m_max_health = 200;
+		bas->m_armor = 20;
+		bas->m_attack = 10;
+		bas->m_strength = 25;
+		bas->m_dexterity = 15;
+		bas->m_magic_power = 15;
+		bas->m_willpower = 45;
+		bas->m_walk_speed = 3000;
+		bas->m_attack_speed=2000;
+		bas->m_attack_range =1;
+
+		m_base_action = Action::HOLY_ATTACK;
+		m_left_action = Action::HOLY_ATTACK;
+		m_right_action = Action::HOLY_ATTACK;
+
+		m_look = "priest_f";
+
+		// Debugging
+		bas->m_abilities[4] = 0xffffff;
+		m_name.assign("Elrond");
+	}
+
+	
+	si = ItemFactory::createItem(Item::POTION,"heal_1");
+	insertItem(si);
+
+	si = ItemFactory::createItem(Item::POTION,"heal_1");
+	insertItem(si);
+	
+	// Modifizierte Basisattribute erzeugen
+	calcBaseAttrMod();
+	
 	return true;
 }
 

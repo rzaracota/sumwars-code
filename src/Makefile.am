@@ -46,11 +46,7 @@ sumwars_SOURCES = core/trade.cpp \
 	core/pathfind.cpp \
 	core/fixedobject.cpp \
 	core/player.cpp \
-	core/warrior.cpp \
 	core/monster.cpp \
-	core/mage.cpp \
-	core/archer.cpp \
-	core/priest.cpp \
 	core/itemfactory.cpp \
 	core/itemloader.cpp \
 	core/damage.cpp \

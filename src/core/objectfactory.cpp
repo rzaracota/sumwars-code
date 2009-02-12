@@ -100,6 +100,8 @@ WorldObject* ObjectFactory::createObject(WorldObject::TypeInfo::ObjectType type,
 
 	if (type ==WorldObject::TypeInfo::TYPE_PLAYER)
 	{
+		ret = new Player(id,subtype);
+		/*
 		if (subtype == "warrior")
 		{
 			ret = new Warrior(  id );
@@ -116,6 +118,7 @@ WorldObject* ObjectFactory::createObject(WorldObject::TypeInfo::ObjectType type,
 		{
 			ret = new Priest( id );
 		}
+		*/
 	}
 	else if (type ==WorldObject::TypeInfo::TYPE_MONSTER)
 	{
