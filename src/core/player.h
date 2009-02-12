@@ -136,14 +136,14 @@ public:
 	//Fields
 	//Constructors
 	/**
-	 * \fn Player(int id, TypeInfo::ObjectSubtype subtype)
+	 * \fn Player(int id, TypeInfo::ObjectSubtype subtype = "")
 	 * \brief Konstruktor
 	 * \param id Objekt-ID
 	 * \param subtype Spielerklasse
 	 *
 	 * Legt ein neues Player Objekt an.
 	 */
-	Player( int id, TypeInfo::ObjectSubtype subtype);
+	Player( int id, TypeInfo::ObjectSubtype subtype = "");
 	
 	
 	
@@ -300,18 +300,6 @@ public:
 	 */
 	void abortAction();
 	
-	
-	/**
-	 * \fn void sendSavegame()
-	 * \brief Sendet ein Savegame an den Client
-	 */
-	void sendSavegame();
-	
-	/**
-	 * \fn void sendGameData()
-	 * \brief Sendet ein Datenpaket an den Client
-	 */
-	void sendGameData();
 	
 	/**
 	 * \fn void sendDetailedItem(short pos)

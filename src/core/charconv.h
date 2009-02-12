@@ -7,6 +7,7 @@
 #include <algorithm>
 #include <string>
 #include <cstring>
+#include <iostream>
 
 /**
  * \class CharConv
@@ -20,12 +21,15 @@ class CharConv
 	 * \fn CharConv()
 	 * \brief Konstruktor
 	 */
-	CharConv()
-	: m_bitstream()
+	CharConv();
+	
+	/**
+	 * \fn CharConv(std::iostream* stream)
+	 * \param stream Datenstrom, in den Daten geschrieben werden
+	 */
+	CharConv(std::iostream* stream)
 	{
-		m_timestamp = RakNet::GetTime();
-		m_bitstream.Write((char) ID_TIMESTAMP);
-		m_bitstream.Write(m_timestamp);
+		m_stream = stream;
 	}
 	
 	/**
@@ -34,32 +38,15 @@ class CharConv
 	 * \param data zugrunde liegende Daten
 	 * \param size Laenge der Zeichenkette data
 	 */
-	CharConv(unsigned char* data, unsigned int size)
-	: m_bitstream(data, size, false)
-	{
-		m_timestamp = RakNet::GetTime();
-	}
+	CharConv(unsigned char* data, unsigned int size);
 	
 	/**
 	 * \fn CharConv(Packet* packet)
 	 * \brief erstellt ein neues Objekt aus einem ueber das Netzwerk erhaltenen Datenpaket
 	 * \param packet Datenpaket
 	 */
-	CharConv(Packet* packet)
-	: m_bitstream(packet->data, packet->length, false)
-	{
-		if (packet->data[0] == ID_TIMESTAMP)
-		{
-			char tmp;
-			m_bitstream.Read(tmp);
-			m_bitstream.Read(m_timestamp);
-		}
-		else
-		{
-			m_timestamp = RakNet::GetTime();
-		}
-		
-	}
+	CharConv(Packet* packet);
+	
 	
 	/**
 	 * \fn void backToStart()
@@ -85,10 +72,8 @@ class CharConv
 	 * \param data zu schreibende Daten
 	 * \param size Laenge der zu schreibenden Daten
 	 */
-	void toBuffer(const char* data, unsigned int size)
-	{
-		m_bitstream.Write(data,size);
-	}
+	void toBuffer(const char* data, unsigned int size);
+	
 	
 	/**
 	 * \fn void fromBuffer(char* data, unsigned int size)
@@ -96,10 +81,7 @@ class CharConv
 	 * \param data  Ausgabeparameter fuer die Daten
 	 * \param size Anzahl der Zeichen die gelesen werden
 	 */
-	void fromBuffer(char* data, unsigned int size)
-	{
-		m_bitstream.Read(data,size);
-	}
+	void fromBuffer(char* data, unsigned int size);
 	
 	/**
 	 * \fn void toBuffer(std::string s, unsigned int size)
@@ -127,7 +109,14 @@ class CharConv
 	template<class T>
 	void toBuffer(T data)
 	{
-		m_bitstream.Write(data);
+		if (m_stream ==0)
+		{
+			m_bitstream.Write(data);
+		}
+		else
+		{
+			(*m_stream) << data << " ";
+		}
 	}
 	
 	/**
@@ -138,11 +127,18 @@ class CharConv
 	template<class T>
 	void fromBuffer(T &data)
 	{
-		m_bitstream.Read(data);
+		if (m_stream ==0)
+		{
+			m_bitstream.Read(data);
+		}
+		else
+		{
+			(*m_stream) >> data;
+		}
 	}
 	
 	/**
-	 * \fn void toBuffer(std::string s)
+	 * \fn virtual void toBuffer(std::string s)
 	 * \brief Schreibt einen String in den Buffer, indem zuerst die Laenge und dann die Daten geschrieben werden
 	 * \param s String
 	 */
@@ -150,7 +146,7 @@ class CharConv
 	
 	
 	/**
-	 * \fn void fromBuffer(std::string s)
+	 * \fn virtual void fromBuffer(std::string s)
 	 * \brief liest einen String aus dem Puffer
 	 * \param s String
 	 */
@@ -166,6 +162,15 @@ class CharConv
 	RakNet::BitStream* getBitStream()
 	{
 		return &m_bitstream;
+	}
+	
+	/**
+	 * \fn std::iostream* getStream()
+	 * \brief  Gibt den Stream aus
+	 */
+	std::iostream* getStream()
+	{
+		return m_stream;
 	}
 	
 	/**
@@ -204,6 +209,16 @@ class CharConv
 		return m_timestamp;
 	}
 	
+	/**
+	 * \fn void printNewline()
+	 * \brief Schreibt Newline (Debugging)
+	 */
+	void printNewline()
+	{
+		if (m_stream !=0)
+			(*m_stream) << "\n";
+	}
+	
 	
 	private:
 		/**
@@ -217,11 +232,14 @@ class CharConv
 		 * \brief Zeit zur das Paket erstellt bzw erhalten wurde
 		 */
 		unsigned long m_timestamp;
+		
+		/**
+		 * \var std::iostream* m_stream
+		 * \brief Ein/Ausgabestrom - wenn nicht auf 0 gesetzt wird dieser Strom verwendet
+		 */
+		std::iostream* m_stream;
 	
 };
-
-
-
 
 
 

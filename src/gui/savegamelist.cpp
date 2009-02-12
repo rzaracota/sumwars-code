@@ -56,15 +56,14 @@ SavegameList::SavegameList (Document* doc)
 }
 
 void SavegameList::update()
-{
+{		
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 
 	CEGUI::MultiColumnList* savelist = (CEGUI::MultiColumnList*) win_mgr.getWindow("SavegameList");
 	savelist->resetList();
-
 	// Liste aller Files im Save Ordner der Form *.sav
 	Ogre::StringVectorPtr files = Ogre::ResourceGroupManager::getSingleton().findResourceNames("Savegame","*.sav");
-
+	
 	std::ifstream file;
 	char head[50];
 	int n=0;
@@ -74,11 +73,10 @@ void SavegameList::update()
 	string classname;
 	std::ostringstream stream;
 	char* bp;
-
 	// iterieren ueber die Files
 	for (Ogre::StringVector::iterator it = files->begin(); it!= files->end();++it)
 	{
-		DEBUG("file found %s",it->c_str());
+		DEBUG5("file found %s",it->c_str());
 		//File oeffnen
 
 		file.open(("../save/"+(*it)).c_str(),std::ios::in| std::ios::binary);
@@ -128,6 +126,8 @@ void SavegameList::update()
 			file.close();
 		}
 	}
+	
+	
 }
 
 bool SavegameList::onSavegameChosen(const CEGUI::EventArgs& evt)

@@ -1401,251 +1401,7 @@ bool Player::update(float time)
 
 	// Debugging
 	//return true;
-
-	Trade* trade = 0;
-
-	/*
-	// handle inputs form network
-	ServerNetwork* net = World::getWorld()->getNetwork();
-	if( net->getSlotStatus( m_network_slot )!=NET_CONNECTED )
-	{
-		// disconnect, Spieler sichern und aus der Welt entfernen
-		// TODO
-		//saveObject( false );
-		DEBUG("disconnect");
-		setDestroyed(true);
-
-		return false;
-	}
-
-	Packet* data;
-	int len;
-
-	if (getState() == STATE_REGION_ENTERED)
-	{
-		// Spieler hat Region betreten und ist in der Region noch nicht aktiviert
-
-		Region* reg = getRegion();
-
-		ServerHeader header;
-
-		CharConv cv;
-		// Header erstellen
-		memset(&header,0,sizeof(header));
-		header.m_content = PTYPE_S2C_REGION;
-		header.toString(&cv);
-
-		reg->getRegionDataString(&cv);
-
-		net->pushSlotMessage(m_network_slot, cv.getBitStream());
-
-
-		// Spieler aktivieren
-		setState(STATE_ACTIVE);
-	}
-
-	ClientHeader headerp;
-	CharConv* cv;
-	while( net->numberSlotMessages( m_network_slot )>0 )
-	{
-		DEBUG5("received msg");
-		data=0;
-		net->popSlotMessage( m_network_slot,data );
-
-		cv = new CharConv(data);
-
-		headerp.fromString(cv);
-
-		if( headerp.m_content == PTYPE_C2S_DATA && !headerp.m_chatmessage)
-		{
-			ClientCommand comp;
-
-			comp.fromString(cv);
-			DEBUG5("Kommando (%f %f) %i %i",comp.m_coordinate_x,comp.m_coordinate_y,comp.m_button, comp.m_id);
-
-			//for (char* c =(char*) comp; c< sizeof(ClientCommand) + (char*) comp; c++)
-			//	printf("%02x",*c);
-			//printf("\n");
-
-			onClientCommand( &comp );
-
-		}
-
-
-		// Chatmessage erhalten
-		if(  headerp.m_content == PTYPE_C2S_DATA && headerp.m_chatmessage	)
-		{
-			DEBUG("Chatmessage erhalten");
-
-
-			char* msgp = data + sizeof(ClientHeader);
-			int len = sizeof(PackageHeader)+sizeof(Chatmessage);
-			char sendmsg[len];
-			Chatmessage cmsg;
-			PackageHeader header;
-			memset(&header,0,sizeof(PackageHeader));
-
-			// Weiterleiten an alle Player
-			WorldObjectSelector* sel = new WorldObjectSelector;
-			sel->getObjectType().setObjectType(OBJECTTYPE_USER);
-			sel->setSelectObjectType(true);
-
-			WorldObjectList* ret = new WorldObjectList;
-
-			World::getWorld()->getWorldObjectsInCircle(getCoordinateX(),getCoordinateY(),1000, sel,ret);
-
-			WorldObjectList::iterator i;
-
-
-			header.m_chatmessages++;
-			header.m_mark = MARK;
-
-			string msg =getName() ;
-			msg += " :> ";
-			msg.append(msgp,CHATMESSAGE_LEN-msg.size());
-
-			memcpy(&cmsg.m_message,msg.c_str(),CHATMESSAGE_LEN);
-			cmsg.m_message[CHATMESSAGE_LEN-1]=0;
-
-
-			memcpy(sendmsg,&header, sizeof(PackageHeader));
-			memcpy(sendmsg+sizeof(PackageHeader),&cmsg,sizeof(Chatmessage));
-
-
-
-			Player* usr;
-
-			//DEBUG4("zu sendende nachricht %s", chat.m_message);
-			for (i=ret->begin(); i!=ret->end();i++)
-			{
-					if ((*i)->getObjectType().getObjectType() == OBJECTTYPE_USER)
-					{
-
-						usr = (Player*) (*i);
-
-						DEBUG4("sende nachricht an Player %i", usr->getId());
-						net->pushSlotMessage(usr->getNetworkSlot(), sendmsg, len );
-					}
-			}
-			DEBUG3("Senden abgeschlossen");
-
-		}
-
-		delete cv;
-		net->deallocatePacket(data);
-
-	}
-*/
-
-	// Behandlung des Handels
-	if (getTradeId() !=0)
-	{
-		trade = World::getWorld()->getTrade(getTradeId());
-
-		/*
-		// Wenn der Handel nicht existiert Fehler ausgeben
-		if (trade == 0)
-		{
-			setTradeId(0);
-		}
-		else
-		{
-			// eigene Position bei dem Handel bestimmen
-			int idx = trade->getPlayerIndex(getId());
-
-			// Wenn spieler gestorben Handel abbrechen
-			if (getState()==STATES_DEAD)
-			{
-				trade->abortTrade();
-			}
-
-			DEBUG5("Playerobjekt [%i] hat das Handelsobjekt [%i] als sein Handel erkannt", getId() ,getTradeId());
-			// Abfragen ob der Handel bereits abgeschlossen ist.
-			if (idx ==-1)
-			{
-				setTradeId(0);
-			}
-			else if (trade->getFinished()==true)
-			{
-				// Abfragen ob der Handel erfolgreich war
-				if (trade->getSuccessful()==true)
-				{
-					// Wenn Gegenstände noch nicht ausgetauscht
-					if (trade->getGotItems(idx)==false)
-					{
-						// Items auf erhalten setzen
-						trade->setGotItems(true, idx);
-
-						// Items austauschen
-						ItemList* tmp = trade->getInventory(idx);
-						trade->setInventory(getItems(),idx);
-						setItems(tmp);
-
-						calcBaggage();
-					}
-
-				}
-				DEBUG5("Handel [%i] für Player [%i] abgeschlossen", getTradeId(), getId());
-				// Handel ist erledigt, id auf 0 setzen
-				setTradeId(0);
-			}
-
-		}
-		if (getCommand()->getType() == COMMAND_TRADE && getTradeId()==0)
-		{
-			getCommand()->setType(COMMAND_NONE);
-			getObjectType().setActionType(ACTION_NONE);
-			getAction()->setType(ACTION_NONE);
-		}
-		*/
-
-	}
-
-
-	// Wenn ausreichend lange tot
-	/*
-	if (getState()==STATES_DEAD && getAction()->getProgress()==1)
-	{
-		//respawnen
-		setState(STATES_ACTIVE);
-		setHealth(getMaxHealth());
-
-		// RespawnPoint, das muss dann nochmal verbessert werden
-		// aktuell gibts nen Fehler wenn (0,0) nicht frei ist
-
-		float x,y;
-		World::getWorld()->getClosestFreeSquare(0,0,x,y);
-
-		MoveTo(x,y);
-
-		setTradeId(0);
-		getCommand()->setType(COMMAND_NONE);
-		getObjectType().setActionType(ACTION_NONE);
-		getAction()->setType(ACTION_NONE);
-
-
-	}
-	*/
-	/*
-	int len = 5+rand()%50;
-	char* tmp=new char[len];
-	memset(tmp,'a',len);
-	net->pushSlotMessage( m_network_slot,tmp,len);
-	*/
-
-	/*
-	sendGameData();
-
-
-
-
-	m_save_timer -= time;
-	if (m_save_timer <=0)
-	{
-		m_save_timer = 10000;
-		sendSavegame();
-	}
-*/
+	
 	return true;
 }
 
@@ -1705,147 +1461,6 @@ bool Player::checkRole(std::string role)
 	return false;
 }
 
-void Player::sendGameData()
-{
-	/*
-	// handle inputs form network
-	ServerNetwork* net = World::getWorld()->getNetwork();
-
-	Trade* trade = 0;
-	WorldObject* obj=0;
-	int len;
-
-	ServerHeader header;
-
-	header.m_content=PTYPE_S2C_DATA;
-	header.m_objects = 0;
-	header.m_items=0;
-	header.m_drop_items=0;
-	header.m_projectiles =0;
-	header.m_chatmessage=false;
-	header.m_trade= false;
-	if (getTradeId()!=0 && trade != 0 )
-		header.m_trade = true;
-	header.m_detailed_item = 0;
-
-	CharConv cv;
-	//DEBUG5("packed bytes: %i bytes",cv.getBitStream()->GetNumberOfBitsUsed());
-
-	WorldObjectList wobjs;
-	wobjs.clear();
-
-	// Ausschnitt der Welt, der fuer den Spieler sichtbar ist
-	Shape* sh = &(getGeometry()->m_shape);
-	Shape shs;
-
-	shs.m_coordinate_x = sh->m_coordinate_x;
-	shs.m_coordinate_y = sh->m_coordinate_y;
-	shs.m_type = Shape::RECT;
-	shs.m_extent_x = 12;
-	shs.m_extent_y = 12;
-
-	// alle sichtbaren Objekte holen
-	if( !World::getWorld()->getObjectsInShape(&shs,getGridLocation()->m_region,&wobjs ) )
-		return;
-
-
-
-	// Objekte einpacken
-	for( WorldObjectList::iterator i=wobjs.begin() ; i!=wobjs.end() ; )
-	{
-		// Objekt in das Paket packen
-		obj = (WorldObject*) (*i);
-
-		// Objekte die statisch sind nicht übertragen
-		if (obj->getState() == STATE_STATIC)
-		{
-			i = wobjs.erase(i);
-		}
-		else if (obj->getId() == getId())
-		{
-			i = wobjs.erase(i);
-		}
-		else
-		{
-			++i;
-		}
-
-	}
-	header.m_objects= wobjs.size();
-
-	std::list<DmgProjectile*> res2;
-	std::list<DmgProjectile*>::iterator i2;
-	// Liste der sichtbaren Projektile
-	World::getWorld()->getProjectilesOnScreen(sh->m_coordinate_x,sh->m_coordinate_y,getGridLocation()->m_region,&res2);
-	header.m_projectiles = res2.size();
-
-	header.m_items = m_equipement->getNumberItems(m_secondary_equip);
-
-	// am Boden liegende Gegenstaende
-	std::list<DropItem*> res3;
-	std::list<DropItem*>::iterator it3;
-	getRegion()->getItemsOnScreen(sh->m_coordinate_x,sh->m_coordinate_y,&res3);
-	header.m_drop_items = res3.size();
-	header.toString(&cv);
-
-	// Begin packet erstellen
-	toStringComplete(&cv);
-
-	//DEBUG("bits written %i",cv.getBitStream()->GetNumberOfBitsUsed());
-
-
-
-
-	// Objekte einpacken
-	for( WorldObjectList::iterator i=wobjs.begin() ; i!=wobjs.end() ; ++i)
-	{
-		// Objekt in das Paket packen
-		obj = (WorldObject*) (*i);
-
-		obj->toString(&cv);
-		DEBUG5("packed object %i",obj->getId());
-
-
-	}
-
-
-	// Projektile einpacken
-	for( i2=res2.begin() ; i2!=res2.end() ; ++i2)
-	{
-		(*i2)->toString(&cv);
-	}
-	DEBUG5("anzahl projektile %i",header.m_projectiles);
-
-	// Gegenstaende senden
-	// Inventar
-	int nr;
-	m_equipement->toString(&cv,nr,m_secondary_equip);
-
-
-
-	// Gegenstaende am Boden senden
-	for (it3 = res3.begin(); it3 != res3.end(); ++it3)
-	{
-		(*it3)->toString(&cv);
-	}
-
-	DEBUG5("anzahl gedroppter items %i",header.m_drop_items);
-
-//	int len = ch.getBitStream()->GetNumberOfBytesUsed();
-//	cv.backToStart();
-//	header.toString(&cv);
-//	ch.getBitStream()->
-
-	//DEBUG5("sending %i byte of data",len);
-	//DEBUG5("objects %i projectiles %i",header.m_objects,header.m_projectiles);
-
-
-
-	DEBUG5("sending %i bytes",cv.getBitStream()->GetNumberOfBytesUsed());
-	net->pushSlotMessage(m_network_slot, cv.getBitStream(),HIGH_PRIORITY, UNRELIABLE_SEQUENCED);
-	*/
-
-}
 
 void Player::sendDetailedItem(short pos)
 {
@@ -1905,24 +1520,6 @@ void Player::sendAbilityDamage(Action::ActionType act)
 	*/
 }
 
-void Player::sendSavegame()
-{
-	/*
-	ServerNetwork* net = World::getWorld()->getNetwork();
-	int len;
-
-	// Puffer fuer Savegame
-	CharConv cv;
-	ServerHeader header;
-
-	memset(&header,0,sizeof(header));
-	header.m_content = PTYPE_S2C_SAVEGAME;
-	header.toString(&cv);
-	toSavegame(&cv);
-	net->pushSlotMessage(m_network_slot,  cv.getBitStream());
-	*/
-
-}
 
 void Player::calcBaseDamage(Action::ActionType act,Damage& dmg)
 {
@@ -2288,93 +1885,72 @@ void Player::recalcDamage()
 
 }
 
-void Player::toSavegame(CharConv* cvin)
+void Player::toSavegame(CharConv* cv)
 {
 
 	int i;
-	// immer binaere Speicherung
-	cvin->toBuffer((char) 1);
-	// TODO Version richtig setzen
-	cvin->toBuffer((short) 1);
+	// Version richtig setzen
+	cv->toBuffer((short) 10);
+	
 	// Laenge der Datei
-
-	CharConv* cv = new CharConv;
-	char stmp[11];
-	stmp[10] = '\0';
-	strncpy(stmp,getTypeInfo()->m_subtype.c_str(),10);
-	cv->toBuffer(stmp,10);
-	char ntmp[32];
-	strncpy(ntmp,m_name.c_str(),32);
-	cv->toBuffer(ntmp,32);
+	cv->toBuffer(getTypeInfo()->m_subtype,10);
+	cv->toBuffer(m_name,32);
+	cv->printNewline();
+	
 	cv->toBuffer(getBaseAttr()->m_level);
 	cv->toBuffer(getBaseAttr()->m_max_health);
+	cv->printNewline();
 
 	cv->toBuffer(getBaseAttr()->m_strength);
 	cv->toBuffer(getBaseAttr()->m_dexterity);
 	cv->toBuffer(getBaseAttr()->m_magic_power);
 	cv->toBuffer(getBaseAttr()->m_willpower);
-
+	cv->printNewline();
+	
 	cv->toBuffer(m_attribute_points);
 	cv->toBuffer(m_skill_points);
-
+	cv->printNewline();
+	
 	cv->toBuffer(getBaseAttr()->m_resistances[0]);
 	cv->toBuffer(getBaseAttr()->m_resistances[1]);
 	cv->toBuffer(getBaseAttr()->m_resistances[2]);
 	cv->toBuffer(getBaseAttr()->m_resistances[3]);
-
+	cv->printNewline();
+	
 	cv->toBuffer(getBaseAttr()->m_max_experience);
 	cv->toBuffer(getDynAttr()->m_experience);
+	cv->printNewline();
+	
 	for (i=0;i<6;i++)
 	{
 		cv->toBuffer(getBaseAttr()->m_abilities[i]);
 	}
-	// TODO: letzte Stadt eintragen
-	cv->toBuffer((short) 1);
-
+	cv->printNewline();
+	
 	cv->toBuffer((short) m_base_action);
 	cv->toBuffer((short) m_left_action);
 	cv->toBuffer((short) m_right_action);
-
-
-	// TODO: Questinformationen
+	cv->printNewline();
 
 	// Items
 	writeEquipement(cv);
 
-	int len = cv->getBitStream()->GetNumberOfBytesUsed();
-	DEBUG5("length of savegame %i",len+7);
-	cvin->toBuffer(len+7);
-
-	cvin->toBuffer((char*) cv->getBitStream()->GetData() , len);
-
-	delete cv;
-
-	//int len = bp - buf;
-	//cv->toBuffer(bp2,len);
-
-
+	// TODO: Questinformationen
+	
+	// TODO: letzte Stadt eintragen
+	
 }
 
 
 void Player::fromSavegame(CharConv* cv)
 {
 
-	char binsave;
-	cv->fromBuffer<char>(binsave);
+	
 	short version;
 	cv->fromBuffer<short>(version);
-	int len;
-	cv->fromBuffer<int>(len);
-	int i;
 
-	char ctmp[11];;
-	// Typ (schon eher gesetzt)
-	cv->fromBuffer(ctmp,10);
-
-	char name[32];
-	cv->fromBuffer(name,32);
-	name[31]=0;
-	m_name.assign(name);
+	cv->fromBuffer(getTypeInfo()->m_subtype,10);
+	cv->fromBuffer(m_name,32);
 	cv->fromBuffer<char>(getBaseAttr()->m_level);
 	cv->fromBuffer<float>(getBaseAttr()->m_max_health);
 	getDynAttr()->m_health = getBaseAttr()->m_max_health;
@@ -2396,33 +1972,28 @@ void Player::fromSavegame(CharConv* cv)
 	cv->fromBuffer<float>(getBaseAttr()->m_max_experience);
 	cv->fromBuffer<float>(getDynAttr()->m_experience);
 
-	for (i=0;i<6;i++)
+	for (int i=0;i<6;i++)
 	{
 		cv->fromBuffer<int>(getBaseAttr()->m_abilities[i]);
 	}
 
-	// TODO: letzte Stadt auslesen
 	short tmp;
-	cv->fromBuffer<short>(tmp);
-
 	cv->fromBuffer<short>(tmp);
 	m_base_action = (Action::ActionType) tmp;
 	cv->fromBuffer<short>(tmp);
 	m_left_action = (Action::ActionType) tmp;
 	cv->fromBuffer<short>(tmp);
 	m_right_action = (Action::ActionType) tmp;
-
-
-	// TODO: Questinformationen
+	
 
 	// Items
 	loadEquipement(cv);
 
-
-	//DEBUG("size of savegame %i",len);
-
 	calcBaseAttrMod();
+	// TODO: letzte Stadt auslesen
+	
 
+	// TODO: Questinformationen
 }
 
 void Player::writeEquipement(CharConv* cv)

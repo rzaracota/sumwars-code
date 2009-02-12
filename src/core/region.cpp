@@ -5,6 +5,11 @@
 
 RegionData::~RegionData()
 {
+	std::multimap<TriggerType, Event*>::iterator it;
+	for (it = m_events.begin(); it != m_events.end(); ++it)
+	{
+		delete it->second;
+	}
 	
 }
 

@@ -1,9 +1,7 @@
 #include "objectloader.h"
 
-#include "warrior.h"
-#include "mage.h"
-#include "archer.h"
-#include "priest.h"
+
+#include "player.h"
 #include "fixedobject.h"
 #include "monster.h"
 

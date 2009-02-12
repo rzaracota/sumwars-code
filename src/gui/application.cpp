@@ -120,7 +120,6 @@ Application::~Application()
 	delete m_ogre_cegui_renderer;
 	delete m_ogre_root;
 	
-	World::deleteWorld();
 	ObjectFactory::cleanup();
 	ItemFactory::cleanup();
 	SoundSystem::cleanup();
@@ -137,7 +136,7 @@ void Application::run()
 
 	int nr = 1000;
 	timer.reset();
-	while (m_document->getState() != Document::SHUTDOWN)
+	while (m_document->getState() != Document::END_GAME)
 	{
 
 		frametime =timer.getMicroseconds ()/1000.0;
@@ -192,17 +191,13 @@ void Application::run()
 
 		// Document aktualisieren
 		m_document->update(frametime);
-
+		
 		t =timer2.getMicroseconds ()/1000.0;
 		time[3] += t;
 		if (t> 20)
 		{
 			DEBUG4("document update time was %f",t);
 		}
-
-	
-		
-		
 
 		try
 		{
@@ -224,6 +219,7 @@ void Application::run()
 			ERRORMSG("Error message: %s",e.getMessage().c_str());
 			return;
 		}
+		
 
 
 		timer2.reset();

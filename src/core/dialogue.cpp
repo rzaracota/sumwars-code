@@ -71,7 +71,11 @@ Dialogue::~Dialogue()
 
 void Dialogue::init()
 {
-	
+}
+
+void Dialogue::cleanup()
+{
+	m_topics.clear();
 }
 
 void Dialogue::addSpeaker(int id, std::string refname)

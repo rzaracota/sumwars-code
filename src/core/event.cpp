@@ -48,16 +48,18 @@ void Trigger::addVariable(std::string name, std::string value)
 
 Event::~Event()
 {
-	if (m_condition != LUA_NOREF)
+	if (!m_copy)
 	{
-		luaL_unref(EventSystem::getLuaState(), LUA_REGISTRYINDEX, m_condition);
+		if (m_condition != LUA_NOREF)
+		{
+			luaL_unref(EventSystem::getLuaState(), LUA_REGISTRYINDEX, m_condition);
+		}
+		
+		if (m_effect != LUA_NOREF)
+		{
+			luaL_unref(EventSystem::getLuaState(), LUA_REGISTRYINDEX, m_effect);
+		}
 	}
-	
-	if (m_effect != LUA_NOREF)
-	{
-		luaL_unref(EventSystem::getLuaState(), LUA_REGISTRYINDEX, m_effect);
-	}
-
 }
 
 void Event::setEffect(const char * effect)

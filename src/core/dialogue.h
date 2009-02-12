@@ -97,6 +97,12 @@ class Dialogue
 		static void init();
 		
 		/**
+		 * \fn static void cleanup()
+		 * \brief Gibt Speicher frei
+		 */
+		static void cleanup();
+		
+		/**
 		 * \fn void addSpeaker(int id, std::string refname)
 		 * \brief Fuegt der Gespraech einen Sprecher hinzu
 		 * \param id ID des Sprechers
@@ -163,11 +169,6 @@ class Dialogue
 		 */
 		int getSpeaker(std::string refname);
 		
-		/**
-		 * \fn void cleanup()
-		 *  \brief Gibt allokierten Speicher frei
-		 */
-		void cleanup();
 		
 		/**
 		 * \fn bool isFinished()

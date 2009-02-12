@@ -492,10 +492,7 @@ public:
 	 * \fn static void deleteWorld()
 	 * \brief entfernt die Spielwelt
 	 */
-	static void deleteWorld()
-	{
-		delete m_world;
-	}
+	static void deleteWorld();
 			
 
 //Private stuff

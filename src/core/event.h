@@ -113,6 +113,20 @@ class Event
 			m_once = false;
 			m_condition = LUA_NOREF;
 			m_effect = LUA_NOREF;
+			m_copy = false;
+		}
+		
+		/**
+		 * \fn Event( Event& other)
+		 * \brief Kopierkonstruktor
+		 * \param other anderes Event
+		 */
+		Event( Event& other)
+		{
+			m_copy = true;
+			m_once = other.m_once;
+			m_condition = other.m_condition;
+			m_effect = other.m_effect;
 		}
 		
 		/**
@@ -184,6 +198,12 @@ class Event
 		 * \brief Wirkung des Events (Folge von Lua Anweisungen)
 		 */
 		int m_effect;
+		
+		/**
+		 * \var bool m_copy
+		 * \brief Gibt an, ob das Event eine Kopie ist. Bei einer Kopie werden die zugrunde liegenden Lua Code Chunks beim loeschen nicht freigegeben
+		 */
+		bool m_copy;
 };
 
 

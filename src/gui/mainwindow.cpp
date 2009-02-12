@@ -130,6 +130,8 @@ void MainWindow::update()
 	m_mouse->capture();
 	m_keyboard->capture();
 	
+	
+	
 	// Tastenwiederholung erzeugen
 	if (m_key !=0)
 	{
@@ -162,8 +164,8 @@ void MainWindow::update()
 	// Flags, welche Fenster gezeigt werden
 	int wflags = m_document->getGUIState()->m_shown_windows;
 
-
-
+	
+	
 	// Testen ob die Anzeige der Fenster geaendert werden muss
 	if (m_document->getModified() & Document::GUISHEET_MODIFIED)
 	{
@@ -181,6 +183,8 @@ void MainWindow::update()
 		m_document->setModified(m_document->getModified() & (~Document::GUISHEET_MODIFIED));
 	}
 
+	
+	
 	// Testen ob Anzeige der Subfenster geaendert werden muss
 	if (m_document->getModified() & Document::WINDOWS_MODIFIED)
 	{
@@ -293,7 +297,6 @@ void MainWindow::update()
 		m_document->setModified(m_document->getModified() & ~Document::WINDOWS_MODIFIED);
 	}
 
-
 	// Objekte aus dem Dokument darstellen
 	if (m_document->getLocalPlayer()!=0 && m_document->getLocalPlayer()->getRegion()!=0)
 	{
@@ -373,6 +376,7 @@ void MainWindow::update()
 			btn->setVisible(vis);
 		}
 	}
+	
 }
 
 

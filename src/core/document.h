@@ -102,6 +102,8 @@ class Document
 		DISCONNECTED =6,
 
  		START_SERVER =7,
+   
+   		END_GAME =8,
 	};
 
 
@@ -741,10 +743,10 @@ class Document
 		int m_data_locks;
 	
 		/**
-		* \var char* m_savegame
+		* \var CharConv* m_savegame
 		* \brief Aktueller Spielstand in Binaerformat
 		*/
-		char* m_savegame;
+		CharConv* m_savegame;
 	
 	
 		/**

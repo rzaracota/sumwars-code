@@ -27,7 +27,14 @@ Region* MapGenerator::createRegion(RegionData* rdata)
 		// Objektgruppen platzieren
 		success = MapGenerator::insertGroupTemplates(&mdata,rdata);
 		
-		mdata.m_region->getEvents() = rdata->m_events;
+		// Events kopieren
+		std::multimap<TriggerType, Event*>::iterator it;
+		Event* ev;
+		for (it = rdata->m_events.begin(); it != rdata ->m_events.end(); ++it)
+		{
+			ev = new Event(*(it->second));
+			mdata.m_region->addEvent(it->first,ev);
+		}
 
 		// Wenn der Versuch nicht erfolgreich war alles loeschen und von vorn beginnen
 		if (!success)

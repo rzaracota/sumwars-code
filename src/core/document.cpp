@@ -290,7 +290,12 @@ void Document::onButtonSendMessageClicked ( )
 
 void Document::onButtonSaveExitClicked ( )
 {
-
+	if (m_state == INACTIVE)
+	{
+		m_state = END_GAME;
+		return;
+	}
+	
 	if (m_state!=SHUTDOWN_REQUEST)
 	{
 		setState(SHUTDOWN_REQUEST);
@@ -1047,6 +1052,9 @@ void Document::update(float time)
 		case SHUTDOWN_REQUEST:
 			updateContent(time);
 			m_shutdown_timer += time;
+			
+			//setState(SHUTDOWN_WRITE_SAVEGAME);
+			
 			if (m_shutdown_timer>400)
 			{
 				setState(SHUTDOWN);
@@ -1066,7 +1074,21 @@ void Document::update(float time)
 
 			m_state = SHUTDOWN;
 			break;
+			
+		case SHUTDOWN:
+			// Spielwelt abschalten
+			DEBUG("shutdown");
+			
+			World::deleteWorld();
+			
+			getGUIState()->m_sheet= MAIN_MENU;
+			getGUIState()->m_shown_windows = NO_WINDOWS;
+			
+			m_state = INACTIVE;
 
+			m_modified =GUISHEET_MODIFIED | WINDOWS_MODIFIED;
+			break;
+			
 		default:
 			break;
 	}
@@ -1218,31 +1240,56 @@ void Document::updateContent(float time)
 
 void* Document::writeSaveFile(void* doc_ptr)
 {
+	
+	
 	Document* doc = (Document*) doc_ptr;
+	
+	std::stringstream str;
+	CharConv  save(&str);
+	doc->getLocalPlayer()->toSavegame(&save);
+	DEBUG("%s",str.str().c_str());
+	return 0;
+	
 	if (doc->m_savegame!=0)
 	{
 
 		// Savegame schreiben
-		char* bp = doc->m_savegame;
-
-
+		std::stringstream* stream = dynamic_cast<std::stringstream*> (doc->m_savegame->getStream());
+		char* bp;
+		int len;
+		char bin =1;
+		if (stream ==0)
+		{
+			bp = (char*) doc->m_savegame->getBitStream()->GetData();
+			len = (doc->m_savegame->writeBits()+7)/8;
+			bin =0;
+		}
 		// Laenge der Datei
-		int len = *((int*) (bp+3));
-
-		int i;
-		bp = doc->m_savegame;
+		
 		// Daten byteweise in Datei schreiben
-		std::ofstream file(doc->m_save_file.c_str(),std::ios::out | std::ios::binary);
-		DEBUG("length of file %i",len);
-		//hexwrite(bp,len);
+		std::ofstream file;
+		if (bin ==1)
+		{
+			file.open(doc->m_save_file.c_str(),std::ios::out | std::ios::binary);
+		}
+		else
+		{
+			file.open(doc->m_save_file.c_str());
+		}
 		if ( file.is_open() )
 		{
-			DEBUG("writing save file");
-			for (i=0;i<len;i++)
+			file << bin;
+			if (bin ==1)
 			{
-				file<< bp[i];
+				file.write((char*) (&len),sizeof(int));
+				file.write(bp,len);
 			}
-
+			else
+			{
+				file << stream->str();
+			}
+			
+			file.close();
 		}
 	}
 

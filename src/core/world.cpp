@@ -329,14 +329,16 @@ void World::updateLogins()
 
 }
 
-
+void World::deleteWorld()
+{
+	delete m_world;
+	m_world=0;
+}
 
 World::~World()
 {
-
+	
 	delete m_network;
-
-
 
 	std::map<int, Trade* >::iterator j;
 	for (j=m_trades->begin(); j!=m_trades->end();j++)
@@ -344,14 +346,14 @@ World::~World()
 		delete j->second;
 	}
 	delete m_trades;
-
+	
 	std::map<int, RegionData*>::iterator it;
-
+ 	
 	for (it = m_region_data.begin(); it != m_region_data.end(); ++it)
 	{
 		delete it->second;
 	}
-
+	
 	std::map<int,Region*>::iterator rit;
 	for (rit = m_regions.begin(); rit != m_regions.end(); rit++)
 	{
@@ -369,6 +371,10 @@ World::~World()
 	delete m_player_slots;
 	delete m_players;
 	delete m_events;
+	
+	Dialogue::cleanup();
+	EventSystem::cleanup();
+	
 }
 
 Region* World::getRegion(int rid)
