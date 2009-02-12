@@ -64,6 +64,8 @@ bool Archer::init ()
 	bas->m_attack_speed=1000;
 	m_base_action = Action::RANGE_ATTACK;
 
+	m_look = "archer_f";
+	
 	// Alle Faehigkeiten deaktivieren
 	int i;
 	for (i=1;i<6;i++)

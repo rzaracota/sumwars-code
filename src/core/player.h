@@ -36,6 +36,8 @@
 #include "servernetwork.h"
 #include "item.h"
 
+typedef std::string PlayerLook;
+
 /**
  * \class PlayerCamera
  * \brief Zeigt an, aus welchem Blickwinkel der Spieler die Szene betrachtet
@@ -529,9 +531,22 @@ public:
 		return m_name;
 	}
 	
+	/**
+	 * \fn PlayerCamera& getCamera()
+	 * \brief Gibt die Kameraeinstellung des Spielers aus
+	 */
 	PlayerCamera& getCamera()
 	{
 		return m_camera;
+	}
+	
+	/**
+	 * \fn PlayerLook& getPlayerLook()
+	 * \brief Gibt Aussehen des Spielers aus
+	 */
+	PlayerLook& getPlayerLook()
+	{
+		return m_look;
 	}
 	
 	/**
@@ -676,6 +691,18 @@ protected:
 	 * \brief Kameraposition durch die dieser Spieler die Szene sieht
 	 */
 	PlayerCamera m_camera;
+	
+	/**
+	 * \var PlayerLook m_look
+	 * \brief bestimmt das Aussehen des Spielers
+	 */
+	PlayerLook m_look;
+	
+	/**
+	 * \var bool m_male
+	 * \brief Gibt das Geschlecht an
+	 */
+	bool m_male;
 	
 	//Constructors
 	//Accessor Methods

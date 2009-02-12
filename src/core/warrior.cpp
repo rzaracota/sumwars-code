@@ -63,6 +63,8 @@ bool Warrior::init ()
 	bas->m_walk_speed = 3000;
 	bas->m_attack_speed=2000;
 
+	m_look = "warrior_m";
+	
 	m_base_action = Action::ATTACK;
 
 	// Faehigkeiten setzen

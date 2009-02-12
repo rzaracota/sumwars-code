@@ -70,7 +70,7 @@ bool Priest::init ()
 	m_left_action = Action::HOLY_ATTACK;
 	m_right_action = Action::HOLY_ATTACK;
 
-
+	m_look = "priest_f";
 
 	int i;
 	for (i=1;i<6;i++)

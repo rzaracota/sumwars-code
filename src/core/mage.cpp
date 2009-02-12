@@ -65,6 +65,8 @@ bool Mage::init ()
 	bas->m_attack_speed=1500;
 	m_base_action = Action::MAGIC_ATTACK;
 	
+	m_look = "mage_m";
+	
 	Item* si;
 	
 	si = ItemFactory::createItem(Item::WEAPON,"ice_wand");

@@ -10,6 +10,7 @@
 #include "document.h"
 #include "worldobject.h"
 #include "sound.h"
+#include "player.h"
 
 
 /**
@@ -44,7 +45,12 @@ struct RenderInfo
 	 */
 	float m_scaling_factor;
 
-
+	/**
+	 * \fn RenderInfo() {}
+	 * \brief Konstruktor
+	 */
+	RenderInfo() {}
+	
 	/**
 	 * \fn RenderInfo(std::string mesh, std::string particle_system, float scaling_factor =1.0)
 	 * \brief Konstruktor
@@ -279,6 +285,23 @@ class Scene
 	 * \param scaling_factor Faktor um den das Mesh und alle Partikelsystem skaliert werden
 	 */
 	static void registerObject(WorldObject::TypeInfo::ObjectSubtype subtype, std::string mesh, std::string particle_system= "", float scaling_factor =1.0);
+	
+	/**
+	 * \fn static void registerPlayer(PlayerLook look, std::string mesh)
+	 * \brief Registriert fuer ein Aussehen des Spielers das passende Mesh
+	 * \param Aussehen des Spielers
+	 * \param mesh Ogre Mesh
+	 */
+	static void registerPlayer(PlayerLook look, std::string mesh);
+	
+	/**
+	 * \fn static void registerPlayerLook(WorldObject::TypeInfo::ObjectSubtype subtype, PlayerLook look, bool male = true)
+	 * \brief Registiert ein fuer einen Spielertyp zulaessiges Aussehen
+	 * \param subtype Spielertyp
+	 * \param look Aussehen
+	 * \param male Gibt Geschlecht an
+	 */
+	static void registerPlayerLook(WorldObject::TypeInfo::ObjectSubtype subtype, PlayerLook look, bool male = true);
 
 	/**
 	 * \fn static void registerObjectAnimations(WorldObject::TypeInfo::ObjectSubtype subtype, std::map<Action::ActionType, std::vector<std::string> > &animations)
@@ -331,6 +354,13 @@ class Scene
 	 * \param subtype Subtyp des Objektes
 	 */
 	static RenderInfo getObjectRenderInfo(WorldObject::TypeInfo::ObjectSubtype subtype);
+	
+	/**
+	 * \fn static RenderInfo getPlayerRenderInfo(PlayerLook look)
+	 * \brief Gibt zu dem Aussehen des Spielers die Informationen zum Rendern aus
+	 * \param look Aussehen des Spielers
+	 */
+	static RenderInfo getPlayerRenderInfo(PlayerLook look);
 
 	/**
 	 * \fn RenderInfo getItemRenderInfo(Item::Subtype subtype)
@@ -385,6 +415,18 @@ class Scene
 	 *  \brief Speichert fuer die Objekte die Information zum Rendern
 	 */
 	static std::map<WorldObject::TypeInfo::ObjectSubtype, RenderInfo> m_object_render_info;
+	
+	/**
+	 * \var static std::map<PlayerLook, RenderInfo> m_player_render_info
+	 * \brief Speichert fuer die Spieler die Information zum Rendern
+	 */
+	static std::map<PlayerLook, RenderInfo> m_player_render_info;
+	
+	/**
+	 * \var static std::multimap< WorldObject::TypeInfo::ObjectSubtype, std::pair<bool, PlayerLook> > m_player_look
+	 * \brief Speichert, fuer welche Spielerklassen welches Aussehen erlaubt ist
+	 */
+	static std::multimap< WorldObject::TypeInfo::ObjectSubtype, std::pair<bool, PlayerLook> > m_player_look;
 	
 	/**
 	 * \var static std::map<WorldObject::TypeInfo::ObjectSubtype, std::map<Action::ActionType, std::vector<std::string> > > m_object_animations

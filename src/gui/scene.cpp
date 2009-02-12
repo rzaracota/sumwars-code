@@ -13,6 +13,10 @@ std::map<Tile, RenderInfo> Scene::m_tile_render_info;
 
 std::map<WorldObject::TypeInfo::ObjectSubtype, std::map<Action::ActionType, std::vector<std::string> > > Scene::m_object_animations;
 
+std::map<PlayerLook, RenderInfo> Scene::m_player_render_info;
+
+std::multimap< WorldObject::TypeInfo::ObjectSubtype, std::pair<bool, PlayerLook> > Scene::m_player_look;
+
 
 Scene::Scene(Document* doc,Ogre::RenderWindow* window)
 {
@@ -162,7 +166,17 @@ void Scene::loadFixedObjectData(std::string file)
 void Scene::registerMeshes()
 {
 	// Meshes fuer Objekte registrieren
-
+	registerPlayerLook("warrior","warrior_m",true);
+	registerPlayerLook("mage","mage_m",true);
+	registerPlayerLook("priest","priest_f",false);
+	registerPlayerLook("archer","archer_f",false);
+	
+	registerPlayer("warrior_m","warrior_m.mesh");
+	registerPlayer("mage_m","mage_m.mesh");
+	registerPlayer("priest_f","priest_f.mesh");
+	registerPlayer("archer_f","archer_f.mesh");
+	
+	
 	// Spieler
 	registerObject("warrior","warrior_m.mesh","");
 	//registerAttachedMesh("warrior","itemRightHand","sword.mesh");
@@ -258,6 +272,17 @@ void Scene::registerAttachedMesh(WorldObject::TypeInfo::ObjectSubtype subtype, s
         it->second.m_extra_meshes.push_back(std::make_pair(bone,mesh));
     }
 }
+
+void Scene::registerPlayer(PlayerLook look, std::string mesh)
+{
+	m_player_render_info.insert(std::make_pair(look, RenderInfo(mesh, "")));
+}
+
+void Scene::registerPlayerLook(WorldObject::TypeInfo::ObjectSubtype subtype, PlayerLook look, bool male )
+{
+	m_player_look.insert(std::make_pair(subtype, std::make_pair(male,look)));
+}
+
 void Scene::registerItem(Item::Subtype subtype, std::string mesh, std::string particle_system, float scaling_factor)
 {
 	m_item_render_info.insert(std::make_pair(subtype,RenderInfo(mesh,particle_system,scaling_factor)));
@@ -285,6 +310,20 @@ RenderInfo  Scene::getObjectRenderInfo(WorldObject::TypeInfo::ObjectSubtype subt
 	{
 		// Standardmesh
 		return RenderInfo("goblin.mesh","");
+	}
+}
+
+RenderInfo Scene::getPlayerRenderInfo(PlayerLook look)
+{
+	std::map<PlayerLook, RenderInfo>::iterator i= m_player_render_info.find(look);
+	if (i != m_player_render_info.end())
+	{
+		return i->second;
+	}
+	else
+	{
+		// Standardmesh
+		return RenderInfo("warrior_m.mesh","");
 	}
 }
 
@@ -1057,7 +1096,16 @@ void Scene::createObject(WorldObject* obj,std::string& name, bool is_static)
 	obj_node->setDirection(cos(angle),0,sin(angle),Ogre::Node::TS_WORLD);
 
 	// Informationen zum Rendern anfordern
-	RenderInfo ri = getObjectRenderInfo(obj->getTypeInfo()->m_subtype);
+	RenderInfo ri;
+	Player* pl = dynamic_cast<Player*>(obj);
+	if (pl != 0 )
+	{
+		ri = getPlayerRenderInfo(pl->getPlayerLook());
+	}
+	else
+	{
+		ri = getObjectRenderInfo(obj->getTypeInfo()->m_subtype);
+	}
 
 	// Je nach Typ das richtige Mesh benutzen
 	Ogre::Entity* obj_ent;
