@@ -10,6 +10,12 @@ CharConv::CharConv()
 	m_stream =0;
 }
 
+CharConv::CharConv(int dummy)
+	: m_bitstream()
+{
+	m_stream =0;
+}
+
 CharConv::CharConv(unsigned char* data, unsigned int size)
 	: m_bitstream(data, size, false)
 {
@@ -77,9 +83,10 @@ void CharConv::fromBuffer(std::string& s, unsigned int size)
 {
 	if (m_stream == 0)
 	{
-		char* data = new char[size];
+		char* data = new char[size+1];
 		fromBuffer(data,size);
-		s.assign(data,size);
+		data[size] = '\0';
+		s = data;
 		delete data;
 	}
 	else
@@ -115,6 +122,32 @@ void CharConv::fromBuffer(std::string& s)
 	else
 	{
 		(*m_stream) >> s ;
+	}
+}
+
+void CharConv::toBuffer(char c)
+{
+	if (m_stream ==0)
+	{
+		m_bitstream.Write(c);
+	}
+	else
+	{
+		(*m_stream) << (int) c << " ";
+	}
+}
+
+void CharConv::fromBuffer(char &c)
+{
+	if (m_stream ==0)
+	{
+		m_bitstream.Read(c);
+	}
+	else
+	{
+		int i;
+		(*m_stream) >> i ;
+		c = (char) i;
 	}
 }
 

@@ -95,15 +95,17 @@ class Document
 
 		SHUTDOWN_REQUEST =4,
 
-		SHUTDOWN_WRITE_SAVEGAME=8,
-
+		
 		SHUTDOWN =5,
 
 		DISCONNECTED =6,
 
  		START_SERVER =7,
    
-   		END_GAME =8,
+   		SHUTDOWN_WRITE_SAVEGAME=8,
+
+   
+   		END_GAME =9,
 	};
 
 
@@ -120,6 +122,7 @@ class Document
 		ITEM_MODIFIED=8,
 		ABILITY_MODIFIED=16,
 		REGION_MODIFIED = 32,
+		SAVEGAME_MODIFIED = 64,
 	};
 
 	/**
@@ -315,10 +318,8 @@ class Document
 	 * \brief Setzt den Name des Savefiles
 	 * \param s Name des Savefiles
 	 */
-	void setSaveFile(string s)
-	{
-		m_save_file =s;
-	}
+	void setSaveFile(string s);
+	
 
 	/**
 	 * \fn string getSaveFile()
@@ -442,17 +443,6 @@ class Document
 	 */
 	void installShortkey(KeyCode key,ShortkeyDestination dest);
 
-	/**
-	 * \fn void lock()
-	 * \brief Sperrt das Dokument
-	 */
-	void lock();
-
-	/**
-	 * \fn void unlock()
-	 * \brief Entsperrt das Dokument
-	 */
-	void unlock();
 
 
 
@@ -737,19 +727,6 @@ class Document
 	
 	
 		/**
-		* \var m_data_locks
-		* \brief Gibt die Anzahl der Locks auf den Daten des Dokuments an. Die Daten koennen nur veraendert und von aussen gelesen werden, wenn die Anzahl gleich 0 ist
-		*/
-		int m_data_locks;
-	
-		/**
-		* \var CharConv* m_savegame
-		* \brief Aktueller Spielstand in Binaerformat
-		*/
-		CharConv* m_savegame;
-	
-	
-		/**
 		* \var int m_modified
 		* \brief Bitmaske welche angibt welche Teile des Dokuments veraendert wurden
 		*/
@@ -792,6 +769,12 @@ class Document
 		* \brief true, wenn der aktuelle Rechner der Server ist
 		*/
 		bool m_server;
+		
+		/**
+		 * \var Player* m_temp_player
+		 * \brief temporaer angelegtes Spielerobjekt zum rendern des ausgewaehlten Spielers
+		 */
+		Player* m_temp_player;
 	
 		/**
 		* \var Timer m_timer

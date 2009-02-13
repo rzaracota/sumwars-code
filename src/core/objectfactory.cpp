@@ -97,24 +97,6 @@ WorldObject* ObjectFactory::createObject(WorldObject::TypeInfo::ObjectType type,
 	if (type ==WorldObject::TypeInfo::TYPE_PLAYER)
 	{
 		ret = new Player(id,subtype);
-		/*
-		if (subtype == "warrior")
-		{
-			ret = new Warrior(  id );
-		}
-		else if (subtype == "mage")
-		{
-			ret = new Mage( id );
-		}
-		else if (subtype == "archer")
-		{
-			ret = new Archer( id );
-		}
-		else if(subtype == "priest")
-		{
-			ret = new Priest( id );
-		}
-		*/
 	}
 	else if (type ==WorldObject::TypeInfo::TYPE_MONSTER)
 	{

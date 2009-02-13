@@ -153,6 +153,8 @@ bool Player::init()
 	bas->m_special_flags=0;
 	bas->m_abilities[0] = 0xffffff;
 	
+	bool init = false;
+	
 	Item* si;
 	if (getTypeInfo()->m_subtype == "warrior")
 	{
@@ -167,14 +169,12 @@ bool Player::init()
 		bas->m_walk_speed = 3000;
 		bas->m_attack_speed=2000;
 		
-		m_base_action = Action::ATTACK;
-		
-		
 		bas->m_attack_range =20;
 		
 		m_base_action = Action::ATTACK;
 		m_left_action = Action::ATTACK;
 		m_right_action = Action::ATTACK;
+		init = true;
 
 		// Debugging
 		m_look = "warrior_m";
@@ -218,8 +218,6 @@ bool Player::init()
 		bas->m_walk_speed = 3000;
 		bas->m_attack_speed=1000;
 		
-		m_base_action = Action::RANGE_ATTACK;
-		
 		m_look = "archer_f";
 		
 		bas->m_attack_range =20;
@@ -227,6 +225,7 @@ bool Player::init()
 		m_base_action = Action::RANGE_ATTACK;
 		m_left_action = Action::RANGE_ATTACK;
 		m_right_action = Action::RANGE_ATTACK;
+		init = true;
 
 		
 		// Debugging
@@ -254,9 +253,9 @@ bool Player::init()
 		bas->m_walk_speed = 3000;
 		bas->m_attack_speed=1500;
 		m_base_action = Action::MAGIC_ATTACK;
-		m_base_action = Action::MAGIC_ATTACK;
 		m_left_action = Action::MAGIC_ATTACK;
 		m_right_action = Action::MAGIC_ATTACK;
+		init = true;
 		m_look = "mage_m";
 	
 		
@@ -288,6 +287,7 @@ bool Player::init()
 		m_base_action = Action::HOLY_ATTACK;
 		m_left_action = Action::HOLY_ATTACK;
 		m_right_action = Action::HOLY_ATTACK;
+		init = true;
 
 		m_look = "priest_f";
 
@@ -303,8 +303,11 @@ bool Player::init()
 	si = ItemFactory::createItem(Item::POTION,"heal_1");
 	insertItem(si);
 	
-	// Modifizierte Basisattribute erzeugen
-	calcBaseAttrMod();
+	if (init)
+	{
+		// Modifizierte Basisattribute erzeugen
+		calcBaseAttrMod();
+	}
 	
 	return true;
 }
@@ -918,27 +921,30 @@ short Player::insertItem(Item* itm)
 		ERRORMSG("tried to insert null item");
 	short pos = getEquipement()->insertItem(itm);
 
-	if (pos != Equipement::NONE)
+	if (World::getWorld() != 0)
 	{
-		// Gegenstand ins Inventar aufgenommen
-		if (World::getWorld()->isServer())
+		if (pos != Equipement::NONE)
 		{
-
-			NetEvent event;
-			event.m_type =  NetEvent::PLAYER_ITEM_PICKED_UP ;
-			event.m_data = pos;
-			event.m_id = getId();
-
-			DEBUG5("event: item picked up %i",pos);
-
-			World::getWorld()->insertNetEvent(event);
+			// Gegenstand ins Inventar aufgenommen
+			if (World::getWorld()->isServer())
+			{
+	
+				NetEvent event;
+				event.m_type =  NetEvent::PLAYER_ITEM_PICKED_UP ;
+				event.m_data = pos;
+				event.m_id = getId();
+	
+				DEBUG5("event: item picked up %i",pos);
+	
+				World::getWorld()->insertNetEvent(event);
+			}
 		}
-	}
-	else
-	{
-		// Gegenstand passt nicht ins Inventar
-		// wieder fallen lassen
-		getRegion()->dropItem(itm,getShape()->m_center);
+		else
+		{
+			// Gegenstand passt nicht ins Inventar
+			// wieder fallen lassen
+			getRegion()->dropItem(itm,getShape()->m_center);
+		}
 	}
 	return pos;
 }
@@ -1892,15 +1898,17 @@ void Player::toSavegame(CharConv* cv)
 	// Version richtig setzen
 	cv->toBuffer((short) 10);
 	
-	// Laenge der Datei
 	cv->toBuffer(getTypeInfo()->m_subtype,10);
 	cv->toBuffer(m_name,32);
+	cv->toBuffer(m_look,20);
 	cv->printNewline();
 	
 	cv->toBuffer(getBaseAttr()->m_level);
 	cv->toBuffer(getBaseAttr()->m_max_health);
 	cv->printNewline();
 
+	cv->toBuffer(getBaseAttr()->m_armor);
+	cv->toBuffer(getBaseAttr()->m_attack);
 	cv->toBuffer(getBaseAttr()->m_strength);
 	cv->toBuffer(getBaseAttr()->m_dexterity);
 	cv->toBuffer(getBaseAttr()->m_magic_power);
@@ -1909,6 +1917,11 @@ void Player::toSavegame(CharConv* cv)
 	
 	cv->toBuffer(m_attribute_points);
 	cv->toBuffer(m_skill_points);
+	cv->printNewline();
+	
+	cv->toBuffer(getBaseAttr()->m_walk_speed);
+	cv->toBuffer(getBaseAttr()->m_attack_speed);
+	cv->toBuffer(getBaseAttr()->m_attack_range);
 	cv->printNewline();
 	
 	cv->toBuffer(getBaseAttr()->m_resistances[0]);
@@ -1951,10 +1964,14 @@ void Player::fromSavegame(CharConv* cv)
 
 	cv->fromBuffer(getTypeInfo()->m_subtype,10);
 	cv->fromBuffer(m_name,32);
-	cv->fromBuffer<char>(getBaseAttr()->m_level);
+	cv->fromBuffer(m_look,20);
+	
+	cv->fromBuffer(getBaseAttr()->m_level);
 	cv->fromBuffer<float>(getBaseAttr()->m_max_health);
 	getDynAttr()->m_health = getBaseAttr()->m_max_health;
 
+	cv->fromBuffer(getBaseAttr()->m_armor);
+	cv->fromBuffer(getBaseAttr()->m_attack);
 	cv->fromBuffer<short>(getBaseAttr()->m_strength);
 	cv->fromBuffer<short>(getBaseAttr()->m_dexterity);
 	cv->fromBuffer<short>(getBaseAttr()->m_magic_power);
@@ -1963,7 +1980,10 @@ void Player::fromSavegame(CharConv* cv)
 	cv->fromBuffer<short>(m_attribute_points);
 	cv->fromBuffer<short>(m_skill_points );
 
-
+	cv->fromBuffer(getBaseAttr()->m_walk_speed);
+	cv->fromBuffer(getBaseAttr()->m_attack_speed);
+	cv->fromBuffer(getBaseAttr()->m_attack_range);
+	
 	cv->fromBuffer<short>(getBaseAttr()->m_resistances[0]);
 	cv->fromBuffer<short>(getBaseAttr()->m_resistances[1]);
 	cv->fromBuffer<short>(getBaseAttr()->m_resistances[2]);
@@ -1977,6 +1997,8 @@ void Player::fromSavegame(CharConv* cv)
 		cv->fromBuffer<int>(getBaseAttr()->m_abilities[i]);
 	}
 
+	DEBUG5("name %s class %s level %i",m_name.c_str(), getTypeInfo()->m_subtype.c_str(), getBaseAttr()->m_level);
+	
 	short tmp;
 	cv->fromBuffer<short>(tmp);
 	m_base_action = (Action::ActionType) tmp;

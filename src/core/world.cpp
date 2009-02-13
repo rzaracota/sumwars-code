@@ -686,22 +686,11 @@ bool World::insertPlayerIntoRegion(WorldObject* player, short region, LocationNa
 void World::handleSavegame(CharConv *cv, int slot)
 {
 	DEBUG5("got savegame from slot %i",slot);
-	// Spieler aus dem Savegame erzeugen
-	char binsave;
-	cv->fromBuffer<char>(binsave);
-	short version;
-	cv->fromBuffer<short>(version);
-	int len;
-	cv->fromBuffer<int>(len);
-	WorldObject::TypeInfo::ObjectSubtype ot;
-	char tmp[11];
-	tmp[10] = '\0';
-	cv->fromBuffer(tmp,10);
-	ot = tmp;
-	WorldObject* pl =0;
-
-	pl=ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_PLAYER, ot);
-
+	
+	Player* pl =0;
+	pl= new Player(getValidId(),"");
+	pl->fromSavegame(cv);
+	
 	// Spieler ist lokal
 	if (slot == LOCAL_SLOT)
 	{
@@ -717,7 +706,7 @@ void World::handleSavegame(CharConv *cv, int slot)
 			CharConv save;
 			header.toString(&save);
 
-			save.toBuffer((char*) cv->getBitStream()->GetData(),len);
+			save.toBuffer((char*) cv->getBitStream()->GetData(),(cv->writeBits()+7)/8);
 			m_network->pushSlotMessage(save.getBitStream());
 		}
 	}

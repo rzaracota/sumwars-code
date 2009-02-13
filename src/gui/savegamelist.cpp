@@ -61,66 +61,80 @@ void SavegameList::update()
 
 	CEGUI::MultiColumnList* savelist = (CEGUI::MultiColumnList*) win_mgr.getWindow("SavegameList");
 	savelist->resetList();
+	
 	// Liste aller Files im Save Ordner der Form *.sav
-	Ogre::StringVectorPtr files = Ogre::ResourceGroupManager::getSingleton().findResourceNames("Savegame","*.sav");
+	Ogre::FileInfoListPtr files;
+	Ogre::FileInfoList::iterator it;
+	files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("Savegame","*.sav");
 	
 	std::ifstream file;
-	char head[50];
+	char head[60];
+	char bin;
 	int n=0;
-	string name;
-	char lev;
+	int lev;
 	std::string cl;
-	string classname;
+	
+	std::string name,look;
+	std::string classname;
 	std::ostringstream stream;
 	char* bp;
+	std::string filename;
 	// iterieren ueber die Files
-	for (Ogre::StringVector::iterator it = files->begin(); it!= files->end();++it)
+	for (it = files->begin(); it!= files->end();++it)
 	{
-		DEBUG5("file found %s",it->c_str());
+		filename = it->archive->getName();
+		filename += "/";
+		filename += it->filename;
+		DEBUG5("file found %s",filename.c_str());
 		//File oeffnen
 
-		file.open(("../save/"+(*it)).c_str(),std::ios::in| std::ios::binary);
+		file.open(filename.c_str(),std::ios::in| std::ios::binary);
 		if (file.is_open())
 		{
 			savelist->addRow();
 
-			// Daten einlesen
-			for (int i=0;i<50;i++)
+			file.get(bin);
+			
+			if (bin =='0')
 			{
-				file.get(head[i]);
+				int version;
+				file >> version;
+				file >> classname;
+				file >> name;
+				file >> look;
+				file >> lev;
 			}
-
-			// nicht benoetigte Headerdaten ueberspringen
-			bp = head+7;
-
-			char ctmp[11];
-			ctmp[10] = '\0';
-			strncpy(ctmp,bp,10);
-			cl = ctmp;
-
-			// Level einlesen
-			bp +=10;
-			DEBUG5("bp pointer: %i",bp-head);
-			lev = *(bp+32);
-			DEBUG5("level: %i",lev);
-			//hexwrite(bp,33);
+			else
+			{
+			
+				// Daten einlesen
+				for (int i=1;i<60;i++)
+				{
+					file.get(head[i]);
+				}
+				
+				// nicht benoetigte Headerdaten ueberspringen
+				bp = head+7;
+	
+				char ctmp[11];
+				ctmp[10] = '\0';
+				strncpy(ctmp,bp,10);
+				classname = ctmp;
+	
+				bp +=10;
+				char ntmp[33];
+				ntmp[32] = '\0';
+				strncpy(ntmp,bp,32);
+				name = ntmp;
+				
+				// Level einlesen
+				lev = *(bp+52);
+			}
 			stream.str("");
 			stream << (int) lev;
 			savelist->setItem(new ListItem(stream.str()),2,n);
-
-			// Klasse einlesen
-			if (cl=="warrior")
-				classname = "Krieger";
-			if (cl=="mage")
-				classname = "Magier";
-			if (cl=="archer")
-				classname = "Bogenschuetze";
-			if (cl=="priest")
-				classname = "Priester";
 			savelist->setItem(new ListItem(classname),1,n);
-
-			name = bp;
-			savelist->setItem(new SaveListItem(name,(*it)),0,n);
+			savelist->setItem(new SaveListItem(name,filename),0,n);
 			n++;
 
 			file.close();

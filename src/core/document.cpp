@@ -50,9 +50,7 @@ Document::Document()
 
 	// Pointer/Inhalte mit 0 initialisieren
 	m_gui_state.m_chat_window_content = "";
-	m_data_locks=0;
-	m_savegame =0;
-
+	
 
 	// aktuell eingestellte Aktionen setzen
 
@@ -64,7 +62,7 @@ Document::Document()
 	// Shortkeys einstellen
 	m_shortkey_map.clear();
 	
-
+	m_temp_player = 0;
 }
 
 void Document::startGame(bool server)
@@ -89,92 +87,99 @@ void Document::startGame(bool server)
 	m_state = LOAD_SAVEGAME;
 }
 
+void Document::setSaveFile(string s)
+{
+	std::fstream file(s.c_str(),std::ios::in| std::ios::binary);
+	if (file.is_open())
+	{
+		char bin;
+		unsigned char* data=0;
+		m_save_file =s;
+		
+		file.get(bin);
+		
+		CharConv* save;
+		DEBUG5("binary %i",bin);
+		if (bin == '0')
+		{
+			save = new CharConv(&file);
+		}
+		else
+		{
+			int len;
+			file.read((char*) &len,4);
+			DEBUG5("length %i",len);
+			data = new unsigned char[len];
+			file.read((char*) data,len);
+			
+			save = new CharConv(data,len);
+		}
+		
+		if (m_temp_player)
+			delete m_temp_player;
+		
+		m_temp_player = new Player(0,"");
+		m_temp_player->fromSavegame(save);
+		
+		delete save;
+		if (data)
+			delete[] data;
+	}
+	file.close();
+}
 
 void Document::loadSavegame()
 {
 	// Savegame einlesen
 	DEBUG("lese savegame");
-	char head[8];
-	int i;
-	string fname = "../save/";
-	fname += m_save_file;
-	/*
-	if (m_gui_type == GL_GUI)
-	{
-		fname =  m_save_file;
-	}
-	*/
+	string fname = m_save_file;
 	DEBUG5("savegame is %s",fname.c_str());
 
-	std::ifstream file(fname.c_str(),std::ios::in| std::ios::binary);
+	std::fstream file(fname.c_str(),std::ios::in| std::ios::binary);
 	if (file.is_open())
 	{
-		for (i=0;i<8;i++)
+		char bin;
+		unsigned char* data=0;
+		
+		file.get(bin);
+		
+		CharConv* save;
+		if (bin == '0')
 		{
-			file.get(head[i]);
+			save = new CharConv(&file);
 		}
-		CharConv cv((unsigned char*) head,18);
-		char binsave;
-		cv.fromBuffer<char>(binsave);
-		short version;
-		cv.fromBuffer<short>(version);
-		int len;
-		cv.fromBuffer<int>(len);
-		char c;
-		cv.fromBuffer<char>(c);
-		DEBUG5("lese %i bytes",len);
-		char* data= new char[len];
-		memcpy(data,head,8);
-		for (i=8;i<len;i++)
+		else
 		{
-			file.get(data[i]);
+			int len;
+			file.read((char*) &len,4);
+			data = new unsigned char[len];
+			file.read((char*) data,len);
+			
+			save = new CharConv(data,len);
 		}
-
-		CharConv cv2((unsigned char*) data,len);
-
+		
+		if (m_temp_player)
+			delete m_temp_player;
+		
+		m_temp_player = new Player(0,"");
+		m_temp_player->fromSavegame(save);
+		
+		CharConv cv2(0);
+		m_temp_player->toSavegame(&cv2);
+		
 		World::getWorld()->handleSavegame(&cv2);
 
-
 		// aktuelle Aktion setzen
-		// TODO: aus dem Savegame einlesen
-
-		/*int n=0;
-		if (c==WorldObje)
-			n=4;
-		if (c==WorldObject::TypeInfo::SUBTYPE_MAGE)
-			n=6;
-		if (c==WorldObject::TypeInfo::SUBTYPE_ARCHER)
-			n=5;
-		if (c==WorldObject::TypeInfo::SUBTYPE_PRIEST)
-			n=7;
-*/
-/*
-		char* tmp = data +101;
-		n = cv->fromBuffer<short>(tmp);
-		DEBUG("left action %i",n);
-		setLeftAction((Action::ActionType) n);
-		m_left_action =(Action::ActionType) n;
-
-		n = cv->fromBuffer<short>(tmp);
-		DEBUG("right action %i",n);
-		setRightAction((Action::ActionType) n);
-		m_right_action=(Action::ActionType) n;
-*/
-		/*
-		setRightAction(Action::ATTACK) ;
-		m_left_action = Action::ATTACK;
-		setLeftAction(Action::ATTACK);
-		m_right_action = Action::ATTACK;
-*/
-
 		m_state =RUNNING;
 		m_gui_state.m_shown_windows = NO_WINDOWS;
 		m_gui_state.m_sheet = GAME_SCREEN;
-		m_modified = WINDOWS_MODIFIED | GUISHEET_MODIFIED;
+		m_modified = WINDOWS_MODIFIED | GUISHEET_MODIFIED | SAVEGAME_MODIFIED;
 		m_timer.start();
 
-
-		delete[] data;
+		file.close();
+		if (data)
+			delete[] data;
+		delete save;
 	}
 	else
 	{
@@ -197,22 +202,6 @@ void Document::sendCommand(ClientCommand* comm)
 
 }
 
-void Document::lock()
-{
-	while (m_data_locks>0)
-		//DEBUG("waiting in lock");
-		;
-
-	m_data_locks++;
-}
-
-void Document::unlock()
-{
-	m_data_locks--;
-
-	if (m_data_locks>0)
-		ERRORMSG("kritischer Abschnitt verletzt");
-}
 
 KeyCode Document::getMappedKey(ShortkeyDestination sd)
 {
@@ -1053,7 +1042,7 @@ void Document::update(float time)
 			updateContent(time);
 			m_shutdown_timer += time;
 			
-			//setState(SHUTDOWN_WRITE_SAVEGAME);
+			setState(SHUTDOWN_WRITE_SAVEGAME);
 			
 			if (m_shutdown_timer>400)
 			{
@@ -1067,10 +1056,6 @@ void Document::update(float time)
 			void* ret;
 			pthread_create(&thread,0,&Document::writeSaveFile,this);
 			pthread_join(thread, &ret);
-
-			// Spielwelt abschalten
-			World::deleteWorld();
-
 
 			m_state = SHUTDOWN;
 			break;
@@ -1243,55 +1228,66 @@ void* Document::writeSaveFile(void* doc_ptr)
 	
 	
 	Document* doc = (Document*) doc_ptr;
-	
+	CharConv* save;
 	std::stringstream str;
-	CharConv  save(&str);
-	doc->getLocalPlayer()->toSavegame(&save);
-	DEBUG("%s",str.str().c_str());
-	return 0;
 	
-	if (doc->m_savegame!=0)
+	bool binary = false;
+	if (!binary)
 	{
-
-		// Savegame schreiben
-		std::stringstream* stream = dynamic_cast<std::stringstream*> (doc->m_savegame->getStream());
-		char* bp;
-		int len;
-		char bin =1;
-		if (stream ==0)
+		save = new CharConv(&str);
+	}
+	else
+	{
+		save = new CharConv(0);
+	}
+	
+	doc->getLocalPlayer()->toSavegame(save);
+	
+	// Savegame schreiben
+	std::stringstream* stream = dynamic_cast<std::stringstream*> (save->getStream());
+	char* bp=0;
+	int len=0;
+	char bin ='0';
+	if (stream ==0)
+	{
+		bp = (char*) save->getBitStream()->GetData();
+		len = (save->writeBits()+7)/8;
+		bin ='1';
+		DEBUG("binary");
+	}
+	// Laenge der Datei
+	
+	// Daten byteweise in Datei schreiben
+	std::ofstream file;
+	if (bin ==1)
+	{
+		file.open(doc->m_save_file.c_str(),std::ios::out | std::ios::binary);
+	}
+	else
+	{
+		file.open(doc->m_save_file.c_str());
+	}
+	if ( file.is_open() )
+	{
+		file << bin;
+		if (bin =='1')
 		{
-			bp = (char*) doc->m_savegame->getBitStream()->GetData();
-			len = (doc->m_savegame->writeBits()+7)/8;
-			bin =0;
-		}
-		// Laenge der Datei
-		
-		// Daten byteweise in Datei schreiben
-		std::ofstream file;
-		if (bin ==1)
-		{
-			file.open(doc->m_save_file.c_str(),std::ios::out | std::ios::binary);
+			file.write((char*) (&len),4);
+			file.write(bp,len);
 		}
 		else
 		{
-			file.open(doc->m_save_file.c_str());
+			file << stream->str();
+			DEBUG5("save: \n %s",stream->str().c_str());
 		}
-		if ( file.is_open() )
-		{
-			file << bin;
-			if (bin ==1)
-			{
-				file.write((char*) (&len),sizeof(int));
-				file.write(bp,len);
-			}
-			else
-			{
-				file << stream->str();
-			}
-			
-			file.close();
-		}
+		
+		file.close();
 	}
+	else
+	{
+		ERRORMSG("cannot open save file: %s",doc->m_save_file.c_str());
+	}
+	delete save;
 
 	return 0;
 }

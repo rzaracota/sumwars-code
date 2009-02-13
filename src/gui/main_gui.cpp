@@ -18,7 +18,8 @@ int main (int argc, char *argv[]) {
 	#ifndef WIN32
 	if (argc>=2)
 	{
-		save = argv[1];
+		save = "../save/";
+		save += argv[1];
 	}
 	else
 	{

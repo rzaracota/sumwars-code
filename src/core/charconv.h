@@ -24,6 +24,13 @@ class CharConv
 	CharConv();
 	
 	/**
+	 * \fn CharConv(int dummy)
+	 * \brief Erzeugt ein Objekt mit leerem Bitstream (Standard ist, dass eine Kennung und ein Zeitstempel geschrieben wird)
+	 * \param dummy Dummy Parameter um eine unterschiedliche Signatur zu erzeugen
+	 */
+	CharConv(int dummy);
+	
+	/**
 	 * \fn CharConv(std::iostream* stream)
 	 * \param stream Datenstrom, in den Daten geschrieben werden
 	 */
@@ -100,6 +107,20 @@ class CharConv
 	 */
 	void fromBuffer(std::string& s, unsigned int size);
 	
+	/**
+	 * \fn void toBuffer(char c)
+	 * \brief Schreibt einen char in den Buffer
+	 * \param c char
+	 */
+	void toBuffer(char c);
+	
+	
+	/**
+	 * \fn void fromBuffer(char &c)
+	 * \brief liest einen char aus dem Puffer
+	 * \param c char
+	 */
+	void fromBuffer(char &c);
 	
 	/**
 	 * \fn void toBuffer(T data)
@@ -138,7 +159,7 @@ class CharConv
 	}
 	
 	/**
-	 * \fn virtual void toBuffer(std::string s)
+	 * \fn void toBuffer(std::string s)
 	 * \brief Schreibt einen String in den Buffer, indem zuerst die Laenge und dann die Daten geschrieben werden
 	 * \param s String
 	 */
@@ -146,7 +167,7 @@ class CharConv
 	
 	
 	/**
-	 * \fn virtual void fromBuffer(std::string s)
+	 * \fn void fromBuffer(std::string s)
 	 * \brief liest einen String aus dem Puffer
 	 * \param s String
 	 */
