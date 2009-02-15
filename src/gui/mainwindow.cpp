@@ -114,6 +114,10 @@ bool MainWindow::setupMainMenu()
 		m_sub_windows["MainMenu"] = wnd;
 		m_main_menu->addChildWindow(wnd->getCEGUIWindow());
 		
+		wnd = new CharCreate(m_document);
+		m_sub_windows["CharCreate"] = wnd;
+		m_main_menu->addChildWindow(wnd->getCEGUIWindow());
+		
 
 	// Verbinden mit dem Document
 	}
@@ -195,7 +199,9 @@ void MainWindow::update()
 		CEGUI::FrameWindow* savelist = (CEGUI::FrameWindow*) win_mgr.getWindow("SavegameMenu");
 		if (wflags & Document::SAVEGAME_LIST)
 		{
+			
 			savelist->setVisible(true);
+			m_sub_windows["SavegameList"]->update();
 		}
 		else
 		{
@@ -211,6 +217,16 @@ void MainWindow::update()
 		else
 		{
 			start_menu->setVisible(false);
+		}
+		
+		CEGUI::FrameWindow* char_create = (CEGUI::FrameWindow*) win_mgr.getWindow("CharCreate");
+		if (wflags & Document::CHAR_CREATE)
+		{
+			char_create->setVisible(true);
+		}
+		else
+		{
+			char_create->setVisible(false);
 		}
 
 
@@ -658,6 +674,13 @@ void  MainWindow::updateMainMenu()
 	m_sub_windows["SavegameList"]->update();
 
 }
+
+void  MainWindow::updateCharCreate()
+{
+	m_sub_windows["CharCreate"]->update();
+
+}
+
 
 void MainWindow::updateCursorItemImage()
 {

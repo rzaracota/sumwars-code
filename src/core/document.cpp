@@ -195,6 +195,52 @@ Document::~Document()
 }
 // Methods
 
+void Document::onCreateNewCharButton()
+{
+	if (m_temp_player)
+		delete m_temp_player;
+	
+	m_modified |= SAVEGAME_MODIFIED;
+	
+	getGUIState()->m_shown_windows =CHAR_CREATE;
+	m_modified |= WINDOWS_MODIFIED;
+	
+}
+
+void Document::setNewCharacter(WorldObject::TypeInfo::ObjectSubtype subtype, PlayerLook look)
+{	
+	if (m_temp_player)
+		delete m_temp_player;
+	
+	m_temp_player = new Player(0,subtype);
+	m_temp_player->getPlayerLook() = look;
+}
+
+void Document::createNewCharacter(std::string name)
+{
+	if (m_temp_player)
+	{
+		m_save_file = "../save/";
+		m_save_file += name;
+		m_save_file += ".sav";
+		
+		m_temp_player ->setName(name);
+		
+		DEBUG5("savefile %s",m_save_file.c_str());
+		
+		std::ifstream file(m_save_file.c_str());
+		if (file.is_open())
+		{
+			ERRORMSG("file exists: %s",m_save_file.c_str());
+			return;
+		}
+		
+		writeSaveFile(this);
+		
+		getGUIState()->m_shown_windows = Document::START_MENU;
+		setModified(Document::WINDOWS_MODIFIED);
+	}
+}
 
 void Document::sendCommand(ClientCommand* comm)
 {

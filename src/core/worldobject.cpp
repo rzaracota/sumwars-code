@@ -32,6 +32,9 @@ bool WorldObject::moveTo(Vector newpos)
 
 Region* WorldObject::getRegion()
 {
+	if (World::getWorld() == 0)
+		return 0;
+	
 	return World::getWorld()->getRegion(m_grid_location.m_region);
 }
 

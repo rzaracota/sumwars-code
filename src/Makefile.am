@@ -79,6 +79,7 @@ sumwars_SOURCES = core/trade.cpp \
 	gui/savegamelist.cpp \
 	gui/chatline.cpp \
 	gui/partyinfo.cpp \
+	gui/charcreate.cpp \
 	gui/sound.cpp \
 	tinyxml/tinyxml.cpp \
 	tinyxml/tinyxmlparser.cpp \

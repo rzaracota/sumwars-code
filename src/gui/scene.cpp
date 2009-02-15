@@ -166,16 +166,12 @@ void Scene::loadFixedObjectData(std::string file)
 void Scene::registerMeshes()
 {
 	// Meshes fuer Objekte registrieren
-	registerPlayerLook("warrior","warrior_m",true);
-	registerPlayerLook("mage","mage_m",true);
-	registerPlayerLook("priest","priest_f",false);
-	registerPlayerLook("archer","archer_f",false);
+	registerPlayerLook("warrior","warrior_m","warrior_m.mesh", true);
+	registerPlayerLook("warrior","warrior_f","archer_f.mesh", false);
 	
-	registerPlayer("warrior_m","warrior_m.mesh");
-	registerPlayer("mage_m","mage_m.mesh");
-	registerPlayer("priest_f","priest_f.mesh");
-	registerPlayer("archer_f","archer_f.mesh");
-	
+	registerPlayerLook("mage","mage_m","mage_m.mesh", true);
+	registerPlayerLook("priest","priest_f","priest_f.mesh", false);
+	registerPlayerLook("archer","archer_f","archer_f.mesh",false);
 	
 	// Spieler
 	registerObject("warrior","warrior_m.mesh","");
@@ -273,13 +269,9 @@ void Scene::registerAttachedMesh(WorldObject::TypeInfo::ObjectSubtype subtype, s
     }
 }
 
-void Scene::registerPlayer(PlayerLook look, std::string mesh)
+void Scene::registerPlayerLook(WorldObject::TypeInfo::ObjectSubtype subtype, PlayerLook look, std::string mesh, bool male)
 {
 	m_player_render_info.insert(std::make_pair(look, RenderInfo(mesh, "")));
-}
-
-void Scene::registerPlayerLook(WorldObject::TypeInfo::ObjectSubtype subtype, PlayerLook look, bool male )
-{
 	m_player_look.insert(std::make_pair(subtype, std::make_pair(male,look)));
 }
 
@@ -352,6 +344,19 @@ RenderInfo  Scene::getProjectileRenderInfo(Projectile::ProjectileType type)
 	{
 		// Standardmesh
 		return RenderInfo("arrow.mesh","");
+	}
+}
+
+void Scene::getPlayerLook(WorldObject::TypeInfo::ObjectSubtype subtype, std::list< std::pair<bool, PlayerLook> > &looks)
+{
+	std::multimap< WorldObject::TypeInfo::ObjectSubtype, std::pair<bool, PlayerLook> >::iterator it,jt;
+	it = m_player_look.lower_bound(subtype);
+	jt = m_player_look.upper_bound(subtype);
+	
+	while (it != jt)
+	{
+		looks.push_back(it->second);
+		++it;
 	}
 }
 

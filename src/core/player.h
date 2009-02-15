@@ -547,6 +547,16 @@ public:
 		return m_name;
 	}
 	
+	/**
+	 * \fn void setName(std::string name)
+	 * \brief Setzt den Name des Spielers
+	 * \param name Name
+	 */
+	void setName(std::string name)
+	{
+		m_name = name;
+	}
+	
 
 //Protected stuff
 protected:

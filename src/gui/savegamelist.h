@@ -5,35 +5,8 @@
 
 #include "window.h"
 
-/**
- * \class ListItem
- * \brief Eintrag einer CEGUI Auswahlliste
- */
-class ListItem : public CEGUI::ListboxTextItem
-{
-	public:
-		ListItem(const CEGUI::String& text) : ListboxTextItem(text)
-		{
-			setSelectionBrushImage("TaharezLook", "MultiListSelectionBrush");
-		}
-};
 
-/**
- * \class SaveListItem
- * \brief Eintrag der Auswahlliste der Savegames
- */
-class SaveListItem : public ListItem
-{
-	public:
-		SaveListItem(const CEGUI::String& text, std::string file) : ListItem(text)
-		{
-			setSelectionBrushImage("TaharezLook", "MultiListSelectionBrush");
-			m_filename = file;
-		}
-
-		std::string m_filename;
-};
-
+#include "listitem.h"
 
 
 /**
@@ -61,6 +34,12 @@ class SavegameList : public Window
 		 * \brief Behandelt Auswahl eines Savegames in der Liste
 		 */
 		bool onSavegameChosen(const CEGUI::EventArgs& evt);
+		
+		/**
+		 * \fn bool onNewCharClicked(const CEGUI::EventArgs& evt)
+		 * \brief Behandelt Auswahl eines Savegames in der Liste
+		 */
+		bool onNewCharClicked(const CEGUI::EventArgs& evt);
 
 		/**
 		 * \fn bool onSavegameSelected(const CEGUI::EventArgs& evt)

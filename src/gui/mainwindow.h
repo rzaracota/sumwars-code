@@ -32,6 +32,7 @@
 #include "savegamelist.h"
 #include "chatline.h"
 #include "partyinfo.h"
+#include "charcreate.h"
 
 /**
  * \class MainWindow
@@ -143,6 +144,12 @@ class MainWindow :
 	bool setupPartyInfo();
 	
 	/**
+	 * \fn bool setupCharCreate
+	 * \brief erstellt Fenster zur Charaktererstellung
+	 */
+	bool setupCharCreate();
+	
+	/**
 	 * \fn bool initInputs()
 	 * \brief Initialisiert die Eingabegeraete
 	 */
@@ -177,6 +184,12 @@ class MainWindow :
 	 * \brief Aktualisiert die Informationen zu Partymitgliedern
 	 */
 	void updatePartyInfo();
+	
+	/**
+	 * \fn void updateCharCreate
+	 * \brief aktualisiert Fenster zur Charaktererstellung
+	 */
+	void updateCharCreate();
 	
 	/**
 	 * \fn void updateSpeechBubbles()

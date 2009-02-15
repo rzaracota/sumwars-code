@@ -150,6 +150,7 @@ class Document
 		PARTY = 32,
 		SAVEGAME_LIST = 64,
 		START_MENU = 128,
+		CHAR_CREATE = 256,
 	};
 
 	/**
@@ -641,6 +642,27 @@ class Document
 	 * \brief sendet eine Chatnachricht an alle Spieler
 	 */
 	void sendChatMessage(std::string msg);
+	
+	/**
+	 * \fn void setNewCharacter(WorldObject::TypeInfo::ObjectSubtype subtype, PlayerLook look)
+	 * \brief setzt die Daten fuer neuen Spieler
+	 * \param subtype Typ des Spielers
+	 * \param look Aussehen des Spielers
+	 */
+	void setNewCharacter(WorldObject::TypeInfo::ObjectSubtype subtype, PlayerLook look);
+	
+	/**
+	 * \fn void createNewCharacter()
+	 * \brief erzeugt einen neuen Spieler
+	 * \param name Name des Spielers
+	 */
+	void createNewCharacter(std::string name);
+	
+	/**
+	 * \fn void onCreateNewCharButton()
+	 * \brief Oeffnet das Fenster zur Charaktererstellung
+	 */
+	void onCreateNewCharButton();
 
 	/**
 	 * \fn void emitDebugSignal(int i=0)
@@ -668,7 +690,7 @@ class Document
 	Player* getLocalPlayer()
 	{
 		if (World::getWorld() ==0)
-			return 0;
+			return m_temp_player;
 
 		return static_cast<Player*>(World::getWorld()->getLocalPlayer());
 	}

@@ -157,6 +157,14 @@ class Scene
 	 */
 	std::pair<float,float> getProjection(Vector pos);
 	
+	/**
+	 * \fn static void getPlayerLook(WorldObject::TypeInfo::ObjectSubtype subtype, std::list< std::pair<bool, PlayerLook> > &looks)
+	 * \brief Gibt fuer eine gegebene Spielerklasse alle Moeglichkeiten des Aussehens aus
+	 * \param subtype Spielerklasse
+	 * \param looks Ausgabe: Vektor mit allen Varianten
+	 */
+	static void getPlayerLook(WorldObject::TypeInfo::ObjectSubtype subtype, std::list< std::pair<bool, PlayerLook> > &looks);
+	
 
 	private:
 
@@ -287,21 +295,14 @@ class Scene
 	static void registerObject(WorldObject::TypeInfo::ObjectSubtype subtype, std::string mesh, std::string particle_system= "", float scaling_factor =1.0);
 	
 	/**
-	 * \fn static void registerPlayer(PlayerLook look, std::string mesh)
-	 * \brief Registriert fuer ein Aussehen des Spielers das passende Mesh
-	 * \param Aussehen des Spielers
-	 * \param mesh Ogre Mesh
-	 */
-	static void registerPlayer(PlayerLook look, std::string mesh);
-	
-	/**
-	 * \fn static void registerPlayerLook(WorldObject::TypeInfo::ObjectSubtype subtype, PlayerLook look, bool male = true)
+	 * \fn static void registerPlayerLook(WorldObject::TypeInfo::ObjectSubtype subtype, PlayerLook look, std::string mesh, bool male = true)
 	 * \brief Registiert ein fuer einen Spielertyp zulaessiges Aussehen
 	 * \param subtype Spielertyp
 	 * \param look Aussehen
 	 * \param male Gibt Geschlecht an
+	 * \param mesh Ogre Mesh
 	 */
-	static void registerPlayerLook(WorldObject::TypeInfo::ObjectSubtype subtype, PlayerLook look, bool male = true);
+	static void registerPlayerLook(WorldObject::TypeInfo::ObjectSubtype subtype, PlayerLook look, std::string mesh, bool male = true);
 
 	/**
 	 * \fn static void registerObjectAnimations(WorldObject::TypeInfo::ObjectSubtype subtype, std::map<Action::ActionType, std::vector<std::string> > &animations)
