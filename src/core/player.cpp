@@ -156,6 +156,7 @@ bool Player::init()
 	bool init = false;
 	
 	Item* si;
+	Equipement* equ = getEquipement();
 	if (getTypeInfo()->m_subtype == "warrior")
 	{
 		dyn->m_health = 200;
@@ -181,29 +182,12 @@ bool Player::init()
 		m_name.assign("Boromir");
 		bas->m_abilities[1] = 0xffffff;
 		
-		Equipement* equ = getEquipement();
-		si = ItemFactory::createItem(Item::WEAPON,"short_sw");
-		insertItem(si);
+		
 
-		si = ItemFactory::createItem(Item::ARMOR,"leath_arm");
-		equ->swapItem(si,Equipement::ARMOR);
+		si = ItemFactory::createItem(Item::WEAPON,"dagger_sw");
+		equ->swapItem(si,Equipement::WEAPON);
 
-		si = ItemFactory::createItem(Item::ARMOR,"heavy_arm");
-		insertItem(si);
-
-		si = ItemFactory::createItem(Item::HELMET,"steel_hlm");
-		equ->swapItem(si,Equipement::HELMET);
-
-		si = ItemFactory::createItem(Item::GLOVES,"leath_gl");
-		equ->swapItem(si,Equipement::GLOVES);
-
-		si = ItemFactory::createItem(Item::SHIELD,"wood_sh");
-		equ->swapItem(si,Equipement::SHIELD);
-
-		si = ItemFactory::createItem(Item::WEAPON,"horse_sw");
-		insertItem(si);
-
-		si = ItemFactory::createItem(Item::WEAPON,"battle_axe");
+		
 	}
 	else if (getTypeInfo()->m_subtype == "archer")
 	{
@@ -232,9 +216,9 @@ bool Player::init()
 		m_name.assign("Legolas");
 		bas->m_abilities[2] = 0xffffff;
 
+		si = ItemFactory::createItem(Item::WEAPON,"trainy_sbw");
+		equ->swapItem(si,Equipement::WEAPON);
 		
-		si = ItemFactory::createItem(Item::WEAPON,"wood_bow");
-		insertItem(si);
 		
 	}
 	else if (getTypeInfo()->m_subtype == "mage")
@@ -261,9 +245,7 @@ bool Player::init()
 		
 	
 		si = ItemFactory::createItem(Item::WEAPON,"ice_wand");
-		insertItem(si);
-		si = ItemFactory::createItem(Item::WEAPON,"ice_staff");
-		insertItem(si);
+		equ->swapItem(si,Equipement::WEAPON);
 
 		// Debugging
 		bas->m_abilities[3] = 0xffffff;
@@ -294,6 +276,9 @@ bool Player::init()
 		// Debugging
 		bas->m_abilities[4] = 0xffffff;
 		m_name.assign("Elrond");
+		
+		si = ItemFactory::createItem(Item::WEAPON,"hammer_hmr");
+		equ->swapItem(si,Equipement::WEAPON);
 	}
 
 	

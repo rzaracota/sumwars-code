@@ -71,6 +71,17 @@ struct RenderInfo
 class Scene
 {
 	public:
+		
+	/**
+	 * \enum ViewportSize
+	 * \brief verschiedene Anordnungen der Flaeche in die gerendert wird
+	 */
+	enum ViewportSize
+	{
+		VIEW_FULL =1,
+		VIEW_LEFT = 2,
+  		VIEW_RIGHT =3,
+	};
 
 	/**
 	 * \fn Scene(Document* doc,Ogre::RenderWindow* window)
@@ -110,6 +121,12 @@ class Scene
 	{
 		return m_viewport;
 	}
+	
+	/**
+	 * \fn void changeViewportSize(ViewportSize size)
+	 * \brief Aendert die Flaeche in die gerendert wird
+	 */
+	void changeViewportSize(ViewportSize size);
 
 
 	/**
@@ -164,6 +181,12 @@ class Scene
 	 * \param looks Ausgabe: Vektor mit allen Varianten
 	 */
 	static void getPlayerLook(WorldObject::TypeInfo::ObjectSubtype subtype, std::list< std::pair<bool, PlayerLook> > &looks);
+	
+	/**
+	 * \fn void updateTempPlayer()
+	 * \brief aktualisiert die Vorschau auf den zu ladenden Spieler
+	 */
+	void updateTempPlayer();
 	
 
 	private:
@@ -490,7 +513,19 @@ class Scene
 	 * \brief interner Pool von Partikelsystem
 	 */
 	std::multimap<std::string, Ogre::ParticleSystem*> m_particle_system_pool;
-
+	
+	
+	/**
+	 * \var ViewportSize m_viewport_size
+	 * \brief aktuelle Groesse und Platzierung der Flaeche in die gerendert wird
+	 */
+	ViewportSize m_viewport_size;
+	
+	/**
+	 * \var std::string m_temp_player
+	 * \brief Vorschau Objekt auf den aktuellen Spieler
+	 */
+	std::string m_temp_player;
 };
 
 #endif

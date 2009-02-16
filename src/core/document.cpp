@@ -124,6 +124,8 @@ void Document::setSaveFile(string s)
 		delete save;
 		if (data)
 			delete[] data;
+		
+		m_modified |= SAVEGAME_MODIFIED;
 	}
 	file.close();
 }
@@ -198,7 +200,10 @@ Document::~Document()
 void Document::onCreateNewCharButton()
 {
 	if (m_temp_player)
+	{
 		delete m_temp_player;
+		m_temp_player =0;
+	}
 	
 	m_modified |= SAVEGAME_MODIFIED;
 	
@@ -214,6 +219,8 @@ void Document::setNewCharacter(WorldObject::TypeInfo::ObjectSubtype subtype, Pla
 	
 	m_temp_player = new Player(0,subtype);
 	m_temp_player->getPlayerLook() = look;
+	
+	m_modified |= SAVEGAME_MODIFIED;
 }
 
 void Document::createNewCharacter(std::string name)

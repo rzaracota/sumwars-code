@@ -5,7 +5,6 @@
 
 #include "window.h"
 
-
 #include "listitem.h"
 
 
@@ -17,8 +16,9 @@ class SavegameList : public Window
 {
 	public:
 		/**
-	 * \fn SavegameList (Document* doc)
-	 * \brief Konstruktor
+		 * \fn SavegameList (Document* doc)
+		 * \brief Konstruktor
+		 * \param doc Dokument
 		 */
 		SavegameList (Document* doc);
 	

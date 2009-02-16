@@ -46,6 +46,9 @@ Scene::Scene(Document* doc,Ogre::RenderWindow* window)
 	registerMeshes();
 
 	m_region_id = -1;
+	m_particle_system_pool.clear();
+	
+	m_temp_player ="";
 
 }
 
@@ -175,7 +178,6 @@ void Scene::registerMeshes()
 	
 	// Spieler
 	registerObject("warrior","warrior_m.mesh","");
-	//registerAttachedMesh("warrior","itemRightHand","sword.mesh");
 	registerObject("mage","mage_m.mesh","");	// TODO
 	registerObject("priest","priest_f.mesh",""); // TODO
 	registerObject("archer","archer_f.mesh",""); // TODO
@@ -368,6 +370,27 @@ std::pair<float,float> Scene::getProjection(Vector pos)
 	projpos = m_camera->getProjectionMatrix()*m_camera->getViewMatrix()*ipos;
 
 	return std::make_pair(0.5 + 0.5*projpos.x / projpos.w, 0.5 - 0.5*projpos.y / projpos.w);
+}
+
+void Scene::changeViewportSize(ViewportSize size)
+{
+	m_viewport_size = size;
+	/*
+	if (size == VIEW_FULL)
+	{
+		m_viewport->setDimensions(0,0,1,1);
+	}
+	else if (size == VIEW_LEFT)
+	{
+		m_viewport->setDimensions(0,0,0.6,1);
+	}
+	else if (size == VIEW_RIGHT)
+	{
+		m_viewport->setDimensions(0.4,0,1,1);
+	}
+	
+	m_camera->setAspectRatio(Ogre::Real(m_viewport->getActualWidth()) / Ogre::Real(m_viewport->getActualHeight()));
+	*/
 }
 
 void Scene::update(float ms)
@@ -1394,7 +1417,7 @@ void Scene::putBackParticleSystem(Ogre::ParticleSystem* part)
 
 void Scene::destroySceneNode(std::string& node_name)
 {
-
+	DEBUG5("deleting scene node %s",node_name.c_str());
 	Ogre::SceneNode* node = m_scene_manager->getSceneNode(node_name);
 
 	if (node==0)
@@ -1434,6 +1457,18 @@ void Scene::destroySceneNode(std::string& node_name)
 	std::string name;
 	std::list<Ogre::MovableObject*> objects;
 	std::list<Ogre::MovableObject*>::iterator i;
+	
+	Ogre::Entity* attch_ent;
+	Ogre::Entity* obj_ent;
+	
+	std::list<Ogre::Entity*> attch_obj;
+	std::list<Ogre::Entity*>::iterator kt;
+	
+	
+	 // Knochen an den ein Mesh angehaengt ist
+	std::string bone;
+	
+	
 
 	while (it.hasMoreElements())
 	{
@@ -1445,6 +1480,28 @@ void Scene::destroySceneNode(std::string& node_name)
 		DEBUG5("deleting object %s",name.c_str());
 
 		objects.push_back(obj);
+		
+		// Schleife ueber die angehaengten Kindelemente
+		obj_ent = m_scene_manager->getEntity(name);
+		
+		attch_obj.clear();
+		
+		Ogre::Entity::ChildObjectListIterator iter = obj_ent->getAttachedObjectIterator();
+		while (iter.hasMoreElements())
+		{
+			bone = iter.peekNextKey();
+			bone = bone.substr(name.size());
+			DEBUG5("attached mesh %s",bone.c_str());
+			
+			attch_ent = static_cast<Ogre::Entity*>(iter.getNext());
+			attch_obj.push_back(attch_ent);
+		}
+		
+		obj_ent->detachAllObjectsFromBone();
+		for (kt = attch_obj.begin(); kt != attch_obj.end(); ++kt)
+		{
+			m_scene_manager->destroyMovableObject(*kt);
+		}
 
 		it.moveNext();
 	}
@@ -1503,27 +1560,30 @@ void Scene::createScene()
 
 	Region* region = m_document->getLocalPlayer()->getRegion();
 
-	Shape s;
-	s.m_center = Vector(0,0);
-	s.m_type = Shape::RECT;
-	s.m_extent = Vector(10000,10000);
-
-	region->getObjectsInShape(&s,&stat_objs, WorldObject::LAYER_ALL,WorldObject::FIXED);
-	std::list<WorldObject*>::iterator it;
-	std::string name;
-	for (it = stat_objs.begin(); it !=stat_objs.end();++it)
+	if (region !=0)
 	{
-		name = (*it)->getNameId();
-
-		DEBUG5("create static object %s",name.c_str());
-
-		// Objekt in der Szene erzeugen
-		createObject((*it),name, ((*it)->getState() == WorldObject::STATE_STATIC));
-
+		Shape s;
+		s.m_center = Vector(0,0);
+		s.m_type = Shape::RECT;
+		s.m_extent = Vector(10000,10000);
+	
+		region->getObjectsInShape(&s,&stat_objs, WorldObject::LAYER_ALL,WorldObject::FIXED);
+		std::list<WorldObject*>::iterator it;
+		std::string name;
+		for (it = stat_objs.begin(); it !=stat_objs.end();++it)
+		{
+			name = (*it)->getNameId();
+	
+			DEBUG5("create static object %s",name.c_str());
+	
+			// Objekt in der Szene erzeugen
+			createObject((*it),name, ((*it)->getState() == WorldObject::STATE_STATIC));
+	
+		}
+	
+		// Tiles einfuegen
+		insertTiles();
 	}
-
-	// Tiles einfuegen
-	insertTiles();
 
 }
 
@@ -1571,4 +1631,25 @@ void  Scene::insertTiles()
 	*/
 }
 
-
+void Scene::updateTempPlayer()
+{
+	DEBUG5("update temp player");
+	if (m_temp_player != "")
+	{
+		deleteObject(m_temp_player);
+	}
+	
+	m_camera->setPosition(Ogre::Vector3(300, 100, 0));
+	m_camera->lookAt(Ogre::Vector3(0,80,70));
+	
+	if (m_document->getLocalPlayer() != 0)
+	{
+		m_temp_player  = m_document->getLocalPlayer()->getNameId();
+		updateObject(m_document->getLocalPlayer());
+	}
+	else
+	{
+		m_temp_player = "";
+	}
+	
+}

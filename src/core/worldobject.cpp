@@ -9,6 +9,8 @@ WorldObject::WorldObject( int id)
 	m_state = STATE_ACTIVE;
 	init();
 	m_event_mask=0;
+	
+	m_grid_location.m_region = -1;
 }
 
 bool WorldObject::isCreature()

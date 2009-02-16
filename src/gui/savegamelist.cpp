@@ -166,7 +166,7 @@ bool SavegameList::onSavegameChosen(const CEGUI::EventArgs& evt)
 	{
 		StrListItem * sitm = (StrListItem *) itm;
 		m_document->setSaveFile(sitm->m_data);
-		DEBUG("selected Savegame %s", sitm->m_data.c_str());
+		DEBUG5("selected Savegame %s", sitm->m_data.c_str());
 	}
 
 	return true;

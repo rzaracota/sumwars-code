@@ -102,9 +102,6 @@ bool MainWindow::setupMainMenu()
 		img->setProperty("Image", "set:startscreen.png image:full_image");
 		img->moveToBack ();
 		img->setMousePassThroughEnabled(true);
-		
-		// m_main_menu->setProperty("BackgroundEnabled", "true");
-		//m_main_menu->setProperty("Image", "set:startscreen.png image:full_image");
 
 		Window* wnd = new SavegameList(m_document);
 		m_sub_windows["SavegameList"] = wnd;
@@ -163,6 +160,13 @@ void MainWindow::update()
 		}
 	}
 
+	
+	if (m_document->getModified() & Document::SAVEGAME_MODIFIED)
+	{
+		m_scene->updateTempPlayer();
+		m_document->setModified(m_document->getModified() & (~Document::SAVEGAME_MODIFIED));
+	}
+	
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 
 	// Flags, welche Fenster gezeigt werden
@@ -192,7 +196,10 @@ void MainWindow::update()
 	// Testen ob Anzeige der Subfenster geaendert werden muss
 	if (m_document->getModified() & Document::WINDOWS_MODIFIED)
 	{
-
+		if (m_document->getGUIState()->m_sheet ==  Document::MAIN_MENU)
+		{
+			updateMainMenu();
+		}
 		DEBUG5("new shown windows %i",wflags);
 
 		// Auswahlliste Savegames  anzeigen wenn entsprechendes Flag gesetzt
@@ -671,7 +678,21 @@ void  MainWindow::setWindowExtents(int width, int height){
 
 void  MainWindow::updateMainMenu()
 {
-	m_sub_windows["SavegameList"]->update();
+	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
+	CEGUI::Window* img;
+	img  = win_mgr.getWindow("StartScreenImage");
+	
+	int wflags = m_document->getGUIState()->m_shown_windows;
+	if (wflags & (Document::SAVEGAME_LIST | Document::CHAR_CREATE))
+	{
+		m_scene->changeViewportSize(Scene::VIEW_RIGHT);
+		img->setVisible(false);
+	}
+	else
+	{
+		m_scene->changeViewportSize(Scene::VIEW_FULL);
+		img->setVisible(true);
+	}
 
 }
 
