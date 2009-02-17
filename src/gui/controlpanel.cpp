@@ -45,7 +45,7 @@ ControlPanel::ControlPanel (Document* doc)
 	// Button Inventar
 	btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", "InventoryButton"));
 	ctrl_panel->addChildWindow(btn);
-	btn->setPosition(CEGUI::UVector2(cegui_reldim(0.4475f), cegui_reldim( 0.65f)));
+	btn->setPosition(CEGUI::UVector2(cegui_reldim(0.495f), cegui_reldim( 0.65f)));
 	btn->setSize(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.30f)));
 	btn->setText("I");
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&ControlPanel::onButtonInventoryClicked, this));
@@ -54,7 +54,7 @@ ControlPanel::ControlPanel (Document* doc)
 	// Button Charakterinfo
 	btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", "CharInfoButton"));
 	ctrl_panel->addChildWindow(btn);
-	btn->setPosition(CEGUI::UVector2(cegui_reldim(0.3675f), cegui_reldim( 0.65f)));
+	btn->setPosition(CEGUI::UVector2(cegui_reldim(0.415f), cegui_reldim( 0.65f)));
 	btn->setSize(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.30f)));
 	btn->setText("C");
 	btn->setWantsMultiClickEvents(false);
@@ -63,7 +63,7 @@ ControlPanel::ControlPanel (Document* doc)
 	// Button Chat oeffnen
 	btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", "ChatOpenButton"));
 	ctrl_panel->addChildWindow(btn);
-	btn->setPosition(CEGUI::UVector2(cegui_reldim(0.64f), cegui_reldim( 0.65f)));
+	btn->setPosition(CEGUI::UVector2(cegui_reldim(0.655f), cegui_reldim( 0.65f)));
 	btn->setSize(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.30f)));
 	btn->setText("M");
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&ControlPanel::onButtonOpenChatClicked, this));
@@ -72,7 +72,7 @@ ControlPanel::ControlPanel (Document* doc)
 	// Button SkillTree
 	btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", "SkillTreeButton"));
 	ctrl_panel->addChildWindow(btn);
-	btn->setPosition(CEGUI::UVector2(cegui_reldim(0.5275f), cegui_reldim( 0.65f)));
+	btn->setPosition(CEGUI::UVector2(cegui_reldim(0.575f), cegui_reldim( 0.65f)));
 	btn->setSize(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.30f)));
 	btn->setText("T");
 	btn->setWantsMultiClickEvents(false);
@@ -86,6 +86,15 @@ ControlPanel::ControlPanel (Document* doc)
 	btn->setText("P");
 	btn->setWantsMultiClickEvents(false);
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&ControlPanel::onButtonPartyClicked, this));
+	
+	// Button Party
+	btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", "QuestInfoButton"));
+	ctrl_panel->addChildWindow(btn);
+	btn->setPosition(CEGUI::UVector2(cegui_reldim(0.335f), cegui_reldim( 0.65f)));
+	btn->setSize(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.30f)));
+	btn->setText("Q");
+	btn->setWantsMultiClickEvents(false);
+	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&ControlPanel::onButtonQuestInfoClicked, this));
 
 	// Button Speichern und Beenden
 	btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", "SaveExitButton"));
@@ -286,5 +295,9 @@ bool ControlPanel::onButtonOpenChatClicked(const CEGUI::EventArgs& evt)
 	return true;
 }
 
-
+bool ControlPanel::onButtonQuestInfoClicked(const CEGUI::EventArgs& evt)
+{
+	m_document->onButtonQuestInfoClicked();
+	return true;
+}
 

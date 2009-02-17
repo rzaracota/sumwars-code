@@ -61,6 +61,12 @@ class ControlPanel : public ItemWindow
 		bool onButtonOpenChatClicked(const CEGUI::EventArgs& evt);
 		
 		
+		/**
+		 * \fn bool onButtonQuestInfoClicked(const CEGUI::EventArgs& evt);
+		 * \brief Behandelt Klick auf QuestInfo Button
+		 */
+		bool onButtonQuestInfoClicked(const CEGUI::EventArgs& evt);
+		
 		
 		
 };

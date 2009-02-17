@@ -175,7 +175,7 @@ void Document::loadSavegame()
 		m_state =RUNNING;
 		m_gui_state.m_shown_windows = NO_WINDOWS;
 		m_gui_state.m_sheet = GAME_SCREEN;
-		m_modified = WINDOWS_MODIFIED | GUISHEET_MODIFIED | SAVEGAME_MODIFIED;
+		m_modified = WINDOWS_MODIFIED | GUISHEET_MODIFIED;
 		m_timer.start();
 
 		file.close();
@@ -706,7 +706,7 @@ void Document::onButtonCharInfoClicked()
 	}
 	else
 	{
-		getGUIState()->m_shown_windows &= ~PARTY;
+		getGUIState()->m_shown_windows &= ~(PARTY | QUEST_INFO);
 		
 		getGUIState()->m_shown_windows |= CHARINFO;
 	}
@@ -725,7 +725,7 @@ void Document::onButtonPartyInfoClicked()
 	else
 	{
 		// wenn PartyInfo geoeffnet wird, dann CharInfo schliessen
-		getGUIState()->m_shown_windows &= ~CHARINFO;
+		getGUIState()->m_shown_windows &= ~(CHARINFO | QUEST_INFO);
 
 		getGUIState()->m_shown_windows |= PARTY;
 	}
@@ -772,6 +772,25 @@ void Document::onButtonOpenChatClicked()
 	// Geoeffnete Fenster haben sich geaendert
 	m_modified |= WINDOWS_MODIFIED;
 }
+
+void Document::onButtonQuestInfoClicked()
+{
+	// Charakterinfo oeffnen wenn es gerade geschlossen ist und schliessen, wenn es geoeffnet ist
+	if (getGUIState()->m_shown_windows & QUEST_INFO)
+	{
+		getGUIState()->m_shown_windows &= ~QUEST_INFO;
+	}
+	else
+	{
+		getGUIState()->m_shown_windows &= ~(PARTY | CHARINFO);
+		
+		getGUIState()->m_shown_windows |= QUEST_INFO;
+	}
+
+	// Geoeffnete Fenster haben sich geaendert
+	m_modified |= WINDOWS_MODIFIED;
+}
+
 
 void Document::sendChatMessage(std::string msg)
 {
@@ -974,6 +993,10 @@ bool Document::onKeyPress(KeyCode key)
 		else if (dest == SHOW_CHARINFO)
 		{
 			onButtonCharInfoClicked();
+		}
+		else if (dest == SHOW_QUESTINFO)
+		{
+			onButtonQuestInfoClicked();
 		}
 		else if (dest == SHOW_SKILLTREE)
 		{

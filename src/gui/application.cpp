@@ -458,6 +458,8 @@ bool Application::createDocument()
 	m_document->installShortkey(OIS::KC_T,Document::SHOW_SKILLTREE);
 	m_document->installShortkey(OIS::KC_P,Document::SHOW_PARTYMENU);
 	m_document->installShortkey(OIS::KC_M,Document::SHOW_CHATBOX);
+	m_document->installShortkey(OIS::KC_Q,Document::SHOW_QUESTINFO);
+	
  	
 	m_document->installShortkey(OIS::KC_RETURN,Document::SHOW_CHATBOX_NO_TOGGLE);
 	m_document->installShortkey(OIS::KC_W,Document::SWAP_EQUIP);

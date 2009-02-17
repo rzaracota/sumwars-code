@@ -33,6 +33,7 @@
 #include "chatline.h"
 #include "partyinfo.h"
 #include "charcreate.h"
+#include "questinfo.h"
 
 /**
  * \class MainWindow
@@ -148,6 +149,12 @@ class MainWindow :
 	 * \brief erstellt Fenster zur Charaktererstellung
 	 */
 	bool setupCharCreate();
+	
+	/**
+	 * \fn void setupQuestInfo()
+	 * \brief erstellt Fenster Questinfo
+	 */
+	void setupQuestInfo();
 	
 	/**
 	 * \fn bool initInputs()

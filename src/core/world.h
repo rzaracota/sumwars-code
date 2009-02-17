@@ -468,6 +468,15 @@ public:
 	}
 	
 	/**
+	 * \fn std::map<std::string, Quest*>& getQuests()
+	 * \brief Gibt die Liste der Quests aus
+	 */
+	std::map<std::string, Quest*>& getQuests()
+	{
+		return m_quests;
+	}
+	
+	/**
 	 * \fn static World* getWorld()
 	 * \brief Gibt den Zeiger auf das World Singleton Objekt zurueck
 	 */

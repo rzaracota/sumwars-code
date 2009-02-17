@@ -71,6 +71,15 @@ class Quest
 		 * \brief Gibt die Beschreibung des Quests aus
 		 */
 		std::string getDescription();
+		
+		/**
+		 * \fn std::string getName()
+		 * \brief Gibt den Name aus
+		 */
+		std::string getName()
+		{
+			return m_name;
+		}
 	
 	private:
 		/**

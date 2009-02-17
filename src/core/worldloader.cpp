@@ -688,7 +688,7 @@ void WorldLoader::loadQuest(TiXmlNode* node, Quest* quest)
 			if (!strcmp(child->Value(), "Description"))
 			{
 				text = child->FirstChild()->ToText();
-				quest->setInit(text->Value());
+				quest->setDescription(text->Value());
 			}
 			
 			if (!strcmp(child->Value(), "NPC"))

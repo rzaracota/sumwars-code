@@ -259,6 +259,18 @@ void MainWindow::update()
 			inventory->setVisible(false);
 		}
 		
+		// QuestInfo anzeigen wenn entsprechendes Flag gesetzt
+		CEGUI::FrameWindow* quest_info = (CEGUI::FrameWindow*) win_mgr.getWindow("QuestInfo");
+		if (wflags & Document::QUEST_INFO)
+		{
+			quest_info->setVisible(true);
+			m_sub_windows["QuestInfo"]->update();
+		}
+		else
+		{
+			quest_info->setVisible(false);
+		}
+		
 		// Chat Fenster anzeigen wenn entsprechendes Flag gesetzt
 		CEGUI::FrameWindow* chat_window = (CEGUI::FrameWindow*) win_mgr.getWindow("ChatWindow");
 		if (wflags & Document::CHAT)
@@ -428,6 +440,8 @@ bool MainWindow::setupGameScreen()
 
 		// Skilltree Fenster anlegen
 		setupSkilltree();
+		
+		setupQuestInfo();
 
 		// Leiste fuer Item/Objekt-Info anlegen
 		setupObjectInfo();
@@ -506,6 +520,16 @@ void MainWindow::setupInventory()
 	wnd->getCEGUIWindow()->setVisible(false);
 	
 
+}
+
+void MainWindow::setupQuestInfo()
+{
+	Window* wnd = new QuestInfo(m_document);
+	m_sub_windows["QuestInfo"] = wnd;
+	
+	// anfangs ausblenden
+	m_game_screen->addChildWindow(wnd->getCEGUIWindow());
+	wnd->getCEGUIWindow()->setVisible(false);
 }
 
 

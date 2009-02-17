@@ -68,7 +68,6 @@
 			</Condition>
 			<Effect>
 				goblins.nr = goblins.nr +1;
-				print('goblins '..goblins.nr);
 			</Effect>
 		</Event>
 	</Region>

@@ -151,6 +151,7 @@ class Document
 		SAVEGAME_LIST = 64,
 		START_MENU = 128,
 		CHAR_CREATE = 256,
+  		QUEST_INFO = 512,
 	};
 
 	/**
@@ -166,6 +167,7 @@ class Document
 		SHOW_PARTYMENU=4,
 		SHOW_CHATBOX =5,
 		SHOW_CHATBOX_NO_TOGGLE =6,
+		SHOW_QUESTINFO =7,
 		CLOSE_ALL=9,
 		SWAP_EQUIP=10,
 		USE_POTION = 30,
@@ -493,6 +495,12 @@ class Document
 	 * \brief Behandelt Klick auf Chat oeffnen Button
 	 */
 	void onButtonOpenChatClicked();
+	
+	/**
+	 * \fn void onButtonQuestInfoClicked()
+	 * \brief Behandelt Klick auf Chat oeffnen Button
+	 */
+	void onButtonQuestInfoClicked();
 
 	/**
 	 * \fn void onSwapEquip()
