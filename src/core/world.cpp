@@ -171,7 +171,6 @@ void World::createRegion(short region)
 		DEBUG5("region created %p for id %i",reg,region);
 
 		// Debugging
-		reg->setReviveLocation("region0","entry_south");
 		insertRegion(reg,region);
 
 	}
@@ -724,7 +723,8 @@ void World::handleSavegame(CharConv *cv, int slot)
 		pl->getGridLocation()->m_region =0;
 		pl->getShape()->m_center = Vector(9,10);
 
-		insertPlayerIntoRegion(pl,pl->getGridLocation()->m_region, "entry_south");
+		RegionLocation regloc = pl->getRevivePosition();
+		insertPlayerIntoRegion(pl,getRegionId(regloc.first), regloc.second);
 
 
 		if (m_server)

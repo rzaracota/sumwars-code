@@ -231,6 +231,7 @@ class Equipement
 		WEAPON2=9,
 		SHIELD2=10,
 		CURSOR_ITEM=11,
+		NR_BODY_ITEMS=12,
 		BIG_ITEMS=20,
 		MEDIUM_ITEMS=30,
 		SMALL_ITEMS = 60,
@@ -284,28 +285,40 @@ class Equipement
 
 	
 	/**
-	 * \fn int getNumberItems(bool secondary_equip)
+	 * \fn int getNumberItems()
 	 * \brief Gibt aus die Anzahl der Gegenstaende in der Ausruestung zurueck
 	 */
-	int getNumberItems(bool secondary_equip);
+	int getNumberItems();
 	
 	/**
-	 * \fn virtual void toString(CharConv* cv,int& nr, bool secondary_equip)
+	 * \fn virtual void toString(CharConv* cv)
 	 * \brief Konvertiert das Objekt in einen String und schreibt ihn in der Puffer
 	 * \param cv Ausgabepuffer
-	 * \param nr Anzahl der Items
-	 * \param secondary_equip Wenn true, wird die zweite Ausruestung geschrieben
 	 */
-	virtual void toString(CharConv* cv,int& nr, bool secondary_equip);
+	virtual void toString(CharConv* cv);
 
 
 	/**
-	 * \fn virtual void fromString(CharConv* cv,int nr)
+	 * \fn virtual void fromString(CharConv* cv)
 	 * \brief Erzeugt das Objekt aus einem String
 	 * \param cv Eingabepuffer
-	 * \param nr Anzahl der Items
 	 */
-	virtual void fromString(CharConv* cv,int nr);
+	virtual void fromString(CharConv* cv);
+	
+	/**
+	 * \fn virtual void toStringComplete(CharConv* cv)
+	 * \brief Konvertiert das Objekt in einen String und schreibt ihn in der Puffer
+	 * \param cv Ausgabepuffer
+	 */
+	virtual void toStringComplete(CharConv* cv);
+
+
+	/**
+	 * \fn virtual void fromStringComplete(CharConv* cv)
+	 * \brief Erzeugt das Objekt aus einem String
+	 * \param cv Eingabepuffer
+	 */
+	virtual void fromStringComplete(CharConv* cv);
 
 	/**
 	 * \fn void clear()
@@ -333,72 +346,12 @@ class Equipement
 	}
 
 	private:
-
+	
 	/**
-	 * \var Item* m_helmet
-	 * \brief Helm
+	 * \var Item* m_body_items[12]
+	 * \brief am Koeper getragene Gegenstaende
 	 */
-	Item* m_helmet;
-
-	/**
-	 * \var Item* m_armor
-	 * \brief Verwendete Ruestung
-	 */
-	Item* m_armor;
-
-	/**
-	 * \var Item* m_weapon
-	 * \brief Verwendete Waffe
-	 */
-	Item* m_weapon;
-
-	/**
-	 * \var Item* m_weapon2
-	 * \brief sekundaere Waffe
-	 */
-	Item* m_weapon2;
-
-	/**
-	 * \var Item* m_shield
-	 * \brief Verwendeter Schild
-	 */
-	Item* m_shield;
-
-	/**
-	 * \var Item* m_shield2
-	 * \brief Sekundaerer Schild
-	 */
-	Item* m_shield2;
-
-	/**
-	 * \var Item* m_gloves
-	 * \brief Verwendete Handschuhe
-	 */
-	Item* m_gloves;
-
-	/**
-	 * \var Item* m_ring_left
-	 * \brief Ring linke Hand
-	 */
-	Item* m_ring_left;
-
-	/**
-	 * \var Item* m_ring_right
-	 * \brief Ring rechte Hand
-	 */
-	Item* m_ring_right;
-
-	/**
-	 * \var Item* m_amulet
-	 * \brief verwendetes Amulett
-	 */
-	Item* m_amulet;
-
-	/**
-	 * \var  Item* m_cursor_item
-	 * \brief Item, das aktuell mit dem Cursor gehalten wird
-	 */
-	Item* m_cursor_item;
+	Item* m_body_items[12];
 
 	/**
 	 * \var ItemList m_inventory
@@ -412,12 +365,6 @@ class Equipement
 	 */
 	int m_gold;
 
-	/**
-	 * \fn Item* getItemRef(int pos)
-	 * \param pos Position des Items
-	 * \brief Gibt Item an der angegebenen Position aus
-	 */
-		Item* & getItemRef(int pos);
 };
 
 #endif //ITEMLIST_H

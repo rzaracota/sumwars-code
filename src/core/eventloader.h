@@ -28,7 +28,7 @@ class TemplateLoader
 	public:
 	
 	/**
-	 * \fn void loadRegionData(const char* pFilename)
+	 * \fn void loadEvent(const char* pFilename, std::list<TempEvent*> &temp_event_list)
 	 * \brief Sorgt fuer das Anlegen von FixedObjectData, die in einer XML-Datei gespeichert sind
 	 * \param pFilename Pfad zu einer XML-Datei, die feste Objekte enthaelt
 	 * \return Liste der geladenen festen Objekte

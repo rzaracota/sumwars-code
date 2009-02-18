@@ -477,6 +477,15 @@ public:
 	}
 	
 	/**
+	 * \fn RegionLocation& getPlayerStartLocation()
+	 * \brief Gibt Ort aus, an dem neu erzeugte Charaktere platziert werden
+	 */
+	RegionLocation& getPlayerStartLocation()
+	{
+		return m_player_start_location;
+	}
+	
+	/**
 	 * \fn static World* getWorld()
 	 * \brief Gibt den Zeiger auf das World Singleton Objekt zurueck
 	 */
@@ -619,6 +628,11 @@ private:
 	 */
 	std::map<int,LocationName> m_region_enter_loc;
 	
+	/**
+	 * \var RegionLocation m_player_start_location
+	 * \brief Gibt den Ort an, an dem neu erzeugte Charaktere starten
+	 */
+	RegionLocation m_player_start_location;
 	
 	/**
 	 * \var  static World* m_world

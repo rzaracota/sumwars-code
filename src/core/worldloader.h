@@ -64,11 +64,7 @@ class ElementAttrib
 		std::map<std::string, TiXmlAttribute*> m_attribs;
 };
 
-struct TempReviveLocation
-{
-	std::string region;
-	std::string location;
-};
+
 
 struct TempNameObjectGroup
 {
@@ -217,7 +213,7 @@ class WorldLoader
 	 */
 	//std::list<FixedObjectData*>* m_object_list;
 	
-	TempReviveLocation m_temp_revive_location;
+	LocationName m_temp_revive_location;
 	TempNameObjectGroup m_temp_name_object_group;
 	TempObjectGroup m_temp_object_group;
 	TempEnvironment m_temp_environment;

@@ -35,6 +35,8 @@ Region* MapGenerator::createRegion(RegionData* rdata)
 			ev = new Event(*(it->second));
 			mdata.m_region->addEvent(it->first,ev);
 		}
+		
+		mdata.m_region->setReviveLocation(rdata->m_revive_location);
 
 		// Wenn der Versuch nicht erfolgreich war alles loeschen und von vorn beginnen
 		if (!success)

@@ -133,22 +133,18 @@ int WorldLoader::generateRegionData(TiXmlNode* pParent, TiXmlElement* pElement, 
 		m_region_data->addEvent(type,ev);
 	}
 	
+	ElementAttrib attr;
+	
 	if (element == "World")
 	{
 		DEBUG5("World");
-		/*if (m_object_data == 0)
-		{
-			m_object_data = new FixedObjectData;
-		}*/
+		attr.parseElement(pElement);
+		std::string startreg, startloc;
+		attr.getString("start_region",startreg);
+		attr.getString("start_location",startloc);
 		
-		while (element == "World" && pAttrib)
-		{
-			/*if (!strcmp(pAttrib->Name(), "subtype"))
-				m_subtype = pAttrib->Value();*/
-
-			i++;
-			pAttrib=pAttrib->Next();
-		}
+		World::getWorld()->getPlayerStartLocation() = std::make_pair(startreg,startloc);
+		
 	}
 	
 	if (element == "Region")
@@ -397,10 +393,8 @@ int WorldLoader::generateRegionData(TiXmlNode* pParent, TiXmlElement* pElement, 
 		DEBUG5("ReviveLocation");
 		while (element == "ReviveLocation" && pAttrib)
 		{
-			if (!strcmp(pAttrib->Name(), "region"))
-				m_temp_revive_location.region = pAttrib->Value();
-			else if (!strcmp(pAttrib->Name(), "location"))
-				m_temp_revive_location.location = pAttrib->Value();
+			if (!strcmp(pAttrib->Name(), "location"))
+				m_temp_revive_location = pAttrib->Value();
 
 			i++;
 			pAttrib=pAttrib->Next();
@@ -498,8 +492,7 @@ void WorldLoader::searchRegionData(TiXmlNode* pParent, std::list<RegionData*> &r
 		}
 		else if ( !strcmp(pChild->Value(), "ReviveLocation") && pChild->Type() == TiXmlNode::ELEMENT)
 		{
-			m_region_data->m_revive_location.first = m_temp_revive_location.region;
-			m_region_data->m_revive_location.second = m_temp_revive_location.location;
+			m_region_data->m_revive_location = m_temp_revive_location;
 			DEBUG5("ReviveLocation loaded");
 		}
 		else if ( !strcmp(pChild->Value(), "Region") && pChild->Type() == TiXmlNode::ELEMENT)

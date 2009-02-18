@@ -146,7 +146,7 @@ void Item::fromString(CharConv* cv)
 
 void Item::toStringComplete(CharConv* cv)
 {
-
+	cv->printNewline();
 	toString(cv);
 
 	cv->toBuffer(m_price);

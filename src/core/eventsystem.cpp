@@ -4,7 +4,7 @@
 #include "item.h"
 #include "dialogue.h"
 
-lua_State * EventSystem::m_lua;
+lua_State * EventSystem::m_lua=0;
 
 Region* EventSystem::m_region;
  
@@ -14,6 +14,11 @@ Dialogue*  EventSystem::m_dialogue;
 
 void EventSystem::init()
 {
+	if (m_lua !=0)
+	{
+		cleanup();
+	}
+	
 	m_lua = lua_open();
 
 	luaL_openlibs(m_lua);
@@ -57,11 +62,14 @@ void EventSystem::init()
 	m_region =0;
 	m_trigger =0;
 	m_dialogue =0;
+	
+	doString("quests = {} ; playervars = {}");
 }
 
 void  EventSystem::cleanup()
 {
 	lua_close(m_lua);
+	m_lua =0;
 }
 
 

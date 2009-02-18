@@ -98,6 +98,11 @@ bool Player::destroy()
 
 bool Player::init()
 {
+	if (World::getWorld() !=0)
+	{
+		m_revive_position = World::getWorld()->getPlayerStartLocation();
+	}
+	
 	DEBUG5("Player::init");
 	//eigene Initialisierung
 	CreatureBaseAttr* bas = getBaseAttr();
@@ -130,7 +135,6 @@ bool Player::init()
 	m_save_timer= 3000;
 
 	m_candidate_party = -1;
-	
 
 	// Attribute auf Basiswerte setzen
 	int i;
@@ -997,6 +1001,7 @@ void Player::increaseAttribute(CreatureBaseAttr::Attribute attr)
 
 	}
 	calcBaseAttrMod();
+	m_event_mask |= NetEvent::DATA_SKILL_ATTR_POINTS;
 }
 
 void Player::gainLevel()
@@ -1035,6 +1040,7 @@ void Player::gainLevel()
 	recalcDamage();
 
 	m_event_mask |= NetEvent::DATA_LEVEL | NetEvent::DATA_HP | NetEvent::DATA_MAX_HP | NetEvent::DATA_EXPERIENCE;
+	m_event_mask |= NetEvent::DATA_SKILL_ATTR_POINTS;
 }
 
 
@@ -1188,6 +1194,8 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 					DEBUG("lerne Faehigkeit %i", command->m_id);
 
 					calcBaseAttrMod();
+					
+					m_event_mask |= NetEvent::DATA_SKILL_ATTR_POINTS;
 				}
 			}
 			break;
@@ -1929,9 +1937,13 @@ void Player::toSavegame(CharConv* cv)
 	cv->toBuffer((short) m_left_action);
 	cv->toBuffer((short) m_right_action);
 	cv->printNewline();
+	
+	cv->toBuffer(m_revive_position.first);
+	cv->toBuffer(m_revive_position.second);
+	cv->printNewline();
 
 	// Items
-	writeEquipement(cv);
+	//writeEquipement(cv);
 
 	// TODO: Questinformationen
 	
@@ -1992,9 +2004,10 @@ void Player::fromSavegame(CharConv* cv)
 	cv->fromBuffer<short>(tmp);
 	m_right_action = (Action::ActionType) tmp;
 	
-
+	cv->fromBuffer(m_revive_position.first);
+	cv->fromBuffer(m_revive_position.second);
 	// Items
-	loadEquipement(cv);
+	//loadEquipement(cv);
 
 	calcBaseAttrMod();
 	// TODO: letzte Stadt auslesen
@@ -2005,57 +2018,12 @@ void Player::fromSavegame(CharConv* cv)
 
 void Player::writeEquipement(CharConv* cv)
 {
-	/*
-	Item* it;
-
-	short nr=0;
-	short i;
-	for (i=1;i<=Equipement::SMALL_ITEMS+30;i++)
-	{
-		if (m_equipement->getItem(i)!=0)
-			nr++;
-	}
-
-	// Platz fuer die Anzahl
-	cv->toBuffer(nr);
-
-
-	for (i=1;i<=Equipement::SMALL_ITEMS+30;i++)
-	{
-		it = static_cast<Item*>(m_equipement->getItem(i));
-		if (it!=0)
-		{
-			DEBUG5("saving item at pos %i",i);
-			it->toStringComplete(cv,i);
-		}
-	}
-
-	DEBUG5("written %i items",nr);
-	*/
+	getEquipement()->toStringComplete(cv);
 }
 
 void Player::loadEquipement(CharConv* cv)
 {
-	/*
-	m_equipement->clear();
-	Item* it;
-	Item* itm;
-	short pos;
-
-	int i;
-	short nr;
-	cv->fromBuffer<short>(nr);
-
-	DEBUG5("reading %i items",nr);
-	for (i=0;i<nr;i++)
-	{
-		it = new Item();
-		it->fromStringComplete(cv,pos);
-		DEBUG5("loaded Item at pos %i",pos);
-		itm  = it;
-		m_equipement->swapItem(itm,pos);
-	}
-	*/
+	getEquipement()->fromStringComplete(cv);
 }
 
 
@@ -2091,12 +2059,14 @@ bool Player::setValue(std::string valname)
 	{
 		m_attribute_points = lua_tointeger(EventSystem::getLuaState() ,-1);
 		lua_pop(EventSystem::getLuaState(), 1);
+		m_event_mask |= NetEvent::DATA_SKILL_ATTR_POINTS;
 		return true;
 	}
 	else if (valname =="skill_points")
 	{
 		m_skill_points = lua_tointeger(EventSystem::getLuaState() ,-1);
 		lua_pop(EventSystem::getLuaState(), 1);
+		m_event_mask |= NetEvent::DATA_SKILL_ATTR_POINTS;
 		return true;
 	}
 	else
@@ -2107,7 +2077,40 @@ bool Player::setValue(std::string valname)
 	return false;
 }
 
+void Player::writeNetEvent(NetEvent* event, CharConv* cv)
+{
+	Creature::writeNetEvent(event,cv);
+	
+	if (event->m_data & NetEvent::DATA_REVIVE_LOCATION)
+	{
+		cv->toBuffer(m_revive_position.first);
+		cv->toBuffer(m_revive_position.second);
+		
+	}
+	
+	if (event->m_data & NetEvent::DATA_SKILL_ATTR_POINTS)
+	{
+		cv->toBuffer(m_attribute_points);
+		cv->toBuffer(m_skill_points);
+	}
+}
 
+void Player::processNetEvent(NetEvent* event, CharConv* cv)
+{
+	Creature::processNetEvent(event,cv);
+	
+	if (event->m_data & NetEvent::DATA_REVIVE_LOCATION)
+	{
+		cv->fromBuffer(m_revive_position.first);
+		cv->fromBuffer(m_revive_position.second);
+	}
+	
+	if (event->m_data & NetEvent::DATA_SKILL_ATTR_POINTS)
+	{
+		cv->fromBuffer(m_attribute_points);
+		cv->fromBuffer(m_skill_points);
+	}
+}
 
 
 

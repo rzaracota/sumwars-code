@@ -512,6 +512,20 @@ public:
 
 	
 	/**
+	 * \fn virtual void writeNetEvent(NetEvent* event, CharConv* cv)
+	 * \brief Schreibt die Daten zu einem NetEvent in den Bitstream
+	 * \param event NetEvent das beschrieben wird
+	 * \param cv Bitstream
+	 */
+	virtual void writeNetEvent(NetEvent* event, CharConv* cv);
+	
+	/**
+	 * \fn virtual void processNetEvent(NetEvent* event, CharConv* cv)
+	 * \brief Fuehrt die Wirkung eines NetEvents auf das Objekt aus. Weitere Daten werden aus dem Bitstream gelesen
+	 */
+	virtual void processNetEvent(NetEvent* event, CharConv* cv);
+	
+	/**
 	 * \fn std::string getName()
 	 * \brief Gibt den Name des Objektes aus
 	 */
@@ -555,6 +569,25 @@ public:
 	void setName(std::string name)
 	{
 		m_name = name;
+	}
+	
+	/**
+	 * \fn RegionLocation getRevivePosition()
+	 * \brief Gibt die Position aus, an der der Spieler das Spiel betritt bzw wiederbelebt wird
+	 */
+	RegionLocation getRevivePosition()
+	{
+		return m_revive_position;
+	}
+	
+	/**
+	 * \fn void setRevivePosition(RegionLocation regloc)
+	 * \brief Setzt die Position, an der der Spieler wiederbelebt wird
+	 */
+	void setRevivePosition(RegionLocation regloc)
+	{
+		m_revive_position = regloc;
+		m_event_mask |= NetEvent::DATA_REVIVE_LOCATION;
 	}
 	
 
@@ -702,6 +735,12 @@ protected:
 	 * \brief Gibt das Geschlecht an
 	 */
 	bool m_male;
+	
+	/**
+	 * \var RegionLocation m_revive_position
+	 * \brief Ort an dem der Spieler wiedererweckt wird
+	 */
+	RegionLocation m_revive_position;
 	
 	//Constructors
 	//Accessor Methods

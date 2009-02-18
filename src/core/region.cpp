@@ -95,6 +95,8 @@ Region::Region(short dimx, short dimy, short id, std::string name)
 
 	m_cutscene_mode = false;
 	
+	m_revive_location = "";
+	
 	Trigger* tr = new Trigger("create_region");
 	insertTrigger(tr);
 	
@@ -639,8 +641,15 @@ bool Region::insertObject(WorldObject* object, Vector pos, float angle, bool col
 
 	if (object->getTypeInfo()->m_type == WorldObject::TypeInfo::TYPE_PLAYER)
 	{
+		Player* pl = dynamic_cast<Player*>(object);
 		DEBUG5("player entered Region");
 		result &= (m_players->insert(std::make_pair(object->getId(),object))).second;
+		
+		if (m_revive_location != "")
+		{
+			pl->setRevivePosition(std::make_pair(getName(),m_revive_location));
+			DEBUG("player will now revive at %s",m_revive_location.c_str());
+		}
 		
 		Trigger* tr = new Trigger("enter_region");
 		tr->addVariable("player", object->getId());
@@ -1181,13 +1190,14 @@ void Region::update(float time)
 				pl->revive();
 
 				// Zielpunkt ermitteln
-				int id = World::getWorld()->getRegionId(m_revive_location.first);
+				RegionLocation regloc = pl->getRevivePosition();
+				int id = World::getWorld()->getRegionId(regloc.first);
 
 				if (id == getId())
 				{
 					DEBUG5("revive in current region");
 					// Spieler bleibt in der aktuellen Region
-					Vector pos = getLocation(m_revive_location.second);
+					Vector pos = getLocation(regloc.second);
 					getFreePlace(pl->getShape(), pl->getLayer(), pos, pl);
 
 					pl->moveTo(pos);
@@ -1205,7 +1215,7 @@ void Region::update(float time)
 					deleteObject(pl);
 
 					// Spieler in die neue Region einfuegen
-					World::getWorld()->insertPlayerIntoRegion(pl, id, m_revive_location.second);
+					World::getWorld()->insertPlayerIntoRegion(pl, id, regloc.second);
 				}
 			}
 

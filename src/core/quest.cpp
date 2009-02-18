@@ -73,6 +73,11 @@ void Quest::init()
 	luainit += ".finished = false; \n";
 	luainit += m_table_name;
 	luainit += ".failed = false; \n";
+	luainit += "quests.";
+	luainit += m_table_name;
+	luainit += " = ";
+	luainit += m_table_name;
+	DEBUG("lua init %s",luainit.c_str());
 	EventSystem::doString(luainit.c_str());
 	
 	if (m_initialisation != LUA_NOREF)

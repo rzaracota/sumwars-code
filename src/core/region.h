@@ -25,6 +25,8 @@ class Gridunit;
 
 typedef std::string RegionName;
 
+typedef std::pair<RegionName, LocationName> RegionLocation;
+
 /**
  * \enum ExitDirection
  * \brief Verschiedene Richtungen in denen man die Region verlassen kann
@@ -296,10 +298,10 @@ class RegionData
 		
 		
 		/**
-		 * \var std::pair<RegionName, LocationName> m_revive_location
+		 * \var LocationName m_revive_location
 		 * \brief Ort an dem in dieser Region gestorbene Helden wiedererweckt werden
 		 */
-		std::pair<RegionName, LocationName> m_revive_location;
+		LocationName m_revive_location;
 		
 		/**
 		 * \fn std::multimap<TriggerType, Event*> m_events
@@ -811,15 +813,13 @@ class Region
 		}
 		
 		/**
-		 * \fn void setReviveLocation(RegionName reg, LocationName loc)
+		 * \fn void setReviveLocation(LocationName loc)
 		 * \brief Setzt den Ort an dem in dieser Region gestorbene Helden wiederbelebt werden
-		 * \param reg Name der Region
 		 * \param loc Name des Ortes
 		 */
-		void setReviveLocation(RegionName reg, LocationName loc)
+		void setReviveLocation(LocationName loc)
 		{
-			m_revive_location.first = reg;
-			m_revive_location.second = loc;
+			m_revive_location = loc;
 			
 		}
 		
@@ -903,6 +903,7 @@ class Region
 		 * \param dia Dialog
 		 */
 		void insertDialogue(Dialogue* dia);
+		
 		
 		
 	private:
@@ -1022,10 +1023,10 @@ class Region
 		std::list<RegionExit> m_exits;
 		
 		/**
-		 * \var std::pair<RegionName, LocationName> m_revive_location
+		 * \var LocationName m_revive_location
 		 * \brief Ort an dem in dieser Region gestorbene Helden wiedererweckt werden
 		 */
-		std::pair<RegionName, LocationName> m_revive_location;
+		LocationName m_revive_location;
 		
 		/**
 		 * \var std::list<Trigger*> m_triggers
