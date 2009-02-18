@@ -107,20 +107,6 @@ class CharConv
 	 */
 	void fromBuffer(std::string& s, unsigned int size);
 	
-	/**
-	 * \fn void toBuffer(char c)
-	 * \brief Schreibt einen char in den Buffer
-	 * \param c char
-	 */
-	void toBuffer(char c);
-	
-	
-	/**
-	 * \fn void fromBuffer(char &c)
-	 * \brief liest einen char aus dem Puffer
-	 * \param c char
-	 */
-	void fromBuffer(char &c);
 	
 	/**
 	 * \fn void toBuffer(T data)
@@ -157,6 +143,9 @@ class CharConv
 			(*m_stream) >> data;
 		}
 	}
+	
+	
+	
 	
 	/**
 	 * \fn void toBuffer(std::string s)
@@ -261,6 +250,22 @@ class CharConv
 		std::iostream* m_stream;
 	
 };
+
+/**
+ * \fn void toBuffer(char c)
+ * \brief Schreibt einen char in den Buffer
+ * \param c char
+ */
+template <>
+void CharConv::toBuffer<char>(char c);
+	
+/**
+ * \fn void fromBuffer(char &c)
+ * \brief liest einen char aus dem Puffer
+ * \param c char
+*/
+template<>
+void CharConv::fromBuffer<char>(char &c);
 
 
 

@@ -37,6 +37,8 @@ Item::Item()
 	m_equip_effect=0;
 	m_weapon_attr=0;
 	m_level_req = 0;
+	m_magic_power =0;
+	m_rarity = NORMAL;
 	m_char_req = REQ_NONE;
 }
 
@@ -123,11 +125,9 @@ void Item::toString(CharConv* cv)
 {
 
 	cv->toBuffer((char) m_type);
-	char stmp[11];
-	stmp[10] = '\0';
-	strncpy(stmp,m_subtype.c_str(),10);
-	cv->toBuffer(stmp,10);
+	cv->toBuffer(m_subtype,10);
 	cv->toBuffer(m_id);
+	cv->toBuffer<char>(m_rarity);
 	if (m_type == GOLD_TYPE)
 	{
 		cv->toBuffer(m_price);
@@ -138,6 +138,10 @@ void Item::toString(CharConv* cv)
 void Item::fromString(CharConv* cv)
 {
 	// Daten werden extern eingelesen
+	
+	char tmp;
+	cv->fromBuffer<char>(tmp);
+	m_rarity = (Rarity) tmp;
 	if (m_type == GOLD_TYPE)
 	{
 		cv->fromBuffer(m_price);
@@ -146,12 +150,15 @@ void Item::fromString(CharConv* cv)
 
 void Item::toStringComplete(CharConv* cv)
 {
-	cv->printNewline();
 	toString(cv);
+
+	if (m_type == GOLD_TYPE)
+		return;
 
 	cv->toBuffer(m_price);
 	cv->toBuffer(m_level_req);
 	cv->toBuffer(m_char_req);
+	
 	cv->toBuffer(m_magic_power);
 
 	char mask = NOINFO;
@@ -231,12 +238,14 @@ void Item::fromStringComplete(CharConv* cv)
 {
 	fromString(cv);
 
+	if (m_type == GOLD_TYPE)
+		return;
+	
 	cv->fromBuffer<int>(m_price);
 	cv->fromBuffer<char>(m_level_req);
 	cv->fromBuffer<char>(m_char_req);
 	cv->fromBuffer<float>(m_magic_power);
-
-
+	
 	char mask = NOINFO;
 	cv->fromBuffer<char>(mask);
 

@@ -129,7 +129,7 @@ struct ItemBasicData;
 struct Item {
 	/**
 	 * \enum Size
-	 * \brief TODO
+	 * \brief Groesse des Items
 	 */
 	enum Size
 	{
@@ -137,6 +137,19 @@ struct Item {
 		SMALL = 2,
 		MEDIUM = 1,
 		BIG = 0,
+	};
+	
+	/**
+	 * \enum Rarity
+	 * \brief Seltenheit des Items
+	 */
+	enum Rarity
+	{
+		NORMAL =0,
+		MAGICAL = 1,
+		RARE	 = 2,
+		UNIQUE	 = 3,
+		QUEST = 5
 	};
 
 
@@ -331,6 +344,12 @@ struct Item {
 	 * \brief Gibt Verzauberungsstärke an
 	 */
 	float m_magic_power;
+	
+	/**
+	 * \var Item::Rarity m_rarity
+	 * \brief Seltenheit des Gegenstandes
+	 */
+	Item::Rarity m_rarity;
 
 };
 
@@ -389,6 +408,8 @@ struct ItemBasicData
 	\brief Gibt die Groesse des Gegenstandes (klein,mittel, gross) an
 	 */
 	Item::Size m_size;
+	
+	
 
 	/**
 	 * \var int m_price

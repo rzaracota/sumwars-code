@@ -125,7 +125,8 @@ void CharConv::fromBuffer(std::string& s)
 	}
 }
 
-void CharConv::toBuffer(char c)
+template<>
+void CharConv::toBuffer<char>(char c)
 {
 	if (m_stream ==0)
 	{
@@ -137,7 +138,8 @@ void CharConv::toBuffer(char c)
 	}
 }
 
-void CharConv::fromBuffer(char &c)
+template<>
+void CharConv::fromBuffer<char>(char &c)
 {
 	if (m_stream ==0)
 	{

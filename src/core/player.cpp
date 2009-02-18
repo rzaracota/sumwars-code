@@ -1943,7 +1943,7 @@ void Player::toSavegame(CharConv* cv)
 	cv->printNewline();
 
 	// Items
-	//writeEquipement(cv);
+	writeEquipement(cv);
 
 	// TODO: Questinformationen
 	
@@ -2007,7 +2007,7 @@ void Player::fromSavegame(CharConv* cv)
 	cv->fromBuffer(m_revive_position.first);
 	cv->fromBuffer(m_revive_position.second);
 	// Items
-	//loadEquipement(cv);
+	loadEquipement(cv);
 
 	calcBaseAttrMod();
 	// TODO: letzte Stadt auslesen

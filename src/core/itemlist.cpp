@@ -19,6 +19,8 @@
 
 #include "itemlist.h"
 
+#include "itemfactory.h"
+
 //Constructors/Destructors
 
 ItemList::ItemList(short max_small, short max_medium, short max_big)
@@ -379,7 +381,8 @@ void Equipement::toString(CharConv* cv)
 	{
 		if (m_body_items[i] !=0)
 		{
-			cv->toBuffer<char>(i);
+			cv->printNewline();
+			cv->toBuffer(i);
 			m_body_items[i]->toString(cv);
 		}
 	}
@@ -392,7 +395,8 @@ void Equipement::toString(CharConv* cv)
 		it = m_inventory.getItem(Item::BIG,i);
 		if (it!=0)
 		{
-			cv->toBuffer<char>(BIG_ITEMS+i);
+			cv->printNewline();
+			cv->toBuffer(BIG_ITEMS+i);
 			it->toString(cv);
 			nr++;
 		}
@@ -404,7 +408,8 @@ void Equipement::toString(CharConv* cv)
 		it = m_inventory.getItem(Item::MEDIUM,i);
 		if (it!=0)
 		{
-			cv->toBuffer<char>(MEDIUM_ITEMS+i);
+			cv->printNewline();
+			cv->toBuffer(MEDIUM_ITEMS+i);
 			it->toString(cv);
 			nr++;
 		}
@@ -416,7 +421,8 @@ void Equipement::toString(CharConv* cv)
 		it = m_inventory.getItem(Item::SMALL,i);
 		if (it!=0)
 		{
-			cv->toBuffer<char>(SMALL_ITEMS+i);
+			cv->printNewline();
+			cv->toBuffer(SMALL_ITEMS+i);
 			it->toString(cv);
 			nr++;
 		}
@@ -435,10 +441,20 @@ void Equipement::fromString(CharConv* cv)
 	int i;
 	char pos;
 	Item* it;
+	
+	std::string subtype;
+	char type;
+	int id;
+	
 	for (i=0;i<nr;i++)
 	{
-		cv->fromBuffer<char>(pos);
-		it = new Item;
+		cv->fromBuffer(pos);
+		cv->fromBuffer(type);
+		cv->fromBuffer(subtype,10);
+		cv->fromBuffer(id);
+		
+		it = ItemFactory::createItem((Item::Type) type, std::string(subtype));
+		
 		// Datenfelder des Items belegen
 		it->fromString(cv);
 
@@ -460,6 +476,7 @@ void Equipement::toStringComplete(CharConv* cv)
 	{
 		if (m_body_items[i] !=0)
 		{
+			cv->printNewline();
 			cv->toBuffer<char>(i);
 			m_body_items[i]->toStringComplete(cv);
 		}
@@ -473,6 +490,7 @@ void Equipement::toStringComplete(CharConv* cv)
 		it = m_inventory.getItem(Item::BIG,i);
 		if (it!=0)
 		{
+			cv->printNewline();
 			cv->toBuffer<char>(BIG_ITEMS+i);
 			it->toStringComplete(cv);
 			nr++;
@@ -485,6 +503,7 @@ void Equipement::toStringComplete(CharConv* cv)
 		it = m_inventory.getItem(Item::MEDIUM,i);
 		if (it!=0)
 		{
+			cv->printNewline();
 			cv->toBuffer<char>(MEDIUM_ITEMS+i);
 			it->toStringComplete(cv);
 			nr++;
@@ -497,6 +516,7 @@ void Equipement::toStringComplete(CharConv* cv)
 		it = m_inventory.getItem(Item::SMALL,i);
 		if (it!=0)
 		{
+			cv->printNewline();
 			cv->toBuffer<char>(SMALL_ITEMS+i);
 			it->toStringComplete(cv);
 			nr++;
@@ -516,10 +536,21 @@ void Equipement::fromStringComplete(CharConv* cv)
 	int i;
 	char pos;
 	Item* it;
+	std::string subtype;
+	char type;
+	int id;
+	
 	for (i=0;i<nr;i++)
 	{
-		cv->fromBuffer<char>(pos);
-		it = new Item;
+		cv->fromBuffer(pos);
+		cv->fromBuffer(type);
+		cv->fromBuffer(subtype,10);
+		cv->fromBuffer(id);
+		
+		DEBUG5("pos %i type %i subtype %s",pos,type, subtype.c_str());
+		
+		it = ItemFactory::createItem((Item::Type) type, std::string(subtype));
+		
 		// Datenfelder des Items belegen
 		it->fromStringComplete(cv);
 

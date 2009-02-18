@@ -16,7 +16,7 @@ ItemFactory::ItemFactory()
 }
 
 
-Item* ItemFactory::createItem(Item::Type type, Item::Subtype subtype, int id, float magic_power)
+Item* ItemFactory::createItem(Item::Type type, Item::Subtype subtype, int id, float magic_power, Item::Rarity rarity)
 {
 	if (id ==0)
 	{
@@ -41,6 +41,8 @@ Item* ItemFactory::createItem(Item::Type type, Item::Subtype subtype, int id, fl
 		ItemBasicData* idata = it->second;
 		item = new Item(*idata);
 		item->m_id = id;
+		item->m_rarity = rarity;
+		
 
 		createMagicMods(item,idata->m_modchance,magic_power, idata->m_min_enchant, idata->m_max_enchant);
 
@@ -460,6 +462,7 @@ void ItemFactory::createMagicMods(Item* item, float* modchance, float magic_powe
 	DEBUG4("mods auswuerfeln");
 
 	magic_power = std::min(magic_power, max_enchant*4);
+	item->m_magic_power =0;
 	
 	// bisher zugeteilte Staerke der Modifikation
 	float mod_power[31];
@@ -489,9 +492,15 @@ void ItemFactory::createMagicMods(Item* item, float* modchance, float magic_powe
 	int num_mods=0;
 	while (magic_power>min_enchant && num_mods<4)
 	{
-			// Staerke auswuerfeln
+		if (item->m_rarity == Item::NORMAL)
+		{
+			item->m_rarity = Item::MAGICAL;
+		}
+		// Staerke auswuerfeln
 		mp = Random::randrangef(min_enchant,max_enchant);
 		mp = std::min(mp, magic_power);
+		item->m_magic_power += mp;
+		
 		sqrtmp = sqrt(mp);
 		logmp = log(mp);
 		magic_power -= mp;
