@@ -584,11 +584,7 @@ public:
 	 * \fn void setRevivePosition(RegionLocation regloc)
 	 * \brief Setzt die Position, an der der Spieler wiederbelebt wird
 	 */
-	void setRevivePosition(RegionLocation regloc)
-	{
-		m_revive_position = regloc;
-		m_event_mask |= NetEvent::DATA_REVIVE_LOCATION;
-	}
+	void setRevivePosition(RegionLocation regloc);
 	
 
 //Protected stuff

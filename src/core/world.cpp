@@ -548,7 +548,7 @@ bool World::insertPlayer(WorldObject* player, int slot)
 
 bool World::insertPlayerIntoRegion(WorldObject* player, short region, LocationName loc)
 {
-
+	DEBUG5("try to enter region %i",region); 
 	Region* reg = getRegion(region);
 
 	// Testen ob alle Daten vorhanden sind
@@ -558,13 +558,16 @@ bool World::insertPlayerIntoRegion(WorldObject* player, short region, LocationNa
 		data_missing =1;
 	}
 
-	player->getGridLocation()->m_region = region;
-
-
+	if (player->getGridLocation()->m_region != region)
+	{
+		DEBUG5("changing region %i %i",player->getGridLocation()->m_region,region);
+		player->getGridLocation()->m_region = region;
+		player->setState(WorldObject::STATE_INACTIVE);
+	}
+	
 	if (player->getState() != WorldObject::STATE_ENTER_REGION)
 	{
 		// Spieler kann noch nicht in die Region eingefuegt werden
-
 
 		if (m_server)
 		{
@@ -574,6 +577,16 @@ bool World::insertPlayerIntoRegion(WorldObject* player, short region, LocationNa
 			// Wenn die Region noch nicht existiert: erzeugen
 			if (data_missing !=0)
 			{
+				
+				if (m_region_data.count(region) == 0)
+				{
+					// fuer die Region gibt es keine Daten
+					// zurueck zum allerersten Startpunkt
+					static_cast<Player*>(player)->setRevivePosition(m_player_start_location);
+					insertPlayerIntoRegion(player, getRegionId(m_player_start_location.first), m_player_start_location.second);
+					
+					return true;
+				}
 				createRegion(region);
 			}
 
@@ -652,6 +665,18 @@ bool World::insertPlayerIntoRegion(WorldObject* player, short region, LocationNa
 
 		if (m_server)
 		{
+			if (!reg->hasLocation(m_region_enter_loc[player->getId()]))
+			{
+				DEBUG("location %s does not exist",m_region_enter_loc[player->getId()].c_str());
+				m_region_enter_loc[player->getId()] = m_player_start_location.second;
+				
+				static_cast<Player*>(player)->setRevivePosition(m_player_start_location);
+				short id = getRegionId(m_player_start_location.first);
+				insertPlayerIntoRegion(player, id, m_player_start_location.second);
+				return true;
+			}
+			
+			
 			pos = reg->getLocation(m_region_enter_loc[player->getId()] );
 			m_region_enter_loc.erase(player->getId());
 		}
@@ -724,7 +749,16 @@ void World::handleSavegame(CharConv *cv, int slot)
 		pl->getShape()->m_center = Vector(9,10);
 
 		RegionLocation regloc = pl->getRevivePosition();
-		insertPlayerIntoRegion(pl,getRegionId(regloc.first), regloc.second);
+		short id = getRegionId(regloc.first);
+		if (id != -1)
+		{
+			insertPlayerIntoRegion(pl,id, regloc.second);
+		}
+		else
+		{
+			pl->setRevivePosition(m_player_start_location);
+			insertPlayerIntoRegion(pl, getRegionId(m_player_start_location.first), m_player_start_location.second);
+		}
 
 
 		if (m_server)
@@ -1147,7 +1181,7 @@ void World::updatePlayers()
 			delete pl;
 			continue;
 		}
-
+		
 		// Spielern die auf Daten zur aktuellen Region warten, Daten senden
 		if (pl->getState() == WorldObject::STATE_REGION_DATA_REQUEST)
 		{
@@ -1174,11 +1208,11 @@ void World::updatePlayers()
 		// Spieler, deren Regionen komplett geladen wurden aktivieren
 		if (m_server)
 		{
+			
 			if (pl->getState() == WorldObject::STATE_ENTER_REGION && pl->getRegion() !=0 )
 			{
 				// TODO: Ort angeben
 				insertPlayerIntoRegion(pl,pl->getGridLocation()->m_region, "entry_south");
-				pl->setState(WorldObject::STATE_ACTIVE);
 			}
 		}
 
@@ -1259,8 +1293,10 @@ void World::updatePlayers()
 				event.m_data = pl->getNetEventMask();
 				event.m_id = pl->getId();
 				insertNetEvent(event);
-
+				
 				pl->clearNetEventMask();
+				
+				
 			}
 		}
 
@@ -1508,7 +1544,7 @@ bool World::writeNetEvent(Region* region,NetEvent* event, CharConv* cv)
 	event->toString(cv);
 
 	DEBUG5("sending event %i  id %i  data %i",event->m_type, event->m_id, event->m_data);
-
+	
 
 	WorldObject* object;
 	Projectile* proj;
@@ -1524,7 +1560,6 @@ bool World::writeNetEvent(Region* region,NetEvent* event, CharConv* cv)
 
 		if (event->m_type == NetEvent::OBJECT_STAT_CHANGED)
 		{
-
 			if (m_players->count(event->m_id) ==1)
 			{
 				object = (*m_players)[event->m_id];
@@ -1536,6 +1571,7 @@ bool World::writeNetEvent(Region* region,NetEvent* event, CharConv* cv)
 
 			if (object !=0)
 			{
+				
 				object->writeNetEvent(event,cv);
 			}
 			else
@@ -1572,6 +1608,16 @@ bool World::writeNetEvent(Region* region,NetEvent* event, CharConv* cv)
 			}
 			else
 				return false;
+		}
+	}
+	else
+	{
+		// Spieler kann man auch ohne Region aktualisieren
+		if (event->m_type == NetEvent::OBJECT_STAT_CHANGED && m_players->count(event->m_id) ==1)
+		{
+			
+			object = (*m_players)[event->m_id];
+			object->writeNetEvent(event,cv);
 		}
 	}
 

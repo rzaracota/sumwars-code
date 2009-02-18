@@ -2085,7 +2085,7 @@ void Player::writeNetEvent(NetEvent* event, CharConv* cv)
 	{
 		cv->toBuffer(m_revive_position.first);
 		cv->toBuffer(m_revive_position.second);
-		
+		DEBUG5("writing revive position %s %s",m_revive_position.first.c_str(), m_revive_position.second.c_str())
 	}
 	
 	if (event->m_data & NetEvent::DATA_SKILL_ATTR_POINTS)
@@ -2103,6 +2103,7 @@ void Player::processNetEvent(NetEvent* event, CharConv* cv)
 	{
 		cv->fromBuffer(m_revive_position.first);
 		cv->fromBuffer(m_revive_position.second);
+		DEBUG5("reading revive position %s %s",m_revive_position.first.c_str(), m_revive_position.second.c_str())
 	}
 	
 	if (event->m_data & NetEvent::DATA_SKILL_ATTR_POINTS)
@@ -2113,6 +2114,11 @@ void Player::processNetEvent(NetEvent* event, CharConv* cv)
 }
 
 
-
+void Player::setRevivePosition(RegionLocation regloc)
+{
+	DEBUG5("changed revive position");
+	m_revive_position = regloc;
+	m_event_mask |= NetEvent::DATA_REVIVE_LOCATION;
+}
 
 

@@ -877,6 +877,12 @@ bool  Region::deleteObject (WorldObject* object)
 	if (object == 0)
 		return false;
 	
+	if (m_objects->count(object->getId()) == 0 && m_static_objects->count(object->getId()) == 0)
+	{
+		// Objekt nicht gefunden
+		return false;
+	}
+	
 	if (object->getTypeInfo()->m_type != WorldObject::TypeInfo::TYPE_PLAYER)
 	{
 		NetEvent event;

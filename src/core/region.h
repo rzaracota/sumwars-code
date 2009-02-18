@@ -766,6 +766,16 @@ class Region
 		}
 		
 		/**
+		 * \fn bool hasLocation(LocationName loc)
+		 * \brief Gibt an, ob die Region einen Ort mit dem angegebenen Namen hat
+		 * \param loc Ort
+		 */
+		bool hasLocation(LocationName loc)
+		{
+			return (m_locations.count(loc) > 0);
+		}
+		
+		/**
 		 * \fn Vector getLocation(LocationName name)
 		 * \brief Gibt die Position eines Ortes aus
 		 * \param name Name des Ortes
