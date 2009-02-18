@@ -226,7 +226,7 @@ void Equipement::clear()
 
 Item* Equipement::getItem(int pos)
 {
-	switch (pos >0 && pos <NR_BODY_ITEMS)
+	if (pos>0 && pos <NR_BODY_ITEMS)
 	{
 		return m_body_items[pos];
 	}
@@ -254,7 +254,6 @@ Item* Equipement::getItem(int pos)
 
 bool Equipement::swapItem(Item* &item,int pos)
 {
-	DEBUG5("swapping %p at %i",item,pos);
 	if (pos>= ARMOR && pos<=CURSOR_ITEM )
 	{
 		// Tausch mit einem Ausruestungsgegenstand
@@ -280,13 +279,16 @@ bool Equipement::swapItem(Item* &item,int pos)
 
 		// Tausch mit Gegenstand im Inventar
 		m_inventory.swapItem(item,size,idx);
+		DEBUG5("cursor item %p %p",getItem(Equipement::CURSOR_ITEM), &(m_body_items[CURSOR_ITEM ]));
+		
 		return true;
 	}
 }
 
 bool Equipement::swapCursorItem(int pos)
 {
-	return swapItem(m_body_items[CURSOR_ITEM],pos);
+	bool ret = swapItem(m_body_items[CURSOR_ITEM],pos);
+	return ret;
 }
 
 short  Equipement::insertItem(Item* item)
