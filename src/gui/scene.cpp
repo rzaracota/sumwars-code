@@ -1637,6 +1637,7 @@ void Scene::updateTempPlayer()
 	if (m_temp_player != "")
 	{
 		deleteObject(m_temp_player);
+		m_objects->clear();
 	}
 	
 	m_camera->setPosition(Ogre::Vector3(300, 100, 0));

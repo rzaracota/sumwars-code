@@ -824,8 +824,9 @@ void MainWindow::updateObjectInfo()
 	Ogre::Entity* ent;
 	
 	
-	
-	
+	Region* reg = World::getWorld()->getRegion(rid);
+	if (reg ==0)
+		return;
 
 
 	// Ergebnispaar einer Intersection Abfrage
@@ -870,7 +871,12 @@ void MainWindow::updateObjectInfo()
 			if (isec.first)
 			{
 				// nur aktive Objekte beruecksichtigen
-				wo = World::getWorld()->getRegion(rid)->getObject(it->first);
+				wo = reg->getObject(it->first);
+				if (wo == 0)
+				{
+					continue;
+				}
+				
 				if (wo->getState() != WorldObject::STATE_ACTIVE)
 					continue;
 						
