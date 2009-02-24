@@ -71,6 +71,15 @@ bool World::init()
 	
 	EventSystem::init();
 	Dialogue::init();
+	
+	files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("lua","*.lua");
+	for (it = files->begin(); it != files->end(); ++it)
+	{
+		file = it->archive->getName();
+		file += "/";
+		file += it->filename;
+		EventSystem::doFile(file.c_str());
+	}
 
 	if (m_server)
 	{
@@ -110,14 +119,7 @@ bool World::init()
 			worldloader.loadQuestsData(file.c_str());
 		}
 		
-		files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("lua","*.lua");
-		for (it = files->begin(); it != files->end(); ++it)
-		{
-			file = it->archive->getName();
-			file += "/";
-			file += it->filename;
-			EventSystem::doFile(file.c_str());
-		}
+		
 		
 		DEBUG("server");
 		m_network = new ServerNetwork(m_max_nr_players);
@@ -713,7 +715,7 @@ void World::handleSavegame(CharConv *cv, int slot)
 	
 	Player* pl =0;
 	pl= new Player(getValidId(),"");
-	pl->fromSavegame(cv);
+	pl->fromSavegame(cv, (slot == LOCAL_SLOT) );
 	
 	// Spieler ist lokal
 	if (slot == LOCAL_SLOT)

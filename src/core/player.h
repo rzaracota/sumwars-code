@@ -372,11 +372,12 @@ public:
 	
 	
 	/**
-	 * \fn void fromSavegame(CharConv* cv)
+	 * \fn void fromSavegame(CharConv* cv, bool local=true)
 	 * \brief Laedt die Daten aus einem Savegame
 	 * \param cv Eingabepuffer
+	 * \param local Gibt an, ob es sich um einen lokalen Spieler handelt
 	 */
-	void fromSavegame(CharConv* cv);
+	void fromSavegame(CharConv* cv, bool local=true);
 	
 	/**
 	 * \fn void increaseAttribute(CreatureBaseAttr::Attribute attr)
@@ -737,6 +738,12 @@ protected:
 	 * \brief Ort an dem der Spieler wiedererweckt wird
 	 */
 	RegionLocation m_revive_position;
+	
+	/**
+	 * \var std::list<std::string> m_lua_instructions
+	 * \brief Speichert die Lua Anweisungen zwischen, die die Questvariablen des Spielers setzen
+	 */
+	std::list<std::string> m_lua_instructions;
 	
 	//Constructors
 	//Accessor Methods

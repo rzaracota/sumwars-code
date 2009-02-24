@@ -12,6 +12,8 @@ Trigger*  EventSystem::m_trigger;
 
 Dialogue*  EventSystem::m_dialogue;
 
+CharConv* EventSystem::m_charconv =0;
+
 void EventSystem::init()
 {
 	if (m_lua !=0)
@@ -58,6 +60,9 @@ void EventSystem::init()
 	lua_register(m_lua, "getSpeaker", getSpeaker);
 	lua_register(m_lua, "setRefName", setRefName);
 	lua_register(m_lua, "getRolePlayers", getRolePlayers);
+	
+	lua_register(m_lua, "writeString", writeString);
+	lua_register(m_lua, "writeNewline", writeNewline);
 	
 	m_region =0;
 	m_trigger =0;
@@ -1100,5 +1105,73 @@ int EventSystem::getRolePlayers(lua_State *L)
 	}
 	
 	return 1;
+}
+
+
+int EventSystem::writeString(lua_State *L)
+{
+	std::string s;
+	s = lua_tostring (L,1);
+	m_charconv->toBuffer<char>(1);
+	m_charconv->toBuffer(s);
+	return 0;
+}
+
+int EventSystem::writeNewline(lua_State *L)
+{
+	m_charconv->printNewline();
+	return 0;
+}
+
+void EventSystem::writeSavegame(CharConv* savegame)
+{
+	m_charconv = savegame;
+	if (m_lua != 0)
+	{
+		EventSystem::doString("writeSavegame();");
+		m_charconv->toBuffer<char>(0);
+	}
+}
+
+void EventSystem::readSavegame(CharConv* savegame, int playerid, bool local_player)
+{
+	std::stringstream stream;
+	stream << "addPlayer(" <<playerid <<");";
+	doString(stream.str().c_str());
+	
+	stream.str("");
+	stream << "playervars["<<playerid<<"].";
+	std::string prefix = stream.str();
+	
+	std::string instr,instr_pr;
+	std::string tablename;
+	DEBUG("prefix %s",prefix.c_str());
+	
+	char c=1;
+	while (c==1)
+	{
+		savegame->fromBuffer(c);
+		if (c==0)
+			break;
+		
+		savegame->fromBuffer(instr);
+		DEBUG5("instructions: %s",instr.c_str());
+		if (local_player)
+		{
+			doString(instr.c_str());
+			
+			tablename = instr.substr(0,instr.find_first_of ('='));
+			DEBUG5("table name %s",tablename.c_str());
+			stream.str("");
+			stream << "quests."<<tablename <<" = "<<tablename;
+			DEBUG5("instr %s",stream.str().c_str());
+			doString(stream.str().c_str());
+		}
+		
+		instr_pr = prefix;
+		instr_pr += instr;
+		doString(instr_pr.c_str());
+		
+	}
 }
 

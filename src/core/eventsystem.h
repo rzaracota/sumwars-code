@@ -5,6 +5,7 @@
 #include "debug.h"
 #include "event.h"
 #include "geometry.h"
+#include "charconv.h"
 
 extern "C"
 {
@@ -336,6 +337,36 @@ class EventSystem
 		 **/
 		static int getRolePlayers(lua_State *L);
 		
+		/**
+		 * \fn static int writeString(lua_State *L)
+		 * \brief schreibt einen String in den Stream
+		 * \param L Lua Status
+		 */
+		static int writeString(lua_State *L);
+
+		/**
+		 * \fn static int writeNewline(lua_State *L)
+		 * \brief Schreibt ein Newline in den Stream
+		 * \param L Lua Status
+		 */
+		static int writeNewline(lua_State *L);
+				
+		/**
+		 * \fn static void writeSavegame(CharConv* savegame, int playerid, bool local_player)
+		 * \brief Schreibt die Daten fuer ein Savegame
+		 * \param savegame Streaming Objekt fuer das Savegame
+		 */
+		static void writeSavegame(CharConv* savegame);
+		
+		/**
+		 * \fn static void readSavegame(CharConv* savegame, int playerid, bool local_player)
+		 * \brief Liest die Daten aus einem Savegame
+		 * \param savegame Streaming Objekt fuer das Savegame
+		 * \param playerid ID des Spielers
+		 * \param local_player Gibt an, ob es sich um den lokalen Spieler handelt
+		 */
+		static void readSavegame(CharConv* savegame, int playerid, bool local_player);
+		
 	private:
 		/**
 		 * \var static lua_State * m_lua
@@ -360,6 +391,12 @@ class EventSystem
 		 * \brief der zuletzt vom Script eingefuegte Trigger
 		 */
 		static Trigger* m_trigger;
+		
+		/**
+		 * \var static CharConv* m_charconv
+		 * \brief Stream Objekt in das die Lua Variablen geschrieben werden
+		 */
+		static CharConv* m_charconv;
 };
 
 

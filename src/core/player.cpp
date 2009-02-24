@@ -1944,15 +1944,32 @@ void Player::toSavegame(CharConv* cv)
 
 	// Items
 	writeEquipement(cv);
+	cv->printNewline();
 
-	// TODO: Questinformationen
-	
-	// TODO: letzte Stadt eintragen
-	
+	// Questinformationen
+	// Daten werden aus der lua Umgebung genommen, wenn die Welt schon laeuft
+	// sonst werden sie im Spieler zwischengespeichert
+	if (World::getWorld() == 0 || getId()==0)
+	{
+		std::list<std::string>::iterator it;
+		for (it =m_lua_instructions.begin(); it !=m_lua_instructions.end(); ++it)
+		{
+			cv->toBuffer<char>(1);
+			cv->toBuffer(*it);
+			cv->printNewline();
+		}
+		cv->toBuffer<char>(0);
+		
+	}
+	else
+	{
+		EventSystem::writeSavegame(cv);
+		cv->printNewline();
+	}
 }
 
 
-void Player::fromSavegame(CharConv* cv)
+void Player::fromSavegame(CharConv* cv, bool local)
 {
 
 	
@@ -2010,10 +2027,31 @@ void Player::fromSavegame(CharConv* cv)
 	loadEquipement(cv);
 
 	calcBaseAttrMod();
-	// TODO: letzte Stadt auslesen
 	
-
-	// TODO: Questinformationen
+	// Questinformationen
+	// Daten werden aus der lua Umgebung genommen, wenn die Welt schon laeuft
+	// sonst werden sie im Spieler zwischengespeichert
+	if (World::getWorld() == 0 || getId()==0)
+	{
+		m_lua_instructions.clear();
+		char c=1;
+		std::string instr;
+		while (c==1)
+		{
+			cv->fromBuffer(c);
+			if (c==0)
+				break;
+			
+			cv->fromBuffer(instr);
+			m_lua_instructions.push_back(instr);
+			DEBUG5("instructions: %s",instr.c_str());
+		}
+	}
+	else
+	{
+		EventSystem::readSavegame(cv,getId(), local);
+		cv->printNewline();
+	}
 }
 
 void Player::writeEquipement(CharConv* cv)

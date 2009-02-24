@@ -77,7 +77,7 @@ void Quest::init()
 	luainit += m_table_name;
 	luainit += " = ";
 	luainit += m_table_name;
-	DEBUG("lua init %s",luainit.c_str());
+	DEBUG5("lua init %s",luainit.c_str());
 	EventSystem::doString(luainit.c_str());
 	
 	if (m_initialisation != LUA_NOREF)
