@@ -14,6 +14,8 @@ Dialogue*  EventSystem::m_dialogue;
 
 CharConv* EventSystem::m_charconv =0;
 
+std::map<int, std::string> EventSystem::m_player_varupdates;
+
 void EventSystem::init()
 {
 	if (m_lua !=0)
@@ -63,6 +65,7 @@ void EventSystem::init()
 	
 	lua_register(m_lua, "writeString", writeString);
 	lua_register(m_lua, "writeNewline", writeNewline);
+	lua_register(m_lua, "writeUpdateString", writeUpdateString);
 	
 	m_region =0;
 	m_trigger =0;
@@ -1145,7 +1148,7 @@ void EventSystem::readSavegame(CharConv* savegame, int playerid, bool local_play
 	
 	std::string instr,instr_pr;
 	std::string tablename;
-	DEBUG("prefix %s",prefix.c_str());
+	DEBUG5("prefix %s",prefix.c_str());
 	
 	char c=1;
 	while (c==1)
@@ -1155,7 +1158,6 @@ void EventSystem::readSavegame(CharConv* savegame, int playerid, bool local_play
 			break;
 		
 		savegame->fromBuffer(instr);
-		DEBUG5("instructions: %s",instr.c_str());
 		if (local_player)
 		{
 			doString(instr.c_str());
@@ -1168,10 +1170,45 @@ void EventSystem::readSavegame(CharConv* savegame, int playerid, bool local_play
 			doString(stream.str().c_str());
 		}
 		
-		instr_pr = prefix;
-		instr_pr += instr;
-		doString(instr_pr.c_str());
-		
+		if (World::getWorld() !=0 && World::getWorld()->isServer())
+		{
+			instr_pr = prefix;
+			instr_pr += instr;
+			doString(instr_pr.c_str());
+		}
+	}
+	
+	if (not local_player)
+	{
+		stream.str("");
+		stream << "initPlayerVars("<<playerid<<");";
+		doString(stream.str().c_str());
 	}
 }
 
+void EventSystem::clearPlayerVarString(int id)
+{
+	m_player_varupdates.erase(id);
+}
+
+std::string EventSystem::getPlayerVarString(int id)
+{
+	if (m_player_varupdates.count(id) ==0)
+	{
+		return "";
+	}
+	return m_player_varupdates[id];
+}
+
+int EventSystem::writeUpdateString(lua_State *L)
+{
+	int argc = lua_gettop(L);
+	if (argc <2)
+		return 0;
+	
+	int id = lua_tonumber(L,1);
+	std::string instr =  lua_tostring(L,2);
+	
+	m_player_varupdates[id] += instr;
+	return 0;
+}

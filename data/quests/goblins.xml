@@ -2,6 +2,11 @@
 	
 	<Init>
 		goblins.nr =0;
+		goblins.test = {};
+		goblins.test.a =1;
+		goblins.test.b =2.5;
+		goblins.test.test2 = {};
+		goblins.test.test2.args = "args";
 	</Init>
 	
 	<Description>
@@ -54,6 +59,7 @@
 				npc = getSpeaker('peasant');
 				dropItem("goblin_hmr", getPosition(npc),500);
 				goblins.finished = true;
+				goblins.test.test3={harr=5,a="b"};
 			</Effect>
 		</Topic>
 	</NPC>

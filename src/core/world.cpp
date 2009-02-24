@@ -966,7 +966,7 @@ void World::handleMessage(std::string msg, int slot)
 	// Nachricht einfuegen
 	static_cast<Player*>(m_local_player)->addMessage(smsg);
 
-	if (msg[0] == '$' && m_server)
+	if (msg[0] == '$')
 	{
 		// Cheatcode eingegeben
 		Player* pl = static_cast<Player*>((*m_player_slots)[slot]);
@@ -1117,8 +1117,15 @@ void World::update(float time)
 	{
 		updateLogins();
 		acceptLogins();
+		
+		// Lua update
+		if (getLocalPlayer() !=0)
+		{
+			std::stringstream stream;
+			stream << "updatePlayerVars("<<getLocalPlayer()->getId()<<");";
+			EventSystem::doString(stream.str().c_str());
+		}
 	}
-
 
 	updatePlayers();
 
@@ -1249,12 +1256,6 @@ void World::updatePlayers()
 
 					// Spielerobjekt die Daten senden
 					com.fromString(cv);
-
-					/*
-					timeval tv;
-					gettimeofday(&tv, NULL);
-					DEBUG("timestamp %i delay %i  system time %i",cv->getTimestamp(), cv->getDelay(),tv.tv_usec/1000);
-					*/
 
 					handleCommand(&com,slot,cv->getDelay());
 				}
@@ -1463,6 +1464,14 @@ void World::updatePlayers()
 
 					delete buf;
 				}
+				
+				if (headerp.m_content == PTYPE_S2C_LUA_CHUNK)
+				{
+					std::string chunk;
+					cv->fromBuffer(chunk);
+					DEBUG5("got lua chunk %s",chunk.c_str());
+					EventSystem::doString(chunk.c_str());
+				}
 
 				delete cv;
 			}
@@ -1532,8 +1541,23 @@ void World::updatePlayers()
 					}
 				}
 
-
-
+				// Lua Chunk
+				
+				std::string chunk = EventSystem::getPlayerVarString(pl->getId());
+				if (chunk != "")
+				{
+					msg = new CharConv;
+					header.m_content = PTYPE_S2C_LUA_CHUNK;
+					DEBUG5("send lua chunk: %s",chunk.c_str());
+					
+					header.toString(msg);
+					msg->toBuffer(chunk);
+					m_network->pushSlotMessage(msg->getBitStream(),slot);
+					
+					EventSystem::clearPlayerVarString(pl->getId());
+					delete msg;
+				}
+				
 			}
 		}
 
@@ -1662,7 +1686,10 @@ bool World::writeNetEvent(Region* region,NetEvent* event, CharConv* cv)
 			if (event->m_data != Equipement::GOLD)
 			{
 				if (static_cast<Player*>(object)->getEquipement()->getItem(event->m_data) ==0)
-					ERRORMSG("no item at pos %i",event->m_data);
+				{
+					ERRORMSG("no item at pos %i (player %i)",event->m_data,object->getId());
+					return false;
+				}
 				cv->toBuffer<short>((short) event->m_data);
 				static_cast<Player*>(object)->getEquipement()->getItem(event->m_data)->toStringComplete(cv);
 			}

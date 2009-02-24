@@ -367,6 +367,26 @@ class EventSystem
 		 */
 		static void readSavegame(CharConv* savegame, int playerid, bool local_player);
 		
+		/**
+		 * \fn static void clearPlayerVarString(int id)
+		 * \brief Loescht den String mit Lua Befehlen
+		 * \param id ID des Spielers
+		 */
+		static void clearPlayerVarString(int id);
+		
+		/**
+		 * \fn static std::string getPlayerVarString(int id)
+		 * \brief Gibt den String mit Lua Befehlen zum aktualisieren der Variablen aus
+		 * \param id ID des Spielers
+		 */
+		static std::string getPlayerVarString(int id);
+		
+		/**
+		 * \fn static int writeUpdateString(lua_State *L)
+		 * \brief Schreibt einen Updatestring fuer einen Spieler
+		 */
+		static int writeUpdateString(lua_State *L);
+		
 	private:
 		/**
 		 * \var static lua_State * m_lua
@@ -397,6 +417,12 @@ class EventSystem
 		 * \brief Stream Objekt in das die Lua Variablen geschrieben werden
 		 */
 		static CharConv* m_charconv;
+		
+		/**
+		 * \var static std::map<int, std::string> m_player_varupdates
+		 * \brief Liste mit Befehlen mit denen lokale Variablen der Spieler angepasst werden
+		 */
+		static std::map<int, std::string> m_player_varupdates;
 };
 
 

@@ -670,7 +670,6 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 	switch(m_action.m_type)
 	{
 		case Action::SPEAK:
-			DEBUG("speak");
 			if (goalobj->isCreature() && getDialogue() ==0)
 			{
 				cr = static_cast<Creature*>(goalobj);

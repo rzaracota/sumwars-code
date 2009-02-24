@@ -287,10 +287,10 @@ bool Player::init()
 
 	
 	si = ItemFactory::createItem(Item::POTION,"heal_1");
-	insertItem(si);
+	equ->swapItem(si,Equipement::SMALL_ITEMS);
 
 	si = ItemFactory::createItem(Item::POTION,"heal_1");
-	insertItem(si);
+	equ->swapItem(si,Equipement::SMALL_ITEMS+1);
 	
 	if (init)
 	{
@@ -915,7 +915,7 @@ short Player::insertItem(Item* itm)
 		if (pos != Equipement::NONE)
 		{
 			// Gegenstand ins Inventar aufgenommen
-			if (World::getWorld()->isServer())
+			if (World::getWorld()->isServer() && getId() !=0)
 			{
 	
 				NetEvent event;
@@ -2154,7 +2154,7 @@ void Player::processNetEvent(NetEvent* event, CharConv* cv)
 
 void Player::setRevivePosition(RegionLocation regloc)
 {
-	DEBUG5("changed revive position");
+	DEBUG("changed revive position");
 	m_revive_position = regloc;
 	m_event_mask |= NetEvent::DATA_REVIVE_LOCATION;
 }

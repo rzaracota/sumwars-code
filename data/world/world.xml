@@ -62,6 +62,8 @@
 			<Environment height="1.0" name="hills" />
 		</Environments>
 		
+		<ReviveLocation  location="entry_south" />
+		
 		<Event trigger ="create_region" once = "true">
 			<Effect>
 				addLocation('LichLocation', {130,212});
@@ -218,8 +220,6 @@
 			<SpawnGroup group_name="goblins" number="10" />
 			<SpawnGroup group_name="goblins_dogs" number="10" />
 		</SpawnGroups>
-		
-		<ReviveLocation  location="entry_north" />
 		
 		<Event trigger ="create_region" once = "true">
 			<Effect>

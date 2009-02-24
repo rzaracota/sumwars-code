@@ -109,6 +109,11 @@ enum PackageType
 	* \brief Partyinformationen vom Server an den Client
 	*/
 	PTYPE_S2C_PARTY,
+ 
+ 	/**
+  	* \brief Lua Code vom Server an den Client
+  	*/
+ 	PTYPE_S2C_LUA_CHUNK,
 };
 
 /**
