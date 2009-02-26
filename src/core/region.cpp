@@ -841,16 +841,20 @@ void Region::createMonsterGroup(MonsterGroupName mgname, Vector position)
 
 	for (mt = mgroup->m_monsters.begin(); mt != mgroup->m_monsters.end(); ++mt)
 	{
+		int count =0;
 		for (int i=0; i< mt->m_number; i++)
 		{
 			pos = position;
 
 			if (Random::random() < mt->m_prob)
 			{
+				count ++;
 				int id = createObject(mt->m_subtype, pos);
 				DEBUG5("inserting monster %s at %f %f with id %i",mt->m_subtype.c_str(),pos.m_x, pos.m_y,id);
 			}
 		}
+		DEBUG5("monstergroup %s : %i x %s prob %f",mgname.c_str(), count, mt->m_subtype.c_str(), mt->m_prob);
+		
 	}
 }
 

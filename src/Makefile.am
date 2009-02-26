@@ -64,6 +64,7 @@ sumwars_SOURCES = core/trade.cpp \
 	core/event.cpp \
 	core/eventsystem.cpp \
 	core/worldloader.cpp \
+	core/elementattrib.cpp \
 	core/dialogue.cpp \
 	core/quest.cpp \
 	gui/main_gui.cpp \

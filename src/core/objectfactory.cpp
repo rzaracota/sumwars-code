@@ -453,6 +453,7 @@ void ObjectFactory::init()
 	
 	
 	// MonsterGroups aus XML Laden
+	/*
 	ObjectLoader objectloader;
 	
 	std::list<MonsterGroup*> monster_group_list;
@@ -469,27 +470,7 @@ void ObjectFactory::init()
 		k++;
 	}
 	
-	// Monstergruppen
-	/*MonsterGroup* mgdata;
-	
-	mgdata = new MonsterGroup;
-	mgdata->addMonsters("goblin",10,0.7);
-	registerMonsterGroup("goblins", mgdata);
-	
-	
-	mgdata = new MonsterGroup;
-	mgdata->addMonsters("goblin",6,0.7);
-	mgdata->addMonsters("gob_dog",4,0.7);
-	registerMonsterGroup("goblins_dogs", mgdata);
-	
-	mgdata = new MonsterGroup;
-	mgdata->addMonsters("lich",1,1.0);
-	mgdata->addMonsters("goblin",7,0.7);
-	registerMonsterGroup("lich_goblins", mgdata);
-	
-	mgdata = new MonsterGroup;
-	registerMonsterGroup("nothing", mgdata);*/
-
+	*/
 	// Daten fuer generische Objekte
 	
 	// Objekt Templates (werden aus xml geladen)

@@ -570,8 +570,9 @@ bool Application::loadResources()
 		file += "/";
 		file += it->filename;
 		
-		ObjectFactory::loadMonsterData(file);
-		Scene::loadMonsterData(file);
+		//ObjectFactory::loadMonsterData(file);
+		//Scene::loadMonsterData(file);
+		ObjectLoader::loadMonsterData(file.c_str());
 
 		updateStartScreen(0.4);
 	}

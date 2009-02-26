@@ -7,6 +7,7 @@
 #include <vector>
 #include "monsterbase.h"
 #include "action.h"
+#include "elementattrib.h"
 
 
 #include "../tinyxml/tinyxml.h"
@@ -131,6 +132,24 @@ class ObjectLoader
 	
 	bool loadMonsterGroup(const char* pFilename, std::list<MonsterGroup*> &monster_group_list, std::list<std::string> &name_list);
 	
+	//// neuer Monsterdata loader
+	
+	/**
+	 * \fn loadMonsterData(const char* pFilename);
+	 * \brief Liest die Daten zu Monstern aus einer XML Datei
+	 * \param pFilename Name der XML Datei
+	 */
+	static bool loadMonsterData(const char* pFilename);
+	
+	/**
+	 * \fn bool loadMonsterTiXmlNode* node)
+	 * \brief Liest die Daten zu einem Monster aus dem Knoten
+	 * \param node XML Knoten
+	 */
+	static bool loadMonster(TiXmlNode* node);
+	
+	//// neuer Monsterdata loader
+	
 	private:
 	
 	/**
@@ -200,6 +219,7 @@ class ObjectLoader
 	int generateMonsterGroup(TiXmlElement* pElement, std::string element, std::list<MonsterGroup*> &monster_group_list, std::list<std::string> &name_list);
 	
 	void searchMonsterGroup(TiXmlNode* pParent, std::list<MonsterGroup*> &monster_group_list, std::list<std::string> &name_list);
+	
 	
 	
 	/**

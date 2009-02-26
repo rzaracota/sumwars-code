@@ -791,6 +791,7 @@ Item* ItemFactory::createItem(DropSlot &slot)
 		return 0;
 
 	DEBUG5("drop item %i %i",slot.m_min_level, slot.m_max_level);
+	DEBUG5("prob distr. %f %f %f %f %f",slot.m_size_probability[0],slot.m_size_probability[1],slot.m_size_probability[2],slot.m_size_probability[3],slot.m_size_probability[4]);
 	int size = Random::randDiscrete(slot.m_size_probability,5);
 
 	// kein Item ausgewurfelt
@@ -861,11 +862,11 @@ Item* ItemFactory::createItem(DropSlot &slot)
 		if (Random::random() < slot.m_magic_probability || type == Item::RING  || type == Item::AMULET)
 		{
 			magic = Random::randrangef(slot.m_magic_power/4,slot.m_magic_power);
-			DEBUG5("magic power %f",magic);
 		}
+		
 
 		item = createItem(type,subtype,0,magic);
-		DEBUG5("item type %i  subtype %s level %i",type,subtype.c_str(), item->m_level_req);
+		DEBUG5("item type %i  subtype %s level %i magic %f",type,subtype.c_str(), item->m_level_req,magic);
 		return item;
 	}
 	return 0;

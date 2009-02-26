@@ -308,6 +308,47 @@ class ObjectFactory
 	static void loadObjectGroupTemplates(std::string file);
 	
 	/**
+	 * \fn static registerMonster(WorldObject::TypeInfo::ObjectSubtype subtype, MonsterBasicData* data)
+	 * \brief Registriert die Daten fuer ein bestimmten Monstertyp
+	 * \param subtype Subtyp des Monsters
+	 * \param data Daten des Monsters
+	 */
+	static void registerMonster(WorldObject::TypeInfo::ObjectSubtype subtype, MonsterBasicData* data);
+	
+	/**
+	 * \fn static void registerFixedObject(WorldObject::TypeInfo::ObjectSubtype subtype, FixedObjectData* data)
+	 * \brief Registriert die Daten fuer ein bestimmten Monstertyp
+	 * \param subtype Subtyp des Objektes
+	 * \param data Daten des festen Objekts
+	 */
+	static void registerFixedObject(WorldObject::TypeInfo::ObjectSubtype subtype, FixedObjectData* data);
+	
+	/**
+	 * \fn static registerObjectTemplate(ObjectTemplateType type, ObjectTemplate* templ)
+	 * \brief Registriert ein neues Objekttemplate
+	 * \param type Typ des Templates
+	 * \param templ die Daten
+	 */
+	static void registerObjectTemplate(ObjectTemplateType type, ObjectTemplate* templ);
+	
+	
+	/**
+	 * \fn static registerObjectGroupTemplate(ObjectGroupTemplateName name, ObjectGroupTemplate* data)
+	 * \brief Registriert ein neues Template fuer eine Objektgruppe
+	 * \param name der Name des Templates
+	 * \param data die Daten
+	 */
+	static void registerObjectGroupTemplate(ObjectGroupTemplateName name, ObjectGroupTemplate* data);
+	
+	/**
+	 * \fn static void registerMonsterGroup(MonsterGroupName name, MonsterGroup data)
+	 * \brief Registriert eine Gruppe von Monstern
+	 * \param name Name der Gruppe
+	 * \param group Daten
+	 */
+	static void registerMonsterGroup(MonsterGroupName name, MonsterGroup* data);
+	
+	/**
 	 * \fn static init()
 	 * \brief registriert die Daten der Monster
 	 */
@@ -356,46 +397,7 @@ class ObjectFactory
 	 */
 	static std::map<WorldObject::TypeInfo::ObjectSubtype, WorldObject::TypeInfo::ObjectType> m_object_types;
 	
-	/**
-	 * \fn static registerMonster(WorldObject::TypeInfo::ObjectSubtype subtype, MonsterBasicData* data)
-	 * \brief Registriert die Daten fuer ein bestimmten Monstertyp
-	 * \param subtype Subtyp des Monsters
-	 * \param data Daten des Monsters
-	 */
-	static void registerMonster(WorldObject::TypeInfo::ObjectSubtype subtype, MonsterBasicData* data);
 	
-	/**
-	 * \fn static void registerFixedObject(WorldObject::TypeInfo::ObjectSubtype subtype, FixedObjectData* data)
-	 * \brief Registriert die Daten fuer ein bestimmten Monstertyp
-	 * \param subtype Subtyp des Objektes
-	 * \param data Daten des festen Objekts
-	 */
-	static void registerFixedObject(WorldObject::TypeInfo::ObjectSubtype subtype, FixedObjectData* data);
-	
-	/**
-	 * \fn static registerObjectTemplate(ObjectTemplateType type, ObjectTemplate* templ)
-	 * \brief Registriert ein neues Objekttemplate
-	 * \param type Typ des Templates
-	 * \param templ die Daten
-	 */
-	static void registerObjectTemplate(ObjectTemplateType type, ObjectTemplate* templ);
-	
-	
-	/**
-	 * \fn static registerObjectGroupTemplate(ObjectGroupTemplateName name, ObjectGroupTemplate* data)
-	 * \brief Registriert ein neues Template fuer eine Objektgruppe
-	 * \param name der Name des Templates
-	 * \param data die Daten
-	 */
-	static void registerObjectGroupTemplate(ObjectGroupTemplateName name, ObjectGroupTemplate* data);
-	
-	/**
-	 * \fn static void registerMonsterGroup(MonsterGroupName name, MonsterGroup data)
-	 * \brief Registriert eine Gruppe von Monstern
-	 * \param name Name der Gruppe
-	 * \param group Daten
-	 */
-	static void registerMonsterGroup(MonsterGroupName name, MonsterGroup* data);
 	
 	
 };

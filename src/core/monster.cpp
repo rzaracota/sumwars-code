@@ -138,6 +138,9 @@ void Monster::updateCommand()
 		// Spieler nur als Ziel, wenn aktiv und nicht in Dialog
 		if (pl->getState() != STATE_ACTIVE || pl->getDialogue() != 0)
 			continue;
+		
+		if (World::getWorld()->getRelation(getFraction(), pl ) != HOSTILE)
+			continue;
 			
 		dist = getShape()->getDistance(*(pl->getShape()));
 		if ( dist< m_ai.m_sight_range)

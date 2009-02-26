@@ -189,6 +189,74 @@ class Scene
 	void updateTempPlayer();
 	
 
+	/**
+	 * \fn static void registerObjectAnimations(WorldObject::TypeInfo::ObjectSubtype subtype, std::map<Action::ActionType, std::vector<std::string> > &animations)
+	 * \brief Registriert die Animationen fuer ein Objekt
+	 * \param subtype Subtyp des Objektes
+	 * \param animations Liste der Animationen sortiert nach Aktionstyp
+	 */
+	static void registerObjectAnimations(WorldObject::TypeInfo::ObjectSubtype subtype, std::map<Action::ActionType, std::vector<std::string> > &animations);
+	
+    /**
+	 * \fn void registerAttachedMesh(WorldObject::TypeInfo::ObjectSubtype subtype, std::string bone, std::string mesh)
+	 * \brief Registriert fuer ein bestehendes Objekt ein Mesh das an das Objekt angefuegt wird
+	 * \param subtype Subtype des Objektes
+	 * \param bone Knochen an den Mesh gehaengt wird
+	 * \param mesh Mesh des angehaengten Objektes
+	 */
+	static void registerAttachedMesh(WorldObject::TypeInfo::ObjectSubtype subtype, std::string bone, std::string mesh);
+	
+	/**
+	 * \fn void registerObject(WorldObject::TypeInfo::ObjectSubtype subtype, std::string mesh, std::string particle_system= "", float scaling_factor =1.0)
+	 * \brief Registriert fuer ein Objekt das zugehoerige Mesh, Partikelsystem, Skalierungsfaktor
+	 * \param subtype Subtyp des Objektes
+	 * \param mesh Mesh fuer das Objekt. Leerer String, wenn kein Mesh verwendet wird
+	 * \param particle_system Name des Partikelsystems. Leerer string, wenn kein Partikelsystem verwendet wird
+	 * \param scaling_factor Faktor um den das Mesh und alle Partikelsystem skaliert werden
+	 */
+	static void registerObject(WorldObject::TypeInfo::ObjectSubtype subtype, std::string mesh, std::string particle_system= "", float scaling_factor =1.0);
+	
+	/**
+	 * \fn static void registerPlayerLook(WorldObject::TypeInfo::ObjectSubtype subtype, PlayerLook look, std::string mesh, bool male = true)
+	 * \brief Registiert ein fuer einen Spielertyp zulaessiges Aussehen
+	 * \param subtype Spielertyp
+	 * \param look Aussehen
+	 * \param male Gibt Geschlecht an
+	 * \param mesh Ogre Mesh
+	 */
+	static void registerPlayerLook(WorldObject::TypeInfo::ObjectSubtype subtype, PlayerLook look, std::string mesh, bool male = true);
+
+	
+
+	/**
+	 * \fn void registerItem(Item::Subtype subtype, std::string mesh, std::string particle_system, float scaling_factor =1.0)
+	 * \brief Registriert fuer ein Item das zugehoerige Mesh, Partikelsystem, Skalierungsfaktor
+	 * \param subtype Subtyp des Items
+	 * \param mesh Mesh fuer das Item. Leerer String, wenn kein Mesh verwendet wird
+	 * \param particle_system Name des Partikelsystems. Leerer string, wenn kein Partikelsystem verwendet wird
+	 */
+	static void registerItem(Item::Subtype subtype, std::string mesh, std::string particle_system= "", float scaling_factor =1.0);
+
+	/**
+	 * \fn void registerProjectile(Projectile::ProjectileType type, std::string mesh, std::string particle_system = "", float scaling_factor =1.0)
+	 * \brief Registriert fuer ein Projektil das zugehoerige Mesh, Partikelsystem, Skalierungsfaktor
+	 * \param type Subtyp des Projektil
+	 * \param mesh Mesh fuer das Projektil. Leerer String, wenn kein Mesh verwendet wird
+	 * \param particle_system Name des Partikelsystems. Leerer string, wenn kein Partikelsystem verwendet wird
+	 * \param scaling_factor Faktor um den das Mesh und alle Partikelsystem skaliert werden
+	 */
+	static void registerProjectile(Projectile::ProjectileType type, std::string mesh, std::string particle_system = "", float scaling_factor =1.0);
+
+	/**
+	 * \fn void registerTile(Tile tile, std::string mesh, std::string particle_system, float scaling_factor =1.0)
+	 * \brief Registriert fuer ein Tile das zugehoerige Mesh, Partikelsystem, Skalierungsfaktor
+	 * \param tile Typ des Tile
+	 * \param mesh Mesh fuer das Tile. Leerer String, wenn kein Mesh verwendet wird
+	 * \param particle_system Name des Partikelsystems. Leerer string, wenn kein Partikelsystem verwendet wird
+	 */
+	static void registerTile(Tile tile, std::string mesh, std::string particle_system ="", float scaling_factor =1.0);
+
+	
 	private:
 
 	/**
@@ -307,71 +375,7 @@ class Scene
 	static void registerMeshes();
 
 
-	/**
-	 * \fn void registerObject(WorldObject::TypeInfo::ObjectSubtype subtype, std::string mesh, std::string particle_system= "", float scaling_factor =1.0)
-	 * \brief Registriert fuer ein Objekt das zugehoerige Mesh, Partikelsystem, Skalierungsfaktor
-	 * \param subtype Subtyp des Objektes
-	 * \param mesh Mesh fuer das Objekt. Leerer String, wenn kein Mesh verwendet wird
-	 * \param particle_system Name des Partikelsystems. Leerer string, wenn kein Partikelsystem verwendet wird
-	 * \param scaling_factor Faktor um den das Mesh und alle Partikelsystem skaliert werden
-	 */
-	static void registerObject(WorldObject::TypeInfo::ObjectSubtype subtype, std::string mesh, std::string particle_system= "", float scaling_factor =1.0);
 	
-	/**
-	 * \fn static void registerPlayerLook(WorldObject::TypeInfo::ObjectSubtype subtype, PlayerLook look, std::string mesh, bool male = true)
-	 * \brief Registiert ein fuer einen Spielertyp zulaessiges Aussehen
-	 * \param subtype Spielertyp
-	 * \param look Aussehen
-	 * \param male Gibt Geschlecht an
-	 * \param mesh Ogre Mesh
-	 */
-	static void registerPlayerLook(WorldObject::TypeInfo::ObjectSubtype subtype, PlayerLook look, std::string mesh, bool male = true);
-
-	/**
-	 * \fn static void registerObjectAnimations(WorldObject::TypeInfo::ObjectSubtype subtype, std::map<Action::ActionType, std::vector<std::string> > &animations)
-	 * \brief Registriert die Animationen fuer ein Objekt
-	 * \param subtype Subtyp des Objektes
-	 * \param animations Liste der Animationen sortiert nach Aktionstyp
-	 */
-	static void registerObjectAnimations(WorldObject::TypeInfo::ObjectSubtype subtype, std::map<Action::ActionType, std::vector<std::string> > &animations);
-	
-    /**
-     * \fn void registerAttachedMesh(WorldObject::TypeInfo::ObjectSubtype subtype, std::string bone, std::string mesh)
-     * \brief Registriert fuer ein bestehendes Objekt ein Mesh das an das Objekt angefuegt wird
-     * \param subtype Subtype des Objektes
-     * \param bone Knochen an den Mesh gehaengt wird
-     * \param mesh Mesh des angehaengten Objektes
-     */
-	static void registerAttachedMesh(WorldObject::TypeInfo::ObjectSubtype subtype, std::string bone, std::string mesh);
-
-	/**
-	 * \fn void registerItem(Item::Subtype subtype, std::string mesh, std::string particle_system, float scaling_factor =1.0)
-	 * \brief Registriert fuer ein Item das zugehoerige Mesh, Partikelsystem, Skalierungsfaktor
-	 * \param subtype Subtyp des Items
-	 * \param mesh Mesh fuer das Item. Leerer String, wenn kein Mesh verwendet wird
-	 * \param particle_system Name des Partikelsystems. Leerer string, wenn kein Partikelsystem verwendet wird
-	 */
-	static void registerItem(Item::Subtype subtype, std::string mesh, std::string particle_system= "", float scaling_factor =1.0);
-
-	/**
-	 * \fn void registerProjectile(Projectile::ProjectileType type, std::string mesh, std::string particle_system = "", float scaling_factor =1.0)
-	 * \brief Registriert fuer ein Projektil das zugehoerige Mesh, Partikelsystem, Skalierungsfaktor
-	 * \param type Subtyp des Projektil
-	 * \param mesh Mesh fuer das Projektil. Leerer String, wenn kein Mesh verwendet wird
-	 * \param particle_system Name des Partikelsystems. Leerer string, wenn kein Partikelsystem verwendet wird
-	 * \param scaling_factor Faktor um den das Mesh und alle Partikelsystem skaliert werden
-	 */
-	static void registerProjectile(Projectile::ProjectileType type, std::string mesh, std::string particle_system = "", float scaling_factor =1.0);
-
-	/**
-	 * \fn void registerTile(Tile tile, std::string mesh, std::string particle_system, float scaling_factor =1.0)
-	 * \brief Registriert fuer ein Tile das zugehoerige Mesh, Partikelsystem, Skalierungsfaktor
-	 * \param tile Typ des Tile
-	 * \param mesh Mesh fuer das Tile. Leerer String, wenn kein Mesh verwendet wird
-	 * \param particle_system Name des Partikelsystems. Leerer string, wenn kein Partikelsystem verwendet wird
-	 */
-	static void registerTile(Tile tile, std::string mesh, std::string particle_system ="", float scaling_factor =1.0);
-
 	/**
 	 * \fn RenderInfo getObjectRenderInfo(WorldObject::TypeInfo::ObjectSubtype subtype)
 	 * \brief Gibt die Informationen zum rendern eines Objektes aus
