@@ -674,6 +674,7 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 			{
 				cr = static_cast<Creature*>(goalobj);
 				Dialogue* dia = new Dialogue(getRegion(), cr->getRefName());
+				EventSystem::setDialogue(dia);
 				dia->addSpeaker(getId(),"player");
 				dia->addSpeaker(goalobj->getId(),cr->getRefName());
 				dia->changeTopic("start");

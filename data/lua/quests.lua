@@ -202,3 +202,30 @@ function updatePlayerVars(loc_pid)
 		end;
 	end;
 end;
+
+function getPlayerPrivateVar(id, varstr)
+	local str;
+	str ="_ret = playervars["..id.."]."..varstr;
+	eval(str);
+	return _ret;
+end;
+
+function setPlayerPrivateVar(id,varstr,value)
+	local str;
+	_ret = value;
+	str ="playervars["..id.."]."..varstr.." = _ret";
+	eval(str);
+	local data={str=""};
+	data.str ="";
+	if (type(value) == "table") then
+		writeTable(value,varstr,data);
+		data.str = data.str..";";
+	elseif (type(value) == "string") then
+		data.str = varstr.."='"..value.."';";
+	else
+		data.str = varstr.."="..tostring(value)..";"
+	end;
+	print(data.str);
+	writeUpdateString(id,data.str);
+end;
+

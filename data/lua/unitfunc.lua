@@ -66,4 +66,8 @@ function getMonstersInArea(area)
 		return filter(getObjectsInArea(area),isMonster);
 end;
 
+function getPlayers()
+	return getRolePlayers("all");
+end;
+
 

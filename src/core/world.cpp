@@ -912,7 +912,7 @@ void World::handleMessage(std::string msg, int slot)
 
 	// als Server: Nachricht an alle Spieler versenden
 	// als Client: Nachricht an den Server senden
-	if (m_server)
+	if (m_server && msg[0]!='$')
 	{
 		// Name des Senders an die Nachricht haengen
 		smsg = "[";
@@ -1121,6 +1121,10 @@ void World::update(float time)
 		// Lua update
 		if (getLocalPlayer() !=0)
 		{
+			std::string chunk = EventSystem::getPlayerVarString(getLocalPlayer()->getId());
+			EventSystem::doString(chunk.c_str());
+			EventSystem::clearPlayerVarString(getLocalPlayer()->getId());
+			
 			std::stringstream stream;
 			stream << "updatePlayerVars("<<getLocalPlayer()->getId()<<");";
 			EventSystem::doString(stream.str().c_str());
