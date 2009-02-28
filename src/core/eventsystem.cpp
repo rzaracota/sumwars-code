@@ -1163,7 +1163,7 @@ void EventSystem::readSavegame(CharConv* savegame, int playerid, bool local_play
 			doString(instr.c_str());
 			
 			tablename = instr.substr(0,instr.find_first_of ('='));
-			DEBUG5("table name %s",tablename.c_str());
+			DEBUG("table name %s",tablename.c_str());
 			stream.str("");
 			stream << "quests."<<tablename <<" = "<<tablename;
 			DEBUG5("instr %s",stream.str().c_str());
@@ -1206,7 +1206,7 @@ int EventSystem::writeUpdateString(lua_State *L)
 	if (argc <2)
 		return 0;
 	
-	int id = lua_tonumber(L,1);
+	int id = (int) lua_tonumber(L,1);
 	std::string instr =  lua_tostring(L,2);
 	
 	m_player_varupdates[id] += instr;

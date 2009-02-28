@@ -102,6 +102,12 @@ bool Player::init()
 	{
 		m_revive_position = World::getWorld()->getPlayerStartLocation();
 	}
+	else
+	{
+		m_revive_position.first = "none";
+		m_revive_position.second = "none";
+			
+	}
 	
 	DEBUG5("Player::init");
 	//eigene Initialisierung
@@ -126,7 +132,7 @@ bool Player::init()
 	m_attribute_points=0;
 	m_skill_points=0;
 
-	m_fraction = FRAC_PLAYER_PARTY;
+	m_fraction = NOFRACTION;
 
 	m_secondary_equip = false;
 

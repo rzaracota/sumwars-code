@@ -317,6 +317,9 @@ public:
 	 */
 	Party* getPartyFrac(WorldObject::Fraction frac)
 	{
+		if (frac<WorldObject::FRAC_PLAYER_PARTY || frac >=WorldObject::FRAC_PLAYER_PARTY + m_max_nr_players)
+			return 0;
+		
 		return &(m_parties[frac - WorldObject::FRAC_PLAYER_PARTY]);
 	}
 

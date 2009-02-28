@@ -38,7 +38,7 @@ void Party::addMember(int id)
 	m_members.insert(id);
 	
 	Party* p = player->getParty();
-	while (!p->getCandidates().empty())
+	while (p!=0 && p!=this && !p->getCandidates().empty())
 	{
 		p->removeCandidate(*(p->getCandidates().begin()));
 	}
