@@ -73,8 +73,7 @@
 		</Linker>
 		<Unit filename="core\action.cpp" />
 		<Unit filename="core\action.h" />
-		<Unit filename="core\archer.cpp" />
-		<Unit filename="core\archer.h" />
+		<Unit filename="core\charconv.cpp" />
 		<Unit filename="core\charconv.h" />
 		<Unit filename="core\clientnetwork.cpp" />
 		<Unit filename="core\clientnetwork.h" />
@@ -95,6 +94,8 @@
 		<Unit filename="core\dropitem.cpp" />
 		<Unit filename="core\dropitem.h" />
 		<Unit filename="core\dropslot.h" />
+		<Unit filename="core\elementattrib.cpp" />
+		<Unit filename="core\elementattrib.h" />
 		<Unit filename="core\event.cpp" />
 		<Unit filename="core\event.h" />
 		<Unit filename="core\eventsystem.cpp" />
@@ -114,8 +115,6 @@
 		<Unit filename="core\itemlist.h" />
 		<Unit filename="core\itemloader.cpp" />
 		<Unit filename="core\itemloader.h" />
-		<Unit filename="core\mage.cpp" />
-		<Unit filename="core\mage.h" />
 		<Unit filename="core\mapgenerator.cpp" />
 		<Unit filename="core\mapgenerator.h" />
 		<Unit filename="core\matrix2d.h" />
@@ -136,10 +135,10 @@
 		<Unit filename="core\pathfind.h" />
 		<Unit filename="core\player.cpp" />
 		<Unit filename="core\player.h" />
-		<Unit filename="core\priest.cpp" />
-		<Unit filename="core\priest.h" />
 		<Unit filename="core\projectile.cpp" />
 		<Unit filename="core\projectile.h" />
+		<Unit filename="core\quest.cpp" />
+		<Unit filename="core\quest.h" />
 		<Unit filename="core\random.cpp" />
 		<Unit filename="core\random.h" />
 		<Unit filename="core\region.cpp" />
@@ -158,8 +157,6 @@
 		<Unit filename="core\unionfindtree.h" />
 		<Unit filename="core\variable.cpp" />
 		<Unit filename="core\variable.h" />
-		<Unit filename="core\warrior.cpp" />
-		<Unit filename="core\warrior.h" />
 		<Unit filename="core\world.cpp" />
 		<Unit filename="core\world.h" />
 		<Unit filename="core\worldloader.cpp" />
@@ -168,6 +165,8 @@
 		<Unit filename="core\worldobject.h" />
 		<Unit filename="gui\application.cpp" />
 		<Unit filename="gui\application.h" />
+		<Unit filename="gui\charcreate.cpp" />
+		<Unit filename="gui\charcreate.h" />
 		<Unit filename="gui\charinfo.cpp" />
 		<Unit filename="gui\charinfo.h" />
 		<Unit filename="gui\chatline.cpp" />
@@ -185,6 +184,8 @@
 		<Unit filename="gui\mainwindow.h" />
 		<Unit filename="gui\partyinfo.cpp" />
 		<Unit filename="gui\partyinfo.h" />
+		<Unit filename="gui\questinfo.cpp" />
+		<Unit filename="gui\questinfo.h" />
 		<Unit filename="gui\savegamelist.cpp" />
 		<Unit filename="gui\savegamelist.h" />
 		<Unit filename="gui\scene.cpp" />
