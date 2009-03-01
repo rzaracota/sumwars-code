@@ -50,12 +50,15 @@ World* World::m_world=0;
 
 
 	m_max_nr_players =8;
-	m_parties = new Party[m_max_nr_players];
-	for (int i =0;i<m_max_nr_players;i++)
+	if (server)
 	{
-		m_parties[i].init(i);
+		m_parties.resize(m_max_nr_players);
+		for (int i =0;i<m_max_nr_players;i++)
+		{
+			m_parties[i].init(i);
+		}
 	}
-
+	
 	m_local_player =0;
 
 	m_events = new NetEventList;
@@ -368,7 +371,7 @@ World::~World()
 	}
 
 
-	delete[] m_parties;
+	//delete[] m_parties;
 	delete m_player_slots;
 	delete m_players;
 	delete m_events;
@@ -1075,6 +1078,15 @@ void World::update(float time)
 	{
 		rit->second->update(time);
 	}
+	
+	if (m_timer_limit[1])
+	{
+		// Parties aktualisieren
+		for (unsigned int i=0; i<m_parties.size(); ++i)
+		{
+			m_parties[i].updateMinimaps();	
+		}
+	}
 
 	// Durchmustern alle Handelsvorgänge
 	std::map<int,Trade*>::iterator iter2;
@@ -1182,9 +1194,9 @@ void World::updatePlayers()
 			// aus allen Partys als Bewerber loeschen
 			for (int i=0; i<m_max_nr_players; i++)
 			{
-				if (m_parties[i].getCandidates().count(pl->getId()) ==1)
+				if (getParty(i)->getCandidates().count(pl->getId()) ==1)
 				{
-					m_parties[i].removeCandidate(pl->getId());
+					getParty(i)->removeCandidate(pl->getId());
 				}
 			}
 
@@ -1424,7 +1436,7 @@ void World::updatePlayers()
 				if (headerp.m_content == PTYPE_S2C_PARTY)
 				{
 					int id = headerp.m_number;
-					m_parties[id].fromString(cv);
+					getParty(id)->fromString(cv);
 				}
 
 				if (headerp.m_content == PTYPE_S2C_REGION_CHANGED)
@@ -2417,3 +2429,10 @@ WorldObject* World::getPlayer(int id)
 	return 0;
 }
 
+Party* World::getParty(int id)
+{
+	if (id >= (int) m_parties.size())
+		m_parties.resize(id+1);
+		
+	return &(m_parties[id]);
+}

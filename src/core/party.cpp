@@ -13,6 +13,7 @@ void Party::init(int id)
 
 Party::~Party()
 {
+	clear();
 }
 
 void Party::clear()
@@ -22,6 +23,51 @@ void Party::clear()
 	m_relations.clear();
 	
 	m_leader_id =0;
+	
+	std::map<short,Minimap*>::iterator it;
+	for (it = m_minimaps.begin(); it != m_minimaps.end(); ++it)
+	{
+		delete it->second;
+	}
+	m_minimaps.clear();
+
+}
+
+void Party::updateMinimaps()
+{
+	WorldObject* wo;
+	Minimap* mm;
+	std::set<int>::iterator it;
+
+	int rid;
+	
+	for (it = m_members.begin(); it != m_members.end(); ++it)
+	{
+		wo = World::getWorld()->getPlayer(*it);
+		// nur aktive Spieler
+		if (wo !=0 && wo->getRegion()!=0 && wo->getState() == WorldObject::STATE_ACTIVE )
+		{
+			rid = wo->getRegion()->getId();
+			mm = getMinimap(rid);
+			
+			mm->update(wo->getShape()->m_center);
+		}
+	}
+}
+
+Minimap* Party::getMinimap(short rid)
+{
+	std::map<short,Minimap*>::iterator mt;
+	
+	mt = m_minimaps.find(rid);
+			
+	if (mt == m_minimaps.end())
+	{
+		// Minimap noch nicht vorhanden -> erzeugen
+		DEBUG("creating minimap for region %i",rid);
+		mt = m_minimaps.insert(std::make_pair(rid,World::getWorld()->getRegion(rid)->createMinimap())).first;
+	}
+	return mt->second;
 }
 
 void Party::addMember(int id)
@@ -38,10 +84,23 @@ void Party::addMember(int id)
 	m_members.insert(id);
 	
 	Party* p = player->getParty();
-	while (p!=0 && p!=this && !p->getCandidates().empty())
+	if (p!=0 && p!=this)
 	{
-		p->removeCandidate(*(p->getCandidates().begin()));
+		while (!p->getCandidates().empty())
+		{
+			p->removeCandidate(*(p->getCandidates().begin()));
+		}
+		
+		// Sichtbereich des neuen Spielers mit dem der Party vereinigen 
+		std::map<short,Minimap*>& othermmaps = p->getMinimaps();
+		std::map<short,Minimap*>::iterator mt;
+		for (mt = othermmaps.begin(); mt != othermmaps.end(); ++mt)
+		{
+			getMinimap(mt->first)->merge(*(mt->second));
+		}
 	}
+	
+	
 	
 	
 	player->setFraction((WorldObject::Fraction) (getId() + WorldObject::FRAC_PLAYER_PARTY));

@@ -4,6 +4,7 @@
 #include "debug.h"
 #include "charconv.h"
 #include "worldobject.h"
+#include "minimap.h"
 #include <set>
 #include <map>
 
@@ -45,6 +46,11 @@ class Party
 	 */
 	void clear();
 
+	/**
+	 * \fn void updateMinimaps()
+	 * \brief aktualisiert die Minimaps
+	 */
+	void updateMinimaps();
 
 	/**
 	 * \fn std::set<int>& getMembers()
@@ -117,6 +123,13 @@ class Party
 	{
 		return m_leader_id;
 	}
+	
+	/**
+	 * \fn Minimap* getMinimap(short rid)
+	 * \brief Gibt die Minimap zur angegebenen Region aus
+	 * \param rid ID der Region
+	 */
+	Minimap* getMinimap(short rid);
 
 	/**
 	 * \fn void addMember(int id)
@@ -169,7 +182,14 @@ class Party
 	 */
 	virtual void fromString(CharConv* cv);
 
-
+	/**
+	 * \fn std::map<short,Minimap*>& getMinimaps()
+	 * \brief Gibt alle Minimaps aus
+	 */
+	std::map<short,Minimap*>& getMinimaps()
+	{
+		return m_minimaps;
+	}
 
 	private:
 
@@ -202,6 +222,12 @@ class Party
 	 * \brief Beziehungen zu anderen Parties
 	 */
 	std::map<int, WorldObject::Relation> m_relations;
+	
+	/**
+	 * \var std::map<short,Minimap*> m_minimaps
+	 * \brief Enthaelt die Minimaps fuer die von der Party erkundeten Regionen
+	 */
+	std::map<short,Minimap*> m_minimaps;
 
 };
 

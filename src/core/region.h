@@ -10,6 +10,7 @@
 #include "projectile.h"
 #include "objectfactory.h"
 #include "dialogue.h"
+#include "minimap.h"
 
 
 
@@ -681,6 +682,15 @@ class Region
 		 */
 		void setTile(Tile tile,short x, short y);
 
+		/**
+		 * \fn Minimap* createMinimap()
+		 * \brief Erzeugt eine Minimap fuer die Region
+		 */
+		Minimap* createMinimap()
+		{
+			return new Minimap(m_dimx,m_dimy);
+		}
+		
 		/**
 		 * \fn WorldObjectMap* getPlayers()
 		 * \brief Gibt alle Spieler in der Region aus

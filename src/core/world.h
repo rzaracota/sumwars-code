@@ -305,10 +305,7 @@ public:
 	 * \brief Gibt die Party mit der angegebenen ID
 	 * \param id ID
 	 */
-	Party* getParty(int id)
-	{
-		return &(m_parties[id]);
-	}
+	Party* getParty(int id);
 	
 	/**
 	 * \fn Party* getPartyFrac(WorldObject::Fraction frac)
@@ -320,7 +317,7 @@ public:
 		if (frac<WorldObject::FRAC_PLAYER_PARTY || frac >=WorldObject::FRAC_PLAYER_PARTY + m_max_nr_players)
 			return 0;
 		
-		return &(m_parties[frac - WorldObject::FRAC_PLAYER_PARTY]);
+		return getParty(frac - WorldObject::FRAC_PLAYER_PARTY);
 	}
 
 	/**
@@ -559,10 +556,10 @@ private:
 
 
 	/**
-	 * \var Party* m_parties
+	 * \var std::vector<Party> m_parties
 	 * \brief Liste alles Parties
 	 */
-	Party* m_parties;
+	std::vector<Party> m_parties;
 
 	/**
 	 * \var m_player_slots
