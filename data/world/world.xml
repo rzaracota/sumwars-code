@@ -5,6 +5,7 @@
 	<Region id="short" name="string">
 		<Settings dimx="short" dimy="short" area_percent="float" complexity="float" granularity="int" />
 		
+		
 		<ExitDirections north="bool" south="bool" west="bool" east="bool" />
 		
 		<Exits>
@@ -46,6 +47,7 @@
 
 <World  start_region="region0" start_location="entry_south">
 	
+<!-- soon to be tutorial-Region-->
 	<Region id="0" name="region0">
 		<Settings dimx="64" dimy="64" area_percent="0.35" complexity="0.4" granularity="8" />
 		
@@ -79,7 +81,6 @@
 				setRefName(peasant,'peasant');
 			</Effect>
 		</Event>
-		
 		
 		<Event trigger ="player_moved" once = "true">
 			<Condition>
@@ -188,6 +189,7 @@
 	
 	
 	<Region id="1" name="region1">
+		
 		<Settings dimx="32" dimy="32" area_percent="0.35" complexity="0.4" granularity="8" />
 		
 		<ExitDirections north="true" south="false" west="false" east="false" />
@@ -239,6 +241,228 @@
 			</Effect>
 		</Event>
 
+	</Region>
+
+<!-- Lobby Konzilshalle der Elemtarmagier [fester Ort; Saeulenhalle im roemischen Stil] -->
+	<Region id="2" name="elCnlLobby">
+			<Settings dimx="8" dimy="4" area_percent="100" complexity="0" granularity="0"/>
+			<ExitDirections north="true" south="false" west="false" east="false" />
+			<Exits>
+				<Exit name="exit_north" destination_region="medMercCamp" destination_location="entry_south" >
+					<Shape shape="RECT" extent_x="4.0" extent_y ="4.0" />
+				</Exit>
+			</Exits>
+	</Region>
+	
+<!-- Medair, Söldnerlager [Stadt]-->
+	<Region id="3" name="medMercCamp">
+		<Settings dimx="10" dimy="10" area_percent="0.8" complexity="0.0" granularity="0.4" />
+		
+		<ExitDirections north="true" south="true" west="false" east="false" />
+		
+		<Exits>
+			<Exit name="exit_south" destination_region="elCnlLobby" destination_location="entry_north" >
+				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
+			</Exit>
+
+			<Exit name="exit_north" destination_region="string" destination_location="entry_south" >
+				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
+			</Exit>
+		</Exits>
+		
+		<ReviveLocation  location="entry_south" />
+	</Region>
+	
+<!-- Aisen, Aisener Wiesen [Feld und Wiesen]; ungefaehr eine viertel Stunde, eher offen; Level 1 - 3 -->
+<!-- verwundeter Soldat -->
+<!-- Goblinschlaeger, Goblinraeuber, Goblinjaeger-->
+	<Region id="4" name="aisMeadow">
+		<Settings dimx="32" dimy="32" area_percent="0.4" complexity="0.3" granularity="6" />
+		
+		<ExitDirections north="true" south="true" west="false" east="false" />
+		
+		<Exits>
+			<Exit name="exit_south" destination_region="medMercCamp" destination_location="entry_north" >
+				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
+			</Exit>
+			<Exit name="exit_north" destination_region="aisPlains" destination_location="entry_south" >
+				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
+			</Exit>
+		</Exits>
+	</Region>
+
+<!-- Aisen, Offene Ebene [Feld und Wiesen]; ungefaehr 20 Min, eher offen; Level 2 - 6 -->
+<!-- Goblinschlaeger, Goblinraeuber, Goblinjaeger, Goblinhunde, Feldalraunen?(falls wir welche bekommen) -->
+	<Region id="5" name="aisPlains">
+		<Settings dimx="32" dimy="32" area_percent="0.4" complexity="0.3" granularity="6" />
+		
+		<ExitDirections north="true" south="true" west="false" east="false" />
+		
+		<Exits>
+			<Exit name="exit_south" destination_region="aisMeadow" destination_location="entry_north" >
+				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
+			</Exit>
+			<Exit name="exit_north" destination_region="aisHeath" destination_location="entry_south" >
+				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
+			</Exit>
+		</Exits>
+	</Region>
+	
+<!-- Aisen, Stille Heide [Feld und Wiesen]; ungefaehr 20 Min, eher offen; Level 5 - 10 -->
+<!-- Goblinschlaeger, Goblinraeuber, Goblinjaeger, Goblinhunde, Goblinkrieger, Goblinschamanen? -->
+	<Region id="6" name="aisHeath">
+		<Settings dimx="32" dimy="32" area_percent="0.4" complexity="0.3" granularity="6" />
+		
+		<ExitDirections north="true" south="true" west="false" east="false" />
+		
+		<Exits>
+			<Exit name="exit_south" destination_region="aisPlains" destination_location="entry_north" >
+				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
+			</Exit>
+			<Exit name="exit_north" destination_region="joringsbridge" destination_location="entry_south" >
+				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
+			</Exit>
+		</Exits>
+	</Region>
+	
+<!-- Aisen, Joringsbrueck [laendliches Dorf] -->
+<!-- erstes Treffen mit dem Prinzen -->
+<!-- Der belagerte Bauernhof -->
+<!-- Rob, der Raeuber, Anfang -->
+<!-- Kraeutersammler -->
+	<Region id="7" name="joringsbridge">
+		<Settings dimx="32" dimy="32" area_percent="0.4" complexity="0.3" granularity="6" />
+		
+		<ExitDirections north="true" south="true" west="true" east="false" />
+		
+		<Exits>
+			<Exit name="exit_south" destination_region="aisHeath" destination_location="entry_north" >
+				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
+			</Exit>
+			<Exit name="exit_north" destination_region="aisJoringsforest" destination_location="entry_south" >
+				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
+			</Exit>
+			<Exit name="exit_west" destination_region="aisNorthMeadow" destination_location="entry_east" >
+				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
+			</Exit>
+		</Exits>
+	</Region>
+
+<!-- Aisen, Nördliche Wiese [Feld und Wiesen]; ungefaehr 20 Min, eher offen; Level 7 - 12; Sidequests aus Joringsbrück -->
+<!-- Der Bauernhof -->
+<!-- Kraeuterbüsche -->
+<!-- Goblinschlaeger, Goblinraeuber, Goblinjaeger, Goblinhunde, Goblinkrieger, Goblinschamanen? -->
+	<Region id="8" name="aisNorthMeadow">
+		<Settings dimx="32" dimy="32" area_percent="0.4" complexity="0.3" granularity="6" />
+		
+		<ExitDirections north="false" south="false" west="false" east="true" />
+		
+		<Exits>
+			<Exit name="exit_east" destination_region="joringsbridge" destination_location="entry_west" >
+				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
+			</Exit>
+		</Exits>
+	</Region>	
+	
+<!-- Aisen, Joringsforst [Wald und Wiesen]; ungefaehr 30 Min, halbwegs offen; Level 7 - 12 -->	
+<!-- Goblinschlaeger, Goblinraeuber, Goblinjaeger, Goblinhunde, Goblinkrieger, Goblinschamanen?, Waldalraunen? -->
+	<Region id="9" name="aisJoringsforest">
+		<Settings dimx="32" dimy="32" area_percent="0.4" complexity="0.3" granularity="6" />
+		
+		<ExitDirections north="true" south="true" west="false" east="false" />
+		
+		<Exits>
+			<Exit name="exit_south" destination_region="joringsbridge" destination_location="entry_north" >
+				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
+			</Exit>
+			<Exit name="exit_north" destination_region="fairyforest" destination_location="entry_south" >
+				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
+			</Exit>
+		</Exits>
+	</Region>
+	
+<!-- Aisen, Feenwald [Wald und Steine]; ungefaehr 60 Min, eher verwinkelt; Level 10 - 16 -->
+<!-- Robs Versteck -->
+<!-- Goblinschlaeger, Goblinraeuber, Goblinjaeger, Goblinhunde, Goblinkrieger, Goblinschamanen?, Waldalraunen?, Feen? -->
+	<Region id="10" name="aisFairyforest">
+		<Settings dimx="32" dimy="32" area_percent="0.4" complexity="0.3" granularity="6" />
+		
+		<ExitDirections north="true" south="true" west="false" east="false" />
+		
+		<Exits>
+			<Exit name="exit_south" destination_region="aisJoringsforest" destination_location="entry_north" >
+				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
+			</Exit>
+			<Exit name="exit_north" destination_region="aisWolfstones" destination_location="entry_south" >
+				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
+			</Exit>
+		</Exits>
+	</Region>
+	
+<!-- Aisen, Wolfsfelsen [Wald und Gebirge]; ungefaehr 35 Min, eher verwinkelt; Level 14 - 17 -->
+<!-- Goblinschlaeger, Goblinraeuber, Goblinjaeger, Goblinhunde, Goblinkrieger, Goblinschamanen?, Harpien, wenige Untote, evtl. ein Lcih oder Neromant -->
+	<Region id="11" name="aisWolfstones">
+		<Settings dimx="32" dimy="32" area_percent="0.4" complexity="0.3" granularity="6" />
+		
+		<ExitDirections north="true" south="true" west="false" east="false" />
+		
+		<Exits>
+			<Exit name="exit_south" destination_region="aisFairyforest" destination_location="entry_north" >
+				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
+			</Exit>
+			<Exit name="exit_north" destination_region="dwarfenfroward" destination_location="entry_south" >
+				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
+			</Exit>
+		</Exits>
+	</Region>
+	
+<!-- Aisen, Zwergentrutz [Grenzfeste] -->
+<!-- Entsatz -->
+<!-- Der Lich -->
+<!-- Rob, der Raeuber, Ende -->
+<!-- Loc: Stadtmauer -->
+	<Region id="12" name="dwarfenfroward">
+		<Settings dimx="32" dimy="32" area_percent="0.4" complexity="0.3" granularity="6" />
+		
+		<ExitDirections north="true" south="true" west="false" east="false" />
+		
+		<Exits>
+			<Exit name="exit_south" destination_region="aisWolfstones" destination_location="entry_north" >
+				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
+			</Exit>
+			<Exit name="exit_north" destination_region="necFieldcamp" destination_location="entry_south" >
+				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
+			</Exit>
+		</Exits>
+	</Region>
+	
+<!-- Aisen, Zwergentrutz Stadtmauer; ungefähr 20 min, relativ starres Design; Level 16 - 19 -->
+<!-- Zombies, Skelette-->
+	<Region id="12" name="dwarfenfrowardRampart">
+		<Settings dimx="32" dimy="32" area_percent="0.4" complexity="0.3" granularity="6" />
+		
+		<ExitDirections north="true" south="true" west="false" east="false" />
+		
+		<Exits>
+			<Exit name="exit_south" destination_region="dwarfenfroward" destination_location="entry_north" >
+				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
+			</Exit>
+		</Exits>
+	</Region>
+	
+<!-- Necroria, Feldlager [Wiesen und Brachland]; ungefaehr 25 Min, eher verwinkelt; Level 17 - 20 -->
+<!-- Ende der Demo, der Lich als quasi-Endgegner -->
+<!-- Zombies, Skelette, Liche/Nekromanten?, DER Lich-->
+	<Region id="13" name="aisWolfstones">
+		<Settings dimx="32" dimy="32" area_percent="0.4" complexity="0.3" granularity="6" />
+		
+		<ExitDirections north="true" south="true" west="false" east="false" />
+		
+		<Exits>
+			<Exit name="exit_south" destination_region="dwarfenfroward" destination_location="entry_north" >
+				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
+			</Exit>
+		</Exits>
 	</Region>
 </World>
 
