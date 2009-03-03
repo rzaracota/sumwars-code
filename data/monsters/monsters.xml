@@ -339,6 +339,57 @@ AIR
 	<AI ai_sight_range="8" />
 </Monster>
 
+<Monster type="MONSTER" subtype="goblin_bow" fraction="MONSTER" category="GOBLIN" layer="NORMAL">
+	<Mesh file="goblin.mesh" />
+	<ExtraMesh bone="itemRightHand" file="goblin_sbw.mesh" />
+	<Dropslots >
+		<Dropslot pbig="0.01" pmedium="0.02" psmall="0.04" pgold="0.02" min_level="0" max_level="10" magic_prob="0.1" magic_power="1000" />
+		<Dropslot pbig="0.01" pmedium="0.02" psmall="0.02" pgold="0.02" min_level="0" max_level="10" magic_prob="0.2" magic_power="1000" />
+	</Dropslots>
+	
+	<BasicAttributes
+					max_experience="100000"
+					level="1"
+					max_health="75"
+					armor="10"
+					block="0"
+					attack="10"
+					strength="25"
+					dexterity="10"
+					magic_power="5"
+					willpower="10"
+					resistances_physical="0"
+					resistances_air="0"
+					resistances_ice="0"
+					resistances_fire="0"
+					resistances_cap_physical="50"
+					resistances_cap_air="50"
+					resistances_cap_ice="50"
+					resistances_cap_fire="50"
+					walk_speed="2500"
+					attack_speed="1500"
+					step_length="0.8"
+					attack_range="1"
+					>
+		<Ability type="walk">
+			<Animation name="walk" />
+		</Ability>
+		
+		<Ability type="range_attack">
+			<Animation name="attack" />
+			<Animation name="attack2"/>
+		</Ability>
+		
+		<Ability type="die">
+			<Animation name="die" />
+		</Ability>
+		
+	</BasicAttributes>
+	
+	<Geometry radius="0.5" />
+	
+	<AI ai_sight_range="8" />
+</Monster>
 
 <!-- Lich -->
 <Monster type="MONSTER" subtype="lich" fraction="UNDEAD" category="UNDEAD" layer="NORMAL OR BASE OR AIR">
@@ -555,7 +606,8 @@ AIR
 
 
 <MonsterGroup name="goblins" >
-	<SubGroup subtype="goblin" number="7" prob="0.7" />
+	<SubGroup subtype="goblin" number="4" prob="0.7" />
+	<SubGroup subtype="goblin_bow" number="3" prob="0.7" />
 	<SubGroup subtype="goblin_clb" number="3" prob="0.7" />
 </MonsterGroup>
 

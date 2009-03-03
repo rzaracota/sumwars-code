@@ -245,7 +245,7 @@
 
 <!-- Lobby Konzilshalle der Elemtarmagier [fester Ort; Saeulenhalle im roemischen Stil] -->
 	<Region id="2" name="elCnlLobby">
-			<Settings dimx="8" dimy="4" area_percent="100" complexity="0" granularity="0"/>
+			<Settings dimx="8" dimy="4" area_percent="0.8" complexity="0" granularity="0"/>
 			<ExitDirections north="true" south="false" west="false" east="false" />
 			<Exits>
 				<Exit name="exit_north" destination_region="medMercCamp" destination_location="entry_south" >

@@ -118,6 +118,8 @@
 		<Unit filename="core\mapgenerator.cpp" />
 		<Unit filename="core\mapgenerator.h" />
 		<Unit filename="core\matrix2d.h" />
+		<Unit filename="core\minimap.cpp" />
+		<Unit filename="core\minimap.h" />
 		<Unit filename="core\monster.cpp" />
 		<Unit filename="core\monster.h" />
 		<Unit filename="core\monsterbase.h" />
