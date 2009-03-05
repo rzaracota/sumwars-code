@@ -34,6 +34,7 @@
 #include "partyinfo.h"
 #include "charcreate.h"
 #include "questinfo.h"
+#include "minimapwindow.h"
 
 /**
  * \class MainWindow
@@ -155,6 +156,12 @@ class MainWindow :
 	 * \brief erstellt Fenster Questinfo
 	 */
 	void setupQuestInfo();
+	
+	/**
+	 * \fn void setupMinimap()
+	 * \brief erstellt Fenster Questinfo
+	 */
+	void setupMinimap();
 	
 	/**
 	 * \fn bool initInputs()

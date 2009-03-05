@@ -1,5 +1,10 @@
 #include "scene.h"
 
+#include "CEGUI.h"
+#include "OgreCEGUIRenderer.h"
+#include "OgreCEGUITexture.h"
+#include "OgreCEGUIResourceProvider.h"
+
 #define USE_OBJECTLOADER
 #define USE_ITEMLOADER
 
@@ -8,8 +13,6 @@ std::map<Projectile::ProjectileType, RenderInfo> Scene::m_projectile_render_info
 std::map<WorldObject::TypeInfo::ObjectSubtype, RenderInfo> Scene::m_object_render_info;
 
 std::map<Item::Subtype, RenderInfo> Scene::m_item_render_info;
-
-std::map<Tile, RenderInfo> Scene::m_tile_render_info;
 
 std::map<WorldObject::TypeInfo::ObjectSubtype, std::map<Action::ActionType, std::vector<std::string> > > Scene::m_object_animations;
 
@@ -49,7 +52,7 @@ Scene::Scene(Document* doc,Ogre::RenderWindow* window)
 	m_particle_system_pool.clear();
 	
 	m_temp_player ="";
-
+	
 }
 
 Scene::~Scene()
@@ -282,10 +285,6 @@ void Scene::registerItem(Item::Subtype subtype, std::string mesh, std::string pa
 	m_item_render_info.insert(std::make_pair(subtype,RenderInfo(mesh,particle_system,scaling_factor)));
 }
 
-void Scene::registerTile(Tile tile, std::string mesh, std::string particle_system, float scaling_factor)
-{
-	m_tile_render_info.insert(std::make_pair(tile,RenderInfo(mesh,particle_system,scaling_factor)));
-}
 
 
 void Scene::registerProjectile(Projectile::ProjectileType type, std::string mesh, std::string particle_system, float scaling_factor)
@@ -450,6 +449,7 @@ void Scene::update(float ms)
 	
 	m_camera->setPosition(Ogre::Vector3(pos.m_x*50 + r*cos(theta)*cos(phi), r*sin(theta), pos.m_y*50 - r*cos(theta)*sin(phi)));
 	m_camera->lookAt(Ogre::Vector3(pos.m_x*50,70,pos.m_y*50));
+	DEBUG5("cam position %f %f %f",pos.m_x*50 + r*cos(theta)*cos(phi), r*sin(theta), pos.m_y*50 - r*cos(theta)*sin(phi));
 
 	Ogre::Light* light= m_scene_manager->getLight("HeroLight");
 	light->setPosition(Ogre::Vector3(pos.m_x*50,1000,pos.m_y*50));
@@ -1582,54 +1582,12 @@ void Scene::createScene()
 		}
 	
 		// Tiles einfuegen
-		insertTiles();
 	}
+	
 
+	
 }
 
-void  Scene::insertTiles()
-{
-	/*
-	// Matrix der Tiles
-	Matrix2d<char>* mat = m_document->getRegionData()->m_tiles;
-
-
-	// Matrix durchgehen
-	Tile tile;
-	ostringstream out_stream;
-	for (int i =0;i<m_document->getRegionData()->m_dimx*2-1;i++)
-	{
-
-		for (int j =0;j<m_document->getRegionData()->m_dimy*2-1;j++)
-		{
-			tile = (Tile) *(mat->ind(i,j));
-			if (tile ==TILE_NOTHING)
-			{
-				continue;
-			}
-			// Name des Tiles
-			out_stream.str("");
-			out_stream << "Tile:"<<i<<":"<<j;
-			string tname = out_stream.str();
-
-
-			// Entity des Tiles
-			Ogre::Entity *ent = m_scene_manager->createEntity(tname, "Tile");
-
-			// TODO: richtiges Material auswaehlen
-			ent->setMaterialName("grass1");
-
-			// Node des Tiles
-			Ogre::SceneNode* obj_node;
-			obj_node = m_scene_manager->getRootSceneNode()->createChildSceneNode(tname+"Node",Ogre::Vector3(i*100,0,j*100));
-
-			// Objekt an den Knoten haengen
-			obj_node->attachObject(ent);
-
-		}
-	}
-	*/
-}
 
 void Scene::updateTempPlayer()
 {

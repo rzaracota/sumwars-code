@@ -791,6 +791,22 @@ void Document::onButtonQuestInfoClicked()
 	m_modified |= WINDOWS_MODIFIED;
 }
 
+void Document::onButtonMinimapClicked()
+{
+	if (getGUIState()->m_shown_windows & MINIMAP)
+	{
+		getGUIState()->m_shown_windows &= ~MINIMAP;
+	}
+	else
+	{
+		//getGUIState()->m_shown_windows &= ~(PARTY | CHARINFO);
+		
+		getGUIState()->m_shown_windows |= MINIMAP;
+	}
+	
+	// Geoeffnete Fenster haben sich geaendert
+	m_modified |= WINDOWS_MODIFIED;
+}
 
 void Document::sendChatMessage(std::string msg)
 {
@@ -1001,6 +1017,10 @@ bool Document::onKeyPress(KeyCode key)
 		else if (dest == SHOW_SKILLTREE)
 		{
 			onButtonSkilltreeClicked();
+		}
+		else if (dest == SHOW_MINIMAP)
+		{
+			onButtonMinimapClicked();
 		}
 		else if (dest == SWAP_EQUIP)
 		{

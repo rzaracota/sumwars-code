@@ -152,6 +152,7 @@ class Document
 		START_MENU = 128,
 		CHAR_CREATE = 256,
   		QUEST_INFO = 512,
+		MINIMAP = 1024,
 	};
 
 	/**
@@ -168,6 +169,7 @@ class Document
 		SHOW_CHATBOX =5,
 		SHOW_CHATBOX_NO_TOGGLE =6,
 		SHOW_QUESTINFO =7,
+  		SHOW_MINIMAP =8,
 		CLOSE_ALL=9,
 		SWAP_EQUIP=10,
 		USE_POTION = 30,
@@ -464,6 +466,11 @@ class Document
 	 */
 	void onButtonSaveExitClicked ( );
 
+	/**
+	 * \fn void onButtonMinimapClicked()
+	 * \brief Behandelt Klick auf Inventar Button
+	 */
+	void onButtonMinimapClicked();
 
 	/**
 	 * \fn void onButtonInventoryClicked()

@@ -41,7 +41,7 @@ bool MainWindow::init()
 	// Aktuelle Ebene setzen
 	CEGUI::System::getSingleton().setGUISheet(m_main_menu);
 
-
+	
 	return result;
 
 }
@@ -271,6 +271,16 @@ void MainWindow::update()
 			quest_info->setVisible(false);
 		}
 		
+		CEGUI::FrameWindow* minimap = (CEGUI::FrameWindow*) win_mgr.getWindow("MinimapWindow");
+		if (wflags & Document::MINIMAP)
+		{
+			minimap->setVisible(true);
+		}
+		else
+		{
+			minimap->setVisible(false);
+		}
+		
 		// Chat Fenster anzeigen wenn entsprechendes Flag gesetzt
 		CEGUI::FrameWindow* chat_window = (CEGUI::FrameWindow*) win_mgr.getWindow("ChatWindow");
 		if (wflags & Document::CHAT)
@@ -363,6 +373,12 @@ void MainWindow::update()
 			m_sub_windows["ChatWindow"]->update();
 		}
 
+		if (wflags & Document::MINIMAP)
+		{
+			// Fenster Minimap aktualisieren
+			m_sub_windows["Minimap"]->update();
+		}
+		
 		
 		// Steuerleiste aktualisieren
 		m_sub_windows["ControlPanel"]->update();
@@ -410,6 +426,23 @@ void MainWindow::update()
 		{
 			btn->setVisible(vis);
 		}
+		
+		/*
+		vis = false;
+		CEGUI::Window* label = win_mgr.getWindow("MinimapImage");
+		if (wflags & Document::MINIMAP)
+		{
+			vis = true;
+		}
+		if (label->isVisible() != vis)
+		{
+			if (vis)
+			{
+				label->setProperty("Image", "set:minimap image:minimap_img"); 
+			}
+			label->setVisible(vis);
+		}
+		*/
 	}
 	
 }
@@ -456,6 +489,8 @@ bool MainWindow::setupGameScreen()
 		
 		// Bild fuer das Item am Cursor
 		setupCursorItemImage();
+		
+		setupMinimap();
 		
 	}
 	catch (CEGUI::Exception e)
@@ -557,20 +592,6 @@ void MainWindow::setupChatWindow()
 	Window* wnd = new ChatLine(m_document);
 	m_sub_windows["ChatWindow"] = wnd;
 	
-	/*
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-	CEGUI::MultiLineEditbox* chat_content;
-	
-	chat_content = static_cast<CEGUI::MultiLineEditbox*>(win_mgr.createWindow("TaharezLook/MultiLineEditbox", "ChatContent"));
-	m_game_screen->addChildWindow(chat_content);
-	//chat_content->setProperty("FrameEnabled", "false");
-	chat_content->setProperty("BackgroundEnabled", "false");
-	chat_content->setPosition(CEGUI::UVector2(cegui_reldim(0.00f), cegui_reldim( 0.0f)));
-	chat_content->setSize(CEGUI::UVector2(cegui_reldim(1.0f), cegui_reldim( 0.78f)));
-	chat_content->setWantsMultiClickEvents(false);
-	chat_content->setReadOnly(true);
-	chat_content->setText("");
-	*/
 	
 	// Inventar anfangs ausblenden
 	m_game_screen->addChildWindow(wnd->getCEGUIWindow());
@@ -593,6 +614,30 @@ void MainWindow::setupCursorItemImage()
 	label->setAlwaysOnTop(true);
 	label->setMousePassThroughEnabled(true);
 	label->setID(0);
+}
+
+void MainWindow::setupMinimap()
+{
+	Window* wnd = new MinimapWindow(m_document);
+	m_sub_windows["Minimap"] = wnd;
+	m_game_screen->addChildWindow(wnd->getCEGUIWindow());
+	/*
+	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
+	
+	CEGUI::Window* label;
+ 	label = win_mgr.createWindow("TaharezLook/StaticImage", "MinimapImage");
+	m_game_screen->addChildWindow(label);
+	label->setProperty("FrameEnabled", "false");
+	label->setProperty("BackgroundEnabled", "false");
+	label->setPosition(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.05)));
+	label->setSize(CEGUI::UVector2(cegui_reldim(0.9f), cegui_reldim( 0.8f)));
+	label->setProperty("Image", "set:TaharezLook image:CloseButtonNormal"); 
+	label->setVisible(false);
+	label->setMousePassThroughEnabled(true);
+	label->setID(0);
+	*/
+	
+	
 }
 
 bool MainWindow::setupObjectInfo()

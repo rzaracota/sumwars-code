@@ -362,11 +362,6 @@ class Scene
 	 */
 	void createScene();
 
-	/**
-	 * \fn void insertTiles()
-	 * \brief Fuegt die Tiles der Region in die Szene ein
-	 */
-	void insertTiles();
 
 	/**
 	 * \fn void registerMeshes()
@@ -403,13 +398,6 @@ class Scene
 	 * \param subtype Subtyp des Objektes
 	 */
 	static RenderInfo getProjectileRenderInfo(Projectile::ProjectileType subtype);
-
-	/**
-	 * \fn RenderInfo getTileRenderInfo(Tile tile)
-	 * \brief Gibt die Informationen zum rendern eines Tiles aus
-	 * \param tile Type des Tiles
-	 */
-	static RenderInfo getTileRenderInfo(Tile tile);
 	
 	
 
@@ -469,11 +457,6 @@ class Scene
 	 */
 	static std::map<Item::Subtype, RenderInfo> m_item_render_info;
 
-	/**
-	 * \var static std::map<Tile, RenderInfo> m_tile_render_info
-	 *  \brief Speichert fuer die Tiles die Information zum Rendern
-	 */
-	static std::map<Tile, RenderInfo> m_tile_render_info;
 
 	/**
 	 * \var Document* m_document
@@ -498,6 +481,7 @@ class Scene
 	 * \brief Kamera mit der die Szene betrachtet wird
 	 */
 	Ogre::Camera* m_camera;
+	
 
 	/**
 	 * \var Ogre::Viewport* m_viewport

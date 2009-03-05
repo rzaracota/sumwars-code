@@ -924,7 +924,24 @@ class Region
 		 */
 		void insertDialogue(Dialogue* dia);
 		
+		/**
+		 * \fn short getDimX()
+		 * \brief Dimension in x-Richtung
+		 */
+		short getDimX()
+		{
+			return m_dimx;
+		}
 		
+		/**
+		 * \fn short getDimY()
+		 * \brief Dimension in y-Richtung
+		 */
+		short getDimY()
+		{
+			return m_dimy;
+		}
+
 		
 	private:
 		/**
