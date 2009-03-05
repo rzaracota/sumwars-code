@@ -394,6 +394,7 @@ bool Application::initGettext()
 	}
 
 	bindtextdomain ("sumwars","../translation/");
+	bindtextdomain ("event","../translation/");
 	textdomain ("sumwars");
 	return result;
 #endif

@@ -1,0 +1,85 @@
+# German translations for sumwars package.
+# Copyright (C) 2009 THE sumwars'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the sumwars package.
+# Hans Wulf <hans@kalypso>, 2009.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: sumwars 0.01\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-05 22:47+0100\n"
+"PO-Revision-Date: 2009-03-05 22:06+0100\n"
+"Last-Translator: Hans Wulf <hans@kalypso>\n"
+"Language-Team: German\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ASCII\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: ../data/quests/goblins.xml:9
+msgid "Quest finished"
+msgstr "Quest abgeschlossen"
+
+#: ../data/quests/goblins.xml:12
+msgid "killed enough goblins"
+msgstr "Ausreichend viele Goblins getoetet"
+
+#: ../data/quests/goblins.xml:15
+msgid "'Kill '..nr..' more Goblins'"
+msgstr "'Noch '..nr..' Goblins'"
+
+#: ../data/quests/goblins.xml:26
+msgid "I have killed them"
+msgstr "Ich habe alle umgebracht"
+
+#: ../data/quests/goblins.xml:27
+msgid "you are soo great"
+msgstr "Du bist so toll"
+
+#: ../data/quests/goblins.xml:30
+msgid "Go and kill some more..."
+msgstr "Du musst noch einige toeten"
+
+#: ../data/quests/goblins.xml:33
+msgid "There are some stupid goblins around"
+msgstr "Es gibt hier dumme Goblins"
+
+#: ../data/quests/goblins.xml:34
+msgid "If you kill 10 of them you get a reward"
+msgstr "Wenn du 10 von ihnen umbringst bekommst du eine Belohnung"
+
+#: ../data/quests/goblins.xml:35
+msgid "Interested?"
+msgstr "Interesse?"
+
+#: ../data/quests/goblins.xml:36
+msgid "Accept Quest?"
+msgstr "Quest annehmen?"
+
+#: ../data/quests/goblins.xml:37
+msgid "Yes"
+msgstr "Ja"
+
+#: ../data/quests/goblins.xml:38
+msgid "No"
+msgstr "Nein"
+
+#: ../data/quests/goblins.xml:49
+msgid "A second reward ?"
+msgstr "Noch eine Belohnung?"
+
+#: ../data/quests/goblins.xml:50
+msgid "Yeah"
+msgstr "Joa"
+
+#: ../data/quests/goblins.xml:51
+msgid "I give you a goblin club"
+msgstr "Ich gebe die eine Goblin Keule"
+
+#: ../data/quests/goblins.xml:60
+msgid "Nearly done"
+msgstr "So gut wie erledigt"
+
+#: ../data/quests/goblins.xml:61
+msgid "Have fun"
+msgstr "Viel Spass"

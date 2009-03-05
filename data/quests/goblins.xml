@@ -6,12 +6,13 @@
 	
 	<Description>
 		if (goblins.finished) then
-			return 'Quest abgeschlossen';
+			return _("Quest finished");
 		end
 		if (goblins.nr >=10) then
-			return 'Genug Goblins getoetet';
+			return _("killed enough goblins");
 		end
-		return 'Noch '..(10-goblins.nr)..' Goblins';
+		nr = (10-goblins.nr)
+		return gettext("'Kill '..nr..' more Goblins'");
 	</Description>
 	
 	<NPC refname="peasant">
@@ -22,19 +23,19 @@
 			<Effect>
 				if (goblins.started) then
 					if (goblins.nr >=10) then
-						speak('player', 'Ich habe sie verhauen',1000)
-						speak('peasant','du bist toll',1000);
+						speak('player', _("I have killed them"),1000)
+						speak('peasant',_("you are soo great"),1000);
 						changeTopic('finish_gob_quest');
 					else
-						speak('peasant','Du muss noch einige killen...',1000);
+						speak('peasant',_("Go and kill some more..."),1000);
 					end
 				else
-					speak('peasant','Es gibt hier dumme Goblins',1000);
-					speak('peasant','Wenn du 10 umbringst bekommst du was',1000);
-					speak('peasant','Interesse?',1000);
-					addQuestion('Quest annehmen?');
-					addAnswer('ja','start_gob_quest'); 
-					addAnswer('nein','end');
+					speak('peasant',_("There are some stupid goblins around"),1000);
+					speak('peasant',_("If you kill 10 of them you get a reward"),1000);
+					speak('peasant',_("Interested?"),1000);
+					addQuestion(_("Accept Quest?"));
+					addAnswer(_("Yes"),'start_gob_quest'); 
+					addAnswer(_("No"),'end');
 				end
 			</Effect>
 		</Topic>
@@ -45,9 +46,9 @@
 				return (getPlayerPrivateVar(getSpeaker('player'),"goblins.reward2") ~= true)
 			</Condition>
 			<Effect>
-				speak('peasant','Noch eine Belohnung ?',1000);
-				speak('player', 'Joa',1000)
-				speak('peasant','ich gebe dir einen goblin Hammer',1000);
+				speak('peasant',_("A second reward ?"),1000);
+				speak('player', _("Yeah"),1000)
+				speak('peasant',_("I give you a goblin club"),1000);
 				setPlayerPrivateVar(getSpeaker('player'),"goblins.reward2",true);
 				changeTopic('goblins_reward2');
 			</Effect>
@@ -56,8 +57,8 @@
 		
 		<Topic name="start_gob_quest" >
 			<Effect>
-				speak('player', 'So gut wie erledigt',1000)
-				speak('peasant','Viel Erfolg',1000);
+				speak('player', _("Nearly done"),1000)
+				speak('peasant',_("Have fun"),1000);
 				goblins.started = true;
 				goblins.nr =0;
 			</Effect>	

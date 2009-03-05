@@ -387,6 +387,12 @@ class EventSystem
 		 */
 		static int writeUpdateString(lua_State *L);
 		
+		
+		/**
+		 * \fn static int gettext(lua_State *L)
+		 * \brief gettext fuer lua
+		 */
+		static int gettext(lua_State *L);
 	private:
 		/**
 		 * \var static lua_State * m_lua

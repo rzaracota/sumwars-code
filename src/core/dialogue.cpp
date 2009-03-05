@@ -139,7 +139,7 @@ void Dialogue::addAnswer(std::string text, std::string topic)
 	{
 		DEBUG5("adding answer %s %s",text.c_str(), topic.c_str());
 
-		m_speech.back().second.m_answers.push_back(std::make_pair(text,topic));
+		m_speech.back().second.m_answers.push_back(std::make_pair(dgettext("event",text.c_str()),topic));
 	}
 	
 	
@@ -181,7 +181,7 @@ void Dialogue::changeTopic(std::string topic)
 	
 	if (topic == "start")
 	{
-		addQuestion("was ansprechen?");
+		addQuestion(gettext("which Topic"));
 		
 		// Alle Antworten hinzufuegen, deren Themen freigeschaltet sind
 		
