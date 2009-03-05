@@ -4,7 +4,15 @@
 Application::Application()
 {
 	// Anwendung initialisieren
-	bool ret = init();
+	bool ret = false;
+	try
+	{
+		ret = init();
+	}
+	catch (std::exception &e)
+	{
+		ERRORMSG("Error message: %s",e.what());
+	}
 
 	if (ret == false)
 	{

@@ -21,7 +21,13 @@ class Inventory : public ItemWindow
 		 * \brief aktualisiert den Inhalt des Fensters
 		 */
 		virtual void update();
-		
+
+		/**
+		 * \fn virtual void updateTranslation
+		 * \brief aktualisiert die Uebersetzungen
+		 */
+		virtual void updateTranslation();
+
 	private:
 		/**
 		 * \fn bool onSwapEquipClicked(const CEGUI::EventArgs& evt)

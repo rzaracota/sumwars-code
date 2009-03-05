@@ -21,6 +21,7 @@ class ItemWindow : public Window
 		 * \brief aktualisiert den Inhalt des Fensters
 		 */
 		virtual void update() =0;
+
 		
 		/**
 		 * \fn static void registerItemImage(Item::Subtype type, std::string image)

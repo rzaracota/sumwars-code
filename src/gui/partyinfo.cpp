@@ -170,6 +170,8 @@ PartyInfo::PartyInfo (Document* doc)
 		
 
 	}
+	
+	updateTranslation();
 }
 
 void PartyInfo::update()
@@ -432,6 +434,23 @@ void PartyInfo::update()
 		}
 	}
 	
+}
+
+void PartyInfo::updateTranslation()
+{
+	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
+	CEGUI::Window* label;
+	
+	std::ostringstream stream;
+	for (int i=0; i<7; i++)
+	{
+		stream.str("");
+		stream << "PlayerName";
+		stream << i;
+		
+		label = win_mgr.getWindow(stream.str());
+		label->setText(gettext("Name"));
+	}
 }
 
 bool PartyInfo::onAcceptMemberButtonClicked(const CEGUI::EventArgs& evt)

@@ -26,6 +26,16 @@ class MinimapWindow : public Window
 		virtual void update();
 		
 		/**
+		 * \fn virtual void updateTranslation
+		 * \brief aktualisiert die Uebersetzungen
+		 */
+		virtual void updateTranslation()
+		{
+			
+		}
+
+		
+		/**
 		 * \fn void resetShift()
 		 *  \brief Setzt Verschiebung auf 0
 		 */

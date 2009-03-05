@@ -27,6 +27,12 @@ class CharCreate : public Window
 		 */
 		virtual void update();
 		
+		/**
+		 * \fn virtual void updateTranslation
+		 * \brief aktualisiert die Uebersetzungen
+		 */
+		virtual void updateTranslation();
+		
 	private:
 	/**
 	 * \fn bool onClassSelected(const CEGUI::EventArgs& evt)

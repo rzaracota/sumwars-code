@@ -168,6 +168,8 @@ ControlPanel::ControlPanel (Document* doc)
 		label->subscribeEvent(CEGUI::Window::EventMouseEnters, CEGUI::Event::Subscriber(&ControlPanel::onItemHover, (ItemWindow*) this));
 	}
 
+	
+	updateTranslation();
 }
 
 void ControlPanel::update()
@@ -258,6 +260,18 @@ void ControlPanel::update()
 	}
 }
 
+void ControlPanel::updateTranslation()
+{
+	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
+	CEGUI::PushButton* btn;
+	//CEGUI::Window* label;
+
+	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("OptionsButton"));
+	btn->setText(gettext("Options"));
+	
+	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("SaveExitButton"));
+	btn->setText(gettext("Save & Exit"));
+}
 
 bool ControlPanel::onButtonSaveExitClicked(const CEGUI::EventArgs& evt)
 {

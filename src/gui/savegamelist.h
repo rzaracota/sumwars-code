@@ -28,6 +28,13 @@ class SavegameList : public Window
 		 */
 		virtual void update();
 		
+		/**
+		 * \fn virtual void updateTranslation
+		 * \brief aktualisiert die Uebersetzungen
+		 */
+		virtual void updateTranslation();
+
+		
 	private:
 		/**
 		 * \fn bool onSavegameChosen(const CEGUI::EventArgs& evt)

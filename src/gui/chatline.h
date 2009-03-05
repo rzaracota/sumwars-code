@@ -22,6 +22,12 @@ class ChatLine : public Window
 		 */
 		virtual void update();
 		
+		/**
+		 * \fn virtual void updateTranslation
+		 * \brief aktualisiert die Uebersetzungen
+		 */
+		virtual void updateTranslation();
+		
 	private:
 		/**
 		 * \fn bool onSendMessage(const CEGUI::EventArgs& evt)

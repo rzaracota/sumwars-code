@@ -42,6 +42,12 @@ class Window
 		virtual void update() =0;
 		
 		/**
+		 * \fn virtual void updateTranslation
+		 * \brief aktualisiert die Uebersetzungen
+		 */
+		virtual void updateTranslation() =0;
+		
+		/**
 		 * \fn bool consumeEvent(const CEGUI::EventArgs& evt)
 		 * \brief Funktion die Events verbraucht, gibt immer true zurueck
 		 */

@@ -23,7 +23,6 @@ MainMenu::MainMenu (Document* doc)
 	start_menu->addChildWindow(btn);
 	btn->setPosition(CEGUI::UVector2(cegui_reldim(0.1f), cegui_reldim( 0.1f)));
 	btn->setSize(CEGUI::UVector2(cegui_reldim(0.8f), cegui_reldim( 0.2f)));
-	btn->setText("Einzelspieler");
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MainMenu::onStartSinglePlayer, this));
 	btn->setWantsMultiClickEvents(false);
 
@@ -32,7 +31,6 @@ MainMenu::MainMenu (Document* doc)
 	start_menu->addChildWindow(btn);
 	btn->setPosition(CEGUI::UVector2(cegui_reldim(0.1f), cegui_reldim( 0.4f)));
 	btn->setSize(CEGUI::UVector2(cegui_reldim(0.8f), cegui_reldim( 0.2f)));
-	btn->setText("Server beitreten");
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MainMenu::onStartMultiPlayer, this));
 	btn->setWantsMultiClickEvents(false);
 
@@ -41,14 +39,32 @@ MainMenu::MainMenu (Document* doc)
 	start_menu->addChildWindow(btn);
 	btn->setPosition(CEGUI::UVector2(cegui_reldim(0.1f), cegui_reldim( 0.7f)));
 	btn->setSize(CEGUI::UVector2(cegui_reldim(0.8f), cegui_reldim( 0.2f)));
-	btn->setText("Server aufsetzen");
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MainMenu::onStartMultiPlayerHost, this));
 	btn->setWantsMultiClickEvents(false);
+	
+	updateTranslation();
 }
 
 void MainMenu::update()
 {
 	
+}
+
+void MainMenu::updateTranslation()
+{
+	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
+	CEGUI::PushButton* btn;
+	
+	
+	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("SinglePlayerButton"));
+	btn->setText(gettext("Single player"));
+	
+	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("ServerJoinButton"));
+	btn->setText(gettext("Join game"));
+	
+	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("ServerHostButton"));
+	btn->setText(gettext("Host game"));
+
 }
 
 bool MainMenu::onStartSinglePlayer(const CEGUI::EventArgs& evt)

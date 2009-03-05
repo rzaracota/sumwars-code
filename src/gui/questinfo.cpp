@@ -49,7 +49,6 @@ QuestInfo::QuestInfo (Document* doc)
 	label->setProperty("BackgroundEnabled", "true");
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.1f), cegui_reldim( 0.28f)));
 	label->setSize(CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim( 0.05f)));
-	label->setText("offene");
 	
 	box = (CEGUI::Checkbox *) win_mgr.createWindow("TaharezLook/Checkbox", "QuestDoneBox");
 	quest_info->addChildWindow(box);
@@ -64,7 +63,6 @@ QuestInfo::QuestInfo (Document* doc)
 	label->setProperty("BackgroundEnabled", "true");
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.4f), cegui_reldim( 0.28f)));
 	label->setSize(CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim( 0.05f)));
-	label->setText("erledigte");
 	
 	box = (CEGUI::Checkbox *) win_mgr.createWindow("TaharezLook/Checkbox", "QuestFailedBox");
 	quest_info->addChildWindow(box);
@@ -79,7 +77,6 @@ QuestInfo::QuestInfo (Document* doc)
 	label->setProperty("BackgroundEnabled", "true");
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim( 0.28f)));
 	label->setSize(CEGUI::UVector2(cegui_reldim(0.25f), cegui_reldim( 0.05f)));
-	label->setText("fehlgeschlagene");
 	
 	CEGUI::MultiLineEditbox* quest_descr;
 	quest_descr = static_cast<CEGUI::MultiLineEditbox*>(win_mgr.createWindow("TaharezLook/MultiLineEditbox", "QuestDescription"));
@@ -89,6 +86,8 @@ QuestInfo::QuestInfo (Document* doc)
 	quest_descr->setWantsMultiClickEvents(false);
 	quest_descr->setReadOnly(true);
 	quest_descr->setText("");
+	
+	updateTranslation();
 }
 
 
@@ -147,6 +146,23 @@ void QuestInfo::update()
 		}
 		updateDescription();
 	}
+	
+}
+
+void QuestInfo::updateTranslation()
+{
+	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
+	CEGUI::Window* label;
+
+	label = win_mgr.getWindow("QuestOpenLabel");
+	label->setText(gettext("open"));
+	
+	label = win_mgr.getWindow("QuestDoneLabel");
+	label->setText(gettext("finished"));
+	
+	label = win_mgr.getWindow("QuestFailedLabel");
+	label->setText(gettext("failed"));
+	
 	
 }
 

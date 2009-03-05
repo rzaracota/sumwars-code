@@ -24,6 +24,12 @@ class ControlPanel : public ItemWindow
 		virtual void update();
 		
 		/**
+		 * \fn virtual void updateTranslation
+		 * \brief aktualisiert die Uebersetzungen
+		*/
+		virtual void updateTranslation();
+		
+		/**
 		 * \fn void onButtonCharInfoClicked(const CEGUI::EventArgs& evt)
 		 * \brief Behandelt Klick auf CharakterInfo Button
 		 */

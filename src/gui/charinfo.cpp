@@ -33,8 +33,7 @@ CharInfo::CharInfo (Document* doc)
 	label->setProperty("BackgroundEnabled", "true");
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.0f), cegui_reldim( 0.0f)));
 	label->setSize(CEGUI::UVector2(cegui_reldim(0.4f), cegui_reldim( 0.1f)));
-	label->setText("Name");
-
+	
 	// Label Klasse
 	label = win_mgr.createWindow("TaharezLook/StaticText", "ClassLabel");
 	char_info->addChildWindow(label);
@@ -42,8 +41,7 @@ CharInfo::CharInfo (Document* doc)
 	label->setProperty("BackgroundEnabled", "true");
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.4f), cegui_reldim( 0.0f)));
 	label->setSize(CEGUI::UVector2(cegui_reldim(0.4f), cegui_reldim( 0.1f)));
-	label->setText("Klasse");
-
+	
 	// Label Level
 	label = win_mgr.createWindow("TaharezLook/StaticText", "LevelLabel");
 	char_info->addChildWindow(label);
@@ -60,8 +58,7 @@ CharInfo::CharInfo (Document* doc)
 	label->setProperty("BackgroundEnabled", "true");
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.15f)));
 	label->setSize(CEGUI::UVector2(cegui_reldim(0.20f), cegui_reldim( 0.06f)));
-	label->setText(gettext("main_power"));
-
+	
 	// Label Staerke (Wert)
 	label = win_mgr.createWindow("TaharezLook/StaticText", "StrengthValueLabel");
 	char_info->addChildWindow(label);
@@ -89,8 +86,7 @@ CharInfo::CharInfo (Document* doc)
 	label->setProperty("BackgroundEnabled", "true");
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.23f)));
 	label->setSize(CEGUI::UVector2(cegui_reldim(0.20f), cegui_reldim( 0.06f)));
-	label->setText(gettext("main_dexterity"));
-
+	
 	// Label Geschick (Wert)
 	label = win_mgr.createWindow("TaharezLook/StaticText", "DexterityValueLabel");
 	char_info->addChildWindow(label);
@@ -117,8 +113,7 @@ CharInfo::CharInfo (Document* doc)
 	label->setProperty("BackgroundEnabled", "true");
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.31f)));
 	label->setSize(CEGUI::UVector2(cegui_reldim(0.20f), cegui_reldim( 0.06f)));
-	label->setText(gettext("main_willpower"));
-
+	
 	// Label Willenskraft (Wert)
 	label = win_mgr.createWindow("TaharezLook/StaticText", "WillpowerValueLabel");
 	char_info->addChildWindow(label);
@@ -145,8 +140,7 @@ CharInfo::CharInfo (Document* doc)
 	label->setProperty("BackgroundEnabled", "true");
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.39f)));
 	label->setSize(CEGUI::UVector2(cegui_reldim(0.20f), cegui_reldim( 0.06f)));
-	label->setText(gettext("main_magic_power"));
-
+	
 	// Label Zauberkraft (Wert)
 	label = win_mgr.createWindow("TaharezLook/StaticText", "MagicpowerValueLabel");
 	char_info->addChildWindow(label);
@@ -173,8 +167,7 @@ CharInfo::CharInfo (Document* doc)
 	label->setProperty("BackgroundEnabled", "true");
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.47f)));
 	label->setSize(CEGUI::UVector2(cegui_reldim(0.20f), cegui_reldim( 0.06f)));
-	label->setText(gettext("main_credits"));
-
+	
 	// Label  Attributpunkte (Wert)
 	label = win_mgr.createWindow("TaharezLook/StaticText", "AttrPointsValueLabel");
 	char_info->addChildWindow(label);
@@ -191,8 +184,7 @@ CharInfo::CharInfo (Document* doc)
 	label->setProperty("BackgroundEnabled", "true");
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.50f), cegui_reldim( 0.15f)));
 	label->setSize(CEGUI::UVector2(cegui_reldim(0.20f), cegui_reldim( 0.06f)));
-	label->setText(gettext("main_experience"));
-
+	
 	// Label Exp (Wert)
 	label = win_mgr.createWindow("TaharezLook/StaticText", "ExperienceValueLabel");
 	char_info->addChildWindow(label);
@@ -209,8 +201,7 @@ CharInfo::CharInfo (Document* doc)
 	label->setProperty("BackgroundEnabled", "true");
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.50f), cegui_reldim( 0.23f)));
 	label->setSize(CEGUI::UVector2(cegui_reldim(0.20f), cegui_reldim( 0.06f)));
-	label->setText(gettext("main_healthpoints"));
-
+	
 	// Label HP (Wert)
 	label = win_mgr.createWindow("TaharezLook/StaticText", "HitpointsValueLabel");
 	char_info->addChildWindow(label);
@@ -227,8 +218,7 @@ CharInfo::CharInfo (Document* doc)
 	label->setProperty("BackgroundEnabled", "true");
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.55f)));
 	label->setSize(CEGUI::UVector2(cegui_reldim(0.20f), cegui_reldim( 0.06f)));
-	label->setText(gettext("main_attack"));
-
+	
 	// Label Attacke (Wert)
 	label = win_mgr.createWindow("TaharezLook/StaticText", "AttackValueLabel");
 	char_info->addChildWindow(label);
@@ -245,8 +235,7 @@ CharInfo::CharInfo (Document* doc)
 	label->setProperty("BackgroundEnabled", "true");
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.62f)));
 	label->setSize(CEGUI::UVector2(cegui_reldim(0.20f), cegui_reldim( 0.06f)));
-	label->setText(gettext("main_attacks_per_second"));
-
+	
 	// Label Attacke (Wert)
 	label = win_mgr.createWindow("TaharezLook/StaticText", "AttackSpeedValueLabel");
 	char_info->addChildWindow(label);
@@ -263,8 +252,7 @@ CharInfo::CharInfo (Document* doc)
 	label->setProperty("BackgroundEnabled", "true");
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.69f)));
 	label->setSize(CEGUI::UVector2(cegui_reldim(0.20f), cegui_reldim( 0.06f)));
-	label->setText(gettext("main_range"));
-
+	
 	// Label Reichweite (Wert)
 	label = win_mgr.createWindow("TaharezLook/StaticText", "RangeValueLabel");
 	char_info->addChildWindow(label);
@@ -281,8 +269,7 @@ CharInfo::CharInfo (Document* doc)
 	label->setProperty("BackgroundEnabled", "true");
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.76f)));
 	label->setSize(CEGUI::UVector2(cegui_reldim(0.20f), cegui_reldim( 0.06f)));
-	label->setText(gettext("main_penetration_power"));
-
+	
 	// Label Durchschlagskraft
 	label = win_mgr.createWindow("TaharezLook/StaticText", "PowerValueLabel");
 	char_info->addChildWindow(label);
@@ -299,8 +286,7 @@ CharInfo::CharInfo (Document* doc)
 	label->setProperty("BackgroundEnabled", "true");
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.83f)));
 	label->setSize(CEGUI::UVector2(cegui_reldim(0.20f), cegui_reldim( 0.06f)));
-	label->setText(gettext("main_armour"));
-
+	
 	// Label Ruestung
 	label = win_mgr.createWindow("TaharezLook/StaticText", "ArmorValueLabel");
 	char_info->addChildWindow(label);
@@ -317,8 +303,7 @@ CharInfo::CharInfo (Document* doc)
 	label->setProperty("BackgroundEnabled", "true");
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.90f)));
 	label->setSize(CEGUI::UVector2(cegui_reldim(0.20f), cegui_reldim( 0.06f)));
-	label->setText(gettext("main_block"));
-
+	
 	// Label Block
 	label = win_mgr.createWindow("TaharezLook/StaticText", "BlockValueLabel");
 	char_info->addChildWindow(label);
@@ -389,8 +374,7 @@ CharInfo::CharInfo (Document* doc)
 	label->setProperty("BackgroundEnabled", "true");
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.50f), cegui_reldim( 0.69f)));
 	label->setSize(CEGUI::UVector2(cegui_reldim(0.20f), cegui_reldim( 0.06f)));
-	label->setText(gettext("main_physical_resistance"));
-
+	
 	// Label physische Resistenz (Wert)
 	label = win_mgr.createWindow("TaharezLook/StaticText", "ResistPhysValueLabel");
 	char_info->addChildWindow(label);
@@ -407,8 +391,7 @@ CharInfo::CharInfo (Document* doc)
 	label->setProperty("BackgroundEnabled", "true");
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.50f), cegui_reldim( 0.76f)));
 	label->setSize(CEGUI::UVector2(cegui_reldim(0.20f), cegui_reldim( 0.06f)));
-	label->setText(gettext("main_fire_resistance"));
-
+	
 	// Label Feuerresistenz (Wert)
 	label = win_mgr.createWindow("TaharezLook/StaticText", "ResistFireValueLabel");
 	char_info->addChildWindow(label);
@@ -425,8 +408,7 @@ CharInfo::CharInfo (Document* doc)
 	label->setProperty("BackgroundEnabled", "true");
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.50f), cegui_reldim( 0.83f)));
 	label->setSize(CEGUI::UVector2(cegui_reldim(0.20f), cegui_reldim( 0.06f)));
-	label->setText(gettext("main_air_resistance"));
-
+	
 	// Label Feuerresistenz (Wert)
 	label = win_mgr.createWindow("TaharezLook/StaticText", "ResistAirValueLabel");
 	char_info->addChildWindow(label);
@@ -443,8 +425,7 @@ CharInfo::CharInfo (Document* doc)
 	label->setProperty("BackgroundEnabled", "true");
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.50f), cegui_reldim( 0.90f)));
 	label->setSize(CEGUI::UVector2(cegui_reldim(0.20f), cegui_reldim( 0.06f)));
-	label->setText(gettext("main_ice_resistance"));
-
+	
 	// Label Eisresistenz (Wert)
 	label = win_mgr.createWindow("TaharezLook/StaticText", "ResistIceValueLabel");
 	char_info->addChildWindow(label);
@@ -453,7 +434,11 @@ CharInfo::CharInfo (Document* doc)
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.70f), cegui_reldim( 0.90f)));
 	label->setSize(CEGUI::UVector2(cegui_reldim(0.25f), cegui_reldim( 0.06f)));
 	label->setText("0");
+	
+	updateTranslation();
 }
+
+
 
  void CharInfo::update()
 {
@@ -775,6 +760,80 @@ CharInfo::CharInfo (Document* doc)
 		label->setTooltipText(tooltip);
 	}
 }
+
+void CharInfo::updateTranslation()
+{
+	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
+	CEGUI::Window* label;
+
+	label = win_mgr.getWindow("NameLabel");
+	label->setText(gettext("Name"));
+	
+	label = win_mgr.getWindow("ClassLabel");
+	label->setText(gettext("Class"));
+	
+	label = win_mgr.getWindow("LevelLabel");
+	std::string text = gettext("Level");
+	text += " 1";
+	label->setText(gettext(text.c_str()));
+	
+	label = win_mgr.getWindow("StrengthLabel");
+	label->setText(gettext("Strength"));
+	
+	label = win_mgr.getWindow("DexterityLabel");
+	label->setText(gettext("Dexterity"));
+
+	label = win_mgr.getWindow("WillpowerLabel");
+	label->setText(gettext("Willpower"));
+	
+	label = win_mgr.getWindow("DexterityLabel");
+	label->setText(gettext("Dexterity"));
+
+	label = win_mgr.getWindow("MagicpowerLabel");
+	label->setText(gettext("Magic power"));
+
+	label = win_mgr.getWindow( "AttrPointsLabel");
+	label->setText(gettext("attr points"));
+
+	label = win_mgr.getWindow("ExperienceLabel" );
+ 	label->setText(gettext("Experience"));
+	
+	label = win_mgr.getWindow("HitpointsLabel");
+	label->setText(gettext("Hitpoints"));
+	
+	label = win_mgr.getWindow("AttackLabel" );
+	label->setText(gettext("Attack"));
+	
+	label = win_mgr.getWindow("AttackSpeedLabel" );
+	label->setText(gettext("Attacks/s"));
+	
+	label = win_mgr.getWindow( "RangeLabel");
+	label->setText(gettext("Range"));
+	
+	label = win_mgr.getWindow("PowerLabel" );
+	label->setText(gettext("Power"));
+	
+	label = win_mgr.getWindow( "ArmorLabel");
+	label->setText(gettext("Armor"));
+	
+	label = win_mgr.getWindow("BlockLabel" );
+	label->setText(gettext("Block"));
+	
+	label = win_mgr.getWindow( "ResistPhysLabel");
+	label->setText(gettext("Physical"));
+	
+	label = win_mgr.getWindow("ResistAirLabel" );
+	label->setText(gettext("Air"));
+	
+	label = win_mgr.getWindow("ResistIceLabel" );
+	label->setText(gettext("Ice"));
+	
+	label = win_mgr.getWindow("ResistFireLabel" );
+	label->setText(gettext("Fire"));
+	
+	
+}
+
 
 bool CharInfo::onIncreaseAttributeButtonClicked(const CEGUI::EventArgs& evt)
 {

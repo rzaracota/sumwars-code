@@ -854,6 +854,8 @@ SkillTree::SkillTree(Document* doc)
 
 	}
 
+	updateTranslation();
+	
 }
 
 void SkillTree::update()
@@ -904,6 +906,50 @@ void SkillTree::update()
 	}
 }
 
+
+void SkillTree::updateTranslation()
+{
+	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
+	CEGUI::DefaultWindow* tab;
+	
+	tab = (CEGUI::DefaultWindow*) win_mgr.getWindow("SkilltreeMage_1");
+	tab->setText(gettext("Fire magic"));
+	
+	tab = (CEGUI::DefaultWindow*) win_mgr.getWindow("SkilltreeMage_2");
+	tab->setText(gettext("Ice magic"));
+	
+	tab = (CEGUI::DefaultWindow*) win_mgr.getWindow("SkilltreeMage_3");
+	tab->setText(gettext("Air magic"));
+	
+	tab = (CEGUI::DefaultWindow*) win_mgr.getWindow("SkilltreeWarrior_1");
+	tab->setText(gettext("Fighting skills"));
+	
+	tab = (CEGUI::DefaultWindow*) win_mgr.getWindow("SkilltreeWarrior_2");
+	tab->setText(gettext("Passive skills"));
+	
+	tab = (CEGUI::DefaultWindow*) win_mgr.getWindow("SkilltreeWarrior_3");
+	tab->setText(gettext("Fighting spirit"));
+	
+	
+	tab = (CEGUI::DefaultWindow*) win_mgr.getWindow("SkilltreeArcher_1");
+	tab->setText(gettext("Marksmanship"));
+	
+	tab = (CEGUI::DefaultWindow*) win_mgr.getWindow("SkilltreeArcher_2");
+	tab->setText(gettext("Passive skills"));
+	
+	tab = (CEGUI::DefaultWindow*) win_mgr.getWindow("SkilltreeArcher_3");
+	tab->setText(gettext("Hunter magic"));
+	
+	
+	tab = (CEGUI::DefaultWindow*) win_mgr.getWindow("SkilltreePriest_1");
+	tab->setText(gettext("Light Magic"));
+	
+	tab = (CEGUI::DefaultWindow*) win_mgr.getWindow("SkilltreePriest_2");
+	tab->setText(gettext("Water Magic"));
+	
+	tab = (CEGUI::DefaultWindow*) win_mgr.getWindow("SkilltreePriest_3");
+	tab->setText(gettext("Wind Magic"));
+}
 
 void SkillTree::updateAbilityTooltip(unsigned int pos)
 {

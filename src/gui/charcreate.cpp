@@ -30,7 +30,6 @@ CharCreate::CharCreate (Document* doc)
 	label->setProperty("BackgroundEnabled", "true");
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.05f)));
 	label->setSize(CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim( 0.05f)));
-	label->setText("Name");
 	
 	CEGUI::Editbox* namebox;
 	
@@ -47,7 +46,6 @@ CharCreate::CharCreate (Document* doc)
 	label->setProperty("BackgroundEnabled", "true");
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.12f)));
 	label->setSize(CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim( 0.05f)));
-	label->setText("Klasse");
 	
 	CEGUI::Listbox* classlist = (CEGUI::Listbox*) win_mgr.createWindow("TaharezLook/Listbox", "ClassList");
 	char_create->addChildWindow(classlist);
@@ -70,7 +68,6 @@ CharCreate::CharCreate (Document* doc)
 	char_create->addChildWindow(btn);
 	btn->setPosition(CEGUI::UVector2(cegui_reldim(0.1f), cegui_reldim( 0.9f)));
 	btn->setSize(CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim( 0.05f)));
-	btn->setText("Abbrechen");
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&CharCreate::onButtonAbort, this));
 	btn->setWantsMultiClickEvents(false);
 	
@@ -82,6 +79,8 @@ CharCreate::CharCreate (Document* doc)
 	btn->setText("Charakter erstellen");
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&CharCreate::onButtonCharCreate, this));
 	btn->setWantsMultiClickEvents(false);
+	
+	updateTranslation();
 }
 
 
@@ -111,6 +110,24 @@ void CharCreate::update()
 	}
 }
 
+void CharCreate::updateTranslation()
+{
+	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
+	CEGUI::PushButton* btn;
+	CEGUI::Window* label;
+	
+	label = win_mgr.getWindow("CharNameLabel");
+	label->setText(gettext("Name"));
+	
+	label = win_mgr.getWindow("CharClassLabel");
+	label->setText(gettext("Class"));
+	
+	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("AbortButton"));
+	btn->setText(gettext("Cancel"));
+
+	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("CharCreateButton"));
+	btn->setText(gettext("Create"));
+}
 
 bool CharCreate::onClassSelected(const CEGUI::EventArgs& evt)
 {

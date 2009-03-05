@@ -23,6 +23,13 @@ class SkillTree : public Window
 		virtual void update();
 		
 		/**
+		 * \fn virtual void updateTranslation
+		 * \brief aktualisiert die Uebersetzungen
+		 */
+		virtual void updateTranslation();
+
+		
+		/**
 		 * \fn CEGUI::Window* getCEGUIWindow(int index)
 		 * \brief Gibt eines der vier zugrunde liegenden CEGUI Windows aus
 		 * \param index Nummer des Fensters

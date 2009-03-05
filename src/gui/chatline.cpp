@@ -41,6 +41,8 @@ ChatLine::ChatLine (Document* doc)
 	chat_content->setReadOnly(true);
 	chat_content->setText("");
 	
+	updateTranslation();
+	
 }
 
 void ChatLine::update()
@@ -60,6 +62,11 @@ void ChatLine::update()
 			sb->setScrollPosition(sb->getDocumentSize());
 		}
 	}
+}
+
+void ChatLine::updateTranslation()
+{
+
 }
 
 bool ChatLine::onSendMessage(const CEGUI::EventArgs& evt)

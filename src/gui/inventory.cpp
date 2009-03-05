@@ -97,24 +97,6 @@ Inventory::Inventory (Document* doc)
 
 
 
-	/*
-	try
-	{
-	numlabel = (NumberedWindow*) win_mgr.createWindow("Taharez/NumberedStaticImage", "ArmorItemLabel");
-	inventory->addChildWindow(numlabel);
-	numlabel->setProperty("FrameEnabled", "true");
-	numlabel->setProperty("BackgroundEnabled", "true");
-	numlabel->setPosition(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.35f)));
-	numlabel->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-	numlabel->setText("Ruestung");
-	DEBUG("NumberedWindow2 created");
-}
-	catch (CEGUI::UnknownObjectException e)
-	{
-	ERRORMSG("Error message: %s",e.getMessage().c_str());
-}
-	*/
-
 	// Label Waffe
 	label = win_mgr.createWindow("TaharezLook/StaticImage", "WeaponItemLabel");
 	inventory->addChildWindow(label);
@@ -215,7 +197,6 @@ Inventory::Inventory (Document* doc)
 	label->setProperty("BackgroundEnabled", "true");
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.94f)));
 	label->setSize(CEGUI::UVector2(cegui_reldim(0.20f), cegui_reldim( 0.05f)));
-	label->setText(gettext("gold"));
 
 	// Label Gold (Wert)
 	label = win_mgr.createWindow("TaharezLook/StaticText", "GoldValueLabel");
@@ -225,6 +206,8 @@ Inventory::Inventory (Document* doc)
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.27f), cegui_reldim( 0.94f)));
 	label->setSize(CEGUI::UVector2(cegui_reldim(0.1f), cegui_reldim( 0.05f)));
 	label->setText("0");
+	
+	updateTranslation();
 }
 
 void Inventory::update()
@@ -402,6 +385,18 @@ void Inventory::update()
 	}
 	
 }
+
+void Inventory::updateTranslation()
+{
+	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
+	CEGUI::Window* label;
+	
+	label = win_mgr.getWindow("GoldLabel");
+	label->setText(gettext("Gold"));
+	
+}
+
+
 
 bool Inventory::onSwapEquipClicked(const CEGUI::EventArgs& evt)
 {

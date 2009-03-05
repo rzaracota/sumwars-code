@@ -26,6 +26,13 @@ class QuestInfo : public Window
 		 */
 		virtual void update();
 		
+		/**
+		 * \fn virtual void updateTranslation
+		 * \brief aktualisiert die Uebersetzungen
+		 */
+		virtual void updateTranslation();
+
+		
 	private:
 	/**
 	 * \fn bool onQuestSelected(const CEGUI::EventArgs& evt)

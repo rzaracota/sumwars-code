@@ -23,6 +23,12 @@ class CharInfo : public Window
 		 */
 		virtual void update();
 		
+		/**
+		 * \fn virtual void updateTranslation
+		 * \brief aktualisiert die Uebersetzungen
+		 */
+		virtual void updateTranslation();
+		
 	private:
 		/**
 		 * \fn bool onIncreaseAttributeButtonClicked(const CEGUI::EventArgs& evt)

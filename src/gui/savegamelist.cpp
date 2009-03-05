@@ -31,8 +31,7 @@ SavegameList::SavegameList (Document* doc)
 	label->setProperty("BackgroundEnabled", "true");
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.1f), cegui_reldim( 0.1f)));
 	label->setSize(CEGUI::UVector2(cegui_reldim(0.8f), cegui_reldim( 0.1f)));
-	label->setText("Savegame auswaehlen");
-
+	
 	CEGUI::MultiColumnList* savelist = (CEGUI::MultiColumnList*) win_mgr.createWindow("TaharezLook/MultiColumnList", "SavegameList");
 	save_menu->addChildWindow(savelist);
 	savelist->setPosition(CEGUI::UVector2(cegui_reldim(0.1f), cegui_reldim( 0.2f)));
@@ -50,7 +49,6 @@ SavegameList::SavegameList (Document* doc)
 	save_menu->addChildWindow(btn);
 	btn->setPosition(CEGUI::UVector2(cegui_reldim(0.1f), cegui_reldim( 0.85f)));
 	btn->setSize(CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim( 0.10f)));
-	btn->setText("Ok");
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&SavegameList::onSavegameSelected, this));
 	btn->setWantsMultiClickEvents(false);
 	
@@ -59,9 +57,10 @@ SavegameList::SavegameList (Document* doc)
 	save_menu->addChildWindow(btn);
 	btn->setPosition(CEGUI::UVector2(cegui_reldim(0.35f), cegui_reldim( 0.85f)));
 	btn->setSize(CEGUI::UVector2(cegui_reldim(0.6f), cegui_reldim( 0.10f)));
-	btn->setText("Charakter erstellen");
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&SavegameList::onNewCharClicked, this));
 	btn->setWantsMultiClickEvents(false);
+	
+	updateTranslation();
 }
 
 void SavegameList::update()
@@ -150,6 +149,28 @@ void SavegameList::update()
 		}
 	}
 	
+	
+}
+
+void SavegameList::updateTranslation()
+{
+	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
+	CEGUI::PushButton* btn;
+	CEGUI::Window* label;
+
+	label = win_mgr.getWindow("SavegameChooseLabel");
+	label->setText(gettext("Savegame"));
+	
+	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("SelectSavegameButton"));
+	btn->setText(gettext("Ok"));
+	
+	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("NewCharButton"));
+	btn->setText(gettext("Create Character"));
+	
+	CEGUI::MultiColumnList* savelist = (CEGUI::MultiColumnList*) win_mgr.getWindow("SavegameList");
+	savelist->getHeaderSegmentForColumn(0).setText(gettext("Name"));
+	savelist->getHeaderSegmentForColumn(1).setText(gettext("Class"));
+	savelist->getHeaderSegmentForColumn(2).setText(gettext("Level"));
 	
 }
 
