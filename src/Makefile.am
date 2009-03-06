@@ -24,8 +24,7 @@ AM_CXXFLAGS = -DDEBUG_LEVEL=5 $(shell pkg-config --cflags OGRE OIS CEGUI CEGUI-O
 
 ##AM_CXXFLAGS = -g -O3 -DDEBUG_LEVEL=5
 
-sumwars_SOURCES = core/trade.cpp \
-	core/world.cpp \
+sumwars_SOURCES = core/world.cpp \
 	core/charconv.cpp \
 	core/objectfactory.cpp \
 	core/objectloader.cpp \

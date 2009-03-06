@@ -116,7 +116,6 @@ bool Player::init()
 	
 	m_network_slot=-1;
 	m_package_number =0;
-	setTradeId(0);
 	getTypeInfo()->m_type = TypeInfo::TYPE_PLAYER;
 	m_category = HUMAN;
 

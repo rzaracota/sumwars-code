@@ -158,25 +158,6 @@ public:
 		return &m_dyn_attr;
 	}
 	
-	/**
-	 * \fn int getTradeId()
-	 * \brief Gibt die ID des aktuellen Handelsvorgangs zur&uuml;ck. Wenn das Lebewesen aktuell nicht handelt wird 0 zurueckgegeben.
-	 * \return int ID des aktuellen Handelsvorgangs
-	 */
-	int getTradeId()
-	{
-		return m_trade_id;
-	}
-	
-	/**
-	 * \fn void setTradeId(int trade_id)
-	 * \brief Setzt ID des aktuellen Handelsvorgangs 
-	 * \param trade_id des aktuellen Handelsvorgangs
-	 */
-	void setTradeId(int trade_id)
-	{
-		m_trade_id = trade_id;
-	}
 	
 	/**
 	 * \fn float getTimerPercent(int timer)

@@ -44,9 +44,6 @@ World* World::m_world=0;
 	m_player_slots = new WorldObjectMap;
 	m_players = new WorldObjectMap;;
 
-	// Baum fuer die Handelsvorgaenge anlegen
-	m_trades = new std::map<int, Trade* >;
-	m_trades->clear();
 
 
 	m_max_nr_players =8;
@@ -344,12 +341,6 @@ World::~World()
 	
 	delete m_network;
 
-	std::map<int, Trade* >::iterator j;
-	for (j=m_trades->begin(); j!=m_trades->end();j++)
-	{
-		delete j->second;
-	}
-	delete m_trades;
 	
 	std::map<int, RegionData*>::iterator it;
  	
@@ -467,53 +458,6 @@ Party* World::getEmptyParty()
 }
 
 
-Trade* World::getTrade ( int id)
-{
-	std::map<int,Trade*>::iterator iter;
-
-	//Handel suchen
-	iter = m_trades->find(id);
-
-	// Testen ob gefunden
-	if (iter == m_trades->end())
-	{
-		// keins gefunden, NULL ausgeben
-		return 0;
-	}
-	else
-	{
-		// Zeiger auf Objekt ausgeben
-		return iter->second;
-	}
-}
-
-
-int World::newTrade(int trader1_id, int trader2_id)
-{
-	// zufällige ID erzeugen;
-	int id = 0;
-	Trade* trade;
-	while (id == 0)
-	{
-		id=rand();
-		trade=getTrade(id);
-		if (trade!=0)
-		{
-			id=0;
-		}
-	}
-
-	// Neues Trade Objekt anlegen
-	trade = new Trade(id, trader1_id,trader2_id);
-	if (trade ==0)
-	{
-		return 0;
-	}
-
-	m_trades->insert(std::make_pair(id,trade));
-	// ID ausgeben
-	return id;
-}
 
 
 
@@ -1088,39 +1032,6 @@ void World::update(float time)
 		}
 	}
 
-	// Durchmustern alle Handelsvorgänge
-	std::map<int,Trade*>::iterator iter2;
-	Trade* trade=0;
-
-	for (iter2 =m_trades->begin(); iter2!=m_trades->end();)
-	{
-		trade = iter2->second;
-		DEBUG5("Trades behandeln %p\n\n",trade);
-		// Testen ob der Handel gelöscht werden kann
-
-		if (trade->getFinished() == true)
-		{
-			if (trade->getSuccessful() == true)
-			{
-				// Handel war erfolgreich, löschen wenn beide Spieler ihre Gegenstaende erhalten haben
-				if (trade->getGotItems(0)==true && trade->getGotItems(1)==true)
-				{
-					m_trades->erase(iter2++);
-					delete trade;
-					continue;
-				}
-			}
-			else
-			{
-				// Handel war nicht erfolgreich, sofort löschen
-				m_trades->erase(iter2++);
-				delete trade;
-				continue;
-			}
-		}
-		++iter2;
-	}
-	DEBUG5("Trades behandeln abgeschlossen");
 
 	m_network->update();
 

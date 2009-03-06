@@ -35,7 +35,6 @@
 
 #include "worldobject.h"
 #include "projectile.h"
-#include "trade.h"
 #include "servernetwork.h"
 #include "clientnetwork.h"
 #include "region.h"
@@ -47,6 +46,7 @@
 #include "worldloader.h"
 #include "templateloader.h"
 #include "quest.h"
+#include "networkstruct.h"
 
 /**
  * \def WORLD_MAX_REGIONS
@@ -146,28 +146,6 @@ public:
 	 */
 	bool insertPlayerIntoRegion(WorldObject* player, short region, LocationName loc ="");
 
-
-
-	/**
-	 * \fn Trade* getTrade( int id)
-	 * \brief Sucht Handelsvorgang anhand seiner ID
-	 * \param id ID des gesuchten Handelsvorganges
-	 * \return Zeiger auf den gefundenen Handel
-	 *
-	 * W&auml;hlt einen Handel anhand seiner ID aus. Gibt einen Zeiger auf das Handelsobjekt zur&uuml;ck, beziehungsweise NULL wenn das Objekt nicht gefunden wurde.
-	 */
-	Trade*  getTrade ( int id);
-
-
-	/**
-	 * \fn int newTrade(int trader1_id, int trader2_id)
-	 * \brief Legt einen neuen Handelsvorgang an
-	 * \param trader1_id ID des ersten Handelspartners
-	 * \param trader2_id ID des zweiten Handelsparters
-	 * \return ID des neu angelegten Handelsvorgangs
-	 * Legt einen neuen Handelsvorgang an und gibt dessen ID aus. Wenn das anlegen des Handelsvorganges nicht erfolgreich war, so wird 0 ausgegeben
-	 */
-	int newTrade(int trader1_id, int trader2_id);
 
 	
 	/**
@@ -547,13 +525,6 @@ private:
 	 */
 	std::map<int, RegionData*> m_region_data;
 	
-
-	/**
-	 * \var std::map<int, Trade* >* m_trades
-	 * \brief Speichert alle Handelsvorgänge
-	 */
-	std::map<int, Trade* >* m_trades;
-
 
 	/**
 	 * \var std::vector<Party> m_parties
