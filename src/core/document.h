@@ -141,18 +141,20 @@ class Document
 	 */
 	enum Windows
 	{
-		NO_WINDOWS =0,
-		INVENTORY =1,
-		CHARINFO=2,
-		SKILLTREE=4,
-		MENU =8,
-		CHAT = 16,
-		PARTY = 32,
-		SAVEGAME_LIST = 64,
-		START_MENU = 128,
-		CHAR_CREATE = 256,
-  		QUEST_INFO = 512,
-		MINIMAP = 1024,
+		NO_WINDOWS =0x0,
+		INVENTORY =0x1,
+		CHARINFO=0x2,
+		SKILLTREE=0x4,
+		MENU =0x8,
+		CHAT = 0x10,
+		PARTY = 0x20,
+		SAVEGAME_LIST = 0x40,
+		START_MENU = 0x80,
+		CHAR_CREATE = 0x100,
+  		QUEST_INFO = 0x200,
+		MINIMAP = 0x400,
+		QUESTIONBOX = 0x800,
+		TRADE =0x1000,
 	};
 
 	/**
@@ -457,7 +459,11 @@ class Document
 	 */
 	void onButtonSendMessageClicked ( );
 
-
+	/**
+	 * \fn bool checkSubwindowsAllowed()
+	 * \brief Prueft, ob aktuell das oeffnen von Unterfenstern (Inventar etc) erlaubt ist
+	 */
+	bool checkSubwindowsAllowed();
 
 
 	/**

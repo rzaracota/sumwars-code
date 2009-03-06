@@ -1576,7 +1576,7 @@ void MainWindow::updateSpeechBubbles()
 		
 	}
 	
-	
+	// restliche Label verstecken
 	for (; nr<lcount; nr++)
 	{
 		stream.str("");
@@ -1587,8 +1587,17 @@ void MainWindow::updateSpeechBubbles()
 		label->setVisible(false);
 	}
 	
+	// Fenster fuer eine Frage
 	if (question !=0)
 	{
+		int wflags = m_document->getGUIState()->m_shown_windows;
+		if (wflags != Document::QUESTIONBOX)
+		{
+			wflags = m_document->getGUIState()->m_shown_windows= Document::QUESTIONBOX;
+			m_document->setModified(m_document->getModified() | Document::WINDOWS_MODIFIED);
+		}
+		
+		
 		if (acount ==0)
 		{
 			ques = (CEGUI::FrameWindow*) win_mgr.createWindow("TaharezLook/FrameWindow", "QuestionWindow");
@@ -1618,6 +1627,7 @@ void MainWindow::updateSpeechBubbles()
 		}
 		nr =0;
 		
+		// Groesse des Fensters ermitteln
 		float h = 0.07 + question->m_answers.size()*0.05;
 		float len =0;
 		float relh = 1/(1.5+question->m_answers.size());
@@ -1630,6 +1640,7 @@ void MainWindow::updateSpeechBubbles()
 		label->setPosition(CEGUI::UVector2(cegui_reldim(0.0f), cegui_reldim(0.1*relh)));
 		label->setSize(CEGUI::UVector2(cegui_reldim(1.0f), cegui_reldim(relh)));
 		
+		// Antworten einfuegen
 		std::list < std::pair<std::string, std::string> >::iterator it;
 		for (it = question->m_answers.begin(); it != question->m_answers.end(); ++it)
 		{
@@ -1670,6 +1681,7 @@ void MainWindow::updateSpeechBubbles()
 		ques->setSize(CEGUI::UVector2(cegui_reldim(len), cegui_reldim( h)));
 		ques->setVisible(true);
 		
+		// restliche Antwortlabels ausblenden
 		for (; nr<acount; nr++)
 		{
 			stream.str("");
@@ -1682,7 +1694,7 @@ void MainWindow::updateSpeechBubbles()
 	}
 	else if (acount !=0)
 	{
-		
+		m_document->getGUIState()->m_shown_windows &= ~Document::QUESTIONBOX;
 		ques = (CEGUI::FrameWindow*) win_mgr.getWindow("QuestionWindow");
 		ques->setVisible(false);
 		

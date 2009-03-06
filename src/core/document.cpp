@@ -661,8 +661,19 @@ void Document::emitDebugSignal(int i)
 	sendCommand(&command);
 }
 
+bool Document::checkSubwindowsAllowed()
+{
+	bool ok = true;
+	ok &= (getState() == RUNNING || getState() == SHUTDOWN_REQUEST);
+	ok &= (getGUIState()->m_shown_windows & (QUESTIONBOX | TRADE)) == 0;
+	return ok;
+}
+
 void Document::onButtonInventoryClicked()
 {
+	if (!checkSubwindowsAllowed())
+		return;
+	
 	// Inventar oeffnen wenn es gerade geschlossen ist und schliessen, wenn es geoeffnet ist
 	if (getGUIState()->m_shown_windows & INVENTORY)
 	{
@@ -699,6 +710,9 @@ void Document::onButtonInventoryClicked()
 
 void Document::onButtonCharInfoClicked()
 {
+	if (!checkSubwindowsAllowed())
+		return;
+	
 	// Charakterinfo oeffnen wenn es gerade geschlossen ist und schliessen, wenn es geoeffnet ist
 	if (getGUIState()->m_shown_windows & CHARINFO)
 	{
@@ -717,6 +731,9 @@ void Document::onButtonCharInfoClicked()
 
 void Document::onButtonPartyInfoClicked()
 {
+	if (!checkSubwindowsAllowed())
+		return;
+	
 	// PartyInfo oeffnen wenn es gerade geschlossen ist und schliessen, wenn er geoeffnet ist
 	if (getGUIState()->m_shown_windows & PARTY)
 	{
@@ -738,6 +755,9 @@ void Document::onButtonPartyInfoClicked()
 
 void Document::onButtonSkilltreeClicked()
 {
+	if (!checkSubwindowsAllowed())
+		return;
+	
 	// Skilltree oeffnen wenn er gerade geschlossen ist und schliessen, wenn er geoeffnet ist
 	if (getGUIState()->m_shown_windows & SKILLTREE)
 	{
@@ -759,6 +779,9 @@ void Document::onButtonSkilltreeClicked()
 
 void Document::onButtonOpenChatClicked()
 {
+	if (!checkSubwindowsAllowed())
+		return;
+	
 	// Cchatfenster oeffnen wenn es gerade geschlossen ist und schliessen, wenn es geoeffnet ist
 	if (getGUIState()->m_shown_windows & CHAT)
 	{
@@ -775,6 +798,9 @@ void Document::onButtonOpenChatClicked()
 
 void Document::onButtonQuestInfoClicked()
 {
+	if (!checkSubwindowsAllowed())
+		return;
+	
 	// Charakterinfo oeffnen wenn es gerade geschlossen ist und schliessen, wenn es geoeffnet ist
 	if (getGUIState()->m_shown_windows & QUEST_INFO)
 	{
@@ -793,6 +819,9 @@ void Document::onButtonQuestInfoClicked()
 
 void Document::onButtonMinimapClicked()
 {
+	if (!checkSubwindowsAllowed())
+		return;
+	
 	if (getGUIState()->m_shown_windows & MINIMAP)
 	{
 		getGUIState()->m_shown_windows &= ~MINIMAP;
