@@ -451,4 +451,23 @@ struct CreatureSpeakText
 	
 };
 
+/**
+ * \struct CreatureTradeInfo
+ * \brief Informationen ueber den aktuellen Handel
+ */
+struct CreatureTradeInfo
+{
+	/**
+	 * \var int m_trade_partner
+	 * \brief ID des Handelspartners
+	 */
+	int m_trade_partner;
+	
+	/**
+	 * \var float m_price_factor
+	 * \brief Kostenfaktor
+	 */
+	float m_price_factor;
+};
+
 #endif

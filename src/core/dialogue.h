@@ -4,6 +4,8 @@
 #include "debug.h"
 #include "event.h"
 #include "creaturestruct.h"
+#include "itemlist.h"
+#include "timer.h"
 
 class Region;
 
@@ -66,6 +68,100 @@ class TopicList
 		 * \brief Liste der Themen, mit denen ein Gespraech beginnen kann (Text,Thema)
 		 */
 		std::list< std::pair<std::string, std::string> > m_start_topics;
+};
+
+/**
+ * \class NPCTrade
+ * \brief Klasse die die Objekte speichert mit denen ein NPC handeln kann
+ */
+class NPCTrade
+{
+	public:
+		/**
+	 * \struct TradeObject
+	 * \brief Speichert die Daten fuer ein einzelnes Item
+		 */
+		struct TradeObject
+		{
+			
+			/**
+			 * \fn void operator=(TradeObject& other)
+			 * \brief Zuweisungsoperator
+			 * \param other anderes Objekt
+			 */
+			void operator=(TradeObject& other);
+			
+			/**
+			 * \var Item::Subtype m_subtype
+			 * \brief Subtyp des Items
+			 */
+			Item::Subtype m_subtype;
+			
+			/**
+			 * \var int m_number
+			 * \brief Anzahl, wie oft das Item verkauft werden soll
+			 */
+			int m_number;
+			
+			/**
+			 * \var int m_number_magical
+			 * \brief Anzahl, wie oft das Item mit Verzauberung verkauft werden soll
+			 */
+			int m_number_magical;
+			
+			/**
+			 * \var float m_min_enchant
+			 * \brief minimale Verzauberungsstaerke
+			 */
+			float m_min_enchant;	
+			
+			/**
+			 * \var float m_max_enchant
+			 * \brief maximale Verzauberungsstarke
+			 */
+			float m_max_enchant;
+			
+		};
+		
+		
+		/**
+		 * \fn NPCTrade()
+		 * \brief Konstruktor
+		 */
+		NPCTrade();
+		
+		/**
+		 * \fn bool checkRefresh(Equipement& equ)
+		 * \brief aktualisiert das Inventar eines Haendlers, wenn noetig
+		 * \param equ Inventar
+		 * \return Gibt true zurueck, wenn tatsaechlich die Items ausgetauscht wurden
+		 */
+		bool checkRefresh(Equipement* &equ);
+		
+				
+		/**
+		 * \var std::list<TradeObject> m_trade_objects
+		 * \brief Liste der Objekte mit denen der Haendler handelt
+		 */
+		std::list<TradeObject> m_trade_objects;
+		
+		/**
+		 * \var float m_cost_multiplier
+		 * \brief Faktor mit dem der Preis fuer eingekaufte Waren multipliziert wird
+		 */
+		float m_cost_multiplier;
+		
+		/**
+		 * \var float m_refresh_time
+		 * \brief Zeit nach der das Angebot erneuert wird in ms
+		 */
+		float m_refresh_time;
+		
+		/**
+		 * \var Timer m_refresh_timer
+		 * \brief Timer fuer den Refresh
+		 */
+		Timer m_refresh_timer;
 };
 
 /**
@@ -197,6 +293,26 @@ class Dialogue
 		{
 			return m_topics[topic_base];
 		}
+		
+		/**
+		 * \fn static NPCTrade& getNPCTrade(std::string npcname)
+		 * \brief Gibt die Handelsinformationen zu einem NPC aus
+		 * \param npcname Name des NPC
+		 */
+		static NPCTrade& getNPCTrade(std::string npcname)
+		{
+			return m_npc_trades[npcname];
+		}
+		
+		/**
+		 * \fn static bool canTrade(std::string npcname)
+		 * \brief prueft, ob ein NPC handeln kann
+		 * \param npcname Name des NPC
+		 */
+		static bool canTrade(std::string npcname)
+		{
+			return (m_npc_trades.count(npcname) >0);
+		}
 	
 	private:
 		
@@ -205,6 +321,7 @@ class Dialogue
 		 * \brief ID des Spielers, dem die Fragen gestellt werden
 		 */
 		int m_main_player_id;
+		
 		
 		/**
 		 * \var std::string m_topic_base
@@ -243,6 +360,12 @@ class Dialogue
 		bool m_started;
 		
 		/**
+		 * \var bool m_trade
+		 * \brief auf true gesetzt, wenn ein Handel gestartet wurde
+		 */
+		bool m_trade;
+		
+		/**
 		 * \var int m_id
 		 * \brief ID des Dialogs
 		 */
@@ -253,6 +376,12 @@ class Dialogue
 		 * \brief Liste der Themen fuer alle NPC's
 		 */
 		static std::map<std::string , TopicList > m_topics;
+		
+		/**
+		 * \var static std::map<std::string, NPCTrade > m_npc_trades
+		 * \brief Liste der Handelsinformationen fuer alle Spieler
+		 */
+		static std::map<std::string, NPCTrade > m_npc_trades;
 		
 };
 

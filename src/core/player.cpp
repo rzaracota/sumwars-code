@@ -83,7 +83,7 @@ Player::Player( int id, TypeInfo::ObjectSubtype subtype) : Creature( id)
 
 Player::~Player()
 {
-	delete m_equipement;
+	
 }
 
 bool Player::destroy()
@@ -370,8 +370,8 @@ void  Player::revive()
 
 bool Player::onGamefieldClick(ClientCommand* command)
 {
-	// keine Aktionen waehrend eines Dialogs
-	if (getDialogue()!=0)
+	// keine Aktionen waehrend eines Dialogs oder Handel
+	if (getDialogue()!=0 || getTradeInfo().m_trade_partner !=0)
 	{
 		return true;
 	}
@@ -1245,6 +1245,19 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 			clearSpeakText();
 			EventSystem::setDialogue(dia);
 			dia->changeTopic(it->second);
+			break;
+			
+		case BUTTON_TRADE_END:
+			if (!World::getWorld()->isServer())
+				break;
+			
+			dia = getDialogue();
+			if (dia ==0)
+			{
+				ERRORMSG("answer without dialogue");
+				break;
+			}
+			dia->changeTopic("end");
 			break;
 
 		case DEBUG_SIGNAL:

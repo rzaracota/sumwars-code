@@ -659,6 +659,12 @@ class Document
 	void onButtonPartyLeave();
 	
 	/**
+	 * \fn void onButtonCloseTrade()
+	 * \brief Behandelt Druck auf Button Handel beenden
+	 */
+	void onButtonCloseTrade();
+	
+	/**
 	 * \fn void sendChatMessage(std::string msg)
 	 * \brief sendet eine Chatnachricht an alle Spieler
 	 */

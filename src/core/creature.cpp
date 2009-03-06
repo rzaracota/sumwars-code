@@ -61,7 +61,11 @@ Creature::~Creature()
 		// eigene Wegfindeinformationen loeschen
 		delete m_path_info;
 	}
-
+	
+	if (m_equipement)
+	{
+		delete m_equipement;
+	}
 
 }
 
@@ -81,6 +85,7 @@ bool Creature::init()
 
 	m_trade_id=0;
 	m_speak_id =0;
+	m_equipement =0;
 
 	// Bewegung auf 0 setzen
 	m_speed = Vector(0,0);
@@ -133,6 +138,7 @@ bool Creature::init()
 	m_event_mask =0;
 	
 	m_refname = getTypeInfo()->m_subtype;
+	getTradeInfo().m_trade_partner =0;
 
 	return tmp;
 }

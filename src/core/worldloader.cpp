@@ -510,7 +510,7 @@ void  WorldLoader::loadNPC( TiXmlNode* node)
 		std::string start_op;
 		Event* ev;
 		TriggerType dummy;
-		
+		NPCTrade::TradeObject tradeobj;
 		attr.getString("refname",refname,"global");
 		
 		for ( child = node->FirstChild(); child != 0; child = child->NextSibling())
@@ -531,6 +531,35 @@ void  WorldLoader::loadNPC( TiXmlNode* node)
 				if (start_op != "")
 				{
 					Dialogue::getTopicList(refname).addStartTopic(start_op, topic);
+				}
+			}
+			
+			if (child->Type()==TiXmlNode::ELEMENT && !strcmp(child->Value(), "Trade"))
+			{
+				attr.parseElement(child->ToElement());
+				float refreshtime,price_factor;
+				attr.getFloat("refresh_time", refreshtime,3600000.0f);
+				attr.getFloat("price_factor",price_factor,1.5f);
+				
+				DEBUG5("trade conditions %f %f",refreshtime, price_factor);
+				NPCTrade& tradeinfo = Dialogue::getNPCTrade(refname);
+				
+				tradeinfo.m_cost_multiplier = price_factor;
+				tradeinfo.m_refresh_time = refreshtime;
+				
+				// TradeObject einlesen
+				for (TiXmlNode* child2 = child->FirstChild(); child2 != 0; child2 = child2->NextSibling())
+				{
+					attr.parseElement(child2->ToElement());
+					
+					attr.getString("subtype", tradeobj.m_subtype);
+					attr.getInt("number", tradeobj.m_number,1);
+					attr.getInt("number_magical",tradeobj.m_number_magical,0);
+					attr.getFloat("min_enchant", tradeobj.m_min_enchant,0);
+					attr.getFloat("max_enchant", tradeobj.m_min_enchant,0);
+					
+					tradeinfo.m_trade_objects.push_back(tradeobj);
+					DEBUG5("new trade Object for %s : %s %i %i %f %f",refname.c_str(),tradeobj.m_subtype.c_str(), tradeobj.m_number, tradeobj.m_number_magical, tradeobj.m_min_enchant, tradeobj.m_min_enchant);
 				}
 			}
 		}

@@ -291,7 +291,7 @@ bool Equipement::swapCursorItem(int pos)
 	return ret;
 }
 
-short  Equipement::insertItem(Item* item)
+short  Equipement::insertItem(Item* item, bool check_useup)
 {
 	if (item ==0)
 		return NONE;
@@ -306,6 +306,8 @@ short  Equipement::insertItem(Item* item)
 	Item* itm = item;
 	int pos;
 	bool useup = (item->m_useup_effect != 0);
+	if (!check_useup)
+		useup = true;
 	pos = m_inventory.getFreePlace(item->m_size,useup);
 	DEBUG5("free pos: %i",pos);
 
@@ -398,7 +400,7 @@ void Equipement::toString(CharConv* cv)
 		if (it!=0)
 		{
 			cv->printNewline();
-			cv->toBuffer(BIG_ITEMS+i);
+			cv->toBuffer<short>(BIG_ITEMS+i);
 			it->toString(cv);
 			nr++;
 		}
@@ -411,7 +413,7 @@ void Equipement::toString(CharConv* cv)
 		if (it!=0)
 		{
 			cv->printNewline();
-			cv->toBuffer(MEDIUM_ITEMS+i);
+			cv->toBuffer<short>(MEDIUM_ITEMS+i);
 			it->toString(cv);
 			nr++;
 		}
@@ -424,7 +426,7 @@ void Equipement::toString(CharConv* cv)
 		if (it!=0)
 		{
 			cv->printNewline();
-			cv->toBuffer(SMALL_ITEMS+i);
+			cv->toBuffer<short>(SMALL_ITEMS+i);
 			it->toString(cv);
 			nr++;
 		}
@@ -441,7 +443,7 @@ void Equipement::fromString(CharConv* cv)
 	cv->fromBuffer<short>(nr);
 	
 	int i;
-	char pos;
+	short pos;
 	Item* it;
 	
 	std::string subtype;
@@ -479,7 +481,7 @@ void Equipement::toStringComplete(CharConv* cv)
 		if (m_body_items[i] !=0)
 		{
 			cv->printNewline();
-			cv->toBuffer<char>(i);
+			cv->toBuffer<short>(i);
 			m_body_items[i]->toStringComplete(cv);
 		}
 	}
@@ -493,7 +495,7 @@ void Equipement::toStringComplete(CharConv* cv)
 		if (it!=0)
 		{
 			cv->printNewline();
-			cv->toBuffer<char>(BIG_ITEMS+i);
+			cv->toBuffer<short>(BIG_ITEMS+i);
 			it->toStringComplete(cv);
 			nr++;
 		}
@@ -506,7 +508,7 @@ void Equipement::toStringComplete(CharConv* cv)
 		if (it!=0)
 		{
 			cv->printNewline();
-			cv->toBuffer<char>(MEDIUM_ITEMS+i);
+			cv->toBuffer<short>(MEDIUM_ITEMS+i);
 			it->toStringComplete(cv);
 			nr++;
 		}
@@ -519,7 +521,7 @@ void Equipement::toStringComplete(CharConv* cv)
 		if (it!=0)
 		{
 			cv->printNewline();
-			cv->toBuffer<char>(SMALL_ITEMS+i);
+			cv->toBuffer<short>(SMALL_ITEMS+i);
 			it->toStringComplete(cv);
 			nr++;
 		}
@@ -536,7 +538,7 @@ void Equipement::fromStringComplete(CharConv* cv)
 	cv->fromBuffer<short>(nr);
 	
 	int i;
-	char pos;
+	short pos;
 	Item* it;
 	std::string subtype;
 	char type;

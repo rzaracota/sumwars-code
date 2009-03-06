@@ -232,10 +232,10 @@ class Equipement
 		SHIELD2=10,
 		CURSOR_ITEM=11,
 		NR_BODY_ITEMS=12,
-		BIG_ITEMS=20,
-		MEDIUM_ITEMS=30,
-		SMALL_ITEMS = 60,
-		GOLD = 120
+		BIG_ITEMS=1000,
+		MEDIUM_ITEMS=2000,
+		SMALL_ITEMS = 3000,
+		GOLD = 4000
 	};
 
 	/**
@@ -264,9 +264,10 @@ class Equipement
 	 * \fn short insertItem(Item* item)
 	 * \brief Fuegt Gegenstand ins Inventar ein
 	 * \param item Zeiger auf den Gegenstand
+	 * \param check_useup wenn auf true gesetzt, wird sichergestellt, dass in den ersten 10 Objekten (Guertel) nur Verbrauchsgegenstaende landen
 	 * \return Gibt an, wo das item eingefuegt wurde
 	 */
-	short insertItem(Item* item);
+	short insertItem(Item* item, bool check_useup=true);
 	
 	/**
 	 * \fn bool swapCursorItem(int pos)

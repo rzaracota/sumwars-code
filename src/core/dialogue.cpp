@@ -2,6 +2,12 @@
 #include "world.h"
 #include "region.h"
 #include "creature.h"
+#include "itemfactory.h"
+
+std::map<std::string , TopicList > Dialogue::m_topics;
+
+std::map<std::string, NPCTrade > Dialogue::m_npc_trades;
+
 
 TopicList::~TopicList()
 {
@@ -34,9 +40,76 @@ Event* TopicList::getSpeakTopic(std::string topic)
 	return it->second;
 }
 
-std::map<std::string , TopicList > Dialogue::m_topics;
 
 
+void NPCTrade::TradeObject::operator=(TradeObject& other)
+{
+	m_subtype = other.m_subtype;
+	m_number = other.m_number;
+	m_number_magical = other.m_number_magical;
+	m_min_enchant = other.m_min_enchant;
+	m_max_enchant = other.m_max_enchant;
+		
+}
+
+NPCTrade::NPCTrade()
+	:	m_trade_objects()
+{
+	m_cost_multiplier= 1.0;
+	m_refresh_time = 36000000; // 10 min
+	m_refresh_timer.start();
+}
+
+bool NPCTrade::checkRefresh(Equipement* &equ)
+{
+	// update, wenn das Inventar noch garnicht existiert oder zu alt ist
+	if (equ ==0 || m_refresh_timer.getTime() > m_refresh_time)
+	{
+		if (equ == 0)
+		{
+			equ = new Equipement(100,100,100);
+		}
+		equ->clear();
+		
+		Item* itm=0;
+		Item::Type type;
+		std::list<TradeObject>::iterator it;
+		// Schleife ueber alle handelbaren Objekte
+		for (it = m_trade_objects.begin(); it != m_trade_objects.end(); ++it)
+		{
+			// nicht magische Objekte erzeugen
+			for (int i=0; i< it->m_number; ++i)
+			{
+				type = ItemFactory::getBaseType(it->m_subtype);
+				itm = ItemFactory::createItem(type,it->m_subtype);
+				
+				// einfuegen und erfolg testen
+				if (equ->insertItem(itm,false) == Equipement::NONE)
+				{
+					delete itm;
+				}
+			}
+			
+			// magische Objekte erzeugen
+			float magic;
+			for (int i=0; i< it->m_number_magical; ++i)
+			{
+				type = ItemFactory::getBaseType(it->m_subtype);
+				magic = Random::randrangef(it->m_min_enchant, it->m_max_enchant);
+				itm = ItemFactory::createItem(type,it->m_subtype,0,magic,Item::MAGICAL);
+				
+				// einfuegen und erfolg testen
+				if (equ->insertItem(itm,false) == Equipement::NONE)
+				{
+					delete itm;
+				}
+			}
+		}
+		
+		return true;
+	}
+	return false;
+}
 
 
 
@@ -49,6 +122,7 @@ Dialogue::Dialogue(Region* region, std::string topic_base)
 	m_finished = false;
 	
 	m_started = true;
+	m_trade = false;
 }
 
 Dialogue::~Dialogue()
@@ -76,6 +150,7 @@ void Dialogue::init()
 void Dialogue::cleanup()
 {
 	m_topics.clear();
+	m_npc_trades.clear();
 }
 
 void Dialogue::addSpeaker(int id, std::string refname)
@@ -171,6 +246,13 @@ void Dialogue::changeTopic(std::string topic)
 	{
 		// Gespraech beenden
 		m_finished = true;
+		
+		if (m_trade)
+		{
+			Creature* player = dynamic_cast<Creature*>( m_region->getObject(m_main_player_id));
+			if (player != 0)
+				player->getTradeInfo().m_trade_partner =0;
+		}
 		return ;
 	}
 	
@@ -196,6 +278,48 @@ void Dialogue::changeTopic(std::string topic)
 			}
 		}
 		return;
+	}
+	
+	if (topic == "trade")
+	{
+		// Pruefen, dass der NPC wirklich handeln kann
+		if (!canTrade(m_topic_base))
+		{
+			m_finished = true;
+			return ;
+		}
+		
+		// Handelspartner und Basisinformationen einholen
+		NPCTrade& tradeinfo = getNPCTrade(m_topic_base);
+		Creature* npc = dynamic_cast<Creature*>( m_region->getObject( getSpeaker(m_topic_base) ) );
+		Creature* player = dynamic_cast<Creature*>( m_region->getObject(m_main_player_id));
+		
+		if (npc==0 || player ==0)
+		{
+			m_finished = true;
+			return ;
+		}
+		
+		// Handelspartner setzen
+		npc->getTradeInfo().m_trade_partner = player->getId();
+		npc->getTradeInfo().m_price_factor = tradeinfo.m_cost_multiplier;
+		player->getTradeInfo().m_trade_partner = npc->getId();
+		
+		// evtl Inventar auffrischen
+		Equipement* equ = npc->getEquipement();
+		bool refresh = tradeinfo.checkRefresh(equ);
+		
+		if (npc->getEquipement() ==0)
+		{
+			npc->setEquipement(equ);
+		}
+		
+		m_trade = true;
+		
+		if (refresh)
+		{
+			// TODO Datenuebertragung
+		}
 	}
 	
 	st = m_topics[m_topic_base].getSpeakTopic(topic);
@@ -229,7 +353,10 @@ void Dialogue::update(float time)
 {
 	
 	if (m_finished)
+	{
+		
 		return;
+	}
 	
 	float stime = time;
 	CreatureSpeakText* cst;
@@ -240,7 +367,8 @@ void Dialogue::update(float time)
 		cst = &(m_speech.front().second);
 		
 		// Fragen bleiben generell stehen
-		if (!m_started && ! cst->m_answers.empty())
+		// Handel ebenso
+		if (!m_started && ! cst->m_answers.empty() || m_trade)
 		{
 			stime =0;
 			break;
@@ -316,7 +444,7 @@ void Dialogue::update(float time)
 		
 	}
 	
-	if (m_speech.empty())
+	if (m_speech.empty() && !m_trade)
 	{
 		m_finished = true;
 	}

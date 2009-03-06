@@ -837,6 +837,14 @@ void Document::onButtonMinimapClicked()
 	m_modified |= WINDOWS_MODIFIED;
 }
 
+void Document::onButtonCloseTrade()
+{
+	ClientCommand command;
+	command.m_button = BUTTON_TRADE_END;
+	command.m_id = 0;
+	sendCommand(&command);
+}
+
 void Document::sendChatMessage(std::string msg)
 {
 	
@@ -1095,6 +1103,10 @@ bool Document::onKeyPress(KeyCode key)
 			{
 				onButtonSaveExitClicked();
 			}
+			else if (m_gui_state.m_shown_windows & TRADE)
+			{
+				onButtonCloseTrade();
+			}
 			else
 			{
 				m_gui_state.m_shown_windows =  NO_WINDOWS;
@@ -1215,6 +1227,22 @@ void Document::updateContent(float time)
 		DEBUG5("no local player");
 		return;
 	}
+	
+	short wmask = getGUIState()->m_shown_windows;
+	if (player->getTradeInfo().m_trade_partner != 0)
+	{
+		if (getGUIState()->m_shown_windows != TRADE | INVENTORY)
+		{
+			getGUIState()->m_shown_windows = TRADE | INVENTORY;
+			m_modified |= WINDOWS_MODIFIED;
+		}
+	}
+	
+	if (player->getTradeInfo().m_trade_partner == 0 && (wmask & TRADE))
+	{
+		getGUIState()->m_shown_windows &= ~(TRADE | INVENTORY);
+		m_modified |= WINDOWS_MODIFIED;
+	}
 
 	if (m_gui_state.m_left_mouse_pressed)
 	{
@@ -1264,88 +1292,7 @@ void Document::updateContent(float time)
 
 
 
-	/*
-	ServerHeader headerp;
 
-	Packet* data=0;
-	CharConv* cv;
-	static int nodata=0;
-	if (m_network_info.m_network->numberSlotMessages()==0)
-		nodata++;
-
-	if (nodata>=3)
-		DEBUG5("no data for %i turns",nodata);
-
-	int datcount=0;
-	// Daten vom Server holen
-	m_network_info.m_network->update();
-
-	if ( m_network_info.m_network->getSlotStatus()!=NET_CONNECTED )
-	{
-		DEBUG5("disconnected");
-
-	}
-
-	while( m_network_info.m_network->getSlotStatus()==NET_CONNECTED &&  m_network_info.m_network->numberSlotMessages()>0 )
-	{
-		//DEBUG("number of messages %i",m_network_info.m_network->numberSlotMessages());
-		datcount++;
-		nodata=0;
-		m_network_info.m_network->popSlotMessage(data);
-		DEBUG5("got information , length %i\n",data->length);
-
-		cv = new CharConv(data);
-
-
-		headerp.fromString(cv);
-
-		if (headerp.m_content == PTYPE_S2C_DATA)
-		{
-
-			DEBUG5("got data pkg");
-			handleDataPkg(cv,&headerp);
-
-		}
-		else if (headerp.m_content == PTYPE_S2C_SAVEGAME)
-		{
-			DEBUG5("got savegame");
-			handleSavegame(cv);
-
-		}
-		else if (headerp.m_content == PTYPE_S2C_ITEM)
-		{
-			handleDetailedItem(cv);
-
-		}
-		else if (headerp.m_content == PTYPE_S2C_DAMAGE)
-		{
-			handleAbilityDamage(cv,&headerp);
-		}
-		else if (headerp.m_content == PTYPE_S2C_REGION)
-		{
-			handleRegionData(cv);
-		}
-		else
-		{
-			WARNING("Got corrupted package type %i",headerp.m_content);
-			// TODO: do something to fix this....
-
-		}
-
-		delete cv;
-
-		m_network_info.m_network->deallocatePacket(data);
-
-	}
-
-
-	if (datcount>3)
-	{
-		DEBUG5("got %i data packages",datcount);
-	}
-
-	DEBUG5("update finished");
-	*/
 }
 
 void* Document::writeSaveFile(void* doc_ptr)

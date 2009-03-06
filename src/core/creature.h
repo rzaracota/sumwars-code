@@ -344,6 +344,23 @@ public:
 	 * \brief Gibt true zurueck, wenn das aktuelle Kommando per Script gesetzt wurde
 	 */
 	bool hasScriptCommand();
+	
+	/**
+	 * \fn int sellItem(Item* &item)
+	 * \brief verkauft das angegebene Item
+	 * \param position Positio des verkauften Items
+	 * \param item Zeiger auf das verkaufte Item (bei erfolgreichem Verkauf)
+	 * \param gold Gold des kaufenden Spielers
+	 */
+	void sellItem(short position, Item* &item, int& gold);
+		
+		/**
+	 * \fn int buyItem(short position, Item* &item, int& gold)
+	 * \brief Kauft das Item 
+	 * \param item gekauftes Item (wird bei erfolgreichem Kauf auf 0 gesetzt
+	 * \param gold Gold des verkaufenden Spielers
+		 */
+	void buyItem(Item* &item, int& gold);
 
 	
 	/**
@@ -361,6 +378,15 @@ public:
 	CreatureSpeakText& getSpeakText()
 	{
 		return m_speak_text;
+	}
+	
+	/**
+	 * \fn  CreatureTradeInfo& getTradeInfo()
+	 * \brief Gibt Informationen zum Handel aus
+	 */
+	CreatureTradeInfo& getTradeInfo()
+	{
+		return m_trade_info;
 	}
 	
 	void clearSpeakText();
@@ -401,6 +427,26 @@ public:
 	void setRefName(std::string name)
 	{
 		m_refname = name;
+	}
+	
+	/**
+	 * fn Equipement* getEquipement()
+	 * \brief Gibt einen Zeiger auf die Ausruestung des Spielers zurück
+	 * \return Zeiger auf die Ausruestung
+	 */
+	Equipement* getEquipement()
+	{
+		return m_equipement;
+	}
+	
+	/**
+	 * \fn void setEquipement(Equipement* equ)
+	 * \brief Setzt das Inventar
+	 * \param equ Inventar
+	 */
+	void setEquipement(Equipement* equ)
+	{
+		m_equipement = equ;
 	}
 	
 	
@@ -559,6 +605,12 @@ private:
 	CreatureSpeakText m_speak_text;
 	
 	/**
+	 * \var CreatureTradeInfo m_trade_info
+	 * \brief Struktur mit aktuellem Handelsvorgang
+	 */
+	CreatureTradeInfo m_trade_info;
+	
+	/**
 	 * \var int m_speak_id
 	 * \brief ID der Person, zu der die Kreatur gerade spricht
 	 */
@@ -646,6 +698,12 @@ private:
 	 * \brief Grundaktion
 	 */
 	Action::ActionType m_base_action;
+	
+	/**
+	 * \var m_equipement
+	 * \brief Enthaelt die Ausruestung des Spielers
+	 */
+	Equipement* m_equipement;
 	
 	/**
 	 * \var PathfindInfo* m_small_path_info

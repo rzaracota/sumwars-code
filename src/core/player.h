@@ -179,15 +179,7 @@ public:
 	}
 	
 	
-	/**
-	 * fn Equipement* getEquipement()
-	 * \brief Gibt einen Zeiger auf die Ausruestung des Spielers zurück
-	 * \return Zeiger auf die Ausruestung
-	 */
-	Equipement* getEquipement()
-	{
-		return m_equipement;
-	}
+	
 	
 	//Operations
 	/**
@@ -625,11 +617,7 @@ private:
 	
 	
 	
-	/**
-	 * \var m_equipement
-	 * \brief Enthaelt die Ausruestung des Spielers
-	 */
-	Equipement* m_equipement;
+	
 	
 protected:
 	
