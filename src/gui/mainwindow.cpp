@@ -281,6 +281,17 @@ void MainWindow::update()
 			minimap->setVisible(false);
 		}
 		
+		CEGUI::FrameWindow* trade = (CEGUI::FrameWindow*) win_mgr.getWindow("TradeWindow");
+		if (wflags & Document::TRADE)
+		{
+			m_sub_windows["Trade"]->update();
+			trade->setVisible(true);
+		}
+		else
+		{
+			trade->setVisible(false);
+		}
+		
 		// Chat Fenster anzeigen wenn entsprechendes Flag gesetzt
 		CEGUI::FrameWindow* chat_window = (CEGUI::FrameWindow*) win_mgr.getWindow("ChatWindow");
 		if (wflags & Document::CHAT)
@@ -491,6 +502,8 @@ bool MainWindow::setupGameScreen()
 		setupCursorItemImage();
 		
 		setupMinimap();
+		
+		setupTrade();
 		
 	}
 	catch (CEGUI::Exception e)
@@ -734,7 +747,16 @@ bool MainWindow::setupPartyInfo()
 	return true;
 }
 
-
+void MainWindow::setupTrade()
+{
+	Window* wnd = new TradeWindow(m_document);
+	m_sub_windows["Trade"] = wnd;
+	
+	
+	// Inventar anfangs ausblenden
+	m_game_screen->addChildWindow(wnd->getCEGUIWindow());
+	wnd->getCEGUIWindow()->setVisible(false);
+}
 
 
 void  MainWindow::setWindowExtents(int width, int height){

@@ -35,6 +35,7 @@
 #include "charcreate.h"
 #include "questinfo.h"
 #include "minimapwindow.h"
+#include "tradewindow.h"
 
 /**
  * \class MainWindow
@@ -164,6 +165,12 @@ class MainWindow :
 	void setupMinimap();
 	
 	/**
+	 * \fn void setupTrade()
+	 * \brief erstellt Fenster Questinfo
+	*/
+	void setupTrade();
+	
+	/**
 	 * \fn bool initInputs()
 	 * \brief Initialisiert die Eingabegeraete
 	 */
@@ -210,6 +217,7 @@ class MainWindow :
 	 * \brief aktualisiert die Sprechblasen
 	 */
 	void updateSpeechBubbles();
+
 
 	/**
 	 * \fn bool mouseMoved(const OIS::MouseEvent &evt)

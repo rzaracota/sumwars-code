@@ -83,6 +83,7 @@ sumwars_SOURCES = core/world.cpp \
 	gui/charcreate.cpp \
 	gui/questinfo.cpp \
 	gui/minimapwindow.cpp \
+	gui/tradewindow.cpp \
 	gui/sound.cpp \
 	tinyxml/tinyxml.cpp \
 	tinyxml/tinyxmlparser.cpp \
