@@ -292,6 +292,12 @@ class Equipement
 	int getNumberItems();
 	
 	/**
+	 * \fn int getNumberItems(Item::Size size)
+	 * \brief Gibt die Nummer des letzten belegten Platzes einer bestimmten Groesse aus
+	 */
+	int getMaxItemNumber(Item::Size size);
+	
+	/**
 	 * \fn virtual void toString(CharConv* cv)
 	 * \brief Konvertiert das Objekt in einen String und schreibt ihn in der Puffer
 	 * \param cv Ausgabepuffer

@@ -36,13 +36,19 @@ class TradeWindow : public ItemWindow
 		bool onTradeItemHover(const CEGUI::EventArgs& evt);
 		
 		/**
-		 * \fn bool onItemMouseButtonPressed(const CEGUI::EventArgs& evt)
+		 * \fn bool onTradeItemMouseButtonPressed(const CEGUI::EventArgs& evt);
 		 * \brief Behandelt Druecken der linken Maustaste ueber einen Item
 		 */
 		bool onTradeItemMouseButtonPressed(const CEGUI::EventArgs& evt);
+		
+		/**
+		 * \fn bool onTradeAreaMouseButtonPressed(const CEGUI::EventArgs& evt);
+		 * \brief Behandelt Druecken der linken Maustaste ueber auf dem Handelsfenster
+		 */
+		bool onTradeAreaMouseButtonPressed(const CEGUI::EventArgs& evt);
 
 		/**
-		 * \fn bool onItemMouseButtonReleased(const CEGUI::EventArgs& evt)
+		 * \fn bool onTradeItemMouseButtonReleased(const CEGUI::EventArgs& evt);
 		 * \brief Behandelt Loslassen der linken Maustaste ueber einen Item
 		 */
 		bool onTradeItemMouseButtonReleased(const CEGUI::EventArgs& evt);

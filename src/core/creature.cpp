@@ -4273,3 +4273,56 @@ void Creature::speakText(CreatureSpeakText& text)
 		DEBUG5("answer %s %s",it->first.c_str(), it->second.c_str());
 	}
 }
+
+Creature* Creature::getTradePartner()
+{
+	if (m_trade_info.m_trade_partner == 0)
+		return 0;
+	
+	if (getRegion() ==0 )
+		return 0;
+	
+	return dynamic_cast<Creature*>(getRegion()->getObject(m_trade_info.m_trade_partner));
+}
+
+void Creature::sellItem(short position, Item* &item, int& gold)
+{
+	if (getEquipement() !=0)
+	{
+		// Item das verkauft wird
+		Item* it = 0;
+		getEquipement()->swapItem(it,position);
+		
+		if (it != 0 && gold >= it->m_price)
+		{
+			item = it;
+			
+			// Geld abziehen
+			gold -= item->m_price;
+			item->m_price = (int) ((item->m_price+0.999f) / m_trade_info.m_price_factor );
+		}
+		else
+		{
+			getEquipement()->swapItem(it,position);
+		}	
+	}
+}
+
+void Creature::buyItem(Item* &item, int& gold)
+{
+	DEBUG("buy %p",item);
+	if (item != 0 && getEquipement() !=0)
+	{
+		// Geld auszahlen
+		gold += item->m_price;
+		item->m_price = (int) (item->m_price * m_trade_info.m_price_factor);
+		
+		// beim Haendler einfuegen
+		if (getEquipement()->insertItem(item) == Equipement::NONE)
+		{
+			delete item;
+		}
+		item =0;
+	}
+}
+

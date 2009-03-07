@@ -665,6 +665,24 @@ class Document
 	void onButtonCloseTrade();
 	
 	/**
+	 * \fn void onTradeItemLeftClick(short pos)
+	 * \brief Behandelt Linksklick auf ein Item beim Handel
+	 */
+	void onTradeItemLeftClick(short pos);
+
+	/**
+	 * \fn void onTradeItemRightClick(short pos)
+	 * \brief Behandelt Rechtsklick auf ein Item beim Handel
+	 */
+	void onTradeItemRightClick(short pos);
+	
+	/**
+	 * \fn void onTradeSellClicked();
+	 * \brief Behandelt Klick auf die Flaeche des Handelsfensters (verkauft Item)
+	 */
+	void onTradeSellClicked();
+	
+	/**
 	 * \fn void sendChatMessage(std::string msg)
 	 * \brief sendet eine Chatnachricht an alle Spieler
 	 */

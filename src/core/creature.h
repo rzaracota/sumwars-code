@@ -449,6 +449,12 @@ public:
 		m_equipement = equ;
 	}
 	
+	/**
+	 * \fn Creature* getTradePartner()
+	 * \brief Gibt den Handelspartner aus
+	 */
+	Creature* getTradePartner();
+	
 	
 protected:
 	

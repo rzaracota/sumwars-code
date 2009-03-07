@@ -136,6 +136,7 @@ bool Player::init()
 	m_secondary_equip = false;
 
 	m_equipement = new Equipement(5,14,30);
+	m_equipement->setGold(50);
 
 	m_save_timer= 3000;
 
@@ -1059,8 +1060,10 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 	int i;
 	std::list< std::pair<std::string, std::string> >::iterator it;
 
+	bool sell;
 	Item* si;
 	DropSlot ds;
+	int gold;
 	// Wahrscheinlichkeiten BIG, MEDIUM, SMALL, GOLD
 	float prob[4] = {0.1, 0.2, 0.2, 0.2};
 
@@ -1258,6 +1261,54 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 				break;
 			}
 			dia->changeTopic("end");
+			break;
+			
+		case BUTTON_TRADE_ITEM_LEFT:
+		case BUTTON_TRADE_ITEM_RIGHT:
+		case BUTTON_TRADE_SELL:
+			if (getTradePartner() ==0)
+			{
+				break;
+			}
+			
+			si = getEquipement()->getItem(Equipement::CURSOR_ITEM);
+			sell = true;
+			gold = getEquipement()->getGold();
+			
+			// Rechtklick kauft immer ein, Linksklick nur, wenn kein Item in der Hand
+			if (command->m_button == BUTTON_TRADE_ITEM_RIGHT || command->m_button == BUTTON_TRADE_ITEM_LEFT && si ==0)
+				sell = false;
+			
+			if (sell)
+			{
+				// Item wird aus dem Inventar herraus genommen
+				si =0;
+				getEquipement()->swapItem(si,Equipement::CURSOR_ITEM);
+				getTradePartner()->buyItem(si,gold);
+				
+				// wieder hinein getauscht, wenn Handel nicht erfolgreich
+				getEquipement()->swapItem(si,Equipement::CURSOR_ITEM);
+				
+			}
+			else
+			{
+				si =0;
+				getTradePartner()->sellItem(command->m_id,si, gold);
+				
+				if (si !=0)
+				{
+					if (command->m_button == BUTTON_TRADE_ITEM_RIGHT)
+					{
+						insertItem(si);
+					}
+					else
+					{
+						getEquipement()->swapItem(si,Equipement::CURSOR_ITEM);
+					}
+				}
+			}
+			
+			getEquipement()->setGold(gold);
 			break;
 
 		case DEBUG_SIGNAL:

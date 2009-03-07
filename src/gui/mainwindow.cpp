@@ -412,6 +412,12 @@ void MainWindow::update()
 			m_sub_windows["PartyInfo"]->update();
 		}
 		
+		if (wflags & Document::TRADE)
+		{
+			// Skilltree aktualisieren
+			m_sub_windows["Trade"]->update();
+		}
+		
 		// + Buttons fuer Levelup aktualisieren
 		bool vis = false;
 		CEGUI::PushButton* btn;

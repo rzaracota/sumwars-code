@@ -374,6 +374,38 @@ int Equipement::getNumberItems()
 	return nr;
 }
 
+int Equipement::getMaxItemNumber(Item::Size size)
+{
+	int pos =0;
+	if (size == Item::BIG)
+	{
+		int i;
+		for (i=0;i<m_inventory.getMaxBig();i++)
+		{
+			if (m_inventory.getItem(Item::BIG,i))
+				pos = i;
+		}
+	}
+	else if(size == Item::MEDIUM)
+	{
+		int i;
+		for (i=0;i<m_inventory.getMaxMedium();i++)
+		{
+			if (m_inventory.getItem(Item::MEDIUM,i))
+				pos = i;
+		}
+	}
+	else if(size == Item::SMALL)
+	{
+		int i;
+		for (i=0;i<m_inventory.getMaxSmall();i++)
+		{
+			if (m_inventory.getItem(Item::SMALL,i))
+				pos = i;
+		}
+	}
+	return pos;
+}
 
 void Equipement::toString(CharConv* cv)
 {
@@ -526,8 +558,8 @@ void Equipement::toStringComplete(CharConv* cv)
 			nr++;
 		}
 	}
-
-
+	cv->printNewline();
+	cv->toBuffer(m_gold);
 
 }
 
@@ -563,6 +595,8 @@ void Equipement::fromStringComplete(CharConv* cv)
 		// Item ins Inventar tauschen
 		swapItem(it,pos);
 	}
+	
+	cv->fromBuffer(m_gold);
 
 }
 

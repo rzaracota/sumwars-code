@@ -605,6 +605,31 @@ void Document::onItemRightClick(short pos)
 
 }
 
+void Document::Document::onTradeItemLeftClick(short pos)
+{
+	ClientCommand command;
+	command.m_button = BUTTON_TRADE_ITEM_LEFT;
+	command.m_id = pos;
+	sendCommand(&command);
+
+}
+
+void Document::Document::onTradeItemRightClick(short pos)
+{
+	ClientCommand command;
+	command.m_button = BUTTON_TRADE_ITEM_RIGHT;
+	command.m_id = pos;
+	sendCommand(&command);
+
+}
+
+void Document::onTradeSellClicked()
+{
+	ClientCommand command;
+	command.m_button = BUTTON_TRADE_SELL;
+	command.m_id = 0;
+	sendCommand(&command);
+}
 
 void Document::increaseAttribute(CreatureBaseAttr::Attribute attr)
 {

@@ -65,6 +65,7 @@ bool NPCTrade::checkRefresh(Equipement* &equ)
 	// update, wenn das Inventar noch garnicht existiert oder zu alt ist
 	if (equ ==0 || m_refresh_timer.getTime() > m_refresh_time)
 	{
+		DEBUG("refresh");
 		if (equ == 0)
 		{
 			equ = new Equipement(100,100,100);
@@ -82,6 +83,7 @@ bool NPCTrade::checkRefresh(Equipement* &equ)
 			{
 				type = ItemFactory::getBaseType(it->m_subtype);
 				itm = ItemFactory::createItem(type,it->m_subtype);
+				itm->m_price = (int) (itm->m_price * m_cost_multiplier);
 				
 				// einfuegen und erfolg testen
 				if (equ->insertItem(itm,false) == Equipement::NONE)
@@ -97,6 +99,7 @@ bool NPCTrade::checkRefresh(Equipement* &equ)
 				type = ItemFactory::getBaseType(it->m_subtype);
 				magic = Random::randrangef(it->m_min_enchant, it->m_max_enchant);
 				itm = ItemFactory::createItem(type,it->m_subtype,0,magic,Item::MAGICAL);
+				itm->m_price = (int) (itm->m_price * m_cost_multiplier);
 				
 				// einfuegen und erfolg testen
 				if (equ->insertItem(itm,false) == Equipement::NONE)
@@ -300,11 +303,6 @@ void Dialogue::changeTopic(std::string topic)
 			return ;
 		}
 		
-		// Handelspartner setzen
-		npc->getTradeInfo().m_trade_partner = player->getId();
-		npc->getTradeInfo().m_price_factor = tradeinfo.m_cost_multiplier;
-		player->getTradeInfo().m_trade_partner = npc->getId();
-		
 		// evtl Inventar auffrischen
 		Equipement* equ = npc->getEquipement();
 		bool refresh = tradeinfo.checkRefresh(equ);
@@ -320,6 +318,11 @@ void Dialogue::changeTopic(std::string topic)
 		{
 			// TODO Datenuebertragung
 		}
+		
+		// Handelspartner setzen
+		npc->getTradeInfo().m_trade_partner = player->getId();
+		npc->getTradeInfo().m_price_factor = tradeinfo.m_cost_multiplier;
+		player->getTradeInfo().m_trade_partner = npc->getId();
 	}
 	
 	st = m_topics[m_topic_base].getSpeakTopic(topic);
