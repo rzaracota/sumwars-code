@@ -23,6 +23,9 @@ Item* ItemFactory::createItem(Item::Type type, Item::Subtype subtype, int id, fl
 		id = World::getWorld()->getValidId();
 	}
 	
+	if (type == Item::NOITEM)
+		return 0;
+	
 	DEBUG5("creating item %i / %s",type, subtype.c_str());
 	
 	if (type == Item::GOLD_TYPE)

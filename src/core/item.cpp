@@ -487,35 +487,21 @@ void Item::calcPrice()
 	{
 		// Wert des Schadens;
 		float dvalue=0;
-		// Multiplikator des Schadens
-		float dmult =1;
-		dmult *= std::min(2.0,sqrt(m_weapon_attr->m_attack_range));
-		dmult *= (1+m_weapon_attr->m_dattack_speed/2000.0);
-
+		//dmult *= std::min(2.0,sqrt(m_weapon_attr->m_attack_range));
 		// Schaden der Waffe
 		Damage & dmg = m_weapon_attr->m_damage;
-		dvalue += dmg.m_min_damage[Damage::PHYSICAL]*0.5;
-		dvalue += dmg.m_max_damage[Damage::PHYSICAL]*0.5;
+		// phys Schaden
+		dvalue += 0.5*(dmg.m_min_damage[0] + dmg.m_max_damage[0])*dmg.m_multiplier[0] * (1+dmg.m_crit_perc*2);
+		// elementar Schaden
 		for (i=1;i<4;i++)
 		{
-			dvalue += dmg.m_min_damage[i]*0.3;
-			dvalue += dmg.m_max_damage[i]*0.3;
+			dvalue += 0.5*(dmg.m_min_damage[i] + dmg.m_max_damage[i])*dmg.m_multiplier[i];
+			
 		}
-
-		for (i=0;i<4;i++)
-		{
-			dmult *=  dmg.m_multiplier[i];
-		}
-
-		for (i=1;i<4;i++)
-		{
-			dvalue +=  ((dmg.m_multiplier[i]*dmg.m_multiplier[i])-1)*100;
-		}
-
+		dvalue *= (2000 + m_weapon_attr->m_dattack_speed)/1000.0;
+		
 		dvalue += dmg.m_attack*0.1;
 		dvalue += dmg.m_power*0.1;
-
-		dmult *= (1+dmg.m_crit_perc*2);
 
 		for (i=0;i<8;i++)
 		{
@@ -523,7 +509,7 @@ void Item::calcPrice()
 		}
 
 		// TODO: Flags einberechnen
-		value += dvalue *dmult;
+		value += dvalue * std::min(1.5,sqrt(m_weapon_attr->m_attack_range));
 
 	}
 
@@ -532,24 +518,24 @@ void Item::calcPrice()
 		// Modifikation beim anlegen
 		CreatureBaseAttrMod* cbasm = m_equip_effect;
 
-		value += cbasm->m_darmor;
+		value += cbasm->m_darmor*0.5;
 		value += cbasm->m_dblock*0.5;
-		value += cbasm->m_dattack*0.2;
-		value += cbasm->m_dmax_health*0.4;
-		value += cbasm->m_dstrength*2;
-		value += cbasm->m_ddexterity*2;
-		value += cbasm->m_dwillpower*2;
-		value += cbasm->m_dmagic_power*2;
+		value += cbasm->m_dattack*0.1;
+		value += cbasm->m_dmax_health*0.2;
+		value += cbasm->m_dstrength;
+		value += cbasm->m_ddexterity;
+		value += cbasm->m_dwillpower;
+		value += cbasm->m_dmagic_power;
 		mult *= (1+cbasm->m_dattack_speed/2000.0);
 
 		for (i=0;i<4;i++)
 		{
-			value += cbasm->m_dresistances[i]*2;
+			value += cbasm->m_dresistances[i]*0.6;
 		}
 
 		for (i=0;i<4;i++)
 		{
-			value += cbasm->m_dresistances_cap[i]*4;
+			value += cbasm->m_dresistances_cap[i];
 		}
 
 
@@ -561,10 +547,9 @@ void Item::calcPrice()
 
 	}
 
+	value = 0.5*(1+0.1*value)*value* mult;
 
-
-	value = ceil(mult*value*value);
-	value = std::min (value,1000000.0f);
+	value = std::min (value,100000.0f);
 	m_price = (int) value;
 }
 
