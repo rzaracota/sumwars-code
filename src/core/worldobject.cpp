@@ -11,6 +11,8 @@ WorldObject::WorldObject( int id)
 	m_event_mask=0;
 	
 	m_grid_location.m_region = -1;
+	m_fraction = NOFRACTION;
+	m_category = NOCATEGORY;
 }
 
 bool WorldObject::isCreature()

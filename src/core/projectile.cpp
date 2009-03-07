@@ -441,7 +441,7 @@ void Projectile::handleFlying(float dtime)
 		i = hitobj.begin();
 		hit = (*i);
 
-		while (!hitobj.empty() && (World::getWorld()->getRelation(m_damage.m_attacker_fraction,hit) == WorldObject:: ALLIED || hit->getId() == m_last_hit_object_id ))
+		while (!hitobj.empty() && (World::getWorld()->getRelation(m_damage.m_attacker_fraction,hit->getFraction()) == WorldObject:: ALLIED || hit->getId() == m_last_hit_object_id ))
 		{
 			i=hitobj.erase(i);
 			if (i!=hitobj.end())
