@@ -63,6 +63,7 @@ NPCTrade::NPCTrade()
 bool NPCTrade::checkRefresh(Equipement* &equ)
 {
 	// update, wenn das Inventar noch garnicht existiert oder zu alt ist
+	DEBUG("refesh timer %f %f",m_refresh_timer.getTime(), m_refresh_time);
 	if (equ ==0 || m_refresh_timer.getTime() > m_refresh_time)
 	{
 		DEBUG("refresh");

@@ -857,9 +857,23 @@ bool Player::onItemClick(ClientCommand* command)
 	else
 	{
 		// Item soll verbraucht werden
+		// oder verkauft
 		it = m_equipement->getItem(pos);
 		if (it!=0)
 		{
+			if (getTradePartner() != 0)
+			{
+				it =0;
+				int gold = getEquipement()->getGold();
+				getEquipement()->swapItem(it,pos);
+				getTradePartner()->buyItem(it,gold);
+				
+				// wieder hinein getauscht, wenn Handel nicht erfolgreich
+				getEquipement()->swapItem(it,pos);
+				getEquipement()->setGold(gold);
+				return true;
+			}
+			
 			if (it->m_useup_effect==0)
 			{
 				// Item kann nicht verbraucht werden

@@ -21,6 +21,12 @@ class TradeWindow : public ItemWindow
 		 * \brief aktualisiert den Inhalt des Fensters
 		 */
 		virtual void update();
+		
+		/**
+		 * \fn void reset()
+		 * \brief Setzt das Fenster zurueck
+		 */
+		void reset();
 
 		/**
 		 * \fn virtual void updateTranslation

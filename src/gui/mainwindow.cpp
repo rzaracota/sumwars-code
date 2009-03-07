@@ -284,6 +284,7 @@ void MainWindow::update()
 		CEGUI::FrameWindow* trade = (CEGUI::FrameWindow*) win_mgr.getWindow("TradeWindow");
 		if (wflags & Document::TRADE)
 		{
+			static_cast<TradeWindow*>(m_sub_windows["Trade"])->reset();
 			m_sub_windows["Trade"]->update();
 			trade->setVisible(true);
 		}

@@ -1256,7 +1256,7 @@ void Document::updateContent(float time)
 	short wmask = getGUIState()->m_shown_windows;
 	if (player->getTradeInfo().m_trade_partner != 0)
 	{
-		if (getGUIState()->m_shown_windows != TRADE | INVENTORY)
+		if (getGUIState()->m_shown_windows != (TRADE | INVENTORY))
 		{
 			getGUIState()->m_shown_windows = TRADE | INVENTORY;
 			m_modified |= WINDOWS_MODIFIED;
