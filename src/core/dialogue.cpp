@@ -63,10 +63,8 @@ NPCTrade::NPCTrade()
 bool NPCTrade::checkRefresh(Equipement* &equ)
 {
 	// update, wenn das Inventar noch garnicht existiert oder zu alt ist
-	DEBUG("refesh timer %f %f",m_refresh_timer.getTime(), m_refresh_time);
 	if (equ ==0 || m_refresh_timer.getTime() > m_refresh_time)
 	{
-		DEBUG("refresh");
 		if (equ == 0)
 		{
 			equ = new Equipement(100,100,100);
@@ -255,7 +253,9 @@ void Dialogue::changeTopic(std::string topic)
 		{
 			Creature* player = dynamic_cast<Creature*>( m_region->getObject(m_main_player_id));
 			if (player != 0)
-				player->getTradeInfo().m_trade_partner =0;
+			{
+				player->setTradePartner(0);
+			}
 		}
 		return ;
 	}
@@ -306,7 +306,7 @@ void Dialogue::changeTopic(std::string topic)
 		
 		// evtl Inventar auffrischen
 		Equipement* equ = npc->getEquipement();
-		bool refresh = tradeinfo.checkRefresh(equ);
+		tradeinfo.checkRefresh(equ);
 		
 		if (npc->getEquipement() ==0)
 		{
@@ -315,15 +315,19 @@ void Dialogue::changeTopic(std::string topic)
 		
 		m_trade = true;
 		
-		if (refresh)
-		{
-			// TODO Datenuebertragung
-		}
+		
+		NetEvent event;
+		event.m_type =  NetEvent::TRADER_INVENTORY_REFRESH;
+		event.m_data = 0;
+		event.m_id = npc->getId();
+
+		m_region->insertNetEvent(event);
+
 		
 		// Handelspartner setzen
-		npc->getTradeInfo().m_trade_partner = player->getId();
+		npc->setTradePartner(player->getId());
 		npc->getTradeInfo().m_price_factor = tradeinfo.m_cost_multiplier;
-		player->getTradeInfo().m_trade_partner = npc->getId();
+		player->setTradePartner(npc->getId());
 	}
 	
 	st = m_topics[m_topic_base].getSpeakTopic(topic);

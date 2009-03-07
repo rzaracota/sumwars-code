@@ -455,6 +455,17 @@ public:
 	 */
 	Creature* getTradePartner();
 	
+	/**
+	 * \fn void setTradePartner(int id)
+	 * \brief Setzt den Handelspartner
+	 * \param id ID des Handelspartners
+	 */
+	void setTradePartner(int id)
+	{
+		m_trade_info.m_trade_partner = id;
+		m_event_mask |= NetEvent::DATA_TRADE_INFO;
+	}
+	
 	
 protected:
 	

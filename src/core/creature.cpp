@@ -3965,6 +3965,12 @@ void Creature::writeNetEvent(NetEvent* event, CharConv* cv)
 			cv->toBuffer(it->second);	
 		}
 	}
+	
+	if (event->m_data & NetEvent::DATA_TRADE_INFO)
+	{
+		cv->toBuffer(m_trade_info.m_trade_partner);
+		cv->toBuffer(m_trade_info.m_price_factor);
+	}
 }
 
 
@@ -4134,6 +4140,12 @@ void Creature::processNetEvent(NetEvent* event, CharConv* cv)
 			DEBUG5("answer %s %s",it->first.c_str(), it->second.c_str());
 		}
 	}
+	
+	if (event->m_data & NetEvent::DATA_TRADE_INFO)
+	{
+		cv->fromBuffer(m_trade_info.m_trade_partner);
+		cv->fromBuffer(m_trade_info.m_price_factor);
+	}
 
 	if (newmove)
 	{
@@ -4300,6 +4312,13 @@ void Creature::sellItem(short position, Item* &item, int& gold)
 			// Geld abziehen
 			gold -= item->m_price;
 			item->m_price = (int) ((item->m_price+0.999f) / m_trade_info.m_price_factor );
+			
+			NetEvent event;
+			event.m_type =  NetEvent::TRADER_ITEM_SELL;
+			event.m_data = position;
+			event.m_id = getId();
+
+			getRegion()->insertNetEvent(event);
 		}
 		else
 		{
@@ -4310,7 +4329,7 @@ void Creature::sellItem(short position, Item* &item, int& gold)
 
 void Creature::buyItem(Item* &item, int& gold)
 {
-	DEBUG("buy %p",item);
+	DEBUG5("buy %p",item);
 	if (item != 0 && getEquipement() !=0)
 	{
 		// Geld auszahlen
@@ -4318,9 +4337,19 @@ void Creature::buyItem(Item* &item, int& gold)
 		item->m_price = (int) (item->m_price * m_trade_info.m_price_factor);
 		
 		// beim Haendler einfuegen
-		if (getEquipement()->insertItem(item) == Equipement::NONE)
+		short pos = getEquipement()->insertItem(item);
+		if (pos == Equipement::NONE)
 		{
 			delete item;
+		}
+		else
+		{
+			NetEvent event;
+			event.m_type =  NetEvent::TRADER_ITEM_BUY;
+			event.m_data = pos;
+			event.m_id = getId();
+
+			getRegion()->insertNetEvent(event);
 		}
 		item =0;
 	}

@@ -1562,6 +1562,30 @@ bool World::writeNetEvent(Region* region,NetEvent* event, CharConv* cv)
 			else
 				return false;
 		}
+		
+		if (event->m_type == NetEvent::TRADER_INVENTORY_REFRESH)
+		{
+			Creature* npc = dynamic_cast<Creature*>(region->getObject(event->m_id));
+			if (npc ==0 || npc->getEquipement() ==0)
+				return false;
+			
+			npc->getEquipement()->toStringComplete(cv);
+		}
+		
+		if (event->m_type == NetEvent::TRADER_ITEM_BUY)
+		{
+			Creature* npc = dynamic_cast<Creature*>(region->getObject(event->m_id));
+			if (npc ==0 || npc->getEquipement() ==0)
+				return false;
+			
+			Item* item = npc->getEquipement()->getItem(event->m_data);
+			if (item ==0)
+				return false;
+			
+			DEBUG5("sending item %i of trader %i",event->m_data,npc->getId());
+			
+			item->toStringComplete(cv);
+		}
 	}
 	else
 	{
@@ -1678,9 +1702,13 @@ bool World::processNetEvent(Region* region,CharConv* cv)
 	DEBUG5("got event %i  id %i  data %i",event.m_type, event.m_id, event.m_data);
 
 	WorldObject* object;
+	Creature* cr;
 	Projectile* proj;
+ 	Item* item;
 	int id;
 	bool mode;
+	std::string subtype;
+	char type;
 
 	// Objekt suchen dass zu dem NetEvent gehoert
 	// Spieler werden aus der Spielerliste gesucht
@@ -1811,7 +1839,51 @@ bool World::processNetEvent(Region* region,CharConv* cv)
 				return false;
 			}
 			break;
+			
+		case NetEvent::TRADER_INVENTORY_REFRESH:
+			
+			cr = dynamic_cast<Creature*>(region->getObject(event.m_id));
+			if (cr ==0)
+				return false;
+			
+			if (cr->getEquipement() ==0)
+			{
+				cr->setEquipement(new Equipement(100,100,100));
+			}
+			cr->getEquipement()->clear();
+			
+			cr->getEquipement()->fromStringComplete(cv);
+			break;
+			
+		case NetEvent::TRADER_ITEM_BUY:
 
+			cr = dynamic_cast<Creature*>(region->getObject(event.m_id));
+			if (cr ==0 || cr->getEquipement() ==0)
+				return false;
+			
+			// Item erstellen
+			cv->fromBuffer(type);
+			cv->fromBuffer(subtype,10);
+			cv->fromBuffer(id);
+			item = ItemFactory::createItem((Item::Type) type,subtype,id);
+			item->fromStringComplete(cv);
+			
+			cr->getEquipement()->swapItem(item, event.m_data);
+			if (item !=0)
+				delete item;
+			
+			break;
+			
+		case NetEvent::TRADER_ITEM_SELL:
+			cr = dynamic_cast<Creature*>(region->getObject(event.m_id));
+			if (cr ==0 || cr->getEquipement() ==0)
+				return false;
+			
+			item =0;
+			cr->getEquipement()->swapItem(item, event.m_data);
+			if (item !=0)
+				delete item;
+			break;
 
 		case NetEvent::PLAYER_CHANGED_REGION:
 			DEBUG5("received event player %i changed region %i",event.m_id, event.m_data);
