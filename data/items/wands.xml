@@ -1,6 +1,6 @@
 <Item type="weapon" subtype="ice_wnd" size="medium">
 	<Image image="set:noMedia.png image:full_image" />
-	<Mesh file="potion.mesh" />
+	<Mesh file="basicWand.mesh" />
 	<Attribute
 			  level_requirement="1"
 			  character_requirement="15"

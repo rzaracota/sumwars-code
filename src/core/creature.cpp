@@ -85,6 +85,7 @@ bool Creature::init()
 
 	m_trade_id=0;
 	m_speak_id =0;
+	m_dialogue_id =0;
 	m_equipement =0;
 
 	// Bewegung auf 0 setzen
@@ -3159,7 +3160,7 @@ void Creature::takeDamage(Damage* d)
 {
 	// Lebewesen kann nur im Zustand aktiv Schaden nehmen
 	// und wenn es nicht gerade in einen Dialog verwickelt ist
-	if (getState() != STATE_ACTIVE || getDialogue() != 0)
+	if (getState() != STATE_ACTIVE || getDialogueId() != 0)
 		return;
 
 	DEBUG5("take Damage %i",getId());
@@ -3978,6 +3979,11 @@ void Creature::writeNetEvent(NetEvent* event, CharConv* cv)
 		cv->toBuffer(m_trade_info.m_trade_partner);
 		cv->toBuffer(m_trade_info.m_price_factor);
 	}
+	
+	if (event->m_data & NetEvent::DATA_DIALOGUE)
+	{
+		cv->toBuffer(m_dialogue_id);
+	}
 }
 
 
@@ -4152,6 +4158,13 @@ void Creature::processNetEvent(NetEvent* event, CharConv* cv)
 	{
 		cv->fromBuffer(m_trade_info.m_trade_partner);
 		cv->fromBuffer(m_trade_info.m_price_factor);
+	}
+	
+	if (event->m_data & NetEvent::DATA_DIALOGUE)
+	{
+		int id;
+		cv->fromBuffer(id);
+		setDialogue(id);
 	}
 
 	if (newmove)
@@ -4361,4 +4374,19 @@ void Creature::buyItem(Item* &item, int& gold)
 		item =0;
 	}
 }
+
+
+void Creature::setDialogue(int id)
+{
+	m_dialogue_id = id;
+	m_event_mask |= NetEvent::DATA_DIALOGUE;
+	
+	if (id !=0)
+	{
+		getAction()->m_type = Action::NOACTION;
+		m_action.m_elapsed_time =0;
+		clearCommand(true);
+	}
+}
+
 

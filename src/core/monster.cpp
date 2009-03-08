@@ -138,7 +138,7 @@ void Monster::updateCommand()
 		pl = static_cast<Creature*>(it->second);
 		
 		// Spieler nur als Ziel, wenn aktiv und nicht in Dialog
-		if (pl->getState() != STATE_ACTIVE || pl->getDialogue() != 0)
+		if (pl->getState() != STATE_ACTIVE || pl->getDialogueId() != 0)
 			continue;
 		
 		if (World::getWorld()->getRelation(getFraction(), pl ) != HOSTILE)

@@ -1328,6 +1328,8 @@ void Region::getRegionData(CharConv* cv)
 	strncpy(stmp,m_name.c_str(),20);
 	cv->toBuffer(stmp,20);
 
+	cv->toBuffer(m_ground_material);
+	
 	// Tiles eintragen
 	int i,j;
 	for (i =0;i<m_dimx*2;i++)
@@ -1499,6 +1501,7 @@ void Region::setRegionData(CharConv* cv,WorldObjectMap* players)
 	cv->fromBuffer(stmp,20);
 	m_name = stmp;
 	DEBUG5("name of region: %s",stmp);
+	cv->fromBuffer(m_ground_material);
 
 	// Tiles eintragen
 	int i,j;

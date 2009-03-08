@@ -1602,7 +1602,7 @@ void MainWindow::updateSpeechBubbles()
 			label = win_mgr.createWindow("TaharezLook/StaticText", stream.str());
 			m_game_screen->addChildWindow(label);
 			label->setProperty("FrameEnabled", "true");
-			label->setProperty("BackgroundEnabled", "false");
+			label->setProperty("BackgroundEnabled", "true");
 			
 			label->setText("");
 			label->setAlpha(0.9);

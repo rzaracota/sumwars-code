@@ -173,7 +173,7 @@ void Dialogue::addSpeaker(int id, std::string refname)
 	}
 	
 	// Pruefen, ob die Kreatur nicht schon einen Dialog hat
-	if (cr->getDialogue() != 0)
+	if (cr->getDialogueId() != 0)
 	{
 		ERRORMSG("cant add %i: %s to dialogue: has already dialogue",id, refname.c_str());
 		return;

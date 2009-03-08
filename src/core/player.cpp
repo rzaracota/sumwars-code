@@ -374,7 +374,7 @@ void  Player::revive()
 bool Player::onGamefieldClick(ClientCommand* command)
 {
 	// keine Aktionen waehrend eines Dialogs oder Handel
-	if (getDialogue()!=0 || getTradeInfo().m_trade_partner !=0)
+	if (getDialogueId()!=0 || getTradeInfo().m_trade_partner !=0)
 	{
 		return true;
 	}

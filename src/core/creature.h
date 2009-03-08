@@ -401,14 +401,21 @@ public:
 	}
 	
 	/**
+	 * \fn int getDialogueId()
+	 * \brief Gibt die ID des Dialogs aus
+	 */
+	int getDialogueId()
+	{
+		return m_dialogue_id;
+	}
+	
+	/**
 	 * \fn void setDialogue(int id)
 	 * \brief Setzt den aktuellen Dialog
 	 * \param id ID des Dialogs
 	 */
-	void setDialogue(int id)
-	{
-		m_dialogue_id = id;
-	}
+	void setDialogue(int id);
+
 	
 	/**
 	 * \fn std::string getRefName()
