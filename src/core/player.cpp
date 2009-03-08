@@ -298,6 +298,8 @@ bool Player::init()
 	si = ItemFactory::createItem(Item::POTION,"heal_1");
 	equ->swapItem(si,Equipement::SMALL_ITEMS+1);
 	
+	getBaseAttrMod()->m_max_health = getBaseAttr()->m_max_health;
+	
 	if (init)
 	{
 		// Modifizierte Basisattribute erzeugen
@@ -1009,6 +1011,7 @@ void Player::increaseAttribute(CreatureBaseAttr::Attribute attr)
 		case (CreatureBaseAttr::STRENGTH):
 			getBaseAttr()->m_strength++;
 			getBaseAttr()->m_max_health += 5;
+			getBaseAttrMod()->m_max_health += 5;
 			getDynAttr()->m_health +=5;
 			m_event_mask |= NetEvent::DATA_HP | NetEvent::DATA_MAX_HP;
 			break;
@@ -1025,8 +1028,10 @@ void Player::increaseAttribute(CreatureBaseAttr::Attribute attr)
 			break;
 
 	}
+	
 	calcBaseAttrMod();
 	m_event_mask |= NetEvent::DATA_SKILL_ATTR_POINTS;
+	
 }
 
 void Player::gainLevel()
@@ -2115,6 +2120,7 @@ void Player::fromSavegame(CharConv* cv, bool local)
 	// Items
 	loadEquipement(cv);
 
+	getBaseAttrMod()->m_max_health = getBaseAttr()->m_max_health;
 	calcBaseAttrMod();
 	
 	// Questinformationen

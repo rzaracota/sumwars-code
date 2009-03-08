@@ -130,10 +130,8 @@ bool Creature::init()
 	m_action.m_time =0;
 	m_action.m_elapsed_time =0;
 	
-	
-
-	//Lebenspunkts auf 1 (debugging)
-	m_dyn_attr.m_health = 1;
+	m_dyn_attr.m_health = getBaseAttr()->m_max_health;
+	getBaseAttrMod()->m_max_health = getBaseAttr()->m_max_health;
 
 	m_event_mask =0;
 	
@@ -2508,7 +2506,7 @@ bool Creature::update (float time)
 
 
 
-void Creature::gainExperience (int exp)
+void Creature::gainExperience (float exp)
 {
 	if (getTypeInfo()->m_type != TypeInfo::TYPE_PLAYER)
 		return;
@@ -3098,6 +3096,11 @@ void Creature::calcBaseAttrMod()
 {
 
 	int i;
+	float hppercent = 1;
+	if (m_base_attr_mod.m_max_health != 0)
+	{
+		hppercent = m_dyn_attr.m_health / m_base_attr_mod.m_max_health;
+	}
 	// Alle Werte auf die Basiswerte setzen
 	m_base_attr_mod.m_armor = m_base_attr.m_armor;
 	m_base_attr_mod.m_block =m_base_attr.m_block;
@@ -3112,6 +3115,8 @@ void Creature::calcBaseAttrMod()
 	m_base_attr_mod.m_level =m_base_attr.m_level;
 	m_base_attr_mod.m_max_health =m_base_attr.m_max_health;
 
+	m_dyn_attr.m_health = hppercent * m_base_attr.m_max_health;
+	
 	for (i=0;i<4;i++)
 	{
 		m_base_attr_mod.m_resistances[i] = m_base_attr.m_resistances[i];
@@ -3130,6 +3135,8 @@ void Creature::calcBaseAttrMod()
 	std::list<CreatureBaseAttrMod>::iterator j;
 	for (j=m_dyn_attr.m_temp_mods.begin(); j!= m_dyn_attr.m_temp_mods.end();++j)
 	{
+		DEBUG("%f / %f",getDynAttr()->m_health, getBaseAttr()->m_max_health);
+	
 		applyBaseAttrMod(&(*j),false);
 	}
 
@@ -3287,7 +3294,7 @@ void Creature::takeDamage(Damage* d)
 		}
 	}
 
-	DEBUG5("sum dmg %f",dmg);
+	DEBUG5("sum dmg %f / %f",dmg,getDynAttr()->m_health );
 
 	// Lebenspunkte abziehen
 	getDynAttr()->m_health -= dmg;

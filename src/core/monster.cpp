@@ -17,6 +17,7 @@
 	51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
 #include "monster.h"
+#include "player.h"
 
 Monster::Monster( int id) : Creature( id)
 {
@@ -43,6 +44,7 @@ Monster::Monster( int id,MonsterBasicData& data)
 
 	getDynAttr()->m_experience=0;
 	getDynAttr()->m_health = getBaseAttr()->m_max_health;
+	getBaseAttrMod()->m_max_health = getBaseAttr()->m_max_health;
 
 	// Standardform setzen
 	getShape()->m_type = Shape::CIRCLE;
@@ -392,35 +394,48 @@ void Monster::die()
 		// Object per ID von der World holen
 		WorldObject* object;
 		object = getRegion()->getObject(id);
-
-		if (object!=0)
+		Player* pl = dynamic_cast<Player*>(object);
+		Player* pl2;
+		short diff;
+		
+		Shape* sh = getShape();
+		if (pl!=0)
 		{
-			if (object->getState() == STATE_ACTIVE && object->getTypeInfo()->m_type==TypeInfo::TYPE_PLAYER)
+			if (pl->getState() == STATE_ACTIVE)
 			{
-				Creature* pl = (Creature*) object;
+				
 
-				// Für Erfahrungspunkte bitte noch eine vernünftige Formel einfallen lassen...
-				//pl->gainExperience((int) ceil(pow(1.5,getLevel()-1)*4));
+				float exp = getBaseAttr()->m_max_experience;
+				pl->gainExperience(exp);
+
 				// Verteilen der Exp auf Spieler in der Nähe
-				// TODO: XP nur auf spieler in der Party verteilen
+				std::set<int>& members = pl->getParty()->getMembers();
+				std::set<int>::iterator i;
 
-				pl->gainExperience((int) ceil(pow(1.5,std::min(pl->getBaseAttrMod()->m_level,getBaseAttr()->m_level)-1)*2));
-
-				WorldObjectList ret;
-				Shape s;
-				s.m_type = Shape::CIRCLE;
-				s.m_radius = 20;
-				s.m_center = getShape()->m_center;
-
-				getRegion()->getObjectsInShape(&s, &ret, LAYER_AIR, CREATURE);
-
-				WorldObjectList::iterator i;
-
-				for (i=ret.begin();i!=ret.end();i++)
+				for (i=members.begin();i!=members.end();i++)
 				{
-					pl = (Creature*) (*i);
-					pl->gainExperience((int) ceil(pow(1.5,getBaseAttr()->m_level-1)*2/ret.size()));
+					pl2 = dynamic_cast<Player*>(getRegion()->getObject(*i));
+					
+					// An den Spieler der das Monster getoetet hat nicht doppelt verteilen...
+					if (pl2 == pl)
+						continue;
+					
+					if (pl2->getShape()->getDistance(*sh) <20)
+					{
+						// volle xp nur wenn das Monster nicht zu stark war
+						diff = getBaseAttr()->m_level - pl2->getBaseAttr()->m_level;
+						if (diff >5)
+						{
+							pl2->gainExperience(exp*pow(0.86,diff));
+						}
+						else
+						{
+							pl2->gainExperience(exp);
+						}
+					}
+					
 				}
+				
 
 			}
 		}

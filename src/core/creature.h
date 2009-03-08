@@ -202,11 +202,11 @@ public:
 	
 	
 	/**
-	 * \fn void gainExperience (int exp)
+	 * \fn void gainExperience (float exp)
 	 * \brief Das Lebewesen gewinnt exp Erfahrungspunkte. Wenn dabei die noetigen Erfahrungspunkte fuer ein Levelup erreicht werden wird gainLevel() aufgerufen.
 	 * \param exp gewonnene Erfahrungspunkte
 	 */
-	virtual void gainExperience (int exp);
+	virtual void gainExperience (float exp);
 	
 	
 	/**

@@ -1172,11 +1172,11 @@ bool  ObjectLoader::loadMonster(TiXmlNode* node)
 				else if (!strcmp(child->Value(), "BasicAttributes"))
 				{
 					// Basisattribute setzen
-					attr.getFloat("max_experience",data->m_base_attr.m_max_experience,0);
+					attr.getFloat("experience",data->m_base_attr.m_max_experience,0);
 					short level;
 					attr.getShort("level",level,1);
 					data->m_base_attr.m_level = level;
-					attr.getFloat("max_hp",data->m_base_attr.m_max_health,1);
+					attr.getFloat("max_health",data->m_base_attr.m_max_health,1);
 					attr.getShort("armor",data->m_base_attr.m_armor,0);
 					attr.getShort("block",data->m_base_attr.m_block,0);
 					attr.getShort("armor",data->m_base_attr.m_attack,0);
