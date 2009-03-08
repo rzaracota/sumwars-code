@@ -44,13 +44,13 @@ TradeWindow::TradeWindow (Document* doc)
 			trade->addChildWindow(label);
 			label->setProperty("FrameEnabled", "true");
 			label->setProperty("BackgroundEnabled", "true");
-			label->setProperty("BackgroundColours", "tl:FFFF0000 tr:FFFF0000 bl:FFFF0000 br:FFFF0000"); 
 			label->setPosition(CEGUI::UVector2(cegui_reldim(0.05f+i*0.18f), cegui_reldim( 0.02f +j*0.1f)));
 			label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.09f)));
 			label->setID(Equipement::BIG_ITEMS+j*5+i);
 			label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&TradeWindow::onTradeItemMouseButtonPressed, this));
 			label->subscribeEvent(CEGUI::Window::EventMouseButtonUp, CEGUI::Event::Subscriber(&TradeWindow::onTradeItemMouseButtonReleased,  this));
 			label->subscribeEvent(CEGUI::Window::EventMouseEnters, CEGUI::Event::Subscriber(&TradeWindow::onTradeItemHover,  this));
+			label->setWantsMultiClickEvents(false);
 		}
 	}
 	
@@ -87,6 +87,7 @@ TradeWindow::TradeWindow (Document* doc)
 			label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&TradeWindow::onTradeItemMouseButtonPressed, this));
 			label->subscribeEvent(CEGUI::Window::EventMouseButtonUp, CEGUI::Event::Subscriber(&TradeWindow::onTradeItemMouseButtonReleased,  this));
 			label->subscribeEvent(CEGUI::Window::EventMouseEnters, CEGUI::Event::Subscriber(&TradeWindow::onTradeItemHover,  this));
+			label->setWantsMultiClickEvents(false);
 		}
 	}
 	
@@ -122,6 +123,7 @@ TradeWindow::TradeWindow (Document* doc)
 			label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&TradeWindow::onTradeItemMouseButtonPressed, this));
 			label->subscribeEvent(CEGUI::Window::EventMouseButtonUp, CEGUI::Event::Subscriber(&TradeWindow::onTradeItemMouseButtonReleased,  this));
 			label->subscribeEvent(CEGUI::Window::EventMouseEnters, CEGUI::Event::Subscriber(&TradeWindow::onTradeItemHover,  this));
+			label->setWantsMultiClickEvents(false);
 		}
 	}
 	
@@ -223,15 +225,7 @@ void TradeWindow::update()
 		out_stream << "TraderBigItem" << i<< "Label";
 		img =  win_mgr.getWindow(out_stream.str().c_str());
 		it = equ->getItem(Equipement::BIG_ITEMS+i + m_big_sheet*15);
-		out_stream.str("");
-		if (it!=0)
-		{
-			out_stream<< getItemImage(it->m_subtype);
-		}
-		if (img->getProperty("Image")!=out_stream.str())
-		{
-			img->setProperty("Image", out_stream.str());
-		}
+		updateItemWindow(img,it,player,player->getEquipement()->getGold());
 	}
 	
 	for (i=0;i<21;i++)
@@ -240,15 +234,7 @@ void TradeWindow::update()
 		out_stream << "TraderMediumItem" << i<< "Label";
 		img =  win_mgr.getWindow(out_stream.str().c_str());
 		it = equ->getItem(Equipement::MEDIUM_ITEMS+i + m_medium_sheet*21);
-		out_stream.str("");
-		if (it!=0)
-		{
-			out_stream<< getItemImage(it->m_subtype);
-		}
-		if (img->getProperty("Image")!=out_stream.str())
-		{
-			img->setProperty("Image", out_stream.str());
-		}
+		updateItemWindow(img,it,player,player->getEquipement()->getGold());
 	}
 	
 	for (i=0;i<30;i++)
@@ -257,15 +243,7 @@ void TradeWindow::update()
 		out_stream << "TraderSmallItem" << i<< "Label";
 		img =  win_mgr.getWindow(out_stream.str().c_str());
 		it = equ->getItem(Equipement::SMALL_ITEMS+i + m_small_sheet*30);
-		out_stream.str("");
-		if (it!=0)
-		{
-			out_stream<< getItemImage(it->m_subtype);
-		}
-		if (img->getProperty("Image")!=out_stream.str())
-		{
-			img->setProperty("Image", out_stream.str());
-		}
+		updateItemWindow(img,it,player,player->getEquipement()->getGold());
 	}
 }
 
@@ -288,12 +266,10 @@ void TradeWindow::reset()
 
 bool TradeWindow::onTradeItemHover(const CEGUI::EventArgs& evt)
 {
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	
 	const CEGUI::MouseEventArgs& we =
 			static_cast<const CEGUI::MouseEventArgs&>(evt);
 	unsigned int id = we.window->getID();
-	short pos = id;
 	
 	Player* player = m_document->getLocalPlayer();
 	if (player ==0)
@@ -307,46 +283,14 @@ bool TradeWindow::onTradeItemHover(const CEGUI::EventArgs& evt)
 	}
 		
 	Equipement* equ = npc->getEquipement();
-	CEGUI::Window* label;
 	
 	if (equ ==0)
 	{
 		return true;
 	}
 	
-	std::ostringstream out_stream;
-	out_stream.str("");
-			
-	if (pos>= Equipement::BIG_ITEMS && pos <  Equipement::MEDIUM_ITEMS)
-	{
-		out_stream << "TraderBigItem"<<pos-Equipement::BIG_ITEMS<<"Label";
-		id += m_big_sheet * 15;
-	}
-	if (pos>= Equipement::MEDIUM_ITEMS && pos < Equipement::SMALL_ITEMS)
-	{
-		out_stream << "TraderMediumItem"<<pos-Equipement::MEDIUM_ITEMS<<"Label";
-		id += m_medium_sheet * 21;
-	}
-	if (pos>= Equipement::SMALL_ITEMS)
-	{
-		out_stream << "TraderSmallItem"<<pos-Equipement::SMALL_ITEMS<<"Label";
-		id += m_small_sheet * 30;
-	}
-	label = win_mgr.getWindow(out_stream.str());
+	updateItemWindowTooltip(we.window,equ->getItem(id) ,player,player->getEquipement()->getGold());
 	
-	Item* item= equ ->getItem(id);
-	std::string msg;
-	
-	if (item ==0)
-	{
-		msg = "";
-	}
-	else
-	{
-		msg =item->getDescription();
-	}
-	label->setTooltipText(msg);
-		
 	return true;
 }
 

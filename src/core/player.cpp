@@ -635,31 +635,8 @@ bool Player::onItemClick(ClientCommand* command)
 			{
 
 				// Item soll als Ausruestungsgegenstand benutzt werden
-
-				// testen ob Level ausreicht
-				if (getBaseAttr()->m_level < it->m_level_req)
-				{
-					// Level Vorraussetzung nicht erfuellt
-					DEBUG("level too low: own level: %i item level: %i",getBaseAttr()->m_level,it->m_level_req);
-					req= false;
-				}
-
-
-				// testen ob Item fuer die Charakterklasse zugelassen ist
-				char mask = Item::REQ_WARRIOR;
-				if (getTypeInfo()->m_subtype == "mage")
-					mask = Item::REQ_MAGE;
-				if (getTypeInfo()->m_subtype == "archer")
-					mask = Item::REQ_ARCHER;
-				if (getTypeInfo()->m_subtype == "priest")
-					mask = Item::REQ_PRIEST;
-
-				if (it->m_char_req & mask != mask)
-				{
-					// Spieler darf das Item nicht benutzen (falsche Spielerklasse)
-					DEBUG("wrong subtype");
-					req =false;
-				}
+				req = checkItemRequirements(it);
+				
 
 				// geforderter Typ um das Item anlegen zu koennen
 				Item::Type req_type = Item::NOITEM;
@@ -956,6 +933,34 @@ short Player::insertItem(Item* itm)
 		}
 	}
 	return pos;
+}
+
+bool Player::checkItemRequirements(Item* itm)
+{
+	// testen ob Level ausreicht
+	if (getBaseAttr()->m_level < itm->m_level_req)
+	{
+		// Level Vorraussetzung nicht erfuellt
+		DEBUG5("level too low: own level: %i item level: %i",getBaseAttr()->m_level,itm->m_level_req);
+		return false;
+	}
+	
+	// testen ob Item fuer die Charakterklasse zugelassen ist
+	char mask = Item::REQ_WARRIOR;
+	if (getTypeInfo()->m_subtype == "mage")
+		mask = Item::REQ_MAGE;
+	if (getTypeInfo()->m_subtype == "archer")
+		mask = Item::REQ_ARCHER;
+	if (getTypeInfo()->m_subtype == "priest")
+		mask = Item::REQ_PRIEST;
+
+	if (itm->m_char_req & mask != mask)
+	{
+		// Spieler darf das Item nicht benutzen (falsche Spielerklasse)
+		DEBUG5("wrong subtype");
+		return false;
+	}
+	return true;
 }
 
 Item* Player::getWeapon()

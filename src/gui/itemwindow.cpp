@@ -16,7 +16,9 @@ bool ItemWindow::onItemHover(const CEGUI::EventArgs& evt)
 	const CEGUI::MouseEventArgs& we =
 			static_cast<const CEGUI::MouseEventArgs&>(evt);
 	unsigned int id = we.window->getID();
-	updateItemTooltip(id);
+	
+	Player* player = m_document->getLocalPlayer();
+	updateItemWindowTooltip(we.window,player->getEquipement()->getItem(id) ,player);
 	return true;
 }
 
@@ -53,69 +55,6 @@ bool ItemWindow::onItemMouseButtonReleased(const CEGUI::EventArgs& evt)
 	return true;
 }
 
-void ItemWindow::updateItemTooltip(unsigned int pos)
-{
-	Item* item = m_document->getLocalPlayer()->getEquipement()->getItem(pos);
-
-	DEBUG5("setting tool tip for item at %i",pos);
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-	CEGUI::Window* label;
-	std::ostringstream out_stream;
-	out_stream.str("");
-	if (pos == Equipement::ARMOR)
-		out_stream << "ArmorItemLabel";
-	if (pos == Equipement::WEAPON || pos == Equipement::WEAPON2)
-		out_stream << "WeaponItemLabel";
-	if (pos == Equipement::HELMET)
-		out_stream << "HelmetItemLabel";
-	if (pos == Equipement::SHIELD || pos == Equipement::SHIELD2)
-		out_stream << "ShieldItemLabel";
-	if (pos == Equipement::GLOVES)
-		out_stream << "GlovesItemLabel";
-	if (pos == Equipement::RING_LEFT)
-		out_stream << "RingLeftItemLabel";
-	if (pos == Equipement::RING_RIGHT)
-		out_stream << "RingRightItemLabel";
-	if (pos == Equipement::AMULET)
-		out_stream << "AmuletItemLabel";
-	if (pos>= Equipement::BIG_ITEMS && pos <  Equipement::MEDIUM_ITEMS)
-	{
-		out_stream << "BigItem"<<pos-Equipement::BIG_ITEMS<<"Label";
-	}
-	if (pos>= Equipement::MEDIUM_ITEMS && pos < Equipement::SMALL_ITEMS)
-	{
-		out_stream << "MediumItem"<<pos-Equipement::MEDIUM_ITEMS<<"Label";
-	}
-	if (pos>= Equipement::SMALL_ITEMS)
-	{
-		out_stream << "SmallItem"<<pos-Equipement::SMALL_ITEMS<<"Label";
-	}
-	label = win_mgr.getWindow(out_stream.str());
-
-	std::string msg;
-	
-	if (item ==0)
-	{
-		msg = "";
-	}
-	else
-	{
-		msg =item->getDescription();
-	}
-	label->setTooltipText(msg);
-
-	DEBUG5("Label: %s \ndescription: \n%s",out_stream.str().c_str(),msg.c_str());
-
-	if (pos>= Equipement::SMALL_ITEMS && pos< Equipement::SMALL_ITEMS+10)
-	{
-		// Item befindet sich im Guertel
-		out_stream.str("");
-		out_stream << "InventoryItem"<<pos-Equipement::SMALL_ITEMS;
-		label = win_mgr.getWindow(out_stream.str());
-		label->setTooltipText(msg);
-	}
-
-}
 
 std::string ItemWindow::getItemImage(Item::Subtype type)
 {
@@ -130,3 +69,58 @@ std::string ItemWindow::getItemImage(Item::Subtype type)
 	return "set: noMedia.png image: full_image";
 }
 
+
+void ItemWindow::updateItemWindow(CEGUI::Window* img, Item* item, Player* player, int gold)
+{
+	std::string imgname="";
+	if (item != 0)
+	{
+		imgname= getItemImage(item->m_subtype); 
+	}
+	
+	if (img->getProperty("Image")!=imgname)
+	{
+		img->setProperty("Image", imgname);
+	}
+	
+	std::string propold = img->getProperty("BackgroundColours").c_str();
+	std::string propnew = "tl:FF000000 tr:FF000000 bl:FF000000 br:FF000000";
+	if (item !=0)
+	{
+		// rot wenn Spieler Item nicht verwenden kann
+		// oder es bezahlen muss und nicht genug Geld hat
+		if (!player->checkItemRequirements(item))
+		{
+			propnew = "tl:FFAA5555 tr:FFAA5555 bl:FFAA5555 br:FFAA5555";
+		}
+		else if (gold>=0 && gold<item->m_price)
+		{
+			propnew = "tl:FFAA5555 tr:FFAA5555 bl:FFAA5555 br:FFAA5555";
+		}
+		else if (item->m_rarity == Item::MAGICAL)
+		{
+			propnew = "tl:FF5555AA tr:FF5555AA bl:FF5555AA br:FF5555AA";
+		}
+	}
+	
+	if (propold != propnew)
+	{
+		img->setProperty("BackgroundColours", propnew); 
+	}
+	
+}
+
+void ItemWindow::updateItemWindowTooltip(CEGUI::Window* img, Item* item, Player* player, int gold)
+{
+	std::string msg;
+	
+	if (item ==0)
+	{
+		msg = "";
+	}
+	else
+	{
+		msg =item->getDescription();
+	}
+	img->setTooltipText(msg);
+}

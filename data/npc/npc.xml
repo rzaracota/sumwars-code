@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 
 <NPC refname="peasant">
-	<Trade refresh_time="360000" price_factor="1.5">
+	<Trade refresh_time="600000" price_factor="1.5">
 		<TradeItem subtype="heal_1" number ="20" />
 		<TradeItem subtype="heal_2" number="15" />
 		<TradeItem subtype="hatch_axe"  number="1" number_magical="2" min_echant="100" max_enchant="500"/>

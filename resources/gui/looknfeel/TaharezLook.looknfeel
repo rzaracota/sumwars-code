@@ -2085,9 +2085,8 @@
                         </UnifiedDim>
                     </Dim>
                 </Area>
-                <Image imageset="TaharezLook" image="StaticBackdrop" />
-                <!--<ColourRectProperty name="BackgroundColours" />-->
-                <Colours topLeft="FFFFFFFF" topRight="FFFFFFFF" bottomLeft="FFFFFFFF" bottomRight="FFFFFFFF" />
+				<Image imageset="TaharezLook" image="MultiLineEditboxSelectionBrush" /> 
+	             <ColourRectProperty name="BackgroundColours" /> 
                 <VertFormat type="Stretched" />
                 <HorzFormat type="Stretched" />
             </ImageryComponent>
@@ -2100,9 +2099,8 @@
                     <Dim type="RightEdge"><UnifiedDim scale="1" type="RightEdge" /></Dim>
                     <Dim type="BottomEdge"><UnifiedDim scale="1" type="BottomEdge" /></Dim>
                 </Area>
-                <Image imageset="TaharezLook" image="StaticBackdrop" />
-                <!--<ColourRectProperty name="BackgroundColours" />-->
-                <Colours topLeft="FFFFFFFF" topRight="FFFFFFFF" bottomLeft="FFFFFFFF" bottomRight="FFFFFFFF" />
+				<Image imageset="TaharezLook" image="MultiLineEditboxSelectionBrush" /> 
+                 <ColourRectProperty name="BackgroundColours" /> 
                 <VertFormat type="Stretched" />
                 <HorzFormat type="Stretched" />
             </ImageryComponent>
@@ -2117,7 +2115,7 @@
     <WidgetLook name="TaharezLook/StaticImage">
 		<PropertyDefinition name="ImageColours" initialValue="tl:FFFFFFFF tr:FFFFFFFF bl:FFFFFFFF br:FFFFFFFF" redrawOnWrite="true" />
 		<PropertyDefinition name="FrameColours" initialValue="tl:FFFFFFFF tr:FFFFFFFF bl:FFFFFFFF br:FFFFFFFF" redrawOnWrite="true" />
-		<PropertyDefinition name="BackgroundColours" initialValue="tl:FFFFFFFF tr:FFFFFFFF bl:FFFFFFFF br:FFFFFFFF" redrawOnWrite="true" />
+		<PropertyDefinition name="BackgroundColours" initialValue="tl:FF000000 tr:FF000000 bl:FF000000 br:FF000000" redrawOnWrite="true" />
         <PropertyDefinition name="VertFormatting" initialValue="Stretched" redrawOnWrite="true" />
         <PropertyDefinition name="HorzFormatting" initialValue="Stretched" redrawOnWrite="true" />
         <Property name="BackgroundEnabled" value="True" />
@@ -2213,7 +2211,7 @@
     -->
     <WidgetLook name="TaharezLook/StaticText">
 		<PropertyDefinition name="FrameColours" initialValue="tl:FFFFFFFF tr:FFFFFFFF bl:FFFFFFFF br:FFFFFFFF" redrawOnWrite="true" />
-		<PropertyDefinition name="BackgroundColours" initialValue="tl:FFFFFFFF tr:FFFFFFFF bl:FFFFFFFF br:FFFFFFFF" redrawOnWrite="true" />
+		<PropertyDefinition name="BackgroundColours" initialValue="tl:FF000000 tr:FF000000 bl:FF000000 br:FF000000" redrawOnWrite="true" />
         <Property name="FrameEnabled" value="True" />
         <Property name="BackgroundEnabled" value="True" />
         <NamedArea name="WithFrameTextRenderArea">

@@ -43,12 +43,26 @@ class ItemWindow : public Window
 		
 	protected:
 		
+		
 		/**
-		 * \fn void updateItemTooltip(unsigned int pos)
-		 * \brief Aktualisiert den Tooltip fuer das Item ueber dem die Maus ist
-		 * \param pos Nummer des zu aktualisierenden Items
+		 * \fn void updateItemWindowTooltip(CEGUI::Window* img, Item* item, Player* player, int gold=-1)
+		 * \brief aktualisiert den Tooltip eines Items
+		 * \param img CEGUI Fenster
+		 * \param item Item das dargestellt werden soll
+		 * \param player Spieler der das Item besitzt (bei Haendlern der Handelnde Spieler)
+		 * \param gold Wenn nicht auf -1 gesetzt, wird geprueft, ob der Spieler sich das Item leisten kann
 		 */
-		void updateItemTooltip(unsigned int pos);
+		void updateItemWindowTooltip(CEGUI::Window* img, Item* item, Player* player, int gold=-1);
+		
+		/**
+		 * \fn void updateItemWindow(CEGUI::Window* img, Item* item, Player* player, int gold=-1)
+		 * \brief aktualisiert das Bild eines Items
+		 * \param img CEGUI Fenster
+		 * \param item Item das dargestellt werden soll
+		 * \param player Spieler der das Item besitzt (bei Haendlern der Handelnde Spieler)
+		 * \param gold Wenn nicht auf -1 gesetzt, wird geprueft, ob der Spieler sich das Item leisten kann
+		 */
+		void updateItemWindow(CEGUI::Window* img, Item* item, Player* player, int gold=-1);
 		
 		/**
 		 * \fn bool onItemHover(const CEGUI::EventArgs& evt)

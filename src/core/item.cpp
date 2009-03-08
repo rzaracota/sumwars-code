@@ -547,7 +547,7 @@ void Item::calcPrice()
 
 	}
 
-	value = 0.5*(1+0.1*value)*value* mult;
+	value = (2+0.5*(1+0.1*value)*value)* mult;
 
 	value = std::min (value,100000.0f);
 	m_price = (int) value;

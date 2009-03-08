@@ -42,6 +42,7 @@ Inventory::Inventory (Document* doc)
 		label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonPressed, (ItemWindow*) this));
 		label->subscribeEvent(CEGUI::Window::EventMouseButtonUp, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonReleased, (ItemWindow*) this));
 		label->subscribeEvent(CEGUI::Window::EventMouseEnters, CEGUI::Event::Subscriber(&Inventory::onItemHover, (ItemWindow*) this));
+		label->setWantsMultiClickEvents(false);
 	}
 
 	// Label fuer mittlere Items
@@ -61,6 +62,7 @@ Inventory::Inventory (Document* doc)
 			label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonPressed, (ItemWindow*) this));
 			label->subscribeEvent(CEGUI::Window::EventMouseButtonUp, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonReleased, (ItemWindow*) this));
 			label->subscribeEvent(CEGUI::Window::EventMouseEnters, CEGUI::Event::Subscriber(&Inventory::onItemHover, (ItemWindow*) this));
+			label->setWantsMultiClickEvents(false);
 		}
 	}
 	// Label fuer kleine Items
@@ -80,6 +82,7 @@ Inventory::Inventory (Document* doc)
 			label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonPressed, (ItemWindow*) this));
 			label->subscribeEvent(CEGUI::Window::EventMouseButtonUp, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonReleased, (ItemWindow*) this));
 			label->subscribeEvent(CEGUI::Window::EventMouseEnters, CEGUI::Event::Subscriber(&Inventory::onItemHover, (ItemWindow*) this));
+			label->setWantsMultiClickEvents(false);
 		}
 	}
 
@@ -94,7 +97,7 @@ Inventory::Inventory (Document* doc)
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonPressed, (ItemWindow*) this));
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonUp, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonReleased, (ItemWindow*) this));
 	label->subscribeEvent(CEGUI::Window::EventMouseEnters, CEGUI::Event::Subscriber(&Inventory::onItemHover, (ItemWindow*) this));
-
+	label->setWantsMultiClickEvents(false);
 
 
 	// Label Waffe
@@ -108,7 +111,8 @@ Inventory::Inventory (Document* doc)
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonPressed, (ItemWindow*) this));
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonUp, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonReleased, (ItemWindow*) this));
 	label->subscribeEvent(CEGUI::Window::EventMouseEnters, CEGUI::Event::Subscriber(&Inventory::onItemHover, (ItemWindow*) this));
-
+	label->setWantsMultiClickEvents(false);
+	
 	// Label Helm
 	label = win_mgr.createWindow("TaharezLook/StaticImage", "HelmetItemLabel");
 	inventory->addChildWindow(label);
@@ -120,7 +124,8 @@ Inventory::Inventory (Document* doc)
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonPressed, (ItemWindow*) this));
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonUp, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonReleased, (ItemWindow*) this));
 	label->subscribeEvent(CEGUI::Window::EventMouseEnters, CEGUI::Event::Subscriber(&Inventory::onItemHover, (ItemWindow*) this));
-
+	label->setWantsMultiClickEvents(false);
+	
 	// Label Schild
 	label = win_mgr.createWindow("TaharezLook/StaticImage", "ShieldItemLabel");
 	inventory->addChildWindow(label);
@@ -132,7 +137,8 @@ Inventory::Inventory (Document* doc)
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonPressed, (ItemWindow*) this));
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonUp, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonReleased, (ItemWindow*) this));
 	label->subscribeEvent(CEGUI::Window::EventMouseEnters, CEGUI::Event::Subscriber(&Inventory::onItemHover, (ItemWindow*) this));
-
+	label->setWantsMultiClickEvents(false);
+	
 	// Label Handschuhe
 	label = win_mgr.createWindow("TaharezLook/StaticImage", "GlovesItemLabel");
 	inventory->addChildWindow(label);
@@ -144,7 +150,8 @@ Inventory::Inventory (Document* doc)
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonPressed, (ItemWindow*)this));
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonUp, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonReleased, (ItemWindow*)this));
 	label->subscribeEvent(CEGUI::Window::EventMouseEnters, CEGUI::Event::Subscriber(&Inventory::onItemHover, (ItemWindow*)this));
-
+	label->setWantsMultiClickEvents(false);
+	
 	// Ring links
 	label = win_mgr.createWindow("TaharezLook/StaticImage", "RingLeftItemLabel");
 	inventory->addChildWindow(label);
@@ -156,7 +163,8 @@ Inventory::Inventory (Document* doc)
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonPressed, (ItemWindow*)this));
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonUp, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonReleased, (ItemWindow*)this));
 	label->subscribeEvent(CEGUI::Window::EventMouseEnters, CEGUI::Event::Subscriber(&Inventory::onItemHover, (ItemWindow*)this));
-
+	label->setWantsMultiClickEvents(false);
+	
 	// Ring rechts
 	label = win_mgr.createWindow("TaharezLook/StaticImage", "RingRightItemLabel");
 	inventory->addChildWindow(label);
@@ -168,7 +176,8 @@ Inventory::Inventory (Document* doc)
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonPressed, (ItemWindow*)this));
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonUp, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonReleased, (ItemWindow*)this));
 	label->subscribeEvent(CEGUI::Window::EventMouseEnters, CEGUI::Event::Subscriber(&Inventory::onItemHover, (ItemWindow*)this));
-
+	label->setWantsMultiClickEvents(false);
+	
 	// Amulett
 	label = win_mgr.createWindow("TaharezLook/StaticImage", "AmuletItemLabel");
 	inventory->addChildWindow(label);
@@ -180,7 +189,8 @@ Inventory::Inventory (Document* doc)
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonPressed, (ItemWindow*)this));
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonUp, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonReleased, (ItemWindow*)this));
 	label->subscribeEvent(CEGUI::Window::EventMouseEnters, CEGUI::Event::Subscriber(&Inventory::onItemHover, (ItemWindow*)this));
-
+	label->setWantsMultiClickEvents(false);
+	
 	// Button Ausruestung umschalten
 	btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", "SwapEquipButton"));
 	inventory->addChildWindow(btn);
@@ -215,113 +225,60 @@ void Inventory::update()
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::Window* img;
 	CEGUI::Window* label;
+	Item* it;
 	
 	std::ostringstream out_stream;
 
 	Player* player = m_document->getLocalPlayer();
+	Equipement* equ = player->getEquipement();
 
 
 	// Label Waffe
-	out_stream.str("");
-	if (player->getWeapon()!=0)
-	{
-		out_stream << getItemImage(player->getWeapon()->m_subtype);
-	}
+	// Label Schild
 	img =  win_mgr.getWindow("WeaponItemLabel");
-	if (img->getProperty("Image")!=out_stream.str())
-	{
-		img->setProperty("Image", out_stream.str());
-	}
+	it = player->getWeapon();
+	updateItemWindow(img,it,player);
 
 
 
 	// Label Ruestung
-	out_stream.str("");
-	Equipement* equ = player->getEquipement();
-	if (equ->getItem(Equipement::ARMOR)!=0)
-	{
-		out_stream << getItemImage(equ->getItem(Equipement::ARMOR)->m_subtype);
-	}
 	img =  win_mgr.getWindow("ArmorItemLabel");
-	if (img->getProperty("Image")!=out_stream.str())
-	{
-		img->setProperty("Image", out_stream.str());
-	}
+	it = equ->getItem(Equipement::ARMOR);
+	updateItemWindow(img,it,player);
 
 	// Label Helm
-	out_stream.str("");
-	if (equ->getItem(Equipement::HELMET)!=0)
-	{
-		out_stream << getItemImage(equ->getItem(Equipement::HELMET)->m_subtype);
-	}
 	img =  win_mgr.getWindow("HelmetItemLabel");
-	if (img->getProperty("Image")!=out_stream.str())
-	{
-		img->setProperty("Image", out_stream.str());
-	}
+	it = equ->getItem(Equipement::HELMET);
+	updateItemWindow(img,it,player);
 
 	// Label Schild
-	out_stream.str("");
-	if (player->getShield()!=0)
-	{
-		out_stream << getItemImage(player->getShield()->m_subtype);
-	}
 	img =  win_mgr.getWindow("ShieldItemLabel");
-	if (img->getProperty("Image")!=out_stream.str())
-	{
-		img->setProperty("Image", out_stream.str());
-	}
+	it = player->getShield();
+	updateItemWindow(img,it,player);
 
 	// Label Handschuhe
-	out_stream.str("");
-	if (equ->getItem(Equipement::GLOVES)!=0)
-	{
-		out_stream << getItemImage(equ->getItem(Equipement::GLOVES)->m_subtype);
-	}
 	img =  win_mgr.getWindow("GlovesItemLabel");
-	if (img->getProperty("Image")!=out_stream.str())
-	{
-		img->setProperty("Image", out_stream.str());
-	}
+	it = equ->getItem(Equipement::GLOVES);
+	updateItemWindow(img,it,player);
 
 	// Label Ring links
-	out_stream.str("");
-	if (equ->getItem(Equipement::RING_LEFT)!=0)
-	{
-		out_stream << getItemImage(equ->getItem(Equipement::RING_LEFT)->m_subtype);
-	}
 	img =  win_mgr.getWindow("RingLeftItemLabel");
-	if (img->getProperty("Image")!=out_stream.str())
-	{
-		img->setProperty("Image", out_stream.str());
-	}
+	it = equ->getItem(Equipement::RING_LEFT);
+	updateItemWindow(img,it,player);
 
 	// Label Ring rechts
-	out_stream.str("");
-	if (equ->getItem(Equipement::RING_RIGHT)!=0)
-	{
-		out_stream << getItemImage(equ->getItem(Equipement::RING_RIGHT)->m_subtype);
-	}
 	img =  win_mgr.getWindow("RingRightItemLabel");
-	if (img->getProperty("Image")!=out_stream.str())
-	{
-		img->setProperty("Image", out_stream.str());
-	}
+	it = equ->getItem(Equipement::RING_RIGHT);
+	updateItemWindow(img,it,player);
+	
 
 	// Label Amulet
-	out_stream.str("");
-	if (equ->getItem(Equipement::AMULET)!=0)
-	{
-		out_stream << getItemImage(equ->getItem(Equipement::AMULET)->m_subtype);
-	}
 	img =  win_mgr.getWindow("AmuletItemLabel");
-	if (img->getProperty("Image")!=out_stream.str())
-	{
-		img->setProperty("Image", out_stream.str());
-	}
+	it = equ->getItem(Equipement::AMULET);
+	updateItemWindow(img,it,player);
 
 	int i;
-	Item* it;
+	
 	// Inventar: grosse Items
 	for (i=0;i<5;i++)
 	{
@@ -329,15 +286,7 @@ void Inventory::update()
 		out_stream << "BigItem" << i<< "Label";
 		img =  win_mgr.getWindow(out_stream.str().c_str());
 		it = equ->getItem(Equipement::BIG_ITEMS+i);
-		out_stream.str("");
-		if (it!=0)
-		{
-			out_stream<< getItemImage(it->m_subtype);
-		}
-		if (img->getProperty("Image")!=out_stream.str())
-		{
-			img->setProperty("Image", out_stream.str());
-		}
+		updateItemWindow(img,it,player);
 	}
 
 	// Inventar: mittlere Items
@@ -347,15 +296,7 @@ void Inventory::update()
 		out_stream << "MediumItem" << i<< "Label";
 		img =  win_mgr.getWindow(out_stream.str().c_str());
 		it = equ->getItem(Equipement::MEDIUM_ITEMS+i);
-		out_stream.str("");
-		if (it!=0)
-		{
-			out_stream<< getItemImage(it->m_subtype);
-		}
-		if (img->getProperty("Image")!=out_stream.str())
-		{
-			img->setProperty("Image", out_stream.str());
-		}
+		updateItemWindow(img,it,player);
 	}
 
 	// Inventar: kleine Items
@@ -365,15 +306,7 @@ void Inventory::update()
 		out_stream << "SmallItem" << i<< "Label";
 		img =  win_mgr.getWindow(out_stream.str().c_str());
 		it = equ->getItem(Equipement::SMALL_ITEMS+i);
-		out_stream.str("");
-		if (it!=0)
-		{
-			out_stream<< getItemImage(it->m_subtype);
-		}
-		if (img->getProperty("Image")!=out_stream.str())
-		{
-			img->setProperty("Image", out_stream.str());
-		}
+		updateItemWindow(img,it,player);
 	}
 	
 	label =  win_mgr.getWindow("GoldValueLabel");
