@@ -29,6 +29,19 @@ struct DropSlot
 	int m_max_level;
 	
 	/**
+	 * \var int m_min_gold
+	 * \brief Anzahl Gold die mindestens droppt, wenn Gold ausgewuerfelt wurde
+	 */
+	int m_min_gold;
+	
+	/**
+	 * \var int m_max_gold
+	 * \brief Anzahl Gold die maximal droppt, wenn Gold ausgewuerfelt wurde
+	 */
+	int m_max_gold;
+
+	
+	/**
 	 * \var float m_magic_probability
 	 * \brief Chance, das der Gegenstand magisch wird
 	 */

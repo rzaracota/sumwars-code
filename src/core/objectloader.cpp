@@ -1161,6 +1161,8 @@ bool  ObjectLoader::loadMonster(TiXmlNode* node)
 						
 						attr.getInt("min_level",data->m_drop_slots[nr].m_min_level,0);
 						attr.getInt("max_level",data->m_drop_slots[nr].m_max_level,0);
+						attr.getInt("min_gold",data->m_drop_slots[nr].m_min_gold,1);
+						attr.getInt("max_gold",data->m_drop_slots[nr].m_max_gold,1);
 						attr.getFloat("magic_prob",data->m_drop_slots[nr].m_magic_probability,0);
 						attr.getFloat("magic_power",data->m_drop_slots[nr].m_magic_power,0);
 						
