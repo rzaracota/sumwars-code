@@ -57,8 +57,12 @@
 			<Exit name="exit_south" destination_region="region1" destination_location="entry_north" >
 				<Shape shape="RECT" extent_x="4.0" extent_y ="4.0" />
 			</Exit>
+			
+<!--			<Exit name="exit_south" destination_region="testregion" destination_location="entry_north" >
+				<Shape shape="RECT" extent_x="4.0" extent_y ="4.0" />
+			</Exit>
+			-->
 		</Exits>
-		
 		<Environments>
 			<Environment height="0.6" name="meadow" />
 			<Environment height="1.0" name="hills" />
@@ -187,12 +191,26 @@
 		-->
 	</Region>
 	
-	<Region id="100" name="testregion">
+	<Region id="1000" name="testregion">
 		
-		<Settings dimx="32" dimy="32" area_percent="0.35" complexity="0.4" granularity="8" />
+		<Settings dimx="8" dimy="8" region_template="test_region_templ" />
+		
+		<Exits>
+			<Exit name="exit_north" destination_region="region0" destination_location="entry_south" >
+				<Shape shape="RECT" extent_x="4.0" extent_y ="4.0" />
+			</Exit>
+		</Exits>
+		
 		<Environments>
 			<Environment height="0.2" name="meadow" />
 		</Environments>
+		
+		<Event trigger ="create_region" once = "true">
+			<Effect>
+				createObject("$tree", "treeloc");
+			</Effect>
+		</Event>
+		
 	</Region>	
 	
 	<Region id="1" name="region1">

@@ -127,18 +127,37 @@
 
 </ObjectGroupTemplate>
 
-<ObjectGroupTemplate name = "test_region" >
+
+<ObjectGroupTemplate name = "test_region_templ" >
 	<Shape
 		  type = "RECT"
-		  extent_x = "4.0"
-		  extent_y = "4.0"
+		  extent_x = "16.0"
+		  extent_y = "16.0"
 		  angle ="0"
 		/>
 	<ObjectContent>
+		
+		<Object subtype="$tree"
+				center_x="4"
+				center_y="-8"
+				angle = "0"
+				probability ="1"
+				prob_angle = "false"
+				/>
+		
+		<Object subtype="$tree"
+				center_x="-4"
+				center_y="-8"
+				angle = "0"
+				probability ="1"
+				prob_angle = "false"
+			/>
 	</ObjectContent>
 	
 	<Locations>
-		<Location name = "string" pos_x="float" pos_y="float" />
+		<Location name = "exit_north" pos_x="0" pos_y="-12" />
+		<Location name = "entry_north" pos_x="0" pos_y="-4" />
+		<Location name = "treeloc" pos_x="0" pos_y="8" />
 	</Locations>
 	
 </ObjectGroupTemplate>

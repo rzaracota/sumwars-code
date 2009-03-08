@@ -17,15 +17,49 @@ Region* MapGenerator::createRegion(RegionData* rdata)
 	{
 		// Speicher anfordern
 		MapGenerator::createMapData(&mdata,rdata);
+		
 
 		// grundlegende Karte anfertigen
-		MapGenerator::createBaseMap(&mdata,rdata);
+		if (rdata->m_region_template =="")
+		{
+			MapGenerator::createBaseMap(&mdata,rdata);
+		}
+		
+		// Umgebungen in die Region einfuegen
+		std::list<std::pair<float, EnvironmentName> >::iterator et;
+		for (et = rdata->m_environments.begin(); et != rdata->m_environments.end(); ++et)
+		{
+			mdata.m_region->insertEnvironment(et->first,et->second);
+		}
+		
+		// Umgebungskarte generieren
+		createPerlinNoise(mdata.m_region->getHeight(), rdata->m_dimx, rdata->m_dimy,4 , 0.4,false);
 
-		// ermitteln wo die Objektgruppen platziert werden koennen
-		MapGenerator::createTemplateMap(&mdata,rdata);
+		if (rdata->m_region_template =="")
+		{
+			// ermitteln wo die Objektgruppen platziert werden koennen
+			MapGenerator::createTemplateMap(&mdata,rdata);
+	
+			// Objektgruppen platzieren
+			success = MapGenerator::insertGroupTemplates(&mdata,rdata);
+		}
+		else
+		{
+			DEBUG("region template %s",rdata->m_region_template.c_str());
+			// Region besteht aus einer einzelnen Objektgruppe
+			// Objektgruppe anhand des Namens suchen
+			ObjectGroupTemplate* templ;
+			templ = ObjectFactory::getObjectGroupTemplate(rdata->m_region_template);
+			if (templ ==0)
+			{
+				ERRORMSG("unknown object group %s",rdata->m_region_template.c_str());
+				continue;
+			}
 
-		// Objektgruppen platzieren
-		success = MapGenerator::insertGroupTemplates(&mdata,rdata);
+			Vector pos = templ->getShape()->getAxisExtent();
+			mdata.m_region->createObjectGroup(rdata->m_region_template,pos,0);
+			success = true;
+		}
 		
 		// Events kopieren
 		std::multimap<TriggerType, Event*>::iterator it;
@@ -51,14 +85,20 @@ Region* MapGenerator::createRegion(RegionData* rdata)
 		}
 	}
 
-	// Berandungen einfuegen
-	MapGenerator::createBorder(&mdata,rdata);
-
+	if (rdata->m_region_template =="")
+	{
+		// Berandungen einfuegen
+		MapGenerator::createBorder(&mdata,rdata);
+	}
+	
 	// Ausgaenge erzeugen
 	MapGenerator::createExits(&mdata,rdata);
-
-	// Monster einfuegen
-	MapGenerator::insertSpawnpoints(&mdata,rdata);
+	
+	if (rdata->m_region_template =="")
+	{
+		// Monster einfuegen
+		MapGenerator::insertSpawnpoints(&mdata,rdata);
+	}
 
 	// Speicher freigeben
 	delete mdata.m_base_map;
@@ -81,13 +121,7 @@ void MapGenerator::createMapData(MapData* mdata, RegionData* rdata)
 void MapGenerator::createBaseMap(MapData* mdata, RegionData* rdata)
 {
 
-	// Umgebungen in die Region einfuegen
-
-	std::list<std::pair<float, EnvironmentName> >::iterator et;
-	for (et = rdata->m_environments.begin(); et != rdata->m_environments.end(); ++et)
-	{
-		mdata->m_region->insertEnvironment(et->first,et->second);
-	}
+	
 
 	float size = rdata->m_area_percent;
 
@@ -275,8 +309,7 @@ void MapGenerator::createBaseMap(MapData* mdata, RegionData* rdata)
 		}
 	}
 
-	// Umgebungskarte generieren
-	createPerlinNoise(mdata->m_region->getHeight(), rdata->m_dimx, rdata->m_dimy,4 , 0.4,false);
+	
 
 	delete hmap;
 }
@@ -714,8 +747,11 @@ void MapGenerator::createExits(MapData* mdata, RegionData* rdata)
 		mdata->m_region->addExit(*it);
 
 		// Bei den Ausgaengen keine Monster
-		pos = mdata->m_region->getLocation(it->m_exit_name);
-		*(mdata->m_base_map->ind(int(pos.m_x/8), int(pos.m_y/8))) = 2;
+		if (rdata->m_region_template =="")
+		{
+			pos = mdata->m_region->getLocation(it->m_exit_name);
+			*(mdata->m_base_map->ind(int(pos.m_x/8), int(pos.m_y/8))) = 2;
+		}
 
 	}
 }
