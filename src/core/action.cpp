@@ -18,7 +18,7 @@ void Action::init()
 	a->m_critical_perc=-1;
 	a->m_distance = SELF;
 	a->m_flags =0;
-	a->m_name = "keine Aktion";
+	a->m_name = "no action";
 	a->m_req_level = 0;
 	a->m_req_ability[0]= Action::NOACTION;
 	a->m_req_ability[1] = Action::NOACTION;

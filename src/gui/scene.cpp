@@ -99,41 +99,6 @@ void Scene::loadItemData(std::string file)
 	itemloader = 0;
 }
 
-void Scene::loadMonsterData(std::string file)
-{
-	// Monster Meshes aus XML-Datei Laden
-	ObjectLoader* objectloader = 0;
-	objectloader = new ObjectLoader;
-
-	std::list<MonsterMeshData*>* monster_mesh_list;
-	monster_mesh_list = objectloader->loadMonsterMeshData(file.c_str());
-
-	if (monster_mesh_list != 0)
-	{
-		// Daten auslesen und registrieren
-		std::list<MonsterMeshData*>::iterator iter = monster_mesh_list->begin();
-		while (iter != monster_mesh_list->end())
-		{
-			registerObject((*iter)->m_subtype, (*iter)->m_mesh, "");
-			registerObjectAnimations((*iter)->m_subtype,(*iter)->m_animations); 
-			*iter++;
-		}
-
-		// Liste aus Speicher loeschen
-		iter = monster_mesh_list->begin();
-		while (iter != monster_mesh_list->end())
-		{
-			delete *iter;
-			*iter++;
-		}
-	}
-
-	delete monster_mesh_list;
-	monster_mesh_list = 0;
-	delete objectloader;
-	objectloader = 0;
-}
-
 void Scene::loadFixedObjectData(std::string file)
 {
 	// FixedObject Meshes aus XML-Datei Laden

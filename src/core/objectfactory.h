@@ -281,12 +281,6 @@ class ObjectFactory
 	static WorldObject::TypeInfo::ObjectType getObjectBaseType(WorldObject::TypeInfo::ObjectSubtype subtype);
 	
 	/**
-	 * \fn Laedt die Daten zu Monstern aus der Datei
-	 * \param file Monster XML Datei
-	 */
-	static void loadMonsterData(std::string file);
-	
-	/**
 	 * \fn static void loadFixedObjectData(std::string file)
 	 * \brief Laedt Daten zu festen Objekten aus der Datei
 	 * \param file Objekte XML Datei

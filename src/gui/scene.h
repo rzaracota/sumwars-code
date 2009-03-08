@@ -154,11 +154,6 @@ class Scene
 	 */
 	static void loadItemData(std::string file);
 	
-	/**
-	 * \fn static void loadMonsterData(std::string file)
-	 * \brief Laedt die Informationen zum Darstellen der Monster
-	 */
-	static void loadMonsterData(std::string file);
 	
 	/**
 	 * \fn static void loadFixedObjectData(std::string file)
