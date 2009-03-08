@@ -1165,6 +1165,17 @@ void MainWindow::updateItemInfo()
 					label->setText(name);
 				}
 				
+				std::string propold = label->getProperty("TextColours").c_str();
+				std::string propnew = "tl:FFFFFFFF tr:FFFFFFFF bl:FFFFFFFF br:FFFFFFFF";
+				if (itm->m_rarity == Item::MAGICAL)
+				{
+					propnew = "tl:FF5555AA tr:FF5555AA bl:FF5555AA br:FF5555AA";
+				}
+				if (propold != propnew)
+				{
+					label->setProperty("TextColours", propnew); 
+				}
+				
 				
 				std::pair<float,float> rpos = m_scene->getProjection(Vector(mix,miy));
 				label->setPosition(CEGUI::UVector2(CEGUI::UDim(std::max(0.0,rpos.first-0.03),0), CEGUI::UDim(std::max(0.0,rpos.second-0.05),0)));
@@ -1266,6 +1277,8 @@ void MainWindow::updateItemInfo()
 		// Begrenzung fuer den Schriftzug
 		float lbound=0,rbound =1;
 		int app;
+		
+		std::string propnew, propold;
 		
 		Vector tpos,pos;
 		for (it = itms->begin();it != itms->end();++it)
@@ -1473,6 +1486,17 @@ void MainWindow::updateItemInfo()
 			
 			
 			label->setPosition(CEGUI::UVector2(CEGUI::UDim(std::max(0.0f,rpos.first),0), CEGUI::UDim(std::max(0.0f,rpos.second),0)));
+			
+			propold = label->getProperty("TextColours").c_str();
+			propnew = "tl:FFFFFFFF tr:FFFFFFFF bl:FFFFFFFF br:FFFFFFFF";
+			if (di->m_item->m_rarity == Item::MAGICAL)
+			{
+				propnew = "tl:FF5555AA tr:FF5555AA bl:FF5555AA br:FF5555AA";
+			}
+			if (propold != propnew)
+			{
+				label->setProperty("TextColours", propnew); 
+			}
 			nr++;
 
 		}
