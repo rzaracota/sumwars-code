@@ -99,40 +99,6 @@ void Scene::loadItemData(std::string file)
 	itemloader = 0;
 }
 
-void Scene::loadFixedObjectData(std::string file)
-{
-	// FixedObject Meshes aus XML-Datei Laden
-	ObjectLoader* objectloader = 0;
-	objectloader = new ObjectLoader;
-
-	std::list<FixedObjectMeshData*>* fixed_object_mesh_list;
-	fixed_object_mesh_list = objectloader->loadFixedObjectMeshData(file.c_str());
-
-	if (fixed_object_mesh_list != 0)
-	{
-		// Daten auslesen und registrieren
-		std::list<FixedObjectMeshData*>::iterator iter = fixed_object_mesh_list->begin();
-		while (iter != fixed_object_mesh_list->end())
-		{
-			registerObject((*iter)->m_subtype, (*iter)->m_mesh, "");
-			*iter++;
-		}
-
-		// Liste aus Speicher loeschen
-		iter = fixed_object_mesh_list->begin();
-		while (iter != fixed_object_mesh_list->end())
-		{
-			delete *iter;
-			*iter++;
-		}
-	}
-
-	delete fixed_object_mesh_list;
-	fixed_object_mesh_list = 0;
-	delete objectloader;
-	objectloader = 0;
-}
-
 
 void Scene::registerMeshes()
 {

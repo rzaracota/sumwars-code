@@ -596,8 +596,7 @@ bool Application::loadResources()
 		file += "/";
 		file += it->filename;
 		
-		ObjectFactory::loadFixedObjectData(file);
-		Scene::loadFixedObjectData(file);
+		ObjectLoader::loadFixedObjectData(file.c_str());
 		
 		updateStartScreen(0.5);
 	}

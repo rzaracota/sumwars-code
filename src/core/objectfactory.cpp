@@ -233,39 +233,6 @@ void ObjectFactory::registerMonsterGroup(MonsterGroupName name, MonsterGroup* da
 }
 
 
-
-
-void ObjectFactory::loadFixedObjectData(std::string file)
-{
-	// Daten fuer feste Objekte
-	ObjectLoader* objectloader = 0;
-	objectloader = new ObjectLoader;
-	std::list<FixedObjectData*>* object_list = 0;
-	std::list<std::string>* subtype_list = 0;
-	
-	objectloader->loadFixedObjectData(file.c_str(), object_list, subtype_list);
-
-	if (object_list != 0)
-	{
-		std::list<FixedObjectData*>::iterator iter = object_list->begin();
-		std::list<std::string>::iterator itersub = subtype_list->begin();
-		
-		while (iter != object_list->end() && itersub != subtype_list->end())
-		{
-			registerFixedObject(*itersub,*iter);
-			*iter++;
-			*itersub++;
-		}
-	}
-
-	delete object_list;
-	object_list = 0;
-	delete subtype_list;
-	subtype_list = 0;
-	delete objectloader;
-	objectloader = 0;
-}
-
 void ObjectFactory::loadObjectTemplates(std::string file)
 {
 	// ObjectTemplates aus XML Laden

@@ -6,272 +6,7 @@
 #include "monster.h"
 #include "objectfactory.h"
 #include "objectloader.h"
-
-
-//##############################################################################
-
-int ObjectLoader::generateFixedObjectData(TiXmlElement* pElement, string element, std::list<FixedObjectData*>* object_list, std::list<string>* subtype_list)
-{
-	if ( !pElement ) return 0;
-
-	TiXmlAttribute* pAttrib=pElement->FirstAttribute();
-	int i=0;
-	double dval;
-
-	if (element == "Object" && pAttrib)
-	{
-		if (m_object_data == 0)
-		{
-			m_object_data = new FixedObjectData;
-		}
-
-		while (element == "Object" && pAttrib)
-		{
-			if (!strcmp(pAttrib->Name(), "subtype"))
-				m_subtype = pAttrib->Value();
-
-			i++;
-			pAttrib=pAttrib->Next();
-		}
-	}
-	
-	if (element == "Layer" && pAttrib)
-	{
-		while (element == "Layer" && pAttrib)
-		{
-			if (!strcmp(pAttrib->Name(), "layer"))
-			{
-				if (!strcmp(pAttrib->Value(), "NORMAL"))
-					m_object_data->m_layer = WorldObject::LAYER_BASE | WorldObject::LAYER_AIR;
-				else if (!strcmp(pAttrib->Value(), "BASE"))
-					m_object_data->m_layer = WorldObject::LAYER_BASE;
-				else if (!strcmp(pAttrib->Value(), "AIR"))
-					m_object_data->m_layer = WorldObject::LAYER_AIR;
-			}
-
-			i++;
-			pAttrib=pAttrib->Next();
-		}
-	}
-	
-	if (element == "Geometry" && pAttrib)
-	{
-		while (element == "Geometry" && pAttrib)
-		{
-			if (!strcmp(pAttrib->Name(), "shape"))
-			{
-				if (!strcmp(pAttrib->Value(), "RECT"))
-					m_object_data->m_shape.m_type = Shape::RECT;
-				else if (!strcmp(pAttrib->Value(), "CIRCLE"))
-					m_object_data->m_shape.m_type = Shape::CIRCLE;
-			}
-			else if (!strcmp(pAttrib->Name(), "extent_x") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
-				m_extent[0] = static_cast<float>(dval);
-			else if (!strcmp(pAttrib->Name(), "extent_y") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
-				m_extent[1] = static_cast<float>(dval);
-			else if (!strcmp(pAttrib->Name(), "radius") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
-				m_radius = static_cast<float>(dval);
-
-			i++;
-			pAttrib=pAttrib->Next();
-		}
-	}
-
-	return i;
-}
-
-
-void ObjectLoader::searchFixedObjectData(TiXmlNode* pParent, std::list<FixedObjectData*>* object_list, std::list<string>* subtype_list)
-{
-	if ( !pParent ) return;
-
-	TiXmlNode* pChild;
-//	TiXmlText* pText;
-
-	int t = pParent->Type();
-	int num;
-
-	switch ( t )
-	{
-	case TiXmlNode::ELEMENT:
-		//printf( "Element [%s]", pParent->Value() );
-		num = generateFixedObjectData(pParent->ToElement(), pParent->Value(), object_list, subtype_list);
-		/*switch(num)
-		{
-			case 0:  printf( " (No attributes)"); break;
-			case 1:  printf( "%s1 attribute", getIndentAlt(indent)); break;
-			default: printf( "%s%d attributes", getIndentAlt(indent), num); break;
-		}*/
-		break;
-	/*
-	case TiXmlNode::TEXT:
-		pText = pParent->ToText();
-		printf( "Text: [%s]", pText->Value() );
-		break;
-	*/
-	default:
-		break;
-	}
-
-	for ( pChild = pParent->FirstChild(); pChild != 0; pChild = pChild->NextSibling())
-	{
-		searchFixedObjectData(pChild, object_list, subtype_list);
-
-		if ( !strcmp(pChild->Value(), "Object") && pChild->Type() == TiXmlNode::ELEMENT)
-		{
-			if (m_object_data->m_shape.m_type == Shape::RECT)
-			{
-				m_object_data->m_shape.m_extent = Vector(m_extent[0],m_extent[1]);
-				m_object_data->m_shape.m_extent = Vector(m_extent[0],m_extent[1]);
-			}
-			else if (m_object_data->m_shape.m_type == Shape::CIRCLE)
-			{
-				m_object_data->m_shape.m_radius = m_radius;
-			}
-			object_list->push_back(m_object_data);
-			subtype_list->push_back(m_subtype);
-			m_object_data = 0;
-			DEBUG5("Object loaded");
-		}
-	}
-}
-
-
-bool ObjectLoader::loadFixedObjectData(const char* pFilename, std::list<FixedObjectData*>* &object_list, std::list<string>* &subtype_list)
-{
-	m_object_data = 0;
-	
-	object_list = new std::list<FixedObjectData*>;
-	subtype_list = new std::list<std::string>;
-
-	TiXmlDocument doc(pFilename);
-	bool loadOkay = doc.LoadFile();
-
-	if (loadOkay)
-	{
-		DEBUG5("Loading %s", pFilename);
-		searchFixedObjectData(&doc, object_list, subtype_list);
-		DEBUG5("Loading %s finished", pFilename);
-		//return m_object_list;
-		return true;
-	}
-	else
-	{
-		DEBUG("Failed to load file %s", pFilename);
-		return false;
-	}
-}
-
-//##############################################################################
-
-int ObjectLoader::generateFixedObjectMeshData(TiXmlElement* pElement, string element)
-{
-	if ( !pElement ) return 0;
-
-	TiXmlAttribute* pAttrib=pElement->FirstAttribute();
-	int i=0;
-
-	if (element == "Object" && pAttrib)
-	{
-		if (m_fixed_object_mesh_data == 0)
-		{
-			m_fixed_object_mesh_data = new FixedObjectMeshData;
-		}
-
-		while (element == "Object" && pAttrib)
-		{
-			if (!strcmp(pAttrib->Name(), "subtype"))
-				m_fixed_object_mesh_data->m_subtype = pAttrib->Value();
-
-			i++;
-			pAttrib=pAttrib->Next();
-		}
-	}
-
-	if (element == "Mesh" && pAttrib)
-	{
-		while (element == "Mesh" && pAttrib)
-		{
-			if (!strcmp(pAttrib->Name(), "file"))
-				m_fixed_object_mesh_data->m_mesh = pAttrib->Value();
-
-			i++;
-			pAttrib=pAttrib->Next();
-		}
-	}
-
-	return i;
-}
-
-
-void ObjectLoader::searchFixedObjectMeshData(TiXmlNode* pParent)
-{
-	if ( !pParent ) return;
-
-	TiXmlNode* pChild;
-//	TiXmlText* pText;
-
-	int t = pParent->Type();
-	int num;
-
-	switch ( t )
-	{
-	case TiXmlNode::ELEMENT:
-		//printf( "Element [%s]", pParent->Value() );
-		num = generateFixedObjectMeshData(pParent->ToElement(), pParent->Value());
-		/*switch(num)
-		{
-			case 0:  printf( " (No attributes)"); break;
-			case 1:  printf( "%s1 attribute", getIndentAlt(indent)); break;
-			default: printf( "%s%d attributes", getIndentAlt(indent), num); break;
-		}*/
-		break;
-	/*
-	case TiXmlNode::TEXT:
-		pText = pParent->ToText();
-		printf( "Text: [%s]", pText->Value() );
-		break;
-	*/
-	default:
-		break;
-	}
-
-	for ( pChild = pParent->FirstChild(); pChild != 0; pChild = pChild->NextSibling())
-	{
-		searchFixedObjectMeshData(pChild);
-
-		if ( !strcmp(pChild->Value(), "Object") && pChild->Type() == TiXmlNode::ELEMENT)
-		{
-			m_fixed_object_mesh_list->push_back(m_fixed_object_mesh_data);
-			m_fixed_object_mesh_data = 0;
-			DEBUG5("FixedObject Mesh loaded");
-		}
-	}
-}
-
-
-std::list<FixedObjectMeshData*>* ObjectLoader::loadFixedObjectMeshData(const char* pFilename)
-{
-	m_fixed_object_mesh_data = 0;
-	m_fixed_object_mesh_list = new std::list<FixedObjectMeshData*>;
-
-	TiXmlDocument doc(pFilename);
-	bool loadOkay = doc.LoadFile();
-
-	if (loadOkay)
-	{
-		DEBUG5("Loading %s", pFilename);
-		searchFixedObjectMeshData(&doc);
-		DEBUG5("Loading %s finished", pFilename);
-		return m_fixed_object_mesh_list;
-	}
-	else
-	{
-		DEBUG("Failed to load file %s", pFilename);
-		return 0;
-	}
-}
-
+#include "scene.h"
 
 
 
@@ -597,3 +332,86 @@ bool  ObjectLoader::loadMonster(TiXmlNode* node)
 	
 	return true;
 }
+
+// neuer FixedObject loader
+bool ObjectLoader::loadFixedObjectData(const char* pFilename)
+{
+	TiXmlDocument doc(pFilename);
+	bool loadOkay = doc.LoadFile();
+
+	if (loadOkay)
+	{
+		loadFixedObject(&doc);
+		return true;
+	}
+	else
+	{
+		DEBUG("Failed to load file %s", pFilename);
+		return false;
+	}
+}
+
+bool ObjectLoader::loadFixedObject(TiXmlNode* node)
+{
+	
+	TiXmlNode* child;
+	if (node->Type()==TiXmlNode::ELEMENT && !strcmp(node->Value(), "Object"))
+	{
+		ElementAttrib attr;
+		attr.parseElement(node->ToElement());
+		
+		FixedObjectData* data = new FixedObjectData;
+		WorldObject::TypeInfo::ObjectSubtype subtype;
+		attr.getString("subtype",subtype);
+		std::string layer;
+		attr.getString("layer",layer, "NORMAL");
+		
+		if (layer == "NORMAL")
+			data->m_layer = WorldObject::LAYER_BASE | WorldObject::LAYER_AIR;
+		else if (layer == "BASE")
+			data->m_layer = WorldObject::LAYER_BASE;
+		else if (layer == "AIR")
+			data->m_layer = WorldObject::LAYER_AIR;
+		
+		// Schleife ueber die Elemente von Object
+		for ( child = node->FirstChild(); child != 0; child = child->NextSibling())
+		{
+			if (child->Type()==TiXmlNode::ELEMENT && !strcmp(child->Value(), "Mesh"))
+			{
+				attr.parseElement(child->ToElement());
+				std::string mesh;
+				attr.getString("file",mesh);
+				
+				Scene::registerObject(subtype,mesh);
+			}
+			else if (child->Type()==TiXmlNode::ELEMENT && !strcmp(child->Value(), "Geometry"))
+			{
+				attr.parseElement(child->ToElement());
+				std::string shape;
+				attr.getString("shape",shape,"CIRCLE");
+				if (shape == "RECT")
+				{
+					data->m_shape.m_type = Shape::RECT;
+					attr.getFloat("extent_x",data->m_shape.m_extent.m_x,0);
+					attr.getFloat("extent_y",data->m_shape.m_extent.m_y,0);
+				}
+				else
+				{
+					data->m_shape.m_type = Shape::CIRCLE;
+					attr.getFloat("radius",data->m_shape.m_radius,0);
+				}
+			}
+		}
+		ObjectFactory::registerFixedObject(subtype,data);
+	}
+	else
+	{
+		// rekursiv durchmustern
+		for ( child = node->FirstChild(); child != 0; child = child->NextSibling())
+		{
+			loadFixedObject(child);
+		}
+	}	
+	return true;
+}
+

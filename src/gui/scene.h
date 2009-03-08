@@ -154,13 +154,7 @@ class Scene
 	 */
 	static void loadItemData(std::string file);
 	
-	
-	/**
-	 * \fn static void loadFixedObjectData(std::string file)
-	 * \brief Laedt Daten zu festen Objekten aus der Datei
-	 * \param file Objekte XML Datei
-	 */
-	static void loadFixedObjectData(std::string file);
+
 	
 	/**
 	 * \fn std::pair<float,float> getProjection(Vector pos)

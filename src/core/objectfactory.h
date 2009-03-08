@@ -5,8 +5,6 @@
 
 #include <map>
 #include "monsterbase.h"
-#include "objectloader.h"
-
 
 #include "../tinyxml/tinyxml.h"
 #include <string>
@@ -16,6 +14,24 @@
 class World;
 
 
+/**
+ * \struct FixedObjectData
+ * \brief Struktur mit den Daten von fixenObjekten
+ */
+struct FixedObjectData
+{
+	/**
+	 * \var short m_layer
+	 * \brief Ebene in der sich das Objekt befindet
+	 */
+	short m_layer;
+
+	/**
+	 * \var Shape m_shape
+	 * \brief Form des Objektes
+	 */
+	Shape m_shape;
+};
 
 
 /**
@@ -280,12 +296,6 @@ class ObjectFactory
 	 */
 	static WorldObject::TypeInfo::ObjectType getObjectBaseType(WorldObject::TypeInfo::ObjectSubtype subtype);
 	
-	/**
-	 * \fn static void loadFixedObjectData(std::string file)
-	 * \brief Laedt Daten zu festen Objekten aus der Datei
-	 * \param file Objekte XML Datei
-	 */
-	static void loadFixedObjectData(std::string file);
 	
 	/**
 	 * \fn static void loadObjectTemplates(std::string file)

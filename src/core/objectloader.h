@@ -15,79 +15,9 @@
 #include <cstring>
 
 
-/**
- * \struct ItemMeshData
- * \brief Enthaelt die Daten, die zum Laden des Meshs fuer ein Monster notwendig sind
- */
-struct MonsterMeshData
-{
-	/**
-	 * \var std::string m_subtype
-	 * \brief Subtyp des Monsters
-	 */
-	std::string m_subtype;
-	
-	/**
-	 * \var string m_mesh
-	 * \brief Name des Meshes
-	 */
-	std::string m_mesh;
-	
-	/**
-	 * \fn std::map<Action::ActionType, std::list<std::string> > m_animations
-	 * \brief Animationen des Monsters sortiert nach Typ der Aktion
-	 */
-	std::map<Action::ActionType, std::vector<std::string> > m_animations;
-};
-
-/**
- * \struct FixedObjectData
- * \brief Struktur mit den Daten von fixenObjekten
- */
-struct FixedObjectData
-{
-	/**
-	* \var short m_layer
-	* \brief Ebene in der sich das Objekt befindet
-	*/
-	short m_layer;
-
-	/**
-	* \var Shape m_shape
-	* \brief Form des Objektes
-	*/
-	Shape m_shape;
-};
 
 
-/**
- * \struct ItemMeshData
- * \brief Enthaelt die Daten, die zum Laden des Meshs fuer ein Monster notwendig sind
- */
-struct FixedObjectMeshData
-{
-	/**
-	 * \var std::string m_subtype
-	 * \brief Subtyp des festen Objekts
-	 */
-	std::string m_subtype;
-	
-	/**
-	 * \var string m_mesh
-	 * \brief Name des Meshes
-	 */
-	std::string m_mesh;
-	
-	
-};
 
-
-struct TempMonsterGroup
-{
-	int number;
-	float prob;
-	WorldObject::TypeInfo::ObjectSubtype subtype;
-};
 
 
 /**
@@ -99,25 +29,9 @@ class ObjectLoader
 	public:
 	
 
+
 	
-	/**
-	 * \fn void loadFixedObjectData(const char* pFilename)
-	 * \brief Sorgt fuer das Anlegen von FixedObjectData, die in einer XML-Datei gespeichert sind
-	 * \param pFilename Pfad zu einer XML-Datei, die feste Objekte enthaelt
-	 * \return Liste der geladenen festen Objekte
-	 */
-	bool loadFixedObjectData(const char* pFilename, std::list<FixedObjectData*>* &object_list, std::list<std::string>* &subtype_list);
-	
-	/**
-	 * \fn void loadFixedObjectMeshData(const char* pFilename)
-	 * \brief Sorgt fuer das Anlegen von FixedObjectMeshData, die in einer XML-Datei gespeichert sind
-	 * \param pFilename Pfad zu einer XML-Datei, die Monster enthaelt
-	 * \return Liste der geladenen FixedObject-Meshes
-	 */
-	std::list<FixedObjectMeshData*>* loadFixedObjectMeshData(const char* pFilename);
-	
-	
-	//// neuer Monsterdata loader
+	// neuer Monsterdata loader
 	
 	/**
 	 * \fn loadMonsterData(const char* pFilename);
@@ -133,86 +47,23 @@ class ObjectLoader
 	 */
 	static bool loadMonster(TiXmlNode* node);
 	
-	//// neuer Monsterdata loader
+	// neuer FixedObject loader
+	
+	/**
+	 * \fn loadFixedObjectData(const char* pFilename);
+	 * \brief Liest die Daten zu festen Objekten aus einer XML Datei
+	 * \param pFilename Name der XML Datei
+	 */
+	static bool loadFixedObjectData(const char* pFilename);
+	
+	/**
+	 * \fn bool loadFixedObject(TiXmlNode* node)
+	 * \brief Liest die Daten zu einem festen Object aus dem Knoten
+	 * \param node XML Knoten
+	 */
+	static bool loadFixedObject(TiXmlNode* node);
 	
 	private:
-	
-
-	
-	/**
-	 * \fn int generateFixedObjectData(TiXmlElement* pElement, std::string element)
-	 * \brief Legt FixedObjectData im Speicher anhand von Daten an, die als Parameter uebergeben wurden. Diese Daten stammen aus einer XML-Datei.
-	 * \param pElement Zeiger auf ein Element der XML-Datei
-	 * \param element Name des Elements
-	 * \return Anzahl der Attribute des bearbeiteten Elements
-	 */
-	int generateFixedObjectData(TiXmlElement* pElement, std::string element, std::list<FixedObjectData*>* object_list, std::list<std::string>* subtype_list);
-	
-	/**
-	 * \fn void searchFixedObjectData( TiXmlNode* pParent )
-	 * \brief Durchmustert eine XML-Datei und sucht nach Elementen.
-	 * \param pParent Zeiger auf eine XML-Datei
-	 */
-	void searchFixedObjectData(TiXmlNode* pParent, std::list<FixedObjectData*>* object_list, std::list<std::string>* subtype_list);
-	
-	/**
-	 * \fn int generateFixedObjectMeshData(TiXmlElement* pElement, std::string element)
-	 * \brief Legt FixedObjectMeshData im Speicher anhand von Daten an, die als Parameter uebergeben wurden. Diese Daten stammen aus einer XML-Datei.
-	 * \param pElement Zeiger auf ein Element der XML-Datei
-	 * \param element Name des Elements
-	 * \return Anzahl der Attribute des bearbeiteten Elements
-	 */
-	int generateFixedObjectMeshData(TiXmlElement* pElement, std::string element);
-	
-	/**
-	 * \fn void searchFixedObjectMeshData( TiXmlNode* pParent )
-	 * \brief Durchmustert eine XML-Datei und sucht nach Elementen.
-	 * \param pParent Zeiger auf eine XML-Datei
-	 */
-	void searchFixedObjectMeshData(TiXmlNode* pParent);
-		
-	
-	/**
-	 * \var FixedObjectData* m_object_data
-	 * \brief Daten zu Objekten
-	 */
-	FixedObjectData* m_object_data;
-	/**
-	 * \var std::list<FixedObjectData*>* m_object_list
-	 * \brief Liste mit Daten zu Objekten
-	 */
-	//std::list<FixedObjectData*>* m_object_list;
-	
-	/**
-	 * \var FixedObjectMeshData* m_fixed_object_mesh_data
-	 * \brief Daten zu den Meshes der festen Objekte
-	 */
-	FixedObjectMeshData* m_fixed_object_mesh_data;
-	/**
-	 * \var std::list<FixedObjectMeshData*>* m_fixed_object_mesh_list
-	 * \brief Liste mit Daten zu den Meshes der festen Objekte
-	 */
-	std::list<FixedObjectMeshData*>* m_fixed_object_mesh_list;
-	
-	
-	
-	/**
-	 * \var float m_extend[2]
-	 * \brief Ausdehnung des Objekt-Grundrechteckes (Zwischenspeicher-Variable)
-	 */
-	float m_extent[2];
-	/**
-	 * \var float m_radius
-	 * \brief Radius des Objekt-Grundkreises (Zwischenspeicher-Variable)
-	 */
-	float m_radius;
-	
-	/**
-	 * \var string m_subtype
-	 * \brief Subtyp des Objektes (Zwischenspeicher-Variable)
-	 */
-	std::string m_subtype;
-	
 	
 
 };
