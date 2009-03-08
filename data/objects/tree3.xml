@@ -1,7 +1,0 @@
-<?xml version="1.0" ?>
-
-<Object type="FIXED_OBJECT" subtype="tree3">
-	<Mesh file="tree3.mesh" />
-	<Layer layer="NORMAL" />
-	<Geometry shape="CIRCLE" radius="0.15" />
-</Object>
