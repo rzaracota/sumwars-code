@@ -625,17 +625,6 @@ bool Application::loadResources()
 		updateStartScreen(0.7);
 	}
 	
-	
-	
-	/*
-	ItemWindow::registerItemImage("short_sw","set:sword.png image:full_image");
-	ItemWindow::registerItemImage("long_sw","set:sword.png image:full_image");
-	ItemWindow::registerItemImage("long_bow","set:bow.png image:full_image");
-	ItemWindow::registerItemImage("wood_bow","set:bow.png image:full_image");
-	ItemWindow::registerItemImage("battle_axe","set:axe2H.png  image:full_image");
-	ItemWindow::registerItemImage("wood_sh","set:shield_dmg.png  image:full_image");
-	ItemWindow::registerItemImage("iron_sh","set:shield.png  image:full_image");
-	*/
 	updateStartScreen(1.0);
 	
 	return true;

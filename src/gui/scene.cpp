@@ -185,10 +185,6 @@ void Scene::registerMeshes()
 	registerObject("priest","priest_f.mesh",""); // TODO
 	registerObject("archer","archer_f.mesh",""); // TODO
 
-	// Monster
-	registerObject("gob_dog","gobDog.mesh","");
-	registerObject("lich","lich.mesh","");
-
 	// feste Objekte
 
 	registerObject("smallWall1","smallWall1.mesh","");
@@ -225,29 +221,8 @@ void Scene::registerMeshes()
 	registerProjectile(Projectile::HYPNOSIS,"","Hypnosis");
 
 
-	registerItem("long_sw","sword.mesh");
-	registerItem("wood_bow","shortbow.mesh");
-	registerItem("long_bow","shortbow.mesh");
-	registerItem("fire_bow","shortbow.mesh");
-	registerItem("battle_axe","battleaxe.mesh");
-	registerItem("holy_flail","warhammer.mesh");
-	registerItem("ice_wand","basicWand.mesh");
-	registerItem("ice_staff","basicStaff.mesh");
+	registerItem("gold","gold.mesh");
 
-	registerItem("leath_arm","armor.mesh");
-	registerItem("tiled_arm","armor.mesh");
-	registerItem("heavy_arm","armor.mesh");
-
-	registerItem("wood_sh","buckler.mesh");
-	registerItem("iron_sh","shield.mesh");
-
-	registerItem("steel_hlm","helmet.mesh");
-	registerItem("divine_hlm","helmet.mesh");
-
-	registerItem("heal_1","potion.mesh");
-	registerItem("heal_2","potion.mesh");
-	registerItem("heal_bl","potion.mesh");
-	registerItem("heal_fr","potion.mesh");
 }
 
 void Scene::registerObject(WorldObject::TypeInfo::ObjectSubtype subtype, std::string mesh, std::string particle_system, float scaling_factor)

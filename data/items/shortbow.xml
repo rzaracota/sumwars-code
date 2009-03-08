@@ -654,7 +654,7 @@
 </Item>
 
 <!-- Feenbogen -->
-<Item type="weapon" subtype="gods_sw" size="medium">
+<Item type="weapon" subtype="gods_sbw" size="medium">
 	<Image image="set:bow.png image:full_image" />
 	<Mesh file="bow.mesh" />
 	<Attribute

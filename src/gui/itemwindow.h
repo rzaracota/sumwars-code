@@ -29,10 +29,8 @@ class ItemWindow : public Window
 		 * \param type Typ des Gegenstandes
 		 * \param image Bild der Form set: ... image: ...
 		 */
-		static void registerItemImage(Item::Subtype type, std::string image)
-		{
-			m_item_images[type] = image;
-		}
+		static void registerItemImage(Item::Subtype type, std::string image);
+		
 	
 		/**
 		 * \fn static std::string getItemImage(Item::Subtype type)

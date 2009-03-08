@@ -2023,7 +2023,7 @@ void Creature::calcStatusModCommand()
 			// nur Nahkampf, daher Reichweite die von Fernwaffen kommt reduzieren
 			if (m_command.m_range >4)
 			{
-				DEBUG("capped range for berserk");
+				DEBUG5("capped range for berserk");
 				m_command.m_range= 1;
 			}
 
@@ -3135,7 +3135,7 @@ void Creature::calcBaseAttrMod()
 	std::list<CreatureBaseAttrMod>::iterator j;
 	for (j=m_dyn_attr.m_temp_mods.begin(); j!= m_dyn_attr.m_temp_mods.end();++j)
 	{
-		DEBUG("%f / %f",getDynAttr()->m_health, getBaseAttr()->m_max_health);
+		DEBUG5("%f / %f",getDynAttr()->m_health, getBaseAttr()->m_max_health);
 	
 		applyBaseAttrMod(&(*j),false);
 	}

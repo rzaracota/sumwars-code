@@ -254,7 +254,7 @@ bool Player::init()
 	
 		
 	
-		si = ItemFactory::createItem(Item::WEAPON,"ice_wand");
+		si = ItemFactory::createItem(Item::WEAPON,"ice_wnd");
 		equ->swapItem(si,Equipement::WEAPON);
 
 		// Debugging

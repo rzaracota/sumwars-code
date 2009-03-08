@@ -509,7 +509,7 @@ AIR
 
 <!-- Goblin Dog -->
 <Monster type="MONSTER" subtype="gob_dog" fraction="MONSTER" category="ANIMAL" layer="NORMAL">
-	<Mesh file="lich.mesh" />
+	<Mesh file="gobDog.mesh" />
 	<Dropslots >
 		<Dropslot pbig="0.01" pmedium="0.02" psmall="0.02" pgold="0.02" min_level="0" max_level="10" magic_prob="0.1" magic_power="1000" />
 		<Dropslot pbig="0.01" pmedium="0.02" psmall="0.02" pgold="0.02" min_level="0" max_level="20" magic_prob="0.2" magic_power="1000" />
