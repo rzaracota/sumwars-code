@@ -49,7 +49,7 @@
 	
 <!-- soon to be tutorial-Region-->
 	<Region id="0" name="region0">
-		<Settings dimx="64" dimy="64" area_percent="0.35" complexity="0.4" granularity="8" />
+		<Settings dimx="64" dimy="64" area_percent="0.35" complexity="0.4" granularity="8" ground="grass1"/>
 		
 		<ExitDirections north="false" south="true" west="false" east="false" />
 		
@@ -187,6 +187,13 @@
 		-->
 	</Region>
 	
+	<Region id="100" name="testregion">
+		
+		<Settings dimx="32" dimy="32" area_percent="0.35" complexity="0.4" granularity="8" />
+		<Environments>
+			<Environment height="0.2" name="meadow" />
+		</Environments>
+	</Region>	
 	
 	<Region id="1" name="region1">
 		
@@ -254,7 +261,7 @@
 			</Exits>
 	</Region>
 	
-<!-- Medair, Söldnerlager [Stadt]-->
+<!-- Medair, Sï¿½ldnerlager [Stadt]-->
 	<Region id="3" name="medMercCamp">
 		<Settings dimx="10" dimy="10" area_percent="0.8" complexity="0.0" granularity="0.4" />
 		
@@ -348,9 +355,9 @@
 		</Exits>
 	</Region>
 
-<!-- Aisen, Nördliche Wiese [Feld und Wiesen]; ungefaehr 20 Min, eher offen; Level 7 - 12; Sidequests aus Joringsbrück -->
+<!-- Aisen, Nï¿½rdliche Wiese [Feld und Wiesen]; ungefaehr 20 Min, eher offen; Level 7 - 12; Sidequests aus Joringsbrï¿½ck -->
 <!-- Der Bauernhof -->
-<!-- Kraeuterbüsche -->
+<!-- Kraeuterbï¿½sche -->
 <!-- Goblinschlaeger, Goblinraeuber, Goblinjaeger, Goblinhunde, Goblinkrieger, Goblinschamanen? -->
 	<Region id="8" name="aisNorthMeadow">
 		<Settings dimx="32" dimy="32" area_percent="0.4" complexity="0.3" granularity="6" />
@@ -436,7 +443,7 @@
 		</Exits>
 	</Region>
 	
-<!-- Aisen, Zwergentrutz Stadtmauer; ungefähr 20 min, relativ starres Design; Level 16 - 19 -->
+<!-- Aisen, Zwergentrutz Stadtmauer; ungefï¿½hr 20 min, relativ starres Design; Level 16 - 19 -->
 <!-- Zombies, Skelette-->
 	<Region id="12" name="dwarfenfrowardRampart">
 		<Settings dimx="32" dimy="32" area_percent="0.4" complexity="0.3" granularity="6" />

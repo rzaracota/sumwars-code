@@ -37,7 +37,8 @@ Region* MapGenerator::createRegion(RegionData* rdata)
 		}
 		
 		mdata.m_region->setReviveLocation(rdata->m_revive_location);
-
+		mdata.m_region->setGroundMaterial(rdata->m_ground_material);
+		
 		// Wenn der Versuch nicht erfolgreich war alles loeschen und von vorn beginnen
 		if (!success)
 		{

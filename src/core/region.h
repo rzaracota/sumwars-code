@@ -305,10 +305,22 @@ class RegionData
 		LocationName m_revive_location;
 		
 		/**
-		 * \fn std::multimap<TriggerType, Event*> m_events
+		 * \var std::multimap<TriggerType, Event*> m_events
 		 * \brief Events der Region
 		 */
 		std::multimap<TriggerType, Event*> m_events;
+		
+		/**
+		 * \var std::string m_ground_material
+		 * \brief Material mit dem der Boden gerendert wird
+		 */
+		std::string m_ground_material;
+		
+		/**
+		 * \var ObjectGroupTemplateName m_region_template
+		 * \brief Ist gesetzt, wenn die komplette Region aus einem Template besteht
+		 */
+		ObjectGroupTemplateName m_region_template;
 };
 
 /**
@@ -941,6 +953,25 @@ class Region
 		{
 			return m_dimy;
 		}
+		
+		/**
+		 * \fn void setGroundMaterial(std::string material)
+		 * \brief Setzt das Material des Bodens
+		 * \param material Material
+		 */
+		void setGroundMaterial(std::string material)
+		{
+			m_ground_material = material;
+		}
+		
+		/**
+		 * \fn std::string getGroundMaterial()
+		 * \brief Gibt das Material fuer den Boden aus
+		 */
+		std::string getGroundMaterial()
+		{
+			return m_ground_material;
+		}
 
 		
 	private:
@@ -1100,6 +1131,12 @@ class Region
 		 * \brief Kameraposition von der aus die Region bei Zwischenszenen gesehen wird
 		 */
 		RegionCamera m_camera;
+		
+		/**
+		 * \var std::string m_ground_material
+		 * \brief Material mit dem der Boden gerendert wird
+		 */
+		std::string m_ground_material;
 
 };
 

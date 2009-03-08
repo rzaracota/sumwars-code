@@ -80,6 +80,9 @@ int WorldLoader::generateRegionData(TiXmlNode* pParent, TiXmlElement* pElement, 
 		if (m_region_data == 0)
 		{
 			m_region_data = new RegionData;
+			m_region_data->m_ground_material = "";
+			m_region_data->m_region_template = "";
+				
 		}
 		
 		while (element == "Region" && pAttrib)
@@ -109,6 +112,10 @@ int WorldLoader::generateRegionData(TiXmlNode* pParent, TiXmlElement* pElement, 
 				m_region_data->m_complexity = static_cast<float>(dval);
 			else if (!strcmp(pAttrib->Name(), "granularity") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
 				m_region_data->m_granularity = ival;
+			else if (!strcmp(pAttrib->Name(), "ground"))
+				m_region_data->m_ground_material = pAttrib->Value();
+			else if (!strcmp(pAttrib->Name(), "region_template"))
+				m_region_data->m_region_template = pAttrib->Value();
 
 			i++;
 			pAttrib=pAttrib->Next();

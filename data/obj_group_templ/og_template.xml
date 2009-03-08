@@ -127,4 +127,18 @@
 
 </ObjectGroupTemplate>
 
-
+<ObjectGroupTemplate name = "test_region" >
+	<Shape
+		  type = "RECT"
+		  extent_x = "4.0"
+		  extent_y = "4.0"
+		  angle ="0"
+		/>
+	<ObjectContent>
+	</ObjectContent>
+	
+	<Locations>
+		<Location name = "string" pos_x="float" pos_y="float" />
+	</Locations>
+	
+</ObjectGroupTemplate>

@@ -141,8 +141,8 @@ void Application::run()
 	float frametime;
 	int count=0;
 	Ogre::Timer timer2;
-
-	int nr = 1000;
+ 
+	int nr = 100;
 	timer.reset();
 	while (m_document->getState() != Document::END_GAME)
 	{
@@ -155,8 +155,9 @@ void Application::run()
 		count ++;
 		if (count ==nr)
 		{
-			/*
+			
 			count =0;
+			/*
 			DEBUG("average stats over %i frames",nr);
 			DEBUG("frame time: %f (%f fps)",time[0]/nr, 1000/(time[0]/nr));
 			DEBUG("app update time: %f",time[1]/nr);
@@ -170,6 +171,7 @@ void Application::run()
 			for (int i=0; i<7; i++)
 			time[i]=0;
 			*/
+			
 		}
 
 		timer2.reset();
@@ -624,6 +626,10 @@ bool Application::loadResources()
 		
 		updateStartScreen(0.7);
 	}
+	
+	Ogre::MeshManager& mesh_mgr = Ogre::MeshManager::getSingleton();
+	Ogre::Plane plane(Ogre::Vector3::UNIT_Y, 0);
+	mesh_mgr.createPlane("ground", Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME, plane, 200, 200, 5, 5, true, 1,1,1,Ogre::Vector3::UNIT_X);
 	
 	updateStartScreen(1.0);
 	

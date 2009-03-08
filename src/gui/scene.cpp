@@ -1531,9 +1531,13 @@ void Scene::createScene()
 
 
 	// Liste der statischen Objekte
+	Ogre::StaticGeometry* static_geom = m_scene_manager->createStaticGeometry ("StaticGeometry");
+	
 	std::list<WorldObject*> stat_objs;
 
 	Region* region = m_document->getLocalPlayer()->getRegion();
+	
+	
 
 	if (region !=0)
 	{
@@ -1556,7 +1560,36 @@ void Scene::createScene()
 	
 		}
 	
-		// Tiles einfuegen
+		// Boden erstellen
+		if (region->getGroundMaterial() != "")
+		{
+			std::stringstream stream;
+			short dimx = region->getDimX();
+			short dimy = region->getDimY();
+			Ogre::SceneNode *node;
+			Ogre::Entity* ground;
+			for (int i=0; i< dimx; ++i)
+			{
+				for (int j=0; j<dimy; ++j)
+				{
+					stream.str("");
+					stream << "GroundNode"<<i<<"_"<<j;
+					node = m_scene_manager->getRootSceneNode()->createChildSceneNode(stream.str());
+					node->setPosition(Ogre::Vector3(i*200+100,0,j*200+100));
+			
+					stream.str("");
+					stream << "GroundEntity"<<i<<"_"<<j;
+					ground = m_scene_manager->createEntity(stream.str(), "ground");
+					ground->setMaterialName(region->getGroundMaterial());
+					ground->setCastShadows(false);
+					node->attachObject(ground);
+					
+					static_geom->addSceneNode(node);
+				}
+			}
+		}
+		
+		
 	}
 	
 
