@@ -1341,60 +1341,6 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 			{
 				gainLevel();
 			}
-			if (command->m_id==2)
-			{
-				si = ItemFactory::createItem(Item::WEAPON,"short_sw",0,1000);
-				getRegion()->dropItem(si,Vector(10,20));
-			}
-			if (command->m_id==1)
-			{
-				// Debugging 2
-				si = ItemFactory::createItem(Item::WEAPON,"short_sw",0,1000);
-				getEquipement()->swapItem(si,Equipement::MEDIUM_ITEMS+4);
-				if (si!=0)
-					delete si;
-
-				si = ItemFactory::createItem(Item::HELMET,"steel_hlm",0,100);
-				getEquipement()->swapItem(si,Equipement::MEDIUM_ITEMS+5);
-				if (si!=0)
-					delete si;
-
-				si = ItemFactory::createItem(Item::GLOVES,"leath_gl",0,100);
-				getEquipement()->swapItem(si,Equipement::MEDIUM_ITEMS+6);
-				if (si!=0)
-					delete si;
-
-				si = ItemFactory::createItem(Item::ARMOR,"heavy_arm",0,500);
-				getEquipement()->swapItem(si,Equipement::BIG_ITEMS+3);
-				if (si!=0)
-					delete si;
-
-				si = ItemFactory::createItem(Item::SHIELD,"iron_sh",0,100);
-				getEquipement()->swapItem(si,Equipement::BIG_ITEMS+4);
-				if (si!=0)
-					delete si;
-
-				si = ItemFactory::createItem(Item::RING,"ring",0,100);
-				getEquipement()->swapItem(si,Equipement::SMALL_ITEMS+15);
-				if (si!=0)
-					delete si;
-
-				si = ItemFactory::createItem(Item::RING,"ring",0,400);
-				getEquipement()->swapItem(si,Equipement::SMALL_ITEMS+16);
-				if (si!=0)
-					delete si;
-
-				si = ItemFactory::createItem(Item::AMULET,"amulet",0,100);
-				getEquipement()->swapItem(si,Equipement::SMALL_ITEMS+17);
-				if (si!=0)
-					delete si;
-
-				si = ItemFactory::createItem(Item::AMULET,"amulet",0,800);
-				getEquipement()->swapItem(si,Equipement::SMALL_ITEMS+18);
-				if (si!=0)
-					delete si;
-
-			}
 			else if (command->m_id==3)
 			{
 

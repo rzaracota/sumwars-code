@@ -461,6 +461,9 @@ Item* ItemFactory::createGold(int value, int id)
 
 void ItemFactory::createMagicMods(Item* item, float* modchance, float magic_power, float min_enchant, float max_enchant)
 {
+	if (magic_power < min_enchant)
+		return;
+	
 	// Modifikationen des Items auswuerfeln
 	DEBUG4("mods auswuerfeln");
 
@@ -469,16 +472,23 @@ void ItemFactory::createMagicMods(Item* item, float* modchance, float magic_powe
 	
 	// bisher zugeteilte Staerke der Modifikation
 	float mod_power[31];
+	float modprob[31];
+	for (int i=0; i<31; i++)
+		modprob[i] = modchance[i];
+	
 	memset(mod_power,0,31*sizeof(float));
 
 	float sum =0;
 	int i;
 	for (i=0;i<31;i++)
 	{
-		sum += modchance[i];
+		sum += modprob[i];
 	}
-
-		// Staerke der aktuellen Verzauberung
+	
+	if (sum < 0.001)
+		return;
+	
+	// Staerke der aktuellen Verzauberung
 	float mp;
 	float sqrtmp;
 	float logmp;
@@ -510,8 +520,8 @@ void ItemFactory::createMagicMods(Item* item, float* modchance, float magic_powe
 		DEBUG5("ausgewuerfelt: Starke der Verzauberung: %f",mp);
 
 			// Modifikation auswuerfeln
-		mod = Random::randDiscrete(modchance,31,sum);
-		DEBUG4("Art der Verzauberung: %i",mod);
+		mod = Random::randDiscrete(modprob,31,sum);
+		DEBUG5("Art der Verzauberung: %i",mod);
 
 		num_mods++;
 
@@ -630,8 +640,8 @@ void ItemFactory::createMagicMods(Item* item, float* modchance, float magic_powe
 
 			// jede Modifikation darf nur einmal vorkommen, entfernen
 
-		sum -= modchance[mod];
-		modchance[mod]=0;
+		sum -= modprob[mod];
+		modprob[mod]=0;
 	}
 
 	item->m_level_req = std::max(item->m_level_req,(char) levelreq);
