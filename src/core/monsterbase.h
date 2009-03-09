@@ -59,6 +59,12 @@ struct MonsterBasicData
 	 * \brief Ebene in der das Monster sich befindet
 	 */
 	short m_layer;
+	
+	/**
+	 * \var std::string m_name
+	 * \brief Name des Monsters
+	 */
+	std::string m_name;
 };
 
 /**

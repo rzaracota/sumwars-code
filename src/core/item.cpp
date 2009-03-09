@@ -1,4 +1,5 @@
 #include "item.h"
+#include "itemfactory.h"
 
 ItemBasicData::ItemBasicData()
 {
@@ -117,7 +118,7 @@ std::string Item::getName()
 
 std::string Item::getString()
 {
-	return m_subtype;
+	return ItemFactory::getItemName(m_subtype);
 }
 
 

@@ -1,7 +1,7 @@
 #include "worldobject.h"
 #include "world.h"
 #include "eventsystem.h"
-
+#include "objectfactory.h"
 
 WorldObject::WorldObject( int id)
 {
@@ -121,8 +121,12 @@ void WorldObject::fromString(CharConv* cv)
 
 string WorldObject::getName()
 {
-
+#ifndef WIN32
+	return ObjectFactory::getObjectName(m_type_info.m_subtype);
+#else
 	return m_type_info.m_subtype;
+#endif
+	
 }
 
 
@@ -131,7 +135,7 @@ string WorldObject::getNameId()
 	std::ostringstream out_stream;
 
 	out_stream.str("");
-	out_stream << getName() << ":" << getId();
+	out_stream << m_subtype << ":" << getId();
 	return out_stream.str();
 }
 

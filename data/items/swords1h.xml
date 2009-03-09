@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" ?>
+<?xml version="1.0" ?>
 
 <!-- Bei Gegenstaenden, die keine Waffen sind kann "WeaponAttribute" weggelassen werden. -->
 
@@ -121,7 +121,7 @@ s		modchance_damage_air_mod="float"
 
 <!-- ONE HANDED SWORDS -->
 <!-- Dagger -->
-<Item type="weapon" subtype="dagger_sw" size="medium">
+<Item type="weapon" subtype="dagger_sw" name="dagger" size="medium">
 	<Mesh file="dagger_sw.mesh" />
 	<Image image="set:dagger_sw.png image:full_image" />
 	<Attribute

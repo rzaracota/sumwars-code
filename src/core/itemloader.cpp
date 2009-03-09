@@ -42,7 +42,10 @@ int ItemLoader::generateItemBasicData(TiXmlElement* pElement, std::string elemen
 			else if (!strcmp(pAttrib->Name(), "subtype"))
 			{
 				m_item_data->m_subtype = pAttrib->Value();
-				
+				if (m_item_data->m_name=="")
+				{
+					m_item_data->m_name = m_item_data->m_subtype;
+				}
 				DEBUG5("found item %s",m_item_data->m_subtype.c_str());
 			}
 			else if (!strcmp(pAttrib->Name(), "size"))
@@ -55,6 +58,10 @@ int ItemLoader::generateItemBasicData(TiXmlElement* pElement, std::string elemen
 					m_item_data->m_size = Item::MEDIUM;
 				else if (!strcmp(pAttrib->Value(), "big"))
 					m_item_data->m_size = Item::BIG;
+			}
+			else if (!strcmp(pAttrib->Name(), "name"))
+			{
+				m_item_data->m_name = pAttrib->Value();
 			}
 
 			i++;

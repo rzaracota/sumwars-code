@@ -296,6 +296,12 @@ class ObjectFactory
 	 */
 	static WorldObject::TypeInfo::ObjectType getObjectBaseType(WorldObject::TypeInfo::ObjectSubtype subtype);
 	
+	/**
+	 * \fn static std::string getObjectName(WorldObject::TypeInfo::ObjectSubtype subtype)
+	 * \brief Gibt den Name eines Objektes aus
+	 */
+	static std::string getObjectName(WorldObject::TypeInfo::ObjectSubtype subtype);
+	
 	
 	/**
 	 * \fn static void loadObjectTemplates(std::string file)

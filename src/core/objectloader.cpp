@@ -46,6 +46,7 @@ bool  ObjectLoader::loadMonster(TiXmlNode* node)
 		attr.getString("category",category);
 		attr.getString("fraction",fraction,"MONSTER");
 		attr.getString("layer",layer,"NORMAL");
+		attr.getString("name",data->m_name,subtype);
 		data->m_type_info.m_subtype = subtype;
 		
 		DEBUG5("monster: %s %s %s %s",type.c_str(), subtype.c_str(), category.c_str(), fraction.c_str());

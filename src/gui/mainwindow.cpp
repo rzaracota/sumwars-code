@@ -995,7 +995,7 @@ void MainWindow::updateObjectInfo()
 		int id;
 		stream >> id;
 
-		string_stream<<name;
+		
 
 		// zur ID gehoerendes Objekt
 		WorldObject* cwo;
@@ -1006,7 +1006,7 @@ void MainWindow::updateObjectInfo()
 		{
 		// Objekt existiert
 			m_document->getGUIState()->m_cursor_object_id = id;
-
+			string_stream<<cwo->getName();
 			if (cwo->getTypeInfo()->m_type != WorldObject::TypeInfo::TYPE_FIXED_OBJECT)
 			{
 				// Objekt ist ein Lebewesen

@@ -120,6 +120,12 @@ public:
 	 * \param subtype Subtyp
 	 */
 	static Item::Type getBaseType(Item::Subtype subtype);
+	
+	/**
+	 * \fn static std::string getItemName(Item::Subtype subtype)
+	 * \brief Gibt den Name eines Objektes aus
+	 */
+	static std::string getItemName(Item::Subtype subtype);
 
 	/**
 	 * \fn static void init()

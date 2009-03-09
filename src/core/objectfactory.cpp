@@ -144,6 +144,18 @@ WorldObject* ObjectFactory::createObject(WorldObject::TypeInfo::ObjectType type,
 	return ret;
 }
 
+std::string ObjectFactory::getObjectName(WorldObject::TypeInfo::ObjectSubtype subtype)
+{
+	std::map<WorldObject::TypeInfo::ObjectSubtype, MonsterBasicData*>::iterator i;
+
+	i = m_monster_data.find(subtype);
+	if (i== m_monster_data.end())
+	{
+		return subtype;
+	}
+	return i->second->m_name;
+}
+
 ObjectGroupTemplate* ObjectFactory::getObjectGroupTemplate(ObjectGroupTemplateName name)
 {
 	std::map<ObjectGroupTemplateName, ObjectGroupTemplate*>::iterator it;

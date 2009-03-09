@@ -235,7 +235,7 @@ AIR
 
 <!-- Goblin -->
 <!-- 3871 = 0xf1f -->
-<Monster type="MONSTER" subtype="goblin" fraction="MONSTER" category="GOBLIN" layer="NORMAL">
+<Monster type="MONSTER" subtype="goblin" name="goblin" fraction="MONSTER" category="GOBLIN" layer="NORMAL">
 	<Mesh file="goblin.mesh" />
 	<Dropslots >
 		<Dropslot pbig="0.01" pmedium="0.02" psmall="0.04" pgold="0.02" max_gold="30" min_level="0" max_level="10" magic_prob="0.1" magic_power="1000" />
@@ -287,7 +287,7 @@ AIR
 </Monster>
 
 
-<Monster type="MONSTER" subtype="goblin_clb" fraction="MONSTER" category="GOBLIN" layer="NORMAL">
+<Monster type="MONSTER" subtype="goblin_clb" name="goblin brute" fraction="MONSTER" category="GOBLIN" layer="NORMAL">
 	<Mesh file="goblin.mesh" />
 	<ExtraMesh bone="itemRightHand" file="goblin_hmr.mesh" />
 	<Dropslots >
@@ -339,7 +339,7 @@ AIR
 	<AI ai_sight_range="8" />
 </Monster>
 
-<Monster type="MONSTER" subtype="goblin_bow" fraction="MONSTER" category="GOBLIN" layer="NORMAL">
+<Monster type="MONSTER" subtype="goblin_bow" name="goblin archer" fraction="MONSTER" category="GOBLIN" layer="NORMAL">
 	<Mesh file="goblin.mesh" />
 	<ExtraMesh bone="itemRightHand" file="goblin_sbw.mesh" />
 	<Dropslots >
@@ -392,7 +392,7 @@ AIR
 </Monster>
 
 <!-- Lich -->
-<Monster type="MONSTER" subtype="lich" fraction="UNDEAD" category="UNDEAD" layer="NORMAL">
+<Monster type="MONSTER" subtype="lich" name="lich" fraction="UNDEAD" category="UNDEAD" layer="NORMAL">
 	<Mesh file="lich.mesh" />
 	<Dropslots >
 		<Dropslot pbig="0.1" pmedium="0.2" psmall="0.2" pgold="0.2" max_gold="50" min_level="10" max_level="40" magic_prob="0.5" magic_power="1000" />
@@ -449,7 +449,7 @@ AIR
 </Monster>
 
 <!-- skeleton -->
-<Monster type="MONSTER" subtype="skeleton" fraction="UNDEAD" category="UNDEAD" layer="NORMAL">
+<Monster type="MONSTER" subtype="skeleton" name="skeleton" fraction="UNDEAD" category="UNDEAD" layer="NORMAL">
 	<Mesh file="skeleton.mesh" />
 	<Dropslots >
 		<Dropslot pbig="0.01" pmedium="0.02" psmall="0.02" pgold="0.02" max_gold="100" min_level="0" max_level="10" magic_prob="0.1" magic_power="1000" />
@@ -508,7 +508,7 @@ AIR
 </Monster>
 
 <!-- Goblin Dog -->
-<Monster type="MONSTER" subtype="gob_dog" fraction="MONSTER" category="ANIMAL" layer="NORMAL">
+<Monster type="MONSTER" subtype="gob_dog" name="goblin dog" fraction="MONSTER" category="ANIMAL" layer="NORMAL">
 	<Mesh file="gobDog.mesh" />
 	<Dropslots >
 		<Dropslot pbig="0.01" pmedium="0.02" psmall="0.02" pgold="0.02" max_gold="70" min_level="0" max_level="10" magic_prob="0.1" magic_power="1000" />
@@ -557,7 +557,7 @@ AIR
 	<AI ai_sight_range="8" />
 </Monster>
 
-<Monster type="MONSTER" subtype="peasant" fraction="HUMAN" category="HUMAN" layer="NORMAL">
+<Monster type="MONSTER" subtype="peasant" name="peasant" fraction="HUMAN" category="HUMAN" layer="NORMAL">
 	<Mesh file="warrior.mesh" />
 	<Dropslots >
 		<Dropslot pbig="0.1" pmedium="0.2" psmall="0.2" pgold="0.2" max_gold="50" min_level="0" max_level="10" magic_prob="0.1" magic_power="1000" />

@@ -276,6 +276,18 @@ Item::Type  ItemFactory::getBaseType(Item::Subtype subtype)
 	return Item::NOITEM;
 }
 
+std::string ItemFactory::getItemName(Item::Subtype subtype)
+{
+	std::map<Item::Subtype,ItemBasicData*>::iterator it;
+	it = m_item_data.find(subtype);
+	
+	if (it== m_item_data.end())
+	{
+		return subtype;
+	}
+	return it->second->m_name;
+}
+
 void ItemFactory::registerItemDrop(Item::Type type,Item::Subtype subtype, DropChance chance)
 {
 	m_item_probabilities.insert(make_pair(subtype, chance));

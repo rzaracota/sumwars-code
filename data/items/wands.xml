@@ -1,4 +1,4 @@
-<Item type="weapon" subtype="ice_wnd" size="medium">
+<Item type="weapon" subtype="ice_wnd" name="ice wand" size="medium">
 	<Image image="set:noMedia.png image:full_image" />
 	<Mesh file="basicWand.mesh" />
 	<Attribute

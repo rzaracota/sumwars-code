@@ -434,6 +434,11 @@ struct ItemBasicData
 	 * \brief maximale Starke einer Verzauberung des Items
 	 */
 	float m_max_enchant;
+	
+	/**
+	 * \var  Name des Items
+	 */
+	std::string m_name;
 
 	/**
 	 * \fn ItemBasicData()
