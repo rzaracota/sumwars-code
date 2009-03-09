@@ -215,8 +215,11 @@ void Dialogue::addAnswer(std::string text, std::string topic)
 	if (checkTopic(topic))
 	{
 		DEBUG5("adding answer %s %s",text.c_str(), topic.c_str());
-
+#ifndef WIN32
 		m_speech.back().second.m_answers.push_back(std::make_pair(dgettext("event",text.c_str()),topic));
+#else
+		m_speech.back().second.m_answers.push_back(std::make_pair(text.c_str(),topic));
+#endif
 	}
 	
 	
