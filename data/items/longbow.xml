@@ -4,7 +4,7 @@
 <!-- Orkbogen -->
 <!-- Eibenbogen -->
 <!-- Langbogen -->
-<Item type="weapon" subtype="long_lbw" size="medium">
+<Item type="weapon" subtype="long_lbw" name="longbow" size="medium">
 	<Image image="set:bow.png image:full_image" />
 	<Mesh file="bow.mesh" />
 	<Attribute

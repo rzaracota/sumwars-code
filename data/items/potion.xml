@@ -1,6 +1,6 @@
 ﻿<!-- POTION -->
 <!-- small potion -->
-<Item type="potion" subtype="heal_1" size="small">
+<Item type="potion" subtype="heal_1" name="small potion" size="small">
 	<Image image="set:potion_health.png image:full_image" />
 	<Mesh file="potion.mesh" />
 	<Attribute
@@ -20,7 +20,7 @@
 </Item>
 
 <!-- medium potion -->
-<Item type="potion" subtype="heal_2" size="small">
+<Item type="potion" subtype="heal_2" name="medium potion" size="small">
 	<Image image="set:potion_health.png image:full_image" />
 	<Mesh file="potion.mesh" />
 	<Attribute
@@ -40,7 +40,7 @@
 </Item>
 
 
-<Item type="potion" subtype="heal_bl" size="small">
+<Item type="potion" subtype="heal_bl" name="eyedrops" size="small">
 	<Image image="set:potion_health.png image:full_image" />
 	<Mesh file="potion.mesh" />
 	<Attribute
@@ -59,7 +59,7 @@
 	/>
 </Item>
 
-<Item type="potion" subtype="heal_fr" size="small">
+<Item type="potion" subtype="heal_fr" name="potion of melting" size="small">
 	<Image image="set:potion_health.png image:full_image" />
 	<Mesh file="potion.mesh" />
 	<Attribute

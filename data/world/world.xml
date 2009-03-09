@@ -54,14 +54,14 @@
 		<ExitDirections north="false" south="true" west="false" east="false" />
 		
 		<Exits>
-			<Exit name="exit_south" destination_region="region1" destination_location="entry_north" >
-				<Shape shape="RECT" extent_x="4.0" extent_y ="4.0" />
-			</Exit>
-			
-<!--			<Exit name="exit_south" destination_region="testregion" destination_location="entry_north" >
+<!--			<Exit name="exit_south" destination_region="region1" destination_location="entry_north" >
 				<Shape shape="RECT" extent_x="4.0" extent_y ="4.0" />
 			</Exit>
 			-->
+			<Exit name="exit_south" destination_region="testregion" destination_location="entry_north" >
+				<Shape shape="RECT" extent_x="4.0" extent_y ="4.0" />
+			</Exit>
+			
 		</Exits>
 		<Environments>
 			<Environment height="0.6" name="meadow" />
@@ -81,7 +81,7 @@
 		
 		<Event trigger ="create_region" once = "true">
 			<Effect>
-				peasant = createObject('peasant', {130,220});
+				peasant = createObject('peasant', {130,210});
 				setRefName(peasant,'peasant');
 			</Effect>
 		</Event>
@@ -279,7 +279,7 @@
 			</Exits>
 	</Region>
 	
-<!-- Medair, S�ldnerlager [Stadt]-->
+<!-- Medair, Soeldnerlager [Stadt]-->
 	<Region id="3" name="medMercCamp">
 		<Settings dimx="10" dimy="10" area_percent="0.8" complexity="0.0" granularity="0.4" />
 		
@@ -318,6 +318,7 @@
 
 <!-- Aisen, Offene Ebene [Feld und Wiesen]; ungefaehr 20 Min, eher offen; Level 2 - 6 -->
 <!-- Goblinschlaeger, Goblinraeuber, Goblinjaeger, Goblinhunde, Feldalraunen?(falls wir welche bekommen) -->
+<!-- Orte: entry_Crypt, exit_Crypt => Maylons Grab -->
 	<Region id="5" name="aisPlains">
 		<Settings dimx="32" dimy="32" area_percent="0.4" complexity="0.3" granularity="6" />
 		
@@ -330,8 +331,43 @@
 			<Exit name="exit_north" destination_region="aisHeath" destination_location="entry_south" >
 				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
 			</Exit>
+			<Exit name="exit_Crypt" destination_region="aisMaylonsGraveL1" destination_location="entry_south" >
+				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
+			</Exit>
 		</Exits>
 	</Region>
+	
+<!-- Maylons Grab, Ebene 1[unterirdisch], ungefaehr 10 Minuten; Level 14 - 17 -->
+<!-- [kleine Elementare], Zombies, Skelette -->
+	<Region id="5" name="aisMaylonsGraveL1">
+		<Settings dimx="32" dimy="32" area_percent="0.4" complexity="0.3" granularity="6" />
+		
+		<ExitDirections north="true" south="true" west="false" east="false" />
+		
+		<Exits>
+			<Exit name="exit_south" destination_region="aisPlains" destination_location="entry_Crypt" >
+				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
+			</Exit>
+			<Exit name="exit_north" destination_region="aisMaylonsGraveL2" destination_location="entry_North" >
+				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
+			</Exit>
+		</Exits>
+	</Region>
+	
+<!-- Maylons Grab, Ebene 2[unterirdisch], ungefaehr 10 Minuten; Level 16 - 19 -->
+<!-- [kleine Elementare], Zombies, Skelette, Maylons Mumie -->
+<!-- Orte: Maylons Grabkammer -->
+	<Region id="5" name="aisMaylonsGraveL1">
+		<Settings dimx="32" dimy="32" area_percent="0.4" complexity="0.3" granularity="6" />
+		
+		<ExitDirections north="true" south="false" west="false" east="false" />
+		
+		<Exits>
+			<Exit name="exit_north" destination_region="aisMaylonsGraveL1" destination_location="entry_North" >
+				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
+			</Exit>
+		</Exits>
+	</Region>	
 	
 <!-- Aisen, Stille Heide [Feld und Wiesen]; ungefaehr 20 Min, eher offen; Level 5 - 10 -->
 <!-- Goblinschlaeger, Goblinraeuber, Goblinjaeger, Goblinhunde, Goblinkrieger, Goblinschamanen? -->

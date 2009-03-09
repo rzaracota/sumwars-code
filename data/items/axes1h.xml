@@ -1,7 +1,7 @@
 ﻿<!-- ONE HANDED AXES -->
 
 <!-- hatchet / Beil -->
-<Item type="weapon" subtype="hatch_axe" size="medium">
+<Item type="weapon" subtype="hatch_axe" name="hatchet" size="medium">
 	<Mesh file="hatch_axe.mesh" />
 	<Image image="set:hatch_axe.png image:full_image" />
 	<Attribute
@@ -38,7 +38,7 @@
 </Item>
 
 <!-- bronze_axe-->
-<Item type="weapon" subtype="bronze_axe" size="medium">
+<Item type="weapon" subtype="bronze_axe" name="bronze axe" size="medium">
 	<Mesh file="bronze_axe.mesh" />
 	<Image image="set:bronze_axe.png image:full_image" />
 	<Attribute
@@ -75,7 +75,7 @@
 </Item>
 
 <!-- Eisenbeil -->
-<Item type="weapon" subtype="ironha_axe" size="medium">
+<Item type="weapon" subtype="ironha_axe" name="iron hatchet" size="medium">
 	<Mesh file="ironha_axe.mesh" />
 	<Image image="set:ironha_axe.png image:full_image" />
 	<Attribute
@@ -112,7 +112,7 @@
 </Item>
 
 <!-- Schlachtebeil -->
-<Item type="weapon" subtype="cleave_axe" size="medium">
+<Item type="weapon" subtype="cleave_axe" name="cleaver" size="medium">
 	<Mesh file="axe.mesh" />
 	<Attribute
 		level_requirement="8"
@@ -148,7 +148,7 @@
 </Item>
 
 <!-- Eisenaxt -->
-<Item type="weapon" subtype="iron_axe" size="medium">
+<Item type="weapon" subtype="iron_axe" name="iron axe" size="medium">
 	<Mesh file="axe.mesh" />
 	<Attribute
 		level_requirement="13"
@@ -184,7 +184,7 @@
 </Item>
 
 <!-- Soeldneraxt -->
-<Item type="weapon" subtype="merc_axe" size="medium">
+<Item type="weapon" subtype="merc_axe" name="mercenary axe" size="medium">
 	<Image image="set:axe.png image:full_image" />
 	<Mesh file="axe.mesh" />
 	<Attribute
@@ -221,7 +221,7 @@
 </Item>
 
 <!-- Stahlaxt -->
-<Item type="weapon" subtype="steel_axe" size="medium">
+<Item type="weapon" subtype="steel_axe" name="steel axe" size="medium">
 	<Image image="set:axe.png image:full_image" />
 	<Mesh file="axe.mesh" />
 	<Attribute
@@ -258,7 +258,7 @@
 </Item>
 
 <!-- Kampfaxt -->
-<Item type="weapon" subtype="battle_axe" size="medium">
+<Item type="weapon" subtype="battle_axe" name="battle axe" size="medium">
 	<Image image="set:axe.png image:full_image" />
 	<Mesh file="axe.mesh" />
 	<Attribute
@@ -295,7 +295,7 @@
 </Item>
 
 <!-- Waechteraxt -->
-<Item type="weapon" subtype="guard_axe" size="medium">
+<Item type="weapon" subtype="guard_axe" name="guard axe" size="medium">
 	<Image image="set:axe.png image:full_image" />
 	<Mesh file="axe.mesh" />
 	<Attribute
@@ -332,7 +332,7 @@
 </Item>
 
 <!-- Minotaurenaxt -->
-<Item type="weapon" subtype="mino_axe" size="medium">
+<Item type="weapon" subtype="mino_axe" name="minotaur axe" size="medium">
 	<Image image="set:axe.png image:full_image" />
 	<Mesh file="axe.mesh" />
 	<Attribute
@@ -369,7 +369,7 @@
 </Item>
 
 <!-- Donneraxt -->
-<Item type="weapon" subtype="wind_axe" size="medium">
+<Item type="weapon" subtype="wind_axe" name="thunder axe" size="medium">
 	<Image image="set:axe.png image:full_image" />
 	<Mesh file="axe.mesh" />
 	<Attribute
@@ -408,7 +408,7 @@
 </Item>
 
 <!-- Daemonenaxt -->
-<Item type="weapon" subtype="demon_axe" size="medium">
+<Item type="weapon" subtype="demon_axe" name="demon axe" size="medium">
 	<Image image="set:axe.png image:full_image" />
 	<Mesh file="axe.mesh" />
 	<Attribute
@@ -445,7 +445,7 @@
 </Item>
 
 <!-- Obsidianaxt -->
-<Item type="weapon" subtype="obsid_axe" size="medium">
+<Item type="weapon" subtype="obsid_axe" name="obsidian axe" size="medium">
 	<Image image="set:axe.png image:full_image" />
 	<Mesh file="axe.mesh" />
 	<Attribute
@@ -482,7 +482,7 @@
 </Item>
 
 <!-- Vulkanaxt -->
-<Item type="weapon" subtype="vulcan_axe" size="medium">
+<Item type="weapon" subtype="vulcan_axe" name="vulcano axe" size="medium">
 	<Image image="set:axe.png image:full_image" />
 	<Mesh file="axe.mesh" />
 	<Attribute
@@ -521,7 +521,7 @@
 </Item>
 
 <!-- Berserkeraxt -->
-<Item type="weapon" subtype="bersrk_axe" size="medium">
+<Item type="weapon" subtype="bersrk_axe" name="berserker axe" size="medium">
 	<Image image="set:axe.png image:full_image" />
 	<Mesh file="axe.mesh" />
 	<Attribute
@@ -558,7 +558,7 @@
 </Item>
 
 <!-- Diamantaxt -->
-<Item type="weapon" subtype="diamnt_axe" size="medium">
+<Item type="weapon" subtype="diamnt_axe" name="diamont axe" size="medium">
 	<Image image="set:axe.png image:full_image" />
 	<Mesh file="axe.mesh" />
 	<Attribute
@@ -595,7 +595,7 @@
 </Item>
 
 <!-- Zwergenaxt -->
-<Item type="weapon" subtype="dwarf_axe" size="medium">
+<Item type="weapon" subtype="dwarf_axe" name="dwarfen axe" size="medium">
 	<Image image="set:axe.png image:full_image" />
 	<Mesh file="axe.mesh" />
 	<Attribute
@@ -632,7 +632,7 @@
 </Item>
 
 <!-- Hoellenaxt -->
-<Item type="weapon" subtype="hell_axe" size="medium">
+<Item type="weapon" subtype="hell_axe" name="hell axe" size="medium">
 	<Image image="set:axe.png image:full_image" />
 	<Mesh file="axe.mesh" />
 	<Attribute

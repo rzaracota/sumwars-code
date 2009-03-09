@@ -1,4 +1,4 @@
-<Item type="helmet" subtype="steel_hlm" size="medium">
+<Item type="helmet" subtype="steel_hlm" name="steel helmet" size="medium">
 	<Image image="set:noMedia.png image:full_image" />
 	<Mesh file="helmet.mesh" />
 	<Attribute

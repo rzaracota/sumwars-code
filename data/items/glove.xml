@@ -1,4 +1,4 @@
-<Item type="gloves" subtype="leath_glv" size="medium">
+<Item type="gloves" subtype="leath_glv" name="leather glove" size="medium">
 	<Image image="set:noMedia.png image:full_image" />
 	<Mesh file="potion.mesh" />
 	<Attribute

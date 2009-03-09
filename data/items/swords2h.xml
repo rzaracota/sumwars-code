@@ -121,7 +121,7 @@ s		modchance_damage_air_mod="float"
 
 <!-- TWO HANDED SWORDS -->
 <!-- farmers two hand sword-->
-<Item type="weapon" subtype="farm2h_sw" size="big">
+<Item type="weapon" subtype="farm2h_sw" name="farmer sword" size="big">
 	<Image image="set:farm2h_sw.png image:full_image" />
 	<Mesh file="farm2h_sw.mesh" />
 	<Attribute
@@ -158,7 +158,7 @@ s		modchance_damage_air_mod="float"
 </Item>
 
 <!-- mercenary blade -->
-<Item type="weapon" subtype="merc2h_sw" size="big">
+<Item type="weapon" subtype="merc2h_sw" name="mercenary blade" size="big">
 	<Image image="set:merc2h_sw.png image:full_image" />
 	<Mesh file="merc2h_sw.mesh" />
 	<Attribute
@@ -195,7 +195,7 @@ s		modchance_damage_air_mod="float"
 </Item>
 
 <!-- two handed steelsword -->
-<Item type="weapon" subtype="steel2h_sw" size="big">
+<Item type="weapon" subtype="steel2h_sw" name="two handed steel sword" size="big">
 	<Image image="set:sword.png image:full_image" />
 	<Mesh file="sword2h.mesh" />
 	<Attribute
@@ -232,7 +232,7 @@ s		modchance_damage_air_mod="float"
 </Item>
 
 <!-- smash sword -->
-<Item type="weapon" subtype="smash_sw" size="big">
+<Item type="weapon" subtype="smash_sw" name="smash sword" size="big">
 	<Image image="set:sword.png image:full_image" />
 	<Mesh file="sword2h.mesh" />
 	<Attribute
@@ -269,7 +269,7 @@ s		modchance_damage_air_mod="float"
 </Item>
 
 <!-- horse killer -->
-<Item type="weapon" subtype="horse_sw" size="big">
+<Item type="weapon" subtype="horse_sw" name="sword killer" size="big">
 	<Image image="set:sword.png image:full_image" />
 	<Mesh file="sword2h.mesh" />
 	<Attribute
@@ -306,7 +306,7 @@ s		modchance_damage_air_mod="float"
 </Item>
 
 <!-- bastard sword -->
-<Item type="weapon" subtype="bast_sw" size="big">
+<Item type="weapon" subtype="bast_sw" name="bastard sword" size="big">
 	<Image image="set:sword.png image:full_image" />
 	<Mesh file="sword2h.mesh" />
 	<Attribute
@@ -343,7 +343,7 @@ s		modchance_damage_air_mod="float"
 </Item>
 
 <!-- Ogerdolch -->
-<Item type="weapon" subtype="ogre_sw" size="big">
+<Item type="weapon" subtype="ogre_sw" name="ogre dagger" size="big">
 	<Image image="set:sword.png image:full_image" />
 	<Mesh file="sword2h.mesh" />
 	<Attribute
@@ -380,7 +380,7 @@ s		modchance_damage_air_mod="float"
 </Item>
 
 <!-- Goblintoeter -->
-<Item type="weapon" subtype="gobkil_sw" size="big">
+<Item type="weapon" subtype="gobkil_sw" name="goblinkiller" size="big">
 	<Image image="set:sword.png image:full_image" />
 	<Mesh file="sword2h.mesh" />
 	<Attribute
@@ -417,7 +417,7 @@ s		modchance_damage_air_mod="float"
 </Item>
 
 <!-- Richtschwert -->
-<Item type="weapon" subtype="judge_sw" size="big">
+<Item type="weapon" subtype="judge_sw" name="executioner's sword" size="big">
 	<Image image="set:sword.png image:full_image" />
 	<Mesh file="sword2h.mesh" />
 	<Attribute
@@ -454,7 +454,7 @@ s		modchance_damage_air_mod="float"
 </Item>
 
 <!-- Gardistenzweihaender -->
-<Item type="weapon" subtype="garde_sw" size="big">
+<Item type="weapon" subtype="garde_sw" name="two handed guardsman sword" size="big">
 	<Image image="set:sword.png image:full_image" />
 	<Mesh file="sword2h.mesh" />
 	<Attribute
@@ -491,7 +491,7 @@ s		modchance_damage_air_mod="float"
 </Item>
 
 <!-- Flamberg -->
-<Item type="weapon" subtype="flame2h_sw" size="big">
+<Item type="weapon" subtype="flame2h_sw" name="flamberg" size="big">
 	<Image image="set:sword.png image:full_image" />
 	<Mesh file="sword2h.mesh" />
 	<Attribute
@@ -530,7 +530,7 @@ s		modchance_damage_air_mod="float"
 </Item>
 
 <!-- Aisener Kriegsschwert -->
-<Item type="weapon" subtype="aisen_sw" size="big">
+<Item type="weapon" subtype="aisen_sw" name="aisener battle sword" size="big">
 	<Image image="set:sword.png image:full_image" />
 	<Mesh file="sword2h.mesh" />
 	<Attribute
@@ -567,7 +567,7 @@ s		modchance_damage_air_mod="float"
 </Item>
 
 <!-- Monsterschwert -->
-<Item type="weapon" subtype="monster_sw" size="big">
+<Item type="weapon" subtype="monster_sw" name="monster sword" size="big">
 	<Image image="set:sword.png image:full_image" />
 	<Mesh file="sword2h.mesh" />
 	<Attribute
@@ -604,7 +604,7 @@ s		modchance_damage_air_mod="float"
 </Item>
 
 <!-- Traenenschwert -->
-<Item type="weapon" subtype="tear_sw" size="big">
+<Item type="weapon" subtype="tear_sw" name="tear sword" size="big">
 	<Image image="set:sword.png image:full_image" />
 	<Mesh file="sword2h.mesh" />
 	<Attribute
@@ -641,7 +641,7 @@ s		modchance_damage_air_mod="float"
 </Item>
 
 <!-- Todeswind -->
-<Item type="weapon" subtype="death_sw" size="big">
+<Item type="weapon" subtype="death_sw" name="deathwind" size="big">
 	<Image image="set:sword.png image:full_image" />
 	<Mesh file="sword2h.mesh" />
 	<Attribute
@@ -680,7 +680,7 @@ s		modchance_damage_air_mod="float"
 </Item>
 
 <!-- Schreckensschwert -->
-<Item type="weapon" subtype="dread_sw" size="big">
+<Item type="weapon" subtype="dread_sw" name="dread sword" size="big">
 	<Image image="set:sword.png image:full_image" />
 	<Mesh file="sword2h.mesh" />
 	<Attribute
@@ -717,7 +717,7 @@ s		modchance_damage_air_mod="float"
 </Item>
 
 <!-- Grossschwert -->
-<Item type="weapon" subtype="great_sw" size="big">
+<Item type="weapon" subtype="great_sw" name="great sword" size="big">
 	<Image image="set:sword.png image:full_image" />
 	<Mesh file="sword2h.mesh" />
 	<Attribute
@@ -754,7 +754,7 @@ s		modchance_damage_air_mod="float"
 </Item>
 
 <!-- Engelsschwert -->
-<Item type="weapon" subtype="angl2h_sw" size="big">
+<Item type="weapon" subtype="angl2h_sw" name="angel sword" size="big">
 	<Image image="set:sword.png image:full_image" />
 	<Mesh file="sword2h.mesh" />
 	<Attribute

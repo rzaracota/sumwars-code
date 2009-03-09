@@ -1,7 +1,7 @@
 ﻿<!-- TWO HANDED AXES -->
 
 <!-- Holzfälleraxt -->
-<Item type="weapon" subtype="lumber_axe" size="big">
+<Item type="weapon" subtype="lumber_axe" name="lumberjack axe" size="big">
 	<Image image="set:axe2H.png image:full_image" />
 	<Mesh file="battleaxe.mesh" />
 	<Attribute
@@ -38,7 +38,7 @@
 </Item>
 
 <!-- Großaxt-->
-<Item type="weapon" subtype="great_axe" size="big">
+<Item type="weapon" subtype="great_axe" name="great axe" size="big">
 	<Image image="set:axe2H.png image:full_image" />
 	<Mesh file="battleaxe.mesh" />
 	<Attribute
@@ -75,7 +75,7 @@
 </Item>
 
 <!-- Reißeraxt -->
-<Item type="weapon" subtype="riping_axe" size="big">
+<Item type="weapon" subtype="riping_axe" name="ripping axe" size="big">
 	<Image image="set:axe2H.png image:full_image" />
 	<Mesh file="battleaxe.mesh" />
 	<Attribute
@@ -112,7 +112,7 @@
 </Item>
 
 <!-- Henkersaxt -->
-<Item type="weapon" subtype="execut_axe" size="big">
+<Item type="weapon" subtype="execut_axe" name="executioner axe" size="big">
 	<Image image="set:axe2H.png image:full_image" />
 	<Mesh file="battleaxe.mesh" />
 	<Attribute
@@ -149,7 +149,7 @@
 </Item>
 
 <!-- Schmetteraxt -->
-<Item type="weapon" subtype="iron_axe" size="big">
+<Item type="weapon" subtype="smash_axe" name="smashing axe" size="big">
 	<Image image="set:axe2H.png image:full_image" />
 	<Mesh file="battleaxe.mesh" />
 	<Attribute
@@ -186,7 +186,7 @@
 </Item>
 
 <!-- Ogerbeil -->
-<Item type="weapon" subtype="ogrhac_axe" size="big">
+<Item type="weapon" subtype="ogrhac_axe" name="ogre hatchet" size="big">
 	<Image image="set:axe2H.png image:full_image" />
 	<Mesh file="battleaxe.mesh" />
 	<Attribute
@@ -223,7 +223,7 @@
 </Item>
 
 <!-- Sensenaxt -->
-<Item type="weapon" subtype="scythe_axe" size="big">
+<Item type="weapon" subtype="scythe_axe" name="scythe axe" size="big">
 	<Image image="set:axe2H.png image:full_image" />
 	<Mesh file="battleaxe.mesh" />
 	<Attribute
@@ -260,7 +260,7 @@
 </Item>
 
 <!-- Barbarenstreitaxt -->
-<Item type="weapon" subtype="barbar_axe" size="big">
+<Item type="weapon" subtype="barbar_axe" name="barbarian axe" size="big">
 	<Image image="set:axe2H.png image:full_image" />
 	<Mesh file="battleaxe.mesh" />
 	<Attribute
@@ -296,8 +296,8 @@
 	/>
 </Item>
 
-<!-- Knochenbrecheraxt -->
-<Item type="weapon" subtype="bnebrk_axe" size="big">
+<!-- Knochenbrecher -->
+<Item type="weapon" subtype="bnebrk_axe" name="bonebreaker axe" size="big">
 	<Image image="set:axe2H.png image:full_image" />
 	<Mesh file="battleaxe.mesh" />
 	<Attribute
@@ -334,7 +334,7 @@
 </Item>
 
 <!-- Riesenaxt -->
-<Item type="weapon" subtype="giant_axe" size="big">
+<Item type="weapon" subtype="giant_axe" name="giant axe" size="big">
 	<Image image="set:axe2H.png image:full_image" />
 	<Mesh file="battleaxe.mesh" />
 	<Attribute
@@ -371,7 +371,7 @@
 </Item>
 
 <!-- Schlachtaxt -->
-<Item type="weapon" subtype="slautr_axe" size="big">
+<Item type="weapon" subtype="slautr_axe" name="slaughter axe" size="big">
 	<Image image="set:axe2H.png image:full_image" />
 	<Mesh file="battleaxe.mesh" />
 	<Attribute
@@ -408,7 +408,7 @@
 </Item>
 
 <!-- Ogerreißer -->
-<Item type="weapon" subtype="ogrkil_axe" size="big">
+<Item type="weapon" subtype="ogrkil_axe" name="ogretearer" size="big">
 	<Image image="set:axe2H.png image:full_image" />
 	<Mesh file="battleaxe.mesh" />
 	<Attribute
@@ -445,7 +445,7 @@
 </Item>
 
 <!-- Zwergenstahlaxt -->
-<Item type="weapon" subtype="dwfstl_axe" size="big">
+<Item type="weapon" subtype="dwfstl_axe" name="dwarfensteel axe" size="big">
 	<Image image="set:axe2H.png image:full_image" />
 	<Mesh file="battleaxe.mesh" />
 	<Attribute
@@ -482,7 +482,7 @@
 </Item>
 
 <!-- Sternenaxt -->
-<Item type="weapon" subtype="star_axe" size="big">
+<Item type="weapon" subtype="star_axe" name="star axe" size="big">
 	<Image image="set:axe2H.png image:full_image" />
 	<Mesh file="battleaxe.mesh" />
 	<Attribute
@@ -519,7 +519,7 @@
 </Item>
 
 <!-- Königsaxt -->
-<Item type="weapon" subtype="king_axe" size="big">
+<Item type="weapon" subtype="king_axe" name="kings axe" size="big">
 	<Image image="set:axe2H.png image:full_image" />
 	<Mesh file="battleaxe.mesh" />
 	<Attribute
@@ -556,7 +556,7 @@
 </Item>
 
 <!-- Folteraxt -->
-<Item type="weapon" subtype="tortur_axe" size="big">
+<Item type="weapon" subtype="tortur_axe" name="torture axe" size="big">
 	<Image image="set:axe2H.png image:full_image" />
 	<Mesh file="battleaxe.mesh" />
 	<Attribute
@@ -593,7 +593,7 @@
 </Item>
 
 <!-- Eislandaxt -->
-<Item type="weapon" subtype="ice_axe" size="big">
+<Item type="weapon" subtype="ice_axe" name="iceland axe" size="big">
 	<Image image="set:axe2H.png image:full_image" />
 	<Mesh file="battleaxe.mesh" />
 	<Attribute
@@ -632,7 +632,7 @@
 </Item>
 
 <!-- Todesaxt -->
-<Item type="weapon" subtype="death_axe" size="big">
+<Item type="weapon" subtype="death_axe" name="death axe" size="big">
 	<Image image="set:axe2H.png image:full_image" />
 	<Mesh file="battleaxe.mesh" />
 	<Attribute

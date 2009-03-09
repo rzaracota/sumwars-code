@@ -7,7 +7,7 @@
 lua_State * EventSystem::m_lua=0;
 
 Region* EventSystem::m_region;
- 
+
 Trigger*  EventSystem::m_trigger;
 
 Dialogue*  EventSystem::m_dialogue;
@@ -22,13 +22,13 @@ void EventSystem::init()
 	{
 		cleanup();
 	}
-	
+
 	m_lua = lua_open();
 
 	luaL_openlibs(m_lua);
-	
+
 	lua_register(m_lua, "getObjectValue", getObjectValue);
-	lua_register(m_lua, "get", getObjectValue);	
+	lua_register(m_lua, "get", getObjectValue);
 	lua_register(m_lua, "setObjectValue", setObjectValue);
 	lua_register(m_lua, "set", setObjectValue);
 	lua_register(m_lua, "pointIsInArea", pointIsInArea);
@@ -62,18 +62,18 @@ void EventSystem::init()
 	lua_register(m_lua, "getSpeaker", getSpeaker);
 	lua_register(m_lua, "setRefName", setRefName);
 	lua_register(m_lua, "getRolePlayers", getRolePlayers);
-	
+
 	lua_register(m_lua, "writeString", writeString);
 	lua_register(m_lua, "writeNewline", writeNewline);
 	lua_register(m_lua, "writeUpdateString", writeUpdateString);
 	lua_register(m_lua, "gettext", luagettext);
 	lua_register(m_lua, "_", luagettext);
-	
-	
+
+
 	m_region =0;
 	m_trigger =0;
 	m_dialogue =0;
-	
+
 	doString("quests = {} ; playervars = {}");
 }
 
@@ -87,7 +87,7 @@ void  EventSystem::cleanup()
 void EventSystem::doString(const char* instructions)
 {
 	int err  = luaL_dostring(m_lua, instructions);
-	
+
 	if (err!=0)
 	{
 		reportErrors(m_lua, err);
@@ -97,7 +97,7 @@ void EventSystem::doString(const char* instructions)
 void EventSystem::doFile(const char* file)
 {
 	int err  = luaL_dofile(m_lua, file);
-	
+
 	if (err!=0)
 	{
 		reportErrors(m_lua, err);
@@ -130,9 +130,9 @@ bool EventSystem::executeEvent(Event* event)
 	bool ret = event->checkCondition();
 	if (ret ==false)
 		return false;
-	
+
 	event->doEffect();
-	
+
 	return true;
 }
 
@@ -141,17 +141,17 @@ Vector EventSystem::getVector(lua_State *L, int index)
 	if (lua_istable(L,index))
 	{
 		float x,y;
-			
+
 		lua_pushinteger(L, 1);
 		lua_gettable(L, index);
 		x = lua_tonumber(L, -1);
 		lua_pop(L, 1);
-				
+
 		lua_pushinteger(L, 2);
 		lua_gettable(L, index);
 		y = lua_tonumber(L, -1);
 		lua_pop(L, 1);
-	
+
 		return Vector(x,y);
 	}
 	else if (lua_isstring(L,index))
@@ -168,7 +168,7 @@ void EventSystem::pushVector(lua_State *L, Vector v)
 	lua_pushinteger(L, 1);
 	lua_pushnumber(L, v.m_x);
 	lua_settable(L, -3);
-			
+
 	lua_pushinteger(L, 2);
 	lua_pushnumber(L,v.m_y);
 	lua_settable(L, -3);
@@ -176,20 +176,20 @@ void EventSystem::pushVector(lua_State *L, Vector v)
 
 int EventSystem::getObjectValue(lua_State *L)
 {
-	
+
 	int ret =0;
 	int argc = lua_gettop(L);
 	if (argc>=2 && lua_isnumber(L,1) && lua_isstring(L,2))
 	{
 		int id = lua_tointeger(L, 1);
 		std::string valname = lua_tostring(L, 2);
-		
-		WorldObject* wo =0; 
+
+		WorldObject* wo =0;
 		if (m_region !=0)
 		{
 			wo = m_region->getObject(id);
 		}
-		
+
 		if (wo !=0)
 		{
 			ret = wo->getValue(valname);
@@ -203,26 +203,26 @@ int EventSystem::getObjectValue(lua_State *L)
 	{
 		ERRORMSG("Syntax: getObjectValue( int id, string valname)");
 	}
-	
+
 	return ret;
 }
 
 int EventSystem::setObjectValue(lua_State *L)
 {
-	
+
 	int ret =0;
 	int argc = lua_gettop(L);
 	if (argc>=2 && lua_isnumber(L,1) && lua_isstring(L,2))
 	{
 		int id = lua_tointeger(L, 1);
 		std::string valname = lua_tostring(L, 2);
-		
-		WorldObject* wo =0; 
+
+		WorldObject* wo =0;
 		if (m_region !=0)
 		{
 			wo = m_region->getObject(id);
 		}
-		
+
 		if (wo !=0)
 		{
 			ret = wo->setValue(valname);
@@ -236,7 +236,7 @@ int EventSystem::setObjectValue(lua_State *L)
 	{
 		ERRORMSG("Syntax: setObjectValue( int id, string valname, value)");
 	}
-	
+
 	return 0;
 }
 
@@ -248,7 +248,7 @@ int EventSystem::getDamageValue(lua_State *L)
 	{
 		std::string dmgname = lua_tostring(L, 1);
 		std::string valname = lua_tostring(L, 2);
-		
+
 		if (m_region !=0)
 		{
 			ret = m_region->getDamageObject(dmgname).getValue(valname);
@@ -258,7 +258,7 @@ int EventSystem::getDamageValue(lua_State *L)
 	{
 		ERRORMSG("Syntax: getDamageValue( string damagename, string valname)");
 	}
-	
+
 	return ret;
 }
 
@@ -269,7 +269,7 @@ int EventSystem::setDamageValue(lua_State *L)
 	{
 		std::string dmgname = lua_tostring(L, 1);
 		std::string valname = lua_tostring(L, 2);
-		
+
 		if (m_region !=0)
 		{
 			m_region->getDamageObject(dmgname).setValue(valname);
@@ -279,7 +279,7 @@ int EventSystem::setDamageValue(lua_State *L)
 	{
 		ERRORMSG("Syntax: setDamageValue( string damagename, string valname, value, [value])");
 	}
-	
+
 	return 0;
 }
 
@@ -293,10 +293,10 @@ int EventSystem::createProjectile(lua_State *L)
 			std::string tname = lua_tostring(L, 1);
 			std::string dmgname = lua_tostring(L, 2);
 			Vector pos = getVector(L,3);
-		
+
 			float speed = 10.0;
 			DEBUG5("name %s dmg %s %f %f",tname.c_str(), dmgname.c_str(),pos.m_x,pos.m_y);
-			
+
 			// Typ ermitteln
 			Projectile::ProjectileType type = Projectile::ARROW;
 			if (tname =="arrow") type = Projectile::ARROW;
@@ -326,13 +326,13 @@ int EventSystem::createProjectile(lua_State *L)
 			else if (tname =="acid") type = Projectile:: ACID;
 			else if (tname =="divine_beam") type = Projectile::DIVINE_BEAM;
 			else if (tname =="hypnosis") type = Projectile::HYPNOSIS;
-			
+
 			// Schaden
 			Damage* dmg = &(m_region->getDamageObject(dmgname));
-			
+
 			// Projektil erzeugen
 			Projectile* pr = new Projectile(type, dmg, World::getWorld()->getValidProjectileId());
-			
+
 			// Richtung, Geschwindigkeit ermitteln
 			if (argc>=4 && (lua_istable(L,4) || lua_isstring(L,4)))
 			{
@@ -340,25 +340,25 @@ int EventSystem::createProjectile(lua_State *L)
 				Vector goal = getVector(L,4);
 				Vector dir = goal - pos;
 				dir.normalize();
-				
+
 				if (argc>=5  && lua_isnumber(L,5))
 				{
 					speed = lua_tonumber(L, 5);
 				}
-				
+
 				// Geschwindigkeit wird in m/ms gemessen
 				pr->setSpeed(dir *speed/1000);
-				
+
 				if (argc>=6 && lua_isnumber(L,6))
 				{
 					float dist = lua_tonumber(L, 6);
 					pos += dir*dist;
 				}
 			}
-			
+
 			m_region->insertProjectile(pr,pos);
 		}
-		
+
 	}
 	else
 	{
@@ -375,8 +375,8 @@ int EventSystem::unitIsInArea(lua_State *L)
 	{
 		int id = lua_tointeger(L, 1);
 		AreaName area = lua_tostring(L, 2);
-		
-		
+
+
 		if (m_region !=0)
 		{
 			WorldObject* wo = m_region->getObject(id);
@@ -389,13 +389,13 @@ int EventSystem::unitIsInArea(lua_State *L)
 				ERRORMSG("unitIsInArea: Unit does not exist");
 			}
 		}
-		
+
 	}
 	else
 	{
 		ERRORMSG("Syntax: pointIsInArea( int unitid, string areaname)");
 	}
-	
+
 	lua_pushboolean(EventSystem::getLuaState() , ret);
 	return 1;
 }
@@ -408,23 +408,23 @@ int EventSystem::pointIsInArea(lua_State *L)
 	{
 		Vector c = getVector(L,1);
 		AreaName area = lua_tostring(L, 2);
-		
+
 		Shape s;
 		s.m_center = c;
 		s.m_type = Shape::CIRCLE;
 		s.m_radius=0;
-		
+
 		if (m_region !=0)
 		{
 			ret = m_region->getArea(area).intersects(s);
 		}
-		
+
 	}
 	else
 	{
 		ERRORMSG("Syntax: pointIsInArea( {float x, float y}, string areaname)");
 	}
-	
+
 	lua_pushboolean(EventSystem::getLuaState() , ret);
 	return 1;
 }
@@ -435,11 +435,11 @@ int EventSystem::createObject(lua_State *L)
 	int argc = lua_gettop(L);
 	if (argc>=2 && (lua_istable(L,2) || lua_isstring(L,2)) && lua_isstring(L,1))
 	{
-		
-		
+
+
 		WorldObject::TypeInfo::ObjectSubtype subtype = lua_tostring(L, 1);
 		Vector pos = getVector(L,2);
-		
+
 		if (m_region!=0)
 		{
 			float angle =0;
@@ -447,16 +447,16 @@ int EventSystem::createObject(lua_State *L)
 			{
 				angle = lua_tonumber(L, 3);
 			}
-			
+
 			ret = m_region->createObject(subtype, pos,angle, WorldObject::STATE_AUTO);
 		}
-		
+
 	}
 	else
 	{
 		ERRORMSG("Syntax: createObject( string subtype, {float x, float y}, [angle])");
 	}
-	
+
 	lua_pushinteger(EventSystem::getLuaState() , ret);
 	return 1;
 }
@@ -486,27 +486,27 @@ int EventSystem::addUnitCommand(lua_State *L)
 	{
 		if (m_region ==0)
 			return 0;
-		
+
 		int id = int (lua_tonumber(L,1));
 		std::string actstr = lua_tostring(L,2);
-		
+
 		WorldObject* wo = m_region->getObject(id);
 		if (wo !=0)
 		{
 			if (wo->getTypeInfo()->m_type != WorldObject::TypeInfo::TYPE_FIXED_OBJECT)
 			{
 				Creature* cr = static_cast<Creature*>(wo);
-				
+
 				Action::ActionType act = Action::getActionType(actstr);
 				if (act != Action::NOACTION)
 				{
 					Command com;
 					com.m_type = act;
 					com.m_range = cr->getBaseAttrMod()->m_attack_range;
-					
+
 					if (act == Action::USE)
 						com.m_range = 0.5;
-					
+
 					if (argc >=4 && lua_isnumber(L,4))
 					{
 						com.m_goal_object_id = lua_tointeger(L,4);
@@ -515,7 +515,7 @@ int EventSystem::addUnitCommand(lua_State *L)
 					{
 						com.m_goal = getVector(L,4);
 					}
-					
+
 					float time = 50000;
 					if (argc>=3 && lua_isnumber(L,3))
 						time = lua_tonumber(L,3);
@@ -529,7 +529,7 @@ int EventSystem::addUnitCommand(lua_State *L)
 		ERRORMSG("Syntax: :addUnitCommand(int unitid, string command, float time, [goal_unitid | {goal_x,goal_y}])");
 	}
 	return 0;
-	
+
 }
 
 int EventSystem::getObjectAt(lua_State *L)
@@ -553,7 +553,7 @@ int EventSystem::getObjectAt(lua_State *L)
 	{
 		ERRORMSG("Syntax: getObjectAt({float x, float y})");
 	}
-	
+
 	return 0;
 }
 
@@ -569,7 +569,7 @@ int EventSystem::getObjectsInArea(lua_State *L)
 			WorldObjectList obj;
 			WorldObjectList::iterator it;
 			Shape s = m_region->getArea(area);
-			
+
 			short layer = WorldObject::LAYER_ALL;
 			if (argc>=2 && lua_isstring(L,2))
 			{
@@ -591,11 +591,11 @@ int EventSystem::getObjectsInArea(lua_State *L)
 					layer = WorldObject::LAYER_BASE | WorldObject::LAYER_AIR;
 				}
 			}
-			
+
 			short group = WorldObject::GROUP_ALL;
 			if (argc>=3 && lua_isstring(L,3))
 			{
-				
+
 				std::string gstr = lua_tostring(L,3);
 				if (gstr == "unit")
 				{
@@ -611,7 +611,7 @@ int EventSystem::getObjectsInArea(lua_State *L)
 				}
 			}
 			m_region->getObjectsInShape(&s,&obj,layer,group);
-			
+
 			int cnt =1;
 			for (it = obj.begin(); it!= obj.end(); ++it)
 			{
@@ -625,8 +625,8 @@ int EventSystem::getObjectsInArea(lua_State *L)
 	{
 		ERRORMSG("Syntax: getObjectsInArea(string areaname)")
 	}
-	
-	
+
+
 	return 1;
 }
 
@@ -637,13 +637,13 @@ int EventSystem::dropItem(lua_State *L)
 	{
 		Item::Subtype subtype = lua_tostring(L, 1);
 		Vector pos = getVector(L,2);
-		
+
 		float magic_power=0;
 		if (argc>=3 && lua_isnumber(L,3))
 		{
 			magic_power= lua_tonumber(L, 3);
 		}
-		
+
 		if (m_region!=0)
 		{
 			m_region->dropItem(subtype, pos, int (magic_power));
@@ -655,7 +655,7 @@ int EventSystem::dropItem(lua_State *L)
 	}
 	return 0;
 }
-	
+
 int EventSystem::addLocation(lua_State *L)
 {
 	int argc = lua_gettop(L);
@@ -663,8 +663,8 @@ int EventSystem::addLocation(lua_State *L)
 	{
 		LocationName loc = lua_tostring(L, 1);
 		Vector v = getVector(L,2);
-		
-		
+
+
 		if (m_region !=0)
 		{
 			m_region->addLocation(loc,v);
@@ -676,7 +676,7 @@ int EventSystem::addLocation(lua_State *L)
 	}
 	return 0;
 }
-	
+
 int EventSystem::getLocation(lua_State *L)
 {
 	int argc = lua_gettop(L);
@@ -686,7 +686,7 @@ int EventSystem::getLocation(lua_State *L)
 		if (m_region !=0)
 		{
 			pushVector(L,m_region->getLocation(loc));
-			
+
 			return 1;
 		}
 	}
@@ -704,7 +704,7 @@ int EventSystem::addArea(lua_State *L)
 	{
 		AreaName area = lua_tostring(L, 1);
 		std::string type = lua_tostring(L, 2);
-		
+
 		Shape s;
 		s.m_center = getVector(L,3);
 		if (type == "rect" || type == "RECT")
@@ -718,7 +718,7 @@ int EventSystem::addArea(lua_State *L)
 			s.m_type = Shape::CIRCLE;
 			s.m_radius = r;
 		}
-		
+
 		if (m_region !=0)
 		{
 			m_region->addArea(area,s);
@@ -739,7 +739,7 @@ int EventSystem::startTimer(lua_State *L)
 	{
 		std::string type = lua_tostring(L, 1);
 		float time = lua_tonumber(L, 2);
-		
+
 		if (m_region !=0)
 		{
 			m_trigger = new Trigger(type);
@@ -760,13 +760,13 @@ int EventSystem::insertTrigger(lua_State *L)
 	{
 		std::string type = lua_tostring(L, 1);
 		Region* reg = m_region;
-		
+
 		if (argc >=2 && lua_isstring(L,2))
 		{
 			std::string regname = lua_tostring(L, 2);
 			reg = World::getWorld()->getRegion(regname);
 		}
-		
+
 		if (reg !=0)
 		{
 			m_trigger = new Trigger(type);
@@ -777,7 +777,7 @@ int EventSystem::insertTrigger(lua_State *L)
 	{
 		ERRORMSG("Syntax: insertTrigger(triggername, [regionname]");
 	}
-	return 0;	
+	return 0;
 }
 
 int EventSystem::addTriggerVariable(lua_State *L)
@@ -788,7 +788,7 @@ int EventSystem::addTriggerVariable(lua_State *L)
 		if (m_trigger !=0)
 		{
 			std::string name = lua_tostring(L, 1);
-			
+
 			if (lua_isnumber(L,2))
 			{
 				float f = lua_tonumber(L, 2);
@@ -799,7 +799,7 @@ int EventSystem::addTriggerVariable(lua_State *L)
 				std::string s = lua_tostring(L, 2);
 				m_trigger->addVariable(name, s);
 			}
-			
+
 		}
 	}
 	else
@@ -824,7 +824,7 @@ int EventSystem::setCutsceneMode(lua_State *L)
 	{
 		ERRORMSG("Syntax: setCutsceneMode(bool mode) ");
 	}
-	
+
 	return 0;
 }
 
@@ -846,33 +846,33 @@ int EventSystem::addCameraPosition(lua_State *L)
 			{
 				pos = cam.m_next_positions.back().first;
 			}
-			
+
 			float time =0;
 			if (lua_isnumber(L,1))
 			{
 				time = lua_tonumber(L,1);
 			}
-			
+
 			if (lua_istable(L,2) || lua_isstring(L,2))
 			{
 				pos.m_focus = getVector(L,2);
 			}
-			
+
 			if (lua_isnumber(L,3))
 			{
 				pos.m_phi = lua_tonumber(L,3);
 			}
-			
+
 			if (lua_isnumber(L,4))
 			{
 				pos.m_theta = lua_tonumber(L,4);
 			}
-			
+
 			if (lua_isnumber(L,5))
 			{
 				pos.m_distance = lua_tonumber(L,5);
 			}
-			
+
 			cam.addPosition(pos,time);
 		}
 	}
@@ -880,7 +880,7 @@ int EventSystem::addCameraPosition(lua_State *L)
 	{
 		ERRORMSG("Syntax: setCameraPosition(float time, {float x, float y}, float phi, float theta, float dist");
 	}
-	
+
 	return 0;
 }
 
@@ -889,27 +889,27 @@ int EventSystem::speak(lua_State *L)
 {
 	if (m_dialogue ==0)
 		return 0;
-	
+
 	int argc = lua_gettop(L);
 	if (argc>=2 && lua_isstring(L,1) && lua_isstring(L,2))
 	{
 		std::string refname = lua_tostring(L, 1);
 		std::string text = lua_tostring(L, 2);
-		
+
 		float time = 1000;
 		if (argc>=3 && lua_isnumber(L,3))
 		{
 			time = lua_tonumber(L,3);
 		}
-		
+
 		m_dialogue->speak(refname,text,time);
-		
+
 	}
 	else
 	{
 		ERRORMSG("Syntax: speak(string refname, string text [,float time])");
 	}
-	
+
 	return 0;
 }
 
@@ -917,7 +917,7 @@ int EventSystem::addQuestion(lua_State *L)
 {
 	if (m_dialogue ==0)
 		return 0;
-	
+
 	int argc = lua_gettop(L);
 	if (argc>=1 && lua_isstring(L,1))
 	{
@@ -928,7 +928,7 @@ int EventSystem::addQuestion(lua_State *L)
 	{
 		ERRORMSG("Syntax: addQuestion(string text)");
 	}
-	
+
 	return 0;
 }
 
@@ -937,20 +937,20 @@ int EventSystem::addAnswer(lua_State *L)
 {
 	if (m_dialogue ==0)
 		return 0;
-	
+
 	int argc = lua_gettop(L);
 	if (argc>=2 && lua_isstring(L,1) && lua_isstring(L,2))
 	{
 		std::string text = lua_tostring(L, 1);
 		std::string topic = lua_tostring(L, 2);
-		
+
 		m_dialogue->addAnswer(text,topic);
 	}
 	else
 	{
 		ERRORMSG("Syntax: addAnswer(string text, string topic)")
 	}
-	
+
 	return 0;
 }
 
@@ -958,7 +958,7 @@ int EventSystem::changeTopic(lua_State *L)
 {
 	if (m_dialogue ==0)
 		return 0;
-	
+
 	int argc = lua_gettop(L);
 	if (argc>=1 && lua_isstring(L,1))
 	{
@@ -970,7 +970,7 @@ int EventSystem::changeTopic(lua_State *L)
 	{
 		ERRORMSG("Syntax: addQuestion(string text)");
 	}
-	
+
 	return 0;
 }
 
@@ -978,10 +978,10 @@ int EventSystem::createDialogue(lua_State *L)
 {
 	if (m_region ==0)
 		return 0;
-	
+
 	m_dialogue = new Dialogue(m_region, "global");
 	m_region->insertDialogue(m_dialogue);
-	
+
 	return 0;
 }
 
@@ -989,25 +989,25 @@ int EventSystem::addSpeaker(lua_State *L)
 {
 	if (m_dialogue ==0)
 		return 0;
-	
+
 	int argc = lua_gettop(L);
 	if (argc>=1 && lua_isnumber(L,1))
 	{
 		int speaker = int (lua_tonumber(L, 1));
-		
+
 		string refname ="";
 		if (argc>=1 && lua_isstring(L,1))
 		{
 			refname = lua_tostring(L,2);
 		}
-		
+
 		m_dialogue->addSpeaker(speaker,refname);
 	}
 	else
 	{
 		ERRORMSG("Syntax: addSpeaker(int speaker, string refname)");
 	}
-	
+
 	return 0;
 }
 
@@ -1015,7 +1015,7 @@ int EventSystem::getSpeaker(lua_State *L)
 {
 	if (m_dialogue ==0)
 		return 0;
-		
+
 	int argc = lua_gettop(L);
 	if (argc>=1 && lua_isstring(L,1))
 	{
@@ -1028,7 +1028,7 @@ int EventSystem::getSpeaker(lua_State *L)
 		ERRORMSG("Syntax: int getSpeaker(string refname)");
 		return 0;
 	}
-	
+
 	return 1;
 }
 
@@ -1037,7 +1037,7 @@ int EventSystem::setTopicBase(lua_State *L)
 {
 	if (m_dialogue ==0)
 		return 0;
-	
+
 	int argc = lua_gettop(L);
 	if (argc>=1 && lua_isstring(L,1))
 	{
@@ -1048,7 +1048,7 @@ int EventSystem::setTopicBase(lua_State *L)
 	{
 		ERRORMSG("Syntax: setTopicBase(string text)");
 	}
-	
+
 	return 0;
 }
 
@@ -1059,7 +1059,7 @@ int EventSystem::setRefName(lua_State *L)
 	{
 		int id = int (lua_tonumber(L,1));
 		std::string refname = lua_tostring(L,2);
-		
+
 		WorldObject* wo = m_region->getObject(id);
 		if (wo!=0 && wo->isCreature())
 		{
@@ -1070,7 +1070,7 @@ int EventSystem::setRefName(lua_State *L)
 	{
 		ERRORMSG("Syntax: setRefName(int id, string name)");
 	}
-	
+
 	return 0;
 }
 
@@ -1080,15 +1080,15 @@ int EventSystem::getRolePlayers(lua_State *L)
 	if (argc>=1 && lua_isstring(L,1))
 	{
 		lua_newtable(L);
-		
+
 		std::set< int >& members = World::getWorld()->getPartyFrac(WorldObject::FRAC_PLAYER_PARTY)->getMembers();
 		std::set< int >::iterator it;
-		
+
 		WorldObject* wo;
 		Player* pl;
-		
+
 		std::string role = lua_tostring(L,1);
-		
+
 		int cnt =1;
 		for (it = members.begin(); it != members.end(); ++it)
 		{
@@ -1101,15 +1101,15 @@ int EventSystem::getRolePlayers(lua_State *L)
 				cnt++;
 			}
 		}
-		
-		
+
+
 	}
 	else
 	{
 		ERRORMSG("Syntax: getRolePlayers(string role)");
 		return 0;
 	}
-	
+
 	return 1;
 }
 
@@ -1144,27 +1144,27 @@ void EventSystem::readSavegame(CharConv* savegame, int playerid, bool local_play
 	std::stringstream stream;
 	stream << "addPlayer(" <<playerid <<");";
 	doString(stream.str().c_str());
-	
+
 	stream.str("");
 	stream << "playervars["<<playerid<<"].";
 	std::string prefix = stream.str();
-	
+
 	std::string instr,instr_pr;
 	std::string tablename;
 	DEBUG5("prefix %s",prefix.c_str());
-	
+
 	char c=1;
 	while (c==1)
 	{
 		savegame->fromBuffer(c);
 		if (c==0)
 			break;
-		
+
 		savegame->fromBuffer(instr);
 		if (local_player)
 		{
 			doString(instr.c_str());
-			
+
 			tablename = instr.substr(0,instr.find_first_of ('='));
 			DEBUG("table name %s",tablename.c_str());
 			stream.str("");
@@ -1172,7 +1172,7 @@ void EventSystem::readSavegame(CharConv* savegame, int playerid, bool local_play
 			DEBUG5("instr %s",stream.str().c_str());
 			doString(stream.str().c_str());
 		}
-		
+
 		if (World::getWorld() !=0 && World::getWorld()->isServer())
 		{
 			instr_pr = prefix;
@@ -1180,7 +1180,7 @@ void EventSystem::readSavegame(CharConv* savegame, int playerid, bool local_play
 			doString(instr_pr.c_str());
 		}
 	}
-	
+
 	if (not local_player)
 	{
 		stream.str("");
@@ -1208,10 +1208,10 @@ int EventSystem::writeUpdateString(lua_State *L)
 	int argc = lua_gettop(L);
 	if (argc <2)
 		return 0;
-	
+
 	int id = (int) lua_tonumber(L,1);
 	std::string instr =  lua_tostring(L,2);
-	
+
 	m_player_varupdates[id] += instr;
 	return 0;
 }
@@ -1219,29 +1219,30 @@ int EventSystem::writeUpdateString(lua_State *L)
 int EventSystem::luagettext(lua_State *L)
 {
 	int argc = lua_gettop(L);
-	
+
 	if (argc<1)
 	{
 		lua_pushstring(L,"");
 		return 1;
 	}
 #ifdef WIN32
-	lua_pushstring(L,lua_tostring(L,1));
-	return 1,
+lua_pushstring(L,lua_tostring(L,1));
+return 1;
+#else
+std:tring text="return ";
+std:tring transl = dgettext("event",lua_tostring(L,1));
+size_t pos = transl.find_first_of("\'\"");
+if (pos == std:tring::npos)
+text += "[[";
+
+text += transl;
+
+if (pos == std:tring::npos)
+text += "]];";
+
+
+doString(text.c_str());
+return 1;
 #endif
-	std::string text="return ";
-	std::string transl = dgettext("event",lua_tostring(L,1));
-	size_t pos = transl.find_first_of("\'\"");
-	if (pos == std::string::npos)
-		text += "[[";
-	
-	text += transl;
-	
-	if (pos == std::string::npos)
-		text += "]];";
-	
-	
-	doString(text.c_str());
-	return 1;
 }
 

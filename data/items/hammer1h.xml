@@ -2,7 +2,7 @@
 <!-- ONE HANDED HAMMER -->
 
 <!-- hammer -->
-<Item type="weapon" subtype="hammer_hmr" size="medium">
+<Item type="weapon" subtype="hammer_hmr" name="hammer" size="medium">
 	<Image image="set:hammer.png image:full_image" />
 	<Mesh file="hammer_hmr.mesh" />
 	<Attribute
@@ -39,7 +39,7 @@
 </Item>
 
 <!-- Goblin Club -->
-<Item type="weapon" subtype="goblin_hmr" size="medium">
+<Item type="weapon" subtype="goblin_hmr" name="goblin club" size="medium">
 	<Image image="set:goblin_hmr.png image:full_image" />
 	<Mesh file="goblin_hmr.mesh" />
 	<Attribute
@@ -76,7 +76,7 @@
 </Item>
 
 <!-- Zeremonienhammer -->
-<Item type="weapon" subtype="cermon_hmr" size="medium">
+<Item type="weapon" subtype="cermon_hmr" name="cermeonial hammer" size="medium">
 	<Image image="set:cermon_hmr.png image:full_image" />
 	<Mesh file="cermon_hmr.mesh" />
 	<Attribute
@@ -113,7 +113,7 @@
 </Item>
 
 <!-- Nagelkeule -->
-<Item type="weapon" subtype="nail_hmr" size="medium">
+<Item type="weapon" subtype="nail_hmr" name="nail club" size="medium">
 	<Image image="set:nail_hmr.png image:full_image" />
 	<Mesh file="nail_hmr.mesh" />
 	<Attribute
@@ -150,7 +150,7 @@
 </Item>
 
 <!-- Eisenhammer -->
-<Item type="weapon" subtype="iron_hmr" size="medium">
+<Item type="weapon" subtype="iron_hmr" name="iron hammer" size="medium">
 	<Image image="set:iron_hmr.png image:full_image" />
 	<Mesh file="iron_hmr.mesh" />
 	<Attribute
@@ -187,7 +187,7 @@
 </Item>
 
 <!-- Eisenbeschlagene Keule -->
-<Item type="weapon" subtype="iroclb_hmr" size="medium">
+<Item type="weapon" subtype="iroclb_hmr" name="iron club" size="medium">
 	<Image image="set:iroclb_hmr.png image:full_image" />
 	<Mesh file="iroclb_hmr.mesh" />
 	<Attribute
@@ -224,7 +224,7 @@
 </Item>
 
 <!-- Schlaegel -->
-<Item type="weapon" subtype="maul_hmr" size="medium">
+<Item type="weapon" subtype="maul_hmr" name="maul" size="medium">
 	<Image image="set:hammer.png image:full_image" />
 	<Mesh file="hammer.mesh" />
 	<Attribute
@@ -261,7 +261,7 @@
 </Item>
 
 <!-- Morgenstern -->
-<Item type="weapon" subtype="mrnstr_hmr" size="medium">
+<Item type="weapon" subtype="mrnstr_hmr" name="morning star" size="medium">
 	<Image image="set:hammer.png image:full_image" />
 	<Mesh file="hammer.mesh" />
 	<Attribute
@@ -298,7 +298,7 @@
 </Item>
 
 <!-- Kraehenkopf -->
-<Item type="weapon" subtype="crow_hmr" size="medium">
+<Item type="weapon" subtype="crow_hmr" name="crowhead" size="medium">
 	<Image image="set:hammer.png image:full_image" />
 	<Mesh file="hammer.mesh" />
 	<Attribute
@@ -335,7 +335,7 @@
 </Item>
 
 <!-- Reiterhammer -->
-<Item type="weapon" subtype="rider_hmr" size="medium">
+<Item type="weapon" subtype="rider_hmr" name="rider hammer" size="medium">
 	<Image image="set:hammer.png image:full_image" />
 	<Mesh file="hammer.mesh" />
 	<Attribute
@@ -372,7 +372,7 @@
 </Item>
 
 <!-- Streitkolben -->
-<Item type="weapon" subtype="mace_hmr" size="medium">
+<Item type="weapon" subtype="mace_hmr" name="mace" size="medium">
 	<Image image="set:hammer.png image:full_image" />
 	<Mesh file="hammer.mesh" />
 	<Attribute
@@ -409,7 +409,7 @@
 </Item>
 
 <!-- Stahlhammer -->
-<Item type="weapon" subtype="steel_hmr" size="medium">
+<Item type="weapon" subtype="steel_hmr" name="steel hammer" size="medium">
 	<Image image="set:hammer.png image:full_image" />
 	<Mesh file="hammer.mesh" />
 	<Attribute
@@ -446,7 +446,7 @@
 </Item>
 
 <!-- Kriegshammer -->
-<Item type="weapon" subtype="battle_hmr" size="medium">
+<Item type="weapon" subtype="battle_hmr" name="battle hammer" size="medium">
 	<Image image="set:hammer.png image:full_image" />
 	<Mesh file="hammer.mesh" />
 	<Attribute
@@ -483,7 +483,7 @@
 </Item>
 
 <!-- Schmetterkopf -->
-<Item type="weapon" subtype="wind_axe" size="medium">
+<Item type="weapon" subtype="smash_hmr" name="smashhead" size="medium">
 	<Image image="set:axe.png image:full_image" />
 	<Mesh file="axe.mesh" />
 	<Attribute
@@ -520,7 +520,7 @@
 </Item>
 
 <!-- Stahlstreitkolben -->
-<Item type="weapon" subtype="stlmce_hmr" size="medium">
+<Item type="weapon" subtype="stlmce_hmr" name="steel mace" size="medium">
 	<Image image="set:hammer.png image:full_image" />
 	<Mesh file="hammer.mesh" />
 	<Attribute
@@ -557,7 +557,7 @@
 </Item>
 
 <!-- Stahlschlaegel -->
-<Item type="weapon" subtype="stlml_hmr" size="medium">
+<Item type="weapon" subtype="stlml_hmr" name="steel maul" size="medium">
 	<Image image="set:hammer.png image:full_image" />
 	<Mesh file="hammer.mesh" />
 	<Attribute
@@ -594,7 +594,7 @@
 </Item>
 
 <!-- Sechskantstreitkolben -->
-<Item type="weapon" subtype="mace6_hmr" size="medium">
+<Item type="weapon" subtype="mace6_hmr" name="sixedged mace" size="medium">
 	<Image image="set:hammer.png image:full_image" />
 	<Mesh file="hammer.mesh" />
 	<Attribute
@@ -631,7 +631,7 @@
 </Item>
 
 <!-- Silberhammer -->
-<Item type="weapon" subtype="bersrk_axe" size="medium">
+<Item type="weapon" subtype="silver_hmr" name="silver hammer" size="medium">
 	<Image image="set:axe.png image:full_image" />
 	<Mesh file="axe.mesh" />
 	<Attribute
@@ -668,7 +668,7 @@
 </Item>
 
 <!-- Diamanthammer -->
-<Item type="weapon" subtype="diamnt_hmr" size="medium">
+<Item type="weapon" subtype="diamnt_hmr" name="diamont hammer" size="medium">
 	<Image image="set:hammer.png image:full_image" />
 	<Mesh file="hammer.mesh" />
 	<Attribute
@@ -705,7 +705,7 @@
 </Item>
 
 <!-- Priesterstreitkolben -->
-<Item type="weapon" subtype="silver_hmr" size="medium">
+<Item type="weapon" subtype="prsmce_hmr" name="priest mace" size="medium">
 	<Image image="set:hammer.png image:full_image" />
 	<Mesh file="hammer.mesh" />
 	<Attribute
@@ -742,7 +742,7 @@
 </Item>
 
 <!-- Heiliger Hammer -->
-<Item type="weapon" subtype="holy_hmr" size="medium">
+<Item type="weapon" subtype="holy_hmr" name="holy hammer" size="medium">
 	<Image image="set:hammer.png image:full_image" />
 	<Mesh file="hammer.mesh" />
 	<Attribute

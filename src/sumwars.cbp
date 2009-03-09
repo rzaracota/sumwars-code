@@ -123,6 +123,7 @@
 		<Unit filename="core\monster.cpp" />
 		<Unit filename="core\monster.h" />
 		<Unit filename="core\monsterbase.h" />
+		<Unit filename="core\netevent.h" />
 		<Unit filename="core\network.cpp" />
 		<Unit filename="core\network.h" />
 		<Unit filename="core\networkstruct.cpp" />
@@ -179,11 +180,14 @@
 		<Unit filename="gui\inventory.h" />
 		<Unit filename="gui\itemwindow.cpp" />
 		<Unit filename="gui\itemwindow.h" />
+		<Unit filename="gui\listitem.h" />
 		<Unit filename="gui\main_gui.cpp" />
 		<Unit filename="gui\mainmenu.cpp" />
 		<Unit filename="gui\mainmenu.h" />
 		<Unit filename="gui\mainwindow.cpp" />
 		<Unit filename="gui\mainwindow.h" />
+		<Unit filename="gui\minimapwindow.cpp" />
+		<Unit filename="gui\minimapwindow.h" />
 		<Unit filename="gui\partyinfo.cpp" />
 		<Unit filename="gui\partyinfo.h" />
 		<Unit filename="gui\questinfo.cpp" />
@@ -196,6 +200,9 @@
 		<Unit filename="gui\skilltree.h" />
 		<Unit filename="gui\sound.cpp" />
 		<Unit filename="gui\sound.h" />
+		<Unit filename="gui\tradewindow.cpp" />
+		<Unit filename="gui\tradewindow.h" />
+		<Unit filename="gui\window.h" />
 		<Unit filename="tinyxml\tinystr.cpp" />
 		<Unit filename="tinyxml\tinystr.h" />
 		<Unit filename="tinyxml\tinyxml.cpp" />

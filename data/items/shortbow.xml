@@ -1,7 +1,7 @@
 <!-- SHORT BOWS -->
 <!-- TODO ersetze twohanded="no", -->
 <!-- Uebungsbogen -->
-<Item type="weapon" subtype="trainy_sbw" size="medium">
+<Item type="weapon" subtype="pract_sbw" name="practice bow" size="medium">
 	<Mesh file="bow.mesh" />
 	<Image image="set:bow.png image:full_image" />
 	<Attribute
@@ -37,7 +37,7 @@
 </Item>
 
 <!-- Goblinbogen -->
-<Item type="weapon" subtype="goblin_sbw" size="medium">
+<Item type="weapon" subtype="goblin_sbw" name="goblin bow" size="medium">
 	<Mesh file="goblin_sbw.mesh" />
 	<Image image="set:goblin_sbw.png image:full_image" />
 	<Attribute
@@ -73,7 +73,7 @@
 </Item>
 
 <!-- Eibenkurzbogen -->
-<Item type="weapon" subtype="yew_sbw" size="medium">
+<Item type="weapon" subtype="yew_sbw" name="yew shortbow" size="medium">
 	<Mesh file="bow.mesh" />
 	<Image image="set:bow.png image:full_image" />
 	<Attribute
@@ -109,7 +109,7 @@
 </Item>
 
 <!-- Kurzbogen -->
-<Item type="weapon" subtype="short_sbw" size="medium">
+<Item type="weapon" subtype="short_sbw" name="shortbow" size="medium">
 	<Mesh file="bow.mesh" />
 	<Image image="set:bow.png image:full_image" />
 	<Attribute
@@ -145,7 +145,7 @@
 </Item>
 
 <!-- Jagdbogen -->
-<Item type="weapon" subtype="hunter_sbw" size="medium">
+<Item type="weapon" subtype="hunter_sbw" name="hunting bow" size="medium">
 	<Image image="set:bow.png image:full_image" />
 	<Mesh file="bow.mesh" />
 	<Attribute
@@ -182,7 +182,7 @@
 </Item>
 
 <!-- Rattanbogen -->
-<Item type="weapon" subtype="rattan_sbw" size="medium">
+<Item type="weapon" subtype="rattan_sbw" name="rattan bow" size="medium">
 	<Image image="set:bow.png image:full_image" />
 	<Mesh file="bow.mesh" />
 	<Attribute
@@ -218,7 +218,7 @@
 </Item>
 
 <!-- Banditenbogen -->
-<Item type="weapon" subtype="bandit_sbw" size="medium">
+<Item type="weapon" subtype="bandit_sbw" name="bandit bow" size="medium">
 	<Image image="set:bow.png image:full_image" />
 	<Mesh file="bow.mesh" />
 	<Attribute
@@ -254,7 +254,7 @@
 </Item>
 
 <!-- Nordauge -->
-<Item type="weapon" subtype="ice_sbw" size="medium">
+<Item type="weapon" subtype="ice_sbw" name="northeye" size="medium">
 	<Image image="set:bow.png image:full_image" />
 	<Mesh file="bow.mesh" />
 	<Attribute
@@ -292,7 +292,7 @@
 </Item>
 
 <!-- Kriegskurzbogen -->
-<Item type="weapon" subtype="battle_sbw" size="medium">
+<Item type="weapon" subtype="battle_sbw" name="battleshortbow" size="medium">
 	<Image image="set:bow.png image:full_image" />
 	<Mesh file="bow.mesh" />
 	<Attribute
@@ -328,7 +328,7 @@
 </Item>
 
 <!-- Kompositbogen -->
-<Item type="weapon" subtype="compst_sbw" size="medium">
+<Item type="weapon" subtype="compst_sbw" name="composite shortbow" size="medium">
 	<Image image="set:bow.png image:full_image" />
 	<Mesh file="bow.mesh" />
 	<Attribute
@@ -364,7 +364,7 @@
 </Item>
 
 <!-- Reiterbogen -->
-<Item type="weapon" subtype="rider_sbw" size="medium">
+<Item type="weapon" subtype="rider_sbw" name="rider bow" size="medium">
 	<Image image="set:bow.png image:full_image" />
 	<Mesh file="bow.mesh" />
 	<Attribute
@@ -400,7 +400,7 @@
 </Item>
 
 <!-- Kohlebogen -->
-<Item type="weapon" subtype="coal_sbw" size="medium">
+<Item type="weapon" subtype="coal_sbw" name="coal bow" size="medium">
 	<Image image="set:bow.png image:full_image" />
 	<Mesh file="bow.mesh" />
 	<Attribute
@@ -436,7 +436,7 @@
 </Item>
 
 <!-- Eschenbogen -->
-<Item type="weapon" subtype="ash_sbw" size="medium">
+<Item type="weapon" subtype="ash_sbw" name="ash bow" size="medium">
 	<Image image="set:bow.png image:full_image" />
 	<Mesh file="bow.mesh" />
 	<Attribute
@@ -473,7 +473,7 @@
 </Item>
 
 <!-- Fluchbogen -->
-<Item type="weapon" subtype="curse_sbw" size="medium">
+<Item type="weapon" subtype="bane_sbw" name="bane bow" size="medium">
 	<Image image="set:bow.png image:full_image" />
 	<Mesh file="bow.mesh" />
 	<Attribute
@@ -510,7 +510,7 @@
 </Item>
 
 <!-- Eichenkurzbogen -->
-<Item type="weapon" subtype="oak_sbw" size="medium">
+<Item type="weapon" subtype="oak_sbw" name="oak shortbow" size="medium">
 	<Image image="set:bow.png image:full_image" />
 	<Mesh file="bow.mesh" />
 	<Attribute
@@ -546,7 +546,7 @@
 </Item>
 
 <!-- Seelenbogen -->
-<Item type="weapon" subtype="soul_sbw" size="medium">
+<Item type="weapon" subtype="soul_sbw" name="soul bow" size="medium">
 	<Image image="set:bow.png image:full_image" />
 	<Mesh file="bow.mesh" />
 	<Attribute
@@ -582,7 +582,7 @@
 </Item>
 
 <!-- Sucher -->
-<Item type="weapon" subtype="seeker_sbw" size="medium">
+<Item type="weapon" subtype="seeker_sbw" name="seeker" size="medium">
 	<Image image="set:bow.png image:full_image" />
 	<Mesh file="bow.mesh" />
 	<Attribute
@@ -618,7 +618,7 @@
 </Item>
 
 <!-- Chaosbogen -->
-<Item type="weapon" subtype="chaos_sbw" size="medium">
+<Item type="weapon" subtype="chaos_sbw" name="chaos shortbow" size="medium">
 	<Image image="set:bow.png image:full_image" />
 	<Mesh file="bow.mesh" />
 	<Attribute
@@ -654,7 +654,7 @@
 </Item>
 
 <!-- Feenbogen -->
-<Item type="weapon" subtype="gods_sbw" size="medium">
+<Item type="weapon" subtype="fairy_sbw" name="fairy bow" size="medium">
 	<Image image="set:bow.png image:full_image" />
 	<Mesh file="bow.mesh" />
 	<Attribute
