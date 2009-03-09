@@ -1523,7 +1523,7 @@ void Scene::createScene()
 		
 	}
 	
-
+	m_temp_player="";
 	
 }
 
