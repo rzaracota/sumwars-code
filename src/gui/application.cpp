@@ -374,7 +374,7 @@ bool Application::initGettext()
 	DEBUG("initializing internationalisation");
 #ifndef WIN32
 	bool result = false;
-	char * language;
+	/*char * language;
 	language = getenv("LANG");
 
 	if ((language[0] == 'd' && language[1] == 'e') ||
@@ -397,7 +397,13 @@ bool Application::initGettext()
 
 	bindtextdomain ("sumwars","../translation/");
 	bindtextdomain ("event","../translation/");
-	textdomain ("sumwars");
+	textdomain ("sumwars");*/
+	
+	result = setlocale( LC_MESSAGES, "" );
+	bindtextdomain ("sumwars_sumwars","../translation/");
+	bindtextdomain ("event","../translation/");
+	//textdomain ("sumwars_sumwars");
+	
 	return result;
 #endif
 	return true;

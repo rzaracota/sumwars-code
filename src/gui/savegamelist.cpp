@@ -154,6 +154,8 @@ void SavegameList::update()
 
 void SavegameList::updateTranslation()
 {
+	textdomain ("sumwars_sumwars");
+	
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::PushButton* btn;
 	CEGUI::Window* label;

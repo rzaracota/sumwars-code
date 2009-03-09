@@ -112,6 +112,8 @@ void CharCreate::update()
 
 void CharCreate::updateTranslation()
 {
+	textdomain ("sumwars_sumwars");
+	
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::PushButton* btn;
 	CEGUI::Window* label;

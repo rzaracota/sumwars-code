@@ -249,11 +249,13 @@ void TradeWindow::update()
 
 void TradeWindow::updateTranslation()
 {
+	textdomain ("sumwars_sumwars");
+	
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::PushButton* btn;
 	
 	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("TradeCloseButton"));
-	btn->setText(gettext("OK"));
+	btn->setText(gettext("Ok"));
 }
 
 

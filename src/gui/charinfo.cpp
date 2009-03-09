@@ -320,7 +320,7 @@ CharInfo::CharInfo (Document* doc)
 	label->setProperty("BackgroundEnabled", "true");
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.50f), cegui_reldim( 0.48f)));
 	label->setSize(CEGUI::UVector2(cegui_reldim(0.20f), cegui_reldim( 0.06f)));
-	label->setText(gettext("main_base_damage"));
+	label->setText(gettext("Base damage"));
 
 	// Label Basisschaden (Wert)
 	label = win_mgr.createWindow("TaharezLook/StaticText", "BaseDmgValueLabel");
@@ -468,19 +468,19 @@ CharInfo::CharInfo (Document* doc)
 	out_stream.str("");
 	if (player->getTypeInfo()->m_subtype == "warrior")
 	{
-		out_stream.str(gettext("main_warrior"));
+		out_stream.str(gettext("Warrior"));
 	}
 	else if (player->getTypeInfo()->m_subtype == "mage")
 	{
-		out_stream.str(gettext("main_magician"));
+		out_stream.str(gettext("Magician"));
 	}
 	else if (player->getTypeInfo()->m_subtype == "archer")
 	{
-		out_stream.str(gettext("main_archer"));
+		out_stream.str(gettext("Archer"));
 	}
 	else if (player->getTypeInfo()->m_subtype == "priest")
 	{
-		out_stream.str(gettext("main_priest"));
+		out_stream.str(gettext("Priest"));
 	}
 	if (label->getText()!=out_stream.str())
 	{
@@ -763,6 +763,8 @@ CharInfo::CharInfo (Document* doc)
 
 void CharInfo::updateTranslation()
 {
+	textdomain ("sumwars_sumwars");
+
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::Window* label;
 
@@ -793,7 +795,7 @@ void CharInfo::updateTranslation()
 	label->setText(gettext("Magic power"));
 
 	label = win_mgr.getWindow( "AttrPointsLabel");
-	label->setText(gettext("attr points"));
+	label->setText(gettext("Attr points"));
 
 	label = win_mgr.getWindow("ExperienceLabel" );
  	label->setText(gettext("Experience"));
