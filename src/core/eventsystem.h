@@ -389,10 +389,10 @@ class EventSystem
 		
 		
 		/**
-		 * \fn static int gettext(lua_State *L)
+		 * \fn static int luagettext(lua_State *L)
 		 * \brief gettext fuer lua
 		 */
-		static int gettext(lua_State *L);
+		static int luagettext(lua_State *L);
 	private:
 		/**
 		 * \var static lua_State * m_lua

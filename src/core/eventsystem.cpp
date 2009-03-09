@@ -66,8 +66,8 @@ void EventSystem::init()
 	lua_register(m_lua, "writeString", writeString);
 	lua_register(m_lua, "writeNewline", writeNewline);
 	lua_register(m_lua, "writeUpdateString", writeUpdateString);
-	lua_register(m_lua, "gettext", gettext);
-	lua_register(m_lua, "_", gettext);
+	lua_register(m_lua, "gettext", luagettext);
+	lua_register(m_lua, "_", luagettext);
 	
 	
 	m_region =0;
@@ -1216,7 +1216,7 @@ int EventSystem::writeUpdateString(lua_State *L)
 	return 0;
 }
 
-int EventSystem::gettext(lua_State *L)
+int EventSystem::luagettext(lua_State *L)
 {
 	int argc = lua_gettop(L);
 	
@@ -1225,6 +1225,10 @@ int EventSystem::gettext(lua_State *L)
 		lua_pushstring(L,"");
 		return 1;
 	}
+#ifdef WIN32
+	lua_pushstring(L,lua_tostring(L,1));
+	return 1,
+#endif
 	std::string text="return ";
 	std::string transl = dgettext("event",lua_tostring(L,1));
 	size_t pos = transl.find_first_of("\'\"");
