@@ -271,6 +271,13 @@ bool TradeWindow::onTradeItemHover(const CEGUI::EventArgs& evt)
 			static_cast<const CEGUI::MouseEventArgs&>(evt);
 	unsigned int id = we.window->getID();
 	
+	if (id >=Equipement::BIG_ITEMS && id < Equipement::MEDIUM_ITEMS)
+		id += 15* m_big_sheet;
+	if (id >=Equipement::MEDIUM_ITEMS && id < Equipement::SMALL_ITEMS)
+		id += 21*m_medium_sheet;
+	if (id >=Equipement::SMALL_ITEMS)
+		id += 30* m_small_sheet;
+	
 	Player* player = m_document->getLocalPlayer();
 	if (player ==0)
 		return true;
