@@ -58,6 +58,12 @@ class MinimapWindow : public Window
 	Ogre::RenderTarget* m_minimap_rt;
 	
 	/**
+	 * \var Ogre::TexturePtr m_minimap_texture
+	 * \brief Textur der Minimap
+	 */
+	Ogre::TexturePtr m_minimap_texture;
+	
+	/**
 	 * \var Vector m_shift
 	 * \brief Wert um den die Karte verschoben ist
 	 */
