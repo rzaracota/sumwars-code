@@ -135,7 +135,7 @@ string WorldObject::getNameId()
 	std::ostringstream out_stream;
 
 	out_stream.str("");
-	out_stream << m_subtype << ":" << getId();
+	out_stream << m_type_info.m_subtype << ":" << getId();
 	return out_stream.str();
 }
 
