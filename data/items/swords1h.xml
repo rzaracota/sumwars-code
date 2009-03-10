@@ -182,7 +182,7 @@ s		modchance_damage_air_mod="float"
 		damage_max_physical="5"
 		damage_attack="30"
 		damage_power="25"
-		attack_range="1.0
+		attack_range="1.0"
 		two_handed="no"
 		dattack_speed="200"
 	/>
