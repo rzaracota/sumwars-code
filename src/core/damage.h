@@ -176,6 +176,12 @@ struct Damage
 	static std::string getDamageTypeName(DamageType dt);
 	
 	/**
+	 * \fn static std::string getDamageResistanceName(DamageType dt)
+	 * \brief Gibt zu einem Schadenstyp den Name der Resistenz als String aus
+	 */
+	static std::string getDamageResistanceName(DamageType dt);
+	
+	/**
 	 * \fn static std::string getStatusModName(StatusMods sm)
 	 * \brief Gibt zu einer Statusveraenderung den Name als String aus
 	 */

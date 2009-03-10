@@ -668,15 +668,24 @@ CharInfo::CharInfo (Document* doc)
 		label->setText((CEGUI::utf8*) out_stream.str().c_str());
 	}
 
+	Damage dmgb = player->getBaseDamage();
+	Damage dmgl = player->getLeftDamage();
+	Damage dmgr = player->getRightDamage();
+	
+	dmgb.normalize();
+	dmgl.normalize();
+	dmgr.normalize();
+	
+	
 	// Schaden Basisattacke
-	float minb=player->getBaseDamage().getSumMinDamage();
-	float maxb=player->getBaseDamage().getSumMaxDamage();
+	float minb=dmgb.getSumMinDamage();
+	float maxb=dmgb.getSumMaxDamage();
 	// Schaden Attacke links
-	float minl=player->getLeftDamage().getSumMinDamage();
-	float maxl=player->getLeftDamage().getSumMaxDamage();
+	float minl=dmgl.getSumMinDamage();
+	float maxl=dmgl.getSumMaxDamage();
 	// Schaden Attacke rechts
-	float minr=player->getRightDamage().getSumMinDamage();
-	float maxr=player->getRightDamage().getSumMaxDamage();
+	float minr=dmgr.getSumMinDamage();
+	float maxr=dmgr.getSumMaxDamage();
 
 
 
@@ -705,7 +714,7 @@ CharInfo::CharInfo (Document* doc)
 	{
 		label->setText((CEGUI::utf8*) out_stream.str().c_str());
 	}
-	tooltip = player->getBaseDamage().getDamageString();
+	tooltip =dmgb.getDamageString();
 	if (tooltip != label->getTooltipText())
 	{
 		label->setTooltipText(tooltip);
@@ -729,11 +738,12 @@ CharInfo::CharInfo (Document* doc)
 	{
 		label->setText((CEGUI::utf8*) out_stream.str().c_str());
 	}
-	tooltip = player->getLeftDamage().getDamageString();
+	tooltip = dmgl.getDamageString();
 	if (tooltip != label->getTooltipText())
 	{
 		label->setTooltipText(tooltip);
 	}
+	
 
 
 
@@ -748,17 +758,28 @@ CharInfo::CharInfo (Document* doc)
 	}
 
 	// Label Schaden Attacke rechts
+	Action::Distance dist = Action::getActionInfo(player->getRightAction())->m_distance;
 	label =  win_mgr.getWindow( "Skill2DmgValueLabel");
-	out_stream.str("");
-	out_stream << (int) minr << "-" << (int) maxr;
-	if (label->getText()!= (CEGUI::utf8*) out_stream.str().c_str())
-	{
-		label->setText((CEGUI::utf8*) out_stream.str().c_str());
+	if (dist == Action::MELEE || dist == Action::RANGED)
+	{	
+		out_stream.str("");
+		out_stream << (int) minr << "-" << (int) maxr;
+		if (label->getText()!= (CEGUI::utf8*) out_stream.str().c_str())
+		{
+			label->setText((CEGUI::utf8*) out_stream.str().c_str());
+		}
+		tooltip = dmgr.getDamageString();
+		if (tooltip != label->getTooltipText())
+		{
+			label->setTooltipText(tooltip);
+		}
 	}
-	tooltip = player->getRightDamage().getDamageString();
-	if (tooltip != label->getTooltipText())
+	else
 	{
-		label->setTooltipText(tooltip);
+		if (label->getText()!= "")
+			label->setText("");
+		if (label->getTooltipText()!="")
+			label->setTooltipText("");
 	}
 }
 

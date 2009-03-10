@@ -1863,7 +1863,7 @@ void Action::init()
 
 string Action::getName(ActionType type)
 {
-        return ( gettext((m_base_info[type].m_enum_name).c_str()) );
+        return ( gettext((m_base_info[type].m_name).c_str()) );
 
 }
 

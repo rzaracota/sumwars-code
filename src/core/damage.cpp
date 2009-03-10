@@ -91,13 +91,29 @@ std::string Damage::getDamageTypeName(DamageType dt)
 	switch(dt)
 	{
 		case PHYSICAL:
-			return "Phys.";
+			return gettext("Physical");
 		case FIRE:
-			return "Feuer";
+			return gettext("Fire");
 		case ICE:
-			return "Eis";
+			return gettext("Ice");
 		case AIR:
-			return "Luft";
+			return gettext("Air");
+	}
+	return "";
+}
+
+std::string Damage::getDamageResistanceName(DamageType dt)
+{
+	switch(dt)
+	{
+		case PHYSICAL:
+			return gettext("Physical resistance");
+		case FIRE:
+			return gettext("Fire resistance");
+		case ICE:
+			return gettext("Ice resistance");
+		case AIR:
+			return gettext("Air resistance");
 	}
 	return "";
 }
@@ -107,21 +123,21 @@ std::string Damage::getStatusModName(StatusMods sm)
 	switch(sm)
 	{
 		case BLIND:
-			return "blind";
+			return gettext("blind");
 		case POISONED:
-			return "vergiftet";
+			return gettext("poisoned");
 		case MUTE:
-			return "stumm";
+			return gettext("mute");
 		case CONFUSED:
-			return "verwirrt";
+			return gettext("confused");
 		case BERSERK:
-			return "Berserker";
+			return gettext("berserk");
 		case PARALYZED:
-			return "gelaehmt";
+			return gettext("paralyzed");
 		case FROZEN:
-			return "eingefroren";
+			return gettext("frozen");
 		case BURNING:
-			return "brennend";
+			return gettext("burning");
 			
 	}
 	return "";
@@ -183,11 +199,11 @@ std::string Damage::getDamageString(Damage::Usage usage)
 			first = false;
 			if (m_multiplier[i]>1)
 			{
-				out_stream <<getDamageTypeName((DamageType) i) <<": +"<<(int) (100*(m_multiplier[i]-1))<< "% Schaden";
+				out_stream <<getDamageTypeName((DamageType) i) <<": +"<<(int) (100*(m_multiplier[i]-1))<< "% "<< gettext("damage");
 			}
 			else
 			{
-				out_stream <<getDamageTypeName((DamageType) i) <<": -"<<(int) (100*(1-m_multiplier[i]))<< "% Schaden";
+				out_stream <<getDamageTypeName((DamageType) i) <<": -"<<(int) (100*(1-m_multiplier[i]))<< "% "<< gettext("damage");
 			}
 		}
 	}
@@ -202,11 +218,11 @@ std::string Damage::getDamageString(Damage::Usage usage)
 			first = false;
 			if (m_special_flags & UNBLOCKABLE)
 			{
-				out_stream <<"trifft immer" ;
+				out_stream <<gettext("can not be blocked");
 			}
 			else
 			{
-				out_stream <<"Attacke: "<<(int) m_attack;
+				out_stream <<gettext("Attack")<<": "<<(int) m_attack;
 			}
 		}
 		
@@ -219,11 +235,11 @@ std::string Damage::getDamageString(Damage::Usage usage)
 			first = false;
 			if (m_special_flags & IGNORE_ARMOR)
 			{
-				out_stream << "ignoriert Ruestung";
+				out_stream << gettext("ignores armor");
 			}
 			else
 			{
-				out_stream <<"Durchschlagskraft: "<<(int) m_power;
+				out_stream <<gettext("Power")<<": "<<(int) m_power;
 			}
 		}
 		
@@ -232,7 +248,7 @@ std::string Damage::getDamageString(Damage::Usage usage)
 		{
 			out_stream << "\n";
 			
-			out_stream << "Chance auf krit. Treffer: "<<(int) (100*m_crit_perc)<<"%";
+			out_stream << gettext("Chance for critical hit")<<": "<<(int) (100*m_crit_perc)<<"%";
 			
 		}
 	}

@@ -992,11 +992,10 @@ std::string Document::getAbilityDescription(Action::ActionType ability)
 
 		// Name der Faehigkeit
 		out_stream << Action::getName(ability);
-		// out_stream << Action::getName(m_ability_pos);
+		
 
 		// Beschreibung
-		//out_stream << "\n" << "Beschreibung: bla blubb";
-		out_stream << "\n" << gettext("doc_description") << Action::getDescription(ability);
+		out_stream << "\n" << Action::getDescription(ability);
 
 		// Gibt an, ob der Spieler die Faehigkeit besitzt
 		bool avlb = true;
@@ -1006,23 +1005,26 @@ std::string Document::getAbilityDescription(Action::ActionType ability)
 			avlb = false;
 
 			// Level ab dem Faehigkeit verfuegbar ist
-			out_stream <<"\n"<< gettext("doc_minimum_level") << aci->m_req_level;
+			out_stream <<"\n"<< gettext("Required level")<<": " << aci->m_req_level;
 		}
 
 		// Timerinfo
 		if (aci->m_timer_nr!=0)
 		{
-			out_stream <<"\n"<< gettext("doc_timer") << aci->m_timer_nr;
-			out_stream <<"\n"<< gettext("doc_timer_runtime") << (int) aci->m_timer*0.001 << " s";
+			out_stream <<"\n"<< gettext("Timer")<<" " << aci->m_timer_nr;
+			out_stream <<"\n"<< gettext("Cast delay")<<": " << (int) aci->m_timer*0.001 << " s";
 		}
 
 		// Schaden
-		Damage dmg;
-		player->calcDamage(ability,dmg);
-		std::string dmgstring = dmg.getDamageString(Damage::ABILITY);
-		if (dmgstring !="")
+		if (aci->m_distance == Action::MELEE || aci->m_distance == Action::RANGED)
 		{
-			out_stream << "\n" << dmgstring;
+			Damage dmg;
+			player->calcDamage(ability,dmg);
+			std::string dmgstring = dmg.getDamageString(Damage::ABILITY);
+			if (dmgstring !="")
+			{
+				out_stream << "\n" << dmgstring;
+			}
 		}
 
 	}

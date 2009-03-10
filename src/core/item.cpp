@@ -341,10 +341,10 @@ std::string Item::getDescription()
 	out_stream<<getName()<<"\n";
 	int i;
 	// Levelbeschraenkung
-	out_stream <<"Wert: "<<m_price;
+	out_stream <<gettext("Value")<<": "<<m_price;
 	if (m_level_req>0)
 	{
-		out_stream<<"\n" << "Mindestlevel: "<<(int) m_level_req;
+		out_stream<<"\n" << gettext("Required level")<<": "<<(int) m_level_req;
 	}
 
 	// TODO: Beschraenkung nach Charakterklasse
@@ -355,7 +355,7 @@ std::string Item::getDescription()
 		// HP Heilung
 		if (m_useup_effect->m_dhealth>0)
 		{
-			out_stream <<"\n"<< "heilt "<<(int) m_useup_effect->m_dhealth<<" HP";
+			out_stream <<"\n"<< gettext("Heals ")<<(int) m_useup_effect->m_dhealth<<gettext(" hitpoints");
 		}
 
 		// Heilen/ Immunisieren gegen Statusmods
@@ -363,10 +363,10 @@ std::string Item::getDescription()
 		{
 			if (	m_useup_effect->m_dstatus_mod_immune_time[i]>0)
 			{
-				out_stream <<"\n"<< "heilt "<<Damage::getStatusModName((Damage::StatusMods) i);
+				out_stream <<"\n"<< gettext("Heals ")<<Damage::getStatusModName((Damage::StatusMods) i);
 				if (m_useup_effect->m_dstatus_mod_immune_time[i]>=1000)
 				{
-					out_stream <<", immunisiert "<< (int) (m_useup_effect->m_dstatus_mod_immune_time[i]*0.001f)<<"s";
+					out_stream <<", "<< gettext("immune for ")<< (int) (m_useup_effect->m_dstatus_mod_immune_time[i]*0.001f)<<"s";
 				}
 			}
 		}
@@ -378,12 +378,12 @@ std::string Item::getDescription()
 	{
 		if (m_weapon_attr->m_two_handed)
 		{
-			out_stream <<"\n"<< "Zweihand-Waffe";
+			out_stream <<"\n"<< gettext("Two-handed weapon");
 		}
 		// Reichweite / Angriffsgeschwindigkeit
 		if (m_type == WEAPON)
 		{
-			out_stream << "\n" << "Reichweite: "<<m_weapon_attr->m_attack_range;
+			out_stream << "\n" << gettext("Range")<<": "<<m_weapon_attr->m_attack_range;
 		}
 
 		//out_stream << "\n" << "Angriffe: "<<m_weapon_attr->m_attack_speed*0.001f<<"/s";
@@ -394,7 +394,7 @@ std::string Item::getDescription()
 		{
 			if (m_type == WEAPON)
 			{
-				out_stream << "\n" << "Schaden:";
+				out_stream << "\n" << gettext("Damage")<<":";
 			}
 			out_stream<<"\n"<<dmgstring;
 		}
@@ -406,44 +406,44 @@ std::string Item::getDescription()
 	{
 		if (m_equip_effect->m_darmor>0)
 		{
-			out_stream<<"\n"<<"Ruestung: "<<m_equip_effect->m_darmor;
+			out_stream<<"\n"<<gettext("Armor")<<": "<<m_equip_effect->m_darmor;
 		}
 
 		if (m_equip_effect->m_dblock>0)
 		{
-			out_stream<<"\n"<<"Block: "<<m_equip_effect->m_dblock;
+			out_stream<<"\n"<<gettext("Block")<<": "<<m_equip_effect->m_dblock;
 		}
 
 		if (m_equip_effect->m_dmax_health>0)
 		{
-			out_stream<<"\n"<<"+"<<(int) m_equip_effect->m_dmax_health<< " max HP";
+			out_stream<<"\n"<<"+"<<(int) m_equip_effect->m_dmax_health<< " "<<gettext("max hitpoints");
 		}
 
 		if (m_equip_effect->m_dstrength>0)
 		{
-			out_stream<<"\n"<<"+"<<m_equip_effect->m_dstrength<< " Staerke";
+			out_stream<<"\n"<<"+"<<m_equip_effect->m_dstrength<< " "<<gettext("Strength");
 		}
 
 		if (m_equip_effect->m_ddexterity>0)
 		{
-			out_stream<<"\n"<<"+"<<m_equip_effect->m_ddexterity<< " Geschick";
+			out_stream<<"\n"<<"+"<<m_equip_effect->m_ddexterity<< " "<<gettext("Dexterity");
 		}
 
 		if (m_equip_effect->m_dmagic_power>0)
 		{
-			out_stream<<"\n"<<"+"<<m_equip_effect->m_dmagic_power<< " Zauberkraft";
+			out_stream<<"\n"<<"+"<<m_equip_effect->m_dmagic_power<< " "<<gettext("Magic Power");
 		}
 
 		if (m_equip_effect->m_dwillpower>0)
 		{
-			out_stream<<"\n"<<"+"<<m_equip_effect->m_dwillpower<< " Willenskraft";
+			out_stream<<"\n"<<"+"<<m_equip_effect->m_dwillpower<< " "<<gettext("Willpower");
 		}
 
 		for (i=0;i<4;i++)
 		{
 			if (m_equip_effect->m_dresistances[i]>0)
 			{
-				out_stream<<"\n"<<"+"<<m_equip_effect->m_dresistances[i]<<" "<<Damage::getDamageTypeName((Damage::DamageType) i)<< "Resistenz";
+				out_stream<<"\n"<<"+"<<m_equip_effect->m_dresistances[i]<<" "<<Damage::getDamageResistanceName((Damage::DamageType) i);
 			}
 		}
 
@@ -451,7 +451,7 @@ std::string Item::getDescription()
 		{
 			if (m_equip_effect->m_dresistances_cap[i]>0)
 			{
-				out_stream<<"\n"<<"+"<<m_equip_effect->m_dresistances_cap[i]<<" max. "<<Damage::getDamageTypeName((Damage::DamageType) i)<< "Resistenz";
+				out_stream<<"\n"<<"+"<<m_equip_effect->m_dresistances_cap[i]<<gettext(" max. ")<<Damage::getDamageResistanceName((Damage::DamageType) i);
 			}
 		}
 
