@@ -67,6 +67,7 @@
 			<Add library="C:\MinGW\lib\alut.lib" />
 			<Add library="C:\MinGW\lib\OpenAL32.lib" />
 			<Add library="C:\MinGW\lib\lua51.lib" />
+			<Add library="C:\mingw\lib\libintl.lib" />
 			<Add directory="$(OGRE_HOME)\lib" />
 			<Add directory="$(OGRE_HOME)\bin\Debug" />
 			<Add directory="$(OGRE_HOME)\bin\Release" />
@@ -154,8 +155,6 @@
 		<Unit filename="core\templateloader.h" />
 		<Unit filename="core\tiles.h" />
 		<Unit filename="core\timer.h" />
-		<Unit filename="core\trade.cpp" />
-		<Unit filename="core\trade.h" />
 		<Unit filename="core\unionfindtree.cpp" />
 		<Unit filename="core\unionfindtree.h" />
 		<Unit filename="core\variable.cpp" />

@@ -109,12 +109,12 @@ void Action::init()
 	a->m_critical_perc=0.66;
 	a->m_distance = MELEE;
 	a->m_flags =0;
-	a->m_name = "attack";
+	a->m_name = "Attack";
 	a->m_req_level = 0;
 	a->m_req_ability[0] = Action::NOACTION;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "normal melee attack";
+	a->m_description = "Basic melee attack";
 	a->m_enum_name = "attack";
 	a->m_animation[NO_WEAPON].push_back("attackUnarmed");
 	a->m_animation[ONE_HANDED].push_back("attack");
@@ -128,12 +128,12 @@ void Action::init()
 	a->m_critical_perc=0.66;
 	a->m_distance = RANGED;
 	a->m_flags =0;
-	a->m_name = "rangeed attack";
+	a->m_name = "Ranged attack";
 	a->m_req_level = 0;
 	a->m_req_ability[0] = Action::NOACTION;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "normal ranged attack";
+	a->m_description = "Basic ranged attack";
 	a->m_enum_name = "range_attack";
     a->m_animation[NO_WEAPON].push_back("attackRangedUnarmed");
 	a->m_animation[ONE_HANDED].push_back("attackRangedUnarmed");
@@ -147,12 +147,12 @@ void Action::init()
 	a->m_critical_perc=0.5;
 	a->m_distance = RANGED;
 	a->m_flags =0;
-	a->m_name = "magic attack";
+	a->m_name = "Magic attack";
 	a->m_req_level = 0;
 	a->m_req_ability[0] = Action::NOACTION;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "normal magic attack";
+	a->m_description = "Basic magic attack";
 	a->m_enum_name = "magic_attack";
     a->m_animation[NO_WEAPON].push_back("attackMagicUnarmed");
 	a->m_animation[ONE_HANDED].push_back("attackMagicOneHand");
@@ -166,12 +166,12 @@ void Action::init()
 	a->m_critical_perc=0.66;
 	a->m_distance = MELEE;
 	a->m_flags =0;
-	a->m_name = "holy attack";
+	a->m_name = "Holy attack";
 	a->m_req_level = 0;
 	a->m_req_ability[0] = Action::NOACTION;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "normal holy melee attack";
+	a->m_description = "Basic holy melee attack";
 	a->m_enum_name = "holy_attack";
 	a->m_animation[NO_WEAPON].push_back("attackUnarmed");
 	a->m_animation[ONE_HANDED].push_back("attack");
@@ -186,7 +186,7 @@ void Action::init()
 	a->m_critical_perc=0.66;
 	a->m_distance = MELEE;
 	a->m_flags =0;
-	a->m_name = "bash";
+	a->m_name = "Bash";
 	a->m_req_level = 1;
 	a->m_req_ability[0] = Action::NOACTION;
 	a->m_req_ability[1] = Action::NOACTION;
@@ -206,7 +206,7 @@ void Action::init()
 	a->m_critical_perc=0.66;
 	a->m_distance = MELEE;
 	a->m_flags =0;
-	a->m_name = "hammer blow";
+	a->m_name = "Hammer blow";
 	a->m_req_level = 20;
 	a->m_req_ability[0] = Action::AROUND_BLOW;
 	a->m_req_ability[1] = Action::NOACTION;
@@ -225,7 +225,7 @@ void Action::init()
 	a->m_critical_perc=0.8;
 	a->m_distance = MELEE;
 	a->m_flags =0;
-	a->m_name = "sweeping blow";
+	a->m_name = "Sweeping blow";
 	a->m_req_level = 5;
 	a->m_req_ability[0] = Action::BASH;
 	a->m_req_ability[1] = Action::NOACTION;
@@ -241,7 +241,7 @@ void Action::init()
 	a->m_critical_perc=0.8;
 	a->m_distance = MELEE;
 	a->m_flags =0;
-	a->m_name = "whirl blow";
+	a->m_name = "Whirl blow";
 	a->m_req_level = 40;
 	a->m_req_ability[0] = Action::AROUND_BLOW;
 	a->m_req_ability[1] = Action::NOACTION;
@@ -257,7 +257,7 @@ void Action::init()
 	a->m_critical_perc=0.8;
 	a->m_distance = MELEE;
 	a->m_flags =0;
-	a->m_name = "smash blow";
+	a->m_name = "Smash blow";
 	a->m_req_level = 40;
 	a->m_req_ability[0] = Action::HAMMER_BASH;
 	a->m_req_ability[1] = Action::NOACTION;
@@ -276,7 +276,7 @@ void Action::init()
 	a->m_critical_perc=0.8;
 	a->m_distance = MELEE;
 	a->m_flags =0;
-	a->m_name = "silencer";
+	a->m_name = "Silencer";
 	a->m_req_level = 5;
 	a->m_req_ability[0] = Action::BASH;
 	a->m_req_ability[1] = Action::NOACTION;
@@ -296,7 +296,7 @@ void Action::init()
 	a->m_critical_perc=0.66;
 	a->m_distance = MELEE;
 	a->m_flags =0;
-	a->m_name = "charge";
+	a->m_name = "Charge";
 	a->m_req_level = 20;
 	a->m_req_ability[0] = Action::BASH;
 	a->m_req_ability[1] = Action::NOACTION;
@@ -315,7 +315,7 @@ void Action::init()
 	a->m_critical_perc=0.66;
 	a->m_distance = MELEE;
 	a->m_flags =0;
-	a->m_name = "chargescythe";
+	a->m_name = "Charge scythe";
 	a->m_req_level = 60;
 	a->m_req_ability[0] = Action::CHARGE;
 	a->m_req_ability[1] = Action::NOACTION;
@@ -334,7 +334,7 @@ void Action::init()
 	a->m_critical_perc=0.8;
 	a->m_distance = SELF;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "taunt";
+	a->m_name = "Taunt";
 	a->m_req_level = 1;
 	a->m_req_ability[0] = Action::NOACTION;
 	a->m_req_ability[1] = Action::NOACTION;
@@ -350,7 +350,7 @@ void Action::init()
 	a->m_critical_perc=0.8;
 	a->m_distance = SELF;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "challange";
+	a->m_name = "Defiances";
 	a->m_req_level = 20;
 	a->m_req_ability[0] = Action::DECOY;
 	a->m_req_ability[1] = Action::NOACTION;
@@ -366,7 +366,7 @@ void Action::init()
 	a->m_critical_perc=0.8;
 	a->m_distance = SELF;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "fire and sword";
+	a->m_name = "Fire and sword";
 	a->m_req_level = 5;
 	a->m_req_ability[0] = Action::NOACTION;
 	a->m_req_ability[1] = Action::NOACTION;
@@ -382,7 +382,7 @@ void Action::init()
 	a->m_critical_perc=0.8;
 	a->m_distance = SELF;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "pact of flames";
+	a->m_name = "Pact of flames";
 	a->m_req_level = 40;
 	a->m_req_ability[0] = Action::FLAMEARMOR;
 	a->m_req_ability[1] = Action::NOACTION;
@@ -398,7 +398,7 @@ void Action::init()
 	a->m_critical_perc=0.8;
 	a->m_distance = SELF;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "flame armor";
+	a->m_name = "Flame armor";
 	a->m_req_level = 20;
 	a->m_req_ability[0] = Action::FIRESWORD;
 	a->m_req_ability[1] = Action::NOACTION;
@@ -414,7 +414,7 @@ void Action::init()
 	a->m_critical_perc=0.8;
 	a->m_distance = SELF;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "battlecry";
+	a->m_name = "Battlecry";
 	a->m_req_level = 5;
 	a->m_req_ability[0] = Action::DECOY;
 	a->m_req_ability[1] = Action::NOACTION;
@@ -446,12 +446,12 @@ void Action::init()
 	a->m_critical_perc=0.8;
 	a->m_distance = SELF;
 	a->m_flags =0;
-	a->m_name = "regeneration";
+	a->m_name = "Regeneration";
 	a->m_req_level = 5;
 	a->m_req_ability[0] = Action::NOACTION;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "The warrior regains some lifepoints through the sheer power of his will.";
+	a->m_description = "The warrior regains up to 50% hitpoints of his total hitpoints through the sheer power of his will.";
 	a->m_enum_name = "regenerate";
 
 	a = &(Action::m_base_info[Action::ANGER]);
@@ -462,7 +462,7 @@ void Action::init()
 	a->m_critical_perc=0.8;
 	a->m_distance = SELF;
 	a->m_flags =0;
-	a->m_name = "barbarian anger";
+	a->m_name = "Barbarian anger";
 	a->m_req_level = 20;
 	a->m_req_ability[0] = Action::REGENERATE;
 	a->m_req_ability[1] = Action::NOACTION;
@@ -494,7 +494,7 @@ void Action::init()
 	a->m_critical_perc=0.0;
 	a->m_distance = PASSIVE;
 	a->m_flags =0;
-	a->m_name = "perseverance";
+	a->m_name = "Perseverance";
 	a->m_req_level = 1;
 	a->m_req_ability[0] = Action::NOACTION;
 	a->m_req_ability[1] = Action::NOACTION;
@@ -510,7 +510,7 @@ void Action::init()
 	a->m_critical_perc=0.0;
 	a->m_distance = PASSIVE;
 	a->m_flags =0;
-	a->m_name = "block";
+	a->m_name = "Block";
 	a->m_req_level = 5;
 	a->m_req_ability[0] = Action::STEADFAST;
 	a->m_req_ability[1] = Action::NOACTION;
@@ -526,12 +526,12 @@ void Action::init()
 	a->m_critical_perc=0.0;
 	a->m_distance = PASSIVE;
 	a->m_flags =0;
-	a->m_name = "weaponmaster";
+	a->m_name = "Weaponmaster";
 	a->m_req_level = 20;
 	a->m_req_ability[0] = Action::BLOCK;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "The warriors mastery of weapons increases the damage his enemies receive even further.";
+	a->m_description = "The warriors mastery of weapons increases the damage of his basic attacks by 20%.";
 	a->m_enum_name = "weaponmaster";
 
 	a = &(Action::m_base_info[Action::MONSTER_HUNTER]);
@@ -542,12 +542,12 @@ void Action::init()
 	a->m_critical_perc=0.0;
 	a->m_distance = PASSIVE;
 	a->m_flags =0;
-	a->m_name = "monster hunter";
+	a->m_name = "Monster hunter";
 	a->m_req_level = 5;
 	a->m_req_ability[0] = Action::STEADFAST;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "Every monster the warrior kills increases his strength for a short amount of time.";
+	a->m_description = "For each monster the warrior kills, his strength increases for a short amount of time.";
 	a->m_enum_name = "monster_hunter";
 
 	a = &(Action::m_base_info[Action::MONSTER_SLAYER]);
@@ -558,7 +558,7 @@ void Action::init()
 	a->m_critical_perc=0.0;
 	a->m_distance = PASSIVE;
 	a->m_flags =0;
-	a->m_name = "monster slayer";
+	a->m_name = "Monster slayer";
 	a->m_req_level = 40;
 	a->m_req_ability[0] = Action::MONSTER_HUNTER;
 	a->m_req_ability[1] = Action::NOACTION;
@@ -574,12 +574,12 @@ void Action::init()
 	a->m_critical_perc=0.0;
 	a->m_distance = PASSIVE;
 	a->m_flags =0;
-	a->m_name = "endurance";
+	a->m_name = "Endurance";
 	a->m_req_level = 60;
 	a->m_req_ability[0] = Action::MONSTER_SLAYER;
 	a->m_req_ability[1] = Action::WEAPONMASTER;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "the warrior has become used to the ways of the battlefield to a point, where he can regenerate his abilities faster than normal.";
+	a->m_description = "The warrior has become used to the ways of the battlefield to a point, where he can regenerate his abilities faster than normal.";
 	a->m_enum_name = "endurance";
 
 
@@ -592,7 +592,7 @@ void Action::init()
 	a->m_critical_perc=0.8;
 	a->m_distance = RANGED;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "firebolt";
+	a->m_name = "Firebolt";
 	a->m_req_level = 1;
 	a->m_req_ability[0] = Action::NOACTION;
 	a->m_req_ability[1] = Action::NOACTION;
@@ -611,7 +611,7 @@ void Action::init()
 	a->m_critical_perc=0.8;
 	a->m_distance = RANGED;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "fireblow";
+	a->m_name = "Fireblow";
 	a->m_req_level = 5;
 	a->m_req_ability[0] = Action::FIRE_BOLT;
 	a->m_req_ability[1] = Action::NOACTION;
@@ -630,7 +630,7 @@ void Action::init()
 	a->m_critical_perc=0.8;
 	a->m_distance = RANGED;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "flamewave";
+	a->m_name = "Flame wave";
 	a->m_req_level = 20;
 	a->m_req_ability[0] = Action::FIRE_BALL;
 	a->m_req_ability[1] = Action::NOACTION;
@@ -649,7 +649,7 @@ void Action::init()
 	a->m_critical_perc=0.8;
 	a->m_distance = RANGED;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "firestorm";
+	a->m_name = "Firestorm";
 	a->m_req_level = 60;
 	a->m_req_ability[0] = Action::FIRE_WAVE;
 	a->m_req_ability[1] = Action::NOACTION;
@@ -668,12 +668,12 @@ void Action::init()
 	a->m_critical_perc=0.8;
 	a->m_distance = RANGED;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "fireball";
+	a->m_name = "Fireball";
 	a->m_req_level = 5;
 	a->m_req_ability[0] = Action::FIRE_BOLT;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "The mage casts a bolt of fire, that explodesupon hitting an enemy. Other enemies nearby the victim are also caught in the explosion.";
+	a->m_description = "The mage casts a bolt of fire, that explodes upon hitting an enemy. Other enemies nearby the victim are also caught in the explosion.";
 	a->m_enum_name = "fire_ball";
 	a->m_animation[NO_WEAPON].push_back("castMagicWeak");
 	a->m_animation[ONE_HANDED].push_back("castMagicWeak");
@@ -687,7 +687,7 @@ void Action::init()
 	a->m_critical_perc=0.8;
 	a->m_distance = RANGED;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "infernoball";
+	a->m_name = "Infernoball";
 	a->m_req_level = 40;
 	a->m_req_ability[0] = Action::FIRE_BALL;
 	a->m_req_ability[1] = Action::NOACTION;
@@ -706,12 +706,12 @@ void Action::init()
 	a->m_critical_perc=0.8;
 	a->m_distance = RANGED;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "firecolumn";
+	a->m_name = "Firecolumn";
 	a->m_req_level = 40;
 	a->m_req_ability[0] = Action::FIRE_STRIKE;
 	a->m_req_ability[1] = Action::FIRE_BALL;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "The mage conjurs a column made of hellfire, that will turn every enemy stupid enough to stay in there to ashes.";
+	a->m_description = "The mage conjurs a column made of hellfire, that will stay for 5 seconds and turn every enemy stupid enough to stay in there to ashes.";
 	a->m_enum_name = "fire_wall";
 	a->m_animation[NO_WEAPON].push_back("castMagicStrong");
 	a->m_animation[ONE_HANDED].push_back("castMagicStrong");
@@ -725,7 +725,7 @@ void Action::init()
 	a->m_critical_perc=0.0;
 	a->m_distance = PASSIVE;
 	a->m_flags =0;
-	a->m_name = "ignite";
+	a->m_name = "Ignite";
 	a->m_req_level = 20;
 	a->m_req_ability[0] = Action::NOACTION;
 	a->m_req_ability[1] = Action::NOACTION;
@@ -741,7 +741,7 @@ void Action::init()
 	a->m_critical_perc=0.8;
 	a->m_distance = RANGED;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "icicle";
+	a->m_name = "Icicle";
 	a->m_req_level = 1;
 	a->m_req_ability[0] = Action::NOACTION;
 	a->m_req_ability[1] = Action::NOACTION;
@@ -761,7 +761,7 @@ void Action::init()
 	a->m_critical_perc=0.8;
 	a->m_distance = RANGED;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "spear of ice";
+	a->m_name = "Spear of ice";
 	a->m_req_level = 5;
 	a->m_req_ability[0] = Action::ICE_BOLT;
 	a->m_req_ability[1] = Action::NOACTION;
@@ -780,7 +780,7 @@ void Action::init()
 	a->m_critical_perc=0.8;
 	a->m_distance = RANGED;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "snow storm";
+	a->m_name = "Snow storm";
 	a->m_req_level = 40;
 	a->m_req_ability[0] = Action::FREEZE;
 	a->m_req_ability[1] = Action::ICE_RING;
@@ -799,7 +799,7 @@ void Action::init()
 	a->m_critical_perc=0.8;
 	a->m_distance = RANGED;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "blizzard";
+	a->m_name = "Blizzard";
 	a->m_req_level = 60;
 	a->m_req_ability[0] = Action::FROST_RING;
 	a->m_req_ability[1] = Action::SNOW_STORM;
@@ -818,7 +818,7 @@ void Action::init()
 	a->m_critical_perc=0.8;
 	a->m_distance = RANGED;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "icering";
+	a->m_name = "Ice ring";
 	a->m_req_level = 5;
 	a->m_req_ability[0] = Action::ICE_BOLT;
 	a->m_req_ability[1] = Action::NOACTION;
@@ -837,7 +837,7 @@ void Action::init()
 	a->m_critical_perc=0.8;
 	a->m_distance = RANGED;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "frostring";
+	a->m_name = "Frost ring";
 	a->m_req_level = 40;
 	a->m_req_ability[0] = Action::ICE_RING;
 	a->m_req_ability[1] = Action::NOACTION;
@@ -856,7 +856,7 @@ void Action::init()
 	a->m_critical_perc=0.8;
 	a->m_distance = RANGED;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "freeze";
+	a->m_name = "Freeze";
 	a->m_req_level = 5;
 	a->m_req_ability[0] = Action::ICE_BOLT;
 	a->m_req_ability[1] = Action::NOACTION;
@@ -875,12 +875,12 @@ void Action::init()
 	a->m_critical_perc=0.0;
 	a->m_distance = PASSIVE;
 	a->m_flags =0;
-	a->m_name = "chilling cold";
+	a->m_name = "Chilling cold";
 	a->m_req_level = 20;
 	a->m_req_ability[0] = Action::NOACTION;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "The mage has understood everything about ice and snow, allowing him to increase the effectiveness of his icespells.";
+	a->m_description = "The mage has understood everything about ice and snow, allowing him to increase the effectiveness of his icespells by 20%.";
 	a->m_enum_name = "chill";
 
 	a = &(Action::m_base_info[Action::LIGHTNING]);
@@ -891,7 +891,7 @@ void Action::init()
 	a->m_critical_perc=0.8;
 	a->m_distance = RANGED;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "lightning";
+	a->m_name = "Lightning";
 	a->m_req_level = 1;
 	a->m_req_ability[0] = Action::NOACTION;
 	a->m_req_ability[1] = Action::NOACTION;
@@ -910,7 +910,7 @@ void Action::init()
 	a->m_critical_perc=0.8;
 	a->m_distance = RANGED;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "lightning strike";
+	a->m_name = "Lightning strike";
 	a->m_req_level = 5;
 	a->m_req_ability[0] = Action::LIGHTNING;
 	a->m_req_ability[1] = Action::NOACTION;
@@ -929,7 +929,7 @@ void Action::init()
 	a->m_critical_perc=0.8;
 	a->m_distance = RANGED;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "thunderstorm";
+	a->m_name = "Thunderstorm";
 	a->m_req_level = 20;
 	a->m_req_ability[0] = Action::LIGHTNING_STRIKE;
 	a->m_req_ability[1] = Action::NOACTION;
@@ -948,7 +948,7 @@ void Action::init()
 	a->m_critical_perc=0.8;
 	a->m_distance = RANGED;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "tempest";
+	a->m_name = "Tempest";
 	a->m_req_level = 60;
 	a->m_req_ability[0] = Action::THUNDERSTORM;
 	a->m_req_ability[1] = Action::NOACTION;
@@ -967,7 +967,7 @@ void Action::init()
 	a->m_critical_perc=0.8;
 	a->m_distance = RANGED;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "chainlightning";
+	a->m_name = "Chainlightning";
 	a->m_req_level = 5;
 	a->m_req_ability[0] = Action::LIGHTNING;
 	a->m_req_ability[1] = Action::NOACTION;
@@ -986,7 +986,7 @@ void Action::init()
 	a->m_critical_perc=0.8;
 	a->m_distance = RANGED;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "ball lightning";
+	a->m_name = "Ball lightning";
 	a->m_req_level = 20;
 	a->m_req_ability[0] = Action::CHAIN_LIGHTNING;
 	a->m_req_ability[1] = Action::NOACTION;
@@ -1005,7 +1005,7 @@ void Action::init()
 	a->m_critical_perc=0.8;
 	a->m_distance = SELF;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "static shield";
+	a->m_name = "Static shield";
 	a->m_req_level = 40;
 	a->m_req_ability[0] = Action::CHAIN_LIGHTNING;
 	a->m_req_ability[1] = Action::LIGHTNING_STRIKE;
@@ -1024,12 +1024,12 @@ void Action::init()
 	a->m_critical_perc=0.0;
 	a->m_distance = PASSIVE;
 	a->m_flags =0;
-	a->m_name = "ionisation";
+	a->m_name = "Ionisation";
 	a->m_req_level = 20;
 	a->m_req_ability[0] = Action::NOACTION;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "The mage has become one with the storm, leading to increased damage from his lightning spells.";
+	a->m_description = "The mage has become one with the storm, leading to 20% extra damage from his lightning spells.";
 	a->m_enum_name = "ionisation";
 
 
