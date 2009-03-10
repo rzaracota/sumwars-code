@@ -23,7 +23,7 @@ void Action::init()
 	a->m_req_ability[0]= Action::NOACTION;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_noaction";
+	a->m_description = "noaction";
 	a->m_enum_name = "noaction";
 	a->m_animation[NO_WEAPON].push_back("idle");
 	a->m_animation[ONE_HANDED].push_back("idle");
@@ -38,12 +38,12 @@ void Action::init()
 	a->m_critical_perc=-1;
 	a->m_distance = SELF;
 	a->m_flags =0;
-	a->m_name = "Sterben";
+	a->m_name = "die";
 	a->m_req_level = 0;
 	a->m_req_ability[0]= Action::NOACTION;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_die";
+	a->m_description = "die";
 	a->m_enum_name = "die";
 	a->m_animation[NO_WEAPON].push_back("die");
 	a->m_animation[ONE_HANDED].push_back("die");
@@ -58,12 +58,12 @@ void Action::init()
 	a->m_critical_perc=-1;
 	a->m_distance = MELEE;
 	a->m_flags =0;
-	a->m_name = "Laufen";
+	a->m_name = "walk";
 	a->m_req_level = 0;
 	a->m_req_ability[0] = Action::NOACTION;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_walk";
+	a->m_description = "walk";
 	a->m_enum_name = "walk";
 	a->m_animation[NO_WEAPON].push_back("walkOneHand");
 	a->m_animation[ONE_HANDED].push_back("walkOneHand");
@@ -77,14 +77,14 @@ void Action::init()
 	a->m_critical_perc=0.7;
 	a->m_distance = MELEE;
 	a->m_flags =0;
-	a->m_name = "Item aufheben";
+	a->m_name = "take up item";
 	a->m_req_level = 0;
 	a->m_req_ability[0] = Action::NOACTION;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_take_item";
+	a->m_description = "take item";
 	a->m_enum_name = "take_item";
-	
+
 	a = &(Action::m_base_info[Action::SPEAK]);
 	a->m_timer_nr=0;
 	a->m_standard_time=1;
@@ -93,12 +93,12 @@ void Action::init()
 	a->m_critical_perc=0.7;
 	a->m_distance = MELEE;
 	a->m_flags =0;
-	a->m_name = "Sprechen";
+	a->m_name = "speak";
 	a->m_req_level = 0;
 	a->m_req_ability[0] = Action::NOACTION;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_speak";
+	a->m_description = "speak with someone";
 	a->m_enum_name = "speak";
 
 	a = &(Action::m_base_info[Action::ATTACK]);
@@ -109,12 +109,12 @@ void Action::init()
 	a->m_critical_perc=0.66;
 	a->m_distance = MELEE;
 	a->m_flags =0;
-	a->m_name = "Angriff";
+	a->m_name = "attack";
 	a->m_req_level = 0;
 	a->m_req_ability[0] = Action::NOACTION;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_attack";
+	a->m_description = "normal melee attack";
 	a->m_enum_name = "attack";
 	a->m_animation[NO_WEAPON].push_back("attackUnarmed");
 	a->m_animation[ONE_HANDED].push_back("attack");
@@ -128,12 +128,12 @@ void Action::init()
 	a->m_critical_perc=0.66;
 	a->m_distance = RANGED;
 	a->m_flags =0;
-	a->m_name = "Distanz Angriff";
+	a->m_name = "rangeed attack";
 	a->m_req_level = 0;
 	a->m_req_ability[0] = Action::NOACTION;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_range_attack";
+	a->m_description = "normal ranged attack";
 	a->m_enum_name = "range_attack";
     a->m_animation[NO_WEAPON].push_back("attackRangedUnarmed");
 	a->m_animation[ONE_HANDED].push_back("attackRangedUnarmed");
@@ -147,12 +147,12 @@ void Action::init()
 	a->m_critical_perc=0.5;
 	a->m_distance = RANGED;
 	a->m_flags =0;
-	a->m_name = "Magischer Angriff";
+	a->m_name = "magic attack";
 	a->m_req_level = 0;
 	a->m_req_ability[0] = Action::NOACTION;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_magic_attack";
+	a->m_description = "normal magic attack";
 	a->m_enum_name = "magic_attack";
     a->m_animation[NO_WEAPON].push_back("attackMagicUnarmed");
 	a->m_animation[ONE_HANDED].push_back("attackMagicOneHand");
@@ -166,12 +166,12 @@ void Action::init()
 	a->m_critical_perc=0.66;
 	a->m_distance = MELEE;
 	a->m_flags =0;
-	a->m_name = "Heiliger Angriff";
+	a->m_name = "holy attack";
 	a->m_req_level = 0;
 	a->m_req_ability[0] = Action::NOACTION;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_holy_attack";
+	a->m_description = "normal holy melee attack";
 	a->m_enum_name = "holy_attack";
 	a->m_animation[NO_WEAPON].push_back("attackUnarmed");
 	a->m_animation[ONE_HANDED].push_back("attack");
@@ -186,18 +186,18 @@ void Action::init()
 	a->m_critical_perc=0.66;
 	a->m_distance = MELEE;
 	a->m_flags =0;
-	a->m_name = "Harter Schlag";
+	a->m_name = "bash";
 	a->m_req_level = 1;
 	a->m_req_ability[0] = Action::NOACTION;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_bash";
+	a->m_description = "Attacks one enemy for serious damage.";
 	a->m_enum_name = "bash";
 	a->m_animation[NO_WEAPON].push_back("attackUnarmed");
 	a->m_animation[ONE_HANDED].push_back("attack");
 	a->m_animation[TWO_HANDED].push_back("attackTwoHands");
-	
-	
+
+
 	a = &(Action::m_base_info[Action::HAMMER_BASH]);
 	a->m_timer_nr=1;
 	a->m_standard_time=1;
@@ -206,17 +206,17 @@ void Action::init()
 	a->m_critical_perc=0.66;
 	a->m_distance = MELEE;
 	a->m_flags =0;
-	a->m_name = "Hammerschlag";
+	a->m_name = "hammer blow";
 	a->m_req_level = 20;
 	a->m_req_ability[0] = Action::AROUND_BLOW;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_hammer_bash";
+	a->m_description = "Attacks one enemy with a brutal blow and damages nearby enemies as well.";
 	a->m_enum_name = "hammer_bash";
 	a->m_animation[NO_WEAPON].push_back("attackUnarmed");
 	a->m_animation[ONE_HANDED].push_back("attack");
 	a->m_animation[TWO_HANDED].push_back("attackTwoHands");
-	
+
 	a = &(Action::m_base_info[Action::AROUND_BLOW]);
 	a->m_timer_nr=1;
 	a->m_standard_time=1;
@@ -225,12 +225,12 @@ void Action::init()
 	a->m_critical_perc=0.8;
 	a->m_distance = MELEE;
 	a->m_flags =0;
-	a->m_name = "Rundumschlag";
+	a->m_name = "sweeping blow";
 	a->m_req_level = 5;
 	a->m_req_ability[0] = Action::BASH;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_around_blow";
+	a->m_description = "Attacks every enemy in weapon range with slightly reduced damage.";
 	a->m_enum_name = "around_blow";
 
 	a = &(Action::m_base_info[Action::WHIRL_BLOW]);
@@ -241,12 +241,12 @@ void Action::init()
 	a->m_critical_perc=0.8;
 	a->m_distance = MELEE;
 	a->m_flags =0;
-	a->m_name = "Wirbelschlag";
+	a->m_name = "whirl blow";
 	a->m_req_level = 40;
 	a->m_req_ability[0] = Action::AROUND_BLOW;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_whirl_blow";
+	a->m_description = "Attacks every enemy in weapon range.";
 	a->m_enum_name = "whirl_blow";
 
 	a = &(Action::m_base_info[Action::SMASH]);
@@ -257,17 +257,17 @@ void Action::init()
 	a->m_critical_perc=0.8;
 	a->m_distance = MELEE;
 	a->m_flags =0;
-	a->m_name = "Schmetterschlag";
+	a->m_name = "smash blow";
 	a->m_req_level = 40;
 	a->m_req_ability[0] = Action::HAMMER_BASH;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_smash";
+	a->m_description = "Attacks an enemy with an unblockable, armor piercing blow.";
 	a->m_enum_name = "smash";
 	a->m_animation[NO_WEAPON].push_back("attackUnarmed");
 	a->m_animation[ONE_HANDED].push_back("attack");
 	a->m_animation[TWO_HANDED].push_back("attackTwoHands");
-	
+
 	a = &(Action::m_base_info[Action::HATE_MAGE]);
 	a->m_timer_nr=1;
 	a->m_standard_time=1;
@@ -276,17 +276,17 @@ void Action::init()
 	a->m_critical_perc=0.8;
 	a->m_distance = MELEE;
 	a->m_flags =0;
-	a->m_name = "Magierhass";
+	a->m_name = "silencer";
 	a->m_req_level = 5;
 	a->m_req_ability[0] = Action::BASH;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_hate_mage";
+	a->m_description = "Attacks an enemy with a chance to inflict silence.";
 	a->m_enum_name = "hate_mage";
 	a->m_animation[NO_WEAPON].push_back("attackUnarmed");
 	a->m_animation[ONE_HANDED].push_back("attack");
 	a->m_animation[TWO_HANDED].push_back("attackTwoHands");
-	
+
 
 	a = &(Action::m_base_info[Action::CHARGE]);
 	a->m_timer_nr=1;
@@ -296,17 +296,17 @@ void Action::init()
 	a->m_critical_perc=0.66;
 	a->m_distance = MELEE;
 	a->m_flags =0;
-	a->m_name = "Sturmangriff";
+	a->m_name = "charge";
 	a->m_req_level = 20;
 	a->m_req_ability[0] = Action::BASH;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_charge";
+	a->m_description = "Launches an assault at an enemy with increasing speed. The faster the warrior is, the more damage a charge inflicts.";
 	a->m_enum_name = "charge";
 	a->m_animation[NO_WEAPON].push_back("attackUnarmed");
 	a->m_animation[ONE_HANDED].push_back("attack");
 	a->m_animation[TWO_HANDED].push_back("attackTwoHands");
-	
+
 	a = &(Action::m_base_info[Action::STORM_CHARGE]);
 	a->m_timer_nr=1;
 	a->m_standard_time=0.5;
@@ -315,17 +315,17 @@ void Action::init()
 	a->m_critical_perc=0.66;
 	a->m_distance = MELEE;
 	a->m_flags =0;
-	a->m_name = "Sturmsense";
+	a->m_name = "chargescythe";
 	a->m_req_level = 60;
 	a->m_req_ability[0] = Action::CHARGE;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_storm_charge";
+	a->m_description = "Launches an even stronger charge attack, that may inflict stun.";
 	a->m_enum_name = "storm_charge";
 	a->m_animation[NO_WEAPON].push_back("attackUnarmed");
 	a->m_animation[ONE_HANDED].push_back("attack");
 	a->m_animation[TWO_HANDED].push_back("attackTwoHands");
-	
+
 	a = &(Action::m_base_info[Action::DECOY]);
 	a->m_timer_nr=2;
 	a->m_standard_time=501;
@@ -334,12 +334,12 @@ void Action::init()
 	a->m_critical_perc=0.8;
 	a->m_distance = SELF;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "Koeder";
+	a->m_name = "taunt";
 	a->m_req_level = 1;
 	a->m_req_ability[0] = Action::NOACTION;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_decoy";
+	a->m_description = "Causes surrounding monsters to attack the warrior more likely.";
 	a->m_enum_name = "decoy";
 
 	a = &(Action::m_base_info[Action::SCARE]);
@@ -350,12 +350,12 @@ void Action::init()
 	a->m_critical_perc=0.8;
 	a->m_distance = SELF;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "Herausforderung";
+	a->m_name = "challange";
 	a->m_req_level = 20;
 	a->m_req_ability[0] = Action::DECOY;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_scare";
+	a->m_description = "Nearby monsters will attack the warrior, if they are able to. The warriors defence is increased.";
 	a->m_enum_name = "scare";
 
 	a = &(Action::m_base_info[Action::FIRESWORD]);
@@ -366,12 +366,12 @@ void Action::init()
 	a->m_critical_perc=0.8;
 	a->m_distance = SELF;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "Feuer und Schwert";
+	a->m_name = "fire and sword";
 	a->m_req_level = 5;
 	a->m_req_ability[0] = Action::NOACTION;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_firesword";
+	a->m_description = "The warrior calls the spirits of fire upon his weapon, causing it to deal firedamage. The damage depends on the warriors spellpower.";
 	a->m_enum_name = "firesword";
 
 	a = &(Action::m_base_info[Action::FLAMESWORD]);
@@ -382,12 +382,12 @@ void Action::init()
 	a->m_critical_perc=0.8;
 	a->m_distance = SELF;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "Flammenpakt";
+	a->m_name = "pact of flames";
 	a->m_req_level = 40;
 	a->m_req_ability[0] = Action::FLAMEARMOR;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_flamesword";
+	a->m_description = "The warrior calls upon the fires of hell, causing his weapon to deal firedamage for a significant time. His enemies might catch fire when hit.";
 	a->m_enum_name = "flamesword";
 
 	a = &(Action::m_base_info[Action::FLAMEARMOR]);
@@ -398,12 +398,12 @@ void Action::init()
 	a->m_critical_perc=0.8;
 	a->m_distance = SELF;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "Flammenruestung";
+	a->m_name = "flame armor";
 	a->m_req_level = 20;
 	a->m_req_ability[0] = Action::FIRESWORD;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_flamearmor";
+	a->m_description = "The warrior surrounds himself with angry spirits of fire, who will burn his enemies to ashes, if they dare to come to close.";
 	a->m_enum_name = "flamearmor";
 
 	a = &(Action::m_base_info[Action::BERSERK]);
@@ -414,12 +414,12 @@ void Action::init()
 	a->m_critical_perc=0.8;
 	a->m_distance = SELF;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "Kampfschrei";
+	a->m_name = "battlecry";
 	a->m_req_level = 5;
 	a->m_req_ability[0] = Action::DECOY;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_berserk";
+	a->m_description = "The warrior releases a mighty cry that causes his enemies to lose concentration, ultimatly reducing their defence.";
 	a->m_enum_name = "berserk";
 
 	a = &(Action::m_base_info[Action::WARCRY]);
@@ -430,12 +430,12 @@ void Action::init()
 	a->m_critical_perc=0.8;
 	a->m_distance = SELF;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "Kriegsschrei";
+	a->m_name = "warcry";
 	a->m_req_level = 60;
 	a->m_req_ability[0] = Action::BERSERK;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_warcry";
+	a->m_description = "The battle hardened warriors scream leaves his enemies defence wide open, sometimes confusing them as well.";
 	a->m_enum_name = "warcry";
 
 	a = &(Action::m_base_info[Action::REGENERATE]);
@@ -446,12 +446,12 @@ void Action::init()
 	a->m_critical_perc=0.8;
 	a->m_distance = SELF;
 	a->m_flags =0;
-	a->m_name = "Regeneration";
+	a->m_name = "regeneration";
 	a->m_req_level = 5;
 	a->m_req_ability[0] = Action::NOACTION;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_regenerate";
+	a->m_description = "The warrior regains some lifepoints through the sheer power of his will.";
 	a->m_enum_name = "regenerate";
 
 	a = &(Action::m_base_info[Action::ANGER]);
@@ -462,12 +462,12 @@ void Action::init()
 	a->m_critical_perc=0.8;
 	a->m_distance = SELF;
 	a->m_flags =0;
-	a->m_name = "Barbarische Wut";
+	a->m_name = "barbarian anger";
 	a->m_req_level = 20;
 	a->m_req_ability[0] = Action::REGENERATE;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_anger";
+	a->m_description = "The warrior sets himself in the state of berserk, attacking his enemies with vicious blows, while completely neglecting his defence.";
 	a->m_enum_name = "anger";
 
 	a = &(Action::m_base_info[Action::FURY]);
@@ -478,12 +478,12 @@ void Action::init()
 	a->m_critical_perc=0.8;
 	a->m_distance = SELF;
 	a->m_flags =0;
-	a->m_name = "Barbarische Kraft";
+	a->m_name = "barbarian power";
 	a->m_req_level = 40;
 	a->m_req_ability[0] = Action::ANGER;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_fury";
+	a->m_description = "The warrior becomes even more bloodthirsty, launching at his enemies with increased attackspeed and damage in a berserk state. Even while neglecting his defence, the impact is not as big as with the barbarian anger.";
 	a->m_enum_name = "fury";
 
 	a = &(Action::m_base_info[Action::STEADFAST]);
@@ -494,12 +494,12 @@ void Action::init()
 	a->m_critical_perc=0.0;
 	a->m_distance = PASSIVE;
 	a->m_flags =0;
-	a->m_name = "Turm in der Schlacht";
+	a->m_name = "perseverance";
 	a->m_req_level = 1;
 	a->m_req_ability[0] = Action::NOACTION;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_steadfast";
+	a->m_description = "The warriors defence increases proportional to the cuts and bruises he receives in combat. The more serious the wounds, the more difficult he is to kill.";
 	a->m_enum_name = "steadfast";
 
 	a = &(Action::m_base_info[Action::BLOCK]);
@@ -510,12 +510,12 @@ void Action::init()
 	a->m_critical_perc=0.0;
 	a->m_distance = PASSIVE;
 	a->m_flags =0;
-	a->m_name = "Blocken";
+	a->m_name = "block";
 	a->m_req_level = 5;
 	a->m_req_ability[0] = Action::STEADFAST;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_block";
+	a->m_description = "The warriors mastery of shields and weapons allows him to block damage at an increased rate.";
 	a->m_enum_name = "block";
 
 	a = &(Action::m_base_info[Action::WEAPONMASTER]);
@@ -526,12 +526,12 @@ void Action::init()
 	a->m_critical_perc=0.0;
 	a->m_distance = PASSIVE;
 	a->m_flags =0;
-	a->m_name = "Waffenmeister";
+	a->m_name = "weaponmaster";
 	a->m_req_level = 20;
 	a->m_req_ability[0] = Action::BLOCK;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_weaponmaster";
+	a->m_description = "The warriors mastery of weapons increases the damage his enemies receive even further.";
 	a->m_enum_name = "weaponmaster";
 
 	a = &(Action::m_base_info[Action::MONSTER_HUNTER]);
@@ -542,12 +542,12 @@ void Action::init()
 	a->m_critical_perc=0.0;
 	a->m_distance = PASSIVE;
 	a->m_flags =0;
-	a->m_name = "Monsterjaeger";
+	a->m_name = "monster hunter";
 	a->m_req_level = 5;
 	a->m_req_ability[0] = Action::STEADFAST;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_monster_hunter";
+	a->m_description = "Every monster the warrior kills increases his strength for a short amount of time.";
 	a->m_enum_name = "monster_hunter";
 
 	a = &(Action::m_base_info[Action::MONSTER_SLAYER]);
@@ -558,12 +558,12 @@ void Action::init()
 	a->m_critical_perc=0.0;
 	a->m_distance = PASSIVE;
 	a->m_flags =0;
-	a->m_name = "Monsterschlaechter";
+	a->m_name = "monster slayer";
 	a->m_req_level = 40;
 	a->m_req_ability[0] = Action::MONSTER_HUNTER;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_monster_slayer";
+	a->m_description = "The warrior has become the worst nightmare of mosnters, with every one of them falling at his feet increasing his strength and attackspeed for a short amount of time.";
 	a->m_enum_name = "monster_slayer";
 
 	a = &(Action::m_base_info[Action::ENDURANCE]);
@@ -574,12 +574,12 @@ void Action::init()
 	a->m_critical_perc=0.0;
 	a->m_distance = PASSIVE;
 	a->m_flags =0;
-	a->m_name = "Ausdauer";
+	a->m_name = "endurance";
 	a->m_req_level = 60;
 	a->m_req_ability[0] = Action::MONSTER_SLAYER;
 	a->m_req_ability[1] = Action::WEAPONMASTER;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_endurance";
+	a->m_description = "the warrior has become used to the ways of the battlefield to a point, where he can regenerate his abilities faster than normal.";
 	a->m_enum_name = "endurance";
 
 
@@ -592,12 +592,12 @@ void Action::init()
 	a->m_critical_perc=0.8;
 	a->m_distance = RANGED;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "Feuerblitz";
+	a->m_name = "firebolt";
 	a->m_req_level = 1;
 	a->m_req_ability[0] = Action::NOACTION;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_fire_bolt";
+	a->m_description = "The mage unleashes a small bolt of fire, that damages a single enemy.";
 	a->m_enum_name = "fire_bolt";
     a->m_animation[NO_WEAPON].push_back("castMagicWeak");
 	a->m_animation[ONE_HANDED].push_back("castMagicWeak");
@@ -611,12 +611,12 @@ void Action::init()
 	a->m_critical_perc=0.8;
 	a->m_distance = RANGED;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "Feuerschlag";
+	a->m_name = "fireblow";
 	a->m_req_level = 5;
 	a->m_req_ability[0] = Action::FIRE_BOLT;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_fire_strike";
+	a->m_description = "The mage casts a strong bolt of fire, that damages one enemy.";
 	a->m_enum_name = "fire_strike";
     a->m_animation[NO_WEAPON].push_back("castMagicWeak");
 	a->m_animation[ONE_HANDED].push_back("castMagicWeak");
@@ -630,12 +630,12 @@ void Action::init()
 	a->m_critical_perc=0.8;
 	a->m_distance = RANGED;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "Feuerwelle";
+	a->m_name = "flamewave";
 	a->m_req_level = 20;
 	a->m_req_ability[0] = Action::FIRE_BALL;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_fire_wave";
+	a->m_description = "The mage conjures a wave of flames, that damages enemies in a circle around him.";
 	a->m_enum_name = "fire_wave";
     a->m_animation[NO_WEAPON].push_back("castMagicStrong");
 	a->m_animation[ONE_HANDED].push_back("castMagicStrong");
@@ -649,12 +649,12 @@ void Action::init()
 	a->m_critical_perc=0.8;
 	a->m_distance = RANGED;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "Feuersturm";
+	a->m_name = "firestorm";
 	a->m_req_level = 60;
 	a->m_req_ability[0] = Action::FIRE_WAVE;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_fire_storm";
+	a->m_description = "The mage conjures a deadly wave of fire, that burns every enemy in a circle around him.";
 	a->m_enum_name = "fire_storm";
 	a->m_animation[NO_WEAPON].push_back("castMagicStrong");
 	a->m_animation[ONE_HANDED].push_back("castMagicStrong");
@@ -668,12 +668,12 @@ void Action::init()
 	a->m_critical_perc=0.8;
 	a->m_distance = RANGED;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "Feuerball";
+	a->m_name = "fireball";
 	a->m_req_level = 5;
 	a->m_req_ability[0] = Action::FIRE_BOLT;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_fire_ball";
+	a->m_description = "The mage casts a bolt of fire, that explodesupon hitting an enemy. Other enemies nearby the victim are also caught in the explosion.";
 	a->m_enum_name = "fire_ball";
 	a->m_animation[NO_WEAPON].push_back("castMagicWeak");
 	a->m_animation[ONE_HANDED].push_back("castMagicWeak");
@@ -687,12 +687,12 @@ void Action::init()
 	a->m_critical_perc=0.8;
 	a->m_distance = RANGED;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "Infernoball";
+	a->m_name = "infernoball";
 	a->m_req_level = 40;
 	a->m_req_ability[0] = Action::FIRE_BALL;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_inferno_ball";
+	a->m_description = "The mage casts an even more powerful fireball.";
 	a->m_enum_name = "inferno_ball";
 	a->m_animation[NO_WEAPON].push_back("castMagicWeak");
 	a->m_animation[ONE_HANDED].push_back("castMagicWeak");
@@ -706,12 +706,12 @@ void Action::init()
 	a->m_critical_perc=0.8;
 	a->m_distance = RANGED;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "Feuersaeule";
+	a->m_name = "firecolumn";
 	a->m_req_level = 40;
 	a->m_req_ability[0] = Action::FIRE_STRIKE;
 	a->m_req_ability[1] = Action::FIRE_BALL;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_fire_wall";
+	a->m_description = "The mage conjurs a column made of hellfire, that will turn every enemy stupid enough to stay in there to ashes.";
 	a->m_enum_name = "fire_wall";
 	a->m_animation[NO_WEAPON].push_back("castMagicStrong");
 	a->m_animation[ONE_HANDED].push_back("castMagicStrong");
@@ -725,12 +725,12 @@ void Action::init()
 	a->m_critical_perc=0.0;
 	a->m_distance = PASSIVE;
 	a->m_flags =0;
-	a->m_name = "Entzuenden";
+	a->m_name = "ignite";
 	a->m_req_level = 20;
 	a->m_req_ability[0] = Action::NOACTION;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_inflame";
+	a->m_description = "The mage embraces the heat of fire, so that victims of his firespells will likely suffer burn.";
 	a->m_enum_name = "inflame";
 
 	a = &(Action::m_base_info[Action::ICE_BOLT]);
@@ -741,12 +741,12 @@ void Action::init()
 	a->m_critical_perc=0.8;
 	a->m_distance = RANGED;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "Eiszapfen";
+	a->m_name = "icicle";
 	a->m_req_level = 1;
 	a->m_req_ability[0] = Action::NOACTION;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_ice_bolt";
+	a->m_description = "The mage casts a shard of pure ice, that damages his foes.";
 	a->m_enum_name = "ice_bolt";
 	a->m_animation[NO_WEAPON].push_back("castMagicWeak");
 	a->m_animation[ONE_HANDED].push_back("castMagicWeak");
@@ -761,12 +761,12 @@ void Action::init()
 	a->m_critical_perc=0.8;
 	a->m_distance = RANGED;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "Eisspeer";
+	a->m_name = "spear of ice";
 	a->m_req_level = 5;
 	a->m_req_ability[0] = Action::ICE_BOLT;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_ice_spike";
+	a->m_description = "The mage attacks one enemy with a powerful spear of magical ice.";
 	a->m_enum_name = "ice_spike";
 	a->m_animation[NO_WEAPON].push_back("castMagicWeak");
 	a->m_animation[ONE_HANDED].push_back("castMagicWeak");
@@ -780,12 +780,12 @@ void Action::init()
 	a->m_critical_perc=0.8;
 	a->m_distance = RANGED;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "Schneesturm";
+	a->m_name = "snow storm";
 	a->m_req_level = 40;
 	a->m_req_ability[0] = Action::FREEZE;
 	a->m_req_ability[1] = Action::ICE_RING;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_snow_storm";
+	a->m_description = "The mage calls upon a snow storm to kill every enemy in a circle.";
 	a->m_enum_name = "snow_storm";
 	a->m_animation[NO_WEAPON].push_back("castMagicStrong");
 	a->m_animation[ONE_HANDED].push_back("castMagicStrong");
@@ -799,12 +799,12 @@ void Action::init()
 	a->m_critical_perc=0.8;
 	a->m_distance = RANGED;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "Blizzard";
+	a->m_name = "blizzard";
 	a->m_req_level = 60;
 	a->m_req_ability[0] = Action::FROST_RING;
 	a->m_req_ability[1] = Action::SNOW_STORM;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_blizzard";
+	a->m_description = "The mage summons a leathal cold blizzard that freezes every enemy caught in it to death.";
 	a->m_enum_name = "blizzard";
 	a->m_animation[NO_WEAPON].push_back("castMagicStrong");
 	a->m_animation[ONE_HANDED].push_back("castMagicStrong");
@@ -818,12 +818,12 @@ void Action::init()
 	a->m_critical_perc=0.8;
 	a->m_distance = RANGED;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "Eisring";
+	a->m_name = "icering";
 	a->m_req_level = 5;
 	a->m_req_ability[0] = Action::ICE_BOLT;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_ice_ring";
+	a->m_description = "The mage casts a ring of ice around himself that will damage enemies in range.";
 	a->m_enum_name = "ice_ring";
 	a->m_animation[NO_WEAPON].push_back("castMagicWeak");
 	a->m_animation[ONE_HANDED].push_back("castMagicWeak");
@@ -837,12 +837,12 @@ void Action::init()
 	a->m_critical_perc=0.8;
 	a->m_distance = RANGED;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "Frostring";
+	a->m_name = "frostring";
 	a->m_req_level = 40;
 	a->m_req_ability[0] = Action::ICE_RING;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_frost_ring";
+	a->m_description = "The mage calls upon a deadlier version of the icering.";
 	a->m_enum_name = "frost_ring";
 	a->m_animation[NO_WEAPON].push_back("castMagicWeak");
 	a->m_animation[ONE_HANDED].push_back("castMagicWeak");
@@ -856,12 +856,12 @@ void Action::init()
 	a->m_critical_perc=0.8;
 	a->m_distance = RANGED;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "Einfrieren";
+	a->m_name = "freeze";
 	a->m_req_level = 5;
 	a->m_req_ability[0] = Action::ICE_BOLT;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_freeze";
+	a->m_description = "The mage catches an enemy in a block of pure ice, instantly sealing his movements.";
 	a->m_enum_name = "freeze";
 	a->m_animation[NO_WEAPON].push_back("castMagicWeak");
 	a->m_animation[ONE_HANDED].push_back("castMagicWeak");
@@ -875,12 +875,12 @@ void Action::init()
 	a->m_critical_perc=0.0;
 	a->m_distance = PASSIVE;
 	a->m_flags =0;
-	a->m_name = "Klirrende Kaelte";
+	a->m_name = "chilling cold";
 	a->m_req_level = 20;
 	a->m_req_ability[0] = Action::NOACTION;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_chill";
+	a->m_description = "The mage has understood everything about ice and snow, allowing him to increase the effectiveness of his icespells.";
 	a->m_enum_name = "chill";
 
 	a = &(Action::m_base_info[Action::LIGHTNING]);
@@ -891,12 +891,12 @@ void Action::init()
 	a->m_critical_perc=0.8;
 	a->m_distance = RANGED;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "Blitz";
+	a->m_name = "lightning";
 	a->m_req_level = 1;
 	a->m_req_ability[0] = Action::NOACTION;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_lightning";
+	a->m_description = "The mage summons a lightning to attack one foe.";
 	a->m_enum_name = "lightning";
 	a->m_animation[NO_WEAPON].push_back("castMagicWeak");
 	a->m_animation[ONE_HANDED].push_back("castMagicWeak");
@@ -910,12 +910,12 @@ void Action::init()
 	a->m_critical_perc=0.8;
 	a->m_distance = RANGED;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "Blitzschlag";
+	a->m_name = "lightning strike";
 	a->m_req_level = 5;
 	a->m_req_ability[0] = Action::LIGHTNING;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_lightning_strike";
+	a->m_description = "The mage calls upon a mighty lightning to kill an enemy.";
 	a->m_enum_name = "lightning_strike";
 	a->m_animation[NO_WEAPON].push_back("castMagicWeak");
 	a->m_animation[ONE_HANDED].push_back("castMagicWeak");
@@ -929,12 +929,12 @@ void Action::init()
 	a->m_critical_perc=0.8;
 	a->m_distance = RANGED;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "Gewitter";
+	a->m_name = "thunderstorm";
 	a->m_req_level = 20;
 	a->m_req_ability[0] = Action::LIGHTNING_STRIKE;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_thunderstorm";
+	a->m_description = "The mage summons a thunderstorm that will assault enemies in its range with lightnings.";
 	a->m_enum_name = "thunderstorm";
 	a->m_animation[NO_WEAPON].push_back("castMagicStrong");
 	a->m_animation[ONE_HANDED].push_back("castMagicStrong");
@@ -948,12 +948,12 @@ void Action::init()
 	a->m_critical_perc=0.8;
 	a->m_distance = RANGED;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "Blitzgewitter";
+	a->m_name = "tempest";
 	a->m_req_level = 60;
 	a->m_req_ability[0] = Action::THUNDERSTORM;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_thunderstorm2";
+	a->m_description = "The mage summons a ferocious tempest that bombards enemies in its wake with lightnings.";
 	a->m_enum_name = "thunderstorm2";
 	a->m_animation[NO_WEAPON].push_back("castMagicStrong");
 	a->m_animation[ONE_HANDED].push_back("castMagicStrong");
@@ -967,12 +967,12 @@ void Action::init()
 	a->m_critical_perc=0.8;
 	a->m_distance = RANGED;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "Kettenblitz";
+	a->m_name = "chainlightning";
 	a->m_req_level = 5;
 	a->m_req_ability[0] = Action::LIGHTNING;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_chain_lightning";
+	a->m_description = "The mage unleashes a ball of lightning, that may jump from one enemy to another. It hits a maximum of five enemies and the damage is reduced everytime it jumps.";
 	a->m_enum_name = "chain_lightning";
 	a->m_animation[NO_WEAPON].push_back("castMagicWeak");
 	a->m_animation[ONE_HANDED].push_back("castMagicWeak");
@@ -986,12 +986,12 @@ void Action::init()
 	a->m_critical_perc=0.8;
 	a->m_distance = RANGED;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "Kugelblitz";
+	a->m_name = "ball lightning";
 	a->m_req_level = 20;
 	a->m_req_ability[0] = Action::CHAIN_LIGHTNING;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_chain_lightning2";
+	a->m_description = "The mage unleashes a mighty ball lightning, that can jump over to nearby enemies. A maximum of nine enemies is hit and the damage is reduced with every jump.";
 	a->m_enum_name = "chain_lightning2";
 	a->m_animation[NO_WEAPON].push_back("castMagicWeak");
 	a->m_animation[ONE_HANDED].push_back("castMagicWeak");
@@ -1005,12 +1005,12 @@ void Action::init()
 	a->m_critical_perc=0.8;
 	a->m_distance = SELF;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "Statikschild";
+	a->m_name = "static shield";
 	a->m_req_level = 40;
 	a->m_req_ability[0] = Action::CHAIN_LIGHTNING;
 	a->m_req_ability[1] = Action::LIGHTNING_STRIKE;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_static_shield";
+	a->m_description = "The mage surrounds himself with an armor of lightning, that will stun and damage enemies who are bolt enough to attack in close combat.";
 	a->m_enum_name = "static_shield";
 	a->m_animation[NO_WEAPON].push_back("castMagicWeak");
 	a->m_animation[ONE_HANDED].push_back("castMagicWeak");
@@ -1024,12 +1024,12 @@ void Action::init()
 	a->m_critical_perc=0.0;
 	a->m_distance = PASSIVE;
 	a->m_flags =0;
-	a->m_name = "Ionisierung";
+	a->m_name = "ionisation";
 	a->m_req_level = 20;
 	a->m_req_ability[0] = Action::NOACTION;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_ionisation";
+	a->m_description = "The mage has become one with the storm, leading to increased damage from his lightning spells.";
 	a->m_enum_name = "ionisation";
 
 
