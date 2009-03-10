@@ -2,10 +2,11 @@
 #define GETTEXT_H
 
 
-#ifdef WIN32
-#else
-    #include <libintl.h>
+#ifdef gettext
+    #undef gettext
 #endif
+#include <libintl.h>
+
 
 #include <locale.h>
 

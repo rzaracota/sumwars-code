@@ -133,10 +133,6 @@ extern "C"
 
 }
 
-#ifdef WIN32
-#define gettext(text) text
-#endif
-
 
 #endif
 

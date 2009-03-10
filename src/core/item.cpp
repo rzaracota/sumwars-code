@@ -106,11 +106,8 @@ std::string Item::getName()
 	{
 		ret << m_price << " ";
 	}
-    #ifndef WIN32
-        ret <<  (gettext((getString()).c_str()));
-    #else
-        ret << getString();
-    #endif
+    ret <<  (gettext((getString()).c_str()));
+
 
 	return ret.str();
 }
@@ -139,7 +136,7 @@ void Item::toString(CharConv* cv)
 void Item::fromString(CharConv* cv)
 {
 	// Daten werden extern eingelesen
-	
+
 	char tmp;
 	cv->fromBuffer<char>(tmp);
 	m_rarity = (Rarity) tmp;
@@ -159,7 +156,7 @@ void Item::toStringComplete(CharConv* cv)
 	cv->toBuffer(m_price);
 	cv->toBuffer(m_level_req);
 	cv->toBuffer(m_char_req);
-	
+
 	cv->toBuffer(m_magic_power);
 
 	char mask = NOINFO;
@@ -241,12 +238,12 @@ void Item::fromStringComplete(CharConv* cv)
 
 	if (m_type == GOLD_TYPE)
 		return;
-	
+
 	cv->fromBuffer<int>(m_price);
 	cv->fromBuffer<char>(m_level_req);
 	cv->fromBuffer<char>(m_char_req);
 	cv->fromBuffer<float>(m_magic_power);
-	
+
 	char mask = NOINFO;
 	cv->fromBuffer<char>(mask);
 
@@ -497,10 +494,10 @@ void Item::calcPrice()
 		for (i=1;i<4;i++)
 		{
 			dvalue += 0.5*(dmg.m_min_damage[i] + dmg.m_max_damage[i])*dmg.m_multiplier[i];
-			
+
 		}
 		dvalue *= (2000 + m_weapon_attr->m_dattack_speed)/1000.0;
-		
+
 		dvalue += dmg.m_attack*0.1;
 		dvalue += dmg.m_power*0.1;
 

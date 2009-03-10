@@ -31,11 +31,7 @@
 
 #include <string>
 #include <cstring>
-#ifdef WIN32
 
-#else
-    #include <libintl.h>
-#endif
 #include <locale.h>
 #include "charconv.h"
 #include "debug.h"
@@ -138,7 +134,7 @@ struct Item {
 		MEDIUM = 1,
 		BIG = 0,
 	};
-	
+
 	/**
 	 * \enum Rarity
 	 * \brief Seltenheit des Items
@@ -344,7 +340,7 @@ struct Item {
 	 * \brief Gibt Verzauberungsstärke an
 	 */
 	float m_magic_power;
-	
+
 	/**
 	 * \var Item::Rarity m_rarity
 	 * \brief Seltenheit des Gegenstandes
@@ -408,8 +404,8 @@ struct ItemBasicData
 	\brief Gibt die Groesse des Gegenstandes (klein,mittel, gross) an
 	 */
 	Item::Size m_size;
-	
-	
+
+
 
 	/**
 	 * \var int m_price
@@ -434,7 +430,7 @@ struct ItemBasicData
 	 * \brief maximale Starke einer Verzauberung des Items
 	 */
 	float m_max_enchant;
-	
+
 	/**
 	 * \var  Name des Items
 	 */

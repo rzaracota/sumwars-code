@@ -9,7 +9,7 @@ WorldObject::WorldObject( int id)
 	m_state = STATE_ACTIVE;
 	init();
 	m_event_mask=0;
-	
+
 	m_grid_location.m_region = -1;
 	m_fraction = NOFRACTION;
 	m_category = NOCATEGORY;
@@ -25,7 +25,7 @@ bool WorldObject::moveTo(Vector newpos)
 	if (World::getWorld()==0 || getRegion()==0)
 	{
 		m_shape.m_center = newpos;
-		
+
 		return true;
 	}
 	else
@@ -38,7 +38,7 @@ Region* WorldObject::getRegion()
 {
 	if (World::getWorld() == 0)
 		return 0;
-	
+
 	return World::getWorld()->getRegion(m_grid_location.m_region);
 }
 
@@ -121,12 +121,9 @@ void WorldObject::fromString(CharConv* cv)
 
 string WorldObject::getName()
 {
-#ifndef WIN32
 	return ObjectFactory::getObjectName(m_type_info.m_subtype);
-#else
-	return m_type_info.m_subtype;
-#endif
-	
+
+
 }
 
 
@@ -161,13 +158,13 @@ int WorldObject::getValue(std::string valname)
 		{
 			if (m_type_info.m_type == TypeInfo::TYPE_MONSTER)
 				lua_pushstring(EventSystem::getLuaState(),"monster");
-			
+
 			if (m_type_info.m_type == TypeInfo::TYPE_PLAYER)
 				lua_pushstring(EventSystem::getLuaState(),"player");
-			
+
 			if (m_type_info.m_type == TypeInfo::TYPE_FIXED_OBJECT)
 				lua_pushstring(EventSystem::getLuaState(),"fixed_object");
-			
+
 			return 1;
 		}
 

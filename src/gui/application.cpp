@@ -99,9 +99,9 @@ bool Application::init()
 		ERRORMSG("cant create view");
 		return false;
 	}
-	
+
 	DEBUG("time to start %f",tm.getTime());
-	
+
 	// Ressourcen laden
 	ret = loadResources();
 	if (ret == false)
@@ -127,7 +127,7 @@ Application::~Application()
 	delete m_document;
 	delete m_ogre_cegui_renderer;
 	delete m_ogre_root;
-	
+
 	ObjectFactory::cleanup();
 	ItemFactory::cleanup();
 	SoundSystem::cleanup();
@@ -141,7 +141,7 @@ void Application::run()
 	float frametime;
 	int count=0;
 	Ogre::Timer timer2;
- 
+
 	int nr = 100;
 	timer.reset();
 	while (m_document->getState() != Document::END_GAME)
@@ -151,11 +151,11 @@ void Application::run()
 		time[0] += frametime;
 		timer.reset();
 
-		
+
 		count ++;
 		if (count ==nr)
 		{
-			
+
 			count =0;
 			/*
 			DEBUG("average stats over %i frames",nr);
@@ -166,12 +166,12 @@ void Application::run()
 			DEBUG("scene update time: %f",time[4]/nr);
 			DEBUG("gui update time: %f",time[5]/nr);
 			DEBUG("ogre  time: %f \n",time[6]/nr);
-			
-			
+
+
 			for (int i=0; i<7; i++)
 			time[i]=0;
 			*/
-			
+
 		}
 
 		timer2.reset();
@@ -189,7 +189,7 @@ void Application::run()
 		timer2.reset();
 		// run the message pump
 		Ogre::WindowEventUtilities::messagePump();
-		
+
 		t =timer2.getMicroseconds ()/1000.0;
 		time[2] += t;
 		if (t>20)
@@ -201,7 +201,7 @@ void Application::run()
 
 		// Document aktualisieren
 		m_document->update(frametime);
-		
+
 		t =timer2.getMicroseconds ()/1000.0;
 		time[3] += t;
 		if (t> 20)
@@ -229,16 +229,16 @@ void Application::run()
 			ERRORMSG("Error message: %s",e.getMessage().c_str());
 			return;
 		}
-		
+
 
 
 		timer2.reset();
-		
+
 		m_cegui_system->injectTimePulse(frametime/1000.0);
 
 		t =timer2.getMicroseconds ()/1000.0;
 		time[5] += t;
-		
+
 		if (t> 20)
 		{
 			DEBUG4("cegui update time was %f",t);
@@ -331,7 +331,7 @@ bool Application::setupResources()
 
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../resources/gui/schemes", "FileSystem", "GUI");
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../resources/itempictures", "FileSystem", "itempictures");
-	
+
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../data/world", "FileSystem", "world");
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../data/npc", "FileSystem", "npc");
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../data/quests", "FileSystem", "quests");
@@ -352,7 +352,7 @@ bool Application::setupResources()
 	Ogre::ResourceGroupManager::getSingleton().initialiseResourceGroup("Savegame");
 	Ogre::ResourceGroupManager::getSingleton().initialiseResourceGroup("GUI");
 
-	
+
 
 
 	// Debugging: Meshes direkt anlegen
@@ -372,7 +372,7 @@ bool Application::setupResources()
 bool Application::initGettext()
 {
 	DEBUG("initializing internationalisation");
-#ifndef WIN32
+
 	bool result = false;
 	/*char * language;
 	language = getenv("LANG");
@@ -398,15 +398,13 @@ bool Application::initGettext()
 	bindtextdomain ("sumwars","../translation/");
 	bindtextdomain ("event","../translation/");
 	textdomain ("sumwars");*/
-	
+
 	result = setlocale( LC_MESSAGES, "" );
 	bindtextdomain ("sumwars_sumwars","../translation/");
 	bind_textdomain_codeset ("sumwars_sumwars","UTF-8");
 	bindtextdomain ("event","../translation/");
-	//textdomain ("sumwars_sumwars");
-	
-	return result;
-#endif
+	textdomain ("sumwars_sumwars");
+
 	return true;
 }
 
@@ -437,18 +435,18 @@ bool Application::initCEGUI()
 	// Imagesets laden
 	//CEGUI::Imageset* imgset = CEGUI::ImagesetManager::getSingleton().createImageset("test.imageset");
 	CEGUI::ImagesetManager::getSingleton().createImageset("skills.imageset");
-	
-	
+
+
 	try
 	{
 		CEGUI::ImagesetManager::getSingleton().createImagesetFromImageFile ("startscreen.png","startscreen.png",(CEGUI::utf8*)"GUI");
 	}
 	catch (CEGUI::Exception& e)
-	{	
+	{
 		DEBUG("CEGUI exception %s",e.getMessage().c_str());
 	}
-	
-	
+
+
 	// Mauscursor setzen (evtl eher in View auslagern ? )
 	m_cegui_system->setDefaultMouseCursor((CEGUI::utf8*)"TaharezLook", (CEGUI::utf8*)"MouseArrow");
 
@@ -478,7 +476,7 @@ bool Application::createDocument()
 	m_document->installShortkey(OIS::KC_M,Document::SHOW_CHATBOX);
 	m_document->installShortkey(OIS::KC_Q,Document::SHOW_QUESTINFO);
 	m_document->installShortkey(OIS::KC_TAB,Document::SHOW_MINIMAP);
- 	
+
 	m_document->installShortkey(OIS::KC_RETURN,Document::SHOW_CHATBOX_NO_TOGGLE);
 	m_document->installShortkey(OIS::KC_W,Document::SWAP_EQUIP);
 	m_document->installShortkey(OIS::KC_1,Document::USE_POTION);
@@ -491,7 +489,7 @@ bool Application::createDocument()
 	m_document->installShortkey(OIS::KC_8,(Document::ShortkeyDestination) (Document::USE_POTION+7));
 	m_document->installShortkey(OIS::KC_9,(Document::ShortkeyDestination) (Document::USE_POTION+8));
 	m_document->installShortkey(OIS::KC_0,(Document::ShortkeyDestination) (Document::USE_POTION+9));
-	
+
 	// CHEATS
 	m_document->installShortkey(OIS::KC_L,(Document::ShortkeyDestination) (Document::CHEAT+0));
 
@@ -512,48 +510,48 @@ bool Application::loadResources()
 	Ogre::FileInfoListPtr files;
 	Ogre::FileInfoList::iterator it;
 	std::string file;
-	
+
 	files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("itempictures","*.png");
 	for (it = files->begin(); it != files->end(); ++it)
 	{
-		
+
 		file = it->filename;
-		
+
 		CEGUI::ImagesetManager::getSingleton().createImagesetFromImageFile (file,file,(CEGUI::utf8*)"itempictures");
-		
+
 		updateStartScreen(0.8);
 	}
-	
+
 	// Imagesets laden
 	files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("itempictures","*.imageset");
 	for (it = files->begin(); it != files->end(); ++it)
 	{
-		
+
 		file = it->filename;
-		
+
 		CEGUI::ImagesetManager::getSingleton().createImageset(file);
-		
+
 		updateStartScreen(0.9);
 	}
-	
+
 	updateStartScreen(0.0);
 	Ogre::ResourceGroupManager::getSingleton().loadResourceGroup("General");
 	updateStartScreen(0.1);
 	Ogre::ResourceGroupManager::getSingleton().loadResourceGroup("Savegame");
 	updateStartScreen(0.2);
 	Ogre::ResourceGroupManager::getSingleton().loadResourceGroup("GUI");
-	
+
 	// Aktionen initialisieren
 	Action::init();
 	SoundSystem::init();
 	SoundSystem::setSoundVolume(0.0);
 
-	
-	
+
+
 	ItemLoader itemloader;
 	std::list<ItemImageData> item_image_data_list;
 	std::list<ItemImageData>::iterator jt;
-	
+
 	// Items initialisieren
 	ItemFactory::init();
 	files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("items","*.xml");
@@ -562,23 +560,23 @@ bool Application::loadResources()
 		file = it->archive->getName();
 		file += "/";
 		file += it->filename;
-		
+
 		ItemFactory::loadItemData(file);
 		Scene::loadItemData(file);
-		
-		// Mesh Images aus XML Laden 
+
+		// Mesh Images aus XML Laden
 		item_image_data_list.clear();
 		itemloader.loadItemImageData(file.c_str(), item_image_data_list);
-		
+
 		for (jt=item_image_data_list.begin(); jt!=item_image_data_list.end(); jt++)
 		{
 			DEBUG5("registering image %s for item %s",jt->m_image.c_str(), jt->m_subtype.c_str());
 			ItemWindow::registerItemImage(jt->m_subtype,jt->m_image);
 		}
-		
+
 		updateStartScreen(0.3);
 	}
-	
+
 	// Monster initialisieren
 	ObjectFactory::init();
 	files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("monsters","*.xml");
@@ -587,14 +585,14 @@ bool Application::loadResources()
 		file = it->archive->getName();
 		file += "/";
 		file += it->filename;
-		
+
 		//ObjectFactory::loadMonsterData(file);
 		//Scene::loadMonsterData(file);
 		ObjectLoader::loadMonsterData(file.c_str());
 
 		updateStartScreen(0.4);
 	}
-	
+
 	// feste Objekte Initialisieren
 	files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("objects","*.xml");
 	for (it = files->begin(); it != files->end(); ++it)
@@ -602,12 +600,12 @@ bool Application::loadResources()
 		file = it->archive->getName();
 		file += "/";
 		file += it->filename;
-		
+
 		ObjectLoader::loadFixedObjectData(file.c_str());
-		
+
 		updateStartScreen(0.5);
 	}
-	
+
 	// Objekt Templates
 	files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("obj_templates","*.xml");
 	for (it = files->begin(); it != files->end(); ++it)
@@ -615,12 +613,12 @@ bool Application::loadResources()
 		file = it->archive->getName();
 		file += "/";
 		file += it->filename;
-		
+
 		ObjectFactory::loadObjectTemplates(file);
-		
+
 		updateStartScreen(0.6);
 	}
-	
+
 	// Objekt Gruppen Templates
 	files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("obj_group_templ","*.xml");
 	for (it = files->begin(); it != files->end(); ++it)
@@ -629,16 +627,16 @@ bool Application::loadResources()
 		file += "/";
 		file += it->filename;
 		ObjectFactory::loadObjectGroupTemplates(file);
-		
+
 		updateStartScreen(0.7);
 	}
-	
+
 	Ogre::MeshManager& mesh_mgr = Ogre::MeshManager::getSingleton();
 	Ogre::Plane plane(Ogre::Vector3::UNIT_Y, 0);
 	mesh_mgr.createPlane("ground", Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME, plane, 200, 200, 5, 5, true, 1,1,1,Ogre::Vector3::UNIT_X);
-	
+
 	updateStartScreen(1.0);
-	
+
 	return true;
 }
 
@@ -653,14 +651,14 @@ void Application::updateStartScreen(float percent)
 	{
 		return;
 	}
-	
+
 	DEBUG5("update time %f  perc: %f",m_timer.getTime(), percent);
 	m_main_window->update();
-	
+
 	m_cegui_system->injectTimePulse(m_timer.getTime()/1000);
-	
+
 	Ogre::WindowEventUtilities::messagePump();
-	
+
 	m_ogre_root->renderOneFrame();
 	m_timer.start();
 }

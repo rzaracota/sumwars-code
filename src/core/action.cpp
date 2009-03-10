@@ -1863,21 +1863,15 @@ void Action::init()
 
 string Action::getName(ActionType type)
 {
-    #ifndef WIN32
         return ( gettext((m_base_info[type].m_enum_name).c_str()) );
-    #else
-        return m_base_info[type].m_enum_name;
-    #endif
+
 }
 
 
 string Action::getDescription(ActionType type)
 {
-    #ifndef WIN32
         return ( gettext((m_base_info[type].m_description).c_str()) );
-    #else
-        return m_base_info[type].m_description;
-    #endif
+
 }
 
 Action::ActionType Action::getActionType(std::string name)

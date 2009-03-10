@@ -1225,24 +1225,21 @@ int EventSystem::luagettext(lua_State *L)
 		lua_pushstring(L,"");
 		return 1;
 	}
-#ifdef WIN32
-	lua_pushstring(L,lua_tostring(L,1));
-	return 1;
-#else
+
 	std::string text="return ";
 	std::string transl = dgettext("event",lua_tostring(L,1));
 	size_t pos = transl.find_first_of("\'\"");
 	if (pos == std::string::npos)
 	text += "[[";
-	
+
 	text += transl;
-	
+
 	if (pos == std::string::npos)
 	text += "]];";
-	
-	
+
+
 	doString(text.c_str());
 	return 1;
-#endif
+
 }
 
