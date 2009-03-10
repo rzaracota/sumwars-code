@@ -249,8 +249,6 @@ void TradeWindow::update()
 
 void TradeWindow::updateTranslation()
 {
-	textdomain ("sumwars_sumwars");
-	
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::PushButton* btn;
 	

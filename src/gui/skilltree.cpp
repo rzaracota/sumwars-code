@@ -889,8 +889,6 @@ void SkillTree::update()
 
 void SkillTree::updateTranslation()
 {
-	textdomain ("sumwars_sumwars");
-	
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::DefaultWindow* tab;
 	

@@ -764,8 +764,6 @@ CharInfo::CharInfo (Document* doc)
 
 void CharInfo::updateTranslation()
 {
-	textdomain ("sumwars_sumwars");
-
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::Window* label;
 
