@@ -101,7 +101,7 @@ ControlPanel::ControlPanel (Document* doc)
 	ctrl_panel->addChildWindow(btn);
 	btn->setPosition(CEGUI::UVector2(cegui_reldim(0.835f), cegui_reldim( 0.30f)));
 	btn->setSize(CEGUI::UVector2(cegui_reldim(0.155f), cegui_reldim( 0.30f)));
-	btn->setText(gettext("main_saveexit"));
+	btn->setText((CEGUI::utf8*) gettext("main_saveexit"));
 	btn->setWantsMultiClickEvents(false);
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&ControlPanel::onButtonSaveExitClicked, this));
 
@@ -111,7 +111,7 @@ ControlPanel::ControlPanel (Document* doc)
 	btn->setPosition(CEGUI::UVector2(cegui_reldim(0.835f), cegui_reldim( 0.65f)));
 	btn->setSize(CEGUI::UVector2(cegui_reldim(0.155f), cegui_reldim( 0.30f)));
 	btn->setWantsMultiClickEvents(false);
-	btn->setText(gettext("main_options"));
+	btn->setText((CEGUI::utf8*) gettext("main_options"));
 
 	// Anzeige linke Maustaste Faehigkeit
 	label = win_mgr.createWindow("TaharezLook/StaticImage", "LeftClickAbilityImage");
@@ -270,10 +270,10 @@ void ControlPanel::updateTranslation()
 	//CEGUI::Window* label;
 
 	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("OptionsButton"));
-	btn->setText(gettext("Options"));
+	btn->setText((CEGUI::utf8*) gettext("Options"));
 	
 	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("SaveExitButton"));
-	btn->setText(gettext("Save & Exit"));
+	btn->setText((CEGUI::utf8*) gettext("Save & Exit"));
 }
 
 bool ControlPanel::onButtonSaveExitClicked(const CEGUI::EventArgs& evt)

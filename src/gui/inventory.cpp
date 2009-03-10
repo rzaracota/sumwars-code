@@ -325,7 +325,7 @@ void Inventory::updateTranslation()
 	CEGUI::Window* label;
 	
 	label = win_mgr.getWindow("GoldLabel");
-	label->setText(gettext("Gold"));
+	label->setText((CEGUI::utf8*) gettext("Gold"));
 	
 }
 

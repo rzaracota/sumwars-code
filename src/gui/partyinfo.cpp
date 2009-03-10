@@ -249,9 +249,9 @@ void PartyInfo::update()
 		{
 			label->setVisible(true);
 		}
-		if (label->getText() != stream.str())
+		if (label->getText() != (CEGUI::utf8*)  stream.str().c_str())
 		{
-			label->setText(stream.str());
+			label->setText((CEGUI::utf8*)  stream.str().c_str());
 		}
 		
 		stream.str("");
@@ -265,9 +265,9 @@ void PartyInfo::update()
 		{
 			label->setVisible(true);
 		}
-		if (label->getText() != stream.str())
+		if (label->getText() != (CEGUI::utf8*)  stream.str().c_str())
 		{
-			label->setText(stream.str());
+			label->setText((CEGUI::utf8*)  stream.str().c_str());
 		}
 		
 		
@@ -286,7 +286,7 @@ void PartyInfo::update()
 		}
 		else if (pl->getTypeInfo()->m_subtype == "archer")
 		{
-			stream.str(gettext("main_archer"));
+			stream.str( gettext("main_archer"));
 		}
 		else if (pl->getTypeInfo()->m_subtype == "priest")
 		{
@@ -296,9 +296,9 @@ void PartyInfo::update()
 		{
 			label->setVisible(true);
 		}
-		if (label->getText() != stream.str())
+		if (label->getText() != (CEGUI::utf8*)  stream.str().c_str())
 		{
-			label->setText(stream.str());
+			label->setText((CEGUI::utf8*)  stream.str().c_str());
 		}
 		
 		// Accept button nur Anzeigen wenn der Spieler Partyleiter ist und der andere Spieler ein Bewerber
@@ -449,7 +449,7 @@ void PartyInfo::updateTranslation()
 		stream << i;
 		
 		label = win_mgr.getWindow(stream.str());
-		label->setText(gettext("Name"));
+		label->setText((CEGUI::utf8*) gettext("Name"));
 	}
 }
 

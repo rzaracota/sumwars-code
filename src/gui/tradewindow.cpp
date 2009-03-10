@@ -255,7 +255,7 @@ void TradeWindow::updateTranslation()
 	CEGUI::PushButton* btn;
 	
 	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("TradeCloseButton"));
-	btn->setText(gettext("Ok"));
+	btn->setText((CEGUI::utf8*) gettext("Ok"));
 }
 
 

@@ -122,7 +122,7 @@ void ItemWindow::updateItemWindowTooltip(CEGUI::Window* img, Item* item, Player*
 	{
 		msg =item->getDescription();
 	}
-	img->setTooltipText(msg);
+	img->setTooltipText((CEGUI::utf8*) msg.c_str());
 }
 
 void ItemWindow::registerItemImage(Item::Subtype type, std::string image)

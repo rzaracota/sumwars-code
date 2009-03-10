@@ -59,13 +59,13 @@ void MainMenu::updateTranslation()
 	
 	
 	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("SinglePlayerButton"));
-	btn->setText(gettext("Single player"));
+	btn->setText((CEGUI::utf8*) gettext("Single player"));
 	
 	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("ServerJoinButton"));
-	btn->setText(gettext("Join game"));
+	btn->setText((CEGUI::utf8*) gettext("Join game"));
 	
 	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("ServerHostButton"));
-	btn->setText(gettext("Host game"));
+	btn->setText((CEGUI::utf8*) gettext("Host game"));
 
 }
 

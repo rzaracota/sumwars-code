@@ -161,18 +161,18 @@ void SavegameList::updateTranslation()
 	CEGUI::Window* label;
 
 	label = win_mgr.getWindow("SavegameChooseLabel");
-	label->setText(gettext("Savegame"));
+	label->setText((CEGUI::utf8*) gettext("Savegame"));
 	
 	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("SelectSavegameButton"));
-	btn->setText(gettext("Ok"));
+	btn->setText((CEGUI::utf8*) gettext("Ok"));
 	
 	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("NewCharButton"));
-	btn->setText(gettext("Create Character"));
+	btn->setText((CEGUI::utf8*) gettext("Create Character"));
 	
 	CEGUI::MultiColumnList* savelist = (CEGUI::MultiColumnList*) win_mgr.getWindow("SavegameList");
-	savelist->getHeaderSegmentForColumn(0).setText(gettext("Name"));
-	savelist->getHeaderSegmentForColumn(1).setText(gettext("Class"));
-	savelist->getHeaderSegmentForColumn(2).setText(gettext("Level"));
+	savelist->getHeaderSegmentForColumn(0).setText((CEGUI::utf8*) gettext("Name"));
+	savelist->getHeaderSegmentForColumn(1).setText((CEGUI::utf8*) gettext("Class"));
+	savelist->getHeaderSegmentForColumn(2).setText((CEGUI::utf8*) gettext("Level"));
 	
 }
 

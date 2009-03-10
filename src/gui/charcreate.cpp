@@ -51,10 +51,10 @@ CharCreate::CharCreate (Document* doc)
 	char_create->addChildWindow(classlist);
 	classlist->setPosition(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.2f)));
 	classlist->setSize(CEGUI::UVector2(cegui_reldim(0.8f), cegui_reldim( 0.2f)));
-	classlist->addItem(new StrListItem("Krieger","warrior"));
-	classlist->addItem(new StrListItem("Bogenschuetze","archer"));
-	classlist->addItem(new StrListItem("Magier","mage"));
-	classlist->addItem(new StrListItem("Priester","priest"));
+	classlist->addItem(new StrListItem((CEGUI::utf8*) gettext("Warrior"),"warrior"));
+	classlist->addItem(new StrListItem((CEGUI::utf8*) gettext("Archer"),"archer"));
+	classlist->addItem(new StrListItem((CEGUI::utf8*) gettext("Mage"),"mage"));
+	classlist->addItem(new StrListItem((CEGUI::utf8*) gettext("Priest"),"priest"));
 	classlist->subscribeEvent(CEGUI::Listbox::EventSelectionChanged, CEGUI::Event::Subscriber(&CharCreate::onClassSelected, this));
 
 	CEGUI::Listbox* looklist = (CEGUI::Listbox*) win_mgr.createWindow("TaharezLook/Listbox", "LookList");
@@ -76,7 +76,6 @@ CharCreate::CharCreate (Document* doc)
 	char_create->addChildWindow(btn);
 	btn->setPosition(CEGUI::UVector2(cegui_reldim(0.35f), cegui_reldim( 0.9f)));
 	btn->setSize(CEGUI::UVector2(cegui_reldim(0.6f), cegui_reldim( 0.05f)));
-	btn->setText("Charakter erstellen");
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&CharCreate::onButtonCharCreate, this));
 	btn->setWantsMultiClickEvents(false);
 	
@@ -119,16 +118,16 @@ void CharCreate::updateTranslation()
 	CEGUI::Window* label;
 	
 	label = win_mgr.getWindow("CharNameLabel");
-	label->setText(gettext("Name"));
+	label->setText((CEGUI::utf8*) gettext("Name"));
 	
 	label = win_mgr.getWindow("CharClassLabel");
-	label->setText(gettext("Class"));
+	label->setText((CEGUI::utf8*) gettext("Class"));
 	
 	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("AbortButton"));
-	btn->setText(gettext("Cancel"));
+	btn->setText((CEGUI::utf8*) gettext("Cancel"));
 
 	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("CharCreateButton"));
-	btn->setText(gettext("Create"));
+	btn->setText((CEGUI::utf8*) gettext("Create"));
 }
 
 bool CharCreate::onClassSelected(const CEGUI::EventArgs& evt)

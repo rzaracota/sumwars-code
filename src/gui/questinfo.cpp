@@ -157,13 +157,13 @@ void QuestInfo::updateTranslation()
 	CEGUI::Window* label;
 
 	label = win_mgr.getWindow("QuestOpenLabel");
-	label->setText(gettext("open"));
+	label->setText((CEGUI::utf8*) gettext("open"));
 	
 	label = win_mgr.getWindow("QuestDoneLabel");
-	label->setText(gettext("finished"));
+	label->setText((CEGUI::utf8*) gettext("finished"));
 	
 	label = win_mgr.getWindow("QuestFailedLabel");
-	label->setText(gettext("failed"));
+	label->setText((CEGUI::utf8*) gettext("failed"));
 	
 	
 }
@@ -204,7 +204,7 @@ void QuestInfo::updateDescription()
 		if (it != quests.end())
 		{
 			
-			quest_descr->setText(it->second->getDescription());
+			quest_descr->setText((CEGUI::utf8*) it->second->getDescription().c_str());
 		}
 		else
 		{

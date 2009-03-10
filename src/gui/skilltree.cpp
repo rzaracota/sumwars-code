@@ -32,7 +32,6 @@ SkillTree::SkillTree(Document* doc)
 
 	// Tab Feuermagie
 	tab = (CEGUI::DefaultWindow*) win_mgr.createWindow("TaharezLook/TabContentPane", "SkilltreeMage_1");
-	tab->setText(gettext("main_firemagic"));
 	skilltree_mage->addTab(tab);
 
 	name =Action::getActionInfo(Action::MAGIC_ATTACK)->m_enum_name;
@@ -43,7 +42,6 @@ SkillTree::SkillTree(Document* doc)
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.05f)));
 	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
 	label->setID(Action::MAGIC_ATTACK);
-	//label->setText(Action::getName(Action::MAGIC_ATTACK));
 	label->setProperty("Image", "set:skills image:magic_attack");
 	label->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&SkillTree::onSkillMouseClicked, this));
 	label->subscribeEvent(CEGUI::Window::EventMouseEnters, CEGUI::Event::Subscriber(&SkillTree::onAbilityHover, this));
@@ -101,8 +99,7 @@ SkillTree::SkillTree(Document* doc)
 	// Tab Eismagie
 	tab = (CEGUI::DefaultWindow*) win_mgr.createWindow("TaharezLook/TabContentPane", "SkilltreeMage_2");
 	skilltree_mage->addTab(tab);
-	tab->setText(gettext("main_icemagic"));
-
+	
 	name =Action::getActionInfo(Action::ICE_BOLT)->m_enum_name;
 	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
 	tab->addChildWindow(label);
@@ -156,8 +153,7 @@ SkillTree::SkillTree(Document* doc)
 	// Tab Luftmagie
 	tab = (CEGUI::DefaultWindow*) win_mgr.createWindow("TaharezLook/TabContentPane", "SkilltreeMage_3");
 	skilltree_mage->addTab(tab);
-	tab->setText(gettext("main_airmagic"));
-
+	
 	name =Action::getActionInfo(Action::LIGHTNING)->m_enum_name;
 	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
 	tab->addChildWindow(label);
@@ -218,7 +214,6 @@ SkillTree::SkillTree(Document* doc)
 		label->setProperty("FrameEnabled", "true");
 		label->setProperty("BackgroundEnabled", "true");
 		label->setID(act);
-		//label->setText(lname);
 		label->setProperty("Image", "set:skills image:" + name);
 		label->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&SkillTree::onSkillMouseClicked, this));
 		label->subscribeEvent(CEGUI::Window::EventMouseEnters, CEGUI::Event::Subscriber(&SkillTree::onAbilityHover, this));
@@ -242,7 +237,6 @@ SkillTree::SkillTree(Document* doc)
 
 
 	tab = (CEGUI::DefaultWindow*) win_mgr.createWindow("TaharezLook/TabContentPane", "SkilltreeWarrior_1");
-	tab->setText("Kampftechniken");
 	skilltree_warrior->addTab(tab);
 
 
@@ -269,7 +263,6 @@ SkillTree::SkillTree(Document* doc)
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.05f)));
 	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
 	label->setID(Action::ATTACK);
-//	label->setText(Action::getName(Action::ATTACK));
 	label->setProperty("Image", "set:skills image:attack");
 	label->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&SkillTree::onSkillMouseClicked, this));
 	label->subscribeEvent(CEGUI::Window::EventMouseEnters, CEGUI::Event::Subscriber(&SkillTree::onAbilityHover, this));
@@ -327,7 +320,6 @@ SkillTree::SkillTree(Document* doc)
 
 	tab = (CEGUI::DefaultWindow*) win_mgr.createWindow("TaharezLook/TabContentPane", "SkilltreeWarrior_2");
 	skilltree_warrior->addTab(tab);
-	tab->setText("Passive Faehigkeiten");
 
 	name =Action::getActionInfo(Action::STEADFAST)->m_enum_name;
 	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
@@ -368,7 +360,6 @@ SkillTree::SkillTree(Document* doc)
 
 	tab = (CEGUI::DefaultWindow*) win_mgr.createWindow("TaharezLook/TabContentPane", "SkilltreeWarrior_3");
 	skilltree_warrior->addTab(tab);
-	tab->setText("Kriegsgeist");
 
 	name =Action::getActionInfo(Action::DECOY)->m_enum_name;
 	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
@@ -439,7 +430,6 @@ SkillTree::SkillTree(Document* doc)
 		label->setProperty("FrameEnabled", "true");
 		label->setProperty("BackgroundEnabled", "true");
 		label->setID(act);
-		//label->setText(lname);
 		label->setProperty("Image", "set:skills image:" + name);
 		label->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&SkillTree::onSkillMouseClicked, this));
 		label->subscribeEvent(CEGUI::Window::EventMouseEnters, CEGUI::Event::Subscriber(&SkillTree::onAbilityHover, this));
@@ -462,7 +452,6 @@ SkillTree::SkillTree(Document* doc)
 
 
 	tab = (CEGUI::DefaultWindow*) win_mgr.createWindow("TaharezLook/TabContentPane", "SkilltreeArcher_1");
-	tab->setText("Kampffertigkeiten");
 	skilltree_archer->addTab(tab);
 
 	name =Action::getActionInfo(Action::RANGE_ATTACK)->m_enum_name;
@@ -473,7 +462,6 @@ SkillTree::SkillTree(Document* doc)
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.05f)));
 	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
 	label->setID(Action::RANGE_ATTACK);
-	//label->setText(Action::getName(Action::RANGE_ATTACK));
 	label->setProperty("Image", "set:skills image:range_attack");
 	label->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&SkillTree::onSkillMouseClicked, this));
 	label->subscribeEvent(CEGUI::Window::EventMouseEnters, CEGUI::Event::Subscriber(&SkillTree::onAbilityHover, this));
@@ -548,7 +536,6 @@ SkillTree::SkillTree(Document* doc)
 	// Tab passive Faehigkeiten
 	tab = (CEGUI::DefaultWindow*) win_mgr.createWindow("TaharezLook/TabContentPane", "SkilltreeArcher_2");
 	skilltree_archer->addTab(tab);
-	tab->setText("passive Faehigkeiten");
 
 	name =Action::getActionInfo(Action::EVADE)->m_enum_name;
 	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
@@ -589,7 +576,6 @@ SkillTree::SkillTree(Document* doc)
 	// Tab3 <hier Name einsetzen>
 	tab = (CEGUI::DefaultWindow*) win_mgr.createWindow("TaharezLook/TabContentPane", "SkilltreeArcher_3");
 	skilltree_archer->addTab(tab);
-	tab->setText("Jagdmagie");
 
 	name =Action::getActionInfo(Action::AIMED_SHOT)->m_enum_name;
 	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
@@ -642,7 +628,6 @@ SkillTree::SkillTree(Document* doc)
 		label->setProperty("FrameEnabled", "true");
 		label->setProperty("BackgroundEnabled", "true");
 		label->setID(act);
-		//label->setText(lname);
 		label->setProperty("Image", "set:skills image:" + name);
 		label->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&SkillTree::onSkillMouseClicked, this));
 		label->subscribeEvent(CEGUI::Window::EventMouseEnters, CEGUI::Event::Subscriber(&SkillTree::onAbilityHover, this));
@@ -666,7 +651,6 @@ SkillTree::SkillTree(Document* doc)
 
 	// Tab Lichtmagie
 	tab = (CEGUI::DefaultWindow*) win_mgr.createWindow("TaharezLook/TabContentPane", "SkilltreePriest_1");
-	tab->setText(gettext("main_lightmagic"));
 	skilltree_priest->addTab(tab);
 
 	name =Action::getActionInfo(Action::HOLY_ATTACK)->m_enum_name;
@@ -677,7 +661,6 @@ SkillTree::SkillTree(Document* doc)
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.05f)));
 	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
 	label->setID(Action::HOLY_ATTACK);
-	//label->setText(Action::getName(Action::HOLY_ATTACK));
 	label->setProperty("Image", "set:skills image:holy_attack");
 	label->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&SkillTree::onSkillMouseClicked, this));
 	label->subscribeEvent(CEGUI::Window::EventMouseEnters, CEGUI::Event::Subscriber(&SkillTree::onAbilityHover, this));
@@ -740,7 +723,6 @@ SkillTree::SkillTree(Document* doc)
 	// Tab Wassermagie
 	tab = (CEGUI::DefaultWindow*) win_mgr.createWindow("TaharezLook/TabContentPane", "SkilltreePriest_2");
 	skilltree_priest->addTab(tab);
-	tab->setText(gettext("main_watermagic"));
 
 	name =Action::getActionInfo(Action::HEAL)->m_enum_name;
 	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
@@ -788,7 +770,6 @@ SkillTree::SkillTree(Document* doc)
 	// Tab Windmagie
 	tab = (CEGUI::DefaultWindow*) win_mgr.createWindow("TaharezLook/TabContentPane", "SkilltreePriest_3");
 	skilltree_priest->addTab(tab);
-	tab->setText(gettext("main_windmagic"));
 
 	name =Action::getActionInfo(Action::BLADE_STORM)->m_enum_name;
 	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
@@ -847,7 +828,6 @@ SkillTree::SkillTree(Document* doc)
 		label->setProperty("FrameEnabled", "true");
 		label->setProperty("BackgroundEnabled", "true");
 		label->setID(act);
-		//label->setText(lname);
 		label->setProperty("Image", "set:skills image:" + name);
 		label->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&SkillTree::onSkillMouseClicked, this));
 		label->subscribeEvent(CEGUI::Window::EventMouseEnters, CEGUI::Event::Subscriber(&SkillTree::onAbilityHover, this));
@@ -915,42 +895,42 @@ void SkillTree::updateTranslation()
 	CEGUI::DefaultWindow* tab;
 	
 	tab = (CEGUI::DefaultWindow*) win_mgr.getWindow("SkilltreeMage_1");
-	tab->setText(gettext("Fire magic"));
+	tab->setText((CEGUI::utf8*) gettext("Fire magic"));
 	
 	tab = (CEGUI::DefaultWindow*) win_mgr.getWindow("SkilltreeMage_2");
-	tab->setText(gettext("Ice magic"));
+	tab->setText((CEGUI::utf8*) gettext("Ice magic"));
 	
 	tab = (CEGUI::DefaultWindow*) win_mgr.getWindow("SkilltreeMage_3");
-	tab->setText(gettext("Air magic"));
+	tab->setText((CEGUI::utf8*) gettext("Air magic"));
 	
 	tab = (CEGUI::DefaultWindow*) win_mgr.getWindow("SkilltreeWarrior_1");
-	tab->setText(gettext("Fighting skills"));
+	tab->setText((CEGUI::utf8*) gettext("Fighting skills"));
 	
 	tab = (CEGUI::DefaultWindow*) win_mgr.getWindow("SkilltreeWarrior_2");
-	tab->setText(gettext("Passive skills"));
+	tab->setText((CEGUI::utf8*) gettext("Passive skills"));
 	
 	tab = (CEGUI::DefaultWindow*) win_mgr.getWindow("SkilltreeWarrior_3");
-	tab->setText(gettext("Fighting spirit"));
+	tab->setText((CEGUI::utf8*) gettext("Fighting spirit"));
 	
 	
 	tab = (CEGUI::DefaultWindow*) win_mgr.getWindow("SkilltreeArcher_1");
-	tab->setText(gettext("Marksmanship"));
+	tab->setText((CEGUI::utf8*) gettext("Marksmanship"));
 	
 	tab = (CEGUI::DefaultWindow*) win_mgr.getWindow("SkilltreeArcher_2");
-	tab->setText(gettext("Passive skills"));
+	tab->setText((CEGUI::utf8*) gettext("Passive skills"));
 	
 	tab = (CEGUI::DefaultWindow*) win_mgr.getWindow("SkilltreeArcher_3");
-	tab->setText(gettext("Hunter magic"));
+	tab->setText((CEGUI::utf8*) gettext("Hunter magic"));
 	
 	
 	tab = (CEGUI::DefaultWindow*) win_mgr.getWindow("SkilltreePriest_1");
-	tab->setText(gettext("Light Magic"));
+	tab->setText((CEGUI::utf8*) gettext("Light Magic"));
 	
 	tab = (CEGUI::DefaultWindow*) win_mgr.getWindow("SkilltreePriest_2");
-	tab->setText(gettext("Water Magic"));
+	tab->setText((CEGUI::utf8*) gettext("Water Magic"));
 	
 	tab = (CEGUI::DefaultWindow*) win_mgr.getWindow("SkilltreePriest_3");
-	tab->setText(gettext("Wind Magic"));
+	tab->setText((CEGUI::utf8*) gettext("Wind Magic"));
 }
 
 void SkillTree::updateAbilityTooltip(unsigned int pos)
@@ -970,7 +950,7 @@ void SkillTree::updateAbilityTooltip(unsigned int pos)
 
 		std::string tooltip = m_document->getAbilityDescription((Action::ActionType) pos);
 
-		label->setTooltipText(tooltip);
+		label->setTooltipText((CEGUI::utf8*) tooltip.c_str());
 
 	}
 

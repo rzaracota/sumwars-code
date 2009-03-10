@@ -40,7 +40,8 @@ MinimapWindow::MinimapWindow (Document* doc)
 	v->setOverlaysEnabled (false);
 	v->setBackgroundColour(Ogre::ColourValue(0,0,0,0) );
 	float ratio = Ogre::Real(v->getActualWidth()) / Ogre::Real(v->getActualHeight());
-	DEBUG("ratio %f",ratio);
+	DEBUG5("render target size %i %i",m_minimap_rt ->getWidth (), m_minimap_rt ->getHeight ());
+	DEBUG5("viewport size %i %i ratio %f",v->getActualWidth(),v->getActualHeight(), ratio);
 	m_minimap_camera->setAspectRatio(ratio);
 	
 	CEGUI::OgreCEGUITexture* ceguiTex = (CEGUI::OgreCEGUITexture*)((CEGUI::OgreCEGUIRenderer*)CEGUI::System::getSingleton().getRenderer())->createTexture((CEGUI::utf8*)"minimap_tex");
@@ -52,7 +53,7 @@ MinimapWindow::MinimapWindow (Document* doc)
 						CEGUI::Size( ceguiTex->getWidth(), ceguiTex->getHeight() ), 
 						CEGUI::Point( 0.0f, 0.0f ) ); 
 	
-	DEBUG("size %i %i",ceguiTex->getWidth(), ceguiTex->getHeight() );
+	DEBUG5("size %i %i",ceguiTex->getWidth(), ceguiTex->getHeight() );
 	
 	CEGUI::FrameWindow* minimap = (CEGUI::FrameWindow*) win_mgr.createWindow("TaharezLook/FrameWindow", "MinimapWindow");
 	m_window = minimap;

@@ -401,7 +401,7 @@ bool Application::initGettext()
 	
 	result = setlocale( LC_MESSAGES, "" );
 	bindtextdomain ("sumwars_sumwars","../translation/");
-	bind_textdomain_codeset("sumwars_sumwars","ISO-8859-1");
+	bind_textdomain_codeset ("sumwars_sumwars","UTF-8");
 	bindtextdomain ("event","../translation/");
 	//textdomain ("sumwars_sumwars");
 	

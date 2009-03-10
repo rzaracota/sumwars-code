@@ -675,7 +675,6 @@ bool MainWindow::setupObjectInfo()
 	label->setProperty("BackgroundEnabled", "true");
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim( 0.02f)));
 	label->setSize(CEGUI::UVector2(cegui_reldim(0.6f), cegui_reldim( 0.07f)));
-	label->setText("test");
 	label->setAlpha(0.5);
 	label->setProperty("MousePassThroughEnabled","true");
 
@@ -1025,10 +1024,10 @@ void MainWindow::updateObjectInfo()
 
 	name = string_stream.str();
 
-	if (label->getText() != name)
+	if (label->getText() != (CEGUI::utf8*) name.c_str())
 	{
 
-		label->setText(name);
+		label->setText((CEGUI::utf8*) name.c_str());
 	}
 
 
@@ -1159,10 +1158,11 @@ void MainWindow::updateItemInfo()
 					label->setVisible(true);
 				}
 				
-				if (label->getText() != name)
+				name = itm->getName();
+				if (label->getText() != (CEGUI::utf8*) name.c_str())
 				{
 
-					label->setText(name);
+					label->setText((CEGUI::utf8*) name.c_str());
 				}
 				
 				std::string propold = label->getProperty("TextColours").c_str();
@@ -1476,10 +1476,10 @@ void MainWindow::updateItemInfo()
 			label->setVisible(true);
 			
 			
-			if (label->getText() != name)
+			if (label->getText() != (CEGUI::utf8*) name.c_str())
 			{
 	
-				label->setText(name);
+				label->setText((CEGUI::utf8*) name.c_str());
 			}
 			
 			label->setID(it->first);
@@ -1615,10 +1615,10 @@ void MainWindow::updateSpeechBubbles()
 		
 			
 			
-		if (label->getText() != text)
+		if (label->getText() != (CEGUI::utf8*) text.c_str())
 		{
 			float len = text.size()*0.01+0.03;
-			label->setText(text);
+			label->setText((CEGUI::utf8*) text.c_str());
 			
 			label->setSize(CEGUI::UVector2(cegui_reldim(len), cegui_reldim( 0.06f)));
 			label->setPosition(CEGUI::UVector2(CEGUI::UDim(std::max(0.0f,pos.first-len/2),0), CEGUI::UDim(std::max(0.0f,pos.second-0.1f),0)));
@@ -1685,9 +1685,9 @@ void MainWindow::updateSpeechBubbles()
 		float len =0;
 		float relh = 1/(1.5+question->m_answers.size());
 		
-		if (label->getText() != question->m_text)
+		if (label->getText() != (CEGUI::utf8*) question->m_text.c_str())
 		{
-			label->setText(question->m_text);
+			label->setText((CEGUI::utf8*) question->m_text.c_str());
 		}
 		
 		label->setPosition(CEGUI::UVector2(cegui_reldim(0.0f), cegui_reldim(0.1*relh)));
@@ -1718,9 +1718,9 @@ void MainWindow::updateSpeechBubbles()
 				label = win_mgr.getWindow(stream.str());
 			}
 			
-			if (label->getText() != it->first)
+			if (label->getText() != (CEGUI::utf8*) it->first.c_str())
 			{
-				label->setText(it->first);
+				label->setText((CEGUI::utf8*) it->first.c_str());
 			}
 			
 			label->setPosition(CEGUI::UVector2(cegui_reldim(0.0f), cegui_reldim((nr+1.4)*relh)));
