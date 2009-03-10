@@ -991,8 +991,14 @@ int EventSystem::addSpeaker(lua_State *L)
 		return 0;
 
 	int argc = lua_gettop(L);
+	if (lua_isnil(L,1))
+	{
+		return 0;
+	}
+	
 	if (argc>=1 && lua_isnumber(L,1))
 	{
+		
 		int speaker = int (lua_tonumber(L, 1));
 
 		string refname ="";
