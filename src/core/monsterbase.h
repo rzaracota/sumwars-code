@@ -6,6 +6,43 @@
 #include "creaturestruct.h"
 
 /**
+ * \struct MonsterAIVars
+ * \brief Sammlung von Variablen, die die KI steuern
+ */
+struct MonsterAIVars
+{
+	/**
+	 * \var float m_ai_sight_range
+	 * \brief Sichtweite der AI
+	 */
+	float m_sight_range;
+	
+	/**
+	 * \var  float m_ai_shoot_range
+	 * \brief Gibt an, ab welcher Entfernung Monster anfangen Fernangriffe zu nutzen
+	 */
+	float m_shoot_range;
+	
+	/**
+	 * \var float m_action_range
+	 * \brief Reichweite ab der die Monster anfangen Aktionen auszufuehren (Angriff erst innerhalb der Sichtweite)
+	 */
+	float m_action_range;
+	
+	/**
+	 * \var float m_randaction_prob
+	 * \brief Wahrscheinlichkeit eine zufaellige Aktion statt der optimalen auszufuehren
+	 */
+	float m_randaction_prob;
+	
+	/**
+	 * \var float m_chase_distance
+	 * \brief Gibt an, wie lange nach einem Angriff das Monster noch versucht den Angreifer zu stellen
+	 */
+	float m_chase_distance;
+};
+
+/**
  * \struct MonsterBasicData
  * \brief enthaelt alle Daten die zur Erzeugung eines Monsters noetig sind
  */
@@ -43,10 +80,10 @@ struct MonsterBasicData
 	DropSlot m_drop_slots[4];
 	
 	/**
-	 * \var float m_ai_sight_range
-	 * \brief Sichtweite der AI
+	 * \var MonsterAIVars m_ai_vars
+	 * \brief Einstellunge fuer die AI
 	 */
-	float m_ai_sight_range;
+	MonsterAIVars m_ai_vars;
 	
 	/**
 	 * \var m_radius

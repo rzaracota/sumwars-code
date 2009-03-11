@@ -286,7 +286,12 @@ bool  ObjectLoader::loadMonster(TiXmlNode* node)
 				}
 				else if (!strcmp(child->Value(), "AI"))
 				{
-					attr.getFloat("ai_sight_range",data-> m_ai_sight_range);
+					attr.getFloat("ai_sight_range",data-> m_ai_vars.m_sight_range,12);
+					attr.getFloat("ai_shoot_range",data-> m_ai_vars.m_shoot_range,data-> m_ai_vars.m_sight_range);
+					attr.getFloat("ai_action_range",data-> m_ai_vars.m_action_range,data-> m_ai_vars.m_sight_range);
+					attr.getFloat("ai_randaction_prob",data-> m_ai_vars.m_randaction_prob,0);
+					attr.getFloat("ai_chase_range",data-> m_ai_vars.m_chase_distance,20);
+					
 				}
 				
 			}

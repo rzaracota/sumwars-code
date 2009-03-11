@@ -54,17 +54,17 @@
 		<ExitDirections north="false" south="true" west="false" east="false" />
 		
 		<Exits>
-			<!--<Exit name="exit_south" destination_region="region1" destination_location="entry_north" >
+			<Exit name="exit_south" destination_region="region1" destination_location="entry_north" >
 				<Shape shape="RECT" extent_x="4.0" extent_y ="4.0" />
 			</Exit>
 			
-			<Exit name="exit_south" destination_region="testregion" destination_location="entry_north" >
+			<!--<Exit name="exit_south" destination_region="testregion" destination_location="entry_north" >
 				<Shape shape="RECT" extent_x="4.0" extent_y ="4.0" />
-			</Exit>-->
+			</Exit>
 			
 			<Exit name="exit_south" destination_region="elCnlLobby" destination_location="entry_north" >
 				<Shape shape="RECT" extent_x="4.0" extent_y ="4.0" />
-			</Exit>
+			</Exit>-->
 			
 		</Exits>
 		<Environments>
@@ -87,6 +87,7 @@
 			<Effect>
 				peasant = createObject('peasant', {130,210});
 				setRefName(peasant,'peasant');
+				peasant = createObject('goblin', {130,220});
 			</Effect>
 		</Event>
 		

@@ -210,11 +210,11 @@ public:
 	
 	
 	/**
-	 * \fn void takeDamage(Damage* damage)
+	 * \fn bool takeDamage(Damage* damage)
 	 * \brief Das Lebewesen nimmt Schaden in der in damage angegebenen Art und Hoehe. Verändert die dynamischen Attribute des Lebewesens.
 	 * \param damage Schadensart und -hoehe
 	 */
-	void takeDamage(Damage* damage);
+	virtual bool takeDamage(Damage* damage);
 	
 	/**
 	 * \fn void applyBaseAttrMod(CreatureBaseAttrMod* mod,bool add = true)

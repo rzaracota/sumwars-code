@@ -352,12 +352,13 @@ class WorldObject {
 	bool moveTo(Vector newpos);
 	
 	/**
-	 * \fn void takeDamage(Damage* damage)
+	 * \fn bool takeDamage(Damage* damage)
 	 * \brief Das Objekt nimmt Schaden in der in damage angegebenen Art und Hoehe.
 	 * \param damage Schadensart und -hoehe
 	 */
-	virtual void takeDamage(Damage* damage)
+	virtual bool takeDamage(Damage* damage)
 	{
+		return false;
 	}
 	
 	/**

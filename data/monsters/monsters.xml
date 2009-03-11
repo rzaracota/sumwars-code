@@ -283,7 +283,7 @@ AIR
 	
 	<Geometry radius="0.5" />
 	
-	<AI ai_sight_range="8" />
+	<AI ai_sight_range="2" ai_chase_range="20"/>
 </Monster>
 
 
@@ -336,7 +336,7 @@ AIR
 	
 	<Geometry radius="0.5" />
 	
-	<AI ai_sight_range="8" />
+	<AI ai_sight_range="12" />
 </Monster>
 
 <Monster type="MONSTER" subtype="goblin_bow" name="goblin archer" fraction="MONSTER" category="GOBLIN" layer="NORMAL">
@@ -388,7 +388,7 @@ AIR
 	
 	<Geometry radius="0.5" />
 	
-	<AI ai_sight_range="8" />
+	<AI ai_sight_range="12" ai_shoot_range="5" />
 </Monster>
 
 <!-- Lich -->
@@ -439,13 +439,14 @@ AIR
 			<Animation name="castMagicWeak" />
 		</Ability>
 		
+		
 		<Immunity type="berserk"/>
 		<Immunity type="confused"/>
 	</BasicAttributes>
 	
 	<Geometry radius="1.0" />
 	
-	<AI ai_sight_range="8" />
+	<AI ai_sight_range="15" ai_shoot_range="9" ai_randaction_prob="1.0" />
 </Monster>
 
 <!-- skeleton -->
@@ -504,7 +505,7 @@ AIR
 	
 	<Geometry radius="0.5" />
 	
-	<AI ai_sight_range="8" />
+	<AI ai_sight_range="12" />
 </Monster>
 
 <!-- Goblin Dog -->
@@ -554,7 +555,7 @@ AIR
 	
 	<Geometry radius="0.5" />
 	
-	<AI ai_sight_range="8" />
+	<AI ai_sight_range="12" />
 </Monster>
 
 <Monster type="MONSTER" subtype="peasant" name="peasant" fraction="HUMAN" category="HUMAN" layer="NORMAL">

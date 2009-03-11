@@ -3160,12 +3160,12 @@ bool Creature::reactOnUse( int id)
     return true;
 }
 
-void Creature::takeDamage(Damage* d)
+bool Creature::takeDamage(Damage* d)
 {
 	// Lebewesen kann nur im Zustand aktiv Schaden nehmen
 	// und wenn es nicht gerade in einen Dialog verwickelt ist
 	if (getState() != STATE_ACTIVE || getDialogueId() != 0)
-		return;
+		return false;
 
 	DEBUG5("take Damage %i",getId());
 	// Testen ob der Verursacher des Schadens feindlich gesinnt ist
@@ -3174,7 +3174,7 @@ void Creature::takeDamage(Damage* d)
 		// Verursacher ist nicht feindlich, kein Schaden
 		DEBUG("not hostile, no dmg");
 		DEBUG("fractions %i %i",d->m_attacker_fraction, this->getFraction());
-		return;
+		return false;
 	}
 	
 
@@ -3182,7 +3182,7 @@ void Creature::takeDamage(Damage* d)
 	// (man kann sich selbst generell nicht schaden)
 	if (d->m_attacker_id == getId())
 	{
-		return;
+		return false;
 	}
 
 
@@ -3202,7 +3202,7 @@ void Creature::takeDamage(Damage* d)
 			{
 				DEBUG5("blocked");
 				// Schaden abgewehrt
-				return;
+				return true;
 			}
 		}
 
@@ -3334,6 +3334,8 @@ void Creature::takeDamage(Damage* d)
 	tr->addVariable("attacker",d->m_attacker_id);
 	tr->addVariable("damage",dmg);
 	getRegion()->insertTrigger(tr);
+	
+	return true;
 }
 
 void Creature::applyDynAttrMod(CreatureDynAttrMod* mod)

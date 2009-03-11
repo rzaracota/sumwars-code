@@ -55,7 +55,7 @@ Monster::Monster( int id,MonsterBasicData& data)
 	m_ai.m_goals = new WorldObjectValueList;
 	m_ai.m_visible_goals = new WorldObjectValueList;
 	m_ai.m_state = Ai::ACTIVE;
-	m_ai.m_sight_range = 15;
+	m_ai.m_vars = data.m_ai_vars;
 	calcBaseAttrMod();
 }
 
@@ -88,7 +88,7 @@ bool Monster::init()
 
 	getBaseAttr()->m_step_length=0.5;
 
-	m_ai.m_sight_range=15;
+	m_ai.m_chase_player_id =0;
 
 	m_ai.m_state = Ai::ACTIVE;
 	return true;
@@ -99,8 +99,7 @@ bool Monster::update(float time)
 	DEBUG5("Update des Monsters [%i]", getId());
 
 	// AI abhandeln
-
-
+	
 
 	// Update Funktion der Oberklasse aufrufen
 	bool result;
@@ -119,6 +118,18 @@ void Monster::updateCommand()
 
 	// eigene Koordinaten
 	Vector &pos = getShape()->m_center;
+	
+	DEBUG5("update monster command %i %s",getId(), getTypeInfo()->m_subtype.c_str());
+	DEBUG5("randaction prob %f",m_ai.m_vars.m_randaction_prob);
+	if (Random::random() < m_ai.m_vars.m_randaction_prob)
+	{
+		m_ai.m_rand_command = true;
+	}
+	else
+	{
+		m_ai.m_rand_command = false;
+	}
+	m_ai.m_command_count=0;
 	
 	// moegliche Ziele ermitteln
 
@@ -145,7 +156,7 @@ void Monster::updateCommand()
 			continue;
 			
 		dist = getShape()->getDistance(*(pl->getShape()));
-		if ( dist< m_ai.m_sight_range)
+		if ( dist< m_ai.m_vars.m_sight_range)
 		{
 			
 		
@@ -172,7 +183,7 @@ void Monster::updateCommand()
 				}
 			}
 
-			if (ret.empty())
+			if (ret.empty() && dist< m_ai.m_vars.m_shoot_range)
 			{
 				// Keine Objekte auf der Linie vom Monster zum Ziel
 				m_ai.m_visible_goals->push_back(std::make_pair(pl,dist));
@@ -188,6 +199,38 @@ void Monster::updateCommand()
 				}
 				*/
 			}
+		}
+	}
+	
+	if (m_ai.m_goals->empty() && m_ai.m_chase_player_id !=0)
+	{
+		pl = dynamic_cast<Creature*>(getRegion()->getObject(m_ai.m_chase_player_id));
+		
+		// Spieler nur als Ziel, wenn aktiv und nicht in Dialog
+		if (pl!=0 && pl->getState() == STATE_ACTIVE && pl->getDialogueId() == 0)
+		{
+			
+		
+			if (World::getWorld()->getRelation(getFraction(), pl ) == HOSTILE)
+			{
+				dist = getShape()->getDistance(*(pl->getShape()));
+				if (dist < m_ai.m_vars.m_chase_distance)
+				{
+					m_ai.m_goals->push_back(std::make_pair(pl,dist));
+				}
+				else
+				{
+					m_ai.m_chase_player_id =0;
+				}
+			}
+			else
+			{
+				m_ai.m_chase_player_id =0;
+			}
+		}
+		else
+		{
+			m_ai.m_chase_player_id =0;
 		}
 	}
 
@@ -328,7 +371,7 @@ void Monster::evalCommand(Action::ActionType act)
 	// Schaden der Aktion ausrechnen
 	Damage dmg;
 	calcDamage(act,dmg);
-
+	m_ai.m_command_count ++;
 
 	if (goal_list)
 	{
@@ -347,9 +390,9 @@ void Monster::evalCommand(Action::ActionType act)
 				value *= 3/(3+dist);
 			}
 			
-			
+			bool takerand = m_ai.m_rand_command && (Random::randi(m_ai.m_command_count) ==1);
 
-			if (value > m_ai.m_command_value)
+			if (value > m_ai.m_command_value || takerand)
 			{
 				DEBUG5("set new command %i value %f",act,value);
 				
@@ -378,6 +421,18 @@ void Monster::evalCommand(Action::ActionType act)
 	{
 		// Bewertung pauschal
 	}
+}
+
+bool Monster::takeDamage(Damage* damage)
+{
+	bool atk = Creature::takeDamage(damage);
+	
+	if (atk)
+	{
+		m_ai.m_chase_player_id =damage->m_attacker_id;
+		
+	}
+	return atk;
 }
 
 

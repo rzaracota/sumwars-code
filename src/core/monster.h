@@ -55,11 +55,10 @@ struct Ai
 	};
 	
 	/**
-	 * \var m_sight_range
-	 * 
-	 * \brief Sichtweite des Monsters
+	 * \var MonsterAIVars m_vars
+	 * \brief Steuervariablen
 	 */
-	float m_sight_range;
+	MonsterAIVars m_vars;
 	
 	/**
 	 * \var WorldObjectValueList* m_goals;
@@ -78,6 +77,25 @@ struct Ai
 	 * \brief Bewertung des aktuellen Kommandos
 	 */
 	float m_command_value;
+	
+	/**
+	 * \var bool m_rand_command
+	 * \brief wenn true, wird der Befehl unter allen Kommandos zufaellig ausgewaehlt
+	 */
+	bool m_rand_command;
+	
+	/**
+	 * \var int m_command_count
+	 * \brief anzahl bisheriger, korrekter Befehle
+	 */
+	int m_command_count;
+	
+	/**
+	 * \var int m_chase_player_id
+	 * \brief ID des Spielers der verfolgt wird
+	 */
+	int m_chase_player_id;
+	
 	
 	/**
 	 * \var Command m_command
@@ -182,6 +200,13 @@ class Monster : public Creature {
 		* \brief Wird aufgerufen, wenn das Monster stirbt. Verteilt Erfahrungspunkte und droppt die Items.
 		*/
 		virtual void die();
+		
+		/**
+		 * \fn bool takeDamage(Damage* damage)
+		 * \brief Das Lebewesen nimmt Schaden in der in damage angegebenen Art und Hoehe. Verändert die dynamischen Attribute des Lebewesens.
+		 * \param damage Schadensart und -hoehe
+		 */
+		virtual bool takeDamage(Damage* damage);
 		
 		/**
 		* \fn virtual Action::ActionEquip getActionEquip()
