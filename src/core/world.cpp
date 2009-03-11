@@ -2158,8 +2158,8 @@ bool World::calcBlockmat(PathfindInfo * pathinfo)
 
 	Shape* wos=0;
 
-	// Alle Objekte in dem Gebiet suchen
-	getRegion(pathinfo->m_region)->getObjectsInShape(&s, &ret,pathinfo->m_layer);
+	// Alle Objekte in dem Gebiet suchen (nur feste und lebende Objekte)
+	getRegion(pathinfo->m_region)->getObjectsInShape(&s, &ret,pathinfo->m_layer, WorldObject::CREATURE | WorldObject::FIXED);
 	WorldObject* wo=0;
 	pathinfo->m_block->clear();
 
@@ -2170,7 +2170,10 @@ bool World::calcBlockmat(PathfindInfo * pathinfo)
 		// eigenes Objekt nicht mit einbeziehen
 		if (wo->getId() != pathinfo->m_id)
 		{
-			DEBUG5("found obstacle %i",wo->getId());
+			if (wo->isCreature())
+			{
+				DEBUG5("found obstacle %i layer %i",wo->getId(),wo->getLayer());
+			}
 			wos = wo->getShape();
 			DEBUG5("shape %i %f %f %f",wos->m_type,wos->m_radius,wos->m_extent.m_x,wos->m_extent.m_y);
 

@@ -2040,6 +2040,9 @@ void Creature::calcStatusModCommand()
 
 void Creature::calcWalkDir(Vector goal,WorldObject* goalobj)
 {
+	// maximale Entfernung bei der normale Wegfindung genommen wird
+	int pathmaxdist = 16;
+	
 	// eigene Position
 	Vector& pos = getShape()->m_center;
 	Vector dir;
@@ -2065,7 +2068,7 @@ void Creature::calcWalkDir(Vector goal,WorldObject* goalobj)
 		bool direct = false;
 
 		// Wenn in einer Koordinatenrichtung Abstand groesser 10 ist direkte Verbindung benutzen
-		if (fabs(pos.m_x-goal.m_x)>10 || fabs(pos.m_y-goal.m_y)>10)
+		if (fabs(pos.m_x-goal.m_x)>pathmaxdist || fabs(pos.m_y-goal.m_y)>pathmaxdist)
 		{
 			direct = true;
 		}
@@ -2078,7 +2081,7 @@ void Creature::calcWalkDir(Vector goal,WorldObject* goalobj)
 
 			// Qualitaet der Suche, geht quadratisch in die Laufzeit ein
 			int qual=4;
-			int dim = 20*qual+1;
+			int dim = 2*pathmaxdist*qual+1;
 
 			// Potentialfeld
 			m_path_info->m_pot = new Matrix2d<float>(dim,dim);
@@ -2128,7 +2131,8 @@ void Creature::calcWalkDir(Vector goal,WorldObject* goalobj)
 			if (recalc)
 			{
 				// neu berechnen notwendig
-
+				DEBUG5("recalc walk field");
+				
 				// Zentrum ist die eigene Position
 				m_path_info->m_center.m_x= goal.m_x +roundf(pos.m_x-goal.m_x);
 				m_path_info->m_center.m_y=goal.m_y +roundf(pos.m_y-goal.m_y);
@@ -3509,6 +3513,9 @@ bool Creature::removeBaseAttrMod(CreatureBaseAttrMod* mod)
 
 void Creature::getPathDirection(Vector pos,short region, float base_size, short layer, Vector& dir)
 {
+	// maximale Entfernung bei der normale Wegfindung genommen wird
+	int pathmaxdist = 16;
+	
 	PathfindInfo** pi= &m_small_path_info;
 	int bsize =1;
 	// true wenn wegsuchendes Objekt fliegt
@@ -3552,7 +3559,7 @@ void Creature::getPathDirection(Vector pos,short region, float base_size, short 
 		*pi = new PathfindInfo;
 		// Qualitaet der Suche
 		int qual=4;
-		int dim = 20 * qual / bsize +1;
+		int dim = 2*pathmaxdist * qual / bsize +1;
 
 		// Potenzialmatrix
 		(*pi)->m_pot = new Matrix2d<float>(dim,dim);
@@ -3598,7 +3605,7 @@ void Creature::getPathDirection(Vector pos,short region, float base_size, short 
 		// Abstand des wegsuchenden Objektes zur einen Position
 		float d2 = (*pi)->m_start.distanceTo(pos);
 		
-		if (fabs(goal.m_x - pos.m_x)>10 || fabs(goal.m_y - pos.m_y)>10)
+		if (fabs(goal.m_x - pos.m_x)>pathmaxdist || fabs(goal.m_y - pos.m_y)>pathmaxdist)
 		{
 			// Direkte Wegsuche wenn das Ziel in einer Richtung mehr als 10 entfernt ist
 			direct = true;
