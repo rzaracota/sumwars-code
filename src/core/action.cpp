@@ -433,7 +433,7 @@ void Action::init()
 	a->m_name = "warcry";
 	a->m_req_level = 60;
 	a->m_req_ability[0] = Action::BERSERK;
-	a->m_req_ability[1] = Action::NOACTION;
+	a->m_req_ability[1] = Action::FURY;
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_description = "The battle hardened warriors scream leaves his enemies defence wide open, sometimes confusing them as well.";
 	a->m_enum_name = "warcry";
@@ -574,7 +574,7 @@ void Action::init()
 	a->m_critical_perc=0.0;
 	a->m_distance = PASSIVE;
 	a->m_flags =0;
-	a->m_name = "Endurance";
+	a->m_name = "Warmaster";
 	a->m_req_level = 60;
 	a->m_req_ability[0] = Action::MONSTER_SLAYER;
 	a->m_req_ability[1] = Action::WEAPONMASTER;
