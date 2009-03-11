@@ -56,9 +56,13 @@
 		<Exits>
 			<!--<Exit name="exit_south" destination_region="region1" destination_location="entry_north" >
 				<Shape shape="RECT" extent_x="4.0" extent_y ="4.0" />
-			</Exit>-->
+			</Exit>
 			
 			<Exit name="exit_south" destination_region="testregion" destination_location="entry_north" >
+				<Shape shape="RECT" extent_x="4.0" extent_y ="4.0" />
+			</Exit>-->
+			
+			<Exit name="exit_south" destination_region="elCnlLobby" destination_location="entry_north" >
 				<Shape shape="RECT" extent_x="4.0" extent_y ="4.0" />
 			</Exit>
 			
@@ -271,13 +275,17 @@
 <!-- Lobby Konzilshalle der Elemtarmagier [fester Ort; Saeulenhalle im roemischen Stil] -->
 <!-- Orte: Soren Windclaw -->
 	<Region id="2" name="elCnlLobby">
-			<Settings dimx="8" dimy="8" region_template="councilhall"/>
-			<ExitDirections north="true" south="false" west="false" east="false" />
-			<Exits>
-				<Exit name="exit_north" destination_region="medMercCamp" destination_location="entry_south" >
-					<Shape shape="RECT" extent_x="4.0" extent_y ="4.0" />
-				</Exit>
-			</Exits>
+		<Settings dimx="8" dimy="8" region_template="councilhall"/>
+		<ExitDirections north="true" south="false" west="false" east="false" />
+		<Exits>
+			<Exit name="exit_north" destination_region="medMercCamp" destination_location="entry_south" >
+				<Shape shape="RECT" extent_x="4.0" extent_y ="4.0" />
+			</Exit>
+		</Exits>
+			
+		<Environments>
+			<Environment height="1.0" name="meadow" />
+		</Environments>
 	</Region>
 	
 <!-- Medair, Soeldnerlager [Stadt]-->
@@ -292,11 +300,15 @@
 				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
 			</Exit>
 
-			<Exit name="exit_north" destination_region="string" destination_location="entry_south" >
+			<Exit name="exit_north" destination_region="aisMeadow" destination_location="entry_south" >
 				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
 			</Exit>
 		</Exits>
-				
+		
+		<Environments>
+			<Environment height="1.0" name="meadow" />
+		</Environments>		
+		
 		<ReviveLocation  location="entry_south" />
 	</Region>
 	
@@ -316,6 +328,10 @@
 				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
 			</Exit>
 		</Exits>
+		
+		<Environments>
+			<Environment height="1.0" name="meadow" />
+		</Environments>
 
 		<NamedObjectGroups>
 			<NameObjectGroup name="willard" object_group="willard" priority="4"/>
@@ -337,11 +353,15 @@
 			<Exit name="exit_north" destination_region="aisHeath" destination_location="entry_south" >
 				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
 			</Exit>
-			<Exit name="exit_Crypt" destination_region="aisMaylonsGraveL1" destination_location="entry_south" >
+			<Exit name="exit_crypt" destination_region="aisMaylonsGraveL1" destination_location="entry_south" >
 				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
 			</Exit>
 		</Exits>
 
+		<Environments>
+			<Environment height="1.0" name="meadow" />
+		</Environments>
+		
 		<NamedObjectGroups>
 			<NameObjectGroup name="maylonsGrave" object_group="maylonsGrave" priority="4"/>
 		</NamedObjectGroups>
@@ -350,19 +370,24 @@
 	
 <!-- Maylons Grab, Ebene 1[unterirdisch], ungefaehr 10 Minuten; Level 14 - 17 -->
 <!-- [kleine Elementare], Zombies, Skelette -->
-	<Region id="5" name="aisMaylonsGraveL1">
+	<Region id="15" name="aisMaylonsGraveL1">
 		<Settings dimx="32" dimy="32" area_percent="0.4" complexity="0.3" granularity="6" />
 		
 		<ExitDirections north="true" south="true" west="false" east="false" />
 		
 		<Exits>
-			<Exit name="exit_south" destination_region="aisPlains" destination_location="entry_Crypt" >
+			<Exit name="exit_south" destination_region="aisPlains" destination_location="entry_crypt" >
 				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
 			</Exit>
-			<Exit name="exit_north" destination_region="aisMaylonsGraveL2" destination_location="entry_North" >
+			<Exit name="exit_north" destination_region="aisMaylonsGraveL2" destination_location="entry_north" >
 				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
 			</Exit>
 		</Exits>
+		
+		<Environments>
+			<Environment height="1.0" name="meadow" />
+		</Environments>
+		
 		<!-- in der Nähe des Eingangs -->
 		<NamedObjectGroups>
 			<NameObjectGroup name= "cryptGobins" object_group="maylonsGraveL1Goblins" priority="4"/>
@@ -372,16 +397,20 @@
 <!-- Maylons Grab, Ebene 2[unterirdisch], ungefaehr 10 Minuten; Level 16 - 19 -->
 <!-- [kleine Elementare], Zombies, Skelette, Maylons Mumie -->
 <!-- Orte: Maylons Grabkammer -->
-	<Region id="5" name="aisMaylonsGraveL1">
+	<Region id="16" name="aisMaylonsGraveL2">
 		<Settings dimx="32" dimy="32" area_percent="0.4" complexity="0.3" granularity="6" />
 		
 		<ExitDirections north="true" south="false" west="false" east="false" />
 		
 		<Exits>
-			<Exit name="exit_north" destination_region="aisMaylonsGraveL1" destination_location="entry_North" >
+			<Exit name="exit_north" destination_region="aisMaylonsGraveL1" destination_location="entry_north" >
 				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
 			</Exit>
 		</Exits>
+		
+		<Environments>
+			<Environment height="1.0" name="meadow" />
+		</Environments>
 		
 		<NamedObjectGroups>
 			<NameObjectGroup name="graveChamber" object_group="maylonsGraveL2Chamber" priority="4"/>
@@ -403,6 +432,10 @@
 				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
 			</Exit>
 		</Exits>
+		
+		<Environments>
+			<Environment height="1.0" name="meadow" />
+		</Environments>
 	</Region>
 	
 <!-- Aisen, Joringsbrueck [laendliches Dorf] -->
@@ -427,6 +460,10 @@
 				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
 			</Exit>
 		</Exits>
+		
+		<Environments>
+			<Environment height="1.0" name="meadow" />
+		</Environments>
 	</Region>
 
 <!-- Aisen, Noerdliche Wiese [Feld und Wiesen]; ungefaehr 20 Min, eher offen; Level 7 - 12; Sidequests aus Joringsbr�ck -->
@@ -452,6 +489,10 @@
 			<ObjectGroup object_group="herbalBushes" priority="4" number="10" probability="1.0" />
 			<ObjectGroup object_group="herbalBushes" priority="3" number="15" probability="0.7" />
 		</ObjectGroups>
+		
+		<Environments>
+			<Environment height="1.0" name="meadow" />
+		</Environments>
 	</Region>	
 	
 <!-- Aisen, Joringsforst [Wald und Wiesen]; ungefaehr 30 Min, halbwegs offen; Level 7 - 12 -->	
@@ -465,10 +506,14 @@
 			<Exit name="exit_south" destination_region="joringsbridge" destination_location="entry_north" >
 				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
 			</Exit>
-			<Exit name="exit_north" destination_region="fairyforest" destination_location="entry_south" >
+			<Exit name="exit_north" destination_region="aisFairyforest" destination_location="entry_south" >
 				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
 			</Exit>
 		</Exits>
+		
+		<Environments>
+			<Environment height="1.0" name="meadow" />
+		</Environments>
 	</Region>
 	
 <!-- Aisen, Feenwald [Wald und Steine]; ungefaehr 60 Min, eher verwinkelt; Level 10 - 16 -->
@@ -487,6 +532,10 @@
 				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
 			</Exit>
 		</Exits>
+		
+		<Environments>
+			<Environment height="1.0" name="meadow" />
+		</Environments>
 		
 		<NamedObjectGroups>
 			<NameObjectGroup name="robsHideout" object_group="robsHideout" priority="4"/>
@@ -508,6 +557,10 @@
 				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
 			</Exit>
 		</Exits>
+		
+		<Environments>
+			<Environment height="1.0" name="meadow" />
+		</Environments>
 	</Region>
 	
 <!-- Aisen, Zwergentrutz [Grenzfeste] -->
@@ -527,38 +580,53 @@
 			<Exit name="exit_north" destination_region="necFieldcamp" destination_location="entry_south" >
 				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
 			</Exit>
+			<Exit name="exit_rampart" destination_region="dwarfenfrowardRampart" destination_location="entry_south" >
+				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
+			</Exit>
 		</Exits>
+		
+		<Environments>
+			<Environment height="1.0" name="meadow" />
+		</Environments>
 		
 	</Region>
 	
 <!-- Aisen, Zwergentrutz Stadtmauer; ungef�hr 20 min, relativ starres Design; Level 16 - 19 -->
 <!-- Zombies, Skelette -->
 <!-- Locations fuer die Verteidigenden Wachen? -->
-	<Region id="12" name="dwarfenfrowardRampart">
+	<Region id="13" name="dwarfenfrowardRampart">
 		<Settings dimx="8" dimy="32" area_percent="0.4" complexity="0.3" granularity="6" />
 		
 		<ExitDirections north="true" south="true" west="false" east="false" />
 		
 		<Exits>
-			<Exit name="exit_south" destination_region="dwarfenfroward" destination_location="entry_north" >
+			<Exit name="exit_south" destination_region="dwarfenfroward" destination_location="entry_rampart" >
 				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
 			</Exit>
 		</Exits>
+		
+		<Environments>
+			<Environment height="1.0" name="meadow" />
+		</Environments>
 	</Region>
 	
 <!-- Necroria, Feldlager [Wiesen und Brachland]; ungefaehr 25 Min, eher verwinkelt; Level 17 - 20 -->
 <!-- Ende der Demo, der Lich als quasi-Endgegner -->
 <!-- Zombies, Skelette, Liche/Nekromanten?, DER Lich-->
-	<Region id="13" name="aisWolfstones">
+	<Region id="14" name="necFieldcamp">
 		<Settings dimx="32" dimy="32" area_percent="0.4" complexity="0.3" granularity="6" />
 		
-		<ExitDirections north="true" south="true" west="false" east="false" />
+		<ExitDirections north="false" south="true" west="false" east="false" />
 		
 		<Exits>
 			<Exit name="exit_south" destination_region="dwarfenfroward" destination_location="entry_north" >
 				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
 			</Exit>
 		</Exits>
+		
+		<Environments>
+			<Environment height="1.0" name="meadow" />
+		</Environments>
 		
 		<NamedObjectGroups>
 			<NameObjectGroup name="powerlich" object_group="powerlich" priority="4" />

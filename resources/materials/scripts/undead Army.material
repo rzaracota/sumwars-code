@@ -11,7 +11,7 @@ material undead
 
 			texture_unit
 			{
-				texture undead.psd
+				texture undead_color.png
 				tex_coord_set 0
 				colour_op modulate
 				scale 1 1

@@ -380,14 +380,14 @@
 			/>
 			
 		<Object subtype="$tree"
-			center_x="12"
+			center_x="-12"
 			center_y="-2"
 			angle = "0"
 			probability ="1.0"
 			prob_angle = "false"
 			/>
 		<Object subtype="$tree"
-			center_x="12"
+			center_x="-12"
 			center_y="2"
 			angle = "0"
 			probability ="1.0"
@@ -402,8 +402,8 @@
 		<Location name = "exit_south" pos_x="0" pos_y="16" />
 		<Location name = "entry_south" pos_x="0" pos_y="8" />
 		
-		<Location name = "exit_west" pos_x="16" pos_y="0" />
-		<Location name = "entry_west" pos_x="8" pos_y="0" />
+		<Location name = "exit_west" pos_x="-16" pos_y="0" />
+		<Location name = "entry_west" pos_x="-8" pos_y="0" />
 		
 		<Location name = "locPrince" pos_x="0" pos_y="2" />
 		<Location name = "locCouncellor" pos_x="0" pos_y="4" />
@@ -526,14 +526,14 @@
 			/>
 			
 		<Object subtype="$tree"
-			center_x="12"
+			center_x="-12"
 			center_y="-2"
 			angle = "0"
 			probability ="1.0"
 			prob_angle = "false"
 			/>
 		<Object subtype="$tree"
-			center_x="12"
+			center_x="-12"
 			center_y="2"
 			angle = "0"
 			probability ="1.0"
@@ -548,8 +548,8 @@
 		<Location name = "exit_south" pos_x="0" pos_y="16" />
 		<Location name = "entry_south" pos_x="0" pos_y="8" />
 		
-		<Location name = "exit_rampart" pos_x="16" pos_y="0" />
-		<Location name = "entry_rampart" pos_x="8" pos_y="0" />
+		<Location name = "exit_rampart" pos_x="-16" pos_y="0" />
+		<Location name = "entry_rampart" pos_x="-8" pos_y="0" />
 		
 		<Location name = "locGeneral" pos_x="1" pos_y="2" />
 		<Location name = "locSummoner" pos_x="1" pos_y="4" />

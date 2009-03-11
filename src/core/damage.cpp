@@ -1,5 +1,6 @@
 #include "damage.h"
 #include "eventsystem.h"
+#include "gettext.h"
 
 Damage::Damage()
 {
@@ -14,75 +15,75 @@ void Damage::toString(CharConv* cv)
 	{
 		cv->toBuffer(m_min_damage[i]);
 	}
-		
+
 	for (i=0;i<4;i++)
 	{
 		cv->toBuffer(m_max_damage[i]);
 	}
-	
+
 	for (i=0;i<4;i++)
 	{
 		cv->toBuffer(m_multiplier[i]);
 	}
-		
+
 	cv->toBuffer(m_attack);
 	cv->toBuffer(m_power);
 	cv->toBuffer(m_crit_perc);
-		
+
 	for (i=0;i<NR_STATUS_MODS;i++)
 	{
 		cv->toBuffer(m_status_mod_power[i]);
 	}
-		
+
 	cv->toBuffer(m_special_flags);
-	
-	
+
+
 }
 
 
 void Damage::fromString(CharConv* cv)
 {
-	
+
 	int i;
 	for (i=0;i<4;i++)
 	{
 		cv->fromBuffer<float>(m_min_damage[i]);
 	}
-		
+
 	for (i=0;i<4;i++)
 	{
 		cv->fromBuffer<float>(m_max_damage[i]);
 	}
-	
+
 	for (i=0;i<4;i++)
 	{
 		cv->fromBuffer<float>(m_multiplier[i]);
 	}
-		
+
 	cv->fromBuffer<float>(m_attack);
 	cv->fromBuffer<float>(m_power);
 	cv->fromBuffer<float>(m_crit_perc);
-		
+
 	for (i=0;i<NR_STATUS_MODS;i++)
 	{
 		cv->fromBuffer<short>(m_status_mod_power[i]);
 	}
-		
+
 	cv->fromBuffer<short>(m_special_flags );
-	
+
 }
 
-		
+
 void Damage::init()
 {
 		// alles nullen
 	memset(this,0, sizeof(Damage));
 	int i;
-		
+
 		// Multiplikatoren auf 1 setzen
 	for (i=0;i<4;i++)
 		m_multiplier[i]=1;
-	
+
 	m_attacker_fraction = WorldObject::FRAC_HOSTILE_TO_ALL;
 }
 
@@ -138,7 +139,7 @@ std::string Damage::getStatusModName(StatusMods sm)
 			return gettext("frozen");
 		case BURNING:
 			return gettext("burning");
-			
+
 	}
 	return "";
 }
@@ -182,12 +183,12 @@ std::string Damage::getDamageString(Damage::Usage usage)
 		{
 			if (!first)
 				out_stream << "\n";
-			
+
 			first = false;
 			out_stream <<getDamageTypeName((DamageType) i) <<": "<<(int) m_min_damage[i]<<"-"<< (int) m_max_damage[i];
 		}
 	}
-	
+
 	// Multiplikatoren anzeigen
 	for (i=0;i<4;i++)
 	{
@@ -195,7 +196,7 @@ std::string Damage::getDamageString(Damage::Usage usage)
 		{
 			if (!first)
 				out_stream << "\n";
-			
+
 			first = false;
 			if (m_multiplier[i]>1)
 			{
@@ -214,7 +215,7 @@ std::string Damage::getDamageString(Damage::Usage usage)
 		{
 			if (!first)
 				out_stream << "\n";
-			
+
 			first = false;
 			if (m_special_flags & UNBLOCKABLE)
 			{
@@ -225,13 +226,13 @@ std::string Damage::getDamageString(Damage::Usage usage)
 				out_stream <<gettext("Attack")<<": "<<(int) m_attack;
 			}
 		}
-		
+
 		// Durchschlagskraft anzeigen
 		if (m_power>0)
 		{
 			if (!first)
 				out_stream << "\n";
-			
+
 			first = false;
 			if (m_special_flags & IGNORE_ARMOR)
 			{
@@ -242,17 +243,17 @@ std::string Damage::getDamageString(Damage::Usage usage)
 				out_stream <<gettext("Power")<<": "<<(int) m_power;
 			}
 		}
-		
+
 		// Chance auf kritische Treffer
 		if (m_crit_perc>0 && !first)
 		{
 			out_stream << "\n";
-			
+
 			out_stream << gettext("Chance for critical hit")<<": "<<(int) (100*m_crit_perc)<<"%";
-			
+
 		}
 	}
-	
+
 	// Statusveraenderungen
 	for (i=0;i<8;i++)
 	{
@@ -260,15 +261,15 @@ std::string Damage::getDamageString(Damage::Usage usage)
 		{
 			if (!first)
 				out_stream << "\n";
-			
+
 			first = false;
-			
+
 			out_stream <<getStatusModName((StatusMods) i) <<": "<<m_status_mod_power[i];
 		}
  	}
-	
+
 	return out_stream.str();
-	
+
 }
 
 int Damage::getValue(std::string valname)
@@ -355,12 +356,12 @@ int Damage::getValue(std::string valname)
 	else if (valname =="blockable")
 	{
 		lua_pushboolean(EventSystem::getLuaState() , !(m_special_flags & UNBLOCKABLE));
-		return 1;		
+		return 1;
 	}
 	else if (valname =="ignore_armor")
 	{
 		lua_pushboolean(EventSystem::getLuaState() , (m_special_flags & IGNORE_ARMOR));
-		return 1;		
+		return 1;
 	}
 	else if (valname =="attacker")
 	{
@@ -374,7 +375,7 @@ int Damage::getValue(std::string valname)
 bool Damage::setValue(std::string valname)
 {
 	int argc = lua_gettop(EventSystem::getLuaState());
-	
+
 	if (valname =="fire_dmg")
 	{
 		float d1,d2;
@@ -505,7 +506,7 @@ bool Damage::setValue(std::string valname)
 			m_special_flags &= ~UNBLOCKABLE ;
 		}
 		return true;
-		
+
 	}
 	else if (valname =="ignore_armor")
 	{
@@ -519,7 +520,7 @@ bool Damage::setValue(std::string valname)
 		{
 			m_special_flags &= ~IGNORE_ARMOR ;
 		}
-		return true;	
+		return true;
 	}
 	else if (valname =="attacker")
 	{
@@ -528,7 +529,7 @@ bool Damage::setValue(std::string valname)
 		m_attacker_id = i;
 		return true;
 	}
-	
+
 	return false;
 }
 

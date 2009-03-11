@@ -563,7 +563,7 @@ void Action::init()
 	a->m_req_ability[0] = Action::MONSTER_HUNTER;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "The warrior has become the worst nightmare of mosnters, with every one of them falling at his feet increasing his strength and attackspeed for a short amount of time.";
+	a->m_description = "The warrior has become the worst nightmare of monsters, with every one of them falling at his feet increasing his strength and attackspeed for a short amount of time.";
 	a->m_enum_name = "monster_slayer";
 
 	a = &(Action::m_base_info[Action::ENDURANCE]);
