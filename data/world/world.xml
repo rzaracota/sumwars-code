@@ -51,7 +51,7 @@
 	<Region id="0" name="region0">
 		<Settings dimx="64" dimy="64" area_percent="0.35" complexity="0.4" granularity="8" ground="grass1"/>
 		
-		<ExitDirections north="false" south="true" west="false" east="false" />
+		<ExitDirections north="true" south="true" west="false" east="false" />
 		
 		<Exits>
 			<Exit name="exit_south" destination_region="region1" destination_location="entry_north" >
@@ -61,10 +61,10 @@
 			<!--<Exit name="exit_south" destination_region="testregion" destination_location="entry_north" >
 				<Shape shape="RECT" extent_x="4.0" extent_y ="4.0" />
 			</Exit>
-			
-			<Exit name="exit_south" destination_region="elCnlLobby" destination_location="entry_north" >
+			-->
+			<Exit name="exit_north" destination_region="elCnlLobby" destination_location="entry_north" >
 				<Shape shape="RECT" extent_x="4.0" extent_y ="4.0" />
-			</Exit>-->
+			</Exit>
 			
 		</Exits>
 		<Environments>

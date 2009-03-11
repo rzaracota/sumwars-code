@@ -1042,12 +1042,12 @@ void Action::init()
 	a->m_critical_perc=0.3;
 	a->m_distance = RANGED;
 	a->m_flags =0;
-	a->m_name = "1 Vogel mit 3 Steinen";
+	a->m_name = "Tripple Shot";
 	a->m_req_level = 1;
 	a->m_req_ability[0] = Action::NOACTION;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_triple_shot";
+	a->m_description = "The archers mastery of ranged weapons allows him to shoot three projectiles in a short amount of time.";
 	a->m_enum_name = "triple_shot";
 	a->m_animation[NO_WEAPON].push_back("attackRangedUnarmed");
 	a->m_animation[ONE_HANDED].push_back("attackRangedUnarmed");
@@ -1062,12 +1062,12 @@ void Action::init()
 	a->m_critical_perc=0.3;
 	a->m_distance = RANGED;
 	a->m_flags =0;
-	a->m_name = "Todesschwarm";
+	a->m_name = "Deadly Swarm";
 	a->m_req_level = 20;
 	a->m_req_ability[0] = Action::MULTISHOT;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_guided_triple_shot";
+	a->m_description = "The archer shoots four consecutive projectiles that are imbued with vengeful spirits. They will pursue the enemy, even if he tries to run.";
 	a->m_enum_name = "guided_triple_shot";
 	a->m_animation[NO_WEAPON].push_back("attackRangedUnarmed");
 	a->m_animation[ONE_HANDED].push_back("attackRangedUnarmed");
@@ -1081,12 +1081,12 @@ void Action::init()
 	a->m_critical_perc=0.7;
 	a->m_distance = RANGED;
 	a->m_flags =0;
-	a->m_name = "Faecherschuss";
+	a->m_name = "Fanshot";
 	a->m_req_level = 5;
 	a->m_req_ability[0] = Action::TRIPLE_SHOT;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_multishot";
+	a->m_description = "The archer shoots five projectiles at a time, aimed at enemies in front of him. The damage dealt by each projectile suffers a little.";
 	a->m_enum_name = "multishot";
 	a->m_animation[NO_WEAPON].push_back("attackRangedUnarmed");
 	a->m_animation[ONE_HANDED].push_back("attackRangedUnarmed");
@@ -1100,12 +1100,12 @@ void Action::init()
 	a->m_critical_perc=0.7;
 	a->m_distance = RANGED;
 	a->m_flags =0;
-	a->m_name = "Eisenhagel";
+	a->m_name = "Iron Hail";
 	a->m_req_level = 40;
 	a->m_req_ability[0] = Action::MULTISHOT;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_volley_shot";
+	a->m_description = "The archer handles his weapons with elflike precision, attacking up to seven enemys in front of him. The damage dealt by each projectile suffers a little.";
 	a->m_enum_name = "volley_shot";
 	a->m_animation[NO_WEAPON].push_back("attackRangedUnarmed");
 	a->m_animation[ONE_HANDED].push_back("attackRangedUnarmed");
@@ -1119,12 +1119,12 @@ void Action::init()
 	a->m_critical_perc=0.66;
 	a->m_distance = RANGED;
 	a->m_flags =0;
-	a->m_name = "Elfenwanderer";
+	a->m_name = "Elfwanderer";
 	a->m_req_level = 5;
 	a->m_req_ability[0] = Action::TRIPLE_SHOT;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_pierce";
+	a->m_description = "The archer unleashes a mighty shot that pierces right through an enemy and might hit another enemy behind him.";
 	a->m_enum_name = "pierce";
 	a->m_animation[NO_WEAPON].push_back("attackRangedUnarmed");
 	a->m_animation[ONE_HANDED].push_back("attackRangedUnarmed");
@@ -1138,12 +1138,12 @@ void Action::init()
 	a->m_critical_perc=0.66;
 	a->m_distance = RANGED;
 	a->m_flags =0;
-	a->m_name = "wunder Punkt";
+	a->m_name = "Weak Spot";
 	a->m_req_level = 2;
 	a->m_req_ability[0] = Action::NOACTION;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_weak_point";
+	a->m_description = "The archer attacks a weak point of his enemy, causing the victim to go berserk.";
 	a->m_enum_name = "weak_point";
 	a->m_animation[NO_WEAPON].push_back("attackRangedUnarmed");
 	a->m_animation[ONE_HANDED].push_back("attackRangedUnarmed");
@@ -1157,12 +1157,12 @@ void Action::init()
 	a->m_critical_perc=0.66;
 	a->m_distance = RANGED;
 	a->m_flags =0;
-	a->m_name = "blinde Wut";
+	a->m_name = "Blind Rage";
 	a->m_req_level = 40;
 	a->m_req_ability[0] = Action::WEAK_POINT;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_blind_rage";
+	a->m_description = "The archer attacks the enemies eyes, causing him to go berserk, but be blinded at the same time.";
 	a->m_enum_name = "blind_rage";
 	a->m_animation[NO_WEAPON].push_back("attackRangedUnarmed");
 	a->m_animation[ONE_HANDED].push_back("attackRangedUnarmed");
@@ -1176,12 +1176,12 @@ void Action::init()
 	a->m_critical_perc=0.66;
 	a->m_distance = RANGED;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "Vakuum";
+	a->m_name = "Vacuum";
 	a->m_req_level = 20;
 	a->m_req_ability[0] = Action::NOACTION;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_vacuum";
+	a->m_description = "The archer attacks with an arrow imbued with a weaker windspirit, that causes an enemy hit by it to be stunned.";
 	a->m_enum_name = "vacuum";
 	a->m_animation[NO_WEAPON].push_back("attackRangedUnarmed");
 	a->m_animation[ONE_HANDED].push_back("attackRangedUnarmed");
@@ -1195,12 +1195,12 @@ void Action::init()
 	a->m_critical_perc=0.66;
 	a->m_distance = RANGED;
 	a->m_flags =0;
-	a->m_name = "Todesroulette";
+	a->m_name = "Deadly Roulette";
 	a->m_req_level = 60;
 	a->m_req_ability[0] = Action::GUIDED_TRIPLE_SHOT;
 	a->m_req_ability[1] = Action::VOLLEY_SHOT;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_death_roulette";
+	a->m_description = "The projectile has a fifty percent probability to attack another target, if it hits someone. Be careful not to stand in its way, for it distinguishes not between friend and foe.";
 	a->m_enum_name = "death_roulette";
 	a->m_animation[NO_WEAPON].push_back("attackRangedUnarmed");
 	a->m_animation[ONE_HANDED].push_back("attackRangedUnarmed");
@@ -1214,12 +1214,12 @@ void Action::init()
 	a->m_critical_perc=0.66;
 	a->m_distance = RANGED;
 	a->m_flags =0;
-	a->m_name = "Sprengpfeil";
+	a->m_name = "Explosion Arrow";
 	a->m_req_level = 5;
 	a->m_req_ability[0] = Action::NOACTION;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_exploding_arrow";
+	a->m_description = "The projectile is imbued with the power of a weak firespirit. IT will deal damage in a small area, if it hits.";
 	a->m_enum_name = "exploding_arrow";
 	a->m_animation[NO_WEAPON].push_back("attackRangedUnarmed");
 	a->m_animation[ONE_HANDED].push_back("attackRangedUnarmed");
@@ -1233,12 +1233,12 @@ void Action::init()
 	a->m_critical_perc=0.66;
 	a->m_distance = RANGED;
 	a->m_flags =0;
-	a->m_name = "Sprengkaskade";
+	a->m_name = "Blast Cascade";
 	a->m_req_level = 40;
 	a->m_req_ability[0] = Action::EXPLODING_ARROW;
 	a->m_req_ability[1] = Action::MULTISHOT;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_exploding_cascade";
+	a->m_description = "The projectile is imbued with the power of a firespirit. It will explode with areadamage on hitting. Additionally four more explosions will go of in every direction.";
 	a->m_enum_name = "exploding_cascade";
 	a->m_animation[NO_WEAPON].push_back("attackRangedUnarmed");
 	a->m_animation[ONE_HANDED].push_back("attackRangedUnarmed");
@@ -1252,12 +1252,12 @@ void Action::init()
 	a->m_critical_perc=0.66;
 	a->m_distance = SELF;
 	a->m_flags =0;
-	a->m_name = "Zielschuss";
+	a->m_name = "Snipe";
 	a->m_req_level = 1;
 	a->m_req_ability[0] = Action::NOACTION;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_aimed_shot";
+	a->m_description = "The archers deadly precision causes his shots to deal more damage than normal.";
 	a->m_enum_name = "aimed_shot";
 
 	a = &(Action::m_base_info[BOW_SPIRIT]);
@@ -1268,12 +1268,12 @@ void Action::init()
 	a->m_critical_perc=0.66;
 	a->m_distance = SELF;
 	a->m_flags =0;
-	a->m_name = "Bogenseele";
+	a->m_name = "Bow Spirit";
 	a->m_req_level = 40;
 	a->m_req_ability[0] = Action::AIMED_SHOT;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_bow_spirit";
+	a->m_description = "The archer becomes one with his weapon, dealing more damage over a longer time. Additionally his critical strike chance is increased. This effect stacks with Elfeyes.";
 	a->m_enum_name = "bow_spirit";
 
 	a = &(Action::m_base_info[ICE_ARROWS]);
@@ -1284,12 +1284,12 @@ void Action::init()
 	a->m_critical_perc=0.66;
 	a->m_distance = SELF;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "Eispfeil";
+	a->m_name = "Ice Arrows";
 	a->m_req_level = 20;
 	a->m_req_ability[0] = Action::NOACTION;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_ice_arrows";
+	a->m_description = "The archer calls upon the spirits of ice to imbue his projectiles with icedamage.";
 	a->m_enum_name = "ice_arrows";
 	a->m_animation[NO_WEAPON].push_back("magicArrow");
 	a->m_animation[ONE_HANDED].push_back("magicArrow");
@@ -1303,12 +1303,12 @@ void Action::init()
 	a->m_critical_perc=0.66;
 	a->m_distance = SELF;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "Frostpfeile";
+	a->m_name = "Frost Arrows";
 	a->m_req_level = 60;
 	a->m_req_ability[0] = Action::ICE_ARROWS;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_freezing_arrows";
+	a->m_description = "The archer summons a spirit of ice into his weapon, causing his shots to deal icedamage over a greater amount of time. There is a chance that his enemies will be frozen solid if they are hit.";
 	a->m_enum_name = "freezing_arrows";
 	a->m_animation[NO_WEAPON].push_back("magicArrow");
 	a->m_animation[ONE_HANDED].push_back("magicArrow");
@@ -1322,12 +1322,12 @@ void Action::init()
 	a->m_critical_perc=0.66;
 	a->m_distance = SELF;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "Windpfeile";
+	a->m_name = "Wind Arrows";
 	a->m_req_level = 5;
 	a->m_req_ability[0] = Action::NOACTION;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_wind_arrows";
+	a->m_description = "The archer has been grantet the power to imbue his projectiles with winddamage by the spirits of wind.";
 	a->m_enum_name = "wind_arrows";
 	a->m_animation[NO_WEAPON].push_back("magicArrow");
 	a->m_animation[ONE_HANDED].push_back("magicArrow");
@@ -1341,12 +1341,12 @@ void Action::init()
 	a->m_critical_perc=0.66;
 	a->m_distance = SELF;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "Sturmpfeile";
+	a->m_name = "Storm Arrows";
 	a->m_req_level = 40;
 	a->m_req_ability[0] = Action::WIND_ARROWS;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_storm_arrows";
+	a->m_description = "The mighty spirits of wind themselfes help the archer by imbuing his projectiles with their power, causing them to deal more winddamage for a longer time.";
 	a->m_enum_name = "storm_arrows";
 	a->m_animation[NO_WEAPON].push_back("magicArrow");
 	a->m_animation[ONE_HANDED].push_back("magicArrow");
@@ -1360,12 +1360,12 @@ void Action::init()
 	a->m_critical_perc=0.66;
 	a->m_distance = SELF;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "Windwandern";
+	a->m_name = "Windwalk";
 	a->m_req_level = 20;
 	a->m_req_ability[0] = Action::AIMED_SHOT;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_wind_walk";
+	a->m_description = "The spirits of wind help the archer to move faster than normal and avoid damage.";
 	a->m_enum_name = "wind_walk";
 
 	a = &(Action::m_base_info[Action::EVADE]);
@@ -1376,12 +1376,12 @@ void Action::init()
 	a->m_critical_perc=0.0;
 	a->m_distance = PASSIVE;
 	a->m_flags =0;
-	a->m_name = "Katzenreflexe";
+	a->m_name = "Catlike Reflexes";
 	a->m_req_level = 1;
 	a->m_req_ability[0] = Action::NOACTION;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_evade";
+	a->m_description = "The archers nimble mind allows him to avoid damage better.";
 	a->m_enum_name = "evade";
 
 	a = &(Action::m_base_info[Action::CRITICAL_STRIKE]);
@@ -1392,12 +1392,12 @@ void Action::init()
 	a->m_critical_perc=0.0;
 	a->m_distance = PASSIVE;
 	a->m_flags =0;
-	a->m_name = "Elfenaugen";
+	a->m_name = "Elfeyes";
 	a->m_req_level = 5;
 	a->m_req_ability[0] = Action::EVADE;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_critical_strike";
+	a->m_description = "The archer shoots with deadly precision, leading to an increased critical hit rate.";
 	a->m_enum_name = "critical_strike";
 
 	a = &(Action::m_base_info[Action::CONCENTRATION]);
@@ -1408,12 +1408,12 @@ void Action::init()
 	a->m_critical_perc=0.0;
 	a->m_distance = PASSIVE;
 	a->m_flags =0;
-	a->m_name = "Konzentration";
+	a->m_name = "Concentration";
 	a->m_req_level = 20;
 	a->m_req_ability[0] = Action::EVADE;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_concentration";
+	a->m_description = "The archers steady mind can no longer be confused.";
 	a->m_enum_name = "concentration";
 
 	a = &(Action::m_base_info[Action::MENTAL_WALL]);
@@ -1424,12 +1424,12 @@ void Action::init()
 	a->m_critical_perc=0.0;
 	a->m_distance = PASSIVE;
 	a->m_flags =0;
-	a->m_name = "Geistige Wand";
+	a->m_name = "Mind Wall";
 	a->m_req_level = 60;
 	a->m_req_ability[0] = Action::CONCENTRATION;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_mental_wall";
+	a->m_description = "The archer has become immune to anger. He wil never go berserk again.";
 	a->m_enum_name = "mental_wall";
 
 	a = &(Action::m_base_info[Action::RESIST_ICE]);
@@ -1440,12 +1440,12 @@ void Action::init()
 	a->m_critical_perc=0.0;
 	a->m_distance = PASSIVE;
 	a->m_flags =0;
-	a->m_name = "Nordwanderer";
+	a->m_name = "North Roamer";
 	a->m_req_level = 5;
 	a->m_req_ability[0] = Action::NOACTION;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_resist_ice";
+	a->m_description = "The archer has made a pact with the spirits of wind and ice. His resistance against wind- and icedamage is increased by 30 percent.";
 	a->m_enum_name = "resist_ice";
 
 	a = &(Action::m_base_info[Action::RESIST_AIR]);
@@ -1456,12 +1456,12 @@ void Action::init()
 	a->m_critical_perc=0.0;
 	a->m_distance = PASSIVE;
 	a->m_flags =0;
-	a->m_name = "Nordjaeger";
+	a->m_name = "North Hunter";
 	a->m_req_level = 40;
 	a->m_req_ability[0] = Action::RESIST_ICE;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_resist_air";
+	a->m_description = "The archers good longterm relations with the spirits of wind and ice has caused his ";
 	a->m_enum_name = "resist_air";
 
 
@@ -1474,12 +1474,12 @@ void Action::init()
 	a->m_critical_perc=0.66;
 	a->m_distance = MELEE;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "leuchtender Schlag";
+	a->m_name = "Bright Blow";
 	a->m_req_level = 5;
 	a->m_req_ability[0] = Action::NOACTION;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_holy_light";
+	a->m_description = "The priest attacks an enemy with a blow imbued with holy power. Undead will be severely damaged by the sacred energies.";
 	a->m_enum_name = "holy_light";
 
 	a = &(Action::m_base_info[HOLY_FIRE]);
@@ -1490,12 +1490,12 @@ void Action::init()
 	a->m_critical_perc=0.66;
 	a->m_distance = MELEE;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "geweihter Schlag";
+	a->m_name = "Sanctified Strike";
 	a->m_req_level = 40;
 	a->m_req_ability[0] = Action::HOLY_LIGHT;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_holy_fire";
+	a->m_description = "The priest attacks with godly power, easily sending undead creatures back to their graves.";
 	a->m_enum_name = "holy_fire";
 
 	a = &(Action::m_base_info[BURNING_RAGE]);
@@ -1506,12 +1506,12 @@ void Action::init()
 	a->m_critical_perc=0.66;
 	a->m_distance = PARTY_MULTI;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "brennende Wut";
+	a->m_name = "Burning Rage";
 	a->m_req_level = 20;
 	a->m_req_ability[0] = Action::BLAZING_SHIELD;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_burning_rage";
+	a->m_description = "The priest inflicts holy anger in his partymembers. They will attack with greater power.";
 	a->m_enum_name = "burning_rage";
 
 	a = &(Action::m_base_info[CURE_BLIND_MUTE]);
@@ -1522,12 +1522,12 @@ void Action::init()
 	a->m_critical_perc=0.66;
 	a->m_distance = PARTY;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "sanftes Leuchten";
+	a->m_name = "Gentle Glow";
 	a->m_req_level = 5;
 	a->m_req_ability[0] = Action::NOACTION;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_cure_blind_mute";
+	a->m_description = "The priest bathes a partymember in a mild light, releaving him of blindness and silence.";
 	a->m_enum_name = "cure_blind_mute";
 
 	a = &(Action::m_base_info[CURE_BLIND_MUTE_PARTY]);
@@ -1538,12 +1538,12 @@ void Action::init()
 	a->m_critical_perc=0.66;
 	a->m_distance = PARTY_MULTI;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "allessehendes Auge";
+	a->m_name = "Omniscent Eye";
 	a->m_req_level = 40;
 	a->m_req_ability[0] = Action::CURE_BLIND_MUTE;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_cure_blind_mute_party";
+	a->m_description = "The party will be immune to blind and berserk for some time.";
 	a->m_enum_name = "cure_blind_mute_party";
 
 	a = &(Action::m_base_info[BLAZING_SHIELD]);
@@ -1554,12 +1554,12 @@ void Action::init()
 	a->m_critical_perc=0.66;
 	a->m_distance = PARTY_MULTI;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "lodernder Schild";
+	a->m_name = "Blazing Shield";
 	a->m_req_level = 1;
 	a->m_req_ability[0] = Action::NOACTION;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_blazing_shield";
+	a->m_description = "The party is surrounded by holy energy. Everyones defense is increased.";
 	a->m_enum_name = "blazing_shield";
 
 	a = &(Action::m_base_info[LIGHT_BEAM]);
@@ -1570,12 +1570,12 @@ void Action::init()
 	a->m_critical_perc=0.66;
 	a->m_distance = RANGED;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "gleissendes Licht";
+	a->m_name = "Glistening Glare";
 	a->m_req_level = 5;
 	a->m_req_ability[0] = Action::NOACTION;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_light_beam";
+	a->m_description = "The priest casts a dazzling light, that can casuse an enemy to be affected by blind.";
 	a->m_enum_name = "light_beam";
 
 	a = &(Action::m_base_info[BURNING_SUN]);
@@ -1586,12 +1586,12 @@ void Action::init()
 	a->m_critical_perc=0.66;
 	a->m_distance = RANGED;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "blendende Sonne";
+	a->m_name = "Glaring Sun";
 	a->m_req_level = 60;
 	a->m_req_ability[0] = Action::LIGHT_BEAM;
 	a->m_req_ability[1] = Action::CURE_BLIND_MUTE;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_burning_sun";
+	a->m_description = "The priest calls forth a mighty explosion of light that can make every enemy in an area to be affected by blind.";
 	a->m_enum_name = "burning_sun";
 
 	a = &(Action::m_base_info[BREAK_BINDING]);
@@ -1602,12 +1602,12 @@ void Action::init()
 	a->m_critical_perc=0.66;
 	a->m_distance = MELEE;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "zerbrechender Schlag";
+	a->m_name = "Breaking Blow";
 	a->m_req_level = 20;
 	a->m_req_ability[0] = Action::NOACTION;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_break_binding";
+	a->m_description = "The priest attacks an enemy with energy that causes elementals to be blown back where they come from.";
 	a->m_enum_name = "break_binding";
 
 	a = &(Action::m_base_info[DISRUPT_BINDING]);
@@ -1618,12 +1618,12 @@ void Action::init()
 	a->m_critical_perc=0.66;
 	a->m_distance = MELEE;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "aufl�sender Schlag";
+	a->m_name = "Dismissing Strike";
 	a->m_req_level = 60;
 	a->m_req_ability[0] = Action::BREAK_BINDING;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_disrupt_binding";
+	a->m_description = "The priest strikes with all his might. While normal mosnters have little to fear from this attack elementals will be easily destroyed by it.";
 	a->m_enum_name = "disrupt_binding";
 
 	a = &(Action::m_base_info[MAGIC_SHIELD]);
@@ -1634,12 +1634,12 @@ void Action::init()
 	a->m_critical_perc=0.66;
 	a->m_distance = PARTY_MULTI;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "magischer Schild";
+	a->m_name = "Magic Shield";
 	a->m_req_level = 5;
 	a->m_req_ability[0] = Action::BLAZING_SHIELD;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_magic_shield";
+	a->m_description = "the priests protecting influence raises the willpower of all partymembers temporarily.";
 	a->m_enum_name = "magic_shield";
 
 	a = &(Action::m_base_info[CURE_POIS_BURN]);
@@ -1650,12 +1650,12 @@ void Action::init()
 	a->m_critical_perc=0.66;
 	a->m_distance = PARTY;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "Schmerz lindern";
+	a->m_name = "Ease Pain";
 	a->m_req_level = 5;
 	a->m_req_ability[0] = Action::HEAL;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_cure_pois_burn";
+	a->m_description = "The priest treats a partymemener with healing water that washes away every poison and stops burns.";
 	a->m_enum_name = "cure_pois_burn";
 
 	a = &(Action::m_base_info[CURE_POIS_BURN_PARTY]);
@@ -1666,12 +1666,12 @@ void Action::init()
 	a->m_critical_perc=0.66;
 	a->m_distance = PARTY_MULTI;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "heilendes Wasser";
+	a->m_name = "Remedial Water";
 	a->m_req_level = 40;
 	a->m_req_ability[0] = Action::CURE_BLIND_MUTE;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_cure_pois_burn_party";
+	a->m_description = "The priests grants every partymember immunity to poison and burn for a small amount of time.";
 	a->m_enum_name = "cure_pois_burn_party";
 
 	a = &(Action::m_base_info[ACID]);
@@ -1682,12 +1682,12 @@ void Action::init()
 	a->m_critical_perc=0.66;
 	a->m_distance = RANGED;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "Saeure";
+	a->m_name = "Acid";
 	a->m_req_level = 20;
 	a->m_req_ability[0] = Action::CURE_POIS_BURN;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_acid";
+	a->m_description = "The priest turns normal water into deadly acid, poisoning one enemy.";
 	a->m_enum_name = "acid";
 
 	a = &(Action::m_base_info[HEAL]);
@@ -1698,12 +1698,12 @@ void Action::init()
 	a->m_critical_perc=0.66;
 	a->m_distance = PARTY;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "Heilung";
+	a->m_name = "Cure";
 	a->m_req_level = 1;
 	a->m_req_ability[0] = Action::NOACTION;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_heal";
+	a->m_description = "the priest restores the hitpoints of one partymemeber.";
 	a->m_enum_name = "heal";
 
 	a = &(Action::m_base_info[HEAL_PARTY]);
@@ -1714,12 +1714,12 @@ void Action::init()
 	a->m_critical_perc=0.66;
 	a->m_distance = PARTY_MULTI;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "Grosse Heilung";
+	a->m_name = "Grand Cure";
 	a->m_req_level = 20;
 	a->m_req_ability[0] = Action::CURE_POIS_BURN;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_heal_party";
+	a->m_description = "The priest restores hitpoints for every partymember.";
 	a->m_enum_name = "heal_party";
 
 	a = &(Action::m_base_info[DIVINE_WIND]);
@@ -1730,12 +1730,12 @@ void Action::init()
 	a->m_critical_perc=0.66;
 	a->m_distance = MELEE;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "Windschlag";
+	a->m_name = "Windstrike";
 	a->m_req_level = 5;
 	a->m_req_ability[0] = Action::NOACTION;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_divine_wind";
+	a->m_description = "The priest creates a vortex with his attack, that can suck a demonic creature right back to hell.";
 	a->m_enum_name = "divine_wind";
 
 	a = &(Action::m_base_info[DIVINE_STORM]);
@@ -1746,12 +1746,12 @@ void Action::init()
 	a->m_critical_perc=0.66;
 	a->m_distance = MELEE;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "Goettlicher Schlag";
+	a->m_name = "God Strike";
 	a->m_req_level = 40;
 	a->m_req_ability[0] = Action::DIVINE_WIND;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_divine_storm";
+	a->m_description = "Only strong and durable demons will be able to resist the priests sacred strike.";
 	a->m_enum_name = "divine_storm";
 
 	a = &(Action::m_base_info[BLADE_STORM]);
@@ -1762,12 +1762,12 @@ void Action::init()
 	a->m_critical_perc=0.66;
 	a->m_distance = PARTY_MULTI;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "Klingensturm";
+	a->m_name = "Bladestorm";
 	a->m_req_level = 1;
 	a->m_req_ability[0] = Action::NOACTION;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_blade_storm";
+	a->m_description = "The priest strengthens the weaponarms of his comrades, leading to increased attackspeed for everyone.";
 	a->m_enum_name = "blade_storm";
 
 	a = &(Action::m_base_info[CURE_CONF_BSRK]);
@@ -1778,12 +1778,12 @@ void Action::init()
 	a->m_critical_perc=0.66;
 	a->m_distance = PARTY;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "Konzentration wiederherstellen";
+	a->m_name = "Restore Concentration";
 	a->m_req_level = 5;
 	a->m_req_ability[0] = Action::NOACTION;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_cure_conf_bsrk";
+	a->m_description = "The priest heals one friend from confusion and berserk.";
 	a->m_enum_name = "cure_conf_bsrk";
 
 	a = &(Action::m_base_info[CURE_CONF_BSRK_PARTY]);
@@ -1794,12 +1794,12 @@ void Action::init()
 	a->m_critical_perc=0.66;
 	a->m_distance = PARTY_MULTI;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "Seelenschild";
+	a->m_name = "Spirit Shield";
 	a->m_req_level = 40;
 	a->m_req_ability[0] = Action::CURE_CONF_BSRK;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_cure_conf_bsrk_party";
+	a->m_description = "The priest grants immunity to berserk and confuse to all his partymembers for a small amount of time.";
 	a->m_enum_name = "cure_conf_bsrk_party";
 
 	a = &(Action::m_base_info[HYPNOSIS]);
@@ -1810,12 +1810,12 @@ void Action::init()
 	a->m_critical_perc=0.66;
 	a->m_distance = RANGED;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "Hypnose";
+	a->m_name = "Hypnosis";
 	a->m_req_level = 20;
 	a->m_req_ability[0] = Action::CURE_CONF_BSRK;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_hypnosis";
+	a->m_description = "The priest comfuses a monster, causing it to attack at random.";
 	a->m_enum_name = "hypnosis";
 
 	a = &(Action::m_base_info[HYPNOSIS2]);
@@ -1826,12 +1826,12 @@ void Action::init()
 	a->m_critical_perc=0.66;
 	a->m_distance = RANGED;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "hypnotischer Wirbel";
+	a->m_name = "Hypnotic Vortex";
 	a->m_req_level = 60;
 	a->m_req_ability[0] = Action::HYPNOSIS;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_hypnosis2";
+	a->m_description = "The priest creates a distracting vortex with the ability to confuse every enemy caught in it.";
 	a->m_enum_name = "hypnosis2";
 
 	a = &(Action::m_base_info[KEEN_MIND]);
@@ -1842,12 +1842,12 @@ void Action::init()
 	a->m_critical_perc=0.66;
 	a->m_distance = PARTY_MULTI;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_name = "messerscharfer Geist";
+	a->m_name = "Keen Mind";
 	a->m_req_level = 5;
 	a->m_req_ability[0] = Action::BLADE_STORM;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
-	a->m_description = "descr_keen_mind";
+	a->m_description = "The priest increases everyones spellpower for a short time. Everyones spells will surely be more effective.";
 	a->m_enum_name = "keen_mind";
 
 	for (int i =0;i<192;i++)
