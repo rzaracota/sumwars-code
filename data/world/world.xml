@@ -269,6 +269,7 @@
 	</Region>
 
 <!-- Lobby Konzilshalle der Elemtarmagier [fester Ort; Saeulenhalle im roemischen Stil] -->
+<!-- Orte: Soren windclaw -->
 	<Region id="2" name="elCnlLobby">
 			<Settings dimx="8" dimy="4" area_percent="0.8" complexity="0" granularity="0"/>
 			<ExitDirections north="true" south="false" west="false" east="false" />
@@ -277,9 +278,14 @@
 					<Shape shape="RECT" extent_x="4.0" extent_y ="4.0" />
 				</Exit>
 			</Exits>
+			
+			<Effect>
+				addLocation('locSorenWindclaw', {});
+			</Effect>
 	</Region>
 	
 <!-- Medair, Soeldnerlager [Stadt]-->
+<!-- Orte: Fenor Marken -->
 	<Region id="3" name="medMercCamp">
 		<Settings dimx="10" dimy="10" area_percent="0.8" complexity="0.0" granularity="0.4" />
 		
@@ -295,11 +301,17 @@
 			</Exit>
 		</Exits>
 		
+		<Event trigger ="create_region" once = "true">
+			<Effect>
+				addLocation('locFenor', {});
+			</Effect>
+		</Event>
+		
 		<ReviveLocation  location="entry_south" />
 	</Region>
 	
 <!-- Aisen, Aisener Wiesen [Feld und Wiesen]; ungefaehr eine viertel Stunde, eher offen; Level 1 - 3 -->
-<!-- verwundeter Soldat -->
+<!-- Orte: verwundeter Soldat, evtl. ein Template -->
 <!-- Goblinschlaeger, Goblinraeuber, Goblinjaeger-->
 	<Region id="4" name="aisMeadow">
 		<Settings dimx="32" dimy="32" area_percent="0.4" complexity="0.3" granularity="6" />
@@ -314,11 +326,15 @@
 				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
 			</Exit>
 		</Exits>
+		
+		<Effect>
+			addLocation('locWillard', {});
+		</Effect>
 	</Region>
 
 <!-- Aisen, Offene Ebene [Feld und Wiesen]; ungefaehr 20 Min, eher offen; Level 2 - 6 -->
 <!-- Goblinschlaeger, Goblinraeuber, Goblinjaeger, Goblinhunde, Feldalraunen?(falls wir welche bekommen) -->
-<!-- Orte: entry_Crypt, exit_Crypt => Maylons Grab -->
+<!-- Orte: entry_Crypt, exit_Crypt => Maylons Grab(Template) -->
 	<Region id="5" name="aisPlains">
 		<Settings dimx="32" dimy="32" area_percent="0.4" complexity="0.3" granularity="6" />
 		
@@ -335,6 +351,11 @@
 				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
 			</Exit>
 		</Exits>
+
+		<Effect>
+			addLocation('locCrypt', {});
+		</Effect>
+
 	</Region>
 	
 <!-- Maylons Grab, Ebene 1[unterirdisch], ungefaehr 10 Minuten; Level 14 - 17 -->
@@ -352,6 +373,10 @@
 				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
 			</Exit>
 		</Exits>
+		
+		<Effect>
+			addLocation('locGoblins', {});
+		</Effect>
 	</Region>
 	
 <!-- Maylons Grab, Ebene 2[unterirdisch], ungefaehr 10 Minuten; Level 16 - 19 -->
@@ -367,6 +392,10 @@
 				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
 			</Exit>
 		</Exits>
+		
+		<Effect>
+			addLocation('locGraveChamber', {});
+		</Effect>
 	</Region>	
 	
 <!-- Aisen, Stille Heide [Feld und Wiesen]; ungefaehr 20 Min, eher offen; Level 5 - 10 -->
@@ -407,11 +436,20 @@
 				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
 			</Exit>
 		</Exits>
+		
+		<Effect>
+			addLocation('locPrince', {});
+			addLocation('locCouncellor', {});
+			addLocation('locPeasentMichel', {});
+			addLocation('locSummoner', {});
+			addLocation('locSergeant', {});
+			addLocation('locHerbalist', {});
+		</Effect>
 	</Region>
 
-<!-- Aisen, N�rdliche Wiese [Feld und Wiesen]; ungefaehr 20 Min, eher offen; Level 7 - 12; Sidequests aus Joringsbr�ck -->
-<!-- Der Bauernhof -->
-<!-- Kraeuterb�sche -->
+<!-- Aisen, Noerdliche Wiese [Feld und Wiesen]; ungefaehr 20 Min, eher offen; Level 7 - 12; Sidequests aus Joringsbr�ck -->
+<!-- Der Bauernhof(Template) -->
+<!-- Kraeuterbuesche -->
 <!-- Goblinschlaeger, Goblinraeuber, Goblinjaeger, Goblinhunde, Goblinkrieger, Goblinschamanen? -->
 	<Region id="8" name="aisNorthMeadow">
 		<Settings dimx="32" dimy="32" area_percent="0.4" complexity="0.3" granularity="6" />
@@ -423,6 +461,10 @@
 				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
 			</Exit>
 		</Exits>
+		
+		<Effect>
+			addLocation('locFarm', {});
+		</Effect>
 	</Region>	
 	
 <!-- Aisen, Joringsforst [Wald und Wiesen]; ungefaehr 30 Min, halbwegs offen; Level 7 - 12 -->	
@@ -443,7 +485,7 @@
 	</Region>
 	
 <!-- Aisen, Feenwald [Wald und Steine]; ungefaehr 60 Min, eher verwinkelt; Level 10 - 16 -->
-<!-- Robs Versteck -->
+<!-- Robs Versteck(Template) -->
 <!-- Goblinschlaeger, Goblinraeuber, Goblinjaeger, Goblinhunde, Goblinkrieger, Goblinschamanen?, Waldalraunen?, Feen? -->
 	<Region id="10" name="aisFairyforest">
 		<Settings dimx="32" dimy="32" area_percent="0.4" complexity="0.3" granularity="6" />
@@ -458,6 +500,10 @@
 				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
 			</Exit>
 		</Exits>
+		
+		<Effect>
+			addLocation('locBanditHideout', {});
+		</Effect>
 	</Region>
 	
 <!-- Aisen, Wolfsfelsen [Wald und Gebirge]; ungefaehr 35 Min, eher verwinkelt; Level 14 - 17 -->
@@ -495,10 +541,18 @@
 				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
 			</Exit>
 		</Exits>
+		
+		<Effect>
+			addLocation('locGeneral', {});
+			addLocation('locSummoner', {});
+			addLocation('locSergeant', {});
+			addLocation('locRampart', {});
+		</Effect>
 	</Region>
 	
 <!-- Aisen, Zwergentrutz Stadtmauer; ungef�hr 20 min, relativ starres Design; Level 16 - 19 -->
-<!-- Zombies, Skelette-->
+<!-- Zombies, Skelette -->
+<!-- Locations fuer die Verteidigenden Wachen? -->
 	<Region id="12" name="dwarfenfrowardRampart">
 		<Settings dimx="32" dimy="32" area_percent="0.4" complexity="0.3" granularity="6" />
 		
@@ -524,6 +578,10 @@
 				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
 			</Exit>
 		</Exits>
+		
+		<Effect>
+			addLocation('locPowerlich', {});
+		</Effect>
 	</Region>
 </World>
 
