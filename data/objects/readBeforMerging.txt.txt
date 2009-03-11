@@ -1,0 +1,3 @@
+Hi Hans. Also, dass die Objekte alle auseinandergenommen sind hat seinen Grund.
+Alles andere macht es uns mit dem MayaExporter echt schwer.
+Deswegen wärs nett, wenn wir den Dateiwust behalten könnten ;).
