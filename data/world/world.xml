@@ -194,12 +194,12 @@
 	<Region id="1000" name="testregion">
 		
 		<Settings dimx="8" dimy="8" region_template="test_region_templ" />
-		<!--
+
 		<Exits>
 			<Exit name="exit_north" destination_region="region0" destination_location="entry_south" >
 				<Shape shape="RECT" extent_x="4.0" extent_y ="4.0" />
 			</Exit>
-		</Exits>-->
+		</Exits>
 		
 		<Environments>
 			<Environment height="0.2" name="meadow" />
@@ -317,9 +317,9 @@
 			</Exit>
 		</Exits>
 
-		<ObjectGroups>
-			<ObjectGroup object_group="willard" priority="4" number="1" probability="1.0" />
-		</ObjectGroups>
+		<NamedObjectGroups>
+			<NameObjectGroup name="willard" object_group="willard" priority="4"/>
+		</NamedObjectGroups>
 	</Region>
 
 <!-- Aisen, Offene Ebene [Feld und Wiesen]; ungefaehr 20 Min, eher offen; Level 2 - 6 -->
@@ -342,9 +342,9 @@
 			</Exit>
 		</Exits>
 
-		<ObjectGroups>
-			<ObjectGroup object_group="maylonsGrave" priority="4" number="1" probability="1.0" />
-		</ObjectGroups>
+		<NamedObjectGroups>
+			<NameObjectGroup name="maylonsGrave" object_group="maylonsGrave" priority="4"/>
+		</NamedObjectGroups>
 
 	</Region>
 	
@@ -364,9 +364,9 @@
 			</Exit>
 		</Exits>
 		<!-- in der Nähe des Eingangs -->
-		<ObjectGroups>
-			<ObjectGroup object_group="maylonsGraveL1Goblins" priority="4" number="1" probability="1.0" />
-		</ObjectGroups>
+		<NamedObjectGroups>
+			<NameObjectGroup name= "cryptGobins" object_group="maylonsGraveL1Goblins" priority="4"/>
+		</NamedObjectGroups>
 	</Region>
 	
 <!-- Maylons Grab, Ebene 2[unterirdisch], ungefaehr 10 Minuten; Level 16 - 19 -->
@@ -383,9 +383,9 @@
 			</Exit>
 		</Exits>
 		
-		<ObjectGroups>
-			<ObjectGroup object_group="maylonsGraveL2Chamber" priority="4" number="1" probability="1.0" />
-		</ObjectGroups>
+		<NamedObjectGroups>
+			<NameObjectGroup name="graveChamber" object_group="maylonsGraveL2Chamber" priority="4"/>
+		</NamedObjectGroups>
 	</Region>	
 	
 <!-- Aisen, Stille Heide [Feld und Wiesen]; ungefaehr 20 Min, eher offen; Level 5 - 10 -->
@@ -444,8 +444,11 @@
 			</Exit>
 		</Exits>
 		
+		<NamedObjectGroups>
+			<NameObjectGroup object_group="michelsFarm" priority="4"/>
+		</NamedObjectGroups>
+		
 		<ObjectGroups>
-			<ObjectGroup object_group="michelsFarm" priority="4" number="1" probability="1.0" />
 			<ObjectGroup object_group="herbalBushes" priority="4" number="10" probability="1.0" />
 			<ObjectGroup object_group="herbalBushes" priority="3" number="15" probability="0.7" />
 		</ObjectGroups>
@@ -485,9 +488,9 @@
 			</Exit>
 		</Exits>
 		
-		<ObjectGroups>
-			<ObjectGroup object_group="robsHideout" priority="4" number="1" probability="1.0" />
-		</ObjectGroups>
+		<NamedObjectGroups>
+			<NameObjectGroup name="robsHideout" object_group="robsHideout" priority="4"/>
+		</NamedObjectGroups>
 	</Region>
 	
 <!-- Aisen, Wolfsfelsen [Wald und Gebirge]; ungefaehr 35 Min, eher verwinkelt; Level 14 - 17 -->
@@ -557,9 +560,9 @@
 			</Exit>
 		</Exits>
 		
-		<ObjectGroups>
-			<ObjectGroup object_group="powerlich" priority="4" number="1" probability="1.0" />
-		</ObjectGroups>
+		<NamedObjectGroups>
+			<NameObjectGroup name="powerlich" object_group="powerlich" priority="4" />
+		</NamedObjectGroups>
 	
 	</Region>
 </World>

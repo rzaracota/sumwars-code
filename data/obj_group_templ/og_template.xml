@@ -255,7 +255,7 @@
 	<ObjectContent>
 		<Object subtype="$tree"
 			center_x="0"
-			center_y="0"
+			center_y="-2"
 			angle = "0"
 			probability ="1.0"
 			prob_angle = "false"
@@ -306,7 +306,7 @@
 	<ObjectContent>
 		<Object subtype="$tree"
 			center_x="0"
-			center_y="0"
+			center_y="-2"
 			angle = "0"
 			probability ="1.0"
 			prob_angle = "false"
@@ -328,7 +328,7 @@
 	<ObjectContent>
 		<Object subtype="$tree"
 			center_x="0"
-			center_y="0"
+			center_y="-2"
 			angle = "0"
 			probability ="1.0"
 			prob_angle = "false"
@@ -424,7 +424,7 @@
 	<ObjectContent>
 		<Object subtype="$tree"
 			center_x="0"
-			center_y="0"
+			center_y="-2"
 			angle = "0"
 			probability ="1.0"
 			prob_angle = "false"
@@ -475,7 +475,7 @@
 	<ObjectContent>
 		<Object subtype="$tree"
 			center_x="0"
-			center_y="0"
+			center_y="-2"
 			angle = "0"
 			probability ="1.0"
 			prob_angle = "false"
@@ -568,7 +568,7 @@
 	<ObjectContent>
 		<Object subtype="$tree"
 			center_x="0"
-			center_y="0"
+			center_y="-2"
 			angle = "0"
 			probability ="1.0"
 			prob_angle = "false"
