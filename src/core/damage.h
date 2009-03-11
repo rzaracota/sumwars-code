@@ -9,11 +9,23 @@
 #define NR_STATUS_MODS 8
 
 /**
+ * \enum AIMods
+ * \brief Modifikationen fuer die AI
+ */
+	enum AIMods
+{
+	TAUNT =0,
+ 	NR_AI_MODS,
+};
+
+/**
  * \struct Damage
  * \brief Parameter fuer ausgeteilten Schaden
  */
 struct Damage 
 {
+	
+	
 	/**
 	 * \var m_min_damage[4]
 	 * \brief Gibt den minimalen Schaden fuer die vier verschiedenen Schadensarten an.
@@ -68,6 +80,12 @@ struct Damage
 	 * \brief Gibt fuer alle Statusveraenderungn die Zauberkraft an. Eine Zauberkraft von 0 bedeutet, dass der betreffende Effekt nicht wirksam wird.
 	 */
 	short m_status_mod_power[NR_STATUS_MODS];
+	
+	/**
+	 * \var short m_ai_mod_power[NR_AI_MODS]
+	 * \brief Staerke der Einfluesse auf die AI
+	 */
+	short m_ai_mod_power[NR_AI_MODS];
 	
 	
 	/**

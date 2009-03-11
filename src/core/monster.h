@@ -104,6 +104,12 @@ struct Ai
 	Command m_command;
 	
 	/**
+	 * \var float m_mod_time[NR_AI_MODS]
+	 * \brief Dauer der Beeinflussungen der AI
+	 */
+	float m_mod_time[NR_AI_MODS];
+	
+	/**
 	 * \var m_state
 	 * 
 	 * \brief Status der AI des Monsters

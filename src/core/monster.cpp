@@ -32,6 +32,7 @@ Monster::Monster( int id) : Creature( id)
 Monster::Monster( int id,MonsterBasicData& data)
 	: Creature(   id)
 {
+	
 	memcpy(getBaseAttr(),&data.m_base_attr, sizeof(data.m_base_attr));
 
 	getTypeInfo()->m_type = data.m_type_info.m_type;
@@ -56,7 +57,19 @@ Monster::Monster( int id,MonsterBasicData& data)
 	m_ai.m_visible_goals = new WorldObjectValueList;
 	m_ai.m_state = Ai::ACTIVE;
 	m_ai.m_vars = data.m_ai_vars;
+	
 	calcBaseAttrMod();
+	
+	m_base_action = Action::NOACTION;
+	for (int i = Action::ATTACK; i<= Action::HOLY_ATTACK; ++i)
+	{
+		if (checkAbility((Action::ActionType) i))
+		{
+			m_base_action = (Action::ActionType) i;
+		}
+	}
+	DEBUG5("base action %i",m_base_action);
+	
 }
 
 Monster::~Monster()
@@ -91,6 +104,21 @@ bool Monster::init()
 	m_ai.m_chase_player_id =0;
 
 	m_ai.m_state = Ai::ACTIVE;
+	
+	for (int i=0; i< NR_AI_MODS; i++)
+	{
+		m_ai.m_mod_time[i]=0;
+	}
+	
+	m_base_action = Action::NOACTION;
+	for (int i = Action::ATTACK; i<= Action::HOLY_ATTACK; ++i)
+	{
+		if (checkAbility((Action::ActionType) i))
+		{
+			m_base_action = (Action::ActionType) i;
+		}
+	}
+	
 	return true;
 }
 
@@ -99,7 +127,13 @@ bool Monster::update(float time)
 	DEBUG5("Update des Monsters [%i]", getId());
 
 	// AI abhandeln
-	
+	for (int i=0; i< NR_AI_MODS; i++)
+	{
+		if (m_ai.m_mod_time[i] >0)
+		{
+			m_ai.m_mod_time[i]-= time;
+		}
+	}
 
 	// Update Funktion der Oberklasse aufrufen
 	bool result;
@@ -143,65 +177,74 @@ void Monster::updateCommand()
 	Line gline(pos,Vector(0,0));
 
 	// Entfernungen und Sichtbarkeit der Ziele ermitteln
+	// nur, wenn das Monster nicht wegen Taunt einen bestimmten Spieler angreifen muss
 	float dist;
-	for (WorldObjectMap::iterator it = players->begin(); it!=players->end(); ++it)
+	if (m_ai.m_mod_time[TAUNT]<=0 || m_ai.m_chase_player_id==0)
 	{
-		pl = static_cast<Creature*>(it->second);
-		
-		// Spieler nur als Ziel, wenn aktiv und nicht in Dialog
-		if (pl->getState() != STATE_ACTIVE || pl->getDialogueId() != 0)
-			continue;
-		
-		if (World::getWorld()->getRelation(getFraction(), pl ) != HOSTILE)
-			continue;
-			
-		dist = getShape()->getDistance(*(pl->getShape()));
-		if ( dist< m_ai.m_vars.m_sight_range)
+		for (WorldObjectMap::iterator it = players->begin(); it!=players->end(); ++it)
 		{
+			pl = static_cast<Creature*>(it->second);
 			
-		
-			// Spieler ist in Sichtweite
-			m_ai.m_goals->push_back(std::make_pair(pl,dist));
-
-			gline.m_end = pl->getShape()->m_center;
-
-			// Testen, ob der Weg zum Spieler frei ist
-			ret.clear();
-			getRegion()->getObjectsOnLine(gline,&ret,LAYER_AIR, CREATURE | FIXED,pl);
+			// Spieler nur als Ziel, wenn aktiv und nicht in Dialog
+			if (pl->getState() != STATE_ACTIVE || pl->getDialogueId() != 0)
+				continue;
 			
-			// alle verbuendeten Objekte loeschen, weil durch diese *durchgeschossen* werden kann
-			WorldObjectList::iterator it;
-			for (it = ret.begin(); it != ret.end();)
+			if (World::getWorld()->getRelation(getFraction(), pl ) != HOSTILE)
+				continue;
+				
+			dist = getShape()->getDistance(*(pl->getShape()));
+			if ( dist< m_ai.m_vars.m_sight_range)
 			{
-				if (World::getWorld()->getRelation(m_fraction,*it) == ALLIED )
+				
+			
+				// Spieler ist in Sichtweite
+				m_ai.m_goals->push_back(std::make_pair(pl,dist));
+	
+				gline.m_end = pl->getShape()->m_center;
+	
+				// Testen, ob der Weg zum Spieler frei ist
+				ret.clear();
+				getRegion()->getObjectsOnLine(gline,&ret,LAYER_AIR, CREATURE | FIXED,pl);
+				
+				// alle verbuendeten Objekte loeschen, weil durch diese *durchgeschossen* werden kann
+				WorldObjectList::iterator it;
+				for (it = ret.begin(); it != ret.end();)
 				{
-					it = ret.erase(it);
+					if (World::getWorld()->getRelation(m_fraction,*it) == ALLIED )
+					{
+						it = ret.erase(it);
+					}
+					else
+					{
+						++it;
+					}
+				}
+	
+				if (ret.empty() && dist< m_ai.m_vars.m_shoot_range)
+				{
+					// Keine Objekte auf der Linie vom Monster zum Ziel
+					m_ai.m_visible_goals->push_back(std::make_pair(pl,dist));
+	
 				}
 				else
 				{
-					++it;
+					/*
+					WorldObjectList::iterator it;
+					for (it = ret.begin(); it != ret.end();++it)
+					{
+						DEBUG("blocking obj %i",(*it)->getId());
+					}
+					*/
 				}
-			}
-
-			if (ret.empty() && dist< m_ai.m_vars.m_shoot_range)
-			{
-				// Keine Objekte auf der Linie vom Monster zum Ziel
-				m_ai.m_visible_goals->push_back(std::make_pair(pl,dist));
-
-			}
-			else
-			{
-				/*
-				WorldObjectList::iterator it;
-				for (it = ret.begin(); it != ret.end();++it)
-				{
-					DEBUG("blocking obj %i",(*it)->getId());
-				}
-				*/
 			}
 		}
 	}
+	else
+	{
+		DEBUG5("taunt %f",m_ai.m_mod_time[TAUNT]);
+	}
 	
+	// Angriff auf Spieler durch anlocken
 	if (m_ai.m_goals->empty() && m_ai.m_chase_player_id !=0)
 	{
 		pl = dynamic_cast<Creature*>(getRegion()->getObject(m_ai.m_chase_player_id));
@@ -217,19 +260,23 @@ void Monster::updateCommand()
 				if (dist < m_ai.m_vars.m_chase_distance)
 				{
 					m_ai.m_goals->push_back(std::make_pair(pl,dist));
+					DEBUG5("chase %i",m_ai.m_chase_player_id);
 				}
 				else
 				{
+					m_ai.m_mod_time[TAUNT] =0;
 					m_ai.m_chase_player_id =0;
 				}
 			}
 			else
 			{
+				m_ai.m_mod_time[TAUNT] =0;
 				m_ai.m_chase_player_id =0;
 			}
 		}
 		else
 		{
+			m_ai.m_mod_time[TAUNT] =0;
 			m_ai.m_chase_player_id =0;
 		}
 	}
@@ -429,7 +476,33 @@ bool Monster::takeDamage(Damage* damage)
 	
 	if (atk)
 	{
-		m_ai.m_chase_player_id =damage->m_attacker_id;
+		if (m_ai.m_mod_time[TAUNT]<=0 || m_ai.m_chase_player_id==0)
+		{
+			m_ai.m_chase_player_id =damage->m_attacker_id;
+		}
+		
+		// Anwenden der AI Veraenderungen
+		for (int i=0;i<NR_AI_MODS;i++)
+		{
+			if (damage->m_ai_mod_power[i]>0)
+			{
+				DEBUG5("mod %i modpow %i wp %i",i,damage->m_ai_mod_power[i],getBaseAttrMod()->m_willpower);
+				if (damage->m_ai_mod_power[i]>getBaseAttrMod()->m_willpower)
+				{
+				// Modifikation anwenden
+					float t = (damage->m_ai_mod_power[i]-getBaseAttrMod()->m_willpower)*1.0 / getBaseAttrMod()->m_willpower;
+					t *= 3000;
+					if (t>m_ai.m_mod_time[i])
+					{
+						m_ai.m_mod_time[i] =t;
+						// TODO
+						//m_event_mask |= NetEvent::DATA_STATUS_MODS;
+					}
+
+					DEBUG5("applying ai mod %i for %f ms",i,t);
+				}
+			}
+		}
 		
 	}
 	return atk;

@@ -87,7 +87,6 @@
 			<Effect>
 				peasant = createObject('peasant', {130,210});
 				setRefName(peasant,'peasant');
-				peasant = createObject('goblin', {130,220});
 			</Effect>
 		</Event>
 		

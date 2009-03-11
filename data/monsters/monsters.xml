@@ -283,7 +283,7 @@ AIR
 	
 	<Geometry radius="0.5" />
 	
-	<AI ai_sight_range="2" ai_chase_range="20"/>
+	<AI ai_sight_range="10" ai_chase_range="20"/>
 </Monster>
 
 

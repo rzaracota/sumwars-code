@@ -706,7 +706,58 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 				}
 			}
 			break;
+			
+		case Action::DECOY:
+		case Action::SCARE:
+			// alle Lebewesen im Umkreis um den Ausfuehrenden auswaehlen
+			// Radius gleich Waffenreichweite
+			s.m_radius =12;
+			getRegion()->getObjectsInShape(&s, &res,LAYER_AIR,CREATURE,this);
 
+			// an alle Schaden austeilen
+			for (it=res.begin();it!=res.end();++it)
+			{
+				if ((*it)->getTypeInfo()->m_type != TypeInfo::TYPE_FIXED_OBJECT)
+				{
+					cr = (Creature*) (*it);
+					cr->takeDamage(&m_damage);
+
+				}
+			}
+			
+			if (m_action.m_type == Action::SCARE)
+			{
+				cbam.m_time =60000;
+				cbam.m_darmor = getBaseAttrMod()->m_armor;
+ 				applyBaseAttrMod(&cbam);
+			}
+			break;
+			
+		case Action::BERSERK:
+		case Action::WARCRY:
+			// alle Lebewesen im Umkreis um den Ausfuehrenden auswaehlen
+			// Radius gleich Waffenreichweite
+			cbam.m_time =60000;
+			
+			s.m_radius =12;
+			getRegion()->getObjectsInShape(&s, &res,LAYER_AIR,CREATURE,this);
+
+			// an alle Schaden austeilen
+			for (it=res.begin();it!=res.end();++it)
+			{
+				if ((*it)->getTypeInfo()->m_type != TypeInfo::TYPE_FIXED_OBJECT)
+				{
+					cr = (Creature*) (*it);
+					cbam.m_dwalk_speed = -cr->getBaseAttrMod()->m_walk_speed/2;
+					cbam.m_dattack_speed = -cr->getBaseAttrMod()->m_attack_speed/2;
+					cr->applyBaseAttrMod(&cbam);
+					if (m_action.m_type == Action::WARCRY)
+					{
+						cr->takeDamage(&m_damage);
+					}
+				}
+			}
+			break;
 		case Action::FLAMESWORD:
 			// Modifikationen:
 			// Flags fuer 120 sec
@@ -1963,6 +2014,7 @@ void Creature::calcStatusModCommand()
 			m_event_mask |= NetEvent::DATA_COMMAND | NetEvent::DATA_MOVE_INFO;
 			return;
 		}
+		DEBUG5("confused command %i",m_command.m_type);
 
 	}
 	else if (m_dyn_attr.m_status_mod_time[Damage::BERSERK]>0)
@@ -2784,6 +2836,20 @@ void Creature::calcAbilityDamage(Action::ActionType act,Damage& dmg)
 			dmg.m_multiplier[Damage::PHYSICAL] *= m_command.m_damage_mult;
 			dmg.m_attack *=m_command.m_damage_mult*0.5;
 			dmg.m_status_mod_power[Damage::PARALYZED] += (short)  (m_base_attr_mod.m_strength*m_command.m_damage_mult*0.2);
+			break;
+			
+		case Action::DECOY:
+			dmg.m_ai_mod_power[TAUNT] += m_base_attr_mod.m_strength/2 + std::min(m_base_attr_mod.m_strength/2,m_base_attr_mod.m_willpower*2);
+			dmg.m_special_flags |= Damage::UNBLOCKABLE;
+			break;
+			
+		case Action::SCARE:
+			dmg.m_ai_mod_power[TAUNT] += m_base_attr_mod.m_strength/2 + std::min(m_base_attr_mod.m_strength/2,m_base_attr_mod.m_willpower*2);
+			dmg.m_special_flags |= Damage::UNBLOCKABLE;
+			break;
+			
+		case Action::WARCRY:
+			dmg.m_status_mod_power[Damage::CONFUSED] += m_base_attr_mod.m_strength/2 + std::min(m_base_attr_mod.m_strength/2,m_base_attr_mod.m_willpower*2) ;
 			break;
 
 		case Action::FIRE_BOLT:
