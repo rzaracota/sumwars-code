@@ -162,3 +162,422 @@
 	
 </ObjectGroupTemplate>
 
+<ObjectGroupTemplate name = "councilhall" >
+	<Shape
+		  type = "RECT"
+		  extent_x = "8.0"
+		  extent_y = "8.0"
+		  angle ="0"
+		/>
+		
+	<ObjectContent>
+		<Object subtype="$tree"
+			center_x="2"
+			center_y="-4"
+			angle = "0"
+			probability ="1.0"
+			prob_angle = "false"
+			/>
+		<Object subtype="$tree"
+			center_x="-2"
+			center_y="-4"
+			angle = "0"
+			probability ="1.0"
+			prob_angle = "false"
+			/>
+	</ObjectContent>
+	
+	<Locations>
+		<Location name = "exit_north" pos_x="0" pos_y="-8" />
+		<Location name = "entry_north" pos_x="0" pos_y="0" />
+		<Location name = "locSorenWindclaw" pos_x="0" pos_y="4" />
+	</Locations>
+</ObjectGroupTemplate>
+
+<ObjectGroupTemplate name = "medairMercenaryCamp" >
+	<Shape
+		  type = "RECT"
+		  extent_x = "8.0"
+		  extent_y = "8.0"
+		  angle ="0"
+		/>
+	<ObjectContent>
+		<Object subtype="$tree"
+			center_x="2"
+			center_y="-4"
+			angle = "0"
+			probability ="1.0"
+			prob_angle = "false"
+			/>
+		<Object subtype="$tree"
+			center_x="-2"
+			center_y="-4"
+			angle = "0"
+			probability ="1.0"
+			prob_angle = "false"
+			/>
+			
+		<Object subtype="$tree"
+			center_x="2"
+			center_y="4"
+			angle = "0"
+			probability ="1.0"
+			prob_angle = "false"
+			/>
+		<Object subtype="$tree"
+			center_x="-2"
+			center_y="4"
+			angle = "0"
+			probability ="1.0"
+			prob_angle = "false"
+			/>
+	</ObjectContent>
+	
+	<Locations>
+		<Location name = "exit_north" pos_x="0" pos_y="-8" />
+		<Location name = "entry_north" pos_x="0" pos_y="0" />
+		
+		<Location name = "exit_south" pos_x="0" pos_y="8" />
+		<Location name = "entry_south" pos_x="0" pos_y="0" />
+		
+		<Location name = "locFenor" pos_x="0" pos_y="4" />
+	</Locations>
+</ObjectGroupTemplate>
+
+<ObjectGroupTemplate name = "willard" >
+	<Shape
+		  type = "RECT"
+		  extent_x = "4.0"
+		  extent_y = "4.0"
+		  angle ="0"
+		/>
+		
+	<ObjectContent>
+		<Object subtype="$tree"
+			center_x="0"
+			center_y="0"
+			angle = "0"
+			probability ="1.0"
+			prob_angle = "false"
+			/>
+	</ObjectContent>
+	
+	<Locations>
+		<Location name = "locWillard" pos_x="0" pos_y="0" />
+	</Locations>
+</ObjectGroupTemplate>
+
+<ObjectGroupTemplate name = "maylonsGrave" >
+	<Shape
+		  type = "RECT"
+		  extent_x = "8.0"
+		  extent_y = "8.0"
+		  angle ="0"
+		/>
+	<ObjectContent>
+		<Object subtype="$tree"
+			center_x="2"
+			center_y="-4"
+			angle = "0"
+			probability ="1.0"
+			prob_angle = "false"
+			/>
+		<Object subtype="$tree"
+			center_x="-2"
+			center_y="-4"
+			angle = "0"
+			probability ="1.0"
+			prob_angle = "false"
+			/>
+	</ObjectContent>
+	<Locations>
+		<Location name = "entry_crypt" pos_x="0" pos_y="0" />
+		<Location name = "exit_crypt" pos_x="0" pos_y="-8" />
+	</Locations>
+</ObjectGroupTemplate>
+
+<ObjectGroupTemplate name = "maylonsGraveL1Goblins" >
+	<Shape
+		  type = "RECT"
+		  extent_x = "4.0"
+		  extent_y = "4.0"
+		  angle ="0"
+		/>
+	<ObjectContent>
+		<Object subtype="$tree"
+			center_x="0"
+			center_y="0"
+			angle = "0"
+			probability ="1.0"
+			prob_angle = "false"
+			/>
+	</ObjectContent>
+	<Locations>
+		<Location name = "cryptGoblins" pos_x="0" pos_y="0" />
+	</Locations>
+</ObjectGroupTemplate>
+
+<ObjectGroupTemplate name = "maylonsGraveL2Chamber" >
+	<Shape
+		  type = "RECT"
+		  extent_x = "4.0"
+		  extent_y = "4.0"
+		  angle ="0"
+		/>
+		
+	<ObjectContent>
+		<Object subtype="$tree"
+			center_x="0"
+			center_y="0"
+			angle = "0"
+			probability ="1.0"
+			prob_angle = "false"
+			/>
+	</ObjectContent>
+	
+	<Locations>
+		<Location name = "cryptGraveChamber" pos_x="0" pos_y="0" />
+	</Locations>
+</ObjectGroupTemplate>
+
+<ObjectGroupTemplate name = "joringsbridge" >
+	<Shape
+		  type = "RECT"
+		  extent_x = "16.0"
+		  extent_y = "16.0"
+		  angle ="0"
+		/>
+		
+	<ObjectContent>
+		<Object subtype="$tree"
+			center_x="2"
+			center_y="-12"
+			angle = "0"
+			probability ="1.0"
+			prob_angle = "false"
+			/>
+		<Object subtype="$tree"
+			center_x="-2"
+			center_y="-12"
+			angle = "0"
+			probability ="1.0"
+			prob_angle = "false"
+			/>
+			
+		<Object subtype="$tree"
+			center_x="2"
+			center_y="12"
+			angle = "0"
+			probability ="1.0"
+			prob_angle = "false"
+			/>
+		<Object subtype="$tree"
+			center_x="-2"
+			center_y="12"
+			angle = "0"
+			probability ="1.0"
+			prob_angle = "false"
+			/>
+			
+		<Object subtype="$tree"
+			center_x="12"
+			center_y="-2"
+			angle = "0"
+			probability ="1.0"
+			prob_angle = "false"
+			/>
+		<Object subtype="$tree"
+			center_x="12"
+			center_y="2"
+			angle = "0"
+			probability ="1.0"
+			prob_angle = "false"
+			/>
+	</ObjectContent>
+	
+	<Locations>
+		<Location name = "exit_north" pos_x="0" pos_y="-16" />
+		<Location name = "entry_north" pos_x="0" pos_y="-8" />
+		
+		<Location name = "exit_south" pos_x="0" pos_y="16" />
+		<Location name = "entry_south" pos_x="0" pos_y="8" />
+		
+		<Location name = "exit_west" pos_x="16" pos_y="0" />
+		<Location name = "entry_west" pos_x="8" pos_y="0" />
+		
+		<Location name = "locPrince" pos_x="0" pos_y="2" />
+		<Location name = "locCouncellor" pos_x="0" pos_y="4" />
+		<Location name = "locSummoner" pos_x="2" pos_y="1" />
+		<Location name = "locSergeant" pos_x="3" pos_y="3" />
+		<Location name = "locPeasentMichel" pos_x="15" pos_y="0" />
+		<Location name = "locHerbalist" pos_x="8" pos_y="1" />
+	</Locations>
+</ObjectGroupTemplate>
+
+<ObjectGroupTemplate name = "michelsFarm" >
+	<Shape
+		  type = "RECT"
+		  extent_x = "8.0"
+		  extent_y = "8.0"
+		  angle ="0"
+		/>
+	<ObjectContent>
+		<Object subtype="$tree"
+			center_x="0"
+			center_y="0"
+			angle = "0"
+			probability ="1.0"
+			prob_angle = "false"
+			/>
+	</ObjectContent>
+	<Locations>
+		<Location name = "door" pos_x="0" pos_y="0" />
+	</Locations>
+</ObjectGroupTemplate>
+
+<ObjectGroupTemplate name = "herbalBushes" >
+<Shape
+		  type = "RECT"
+		  extent_x = "4.0"
+		  extent_y = "4.0"
+		  angle ="0"
+		/>
+
+	<ObjectContent>
+		<Object subtype="$tree"
+			center_x="2.5"
+			center_y="3.6"
+			angle = "0"
+			probability ="0.3"
+			prob_angle = "false"
+			/>
+		<Object subtype="$tree"
+			center_x="0"
+			center_y="0"
+			angle = "0"
+			probability ="1.0"
+			prob_angle = "false"
+			/>
+	</ObjectContent>
+	
+	<Locations>
+		<Location name = "herb" pos_x="0" pos_y="0" />
+	</Locations>
+</ObjectGroupTemplate>
+
+<ObjectGroupTemplate name = "robsHideout" >
+	<Shape
+		  type = "RECT"
+		  extent_x = "4.0"
+		  extent_y = "4.0"
+		  angle ="0"
+		/>
+	<ObjectContent>
+		<Object subtype="$tree"
+			center_x="0"
+			center_y="0"
+			angle = "0"
+			probability ="1.0"
+			prob_angle = "false"
+			/>
+	</ObjectContent>
+	<Locations>
+		<Location name = "locRob" pos_x="0" pos_y="0" />
+	</Locations>
+</ObjectGroupTemplate>
+
+<ObjectGroupTemplate name = "dwarfenfroward" >
+	<Shape
+		  type = "RECT"
+		  extent_x = "16.0"
+		  extent_y = "16.0"
+		  angle ="0"
+		/>
+		
+	<ObjectContent>
+		<Object subtype="$tree"
+			center_x="2"
+			center_y="-12"
+			angle = "0"
+			probability ="1.0"
+			prob_angle = "false"
+			/>
+		<Object subtype="$tree"
+			center_x="-2"
+			center_y="-12"
+			angle = "0"
+			probability ="1.0"
+			prob_angle = "false"
+			/>
+			
+		<Object subtype="$tree"
+			center_x="2"
+			center_y="12"
+			angle = "0"
+			probability ="1.0"
+			prob_angle = "false"
+			/>
+		<Object subtype="$tree"
+			center_x="-2"
+			center_y="12"
+			angle = "0"
+			probability ="1.0"
+			prob_angle = "false"
+			/>
+			
+		<Object subtype="$tree"
+			center_x="12"
+			center_y="-2"
+			angle = "0"
+			probability ="1.0"
+			prob_angle = "false"
+			/>
+		<Object subtype="$tree"
+			center_x="12"
+			center_y="2"
+			angle = "0"
+			probability ="1.0"
+			prob_angle = "false"
+			/>
+	</ObjectContent>
+	
+	<Locations>
+		<Location name = "exit_north" pos_x="0" pos_y="-16" />
+		<Location name = "entry_north" pos_x="0" pos_y="-8" />
+		
+		<Location name = "exit_south" pos_x="0" pos_y="16" />
+		<Location name = "entry_south" pos_x="0" pos_y="8" />
+		
+		<Location name = "exit_rampart" pos_x="16" pos_y="0" />
+		<Location name = "entry_rampart" pos_x="8" pos_y="0" />
+		
+		<Location name = "locGeneral" pos_x="1" pos_y="2" />
+		<Location name = "locSummoner" pos_x="1" pos_y="4" />
+		<Location name = "locSergeant" pos_x="4" pos_y="3" />
+	</Locations>
+</ObjectGroupTemplate>
+
+<ObjectGroupTemplate name = "powerlich" >
+	<Shape
+		  type = "RECT"
+		  extent_x = "4.0"
+		  extent_y = "4.0"
+		  angle ="0"
+		/>
+
+	<ObjectContent>
+		<Object subtype="$tree"
+			center_x="0"
+			center_y="0"
+			angle = "0"
+			probability ="1.0"
+			prob_angle = "false"
+			/>
+	</ObjectContent>
+
+	<Locations>
+		<Location name = "locPowerLich" pos_x="0" pos_y="0" />
+	</Locations>
+</ObjectGroupTemplate>
+
+

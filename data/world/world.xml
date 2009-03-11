@@ -54,7 +54,7 @@
 		<ExitDirections north="false" south="true" west="false" east="false" />
 		
 		<Exits>
-<!--			<Exit name="exit_south" destination_region="region1" destination_location="entry_north" >
+			<!--<Exit name="exit_south" destination_region="region1" destination_location="entry_north" >
 				<Shape shape="RECT" extent_x="4.0" extent_y ="4.0" />
 			</Exit>-->
 			
@@ -193,13 +193,13 @@
 	
 	<Region id="1000" name="testregion">
 		
-		<Settings dimx="8" dimy="8" region_template="test" />
-		
+		<Settings dimx="8" dimy="8" region_template="test_region_templ" />
+		<!--
 		<Exits>
 			<Exit name="exit_north" destination_region="region0" destination_location="entry_south" >
 				<Shape shape="RECT" extent_x="4.0" extent_y ="4.0" />
 			</Exit>
-		</Exits>
+		</Exits>-->
 		
 		<Environments>
 			<Environment height="0.2" name="meadow" />
@@ -269,25 +269,21 @@
 	</Region>
 
 <!-- Lobby Konzilshalle der Elemtarmagier [fester Ort; Saeulenhalle im roemischen Stil] -->
-<!-- Orte: Soren windclaw -->
+<!-- Orte: Soren Windclaw -->
 	<Region id="2" name="elCnlLobby">
-			<Settings dimx="8" dimy="4" area_percent="0.8" complexity="0" granularity="0"/>
+			<Settings dimx="8" dimy="8" region_template="councilhall"/>
 			<ExitDirections north="true" south="false" west="false" east="false" />
 			<Exits>
 				<Exit name="exit_north" destination_region="medMercCamp" destination_location="entry_south" >
 					<Shape shape="RECT" extent_x="4.0" extent_y ="4.0" />
 				</Exit>
 			</Exits>
-			
-			<Effect>
-				addLocation('locSorenWindclaw', {});
-			</Effect>
 	</Region>
 	
 <!-- Medair, Soeldnerlager [Stadt]-->
 <!-- Orte: Fenor Marken -->
 	<Region id="3" name="medMercCamp">
-		<Settings dimx="10" dimy="10" area_percent="0.8" complexity="0.0" granularity="0.4" />
+		<Settings dimx="16" dimy="16" region_template="medairMercenaryCamp" />
 		
 		<ExitDirections north="true" south="true" west="false" east="false" />
 		
@@ -300,18 +296,12 @@
 				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
 			</Exit>
 		</Exits>
-		
-		<Event trigger ="create_region" once = "true">
-			<Effect>
-				addLocation('locFenor', {});
-			</Effect>
-		</Event>
-		
+				
 		<ReviveLocation  location="entry_south" />
 	</Region>
 	
 <!-- Aisen, Aisener Wiesen [Feld und Wiesen]; ungefaehr eine viertel Stunde, eher offen; Level 1 - 3 -->
-<!-- Orte: verwundeter Soldat, evtl. ein Template -->
+<!-- Orte: verwundeter Soldat, Template -->
 <!-- Goblinschlaeger, Goblinraeuber, Goblinjaeger-->
 	<Region id="4" name="aisMeadow">
 		<Settings dimx="32" dimy="32" area_percent="0.4" complexity="0.3" granularity="6" />
@@ -326,10 +316,10 @@
 				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
 			</Exit>
 		</Exits>
-		
-		<Effect>
-			addLocation('locWillard', {});
-		</Effect>
+
+		<ObjectGroups>
+			<ObjectGroup object_group="willard" priority="4" number="1" probability="1.0" />
+		</ObjectGroups>
 	</Region>
 
 <!-- Aisen, Offene Ebene [Feld und Wiesen]; ungefaehr 20 Min, eher offen; Level 2 - 6 -->
@@ -352,9 +342,9 @@
 			</Exit>
 		</Exits>
 
-		<Effect>
-			addLocation('locCrypt', {});
-		</Effect>
+		<ObjectGroups>
+			<ObjectGroup object_group="maylonsGrave" priority="4" number="1" probability="1.0" />
+		</ObjectGroups>
 
 	</Region>
 	
@@ -373,10 +363,10 @@
 				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
 			</Exit>
 		</Exits>
-		
-		<Effect>
-			addLocation('locGoblins', {});
-		</Effect>
+		<!-- in der Nähe des Eingangs -->
+		<ObjectGroups>
+			<ObjectGroup object_group="maylonsGraveL1Goblins" priority="4" number="1" probability="1.0" />
+		</ObjectGroups>
 	</Region>
 	
 <!-- Maylons Grab, Ebene 2[unterirdisch], ungefaehr 10 Minuten; Level 16 - 19 -->
@@ -393,9 +383,9 @@
 			</Exit>
 		</Exits>
 		
-		<Effect>
-			addLocation('locGraveChamber', {});
-		</Effect>
+		<ObjectGroups>
+			<ObjectGroup object_group="maylonsGraveL2Chamber" priority="4" number="1" probability="1.0" />
+		</ObjectGroups>
 	</Region>	
 	
 <!-- Aisen, Stille Heide [Feld und Wiesen]; ungefaehr 20 Min, eher offen; Level 5 - 10 -->
@@ -419,9 +409,10 @@
 <!-- erstes Treffen mit dem Prinzen -->
 <!-- Der belagerte Bauernhof -->
 <!-- Rob, der Raeuber, Anfang -->
+<!-- Prinz, Ratgeber, Magier, Bauer, Sergeant -->
 <!-- Kraeutersammler -->
 	<Region id="7" name="joringsbridge">
-		<Settings dimx="32" dimy="32" area_percent="0.4" complexity="0.3" granularity="6" />
+		<Settings dimx="32" dimy="32" region_template="joringsbridge"/>
 		
 		<ExitDirections north="true" south="true" west="true" east="false" />
 		
@@ -436,15 +427,6 @@
 				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
 			</Exit>
 		</Exits>
-		
-		<Effect>
-			addLocation('locPrince', {});
-			addLocation('locCouncellor', {});
-			addLocation('locPeasentMichel', {});
-			addLocation('locSummoner', {});
-			addLocation('locSergeant', {});
-			addLocation('locHerbalist', {});
-		</Effect>
 	</Region>
 
 <!-- Aisen, Noerdliche Wiese [Feld und Wiesen]; ungefaehr 20 Min, eher offen; Level 7 - 12; Sidequests aus Joringsbr�ck -->
@@ -462,9 +444,11 @@
 			</Exit>
 		</Exits>
 		
-		<Effect>
-			addLocation('locFarm', {});
-		</Effect>
+		<ObjectGroups>
+			<ObjectGroup object_group="michelsFarm" priority="4" number="1" probability="1.0" />
+			<ObjectGroup object_group="herbalBushes" priority="4" number="10" probability="1.0" />
+			<ObjectGroup object_group="herbalBushes" priority="3" number="15" probability="0.7" />
+		</ObjectGroups>
 	</Region>	
 	
 <!-- Aisen, Joringsforst [Wald und Wiesen]; ungefaehr 30 Min, halbwegs offen; Level 7 - 12 -->	
@@ -501,9 +485,9 @@
 			</Exit>
 		</Exits>
 		
-		<Effect>
-			addLocation('locBanditHideout', {});
-		</Effect>
+		<ObjectGroups>
+			<ObjectGroup object_group="robsHideout" priority="4" number="1" probability="1.0" />
+		</ObjectGroups>
 	</Region>
 	
 <!-- Aisen, Wolfsfelsen [Wald und Gebirge]; ungefaehr 35 Min, eher verwinkelt; Level 14 - 17 -->
@@ -529,7 +513,7 @@
 <!-- Rob, der Raeuber, Ende -->
 <!-- Loc: Stadtmauer -->
 	<Region id="12" name="dwarfenfroward">
-		<Settings dimx="32" dimy="32" area_percent="0.4" complexity="0.3" granularity="6" />
+		<Settings dimx="32" dimy="32" region_template="dwarfenfroward"/>
 		
 		<ExitDirections north="true" south="true" west="false" east="false" />
 		
@@ -542,19 +526,13 @@
 			</Exit>
 		</Exits>
 		
-		<Effect>
-			addLocation('locGeneral', {});
-			addLocation('locSummoner', {});
-			addLocation('locSergeant', {});
-			addLocation('locRampart', {});
-		</Effect>
 	</Region>
 	
 <!-- Aisen, Zwergentrutz Stadtmauer; ungef�hr 20 min, relativ starres Design; Level 16 - 19 -->
 <!-- Zombies, Skelette -->
 <!-- Locations fuer die Verteidigenden Wachen? -->
 	<Region id="12" name="dwarfenfrowardRampart">
-		<Settings dimx="32" dimy="32" area_percent="0.4" complexity="0.3" granularity="6" />
+		<Settings dimx="8" dimy="32" area_percent="0.4" complexity="0.3" granularity="6" />
 		
 		<ExitDirections north="true" south="true" west="false" east="false" />
 		
@@ -579,9 +557,10 @@
 			</Exit>
 		</Exits>
 		
-		<Effect>
-			addLocation('locPowerlich', {});
-		</Effect>
+		<ObjectGroups>
+			<ObjectGroup object_group="powerlich" priority="4" number="1" probability="1.0" />
+		</ObjectGroups>
+	
 	</Region>
 </World>
 
