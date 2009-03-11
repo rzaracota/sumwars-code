@@ -822,13 +822,29 @@ void Projectile::handleStable(float dtime)
 		if (m_type == LIGHTNING || m_type ==LIGHT_BEAM  || m_type ==ELEM_EXPLOSION || m_type ==ACID || m_type ==DIVINE_BEAM  || m_type ==HYPNOSIS)
 		{
 			// Objekt an der Stelle suchen an der der Zauber wirkt
-			hit = getRegionPtr()->getObjectAt( pos,m_region, m_layer );
-
+			Shape s;
+			s.m_center = pos;
+			s.m_type = Shape::CIRCLE;
+			s.m_radius = 0.5;
+			WorldObjectList hits;
+			getRegionPtr()->getObjectsInShape( &s,&hits, m_layer );
+			if (!hits.empty())
+			{
+				hit = hits.front();
+			}
+			else
+			{
+				hit =0;
+			}
 			if (hit !=0)
 			{
 				// Ziel gefunden, Schaden austeilen
 				m_last_hit_object_id = hit->getId();
 				hit->takeDamage(&m_damage);
+			}
+			else
+			{
+				DEBUG("hit nothing");
 			}
 		}
 
