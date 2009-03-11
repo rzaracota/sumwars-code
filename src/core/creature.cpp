@@ -2593,9 +2593,9 @@ void Creature::calcBaseDamage(Action::ActionType act,Damage& dmg)
 
 
 		dmg.m_attack += basm->m_attack;
-		dmg.m_attack += basm->m_dexterity/5;
+		dmg.m_attack += basm->m_dexterity/2;
 
-		dmg.m_power += basm->m_strength;
+		dmg.m_power += basm->m_strength/2;
 
 		dmg.m_special_flags = Damage::NOFLAGS;
 
@@ -2624,9 +2624,9 @@ void Creature::calcBaseDamage(Action::ActionType act,Damage& dmg)
 		dmg.m_max_damage[Damage::PHYSICAL] += basm->m_dexterity/4;
 
 		dmg.m_attack += basm->m_attack;
-		dmg.m_attack += basm->m_dexterity/3;
+		dmg.m_attack += basm->m_dexterity/2;
 
-		dmg.m_power += basm->m_dexterity;
+		dmg.m_power += basm->m_dexterity/2;
 
 		dmg.m_special_flags = Damage::NOFLAGS;
 
@@ -2641,9 +2641,9 @@ void Creature::calcBaseDamage(Action::ActionType act,Damage& dmg)
 		dmg.m_max_damage[Damage::PHYSICAL] += basm->m_willpower/3;
 
 		dmg.m_attack += basm->m_attack;
-		dmg.m_attack += basm->m_dexterity/5;
+		dmg.m_attack += basm->m_dexterity/2;
 
-		dmg.m_power += basm->m_willpower;
+		dmg.m_power += basm->m_willpower/2;
 
 		dmg.m_special_flags = Damage::NOFLAGS;
 
@@ -3379,7 +3379,7 @@ void Creature::applyBaseAttrMod(CreatureBaseAttrMod* mod, bool add)
 	m_base_attr_mod.m_walk_speed +=mod->m_dwalk_speed;
 	m_base_attr_mod.m_max_health += mod->m_dmax_health;
 	m_base_attr_mod.m_max_health += mod->m_dstrength*5;
-	m_base_attr_mod.m_attack_speed += mod->m_ddexterity*3;
+	m_base_attr_mod.m_attack_speed += mod->m_ddexterity*20;
 	m_dyn_attr.m_health *= m_base_attr_mod.m_max_health /oldmaxhp;
 
 
@@ -3461,7 +3461,7 @@ bool Creature::removeBaseAttrMod(CreatureBaseAttrMod* mod)
 	m_base_attr_mod.m_walk_speed -=mod->m_dwalk_speed;
 	m_base_attr_mod.m_attack_speed -=mod->m_dattack_speed;
 	m_base_attr_mod.m_max_health -= mod->m_dstrength*5;
-	m_base_attr_mod.m_attack_speed -= mod->m_ddexterity*3;
+	m_base_attr_mod.m_attack_speed -= mod->m_ddexterity*20;
 
 	m_dyn_attr.m_health *= m_base_attr_mod.m_max_health /oldmaxhp;
 

@@ -1017,7 +1017,7 @@ void Player::increaseAttribute(CreatureBaseAttr::Attribute attr)
 			break;
 		case (CreatureBaseAttr::DEXTERITY):
 			getBaseAttr()->m_dexterity++;
-			getBaseAttr()->m_attack_speed +=3;
+			getBaseAttr()->m_attack_speed +=20;
 			m_event_mask |= NetEvent::DATA_ATTACK_SPEED;
 			break;
 		case (CreatureBaseAttr::WILLPOWER):
@@ -1573,12 +1573,35 @@ void Player::calcBaseDamage(Action::ActionType act,Damage& dmg)
 		Damage& wdmg=weapon->m_weapon_attr->m_damage;
 
 		int i;
+		float maxdmg =0;
+		Damage::DamageType dmgtype = Damage::FIRE;
+		
 		// Schaden uebernehmen
 		for (i=0;i<4;i++)
 		{
 			dmg.m_min_damage[i] += wdmg.m_min_damage[i];
 			dmg.m_max_damage[i] += wdmg.m_max_damage[i];
 			dmg.m_multiplier[i] *= wdmg.m_multiplier[i];
+			
+			if ((wdmg.m_min_damage[i]+ wdmg.m_max_damage[i]) * wdmg.m_multiplier[i]>maxdmg)
+			{
+				maxdmg = (wdmg.m_min_damage[i]+ wdmg.m_max_damage[i]) * wdmg.m_multiplier[i];
+				dmgtype = (Damage::DamageType) i;
+			}
+		}
+		
+		if (getTypeInfo()->m_subtype == "mage")
+		{
+			CreatureBaseAttr* basm = getBaseAttrMod();
+			dmg.m_min_damage[Damage::FIRE] -= basm->m_magic_power/10;
+			dmg.m_min_damage[Damage::FIRE] -= basm->m_willpower/20;
+			dmg.m_max_damage[Damage::FIRE] -= basm->m_magic_power/6;
+			dmg.m_max_damage[Damage::FIRE] -= basm->m_willpower/15;
+			
+			dmg.m_min_damage[dmgtype] += basm->m_magic_power/10;
+			dmg.m_min_damage[dmgtype] += basm->m_willpower/20;
+			dmg.m_max_damage[dmgtype] += basm->m_magic_power/6;
+			dmg.m_max_damage[dmgtype] += basm->m_willpower/15;
 		}
 
 		// Statusmods uebernehmen
