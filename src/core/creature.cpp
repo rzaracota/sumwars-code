@@ -2036,6 +2036,15 @@ void Creature::calcStatusModCommand()
 
 		// Suchen aller Objekte im Kreis
 		getRegion()->getObjectsInShape(&s, &res,LAYER_AIR,CREATURE,this);
+		if (res.empty())
+		{
+			WorldObject* wo = getRegion()->getObject(getDynAttr()->m_last_attacker_id);
+			if (wo != 0)
+			{
+				res.push_back(wo);
+			}
+		}
+		
 		for (i=res.begin();i!= res.end();++i)
 		{
 			// nur aktive Lebewesen beruecksichtigen
@@ -2066,6 +2075,7 @@ void Creature::calcStatusModCommand()
 		// Wenn Zielobjekt gefunden wurde
 		if (id !=0)
 		{
+			getDynAttr()->m_timer.start();
 			DEBUG5("attack id %i",id);
 			// Angriff
 			m_command.m_type = Action::ATTACK;
@@ -2085,6 +2095,12 @@ void Creature::calcStatusModCommand()
 		{
 			// nichts machen
 			m_command.m_type = Action::NOACTION;
+			if (getDynAttr()->m_timer.getTime() >1000)
+			{
+				m_dyn_attr.m_status_mod_time[Damage::BERSERK] =0;
+				m_event_mask |= NetEvent::DATA_STATUS_MODS;
+			}
+			
 		}
 		m_event_mask |= NetEvent::DATA_COMMAND;
 	}

@@ -350,6 +350,12 @@ struct CreatureDynAttr
 	 */
 	std::list<CreatureBaseAttrMod> m_temp_mods;
 	
+	/**
+	 * \var Timer m_timer;
+	 * \brief timer fuer verschiedene Zwecke
+	 */
+	Timer m_timer;
+	
 	
 	/**
 	 * \fn int getValue(std::string valname)
