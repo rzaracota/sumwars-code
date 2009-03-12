@@ -58,8 +58,8 @@ bool  ObjectLoader::loadMonster(TiXmlNode* node)
 			data->m_type_info.m_type = WorldObject::TypeInfo::TYPE_PLAYER;
 		else if (type ==  "MONSTER")
 			data->m_type_info.m_type = WorldObject::TypeInfo::TYPE_MONSTER;
-		else if (type ==  "TRADER")
-			data->m_type_info.m_type = WorldObject::TypeInfo::TYPE_TRADER;
+		else if (type ==  "NPC")
+			data->m_type_info.m_type = WorldObject::TypeInfo::TYPE_NPC;
 
 		if (fraction ==  "NOFRACTION")
 			data->m_fraction = WorldObject::NOFRACTION;

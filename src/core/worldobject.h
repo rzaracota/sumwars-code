@@ -144,7 +144,7 @@ class WorldObject {
 			TYPE_NONE=0,
 			TYPE_PLAYER =1,
 			TYPE_MONSTER= 2,
-			TYPE_TRADER=3,
+			TYPE_NPC=3,
 			TYPE_FIXED_OBJECT=4
 		};
 

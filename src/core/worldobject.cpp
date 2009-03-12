@@ -161,6 +161,9 @@ int WorldObject::getValue(std::string valname)
 
 			if (m_type_info.m_type == TypeInfo::TYPE_PLAYER)
 				lua_pushstring(EventSystem::getLuaState(),"player");
+			
+			if (m_type_info.m_type == TypeInfo::TYPE_NPC)
+				lua_pushstring(EventSystem::getLuaState(),"npc");
 
 			if (m_type_info.m_type == TypeInfo::TYPE_FIXED_OBJECT)
 				lua_pushstring(EventSystem::getLuaState(),"fixed_object");

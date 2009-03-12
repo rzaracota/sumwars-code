@@ -472,14 +472,7 @@ bool Player::onGamefieldClick(ClientCommand* command)
 					com->m_range = 0.5;
 					DEBUG5("action range %f",getCommand()->m_range);
 				}
-						/*
-				if (wo->getObjectType().getObjectType()==OBJECTTYPE_TRADER)
-				{
-							// mit einem Händler handeln
-				getNextCommand()->setType(COMMAND_TRADE);
-				getNextCommand()->setGoalObjectId(command->m_id);
-			}
-						*/
+				
 			}
 			else if (command->m_button == RIGHT_MOUSE_BUTTON)
 			{

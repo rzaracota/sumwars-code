@@ -558,7 +558,7 @@ AIR
 	<AI ai_sight_range="12" />
 </Monster>
 
-<Monster type="MONSTER" subtype="peasant" name="peasant" fraction="HUMAN" category="HUMAN" layer="NORMAL">
+<Monster type="NPC" subtype="peasant" name="peasant" fraction="HUMAN" category="HUMAN" layer="NORMAL">
 	<Mesh file="warrior.mesh" />
 	<Dropslots >
 		<Dropslot pbig="0.1" pmedium="0.2" psmall="0.2" pgold="0.2" max_gold="50" min_level="0" max_level="10" magic_prob="0.1" magic_power="1000" />
