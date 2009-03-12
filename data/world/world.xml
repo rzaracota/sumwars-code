@@ -310,6 +310,13 @@
 		</Environments>		
 		
 		<ReviveLocation  location="entry_south" />
+		
+		<Event trigger ="create_region" once = "true">
+			<Effect>
+				fenor = createObject('peasant', 'locFenor');
+				setRefName(fenor, 'Fenor Marken');
+			</Effect>
+		</Event>
 	</Region>
 	
 <!-- Aisen, Aisener Wiesen [Feld und Wiesen]; ungefaehr eine viertel Stunde, eher offen; Level 1 - 3 -->
@@ -336,6 +343,34 @@
 		<NamedObjectGroups>
 			<NameObjectGroup name="willard" object_group="willard" priority="4"/>
 		</NamedObjectGroups>
+		
+		<Event trigger ="create_region" once = "true">
+			<Effect>
+				addArea('WillardArea','circle','locWillard',10);
+				addArea('WillardEnemiesArea','circle','locWillard',50);
+				if (rescue_willard.finished == false) then
+					rescue_willard_tmp.monsters = createMonsterGroup("goblins","locWillard")
+				end
+			</Effect>
+		</Event>
+		
+		<Event trigger ="player_moved" once = "true">
+			<Condition>
+				return (unitIsInArea(trigger.player,"WillardArea"))
+			</Condition>
+			<Effect>
+				createDialogue();
+				addSpeaker(trigger.player,'finder');
+				speak('finder','Hier steckt also dieser Willard.',2000)
+			</Effect>
+		</Event>
+		
+		<!--<Event trigger ="create_region" once = "true">
+			<Effect>
+				willard = createObject('peasant', 'locWillard');
+				setRefName(willard, 'Willard');
+			</Effect>
+		</Event>-->
 	</Region>
 
 <!-- Aisen, Offene Ebene [Feld und Wiesen]; ungefaehr 20 Min, eher offen; Level 2 - 6 -->

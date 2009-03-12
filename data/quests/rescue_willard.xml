@@ -1,0 +1,115 @@
+<Quest name="Ein Freund in Not" table_name="rescue_willard">
+	
+	<Init>
+		rescue_willard.finished = false;
+		rescue_willard.started = false;
+	</Init>
+	
+	<Description>
+		if (rescue_willard.finished) then
+			return _("Quest finished");
+		end
+	</Description>
+	
+	<NPC refname="Fenor Marken">
+		<Topic name="rescue_willard" start_option="Willard">
+			<Condition>
+				return (not rescue_willard.finished)
+			</Condition>
+			<Effect>
+				if (rescue_willard.started) then
+					if (rescue_willard.finished) then
+						speak('player', _("Wir haben Willard befreit."),1000)
+						speak('Fenor Marken',_("Super."),1000);
+						changeTopic('rescue_willard_reward');
+					else
+						speak('Fenor Marken',_("Ihr habt Willard noch nicht befreit."),1000);
+					end
+				else
+					speak('Fenor Marken',_("Ein ..."),1000);
+					speak('player',_("... Gespraech"),1000);
+					speak('Fenor Marken',_("Werdet ihr ihn befreien?"),1000);
+					addQuestion(_("Quest annehmen?"));
+					addAnswer(_("Yes"),'start_rescue_willard_quest'); 
+					addAnswer(_("No"),'end');
+				end
+			</Effect>
+		</Topic>
+		
+		<Topic name="rescue_willard_reward" start_option="Willard (Belohnung)">
+			<Condition>
+				if (rescue_willard.finished == false) then return false end;
+			</Condition>
+			<Effect>
+				speak('Fenor Marken',_("Danke. Jetzt bekommt ihr eurer Gold."),1000);
+				speak('player', _("Yeah"),1000)
+			</Effect>
+		</Topic>
+		
+		<Topic name="start_rescue_willard_quest" >
+			<Effect>
+				speak('player', _("Wir machen uns auf den Weg."),1500)
+				speak('Fenor Marken',_("Viel Glueck!"),1000);
+				rescue_willard.started = true;
+			</Effect>	
+		</Topic>
+		<!--
+		<Topic name="finish_gob_quest" >
+			<Effect>
+				goblins.finished = true;
+				local players = getPlayers();
+				local i,player;
+				for i,player in ipairs(players) do
+					if (getPlayerPrivateVar(player,"goblins.reward") ~= true) then
+						setPlayerPrivateVar(player,"goblins.reward",true);
+						setObjectValue(player,"attribute_points", getObjectValue(player,"attribute_points") +5);
+					end;
+				end;	
+			</Effect>
+		</Topic>
+		
+		<Topic name="goblins_reward2" >
+			<Effect>
+				local npc = getSpeaker('peasant');
+				dropItem("goblin_hmr", getPosition(npc),500);
+			</Effect>
+		</Topic>-->
+	</NPC>
+	
+	
+	<Event trigger ="player_moved" once = "true">
+			<Condition>
+				return (unitIsInArea(trigger.player,"WillardArea"))
+			</Condition>
+			<Effect>
+				createDialogue()
+				addSpeaker(trigger.player,'finder')
+				speak('finder','Hier steckt also dieser Willard.',1000)
+			</Effect>
+		</Event>
+	
+	
+	<Region name="aisMeadow">
+		<Event trigger ="unit_die">
+			<Condition>
+				local list = getMonstersInArea('WillardEnemiesArea')
+				printlist(list)
+				if (list[1] == nil) then
+					return true
+				else
+					return false
+				end
+			</Condition>
+			<Effect>
+				rescue_willard.finished = true
+				rescue_willard_tmp.willard = createObject('peasant', 'locWillard')
+				setRefName(rescue_willard_tmp.willard, 'Willard')
+				createDialogue()
+				addSpeaker(rescue_willard_tmp.willard,'willard')
+				speak('willard','Ich bin euch zu grossem Dank verpflichtet.',1000)
+			</Effect>
+		</Event>
+	</Region>
+	
+</Quest>
+
