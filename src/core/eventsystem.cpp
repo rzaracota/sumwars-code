@@ -46,6 +46,7 @@ void EventSystem::init()
 	lua_register(m_lua, "setDamageValue", setDamageValue);
 	lua_register(m_lua, "getDamageValue", getDamageValue);
 	lua_register(m_lua, "createProjectile", createProjectile);
+	lua_register(m_lua, "createMonsterGroup", createMonsterGroup);
 	lua_register(m_lua, "getObjectAt", getObjectAt);
 	lua_register(m_lua, "getObjectsInArea", getObjectsInArea);
 	lua_register(m_lua, "addUnitCommand", addUnitCommand);
@@ -461,6 +462,30 @@ int EventSystem::createObject(lua_State *L)
 	return 1;
 }
 
+int EventSystem::createMonsterGroup(lua_State *L)
+{
+	int argc = lua_gettop(L);
+	if (argc>=2 && (lua_istable(L,2) || lua_isstring(L,2)) && lua_isstring(L,1))
+	{
+
+
+		MonsterGroupName group= lua_tostring(L, 1);
+		Vector pos = getVector(L,2);
+
+		if (m_region!=0)
+		{
+
+			m_region->createMonsterGroup(group, pos);
+		}
+
+	}
+	else
+	{
+		ERRORMSG("Syntax: createMonsterGroup( string monstergroup, {float x, float y}])");
+	}
+	return 0;
+}
+
 int EventSystem::deleteObject(lua_State *L)
 {
 	int argc = lua_gettop(L);
@@ -570,7 +595,7 @@ int EventSystem::getObjectsInArea(lua_State *L)
 			WorldObjectList::iterator it;
 			Shape s = m_region->getArea(area);
 
-			short layer = WorldObject::LAYER_ALL;
+			short layer = WorldObject::WorldObject::LAYER_BASE | WorldObject::LAYER_AIR;
 			if (argc>=2 && lua_isstring(L,2))
 			{
 				std::string lstr = lua_tostring(L,2);
@@ -604,6 +629,10 @@ int EventSystem::getObjectsInArea(lua_State *L)
 				else if (gstr == "player")
 				{
 					group = WorldObject::PLAYER;
+				}
+				else if (gstr == "monster")
+				{
+					group = WorldObject::CREATURE_ONLY;
 				}
 				else if (gstr == "fixed")
 				{

@@ -63,7 +63,7 @@ end;
 
 
 function getMonstersInArea(area)
-		return filter(getObjectsInArea(area),isMonster);
+		return filter(getObjectsInArea(area,"normal","monster"),isMonster);
 end;
 
 function getPlayers()

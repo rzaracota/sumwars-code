@@ -169,6 +169,13 @@ class EventSystem
 		static int deleteObject(lua_State *L);
 		
 		/**
+		 * \fn static int createMonsterGroup(lua_State *L)
+		 * \brief Erstellt eine neue Monstergruppe
+		 * \param L Lua Status
+		 */
+		static int createMonsterGroup(lua_State *L);
+		
+		/**
 		 * \fn static int addUnitCommand(lua_State *L)
 		 * \brief Fuegt zu einer Einheit ein Kommando hinzu
 		 * \param L Lua Status
