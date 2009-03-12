@@ -270,8 +270,11 @@ KeyCode Document::getMappedKey(ShortkeyDestination sd)
 	return 0;
 }
 
-void Document::installShortkey(KeyCode key,ShortkeyDestination dest)
+void Document::installShortkey(KeyCode key,ShortkeyDestination dest, bool check_special)
 {
+	if (check_special && m_special_keys.count(key)>0)
+		return;
+	
 	// Taste auf die das Ereignis bisher gemappt war
 	KeyCode oldkey = getMappedKey(dest);
 	// entfernen
@@ -282,6 +285,11 @@ void Document::installShortkey(KeyCode key,ShortkeyDestination dest)
 
 	// Mapping anlegen
 	m_shortkey_map[key]=dest;
+	
+	if (!check_special)
+	{
+		m_special_keys.insert(key);
+	}
 
 }
 
@@ -862,6 +870,25 @@ void Document::onButtonMinimapClicked()
 	m_modified |= WINDOWS_MODIFIED;
 }
 
+void Document::onButtonOptionsClicked()
+{
+	if (!checkSubwindowsAllowed() && getGUIState()->m_sheet ==  Document::GAME_SCREEN)
+		return;
+	
+	if (getGUIState()->m_shown_windows & OPTIONS)
+	{
+		getGUIState()->m_shown_windows &= ~OPTIONS;
+	}
+	else
+	{	
+		
+		getGUIState()->m_shown_windows |= OPTIONS;
+	}
+	
+	// Geoeffnete Fenster haben sich geaendert
+	m_modified |= WINDOWS_MODIFIED;
+}
+
 void Document::onButtonCloseTrade()
 {
 	ClientCommand command;
@@ -1085,6 +1112,10 @@ bool Document::onKeyPress(KeyCode key)
 		else if (dest == SHOW_MINIMAP)
 		{
 			onButtonMinimapClicked();
+		}
+		else if (dest == SHOW_OPTIONS)
+		{
+			onButtonOptionsClicked();
 		}
 		else if (dest == SWAP_EQUIP)
 		{

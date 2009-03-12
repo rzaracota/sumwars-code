@@ -49,6 +49,12 @@ class ControlPanel : public ItemWindow
 		bool onButtonSaveExitClicked(const CEGUI::EventArgs& evt);
 		
 		/**
+		 * \fn bool onButtonOptionsClicked(const CEGUI::EventArgs& evt)
+		 * \brief Behandelt Klick auf Optionen
+		 */
+		bool onButtonOptionsClicked(const CEGUI::EventArgs& evt);
+		
+		/**
 		 * \fn void onButtonInventoryClicked(const CEGUI::EventArgs& evt)
 		 * \brief Behandelt Klick auf Inventar Button
 		 */

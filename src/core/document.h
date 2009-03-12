@@ -155,6 +155,7 @@ class Document
 		MINIMAP = 0x400,
 		QUESTIONBOX = 0x800,
 		TRADE =0x1000,
+  		OPTIONS =0x2000,
 	};
 
 	/**
@@ -174,6 +175,7 @@ class Document
   		SHOW_MINIMAP =8,
 		CLOSE_ALL=9,
 		SWAP_EQUIP=10,
+		SHOW_OPTIONS = 11,
 		USE_POTION = 30,
 		USE_SKILL_LEFT=100,
 		USE_SKILL_RIGHT=300,
@@ -443,15 +445,24 @@ class Document
 	KeyCode getMappedKey(ShortkeyDestination sd);
 
 	/**
-	 * \fn void installShortkey(KeyCode key,ShortkeyDestination dest)
+	 * \fn void installShortkey(KeyCode key,ShortkeyDestination dest, bool check_special=true)
 	 * \brief Bindet eine Taste an ein Ereignis
 	 * \param key Taste
 	 * \param dest Ereignis, das auf die Taste hin ausgeloest werden soll
+	 * \param check_special wenn true, wird sichergestellt, dass die Taste keine Sondertaste ist;
 	 */
-	void installShortkey(KeyCode key,ShortkeyDestination dest);
+	void installShortkey(KeyCode key,ShortkeyDestination dest, bool check_special=true);
 
 
-
+	/**
+	 * \fn void installSpecialKey(KeyCode key)
+	 * \brief Markiert eine Taste, sodass sie nicht als Kurztaste verwendet werden kann
+	 * \param key Keycode
+	 */
+	void installSpecialKey(KeyCode key)
+	{
+		m_special_keys.insert(key);
+	}
 
 	/**
 	 * \fn void onButtonSendMessageClicked ( )
@@ -514,6 +525,12 @@ class Document
 	 * \brief Behandelt Klick auf Chat oeffnen Button
 	 */
 	void onButtonQuestInfoClicked();
+	
+	/**
+	 * \fn void onButtonOptionsClicked()
+	 * \brief Behandelt Klick auf Button Optionen
+	 */
+	void onButtonOptionsClicked();
 
 	/**
 	 * \fn void onSwapEquip()

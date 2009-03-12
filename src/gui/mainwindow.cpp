@@ -115,6 +115,10 @@ bool MainWindow::setupMainMenu()
 		m_sub_windows["CharCreate"] = wnd;
 		m_main_menu->addChildWindow(wnd->getCEGUIWindow());
 		
+		wnd = new OptionsWindow(m_document,m_keyboard);
+		m_sub_windows["Options"] = wnd;
+		m_main_menu->addChildWindow(wnd->getCEGUIWindow());
+		
 
 	// Verbinden mit dem Document
 	}
@@ -181,12 +185,13 @@ void MainWindow::update()
 		{
 			updateMainMenu();
 			m_cegui_system->setGUISheet(m_main_menu);
-
+			m_main_menu->addChildWindow(m_sub_windows["Options"]->getCEGUIWindow());
 		}
 
 		if (m_document->getGUIState()->m_sheet ==  Document::GAME_SCREEN)
 		{
 			m_cegui_system->setGUISheet(m_game_screen);
+			m_game_screen->addChildWindow(m_sub_windows["Options"]->getCEGUIWindow());
 		}
 		m_document->setModified(m_document->getModified() & (~Document::GUISHEET_MODIFIED));
 	}
@@ -226,6 +231,17 @@ void MainWindow::update()
 			start_menu->setVisible(false);
 		}
 		
+		CEGUI::FrameWindow* options = (CEGUI::FrameWindow*) win_mgr.getWindow("OptionsWindow");
+		if (wflags & Document::OPTIONS)
+		{
+			static_cast<OptionsWindow*>(m_sub_windows["Options"])->reset();
+			options->setVisible(true);
+		}
+		else
+		{
+			options->setVisible(false);
+		}
+		
 		CEGUI::FrameWindow* char_create = (CEGUI::FrameWindow*) win_mgr.getWindow("CharCreate");
 		if (wflags & Document::CHAR_CREATE)
 		{
@@ -236,122 +252,131 @@ void MainWindow::update()
 			char_create->setVisible(false);
 		}
 
-
-		// Charinfo anzeigen wenn entsprechendes Flag gesetzt
-		CEGUI::FrameWindow* char_info = (CEGUI::FrameWindow*) win_mgr.getWindow("CharInfo");
-		if (wflags & Document::CHARINFO)
+		if (m_document->getGUIState()->m_sheet ==  Document::GAME_SCREEN)
 		{
-			char_info->setVisible(true);
-		}
-		else
-		{
-			char_info->setVisible(false);
-		}
-
-		// Inventar anzeigen wenn entsprechendes Flag gesetzt
-		CEGUI::FrameWindow* inventory = (CEGUI::FrameWindow*) win_mgr.getWindow("Inventory");
-		if (wflags & Document::INVENTORY)
-		{
-			inventory->setVisible(true);
-		}
-		else
-		{
-			inventory->setVisible(false);
-		}
-		
-		// QuestInfo anzeigen wenn entsprechendes Flag gesetzt
-		CEGUI::FrameWindow* quest_info = (CEGUI::FrameWindow*) win_mgr.getWindow("QuestInfo");
-		if (wflags & Document::QUEST_INFO)
-		{
-			quest_info->setVisible(true);
-			m_sub_windows["QuestInfo"]->update();
-		}
-		else
-		{
-			quest_info->setVisible(false);
-		}
-		
-		CEGUI::FrameWindow* minimap = (CEGUI::FrameWindow*) win_mgr.getWindow("MinimapWindow");
-		if (wflags & Document::MINIMAP)
-		{
-			minimap->setVisible(true);
-		}
-		else
-		{
-			minimap->setVisible(false);
-		}
-		
-		CEGUI::FrameWindow* trade = (CEGUI::FrameWindow*) win_mgr.getWindow("TradeWindow");
-		if (wflags & Document::TRADE)
-		{
-			static_cast<TradeWindow*>(m_sub_windows["Trade"])->reset();
-			m_sub_windows["Trade"]->update();
-			trade->setVisible(true);
-		}
-		else
-		{
-			trade->setVisible(false);
-		}
-		
-		// Chat Fenster anzeigen wenn entsprechendes Flag gesetzt
-		CEGUI::FrameWindow* chat_window = (CEGUI::FrameWindow*) win_mgr.getWindow("ChatWindow");
-		if (wflags & Document::CHAT)
-		{
-			// Fokus setzen, wenn das Fenster gerade geoeffnet wurde
-			if (!chat_window->isVisible())
+			// Charinfo anzeigen wenn entsprechendes Flag gesetzt
+			CEGUI::FrameWindow* char_info = (CEGUI::FrameWindow*) win_mgr.getWindow("CharInfo");
+			if (wflags & Document::CHARINFO)
 			{
-				CEGUI::Editbox* chatline;
-				chatline = static_cast<CEGUI::Editbox*>(win_mgr.getWindow("Chatline"));
-				chatline->activate();
-			}
-			
-			chat_window->setVisible(true);
-		}
-		else
-		{
-			chat_window->setVisible(false);
-			// Chatzeile deaktivieren
-			CEGUI::Editbox* chatline;
-			chatline = static_cast<CEGUI::Editbox*>(win_mgr.getWindow("Chatline"));
-			chatline->deactivate();
-		}
-		
-		CEGUI::FrameWindow* party_info = (CEGUI::FrameWindow*) win_mgr.getWindow("PartyInfo");
-		if (wflags & Document::PARTY)
-		{
-			party_info->setVisible(true);
-		}
-		else
-		{
-			party_info->setVisible(false);
-		}
-
-		if (m_document->getLocalPlayer()!=0)
-		{
-			// Skilltree anzeigen wenn entsprechendes Flag gesetzt
-			CEGUI::TabControl* skilltree = (CEGUI::TabControl*) win_mgr.getWindow("SkilltreeMage");
-			Player* player = m_document->getLocalPlayer();
-
-			// Skilltree einstellen der der Spielerklasse entspricht
-			if (player->getTypeInfo()->m_subtype == "warrior")
-				skilltree = (CEGUI::TabControl*) win_mgr.getWindow("SkilltreeWarrior");
-			if (player->getTypeInfo()->m_subtype == "archer")
-				skilltree = (CEGUI::TabControl*) win_mgr.getWindow("SkilltreeArcher");
-			if (player->getTypeInfo()->m_subtype == "priest")
-				skilltree = (CEGUI::TabControl*) win_mgr.getWindow("SkilltreePriest");
-
-			if (wflags & Document::SKILLTREE)
-			{
-				skilltree->setVisible(true);
+				char_info->setVisible(true);
 			}
 			else
 			{
-				skilltree->setVisible(false);
+				char_info->setVisible(false);
+			}
+	
+			// Inventar anzeigen wenn entsprechendes Flag gesetzt
+			CEGUI::FrameWindow* inventory = (CEGUI::FrameWindow*) win_mgr.getWindow("Inventory");
+			if (wflags & Document::INVENTORY)
+			{
+				inventory->setVisible(true);
+			}
+			else
+			{
+				inventory->setVisible(false);
 			}
 			
+			// QuestInfo anzeigen wenn entsprechendes Flag gesetzt
+			CEGUI::FrameWindow* quest_info = (CEGUI::FrameWindow*) win_mgr.getWindow("QuestInfo");
+			if (wflags & Document::QUEST_INFO)
+			{
+				quest_info->setVisible(true);
+				m_sub_windows["QuestInfo"]->update();
+			}
+			else
+			{
+				quest_info->setVisible(false);
+			}
 			
+			CEGUI::FrameWindow* minimap = (CEGUI::FrameWindow*) win_mgr.getWindow("MinimapWindow");
+			if (wflags & Document::MINIMAP)
+			{
+				minimap->setVisible(true);
+			}
+			else
+			{
+				minimap->setVisible(false);
+			}
+			
+			CEGUI::FrameWindow* trade = (CEGUI::FrameWindow*) win_mgr.getWindow("TradeWindow");
+			if (wflags & Document::TRADE)
+			{
+				static_cast<TradeWindow*>(m_sub_windows["Trade"])->reset();
+				m_sub_windows["Trade"]->update();
+				trade->setVisible(true);
+			}
+			else
+			{
+				trade->setVisible(false);
+			}
+			
+			// Chat Fenster anzeigen wenn entsprechendes Flag gesetzt
+			CEGUI::FrameWindow* chat_window = (CEGUI::FrameWindow*) win_mgr.getWindow("ChatWindow");
+			if (wflags & Document::CHAT)
+			{
+				// Fokus setzen, wenn das Fenster gerade geoeffnet wurde
+				if (!chat_window->isVisible())
+				{
+					CEGUI::Editbox* chatline;
+					chatline = static_cast<CEGUI::Editbox*>(win_mgr.getWindow("Chatline"));
+					chatline->activate();
+				}
+				
+				chat_window->setVisible(true);
+			}
+			else
+			{
+				chat_window->setVisible(false);
+				// Chatzeile deaktivieren
+				CEGUI::Editbox* chatline;
+				chatline = static_cast<CEGUI::Editbox*>(win_mgr.getWindow("Chatline"));
+				chatline->deactivate();
+			}
+			
+			CEGUI::FrameWindow* party_info = (CEGUI::FrameWindow*) win_mgr.getWindow("PartyInfo");
+			if (wflags & Document::PARTY)
+			{
+				party_info->setVisible(true);
+			}
+			else
+			{
+				party_info->setVisible(false);
+			}
+	
+			if (m_document->getLocalPlayer()!=0)
+			{
+				// Skilltree anzeigen wenn entsprechendes Flag gesetzt
+				CEGUI::TabControl* skilltree = (CEGUI::TabControl*) win_mgr.getWindow("SkilltreeMage");
+				Player* player = m_document->getLocalPlayer();
+	
+				// Skilltree einstellen der der Spielerklasse entspricht
+				if (player->getTypeInfo()->m_subtype == "warrior")
+					skilltree = (CEGUI::TabControl*) win_mgr.getWindow("SkilltreeWarrior");
+				if (player->getTypeInfo()->m_subtype == "archer")
+					skilltree = (CEGUI::TabControl*) win_mgr.getWindow("SkilltreeArcher");
+				if (player->getTypeInfo()->m_subtype == "priest")
+					skilltree = (CEGUI::TabControl*) win_mgr.getWindow("SkilltreePriest");
+	
+				if (wflags & Document::SKILLTREE)
+				{
+					skilltree->setVisible(true);
+				}
+				else
+				{
+					skilltree->setVisible(false);
+				}
+				
+				
+			}
 		}
+		
 		m_document->setModified(m_document->getModified() & ~Document::WINDOWS_MODIFIED);
+	}
+	
+	if (wflags & Document::OPTIONS)
+	{
+		// Fenster Optionen aktualisieren
+		m_sub_windows["Options"]->update();
 	}
 
 	// Objekte aus dem Dokument darstellen
@@ -511,6 +536,8 @@ bool MainWindow::setupGameScreen()
 		setupMinimap();
 		
 		setupTrade();
+		
+		
 		
 	}
 	catch (CEGUI::Exception e)
@@ -2038,6 +2065,15 @@ bool MainWindow::keyPressed(const OIS::KeyEvent &evt) {
 	unsigned int ch = evt.text;
 	
 	DEBUG5("keycode %x",evt.key);
+	if (m_document->getGUIState()->m_shown_windows & Document::OPTIONS)
+	{
+		if (static_cast<OptionsWindow*>(m_sub_windows["Options"])->requestsForKey())
+		{
+			static_cast<OptionsWindow*>(m_sub_windows["Options"])->setKeyCode(evt.key);
+			return true;
+		}
+	}
+	
 	bool ret =m_cegui_system->injectKeyDown(evt.key);
 	
 	ret |= m_cegui_system->injectChar(ch);

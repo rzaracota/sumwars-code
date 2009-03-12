@@ -36,6 +36,7 @@
 #include "questinfo.h"
 #include "minimapwindow.h"
 #include "tradewindow.h"
+#include "optionswindow.h"
 
 /**
  * \class MainWindow
