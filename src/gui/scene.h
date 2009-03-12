@@ -503,6 +503,7 @@ class Scene
 	 * \brief Vorschau Objekt auf den aktuellen Spieler
 	 */
 	std::string m_temp_player;
+	
 };
 
 #endif

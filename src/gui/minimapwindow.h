@@ -35,39 +35,8 @@ class MinimapWindow : public Window
 		}
 
 		
-		/**
-		 * \fn void resetShift()
-		 *  \brief Setzt Verschiebung auf 0
-		 */
-		void resetShift()
-		{
-			m_shift = Vector(0,0);
-		}
-		
 	private:
-	/**
-	 * \var Ogre::Camera* m_minimap_camera
-	 * \brief Kamera mit der die Minimap erzeugt wird
-	 */
-	Ogre::Camera* m_minimap_camera;
 	
-	/**
-	*  \var Ogre::RenderTarget* m_minimap_rt
-	* \brief Rendertarget for the minimap
-	*/
-	Ogre::RenderTarget* m_minimap_rt;
-	
-	/**
-	 * \var Ogre::TexturePtr m_minimap_texture
-	 * \brief Textur der Minimap
-	 */
-	Ogre::TexturePtr m_minimap_texture;
-	
-	/**
-	 * \var Vector m_shift
-	 * \brief Wert um den die Karte verschoben ist
-	 */
-	Vector m_shift;
 	
 	/**
 	 * \var short m_region_id
