@@ -1,8 +1,7 @@
 <Quest name="Ein Freund in Not" table_name="rescue_willard">
 	
 	<Init>
-		rescue_willard.finished = false;
-		rescue_willard.started = false;
+		rescue_willard.freed = false;
 	</Init>
 	
 	<Description>
@@ -14,35 +13,37 @@
 	<NPC refname="Fenor Marken">
 		<Topic name="rescue_willard" start_option="Willard">
 			<Condition>
-				return (not rescue_willard.finished)
+				if (rescue_willard.finished == true) then
+					return false
+				else
+					return true
+				end
 			</Condition>
 			<Effect>
-				if (rescue_willard.started) then
-					if (rescue_willard.finished) then
+				if (rescue_willard.started == true) then
+					if (rescue_willard.freed == true) then
 						speak('player', _("Wir haben Willard befreit."),1000)
-						speak('Fenor Marken',_("Super."),1000);
-						changeTopic('rescue_willard_reward');
+						speak('Fenor Marken',_("Super."),1000)
+						changeTopic('rescue_willard_reward')
 					else
-						speak('Fenor Marken',_("Ihr habt Willard noch nicht befreit."),1000);
+						speak('Fenor Marken',_("Ihr habt Willard noch nicht befreit."),1000)
 					end
 				else
-					speak('Fenor Marken',_("Ein ..."),1000);
-					speak('player',_("... Gespraech"),1000);
-					speak('Fenor Marken',_("Werdet ihr ihn befreien?"),1000);
-					addQuestion(_("Quest annehmen?"));
-					addAnswer(_("Yes"),'start_rescue_willard_quest'); 
-					addAnswer(_("No"),'end');
+					speak('Fenor Marken',_("Ein ..."),1000)
+					speak('player',_("... Gespraech"),1000)
+					speak('Fenor Marken',_("Werdet ihr ihn befreien?"),1000)
+					addQuestion(_("Quest annehmen?"))
+					addAnswer(_("Yes"),'start_rescue_willard_quest')
+					addAnswer(_("No"),'end')
 				end
 			</Effect>
 		</Topic>
 		
-		<Topic name="rescue_willard_reward" start_option="Willard (Belohnung)">
-			<Condition>
-				if (rescue_willard.finished == false) then return false end;
-			</Condition>
+		<Topic name="rescue_willard_reward">
 			<Effect>
 				speak('Fenor Marken',_("Danke. Jetzt bekommt ihr eurer Gold."),1000);
 				speak('player', _("Yeah"),1000)
+				rescue_willard.finished = true
 			</Effect>
 		</Topic>
 		
@@ -101,12 +102,12 @@
 				end
 			</Condition>
 			<Effect>
-				rescue_willard.finished = true
 				rescue_willard_tmp.willard = createObject('peasant', 'locWillard')
 				setRefName(rescue_willard_tmp.willard, 'Willard')
 				createDialogue()
 				addSpeaker(rescue_willard_tmp.willard,'willard')
 				speak('willard','Ich bin euch zu grossem Dank verpflichtet.',1000)
+				rescue_willard.freed = true
 			</Effect>
 		</Event>
 	</Region>

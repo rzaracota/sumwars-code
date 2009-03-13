@@ -346,7 +346,7 @@
 		
 		<Event trigger ="create_region" once = "true">
 			<Effect>
-				addArea('WillardArea','circle','locWillard',10);
+				addArea('WillardArea','circle','locWillard',20);
 				addArea('WillardEnemiesArea','circle','locWillard',50);
 				if (rescue_willard.finished == false) then
 					rescue_willard_tmp.monsters = createMonsterGroup("goblins","locWillard")
