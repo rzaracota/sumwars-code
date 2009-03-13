@@ -2139,6 +2139,11 @@ int Player::getValue(std::string valname)
 		lua_pushinteger(EventSystem::getLuaState() , m_skill_points );
 		return 1;
 	}
+	else if (valname =="gold")
+	{
+		lua_pushinteger(EventSystem::getLuaState() , getEquipement()->getGold() );
+		return 1;
+	}
 	else
 	{
 		int ret = Creature::getValue(valname);
@@ -2162,6 +2167,22 @@ bool Player::setValue(std::string valname)
 		m_skill_points = lua_tointeger(EventSystem::getLuaState() ,-1);
 		lua_pop(EventSystem::getLuaState(), 1);
 		m_event_mask |= NetEvent::DATA_SKILL_ATTR_POINTS;
+		return true;
+	}
+	else if (valname =="gold")
+	{
+		int gold = lua_tointeger(EventSystem::getLuaState() ,-1);
+		getEquipement()->setGold(gold);
+		lua_pop(EventSystem::getLuaState(), 1);
+		
+		NetEvent event;
+		event.m_type =  NetEvent::PLAYER_ITEM_PICKED_UP ;
+		event.m_data = Equipement::GOLD;
+		event.m_id = getId();
+		
+		World::getWorld()->insertNetEvent(event);
+		
+		lua_pushinteger(EventSystem::getLuaState() , getEquipement()->getGold() );
 		return true;
 	}
 	else
