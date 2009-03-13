@@ -621,7 +621,7 @@ void Scene::updateObject(WorldObject* obj)
 		obj_ent = m_scene_manager->getEntity(name);
 		if (obj_ent == 0)
 		{
-				ERRORMSG("object %s not found",name.c_str());
+				ERRORMSG("Object %s not found",name.c_str());
 		}
 
 		if (anim_name != "")

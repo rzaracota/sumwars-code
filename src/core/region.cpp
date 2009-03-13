@@ -1434,6 +1434,11 @@ void Region::createObjectFromString(CharConv* cv, WorldObjectMap* players)
 		obj = (*players)[id];
 	}
 
+	if (obj==0)
+	{
+		ERRORMSG("failed to create Object %s",subt);
+	}
+	
 	obj->fromString(cv);
 
 

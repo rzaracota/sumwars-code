@@ -98,7 +98,7 @@ WorldObject* ObjectFactory::createObject(WorldObject::TypeInfo::ObjectType type,
 	{
 		ret = new Player(id,subtype);
 	}
-	else if (type ==WorldObject::TypeInfo::TYPE_MONSTER)
+	else if (type ==WorldObject::TypeInfo::TYPE_MONSTER || type ==WorldObject::TypeInfo::TYPE_NPC)
 	{
 		DEBUG5("requested subtype: %s",subtype.c_str());
 		MonsterBasicData* mdata;
