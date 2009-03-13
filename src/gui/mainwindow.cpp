@@ -696,14 +696,27 @@ bool MainWindow::setupObjectInfo()
 	CEGUI::Window* label;
 
 	// Leiste fuer Informationen
+	
+	CEGUI::ProgressBar* bar = static_cast<CEGUI::ProgressBar*>(win_mgr.createWindow("TaharezLook/ProgressBar", "MonsterHealthProgressBar"));
+	m_game_screen->addChildWindow(bar);
+	bar->setPosition(CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim( 0.02f)));
+	bar->setSize(CEGUI::UVector2(cegui_reldim(0.6f), cegui_reldim( 0.07f)));
+	bar->setWantsMultiClickEvents(false);
+	bar->setProperty("MousePassThroughEnabled","true");
+	bar->setProgress(1.0);
+	
+	
 	label = win_mgr.createWindow("TaharezLook/StaticText", "ObjectInfoLabel");
 	m_game_screen->addChildWindow(label);
-	label->setProperty("FrameEnabled", "true");
-	label->setProperty("BackgroundEnabled", "true");
+	label->setProperty("FrameEnabled", "false");
+	label->setProperty("BackgroundEnabled", "false");
+	label->setProperty("HorzFormatting", "HorzCentred");
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim( 0.02f)));
 	label->setSize(CEGUI::UVector2(cegui_reldim(0.6f), cegui_reldim( 0.07f)));
-	label->setAlpha(0.5);
+	label->setAlpha(1.0);
 	label->setProperty("MousePassThroughEnabled","true");
+	
+	
 
 	return true;
 }
@@ -906,7 +919,8 @@ void MainWindow::updateObjectInfo()
 	// Fenstermanager
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::Window* label = win_mgr.getWindow("ObjectInfoLabel");
-
+	CEGUI::ProgressBar* bar = static_cast<CEGUI::ProgressBar*>(win_mgr.getWindow( "MonsterHealthProgressBar"));
+	
 	// Position der Maus
 	float x = m_mouse->getMouseState().X.abs;
 	float y = m_mouse->getMouseState().Y.abs;
@@ -1000,6 +1014,7 @@ void MainWindow::updateObjectInfo()
 			m_document->getGUIState()->m_cursor_object_id =0;
 
 			label->setVisible(false);
+			bar->setVisible(false);
 		}
 	}
 
@@ -1012,7 +1027,8 @@ void MainWindow::updateObjectInfo()
 		// es gibt ein ein Objekt unterm Mauszeiger
 		m_document->getGUIState()->m_cursor_item_id =0;
 		label->setVisible(true);
-
+		bar->setVisible(true);
+		
 		// ID des Objektes ermitteln
 		int pos = objname.find(":");
 		std::string idstring = objname.substr(pos+1);
@@ -1038,7 +1054,16 @@ void MainWindow::updateObjectInfo()
 				// Objekt ist ein Lebewesen
 				// Lebenspunkte anfuegen
 				cr = static_cast<Creature*>(cwo);
-				string_stream << " " << std::max(0,(int) (cr->getDynAttr()->m_health / cr->getBaseAttrMod()->m_max_health*100)) <<"%";
+				//string_stream << " " << std::max(0,(int) (cr->getDynAttr()->m_health / cr->getBaseAttrMod()->m_max_health*100)) <<"%";
+				float perc = cr->getDynAttr()->m_health / cr->getBaseAttrMod()->m_max_health;
+				if (bar->getProgress() != perc)
+				{
+					bar->setProgress(perc);
+				}
+			}
+			else
+			{
+				bar->setVisible(false);
 			}
 		}
 		else
