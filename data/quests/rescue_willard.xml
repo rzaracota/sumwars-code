@@ -78,9 +78,14 @@
 	</NPC>
 	
 	
-	<Event trigger ="player_moved" once = "true">
+	<Region name="aisMeadow">
+		<Event trigger ="player_moved" once = "true">
 			<Condition>
-				return (unitIsInArea(trigger.player,"WillardArea"))
+				if (rescue_willard.started == true and rescue_willard.finished == false) then
+					return (unitIsInArea(trigger.player,"WillardArea"))
+				else
+					return false
+				end
 			</Condition>
 			<Effect>
 				createDialogue()
@@ -89,13 +94,11 @@
 			</Effect>
 		</Event>
 	
-	
-	<Region name="aisMeadow">
 		<Event trigger ="unit_die">
 			<Condition>
 				local list = getMonstersInArea('WillardEnemiesArea')
 				printlist(list)
-				if (list[1] == nil) then
+				if (list[1] == nil and rescue_willard.started == true and rescue_willard.finished == false) then
 					return true
 				else
 					return false

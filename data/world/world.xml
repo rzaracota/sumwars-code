@@ -354,7 +354,7 @@
 			</Effect>
 		</Event>
 		
-		<Event trigger ="player_moved" once = "true">
+		<!--<Event trigger ="player_moved" once = "true">
 			<Condition>
 				return (unitIsInArea(trigger.player,"WillardArea"))
 			</Condition>
@@ -365,7 +365,7 @@
 			</Effect>
 		</Event>
 		
-		<!--<Event trigger ="create_region" once = "true">
+		<Event trigger ="create_region" once = "true">
 			<Effect>
 				willard = createObject('peasant', 'locWillard');
 				setRefName(willard, 'Willard');
