@@ -10,7 +10,6 @@
 #include "debug.h"
 #include <queue>
 
-#define REQ_PORT 5331
 
 /**
  * \enum NetStatus
@@ -65,7 +64,7 @@ class Network
 		 * \return Status der Methode
 		 *
 		 */
-		virtual NetStatus init( int auth_port=REQ_PORT )
+		virtual NetStatus init( int auth_port )
 		{
 			return NET_OK;
 		};

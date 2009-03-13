@@ -132,7 +132,7 @@ class ServerNetwork: public Network
 		* \return Status der Methode
 		*
 		*/
-		virtual NetStatus init( int auth_port=REQ_PORT );
+		virtual NetStatus init( int auth_port );
 
 
 

@@ -84,13 +84,14 @@ public:
 	//Fields
 	//Constructors
 	/**
-	 * \fn World(bool server, bool cooperative)
+	 * \fn World(bool server,  bool cooperative, int max_players)
 	 * \param server Gibt an, ob der Rechner der Server ist
 	 * \brief Konstruktor
 	 * \param cooperative wenn auf true gesetzt, sind alle Spieler automatisch verbuendet
+	 * \param max_players Maximale Spieleranzahl
 	 * Legt ein neues World Objekt an
 	 */
-	World(bool server , bool cooperative);
+	World(bool server ,  bool cooperative, int max_players);
 	
 	
 	/**
@@ -102,11 +103,12 @@ public:
 	
 	
 	/**
-	 * \fn bool init()
+	 * \fn bool init(int port)
 	 * \brief initialisiert die Welt
+	 * \param port Port fuer den Netzverkehr
 	 * \return true, wenn kein Fehler aufgetreten ist, sonst false
 	 */
-	bool init();
+	bool init(int port );
 	
 	/**
 	 * \fn void createRegion(short region)
@@ -473,15 +475,17 @@ public:
 	}
 	
 	/**
-	 * \fn static void createWorld(bool server, bool cooperative)
+	 * \fn static void createWorld(bool server, int port,  bool cooperative, int max_players)
 	 * \brief Erzeugt die Spielwelt
 	 * \param server auf true gesetzt, wenn der Rechner der Server ist
 	 * \param cooperative wenn auf true gesetzt, sind alle Spieler automatisch verbuendet
+	 * \param port Port fuer den Netzverkehr
+	 *  \param max_players Maximale Spieleranzahl
 	 */
-	static void createWorld(bool server, bool cooperative)
+	static void createWorld(bool server, int port, bool cooperative, int max_players)
 	{
-		m_world = new World(server, cooperative);
-		m_world->init();
+		m_world = new World(server, cooperative, max_players);
+		m_world->init(port);
 	}
 	
 	/**

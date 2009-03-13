@@ -156,6 +156,8 @@ class Document
 		QUESTIONBOX = 0x800,
 		TRADE =0x1000,
   		OPTIONS =0x2000,
+		HOST_GAME =0x4000,
+		JOIN_GAME = 0x8000,
 	};
 
 	/**
@@ -476,7 +478,36 @@ class Document
 	 */
 	bool checkSubwindowsAllowed();
 
-
+	/**
+	 * \fn void onButtonStartSinglePlayer()
+	 * \brief Behandelt Klick auf Button Einzelspieler Spiel starten
+	 */
+	void onButtonStartSinglePlayer();
+	
+	/**
+	 * \fn void onButtonHostGame()
+	 * \brief Behandelt Klick auf Button Spiel hosten
+	 */
+	void onButtonHostGame();
+	
+	/**
+	 * \fn void onButtonStartHostGame()
+	 * \brief Behandelt Klick auf Button Spiel starten (Host)
+	 */
+	void onButtonStartHostGame();
+	
+	 /**
+	  * \fn void onButtonJoinGame()
+	  * \brief Behandelt Klick auf Button Spiel joinen
+	  */
+	void onButtonJoinGame();
+	
+	/**
+	 * \fn void onButtonStartJoinGame()
+	 * \brief Behandelt Klick auf Button Spiel starten (Client)
+	 */
+	void onButtonStartJoinGame();
+	
 	/**
 	 * \fn void onButtonSaveExitClicked ( )
 	 * \brief Button zum Speichern und Beenden des Spiels wurde angeklickt
@@ -766,6 +797,52 @@ class Document
 		return World::getWorld();
 	}
 
+	/**
+	 * \fn std::string& getServerHost()
+	 * \brief Gibt den Server Host aus
+	 */
+	std::string& getServerHost()
+	{
+		return m_server_host;
+	}
+	
+	/**
+	 * \fn int getMaxPlayers()
+	 * \brief Gibt maximale Spieleranzahl aus
+	 */
+	int getMaxPlayers()
+	{
+		return m_max_players;
+	}
+	
+	/**
+	 * \fn void setMaxPlayers(int max_players)
+	 * \brief Setzt die maximale Spieleranzahl
+	 * \param max_players maximale Spieleranzahl
+	 */
+	void setMaxPlayers(int max_players)
+	{
+		m_max_players = max_players;
+	}
+	
+	/**
+	 * \fn int getPort()
+	 * \brief Gibt den Port aus
+	 */
+	int getPort()
+	{
+		return m_port;
+	}
+	
+	/**
+	 * \fn void setPort(int port)
+	 * \brief Setzt den Port
+	 * \param port Port
+	 */
+	void setPort(int port)
+	{
+		m_port = port;
+	}
 
 	// Private stuff
 	private:
@@ -842,12 +919,23 @@ class Document
 	
 	
 		/**
-		* \var char m_server_ip[16]
+		* \var std::string m_server_host
 		* \brief IP des Servers
 		*/
-		char m_server_ip[16];
+		std::string m_server_host;
 	
-	
+		/**
+		 * \var int m_port
+		 * \brief Port ueber den der Netzverkehr laeuft
+		 */
+		int m_port;
+		
+		/**
+		 * \var int m_max_players
+		 * \brief maximale Anzahl Spieler
+		 */
+		int m_max_players;
+		
 		/**
 		* \var bool m_server
 		* \brief true, wenn der aktuelle Rechner der Server ist

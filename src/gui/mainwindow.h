@@ -37,6 +37,7 @@
 #include "minimapwindow.h"
 #include "tradewindow.h"
 #include "optionswindow.h"
+#include "networkwindows.h"
 
 /**
  * \class MainWindow

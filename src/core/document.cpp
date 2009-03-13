@@ -26,8 +26,10 @@ Document::Document()
 	:  m_shortkey_map(), m_special_keys()
 {
    
-	strcpy(m_server_ip,"127.0.0.1");
-
+	m_server_host = "127.0.0.1";
+	m_port = 5331;
+	m_max_players = 8;
+	
 	// Informationen zu Aktionen initialisieren
 	Action::init();
 
@@ -70,7 +72,7 @@ void Document::startGame(bool server)
 	m_server = server;
 
 	// momentan: alle Spiele sind kooperativ
-	World::createWorld(server, true);
+	World::createWorld(server,m_port, true,m_max_players);
 
 	if (server)
 	{
@@ -81,7 +83,7 @@ void Document::startGame(bool server)
 	else
 	{
 		ClientNetwork* net = static_cast<ClientNetwork*>(World::getWorld()->getNetwork());
-		net->serverConnect(m_server_ip,REQ_PORT);
+		net->serverConnect((char*) m_server_host.c_str(),m_port);
 
 	}
 	m_state = LOAD_SAVEGAME;
@@ -700,6 +702,49 @@ bool Document::checkSubwindowsAllowed()
 	ok &= (getState() == RUNNING || getState() == SHUTDOWN_REQUEST);
 	ok &= (getGUIState()->m_shown_windows & (QUESTIONBOX | TRADE)) == 0;
 	return ok;
+}
+
+void Document::onButtonStartSinglePlayer()
+{
+	// Spieler ist selbst der Host
+	setServer(true);
+
+	// Verbindung aufbauen
+	setState(Document::START_GAME);
+}
+
+void Document::onButtonHostGame()
+{
+	DEBUG("Host Game");
+	getGUIState()->m_shown_windows |= HOST_GAME;
+	getGUIState()->m_shown_windows &= ~START_MENU;
+	
+	m_modified |= WINDOWS_MODIFIED;
+}
+
+void Document::onButtonJoinGame()
+{
+	getGUIState()->m_shown_windows |= JOIN_GAME;
+	getGUIState()->m_shown_windows &= ~START_MENU;
+	m_modified |= WINDOWS_MODIFIED;
+}
+
+void Document::onButtonStartHostGame()
+{
+	DEBUG("start single player game");
+	// Spieler ist selbst der Host
+	setServer(true);
+
+	// Verbindung aufbauen
+	setState(Document::START_GAME);
+}
+
+void Document::onButtonStartJoinGame()
+{
+	setServer(false);
+
+	// starten
+	setState(Document::START_GAME);	
 }
 
 void Document::onButtonInventoryClicked()

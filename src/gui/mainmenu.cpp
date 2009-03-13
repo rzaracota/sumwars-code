@@ -18,7 +18,7 @@ MainMenu::MainMenu (Document* doc)
 	start_menu->setProperty("TitlebarEnabled","false");
 	start_menu->setProperty("CloseButtonEnabled","false");
 
-		// Button Einzelspieler
+	// Button Einzelspieler
 	btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", "SinglePlayerButton"));
 	start_menu->addChildWindow(btn);
 	btn->setPosition(CEGUI::UVector2(cegui_reldim(0.1f), cegui_reldim( 0.1f)));
@@ -69,35 +69,18 @@ void MainMenu::updateTranslation()
 
 bool MainMenu::onStartSinglePlayer(const CEGUI::EventArgs& evt)
 {
-	DEBUG("start single player game");
-	// Spieler ist selbst der Host
-	m_document->setServer(true);
-
-	// Verbindung aufbauen
-	m_document->setState(Document::START_GAME);
+	m_document->onButtonStartSinglePlayer();
 	return true;
 }
 
 bool MainMenu::onStartMultiPlayer(const CEGUI::EventArgs& evt)
 {
-	DEBUG("start multi player game");
-
-	m_document->setServer(false);
-
-
-	// Verbindung aufbauen
-	m_document->setState(Document::START_GAME);
+	m_document->onButtonJoinGame();
 	return true;
 }
 
 bool MainMenu::onStartMultiPlayerHost(const CEGUI::EventArgs& evt)
 {
-	DEBUG("start single player game");
-	// Spieler ist selbst der Host
-	m_document->setServer(true);
-
-
-	// Verbindung aufbauen
-	m_document->setState(Document::START_GAME);
+	m_document->onButtonHostGame();
 	return true;
 }

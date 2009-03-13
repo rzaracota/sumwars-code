@@ -119,7 +119,13 @@ bool MainWindow::setupMainMenu()
 		m_sub_windows["Options"] = wnd;
 		m_main_menu->addChildWindow(wnd->getCEGUIWindow());
 		
-
+		wnd = new HostGameWindow(m_document);
+		m_sub_windows["HostGame"] = wnd;
+		m_main_menu->addChildWindow(wnd->getCEGUIWindow());
+		
+		wnd = new JoinGameWindow(m_document);
+		m_sub_windows["JoinGame"] = wnd;
+		m_main_menu->addChildWindow(wnd->getCEGUIWindow());
 	// Verbinden mit dem Document
 	}
 	catch (CEGUI::Exception e)
@@ -205,7 +211,7 @@ void MainWindow::update()
 		{
 			updateMainMenu();
 		}
-		DEBUG5("new shown windows %i",wflags);
+		DEBUG5("new shown windows %x",wflags);
 
 		// Auswahlliste Savegames  anzeigen wenn entsprechendes Flag gesetzt
 		CEGUI::FrameWindow* savelist = (CEGUI::FrameWindow*) win_mgr.getWindow("SavegameMenu");
@@ -229,6 +235,28 @@ void MainWindow::update()
 		else
 		{
 			start_menu->setVisible(false);
+		}
+		
+		CEGUI::FrameWindow* host_game = (CEGUI::FrameWindow*) win_mgr.getWindow("HostGameWindow");
+		if (wflags & Document::HOST_GAME)
+		{
+			m_sub_windows["HostGame"]->update();
+			host_game->setVisible(true);
+		}
+		else
+		{
+			host_game->setVisible(false);
+		}
+		
+		CEGUI::FrameWindow* join_game = (CEGUI::FrameWindow*) win_mgr.getWindow("JoinGameWindow");
+		if (wflags & Document::JOIN_GAME)
+		{
+			m_sub_windows["JoinGame"]->update();
+			join_game->setVisible(true);
+		}
+		else
+		{
+			join_game->setVisible(false);
 		}
 		
 		CEGUI::FrameWindow* options = (CEGUI::FrameWindow*) win_mgr.getWindow("OptionsWindow");

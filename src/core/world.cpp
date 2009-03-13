@@ -34,7 +34,7 @@ World* World::m_world=0;
 /**
  *
  */
- World::World(bool server, bool cooperative)
+ World::World(bool server, bool cooperative, int max_players)
 {
 	m_server = server;
 	m_cooperative = cooperative;
@@ -46,7 +46,7 @@ World* World::m_world=0;
 
 
 
-	m_max_nr_players =8;
+	m_max_nr_players =max_players;
 	if (server)
 	{
 		m_parties.resize(m_max_nr_players);
@@ -63,7 +63,7 @@ World* World::m_world=0;
 }
 
 
-bool World::init()
+bool World::init(int port)
 {
 	Ogre::FileInfoListPtr files;
 	Ogre::FileInfoList::iterator it;
@@ -133,7 +133,7 @@ bool World::init()
 		m_network = new ClientNetwork();
 	}
 
-	if( m_network->init( REQ_PORT )!=NET_OK )
+	if( m_network->init( port )!=NET_OK )
 	{
 		ERRORMSG( "Error occured in network" );
 		return false;
