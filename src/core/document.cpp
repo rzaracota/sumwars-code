@@ -1312,6 +1312,8 @@ void Document::update(float time)
 			m_state = INACTIVE;
 
 			m_modified =GUISHEET_MODIFIED | WINDOWS_MODIFIED;
+			
+			saveSettings();
 			break;
 			
 		default:
@@ -1468,4 +1470,69 @@ void* Document::writeSaveFile(void* doc_ptr)
 }
 
 
+void Document::saveSettings()
+{
+	std::ofstream file;
+	file.open(".sumwars");
+	
+	if (file.is_open())
+	{
+		ShortkeyMap::iterator it;
+		std::set<KeyCode>::iterator jt;
+
+		file << m_shortkey_map.size()<<"\n";
+		for (it = m_shortkey_map.begin(); it != m_shortkey_map.end(); ++it)
+		{
+			file << (int) it->first << " " << (int) it->second << "\n";
+		}
+		
+		file << m_special_keys.size()<<"\n";
+		for (jt = m_special_keys.begin(); jt != m_special_keys.end(); ++jt)
+		{
+			file << (int) *jt<< " ";
+		}
+		file << "\n";
+		file << m_server_host << " " << m_port << " " << m_max_players << "\n";
+		
+		file.close();
+	}
+}
+
+void Document::loadSettings()
+{
+	std::fstream file;
+	file.open(".sumwars", std::ios::in);
+	
+	int key, dest,nr;
+	if (file.is_open())
+	{
+		ShortkeyMap::iterator it;
+		std::set<KeyCode>::iterator jt;
+		
+		m_shortkey_map.clear();
+		file >> nr;
+		DEBUG5("short keys %i",nr);
+		for (int i=0; i<nr; i++)
+		{
+			file >> key >> dest;
+			m_shortkey_map[(KeyCode) key] = (ShortkeyDestination) dest;
+		}
+		
+		m_special_keys.clear();
+		file >> nr;
+		DEBUG5("special keys %i",nr);
+		for (int i=0; i<nr; i++)
+		{
+			file >> key;
+			m_special_keys.insert((KeyCode) key);
+		}
+		file >> m_server_host >> m_port >> m_max_players;
+		DEBUG5("server %s port %i player %i",m_server_host.c_str(), m_port, m_max_players);
+		file.close();
+	}
+	else
+	{
+		DEBUG5(".sumwars not found");
+	}
+}
 

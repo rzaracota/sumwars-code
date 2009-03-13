@@ -53,7 +53,7 @@ void SoundSystem::loadSoundFile(std::string file, SoundName sname)
 	}
 	else
 	{
-		ERRORMSG( "could not load %s",file.c_str());
+		ERRORMSG( "Could not load %s",file.c_str());
 	}
 }
 
@@ -204,7 +204,7 @@ SoundObject* SoundSystem::createSoundObject(std::string name)
 {
 	if (m_sound_objects.count(name)>0)
 	{
-		ERRORMSG("sound object with name %s already exists",name.c_str());
+		ERRORMSG("Sound object with name %s already exists",name.c_str());
 		return getSoundObject(name);
 	}
 	
@@ -238,7 +238,7 @@ void SoundSystem::deleteSoundObject(std::string name)
 	}
 	else
 	{
-		ERRORMSG("cant delete Sound Object %s",name.c_str());
+		ERRORMSG("Cant delete Sound Object %s",name.c_str());
 	}
 }
 

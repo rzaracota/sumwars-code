@@ -775,6 +775,18 @@ class Document
 	 * \brief Baut Verbindung zum Server auf
 	 */
 	void startGame(bool server);
+	
+	/**
+	 * \fn void saveSettings()
+	 * \brief Speichert die Einstellungen
+	 */
+	void saveSettings();
+	
+	/**
+	 * \fn void loadSettings()
+	 * \brief Laedt die Einstellungen
+	 */
+	void loadSettings();
 
 	/**
 	 * \fn Player* getLocalPlayer()

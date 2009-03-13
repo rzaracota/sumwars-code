@@ -499,6 +499,8 @@ bool Application::createDocument()
 	// CHEATS
 	m_document->installShortkey(OIS::KC_L,(Document::ShortkeyDestination) (Document::CHEAT+0));
 
+	m_document->loadSettings();
+	
 	return true;
 }
 
