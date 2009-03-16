@@ -187,6 +187,10 @@
 		<Unit filename="gui\mainwindow.h" />
 		<Unit filename="gui\minimapwindow.cpp" />
 		<Unit filename="gui\minimapwindow.h" />
+		<Unit filename="gui\networkwindows.cpp" />
+		<Unit filename="gui\networkwindows.h" />
+		<Unit filename="gui\optionswindow.cpp" />
+		<Unit filename="gui\optionswindow.h" />
 		<Unit filename="gui\partyinfo.cpp" />
 		<Unit filename="gui\partyinfo.h" />
 		<Unit filename="gui\questinfo.cpp" />
