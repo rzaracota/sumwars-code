@@ -4,12 +4,13 @@
 Network::Network()
 {
 	m_peer = RakNetworkFactory::GetRakPeerInterface();
-	
+
 	m_peer->SetOccasionalPing(true);
-	
+
 	// m_peer->ApplyNetworkSimulator( 0, 100, 0);
 	// m_peer->ApplyNetworkSimulator( 0, 100, 500);
 	// m_peer->ApplyNetworkSimulator( 0, 100, 2000);
+	DEBUG("raknet enum %i", ID_USER_PACKET_ENUM);
 }
 
 Network::~Network()

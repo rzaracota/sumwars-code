@@ -43,7 +43,8 @@ enum PackageType
 	/**
 	 * \brief Anfrage des Clients an den Server
 	 */
-	PTYPE_C2S_REQUEST =ID_USER_PACKET_ENUM,
+	//PTYPE_C2S_REQUEST =ID_USER_PACKET_ENUM,
+	PTYPE_C2S_REQUEST =200,
 
  /**
   * \brief Antwort des Servers auf eine Anfrage des Clients
@@ -89,27 +90,27 @@ enum PackageType
 	 * \brief Informationen zur Initialisierung
 	 */
 	PTYPE_S2C_INITIALISATION,
- 
+
 	/**
 	 * \brief Information, dass beim Server der Spieler die Region gewechselt hat
 	 */
 	PTYPE_S2C_REGION_CHANGED,
- 
+
 	/**
 	* \brief Nachricht vom Server an den Client
 	*/
  	PTYPE_S2C_MESSAGE,
- 
+
 	/**
 	* \brief Nachricht vom Client an den Server
 	*/
  	PTYPE_C2S_MESSAGE,
-  
+
 	/**
 	* \brief Partyinformationen vom Server an den Client
 	*/
 	PTYPE_S2C_PARTY,
- 
+
  	/**
   	* \brief Lua Code vom Server an den Client
   	*/
@@ -222,29 +223,29 @@ enum Button
 	BUTTON_LEARN_ABILITY = 14,
 
 	DROP_ITEM = 20,
- 
+
 	BUTTON_ANSWER=21,
- 
+
 	BUTTON_MEMBER_ACCEPT = 30,
- 
+
  	BUTTON_MEMBER_REJECT = 31,
-  
+
 	BUTTON_APPLY = 32,
 
 	BUTTON_KICK = 33,
 
 	BUTTON_PEACE = 34,
- 
+
 	BUTTON_WAR = 35,
- 
+
 	BUTTON_LEAVE = 36,
- 
+
 	BUTTON_TRADE_ITEM_LEFT=37,
 
 	BUTTON_TRADE_ITEM_RIGHT=38,
- 
+
 	BUTTON_TRADE_SELL=40,
- 
+
 	BUTTON_TRADE_END = 39,
 
 	DEBUG_SIGNAL=100,
