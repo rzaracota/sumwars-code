@@ -1,9 +1,67 @@
 <!-- SHIELDS -->
 
-<!-- Tartsche 1-->
+<!-- Tartsche ;Name nachschlagen-->
+<Item type="shield" subtype="tart_shd" name="tart" size="medium">
+	 <Image image="set:shield.png image:full_image" />
+	<Mesh file="shield.mesh" />
+	<Attribute
+		level_requirement="1"
+		character_requirement="15"
+		min_enchant="20"
+		max_enchant="40"
+		modchance_armor_mod="0.05"
+		modchance_block_mod="0.3"
+		modchance_resist_phys_mod="0.05"
+		modchance_resist_fire_mod="0.15"
+		modchance_resist_ice_mod="0.15"
+		modchance_resist_air_mod="0.15"
+		modchance_resist_all_mod="0.15"
+	/>
+
+  <EquipEffect
+		darmor="5"
+		dblock="35"
+  >
+	</EquipEffect>
+
+	<DropChance
+		level="1"
+		probability="1.0"
+	/>
+</Item>
+
 <!-- Buckler 3-->
+<Item type="shield" subtype="buck_shd" name="buckler" size="medium">
+	 <Image image="set:shield.png image:full_image" />
+	<Mesh file="shield.mesh" />
+	<Attribute
+		level_requirement="3"
+		character_requirement="15"
+		min_enchant="30"
+		max_enchant="60"
+		modchance_armor_mod="0.05"
+		modchance_block_mod="0.3"
+		modchance_resist_phys_mod="0.05"
+		modchance_resist_fire_mod="0.15"
+		modchance_resist_ice_mod="0.15"
+		modchance_resist_air_mod="0.15"
+		modchance_resist_all_mod="0.15"
+	/>
+
+  <EquipEffect
+		darmor="7"
+		dblock="55"
+  >
+	</EquipEffect>
+
+	<DropChance
+		level="3"
+		probability="1.0"
+	/>
+</Item>
+
 <!-- Holzschild 5 XX-->
-<Item type="shield" subtype="wood_shd" name="wooden shield" size="medium">
+<Item type="shield" subtype="wood_shd" name="wood shield" size="medium">
 	 <Image image="set:shield.png image:full_image" />
 	<Mesh file="shield.mesh" />
 	<Attribute
@@ -21,8 +79,8 @@
 	/>
 
   <EquipEffect
-		darmor="3"
-		dblock="15"
+		darmor="10"
+		dblock="70"
   >
 	</EquipEffect>
 
@@ -34,16 +92,14 @@
 
 
 <!-- Bronzeschild 8-->
-
-<!-- Eisenschild 13 XX-->
-<Item type="shield" subtype="iron_shd" name="iron shield" size="medium">
-	<Image image="set:shield.png image:full_image" />
+<Item type="shield" subtype="bronze_shd" name="bronze shield" size="medium">
+	 <Image image="set:shield.png image:full_image" />
 	<Mesh file="shield.mesh" />
 	<Attribute
 		level_requirement="8"
 		character_requirement="15"
 		min_enchant="50"
-		max_enchant="170"
+		max_enchant="160"
 		modchance_armor_mod="0.05"
 		modchance_block_mod="0.3"
 		modchance_resist_phys_mod="0.05"
@@ -54,19 +110,78 @@
 	/>
 
   <EquipEffect
-		darmor="8"
-		dblock="20"
+		darmor="11"
+		dblock="90"
   >
 	</EquipEffect>
 
 	<DropChance
-		level="5"
+		level="8"
+		probability="1.0"
+	/>
+</Item>
+
+<!-- Eisenschild 13 XX-->
+<Item type="shield" subtype="iron_shd" name="iron shield" size="medium">
+	<Image image="set:shield.png image:full_image" />
+	<Mesh file="shield.mesh" />
+	<Attribute
+		level_requirement="13"
+		character_requirement="15"
+		min_enchant="60"
+		max_enchant="190"
+		modchance_armor_mod="0.05"
+		modchance_block_mod="0.3"
+		modchance_resist_phys_mod="0.05"
+		modchance_resist_fire_mod="0.15"
+		modchance_resist_ice_mod="0.15"
+		modchance_resist_air_mod="0.15"
+		modchance_resist_all_mod="0.15"
+	/>
+
+  <EquipEffect
+		darmor="15"
+		dblock="120"
+  >
+	</EquipEffect>
+
+	<DropChance
+		level="13"
 		probability="1.0"
 	/>
 </Item>
 
 
 <!-- Stahlschild 19-->
+<Item type="shield" subtype="steel_shd" name="steel shield" size="medium">
+	<Image image="set:shield.png image:full_image" />
+	<Mesh file="shield.mesh" />
+	<Attribute
+		level_requirement="19"
+		character_requirement="15"
+		min_enchant="100"
+		max_enchant="250"
+		modchance_armor_mod="0.05"
+		modchance_block_mod="0.3"
+		modchance_resist_phys_mod="0.05"
+		modchance_resist_fire_mod="0.15"
+		modchance_resist_ice_mod="0.15"
+		modchance_resist_air_mod="0.15"
+		modchance_resist_all_mod="0.15"
+	/>
+
+  <EquipEffect
+		darmor="20"
+		dblock="160"
+  >
+	</EquipEffect>
+
+	<DropChance
+		level="19"
+		probability="1.0"
+	/>
+</Item>
+
 <!-- Verst�rkter Rundschild -->
 <!-- Gl�hender Schild -->
 <!-- Klingenschild -->

@@ -197,7 +197,7 @@
 	
 	<Region id="1000" name="testregion">
 		
-		<Settings dimx="8" dimy="8" region_template="test_region_templ" />
+		<Settings dimx="8" dimy="8" region_template="test" />
 
 		<Exits>
 			<Exit name="exit_north" destination_region="region0" destination_location="entry_south" >

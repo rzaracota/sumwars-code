@@ -1,21 +1,23 @@
-<Item type="gloves" subtype="leath_arm" name="leather armor" size="medium">
+<!-- Tuchruestung -->
+<!-- WAR, PRI, ARC, MAG-->
+<Item type="armor" subtype="cloth_arm" name="cloth armor" size="medium">
 	<Image image="set:noMedia.png image:full_image" />
-	<Mesh file="potion.mesh" />
+	<Mesh file="armor.mesh" />
 	<Attribute
-			  level_requirement="1"
-			  character_requirement="15"
-			  min_enchant="20"
-			  max_enchant="40"
-			  modchance_armor_mod="0.12"
-			  modchance_resist_phys_mod="0.10"
-			  modchance_resist_fire_mod="0.12"
-			  modchance_resist_ice_mod="0.12"
-			  modchance_resist_air_mod="0.12"
-			  modchance_resist_all_mod="0.1"
-			  modchance_strength_mod="0.1"
-			  modchance_dexterity_mod="0.12"
-			  modchance_magic_power_mod="0.1"
-			  />
+			level_requirement="3"
+			character_requirement="15"
+			min_enchant="20"
+			max_enchant="40"
+			modchance_health_mod="0.11"
+			modchance_armor_mod="0.15"
+			modchance_resist_phys_mod="0.12"
+			modchance_resist_fire_mod="0.05"
+			modchance_resist_ice_mod="0.15"
+			modchance_resist_air_mod="0.1"
+			modchance_resist_all_mod="0.05"
+			modchance_dexterity_mod="0.15"
+			modchance_willpower_mod="0.12"
+			/>
 	
 	<EquipEffect
 				darmor="50"
@@ -23,7 +25,264 @@
 	</EquipEffect>
 	
 	<DropChance
-			   level="5"
+			   level="3"
 			   probability="1.0"
 			   />
 </Item> 
+
+<!-- Lederruestung -->
+<!-- WAR, PRI, ARC, MAG-->
+<Item type="armor" subtype="leath_arm" name="leather armor" size="medium">
+	<Image image="set:noMedia.png image:full_image" />
+	<Mesh file="armor.mesh" />
+	<Attribute
+			level_requirement="3"
+			character_requirement="15" 
+			min_enchant="30"
+			max_enchant="80"
+			modchance_health_mod="0.11"
+			modchance_armor_mod="0.15"
+			modchance_resist_phys_mod="0.12"
+			modchance_resist_fire_mod="0.07"
+			modchance_resist_ice_mod="0.12"
+			modchance_resist_air_mod="0.11"
+			modchance_resist_all_mod="0.05"
+			modchance_dexterity_mod="0.15"
+			modchance_willpower_mod="0.12"
+			/>
+	
+	<EquipEffect
+				darmor="70"
+				>
+	</EquipEffect>
+	
+	<DropChance
+			   level="3"
+			   probability="1.0"
+			   />
+</Item>
+
+<!-- Nietenruestung -->
+<!-- WAR, PRI, ARC-->
+<Item type="armor" subtype="rivet_arm" name="rivet armor" size="medium">
+	<Image image="set:noMedia.png image:full_image" />
+	<Mesh file="armor.mesh" />
+	<Attribute
+			level_requirement="5"
+			character_requirement="15" 
+			min_enchant="40"
+			max_enchant="130"
+			modchance_health_mod="0.11"
+			modchance_armor_mod="0.15"
+			modchance_resist_phys_mod="0.14"
+			modchance_resist_fire_mod="0.08"
+			modchance_resist_ice_mod="0.1"
+			modchance_resist_air_mod="0.1"
+			modchance_resist_all_mod="0.05"
+			modchance_dexterity_mod="0.15"
+			modchance_willpower_mod="0.12"
+			/>
+	
+	<EquipEffect
+				darmor="90"
+				>
+	</EquipEffect>
+	
+	<DropChance
+			   level="5"
+			   probability="1.0"
+			   />
+</Item>
+
+<!-- Banditenruestung -->
+<!-- WAR, ARC-->
+<Item type="armor" subtype="bandit_arm" name="bandit armor" size="medium">
+	<Image image="set:noMedia.png image:full_image" />
+	<Mesh file="armor.mesh" />
+	<Attribute
+			level_requirement="8"
+			character_requirement="15" 
+			min_enchant="40"
+			max_enchant="160"
+			modchance_health_mod="0.11"
+			modchance_armor_mod="0.15"
+			modchance_resist_phys_mod="0.12"
+			modchance_resist_fire_mod="0.07"
+			modchance_resist_ice_mod="0.12"
+			modchance_resist_air_mod="0.11"
+			modchance_resist_all_mod="0.05"
+			modchance_dexterity_mod="0.15"
+			modchance_willpower_mod="0.12"
+			/>
+	
+	<EquipEffect
+				darmor="120"
+				>
+	</EquipEffect>
+	
+	<DropChance
+			   level="8"
+			   probability="1.0"
+			   />
+</Item>
+
+<!-- Novizenruestung -->
+<!-- PRI-->
+<Item type="armor" subtype="novice_arm" name="novice armor" size="medium">
+	<Image image="set:noMedia.png image:full_image" />
+	<Mesh file="armor.mesh" />
+	<Attribute
+			level_requirement="8"
+			character_requirement="15" 
+			min_enchant="60"
+			max_enchant="200"
+			modchance_health_mod="0.11"
+			modchance_armor_mod="0.15"
+			modchance_resist_phys_mod="0.12"
+			modchance_resist_fire_mod="0.1"
+			modchance_resist_ice_mod="0.1"
+			modchance_resist_air_mod="0.1"
+			modchance_resist_all_mod="0.05"
+			modchance_dexterity_mod="0.13"
+			modchance_willpower_mod="0.14"
+			/>
+	
+	<EquipEffect
+				darmor="110"
+				>
+	</EquipEffect>
+	
+	<DropChance
+			   level="8"
+			   probability="1.0"
+			   />
+</Item>
+
+<!-- Soeldnerruestung -->
+<!-- WAR, PRI-->
+<Item type="armor" subtype="merc_arm" name="mercenary armor" size="medium">
+	<Image image="set:noMedia.png image:full_image" />
+	<Mesh file="armor.mesh" />
+	<Attribute
+			level_requirement="13"
+			character_requirement="15" 
+			min_enchant="70"
+			max_enchant="230"
+			modchance_health_mod="0.11"
+			modchance_armor_mod="0.15"
+			modchance_resist_phys_mod="0.12"
+			modchance_resist_fire_mod="0.1"
+			modchance_resist_ice_mod="0.1"
+			modchance_resist_air_mod="0.1"
+			modchance_resist_all_mod="0.05"
+			modchance_dexterity_mod="0.15"
+			modchance_willpower_mod="0.12"
+			/>
+	
+	<EquipEffect
+				darmor="140"
+				>
+	</EquipEffect>
+	
+	<DropChance
+			   level="13"
+			   probability="1.0"
+			   />
+</Item>
+
+<!-- Waldlaeuferhemd -->
+<!-- ARC -->
+<Item type="armor" subtype="rngsh_arm" name="ranger shirt" size="medium">
+	<Image image="set:noMedia.png image:full_image" />
+	<Mesh file="armor.mesh" />
+	<Attribute
+			level_requirement="13"
+			character_requirement="15" 
+			min_enchant="60"
+			max_enchant="200"
+			modchance_health_mod="0.11"
+			modchance_armor_mod="0.15"
+			modchance_resist_phys_mod="0.12"
+			modchance_resist_fire_mod="0.08"
+			modchance_resist_ice_mod="0.1"
+			modchance_resist_air_mod="0.1"
+			modchance_resist_all_mod="0.07"
+			modchance_dexterity_mod="0.15"
+			modchance_willpower_mod="0.12"
+			/>
+	
+	<EquipEffect
+				darmor="130"
+				>
+	</EquipEffect>
+	
+	<DropChance
+			   level="13"
+			   probability="1.0"
+			   />
+</Item>
+
+<!-- Assassinenruestung -->
+<!-- WAR, ARC -->
+<Item type="armor" subtype="assass_arm" name="assassin armor" size="medium">
+	<Image image="set:noMedia.png image:full_image" />
+	<Mesh file="armor.mesh" />
+	<Attribute
+			level_requirement="19"
+			character_requirement="15" 
+			min_enchant="70"
+			max_enchant="250"
+			modchance_health_mod="0.11"
+			modchance_armor_mod="0.15"
+			modchance_resist_phys_mod="0.12"
+			modchance_resist_fire_mod="0.1"
+			modchance_resist_ice_mod="0.1"
+			modchance_resist_air_mod="0.1"
+			modchance_resist_all_mod="0.05"
+			modchance_dexterity_mod="0.15"
+			modchance_willpower_mod="0.12"
+			/>
+	
+	<EquipEffect
+				darmor="210"
+				>
+			<XImmunity type="POISONED"/>
+	</EquipEffect>
+	
+	<DropChance
+			   level="19"
+			   probability="1.0"
+			   />
+</Item>
+
+<!-- Tempelruestung -->
+<!-- PRI -->
+<Item type="armor" subtype="temple_arm" name="temple armor" size="medium">
+	<Image image="set:noMedia.png image:full_image" />
+	<Mesh file="armor.mesh" />
+	<Attribute
+			level_requirement="19"
+			character_requirement="15" 
+			min_enchant="80"
+			max_enchant="280"
+			modchance_health_mod="0.11"
+			modchance_armor_mod="0.15"
+			modchance_resist_phys_mod="0.12"
+			modchance_resist_fire_mod="0.1"
+			modchance_resist_ice_mod="0.1"
+			modchance_resist_air_mod="0.1"
+			modchance_resist_all_mod="0.05"
+			modchance_dexterity_mod="0.15"
+			modchance_willpower_mod="0.12"
+			/>
+	
+	<EquipEffect
+				darmor="200"
+				>
+	</EquipEffect>
+	
+	<DropChance
+			   level="19"
+			   probability="1.0"
+			   />
+</Item>

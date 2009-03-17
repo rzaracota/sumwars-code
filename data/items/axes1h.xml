@@ -69,7 +69,7 @@
 		dattack_speed="200"
 	/>
 	<DropChance
-		level="1"
+		level="3"
 		probability="1.0"
 	/>
 </Item>

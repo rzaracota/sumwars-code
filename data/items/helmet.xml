@@ -1,3 +1,36 @@
+<!-- Kappe -->
+<!-- WAR, PRI, ARC, MAG -->
+<Item type="helmet" subtype="cap_hlm" name="cap" size="medium">
+	<Image image="set:noMedia.png image:full_image" />
+	<Mesh file="helmet.mesh" />
+	<Attribute
+		level_requirement="1"
+		character_requirement="15"
+		min_enchant="60"
+		max_enchant="200"
+		modchance_health_mod="0.1"
+		modchance_armor_mod="0.1"
+		modchance_resist_phys_mod="0.10"
+		modchance_resist_fire_mod="0.15"
+		modchance_resist_ice_mod="0.15"
+		modchance_resist_air_mod="0.15"
+		modchance_resist_all_mod="0.15"
+		modchance_willpower_mod="0.1"
+	/>
+
+  <EquipEffect
+		darmor="2"
+  >
+	</EquipEffect>
+
+	<DropChance
+		level="1"
+		probability="1.0"
+	/>
+</Item> 
+
+<!-- Stahlhelm -->
+<!-- WAR, PRI -->
 <Item type="helmet" subtype="steel_hlm" name="steel helmet" size="medium">
 	<Image image="set:noMedia.png image:full_image" />
 	<Mesh file="helmet.mesh" />
@@ -22,7 +55,7 @@
 	</EquipEffect>
 
 	<DropChance
-		level="5"
+		level="13"
 		probability="1.0"
 	/>
 </Item> 

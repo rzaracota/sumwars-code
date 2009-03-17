@@ -248,7 +248,7 @@ AIR
 		max_health="40"
 		armor="10"
 		block="0"
-		attack="10"
+		attack="25"
 		strength="15"
 		dexterity="10"
 		magic_power="5"
