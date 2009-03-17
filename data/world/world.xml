@@ -314,6 +314,7 @@
 		<Event trigger ="create_region" once = "true">
 			<Effect>
 				fenor = createObject('peasant', 'locFenor');
+				addArea('FenorArea','circle','locFenor',5);
 				setRefName(fenor, 'Fenor Marken');
 			</Effect>
 		</Event>

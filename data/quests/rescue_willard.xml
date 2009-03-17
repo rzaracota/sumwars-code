@@ -68,15 +68,47 @@
 		</Effect>
 	</Topic>
 </NPC>
-	
+	<Region name="medMercCamp" >
+		<Event trigger ="player_moved" once = "true">
+			<Condition>
+				if (rescue_willard.asked ~= true) then
+					return (unitIsInArea(trigger.player,"FenorArea"))
+				else
+					return false
+				end
+			</Condition>
+			<Effect>
+				rescue_willard.asked = true
+				local pos = getPosition(trigger.player)
+				addUnitCommand(fenor,'walk',1000,pos);
+				startTimer("askRescueWillard",1000);
+				addTriggerVariable("player",trigger.player);
+			</Effect>
+		</Event>
+		
+		<Event trigger ="askRescueWillard" once = "true">
+			<Effect>
+				createDialogue()
+				addSpeaker(trigger.player,'player')
+				addSpeaker(fenor,'Fenor Marken')
+				setTopicBase('Fenor Marken')
+				changeTopic('rescue_willard')
+			</Effect>
+		</Event>
+		
+	</Region>
 	
 	<Region name="aisMeadow">
 		<Event trigger ="create_region" once = "true">
 			<Effect>
 				addArea('WillardArea','circle','locWillard',20);
-				addArea('WillardEnemiesArea','circle','locWillard',50);
-				if (rescue_willard.finished == false) then
+				addArea('WillardEnemiesArea','circle','locWillard',15);
+				if (rescue_willard.freed ~= true) then
 					rescue_willard_tmp.monsters = createMonsterGroup("goblins","locWillard")
+				end
+				if (rescue_willard.freed == true and rescue_willard.finished ~= true) then
+					rescue_willard_tmp.willard = createObject('peasant', 'locWillard')
+					setRefName(rescue_willard_tmp.willard, 'Willard')
 				end
 			</Effect>
 		</Event>
@@ -127,7 +159,6 @@
 		<Event trigger ="checkWillardSafety">
 			<Condition>
 				local list = getMonstersInArea('WillardEnemiesArea')
-				printlist(list)
 				if (list[1] == nil and rescue_willard.started == true and rescue_willard.finished == false and rescue_willard.freed == false) then
 					return true
 				else
