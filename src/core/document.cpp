@@ -1187,6 +1187,20 @@ bool Document::onKeyPress(KeyCode key)
 			onButtonOpenChatClicked();
 	
 		}
+		else if (dest == SHOW_MINIMAP)
+		{
+			if (getGUIState()->m_shown_windows & MINIMAP)
+			{
+				getGUIState()->m_shown_windows &= ~MINIMAP;
+			}
+			else
+			{
+				//getGUIState()->m_shown_windows &= ~(PARTY | QUEST_INFO);
+		
+				getGUIState()->m_shown_windows |= MINIMAP;
+			}
+			m_modified |= WINDOWS_MODIFIED;
+		}
 		else if(dest == SHOW_CHATBOX_NO_TOGGLE)
 		{
 			// Chatfenster oeffnen wenn es gerade geschlossen ist

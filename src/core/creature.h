@@ -423,6 +423,9 @@ public:
 	 */
 	virtual std::string getRefName()
 	{
+		if (m_refname =="")
+			return getName();
+		
 		return m_refname;
 	}
 	

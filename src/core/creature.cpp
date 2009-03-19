@@ -136,7 +136,7 @@ bool Creature::init()
 
 	m_event_mask =0;
 	
-	m_refname = getTypeInfo()->m_subtype;
+	m_refname = "";
 	getTradeInfo().m_trade_partner =0;
 
 	return tmp;

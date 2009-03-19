@@ -162,13 +162,14 @@ class MainWindow :
 	
 	/**
 	 * \fn void setupMinimap()
-	 * \brief erstellt Fenster Questinfo
+	 * \brief erstellt Fenster Minimap
 	 */
 	void setupMinimap();
+		
 	
 	/**
 	 * \fn void setupTrade()
-	 * \brief erstellt Fenster Questinfo
+	 * \brief erstellt Fenster Handel
 	*/
 	void setupTrade();
 	

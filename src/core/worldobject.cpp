@@ -122,8 +122,6 @@ void WorldObject::fromString(CharConv* cv)
 string WorldObject::getName()
 {
 	return ObjectFactory::getObjectName(m_type_info.m_subtype);
-
-
 }
 
 
