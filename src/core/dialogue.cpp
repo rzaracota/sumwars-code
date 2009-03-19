@@ -267,7 +267,15 @@ void Dialogue::changeTopic(std::string topic)
 
 	if (topic == "start")
 	{
-		addQuestion(gettext("which Topic"));
+		Creature* npc = dynamic_cast<Creature*>( m_region->getObject( getSpeaker(m_topic_base) ) );
+		if (npc ==0)
+		{
+			addQuestion(gettext("which Topic"));
+		}
+		else
+		{
+			addQuestion(npc->getRefName());
+		}
 
 		// Alle Antworten hinzufuegen, deren Themen freigeschaltet sind
 
