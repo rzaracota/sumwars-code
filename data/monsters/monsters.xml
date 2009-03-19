@@ -1162,9 +1162,14 @@ AIR
 					resistances_cap_fire="50"
 					walk_speed="2500"
 					attack_speed="2000"
-					step_length="0.5"
+					step_length="1.2"
 					attack_range="0.5"
 					>
+		
+		<Ability type="noaction">
+			<Animation name="idle" />
+		</Ability>
+		
 		<Ability type="walk">
 			<Animation name="walkOneHand" />
 		</Ability>

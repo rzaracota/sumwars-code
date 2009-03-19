@@ -1667,7 +1667,7 @@ void Creature::insertScriptCommand(Command &cmd, float time)
 		clearCommand(false);
 	}
 	m_script_commands.push_back(std::make_pair(cmd,time));	
-	DEBUG5("insert script command %i",cmd.m_type);
+	DEBUG("insert script command %i",cmd.m_type);
 }
 
 

@@ -143,6 +143,12 @@ bool Monster::update(float time)
 
 void Monster::updateCommand()
 {
+	// keine AI wenn Kommando per Script vorgegeben
+	if (hasScriptCommand())
+	{
+		Creature::updateCommand();
+	}
+	
 	// bei Cutscenes keine AI verwenden
 	if (getRegion()->getCutsceneMode())
 		return;
