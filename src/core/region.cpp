@@ -217,9 +217,14 @@ bool Region::getFreePlace(Shape* shape, short layer, Vector & pos, WorldObject* 
 	std::queue<int> fields;
 
 	float c = 1.1;
+	
 	// Position in 0.5 x 0.5 Feldern
 	int sx = (int) ((pos.m_x/c) + 0.5);
 	int sy = (int) ((pos.m_y/c) + 0.5);
+	
+	float fx = pos.m_x - sx*c;
+	float fy = pos.m_y - sy*c;
+	
 	int i;
 	fields.push(sx*10000+sy);
 
@@ -245,7 +250,7 @@ bool Region::getFreePlace(Shape* shape, short layer, Vector & pos, WorldObject* 
 		DEBUG5("testing field %f %f",sx*c,sy*c);
 
 		// Testen ob dort keine festen Objekte sind
-		s.m_center = Vector(sx*c,sy*c);
+		s.m_center = Vector(sx*c +fx,sy*c + fy);
 
 		res.clear();
 		getObjectsInShape(&s,&res,layer,WorldObject::FIXED,omit,true);
@@ -324,7 +329,7 @@ bool Region::getFreePlace(Shape* shape, short layer, Vector & pos, WorldObject* 
 
 	}
 
-	// keine Stelle gefunden um das Item zu droppen
+	// keine Stelle gefunden
 	return false;
 
 }
@@ -707,7 +712,7 @@ bool Region::insertObject(WorldObject* object, Vector pos, float angle, bool col
 
 	}
 
-	//DEBUG("object inserted %s at %f %f",object->getTypeInfo()->m_subtype.c_str(),
+	DEBUG5("object inserted %s at %f %f",object->getTypeInfo()->m_subtype.c_str(), object->getShape()->m_center.m_x,object->getShape()->m_center.m_y);
 	return result;
 }
 
@@ -826,7 +831,7 @@ void Region::createObjectGroup(ObjectGroupTemplateName templname, Vector positio
 }
 
 
-void Region::createMonsterGroup(MonsterGroupName mgname, Vector position)
+void Region::createMonsterGroup(MonsterGroupName mgname, Vector position, float radius)
 {
 	MonsterGroup * mgroup = ObjectFactory::getMonsterGroup(mgname);
 
@@ -838,13 +843,23 @@ void Region::createMonsterGroup(MonsterGroupName mgname, Vector position)
 
 	std::list<MonsterGroup::SubGroup>::iterator mt;
 	Vector pos;
-
+	float dx,dy;
+	
 	for (mt = mgroup->m_monsters.begin(); mt != mgroup->m_monsters.end(); ++mt)
 	{
 		int count =0;
 		for (int i=0; i< mt->m_number; i++)
 		{
 			pos = position;
+			do
+			{
+				dx = -radius + Random::randf(radius*2);
+				dy = -radius + Random::randf(radius*2);	
+			}
+			while (dx*dx+dy*dy > radius*radius);
+			
+			pos.m_x += dx;
+			pos.m_y += dy;	
 
 			if (Random::random() < mt->m_prob)
 			{
