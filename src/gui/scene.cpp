@@ -1218,7 +1218,7 @@ void Scene::updateProjectiles()
 		}
 
 		// Ortsvektor des Projektils
-		Ogre::Vector3 vec(pr->getShape()->m_center.m_x*50,50,pr->getShape()->m_center.m_y*50);
+		Ogre::Vector3 vec(pr->getShape()->m_center.m_x*50,110,pr->getShape()->m_center.m_y*50);
 
 		// an die richtige Stelle verschieben
 		m_scene_manager->getSceneNode(node_name)->setPosition(vec);
@@ -1259,7 +1259,7 @@ void Scene::createProjectile(Projectile* pr, std::string& name)
 	std::string node_name = name + "Node";
 
 	// Ortsvektor des Projektils
-	Ogre::Vector3 vec(pr->getShape()->m_center.m_x*50,50,pr->getShape()->m_center.m_y*50);
+	Ogre::Vector3 vec(pr->getShape()->m_center.m_x*50,110,pr->getShape()->m_center.m_y*50);
 
 	// in die Liste einfuegen
 	m_projectiles->insert(std::make_pair(pr->getId(),name));
