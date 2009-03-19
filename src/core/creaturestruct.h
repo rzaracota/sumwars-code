@@ -12,6 +12,8 @@
 
 #define NR_EFFECTS 1
 
+class Item;
+
 /**
  * \struct CreatureBaseAttr
  * \brief Struktor mit den Basisattributen einer Kreatur
@@ -474,6 +476,12 @@ struct CreatureTradeInfo
 	 * \brief Kostenfaktor
 	 */
 	float m_price_factor;
+	
+	/**
+	 * \var Item* m_last_sold_item
+	 * \brief zuletzt verkauftes Item
+	 */
+	Item* m_last_sold_item;
 };
 
 #endif

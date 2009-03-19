@@ -138,7 +138,8 @@ bool Creature::init()
 	
 	m_refname = "";
 	getTradeInfo().m_trade_partner =0;
-
+	getTradeInfo().m_last_sold_item=0;
+	
 	return tmp;
 }
 
@@ -4430,6 +4431,8 @@ void Creature::sellItem(short position, Item* &item, int& gold)
 			event.m_id = getId();
 
 			getRegion()->insertNetEvent(event);
+			
+			m_trade_info.m_last_sold_item = item;
 		}
 		else
 		{
@@ -4444,7 +4447,15 @@ void Creature::buyItem(Item* &item, int& gold)
 	if (item != 0 && getEquipement() !=0)
 	{
 		// Geld auszahlen
-		gold += item->m_price;
+		// zuletzt gekauftes Item kann zum vollen Preis zurueck gegebebn werden
+		if (item == m_trade_info.m_last_sold_item)
+		{
+			gold +=(int) (item->m_price * m_trade_info.m_price_factor);
+		}
+		else
+		{
+			gold += item->m_price;
+		}
 		item->m_price = (int) (item->m_price * m_trade_info.m_price_factor);
 		
 		// beim Haendler einfuegen
