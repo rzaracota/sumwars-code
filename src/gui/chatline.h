@@ -35,6 +35,30 @@ class ChatLine : public Window
 		 * \param evt CEGUI Event Parameter
 		 */
 		bool onSendMessage(const CEGUI::EventArgs& evt);
+		
+		/**
+		 * \fn bool onKeyPress(const CEGUI::EventArgs& evt)
+		 * \brief Behandelt Tastendruck in diesem Fenster
+		 */
+		bool onKeyPress(const CEGUI::EventArgs& evt);
+		
+		/**
+		 * \fn void setHistoryLine()
+		 * \brief Setzt die Chatzeile mit einer Nachricht aus der History
+		 */
+		void setHistoryLine();
+		
+		/**
+		 * \var int m_history_line
+		 * \brief Zeile der History die gerade angezeigt wird
+		 */
+		int m_history_line;
+		
+		/**
+		 * \var std::list<std::string> m_history
+		 * \brief Liste der früher abgesendeten Befehle
+		 */
+		std::list<std::string> m_history;
 };
 
 #endif
