@@ -1,7 +1,7 @@
 <!-- SHIELDS -->
 
-<!-- Tartsche ;Name nachschlagen-->
-<Item type="shield" subtype="tart_shd" name="tart" size="medium">
+<!-- Tartsche -->
+<Item type="shield" subtype="targe_shd" name="targe" size="medium">
 	 <Image image="set:shield.png image:full_image" />
 	<Mesh file="shield.mesh" />
 	<Attribute

@@ -1,10 +1,10 @@
 <!-- Lederhandschuhe -->
-<!-- alle -->
-<Item type="gloves" subtype="leath_glv" name="leather glove" size="medium">
+<!-- WAR, PRI, ARC, MAG -->
+<Item type="gloves" subtype="leath_glv" name="leather gloves" size="medium">
 	<Image image="set:noMedia.png image:full_image" />
 	<Mesh file="potion.mesh" />
 	<Attribute
-		level_requirement="3"
+		level_requirement="2"
 		character_requirement="15"
 		min_enchant="20"
 		max_enchant="40"
@@ -25,18 +25,18 @@
 	</EquipEffect>
 
 	<DropChance
-		level="3"
+		level="2"
 		probability="1.0"
 	/>
 </Item>
 
-<!-- Schlangenlederhandschuhe ;Name-->
-<!-- Magier, Priester -->
-<Item type="gloves" subtype="snake_glv" name="snakehide glove" size="medium">
+<!-- Schlangenlederhandschuhe -->
+<!-- PRI, MAG -->
+<Item type="gloves" subtype="snake_glv" name="snakehide gloves" size="medium">
 	<Image image="set:noMedia.png image:full_image" />
 	<Mesh file="potion.mesh" />
 	<Attribute
-		level_requirement="8"
+		level_requirement="7"
 		character_requirement="15"
 		min_enchant="80"
 		max_enchant="200"
@@ -57,7 +57,167 @@
 	</EquipEffect>
 
 	<DropChance
-		level="8"
+		level="7"
+		probability="1.0"
+	/>
+</Item>
+
+<!-- Wildlederhandschuhe -->
+<!-- WAR, PRI, ARC, MAG -->
+<Item type="gloves" subtype="bucskn_glv" name="buckskin gloves" size="medium">
+	<Image image="set:noMedia.png image:full_image" />
+	<Mesh file="potion.mesh" />
+	<Attribute
+		level_requirement="13"
+		character_requirement="15"
+		min_enchant="80"
+		max_enchant="200"
+		modchance_armor_mod="0.12"
+		modchance_resist_phys_mod="0.05"
+		modchance_resist_fire_mod="0.14"
+		modchance_resist_ice_mod="0.13"
+		modchance_resist_air_mod="0.14"
+		modchance_resist_all_mod="0.1"
+		modchance_strength_mod="0.1"
+		modchance_dexterity_mod="0.12"
+		modchance_magic_power_mod="0.1"
+		/>
+
+  <EquipEffect
+		darmor="16"
+  >
+	</EquipEffect>
+
+	<DropChance
+		level="13"
+		probability="1.0"
+	/>
+</Item>
+
+<!-- Kettenhandschuhe -->
+<!-- WAR, PRI -->
+<Item type="gloves" subtype="chain_glv" name="chain gloves" size="medium">
+	<Image image="set:noMedia.png image:full_image" />
+	<Mesh file="potion.mesh" />
+	<Attribute
+		level_requirement="11"
+		character_requirement="15"
+		min_enchant="20"
+		max_enchant="40"
+		modchance_armor_mod="0.12"
+		modchance_resist_phys_mod="0.10"
+		modchance_resist_fire_mod="0.12"
+		modchance_resist_ice_mod="0.12"
+		modchance_resist_air_mod="0.12"
+		modchance_resist_all_mod="0.1"
+		modchance_strength_mod="0.1"
+		modchance_dexterity_mod="0.12"
+		modchance_magic_power_mod="0.1"
+		/>
+
+  <EquipEffect
+		darmor="18"
+  >
+	</EquipEffect>
+
+	<DropChance
+		level="11"
+		probability="1.0"
+	/>
+</Item>
+
+<!-- Spinnenseidehandschuhe -->
+<!-- MAG, PRI -->
+<Item type="gloves" subtype="spider_glv" name="spidersilk gloves" size="medium">
+	<Image image="set:noMedia.png image:full_image" />
+	<Mesh file="potion.mesh" />
+	<Attribute
+		level_requirement="15"
+		character_requirement="15"
+		min_enchant="20"
+		max_enchant="40"
+		modchance_armor_mod="0.12"
+		modchance_resist_phys_mod="0.10"
+		modchance_resist_fire_mod="0.12"
+		modchance_resist_ice_mod="0.12"
+		modchance_resist_air_mod="0.12"
+		modchance_resist_all_mod="0.1"
+		modchance_strength_mod="0.1"
+		modchance_dexterity_mod="0.12"
+		modchance_magic_power_mod="0.1"
+		/>
+
+  <EquipEffect
+		darmor="21"
+  >
+	</EquipEffect>
+
+	<DropChance
+		level="15"
+		probability="1.0"
+	/>
+</Item>
+
+<!-- Shuetzenhandschuhe -->
+<!-- ARC -->
+<Item type="gloves" subtype="marksm_glv" name="marksman gloves" size="medium">
+	<Image image="set:noMedia.png image:full_image" />
+	<Mesh file="potion.mesh" />
+	<Attribute
+		level_requirement="16"
+		character_requirement="15"
+		min_enchant="80"
+		max_enchant="200"
+		modchance_armor_mod="0.12"
+		modchance_resist_phys_mod="0.05"
+		modchance_resist_fire_mod="0.14"
+		modchance_resist_ice_mod="0.13"
+		modchance_resist_air_mod="0.14"
+		modchance_resist_all_mod="0.1"
+		modchance_strength_mod="0.1"
+		modchance_dexterity_mod="0.12"
+		modchance_magic_power_mod="0.1"
+		/>
+
+  <EquipEffect
+		darmor="21"
+  >
+	</EquipEffect>
+
+	<DropChance
+		level="13"
+		probability="1.0"
+	/>
+</Item>
+
+<!-- Assassinenhandschuhe -->
+<!-- WAR, ARC -->
+<Item type="gloves" subtype="assass_glv" name="assassin gloves" size="medium">
+	<Image image="set:noMedia.png image:full_image" />
+	<Mesh file="potion.mesh" />
+	<Attribute
+		level_requirement="18"
+		character_requirement="15"
+		min_enchant="20"
+		max_enchant="40"
+		modchance_armor_mod="0.12"
+		modchance_resist_phys_mod="0.10"
+		modchance_resist_fire_mod="0.12"
+		modchance_resist_ice_mod="0.12"
+		modchance_resist_air_mod="0.12"
+		modchance_resist_all_mod="0.1"
+		modchance_strength_mod="0.1"
+		modchance_dexterity_mod="0.12"
+		modchance_magic_power_mod="0.1"
+		/>
+
+  <EquipEffect
+		darmor="25"
+  >
+	</EquipEffect>
+
+	<DropChance
+		level="11"
 		probability="1.0"
 	/>
 </Item>

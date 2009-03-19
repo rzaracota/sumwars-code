@@ -246,7 +246,7 @@
 	<EquipEffect
 				darmor="210"
 				>
-			<XImmunity type="POISONED"/>
+			<XImmunity type="poisoned"/>
 	</EquipEffect>
 	
 	<DropChance
