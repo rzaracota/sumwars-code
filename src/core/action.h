@@ -382,6 +382,12 @@ public:
 	 * \param name Name der Aktion
 	 */
 	static ActionType getActionType(std::string name);
+	
+	/**
+	 * \fn static void updateTranslation()
+	 * \brief aktualisiert die Uebersetzung
+	 */
+	static void updateTranslation();
 
 	/**
 	 * \fn void toString(CharConv* cv)
