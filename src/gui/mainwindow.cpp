@@ -998,11 +998,7 @@ void MainWindow::updateObjectInfo()
 		{
 			WorldObject* wo;
 			
-			if (m_document->getLocalPlayer()->getId() == it->first)
-			{
-				// Spieler selbst ueberspringen
-				continue;
-			}
+			
 
 			ent = m_scene_manager->getEntity(it->second);
 
@@ -1021,6 +1017,12 @@ void MainWindow::updateObjectInfo()
 				
 				if (wo->getState() != WorldObject::STATE_ACTIVE)
 					continue;
+				
+				// verbuendete Spieler ueberspringen
+				if (World::getWorld()->getRelation(m_document->getLocalPlayer()->getFraction(), wo->getFraction()) == WorldObject::ALLIED)
+				{
+					continue;
+				}
 						
 				// Objekt wird vom Kamerastrahl geschnitten
 				// Distance zum Spieler ausrechnen
