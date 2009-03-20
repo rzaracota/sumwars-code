@@ -396,9 +396,6 @@ bool Player::onGamefieldClick(ClientCommand* command)
 	if ( dist == Action::SELF || dist == Action::PARTY_MULTI)
 		command->m_id=0;
 
-	// TODO ???
-	if (dist == Action::PARTY)
-		command->m_id = getId();
 
 	// bei Take Item wird in der ID die ID des Items gespeichert
 	if ( command->m_id!=0 && command->m_action != Action::TAKE_ITEM)
@@ -533,19 +530,11 @@ bool Player::onGamefieldClick(ClientCommand* command)
 			com->m_goal = Vector(0,0);
 			com->m_goal_object_id =0;
 		}
-		else if (dist == Action::PARTY_MULTI)
+		else if (dist == Action::PARTY_MULTI || dist == Action::PARTY)
 		{
 			com->m_type = command->m_action;
 			com->m_goal = command->m_goal;
 			com->m_goal_object_id =0;
-		}
-		else if (dist == Action::PARTY)
-		{
-			// Aktionen auf Party nie ausfuehren, wenn kein Ziel angegeben
-			com->m_type =Action::NOACTION;
-			com->m_goal = Vector(0,0);
-			com->m_goal_object_id =0;
-
 		}
 		else if (dist == Action::RANGED)
 		{

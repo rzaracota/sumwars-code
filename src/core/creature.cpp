@@ -401,6 +401,7 @@ void Creature::performAction(float &time)
 
 
 	// Behandlung der Wirkung der Aktion
+	
 
 	// Prozentsatz bei dessen Erreichen die Wirkung der Aktion berechnet wird
 	float pct = Action::getActionInfo(m_action.m_type)->m_critical_perc;
@@ -472,7 +473,36 @@ void Creature::performAction(float &time)
 			}
 		}
 
-
+		// Party Zauber suchen sich ihr Ziel
+		if (Action::getActionInfo(m_action.m_type)->m_distance == Action::PARTY)
+		{
+			Shape s;
+			s.m_type = Shape::CIRCLE;
+			s.m_center = goal;
+			s.m_radius =8;
+			WorldObjectList res;
+			WorldObjectList::iterator it;
+			
+			getRegion()->getObjectsInShape(&s, &res, LAYER_ALL,PLAYER,0);
+			
+			// naechstgelegenen verbuendeten Spieler suchen
+			float dist = 10000;
+			goalobj = this;
+			
+			for (it = res.begin(); it != res.end(); ++it)
+			{
+				if (World::getWorld()->getRelation(getFraction(), (*it)->getFraction()) == ALLIED)
+				{
+					if (goal.distanceTo((*it)->getShape()->m_center) < dist)
+					{
+						goalobj = (*it);
+						dist = goal.distanceTo((*it)->getShape()->m_center);
+						DEBUG5("chose player %i with distance %f",(*it)->getId(),dist);
+					}
+				}
+			}
+			
+		}
 
 
 		// Zielobjekt als Creature* pointer
