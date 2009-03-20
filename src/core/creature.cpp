@@ -3948,7 +3948,7 @@ void Creature::writeNetEvent(NetEvent* event, CharConv* cv)
 		m_action.toString(cv);
 		cv->toBuffer(getShape()->m_center.m_x);
 		cv->toBuffer(getShape()->m_center.m_y);
-
+		cv->toBuffer(getShape()->m_angle);
 
 		if (m_action.m_type!=0)
 		{
@@ -4097,6 +4097,7 @@ void Creature::processNetEvent(NetEvent* event, CharConv* cv)
 	bool newact= false;
 	bool newmove = false;
 	float delay = cv->getDelay();
+	float newangle=0;
 
 	if (delay>1000)
 	{
@@ -4112,6 +4113,7 @@ void Creature::processNetEvent(NetEvent* event, CharConv* cv)
 
 		cv->fromBuffer(newpos.m_x);
 		cv->fromBuffer(newpos.m_y);
+		cv->fromBuffer(newangle);
 		newact = true;
 	}
 
@@ -4311,6 +4313,7 @@ void Creature::processNetEvent(NetEvent* event, CharConv* cv)
 			if (!newmove)
 			{
 				moveTo(newpos);
+				getShape()->m_angle = newangle;
 			}
 
 			m_action.m_type = Action::NOACTION;
@@ -4319,10 +4322,12 @@ void Creature::processNetEvent(NetEvent* event, CharConv* cv)
 		}
 		else
 		{
-
+			// Drehwinkel korrekt setzen
 			if (!newmove && m_action.m_type != Action::NOACTION)
 			{
+				// Wenn die Aktion nicht laufen ist, Spieler an die richtige Position versetzen
 				moveTo(newpos);
+				getShape()->m_angle = newangle;
 			}
 
 			if (Action::getActionInfo(m_action.m_type)->m_distance != Action::SELF)
