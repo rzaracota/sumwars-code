@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ObjectGroupTemplate name="test" version="1.0">
+  <Shape
+    type="RECT"
+    extent_x="15"
+    extent_y="15"
+    angle="0"
+  />
+
+  <WayPoint pos_x="0" pos_y="0" />
+
+  <ObjectContent>
+    <Object subtype="$tree" 
+            center_x="10.21630722" 
+            center_y="-9.191832585" 
+            angle="0" 
+            probability="1" 
+            prob_angle="true" 
+    />
+    <Object subtype="$tree" 
+            center_x="-2.37699426" 
+            center_y="-10.65049855" 
+            angle="0" 
+            probability="1" 
+            prob_angle="true" 
+    />
+    <Object subtype="$tree" 
+            center_x="4.940437046" 
+            center_y="-8.743411203" 
+            angle="0" 
+            probability="1" 
+            prob_angle="true" 
+    />
+    <Object subtype="$tree" 
+            center_x="-7.248663373" 
+            center_y="-6.702092572" 
+            angle="0" 
+            probability="1" 
+            prob_angle="true" 
+    />
+    <Object subtype="$tree" 
+            center_x="1.799874832" 
+            center_y="4.129958979" 
+            angle="0" 
+            probability="1" 
+            prob_angle="true" 
+    />
+    <Object subtype="$tree" 
+            center_x="-2.425189418" 
+            center_y="3.549839899" 
+            angle="0" 
+            probability="1" 
+            prob_angle="true" 
+    />
+    <Object subtype="wall2" 
+            center_x="-7.756758412" 
+            center_y="-3.196758567" 
+            angle="40.31772967" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="wall3" 
+            center_x="0" 
+            center_y="7.549277805" 
+            angle="0" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="wall3" 
+            center_x="0" 
+            center_y="-6.270165392" 
+            angle="0" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="wall3" 
+            center_x="8.149200598" 
+            center_y="-2.833382522" 
+            angle="-45.67692762" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="wall3" 
+            center_x="8.524100839" 
+            center_y="5.103694595" 
+            angle="39.21103246" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="wall2" 
+            center_x="-8.150347878" 
+            center_y="4.109674155" 
+            angle="-51.10188793" 
+            probability="1" 
+            prob_angle="false" 
+    />
+  </ObjectContent>
+
+  <Locations>
+    <Location name="entry_north" pos_x="8.664746033" pos_y="0" />
+    <Location name="exit_north" pos_x="13.61562399" pos_y="0" />
+  </Locations>
+
+</ObjectGroupTemplate>
