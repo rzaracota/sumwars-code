@@ -746,7 +746,7 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 			// an alle Schaden austeilen
 			for (it=res.begin();it!=res.end();++it)
 			{
-				if ((*it)->getTypeInfo()->m_type != TypeInfo::TYPE_FIXED_OBJECT)
+				if ((*it)->getTypeInfo()->m_type != TypeInfo::TYPE_FIXED_OBJECT && World::getWorld()->getRelation(getFraction(),(*it)->getFraction()) ==  HOSTILE)
 				{
 					cr = (Creature*) (*it);
 					cbam.m_dwalk_speed = -cr->getBaseAttrMod()->m_walk_speed/2;
