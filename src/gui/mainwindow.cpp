@@ -1240,10 +1240,19 @@ void MainWindow::updateItemInfo()
 				}
 				
 				name = itm->getName();
+				float len = 0.009*name.length();
+				
+				
 				if (label->getText() != (CEGUI::utf8*) name.c_str())
 				{
 
 					label->setText((CEGUI::utf8*) name.c_str());
+				}
+				
+				if (fabs( label->getArea().getWidth().d_scale - len) > 0.01)
+				{
+					DEBUG5("old value %f new value %f",label->getArea().getWidth().d_scale, len);
+					label->setSize(CEGUI::UVector2(cegui_reldim(len), cegui_reldim( 0.03f)));
 				}
 				
 				std::string propold = label->getProperty("TextColours").c_str();
@@ -1307,6 +1316,7 @@ void MainWindow::updateItemInfo()
 		po.projectOn(ox);
 		po = pll - po;
 		
+		// Abfangen numerischer Schwankungen
 		static Vector oldoy = Vector(0,-1);
 		
 		if (fabs(oldoy.angle(oy)) < 0.01 && fabs(oy.getLength() - oldoy.getLength())<0.01 )
@@ -1544,7 +1554,7 @@ void MainWindow::updateItemInfo()
 				label->setProperty("FrameEnabled", "false");
 				label->setProperty("BackgroundEnabled", "false");
 				label->setPosition(CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim( 0.02f)));
-				label->setSize(CEGUI::UVector2(cegui_reldim(0.08f), cegui_reldim( 0.03f)));
+				label->setSize(CEGUI::UVector2(cegui_reldim(len), cegui_reldim( 0.03f)));
 				label->setText("");
 				label->setAlpha(0.9);
 				label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&MainWindow::onDropItemClicked, this));
@@ -1553,6 +1563,7 @@ void MainWindow::updateItemInfo()
 			else
 			{
 				label = win_mgr.getWindow(stream.str());
+				
 			}
 			label->setVisible(true);
 			
@@ -1561,6 +1572,12 @@ void MainWindow::updateItemInfo()
 			{
 	
 				label->setText((CEGUI::utf8*) name.c_str());
+			}
+			
+			if (fabs( label->getArea().getWidth().d_scale - len) > 0.01)
+			{
+				DEBUG5("old value %f new value %f",label->getArea().getWidth().d_scale, len);
+				label->setSize(CEGUI::UVector2(cegui_reldim(len), cegui_reldim( 0.03f)));
 			}
 			
 			label->setID(it->first);
