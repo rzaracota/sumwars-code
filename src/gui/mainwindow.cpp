@@ -80,7 +80,7 @@ bool MainWindow::initInputs()
 	// Tastatur initialisieren
 	m_keyboard = static_cast<OIS::Keyboard*>(m_ois->createInputObject( OIS::OISKeyboard, true));
 	m_keyboard->setEventCallback(this);
-
+	m_keyboard->setTextTranslation (OIS::Keyboard::Unicode);
 	return true;
 }
 
@@ -2137,7 +2137,7 @@ bool MainWindow::mouseReleased(const OIS::MouseEvent &evt, OIS::MouseButtonID bt
 bool MainWindow::keyPressed(const OIS::KeyEvent &evt) {
 	unsigned int ch = evt.text;
 	
-	DEBUG5("keycode %x",evt.key);
+	DEBUG5("keycode %i %s %x",evt.key,m_keyboard->getAsString(evt.key).c_str(), ch);
 	if (m_document->getGUIState()->m_shown_windows & Document::OPTIONS)
 	{
 		if (static_cast<OptionsWindow*>(m_sub_windows["Options"])->requestsForKey())
@@ -2145,6 +2145,13 @@ bool MainWindow::keyPressed(const OIS::KeyEvent &evt) {
 			static_cast<OptionsWindow*>(m_sub_windows["Options"])->setKeyCode(evt.key);
 			return true;
 		}
+	}
+	
+	if (evt.key == OIS::KC_UNASSIGNED)
+	{
+		ch &= 0xff;
+		m_cegui_system->injectChar((CEGUI::utf32) ch);
+		return true;
 	}
 	
 	bool ret =m_cegui_system->injectKeyDown(evt.key);

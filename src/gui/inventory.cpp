@@ -225,7 +225,7 @@ void Inventory::update()
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::Window* img;
 	CEGUI::Window* label;
-	Item* it;
+	Item* it,*weapon;
 	
 	std::ostringstream out_stream;
 
@@ -238,7 +238,12 @@ void Inventory::update()
 	img =  win_mgr.getWindow("WeaponItemLabel");
 	it = player->getWeapon();
 	updateItemWindow(img,it,player);
-
+	weapon = it;
+	bool two_hand = false;
+	if (weapon !=0 && weapon->m_weapon_attr->m_two_handed)
+	{
+		two_hand = true;
+	}
 
 
 	// Label Ruestung
@@ -252,9 +257,21 @@ void Inventory::update()
 	updateItemWindow(img,it,player);
 
 	// Label Schild
+	// bei Zweihandwaffen wird die Waffe eingeblendet
+	float alpha = 1.0;
 	img =  win_mgr.getWindow("ShieldItemLabel");
 	it = player->getShield();
+	if (two_hand && it ==0)
+	{
+		it = weapon;
+		alpha = 0.7;
+	}
 	updateItemWindow(img,it,player);
+	if (img->getAlpha() != alpha)
+	{
+		img->setAlpha(alpha);
+	}
+	
 
 	// Label Handschuhe
 	img =  win_mgr.getWindow("GlovesItemLabel");

@@ -56,9 +56,9 @@ void ChatLine::update()
 	CEGUI::MultiLineEditbox* chat_content;
 	chat_content =  static_cast<CEGUI::MultiLineEditbox*>(win_mgr.getWindow("ChatContent"));
 	
-	if (chat_content->getText() != pl->getMessages())
+	if (chat_content->getText() != (CEGUI::utf8*) pl->getMessages().c_str())
 	{
-		chat_content->setText(pl->getMessages());
+		chat_content->setText((CEGUI::utf8*) pl->getMessages().c_str());
 		CEGUI::Scrollbar* sb = chat_content->getVertScrollbar();
 		if (sb !=0)
 		{
@@ -93,11 +93,11 @@ void ChatLine::setHistoryLine()
 		
 		if (it != m_history.end())
 		{
-			line->setText(it->c_str());
+			line->setText((CEGUI::utf8*) it->c_str());
 		}
 		else
 		{
-			line->setText(m_history.back().c_str());
+			line->setText((CEGUI::utf8*) m_history.back().c_str());
 		}
 	}
 }
