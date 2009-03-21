@@ -46,6 +46,14 @@ void Trigger::addVariable(std::string name, std::string value)
 	m_lua_variables += stream.str();
 }
 
+void Trigger::addVariable(std::string name, Vector value)
+{
+	std::stringstream stream;
+	stream <<"trigger."<< name << " = {" << value.m_x<<","<<value.m_y << "}\n";
+	m_lua_variables += stream.str();
+}
+
+
 Event::~Event()
 {
 	if (!m_copy)

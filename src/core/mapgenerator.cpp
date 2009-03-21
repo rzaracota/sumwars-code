@@ -476,17 +476,9 @@ bool MapGenerator::insertGroupTemplates(MapData* mdata, RegionData* rdata)
 		// Objektgruppe einfuegen
 		// TODO: Winkel ?
 		DEBUG5("placing group %s at %f %f",it->second.m_group_name.c_str(), pos.m_x, pos.m_y);
-		mdata->m_region->createObjectGroup(it->second.m_group_name,pos,0);
+		mdata->m_region->createObjectGroup(it->second.m_group_name,pos,0, it->second.m_name);
 
-		// Mittelpunkt eintragen
-		locname = it->second.m_name;
-		locname += ":center";
-		mdata->m_region->addLocation(locname,pos);
 		
-		// Flaeche eintragen
-		areaname = it->second.m_name;
-		areaname += ":area";
-		mdata->m_region->addArea(areaname,s);
 	}
 
 

@@ -13,6 +13,8 @@ extern "C"
 #include "lauxlib.h"
 }
 
+#include "geometry.h"
+
 /**
  * Typ eines Triggers
  */
@@ -56,13 +58,21 @@ class Trigger
 			*/
 		void addVariable(std::string name, float value);
 		
-			/**
+		/**
 		 * \fn void addVariable(std::string name, std::string value)
 		 * \brief Fuegt eine String Variable hinzu
 		 * \param name Name der Variable
 		 * \param value Wert der Variable
-			 */
+		 */
 		void addVariable(std::string name, std::string value);
+		
+		/**
+		 * \fn void addVariable(std::string name, Vector value)
+		 * \brief Fuegt eine Vector Variable hinzu
+		 * \param name Name der Variable
+		 * \param value Wert der Variable
+		 */
+		void addVariable(std::string name, Vector value);
 		
 		/**
 		 * \fn std::string& getLuaVariables()

@@ -783,8 +783,10 @@ int Region::createObject(ObjectTemplateType generictype, Vector pos, float angle
 }
 
 
-void Region::createObjectGroup(ObjectGroupTemplateName templname, Vector position, float angle)
+void Region::createObjectGroup(ObjectGroupTemplateName templname, Vector position, float angle, std::string name)
 {
+	Trigger* tr=0;
+	
 	// Template aus der Datenbank heraussuchen
 	std::map<ObjectGroupTemplateName, ObjectGroupTemplate*>::iterator it;
 
@@ -792,6 +794,28 @@ void Region::createObjectGroup(ObjectGroupTemplateName templname, Vector positio
 
 	if (templ != 0)
 	{
+		if (name != "" || !(templ->getLocations()->empty()))
+		{
+			tr = new Trigger("create_template");
+			tr->addVariable("templname",templname);
+			tr->addVariable("name",name);
+			tr->addVariable("position",position);
+			tr->addVariable("angle",angle);
+		}
+		
+		if (name != "")
+		{
+			// Mittelpunkt eintragen
+			std::string locname = name;
+			locname += ":center";
+			addLocation(locname,position);
+			
+			// Flaeche eintragen
+			std::string areaname = name;
+			areaname += ":area";
+			addArea(areaname,*(templ->getShape()));
+		}
+		
 		// Template wurde gefunden
 		// Objekte platzieren
 		std::list<ObjectGroupTemplate::GroupObject>::iterator gt;
@@ -822,6 +846,14 @@ void Region::createObjectGroup(ObjectGroupTemplateName templname, Vector positio
 			pos += position;
 
 			addLocation(lt->first,pos);
+			tr->addVariable(lt->first,pos);
+			DEBUG("template location %s",lt->first.c_str());
+		}
+		
+		// Trigger der besagt dass das Template eingefuegt wurde
+		if (tr !=0)
+		{
+			insertTrigger(tr);
 		}
 	}
 	else
