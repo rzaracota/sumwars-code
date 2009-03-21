@@ -163,6 +163,37 @@ Vector EventSystem::getVector(lua_State *L, int index)
 	return Vector(0,0);
 }
 
+Shape EventSystem::getArea(lua_State *L, int& index)
+{
+	Shape s;
+	if (lua_isstring(L,index))
+	{
+		std::string name = lua_tostring(L, index);
+		if (name =="circle" || name =="rect")
+		{
+			s.m_center = getVector(L,index+1);
+			if (name =="circle")
+			{
+				s.m_type = Shape::CIRCLE;
+				s.m_radius = lua_tonumber(L,index+2);
+			}
+			else
+			{
+				s.m_type = Shape::RECT;
+				s.m_extent = getVector(L,index+2);
+			}
+			index +=2;
+		}
+		else
+		{
+			return m_region->getArea(name);
+		}
+	}
+	
+	
+	return s;
+}
+
 void EventSystem::pushVector(lua_State *L, Vector v)
 {
 	lua_newtable(L);
@@ -375,7 +406,6 @@ int EventSystem::unitIsInArea(lua_State *L)
 	if (argc>=2 && lua_isnumber(L,1) && lua_isstring(L,2) )
 	{
 		int id = lua_tointeger(L, 1);
-		AreaName area = lua_tostring(L, 2);
 
 
 		if (m_region !=0)
@@ -383,7 +413,8 @@ int EventSystem::unitIsInArea(lua_State *L)
 			WorldObject* wo = m_region->getObject(id);
 			if (wo !=0)
 			{
-				ret = m_region->getArea(area).intersects(*(wo->getShape()));
+				int idx=2;
+				ret = getArea(L,idx).intersects(*(wo->getShape()));
 			}
 			else
 			{
@@ -408,7 +439,6 @@ int EventSystem::pointIsInArea(lua_State *L)
 	if (argc>=2 && (lua_istable(L,1) || lua_isstring(L,1)) && lua_isstring(L,2))
 	{
 		Vector c = getVector(L,1);
-		AreaName area = lua_tostring(L, 2);
 
 		Shape s;
 		s.m_center = c;
@@ -417,7 +447,8 @@ int EventSystem::pointIsInArea(lua_State *L)
 
 		if (m_region !=0)
 		{
-			ret = m_region->getArea(area).intersects(s);
+			int idx=2;
+			ret = getArea(L,idx).intersects(s);
 		}
 
 	}
@@ -588,17 +619,17 @@ int EventSystem::getObjectsInArea(lua_State *L)
 	lua_newtable(L);
 	if (argc>=1 && lua_isstring(L,1))
 	{
-		AreaName area = lua_tostring(L, 1);
 		if (m_region !=0)
 		{
 			WorldObjectList obj;
 			WorldObjectList::iterator it;
-			Shape s = m_region->getArea(area);
+			int idx = 1;
+			Shape s = getArea(L,idx);
 
 			short layer = WorldObject::WorldObject::LAYER_BASE | WorldObject::LAYER_AIR;
-			if (argc>=2 && lua_isstring(L,2))
+			if (argc>=idx+1 && lua_isstring(L,idx+1))
 			{
-				std::string lstr = lua_tostring(L,2);
+				std::string lstr = lua_tostring(L,idx+1);
 				if (lstr == "base")
 				{
 					layer = WorldObject::LAYER_BASE;
@@ -618,10 +649,10 @@ int EventSystem::getObjectsInArea(lua_State *L)
 			}
 
 			short group = WorldObject::GROUP_ALL;
-			if (argc>=3 && lua_isstring(L,3))
+			if (argc>=idx+2 && lua_isstring(L,idx+2))
 			{
 
-				std::string gstr = lua_tostring(L,3);
+				std::string gstr = lua_tostring(L,idx+2);
 				if (gstr == "unit")
 				{
 					group = WorldObject::CREATURE;
@@ -734,19 +765,8 @@ int EventSystem::addArea(lua_State *L)
 		AreaName area = lua_tostring(L, 1);
 		std::string type = lua_tostring(L, 2);
 
-		Shape s;
-		s.m_center = getVector(L,3);
-		if (type == "rect" || type == "RECT")
-		{
-			s.m_type = Shape::RECT;
-			s.m_extent = getVector(L,4);
-		}
-		else
-		{
-			float r = lua_tonumber(L, 4);
-			s.m_type = Shape::CIRCLE;
-			s.m_radius = r;
-		}
+		int idx =2;
+		Shape s=getArea(L,idx);
 
 		if (m_region !=0)
 		{

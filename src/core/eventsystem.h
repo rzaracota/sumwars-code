@@ -330,6 +330,14 @@ class EventSystem
 		static Vector getVector(lua_State *L, int index);
 		
 		/**
+		 * \fn static Shape getArea(lua_State *L, int &index)
+		 * \brief liest eine Area vom Strack
+		 * \param L Lua Status
+		 * \param index Index der Area auf dem Stack
+		 */
+		static Shape getArea(lua_State *L, int &index);
+		
+		/**
 		 * \fn static void pushVector(lua_State *L, Vector v)
 		 * \brief Schiebt einen Vektor auf den Lua Stack
 		 * \param v Vector
