@@ -1,0 +1,291 @@
+<ObjectGroupTemplate name = "border(side)" >
+	<Shape
+		  type = "RECT"
+		  extent_x = "4"
+		  extent_y = "4"
+		  angle ="0"
+		  />
+	
+	<ObjectContent>
+		<Object subtype="$border"
+				center_x="0"
+				center_y="3.8"
+				angle = "0"
+				probability ="1"
+				prob_angle = "false"
+				/>
+		
+		<Object subtype="$tree"
+				center_x="-1.84"
+				center_y="3.2"
+				angle = "0"
+				probability ="0.5"
+				prob_angle = "true"
+				/>
+		
+		<Object subtype="$tree"
+				center_x="-1.6"
+				center_y="0.3"
+				angle = "0"
+				probability ="0.5"
+				prob_angle = "true"
+				/>
+		
+		<Object subtype="$tree"
+				center_x="1.1"
+				center_y="0.82"
+				angle = "0"
+				probability ="0.5"
+				prob_angle = "true"
+				/>
+	</ObjectContent>
+	
+</ObjectGroupTemplate>
+
+
+
+<ObjectGroupTemplate name = "trees3" >
+	<Shape
+		  type = "RECT"
+		  extent_x = "4.0"
+		  extent_y = "4.0"
+		  angle ="0"
+		  />
+	
+	<ObjectContent>
+		<Object subtype="$tree"
+				center_x="2.5"
+				center_y="3.6"
+				angle = "0"
+				probability ="0.7"
+				prob_angle = "false"
+				/>
+		
+		<Object subtype="$tree"
+				center_x="-1"
+				center_y="-2.3"
+				angle = "0"
+				probability ="0.7"
+				prob_angle = "false"
+				/>
+		
+		<Object subtype="$tree"
+				center_x="-1.7"
+				center_y="3.3"
+				angle = "0"
+				probability ="0.7"
+				prob_angle = "false"
+				/>
+		
+		<Object subtype="$tree"
+				center_x="0.7"
+				center_y="-1.7"
+				angle = "0"
+				probability ="0.7"
+				prob_angle = "false"
+				/>
+	</ObjectContent>
+	
+</ObjectGroupTemplate>
+
+<ObjectGroupTemplate name = "border(corner)" >
+	<Shape
+		  type = "RECT"
+		  extent_x = "4"
+		  extent_y = "4"
+		  angle ="0"
+		  />
+	
+	<ObjectContent>
+		<Object subtype="$border"
+				center_x="0"
+				center_y="3.8"
+				angle = "0"
+				probability ="1"
+				prob_angle = "false"
+				/>
+		
+		<Object subtype="$border"
+				center_x="3.8"
+				center_y="0"
+				angle = "-90"
+				probability ="1"
+				prob_angle = "true"
+				/>
+		
+		<Object subtype="$tree"
+				center_x="0.57"
+				center_y="-2.78"
+				angle = "0"
+				probability ="0.5"
+				prob_angle = "true"
+				/>
+		
+		<Object subtype="$tree"
+				center_x="-2.5"
+				center_y="2.3"
+				angle = "0"
+				probability ="0.5"
+				prob_angle = "true"
+				/>
+	</ObjectContent>
+	
+</ObjectGroupTemplate>
+
+<ObjectGroupTemplate name = "border(twocorner)" >
+	<Shape
+		  type = "RECT"
+		  extent_x = "4"
+		  extent_y = "4"
+		  angle ="0"
+		  />
+	
+	<ObjectContent>
+		<Object subtype="$border"
+				center_x="0"
+				center_y="3.8"
+				angle = "0"
+				probability ="1"
+				prob_angle = "false"
+				/>
+		
+		<Object subtype="$border"
+				center_x="3.8"
+				center_y="0"
+				angle = "-90"
+				probability ="1"
+				prob_angle = "true"
+				/>
+		
+		<Object subtype="$border"
+				center_x="0"
+				center_y="-3.8"
+				angle = "-180"
+				probability ="1"
+				prob_angle = "true"
+				/>
+		
+		<Object subtype="$tree"
+				center_x="-0.86"
+				center_y="1.9"
+				angle = "0"
+				probability ="0.5"
+				prob_angle = "true"
+				/>
+		
+		<Object subtype="$tree"
+				center_x="3"
+				center_y="-1.3"
+				angle = "0"
+				probability ="0.5"
+				prob_angle = "true"
+				/>
+	</ObjectContent>
+	
+</ObjectGroupTemplate>
+
+
+<ObjectGroupTemplate name = "border(twoside)" >
+	<Shape
+		  type = "RECT"
+		  extent_x = "4"
+		  extent_y = "4"
+		  angle ="0"
+		  />
+	
+	<ObjectContent>
+		<Object subtype="$border"
+				center_x="0"
+				center_y="3.8"
+				angle = "0"
+				probability ="1"
+				prob_angle = "false"
+				/>
+		
+		<Object subtype="$border"
+				center_x="0"
+				center_y="-3.8"
+				angle = "-180"
+				probability ="1"
+				prob_angle = "true"
+				/>
+		
+		<Object subtype="$tree"
+				center_x="-0.46"
+				center_y="1.6"
+				angle = "0"
+				probability ="0.5"
+				prob_angle = "true"
+				/>
+		
+		<Object subtype="$tree"
+				center_x="3.5"
+				center_y="-0.85"
+				angle = "0"
+				probability ="0.5"
+				prob_angle = "true"
+				/>
+	</ObjectContent>
+	
+</ObjectGroupTemplate>
+
+<ObjectGroupTemplate name = "border(single_block)" >
+	<Shape
+		  type = "RECT"
+		  extent_x = "4"
+		  extent_y = "4"
+		  angle ="0"
+		  />
+	
+	<Object subtype="$tree"
+			center_x="0"
+			center_y="0"
+			angle = "0"
+			probability ="0.5"
+			prob_angle = "true"
+				/>
+
+</ObjectGroupTemplate>
+
+<ObjectGroupTemplate name = "border(filled)" >
+	<Shape
+		  type = "RECT"
+		  extent_x = "4"
+		  extent_y = "4"
+		  angle ="0"
+		  />
+	
+	<Object subtype="$tree"
+			center_x="0"
+			center_y="3.6"
+			angle = "0"
+			probability ="0.5"
+			prob_angle = "true"
+			/>
+	
+	<Object subtype="$tree"
+			center_x="-1"
+			center_y="-2.3"
+			angle = "0"
+			probability ="0.5"
+			prob_angle = "true"
+			/>
+	
+	<Object subtype="$tree"
+			center_x="-1.2"
+			center_y="3.3"
+			angle = "0"
+			probability ="0.5"
+			prob_angle = "true"
+			/>
+	
+	<Object subtype="$tree"
+			center_x="0.4"
+			center_y="-1,7"
+			angle = "0"
+			probability ="0.5"
+			prob_angle = "true"
+			/>
+	
+</ObjectGroupTemplate>
+
