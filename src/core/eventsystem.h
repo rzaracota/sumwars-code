@@ -322,6 +322,27 @@ class EventSystem
 		static int setRefName(lua_State *L);
 		
 		/**
+		 * \fn static int createEvent(lua_State *L)
+		 * \brief Erzeugt ein neues Event. Auf dieses Event beziehen sich die folgenden addCondition und addEffect Aufrufe
+		 *  \param L Lua Status
+		 */
+		static int createEvent(lua_State *L);
+		
+		/**
+		 * \fn static int addCondition(lua_State *L)
+		 * \brief Fuegt dem Event eine Bedingung hinzu
+		 * \param  L Lua Status
+		 */
+		static int addCondition(lua_State *L);
+		
+		/**
+		 * \fn static int addEffect(lua_State *L)
+		 * \brief Fuegt dem Event einen Effekt hinzu
+		 * \param  L Lua Status
+		 **/
+		static int addEffect(lua_State *L);
+		
+		/**
 		 * \fn static Vector getVector(lua_State *L, int index)
 		 * \brief Liest einen Vector vom Lua Stack
 		 * \param L Lua Status
@@ -432,6 +453,12 @@ class EventSystem
 		 * \brief der zuletzt vom Script eingefuegte Trigger
 		 */
 		static Trigger* m_trigger;
+		
+		/**
+		 * \var static Event* m_event
+		 * \brief das zuletzt per Script erzeugte Event
+		 */
+		static Event* m_event;
 		
 		/**
 		 * \var static CharConv* m_charconv

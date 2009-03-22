@@ -14,6 +14,8 @@ Dialogue*  EventSystem::m_dialogue;
 
 CharConv* EventSystem::m_charconv =0;
 
+Event* EventSystem::m_event =0;
+
 std::map<int, std::string> EventSystem::m_player_varupdates;
 
 void EventSystem::init()
@@ -63,6 +65,9 @@ void EventSystem::init()
 	lua_register(m_lua, "getSpeaker", getSpeaker);
 	lua_register(m_lua, "setRefName", setRefName);
 	lua_register(m_lua, "getRolePlayers", getRolePlayers);
+	lua_register(m_lua, "createEvent", createEvent);
+	lua_register(m_lua, "addCondition", addCondition);
+	lua_register(m_lua, "addEffect", addEffect);
 
 	lua_register(m_lua, "writeString", writeString);
 	lua_register(m_lua, "writeNewline", writeNewline);
@@ -128,10 +133,13 @@ std::string EventSystem::getReturnValue()
 bool EventSystem::executeEvent(Event* event)
 {
 	// Lua Code zum Bedingung pruefen ausfuehren
+	DEBUG5("execute Event %p",event)
 	bool ret = event->checkCondition();
 	if (ret ==false)
+	{
 		return false;
-
+	}
+	
 	event->doEffect();
 
 	return true;
@@ -425,7 +433,7 @@ int EventSystem::unitIsInArea(lua_State *L)
 	}
 	else
 	{
-		ERRORMSG("Syntax: pointIsInArea( int unitid, string areaname)");
+		ERRORMSG("Syntax: unitIsInArea( int unitid, string areaname)");
 	}
 
 	lua_pushboolean(EventSystem::getLuaState() , ret);
@@ -848,6 +856,11 @@ int EventSystem::addTriggerVariable(lua_State *L)
 				std::string s = lua_tostring(L, 2);
 				m_trigger->addVariable(name, s);
 			}
+			else if (lua_istable(L,2))
+			{
+				Vector v = getVector(L,2);
+				m_trigger->addVariable(name,v);
+			}
 
 		}
 	}
@@ -1168,6 +1181,75 @@ int EventSystem::getRolePlayers(lua_State *L)
 	return 1;
 }
 
+int EventSystem::createEvent(lua_State *L)
+{
+	int argc = lua_gettop(L);
+	if (argc>=1 && lua_isstring(L,1))
+	{
+		std::string trigger = lua_tostring(L,1);
+		bool once = false;
+		if (argc>=2 && lua_isboolean(L,2))
+		{
+			once = lua_toboolean(L,2);
+		}
+		
+		Region* reg = m_region;
+		if (argc>=3 && lua_isstring(L,3))
+		{
+			reg = World::getWorld()->getRegion(lua_tostring(L,3));
+		}
+		if (reg ==0)
+		{
+			return 0;
+			DEBUG("region for createEvent does not exist");
+		}
+		
+		m_event = new Event();
+		m_event->setOnce(once);
+		reg ->addEvent(trigger,m_event);
+	}
+	else
+	{
+		ERRORMSG("Syntax: createEvent(string triggername [,bool once [,string regionname]])");
+	}
+	return 0;
+}
+
+int EventSystem::addCondition(lua_State *L)
+{
+	int argc = lua_gettop(L);
+	if (argc>=1 && lua_isstring(L,1))
+	{
+		if (m_event !=0)
+		{
+			std::string cond = lua_tostring(L,1);
+			m_event->setCondition(cond.c_str());
+		}
+	}
+	else
+	{
+		ERRORMSG("Syntax: addCondition(string luacode)");		
+	}
+	return 0;
+}
+
+int EventSystem::addEffect(lua_State *L)
+{
+	int argc = lua_gettop(L);
+	if (argc>=1 && lua_isstring(L,1))
+	{
+		if (m_event !=0)
+		{
+			std::string effect = lua_tostring(L,1);
+			m_event->setEffect(effect.c_str());
+		}
+	}
+	else
+	{
+		ERRORMSG("Syntax: addEffect(string luacode)");		
+	}
+	return 0;
+}
 
 int EventSystem::writeString(lua_State *L)
 {

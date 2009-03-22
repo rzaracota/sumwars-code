@@ -847,7 +847,7 @@ void Region::createObjectGroup(ObjectGroupTemplateName templname, Vector positio
 
 			addLocation(lt->first,pos);
 			tr->addVariable(lt->first,pos);
-			DEBUG("template location %s",lt->first.c_str());
+			DEBUG5("template location %s",lt->first.c_str());
 		}
 		
 		// Trigger der besagt dass das Template eingefuegt wurde

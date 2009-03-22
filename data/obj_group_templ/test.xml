@@ -103,3 +103,16 @@
   </Locations>
 
 </ObjectGroupTemplate>
+
+<ObjectGroupTemplate name = "herbalBushes_test" >
+	<Shape
+		  type = "RECT"
+		  extent_x = "4.0"
+		  extent_y = "4.0"
+		  angle ="0"
+		  />
+	
+	<Locations>
+		<Location name = "herb" pos_x="0" pos_y="0" />
+	</Locations>
+</ObjectGroupTemplate>
