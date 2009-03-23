@@ -145,6 +145,12 @@ class RegionData
 		};
 		
 		/**
+		 * \fn RegionData()
+		 * \brief Konstruktor
+		 */
+		RegionData();
+		
+		/**
 		 * \fn ~RegionData()
 		 * \brief Destruktor
 		 */
@@ -321,6 +327,25 @@ class RegionData
 		 * \brief Ist gesetzt, wenn die komplette Region aus einem Template besteht
 		 */
 		ObjectGroupTemplateName m_region_template;
+		
+		/**
+		 * \var float m_ambient_light[3]
+		 * \brief Werte fuer ambientes Licht
+		 */
+		float m_ambient_light[3];
+		
+		/**
+		 * \var float m_hero_light[3]
+		 * \brief Werte fuer das Spotlicht des Helden
+		 */
+		float m_hero_light[3];
+		
+		/**
+		 * \var float m_directional_light[3]
+		 * \brief Werte fuer das Licht von Sonne/Mond
+		 */
+		float m_directional_light[3];
+		
 };
 
 /**
@@ -402,15 +427,15 @@ class Region
 {
 	public:
 		/**
-	 * \fn Region(short dimx, short dimy, short id, std::string name)
+	 * \fn Region(short dimx, short dimy, short id, std::string name, RegionData* data=0)
 		 * \brief Konstruktor
 		 * \param dimx Ausdehnung in x-Richtung
 	 	 * \param dimy Ausdehnung in y-Richtung
 		 * \param id ID der Region
 		 * \param name Name der Region
-		 * 
+		 * \param data Daten zur Initialisierung
 	 	 */
-		Region(short dimx, short dimy, short id, std::string name);
+		Region(short dimx, short dimy, short id, std::string name, RegionData* data=0);
 
 
 		/**
@@ -974,6 +999,33 @@ class Region
 		{
 			return m_ground_material;
 		}
+		
+		/**
+		 * \fn float* getAmbientLight()
+		 * \brief Gibt ambiente Lichtstaerke aus
+		 */
+		float* getAmbientLight()
+		{
+			return m_ambient_light;
+		}
+		
+		/**
+		 * \fn float* getHeroLight()
+		 * \brief Gibt Lichtstaerke des Heldeslichtes aus
+		 */
+		float* getHeroLight()
+		{
+			return m_hero_light;
+		}
+		
+		/**
+		 * \fn float* getDirectionalLight()
+		 * \brief Gibt Lichtstaerke des gerichteten Lichts aus
+		 */
+		float* getDirectionalLight()
+		{
+			return m_directional_light;
+		}
 
 		
 	private:
@@ -1139,6 +1191,24 @@ class Region
 		 * \brief Material mit dem der Boden gerendert wird
 		 */
 		std::string m_ground_material;
+		
+		/**
+		 * \var float m_ambient_light[3]
+		 * \brief Werte fuer ambientes Licht
+		 */
+		float m_ambient_light[3];
+		
+		/**
+		 * \var float m_hero_light[3]
+		 * \brief Werte fuer das Spotlicht des Helden
+		 */
+		float m_hero_light[3];
+		
+		/**
+		 * \var float m_directional_light[3]
+		 * \brief Werte fuer das Licht von Sonne/Mond
+		 */
+		float m_directional_light[3];
 
 };
 

@@ -3,6 +3,18 @@
 #include "player.h"
 #include "eventsystem.h"
 
+
+RegionData::RegionData()
+{
+	for (int i=0; i<3; i++)
+	{
+		m_ambient_light[i] = 0.2;
+		m_hero_light[i] = 1.0;
+		m_directional_light[i] = 0.3;
+	}
+}
+
+
 RegionData::~RegionData()
 {
 	std::multimap<TriggerType, Event*>::iterator it;
@@ -62,7 +74,7 @@ void RegionCamera::update(float time)
 	}
 }
 
-Region::Region(short dimx, short dimy, short id, std::string name)
+Region::Region(short dimx, short dimy, short id, std::string name, RegionData* data)
 {
 	DEBUG5("creating region");
 	m_data_grid = new Matrix2d<Gridunit>(dimx,dimy);
@@ -100,6 +112,16 @@ Region::Region(short dimx, short dimy, short id, std::string name)
 	Trigger* tr = new Trigger("create_region");
 	insertTrigger(tr);
 	
+	if (data !=0)
+	{
+		for (int i=0; i<3; i++)
+		{
+			m_ambient_light[i] = data->m_ambient_light[i];
+			m_hero_light[i] = data->m_hero_light[i];
+			m_directional_light[i] = data->m_directional_light[i];
+				
+		}
+	}
 }
 
 Region::~Region()
@@ -869,7 +891,7 @@ void Region::createMonsterGroup(MonsterGroupName mgname, Vector position, float 
 
 	if (mgroup == 0)
 	{
-		DEBUG("monster group %s ot found",mgname.c_str());
+		DEBUG("monster group %s not found",mgname.c_str());
 		return;
 	}
 

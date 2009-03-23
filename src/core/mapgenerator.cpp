@@ -114,7 +114,7 @@ void MapGenerator::createMapData(MapData* mdata, RegionData* rdata)
 	mdata->m_base_map->clear();
 	mdata->m_template_map = new Matrix2d<char>(rdata->m_dimx,rdata->m_dimy);
 	mdata->m_template_map->clear();
-	mdata->m_region = new Region(rdata->m_dimx,rdata->m_dimy,rdata->m_id,rdata->m_name);
+	mdata->m_region = new Region(rdata->m_dimx,rdata->m_dimy,rdata->m_id,rdata->m_name,rdata);
 	mdata->m_template_index_map = new Matrix2d<int>(rdata->m_dimx,rdata->m_dimy);
 }
 

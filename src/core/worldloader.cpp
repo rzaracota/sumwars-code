@@ -39,451 +39,234 @@ void WorldLoader::loadEvent( TiXmlNode* node, Event *ev, TriggerType &type)
 	}
 }
 
-//######################  RegionData (world.xml)  ##############################
 
-//int ObjectLoader::generateFixedObjectData(TiXmlElement* pElement, string element, std::list<FixedObjectData*>* object_list, std::list<string>* subtype_list)
-int WorldLoader::generateRegionData(TiXmlNode* pParent, TiXmlElement* pElement, std::string element, std::list<RegionData*> &region_list)
+bool WorldLoader::loadRegionData(const char* pFilename)
 {
-	if ( !pElement ) return 0;
-
-	TiXmlAttribute* pAttrib=pElement->FirstAttribute();
-	int i=0;
-	int ival;
-	double dval;
-	
-	if (element == "Event")
-	{
-		TriggerType type;
-		Event* ev = new Event;
-		loadEvent(pParent, ev,type);
-		m_region_data->addEvent(type,ev);
-	}
-	
-	ElementAttrib attr;
-	
-	if (element == "World")
-	{
-		DEBUG5("World");
-		attr.parseElement(pElement);
-		std::string startreg, startloc;
-		attr.getString("start_region",startreg);
-		attr.getString("start_location",startloc);
-		
-		World::getWorld()->getPlayerStartLocation() = std::make_pair(startreg,startloc);
-		
-	}
-	
-	if (element == "Region")
-	{
-		DEBUG5("Region");
-		
-		if (m_region_data == 0)
-		{
-			m_region_data = new RegionData;
-			m_region_data->m_ground_material = "";
-			m_region_data->m_region_template = "";
-				
-		}
-		
-		while (element == "Region" && pAttrib)
-		{
-			if (!strcmp(pAttrib->Name(), "id") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
-				m_region_data->m_id = static_cast<short>(ival);
-			else if (!strcmp(pAttrib->Name(), "name"))
-				m_region_data->m_name = pAttrib->Value();
-
-			i++;
-			pAttrib=pAttrib->Next();
-		}
-	}
-	
-	if (element == "Settings")
-	{
-		DEBUG5("Settings");
-		while (element == "Settings" && pAttrib)
-		{
-			if (!strcmp(pAttrib->Name(), "dimx") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
-				m_region_data->m_dimx = static_cast<short>(ival);
-			else if (!strcmp(pAttrib->Name(), "dimy") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
-				m_region_data->m_dimy = static_cast<short>(ival);
-			else if (!strcmp(pAttrib->Name(), "area_percent") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
-				m_region_data->m_area_percent = static_cast<float>(dval);
-			else if (!strcmp(pAttrib->Name(), "complexity") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
-				m_region_data->m_complexity = static_cast<float>(dval);
-			else if (!strcmp(pAttrib->Name(), "granularity") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
-				m_region_data->m_granularity = ival;
-			else if (!strcmp(pAttrib->Name(), "ground"))
-				m_region_data->m_ground_material = pAttrib->Value();
-			else if (!strcmp(pAttrib->Name(), "region_template"))
-				m_region_data->m_region_template = pAttrib->Value();
-
-			i++;
-			pAttrib=pAttrib->Next();
-		}
-	}
-	
-	if (element == "ExitDirections")
-	{
-		DEBUG5("ExitDirections");
-		while (element == "ExitDirections" && pAttrib)
-		{
-			if (!strcmp(pAttrib->Name(), "north"))
-			{
-				if (!strcmp(pAttrib->Value(), "true"))
-					m_region_data->m_exit_directions[NORTH] = true;
-				else
-					m_region_data->m_exit_directions[NORTH] = false;
-			}
-			else if (!strcmp(pAttrib->Name(), "south"))
-			{
-				if (!strcmp(pAttrib->Value(), "true"))
-					m_region_data->m_exit_directions[SOUTH] = true;
-				else
-					m_region_data->m_exit_directions[SOUTH] = false;
-			}
-			else if (!strcmp(pAttrib->Name(), "west"))
-			{
-				if (!strcmp(pAttrib->Value(), "true"))
-					m_region_data->m_exit_directions[WEST] = true;
-				else
-					m_region_data->m_exit_directions[WEST] = false;
-			}
-			else if (!strcmp(pAttrib->Name(), "east"))
-			{
-				if (!strcmp(pAttrib->Value(), "true"))
-					m_region_data->m_exit_directions[EAST] = true;
-				else
-					m_region_data->m_exit_directions[EAST] = false;
-			}
-
-			i++;
-			pAttrib=pAttrib->Next();
-		}
-	}
-	
-	if (element == "Exits")
-	{
-		DEBUG5("Exits");
-		while (element == "Exits" && pAttrib)
-		{
-			i++;
-			pAttrib=pAttrib->Next();
-		}
-	}
-	
-	if (element == "Exit")
-	{
-		DEBUG5("Exit");
-		while (element == "Exit" && pAttrib)
-		{
-			if (!strcmp(pAttrib->Name(), "destination_location"))
-				m_temp_exit.destination_location = pAttrib->Value();
-			else if (!strcmp(pAttrib->Name(), "destination_region"))
-				m_temp_exit.destination_region = pAttrib->Value();
-			else if (!strcmp(pAttrib->Name(), "name"))
-				m_temp_exit.exit_name = pAttrib->Value();
-
-			i++;
-			pAttrib=pAttrib->Next();
-		}
-	}
-	
-	if (element == "Shape")
-	{
-		DEBUG5("Shape");
-		while (element == "Shape" && pAttrib)
-		{
-			if (!strcmp(pAttrib->Name(), "shape"))
-			{
-				if (!strcmp(pAttrib->Value(), "RECT"))
-					m_temp_exit.type = Shape::RECT;
-				else
-					m_temp_exit.type = Shape::CIRCLE;
-			}
-			else if (!strcmp(pAttrib->Name(), "extent_x") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
-				m_temp_exit.extent_x = static_cast<float>(dval);
-			else if (!strcmp(pAttrib->Name(), "extent_y") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
-				m_temp_exit.extent_y = static_cast<float>(dval);
-			else if (!strcmp(pAttrib->Name(), "radius") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
-				m_temp_exit.radius = static_cast<float>(dval);
-
-			i++;
-			pAttrib=pAttrib->Next();
-		}
-	}
-	
-	if (element == "NamedObjectGroups")
-	{
-		DEBUG5("NamedObjectGroups");
-		while (element == "NamedObjectGroups" && pAttrib)
-		{
-			i++;
-			pAttrib=pAttrib->Next();
-		}
-	}
-	
-	if (element == "NameObjectGroup")
-	{
-		DEBUG5("NameObjectGroup");
-		m_temp_name_object_group.init();
-		while (element == "NameObjectGroup" && pAttrib)
-		{
-			if (!strcmp(pAttrib->Name(), "object_group"))
-				m_temp_name_object_group.group_name = pAttrib->Value();
-			else if (!strcmp(pAttrib->Name(), "name"))
-				m_temp_name_object_group.name = pAttrib->Value();
-			else if (!strcmp(pAttrib->Name(), "priority") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
-				m_temp_name_object_group.prio = ival;
-
-			i++;
-			pAttrib=pAttrib->Next();
-		}
-	}
-	
-	if (element == "ObjectGroups")
-	{
-		DEBUG5("ObjectGroups");
-		while (element == "ObjectGroups" && pAttrib)
-		{
-			i++;
-			pAttrib=pAttrib->Next();
-		}
-	}
-	
-	if (element == "ObjectGroup")
-	{
-		DEBUG5("ObjectGroup");
-		m_temp_object_group.init();
-		while (element == "ObjectGroup" && pAttrib)
-		{
-			if (!strcmp(pAttrib->Name(), "object_group"))
-				m_temp_object_group.group_name = pAttrib->Value();
-			else if (!strcmp(pAttrib->Name(), "priority") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
-				m_temp_object_group.prio = ival;
-			else if (!strcmp(pAttrib->Name(), "number") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
-				m_temp_object_group.number = ival;
-			else if (!strcmp(pAttrib->Name(), "probability") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
-				m_temp_object_group.probability = static_cast<float>(dval);
-
-			i++;
-			pAttrib=pAttrib->Next();
-		}
-	}
-	
-	if (element == "Environments")
-	{
-		DEBUG5("Environments");
-		while (element == "Environments" && pAttrib)
-		{
-			i++;
-			pAttrib=pAttrib->Next();
-		}
-	}
-	
-	if (element == "Environment")
-	{
-		DEBUG5("Environment");
-		while (element == "Environment" && pAttrib)
-		{
-			if (!strcmp(pAttrib->Name(), "height") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
-				m_temp_environment.maxheight = static_cast<float>(dval);
-			else if (!strcmp(pAttrib->Name(), "name"))
-				m_temp_environment.env = pAttrib->Value();
-
-			i++;
-			pAttrib=pAttrib->Next();
-		}
-	}
-	
-	if (element == "SpawnGroups")
-	{
-		DEBUG5("SpawnGroups");
-		while (element == "SpawnGroups" && pAttrib)
-		{
-			i++;
-			pAttrib=pAttrib->Next();
-		}
-	}
-	
-	if (element == "SpawnGroup")
-	{
-		DEBUG5("SpawnGroup");
-		m_spawn_group.init();
-		while (element == "SpawnGroup" && pAttrib)
-		{
-			if (!strcmp(pAttrib->Name(), "group_name"))
-				m_spawn_group.group_name = pAttrib->Value();
-			else if (!strcmp(pAttrib->Name(), "number") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
-				m_spawn_group.number = ival;
-
-			i++;
-			pAttrib=pAttrib->Next();
-		}
-	}
-	
-	if (element == "ReviveLocation")
-	{
-		DEBUG5("ReviveLocation");
-		while (element == "ReviveLocation" && pAttrib)
-		{
-			if (!strcmp(pAttrib->Name(), "location"))
-				m_temp_revive_location = pAttrib->Value();
-
-			i++;
-			pAttrib=pAttrib->Next();
-		}
-	}
-	
-	return i;
-}
-
-
-//void ObjectLoader::searchFixedObjectData(TiXmlNode* pParent, std::list<FixedObjectData*>* object_list, std::list<string>* subtype_list)
-void WorldLoader::searchRegionData(TiXmlNode* pParent, std::list<RegionData*> &region_list)
-{
-	if ( !pParent ) return;
-
-	TiXmlNode* pChild;
-//	TiXmlText* pText;
-
-	int t = pParent->Type();
-	int num;
-
-	switch ( t )
-	{
-	case TiXmlNode::ELEMENT:
-		//printf( "Element [%s]", pParent->Value() );
-		num = generateRegionData(pParent, pParent->ToElement(), pParent->Value(), region_list);
-		/*switch(num)
-		{
-			case 0:  printf( " (No attributes)"); break;
-			case 1:  printf( "%s1 attribute", getIndentAlt(indent)); break;
-			default: printf( "%s%d attributes", getIndentAlt(indent), num); break;
-		}*/
-		break;
-	/*
-	case TiXmlNode::TEXT:
-		pText = pParent->ToText();
-		printf( "Text: [%s]", pText->Value() );
-		break;
-	*/
-	default:
-		break;
-	}
-	/*
-	for ( pChild = pParent->FirstChild(); pChild != 0; pChild = pChild->NextSibling() )
-	{
-		if (pChild->Type() == TiXmlNode::ELEMENT)
-		{
-			std::cout << "### " << pChild->Value() << std::endl;
-			for ( pChild2 = pChild->FirstChild(); pChild2 != 0; pChild2= pChild2->NextSibling() )
-			{
-				if (pChild2->Type() == TiXmlNode::ELEMENT)
-				{
-					std::cout << "### " << pChild2->Value() << std::endl;
-					if (pChild2->Value() == "Region")
-					{
-						RegionData* rdata = new RegionData;
-						loadRegionData(rdata, pChild2);
-					}
-				}
-			}
-		}
-	}*/
-	
-	/*if (element=="Region")
-	{
-	RegionData* rdata = new RegionData;
-	loadRegionData(rdata,pElement);
-	// hier dann id und Name einlesen
-	}*/
-	
-	
-	for ( pChild = pParent->FirstChild(); pChild != 0; pChild = pChild->NextSibling())
-	{
-		searchRegionData(pChild, region_list);
-
-		if ( !strcmp(pChild->Value(), "NameObjectGroup") && pChild->Type() == TiXmlNode::ELEMENT)
-		{
-			m_region_data->addNamedObjectGroupTemplate(m_temp_name_object_group.group_name, m_temp_name_object_group.name, m_temp_name_object_group.prio);
-			DEBUG5("NameObjectGroup loaded");
-		}
-		else if ( !strcmp(pChild->Value(), "ObjectGroup") && pChild->Type() == TiXmlNode::ELEMENT)
-		{
-			m_region_data->addObjectGroupTemplate(m_temp_object_group.group_name, m_temp_object_group.prio, m_temp_object_group.number, m_temp_object_group.probability);
-			DEBUG5("ObjectGroup loaded");
-		}
-		else if ( !strcmp(pChild->Value(), "Environment") && pChild->Type() == TiXmlNode::ELEMENT)
-		{
-			m_region_data->addEnvironment(m_temp_environment.maxheight, m_temp_environment.env);
-			DEBUG5("Environment loaded");
-		}
-		else if ( !strcmp(pChild->Value(), "SpawnGroup") && pChild->Type() == TiXmlNode::ELEMENT)
-		{
-			m_region_data->addSpawnGroup(m_spawn_group.group_name, m_spawn_group.number);
-			DEBUG5("SpawnGroups loaded");
-		}
-		else if ( !strcmp(pChild->Value(), "ReviveLocation") && pChild->Type() == TiXmlNode::ELEMENT)
-		{
-			m_region_data->m_revive_location = m_temp_revive_location;
-			DEBUG5("ReviveLocation loaded");
-		}
-		else if ( !strcmp(pChild->Value(), "Region") && pChild->Type() == TiXmlNode::ELEMENT)
-		{
-			region_list.push_back(m_region_data);
-			m_region_data = 0;
-			DEBUG5("Region loaded");
-		}
-		else if ( !strcmp(pChild->Value(), "Exit") && pChild->Type() == TiXmlNode::ELEMENT)
-		{
-			RegionExit temp_exit;
-			
-			temp_exit.m_destination_location = m_temp_exit.destination_location;
-			temp_exit.m_destination_region = m_temp_exit.destination_region;
-			temp_exit.m_exit_name = m_temp_exit.exit_name;
-			temp_exit.m_shape.m_type = m_temp_exit.type;
-			
-			if (m_temp_exit.type == Shape::RECT)
-				temp_exit.m_shape.m_extent = Vector(m_temp_exit.extent_x,m_temp_exit.extent_y);
-			else
-				temp_exit.m_shape.m_radius = m_temp_exit.radius;
-			
-			m_region_data->addExit(temp_exit);
-			
-			DEBUG5("Exit loaded");
-		}
-		/*else if ( !strcmp(pChild->Value(), "World") && pChild->Type() == TiXmlNode::ELEMENT)
-		{
-			DEBUG5("World loaded");
-		}*/
-	}
-}
-
-
-
-bool WorldLoader::loadRegionData(const char* pFilename, std::list<RegionData*> &region_list)
-{
-	m_region_data = 0;
-	
-	/*object_list = new std::list<FixedObjectData*>;
-	subtype_list = new std::list<std::string>;*/
-
 	TiXmlDocument doc(pFilename);
 	bool loadOkay = doc.LoadFile();
 
 	if (loadOkay)
 	{
-		DEBUG5("Loading %s", pFilename);
-		searchRegionData(&doc, region_list);
-		DEBUG5("Loading %s finished", pFilename);
-		//return m_object_list;
+		loadRegions(&doc);
 		return true;
 	}
 	else
 	{
-		DEBUG5("Failed to load file %s", pFilename);
+		DEBUG("Failed to load file %s", pFilename);
 		return false;
 	}
+}
+
+bool WorldLoader::loadRegions(TiXmlNode* node)
+{
+	TiXmlNode* child;
+	RegionData* rdata=0;
+	if (node->Type()==TiXmlNode::ELEMENT && !strcmp(node->Value(), "Region"))
+	{
+		ElementAttrib attr;
+		attr.parseElement(node->ToElement());
+		
+		rdata = new RegionData;
+		
+		int id;
+		attr.getInt("id",id,-1);
+		rdata->m_id = id;
+		attr.getString("name",rdata->m_name);
+		DEBUG5("Region %s %i",rdata->m_name.c_str(), id);
+		World::getWorld()->registerRegionData(rdata, rdata->m_id);
+		loadRegion(node,rdata);
+		
+	}
+	else
+	{
+		for ( child = node->FirstChild(); child != 0; child = child->NextSibling())
+		{
+			loadRegions(child);
+		}
+	}
+	return true;
+}
+
+bool WorldLoader::loadRegion(TiXmlNode* node, RegionData* rdata)
+{
+	
+	TiXmlNode* child;
+	TiXmlNode* child2;
+	for ( child = node->FirstChild(); child != 0; child = child->NextSibling())
+	{
+		if (child->Type()==TiXmlNode::ELEMENT)
+		{
+			ElementAttrib attr;
+			attr.parseElement(child->ToElement());
+			
+			if (!strcmp(child->Value(), "Settings"))
+			{
+				int dimx,dimy;
+				attr.getInt("dimx",dimx,16);
+				attr.getInt("dimy",dimy,16);
+				rdata->m_dimx = dimx;
+				rdata->m_dimy = dimy;
+				attr.getString("region_template",rdata->m_region_template);
+				attr.getString("ground",rdata->m_ground_material);
+				attr.getFloat("area_percent",rdata->m_area_percent,0.5f);
+				attr.getFloat("complexity",rdata->m_complexity,0.5f);
+				attr.getInt("granularity",rdata->m_granularity,8);
+			}
+			else if (!strcmp(child->Value(), "ExitDirections"))
+			{
+				string boolstr;
+				attr.getString("north",boolstr,"false");
+				rdata->m_exit_directions[NORTH] = (boolstr =="true");
+				attr.getString("south",boolstr,"false");
+				rdata->m_exit_directions[SOUTH] = (boolstr =="true");
+				attr.getString("west",boolstr,"false");
+				rdata->m_exit_directions[WEST] = (boolstr =="true");
+				attr.getString("east",boolstr,"false");
+				rdata->m_exit_directions[EAST] = (boolstr =="true");
+					
+			}
+			else if (!strcmp(child->Value(), "Exits"))
+			{
+				for ( child2 = child->FirstChild(); child2 != 0; child2 = child2->NextSibling())
+				{
+					
+					if (!strcmp(child2->Value(), "Exit"))
+					{
+						RegionExit exit;
+						attr.parseElement(child2->ToElement());
+						attr.getString("name",exit.m_exit_name);
+						attr.getString("destination_region",exit.m_destination_region);
+						attr.getString("destination_location",exit.m_destination_location);
+						
+						TiXmlNode* child3;
+						for ( child3 = child2->FirstChild(); child3 != 0; child3 = child3->NextSibling())
+						{
+							
+							if (!strcmp(child3->Value(), "Shape"))
+							{
+								attr.parseElement(child3->ToElement());
+								std::string shape;
+								attr.getString("shape",shape,"CIRCLE");
+								if (shape == "RECT")
+								{
+									exit.m_shape.m_type = Shape::RECT;
+									attr.getFloat("extent_x",exit.m_shape.m_extent.m_x,0);
+									attr.getFloat("extent_y",exit.m_shape.m_extent.m_y,0);
+								}
+								else
+								{
+									exit.m_shape.m_type = Shape::CIRCLE;
+									attr.getFloat("radius",exit.m_shape.m_radius,0);
+								}
+							}
+						}
+						rdata->addExit(exit);
+					}
+				}
+			}
+			else if (!strcmp(child->Value(), "Environments"))
+			{
+				for ( child2 = child->FirstChild(); child2 != 0; child2 = child2->NextSibling())
+				{
+					if (!strcmp(child2->Value(), "Environment"))
+					{
+						std::string envname;
+						float height;
+						attr.parseElement(child2->ToElement());
+						attr.getString("name",envname);
+						attr.getFloat("height",height);
+						rdata->addEnvironment(height,envname);
+					}
+				}
+			}
+			else if (!strcmp(child->Value(), "ReviveLocation"))
+			{
+				attr.getString("location",rdata->m_revive_location);
+			}
+			else if (!strcmp(child->Value(), "Event"))
+			{
+				TriggerType type;
+				Event* ev = new Event();
+				loadEvent(child, ev,type);
+				World::getWorld()->addEvent(rdata->m_name,type,ev);
+			}
+ 			else if (!strcmp(child->Value(), "NamedObjectGroups"))
+			{
+				for ( child2 = child->FirstChild(); child2 != 0; child2 = child2->NextSibling())
+				{
+					if ((!strcmp(child2->Value(), "NameObjectGroup")) || (!strcmp(child2->Value(), "NamedObjectGroup")))
+					{
+						attr.parseElement(child2->ToElement());
+						std::string group_name, name;
+						int prio;
+						attr.getString("name",name);
+						attr.getString("object_group",group_name);
+						attr.getInt("priority",prio);
+						
+						DEBUG5("named object group %s %s %i",group_name.c_str(), name.c_str(), prio);
+						
+						rdata->addNamedObjectGroupTemplate(group_name,name,prio);
+					}
+				}
+			}
+			else if (!strcmp(child->Value(), "ObjectGroups"))
+			{
+				for ( child2 = child->FirstChild(); child2 != 0; child2 = child2->NextSibling())
+				{
+					if (!strcmp(child2->Value(), "ObjectGroup"))
+					{
+						attr.parseElement(child2->ToElement());
+						std::string group_name;
+						int prio,number;
+						float prob;
+						attr.getString("object_group",group_name);
+						attr.getInt("priority",prio,0);	
+						attr.getInt("number",number,1);	
+						attr.getFloat("probability",prob,1.0f);	
+						
+						DEBUG5("object group %s  number %i prio %i",group_name.c_str(), number, prio);
+						
+						rdata->addObjectGroupTemplate(group_name,prio, number, prob);
+					}
+				}
+			}
+			else if (!strcmp(child->Value(), "SpawnGroups"))
+			{
+				for ( child2 = child->FirstChild(); child2 != 0; child2 = child2->NextSibling())
+				{
+					if (!strcmp(child2->Value(), "SpawnGroup"))
+					{
+						attr.parseElement(child2->ToElement());
+						std::string group_name;
+						int number;
+						attr.getInt("number",number,1);
+						attr.getString("group_name",group_name);
+						
+						rdata->addSpawnGroup(group_name,number);
+					}
+				}
+			}
+			else if (!strcmp(child->Value(), "AmbientLight"))
+			{
+				attr.getFloat("red",rdata->m_ambient_light[0],0.2f);
+				attr.getFloat("green",rdata->m_ambient_light[1],0.2f);
+				attr.getFloat("blue",rdata->m_ambient_light[2],0.2f);
+			}
+			else if (!strcmp(child->Value(), "HeroLight"))
+			{
+				attr.getFloat("red",rdata->m_hero_light[0],1.0f);
+				attr.getFloat("green",rdata->m_hero_light[1],1.0f);
+				attr.getFloat("blue",rdata->m_hero_light[2],1.0f);
+			}
+			else if (!strcmp(child->Value(), "DirectionalLight"))
+			{
+				attr.getFloat("red",rdata->m_directional_light[0],0.3f);
+				attr.getFloat("green",rdata->m_directional_light[1],0.3f);
+				attr.getFloat("blue",rdata->m_directional_light[2],0.3f);
+			}
+		}
+	}
+	return true;
 }
 
 bool  WorldLoader::loadNPCData(const char* pFilename)

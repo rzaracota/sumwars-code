@@ -92,14 +92,17 @@ bool World::init(int port)
 			file = it->archive->getName();
 			file += "/";
 			file += it->filename;
-			worldloader.loadRegionData(file.c_str(), region_list);
+			//worldloader.loadRegionData(file.c_str(), region_list);
+			worldloader.loadRegionData(file.c_str());
 		}
 
+		/*
 		std::list<RegionData*>::iterator rt;
 		for (rt = region_list.begin(); rt != region_list.end();rt++)
 		{
 			registerRegionData(*rt, (*rt)->m_id);
 		}
+		*/
 		
 		files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("npc","*.xml");
 		for (it = files->begin(); it != files->end(); ++it)

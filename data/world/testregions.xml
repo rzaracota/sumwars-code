@@ -249,6 +249,10 @@
 						 
 						 <Settings dimx="32" dimy="32" area_percent="0.35" complexity="0.4" granularity="8" />
 						 
+						 <HeroLight red="0" green="0" blue="0" />
+						 <AmbientLight red="0" green="0" blue="0" />
+						 <DirectionalLight red="1.0" green="1.0" blue="1.0" />
+						 
 						 <ExitDirections north="true" south="false" west="false" east="false" />
 						 
 						 <Exits>

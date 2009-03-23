@@ -387,7 +387,7 @@ void Scene::update(float ms)
 	DEBUG5("cam position %f %f %f",pos.m_x*50 + r*cos(theta)*cos(phi), r*sin(theta), pos.m_y*50 - r*cos(theta)*sin(phi));
 
 	Ogre::Light* light= m_scene_manager->getLight("HeroLight");
-	light->setPosition(Ogre::Vector3(pos.m_x*50,1000,pos.m_y*50));
+	light->setPosition(Ogre::Vector3(pos.m_x*50,300,pos.m_y*50));
 
 	// alle Objekte aktualisieren
 	updateObjects();
@@ -1475,21 +1475,8 @@ void Scene::createScene()
 	m_scene_manager->clearScene();
 	clearObjects();
 	SoundSystem::clearObjects();
-
-    m_scene_manager->setAmbientLight(Ogre::ColourValue(0.4,0.4,0.4));
-    Ogre::Light *light = m_scene_manager->createLight("HeroLight");
-    light->setType(Ogre::Light::LT_SPOTLIGHT);
-    light->setDiffuseColour(0.8, 0.8, 0.8);
-    light->setSpecularColour(0.5, 0.5, 0.5);
-    light->setDirection(0,-1,0);
-
-    light = m_scene_manager->createLight("RegionLight");
-    light->setType(Ogre::Light::LT_DIRECTIONAL);
-    light->setDiffuseColour(0.6, 0.6, 0.6);
-    light->setSpecularColour(1.0, 1.0, 1.0);
-    light->setDirection(Ogre::Vector3(400,1000,300));
-
-
+	
+	
 	// Liste der statischen Objekte
 	Ogre::StaticGeometry* static_geom = m_scene_manager->createStaticGeometry ("StaticGeometry");
 	
@@ -1497,7 +1484,23 @@ void Scene::createScene()
 
 	Region* region = m_document->getLocalPlayer()->getRegion();
 	
+	float *colour;
+	colour= region->getHeroLight();
+	m_scene_manager->setAmbientLight(Ogre::ColourValue(0.4,0.4,0.4));
+	Ogre::Light *light = m_scene_manager->createLight("HeroLight");
+	light->setType(Ogre::Light::LT_POINT);
+	light->setDiffuseColour(colour[0], colour[1], colour[2]);
+	light->setSpecularColour(0.0, 0.0, 0.0);
+	light->setAttenuation(1000,0.5,0.000,0.00001);
+	DEBUG5("hero light %f %f %f",colour[0], colour[1], colour[2]);
 	
+	colour= region->getDirectionalLight();
+	light = m_scene_manager->createLight("RegionLight");
+	light->setType(Ogre::Light::LT_DIRECTIONAL);
+	light->setDiffuseColour(colour[0], colour[1], colour[2]);
+	light->setSpecularColour(colour[0], colour[1], colour[2]);
+	light->setDirection(Ogre::Vector3(-1,-1,-1));
+	DEBUG5("directional light %f %f %f",colour[0], colour[1], colour[2]);
 
 	if (region !=0)
 	{
@@ -1542,7 +1545,11 @@ void Scene::createScene()
 		
 		m_scene_manager->setAmbientLight(Ogre::ColourValue(1.0,1.0,1.0));
 		target->update();
-		m_scene_manager->setAmbientLight(Ogre::ColourValue(0.4,0.4,0.4));
+		
+		colour= region->getAmbientLight();
+		m_scene_manager->setAmbientLight(Ogre::ColourValue(colour[0], colour[1], colour[2]));
+		DEBUG5("ambient light %f %f %f",colour[0], colour[1], colour[2]);
+		//m_scene_manager->setAmbientLight(Ogre::ColourValue(0.0,0.0,0.0));
 		
 		// Boden erstellen
 		if (region->getGroundMaterial() != "")
