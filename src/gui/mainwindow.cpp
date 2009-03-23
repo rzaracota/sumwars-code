@@ -1019,7 +1019,7 @@ void MainWindow::updateObjectInfo()
 					continue;
 				
 				// verbuendete Spieler ueberspringen
-				if (World::getWorld()->getRelation(m_document->getLocalPlayer()->getFraction(), wo->getFraction()) == WorldObject::ALLIED)
+				if (World::getWorld()->getRelation(m_document->getLocalPlayer()->getFraction(), wo->getFraction()) == WorldObject::ALLIED && wo->getTypeInfo()->m_type == WorldObject::TypeInfo::TYPE_PLAYER)
 				{
 					continue;
 				}
