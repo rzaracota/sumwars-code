@@ -1,5 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <Object type="FIXED_OBJECT" subtype="wall3" layer="NORMAL">
 	<Mesh file="wall3.mesh" />
-	<Layer layer="NORMAL" />
-	<Geometry shape="RECT" extent_x="4" extent_y ="0.61" />
+	<Layer  />
+	<Geometry shape="RECT" extent_x="0.4090934843" extent_y="2"/>
 </Object>
