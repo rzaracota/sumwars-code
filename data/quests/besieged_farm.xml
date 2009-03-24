@@ -1,0 +1,139 @@
+<Quest name="Der belagerte Bauernhof" table_name="besieged_farm">
+	
+	<Init>
+		local a = 2
+	</Init>
+	
+	<Description>
+		if (besieged_farm.finished) then
+			return _("Quest finished")
+		else
+			return _("Quest description")
+		end
+	</Description>
+	
+	<NPC refname="Sergeant Lutterer">
+		<Topic name="besieged_farm" start_option="Besieged Farm">
+			<Condition>
+				if (besieged_farm.finished ~= true and besieged_farm.freed ~= true) then
+					return true
+				else
+					return false
+				end
+			</Condition>
+			<Effect>
+				if (besieged_farm.started == true) then
+					speak("Sergeant Lutterer",_("Ihr habt Brons Hof noch nicht befreit."),1000)
+				else
+					addQuestion(_("Quest annehmen?"))
+					addAnswer(_("Yes"),"start_besieged_farm_quest")
+					addAnswer(_("No"),"end")
+				end
+			</Effect>
+		</Topic>
+		
+		<Topic name="start_besieged_farm_quest" >
+			<Effect>
+				speak("Sergeant Lutterer",_("Ah, habt ihr doch ..."),1000)
+				speak("player", _("Wir sind unterwegs."),1000)
+				besieged_farm.started = true
+			</Effect>	
+		</Topic>
+		
+		<Topic name="besieged_farm_reward" start_option="Besieged Farm (Reward)">
+			<Condition>
+				if (besieged_farm.started == true and besieged_farm.finished ~= true and besieged_farm.freed == true) then
+					return true
+				else
+					return false
+				end
+			</Condition>
+			<Effect>
+				besieged_farm.finished = true
+				speak("player", _("Es ist vollbracht"),1000)
+				speak("Sergeant Lutterer",_("Habt ihr schon ..."),1000)
+				local players = getPlayers()
+				local i,player,count
+				for i,player in ipairs(players) do
+					if (getPlayerPrivateVar(player,"besieged_farm.reward") ~= true) then
+						setPlayerPrivateVar(player,"besieged_farm.reward",true)
+						setObjectValue(player,"gold", getObjectValue(player,"gold") + 200)
+					end
+				end
+			</Effect>
+		</Topic>
+	</NPC>
+	
+	
+	<NPC refname="Brons Tuer">
+		<Topic name="besieged_farm_safe" start_option="Brons Safety">
+			<Condition>
+				if (besieged_farm.started == true and besieged_farm.finished ~= true and besieged_farm.freed == true and besieged_farm.asked ~= true) then
+					return true
+				else
+					return false
+				end
+			</Condition>
+			<Effect>
+				besieged_farm.asked = true
+				speak("player", _("Die Goblins sind weg ..."),1000)
+				speak("Brons Tuer",_("Ich danke euch ..."),1000)
+				speak("player", _("Wie das denn?"),1000)
+				speak("Brons Tuer",_("Mit einem Kristall ..."),1000)
+				speak("player",_("Natuerlich ..."),1000)
+				createDialogue()
+				if (getPlayers()[2] ~= nil) then
+					if (getMages()[1] ~= getSpeaker("player")) then
+						local mage = getMages()[1]
+					else
+						local mage = getMages()[2]
+					end
+					addSpeaker(mage,"mage")
+					speak("mage",_("Also ehrlich, ..."),1000)
+					speak("player",_("Lasst und das ..."),1000)
+				end
+			</Effect>
+		</Topic>
+	</NPC>
+	
+	
+	<Region name="aisNorthMeadow">
+		<Event trigger ="create_region" once = "true">
+			<Effect>
+				addArea("DoorEnemiesArea","circle","door",15)
+				if (besieged_farm.freed ~= true) then
+					besieged_farm_tmp.monsters = createMonsterGroup("goblins","door")
+				end
+			</Effect>
+		</Event>
+		
+		<Event trigger ="unit_die">
+			<Condition>
+				if (besieged_farm.started == true and besieged_farm.finished ~= true) then
+					return true
+				else
+					return false
+				end
+			</Condition>
+			<Effect>
+				insertTrigger("checkFarmSafety")
+			</Effect>
+		</Event>
+		
+		<Event trigger ="checkFarmSafety">
+			<Condition>
+				local list = getMonstersInArea("DoorEnemiesArea")
+				if (list[1] == nil and besieged_farm.started == true and besieged_farm.finished ~= true and besieged_farm.freed ~= true) then
+					return true
+				else
+					return false
+				end
+			</Condition>
+			<Effect>
+				besieged_farm.freed = true
+			</Effect>
+		</Event>
+	</Region>
+	
+</Quest>
+

@@ -61,8 +61,31 @@
 			speak('peasant','du nervst!',1000);
 		</Effect>
 	</Topic>
-	
-	
+</NPC>
+
+
+<NPC refname="Fenor Marken">
+</NPC>
+
+<NPC refname="Sergeant Lutterer">
+</NPC>
+
+<NPC refname="Michel Bron">
+</NPC>
+
+<NPC refname="Brons Frau">
+</NPC>
+
+<NPC refname="Brons Tuer">
+</NPC>
+
+<NPC refname="Gertlinde Kampfer">
+</NPC>
+
+<NPC refname="Sergeant Wober">
+</NPC>
+
+<NPC refname="Maylons Geist">
 </NPC>
 
 

@@ -10,6 +10,10 @@ function isPlayer(obj)
 		return (getObjectValue(obj,"type") == "player")
 		end;
 
+function isNotPlayer(obj)
+		return (getObjectValue(obj,"type") ~= "player")
+		end;
+
 function isFixedObject(obj)
 		return (getObjectValue(obj,"type") == "fixed_object")
 		end;
@@ -70,4 +74,31 @@ function getPlayers()
 	return getRolePlayers("all");
 end;
 
+function getWarriors()
+	return getRolePlayers("warrior");
+end;
+
+function getMages()
+	return getRolePlayers("mage");
+end;
+
+function getMagesWithoutPlayers()
+	return filter(getRolePlayers("mage"),isNotPlayer);
+end;
+
+function getArchers()
+	return getRolePlayers("mage");
+end;
+
+function getPriests()
+	return getRolePlayers("priest");
+end;
+
+function getMales()
+	return getRolePlayers("male");
+end;
+
+function getFemales()
+	return getRolePlayers("female");
+end;
 

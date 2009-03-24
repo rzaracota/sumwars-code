@@ -1,12 +1,14 @@
 <Quest name="Ein Freund in Not" table_name="rescue_willard">
 	
 	<Init>
-		rescue_willard.freed = false;
+		local a = 2
 	</Init>
 	
 	<Description>
 		if (rescue_willard.finished) then
-			return _("Quest finished");
+			return _("Quest finished")
+		else
+			return _("Quest description")
 		end
 	</Description>
 	
@@ -23,28 +25,60 @@
 				if (rescue_willard.started == true) then
 					speak('Fenor Marken',_("Ihr habt Willard noch nicht befreit."),1000)
 				else
-					speak('Fenor Marken',_("Ein ..."),1000)
-					speak('player',_("... Gespraech"),1000)
-					speak('Fenor Marken',_("Werdet ihr ihn befreien?"),1000)
+					speak('Fenor Marken',_("Heda! ..."),1000)
+					speak('player',_("Und wenn es ..."),1000)
+					speak('Fenor Marken',_("Ich habe laeuten ..."),1000)
+					createDialogue()
+					if (getPlayers()[2] ~= nil and getPlayers()[2] ~= getSpeaker("player")) then
+						local any = getPlayers()[2]
+					else
+						local any = getPlayers()[1]
+					end
+					addSpeaker(any,"any")
+					speak("any",_("Wer haette das ..."),1000)
+					speak('Fenor Marken',_("Hae! Dafuer haette ..."),1000)
+					speak("any",_("Verzeiht. Vielleicht war ..."),1000)
+					speak('player',_("Wie auch immer ..."),1000)
+					speak('Fenor Marken',_("Danke. Mein Name ..."),1000)
+					speak('player',_("Sicher wollt ihr ..."),1000)
+					speak('Fenor Marken',_("Nein. Willard ist ..."),1000)
+					speak('player',_("Ich verstehe."),1000)
 					addQuestion(_("Quest annehmen?"))
 					addAnswer(_("Ja"),'start_rescue_willard_quest')
-					addAnswer(_("Nein"),'end')
+					addAnswer(_("Nein"),'refuse_rescue_willard_quest')
 				end
 			</Effect>
 		</Topic>
 		
 		<Topic name="start_rescue_willard_quest" >
 			<Effect>
-				speak('player', _("Wir machen uns auf den Weg."),1500)
-				speak('Fenor Marken',_("Viel Glueck!"),1000);
+				createDialogue()
+				local war = getWarriors()[1]
+				addSpeaker(war,"war")
+				speak("war",_("Euer Freund ist ..."),1000)
+				if (getPlayers()[1] ~= getSpeaker("player")) then
+					local any = getPlayers()[1]
+				else
+					local any = getPlayers()[2]
+				end
+				addSpeaker(any,"any")
+				speak("any",_("Und fragt nicht ..."),1000)
+				speak('Fenor Marken',_("Ich danke euch ..."),1000);
 				rescue_willard.started = true;
+			</Effect>	
+		</Topic>
+		
+		<Topic name="refuse_rescue_willard_quest" >
+			<Effect>
+				speak("player",_("Es tut mir ..."),1000)
+				speak('Fenor Marken',_("Ihr seid genauso ..."),1000);
 			</Effect>	
 		</Topic>
 	</NPC>
 	
 	
 <NPC refname="Willard">
-	<Topic name="rescue_willard_reward" start_option="Willard (Belohnung)">
+	<Topic name="rescue_willard_reward" start_option="Willard (Reward)">
 		<Condition>
 			if (rescue_willard.finished == true) then
 				return false
@@ -54,9 +88,12 @@
 		</Condition>
 		<Effect>
 			rescue_willard.finished = true
-			speak('Willard','Ich bin euch zu grossem Dank verpflichtet.',1000)
-			speak('Willard',_("Dafuer bekommt ihr von mir jetzt eine Belohnung."),1000)
-			speak('player', _("Yeah"),1000)
+			speak("Willard","Danke fuer eure ...",1000)
+			speak("player", _("Ich nehme an ..."),1000)
+			speak("Willard","Der bin ich ...",1000)
+			speak("player", _("Euer Freund Fenor ..."),1000)
+			speak("Willard","Bei den Goettern ...",1000)
+			speak("player", _("Ich danke euch."),1000)
 			local players = getPlayers()
 			local i,player
 			for i,player in ipairs(players) do
@@ -144,7 +181,7 @@
 		
 		<Event trigger ="unit_die">
 			<Condition>
-				if (rescue_willard.started == true and rescue_willard.finished == false) then
+				if (rescue_willard.started == true and rescue_willard.finished ~= true) then
 					return true
 				else
 					return false
@@ -159,7 +196,7 @@
 		<Event trigger ="checkWillardSafety">
 			<Condition>
 				local list = getMonstersInArea('WillardEnemiesArea')
-				if (list[1] == nil and rescue_willard.started == true and rescue_willard.finished == false and rescue_willard.freed == false) then
+				if (list[1] == nil and rescue_willard.started == true and rescue_willard.finished ~= true and rescue_willard.freed ~= true) then
 					return true
 				else
 					return false

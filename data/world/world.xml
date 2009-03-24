@@ -253,6 +253,16 @@
 		<Environments>
 			<Environment height="1.0" name="meadow" />
 		</Environments>
+		
+		<Event trigger ="create_region" once = "true">
+			<Effect>
+				gertlinde_kampfer = createObject("peasant", "locHerbalist");
+				setRefName(gertlinde_kampfer, "Gertlinde Kampfer");
+				addArea("HerbalistArea","circle","locHerbalist",5);
+				sergeant_lutterer = createObject("peasant", "locSergeant");
+				setRefName(sergeant_lutterer, "Sergeant Lutterer");
+			</Effect>
+		</Event>
 	</Region>
 
 <!-- Aisen, Noerdliche Wiese [Feld und Wiesen]; ungefaehr 20 Min, eher offen; Level 7 - 12; Sidequests aus Joringsbr�ck -->
@@ -282,7 +292,14 @@
 		<Environments>
 			<Environment height="1.0" name="meadow" />
 		</Environments>
-	</Region>	
+		
+		<Event trigger ="create_region" once = "true">
+			<Effect>
+				brons_door = createObject("peasant", "door")
+				setRefName(brons_door, "Brons Tuer")
+			</Effect>
+		</Event>
+	</Region>
 	
 <!-- Aisen, Joringsforst [Wald und Wiesen]; ungefaehr 30 Min, halbwegs offen; Level 7 - 12 -->	
 <!-- Goblinschlaeger, Goblinraeuber, Goblinjaeger, Goblinhunde, Goblinkrieger, Goblinschamanen?, Waldalraunen? -->
@@ -378,6 +395,12 @@
 			<Environment height="1.0" name="meadow" />
 		</Environments>
 		
+		<Event trigger ="create_region" once = "true">
+			<Effect>
+				sergeant_wober = createObject("peasant", "locSergeant");
+				setRefName(sergeant_wober, "Sergeant Wober");
+			</Effect>
+		</Event>
 	</Region>
 	
 <!-- Aisen, Zwergentrutz Stadtmauer; ungef�hr 20 min, relativ starres Design; Level 16 - 19 -->
