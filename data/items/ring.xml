@@ -1,0 +1,141 @@
+<!-- Ringe -->
+
+<!-- Bronzering -->
+<Item type="ring" subtype="bronze_rng" name="bronze ring" size="small">
+	<Image image="set:noMedia.png image:full_image" />
+	<Mesh file="potion.mesh" />
+	<Attribute
+		level_requirement="2"
+		character_requirement="15"
+		min_enchant="25"
+		max_enchant="45"
+		modchance_magic_power_mod="0.1"
+		modchance_willpower_mod="0.1"
+		modchance_resist_phys_mod="0.04"
+		modchance_resist_fire_mod="0.11"
+		modchance_resist_ice_mod="0.11"
+		modchance_resist_air_mod="0.11"
+		modchance_resist_all_mod="0.04"
+		modchance_damage_mult_phys_mod="0.09"
+		modchance_damage_mult_fire_mod="0.1"
+		modchance_damage_mult_ice_mod="0.1"
+		modchance_damage_mult_air_mod="0.1"
+	/>
+	
+	<DropChance
+		level="2"
+		probability="1.0"
+	/>
+</Item>
+
+<!-- Bernsteinring -->
+<Item type="ring" subtype="amber_rng" name="amber ring" size="small">
+	<Image image="set:noMedia.png image:full_image" />
+	<Mesh file="potion.mesh" />
+	<Attribute
+		level_requirement="4"
+		character_requirement="15"
+		min_enchant="50"
+		max_enchant="80"
+		modchance_magic_power_mod="0.1"
+		modchance_willpower_mod="0.1"
+		modchance_resist_phys_mod="0.04"
+		modchance_resist_fire_mod="0.11"
+		modchance_resist_ice_mod="0.11"
+		modchance_resist_air_mod="0.11"
+		modchance_resist_all_mod="0.04"
+		modchance_damage_mult_phys_mod="0.09"
+		modchance_damage_mult_fire_mod="0.1"
+		modchance_damage_mult_ice_mod="0.1"
+		modchance_damage_mult_air_mod="0.1"
+	/>
+	
+	<DropChance
+		level="4"
+		probability="1.0"
+	/>
+</Item>
+
+<!-- Silberring -->
+<Item type="ring" subtype="silver_rng" name="silver ring" size="small">
+	<Image image="set:noMedia.png image:full_image" />
+	<Mesh file="potion.mesh" />
+	<Attribute
+		level_requirement="8"
+		character_requirement="15"
+		min_enchant="90"
+		max_enchant="140"
+		modchance_magic_power_mod="0.1"
+		modchance_willpower_mod="0.1"
+		modchance_resist_phys_mod="0.04"
+		modchance_resist_fire_mod="0.11"
+		modchance_resist_ice_mod="0.11"
+		modchance_resist_air_mod="0.11"
+		modchance_resist_all_mod="0.04"
+		modchance_damage_mult_phys_mod="0.09"
+		modchance_damage_mult_fire_mod="0.1"
+		modchance_damage_mult_ice_mod="0.1"
+		modchance_damage_mult_air_mod="0.1"
+	/>
+	
+	<DropChance
+		level="8"
+		probability="1.0"
+	/>
+</Item>
+
+<!-- Jettring -->
+<Item type="ring" subtype="jet_rng" name="jet ring" size="small">
+	<Image image="set:noMedia.png image:full_image" />
+	<Mesh file="potion.mesh" />
+	<Attribute
+		level_requirement="15"
+		character_requirement="15"
+		min_enchant="130"
+		max_enchant="200"
+		modchance_magic_power_mod="0.1"
+		modchance_willpower_mod="0.1"
+		modchance_resist_phys_mod="0.04"
+		modchance_resist_fire_mod="0.11"
+		modchance_resist_ice_mod="0.11"
+		modchance_resist_air_mod="0.11"
+		modchance_resist_all_mod="0.04"
+		modchance_damage_mult_phys_mod="0.09"
+		modchance_damage_mult_fire_mod="0.1"
+		modchance_damage_mult_ice_mod="0.1"
+		modchance_damage_mult_air_mod="0.1"
+	/>
+	
+	<DropChance
+		level="15"
+		probability="1.0"
+	/>
+</Item>
+
+<!-- Goldring -->
+<Item type="ring" subtype="gold_rng" name="gold ring" size="small">
+	<Image image="set:noMedia.png image:full_image" />
+	<Mesh file="potion.mesh" />
+	<Attribute
+		level_requirement="21"
+		character_requirement="15"
+		min_enchant="160"
+		max_enchant="250"
+		modchance_magic_power_mod="0.1"
+		modchance_willpower_mod="0.1"
+		modchance_resist_phys_mod="0.04"
+		modchance_resist_fire_mod="0.11"
+		modchance_resist_ice_mod="0.11"
+		modchance_resist_air_mod="0.11"
+		modchance_resist_all_mod="0.04"
+		modchance_damage_mult_phys_mod="0.09"
+		modchance_damage_mult_fire_mod="0.1"
+		modchance_damage_mult_ice_mod="0.1"
+		modchance_damage_mult_air_mod="0.1"
+	/>
+	
+	<DropChance
+		level="21"
+		probability="1.0"
+	/>
+</Item>

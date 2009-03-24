@@ -1,5 +1,5 @@
 <!-- SHORT BOWS -->
-<!-- TODO ersetze twohanded="no", -->
+
 <!-- Uebungsbogen -->
 <Item type="weapon" subtype="pract_sbw" name="practice bow" size="medium">
 	<Mesh file="bow.mesh" />
@@ -292,7 +292,7 @@
 </Item>
 
 <!-- Kriegskurzbogen -->
-<Item type="weapon" subtype="battle_sbw" name="battleshortbow" size="medium">
+<Item type="weapon" subtype="battle_sbw" name="battle shortbow" size="medium">
 	<Image image="set:bow.png image:full_image" />
 	<Mesh file="bow.mesh" />
 	<Attribute

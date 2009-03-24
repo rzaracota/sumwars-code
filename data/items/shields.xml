@@ -90,7 +90,6 @@
 	/>
 </Item>
 
-
 <!-- Bronzeschild 8-->
 <Item type="shield" subtype="bronze_shd" name="bronze shield" size="medium">
 	 <Image image="set:shield.png image:full_image" />
@@ -150,7 +149,6 @@
 		probability="1.0"
 	/>
 </Item>
-
 
 <!-- Stahlschild 19-->
 <Item type="shield" subtype="steel_shd" name="steel shield" size="medium">

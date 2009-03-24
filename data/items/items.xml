@@ -142,7 +142,7 @@ HINWEISE:
 -->
 
 <!-- general
-<Item type="weapon" subtype="short_sw" size="medium">
+<Item type="weapon" subtype="short_sw" name="string" size="medium">
 	<Image image="set:sword.png image:full_image" />
 	<Mesh file="sword.mesh" />
 	<Attribute
