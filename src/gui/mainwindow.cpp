@@ -338,6 +338,17 @@ void MainWindow::update()
 				trade->setVisible(false);
 			}
 			
+			CEGUI::FrameWindow* worldmap = (CEGUI::FrameWindow*) win_mgr.getWindow("WorldmapWindow");
+			if (wflags & Document::WORLDMAP)
+			{
+				m_sub_windows["Worldmap"]->update();
+				worldmap->setVisible(true);
+			}
+			else
+			{
+				worldmap->setVisible(false);
+			}
+			
 			// Chat Fenster anzeigen wenn entsprechendes Flag gesetzt
 			CEGUI::FrameWindow* chat_window = (CEGUI::FrameWindow*) win_mgr.getWindow("ChatWindow");
 			if (wflags & Document::CHAT)
@@ -565,7 +576,7 @@ bool MainWindow::setupGameScreen()
 		
 		setupTrade();
 		
-		
+		setupWorldmap();
 		
 	}
 	catch (CEGUI::Exception e)
@@ -825,6 +836,18 @@ void MainWindow::setupTrade()
 {
 	Window* wnd = new TradeWindow(m_document);
 	m_sub_windows["Trade"] = wnd;
+	
+	
+	// Inventar anfangs ausblenden
+	m_game_screen->addChildWindow(wnd->getCEGUIWindow());
+	wnd->getCEGUIWindow()->setVisible(false);
+}
+
+
+void MainWindow::setupWorldmap()
+{
+	Window* wnd = new Worldmap(m_document);
+	m_sub_windows["Worldmap"] = wnd;
 	
 	
 	// Inventar anfangs ausblenden

@@ -170,6 +170,11 @@ void Creature::die()
 	getRegion()->insertTrigger(tr);
 }
 
+bool Creature::canBeAttacked()
+{
+	return (getState() == STATE_ACTIVE && getDialogueId() == 0);
+}
+
 void Creature::initAction()
 {
 	//wenn Idle Animation schon laeuft, laufen lassen
@@ -694,7 +699,7 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 			break;
 		
 		case Action::USE:
-			if (cgoal)
+			if (goalobj)
 				goalobj->reactOnUse(getId());
 			break;
 
@@ -3268,16 +3273,12 @@ void Creature::calcBaseAttrMod()
 
 }
 
-bool Creature::reactOnUse( int id)
-{
-    return true;
-}
 
 bool Creature::takeDamage(Damage* d)
 {
 	// Lebewesen kann nur im Zustand aktiv Schaden nehmen
 	// und wenn es nicht gerade in einen Dialog verwickelt ist
-	if (getState() != STATE_ACTIVE || getDialogueId() != 0)
+	if (!canBeAttacked())
 		return false;
 
 	DEBUG5("take Damage %i",getId());

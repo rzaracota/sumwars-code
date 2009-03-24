@@ -2030,6 +2030,14 @@ bool World::processNetEvent(Region* region,CharConv* cv)
 				return false;
 			}
 			break;
+			
+		case NetEvent::PLAYER_WAYPOINT_DISCOVERED:
+			if (m_players->count(event.m_id)>0)
+			{
+				object = (*m_players)[event.m_id];
+				static_cast<Player*>(object)->addWaypoint(event.m_data,false);
+			}
+			break;
 
 		case NetEvent::PLAYER_PARTY_CHANGED:
 			if (m_players->count(event.m_id)>0)
@@ -2076,6 +2084,7 @@ bool World::processNetEvent(Region* region,CharConv* cv)
 			World::getWorld()->getParty( event.m_data )->setRelation(event.m_id, (WorldObject::Relation) rel);
 			DEBUG("party %i changed relation to %i to %i",event.m_data, event.m_id, rel);
 			break;
+			
 			
 		case NetEvent::REGION_CUTSCENE:
 			mode = (bool) event.m_data;

@@ -289,3 +289,15 @@
 	
 </ObjectGroupTemplate>
 
+<ObjectGroupTemplate name = "waypoint_templ" >
+	<Shape
+		  type = "RECT"
+		  extent_x = "2"
+		  extent_y = "2"
+		  angle ="0"
+		  />
+	<Locations>
+		<Location name = "WaypointLoc" pos_x="0" pos_y="0" />
+	</Locations>
+</ObjectGroupTemplate>	
+

@@ -12,6 +12,7 @@ RegionData::RegionData()
 		m_hero_light[i] = 1.0;
 		m_directional_light[i] = 0.3;
 	}
+	m_has_waypoint = false;
 }
 
 
@@ -1303,6 +1304,20 @@ void Region::update(float time)
 		}
 		del = false;
 	}
+	
+	// Spieler die die Region per Wegpunkt verlassen bearbeiten
+	std::map<int,int>::iterator wt;
+	for (wt = m_teleport_players.begin(); wt != m_teleport_players.end(); ++wt)
+	{
+		Player* pl = static_cast<Player*>(getObject (wt->first));
+		
+		// Spieler aus der Region entfernen
+		deleteObject(pl);
+
+		// Spieler in die neue Region einfuegen
+		World::getWorld()->insertPlayerIntoRegion(pl, wt->second, "WaypointLoc");
+	}
+	m_teleport_players.clear();
 	
 	// Trigger & Events abarbeiten
 	// Zeitverzoegerte Trigger

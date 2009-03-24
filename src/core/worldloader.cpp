@@ -183,6 +183,17 @@ bool WorldLoader::loadRegion(TiXmlNode* node, RegionData* rdata)
 			{
 				attr.getString("location",rdata->m_revive_location);
 			}
+			else if (!strcmp(child->Value(), "Waypoint"))
+			{
+				WaypointInfo winfo;
+				winfo.m_id = rdata->m_id;
+				winfo.m_name = rdata->m_name;
+				attr.getFloat("world_x",winfo.m_world_coord.m_x);
+				attr.getFloat("world_y",winfo.m_world_coord.m_y);
+				
+				rdata->m_has_waypoint = true;
+				World::getWorld()->addWaypoint(winfo.m_id,winfo);
+			}
 			else if (!strcmp(child->Value(), "Event"))
 			{
 				TriggerType type;

@@ -38,6 +38,7 @@
 #include "tradewindow.h"
 #include "optionswindow.h"
 #include "networkwindows.h"
+#include "worldmap.h"
 
 /**
  * \class MainWindow
@@ -172,6 +173,12 @@ class MainWindow :
 	 * \brief erstellt Fenster Handel
 	*/
 	void setupTrade();
+	
+	/**
+	 * \fn void setupWorldmap()
+	 * \brief Erstellt Weltkarte Fenster
+	 */
+	void setupWorldmap();
 	
 	/**
 	 * \fn bool initInputs()

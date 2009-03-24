@@ -163,6 +163,8 @@ bool Player::init()
 	bas->m_special_flags=0;
 	bas->m_abilities[0] = 0xffffff;
 	
+	m_using_waypoint = false;
+	
 	bool init = false;
 	
 	Item* si;
@@ -309,6 +311,11 @@ bool Player::init()
 	return true;
 }
 
+bool Player::canBeAttacked()
+{
+	return (Creature::canBeAttacked() && !m_using_waypoint);
+}
+
 void  Player::revive()
 {
 	DEBUG("reviving");
@@ -374,7 +381,7 @@ void  Player::revive()
 bool Player::onGamefieldClick(ClientCommand* command)
 {
 	// keine Aktionen waehrend eines Dialogs oder Handel
-	if (getDialogueId()!=0 || getTradeInfo().m_trade_partner !=0)
+	if (getDialogueId()!=0 || getTradeInfo().m_trade_partner !=0 || isUsingWaypoint())
 	{
 		return true;
 	}
@@ -466,8 +473,8 @@ bool Player::onGamefieldClick(ClientCommand* command)
 					// festes Objekt benutzen
 					com->m_type =Action::USE;
 					com->m_goal_object_id = command->m_id;
-					com->m_range = 0.5;
-					DEBUG5("action range %f",getCommand()->m_range);
+					com->m_range = 1.0;
+					DEBUG5("use Object %i",command->m_id);
 				}
 				
 			}
@@ -1337,6 +1344,21 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 
 			}
 			break;
+		
+		case BUTTON_WAYPOINT_CHOSE:
+			
+			if (World::getWorld()->isServer())
+			{
+				setUsingWaypoint(false);
+				if (command->m_id>=0 && command->m_id!= getRegion()->getId())
+				{
+					DEBUG5("Player Teleport to Region %i",command->m_id);
+					getRegion()->insertPlayerTeleport(getId(), command->m_id);
+					clearCommand(true);
+				}
+			}
+			break;
+		
 
 		default:
 			DEBUG("unknown command: %i",command->m_button);
@@ -1775,6 +1797,18 @@ void Player::toString(CharConv* cv)
 
 		}
 	}
+	
+	// IDs der Wegpunkte
+	cv->toBuffer(m_waypoints.size());
+	cv->printNewline();
+	
+	std::set<short>::iterator it;
+	short regid;
+	for (it = m_waypoints.begin(); it != m_waypoints.end(); ++it)
+	{
+		regid = (short) (*it);
+		cv->toBuffer(regid);
+	}
 
 }
 
@@ -1798,6 +1832,17 @@ void Player::fromString(CharConv* cv)
 		readItem(cv);
 	}
 
+	// IDs der Wegpunkte
+	int nr=0;
+	cv->fromBuffer(nr);
+	
+	short regid;
+	m_waypoints.clear();
+	for (int i=0; i<nr; i++)
+	{
+		cv->fromBuffer(regid);
+		m_waypoints.insert(regid);
+	}
 }
 
 void Player::readItem(CharConv* cv)
@@ -1879,14 +1924,6 @@ void Player::toStringComplete(CharConv* cv)
 	m_left_damage.toString(cv);
 	m_right_damage.toString(cv);
 
-	/*
-	for (i=0;i<4;i++)
-	{
-		printf("%s %f - %f\n",Damage::getDamageTypeName((Damage::DamageType) i).c_str(),m_left_damage.m_min_damage[i],m_left_damage.m_max_damage[i]);
-		printf("%s %f - %f\n",Damage::getDamageTypeName((Damage::DamageType) i).c_str(),m_right_damage.m_min_damage[i],m_right_damage.m_max_damage[i]);
-	}
-	*/
-
 	for (i=0;i<6;i++)
 		cv->toBuffer(getBaseAttrMod()->m_abilities[i]);
 
@@ -1904,7 +1941,6 @@ void Player::toStringComplete(CharConv* cv)
 	DEBUG5("trel %f %f",trel1,trel2);
 	cv->toBuffer(trel1);
 	cv->toBuffer(trel2);
-	// TODO: Questinformationen
 
 
 }
@@ -1927,6 +1963,64 @@ void Player::recalcDamage()
 	}
 */
 
+}
+
+void Player::addWaypoint(short id, bool check_party)
+{
+	if (m_waypoints.count(id) ==0)
+	{
+		m_waypoints.insert(id);
+		DEBUG5("inserted Waypoint %i for player %i",id, getId());
+		
+		// Partymitglieder auch ueber den Wegpunkt informieren
+		if (check_party)
+		{
+			std::set<int>& members = getParty()->getMembers();
+			
+			Player* pl;
+			std::set<int>::iterator it;
+			for (it =members.begin(); it != members.end(); ++it)
+			{
+				pl = dynamic_cast<Player*>(World::getWorld()->getPlayer(*it));
+				if (pl !=0 && pl != this)
+				{
+					// diese Mitspieler sollen nicht ueber ihre Partymember iterieren
+					// um endlose Rekursion zu vermeiden
+					pl->addWaypoint(id,false);
+				}
+			}
+		}
+		
+		// Event das die Entdenkung des Wegpunktes beinhaltet
+		if (World::getWorld()->isServer())
+		{
+			NetEvent event;
+			event.m_type = NetEvent::PLAYER_WAYPOINT_DISCOVERED;
+			event.m_id = getId();
+			event.m_data = id;
+			
+			World::getWorld()->insertNetEvent(event);
+		}
+	}
+}
+
+bool Player::checkWaypoint(short id)
+{
+	// Spieler hat den Wegpunkt direkt
+	if (m_waypoints.count(id) >0)
+		return true;
+	
+	// Partyleader hat den Wegpunkt
+	if (getParty()->getLeader()!= getId())
+	{
+		Player* leader =  dynamic_cast<Player*>(World::getWorld()->getPlayer(getParty()->getLeader()));
+		if (leader !=0)
+		{
+			return leader->checkWaypoint(id);
+		}
+	}
+	
+	return false;
 }
 
 void Player::toSavegame(CharConv* cv)
@@ -2011,6 +2105,18 @@ void Player::toSavegame(CharConv* cv)
 		EventSystem::writeSavegame(cv);
 		cv->printNewline();
 	}
+	
+	// IDs der Wegpunkte
+	cv->toBuffer(m_waypoints.size());
+	cv->printNewline();
+	
+	std::set<short>::iterator it;
+	short regid;
+	for (it = m_waypoints.begin(); it != m_waypoints.end(); ++it)
+	{
+		regid = (short) (*it);
+		cv->toBuffer(regid);
+	}
 }
 
 
@@ -2084,6 +2190,7 @@ void Player::fromSavegame(CharConv* cv, bool local)
 		std::string instr;
 		while (c==1)
 		{
+			c=0;
 			cv->fromBuffer(c);
 			if (c==0)
 				break;
@@ -2097,6 +2204,18 @@ void Player::fromSavegame(CharConv* cv, bool local)
 	{
 		EventSystem::readSavegame(cv,getId(), local);
 		cv->printNewline();
+	}
+	
+	// IDs der Wegpunkte
+	int nr=0;
+	cv->fromBuffer(nr);
+	
+	short regid;
+	m_waypoints.clear();
+	for (int i=0; i<nr; i++)
+	{
+		cv->fromBuffer(regid);
+		m_waypoints.insert(regid);
 	}
 }
 
@@ -2198,6 +2317,11 @@ void Player::writeNetEvent(NetEvent* event, CharConv* cv)
 		cv->toBuffer(m_attribute_points);
 		cv->toBuffer(m_skill_points);
 	}
+	
+	if (event->m_data & NetEvent::DATA_WAYPOINT)
+	{
+		cv->toBuffer(m_using_waypoint);
+	}
 }
 
 void Player::processNetEvent(NetEvent* event, CharConv* cv)
@@ -2216,6 +2340,11 @@ void Player::processNetEvent(NetEvent* event, CharConv* cv)
 		cv->fromBuffer(m_attribute_points);
 		cv->fromBuffer(m_skill_points);
 	}
+	
+	if (event->m_data & NetEvent::DATA_WAYPOINT)
+	{
+		cv->fromBuffer(m_using_waypoint);
+	}
 }
 
 
@@ -2226,4 +2355,10 @@ void Player::setRevivePosition(RegionLocation regloc)
 	m_event_mask |= NetEvent::DATA_REVIVE_LOCATION;
 }
 
+void Player::setUsingWaypoint(bool val)
+{
+	DEBUG5("player %i using waypoint ",getId());
+	m_using_waypoint = val;
+	m_event_mask |= NetEvent::DATA_WAYPOINT;
+}
 

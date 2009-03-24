@@ -154,6 +154,8 @@
 		<Location name = "locWeaponTrader" pos_x="8" pos_y="1" />
 		<Location name = "locArmorTrader" pos_x="8" pos_y="-1" />
 		<Location name = "locPotionTrader" pos_x="7" pos_y="0" />
+		
+		<Location name ="WaypointLoc" pos_x="-6" pos_y="0" />
 	</Locations>
 </ObjectGroupTemplate>
 

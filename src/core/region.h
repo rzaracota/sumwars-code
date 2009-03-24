@@ -346,6 +346,11 @@ class RegionData
 		 */
 		float m_directional_light[3];
 		
+		/**
+		 * \var bool m_has_waypoint
+		 * \brief auf true gesetzt, wenn die Region einen Wegpunkt hat
+		 */
+		bool m_has_waypoint;
 };
 
 /**
@@ -1026,6 +1031,24 @@ class Region
 		{
 			return m_directional_light;
 		}
+		
+		/**
+		 * \fn Vector& getWaypointLocation()
+		 * \brief Gibt den Ort des Wegpunktes aus
+		 */
+		Vector& getWaypointLocation()
+		{
+			return m_waypoint_location;
+		}
+		
+		/**
+		 * \fn void insertPlayerTeleport(int playerid, int regionid)
+		 * \brief Fuegt einen Spieler ein, der sich aus der Region per Wegpunkt entfernt
+		 */
+		void insertPlayerTeleport(int playerid, int regionid)
+		{
+			m_teleport_players.insert(std::make_pair(playerid,regionid));
+		}
 
 		
 	private:
@@ -1181,6 +1204,12 @@ class Region
 		std::map<int, Dialogue*> m_dialogues;
 		
 		/**
+		 * \var std::map<int,int>  m_teleport_players;
+		 * \brief Liste der Spieler die sich aus der Region per Wegpunkt entfernen
+		 */
+		std::map<int,int>  m_teleport_players;
+		
+		/**
 		 * \var RegionCamera m_camera
 		 * \brief Kameraposition von der aus die Region bei Zwischenszenen gesehen wird
 		 */
@@ -1209,6 +1238,12 @@ class Region
 		 * \brief Werte fuer das Licht von Sonne/Mond
 		 */
 		float m_directional_light[3];
+		
+		/**
+		 * \var Vector m_waypoint_location
+		 * \brief Position des Wegpunktes
+		 */
+		Vector m_waypoint_location;
 
 };
 

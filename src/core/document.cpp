@@ -942,6 +942,47 @@ void Document::onButtonCloseTrade()
 	sendCommand(&command);
 }
 
+void Document::onButtonWorldmap()
+{
+	if (!checkSubwindowsAllowed() && getGUIState()->m_sheet ==  Document::GAME_SCREEN)
+		return;
+	
+	if (getGUIState()->m_shown_windows & WORLDMAP)
+	{
+		if (getLocalPlayer()->isUsingWaypoint())
+		{
+			ClientCommand command;
+			command.m_button = BUTTON_WAYPOINT_CHOSE;
+			command.m_id = -1;
+			sendCommand(&command);
+		}
+		else
+		{
+			getGUIState()->m_shown_windows &= ~	WORLDMAP;
+			m_modified |= WINDOWS_MODIFIED;
+		}
+	}
+	else
+	{	
+		
+		getGUIState()->m_shown_windows |= WORLDMAP;
+		m_modified |= WINDOWS_MODIFIED;
+	}
+	
+	
+}
+
+void Document::onButtonWaypointClicked(int id)
+{
+	if (getLocalPlayer()->isUsingWaypoint())
+	{
+		ClientCommand command;
+		command.m_button = BUTTON_WAYPOINT_CHOSE;
+		command.m_id = id;
+		sendCommand(&command);
+	}
+}
+
 void Document::sendChatMessage(std::string msg)
 {
 	
@@ -1220,6 +1261,10 @@ bool Document::onKeyPress(KeyCode key)
 			{
 				onButtonSaveExitClicked();
 			}
+			else if (m_gui_state.m_shown_windows & WORLDMAP)
+			{
+				onButtonWorldmap();
+			}
 			else if (m_gui_state.m_shown_windows & TRADE)
 			{
 				onButtonCloseTrade();
@@ -1347,7 +1392,8 @@ void Document::updateContent(float time)
 		return;
 	}
 	
-	short wmask = getGUIState()->m_shown_windows;
+	// Fenster einstellen, die automatisch geoeffnet werden
+	int wmask = getGUIState()->m_shown_windows;
 	if (player->getTradeInfo().m_trade_partner != 0)
 	{
 		if (getGUIState()->m_shown_windows != (TRADE | INVENTORY))
@@ -1360,6 +1406,18 @@ void Document::updateContent(float time)
 	if (player->getTradeInfo().m_trade_partner == 0 && (wmask & TRADE))
 	{
 		getGUIState()->m_shown_windows &= ~(TRADE | INVENTORY);
+		m_modified |= WINDOWS_MODIFIED;
+	}
+	
+	if (player->isUsingWaypoint() && getGUIState()->m_shown_windows !=	WORLDMAP)
+	{
+		getGUIState()->m_shown_windows = WORLDMAP;
+		m_modified |= WINDOWS_MODIFIED;
+	}
+	
+	if (!player->isUsingWaypoint() && (wmask & WORLDMAP))
+	{
+		getGUIState()->m_shown_windows &= ~WORLDMAP;
 		m_modified |= WINDOWS_MODIFIED;
 	}
 

@@ -193,13 +193,6 @@ public:
 	virtual bool  update (float time);
 	
 	
-	/**
-	 * \fn reactOnUse(int id)
-	 * \brief Beschreibt die Reaktion des Lebewesens, wenn ein anderes Lebewesen auf es die Aktion benutzen ausführt.  
-	 * \param id ist die ID des Lebewesens, welche die Aktion benutzen ausgeführt hat
-	 */
-	bool reactOnUse(int id);
-	
 	
 	/**
 	 * \fn void gainExperience (float exp)
@@ -316,6 +309,12 @@ public:
 	{
 		return Action::ONE_HANDED;
 	}
+	
+	/**
+	 * \fn virtual bool canBeAttacked()
+	 * \brief Gibt an, ob die Kreatur gerade angegriffen werden darf
+	*/
+	virtual bool canBeAttacked();
 	
 	/**
 	 * \fn virtual int getValue(std::string valname)
@@ -563,6 +562,8 @@ protected:
 	 * \brief Wird aufgerufen, wenn die aktuellen Lebenspunkte unter 0 sinken. Die genaue Wirkung der Funktion ist abhängig vom exakten Typ des Lebewesens (Monster etc)
 	*/
 	virtual void die();
+	
+
 	
 	/**
 	 * \fn void handleCollision(Shape* s)

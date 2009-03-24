@@ -27,7 +27,23 @@ void Action::init()
 	a->m_animation[ONE_HANDED].push_back("idle");
 	a->m_animation[TWO_HANDED].push_back("idle");
 
-
+	a = &(Action::m_base_info[Action::USE]);
+	a->m_timer_nr=0;
+	a->m_standard_time=1;
+	a->m_timer=0;
+	a->m_base_action = Action::NOACTION;
+	a->m_critical_perc=0.5;
+	a->m_distance = MELEE;
+	a->m_flags =0;
+	a->m_req_level = 0;
+	a->m_req_ability[0]= Action::NOACTION;
+	a->m_req_ability[1] = Action::NOACTION;
+	a->m_req_ability[2] = Action::NOACTION;
+	a->m_enum_name = "use";
+	a->m_animation[NO_WEAPON].push_back("idle");
+	a->m_animation[ONE_HANDED].push_back("idle");
+	a->m_animation[TWO_HANDED].push_back("idle");
+	
 	a = &(Action::m_base_info[Action::DIE]);
 	a->m_timer_nr=0;
 	a->m_standard_time=1000;

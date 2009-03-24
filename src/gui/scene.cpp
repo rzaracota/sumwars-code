@@ -237,6 +237,7 @@ RenderInfo  Scene::getObjectRenderInfo(WorldObject::TypeInfo::ObjectSubtype subt
 	else
 	{
 		// Standardmesh
+		DEBUG("no mesh for %s",subtype.c_str());
 		return RenderInfo("goblin.mesh","");
 	}
 }

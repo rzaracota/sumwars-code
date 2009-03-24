@@ -158,6 +158,7 @@ class Document
   		OPTIONS =0x2000,
 		HOST_GAME =0x4000,
 		JOIN_GAME = 0x8000,
+		WORLDMAP = 0x10000,
 	};
 
 	/**
@@ -729,6 +730,18 @@ class Document
 	 * \brief Behandelt Klick auf die Flaeche des Handelsfensters (verkauft Item)
 	 */
 	void onTradeSellClicked();
+	
+	/**
+	 * \fn void onButtonWorldmap()
+	 * \brief Behandelt Klick auf Button Weltkarte
+	 */
+	void onButtonWorldmap();
+	
+	/**
+	 * \fn void onButtonWaypointClicked(int id)
+	 * \brief Behandelt Klick auf Wegpunkt Button
+	 */
+	void onButtonWaypointClicked(int id);
 	
 	/**
 	 * \fn void sendChatMessage(std::string msg)

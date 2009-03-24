@@ -44,3 +44,13 @@ FIXED_OBJECT
 	</Environment>
 </ObjectTemplate>
 
+<ObjectTemplate name="$waypoint" type="FIXED_OBJECT">
+	<Environment name="meadow">
+		<Object name="waypoint" />
+	</Environment>
+	<Environment name="hills">
+		<Object name="waypoint" />
+	</Environment>
+</ObjectTemplate>
+	
+

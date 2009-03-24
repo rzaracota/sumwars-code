@@ -132,13 +132,12 @@ WorldObject* ObjectFactory::createObject(WorldObject::TypeInfo::ObjectType type,
 		Shape* sp;
 		DEBUG5("create fixed object: %s",subtype.c_str());
 		ret = new FixedObject(id,subtype);
-
+		ret->setState(WorldObject::STATE_STATIC);
+		
 		sp=ret->getShape();		
 		memcpy(sp,&(data->m_shape),sizeof(Shape));
 		sp->m_angle =0;
-
-
-		ret->setState(WorldObject::STATE_STATIC);
+	
 		ret->setLayer(data->m_layer);
 	}
 	return ret;

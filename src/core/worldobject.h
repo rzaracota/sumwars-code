@@ -418,7 +418,7 @@ class WorldObject {
     {
         m_type_info.m_subtype =t;
     }
-
+	
 	/**
 	 * \fn Shape* getShape()
 	 * \brief Gibt die Form des Objektes aus

@@ -47,6 +47,7 @@
 #include "templateloader.h"
 #include "quest.h"
 #include "networkstruct.h"
+#include "waypoint.h"
 
 /**
  * \def WORLD_MAX_REGIONS
@@ -448,6 +449,15 @@ public:
 	}
 	
 	/**
+	 * \fn void addWaypoint(short id, WaypointInfo& data)
+	 * \brief Fuegt einen weiteren Wegpunkt hinzu
+	 */
+	void addWaypoint(short id, WaypointInfo& data)
+	{
+		m_waypoint_data.insert(std::make_pair(id,data));
+	}
+	
+	/**
 	 * \fn std::map<std::string, Quest*>& getQuests()
 	 * \brief Gibt die Liste der Quests aus
 	 */
@@ -463,6 +473,15 @@ public:
 	RegionLocation& getPlayerStartLocation()
 	{
 		return m_player_start_location;
+	}
+	
+	/**
+	 * \fn std::map<short,WaypointInfo>& getWaypointData()
+	 * \brief Gibt die Liste aller Wegpunkte aus
+	 */
+	std::map<short,WaypointInfo>& getWaypointData()
+	{
+		return m_waypoint_data;
 	}
 	
 	/**
@@ -553,6 +572,12 @@ private:
 	 * \brief Liste der Quests
 	 */
 	std::map<std::string, Quest*> m_quests;
+	
+	/**
+	 * \var std::map<short,WaypointInfo> m_waypoint_data
+	 * \brief Daten zu Wegpunkten
+	 */
+	std::map<short,WaypointInfo> m_waypoint_data;
 	
 
 	/**

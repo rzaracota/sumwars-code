@@ -480,8 +480,18 @@ bool MapGenerator::insertGroupTemplates(MapData* mdata, RegionData* rdata)
 
 		
 	}
-
-
+	
+	// Wegpunkt einfuegen
+	templ = ObjectFactory::getObjectGroupTemplate("waypoint_templ");
+	memcpy(&s , templ->getShape(), sizeof(Shape));
+	succ = getTemplatePlace(mdata,&s,pos);
+	if (succ == false)
+	{
+		// Wegpunkt konnte nicht platziert werden
+		return false;
+	}
+	mdata->m_region->createObjectGroup("waypoint_templ",pos,0);
+	
 	// fakultative Objektgruppen einfuegen
 	std::multimap<int, RegionData::ObjectGroupTemplateSet >::reverse_iterator jt;
 	for (jt = rdata->m_object_groups.rbegin(); jt != rdata->m_object_groups.rend(); ++jt)
@@ -518,6 +528,8 @@ bool MapGenerator::insertGroupTemplates(MapData* mdata, RegionData* rdata)
 			mdata->m_region->createObjectGroup(jt->second.m_group_name,pos,0);
 		}
 	}
+	
+	
 
 	return true;
 }
@@ -745,6 +757,18 @@ void MapGenerator::createExits(MapData* mdata, RegionData* rdata)
 			*(mdata->m_base_map->ind(int(pos.m_x/8), int(pos.m_y/8))) = 2;
 		}
 
+	}
+	
+	if (rdata->m_has_waypoint)
+	{
+		Vector pos = mdata->m_region->getLocation("WaypointLoc");
+		WorldObject* wo =	 new Waypoint(World::getWorld()->getValidId());
+		mdata->m_region->insertObject(wo,pos);
+		mdata->m_region->getWaypointLocation() = pos;
+		
+		//WorldObject* wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT,"tree1");
+		//mdata->m_region->insertObject(wo,pos);
+		DEBUG("waypoint at %f %f %i",pos.m_x, pos.m_y,wo->getId());
 	}
 }
 

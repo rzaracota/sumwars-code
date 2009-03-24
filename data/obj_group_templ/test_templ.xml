@@ -102,7 +102,7 @@
 </ObjectGroupTemplate>
 
 
-<ObjectGroupTemplate name = "test1" >
+<ObjectGroupTemplate name = "test3" >
 	<Shape
 		  type = "RECT"
 		  extent_x = "16.0"

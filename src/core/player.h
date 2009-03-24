@@ -585,6 +585,43 @@ public:
 	 */
 	void setRevivePosition(RegionLocation regloc);
 	
+	/**
+	 * \fn void addWaypoint(short id, bool check_party=false)
+	 * \brief Fuegt dem Spieler einen Wegpunkt hinzu
+	 * \param id ID der Region
+	 * \param check_party Wenn auf true gesetzt dann wird der Wegpunkt bei der kompletten Party hinzugefuegt, falls er noch nicht aktiv war
+	 */
+	void addWaypoint(short id, bool check_party=false);
+	
+	/**
+	 * \fn bool checkWaypoint(short id)
+	 * \brief Prueft, ob der Spieler sich zu einem Wegpunkt teleportieren darf
+	 * \param id ID der Region
+	 */
+	bool checkWaypoint(short id);
+	
+	/**
+	 * \fn bool isUsingWaypoint()
+	 * \brief Gibt aus, ob der Spieler gerade einen Wegpunkt verwendet
+	 */
+	bool isUsingWaypoint()
+	{
+		return m_using_waypoint;
+	}
+	
+	/**
+	 * \fn void setUsingWaypoint(bool val)
+	 * \brief Setzt, ob der Spieler gerade einen Wegpunkt verwendet
+	 * \param val bool
+	 */
+	void setUsingWaypoint(bool val);
+	
+	/**
+	 * \fn virtual bool canBeAttacked()
+	 * \brief Gibt an, ob die Kreatur gerade angegriffen werden darf
+	 */
+	virtual bool canBeAttacked();
+	
 
 //Protected stuff
 protected:
@@ -728,10 +765,23 @@ protected:
 	bool m_male;
 	
 	/**
+	 * \var bool m_using_waypoint
+	 * \brief auf true gesetzt, waehrend ein Spieler einen Wegpunkt verwendet
+	 */
+	bool m_using_waypoint;
+	
+	
+	/**
 	 * \var RegionLocation m_revive_position
 	 * \brief Ort an dem der Spieler wiedererweckt wird
 	 */
 	RegionLocation m_revive_position;
+	
+	/**
+	 * \var std::set<short> m_waypoints
+	 * \brief Wegpunkte die der Spieler aktiviert hat
+	 */
+	std::set<short> m_waypoints;
 	
 	/**
 	 * \var std::list<std::string> m_lua_instructions
