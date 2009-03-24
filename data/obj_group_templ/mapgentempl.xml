@@ -10,7 +10,7 @@
 		<Object subtype="$border"
 				center_x="0"
 				center_y="3.8"
-				angle = "0"
+				angle = "-90"
 				probability ="1"
 				prob_angle = "false"
 				/>
@@ -100,7 +100,7 @@
 		<Object subtype="$border"
 				center_x="0"
 				center_y="3.8"
-				angle = "0"
+				angle = "-90"
 				probability ="1"
 				prob_angle = "false"
 				/>
@@ -108,7 +108,7 @@
 		<Object subtype="$border"
 				center_x="3.8"
 				center_y="0"
-				angle = "-90"
+				angle = "-180"
 				probability ="1"
 				prob_angle = "true"
 				/>
@@ -144,7 +144,7 @@
 		<Object subtype="$border"
 				center_x="0"
 				center_y="3.8"
-				angle = "0"
+				angle = "-90"
 				probability ="1"
 				prob_angle = "false"
 				/>
@@ -152,7 +152,7 @@
 		<Object subtype="$border"
 				center_x="3.8"
 				center_y="0"
-				angle = "-90"
+				angle = "-180"
 				probability ="1"
 				prob_angle = "true"
 				/>
@@ -160,7 +160,7 @@
 		<Object subtype="$border"
 				center_x="0"
 				center_y="-3.8"
-				angle = "-180"
+				angle = "-270"
 				probability ="1"
 				prob_angle = "true"
 				/>
@@ -197,7 +197,7 @@
 		<Object subtype="$border"
 				center_x="0"
 				center_y="3.8"
-				angle = "0"
+				angle = "-90"
 				probability ="1"
 				prob_angle = "false"
 				/>
@@ -205,7 +205,7 @@
 		<Object subtype="$border"
 				center_x="0"
 				center_y="-3.8"
-				angle = "-180"
+				angle = "-270"
 				probability ="1"
 				prob_angle = "true"
 				/>

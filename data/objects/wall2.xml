@@ -2,5 +2,5 @@
 <Object type="FIXED_OBJECT" subtype="wall2" layer="NORMAL">
 	<Mesh file="wall2.mesh" />
 	<Layer  />
-	<Geometry shape="RECT" extent_x="0.4090934843" extent_y="2"/>
+	<Geometry shape="RECT" extent_x="0.4090934843" extent_y="4"/>
 </Object>

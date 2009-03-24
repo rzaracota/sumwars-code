@@ -117,19 +117,6 @@
 				 </Effect>
 			 </Event>
 			 
-			 <Event trigger ="player_moved" once = "true">
-				 <Condition>
-					 return (unitIsInArea(trigger.player,"LichArea"))
-				 </Condition>
-				 <Effect>
-					 createDialogue();
-					 addSpeaker(trigger.player,'warrior');
-					 addSpeaker(peasant, 'lumberjack');
-					 changeTopic('tree');
-				 </Effect>
-			 </Event>
-			 
-			 
 			 <!--
 				 <Event trigger ="player_moved" once = "true">
 					 <Condition>

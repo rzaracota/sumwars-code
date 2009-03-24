@@ -50,21 +50,21 @@ Scene::Scene(Document* doc,Ogre::RenderWindow* window)
 
 	m_region_id = -1;
 	m_particle_system_pool.clear();
-	
+
 	m_temp_player ="";
-	
+
 	Ogre::Camera* minimap_camera=m_scene_manager->createCamera("minimap_camera");
 	minimap_camera->setNearClipDistance(500);
 	minimap_camera->setProjectionType(Ogre::PT_ORTHOGRAPHIC);
 	minimap_camera->setFOVy(Ogre::Degree(90.0));
-	
-	Ogre::TexturePtr minimap_texture = Ogre::TextureManager::getSingleton().createManual( "minimap_tex", 
-			Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME, Ogre::TEX_TYPE_2D, 
+
+	Ogre::TexturePtr minimap_texture = Ogre::TextureManager::getSingleton().createManual( "minimap_tex",
+			Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME, Ogre::TEX_TYPE_2D,
    512, 512, 0, Ogre::PF_R8G8B8A8, Ogre::TU_RENDERTARGET );
-	
+
 	Ogre::RenderTarget* minimap_rt = minimap_texture->getBuffer()->getRenderTarget();
 	minimap_rt ->setAutoUpdated(false);
-	
+
 	Ogre::Viewport *v = minimap_rt->addViewport( minimap_camera );
 	v->setClearEveryFrame( true );
 	v->setOverlaysEnabled (false);
@@ -73,15 +73,15 @@ Scene::Scene(Document* doc,Ogre::RenderWindow* window)
 	DEBUG5("render target size %i %i",minimap_rt ->getWidth (), minimap_rt ->getHeight ());
 	DEBUG5("viewport size %i %i ratio %f",v->getActualWidth(),v->getActualHeight(), ratio);
 	minimap_camera->setAspectRatio(ratio);
-	
+
 	CEGUI::OgreCEGUITexture* ceguiTex = (CEGUI::OgreCEGUITexture*)((CEGUI::OgreCEGUIRenderer*)CEGUI::System::getSingleton().getRenderer())->createTexture((CEGUI::utf8*)"minimap_tex");
-	
+
 	CEGUI::Imageset* textureImageSet = CEGUI::ImagesetManager::getSingleton().createImageset("minimap", ceguiTex);
-	
-	textureImageSet->defineImage( "minimap_img", 
-								  CEGUI::Point( 0.0f, 0.0f ), 
-										  CEGUI::Size( ceguiTex->getWidth(), ceguiTex->getHeight() ), 
-												  CEGUI::Point( 0.0f, 0.0f ) ); 
+
+	textureImageSet->defineImage( "minimap_img",
+								  CEGUI::Point( 0.0f, 0.0f ),
+										  CEGUI::Size( ceguiTex->getWidth(), ceguiTex->getHeight() ),
+												  CEGUI::Point( 0.0f, 0.0f ) );
 }
 
 Scene::~Scene()
@@ -134,11 +134,11 @@ void Scene::registerMeshes()
 	// Meshes fuer Objekte registrieren
 	registerPlayerLook("warrior","warrior_m","warrior_m.mesh", true);
 	registerPlayerLook("warrior","warrior_f","archer_f.mesh", false);
-	
+
 	registerPlayerLook("mage","mage_m","mage_m.mesh", true);
 	registerPlayerLook("priest","priest_f","priest_f.mesh", false);
 	registerPlayerLook("archer","archer_f","archer_f.mesh",false);
-	
+
 	// Spieler
 	registerObject("warrior","warrior_m.mesh","");
 	registerObject("mage","mage_m.mesh","");	// TODO
@@ -289,7 +289,7 @@ void Scene::getPlayerLook(WorldObject::TypeInfo::ObjectSubtype subtype, std::lis
 	std::multimap< WorldObject::TypeInfo::ObjectSubtype, std::pair<bool, PlayerLook> >::iterator it,jt;
 	it = m_player_look.lower_bound(subtype);
 	jt = m_player_look.upper_bound(subtype);
-	
+
 	while (it != jt)
 	{
 		looks.push_back(it->second);
@@ -323,7 +323,7 @@ void Scene::changeViewportSize(ViewportSize size)
 	{
 		m_viewport->setDimensions(0.4,0,1,1);
 	}
-	
+
 	m_camera->setAspectRatio(Ogre::Real(m_viewport->getActualWidth()) / Ogre::Real(m_viewport->getActualHeight()));
 	*/
 }
@@ -373,7 +373,7 @@ void Scene::update(float ms)
 	float r= player->getCamera().m_distance*50;
 	float theta = player->getCamera().m_theta * 3.14159 / 180;
 	float phi = player->getCamera().m_phi * 3.14159 / 180;
-	
+
 	if (player->getRegion()->getCutsceneMode())
 	{
 		RegionCamera::Position& cam =player->getRegion()->getCamera().m_position;
@@ -382,7 +382,7 @@ void Scene::update(float ms)
 		phi = cam.m_phi* 3.14159 / 180;
 		theta = cam.m_theta* 3.14159 / 180;
 	}
-	
+
 	m_camera->setPosition(Ogre::Vector3(pos.m_x*50 + r*cos(theta)*cos(phi), r*sin(theta), pos.m_y*50 - r*cos(theta)*sin(phi)));
 	m_camera->lookAt(Ogre::Vector3(pos.m_x*50,70,pos.m_y*50));
 	DEBUG5("cam position %f %f %f",pos.m_x*50 + r*cos(theta)*cos(phi), r*sin(theta), pos.m_y*50 - r*cos(theta)*sin(phi));
@@ -456,11 +456,11 @@ void  Scene::updateObjects()
 	for (it = objs.begin();it != objs.end(); ++it)
 	{
 		obj = *it;
-		
+
 		if (obj->getState() == WorldObject::STATE_STATIC)
 			continue;
-		
-		
+
+
 		// Darstellung fuer das Objekt aktualisieren
 		updateObject(obj);
 	}
@@ -531,7 +531,7 @@ void Scene::updateItems()
 			itm_node->setPosition(vec);
 
 			float angle = di->m_angle_z;
-			itm_node->setDirection(cos(angle),0,sin(angle),Ogre::Node::TS_WORLD);
+			itm_node->setDirection(sin(angle),0,-cos(angle),Ogre::Node::TS_WORLD);
 
 			angle = di->m_angle_x;
 			itm_node->pitch(Ogre::Radian(angle));
@@ -554,7 +554,7 @@ void Scene::updateObject(WorldObject* obj)
 	{
 		// Objekt existiert noch nicht in der Szene
 
-		
+
 
 		//Objekt anlegen
 		createObject(obj,name);
@@ -575,7 +575,7 @@ void Scene::updateObject(WorldObject* obj)
 
 	float angle = obj->getShape()->m_angle;
 	// Objekt drehen
-	node->setDirection(cos(angle),0,sin(angle),Ogre::Node::TS_WORLD);
+	node->setDirection(sin(angle),0,-cos(angle),Ogre::Node::TS_WORLD);
 
 	// Statusmods anpassen
 	std::ostringstream num("");
@@ -597,14 +597,14 @@ void Scene::updateObject(WorldObject* obj)
 		Action::ActionType act = cr->getAction()->m_type;
 		Action::ActionInfo* aci = Action::getActionInfo(act);
 		float perc = cr->getAction()->m_elapsed_time / cr->getAction()->m_time  ;
-		
+
 		if (cr->getState() == WorldObject::STATE_DEAD)
 		{
 			act = Action::DIE;
 			perc = 0.99;
 		}
 		// Name der Animation ermitteln
-		
+
 		// Wenn in der Datenbank ein Satz Animationen fuer die Aktion enthalten diesen verwenden
 		// (sonst den Standardsatz
 		std::vector<std::string>* animations = &(aci->m_animation[cr->getActionEquip()]);
@@ -612,7 +612,7 @@ void Scene::updateObject(WorldObject* obj)
 		{
 			animations = &(m_object_animations[cr->getTypeInfo()->m_subtype][act]);
 		}
-		
+
 		std::string anim_name = "";
 		if (!animations->empty())
 		{
@@ -654,7 +654,7 @@ void Scene::updateObject(WorldObject* obj)
 						anim->setEnabled(true);
 
 						// prozentsatz zu dem die Animation fortgeschritten ist
-						
+
 						DEBUG5("setting animation %s to %f",anim_name.c_str(),perc);
 						anim->setTimePosition(perc*anim->getLength());
 					}
@@ -1037,7 +1037,7 @@ void Scene::createObject(WorldObject* obj,std::string& name, bool is_static)
 		// in die Liste der Objekte einfuegen
 		m_objects->insert(std::make_pair(obj->getId(),name));
 	}
-	
+
 	Timer timer;
 	timer.start();
 
@@ -1057,7 +1057,7 @@ void Scene::createObject(WorldObject* obj,std::string& name, bool is_static)
 
 	float angle = obj->getShape()->m_angle;
 	// Objekt drehen
-	obj_node->setDirection(cos(angle),0,sin(angle),Ogre::Node::TS_WORLD);
+	obj_node->setDirection(sin(angle),0,-cos(angle),Ogre::Node::TS_WORLD);
 
 	// Informationen zum Rendern anfordern
 	RenderInfo ri;
@@ -1149,7 +1149,7 @@ void Scene::createItem(DropItem* di, std::string& name)
 
 	// Objekt drehen
 	float angle = di->m_angle_z;
-	obj_node->setDirection(cos(angle),0,sin(angle),Ogre::Node::TS_WORLD);
+	obj_node->setDirection(sin(angle),0,-cos(angle),Ogre::Node::TS_WORLD);
 
 	obj_node->attachObject(ent);
 
@@ -1226,7 +1226,7 @@ void Scene::updateProjectiles()
 
 		// Objekt drehen
 		float angle = pr->getShape()->m_angle;
-		m_scene_manager->getSceneNode(node_name)->setDirection(cos(angle),0,sin(angle),Ogre::Node::TS_WORLD);
+		m_scene_manager->getSceneNode(node_name)->setDirection(sin(angle),0,-cos(angle),Ogre::Node::TS_WORLD);
 
 		if (pr->getTimer()<200)
 		{
@@ -1393,18 +1393,18 @@ void Scene::destroySceneNode(std::string& node_name)
 	std::string name;
 	std::list<Ogre::MovableObject*> objects;
 	std::list<Ogre::MovableObject*>::iterator i;
-	
+
 	Ogre::Entity* attch_ent;
 	Ogre::Entity* obj_ent;
-	
+
 	std::list<Ogre::Entity*> attch_obj;
 	std::list<Ogre::Entity*>::iterator kt;
-	
-	
+
+
 	 // Knochen an den ein Mesh angehaengt ist
 	std::string bone;
-	
-	
+
+
 
 	while (it.hasMoreElements())
 	{
@@ -1416,23 +1416,23 @@ void Scene::destroySceneNode(std::string& node_name)
 		DEBUG5("deleting object %s",name.c_str());
 
 		objects.push_back(obj);
-		
+
 		// Schleife ueber die angehaengten Kindelemente
 		obj_ent = m_scene_manager->getEntity(name);
-		
+
 		attch_obj.clear();
-		
+
 		Ogre::Entity::ChildObjectListIterator iter = obj_ent->getAttachedObjectIterator();
 		while (iter.hasMoreElements())
 		{
 			bone = iter.peekNextKey();
 			bone = bone.substr(name.size());
 			DEBUG5("attached mesh %s",bone.c_str());
-			
+
 			attch_ent = static_cast<Ogre::Entity*>(iter.getNext());
 			attch_obj.push_back(attch_ent);
 		}
-		
+
 		obj_ent->detachAllObjectsFromBone();
 		for (kt = attch_obj.begin(); kt != attch_obj.end(); ++kt)
 		{
@@ -1476,15 +1476,15 @@ void Scene::createScene()
 	m_scene_manager->clearScene();
 	clearObjects();
 	SoundSystem::clearObjects();
-	
-	
+
+
 	// Liste der statischen Objekte
 	Ogre::StaticGeometry* static_geom = m_scene_manager->createStaticGeometry ("StaticGeometry");
-	
+
 	std::list<WorldObject*> stat_objs;
 
 	Region* region = m_document->getLocalPlayer()->getRegion();
-	
+
 	float *colour;
 	colour= region->getHeroLight();
 	m_scene_manager->setAmbientLight(Ogre::ColourValue(0.4,0.4,0.4));
@@ -1494,7 +1494,7 @@ void Scene::createScene()
 	light->setSpecularColour(0.0, 0.0, 0.0);
 	light->setAttenuation(1000,0.5,0.000,0.00001);
 	DEBUG5("hero light %f %f %f",colour[0], colour[1], colour[2]);
-	
+
 	colour= region->getDirectionalLight();
 	light = m_scene_manager->createLight("RegionLight");
 	light->setType(Ogre::Light::LT_DIRECTIONAL);
@@ -1509,21 +1509,21 @@ void Scene::createScene()
 		s.m_center = Vector(0,0);
 		s.m_type = Shape::RECT;
 		s.m_extent = Vector(10000,10000);
-	
+
 		region->getObjectsInShape(&s,&stat_objs, WorldObject::LAYER_ALL,WorldObject::FIXED);
 		std::list<WorldObject*>::iterator it;
 		std::string name;
 		for (it = stat_objs.begin(); it !=stat_objs.end();++it)
 		{
 			name = (*it)->getNameId();
-	
+
 			DEBUG5("create static object %s",name.c_str());
-	
+
 			// Objekt in der Szene erzeugen
 			createObject((*it),name, ((*it)->getState() == WorldObject::STATE_STATIC));
-	
+
 		}
-	
+
 		short dimx = region->getDimX();
 		short dimy = region->getDimY();
 		Ogre::Camera* minimap_camera=m_scene_manager->getCamera("minimap_camera");
@@ -1531,27 +1531,27 @@ void Scene::createScene()
 		minimap_camera->setPosition(Ogre::Vector3(dimx*100,std::max(dimx,dimy)*200,10+dimy*100));
 		minimap_camera->lookAt(Ogre::Vector3(dimx*100,0,dimy*100));
 		minimap_camera->setNearClipDistance(std::max(dimx,dimy)*100);
-		
+
 		Ogre::Resource* res= Ogre::TextureManager::getSingleton().createOrRetrieve ("minimap_tex",Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME).first.getPointer();
 		Ogre::Texture* texture = dynamic_cast<Ogre::Texture*>(res);
 		Ogre::RenderTarget* target = texture->getBuffer()->getRenderTarget();
-		
+
 		//m_minimap_camera->setPosition(Ogre::Vector3(6600,1000,11400));
 		//m_minimap_camera->lookAt(Ogre::Vector3(6600,0,11380));
 		//Ogre::Vector3 up = m_minimap_camera->getUp();
 		//m_minimap_camera->setFrustumExtents (0,dimx*200,0,dimy*200);
 		//DEBUG("camera up %f %f %f",up.x, up.y, up.z);
-		
-		
-		
+
+
+
 		m_scene_manager->setAmbientLight(Ogre::ColourValue(1.0,1.0,1.0));
 		target->update();
-		
+
 		colour= region->getAmbientLight();
 		m_scene_manager->setAmbientLight(Ogre::ColourValue(colour[0], colour[1], colour[2]));
 		DEBUG5("ambient light %f %f %f",colour[0], colour[1], colour[2]);
 		//m_scene_manager->setAmbientLight(Ogre::ColourValue(0.0,0.0,0.0));
-		
+
 		// Boden erstellen
 		if (region->getGroundMaterial() != "")
 		{
@@ -1568,24 +1568,24 @@ void Scene::createScene()
 					stream << "GroundNode"<<i<<"_"<<j;
 					node = m_scene_manager->getRootSceneNode()->createChildSceneNode(stream.str());
 					node->setPosition(Ogre::Vector3(i*200+100,0,j*200+100));
-			
+
 					stream.str("");
 					stream << "GroundEntity"<<i<<"_"<<j;
 					ground = m_scene_manager->createEntity(stream.str(), "ground");
 					ground->setMaterialName(region->getGroundMaterial());
 					ground->setCastShadows(false);
 					node->attachObject(ground);
-					
+
 					static_geom->addSceneNode(node);
 				}
 			}
 		}
-		
-		
+
+
 	}
-	
+
 	m_temp_player="";
-	
+
 }
 
 
@@ -1597,10 +1597,10 @@ void Scene::updateTempPlayer()
 		deleteObject(m_temp_player);
 		m_objects->clear();
 	}
-	
+
 	m_camera->setPosition(Ogre::Vector3(300, 100, 0));
 	m_camera->lookAt(Ogre::Vector3(0,80,70));
-	
+
 	if (m_document->getLocalPlayer() != 0)
 	{
 		m_temp_player  = m_document->getLocalPlayer()->getNameId();
@@ -1610,5 +1610,5 @@ void Scene::updateTempPlayer()
 	{
 		m_temp_player = "";
 	}
-	
+
 }
