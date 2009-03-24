@@ -159,6 +159,8 @@
 		<Unit filename="core\unionfindtree.h" />
 		<Unit filename="core\variable.cpp" />
 		<Unit filename="core\variable.h" />
+		<Unit filename="core\waypoint.cpp" />
+		<Unit filename="core\waypoint.h" />
 		<Unit filename="core\world.cpp" />
 		<Unit filename="core\world.h" />
 		<Unit filename="core\worldloader.cpp" />
@@ -206,6 +208,8 @@
 		<Unit filename="gui\tradewindow.cpp" />
 		<Unit filename="gui\tradewindow.h" />
 		<Unit filename="gui\window.h" />
+		<Unit filename="gui\worldmap.cpp" />
+		<Unit filename="gui\worldmap.h" />
 		<Unit filename="tinyxml\tinystr.cpp" />
 		<Unit filename="tinyxml\tinystr.h" />
 		<Unit filename="tinyxml\tinyxml.cpp" />

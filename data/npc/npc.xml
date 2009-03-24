@@ -65,13 +65,4 @@
 	
 </NPC>
 
-<NPC refname ="global">
-	<Topic name="tree">
-		<Effect>
-			speak('warrior', 'ein toller Baum',1000)
-			speak('lumberjack','Ich hole meine Axt',1000)
-		</Effect>
-	</Topic>
-</NPC>
-
 
