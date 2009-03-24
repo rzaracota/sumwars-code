@@ -79,6 +79,17 @@ bool WorldLoader::loadRegions(TiXmlNode* node)
 	}
 	else
 	{
+		if (node->Type()==TiXmlNode::ELEMENT && !strcmp(node->Value(), "World"))
+		{
+			ElementAttrib attr;
+			attr.parseElement(node->ToElement());
+			
+			attr.getString("start_region",World::getWorld()->getPlayerStartLocation().first,World::getWorld()->getPlayerStartLocation().first);
+			
+			attr.getString("start_location",World::getWorld()->getPlayerStartLocation().second,World::getWorld()->getPlayerStartLocation().second);
+			
+		}
+		
 		for ( child = node->FirstChild(); child != 0; child = child->NextSibling())
 		{
 			loadRegions(child);

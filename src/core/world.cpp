@@ -534,10 +534,13 @@ bool World::insertPlayerIntoRegion(WorldObject* player, short region, LocationNa
 				{
 					// fuer die Region gibt es keine Daten
 					// zurueck zum allerersten Startpunkt
-					static_cast<Player*>(player)->setRevivePosition(m_player_start_location);
-					insertPlayerIntoRegion(player, getRegionId(m_player_start_location.first), m_player_start_location.second);
+					if (region == getRegionId(m_player_start_location.first) && loc ==m_player_start_location.second)
+						return false;
 					
-					return true;
+					static_cast<Player*>(player)->setRevivePosition(m_player_start_location);
+					bool succ = insertPlayerIntoRegion(player, getRegionId(m_player_start_location.first), m_player_start_location.second);
+					
+					return succ;
 				}
 				createRegion(region);
 			}
