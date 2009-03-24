@@ -775,8 +775,126 @@ AIR
 	<AI ai_sight_range="15" ai_shoot_range="9" ai_randaction_prob="1.0" />
 </Monster>
 
-<!-- skeleton -->
-<Monster type="MONSTER" subtype="skeleton" name="skeleton" fraction="UNDEAD" category="UNDEAD" layer="NORMAL">
+<!-- skeleton, oldsword -->
+<Monster type="MONSTER" subtype="sword_skel" name="skeleton" fraction="UNDEAD" category="UNDEAD" layer="NORMAL">
+	<Mesh file="skeleton.mesh" />
+	<Dropslots >
+		<Dropslot pbig="0.01" pmedium="0.02" psmall="0.02" pgold="0.02" max_gold="100" min_level="0" max_level="10" magic_prob="0.1" magic_power="1000" />
+		<Dropslot pbig="0.01" pmedium="0.02" psmall="0.02" pgold="0.02" max_gold="50" min_level="0" max_level="20" magic_prob="0.2" magic_power="1000" />
+	</Dropslots>
+	
+	<BasicAttributes
+		experience="10"
+		level="18"
+		max_health="100"
+		armor="48"
+		block="10"
+		attack="37"
+		strength="25"
+		dexterity="15"
+		magic_power="0"
+		willpower="10"
+		resistances_physical="20"
+		resistances_air="0"
+		resistances_ice="0"
+		resistances_fire="-50"
+		resistances_cap_physical="50"
+		resistances_cap_air="50"
+		resistances_cap_ice="50"
+		resistances_cap_fire="0"
+		walk_speed="3000"
+		attack_speed="1500"
+		step_length="1.0"
+		attack_range="1"
+	>
+		<Ability type="walk">
+			<Animation name="walk" />
+		</Ability>
+		
+		<Ability type="attack">
+			<Animation name="attack1" />
+			<Animation name="attack2" />
+			<Animation name="attack3" />
+		</Ability>
+		
+		<Ability type="die">
+			<Animation name="die" />
+		</Ability>
+		
+		<Immunity type="blind"/>
+		<Immunity type="poisoned"/>
+		<Immunity type="berserk"/>
+		<Immunity type="confused"/>
+		<Immunity type="mute"/>
+		
+	</BasicAttributes>
+	
+	<Geometry radius="0.5" />
+	
+	<AI ai_sight_range="12" />
+</Monster>
+
+<!-- skeleton, axe -->
+<Monster type="MONSTER" subtype="axe_skel" name="skeleton" fraction="UNDEAD" category="UNDEAD" layer="NORMAL">
+	<Mesh file="skeleton.mesh" />
+	<Dropslots >
+		<Dropslot pbig="0.01" pmedium="0.02" psmall="0.02" pgold="0.02" max_gold="100" min_level="0" max_level="10" magic_prob="0.1" magic_power="1000" />
+		<Dropslot pbig="0.01" pmedium="0.02" psmall="0.02" pgold="0.02" max_gold="50" min_level="0" max_level="20" magic_prob="0.2" magic_power="1000" />
+	</Dropslots>
+	
+	<BasicAttributes
+		experience="10"
+		level="18"
+		max_health="100"
+		armor="48"
+		block="10"
+		attack="37"
+		strength="25"
+		dexterity="15"
+		magic_power="0"
+		willpower="10"
+		resistances_physical="20"
+		resistances_air="0"
+		resistances_ice="0"
+		resistances_fire="-50"
+		resistances_cap_physical="50"
+		resistances_cap_air="50"
+		resistances_cap_ice="50"
+		resistances_cap_fire="0"
+		walk_speed="3000"
+		attack_speed="1500"
+		step_length="1.0"
+		attack_range="1"
+	>
+		<Ability type="walk">
+			<Animation name="walk" />
+		</Ability>
+		
+		<Ability type="attack">
+			<Animation name="attack1" />
+			<Animation name="attack2" />
+			<Animation name="attack3" />
+		</Ability>
+		
+		<Ability type="die">
+			<Animation name="die" />
+		</Ability>
+		
+		<Immunity type="blind"/>
+		<Immunity type="poisoned"/>
+		<Immunity type="berserk"/>
+		<Immunity type="confused"/>
+		<Immunity type="mute"/>
+		
+	</BasicAttributes>
+	
+	<Geometry radius="0.5" />
+	
+	<AI ai_sight_range="12" />
+</Monster>
+
+<!-- skeleton, 2haxe -->
+<Monster type="MONSTER" subtype="axe2_skel" name="skeleton" fraction="UNDEAD" category="UNDEAD" layer="NORMAL">
 	<Mesh file="skeleton.mesh" />
 	<Dropslots >
 		<Dropslot pbig="0.01" pmedium="0.02" psmall="0.02" pgold="0.02" max_gold="100" min_level="0" max_level="10" magic_prob="0.1" magic_power="1000" />
@@ -1241,7 +1359,16 @@ AIR
 </MonsterGroup>
 
 <MonsterGroup name="skeletons" >
-	<SubGroup subtype="skeleton" number="7" prob="0.7" />
+	<SubGroup subtype="sword_skel" number="3" prob="0.7" />
+	<SubGroup subtype="axe_skel" number="3" prob="0.7" />
+	<SubGroup subtype="axe2_skel" number="2" prob="0.7" />
+</MonsterGroup>
+
+<!-- nur damit wir etwas variationsmoeglichkeiten haben-->
+<MonsterGroup name="skeletons2" >
+	<SubGroup subtype="sword_skel" number="3" prob="0.7" />
+	<SubGroup subtype="axe_skel" number="3" prob="0.7" />
+	<SubGroup subtype="axe2_skel" number="2" prob="0.7" />
 </MonsterGroup>
 
 <MonsterGroup name="zombies" >
@@ -1249,13 +1376,17 @@ AIR
 </MonsterGroup>
 
 <MonsterGroup name="undead_weak" >
-	<SubGroup subtype="skeleton" number="7" prob="0.7" />
+	<SubGroup subtype="sword skel" number="3" prob="0.7" />
+	<SubGroup subtype="axe_skel" number="2" prob="0.7" />
+	<SubGroup subtype="axe2_skel" number="1" prob="0.7" />
 	<SubGroup subtype="zombie" number="7" prob="0.7" />
 </MonsterGroup>
 
 <MonsterGroup name="lich_skeletons" >
 	<SubGroup subtype="lich" number="1" prob="1.0" />
-	<SubGroup subtype="skeleton" number="7" prob="0.7" />
+	<SubGroup subtype="sword_skel" number="3" prob="0.7" />
+	<SubGroup subtype="axe_skel" number="3" prob="0.7" />
+	<SubGroup subtype="axe2_skel" number="2" prob="0.7" />
 </MonsterGroup>
 
 <MonsterGroup name="harpies" >

@@ -39,7 +39,7 @@
 	/>
 </Item>
 
-
+<!-- anti blind-->
 <Item type="potion" subtype="heal_bl" name="eyedrops" size="small">
 	<Image image="set:potion_health.png image:full_image" />
 	<Mesh file="potion.mesh" />
@@ -59,6 +59,107 @@
 	/>
 </Item>
 
+<!-- anti poison-->
+<Item type="potion" subtype="heal_ps" name="antidot" size="small">
+	<Image image="set:potion_health.png image:full_image" />
+	<Mesh file="potion.mesh" />
+	<Attribute
+		character_requirement="15"
+		price = "100"
+  />
+  
+  <UseupEffect
+		dstatus_mod_immune_time1="3000"
+	/>
+  
+  
+	<DropChance
+		level="-1"
+		probability="0.5"
+	/>
+</Item>
+
+<!-- anti berserk -->
+<Item type="potion" subtype="heal_br" name="calming salve" size="small">
+	<Image image="set:potion_health.png image:full_image" />
+	<Mesh file="potion.mesh" />
+	<Attribute
+		character_requirement="15"
+		price = "100"
+  />
+  
+  <UseupEffect
+		dstatus_mod_immune_time2="3000"
+	/>
+  
+  
+	<DropChance
+		level="-1"
+		probability="0.5"
+	/>
+</Item>
+
+<!-- anti confuse -->
+<Item type="potion" subtype="heal_cf" name="potion of determination" size="small">
+	<Image image="set:potion_health.png image:full_image" />
+	<Mesh file="potion.mesh" />
+	<Attribute
+		character_requirement="15"
+		price = "100"
+  />
+  
+  <UseupEffect
+		dstatus_mod_immune_time3="3000"
+	/>
+  
+  
+	<DropChance
+		level="-1"
+		probability="0.5"
+	/>
+</Item>
+
+<!-- anti mute -->
+<Item type="potion" subtype="heal_mt" name="echo potion" size="small">
+	<Image image="set:potion_health.png image:full_image" />
+	<Mesh file="potion.mesh" />
+	<Attribute
+		character_requirement="15"
+		price = "100"
+  />
+  
+  <UseupEffect
+		dstatus_mod_immune_time4="3000"
+	/>
+  
+  
+	<DropChance
+		level="-1"
+		probability="0.5"
+	/>
+</Item>
+
+<!-- anti paralyse -->
+<Item type="potion" subtype="heal_py" name="muscle salve" size="small">
+	<Image image="set:potion_health.png image:full_image" />
+	<Mesh file="potion.mesh" />
+	<Attribute
+		character_requirement="15"
+		price = "100"
+  />
+  
+  <UseupEffect
+		dstatus_mod_immune_time5="3000"
+	/>
+  
+  
+	<DropChance
+		level="-1"
+		probability="0.5"
+	/>
+</Item>
+
+<!-- anti freeze -->
 <Item type="potion" subtype="heal_fr" name="potion of melting" size="small">
 	<Image image="set:potion_health.png image:full_image" />
 	<Mesh file="potion.mesh" />
@@ -69,6 +170,26 @@
   
   <UseupEffect
 		dstatus_mod_immune_time6="1000"
+	/>
+  
+  
+	<DropChance
+		level="-1"
+		probability="0.5"
+	/>
+</Item>
+
+<!-- anti burn -->
+<Item type="potion" subtype="heal_bu" name="spike oil" size="small">
+	<Image image="set:potion_health.png image:full_image" />
+	<Mesh file="potion.mesh" />
+	<Attribute
+		character_requirement="15"
+		price = "100"
+  />
+  
+  <UseupEffect
+		dstatus_mod_immune_time7="1000"
 	/>
   
   
