@@ -797,45 +797,63 @@ void CharInfo::updateTranslation()
 	
 	label = win_mgr.getWindow("StrengthLabel");
 	label->setText((CEGUI::utf8*) gettext("Strength"));
+	label->setTooltipText((CEGUI::utf8*) gettext("Strength increases hitpoints, melee damage and attack power."));
 	
 	label = win_mgr.getWindow("DexterityLabel");
 	label->setText((CEGUI::utf8*) gettext("Dexterity"));
-
+	label->setTooltipText((CEGUI::utf8*) gettext("Dexterity increases ranged damage, attack accuracy and attack speed"));
+	
 	label = win_mgr.getWindow("WillpowerLabel");
 	label->setText((CEGUI::utf8*) gettext("Willpower"));
+	label->setTooltipText((CEGUI::utf8*) gettext("Willpower decreases the duration and the impact of status changes and increases magical melee damage."));
 	
-	label = win_mgr.getWindow("DexterityLabel");
-	label->setText((CEGUI::utf8*) gettext("Dexterity"));
-
+	
 	label = win_mgr.getWindow("MagicpowerLabel");
 	label->setText((CEGUI::utf8*) gettext("Magic power"));
-
+	label->setTooltipText((CEGUI::utf8*) gettext("Magic power increases the damage of magical attacks."));
+	
 	label = win_mgr.getWindow( "AttrPointsLabel");
 	label->setText((CEGUI::utf8*) gettext("Attr points"));
+	label->setTooltipText((CEGUI::utf8*) gettext("Attribute points remaining to distribute"));
 
 	label = win_mgr.getWindow("ExperienceLabel" );
  	label->setText((CEGUI::utf8*) gettext("Experience"));
+	label->setTooltipText((CEGUI::utf8*) gettext("Current experience and experience necessary for next level-up."));
 	
 	label = win_mgr.getWindow("HitpointsLabel");
 	label->setText((CEGUI::utf8*) gettext("Hitpoints"));
+	label->setTooltipText((CEGUI::utf8*) gettext("Current and maximal hitpoints."));
+	
 	
 	label = win_mgr.getWindow("AttackLabel" );
 	label->setText((CEGUI::utf8*) gettext("Attack"));
+	label->setTooltipText((CEGUI::utf8*) gettext("Attack value determines the chance to hit enemies that can block or evade."));
+	
 	
 	label = win_mgr.getWindow("AttackSpeedLabel" );
 	label->setText((CEGUI::utf8*) gettext("Attacks/s"));
+	label->setTooltipText((CEGUI::utf8*) gettext("Number of attacks per second."));
+	
 	
 	label = win_mgr.getWindow( "RangeLabel");
 	label->setText((CEGUI::utf8*) gettext("Range"));
+	label->setTooltipText((CEGUI::utf8*) gettext("Weapon Range in meters."));
+	
 	
 	label = win_mgr.getWindow("PowerLabel" );
 	label->setText((CEGUI::utf8*) gettext("Power"));
+	label->setTooltipText((CEGUI::utf8*) gettext("Attack power influences the damage dealt to armored enemies."));
+	
 	
 	label = win_mgr.getWindow( "ArmorLabel");
 	label->setText((CEGUI::utf8*) gettext("Armor"));
+	label->setTooltipText((CEGUI::utf8*) gettext("Armor reduces the damage of physical attacks."));
+	
 	
 	label = win_mgr.getWindow("BlockLabel" );
 	label->setText((CEGUI::utf8*) gettext("Block"));
+	label->setTooltipText((CEGUI::utf8*) gettext("Block value determines the chance to avoid damage from physical attacks."));
+	
 	
 	label = win_mgr.getWindow( "ResistPhysLabel");
 	label->setText((CEGUI::utf8*) gettext("Physical"));

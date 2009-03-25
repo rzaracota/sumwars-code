@@ -191,6 +191,12 @@ void ControlPanel::update()
 	{
 		bar->setProgress(hperc);
 	}
+	out_stream.str("");
+	out_stream << (int) player->getDynAttr()->m_health<<"/"<< (int) player->getBaseAttrMod()->m_max_health;
+	if (bar->getTooltipText() != out_stream.str())
+	{
+		bar->setTooltipText(out_stream.str());
+	}
 	
 	// Balken fuer Experience
 	bar = static_cast<CEGUI::ProgressBar*>(win_mgr.getWindow( "ExperienceProgressBar"));
@@ -199,7 +205,13 @@ void ControlPanel::update()
 	{
 		bar->setProgress(eperc);
 	}
-
+	out_stream.str("");
+	out_stream << (int) player->getDynAttr()->m_experience<<"/"<<(int) player->getBaseAttr()->m_max_experience;
+	if (bar->getTooltipText() != out_stream.str())
+	{
+		bar->setTooltipText(out_stream.str());
+	}
+	
 	// Image Schaden Attacke links
 	label =  win_mgr.getWindow( "LeftClickAbilityImage");
 	name = Action::getActionInfo((Action::ActionType) player->getLeftAction())->m_enum_name;

@@ -1922,6 +1922,11 @@ void MainWindow::updatePartyInfo()
 				img->setVisible(true);
 			}
 			
+			if (img->getTooltipText() != (CEGUI::utf8*) pl->getName().c_str())
+			{
+				img->setTooltipText((CEGUI::utf8*) pl->getName().c_str());
+			}
+			
 			stream.str("");
 			stream << "PartyMemberHealthBar";
 			stream << i;
@@ -1932,6 +1937,13 @@ void MainWindow::updatePartyInfo()
 			if (bar->getProgress() != hperc)
 			{
 				bar->setProgress(hperc);
+			}
+			
+			stream.str("");
+			stream << (int) pl->getDynAttr()->m_health<<"/"<< (int) pl->getBaseAttrMod()->m_max_health;
+			if (bar->getTooltipText() != stream.str())
+			{
+				bar->setTooltipText(stream.str());
 			}
 			
 			if (!bar->isVisible())

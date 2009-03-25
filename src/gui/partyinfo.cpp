@@ -278,19 +278,19 @@ void PartyInfo::update()
 		label = win_mgr.getWindow(stream.str());
 		if (pl->getTypeInfo()->m_subtype == "warrior")
 		{
-			stream.str(gettext("main_warrior"));
+			stream.str(gettext("Warrior"));
 		}
 		else if (pl->getTypeInfo()->m_subtype == "mage")
 		{
-			stream.str(gettext("main_magician"));
+			stream.str(gettext("Magician"));
 		}
 		else if (pl->getTypeInfo()->m_subtype == "archer")
 		{
-			stream.str( gettext("main_archer"));
+			stream.str( gettext("Archer"));
 		}
 		else if (pl->getTypeInfo()->m_subtype == "priest")
 		{
-			stream.str(gettext("main_priest"));
+			stream.str(gettext("Priest"));
 		}
 		if (label->isVisible()!=true)
 		{
