@@ -539,7 +539,7 @@ std::list<ItemBasicData*>* ItemLoader::loadItemBasicData(const char* pFilename)
 	}
 	else
 	{
-		DEBUG("Failed to load file %s", pFilename);
+		ERRORMSG("Failed to load file %s", pFilename);
 		return 0;
 	}
 }
@@ -687,7 +687,7 @@ std::list<DropChanceData*>* ItemLoader::loadDropChanceData(const char* pFilename
 	}
 	else
 	{
-		DEBUG("Failed to load file %s", pFilename);
+		ERRORMSG("Failed to load file %s", pFilename);
 		return 0;
 	}
 }
@@ -797,7 +797,7 @@ std::list<ItemMeshData*>* ItemLoader::loadItemMeshData(const char* pFilename)
 	}
 	else
 	{
-		DEBUG("Failed to load file %s", pFilename);
+		ERRORMSG("Failed to load file %s", pFilename);
 		return 0;
 	}
 }
@@ -905,7 +905,7 @@ bool ItemLoader::loadItemImageData(const char* pFilename, std::list<ItemImageDat
 	}
 	else
 	{
-		DEBUG5("Failed to load file %s", pFilename);
+		ERRORMSG("Failed to load file %s", pFilename);
 		return false;
 	}
 }

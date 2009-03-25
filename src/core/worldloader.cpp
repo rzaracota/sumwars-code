@@ -36,6 +36,10 @@ void WorldLoader::loadEvent( TiXmlNode* node, Event *ev, TriggerType &type)
 				ev->setEffect(text->Value());
 			}
 		}
+		else if (child->Type()!=TiXmlNode::COMMENT)
+		{
+			DEBUG("unexpected element of <Event>: %s",child->Value());
+		}
 	}
 }
 
@@ -52,7 +56,7 @@ bool WorldLoader::loadRegionData(const char* pFilename)
 	}
 	else
 	{
-		DEBUG("Failed to load file %s", pFilename);
+		ERRORMSG("Failed to load file %s", pFilename);
 		return false;
 	}
 }
@@ -170,8 +174,16 @@ bool WorldLoader::loadRegion(TiXmlNode* node, RegionData* rdata)
 									attr.getFloat("radius",exit.m_shape.m_radius,0);
 								}
 							}
+							else if (child3->Type()!=TiXmlNode::COMMENT)
+							{
+								DEBUG("unexpected element of <Exit>: %s",child3->Value());
+							}
 						}
 						rdata->addExit(exit);
+					}
+					else if (child2->Type()!=TiXmlNode::COMMENT)
+					{
+						DEBUG("unexpected element of <Exits>: %s",child2->Value());
 					}
 				}
 			}
@@ -187,6 +199,10 @@ bool WorldLoader::loadRegion(TiXmlNode* node, RegionData* rdata)
 						attr.getString("name",envname);
 						attr.getFloat("height",height);
 						rdata->addEnvironment(height,envname);
+					}
+					else if (child2->Type()!=TiXmlNode::COMMENT)
+					{
+						DEBUG("unexpected element of <Environments>: %s",child2->Value());
 					}
 				}
 			}
@@ -229,6 +245,10 @@ bool WorldLoader::loadRegion(TiXmlNode* node, RegionData* rdata)
 						
 						rdata->addNamedObjectGroupTemplate(group_name,name,prio);
 					}
+					else if (child2->Type()!=TiXmlNode::COMMENT)
+					{
+						DEBUG("unexpected element of <NamedObjectGroups>: %s",child2->Value());
+					}
 				}
 			}
 			else if (!strcmp(child->Value(), "ObjectGroups"))
@@ -250,6 +270,10 @@ bool WorldLoader::loadRegion(TiXmlNode* node, RegionData* rdata)
 						
 						rdata->addObjectGroupTemplate(group_name,prio, number, prob);
 					}
+					else if (child2->Type()!=TiXmlNode::COMMENT)
+					{
+						DEBUG("unexpected element of <ObjectGroups>: %s",child2->Value());
+					}
 				}
 			}
 			else if (!strcmp(child->Value(), "SpawnGroups"))
@@ -265,6 +289,10 @@ bool WorldLoader::loadRegion(TiXmlNode* node, RegionData* rdata)
 						attr.getString("group_name",group_name);
 						
 						rdata->addSpawnGroup(group_name,number);
+					}
+					else if (child2->Type()!=TiXmlNode::COMMENT)
+					{
+						DEBUG("unexpected element of <SpawnGroup>: %s",child2->Value());
 					}
 				}
 			}
@@ -286,6 +314,10 @@ bool WorldLoader::loadRegion(TiXmlNode* node, RegionData* rdata)
 				attr.getFloat("green",rdata->m_directional_light[1],0.3f);
 				attr.getFloat("blue",rdata->m_directional_light[2],0.3f);
 			}
+			else if (child->Type()!=TiXmlNode::COMMENT)
+			{
+				DEBUG("unexpected element of <Region>: %s",child->Value());
+			}
 		}
 	}
 	return true;
@@ -303,7 +335,7 @@ bool  WorldLoader::loadNPCData(const char* pFilename)
 	}
 	else
 	{
-		DEBUG("Failed to load file %s", pFilename);
+		ERRORMSG("Failed to load file %s", pFilename);
 		return false;
 	}
 }
@@ -345,8 +377,7 @@ void  WorldLoader::loadNPC( TiXmlNode* node)
 					Dialogue::getTopicList(refname).addStartTopic(start_op, topic);
 				}
 			}
-			
-			if (child->Type()==TiXmlNode::ELEMENT && !strcmp(child->Value(), "Trade"))
+			else if (child->Type()==TiXmlNode::ELEMENT && !strcmp(child->Value(), "Trade"))
 			{
 				attr.parseElement(child->ToElement());
 				float refreshtime,price_factor;
@@ -374,6 +405,10 @@ void  WorldLoader::loadNPC( TiXmlNode* node)
 					DEBUG5("new trade Object for %s : %s %i %i %f %f",refname.c_str(),tradeobj.m_subtype.c_str(), tradeobj.m_number, tradeobj.m_number_magical, tradeobj.m_min_enchant, tradeobj.m_min_enchant);
 				}
 			}
+			else if (child->Type()!=TiXmlNode::COMMENT)
+			{
+				DEBUG("unexpected element of <NPC>: %s",child->Value());
+			}
 		}
 	}
 	else
@@ -397,7 +432,7 @@ bool WorldLoader::loadQuestsData(const char* pFilename)
 	}
 	else
 	{
-		DEBUG("Failed to load file %s", pFilename);
+		ERRORMSG("Failed to load file %s", pFilename);
 		return false;
 	}
 }
@@ -444,19 +479,16 @@ void WorldLoader::loadQuest(TiXmlNode* node, Quest* quest)
 				quest->setInit(text->Value());
 				quest->init();
 			}
-			
-			if (!strcmp(child->Value(), "Description"))
+			else if (!strcmp(child->Value(), "Description"))
 			{
 				text = child->FirstChild()->ToText();
 				quest->setDescription(text->Value());
 			}
-			
-			if (!strcmp(child->Value(), "NPC"))
+			else if (!strcmp(child->Value(), "NPC"))
 			{
 				loadNPC(child);
 			}
-			
-			if (!strcmp(child->Value(), "Region"))
+			else if (!strcmp(child->Value(), "Region"))
 			{
 				TriggerType type;
 				std::string rname;
@@ -476,8 +508,16 @@ void WorldLoader::loadQuest(TiXmlNode* node, Quest* quest)
 						loadEvent(child2, ev,type);
 						World::getWorld()->addEvent(rname,type,ev);
 					}
+					else if (child2->Type()!=TiXmlNode::COMMENT)
+					{
+						DEBUG("unexpected element of <Region>: %s",child2->Value());
+					}
 				}
 				
+			}
+			else if (child->Type()!=TiXmlNode::COMMENT)
+			{
+				DEBUG("unexpected element of <Quest>: %s",child->Value());
 			}
 		}
 	}

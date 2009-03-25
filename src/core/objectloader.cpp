@@ -275,6 +275,10 @@ bool  ObjectLoader::loadMonster(TiXmlNode* node)
 							else if (type == "extra_summoned_dmg")
 								data->m_base_attr.m_special_flags |= Damage::EXTRA_SUMMONED_DMG;
 						}
+						else if (child2->Type()!=TiXmlNode::COMMENT)
+						{
+							DEBUG("unexpected element of <BasicAttributes>: %s",child2->Value());
+						}
 					}
 					
 					Scene::registerObjectAnimations(subtype,animations);
@@ -292,6 +296,10 @@ bool  ObjectLoader::loadMonster(TiXmlNode* node)
 					attr.getFloat("ai_randaction_prob",data-> m_ai_vars.m_randaction_prob,0);
 					attr.getFloat("ai_chase_range",data-> m_ai_vars.m_chase_distance,20);
 					
+				}
+				else if (child->Type()!=TiXmlNode::COMMENT)
+				{
+					DEBUG("unexpected element of <Monster>: %s",child->Value());
 				}
 				
 			}
@@ -322,6 +330,10 @@ bool  ObjectLoader::loadMonster(TiXmlNode* node)
 				attr.getFloat("prob",prob,1);
 				
 				data-> addMonsters(subtype,number,prob);
+			}
+			else if (child->Type()!=TiXmlNode::COMMENT)
+			{
+				DEBUG("unexpected element of <MonsterGroup>: %s",child->Value());
 			}
 		}
 		
@@ -407,6 +419,11 @@ bool ObjectLoader::loadFixedObject(TiXmlNode* node)
 					attr.getFloat("radius",data->m_shape.m_radius,0);
 				}
 			}
+			else if (child->Type()!=TiXmlNode::COMMENT)
+			{
+				DEBUG5("unexpected element of <Object>: %s",child->Value());
+			}
+			
 		}
 		ObjectFactory::registerFixedObject(subtype,data);
 	}
