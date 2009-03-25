@@ -52,6 +52,16 @@ Item* ItemFactory::createItem(Item::Type type, Item::Subtype subtype, int id, fl
 
 		return item;
 	}
+	else
+	{
+		WARNING("Item type %s unknown",subtype.c_str());
+		item = new Item();
+		item->m_id = id;
+		item->m_type = type;
+		item->m_subtype = subtype;
+		
+		return item;
+	}
 	return 0;
 
 }
@@ -144,6 +154,16 @@ void ItemFactory::createMagicMods(Item* item, float* modchance, float magic_powe
 		levelreq = std::min(80,levelreq);
 
 		dmgavg = mp*0.06;
+		
+		// bei Ringen und Amuletten koennen die Strukturen noch fehlen
+		if (mod <=RESIST_ALL_MOD && item->m_equip_effect==0)
+		{
+			item->m_equip_effect = new CreatureBaseAttrMod;
+		}
+		else if (mod > RESIST_ALL_MOD && item->m_weapon_attr ==0)
+		{
+			item->m_weapon_attr = new WeaponAttr;
+		}
 
 			// Wirkung der Modifikation
 		switch (mod)

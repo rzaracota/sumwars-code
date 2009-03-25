@@ -41,6 +41,7 @@ Item::Item()
 	m_magic_power =0;
 	m_rarity = NORMAL;
 	m_char_req = REQ_NONE;
+	m_size = SMALL;
 }
 
 Item::Item(ItemBasicData& data)
