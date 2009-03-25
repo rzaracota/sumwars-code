@@ -750,19 +750,19 @@ AIR
 		attack_range="2"
 	>
 		<Ability type="walk">
-			<Animation name="walkOneHand" />
+			<Animation name="walk" />
 		</Ability>
 		
 		<Ability type="attack">
-			<Animation name="attack" />
+			<Animation name="idle" />
 		</Ability>
 		
 		<Ability type="die">
-			<Animation name="die" />
+			<Animation name="idle" />
 		</Ability>
 		
 		<Ability type="ice_bolt">
-			<Animation name="castMagicWeak" />
+			<Animation name="idle" />
 		</Ability>
 		
 		
