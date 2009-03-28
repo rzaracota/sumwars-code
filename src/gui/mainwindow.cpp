@@ -1696,7 +1696,7 @@ void MainWindow::updateSpeechBubbles()
 			continue;
 		
 		cr = static_cast<Creature*>(*it);
-		pos = m_scene->getProjection(cr->getShape()->m_center);
+		pos = m_scene->getProjection(cr->getShape()->m_center,1.8f);
 		
 		// nur Kreaturen behandeln, die wirklich zu sehen sind
 		if (pos.first <0 || pos.first >1 || pos.second <0 || pos.second >1)
@@ -1743,14 +1743,33 @@ void MainWindow::updateSpeechBubbles()
 		{
 			CEGUI::Font* font = label->getFont();
 			
-			float len = text.size()*0.01+0.03;
 			label->setText((CEGUI::utf8*) text.c_str());
 			
-			float length = font->getTextExtent((CEGUI::utf8*) text.c_str());
-			DEBUG("game screen width %f length %f",m_game_screen->getInnerRect().getWidth(),length);
+			float width = font->getTextExtent((CEGUI::utf8*) text.c_str())+15;
+			float height = font->getFontHeight() +15;
+			CEGUI::Rect rect = m_game_screen->getInnerRect();
 			
-			label->setSize(CEGUI::UVector2(cegui_reldim(len), cegui_reldim( 0.06f)));
-			label->setPosition(CEGUI::UVector2(CEGUI::UDim(std::max(0.0f,pos.first-len/2),0), CEGUI::UDim(std::max(0.0f,pos.second-0.1f),0)));
+			// Testen ob der Text auf eine Zeile passt
+			float maxwidth = rect.getWidth()/6;
+			if (width < maxwidth)
+			{
+				// einzelne Zeile
+				label->setSize(CEGUI::UVector2(CEGUI::UDim(0,width),  CEGUI::UDim(0,height)));
+				label->setPosition(CEGUI::UVector2(CEGUI::UDim(pos.first,-width/2), CEGUI::UDim(pos.second,-height)));
+			}
+			else
+			{
+				// mehrere Zeilen
+				rect.setWidth(maxwidth-15);
+				
+				int lines = font->getFormattedLineCount((CEGUI::utf8*) text.c_str(),rect, CEGUI::WordWrapLeftAligned);
+				height = lines * font->getFontHeight() +15;
+				
+				label->setSize(CEGUI::UVector2(CEGUI::UDim(0,maxwidth),  CEGUI::UDim(0,height)));
+				label->setPosition(CEGUI::UVector2(CEGUI::UDim(pos.first,-maxwidth/2), CEGUI::UDim(pos.second,-height)));
+			}
+			
+			
 		}
 		label->setVisible(true);
 		
@@ -1800,6 +1819,7 @@ void MainWindow::updateSpeechBubbles()
 		{
 			ques = (CEGUI::FrameWindow*)win_mgr.getWindow("QuestionWindow");
 			label = (CEGUI::Window*) win_mgr.getWindow("QuestionLabel");
+			label->setProperty("HorzFormatting", "WordWrapLeftAligned");
 		}
 		
 		// Wenn das Frage Fenster schon sichtbar ist -> keine Aenderung
@@ -1810,24 +1830,45 @@ void MainWindow::updateSpeechBubbles()
 		nr =0;
 		
 		// Groesse des Fensters ermitteln
-		float h = 0.07 + question->m_answers.size()*0.05;
-		float len =0;
-		float relh = 1/(1.5+question->m_answers.size());
+		float height=5,width=0;
+		float elemheight, elemwidth;
+		int lines;
+		float horzoffset = 10;
 		
-		if (label->getText() != (CEGUI::utf8*) question->m_text.c_str())
+		CEGUI::Rect rect = m_game_screen->getInnerRect();
+		float maxwidth = rect.getWidth()/6;
+		rect.setWidth(maxwidth-15);
+		
+		CEGUI::Font* font = label->getFont();
+		float lineheight = font->getFontHeight();
+		
+		CEGUI::utf8* ctext;
+		ctext = (CEGUI::utf8*) question->m_text.c_str();
+		elemwidth =font->getTextExtent(ctext);
+		elemheight = lineheight;
+		
+		if (elemwidth > maxwidth)
 		{
-			label->setText((CEGUI::utf8*) question->m_text.c_str());
+			elemwidth = maxwidth;
+			lines = font->getFormattedLineCount(ctext,rect, CEGUI::WordWrapLeftAligned);
+			elemheight = lines * lineheight;
+		}
+		width = std::max(width,elemwidth);
+		
+		if (label->getText() != ctext)
+		{
+			label->setText(ctext);
 		}
 		
-		label->setPosition(CEGUI::UVector2(cegui_reldim(0.0f), cegui_reldim(0.1*relh)));
-		label->setSize(CEGUI::UVector2(cegui_reldim(1.0f), cegui_reldim(relh)));
+		label->setPosition(CEGUI::UVector2(CEGUI::UDim(0,horzoffset), CEGUI::UDim(0,height)));
+		label->setSize(CEGUI::UVector2(cegui_reldim(1.0f), CEGUI::UDim(0,elemheight)));
+		
+		height += elemheight + 20;
 		
 		// Antworten einfuegen
 		std::list < std::pair<std::string, std::string> >::iterator it;
 		for (it = question->m_answers.begin(); it != question->m_answers.end(); ++it)
 		{
-			len = std::max(len, it->first.size()*0.01f);
-			
 			stream.str("");
 			stream << "AnswerLabel";
 			stream << nr;
@@ -1839,6 +1880,7 @@ void MainWindow::updateSpeechBubbles()
 				ques->addChildWindow(label);
 				label->setProperty("FrameEnabled", "false");
 				label->setProperty("BackgroundEnabled", "false");
+				label->setProperty("HorzFormatting", "WordWrapLeftAligned");
 				label->setID(nr);
 				label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&MainWindow::onAnswerClicked, this));
 			}
@@ -1847,20 +1889,34 @@ void MainWindow::updateSpeechBubbles()
 				label = win_mgr.getWindow(stream.str());
 			}
 			
-			if (label->getText() != (CEGUI::utf8*) it->first.c_str())
+			ctext = (CEGUI::utf8*) it->first.c_str();
+			elemwidth =font->getTextExtent(ctext);
+			elemheight = lineheight+5;
+		
+			if (elemwidth > maxwidth)
 			{
-				label->setText((CEGUI::utf8*) it->first.c_str());
+				elemwidth = maxwidth;
+				lines = font->getFormattedLineCount(ctext,rect, CEGUI::WordWrapLeftAligned);
+				elemheight = lines * lineheight;
+			}
+			width = std::max(width,elemwidth);
+			
+			if (label->getText() != ctext)
+			{
+				label->setText(ctext);
 			}
 			
-			label->setPosition(CEGUI::UVector2(cegui_reldim(0.0f), cegui_reldim((nr+1.4)*relh)));
-			label->setSize(CEGUI::UVector2(cegui_reldim(1.0f), cegui_reldim(relh)));
+			label->setPosition(CEGUI::UVector2(CEGUI::UDim(0,horzoffset), CEGUI::UDim(0,height)));
+			label->setSize(CEGUI::UVector2(cegui_reldim(1.0f), CEGUI::UDim(0,elemheight)));
 			label->setVisible(true);
 			
+			height += elemheight + 5;
 			nr++;
 		}
 		
-		ques->setPosition(CEGUI::UVector2(cegui_reldim(0.5f-len/2), cegui_reldim(0.2)));
-		ques->setSize(CEGUI::UVector2(cegui_reldim(len), cegui_reldim( h)));
+		width += 2* horzoffset;
+		ques->setPosition(CEGUI::UVector2(CEGUI::UDim(0.5f,-width/2), cegui_reldim(0.2)));
+		ques->setSize(CEGUI::UVector2(CEGUI::UDim(0,width), CEGUI::UDim(0,height)));
 		ques->setVisible(true);
 		
 		// restliche Antwortlabels ausblenden

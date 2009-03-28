@@ -298,9 +298,9 @@ void Scene::getPlayerLook(WorldObject::TypeInfo::ObjectSubtype subtype, std::lis
 }
 
 
-std::pair<float,float> Scene::getProjection(Vector pos)
+std::pair<float,float> Scene::getProjection(Vector pos, float height)
 {
-	Ogre::Vector4 ipos(pos.m_x*50,0,pos.m_y*50,1);
+	Ogre::Vector4 ipos(pos.m_x*50,height*50,pos.m_y*50,1);
 	Ogre::Vector4 projpos;
 	projpos = m_camera->getProjectionMatrix()*m_camera->getViewMatrix()*ipos;
 

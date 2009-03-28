@@ -157,11 +157,12 @@ class Scene
 
 	
 	/**
-	 * \fn std::pair<float,float> getProjection(Vector pos)
+	 * \fn std::pair<float,float> getProjection(Vector pos, float height=0)
 	 * \brief Gibt aus, an welcher Stelle ein Punkt in Spielkoordinaten auf dem Bildschirm erscheint
 	 * \param pos Ort in Spielkoordinaten
+	 * \param height Hoehe in Spielkoordinaten
 	 */
-	std::pair<float,float> getProjection(Vector pos);
+	std::pair<float,float> getProjection(Vector pos, float height=0);
 	
 	/**
 	 * \fn static void getPlayerLook(WorldObject::TypeInfo::ObjectSubtype subtype, std::list< std::pair<bool, PlayerLook> > &looks)
