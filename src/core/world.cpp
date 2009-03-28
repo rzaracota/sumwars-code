@@ -414,6 +414,9 @@ WorldObject::Relation World::getRelation(WorldObject::Fraction frac, WorldObject
 	if (frac == WorldObject::FRAC_HOSTILE_TO_ALL || frac2 == WorldObject::FRAC_HOSTILE_TO_ALL)
 		return WorldObject::HOSTILE;
 	
+	if (frac == WorldObject::FRAC_NEUTRAL_TO_ALL || frac2 == WorldObject::FRAC_NEUTRAL_TO_ALL)
+		return WorldObject::NEUTRAL;
+	
 	if (frac == frac2)
 		return WorldObject::ALLIED;
 	

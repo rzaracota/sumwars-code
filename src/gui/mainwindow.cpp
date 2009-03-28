@@ -1654,7 +1654,7 @@ void MainWindow::updateSpeechBubbles()
 {
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	
-	// Zaehler wie viele Labels fuer Items existieren
+	// Zaehler wie viele Labels existieren
 	static int lcount =0;
 	
 	// Zaehler, wie viele Antwortmoeglichkeiten existieren
@@ -1726,6 +1726,7 @@ void MainWindow::updateSpeechBubbles()
 			m_game_screen->addChildWindow(label);
 			label->setProperty("FrameEnabled", "true");
 			label->setProperty("BackgroundEnabled", "true");
+			label->setProperty("HorzFormatting", "WordWrapLeftAligned");
 			
 			label->setText("");
 			label->setAlpha(0.9);
@@ -1740,8 +1741,13 @@ void MainWindow::updateSpeechBubbles()
 			
 		if (label->getText() != (CEGUI::utf8*) text.c_str())
 		{
+			CEGUI::Font* font = label->getFont();
+			
 			float len = text.size()*0.01+0.03;
 			label->setText((CEGUI::utf8*) text.c_str());
+			
+			float length = font->getTextExtent((CEGUI::utf8*) text.c_str());
+			DEBUG("game screen width %f length %f",m_game_screen->getInnerRect().getWidth(),length);
 			
 			label->setSize(CEGUI::UVector2(cegui_reldim(len), cegui_reldim( 0.06f)));
 			label->setPosition(CEGUI::UVector2(CEGUI::UDim(std::max(0.0f,pos.first-len/2),0), CEGUI::UDim(std::max(0.0f,pos.second-0.1f),0)));

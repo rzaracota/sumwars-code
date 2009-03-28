@@ -4411,7 +4411,7 @@ bool Creature::setValue(std::string valname)
 		return ret;
 	}
 	
-	ret = WorldObject::getValue(valname);
+	ret = WorldObject::setValue(valname);
 	return ret;
 }
 

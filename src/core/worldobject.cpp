@@ -168,6 +168,19 @@ int WorldObject::getValue(std::string valname)
 
 			return 1;
 		}
+		else if (valname == "fraction")
+		{
+			if (getFraction() >=FRAC_PLAYER_PARTY)
+			{
+				lua_pushstring(EventSystem::getLuaState(),"player");
+			}
+			else
+			{
+				static std::string frac[10] = {"none","human","demon","undead","dwarf","summoner","monster","","neutral","hostile"};
+				lua_pushstring(EventSystem::getLuaState(),frac[getFraction()].c_str());
+			}
+			return 1;
+		}
 
 		return 0;
 }
@@ -175,5 +188,25 @@ int WorldObject::getValue(std::string valname)
 
 bool WorldObject::setValue(std::string valname)
 {
+	if (valname == "fraction")
+	{
+		if (getTypeInfo()->m_type == TypeInfo::TYPE_PLAYER)
+		{
+			DEBUG("You cant change the fraction of a player");
+			return false;
+		}
+		std::string fraction  = lua_tostring(EventSystem::getLuaState() ,-1);
+		lua_pop(EventSystem::getLuaState(), 1);
+		if (fraction == "human") setFraction(FRAC_HUMAN);
+		else if (fraction == "demon") setFraction(FRAC_DEMON);
+		else if (fraction == "undead") setFraction(FRAC_UNDEAD);
+		else if (fraction == "dwarf") setFraction(FRAC_DWARF);
+		else if (fraction == "summoner") setFraction(FRAC_SUMMONER);
+		else if (fraction == "monster") setFraction(FRAC_MONSTER);
+		else if (fraction == "neutral") setFraction(FRAC_NEUTRAL_TO_ALL);
+		
+		DEBUG("fraction is now %i",getFraction());
+		return true;
+	}
 	return false;
 }
