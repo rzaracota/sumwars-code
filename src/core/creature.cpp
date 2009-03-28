@@ -3473,6 +3473,14 @@ void Creature::applyDynAttrMod(CreatureDynAttrMod* mod)
 		{
 			m_dyn_attr.m_status_mod_immune_time[i] = std::max(m_dyn_attr.m_status_mod_immune_time[i],mod->m_dstatus_mod_immune_time[i]);
 			m_dyn_attr.m_status_mod_time[i]=0;
+			
+			if (i==Damage::CONFUSED || i==Damage::BERSERK)
+			{
+				clearCommand(true);
+				m_event_mask |= NetEvent::DATA_COMMAND;
+				m_event_mask |= NetEvent::DATA_ACTION;
+					
+			}
 			m_event_mask |= NetEvent::DATA_STATUS_MODS;
 		}
 	}
