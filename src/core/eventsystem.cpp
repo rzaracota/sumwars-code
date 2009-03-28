@@ -55,6 +55,7 @@ void EventSystem::init()
 	lua_register(m_lua, "setCutsceneMode", setCutsceneMode);
 	lua_register(m_lua, "addCameraPosition", addCameraPosition);
 	lua_register(m_lua, "speak", speak);
+	lua_register(m_lua, "unitSpeak", unitSpeak);
 	lua_register(m_lua, "addQuestion", addQuestion);
 	lua_register(m_lua, "addAnswer", addAnswer);
 	lua_register(m_lua, "changeTopic", changeTopic);
@@ -973,6 +974,47 @@ int EventSystem::speak(lua_State *L)
 	}
 
 	return 0;
+}
+
+int EventSystem::unitSpeak(lua_State *L)
+{
+	int argc = lua_gettop(L);
+	if (argc>=2 && lua_isnumber(L,1) && lua_isstring(L,2))
+	{
+		int id = lua_tointeger(L, 1);
+		CreatureSpeakText text;
+		text.m_text = lua_tostring(L, 2);
+
+		WorldObject* wo =0;
+		if (m_region !=0)
+		{
+			wo = m_region->getObject(id);
+		}
+		
+		Creature* cr = dynamic_cast<Creature*>(wo);
+		
+		text.m_time = 1000;
+		if (argc>=3 && lua_isnumber(L,3))
+		{
+			text.m_time = lua_tonumber(L,3);
+		}
+
+		if (cr!=0)
+		{
+			cr->speakText(text);
+		}
+		else
+		{
+			ERRORMSG("getObjectValue: Object doesnt exist %i",id);
+		}
+	}
+	else
+	{
+		ERRORMSG("Syntax: unitSpeak(( int id, string text [,float time])");
+	}
+	return 0;
+	
+
 }
 
 int EventSystem::addQuestion(lua_State *L)

@@ -266,6 +266,13 @@ class EventSystem
 		static int speak(lua_State *L);
 		
 		/**
+		 * \fn static int unitSpeak(lua_State *L)
+		 * \brief Fuegt einer Kreatur eine Sprechblase hinzu
+		 * \param L Lua Status
+		 */
+		static int unitSpeak(lua_State *L);
+		
+		/**
 		 * \fn static int addQuestion(lua_State *L)
 		 * \brief Fuegt dem aktuellen Dialog eine Frage
 		 * \param L Lua Status
