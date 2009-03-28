@@ -772,7 +772,8 @@ bool MainWindow::setupItemInfo()
 	label = win_mgr.createWindow("TaharezLook/StaticText", "ItemInfoLabel");
 	m_game_screen->addChildWindow(label);
 	label->setProperty("FrameEnabled", "false");
-	label->setProperty("BackgroundEnabled", "false");
+	label->setProperty("BackgroundEnabled", "true");
+	label->setProperty("BackgroundColours", "tl:77000000 tr:77000000 bl:77000000 br:77000000"); 
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim( 0.02f)));
 	label->setSize(CEGUI::UVector2(cegui_reldim(0.08f), cegui_reldim( 0.03f)));
 	label->setText("");
@@ -1265,12 +1266,16 @@ void MainWindow::updateItemInfo()
 				}
 				
 				name = itm->getName();
-				float len = 0.009*name.length();
 				
+				float len = label->getArea().getWidth().d_scale;
 				
 				if (label->getText() != (CEGUI::utf8*) name.c_str())
 				{
-
+					CEGUI::Font* font = label->getFont();
+					float width = font->getTextExtent((CEGUI::utf8*) name.c_str());
+					CEGUI::Rect rect = m_game_screen->getInnerRect();
+					len = width / rect.getWidth();
+					
 					label->setText((CEGUI::utf8*) name.c_str());
 				}
 				
@@ -1284,7 +1289,7 @@ void MainWindow::updateItemInfo()
 				std::string propnew = "tl:FFFFFFFF tr:FFFFFFFF bl:FFFFFFFF br:FFFFFFFF";
 				if (itm->m_rarity == Item::MAGICAL)
 				{
-					propnew = "tl:FF5555AA tr:FF5555AA bl:FF5555AA br:FF5555AA";
+					propnew = "tl:FF8888FF tr:FF8888FF bl:FF8888FF br:FF8888FF";
 				}
 				if (propold != propnew)
 				{
@@ -1431,21 +1436,33 @@ void MainWindow::updateItemInfo()
 				continue;
 			}
 			
+			
+			DEBUG5("optpos %i %f",optrow,optcol);
+			
+			// Laenge des Schriftzugs
+			CEGUI::Font* font = label->getFont();
+			float width = font->getTextExtent((CEGUI::utf8*) name.c_str());
+			CEGUI::Rect rect = m_game_screen->getInnerRect();
+			len = width / rect.getWidth();
+			
+			// eine Laenge fuer die Darstellung (mit Rand), eine ohne
+			float reallen = len;
+			float margin = 0.004;
+			len +=2*margin;
+			
+			DEBUG5("length %f",len);
+			
+			std::list < std::pair<float,float> >::iterator jt, optjt;
 			// optimale Position ermitteln
 			// Distanz zur wahren Position
 			optdist = 1000000;
 			
 			// beste gefundene Platzierung
+			rpos.first -= len/2;
 			optrow= (int) (rpos.second/height);
 			optcol= rpos.first;
-			DEBUG5("optpos %i %f",optrow,optcol);
-			
-			// Laenge des Schriftzugs
-			len = 0.009*name.length();
 			app = 1;
 			
-			
-			std::list < std::pair<float,float> >::iterator jt, optjt;
 			
 			
 			// schleife ueber die Zeilen
@@ -1507,7 +1524,8 @@ void MainWindow::updateItemInfo()
 						optjt = jt;
 						app = 0;
 						
-						DEBUG5("optdist %f optrow %i pos %i %f  app %i",optdist, optrow, row, col,app);
+						DEBUG5("optdist %f pos %i %f ",optdist, row, col);
+						DEBUG5("lbound %f rbound %f",lbound,rbound);
 					}
 					
 					lbound = jt->second;
@@ -1534,6 +1552,7 @@ void MainWindow::updateItemInfo()
 						optrow = row;
 						
 						DEBUG5("optdist %f optrow %i pos %i %f  app %i",optdist, optrow, row, col,app);
+						DEBUG5("lbound %f rbound %f",lbound,rbound);
 					}
 					
 				}
@@ -1547,21 +1566,22 @@ void MainWindow::updateItemInfo()
 			
 			DEBUG5("center %i rpos %f  %f",centerrow,rpos.second, rpos.second-centerrow*height);
 			
-			rpos.first=optcol-len/2;
+			rpos.first=optcol;
 			rpos.second=(optrow + yoffs) *height;
 			
 			
 			
-			DEBUG5("optdist %f optrow %i pos %f %f  app %i",optdist, optrow, rpos.second, rpos.first,app);
+			DEBUG5("optdist %f optrow %i pos ",optdist, optrow);
+			DEBUG5("final position %f %f",rpos.second, rpos.first);
 			
 			if (app == 1)
 			{
-				itempos[optrow].push_back(std::make_pair(optcol,optcol+len));
+				itempos[optrow].push_back(std::make_pair(rpos.first,rpos.first+len));
 			}
 			else
 			{
 				DEBUG5("insert before %f %f",optjt->first, optjt->second);
-				itempos[optrow].insert(optjt,std::make_pair(optcol,optcol+len));
+				itempos[optrow].insert(optjt,std::make_pair(rpos.first,rpos.first+len));
 			}
 			
 			if (rpos.first<0 || rpos.first+len>1 || rpos.second<0 || rpos.second+height>0.9)
@@ -1577,9 +1597,9 @@ void MainWindow::updateItemInfo()
 				label = win_mgr.createWindow("TaharezLook/StaticText", stream.str());
 				m_game_screen->addChildWindow(label);
 				label->setProperty("FrameEnabled", "false");
-				label->setProperty("BackgroundEnabled", "false");
-				label->setPosition(CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim( 0.02f)));
-				label->setSize(CEGUI::UVector2(cegui_reldim(len), cegui_reldim( 0.03f)));
+				label->setProperty("BackgroundEnabled", "true");
+				label->setProperty("BackgroundColours", "tl:77000000 tr:77000000 bl:77000000 br:77000000"); label->setPosition(CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim( 0.02f)));
+				label->setSize(CEGUI::UVector2(cegui_reldim(reallen), cegui_reldim( 0.03f)));
 				label->setText("");
 				label->setAlpha(0.9);
 				label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&MainWindow::onDropItemClicked, this));
@@ -1599,22 +1619,22 @@ void MainWindow::updateItemInfo()
 				label->setText((CEGUI::utf8*) name.c_str());
 			}
 			
-			if (fabs( label->getArea().getWidth().d_scale - len) > 0.01)
+			if (fabs( label->getArea().getWidth().d_scale - reallen) > 0.005)
 			{
 				DEBUG5("old value %f new value %f",label->getArea().getWidth().d_scale, len);
-				label->setSize(CEGUI::UVector2(cegui_reldim(len), cegui_reldim( 0.03f)));
+				label->setSize(CEGUI::UVector2(cegui_reldim(reallen), cegui_reldim( 0.03f)));
 			}
 			
 			label->setID(it->first);
 			
 			
-			label->setPosition(CEGUI::UVector2(CEGUI::UDim(std::max(0.0f,rpos.first),0), CEGUI::UDim(std::max(0.0f,rpos.second),0)));
+			label->setPosition(CEGUI::UVector2(CEGUI::UDim(std::max(0.0f,rpos.first+margin),0), CEGUI::UDim(std::max(0.0f,rpos.second),0)));
 			
 			propold = label->getProperty("TextColours").c_str();
 			propnew = "tl:FFFFFFFF tr:FFFFFFFF bl:FFFFFFFF br:FFFFFFFF";
 			if (di->m_item->m_rarity == Item::MAGICAL)
 			{
-				propnew = "tl:FF5555AA tr:FF5555AA bl:FF5555AA br:FF5555AA";
+				propnew = "tl:FF8888FF tr:FF8888FF bl:FF8888FF br:FF8888FF";
 			}
 			if (propold != propnew)
 			{
