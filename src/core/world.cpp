@@ -1718,6 +1718,7 @@ bool World::processNetEvent(Region* region,CharConv* cv)
 	bool mode;
 	std::string subtype;
 	char type;
+	bool success;
 
 	// Objekt suchen dass zu dem NetEvent gehoert
 	// Spieler werden aus der Spielerliste gesucht
@@ -1795,11 +1796,15 @@ bool World::processNetEvent(Region* region,CharConv* cv)
 					return false;
 			}
 			object->destroy();
+			success = true;
 			if (region !=0)
 			{
-				region->deleteObject(object);
+				success = region->deleteObject(object);
 			}
-			delete object;
+			if (success)
+			{
+				delete object;
+			}
 
 			break;
 

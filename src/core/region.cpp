@@ -546,6 +546,21 @@ bool Region::getObjectsInShape( Shape* shape,  WorldObjectList* result,short lay
 			}
 
 		}
+		
+		// grosse Objekte durchmustern
+		WorldObjectMap::iterator it;
+		for (it = m_large_objects.begin(); it != m_large_objects.end(); ++it)
+		{
+			if (( it->second->getGroup() & group) && (it->second->getLayer() & layer))
+			{
+				if (shape->intersects(*(it->second->getShape())) && it->second != omit )
+				{
+					result->push_back(it->second);
+					if (empty_test)
+						return true;
+				}
+			}
+		}
 	}
 	return true;
 }
@@ -641,6 +656,18 @@ void Region::getObjectsOnLine(Line& line,  WorldObjectList* result,short layer, 
 		}
 
 	}
+	
+	WorldObjectMap::iterator it;
+	for (it = m_large_objects.begin(); it != m_large_objects.end(); ++it)
+	{
+		if (( it->second->getGroup() & group) && (it->second->getLayer() & layer))
+		{
+			if ((it->second->getShape()->intersects(line)) && it->second != omit )
+			{
+				result->push_back(it->second);
+			}
+		}
+	}
 }
 
 
@@ -728,9 +755,18 @@ bool Region::insertObject(WorldObject* object, Vector pos, float angle, bool col
 	{
 		if (object->getLayer() != WorldObject::LAYER_SPECIAL)
 		{
-			Gridunit *gu = (m_data_grid->ind(x_g,y_g));
+			// testen ob das Objekt zu den gesondert behandelten grossen Objekten gehoehrt
+			if (object->isLarge())
+			{
+				DEBUG5("object %s is large",object->getName().c_str());
+				m_large_objects.insert(std::make_pair(object->getId(),object));
+			}
+			else
+			{
+				Gridunit *gu = (m_data_grid->ind(x_g,y_g));
 
-			result = gu->insertObject(object);
+				result = gu->insertObject(object);
+			}
 		}
 
 	}
@@ -965,17 +1001,31 @@ bool  Region::deleteObject (WorldObject* object)
 		insertNetEvent(event);
 	}
 	
-	 // aus dem Grid loeschen
-	int x = object->getGridLocation()->m_grid_x;
-	int y = object->getGridLocation()->m_grid_y;
-	DEBUG5("deleting object in grid tile %i %i",x,y);
-
-	if (object->getLayer() != WorldObject::LAYER_SPECIAL)
+	if (object->isLarge())
 	{
-		Gridunit *gu = (m_data_grid->ind(x,y));
-		result = gu->deleteObject(object);
+		if (m_large_objects.count(object->getId()) == 0)
+		{
+			result = false;
+		}
+		else
+		{
+			m_large_objects.erase(object->getId());
+		}
 	}
-
+	else
+	{
+		// aus dem Grid loeschen
+		int x = object->getGridLocation()->m_grid_x;
+		int y = object->getGridLocation()->m_grid_y;
+		DEBUG5("deleting object in grid tile %i %i",x,y);
+	
+		if (object->getLayer() != WorldObject::LAYER_SPECIAL)
+		{
+			Gridunit *gu = (m_data_grid->ind(x,y));
+			result = gu->deleteObject(object);
+		}
+	}
+	
 	if (result==false)
 	{
 		return result;
@@ -1021,6 +1071,19 @@ bool Region::moveObject(WorldObject* object, Vector pos)
 	// Wenn NULL Zeiger übergeben -> Fehler anzeigen
 	if (object == 0)
 		return false;
+	
+	if (object->getState() == WorldObject::STATE_STATIC)
+	{
+		ERRORMSG("Cant move static object %s",object->getName().c_str());
+		return false;
+	}
+	
+	// grosse Objekte werden einfach verschoben (da sie nicht in der Gridunit sind)
+	if (object->isLarge())
+	{
+		object->getShape()->m_center = pos;
+		return true;
+	}
 
 	// Testen ob das Objekt innerhalb des 4*4 Grid in ein neues Feld kommt
 	int x_old = object->getGridLocation()->m_grid_x;
@@ -1069,13 +1132,15 @@ bool Region::changeObjectGroup(WorldObject* object,WorldObject::Group group )
 {
 	bool result = true;
 
-	int x = object->getGridLocation()->m_grid_x;
-	int y = object->getGridLocation()->m_grid_y;
-	DEBUG5("changing object in grid tile %i %i",x,y);
-
-	Gridunit *gu = (m_data_grid->ind(x,y));
-	result = gu->moveObject(object,group);
-
+	if (!object->isLarge())
+	{
+		int x = object->getGridLocation()->m_grid_x;
+		int y = object->getGridLocation()->m_grid_y;
+		DEBUG5("changing object in grid tile %i %i",x,y);
+	
+		Gridunit *gu = (m_data_grid->ind(x,y));
+		result = gu->moveObject(object,group);
+	}
 
 	return result;
 
@@ -1122,9 +1187,12 @@ void Region::update(float time)
 					
 					++iter;
 					object->destroy();
-					deleteObject(object);
-					delete object;
-					continue;
+					bool succ = deleteObject(object);
+					if (succ)
+					{
+						delete object;
+						continue;
+					}
 				}
 				else
 					++iter;

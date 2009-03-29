@@ -1111,6 +1111,12 @@ class Region
 		 * \brief organisiert statische Objekte in einem Bin&auml;rbaum
 		 */
 		WorldObjectMap* m_static_objects;
+		
+		/**
+		 * \var WorldObjectMap m_large_objects
+		 * \brief Speichert alle Objekte, die so gross sind, dass sie fuer die Kollisionsbehandlung gesondert behandelt werden muessen
+		 */
+		WorldObjectMap m_large_objects;
 	
 		/**
 		* \var DropItemMap* m_drop_items

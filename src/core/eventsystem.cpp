@@ -534,7 +534,16 @@ int EventSystem::deleteObject(lua_State *L)
 		int id = lua_tointeger(L, 1);
 		if (m_region !=0)
 		{
-			m_region->deleteObject(id);
+			WorldObject* wo = m_region->getObject(id);
+			if (wo !=0)
+			{
+				bool success = m_region->deleteObject(wo);
+				if (success)
+				{
+					delete wo;
+				}
+			}
+			
 		}
 	}
 	else

@@ -20,6 +20,35 @@ bool WorldObject::isCreature()
 	return m_type_info.m_type != TypeInfo::TYPE_FIXED_OBJECT;
 }
 
+bool WorldObject::isLarge()
+{
+	if (getState() == WorldObject::STATE_STATIC)
+	{
+		// statische Objekte duerfen in jeder Richtung maximal 3 Gridunits ueberdecken
+		Vector pos = getShape()->m_center;
+		Vector ext = getShape()->getAxisExtent();
+		Vector corner1 = pos - ext;
+		Vector corner2 = pos + ext;
+		
+		int x1 = (int) floor(0.25*corner1.m_x+0.01);
+		int y1 = (int) floor(0.25*corner1.m_y+0.01);
+		
+		int x2 = (int) floor(0.25*corner2.m_x-0.01);
+		int y2 = (int) floor(0.25*corner2.m_y-0.01);
+		
+		if (x2-x1>2 || y2-y1>2)
+			return true;
+		
+		return false;
+	}
+	else
+	{
+		// dynamische Objekte duerfen maximal einen Radius von 4 haben
+		return (getShape()->getOuterRadius()>4);
+	}
+	return false;
+}
+
 bool WorldObject::moveTo(Vector newpos)
 {
 	if (World::getWorld()==0 || getRegion()==0)

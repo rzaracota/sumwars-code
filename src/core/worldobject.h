@@ -392,6 +392,12 @@ class WorldObject {
 	}
 	
 	/**
+	 * \fn virtual bool isLarge()
+	 * \brief Gibt an, ob es sich um ein grosses Objekt handelt. Diese werden gesondert behandelt
+	 */
+	virtual bool isLarge();
+	
+	/**
 	 * \fn int getNetEventMask()
 	 * \brief Gibt die Bitmaske der NetEvents aus
 	 */
