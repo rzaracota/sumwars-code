@@ -88,6 +88,7 @@ sumwars_SOURCES = core/world.cpp \
 	gui/optionswindow.cpp\
 	gui/networkwindows.cpp \
 	gui/worldmap.cpp \
+	gui/tooltip.cpp \
 	gui/sound.cpp \
 	tinyxml/tinyxml.cpp \
 	tinyxml/tinyxmlparser.cpp \

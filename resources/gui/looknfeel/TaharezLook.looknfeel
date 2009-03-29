@@ -2977,7 +2977,7 @@
                 </Area>
                 <Colours topLeft="FF000000" topRight="FF000000" bottomLeft="FF000000" bottomRight="FF000000" />
                 <VertFormat type="CentreAligned" />
-                <HorzFormat type="CentreAligned" />
+				<HorzFormat type="WordWrapCentreAligned" />
             </TextComponent>
         </ImagerySection>
         <StateImagery name="Enabled">

@@ -458,12 +458,15 @@ bool Application::initCEGUI()
 	CEGUI::FontManager::getSingleton().createFont("DejaVuSerif-8.font", (CEGUI::utf8*)"GUI");
 	m_cegui_system->setDefaultFont((CEGUI::utf8*)"DejaVuSerif-8");
 
+	// eigene Factorys einfuegen
+	CEGUI::WindowFactoryManager::getSingleton().addFactory( new TextWrapTooltipFactory );
+	CEGUI::WindowFactoryManager::getSingleton().addFalagardWindowMapping ("TextWrapTooltip", "CEGUI/Tooltip", "TaharezLook/Tooltip","Falagard/Tooltip");
+	
 	// default ToolTip erzeugen
-	CEGUI::System::getSingleton().setDefaultTooltip( (CEGUI::utf8*)"TaharezLook/Tooltip" );
+	CEGUI::System::getSingleton().setDefaultTooltip( (CEGUI::utf8*)"TextWrapTooltip" );
 	CEGUI::Tooltip* ttip = CEGUI::System::getSingleton().getDefaultTooltip();
 	ttip->setDisplayTime(0);
-
-	// eigene Factorys einfuegen
+	ttip->setMaxSize(CEGUI::UVector2(cegui_reldim(0.4), cegui_reldim(1.0)));
 	return true;
 }
 
