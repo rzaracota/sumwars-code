@@ -4524,14 +4524,17 @@ void Creature::buyItem(Item* &item, int& gold)
 
 void Creature::setDialogue(int id)
 {
-	m_dialogue_id = id;
-	m_event_mask |= NetEvent::DATA_DIALOGUE;
-	
-	if (id !=0)
+	if (id != m_dialogue_id)
 	{
-		getAction()->m_type = Action::NOACTION;
-		m_action.m_elapsed_time =0;
-		clearCommand(true);
+		m_dialogue_id = id;
+		m_event_mask |= NetEvent::DATA_DIALOGUE;
+		
+		if (id !=0)
+		{
+			getAction()->m_type = Action::NOACTION;
+			m_action.m_elapsed_time =0;
+			clearCommand(true);
+		}
 	}
 }
 

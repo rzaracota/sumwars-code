@@ -175,11 +175,17 @@ void Dialogue::addSpeaker(int id, std::string refname)
 	// Pruefen, ob die Kreatur nicht schon einen Dialog hat
 	if (cr->getDialogueId() != 0)
 	{
-		ERRORMSG("cant add %i: %s to dialogue: has already dialogue",id, refname.c_str());
-		return;
+		if (cr->getDialogueId()!= m_id)
+		{
+			ERRORMSG("cant add %i: %s to dialogue: has already dialogue",id, refname.c_str());
+			return;
+		}
+	}
+	else
+	{
+		cr->setDialogue(m_id);
 	}
 
-	cr->setDialogue(m_id);
 	m_speaker.insert(std::make_pair(refname,id));
 
 	if (m_main_player_id ==0 && cr->getTypeInfo()->m_type == WorldObject::TypeInfo::TYPE_PLAYER)
