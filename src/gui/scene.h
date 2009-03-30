@@ -341,6 +341,12 @@ class Scene
 	void destroySceneNode(std::string& node_name);
 
 	/**
+	 * \fn void updateCharacterView()
+	 * \brief aktualisiert die Ansicht des Spielers
+	 */
+	void updateCharacterView();
+	
+	/**
 	 * \var clearObjects()
 	 * \brief entfernt alle Objekte aus der Szene
 	 */

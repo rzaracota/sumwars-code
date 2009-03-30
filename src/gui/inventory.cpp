@@ -23,6 +23,17 @@ Inventory::Inventory (Document* doc)
 	// Bestandteile des Charakterfensters hinzufuegen
 	CEGUI::PushButton* btn;
 	CEGUI::Window* label;
+	
+	label = win_mgr.createWindow("TaharezLook/StaticImage", "CharacterImage");
+	inventory->addChildWindow(label);
+	label->setProperty("FrameEnabled", "true");
+	label->setProperty("BackgroundEnabled", "false");
+	label->setPosition(CEGUI::UVector2(cegui_reldim(0.25f), cegui_reldim( 0.02)));
+	label->setSize(CEGUI::UVector2(cegui_reldim(0.5f), cegui_reldim( 0.4f)));
+	label->setMousePassThroughEnabled(true);
+	label->setProperty("Image", "set:character image:character_img"); 
+	//label->setInheritsAlpha (false);
+	//label->setAlpha(1.0);
 
 	int i,j;
 

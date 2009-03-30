@@ -53,6 +53,7 @@ Scene::Scene(Document* doc,Ogre::RenderWindow* window)
 
 	m_temp_player ="";
 
+	// Setup fuer die Minimap
 	Ogre::Camera* minimap_camera=m_scene_manager->createCamera("minimap_camera");
 	minimap_camera->setNearClipDistance(500);
 	minimap_camera->setProjectionType(Ogre::PT_ORTHOGRAPHIC);
@@ -79,9 +80,61 @@ Scene::Scene(Document* doc,Ogre::RenderWindow* window)
 	CEGUI::Imageset* textureImageSet = CEGUI::ImagesetManager::getSingleton().createImageset("minimap", ceguiTex);
 
 	textureImageSet->defineImage( "minimap_img",
-								  CEGUI::Point( 0.0f, 0.0f ),
-										  CEGUI::Size( ceguiTex->getWidth(), ceguiTex->getHeight() ),
-												  CEGUI::Point( 0.0f, 0.0f ) );
+				CEGUI::Point( 0.0f, 0.0f ),
+				CEGUI::Size( ceguiTex->getWidth(), ceguiTex->getHeight() ),
+				CEGUI::Point( 0.0f, 0.0f ) );
+	
+	// Setup fuer die Spieleransicht
+	Ogre::SceneManager* char_scene_mng = Ogre::Root::getSingleton().createSceneManager(Ogre::ST_GENERIC,"CharacterSceneManager");
+	char_scene_mng->setAmbientLight(Ogre::ColourValue(1.0,1.0,1.0));
+	
+	Ogre::SceneNode* node = char_scene_mng->createSceneNode("testNode");
+	node->setPosition(Ogre::Vector3(0,0,0));
+	Ogre::Entity* ent = char_scene_mng->createEntity("testEntity","warrior.mesh");
+	node->attachObject(ent);
+	
+	Ogre::Camera* char_camera = char_scene_mng->createCamera("char_camera");
+	char_camera->setPosition(Ogre::Vector3(500, 500, 0));
+	char_camera->lookAt(Ogre::Vector3(0,0,0));
+	char_camera->setNearClipDistance(1);
+	char_camera->setAspectRatio(1.0);
+	
+	/*
+	m_window->removeAllViewports();
+	m_camera = char_camera;
+	m_viewport = m_window->addViewport(m_camera);
+	m_viewport->setBackgroundColour(Ogre::ColourValue(0,0,0));
+	m_camera->setAspectRatio(Ogre::Real(m_viewport->getActualWidth()) / Ogre::Real(m_viewport->getActualHeight()));m_viewport->setOverlaysEnabled (true);
+	m_viewport->setOverlaysEnabled (true);
+	
+	
+	if (char_camera->isVisible(ent->getBoundingBox()))
+	{
+		DEBUG("object is visible");
+	}
+	*/
+	Ogre::TexturePtr char_texture = Ogre::TextureManager::getSingleton().createManual( "character_tex",
+			Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME, Ogre::TEX_TYPE_2D,
+   512, 512, 0, Ogre::PF_R8G8B8A8, Ogre::TU_RENDERTARGET );
+
+	Ogre::RenderTarget* char_rt = char_texture->getBuffer()->getRenderTarget();
+	char_rt ->setAutoUpdated(false);
+
+	Ogre::Viewport *char_view = char_rt->addViewport(char_camera );
+	char_view->setClearEveryFrame( true );
+	char_view->setOverlaysEnabled (false);
+	char_view->setBackgroundColour(Ogre::ColourValue(0,0,0,1.0) );
+
+	CEGUI::OgreCEGUITexture* char_ceguiTex = (CEGUI::OgreCEGUITexture*)((CEGUI::OgreCEGUIRenderer*) CEGUI::System::getSingleton().getRenderer())->createTexture((CEGUI::utf8*)"character_tex");
+
+	CEGUI::Imageset* char_textureImageSet = CEGUI::ImagesetManager::getSingleton().createImageset("character", char_ceguiTex);
+
+	char_textureImageSet->defineImage( "character_img",
+				CEGUI::Point( 0.0f, 0.0f ),
+				CEGUI::Size( char_ceguiTex->getWidth(), char_ceguiTex->getHeight() ),
+				CEGUI::Point( 0.0f, 0.0f ) );
+	
+	char_rt->update();
 }
 
 Scene::~Scene()
@@ -337,6 +390,9 @@ void Scene::update(float ms)
 
 	if (player ==0)
 		return;
+	
+	updateCharacterView();
+	
 	if (player->getRegion() ==0)
 		return;
 
@@ -1449,6 +1505,61 @@ void Scene::destroySceneNode(std::string& node_name)
 	}
 	// Knoten entfernen
 	m_scene_manager->destroySceneNode(node_name);
+}
+
+void Scene::updateCharacterView()
+{
+	
+	/*
+	Ogre::SceneManager* scene_mgr = Ogre::Root::getSingleton().getSceneManager("CharacterSceneManager");
+	
+	Player* pl = m_document->getLocalPlayer();
+	
+	
+	if ((pl ==0 && m_temp_player!="") || (pl->getNameId() != m_temp_player))
+	{
+		DEBUG("clear scene");
+		scene_mgr->clearScene();
+	}
+	
+	if (pl ==0)
+		return;
+	
+	m_temp_player = pl->getNameId();
+	
+	Ogre::SceneNode* node;
+	if (!scene_mgr->hasSceneNode("characterNode"))
+	{
+		node = scene_mgr->createSceneNode("characterNode");
+		node->setPosition(Ogre::Vector3(0,0,0));
+	}
+	else
+	{
+		node = scene_mgr->getSceneNode("characterNode");
+	}
+	
+	RenderInfo ri;
+	ri = getPlayerRenderInfo(pl->getPlayerLook());
+	
+	Ogre::Entity* obj_ent;
+	if (!scene_mgr->hasEntity("characterEntity"))
+	{
+		DEBUG("character view created");
+		obj_ent = scene_mgr->createEntity("characterEntity", ri.m_mesh);
+		node->attachObject(obj_ent);
+	}
+	else
+	{
+		obj_ent = scene_mgr->getEntity("characterEntity");
+	}
+	*/
+	/*
+	Ogre::Resource* res= Ogre::TextureManager::getSingleton().createOrRetrieve ("character_tex",Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME).first.getPointer();
+	Ogre::Texture* texture = dynamic_cast<Ogre::Texture*>(res);
+	Ogre::RenderTarget* target = texture->getBuffer()->getRenderTarget();
+	
+	target->update();
+	*/
 }
 
 
