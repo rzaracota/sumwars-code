@@ -33,7 +33,7 @@ Region* MapGenerator::createRegion(RegionData* rdata)
 		}
 		
 		// Umgebungskarte generieren
-		createPerlinNoise(mdata.m_region->getHeight(), rdata->m_dimx, rdata->m_dimy,4 , 0.4,false);
+		createPerlinNoise(mdata.m_region->getHeight(), rdata->m_dimx, rdata->m_dimy,std::min(rdata->m_dimx,rdata->m_dimy)/4 , 0.4,false);
 
 		if (rdata->m_region_template =="")
 		{
@@ -125,6 +125,7 @@ void MapGenerator::createBaseMap(MapData* mdata, RegionData* rdata)
 
 	float size = rdata->m_area_percent;
 
+	// Karte wird in 8x8 Felder erzeugt, Region rechnet aber in 4x4 Gridunits
 	int dimx = rdata->m_dimx/2;
 	int dimy = rdata->m_dimy/2;
 
@@ -136,7 +137,7 @@ void MapGenerator::createBaseMap(MapData* mdata, RegionData* rdata)
 	// Karte erzeugen mit Perlin Noise
 	// erhaltenes Feld wird als Hoehenkarte interpretiert
 	// alle Felder die unterhalb eines kritischen Niveaus liegen sind begehbar
-	createPerlinNoise(hmap,dimx, dimy, rdata->m_granularity, rdata->m_complexity,true);
+	createPerlinNoise(hmap,dimx, dimy, rdata->m_granularity/2, rdata->m_complexity,true);
 
 
 	// Delta zu Nachbarfeldern
@@ -204,7 +205,27 @@ void MapGenerator::createBaseMap(MapData* mdata, RegionData* rdata)
 
 	// kleiner Aufschlag um sehr enge Durchgaenge zu vermeiden
 	height += 0.01;
-
+	
+	/*
+	// Debugging
+	DEBUG("height %f",height);
+	for (int j=0; j< dimy; j++)
+	{
+		for (int i=0; i< dimx; i++)
+		{
+			if ((*hmap)[i][j]<height)
+			{
+				std::cout << " ";
+			}
+			else
+			{
+				std::cout << "X";
+			}
+		}
+		std::cout << "\n";
+	}
+	*/
+	
 	// Floodfill um die Flaeche und deren Rand zu finden
 	// die besuchten Felder werden in border mit 1 markiert
 	// es werden nur Felder besucht, die unterhalb der gefundenen Hoehe liegen
@@ -235,8 +256,8 @@ void MapGenerator::createBaseMap(MapData* mdata, RegionData* rdata)
 			nbx = x + nb[i][0];
 			nby = y + nb[i][1];
 
-			// Dimension pruefen, die Randfelder werden auch generell nicht gewaehlt
-			if (nbx<1 || nby<1 || nbx >= dimx-1 || nby >= dimy-1)
+			// Dimension pruefen
+			if (nbx<0 || nby<0 || nbx >= dimx || nby >= dimy)
 				continue;
 
 			// nur noch nicht besuchte Felder
@@ -261,8 +282,11 @@ void MapGenerator::createBaseMap(MapData* mdata, RegionData* rdata)
 			cnt++;
 		}
 	}
-	//std::cout << "area percent: "<<cnt*1.0/(dimx*dimy)<<"\n";
-
+	
+	//std::list<std::pair<int,int> >::iterator it;
+	//for (
+	
+	
 	// nochmal 3 Runden Floodfill um den Rand zu ermitteln
 
 	// Marker einfuegen
@@ -308,7 +332,6 @@ void MapGenerator::createBaseMap(MapData* mdata, RegionData* rdata)
 			(*(mdata->m_base_map))[nbx][nby]=-1;
 		}
 	}
-
 	
 
 	delete hmap;
@@ -470,6 +493,7 @@ bool MapGenerator::insertGroupTemplates(MapData* mdata, RegionData* rdata)
 		if (succ == false)
 		{
 			// Obligatorisches Template konnte nicht platziert werden
+			DEBUG("could not place template %s",it->second.m_group_name.c_str());
 			return false;
 		}
 
@@ -481,16 +505,20 @@ bool MapGenerator::insertGroupTemplates(MapData* mdata, RegionData* rdata)
 		
 	}
 	
-	// Wegpunkt einfuegen
-	templ = ObjectFactory::getObjectGroupTemplate("waypoint_templ");
-	memcpy(&s , templ->getShape(), sizeof(Shape));
-	succ = getTemplatePlace(mdata,&s,pos);
-	if (succ == false)
+	if (rdata->m_has_waypoint)
 	{
-		// Wegpunkt konnte nicht platziert werden
-		return false;
+		// Wegpunkt einfuegen
+		templ = ObjectFactory::getObjectGroupTemplate("waypoint_templ");
+		memcpy(&s , templ->getShape(), sizeof(Shape));
+		succ = getTemplatePlace(mdata,&s,pos);
+		if (succ == false)
+		{
+			// Wegpunkt konnte nicht platziert werden
+			DEBUG("could not place waypoint");
+			return false;
+		}
+		mdata->m_region->createObjectGroup("waypoint_templ",pos,0);
 	}
-	mdata->m_region->createObjectGroup("waypoint_templ",pos,0);
 	
 	// fakultative Objektgruppen einfuegen
 	std::multimap<int, RegionData::ObjectGroupTemplateSet >::reverse_iterator jt;
@@ -559,8 +587,9 @@ void MapGenerator::createBorder(MapData* mdata, RegionData* rdata)
 		for (int j=0; j< hdimy;j++)
 		{
 
-
+			int rnd;
 			if (*(mdata->m_base_map->ind(i,j)) >=1 )
+			{
 				// Testen ob das Feld als Ausgang in Frage kommt
 				// Also am noerdlichsten, westlichsten usw liegt
 				for (int k=0; k<4; k++)
@@ -571,13 +600,19 @@ void MapGenerator::createBorder(MapData* mdata, RegionData* rdata)
 						exit[k][1] =j;
 						exitcount[k] =1;
 					}
-					if (exit[k][0]*nb[k][0] + exit[k][1]*nb[k][1] == i*nb[k][0] + j*nb[k][1] && Random::randi(exitcount[k]) ==0)
+					
+					if (exit[k][0]*nb[k][0] + exit[k][1]*nb[k][1] == i*nb[k][0] + j*nb[k][1])
 					{
-						exit[k][0] =i;
-						exit[k][1] =j;
+						rnd = Random::randi(exitcount[k]);
+						if (rnd ==0)
+						{
+							exit[k][0] =i;
+							exit[k][1] =j;
+						}
 						exitcount[k] ++;
 					}
 				}
+			}
 
 		}
 	}
@@ -614,6 +649,7 @@ void MapGenerator::createBorder(MapData* mdata, RegionData* rdata)
 	}
 
 
+	
 	// fuer jedes markierte werden die 4 Nachbarfelder angesehen
 	// die 4 Informationen werden als 4bit Zahl interpretiert
 	// es gibt 6 verschiedene Konstellationen fuer die Nachbarfelder
@@ -980,20 +1016,32 @@ void MapGenerator::createPerlinNoise(Matrix2d<float> *data, int dimx, int dimy,i
 {
 	Matrix2d<float>* tmp= new Matrix2d<float>(dimx+1, dimy+1);
 	tmp->clear();
-	float* weightx = new float[dimx];
-	float* weighty = new float[dimy];
-	int freqy,px,py;
+	float* weight = new float[std::min(dimx,dimy)];
 	float ampl =1;
-
-	// Perlin Noise Algorithmus
-	for (int freq = startfreq; freq <= dimx;freq*=2)
+	int dx,dy;
+	float invdist;
+	
+	if (startfreq > dimx || startfreq > dimy)
 	{
-		freqy = (freq * dimy)/dimx;
-
+		startfreq = std::min(dimx,dimy);
+	}
+	
+	DEBUG5("Perlin noise dimx %i dimy %i",dimx,dimy);
+	
+	// Perlin Noise Algorithmus
+	// Aenderung hier: Schleife geht ueber den Abstand zwischen den Stuetzstellen
+	for (int dist = startfreq; dist>0 ;dist/=2)
+	{
+		// Dimension des Zufallszahlenfeldes fuer diesen Abstand
+		dx = 2+(dimx-2)/dist;
+		dy = 2+(dimy-2)/dist;
+		
+		DEBUG5("distance %i  tmp array %i %i",dist,dx,dy);
+		
 		// anlegen der Zufallszahlen fuer die aktuelle Frequenz
-		for (int i=0;i<=freq;i++)
+		for (int i=0;i<=dx;i++)
 		{
-			for (int j=0;j<=freqy;j++)
+			for (int j=0;j<=dy;j++)
 			{
 				*(tmp->ind(i,j)) = Random::random()* ampl;
 
@@ -1001,42 +1049,81 @@ void MapGenerator::createPerlinNoise(Matrix2d<float> *data, int dimx, int dimy,i
 
 		}
 
-		// Interpolation
-		px = dimx/freq;
-		float invpx = 1.0/ px;
-		py = dimy/freqy;
-		float invpy = 1.0/ py;
-
-		for (int k=0;k<px;k++)
+		// Interpolation (nur fuer Abstand >1)
+		if (dist>1)
 		{
-			weightx[k] = k*invpx;
-		}
-
-		for (int l=0;l<py;l++)
-		{
-			weighty[l] = l*invpy;
-		}
-
-		for (int i=0;i<freq;i++)
-		{
-			for (int j=0;j<freqy;j++)
+			invdist = 1.0f/dist;
+	
+			for (int k=0;k<dist;k++)
 			{
-				for (int k=0;k<px;k++)
+				weight[k] = k*invdist;
+			}
+	
+			
+			
+			for (int i=0;i<dx;i++)
+			{
+				for (int j=0;j<dy;j++)
 				{
-					for (int l=0;l<py;l++)
+					for (int k=0;k<dist;k++)
 					{
-
-						*(data->ind(i*px+k,j*py+l)) += (*(tmp->ind(i,j))*(1-weightx[k])*(1-weighty[l])
-								+ *(tmp->ind(i+1,j))*weightx[k]*(1-weighty[l])
-								+ *(tmp->ind(i+1,j+1))*weightx[k]*weighty[l]
-								+ *(tmp->ind(i,j+1))*(1-weightx[k])*weighty[l]) ;
+						for (int l=0;l<dist;l++)
+						{
+							if (i*dist+k< dimx && j*dist+l< dimy)
+							{
+								*(data->ind(i*dist+k,j*dist+l)) += (*(tmp->ind(i,j))*(1-weight[k])*(1-weight[l])
+										+ *(tmp->ind(i+1,j))*weight[k]*(1-weight[l])
+										+ *(tmp->ind(i+1,j+1))*weight[k]*weight[l]
+										+ *(tmp->ind(i,j+1))*(1-weight[k])*weight[l]) ;
+							}
+						}
 					}
 				}
 			}
 		}
-
+		else
+		{
+			for (int i=0;i<dimx;i++)
+			{
+				for (int j=0;j<dimy;j++)
+				{
+					*(data->ind(i,j)) +=*(tmp->ind(i,j));
+				}
+			}
+		}
 
 		ampl *= persistance;
+		/*
+		if (bounds)
+		{
+		
+			std::cout.width(6);
+			std::cout << "\n";
+			for (int j=0;j<dy;j++)
+			{
+				for (int i=0;i<dx;i++)
+				{
+				
+					std::cout << *(tmp->ind(i,j))<<" ";
+				}
+				std::cout << "\n";
+			}
+		}
+		if (bounds)
+		{
+		
+			std::cout.width(6);
+			std::cout << "\n";
+			for (int j=0;j<dimy;j++)
+			{
+				for (int i=0;i<dimx;i++)
+				{
+					std::cout << *(data->ind(i,j))<<" ";
+				}
+				std::cout << "\n";
+			}
+		}
+		*/
 	}
 
 	// Maximum und Minimum suchen
@@ -1070,11 +1157,12 @@ void MapGenerator::createPerlinNoise(Matrix2d<float> *data, int dimx, int dimy,i
 			}
 		}
 	}
-
+	
+	
 	// Raender anlegen
 	if (bounds)
 	{
-		float bnd = 5;
+		float bnd = std::min(5.0f, std::min(dimx/3.0f,dimy/3.0f));
 		float dist;
 		for (int i=0;i<dimx;i++)
 		{
@@ -1088,9 +1176,21 @@ void MapGenerator::createPerlinNoise(Matrix2d<float> *data, int dimx, int dimy,i
 			}
 		}
 	}
-
-	delete[] weightx;
-	delete[] weighty;
+	
+	/*
+	//Debugging
+	
+	std::cout << "\n";
+	for (int j=0;j<dimy;j++)
+	{
+		for (int i=0;i<dimx;i++)
+		{
+			std::cout << *(data->ind(i,j))<<" ";
+		}
+		std::cout << "\n";
+	}
+	*/
+	delete[] weight;
 	delete tmp;
 }
 

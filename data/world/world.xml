@@ -407,7 +407,7 @@
 <!-- Zombies, Skelette -->
 <!-- Locations fuer die Verteidigenden Wachen? -->
 	<Region id="13" name="dwarfenfrowardRampart">
-		<Settings dimx="8" dimy="32" area_percent="0.4" complexity="0.3" granularity="6" />
+		<Settings dimx="32" dimy="8" area_percent="0.3" complexity="0.3" granularity="4" />
 		
 		<ExitDirections north="true" south="true" west="false" east="false" />
 		

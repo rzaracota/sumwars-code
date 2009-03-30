@@ -47,7 +47,7 @@
 	 <World>
 		 <!-- soon to be tutorial-Region-->
 		 <Region id="0" name="region0">
-			 <Settings dimx="64" dimy="64" area_percent="0.35" complexity="0.4" granularity="8" ground="grass1"/>
+			 <Settings dimx="64" dimy="64" area_percent="0.30" complexity="0.4" granularity="8" ground="grass1"/>
 			 
 			 <ExitDirections north="true" south="true" west="false" east="false" />
 			 
@@ -81,21 +81,39 @@
 			 
 			 <Event trigger ="create_region" once = "true">
 				 <Effect>
-					 addLocation('LichLocation', {130,212});
-					 addLocation('TestLocation', {130,217});
-					 addArea('LichArea','circle',{130,212},6);
-					 tree = createObject('$tree', 'LichLocation');
+					 local pos = getLocation("entry_south");
+					 pos[2] = pos[2]-8;
+					 addLocation('LichLocation', pos);
+					 addLocation('TestLocation', pos);
+					 addArea('LichArea','circle',pos,6);
 				 </Effect>
 			 </Event>
 			 
 			 <Event trigger ="create_region" once = "true">
 				 <Effect>
-					 peasant = createObject('peasant', {130,210});
+					 local pos = getLocation("entry_south");
+					 pos[2] = pos[2]-8;
+					 peasant = createObject('peasant', pos);
 					 setRefName(peasant,'peasant');
 				 </Effect>
 			 </Event>
-			 
 			
+			 <!--
+			 <Event trigger ="player_moved" once = "true">
+				 <Condition>
+					 return (unitIsInArea(trigger.player,"LichArea"))
+				</Condition>
+				 <Effect>
+					print("player is in area");
+					createDialogue();
+					addSpeaker(peasant,"peasant");
+					addSpeaker(peasant,"peasant2");
+					addSpeaker(trigger.player,"player");
+					setTopicBase("peasant");
+					changeTopic("topic1");
+				 </Effect>
+			 </Event>
+			 -->
 			 
 			 <Event trigger ="create_template">
 				 <Condition>
