@@ -1,5 +1,4 @@
 <Object type="FIXED_OBJECT" subtype="fence4" layer="NORMAL">
 	<Mesh file="fence4.mesh" />
-	<Layer layer="NORMAL" />
-	<Geometry shape="RECT" extent_x="3.84" extent_y ="0.15"  />
+	<Geometry shape="RECT" extent_x="1.32" extent_y="4"/>
 </Object>
