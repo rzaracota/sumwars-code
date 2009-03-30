@@ -205,6 +205,8 @@
 		<Unit filename="gui\skilltree.h" />
 		<Unit filename="gui\sound.cpp" />
 		<Unit filename="gui\sound.h" />
+		<Unit filename="gui\tooltip.cpp" />
+		<Unit filename="gui\tooltip.h" />
 		<Unit filename="gui\tradewindow.cpp" />
 		<Unit filename="gui\tradewindow.h" />
 		<Unit filename="gui\window.h" />
