@@ -29,6 +29,7 @@ MinimapWindow::MinimapWindow (Document* doc)
 	minimap->setProperty("TitlebarEnabled","false");
 	minimap->setProperty("CloseButtonEnabled","false");
  	minimap->setAlpha (0.0);
+	minimap->setMousePassThroughEnabled(true);
 	
 	CEGUI::Window* label;
 	label = win_mgr.createWindow("TaharezLook/StaticImage", "MinimapImage");
@@ -124,8 +125,16 @@ void MinimapWindow::update()
 			label->setAlpha(alpha);
 		}
 		
-		relx =pl->getShape()->m_center.m_x/ region->getDimX()/4 - 0.015;
-		rely =pl->getShape()->m_center.m_y/ region->getDimY()/4 - 0.015;
+		if (region->getDimX()>region->getDimY())
+		{
+			relx =pl->getShape()->m_center.m_x/ region->getDimX()/4.0f - 0.015;
+			rely =(pl->getShape()->m_center.m_y +2*(region->getDimX()-region->getDimY()))/ region->getDimX()/4.0f - 0.015;
+		}
+		else
+		{
+			relx =(pl->getShape()->m_center.m_x +2*(region->getDimY()-region->getDimX()))/ region->getDimY()/4 - 0.015;
+			rely =pl->getShape()->m_center.m_y/ region->getDimY()/4 - 0.015;
+		}
 		
 		DEBUG5("relx %f  rely %f",relx,rely);
 		
