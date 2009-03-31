@@ -33,7 +33,6 @@
 				else
 					speak('Gertlinde Kampfer',_("He da, ..."),1000)
 					speak('player',_("Das stimmt."),1000)
-					createDialogue()
 					local spoken = false
 					if (getPlayers()[2] ~= nil) then
 						if (getPriests()[1] ~= getSpeaker("player")) then
