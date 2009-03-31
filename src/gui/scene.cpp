@@ -83,22 +83,23 @@ Scene::Scene(Document* doc,Ogre::RenderWindow* window)
 				CEGUI::Point( 0.0f, 0.0f ),
 				CEGUI::Size( ceguiTex->getWidth(), ceguiTex->getHeight() ),
 				CEGUI::Point( 0.0f, 0.0f ) );
-	
+
 	// Setup fuer die Spieleransicht
+
 	Ogre::SceneManager* char_scene_mng = Ogre::Root::getSingleton().createSceneManager(Ogre::ST_GENERIC,"CharacterSceneManager");
 	char_scene_mng->setAmbientLight(Ogre::ColourValue(1.0,1.0,1.0));
-	
+
 	Ogre::SceneNode* node = char_scene_mng->createSceneNode("testNode");
 	node->setPosition(Ogre::Vector3(0,0,0));
-	Ogre::Entity* ent = char_scene_mng->createEntity("testEntity","warrior.mesh");
+	Ogre::Entity* ent = char_scene_mng->createEntity("testEntity","warrior_m.mesh");
 	node->attachObject(ent);
-	
+
 	Ogre::Camera* char_camera = char_scene_mng->createCamera("char_camera");
 	char_camera->setPosition(Ogre::Vector3(500, 500, 0));
 	char_camera->lookAt(Ogre::Vector3(0,0,0));
 	char_camera->setNearClipDistance(1);
 	char_camera->setAspectRatio(1.0);
-	
+
 	/*
 	m_window->removeAllViewports();
 	m_camera = char_camera;
@@ -106,8 +107,8 @@ Scene::Scene(Document* doc,Ogre::RenderWindow* window)
 	m_viewport->setBackgroundColour(Ogre::ColourValue(0,0,0));
 	m_camera->setAspectRatio(Ogre::Real(m_viewport->getActualWidth()) / Ogre::Real(m_viewport->getActualHeight()));m_viewport->setOverlaysEnabled (true);
 	m_viewport->setOverlaysEnabled (true);
-	
-	
+
+
 	if (char_camera->isVisible(ent->getBoundingBox()))
 	{
 		DEBUG("object is visible");
@@ -133,7 +134,7 @@ Scene::Scene(Document* doc,Ogre::RenderWindow* window)
 				CEGUI::Point( 0.0f, 0.0f ),
 				CEGUI::Size( char_ceguiTex->getWidth(), char_ceguiTex->getHeight() ),
 				CEGUI::Point( 0.0f, 0.0f ) );
-	
+
 	char_rt->update();
 }
 
@@ -390,9 +391,9 @@ void Scene::update(float ms)
 
 	if (player ==0)
 		return;
-	
+
 	updateCharacterView();
-	
+
 	if (player->getRegion() ==0)
 		return;
 
@@ -1509,24 +1510,24 @@ void Scene::destroySceneNode(std::string& node_name)
 
 void Scene::updateCharacterView()
 {
-	
+
 	/*
 	Ogre::SceneManager* scene_mgr = Ogre::Root::getSingleton().getSceneManager("CharacterSceneManager");
-	
+
 	Player* pl = m_document->getLocalPlayer();
-	
-	
+
+
 	if ((pl ==0 && m_temp_player!="") || (pl->getNameId() != m_temp_player))
 	{
 		DEBUG("clear scene");
 		scene_mgr->clearScene();
 	}
-	
+
 	if (pl ==0)
 		return;
-	
+
 	m_temp_player = pl->getNameId();
-	
+
 	Ogre::SceneNode* node;
 	if (!scene_mgr->hasSceneNode("characterNode"))
 	{
@@ -1537,10 +1538,10 @@ void Scene::updateCharacterView()
 	{
 		node = scene_mgr->getSceneNode("characterNode");
 	}
-	
+
 	RenderInfo ri;
 	ri = getPlayerRenderInfo(pl->getPlayerLook());
-	
+
 	Ogre::Entity* obj_ent;
 	if (!scene_mgr->hasEntity("characterEntity"))
 	{
@@ -1557,7 +1558,7 @@ void Scene::updateCharacterView()
 	Ogre::Resource* res= Ogre::TextureManager::getSingleton().createOrRetrieve ("character_tex",Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME).first.getPointer();
 	Ogre::Texture* texture = dynamic_cast<Ogre::Texture*>(res);
 	Ogre::RenderTarget* target = texture->getBuffer()->getRenderTarget();
-	
+
 	target->update();
 	*/
 }
