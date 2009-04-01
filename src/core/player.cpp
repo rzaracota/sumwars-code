@@ -161,7 +161,7 @@ bool Player::init()
 	bas->m_resistances_cap[2] =50;
 	bas->m_resistances_cap[3] =50;
 	bas->m_special_flags=0;
-	bas->m_abilities[0] = 0xffffff;
+	bas->m_abilities[0] = 0xfffffff;
 	
 	m_using_waypoint = false;
 	
@@ -178,11 +178,11 @@ bool Player::init()
 		bas->m_strength = 50;
 		bas->m_dexterity = 20;
 		bas->m_magic_power = 10;
-		bas->m_willpower = 25;
+		bas->m_willpower = 20;
 		bas->m_walk_speed = 3000;
 		bas->m_attack_speed=2000;
 		
-		bas->m_attack_range =20;
+		bas->m_attack_range =1;
 		
 		m_base_action = Action::ATTACK;
 		m_left_action = Action::ATTACK;
@@ -192,7 +192,7 @@ bool Player::init()
 		// Debugging
 		m_look = "warrior_m";
 		m_name.assign("Boromir");
-		bas->m_abilities[1] = 0xffffff;
+		//bas->m_abilities[1] = 0xffffff;
 		
 		
 
@@ -212,7 +212,8 @@ bool Player::init()
 		bas->m_magic_power = 15;
 		bas->m_willpower = 15;
 		bas->m_walk_speed = 3000;
-		bas->m_attack_speed=1000;
+		bas->m_attack_speed=1500;
+		bas->m_attack_range =20;
 		
 		m_look = "archer_f";
 		
@@ -226,7 +227,7 @@ bool Player::init()
 		
 		// Debugging
 		m_name.assign("Legolas");
-		bas->m_abilities[2] = 0xffffff;
+		//bas->m_abilities[2] = 0xffffff;
 
 		si = ItemFactory::createItem(Item::WEAPON,"trainy_sbw");
 		equ->swapItem(si,Equipement::WEAPON);
@@ -254,13 +255,19 @@ bool Player::init()
 		init = true;
 		m_look = "mage_m";
 	
+		bas->m_resistances[1] =10;
+		bas->m_resistances[2] =10;
+		bas->m_resistances[3] =10;
+		bas->m_resistances_cap[1] =60;
+		bas->m_resistances_cap[2] =60;
+		bas->m_resistances_cap[3] =60;
 		
 	
 		si = ItemFactory::createItem(Item::WEAPON,"ice_wnd");
 		equ->swapItem(si,Equipement::WEAPON);
 
 		// Debugging
-		bas->m_abilities[3] = 0xffffff;
+		//bas->m_abilities[3] = 0xffffff;
 	}
 	else if (getTypeInfo()->m_subtype == "priest")
 	{
@@ -286,7 +293,7 @@ bool Player::init()
 		m_look = "priest_f";
 
 		// Debugging
-		bas->m_abilities[4] = 0xffffff;
+		//bas->m_abilities[4] = 0xffffff;
 		m_name.assign("Elrond");
 		
 		si = ItemFactory::createItem(Item::WEAPON,"hammer_hmr");
