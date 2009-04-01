@@ -30,22 +30,22 @@ SkillTree::SkillTree(Document* doc)
 	m_skill_position[Action::INFLAME] = CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.45f));
 	
 	m_skill_position[Action::ICE_BOLT] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.05f));
-	m_skill_position[Action::ICE_SPIKE] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.25f));
+	m_skill_position[Action::ICE_SPIKE] = CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.25f));
 	m_skill_position[Action::SNOW_STORM] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.65f));
 	m_skill_position[Action::BLIZZARD] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.85f));
 	m_skill_position[Action::ICE_RING] = CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.25f));
 	m_skill_position[Action::FROST_RING] = CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.65f));
-	m_skill_position[Action::FREEZE] = CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.25f));
-	m_skill_position[Action::CHILL] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.45f));
+	m_skill_position[Action::FREEZE] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.25f));
+	m_skill_position[Action::CHILL] = CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.45f));
 	
 	m_skill_position[Action::LIGHTNING] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.05f));
-	m_skill_position[Action::LIGHTNING_STRIKE] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.25f));
-	m_skill_position[Action::THUNDERSTORM] = CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.45f));
-	m_skill_position[Action::THUNDERSTORM2] = CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.85f));
+	m_skill_position[Action::LIGHTNING_STRIKE] = CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.25f));
+	m_skill_position[Action::THUNDERSTORM] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.45f));
+	m_skill_position[Action::THUNDERSTORM2] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.85f));
 	m_skill_position[Action::CHAIN_LIGHTNING] = CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.25f));
 	m_skill_position[Action::CHAIN_LIGHTNING2] = CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.45f));
-	m_skill_position[Action::STATIC_SHIELD] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.65f));
-	m_skill_position[Action::IONISATION] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.45f));
+	m_skill_position[Action::STATIC_SHIELD] = CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.65f));
+	m_skill_position[Action::IONISATION] = CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.45f));
 
 	m_skill_position[Action::BASH] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.05f));
 	m_skill_position[Action::HAMMER_BASH] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.45f));
@@ -56,12 +56,12 @@ SkillTree::SkillTree(Document* doc)
 	m_skill_position[Action::CHARGE] = CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.45f));
 	m_skill_position[Action::STORM_CHARGE] = CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.85f));
 	
-	m_skill_position[Action::BLOCK] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.25f));
+	m_skill_position[Action::BLOCK] = CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.25f));
 	m_skill_position[Action::STEADFAST] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.05f));
 	m_skill_position[Action::MONSTER_HUNTER] = CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.25f));
 	m_skill_position[Action::MONSTER_SLAYER] = CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.65f));
 	m_skill_position[Action::ENDURANCE] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.85f));
-	m_skill_position[Action::WEAPONMASTER] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.45f));
+	m_skill_position[Action::WEAPONMASTER] = CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.45f));
 	
 	m_skill_position[Action::FIRESWORD] = CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.25f));
 	m_skill_position[Action::FLAMESWORD] = CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.65f));
@@ -74,17 +74,17 @@ SkillTree::SkillTree(Document* doc)
 	m_skill_position[Action::ANGER] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.45f));
 	m_skill_position[Action::FURY] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.65f));
 	
-	m_skill_position[Action::TRIPLE_SHOT] = CEGUI::UVector2(cegui_reldim(0.35f), cegui_reldim(0.05f));
-	m_skill_position[Action::GUIDED_TRIPLE_SHOT] = CEGUI::UVector2(cegui_reldim(0.35f), cegui_reldim(0.45f));
-	m_skill_position[Action::MULTISHOT] = CEGUI::UVector2(cegui_reldim(0.15f), cegui_reldim(0.25f));
-	m_skill_position[Action::VOLLEY_SHOT] = CEGUI::UVector2(cegui_reldim(0.15f), cegui_reldim(0.65f));
-	m_skill_position[Action::PIERCE] = CEGUI::UVector2(cegui_reldim(0.35f), cegui_reldim(0.25f));
-	m_skill_position[Action::WEAK_POINT] = CEGUI::UVector2(cegui_reldim(0.75f), cegui_reldim(0.25f));
-	m_skill_position[Action::BLIND_RAGE] = CEGUI::UVector2(cegui_reldim(0.75f), cegui_reldim(0.65f));
-	m_skill_position[Action::VACUUM] = CEGUI::UVector2(cegui_reldim(0.55f), cegui_reldim(0.45f));
-	m_skill_position[Action::DEATH_ROULETTE] = CEGUI::UVector2(cegui_reldim(0.35f), cegui_reldim(0.85f));
-	m_skill_position[Action::EXPLODING_ARROW] = CEGUI::UVector2(cegui_reldim(0.55f), cegui_reldim(0.25f));
-	m_skill_position[Action::EXPLOSION_CASCADE] = CEGUI::UVector2(cegui_reldim(0.55f), cegui_reldim(0.65f));
+	m_skill_position[Action::TRIPLE_SHOT] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.05f));
+	m_skill_position[Action::GUIDED_TRIPLE_SHOT] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.45f));
+	m_skill_position[Action::MULTISHOT] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.25f));
+	m_skill_position[Action::VOLLEY_SHOT] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.65f));
+	m_skill_position[Action::PIERCE] = CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.05f));
+	m_skill_position[Action::WEAK_POINT] = CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.25f));
+	m_skill_position[Action::BLIND_RAGE] = CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.45f));
+	m_skill_position[Action::VACUUM] = CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.25f));
+	m_skill_position[Action::DEATH_ROULETTE] = CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.65f));
+	m_skill_position[Action::EXPLODING_ARROW] = CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.45f));
+	m_skill_position[Action::EXPLOSION_CASCADE] = CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.85f));
 	
 	m_skill_position[Action::EVADE] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.05f));
 	m_skill_position[Action::CRITICAL_STRIKE] = CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.25f));
@@ -99,16 +99,16 @@ SkillTree::SkillTree(Document* doc)
 	m_skill_position[Action::FREEZING_ARROWS] = CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.85f));
 	m_skill_position[Action::WIND_ARROWS] = CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.25f));
 	m_skill_position[Action::STORM_ARROWS] = CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.65f));
-	m_skill_position[Action::WIND_WALK] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.45f));
+	m_skill_position[Action::WIND_WALK] = CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.25f));
 	
-	m_skill_position[Action::HOLY_LIGHT] = CEGUI::UVector2(cegui_reldim(0.15f), cegui_reldim(0.25f));
-	m_skill_position[Action::HOLY_FIRE] = CEGUI::UVector2(cegui_reldim(0.15f), cegui_reldim(0.65f));
-	m_skill_position[Action::BURNING_RAGE] = CEGUI::UVector2(cegui_reldim(0.55f), cegui_reldim(0.45f));
-	m_skill_position[Action::CURE_BLIND_MUTE] = CEGUI::UVector2(cegui_reldim(0.75f), cegui_reldim(0.25f));
-	m_skill_position[Action:: CURE_BLIND_MUTE_PARTY] = CEGUI::UVector2(cegui_reldim(0.75f), cegui_reldim(0.65f));
-	m_skill_position[Action::BLAZING_SHIELD] = CEGUI::UVector2(cegui_reldim(0.55f), cegui_reldim(0.05f));
-	m_skill_position[Action::LIGHT_BEAM] = CEGUI::UVector2(cegui_reldim(0.35f), cegui_reldim(0.25f));
-	m_skill_position[Action::BURNING_SUN] = CEGUI::UVector2(cegui_reldim(0.35f), cegui_reldim(0.85f));
+	m_skill_position[Action::HOLY_LIGHT] = CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.45f));
+	m_skill_position[Action::HOLY_FIRE] = CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.65f));
+	m_skill_position[Action::BURNING_RAGE] = CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.25f));
+	m_skill_position[Action::CURE_BLIND_MUTE] = CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.25f));
+	m_skill_position[Action:: CURE_BLIND_MUTE_PARTY] = CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.65f));
+	m_skill_position[Action::BLAZING_SHIELD] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.05f));
+	m_skill_position[Action::LIGHT_BEAM] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.25f));
+	m_skill_position[Action::BURNING_SUN] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.85f));
 	
 	m_skill_position[Action::BREAK_BINDING] = CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.45f));
 	m_skill_position[Action::DISRUPT_BINDING] = CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.85f));

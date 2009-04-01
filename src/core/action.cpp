@@ -202,7 +202,7 @@ void Action::init()
 	a->m_critical_perc=0.66;
 	a->m_distance = MELEE;
 	a->m_flags =0;
-	a->m_req_level = 20;
+	a->m_req_level = 15;
 	a->m_req_ability[0] = Action::AROUND_BLOW;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
@@ -233,7 +233,7 @@ void Action::init()
 	a->m_critical_perc=0.8;
 	a->m_distance = MELEE;
 	a->m_flags =0;
-	a->m_req_level = 40;
+	a->m_req_level = 35;
 	a->m_req_ability[0] = Action::AROUND_BLOW;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
@@ -247,7 +247,7 @@ void Action::init()
 	a->m_critical_perc=0.8;
 	a->m_distance = MELEE;
 	a->m_flags =0;
-	a->m_req_level = 40;
+	a->m_req_level = 35;
 	a->m_req_ability[0] = Action::HAMMER_BASH;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
@@ -282,7 +282,7 @@ void Action::init()
 	a->m_critical_perc=0.66;
 	a->m_distance = MELEE;
 	a->m_flags =0;
-	a->m_req_level = 20;
+	a->m_req_level = 15;
 	a->m_req_ability[0] = Action::BASH;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
@@ -330,8 +330,8 @@ void Action::init()
 	a->m_critical_perc=0.8;
 	a->m_distance = SELF;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_req_level = 20;
-	a->m_req_ability[0] = Action::DECOY;
+	a->m_req_level = 15;
+	a->m_req_ability[0] = Action::BERSERK;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_enum_name = "scare";
@@ -358,7 +358,7 @@ void Action::init()
 	a->m_critical_perc=0.8;
 	a->m_distance = SELF;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_req_level = 40;
+	a->m_req_level = 35;
 	a->m_req_ability[0] = Action::FLAMEARMOR;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
@@ -372,7 +372,7 @@ void Action::init()
 	a->m_critical_perc=0.8;
 	a->m_distance = SELF;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_req_level = 20;
+	a->m_req_level = 15;
 	a->m_req_ability[0] = Action::FIRESWORD;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
@@ -401,7 +401,7 @@ void Action::init()
 	a->m_distance = SELF;
 	a->m_flags =MUTE_AFFECTED;
 	a->m_req_level = 60;
-	a->m_req_ability[0] = Action::BERSERK;
+	a->m_req_ability[0] = Action::SCARE;
 	a->m_req_ability[1] = Action::FURY;
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_enum_name = "warcry";
@@ -428,8 +428,8 @@ void Action::init()
 	a->m_critical_perc=0.8;
 	a->m_distance = SELF;
 	a->m_flags =0;
-	a->m_req_level = 20;
-	a->m_req_ability[0] = Action::REGENERATE;
+	a->m_req_level = 15;
+	a->m_req_ability[0] = Action::NOACTION;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_enum_name = "anger";
@@ -442,7 +442,7 @@ void Action::init()
 	a->m_critical_perc=0.8;
 	a->m_distance = SELF;
 	a->m_flags =0;
-	a->m_req_level = 40;
+	a->m_req_level = 35;
 	a->m_req_ability[0] = Action::ANGER;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
@@ -484,7 +484,7 @@ void Action::init()
 	a->m_critical_perc=0.0;
 	a->m_distance = PASSIVE;
 	a->m_flags =0;
-	a->m_req_level = 20;
+	a->m_req_level = 15;
 	a->m_req_ability[0] = Action::BLOCK;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
@@ -499,7 +499,7 @@ void Action::init()
 	a->m_distance = PASSIVE;
 	a->m_flags =0;
 	a->m_req_level = 5;
-	a->m_req_ability[0] = Action::STEADFAST;
+	a->m_req_ability[0] = Action::NOACTION;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_enum_name = "monster_hunter";
@@ -512,7 +512,7 @@ void Action::init()
 	a->m_critical_perc=0.0;
 	a->m_distance = PASSIVE;
 	a->m_flags =0;
-	a->m_req_level = 40;
+	a->m_req_level = 35;
 	a->m_req_ability[0] = Action::MONSTER_HUNTER;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
@@ -576,8 +576,8 @@ void Action::init()
 	a->m_critical_perc=0.8;
 	a->m_distance = RANGED;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_req_level = 20;
-	a->m_req_ability[0] = Action::FIRE_BALL;
+	a->m_req_level = 15;
+	a->m_req_ability[0] = Action::INFERNO_BALL;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_enum_name = "fire_wave";
@@ -627,7 +627,7 @@ void Action::init()
 	a->m_critical_perc=0.8;
 	a->m_distance = RANGED;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_req_level = 40;
+	a->m_req_level = 35;
 	a->m_req_ability[0] = Action::FIRE_BALL;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
@@ -644,7 +644,7 @@ void Action::init()
 	a->m_critical_perc=0.8;
 	a->m_distance = RANGED;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_req_level = 40;
+	a->m_req_level = 35;
 	a->m_req_ability[0] = Action::FIRE_STRIKE;
 	a->m_req_ability[1] = Action::FIRE_BALL;
 	a->m_req_ability[2] = Action::NOACTION;
@@ -661,7 +661,7 @@ void Action::init()
 	a->m_critical_perc=0.0;
 	a->m_distance = PASSIVE;
 	a->m_flags =0;
-	a->m_req_level = 20;
+	a->m_req_level = 15;
 	a->m_req_ability[0] = Action::NOACTION;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
@@ -710,7 +710,7 @@ void Action::init()
 	a->m_critical_perc=0.8;
 	a->m_distance = RANGED;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_req_level = 40;
+	a->m_req_level = 35;
 	a->m_req_ability[0] = Action::FREEZE;
 	a->m_req_ability[1] = Action::ICE_RING;
 	a->m_req_ability[2] = Action::NOACTION;
@@ -761,7 +761,7 @@ void Action::init()
 	a->m_critical_perc=0.8;
 	a->m_distance = RANGED;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_req_level = 40;
+	a->m_req_level = 35;
 	a->m_req_ability[0] = Action::ICE_RING;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
@@ -795,7 +795,7 @@ void Action::init()
 	a->m_critical_perc=0.0;
 	a->m_distance = PASSIVE;
 	a->m_flags =0;
-	a->m_req_level = 20;
+	a->m_req_level = 15;
 	a->m_req_ability[0] = Action::NOACTION;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
@@ -843,8 +843,8 @@ void Action::init()
 	a->m_critical_perc=0.8;
 	a->m_distance = RANGED;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_req_level = 20;
-	a->m_req_ability[0] = Action::LIGHTNING_STRIKE;
+	a->m_req_level = 15;
+	a->m_req_ability[0] = Action::CHAIN_LIGHTNING;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_enum_name = "thunderstorm";
@@ -894,7 +894,7 @@ void Action::init()
 	a->m_critical_perc=0.8;
 	a->m_distance = RANGED;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_req_level = 20;
+	a->m_req_level = 15;
 	a->m_req_ability[0] = Action::CHAIN_LIGHTNING;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
@@ -911,9 +911,9 @@ void Action::init()
 	a->m_critical_perc=0.8;
 	a->m_distance = SELF;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_req_level = 40;
-	a->m_req_ability[0] = Action::CHAIN_LIGHTNING;
-	a->m_req_ability[1] = Action::LIGHTNING_STRIKE;
+	a->m_req_level = 35;
+	a->m_req_ability[0] = Action::IONISATION;
+	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_enum_name = "static_shield";
 	a->m_animation[NO_WEAPON].push_back("castMagicWeak");
@@ -928,7 +928,7 @@ void Action::init()
 	a->m_critical_perc=0.0;
 	a->m_distance = PASSIVE;
 	a->m_flags =0;
-	a->m_req_level = 20;
+	a->m_req_level = 15;
 	a->m_req_ability[0] = Action::NOACTION;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
@@ -962,7 +962,7 @@ void Action::init()
 	a->m_critical_perc=0.3;
 	a->m_distance = RANGED;
 	a->m_flags =0;
-	a->m_req_level = 20;
+	a->m_req_level = 15;
 	a->m_req_ability[0] = Action::MULTISHOT;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
@@ -996,8 +996,8 @@ void Action::init()
 	a->m_critical_perc=0.7;
 	a->m_distance = RANGED;
 	a->m_flags =0;
-	a->m_req_level = 40;
-	a->m_req_ability[0] = Action::MULTISHOT;
+	a->m_req_level = 35;
+	a->m_req_ability[0] = Action::GUIDED_TRIPLE_SHOT;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_enum_name = "volley_shot";
@@ -1013,8 +1013,8 @@ void Action::init()
 	a->m_critical_perc=0.66;
 	a->m_distance = RANGED;
 	a->m_flags =0;
-	a->m_req_level = 5;
-	a->m_req_ability[0] = Action::TRIPLE_SHOT;
+	a->m_req_level = 1;
+	a->m_req_ability[0] = Action::NOACTION;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_enum_name = "pierce";
@@ -1047,7 +1047,7 @@ void Action::init()
 	a->m_critical_perc=0.66;
 	a->m_distance = RANGED;
 	a->m_flags =0;
-	a->m_req_level = 40;
+	a->m_req_level = 15;
 	a->m_req_ability[0] = Action::WEAK_POINT;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
@@ -1064,7 +1064,7 @@ void Action::init()
 	a->m_critical_perc=0.66;
 	a->m_distance = RANGED;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_req_level = 20;
+	a->m_req_level = 5;
 	a->m_req_ability[0] = Action::NOACTION;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
@@ -1081,9 +1081,9 @@ void Action::init()
 	a->m_critical_perc=0.66;
 	a->m_distance = RANGED;
 	a->m_flags =0;
-	a->m_req_level = 60;
+	a->m_req_level = 35;
 	a->m_req_ability[0] = Action::GUIDED_TRIPLE_SHOT;
-	a->m_req_ability[1] = Action::VOLLEY_SHOT;
+	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_enum_name = "death_roulette";
 	a->m_animation[NO_WEAPON].push_back("attackRangedUnarmed");
@@ -1098,7 +1098,7 @@ void Action::init()
 	a->m_critical_perc=0.66;
 	a->m_distance = RANGED;
 	a->m_flags =0;
-	a->m_req_level = 5;
+ 	a->m_req_level = 15;
 	a->m_req_ability[0] = Action::NOACTION;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
@@ -1115,9 +1115,9 @@ void Action::init()
 	a->m_critical_perc=0.66;
 	a->m_distance = RANGED;
 	a->m_flags =0;
-	a->m_req_level = 40;
+	a->m_req_level = 35;
 	a->m_req_ability[0] = Action::EXPLODING_ARROW;
-	a->m_req_ability[1] = Action::MULTISHOT;
+	a->m_req_ability[1] = Action::VOLLEY_SHOT;
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_enum_name = "exploding_cascade";
 	a->m_animation[NO_WEAPON].push_back("attackRangedUnarmed");
@@ -1146,7 +1146,7 @@ void Action::init()
 	a->m_critical_perc=0.66;
 	a->m_distance = SELF;
 	a->m_flags =0;
-	a->m_req_level = 40;
+	a->m_req_level = 35;
 	a->m_req_ability[0] = Action::AIMED_SHOT;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
@@ -1160,7 +1160,7 @@ void Action::init()
 	a->m_critical_perc=0.66;
 	a->m_distance = SELF;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_req_level = 20;
+	a->m_req_level = 15;
 	a->m_req_ability[0] = Action::NOACTION;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
@@ -1211,7 +1211,7 @@ void Action::init()
 	a->m_critical_perc=0.66;
 	a->m_distance = SELF;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_req_level = 40;
+	a->m_req_level = 35;
 	a->m_req_ability[0] = Action::WIND_ARROWS;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
@@ -1228,8 +1228,8 @@ void Action::init()
 	a->m_critical_perc=0.66;
 	a->m_distance = SELF;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_req_level = 20;
-	a->m_req_ability[0] = Action::AIMED_SHOT;
+	a->m_req_level = 5;
+	a->m_req_ability[0] = Action::NOACTION;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_enum_name = "wind_walk";
@@ -1270,7 +1270,7 @@ void Action::init()
 	a->m_critical_perc=0.0;
 	a->m_distance = PASSIVE;
 	a->m_flags =0;
-	a->m_req_level = 20;
+	a->m_req_level = 15;
 	a->m_req_ability[0] = Action::EVADE;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
@@ -1312,7 +1312,7 @@ void Action::init()
 	a->m_critical_perc=0.0;
 	a->m_distance = PASSIVE;
 	a->m_flags =0;
-	a->m_req_level = 40;
+	a->m_req_level = 35;
 	a->m_req_ability[0] = Action::RESIST_ICE;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
@@ -1328,7 +1328,7 @@ void Action::init()
 	a->m_critical_perc=0.66;
 	a->m_distance = MELEE;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_req_level = 5;
+	a->m_req_level = 15;
 	a->m_req_ability[0] = Action::NOACTION;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
@@ -1342,7 +1342,7 @@ void Action::init()
 	a->m_critical_perc=0.66;
 	a->m_distance = MELEE;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_req_level = 40;
+	a->m_req_level = 35;
 	a->m_req_ability[0] = Action::HOLY_LIGHT;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
@@ -1356,7 +1356,7 @@ void Action::init()
 	a->m_critical_perc=0.66;
 	a->m_distance = PARTY_MULTI;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_req_level = 20;
+	a->m_req_level = 5;
 	a->m_req_ability[0] = Action::BLAZING_SHIELD;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
@@ -1384,7 +1384,7 @@ void Action::init()
 	a->m_critical_perc=0.66;
 	a->m_distance = PARTY_MULTI;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_req_level = 40;
+	a->m_req_level = 35;
 	a->m_req_ability[0] = Action::CURE_BLIND_MUTE;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
@@ -1440,7 +1440,7 @@ void Action::init()
 	a->m_critical_perc=0.66;
 	a->m_distance = MELEE;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_req_level = 20;
+	a->m_req_level = 15;
 	a->m_req_ability[0] = Action::NOACTION;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
@@ -1469,7 +1469,7 @@ void Action::init()
 	a->m_distance = PARTY_MULTI;
 	a->m_flags =MUTE_AFFECTED;
 	a->m_req_level = 5;
-	a->m_req_ability[0] = Action::BLAZING_SHIELD;
+	a->m_req_ability[0] = Action::NOACTION;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_enum_name = "magic_shield";
@@ -1496,8 +1496,8 @@ void Action::init()
 	a->m_critical_perc=0.66;
 	a->m_distance = PARTY_MULTI;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_req_level = 40;
-	a->m_req_ability[0] = Action::CURE_BLIND_MUTE;
+	a->m_req_level = 35;
+	a->m_req_ability[0] = Action::ACID;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_enum_name = "cure_pois_burn_party";
@@ -1510,7 +1510,7 @@ void Action::init()
 	a->m_critical_perc=0.66;
 	a->m_distance = RANGED;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_req_level = 20;
+	a->m_req_level = 15;
 	a->m_req_ability[0] = Action::CURE_POIS_BURN;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
@@ -1538,8 +1538,8 @@ void Action::init()
 	a->m_critical_perc=0.66;
 	a->m_distance = PARTY_MULTI;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_req_level = 20;
-	a->m_req_ability[0] = Action::CURE_POIS_BURN;
+	a->m_req_level = 15;
+	a->m_req_ability[0] = Action::HEAL;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_enum_name = "heal_party";
@@ -1566,7 +1566,7 @@ void Action::init()
 	a->m_critical_perc=0.66;
 	a->m_distance = MELEE;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_req_level = 40;
+	a->m_req_level = 35;
 	a->m_req_ability[0] = Action::DIVINE_WIND;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
@@ -1608,7 +1608,7 @@ void Action::init()
 	a->m_critical_perc=0.66;
 	a->m_distance = PARTY_MULTI;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_req_level = 40;
+	a->m_req_level = 35;
 	a->m_req_ability[0] = Action::CURE_CONF_BSRK;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
@@ -1622,7 +1622,7 @@ void Action::init()
 	a->m_critical_perc=0.66;
 	a->m_distance = RANGED;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_req_level = 20;
+	a->m_req_level = 15;
 	a->m_req_ability[0] = Action::CURE_CONF_BSRK;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
@@ -2086,7 +2086,7 @@ void Action::updateTranslation()
 
 	a = &(Action::m_base_info[LIGHT_BEAM]);
 	a->m_name = gettext("Glistening Glare");
-	a->m_description = gettext("The priest casts a dazzling light, that can casuse an enemy to be affected by blind.");
+	a->m_description = gettext("The priest casts a dazzling light, that can cause an enemy to be affected by blind.");
 
 	a = &(Action::m_base_info[BURNING_SUN]);
 	a->m_name = gettext("Glaring Sun");
