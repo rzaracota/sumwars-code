@@ -229,7 +229,7 @@ bool Player::init()
 		m_name.assign("Legolas");
 		//bas->m_abilities[2] = 0xffffff;
 
-		si = ItemFactory::createItem(Item::WEAPON,"trainy_sbw");
+		si = ItemFactory::createItem(Item::WEAPON,"pract_sbw");
 		equ->swapItem(si,Equipement::WEAPON);
 		
 		
@@ -984,7 +984,7 @@ Item* Player::getShield()
 Action::ActionEquip Player::getActionEquip()
 {
 	Item* weapon = getWeapon();
-	if (weapon ==0)
+	if (weapon ==0 || weapon->m_weapon_attr==0)
 	{
 		return Action::NO_WEAPON;
 	}
@@ -1056,7 +1056,7 @@ void Player::gainLevel()
 	// Attributpunkte hinzufuegen
 	m_attribute_points +=5;
 
-	if (getBaseAttr()->m_level %10 ==0 || getBaseAttr()->m_level==15 || getBaseAttr()->m_level==5 || getBaseAttr()->m_level==3)
+	if (getBaseAttr()->m_level %10 ==0 || (getBaseAttr()->m_level<50 &&  getBaseAttr()->m_level %5 ==0) || getBaseAttr()->m_level==7 || getBaseAttr()->m_level==3 || getBaseAttr()->m_level==2)
 	{
 		// Skillpunkt hinzufuegen
 		m_skill_points ++;
@@ -1219,7 +1219,7 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 					// Bit fuer die Faehigkeit setzen
 					getBaseAttr()->m_abilities[command->m_id/32] |= (1 << (command->m_id%32));
 
-					DEBUG("lerne Faehigkeit %i", command->m_id);
+					DEBUG5("lerne Faehigkeit %i", command->m_id);
 
 					calcBaseAttrMod();
 					
@@ -1578,7 +1578,7 @@ void Player::calcBaseDamage(Action::ActionType act,Damage& dmg)
 
 	Item* weapon = getWeapon();
 
-	if (weapon!=0)
+	if (weapon!=0 && weapon->m_weapon_attr !=0)
 	{
 		// Schaden der Waffe
 		Damage& wdmg=weapon->m_weapon_attr->m_damage;

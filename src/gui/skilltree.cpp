@@ -13,12 +13,14 @@ SkillTree::SkillTree(Document* doc)
 
 	// Bestandteile des Charakterfensters hinzufuegen
 	CEGUI::Window* label;
+	CEGUI::PushButton* button;
 	CEGUI::DefaultWindow* tab;
 
 	std::ostringstream outStream;
 	std::string name;
-	std::string lname;
+	std::string lname,bname;
 	unsigned int act;
+	CEGUI::UVector2 pos;
 	
 	m_skill_position[Action::FIRE_BOLT] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.05f));
 	m_skill_position[Action:: FIRE_STRIKE] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.25f));
@@ -158,10 +160,20 @@ SkillTree::SkillTree(Document* doc)
 	for (int i = Action::FIRE_BOLT; i <= Action::INFLAME; i++)
 	{
 		name =Action::getActionInfo((Action::ActionType) i)->m_enum_name;
-		label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
+		lname = name;
+		label = win_mgr.createWindow("TaharezLook/StaticImage", lname.append( "Label") );
 		tab->addChildWindow(label);
 		label->setPosition(m_skill_position[i]);
 		label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
+		
+		
+		pos = m_skill_position[i];
+		pos += CEGUI::UVector2(cegui_reldim(0.14f), cegui_reldim( 0.05f));
+		bname = name;
+		button = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", bname.append( "Button") ));
+		tab->addChildWindow(button);
+		button->setPosition(pos);
+		button->setSize(CEGUI::UVector2(cegui_reldim(0.07f), cegui_reldim( 0.05f)));
 	}
 
 	// Tab Eismagie
@@ -171,10 +183,19 @@ SkillTree::SkillTree(Document* doc)
 	for (int i = Action::ICE_BOLT; i <= Action::CHILL; i++)
 	{
 		name =Action::getActionInfo((Action::ActionType) i)->m_enum_name;
-		label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
+		lname = name;
+		label = win_mgr.createWindow("TaharezLook/StaticImage", lname.append( "Label") );
 		tab->addChildWindow(label);
 		label->setPosition(m_skill_position[i]);
 		label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
+		
+		pos = m_skill_position[i];
+		pos += CEGUI::UVector2(cegui_reldim(0.14f), cegui_reldim( 0.05f));
+		bname = name;
+		button = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", bname.append( "Button") ));
+		tab->addChildWindow(button);
+		button->setPosition(pos);
+		button->setSize(CEGUI::UVector2(cegui_reldim(0.07f), cegui_reldim( 0.05f)));
 	}
 
 
@@ -185,10 +206,19 @@ SkillTree::SkillTree(Document* doc)
 	for (int i = Action::LIGHTNING; i <= Action::IONISATION; i++)
 	{
 		name =Action::getActionInfo((Action::ActionType) i)->m_enum_name;
-		label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
+		lname = name;
+		label = win_mgr.createWindow("TaharezLook/StaticImage", lname.append( "Label") );
 		tab->addChildWindow(label);
 		label->setPosition(m_skill_position[i]);
 		label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
+		
+		pos = m_skill_position[i];
+		pos += CEGUI::UVector2(cegui_reldim(0.14f), cegui_reldim( 0.05f));
+		bname = name;
+		button = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", bname.append( "Button") ));
+		tab->addChildWindow(button);
+		button->setPosition(pos);
+		button->setSize(CEGUI::UVector2(cegui_reldim(0.07f), cegui_reldim( 0.05f)));
 	}
 	
 	// Label beschriften und verknuepfen
@@ -206,6 +236,10 @@ SkillTree::SkillTree(Document* doc)
 		label->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&SkillTree::onSkillMouseClicked, this));
 		label->subscribeEvent(CEGUI::Window::EventMouseEnters, CEGUI::Event::Subscriber(&SkillTree::onAbilityHover, this));
 
+		button = static_cast<CEGUI::PushButton*>(win_mgr.getWindow(name + "Button"));
+		button->setText("+");
+		button->setID(act);
+		button->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&SkillTree::onSkillLearnMouseClicked, this));
 	}
 
 
@@ -243,10 +277,19 @@ SkillTree::SkillTree(Document* doc)
 	for (int i = Action::BASH; i <= Action::STORM_CHARGE; i++)
 	{
 		name =Action::getActionInfo((Action::ActionType) i)->m_enum_name;
-		label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
+		lname = name;
+		label = win_mgr.createWindow("TaharezLook/StaticImage", lname.append( "Label") );
 		tab->addChildWindow(label);
 		label->setPosition(m_skill_position[i]);
 		label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
+		
+		pos = m_skill_position[i];
+		pos += CEGUI::UVector2(cegui_reldim(0.14f), cegui_reldim( 0.05f));
+		bname = name;
+		button = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", bname.append( "Button") ));
+		tab->addChildWindow(button);
+		button->setPosition(pos);
+		button->setSize(CEGUI::UVector2(cegui_reldim(0.07f), cegui_reldim( 0.05f)));
 	}
 	
 
@@ -257,10 +300,19 @@ SkillTree::SkillTree(Document* doc)
 	for (int i = Action::BLOCK; i <= Action::WEAPONMASTER; i++)
 	{
 		name =Action::getActionInfo((Action::ActionType) i)->m_enum_name;
-		label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
+		lname = name;
+		label = win_mgr.createWindow("TaharezLook/StaticImage", lname.append( "Label") );
 		tab->addChildWindow(label);
 		label->setPosition(m_skill_position[i]);
 		label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
+		
+		pos = m_skill_position[i];
+		pos += CEGUI::UVector2(cegui_reldim(0.14f), cegui_reldim( 0.05f));
+		bname = name;
+		button = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", bname.append( "Button") ));
+		tab->addChildWindow(button);
+		button->setPosition(pos);
+		button->setSize(CEGUI::UVector2(cegui_reldim(0.07f), cegui_reldim( 0.05f)));
 	}
 	
 
@@ -271,10 +323,19 @@ SkillTree::SkillTree(Document* doc)
 	for (int i = Action::FIRESWORD; i <= Action::FURY; i++)
 	{
 		name =Action::getActionInfo((Action::ActionType) i)->m_enum_name;
-		label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
+		lname = name;
+		label = win_mgr.createWindow("TaharezLook/StaticImage", lname.append( "Label") );
 		tab->addChildWindow(label);
 		label->setPosition(m_skill_position[i]);
 		label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
+		
+		pos = m_skill_position[i];
+		pos += CEGUI::UVector2(cegui_reldim(0.14f), cegui_reldim( 0.05f));
+		bname = name;
+		button = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", bname.append( "Button") ));
+		tab->addChildWindow(button);
+		button->setPosition(pos);
+		button->setSize(CEGUI::UVector2(cegui_reldim(0.07f), cegui_reldim( 0.05f)));
 	}
 	
 	for (act =Action::BASH;act <=Action::FURY;act++)
@@ -290,6 +351,10 @@ SkillTree::SkillTree(Document* doc)
 		label->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&SkillTree::onSkillMouseClicked, this));
 		label->subscribeEvent(CEGUI::Window::EventMouseEnters, CEGUI::Event::Subscriber(&SkillTree::onAbilityHover, this));
 
+		button = static_cast<CEGUI::PushButton*>(win_mgr.getWindow(name + "Button"));
+		button->setText("+");
+		button->setID(act);
+		button->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&SkillTree::onSkillLearnMouseClicked, this));
 	}
 
 	skilltree_warrior->setVisible(false);
@@ -326,10 +391,19 @@ SkillTree::SkillTree(Document* doc)
 	for (int i = Action::TRIPLE_SHOT; i <= Action::EXPLOSION_CASCADE; i++)
 	{
 		name =Action::getActionInfo((Action::ActionType) i)->m_enum_name;
-		label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
+		lname = name;
+		label = win_mgr.createWindow("TaharezLook/StaticImage", lname.append( "Label") );
 		tab->addChildWindow(label);
 		label->setPosition(m_skill_position[i]);
 		label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
+		
+		pos = m_skill_position[i];
+		pos += CEGUI::UVector2(cegui_reldim(0.14f), cegui_reldim( 0.05f));
+		bname = name;
+		button = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", bname.append( "Button") ));
+		tab->addChildWindow(button);
+		button->setPosition(pos);
+		button->setSize(CEGUI::UVector2(cegui_reldim(0.07f), cegui_reldim( 0.05f)));
 	}
 
 	// Tab passive Faehigkeiten
@@ -339,10 +413,19 @@ SkillTree::SkillTree(Document* doc)
 	for (int i = Action::EVADE; i <= Action::RESIST_AIR; i++)
 	{
 		name =Action::getActionInfo((Action::ActionType) i)->m_enum_name;
-		label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
+		lname = name;
+		label = win_mgr.createWindow("TaharezLook/StaticImage", lname.append( "Label") );
 		tab->addChildWindow(label);
 		label->setPosition(m_skill_position[i]);
 		label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
+		
+		pos = m_skill_position[i];
+		pos += CEGUI::UVector2(cegui_reldim(0.14f), cegui_reldim( 0.05f));
+		bname = name;
+		button = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", bname.append( "Button") ));
+		tab->addChildWindow(button);
+		button->setPosition(pos);
+		button->setSize(CEGUI::UVector2(cegui_reldim(0.07f), cegui_reldim( 0.05f)));
 	}
 	
 	// Tab3 <hier Name einsetzen>
@@ -352,10 +435,19 @@ SkillTree::SkillTree(Document* doc)
 	for (int i = Action::AIMED_SHOT; i <= Action::WIND_WALK; i++)
 	{
 		name =Action::getActionInfo((Action::ActionType) i)->m_enum_name;
-		label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
+		lname = name;
+		label = win_mgr.createWindow("TaharezLook/StaticImage", lname.append( "Label") );
 		tab->addChildWindow(label);
 		label->setPosition(m_skill_position[i]);
 		label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
+		
+		pos = m_skill_position[i];
+		pos += CEGUI::UVector2(cegui_reldim(0.14f), cegui_reldim( 0.05f));
+		bname = name;
+		button = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", bname.append( "Button") ));
+		tab->addChildWindow(button);
+		button->setPosition(pos);
+		button->setSize(CEGUI::UVector2(cegui_reldim(0.07f), cegui_reldim( 0.05f)));
 	}
 	
 	for (act =Action::TRIPLE_SHOT;act <=Action::WIND_WALK;act++)
@@ -371,6 +463,10 @@ SkillTree::SkillTree(Document* doc)
 		label->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&SkillTree::onSkillMouseClicked, this));
 		label->subscribeEvent(CEGUI::Window::EventMouseEnters, CEGUI::Event::Subscriber(&SkillTree::onAbilityHover, this));
 
+		button = static_cast<CEGUI::PushButton*>(win_mgr.getWindow(name + "Button"));
+		button->setText("+");
+		button->setID(act);
+		button->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&SkillTree::onSkillLearnMouseClicked, this));
 	}
 
 	skilltree_archer->setVisible(false);
@@ -407,10 +503,19 @@ SkillTree::SkillTree(Document* doc)
 	for (int i = Action::HOLY_LIGHT; i <= Action::BURNING_SUN; i++)
 	{
 		name =Action::getActionInfo((Action::ActionType) i)->m_enum_name;
-		label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
+		lname = name;
+		label = win_mgr.createWindow("TaharezLook/StaticImage", lname.append( "Label") );
 		tab->addChildWindow(label);
 		label->setPosition(m_skill_position[i]);
 		label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
+		
+		pos = m_skill_position[i];
+		pos += CEGUI::UVector2(cegui_reldim(0.14f), cegui_reldim( 0.05f));
+		bname = name;
+		button = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", bname.append( "Button") ));
+		tab->addChildWindow(button);
+		button->setPosition(pos);
+		button->setSize(CEGUI::UVector2(cegui_reldim(0.07f), cegui_reldim( 0.05f)));
 	}
 	
 
@@ -422,10 +527,20 @@ SkillTree::SkillTree(Document* doc)
 	for (int i = Action::BREAK_BINDING; i <= Action::HEAL_PARTY; i++)
 	{
 		name =Action::getActionInfo((Action::ActionType) i)->m_enum_name;
-		label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
+		lname = name;
+		label = win_mgr.createWindow("TaharezLook/StaticImage", lname.append( "Label") );
 		tab->addChildWindow(label);
 		label->setPosition(m_skill_position[i]);
 		label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
+		
+		pos = m_skill_position[i];
+		pos += CEGUI::UVector2(cegui_reldim(0.14f), cegui_reldim( 0.05f));
+		bname = name;
+		button = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", bname.append( "Button") ));
+		tab->addChildWindow(button);
+		button->setPosition(pos);
+		button->setSize(CEGUI::UVector2(cegui_reldim(0.07f), cegui_reldim( 0.05f)));
+		button->setText("+");
 	}
 
 	// Tab Windmagie
@@ -435,18 +550,25 @@ SkillTree::SkillTree(Document* doc)
 	for (int i = Action::DIVINE_WIND; i <= Action::KEEN_MIND; i++)
 	{
 		name =Action::getActionInfo((Action::ActionType) i)->m_enum_name;
-		label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
+		lname = name;
+		label = win_mgr.createWindow("TaharezLook/StaticImage", lname.append( "Label") );
 		tab->addChildWindow(label);
 		label->setPosition(m_skill_position[i]);
 		label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
+		
+		pos = m_skill_position[i];
+		pos += CEGUI::UVector2(cegui_reldim(0.14f), cegui_reldim( 0.05f));
+		bname = name;
+		button = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", bname.append( "Button") ));
+		tab->addChildWindow(button);
+		button->setPosition(pos);
+		button->setSize(CEGUI::UVector2(cegui_reldim(0.07f), cegui_reldim( 0.05f)));
 	}
 	
 
 	for (act =Action::HOLY_LIGHT;act <=Action::KEEN_MIND;act++)
 	{
 		name =Action::getActionInfo((Action::ActionType) act)->m_enum_name;
-		//lname =Action::getName((Action::ActionType) act);
-		//label = win_mgr.getWindow(name.append( "Label"));
 		label = win_mgr.getWindow(name + "Label");
 		label->setProperty("FrameEnabled", "true");
 		label->setProperty("BackgroundEnabled", "true");
@@ -455,6 +577,10 @@ SkillTree::SkillTree(Document* doc)
 		label->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&SkillTree::onSkillMouseClicked, this));
 		label->subscribeEvent(CEGUI::Window::EventMouseEnters, CEGUI::Event::Subscriber(&SkillTree::onAbilityHover, this));
 
+		button = static_cast<CEGUI::PushButton*>(win_mgr.getWindow(name + "Button"));
+		button->setText("+");
+		button->setID(act);
+		button->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&SkillTree::onSkillLearnMouseClicked, this));
 	}
 
 	updateTranslation();
@@ -465,6 +591,7 @@ void SkillTree::update()
 {
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::Window* label;
+	CEGUI::PushButton* button;
 	std::ostringstream out_stream;
 
 	Player* player = m_document->getLocalPlayer();
@@ -478,6 +605,8 @@ void SkillTree::update()
 	if (player->getTypeInfo()->m_subtype == "priest")
 		i= Action::HOLY_LIGHT;
 
+	bool vis;
+	
 	// Schleife ueber alle Skill labels
 	for (int j=i;j<i+24;j++)
 	{
@@ -490,21 +619,30 @@ void SkillTree::update()
 		// Alpha Wert des Labels
 		float alpha = 0.2;
 
-		if (player->checkAbilityLearnable((Action::ActionType) j))
-		{
-			// Faehigkeit kann gelernt werden
-			alpha = 0.6;
-		}
 
 		if (player->checkAbility((Action::ActionType) j))
 		{
 			// Faehigkeit steht zur Verfuegung
 			alpha = 1.0;
 		}
+		else
+		{
+			alpha = 0.5;
+		}
 
 		if (label->getAlpha() != alpha)
 		{
 			label->setAlpha(alpha);
+		}
+		
+		out_stream.str("");
+		out_stream << Action::getActionInfo((Action::ActionType) j)->m_enum_name << "Button";
+		
+		button = static_cast<CEGUI::PushButton*>(win_mgr.getWindow(out_stream.str()));
+		vis = player->checkAbilityLearnable((Action::ActionType) j) && (player->getSkillPoints()>0);
+		if (button->isVisible() != vis)
+		{
+			button->setVisible(vis);
 		}
 	}
 }
@@ -610,6 +748,17 @@ bool SkillTree::onSkillMouseClicked(const CEGUI::EventArgs& evt)
 	return true;
 }
 
+bool SkillTree::onSkillLearnMouseClicked(const CEGUI::EventArgs& evt)
+{
+	const CEGUI::MouseEventArgs& we =
+			static_cast<const CEGUI::MouseEventArgs&>(evt);
+	unsigned int id = we.window->getID();
+	
+	// versuche Faehigkeit zu lernen
+	m_document->learnAbility((Action::ActionType) id);
+	
+	return true;
+}
 
 bool SkillTree::onAbilityHover(const CEGUI::EventArgs& evt)
 {

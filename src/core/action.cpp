@@ -576,7 +576,7 @@ void Action::init()
 	a->m_critical_perc=0.8;
 	a->m_distance = RANGED;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_req_level = 15;
+	a->m_req_level = 35;
 	a->m_req_ability[0] = Action::INFERNO_BALL;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
@@ -627,7 +627,7 @@ void Action::init()
 	a->m_critical_perc=0.8;
 	a->m_distance = RANGED;
 	a->m_flags =MUTE_AFFECTED;
-	a->m_req_level = 35;
+	a->m_req_level = 15;
 	a->m_req_ability[0] = Action::FIRE_BALL;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
@@ -1030,7 +1030,7 @@ void Action::init()
 	a->m_critical_perc=0.66;
 	a->m_distance = RANGED;
 	a->m_flags =0;
-	a->m_req_level = 2;
+	a->m_req_level = 5;
 	a->m_req_ability[0] = Action::NOACTION;
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
@@ -1115,7 +1115,7 @@ void Action::init()
 	a->m_critical_perc=0.66;
 	a->m_distance = RANGED;
 	a->m_flags =0;
-	a->m_req_level = 35;
+	a->m_req_level = 60;
 	a->m_req_ability[0] = Action::EXPLODING_ARROW;
 	a->m_req_ability[1] = Action::VOLLEY_SHOT;
 	a->m_req_ability[2] = Action::NOACTION;

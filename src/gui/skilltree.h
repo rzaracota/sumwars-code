@@ -59,6 +59,12 @@ class SkillTree : public Window
 		bool onSkillMouseClicked(const CEGUI::EventArgs& evt);
 		
 		/**
+		 * \fn bool onSkillLearnMouseClicked(const CEGUI::EventArgs& evt)
+		 * \brief Behandelt Mausklick auf den Lernen Button zu einer Faehigkeit im Skilltree
+		 */
+		bool onSkillLearnMouseClicked(const CEGUI::EventArgs& evt);
+		
+		/**
 		 * \var Zeiger auf die 4 zugrunde liegenden Fenster
 		 */
 		CEGUI::Window* m_windows[4];

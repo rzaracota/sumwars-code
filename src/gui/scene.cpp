@@ -758,7 +758,7 @@ void Scene::updateObject(WorldObject* obj)
         std::map<std::string, std::string>::iterator jt;
 
         itm = cmp->getWeapon();
-        if (itm !=0)
+        if (itm !=0 && itm->m_weapon_attr !=0)
         {
             itmsubtype = itm->m_subtype;
             new_ent_name = getItemRenderInfo(itmsubtype).m_mesh;
