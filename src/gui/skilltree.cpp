@@ -19,7 +19,116 @@ SkillTree::SkillTree(Document* doc)
 	std::string name;
 	std::string lname;
 	unsigned int act;
+	
+	m_skill_position[Action::FIRE_BOLT] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.05f));
+	m_skill_position[Action:: FIRE_STRIKE] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.25f));
+	m_skill_position[Action::FIRE_WAVE] = CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.65f));
+	m_skill_position[Action::FIRE_STORM] = CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.85f));
+	m_skill_position[Action::FIRE_BALL] = CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.25f));
+	m_skill_position[Action::INFERNO_BALL] = CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.45f));
+	m_skill_position[Action::FIRE_WALL] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.65f));
+	m_skill_position[Action::INFLAME] = CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.45f));
+	
+	m_skill_position[Action::ICE_BOLT] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.05f));
+	m_skill_position[Action::ICE_SPIKE] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.25f));
+	m_skill_position[Action::SNOW_STORM] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.65f));
+	m_skill_position[Action::BLIZZARD] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.85f));
+	m_skill_position[Action::ICE_RING] = CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.25f));
+	m_skill_position[Action::FROST_RING] = CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.65f));
+	m_skill_position[Action::FREEZE] = CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.25f));
+	m_skill_position[Action::CHILL] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.45f));
+	
+	m_skill_position[Action::LIGHTNING] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.05f));
+	m_skill_position[Action::LIGHTNING_STRIKE] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.25f));
+	m_skill_position[Action::THUNDERSTORM] = CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.45f));
+	m_skill_position[Action::THUNDERSTORM2] = CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.85f));
+	m_skill_position[Action::CHAIN_LIGHTNING] = CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.25f));
+	m_skill_position[Action::CHAIN_LIGHTNING2] = CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.45f));
+	m_skill_position[Action::STATIC_SHIELD] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.65f));
+	m_skill_position[Action::IONISATION] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.45f));
 
+	m_skill_position[Action::BASH] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.05f));
+	m_skill_position[Action::HAMMER_BASH] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.45f));
+	m_skill_position[Action::AROUND_BLOW] = CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.25f));
+	m_skill_position[Action::WHIRL_BLOW] = CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.65f));
+	m_skill_position[Action::SMASH] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.65f));
+	m_skill_position[Action::HATE_MAGE] = CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.25f));
+	m_skill_position[Action::CHARGE] = CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.45f));
+	m_skill_position[Action::STORM_CHARGE] = CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.85f));
+	
+	m_skill_position[Action::BLOCK] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.25f));
+	m_skill_position[Action::STEADFAST] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.05f));
+	m_skill_position[Action::MONSTER_HUNTER] = CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.25f));
+	m_skill_position[Action::MONSTER_SLAYER] = CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.65f));
+	m_skill_position[Action::ENDURANCE] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.85f));
+	m_skill_position[Action::WEAPONMASTER] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.45f));
+	
+	m_skill_position[Action::FIRESWORD] = CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.25f));
+	m_skill_position[Action::FLAMESWORD] = CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.65f));
+	m_skill_position[Action::FLAMEARMOR] = CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.45f));
+	m_skill_position[Action::BERSERK] = CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.25f));
+	m_skill_position[Action::WARCRY] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.85f));
+	m_skill_position[Action::REGENERATE] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.25f));
+	m_skill_position[Action::DECOY] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.05f));
+	m_skill_position[Action::SCARE] = CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.45f));
+	m_skill_position[Action::ANGER] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.45f));
+	m_skill_position[Action::FURY] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.65f));
+	
+	m_skill_position[Action::TRIPLE_SHOT] = CEGUI::UVector2(cegui_reldim(0.35f), cegui_reldim(0.05f));
+	m_skill_position[Action::GUIDED_TRIPLE_SHOT] = CEGUI::UVector2(cegui_reldim(0.35f), cegui_reldim(0.45f));
+	m_skill_position[Action::MULTISHOT] = CEGUI::UVector2(cegui_reldim(0.15f), cegui_reldim(0.25f));
+	m_skill_position[Action::VOLLEY_SHOT] = CEGUI::UVector2(cegui_reldim(0.15f), cegui_reldim(0.65f));
+	m_skill_position[Action::PIERCE] = CEGUI::UVector2(cegui_reldim(0.35f), cegui_reldim(0.25f));
+	m_skill_position[Action::WEAK_POINT] = CEGUI::UVector2(cegui_reldim(0.75f), cegui_reldim(0.25f));
+	m_skill_position[Action::BLIND_RAGE] = CEGUI::UVector2(cegui_reldim(0.75f), cegui_reldim(0.65f));
+	m_skill_position[Action::VACUUM] = CEGUI::UVector2(cegui_reldim(0.55f), cegui_reldim(0.45f));
+	m_skill_position[Action::DEATH_ROULETTE] = CEGUI::UVector2(cegui_reldim(0.35f), cegui_reldim(0.85f));
+	m_skill_position[Action::EXPLODING_ARROW] = CEGUI::UVector2(cegui_reldim(0.55f), cegui_reldim(0.25f));
+	m_skill_position[Action::EXPLOSION_CASCADE] = CEGUI::UVector2(cegui_reldim(0.55f), cegui_reldim(0.65f));
+	
+	m_skill_position[Action::EVADE] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.05f));
+	m_skill_position[Action::CRITICAL_STRIKE] = CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.25f));
+	m_skill_position[Action::CONCENTRATION] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.45f));
+	m_skill_position[Action::MENTAL_WALL] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.85f));
+	m_skill_position[Action::RESIST_ICE] = CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.25f));
+	m_skill_position[Action::RESIST_AIR] = CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.65f));
+	
+	m_skill_position[Action::AIMED_SHOT] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.05f));
+	m_skill_position[Action::BOW_SPIRIT] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.65f));
+	m_skill_position[Action::ICE_ARROWS] = CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.45f));
+	m_skill_position[Action::FREEZING_ARROWS] = CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.85f));
+	m_skill_position[Action::WIND_ARROWS] = CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.25f));
+	m_skill_position[Action::STORM_ARROWS] = CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.65f));
+	m_skill_position[Action::WIND_WALK] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.45f));
+	
+	m_skill_position[Action::HOLY_LIGHT] = CEGUI::UVector2(cegui_reldim(0.15f), cegui_reldim(0.25f));
+	m_skill_position[Action::HOLY_FIRE] = CEGUI::UVector2(cegui_reldim(0.15f), cegui_reldim(0.65f));
+	m_skill_position[Action::BURNING_RAGE] = CEGUI::UVector2(cegui_reldim(0.55f), cegui_reldim(0.45f));
+	m_skill_position[Action::CURE_BLIND_MUTE] = CEGUI::UVector2(cegui_reldim(0.75f), cegui_reldim(0.25f));
+	m_skill_position[Action:: CURE_BLIND_MUTE_PARTY] = CEGUI::UVector2(cegui_reldim(0.75f), cegui_reldim(0.65f));
+	m_skill_position[Action::BLAZING_SHIELD] = CEGUI::UVector2(cegui_reldim(0.55f), cegui_reldim(0.05f));
+	m_skill_position[Action::LIGHT_BEAM] = CEGUI::UVector2(cegui_reldim(0.35f), cegui_reldim(0.25f));
+	m_skill_position[Action::BURNING_SUN] = CEGUI::UVector2(cegui_reldim(0.35f), cegui_reldim(0.85f));
+	
+	m_skill_position[Action::BREAK_BINDING] = CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.45f));
+	m_skill_position[Action::DISRUPT_BINDING] = CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.85f));
+	m_skill_position[Action::MAGIC_SHIELD] = CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.25f));
+	m_skill_position[Action::CURE_POIS_BURN] = CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.25f));
+	m_skill_position[Action::CURE_POIS_BURN_PARTY] = CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.65f));
+	m_skill_position[Action::ACID] = CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.45f));
+	m_skill_position[Action::HEAL] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.05f));
+	m_skill_position[Action::HEAL_PARTY] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.45f));
+	
+	m_skill_position[Action::DIVINE_WIND] = CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.25f));
+	m_skill_position[Action::DIVINE_STORM] = CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.65f));
+	m_skill_position[Action::BLADE_STORM] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.05f));
+	m_skill_position[Action::CURE_CONF_BSRK] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.25f));
+	m_skill_position[Action::CURE_CONF_BSRK_PARTY] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.65f));
+	m_skill_position[Action::HYPNOSIS] = CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.45f));
+	m_skill_position[Action::HYPNOSIS2] = CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.85f));
+	m_skill_position[Action::KEEN_MIND] = CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.25f));
+	
+	
 	// Skilltree Magier
 	CEGUI::TabControl* skilltree_mage = (CEGUI::TabControl*) win_mgr.createWindow("TaharezLook/TabControl", "SkilltreeMage");
 	m_windows[0] = skilltree_mage;
@@ -46,163 +155,42 @@ SkillTree::SkillTree(Document* doc)
 	label->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&SkillTree::onSkillMouseClicked, this));
 	label->subscribeEvent(CEGUI::Window::EventMouseEnters, CEGUI::Event::Subscriber(&SkillTree::onAbilityHover, this));
 
-
-	name =Action::getActionInfo(Action::FIRE_BOLT)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.05f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
-	name =Action::getActionInfo(Action::FIRE_STRIKE)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.25f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
-	name =Action::getActionInfo(Action::FIRE_BALL)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.25f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
-	name =Action::getActionInfo(Action::INFERNO_BALL)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.45f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
-	name =Action::getActionInfo(Action::INFLAME)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.45f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
-	name =Action::getActionInfo(Action::FIRE_WALL)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.65f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
-	name =Action::getActionInfo(Action::FIRE_WAVE)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.65f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
-	name =Action::getActionInfo(Action::FIRE_STORM)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.85f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
+	for (int i = Action::FIRE_BOLT; i <= Action::INFLAME; i++)
+	{
+		name =Action::getActionInfo((Action::ActionType) i)->m_enum_name;
+		label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
+		tab->addChildWindow(label);
+		label->setPosition(m_skill_position[i]);
+		label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
+	}
 
 	// Tab Eismagie
 	tab = (CEGUI::DefaultWindow*) win_mgr.createWindow("TaharezLook/TabContentPane", "SkilltreeMage_2");
 	skilltree_mage->addTab(tab);
 	
-	name =Action::getActionInfo(Action::ICE_BOLT)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.05f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
-	name =Action::getActionInfo(Action::ICE_SPIKE)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.25f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
-	name =Action::getActionInfo(Action::FREEZE)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.25f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
-	name =Action::getActionInfo(Action::ICE_RING)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.25f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
-	name =Action::getActionInfo(Action::CHILL)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.45f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
-	name =Action::getActionInfo(Action::FROST_RING)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.65f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
-	name =Action::getActionInfo(Action::SNOW_STORM)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.65f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
-	name =Action::getActionInfo(Action::BLIZZARD)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage",name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.85f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
+	for (int i = Action::ICE_BOLT; i <= Action::CHILL; i++)
+	{
+		name =Action::getActionInfo((Action::ActionType) i)->m_enum_name;
+		label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
+		tab->addChildWindow(label);
+		label->setPosition(m_skill_position[i]);
+		label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
+	}
 
 
 	// Tab Luftmagie
 	tab = (CEGUI::DefaultWindow*) win_mgr.createWindow("TaharezLook/TabContentPane", "SkilltreeMage_3");
 	skilltree_mage->addTab(tab);
 	
-	name =Action::getActionInfo(Action::LIGHTNING)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.05f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
-	name =Action::getActionInfo(Action::LIGHTNING_STRIKE)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.25f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
-	name =Action::getActionInfo(Action::CHAIN_LIGHTNING)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage",name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.25f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
-	name =Action::getActionInfo(Action::CHAIN_LIGHTNING2)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.45f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
-	name =Action::getActionInfo(Action::THUNDERSTORM)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage",name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.45f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
-	name =Action::getActionInfo(Action::THUNDERSTORM2)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.85f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
-	name =Action::getActionInfo(Action::STATIC_SHIELD)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.65f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
-	name =Action::getActionInfo(Action::IONISATION)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.45f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
-
+	for (int i = Action::LIGHTNING; i <= Action::IONISATION; i++)
+	{
+		name =Action::getActionInfo((Action::ActionType) i)->m_enum_name;
+		label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
+		tab->addChildWindow(label);
+		label->setPosition(m_skill_position[i]);
+		label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
+	}
+	
 	// Label beschriften und verknuepfen
 
 	for (act =Action::FIRE_BOLT;act <=Action::IONISATION;act++)
@@ -240,21 +228,6 @@ SkillTree::SkillTree(Document* doc)
 	skilltree_warrior->addTab(tab);
 
 
-	/*
-	name =Action::getActionInfo(Action::ATTACK)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setProperty("FrameEnabled", "true");
-	label->setProperty("BackgroundEnabled", "true");
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.05f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-	label->setID(Action::ATTACK);
-	label->setText(Action::getName(Action::ATTACK));
-	label->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&SkillTree::onSkillMouseClicked, this));
-	label->subscribeEvent(CEGUI::Window::EventMouseEnters, CEGUI::Event::Subscriber(&SkillTree::onAbilityHover, this));
-	*/
-
-
 	name =Action::getActionInfo(Action::ATTACK)->m_enum_name;
 	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
 	tab->addChildWindow(label);
@@ -267,160 +240,43 @@ SkillTree::SkillTree(Document* doc)
 	label->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&SkillTree::onSkillMouseClicked, this));
 	label->subscribeEvent(CEGUI::Window::EventMouseEnters, CEGUI::Event::Subscriber(&SkillTree::onAbilityHover, this));
 
-
-	name =Action::getActionInfo(Action::BASH)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.05f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
-	name =Action::getActionInfo(Action::HAMMER_BASH)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.45f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
-	name =Action::getActionInfo(Action::HATE_MAGE)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.25f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
-	name =Action::getActionInfo(Action::AROUND_BLOW)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.25f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
-	name =Action::getActionInfo(Action::WHIRL_BLOW)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.65f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
-	name =Action::getActionInfo(Action::SMASH)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.65f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
-	name =Action::getActionInfo(Action::CHARGE)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.45f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
-	name =Action::getActionInfo(Action::STORM_CHARGE)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.85f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
-
+	for (int i = Action::BASH; i <= Action::STORM_CHARGE; i++)
+	{
+		name =Action::getActionInfo((Action::ActionType) i)->m_enum_name;
+		label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
+		tab->addChildWindow(label);
+		label->setPosition(m_skill_position[i]);
+		label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
+	}
+	
 
 	tab = (CEGUI::DefaultWindow*) win_mgr.createWindow("TaharezLook/TabContentPane", "SkilltreeWarrior_2");
 	skilltree_warrior->addTab(tab);
 
-	name =Action::getActionInfo(Action::STEADFAST)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.05f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
-	name =Action::getActionInfo(Action::BLOCK)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.25f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
-	name =Action::getActionInfo(Action::WEAPONMASTER)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.45f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
-	name =Action::getActionInfo(Action::MONSTER_HUNTER)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.25f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
-	name =Action::getActionInfo(Action::MONSTER_SLAYER)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.65f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
-	name =Action::getActionInfo(Action::ENDURANCE)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.85f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
+	
+	for (int i = Action::BLOCK; i <= Action::WEAPONMASTER; i++)
+	{
+		name =Action::getActionInfo((Action::ActionType) i)->m_enum_name;
+		label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
+		tab->addChildWindow(label);
+		label->setPosition(m_skill_position[i]);
+		label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
+	}
+	
 
 	tab = (CEGUI::DefaultWindow*) win_mgr.createWindow("TaharezLook/TabContentPane", "SkilltreeWarrior_3");
 	skilltree_warrior->addTab(tab);
 
-	name =Action::getActionInfo(Action::DECOY)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.05f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
-	name =Action::getActionInfo(Action::SCARE)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.45f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
-	name =Action::getActionInfo(Action::BERSERK)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.25f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
-	name =Action::getActionInfo(Action::WARCRY)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.85f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
-	name =Action::getActionInfo(Action::REGENERATE)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.25f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
-	name =Action::getActionInfo(Action::ANGER)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.45f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
-	name =Action::getActionInfo(Action::FURY)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.65f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
-	name =Action::getActionInfo(Action::FIRESWORD)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.25f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
-	name =Action::getActionInfo(Action::FLAMEARMOR)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.45f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
-	name =Action::getActionInfo(Action::FLAMESWORD)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.65f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
+	
+	for (int i = Action::FIRESWORD; i <= Action::FURY; i++)
+	{
+		name =Action::getActionInfo((Action::ActionType) i)->m_enum_name;
+		label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
+		tab->addChildWindow(label);
+		label->setPosition(m_skill_position[i]);
+		label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
+	}
+	
 	for (act =Action::BASH;act <=Action::FURY;act++)
 	{
 		name = Action::getActionInfo((Action::ActionType) act)->m_enum_name;
@@ -466,159 +322,42 @@ SkillTree::SkillTree(Document* doc)
 	label->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&SkillTree::onSkillMouseClicked, this));
 	label->subscribeEvent(CEGUI::Window::EventMouseEnters, CEGUI::Event::Subscriber(&SkillTree::onAbilityHover, this));
 
-	name =Action::getActionInfo(Action::TRIPLE_SHOT)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.35f), cegui_reldim(0.05f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
-	name =Action::getActionInfo(Action::GUIDED_TRIPLE_SHOT)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.35f), cegui_reldim(0.45f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
-	name =Action::getActionInfo(Action::PIERCE)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.35f), cegui_reldim(0.25f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
-	name =Action::getActionInfo(Action::MULTISHOT)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.15f), cegui_reldim(0.25f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
-	name =Action::getActionInfo(Action::VOLLEY_SHOT)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.15f), cegui_reldim(0.65f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
-	name =Action::getActionInfo(Action::DEATH_ROULETTE)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.35f), cegui_reldim(0.85f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
-	name =Action::getActionInfo(Action::WEAK_POINT)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.75f), cegui_reldim(0.25f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
-	name =Action::getActionInfo(Action::BLIND_RAGE)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.75f), cegui_reldim(0.65f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
-	name =Action::getActionInfo(Action::EXPLODING_ARROW)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.55f), cegui_reldim(0.25f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
-	name =Action::getActionInfo(Action::EXPLOSION_CASCADE)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.55f), cegui_reldim(0.65f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
-	name =Action::getActionInfo(Action::VACUUM)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.55f), cegui_reldim(0.45f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
+	
+	for (int i = Action::TRIPLE_SHOT; i <= Action::EXPLOSION_CASCADE; i++)
+	{
+		name =Action::getActionInfo((Action::ActionType) i)->m_enum_name;
+		label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
+		tab->addChildWindow(label);
+		label->setPosition(m_skill_position[i]);
+		label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
+	}
 
 	// Tab passive Faehigkeiten
 	tab = (CEGUI::DefaultWindow*) win_mgr.createWindow("TaharezLook/TabContentPane", "SkilltreeArcher_2");
 	skilltree_archer->addTab(tab);
 
-	name =Action::getActionInfo(Action::EVADE)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.05f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
-	name =Action::getActionInfo(Action::CRITICAL_STRIKE)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.25f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
-	name =Action::getActionInfo(Action::CONCENTRATION)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.45f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
-	name =Action::getActionInfo(Action::MENTAL_WALL)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.85f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
-	name =Action::getActionInfo(Action::RESIST_ICE)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.25f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
-	name =Action::getActionInfo(Action::RESIST_AIR)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.65f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
+	for (int i = Action::EVADE; i <= Action::RESIST_AIR; i++)
+	{
+		name =Action::getActionInfo((Action::ActionType) i)->m_enum_name;
+		label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
+		tab->addChildWindow(label);
+		label->setPosition(m_skill_position[i]);
+		label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
+	}
+	
 	// Tab3 <hier Name einsetzen>
 	tab = (CEGUI::DefaultWindow*) win_mgr.createWindow("TaharezLook/TabContentPane", "SkilltreeArcher_3");
 	skilltree_archer->addTab(tab);
-
-	name =Action::getActionInfo(Action::AIMED_SHOT)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.05f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
-	name =Action::getActionInfo(Action::WIND_WALK)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.45f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
-	name =Action::getActionInfo(Action::BOW_SPIRIT)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.65f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
-	name =Action::getActionInfo(Action::WIND_ARROWS)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.25f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
-	name =Action::getActionInfo(Action::STORM_ARROWS)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.65f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
-	name =Action::getActionInfo(Action::ICE_ARROWS)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.45f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
-	name =Action::getActionInfo(Action::FREEZING_ARROWS)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.85f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
+	
+	for (int i = Action::AIMED_SHOT; i <= Action::WIND_WALK; i++)
+	{
+		name =Action::getActionInfo((Action::ActionType) i)->m_enum_name;
+		label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
+		tab->addChildWindow(label);
+		label->setPosition(m_skill_position[i]);
+		label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
+	}
+	
 	for (act =Action::TRIPLE_SHOT;act <=Action::WIND_WALK;act++)
 	{
 		name =Action::getActionInfo((Action::ActionType) act)->m_enum_name;
@@ -665,159 +404,43 @@ SkillTree::SkillTree(Document* doc)
 	label->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&SkillTree::onSkillMouseClicked, this));
 	label->subscribeEvent(CEGUI::Window::EventMouseEnters, CEGUI::Event::Subscriber(&SkillTree::onAbilityHover, this));
 
-	name =Action::getActionInfo(Action::BLAZING_SHIELD)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.55f), cegui_reldim(0.05f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
-	name =Action::getActionInfo(Action::MAGIC_SHIELD)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.55f), cegui_reldim(0.25f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
-	name =Action::getActionInfo(Action::BURNING_RAGE)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.55f), cegui_reldim(0.45f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
-	name =Action::getActionInfo(Action::CURE_BLIND_MUTE)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.75f), cegui_reldim(0.25f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
-	name =Action::getActionInfo(Action::CURE_BLIND_MUTE_PARTY)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.75f), cegui_reldim(0.65f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
-	name =Action::getActionInfo(Action::LIGHT_BEAM)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.35f), cegui_reldim(0.25f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
-	name =Action::getActionInfo(Action::BURNING_SUN)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.35f), cegui_reldim(0.85f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
-	name =Action::getActionInfo(Action::HOLY_LIGHT)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.15f), cegui_reldim(0.25f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
-	name =Action::getActionInfo(Action::HOLY_FIRE)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.15f), cegui_reldim(0.65f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
+	for (int i = Action::HOLY_LIGHT; i <= Action::BURNING_SUN; i++)
+	{
+		name =Action::getActionInfo((Action::ActionType) i)->m_enum_name;
+		label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
+		tab->addChildWindow(label);
+		label->setPosition(m_skill_position[i]);
+		label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
+	}
+	
 
 
 	// Tab Wassermagie
 	tab = (CEGUI::DefaultWindow*) win_mgr.createWindow("TaharezLook/TabContentPane", "SkilltreePriest_2");
 	skilltree_priest->addTab(tab);
 
-	name =Action::getActionInfo(Action::HEAL)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.05f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
-	name =Action::getActionInfo(Action::CURE_POIS_BURN)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.25f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
-	name =Action::getActionInfo(Action::HEAL_PARTY)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.45f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
-	name =Action::getActionInfo(Action::ACID)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.45f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
-	name =Action::getActionInfo(Action::CURE_POIS_BURN_PARTY)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.65f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
-	name =Action::getActionInfo(Action::BREAK_BINDING)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.45f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
-	name =Action::getActionInfo(Action::DISRUPT_BINDING)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.85f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
+	for (int i = Action::BREAK_BINDING; i <= Action::HEAL_PARTY; i++)
+	{
+		name =Action::getActionInfo((Action::ActionType) i)->m_enum_name;
+		label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
+		tab->addChildWindow(label);
+		label->setPosition(m_skill_position[i]);
+		label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
+	}
 
 	// Tab Windmagie
 	tab = (CEGUI::DefaultWindow*) win_mgr.createWindow("TaharezLook/TabContentPane", "SkilltreePriest_3");
 	skilltree_priest->addTab(tab);
 
-	name =Action::getActionInfo(Action::BLADE_STORM)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.05f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
-	name =Action::getActionInfo(Action::KEEN_MIND)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.25f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
-	name =Action::getActionInfo(Action::CURE_CONF_BSRK)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.25f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
-	name =Action::getActionInfo(Action::CURE_CONF_BSRK_PARTY)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.65f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
-	name =Action::getActionInfo(Action::HYPNOSIS)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.45f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
-	name =Action::getActionInfo(Action::HYPNOSIS2)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.85f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
-	name =Action::getActionInfo(Action::DIVINE_WIND)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.25f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-
-	name =Action::getActionInfo(Action::DIVINE_STORM)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.65f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
+	for (int i = Action::DIVINE_WIND; i <= Action::KEEN_MIND; i++)
+	{
+		name =Action::getActionInfo((Action::ActionType) i)->m_enum_name;
+		label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
+		tab->addChildWindow(label);
+		label->setPosition(m_skill_position[i]);
+		label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
+	}
+	
 
 	for (act =Action::HOLY_LIGHT;act <=Action::KEEN_MIND;act++)
 	{

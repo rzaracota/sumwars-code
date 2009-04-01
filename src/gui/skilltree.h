@@ -62,6 +62,12 @@ class SkillTree : public Window
 		 * \var Zeiger auf die 4 zugrunde liegenden Fenster
 		 */
 		CEGUI::Window* m_windows[4];
+		
+		/**
+		 * \var CEGUI::UVector2 m_skill_position[196]
+		 * \brief Position der Fenster fuer die Skills
+		 */
+		CEGUI::UVector2 m_skill_position[196];
 };
 
 #endif
