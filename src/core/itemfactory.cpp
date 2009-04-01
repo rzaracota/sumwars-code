@@ -205,7 +205,7 @@ void ItemFactory::createMagicMods(Item* item, float* modchance, float magic_powe
 				break;
 
 			case RESIST_ICE_MOD:
-				item->m_equip_effect->m_dresistances[Damage::FIRE] += (short) ceil(sqrtmp*1.0);
+				item->m_equip_effect->m_dresistances[Damage::ICE] += (short) ceil(sqrtmp*1.0);
 				break;
 
 			case RESIST_AIR_MOD:

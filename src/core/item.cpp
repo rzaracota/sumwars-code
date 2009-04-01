@@ -486,30 +486,35 @@ void Item::calcPrice()
 	{
 		// Wert des Schadens;
 		float dvalue=0;
-		//dmult *= std::min(2.0,sqrt(m_weapon_attr->m_attack_range));
+		
 		// Schaden der Waffe
 		Damage & dmg = m_weapon_attr->m_damage;
 		// phys Schaden
 		dvalue += 0.5*(dmg.m_min_damage[0] + dmg.m_max_damage[0])*dmg.m_multiplier[0] * (1+dmg.m_crit_perc*2);
+		if (dmg.m_multiplier[0] >1)
+		{
+			dvalue += (dmg.m_multiplier[0]-1)*100;
+		}
 		// elementar Schaden
 		for (i=1;i<4;i++)
 		{
 			dvalue += 0.5*(dmg.m_min_damage[i] + dmg.m_max_damage[i])*dmg.m_multiplier[i];
-
+			if (dmg.m_multiplier[i] >1)
+			{
+				dvalue += (dmg.m_multiplier[i]-1)*100;
+			}
 		}
 		dvalue *= (2000 + m_weapon_attr->m_dattack_speed)/1000.0;
 
 		dvalue += dmg.m_attack*0.1;
 		dvalue += dmg.m_power*0.1;
-
 		for (i=0;i<8;i++)
 		{
 			dvalue += dmg.m_status_mod_power[i]*0.2;
 		}
-
 		// TODO: Flags einberechnen
-		value += dvalue * std::min(1.5,sqrt(m_weapon_attr->m_attack_range));
-
+		value += dvalue * std::max(1.0,std::min(1.5,sqrt(m_weapon_attr->m_attack_range)));
+		
 	}
 
 	if (m_equip_effect!=0)
@@ -545,7 +550,7 @@ void Item::calcPrice()
 		// TODO: Skills mit einberechnen
 
 	}
-
+	
 	value = (2+0.5*(1+0.1*value)*value)* mult;
 
 	value = std::min (value,100000.0f);
