@@ -407,6 +407,9 @@ bool Application::initGettext()
 	bindtextdomain ("sumwars_events","../translation/");
 	bind_textdomain_codeset ("sumwars_events","UTF-8");
 	
+	bindtextdomain ("sumwars_xml","../translation/");
+	bind_textdomain_codeset ("sumwars_xml","UTF-8");
+	
 	textdomain ("sumwars_sumwars");
 	
 	return true;
