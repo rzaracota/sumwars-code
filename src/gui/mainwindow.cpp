@@ -657,7 +657,7 @@ void MainWindow::setupQuestInfo()
 void MainWindow::setupSkilltree()
 {
 	
-	SkillTree* wnd = new SkillTree(m_document);
+	SkillTree* wnd = new SkillTree(m_document,m_keyboard);
 	m_sub_windows["SkillTree"] = wnd;
 	
 	// Skilltree anfangs ausblenden

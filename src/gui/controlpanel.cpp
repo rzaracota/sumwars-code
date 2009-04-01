@@ -75,6 +75,7 @@ ControlPanel::ControlPanel (Document* doc)
 	btn->setPosition(CEGUI::UVector2(cegui_reldim(0.575f), cegui_reldim( 0.65f)));
 	btn->setSize(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.30f)));
 	btn->setText("T");
+	btn->setID(0);
 	btn->setWantsMultiClickEvents(false);
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&ControlPanel::onButtonSkilltreeClicked, this));
 
@@ -119,6 +120,8 @@ ControlPanel::ControlPanel (Document* doc)
 	label->setProperty("BackgroundEnabled", "true");
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.12f), cegui_reldim( 0.05f)));
 	label->setSize(CEGUI::UVector2(cegui_reldim(0.10f), cegui_reldim( 0.90f)));
+	label->setID(1);
+	label->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&ControlPanel::onButtonSkilltreeClicked, this));
 
 	// Balken fuer linke Maustaste Faehigkeit
 	bar = static_cast<CEGUI::ProgressBar*>(win_mgr.createWindow("TaharezLook/ProgressBar", "LeftClickAbilityProgressBar"));
@@ -137,6 +140,8 @@ ControlPanel::ControlPanel (Document* doc)
 	label->setProperty("BackgroundEnabled", "true");
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.725f), cegui_reldim( 0.05f)));
 	label->setSize(CEGUI::UVector2(cegui_reldim(0.10f), cegui_reldim( 0.90f)));
+	label->setID(2);
+	label->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&ControlPanel::onButtonSkilltreeClicked, this));
 
 	// Balken fuer rechte Maustaste Faehigkeit
 	bar = static_cast<CEGUI::ProgressBar*>(win_mgr.createWindow("TaharezLook/ProgressBar", "RightClickAbilityProgressBar"));
@@ -305,7 +310,13 @@ bool ControlPanel::onButtonCharInfoClicked(const CEGUI::EventArgs& evt)
 
 bool ControlPanel::onButtonSkilltreeClicked(const CEGUI::EventArgs& evt)
 {
-	m_document->onButtonSkilltreeClicked();
+	const CEGUI::MouseEventArgs& we =
+			static_cast<const CEGUI::MouseEventArgs&>(evt);
+	unsigned int id = we.window->getID();
+	
+	bool right = (id ==2);
+	
+	m_document->onButtonSkilltreeClicked(right);
 	return true;
 }
 

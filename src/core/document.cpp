@@ -49,7 +49,9 @@ Document::Document()
 	getGUIState()->m_cursor_item_id =0;
 	getGUIState()->m_right_mouse_pressed_time=0;
 	getGUIState()->m_left_mouse_pressed_time=0;
-
+	getGUIState()->m_hover_ability = Action::NOACTION;
+	getGUIState()->m_prefer_right_skill = false;
+	
 	// Pointer/Inhalte mit 0 initialisieren
 	m_gui_state.m_chat_window_content = "";
 	
@@ -831,7 +833,7 @@ void Document::onButtonPartyInfoClicked()
 	m_modified |= WINDOWS_MODIFIED;
 }
 
-void Document::onButtonSkilltreeClicked()
+void Document::onButtonSkilltreeClicked(bool skill_right)
 {
 	if (!checkSubwindowsAllowed())
 		return;
@@ -839,6 +841,7 @@ void Document::onButtonSkilltreeClicked()
 	// Skilltree oeffnen wenn er gerade geschlossen ist und schliessen, wenn er geoeffnet ist
 	if (getGUIState()->m_shown_windows & SKILLTREE)
 	{
+		getGUIState()->m_prefer_right_skill = false;
 		getGUIState()->m_shown_windows &= ~SKILLTREE;
 	}
 	else
@@ -847,6 +850,7 @@ void Document::onButtonSkilltreeClicked()
 		getGUIState()->m_shown_windows &= ~INVENTORY;
 
 		getGUIState()->m_shown_windows |= SKILLTREE;
+		getGUIState()->m_prefer_right_skill =skill_right;
 	}
 
 	m_gui_state.m_pressed_key = 0;
@@ -1009,14 +1013,7 @@ void Document::onSwapEquip()
 
 void Document::setLeftAction(Action::ActionType act)
 {
-	if (m_gui_state.m_pressed_key != 0)
-	{
-		// Im Skilltree wird Kurztaste ausgewaehlt
-		installShortkey(m_gui_state.m_pressed_key,(ShortkeyDestination) (USE_SKILL_LEFT+act));
-		return;
-	}
-
-
+	
 	// wenn kein Spieler gesetzt ist, dann keine Faehigkeit setzen
 	// der lokale Spieler
 	Player* player = static_cast<Player*>(World::getWorld()->getLocalPlayer());
@@ -1053,14 +1050,7 @@ void Document::setLeftAction(Action::ActionType act)
 
 void Document::setRightAction(Action::ActionType act)
 {
-	if (m_gui_state.m_pressed_key != 0)
-	{
-		// Im Skilltree wird Kurztaste ausgewaehlt
-		installShortkey(m_gui_state.m_pressed_key,(ShortkeyDestination) (USE_SKILL_RIGHT+act));
-		DEBUG("setting short key %i for action %i",m_gui_state.m_pressed_key,USE_SKILL_RIGHT+act);
-		return;
-	}
-
+	
 	// wenn kein Spieler gesetzt ist, dann keine Faehigkeit setzen
 	// der lokale Spieler
 	Player* player = static_cast<Player*>(World::getWorld()->getLocalPlayer());
@@ -1162,8 +1152,31 @@ bool Document::onKeyPress(KeyCode key)
 
 		if (m_special_keys.find(key)==m_special_keys.end() && (dest == NO_KEY || dest >= USE_SKILL_LEFT))
 		{
-			m_gui_state.m_pressed_key = key;
-			return true;
+			// Kurztaste einrichten
+			Action::ActionType act = getGUIState()->m_hover_ability;
+			if (act != Action::NOACTION && getLocalPlayer()->checkAbility(act))
+			{
+				Action::ActionInfo* aci = Action::getActionInfo(act);
+			
+				bool left = true;
+				if (getGUIState()->m_prefer_right_skill || aci->m_distance == Action::PASSIVE || aci->m_base_action== Action::NOACTION)
+				{
+					left = false;
+				}
+				
+				if (left)
+				{
+					installShortkey(key,(ShortkeyDestination) (USE_SKILL_LEFT+act));
+					DEBUG5("left short key for action %i",act);
+				}
+				else
+				{
+					installShortkey(key,(ShortkeyDestination) (USE_SKILL_RIGHT+act));
+					DEBUG5("right short key for action %i",act);
+				}
+				return true;
+			}
+			
 		}
 
 	}
@@ -1590,7 +1603,6 @@ void Document::loadSettings()
 			m_shortkey_map[(KeyCode) key] = (ShortkeyDestination) dest;
 		}
 		
-		m_special_keys.clear();
 		file >> nr;
 		DEBUG5("special keys %i",nr);
 		for (int i=0; i<nr; i++)

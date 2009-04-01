@@ -500,8 +500,21 @@ bool Application::createDocument()
 	m_document->installShortkey(OIS::KC_8,(Document::ShortkeyDestination) (Document::USE_POTION+7),false);
 	m_document->installShortkey(OIS::KC_9,(Document::ShortkeyDestination) (Document::USE_POTION+8),false);
 	m_document->installShortkey(OIS::KC_0,(Document::ShortkeyDestination) (Document::USE_POTION+9),false);
- 	m_document->installSpecialKey(OIS::KC_ESCAPE);
-	
+ 	
+	m_document->installSpecialKey(OIS::KC_ESCAPE);
+	m_document->installSpecialKey(OIS::KC_LSHIFT);
+	m_document->installSpecialKey(OIS::KC_LCONTROL);
+	m_document->installSpecialKey(OIS::KC_RCONTROL);
+	m_document->installSpecialKey(OIS::KC_RMENU);
+	m_document->installSpecialKey(OIS::KC_LMENU);
+	m_document->installSpecialKey(OIS::KC_TAB);
+	m_document->installSpecialKey(OIS::KC_RETURN);
+	m_document->installSpecialKey(OIS::KC_BACK);
+	m_document->installSpecialKey(OIS::KC_UP);
+	m_document->installSpecialKey(OIS::KC_DOWN);
+	m_document->installSpecialKey(OIS::KC_LEFT);
+	m_document->installSpecialKey(OIS::KC_RIGHT);
+	m_document->installSpecialKey(OIS::KC_CAPITAL);
 	// CHEATS
 	m_document->installShortkey(OIS::KC_L,(Document::ShortkeyDestination) (Document::CHEAT+0));
 

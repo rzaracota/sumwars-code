@@ -2,7 +2,7 @@
 #define SKILLTREE_H
 
 #include "window.h"
-
+#include "OISKeyboard.h"
 /**
  * \class SkillTree
  * \brief Fenster Faehigkeitenbaum
@@ -11,10 +11,11 @@ class SkillTree : public Window
 {
 	public:
 		/**
-		 * \fn SkillTree (Document* doc)
+		 * \fn SkillTree (Document* doc, OIS::Keyboard *keyboard)
+		 * \param keyboard OIS keyboard
 		 * \brief Konstruktor
 		 */
-		SkillTree (Document* doc);
+		SkillTree (Document* doc, OIS::Keyboard *keyboard);
 	
 		/**
 		 * \fn virtual void update()
@@ -47,6 +48,12 @@ class SkillTree : public Window
 		bool onAbilityHover(const CEGUI::EventArgs& evt);
 		
 		/**
+		 * \fn bool onAbilityHoverLeave(const CEGUI::EventArgs& evt)
+		 * \brief Behandelt Verlassen des Bereichs ueber einer Faehigkeit
+		 */
+		bool onAbilityHoverLeave(const CEGUI::EventArgs& evt);
+		
+		/**
 		 * \fn void updateAbilityTooltip(unsigned int pos)
 		 * \brief Aktualisiert den Tooltip fuer die Faehigkeit ueber der die Maus ist
 		 */
@@ -74,6 +81,12 @@ class SkillTree : public Window
 		 * \brief Position der Fenster fuer die Skills
 		 */
 		CEGUI::UVector2 m_skill_position[196];
+		
+			/**
+		 * \var OIS::Keyboard *m_keyboard
+		 * \brief Repraesentation der Tastatur
+			 */
+		OIS::Keyboard *m_keyboard;
 };
 
 #endif

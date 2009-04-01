@@ -1,11 +1,13 @@
 
 #include "skilltree.h"
 
-SkillTree::SkillTree(Document* doc)
+
+SkillTree::SkillTree(Document* doc, OIS::Keyboard *keyboard)
 	:Window(doc)
 {
 	DEBUG4("setup skilltree");
-
+	m_keyboard = keyboard;
+	
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 
 
@@ -196,6 +198,7 @@ SkillTree::SkillTree(Document* doc)
 		tab->addChildWindow(button);
 		button->setPosition(pos);
 		button->setSize(CEGUI::UVector2(cegui_reldim(0.07f), cegui_reldim( 0.05f)));
+		
 	}
 
 
@@ -355,6 +358,8 @@ SkillTree::SkillTree(Document* doc)
 		button->setText("+");
 		button->setID(act);
 		button->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&SkillTree::onSkillLearnMouseClicked, this));
+		
+		
 	}
 
 	skilltree_warrior->setVisible(false);
@@ -645,6 +650,97 @@ void SkillTree::update()
 			button->setVisible(vis);
 		}
 	}
+	
+	// Markierer fuer Shortkeys einbauen
+	// Zaehler fuer die Fenster
+	static int acount =0;
+	std::stringstream stream;
+	
+	Document::ShortkeyMap& shortkeys = m_document->getShortkeys();
+	Document::ShortkeyMap::iterator it;
+	int nr =0;
+	
+	CEGUI::Window *label2;
+	Action::ActionType act;
+	bool right;
+	std::string keyname;
+	int key;
+	CEGUI::UVector2 pos;
+	
+	for (it = shortkeys.begin(); it != shortkeys.end(); ++it)
+	{
+		if (it->second < Document::USE_SKILL_LEFT || it->second >Document::USE_SKILL_RIGHT+200)
+			continue;
+		
+		DEBUG5("shortkey %i to %i",it->first,it->second);
+		key = it->first;
+		
+		act= (Action::ActionType) (it->second-Document::USE_SKILL_LEFT);
+		right = false;
+		if (it->second >= Document::USE_SKILL_RIGHT)
+		{
+			act= (Action::ActionType)  (it->second-Document::USE_SKILL_RIGHT);
+			right = true;
+		}
+		stream.str("");
+		stream << "SkillShortkeyLabel";
+		stream << nr;
+		
+		if (nr >= acount)
+		{
+			acount ++;
+			label = win_mgr.createWindow("TaharezLook/StaticText", stream.str());
+			label->setProperty("FrameEnabled", "false");
+			label->setProperty("BackgroundEnabled", "false");
+			label->setProperty("HorzFormatting", "Centred");
+			label->setID(0);
+			label->setText("");
+			label->setSize(CEGUI::UVector2(cegui_reldim(0.07f), cegui_reldim( 0.05f)));
+			label->setAlpha(1.0);
+			label->setMousePassThroughEnabled(true);
+			
+		}
+		else
+		{
+			label = win_mgr.getWindow(stream.str());
+		}
+		
+		stream.str("");
+		stream << Action::getActionInfo((Action::ActionType) act)->m_enum_name << "Label";
+		label2 = win_mgr.getWindow(stream.str());
+		
+		
+		if (label2->getParent() != label->getParent())
+		{
+			if (label->getParent() != 0)
+			{
+				label->getParent()->removeChildWindow (label);
+			}
+			label2->getParent()->addChildWindow (label);
+		}
+		
+		keyname = m_keyboard->getAsString ( (OIS::KeyCode) key);
+		if (label->getText() != keyname)
+		{
+			label->setText(keyname);
+		}
+		
+		if ((int) label->getID() != act)
+		{
+			label->setID(act);
+			pos = m_skill_position[act];
+			if (right)
+			{
+				pos += CEGUI::UVector2(cegui_reldim(0.07f), cegui_reldim( 0.05f));
+			}
+			else
+			{
+				pos += CEGUI::UVector2(cegui_reldim(0.01f), cegui_reldim( 0.05f));
+			}
+			label->setPosition(pos);
+		}
+		nr ++;
+	}
 }
 
 
@@ -723,21 +819,7 @@ bool SkillTree::onSkillMouseClicked(const CEGUI::EventArgs& evt)
 
 	if (we.button == CEGUI::LeftButton)
 	{
-		DEBUG5("left button pressed on skill %i",id);
-		if (m_document->getLocalPlayer())
-		{
-			if (m_document->getLocalPlayer()->checkAbility((Action::ActionType) id))
-			{
-				// Faehigkeit ist verfuegbar, setzen
-				m_document->setLeftAction((Action::ActionType) id);
-			}
-			else
-			{
-				// versuche Faehigkeit zu lernen
-				m_document->learnAbility((Action::ActionType) id);
-			}
-		}
-
+		m_document->setLeftAction((Action::ActionType) id);
 	}
 
 	if (we.button == CEGUI::RightButton)
@@ -768,9 +850,13 @@ bool SkillTree::onAbilityHover(const CEGUI::EventArgs& evt)
 	unsigned int id = we.window->getID();
 	DEBUG5("mouse entered Ability %i",id);
 	updateAbilityTooltip(id);
+	m_document->getGUIState()->m_hover_ability = (Action::ActionType) (id);
 	return true;
 }
 
-
-
+bool SkillTree::onAbilityHoverLeave(const CEGUI::EventArgs& evt)
+{
+	m_document->getGUIState()->m_hover_ability = Action::NOACTION;
+	return true;
+}
 

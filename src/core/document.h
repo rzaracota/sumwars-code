@@ -283,6 +283,18 @@ class Document
 		 * \brief aktuell festgehaltene Taste
 		 */
 		KeyCode m_pressed_key;
+		
+		/**
+		 * \var Action::ActionType m_hover_ability
+		 * \brief Aktion auf die gerade mit der Maus gezeigt wird
+		 */
+		Action::ActionType m_hover_ability;
+		
+		/**
+		 * \var bool m_prefer_right_skill
+		 * \brief wenn true, werden Kurztasten auf die rechte Maustaste gelegt, auch wenn sie fuer die linke geeignet waeren
+		 */
+		bool m_prefer_right_skill;
 
 		/**
 		 * \var std::string m_cursor_object
@@ -408,6 +420,15 @@ class Document
 	Party* getParty()
 	{
 		return 0;
+	}
+	
+	/**
+	 * \fn ShortkeyMap& getShortkeys()
+	 * \brief Gibt alle Shortkeys aus
+	 */
+	ShortkeyMap& getShortkeys()
+	{
+		return m_shortkey_map;
 	}
 
 	/**
@@ -541,10 +562,11 @@ class Document
 
 
 	/**
-	 * \fn void onButtonSkilltreeClicked()
+	 * \fn void onButtonSkilltreeClicked(bool skill_right=false)
 	 * \brief Behandelt Klick auf Skilltree Button
+	 * \param skill_right Ist dann true, wenn das Fenster per Klick auf die Faehigkeit auf rechts geoeffnet wurde
 	 */
-	void onButtonSkilltreeClicked();
+	void onButtonSkilltreeClicked(bool skill_right=false);
 
 	/**
 	 * \fn void onButtonOpenChatClicked()
