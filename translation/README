@@ -1,0 +1,31 @@
+1.  Hinzufügen einer neuen Sprache
+----------------------------------
+
+Um eine neue Sprache einzufügen in die übersetzt werden soll, muss allgemein
+folgendes ausgeführt werden:
+   msginit -l lang -o program_domain_lang.po -i program_domain.pot
+
+Konkretes Beispiel anhand der deutschen Übersetzung:
+   msginit -l de -o sumwars_sumwars_de.po -i sumwars_sumwars.pot
+
+Nachfolgend muss in der .po-Datei noch der korrekte Zeichensatz eingetragen
+werden und es müssen die Skripte  update_translation.sh  und  generate_mo.sh
+entsprechend erweitert werden.
+
+
+
+2.  Hinweise zum Bearbeiten der po-Dateien
+------------------------------------------
+
+- Es dürfen nur die msgstr-Einträge bearbeitet werden.
+
+- Neue Einträge dürfen NICHT manuell hinzugefügt werden. Dies geschieht
+  ausschließlich durch Skripte.
+
+
+
+3.  Sonstiges
+-------------
+
+- pot-Dateien dürfen NICHT manuell bearbeitet werden.
+

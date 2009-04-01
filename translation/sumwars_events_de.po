@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sumwars 0.01\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-10 17:22+0100\n"
+"POT-Creation-Date: 2009-04-01 15:13+0200\n"
 "PO-Revision-Date: 2009-03-10 17:28+0100\n"
 "Last-Translator: Michael <michael@localhost.localdomain>\n"
 "Language-Team: German <translation-team-de@lists.sourceforge.net>\n"
@@ -16,70 +16,316 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../data/quests/goblins.xml:9
-msgid "Quest finished"
-msgstr "Quest abgeschlossen"
-
-#: ../data/quests/goblins.xml:12
-msgid "killed enough goblins"
-msgstr "Ausreichend viele Goblins getoetet"
-
 #: ../data/quests/goblins.xml:15
 msgid "'Kill '..nr..' more Goblins'"
 msgstr "'Noch '..nr..' Goblins'"
 
-#: ../data/quests/goblins.xml:26
-msgid "I have killed them"
-msgstr "Ich habe alle umgebracht"
-
-#: ../data/quests/goblins.xml:27
-msgid "you are soo great"
-msgstr "Du bist so toll"
-
-#: ../data/quests/goblins.xml:30
-msgid "Go and kill some more..."
-msgstr "Du musst noch einige toeten"
-
-#: ../data/quests/goblins.xml:33
-msgid "There are some stupid goblins around"
-msgstr "Es gibt hier dumme Goblins"
-
-#: ../data/quests/goblins.xml:34
-msgid "If you kill 10 of them you get a reward"
-msgstr "Wenn du 10 von ihnen umbringst bekommst du eine Belohnung"
-
-#: ../data/quests/goblins.xml:35
-msgid "Interested?"
-msgstr "Interesse?"
-
-#: ../data/quests/goblins.xml:36
-msgid "Accept Quest?"
-msgstr "Quest annehmen?"
-
-#: ../data/quests/goblins.xml:37
-msgid "Yes"
-msgstr "Ja"
-
-#: ../data/quests/goblins.xml:38
-msgid "No"
-msgstr "Nein"
+#: ../data/quests/scene1.xml:83
+msgid "...aaaah..."
+msgstr ""
 
 #: ../data/quests/goblins.xml:49
 msgid "A second reward ?"
 msgstr "Noch eine Belohnung?"
 
-#: ../data/quests/goblins.xml:50
-msgid "Yeah"
-msgstr "Joa"
+#: ../data/quests/goblins.xml:36
+msgid "Accept Quest?"
+msgstr "Quest annehmen?"
+
+#: ../data/quests/herbalist.xml:57
+msgid "Ach ..."
+msgstr ""
+
+#: ../data/quests/rob_the_robber.xml:29 ../data/quests/rob_the_robber.xml:67
+msgid "Ach, der. Von ..."
+msgstr ""
+
+#: ../data/quests/herbalist.xml:28
+msgid "Ah, gut gemacht ..."
+msgstr ""
+
+#: ../data/quests/besieged_farm.xml:37
+msgid "Ah, habt ihr doch ..."
+msgstr ""
+
+#: ../data/quests/rob_the_robber.xml:39 ../data/quests/rob_the_robber.xml:77
+msgid "Allerdings. 3000 Goldstuecke ..."
+msgstr ""
+
+#: ../data/quests/besieged_farm.xml:92
+msgid "Also ehrlich, ..."
+msgstr ""
+
+#: ../data/quests/rob_the_robber.xml:100
+msgid "Bei allen Teufeln. ..."
+msgstr ""
+
+#: ../data/quests/herbalist.xml:163
+msgid "Collect "
+msgstr ""
+
+#: ../data/quests/herbalist.xml:68
+msgid "Danke Herzchen."
+msgstr ""
+
+#: ../data/quests/rescue_willard.xml:42
+msgid "Danke. Mein Name ..."
+msgstr ""
+
+#: ../data/quests/rob_the_robber.xml:40 ../data/quests/rob_the_robber.xml:78
+msgid "Dann nehmt ihm ..."
+msgstr ""
+
+#: ../data/quests/herbalist.xml:35
+msgid "Das stimmt."
+msgstr ""
+
+#: ../data/quests/besieged_farm.xml:79
+msgid "Die Goblins sind weg ..."
+msgstr ""
+
+#: ../data/quests/besieged_farm.xml:53
+msgid "Es ist vollbracht"
+msgstr ""
+
+#: ../data/quests/rescue_willard.xml:73
+msgid "Es tut mir ..."
+msgstr ""
+
+#: ../data/quests/rescue_willard.xml:94
+msgid "Euer Freund Fenor ..."
+msgstr ""
+
+#: ../data/quests/rescue_willard.xml:58
+msgid "Euer Freund ist ..."
+msgstr ""
+
+#: ../data/quests/herbalist.xml:52
+msgid "Frieden."
+msgstr ""
+
+#: ../data/quests/goblins.xml:30
+msgid "Go and kill some more..."
+msgstr "Du musst noch einige toeten"
+
+#: ../data/quests/besieged_farm.xml:54
+msgid "Habt ihr schon ..."
+msgstr ""
+
+#: ../data/quests/rescue_willard.xml:39
+msgid "Hae! Dafuer haette ..."
+msgstr ""
+
+#: ../data/quests/goblins.xml:61
+msgid "Have fun"
+msgstr "Viel Spass"
+
+#: ../data/quests/herbalist.xml:34
+msgid "He da, ..."
+msgstr ""
+
+#: ../data/quests/rescue_willard.xml:28
+msgid "Heda! ..."
+msgstr ""
+
+#: ../data/quests/herbalist.xml:27
+msgid "Hier alte Frau ..."
+msgstr ""
+
+#: ../data/quests/rob_the_robber.xml:99
+msgid "Hier ist das ..."
+msgstr ""
 
 #: ../data/quests/goblins.xml:51
 msgid "I give you a goblin club"
 msgstr "Ich gebe die eine Goblin Keule"
 
+#: ../data/quests/goblins.xml:26
+msgid "I have killed them"
+msgstr "Ich habe alle umgebracht"
+
+#: ../data/quests/besieged_farm.xml:80 ../data/quests/rescue_willard.xml:66
+msgid "Ich danke euch ..."
+msgstr ""
+
+#: ../data/quests/rescue_willard.xml:96
+msgid "Ich danke euch."
+msgstr ""
+
+#: ../data/quests/rescue_willard.xml:30
+msgid "Ich habe laeuten ..."
+msgstr ""
+
+#: ../data/quests/rescue_willard.xml:92
+msgid "Ich nehme an ..."
+msgstr ""
+
+#: ../data/quests/rescue_willard.xml:45
+msgid "Ich verstehe."
+msgstr ""
+
+#: ../data/quests/goblins.xml:34
+msgid "If you kill 10 of them you get a reward"
+msgstr "Wenn du 10 von ihnen umbringst bekommst du eine Belohnung"
+
+#: ../data/quests/besieged_farm.xml:26
+msgid "Ihr habt Brons Hof noch nicht befreit."
+msgstr ""
+
+#: ../data/quests/rob_the_robber.xml:26 ../data/quests/rob_the_robber.xml:64
+msgid "Ihr habt Rob noch nicht getoetet."
+msgstr ""
+
+#: ../data/quests/rescue_willard.xml:26
+msgid "Ihr habt Willard noch nicht befreit."
+msgstr ""
+
+#: ../data/quests/herbalist.xml:31
+msgid "Ihr muesst noch mehr Kraeuter sammeln."
+msgstr ""
+
+#: ../data/quests/rescue_willard.xml:74
+msgid "Ihr seid genauso ..."
+msgstr ""
+
+#: ../data/quests/goblins.xml:35
+msgid "Interested?"
+msgstr "Interesse?"
+
+#: ../data/quests/rescue_willard.xml:47
+msgid "Ja"
+msgstr ""
+
+#: ../data/quests/herbalist.xml:56
+msgid "Kraeuter ..."
+msgstr ""
+
+#: ../data/quests/herbalist.xml:51
+msgid "Kunststueck: Immerhin wollten ..."
+msgstr ""
+
+#: ../data/quests/besieged_farm.xml:93
+msgid "Lasst und das ..."
+msgstr ""
+
+#: ../data/quests/besieged_farm.xml:82
+msgid "Mit einem Kristall ..."
+msgstr ""
+
+#: ../data/quests/herbalist.xml:67
+msgid "Na schoen, wenn ..."
+msgstr ""
+
+#: ../data/quests/besieged_farm.xml:83
+msgid "Natuerlich ..."
+msgstr ""
+
 #: ../data/quests/goblins.xml:60
 msgid "Nearly done"
 msgstr "So gut wie erledigt"
 
-#: ../data/quests/goblins.xml:61
-msgid "Have fun"
-msgstr "Viel Spass"
+#: ../data/quests/rescue_willard.xml:48
+msgid "Nein"
+msgstr ""
+
+#: ../data/quests/rescue_willard.xml:44
+msgid "Nein. Willard ist ..."
+msgstr ""
+
+#: ../data/quests/besieged_farm.xml:30 ../data/quests/goblins.xml:38
+#: ../data/quests/herbalist.xml:60 ../data/quests/rob_the_robber.xml:32
+#: ../data/quests/rob_the_robber.xml:70
+msgid "No"
+msgstr "Nein"
+
+#: ../data/quests/rob_the_robber.xml:47 ../data/quests/rob_the_robber.xml:85
+msgid "Nur neugierig."
+msgstr ""
+
+#: ../data/quests/besieged_farm.xml:28 ../data/quests/herbalist.xml:58
+#: ../data/quests/rescue_willard.xml:46 ../data/quests/rob_the_robber.xml:30
+#: ../data/quests/rob_the_robber.xml:68
+msgid "Quest annehmen?"
+msgstr "Quest abgeschlossen"
+
+#: ../data/quests/besieged_farm.xml:11 ../data/quests/herbalist.xml:11
+#: ../data/quests/rescue_willard.xml:11 ../data/quests/rob_the_robber.xml:11
+#: ../data/quests/scene1.xml:11
+msgid "Quest description"
+msgstr ""
+
+#: ../data/quests/besieged_farm.xml:9 ../data/quests/goblins.xml:9
+#: ../data/quests/herbalist.xml:9 ../data/quests/rescue_willard.xml:9
+#: ../data/quests/rob_the_robber.xml:9 ../data/quests/scene1.xml:9
+msgid "Quest finished"
+msgstr "Quest abgeschlossen"
+
+#: ../data/quests/rescue_willard.xml:43
+msgid "Sicher wollt ihr ..."
+msgstr ""
+
+#: ../data/quests/goblins.xml:33
+msgid "There are some stupid goblins around"
+msgstr "Es gibt hier dumme Goblins"
+
+#: ../data/quests/rescue_willard.xml:65
+msgid "Und fragt nicht ..."
+msgstr ""
+
+#: ../data/quests/rescue_willard.xml:29
+msgid "Und wenn es ..."
+msgstr ""
+
+#: ../data/quests/herbalist.xml:76
+msgid "Vergiss es ..."
+msgstr ""
+
+#: ../data/quests/rob_the_robber.xml:28 ../data/quests/rob_the_robber.xml:66
+msgid "Verzeiht, Sergeant, aber ..."
+msgstr ""
+
+#: ../data/quests/rescue_willard.xml:40
+msgid "Verzeiht. Vielleicht war ..."
+msgstr ""
+
+#: ../data/quests/herbalist.xml:55
+msgid "Wenn ihr ..."
+msgstr ""
+
+#: ../data/quests/rescue_willard.xml:38
+msgid "Wer haette das ..."
+msgstr ""
+
+#: ../data/quests/rescue_willard.xml:41
+msgid "Wie auch immer ..."
+msgstr ""
+
+#: ../data/quests/besieged_farm.xml:81
+msgid "Wie das denn?"
+msgstr ""
+
+#: ../data/quests/herbalist.xml:77
+msgid "Wie du meinst ..."
+msgstr ""
+
+#: ../data/quests/besieged_farm.xml:38
+msgid "Wir sind unterwegs."
+msgstr ""
+
+#: ../data/quests/goblins.xml:50
+msgid "Yeah"
+msgstr "Joa"
+
+#: ../data/quests/besieged_farm.xml:29 ../data/quests/goblins.xml:37
+#: ../data/quests/herbalist.xml:59 ../data/quests/rob_the_robber.xml:31
+#: ../data/quests/rob_the_robber.xml:69
+msgid "Yes"
+msgstr "Ja"
+
+#: ../data/quests/goblins.xml:12
+msgid "killed enough goblins"
+msgstr "Ausreichend viele Goblins getoetet"
+
+#: ../data/quests/goblins.xml:27
+msgid "you are soo great"
+msgstr "Du bist so toll"
