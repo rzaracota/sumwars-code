@@ -2000,7 +2000,7 @@ void Action::updateTranslation()
 
 	a = &(Action::m_base_info[Action::EXPLODING_ARROW]);
 	a->m_name = gettext("Explosion Arrow");
-	a->m_description = gettext("The projectile is imbued with the power of a weak firespirit. IT will deal damage in a small area, if it hits.");
+	a->m_description = gettext("The projectile is imbued with the power of a weak firespirit. It will deal damage in a small area, if it hits.");
 
 	a = &(Action::m_base_info[Action::EXPLOSION_CASCADE]);
 	a->m_name = gettext("Blast Cascade");
@@ -2070,7 +2070,7 @@ void Action::updateTranslation()
 
 	a = &(Action::m_base_info[BURNING_RAGE]);
 	a->m_name = gettext("Burning Rage");
-	a->m_description = gettext("The priest inflicts holy anger in his partymembers. They will attack with greater power.");
+	a->m_description = gettext("The priest inflicts holy anger in his partymembers. They will attack with greater power. With increasing willpower the priest can hold this effect longer.");
 
 	a = &(Action::m_base_info[CURE_BLIND_MUTE]);
 	a->m_name = gettext("Gentle Glow");
@@ -2078,11 +2078,11 @@ void Action::updateTranslation()
 
 	a = &(Action::m_base_info[CURE_BLIND_MUTE_PARTY]);
 	a->m_name = gettext("Omniscent Eye");
-	a->m_description = gettext("The party will be immune to blind and berserk for some time.");
+	a->m_description = gettext("The party will be immune to blind and berserk for some time. With increasing willpower the priest can hold this effect longer.");
 
 	a = &(Action::m_base_info[BLAZING_SHIELD]);
 	a->m_name = gettext("Blazing Shield");
-	a->m_description = gettext("The party is surrounded by holy energy. Everyones defense is increased.");
+	a->m_description = gettext("The party is surrounded by holy energy. Everyones defense is increased. With increasing willpower the priest can hold this effect longer.");
 
 	a = &(Action::m_base_info[LIGHT_BEAM]);
 	a->m_name = gettext("Glistening Glare");
@@ -2102,7 +2102,7 @@ void Action::updateTranslation()
 
 	a = &(Action::m_base_info[MAGIC_SHIELD]);
 	a->m_name = gettext("Magic Shield");
-	a->m_description = gettext("The priests protecting influence raises the willpower of all partymembers temporarily.");
+	a->m_description = gettext("The priests protecting influence raises the willpower of all partymembers temporarily. With increasing willpower the priest can hold this effect longer.");
 
 	a = &(Action::m_base_info[CURE_POIS_BURN]);
 	a->m_name = gettext("Ease Pain");
@@ -2110,7 +2110,7 @@ void Action::updateTranslation()
 
 	a = &(Action::m_base_info[CURE_POIS_BURN_PARTY]);
 	a->m_name = gettext("Remedial Water");
-	a->m_description = gettext("The priests grants every partymember immunity to poison and burn for a small amount of time.");
+	a->m_description = gettext("The priests grants every partymember immunity to poison and burn for a small amount of time while healing these effects. With increasing willpower the priest can hold this effect longer.");
 
 	a = &(Action::m_base_info[ACID]);
 	a->m_name = gettext("Acid");
@@ -2134,7 +2134,7 @@ void Action::updateTranslation()
 
 	a = &(Action::m_base_info[BLADE_STORM]);
 	a->m_name = gettext("Bladestorm");
-	a->m_description = gettext("The priest strengthens the weaponarms of his comrades, leading to increased attackspeed for everyone.");
+	a->m_description = gettext("The priest strengthens the weaponarms of his comrades, leading to increased attackspeed for everyone. With increasing willpower the priest can hold this effect longer.");
 
 	a = &(Action::m_base_info[CURE_CONF_BSRK]);
 	a->m_name = gettext("Restore Concentration");
@@ -2142,7 +2142,7 @@ void Action::updateTranslation()
 
 	a = &(Action::m_base_info[CURE_CONF_BSRK_PARTY]);
 	a->m_name = gettext("Spirit Shield");
-	a->m_description = gettext("The priest grants immunity to berserk and confuse to all his partymembers for a small amount of time.");
+	a->m_description = gettext("The priest grants immunity to berserk and confuse to all his partymembers for a small amount of time. With increasing willpower the priest can hold this effect longer.");
 
 	a = &(Action::m_base_info[HYPNOSIS]);
 	a->m_name = gettext("Hypnosis");
@@ -2154,6 +2154,6 @@ void Action::updateTranslation()
 
 	a = &(Action::m_base_info[KEEN_MIND]);
 	a->m_name = gettext("Keen Mind");
-	a->m_description = gettext("The priest increases everyones spellpower for a short time. Everyones spells will surely be more effective.");
+	a->m_description = gettext("The priest increases everyones spellpower for a short time. Everyones spells will surely be more effective. With increasing willpower the priest can hold this effect longer.");
 }
 
