@@ -36,7 +36,7 @@
 		
 		<Topic name="start_rob_the_robber_quest" >
 			<Effect>
-				speak("player", _("Allerdings. 3000 Goldstücke ..."),1000)
+				speak("player", _("Allerdings. 3000 Goldstuecke ..."),1000)
 				speak("Sergeant Lutterer",_("Dann nehmt ihm ..."),1000)
 				rob_the_robber.started = true
 			</Effect>	
@@ -74,7 +74,7 @@
 		
 		<Topic name="start_rob_the_robber_quest" >
 			<Effect>
-				speak("player", _("Allerdings. 3000 Goldstücke ..."),1000)
+				speak("player", _("Allerdings. 3000 Goldstuecke ..."),1000)
 				speak("Sergeant Wober",_("Dann nehmt ihm ..."),1000)
 				rob_the_robber.started = true
 			</Effect>	

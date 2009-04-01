@@ -177,7 +177,7 @@
 			<Environment height="1.0" name="meadow" />
 		</Environments>
 		
-		<!-- in der Nähe des Eingangs -->
+		<!-- in der Naehe des Eingangs -->
 		<NamedObjectGroups>
 			<NameObjectGroup name= "cryptGobins" object_group="maylonsGraveL1Goblins" priority="4"/>
 		</NamedObjectGroups>
@@ -265,7 +265,7 @@
 		</Event>
 	</Region>
 
-<!-- Aisen, Noerdliche Wiese [Feld und Wiesen]; ungefaehr 20 Min, eher offen; Level 7 - 12; Sidequests aus Joringsbr�ck -->
+<!-- Aisen, Noerdliche Wiese [Feld und Wiesen]; ungefaehr 20 Min, eher offen; Level 7 - 12; Sidequests aus Joringsbrueck -->
 <!-- Der Bauernhof(Template) -->
 <!-- Kraeuterbuesche -->
 <!-- Goblinschlaeger, Goblinraeuber, Goblinjaeger, Goblinhunde, Goblinkrieger, Goblinschamanen? -->
@@ -403,7 +403,7 @@
 		</Event>
 	</Region>
 	
-<!-- Aisen, Zwergentrutz Stadtmauer; ungef�hr 20 min, relativ starres Design; Level 16 - 19 -->
+<!-- Aisen, Zwergentrutz Stadtmauer; ungefaehr 20 min, relativ starres Design; Level 16 - 19 -->
 <!-- Zombies, Skelette -->
 <!-- Locations fuer die Verteidigenden Wachen? -->
 	<Region id="13" name="dwarfenfrowardRampart">
