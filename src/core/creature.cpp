@@ -3265,10 +3265,20 @@ void Creature::calcBaseAttrMod()
 
 	// Wirkungen durch passive Faehigkeiten
 	if (checkAbility(Action::RESIST_ICE))
-		m_base_attr_mod.m_resistances[Damage::ICE] += 30;
+	{
+		m_base_attr_mod.m_resistances[Damage::ICE] += 20;
+		m_base_attr_mod.m_resistances[Damage::AIR] += 20;
+		
+	}
 
 	if (checkAbility(Action::RESIST_AIR))
-		m_base_attr_mod.m_resistances[Damage::AIR] += 30;
+	{
+		m_base_attr_mod.m_resistances[Damage::ICE] += 10;
+		m_base_attr_mod.m_resistances[Damage::AIR] += 10;
+		m_base_attr_mod.m_resistances_cap[Damage::ICE] += 10;
+		m_base_attr_mod.m_resistances_cap[Damage::AIR] += 10;
+		
+	}
 
 
 }
