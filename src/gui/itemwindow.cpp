@@ -18,7 +18,20 @@ bool ItemWindow::onItemHover(const CEGUI::EventArgs& evt)
 	unsigned int id = we.window->getID();
 	
 	Player* player = m_document->getLocalPlayer();
-	updateItemWindowTooltip(we.window,player->getEquipement()->getItem(id) ,player);
+	Item* itm;
+	if (id == Equipement::WEAPON)
+	{
+		itm = player->getWeapon();
+	}
+	else if (id == Equipement::SHIELD)
+	{
+		itm = player->getShield();
+	}
+	else
+	{
+		itm = player->getEquipement()->getItem(id);
+	}
+	updateItemWindowTooltip(we.window,itm ,player);
 	return true;
 }
 
