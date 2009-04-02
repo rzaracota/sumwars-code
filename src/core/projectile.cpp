@@ -146,7 +146,9 @@ bool Projectile::update(float time)
 			m_timer += dtime;
 		}
 		time -= dtime;
-
+		
+		if (dtime <=0)
+			return false;
 
 		switch (m_state)
 		{
@@ -164,7 +166,7 @@ bool Projectile::update(float time)
 				// Wenn Timer Limit erreicht
 				if (m_timer >= m_timer_limit)
 				{
-					m_state = DESTROYED;
+					setState(DESTROYED);
 
 					if (World::getWorld()->isServer())
 					{
@@ -250,7 +252,7 @@ bool Projectile::update(float time)
 				}
 				if (m_timer >= m_timer_limit)
 				{
-					m_state = DESTROYED;
+					setState(DESTROYED);
 				}
 
 
@@ -420,7 +422,7 @@ void Projectile::handleFlying(float dtime)
 	if (m_timer >= m_timer_limit)
 	{
 		DEBUG5("destroyed after timeout");
-		m_state = DESTROYED;
+		setState(DESTROYED);
 	}
 
 	DEBUG5("pos %f %f",pos.m_x, pos.m_y);
@@ -472,7 +474,7 @@ void Projectile::handleFlying(float dtime)
 			{
 				// Projektil wird zerstoert
 				DEBUG5("hit obj %i",hit->getId());
-				m_state = DESTROYED;
+				setState(DESTROYED);
 				m_timer=0;
 			}
 			if (World::getWorld()->isServer())
@@ -486,7 +488,7 @@ void Projectile::handleFlying(float dtime)
 			// Projektil explodiert
 			// Status auf explodierend setzen, Radius, Timer setzen
 			DEBUG5("exploding");
-			m_state = EXPLODING;
+			 setState(EXPLODING);
 			if (m_type == FIRE_BALL || m_type == FIRE_ARROW)
 				m_type = FIRE_EXPLOSION;
 			else if (m_type == ICE_ARROW)
@@ -499,7 +501,7 @@ void Projectile::handleFlying(float dtime)
 			m_max_radius = 1.5;
 
 			m_timer=0;
-			m_timer_limit=200;
+			setTimerLimit(200);
 
 			m_event_mask |= NetEvent::DATA_PROJ_STATE | NetEvent::DATA_TYPE | NetEvent::DATA_MAX_RADIUS;
 		}
@@ -522,7 +524,7 @@ void Projectile::handleFlying(float dtime)
 		if (hit->getTypeInfo()->m_type != WorldObject::TypeInfo::TYPE_FIXED_OBJECT && bounce)
 		{
 			// Projektil hat ein Lebewesen getroffen, springt weiter
-			m_state = FLYING;
+			setState(FLYING);
 			float speed = m_speed.getLength();
 
 			// Kreis mit Radius 5 um aktuelle Position
@@ -594,14 +596,14 @@ void Projectile::handleFlying(float dtime)
 			else
 			{
 				// kein Ziel gefunden, Projektil zerstoeren
-				m_state = DESTROYED;
+				setState(DESTROYED);
 			}
 
 			// Zaehler, bei 5 Spruengen Projektil zerstoeren
 			m_counter ++;
 			if (m_counter>=5)
 			{
-				m_state = DESTROYED;
+				setState(DESTROYED);
 			}
 		}
 
@@ -682,14 +684,14 @@ void Projectile::handleGrowing(float dtime)
 		// Timer abgelaufen
 
 		// Standardverhalten Projektil zerstoeren
-		m_state = DESTROYED;
+		setState(DESTROYED);
 
 		if (m_type == FIRE_WALL)
 		{
 			// fuer Feuersaeule: Uebergang in stabilen Zustand
 			m_timer =0;
-			m_timer_limit=5000;
-			m_state = STABLE;
+			setTimerLimit(5000);
+			setState(STABLE);
 
 			m_event_mask |= NetEvent::DATA_PROJ_STATE | NetEvent::DATA_PROJ_TIMER;
 		}
@@ -712,7 +714,7 @@ void Projectile::handleStable(float dtime)
 	if (m_timer >= m_timer_limit && World::getWorld()->isServer())
 	{
 		// Timer Limit erreicht
-		m_state = DESTROYED;
+		setState(DESTROYED);
 
 		if (m_type == BLIZZARD)
 		{
@@ -732,7 +734,7 @@ void Projectile::handleStable(float dtime)
 				// naechste Welle: Timer zuruecksetzen, Zaehler erhoehen
 				m_counter ++;
 				m_timer =0;
-				m_state = STABLE;
+				setState(STABLE);
 
 			}
 		}
@@ -803,7 +805,7 @@ void Projectile::handleStable(float dtime)
 				// naechster Blitz: Timer zuruecksetzen
 				m_counter ++;
 				m_timer =0;
-				m_state = STABLE;
+				setState(STABLE);
 
 			}
 
@@ -814,8 +816,8 @@ void Projectile::handleStable(float dtime)
 			// Zauber Feuersaeule
 			// Uebergang zum Zustand verschwindend
 			m_timer =0;
-			m_timer_limit=200;
-			m_state = VANISHING;
+			setTimerLimit(200);
+			setState(VANISHING);
 			m_event_mask |= NetEvent::DATA_PROJ_STATE | NetEvent::DATA_PROJ_TIMER;
 		}
 

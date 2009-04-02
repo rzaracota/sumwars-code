@@ -315,6 +315,28 @@ class Projectile
 	protected:
 		
 		/**
+		 * \fn void setState(ProjectileState state)
+		 * \brief Setzt den Status des Projektils
+		 * \param state neuer Status
+		 */
+		void setState(ProjectileState state)
+		{
+			m_state = state;
+			m_event_mask |= NetEvent::DATA_PROJ_STATE;
+		}
+		
+		/**
+		 * \fn void setTimerLimit(float limit)
+		 * \brief Setzt das Timer Limit
+		 * \param limit neues Limit
+		 */
+		void setTimerLimit(float limit)
+		{
+			m_timer_limit = limit;
+			m_event_mask |= NetEvent::DATA_PROJ_TIMER;
+		}
+		
+		/**
 		* \fn void handleFlying(float dtime)
 		* \brief Fuehrt update fuer Objekt im Zustand FLYING aus
 		*/
