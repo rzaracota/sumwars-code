@@ -23,6 +23,7 @@
 #include <algorithm>
 
 class Gridunit;
+class Region;
 
 typedef std::string RegionName;
 
@@ -421,6 +422,12 @@ class RegionCamera
 		 * \brief Positionen, die als naechstes eingenommen werden
 		 */
 		std::list<std::pair<Position,float> > m_next_positions;
+		
+		/**
+		 * \var  Region* m_region
+		 * \brief Region zu der die Kamera gehoert
+		 */
+		Region* m_region;
 };
 
 	
@@ -1042,12 +1049,12 @@ class Region
 		}
 		
 		/**
-		 * \fn void insertPlayerTeleport(int playerid, int regionid)
+		 * \fn void insertPlayerTeleport(int playerid, RegionLocation regionloc)
 		 * \brief Fuegt einen Spieler ein, der sich aus der Region per Wegpunkt entfernt
 		 */
-		void insertPlayerTeleport(int playerid, int regionid)
+		void insertPlayerTeleport(int playerid, RegionLocation regionloc)
 		{
-			m_teleport_players.insert(std::make_pair(playerid,regionid));
+			m_teleport_players.insert(std::make_pair(playerid,regionloc));
 		}
 
 		
@@ -1210,10 +1217,10 @@ class Region
 		std::map<int, Dialogue*> m_dialogues;
 		
 		/**
-		 * \var std::map<int,int>  m_teleport_players;
+		 * \var std::map<int,RegionLocation>  m_teleport_players;
 		 * \brief Liste der Spieler die sich aus der Region per Wegpunkt entfernen
 		 */
-		std::map<int,int>  m_teleport_players;
+		std::map<int,RegionLocation>  m_teleport_players;
 		
 		/**
 		 * \var RegionCamera m_camera

@@ -33,6 +33,7 @@ void EventSystem::init()
 	lua_register(m_lua, "get", getObjectValue);
 	lua_register(m_lua, "setObjectValue", setObjectValue);
 	lua_register(m_lua, "set", setObjectValue);
+	lua_register(m_lua, "objectIsInRegion", objectIsInRegion);
 	lua_register(m_lua, "pointIsInArea", pointIsInArea);
 	lua_register(m_lua, "unitIsInArea", unitIsInArea);
 	lua_register(m_lua, "objectIsInArea", unitIsInArea);
@@ -66,6 +67,7 @@ void EventSystem::init()
 	lua_register(m_lua, "getSpeaker", getSpeaker);
 	lua_register(m_lua, "setRefName", setRefName);
 	lua_register(m_lua, "getRolePlayers", getRolePlayers);
+	lua_register(m_lua, "teleportPlayer", teleportPlayer);
 	lua_register(m_lua, "createEvent", createEvent);
 	lua_register(m_lua, "addCondition", addCondition);
 	lua_register(m_lua, "addEffect", addEffect);
@@ -280,6 +282,29 @@ int EventSystem::setObjectValue(lua_State *L)
 
 	return 0;
 }
+
+int EventSystem::objectIsInRegion(lua_State *L)
+{
+	int argc = lua_gettop(L);
+	if (argc>=1 && lua_isnumber(L,1))
+	{
+		int id = lua_tointeger(L, 1);
+		
+		WorldObject* wo =0;
+		if (m_region !=0)
+		{
+			wo = m_region->getObject(id);
+			lua_pushboolean(EventSystem::getLuaState() , (wo!=0) );
+			return 1;
+		}
+	}
+	else
+	{
+		ERRORMSG("Syntax: objectIsInRegion( int id)");
+	}
+	return 0;
+}
+
 
 int EventSystem::getDamageValue(lua_State *L)
 {
@@ -1230,6 +1255,42 @@ int EventSystem::getRolePlayers(lua_State *L)
 	}
 
 	return 1;
+}
+
+int EventSystem::teleportPlayer(lua_State *L)
+{
+	int argc = lua_gettop(L);
+	if (argc>=3 && lua_isnumber(L,1) && lua_isstring(L,2) && lua_isstring(L,3))
+	{
+		int id = lua_tointeger(L, 1);
+		std::string regname = lua_tostring(L, 2);
+		std::string locname = lua_tostring(L, 3);
+		
+		RegionLocation regloc;
+		regloc.first = regname;
+		regloc.second = locname;
+
+		WorldObject* wo =World::getWorld()->getPlayer(id);
+		if (wo !=0 && wo->getRegion() !=0)
+		{
+			if (wo->getRegion()->getName() == regname)
+			{
+				// Spieler ist schon in der Richtigen Region
+				Vector pos = wo->getRegion()->getLocation(locname);
+				wo->getRegion()->getFreePlace (wo->getShape(), wo->getLayer(), pos);
+				wo->moveTo(pos);
+			}
+			else
+			{
+				wo->getRegion()->insertPlayerTeleport(wo->getId(),regloc);
+			}
+		}
+	}
+	else
+	{
+		ERRORMSG("Syntax: objectIsInRegion( int playerid, string regionname, string locationname)");
+	}
+	return 0;
 }
 
 int EventSystem::createEvent(lua_State *L)

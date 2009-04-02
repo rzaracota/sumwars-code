@@ -55,6 +55,12 @@ void RegionCamera::update(float time)
 		// naechstes Etappenziel wurde erreicht
 		m_position  = pos;
 		m_next_positions.pop_front();
+		
+		if (m_next_positions.empty())
+		{
+			Trigger* tr = new Trigger("camera_move_complete");
+			m_region->insertTrigger(tr);
+		}
 	}
 	else
 	{
@@ -123,6 +129,8 @@ Region::Region(short dimx, short dimy, short id, std::string name, RegionData* d
 				
 		}
 	}
+	
+	m_camera.m_region = this;
 }
 
 Region::~Region()
@@ -1374,7 +1382,7 @@ void Region::update(float time)
 	}
 	
 	// Spieler die die Region per Wegpunkt verlassen bearbeiten
-	std::map<int,int>::iterator wt;
+	std::map<int,RegionLocation>::iterator wt;
 	for (wt = m_teleport_players.begin(); wt != m_teleport_players.end(); ++wt)
 	{
 		Player* pl = static_cast<Player*>(getObject (wt->first));
@@ -1383,7 +1391,8 @@ void Region::update(float time)
 		deleteObject(pl);
 
 		// Spieler in die neue Region einfuegen
-		World::getWorld()->insertPlayerIntoRegion(pl, wt->second, "WaypointLoc");
+		int id = World::getWorld()->getRegionId(wt->second.first);
+		World::getWorld()->insertPlayerIntoRegion(pl, id, wt->second.second);
 	}
 	m_teleport_players.clear();
 	

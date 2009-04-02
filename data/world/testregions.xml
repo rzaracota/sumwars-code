@@ -220,8 +220,29 @@
 								 return (trigger.command == 'attack')
 							 </Condition>
 							 <Effect>
-								 deleteObject(tree);
 								 setCutsceneMode(false);
+							 </Effect>
+						 </Event>
+						 
+						 <Event trigger ="camera_move_complete" once="true">
+							 <Effect>
+								 print("camera movement complete");
+							 </Effect>
+						 </Event>
+						 -->
+						 <!--
+						 <Event trigger ="player_moved" once="true">
+							 <Condition>
+								 return (unitIsInArea(trigger.player,'LichArea'))
+							 </Condition>
+							 <Effect>
+								 startTimer("test",10000);
+							 </Effect>
+						 </Event>
+						 
+						 <Event trigger ="test">
+							 <Effect>
+								 teleportPlayer(53,"region0","LichLocation");
 							 </Effect>
 						 </Event>
 						 -->

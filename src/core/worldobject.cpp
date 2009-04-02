@@ -237,5 +237,13 @@ bool WorldObject::setValue(std::string valname)
 		DEBUG("fraction is now %i",getFraction());
 		return true;
 	}
+	else if (valname == "position")
+	{
+		Vector pos = EventSystem::getVector(EventSystem::getLuaState(),-1);
+		
+		getRegion()->getFreePlace (getShape(), getLayer(), pos);
+		moveTo(pos);
+	}
+	
 	return false;
 }

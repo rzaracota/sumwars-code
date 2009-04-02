@@ -120,6 +120,13 @@ class EventSystem
 		static int setObjectValue(lua_State *L);
 		
 		/**
+		 * \fn static int objectIsInRegion(lua_State *L)
+		 * \brief Gibt aus, ob ein Objekt in der aktuellen Region ist
+		 * \param L Lua Status
+		 */
+		static int objectIsInRegion(lua_State *L);
+		
+		/**
 		 * \fn static int getDamageValue(lua_State *L)
 		 * \brief Setzt einen Wert des Schadensobjekts
 		 * \param L Lua Status
@@ -379,6 +386,13 @@ class EventSystem
 		 * \param L Lua Status
 		 **/
 		static int getRolePlayers(lua_State *L);
+		
+		/**
+		 * \fn static int teleportPlayer(lua_State *L)
+		 * \brief teleportiert Spieler in eine andere Region
+		 * \param L Lua Status
+		 */
+		static int teleportPlayer(lua_State *L);
 		
 		/**
 		 * \fn static int writeString(lua_State *L)
