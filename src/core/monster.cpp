@@ -554,6 +554,10 @@ void Monster::die()
 					if (pl2 == pl)
 						continue;
 					
+					// Spieler ist nicht in der Region
+					if (pl2 ==0)
+						continue;
+					
 					if (pl2->getShape()->getDistance(*sh) <20)
 					{
 						// volle xp nur wenn das Monster nicht zu stark war

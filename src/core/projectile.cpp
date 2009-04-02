@@ -128,7 +128,7 @@ bool Projectile::update(float time)
 	WorldObjectList::iterator i;
 	WorldObject* hit;
 
-	while (time>0)
+	while (time>0.1)
 	{
 		hitobj.clear();
 		dtime = time;
