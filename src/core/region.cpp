@@ -1560,6 +1560,22 @@ void Region::getRegionData(CharConv* cv)
 		cv->toBuffer(lt->second->m_y);
 		lt->second->m_item->toString(cv);
 	}
+	
+	// Cutscene modus
+	cv->toBuffer(m_cutscene_mode);
+	
+	// Licht
+	for (int i=0; i<3; ++i)
+		cv->toBuffer(m_ambient_light[i]);
+	for (int i=0; i<3; ++i)
+		cv->toBuffer(m_hero_light[i]);
+	for (int i=0; i<3; ++i)
+		cv->toBuffer(m_directional_light[i]);
+	
+	// Untergrund
+	cv->toBuffer(m_ground_material);
+	
+	
 }
 
 
@@ -1749,6 +1765,20 @@ void Region::setRegionData(CharConv* cv,WorldObjectMap* players)
 
 	}
 
+	// Cutscene modus
+	cv->fromBuffer(m_cutscene_mode);
+	
+	// Licht
+	for (int i=0; i<3; ++i)
+		cv->fromBuffer(m_ambient_light[i]);
+	for (int i=0; i<3; ++i)
+		cv->fromBuffer(m_hero_light[i]);
+	for (int i=0; i<3; ++i)
+		cv->fromBuffer(m_directional_light[i]);
+	
+	// Untergrund
+	cv->fromBuffer(m_ground_material);
+	
 }
 
 

@@ -171,7 +171,7 @@ void World::createRegion(short region)
 		rdata = it->second;
 
 		srand(1000);
-
+		//srand((unsigned int)time((time_t *)NULL));
 		Region* reg = MapGenerator::createRegion(rdata);
 		DEBUG5("region created %p for id %i",reg,region);
 
@@ -1321,7 +1321,7 @@ void World::updatePlayers()
 					}
 					else
 					{
-						// Daten loeschen
+						// Daten loeschen?
 					}
 
 					// Daten schreiben
