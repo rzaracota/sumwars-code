@@ -3296,8 +3296,8 @@ bool Creature::takeDamage(Damage* d)
 	if (World::getWorld()->getRelation(d->m_attacker_fraction,this) != HOSTILE)
 	{
 		// Verursacher ist nicht feindlich, kein Schaden
-		DEBUG("not hostile, no dmg");
-		DEBUG("fractions %i %i",d->m_attacker_fraction, this->getFraction());
+		DEBUG5("not hostile, no dmg");
+		DEBUG5("fractions %i %i",d->m_attacker_fraction, this->getFraction());
 		return false;
 	}
 	
@@ -4047,6 +4047,8 @@ void Creature::writeNetEvent(NetEvent* event, CharConv* cv)
 
 	if (event->m_data & NetEvent::DATA_TIMER)
 	{
+		cv->toBuffer(m_timer1);
+		cv->toBuffer(m_timer2);
 		cv->toBuffer(m_timer1_max);
 		cv->toBuffer(m_timer2_max);
 	}
@@ -4202,11 +4204,10 @@ void Creature::processNetEvent(NetEvent* event, CharConv* cv)
 
 	if (event->m_data & NetEvent::DATA_TIMER)
 	{
+		cv->fromBuffer(m_timer1);
+		cv->fromBuffer(m_timer2);
 		cv->fromBuffer(m_timer1_max);
 		cv->fromBuffer(m_timer2_max);
-		m_timer1 = m_timer1_max;
-		m_timer2 = m_timer2_max;
-
 	}
 
 	if (event->m_data & NetEvent::DATA_STATE)
