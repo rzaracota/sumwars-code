@@ -10,10 +10,6 @@ function isPlayer(obj)
 		return (getObjectValue(obj,"type") == "player")
 		end;
 
-function isNotPlayer(obj)
-		return (getObjectValue(obj,"type") ~= "player")
-		end;
-
 function isFixedObject(obj)
 		return (getObjectValue(obj,"type") == "fixed_object")
 		end;
@@ -65,9 +61,12 @@ function getPlayersInArea(area)
 		return filter(getObjectsInArea(area),isPlayer);
 end;
 
-
 function getMonstersInArea(area)
 		return filter(getObjectsInArea(area,"normal","monster"),isMonster);
+end;
+
+function getPartyleader()
+	return getRolePlayers("leader");
 end;
 
 function getPlayers()
@@ -80,10 +79,6 @@ end;
 
 function getMages()
 	return getRolePlayers("mage");
-end;
-
-function getMagesWithoutPlayers()
-	return filter(getRolePlayers("mage"),isNotPlayer);
 end;
 
 function getArchers()
@@ -101,4 +96,81 @@ end;
 function getFemales()
 	return getRolePlayers("female");
 end;
+
+
+-- Sprecher-Rollen verteilen
+function getRole(role)
+	if (role == "PL") then
+		return getPartyleader()[1];
+	elseif (role == "ANY") then
+		if (getPlayers()[2] ~= nil and getPlayers()[2] ~= getPartyleader[1]) then
+			return getPlayers()[2];
+		else
+			return getPlayers()[1];
+		end;
+	elseif (role == "ANYast") then
+		if (getPlayers()[3] ~= nil and getPlayers()[3] ~= getPartyleader[1]) then
+			return getPlayers()[3];
+		elseif (getPlayers()[2] ~= nil and getPlayers()[2] ~= getPartyleader[1]) then
+			return getPlayers()[2];
+		else
+			return getPlayers()[1];
+		end;
+	elseif (role == "ANYplus") then
+		if (getPlayers()[3] ~= nil and getPlayers()[3] ~= getPartyleader[1]) then
+			return getPlayers()[3];
+		else
+			return getPlayers()[2];
+		end;
+	elseif (role == "WAR") then
+		if (getWarriors()[1] ~= nil) then
+			return getWarriors()[1];
+		else
+			return getRole("ANY");
+		end;
+	elseif (role == "PRI") then
+		if (getPriests()[1] ~= nil) then
+			return getPriests()[1];
+		else
+			return getRole("ANY");
+		end;
+	elseif (role == "ARC") then
+		if (getArchers()[1] ~= nil) then
+			return getArchers()[1];
+		else
+			return getRole("ANY");
+		end;
+	elseif (role == "MAG") then
+		if (getMages()[1] ~= nil) then
+			return getMages()[1];
+		else
+			return getRole("ANY");
+		end;
+	elseif (role == "WARast") then
+		return getWarriors()[1];
+	elseif (role == "PRIast") then
+		return getPriests()[1];
+	elseif (role == "ARCast") then
+		return getArchers()[1];
+	elseif (role == "MAGast") then
+		return getMages()[1];
+	end;
+end;
+
+
+function addStandardSpeakers()
+	addSpeaker(getRole("PL"),"PL");
+	addSpeaker(getRole("ANY"),"ANY");
+	addSpeaker(getRole("ANYast"),"ANYast");
+	addSpeaker(getRole("ANYplus"),"ANYplus");
+	addSpeaker(getRole("WAR"),"WAR");
+	addSpeaker(getRole("PRI"),"PRI");
+	addSpeaker(getRole("ARC"),"ARC");
+	addSpeaker(getRole("MAG"),"MAG");
+	addSpeaker(getRole("WARast"),"WARast");
+	addSpeaker(getRole("PRIast"),"PRIast");
+	addSpeaker(getRole("ARCast"),"ARCast");
+	addSpeaker(getRole("MAGast"),"MAGast");
+end;
+
 
