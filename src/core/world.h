@@ -501,11 +501,8 @@ public:
 	 * \param port Port fuer den Netzverkehr
 	 *  \param max_players Maximale Spieleranzahl
 	 */
-	static void createWorld(bool server, int port, bool cooperative, int max_players)
-	{
-		m_world = new World(server, cooperative, max_players);
-		m_world->init(port);
-	}
+	static void createWorld(bool server, int port, bool cooperative, int max_players);
+	
 	
 	/**
 	 * \fn static void deleteWorld()

@@ -393,6 +393,12 @@ bool Player::onGamefieldClick(ClientCommand* command)
 		return true;
 	}
 	
+	if (getRegion()->getCutsceneMode())
+	{
+		return true;
+	}
+	
+	
 	if (command->m_action>=192)
 	{
 		ERRORMSG("invalid action");

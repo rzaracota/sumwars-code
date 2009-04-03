@@ -28,6 +28,15 @@
 
 World* World::m_world=0;
 
+void  World::createWorld(bool server, int port, bool cooperative, int max_players)
+{
+	if (m_world != 0)
+		delete m_world;
+	
+	m_world = new World(server, cooperative, max_players);
+	m_world->init(port);
+}
+
 /**
  * Constructors/Destructors
  */
