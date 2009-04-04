@@ -2953,8 +2953,8 @@ void Creature::calcAbilityDamage(Action::ActionType act,Damage& dmg)
 			break;
 
 		case	Action::FIRE_WALL:
-			dmg.m_min_damage[Damage::FIRE] = m_base_attr_mod.m_magic_power/1500.0;
-			dmg.m_max_damage[Damage::FIRE] = m_base_attr_mod.m_magic_power/1000.0;
+			dmg.m_min_damage[Damage::FIRE] = m_base_attr_mod.m_magic_power/3.0;
+			dmg.m_max_damage[Damage::FIRE] = m_base_attr_mod.m_magic_power/2.0;
 			dmg.m_min_damage[Damage::ICE]=0;
 			dmg.m_max_damage[Damage::ICE]=0;
 			dmg.m_special_flags |= Damage::UNBLOCKABLE;

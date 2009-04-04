@@ -275,10 +275,7 @@ bool Projectile::update(float time)
 		{
 			// Schaden austeilen
 			hit = (*i);
-			float m = m_damage.m_multiplier[Damage::FIRE];
-			m_damage.m_multiplier[Damage::FIRE] *= 500;
 			hit->takeDamage(&m_damage);
-			m_damage.m_multiplier[Damage::FIRE] = m;
 		}
 	}
 
