@@ -173,7 +173,8 @@ bool  ObjectLoader::loadMonster(TiXmlNode* node)
 					attr.getFloat("max_health",data->m_base_attr.m_max_health,1);
 					attr.getShort("armor",data->m_base_attr.m_armor,0);
 					attr.getShort("block",data->m_base_attr.m_block,0);
-					attr.getShort("armor",data->m_base_attr.m_attack,0);
+					attr.getShort("attack",data->m_base_attr.m_attack,1);
+					attr.getShort("power",data->m_base_attr.m_power,1);
 					attr.getShort("strength",data->m_base_attr.m_strength,1);
 					attr.getShort("dexterity",data->m_base_attr.m_dexterity,1);
 					attr.getShort("magic_power",data->m_base_attr.m_magic_power,1);

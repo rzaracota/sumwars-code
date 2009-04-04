@@ -494,6 +494,15 @@ public:
 	}
 	
 	/**
+	 * \fn static short getVersion()
+	 * \brief Gibt die Version aus
+	 */
+	static short getVersion()
+	{
+		return m_version;
+	}
+	
+	/**
 	 * \fn static void createWorld(bool server, int port,  bool cooperative, int max_players)
 	 * \brief Erzeugt die Spielwelt
 	 * \param server auf true gesetzt, wenn der Rechner der Server ist
@@ -636,5 +645,11 @@ private:
 	 * \brief Objekt fuer die Spielwelt
 	 */
 	static World* m_world;
+	
+	/**
+	 * \var static short m_version
+	 * \brief Versionsnummer
+	 */
+	static short m_version;
 };
 #endif //WORLD_H

@@ -229,6 +229,25 @@ class CharConv
 			(*m_stream) << "\n";
 	}
 	
+	/**
+	 * \fn  int getId()
+	 * \brief Gibt die ID aus
+	 */
+	int getId()
+	{
+		return m_id;
+	}
+	
+	/**
+	 * \fn void setId(int id)
+	 * \brief Setzt die ID
+	 * \param id ID
+	 */
+	void setId(int id)
+	{
+		m_id = id;
+	}
+	
 	
 	private:
 		/**
@@ -248,6 +267,12 @@ class CharConv
 		 * \brief Ein/Ausgabestrom - wenn nicht auf 0 gesetzt wird dieser Strom verwendet
 		 */
 		std::iostream* m_stream;
+		
+		/**
+		 * \var int m_id
+		 * \brief ID
+		 */
+		int m_id;
 	
 };
 

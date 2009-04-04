@@ -174,7 +174,8 @@ bool Player::init()
 		dyn->m_health = 200;
 		bas->m_max_health = 200;
 		bas->m_armor = 20;
-		bas->m_attack = 40;
+		bas->m_attack = 30;
+		bas->m_power = 30;
 		bas->m_strength = 50;
 		bas->m_dexterity = 20;
 		bas->m_magic_power = 10;
@@ -207,6 +208,7 @@ bool Player::init()
 		bas->m_max_health = 150;
 		bas->m_armor = 15;
 		bas->m_attack = 30;
+		bas->m_power = 20;
 		bas->m_strength = 25;
 		bas->m_dexterity = 45;
 		bas->m_magic_power = 15;
@@ -240,6 +242,7 @@ bool Player::init()
 		bas->m_max_health = 100;
 		bas->m_armor = 15;
 		bas->m_attack = 10;
+		bas->m_power = 10;
 		bas->m_strength = 15;
 		bas->m_dexterity = 15;
 		bas->m_magic_power = 45;
@@ -276,7 +279,8 @@ bool Player::init()
 		bas->m_level =1;
 		bas->m_max_health = 200;
 		bas->m_armor = 20;
-		bas->m_attack = 10;
+		bas->m_attack = 20;
+		bas->m_power = 30;
 		bas->m_strength = 25;
 		bas->m_dexterity = 15;
 		bas->m_magic_power = 15;
@@ -2045,7 +2049,7 @@ void Player::toSavegame(CharConv* cv)
 
 	int i;
 	// Version richtig setzen
-	cv->toBuffer((short) 10);
+	cv->toBuffer((short) World::getVersion());
 	
 	cv->toBuffer(getTypeInfo()->m_subtype,10);
 	cv->toBuffer(m_name,32);
@@ -2058,6 +2062,8 @@ void Player::toSavegame(CharConv* cv)
 
 	cv->toBuffer(getBaseAttr()->m_armor);
 	cv->toBuffer(getBaseAttr()->m_attack);
+	if (World::getVersion()>=100)
+		cv->toBuffer(getBaseAttr()->m_power);
 	cv->toBuffer(getBaseAttr()->m_strength);
 	cv->toBuffer(getBaseAttr()->m_dexterity);
 	cv->toBuffer(getBaseAttr()->m_magic_power);
@@ -2154,6 +2160,11 @@ void Player::fromSavegame(CharConv* cv, bool local)
 
 	cv->fromBuffer(getBaseAttr()->m_armor);
 	cv->fromBuffer(getBaseAttr()->m_attack);
+	if (version>=100)
+		cv->fromBuffer(getBaseAttr()->m_power);
+	else
+		getBaseAttr()->m_power = 20;
+	
 	cv->fromBuffer<short>(getBaseAttr()->m_strength);
 	cv->fromBuffer<short>(getBaseAttr()->m_dexterity);
 	cv->fromBuffer<short>(getBaseAttr()->m_magic_power);

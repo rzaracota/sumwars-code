@@ -19,6 +19,7 @@
 #include "creature.h"
 #include <sys/time.h>
 #include "eventsystem.h"
+#include "math.h"
 
 //Constructors/Destructors
 Creature::Creature(int id) : WorldObject(id)
@@ -133,7 +134,8 @@ bool Creature::init()
 	
 	m_dyn_attr.m_health = getBaseAttr()->m_max_health;
 	getBaseAttrMod()->m_max_health = getBaseAttr()->m_max_health;
-
+	getBaseAttrMod()->m_power =1;
+	
 	m_event_mask =0;
 	
 	m_refname = "";
@@ -2699,6 +2701,7 @@ void Creature::calcBaseDamage(Action::ActionType act,Damage& dmg)
 		dmg.m_attack += basm->m_attack;
 		dmg.m_attack += basm->m_dexterity/2;
 
+		dmg.m_power += basm->m_power;
 		dmg.m_power += basm->m_strength/2;
 
 		dmg.m_special_flags = Damage::NOFLAGS;
@@ -2730,6 +2733,7 @@ void Creature::calcBaseDamage(Action::ActionType act,Damage& dmg)
 		dmg.m_attack += basm->m_attack;
 		dmg.m_attack += basm->m_dexterity/2;
 
+		dmg.m_power += basm->m_power;
 		dmg.m_power += basm->m_dexterity/2;
 
 		dmg.m_special_flags = Damage::NOFLAGS;
@@ -2747,6 +2751,7 @@ void Creature::calcBaseDamage(Action::ActionType act,Damage& dmg)
 		dmg.m_attack += basm->m_attack;
 		dmg.m_attack += basm->m_dexterity/2;
 
+		dmg.m_power += basm->m_power;
 		dmg.m_power += basm->m_willpower/2;
 
 		dmg.m_special_flags = Damage::NOFLAGS;
@@ -3229,6 +3234,7 @@ void Creature::calcBaseAttrMod()
 	m_base_attr_mod.m_armor = m_base_attr.m_armor;
 	m_base_attr_mod.m_block =m_base_attr.m_block;
 	m_base_attr_mod.m_attack =m_base_attr.m_attack;
+	m_base_attr_mod.m_power =m_base_attr.m_power;
 	m_base_attr_mod.m_strength =m_base_attr.m_strength;
 	m_base_attr_mod.m_dexterity =m_base_attr.m_dexterity;
 	m_base_attr_mod.m_willpower =m_base_attr.m_willpower;
@@ -3320,12 +3326,13 @@ bool Creature::takeDamage(Damage* d)
 		float block = m_base_attr_mod.m_block  ;
 
 
-		// Chance zu blocken ist 1 - Attackewert / Blockwert
-		if (d->m_attack>0 && block>0 && d->m_attack<block)
+		// Chance zu blocken
+		if (d->m_attack>0 && block>0)
 		{
-			if (rand()*rez>d->m_attack/block)
+			float blockchance = 1-atan(d->m_attack/block)/(3.1415/2);
+			DEBUG5("attack %f block %f -> blockchance %f",d->m_attack,block, blockchance);
+			if (Random::random()<blockchance)
 			{
-				DEBUG5("blocked");
 				// Schaden abgewehrt
 				return true;
 			}
@@ -3374,9 +3381,11 @@ bool Creature::takeDamage(Damage* d)
 		armor *=2;
 
 
-	if (d->m_power>0 && armor>0 && armor>d->m_power && !(d->m_special_flags & Damage::IGNORE_ARMOR))
+	if (armor>0 && !(d->m_special_flags & Damage::IGNORE_ARMOR))
 	{
-		dmgt = dmgt*d->m_power/armor;
+		float armorfak = atan(d->m_power/armor)/(3.1415/2);
+		DEBUG5("power %f armor %f -> damage perc. %f",d->m_power, armor, armorfak);
+		dmgt = dmgt*armorfak;
 	}
 
 	dmg += dmgt;
@@ -3515,6 +3524,8 @@ void Creature::applyBaseAttrMod(CreatureBaseAttrMod* mod, bool add)
 	m_base_attr_mod.m_attack_speed += mod->m_ddexterity*20;
 	m_dyn_attr.m_health *= m_base_attr_mod.m_max_health /oldmaxhp;
 
+	m_base_attr_mod.m_attack +=mod->m_dattack;
+	m_base_attr_mod.m_power +=mod->m_dpower;
 
 	m_base_attr_mod.m_attack_speed +=mod->m_dattack_speed;
 
@@ -3598,6 +3609,8 @@ bool Creature::removeBaseAttrMod(CreatureBaseAttrMod* mod)
 
 	m_dyn_attr.m_health *= m_base_attr_mod.m_max_health /oldmaxhp;
 
+	m_base_attr_mod.m_attack -=mod->m_dattack;
+	m_base_attr_mod.m_power -=mod->m_dpower;
 
 	// Modifikationen feststellen
 	if (mod->m_dwalk_speed!=0)

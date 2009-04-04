@@ -58,9 +58,15 @@ struct CreatureBaseAttr
 	
 	/**
 	 * \var m_attack;
-	 * \brief Attackewert, beeinfluss die Trefferchance
+	 * \brief Attackewert, beeinflusst die Trefferchance
 	 */
 	short m_attack;
+	
+	/**
+	 * \var m_power;
+	 * \brief Durchschlagskraft, beeinflusst Schaden gegen gepanzerte Feinde
+	 */
+	short m_power;
 	
 	
 	/**
@@ -196,6 +202,11 @@ struct CreatureBaseAttrMod
 	 */
 	short m_dattack;
 	
+	/**
+	 * \var m_dpower;
+	 * \brief Aenderung der Durchschlagskraft, beeinflusst Schaden gegen gepanzerte Feinde
+	 */
+	short m_dpower;
 	
 	/**
 	 * \var m_dstrength
@@ -482,6 +493,49 @@ struct CreatureTradeInfo
 	 * \brief zuletzt verkauftes Item
 	 */
 	Item* m_last_sold_item;
+};
+
+/**
+ * \struct FightStatistic
+ * \brief einige Statistische Daten zum Kampf
+ */
+struct FightStatistic
+{
+	/**
+	 * \var std::string m_last_attacker
+	 * \brief Typ des letzten Angreifers
+	 */
+	std::string m_last_attacker;
+	
+	/**
+	 * \var std::string m_last_attacked
+	 * \brief Typ des zuletzt angegriffenen
+	 */
+	std::string m_last_attacked;
+	
+	/**
+	 * \var float m_hit_chance
+	 * \brief Chance den Gegner zu treffen
+	 */
+	float m_hit_chance;
+	
+	/**
+	 * \var float m_damage_dealt_perc
+	 * \brief Prozentsatz ausgeteilter Schaden
+	 */
+	float m_damage_dealt_perc;
+	
+	/**
+	 * \var float m_damage_got_perc
+	 * \brief Prozentsatz erhaltener Schaden
+	 */
+	float m_damage_got_perc;
+	
+	/**
+	 * \var float m_block_chance
+	 * \brief Chance zu Blocken
+	 */
+	float m_block_chance;
 };
 
 #endif
