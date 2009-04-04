@@ -175,6 +175,31 @@ void Document::loadSavegame()
 		
 		World::getWorld()->handleSavegame(&cv2);
 
+		// Kurztasten einlesen
+		ShortkeyMap::iterator it;
+		// alte Kurztasten entfernen
+		for (it = m_shortkey_map.begin(); it != m_shortkey_map.end();)
+		{
+			if (it->second >= USE_SKILL_LEFT && it->second < USE_SKILL_RIGHT + 200)
+			{
+				m_shortkey_map.erase(it++);
+			}
+			else
+			{
+				++it;
+			}
+		}
+		
+		short key,dest;
+		int nr =0;
+		save->fromBuffer(nr);
+		for (int i=0; i<nr; ++i)
+		{
+			save->fromBuffer<short>(key);
+			save->fromBuffer<short>(dest);
+			installShortkey((KeyCode) key, (ShortkeyDestination) dest);
+		}
+		
 		// aktuelle Aktion setzen
 		m_state =RUNNING;
 		m_gui_state.m_shown_windows = NO_WINDOWS;
@@ -1505,6 +1530,27 @@ void* Document::writeSaveFile(void* doc_ptr)
 	
 	doc->getLocalPlayer()->toSavegame(save);
 	
+	// Shortkeys hinzufuegen
+	ShortkeyMap::iterator it;
+	int nr =0;
+	for (it = doc->m_shortkey_map.begin(); it != doc->m_shortkey_map.end(); ++it)
+	{
+		if (it->second >= USE_SKILL_LEFT && it->second < USE_SKILL_RIGHT + 200)
+			nr ++;
+	}
+	save->printNewline();
+	save->toBuffer(nr);
+	save->printNewline();
+	for (it = doc->m_shortkey_map.begin(); it != doc->m_shortkey_map.end(); ++it)
+	{
+		if (it->second >= USE_SKILL_LEFT && it->second < USE_SKILL_RIGHT + 200)
+		{
+			save->toBuffer<short>(it->first);
+			save->toBuffer<short>(it->second);
+			save->printNewline();
+		}
+	}
+	
 	// Savegame schreiben
 	std::stringstream* stream = dynamic_cast<std::stringstream*> (save->getStream());
 	char* bp=0;
@@ -1565,10 +1611,19 @@ void Document::saveSettings()
 		ShortkeyMap::iterator it;
 		std::set<KeyCode>::iterator jt;
 
-		file << m_shortkey_map.size()<<"\n";
+		int nr =0;
 		for (it = m_shortkey_map.begin(); it != m_shortkey_map.end(); ++it)
 		{
-			file << (int) it->first << " " << (int) it->second << "\n";
+			if (it->second < USE_SKILL_LEFT || it->second > USE_SKILL_RIGHT + 200)
+				nr ++;
+		}
+		file << nr<<"\n";
+		for (it = m_shortkey_map.begin(); it != m_shortkey_map.end(); ++it)
+		{
+			if (it->second < USE_SKILL_LEFT || it->second > USE_SKILL_RIGHT + 200)
+			{
+				file << (int) it->first << " " << (int) it->second << "\n";
+			}
 		}
 		
 		file << m_special_keys.size()<<"\n";

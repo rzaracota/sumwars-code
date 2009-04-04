@@ -23,9 +23,13 @@ SkillTree::SkillTree(Document* doc, OIS::Keyboard *keyboard)
 	std::string lname,bname;
 	unsigned int act;
 	CEGUI::UVector2 pos;
+	m_skill_position[Action::ATTACK] = CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.05f));
+	m_skill_position[Action::RANGE_ATTACK] = CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.05f));
+	m_skill_position[Action::MAGIC_ATTACK] = CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.05f));
+	m_skill_position[Action::HOLY_ATTACK] = CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.05f));
 	
 	m_skill_position[Action::FIRE_BOLT] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.05f));
-	m_skill_position[Action:: FIRE_STRIKE] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.25f));
+	m_skill_position[Action::FIRE_STRIKE] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.25f));
 	m_skill_position[Action::FIRE_WAVE] = CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.65f));
 	m_skill_position[Action::FIRE_STORM] = CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.85f));
 	m_skill_position[Action::FIRE_BALL] = CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.25f));
@@ -739,7 +743,24 @@ void SkillTree::update()
 			}
 			label->setPosition(pos);
 		}
+		
+		if (!label->isVisible())
+		{
+			label->setVisible(true);
+		}
 		nr ++;
+	}
+	
+	
+	// restliche Labels ausblenden
+	for (; nr<acount; nr++)
+	{
+		stream.str("");
+		stream << "SkillShortkeyLabel";
+		stream << nr;
+			
+		label = win_mgr.getWindow(stream.str());
+		label->setVisible(false);
 	}
 }
 
