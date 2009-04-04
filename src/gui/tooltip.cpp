@@ -24,10 +24,10 @@ CEGUI::Size TextWrapTooltip::getTextSize_impl() const
 			width = maxsize.d_x;
 		}
 		
-		area.setWidth(width);
-		float height = PixelAligned(fnt->getFormattedLineCount(d_text, area, CEGUI::WordWrapLeftAligned) * fnt->getLineSpacing());
+		area.setWidth(width-6);
+		float height = PixelAligned(fnt->getFormattedLineCount(d_text, area, CEGUI::WordWrapCentred) * fnt->getLineSpacing());
 		
-		return CEGUI::Size(width, height);
+		return CEGUI::Size(width+6, height);
 	}
 	else
 	{
