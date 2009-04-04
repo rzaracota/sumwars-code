@@ -537,7 +537,7 @@ void Action::init()
 	a = &(Action::m_base_info[Action::FIRE_BOLT]);
 	a->m_timer_nr=1;
 	a->m_standard_time=701;
-	a->m_timer=4000;
+	a->m_timer=2500;
 	a->m_base_action = Action::MAGIC_ATTACK;
 	a->m_critical_perc=0.8;
 	a->m_distance = RANGED;
@@ -554,7 +554,7 @@ void Action::init()
 	a = &(Action::m_base_info[Action::FIRE_STRIKE]);
 	a->m_timer_nr=1;
 	a->m_standard_time=701;
-	a->m_timer=4000;
+	a->m_timer=2500;
 	a->m_base_action = Action::MAGIC_ATTACK;
 	a->m_critical_perc=0.8;
 	a->m_distance = RANGED;
@@ -670,7 +670,7 @@ void Action::init()
 	a = &(Action::m_base_info[Action::ICE_BOLT]);
 	a->m_timer_nr=1;
 	a->m_standard_time=701;
-	a->m_timer=4000;
+	a->m_timer=3000;
 	a->m_base_action = Action::MAGIC_ATTACK;
 	a->m_critical_perc=0.8;
 	a->m_distance = RANGED;
@@ -688,7 +688,7 @@ void Action::init()
 	a = &(Action::m_base_info[Action::ICE_SPIKE]);
 	a->m_timer_nr=1;
 	a->m_standard_time=701;
-	a->m_timer=4000;
+	a->m_timer=3000;
 	a->m_base_action = Action::MAGIC_ATTACK;
 	a->m_critical_perc=0.8;
 	a->m_distance = RANGED;
@@ -804,7 +804,7 @@ void Action::init()
 	a = &(Action::m_base_info[Action::LIGHTNING]);
 	a->m_timer_nr=1;
 	a->m_standard_time=501;
-	a->m_timer=4000;
+	a->m_timer=2000;
 	a->m_base_action = Action::MAGIC_ATTACK;
 	a->m_critical_perc=0.8;
 	a->m_distance = RANGED;
@@ -821,7 +821,7 @@ void Action::init()
 	a = &(Action::m_base_info[Action::LIGHTNING_STRIKE]);
 	a->m_timer_nr=1;
 	a->m_standard_time=501;
-	a->m_timer=4000;
+	a->m_timer=2000;
 	a->m_base_action = Action::MAGIC_ATTACK;
 	a->m_critical_perc=0.8;
 	a->m_distance = RANGED;
@@ -1008,7 +1008,7 @@ void Action::init()
 	a = &(Action::m_base_info[Action::PIERCE]);
 	a->m_timer_nr=1;
 	a->m_standard_time=1;
-	a->m_timer=3000;
+	a->m_timer=2000;
 	a->m_base_action = Action::RANGE_ATTACK;
 	a->m_critical_perc=0.66;
 	a->m_distance = RANGED;

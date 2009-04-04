@@ -8,6 +8,10 @@
 	<SubGroup subtype="goblin" number="3" prob="1.0" />
 </MonsterGroup>
 
+<MonsterGroup name="goblins_5" >
+	<SubGroup subtype="goblin" number="10" prob="1.0" />
+</MonsterGroup>
+
 <MonsterGroup name="goblins_10" >
 	<SubGroup subtype="goblin" number="10" prob="1.0" />
 </MonsterGroup>

@@ -17,7 +17,7 @@ Projectile::Projectile(ProjectileType type, Damage* dmg, int id)
 	m_last_hit_object_id =0;
 	m_flags =0;
 	m_state = FLYING;
-	m_timer_limit = 1000;
+	m_timer_limit = 1500;
 	m_counter =0;
 	m_goal_object =0;
 

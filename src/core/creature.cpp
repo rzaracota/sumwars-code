@@ -2851,7 +2851,7 @@ void Creature::calcAbilityDamage(Action::ActionType act,Damage& dmg)
 	switch (act)
 	{
 		case Action::BASH:
-			dmg.m_multiplier[Damage::PHYSICAL] *= 3;
+			dmg.m_multiplier[Damage::PHYSICAL] *= 2;
 			break;
 
 		case Action::HAMMER_BASH:
@@ -2905,8 +2905,8 @@ void Creature::calcAbilityDamage(Action::ActionType act,Damage& dmg)
 			break;
 
 		case Action::FIRE_BOLT:
-			dmg.m_min_damage[Damage::FIRE] += m_base_attr_mod.m_magic_power*2;
-			dmg.m_max_damage[Damage::FIRE] += m_base_attr_mod.m_magic_power*3;
+			dmg.m_min_damage[Damage::FIRE] += m_base_attr_mod.m_magic_power*1;
+			dmg.m_max_damage[Damage::FIRE] += m_base_attr_mod.m_magic_power*2;
 			dmg.m_min_damage[Damage::ICE]=0;
 			dmg.m_max_damage[Damage::ICE]=0;
 			dmg.m_special_flags |= Damage::UNBLOCKABLE;
@@ -2961,8 +2961,8 @@ void Creature::calcAbilityDamage(Action::ActionType act,Damage& dmg)
 			break;
 
 		case	Action::ICE_BOLT:
-			dmg.m_min_damage[Damage::ICE] += m_base_attr_mod.m_magic_power*2;
-			dmg.m_max_damage[Damage::ICE] += m_base_attr_mod.m_magic_power*3;
+			dmg.m_min_damage[Damage::ICE] += m_base_attr_mod.m_magic_power*1.6;
+			dmg.m_max_damage[Damage::ICE] += m_base_attr_mod.m_magic_power*2.2;
 			dmg.m_min_damage[Damage::FIRE]=0;
 			dmg.m_max_damage[Damage::FIRE]=0;
 			dmg.m_special_flags |= Damage::UNBLOCKABLE;
@@ -3016,13 +3016,13 @@ void Creature::calcAbilityDamage(Action::ActionType act,Damage& dmg)
 			break;
 
 		case Action::LIGHTNING:
-			dmg.m_min_damage[Damage::AIR] += m_base_attr_mod.m_magic_power*1.5;
-			dmg.m_max_damage[Damage::AIR] += m_base_attr_mod.m_magic_power*3.5;
+			dmg.m_min_damage[Damage::AIR] += m_base_attr_mod.m_magic_power*0.5;
+			dmg.m_max_damage[Damage::AIR] += m_base_attr_mod.m_magic_power*2.5;
 			dmg.m_special_flags |= Damage::UNBLOCKABLE;
 			break;
 
 		case Action::LIGHTNING_STRIKE:
-			dmg.m_min_damage[Damage::AIR] += m_base_attr_mod.m_magic_power*2.3;
+			dmg.m_min_damage[Damage::AIR] += m_base_attr_mod.m_magic_power*1;
 			dmg.m_max_damage[Damage::AIR] += m_base_attr_mod.m_magic_power*5;
 			dmg.m_special_flags |= Damage::UNBLOCKABLE;
 			break;
@@ -3070,6 +3070,7 @@ void Creature::calcAbilityDamage(Action::ActionType act,Damage& dmg)
 			break;
 
 		case Action::PIERCE:
+			dmg.m_multiplier[Damage::PHYSICAL] *=1.5;
 			dmg.m_special_flags |= Damage::UNBLOCKABLE;
 			break;
 
@@ -3369,8 +3370,8 @@ bool Creature::takeDamage(Damage* d)
 	float armor = m_base_attr_mod.m_armor;
 
 	// Faehigkeit Turm in der Schlacht
-	if (checkAbility(Action::STEADFAST) && m_base_attr_mod.m_max_health *0.3 > m_dyn_attr.m_health)
-		armor *=1.5;
+	if (checkAbility(Action::STEADFAST) && m_base_attr_mod.m_max_health *0.4 > m_dyn_attr.m_health)
+		armor *=2;
 
 
 	if (d->m_power>0 && armor>0 && armor>d->m_power && !(d->m_special_flags & Damage::IGNORE_ARMOR))

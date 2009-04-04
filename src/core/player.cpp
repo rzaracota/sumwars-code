@@ -1724,7 +1724,7 @@ void Player::calcBaseAttrMod()
 	// Faehigkeit ausweichen
 	if (checkAbility(Action::EVADE))
 	{
-		getBaseAttrMod()->m_block += getBaseAttrMod()->m_dexterity/ 2;
+		getBaseAttrMod()->m_block += getBaseAttrMod()->m_dexterity;
 	}
 
 		// Faehigkeit Windwandern
