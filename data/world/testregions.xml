@@ -45,6 +45,26 @@
 -->
 	 
 	 <World>
+		 <Region id="1001" name="sandbox">
+			 <Settings dimx="16" dimy="16" area_percent="0.40" complexity="0.4" granularity="8" ground="grass1"/>
+			 <ExitDirections north="false" south="true" west="false" east="false" />
+			 <Exits>
+				 <Exit name="exit_south" destination_region="region1" destination_location="entry_north" >
+					 <Shape shape="RECT" extent_x="4.0" extent_y ="4.0" />
+				 </Exit>
+			 </Exits> 
+			 <Environments>
+				 <Environment height="0.6" name="meadow" />
+				 <Environment height="1.0" name="hills" />
+			 </Environments>
+			 <ReviveLocation  location="entry_south" />
+			
+			<SpawnGroups>
+				<SpawnGroup group_name="goblins_10" number="10" />
+			</SpawnGroups>
+			
+		 </Region>
+		 
 		 <!-- soon to be tutorial-Region-->
 		 <Region id="0" name="region0">
 			 <Settings dimx="64" dimy="64" area_percent="0.30" complexity="0.4" granularity="8" ground="grass1"/>
@@ -114,7 +134,7 @@
 				 </Effect>
 			 </Event>
 			 -->
-			 
+			 <!--
 			 <Event trigger ="create_template">
 				 <Condition>
 					 return (trigger.templname == "herbalBushes_test")
@@ -134,7 +154,7 @@
 					 deleteObject(trigger.tree);
 				 </Effect>
 			 </Event>
-			 
+			 -->
 			 <!--
 				 <Event trigger ="player_moved" once = "true">
 					 <Condition>

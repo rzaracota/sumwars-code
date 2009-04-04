@@ -490,13 +490,13 @@ class Region
 		void createObjectGroup(ObjectGroupTemplateName templname, Vector position, float angle=0, std::string name ="");
 		
 		/**
-		 * \fn void createMonsterGroup(MonsterGroupName mgname, Vector position, float radius=4)
+		 * \fn void createMonsterGroup(MonsterGroupName mgname, Vector position, float radius=3)
 		 * \brief erzeugt an der angegebenen Stelle eine Monstergruppe
 		 * \param mgname Name der Monstergruppe
 		 * \param position Ort an dem die Gruppe erzeugt wird
 		 * \param radius Umkreis in dem die Monster verteilt werden
 		 */
-		void createMonsterGroup(MonsterGroupName mgname, Vector position, float radius=4);
+		void createMonsterGroup(MonsterGroupName mgname, Vector position, float radius=3);
 
 		/**
 		 * \fn bool getObjectsInShape( Shape* shape,  WorldObjectList* result,short layer=WorldObject::LAYER_ALL, short group = WorldObject::GROUP_ALL, WorldObject* omit=0, bool empty_test = false );
