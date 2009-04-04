@@ -698,7 +698,7 @@ void SkillTree::update()
 			label->setSize(CEGUI::UVector2(cegui_reldim(0.07f), cegui_reldim( 0.05f)));
 			label->setAlpha(1.0);
 			label->setMousePassThroughEnabled(true);
-			
+			label->setAlwaysOnTop(true);
 		}
 		else
 		{
