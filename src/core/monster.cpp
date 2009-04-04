@@ -57,6 +57,7 @@ Monster::Monster( int id,MonsterBasicData& data)
 	m_ai.m_visible_goals = new WorldObjectValueList;
 	m_ai.m_state = Ai::ACTIVE;
 	m_ai.m_vars = data.m_ai_vars;
+	m_ai.m_chase_player_id =0;
 	
 	calcBaseAttrMod();
 	
@@ -484,6 +485,35 @@ bool Monster::takeDamage(Damage* damage)
 	{
 		if (m_ai.m_mod_time[TAUNT]<=0 || m_ai.m_chase_player_id==0)
 		{
+			// umliegende Monster alarmieren
+			if (m_ai.m_chase_player_id ==0)
+			{
+				Shape shape = *(getShape());
+				shape.m_radius = m_ai.m_vars.m_warn_radius;
+				WorldObjectList res;
+				WorldObjectList::iterator it;
+				
+				getRegion()->getObjectsInShape(&shape, &res, LAYER_BASE | LAYER_AIR, CREATURE_ONLY,this);
+				Monster * mon;
+				Ai* ai;
+				for (it = res.begin(); it!= res.end(); ++it)
+				{
+					mon = dynamic_cast<Monster*>(*it);
+					
+					if (mon != 0)
+					{
+						if (World::getWorld()->getRelation(getFraction(),mon) == ALLIED)
+						{
+							ai = &(mon->getAi());
+							if (ai->m_chase_player_id==0)
+							{
+								ai->m_chase_player_id = damage->m_attacker_id;
+							}
+						}
+					}
+				}
+			}
+			
 			m_ai.m_chase_player_id =damage->m_attacker_id;
 		}
 		

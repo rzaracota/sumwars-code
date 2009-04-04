@@ -223,6 +223,15 @@ class Monster : public Creature {
 			// Monster per default immer einhaendig;
 			return Action::ONE_HANDED;
 		}
+		
+		/**
+		 * \fn Ai& getAi()
+		 * \brief Gibt das AI Objekt des Monsters aus
+		 */
+		Ai& getAi()
+		{
+			return m_ai;
+		}
 	
 	protected:
 		

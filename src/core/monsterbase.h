@@ -40,6 +40,12 @@ struct MonsterAIVars
 	 * \brief Gibt an, wie lange nach einem Angriff das Monster noch versucht den Angreifer zu stellen
 	 */
 	float m_chase_distance;
+	
+	/**
+	 * \var float m_warn_radius
+	 * \brief Radius in dem Verbuendete gewarnt werden, wenn eines der Monster angegriffen wird
+	 */
+	float m_warn_radius;
 };
 
 /**

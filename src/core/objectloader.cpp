@@ -295,6 +295,7 @@ bool  ObjectLoader::loadMonster(TiXmlNode* node)
 					attr.getFloat("ai_action_range",data-> m_ai_vars.m_action_range,data-> m_ai_vars.m_sight_range);
 					attr.getFloat("ai_randaction_prob",data-> m_ai_vars.m_randaction_prob,0);
 					attr.getFloat("ai_chase_range",data-> m_ai_vars.m_chase_distance,20);
+					attr.getFloat("ai_warn_range",data-> m_ai_vars.m_warn_radius,4);
 					
 				}
 				else if (child->Type()!=TiXmlNode::COMMENT)
