@@ -126,6 +126,7 @@ bool MainWindow::setupMainMenu()
 		wnd = new JoinGameWindow(m_document);
 		m_sub_windows["JoinGame"] = wnd;
 		m_main_menu->addChildWindow(wnd->getCEGUIWindow());
+		
 	// Verbinden mit dem Document
 	}
 	catch (CEGUI::Exception e)
@@ -173,7 +174,7 @@ void MainWindow::update()
 	
 	if (m_document->getModified() & Document::SAVEGAME_MODIFIED)
 	{
-		m_scene->updateTempPlayer();
+		m_scene->updateCharacterView();
 		m_document->setModified(m_document->getModified() & (~Document::SAVEGAME_MODIFIED));
 	}
 	
@@ -198,6 +199,12 @@ void MainWindow::update()
 		{
 			m_cegui_system->setGUISheet(m_game_screen);
 			m_game_screen->addChildWindow(m_sub_windows["Options"]->getCEGUIWindow());
+			
+			/*
+			CEGUI::Window* label;
+			label = win_mgr.getWindow("CharacterPreviewImage");
+			m_game_screen->addChildWindow(label);
+			*/
 		}
 		m_document->setModified(m_document->getModified() & (~Document::GUISHEET_MODIFIED));
 	}
@@ -578,6 +585,16 @@ bool MainWindow::setupGameScreen()
 		
 		setupWorldmap();
 		
+		CEGUI::Window* label;
+		label = win_mgr.createWindow("TaharezLook/StaticImage", "CharacterPreviewImage");
+		m_main_menu->addChildWindow(label);
+		label->setProperty("FrameEnabled", "false");
+		label->setProperty("BackgroundEnabled", "false");
+		label->setPosition(CEGUI::UVector2(cegui_reldim(0.5f), cegui_reldim( 0.15)));
+		label->setSize(CEGUI::UVector2(cegui_reldim(0.5f), cegui_reldim( 0.7f)));
+		label->setMousePassThroughEnabled(true);
+		label->setInheritsAlpha(false);
+		label->setProperty("Image", "set:character image:character_img"); 
 	}
 	catch (CEGUI::Exception e)
 	{
@@ -870,17 +887,21 @@ void  MainWindow::updateMainMenu()
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::Window* img;
 	img  = win_mgr.getWindow("StartScreenImage");
+	CEGUI::Window* label;
+	label = win_mgr.getWindow("CharacterPreviewImage");
 	
 	int wflags = m_document->getGUIState()->m_shown_windows;
 	if (wflags & (Document::SAVEGAME_LIST | Document::CHAR_CREATE))
 	{
 		m_scene->changeViewportSize(Scene::VIEW_RIGHT);
 		img->setVisible(false);
+		label->setVisible(true);
 	}
 	else
 	{
 		m_scene->changeViewportSize(Scene::VIEW_FULL);
 		img->setVisible(true);
+		label->setVisible(false);
 	}
 
 }

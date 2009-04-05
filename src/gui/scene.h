@@ -172,12 +172,12 @@ class Scene
 	 */
 	static void getPlayerLook(WorldObject::TypeInfo::ObjectSubtype subtype, std::list< std::pair<bool, PlayerLook> > &looks);
 	
-	/**
-	 * \fn void updateTempPlayer()
-	 * \brief aktualisiert die Vorschau auf den zu ladenden Spieler
-	 */
-	void updateTempPlayer();
 	
+	/**
+	 * \fn void updateCharacterView()
+	 * \brief aktualisiert die Ansicht des Spielers
+	 */
+	void updateCharacterView();
 
 	/**
 	 * \fn static void registerObjectAnimations(WorldObject::TypeInfo::ObjectSubtype subtype, std::map<Action::ActionType, std::vector<std::string> > &animations)
@@ -349,11 +349,7 @@ class Scene
 	 */
 	void destroySceneNode(std::string& node_name);
 
-	/**
-	 * \fn void updateCharacterView()
-	 * \brief aktualisiert die Ansicht des Spielers
-	 */
-	void updateCharacterView();
+	
 	
 	/**
 	 * \var clearObjects()

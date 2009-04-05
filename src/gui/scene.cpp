@@ -129,7 +129,21 @@ Scene::Scene(Document* doc,Ogre::RenderWindow* window)
 			CEGUI::Point( 0.0f, 0.0f ),
 			CEGUI::Size( char_ceguiTex->getWidth(), char_ceguiTex->getHeight() ),
 			CEGUI::Point( 0.0f, 0.0f ) );
+	
+	/*
+	Ogre::MaterialPtr mat = Ogre::MaterialManager::getSingleton().create("RttMat",
+			Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME);
+	mat->getTechnique(0)->getPass(0)->createTextureUnitState("character_tex");
 
+			
+	Ogre::Overlay* overlay = Ogre::OverlayManager::getSingleton().create("TextureOverlay");
+	Ogre::PanelOverlayElement* container = (Ogre::PanelOverlayElement*)Ogre::OverlayManager::getSingleton().createOverlayElement("Panel", "TextureOverlayPanel");
+	overlay->add2D(container);
+	container->setDimensions(0.4, 0.4);
+	container->setPosition(0.6, 0.6);
+	container->setMaterialName("RttMat");
+	overlay->show();
+*/
 }
 
 Scene::~Scene()
@@ -1521,16 +1535,23 @@ void Scene::updateCharacterView()
 
 	Player* pl = m_document->getLocalPlayer();
 
-	if ((pl ==0 && m_temp_player!="") || (pl->getNameId() != m_temp_player))
+	if ((pl ==0 && m_temp_player!=""))
 	{
+		m_temp_player="";
 		scene_mgr->clearScene();
 		update = true;
 	}
 
 	if (pl !=0)
 	{
+		if ((pl->getNameId() != m_temp_player))
+		{
+			scene_mgr->clearScene();
+			update = true;
+		}
 		m_temp_player = pl->getNameId();
-	
+		
+		
 		Ogre::SceneNode* node;
 		if (!scene_mgr->hasSceneNode("characterNode"))
 		{
@@ -1558,6 +1579,7 @@ void Scene::updateCharacterView()
 		}
 		
 		update |= updatePlayer(pl,obj_ent,scene_mgr);
+		
 	}	
 	
 	if (update)
@@ -1568,6 +1590,7 @@ void Scene::updateCharacterView()
 	
 	
 		target->update();
+		DEBUG5("player image is now %s",m_temp_player.c_str());
 	}
 	
 }
@@ -1709,27 +1732,3 @@ void Scene::createScene()
 
 }
 
-
-void Scene::updateTempPlayer()
-{
-	DEBUG5("update temp player");
-	if (m_temp_player != "")
-	{
-		deleteObject(m_temp_player);
-		m_objects->clear();
-	}
-
-	m_camera->setPosition(Ogre::Vector3(300, 100, 0));
-	m_camera->lookAt(Ogre::Vector3(0,80,70));
-
-	if (m_document->getLocalPlayer() != 0)
-	{
-		m_temp_player  = m_document->getLocalPlayer()->getNameId();
-		updateObject(m_document->getLocalPlayer());
-	}
-	else
-	{
-		m_temp_player = "";
-	}
-
-}
