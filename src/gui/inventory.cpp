@@ -32,7 +32,7 @@ Inventory::Inventory (Document* doc)
 	label->setSize(CEGUI::UVector2(cegui_reldim(0.5f), cegui_reldim( 0.4f)));
 	label->setMousePassThroughEnabled(true);
 	label->setProperty("Image", "set:character image:character_img"); 
-	//label->setInheritsAlpha (false);
+	label->setInheritsAlpha (false);
 	//label->setAlpha(1.0);
 
 	int i,j;
@@ -205,8 +205,8 @@ Inventory::Inventory (Document* doc)
 	// Button Ausruestung umschalten
 	btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", "SwapEquipButton"));
 	inventory->addChildWindow(btn);
-	btn->setPosition(CEGUI::UVector2(cegui_reldim(0.70f), cegui_reldim( 0.06f)));
-	btn->setSize(CEGUI::UVector2(cegui_reldim(0.1f), cegui_reldim( 0.07f)));
+	btn->setPosition(CEGUI::UVector2(cegui_reldim(0.77f), cegui_reldim( 0.04f)));
+	btn->setSize(CEGUI::UVector2(cegui_reldim(0.07f), cegui_reldim( 0.05f)));
 	btn->setText("1");
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&Inventory::onSwapEquipClicked, this));
 
@@ -237,6 +237,8 @@ void Inventory::update()
 	CEGUI::Window* img;
 	CEGUI::Window* label;
 	Item* it,*weapon;
+	CEGUI::PushButton* btn;
+	
 	
 	std::ostringstream out_stream;
 
@@ -304,7 +306,19 @@ void Inventory::update()
 	img =  win_mgr.getWindow("AmuletItemLabel");
 	it = equ->getItem(Equipement::AMULET);
 	updateItemWindow(img,it,player);
-
+	
+	// Button fuer Zweitausruestung
+	std::string text = "1";
+	if (player->isUsingSecondaryEquip())
+	{
+		text="2";
+	}
+	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("SwapEquipButton"));
+	if (btn->getText() != text)
+	{
+		btn->setText(text);
+	}
+	
 	int i;
 	
 	// Inventar: grosse Items

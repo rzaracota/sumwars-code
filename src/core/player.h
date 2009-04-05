@@ -580,6 +580,16 @@ public:
 	}
 	
 	/**
+	 * \fn bool isUsingSecondaryEquip()
+	 * \brief Gibt an, ob der Spieler die Zweiausruestung verwendet
+	 */
+	bool isUsingSecondaryEquip()
+	{
+		return m_secondary_equip;
+	}
+		
+	
+	/**
 	 * \fn void setRevivePosition(RegionLocation regloc)
 	 * \brief Setzt die Position, an der der Spieler wiederbelebt wird
 	 */

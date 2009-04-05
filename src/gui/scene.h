@@ -261,6 +261,15 @@ class Scene
 	 */
 	void updateObject(WorldObject* obj);
 
+	/**
+	 * \fn bool updatePlayer(Player* pl, Ogre::Entity* obj_ent, Ogre::SceneManager* scene_manager)
+	 * \brief Aktualisiert die an den Spieler angehaengten Meshes
+	 * \param pl Spieler Objekt
+	 * \param obj_ent Ogre Entity
+	 * \param scene_manager Scene in der der Spieler sich befindet
+	 * \return Gibt an, ob eine Veraenderung eingetreten ist
+	 */
+	bool updatePlayer(Player* pl, Ogre::Entity* obj_ent, Ogre::SceneManager* scene_manager);
 
 	/**
 	 * \fn void  createObject(WorldObject* obj,std::string& name, bool is_static)

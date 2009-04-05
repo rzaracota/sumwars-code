@@ -4,6 +4,7 @@
 #include "OgreCEGUIRenderer.h"
 #include "OgreCEGUITexture.h"
 #include "OgreCEGUIResourceProvider.h"
+#include <OgrePanelOverlayElement.h>
 
 #define USE_OBJECTLOADER
 #define USE_ITEMLOADER
@@ -87,33 +88,26 @@ Scene::Scene(Document* doc,Ogre::RenderWindow* window)
 	// Setup fuer die Spieleransicht
 
 	Ogre::SceneManager* char_scene_mng = Ogre::Root::getSingleton().createSceneManager(Ogre::ST_GENERIC,"CharacterSceneManager");
-	char_scene_mng->setAmbientLight(Ogre::ColourValue(1.0,1.0,1.0));
-
-	Ogre::SceneNode* node = char_scene_mng->createSceneNode("testNode");
-	node->setPosition(Ogre::Vector3(0,0,0));
-	Ogre::Entity* ent = char_scene_mng->createEntity("testEntity","warrior_m.mesh");
-	node->attachObject(ent);
-
+	char_scene_mng->setAmbientLight(Ogre::ColourValue(1,1,1));
+			
 	Ogre::Camera* char_camera = char_scene_mng->createCamera("char_camera");
-	char_camera->setPosition(Ogre::Vector3(500, 500, 0));
-	char_camera->lookAt(Ogre::Vector3(0,0,0));
-	char_camera->setNearClipDistance(1);
+	char_camera->setPosition(Ogre::Vector3(250, 80,0));
+	char_camera->lookAt(Ogre::Vector3(0,80,0));
+	char_camera->setNearClipDistance(5);
+			
 	char_camera->setAspectRatio(1.0);
+			
+		
+			
+	Ogre::Entity *player = char_scene_mng->createEntity("Player", "warrior_m.mesh");
+			
+	Ogre::SceneNode *playerNode = char_scene_mng->getRootSceneNode()->createChildSceneNode("characterNode");
+	playerNode->attachObject(player);
+	
 
-	/*
-	m_window->removeAllViewports();
-	m_camera = char_camera;
-	m_viewport = m_window->addViewport(m_camera);
-	m_viewport->setBackgroundColour(Ogre::ColourValue(0,0,0));
-	m_camera->setAspectRatio(Ogre::Real(m_viewport->getActualWidth()) / Ogre::Real(m_viewport->getActualHeight()));m_viewport->setOverlaysEnabled (true);
-	m_viewport->setOverlaysEnabled (true);
-
-
-	if (char_camera->isVisible(ent->getBoundingBox()))
-	{
-		DEBUG("object is visible");
-	}
-	*/
+	Ogre::SceneNode *camNode = char_scene_mng->getRootSceneNode()->createChildSceneNode("CharacterCamNode");
+	camNode->attachObject(char_camera);
+			
 	Ogre::TexturePtr char_texture = Ogre::TextureManager::getSingleton().createManual( "character_tex",
 			Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME, Ogre::TEX_TYPE_2D,
    512, 512, 0, Ogre::PF_R8G8B8A8, Ogre::TU_RENDERTARGET );
@@ -125,17 +119,17 @@ Scene::Scene(Document* doc,Ogre::RenderWindow* window)
 	char_view->setClearEveryFrame( true );
 	char_view->setOverlaysEnabled (false);
 	char_view->setBackgroundColour(Ogre::ColourValue(0,0,0,1.0) );
-
+	
+	
 	CEGUI::OgreCEGUITexture* char_ceguiTex = (CEGUI::OgreCEGUITexture*)((CEGUI::OgreCEGUIRenderer*) CEGUI::System::getSingleton().getRenderer())->createTexture((CEGUI::utf8*)"character_tex");
 
 	CEGUI::Imageset* char_textureImageSet = CEGUI::ImagesetManager::getSingleton().createImageset("character", char_ceguiTex);
 
 	char_textureImageSet->defineImage( "character_img",
-				CEGUI::Point( 0.0f, 0.0f ),
-				CEGUI::Size( char_ceguiTex->getWidth(), char_ceguiTex->getHeight() ),
-				CEGUI::Point( 0.0f, 0.0f ) );
+			CEGUI::Point( 0.0f, 0.0f ),
+			CEGUI::Size( char_ceguiTex->getWidth(), char_ceguiTex->getHeight() ),
+			CEGUI::Point( 0.0f, 0.0f ) );
 
-	char_rt->update();
 }
 
 Scene::~Scene()
@@ -736,114 +730,7 @@ void Scene::updateObject(WorldObject* obj)
         Player* cmp = static_cast<Player*>(obj);
         //Equipement* equ =  cmp->getEquipement();
 
-        // Schleife ueber alle angehaengten Entities
-        Ogre::Entity* attch_ent;
-
-        // Knochen an den ein Mesh angehaengt ist
-        std::string bone;
-
-        // Name des neuen Meshes an einem Knochen
-        std::string old_ent_name;
-        std::string new_ent_name;
-
-        Item* itm;
-        Item::Subtype itmsubtype;
-
-        Ogre::Node* node;
-
-       Ogre::Entity::ChildObjectListIterator it = obj_ent->getAttachedObjectIterator();
-
-		// mappt Namen von Knochen auf die daran anzuhaengenen Meshes
-        std::map<std::string, std::string> goal_atch;
-        std::map<std::string, std::string>::iterator jt;
-
-        itm = cmp->getWeapon();
-        if (itm !=0 && itm->m_weapon_attr !=0)
-        {
-            itmsubtype = itm->m_subtype;
-            new_ent_name = getItemRenderInfo(itmsubtype).m_mesh;
-
-			// einige Waffen werden in der Linken Hand getragen
-			if (itm->m_weapon_attr->m_weapon_type == WeaponAttr::BOW || itm->m_weapon_attr->m_weapon_type == WeaponAttr::CROSSBOW)
-			{
-				goal_atch.insert(std::make_pair("itemLeftHand",new_ent_name));
-			}
-			else
-			{
-            	goal_atch.insert(std::make_pair("itemRightHand",new_ent_name));
-			}
-        }
-
-		itm = cmp->getShield();
-		if (itm !=0)
-		{
-			itmsubtype = itm->m_subtype;
-			new_ent_name = getItemRenderInfo(itmsubtype).m_mesh;
-
-			goal_atch.insert(std::make_pair("itemLeftHand",new_ent_name));
-		}
-
-        // Schleife ueber die aktuell angehaengten Meshes
-        while (it.hasMoreElements())
-        {
-            bone = it.peekNextKey();
-            bone = bone.substr(name.size());
-            attch_ent = static_cast<Ogre::Entity*>(it.getNext());
-            old_ent_name = attch_ent->getMesh()->getName();
-            DEBUG5("bone name %s",bone.c_str());
-            jt = goal_atch.find(bone);
-
-            if (jt != goal_atch.end())
-            {
-                // es ist bereits ein Objekt an den Knochen gehaengt
-
-                if (old_ent_name != jt->second)
-                {
-                    // Es soll ein anderes Mesh angehaengt werden als aktuell angehaengt ist
-                    DEBUG5("replaced mesh %s by %s at bone %s",old_ent_name.c_str(),jt->second.c_str(),bone.c_str());
-
-
-                    // altes Mesh entfernen, neues anhaengen
-                    obj_ent->detachObjectFromBone(attch_ent);
-                    m_scene_manager->destroyEntity(attch_ent);
-
-                    attch_ent = m_scene_manager->createEntity(name+bone,jt->second);
-                    obj_ent->attachObjectToBone(bone,attch_ent);
-
-                    node = attch_ent->getParentNode();
-                    node->setInheritScale(false);
-
-
-                }
-
-                // Zielzustand erreicht
-                goal_atch.erase(jt);
-
-            }
-            else
-            {
-                // Objekt befindet sich im Zielzustand nicht am Knochen
-
-                DEBUG5("removed mesh %s from bone %s",old_ent_name.c_str(),bone.c_str());
-                // Mesh entfernen
-                obj_ent->detachObjectFromBone(attch_ent);
-                m_scene_manager->destroyEntity(attch_ent);
-            }
-        }
-
-        // Behandeln der Meshes die an keinem Knochen gefunden wurden
-        for (jt = goal_atch.begin(); jt != goal_atch.end();++jt)
-        {
-            bone = jt->first;
-            DEBUG5("attached mesh %s at bone %s",jt->second.c_str(),bone.c_str());
-            attch_ent = m_scene_manager->createEntity(name+bone,jt->second);
-
-            obj_ent->attachObjectToBone(bone,attch_ent);
-            node = attch_ent->getParentNode();
-            node->setInheritScale(false);
-
-
-        }
+		updatePlayer(cmp,obj_ent,m_scene_manager);
     }
 	DEBUG5("particle");
 	//zeigt an ob ein Partikelsystem sichtbar is
@@ -1053,6 +940,123 @@ void Scene::updateObject(WorldObject* obj)
 
 	}
 
+}
+
+bool Scene::updatePlayer(Player* pl, Ogre::Entity* obj_ent, Ogre::SceneManager* scene_manager)
+{
+	bool ret = false;
+	
+	std::string name = pl->getNameId();
+	 // Schleife ueber alle angehaengten Entities
+	Ogre::Entity* attch_ent;
+
+        // Knochen an den ein Mesh angehaengt ist
+	std::string bone;
+
+        // Name des neuen Meshes an einem Knochen
+	std::string old_ent_name;
+	std::string new_ent_name;
+
+	Item* itm;
+	Item::Subtype itmsubtype;
+
+	Ogre::Node* node;
+
+	Ogre::Entity::ChildObjectListIterator it = obj_ent->getAttachedObjectIterator();
+
+		// mappt Namen von Knochen auf die daran anzuhaengenen Meshes
+	std::map<std::string, std::string> goal_atch;
+	std::map<std::string, std::string>::iterator jt;
+
+	itm = pl->getWeapon();
+	if (itm !=0 && itm->m_weapon_attr !=0)
+	{
+		itmsubtype = itm->m_subtype;
+		new_ent_name = getItemRenderInfo(itmsubtype).m_mesh;
+
+			// einige Waffen werden in der Linken Hand getragen
+		if (itm->m_weapon_attr->m_weapon_type == WeaponAttr::BOW || itm->m_weapon_attr->m_weapon_type == WeaponAttr::CROSSBOW)
+		{
+			goal_atch.insert(std::make_pair("itemLeftHand",new_ent_name));
+		}
+		else
+		{
+			goal_atch.insert(std::make_pair("itemRightHand",new_ent_name));
+		}
+	}
+
+	itm = pl->getShield();
+	if (itm !=0)
+	{
+		itmsubtype = itm->m_subtype;
+		new_ent_name = getItemRenderInfo(itmsubtype).m_mesh;
+
+		goal_atch.insert(std::make_pair("itemLeftHand",new_ent_name));
+	}
+
+        // Schleife ueber die aktuell angehaengten Meshes
+	while (it.hasMoreElements())
+	{
+		bone = it.peekNextKey();
+		bone = bone.substr(name.size());
+		attch_ent = static_cast<Ogre::Entity*>(it.getNext());
+		old_ent_name = attch_ent->getMesh()->getName();
+		DEBUG5("bone name %s",bone.c_str());
+		jt = goal_atch.find(bone);
+
+		if (jt != goal_atch.end())
+		{
+                // es ist bereits ein Objekt an den Knochen gehaengt
+
+			if (old_ent_name != jt->second)
+			{
+                    // Es soll ein anderes Mesh angehaengt werden als aktuell angehaengt ist
+				DEBUG5("replaced mesh %s by %s at bone %s",old_ent_name.c_str(),jt->second.c_str(),bone.c_str());
+
+
+                    // altes Mesh entfernen, neues anhaengen
+				obj_ent->detachObjectFromBone(attch_ent);
+				scene_manager->destroyEntity(attch_ent);
+
+				attch_ent = scene_manager->createEntity(name+bone,jt->second);
+				obj_ent->attachObjectToBone(bone,attch_ent);
+
+				node = attch_ent->getParentNode();
+				node->setInheritScale(false);
+				
+				ret = true;
+			}
+
+                // Zielzustand erreicht
+			goal_atch.erase(jt);
+
+		}
+		else
+		{
+			// Objekt befindet sich im Zielzustand nicht am Knochen
+			DEBUG5("removed mesh %s from bone %s",old_ent_name.c_str(),bone.c_str());
+			// Mesh entfernen
+			obj_ent->detachObjectFromBone(attch_ent);
+			scene_manager->destroyEntity(attch_ent);
+			
+			ret = true;
+		}
+	}
+
+    // Behandeln der Meshes die an keinem Knochen gefunden wurden
+	for (jt = goal_atch.begin(); jt != goal_atch.end();++jt)
+	{
+		bone = jt->first;
+		DEBUG5("attached mesh %s at bone %s",jt->second.c_str(),bone.c_str());
+		attch_ent = scene_manager->createEntity(name+bone,jt->second);
+
+		obj_ent->attachObjectToBone(bone,attch_ent);
+		node = attch_ent->getParentNode();
+		node->setInheritScale(false);
+
+		ret = true;
+	}
+	return ret;
 }
 
 void Scene::deleteObject(std::string name)
@@ -1510,57 +1514,62 @@ void Scene::destroySceneNode(std::string& node_name)
 
 void Scene::updateCharacterView()
 {
-
-	/*
+	
+	bool update = false;
+	
 	Ogre::SceneManager* scene_mgr = Ogre::Root::getSingleton().getSceneManager("CharacterSceneManager");
 
 	Player* pl = m_document->getLocalPlayer();
 
-
 	if ((pl ==0 && m_temp_player!="") || (pl->getNameId() != m_temp_player))
 	{
-		DEBUG("clear scene");
 		scene_mgr->clearScene();
+		update = true;
 	}
 
-	if (pl ==0)
-		return;
-
-	m_temp_player = pl->getNameId();
-
-	Ogre::SceneNode* node;
-	if (!scene_mgr->hasSceneNode("characterNode"))
+	if (pl !=0)
 	{
-		node = scene_mgr->createSceneNode("characterNode");
-		node->setPosition(Ogre::Vector3(0,0,0));
-	}
-	else
+		m_temp_player = pl->getNameId();
+	
+		Ogre::SceneNode* node;
+		if (!scene_mgr->hasSceneNode("characterNode"))
+		{
+			node = scene_mgr->getRootSceneNode()->createChildSceneNode("characterNode");
+			update = true;
+		}
+		else
+		{
+			node = scene_mgr->getSceneNode("characterNode");
+		}
+	
+		RenderInfo ri;
+		ri = getPlayerRenderInfo(pl->getPlayerLook());
+	
+		Ogre::Entity* obj_ent;
+		if (!scene_mgr->hasEntity("characterEntity"))
+		{
+			obj_ent = scene_mgr->createEntity("characterEntity", ri.m_mesh);
+			node->attachObject(obj_ent);
+			update = true;
+		}
+		else
+		{
+			obj_ent = scene_mgr->getEntity("characterEntity");
+		}
+		
+		update |= updatePlayer(pl,obj_ent,scene_mgr);
+	}	
+	
+	if (update)
 	{
-		node = scene_mgr->getSceneNode("characterNode");
+		Ogre::Resource* res= Ogre::TextureManager::getSingleton().createOrRetrieve ("character_tex",Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME).first.getPointer();
+		Ogre::Texture* texture = dynamic_cast<Ogre::Texture*>(res);
+		Ogre::RenderTarget* target = texture->getBuffer()->getRenderTarget();
+	
+	
+		target->update();
 	}
-
-	RenderInfo ri;
-	ri = getPlayerRenderInfo(pl->getPlayerLook());
-
-	Ogre::Entity* obj_ent;
-	if (!scene_mgr->hasEntity("characterEntity"))
-	{
-		DEBUG("character view created");
-		obj_ent = scene_mgr->createEntity("characterEntity", ri.m_mesh);
-		node->attachObject(obj_ent);
-	}
-	else
-	{
-		obj_ent = scene_mgr->getEntity("characterEntity");
-	}
-	*/
-	/*
-	Ogre::Resource* res= Ogre::TextureManager::getSingleton().createOrRetrieve ("character_tex",Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME).first.getPointer();
-	Ogre::Texture* texture = dynamic_cast<Ogre::Texture*>(res);
-	Ogre::RenderTarget* target = texture->getBuffer()->getRenderTarget();
-
-	target->update();
-	*/
+	
 }
 
 
