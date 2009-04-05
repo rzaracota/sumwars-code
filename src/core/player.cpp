@@ -113,6 +113,7 @@ bool Player::init()
 	//eigene Initialisierung
 	CreatureBaseAttr* bas = getBaseAttr();
 	CreatureDynAttr* dyn = getDynAttr();
+	FightStatistic& fstat= getFightStatistic();
 	
 	m_network_slot=-1;
 	m_package_number =0;
@@ -162,6 +163,13 @@ bool Player::init()
 	bas->m_resistances_cap[3] =50;
 	bas->m_special_flags=0;
 	bas->m_abilities[0] = 0xfffffff;
+	
+	fstat.m_last_attacker="";
+	fstat.m_last_attacked="";
+	fstat.m_hit_chance =0;
+	fstat.m_damage_dealt_perc =0;
+	fstat.m_damage_got_perc =0;
+	fstat.m_block_chance =0;
 	
 	m_using_waypoint = false;
 	
@@ -2350,6 +2358,17 @@ void Player::writeNetEvent(NetEvent* event, CharConv* cv)
 	{
 		cv->toBuffer(m_using_waypoint);
 	}
+	
+	if (event->m_data & NetEvent::DATA_FIGHT_STAT)
+	{
+		FightStatistic* fstat = &(getFightStatistic());
+		cv->toBuffer(fstat->m_last_attacker);
+		cv->toBuffer(fstat->m_last_attacked);
+		cv->toBuffer(fstat->m_hit_chance);
+		cv->toBuffer(fstat->m_damage_dealt_perc);
+		cv->toBuffer(fstat->m_damage_got_perc);
+		cv->toBuffer(fstat->m_block_chance);
+	}
 }
 
 void Player::processNetEvent(NetEvent* event, CharConv* cv)
@@ -2372,6 +2391,17 @@ void Player::processNetEvent(NetEvent* event, CharConv* cv)
 	if (event->m_data & NetEvent::DATA_WAYPOINT)
 	{
 		cv->fromBuffer(m_using_waypoint);
+	}
+	
+	if (event->m_data & NetEvent::DATA_FIGHT_STAT)
+	{
+		FightStatistic* fstat = &(getFightStatistic());
+		cv->fromBuffer(fstat->m_last_attacker);
+		cv->fromBuffer(fstat->m_last_attacked);
+		cv->fromBuffer(fstat->m_hit_chance);
+		cv->fromBuffer(fstat->m_damage_dealt_perc);
+		cv->fromBuffer(fstat->m_damage_got_perc);
+		cv->fromBuffer(fstat->m_block_chance);
 	}
 }
 

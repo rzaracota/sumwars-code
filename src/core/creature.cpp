@@ -3315,12 +3315,14 @@ bool Creature::takeDamage(Damage* d)
 	{
 		return false;
 	}
-
+	
+	bool blocked = false;
 
 	float dmg=0,dmgt;
 	short res;
 	float rez = 1.0/RAND_MAX;
 	// testen ob der Schaden geblockt wird
+	float blockchance =0;
 	if (!(d->m_special_flags & Damage::UNBLOCKABLE))
 	{
 		float block = m_base_attr_mod.m_block  ;
@@ -3329,12 +3331,14 @@ bool Creature::takeDamage(Damage* d)
 		// Chance zu blocken
 		if (d->m_attack>0 && block>0)
 		{
-			float blockchance = 1-atan(d->m_attack/block)/(3.1415/2);
+			blockchance = 1-atan(d->m_attack/block)/(3.1415/2);
+			
+			
 			DEBUG5("attack %f block %f -> blockchance %f",d->m_attack,block, blockchance);
 			if (Random::random()<blockchance)
 			{
 				// Schaden abgewehrt
-				return true;
+				blocked = true;
 			}
 		}
 
@@ -3380,10 +3384,10 @@ bool Creature::takeDamage(Damage* d)
 	if (checkAbility(Action::STEADFAST) && m_base_attr_mod.m_max_health *0.4 > m_dyn_attr.m_health)
 		armor *=2;
 
-
+	float armorfak = 1.0;
 	if (armor>0 && !(d->m_special_flags & Damage::IGNORE_ARMOR))
 	{
-		float armorfak = atan(d->m_power/armor)/(3.1415/2);
+		armorfak = atan(d->m_power/armor)/(3.1415/2);
 		DEBUG5("power %f armor %f -> damage perc. %f",d->m_power, armor, armorfak);
 		dmgt = dmgt*armorfak;
 	}
@@ -3391,8 +3395,45 @@ bool Creature::takeDamage(Damage* d)
 	dmg += dmgt;
 
 	DEBUG5("phys dmg %f",dmgt);
+	
+	// Daten um Trefferwahrscheinlichkeiten / Schadensreduktion anzuzeigen
+	WorldObject* wo = getRegion()->getObject(d->m_attacker_id);
+	FightStatistic* fstat= &(getFightStatistic());
+	FightStatistic* attfstat=0;
+	Creature* attacker = dynamic_cast<Creature*>(getRegion()->getObject(d->m_attacker_id));
+	if (wo !=0  && wo->getTypeInfo()->m_type == TypeInfo::TYPE_PLAYER)
+	{
+		attfstat = &(attacker->getFightStatistic());
+	}
+	
+	// eigene Daten setzen
+	if (wo !=0 && getTypeInfo()->m_type==TypeInfo::TYPE_PLAYER)
+	{
+		if (fabs(fstat->m_block_chance - blockchance) >0.01
+				  || fabs(fstat->m_damage_got_perc - armorfak) >0.01
+				  || fstat->m_last_attacker != wo->getName())
+		{
+			fstat->m_block_chance = blockchance;
+			fstat->m_last_attacker = wo->getName();
+			fstat->m_damage_got_perc = armorfak;
+			m_event_mask |= NetEvent::DATA_FIGHT_STAT;
+			
+			DEBUG5("blockchance %f damage perc %f attacker %s",blockchance, armorfak, fstat->m_last_attacker.c_str());
+		}
+	}
+	
+	// Daten des Angreifers setzen
+	if (attacker !=0 && attacker->getTypeInfo()->m_type==TypeInfo::TYPE_PLAYER)
+	{
+		attacker->updateFightStat(1-blockchance, armorfak,getName());
+	}
 
-
+	// wenn Schaden geblockt wurde, hier beenden
+	if (blocked)
+	{
+		return true;
+	}
+	
 	// restliche 3 Schadensarten
 	int i;
 	for (i=Damage::AIR;i<=Damage::FIRE;i++)
@@ -3461,6 +3502,8 @@ bool Creature::takeDamage(Damage* d)
 		pr->getShape()->m_radius =getShape()->m_radius+1;
 		getRegion()->insertProjectile(pr,getShape()->m_center);
 	}
+	
+	
 	
 	// Trigger erzeugen
 	Trigger* tr = new Trigger("unit_hit");
@@ -4563,4 +4606,19 @@ void Creature::setDialogue(int id)
 	}
 }
 
+void Creature::updateFightStat(float hitchance, float armorperc, std::string attacked)
+{
+	FightStatistic* fstat = &(getFightStatistic());
+	if (fabs(hitchance - fstat->m_hit_chance) > 0.01 
+		   || fabs(armorperc - fstat->m_damage_dealt_perc) > 0.01
+		   || attacked != fstat->m_last_attacked)
+	{
+		fstat->m_hit_chance = hitchance;
+		fstat->m_damage_dealt_perc = armorperc;
+		fstat->m_last_attacked = attacked;
+		m_event_mask |= NetEvent::DATA_FIGHT_STAT;
+		
+		DEBUG5("hitchance %f damage perc %f attacked %s",hitchance, armorperc, attacked.c_str());
+	}
+}
 

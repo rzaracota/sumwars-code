@@ -369,6 +369,15 @@ public:
 	 **/
 	void speakText(CreatureSpeakText& text);
 	
+	/**
+	 * \fn void updateFightStat(float blockchance, float armorperc, std::string attacked)
+	 * \brief aktualisiert Kampfinformationen
+	 * \param blockchance Chance zu treffen
+	 * \param armorperc Prozentsatz, zu dem der Schaden durch die Ruestung geht
+	 * \param attacker Name des Angegriffenen
+	 */
+	void updateFightStat(float hitchance, float armorperc, std::string attacked);
+	
 	
 	/**
 	 * \fn  CreatureSpeakText& getSpeakText()
@@ -476,6 +485,14 @@ public:
 		m_event_mask |= NetEvent::DATA_TRADE_INFO;
 	}
 	
+	/**
+	 * \fn FightStatistic& getFightStatistic()
+	 * \brief Gibt statistische Daten zum Kampf aus
+	 */
+	FightStatistic& getFightStatistic()
+	{
+		return m_fight_statistic;
+	}
 	
 protected:
 	
@@ -733,6 +750,12 @@ private:
 	 * \brief Enthaelt die Ausruestung des Spielers
 	 */
 	Equipement* m_equipement;
+	
+	/**
+	 * \var FightStatistic m_fight_statistic
+	 * \brief statistische Daten zum Kampf
+	 */
+	FightStatistic m_fight_statistic;
 	
 	/**
 	 * \var PathfindInfo* m_small_path_info

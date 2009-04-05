@@ -444,7 +444,7 @@ CharInfo::CharInfo (Document* doc)
 {
 	// Spielerobjekt
 	Player* player = m_document->getLocalPlayer();
-
+	FightStatistic* fstat = &(player->getFightStatistic());
 	std::string tooltip;
 
 	// Fenstermanager
@@ -568,6 +568,16 @@ CharInfo::CharInfo (Document* doc)
 	{
 		label->setText((CEGUI::utf8*) out_stream.str().c_str());
 	}
+	
+	out_stream.str("");
+	if (fstat->m_last_attacker != "")
+	{
+		out_stream << "Damage dealt by "<<gettext(fstat->m_last_attacker.c_str())<<": "<<(int) (fstat->m_damage_got_perc*100) << "%";
+	}
+	if (label->getTooltipText() != (CEGUI::utf8*) out_stream.str().c_str())
+	{
+		label->setTooltipText((CEGUI::utf8*) out_stream.str().c_str());
+	}
 
 	// Label Attacke
 	label =  win_mgr.getWindow("AttackValueLabel");
@@ -577,6 +587,16 @@ CharInfo::CharInfo (Document* doc)
 	{
 		label->setText((CEGUI::utf8*) out_stream.str().c_str());
 	}
+	
+	out_stream.str("");
+	if (fstat->m_last_attacked != "")
+	{
+		out_stream << "Chance to hit  "<<gettext(fstat->m_last_attacked.c_str())<<": "<<(int) (fstat->m_hit_chance*100) << "%";
+	}
+	if (label->getTooltipText() != (CEGUI::utf8*) out_stream.str().c_str())
+	{
+		label->setTooltipText((CEGUI::utf8*) out_stream.str().c_str());
+	}
 
 	// Label Block
 	label =  win_mgr.getWindow("BlockValueLabel");
@@ -585,6 +605,16 @@ CharInfo::CharInfo (Document* doc)
 	if (label->getText()!= (CEGUI::utf8*) out_stream.str().c_str())
 	{
 		label->setText((CEGUI::utf8*) out_stream.str().c_str());
+	}
+	
+	out_stream.str("");
+	if (fstat->m_last_attacker != "")
+	{
+		out_stream << "Chance to get hit by "<<gettext(fstat->m_last_attacker.c_str())<<": "<<(int) (100-fstat->m_block_chance*100) << "%";
+	}
+	if (label->getTooltipText() != (CEGUI::utf8*) out_stream.str().c_str())
+	{
+		label->setTooltipText((CEGUI::utf8*) out_stream.str().c_str());
 	}
 
 	// Label HP
@@ -666,6 +696,16 @@ CharInfo::CharInfo (Document* doc)
 	if (label->getText()!= (CEGUI::utf8*) out_stream.str().c_str())
 	{
 		label->setText((CEGUI::utf8*) out_stream.str().c_str());
+	}
+	
+	out_stream.str("");
+	if (fstat->m_last_attacked != "")
+	{
+		out_stream << "Damage dealt to  "<<gettext(fstat->m_last_attacked.c_str())<<": "<<(int) (fstat->m_damage_dealt_perc*100) << "%";
+	}
+	if (label->getTooltipText() != (CEGUI::utf8*) out_stream.str().c_str())
+	{
+		label->setTooltipText((CEGUI::utf8*) out_stream.str().c_str());
 	}
 
 	Damage dmgb = player->getBaseDamage();
