@@ -1378,10 +1378,10 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 				if (command->m_id>=0 && command->m_id!= getRegion()->getId())
 				{
 					DEBUG5("Player Teleport to Region %i",command->m_id);
-					Region* reg = World::getWorld()->getRegion(command->m_id);
+					std::map<short,WaypointInfo>& winfos  = World::getWorld()->getWaypointData();
 					RegionLocation regloc;
-					regloc.first = reg->getName();
-					regloc.second="locWaypoint";
+					regloc.first = winfos[command->m_id].m_name;
+					regloc.second="WaypointLoc";
 					getRegion()->insertPlayerTeleport(getId(), regloc);
 					clearCommand(true);
 				}
