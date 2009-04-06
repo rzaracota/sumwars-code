@@ -21,7 +21,7 @@
 			/>
 	
 	<EquipEffect
-				darmor="40"
+				darmor="10"
 				>
 	</EquipEffect>
 	
@@ -52,7 +52,7 @@
 			/>
 	
 	<EquipEffect
-				darmor="60"
+				darmor="12"
 				>
 	</EquipEffect>
 	
@@ -83,7 +83,7 @@
 			/>
 	
 	<EquipEffect
-				darmor="80"
+				darmor="20"
 				>
 	</EquipEffect>
 	
@@ -114,7 +114,7 @@
 			/>
 	
 	<EquipEffect
-				darmor="105"
+				darmor="25"
 				>
 	</EquipEffect>
 	
@@ -145,7 +145,7 @@
 			/>
 	
 	<EquipEffect
-				darmor="120"
+				darmor="30"
 				>
 	</EquipEffect>
 	
@@ -176,7 +176,7 @@
 			/>
 	
 	<EquipEffect
-				darmor="185"
+				darmor="45"
 				>
 	</EquipEffect>
 	

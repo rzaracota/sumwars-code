@@ -4,7 +4,7 @@
 	<Image image="set:noMedia.png image:full_image" />
 	<Mesh file="armor.mesh" />
 	<Attribute
-			level_requirement="3"
+			level_requirement="1"
 			character_requirement="15"
 			min_enchant="20"
 			max_enchant="40"
@@ -20,12 +20,12 @@
 			/>
 	
 	<EquipEffect
-				darmor="50"
+				darmor="15"
 				>
 	</EquipEffect>
 	
 	<DropChance
-			   level="3"
+			   level="1"
 			   probability="1.0"
 			   />
 </Item> 
@@ -52,7 +52,7 @@
 			/>
 	
 	<EquipEffect
-				darmor="70"
+				darmor="20"
 				>
 	</EquipEffect>
 	
@@ -84,7 +84,7 @@
 			/>
 	
 	<EquipEffect
-				darmor="90"
+				darmor="25"
 				>
 	</EquipEffect>
 	
@@ -116,7 +116,7 @@
 			/>
 	
 	<EquipEffect
-				darmor="120"
+				darmor="40"
 				>
 	</EquipEffect>
 	
@@ -148,7 +148,7 @@
 			/>
 	
 	<EquipEffect
-				darmor="110"
+				darmor="35"
 				>
 	</EquipEffect>
 	
@@ -180,7 +180,7 @@
 			/>
 	
 	<EquipEffect
-				darmor="140"
+				darmor="50"
 				>
 	</EquipEffect>
 	
@@ -212,7 +212,7 @@
 			/>
 	
 	<EquipEffect
-				darmor="130"
+				darmor="50"
 				>
 	</EquipEffect>
 	
@@ -244,7 +244,7 @@
 			/>
 	
 	<EquipEffect
-				darmor="210"
+				darmor="60"
 				>
 			<XImmunity type="poisoned"/>
 	</EquipEffect>
@@ -277,7 +277,7 @@
 			/>
 	
 	<EquipEffect
-				darmor="200"
+				darmor="65"
 				>
 	</EquipEffect>
 	

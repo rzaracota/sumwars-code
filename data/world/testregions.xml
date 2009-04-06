@@ -60,7 +60,7 @@
 			 <ReviveLocation  location="entry_south" />
 			
 			<SpawnGroups>
-				<SpawnGroup group_name="goblins_5" number="10" />
+				<SpawnGroup group_name="goblins_3" number="10" />
 			</SpawnGroups>
 			
 		 </Region>

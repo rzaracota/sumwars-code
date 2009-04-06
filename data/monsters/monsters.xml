@@ -244,9 +244,9 @@ AIR
 	</Dropslots>
 	
 	<BasicAttributes
-		experience="5"
+		experience="8"
 		level="1"
-		max_health="40"
+		max_health="30"
 		armor="10"
 		block="0"
 		attack="25"
@@ -289,19 +289,19 @@ AIR
 </Monster>
 
 <!-- Goblinraeuber -->
-<!-- L2 -->
+<!-- L3 -->
 <Monster type="MONSTER" subtype="goblin_rob" name="goblin robber" fraction="MONSTER" category="GOBLIN" layer="NORMAL">
 	<Mesh file="goblin.mesh" />
 	<ExtraMesh bone="itemRightHand" file="goblin_hmr.mesh" />
 	<Dropslots >
-		<Dropslot pbig="0.01" pmedium="0.02" psmall="0.04" pgold="0.02" max_gold="50" min_level="0" max_level="5" magic_prob="0.1" magic_power="200" />
+		<Dropslot pbig="0.01" pmedium="0.02" psmall="0.04" pgold="0.02" max_gold="50" min_level="0" max_level="5" magic_prob="0.1" magic_power="250" />
 		<Dropslot pbig="0.01" pmedium="0.02" psmall="0.02" pgold="0.02" max_gold="30" min_level="0" max_level="3" magic_prob="0.2" magic_power="200" />
 	</Dropslots>
 	
 	<BasicAttributes
-					experience="8"
-					level="2"
-					max_health="70"
+					experience="12"
+					level="3"
+					max_health="50"
 					armor="15"
 					block="0"
 					attack="10"
@@ -344,7 +344,7 @@ AIR
 </Monster>
 
 <!-- Goblinjaeger -->
-<!-- L3 -->
+<!-- L2 -->
 <Monster type="MONSTER" subtype="goblin_bow" name="goblin hunter" fraction="MONSTER" category="GOBLIN" layer="NORMAL">
 	<Mesh file="goblin.mesh" />
 	<ExtraMesh bone="itemRightHand" file="goblin_sbw.mesh" />
@@ -354,9 +354,9 @@ AIR
 	</Dropslots>
 	
 	<BasicAttributes
-					experience="7"
-					level="3"
-					max_health="45"
+					experience="9"
+					level="2"
+					max_health="25"
 					armor="10"
 					block="0"
 					attack="20"

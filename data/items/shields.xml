@@ -20,7 +20,7 @@
 
   <EquipEffect
 		darmor="5"
-		dblock="35"
+		dblock="10"
   >
 	</EquipEffect>
 
@@ -50,7 +50,7 @@
 
   <EquipEffect
 		darmor="7"
-		dblock="55"
+		dblock="15"
   >
 	</EquipEffect>
 
@@ -80,7 +80,7 @@
 
   <EquipEffect
 		darmor="10"
-		dblock="70"
+		dblock="20"
   >
 	</EquipEffect>
 
@@ -110,7 +110,7 @@
 
   <EquipEffect
 		darmor="11"
-		dblock="90"
+		dblock="25"
   >
 	</EquipEffect>
 
@@ -140,7 +140,7 @@
 
   <EquipEffect
 		darmor="15"
-		dblock="120"
+		dblock="30"
   >
 	</EquipEffect>
 
@@ -170,7 +170,7 @@
 
   <EquipEffect
 		darmor="20"
-		dblock="160"
+		dblock="45"
   >
 	</EquipEffect>
 

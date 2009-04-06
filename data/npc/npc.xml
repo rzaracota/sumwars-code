@@ -68,6 +68,27 @@
 <NPC refname="Fenor Marken">
 </NPC>
 
+<NPC refname="Trader">
+	<Trade refresh_time="600000" price_factor="1.5">
+		<TradeItem subtype="heal_1" number ="20" />
+		<TradeItem subtype="heal_2" number="15" />
+		<TradeItem subtype="hatch_axe"  number="1" number_magical="2" min_echant="100" max_enchant="200"/>
+		<TradeItem subtype="bronze_axe"  number="1" number_magical="2" min_echant="100" max_enchant="200"/>
+		<TradeItem subtype="lumber_axe"  number="1" number_magical="2" min_echant="100" max_enchant="200"/>
+		<TradeItem subtype="hammer_hmr"  number="1" number_magical="2" min_echant="100" max_enchant="200"/>
+		<TradeItem subtype="cermon_hmr"  number="1" number_magical="2" min_echant="100" max_enchant="200"/>
+		<TradeItem subtype="short_sw"  number="1" number_magical="1" min_echant="100" max_enchant="200"/>
+		<TradeItem subtype="bronze_sw"  number="1"/>
+		<TradeItem subtype="farm2h_sw"/>
+		<TradeItem subtype="merc2h_sw"  number="1" number_magical="2" min_echant="100" max_enchant="200"/>
+		<TradeItem subtype="long_lbw"  number="1" number_magical="2" min_echant="100" max_enchant="200"/>
+		<TradeItem subtype="leath_glv"  number="1" number_magical="2" min_echant="100" max_enchant="200"/>
+		<TradeItem subtype="wood_shd"  number="1" number_magical="2" min_echant="100" max_enchant="200"/>
+	</Trade>
+	
+	<Topic name="trade" start_option="Handel" />
+</NPC>
+
 <NPC refname="Sergeant Lutterer">
 </NPC>
 

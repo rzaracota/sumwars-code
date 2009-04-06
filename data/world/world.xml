@@ -95,6 +95,9 @@
 				fenor = createObject('peasant', 'locFenor');
 				addArea('FenorArea','circle','locFenor',5);
 				setRefName(fenor, 'Fenor Marken');
+				
+				trader = createObject('peasant', 'locWeaponTrader');
+				setRefName(trader, 'Trader');
 			</Effect>
 		</Event>
 	</Region>
@@ -103,7 +106,7 @@
 <!-- Orte: verwundeter Soldat, Template -->
 <!-- Goblinschlaeger, Goblinraeuber, Goblinjaeger-->
 	<Region id="4" name="aisMeadow">
-		<Settings dimx="32" dimy="32" area_percent="0.4" complexity="0.3" granularity="6"  ground="grass1"/>
+		<Settings dimx="32" dimy="32" area_percent="0.3" complexity="0.4" granularity="6"  ground="grass1"/>
 		
 		<Waypoint world_x="0.4" world_y ="0.8" />
 		
@@ -127,9 +130,8 @@
 		</NamedObjectGroups>
 		
 		<SpawnGroups>
-			<SpawnGroup group_name="goblins_l1" number="10" />
-			<SpawnGroup group_name="goblins_poacher_l1" number="5" />
-			<SpawnGroup group_name="goblins_robber_l1" number="3" />
+			<SpawnGroup group_name="goblins_l1" number="18" />
+			<SpawnGroup group_name="goblins_bow_l1" number="12" />
 		</SpawnGroups>
 	</Region>
 
@@ -137,7 +139,7 @@
 <!-- Goblinschlaeger, Goblinraeuber, Goblinjaeger, Goblinhunde, Feldalraunen?(falls wir welche bekommen) -->
 <!-- Orte: entry_Crypt, exit_Crypt => Maylons Grab(Template) -->
 	<Region id="5" name="aisPlains">
-		<Settings dimx="32" dimy="32" area_percent="0.4" complexity="0.3" granularity="6"  ground="grass1" />
+		<Settings dimx="32" dimy="32" area_percent="0.3" complexity="0.4" granularity="6"  ground="grass1" />
 		<Waypoint world_x="0.55" world_y ="0.7" />
 		<ExitDirections north="false" south="true" west="false" east="true" />
 		
@@ -160,7 +162,11 @@
 		<NamedObjectGroups>
 			<NameObjectGroup name="maylonsGrave" object_group="maylonsGrave" priority="4"/>
 		</NamedObjectGroups>
-
+		
+		<SpawnGroups>
+			<SpawnGroup group_name="goblins_bow_l3" number="18" />
+			<SpawnGroup group_name="goblins_robber_l3" number="12" />
+		</SpawnGroups>
 	</Region>
 	
 <!-- Maylons Grab, Ebene 1[unterirdisch], ungefaehr 10 Minuten; Level 14 - 17 -->

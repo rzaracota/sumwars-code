@@ -151,7 +151,7 @@
 		<Location name = "entry_south" pos_x="0" pos_y="8" />
 		
 		<Location name = "locFenor" pos_x="8" pos_y="0" />
-		<Location name = "locWeaponTrader" pos_x="8" pos_y="1" />
+		<Location name = "locWeaponTrader" pos_x="8" pos_y="2" />
 		<Location name = "locArmorTrader" pos_x="8" pos_y="-1" />
 		<Location name = "locPotionTrader" pos_x="7" pos_y="0" />
 		
