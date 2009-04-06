@@ -758,8 +758,11 @@ void MapGenerator::insertSpawnpoints(MapData* mdata, RegionData* rdata)
 	// Spawnpoints platzieren
 	std::list<RegionData::SpawnGroup>::iterator st;
 	WorldObject* wo;
-	for (st = rdata->m_monsters.begin(); st != rdata->m_monsters.end(); ++st)
+	bool stop = false;
+	for (st = rdata->m_monsters.begin(); st != rdata->m_monsters.end() &&!stop; ++st)
 	{
+		// aufhoeren, wenn keine Orte mehr vorhanden
+		
 		DEBUG5("%s x %i",st->m_monsters.c_str(),st->m_number);
 		for (int i=0; i< st->m_number; i++)
 		{
@@ -769,10 +772,14 @@ void MapGenerator::insertSpawnpoints(MapData* mdata, RegionData* rdata)
 			mdata->m_region->insertObject(wo,Vector(points[r].first*8+4, points[r].second*8+4));
 
 			DEBUG5("placing spawnpoint for %s at %i %i",st->m_monsters.c_str(), points[r].first*8+4, points[r].second*8+4);
-
+			
 			points[r] = points.back();
 			points.resize(points.size() -1);
-
+			if (points.size() ==0)
+			{
+				stop = true;
+				break;
+			}
 		}
 	}
 }
@@ -780,6 +787,9 @@ void MapGenerator::insertSpawnpoints(MapData* mdata, RegionData* rdata)
 
 void MapGenerator::createExits(MapData* mdata, RegionData* rdata)
 {
+	int dimx = rdata->m_dimx/2;
+	int dimy = rdata->m_dimy/2;
+	
 	std::list<RegionExit>::iterator it;
 	Vector pos;
 	for (it = rdata->m_exits.begin(); it != rdata->m_exits.end(); ++it)
@@ -790,7 +800,18 @@ void MapGenerator::createExits(MapData* mdata, RegionData* rdata)
 		if (rdata->m_region_template =="")
 		{
 			pos = mdata->m_region->getLocation(it->m_exit_name);
-			*(mdata->m_base_map->ind(int(pos.m_x/8), int(pos.m_y/8))) = 2;
+			int cx = int(pos.m_x/8);
+			int cy = int(pos.m_y/8);
+			for (int i=std::max(0,cx-2); i<std::min(dimx,cx+2); i++)
+			{
+				for (int j=std::max(0,cy-2); j<std::min(dimy,cy+2); j++)
+				{
+					if (*(mdata->m_base_map->ind(i,j))==1)
+					{
+						*(mdata->m_base_map->ind(i,j)) = 2;
+					}
+				}
+			}
 		}
 
 	}
@@ -805,6 +826,23 @@ void MapGenerator::createExits(MapData* mdata, RegionData* rdata)
 		//WorldObject* wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT,"tree1");
 		//mdata->m_region->insertObject(wo,pos);
 		DEBUG("waypoint at %f %f %i",pos.m_x, pos.m_y,wo->getId());
+		
+		// Bei den Ausgaengen keine Monster
+		if (rdata->m_region_template =="")
+		{
+			int cx = int(pos.m_x/8);
+			int cy = int(pos.m_y/8);
+			for (int i=std::max(0,cx-2); i<std::min(dimx,cx+2); i++)
+			{
+				for (int j=std::max(0,cy-2); j<std::min(dimy,cy+2); j++)
+				{
+					if (*(mdata->m_base_map->ind(i,j))==1)
+					{
+						*(mdata->m_base_map->ind(i,j)) = 2;
+					}
+				}
+			}
+		}
 	}
 }
 
