@@ -28,7 +28,6 @@
 					speak('Fenor Marken',_("Heda! ..."),1000)
 					speak('player',_("Und wenn es ..."),1000)
 					speak('Fenor Marken',_("Ich habe laeuten ..."),1000)
-					createDialogue()
 					if (getPlayers()[2] ~= nil and getPlayers()[2] ~= getSpeaker("player")) then
 						local any = getPlayers()[2]
 					else
@@ -52,7 +51,6 @@
 		
 		<Topic name="start_rescue_willard_quest" >
 			<Effect>
-				createDialogue()
 				local war = getWarriors()[1]
 				addSpeaker(war,"war")
 				speak("war",_("Euer Freund ist ..."),1000)

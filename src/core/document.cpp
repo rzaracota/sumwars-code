@@ -197,7 +197,10 @@ void Document::loadSavegame()
 		{
 			save->fromBuffer<short>(key);
 			save->fromBuffer<short>(dest);
-			installShortkey((KeyCode) key, (ShortkeyDestination) dest);
+			if (dest >= USE_SKILL_LEFT && dest < USE_SKILL_RIGHT + 200)
+			{
+				installShortkey((KeyCode) key, (ShortkeyDestination) dest);
+			}
 		}
 		
 		// aktuelle Aktion setzen
@@ -319,7 +322,7 @@ void Document::installShortkey(KeyCode key,ShortkeyDestination dest, bool check_
 	{
 		m_special_keys.insert(key);
 	}
-
+	
 }
 
 void Document::onButtonSendMessageClicked ( )
@@ -1217,6 +1220,7 @@ bool Document::onKeyPress(KeyCode key)
 	{
 		// Aktion welche mit der Taste verbunden ist
 		ShortkeyDestination dest = it->second;
+	
 		if (dest == SHOW_INVENTORY)
 		{
 			onButtonInventoryClicked();

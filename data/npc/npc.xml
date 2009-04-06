@@ -24,6 +24,7 @@
 	<Topic name="topic1" start_option="das erste Thema">
 		<Effect>
 			speak('peasant', 'blah',800);
+			speak('peasant2', 'muhaha',800);
 			speak('player','blubb',800);
 		</Effect>
 	</Topic>

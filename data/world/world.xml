@@ -45,14 +45,14 @@
 
 
 
-<World  start_region="region0" start_location="entry_south">
+<World  start_region="medMercCamp" start_location="entry_south">
 	
 
 
 <!-- Lobby Konzilshalle der Elemtarmagier [fester Ort; Saeulenhalle im roemischen Stil] -->
 <!-- Orte: Soren Windclaw -->
 	<Region id="2" name="elCnlLobby">
-		<Settings dimx="8" dimy="8" region_template="councilhall"/>
+		<Settings dimx="8" dimy="8" region_template="councilhall" ground="grass1"/>
 		<ExitDirections north="true" south="false" west="false" east="false" />
 		<Exits>
 			<Exit name="exit_north" destination_region="medMercCamp" destination_location="entry_south" >
@@ -68,7 +68,7 @@
 <!-- Medair, Soeldnerlager [Stadt]-->
 <!-- Orte: Fenor Marken -->
 	<Region id="3" name="medMercCamp">
-		<Settings dimx="16" dimy="16" region_template="medairMercenaryCamp" />
+		<Settings dimx="16" dimy="16" region_template="medairMercenaryCamp"  ground="grass1"/>
 		
 		<Waypoint world_x="0.5" world_y ="0.9" />
 		
@@ -103,7 +103,7 @@
 <!-- Orte: verwundeter Soldat, Template -->
 <!-- Goblinschlaeger, Goblinraeuber, Goblinjaeger-->
 	<Region id="4" name="aisMeadow">
-		<Settings dimx="32" dimy="32" area_percent="0.4" complexity="0.3" granularity="6" />
+		<Settings dimx="32" dimy="32" area_percent="0.4" complexity="0.3" granularity="6"  ground="grass1"/>
 		
 		<Waypoint world_x="0.4" world_y ="0.8" />
 		
@@ -125,13 +125,19 @@
 		<NamedObjectGroups>
 			<NameObjectGroup name="willard" object_group="willard" priority="4"/>
 		</NamedObjectGroups>
+		
+		<SpawnGroups>
+			<SpawnGroup group_name="goblins_l1" number="10" />
+			<SpawnGroup group_name="goblins_poacher_l1" number="5" />
+			<SpawnGroup group_name="goblins_robber_l1" number="3" />
+		</SpawnGroups>
 	</Region>
 
 <!-- Aisen, Offene Ebene [Feld und Wiesen]; ungefaehr 20 Min, eher offen; Level 2 - 6 -->
 <!-- Goblinschlaeger, Goblinraeuber, Goblinjaeger, Goblinhunde, Feldalraunen?(falls wir welche bekommen) -->
 <!-- Orte: entry_Crypt, exit_Crypt => Maylons Grab(Template) -->
 	<Region id="5" name="aisPlains">
-		<Settings dimx="32" dimy="32" area_percent="0.4" complexity="0.3" granularity="6" />
+		<Settings dimx="32" dimy="32" area_percent="0.4" complexity="0.3" granularity="6"  ground="grass1" />
 		<Waypoint world_x="0.55" world_y ="0.7" />
 		<ExitDirections north="false" south="true" west="false" east="true" />
 		
@@ -160,7 +166,7 @@
 <!-- Maylons Grab, Ebene 1[unterirdisch], ungefaehr 10 Minuten; Level 14 - 17 -->
 <!-- [kleine Elementare], Zombies, Skelette -->
 	<Region id="15" name="aisMaylonsGraveL1">
-		<Settings dimx="32" dimy="32" area_percent="0.4" complexity="0.3" granularity="6" />
+		<Settings dimx="24" dimy="24" area_percent="0.3" complexity="0.3" granularity="4"  ground="grass1"/>
 		
 		<ExitDirections north="true" south="true" west="false" east="false" />
 		
@@ -187,7 +193,7 @@
 <!-- [kleine Elementare], Zombies, Skelette, Maylons Mumie -->
 <!-- Orte: Maylons Grabkammer -->
 	<Region id="16" name="aisMaylonsGraveL2">
-		<Settings dimx="32" dimy="32" area_percent="0.4" complexity="0.3" granularity="6" />
+		<Settings dimx="24" dimy="24" area_percent="0.3" complexity="0.3" granularity="4"  ground="grass1"/>
 		
 		<ExitDirections north="true" south="false" west="false" east="false" />
 		
@@ -209,7 +215,7 @@
 <!-- Aisen, Stille Heide [Feld und Wiesen]; ungefaehr 20 Min, eher offen; Level 5 - 10 -->
 <!-- Goblinschlaeger, Goblinraeuber, Goblinjaeger, Goblinhunde, Goblinkrieger, Goblinschamanen? -->
 	<Region id="6" name="aisHeath">
-		<Settings dimx="32" dimy="32" area_percent="0.4" complexity="0.3" granularity="6" />
+		<Settings dimx="32" dimy="32" area_percent="0.4" complexity="0.3" granularity="6"  ground="grass1"/>
 		
 		<ExitDirections north="true" south="false" west="true" east="false" />
 		
@@ -234,7 +240,7 @@
 <!-- Prinz, Ratgeber, Magier, Bauer, Sergeant -->
 <!-- Kraeutersammler -->
 	<Region id="7" name="joringsbridge">
-		<Settings dimx="32" dimy="32" region_template="joringsbridge"/>
+		<Settings dimx="32" dimy="32" region_template="joringsbridge"  ground="grass1"/>
 		
 		<ExitDirections north="true" south="true" west="true" east="false" />
 		
@@ -270,7 +276,7 @@
 <!-- Kraeuterbuesche -->
 <!-- Goblinschlaeger, Goblinraeuber, Goblinjaeger, Goblinhunde, Goblinkrieger, Goblinschamanen? -->
 	<Region id="8" name="aisNorthMeadow">
-		<Settings dimx="32" dimy="32" area_percent="0.4" complexity="0.3" granularity="6" />
+		<Settings dimx="32" dimy="32" area_percent="0.4" complexity="0.3" granularity="6"  ground="grass1"/>
 		
 		<ExitDirections north="false" south="false" west="false" east="true" />
 		
@@ -304,7 +310,7 @@
 <!-- Aisen, Joringsforst [Wald und Wiesen]; ungefaehr 30 Min, halbwegs offen; Level 7 - 12 -->	
 <!-- Goblinschlaeger, Goblinraeuber, Goblinjaeger, Goblinhunde, Goblinkrieger, Goblinschamanen?, Waldalraunen? -->
 	<Region id="9" name="aisJoringsforest">
-		<Settings dimx="32" dimy="32" area_percent="0.4" complexity="0.3" granularity="6" />
+		<Settings dimx="32" dimy="32" area_percent="0.4" complexity="0.3" granularity="6"  ground="grass1"/>
 		
 		<ExitDirections north="false" south="true" west="true" east="false" />
 		
@@ -326,7 +332,7 @@
 <!-- Robs Versteck(Template) -->
 <!-- Goblinschlaeger, Goblinraeuber, Goblinjaeger, Goblinhunde, Goblinkrieger, Goblinschamanen?, Waldalraunen?, Feen? -->
 	<Region id="10" name="aisFairyforest">
-		<Settings dimx="32" dimy="32" area_percent="0.4" complexity="0.3" granularity="6" />
+		<Settings dimx="32" dimy="32" area_percent="0.4" complexity="0.3" granularity="6"  ground="grass1"/>
 		
 		<ExitDirections north="true" south="false" west="false" east="true" />
 		
@@ -351,7 +357,7 @@
 <!-- Aisen, Wolfsfelsen [Wald und Gebirge]; ungefaehr 35 Min, eher verwinkelt; Level 14 - 17 -->
 <!-- Goblinschlaeger, Goblinraeuber, Goblinjaeger, Goblinhunde, Goblinkrieger, Goblinschamanen?, Harpien, wenige Untote, evtl. ein Lcih oder Neromant -->
 	<Region id="11" name="aisWolfstones">
-		<Settings dimx="32" dimy="32" area_percent="0.4" complexity="0.3" granularity="6" />
+		<Settings dimx="32" dimy="32" area_percent="0.4" complexity="0.3" granularity="6"  ground="grass1"/>
 		
 		<ExitDirections north="true" south="true" west="false" east="false" />
 		
@@ -375,7 +381,7 @@
 <!-- Rob, der Raeuber, Ende -->
 <!-- Loc: Stadtmauer -->
 	<Region id="12" name="dwarfenfroward">
-		<Settings dimx="32" dimy="32" region_template="dwarfenfroward"/>
+		<Settings dimx="32" dimy="32" region_template="dwarfenfroward"  ground="grass1"/>
 		
 		<ExitDirections north="true" south="true" west="false" east="false" />
 		
@@ -407,7 +413,7 @@
 <!-- Zombies, Skelette -->
 <!-- Locations fuer die Verteidigenden Wachen? -->
 	<Region id="13" name="dwarfenfrowardRampart">
-		<Settings dimx="32" dimy="8" area_percent="0.3" complexity="0.3" granularity="4" />
+		<Settings dimx="32" dimy="8" area_percent="0.3" complexity="0.3" granularity="4"  ground="grass1"/>
 		
 		<ExitDirections north="true" south="true" west="false" east="false" />
 		
@@ -426,7 +432,7 @@
 <!-- Ende der Demo, der Lich als quasi-Endgegner -->
 <!-- Zombies, Skelette, Liche/Nekromanten?, DER Lich-->
 	<Region id="14" name="necFieldcamp">
-		<Settings dimx="32" dimy="32" area_percent="0.4" complexity="0.3" granularity="6" />
+		<Settings dimx="32" dimy="32" area_percent="0.4" complexity="0.3" granularity="6"  ground="grass1"/>
 		
 		<ExitDirections north="false" south="true" west="false" east="false" />
 		
