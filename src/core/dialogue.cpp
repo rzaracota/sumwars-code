@@ -405,7 +405,7 @@ void Dialogue::update(float time)
 		{
 
 			// Aenderung eingetreten
-			WorldObject* wo;
+			WorldObject* wo=0;
 			Creature* cr;
 			if (!m_started)
 			{
@@ -429,6 +429,13 @@ void Dialogue::update(float time)
 			cst =0;
 			while (cst==0 && !m_speech.empty())
 			{
+				// Change Topic braucht keinen Sprecher
+				if (m_speech.front().second.m_text == "#change_topic#")
+				{
+					cst = &(m_speech.front().second);
+					break;
+				}
+				
 				wo = m_region->getObject( getSpeaker(m_speech.front().first));
 
 				if (wo ==0 || !wo->isCreature())
