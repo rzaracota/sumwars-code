@@ -453,6 +453,7 @@ void WorldLoader::loadQuests(TiXmlNode* node)
 		qu = new Quest(name,tabname);
 		
 		loadQuest(node,qu);
+		qu->init();
 		World::getWorld()->addQuest(tabname,qu);
 	}
 	else
@@ -473,11 +474,11 @@ void WorldLoader::loadQuest(TiXmlNode* node, Quest* quest)
 	{
 		if (child->Type()==TiXmlNode::ELEMENT)
 		{
-			if (!strcmp(child->Value(), "Init"))
+			if ((!strcmp(child->Value(), "Init")) && child->FirstChild()!=0)
 			{
 				text = child->FirstChild()->ToText();
 				quest->setInit(text->Value());
-				quest->init();
+				
 			}
 			else if (!strcmp(child->Value(), "Description"))
 			{
