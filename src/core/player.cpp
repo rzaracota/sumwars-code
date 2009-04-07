@@ -1598,57 +1598,76 @@ void Player::calcBaseDamage(Action::ActionType act,Damage& dmg)
 	Creature::calcBaseDamage(act,dmg);
 
 
-	Item* weapon = getWeapon();
-
-	if (weapon!=0 && weapon->m_weapon_attr !=0)
+	Damage::DamageType dmgtype = Damage::FIRE;
+	float maxdmg =0;
+	
+	Item* item;
+	for (int j=1; j<=8; j++)
 	{
-		// Schaden der Waffe
-		Damage& wdmg=weapon->m_weapon_attr->m_damage;
-
-		int i;
-		float maxdmg =0;
-		Damage::DamageType dmgtype = Damage::FIRE;
-		
-		// Schaden uebernehmen
-		for (i=0;i<4;i++)
+		item = getEquipement()->getItem(j);
+		if (j == Equipement::WEAPON)
 		{
-			dmg.m_min_damage[i] += wdmg.m_min_damage[i];
-			dmg.m_max_damage[i] += wdmg.m_max_damage[i];
-			dmg.m_multiplier[i] *= wdmg.m_multiplier[i];
+			item = getWeapon();
+		}
+		if (j == Equipement::SHIELD)
+			item = getShield();
+		
+		if (item!=0 && item->m_weapon_attr !=0)
+		{
+			// Schaden der Waffe
+			Damage& wdmg=item->m_weapon_attr->m_damage;
+
+			int i;
 			
-			if ((wdmg.m_min_damage[i]+ wdmg.m_max_damage[i]) * wdmg.m_multiplier[i]>maxdmg)
+		
+		
+			// Schaden uebernehmen
+			for (i=0;i<4;i++)
 			{
-				maxdmg = (wdmg.m_min_damage[i]+ wdmg.m_max_damage[i]) * wdmg.m_multiplier[i];
-				dmgtype = (Damage::DamageType) i;
+				dmg.m_min_damage[i] += wdmg.m_min_damage[i];
+				dmg.m_max_damage[i] += wdmg.m_max_damage[i];
+				dmg.m_multiplier[i] *= wdmg.m_multiplier[i];
+			
+				if (j == Equipement::WEAPON)
+				{
+					if ((wdmg.m_min_damage[i]+ wdmg.m_max_damage[i]) * wdmg.m_multiplier[i]>maxdmg)
+					{
+						maxdmg = (wdmg.m_min_damage[i]+ wdmg.m_max_damage[i]) * wdmg.m_multiplier[i];
+						dmgtype = (Damage::DamageType) i;
+					}
+				}
 			}
+		
+			
+
+			// Statusmods uebernehmen
+			for (i=0;i<NR_STATUS_MODS;i++)
+			{
+				dmg.m_status_mod_power[i] += wdmg.m_status_mod_power[i];
+			}
+
+			// weitere Attribute
+			dmg.m_power += wdmg.m_power;
+			dmg.m_attack += wdmg.m_attack;
+			dmg.m_crit_perc += wdmg.m_crit_perc;
+			dmg.m_special_flags |= wdmg.m_special_flags;
+
 		}
 		
-		if (getTypeInfo()->m_subtype == "mage")
-		{
-			CreatureBaseAttr* basm = getBaseAttrMod();
-			dmg.m_min_damage[Damage::FIRE] -= basm->m_magic_power/10;
-			dmg.m_min_damage[Damage::FIRE] -= basm->m_willpower/20;
-			dmg.m_max_damage[Damage::FIRE] -= basm->m_magic_power/6;
-			dmg.m_max_damage[Damage::FIRE] -= basm->m_willpower/15;
+	}
+	
+	if (getTypeInfo()->m_subtype == "mage")
+	{
+		CreatureBaseAttr* basm = getBaseAttrMod();
+		dmg.m_min_damage[Damage::FIRE] -= basm->m_magic_power/10;
+		dmg.m_min_damage[Damage::FIRE] -= basm->m_willpower/20;
+		dmg.m_max_damage[Damage::FIRE] -= basm->m_magic_power/6;
+		dmg.m_max_damage[Damage::FIRE] -= basm->m_willpower/15;
 			
-			dmg.m_min_damage[dmgtype] += basm->m_magic_power/10;
-			dmg.m_min_damage[dmgtype] += basm->m_willpower/20;
-			dmg.m_max_damage[dmgtype] += basm->m_magic_power/6;
-			dmg.m_max_damage[dmgtype] += basm->m_willpower/15;
-		}
-
-		// Statusmods uebernehmen
-		for (i=0;i<NR_STATUS_MODS;i++)
-		{
-			dmg.m_status_mod_power[i] += wdmg.m_status_mod_power[i];
-		}
-
-		// weitere Attribute
-		dmg.m_power += wdmg.m_power;
-		dmg.m_attack += wdmg.m_attack;
-		dmg.m_crit_perc += wdmg.m_crit_perc;
-		dmg.m_special_flags |= wdmg.m_special_flags;
-
+		dmg.m_min_damage[dmgtype] += basm->m_magic_power/10;
+		dmg.m_min_damage[dmgtype] += basm->m_willpower/20;
+		dmg.m_max_damage[dmgtype] += basm->m_magic_power/6;
+		dmg.m_max_damage[dmgtype] += basm->m_willpower/15;
 	}
 }
 
