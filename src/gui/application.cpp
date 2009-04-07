@@ -534,6 +534,8 @@ bool Application::createView()
 
 bool Application::loadResources()
 {
+	TiXmlBase::SetCondenseWhiteSpace(false);
+	
 	Ogre::FileInfoListPtr files;
 	Ogre::FileInfoList::iterator it;
 	std::string file;
