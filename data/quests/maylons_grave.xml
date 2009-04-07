@@ -1,0 +1,193 @@
+<Quest name="Maylons Grave" table_name="maylons_grave">
+	
+	<Init>
+		local a = 2
+	</Init>
+	
+	<Description>
+		if (maylons_grave.finished) then
+			return _("Quest finished")
+		else
+			return _("Quest description")
+		end
+	</Description>
+	
+	<NPC refname="Gab Resh">
+		<Topic name="talk_with_goblins">
+			<Effect>
+				speak("G1",_("text1"),1000);
+				speak("G2",_("text2"),1000);
+				speak("Gab Resh",_("text3"),1000);
+				addQuestion(_("Kill Goblins?"));
+				addAnswer(_("Yes"),"kill_goblins_immediately");
+				addAnswer(_("No"),"keep_on_talking");
+			</Effect>
+		</Topic>
+		
+		<Topic name="keep_on_talking" >
+			<Effect>
+				speak("PL",_("text4"),1000);
+				speak("GabResh",_("text5"),1000);
+				addQuestion(_("Listen?"));
+				addAnswer(_("Yes"),"start_quest");
+				addAnswer(_("Let Goblins go"),"let_goblins_go");
+				addAnswer(_("Kill them"),"kill_goblins");
+			</Effect>	
+		</Topic>
+		
+		<Topic name="kill_goblins_immediately" >
+			<Effect>
+				speak("PL",_("text6"),1000);
+				set(maylons_grave_tmp.Goblin1,"fraction","monster");
+				set(maylons_grave_tmp.Goblin2,"fraction","monster");
+				set(maylons_grave_tmp.Goblin3,"fraction","monster");
+				set(maylons_grave_tmp.Goblin4,"fraction","monster");
+				set(maylons_grave_tmp.GabResh,"fraction","monster");
+			</Effect>	
+		</Topic>
+		
+		<Topic name="start_quest" >
+			<Effect>
+				maylons_grave.started = true;
+				addStandardSpeakers();
+				speak("MAG",_("text7"),1000);
+				speak("Gab Resh",_("text"),1000);
+				speak("PRI",_("text8"),1000);
+				speak("Gab Resh",_("text"),1000);
+				speak("PL",_("text9"),1000);
+			</Effect>	
+		</Topic>
+		
+		<Topic name="let_goblins_go" >
+			<Effect>
+				maylons_grave.let_goblins_go = true;
+				addStandardSpeakers();
+				speak("PL",_("text10"),1000);
+			</Effect>	
+		</Topic>
+		
+		<Topic name="kill_goblins" >
+			<Effect>
+				set(maylons_grave_tmp.Goblin1,"fraction","monster");
+				set(maylons_grave_tmp.Goblin2,"fraction","monster");
+				set(maylons_grave_tmp.Goblin3,"fraction","monster");
+				set(maylons_grave_tmp.Goblin4,"fraction","monster");
+				set(maylons_grave_tmp.GabResh,"fraction","monster");
+			</Effect>	
+		</Topic>
+	</NPC>
+	
+	
+	<NPC refname="Maylons Ghost">
+		<Topic name="maylons_grave_freed">
+			<Effect>
+				speak("Maylons Ghost",_("text11"),1000);
+				if (maylons_grave.goblins_killed ~= true) then
+					speak("Maylons Ghost",_("text12"),1000);
+					speak("PL",_("text13"),1000);
+					if (maylons_grave.started == true) then
+						maylons_grave.finished = true;
+						speak("Maylons Ghost",_("text14_reward"),1000);
+						-- drop suitable weapons
+						-- dropItem("???", "cryptGraveChamber");
+						-- dropItem("???", "cryptGraveChamber");
+						-- dropItem("???", "cryptGraveChamber");
+					end;
+				end;
+			</Effect>
+		</Topic>
+	</NPC>
+	
+	
+	<Region name="aisMaylonsGraveL1">
+		<Event trigger ="create_region" once = "true">
+			<Effect>
+				addArea("GabReshGoblinArea","circle","cryptGoblins",15);
+				addArea("GabReshArea","circle","cryptGoblins",5);
+			if (maylons_grave.goblins_killed ~= true) then
+					maylons_grave_tmp.Goblin1 = createObject("goblin", "cryptGoblins");
+					maylons_grave_tmp.Goblin2 = createObject("goblin", "cryptGoblins");
+					maylons_grave_tmp.Goblin3 = createObject("goblin", "cryptGoblins");
+					maylons_grave_tmp.Goblin4 = createObject("goblin", "cryptGoblins");
+					maylons_grave_tmp.GabResh = createObject("goblin", "cryptGoblins");
+					setRefName(maylons_grave_tmp.GabResh, "Gab Resh");
+					set(maylons_grave_tmp.Goblin1,"fraction","neutral");
+					set(maylons_grave_tmp.Goblin2,"fraction","neutral");
+					set(maylons_grave_tmp.Goblin3,"fraction","neutral");
+					set(maylons_grave_tmp.Goblin4,"fraction","neutral");
+					set(maylons_grave_tmp.GabResh,"fraction","neutral");
+				end;
+			</Effect>
+		</Event>
+		
+		<Event trigger ="unit_die">
+			<Condition>
+				local list = getMonstersInArea("GabReshGoblinArea");
+				if (list[1] == nil) then
+					return true;
+				else
+					return false;
+				end;
+			</Condition>
+			<Effect>
+				maylons_grave.goblins_killed = true;
+			</Effect>
+		</Event>
+		
+		<Event trigger="player_moved" once="true">
+			<Condition>
+				if (maylons_grave.goblins_killed ~= true and maylons_grave.started ~= true and maylons_grave.let_goblins_go ~= true) then
+					return (unitIsInArea(trigger.player,"GabReshArea"));
+				else
+					return false;
+				end;
+			</Condition>
+			<Effect>
+				createDialogue();
+				addSpeaker(maylons_grave_tmp.Goblin1,"G1");
+				addSpeaker(maylons_grave_tmp.Goblin1,"G2");
+				addSpeaker(maylons_grave_tmp.GabResh,"Gab Resh");
+				addSpeaker(trigger.player,"Player");
+				addStandardSpeakers();
+				setTopicBase("Gab Resh");
+				changeTopic("talk_with_goblins");
+			</Effect>
+		</Event>
+	</Region>
+	
+	
+	<Region name="aisMaylonsGraveL2">
+		<Event trigger ="create_region" once = "true">
+			<Effect>
+				addArea("MaylonUndeadArea","circle","cryptGraveChamber",15);
+				if (maylons_grave.freed ~= true) then
+					createMonsterGroup("undead_weak","cryptGraveChamber");
+					createMonsterGroup("lich_skeletons","cryptGraveChamber");
+				end;
+			</Effect>
+		</Event>
+		
+		<Event trigger ="unit_die">
+			<Condition>
+				local list = getMonstersInArea("MaylonUndeadArea");
+				if (list[1] == nil and maylons_grave.freed ~= true) then
+					return true;
+				else
+					return false;
+				end;
+			</Condition>
+			<Effect>
+				maylons_grave.freed = true;
+				maylons_grave_tmp.maylons_ghost = createObject("peasant", "cryptGraveChamber");
+				setRefName(maylons_grave_tmp.maylons_ghost, "Maylons Ghost");
+				createDialogue();
+				addSpeaker(maylons_grave_tmp.maylons_ghost,"Maylons Ghost");
+				addStandardSpeakers();
+				setTopicBase("Maylons Ghost");
+				changeTopic("maylons_grave_freed");
+			</Effect>
+		</Event>
+	</Region>
+	
+</Quest>
+
