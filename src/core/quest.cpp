@@ -1,5 +1,5 @@
 #include "quest.h"
-
+#include <libintl.h>
 
 Quest::Quest(std::string name, std::string table_name)
 {
