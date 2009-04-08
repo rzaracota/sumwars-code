@@ -436,6 +436,7 @@ void MainWindow::update()
 		updateObjectInfo();
 		
 		updateItemInfo();
+		updateRegionInfo();
 		updateSpeechBubbles();
 		
 		// Bild am Curso aktualisieren
@@ -568,7 +569,7 @@ bool MainWindow::setupGameScreen()
 		// Leiste fuer Item/Objekt-Info anlegen
 		setupObjectInfo();
 		setupItemInfo();
-		
+		setupRegionInfo();
 		
 		// Chatfenster anlegen
 		setupChatWindow();
@@ -873,6 +874,23 @@ void MainWindow::setupWorldmap()
 	wnd->getCEGUIWindow()->setVisible(false);
 }
 
+void MainWindow::setupRegionInfo()
+{
+	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
+	
+	CEGUI::Window* label;
+	label = win_mgr.createWindow("TaharezLook/StaticText", "RegionInfoLabel");
+	m_game_screen->addChildWindow(label);
+	label->setProperty("FrameEnabled", "false");
+	label->setProperty("BackgroundEnabled", "false");
+	label->setProperty("HorzFormatting", "HorzCentred");
+	label->setPosition(CEGUI::UVector2(cegui_reldim(0.25f), cegui_reldim( 0.05)));
+	label->setSize(CEGUI::UVector2(cegui_reldim(0.5f), cegui_reldim( 0.06f)));
+	label->setVisible(false);
+	label->setAlwaysOnTop(true);
+	label->setMousePassThroughEnabled(true);
+	label->setID(0);
+}
 
 void  MainWindow::setWindowExtents(int width, int height){
 	//Set Mouse Region.. if window resizes, we should alter this to reflect as well
@@ -2080,6 +2098,65 @@ void MainWindow::updatePartyInfo()
 			bar->setVisible(false);
 		}
 
+	}
+}
+
+void MainWindow::updateRegionInfo()
+{
+	static int region = -1;
+	static int id = 0;
+	static Timer timer;
+	
+	bool refresh = false;
+	
+	Player* pl = m_document->getLocalPlayer();	
+	if (pl->getRegion() != 0)
+	{
+		// update, wenn neuer Spieler oder neue Region gesetzt
+		if (pl->getId() != id)
+		{
+			refresh = true;
+			id = pl->getId();
+		}
+		
+		if (pl->getRegion()->getId() != region)
+		{
+			refresh = true;
+			region = pl->getRegion()->getId();
+		}
+		
+		if (refresh)
+		{
+			timer.start();
+		}
+		
+		float time = timer.getTime();
+		
+		bool vis = false;
+		if (time > 500 &&  time < 3000)
+		{
+			vis = true;
+		}
+		
+		CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
+	
+		CEGUI::Window* label;
+		label = win_mgr.getWindow("RegionInfoLabel");
+		
+		// nur anzeigen, wenn minimap nicht geoeffnet
+		int wflags = m_document->getGUIState()->m_shown_windows;
+		vis &= !(wflags & Document::MINIMAP);
+		
+		if (label->isVisible() != vis)
+		{
+			label->setVisible(vis);
+			
+			if (vis == true)
+			{
+				label->setText( (CEGUI::utf8*) dgettext("sumwars_xml",pl->getRegion()->getName().c_str()));
+			}
+		}
+		
 	}
 }
 

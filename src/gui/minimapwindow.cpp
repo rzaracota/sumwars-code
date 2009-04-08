@@ -31,7 +31,24 @@ MinimapWindow::MinimapWindow (Document* doc)
  	minimap->setAlpha (0.0);
 	minimap->setMousePassThroughEnabled(true);
 	
+	
 	CEGUI::Window* label;
+	
+	label = win_mgr.createWindow("TaharezLook/StaticText", "RegionNameLabel");
+	minimap->addChildWindow(label);
+	label->setProperty("FrameEnabled", "false");
+	label->setProperty("BackgroundEnabled", "false");
+	label->setProperty("HorzFormatting", "HorzCentred");
+	label->setPosition(CEGUI::UVector2(cegui_reldim(0.25f), cegui_reldim( 0.01)));
+	label->setSize(CEGUI::UVector2(cegui_reldim(0.5f), cegui_reldim( 0.06f)));
+	label->setVisible(true);
+	label->setAlwaysOnTop(true);
+	label->setMousePassThroughEnabled(true);
+	label->setID(0);
+	label->setText( "test" );
+	label->setInheritsAlpha (false);
+	label->setAlpha(0.6);
+	
 	label = win_mgr.createWindow("TaharezLook/StaticImage", "MinimapImage");
 	minimap->addChildWindow(label);
 	label->setProperty("FrameEnabled", "false");
@@ -152,6 +169,14 @@ void MinimapWindow::update()
 			
 		label = win_mgr.getWindow(stream.str());
 		label->setVisible(false);
+	}
+	
+	label = win_mgr.getWindow("RegionNameLabel");
+	
+	CEGUI::utf8* ctext = (CEGUI::utf8*) dgettext("sumwars_xml",region->getName().c_str());
+	if (label->getText() != ctext)
+	{
+		label->setText( ctext );
 	}
 	
 }

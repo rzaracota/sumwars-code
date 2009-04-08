@@ -181,6 +181,12 @@ class MainWindow :
 	void setupWorldmap();
 	
 	/**
+	 * \fn void setupRegionInfo()
+	 * \brief Erstellt Fenster mit Informationen zur Region
+	 */
+	void setupRegionInfo();
+	
+	/**
 	 * \fn bool initInputs()
 	 * \brief Initialisiert die Eingabegeraete
 	 */
@@ -227,6 +233,12 @@ class MainWindow :
 	 * \brief aktualisiert die Sprechblasen
 	 */
 	void updateSpeechBubbles();
+	
+	/**
+	 * \fn void updateRegionInfo()
+	 * \brief Erstellt Fenster mit Informationen zur Region
+	 */
+	void updateRegionInfo();
 
 
 	/**
