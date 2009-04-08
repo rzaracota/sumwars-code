@@ -405,6 +405,9 @@ bool Player::onGamefieldClick(ClientCommand* command)
 		return true;
 	}
 	
+	if (getRegion()==0)
+		return true;
+	
 	if (getRegion()->getCutsceneMode())
 	{
 		return true;
