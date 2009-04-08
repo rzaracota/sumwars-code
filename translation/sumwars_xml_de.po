@@ -16,44 +16,1005 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: besieged_farm.xml
-msgid "Besieged Farm"
-msgstr "Der bleagerte Bauernhof"
+#: shortbow.xml
+msgid "practice bow"
+msgstr "Uebungsbogen"
 
-#: besieged_farm.xml
-msgid "Besieged Farm (Reward)"
-msgstr "Der belagerte Bauernhof(Belohnung)"
+#: shortbow.xml
+msgid "goblin bow"
+msgstr "Goblinbogen"
 
-#: besieged_farm.xml
-msgid "Brons Safety"
-msgstr "Brons Familie ist sicher"
+#: shortbow.xml
+msgid "yew shortbow"
+msgstr "Eibenkurzbogen"
 
-#Bron's door
-#: besieged_farm.xml
-msgid "Brons Tuer"
-msgstr "Tuer zu Brons Farm"
+#: shortbow.xml
+msgid "shortbow"
+msgstr "Kurzbogen"
+
+#: shortbow.xml
+msgid "hunting bow"
+msgstr "Jagdbogen"
+
+#: shortbow.xml
+msgid "rattan bow"
+msgstr "Rattanbogen"
+
+#: shortbow.xml
+msgid "bandit bow"
+msgstr "Banditenbogen"
+
+#: shortbow.xml
+msgid "northeye"
+msgstr "Nordauge"
+
+#: shortbow.xml
+msgid "battle shortbow"
+msgstr "Kriegskurzbogen"
+
+#: shortbow.xml
+msgid "composite shortbow"
+msgstr "Kompositbogen"
+
+#: shortbow.xml
+msgid "rider bow"
+msgstr "Reiterbogen"
+
+#: shortbow.xml
+msgid "coal bow"
+msgstr "Kohlebogen"
+
+#: shortbow.xml
+msgid "ash bow"
+msgstr "Eschenbogen"
+
+#: shortbow.xml
+msgid "bane bow"
+msgstr "Fluchbogen"
+
+#: shortbow.xml
+msgid "oak shortbow"
+msgstr "Eichenkurzbogen"
+
+#: shortbow.xml
+msgid "soul bow"
+msgstr "Seelenbogen"
+
+#: shortbow.xml
+msgid "seeker"
+msgstr "Sucher"
+
+#: shortbow.xml
+msgid "chaos shortbow"
+msgstr "Chaosbogen"
+
+#: shortbow.xml
+msgid "fairy bow"
+msgstr "Feenbogen"
+
+#: potion.xml
+msgid "small potion"
+msgstr "Kleiner Heiltrank"
+
+#: potion.xml
+msgid "medium potion"
+msgstr "Mittlerer Heiltrank"
+
+#: potion.xml
+msgid "eyedrops"
+msgstr "Augentropfen"
+
+#: potion.xml
+msgid "antidot"
+msgstr "Gegengift"
+
+#: potion.xml
+msgid "calming salve"
+msgstr "Beruhigende Salbe"
+
+#: potion.xml
+msgid "potion of determination"
+msgstr "Trank der Entscheidungsstaerke"
+
+#: potion.xml
+msgid "echo potion"
+msgstr "Echotrank"
+
+#: potion.xml
+msgid "muscle salve"
+msgstr "Muskelsalbe"
+
+#: potion.xml
+msgid "potion of melting"
+msgstr "Auftautrank"
+
+#: potion.xml
+msgid "spike oil"
+msgstr "Lavendeloel"
+
+#: axes2h.xml
+msgid "lumberjack axe"
+msgstr "Holzfaelleraxt"
+
+#: axes2h.xml
+msgid "great axe"
+msgstr "Grossaxt"
+
+#: axes2h.xml
+msgid "ripping axe"
+msgstr "Reisseraxt"
+
+#: axes2h.xml
+msgid "executioner axe"
+msgstr "Henkersaxt"
+
+#: axes2h.xml
+msgid "smashing axe"
+msgstr "Schmetteraxt"
+
+#: axes2h.xml
+msgid "ogre hatchet"
+msgstr "Ogerbeil"
+
+#: axes2h.xml
+msgid "scythe axe"
+msgstr "Sensenaxt"
+
+#: axes2h.xml
+msgid "barbarian axe"
+msgstr "Barbarenstreitaxt"
+
+#: axes2h.xml
+msgid "bonebreaker axe"
+msgstr "Kncohenbrecheraxt"
+
+#: axes2h.xml
+msgid "giant axe"
+msgstr "Riesenaxt"
+
+#: axes2h.xml
+msgid "slaughter axe"
+msgstr "Schlachtaxt"
+
+#: axes2h.xml
+msgid "ogretearer"
+msgstr "Ogerreisser"
+
+#: axes2h.xml
+msgid "dwarfensteel axe"
+msgstr "Zwergenstahlaxt"
+
+#: axes2h.xml
+msgid "star axe"
+msgstr "Sternenaxt"
+
+#: axes2h.xml
+msgid "kings axe"
+msgstr "Koenigsaxt"
+
+#: axes2h.xml
+msgid "torture axe"
+msgstr "Folteraxt"
+
+#: axes2h.xml
+msgid "iceland axe"
+msgstr "Eislandaxt"
+
+#: axes2h.xml
+msgid "death axe"
+msgstr "Todesaxt"
+
+#: hammer2h.xml
+msgid "sledgehammer"
+msgstr "Vorschlaghammer"
+
+#: hammer2h.xml
+msgid "bronze hammer"
+msgstr "Bronzehammer"
+
+#: hammer2h.xml
+msgid "longshaft"
+msgstr "Langstiel"
+
+#: hammer2h.xml
+msgid "guard hammer"
+msgstr "Gardistenhammer"
+
+#: hammer2h.xml
+msgid "silverterror"
+msgstr "Silberschrecken"
+
+#: hammer2h.xml
+msgid "glow hammer"
+msgstr "Glimmhammer"
+
+#: hammer2h.xml
+msgid "bonebreaker"
+msgstr "Knochenbrecher"
+
+#: hammer2h.xml
+msgid "smashhead"
+msgstr "Schmetterkopf"
+
+#: hammer2h.xml
+msgid "aisener warhammer"
+msgstr "Aisener Kriegshammer"
+
+#: hammer2h.xml
+msgid "judgement hammer"
+msgstr "Urteilshammer"
+
+#: hammer2h.xml
+msgid "priest hammer"
+msgstr "Priesterhammer"
+
+#: hammer2h.xml
+msgid "obsidian hammer"
+msgstr "Obsidianhammer"
+
+#: hammer2h.xml
+msgid "judge hammer"
+msgstr "Richthammer"
+
+#: hammer2h.xml
+msgid "cyclops hammer"
+msgstr "Zyklopenhammer"
+
+#: hammer2h.xml
+msgid "dwarfensteel hammer"
+msgstr "Zwergenstahlhammer"
+
+#: hammer2h.xml
+msgid "elementhunter"
+msgstr "Elementenjaeger"
+
+#: hammer2h.xml
+msgid "exorcists hammer"
+msgstr "Exorzistenhammer"
+
+#: hammer2h.xml
+msgid "worldshaker"
+msgstr "Welterschuetterer"
+
+#: helmet.xml
+msgid "cap"
+msgstr "Kappe"
+
+#: helmet.xml
+msgid "leather cap"
+msgstr "Lederkappe"
+
+#: helmet.xml
+msgid "leather helmet"
+msgstr "Lederhelm"
+
+#: helmet.xml
+msgid "mercenary head"
+msgstr "Soeldnerkopf"
+
+#: helmet.xml
+msgid "novice headgear"
+msgstr "Novizenhelm"
+
+#: helmet.xml
+msgid "mercenary helmet"
+msgstr "Soeldnerhelm"
+
+#: helmet.xml
+msgid "ranger bandana"
+msgstr "Waldlaeuferstirnband"
+
+#: helmet.xml
+msgid "assassin hood"
+msgstr "Assassinenkapuze"
+
+#: helmet.xml
+msgid "biretta"
+msgstr "Birett"
+
+#: hammer1h.xml
+msgid "hammer"
+msgstr "Hammer"
+
+#: hammer1h.xml
+msgid "goblin club"
+msgstr "Goblinkeule"
+
+#: hammer1h.xml
+msgid "cermeonial hammer"
+msgstr "Zeremonienhammer"
+
+#: hammer1h.xml
+msgid "nail club"
+msgstr "Nagelkeule"
+
+#: hammer1h.xml
+msgid "iron hammer"
+msgstr "Eisenhammer"
+
+#: hammer1h.xml
+msgid "iron club"
+msgstr "Eisenkeule"
+
+#: hammer1h.xml
+msgid "maul"
+msgstr "Schlaegel"
+
+#: hammer1h.xml
+msgid "morning star"
+msgstr "Morgenstern"
+
+#: hammer1h.xml
+msgid "crowhead"
+msgstr "Kraehenkopf"
+
+#: hammer1h.xml
+msgid "rider hammer"
+msgstr "Reiterhammer"
+
+#: hammer1h.xml
+msgid "mace"
+msgstr "Streitkolben"
+
+#: hammer1h.xml
+msgid "steel hammer"
+msgstr "Stahlhammer"
+
+#: hammer1h.xml
+msgid "battle hammer"
+msgstr "Kriegshammer"
+
+#: hammer1h.xml
+msgid "steel mace"
+msgstr "Stahlstreitkolben"
+
+#: hammer1h.xml
+msgid "steel maul"
+msgstr "Stahlschlaegel"
+
+#: hammer1h.xml
+msgid "sixedged mace"
+msgstr "Sechskantstreitkolben"
+
+#: hammer1h.xml
+msgid "silver hammer"
+msgstr "Silberhammer"
+
+#: hammer1h.xml
+msgid "diamont hammer"
+msgstr "Diamanthammer"
+
+#: hammer1h.xml
+msgid "priest mace"
+msgstr "Priesterstreitkolben"
+
+#: hammer1h.xml
+msgid "holy hammer"
+msgstr "Heiliger Hammer"
+
+#: shields.xml
+msgid "targe"
+msgstr "Tartsche"
+
+#: shields.xml
+msgid "buckler"
+msgstr "Buckler"
+
+#: shields.xml
+msgid "wood shield"
+msgstr "Holzschild"
+
+#: shields.xml
+msgid "bronze shield"
+msgstr "Bronzeschild"
+
+#: shields.xml
+msgid "iron shield"
+msgstr "Eisenschild"
+
+#: shields.xml
+msgid "steel shield"
+msgstr "Stahlschild"
+
+#: wands.xml
+msgid "ice wand"
+msgstr ""
+
+#: wands.xml
+msgid "spruce wand"
+msgstr "Fichtenzauberstab"
+
+#: wands.xml
+msgid "apprentice wand"
+msgstr "Lehrlingszauberstab"
+
+#: wands.xml
+msgid "novice wand"
+msgstr "Novizenzauberstab"
+
+#: wands.xml
+msgid "rock wand"
+msgstr "Felsenzauberstab"
+
+#: wands.xml
+msgid "alder wand"
+msgstr "Erlenzauberstab"
+
+#: wands.xml
+msgid "magus wand"
+msgstr "Magierzauberstab"
+
+#: wands.xml
+msgid "silver wand"
+msgstr "Silberzauberstab"
+
+#: wands.xml
+msgid "oak wand"
+msgstr "Eichenzauberstab"
+
+#: wands.xml
+msgid "phenix wand"
+msgstr "Phoenixzauberstab"
+
+#: wands.xml
+msgid "frost wand"
+msgstr "Frostzauberstab"
+
+#: wands.xml
+msgid "thunder wand"
+msgstr "Gewitterzauberstab"
+
+#: wands.xml
+msgid "ash wand"
+msgstr "Eschenzauberstab"
+
+#: wands.xml
+msgid "summoner wand"
+msgstr "Beschwoererzauberstab"
+
+#: wands.xml
+msgid "master wand"
+msgstr "Magisterzauberstab"
+
+#: wands.xml
+msgid "necromancer wand"
+msgstr "Nekromantenzauberstab"
+
+#: wands.xml
+msgid "demon wand"
+msgstr "Daemonenzauberstab"
+
+#: wands.xml
+msgid "fairy wand"
+msgstr "Feenzauberstab"
+
+#: wands.xml
+msgid "archmage wand"
+msgstr "Erzmagierzauberstab"
+
+#: axes1h.xml
+msgid "hatchet"
+msgstr "Beil"
+
+#: axes1h.xml
+msgid "bronze axe"
+msgstr "Bronzeaxt"
+
+#: axes1h.xml
+msgid "iron hatchet"
+msgstr "Eisenbeil"
+
+#: axes1h.xml
+msgid "cleaver"
+msgstr "Schlachtbeil"
+
+#: axes1h.xml
+msgid "iron axe"
+msgstr "Eisenaxt"
+
+#: axes1h.xml
+msgid "mercenary axe"
+msgstr "Soeldneraxt"
+
+#: axes1h.xml
+msgid "steel axe"
+msgstr "Stahlaxt"
+
+#: axes1h.xml
+msgid "battle axe"
+msgstr "Kampfaxt"
+
+#: axes1h.xml
+msgid "guard axe"
+msgstr "Gardistenaxt"
+
+#: axes1h.xml
+msgid "minotaur axe"
+msgstr "Minotaurenaxt"
+
+#: axes1h.xml
+msgid "thunder axe"
+msgstr "Donneraxt"
+
+#: axes1h.xml
+msgid "demon axe"
+msgstr "Daemonenaxt"
+
+#: axes1h.xml
+msgid "obsidian axe"
+msgstr "Obsidianaxt"
+
+#: axes1h.xml
+msgid "vulcano axe"
+msgstr "Vulkanaxt"
+
+#: axes1h.xml
+msgid "berserker axe"
+msgstr "Berserkeraxt"
+
+#: axes1h.xml
+msgid "diamont axe"
+msgstr "Diamantaxt"
+
+#: axes1h.xml
+msgid "dwarfen axe"
+msgstr "Zwergenaxt"
+
+#: axes1h.xml
+msgid "hell axe"
+msgstr "Hoellenaxt"
+
+#: swords1h.xml
+msgid "dagger"
+msgstr "Dolch"
+
+#: swords1h.xml
+msgid "rusty dagger"
+msgstr "Rostiger Dolch"
+
+#: swords1h.xml
+msgid "shortsword"
+msgstr "Kurzschwert"
+
+#: swords1h.xml
+msgid "bronzesword"
+msgstr "Bronzeschwert"
+
+#: swords1h.xml
+msgid "old sword"
+msgstr "Altes Schwert"
+
+#: swords1h.xml
+msgid "sabre"
+msgstr "Saebel"
+
+#: swords1h.xml
+msgid "legion blade"
+msgstr "Legionaersklinge"
+
+#: swords1h.xml
+msgid "long sword"
+msgstr "Langschwert"
+
+#: swords1h.xml
+msgid "sword of the coast"
+msgstr "Kuestenschwert"
+
+#: swords1h.xml
+msgid "scimitar"
+msgstr "Krummsaebel"
+
+#: swords1h.xml
+msgid "barbarian sword"
+msgstr "Barbarenschwert"
+
+#: swords1h.xml
+msgid "northlings blade"
+msgstr "Nordlingsklinge"
+
+#: swords1h.xml
+msgid "steel sword"
+msgstr "Stahlschwert"
+
+#: swords1h.xml
+msgid "assassins blade"
+msgstr "Assassinenklinge"
+
+#: swords1h.xml
+msgid "diamont sword"
+msgstr "Diamantschwert"
+
+#: swords1h.xml
+msgid "dwarfsteel sword"
+msgstr "Zwergenstahlschwert"
+
+#: swords1h.xml
+msgid "demon blade"
+msgstr "Daemonenschwert"
+
+#: swords1h.xml
+msgid "hero blade"
+msgstr "Heldenklinge"
+
+#: swords1h.xml
+msgid "angel blade"
+msgstr "Engelsklinge"
+
+#: swords1h.xml
+msgid "gods blade"
+msgstr "Goetterklinge"
+
+#: staff.xml
+msgid "spruce staff"
+msgstr "Fichtenstab"
+
+#: staff.xml
+msgid "apprentice staff"
+msgstr "Lehrlingsstab"
+
+#: staff.xml
+msgid "novice staff"
+msgstr "Novizenstab"
+
+#: staff.xml
+msgid "rock staff"
+msgstr "Felsenstab"
+
+#: staff.xml
+msgid "alder staff"
+msgstr "Erlenstab"
+
+#: staff.xml
+msgid "magus staff"
+msgstr "Magierstab"
+
+#: staff.xml
+msgid "silver staff"
+msgstr "Silberstab"
+
+#: staff.xml
+msgid "oak staff"
+msgstr "Eichenstab"
+
+#: staff.xml
+msgid "phenix staff"
+msgstr "Phoenixstab"
+
+#: staff.xml
+msgid "frost staff"
+msgstr "Froststab"
+
+#: staff.xml
+msgid "thunder staff"
+msgstr "Gewitterstab"
+
+#: staff.xml
+msgid "ash staff"
+msgstr "Eschenstab"
+
+#: staff.xml
+msgid "summoner staff"
+msgstr "Beschwoererstab"
+
+#: staff.xml
+msgid "master staff"
+msgstr "Magisterstab"
+
+#: staff.xml
+msgid "necromancer staff"
+msgstr "Nekromantenstab"
+
+#: staff.xml
+msgid "demon staff"
+msgstr "Daemonenstab"
+
+#: staff.xml
+msgid "fairy staff"
+msgstr "Feenstab"
+
+#: staff.xml
+msgid "archmage staff"
+msgstr "Erzmagierstab"
+
+#: ring.xml
+msgid "bronze ring"
+msgstr "Bronzering"
+
+#: ring.xml
+msgid "amber ring"
+msgstr "Bernsteinring"
+
+#: ring.xml
+msgid "silver ring"
+msgstr "Silberring"
+
+#: ring.xml
+msgid "jet ring"
+msgstr "Jettring"
+
+#: ring.xml
+msgid "gold ring"
+msgstr "Goldring"
+
+#: swords2h.xml
+msgid "farmer sword"
+msgstr "Bauernzweihaender"
+
+#: swords2h.xml
+msgid "mercenary blade"
+msgstr "Soeldnerklinge"
+
+#: swords2h.xml
+msgid "two handed steel sword"
+msgstr "Stahlzweihaender"
+
+#: swords2h.xml
+msgid "smash sword"
+msgstr "Schmetterschwert"
+
+#: swords2h.xml
+msgid "horse killer"
+msgstr "Pferdeschlaechter"
+
+#: swords2h.xml
+msgid "bastard sword"
+msgstr "Bastardschwert"
+
+#: swords2h.xml
+msgid "ogre dagger"
+msgstr "Ogerdolch"
+
+#: swords2h.xml
+msgid "goblinkiller"
+msgstr "Goblintoeter"
+
+#: swords2h.xml
+msgid "executioner's sword"
+msgstr "Richtschwert"
+
+#: swords2h.xml
+msgid "two handed guardsman sword"
+msgstr "Gardistenzweihaender"
+
+#: swords2h.xml
+msgid "flamberg"
+msgstr "Flamberg"
+
+#: swords2h.xml
+msgid "aisener battle sword"
+msgstr "Aisener Kriegsschert"
+
+#: swords2h.xml
+msgid "monster sword"
+msgstr "Monsterschwert"
+
+#: swords2h.xml
+msgid "tear sword"
+msgstr "Traenenschwert"
+
+#: swords2h.xml
+msgid "deathwind"
+msgstr "Todeswind"
+
+#: swords2h.xml
+msgid "dread sword"
+msgstr "Schreckensschwert"
+
+#: swords2h.xml
+msgid "great sword"
+msgstr "Grossschwert"
+
+#: swords2h.xml
+msgid "angel sword"
+msgstr "Engelsschwert"
+
+#: longbow.xml
+msgid "tourney bow"
+msgstr "Turnierbogen"
+
+#: longbow.xml
+msgid "orc bow"
+msgstr "Orkbogen"
+
+#: longbow.xml
+msgid "yew bow"
+msgstr "Eibenbogen"
+
+#: longbow.xml
+msgid "longbow"
+msgstr "Langbogen"
+
+#: longbow.xml
+msgid "soldier bow"
+msgstr "Soldatenbogen"
+
+#: longbow.xml
+msgid "horn bow"
+msgstr "Hornbogen"
+
+#: longbow.xml
+msgid "maple bow"
+msgstr "Ahornbogen"
+
+#: longbow.xml
+msgid "battle bow"
+msgstr "Kriegsbogen"
+
+#: longbow.xml
+msgid "composite longbow"
+msgstr "Kompositlangbogen"
+
+#: longbow.xml
+msgid "stormsinger"
+msgstr "Sturmsaenger"
+
+#: longbow.xml
+msgid "oak bow"
+msgstr "Eichenbogen"
+
+#: longbow.xml
+msgid "demonhorn bow"
+msgstr "Daemonenhornbogen"
+
+#: longbow.xml
+msgid "ranger bow"
+msgstr "Waldlaeuferbogen"
+
+#: longbow.xml
+msgid "ash longbow"
+msgstr "Eschenlangbogen"
+
+#: longbow.xml
+msgid "demon compositebow"
+msgstr "Daemonenkompositbogen"
+
+#: longbow.xml
+msgid "hero bow"
+msgstr "Heldenbogen"
+
+#: longbow.xml
+msgid "elf bow"
+msgstr "Elfenbogen"
+
+#: hat.xml
+msgid "vagabond hat"
+msgstr "Vagabundenhut"
+
+#: hat.xml
+msgid "apprentice cap"
+msgstr ""
+
+#: hat.xml
+msgid "novice hat"
+msgstr "Novizenhut"
+
+#: hat.xml
+msgid "alchemist cap"
+msgstr "Alchemistenkappe"
+
+#: hat.xml
+msgid "beret"
+msgstr "Barett"
+
+#: hat.xml
+msgid "magus hat"
+msgstr "Magierhut"
+
+#: armor.xml
+msgid "cloth armor"
+msgstr "Tuchruestung"
+
+#: armor.xml
+msgid "leather armor"
+msgstr "Lederruestung"
+
+#: armor.xml
+msgid "rivet armor"
+msgstr "Nietenruestung"
+
+#: armor.xml
+msgid "bandit armor"
+msgstr "Banditenruestung"
+
+#: armor.xml
+msgid "novice armor"
+msgstr "Novizenruestung"
+
+#: armor.xml
+msgid "mercenary armor"
+msgstr "Soeldnerruestung"
+
+#: armor.xml
+msgid "ranger shirt"
+msgstr "Waldlaeuferhemd"
+
+#: armor.xml
+msgid "assassin armor"
+msgstr "Assassinenruestung"
+
+#: armor.xml
+msgid "temple armor"
+msgstr "Tempelruestung"
+
+#: robes.xml
+msgid "ragged robe"
+msgstr "Flickenrobe"
+
+#: robes.xml
+msgid "apprentice robe"
+msgstr "Lehrlingskappe"
+
+#: robes.xml
+msgid "novice robe"
+msgstr "Novizenrobe"
+
+#: robes.xml
+msgid "alchemist robe"
+msgstr "Alchemistenrobe"
+
+#: robes.xml
+msgid "scholar robe"
+msgstr "Gelehrtenrobe"
+
+#: robes.xml
+msgid "magus robe"
+msgstr "Magierrobe"
+
+#: glove.xml
+msgid "leather gloves"
+msgstr "Lederhandschuhe"
+
+#: glove.xml
+msgid "snakehide gloves"
+msgstr "Schlangenlederhandschuhe"
+
+#: glove.xml
+msgid "buckskin gloves"
+msgstr "Wildlederhandschuhe"
+
+#: glove.xml
+msgid "chain gloves"
+msgstr "Kettenhandschuhe"
+
+#: glove.xml
+msgid "spidersilk gloves"
+msgstr "Spinnenseidehandschuhe"
+
+#: glove.xml
+msgid "marksman gloves"
+msgstr "Schuetzenhandschuhe"
+
+#: glove.xml
+msgid "assassin gloves"
+msgstr "Assassinenhandschuhe"
+
+#: amulet.xml
+msgid "feather amulet"
+msgstr "Federnamulett"
+
+#: amulet.xml
+msgid "amber amulet"
+msgstr "Bernsteinamulett"
+
+#: amulet.xml
+msgid "silver amulet"
+msgstr "Silberamulett"
+
+#: amulet.xml
+msgid "coral amulet"
+msgstr "Korallenamulett"
+
+#: amulet.xml
+msgid "gold amulet"
+msgstr "Goldamulett"
 
 #: goblins.xml
 msgid "Der Goblinvernichter"
 msgstr ""
 
-#TODO Besieged Farm
-#: besieged_farm.xml
-msgid "Der belagerte Bauernhof"
-msgstr "Der belagerte Bauernhof"
-
-#TODO A friend in need
-#: rescue_willard.xml_bak
-msgid "Ein Freund in Not"
-msgstr "Ein Freund in Not"
-
-#: rescue_willard.xml_bak
-msgid "Fenor Marken"
-msgstr "Fenor Marken"
-
-#: herbalist.xml
-msgid "Gertlinde Kampfer"
-msgstr "Gertlinde Kampfer"
+#: goblins.xml
+msgid "peasant"
+msgstr "Bauer"
 
 #: goblins.xml
 msgid "Goblins"
@@ -63,517 +1024,207 @@ msgstr ""
 msgid "Goblins (Belohnung)"
 msgstr ""
 
-#TODO Trade
-#: npc.xml
-msgid "Handel"
-msgstr "Handel"
+#: goblins.xml
+msgid "region1"
+msgstr ""
 
-#TODO Herb gathering
-#: herbalist.xml
-msgid "Kraeutersammler"
-msgstr "Kraeutersammler"
+#: defend_dwarfenfroward.xml
+#, fuzzy
+msgid "Defend Dwarfenfroward"
+msgstr "Zwergentrutz"
 
-#TODO Maylons Ghost
-#: npc.xml
-msgid "Maylons Geist"
-msgstr "Maylons Geist"
+#: defend_dwarfenfroward.xml
+msgid "Soren Windclaw"
+msgstr "Soren Windklaue"
 
-#: npc.xml
-msgid "Michel Bron"
-msgstr "Michel Bron"
+#: defend_dwarfenfroward.xml
+msgid "elCnlLobby"
+msgstr "Lobby des Konzils"
 
-#TODO Rob the robber
-#: rob_the_robber.xml
-msgid "Rob der Raeuber"
-msgstr "Rob der Raeuber"
-
-#: rob_the_robber.xml
-msgid "Rob the Robber (Reward)"
-msgstr "Rob der Raeuber (Belohnung)"
-
-#: scene1.xml
-msgid "Scene1"
-msgstr "Hilfe fuer Zwergentrutz"
+# TODO Besieged Farm
+#: besieged_farm.xml
+msgid "Der belagerte Bauernhof"
+msgstr "Der belagerte Bauernhof"
 
 #: besieged_farm.xml
 msgid "Sergeant Lutterer"
 msgstr "Sergeant Lutterer"
 
-#: rob_the_robber.xml
-msgid "Sergeant Wober"
-msgstr "Sergeant Wober"
+#: besieged_farm.xml
+msgid "Besieged Farm"
+msgstr "Der bleagerte Bauernhof"
 
-#: scene1.xml
-msgid "Soren Windclaw"
-msgstr "Soren Windklaue"
+#: besieged_farm.xml
+msgid "Besieged Farm (Reward)"
+msgstr "Der belagerte Bauernhof(Belohnung)"
 
-#: rob_the_robber.xml
-msgid "Steckbrief"
-msgstr "Ein lukrativer Steckbrief"
+# Bron's door
+#: besieged_farm.xml
+msgid "Brons Tuer"
+msgstr "Tuer zu Brons Farm"
 
-#: scene1.xml
-msgid "Szene"
-msgstr ""
-
-#: rescue_willard.xml_bak
-msgid "Willard"
-msgstr "Willard"
-
-#: rescue_willard.xml_bak
-msgid "Willard (Belohnung)"
-msgstr ""
-
-#: rescue_willard.xml
-msgid "Willard (Reward)"
-msgstr "Willard den Stein geben (Belohnung)"
-
-#: rob_the_robber.xml
-msgid "aisFairyforest"
-msgstr "Feenwald"
-
-#: world.xml_bak
-msgid "aisHeath"
-msgstr "Aisener Heide"
-
-#: world.xml_bak
-msgid "aisJoringsforest"
-msgstr "Joringsforst"
-
-#: world.xml_bak
-msgid "aisMaylonsGraveL1"
-msgstr "Maylons Grab"
-
-#: world.xml_bak
-msgid "aisMaylonsGraveL2"
-msgstr "Maylons Grab, Krypta"
-
-#: rescue_willard.xml_bak
-msgid "aisMeadow"
-msgstr "Aisener Wiese"
+#: besieged_farm.xml
+msgid "Brons Safety"
+msgstr "Brons Familie ist sicher"
 
 #: besieged_farm.xml
 msgid "aisNorthMeadow"
 msgstr "Noerdliche Wiese"
 
-#: world.xml_bak
-msgid "aisPlains"
-msgstr "Offene Ebene"
+#: maylons_grave.xml
+#, fuzzy
+msgid "Maylons Grave"
+msgstr "Maylons Grab"
 
-#: world.xml_bak
-msgid "aisWolfstones"
-msgstr "Wolfssteine"
-
-#: swords2h.xml
-msgid "aisener battle sword"
-msgstr "Aisener Kriegsschert"
-
-#: hammer2h.xml
-msgid "aisener warhammer"
-msgstr "Aisener Kriegshammer"
-
-#: hat.xml
-msgid "alchemist cap"
-msgstr "Alchemistenkappe"
-
-#: robes.xml
-msgid "alchemist robe"
-msgstr "Alchemistenrobe"
-
-#: staff.xml
-msgid "alder staff"
-msgstr "Erlenstab"
-
-#: wands.xml
-msgid "alder wand"
-msgstr "Erlenzauberstab"
-
-#: amulet.xml
-msgid "amber amulet"
-msgstr "Bernsteinamulett"
-
-#: ring.xml
-msgid "amber ring"
-msgstr "Bernsteinring"
-
-#: swords1h.xml
-msgid "angel blade"
-msgstr "Engelsklinge"
-
-#: swords2h.xml
-msgid "angel sword"
-msgstr "Engelsschwert"
-
-#: potion.xml
-msgid "antidot"
-msgstr "Gegengift"
-
-#: hat.xml
-msgid "apprentice cap"
+#: maylons_grave.xml
+msgid "Gab Resh"
 msgstr ""
 
-#: robes.xml
-msgid "apprentice robe"
-msgstr "Lehrlingskappe"
+# TODO Maylons Ghost
+#: maylons_grave.xml
+#, fuzzy
+msgid "Maylons Ghost"
+msgstr "Maylons Geist"
 
-#: staff.xml
-msgid "apprentice staff"
-msgstr "Lehrlingsstab"
+#: maylons_grave.xml
+msgid "aisMaylonsGraveL1"
+msgstr "Maylons Grab"
 
-#: wands.xml
-msgid "apprentice wand"
-msgstr "Lehrlingszauberstab"
+#: maylons_grave.xml
+msgid "aisMaylonsGraveL2"
+msgstr "Maylons Grab, Krypta"
 
-#: staff.xml
-msgid "archmage staff"
-msgstr "Erzmagierstab"
+# TODO Herb gathering
+#: herbalist.xml
+msgid "Kraeutersammler"
+msgstr "Kraeutersammler"
 
-#: wands.xml
-msgid "archmage wand"
-msgstr "Erzmagierzauberstab"
+#: herbalist.xml
+msgid "Gertlinde Kampfer"
+msgstr "Gertlinde Kampfer"
 
-#: shortbow.xml
-msgid "ash bow"
-msgstr "Eschenbogen"
+#: herbalist.xml
+msgid "joringsbridge"
+msgstr "Joringsbrueck"
 
-#: longbow.xml
-msgid "ash longbow"
-msgstr "Eschenlangbogen"
+# TODO Rob the robber
+#: rob_the_robber.xml
+msgid "Rob der Raeuber"
+msgstr "Rob der Raeuber"
 
-#: staff.xml
-msgid "ash staff"
-msgstr "Eschenstab"
+#: rob_the_robber.xml
+msgid "Steckbrief"
+msgstr "Ein lukrativer Steckbrief"
 
-#: wands.xml
-msgid "ash wand"
-msgstr "Eschenzauberstab"
+#: rob_the_robber.xml
+msgid "Sergeant Wober"
+msgstr "Sergeant Wober"
 
-#: armor.xml
-msgid "assassin armor"
-msgstr "Assassinenruestung"
+#: rob_the_robber.xml
+msgid "Rob the Robber (Reward)"
+msgstr "Rob der Raeuber (Belohnung)"
 
-#: glove.xml
-msgid "assassin gloves"
-msgstr "Assassinenhandschuhe"
+#: rob_the_robber.xml
+msgid "aisFairyforest"
+msgstr "Feenwald"
 
-#: helmet.xml
-msgid "assassin hood"
-msgstr "Assassinenkapuze"
+# TODO A friend in need
+#: rescue_willard.xml
+msgid "Ein Freund in Not"
+msgstr "Ein Freund in Not"
 
-#: swords1h.xml
-msgid "assassins blade"
-msgstr "Assassinenklinge"
+#: rescue_willard.xml
+msgid "Fenor Marken"
+msgstr "Fenor Marken"
 
-#: armor.xml
-msgid "bandit armor"
-msgstr "Banditenruestung"
+#: rescue_willard.xml
+msgid "Willard"
+msgstr "Willard"
 
-#: shortbow.xml
-msgid "bandit bow"
-msgstr "Banditenbogen"
+#: rescue_willard.xml
+msgid "Willard (Reward)"
+msgstr "Willard den Stein geben (Belohnung)"
 
-#: shortbow.xml
-msgid "bane bow"
-msgstr "Fluchbogen"
+#: rescue_willard.xml
+msgid "medMercCamp"
+msgstr "Soeldnerlager von Medair"
 
-#: axes2h.xml
-msgid "barbarian axe"
-msgstr "Barbarenstreitaxt"
+#: rescue_willard.xml
+msgid "aisMeadow"
+msgstr "Aisener Wiese"
 
-#: swords1h.xml
-msgid "barbarian sword"
-msgstr "Barbarenschwert"
-
-#: swords2h.xml
-msgid "bastard sword"
-msgstr "Bastardschwert"
-
-#: axes1h.xml
-msgid "battle axe"
-msgstr "Kampfaxt"
-
-#: longbow.xml
-msgid "battle bow"
-msgstr "Kriegsbogen"
-
-#: hammer1h.xml
-msgid "battle hammer"
-msgstr "Kriegshammer"
-
-#: shortbow.xml
-msgid "battle shortbow"
-msgstr "Kriegskurzbogen"
-
-#: hat.xml
-msgid "beret"
-msgstr "Barett"
-
-#: axes1h.xml
-msgid "berserker axe"
-msgstr "Berserkeraxt"
-
-#: helmet.xml
-msgid "biretta"
-msgstr "Birett"
-
-#: hammer2h.xml
-msgid "bonebreaker"
-msgstr "Knochenbrecher"
-
-#: axes2h.xml
-msgid "bonebreaker axe"
-msgstr "Kncohenbrecheraxt"
-
-#: axes1h.xml
-msgid "bronze axe"
-msgstr "Bronzeaxt"
-
-#: hammer2h.xml
-msgid "bronze hammer"
-msgstr "Bronzehammer"
-
-#: ring.xml
-msgid "bronze ring"
-msgstr "Bronzering"
-
-#: shields.xml
-msgid "bronze shield"
-msgstr "Bronzeschild"
-
-#: swords1h.xml
-msgid "bronzesword"
-msgstr "Bronzeschwert"
-
-#: shields.xml
-msgid "buckler"
-msgstr "Buckler"
-
-#: glove.xml
-msgid "buckskin gloves"
-msgstr "Wildlederhandschuhe"
-
-#: potion.xml
-msgid "calming salve"
-msgstr "Beruhigende Salbe"
-
-#: helmet.xml
-msgid "cap"
-msgstr "Kappe"
-
-#: hammer1h.xml
-msgid "cermeonial hammer"
-msgstr "Zeremonienhammer"
-
-#: glove.xml
-msgid "chain gloves"
-msgstr "Kettenhandschuhe"
-
-#: shortbow.xml
-msgid "chaos shortbow"
-msgstr "Chaosbogen"
-
-#: axes1h.xml
-msgid "cleaver"
-msgstr "Schlachtbeil"
-
-#: armor.xml
-msgid "cloth armor"
-msgstr "Tuchruestung"
-
-#: shortbow.xml
-msgid "coal bow"
-msgstr "Kohlebogen"
-
-#: longbow.xml
-msgid "composite longbow"
-msgstr "Kompositlangbogen"
-
-#: shortbow.xml
-msgid "composite shortbow"
-msgstr "Kompositbogen"
-
-#: amulet.xml
-msgid "coral amulet"
-msgstr "Korallenamulett"
-
-#: hammer1h.xml
-msgid "crowhead"
-msgstr "Kraehenkopf"
-
-#: hammer2h.xml
-msgid "cyclops hammer"
-msgstr "Zyklopenhammer"
-
-#: swords1h.xml
-msgid "dagger"
-msgstr "Dolch"
+# TODO Trade
+#: npc.xml
+msgid "Handel"
+msgstr "Handel"
 
 #: npc.xml
 msgid "das erste Thema"
 msgstr ""
 
-#: axes2h.xml
-msgid "death axe"
-msgstr "Todesaxt"
-
-#: swords2h.xml
-msgid "deathwind"
-msgstr "Todeswind"
-
-#: axes1h.xml
-msgid "demon axe"
-msgstr "Daemonenaxt"
-
-#: swords1h.xml
-msgid "demon blade"
-msgstr "Daemonenschwert"
-
-#: longbow.xml
-msgid "demon compositebow"
-msgstr "Daemonenkompositbogen"
-
-#: staff.xml
-msgid "demon staff"
-msgstr "Daemonenstab"
-
-#: wands.xml
-msgid "demon wand"
-msgstr "Daemonenzauberstab"
-
-#: longbow.xml
-msgid "demonhorn bow"
-msgstr "Daemonenhornbogen"
-
-#: axes1h.xml
-msgid "diamont axe"
-msgstr "Diamantaxt"
-
-#: hammer1h.xml
-msgid "diamont hammer"
-msgstr "Diamanthammer"
-
-#: swords1h.xml
-msgid "diamont sword"
-msgstr "Diamantschwert"
-
-#: swords2h.xml
-msgid "dread sword"
-msgstr "Schreckensschwert"
-
 #: npc.xml
 msgid "dumme Fragen stellen"
 msgstr ""
 
-#: axes1h.xml
-msgid "dwarfen axe"
-msgstr "Zwergenaxt"
+#: npc.xml
+msgid "Trader"
+msgstr ""
 
-#: world.xml_bak
+#: npc.xml
+msgid "Michel Bron"
+msgstr "Michel Bron"
+
+#: world.xml
+msgid "aisPlains"
+msgstr "Offene Ebene"
+
+#: world.xml
+msgid "aisHeath"
+msgstr "Aisener Heide"
+
+#: world.xml
+msgid "aisJoringsforest"
+msgstr "Joringsforst"
+
+#: world.xml
+msgid "aisWolfstones"
+msgstr "Wolfssteine"
+
+#: world.xml
 msgid "dwarfenfroward"
 msgstr "Zwergentrutz"
 
-#: world.xml_bak
+#: world.xml
 msgid "dwarfenfrowardRampart"
 msgstr "Die Mauern von Zwergentrutz"
 
-#: axes2h.xml
-msgid "dwarfensteel axe"
-msgstr "Zwergenstahlaxt"
+#: world.xml
+msgid "necFieldcamp"
+msgstr "Feldlager der Untoten"
 
-#: hammer2h.xml
-msgid "dwarfensteel hammer"
-msgstr "Zwergenstahlhammer"
+#: testregions.xml
+msgid "sandbox"
+msgstr ""
 
-#: swords1h.xml
-msgid "dwarfsteel sword"
-msgstr "Zwergenstahlschwert"
+#: testregions.xml
+msgid "region0"
+msgstr ""
 
-#: potion.xml
-msgid "echo potion"
-msgstr "Echotrank"
-
-#: scene1.xml
-msgid "elCnlLobby"
-msgstr "Lobby des Konzils"
-
-#: hammer2h.xml
-msgid "elementhunter"
-msgstr "Elementenjaeger"
-
-#: longbow.xml
-msgid "elf bow"
-msgstr "Elfenbogen"
-
-#: axes2h.xml
-msgid "executioner axe"
-msgstr "Henkersaxt"
-
-#: swords2h.xml
-msgid "executioner's sword"
-msgstr "Richtschwert"
-
-#: hammer2h.xml
-msgid "exorcists hammer"
-msgstr "Exorzistenhammer"
-
-#: potion.xml
-msgid "eyedrops"
-msgstr "Augentropfen"
-
-#: shortbow.xml
-msgid "fairy bow"
-msgstr "Feenbogen"
-
-#: staff.xml
-msgid "fairy staff"
-msgstr "Feenstab"
-
-#: wands.xml
-msgid "fairy wand"
-msgstr "Feenzauberstab"
-
-#: swords2h.xml
-msgid "farmer sword"
-msgstr "Bauernzweihaender"
-
-#: amulet.xml
-msgid "feather amulet"
-msgstr "Federnamulett"
-
-#: swords2h.xml
-msgid "flamberg"
-msgstr "Flamberg"
-
-#: staff.xml
-msgid "frost staff"
-msgstr "Froststab"
-
-#: wands.xml
-msgid "frost wand"
-msgstr "Frostzauberstab"
-
-#: axes2h.xml
-msgid "giant axe"
-msgstr "Riesenaxt"
-
-#: hammer2h.xml
-msgid "glow hammer"
-msgstr "Glimmhammer"
-
-#: shortbow.xml
-msgid "goblin bow"
-msgstr "Goblinbogen"
+#: testregions.xml
+msgid "testregion"
+msgstr ""
 
 #: monsters.xml
 msgid "goblin brawler"
 msgstr "Goblinschlaeger"
 
 #: monsters.xml
-msgid "goblin chieftain"
-msgstr "Goblinhaeuptling"
+msgid "goblin robber"
+msgstr "Goblinraeuber"
 
-#: hammer1h.xml
-msgid "goblin club"
-msgstr "Goblinkeule"
+#: monsters.xml
+msgid "goblin hunter"
+msgstr "Goblinjaeger"
 
 #: monsters.xml
 msgid "goblin dog"
@@ -584,685 +1235,48 @@ msgid "goblin fighter"
 msgstr "Goblinkaempfer"
 
 #: monsters.xml
-msgid "goblin hunter"
-msgstr "Goblinjaeger"
+msgid "goblin warrior"
+msgstr "Goblinkrieger"
 
 #: monsters.xml
 msgid "goblin poacher"
 msgstr "Goblinwilderer"
 
 #: monsters.xml
-msgid "goblin robber"
-msgstr "Goblinraeuber"
-
-#: monsters.xml
 msgid "goblin shaman"
 msgstr "Goblinschamane"
 
 #: monsters.xml
-msgid "goblin warrior"
-msgstr "Goblinkrieger"
-
-#: swords2h.xml
-msgid "goblinkiller"
-msgstr "Goblintoeter"
-
-#: swords1h.xml
-msgid "gods blade"
-msgstr "Goetterklinge"
-
-#: amulet.xml
-msgid "gold amulet"
-msgstr "Goldamulett"
-
-#: ring.xml
-msgid "gold ring"
-msgstr "Goldring"
-
-#: axes2h.xml
-msgid "great axe"
-msgstr "Grossaxt"
-
-#: swords2h.xml
-msgid "great sword"
-msgstr "Grossschwert"
-
-#: axes1h.xml
-msgid "guard axe"
-msgstr "Gardistenaxt"
-
-#: hammer2h.xml
-msgid "guard hammer"
-msgstr "Gardistenhammer"
-
-#: hammer1h.xml
-msgid "hammer"
-msgstr "Hammer"
-
-#: monsters.xml
-msgid "harpy"
-msgstr "Harpie"
-
-#: axes1h.xml
-msgid "hatchet"
-msgstr "Beil"
-
-#: axes1h.xml
-msgid "hell axe"
-msgstr "Hoellenaxt"
-
-#: swords1h.xml
-msgid "hero blade"
-msgstr "Heldenklinge"
-
-#: longbow.xml
-msgid "hero bow"
-msgstr "Heldenbogen"
-
-#: hammer1h.xml
-msgid "holy hammer"
-msgstr "Heiliger Hammer"
-
-#: longbow.xml
-msgid "horn bow"
-msgstr "Hornbogen"
-
-#: shortbow.xml
-msgid "hunting bow"
-msgstr "Jagdbogen"
-
-#: wands.xml
-msgid "ice wand"
-msgstr ""
-
-#: axes2h.xml
-msgid "iceland axe"
-msgstr "Eislandaxt"
-
-#: axes1h.xml
-msgid "iron axe"
-msgstr "Eisenaxt"
-
-#: hammer1h.xml
-msgid "iron club"
-msgstr "Eisenkeule"
-
-#: hammer1h.xml
-msgid "iron hammer"
-msgstr "Eisenhammer"
-
-#: axes1h.xml
-msgid "iron hatchet"
-msgstr "Eisenbeil"
-
-#: shields.xml
-msgid "iron shield"
-msgstr "Eisenschild"
-
-#: ring.xml
-msgid "jet ring"
-msgstr "Jettring"
-
-#: herbalist.xml
-msgid "joringsbridge"
-msgstr "Joringsbrueck"
-
-#: hammer2h.xml
-msgid "judge hammer"
-msgstr "Richthammer"
-
-#: hammer2h.xml
-msgid "judgement hammer"
-msgstr "Urteilshammer"
-
-#: axes2h.xml
-msgid "kings axe"
-msgstr "Koenigsaxt"
-
-#: armor.xml
-msgid "leather armor"
-msgstr "Lederruestung"
-
-#: helmet.xml
-msgid "leather cap"
-msgstr "Lederkappe"
-
-#: glove.xml
-msgid "leather gloves"
-msgstr "Lederhandschuhe"
-
-#: helmet.xml
-msgid "leather helmet"
-msgstr "Lederhelm"
-
-#: swords1h.xml
-msgid "legion blade"
-msgstr "Legionaersklinge"
+msgid "goblin chieftain"
+msgstr "Goblinhaeuptling"
 
 #: monsters.xml
 msgid "lich"
 msgstr "Lich"
 
-#: swords1h.xml
-msgid "long sword"
-msgstr "Langschwert"
-
-#: longbow.xml
-msgid "longbow"
-msgstr "Langbogen"
-
-#: hammer2h.xml
-msgid "longshaft"
-msgstr "Langstiel"
-
-#: axes2h.xml
-msgid "lumberjack axe"
-msgstr "Holzfaelleraxt"
-
-#: hammer1h.xml
-msgid "mace"
-msgstr "Streitkolben"
-
-#: hat.xml
-msgid "magus hat"
-msgstr "Magierhut"
-
-#: robes.xml
-msgid "magus robe"
-msgstr "Magierrobe"
-
-#: staff.xml
-msgid "magus staff"
-msgstr "Magierstab"
-
-#: wands.xml
-msgid "magus wand"
-msgstr "Magierzauberstab"
-
 #: monsters.xml
-msgid "mandragora"
-msgstr "Alraune"
-
-#: longbow.xml
-msgid "maple bow"
-msgstr "Ahornbogen"
-
-#: glove.xml
-msgid "marksman gloves"
-msgstr "Schuetzenhandschuhe"
-
-#: staff.xml
-msgid "master staff"
-msgstr "Magisterstab"
-
-#: wands.xml
-msgid "master wand"
-msgstr "Magisterzauberstab"
-
-#: hammer1h.xml
-msgid "maul"
-msgstr "Schlaegel"
-
-#: rescue_willard.xml
-msgid "medMercCamp"
-msgstr "Soeldnerlager von Medair"
-
-#: potion.xml
-msgid "medium potion"
-msgstr "Mittlerer Heiltrank"
-
-#: armor.xml
-msgid "mercenary armor"
-msgstr "Soeldnerruestung"
-
-#: axes1h.xml
-msgid "mercenary axe"
-msgstr "Soeldneraxt"
-
-#: swords2h.xml
-msgid "mercenary blade"
-msgstr "Soeldnerklinge"
-
-#: helmet.xml
-msgid "mercenary head"
-msgstr "Soeldnerkopf"
-
-#: helmet.xml
-msgid "mercenary helmet"
-msgstr "Soeldnerhelm"
-
-#: axes1h.xml
-msgid "minotaur axe"
-msgstr "Minotaurenaxt"
-
-#: swords2h.xml
-msgid "monster sword"
-msgstr "Monsterschwert"
-
-#: hammer1h.xml
-msgid "morning star"
-msgstr "Morgenstern"
-
-#: potion.xml
-msgid "muscle salve"
-msgstr "Muskelsalbe"
-
-#: hammer1h.xml
-msgid "nail club"
-msgstr "Nagelkeule"
-
-#: world.xml_bak
-msgid "necFieldcamp"
-msgstr "Feldlager der Untoten"
-
-#: staff.xml
-msgid "necromancer staff"
-msgstr "Nekromantenstab"
-
-#: wands.xml
-msgid "necromancer wand"
-msgstr "Nekromantenzauberstab"
-
-#: shortbow.xml
-msgid "northeye"
-msgstr "Nordauge"
-
-#: swords1h.xml
-msgid "northlings blade"
-msgstr "Nordlingsklinge"
-
-#: armor.xml
-msgid "novice armor"
-msgstr "Novizenruestung"
-
-#: hat.xml
-msgid "novice hat"
-msgstr "Novizenhut"
-
-#: helmet.xml
-msgid "novice headgear"
-msgstr "Novizenhelm"
-
-#: robes.xml
-msgid "novice robe"
-msgstr "Novizenrobe"
-
-#: staff.xml
-msgid "novice staff"
-msgstr "Novizenstab"
-
-#: wands.xml
-msgid "novice wand"
-msgstr "Novizenzauberstab"
-
-#: longbow.xml
-msgid "oak bow"
-msgstr "Eichenbogen"
-
-#: shortbow.xml
-msgid "oak shortbow"
-msgstr "Eichenkurzbogen"
-
-#: staff.xml
-msgid "oak staff"
-msgstr "Eichenstab"
-
-#: wands.xml
-msgid "oak wand"
-msgstr "Eichenzauberstab"
-
-#: axes1h.xml
-msgid "obsidian axe"
-msgstr "Obsidianaxt"
-
-#: hammer2h.xml
-msgid "obsidian hammer"
-msgstr "Obsidianhammer"
-
-#: swords2h.xml
-msgid "ogre dagger"
-msgstr "Ogerdolch"
-
-#: axes2h.xml
-msgid "ogre hatchet"
-msgstr "Ogerbeil"
-
-#: axes2h.xml
-msgid "ogretearer"
-msgstr "Ogerreisser"
-
-#: swords1h.xml
-msgid "old sword"
-msgstr "Altes Schwert"
-
-#: longbow.xml
-msgid "orc bow"
-msgstr "Orkbogen"
-
-#: goblins.xml
-msgid "peasant"
-msgstr "Bauer"
+msgid "skeleton"
+msgstr "Skelett"
 
 #: monsters.xml
 msgid "phantom"
 msgstr "Phantom"
 
-#: staff.xml
-msgid "phenix staff"
-msgstr "Phoenixstab"
-
-#: wands.xml
-msgid "phenix wand"
-msgstr "Phoenixzauberstab"
-
-#: potion.xml
-msgid "potion of determination"
-msgstr "Trank der Entscheidungsstaerke"
-
-#: potion.xml
-msgid "potion of melting"
-msgstr "Auftautrank"
-
-#: shortbow.xml
-msgid "practice bow"
-msgstr "Uebungsbogen"
-
-#: hammer2h.xml
-msgid "priest hammer"
-msgstr "Priesterhammer"
-
-#: hammer1h.xml
-msgid "priest mace"
-msgstr "Priesterstreitkolben"
-
-#: robes.xml
-msgid "ragged robe"
-msgstr "Flickenrobe"
-
-#: helmet.xml
-msgid "ranger bandana"
-msgstr "Waldlaeuferstirnband"
-
-#: longbow.xml
-msgid "ranger bow"
-msgstr "Waldlaeuferbogen"
-
-#: armor.xml
-msgid "ranger shirt"
-msgstr "Waldlaeuferhemd"
-
-#: shortbow.xml
-msgid "rattan bow"
-msgstr "Rattanbogen"
-
-#: world.xml_bak
-msgid "region0"
-msgstr ""
-
-#: goblins.xml
-msgid "region1"
-msgstr ""
-
-#: shortbow.xml
-msgid "rider bow"
-msgstr "Reiterbogen"
-
-#: hammer1h.xml
-msgid "rider hammer"
-msgstr "Reiterhammer"
-
-#: axes2h.xml
-msgid "ripping axe"
-msgstr "Reisseraxt"
-
-#: armor.xml
-msgid "rivet armor"
-msgstr "Nietenruestung"
-
-#: staff.xml
-msgid "rock staff"
-msgstr "Felsenstab"
-
-#: wands.xml
-msgid "rock wand"
-msgstr "Felsenzauberstab"
-
-#: swords1h.xml
-msgid "rusty dagger"
-msgstr "Rostiger Dolch"
-
-#: swords1h.xml
-msgid "sabre"
-msgstr "Saebel"
-
-#: robes.xml
-msgid "scholar robe"
-msgstr "Gelehrtenrobe"
-
-#: swords1h.xml
-msgid "scimitar"
-msgstr "Krummsaebel"
-
-#: axes2h.xml
-msgid "scythe axe"
-msgstr "Sensenaxt"
-
-#: shortbow.xml
-msgid "seeker"
-msgstr "Sucher"
-
-#: shortbow.xml
-msgid "shortbow"
-msgstr "Kurzbogen"
-
-#: swords1h.xml
-msgid "shortsword"
-msgstr "Kurzschwert"
-
-#: amulet.xml
-msgid "silver amulet"
-msgstr "Silberamulett"
-
-#: hammer1h.xml
-msgid "silver hammer"
-msgstr "Silberhammer"
-
-#: ring.xml
-msgid "silver ring"
-msgstr "Silberring"
-
-#: staff.xml
-msgid "silver staff"
-msgstr "Silberstab"
-
-#: wands.xml
-msgid "silver wand"
-msgstr "Silberzauberstab"
-
-#: hammer2h.xml
-msgid "silverterror"
-msgstr "Silberschrecken"
-
-#: hammer1h.xml
-msgid "sixedged mace"
-msgstr "Sechskantstreitkolben"
+#: monsters.xml
+msgid "zombie"
+msgstr "Zombie"
 
 #: monsters.xml
-msgid "skeleton"
-msgstr "Skelett"
-
-#: axes2h.xml
-msgid "slaughter axe"
-msgstr "Schlachtaxt"
-
-#: hammer2h.xml
-msgid "sledgehammer"
-msgstr "Vorschlaghammer"
+msgid "harpy"
+msgstr "Harpie"
 
 #: monsters.xml
 msgid "small mandragora"
 msgstr "Kleine Alraune"
 
-#: potion.xml
-msgid "small potion"
-msgstr "Kleiner Heiltrank"
-
-#: swords2h.xml
-msgid "smash sword"
-msgstr "Schmetterschwert"
-
-#: hammer2h.xml
-msgid "smashhead"
-msgstr "Schmetterkopf"
-
-#: axes2h.xml
-msgid "smashing axe"
-msgstr "Schmetteraxt"
-
-#: glove.xml
-msgid "snakehide gloves"
-msgstr "Schlangenlederhandschuhe"
-
-#: longbow.xml
-msgid "soldier bow"
-msgstr "Soldatenbogen"
-
-#: shortbow.xml
-msgid "soul bow"
-msgstr "Seelenbogen"
-
-#: glove.xml
-msgid "spidersilk gloves"
-msgstr "Spinnenseidehandschuhe"
-
-#: potion.xml
-msgid "spike oil"
-msgstr "Lavendeloel"
-
-#: staff.xml
-msgid "spruce staff"
-msgstr "Fichtenstab"
-
-#: wands.xml
-msgid "spruce wand"
-msgstr "Fichtenzauberstab"
-
-#: axes2h.xml
-msgid "star axe"
-msgstr "Sternenaxt"
-
-#: axes1h.xml
-msgid "steel axe"
-msgstr "Stahlaxt"
-
-#: hammer1h.xml
-msgid "steel hammer"
-msgstr "Stahlhammer"
-
-#: hammer1h.xml
-msgid "steel mace"
-msgstr "Stahlstreitkolben"
-
-#: hammer1h.xml
-msgid "steel maul"
-msgstr "Stahlschlaegel"
-
-#: shields.xml
-msgid "steel shield"
-msgstr "Stahlschild"
-
-#: swords1h.xml
-msgid "steel sword"
-msgstr "Stahlschwert"
-
-#: longbow.xml
-msgid "stormsinger"
-msgstr "Sturmsaenger"
-
-#: staff.xml
-msgid "summoner staff"
-msgstr "Beschwoererstab"
-
-#: wands.xml
-msgid "summoner wand"
-msgstr "Beschwoererzauberstab"
-
-#: swords2h.xml
-msgid "horse killer"
-msgstr "Pferdeschlaechter"
-
-#: swords1h.xml
-msgid "sword of the coast"
-msgstr "Kuestenschwert"
-
-#: shields.xml
-msgid "targe"
-msgstr "Tartsche"
-
-#: swords2h.xml
-msgid "tear sword"
-msgstr "Traenenschwert"
-
-#: armor.xml
-msgid "temple armor"
-msgstr "Tempelruestung"
-
-#: world.xml_bak
-msgid "testregion"
-msgstr ""
-
-#: axes1h.xml
-msgid "thunder axe"
-msgstr "Donneraxt"
-
-#: staff.xml
-msgid "thunder staff"
-msgstr "Gewitterstab"
-
-#: wands.xml
-msgid "thunder wand"
-msgstr "Gewitterzauberstab"
-
-#: axes2h.xml
-msgid "torture axe"
-msgstr "Folteraxt"
-
-#: longbow.xml
-msgid "tourney bow"
-msgstr "Turnierbogen"
-
-#: swords2h.xml
-msgid "two handed guardsman sword"
-msgstr "Gardistenzweihaender"
-
-#: swords2h.xml
-msgid "two handed steel sword"
-msgstr "Stahlzweihaender"
-
-#: hat.xml
-msgid "vagabond hat"
-msgstr "Vagabundenhut"
-
-#: axes1h.xml
-msgid "vulcano axe"
-msgstr "Vulkanaxt"
-
-#: shields.xml
-msgid "wood shield"
-msgstr "Holzschild"
-
-#: hammer2h.xml
-msgid "worldshaker"
-msgstr "Welterschuetterer"
-
-#: longbow.xml
-msgid "yew bow"
-msgstr "Eibenbogen"
-
-#: shortbow.xml
-msgid "yew shortbow"
-msgstr "Eibenkurzbogen"
-
 #: monsters.xml
-msgid "zombie"
-msgstr "Zombie"
+msgid "mandragora"
+msgstr "Alraune"
+
+#~ msgid "Scene1"
+#~ msgstr "Hilfe fuer Zwergentrutz"

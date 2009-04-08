@@ -8,1385 +8,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-01 16:50+0200\n"
+"POT-Creation-Date: 2009-04-08 11:48+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-
-#: ../src/core/item.cpp:359
-msgid " hitpoints"
-msgstr ""
-
-#: ../src/core/item.cpp:455
-msgid " max. "
-msgstr ""
-
-#: ../src/core/action.cpp:2116
-msgid "Acid"
-msgstr ""
-
-#: ../src/core/damage.cpp:101 ../src/gui/charinfo.cpp:862
-msgid "Air"
-msgstr ""
-
-#: ../src/gui/skilltree.cpp:525
-msgid "Air magic"
-msgstr ""
-
-#: ../src/core/damage.cpp:117
-msgid "Air resistance"
-msgstr ""
-
-#: ../src/gui/charcreate.cpp:55 ../src/gui/charinfo.cpp:479
-#: ../src/gui/partyinfo.cpp:289
-msgid "Archer"
-msgstr ""
-
-#: ../src/core/item.cpp:410 ../src/gui/charinfo.cpp:849
-msgid "Armor"
-msgstr ""
-
-#: ../src/gui/charinfo.cpp:850
-msgid "Armor reduces the damage of physical attacks."
-msgstr ""
-
-#: ../src/core/action.cpp:1749 ../src/core/damage.cpp:226
-#: ../src/gui/charinfo.cpp:829
-msgid "Attack"
-msgstr ""
-
-#: ../src/gui/charinfo.cpp:845
-msgid "Attack power influences the damage dealt to armored enemies."
-msgstr ""
-
-#: ../src/gui/charinfo.cpp:830
-msgid ""
-"Attack value determines the chance to hit enemies that can block or evade."
-msgstr ""
-
-#: ../src/core/action.cpp:1788
-msgid "Attacks an enemy with a chance to inflict silence."
-msgstr ""
-
-#: ../src/core/action.cpp:1784
-msgid "Attacks an enemy with an unblockable, armor piercing blow."
-msgstr ""
-
-#: ../src/core/action.cpp:1776
-msgid "Attacks every enemy in weapon range with slightly reduced damage."
-msgstr ""
-
-#: ../src/core/action.cpp:1780
-msgid "Attacks every enemy in weapon range."
-msgstr ""
-
-#: ../src/core/action.cpp:1767
-msgid "Attacks one enemy for serious damage."
-msgstr ""
-
-#: ../src/core/action.cpp:1772
-msgid ""
-"Attacks one enemy with a brutal blow and damages nearby enemies as well."
-msgstr ""
-
-#: ../src/gui/charinfo.cpp:834
-msgid "Attacks/s"
-msgstr ""
-
-#: ../src/gui/charinfo.cpp:816
-msgid "Attr points"
-msgstr ""
-
-#: ../src/gui/charinfo.cpp:817
-msgid "Attribute points remaining to distribute"
-msgstr ""
-
-#: ../src/core/action.cpp:1951
-msgid "Ball lightning"
-msgstr ""
-
-#: ../src/core/action.cpp:1832
-msgid "Barbarian anger"
-msgstr ""
-
-#: ../src/gui/charinfo.cpp:323
-msgid "Base damage"
-msgstr ""
-
-#: ../src/core/action.cpp:1766
-msgid "Bash"
-msgstr ""
-
-#: ../src/core/action.cpp:1762
-msgid "Basic holy melee attack"
-msgstr ""
-
-#: ../src/core/action.cpp:1758
-msgid "Basic magic attack"
-msgstr ""
-
-#: ../src/core/action.cpp:1750
-msgid "Basic melee attack"
-msgstr ""
-
-#: ../src/core/action.cpp:1754
-msgid "Basic ranged attack"
-msgstr ""
-
-#: ../src/core/action.cpp:1820
-msgid "Battlecry"
-msgstr ""
-
-#: ../src/core/action.cpp:2136
-msgid "Bladestorm"
-msgstr ""
-
-#: ../src/core/action.cpp:2006
-msgid "Blast Cascade"
-msgstr ""
-
-#: ../src/core/action.cpp:2084
-msgid "Blazing Shield"
-msgstr ""
-
-#: ../src/core/action.cpp:1990
-msgid "Blind Rage"
-msgstr ""
-
-#: ../src/core/action.cpp:1911
-msgid "Blizzard"
-msgstr ""
-
-#: ../src/core/action.cpp:1844 ../src/core/item.cpp:415
-#: ../src/gui/charinfo.cpp:854
-msgid "Block"
-msgstr ""
-
-#: ../src/gui/charinfo.cpp:855
-msgid ""
-"Block value determines the chance to avoid damage from physical attacks."
-msgstr ""
-
-#: ../src/core/action.cpp:2014
-msgid "Bow Spirit"
-msgstr ""
-
-#: ../src/core/action.cpp:2096
-msgid "Breaking Blow"
-msgstr ""
-
-#: ../src/core/action.cpp:2064
-msgid "Bright Blow"
-msgstr ""
-
-#: ../src/core/action.cpp:2072
-msgid "Burning Rage"
-msgstr ""
-
-#: ../src/gui/charcreate.cpp:125
-msgid "Cancel"
-msgstr "Abbrechen"
-
-#: ../src/core/document.cpp:1128
-msgid "Cast delay"
-msgstr ""
-
-#: ../src/core/action.cpp:2038
-msgid "Catlike Reflexes"
-msgstr ""
-
-#: ../src/core/action.cpp:1801
-msgid "Causes surrounding monsters to attack the warrior more likely."
-msgstr ""
-
-#: ../src/core/action.cpp:1947
-msgid "Chainlightning"
-msgstr ""
-
-#: ../src/core/damage.cpp:252
-msgid "Chance for critical hit"
-msgstr ""
-
-#: ../src/gui/optionswindow.cpp:114
-msgid "Character screen"
-msgstr ""
-
-#: ../src/core/action.cpp:1792
-msgid "Charge"
-msgstr ""
-
-#: ../src/core/action.cpp:1796
-msgid "Charge scythe"
-msgstr ""
-
-#: ../src/gui/optionswindow.cpp:123
-msgid "Chatbox"
-msgstr ""
-
-#: ../src/core/action.cpp:1927
-msgid "Chilling cold"
-msgstr ""
-
-#: ../src/gui/charcreate.cpp:122 ../src/gui/charinfo.cpp:795
-#: ../src/gui/savegamelist.cpp:172
-msgid "Class"
-msgstr ""
-
-#: ../src/core/action.cpp:2046
-msgid "Concentration"
-msgstr ""
-
-#: ../src/gui/charcreate.cpp:128
-msgid "Create"
-msgstr "Erstellen"
-
-#: ../src/gui/savegamelist.cpp:168
-msgid "Create Character"
-msgstr ""
-
-#: ../src/core/action.cpp:2120
-#, fuzzy
-msgid "Cure"
-msgstr "Erstellen"
-
-#: ../src/gui/charinfo.cpp:825
-msgid "Current and maximal hitpoints."
-msgstr ""
-
-#: ../src/gui/charinfo.cpp:821
-msgid "Current experience and experience necessary for next level-up."
-msgstr ""
-
-#: ../src/core/item.cpp:398
-msgid "Damage"
-msgstr ""
-
-#: ../src/core/action.cpp:1998
-msgid "Deadly Roulette"
-msgstr ""
-
-#: ../src/core/action.cpp:1970
-msgid "Deadly Swarm"
-msgstr ""
-
-#: ../src/core/action.cpp:1804
-msgid "Defiances"
-msgstr ""
-
-#: ../src/core/item.cpp:430 ../src/gui/charinfo.cpp:803
-msgid "Dexterity"
-msgstr ""
-
-#: ../src/gui/charinfo.cpp:804
-msgid "Dexterity increases ranged damage, attack accuracy and attack speed"
-msgstr ""
-
-#: ../src/core/action.cpp:2100
-msgid "Dismissing Strike"
-msgstr ""
-
-#: ../src/core/action.cpp:2108
-msgid "Ease Pain"
-msgstr ""
-
-#: ../src/core/action.cpp:2042
-msgid "Elfeyes"
-msgstr ""
-
-#: ../src/core/action.cpp:1982
-msgid "Elfwanderer"
-msgstr ""
-
-#: ../src/gui/charinfo.cpp:820
-msgid "Experience"
-msgstr ""
-
-#: ../src/core/action.cpp:2002
-msgid "Explosion Arrow"
-msgstr ""
-
-#: ../src/core/action.cpp:1974
-msgid "Fanshot"
-msgstr ""
-
-#: ../src/gui/skilltree.cpp:528
-msgid "Fighting skills"
-msgstr ""
-
-#: ../src/gui/skilltree.cpp:534
-msgid "Fighting spirit"
-msgstr ""
-
-#: ../src/core/damage.cpp:97 ../src/gui/charinfo.cpp:868
-msgid "Fire"
-msgstr ""
-
-#: ../src/core/action.cpp:1808
-msgid "Fire and sword"
-msgstr ""
-
-#: ../src/gui/skilltree.cpp:519
-msgid "Fire magic"
-msgstr ""
-
-#: ../src/core/damage.cpp:113
-msgid "Fire resistance"
-msgstr ""
-
-#: ../src/core/action.cpp:1882
-msgid "Fireball"
-msgstr ""
-
-#: ../src/core/action.cpp:1870
-msgid "Fireblow"
-msgstr ""
-
-#: ../src/core/action.cpp:1866
-msgid "Firebolt"
-msgstr ""
-
-#: ../src/core/action.cpp:1890
-msgid "Firecolumn"
-msgstr ""
-
-#: ../src/core/action.cpp:1878
-msgid "Firestorm"
-msgstr ""
-
-#: ../src/core/action.cpp:1816
-msgid "Flame armor"
-msgstr ""
-
-#: ../src/core/action.cpp:1874
-msgid "Flame wave"
-msgstr ""
-
-#: ../src/core/action.cpp:1853
-msgid ""
-"For each monster the warrior kills, his strength increases for a short "
-"amount of time."
-msgstr ""
-
-#: ../src/core/action.cpp:1923
-msgid "Freeze"
-msgstr ""
-
-#: ../src/core/action.cpp:2022
-msgid "Frost Arrows"
-msgstr ""
-
-#: ../src/core/action.cpp:1919
-msgid "Frost ring"
-msgstr ""
-
-#: ../src/core/action.cpp:2076
-msgid "Gentle Glow"
-msgstr ""
-
-#: ../src/core/action.cpp:2092
-msgid "Glaring Sun"
-msgstr ""
-
-#: ../src/core/action.cpp:2088
-msgid "Glistening Glare"
-msgstr ""
-
-#: ../src/core/action.cpp:2132
-msgid "God Strike"
-msgstr ""
-
-#: ../src/gui/inventory.cpp:356
-msgid "Gold"
-msgstr ""
-
-#: ../src/core/action.cpp:2124
-msgid "Grand Cure"
-msgstr ""
-
-#: ../src/core/action.cpp:1771
-msgid "Hammer blow"
-msgstr ""
-
-#: ../src/core/item.cpp:359 ../src/core/item.cpp:367
-msgid "Heals "
-msgstr ""
-
-#: ../src/gui/charinfo.cpp:824
-msgid "Hitpoints"
-msgstr ""
-
-#: ../src/core/action.cpp:1761
-msgid "Holy attack"
-msgstr ""
-
-#: ../src/gui/networkwindows.cpp:221
-msgid "Host"
-msgstr ""
-
-#: ../src/gui/mainmenu.cpp:66
-msgid "Host game"
-msgstr ""
-
-#: ../src/gui/skilltree.cpp:544
-msgid "Hunter magic"
-msgstr ""
-
-#: ../src/core/action.cpp:2148
-msgid "Hypnosis"
-msgstr ""
-
-#: ../src/core/action.cpp:2152
-msgid "Hypnotic Vortex"
-msgstr ""
-
-#: ../src/core/damage.cpp:99 ../src/gui/charinfo.cpp:865
-msgid "Ice"
-msgstr ""
-
-#: ../src/core/action.cpp:2018
-msgid "Ice Arrows"
-msgstr ""
-
-#: ../src/gui/skilltree.cpp:522
-msgid "Ice magic"
-msgstr ""
-
-#: ../src/core/damage.cpp:115
-msgid "Ice resistance"
-msgstr ""
-
-#: ../src/core/action.cpp:1915
-msgid "Ice ring"
-msgstr ""
-
-#: ../src/core/action.cpp:1898
-msgid "Icicle"
-msgstr ""
-
-#: ../src/core/action.cpp:1894
-msgid "Ignite"
-msgstr ""
-
-#: ../src/core/action.cpp:1886
-msgid "Infernoball"
-msgstr ""
-
-#: ../src/gui/optionswindow.cpp:111
-msgid "Inventory"
-msgstr ""
-
-#: ../src/core/action.cpp:1959
-msgid "Ionisation"
-msgstr ""
-
-#: ../src/core/action.cpp:1978
-msgid "Iron Hail"
-msgstr ""
-
-#: ../src/gui/mainmenu.cpp:63
-msgid "Join game"
-msgstr ""
-
-#: ../src/core/action.cpp:2156
-msgid "Keen Mind"
-msgstr ""
-
-#: ../src/core/action.cpp:1793
-msgid ""
-"Launches an assault at an enemy with increasing speed. The faster the "
-"warrior is, the more damage a charge inflicts."
-msgstr ""
-
-#: ../src/core/action.cpp:1797
-msgid "Launches an even stronger charge attack, that may inflict stun."
-msgstr ""
-
-#: ../src/gui/savegamelist.cpp:173
-msgid "Level"
-msgstr ""
-
-#: ../src/gui/skilltree.cpp:548
-msgid "Light Magic"
-msgstr ""
-
-#: ../src/core/action.cpp:1931
-msgid "Lightning"
-msgstr ""
-
-#: ../src/core/action.cpp:1935
-msgid "Lightning strike"
-msgstr ""
-
-#: ../src/gui/charcreate.cpp:56
-msgid "Mage"
-msgstr ""
-
-#: ../src/core/item.cpp:435
-msgid "Magic Power"
-msgstr ""
-
-#: ../src/core/action.cpp:2104
-msgid "Magic Shield"
-msgstr ""
-
-#: ../src/core/action.cpp:1757
-msgid "Magic attack"
-msgstr ""
-
-#: ../src/gui/charinfo.cpp:812
-msgid "Magic power"
-msgstr ""
-
-#: ../src/gui/charinfo.cpp:813
-msgid "Magic power increases the damage of magical attacks."
-msgstr ""
-
-#: ../src/gui/charinfo.cpp:475 ../src/gui/partyinfo.cpp:285
-msgid "Magician"
-msgstr ""
-
-#: ../src/gui/skilltree.cpp:538
-msgid "Marksmanship"
-msgstr ""
-
-#: ../src/gui/networkwindows.cpp:96
-msgid "Max. number of players"
-msgstr ""
-
-#: ../src/core/action.cpp:2050
-msgid "Mind Wall"
-msgstr ""
-
-#: ../src/gui/optionswindow.cpp:129
-msgid "Minimap"
-msgstr ""
-
-#: ../src/core/action.cpp:1852
-msgid "Monster hunter"
-msgstr ""
-
-#: ../src/core/action.cpp:1856
-msgid "Monster slayer"
-msgstr ""
-
-#: ../src/gui/charcreate.cpp:119 ../src/gui/charinfo.cpp:792
-#: ../src/gui/partyinfo.cpp:452 ../src/gui/savegamelist.cpp:171
-msgid "Name"
-msgstr ""
-
-#: ../src/core/action.cpp:1805
-msgid ""
-"Nearby monsters will attack the warrior, if they are able to. The warriors "
-"defence is increased."
-msgstr ""
-
-#: ../src/core/action.cpp:2058
-msgid "North Hunter"
-msgstr ""
-
-#: ../src/core/action.cpp:2054
-msgid "North Roamer"
-msgstr ""
-
-#: ../src/gui/charinfo.cpp:835
-msgid "Number of attacks per second."
-msgstr ""
-
-#: ../src/gui/networkwindows.cpp:93 ../src/gui/networkwindows.cpp:218
-#: ../src/gui/optionswindow.cpp:135 ../src/gui/savegamelist.cpp:165
-#: ../src/gui/tradewindow.cpp:256
-msgid "Ok"
-msgstr ""
-
-#: ../src/core/action.cpp:2080
-msgid "Omniscent Eye"
-msgstr ""
-
-#: ../src/core/action.cpp:2133
-msgid ""
-"Only strong and durable demons will be able to resist the priests sacred "
-"strike."
-msgstr ""
-
-#: ../src/gui/controlpanel.cpp:282
-msgid "Options"
-msgstr ""
-
-#: ../src/core/action.cpp:1812
-msgid "Pact of flames"
-msgstr ""
-
-#: ../src/gui/optionswindow.cpp:120
-msgid "Party screen"
-msgstr ""
-
-#: ../src/gui/skilltree.cpp:531 ../src/gui/skilltree.cpp:541
-msgid "Passive skills"
-msgstr ""
-
-#: ../src/core/action.cpp:1840
-msgid "Perseverance"
-msgstr ""
-
-#: ../src/core/damage.cpp:95 ../src/gui/charinfo.cpp:859
-msgid "Physical"
-msgstr ""
-
-#: ../src/core/damage.cpp:111
-msgid "Physical resistance"
-msgstr ""
-
-#: ../src/gui/networkwindows.cpp:99 ../src/gui/networkwindows.cpp:224
-msgid "Port"
-msgstr ""
-
-#: ../src/core/damage.cpp:243 ../src/gui/charinfo.cpp:844
-msgid "Power"
-msgstr ""
-
-#: ../src/gui/charcreate.cpp:57 ../src/gui/charinfo.cpp:483
-#: ../src/gui/partyinfo.cpp:293
-msgid "Priest"
-msgstr ""
-
-#: ../src/gui/optionswindow.cpp:126
-msgid "Quests"
-msgstr ""
-
-#: ../src/core/item.cpp:387 ../src/gui/charinfo.cpp:839
-msgid "Range"
-msgstr ""
-
-#: ../src/core/action.cpp:1753
-msgid "Ranged attack"
-msgstr ""
-
-#: ../src/core/action.cpp:1828
-msgid "Regeneration"
-msgstr ""
-
-#: ../src/core/action.cpp:2112
-msgid "Remedial Water"
-msgstr ""
-
-#: ../src/core/document.cpp:1121 ../src/core/item.cpp:348
-msgid "Required level"
-msgstr ""
-
-#: ../src/core/action.cpp:2140
-msgid "Restore Concentration"
-msgstr ""
-
-#: ../src/core/action.cpp:2068
-msgid "Sanctified Strike"
-msgstr ""
-
-#: ../src/gui/controlpanel.cpp:285
-msgid "Save & Exit"
-msgstr ""
-
-#: ../src/gui/savegamelist.cpp:162
-msgid "Savegame"
-msgstr ""
-
-#: ../src/core/action.cpp:1787
-msgid "Silencer"
-msgstr ""
-
-#: ../src/gui/mainmenu.cpp:60
-msgid "Single player"
-msgstr ""
-
-#: ../src/gui/optionswindow.cpp:117
-msgid "Skilltree"
-msgstr ""
-
-#: ../src/core/action.cpp:1783
-msgid "Smash blow"
-msgstr ""
-
-#: ../src/core/action.cpp:2010
-msgid "Snipe"
-msgstr ""
-
-#: ../src/core/action.cpp:1907
-msgid "Snow storm"
-msgstr ""
-
-#: ../src/core/action.cpp:1903
-msgid "Spear of ice"
-msgstr ""
-
-#: ../src/core/action.cpp:2144
-msgid "Spirit Shield"
-msgstr ""
-
-#: ../src/core/action.cpp:1955
-msgid "Static shield"
-msgstr ""
-
-#: ../src/core/action.cpp:2030
-msgid "Storm Arrows"
-msgstr ""
-
-#: ../src/core/item.cpp:425 ../src/gui/charinfo.cpp:799
-msgid "Strength"
-msgstr ""
-
-#: ../src/gui/charinfo.cpp:800
-msgid "Strength increases hitpoints, melee damage and attack power."
-msgstr ""
-
-#: ../src/gui/optionswindow.cpp:132
-msgid "Swap equipement"
-msgstr ""
-
-#: ../src/core/action.cpp:1775
-msgid "Sweeping blow"
-msgstr ""
-
-#: ../src/core/action.cpp:1800
-msgid "Taunt"
-msgstr ""
-
-#: ../src/core/action.cpp:1943
-msgid "Tempest"
-msgstr ""
-
-#: ../src/core/action.cpp:1987
-msgid ""
-"The archer attacks a weak point of his enemy, causing the victim to go "
-"berserk."
-msgstr ""
-
-#: ../src/core/action.cpp:1991
-msgid ""
-"The archer attacks the enemies eyes, causing him to go berserk, but be "
-"blinded at the same time."
-msgstr ""
-
-#: ../src/core/action.cpp:1995
-msgid ""
-"The archer attacks with an arrow imbued with a weaker windspirit, that "
-"causes an enemy hit by it to be stunned."
-msgstr ""
-
-#: ../src/core/action.cpp:2015
-msgid ""
-"The archer becomes one with his weapon, dealing more damage over a longer "
-"time. Additionally his critical strike chance is increased. This effect "
-"stacks with Elfeyes."
-msgstr ""
-
-#: ../src/core/action.cpp:2019
-msgid ""
-"The archer calls upon the spirits of ice to imbue his projectiles with "
-"icedamage."
-msgstr ""
-
-#: ../src/core/action.cpp:1979
-msgid ""
-"The archer handles his weapons with elflike precision, attacking up to seven "
-"enemys in front of him. The damage dealt by each projectile suffers a little."
-msgstr ""
-
-#: ../src/core/action.cpp:2051
-msgid "The archer has become immune to anger. He will never go berserk again."
-msgstr ""
-
-#: ../src/core/action.cpp:2027
-msgid ""
-"The archer has been grantet the power to imbue his projectiles with "
-"winddamage by the spirits of wind."
-msgstr ""
-
-#: ../src/core/action.cpp:2055
-msgid ""
-"The archer has made a pact with the spirits of wind and ice. His resistance "
-"against wind- and icedamage is increased by 20 percent."
-msgstr ""
-
-#: ../src/core/action.cpp:1975
-msgid ""
-"The archer shoots five projectiles at a time, aimed at enemies in front of "
-"him. The damage dealt by each projectile suffers a little."
-msgstr ""
-
-#: ../src/core/action.cpp:1971
-msgid ""
-"The archer shoots four consecutive projectiles that are imbued with vengeful "
-"spirits. They will pursue the enemy, even if he tries to run."
-msgstr ""
-
-#: ../src/core/action.cpp:2043
-msgid ""
-"The archer shoots with deadly precision, leading to an increased critical "
-"hit rate."
-msgstr ""
-
-#: ../src/core/action.cpp:2023
-msgid ""
-"The archer summons a spirit of ice into his weapon, causing his shots to "
-"deal icedamage over a greater amount of time. There is a chance that his "
-"enemies will be frozen solid if they are hit."
-msgstr ""
-
-#: ../src/core/action.cpp:1983
-msgid ""
-"The archer unleashes a mighty shot that pierces right through an enemy and "
-"might hit another enemy behind him."
-msgstr ""
-
-#: ../src/core/action.cpp:2011
-msgid ""
-"The archers deadly precision causes his shots to deal more damage than "
-"normal."
-msgstr ""
-
-#: ../src/core/action.cpp:2059
-msgid ""
-"The archers good longterm relations with the spirits of wind and ice has "
-"caused his resistence and his maximum resistance of these elements to rise "
-"by 10 percent."
-msgstr ""
-
-#: ../src/core/action.cpp:1966
-msgid ""
-"The archers mastery of ranged weapons allows him to shoot three projectiles "
-"in a short amount of time."
-msgstr ""
-
-#: ../src/core/action.cpp:2039
-msgid "The archers nimble mind allows him to avoid damage better."
-msgstr ""
-
-#: ../src/core/action.cpp:2047
-msgid "The archers steady mind can no longer be confused."
-msgstr ""
-
-#: ../src/core/action.cpp:1825
-msgid ""
-"The battle hardened warriors scream leaves his enemies defence wide open, "
-"sometimes confusing them as well."
-msgstr ""
-
-#: ../src/core/action.cpp:1904
-msgid "The mage attacks one enemy with a powerful spear of magical ice."
-msgstr ""
-
-#: ../src/core/action.cpp:1920
-msgid "The mage calls upon a deadlier version of the icering."
-msgstr ""
-
-#: ../src/core/action.cpp:1936
-msgid "The mage calls upon a mighty lightning to kill an enemy."
-msgstr ""
-
-#: ../src/core/action.cpp:1908
-msgid "The mage calls upon a snow storm to kill every enemy in a circle."
-msgstr ""
-
-#: ../src/core/action.cpp:1883
-msgid ""
-"The mage casts a bolt of fire, that explodes upon hitting an enemy. Other "
-"enemies nearby the victim are also caught in the explosion."
-msgstr ""
-
-#: ../src/core/action.cpp:1916
-msgid ""
-"The mage casts a ring of ice around himself that will damage enemies in "
-"range."
-msgstr ""
-
-#: ../src/core/action.cpp:1899
-msgid "The mage casts a shard of pure ice, that damages his foes."
-msgstr ""
-
-#: ../src/core/action.cpp:1871
-msgid "The mage casts a strong bolt of fire, that damages one enemy."
-msgstr ""
-
-#: ../src/core/action.cpp:1887
-msgid "The mage casts an even more powerful fireball."
-msgstr ""
-
-#: ../src/core/action.cpp:1924
-msgid ""
-"The mage catches an enemy in a block of pure ice, instantly sealing his "
-"movements."
-msgstr ""
-
-#: ../src/core/action.cpp:1879
-msgid ""
-"The mage conjures a deadly wave of fire, that burns every enemy in a circle "
-"around him."
-msgstr ""
-
-#: ../src/core/action.cpp:1875
-msgid ""
-"The mage conjures a wave of flames, that damages enemies in a circle around "
-"him."
-msgstr ""
-
-#: ../src/core/action.cpp:1891
-msgid ""
-"The mage conjurs a column made of hellfire, that will stay for 5 seconds and "
-"turn every enemy stupid enough to stay in there to ashes."
-msgstr ""
-
-#: ../src/core/action.cpp:1895
-msgid ""
-"The mage embraces the heat of fire, so that victims of his firespells will "
-"likely suffer burn."
-msgstr ""
-
-#: ../src/core/action.cpp:1960
-#, c-format
-msgid ""
-"The mage has become one with the storm, leading to 20% extra damage from his "
-"lightning spells."
-msgstr ""
-
-#: ../src/core/action.cpp:1928
-msgid ""
-"The mage has understood everything about ice and snow, allowing him to "
-"increase the effectiveness of his icespells by 20%."
-msgstr ""
-
-#: ../src/core/action.cpp:1944
-msgid ""
-"The mage summons a ferocious tempest that bombards enemies in its wake with "
-"lightnings."
-msgstr ""
-
-#: ../src/core/action.cpp:1912
-msgid ""
-"The mage summons a leathal cold blizzard that freezes every enemy caught in "
-"it to death."
-msgstr ""
-
-#: ../src/core/action.cpp:1932
-msgid "The mage summons a lightning to attack one foe."
-msgstr ""
-
-#: ../src/core/action.cpp:1940
-msgid ""
-"The mage summons a thunderstorm that will assault enemies in its range with "
-"lightnings."
-msgstr ""
-
-#: ../src/core/action.cpp:1956
-msgid ""
-"The mage surrounds himself with an armor of lightning, that will stun and "
-"damage enemies who are bolt enough to attack in close combat."
-msgstr ""
-
-#: ../src/core/action.cpp:1948
-msgid ""
-"The mage unleashes a ball of lightning, that may jump from one enemy to "
-"another. It hits a maximum of five enemies and the damage is reduced "
-"everytime it jumps."
-msgstr ""
-
-#: ../src/core/action.cpp:1952
-msgid ""
-"The mage unleashes a mighty ball lightning, that can jump over to nearby "
-"enemies. A maximum of nine enemies is hit and the damage is reduced with "
-"every jump."
-msgstr ""
-
-#: ../src/core/action.cpp:1867
-msgid "The mage unleashes a small bolt of fire, that damages a single enemy."
-msgstr ""
-
-#: ../src/core/action.cpp:2031
-msgid ""
-"The mighty spirits of wind themselfes help the archer by imbuing his "
-"projectiles with their power, causing them to deal more winddamage for a "
-"longer time."
-msgstr ""
-
-#: ../src/core/action.cpp:2085
-msgid ""
-"The party is surrounded by holy energy. Everyones defense is increased. With "
-"increasing willpower the priest can hold this effect longer."
-msgstr ""
-
-#: ../src/core/action.cpp:2081
-msgid ""
-"The party will be immune to blind and berserk for some time. With increasing "
-"willpower the priest can hold this effect longer."
-msgstr ""
-
-#: ../src/core/action.cpp:2065
-msgid ""
-"The priest attacks an enemy with a blow imbued with holy power. Undead will "
-"be severely damaged by the sacred energies."
-msgstr ""
-
-#: ../src/core/action.cpp:2097
-msgid ""
-"The priest attacks an enemy with energy that causes elementals to be blown "
-"back where they come from."
-msgstr ""
-
-#: ../src/core/action.cpp:2069
-msgid ""
-"The priest attacks with godly power, easily sending undead creatures back to "
-"their graves."
-msgstr ""
-
-#: ../src/core/action.cpp:2077
-msgid ""
-"The priest bathes a partymember in a mild light, releaving him of blindness "
-"and silence."
-msgstr ""
-
-#: ../src/core/action.cpp:2093
-msgid ""
-"The priest calls forth a mighty explosion of light that can make every enemy "
-"in an area to be affected by blind."
-msgstr ""
-
-#: ../src/core/action.cpp:2089
-msgid ""
-"The priest casts a dazzling light, that can cause an enemy to be affected by "
-"blind."
-msgstr ""
-
-#: ../src/core/action.cpp:2149
-msgid "The priest confuses a monster, causing it to attack at random."
-msgstr ""
-
-#: ../src/core/action.cpp:2153
-msgid ""
-"The priest creates a distracting vortex with the ability to confuse every "
-"enemy caught in it."
-msgstr ""
-
-#: ../src/core/action.cpp:2129
-msgid ""
-"The priest creates a vortex with his attack, that can suck a demonic "
-"creature right back to hell."
-msgstr ""
-
-#: ../src/core/action.cpp:2145
-msgid ""
-"The priest grants immunity to berserk and confuse to all his partymembers "
-"for a small amount of time. With increasing willpower the priest can hold "
-"this effect longer."
-msgstr ""
-
-#: ../src/core/action.cpp:2141
-msgid "The priest heals one friend from confusion and berserk."
-msgstr ""
-
-#: ../src/core/action.cpp:2157
-msgid ""
-"The priest increases everyones spellpower for a short time. Everyones spells "
-"will surely be more effective. With increasing willpower the priest can hold "
-"this effect longer."
-msgstr ""
-
-#: ../src/core/action.cpp:2073
-msgid ""
-"The priest inflicts holy anger in his partymembers. They will attack with "
-"greater power. With increasing willpower the priest can hold this effect "
-"longer."
-msgstr ""
-
-#: ../src/core/action.cpp:2125
-msgid "The priest restores hitpoints for every partymember."
-msgstr ""
-
-#: ../src/core/action.cpp:2121
-msgid "The priest restores the hitpoints of one partymemeber."
-msgstr ""
-
-#: ../src/core/action.cpp:2137
-msgid ""
-"The priest strengthens the weaponarms of his comrades, leading to increased "
-"attackspeed for everyone. With increasing willpower the priest can hold this "
-"effect longer."
-msgstr ""
-
-#: ../src/core/action.cpp:2101
-msgid ""
-"The priest strikes with all his might. While normal monsters have little to "
-"fear from this attack elementals will be easily destroyed by it."
-msgstr ""
-
-#: ../src/core/action.cpp:2109
-msgid ""
-"The priest treats a partymemener with healing water that washes away every "
-"poison and stops burns."
-msgstr ""
-
-#: ../src/core/action.cpp:2117
-msgid "The priest turns normal water into deadly acid, poisoning one enemy."
-msgstr ""
-
-#: ../src/core/action.cpp:2113
-msgid ""
-"The priests grants every partymember immunity to poison and burn for a small "
-"amount of time while healing these effects. With increasing willpower the "
-"priest can hold this effect longer."
-msgstr ""
-
-#: ../src/core/action.cpp:2105
-msgid ""
-"The priests protecting influence raises the willpower of all partymembers "
-"temporarily. With increasing willpower the priest can hold this effect "
-"longer."
-msgstr ""
-
-#: ../src/core/action.cpp:1999
-msgid ""
-"The projectile has a fifty percent probability to attack another target, if "
-"it hits someone. Be careful not to stand in its way, for it distinguishes "
-"not between friend and foe."
-msgstr ""
-
-#: ../src/core/action.cpp:2007
-msgid ""
-"The projectile is imbued with the power of a firespirit. It will explode "
-"with areadamage on hitting. Additionally four more explosions will go of in "
-"every direction."
-msgstr ""
-
-#: ../src/core/action.cpp:2003
-msgid ""
-"The projectile is imbued with the power of a weak firespirit. It will deal "
-"damage in a small area, if it hits."
-msgstr ""
-
-#: ../src/core/action.cpp:2035
-msgid ""
-"The spirits of wind help the archer to move faster than normal and avoid "
-"damage."
-msgstr ""
-
-#: ../src/core/action.cpp:1837
-msgid ""
-"The warrior becomes even more bloodthirsty, launching at his enemies with "
-"increased attackspeed and damage in a berserk state. Even while neglecting "
-"his defence, the impact is not as big as with the barbarian anger."
-msgstr ""
-
-#: ../src/core/action.cpp:1809
-msgid ""
-"The warrior calls the spirits of fire upon his weapon, causing it to deal "
-"firedamage. The damage depends on the warriors spellpower."
-msgstr ""
-
-#: ../src/core/action.cpp:1813
-msgid ""
-"The warrior calls upon the fires of hell, causing his weapon to deal "
-"firedamage for a significant time. His enemies might catch fire when hit."
-msgstr ""
-
-#: ../src/core/action.cpp:1857
-msgid ""
-"The warrior has become the worst nightmare of monsters, with every one of "
-"them falling at his feet increasing his strength and attackspeed for a short "
-"amount of time."
-msgstr ""
-
-#: ../src/core/action.cpp:1861
-msgid ""
-"The warrior has become used to the ways of the battlefield to a point, where "
-"he can regenerate his abilities faster than normal."
-msgstr ""
-
-#: ../src/core/action.cpp:1829
-#, c-format
-msgid ""
-"The warrior regains up to 50% hitpoints of his total hitpoints through the "
-"sheer power of his will."
-msgstr ""
-
-#: ../src/core/action.cpp:1821
-msgid ""
-"The warrior releases a mighty cry that causes his enemies to lose "
-"concentration, ultimatly reducing their defence."
-msgstr ""
-
-#: ../src/core/action.cpp:1833
-msgid ""
-"The warrior sets himself in the state of berserk, attacking his enemies with "
-"vicious blows, while completely neglecting his defence."
-msgstr ""
-
-#: ../src/core/action.cpp:1817
-msgid ""
-"The warrior surrounds himself with angry spirits of fire, who will burn his "
-"enemies to ashes, if they dare to come to close."
-msgstr ""
-
-#: ../src/core/action.cpp:1841
-msgid ""
-"The warriors defence increases proportional to the cuts and bruises he "
-"receives in combat. The more serious the wounds, the more difficult he is to "
-"kill."
-msgstr ""
-
-#: ../src/core/action.cpp:1845
-msgid ""
-"The warriors mastery of shields and weapons allows him to block damage at an "
-"increased rate."
-msgstr ""
-
-#: ../src/core/action.cpp:1849
-msgid ""
-"The warriors mastery of weapons increases the damage of his basic attacks by "
-"20%."
-msgstr ""
-
-#: ../src/core/action.cpp:1939
-msgid "Thunderstorm"
-msgstr ""
-
-#: ../src/core/document.cpp:1127
-msgid "Timer"
-msgstr ""
-
-#: ../src/core/action.cpp:1965
-msgid "Tripple Shot"
-msgstr ""
-
-#: ../src/core/item.cpp:382
-msgid "Two-handed weapon"
-msgstr ""
-
-#: ../src/core/action.cpp:1994
-msgid "Vacuum"
-msgstr ""
-
-#: ../src/core/item.cpp:345
-msgid "Value"
-msgstr ""
-
-#: ../src/core/action.cpp:1824
-msgid "Warcry"
-msgstr ""
-
-#: ../src/core/action.cpp:1860
-msgid "Warmaster"
-msgstr ""
-
-#: ../src/gui/charcreate.cpp:54 ../src/gui/charinfo.cpp:471
-#: ../src/gui/partyinfo.cpp:281
-msgid "Warrior"
-msgstr ""
-
-#: ../src/gui/skilltree.cpp:551
-msgid "Water Magic"
-msgstr ""
-
-#: ../src/core/action.cpp:1986
-msgid "Weak Spot"
-msgstr ""
-
-#: ../src/gui/charinfo.cpp:840
-msgid "Weapon Range in meters."
-msgstr ""
-
-#: ../src/core/action.cpp:1848
-msgid "Weaponmaster"
-msgstr ""
-
-#: ../src/core/action.cpp:1779
-msgid "Whirl blow"
-msgstr ""
-
-#: ../src/core/item.cpp:440 ../src/gui/charinfo.cpp:807
-msgid "Willpower"
-msgstr ""
-
-#: ../src/gui/charinfo.cpp:808
-msgid ""
-"Willpower decreases the duration and the impact of status changes and "
-"increases magical melee damage."
-msgstr ""
-
-#: ../src/core/action.cpp:2026
-msgid "Wind Arrows"
-msgstr ""
-
-#: ../src/gui/skilltree.cpp:554
-msgid "Wind Magic"
-msgstr ""
-
-#: ../src/core/action.cpp:2128
-msgid "Windstrike"
-msgstr ""
-
-#: ../src/core/action.cpp:2034
-msgid "Windwalk"
-msgstr ""
-
-#: ../src/core/action.cpp:1836
-msgid "barbarian power"
-msgstr ""
-
-#: ../src/core/damage.cpp:135
-msgid "berserk"
-msgstr ""
-
-#: ../src/core/damage.cpp:127
-msgid "blind"
-msgstr ""
-
-#: ../src/core/damage.cpp:141
-msgid "burning"
-msgstr ""
-
-#: ../src/core/damage.cpp:222
-msgid "can not be blocked"
-msgstr ""
-
-#: ../src/core/damage.cpp:133
-msgid "confused"
-msgstr ""
-
-#: ../src/core/damage.cpp:203 ../src/core/damage.cpp:207
-msgid "damage"
-msgstr ""
-
-#: ../src/core/action.cpp:1733 ../src/core/action.cpp:1734
-msgid "die"
-msgstr ""
-
-#: ../src/gui/questinfo.cpp:164
-msgid "failed"
-msgstr ""
-
-#: ../src/gui/questinfo.cpp:161
-msgid "finished"
-msgstr ""
-
-#: ../src/core/damage.cpp:139
-msgid "frozen"
-msgstr ""
-
-#: ../src/core/damage.cpp:239
-msgid "ignores armor"
-msgstr ""
-
-#: ../src/core/item.cpp:370
-msgid "immune for "
-msgstr ""
-
-#: ../src/core/item.cpp:420
-msgid "max hitpoints"
-msgstr ""
-
-#: ../src/core/damage.cpp:131
-msgid "mute"
-msgstr ""
 
 #: ../src/core/action.cpp:1729
 msgid "no action"
@@ -1396,16 +24,20 @@ msgstr ""
 msgid "noaction"
 msgstr ""
 
-#: ../src/gui/questinfo.cpp:158
-msgid "open"
+#: ../src/core/action.cpp:1733 ../src/core/action.cpp:1734
+msgid "die"
 msgstr ""
 
-#: ../src/core/damage.cpp:137
-msgid "paralyzed"
+#: ../src/core/action.cpp:1737 ../src/core/action.cpp:1738
+msgid "walk"
 msgstr ""
 
-#: ../src/core/damage.cpp:129
-msgid "poisoned"
+#: ../src/core/action.cpp:1741
+msgid "take up item"
+msgstr ""
+
+#: ../src/core/action.cpp:1742
+msgid "take item"
 msgstr ""
 
 #: ../src/core/action.cpp:1745
@@ -1416,18 +48,1386 @@ msgstr ""
 msgid "speak with someone"
 msgstr ""
 
-#: ../src/core/action.cpp:1742
-msgid "take item"
+#: ../src/core/action.cpp:1749 ../src/core/damage.cpp:226
+#: ../src/gui/charinfo.cpp:869
+msgid "Attack"
 msgstr ""
 
-#: ../src/core/action.cpp:1741
-msgid "take up item"
+#: ../src/core/action.cpp:1750
+msgid "Basic melee attack"
 msgstr ""
 
-#: ../src/core/action.cpp:1737 ../src/core/action.cpp:1738
-msgid "walk"
+#: ../src/core/action.cpp:1753
+msgid "Ranged attack"
+msgstr ""
+
+#: ../src/core/action.cpp:1754
+msgid "Basic ranged attack"
+msgstr ""
+
+#: ../src/core/action.cpp:1757
+msgid "Magic attack"
+msgstr ""
+
+#: ../src/core/action.cpp:1758
+msgid "Basic magic attack"
+msgstr ""
+
+#: ../src/core/action.cpp:1761
+msgid "Holy attack"
+msgstr ""
+
+#: ../src/core/action.cpp:1762
+msgid "Basic holy melee attack"
+msgstr ""
+
+#: ../src/core/action.cpp:1766
+msgid "Bash"
+msgstr ""
+
+#: ../src/core/action.cpp:1767
+msgid "Attacks one enemy for serious damage."
+msgstr ""
+
+#: ../src/core/action.cpp:1771
+msgid "Hammer blow"
+msgstr ""
+
+#: ../src/core/action.cpp:1772
+msgid ""
+"Attacks one enemy with a brutal blow and damages nearby enemies as well."
+msgstr ""
+
+#: ../src/core/action.cpp:1775
+msgid "Sweeping blow"
+msgstr ""
+
+#: ../src/core/action.cpp:1776
+msgid "Attacks every enemy in weapon range with slightly reduced damage."
+msgstr ""
+
+#: ../src/core/action.cpp:1779
+msgid "Whirl blow"
+msgstr ""
+
+#: ../src/core/action.cpp:1780
+msgid "Attacks every enemy in weapon range."
+msgstr ""
+
+#: ../src/core/action.cpp:1783
+msgid "Smash blow"
+msgstr ""
+
+#: ../src/core/action.cpp:1784
+msgid "Attacks an enemy with an unblockable, armor piercing blow."
+msgstr ""
+
+#: ../src/core/action.cpp:1787
+msgid "Silencer"
+msgstr ""
+
+#: ../src/core/action.cpp:1788
+msgid "Attacks an enemy with a chance to inflict silence."
+msgstr ""
+
+#: ../src/core/action.cpp:1792
+msgid "Charge"
+msgstr ""
+
+#: ../src/core/action.cpp:1793
+msgid ""
+"Launches an assault at an enemy with increasing speed. The faster the "
+"warrior is, the more damage a charge inflicts."
+msgstr ""
+
+#: ../src/core/action.cpp:1796
+msgid "Charge scythe"
+msgstr ""
+
+#: ../src/core/action.cpp:1797
+msgid "Launches an even stronger charge attack, that may inflict stun."
+msgstr ""
+
+#: ../src/core/action.cpp:1800
+msgid "Taunt"
+msgstr ""
+
+#: ../src/core/action.cpp:1801
+msgid "Causes surrounding monsters to attack the warrior more likely."
+msgstr ""
+
+#: ../src/core/action.cpp:1804
+msgid "Defiances"
+msgstr ""
+
+#: ../src/core/action.cpp:1805
+msgid ""
+"Nearby monsters will attack the warrior, if they are able to. The warriors "
+"defence is increased."
+msgstr ""
+
+#: ../src/core/action.cpp:1808
+msgid "Fire and sword"
+msgstr ""
+
+#: ../src/core/action.cpp:1809
+msgid ""
+"The warrior calls the spirits of fire upon his weapon, causing it to deal "
+"firedamage. The damage depends on the warriors spellpower."
+msgstr ""
+
+#: ../src/core/action.cpp:1812
+msgid "Pact of flames"
+msgstr ""
+
+#: ../src/core/action.cpp:1813
+msgid ""
+"The warrior calls upon the fires of hell, causing his weapon to deal "
+"firedamage for a significant time. His enemies might catch fire when hit."
+msgstr ""
+
+#: ../src/core/action.cpp:1816
+msgid "Flame armor"
+msgstr ""
+
+#: ../src/core/action.cpp:1817
+msgid ""
+"The warrior surrounds himself with angry spirits of fire, who will burn his "
+"enemies to ashes, if they dare to come to close."
+msgstr ""
+
+#: ../src/core/action.cpp:1820
+msgid "Battlecry"
+msgstr ""
+
+#: ../src/core/action.cpp:1821
+msgid ""
+"The warrior releases a mighty cry that causes his enemies to lose "
+"concentration, ultimatly reducing their defence."
+msgstr ""
+
+#: ../src/core/action.cpp:1824
+msgid "Warcry"
+msgstr ""
+
+#: ../src/core/action.cpp:1825
+msgid ""
+"The battle hardened warriors scream leaves his enemies defence wide open, "
+"sometimes confusing them as well."
+msgstr ""
+
+#: ../src/core/action.cpp:1828
+msgid "Regeneration"
+msgstr ""
+
+#: ../src/core/action.cpp:1829
+#, c-format
+msgid ""
+"The warrior regains up to 50% hitpoints of his total hitpoints through the "
+"sheer power of his will."
+msgstr ""
+
+#: ../src/core/action.cpp:1832
+msgid "Barbarian anger"
+msgstr ""
+
+#: ../src/core/action.cpp:1833
+msgid ""
+"The warrior sets himself in the state of berserk, attacking his enemies with "
+"vicious blows, while completely neglecting his defence."
+msgstr ""
+
+#: ../src/core/action.cpp:1836
+msgid "barbarian power"
+msgstr ""
+
+#: ../src/core/action.cpp:1837
+msgid ""
+"The warrior becomes even more bloodthirsty, launching at his enemies with "
+"increased attackspeed and damage in a berserk state. Even while neglecting "
+"his defence, the impact is not as big as with the barbarian anger."
+msgstr ""
+
+#: ../src/core/action.cpp:1840
+msgid "Perseverance"
+msgstr ""
+
+#: ../src/core/action.cpp:1841
+msgid ""
+"The warriors defence increases proportional to the cuts and bruises he "
+"receives in combat. The more serious the wounds, the more difficult he is to "
+"kill."
+msgstr ""
+
+#: ../src/core/action.cpp:1844 ../src/core/item.cpp:415
+#: ../src/gui/charinfo.cpp:894
+msgid "Block"
+msgstr ""
+
+#: ../src/core/action.cpp:1845
+msgid ""
+"The warriors mastery of shields and weapons allows him to block damage at an "
+"increased rate."
+msgstr ""
+
+#: ../src/core/action.cpp:1848
+msgid "Weaponmaster"
+msgstr ""
+
+#: ../src/core/action.cpp:1849
+msgid ""
+"The warriors mastery of weapons increases the damage of his basic attacks by "
+"20%."
+msgstr ""
+
+#: ../src/core/action.cpp:1852
+msgid "Monster hunter"
+msgstr ""
+
+#: ../src/core/action.cpp:1853
+msgid ""
+"For each monster the warrior kills, his strength increases for a short "
+"amount of time."
+msgstr ""
+
+#: ../src/core/action.cpp:1856
+msgid "Monster slayer"
+msgstr ""
+
+#: ../src/core/action.cpp:1857
+msgid ""
+"The warrior has become the worst nightmare of monsters, with every one of "
+"them falling at his feet increasing his strength and attackspeed for a short "
+"amount of time."
+msgstr ""
+
+#: ../src/core/action.cpp:1860
+msgid "Warmaster"
+msgstr ""
+
+#: ../src/core/action.cpp:1861
+msgid ""
+"The warrior has become used to the ways of the battlefield to a point, where "
+"he can regenerate his abilities faster than normal."
+msgstr ""
+
+#: ../src/core/action.cpp:1866
+msgid "Firebolt"
+msgstr ""
+
+#: ../src/core/action.cpp:1867
+msgid "The mage unleashes a small bolt of fire, that damages a single enemy."
+msgstr ""
+
+#: ../src/core/action.cpp:1870
+msgid "Fireblow"
+msgstr ""
+
+#: ../src/core/action.cpp:1871
+msgid "The mage casts a strong bolt of fire, that damages one enemy."
+msgstr ""
+
+#: ../src/core/action.cpp:1874
+msgid "Flame wave"
+msgstr ""
+
+#: ../src/core/action.cpp:1875
+msgid ""
+"The mage conjures a wave of flames, that damages enemies in a circle around "
+"him."
+msgstr ""
+
+#: ../src/core/action.cpp:1878
+msgid "Firestorm"
+msgstr ""
+
+#: ../src/core/action.cpp:1879
+msgid ""
+"The mage conjures a deadly wave of fire, that burns every enemy in a circle "
+"around him."
+msgstr ""
+
+#: ../src/core/action.cpp:1882
+msgid "Fireball"
+msgstr ""
+
+#: ../src/core/action.cpp:1883
+msgid ""
+"The mage casts a bolt of fire, that explodes upon hitting an enemy. Other "
+"enemies nearby the victim are also caught in the explosion."
+msgstr ""
+
+#: ../src/core/action.cpp:1886
+msgid "Infernoball"
+msgstr ""
+
+#: ../src/core/action.cpp:1887
+msgid "The mage casts an even more powerful fireball."
+msgstr ""
+
+#: ../src/core/action.cpp:1890
+msgid "Firecolumn"
+msgstr ""
+
+#: ../src/core/action.cpp:1891
+msgid ""
+"The mage conjurs a column made of hellfire, that will stay for 5 seconds and "
+"turn every enemy stupid enough to stay in there to ashes."
+msgstr ""
+
+#: ../src/core/action.cpp:1894
+msgid "Ignite"
+msgstr ""
+
+#: ../src/core/action.cpp:1895
+msgid ""
+"The mage embraces the heat of fire, so that victims of his firespells will "
+"likely suffer burn."
+msgstr ""
+
+#: ../src/core/action.cpp:1898
+msgid "Icicle"
+msgstr ""
+
+#: ../src/core/action.cpp:1899
+msgid "The mage casts a shard of pure ice, that damages his foes."
+msgstr ""
+
+#: ../src/core/action.cpp:1903
+msgid "Spear of ice"
+msgstr ""
+
+#: ../src/core/action.cpp:1904
+msgid "The mage attacks one enemy with a powerful spear of magical ice."
+msgstr ""
+
+#: ../src/core/action.cpp:1907
+msgid "Snow storm"
+msgstr ""
+
+#: ../src/core/action.cpp:1908
+msgid "The mage calls upon a snow storm to kill every enemy in a circle."
+msgstr ""
+
+#: ../src/core/action.cpp:1911
+msgid "Blizzard"
+msgstr ""
+
+#: ../src/core/action.cpp:1912
+msgid ""
+"The mage summons a leathal cold blizzard that freezes every enemy caught in "
+"it to death."
+msgstr ""
+
+#: ../src/core/action.cpp:1915
+msgid "Ice ring"
+msgstr ""
+
+#: ../src/core/action.cpp:1916
+msgid ""
+"The mage casts a ring of ice around himself that will damage enemies in "
+"range."
+msgstr ""
+
+#: ../src/core/action.cpp:1919
+msgid "Frost ring"
+msgstr ""
+
+#: ../src/core/action.cpp:1920
+msgid "The mage calls upon a deadlier version of the icering."
+msgstr ""
+
+#: ../src/core/action.cpp:1923
+msgid "Freeze"
+msgstr ""
+
+#: ../src/core/action.cpp:1924
+msgid ""
+"The mage catches an enemy in a block of pure ice, instantly sealing his "
+"movements."
+msgstr ""
+
+#: ../src/core/action.cpp:1927
+msgid "Chilling cold"
+msgstr ""
+
+#: ../src/core/action.cpp:1928
+msgid ""
+"The mage has understood everything about ice and snow, allowing him to "
+"increase the effectiveness of his icespells by 20%."
+msgstr ""
+
+#: ../src/core/action.cpp:1931
+msgid "Lightning"
+msgstr ""
+
+#: ../src/core/action.cpp:1932
+msgid "The mage summons a lightning to attack one foe."
+msgstr ""
+
+#: ../src/core/action.cpp:1935
+msgid "Lightning strike"
+msgstr ""
+
+#: ../src/core/action.cpp:1936
+msgid "The mage calls upon a mighty lightning to kill an enemy."
+msgstr ""
+
+#: ../src/core/action.cpp:1939
+msgid "Thunderstorm"
+msgstr ""
+
+#: ../src/core/action.cpp:1940
+msgid ""
+"The mage summons a thunderstorm that will assault enemies in its range with "
+"lightnings."
+msgstr ""
+
+#: ../src/core/action.cpp:1943
+msgid "Tempest"
+msgstr ""
+
+#: ../src/core/action.cpp:1944
+msgid ""
+"The mage summons a ferocious tempest that bombards enemies in its wake with "
+"lightnings."
+msgstr ""
+
+#: ../src/core/action.cpp:1947
+msgid "Chainlightning"
+msgstr ""
+
+#: ../src/core/action.cpp:1948
+msgid ""
+"The mage unleashes a ball of lightning, that may jump from one enemy to "
+"another. It hits a maximum of five enemies and the damage is reduced "
+"everytime it jumps."
+msgstr ""
+
+#: ../src/core/action.cpp:1951
+msgid "Ball lightning"
+msgstr ""
+
+#: ../src/core/action.cpp:1952
+msgid ""
+"The mage unleashes a mighty ball lightning, that can jump over to nearby "
+"enemies. A maximum of nine enemies is hit and the damage is reduced with "
+"every jump."
+msgstr ""
+
+#: ../src/core/action.cpp:1955
+msgid "Static shield"
+msgstr ""
+
+#: ../src/core/action.cpp:1956
+msgid ""
+"The mage surrounds himself with an armor of lightning, that will stun and "
+"damage enemies who are bolt enough to attack in close combat."
+msgstr ""
+
+#: ../src/core/action.cpp:1959
+msgid "Ionisation"
+msgstr ""
+
+#: ../src/core/action.cpp:1960
+#, c-format
+msgid ""
+"The mage has become one with the storm, leading to 20% extra damage from his "
+"lightning spells."
+msgstr ""
+
+#: ../src/core/action.cpp:1965
+msgid "Tripple Shot"
+msgstr ""
+
+#: ../src/core/action.cpp:1966
+msgid ""
+"The archers mastery of ranged weapons allows him to shoot three projectiles "
+"in a short amount of time."
+msgstr ""
+
+#: ../src/core/action.cpp:1970
+msgid "Deadly Swarm"
+msgstr ""
+
+#: ../src/core/action.cpp:1971
+msgid ""
+"The archer shoots four consecutive projectiles that are imbued with vengeful "
+"spirits. They will pursue the enemy, even if he tries to run."
+msgstr ""
+
+#: ../src/core/action.cpp:1974
+msgid "Fanshot"
+msgstr ""
+
+#: ../src/core/action.cpp:1975
+msgid ""
+"The archer shoots five projectiles at a time, aimed at enemies in front of "
+"him. The damage dealt by each projectile suffers a little."
+msgstr ""
+
+#: ../src/core/action.cpp:1978
+msgid "Iron Hail"
+msgstr ""
+
+#: ../src/core/action.cpp:1979
+msgid ""
+"The archer handles his weapons with elflike precision, attacking up to seven "
+"enemys in front of him. The damage dealt by each projectile suffers a little."
+msgstr ""
+
+#: ../src/core/action.cpp:1982
+msgid "Elfwanderer"
+msgstr ""
+
+#: ../src/core/action.cpp:1983
+msgid ""
+"The archer unleashes a mighty shot that pierces right through an enemy and "
+"might hit another enemy behind him."
+msgstr ""
+
+#: ../src/core/action.cpp:1986
+msgid "Weak Spot"
+msgstr ""
+
+#: ../src/core/action.cpp:1987
+msgid ""
+"The archer attacks a weak point of his enemy, causing the victim to go "
+"berserk."
+msgstr ""
+
+#: ../src/core/action.cpp:1990
+msgid "Blind Rage"
+msgstr ""
+
+#: ../src/core/action.cpp:1991
+msgid ""
+"The archer attacks the enemies eyes, causing him to go berserk, but be "
+"blinded at the same time."
+msgstr ""
+
+#: ../src/core/action.cpp:1994
+msgid "Vacuum"
+msgstr ""
+
+#: ../src/core/action.cpp:1995
+msgid ""
+"The archer attacks with an arrow imbued with a weaker windspirit, that "
+"causes an enemy hit by it to be stunned."
+msgstr ""
+
+#: ../src/core/action.cpp:1998
+msgid "Deadly Roulette"
+msgstr ""
+
+#: ../src/core/action.cpp:1999
+msgid ""
+"The projectile has a fifty percent probability to attack another target, if "
+"it hits someone. Be careful not to stand in its way, for it distinguishes "
+"not between friend and foe."
+msgstr ""
+
+#: ../src/core/action.cpp:2002
+msgid "Explosion Arrow"
+msgstr ""
+
+#: ../src/core/action.cpp:2003
+msgid ""
+"The projectile is imbued with the power of a weak firespirit. It will deal "
+"damage in a small area, if it hits."
+msgstr ""
+
+#: ../src/core/action.cpp:2006
+msgid "Blast Cascade"
+msgstr ""
+
+#: ../src/core/action.cpp:2007
+msgid ""
+"The projectile is imbued with the power of a firespirit. It will explode "
+"with areadamage on hitting. Additionally four more explosions will go of in "
+"every direction."
+msgstr ""
+
+#: ../src/core/action.cpp:2010
+msgid "Snipe"
+msgstr ""
+
+#: ../src/core/action.cpp:2011
+msgid ""
+"The archers deadly precision causes his shots to deal more damage than "
+"normal."
+msgstr ""
+
+#: ../src/core/action.cpp:2014
+msgid "Bow Spirit"
+msgstr ""
+
+#: ../src/core/action.cpp:2015
+msgid ""
+"The archer becomes one with his weapon, dealing more damage over a longer "
+"time. Additionally his critical strike chance is increased. This effect "
+"stacks with Elfeyes."
+msgstr ""
+
+#: ../src/core/action.cpp:2018
+msgid "Ice Arrows"
+msgstr ""
+
+#: ../src/core/action.cpp:2019
+msgid ""
+"The archer calls upon the spirits of ice to imbue his projectiles with "
+"icedamage."
+msgstr ""
+
+#: ../src/core/action.cpp:2022
+msgid "Frost Arrows"
+msgstr ""
+
+#: ../src/core/action.cpp:2023
+msgid ""
+"The archer summons a spirit of ice into his weapon, causing his shots to "
+"deal icedamage over a greater amount of time. There is a chance that his "
+"enemies will be frozen solid if they are hit."
+msgstr ""
+
+#: ../src/core/action.cpp:2026
+msgid "Wind Arrows"
+msgstr ""
+
+#: ../src/core/action.cpp:2027
+msgid ""
+"The archer has been grantet the power to imbue his projectiles with "
+"winddamage by the spirits of wind."
+msgstr ""
+
+#: ../src/core/action.cpp:2030
+msgid "Storm Arrows"
+msgstr ""
+
+#: ../src/core/action.cpp:2031
+msgid ""
+"The mighty spirits of wind themselfes help the archer by imbuing his "
+"projectiles with their power, causing them to deal more winddamage for a "
+"longer time."
+msgstr ""
+
+#: ../src/core/action.cpp:2034
+msgid "Windwalk"
+msgstr ""
+
+#: ../src/core/action.cpp:2035
+msgid ""
+"The spirits of wind help the archer to move faster than normal and avoid "
+"damage."
+msgstr ""
+
+#: ../src/core/action.cpp:2038
+msgid "Catlike Reflexes"
+msgstr ""
+
+#: ../src/core/action.cpp:2039
+msgid "The archers nimble mind allows him to avoid damage better."
+msgstr ""
+
+#: ../src/core/action.cpp:2042
+msgid "Elfeyes"
+msgstr ""
+
+#: ../src/core/action.cpp:2043
+msgid ""
+"The archer shoots with deadly precision, leading to an increased critical "
+"hit rate."
+msgstr ""
+
+#: ../src/core/action.cpp:2046
+msgid "Concentration"
+msgstr ""
+
+#: ../src/core/action.cpp:2047
+msgid "The archers steady mind can no longer be confused."
+msgstr ""
+
+#: ../src/core/action.cpp:2050
+msgid "Mind Wall"
+msgstr ""
+
+#: ../src/core/action.cpp:2051
+msgid "The archer has become immune to anger. He will never go berserk again."
+msgstr ""
+
+#: ../src/core/action.cpp:2054
+msgid "North Roamer"
+msgstr ""
+
+#: ../src/core/action.cpp:2055
+msgid ""
+"The archer has made a pact with the spirits of wind and ice. His resistance "
+"against wind- and icedamage is increased by 20 percent."
+msgstr ""
+
+#: ../src/core/action.cpp:2058
+msgid "North Hunter"
+msgstr ""
+
+#: ../src/core/action.cpp:2059
+msgid ""
+"The archers good longterm relations with the spirits of wind and ice has "
+"caused his resistence and his maximum resistance of these elements to rise "
+"by 10 percent."
+msgstr ""
+
+#: ../src/core/action.cpp:2064
+msgid "Bright Blow"
+msgstr ""
+
+#: ../src/core/action.cpp:2065
+msgid ""
+"The priest attacks an enemy with a blow imbued with holy power. Undead will "
+"be severely damaged by the sacred energies."
+msgstr ""
+
+#: ../src/core/action.cpp:2068
+msgid "Sanctified Strike"
+msgstr ""
+
+#: ../src/core/action.cpp:2069
+msgid ""
+"The priest attacks with godly power, easily sending undead creatures back to "
+"their graves."
+msgstr ""
+
+#: ../src/core/action.cpp:2072
+msgid "Burning Rage"
+msgstr ""
+
+#: ../src/core/action.cpp:2073
+msgid ""
+"The priest inflicts holy anger in his partymembers. They will attack with "
+"greater power. With increasing willpower the priest can hold this effect "
+"longer."
+msgstr ""
+
+#: ../src/core/action.cpp:2076
+msgid "Gentle Glow"
+msgstr ""
+
+#: ../src/core/action.cpp:2077
+msgid ""
+"The priest bathes a partymember in a mild light, releaving him of blindness "
+"and silence."
+msgstr ""
+
+#: ../src/core/action.cpp:2080
+msgid "Omniscent Eye"
+msgstr ""
+
+#: ../src/core/action.cpp:2081
+msgid ""
+"The party will be immune to blind and berserk for some time. With increasing "
+"willpower the priest can hold this effect longer."
+msgstr ""
+
+#: ../src/core/action.cpp:2084
+msgid "Blazing Shield"
+msgstr ""
+
+#: ../src/core/action.cpp:2085
+msgid ""
+"The party is surrounded by holy energy. Everyones defense is increased. With "
+"increasing willpower the priest can hold this effect longer."
+msgstr ""
+
+#: ../src/core/action.cpp:2088
+msgid "Glistening Glare"
+msgstr ""
+
+#: ../src/core/action.cpp:2089
+msgid ""
+"The priest casts a dazzling light, that can cause an enemy to be affected by "
+"blind."
+msgstr ""
+
+#: ../src/core/action.cpp:2092
+msgid "Glaring Sun"
+msgstr ""
+
+#: ../src/core/action.cpp:2093
+msgid ""
+"The priest calls forth a mighty explosion of light that can make every enemy "
+"in an area to be affected by blind."
+msgstr ""
+
+#: ../src/core/action.cpp:2096
+msgid "Breaking Blow"
+msgstr ""
+
+#: ../src/core/action.cpp:2097
+msgid ""
+"The priest attacks an enemy with energy that causes elementals to be blown "
+"back where they come from."
+msgstr ""
+
+#: ../src/core/action.cpp:2100
+msgid "Dismissing Strike"
+msgstr ""
+
+#: ../src/core/action.cpp:2101
+msgid ""
+"The priest strikes with all his might. While normal monsters have little to "
+"fear from this attack elementals will be easily destroyed by it."
+msgstr ""
+
+#: ../src/core/action.cpp:2104
+msgid "Magic Shield"
+msgstr ""
+
+#: ../src/core/action.cpp:2105
+msgid ""
+"The priests protecting influence raises the willpower of all partymembers "
+"temporarily. With increasing willpower the priest can hold this effect "
+"longer."
+msgstr ""
+
+#: ../src/core/action.cpp:2108
+msgid "Ease Pain"
+msgstr ""
+
+#: ../src/core/action.cpp:2109
+msgid ""
+"The priest treats a partymemener with healing water that washes away every "
+"poison and stops burns."
+msgstr ""
+
+#: ../src/core/action.cpp:2112
+msgid "Remedial Water"
+msgstr ""
+
+#: ../src/core/action.cpp:2113
+msgid ""
+"The priests grants every partymember immunity to poison and burn for a small "
+"amount of time while healing these effects. With increasing willpower the "
+"priest can hold this effect longer."
+msgstr ""
+
+#: ../src/core/action.cpp:2116
+msgid "Acid"
+msgstr ""
+
+#: ../src/core/action.cpp:2117
+msgid "The priest turns normal water into deadly acid, poisoning one enemy."
+msgstr ""
+
+#: ../src/core/action.cpp:2120
+#, fuzzy
+msgid "Cure"
+msgstr "Erstellen"
+
+#: ../src/core/action.cpp:2121
+msgid "The priest restores the hitpoints of one partymemeber."
+msgstr ""
+
+#: ../src/core/action.cpp:2124
+msgid "Grand Cure"
+msgstr ""
+
+#: ../src/core/action.cpp:2125
+msgid "The priest restores hitpoints for every partymember."
+msgstr ""
+
+#: ../src/core/action.cpp:2128
+msgid "Windstrike"
+msgstr ""
+
+#: ../src/core/action.cpp:2129
+msgid ""
+"The priest creates a vortex with his attack, that can suck a demonic "
+"creature right back to hell."
+msgstr ""
+
+#: ../src/core/action.cpp:2132
+msgid "God Strike"
+msgstr ""
+
+#: ../src/core/action.cpp:2133
+msgid ""
+"Only strong and durable demons will be able to resist the priests sacred "
+"strike."
+msgstr ""
+
+#: ../src/core/action.cpp:2136
+msgid "Bladestorm"
+msgstr ""
+
+#: ../src/core/action.cpp:2137
+msgid ""
+"The priest strengthens the weaponarms of his comrades, leading to increased "
+"attackspeed for everyone. With increasing willpower the priest can hold this "
+"effect longer."
+msgstr ""
+
+#: ../src/core/action.cpp:2140
+msgid "Restore Concentration"
+msgstr ""
+
+#: ../src/core/action.cpp:2141
+msgid "The priest heals one friend from confusion and berserk."
+msgstr ""
+
+#: ../src/core/action.cpp:2144
+msgid "Spirit Shield"
+msgstr ""
+
+#: ../src/core/action.cpp:2145
+msgid ""
+"The priest grants immunity to berserk and confuse to all his partymembers "
+"for a small amount of time. With increasing willpower the priest can hold "
+"this effect longer."
+msgstr ""
+
+#: ../src/core/action.cpp:2148
+msgid "Hypnosis"
+msgstr ""
+
+#: ../src/core/action.cpp:2149
+msgid "The priest confuses a monster, causing it to attack at random."
+msgstr ""
+
+#: ../src/core/action.cpp:2152
+msgid "Hypnotic Vortex"
+msgstr ""
+
+#: ../src/core/action.cpp:2153
+msgid ""
+"The priest creates a distracting vortex with the ability to confuse every "
+"enemy caught in it."
+msgstr ""
+
+#: ../src/core/action.cpp:2156
+msgid "Keen Mind"
+msgstr ""
+
+#: ../src/core/action.cpp:2157
+msgid ""
+"The priest increases everyones spellpower for a short time. Everyones spells "
+"will surely be more effective. With increasing willpower the priest can hold "
+"this effect longer."
+msgstr ""
+
+#: ../src/core/damage.cpp:95 ../src/gui/charinfo.cpp:899
+msgid "Physical"
+msgstr ""
+
+#: ../src/core/damage.cpp:97 ../src/gui/charinfo.cpp:908
+msgid "Fire"
+msgstr ""
+
+#: ../src/core/damage.cpp:99 ../src/gui/charinfo.cpp:905
+msgid "Ice"
+msgstr ""
+
+#: ../src/core/damage.cpp:101 ../src/gui/charinfo.cpp:902
+msgid "Air"
+msgstr ""
+
+#: ../src/core/damage.cpp:111
+msgid "Physical resistance"
+msgstr ""
+
+#: ../src/core/damage.cpp:113
+msgid "Fire resistance"
+msgstr ""
+
+#: ../src/core/damage.cpp:115
+msgid "Ice resistance"
+msgstr ""
+
+#: ../src/core/damage.cpp:117
+msgid "Air resistance"
+msgstr ""
+
+#: ../src/core/damage.cpp:127
+msgid "blind"
+msgstr ""
+
+#: ../src/core/damage.cpp:129
+msgid "poisoned"
+msgstr ""
+
+#: ../src/core/damage.cpp:131
+msgid "mute"
+msgstr ""
+
+#: ../src/core/damage.cpp:133
+msgid "confused"
+msgstr ""
+
+#: ../src/core/damage.cpp:135
+msgid "berserk"
+msgstr ""
+
+#: ../src/core/damage.cpp:137
+msgid "paralyzed"
+msgstr ""
+
+#: ../src/core/damage.cpp:139
+msgid "frozen"
+msgstr ""
+
+#: ../src/core/damage.cpp:141
+msgid "burning"
+msgstr ""
+
+#: ../src/core/damage.cpp:203 ../src/core/damage.cpp:207
+msgid "damage"
+msgstr ""
+
+#: ../src/core/damage.cpp:222
+msgid "can not be blocked"
+msgstr ""
+
+#: ../src/core/damage.cpp:239
+msgid "ignores armor"
+msgstr ""
+
+#: ../src/core/damage.cpp:243 ../src/gui/charinfo.cpp:884
+msgid "Power"
+msgstr ""
+
+#: ../src/core/damage.cpp:252
+msgid "Chance for critical hit"
 msgstr ""
 
 #: ../src/core/dialogue.cpp:279
 msgid "which Topic"
+msgstr ""
+
+#: ../src/core/document.cpp:1139 ../src/core/item.cpp:348
+msgid "Required level"
+msgstr ""
+
+#: ../src/core/document.cpp:1145
+msgid "Timer"
+msgstr ""
+
+#: ../src/core/document.cpp:1146
+msgid "Cast delay"
+msgstr ""
+
+#: ../src/core/item.cpp:345
+msgid "Value"
+msgstr ""
+
+#: ../src/core/item.cpp:359 ../src/core/item.cpp:367
+msgid "Heals "
+msgstr ""
+
+#: ../src/core/item.cpp:359
+msgid " hitpoints"
+msgstr ""
+
+#: ../src/core/item.cpp:370
+msgid "immune for "
+msgstr ""
+
+#: ../src/core/item.cpp:382
+msgid "Two-handed weapon"
+msgstr ""
+
+#: ../src/core/item.cpp:387 ../src/gui/charinfo.cpp:879
+msgid "Range"
+msgstr ""
+
+#: ../src/core/item.cpp:398
+msgid "Damage"
+msgstr ""
+
+#: ../src/core/item.cpp:410 ../src/gui/charinfo.cpp:889
+msgid "Armor"
+msgstr ""
+
+#: ../src/core/item.cpp:420
+msgid "max hitpoints"
+msgstr ""
+
+#: ../src/core/item.cpp:425 ../src/gui/charinfo.cpp:839
+msgid "Strength"
+msgstr ""
+
+#: ../src/core/item.cpp:430 ../src/gui/charinfo.cpp:843
+msgid "Dexterity"
+msgstr ""
+
+#: ../src/core/item.cpp:435
+msgid "Magic Power"
+msgstr ""
+
+#: ../src/core/item.cpp:440 ../src/gui/charinfo.cpp:847
+msgid "Willpower"
+msgstr ""
+
+#: ../src/core/item.cpp:455
+msgid " max. "
+msgstr ""
+
+#: ../src/gui/charcreate.cpp:54 ../src/gui/charinfo.cpp:471
+#: ../src/gui/partyinfo.cpp:281
+msgid "Warrior"
+msgstr ""
+
+#: ../src/gui/charcreate.cpp:55 ../src/gui/charinfo.cpp:479
+#: ../src/gui/partyinfo.cpp:289
+msgid "Archer"
+msgstr ""
+
+#: ../src/gui/charcreate.cpp:56
+msgid "Mage"
+msgstr ""
+
+#: ../src/gui/charcreate.cpp:57 ../src/gui/charinfo.cpp:483
+#: ../src/gui/partyinfo.cpp:293
+msgid "Priest"
+msgstr ""
+
+#: ../src/gui/charcreate.cpp:119 ../src/gui/charinfo.cpp:832
+#: ../src/gui/partyinfo.cpp:452 ../src/gui/savegamelist.cpp:171
+msgid "Name"
+msgstr ""
+
+#: ../src/gui/charcreate.cpp:122 ../src/gui/charinfo.cpp:835
+#: ../src/gui/savegamelist.cpp:172
+msgid "Class"
+msgstr ""
+
+#: ../src/gui/charcreate.cpp:125
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#: ../src/gui/charcreate.cpp:128
+msgid "Create"
+msgstr "Erstellen"
+
+#: ../src/gui/charinfo.cpp:323
+msgid "Base damage"
+msgstr ""
+
+#: ../src/gui/charinfo.cpp:475 ../src/gui/partyinfo.cpp:285
+msgid "Magician"
+msgstr ""
+
+#: ../src/gui/charinfo.cpp:840
+msgid "Strength increases hitpoints, melee damage and attack power."
+msgstr ""
+
+#: ../src/gui/charinfo.cpp:844
+msgid "Dexterity increases ranged damage, attack accuracy and attack speed"
+msgstr ""
+
+#: ../src/gui/charinfo.cpp:848
+msgid ""
+"Willpower decreases the duration and the impact of status changes and "
+"increases magical melee damage."
+msgstr ""
+
+#: ../src/gui/charinfo.cpp:852
+msgid "Magic power"
+msgstr ""
+
+#: ../src/gui/charinfo.cpp:853
+msgid "Magic power increases the damage of magical attacks."
+msgstr ""
+
+#: ../src/gui/charinfo.cpp:856
+msgid "Attr points"
+msgstr ""
+
+#: ../src/gui/charinfo.cpp:857
+msgid "Attribute points remaining to distribute"
+msgstr ""
+
+#: ../src/gui/charinfo.cpp:860
+msgid "Experience"
+msgstr ""
+
+#: ../src/gui/charinfo.cpp:861
+msgid "Current experience and experience necessary for next level-up."
+msgstr ""
+
+#: ../src/gui/charinfo.cpp:864
+msgid "Hitpoints"
+msgstr ""
+
+#: ../src/gui/charinfo.cpp:865
+msgid "Current and maximal hitpoints."
+msgstr ""
+
+#: ../src/gui/charinfo.cpp:870
+msgid ""
+"Attack value determines the chance to hit enemies that can block or evade."
+msgstr ""
+
+#: ../src/gui/charinfo.cpp:874
+msgid "Attacks/s"
+msgstr ""
+
+#: ../src/gui/charinfo.cpp:875
+msgid "Number of attacks per second."
+msgstr ""
+
+#: ../src/gui/charinfo.cpp:880
+msgid "Weapon Range in meters."
+msgstr ""
+
+#: ../src/gui/charinfo.cpp:885
+msgid "Attack power influences the damage dealt to armored enemies."
+msgstr ""
+
+#: ../src/gui/charinfo.cpp:890
+msgid "Armor reduces the damage of physical attacks."
+msgstr ""
+
+#: ../src/gui/charinfo.cpp:895
+msgid ""
+"Block value determines the chance to avoid damage from physical attacks."
+msgstr ""
+
+#: ../src/gui/controlpanel.cpp:287
+msgid "Options"
+msgstr ""
+
+#: ../src/gui/controlpanel.cpp:290
+msgid "Save & Exit"
+msgstr ""
+
+#: ../src/gui/inventory.cpp:370
+msgid "Gold"
+msgstr ""
+
+#: ../src/gui/mainmenu.cpp:60
+msgid "Single player"
+msgstr ""
+
+#: ../src/gui/mainmenu.cpp:63
+msgid "Join game"
+msgstr ""
+
+#: ../src/gui/mainmenu.cpp:66
+msgid "Host game"
+msgstr ""
+
+#: ../src/gui/networkwindows.cpp:93 ../src/gui/networkwindows.cpp:218
+#: ../src/gui/optionswindow.cpp:135 ../src/gui/savegamelist.cpp:165
+#: ../src/gui/tradewindow.cpp:256
+msgid "Ok"
+msgstr ""
+
+#: ../src/gui/networkwindows.cpp:96
+msgid "Max. number of players"
+msgstr ""
+
+#: ../src/gui/networkwindows.cpp:99 ../src/gui/networkwindows.cpp:224
+msgid "Port"
+msgstr ""
+
+#: ../src/gui/networkwindows.cpp:221
+msgid "Host"
+msgstr ""
+
+#: ../src/gui/optionswindow.cpp:111
+msgid "Inventory"
+msgstr ""
+
+#: ../src/gui/optionswindow.cpp:114
+msgid "Character screen"
+msgstr ""
+
+#: ../src/gui/optionswindow.cpp:117
+msgid "Skilltree"
+msgstr ""
+
+#: ../src/gui/optionswindow.cpp:120
+msgid "Party screen"
+msgstr ""
+
+#: ../src/gui/optionswindow.cpp:123
+msgid "Chatbox"
+msgstr ""
+
+#: ../src/gui/optionswindow.cpp:126
+msgid "Quests"
+msgstr ""
+
+#: ../src/gui/optionswindow.cpp:129
+msgid "Minimap"
+msgstr ""
+
+#: ../src/gui/optionswindow.cpp:132
+msgid "Swap equipement"
+msgstr ""
+
+#: ../src/gui/questinfo.cpp:158
+msgid "open"
+msgstr ""
+
+#: ../src/gui/questinfo.cpp:161
+msgid "finished"
+msgstr ""
+
+#: ../src/gui/questinfo.cpp:164
+msgid "failed"
+msgstr ""
+
+#: ../src/gui/savegamelist.cpp:162
+msgid "Savegame"
+msgstr ""
+
+#: ../src/gui/savegamelist.cpp:168
+msgid "Create Character"
+msgstr ""
+
+#: ../src/gui/savegamelist.cpp:173
+msgid "Level"
+msgstr ""
+
+#: ../src/gui/skilltree.cpp:774
+msgid "Fire magic"
+msgstr ""
+
+#: ../src/gui/skilltree.cpp:777
+msgid "Ice magic"
+msgstr ""
+
+#: ../src/gui/skilltree.cpp:780
+msgid "Air magic"
+msgstr ""
+
+#: ../src/gui/skilltree.cpp:783
+msgid "Fighting skills"
+msgstr ""
+
+#: ../src/gui/skilltree.cpp:786 ../src/gui/skilltree.cpp:796
+msgid "Passive skills"
+msgstr ""
+
+#: ../src/gui/skilltree.cpp:789
+msgid "Fighting spirit"
+msgstr ""
+
+#: ../src/gui/skilltree.cpp:793
+msgid "Marksmanship"
+msgstr ""
+
+#: ../src/gui/skilltree.cpp:799
+msgid "Hunter magic"
+msgstr ""
+
+#: ../src/gui/skilltree.cpp:803
+msgid "Light Magic"
+msgstr ""
+
+#: ../src/gui/skilltree.cpp:806
+msgid "Water Magic"
+msgstr ""
+
+#: ../src/gui/skilltree.cpp:809
+msgid "Wind Magic"
 msgstr ""
