@@ -71,6 +71,12 @@ Monster::Monster( int id,MonsterBasicData& data)
 	}
 	DEBUG5("base action %i",m_base_action);
 	
+	// HP Faktor bei mehreren Spielern
+	WorldObjectMap * pl = World::getWorld()->getPlayers();
+	float fak = (0.5 + 0.5*pl->size());
+	
+	getBaseAttr()->m_max_health *= fak;
+	getDynAttr()->m_health *= fak;
 }
 
 Monster::~Monster()
