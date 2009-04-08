@@ -1395,7 +1395,7 @@ void Document::update(float time)
 				
 				pthread_t thread;
 				pthread_create(&thread,0,&Document::writeSaveFile,this);
-				DEBUG("saving");
+				DEBUG5("saving");
 			}
 			break;
 
@@ -1536,7 +1536,8 @@ void Document::updateContent(float time)
 
 void* Document::writeSaveFile(void* doc_ptr)
 {
-	
+	if (doc->getLocalPlayer()==0)
+		return 0;
 	
 	Document* doc = (Document*) doc_ptr;
 	CharConv* save;
