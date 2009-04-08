@@ -1002,10 +1002,10 @@ class Document
 		Player* m_temp_player;
 	
 		/**
-		* \var Timer m_timer
-		* \brief Timer fuer die Updatezyklen der Spielwelt
+		* \var Timer m_save_timer
+		* \brief Timer fuer das automatische speichern
 		*/
-		Timer m_timer;
+		Timer m_save_timer;
 	
 		/**
 		* \var m_shutdown_timer

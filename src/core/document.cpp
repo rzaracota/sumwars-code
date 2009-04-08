@@ -208,7 +208,7 @@ void Document::loadSavegame()
 		m_gui_state.m_shown_windows = NO_WINDOWS;
 		m_gui_state.m_sheet = GAME_SCREEN;
 		m_modified = WINDOWS_MODIFIED | GUISHEET_MODIFIED;
-		m_timer.start();
+		m_save_timer.start();
 
 		file.close();
 		if (data)
@@ -1388,6 +1388,15 @@ void Document::update(float time)
 
 		case RUNNING:
 			updateContent(time);
+			
+			if (m_save_timer.getTime() > 60000)
+			{
+				m_save_timer.start();
+				
+				pthread_t thread;
+				pthread_create(&thread,0,&Document::writeSaveFile,this);
+				DEBUG("saving");
+			}
 			break;
 
 		case SHUTDOWN_REQUEST:
