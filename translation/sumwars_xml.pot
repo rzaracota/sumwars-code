@@ -1185,7 +1185,7 @@ msgid "summoner wand"
 msgstr ""
 
 #: swords2h.xml
-msgid "sword killer"
+msgid "horse killer"
 msgstr ""
 
 #: swords1h.xml

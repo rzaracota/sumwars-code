@@ -269,7 +269,7 @@ s		modchance_damage_air_mod="float"
 </Item>
 
 <!-- horse killer -->
-<Item type="weapon" subtype="horse_sw" name="sword killer" size="big">
+<Item type="weapon" subtype="horse_sw" name="horse killer" size="big">
 	<Image image="set:sword.png image:full_image" />
 	<Mesh file="sword2h.mesh" />
 	<Attribute
