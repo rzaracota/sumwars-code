@@ -1536,10 +1536,11 @@ void Document::updateContent(float time)
 
 void* Document::writeSaveFile(void* doc_ptr)
 {
+
+	Document* doc = (Document*) doc_ptr;
 	if (doc->getLocalPlayer()==0)
 		return 0;
 	
-	Document* doc = (Document*) doc_ptr;
 	CharConv* save;
 	std::stringstream str;
 	
