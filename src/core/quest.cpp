@@ -121,4 +121,8 @@ std::string Quest::getDescription()
 	return EventSystem::getReturnValue();
 }
 
+std::string Quest::getName()
+{
+	return dgettext("sumwars_xml",m_name.c_str());
+}
 

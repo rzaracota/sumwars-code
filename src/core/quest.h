@@ -76,10 +76,8 @@ class Quest
 		 * \fn std::string getName()
 		 * \brief Gibt den Name aus
 		 */
-		std::string getName()
-		{
-			return m_name;
-		}
+		std::string getName();
+		
 	
 	private:
 		/**

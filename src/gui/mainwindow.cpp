@@ -1130,7 +1130,7 @@ void MainWindow::updateObjectInfo()
 				// Lebenspunkte anfuegen
 				
 				cr = static_cast<Creature*>(cwo);
-				string_stream<<cr->getRefName();
+				string_stream<< dgettext("sumwars_xml",cr->getRefName().c_str());
 				float perc = cr->getDynAttr()->m_health / cr->getBaseAttrMod()->m_max_health;
 				if (bar->getProgress() != perc)
 				{
@@ -1930,7 +1930,7 @@ void MainWindow::updateSpeechBubbles()
 				label = win_mgr.getWindow(stream.str());
 			}
 			
-			ctext = (CEGUI::utf8*) it->first.c_str();
+			ctext = (CEGUI::utf8*) dgettext("sumwars_xml",it->first.c_str());
 			elemwidth =font->getTextExtent(ctext);
 			elemheight = lineheight+5;
 		
