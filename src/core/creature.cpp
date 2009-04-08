@@ -3864,6 +3864,8 @@ void Creature::toString(CharConv* cv)
 	cv->toBuffer((short) m_category);
 	cv->toBuffer((char) m_fraction);
 
+	cv->toBuffer(m_refname);
+	
 	m_action.toString(cv);
 	m_command.toString(cv);
 	m_next_command.toString(cv);
@@ -3930,6 +3932,8 @@ void Creature::fromString(CharConv* cv)
 	cv->fromBuffer<char>(ctmp);
 	m_fraction = (Fraction) ctmp;
 
+	cv->fromBuffer(m_refname);
+	
 	m_action.fromString(cv);
 	m_command.fromString(cv);
 	m_next_command.fromString(cv);
