@@ -34,6 +34,12 @@ class Inventory : public ItemWindow
 		 * \brief Behandelt Mausklick auf Ausruestung wechseln
 		 */
 		bool onSwapEquipClicked(const CEGUI::EventArgs& evt);
+		
+		/**
+		 * \fn bool onDropGoldClicked(const CEGUI::EventArgs& evt)
+		 * \brief Behandelt Mausklick auf Gold fallen lassen
+		 */
+		bool onDropGoldClicked(const CEGUI::EventArgs& evt);
 };
 
 #endif

@@ -1247,12 +1247,27 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 			break;
 
 		case DROP_ITEM:
-			si = getEquipement()->getItem(Equipement::CURSOR_ITEM);
-			if (si !=0)
+			if (command->m_number ==0)
 			{
-				si=0;
-				getEquipement()->swapItem(si,Equipement::CURSOR_ITEM);
-				getRegion()->dropItem(si,getShape()->m_center);
+				// normales Item
+				si = getEquipement()->getItem(Equipement::CURSOR_ITEM);
+				if (si !=0)
+				{
+					si=0;
+					getEquipement()->swapItem(si,Equipement::CURSOR_ITEM);
+					getRegion()->dropItem(si,getShape()->m_center);
+				}
+			}
+			else
+			{
+				// Gold
+				if (command->m_number <= getEquipement()->getGold())
+				{
+					si = ItemFactory::createGold(command->m_number);
+					getRegion()->dropItem(si,getShape()->m_center);
+					
+					getEquipement()->setGold( getEquipement()->getGold() - command->m_number);
+				}
 			}
 			break;
 			

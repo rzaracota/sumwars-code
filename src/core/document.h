@@ -661,6 +661,12 @@ class Document
 	 * \brief Laesst das Item fallen, das aktuell am Cursor haengt
 	 */
 	void dropCursorItem();
+	
+	/**
+	 * \fn void dropGold(int value)
+	 * \brief laesst Gold fallen
+	 */
+	void dropGold(int value);
 
 	/**
 	 * \fn void onDropItemClick(int id)

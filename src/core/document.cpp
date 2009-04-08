@@ -692,6 +692,17 @@ void Document::dropCursorItem()
 {
 	ClientCommand command;
 	command.m_button = DROP_ITEM;
+	command.m_id =0;
+	command.m_number =0;
+	sendCommand(&command);
+}
+
+void Document::dropGold(int value)
+{
+	ClientCommand command;
+	command.m_button = DROP_ITEM;
+	command.m_id =1;
+	command.m_number =value;
 	sendCommand(&command);
 }
 

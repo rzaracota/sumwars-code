@@ -217,16 +217,33 @@ Inventory::Inventory (Document* doc)
 	label->setProperty("FrameEnabled", "true");
 	label->setProperty("BackgroundEnabled", "true");
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.94f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.20f), cegui_reldim( 0.05f)));
-
+	label->setSize(CEGUI::UVector2(cegui_reldim(0.15f), cegui_reldim( 0.05f)));
+	
 	// Label Gold (Wert)
 	label = win_mgr.createWindow("TaharezLook/StaticText", "GoldValueLabel");
 	inventory->addChildWindow(label);
 	label->setProperty("FrameEnabled", "true");
 	label->setProperty("BackgroundEnabled", "true");
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.27f), cegui_reldim( 0.94f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.1f), cegui_reldim( 0.05f)));
+	label->setPosition(CEGUI::UVector2(cegui_reldim(0.22f), cegui_reldim( 0.94f)));
+	label->setSize(CEGUI::UVector2(cegui_reldim(0.25f), cegui_reldim( 0.05f)));
 	label->setText("0");
+	
+	// Label drop Gold
+	btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", "GoldDropButton"));
+	inventory->addChildWindow(btn);
+	btn->setPosition(CEGUI::UVector2(cegui_reldim(0.50f), cegui_reldim( 0.94f)));
+	btn->setSize(CEGUI::UVector2(cegui_reldim(0.15f), cegui_reldim( 0.05f)));
+	btn->subscribeEvent(CEGUI::PushButton::EventClicked,CEGUI::Event::Subscriber(&Inventory::onDropGoldClicked, this));
+	
+	
+	// Label drop Gold (Wert)
+	CEGUI::Editbox* box;
+	box = static_cast<CEGUI::Editbox*>(win_mgr.createWindow("TaharezLook/Editbox", "GoldDropValueBox"));
+	inventory->addChildWindow(box);
+	box->setPosition(CEGUI::UVector2(cegui_reldim(0.67f), cegui_reldim( 0.94f)));
+	box->setSize(CEGUI::UVector2(cegui_reldim(0.25f), cegui_reldim( 0.05f)));
+	box->subscribeEvent(CEGUI::Editbox::EventTextAccepted, CEGUI::Event::Subscriber(&Inventory::onDropGoldClicked,  this));
+	box->setText("0");
 	
 	updateTranslation();
 }
@@ -369,6 +386,9 @@ void Inventory::updateTranslation()
 	label = win_mgr.getWindow("GoldLabel");
 	label->setText((CEGUI::utf8*) gettext("Gold"));
 	
+	label = win_mgr.getWindow("GoldDropButton");
+	label->setText((CEGUI::utf8*) gettext("Drop:"));
+	
 }
 
 
@@ -376,6 +396,26 @@ void Inventory::updateTranslation()
 bool Inventory::onSwapEquipClicked(const CEGUI::EventArgs& evt)
 {
 	m_document->onSwapEquip();
+	return true;
+}
+
+bool Inventory::onDropGoldClicked(const CEGUI::EventArgs& evt)
+{
+	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
+
+	
+	CEGUI::Editbox* gold = static_cast<CEGUI::Editbox*>(win_mgr.getWindow("GoldDropValueBox"));
+	int val =0;
+	std::stringstream stream;
+	stream.str(gold->getText().c_str());
+	stream >> val;
+	
+	if (val != 0)
+	{
+		gold->setText("0");
+		gold->deactivate();
+		m_document->dropGold(val);
+	}
 	return true;
 }
 
