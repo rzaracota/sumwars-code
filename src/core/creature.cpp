@@ -4161,6 +4161,7 @@ void Creature::writeNetEvent(NetEvent* event, CharConv* cv)
 	if (event->m_data & NetEvent::DATA_LEVEL)
 	{
 		cv->toBuffer(getBaseAttr()->m_level);
+		cv->toBuffer(getBaseAttr()->m_max_experience);
 	}
 	
 	if (event->m_data & NetEvent::DATA_SPEAK_TEXT)
@@ -4331,6 +4332,7 @@ void Creature::processNetEvent(NetEvent* event, CharConv* cv)
 	if (event->m_data & NetEvent::DATA_LEVEL)
 	{
 		cv->fromBuffer(getBaseAttr()->m_level);
+		cv->fromBuffer(getBaseAttr()->m_max_experience);
 	}
 	
 	if (event->m_data & NetEvent::DATA_SPEAK_TEXT)
