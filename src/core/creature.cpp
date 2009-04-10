@@ -4442,13 +4442,14 @@ void Creature::processNetEvent(NetEvent* event, CharConv* cv)
 				moveTo(newpos);
 				getShape()->m_angle = newangle;
 			}
-
+			/*
 			if (Action::getActionInfo(m_action.m_type)->m_distance != Action::SELF)
 			{
 
 				getShape()->m_angle = (m_action.m_goal - newpos).angle();
 
 			}
+			*/
 			if (Action::getActionInfo(m_action.m_type)->m_base_action == Action::WALK)
 			{
 				getShape()->m_angle = m_speed.angle();
