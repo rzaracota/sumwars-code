@@ -1584,8 +1584,7 @@ void Region::getRegionData(CharConv* cv)
 void Region::createObjectFromString(CharConv* cv, WorldObjectMap* players)
 {
 	char type;
-	char subt[11];
-	subt[10] ='\0';
+	std::string subt;
 	int id;
 
 	WorldObject* obj;
@@ -1593,29 +1592,29 @@ void Region::createObjectFromString(CharConv* cv, WorldObjectMap* players)
 	DEBUG5("read offset: %i",cv->getBitStream()->GetReadOffset());
 
 	cv->fromBuffer(type);
-	cv->fromBuffer(subt,10);
+	cv->fromBuffer(subt);
 	cv->fromBuffer(id);
 
-	DEBUG5("object %s id %i",subt,id);
+	DEBUG5("object %s id %i",subt.c_str(),id);
 
 		// alle Objekte ausser den Spielern werden neu angelegt
 		// die Spieler existieren schon
 	if (type != WorldObject::TypeInfo::TYPE_PLAYER)
 	{
-		obj = ObjectFactory::createObject((WorldObject::TypeInfo::ObjectType) type, std::string(subt),id);
+		obj = ObjectFactory::createObject((WorldObject::TypeInfo::ObjectType) type, subt,id);
 	}
 	else
 	{
 		if (players->count(id) ==0)
 		{
-			ERRORMSG("player (%s) with id %i does not exist",subt,id);
+			ERRORMSG("player (%s) with id %i does not exist",subt.c_str(),id);
 		}
 		obj = (*players)[id];
 	}
 
 	if (obj==0)
 	{
-		ERRORMSG("failed to create Object %s",subt);
+		ERRORMSG("failed to create Object %s",subt.c_str());
 	}
 	
 	obj->fromString(cv);

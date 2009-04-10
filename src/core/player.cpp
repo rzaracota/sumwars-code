@@ -750,11 +750,11 @@ bool Player::onItemClick(ClientCommand* command)
 
 			if (m_equipement->getItem(pos) == 0)
 			{
-				event.m_type = NetEvent::PLAYER_NOITEM_EQUIPED;
+				event.m_type = NetEvent::PLAYER_ITEM_REMOVE;
 			}
 			else
 			{
-				event.m_type = NetEvent::PLAYER_ITEM_EQUIPED;
+				event.m_type = NetEvent::PLAYER_ITEM_INSERT;
 			}
 			DEBUG5("event: %i at %i",event.m_type,event.m_data);
 			World::getWorld()->insertNetEvent(event);
@@ -778,7 +778,7 @@ bool Player::onItemClick(ClientCommand* command)
 					if (World::getWorld()->isServer())
 					{
 						NetEvent event;
-						event.m_type =  NetEvent::PLAYER_NOITEM_EQUIPED;
+						event.m_type =  NetEvent::PLAYER_ITEM_REMOVE;
 						event.m_data = shpos;
 						event.m_id = getId();
 
@@ -830,7 +830,7 @@ bool Player::onItemClick(ClientCommand* command)
 				if (World::getWorld()->isServer())
 				{
 					NetEvent event;
-					event.m_type =  NetEvent::PLAYER_NOITEM_EQUIPED;
+					event.m_type =  NetEvent::PLAYER_ITEM_REMOVE;
 					event.m_data = wpos;
 					event.m_id = getId();
 
@@ -935,7 +935,7 @@ short Player::insertItem(Item* itm)
 			{
 	
 				NetEvent event;
-				event.m_type =  NetEvent::PLAYER_ITEM_PICKED_UP ;
+				event.m_type =  NetEvent::PLAYER_ITEM_INSERT ;
 				event.m_data = pos;
 				event.m_id = getId();
 	
@@ -2357,7 +2357,7 @@ bool Player::setValue(std::string valname)
 		lua_pop(EventSystem::getLuaState(), 1);
 		
 		NetEvent event;
-		event.m_type =  NetEvent::PLAYER_ITEM_PICKED_UP ;
+		event.m_type =  NetEvent::PLAYER_ITEM_INSERT ;
 		event.m_data = Equipement::GOLD;
 		event.m_id = getId();
 		

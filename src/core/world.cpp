@@ -1284,21 +1284,20 @@ void World::updatePlayers()
 						cv->fromBuffer(tmp);
 
 						// Subtyp
-						char subt[11];
-						subt[10] ='\0';
-						cv->fromBuffer(subt,10);
+						std::string subt;
+						cv->fromBuffer(subt);
 
 						int id;
 						cv->fromBuffer(id);
 						WorldObject* player;
 
-						DEBUG("got data for player %s id %i",subt,id);
+						DEBUG("got data for player %s id %i",subt.c_str(),id);
 
 						// Spieler entweder neu anlegen oder aus den existierenden herraussuchen
 						if (m_players->count(id)==0)
 						{
 							// Spieler existiert noch nicht
-							player = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_PLAYER, std::string(subt),id);
+							player = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_PLAYER, subt,id);
 							insertPlayer(player);
 						}
 						else
@@ -1633,22 +1632,7 @@ bool World::writeNetEvent(Region* region,NetEvent* event, CharConv* cv)
 
 	}
 
-	if (event->m_type == NetEvent::PLAYER_ITEM_EQUIPED)
-	{
-		object = (*m_players)[event->m_id];
-		if (object != 0)
-		{
-			cv->toBuffer<short>((short) event->m_data);
-			static_cast<Player*>(object)->getEquipement()->getItem(event->m_data)->toString(cv);
-
-
-		}
-		else
-			return false;
-
-	}
-
-	if (event->m_type == NetEvent::PLAYER_ITEM_PICKED_UP)
+	if (event->m_type == NetEvent::PLAYER_ITEM_INSERT)
 	{
 		object = (*m_players)[event->m_id];
 		if (object != 0)
@@ -1980,7 +1964,7 @@ bool World::processNetEvent(Region* region,CharConv* cv)
 			}
 			break;
 
-		case NetEvent::PLAYER_NOITEM_EQUIPED:
+		case NetEvent::PLAYER_ITEM_REMOVE:
 
 			if (m_players->count(event.m_id)>0)
 			{
@@ -2004,27 +1988,7 @@ bool World::processNetEvent(Region* region,CharConv* cv)
 			}
 			break;
 
-
-		case NetEvent::PLAYER_ITEM_EQUIPED:
-			if (m_players->count(event.m_id)>0)
-			{
-				object = (*m_players)[event.m_id];
-				if (object != m_local_player)
-				{
-					static_cast<Player*>(object)->readItem(cv);
-				}
-				else
-				{
-					return false;
-				}
-			}
-			else
-			{
-				return false;
-			}
-			break;
-
-		case NetEvent::PLAYER_ITEM_PICKED_UP:
+		case NetEvent::PLAYER_ITEM_INSERT:
 			if (m_players->count(event.m_id)>0)
 			{
 				object = (*m_players)[event.m_id];
