@@ -15,9 +15,9 @@
 	<NPC refname="Gab Resh">
 		<Topic name="talk_with_goblins">
 			<Effect>
-				speak("G1",_("text1"),1000);
-				speak("G2",_("text2"),1000);
-				speak("Gab Resh",_("text3"),1000);
+				speak("G1",_("Rakthr mootrick!"),1000);
+				speak("G2",_("Mar! Nom Togubri!"),1000);
+				speak("Gab Resh",_("Wait big warriorhumans. No kill!"),1000);
 				addQuestion(_("Kill Goblins?"));
 				addAnswer(_("Yes"),"kill_goblins_immediately");
 				addAnswer(_("No"),"keep_on_talking");
@@ -26,8 +26,11 @@
 		
 		<Topic name="keep_on_talking" >
 			<Effect>
-				speak("PL",_("text4"),1000);
-				speak("GabResh",_("text5"),1000);
+				speak("PL",_("A goblin that want's to talk?"),1300);
+				speak("GabResh",_("Yes. No hit, no kill!"),1300);
+				speak("GabResh",_("Gab'Resh and friends only harmless rustlers."),2000);
+				speak("GabResh",_("No bandits."),1300);
+				speak("GabResh",_("Will listen, yes?"),1300);
 				addQuestion(_("Listen?"));
 				addAnswer(_("Yes"),"start_quest");
 				addAnswer(_("Let Goblins go"),"let_goblins_go");
@@ -37,7 +40,7 @@
 		
 		<Topic name="kill_goblins_immediately" >
 			<Effect>
-				speak("PL",_("text6"),1000);
+				speak("PL",_("Wretched Brood! Slay them!"),1000);
 				set(maylons_grave_tmp.Goblin1,"fraction","monster");
 				set(maylons_grave_tmp.Goblin2,"fraction","monster");
 				set(maylons_grave_tmp.Goblin3,"fraction","monster");
@@ -50,11 +53,19 @@
 			<Effect>
 				maylons_grave.started = true;
 				addStandardSpeakers();
-				speak("MAG",_("text7"),1000);
-				speak("Gab Resh",_("text"),1000);
-				speak("PRI",_("text8"),1000);
-				speak("Gab Resh",_("text"),1000);
-				speak("PL",_("text9"),1000);
+				speak("MAG",_("What could a goblin have to say?"),1800);
+				speak("Gab Resh",_("We often hide here."),1000);
+				speak("Gab Resh",_("Few humans come, and if they do, never return from deep cave."),2500);
+				speak("Gab Resh",_("But last moon black human come."),1000);
+				speak("Gab Resh",_("Now dread of the deepth also wandering up. "),1800);
+				speak("Gab Resh",_("Chasing poor goblin were never stole nothing not."),2300);
+				speak("PRI",_("Sounds allmost as if a necromancer passed by."),1500);
+				speak("PRI",_("We can't let be such a problem in an undefended region like this."),2800);
+				speak("PRI",_("Who knows what could happen."),1500);				
+				speak("Gab Resh",_("Good warning, no?"),1500);
+				speak("Gab Resh",_("Mighty humanwarriors let us live, no?"),2000);
+				speak("PL",_("Do disappear."),1000);
+				speak("PL",_("We have better things to do than killing a band of wretched goblins."),3000);
 			</Effect>	
 		</Topic>
 		
@@ -62,7 +73,7 @@
 			<Effect>
 				maylons_grave.let_goblins_go = true;
 				addStandardSpeakers();
-				speak("PL",_("text10"),1000);
+				speak("PL",_("Just scram, before I change my mind!"),2000);
 			</Effect>	
 		</Topic>
 		

@@ -23,9 +23,9 @@
 			</Condition>
 			<Effect>
 				if (besieged_farm.started == true) then
-					speak("Sergeant Lutterer",_("Ihr habt Brons Hof noch nicht befreit."),1000)
+					speak("Sergeant Lutterer",_("You haven't saved Brons farm yet."),1000)
 				else
-					addQuestion(_("Quest annehmen?"))
+					addQuestion(_("Accept Quest?"))
 					addAnswer(_("Yes"),"start_besieged_farm_quest")
 					addAnswer(_("No"),"end")
 				end
@@ -34,8 +34,16 @@
 		
 		<Topic name="start_besieged_farm_quest" >
 			<Effect>
-				speak("Sergeant Lutterer",_("Ah, habt ihr doch ..."),1000)
-				speak("player", _("Wir sind unterwegs."),1000)
+				speak("player", _("Do you have a goblin problem in this region?"),1800)
+				speak("Sergeant Lutterer",_("Ah, do you now feel like earning the money?"),1800)
+				speak("Sergeant Lutterer", _("Don't believe I didn't see you hanging around back there."),2000)
+				speak("Sergeant Lutterer", _("But I won't complain."),1000)
+				speak("Sergeant Lutterer", _("You know how it works: Go west to the Northern Meadow and drive out that goblin scum around Brons farm."),2500)
+				speak("Sergeant Lutterer", _("I don't care, how you do that."),1000)
+				speak("Sergeant Lutterer", _("You can eat them raw and bath in their blood for all I care."),2000)
+				speak("Sergeant Lutterer", _("Just kidding."),1000)
+				speak("Sergeant Lutterer", _(" Come back when you're done."),1000)
+				speak("player", _("We're on our way."),1000)
 				besieged_farm.started = true
 			</Effect>	
 		</Topic>
@@ -50,8 +58,11 @@
 			</Condition>
 			<Effect>
 				besieged_farm.finished = true
-				speak("player", _("Es ist vollbracht"),1000)
-				speak("Sergeant Lutterer",_("Habt ihr schon ..."),1000)
+				speak("player", _("It's done."),1000)
+				speak("Sergeant Lutterer",_("I heard it allready."),1000)
+				speak("Sergeant Lutterer", _("Bron's at the tavern and filling himself for your well-being."), 2000)
+				speak("Sergeant Lutterer", _("But that should be none of you're concern anymore."), 1500)
+				speak("Sergeant Lutterer", _("Here's you're money."), 1000)
 				local players = getPlayers()
 				local i,player,count
 				for i,player in ipairs(players) do
@@ -76,11 +87,14 @@
 			</Condition>
 			<Effect>
 				besieged_farm.asked = true
-				speak("player", _("Die Goblins sind weg ..."),1000)
-				speak("Brons Tuer",_("Ich danke euch ..."),1000)
-				speak("player", _("Wie das denn?"),1000)
-				speak("Brons Tuer",_("Mit einem Kristall ..."),1000)
-				speak("player",_("Natuerlich ..."),1000)
+				speak("player", _("The goblins are gone. Are you allright?"),1500)
+				speak("Brons Tuer",_("I thank you.   "),1000)
+				speak("Brons Tuer", _("I'm afraid, I can't ask you in."),1500)
+				speak("Brons Tuer", _("The barricades we built are quite heavy and it will take sone time to remove them."),2500)
+				speak("Brons Tuer", _("But I will give word to my husband that we are safe."),1500)
+				speak("player", _("How will you do that?"),1000)
+				speak("Brons Tuer",_("With a crystal. It was part of my dowry and is in my family for generations"),2500)
+				speak("player",_("Of course. Thoughtless of me."),1000)
 				createDialogue()
 				if (getPlayers()[2] ~= nil) then
 					if (getMages()[1] ~= getSpeaker("player")) then
@@ -89,8 +103,8 @@
 						local mage = getMages()[2]
 					end
 					addSpeaker(mage,"mage")
-					speak("mage",_("Also ehrlich, ..."),1000)
-					speak("player",_("Lasst und das ..."),1000)
+					speak("mage",_("Really. Did you think there's still people using carrier pigeons these days?"),2000)
+					speak("player",_("Let's just get the money."),1000)
 				end
 			</Effect>
 		</Topic>
