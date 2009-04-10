@@ -699,6 +699,7 @@ bool Region::insertObject(WorldObject* object, Vector pos, float angle, bool col
 	 // Wenn das Element bereits existiert ist die Antwort false
 	if (result==false)
 	{
+		DEBUG("Object with id %i already exists",object->getId());
 		return result;
 	}
 
@@ -737,7 +738,7 @@ bool Region::insertObject(WorldObject* object, Vector pos, float angle, bool col
 	}
 
 	object->getShape()->m_angle = angle;
-
+	
 	// Test auf Kollisionen und eventuelle Verschiebung
 	if (collision_test)
 	{
@@ -757,7 +758,8 @@ bool Region::insertObject(WorldObject* object, Vector pos, float angle, bool col
 	 // Testen ob das Objekt in der Region liegt
 	if (x_g<0 || y_g<0 || x_g>=m_dimx || y_g>=m_dimy)
 	{
-		 return false;
+		DEBUG("create Object at %f %f",pos.m_x, pos.m_y);
+		return false;
 	}
 	else
 	{
@@ -768,6 +770,7 @@ bool Region::insertObject(WorldObject* object, Vector pos, float angle, bool col
 			{
 				DEBUG5("object %s is large",object->getName().c_str());
 				m_large_objects.insert(std::make_pair(object->getId(),object));
+				result = true;
 			}
 			else
 			{
@@ -832,12 +835,11 @@ int Region::createObject(ObjectTemplateType generictype, Vector pos, float angle
 		}
 	}
 	
-	if (object->getState() == WorldObject::STATE_STATIC)
+	if (object->getTypeInfo()->m_type == WorldObject::TypeInfo::TYPE_FIXED_OBJECT)
 	{
 		collision_test= false;
 	}
-	
-	
+			
 	// Objekt einfuegen
 	bool ret = insertObject(object,pos,angle,collision_test);
 	if (!ret)

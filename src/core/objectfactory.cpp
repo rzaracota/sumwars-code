@@ -75,7 +75,7 @@ WorldObject::TypeInfo::ObjectSubtype ObjectFactory::getObjectType(ObjectTemplate
 	it = m_object_templates.find(generictype);
 	if (it == m_object_templates.end())
 	{
-		return "";
+		return generictype.substr(1);
 	}
 	else
 	{
