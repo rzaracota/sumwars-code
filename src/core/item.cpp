@@ -124,7 +124,7 @@ void Item::toString(CharConv* cv)
 {
 
 	cv->toBuffer((char) m_type);
-	cv->toBuffer(m_subtype,10);
+	cv->toBuffer(m_subtype);
 	cv->toBuffer(m_id);
 	cv->toBuffer<char>(m_rarity);
 	if (m_type == GOLD_TYPE)

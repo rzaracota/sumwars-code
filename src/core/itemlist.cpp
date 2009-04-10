@@ -486,7 +486,7 @@ void Equipement::fromString(CharConv* cv)
 	{
 		cv->fromBuffer(pos);
 		cv->fromBuffer(type);
-		cv->fromBuffer(subtype,10);
+		cv->fromBuffer(subtype);
 		cv->fromBuffer(id);
 		
 		it = ItemFactory::createItem((Item::Type) type, std::string(subtype),id);
@@ -580,7 +580,7 @@ void Equipement::fromStringComplete(CharConv* cv)
 	{
 		cv->fromBuffer(pos);
 		cv->fromBuffer(type);
-		cv->fromBuffer(subtype,10);
+		cv->fromBuffer(subtype);
 		cv->fromBuffer(id);
 		
 		DEBUG5("pos %i type %i subtype %s",pos,type, subtype.c_str());

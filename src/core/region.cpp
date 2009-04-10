@@ -1646,8 +1646,7 @@ void Region::createProjectileFromString(CharConv* cv)
 void Region::createItemFromString(CharConv* cv)
 {
 	char type;
-	char subtype[11];
-	subtype[10] ='\0';
+	std::string subtype;
 	Item* item;
 	int id;
 	short sx,sy;
@@ -1655,10 +1654,10 @@ void Region::createItemFromString(CharConv* cv)
 	cv->fromBuffer(sy);
 
 	cv->fromBuffer<char>(type);
-	cv->fromBuffer(subtype,10);
+	cv->fromBuffer(subtype);
 	cv->fromBuffer(id);
 
-	item = ItemFactory::createItem((Item::Type) type, std::string(subtype),id);
+	item = ItemFactory::createItem((Item::Type) type, subtype,id);
 	item->fromString(cv);
 
 	DropItem* di = new DropItem;

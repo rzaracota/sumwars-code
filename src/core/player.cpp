@@ -1915,17 +1915,16 @@ void Player::readItem(CharConv* cv)
 {
 	short pos;
 	char type;
-	char subtype[11];
+	std::string subtype;
 	int id;
-	subtype[10] ='\0';
 	Item* item;
 
 	cv->fromBuffer<short>(pos);
 	cv->fromBuffer<char>(type);
-	cv->fromBuffer(subtype,10);
+	cv->fromBuffer(subtype);
 	cv->fromBuffer(id);
 
-	item = ItemFactory::createItem((Item::Type) type, std::string(subtype),id);
+	item = ItemFactory::createItem((Item::Type) type, subtype,id);
 	item->fromString(cv);
 	getEquipement()->swapItem(item,pos);
 
@@ -1939,18 +1938,17 @@ void Player::readItemComplete(CharConv* cv)
 {
 	short pos;
 	char type;
-	char subtype[11];
+	std::string subtype;
 	int id;
-	subtype[10] ='\0';
 	Item* item;
 
 	cv->fromBuffer<short>(pos);
 	cv->fromBuffer<char>(type);
-	cv->fromBuffer(subtype,10);
+	cv->fromBuffer(subtype);
 	cv->fromBuffer(id);
 
-	DEBUG5("reading Item for pos %i type %i subtype %s",pos,type,subtype);
-	item = ItemFactory::createItem((Item::Type) type, std::string(subtype),id);
+	DEBUG5("reading Item for pos %i type %i subtype %s",pos,type,subtype.c_str());
+	item = ItemFactory::createItem((Item::Type) type, subtype,id);
 	item->fromStringComplete(cv);
 	getEquipement()->swapItem(item,pos);
 
