@@ -1632,6 +1632,19 @@ bool World::writeNetEvent(Region* region,NetEvent* event, CharConv* cv)
 
 	}
 
+	if (event->m_type == NetEvent::PLAYER_ITEM_SWAP)
+	{
+		object = (*m_players)[event->m_id];
+		if (object != 0)
+		{
+			cv->toBuffer(static_cast<Player*>(object)->isUsingSecondaryEquip());
+		}
+		else
+		{
+			return false;
+		}
+	}
+	
 	if (event->m_type == NetEvent::PLAYER_ITEM_INSERT)
 	{
 		object = (*m_players)[event->m_id];
@@ -1646,6 +1659,7 @@ bool World::writeNetEvent(Region* region,NetEvent* event, CharConv* cv)
 				}
 				cv->toBuffer<short>((short) event->m_data);
 				static_cast<Player*>(object)->getEquipement()->getItem(event->m_data)->toStringComplete(cv);
+				DEBUG("player item insert");
 			}
 			else
 			{
@@ -1871,7 +1885,7 @@ bool World::processNetEvent(Region* region,CharConv* cv)
 			
 			// Item erstellen
 			cv->fromBuffer(type);
-			cv->fromBuffer(subtype,10);
+			cv->fromBuffer(subtype);
 			cv->fromBuffer(id);
 			item = ItemFactory::createItem((Item::Type) type,subtype,id);
 			item->fromStringComplete(cv);
@@ -1987,28 +2001,34 @@ bool World::processNetEvent(Region* region,CharConv* cv)
 				return false;
 			}
 			break;
+			
+		case NetEvent::PLAYER_ITEM_SWAP:
+			if (m_players->count(event.m_id)>0)
+			{
+				object = (*m_players)[event.m_id];
+				bool sec;
+				cv->fromBuffer(sec);
+				
+				static_cast<Player*>(object)->setUsingSecondaryEquip(sec);
+			}
+			break;
 
 		case NetEvent::PLAYER_ITEM_INSERT:
 			if (m_players->count(event.m_id)>0)
 			{
 				object = (*m_players)[event.m_id];
-				if (object == m_local_player)
+				
+				if (event.m_data != Equipement::GOLD)
 				{
-					if (event.m_data != Equipement::GOLD)
-					{
-						static_cast<Player*>(object)->readItemComplete(cv);
-					}
-					else
-					{
-						int gold;
-						cv->fromBuffer(gold);
-						static_cast<Player*>(object)->getEquipement()->setGold(gold);
-					}
+					static_cast<Player*>(object)->readItemComplete(cv);
 				}
 				else
 				{
-					return false;
+					int gold;
+					cv->fromBuffer(gold);
+					static_cast<Player*>(object)->getEquipement()->setGold(gold);
 				}
+				
 			}
 			else
 			{

@@ -1202,19 +1202,19 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 
 		case BUTTON_SWAP_EQUIP:
 			m_secondary_equip = !m_secondary_equip;
+			
 			calcBaseAttrMod();
+			
+			if (World::getWorld()->isServer())
+			{
+				NetEvent event;
+				event.m_type =  NetEvent::PLAYER_ITEM_SWAP ;
+				event.m_id = getId();
+				World::getWorld()->insertNetEvent(event);
+			}
 			DEBUG5("switching equip");
 			break;
 
-		case REQUEST_DETAILED_ITEM:
-			DEBUG5("requested item %i",command->m_id);
-			sendDetailedItem(command->m_id);
-			break;
-
-		case REQUEST_ABILITY_DAMAGE:
-			DEBUG5("requested info %i",command->m_id);
-			sendAbilityDamage((Action::ActionType) command->m_id);
-			break;
 
 		case BUTTON_INCREASE_ATTRIBUTE:
 			if (m_attribute_points>0)

@@ -587,6 +587,17 @@ public:
 	{
 		return m_secondary_equip;
 	}
+	
+	/**
+	 * \fn void setUsingSecondaryEquip(bool sec)
+	 * \brief Setzt Verwendung der Zweitausruestung
+	 * \param sec Gibt an, ob die Zweitausruestung verwendet wird
+	 */
+	void setUsingSecondaryEquip(bool sec)
+	{
+		m_secondary_equip = sec;
+		calcBaseAttrMod();
+	}
 		
 	
 	/**
