@@ -328,12 +328,7 @@ public:
 	 */
 	virtual void fromString(CharConv* cv);
 	
-	/**
-	 * \fn virtual void toStringComplete(CharConv* cv)
-	 * \brief Konvertiert das Objekt in einen String und schreibt es in der Puffer
-	 * \param cv Ausgabepuffer
-	 */
-	virtual void toStringComplete(CharConv* cv);
+	
 	
 	/**
 	 * \fn void readItem(CharConv* cv)

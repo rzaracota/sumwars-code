@@ -1956,59 +1956,6 @@ void Player::readItemComplete(CharConv* cv)
 		delete item;
 }
 
-void Player::toStringComplete(CharConv* cv)
-{
-	this->toString(cv);
-	cv->toBuffer(getBaseAttr()->m_level);
-	cv->toBuffer(getBaseAttrMod()->m_max_health);
-	cv->toBuffer(getDynAttr()->m_health);
-	cv->toBuffer(getBaseAttrMod()->m_strength);
-	cv->toBuffer(getBaseAttrMod()->m_dexterity);
-	cv->toBuffer(getBaseAttrMod()->m_magic_power);
-	cv->toBuffer(getBaseAttrMod()->m_willpower);
-	cv->toBuffer(m_attribute_points);
-
-
-	int i;
-	for (i=0;i<4;i++)
-		cv->toBuffer(getBaseAttrMod()->m_resistances[i]);
-	for (i=0;i<4;i++)
-		cv->toBuffer(getBaseAttrMod()->m_resistances_cap[i]);
-
-
-	cv->toBuffer(getBaseAttr()->m_max_experience);
-	cv->toBuffer(getDynAttr()->m_experience);
-	cv->toBuffer(getBaseAttrMod()->m_armor);
-	cv->toBuffer(getBaseAttrMod()->m_block);
-	cv->toBuffer(getBaseAttrMod()->m_attack);
-	cv->toBuffer(getBaseAttrMod()->m_attack_speed);
-	cv->toBuffer(getBaseAttr()->m_attack_range);
-	cv->toBuffer(m_base_damage.m_power);
-	m_base_damage.toString(cv);
-	m_left_damage.toString(cv);
-	m_right_damage.toString(cv);
-
-	for (i=0;i<6;i++)
-		cv->toBuffer(getBaseAttrMod()->m_abilities[i]);
-
-	float trel1=0,trel2=0;
-	if (m_timer1_max>0)
-	{
-		trel1 = m_timer1 / m_timer1_max;
-	}
-
-	if (m_timer2_max>0)
-	{
-		trel2 = m_timer2 / m_timer2_max;
-	}
-
-	DEBUG5("trel %f %f",trel1,trel2);
-	cv->toBuffer(trel1);
-	cv->toBuffer(trel2);
-
-
-}
-
 void Player::recalcDamage()
 {
 	calcDamage(m_base_action,m_base_damage);

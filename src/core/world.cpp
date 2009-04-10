@@ -797,7 +797,34 @@ void World::handleSavegame(CharConv *cv, int slot)
 					m_network->pushSlotMessage(msg2.getBitStream(),it->first);
 				}
 			}
-
+			
+			// Nachricht ueber die Wegpunkte
+			if (slot != LOCAL_SLOT)
+			{
+				std::map<short,WaypointInfo>& winfos =getWaypointData();
+				std::map<short,WaypointInfo>::iterator lt;
+				
+				PackageHeader header3;
+				header3.m_content = PTYPE_S2C_WAYPOINTS;	// Spielerdaten vom Server zum Client
+				header3.m_number = winfos.size();					// der neue Spieler
+	
+				CharConv msg3;
+				header3.toString(&msg3);
+				
+				
+				for (lt = winfos.begin(); lt != winfos.end(); ++lt)
+				{
+					msg3.toBuffer(lt->first);
+					msg3.toBuffer(lt->second.m_name);
+					msg3.toBuffer(lt->second.m_id);
+					msg3.toBuffer(lt->second.m_world_coord.m_x);
+					msg3.toBuffer(lt->second.m_world_coord.m_y);
+					DEBUG5("sending waypoint info %i %s %f %f",lt->first, lt->second.m_name.c_str(), lt->second.m_world_coord.m_x,lt->second.m_world_coord.m_y);
+				}
+			
+				m_network->pushSlotMessage(msg3.getBitStream(),slot);
+			}
+			
 			if (slot != LOCAL_SLOT)
 			{
 				// Informationen ueber Parties senden
@@ -1360,6 +1387,27 @@ void World::updatePlayers()
 					DEBUG("fraction %i",frac);
 
 					insertPlayer(m_local_player, LOCAL_SLOT);
+				}
+				
+				if (headerp.m_content == PTYPE_S2C_WAYPOINTS)
+				{
+					DEBUG("got waypoints");
+					std::map<short,WaypointInfo>& winfos = World::getWorld()->getWaypointData();
+					winfos.clear();
+					
+					WaypointInfo wi;
+					short regid;
+					for (int i=0; i<headerp.m_number; i++)
+					{
+						cv->fromBuffer(regid);
+						cv->fromBuffer(wi.m_name);
+						cv->fromBuffer(wi.m_id);
+						cv->fromBuffer(wi.m_world_coord.m_x);
+						cv->fromBuffer(wi.m_world_coord.m_y);	
+						
+						winfos[regid] = wi;
+						DEBUG5("got waypoint info %i %s %f %f",regid, wi.m_name.c_str(), wi.m_world_coord.m_x,wi.m_world_coord.m_y);
+					}
 				}
 
 				if (headerp.m_content == PTYPE_S2C_PARTY)

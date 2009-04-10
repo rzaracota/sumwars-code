@@ -115,6 +115,11 @@ enum PackageType
   	* \brief Lua Code vom Server an den Client
   	*/
  	PTYPE_S2C_LUA_CHUNK,
+  
+  	/**
+   	* \brief Position der Wegpunkte
+   	*/
+  	PTYPE_S2C_WAYPOINTS,
 };
 
 /**
