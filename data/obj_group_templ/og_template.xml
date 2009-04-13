@@ -142,13 +142,6 @@
 			prob_angle = "false"
 			/>
 		
-		<Object subtype="$houseAisen4"
-				center_x="-12"
-				center_y="6"
-				angle = "0"
-				probability ="1.0"
-				prob_angle = "false"
-			/>
 	</ObjectContent>
 	
 	<Locations>
