@@ -23,11 +23,17 @@
 			</Condition>
 			<Effect>
 				if (rob_the_robber.started == true) then
-					speak("Sergeant Lutterer",_("Ihr habt Rob noch nicht getoetet."),1000)
+					speak("Sergeant Lutterer",_("You havn't killed Rob yet."),1000)
 				else
-					speak("player",_("Verzeiht, Sergeant, aber ..."),1000)
-					speak("Sergeant Lutterer",_("Ach, der. Von ..."),1000)
-					addQuestion(_("Quest annehmen?"))
+					speak("player",_("Excuse me, Seargent, but I noticed that wanted poster."),2500)
+					speak("player",_("Isn't a bounty of 3000 Goldpieces a bit exaggerated?"),2300)
+					speak("Sergeant Lutterer",_("Oh, that one."),1000)
+					speak("Sergeant Lutterer",_("The bounty hunters keep their hands of him."),2500)
+					speak("Sergeant Lutterer",_("Everytime word has someone killed him"),2300)
+					speak("Sergeant Lutterer",_("he winds up dead himself and Rob's robbing and killing on"),3000)
+					speak("Sergeant Lutterer",_("Pretty lucky, the guy."),1800)
+					speak("Sergeant Lutterer",_("Interested?"),1000)
+					addQuestion(_("Accept Quest?"))
 					addAnswer(_("Yes"),"start_rob_the_robber_quest")
 					addAnswer(_("No"),"refuse_rob_the_robber_quest")
 				end
@@ -36,15 +42,21 @@
 		
 		<Topic name="start_rob_the_robber_quest" >
 			<Effect>
-				speak("player", _("Allerdings. 3000 Goldstuecke ..."),1000)
-				speak("Sergeant Lutterer",_("Dann nehmt ihm ..."),1000)
+				speak("player", _("Indeed"),1000)
+				speak("player", _("3000 Goldpieces make a fine addition to the travelling funds."),3000)
+				speak("Sergeant Lutterer",_("Then take his necklace."),1800)
+				speak("Sergeant Lutterer",_("They say he really treasures it"),1800)
+				speak("Sergeant Lutterer",_("and if you bring it to dwarfenfroward"),2100)
+				speak("Sergeant Lutterer",_("and show it to seargent Wober, they'll believe you."),3000)
+				speak("Sergeant Lutterer",_("We think he's hiding in the fairyforest right now."),3000)
+				speak("Sergeant Lutterer",_("Between here and Dwarfenfroward."),2100)
 				rob_the_robber.started = true
 			</Effect>	
 		</Topic>
 		
 		<Topic name="refuse_rob_the_robber_quest" >
 			<Effect>
-				speak('player', _("Nur neugierig."),1000)
+				speak('player', _("Just curious."),1000)
 			</Effect>	
 		</Topic>
 	</NPC>
@@ -61,11 +73,17 @@
 			</Condition>
 			<Effect>
 				if (rob_the_robber.started == true) then
-					speak("Sergeant Wober",_("Ihr habt Rob noch nicht getoetet."),1000)
+					speak("Sergeant Wober",_("You havn't killed Rob yet."),1000)
 				else
-					speak("player",_("Verzeiht, Sergeant, aber ..."),1000)
-					speak("Sergeant Wober",_("Ach, der. Von ..."),1000)
-					addQuestion(_("Quest annehmen?"))
+					speak("player",_("Excuse me, Seargent, but I noticed that wanted poster."),2500)
+					speak("player",_("Isn't a bounty of 3000 Goldpieces a bit exaggerated?"),2300)
+					speak("Sergeant Wober",_("Oh, that one."),1000)
+					speak("Sergeant Wober",_("The bounty hunters keep their hands of him."),2500)
+					speak("Sergeant Wober",_("Everytime word has someone killed him"),2300)
+					speak("Sergeant Wober",_("he winds up dead himself and Rob's robbing and killing on"),3000)
+					speak("Sergeant Wober",_("Pretty lucky, the guy."),1800)
+					speak("Sergeant Wober",_("Interested?"),1000)
+					addQuestion(_("Accept Quest?"))
 					addAnswer(_("Yes"),"start_rob_the_robber_quest")
 					addAnswer(_("No"),"refuse_rob_the_robber_quest")
 				end
@@ -74,8 +92,14 @@
 		
 		<Topic name="start_rob_the_robber_quest" >
 			<Effect>
-				speak("player", _("Allerdings. 3000 Goldstuecke ..."),1000)
-				speak("Sergeant Wober",_("Dann nehmt ihm ..."),1000)
+				speak("player", _("Indeed"),1000)
+				speak("player", _("3000 Goldpieces make a fine addition to the travelling funds."),3000)
+				speak("Sergeant Lutterer",_("Then take his necklace."),1800)
+				speak("Sergeant Lutterer",_("They say he really treasures it"),1800)
+				speak("Sergeant Lutterer",_("and if you show it to me"),1800)
+				speak("Sergeant Lutterer",_("I'll believe you killed him."),1800)
+				speak("Sergeant Lutterer",_("We think he's hiding in the fairyforest right now."),3000)
+				speak("Sergeant Lutterer",_("Between here and Joringsbridge."),2100)
 				rob_the_robber.started = true
 			</Effect>	
 		</Topic>
@@ -96,8 +120,13 @@
 			</Condition>
 			<Effect>
 				rob_the_robber.finished = true
-				speak("player", _("Hier ist das ..."),1000)
-				speak("Sergeant Wober",_("Bei allen Teufeln. ..."),1000)
+				speak("player", _("Here is the necklace of Rob the Robber"),2300)
+				speak("Sergeant Wober",_("By all devils!"),1000)
+				speak("Sergeant Wober",_("Did someone really get him?"),1800)
+				speak("Sergeant Wober",_("Well, I wish you luck."),1000)
+				speak("Sergeant Wober",_("His vengeful spirit is supposedly stalking all that hurt him."),3500)
+				speak("Sergeant Wober",_("But that's none of my buisiness."),1800)
+				speak("Sergeant Wober",_("Here's 300 Pieces of Gold for you."),2100)
 				local players = getPlayers()
 				local i,player,count
 				count = 0
