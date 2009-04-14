@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-08 11:48+0200\n"
+"POT-Creation-Date: 2009-04-14 15:58+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -221,10 +221,9 @@ msgid "Regeneration"
 msgstr ""
 
 #: ../src/core/action.cpp:1829
-#, c-format
 msgid ""
-"The warrior regains up to 50% hitpoints of his total hitpoints through the "
-"sheer power of his will."
+"The warrior regains up to 50 percent hitpoints of his total hitpoints "
+"through the sheer power of his will."
 msgstr ""
 
 #: ../src/core/action.cpp:1832
@@ -530,10 +529,9 @@ msgid "Ionisation"
 msgstr ""
 
 #: ../src/core/action.cpp:1960
-#, c-format
 msgid ""
-"The mage has become one with the storm, leading to 20% extra damage from his "
-"lightning spells."
+"The mage has become one with the storm, leading to 20 percent extra damage "
+"from his lightning spells."
 msgstr ""
 
 #: ../src/core/action.cpp:1965
@@ -1101,15 +1099,15 @@ msgstr ""
 msgid "which Topic"
 msgstr ""
 
-#: ../src/core/document.cpp:1139 ../src/core/item.cpp:348
+#: ../src/core/document.cpp:1150 ../src/core/item.cpp:348
 msgid "Required level"
 msgstr ""
 
-#: ../src/core/document.cpp:1145
+#: ../src/core/document.cpp:1156
 msgid "Timer"
 msgstr ""
 
-#: ../src/core/document.cpp:1146
+#: ../src/core/document.cpp:1157
 msgid "Cast delay"
 msgstr ""
 
@@ -1298,8 +1296,12 @@ msgstr ""
 msgid "Save & Exit"
 msgstr ""
 
-#: ../src/gui/inventory.cpp:370
+#: ../src/gui/inventory.cpp:387
 msgid "Gold"
+msgstr ""
+
+#: ../src/gui/inventory.cpp:390
+msgid "Drop:"
 msgstr ""
 
 #: ../src/gui/mainmenu.cpp:60

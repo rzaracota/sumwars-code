@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sumwars 0.01\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-08 11:48+0200\n"
+"POT-Creation-Date: 2009-04-14 15:58+0200\n"
 "PO-Revision-Date: 2009-03-09 15:17+0100\n"
 "Last-Translator: Michael <michael@localhost.localdomain>\n"
 "Language-Team: German <translation-team-de@lists.sourceforge.net>\n"
@@ -243,10 +243,9 @@ msgid "Regeneration"
 msgstr "Regeneration"
 
 #: ../src/core/action.cpp:1829
-#, c-format
 msgid ""
-"The warrior regains up to 50 percent hitpoints of his total hitpoints through the "
-"sheer power of his will."
+"The warrior regains up to 50 percent hitpoints of his total hitpoints "
+"through the sheer power of his will."
 msgstr ""
 "Der Krieger erlangt durch schiere Willenskraft bis zu 50 Prozent seiner "
 "Lebenspunkte wieder."
@@ -610,10 +609,9 @@ msgid "Ionisation"
 msgstr "Ionisation"
 
 #: ../src/core/action.cpp:1960
-#, c-format
 msgid ""
-"The mage has become one with the storm, leading to 20 percent extra damage from his "
-"lightning spells."
+"The mage has become one with the storm, leading to 20 percent extra damage "
+"from his lightning spells."
 msgstr ""
 "Der Magier ist eins mit dem Sturm geworden, wodurch seine Blitzzauber 20 "
 "Prozent mehr Schaden verursachen."
@@ -1291,15 +1289,15 @@ msgstr "Chance für kritischen Treffer"
 msgid "which Topic"
 msgstr "welches Thema"
 
-#: ../src/core/document.cpp:1139 ../src/core/item.cpp:348
+#: ../src/core/document.cpp:1150 ../src/core/item.cpp:348
 msgid "Required level"
 msgstr "Benötigtes Level"
 
-#: ../src/core/document.cpp:1145
+#: ../src/core/document.cpp:1156
 msgid "Timer"
 msgstr "Timer"
 
-#: ../src/core/document.cpp:1146
+#: ../src/core/document.cpp:1157
 msgid "Cast delay"
 msgstr "Verzögerung"
 
@@ -1496,9 +1494,13 @@ msgstr "Optionen"
 msgid "Save & Exit"
 msgstr "Speichern & Ende"
 
-#: ../src/gui/inventory.cpp:370
+#: ../src/gui/inventory.cpp:387
 msgid "Gold"
 msgstr "Gold"
+
+#: ../src/gui/inventory.cpp:390
+msgid "Drop:"
+msgstr ""
 
 #: ../src/gui/mainmenu.cpp:60
 msgid "Single player"

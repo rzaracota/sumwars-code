@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-08 11:48+0200\n"
+"POT-Creation-Date: 2009-04-14 15:58+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -31,70 +31,131 @@ msgid "Quest description"
 msgstr ""
 
 #: ../data/quests/besieged_farm.xml:26
-msgid "Ihr habt Brons Hof noch nicht befreit."
+msgid "You haven't saved Brons farm yet."
 msgstr ""
 
-#: ../data/quests/besieged_farm.xml:28 ../data/quests/herbalist.xml:58
-#: ../data/quests/rescue_willard.xml:45 ../data/quests/rob_the_robber.xml:30
-#: ../data/quests/rob_the_robber.xml:68
-msgid "Quest annehmen?"
+#: ../data/quests/besieged_farm.xml:28 ../data/quests/goblins.xml:36
+#: ../data/quests/herbalist.xml:70
+msgid "Accept Quest?"
 msgstr ""
 
 #: ../data/quests/besieged_farm.xml:29 ../data/quests/goblins.xml:37
-#: ../data/quests/herbalist.xml:59 ../data/quests/maylons_grave.xml:22
-#: ../data/quests/maylons_grave.xml:32 ../data/quests/rob_the_robber.xml:31
+#: ../data/quests/herbalist.xml:71 ../data/quests/maylons_grave.xml:22
+#: ../data/quests/maylons_grave.xml:35 ../data/quests/rob_the_robber.xml:31
 #: ../data/quests/rob_the_robber.xml:69
 msgid "Yes"
 msgstr ""
 
 #: ../data/quests/besieged_farm.xml:30 ../data/quests/goblins.xml:38
-#: ../data/quests/herbalist.xml:60 ../data/quests/maylons_grave.xml:23
+#: ../data/quests/herbalist.xml:72 ../data/quests/maylons_grave.xml:23
 #: ../data/quests/rob_the_robber.xml:32 ../data/quests/rob_the_robber.xml:70
 msgid "No"
 msgstr ""
 
 #: ../data/quests/besieged_farm.xml:37
-msgid "Ah, habt ihr doch ..."
+msgid "Do you have a goblin problem in this region?"
 msgstr ""
 
 #: ../data/quests/besieged_farm.xml:38
-msgid "Wir sind unterwegs."
+msgid "Ah, do you now feel like earning the money?"
 msgstr ""
 
-#: ../data/quests/besieged_farm.xml:53
-msgid "Es ist vollbracht"
+#: ../data/quests/besieged_farm.xml:39
+msgid "Don't believe I didn't see you hanging around back there."
 msgstr ""
 
-#: ../data/quests/besieged_farm.xml:54
-msgid "Habt ihr schon ..."
+#: ../data/quests/besieged_farm.xml:40
+msgid "But I won't complain."
 msgstr ""
 
-#: ../data/quests/besieged_farm.xml:79
-msgid "Die Goblins sind weg ..."
+#: ../data/quests/besieged_farm.xml:41
+msgid ""
+"You know how it works: Go west to the Northern Meadow and drive out that "
+"goblin scum around Brons farm."
 msgstr ""
 
-#: ../data/quests/besieged_farm.xml:80 ../data/quests/rescue_willard.xml:64
-msgid "Ich danke euch ..."
+#: ../data/quests/besieged_farm.xml:42
+msgid "I don't care, how you do that."
 msgstr ""
 
-#: ../data/quests/besieged_farm.xml:81
-msgid "Wie das denn?"
+#: ../data/quests/besieged_farm.xml:43
+msgid "You can eat them raw and bath in their blood for all I care."
 msgstr ""
 
-#: ../data/quests/besieged_farm.xml:82
-msgid "Mit einem Kristall ..."
+#: ../data/quests/besieged_farm.xml:44
+msgid "Just kidding."
 msgstr ""
 
-#: ../data/quests/besieged_farm.xml:83
-msgid "Natuerlich ..."
+#: ../data/quests/besieged_farm.xml:45
+msgid " Come back when you're done."
+msgstr ""
+
+#: ../data/quests/besieged_farm.xml:46
+msgid "We're on our way."
+msgstr ""
+
+#: ../data/quests/besieged_farm.xml:61
+msgid "It's done."
+msgstr ""
+
+#: ../data/quests/besieged_farm.xml:62
+msgid "I heard it allready."
+msgstr ""
+
+#: ../data/quests/besieged_farm.xml:63
+msgid "Bron's at the tavern and filling himself for your well-being."
+msgstr ""
+
+#: ../data/quests/besieged_farm.xml:64
+msgid "But that should be none of you're concern anymore."
+msgstr ""
+
+#: ../data/quests/besieged_farm.xml:65
+msgid "Here's you're money."
+msgstr ""
+
+#: ../data/quests/besieged_farm.xml:90
+msgid "The goblins are gone. Are you allright?"
+msgstr ""
+
+#: ../data/quests/besieged_farm.xml:91
+msgid "I thank you.   "
 msgstr ""
 
 #: ../data/quests/besieged_farm.xml:92
-msgid "Also ehrlich, ..."
+msgid "I'm afraid, I can't ask you in."
 msgstr ""
 
 #: ../data/quests/besieged_farm.xml:93
-msgid "Lasst und das ..."
+msgid ""
+"The barricades we built are quite heavy and it will take sone time to remove "
+"them."
+msgstr ""
+
+#: ../data/quests/besieged_farm.xml:94
+msgid "But I will give word to my husband that we are safe."
+msgstr ""
+
+#: ../data/quests/besieged_farm.xml:95
+msgid "How will you do that?"
+msgstr ""
+
+#: ../data/quests/besieged_farm.xml:96
+msgid ""
+"With a crystal. It was part of my dowry and is in my family for generations"
+msgstr ""
+
+#: ../data/quests/besieged_farm.xml:97
+msgid "Of course. Thoughtless of me."
+msgstr ""
+
+#: ../data/quests/besieged_farm.xml:106
+msgid ""
+"Really. Did you think there's still people using carrier pigeons these days?"
+msgstr ""
+
+#: ../data/quests/besieged_farm.xml:107
+msgid "Let's just get the money."
 msgstr ""
 
 #: ../data/quests/defend_dwarfenfroward.xml:62
@@ -137,10 +198,6 @@ msgstr ""
 msgid "Interested?"
 msgstr ""
 
-#: ../data/quests/goblins.xml:36
-msgid "Accept Quest?"
-msgstr ""
-
 #: ../data/quests/goblins.xml:49
 msgid "A second reward ?"
 msgstr ""
@@ -162,75 +219,138 @@ msgid "Have fun"
 msgstr ""
 
 #: ../data/quests/herbalist.xml:27
-msgid "Hier alte Frau ..."
+msgid "Here, old woman. Your herbs."
 msgstr ""
 
 #: ../data/quests/herbalist.xml:28
-msgid "Ah, gut gemacht ..."
+msgid "Ah, well done, young one."
 msgstr ""
 
-#: ../data/quests/herbalist.xml:31
-msgid "Ihr muesst noch mehr Kraeuter sammeln."
+#: ../data/quests/herbalist.xml:29
+msgid "Let me give you something in return."
 msgstr ""
 
-#: ../data/quests/herbalist.xml:34
-msgid "He da, ..."
+#: ../data/quests/herbalist.xml:32
+msgid "You need to collect more herbs."
 msgstr ""
 
 #: ../data/quests/herbalist.xml:35
-msgid "Das stimmt."
+msgid "Hey there, young one."
 msgstr ""
 
-#: ../data/quests/herbalist.xml:51
-msgid "Kunststueck: Immerhin wollten ..."
+#: ../data/quests/herbalist.xml:36
+msgid "I see, you're going to the Northern Meadow."
 msgstr ""
 
-#: ../data/quests/herbalist.xml:52
-msgid "Frieden."
+#: ../data/quests/herbalist.xml:37
+msgid "That's right."
+msgstr ""
+
+#: ../data/quests/herbalist.xml:53
+msgid "What a feat."
+msgstr ""
+
+#: ../data/quests/herbalist.xml:54
+msgid "We were only just walking through the gate."
 msgstr ""
 
 #: ../data/quests/herbalist.xml:55
-msgid "Wenn ihr ..."
+msgid "Peace."
 msgstr ""
 
-#: ../data/quests/herbalist.xml:56
-msgid "Kraeuter ..."
+#: ../data/quests/herbalist.xml:58
+msgid "If you're roaming the Meadow anyway and do whatever you're doing,"
 msgstr ""
 
-#: ../data/quests/herbalist.xml:57
-msgid "Ach ..."
+#: ../data/quests/herbalist.xml:59
+msgid "would you be so kind as to bring me some herbs?"
+msgstr ""
+
+#: ../data/quests/herbalist.xml:60
+msgid ""
+"With all those goblins an old lady can't even dare to go out of her door."
+msgstr ""
+
+#: ../data/quests/herbalist.xml:61
+msgid "I don't exactly specialize in herbs..."
+msgstr ""
+
+#: ../data/quests/herbalist.xml:62
+msgid "Fiddlesticks!"
+msgstr ""
+
+#: ../data/quests/herbalist.xml:63
+msgid "I don't want you to gather someting exotic."
+msgstr ""
+
+#: ../data/quests/herbalist.xml:64
+msgid "Just Rilfherb."
+msgstr ""
+
+#: ../data/quests/herbalist.xml:65
+msgid "That's big bushes with flashy red flowers."
+msgstr ""
+
+#: ../data/quests/herbalist.xml:66
+msgid "I'm sure you'll recognize it."
 msgstr ""
 
 #: ../data/quests/herbalist.xml:67
-msgid "Na schoen, wenn ..."
+msgid ""
+"You'll have to bring at least ten bushels, or else it won't be worth the "
+"efford"
 msgstr ""
 
 #: ../data/quests/herbalist.xml:68
-msgid "Danke Herzchen."
+msgid "But only the small green leaves."
 msgstr ""
 
-#: ../data/quests/herbalist.xml:76
-msgid "Vergiss es ..."
+#: ../data/quests/herbalist.xml:69
+msgid "Not the big and old stuff, that's no good."
 msgstr ""
 
-#: ../data/quests/herbalist.xml:77
-msgid "Wie du meinst ..."
+#: ../data/quests/herbalist.xml:79
+msgid "Fine, if I see anything, I'll bring it along."
 msgstr ""
 
-#: ../data/quests/herbalist.xml:163
+#: ../data/quests/herbalist.xml:80
+msgid "Thanks sweety."
+msgstr ""
+
+#: ../data/quests/herbalist.xml:88
+msgid "Forget it, herb woman."
+msgstr ""
+
+#: ../data/quests/herbalist.xml:89
+msgid "I cocksure won't crawl throug the meadows searching for some bushes."
+msgstr ""
+
+#: ../data/quests/herbalist.xml:90
+msgid "Suit yourself!"
+msgstr ""
+
+#: ../data/quests/herbalist.xml:91
+msgid "But if you change your mind let me know"
+msgstr ""
+
+#: ../data/quests/herbalist.xml:92
+msgid "I won't go anywere."
+msgstr ""
+
+#: ../data/quests/herbalist.xml:178
 msgid "Collect "
 msgstr ""
 
 #: ../data/quests/maylons_grave.xml:18
-msgid "text1"
+msgid "Rakthr mootrick!"
 msgstr ""
 
 #: ../data/quests/maylons_grave.xml:19
-msgid "text2"
+msgid "Mar! Nom Togubri!"
 msgstr ""
 
 #: ../data/quests/maylons_grave.xml:20
-msgid "text3"
+msgid "Wait big warriorhumans. No kill!"
 msgstr ""
 
 #: ../data/quests/maylons_grave.xml:21
@@ -238,147 +358,280 @@ msgid "Kill Goblins?"
 msgstr ""
 
 #: ../data/quests/maylons_grave.xml:29
-msgid "text4"
+msgid "A goblin that want's to talk?"
 msgstr ""
 
 #: ../data/quests/maylons_grave.xml:30
-msgid "text5"
+msgid "Yes. No hit, no kill!"
 msgstr ""
 
 #: ../data/quests/maylons_grave.xml:31
-msgid "Listen?"
+msgid "Gab'Resh and friends only harmless rustlers."
+msgstr ""
+
+#: ../data/quests/maylons_grave.xml:32
+msgid "No bandits."
 msgstr ""
 
 #: ../data/quests/maylons_grave.xml:33
-msgid "Let Goblins go"
+msgid "Will listen, yes?"
 msgstr ""
 
 #: ../data/quests/maylons_grave.xml:34
+msgid "Listen?"
+msgstr ""
+
+#: ../data/quests/maylons_grave.xml:36
+msgid "Let Goblins go"
+msgstr ""
+
+#: ../data/quests/maylons_grave.xml:37
 msgid "Kill them"
 msgstr ""
 
-#: ../data/quests/maylons_grave.xml:40
-msgid "text6"
+#: ../data/quests/maylons_grave.xml:43
+msgid "Wretched Brood! Slay them!"
 msgstr ""
 
-#: ../data/quests/maylons_grave.xml:53
-msgid "text7"
-msgstr ""
-
-#: ../data/quests/maylons_grave.xml:54 ../data/quests/maylons_grave.xml:56
-msgid "text"
-msgstr ""
-
-#: ../data/quests/maylons_grave.xml:55
-msgid "text8"
+#: ../data/quests/maylons_grave.xml:56
+msgid "What could a goblin have to say?"
 msgstr ""
 
 #: ../data/quests/maylons_grave.xml:57
-msgid "text9"
+msgid "We often hide here."
+msgstr ""
+
+#: ../data/quests/maylons_grave.xml:58
+msgid "Few humans come, and if they do, never return from deep cave."
+msgstr ""
+
+#: ../data/quests/maylons_grave.xml:59
+msgid "But last moon black human come."
+msgstr ""
+
+#: ../data/quests/maylons_grave.xml:60
+msgid "Now dread of the deepth also wandering up. "
+msgstr ""
+
+#: ../data/quests/maylons_grave.xml:61
+msgid "Chasing poor goblin were never stole nothing not."
+msgstr ""
+
+#: ../data/quests/maylons_grave.xml:62
+msgid "Sounds allmost as if a necromancer passed by."
+msgstr ""
+
+#: ../data/quests/maylons_grave.xml:63
+msgid "We can't let be such a problem in an undefended region like this."
+msgstr ""
+
+#: ../data/quests/maylons_grave.xml:64
+msgid "Who knows what could happen."
 msgstr ""
 
 #: ../data/quests/maylons_grave.xml:65
-msgid "text10"
+msgid "Good warning, no?"
 msgstr ""
 
-#: ../data/quests/maylons_grave.xml:84
+#: ../data/quests/maylons_grave.xml:66
+msgid "Mighty humanwarriors let us live, no?"
+msgstr ""
+
+#: ../data/quests/maylons_grave.xml:67
+msgid "Do disappear."
+msgstr ""
+
+#: ../data/quests/maylons_grave.xml:68
+msgid "We have better things to do than killing a band of wretched goblins."
+msgstr ""
+
+#: ../data/quests/maylons_grave.xml:76
+msgid "Just scram, before I change my mind!"
+msgstr ""
+
+#: ../data/quests/maylons_grave.xml:95
 msgid "text11"
 msgstr ""
 
-#: ../data/quests/maylons_grave.xml:86
+#: ../data/quests/maylons_grave.xml:97
 msgid "text12"
 msgstr ""
 
-#: ../data/quests/maylons_grave.xml:87
+#: ../data/quests/maylons_grave.xml:98
 msgid "text13"
 msgstr ""
 
-#: ../data/quests/maylons_grave.xml:90
+#: ../data/quests/maylons_grave.xml:101
 msgid "text14_reward"
 msgstr ""
 
 #: ../data/quests/rescue_willard.xml:26
-msgid "Ihr habt Willard noch nicht befreit."
+msgid "You have yet to give the stone to Willard."
 msgstr ""
 
 #: ../data/quests/rescue_willard.xml:28
-msgid "Heda! ..."
+msgid "Hey there!"
 msgstr ""
 
 #: ../data/quests/rescue_willard.xml:29
-msgid "Und wenn es ..."
+msgid "Are you the councils backing?"
 msgstr ""
 
 #: ../data/quests/rescue_willard.xml:30
-msgid "Ich habe laeuten ..."
+msgid "And if it was like that?"
 msgstr ""
 
-#: ../data/quests/rescue_willard.xml:37
-msgid "Wer haette das ..."
+#: ../data/quests/rescue_willard.xml:31
+msgid "I heard you were Branded Ones."
 msgstr ""
 
-#: ../data/quests/rescue_willard.xml:38
-msgid "Hae! Dafuer haette ..."
+#: ../data/quests/rescue_willard.xml:32
+msgid "There is something, only someone like you can do."
 msgstr ""
 
-#: ../data/quests/rescue_willard.xml:39
-msgid "Verzeiht. Vielleicht war ..."
+#: ../data/quests/rescue_willard.xml:33
+msgid "With sure success that is."
 msgstr ""
 
 #: ../data/quests/rescue_willard.xml:40
-msgid "Wie auch immer ..."
+msgid "Who would have thougt of that?"
 msgstr ""
 
 #: ../data/quests/rescue_willard.xml:41
-msgid "Danke. Mein Name ..."
+msgid "Does an respectable member of the guard want someones thoat cut?"
 msgstr ""
 
 #: ../data/quests/rescue_willard.xml:42
-msgid "Sicher wollt ihr ..."
+msgid "Eh? I could've hired a professional assassin for that."
 msgstr ""
 
 #: ../data/quests/rescue_willard.xml:43
-msgid "Nein. Willard ist ..."
+msgid "I thought you were not the kind of Branded Ones"
 msgstr ""
 
 #: ../data/quests/rescue_willard.xml:44
-msgid "Ich verstehe."
+msgid "that kill everyone crossing their pass."
+msgstr ""
+
+#: ../data/quests/rescue_willard.xml:45
+msgid "My apologies. Maybe my mouth slipped."
 msgstr ""
 
 #: ../data/quests/rescue_willard.xml:46
-msgid "Ja"
+msgid "Whatever. What do you really want?"
 msgstr ""
 
 #: ../data/quests/rescue_willard.xml:47
-msgid "Nein"
+msgid "Thanks. My name is Fenor Marken."
+msgstr ""
+
+#: ../data/quests/rescue_willard.xml:48
+msgid "It is like that: I have a friend with the gamekeepers."
+msgstr ""
+
+#: ../data/quests/rescue_willard.xml:49
+msgid "He was in the woods with two others when they were attacked by goblins."
+msgstr ""
+
+#: ../data/quests/rescue_willard.xml:50
+msgid "And those cowards left him behind wounded."
+msgstr ""
+
+#: ../data/quests/rescue_willard.xml:51
+msgid "Surely you don't want me to bring back his corpse, do you?"
+msgstr ""
+
+#: ../data/quests/rescue_willard.xml:52
+msgid "No. Willard isn't someone who is killed by some measly goblins."
+msgstr ""
+
+#: ../data/quests/rescue_willard.xml:53
+msgid "I'm sure he's waiting somewhere for help."
+msgstr ""
+
+#: ../data/quests/rescue_willard.xml:54
+msgid "You must be very busy."
+msgstr ""
+
+#: ../data/quests/rescue_willard.xml:55
+msgid "That's why all I ask you is bringing him this phasestone."
 msgstr ""
 
 #: ../data/quests/rescue_willard.xml:56
-msgid "Euer Freund ist ..."
+msgid "Normally I wouldn't entrust anyone with this"
+msgstr ""
+
+#: ../data/quests/rescue_willard.xml:57
+msgid "out of fear they'd elope with it."
+msgstr ""
+
+#: ../data/quests/rescue_willard.xml:58
+msgid "But you Branded Ones have other means of transportation, havn't you."
+msgstr ""
+
+#: ../data/quests/rescue_willard.xml:59
+msgid "That's why I came to you."
+msgstr ""
+
+#: ../data/quests/rescue_willard.xml:60
+msgid "I understand."
+msgstr ""
+
+#: ../data/quests/rescue_willard.xml:61 ../data/quests/rob_the_robber.xml:30
+#: ../data/quests/rob_the_robber.xml:68
+msgid "Quest annehmen?"
+msgstr ""
+
+#: ../data/quests/rescue_willard.xml:62
+msgid "Ja"
 msgstr ""
 
 #: ../data/quests/rescue_willard.xml:63
-msgid "Und fragt nicht ..."
-msgstr ""
-
-#: ../data/quests/rescue_willard.xml:71
-msgid "Es tut mir ..."
+msgid "Nein"
 msgstr ""
 
 #: ../data/quests/rescue_willard.xml:72
-msgid "Ihr seid genauso ..."
+msgid "Your friend is as good as saved."
+msgstr ""
+
+#: ../data/quests/rescue_willard.xml:79
+msgid "And not even asking what the rest is thinking."
+msgstr ""
+
+#: ../data/quests/rescue_willard.xml:80
+msgid "Thank you very much."
+msgstr ""
+
+#: ../data/quests/rescue_willard.xml:87
+msgid "Sorry, but we can't waste time searching for some gamekeeper."
+msgstr ""
+
+#: ../data/quests/rescue_willard.xml:88
+msgid "You're as coldharted as they say."
+msgstr ""
+
+#: ../data/quests/rescue_willard.xml:89
+msgid "If only I could leave here."
 msgstr ""
 
 #: ../data/quests/rescue_willard.xml:90
-msgid "Ich nehme an ..."
+msgid "I would search for him myself"
 msgstr ""
 
-#: ../data/quests/rescue_willard.xml:92
-msgid "Euer Freund Fenor ..."
+#: ../data/quests/rescue_willard.xml:110
+msgid "You're Willard I suppose."
 msgstr ""
 
-#: ../data/quests/rescue_willard.xml:94
-msgid "Ich danke euch."
+#: ../data/quests/rescue_willard.xml:112
+msgid "Your friend Fenor Marken sends us."
+msgstr ""
+
+#: ../data/quests/rescue_willard.xml:113
+msgid "We are to give you a phasestone."
+msgstr ""
+
+#: ../data/quests/rescue_willard.xml:119
+msgid "I thank you."
 msgstr ""
 
 #: ../data/quests/rob_the_robber.xml:26 ../data/quests/rob_the_robber.xml:64

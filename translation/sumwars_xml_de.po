@@ -18,7 +18,7 @@ msgstr ""
 
 #: shortbow.xml
 msgid "practice bow"
-msgstr "übungsbogen"
+msgstr "Ã¼bungsbogen"
 
 #: shortbow.xml
 msgid "goblin bow"
@@ -114,7 +114,7 @@ msgstr "Beruhigende Salbe"
 
 #: potion.xml
 msgid "potion of determination"
-msgstr "Trank der Entscheidungsstärke"
+msgstr "Trank der EntscheidungsstÃ¤rke"
 
 #: potion.xml
 msgid "echo potion"
@@ -130,11 +130,11 @@ msgstr "Auftautrank"
 
 #: potion.xml
 msgid "spike oil"
-msgstr "Lavendelöl"
+msgstr "LavendelÃ¶l"
 
 #: axes2h.xml
 msgid "lumberjack axe"
-msgstr "Holzfälleraxt"
+msgstr "HolzfÃ¤lleraxt"
 
 #: axes2h.xml
 msgid "great axe"
@@ -190,7 +190,7 @@ msgstr "Sternenaxt"
 
 #: axes2h.xml
 msgid "kings axe"
-msgstr "Königsaxt"
+msgstr "KÃ¶nigsaxt"
 
 #: axes2h.xml
 msgid "torture axe"
@@ -266,7 +266,7 @@ msgstr "Zwergenstahlhammer"
 
 #: hammer2h.xml
 msgid "elementhunter"
-msgstr "Elementenjäger"
+msgstr "ElementenjÃ¤ger"
 
 #: hammer2h.xml
 msgid "exorcists hammer"
@@ -274,7 +274,7 @@ msgstr "Exorzistenhammer"
 
 #: hammer2h.xml
 msgid "worldshaker"
-msgstr "Welterschütterer"
+msgstr "WelterschÃ¼tterer"
 
 #: helmet.xml
 msgid "cap"
@@ -290,7 +290,7 @@ msgstr "Lederhelm"
 
 #: helmet.xml
 msgid "mercenary head"
-msgstr "Söldnerkopf"
+msgstr "SÃ¶ldnerkopf"
 
 #: helmet.xml
 msgid "novice headgear"
@@ -298,11 +298,11 @@ msgstr "Novizenhelm"
 
 #: helmet.xml
 msgid "mercenary helmet"
-msgstr "Söldnerhelm"
+msgstr "SÃ¶ldnerhelm"
 
 #: helmet.xml
 msgid "ranger bandana"
-msgstr "Waldläuferstirnband"
+msgstr "WaldlÃ¤uferstirnband"
 
 #: helmet.xml
 msgid "assassin hood"
@@ -338,7 +338,7 @@ msgstr "Eisenkeule"
 
 #: hammer1h.xml
 msgid "maul"
-msgstr "Schlägel"
+msgstr "SchlÃ¤gel"
 
 #: hammer1h.xml
 msgid "morning star"
@@ -346,7 +346,7 @@ msgstr "Morgenstern"
 
 #: hammer1h.xml
 msgid "crowhead"
-msgstr "Krähenkopf"
+msgstr "KrÃ¤henkopf"
 
 #: hammer1h.xml
 msgid "rider hammer"
@@ -370,7 +370,7 @@ msgstr "Stahlstreitkolben"
 
 #: hammer1h.xml
 msgid "steel maul"
-msgstr "Stahlschlägel"
+msgstr "StahlschlÃ¤gel"
 
 #: hammer1h.xml
 msgid "sixedged mace"
@@ -454,7 +454,7 @@ msgstr "Eichenzauberstab"
 
 #: wands.xml
 msgid "phenix wand"
-msgstr "Phönixzauberstab"
+msgstr "PhÃ¶nixzauberstab"
 
 #: wands.xml
 msgid "frost wand"
@@ -470,7 +470,7 @@ msgstr "Eschenzauberstab"
 
 #: wands.xml
 msgid "summoner wand"
-msgstr "Beschwörerzauberstab"
+msgstr "BeschwÃ¶rerzauberstab"
 
 #: wands.xml
 msgid "master wand"
@@ -482,7 +482,7 @@ msgstr "Nekromantenzauberstab"
 
 #: wands.xml
 msgid "demon wand"
-msgstr "Dämonenzauberstab"
+msgstr "DÃ¤monenzauberstab"
 
 #: wands.xml
 msgid "fairy wand"
@@ -514,7 +514,7 @@ msgstr "Eisenaxt"
 
 #: axes1h.xml
 msgid "mercenary axe"
-msgstr "Söldneraxt"
+msgstr "SÃ¶ldneraxt"
 
 #: axes1h.xml
 msgid "steel axe"
@@ -538,7 +538,7 @@ msgstr "Donneraxt"
 
 #: axes1h.xml
 msgid "demon axe"
-msgstr "Dämonenaxt"
+msgstr "DÃ¤monenaxt"
 
 #: axes1h.xml
 msgid "obsidian axe"
@@ -562,7 +562,7 @@ msgstr "Zwergenaxt"
 
 #: axes1h.xml
 msgid "hell axe"
-msgstr "Höllenaxt"
+msgstr "HÃ¶llenaxt"
 
 #: swords1h.xml
 msgid "dagger"
@@ -586,11 +586,11 @@ msgstr "Altes Schwert"
 
 #: swords1h.xml
 msgid "sabre"
-msgstr "Säbel"
+msgstr "SÃ¤bel"
 
 #: swords1h.xml
 msgid "legion blade"
-msgstr "Legionärsklinge"
+msgstr "LegionÃ¤rsklinge"
 
 #: swords1h.xml
 msgid "long sword"
@@ -598,11 +598,11 @@ msgstr "Langschwert"
 
 #: swords1h.xml
 msgid "sword of the coast"
-msgstr "Küstenschwert"
+msgstr "KÃ¼stenschwert"
 
 #: swords1h.xml
 msgid "scimitar"
-msgstr "Krummsäbel"
+msgstr "KrummsÃ¤bel"
 
 #: swords1h.xml
 msgid "barbarian sword"
@@ -630,7 +630,7 @@ msgstr "Zwergenstahlschwert"
 
 #: swords1h.xml
 msgid "demon blade"
-msgstr "Dämonenschwert"
+msgstr "DÃ¤monenschwert"
 
 #: swords1h.xml
 msgid "hero blade"
@@ -642,7 +642,7 @@ msgstr "Engelsklinge"
 
 #: swords1h.xml
 msgid "gods blade"
-msgstr "Götterklinge"
+msgstr "GÃ¶tterklinge"
 
 #: staff.xml
 msgid "spruce staff"
@@ -678,7 +678,7 @@ msgstr "Eichenstab"
 
 #: staff.xml
 msgid "phenix staff"
-msgstr "Phönixstab"
+msgstr "PhÃ¶nixstab"
 
 #: staff.xml
 msgid "frost staff"
@@ -694,7 +694,7 @@ msgstr "Eschenstab"
 
 #: staff.xml
 msgid "summoner staff"
-msgstr "Beschwörerstab"
+msgstr "BeschwÃ¶rerstab"
 
 #: staff.xml
 msgid "master staff"
@@ -706,7 +706,7 @@ msgstr "Nekromantenstab"
 
 #: staff.xml
 msgid "demon staff"
-msgstr "Dämonenstab"
+msgstr "DÃ¤monenstab"
 
 #: staff.xml
 msgid "fairy staff"
@@ -738,15 +738,15 @@ msgstr "Goldring"
 
 #: swords2h.xml
 msgid "farmer sword"
-msgstr "Bauernzweihänder"
+msgstr "BauernzweihÃ¤nder"
 
 #: swords2h.xml
 msgid "mercenary blade"
-msgstr "Söldnerklinge"
+msgstr "SÃ¶ldnerklinge"
 
 #: swords2h.xml
 msgid "two handed steel sword"
-msgstr "Stahlzweihänder"
+msgstr "StahlzweihÃ¤nder"
 
 #: swords2h.xml
 msgid "smash sword"
@@ -754,7 +754,7 @@ msgstr "Schmetterschwert"
 
 #: swords2h.xml
 msgid "horse killer"
-msgstr "Pferdeschlächter"
+msgstr "PferdeschlÃ¤chter"
 
 #: swords2h.xml
 msgid "bastard sword"
@@ -766,7 +766,7 @@ msgstr "Ogerdolch"
 
 #: swords2h.xml
 msgid "goblinkiller"
-msgstr "Goblintöter"
+msgstr "GoblintÃ¶ter"
 
 #: swords2h.xml
 msgid "executioner's sword"
@@ -774,7 +774,7 @@ msgstr "Richtschwert"
 
 #: swords2h.xml
 msgid "two handed guardsman sword"
-msgstr "Gardistenzweihänder"
+msgstr "GardistenzweihÃ¤nder"
 
 #: swords2h.xml
 msgid "flamberg"
@@ -790,7 +790,7 @@ msgstr "Monsterschwert"
 
 #: swords2h.xml
 msgid "tear sword"
-msgstr "Tränenschwert"
+msgstr "TrÃ¤nenschwert"
 
 #: swords2h.xml
 msgid "deathwind"
@@ -846,7 +846,7 @@ msgstr "Kompositlangbogen"
 
 #: longbow.xml
 msgid "stormsinger"
-msgstr "Sturmsänger"
+msgstr "SturmsÃ¤nger"
 
 #: longbow.xml
 msgid "oak bow"
@@ -854,11 +854,11 @@ msgstr "Eichenbogen"
 
 #: longbow.xml
 msgid "demonhorn bow"
-msgstr "Dämonenhornbogen"
+msgstr "DÃ¤monenhornbogen"
 
 #: longbow.xml
 msgid "ranger bow"
-msgstr "Waldläuferbogen"
+msgstr "WaldlÃ¤uferbogen"
 
 #: longbow.xml
 msgid "ash longbow"
@@ -866,7 +866,7 @@ msgstr "Eschenlangbogen"
 
 #: longbow.xml
 msgid "demon compositebow"
-msgstr "Dämonenkompositbogen"
+msgstr "DÃ¤monenkompositbogen"
 
 #: longbow.xml
 msgid "hero bow"
@@ -902,39 +902,39 @@ msgstr "Magierhut"
 
 #: armor.xml
 msgid "cloth armor"
-msgstr "Tuchrüstung"
+msgstr "TuchrÃ¼stung"
 
 #: armor.xml
 msgid "leather armor"
-msgstr "Lederrüstung"
+msgstr "LederrÃ¼stung"
 
 #: armor.xml
 msgid "rivet armor"
-msgstr "Nietenrüstung"
+msgstr "NietenrÃ¼stung"
 
 #: armor.xml
 msgid "bandit armor"
-msgstr "Banditenrüstung"
+msgstr "BanditenrÃ¼stung"
 
 #: armor.xml
 msgid "novice armor"
-msgstr "Novizenrüstung"
+msgstr "NovizenrÃ¼stung"
 
 #: armor.xml
 msgid "mercenary armor"
-msgstr "Söldnerrüstung"
+msgstr "SÃ¶ldnerrÃ¼stung"
 
 #: armor.xml
 msgid "ranger shirt"
-msgstr "Waldläuferhemd"
+msgstr "WaldlÃ¤uferhemd"
 
 #: armor.xml
 msgid "assassin armor"
-msgstr "Assassinenrüstung"
+msgstr "AssassinenrÃ¼stung"
 
 #: armor.xml
 msgid "temple armor"
-msgstr "Tempelrüstung"
+msgstr "TempelrÃ¼stung"
 
 #: robes.xml
 msgid "ragged robe"
@@ -982,7 +982,7 @@ msgstr "Spinnenseidehandschuhe"
 
 #: glove.xml
 msgid "marksman gloves"
-msgstr "Schützenhandschuhe"
+msgstr "SchÃ¼tzenhandschuhe"
 
 #: glove.xml
 msgid "assassin gloves"
@@ -1060,8 +1060,9 @@ msgstr "Der belagerte Bauernhof(Belohnung)"
 
 # Bron's door
 #: besieged_farm.xml
-msgid "Brons Tür"
-msgstr "Tür zu Brons Farm"
+#, fuzzy
+msgid "Brons Tuer"
+msgstr "TÃ¼r zu Brons Farm"
 
 #: besieged_farm.xml
 msgid "Brons Safety"
@@ -1069,7 +1070,7 @@ msgstr "Brons Familie ist sicher"
 
 #: besieged_farm.xml
 msgid "aisNorthMeadow"
-msgstr "Nürdliche Wiese"
+msgstr "NÃ¼rdliche Wiese"
 
 #: maylons_grave.xml
 #, fuzzy
@@ -1096,8 +1097,9 @@ msgstr "Maylons Grab, Krypta"
 
 # TODO Herb gathering
 #: herbalist.xml
-msgid "Kräutersammler"
-msgstr "Kräutersammler"
+#, fuzzy
+msgid "Kraeutersammler"
+msgstr "KrÃ¤utersammler"
 
 #: herbalist.xml
 msgid "Gertlinde Kampfer"
@@ -1105,12 +1107,13 @@ msgstr "Gertlinde Kampfer"
 
 #: herbalist.xml
 msgid "joringsbridge"
-msgstr "Joringsbrück"
+msgstr "JoringsbrÃ¼ck"
 
 # TODO Rob the robber
 #: rob_the_robber.xml
-msgid "Rob der Räuber"
-msgstr "Rob der Räuber"
+#, fuzzy
+msgid "Rob der Raeuber"
+msgstr "Rob der RÃ¤uber"
 
 #: rob_the_robber.xml
 msgid "Steckbrief"
@@ -1122,7 +1125,7 @@ msgstr "Sergeant Wober"
 
 #: rob_the_robber.xml
 msgid "Rob the Robber (Reward)"
-msgstr "Rob der Räuber (Belohnung)"
+msgstr "Rob der RÃ¤uber (Belohnung)"
 
 #: rob_the_robber.xml
 msgid "aisFairyforest"
@@ -1147,7 +1150,7 @@ msgstr "Willard den Stein geben (Belohnung)"
 
 #: rescue_willard.xml
 msgid "medMercCamp"
-msgstr "Söldnerlager von Medair"
+msgstr "SÃ¶ldnerlager von Medair"
 
 #: rescue_willard.xml
 msgid "aisMeadow"
@@ -1216,15 +1219,15 @@ msgstr ""
 
 #: monsters.xml
 msgid "goblin brawler"
-msgstr "Goblinschläger"
+msgstr "GoblinschlÃ¤ger"
 
 #: monsters.xml
 msgid "goblin robber"
-msgstr "Goblinräuber"
+msgstr "GoblinrÃ¤uber"
 
 #: monsters.xml
 msgid "goblin hunter"
-msgstr "Goblinjäger"
+msgstr "GoblinjÃ¤ger"
 
 #: monsters.xml
 msgid "goblin dog"
@@ -1232,7 +1235,7 @@ msgstr "Goblinhund"
 
 #: monsters.xml
 msgid "goblin fighter"
-msgstr "Goblinkämpfer"
+msgstr "GoblinkÃ¤mpfer"
 
 #: monsters.xml
 msgid "goblin warrior"
@@ -1248,7 +1251,7 @@ msgstr "Goblinschamane"
 
 #: monsters.xml
 msgid "goblin chieftain"
-msgstr "Goblinhäuptling"
+msgstr "GoblinhÃ¤uptling"
 
 #: monsters.xml
 msgid "lich"
@@ -1279,4 +1282,4 @@ msgid "mandragora"
 msgstr "Alraune"
 
 #~ msgid "Scene1"
-#~ msgstr "Hilfe für Zwergentrutz"
+#~ msgstr "Hilfe fÃ¼r Zwergentrutz"
