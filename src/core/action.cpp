@@ -1826,7 +1826,7 @@ void Action::updateTranslation()
 
 	a = &(Action::m_base_info[Action::REGENERATE]);
 	a->m_name = gettext("Regeneration");
-	a->m_description = gettext("The warrior regains up to 50% hitpoints of his total hitpoints through the sheer power of his will.");
+	a->m_description = gettext("The warrior regains up to 50 percent hitpoints of his total hitpoints through the sheer power of his will.");
 
 	a = &(Action::m_base_info[Action::ANGER]);
 	a->m_name = gettext("Barbarian anger");
@@ -1957,7 +1957,7 @@ void Action::updateTranslation()
 
 	a = &(Action::m_base_info[Action::IONISATION]);
 	a->m_name = gettext("Ionisation");
-	a->m_description = gettext("The mage has become one with the storm, leading to 20% extra damage from his lightning spells.");
+	a->m_description = gettext("The mage has become one with the storm, leading to 20 percent extra damage from his lightning spells.");
 
 
 	// Schuetze Faehigkeiten
