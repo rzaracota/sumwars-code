@@ -42,7 +42,7 @@
 #include "party.h"
 #include "itemfactory.h"
 #include "objectfactory.h"
-#include "netevent.h"
+#include "networkstruct.h"
 #include "worldloader.h"
 #include "templateloader.h"
 #include "quest.h"
@@ -617,16 +617,16 @@ private:
 	NetEventList* m_events;
 	
 	/**
-	 * \var float m_timer[3]
+	 * \var float m_timer[6]
 	 * \brief Timer a 250, 500 und 1000 ms
 	 */
-	float m_timer[3];
+	float m_timer[6];
 	
 	/**
-	 * \var  bool m_timer_limit[3]
+	 * \var  bool m_timer_limit[6]
 	 * \brief ist true, wenn der betreffende Timer gerade in dem Tick abgelaufen ist
 	 */
-	bool m_timer_limit[3];
+	bool m_timer_limit[6];
 	
 	/**
 	 * \fn std::map<int,LocationName> m_region_enter_loc

@@ -767,7 +767,7 @@ void MapGenerator::insertSpawnpoints(MapData* mdata, RegionData* rdata)
 		for (int i=0; i< st->m_number; i++)
 		{
 			int r = Random::randi(points.size());
-			wo = new Spawnpoint(st->m_monsters, World::getWorld()->getValidId());
+			wo = new Spawnpoint(st->m_monsters);
 
 			mdata->m_region->insertObject(wo,Vector(points[r].first*8+4, points[r].second*8+4));
 
@@ -819,7 +819,7 @@ void MapGenerator::createExits(MapData* mdata, RegionData* rdata)
 	if (rdata->m_has_waypoint)
 	{
 		Vector pos = mdata->m_region->getLocation("WaypointLoc");
-		WorldObject* wo =	 new Waypoint(World::getWorld()->getValidId());
+		WorldObject* wo =	 new Waypoint();
 		mdata->m_region->insertObject(wo,pos);
 		mdata->m_region->getWaypointLocation() = pos;
 		

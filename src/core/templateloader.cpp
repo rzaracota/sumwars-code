@@ -36,16 +36,7 @@ int TemplateLoader::generateObjectTemplate(TiXmlElement* pElement, std::string e
 				name_list.push_back(pAttrib->Value());
 			else if (!strcmp(pAttrib->Name(), "type"))
 			{
-				if (!strcmp(pAttrib->Value(), "NONE"))
-					m_object_template->m_type = WorldObject::TypeInfo::TYPE_NONE;
-				else if (!strcmp(pAttrib->Value(), "PLAYER"))
-					m_object_template->m_type = WorldObject::TypeInfo::TYPE_PLAYER;
-				else if (!strcmp(pAttrib->Value(), "MONSTER"))
-					m_object_template->m_type = WorldObject::TypeInfo::TYPE_MONSTER;
-				else if (!strcmp(pAttrib->Value(), "NPC"))
-					m_object_template->m_type = WorldObject::TypeInfo::TYPE_NPC;
-				else if (!strcmp(pAttrib->Value(), "FIXED_OBJECT"))
-					m_object_template->m_type = WorldObject::TypeInfo::TYPE_FIXED_OBJECT;
+				m_object_template->m_type = pAttrib->Value();
 			}
 
 			i++;

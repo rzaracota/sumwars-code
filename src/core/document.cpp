@@ -244,7 +244,7 @@ void Document::onCreateNewCharButton()
 	
 }
 
-void Document::setNewCharacter(WorldObject::TypeInfo::ObjectSubtype subtype, PlayerLook look)
+void Document::setNewCharacter(WorldObject::Subtype subtype, PlayerLook look)
 {	
 	if (m_temp_player)
 		delete m_temp_player;
@@ -444,7 +444,7 @@ void Document::onRightMouseButtonClick(Vector pos)
 	command.m_number=0;
 
 	if (command.m_id!=0)
-		DEBUG("angeklicktes Objekt %i",command.m_id);
+		DEBUG5("angeklicktes Objekt %i",command.m_id);
 
 
 	// Paket an den Server senden

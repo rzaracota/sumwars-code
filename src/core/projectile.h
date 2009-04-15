@@ -7,8 +7,9 @@
 #include "damage.h"
 #include <algorithm>
 #include <math.h>
-#include "netevent.h"
+#include "networkstruct.h"
 #include <list>
+#include "gameobject.h"
 
 class World;
 
@@ -16,59 +17,9 @@ class World;
  * \class Projectile
  * \brief Klasse fuer bewegliche Gegenstaende und Erscheinungen
  */
-class Projectile
+class Projectile : public GameObject
 {
 	public:
-		
-	/**
-	 * \enum ProjectileType
-	 * \brief Aufzaehlung verschiedener Typen von Projektilen
-	 */
-	enum ProjectileType
-	{
-		ARROW=1,
-		MAGIC_ARROW=2,
-		FIRE_BOLT=3,
-		FIRE_BALL=4,
-		FIRE_WALL=5,
-  		FIRE_WAVE=6,
-		ICE_BOLT = 10,
-		BLIZZARD = 11,
-		ICE_RING= 12,
-		FREEZE =13,
-		LIGHTNING = 20,
-		THUNDERSTORM = 21,
-		CHAIN_LIGHTNING = 23,
-		STATIC_SHIELD,
-		FIRE_ARROW = 30,
-		ICE_ARROW = 31,
-		WIND_ARROW = 32,
-  		GUIDED_ARROW=34,
-		EXPLOSION = 40,
-		FIRE_EXPLOSION = 41,
-		ICE_EXPLOSION = 42,
-		WIND_EXPLOSION = 43,
-		LIGHT_BEAM = 50,
-		ELEM_EXPLOSION = 51,
-		ACID = 52,
-		DIVINE_BEAM = 53,
-		HYPNOSIS = 54
-
-	};
-	 
-	/**
-	 * \enum ProjectileState
-	 * \brief Aufzaehlung der Zustaende die ein Projektil annehmen kann
-	 */
-	enum ProjectileState
-	{
-		FLYING = 1,
-		EXPLODING = 2,
-		GROWING = 3,
-		STABLE = 4,
-		VANISHING =5,
-		DESTROYED= 6
-	};
 
 	/**
 	 * \enum Flags
@@ -85,13 +36,13 @@ class Projectile
 	};
 	
 	/**
-	 * \fn Projectile( ProjectileType type, Damage* dmg,  int id)
-	 * \param type Typ des Projektils
+	 * \fn Projectile( ProjectileType type, Damage* dmg,  int id=0)
+	 * \param subtype Typ des Projektils
 	 * \param dmg Schaden den das Projektil anrichtet
 	 * \param id ID des Projektils
 	 * \brief Konstruktor
 	 */
-	Projectile( ProjectileType type, Damage* dmg, int id);
+	Projectile( Subtype subtype, Damage* dmg, int id=0);
 	
 	/**
 	 * \fn virtual ~Projectile()
@@ -102,58 +53,15 @@ class Projectile
 		
 	}
 	
-/**
+	/**
 	 * \fn virtual update ( float time)
 	 * \brief Aktualisiert das Projektil, nachdem eine bestimmte Zeit vergangen ist. Alle Aktionen des Objekts werden auf diesem Weg ausgeloest. 
 	 * \param time Menge der vergangenen Zeit in Millisekunden
 	 * \return bool, der angibt, ob die Aktualisierung fehlerfrei verlaufen ist
- */
+ 	*/
 	virtual  bool  update ( float time);
 
-	
-	/**
-	 * \fn void setSpeed(Vector speed)
-	 * \brief Setzt die Geschwindigkeit des Projektils
-	 * \param speed Geschwindigkeit
-	 */
-	void setSpeed(Vector speed)
-	{
-		m_speed = speed;
-		getShape()->m_angle = m_speed.angle();
-	}
-	
-	/**
-	 * \fn Vector getSpeed()
-	 * \brief Gibt die Geschwindigkeit aus
-	 */
-	Vector getSpeed()
-	{
-		return m_speed;
-	}
-	
-	/**
-	 * \fn short getRegion()
-	 * \brief Gibt die Region aus, in der das Projektil sich befindet
-	 * \return Region
-	 */
-	short getRegion()
-	{
-		return m_region;
-	}
-	
-	Region* getRegionPtr();
-	
-	
-	/**
-	 * \fn void setRegion(short r)
-	 * \brief setzt die Region
-	 * \param r Region
-	 */
-	void setRegion(short r)
-	{
-		m_region=r;
-	}
-	
+		
 	/**
 	 * \fn void setCounter(short cnt)
 	 * \brief Setzt den internen Zaehler
@@ -235,33 +143,6 @@ class Projectile
 	 */
 	virtual void processNetEvent(NetEvent* event, CharConv* cv);
 	
-	/**
-	 * \fn Shape* getShape()
-	 * \brief Gibt die Form des Projektils aus
-	 */
-	Shape* getShape()
-	{
-		return &m_shape;
-	}
-	
-	
-	/**
-	 * \fn ProjectileType getType()
-	 * \brief Gibt Typ des Projektils aus
-	 */
-	ProjectileType getType()
-	{
-		return m_type;
-	}
-	
-	/**
-	 * \fn ProjectileState getState()
-	 * \brief Gibt Status des Projektils aus
-	 */
-	ProjectileState getState()
-	{	
-		return m_state;
-	}
 	
 	/**
 	 * \fn float getTimer()
@@ -281,49 +162,29 @@ class Projectile
 		return m_timer_limit;
 	}
 	
-	
-	
-	
-	/**
-	 * \fn int getId()
-	 * \brief Gibt die ID aus
-	 */
-	int getId()
+	/** 
+	 * \fn Fraction getFraction()
+	* \brief Gibt die Fraktion aus
+	*/
+	Fraction getFraction()
 	{
-		return m_id;
+		return m_fraction;
 	}
 	
 	/**
-	 * \fn int getNetEventMask()
-	 * \brief Gibt die Bitmaske der NetEvents aus
+	 * \fn void setFraction(Fraction fr)
+	 * \brief setzt die Fraktion
+	 * \param fr Fraktion
 	 */
-	int getNetEventMask()
+	void setFraction(Fraction fr)
 	{
-		return m_event_mask;
+		m_fraction = fr;
 	}
 	
-	/**
-	 * \fn void clearNetEventMask()
-	 * \brief Setzt die Bitmaske der NetEvents auf 0 
-	 */
-	void clearNetEventMask()
-	{
-		m_event_mask =0;
-	}
+	
 	
 	
 	protected:
-		
-		/**
-		 * \fn void setState(ProjectileState state)
-		 * \brief Setzt den Status des Projektils
-		 * \param state neuer Status
-		 */
-		void setState(ProjectileState state)
-		{
-			m_state = state;
-			m_event_mask |= NetEvent::DATA_PROJ_STATE;
-		}
 		
 		/**
 		 * \fn void setTimerLimit(float limit)
@@ -333,7 +194,7 @@ class Projectile
 		void setTimerLimit(float limit)
 		{
 			m_timer_limit = limit;
-			m_event_mask |= NetEvent::DATA_PROJ_TIMER;
+			addToNetEventMask(NetEvent::DATA_TIMER);
 		}
 		
 		/**
@@ -355,17 +216,6 @@ class Projectile
 		void handleStable(float dtime);
 		
 		
-		/**
-		 * \var Vector m_speed
-		 * \brief Geschwindigkeit, mit der sich das Projektil bewegt
-		 */
-		Vector m_speed;
-		
-		/**
-		* \var short m_region
-		* \brief Region in der sich das Projektil befindet
-		*/
-		short m_region;
 		
 		/**
 		* \var Damage m_damage
@@ -396,31 +246,8 @@ class Projectile
 		* \brief Zielobjekt
 		*/
 		int m_goal_object;
-			
-		/**
-		 * \var Shape m_shape
-		 * \brief Form des Projektils
-		 */
-		Shape m_shape;
 		
-		/**
-		 * \var short m_layer
-		 * \brief Ebene
-		 */
-		short m_layer;
 		
-		/**
-		* \fn ProjectileType m_type
-		* \brief Typ des Projektils
-		*/
-		ProjectileType m_type;
-				
-		/**
-		* \fn ProjectileState m_state
-		* \brief Status des Projektils
-		*/
-		ProjectileState m_state;
-				
 		/**
 		* \fn float m_timer
 		* \brief Timer, Verwendung je nach Art des Projektils und aktuellem Zustand
@@ -440,17 +267,10 @@ class Projectile
 		int m_counter;
 		
 		/**
-		* \var int m_id
-		* \brief ID des Projektils
-		*/
-		int m_id;
-		
-		/**
-		* \var int m_event_mask
-		* \brief Bitmaske mit den beim aktuellen updaten aufgetretenen NetEvents
-		*/
-		int m_event_mask;
-	 
+		 * \var Fraction m_fraction
+		 * \brief Fraktion des Objektes
+		 */
+		Fraction m_fraction;
 
 };
 

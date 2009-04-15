@@ -78,6 +78,21 @@ class Quest
 		 */
 		std::string getName();
 		
+		/**
+		 * \fn void toString(CharConv* cv)
+		 * \brief Konvertiert das Objekt in einen String und schreibt ihn in der Puffer
+		 * \param cv Ausgabepuffer
+		 */
+		virtual void toString(CharConv* cv);
+
+
+		/**
+		 * \fn void fromString(CharConv* cv)
+		 * \brief Erzeugt das Objekt aus einem String
+		 * \param cv Eingabepuffer
+		 */
+		virtual void fromString(CharConv* cv);
+		
 	
 	private:
 		/**
@@ -105,6 +120,12 @@ class Quest
 		 * \brief Handle auf eine Folge von Lua Anweisungen, die die Beschreibung ausgibt
 		 */
 		int m_description;
+		
+		/**
+		 * \var std::string m_description_code
+		 * \brief Lua Code, der die Beschreibung zurueck gibt
+		 */
+		std::string m_description_code;
 		
 };
 

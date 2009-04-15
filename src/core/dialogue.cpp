@@ -188,7 +188,7 @@ void Dialogue::addSpeaker(int id, std::string refname)
 
 	m_speaker.insert(std::make_pair(refname,id));
 
-	if (m_main_player_id ==0 && cr->getTypeInfo()->m_type == WorldObject::TypeInfo::TYPE_PLAYER)
+	if (m_main_player_id ==0 && cr->getType() == "PLAYER")
 	{
 		m_main_player_id = cr->getId();
 		m_speaker["main_player"] = m_main_player_id;

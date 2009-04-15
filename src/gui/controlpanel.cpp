@@ -268,7 +268,7 @@ void ControlPanel::update()
 		out_stream.str("");
 		if (it!=0)
 		{
-			out_stream<< getItemImage(it->m_subtype);;
+			out_stream<< getItemImage(it->m_subtype);
 		}
 		if (img->getProperty("Image")!=out_stream.str())
 		{

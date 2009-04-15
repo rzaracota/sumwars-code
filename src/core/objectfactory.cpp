@@ -10,9 +10,9 @@
 #define USE_OBJECTLOADER
 
 
-std::map<WorldObject::TypeInfo::ObjectSubtype, MonsterBasicData*> ObjectFactory::m_monster_data;
+std::map<GameObject::Subtype, MonsterBasicData*> ObjectFactory::m_monster_data;
 
-std::map<WorldObject::TypeInfo::ObjectSubtype, FixedObjectData*> ObjectFactory::m_fixed_object_data;
+std::map<GameObject::Subtype, FixedObjectData*> ObjectFactory::m_fixed_object_data;
 
 std::map<ObjectTemplateType, ObjectTemplate*> ObjectFactory::m_object_templates;
 
@@ -20,10 +20,10 @@ std::map<ObjectGroupTemplateName, ObjectGroupTemplate*> ObjectFactory::m_object_
 
 std::map< MonsterGroupName, MonsterGroup*>  ObjectFactory::m_monster_groups;
 
-std::map<WorldObject::TypeInfo::ObjectSubtype, WorldObject::TypeInfo::ObjectType> ObjectFactory::m_object_types;
+std::map<GameObject::Subtype, GameObject::Type> ObjectFactory::m_object_types;
 
 
-WorldObject::TypeInfo::ObjectSubtype ObjectTemplate::getObject(EnvironmentName env)
+GameObject::Subtype ObjectTemplate::getObject(EnvironmentName env)
 {
 	// Daten aus der Map suchen
 	std::map<EnvironmentName, WorldObjectTypeList >::iterator it;
@@ -61,7 +61,7 @@ void ObjectGroupTemplate::addObject(ObjectTemplateType objtype, Vector pos, floa
 }
 
 
-WorldObject::TypeInfo::ObjectSubtype ObjectFactory::getObjectType(ObjectTemplateType generictype, EnvironmentName env)
+GameObject::Subtype ObjectFactory::getObjectType(ObjectTemplateType generictype, EnvironmentName env)
 {
 	// Namen die nicht mit $ anfangen sind normale Typen
 	if (generictype[0] != '$')
@@ -83,26 +83,22 @@ WorldObject::TypeInfo::ObjectSubtype ObjectFactory::getObjectType(ObjectTemplate
 	}
 }
 
-WorldObject* ObjectFactory::createObject(WorldObject::TypeInfo::ObjectType type, WorldObject::TypeInfo::ObjectSubtype subtype, int id)
+WorldObject* ObjectFactory::createObject(GameObject::Type type, GameObject::Subtype subtype, int id)
 {
 	// Zeiger auf erzeugtes Objekt
 	WorldObject* ret=0;
 
-	// ID des Objektes
-	if (id ==0)
-	{
-		id = World::getWorld()->getValidId();
-	}
+	
 
-	if (type ==WorldObject::TypeInfo::TYPE_PLAYER)
+	if (type =="PLAYER")
 	{
 		ret = new Player(id,subtype);
 	}
-	else if (type ==WorldObject::TypeInfo::TYPE_MONSTER || type ==WorldObject::TypeInfo::TYPE_NPC)
+	else if (type =="MONSTER" || type =="NPC")
 	{
 		DEBUG5("requested subtype: %s",subtype.c_str());
 		MonsterBasicData* mdata;
-		std::map<WorldObject::TypeInfo::ObjectSubtype, MonsterBasicData*>::iterator i;
+		std::map<GameObject::Subtype, MonsterBasicData*>::iterator i;
 
 		i = m_monster_data.find(subtype);
 		if (i== m_monster_data.end())
@@ -114,12 +110,12 @@ WorldObject* ObjectFactory::createObject(WorldObject::TypeInfo::ObjectType type,
 		ret = new Monster( id,*mdata);
 		DEBUG5("Monster created");
 	}
-	else if (type ==WorldObject::TypeInfo::TYPE_FIXED_OBJECT)
+	else if (type =="FIXED_OBJECT")
 	{
 	
 		DEBUG5("requested subtype: %s",subtype.c_str());
 		FixedObjectData* data;
-		std::map<WorldObject::TypeInfo::ObjectSubtype, FixedObjectData*>::iterator i;
+		std::map<GameObject::Subtype, FixedObjectData*>::iterator i;
 
 		i = m_fixed_object_data.find(subtype);
 		if (i== m_fixed_object_data.end())
@@ -132,7 +128,7 @@ WorldObject* ObjectFactory::createObject(WorldObject::TypeInfo::ObjectType type,
 		Shape* sp;
 		DEBUG5("create fixed object: %s",subtype.c_str());
 		ret = new FixedObject(id,subtype);
-		ret->setState(WorldObject::STATE_STATIC);
+		ret->setState(WorldObject::STATE_STATIC,false);
 		
 		sp=ret->getShape();		
 		memcpy(sp,&(data->m_shape),sizeof(Shape));
@@ -143,9 +139,9 @@ WorldObject* ObjectFactory::createObject(WorldObject::TypeInfo::ObjectType type,
 	return ret;
 }
 
-std::string ObjectFactory::getObjectName(WorldObject::TypeInfo::ObjectSubtype subtype)
+std::string ObjectFactory::getObjectName(GameObject::Subtype subtype)
 {
-	std::map<WorldObject::TypeInfo::ObjectSubtype, MonsterBasicData*>::iterator i;
+	std::map<GameObject::Subtype, MonsterBasicData*>::iterator i;
 
 	i = m_monster_data.find(subtype);
 	if (i== m_monster_data.end())
@@ -181,28 +177,28 @@ MonsterGroup* ObjectFactory::getMonsterGroup(MonsterGroupName name)
 	return it->second;
 }
 
-WorldObject::TypeInfo::ObjectType ObjectFactory::getObjectBaseType(WorldObject::TypeInfo::ObjectSubtype subtype)
+GameObject::Type ObjectFactory::getObjectBaseType(GameObject::Subtype subtype)
 {
-	std::map<WorldObject::TypeInfo::ObjectSubtype, WorldObject::TypeInfo::ObjectType>::iterator it;
+	std::map<GameObject::Subtype, GameObject::Type>::iterator it;
 	it = m_object_types.find(subtype);
 	if (it != m_object_types.end())
 		return it->second;
 	
-	return WorldObject::TypeInfo::TYPE_NONE;
+	return "NONE";
 }
 
 
-void ObjectFactory::registerMonster(WorldObject::TypeInfo::ObjectSubtype subtype, MonsterBasicData* data)
+void ObjectFactory::registerMonster(GameObject::Subtype subtype, MonsterBasicData* data)
 {
-	m_object_types.insert(std::make_pair(subtype, WorldObject::TypeInfo::TYPE_MONSTER));
+	m_object_types.insert(std::make_pair(subtype, "MONSTER"));
 	
 	DEBUG5("registered monster for subtype %s",subtype.c_str());
 	m_monster_data.insert(std::make_pair(subtype,data));
 }
 
-void ObjectFactory::registerFixedObject(WorldObject::TypeInfo::ObjectSubtype subtype, FixedObjectData* data)
+void ObjectFactory::registerFixedObject(GameObject::Subtype subtype, FixedObjectData* data)
 {
-	m_object_types.insert(std::make_pair(subtype, WorldObject::TypeInfo::TYPE_FIXED_OBJECT));
+	m_object_types.insert(std::make_pair(subtype, "FIXED_OBJECT"));
 	m_fixed_object_data.insert(std::make_pair(subtype,data));
 }
 
@@ -293,13 +289,13 @@ void ObjectFactory::init()
 
 void ObjectFactory::cleanup()
 {
-	std::map<WorldObject::TypeInfo::ObjectSubtype, MonsterBasicData*>::iterator it1;
+	std::map<GameObject::Subtype, MonsterBasicData*>::iterator it1;
 	for (it1 = m_monster_data.begin(); it1 != m_monster_data.end(); ++it1)
 	{
 		delete it1->second;
 	}
 
-	std::map<WorldObject::TypeInfo::ObjectSubtype, FixedObjectData*>::iterator it2;
+	std::map<GameObject::Subtype, FixedObjectData*>::iterator it2;
 	for (it2 = m_fixed_object_data.begin(); it2 != m_fixed_object_data.end(); ++it2)
 	{
 		delete it2->second;

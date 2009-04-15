@@ -198,18 +198,18 @@ struct Item {
 	};
 
 	/**
-	 * \fn Item()
+	 * \fn Item(int id =0)
 	 * \brief Konstruktor
 	 */
-	Item();
+	Item(int id =0);
 
 
 	/**
-	 * \fn Item(ItemBasicData& data)
+	 * \fn Item(ItemBasicData& data, int id =0)
 	 * \brief erzeugt ein neuen Gegenstand mit den vorgegebenen Daten
 	 * \param data Daten auf deren Basis der Gegenstand erzeugt wird
 	 */
-	Item(ItemBasicData& data);
+	Item(ItemBasicData& data, int id =0);
 
 	/**
 	 * \fn virtual ~Item()

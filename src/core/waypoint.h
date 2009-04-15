@@ -43,7 +43,7 @@ class Waypoint : public FixedObject
 	 * \brief Konstruktor
 	 * \param ID des Objektes
 	 */
-	Waypoint(int id);
+	Waypoint(int id=0);
 	
 	/**
 	 * \fn virtual bool init()

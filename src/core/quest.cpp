@@ -53,6 +53,7 @@ void Quest::setDescription(const char* descr)
 	int err = luaL_loadstring(EventSystem::getLuaState(),descr);
 	if (err ==0)
 	{
+		m_description_code = descr;
 		m_description = luaL_ref(EventSystem::getLuaState(),LUA_REGISTRYINDEX);
 	}
 	else
@@ -123,6 +124,20 @@ std::string Quest::getDescription()
 
 std::string Quest::getName()
 {
-	return dgettext("sumwars_xml",m_name.c_str());
+	return m_name;
+}
+
+void Quest::toString(CharConv* cv)
+{
+	cv->toBuffer(m_name);
+	cv->toBuffer(m_table_name);
+	cv->toBuffer(m_description_code);
+}
+
+void Quest::fromString(CharConv* cv)
+{
+	// Name und Tabellenname werden extern gelesen
+	cv->fromBuffer(m_description_code);
+	setDescription(m_description_code.c_str());
 }
 

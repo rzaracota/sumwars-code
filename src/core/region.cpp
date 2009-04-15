@@ -156,7 +156,8 @@ Region::~Region()
 	DropItemMap::iterator k;
 	for (k =  m_drop_items->begin(); k != m_drop_items->end(); k++)
 	{
-		delete k->second->m_item;
+		if (k->second->getItem() !=0)
+			delete k->second->getItem();
 		delete k->second;
 	}
 	
@@ -569,6 +570,7 @@ bool Region::getObjectsInShape( Shape* shape,  WorldObjectList* result,short lay
 				}
 			}
 		}
+		
 	}
 	return true;
 }
@@ -681,9 +683,10 @@ void Region::getObjectsOnLine(Line& line,  WorldObjectList* result,short layer, 
 
 bool Region::insertObject(WorldObject* object, Vector pos, float angle, bool collision_test)
 {
+	DEBUG5("try to insert %s at %f %f",object->getSubtype().c_str(), pos.m_x,pos.m_y);
 	bool result = true;
 
-	object->getGridLocation()->m_region = m_id;
+	object->setRegionId(m_id);
 
 	 // Einfügen in den Binärbaum
 	if (object->getState() != WorldObject::STATE_STATIC)
@@ -703,7 +706,7 @@ bool Region::insertObject(WorldObject* object, Vector pos, float angle, bool col
 		return result;
 	}
 
-	if (object->getTypeInfo()->m_type == WorldObject::TypeInfo::TYPE_PLAYER)
+	if (object->getType() == "PLAYER")
 	{
 		Player* pl = dynamic_cast<Player*>(object);
 		DEBUG5("player entered Region");
@@ -723,6 +726,7 @@ bool Region::insertObject(WorldObject* object, Vector pos, float angle, bool col
 	else
 	{
 		// fuer Nicht Spieler NetEvent erzeugen, dass das Objekt erschaffen wurde
+		
 		NetEvent event;
 		event.m_type = NetEvent::OBJECT_CREATED;
 		event.m_id = object->getId();
@@ -758,7 +762,7 @@ bool Region::insertObject(WorldObject* object, Vector pos, float angle, bool col
 	 // Testen ob das Objekt in der Region liegt
 	if (x_g<0 || y_g<0 || x_g>=m_dimx || y_g>=m_dimy)
 	{
-		DEBUG("create Object at %f %f",pos.m_x, pos.m_y);
+		DEBUG5("create Object at %f %f",pos.m_x, pos.m_y);
 		return false;
 	}
 	else
@@ -782,7 +786,7 @@ bool Region::insertObject(WorldObject* object, Vector pos, float angle, bool col
 
 	}
 
-	DEBUG5("object inserted %s at %f %f",object->getTypeInfo()->m_subtype.c_str(), object->getShape()->m_center.m_x,object->getShape()->m_center.m_y);
+	DEBUG5("object inserted %s %i at %f %f",object->getSubtype().c_str(), object->getId(), object->getShape()->m_center.m_x,object->getShape()->m_center.m_y);
 	return result;
 }
 
@@ -792,7 +796,7 @@ int Region::createObject(ObjectTemplateType generictype, Vector pos, float angle
 	EnvironmentName env = getEnvironment(pos);
 
 	// genauen Subtyp ermitteln
-	WorldObject::TypeInfo::ObjectSubtype subtype = ObjectFactory::getObjectType(generictype, env);
+	WorldObject::Subtype subtype = ObjectFactory::getObjectType(generictype, env);
 	if (subtype == "")
 	{
 		DEBUG("no subtype found for generictype %s",generictype.c_str());
@@ -802,8 +806,8 @@ int Region::createObject(ObjectTemplateType generictype, Vector pos, float angle
 	bool collision_test=true;
 	
 	// Basistyp ermitteln
-	WorldObject::TypeInfo::ObjectType type = ObjectFactory::getObjectBaseType(subtype);
-	if (type == WorldObject::TypeInfo::TYPE_NONE)
+	WorldObject::Type type = ObjectFactory::getObjectBaseType(subtype);
+	if (type == "NONE")
 	{
 		DEBUG("no base type for subtype %s",subtype.c_str());
 		return 0;
@@ -820,22 +824,22 @@ int Region::createObject(ObjectTemplateType generictype, Vector pos, float angle
 
 	if (state != WorldObject::STATE_NONE)
 	{
-		object->setState(state);
+		object->setState(state,false);
 	}
 	
 	if (state == WorldObject::STATE_AUTO)
 	{
-		if (object->getTypeInfo()->m_type == WorldObject::TypeInfo::TYPE_FIXED_OBJECT)
+		if (object->getType() == "FIXED_OBJECT")
 		{
-			object->setState(WorldObject::STATE_INACTIVE);
+			object->setState(WorldObject::STATE_INACTIVE,false);
 		}
 		else
 		{
-			object->setState(WorldObject::STATE_ACTIVE);
+			object->setState(WorldObject::STATE_ACTIVE,false);
 		}
 	}
 	
-	if (object->getTypeInfo()->m_type == WorldObject::TypeInfo::TYPE_FIXED_OBJECT)
+	if (object->getType() == "FIXED_OBJECT")
 	{
 		collision_test= false;
 	}
@@ -977,9 +981,10 @@ void Region::createMonsterGroup(MonsterGroupName mgname, Vector position, float 
 
 bool  Region::insertProjectile(Projectile* object, Vector pos)
 {
+	DEBUG5("projectile inserted: %s %i",object->getSubtype().c_str(), object->getId());
 	m_projectiles->insert(std::make_pair(object->getId(),object));
 	object->getShape()->m_center = pos;
-	object->setRegion( m_id);
+	object->setRegionId( m_id);
 
 	// NetEvent erzeugen: neues Projektil in der Region
 	NetEvent event;
@@ -1003,12 +1008,14 @@ bool  Region::deleteObject (WorldObject* object)
 		return false;
 	}
 	
-	if (object->getTypeInfo()->m_type != WorldObject::TypeInfo::TYPE_PLAYER)
+	if (object->getType() != "PLAYER")
 	{
+		
 		NetEvent event;
 		event.m_type = NetEvent::OBJECT_DESTROYED;
 		event.m_id = object->getId();
 		insertNetEvent(event);
+		
 	}
 	
 	if (object->isLarge())
@@ -1051,7 +1058,7 @@ bool  Region::deleteObject (WorldObject* object)
 		m_static_objects->erase(object->getId());
 	}
 
-	if (object->getTypeInfo()->m_type == WorldObject::TypeInfo::TYPE_PLAYER)
+	if (object->getType() == "PLAYER")
 	{
 		DEBUG5("Player deleted");
 		m_players->erase(object->getId());
@@ -1166,6 +1173,7 @@ void Region::deleteProjectile(Projectile* proj)
 	if (m_projectiles->count(id)!=0)
 	{
 		m_projectiles->erase(m_projectiles->find(id));
+		DEBUG5("projectile deleted: %s %i",proj->getSubtype().c_str(), proj->getId());
 	}
 }
 
@@ -1191,7 +1199,7 @@ void Region::update(float time)
 			if (World::getWorld()->isServer())
 			{
 				// nur Nichtspieler Objekte loeschen
-				if (object->getTypeInfo()->m_type != WorldObject::TypeInfo::TYPE_PLAYER)
+				if (object->getType() != "PLAYER")
 				{
 					DEBUG5("Objekt gelöscht: %i \n",object->getId());
 					
@@ -1229,17 +1237,18 @@ void Region::update(float time)
 	for (it3 = m_projectiles->begin(); it3 !=m_projectiles->end();)
 	{
 		pr = (it3->second);
-		if (pr->getState() == Projectile::DESTROYED)
+		if (pr->getState() == Projectile::STATE_DESTROYED)
 		{
 			// Projektile selbststaendig loeschen darf nur der Server
 			if (World::getWorld()->isServer())
 			{
+				
 				NetEvent event;
 				event.m_type = NetEvent::PROJECTILE_DESTROYED;
 				event.m_id = pr->getId();
 				insertNetEvent(event);
-
-				DEBUG5("deleting projectile %p",pr);
+				
+				DEBUG5("deleting projectile %i",pr->getId());
 				m_projectiles->erase(it3++);
 				delete pr;
 				DEBUG5("loesche projektil");
@@ -1273,7 +1282,7 @@ void Region::update(float time)
 			object = iter->second;
 
 			// NetEvents durch Spieler werden global behandelt, daher hier nicht beruecksichtigen
-			if (object->getTypeInfo()->m_type == WorldObject::TypeInfo::TYPE_PLAYER)
+			if (object->getType() == "PLAYER")
 			{
 				continue;
 			}
@@ -1558,9 +1567,7 @@ void Region::getRegionData(CharConv* cv)
 	DropItemMap::iterator lt;
 	for (lt = m_drop_items->begin(); lt != m_drop_items->end(); ++lt)
 	{
-		cv->toBuffer(lt->second->m_x);
-		cv->toBuffer(lt->second->m_y);
-		lt->second->m_item->toString(cv);
+		lt->second->toString(cv);
 	}
 	
 	// Cutscene modus
@@ -1583,8 +1590,8 @@ void Region::getRegionData(CharConv* cv)
 
 void Region::createObjectFromString(CharConv* cv, WorldObjectMap* players)
 {
-	char type;
-	std::string subt;
+	WorldObject::Type type;
+	WorldObject::Subtype subt;
 	int id;
 
 	WorldObject* obj;
@@ -1599,9 +1606,9 @@ void Region::createObjectFromString(CharConv* cv, WorldObjectMap* players)
 
 		// alle Objekte ausser den Spielern werden neu angelegt
 		// die Spieler existieren schon
-	if (type != WorldObject::TypeInfo::TYPE_PLAYER)
+	if (type != "PLAYER")
 	{
-		obj = ObjectFactory::createObject((WorldObject::TypeInfo::ObjectType) type, subt,id);
+		obj = ObjectFactory::createObject(type, subt,id);
 	}
 	else
 	{
@@ -1619,7 +1626,14 @@ void Region::createObjectFromString(CharConv* cv, WorldObjectMap* players)
 	
 	obj->fromString(cv);
 
-
+	WorldObject* oldobj = getObject(obj->getId());
+	if (oldobj != 0)
+	{
+		DEBUG("Object %i already exists",oldobj->getId());
+		oldobj->destroy();
+		deleteObject(oldobj);
+		delete oldobj;
+	}
 	insertObject(obj,obj->getShape()->m_center,obj->getShape()->m_angle);
 }
 
@@ -1627,48 +1641,53 @@ void Region::createObjectFromString(CharConv* cv, WorldObjectMap* players)
 void Region::createProjectileFromString(CharConv* cv)
 {
 
-	char type,frac;
+	GameObject::Type type;
+	GameObject::Subtype subt;
 	int id;
 	Projectile* proj;
 
 	cv->fromBuffer(type);
+	cv->fromBuffer(subt);
 	cv->fromBuffer(id);
 
-	DEBUG5("new projectile %i frac %i id %i",type,frac,id);
+	DEBUG5("new projectile %s  id %i",subt.c_str(),id);
 
-	proj = new Projectile((Projectile::ProjectileType) type,0, id);
+	proj = new Projectile(subt,0, id);
 
 	proj->fromString(cv);
 
+	Projectile* oldproj = getProjectile(proj->getId());
+	if (oldproj != 0)
+	{
+		DEBUG("Projectile %i already exists",oldproj->getId());
+		deleteProjectile(oldproj);
+		delete oldproj;
+	}
 	insertProjectile(proj,proj->getShape()->m_center);
 }
 
 void Region::createItemFromString(CharConv* cv)
 {
-	char type;
-	std::string subtype;
-	Item* item;
+	GameObject::Type type;
+	GameObject::Subtype subt;
 	int id;
-	short sx,sy;
-	cv->fromBuffer(sx);
-	cv->fromBuffer(sy);
-
-	cv->fromBuffer<char>(type);
-	cv->fromBuffer(subtype);
+	
+	cv->fromBuffer(type);
+	cv->fromBuffer(subt);
 	cv->fromBuffer(id);
+	
+	DEBUG5("got Item %i %s %s",id,type.c_str(),subt.c_str());
+	
+	DropItem* di = new DropItem(id);
+	di->fromString(cv);
 
-	item = ItemFactory::createItem((Item::Type) type, subtype,id);
-	item->fromString(cv);
-
-	DropItem* di = new DropItem;
-	di->m_item = item;
-	di->m_x = sx;
-	di->m_y = sy;
-	DEBUG5("dropped item %i at %i %i", id,sx,sy);
-	di->m_time = 0;
-
+	if (m_drop_items->count(id) >0)
+	{
+		DEBUG5("Item %i already exists",di->getId());
+		deleteItem(id);
+	}
 	m_drop_items->insert(std::make_pair(id,di));
-	m_drop_item_locations->insert(std::make_pair(sx*10000+sy,di));
+	m_drop_item_locations->insert(std::make_pair(di->getLocationId(),di));
 
 }
 
@@ -1711,7 +1730,7 @@ void Region::setRegionData(CharConv* cv,WorldObjectMap* players)
 	WorldObjectMap::iterator jt;
 	for (jt = m_objects->begin();jt!=m_objects->end();jt++)
 	{
-		if (jt->second->getTypeInfo()->m_type != WorldObject::TypeInfo::TYPE_PLAYER)
+		if (jt->second->getType() != "PLAYER")
 		{
 			jt->second->destroy();
 			deleteObject(jt->second);
@@ -1724,7 +1743,7 @@ void Region::setRegionData(CharConv* cv,WorldObjectMap* players)
 	// statische Objekte einlesen
 	short nr_stat;
 	cv->fromBuffer<short>(nr_stat);
-	DEBUG5("static objects: %i",nr_stat);
+	DEBUG("static objects: %i",nr_stat);
 
 	for (int i=0; i<nr_stat;i++)
 	{
@@ -1781,7 +1800,275 @@ void Region::setRegionData(CharConv* cv,WorldObjectMap* players)
 	
 }
 
+void Region::getRegionCheckData(CharConv* cv)
+{
 
+
+	// Anzahl der nicht  statischen Objekte eintragen
+	WorldObjectMap::iterator jt;
+	short nr=0;
+	for (jt = m_objects->begin();jt!=m_objects->end();++jt)
+	{
+		if (jt->second->getLayer() != WorldObject::LAYER_SPECIAL)
+			nr++;
+	}
+	DEBUG5("nonstatic objects: %i",nr);
+	cv->toBuffer<short>((short) nr);
+
+	// nicht statische Objekte in den Puffer eintragen
+
+	for (jt = m_objects->begin();jt!=m_objects->end();++jt)
+	{
+		if (jt->second->getLayer() != WorldObject::LAYER_SPECIAL)
+		{
+			cv->toBuffer((jt->second)->getId());
+			DEBUG5("object: %s",(jt->second)->getNameId().c_str());
+		}
+	}
+
+	// Anzahl der Projektile eintragen
+	cv->toBuffer<short>((short) m_projectiles->size());
+	DEBUG5("projectiles: %i",m_projectiles->size());
+
+	// Projektile in den Puffer eintragen
+	ProjectileMap::iterator kt;
+	for (kt = m_projectiles->begin(); kt != m_projectiles->end(); ++kt)
+	{
+		cv->toBuffer((kt->second)->getId());
+	}
+
+	cv->toBuffer<short>((short) m_drop_items->size());
+	DEBUG5("dropped items: %i",m_drop_items->size());
+
+	//  Items in den Puffer eintragen
+	DropItemMap::iterator lt;
+	for (lt = m_drop_items->begin(); lt != m_drop_items->end(); ++lt)
+	{
+		cv->toBuffer((lt->second)->getId());
+	}
+	
+	// Cutscene modus
+	cv->toBuffer(m_cutscene_mode);
+}
+
+void Region::checkRegionData(CharConv* cv)
+{
+	short nr;
+	std::set<int> objects;
+	int id;
+	
+	WorldObject* wo;
+	Projectile* pr;
+	DropItem* di;
+	
+	static std::set<int> objectstodelete;
+	static std::set<int> objectsmissing;
+	static std::set<int> projtodelete;
+	static std::set<int> projmissing;
+	static std::set<int> itemtodelete;
+	static std::set<int> itemmissing;
+	static std::set<int>::iterator setit;
+	
+	// Objekte die nach dem letzten Check fraglich waren loeschen
+	// bzw neu anfordern
+	WorldObjectList::iterator wit;
+	WorldObjectMap::iterator it;
+	
+	// WorldObjects
+	for (setit = objectstodelete.begin(); setit != objectstodelete.end(); ++setit)
+	{
+		wo = getObject((*setit));
+		if (wo != 0)
+		{
+			WARNING("object %i does not exist at server",wo->getId());
+			wo->destroy();
+			deleteObject(wo);
+			delete wo;
+		}
+	}
+	for (setit = objectsmissing.begin(); setit != objectsmissing.end(); ++setit)
+	{
+		wo = getObject((*setit));
+		if (wo ==0)
+		{
+			WARNING("object %i is missing",(*setit));
+			// fehlende Daten zur Region anfordern
+			PackageHeader header;
+			header.m_content = PTYPE_C2S_DATA_REQUEST; 	// Data Request von Client zu Server
+			header.m_number =1;
+
+			ClientDataRequest datareq;
+			datareq.m_data = ClientDataRequest::OBJECT;
+			datareq.m_id = *setit;
+			datareq.m_region_id = getId();
+
+			CharConv msg;
+			header.toString(&msg);
+			datareq.toString(&msg);
+
+			World::getWorld()->getNetwork()->pushSlotMessage(msg.getBitStream());
+		}
+	}
+	
+	// Projektile
+	for (setit = projtodelete.begin(); setit != projtodelete.end(); ++setit)
+	{
+		pr = getProjectile(*setit);
+		if (pr != 0)
+		{
+			WARNING("projectile %i does not exist at server",pr->getId());
+			deleteProjectile(pr);
+			delete pr;
+		}
+	}
+	for (setit = projmissing.begin(); setit != projmissing.end(); ++setit)
+	{
+		pr = getProjectile(*setit);
+		if (pr ==0)
+		{
+			WARNING("projectile %i is missing",(*setit));
+			// fehlende Daten zur Region anfordern
+			PackageHeader header;
+			header.m_content = PTYPE_C2S_DATA_REQUEST; 	// Data Request von Client zu Server
+			header.m_number =1;
+
+			ClientDataRequest datareq;
+			datareq.m_data = ClientDataRequest::PROJECTILE;
+			datareq.m_id = *setit;
+			datareq.m_region_id = getId();
+
+			CharConv msg;
+			header.toString(&msg);
+			datareq.toString(&msg);
+
+			World::getWorld()->getNetwork()->pushSlotMessage(msg.getBitStream());	
+		}
+	}
+	
+	// DropItem
+	for (setit = itemtodelete.begin(); setit != itemtodelete.end(); ++setit)
+	{
+		di = getDropItem(*setit);
+		if (di != 0)
+		{
+			WARNING("dropitem %i does not exist at server",di->getId());
+			deleteItem(di->getId(), true);
+		}
+	}
+	for (setit = itemmissing.begin(); setit != itemmissing.end(); ++setit)
+	{
+		di = getDropItem(*setit);
+		if (di ==0)
+		{
+			WARNING("dropitem %i is missing",(*setit));
+			// fehlende Daten zur Region anfordern
+			PackageHeader header;
+			header.m_content = PTYPE_C2S_DATA_REQUEST; 	// Data Request von Client zu Server
+			header.m_number =1;
+
+			ClientDataRequest datareq;
+			datareq.m_data = ClientDataRequest::ITEM;
+			datareq.m_id = *setit;
+			datareq.m_region_id = getId();
+
+			CharConv msg;
+			header.toString(&msg);
+			datareq.toString(&msg);
+
+			World::getWorld()->getNetwork()->pushSlotMessage(msg.getBitStream());	
+		}
+	}
+	
+	
+	objectstodelete.clear();
+	objectsmissing.clear();
+	projtodelete.clear();
+	projmissing.clear();
+	itemtodelete.clear();
+	itemmissing.clear();
+	
+	
+	
+	cv->fromBuffer(nr);
+	DEBUG5("nonstatic Objects %i",nr);
+	for (int i=0; i<nr; i++)
+	{
+		cv->fromBuffer(id);
+		objects.insert(id);
+		
+		if (m_objects->count(id) ==0)
+		{
+			// Objekt fehlt beim Client
+			objectsmissing.insert(id);
+		}
+	}
+	
+	for (it = m_objects->begin();it!=m_objects->end();++it)
+	{
+		wo = it->second;
+		if (objects.count(wo->getId()) ==0)
+		{
+			// Objekt ist beim Client zu viel
+			objectstodelete.insert(wo->getId());
+		}
+	}
+	
+	objects.clear();
+	
+	cv->fromBuffer(nr);
+	ProjectileMap::iterator kt;
+	
+	DEBUG5("projectiles %i",nr);
+	for (int i=0; i<nr; i++)
+	{
+		cv->fromBuffer(id);
+		objects.insert(id);
+		
+		if (m_projectiles->count(id) ==0)
+		{
+			// Objekt fehlt beim Client
+			projmissing.insert(id);
+		}
+	}
+	
+	for (kt = m_projectiles->begin(); kt!=m_projectiles->end();++kt)
+	{
+		pr = kt->second;
+		if (objects.count(pr->getId()) ==0)
+		{
+			// Objekt ist beim Client zu viel
+			projtodelete.insert(pr->getId());
+		}
+	}
+	
+	objects.clear();
+	
+	cv->fromBuffer(nr);
+	DropItemMap::iterator lt;
+	
+	DEBUG5("dropitems %i",nr);
+	for (int i=0; i<nr; i++)
+	{
+		cv->fromBuffer(id);
+		objects.insert(id);
+		
+		if (m_drop_items->count(id) ==0)
+		{
+			// Objekt fehlt beim Client
+			itemmissing.insert(id);
+		}
+	}
+	
+	for (lt = m_drop_items->begin(); lt!=m_drop_items->end();++lt)
+	{
+		di = lt->second;
+		if (objects.count(di->getId()) ==0)
+		{
+			// Objekt ist beim Client zu viel
+			itemtodelete.insert(di->getId());
+		}
+	}
+}
 
 void Region::setTile(Tile tile,short x, short y)
 {
@@ -1790,6 +2077,7 @@ void Region::setTile(Tile tile,short x, short y)
 
 bool  Region::dropItem(Item* item, Vector pos)
 {
+	DEBUG5("drop %s %i",item->m_subtype.c_str(), item->m_id);
 	// Menge der bereits getesteten Felder
 	std::set<int> tfields;
 
@@ -1851,26 +2139,25 @@ bool  Region::dropItem(Item* item, Vector pos)
 			DEBUG5("field is free");
 			// Stelle ist frei
 			// Item einfuegen
-			DropItem* di = new DropItem;
-			di->m_item = item;
-			di->m_x = (short) sx;
-			di->m_y = (short) sy;
+			DropItem* di = new DropItem(item);
+			di->setPosition(Vector(sx/2.0f, sy/2.0f));
 			DEBUG5("dropped item %i", sx*10000+sy);
-			di->m_time = 0;
-
-			m_drop_items->insert(std::make_pair(di->m_item->m_id,di));
+			
+			m_drop_items->insert(std::make_pair(di->getId(),di));
 			m_drop_item_locations->insert(std::make_pair(i,di));
 
 
-			DEBUG5("items dropped at %i %i",sx,sy);
+			DEBUG5("items dropped at %f %f locID %i %p",sx/2.0f,sy/2.0f, di->getLocationId(),item);
 
 			if (World::getWorld()->isServer())
 			{
+				
 				NetEvent event;
 				event.m_type = NetEvent::ITEM_DROPPED;
-				event.m_id = di->m_item->m_id;
+				event.m_id = di->getId();
 
 				insertNetEvent(event);
+				
 			}
 
 			return true;
@@ -1951,8 +2238,8 @@ bool Region::dropItem(Item::Subtype subtype, Vector pos, int magic_power)
 Item*  Region::getItemAt(Vector pos)
 {
 	DropItemMap::iterator it;
-	short sx = (int) (pos.m_x*2);
-	short sy = (int) (pos.m_y*2);
+	short sx = (int) (pos.m_x*2 + 0.5);
+	short sy = (int) (pos.m_y*2 + 0.5);
 	int id = sx*10000 + sy;
 
 	it = m_drop_item_locations->find(id);
@@ -1962,7 +2249,7 @@ Item*  Region::getItemAt(Vector pos)
 	}
 	else
 	{
-		return it->second->m_item;
+		return it->second->getItem();
 	}
 }
 
@@ -1976,7 +2263,7 @@ Item* Region::getItem(int id)
 	}
 	else
 	{
-		return it->second->m_item;
+		return it->second->getItem();
 	}
 }
 
@@ -2008,17 +2295,18 @@ bool Region::deleteItem(int id, bool delitem)
 	else
 	{
 		// Item Wrapper loeschen
-		int pos = 10000* it->second->m_x + it->second->m_y;
+		int pos = it->second->getLocationId();
 		it2 = m_drop_item_locations->find(pos);
 
+		
 		NetEvent event;
 		event.m_type = NetEvent::ITEM_REMOVED;
-		event.m_id = it->second->m_item->m_id;
+		event.m_id = it->second->getId();
 		insertNetEvent(event);
 
 		if (delitem)
 		{
-			delete it->second->m_item;
+			delete it->second->getItem();
 		}
 		delete (it->second);
 

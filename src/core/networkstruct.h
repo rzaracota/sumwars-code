@@ -31,8 +31,10 @@
 
 #include "network.h"
 #include "action.h"
-#include "worldobject.h"
 #include "geometry.h"
+
+#include "charconv.h"
+#include <list>
 
 /**
  * \enum PackageType
@@ -120,6 +122,16 @@ enum PackageType
    	* \brief Position der Wegpunkte
    	*/
   	PTYPE_S2C_WAYPOINTS,
+   
+   /**
+    * \brief Daten zum Pruefung der Synchronisation
+    */
+   PTYPE_S2C_DATA_CHECK,
+   
+   /**
+    * \brief Daten der Quests
+    */
+   PTYPE_S2C_QUEST,
 };
 
 /**
@@ -139,8 +151,8 @@ struct ClientDataRequest
 		REGION_ALL=3,
 		ITEM = 0x10,
 		PLAYERS = 0x20,
-		OBJECT = 0x30,
- 		PROJECTILE = 0x40,
+		OBJECT = 0x40,
+ 		PROJECTILE = 0x80,
 	};
 
 	/**
@@ -154,6 +166,12 @@ struct ClientDataRequest
 	 * \brief ID des geforderten Objektes
 	 */
 	int m_id;
+	
+	/**
+	 * \var short m_region_id
+	 * \brief Id der Region
+	*/
+	short m_region_id;
 
 	/**
 	 * \fn void toString(CharConv* cv)
@@ -164,6 +182,7 @@ struct ClientDataRequest
 	{
 		cv->toBuffer((char) m_data);
 		cv->toBuffer(m_id);
+		cv->toBuffer(m_region_id);
 	}
 
 
@@ -178,6 +197,7 @@ struct ClientDataRequest
 		cv->fromBuffer(tmp);
 		m_data = (Data) tmp;
 		cv->fromBuffer(m_id);
+		cv->fromBuffer(m_region_id);
 	}
 };
 
@@ -368,5 +388,161 @@ struct PackageHeader
 	 */
 	void fromString(CharConv* cv);
 };
+
+/**
+ * \struct NetEvent
+ * \brief beschreibt ein Ereignis in der Spielwelt das ueber das Netzwerk mitgeteilt wird
+ */
+struct NetEvent
+{
+	
+	/**
+	 * \enum EventType
+	 * \brief verschiedene Eventarten
+	 */
+	enum EventType
+	{
+		NOEVENT =0,
+  OBJECT_CREATED =1,
+  OBJECT_DESTROYED = 2,
+  OBJECT_STAT_CHANGED =3,
+		
+  PROJECTILE_CREATED = 5,
+  PROJECTILE_DESTROYED = 6,
+  PROJECTILE_STAT_CHANGED = 7,
+
+  PLAYER_JOINED = 10,
+  PLAYER_QUIT = 11,
+  PLAYER_CHANGED_REGION = 12,
+  
+  PLAYER_WAYPOINT_DISCOVERED = 15,
+  
+  PLAYER_ITEM_INSERT = 20,
+  PLAYER_ITEM_REMOVE = 21,
+  PLAYER_ITEM_SWAP = 22,
+  
+  PLAYER_PARTY_CHANGED = 24,
+  PLAYER_PARTY_CANDIDATE = 25,
+
+  PARTY_RELATION_CHANGED = 28,
+		
+  ITEM_DROPPED = 30,
+  ITEM_REMOVED = 31,
+  
+  TRADER_INVENTORY_REFRESH = 50,
+  TRADER_ITEM_BUY = 51,
+  TRADER_ITEM_SELL = 52,
+  
+  REGION_CUTSCENE = 40,
+		
+	};
+	
+	/**
+	 * \var EventType m_type
+	 * \brief Gibt die Art des Events an
+	 */
+	EventType m_type;
+	
+	enum GameObjectData
+	{
+		DATA_TYPE = 0x1,
+		DATA_SHAPE = 0x2,
+		DATA_STATE = 0x4,
+		DATA_SPEED = 0x8,
+		DATA_TIMER = 0x10,
+	};
+	
+	/**
+	 * \enum ObjectData
+	 * \brief Objektdaten die mit dem Event versendet werden
+	 */
+	enum WorldObjectData
+	{
+		DATA_COMMAND =0x100,
+		DATA_ACTION =0x200,
+		DATA_HP = 0x400,
+		DATA_EFFECTS = 0x800,
+		DATA_STATUS_MODS = 0x1000,
+		
+		DATA_ATTACK_WALK_SPEED = 0x4000,
+		DATA_NEXT_COMMAND = 0x8000,
+		DATA_ABILITIES = 0x10000,
+		DATA_ATTRIBUTES_LEVEL = 0x20000,
+		DATA_FLAGS = 0x40000,
+		DATA_EXPERIENCE=0x80000,
+		DATA_TRADE_INFO = 0x100000,
+		DATA_DIALOGUE = 0x200000,
+		DATA_WAYPOINT = 0x400000,
+		DATA_FIGHT_STAT= 0x800000,
+		DATA_SPEAK_TEXT = 0x1000000,
+		DATA_REVIVE_LOCATION = 0x2000000,
+		DATA_SKILL_ATTR_POINTS = 0x4000000,
+	};
+	
+	/**
+	 * \enum ProjectileData
+	 * \brief Projektildaten, die mit dem Event versendet werden
+	 */
+	enum ProjectileData
+	{
+		DATA_GOAL_OBJECT = 0x100,
+		DATA_MAX_RADIUS = 0x200,
+	};
+	
+	/**
+	 * \var int m_data
+	 * \brief Bitmaske die angibt welche Daten gesendet werden
+	 */
+	int m_data;
+	
+	/**
+	 * \var int m_id
+	 * \brief ID des Objektes, das das Ereignis erzeugt hat
+	 */
+	int m_id;
+	
+
+		
+	/**
+	 * \fn void toString(CharConv* cv)
+	 * \brief Konvertiert das Objekt in einen String und schreibt ihn in der Puffer
+	 * \param cv Ausgabepuffer
+	 */
+	void toString(CharConv* cv)
+	{
+		cv->toBuffer((char) m_type);
+		cv->toBuffer(m_data);
+		cv->toBuffer(m_id);
+	}
+	
+	/**
+	 * \fn void fromString(CharConv* cv)
+	 * \brief Erzeugt das Objekt aus einem String
+	 * \param cv Eingabepuffer
+	 */
+	void fromString(CharConv* cv)
+	{
+		char ctmp;
+		cv->fromBuffer(ctmp);
+		m_type = (EventType) ctmp;
+		cv->fromBuffer(m_data);
+		cv->fromBuffer(m_id);
+	}
+	
+	/**
+	 * \fn NetEvent()
+	 * \brief Konstruktor
+	 */
+	NetEvent()
+	{
+		m_id =0;
+		m_data =0;
+		m_type = NOEVENT;
+	}
+	
+};
+
+typedef std::list<NetEvent> NetEventList;
+
 
 #endif //NETWORKSTRUCT_H

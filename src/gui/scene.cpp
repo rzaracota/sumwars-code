@@ -9,17 +9,17 @@
 #define USE_OBJECTLOADER
 #define USE_ITEMLOADER
 
-std::map<Projectile::ProjectileType, RenderInfo> Scene::m_projectile_render_info;
+std::map<Projectile::Subtype, RenderInfo> Scene::m_projectile_render_info;
 
-std::map<WorldObject::TypeInfo::ObjectSubtype, RenderInfo> Scene::m_object_render_info;
+std::map<GameObject::Subtype, RenderInfo> Scene::m_object_render_info;
 
 std::map<Item::Subtype, RenderInfo> Scene::m_item_render_info;
 
-std::map<WorldObject::TypeInfo::ObjectSubtype, std::map<Action::ActionType, std::vector<std::string> > > Scene::m_object_animations;
+std::map<GameObject::Subtype, std::map<Action::ActionType, std::vector<std::string> > > Scene::m_object_animations;
 
 std::map<PlayerLook, RenderInfo> Scene::m_player_render_info;
 
-std::multimap< WorldObject::TypeInfo::ObjectSubtype, std::pair<bool, PlayerLook> > Scene::m_player_look;
+std::multimap< GameObject::Subtype, std::pair<bool, PlayerLook> > Scene::m_player_look;
 
 
 Scene::Scene(Document* doc,Ogre::RenderWindow* window)
@@ -214,45 +214,45 @@ void Scene::registerMeshes()
 	registerObject("stones3","stones3.mesh","");
 
 	// Geschosse
-	registerProjectile(Projectile::ARROW,"arrow.mesh","");
-	registerProjectile(Projectile::MAGIC_ARROW,"","Magic_Arrow");
-	registerProjectile(Projectile::FIRE_BOLT,"","Firebolt");
-	registerProjectile(Projectile::FIRE_BALL,"","Fireball");
-	registerProjectile(Projectile::FIRE_WALL,"","Firewall");
-	registerProjectile(Projectile::FIRE_WAVE,"","Firewave");
-	registerProjectile(Projectile::ICE_BOLT,"","Icebolt");
-	registerProjectile(Projectile::BLIZZARD,"","Blizzard");
-	registerProjectile(Projectile::ICE_RING,"","Icering");
-	registerProjectile(Projectile::FREEZE,"","Freeze");
-	registerProjectile(Projectile::LIGHTNING,"","Lightning");
-	registerProjectile(Projectile::THUNDERSTORM,"","Thunderstorm");
-	registerProjectile(Projectile::CHAIN_LIGHTNING,"","Chainlightning");
-	registerProjectile(Projectile::STATIC_SHIELD,"","Static_Shield");
-	registerProjectile(Projectile::FIRE_ARROW,"arrow.mesh","Fire_Arrow");
-	registerProjectile(Projectile::ICE_ARROW ,"arrow.mesh","Ice_Arrow");
-	registerProjectile(Projectile::WIND_ARROW,"arrow.mesh","Wind_Arrow");
-	registerProjectile(Projectile::GUIDED_ARROW,"arrow.mesh","Guided_Arrow");
-	registerProjectile(Projectile::EXPLOSION,"","Explosion");
-	registerProjectile(Projectile::FIRE_EXPLOSION,"","Fire_Explosion");
-	registerProjectile(Projectile::ICE_EXPLOSION,"","Ice_Explosion");
-	registerProjectile(Projectile::WIND_EXPLOSION,"","Wind_Explosion");
-	registerProjectile(Projectile::LIGHT_BEAM,"","Lightbeam");
-	registerProjectile(Projectile::ELEM_EXPLOSION,"","ElemExplosion");
-	registerProjectile(Projectile::ACID,"","Acid");
-	registerProjectile(Projectile::DIVINE_BEAM,"","Divine_Beam");
-	registerProjectile(Projectile::HYPNOSIS,"","Hypnosis");
+	registerProjectile("ARROW","arrow.mesh","");
+	registerProjectile("MAGIC_ARROW","","Magic_Arrow");
+	registerProjectile("FIRE_BOLT","","Firebolt");
+	registerProjectile("FIRE_BALL","","Fireball");
+	registerProjectile("FIRE_WALL","","Firewall");
+	registerProjectile("FIRE_WAVE","","Firewave");
+	registerProjectile("ICE_BOLT","","Icebolt");
+	registerProjectile("BLIZZARD","","Blizzard");
+	registerProjectile("ICE_RING","","Icering");
+	registerProjectile("FREEZE","","Freeze");
+	registerProjectile("LIGHTNING","","Lightning");
+	registerProjectile("THUNDERSTORM","","Thunderstorm");
+	registerProjectile("CHAIN_LIGHTNING","","Chainlightning");
+	registerProjectile("STATIC_SHIELD","","Static_Shield");
+	registerProjectile("FIRE_ARROW","arrow.mesh","Fire_Arrow");
+	registerProjectile("ICE_ARROW" ,"arrow.mesh","Ice_Arrow");
+	registerProjectile("WIND_ARROW","arrow.mesh","Wind_Arrow");
+	registerProjectile("GUIDED_ARROW","arrow.mesh","Guided_Arrow");
+	registerProjectile("EXPLOSION","","Explosion");
+	registerProjectile("FIRE_EXPLOSION","","Fire_Explosion");
+	registerProjectile("ICE_EXPLOSION","","Ice_Explosion");
+	registerProjectile("WIND_EXPLOSION","","Wind_Explosion");
+	registerProjectile("LIGHT_BEAM","","Lightbeam");
+	registerProjectile("ELEM_EXPLOSION","","ElemExplosion");
+	registerProjectile("ACID","","Acid");
+	registerProjectile("DIVINE_BEAM","","Divine_Beam");
+	registerProjectile("HYPNOSIS","","Hypnosis");
 
 
 	registerItem("gold","gold.mesh");
 
 }
 
-void Scene::registerObject(WorldObject::TypeInfo::ObjectSubtype subtype, std::string mesh, std::string particle_system, float scaling_factor)
+void Scene::registerObject(GameObject::Subtype subtype, std::string mesh, std::string particle_system, float scaling_factor)
 {
 	m_object_render_info.insert(std::make_pair(subtype,RenderInfo(mesh,particle_system,scaling_factor)));
 }
 
-void Scene::registerObjectAnimations(WorldObject::TypeInfo::ObjectSubtype subtype, std::map<Action::ActionType, std::vector<std::string> > &animations)
+void Scene::registerObjectAnimations(GameObject::Subtype subtype, std::map<Action::ActionType, std::vector<std::string> > &animations)
 {
 	if (!animations.empty())
 	{
@@ -260,10 +260,10 @@ void Scene::registerObjectAnimations(WorldObject::TypeInfo::ObjectSubtype subtyp
 	}
 }
 
-void Scene::registerAttachedMesh(WorldObject::TypeInfo::ObjectSubtype subtype, std::string bone, std::string mesh)
+void Scene::registerAttachedMesh(GameObject::Subtype subtype, std::string bone, std::string mesh)
 {
     // Renderinformationen suchen
-    std::map<WorldObject::TypeInfo::ObjectSubtype, RenderInfo>::iterator it = m_object_render_info.find(subtype);
+    std::map<GameObject::Subtype, RenderInfo>::iterator it = m_object_render_info.find(subtype);
     if (it != m_object_render_info.end())
     {
         // gefunden
@@ -271,7 +271,7 @@ void Scene::registerAttachedMesh(WorldObject::TypeInfo::ObjectSubtype subtype, s
     }
 }
 
-void Scene::registerPlayerLook(WorldObject::TypeInfo::ObjectSubtype subtype, PlayerLook look, std::string mesh, bool male)
+void Scene::registerPlayerLook(GameObject::Subtype subtype, PlayerLook look, std::string mesh, bool male)
 {
 	m_player_render_info.insert(std::make_pair(look, RenderInfo(mesh, "")));
 	m_player_look.insert(std::make_pair(subtype, std::make_pair(male,look)));
@@ -284,14 +284,14 @@ void Scene::registerItem(Item::Subtype subtype, std::string mesh, std::string pa
 
 
 
-void Scene::registerProjectile(Projectile::ProjectileType type, std::string mesh, std::string particle_system, float scaling_factor)
+void Scene::registerProjectile(Projectile::Subtype type, std::string mesh, std::string particle_system, float scaling_factor)
 {
 	m_projectile_render_info.insert(std::make_pair(type,RenderInfo(mesh,particle_system,scaling_factor)));
 }
 
-RenderInfo  Scene::getObjectRenderInfo(WorldObject::TypeInfo::ObjectSubtype subtype)
+RenderInfo  Scene::getObjectRenderInfo(GameObject::Subtype subtype)
 {
-	std::map<WorldObject::TypeInfo::ObjectSubtype, RenderInfo>::iterator i= m_object_render_info.find(subtype);
+	std::map<GameObject::Subtype, RenderInfo>::iterator i= m_object_render_info.find(subtype);
 	if (i != m_object_render_info.end())
 	{
 		return i->second;
@@ -332,9 +332,9 @@ RenderInfo  Scene::getItemRenderInfo(Item::Subtype subtype)
 	}
 }
 
-RenderInfo  Scene::getProjectileRenderInfo(Projectile::ProjectileType type)
+RenderInfo  Scene::getProjectileRenderInfo(Projectile::Subtype type)
 {
-	std::map<Projectile::ProjectileType, RenderInfo>::iterator i= m_projectile_render_info.find(type);
+	std::map<Projectile::Subtype, RenderInfo>::iterator i= m_projectile_render_info.find(type);
 	if (i != m_projectile_render_info.end())
 	{
 		return i->second;
@@ -346,9 +346,9 @@ RenderInfo  Scene::getProjectileRenderInfo(Projectile::ProjectileType type)
 	}
 }
 
-void Scene::getPlayerLook(WorldObject::TypeInfo::ObjectSubtype subtype, std::list< std::pair<bool, PlayerLook> > &looks)
+void Scene::getPlayerLook(GameObject::Subtype subtype, std::list< std::pair<bool, PlayerLook> > &looks)
 {
-	std::multimap< WorldObject::TypeInfo::ObjectSubtype, std::pair<bool, PlayerLook> >::iterator it,jt;
+	std::multimap< GameObject::Subtype, std::pair<bool, PlayerLook> >::iterator it,jt;
 	it = m_player_look.lower_bound(subtype);
 	jt = m_player_look.upper_bound(subtype);
 
@@ -406,7 +406,7 @@ void Scene::update(float ms)
 		return;
 
 	// Nummer der region in der sich der Spieler befindet
-	short region_nr = player->getGridLocation()->m_region;
+	short region_nr = player->getRegionId();
 
 
 
@@ -525,7 +525,7 @@ void  Scene::updateObjects()
 		if (obj->getState() == WorldObject::STATE_STATIC)
 			continue;
 
-
+		DEBUG5("object %s %i at %f %f",obj->getSubtype().c_str(), obj->getId(), obj->getShape()->m_center.m_x,obj->getShape()->m_center.m_y);
 		// Darstellung fuer das Objekt aktualisieren
 		updateObject(obj);
 	}
@@ -584,21 +584,20 @@ void Scene::updateItems()
 		else
 		{
 			// Koordinaten des Objektes
-			float x=di->m_x;
-			float y=di->m_y;
-			float z = di->m_height;
+			Vector pos = di->getPosition();
+			float z = di->getHeight();
 
 			// Ortsvektor des Objektes
-			Ogre::Vector3 vec(x*25,z*50,y*25);
+			Ogre::Vector3 vec(pos.m_x*50,z*50,pos.m_y*50);
 
 			// an die richtige Stelle verschieben
 			Ogre::SceneNode* itm_node = m_scene_manager->getSceneNode(node_name);
 			itm_node->setPosition(vec);
 
-			float angle = di->m_angle_z;
+			float angle = di->getShape()->m_angle;
 			itm_node->setDirection(sin(angle),0,-cos(angle),Ogre::Node::TS_WORLD);
 
-			angle = di->m_angle_x;
+			angle = di->getAngleX();
 			itm_node->pitch(Ogre::Radian(angle));
 
 		}
@@ -610,22 +609,20 @@ void Scene::updateObject(WorldObject* obj)
 	std::string name = obj->getNameId();
 	DEBUG5("handle obj %s",name.c_str());
 	std::string node_name = name + "Node";
-
 	// Ogre::Entity des Objektes
-	Ogre::Entity* obj_ent;
+	Ogre::Entity* obj_ent=0;
 	Ogre::SceneNode* node;
-
+	
 	if (!m_scene_manager->hasSceneNode(node_name))
 	{
 		// Objekt existiert noch nicht in der Szene
 
 
-
 		//Objekt anlegen
 		createObject(obj,name);
+		DEBUG5("created obj %s",name.c_str());
 	}
-
-
+	
 	// Koordinaten des Objektes
 	float x=obj->getShape()->m_center.m_x;
 	float y=obj->getShape()->m_center.m_y;
@@ -646,8 +643,7 @@ void Scene::updateObject(WorldObject* obj)
 	std::ostringstream num("");
 	std::string mod_name;
 
-
-
+	
 	// Animation anpassen
 	// Status der Animation
 	Ogre::AnimationState* anim;
@@ -656,7 +652,8 @@ void Scene::updateObject(WorldObject* obj)
 	DEBUG5("animation");
 	// Aktion des Objeks
 	Creature* cr=0;
-	if (obj->getTypeInfo()->m_type != WorldObject::TypeInfo::TYPE_FIXED_OBJECT)
+	
+	if (obj->getType() != "FIXED_OBJECT")
 	{
 		cr = static_cast<Creature*>(obj);
 		Action::ActionType act = cr->getAction()->m_type;
@@ -673,9 +670,9 @@ void Scene::updateObject(WorldObject* obj)
 		// Wenn in der Datenbank ein Satz Animationen fuer die Aktion enthalten diesen verwenden
 		// (sonst den Standardsatz
 		std::vector<std::string>* animations = &(aci->m_animation[cr->getActionEquip()]);
-		if (m_object_animations.count(cr->getTypeInfo()->m_subtype) != 0)
+		if (m_object_animations.count(cr->getSubtype()) != 0)
 		{
-			animations = &(m_object_animations[cr->getTypeInfo()->m_subtype][act]);
+			animations = &(m_object_animations[cr->getSubtype()][act]);
 		}
 
 		std::string anim_name = "";
@@ -738,7 +735,7 @@ void Scene::updateObject(WorldObject* obj)
 
 	DEBUG5("extra meshes");
     // angehaengte Meshes an die verwendeten Items anpassen
-    if (obj->getTypeInfo()->m_type == WorldObject::TypeInfo::TYPE_PLAYER)
+    if (obj->getType() == "PLAYER")
     {
         // Objekt ist ein Spieler
         Player* cmp = static_cast<Player*>(obj);
@@ -869,7 +866,7 @@ void Scene::updateObject(WorldObject* obj)
 	}
 
 	// Sound aktualisieren
-	if (obj->getTypeInfo()->m_type == WorldObject::TypeInfo::TYPE_PLAYER)
+	if (obj->getType() == "PLAYER")
 	{
 		std::string sname= name;
 		sname += ":weapon";
@@ -898,7 +895,7 @@ void Scene::updateObject(WorldObject* obj)
 		}
 	}
 
-	if (obj->getTypeInfo()->m_type != WorldObject::TypeInfo::TYPE_FIXED_OBJECT)
+	if (obj->getType() != "FIXED_OBJECT")
 	{
 		// Sound durch Aktion
 		std::string actsoundname = name;
@@ -910,9 +907,9 @@ void Scene::updateObject(WorldObject* obj)
 			if (cr->getAction()->m_elapsed_time < 200)
 			{
 				Action::ActionType act = cr->getAction()->m_type;
-				SoundTarget target = cr->getTypeInfo()->m_subtype;
+				SoundTarget target = cr->getSubtype();
 
-				if (obj->getTypeInfo()->m_type == WorldObject::TypeInfo::TYPE_PLAYER)
+				if (obj->getType() == "PLAYER")
 				{
 					target = "hero";
 				}
@@ -939,9 +936,9 @@ void Scene::updateObject(WorldObject* obj)
 
 		if (effects[CreatureDynAttr::BLEEDING]> 50)
 		{
-			SoundTarget target = cr->getTypeInfo()->m_subtype;
+			SoundTarget target = cr->getSubtype();
 
-			if (obj->getTypeInfo()->m_type == WorldObject::TypeInfo::TYPE_PLAYER)
+			if (obj->getType() == "PLAYER")
 			{
 				target = "hero";
 			}
@@ -1143,7 +1140,7 @@ void Scene::createObject(WorldObject* obj,std::string& name, bool is_static)
 	}
 	else
 	{
-		ri = getObjectRenderInfo(obj->getTypeInfo()->m_subtype);
+		ri = getObjectRenderInfo(obj->getSubtype());
 	}
 
 	// Je nach Typ das richtige Mesh benutzen
@@ -1169,7 +1166,7 @@ void Scene::createObject(WorldObject* obj,std::string& name, bool is_static)
     }
 
 	// Fuer Spieler ein extra Soundobjekt fuer die Waffe anlegen
-	if (obj->getTypeInfo()->m_type == WorldObject::TypeInfo::TYPE_PLAYER)
+	if (obj->getType() == "PLAYER")
 	{
 		std::string sname= name;
 		sname += ":weapon";
@@ -1195,9 +1192,9 @@ void Scene::createItem(DropItem* di, std::string& name)
 
 	// SoundObjekt anlegen
 	SoundObject* obj = SoundSystem::createSoundObject(name);
-	if (di->m_height > 0)
+	if (di->getHeight() > 0.1f)
 	{
-		SoundTarget target = di->m_item->m_subtype;
+		SoundTarget target = di->getSubtype();
 		target += ":drop";
 		SoundName sound = SoundSystem::getSoundName(target);
 		obj->setSound(sound);
@@ -1205,10 +1202,11 @@ void Scene::createItem(DropItem* di, std::string& name)
 	}
 	DEBUG5("created item %s",name.c_str());
 	// Ortsvektor des Items
-	Ogre::Vector3 vec(di->m_x*25,0,di->m_y*25);
+	Vector pos = di->getPosition();
+	Ogre::Vector3 vec(pos.m_x*50,0,pos.m_y * 50);
 
 	// in die Liste einfuegen
-	m_drop_items->insert(std::make_pair(di->m_item->m_id,name));
+	m_drop_items->insert(std::make_pair(di->getId(),name));
 
 	// Node anlegen
 	Ogre::SceneNode* obj_node;
@@ -1216,14 +1214,14 @@ void Scene::createItem(DropItem* di, std::string& name)
 
 
 	// Informationen zum Rendern anfordern
-	RenderInfo ri = getItemRenderInfo(di->m_item->m_subtype);
+	RenderInfo ri = getItemRenderInfo(di->getSubtype());
 
 	// Je nach Typ das richtige Mesh benutzen
 	Ogre::Entity* ent;
 	ent = m_scene_manager->createEntity(name, ri.m_mesh);
 
 	// Objekt drehen
-	float angle = di->m_angle_z;
+	float angle = di->getShape()->m_angle;
 	obj_node->setDirection(sin(angle),0,-cos(angle),Ogre::Node::TS_WORLD);
 
 	obj_node->attachObject(ent);
@@ -1305,7 +1303,7 @@ void Scene::updateProjectiles()
 
 		if (pr->getTimer()<200)
 		{
-			SoundTarget target = SoundSystem::getProjectileSound(pr->getType());
+			SoundTarget target = SoundSystem::getProjectileSound(pr->getSubtype());
 			SoundName sound;
 			sound = SoundSystem::getSoundName(target);
 			SoundObject* obj = SoundSystem::getSoundObject(name);
@@ -1347,7 +1345,7 @@ void Scene::createProjectile(Projectile* pr, std::string& name)
 	Ogre::SceneNode* obj_node;
 	obj_node =m_scene_manager->getRootSceneNode()->createChildSceneNode(node_name,vec);
 
-	Projectile::ProjectileType type = pr->getType();
+	Projectile::Subtype type = pr->getSubtype();
 	Ogre::Entity *ent =0;
 	//Partikelsystem anlegen
 	std::string particle_name = name + "Particle";

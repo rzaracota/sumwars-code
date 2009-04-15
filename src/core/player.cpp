@@ -70,9 +70,9 @@ void PlayerCamera::update(float time)
 
 //Constructors/Destructors
 
-Player::Player( int id, TypeInfo::ObjectSubtype subtype) : Creature( id)
+Player::Player( int id, Subtype subtype) : Creature( id)
 {
-	getTypeInfo()->m_subtype = subtype;
+	setSubtype(subtype);
 	bool tmp=Player::init();
 	if (!tmp)
 	{
@@ -117,12 +117,12 @@ bool Player::init()
 	
 	m_network_slot=-1;
 	m_package_number =0;
-	getTypeInfo()->m_type = TypeInfo::TYPE_PLAYER;
+	setType("PLAYER");
 	m_category = HUMAN;
 
 	getShape()->m_type = Shape::CIRCLE;
 	getShape()->m_radius = 0.5;
-	m_layer = (LAYER_BASE | LAYER_AIR);
+	setLayer(LAYER_BASE | LAYER_AIR);
 	getShape()->m_angle =0;
 
 	bas->m_step_length=1.5;
@@ -177,7 +177,7 @@ bool Player::init()
 	
 	Item* si;
 	Equipement* equ = getEquipement();
-	if (getTypeInfo()->m_subtype == "warrior")
+	if (getSubtype() == "warrior")
 	{
 		dyn->m_health = 200;
 		bas->m_max_health = 200;
@@ -210,7 +210,7 @@ bool Player::init()
 
 		
 	}
-	else if (getTypeInfo()->m_subtype == "archer")
+	else if (getSubtype() == "archer")
 	{
 		dyn->m_health = 150;
 		bas->m_max_health = 150;
@@ -244,7 +244,7 @@ bool Player::init()
 		
 		
 	}
-	else if (getTypeInfo()->m_subtype == "mage")
+	else if (getSubtype() == "mage")
 	{
 		dyn->m_health = 100;
 		bas->m_max_health = 100;
@@ -280,7 +280,7 @@ bool Player::init()
 		// Debugging
 		//bas->m_abilities[3] = 0xffffff;
 	}
-	else if (getTypeInfo()->m_subtype == "priest")
+	else if (getSubtype() == "priest")
 	{
 		dyn->m_health = 200;
 		bas->m_max_experience = 100;
@@ -327,6 +327,7 @@ bool Player::init()
 		calcBaseAttrMod();
 	}
 	
+	clearNetEventMask();
 	return true;
 }
 
@@ -349,7 +350,7 @@ void  Player::revive()
 	getNextCommand()->m_type = Action::NOACTION;
 
 	// Bewegung auf 0 setzen
-	m_speed = Vector(0,0);
+	setSpeed(Vector(0,0));
 
 	// Wegfindeinformationen auf 0 setzen
 	m_small_path_info=0;
@@ -381,7 +382,7 @@ void  Player::revive()
 		getDynAttr()->m_effect_time[i]=0;
 	}
 
-	setState(STATE_ACTIVE);
+	setState(STATE_ACTIVE,false);
 	clearCommand(false);
 	getNextCommand()->m_type = Action::NOACTION;
 	getNextCommand()->m_damage_mult = 1;
@@ -496,7 +497,7 @@ bool Player::onGamefieldClick(ClientCommand* command)
 				}
 				
 				
-				if (wo->getTypeInfo()->m_type==TypeInfo::TYPE_FIXED_OBJECT )
+				if (wo->getType()=="FIXED_OBJECT" )
 				{
 					// festes Objekt benutzen
 					com->m_type =Action::USE;
@@ -525,7 +526,7 @@ bool Player::onGamefieldClick(ClientCommand* command)
 
 					meleedir = true;
 				}
-				m_event_mask |= NetEvent::DATA_NEXT_COMMAND;
+				addToNetEventMask(NetEvent::DATA_NEXT_COMMAND);
 			}
 		}
 		else
@@ -615,7 +616,7 @@ bool Player::onGamefieldClick(ClientCommand* command)
 		}
 	}
 
-	m_event_mask |= NetEvent::DATA_NEXT_COMMAND;
+	addToNetEventMask(NetEvent::DATA_NEXT_COMMAND);
 	DEBUG5("resulting command %i goal %f %f id %i",com->m_type,com->m_goal.m_x,com->m_goal.m_y, com->m_goal_object_id);
 
 	return true;
@@ -966,11 +967,11 @@ bool Player::checkItemRequirements(Item* itm)
 	
 	// testen ob Item fuer die Charakterklasse zugelassen ist
 	char mask = Item::REQ_WARRIOR;
-	if (getTypeInfo()->m_subtype == "mage")
+	if (getSubtype() == "mage")
 		mask = Item::REQ_MAGE;
-	if (getTypeInfo()->m_subtype == "archer")
+	if (getSubtype() == "archer")
 		mask = Item::REQ_ARCHER;
-	if (getTypeInfo()->m_subtype == "priest")
+	if (getSubtype() == "priest")
 		mask = Item::REQ_PRIEST;
 
 	if (itm->m_char_req & mask != mask)
@@ -1030,12 +1031,12 @@ void Player::increaseAttribute(CreatureBaseAttr::Attribute attr)
 			getBaseAttr()->m_max_health += 5;
 			getBaseAttrMod()->m_max_health += 5;
 			getDynAttr()->m_health +=5;
-			m_event_mask |= NetEvent::DATA_HP | NetEvent::DATA_MAX_HP;
+			addToNetEventMask(NetEvent::DATA_HP | NetEvent::DATA_ATTRIBUTES_LEVEL);
 			break;
 		case (CreatureBaseAttr::DEXTERITY):
 			getBaseAttr()->m_dexterity++;
 			getBaseAttr()->m_attack_speed +=20;
-			m_event_mask |= NetEvent::DATA_ATTACK_SPEED;
+			addToNetEventMask(NetEvent::DATA_ATTACK_WALK_SPEED);
 			break;
 		case (CreatureBaseAttr::WILLPOWER):
 			getBaseAttr()->m_willpower++;
@@ -1047,7 +1048,7 @@ void Player::increaseAttribute(CreatureBaseAttr::Attribute attr)
 	}
 	
 	calcBaseAttrMod();
-	m_event_mask |= NetEvent::DATA_SKILL_ATTR_POINTS;
+	addToNetEventMask(NetEvent::DATA_SKILL_ATTR_POINTS);
 	
 }
 
@@ -1086,8 +1087,8 @@ void Player::gainLevel()
 	// Schaden neu berechnen
 	recalcDamage();
 
-	m_event_mask |= NetEvent::DATA_LEVEL | NetEvent::DATA_HP | NetEvent::DATA_MAX_HP | NetEvent::DATA_EXPERIENCE;
-	m_event_mask |= NetEvent::DATA_SKILL_ATTR_POINTS;
+	addToNetEventMask(NetEvent::DATA_ATTRIBUTES_LEVEL | NetEvent::DATA_HP | NetEvent::DATA_EXPERIENCE);
+	addToNetEventMask(NetEvent::DATA_SKILL_ATTR_POINTS);
 }
 
 
@@ -1168,6 +1169,9 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 			break;
 
 		case BUTTON_LEAVE:
+			if (World::getWorld()->isCooperative())
+				break;
+			
 			if (getParty()->getNrMembers() ==1)
 			{
 				if (m_candidate_party >=0)
@@ -1196,7 +1200,7 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 			break;
 
 		case BUTTON_SAVE_QUIT:
-			setState(STATE_QUIT);
+			setState(STATE_QUIT,false);
 			DEBUG("player wants to quit");
 			break;
 
@@ -1244,7 +1248,7 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 
 					calcBaseAttrMod();
 					
-					m_event_mask |= NetEvent::DATA_SKILL_ATTR_POINTS;
+					addToNetEventMask( NetEvent::DATA_SKILL_ATTR_POINTS);
 				}
 			}
 			break;
@@ -1436,7 +1440,9 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 			if (getAction()->m_type == Action::WALK)
 			{
 				// Laufgeschwindigkeit entsprechend erhoehen
-				m_speed *= (1/mult);
+				Vector speed = getSpeed();
+				speed *= (1/mult);
+				setSpeed(speed);
 
 			}
 			getAction()->m_time *= mult;
@@ -1460,7 +1466,7 @@ void Player::abortAction()
 	if (getAction()->m_type == Action::WALK)
 	{
 		// Position zurueck setzen
-		getShape()->m_center -= m_speed*time;
+		moveTo(getPosition() - getSpeed()*time);
 	}
 
 	// Timer wieder zuruecksetzen
@@ -1476,7 +1482,7 @@ void Player::abortAction()
 		m_timer2_max=0;
 	}
 
-	m_event_mask |= NetEvent::DATA_ACTION;
+	addToNetEventMask(NetEvent::DATA_ACTION);
 }
 
 bool Player::update(float time)
@@ -1510,7 +1516,7 @@ void Player::performActionCritPart(Vector goal, WorldObject* goalobj)
 
 			// Item einfuegen
 			insertItem(itm);
-
+			DEBUG5("take item %p",itm);
 		}
 		else
 		{
@@ -1531,7 +1537,7 @@ bool Player::checkRole(std::string role)
 		return true;
 	}
 	
-	if (role == getTypeInfo()->m_subtype)
+	if (role == getSubtype())
 	{
 		return true;
 	}
@@ -1674,7 +1680,7 @@ void Player::calcBaseDamage(Action::ActionType act,Damage& dmg)
 		
 	}
 	
-	if (getTypeInfo()->m_subtype == "mage")
+	if (getSubtype() == "mage")
 	{
 		CreatureBaseAttr* basm = getBaseAttrMod();
 		dmg.m_min_damage[Damage::FIRE] -= basm->m_magic_power/10;
@@ -1712,7 +1718,7 @@ void Player::calcBaseAttrMod()
 
 			if (si->m_weapon_attr ->m_dattack_speed!=0)
 			{
-				m_event_mask |= NetEvent::DATA_ATTACK_SPEED;
+				addToNetEventMask(NetEvent::DATA_ATTACK_WALK_SPEED);
 			}
 		}
 	}
@@ -1784,7 +1790,7 @@ void Player::calcBaseAttrMod()
 
 
 	// Blockbonus durch Geschick (nur wenn schon ein Blockwert vorhanden ist)
-	if (getBaseAttrMod()->m_block!=0 || getTypeInfo()->m_subtype == "archer")
+	if (getBaseAttrMod()->m_block!=0 || getSubtype() == "archer")
 	{
 		getBaseAttrMod()->m_block += getBaseAttrMod()->m_dexterity/ 4;
 	}
@@ -2041,9 +2047,9 @@ void Player::toSavegame(CharConv* cv)
 	// Version richtig setzen
 	cv->toBuffer((short) World::getVersion());
 	
-	cv->toBuffer(getTypeInfo()->m_subtype,10);
-	cv->toBuffer(m_name,32);
-	cv->toBuffer(m_look,20);
+	cv->toBuffer(getSubtype());
+	cv->toBuffer(m_name);
+	cv->toBuffer(m_look);
 	cv->printNewline();
 	
 	cv->toBuffer(getBaseAttr()->m_level);
@@ -2140,9 +2146,9 @@ void Player::fromSavegame(CharConv* cv, bool local)
 	short version;
 	cv->fromBuffer<short>(version);
 
-	cv->fromBuffer(getTypeInfo()->m_subtype,10);
-	cv->fromBuffer(m_name,32);
-	cv->fromBuffer(m_look,20);
+	cv->fromBuffer(getSubtype());
+	cv->fromBuffer(m_name);
+	cv->fromBuffer(m_look);
 	
 	cv->fromBuffer(getBaseAttr()->m_level);
 	cv->fromBuffer<float>(getBaseAttr()->m_max_health);
@@ -2180,7 +2186,7 @@ void Player::fromSavegame(CharConv* cv, bool local)
 		cv->fromBuffer<int>(getBaseAttr()->m_abilities[i]);
 	}
 
-	DEBUG5("name %s class %s level %i",m_name.c_str(), getTypeInfo()->m_subtype.c_str(), getBaseAttr()->m_level);
+	DEBUG5("name %s class %s level %i",m_name.c_str(), getSubtype().c_str(), getBaseAttr()->m_level);
 	
 	short tmp;
 	cv->fromBuffer<short>(tmp);
@@ -2285,14 +2291,14 @@ bool Player::setValue(std::string valname)
 	{
 		m_attribute_points = lua_tointeger(EventSystem::getLuaState() ,-1);
 		lua_pop(EventSystem::getLuaState(), 1);
-		m_event_mask |= NetEvent::DATA_SKILL_ATTR_POINTS;
+		addToNetEventMask(NetEvent::DATA_SKILL_ATTR_POINTS);
 		return true;
 	}
 	else if (valname =="skill_points")
 	{
 		m_skill_points = lua_tointeger(EventSystem::getLuaState() ,-1);
 		lua_pop(EventSystem::getLuaState(), 1);
-		m_event_mask |= NetEvent::DATA_SKILL_ATTR_POINTS;
+		addToNetEventMask(NetEvent::DATA_SKILL_ATTR_POINTS);
 		return true;
 	}
 	else if (valname =="gold")
@@ -2392,13 +2398,13 @@ void Player::setRevivePosition(RegionLocation regloc)
 {
 	DEBUG("changed revive position");
 	m_revive_position = regloc;
-	m_event_mask |= NetEvent::DATA_REVIVE_LOCATION;
+	addToNetEventMask(NetEvent::DATA_REVIVE_LOCATION);
 }
 
 void Player::setUsingWaypoint(bool val)
 {
 	DEBUG5("player %i using waypoint ",getId());
 	m_using_waypoint = val;
-	m_event_mask |= NetEvent::DATA_WAYPOINT;
+	addToNetEventMask(NetEvent::DATA_WAYPOINT);
 }
 

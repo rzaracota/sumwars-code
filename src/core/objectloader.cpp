@@ -41,25 +41,17 @@ bool  ObjectLoader::loadMonster(TiXmlNode* node)
 		
 		// Typinformationen auslesen
 		std::string type,subtype, category, fraction,layer;
-		attr.getString("type",type,"MONSTER");
+		attr.getString("type",data->m_type,"MONSTER");
 		attr.getString("subtype",subtype);
 		attr.getString("category",category);
 		attr.getString("fraction",fraction,"MONSTER");
 		attr.getString("layer",layer,"NORMAL");
 		attr.getString("name",data->m_name,subtype);
-		data->m_type_info.m_subtype = subtype;
+		data->m_subtype = subtype;
 		
 		DEBUG5("monster: %s %s %s %s",type.c_str(), subtype.c_str(), category.c_str(), fraction.c_str());
 		
 		// String in enums umwandeln
-		if (type == "NONE") 
-			data->m_type_info.m_type = WorldObject::TypeInfo::TYPE_NONE;
-		else if (type ==  "PLAYER")
-			data->m_type_info.m_type = WorldObject::TypeInfo::TYPE_PLAYER;
-		else if (type ==  "MONSTER")
-			data->m_type_info.m_type = WorldObject::TypeInfo::TYPE_MONSTER;
-		else if (type ==  "NPC")
-			data->m_type_info.m_type = WorldObject::TypeInfo::TYPE_NPC;
 
 		if (fraction ==  "NOFRACTION")
 			data->m_fraction = WorldObject::NOFRACTION;
@@ -381,7 +373,7 @@ bool ObjectLoader::loadFixedObject(TiXmlNode* node)
 		attr.parseElement(node->ToElement());
 		
 		FixedObjectData* data = new FixedObjectData;
-		WorldObject::TypeInfo::ObjectSubtype subtype;
+		GameObject::Subtype subtype;
 		attr.getString("subtype",subtype);
 		std::string layer;
 		attr.getString("layer",layer, "NORMAL");

@@ -110,42 +110,42 @@ bool CreatureBaseAttr::setValue(std::string valname, int& event_mask)
 	{
 		m_level = lua_tointeger(EventSystem::getLuaState() ,-1);
 		lua_pop(EventSystem::getLuaState(), 1);
-		event_mask |= NetEvent::DATA_LEVEL;
+		event_mask |= NetEvent::DATA_ATTRIBUTES_LEVEL;
 		return true;
 	}
 	else if (valname =="strength")
 	{
 		m_strength = lua_tointeger(EventSystem::getLuaState() ,-1);
 		lua_pop(EventSystem::getLuaState(), 1);
-		event_mask |= NetEvent::DATA_ATTRIBUTES;
+		event_mask |= NetEvent::DATA_ATTRIBUTES_LEVEL;
 		return true;
 	}
 	else if (valname =="dexterity")
 	{
 		m_dexterity = lua_tointeger(EventSystem::getLuaState() ,-1);
 		lua_pop(EventSystem::getLuaState(), 1);
-		event_mask |= NetEvent::DATA_ATTRIBUTES;
+		event_mask |= NetEvent::DATA_ATTRIBUTES_LEVEL;
 		return true;
 	}
 	else if (valname =="willpower")
 	{
 		m_willpower = lua_tointeger(EventSystem::getLuaState() ,-1);
 		lua_pop(EventSystem::getLuaState(), 1);
-		event_mask |= NetEvent::DATA_ATTRIBUTES;
+		event_mask |= NetEvent::DATA_ATTRIBUTES_LEVEL;
 		return true;
 	}
 	else if (valname =="magic_power")
 	{
 		m_magic_power = lua_tointeger(EventSystem::getLuaState() ,-1);
 		lua_pop(EventSystem::getLuaState(), 1);
-		event_mask |= NetEvent::DATA_ATTRIBUTES;
+		event_mask |= NetEvent::DATA_ATTRIBUTES_LEVEL;
 		return true;
 	}
 	else if (valname =="max_health")
 	{
 		m_max_health = lua_tonumber(EventSystem::getLuaState() ,-1);
 		lua_pop(EventSystem::getLuaState(), 1);
-		event_mask |= NetEvent::DATA_MAX_HP;
+		event_mask |= NetEvent::DATA_ATTRIBUTES_LEVEL;
 		return true;
 	}
 	else if (valname =="block")
@@ -219,14 +219,14 @@ bool CreatureBaseAttr::setValue(std::string valname, int& event_mask)
 	{
 		m_attack_speed = lua_tointeger(EventSystem::getLuaState() ,-1);
 		lua_pop(EventSystem::getLuaState(), 1);
-		event_mask |= NetEvent::DATA_ATTACK_SPEED;
+		event_mask |= NetEvent::DATA_ATTACK_WALK_SPEED;
 		return true;
 	}
 	else if (valname =="walk_speed")
 	{
 		m_walk_speed = lua_tointeger(EventSystem::getLuaState() ,-1);
 		lua_pop(EventSystem::getLuaState(), 1);
-		event_mask |= NetEvent::DATA_WALK_SPEED;
+		event_mask |= NetEvent::DATA_ATTACK_WALK_SPEED;
 		return true;
 	}
 	

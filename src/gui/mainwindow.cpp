@@ -396,11 +396,11 @@ void MainWindow::update()
 				Player* player = m_document->getLocalPlayer();
 	
 				// Skilltree einstellen der der Spielerklasse entspricht
-				if (player->getTypeInfo()->m_subtype == "warrior")
+				if (player->getSubtype() == "warrior")
 					skilltree = (CEGUI::TabControl*) win_mgr.getWindow("SkilltreeWarrior");
-				if (player->getTypeInfo()->m_subtype == "archer")
+				if (player->getSubtype() == "archer")
 					skilltree = (CEGUI::TabControl*) win_mgr.getWindow("SkilltreeArcher");
-				if (player->getTypeInfo()->m_subtype == "priest")
+				if (player->getSubtype() == "priest")
 					skilltree = (CEGUI::TabControl*) win_mgr.getWindow("SkilltreePriest");
 	
 				if (wflags & Document::SKILLTREE)
@@ -1001,7 +1001,7 @@ void MainWindow::updateCursorItemImage()
 void MainWindow::updateObjectInfo()
 {
 	Player* player = m_document->getLocalPlayer();
-	short rid = player->getGridLocation()->m_region;
+	short rid = player->getRegionId();
 	Vector plpos = player->getShape()->m_center;
 
 	// Ogre Name des Objektes auf das der Mauszeiger zeigt
@@ -1082,7 +1082,7 @@ void MainWindow::updateObjectInfo()
 					continue;
 				
 				// verbuendete Spieler ueberspringen
-				if (World::getWorld()->getRelation(m_document->getLocalPlayer()->getFraction(), wo->getFraction()) == WorldObject::ALLIED && wo->getTypeInfo()->m_type == WorldObject::TypeInfo::TYPE_PLAYER)
+				if (World::getWorld()->getRelation(m_document->getLocalPlayer()->getFraction(), wo->getFraction()) == WorldObject::ALLIED && wo->getType() == "PLAYER")
 				{
 					continue;
 				}
@@ -1142,7 +1142,7 @@ void MainWindow::updateObjectInfo()
 		// Objekt existiert
 			m_document->getGUIState()->m_cursor_object_id = id;
 			
-			if (cwo->getTypeInfo()->m_type != WorldObject::TypeInfo::TYPE_FIXED_OBJECT)
+			if (cwo->getType() !="FIXED_OBJECT")
 			{
 				// Objekt ist ein Lebewesen
 				// Lebenspunkte anfuegen
@@ -1194,7 +1194,7 @@ void MainWindow::updateItemInfo()
 	DropItem* di;
 	
 	Player* player = m_document->getLocalPlayer();
-	short rid = player->getGridLocation()->m_region;
+	short rid = player->getRegionId();
 	Vector plpos = player->getShape()->m_center;
 	
 	
@@ -1263,8 +1263,8 @@ void MainWindow::updateItemInfo()
 					continue;
 				}
 					
-				ix = di->m_x/2.0;
-				iy = di->m_y/2.0;
+				ix = di->getPosition().m_x;
+				iy = di->getPosition().m_y;
 				dist = (gx-ix)*(gx-ix) + (gy-iy)*(gy-iy);
 				if (dist < mindist)
 				{
@@ -1450,11 +1450,11 @@ void MainWindow::updateItemInfo()
 				continue;
 			}
 			
-			name = di->m_item->getName();
+			name = di->getItem()->getName();
 			DEBUG5(" ");
 			DEBUG5(" %s %i",name.c_str(), di->getId());
 			
-			tpos = Vector(di->m_x/2.0,di->m_y/2.0);
+			tpos = di->getPosition();
 			tpos -= o;
 			
 			pos.m_x = tpos*ox;
@@ -1671,7 +1671,7 @@ void MainWindow::updateItemInfo()
 			
 			propold = label->getProperty("TextColours").c_str();
 			propnew = "tl:FFFFFFFF tr:FFFFFFFF bl:FFFFFFFF br:FFFFFFFF";
-			if (di->m_item->m_rarity == Item::MAGICAL)
+			if (di->getItem()->m_rarity == Item::MAGICAL)
 			{
 				propnew = "tl:FF8888FF tr:FF8888FF bl:FF8888FF br:FF8888FF";
 			}
@@ -2015,7 +2015,7 @@ void MainWindow::updatePartyInfo()
 	std::ostringstream stream;
 	
 	int i=0;
-	if (!( windows & Document::PARTY || windows & Document::CHARINFO)) 
+	if (!( windows & Document::PARTY || windows & Document::CHARINFO || windows & Document::QUEST_INFO)) 
 	{
 		float hperc;
 		Player* player = m_document->getLocalPlayer();

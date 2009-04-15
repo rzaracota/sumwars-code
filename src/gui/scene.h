@@ -165,12 +165,12 @@ class Scene
 	std::pair<float,float> getProjection(Vector pos, float height=0);
 	
 	/**
-	 * \fn static void getPlayerLook(WorldObject::TypeInfo::ObjectSubtype subtype, std::list< std::pair<bool, PlayerLook> > &looks)
+	 * \fn static void getPlayerLook(GameObject::Subtype subtype, std::list< std::pair<bool, PlayerLook> > &looks)
 	 * \brief Gibt fuer eine gegebene Spielerklasse alle Moeglichkeiten des Aussehens aus
 	 * \param subtype Spielerklasse
 	 * \param looks Ausgabe: Vektor mit allen Varianten
 	 */
-	static void getPlayerLook(WorldObject::TypeInfo::ObjectSubtype subtype, std::list< std::pair<bool, PlayerLook> > &looks);
+	static void getPlayerLook(GameObject::Subtype subtype, std::list< std::pair<bool, PlayerLook> > &looks);
 	
 	
 	/**
@@ -180,41 +180,41 @@ class Scene
 	void updateCharacterView();
 
 	/**
-	 * \fn static void registerObjectAnimations(WorldObject::TypeInfo::ObjectSubtype subtype, std::map<Action::ActionType, std::vector<std::string> > &animations)
+	 * \fn static void registerObjectAnimations(GameObject::Subtype subtype, std::map<Action::ActionType, std::vector<std::string> > &animations)
 	 * \brief Registriert die Animationen fuer ein Objekt
 	 * \param subtype Subtyp des Objektes
 	 * \param animations Liste der Animationen sortiert nach Aktionstyp
 	 */
-	static void registerObjectAnimations(WorldObject::TypeInfo::ObjectSubtype subtype, std::map<Action::ActionType, std::vector<std::string> > &animations);
+	static void registerObjectAnimations(GameObject::Subtype subtype, std::map<Action::ActionType, std::vector<std::string> > &animations);
 	
     /**
-	 * \fn void registerAttachedMesh(WorldObject::TypeInfo::ObjectSubtype subtype, std::string bone, std::string mesh)
+	 * \fn void registerAttachedMesh(GameObject::Subtype subtype, std::string bone, std::string mesh)
 	 * \brief Registriert fuer ein bestehendes Objekt ein Mesh das an das Objekt angefuegt wird
 	 * \param subtype Subtype des Objektes
 	 * \param bone Knochen an den Mesh gehaengt wird
 	 * \param mesh Mesh des angehaengten Objektes
 	 */
-	static void registerAttachedMesh(WorldObject::TypeInfo::ObjectSubtype subtype, std::string bone, std::string mesh);
+	static void registerAttachedMesh(GameObject::Subtype subtype, std::string bone, std::string mesh);
 	
 	/**
-	 * \fn void registerObject(WorldObject::TypeInfo::ObjectSubtype subtype, std::string mesh, std::string particle_system= "", float scaling_factor =1.0)
+	 * \fn void registerObject(GameObject::Subtype subtype, std::string mesh, std::string particle_system= "", float scaling_factor =1.0)
 	 * \brief Registriert fuer ein Objekt das zugehoerige Mesh, Partikelsystem, Skalierungsfaktor
 	 * \param subtype Subtyp des Objektes
 	 * \param mesh Mesh fuer das Objekt. Leerer String, wenn kein Mesh verwendet wird
 	 * \param particle_system Name des Partikelsystems. Leerer string, wenn kein Partikelsystem verwendet wird
 	 * \param scaling_factor Faktor um den das Mesh und alle Partikelsystem skaliert werden
 	 */
-	static void registerObject(WorldObject::TypeInfo::ObjectSubtype subtype, std::string mesh, std::string particle_system= "", float scaling_factor =1.0);
+	static void registerObject(GameObject::Subtype subtype, std::string mesh, std::string particle_system= "", float scaling_factor =1.0);
 	
 	/**
-	 * \fn static void registerPlayerLook(WorldObject::TypeInfo::ObjectSubtype subtype, PlayerLook look, std::string mesh, bool male = true)
+	 * \fn static void registerPlayerLook(GameObject::Subtype subtype, PlayerLook look, std::string mesh, bool male = true)
 	 * \brief Registiert ein fuer einen Spielertyp zulaessiges Aussehen
 	 * \param subtype Spielertyp
 	 * \param look Aussehen
 	 * \param male Gibt Geschlecht an
 	 * \param mesh Ogre Mesh
 	 */
-	static void registerPlayerLook(WorldObject::TypeInfo::ObjectSubtype subtype, PlayerLook look, std::string mesh, bool male = true);
+	static void registerPlayerLook(GameObject::Subtype subtype, PlayerLook look, std::string mesh, bool male = true);
 
 	
 
@@ -228,14 +228,14 @@ class Scene
 	static void registerItem(Item::Subtype subtype, std::string mesh, std::string particle_system= "", float scaling_factor =1.0);
 
 	/**
-	 * \fn void registerProjectile(Projectile::ProjectileType type, std::string mesh, std::string particle_system = "", float scaling_factor =1.0)
+	 * \fn void registerProjectile(Projectile::Subtype type, std::string mesh, std::string particle_system = "", float scaling_factor =1.0)
 	 * \brief Registriert fuer ein Projektil das zugehoerige Mesh, Partikelsystem, Skalierungsfaktor
 	 * \param type Subtyp des Projektil
 	 * \param mesh Mesh fuer das Projektil. Leerer String, wenn kein Mesh verwendet wird
 	 * \param particle_system Name des Partikelsystems. Leerer string, wenn kein Partikelsystem verwendet wird
 	 * \param scaling_factor Faktor um den das Mesh und alle Partikelsystem skaliert werden
 	 */
-	static void registerProjectile(Projectile::ProjectileType type, std::string mesh, std::string particle_system = "", float scaling_factor =1.0);
+	static void registerProjectile(Projectile::Subtype type, std::string mesh, std::string particle_system = "", float scaling_factor =1.0);
 
 	/**
 	 * \fn void registerTile(Tile tile, std::string mesh, std::string particle_system, float scaling_factor =1.0)
@@ -373,11 +373,11 @@ class Scene
 
 	
 	/**
-	 * \fn RenderInfo getObjectRenderInfo(WorldObject::TypeInfo::ObjectSubtype subtype)
+	 * \fn RenderInfo getObjectRenderInfo(GameObject::Subtype subtype)
 	 * \brief Gibt die Informationen zum rendern eines Objektes aus
 	 * \param subtype Subtyp des Objektes
 	 */
-	static RenderInfo getObjectRenderInfo(WorldObject::TypeInfo::ObjectSubtype subtype);
+	static RenderInfo getObjectRenderInfo(GameObject::Subtype subtype);
 	
 	/**
 	 * \fn static RenderInfo getPlayerRenderInfo(PlayerLook look)
@@ -394,11 +394,11 @@ class Scene
 	static RenderInfo getItemRenderInfo(Item::Subtype subtype);
 
 	/**
-	 * \fn RenderInfo getProjectileRenderInfo(Projectile::ProjectileType subtype)
+	 * \fn RenderInfo getProjectileRenderInfo(Projectile::Subtype subtype)
 	 * \brief Gibt die Informationen zum rendern eines Objektes aus
 	 * \param subtype Subtyp des Objektes
 	 */
-	static RenderInfo getProjectileRenderInfo(Projectile::ProjectileType subtype);
+	static RenderInfo getProjectileRenderInfo(Projectile::Subtype subtype);
 	
 	
 
@@ -422,16 +422,16 @@ class Scene
 	std::map<int,string>* m_projectiles;
 
 	/**
-	 * \var static std::map<Projectile::ProjectileType, RenderInfo> m_projectile_render_info
+	 * \var static std::map<Projectile::Subtype, RenderInfo> m_projectile_render_info
 	 *  \brief Speichert fuer die Projektile die Information zum Rendern
 	 */
-	static std::map<Projectile::ProjectileType, RenderInfo> m_projectile_render_info;
+	static std::map<Projectile::Subtype, RenderInfo> m_projectile_render_info;
 
 	/**
-	 * \var static std::map<WorldObject::TypeInfo::ObjectSubtype, RenderInfo> m_object_render_info
+	 * \var static std::map<GameObject::Subtype, RenderInfo> m_object_render_info
 	 *  \brief Speichert fuer die Objekte die Information zum Rendern
 	 */
-	static std::map<WorldObject::TypeInfo::ObjectSubtype, RenderInfo> m_object_render_info;
+	static std::map<GameObject::Subtype, RenderInfo> m_object_render_info;
 	
 	/**
 	 * \var static std::map<PlayerLook, RenderInfo> m_player_render_info
@@ -440,16 +440,16 @@ class Scene
 	static std::map<PlayerLook, RenderInfo> m_player_render_info;
 	
 	/**
-	 * \var static std::multimap< WorldObject::TypeInfo::ObjectSubtype, std::pair<bool, PlayerLook> > m_player_look
+	 * \var static std::multimap< GameObject::Subtype, std::pair<bool, PlayerLook> > m_player_look
 	 * \brief Speichert, fuer welche Spielerklassen welches Aussehen erlaubt ist
 	 */
-	static std::multimap< WorldObject::TypeInfo::ObjectSubtype, std::pair<bool, PlayerLook> > m_player_look;
+	static std::multimap< GameObject::Subtype, std::pair<bool, PlayerLook> > m_player_look;
 	
 	/**
-	 * \var static std::map<WorldObject::TypeInfo::ObjectSubtype, std::map<Action::ActionType, std::vector<std::string> > > m_object_animations
+	 * \var static std::map<GameObject::Subtype, std::map<Action::ActionType, std::vector<std::string> > > m_object_animations
 	 * \brief Animationen der Objekte (erster Schluessel: Objekttyp, zweiter Schluessel Aktionstyp)
 	 */
-	static std::map<WorldObject::TypeInfo::ObjectSubtype, std::map<Action::ActionType, std::vector<std::string> > > m_object_animations;
+	static std::map<GameObject::Subtype, std::map<Action::ActionType, std::vector<std::string> > > m_object_animations;
 	
 
 	/**

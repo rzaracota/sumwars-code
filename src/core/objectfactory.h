@@ -42,7 +42,8 @@ typedef std::string EnvironmentName;
 /**
  * Liste von Typbezeichnungen fuer Objekte
  */
-typedef std::list<WorldObject::TypeInfo::ObjectSubtype> WorldObjectTypeList;
+typedef std::list<GameObject::Subtype> GameObjectTypeList;
+typedef std::list<GameObject::Subtype> WorldObjectTypeList;
 
 /**
  * Name fuer ein Objekt in einem Template
@@ -68,28 +69,28 @@ class ObjectTemplate
 	public:
 		
 		/**
-		 * \var WorldObject::TypeInfo::ObjectType m_type
+		 * \var GameObject::Type m_type
 		 * \brief Basistyp des Objekts
 		 */
-		WorldObject::TypeInfo::ObjectType m_type;
+		GameObject::Type m_type;
 		
 		/**
-		 * \fn void addObject(EnvironmentName env, WorldObject::TypeInfo::ObjectSubtype object)
+		 * \fn void addObject(EnvironmentName env, GameObject::Subtype object)
 		 * \brief Fuegt fuer die Umgebung ein Objekt hinzu
 		 * \param env Name der Umgebung
 		 * \param object Typ des Objekts
 		 */
-		void addObject(EnvironmentName env, WorldObject::TypeInfo::ObjectSubtype object)
+		void addObject(EnvironmentName env, GameObject::Subtype object)
 		{
 			m_env_objects[env].push_back(object);
 		}
 		
 		/**
-		 * \fn WorldObject::TypeInfo::ObjectSubtype getObject(EnvironmentName env)
+		 * \fn GameObject::Subtype getObject(EnvironmentName env)
 		 * \brief Gibt fuer eine gegebene Umgebung ein passendes Objekt aus
 		 * \param env Umgebung
 		 */
-		WorldObject::TypeInfo::ObjectSubtype getObject(EnvironmentName env);
+		GameObject::Subtype getObject(EnvironmentName env);
 };
 
 
@@ -258,22 +259,22 @@ class ObjectFactory
 	public:
 		
 	/**
-	 * \fn static WorldObject* createObject(WorldObject::TypeInfo::ObjectType type, WorldObject::TypeInfo::ObjectSubtype subtype, int id=0)
+	 * \fn static WorldObject* createObject(GameObject::Type type, GameObject::Subtype subtype, int id=0)
 	 * \brief Erzeugt ein Objekt des angefordertens Typs/Subtyps
 	 * \param type Typ des Objektes
 	 * \param subtype Subtyp des Objektes
 	 * \param id ID des Objektes. Wenn id==0 wird eine neue ID generiert
 	 */
-	static WorldObject* createObject(WorldObject::TypeInfo::ObjectType type, WorldObject::TypeInfo::ObjectSubtype subtype, int id=0);
+	static WorldObject* createObject(GameObject::Type type, GameObject::Subtype subtype, int id=0);
 	
 	
 	/**
-	 * \fn static WorldObject::TypeInfo::ObjectSubtype getObjectType(ObjectTemplateType generictype, EnvironmentName env)
+	 * \fn static GameObject::Subtype getObjectType(ObjectTemplateType generictype, EnvironmentName env)
 	 * \brief erzeugt aus einem ObjektTemplate einen Objekttyp passend zu seiner Umgebung
 	 * \param generictype generischer Typ des Objekts
 	 * \param env Umgebung
 	 */
-	static WorldObject::TypeInfo::ObjectSubtype getObjectType(ObjectTemplateType generictype, EnvironmentName env);
+	static GameObject::Subtype getObjectType(ObjectTemplateType generictype, EnvironmentName env);
 	
 	/**
 	 * \fn static ObjectGroupTemplate* getObjectGroupTemplate(ObjectGroupTemplateName name)
@@ -289,18 +290,18 @@ class ObjectFactory
 	static MonsterGroup* getMonsterGroup(MonsterGroupName name);
 	
 	/**
-	 * \fn static WorldObject::TypeInfo::ObjectType getObjectBaseType(WorldObject::TypeInfo::Object
+	 * \fn static GameObject::Type getObjectBaseType(GameObject::
 	Subtype subtype)
 	 * \brief Gibt den Basistyp des Objekts aus
 	 * \param subtype Subtyp des Objekts
 	 */
-	static WorldObject::TypeInfo::ObjectType getObjectBaseType(WorldObject::TypeInfo::ObjectSubtype subtype);
+	static GameObject::Type getObjectBaseType(GameObject::Subtype subtype);
 	
 	/**
-	 * \fn static std::string getObjectName(WorldObject::TypeInfo::ObjectSubtype subtype)
+	 * \fn static std::string getObjectName(GameObject::Subtype subtype)
 	 * \brief Gibt den Name eines Objektes aus
 	 */
-	static std::string getObjectName(WorldObject::TypeInfo::ObjectSubtype subtype);
+	static std::string getObjectName(GameObject::Subtype subtype);
 	
 	
 	/**
@@ -318,20 +319,20 @@ class ObjectFactory
 	static void loadObjectGroupTemplates(std::string file);
 	
 	/**
-	 * \fn static registerMonster(WorldObject::TypeInfo::ObjectSubtype subtype, MonsterBasicData* data)
+	 * \fn static registerMonster(GameObject::Subtype subtype, MonsterBasicData* data)
 	 * \brief Registriert die Daten fuer ein bestimmten Monstertyp
 	 * \param subtype Subtyp des Monsters
 	 * \param data Daten des Monsters
 	 */
-	static void registerMonster(WorldObject::TypeInfo::ObjectSubtype subtype, MonsterBasicData* data);
+	static void registerMonster(GameObject::Subtype subtype, MonsterBasicData* data);
 	
 	/**
-	 * \fn static void registerFixedObject(WorldObject::TypeInfo::ObjectSubtype subtype, FixedObjectData* data)
+	 * \fn static void registerFixedObject(GameObject::Subtype subtype, FixedObjectData* data)
 	 * \brief Registriert die Daten fuer ein bestimmten Monstertyp
 	 * \param subtype Subtyp des Objektes
 	 * \param data Daten des festen Objekts
 	 */
-	static void registerFixedObject(WorldObject::TypeInfo::ObjectSubtype subtype, FixedObjectData* data);
+	static void registerFixedObject(GameObject::Subtype subtype, FixedObjectData* data);
 	
 	/**
 	 * \fn static registerObjectTemplate(ObjectTemplateType type, ObjectTemplate* templ)
@@ -372,16 +373,16 @@ class ObjectFactory
 	
 	private:	
 	/**
-	 * \var static std::map<WorldObject::TypeInfo::ObjectSubtype, MonsterBasicData*> m_monster_data
+	 * \var static std::map<GameObject::Subtype, MonsterBasicData*> m_monster_data
 	 * \brief Basisdaten zu den Monstern
 	 */
-	static std::map<WorldObject::TypeInfo::ObjectSubtype, MonsterBasicData*> m_monster_data;
+	static std::map<GameObject::Subtype, MonsterBasicData*> m_monster_data;
 	
 	/**
-	 * \var static std::map<WorldObject::TypeInfo::ObjectSubtype, FixedObjectData*> m_fixed_object_data
+	 * \var static std::map<GameObject::Subtype, FixedObjectData*> m_fixed_object_data
 	 * \brief Basisdaten zu den festen Objekten
 	 */
-	static std::map<WorldObject::TypeInfo::ObjectSubtype, FixedObjectData*> m_fixed_object_data;
+	static std::map<GameObject::Subtype, FixedObjectData*> m_fixed_object_data;
 	
 	/**
 	 * \var static std::map<ObjectTemplateType, ObjectTemplate*> m_object_templates
@@ -402,10 +403,10 @@ class ObjectFactory
 	static std::map< MonsterGroupName, MonsterGroup*>  m_monster_groups;
 	
 	/**
-	 * \var static std::map<WorldObject::TypeInfo::ObjectSubtype, WorldObject::TypeInfo::ObjectType> m_object_types
+	 * \var static std::map<GameObject::Subtype, GameObject::Type> m_object_types
 	 * \brief Typen der Objekte
 	 */
-	static std::map<WorldObject::TypeInfo::ObjectSubtype, WorldObject::TypeInfo::ObjectType> m_object_types;
+	static std::map<GameObject::Subtype, GameObject::Type> m_object_types;
 	
 	
 	

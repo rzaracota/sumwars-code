@@ -35,8 +35,8 @@ Monster::Monster( int id,MonsterBasicData& data)
 	
 	memcpy(getBaseAttr(),&data.m_base_attr, sizeof(data.m_base_attr));
 
-	getTypeInfo()->m_type = data.m_type_info.m_type;
-	getTypeInfo()->m_subtype = data.m_type_info.m_subtype;
+	setType(data.m_type);
+	setSubtype(data.m_subtype);
 	m_category = data.m_category;
 	m_fraction = data.m_fraction;
 
@@ -50,7 +50,7 @@ Monster::Monster( int id,MonsterBasicData& data)
 	// Standardform setzen
 	getShape()->m_type = Shape::CIRCLE;
 	getShape()->m_radius = data.m_radius;
-	m_layer = data.m_layer;
+	setLayer(data.m_layer);
 	getShape()->m_angle =0;
 
 	m_ai.m_goals = new WorldObjectValueList;
@@ -59,6 +59,13 @@ Monster::Monster( int id,MonsterBasicData& data)
 	m_ai.m_vars = data.m_ai_vars;
 	m_ai.m_chase_player_id =0;
 	
+	// HP Faktor bei mehreren Spielern
+	WorldObjectMap * pl = World::getWorld()->getPlayers();
+	float fak = (0.5 + 0.5*pl->size());
+	
+	getBaseAttr()->m_max_health *= fak;
+	getBaseAttrMod()->m_max_health *= fak;
+	getDynAttr()->m_health *= fak;
 	calcBaseAttrMod();
 	
 	m_base_action = Action::NOACTION;
@@ -71,12 +78,6 @@ Monster::Monster( int id,MonsterBasicData& data)
 	}
 	DEBUG5("base action %i",m_base_action);
 	
-	// HP Faktor bei mehreren Spielern
-	WorldObjectMap * pl = World::getWorld()->getPlayers();
-	float fak = (0.5 + 0.5*pl->size());
-	
-	getBaseAttr()->m_max_health *= fak;
-	getDynAttr()->m_health *= fak;
 }
 
 Monster::~Monster()
@@ -98,12 +99,12 @@ bool Monster::init()
 	m_ai.m_visible_goals = new WorldObjectValueList;
 
 	// Basistyp setzen
-	getTypeInfo()->m_type = TypeInfo::TYPE_MONSTER;
+	setType("MONSTER");
 
 	// Standardform setzen
 	getShape()->m_type = Shape::CIRCLE;
 	getShape()->m_radius = 0.5;
-	m_layer = (LAYER_BASE | LAYER_AIR);
+	setLayer(LAYER_BASE | LAYER_AIR);
 	getShape()->m_angle =0;
 
 	getBaseAttr()->m_step_length=0.5;
@@ -125,7 +126,8 @@ bool Monster::init()
 			m_base_action = (Action::ActionType) i;
 		}
 	}
-	
+	clearNetEventMask();
+
 	return true;
 }
 
@@ -166,7 +168,7 @@ void Monster::updateCommand()
 	// eigene Koordinaten
 	Vector &pos = getShape()->m_center;
 	
-	DEBUG5("update monster command %i %s",getId(), getTypeInfo()->m_subtype.c_str());
+	DEBUG5("update monster command %i %s",getId(), getSubtype().c_str());
 	DEBUG5("randaction prob %f",m_ai.m_vars.m_randaction_prob);
 	if (Random::random() < m_ai.m_vars.m_randaction_prob)
 	{
@@ -313,7 +315,7 @@ void Monster::updateCommand()
 		DEBUG5("calculated command %i",m_ai.m_command.m_type);
 		
 
-		m_event_mask |= NetEvent::DATA_COMMAND;
+		addToNetEventMask(NetEvent::DATA_COMMAND);
 
 	}
 	else

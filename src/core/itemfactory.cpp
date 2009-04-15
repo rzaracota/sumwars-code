@@ -18,10 +18,6 @@ ItemFactory::ItemFactory()
 
 Item* ItemFactory::createItem(Item::Type type, Item::Subtype subtype, int id, float magic_power, Item::Rarity rarity)
 {
-	if (id ==0)
-	{
-		id = World::getWorld()->getValidId();
-	}
 	
 	if (type == Item::NOITEM)
 		return 0;
@@ -40,8 +36,7 @@ Item* ItemFactory::createItem(Item::Type type, Item::Subtype subtype, int id, fl
 	if (it != m_item_data.end())
 	{
 		ItemBasicData* idata = it->second;
-		item = new Item(*idata);
-		item->m_id = id;
+		item = new Item(*idata,id);
 		item->m_rarity = rarity;
 		
 

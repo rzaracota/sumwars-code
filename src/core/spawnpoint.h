@@ -26,7 +26,7 @@ class Spawnpoint : public WorldObject {
 	 * \param name Name der Monstergruppe die dieser Spawnpoint erzeugt
 	 * \param id ID des Spawnpoints
 	 */
-	Spawnpoint(MonsterGroupName name, int id);
+	Spawnpoint(MonsterGroupName name, int id=0);
 	
 	/**
 	 * \fn virtual bool init()

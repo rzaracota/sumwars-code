@@ -53,10 +53,10 @@ public:
 	FixedObject( int id);
 	
 	/**
-	 * \fn FixedObject( int id, TypeInfo::ObjectSubtype object_subtype)
+	 * \fn FixedObject( int id, Subtype object_subtype)
 	 * \brief Konstruktor
 	 */
-	FixedObject( int id, TypeInfo::ObjectSubtype object_subtype);
+	FixedObject( int id, Subtype object_subtype);
 	
 	/**
 	* \fn virtual bool init()

@@ -2,21 +2,24 @@
 #include "world.h"
 
 
-Region* Projectile::getRegionPtr()
-{
-	return World::getWorld()->getRegion(m_region);
-}
 
-Projectile::Projectile(ProjectileType type, Damage* dmg, int id)
+
+Projectile::Projectile(Subtype subtype, Damage* dmg, int id)
+	: GameObject(id)
 {
-	m_id = id;
-	m_type = type;
+	if (dmg !=0)
+	{
+		setFraction(dmg->m_attacker_fraction);
+	}
+	setSubtype(subtype);
 	m_timer =0;
-	m_layer = WorldObject::LAYER_AIR;
+	setLayer(WorldObject::LAYER_AIR);
+	setType("PROJECTILE");
+	setBaseType(PROJECTILE);
 	
 	m_last_hit_object_id =0;
 	m_flags =0;
-	m_state = FLYING;
+	setState(STATE_FLYING,false);
 	m_timer_limit = 1500;
 	m_counter =0;
 	m_goal_object =0;
@@ -24,96 +27,121 @@ Projectile::Projectile(ProjectileType type, Damage* dmg, int id)
 
 	float r=0.1;
 	// Radius, Timerlaufzeit und Status je nach Typ setzen
-	switch(type)
+	Subtype st = getSubtype();
+	if (st == "FIRE_BOLT")
 	{
-		case FIRE_BOLT: r=0.1; break;
-		case ICE_BOLT: r=0.1; break;
-		case LIGHTNING:
-			r=0.15;
-			m_state=STABLE;
-			m_timer_limit = 250;
-			break;
-		case FIRE_BALL:
-			r=0.2;
-			m_max_radius = 1.5;
-			m_flags = EXPLODES;
-			break;
-		case FIRE_WALL:
-			r=0;
-			m_state=GROWING;
-			m_timer_limit = 200;
-			m_max_radius = 2;
-			break;
-		case FIRE_WAVE:
-			r=0;
-			m_state=GROWING;
-			m_timer_limit = 1000;
-			m_max_radius = 7;
-			break;
-		case ICE_RING:
-			r=0;
-			m_state=GROWING;
-			m_timer_limit = 800;
-			m_max_radius = 4;
-			break;
-		case FREEZE:
-			r=4;
-			m_state=STABLE;
-			m_timer_limit = 300;
-			break;
-		case BLIZZARD:
-			r=3;
-			m_state=STABLE;
-			m_timer_limit = 500;
-			break;
-		case THUNDERSTORM:
-			r=5;
-			m_state=STABLE;
-			m_timer_limit = 300;
-			break;
-		case CHAIN_LIGHTNING:
-			r=0.15;
-			m_flags = BOUNCING;
-			break;
-		case STATIC_SHIELD:
-			r=1.5;
-			m_state=STABLE;
-			m_timer_limit = 150;
-			case ARROW: r=0.1; break;
-		case GUIDED_ARROW:
-			r=0.1;
-			m_timer_limit = 1000;
-			break;
-		case EXPLOSION:
-		case ICE_EXPLOSION:
-		case WIND_EXPLOSION:
-		case FIRE_EXPLOSION:
-			m_timer_limit = 200;
-			m_state=EXPLODING;
-			break;
-
-		case LIGHT_BEAM:
-		case DIVINE_BEAM:
-		case ELEM_EXPLOSION:
-		case ACID:
-		case HYPNOSIS:
-			r=0.2;
-			m_timer_limit = 200;
-			m_state=STABLE;
-			break;
-
-		default:
-			break;
+		r=0.1;
+	}
+	else if (st == "ICE_BOLT")
+	{
+		r=0.1;
+	}
+	else if (st == "LIGHTNING")
+	{
+		r=0.15;
+		setState(STATE_STABLE,false);
+		m_timer_limit = 250;
+	}
+	else if (st == "FIRE_BALL")
+	{
+		r=0.2;
+		m_max_radius = 1.5;
+		m_flags = EXPLODES;
+	}
+	else if (st == "FIRE_WALL")
+	{
+		r=0;
+		setState(STATE_GROWING,false);
+		m_timer_limit = 200;
+		m_max_radius = 2;
+	}
+	else if (st == "FIRE_WAVE")
+	{
+		r=0;
+		setState(STATE_GROWING,false);
+		m_timer_limit = 1000;
+		m_max_radius = 7;
+	}
+	else if (st == "ICE_RING")
+	{
+		r=0;
+		setState(STATE_GROWING,false);
+		m_timer_limit = 800;
+		m_max_radius = 4;
+	}
+	else if (st == "FREEZE")
+	{
+		r=4;
+		setState(STATE_STABLE,false);
+		m_timer_limit = 300;
+	}
+	else if (st == "BLIZZARD")
+	{
+		r=3;
+		setState(STATE_STABLE,false);
+		m_timer_limit = 500;
+	}
+	else if (st == "THUNDERSTORM")
+	{
+		r=5;
+		setState(STATE_STABLE,false);
+		m_timer_limit = 300;
+	}
+	else if (st == "CHAIN_LIGHTNING")
+	{
+		r=0.15;
+		m_flags = BOUNCING;
+	}
+	else if (st == "STATIC_SHIELD")
+	{
+		r=1.5;
+		setState(STATE_STABLE,false);
+		m_timer_limit = 150;
+	}
+	else if (st == "ARROW")
+	{
+		r=0.1;
+	}
+	else if (st == "GUIDED_ARROW")
+	{
+		r=0.1;
+		m_timer_limit = 1000;
+	}
+	else if (st == "")
+	{
+		r=0.1;
+	}
+	else if (st == "")
+	{
+		r=0.1;
+	}
+	else if (st == "")
+	{
+		r=0.1;
+	}
+	else if (st == "EXPLOSION"  ||st == "ICE_EXPLOSION" || st == "WIND_EXPLOSION" || st == "FIRE_EXPLOSION" || st == "ELEM_EXPLOSION")
+	{
+		m_timer_limit = 200;
+		setState(STATE_EXPLODING,false);
+	}
+	else if (st == "LIGHT_BEAM" || st == "DIVINE_BEAM" || st == "ACID" || st == "HYPNOSIS" )
+	{
+		r=0.1;
+	}
+	else if (st == "")
+	{
+		r=0.1;
 	}
 
 
-	m_shape.m_radius =r;
-	m_shape.m_angle =0;
+	getShape()->m_radius =r;
+	setAngle(0);
 	if (dmg !=0)
 	{
 		memcpy(&m_damage, dmg,sizeof(Damage)); 
 	}
 
+	clearNetEventMask();
 }
 
 bool Projectile::update(float time)
@@ -150,30 +178,30 @@ bool Projectile::update(float time)
 		if (dtime <=0)
 			return false;
 
-		switch (m_state)
+		switch (getState())
 		{
-			case FLYING:
+			case STATE_FLYING:
 				// Status fliegend behandeln
 				handleFlying(dtime);
 
 				break;
 
-			case EXPLODING:
+			case STATE_EXPLODING:
 				DEBUG5("exploding");
 				// Radius vergroessern
-				m_shape.m_radius += (m_max_radius)*dtime/(m_timer_limit);
+				getShape()->m_radius += (m_max_radius)*dtime/(m_timer_limit);
 
 				// Wenn Timer Limit erreicht
 				if (m_timer >= m_timer_limit)
 				{
-					setState(DESTROYED);
+					setState(STATE_DESTROYED);
 
 					if (World::getWorld()->isServer())
 					{
 
 						// Alle Objekte im Explosionsradius suchen
 						hitobj.clear();
-						getRegionPtr()->getObjectsInShape(&m_shape,&hitobj,m_layer,WorldObject::CREATURE,0);
+						getRegion()->getObjectsInShape(getShape(),&hitobj,getLayer(),WorldObject::CREATURE,0);
 						for (i=hitobj.begin();i!=hitobj.end();++i)
 						{
 							// Schaden austeilen
@@ -184,9 +212,9 @@ bool Projectile::update(float time)
 						{
 							// Flag mehrfach explodierend gesetzt
 							DEBUG("multiexploding");
-							Vector dir = m_speed;
+							Vector dir = getSpeed();
 							dir.normalize();
-							dir *= m_shape.m_radius;
+							dir *= getShape()->m_radius;
 							
 							// Schaden halbieren
 							Damage dmg;
@@ -198,61 +226,61 @@ bool Projectile::update(float time)
 
 							// vier neue Projektile erzeugen
 							Projectile* pr;
-							pr = new Projectile(m_type,&dmg, World::getWorld()->getValidId());
+							pr = new Projectile(getSubtype(),&dmg);
 							pr->setFlags(Projectile::EXPLODES);
 							pr->setMaxRadius(1);
-							getRegionPtr()->insertProjectile(pr,m_shape.m_center + dir );
+							getRegion()->insertProjectile(pr,getPosition() + dir );
 							
 							dir.m_x = -dir.m_x;
-							pr = new Projectile(m_type,&dmg, World::getWorld()->getValidId());
+							pr = new Projectile(getSubtype(),&dmg);
 							pr->setFlags(Projectile::EXPLODES);
 							pr->setMaxRadius(1);
-							getRegionPtr()->insertProjectile(pr,m_shape.m_center + dir);
+							getRegion()->insertProjectile(pr,getPosition() + dir);
 
 							dir.m_y = -dir.m_y;
-							pr = new Projectile(m_type,&dmg, World::getWorld()->getValidId());
+							pr = new Projectile(getSubtype(),&dmg);
 							pr->setFlags(Projectile::EXPLODES);
 							pr->setMaxRadius(1);
-							getRegionPtr()->insertProjectile(pr,m_shape.m_center + dir);
+							getRegion()->insertProjectile(pr,getPosition() + dir);
 
 							dir.m_x = -dir.m_x;
-							pr = new Projectile(m_type,&dmg, World::getWorld()->getValidId());
+							pr = new Projectile(getSubtype(),&dmg);
 							pr->setFlags(Projectile::EXPLODES);
 							pr->setMaxRadius(1);
-							getRegionPtr()->insertProjectile(pr,m_shape.m_center + dir);
+							getRegion()->insertProjectile(pr,getPosition() + dir);
 
 						}
 					}
 				}
 				break;
 
-			case GROWING:
+			case STATE_GROWING:
 				// Status wachsend behandeln
 				handleGrowing(dtime);
 
 				break;
 
-			case STABLE:
+			case STATE_STABLE:
 				// Status stabil behandeln
 				handleStable(dtime);
 
 				break;
 
-			case DESTROYED:
+			case STATE_DESTROYED:
 				DEBUG5("destroyed");
 				time =0;
 				break;
 
-			case VANISHING:
+			case STATE_VANISHING:
 				// Status verschwindend
-				if (m_type == FIRE_WALL)
+				if (getSubtype() == "FIRE_WALL")
 				{
 					// Radius reduzieren
-					m_shape.m_radius -= 2* dtime/(m_timer_limit);
+					getShape()->m_radius -= 2* dtime/(m_timer_limit);
 				}
 				if (m_timer >= m_timer_limit)
 				{
-					setState(DESTROYED);
+					setState(STATE_DESTROYED);
 				}
 
 
@@ -264,13 +292,13 @@ bool Projectile::update(float time)
 		}
 	}
 
-	if (m_type == FIRE_WALL && World::getWorld()->timerLimit(1))
+	if (getSubtype() == "FIRE_WALL" && World::getWorld()->timerLimit(1))
 	{
 		// Typ Feuersaeule
 
 
 		// Objekte suchen die die Saeule beruehren
-		getRegionPtr()->getObjectsInShape(&m_shape,&hitobj,m_layer,WorldObject::CREATURE,0);
+		getRegion()->getObjectsInShape(getShape(),&hitobj,getLayer(),WorldObject::CREATURE,0);
 		for (i=hitobj.begin();i!=hitobj.end();++i)
 		{
 			// Schaden austeilen
@@ -291,11 +319,13 @@ void Projectile::handleFlying(float dtime)
 	WorldObject* hit;
 	Vector dir,newdir(0,0);
 	Vector sdir,hitpos,ndir;
-	Vector &pos = m_shape.m_center, newpos;
+	Vector pos = getPosition(), newpos;
 	float rnew,rmin;
 	int lid;
+	
+	Vector speed = getSpeed();
 
-	if (m_type == GUIDED_ARROW)
+	if (getSubtype() == "GUIDED_ARROW")
 	{
 		// Lenkpfeil
 
@@ -305,7 +335,7 @@ void Projectile::handleFlying(float dtime)
 		if (m_goal_object!=0)
 		{
 			// Zielobjekt ist per ID vorgegeben, Objekt von der Welt holen
-			hit = getRegionPtr()->getObject(m_goal_object);
+			hit = getRegion()->getObject(m_goal_object);
 		}
 
 		if (hit==0)
@@ -320,14 +350,14 @@ void Projectile::handleFlying(float dtime)
 
 
 			// alle Objekte im Kreis suchen
-			getRegionPtr()->getObjectsInShape(&s,&hitobj,m_layer, WorldObject::CREATURE,0);
+			getRegion()->getObjectsInShape(&s,&hitobj,getLayer(), WorldObject::CREATURE,0);
 
 			// alle Objekte als potentielle Ziele loeschen, die dem Erschaffer des Projektils nicht feindlich gesinnt sind
 			if (!hitobj.empty())
 			{
 				i = hitobj.begin();
 				hit=(*i);
-				while (!hitobj.empty() && World::getWorld()->getRelation(m_damage.m_attacker_fraction,hit) != WorldObject::HOSTILE)
+				while (!hitobj.empty() && World::getWorld()->getRelation(getFraction(),hit) != WorldObject::HOSTILE)
 				{
 					i=hitobj.erase(i);
 					if (i!=hitobj.end())
@@ -340,7 +370,7 @@ void Projectile::handleFlying(float dtime)
 			if (!hitobj.empty())
 			{
 				// normieren der aktuellen Geschwindigkeit
-				sdir = m_speed;
+				sdir = speed;
 				sdir.normalize();
 
 				// Durchmustern der potentiellen Ziele
@@ -384,7 +414,7 @@ void Projectile::handleFlying(float dtime)
 		}
 
 		// aktuelle absolute Geschwindigkeit
-		float v = m_speed.getLength();
+		float v = speed.getLength();
 		
 		
 		// normieren der Zielrichtung
@@ -398,41 +428,41 @@ void Projectile::handleFlying(float dtime)
 		DEBUG5("newdir %f %f",newdir.m_x,newdir.m_y);
 		
 		// Neue Richtung ergibt sich aus Linearkombination von aktueller Richtung und Zielrichtung
-		m_speed = m_speed*(1-p) + newdir*p;
-		DEBUG5("new speed %f %f",m_speed.m_x,m_speed.m_y);
+		speed = speed*(1-p) + newdir*p;
+		DEBUG5("new speed %f %f",speed.m_x,speed.m_y);
 
 		// neue Richtung normieren
-		m_speed.normalize();
-		m_speed *= v;
+		speed.normalize();
+		speed *= v;
 
 		if (World::getWorld()->timerLimit(0))
 		{
-			m_event_mask |= NetEvent::DATA_SPEED;
+			addToNetEventMask(NetEvent::DATA_SPEED);
 		}
 		
 		hitobj.clear();
 
-		m_shape.m_angle = m_speed.angle();
+		setSpeed(speed,false);
 		
 	}
 
 	if (m_timer >= m_timer_limit)
 	{
 		DEBUG5("destroyed after timeout");
-		setState(DESTROYED);
+		setState(STATE_DESTROYED);
 	}
 
 	DEBUG5("pos %f %f",pos.m_x, pos.m_y);
 	
 	// neue Koordinaten nach Ablauf des Zeitquantums
-	newpos = pos + m_speed*dtime;
+	newpos = pos + getSpeed()*dtime;
 
 	// Linie zwischen alter und neuer Position
 	Line line(pos,newpos);
 
 
 	// Objekt an der aktuellen Position suchen
-	getRegionPtr()->getObjectsOnLine(line,&hitobj,m_layer,WorldObject::CREATURE | WorldObject::FIXED,0);
+	getRegion()->getObjectsOnLine(line,&hitobj,getLayer(),WorldObject::CREATURE | WorldObject::FIXED,0);
 
 	// Alle Objekte herausfiltern die verbuendet sind, sowie das zuletzt gerade getroffene Objekt
 	if (!hitobj.empty())
@@ -440,7 +470,7 @@ void Projectile::handleFlying(float dtime)
 		i = hitobj.begin();
 		hit = (*i);
 
-		while (!hitobj.empty() && (World::getWorld()->getRelation(m_damage.m_attacker_fraction,hit->getFraction()) == WorldObject:: ALLIED || hit->getId() == m_last_hit_object_id ))
+		while (!hitobj.empty() && (World::getWorld()->getRelation(getFraction(),hit->getFraction()) == WorldObject:: ALLIED || hit->getId() == m_last_hit_object_id ))
 		{
 			i=hitobj.erase(i);
 			if (i!=hitobj.end())
@@ -471,7 +501,7 @@ void Projectile::handleFlying(float dtime)
 			{
 				// Projektil wird zerstoert
 				DEBUG5("hit obj %i",hit->getId());
-				setState(DESTROYED);
+				setState(STATE_DESTROYED);
 				m_timer=0;
 			}
 			if (World::getWorld()->isServer())
@@ -485,22 +515,23 @@ void Projectile::handleFlying(float dtime)
 			// Projektil explodiert
 			// Status auf explodierend setzen, Radius, Timer setzen
 			DEBUG5("exploding");
-			 setState(EXPLODING);
-			if (m_type == FIRE_BALL || m_type == FIRE_ARROW)
-				m_type = FIRE_EXPLOSION;
-			else if (m_type == ICE_ARROW)
-				m_type = ICE_EXPLOSION;
-			else if (m_type == WIND_ARROW)
-				m_type = WIND_EXPLOSION;
+			 setState(STATE_EXPLODING);
+			 
+			if (getSubtype() == "FIRE_BALL" || getSubtype() == "FIRE_ARROW")
+				setSubtype("FIRE_EXPLOSION");
+			else if (getSubtype() == "ICE_ARROW")
+				setSubtype("ICE_EXPLOSION");
+			else if (getSubtype() == "WIND_ARROW")
+				setSubtype("WIND_EXPLOSION");
 			else
-				m_type = EXPLOSION;
+				setSubtype("EXPLOSION");
 
 			m_max_radius = 1.5;
 
 			m_timer=0;
 			setTimerLimit(200);
 
-			m_event_mask |= NetEvent::DATA_PROJ_STATE | NetEvent::DATA_TYPE | NetEvent::DATA_MAX_RADIUS;
+			addToNetEventMask(NetEvent::DATA_MAX_RADIUS);
 		}
 
 		// true, wenn das Projektil zu einem weiteren Ziel weiterspringt
@@ -518,11 +549,12 @@ void Projectile::handleFlying(float dtime)
 			}
 		}
 
-		if (hit->getTypeInfo()->m_type != WorldObject::TypeInfo::TYPE_FIXED_OBJECT && bounce)
+		if (hit->isCreature() && bounce)
 		{
+			Vector speed = getSpeed();
 			// Projektil hat ein Lebewesen getroffen, springt weiter
-			setState(FLYING);
-			float speed = m_speed.getLength();
+			setState(STATE_FLYING);
+			float v = speed.getLength();
 
 			// Kreis mit Radius 5 um aktuelle Position
 			Shape s;
@@ -532,7 +564,7 @@ void Projectile::handleFlying(float dtime)
 
 			// Alle Objekte im Kreis suchen
 			hitobj.clear();
-			getRegionPtr()->getObjectsInShape(&s,&hitobj,WorldObject::LAYER_AIR,WorldObject::CREATURE,0);
+			getRegion()->getObjectsInShape(&s,&hitobj,WorldObject::LAYER_AIR,WorldObject::CREATURE,0);
 			rmin = sqr(s.m_radius);
 			lid = hit->getId();
 			hit =0;
@@ -547,7 +579,7 @@ void Projectile::handleFlying(float dtime)
 					continue;
 
 				// alle nicht feindlich gesinnten Objekte ausschliessen
-				if (World::getWorld()->getRelation(m_damage.m_attacker_fraction,(*i)) != WorldObject::HOSTILE)
+				if (World::getWorld()->getRelation(getFraction(),(*i)) != WorldObject::HOSTILE)
 					continue;
 
 				// kein zurueckspringen zu dem davor zuletzt getroffenen Objekt
@@ -577,37 +609,34 @@ void Projectile::handleFlying(float dtime)
 				// Neue Richtung ist Vektor von aktueller Position zum neuen Ziel
 				dir = hit->getShape()->m_center - newpos;
 				dir.normalize();
-				m_speed = dir *speed;
-
-				m_event_mask |= NetEvent::DATA_SPEED | NetEvent::DATA_PROJ_STATE;
+				setSpeed(dir *v);
 
 				DEBUG5("dir %f %f",dir.m_x,dir.m_y);
 				m_timer =0;
 
 				// bei Kettenblitz Schaden pro Sprung um 20% reduzieren
-				if (m_type == CHAIN_LIGHTNING)
+				if (getSubtype() == "CHAIN_LIGHTNING")
 					m_damage.m_multiplier[Damage::AIR] *= 0.8;
 
-				m_shape.m_angle = m_speed.angle();
 			}
 			else
 			{
 				// kein Ziel gefunden, Projektil zerstoeren
-				setState(DESTROYED);
+				setState(STATE_DESTROYED);
 			}
 
 			// Zaehler, bei 5 Spruengen Projektil zerstoeren
 			m_counter ++;
 			if (m_counter>=5)
 			{
-				setState(DESTROYED);
+				setState(STATE_DESTROYED);
 			}
 		}
 
 	}
 	
 	// neue Koordinaten setzen
-	m_shape.m_center = newpos;
+	setPosition(newpos);
 
 }
 
@@ -620,22 +649,22 @@ void Projectile::handleGrowing(float dtime)
 	float rold;
 	int lid;
 
-	rold = m_shape.m_radius;
+	rold = getShape()->m_radius;
 	// Radius erhoehen
-	m_shape.m_radius += m_max_radius* dtime/(m_timer_limit);
+	getShape()->m_radius += m_max_radius* dtime/(m_timer_limit);
 
-	if ((m_type == FIRE_WAVE || m_type == ICE_RING) && World::getWorld()->isServer())
+	if ((getSubtype() == "FIRE_WAVE" || getSubtype() == "ICE_RING") && World::getWorld()->isServer())
 	{
 		// Schaden an die neu getroffenen Lebewesen austeilen
-		rnew = m_shape.m_radius;
+		rnew = getShape()->m_radius;
 		
 		Shape s;
-		s.m_center = m_shape.m_center;
+		s.m_center = getShape()->m_center;
 		s.m_type = Shape::CIRCLE;
-		s.m_radius = m_shape.m_radius;
+		s.m_radius = getShape()->m_radius;
 
 		// Alle Objekte suchen die sich in dem Kreis befinden
-		getRegionPtr()->getObjectsInShape(&m_shape,&hitobj,m_layer,WorldObject::CREATURE,0);
+		getRegion()->getObjectsInShape(getShape(),&hitobj,getLayer(),WorldObject::CREATURE,0);
 		lid = m_last_hit_object_id;
 		DEBUG5("last hit id = %i",lid);
 		rmin =0;
@@ -652,7 +681,7 @@ void Projectile::handleGrowing(float dtime)
 				DEBUG5("covering obj %i",hit->getId());
 
 				// Kein Schaden an nicht feindliche Objekte austeilen
-				if (World::getWorld()->getRelation(m_damage.m_attacker_fraction,hit) != WorldObject::HOSTILE)
+				if (World::getWorld()->getRelation(getFraction(),hit) != WorldObject::HOSTILE)
 					continue;
 
 				// kein Schaden an Objekte austeilen, die sich im inneren Kreis befinden
@@ -681,16 +710,14 @@ void Projectile::handleGrowing(float dtime)
 		// Timer abgelaufen
 
 		// Standardverhalten Projektil zerstoeren
-		setState(DESTROYED);
+		setState(STATE_DESTROYED);
 
-		if (m_type == FIRE_WALL)
+		if (getSubtype() == "FIRE_WALL")
 		{
 			// fuer Feuersaeule: Uebergang in stabilen Zustand
 			m_timer =0;
 			setTimerLimit(5000);
-			setState(STABLE);
-
-			m_event_mask |= NetEvent::DATA_PROJ_STATE | NetEvent::DATA_PROJ_TIMER;
+			setState(STATE_STABLE);
 		}
 	}
 
@@ -704,20 +731,20 @@ void Projectile::handleStable(float dtime)
 	WorldObject* hit;
 
 	// aktuelle Position
-	Vector& pos= m_shape.m_center;
+	Vector pos= getPosition();
 	Vector dir;
 	Projectile* pr;
 
 	if (m_timer >= m_timer_limit && World::getWorld()->isServer())
 	{
 		// Timer Limit erreicht
-		setState(DESTROYED);
+		setState(STATE_DESTROYED);
 
-		if (m_type == BLIZZARD)
+		if (getSubtype() == "BLIZZARD")
 		{
 
 			// Alle Objekte in der Flaeche suchen
-			getRegionPtr()->getObjectsInShape(&m_shape,&hitobj,m_layer,WorldObject::CREATURE,0);
+			getRegion()->getObjectsInShape(getShape(),&hitobj,getLayer(),WorldObject::CREATURE,0);
 			for (i=hitobj.begin();i!=hitobj.end();++i)
 			{
 				// Schaden austeilen
@@ -731,15 +758,15 @@ void Projectile::handleStable(float dtime)
 				// naechste Welle: Timer zuruecksetzen, Zaehler erhoehen
 				m_counter ++;
 				m_timer =0;
-				setState(STABLE);
+				setState(STATE_STABLE);
 
 			}
 		}
 
-		if (m_type == FREEZE || m_type == STATIC_SHIELD)
+		if (getSubtype() == "FREEZE" || getSubtype() == "STATIC_SHIELD")
 		{
 			// Alle Objekte in der Flaeche suchen
-			getRegionPtr()->getObjectsInShape(&m_shape,&hitobj,m_layer,WorldObject::CREATURE,0);
+			getRegion()->getObjectsInShape(getShape(),&hitobj,getLayer(),WorldObject::CREATURE,0);
 			for (i=hitobj.begin();i!=hitobj.end();++i)
 			{
 				// Schaden austeilen
@@ -748,15 +775,16 @@ void Projectile::handleStable(float dtime)
 			}
 		}
 
-		if (m_type ==  THUNDERSTORM)
+		if (getSubtype() ==  "THUNDERSTORM")
 		{
+			float r = getShape()->m_radius;
 			// Punkt in der Flaeche des Zaubers auswuerfeln
-			dir = Vector(m_shape.m_radius , m_shape.m_radius);
+			dir = Vector(r, r);
 
-			while (dir.getLength() > m_shape.m_radius)
+			while (dir.getLength() > r)
 			{
-				dir.m_x = m_shape.m_radius*(1 - 2*rand()*1.0/RAND_MAX);
-				dir.m_y = m_shape.m_radius*(1 - 2*rand()*1.0/RAND_MAX);
+				dir.m_x = r*(1 - 2*rand()*1.0/RAND_MAX);
+				dir.m_y = r*(1 - 2*rand()*1.0/RAND_MAX);
 			}
 
 			// Kreis um den ausgewuerfelten Punkt mit Radius 1.5
@@ -767,14 +795,14 @@ void Projectile::handleStable(float dtime)
 			hitobj.clear();
 
 			// Alle Objekte in dem Kreis suchen
-			getRegionPtr()->getObjectsInShape(&s,&hitobj,m_layer,WorldObject::CREATURE,0);
+			getRegion()->getObjectsInShape(&s,&hitobj,getLayer(),WorldObject::CREATURE,0);
 
 			// Alle nicht feindlichen Objekte aus der Liste entfernen
 			if (!hitobj.empty())
 			{
 				i = hitobj.begin();
 				hit = (*i);
-				while (i != hitobj.end() && World::getWorld()->getRelation(m_damage.m_attacker_fraction,hit) != WorldObject::HOSTILE)
+				while (i != hitobj.end() && World::getWorld()->getRelation(getFraction(),hit) != WorldObject::HOSTILE)
 				{
 					i=hitobj.erase(i);
 					if (i!=hitobj.end())
@@ -792,8 +820,8 @@ void Projectile::handleStable(float dtime)
 				DEBUG5("hit obj %i",hit->getId());
 
 				// beim Ziel Projektil vom Typ Blitz erzeugen
-				pr = new Projectile(Projectile::LIGHTNING,&m_damage, World::getWorld()->getValidId());
-				getRegionPtr()->insertProjectile(pr,hit->getShape()->m_center);
+				pr = new Projectile("LIGHTNING",&m_damage, World::getWorld()->getValidId());
+				getRegion()->insertProjectile(pr,hit->getShape()->m_center);
 			}
 
 			// Gewitter besteht aus 30 Blitzen
@@ -802,23 +830,22 @@ void Projectile::handleStable(float dtime)
 				// naechster Blitz: Timer zuruecksetzen
 				m_counter ++;
 				m_timer =0;
-				setState(STABLE);
+				setState(STATE_STABLE);
 
 			}
 
 		}
 
-		if (m_type == FIRE_WALL)
+		if (getSubtype() == "FIRE_WALL")
 		{
 			// Zauber Feuersaeule
 			// Uebergang zum Zustand verschwindend
 			m_timer =0;
 			setTimerLimit(200);
-			setState(VANISHING);
-			m_event_mask |= NetEvent::DATA_PROJ_STATE | NetEvent::DATA_PROJ_TIMER;
+			setState(STATE_VANISHING);
 		}
 
-		if (m_type == LIGHTNING || m_type ==LIGHT_BEAM  || m_type ==ELEM_EXPLOSION || m_type ==ACID || m_type ==DIVINE_BEAM  || m_type ==HYPNOSIS)
+		if (getSubtype() == "LIGHTNING" || getSubtype() =="LIGHT_BEAM"  || getSubtype() =="ELEM_EXPLOSION" || getSubtype() =="ACID" || getSubtype() =="DIVINE_BEAM"  || getSubtype() =="HYPNOSIS")
 		{
 			// Objekt an der Stelle suchen an der der Zauber wirkt
 			Shape s;
@@ -826,7 +853,7 @@ void Projectile::handleStable(float dtime)
 			s.m_type = Shape::CIRCLE;
 			s.m_radius = 0.5;
 			WorldObjectList hits;
-			getRegionPtr()->getObjectsInShape( &s,&hits, m_layer );
+			getRegion()->getObjectsInShape( &s,&hits, getLayer() );
 			if (!hits.empty())
 			{
 				hit = hits.front();
@@ -853,19 +880,13 @@ void Projectile::handleStable(float dtime)
 
 void Projectile::toString(CharConv* cv)
 {
-	cv->toBuffer((char) m_type);
-	cv->toBuffer( m_id);
-	cv->toBuffer((char) m_damage.m_attacker_fraction);
-	cv->toBuffer((char) m_state);
-	cv->toBuffer(m_shape.m_center.m_x);
-	cv->toBuffer(m_shape.m_center.m_y);
-	cv->toBuffer(m_shape.m_radius);
-	cv->toBuffer(m_shape.m_angle);
-	cv->toBuffer(m_layer);
+	GameObject::toString(cv);
+	
+	cv->toBuffer((char) getFraction());
 	cv->toBuffer(m_timer);
 	cv->toBuffer(m_timer_limit);
-	cv->toBuffer(m_speed.m_x);
-	cv->toBuffer(m_speed.m_y);
+	cv->toBuffer(getSpeed().m_x);
+	cv->toBuffer(getSpeed().m_y);
 	cv->toBuffer(m_flags);
 	cv->toBuffer(m_max_radius);
 	cv->toBuffer(m_goal_object);
@@ -874,22 +895,17 @@ void Projectile::toString(CharConv* cv)
 
 void Projectile::fromString(CharConv* cv)
 {
-	// Typ und ID werden schon vorher eingelesen..
-
+	GameObject::fromString(cv);
+	
 	char tmp;
 	cv->fromBuffer<char>(tmp);
-	m_damage.m_attacker_fraction = (WorldObject::Fraction) tmp;
-	cv->fromBuffer<char>(tmp);
-	m_state = (ProjectileState) tmp;
-	cv->fromBuffer<float>(m_shape.m_center.m_x);
-	cv->fromBuffer<float>(m_shape.m_center.m_y);
-	cv->fromBuffer<float>(m_shape.m_radius);
-	cv->fromBuffer<float>(m_shape.m_angle);
-	cv->fromBuffer<short>(m_layer);
+	m_fraction = (WorldObject::Fraction) tmp;
 	cv->fromBuffer<float>(m_timer);
 	cv->fromBuffer<float>(m_timer_limit);
-	cv->fromBuffer(m_speed.m_x);
-	cv->fromBuffer(m_speed.m_y);
+	Vector speed;
+	cv->fromBuffer(speed.m_x);
+	cv->fromBuffer(speed.m_y);
+	setSpeed(speed);
 	cv->fromBuffer(m_flags);
 	cv->fromBuffer(m_max_radius);
 	cv->fromBuffer(m_goal_object);
@@ -899,15 +915,10 @@ void Projectile::writeNetEvent(NetEvent* event, CharConv* cv)
 {
 	if (event->m_data & NetEvent::DATA_SPEED)
 	{
-		cv->toBuffer(m_shape.m_center.m_x);
-		cv->toBuffer(m_shape.m_center.m_y);
-		cv->toBuffer(m_speed.m_x);
-		cv->toBuffer(m_speed.m_y);
-	}
-
-	if (event->m_data & NetEvent::DATA_PROJ_STATE)
-	{
-		cv->toBuffer((char) m_state);
+		cv->toBuffer(getShape()->m_center.m_x);
+		cv->toBuffer(getShape()->m_center.m_y);
+		cv->toBuffer(getSpeed().m_x);
+		cv->toBuffer(getSpeed().m_y);
 	}
 
 	if (event->m_data & NetEvent::DATA_GOAL_OBJECT)
@@ -915,12 +926,7 @@ void Projectile::writeNetEvent(NetEvent* event, CharConv* cv)
 		cv->toBuffer(m_goal_object);
 	}
 
-	if (event->m_data & NetEvent::DATA_TYPE)
-	{
-		cv->toBuffer((char) m_type);
-	}
-
-	if (event->m_data & NetEvent::DATA_PROJ_TIMER)
+	if (event->m_data & NetEvent::DATA_TIMER)
 	{
 		cv->toBuffer(m_timer_limit);
 	}
@@ -928,7 +934,7 @@ void Projectile::writeNetEvent(NetEvent* event, CharConv* cv)
 	if (event->m_data & NetEvent::DATA_MAX_RADIUS)
 	{
 		cv->toBuffer(m_max_radius);
-		cv->toBuffer<float>(m_shape.m_radius);
+		cv->toBuffer<float>(getShape()->m_radius);
 	}
 }
 
@@ -936,37 +942,24 @@ void Projectile::processNetEvent(NetEvent* event, CharConv* cv)
 {
 	if (event->m_data & NetEvent::DATA_SPEED)
 	{
-		cv->fromBuffer(m_shape.m_center.m_x);
-		cv->fromBuffer(m_shape.m_center.m_y);
-		cv->fromBuffer(m_speed.m_x);
-		cv->fromBuffer(m_speed.m_y);
-
-		if (m_speed.m_y!=0 || m_speed.m_x !=0)
-		{
-			m_shape.m_angle = m_speed.angle();
-		}
+		Vector pos;
+		cv->fromBuffer(pos.m_x);
+		cv->fromBuffer(pos.m_y);
+		setPosition(pos);
+		
+		Vector speed;
+		cv->fromBuffer(speed.m_x);
+		cv->fromBuffer(speed.m_y);
+		setSpeed(speed);
 	}
 
-	if (event->m_data & NetEvent::DATA_PROJ_STATE)
-	{
-		char ctmp;
-		cv->fromBuffer(ctmp);
-		m_state = (ProjectileState) ctmp;
-	}
 
 	if (event->m_data & NetEvent::DATA_GOAL_OBJECT)
 	{
 		cv->fromBuffer(m_goal_object);
 	}
 
-	if (event->m_data & NetEvent::DATA_TYPE)
-	{
-		char ctmp;
-		cv->fromBuffer(ctmp);
-		m_type = (ProjectileType) ctmp;
-	}
-
-	if (event->m_data & NetEvent::DATA_PROJ_TIMER)
+	if (event->m_data & NetEvent::DATA_TIMER)
 	{
 		cv->fromBuffer(m_timer_limit);
 		m_timer =0;
@@ -975,7 +968,7 @@ void Projectile::processNetEvent(NetEvent* event, CharConv* cv)
 	if (event->m_data & NetEvent::DATA_MAX_RADIUS)
 	{
 		cv->fromBuffer(m_max_radius);
-		cv->fromBuffer<float>(m_shape.m_radius);
+		cv->fromBuffer<float>(getShape()->m_radius);
 	}
 }
 

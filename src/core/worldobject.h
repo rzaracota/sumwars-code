@@ -25,11 +25,12 @@
 #include <sstream>
 #include "debug.h"
 #include "charconv.h"
-#include "netevent.h"
+#include "networkstruct.h"
 #include <map>
 #include <list>
 
 #include "geometry.h"
+#include "gameobject.h"
 
 class World;
 class Region;
@@ -53,12 +54,6 @@ struct Damage;
  */
 struct GridLocation
 {
-	
-	/**
-	 * \var m_region
-	 * \brief Region in der sich das Objekt befindet
-	 */
-	short m_region;
 	
 	/**
 	 * \var m_grid_x
@@ -85,7 +80,8 @@ struct GridLocation
  * \class WorldObject
  * \brief ein Objekt, welches sich in der Spielwelt befindet
  */
-class WorldObject {
+class WorldObject : public GameObject
+{
 
 	public:
 
@@ -115,65 +111,6 @@ class WorldObject {
   		GROUP_ALL = 15
 	};
 	
-	/**
-	 * \enum Layer
-	 * \brief TODO
-	 */
-	enum Layer
-	{
-		LAYER_BASE =0x01,
-		LAYER_AIR = 0x02,
-		LAYER_DEAD = 0x04,
-		LAYER_ALL = 0x0F,
-   
-		LAYER_SPECIAL = 0x10,
-	};
-	
-	/**
-	 * \struct TypeInfo
-	 * \brief Enthaelt alle Informationen zum Typ eines Objektes
-	 */
-	struct TypeInfo
-	{
-		/**
-		 * \enum ObjectType
-		 * \brief Grundtypen von Objekten
-		 */
-		enum ObjectType
-		{
-			TYPE_NONE=0,
-			TYPE_PLAYER =1,
-			TYPE_MONSTER= 2,
-			TYPE_NPC=3,
-			TYPE_FIXED_OBJECT=4
-		};
-
-		/**
-		 * \var ObjectSubtype
-		 * \brief genauere Unterteilung von Objekten
-		 */
-		typedef std::string ObjectSubtype;
-
-		
-
-
-
-		/**
-		* \var m_type
-		* \brief Informationen zum Objekttyp, unter anderem welcher abgeleiteten Klasse das Objekt angeh&ouml;rt
-		*/
-		ObjectType m_type;
-
-		/**
-		* \var m_subtype;
-		* \brief Gibt den Untertyp des Objektes an
-		*/
-		ObjectSubtype m_subtype;
-
-		
-
-	};
-
 
 	/**
 	 * \enum Category
@@ -193,43 +130,13 @@ class WorldObject {
 		SUMMONED = 0x1000
 	};
 
-	/**
-	 * \enum Fraction
-	 * \brief Parteien fuer die Lebewesen kaempfen koennen
-	*/
-	enum Fraction
-	{
-		NOFRACTION = 0,
-		FRAC_HUMAN = 1,
-		FRAC_DEMON = 2,
-		FRAC_UNDEAD = 3,
-		FRAC_DWARF = 4,
-		FRAC_SUMMONER = 5,
-		FRAC_MONSTER = 6,
-		FRAC_NEUTRAL_TO_ALL =8,
-		FRAC_HOSTILE_TO_ALL=9,
-		FRAC_PLAYER_PARTY = 10,
-	};
+	
 	
 	/**
 	 * \enum State
 	 * \brief zaehlt Zustaende von Objekten auf
 	 */
-	enum State
-	{
-			STATE_INACTIVE=0,
-			STATE_ACTIVE =1,
-			STATE_DIEING =2,
-			STATE_DEAD =3,
-			STATE_REGION_DATA_REQUEST=6,
-			STATE_REGION_DATA_WAITING=4,
-			STATE_ENTER_REGION =5,
-			STATE_QUIT=9,
-			STATE_STATIC = 10,
-			STATE_SPEAK= 20,
-   			STATE_NONE = 30,
-	  		STATE_AUTO = 31,
-	};
+	
 
 	/**
 	 * \enum SpecialFlags
@@ -277,12 +184,6 @@ class WorldObject {
 	
 	
 	/**
-	 * \fn Region* getRegion()
-	 * \brief Gibt die Region aus, in der sich das Objekt befindet
-	 */
-	Region* getRegion();
-	
-	/**
 	 * \fn GridLocation* getGridLocation()
 	 * \brief Gibt den Ort des Objektes im Grid aus
 	 * \return Ort des Objektes im Grid
@@ -302,18 +203,6 @@ class WorldObject {
 	virtual  bool  init ()
 	{
 		m_destroyed=false;
-		return true;
-	}
-	
-	
-	/**
-	 * \fn virtual bool update ( float time)
-	 * \brief Aktualisiert das WorldObject, nachdem eine bestimmte Zeit vergangen ist. Alle Aktionen des Objekts werden auf diesem Weg ausgel&ouml;st. Die Funktion ist virtuell und wird von den abgeleiteten Klassen &uuml;berschrieben
-	 * \param time Menge der vergangenen Zeit in Millisekunden
-	 * \return bool, der angibt, ob die Aktualisierung fehlerfrei verlaufen ist
-	 */
-	virtual  bool  update ( float time) 
-	{
 		return true;
 	}
 	
@@ -368,17 +257,15 @@ class WorldObject {
 	 * \param event NetEvent das beschrieben wird
 	 * \param cv Bitstream
 	 */
-	virtual void writeNetEvent(NetEvent* event, CharConv* cv)
-	{
-	}
+	virtual void writeNetEvent(NetEvent* event, CharConv* cv);
+	
 	
 	/**
 	 * \fn virtual void processNetEvent(NetEvent* event, CharConv* cv)
 	 * \brief Fuehrt die Wirkung eines NetEvents auf das Objekt aus. Weitere Daten werden aus dem Bitstream gelesen
 	 */
-	virtual void processNetEvent(NetEvent* event, CharConv* cv)
-	{
-	}
+	virtual void processNetEvent(NetEvent* event, CharConv* cv);
+	
 	
 	/**
 	 * \fn virtual bool reactOnUse (int id)
@@ -397,102 +284,11 @@ class WorldObject {
 	 */
 	virtual bool isLarge();
 	
-	/**
-	 * \fn int getNetEventMask()
-	 * \brief Gibt die Bitmaske der NetEvents aus
-	 */
-	int getNetEventMask()
-	{
-		return m_event_mask;
-	}
 	
-	/**
-	 * \fn void clearNetEventMask()
-	 * \brief Setzt die Bitmaske der NetEvents auf 0
-	 */
-	void clearNetEventMask()
-	{
-		m_event_mask =0;
-	}
 
 	//Accessor Methods
-    /**
-	 * \fn void setSubType(TypeInfo::ObjectSubtype t)
-	 * \brief Setzt den Subtyp des Objektes
-	 * \param t neuer Subtyp
-	 */
-    void setSubType(TypeInfo::ObjectSubtype t)
-    {
-        m_type_info.m_subtype =t;
-    }
-	
-	/**
-	 * \fn Shape* getShape()
-	 * \brief Gibt die Form des Objektes aus
-	 */
-	Shape* getShape()
-	{
-		return &m_shape;
-	}
-	
-	/**
-	 * \fn short getLayer()
-	 * \brief Gibt die Ebene des Objektes aus
-	 */
-	short getLayer()
-	{
-		return m_layer;
-	}
-	
-	/**
-	 * \fn void setLayer(short layer)
-	 * \brief Setzt die Ebene des Objektes
-	 * \param layer Ebene
-	 */
-	void setLayer(short layer)
-	{
-		m_layer = layer;
-	}
 
-	/**
-	 * \fn TypeInfo* getTypeInfo()
-	 * \brief Gibt einen Zeiger auf die Struktur mit den Typinformationen zurueck
-	 * \return Zeiger auf die Struktur
-	 */
-	TypeInfo* getTypeInfo()
-	{
-		return &m_type_info;
-	}
 
-	/**
-	 * \fn State getState()
-	 * \brief Gibt den aktuellen Status des Objektes aus
-	 * \return Status des Objektes
-	 */
-	State getState()
-	{
-		return m_state;
-	}
-
-	/**
-	 * \fn void setState(State s)
-	 * \brief Setzt den Status
-	 * \param s Status
-	 */
-	void setState(State s)
-	{
-		m_state = s;
-	}
-
-	/**
-	 * \fn int getId()
-	 * \brief Gibt die ID des objektes zurueck
-	 * \return ID
-	 */
-	int getId()
-	{
-		return m_id;
-	}
 	
 	/**
 	 * \fn Fraction getFraction()
@@ -508,10 +304,7 @@ class WorldObject {
 	 * \brief setzt die Fraktion
 	 * \param fr Fraktion
 	 */
-	void setFraction(Fraction fr)
-	{
-		m_fraction = fr;
-	}
+	void setFraction(Fraction fr);
 	
 	/**
 	 * \fn Category getCategory()
@@ -522,24 +315,13 @@ class WorldObject {
 		return m_category;
 	}
 	
-	
 	/**
-	 * \fn void setId(int id)
-	 * \brief Setzt die ID eines Objektes
+	 * \fn void setCategory(Category cat)
+	 * \brief Setzt die Kategorie
+	 * \param cat neue Kategorie
 	 */
-	void setId(int id)
-	{
-		m_id = id;
-	}
+	void setCategory(Category cat);
 	
-	/**
-	 * \fn Vector& getSpeed()
-	 * \brief Gibt die Geschwindigkeit des Objektes aus
-	 */
-	Vector& getSpeed()
-	{
-		return m_speed;
-	}
 	
 	/**
 	 * \fn WorldObject::Group getGroup()
@@ -547,9 +329,9 @@ class WorldObject {
 	 */
 	WorldObject::Group getGroup()
 	{
-		if (getTypeInfo()->m_type == WorldObject::TypeInfo::TYPE_FIXED_OBJECT)
+		if (getType() == "FIXED_OBJECT")
 			return WorldObject::FIXED;
-		if (getState() == WorldObject::STATE_DEAD || getState() == WorldObject::STATE_DIEING )
+		if (getState() == STATE_DEAD || getState() == STATE_DIEING )
 			return WorldObject::DEAD;
 		return WorldObject::CREATURE;
 			
@@ -570,18 +352,7 @@ class WorldObject {
 	 */
 	virtual void fromString(CharConv* cv);
 
-	/**
-	 * \fn std::string getName()
-	 * \brief Gibt den Name des Objektes aus
-	 */
-	virtual std::string getName();
-
-
-	/**
-	 * \fn std::string getNameId()
-	 * \brief Gibt Name mit angehaengter ID aus
-	 */
-	std::string getNameId();
+	
 	
 	/**
 	 * \fn virtual int getValue(std::string valname)
@@ -605,24 +376,7 @@ class WorldObject {
 
 	protected:
 		
-	/**
-	 * \var int m_event_mask
-	 * \brief Bitmaske mit den NetEvents die das Objekt seit dem letzten Update erlebt hat
-	 */
-	int m_event_mask;
-	
-	/**
-	 * \var short m_layer
-	 * \brief Gibt die Ebene an, in der sich das Objekt befindet
-	 */
-	short m_layer;
-	
-	/**
-	 * \var Vector m_speed
-	 * \brief Gibt die Geschwindigkeit des Objektes an
-	 */
-	Vector m_speed;
-	
+
 	/**
 	 * \var Category m_category
 	 * \brief Kategorie des Objektes
@@ -638,31 +392,6 @@ class WorldObject {
 //Private stuff
 private:
 
-	/**
-	 * \var Shape m_shape
-	 * \brief Gibt die Form des Objektes an
-	 */
-	Shape m_shape;
-
-	
-	
-	/**
-	 * \var TypeInfo m_type_info
-	 * \brief Beeinhaltet alle Informationen zum Typ des Objektes
-	 */
-	TypeInfo m_type_info;
-
-	/**
-	 * \var m_state;
-	 * \brief Gibt den Status des Objekts an
-	 */
-	State m_state;
-
-	/**
-	 * \var m_id
-	 * \brief ID des Objekts
-	 */
-	int m_id;
 
 	/**
 	 * \var GridLocation m_grid_location

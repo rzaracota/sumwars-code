@@ -466,19 +466,19 @@ CharInfo::CharInfo (Document* doc)
 	// Label Klasse
 	label =  win_mgr.getWindow("ClassLabel");
 	out_stream.str("");
-	if (player->getTypeInfo()->m_subtype == "warrior")
+	if (player->getSubtype() == "warrior")
 	{
 		out_stream.str(gettext("Warrior"));
 	}
-	else if (player->getTypeInfo()->m_subtype == "mage")
+	else if (player->getSubtype() == "mage")
 	{
 		out_stream.str( gettext("Magician"));
 	}
-	else if (player->getTypeInfo()->m_subtype == "archer")
+	else if (player->getSubtype() == "archer")
 	{
 		out_stream.str( gettext("Archer"));
 	}
-	else if (player->getTypeInfo()->m_subtype == "priest")
+	else if (player->getSubtype() == "priest")
 	{
 		out_stream.str( gettext("Priest"));
 	}
@@ -732,13 +732,13 @@ CharInfo::CharInfo (Document* doc)
 	// Label Schaden Basisattacke
 	label =  win_mgr.getWindow( "BaseDmgLabel");
 	out_stream.str("");
-	if (player->getTypeInfo()->m_subtype == "mage")
+	if (player->getSubtype() == "mage")
 		out_stream << Action::getName(Action::MAGIC_ATTACK);
-	if (player->getTypeInfo()->m_subtype == "archer")
+	if (player->getSubtype() == "archer")
 		out_stream << Action::getName(Action::RANGE_ATTACK);
-	if (player->getTypeInfo()->m_subtype == "warrior")
+	if (player->getSubtype() == "warrior")
 		out_stream << Action::getName(Action::ATTACK);
-	if (player->getTypeInfo()->m_subtype == "priest")
+	if (player->getSubtype() == "priest")
 		out_stream << Action::getName(Action::HOLY_ATTACK);
 
 	if (label->getText()!= (CEGUI::utf8*) out_stream.str().c_str())

@@ -57,6 +57,7 @@ void Party::updateMinimaps()
 
 Minimap* Party::getMinimap(short rid)
 {
+	DEBUG5("get Minimap for %i",rid);
 	std::map<short,Minimap*>::iterator mt;
 	
 	mt = m_minimaps.find(rid);
@@ -94,9 +95,12 @@ void Party::addMember(int id)
 		// Sichtbereich des neuen Spielers mit dem der Party vereinigen 
 		std::map<short,Minimap*>& othermmaps = p->getMinimaps();
 		std::map<short,Minimap*>::iterator mt;
+		Minimap* mmap;
 		for (mt = othermmaps.begin(); mt != othermmaps.end(); ++mt)
 		{
-			getMinimap(mt->first)->merge(*(mt->second));
+			
+			mmap = getMinimap(mt->first);
+			mmap->merge(*(mt->second));
 		}
 	}
 	

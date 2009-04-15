@@ -607,11 +607,11 @@ void SkillTree::update()
 
 	// Enum Wert bei dem die Skillz des Spielers anfangen
 	int i=Action::BASH;
-	if (player->getTypeInfo()->m_subtype == "mage")
+	if (player->getSubtype() == "mage")
 		i = Action::FIRE_BOLT;
-	if (player->getTypeInfo()->m_subtype == "archer")
+	if (player->getSubtype() == "archer")
 		i= Action::TRIPLE_SHOT;
-	if (player->getTypeInfo()->m_subtype == "priest")
+	if (player->getSubtype() == "priest")
 		i= Action::HOLY_LIGHT;
 
 	bool vis;

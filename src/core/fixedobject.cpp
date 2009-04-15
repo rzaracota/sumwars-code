@@ -31,9 +31,9 @@ FixedObject::FixedObject( int id) : WorldObject(id)
 
 
 
-FixedObject::FixedObject( int id,  TypeInfo::ObjectSubtype object_subtype)  : WorldObject( id)
+FixedObject::FixedObject( int id,  Subtype object_subtype)  : WorldObject( id)
 {
-	getTypeInfo()->m_subtype = object_subtype;
+	setSubtype(object_subtype);
 	bool tmp=FixedObject::init();
 	if (!tmp)
 	{
@@ -45,9 +45,10 @@ FixedObject::FixedObject( int id,  TypeInfo::ObjectSubtype object_subtype)  : Wo
 bool FixedObject::init()
 {
 	//eigene Initialisierung
-	getTypeInfo()->m_type = TypeInfo::TYPE_FIXED_OBJECT;
-
-	setState(STATE_STATIC);
+	setType("FIXED_OBJECT");
+	setState(STATE_STATIC,false);
+	
+	clearNetEventMask();
 	return true;
 }
 

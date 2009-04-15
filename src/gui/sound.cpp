@@ -7,7 +7,7 @@ std::map<std::string, SoundObject*> SoundSystem::m_sound_objects;
 
 std::map<SoundTarget, SoundName> SoundSystem::m_sounds_targets;
 
-std::map<int, SoundName> SoundSystem::m_projectile_sounds;
+std::map<GameObject::Subtype, SoundName> SoundSystem::m_projectile_sounds;
 
 Sound SoundSystem::getSound(SoundName sname)
 {
@@ -129,40 +129,40 @@ void SoundSystem::init()
 	SoundSystem::registerSound("thunder", "thunder");
 
 
-	m_projectile_sounds[Projectile::ARROW] = "arrow";
-	m_projectile_sounds[Projectile::GUIDED_ARROW] = "arrow";
-	m_projectile_sounds[Projectile::FIRE_ARROW] = "arrow";
-	m_projectile_sounds[Projectile::ICE_ARROW] = "arrow";
-	m_projectile_sounds[Projectile::WIND_ARROW] = "arrow";
+	m_projectile_sounds["ARROW"] = "arrow";
+	m_projectile_sounds["GUIDED_ARROW"] = "arrow";
+	m_projectile_sounds["FIRE_ARROW"] = "arrow";
+	m_projectile_sounds["ICE_ARROW"] = "arrow";
+	m_projectile_sounds["WIND_ARROW"] = "arrow";
 
-	m_projectile_sounds[Projectile::MAGIC_ARROW] = "cast_fire";
-	m_projectile_sounds[Projectile::FIRE_BOLT] = "cast_fire";
-	m_projectile_sounds[Projectile::FIRE_BALL] = "cast_fire";
-	m_projectile_sounds[Projectile::FIRE_WALL] = "cast_fire";
-	m_projectile_sounds[Projectile::FIRE_WAVE] = "cast_fire";
-	m_projectile_sounds[Projectile::FIRE_WAVE] = "cast_fire";
-	m_projectile_sounds[Projectile::EXPLOSION] = "cast_fire";
-	m_projectile_sounds[Projectile::FIRE_EXPLOSION] = "cast_fire";
+	m_projectile_sounds["MAGIC_ARROW"] = "cast_fire";
+	m_projectile_sounds["FIRE_BOLT"] = "cast_fire";
+	m_projectile_sounds["FIRE_BALL"] = "cast_fire";
+	m_projectile_sounds["FIRE_WALL"] = "cast_fire";
+	m_projectile_sounds["FIRE_WAVE"] = "cast_fire";
+	m_projectile_sounds["FIRE_WAVE"] = "cast_fire";
+	m_projectile_sounds["EXPLOSION"] = "cast_fire";
+	m_projectile_sounds["FIRE_EXPLOSION"] = "cast_fire";
 
-	m_projectile_sounds[Projectile::ICE_BOLT] = "cast_ice";
-	m_projectile_sounds[Projectile::BLIZZARD] = "cast_ice";
-	m_projectile_sounds[Projectile::ICE_RING] = "cast_ice";
-	m_projectile_sounds[Projectile::FREEZE] = "cast_ice";
-	m_projectile_sounds[Projectile::ICE_EXPLOSION] = "cast_ice";
-
-
-	m_projectile_sounds[Projectile::LIGHTNING] = "cast_thunder";
-	m_projectile_sounds[Projectile::THUNDERSTORM] = "thunder";
-	m_projectile_sounds[Projectile::CHAIN_LIGHTNING] = "cast_thunder";
-	m_projectile_sounds[Projectile::STATIC_SHIELD] = "cast_thunder";
-	m_projectile_sounds[Projectile::WIND_EXPLOSION] = "cast_thunder";
+	m_projectile_sounds["ICE_BOLT"] = "cast_ice";
+	m_projectile_sounds["BLIZZARD"] = "cast_ice";
+	m_projectile_sounds["ICE_RING"] = "cast_ice";
+	m_projectile_sounds["FREEZE"] = "cast_ice";
+	m_projectile_sounds["ICE_EXPLOSION"] = "cast_ice";
 
 
-	m_projectile_sounds[Projectile::LIGHT_BEAM] = "cast_fire";
-	m_projectile_sounds[Projectile::ELEM_EXPLOSION] = "cast_fire";
-	m_projectile_sounds[Projectile::ACID] = "cast_fire";
-	m_projectile_sounds[Projectile::DIVINE_BEAM] = "cast_fire";
-	m_projectile_sounds[Projectile::HYPNOSIS] = "cast_fire";
+	m_projectile_sounds["LIGHTNING"] = "cast_thunder";
+	m_projectile_sounds["THUNDERSTORM"] = "thunder";
+	m_projectile_sounds["CHAIN_LIGHTNING"] = "cast_thunder";
+	m_projectile_sounds["STATIC_SHIELD"] = "cast_thunder";
+	m_projectile_sounds["WIND_EXPLOSION"] = "cast_thunder";
+
+
+	m_projectile_sounds["LIGHT_BEAM"] = "cast_fire";
+	m_projectile_sounds["ELEM_EXPLOSION"] = "cast_fire";
+	m_projectile_sounds["ACID"] = "cast_fire";
+	m_projectile_sounds["DIVINE_BEAM"] = "cast_fire";
+	m_projectile_sounds["HYPNOSIS"] = "cast_fire";
 
 
 }
@@ -265,11 +265,11 @@ void SoundSystem::registerSound(SoundTarget target, SoundName name)
 	m_sounds_targets.insert(std::make_pair(target,name));
 }
 
-SoundName SoundSystem::getProjectileSound(Projectile::ProjectileType ptype)
+SoundName SoundSystem::getProjectileSound(Projectile::Subtype ptype)
 {
-	std::map<int, SoundName>::iterator it;
+	std::map<Projectile::Subtype, SoundName>::iterator it;
 
-	it = m_projectile_sounds.find((int) ptype);
+	it = m_projectile_sounds.find(ptype);
 	if (it != m_projectile_sounds.end())
 	{
 		return it->second;

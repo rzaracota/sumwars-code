@@ -62,10 +62,16 @@ struct MonsterBasicData
 	CreatureBaseAttr m_base_attr;
 	
 	/**
-	 * \var WorldObject::TypeInfo m_type_info
+	 * \var GameObject::Type m_type
 	 * \brief Informationen zum Typ
 	 */
-	WorldObject::TypeInfo m_type_info;
+	GameObject::Type m_type;
+	
+	/**
+	 * \var GameObject::Type m_subtype
+	 * \brief Informationen zum Subtyp
+	 */
+	GameObject::Type m_subtype;
 	
 	/**
 	 * \var WorldObject::Category m_category
@@ -128,10 +134,10 @@ class MonsterGroup
 	struct SubGroup
 	{
 		/**
-		 * \var WorldObject::TypeInfo::ObjectSubtype m_subtype
+		 * \var GameObject::Subtype m_subtype
 		 * \brief Subtype der erzeugten Monster
 		 */
-		WorldObject::TypeInfo::ObjectSubtype m_subtype;
+		GameObject::Subtype m_subtype;
 		
 		/**
 		 * \var float m_prob
@@ -151,13 +157,13 @@ class MonsterGroup
 	public:
 		
 		/**
-		 * \fn void addMonsterGroup(WorldObject::TypeInfo::ObjectSubtype subtype, int number =1, float prob = 1.0)
+		 * \fn void addMonsterGroup(GameObject::Subtype subtype, int number =1, float prob = 1.0)
 		 * \brief Fuegt der Monstergruppe eine Subgruppe hinzu
 		 * \param subtype Typ der Monster
 		 * \param number Anzahl der Monster
 		 * \param prob Wahrscheinlichkeit mit der ein Monster erzeugt wird
 		 */
-		void addMonsters(WorldObject::TypeInfo::ObjectSubtype subtype, int number =1, float prob = 1.0)
+		void addMonsters(GameObject::Subtype subtype, int number =1, float prob = 1.0)
 		{
 			SubGroup sg;
 			sg.m_subtype = subtype;

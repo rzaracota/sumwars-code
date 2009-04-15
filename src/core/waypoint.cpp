@@ -15,8 +15,8 @@ bool Waypoint::init ()
 	getShape()->m_radius = 0.5;
 	setLayer(LAYER_BASE | LAYER_AIR);
 	
-	setState(STATE_ACTIVE);
-	getTypeInfo()->m_subtype = "waypoint";
+	setState(STATE_ACTIVE,false);
+	setSubtype("waypoint");
 	return true;
 }
 

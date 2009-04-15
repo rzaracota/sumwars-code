@@ -32,8 +32,23 @@ ItemBasicData::~ItemBasicData()
 }
 
 
-Item::Item()
+Item::Item(int id)
 {
+	if (id ==0)
+	{
+		if (World::getWorld() !=0)
+		{
+			m_id = World::getWorld()->getValidId();
+		}
+		else
+		{
+			m_id =0;
+		}
+	}
+	else
+	{
+		m_id = id;
+	}
 	m_useup_effect=0;
 	m_equip_effect=0;
 	m_weapon_attr=0;
@@ -44,8 +59,24 @@ Item::Item()
 	m_size = SMALL;
 }
 
-Item::Item(ItemBasicData& data)
+Item::Item(ItemBasicData& data, int id)
 {
+	if (id ==0)
+	{
+		if (World::getWorld() !=0)
+		{
+			m_id = World::getWorld()->getValidId();
+		}
+		else
+		{
+			m_id =0;
+		}
+	}
+	else
+	{
+		m_id = id;
+	}
+	
 	m_type = data.m_type;
 	m_subtype = data.m_subtype;
 	m_size = data.m_size;
@@ -146,6 +177,7 @@ void Item::fromString(CharConv* cv)
 		cv->fromBuffer(m_price);
 	}
 }
+
 
 void Item::toStringComplete(CharConv* cv)
 {

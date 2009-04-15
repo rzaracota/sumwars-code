@@ -482,7 +482,7 @@ public:
 	{
 		m_trade_info.m_trade_partner = id;
 		m_trade_info.m_last_sold_item = 0;
-		m_event_mask |= NetEvent::DATA_TRADE_INFO;
+		addToNetEventMask(NetEvent::DATA_TRADE_INFO);
 	}
 	
 	/**

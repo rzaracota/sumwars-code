@@ -111,11 +111,11 @@ class SoundSystem
 		static void registerSound(SoundTarget target, SoundName name);
 		
 		/**
-		 * \fn static SoundName getProjectileSound(Projectile::ProjectileType ptype)
+		 * \fn static SoundName getProjectileSound(Projectile::Subtype ptype)
 		 * \brief Gibt den Sound fuer ein bestimmtes Projektil aus
 		 * \param ptype Typ des Projektils
 		 */
-		static SoundName getProjectileSound(Projectile::ProjectileType ptype);
+		static SoundName getProjectileSound(Projectile::Subtype ptype);
 		
 		/**
 		 * \fn static void setSoundVolume(float vol)
@@ -127,10 +127,10 @@ class SoundSystem
 	private:
 		
 		/**
-		 * \fn static std::map<int, SoundName> m_projectile_sounds
+	 * \fn static std::map<GameObject::Subtype, SoundName> m_projectile_sounds
 		 * \brief Sounds die abgespielt werden, wenn Projektile gestartet werden
 		 */
-		static std::map<int, SoundName> m_projectile_sounds;
+		static std::map<GameObject::Subtype, SoundName> m_projectile_sounds;
 		
 		/**
 		 * \var static std::multimap<SoundName, Sound> m_sounds

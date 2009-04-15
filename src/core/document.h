@@ -778,12 +778,12 @@ class Document
 	void sendChatMessage(std::string msg);
 	
 	/**
-	 * \fn void setNewCharacter(WorldObject::TypeInfo::ObjectSubtype subtype, PlayerLook look)
+	 * \fn void setNewCharacter(GameObject::Subtype subtype, PlayerLook look)
 	 * \brief setzt die Daten fuer neuen Spieler
 	 * \param subtype Typ des Spielers
 	 * \param look Aussehen des Spielers
 	 */
-	void setNewCharacter(WorldObject::TypeInfo::ObjectSubtype subtype, PlayerLook look);
+	void setNewCharacter(GameObject::Subtype subtype, PlayerLook look);
 	
 	/**
 	 * \fn void createNewCharacter()

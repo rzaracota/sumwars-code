@@ -13,11 +13,11 @@ Spawnpoint::Spawnpoint( MonsterGroupName name,int id) : WorldObject( id)
 bool Spawnpoint::init()
 {
 	//eigene Initialisierung
-	getTypeInfo()->m_type = TypeInfo::TYPE_FIXED_OBJECT;
-	getTypeInfo()->m_subtype = "spawnpoint";
-	m_layer = LAYER_SPECIAL;
+	setType("FIXED_OBJECT");
+	setSubtype("spawnpoint");
+	setLayer(LAYER_SPECIAL);
 
-	setState(STATE_ACTIVE);
+	setState(STATE_ACTIVE,false);
 
 	m_time =0;
 
