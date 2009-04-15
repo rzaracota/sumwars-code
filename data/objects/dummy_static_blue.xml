@@ -1,0 +1,4 @@
+<Object type="FIXED_OBJECT" subtype="dummy_static_blue" layer="NORMAL">
+	<Mesh file="dummy_static_blue.mesh" />
+	<Geometry shape="RECT" extent_x="1" extent_y="1"/>
+</Object>
