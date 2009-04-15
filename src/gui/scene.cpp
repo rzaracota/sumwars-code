@@ -119,7 +119,7 @@ Scene::Scene(Document* doc,Ogre::RenderWindow* window)
 	char_view->setClearEveryFrame( true );
 	char_view->setOverlaysEnabled (false);
 	char_view->setBackgroundColour(Ogre::ColourValue(0,0,0,1.0) );
-	
+	char_rt->update();
 	
 	CEGUI::OgreCEGUITexture* char_ceguiTex = (CEGUI::OgreCEGUITexture*)((CEGUI::OgreCEGUIRenderer*) CEGUI::System::getSingleton().getRenderer())->createTexture((CEGUI::utf8*)"character_tex");
 
