@@ -1148,6 +1148,14 @@ void Scene::createObject(WorldObject* obj,std::string& name, bool is_static)
 	obj_ent = m_scene_manager->createEntity(name, ri.m_mesh);
 
     obj_node->attachObject(obj_ent);
+	
+	// Monster zufaellig skalieren
+	if (obj->getType() == "MONSTER")
+	{
+		float scale = 0.9 + 0.2*Random::random();
+		obj_node->setScale(scale,scale,scale);
+		
+	}
 
     // weitere Meshes anfuegen
     std::list<std::pair<std::string,std::string> >::iterator it;
