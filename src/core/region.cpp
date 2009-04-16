@@ -894,6 +894,7 @@ void Region::createObjectGroup(ObjectGroupTemplateName templname, Vector positio
 		std::list<ObjectGroupTemplate::GroupObject>::iterator gt;
 		Vector pos;
 
+		float oangle=0;
 		for (gt = templ->getObjects()->begin(); gt != templ->getObjects()->end(); ++gt)
 		{
 			if (Random::random() < gt->m_probability)
@@ -903,8 +904,13 @@ void Region::createObjectGroup(ObjectGroupTemplateName templname, Vector positio
 				pos.rotate(angle);
 				pos += position;
 
+				oangle = gt->m_angle;
+				if (gt->m_prob_angle)
+				{
+					oangle = 2*3.14159*Random::random();
+				}
 
-				int id = createObject(gt->m_type, pos, angle+gt->m_angle);
+				int id = createObject(gt->m_type, pos, angle+oangle);
 				DEBUG5("inserting object %s at %f %f with id %i",gt->m_type.c_str(),pos.m_x, pos.m_y,id);
 
 			}

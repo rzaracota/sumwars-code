@@ -228,6 +228,7 @@ int TemplateLoader::generateObjectGroupTemplate(TiXmlElement* pElement, std::str
 	if (element == "Object")
 	{
 		DEBUG5("Object");
+		m_temp_group_object.prob_angle = true;
 		while (element == "Object" && pAttrib)
 		{
 			if (!strcmp(pAttrib->Name(), "center_x") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)

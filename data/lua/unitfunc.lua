@@ -3,20 +3,20 @@
 
 -- Pruefen von Eigenschaften
 function isMonster(obj)
-		return (getObjectValue(obj,"type") == "monster")
+		return (getObjectValue(obj,"type") == "MONSTER")
 		end;
 
 function isPlayer(obj)
-		return (getObjectValue(obj,"type") == "player")
+		return (getObjectValue(obj,"type") == "PLAYER")
 		end;
 
 function isFixedObject(obj)
-		return (getObjectValue(obj,"type") == "fixed_object")
+		return (getObjectValue(obj,"type") == "FIXED_OBJECT")
 		end;
 
 function isCreature(obj)
 		local t = getObjectValue(obj,"type")
-		return (t == "monster" or t=="player")
+		return (t == "MONSTER" or t=="PLAYER")
 		end;
 
 function isAlive(obj)
