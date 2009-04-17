@@ -1,5 +1,6 @@
 
 #include "controlpanel.h"
+#include "player.h"
 
 ControlPanel::ControlPanel (Document* doc)
 	: ItemWindow(doc)

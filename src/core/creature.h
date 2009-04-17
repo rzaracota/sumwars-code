@@ -39,7 +39,6 @@
 #include "damage.h"
 #include "itemlist.h"
 #include "creaturestruct.h"
-#include "itemfactory.h"
 #include "dialogue.h"
 // debugging
 #include <iostream>

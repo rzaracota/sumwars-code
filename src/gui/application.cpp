@@ -1,5 +1,7 @@
 #include "application.h"
 
+#include "tooltip.h"
+#include "itemwindow.h"
 
 Application::Application()
 {
@@ -475,6 +477,8 @@ bool Application::initCEGUI()
 
 bool Application::createDocument()
 {
+	SoundSystem::init();
+	
 	DEBUG("create document\n");
 	m_document = new Document();
 
@@ -572,8 +576,7 @@ bool Application::loadResources()
 
 	// Aktionen initialisieren
 	Action::init();
-	SoundSystem::init();
-	SoundSystem::setSoundVolume(0.0);
+	
 
 
 

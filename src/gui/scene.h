@@ -237,15 +237,6 @@ class Scene
 	 */
 	static void registerProjectile(Projectile::Subtype type, std::string mesh, std::string particle_system = "", float scaling_factor =1.0);
 
-	/**
-	 * \fn void registerTile(Tile tile, std::string mesh, std::string particle_system, float scaling_factor =1.0)
-	 * \brief Registriert fuer ein Tile das zugehoerige Mesh, Partikelsystem, Skalierungsfaktor
-	 * \param tile Typ des Tile
-	 * \param mesh Mesh fuer das Tile. Leerer String, wenn kein Mesh verwendet wird
-	 * \param particle_system Name des Partikelsystems. Leerer string, wenn kein Partikelsystem verwendet wird
-	 */
-	static void registerTile(Tile tile, std::string mesh, std::string particle_system ="", float scaling_factor =1.0);
-
 	
 	private:
 

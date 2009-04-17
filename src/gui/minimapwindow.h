@@ -1,8 +1,6 @@
 #ifndef MINIMAPWINDOW_H
 #define MINIMAPWINDOW_H
 
-#include "Ogre.h"
-
 #include "window.h"
 
 

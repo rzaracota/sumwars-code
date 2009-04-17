@@ -12,7 +12,7 @@
 #include <set>
 
 #include "geometry.h"
-#include "projectile.h"
+#include "gameobject.h"
 
 /**
  * \brief Name eines Sounds
@@ -111,11 +111,11 @@ class SoundSystem
 		static void registerSound(SoundTarget target, SoundName name);
 		
 		/**
-		 * \fn static SoundName getProjectileSound(Projectile::Subtype ptype)
+		 * \fn static SoundName getProjectileSound(GameObject::Subtype ptype)
 		 * \brief Gibt den Sound fuer ein bestimmtes Projektil aus
 		 * \param ptype Typ des Projektils
 		 */
-		static SoundName getProjectileSound(Projectile::Subtype ptype);
+		static SoundName getProjectileSound(GameObject::Subtype ptype);
 		
 		/**
 		 * \fn static void setSoundVolume(float vol)
@@ -123,6 +123,15 @@ class SoundSystem
 		 * \param vol Lautstaerke (0-1)
 		 */
 		static void setSoundVolume(float vol);
+		
+		/**
+		 * \fn static float getSoundVolume()
+		 * \brief Gibt die Lautstaerke des Sounds aus
+		 */
+		static float getSoundVolume()
+		{
+			return m_sound_volume;
+		}
 	
 	private:
 		
@@ -149,6 +158,12 @@ class SoundSystem
 		 * \brief Schallquellen sortiert nach Name
 		 */
 		static std::map<std::string, SoundObject*> m_sound_objects;
+		
+		/**
+		 * \var static float m_sound_volume
+		 * \brief Lautstaerke
+		 */
+		static float m_sound_volume;
 		
 };
 

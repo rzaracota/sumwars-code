@@ -20,25 +20,8 @@
 #include "OISJoyStick.h"
 
 #include "document.h"
+#include "window.h"
 #include "scene.h"
-#include "gettext.h"
-#include "player.h"
-
-#include "charinfo.h"
-#include "controlpanel.h"
-#include "inventory.h"
-#include "skilltree.h"
-#include "mainmenu.h"
-#include "savegamelist.h"
-#include "chatline.h"
-#include "partyinfo.h"
-#include "charcreate.h"
-#include "questinfo.h"
-#include "minimapwindow.h"
-#include "tradewindow.h"
-#include "optionswindow.h"
-#include "networkwindows.h"
-#include "worldmap.h"
 
 /**
  * \class MainWindow

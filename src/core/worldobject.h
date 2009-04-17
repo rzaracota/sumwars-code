@@ -25,7 +25,6 @@
 #include <sstream>
 #include "debug.h"
 #include "charconv.h"
-#include "networkstruct.h"
 #include <map>
 #include <list>
 

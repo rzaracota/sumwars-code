@@ -5,7 +5,7 @@
 #include "world.h"
 #include "player.h"
 
-
+#include "templateloader.h"
 
 #define USE_OBJECTLOADER
 

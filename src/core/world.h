@@ -40,14 +40,10 @@
 #include "region.h"
 #include "pathfind.h"
 #include "party.h"
-#include "itemfactory.h"
-#include "objectfactory.h"
-#include "networkstruct.h"
-#include "worldloader.h"
-#include "templateloader.h"
 #include "quest.h"
-#include "networkstruct.h"
 #include "waypoint.h"
+
+
 
 /**
  * \def WORLD_MAX_REGIONS

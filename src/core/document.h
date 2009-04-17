@@ -37,26 +37,14 @@
 #include <map>
 #include <set>
 
-
-#include "networkstruct.h"
-#include "projectile.h"
-#include "party.h"
-#include "debug.h"
-#include "damage.h"
-#include "itemlist.h"
-#include "random.h"
-#include "item.h"
-#include "matrix2d.h"
-#include "tiles.h"
-#include "dropitem.h"
-#include "world.h"
+#include "gameobject.h"
+#include "action.h"
+#include "creaturestruct.h"
 #include "player.h"
-#include "timer.h"
-#include <pthread.h>
 
-#include "gettext.h"
+// forward Deklarationen um include von player.h zu vermeiden
 
-
+class Party;
 
 /**
  * \class Document
@@ -833,22 +821,8 @@ class Document
 	 * \fn Player* getLocalPlayer()
 	 * \brief Gibt den Spieler aus, der lokal an dem Rechner ist
 	 */
-	Player* getLocalPlayer()
-	{
-		if (World::getWorld() ==0)
-			return m_temp_player;
+	Player* getLocalPlayer();
 
-		return static_cast<Player*>(World::getWorld()->getLocalPlayer());
-	}
-
-	/**
-	 * \fn World* getWorld()
-	 * \brief gibt Zeiger auf die Spielwelt aus
-	 */
-	World* getWorld()
-	{
-		return World::getWorld();
-	}
 
 	/**
 	 * \fn std::string& getServerHost()

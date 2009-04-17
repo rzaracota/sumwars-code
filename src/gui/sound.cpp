@@ -1,5 +1,6 @@
 #include "sound.h"
 
+#include "projectile.h"
 
 std::multimap<SoundName, Sound> SoundSystem::m_sounds;
 
@@ -8,6 +9,8 @@ std::map<std::string, SoundObject*> SoundSystem::m_sound_objects;
 std::map<SoundTarget, SoundName> SoundSystem::m_sounds_targets;
 
 std::map<GameObject::Subtype, SoundName> SoundSystem::m_projectile_sounds;
+
+float SoundSystem::m_sound_volume = 0.0f;
 
 Sound SoundSystem::getSound(SoundName sname)
 {
@@ -203,6 +206,7 @@ void SoundSystem::clearObjects()
 void SoundSystem::setSoundVolume(float vol)
 {
 	alListenerf(AL_GAIN,vol);
+	m_sound_volume = vol;
 }
 
 SoundObject* SoundSystem::createSoundObject(std::string name)
@@ -265,7 +269,7 @@ void SoundSystem::registerSound(SoundTarget target, SoundName name)
 	m_sounds_targets.insert(std::make_pair(target,name));
 }
 
-SoundName SoundSystem::getProjectileSound(Projectile::Subtype ptype)
+SoundName SoundSystem::getProjectileSound(GameObject::Subtype ptype)
 {
 	std::map<Projectile::Subtype, SoundName>::iterator it;
 

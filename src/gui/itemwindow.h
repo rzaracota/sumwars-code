@@ -2,7 +2,8 @@
 #define ITEMWINDOW_H
 
 #include "window.h"
-
+#include "item.h"
+#include "itemlist.h"
 /**
  * \class ItemWindow
  * \brief Fenster das Gegenstaende darstellen muss

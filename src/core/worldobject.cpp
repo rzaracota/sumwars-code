@@ -1,7 +1,10 @@
 #include "worldobject.h"
+
 #include "world.h"
 #include "eventsystem.h"
 #include "objectfactory.h"
+#include "networkstruct.h"
+
 
 WorldObject::WorldObject( int id)
 	: GameObject(id)

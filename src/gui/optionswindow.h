@@ -1,8 +1,6 @@
 #ifndef OPTIONSWINDOW_H
 #define OPTIONSWINDOW_H
 
-#include "Ogre.h"
-
 #include "window.h"
 #include "OISKeyboard.h"
 
@@ -79,6 +77,12 @@ class OptionsWindow : public Window
 		 * \brief Behandelt Druecken der linken Maustaste ueber auf dem Fenster
 		 */
 		bool onAreaMouseButtonPressed(const CEGUI::EventArgs& evt);
+		
+		/**
+		 * \fn bool onSoundVolumeChanged(const CEGUI::EventArgs& evt);
+		 * \brief Behandelt Druecken der linken Maustaste ueber auf dem Fenster
+		 */
+		bool onSoundVolumeChanged(const CEGUI::EventArgs& evt);
 		
 		/**
 		 * \var OIS::Keyboard *m_keyboard

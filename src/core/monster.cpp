@@ -18,6 +18,7 @@
 */
 #include "monster.h"
 #include "player.h"
+#include "itemfactory.h"
 
 Monster::Monster( int id) : Creature( id)
 {

@@ -4,7 +4,6 @@
 #include "event.h"
 #include "matrix2d.h"
 #include "worldobject.h"
-#include "tiles.h"
 #include "dropitem.h"
 #include "networkstruct.h"
 #include "projectile.h"
@@ -738,14 +737,6 @@ class Region
 		 */
 		void checkRegionData(CharConv* cv);
 		
-		/**
-		 * \fn  setTile(Tile tile,short x, short y)
-		 * \brief setzt an der angegebenen Position das Tile
-		 * \param tile Tile
-		 * \param x Position
-		 * \param y Position
-		 */
-		void setTile(Tile tile,short x, short y);
 
 		/**
 		 * \fn Minimap* createMinimap()
@@ -1091,11 +1082,6 @@ class Region
 			*/
 		Matrix2d<Gridunit>* m_data_grid;
 	
-		/**
-		* \var Matrix2d<char> m_tiles
-		* \brief Matrix der Tiles
-		*/
-		Matrix2d<char>* m_tiles;
 		
 		/**
 		 * \var Matrix2d<float>* m_height

@@ -477,4 +477,6 @@ class GameObject
 		Vector m_speed;
 };
 
+typedef std::string PlayerLook;
+
 #endif

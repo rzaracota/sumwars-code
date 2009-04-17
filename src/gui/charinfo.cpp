@@ -1,6 +1,6 @@
 #include "charinfo.h"
-
-
+#include "player.h"
+#include "damage.h"
 
 
 CharInfo::CharInfo (Document* doc)
@@ -446,6 +446,7 @@ CharInfo::CharInfo (Document* doc)
 	Player* player = m_document->getLocalPlayer();
 	FightStatistic* fstat = &(player->getFightStatistic());
 	std::string tooltip;
+	CEGUI::utf8* ttext=0;
 
 	// Fenstermanager
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
@@ -733,17 +734,34 @@ CharInfo::CharInfo (Document* doc)
 	label =  win_mgr.getWindow( "BaseDmgLabel");
 	out_stream.str("");
 	if (player->getSubtype() == "mage")
+	{
+		ttext = (CEGUI::utf8*) (Action::getDescription(Action::MAGIC_ATTACK).c_str());
 		out_stream << Action::getName(Action::MAGIC_ATTACK);
+	}
 	if (player->getSubtype() == "archer")
+	{
+		ttext = (CEGUI::utf8*) (Action::getDescription(Action::RANGE_ATTACK).c_str());
 		out_stream << Action::getName(Action::RANGE_ATTACK);
+	}
 	if (player->getSubtype() == "warrior")
+	{
+		ttext = (CEGUI::utf8*) (Action::getDescription(Action::ATTACK).c_str());
 		out_stream << Action::getName(Action::ATTACK);
+	}
 	if (player->getSubtype() == "priest")
+	{
+		ttext = (CEGUI::utf8*) (Action::getDescription(Action::HOLY_ATTACK).c_str());
 		out_stream << Action::getName(Action::HOLY_ATTACK);
+	}
 
 	if (label->getText()!= (CEGUI::utf8*) out_stream.str().c_str())
 	{
 		label->setText((CEGUI::utf8*) out_stream.str().c_str());
+	}
+	
+	if (ttext != label->getTooltipText())
+	{
+		label->setTooltipText(ttext);
 	}
 
 	// Label Basisschaden
@@ -767,9 +785,18 @@ CharInfo::CharInfo (Document* doc)
 	if (label->getText()!= (CEGUI::utf8*) out_stream.str().c_str())
 	{
 		label->setText((CEGUI::utf8*) out_stream.str().c_str());
-
+	}
+	
+	out_stream.str("");
+	out_stream << Action::getDescription(player->getLeftAction());
+	CEGUI::String str((CEGUI::utf8*)  out_stream.str().c_str());
+	if (label->getTooltipText() != str)
+	{
+		
+		label->setTooltipText(str);
 	}
 
+	
 	// Label Schaden Attacke links
 	label =  win_mgr.getWindow( "Skill1DmgValueLabel");
 	out_stream.str("");
@@ -794,7 +821,15 @@ CharInfo::CharInfo (Document* doc)
 	if (label->getText()!= (CEGUI::utf8*) out_stream.str().c_str())
 	{
 		label->setText((CEGUI::utf8*) out_stream.str().c_str());
-
+	}
+	
+	out_stream.str("");
+	out_stream << Action::getDescription(player->getRightAction());
+	CEGUI::String str2((CEGUI::utf8*)  out_stream.str().c_str());
+	if (label->getTooltipText() != str2)
+	{
+		
+		label->setTooltipText(str2);
 	}
 
 	// Label Schaden Attacke rechts

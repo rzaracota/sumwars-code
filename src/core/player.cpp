@@ -20,6 +20,7 @@
 
 #include "player.h"
 #include "eventsystem.h"
+#include "itemfactory.h"
 
 PlayerCamera::PlayerCamera()
 {
@@ -2058,7 +2059,7 @@ void Player::toSavegame(CharConv* cv)
 
 	cv->toBuffer(getBaseAttr()->m_armor);
 	cv->toBuffer(getBaseAttr()->m_attack);
-	if (World::getVersion()>=100)
+	if (World::getVersion()>=10)
 		cv->toBuffer(getBaseAttr()->m_power);
 	cv->toBuffer(getBaseAttr()->m_strength);
 	cv->toBuffer(getBaseAttr()->m_dexterity);
@@ -2156,7 +2157,7 @@ void Player::fromSavegame(CharConv* cv, bool local)
 
 	cv->fromBuffer(getBaseAttr()->m_armor);
 	cv->fromBuffer(getBaseAttr()->m_attack);
-	if (version>=100)
+	if (version>=10)
 		cv->fromBuffer(getBaseAttr()->m_power);
 	else
 		getBaseAttr()->m_power = 20;

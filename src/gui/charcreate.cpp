@@ -1,5 +1,9 @@
 #include "charcreate.h"
 
+#include "listitem.h"
+#include "scene.h"
+
+
 CharCreate::CharCreate (Document* doc)
 	:Window(doc)
 {

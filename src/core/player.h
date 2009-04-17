@@ -36,7 +36,7 @@
 #include "servernetwork.h"
 #include "item.h"
 
-typedef std::string PlayerLook;
+
 
 /**
  * \class PlayerCamera

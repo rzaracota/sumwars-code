@@ -20,6 +20,7 @@
 #include <sys/time.h>
 #include "eventsystem.h"
 #include "math.h"
+#include "itemfactory.h"
 
 //Constructors/Destructors
 Creature::Creature(int id) : WorldObject(id)

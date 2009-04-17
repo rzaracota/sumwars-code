@@ -19,7 +19,6 @@
 #include "CEGUISchemeManager.h"
 #include "CEGUIFontManager.h"
 #include "elements/CEGUIFrameWindow.h"
-#include "tooltip.h"
 
 #include <stdio.h>
 

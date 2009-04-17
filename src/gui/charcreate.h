@@ -1,11 +1,7 @@
 #ifndef CHARCREATE_H
 #define CHARCREATE_H
 
-#include "Ogre.h"
-
 #include "window.h"
-#include "listitem.h"
-#include "scene.h"
 
 
 /**

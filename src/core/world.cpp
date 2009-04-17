@@ -24,10 +24,16 @@
 #include "eventsystem.h"
 #include "dialogue.h"
 
+#include "itemfactory.h"
+#include "objectfactory.h"
+#include "networkstruct.h"
+#include "worldloader.h"
+#include "templateloader.h"
+
 #include "OgreResourceGroupManager.h"
 
 World* World::m_world=0;
-short World::m_version = 100;
+short World::m_version = 11;
 
 void  World::createWorld(bool server, int port, bool cooperative, int max_players)
 {
@@ -204,18 +210,6 @@ void World::createRegion(short region)
 
 		reg->addLocation("entry_south",Vector(10,10));
 		// Objekte anlegen
-
-
-		// Tiles Setzen
-		for (int i=1;i<5;i++)
-		{
-			reg->setTile(TILE_GRASS,5,i);
-		}
-
-		for (int i=7;i<10;i++)
-		{
-			reg->setTile(TILE_WATER,i,6);
-		}
 
 
 		reg->createObject( "fence1", Vector(4,2));

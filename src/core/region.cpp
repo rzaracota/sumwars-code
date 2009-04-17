@@ -2,7 +2,7 @@
 #include "world.h"
 #include "player.h"
 #include "eventsystem.h"
-
+#include "itemfactory.h"
 
 RegionData::RegionData()
 {
@@ -92,9 +92,6 @@ Region::Region(short dimx, short dimy, short id, std::string name, RegionData* d
 	m_height = new Matrix2d<float>(dimx,dimy);
 	m_height->clear();
 
-	m_tiles = new Matrix2d<char>(dimx*2,dimy*2);
-	m_tiles->clear();
-
 	// Binärbaum fuer WorldObjects anlegen
 	m_objects = new WorldObjectMap;
 	m_static_objects = new WorldObjectMap;
@@ -179,7 +176,6 @@ Region::~Region()
 	delete m_projectiles;
 
 	delete m_data_grid;
-	delete m_tiles;
 	delete m_drop_items;
 	delete m_drop_item_locations;
 	delete m_height;
@@ -1508,15 +1504,6 @@ void Region::getRegionData(CharConv* cv)
 
 	cv->toBuffer(m_ground_material);
 	
-	// Tiles eintragen
-	int i,j;
-	for (i =0;i<m_dimx*2;i++)
-	{
-		for (j=0;j<m_dimy*2;j++)
-		{
-			cv->toBuffer(*(m_tiles->ind(i,j)));
-		}
-	}
 
 	// Anzahl der statischen Objekte eintragen
 	DEBUG5("static objects: %i",m_static_objects->size());
@@ -1709,16 +1696,6 @@ void Region::setRegionData(CharConv* cv,WorldObjectMap* players)
 	m_name = stmp;
 	DEBUG5("name of region: %s",stmp);
 	cv->fromBuffer(m_ground_material);
-
-	// Tiles eintragen
-	int i,j;
-	for (i =0;i<m_dimx*2;i++)
-	{
-		for (j=0;j<m_dimy*2;j++)
-		{
-			cv->fromBuffer(*(m_tiles->ind(i,j)));
-		}
-	}
 
 
 	// alle bisherigen statischen Objekte entfernen
@@ -2076,10 +2053,6 @@ void Region::checkRegionData(CharConv* cv)
 	}
 }
 
-void Region::setTile(Tile tile,short x, short y)
-{
-	*(m_tiles->ind(x,y)) = (char) tile;
-}
 
 bool  Region::dropItem(Item* item, Vector pos)
 {

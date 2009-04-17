@@ -5,7 +5,6 @@
 
 #include "document.h"
 #include "gettext.h"
-#include "player.h"
 
 // CEGUI includes
 #include "CEGUI.h"

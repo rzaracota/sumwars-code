@@ -4,6 +4,7 @@
 #include "OgreCEGUITexture.h"
 #include "OgreCEGUIResourceProvider.h"
 #include "scene.h"
+
 #include "OgreResource.h"
 
 MinimapWindow::MinimapWindow (Document* doc)

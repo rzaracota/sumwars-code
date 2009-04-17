@@ -19,6 +19,25 @@
 #include "fstream"
 #include "document.h"
 
+#include "sound.h"
+
+#include "networkstruct.h"
+#include "projectile.h"
+#include "party.h"
+#include "debug.h"
+#include "damage.h"
+#include "itemlist.h"
+#include "random.h"
+#include "item.h"
+#include "matrix2d.h"
+#include "dropitem.h"
+#include "world.h"
+#include "player.h"
+#include "timer.h"
+#include <pthread.h>
+
+#include "gettext.h"
+
 
 // Constructors/Destructors
 // Initialisiert Document zu Testzwecken
@@ -374,6 +393,7 @@ void Document::onButtonSaveExitClicked ( )
 {
 	if (m_state == INACTIVE)
 	{
+		saveSettings();
 		m_state = END_GAME;
 		return;
 	}
@@ -1634,6 +1654,10 @@ void Document::saveSettings()
 	
 	if (file.is_open())
 	{
+		file << World::getVersion() << "\n";
+		
+		file << SoundSystem::getSoundVolume() <<"\n";
+		
 		ShortkeyMap::iterator it;
 		std::set<KeyCode>::iterator jt;
 
@@ -1676,6 +1700,14 @@ void Document::loadSettings()
 		std::set<KeyCode>::iterator jt;
 		
 		m_shortkey_map.clear();
+		short version;
+		file >> version;
+		
+		float soundvolume;
+		file >> soundvolume;
+		SoundSystem::setSoundVolume(soundvolume);
+		DEBUG5("Sound volume %f",soundvolume);
+		
 		file >> nr;
 		DEBUG5("short keys %i",nr);
 		for (int i=0; i<nr; i++)
@@ -1701,3 +1733,10 @@ void Document::loadSettings()
 	}
 }
 
+Player*  Document::getLocalPlayer()
+{
+	if (World::getWorld() ==0)
+		return m_temp_player;
+
+	return static_cast<Player*>(World::getWorld()->getLocalPlayer());
+}
