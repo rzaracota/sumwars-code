@@ -104,6 +104,7 @@
 	</Locations>
 </ObjectGroupTemplate>
 
+<!--
 <ObjectGroupTemplate name = "medairMercenaryCamp" >
 	<Shape
 		  type = "RECT"
@@ -158,7 +159,7 @@
 		
 		<Location name ="WaypointLoc" pos_x="-6" pos_y="0" />
 	</Locations>
-</ObjectGroupTemplate>
+</ObjectGroupTemplate>-->
 
 <ObjectGroupTemplate name = "willard" >
 	<Shape

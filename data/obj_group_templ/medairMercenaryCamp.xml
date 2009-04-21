@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ObjectGroupTemplate name="medairMercenaryCamp" version="1.0">
+  <Shape
+    type="RECT"
+    extent_x="35.03534882"
+    extent_y="35.03534882"
+    angle="0"
+  />
+
+  <WayPoint pos_x="0" pos_y="0" />
+
+  <ObjectContent>
+    <Object subtype="houseAisen1" 
+            center_x="-13.12708443" 
+            center_y="-8.176966103" 
+            angle="32.50582844" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="tree1" 
+            center_x="15.48688887" 
+            center_y="15.61319531" 
+            angle="0" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="tree2" 
+            center_x="17.54077189" 
+            center_y="-19.41193358" 
+            angle="0" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="tree3" 
+            center_x="-19" 
+            center_y="8" 
+            angle="0" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="tree3" 
+            center_x="21.65868909" 
+            center_y="0.8167813287" 
+            angle="0" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="tree3" 
+            center_x="-18.28020989" 
+            center_y="19.16398691" 
+            angle="0" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="wall1" 
+            center_x="-1" 
+            center_y="-13" 
+            angle="90" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="wall1" 
+            center_x="11.26683904" 
+            center_y="-17.28816847" 
+            angle="0" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="wall1" 
+            center_x="19" 
+            center_y="7" 
+            angle="0" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="wall1" 
+            center_x="-15" 
+            center_y="12" 
+            angle="0" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="wall1" 
+            center_x="14.95619263" 
+            center_y="17.50649003" 
+            angle="-67.977729" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="wall2" 
+            center_x="2.622457414" 
+            center_y="-17.27823732" 
+            angle="0" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="wall2" 
+            center_x="15" 
+            center_y="-13" 
+            angle="90" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="wall2" 
+            center_x="-15" 
+            center_y="4" 
+            angle="0" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="wall2" 
+            center_x="19" 
+            center_y="-9" 
+            angle="0" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="wall2" 
+            center_x="2.64649612" 
+            center_y="-25.27178126" 
+            angle="0" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="wall2" 
+            center_x="11.25262334" 
+            center_y="-25.295512" 
+            angle="0" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="wall2" 
+            center_x="19" 
+            center_y="15" 
+            angle="0" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="wall2" 
+            center_x="-1" 
+            center_y="16" 
+            angle="90" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="wall2" 
+            center_x="-15" 
+            center_y="20" 
+            angle="0" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="wall2" 
+            center_x="-15" 
+            center_y="28" 
+            angle="0" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="wall3" 
+            center_x="19" 
+            center_y="-1" 
+            angle="0" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="wall3" 
+            center_x="7" 
+            center_y="16" 
+            angle="90" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="wall3" 
+            center_x="-5.892213749" 
+            center_y="20.09783933" 
+            angle="17.49047226" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="wall3" 
+            center_x="-7" 
+            center_y="28" 
+            angle="0" 
+            probability="1" 
+            prob_angle="false" 
+    />
+  </ObjectContent>
+
+  <Locations>
+    <Location name="WaypointLoc" pos_x="12" pos_y="-2" />
+    <Location name="entry_north" pos_x="7" pos_y="-13" />
+    <Location name="entry_south" pos_x="-11" pos_y="15" />
+    <Location name="exit_north" pos_x="7" pos_y="-22" />
+    <Location name="exit_south" pos_x="-11" pos_y="23" />
+    <Location name="locArmorTrader" pos_x="-12" pos_y="3" />
+    <Location name="locFenor" pos_x="3" pos_y="-11" />
+    <Location name="locPotionTrader" pos_x="-9" pos_y="-3" />
+    <Location name="locWeaponTrader" pos_x="-5" pos_y="-7" />
+  </Locations>
+
+</ObjectGroupTemplate>

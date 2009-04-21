@@ -68,7 +68,7 @@
 <!-- Medair, Soeldnerlager [Stadt]-->
 <!-- Orte: Fenor Marken -->
 	<Region id="3" name="medMercCamp">
-		<Settings dimx="16" dimy="16" region_template="medairMercenaryCamp"  ground="grass1"/>
+		<Settings dimx="44" dimy="44" region_template="medairMercenaryCamp"  ground="grass1"/>
 		
 		<Waypoint world_x="0.5" world_y ="0.9" />
 		

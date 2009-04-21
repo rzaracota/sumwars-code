@@ -189,6 +189,8 @@
 		<Unit filename="gui\mainmenu.h" />
 		<Unit filename="gui\mainwindow.cpp" />
 		<Unit filename="gui\mainwindow.h" />
+		<Unit filename="gui\messageboxes.cpp" />
+		<Unit filename="gui\messageboxes.h" />
 		<Unit filename="gui\minimapwindow.cpp" />
 		<Unit filename="gui\minimapwindow.h" />
 		<Unit filename="gui\networkwindows.cpp" />
