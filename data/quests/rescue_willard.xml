@@ -45,7 +45,7 @@
 					speak("any",_("My apologies. Maybe my mouth slipped."),1800)
 					speak('player',_("Whatever. What do you really want?"),1000)
 					speak('Fenor Marken',_("Thanks. My name is Fenor Marken."),1800)
-					speak('Fenor Marken',_("It is like that: I have a friend with the gamekeepers."),28000)
+					speak('Fenor Marken',_("It is like that: I have a friend with the gamekeepers."),2800)
 					speak('Fenor Marken',_("He was in the woods with two others when they were attacked by goblins."),3400)
 					speak('Fenor Marken',_("And those cowards left him behind wounded."),1500)
 					speak('player',_("Surely you don't want me to bring back his corpse, do you?"),3000)

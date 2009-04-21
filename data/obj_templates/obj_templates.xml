@@ -34,6 +34,21 @@ FIXED_OBJECT
 	</Environment>
 </ObjectTemplate>
 
+<ObjectTemplate name="$house" type="FIXED_OBJECT">
+	<Environment name="meadow">
+		<Object name="houseAisen1" />
+		<Object name="houseAisen2" />
+		<Object name="houseAisen3" />
+		<Object name="houseAisen4" />
+	</Environment>
+	<Environment name="hills">
+		<Object name="houseAisen1" />
+		<Object name="houseAisen2" />
+		<Object name="houseAisen3" />
+		<Object name="houseAisen4" />
+	</Environment>
+</ObjectTemplate>
+
 
 <ObjectTemplate name="$single_block" type="FIXED_OBJECT">
 	<Environment name="meadow">
