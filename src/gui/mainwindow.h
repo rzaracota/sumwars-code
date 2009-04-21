@@ -170,6 +170,12 @@ class MainWindow :
 	void setupRegionInfo();
 	
 	/**
+	 * \fn void setupSaveExitWindow()
+	 * \brief erstellt Fenster Speichern & Beenden
+	 */
+	void setupSaveExitWindow();
+	
+	/**
 	 * \fn bool initInputs()
 	 * \brief Initialisiert die Eingabegeraete
 	 */

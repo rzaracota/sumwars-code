@@ -21,7 +21,7 @@
 #include "optionswindow.h"
 #include "networkwindows.h"
 #include "worldmap.h"
-
+#include "messageboxes.h"
 
 
 MainWindow::MainWindow(Ogre::Root* ogreroot, CEGUI::System* ceguisystem,Ogre::RenderWindow* window,Document* doc)
@@ -375,6 +375,18 @@ void MainWindow::update()
 				worldmap->setVisible(false);
 			}
 			
+			CEGUI::FrameWindow* save_exit = (CEGUI::FrameWindow*) win_mgr.getWindow("SaveExitWindow");
+			if (wflags & Document::SAVE_EXIT)
+			{
+				save_exit->setVisible(true);
+				save_exit->setModalState(true);
+			}
+			else
+			{
+				save_exit->setVisible(false);
+				save_exit->setModalState(false);
+			}
+			
 			// Chat Fenster anzeigen wenn entsprechendes Flag gesetzt
 			CEGUI::FrameWindow* chat_window = (CEGUI::FrameWindow*) win_mgr.getWindow("ChatWindow");
 			if (wflags & Document::CHAT)
@@ -587,8 +599,10 @@ bool MainWindow::setupGameScreen()
 
 		// Leiste fuer Item/Objekt-Info anlegen
 		setupObjectInfo();
+		
 		setupItemInfo();
 		setupRegionInfo();
+		setupSaveExitWindow();
 		
 		// Chatfenster anlegen
 		setupChatWindow();
@@ -909,6 +923,17 @@ void MainWindow::setupRegionInfo()
 	label->setAlwaysOnTop(true);
 	label->setMousePassThroughEnabled(true);
 	label->setID(0);
+}
+
+void MainWindow::setupSaveExitWindow()
+{
+	Window* wnd = new SaveExitWindow(m_document);
+	m_sub_windows["saveExit"] = wnd;
+	
+	
+	// Inventar anfangs ausblenden
+	m_game_screen->addChildWindow(wnd->getCEGUIWindow());
+	wnd->getCEGUIWindow()->setVisible(false);
 }
 
 void  MainWindow::setWindowExtents(int width, int height){

@@ -347,56 +347,25 @@ void Document::installShortkey(KeyCode key,ShortkeyDestination dest, bool check_
 void Document::onButtonSendMessageClicked ( )
 {
 	DEBUG5("onbuttonmessageclicked");
-
-	// Header anlegen
-	/*ClientHeader header;
-	short slen = strlen(m_gui_state.m_chat_sendline_content.c_str());
-	short len = slen+ sizeof(ClientHeader)+sizeof(short)+1;
-
-	// Puffer fuer das Datenpaket
-	char* data = new char[len];
-	memset(data,0,len);
-	char* bp = data;
-	header.m_content = PTYPE_C2S_DATA;	// Daten vom Client zum server
-	header.m_chatmessage = true;			// Chatmessage enthalten
-
-	// Header in den Puffer kopieren
-	bp = header.toString(bp);
-
-	// Chatnachricht in den Puffer kopieren
-	cv->toBuffer(bp,slen+1);
-	memcpy(bp,m_gui_state.m_chat_sendline_content.c_str(),slen);
-
-	bp += slen;
-	*bp =0;
-	bp ++;
-	len = bp - data;
-
-
-	// Nachricht an den Server senden
-
-	NetStatus ret;
-	ret = m_network_info.m_network->pushSlotMessage(data,len);
-
-	// Rueckgabewert pruefen
-	if (ret != NET_OK)
-	{
-		DEBUG("Netzwerkfehler beim Daten senden: %i", ret);
-		getNetworkInfo()->m_network_error = true;
-	}
-	delete data;
-*/
 }
 
 
 void Document::onButtonSaveExitClicked ( )
 {
+	getGUIState()->m_shown_windows = SAVE_EXIT;
+	m_modified |= WINDOWS_MODIFIED;
+	
 	if (m_state == INACTIVE)
 	{
 		saveSettings();
 		m_state = END_GAME;
 		return;
 	}
+}
+
+void Document::onButtonSaveExitConfirm()
+{
+	
 	
 	if (m_state!=SHUTDOWN_REQUEST)
 	{
@@ -420,11 +389,16 @@ void Document::onButtonSaveExitClicked ( )
 
 	// Paket an den Server senden
 	sendCommand(&command);
-
-
-
+	
+	getGUIState()->m_shown_windows = NO_WINDOWS;
+	m_modified |= WINDOWS_MODIFIED;
 }
 
+void Document::onButtonSaveExitAbort()
+{
+	getGUIState()->m_shown_windows = NO_WINDOWS;
+	m_modified |= WINDOWS_MODIFIED;
+}
 
 void Document::onRightMouseButtonClick(Vector pos)
 {

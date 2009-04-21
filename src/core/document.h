@@ -147,6 +147,8 @@ class Document
 		HOST_GAME =0x4000,
 		JOIN_GAME = 0x8000,
 		WORLDMAP = 0x10000,
+ 		MESSAGE = 0x20000,
+		SAVE_EXIT = 0x40000,
 	};
 
 	/**
@@ -523,6 +525,18 @@ class Document
 	 * \brief Button zum Speichern und Beenden des Spiels wurde angeklickt
 	 */
 	void onButtonSaveExitClicked ( );
+	
+	/**
+	 * \fn void onButtonSaveExitConfirm( )
+	 * \brief The player has confirmed to save & exit
+	 */
+	void onButtonSaveExitConfirm();
+
+	/**
+	 * \fn void onButtonSaveExitAbort( )
+	 * \brief The player has aborted save & exit
+	 */
+	void onButtonSaveExitAbort();
 
 	/**
 	 * \fn void onButtonMinimapClicked()
