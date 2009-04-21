@@ -239,8 +239,8 @@ AIR
 <Monster type="MONSTER" subtype="goblin" name="goblin brawler" fraction="MONSTER" category="GOBLIN" layer="NORMAL">
 	<Mesh file="goblin.mesh" />
 	<Dropslots >
-		<Dropslot pbig="0.01" pmedium="0.02" psmall="0.04" pgold="0.02" max_gold="30" min_level="0" max_level="3" magic_prob="0.1" magic_power="100" />
-		<Dropslot pbig="0.01" pmedium="0.02" psmall="0.02" pgold="0.02" max_gold="20" min_level="0" max_level="1" magic_prob="0.2" magic_power="100" />
+		<Dropslot pbig="0.02" pmedium="0.06" psmall="0.08" pgold="0.05" max_gold="30" min_level="0" max_level="3" magic_prob="0.1" magic_power="100" />
+		<Dropslot pbig="0.02" pmedium="0.06" psmall="0.05" pgold="0.05" max_gold="20" min_level="0" max_level="1" magic_prob="0.2" magic_power="100" />
 	</Dropslots>
 	
 	<BasicAttributes
@@ -294,8 +294,8 @@ AIR
 	<Mesh file="goblin.mesh" />
 	<ExtraMesh bone="itemRightHand" file="goblin_hmr.mesh" />
 	<Dropslots >
-		<Dropslot pbig="0.01" pmedium="0.02" psmall="0.04" pgold="0.02" max_gold="50" min_level="0" max_level="5" magic_prob="0.1" magic_power="250" />
-		<Dropslot pbig="0.01" pmedium="0.02" psmall="0.02" pgold="0.02" max_gold="30" min_level="0" max_level="3" magic_prob="0.2" magic_power="200" />
+		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" max_gold="50" min_level="0" max_level="5" magic_prob="0.1" magic_power="250" />
+		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.05" pgold="0.05" max_gold="30" min_level="0" max_level="3" magic_prob="0.2" magic_power="200" />
 	</Dropslots>
 	
 	<BasicAttributes
@@ -349,8 +349,8 @@ AIR
 	<Mesh file="goblin.mesh" />
 	<ExtraMesh bone="itemRightHand" file="goblin_sbw.mesh" />
 	<Dropslots >
-		<Dropslot pbig="0.01" pmedium="0.02" psmall="0.04" pgold="0.02" max_gold="50" min_level="0" max_level="5" magic_prob="0.1" magic_power="250" />
-		<Dropslot pbig="0.01" pmedium="0.02" psmall="0.02" pgold="0.02" max_gold="30" min_level="0" max_level="3" magic_prob="0.2" magic_power="250" />
+		<Dropslot pbig="0.02" pmedium="0.07" psmall="0.08" pgold="0.05" max_gold="50" min_level="0" max_level="5" magic_prob="0.1" magic_power="250" />
+		<Dropslot pbig="0.02" pmedium="0.07" psmall="0.05" pgold="0.05" max_gold="30" min_level="0" max_level="3" magic_prob="0.2" magic_power="250" />
 	</Dropslots>
 	
 	<BasicAttributes
@@ -374,7 +374,7 @@ AIR
 					resistances_cap_ice="50"
 					resistances_cap_fire="50"
 					walk_speed="2500"
-					attack_speed="1500"
+					attack_speed="1000"
 					step_length="0.8"
 					attack_range="1"
 					>
@@ -403,8 +403,8 @@ AIR
 <Monster type="MONSTER" subtype="gob_dog" name="goblin dog" fraction="MONSTER" category="ANIMAL" layer="NORMAL">
 	<Mesh file="gobDog.mesh" />
 	<Dropslots >
-		<Dropslot pbig="0.01" pmedium="0.02" psmall="0.02" pgold="0.02" max_gold="70" min_level="0" max_level="5" magic_prob="0.1" magic_power="250" />
-		<Dropslot pbig="0.01" pmedium="0.02" psmall="0.02" pgold="0.02" max_gold="50" min_level="0" max_level="3" magic_prob="0.2" magic_power="250" />
+		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" max_gold="70" min_level="0" max_level="5" magic_prob="0.1" magic_power="250" />
+		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" max_gold="50" min_level="0" max_level="3" magic_prob="0.2" magic_power="250" />
 	</Dropslots>
 	<BasicAttributes
 		experience="6"
@@ -456,7 +456,7 @@ AIR
 	<Mesh file="goblin.mesh" />
 	<Dropslots >
 		<Dropslot pbig="0.01" pmedium="0.02" psmall="0.04" pgold="0.02" max_gold="30" min_level="0" max_level="6" magic_prob="0.1" magic_power="300" />
-		<Dropslot pbig="0.01" pmedium="0.02" psmall="0.02" pgold="0.02" max_gold="20" min_level="0" max_level="3" magic_prob="0.2" magic_power="250" />
+		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" max_gold="20" min_level="0" max_level="3" magic_prob="0.2" magic_power="250" />
 	</Dropslots>
 	
 	<BasicAttributes
@@ -512,7 +512,7 @@ AIR
 	<ExtraMesh bone="itemLeftHand" file="crude_sw.mesh" />
 	<Dropslots >
 		<Dropslot pbig="0.01" pmedium="0.02" psmall="0.04" pgold="0.02" max_gold="50" min_level="0" max_level="9" magic_prob="0.1" magic_power="350" />
-		<Dropslot pbig="0.01" pmedium="0.02" psmall="0.02" pgold="0.02" max_gold="30" min_level="0" max_level="5" magic_prob="0.2" magic_power="300" />
+		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" max_gold="30" min_level="0" max_level="5" magic_prob="0.2" magic_power="300" />
 	</Dropslots>
 	
 	<BasicAttributes
@@ -567,7 +567,7 @@ AIR
 	<ExtraMesh bone="itemRightHand" file="goblin_sbw.mesh" />
 	<Dropslots >
 		<Dropslot pbig="0.01" pmedium="0.02" psmall="0.04" pgold="0.02" max_gold="50" min_level="0" max_level="12" magic_prob="0.1" magic_power="400" />
-		<Dropslot pbig="0.01" pmedium="0.02" psmall="0.02" pgold="0.02" max_gold="30" min_level="0" max_level="8" magic_prob="0.2" magic_power="300" />
+		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" max_gold="30" min_level="0" max_level="8" magic_prob="0.2" magic_power="300" />
 	</Dropslots>
 	
 	<BasicAttributes
@@ -622,7 +622,7 @@ AIR
 	<ExtraMesh bone="itemRightHand" file="ice_wnd.mesh" />
 	<Dropslots >
 		<Dropslot pbig="0.01" pmedium="0.02" psmall="0.04" pgold="0.02" max_gold="30" min_level="0" max_level="12" magic_prob="0.1" magic_power="500" />
-		<Dropslot pbig="0.01" pmedium="0.02" psmall="0.02" pgold="0.02" max_gold="20" min_level="0" max_level="9" magic_prob="0.2" magic_power="400" />
+		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" max_gold="20" min_level="0" max_level="9" magic_prob="0.2" magic_power="400" />
 	</Dropslots>
 	
 	<BasicAttributes
@@ -677,7 +677,7 @@ AIR
 	<ExtraMesh bone="itemRightHand" file="crude_sw.mesh" />
 	<Dropslots >
 		<Dropslot pbig="0.01" pmedium="0.02" psmall="0.04" pgold="0.02" max_gold="50" min_level="0" max_level="13" magic_prob="0.1" magic_power="550" />
-		<Dropslot pbig="0.01" pmedium="0.02" psmall="0.02" pgold="0.02" max_gold="30" min_level="0" max_level="10" magic_prob="0.2" magic_power="500" />
+		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" max_gold="30" min_level="0" max_level="10" magic_prob="0.2" magic_power="500" />
 	</Dropslots>
 	
 	<BasicAttributes
@@ -790,8 +790,8 @@ AIR
 <Monster type="MONSTER" subtype="sword_skel" name="skeleton" fraction="UNDEAD" category="UNDEAD" layer="NORMAL">
 	<Mesh file="skeleton.mesh" />
 	<Dropslots >
-		<Dropslot pbig="0.01" pmedium="0.02" psmall="0.02" pgold="0.02" max_gold="100" min_level="0" max_level="10" magic_prob="0.1" magic_power="1000" />
-		<Dropslot pbig="0.01" pmedium="0.02" psmall="0.02" pgold="0.02" max_gold="50" min_level="0" max_level="20" magic_prob="0.2" magic_power="1000" />
+		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" max_gold="100" min_level="0" max_level="10" magic_prob="0.1" magic_power="1000" />
+		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" max_gold="50" min_level="0" max_level="20" magic_prob="0.2" magic_power="1000" />
 	</Dropslots>
 	
 	<BasicAttributes
@@ -850,8 +850,8 @@ AIR
 <Monster type="MONSTER" subtype="axe_skel" name="skeleton" fraction="UNDEAD" category="UNDEAD" layer="NORMAL">
 	<Mesh file="skeleton.mesh" />
 	<Dropslots >
-		<Dropslot pbig="0.01" pmedium="0.02" psmall="0.02" pgold="0.02" max_gold="100" min_level="0" max_level="10" magic_prob="0.1" magic_power="1000" />
-		<Dropslot pbig="0.01" pmedium="0.02" psmall="0.02" pgold="0.02" max_gold="50" min_level="0" max_level="20" magic_prob="0.2" magic_power="1000" />
+		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" max_gold="100" min_level="0" max_level="10" magic_prob="0.1" magic_power="1000" />
+		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" max_gold="50" min_level="0" max_level="20" magic_prob="0.2" magic_power="1000" />
 	</Dropslots>
 	
 	<BasicAttributes
@@ -910,8 +910,8 @@ AIR
 <Monster type="MONSTER" subtype="axe2_skel" name="skeleton" fraction="UNDEAD" category="UNDEAD" layer="NORMAL">
 	<Mesh file="skeleton.mesh" />
 	<Dropslots >
-		<Dropslot pbig="0.01" pmedium="0.02" psmall="0.02" pgold="0.02" max_gold="100" min_level="0" max_level="10" magic_prob="0.1" magic_power="1000" />
-		<Dropslot pbig="0.01" pmedium="0.02" psmall="0.02" pgold="0.02" max_gold="50" min_level="0" max_level="20" magic_prob="0.2" magic_power="1000" />
+		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" max_gold="100" min_level="0" max_level="10" magic_prob="0.1" magic_power="1000" />
+		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" max_gold="50" min_level="0" max_level="20" magic_prob="0.2" magic_power="1000" />
 	</Dropslots>
 	
 	<BasicAttributes
@@ -971,8 +971,8 @@ AIR
 <Monster type="MONSTER" subtype="phantom" name="phantom" fraction="UNDEAD" category="UNDEAD" layer="NORMAL">
 	<Mesh file="skeleton.mesh" />
 	<Dropslots >
-		<Dropslot pbig="0.01" pmedium="0.02" psmall="0.02" pgold="0.02" max_gold="100" min_level="0" max_level="10" magic_prob="0.1" magic_power="1000" />
-		<Dropslot pbig="0.01" pmedium="0.02" psmall="0.02" pgold="0.02" max_gold="50" min_level="0" max_level="20" magic_prob="0.2" magic_power="1000" />
+		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" max_gold="100" min_level="0" max_level="10" magic_prob="0.1" magic_power="1000" />
+		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" max_gold="50" min_level="0" max_level="20" magic_prob="0.2" magic_power="1000" />
 	</Dropslots>
 	
 	<BasicAttributes
@@ -1031,8 +1031,8 @@ AIR
 <Monster type="MONSTER" subtype="zombie" name="zombie" fraction="UNDEAD" category="UNDEAD" layer="NORMAL">
 	<Mesh file="skeleton.mesh" />
 	<Dropslots >
-		<Dropslot pbig="0.01" pmedium="0.02" psmall="0.02" pgold="0.02" max_gold="100" min_level="0" max_level="10" magic_prob="0.1" magic_power="1000" />
-		<Dropslot pbig="0.01" pmedium="0.02" psmall="0.02" pgold="0.02" max_gold="50" min_level="0" max_level="20" magic_prob="0.2" magic_power="1000" />
+		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" max_gold="100" min_level="0" max_level="10" magic_prob="0.1" magic_power="1000" />
+		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" max_gold="50" min_level="0" max_level="20" magic_prob="0.2" magic_power="1000" />
 	</Dropslots>
 	
 	<BasicAttributes
@@ -1092,8 +1092,8 @@ AIR
 <Monster type="MONSTER" subtype="harpy" name="harpy" fraction="MONSTER" category="FAIRY" layer="NORMAL">
 	<Mesh file="goblin.mesh" />
 	<Dropslots >
-		<Dropslot pbig="0.01" pmedium="0.02" psmall="0.02" pgold="0.02" max_gold="100" min_level="0" max_level="10" magic_prob="0.1" magic_power="1000" />
-		<Dropslot pbig="0.01" pmedium="0.02" psmall="0.02" pgold="0.02" max_gold="50" min_level="0" max_level="20" magic_prob="0.2" magic_power="1000" />
+		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" max_gold="100" min_level="0" max_level="10" magic_prob="0.1" magic_power="1000" />
+		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" max_gold="50" min_level="0" max_level="20" magic_prob="0.2" magic_power="1000" />
 	</Dropslots>
 	
 	<BasicAttributes
@@ -1153,8 +1153,8 @@ AIR
 <Monster type="MONSTER" subtype="mandrake_s" name="small mandragora" fraction="MONSTER" category="ANIMAL" layer="NORMAL">
 	<Mesh file="goblin.mesh" />
 	<Dropslots >
-		<Dropslot pbig="0.01" pmedium="0.02" psmall="0.02" pgold="0.02" max_gold="100" min_level="0" max_level="10" magic_prob="0.1" magic_power="1000" />
-		<Dropslot pbig="0.01" pmedium="0.02" psmall="0.02" pgold="0.02" max_gold="50" min_level="0" max_level="20" magic_prob="0.2" magic_power="1000" />
+		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" max_gold="100" min_level="0" max_level="10" magic_prob="0.1" magic_power="1000" />
+		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" max_gold="50" min_level="0" max_level="20" magic_prob="0.2" magic_power="1000" />
 	</Dropslots>
 	
 	<BasicAttributes
@@ -1214,8 +1214,8 @@ AIR
 <Monster type="MONSTER" subtype="mandrake_m" name="mandragora" fraction="MONSTER" category="ANIMAL" layer="NORMAL">
 	<Mesh file="goblin.mesh" />
 	<Dropslots >
-		<Dropslot pbig="0.01" pmedium="0.02" psmall="0.02" pgold="0.02" max_gold="100" min_level="0" max_level="10" magic_prob="0.1" magic_power="1000" />
-		<Dropslot pbig="0.01" pmedium="0.02" psmall="0.02" pgold="0.02" max_gold="50" min_level="0" max_level="20" magic_prob="0.2" magic_power="1000" />
+		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" max_gold="100" min_level="0" max_level="10" magic_prob="0.1" magic_power="1000" />
+		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" max_gold="50" min_level="0" max_level="20" magic_prob="0.2" magic_power="1000" />
 	</Dropslots>
 	
 	<BasicAttributes

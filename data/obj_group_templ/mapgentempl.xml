@@ -207,7 +207,7 @@
 				center_y="-3.8"
 				angle = "-270"
 				probability ="1"
-				prob_angle = "true"
+				prob_angle = "false"
 				/>
 		
 		<Object subtype="$tree"
