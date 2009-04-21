@@ -2075,6 +2075,8 @@ void MainWindow::updatePartyInfo()
 				continue;
 			
 			pl =  static_cast<Player*>(World::getWorld()->getPlayer(*it));
+			if (pl ==0)
+				continue;
 			
 			stream.str("");
 			stream << "PartyMemberImage";

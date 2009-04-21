@@ -64,7 +64,10 @@ void Quest::setDescription(const char* descr)
 
 void Quest::init()
 {
-	std::string luainit = m_table_name;
+	std::string luainit = "if (";
+	luainit += m_table_name;
+	luainit += "==nil ) then \n";
+	luainit += m_table_name;
 	luainit += " = {}; \n";
 	luainit += m_table_name;
 	luainit += "_tmp = {}; \n";
@@ -78,6 +81,7 @@ void Quest::init()
 	luainit += m_table_name;
 	luainit += " = ";
 	luainit += m_table_name;
+	luainit += "\n end;";
 	DEBUG5("lua init %s",luainit.c_str());
 	EventSystem::doString(luainit.c_str());
 	

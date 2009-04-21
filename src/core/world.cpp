@@ -1399,7 +1399,7 @@ void World::updatePlayers()
 					
 					Quest* qu = new Quest(name,tabname);
 					qu->fromString(cv);
-					
+					qu->init();
 					addQuest(tabname,qu);
 				}
 
