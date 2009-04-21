@@ -1417,6 +1417,12 @@ void Document::update(float time)
 				pthread_create(&thread,0,&Document::writeSaveFile,this);
 				DEBUG5("saving");
 			}
+			
+			if (World::getWorld()->getNetwork()->getSlotStatus() == NET_TIMEOUT)
+			{
+				setState(SHUTDOWN_REQUEST);
+			}
+			
 			break;
 
 		case SHUTDOWN_REQUEST:

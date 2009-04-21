@@ -1255,6 +1255,10 @@ void World::updatePlayers()
 		if (m_network->getSlotStatus()!=NET_CONNECTED)
 		{
 			// disconnect
+			if (m_network->getSlotStatus() == NET_TIMEOUT)
+			{
+				m_local_player->setState(GameObject::STATE_QUIT,false);
+			}
 		}
 		else
 		{
