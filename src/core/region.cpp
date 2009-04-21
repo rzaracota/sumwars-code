@@ -1020,6 +1020,23 @@ bool  Region::deleteObject (WorldObject* object)
 		
 	}
 	
+	 // Aus dem Binärbaum loeschen
+	if (object->getState() != WorldObject::STATE_STATIC)
+	{
+		m_objects->erase(object->getId());
+	}
+	else
+	{
+		m_static_objects->erase(object->getId());
+	}
+
+	if (object->getType() == "PLAYER")
+	{
+		DEBUG5("Player deleted");
+		m_players->erase(object->getId());
+
+	}
+	
 	if (object->isLarge())
 	{
 		if (m_large_objects.count(object->getId()) == 0)
@@ -1043,28 +1060,6 @@ bool  Region::deleteObject (WorldObject* object)
 			Gridunit *gu = (m_data_grid->ind(x,y));
 			result = gu->deleteObject(object);
 		}
-	}
-	
-	if (result==false)
-	{
-		return result;
-	}
-
-	 // Aus dem Binärbaum loeschen
-	if (object->getState() != WorldObject::STATE_STATIC)
-	{
-		m_objects->erase(object->getId());
-	}
-	else
-	{
-		m_static_objects->erase(object->getId());
-	}
-
-	if (object->getType() == "PLAYER")
-	{
-		DEBUG5("Player deleted");
-		m_players->erase(object->getId());
-
 	}
 
 	return result;
@@ -1864,9 +1859,12 @@ void Region::checkRegionData(CharConv* cv)
 		if (wo != 0)
 		{
 			WARNING("object %i does not exist at server",wo->getId());
-			wo->destroy();
 			deleteObject(wo);
-			delete wo;
+			if (wo->getType() != "PLAYER")
+			{
+				wo->destroy();
+				delete wo;
+			}
 		}
 	}
 	for (setit = objectsmissing.begin(); setit != objectsmissing.end(); ++setit)
