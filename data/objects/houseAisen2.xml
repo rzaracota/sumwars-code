@@ -1,4 +1,4 @@
 <Object type="FIXED_OBJECT" subtype="houseAisen2" layer="NORMAL">
 	<Mesh file="houseAisen2.mesh" />
-	<Geometry shape="RECT" extent_x="3.929373356" extent_y="9.404614265"/>
+	<Geometry shape="RECT" extent_x="2.137018164" extent_y="4.5"/>
 </Object>
