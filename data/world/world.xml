@@ -68,7 +68,7 @@
 <!-- Medair, Soeldnerlager [Stadt]-->
 <!-- Orte: Fenor Marken -->
 	<Region id="3" name="medMercCamp">
-		<Settings dimx="44" dimy="44" region_template="medairMercenaryCamp"  ground="grass1"/>
+		<Settings dimx="20" dimy="20" region_template="medairMercenaryCamp"  ground="grass1"/>
 		
 		<Waypoint world_x="0.5" world_y ="0.9" />
 		
@@ -88,7 +88,7 @@
 			<Environment height="1.0" name="meadow" />
 		</Environments>		
 		
-		<ReviveLocation  location="entry_south" />
+		<ReviveLocation  location="WaypointLoc" />
 		
 		<Event trigger ="create_region" once = "true">
 			<Effect>
@@ -151,7 +151,7 @@
 				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
 			</Exit>
 			<Exit name="exit_crypt" destination_region="aisMaylonsGraveL1" destination_location="entry_south" >
-				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
+				<Shape shape="RECT" extent_x="1.0" extent_y="4.0" />
 			</Exit>
 		</Exits>
 
@@ -246,7 +246,7 @@
 <!-- Prinz, Ratgeber, Magier, Bauer, Sergeant -->
 <!-- Kraeutersammler -->
 	<Region id="7" name="joringsbridge">
-		<Settings dimx="32" dimy="32" region_template="joringsbridge"  ground="grass1"/>
+		<Settings dimx="23" dimy="23" region_template="joringsbridge"  ground="grass1"/>
 		
 		<ExitDirections north="true" south="true" west="true" east="false" />
 		
@@ -268,7 +268,7 @@
 		
 		<Event trigger ="create_region" once = "true">
 			<Effect>
-				gertlinde_kampfer = createObject("peasant", "locHerbalist");
+				gertlinde_kampfer = createObject("peasant_f", "locHerbalist");
 				setRefName(gertlinde_kampfer, "Gertlinde Kampfer");
 				addArea("HerbalistArea","circle","locHerbalist",5);
 				sergeant_lutterer = createObject("peasant", "locSergeant");
