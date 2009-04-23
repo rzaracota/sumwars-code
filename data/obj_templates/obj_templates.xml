@@ -15,7 +15,7 @@ FIXED_OBJECT
 		<Object name="tree3" />
 	</Environment>
 	<Environment name="hills">
-		<Object name="tree3" />
+		<Object name="tree4" />
 	</Environment>
 </ObjectTemplate>
 
@@ -31,6 +31,33 @@ FIXED_OBJECT
 		<Object name="wall1" />
 		<Object name="wall2" />
 		<Object name="wall3" />
+	</Environment>
+</ObjectTemplate>
+
+<ObjectTemplate name="$border_m" type="FIXED_OBJECT">
+	<Environment name="meadow">
+		<Object name="fence_m1" />
+	</Environment>
+	<Environment name="hills">
+		<Object name="wall_m1" />
+	</Environment>
+</ObjectTemplate>
+
+<ObjectTemplate name="$border_s" type="FIXED_OBJECT">
+	<Environment name="meadow">
+		<Object name="fence_s1" />
+	</Environment>
+	<Environment name="hills">
+		<Object name="wall_s1" />
+	</Environment>
+</ObjectTemplate>
+
+<ObjectTemplate name="$border_c" type="FIXED_OBJECT">
+	<Environment name="meadow">
+		<Object name="fence_c1" />
+	</Environment>
+	<Environment name="hills">
+		<Object name="wall_c1" />
 	</Environment>
 </ObjectTemplate>
 
@@ -53,9 +80,29 @@ FIXED_OBJECT
 <ObjectTemplate name="$single_block" type="FIXED_OBJECT">
 	<Environment name="meadow">
 		<Object name="tree1" />
+		<Object name="tree2" />
 	</Environment>
 	<Environment name="hills">
 		<Object name="tree3" />
+		<Object name="tree4" />
+	</Environment>
+</ObjectTemplate>
+
+<ObjectTemplate name="$single_debris" type="FIXED_OBJECT">
+	<Environment name="meadow">
+		<Object name="stone1" />
+	</Environment>
+	<Environment name="hills">
+		<Object name="stone2" />
+	</Environment>
+</ObjectTemplate>
+
+<ObjectTemplate name="$single_deb_l" type="FIXED_OBJECT">
+	<Environment name="meadow">
+		<Object name="stone_l1" />
+	</Environment>
+	<Environment name="hills">
+		<Object name="stone_l1" />
 	</Environment>
 </ObjectTemplate>
 
@@ -65,6 +112,15 @@ FIXED_OBJECT
 	</Environment>
 	<Environment name="hills">
 		<Object name="waypoint" />
+	</Environment>
+</ObjectTemplate>
+
+<ObjectTemplate name="$signpost" type="FIXED_OBJECT">
+	<Environment name="meadow">
+		<Object name="signpost" />
+	</Environment>
+	<Environment name="hills">
+		<Object name="signpost" />
 	</Environment>
 </ObjectTemplate>
 	
