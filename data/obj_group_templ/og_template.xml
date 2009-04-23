@@ -184,6 +184,7 @@
 	</Locations>
 </ObjectGroupTemplate>
 
+<!--
 <ObjectGroupTemplate name = "maylonsGrave" >
 	<Shape
 		  type = "RECT"
@@ -212,6 +213,7 @@
 		<Location name = "exit_crypt" pos_x="0" pos_y="-8" />
 	</Locations>
 </ObjectGroupTemplate>
+-->
 
 <ObjectGroupTemplate name = "maylonsGraveL1Goblins" >
 	<Shape
@@ -257,6 +259,7 @@
 	</Locations>
 </ObjectGroupTemplate>
 
+<!--
 <ObjectGroupTemplate name = "joringsbridge" >
 	<Shape
 		  type = "RECT"
@@ -331,7 +334,7 @@
 		<Location name = "locWeaponTrader" pos_x="8" pos_y="2" />
 		<Location name = "locArmorTrader" pos_x="8" pos_y="-1" />
 	</Locations>
-</ObjectGroupTemplate>
+</ObjectGroupTemplate>-->
 
 <ObjectGroupTemplate name = "michelsFarm" >
 	<Shape
