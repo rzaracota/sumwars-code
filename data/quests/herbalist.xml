@@ -13,7 +13,7 @@
 	</Description>
 	
 	<NPC refname="Gertlinde Kampfer">
-		<Topic name="herbalist" start_option="Kraeutersammler">
+		<Topic name="herbalist" start_option="Herb gathering">
 			<Condition>
 				if (herbalist.finished ~= true) then
 					return true
