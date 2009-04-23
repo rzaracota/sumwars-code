@@ -248,6 +248,8 @@
 	<Region id="7" name="joringsbridge">
 		<Settings dimx="23" dimy="23" region_template="joringsbridge"  ground="grass1"/>
 		
+		<Waypoint world_x="0.6" world_y ="0.6" />
+		
 		<ExitDirections north="true" south="true" west="true" east="false" />
 		
 		<Exits>
