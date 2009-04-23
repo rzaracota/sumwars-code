@@ -200,6 +200,7 @@ bool CharCreate::onButtonCharCreate(const CEGUI::EventArgs& evt)
 	}
 	
 	m_document->createNewCharacter(name);
+	namebox ->setText("");
 	return true;
 }
 
