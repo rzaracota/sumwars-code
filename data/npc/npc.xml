@@ -1,7 +1,9 @@
 <?xml version="1.0" ?>
 
 <NPC refname="peasant">
+	<!--
 	<Trade refresh_time="600000" price_factor="1.5">
+	
 		<TradeItem subtype="heal_1" number ="20" />
 		<TradeItem subtype="heal_2" number="15" />
 		<TradeItem subtype="hatch_axe"  number="1" number_magical="2" min_echant="100" max_enchant="500"/>
@@ -62,6 +64,7 @@
 			speak('peasant','du nervst!',1000);
 		</Effect>
 	</Topic>
+	-->
 </NPC>
 
 
@@ -86,7 +89,7 @@
 		<TradeItem subtype="wood_shd"  number="1" number_magical="2" min_echant="100" max_enchant="200"/>
 	</Trade>
 	
-	<Topic name="trade" start_option="Handel" />
+	<Topic name="trade" start_option="Trade" />
 </NPC>
 
 <NPC refname="Sergeant Lutterer">
@@ -99,6 +102,11 @@
 </NPC>
 
 <NPC refname="Gertlinde Kampfer">
+	<Trade refresh_time="300000" price_factor="1.5">
+		<TradeItem subtype="heal_1" number ="20" />
+	</Trade>
+	
+	<Topic name="trade" start_option="Potions" />
 </NPC>
 
 <NPC refname="Sergeant Wober">
