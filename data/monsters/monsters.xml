@@ -453,7 +453,7 @@ AIR
 <!-- Goblinkaempfer -->
 <!-- L4 -->
 <Monster type="MONSTER" subtype="goblin_fgt" name="goblin fighter" fraction="MONSTER" category="GOBLIN" layer="NORMAL">
-	<Mesh file="goblin.mesh" />
+	<Mesh file="gob_brown.mesh" />
 	<Dropslots >
 		<Dropslot pbig="0.01" pmedium="0.02" psmall="0.04" pgold="0.02" max_gold="30" min_level="0" max_level="6" magic_prob="0.1" magic_power="300" />
 		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" max_gold="20" min_level="0" max_level="3" magic_prob="0.2" magic_power="250" />
@@ -563,7 +563,7 @@ AIR
 <!-- Goblinwilderer -->
 <!-- L7 -->
 <Monster type="MONSTER" subtype="goblin_pch" name="goblin poacher" fraction="MONSTER" category="GOBLIN" layer="NORMAL">
-	<Mesh file="goblin.mesh" />
+	<Mesh file="gob_brown.mesh" />
 	<ExtraMesh bone="itemRightHand" file="goblin_sbw.mesh" />
 	<Dropslots >
 		<Dropslot pbig="0.01" pmedium="0.02" psmall="0.04" pgold="0.02" max_gold="50" min_level="0" max_level="12" magic_prob="0.1" magic_power="400" />
