@@ -265,9 +265,11 @@ class Equipement
 	 * \brief Fuegt Gegenstand ins Inventar ein
 	 * \param item Zeiger auf den Gegenstand
 	 * \param check_useup wenn auf true gesetzt, wird sichergestellt, dass in den ersten 10 Objekten (Guertel) nur Verbrauchsgegenstaende landen
+	 * \param use_equip Bei der Suche nach einem Platz werden auch die Ausruestungsslots verwendet
+	 * \param use_secondary Ruestungen und Schilde werden in den zweiten Slot eingefuegt
 	 * \return Gibt an, wo das item eingefuegt wurde
 	 */
-	short insertItem(Item* item, bool check_useup=true);
+	short insertItem(Item* item, bool check_useup=true, bool use_equip= false, bool use_secondary=false);
 	
 	/**
 	 * \fn bool swapCursorItem(int pos)

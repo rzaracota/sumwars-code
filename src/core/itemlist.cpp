@@ -291,7 +291,7 @@ bool Equipement::swapCursorItem(int pos)
 	return ret;
 }
 
-short  Equipement::insertItem(Item* item, bool check_useup)
+short  Equipement::insertItem(Item* item, bool check_useup,bool use_equip, bool use_secondary)
 {
 	if (item ==0)
 		return NONE;
