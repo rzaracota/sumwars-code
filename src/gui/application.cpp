@@ -374,32 +374,8 @@ bool Application::setupResources()
 bool Application::initGettext()
 {
 	DEBUG("initializing internationalisation");
-
+/*
 	bool result = false;
-	/*char * language;
-	language = getenv("LANG");
-
-	if ((language[0] == 'd' && language[1] == 'e') ||
-			(language[0] == 'e' && language[1] == 'n'))
-	{
-		result = setlocale (LC_MESSAGES, "");
-		//result = setlocale (LC_MESSAGES, "de_DE");
-	}
-	else
-	{
-		result = setlocale (LC_MESSAGES, "en");
-
-		if (!result)
-			result = setlocale (LC_MESSAGES, "en_GB");
-		if (!result)
-			result = setlocale (LC_MESSAGES, "en_US");
-		if (!result)
-			result = setlocale (LC_MESSAGES, "en_NZ");
-	}
-
-	bindtextdomain ("sumwars","../translation/");
-	bindtextdomain ("event","../translation/");
-	textdomain ("sumwars");*/
 	
 	result = setlocale( LC_MESSAGES, "" );
 	
@@ -413,7 +389,8 @@ bool Application::initGettext()
 	bind_textdomain_codeset ("sumwars_xml","UTF-8");
 	
 	textdomain ("sumwars_sumwars");
-	
+	*/
+	Gettext::init("");
 	return true;
 }
 

@@ -69,6 +69,7 @@ sumwars_SOURCES = core/world.cpp \
 	core/quest.cpp \
 	core/minimap.cpp \
 	core/waypoint.cpp \
+	core/gettext.cpp \
 	gui/main_gui.cpp \
 	gui/mainwindow.cpp \
 	gui/scene.cpp \
