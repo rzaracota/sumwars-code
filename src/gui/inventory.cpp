@@ -30,9 +30,10 @@ Inventory::Inventory (Document* doc)
 	label->setProperty("BackgroundEnabled", "false");
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.25f), cegui_reldim( 0.02)));
 	label->setSize(CEGUI::UVector2(cegui_reldim(0.5f), cegui_reldim( 0.4f)));
-	label->setMousePassThroughEnabled(true);
 	label->setProperty("Image", "set:character image:character_img"); 
 	label->setInheritsAlpha (false);
+	label->setID(Equipement::NONE);
+	label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonPressed, (ItemWindow*) this));
 	//label->setAlpha(1.0);
 
 	int i,j;

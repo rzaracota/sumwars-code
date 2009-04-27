@@ -279,12 +279,13 @@ public:
 	bool onItemClick(ClientCommand* command);
 	
 	/**
-	 * \fn bool insertItem(Item* itm)
+	 * \fn bool insertItem(Item* itm, bool use_equip = true)
 	 * \brief Fuegt ein Items in das Inventar ein
 	 * \param itm einzufuegendes Item
+	 * \param use_equip wenn auf true gesetzt, wird das Item falls moeglich als Ausruestungsgegenstand verwendet
 	 * \return Position an der das Item eingefuegt wurde
 	 */
-	short insertItem(Item* itm);
+	short insertItem(Item* itm, bool use_equip = true);
 	
 	/**
 	 * \fn bool checkItemRequirements(Item* itm)

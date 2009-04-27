@@ -35,10 +35,10 @@ class Quest
 		Quest(std::string name, std::string table_name);
 		
 		/**
-		 * \fn ~Quest()
+		 * \fn virtual ~Quest()
 		 * \brief Destruktor
 		 */
-		~Quest();
+		virtual ~Quest();
 		
 		/**
 		 * \fn void setInit(const char* init)

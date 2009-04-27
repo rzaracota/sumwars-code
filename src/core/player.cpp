@@ -658,7 +658,7 @@ bool Player::onItemClick(ClientCommand* command)
 				// Item soll als Ausruestungsgegenstand benutzt werden
 				req = checkItemRequirements(it);
 				
-
+/*
 				// geforderter Typ um das Item anlegen zu koennen
 				Item::Type req_type = Item::NOITEM;
 
@@ -687,7 +687,30 @@ bool Player::onItemClick(ClientCommand* command)
 					req= false;
 				}
 
-
+*/
+				if (it->m_type == Item::WEAPON && !m_secondary_equip)
+					pos = Equipement::WEAPON;
+				else if (it->m_type == Item::WEAPON && m_secondary_equip)
+					pos = Equipement::WEAPON2;
+				else if (it->m_type == Item::SHIELD && !m_secondary_equip)
+					pos = Equipement::SHIELD;
+				else if (it->m_type == Item::SHIELD && m_secondary_equip)
+					pos = Equipement::SHIELD2;
+				else if (it->m_type == Item::HELMET)
+					pos = Equipement::HELMET;
+				else if (it->m_type == Item::GLOVES)
+					pos = Equipement::GLOVES;
+				else if (it->m_type == Item::ARMOR)
+					pos = Equipement::ARMOR;
+				else if (it->m_type == Item::AMULET)
+					pos = Equipement::AMULET;
+				else if (it->m_type == Item::RING)
+				{
+					pos = Equipement::RING_LEFT;
+					if (m_equipement->getItem(pos) != 0)
+						pos = Equipement::RING_RIGHT;
+				}
+				
 
 			}
 			else
@@ -711,7 +734,7 @@ bool Player::onItemClick(ClientCommand* command)
 					m_equipement->swapItem(itm, Equipement::CURSOR_ITEM);
 
 					// ins Inventar einfuegen
-					insertItem(itm);
+					insertItem(itm,false);
 					req = false;
 				}
 				else if (pos >= Equipement::SMALL_ITEMS && pos < Equipement::SMALL_ITEMS+10)
@@ -725,7 +748,7 @@ bool Player::onItemClick(ClientCommand* command)
 						m_equipement->swapItem(itm, Equipement::CURSOR_ITEM);
 
 						// ins Inventar einfuegen
-						insertItem(itm);
+						insertItem(itm,false);
 						req = false;
 					}
 				}
@@ -739,7 +762,9 @@ bool Player::onItemClick(ClientCommand* command)
 			}
 		}
 
-
+		if (pos == Equipement::NONE)
+			return true;
+		
 		// Vertauschen von Cursoritem und angeklicktem Item
 		m_equipement->swapCursorItem(pos);
 
@@ -922,11 +947,13 @@ bool Player::onItemClick(ClientCommand* command)
 	return true;
 }
 
-short Player::insertItem(Item* itm)
+short Player::insertItem(Item* itm, bool use_equip)
 {
 	if (itm ==0)
 		ERRORMSG("tried to insert null item");
-	short pos = getEquipement()->insertItem(itm);
+	bool may_equip = use_equip && checkItemRequirements(itm);
+	
+	short pos = getEquipement()->insertItem(itm,true,may_equip, m_secondary_equip);
 
 	if (World::getWorld() != 0)
 	{
@@ -1360,7 +1387,7 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 				{
 					if (command->m_button == BUTTON_TRADE_ITEM_RIGHT)
 					{
-						insertItem(si);
+						insertItem(si,true);
 					}
 					else
 					{
@@ -1516,7 +1543,7 @@ void Player::performActionCritPart(Vector goal, WorldObject* goalobj)
 			getRegion()->deleteItem(getCommand()->m_goal_object_id);
 
 			// Item einfuegen
-			insertItem(itm);
+			insertItem(itm,true);
 			DEBUG5("take item %p",itm);
 		}
 		else

@@ -303,6 +303,60 @@ short  Equipement::insertItem(Item* item, bool check_useup,bool use_equip, bool 
 		return GOLD;
 	}
 	
+	if (use_equip)
+	{
+		if (item->m_type == Item::WEAPON && !use_secondary && m_body_items[WEAPON] == 0 && (item->m_weapon_attr->m_two_handed == false || m_body_items[SHIELD] == 0))
+		{
+			swapItem(item,WEAPON);
+			return WEAPON;
+		}
+		else if (item->m_type == Item::WEAPON && use_secondary && m_body_items[WEAPON2] == 0  && (item->m_weapon_attr->m_two_handed == false || m_body_items[SHIELD2] == 0))
+		{
+			swapItem(item,WEAPON2);
+			return WEAPON2;
+		}
+		else if (item->m_type == Item::SHIELD && !use_secondary && m_body_items[SHIELD] == 0 && (m_body_items[WEAPON] == 0 || m_body_items[WEAPON]->m_weapon_attr->m_two_handed == false))
+		{
+			swapItem(item,SHIELD);
+			return SHIELD;
+		}
+		else if (item->m_type == Item::SHIELD && use_secondary && m_body_items[SHIELD2] == 0 && (m_body_items[WEAPON2] == 0 || m_body_items[WEAPON2]->m_weapon_attr->m_two_handed == false))
+		{
+			swapItem(item,SHIELD2);
+			return SHIELD2;
+		}
+		else if (item->m_type == Item::ARMOR && m_body_items[ARMOR] == 0)
+		{
+			swapItem(item,ARMOR);
+			return ARMOR;
+		}
+		else if (item->m_type == Item::GLOVES && m_body_items[GLOVES] == 0)
+		{
+			swapItem(item,GLOVES);
+			return GLOVES;
+		}
+		else if (item->m_type == Item::HELMET && m_body_items[HELMET] == 0)
+		{
+			swapItem(item,HELMET);
+			return HELMET;
+		}
+		else if (item->m_type == Item::RING && m_body_items[RING_LEFT] == 0)
+		{
+			swapItem(item,RING_LEFT);
+			return RING_LEFT;
+		}
+		else if (item->m_type == Item::RING && m_body_items[RING_RIGHT] == 0)
+		{
+			swapItem(item,RING_RIGHT);
+			return RING_RIGHT;
+		}
+		else if (item->m_type == Item::AMULET && m_body_items[AMULET] == 0)
+		{
+			swapItem(item,AMULET);
+			return AMULET;
+		}
+	}
+	
 	Item* itm = item;
 	int pos;
 	bool useup = (item->m_useup_effect != 0);

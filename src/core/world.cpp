@@ -952,7 +952,7 @@ void World::handleMessage(std::string msg, int slot)
 			Item* itm = ItemFactory::createItem(type, name,0,val);
 			if (itm != 0)
 			{
-				pl->insertItem(itm);
+				pl->insertItem(itm,true);
 			}
 		}
 		else if (obj == "get")
