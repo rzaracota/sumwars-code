@@ -1,5 +1,6 @@
 #include "optionswindow.h"
 #include "sound.h"
+#include "listitem.h"
 
 OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard)
 	:Window(doc)
@@ -82,6 +83,29 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard)
 	btn->setID(5);
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&OptionsWindow::onButtonOkClicked, this));
 	
+	label = win_mgr.createWindow("TaharezLook/StaticText", "LanguageLabel");
+	options->addChildWindow(label);
+	label->setProperty("FrameEnabled", "true");
+	label->setProperty("BackgroundEnabled", "true");
+	label->setPosition(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.8)));
+	label->setSize(CEGUI::UVector2(cegui_reldim(0.3f), cegui_reldim( 0.06f)));
+	
+	CEGUI::Combobox* cbo = static_cast<CEGUI::Combobox*>(win_mgr.createWindow("TaharezLook/Combobox","LanguageBox"));
+	options->addChildWindow(cbo);
+	cbo->setPosition(CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim( 0.8f)));
+	cbo->setSize(CEGUI::UVector2(cegui_reldim(0.4f), cegui_reldim( 0.3f)));
+	
+	cbo->addItem(new StrListItem("System default","",0));
+	cbo->addItem(new StrListItem("German","de_DE.UTF-8",0));
+	cbo->addItem(new StrListItem("English","en_GB.UTF-8",0));
+	
+	cbo->setReadOnly(true);
+	
+	cbo->setItemSelectState((size_t) 0,true);
+	cbo->handleUpdatedListItemData();
+	
+	cbo->subscribeEvent(CEGUI::Combobox::EventListSelectionAccepted, CEGUI::Event::Subscriber(&OptionsWindow::onLanguageSelected, this));
+	
 	reset();
 	updateTranslation();
 }
@@ -123,6 +147,7 @@ void OptionsWindow::update()
 	{
 		slider->setScrollPosition(SoundSystem::getSoundVolume());
 	}
+	
 }
 
 void OptionsWindow::updateTranslation()
@@ -156,6 +181,9 @@ void OptionsWindow::updateTranslation()
 	
 	label = win_mgr.getWindow("SoundVolumeLabel");
 	label->setText((CEGUI::utf8*) gettext("Sound"));
+	
+	label = win_mgr.getWindow("LanguageLabel");
+	label->setText((CEGUI::utf8*) gettext("Language"));
 	
 	CEGUI::PushButton* btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow( "OptionsCloseButton"));
 	btn->setText((CEGUI::utf8*) gettext("Ok"));
@@ -216,3 +244,24 @@ bool OptionsWindow::onSoundVolumeChanged(const CEGUI::EventArgs& evt)
 	SoundSystem::setSoundVolume(vol);
 	return true;
 }
+
+bool OptionsWindow::onLanguageSelected(const CEGUI::EventArgs& evt)
+{
+	
+	const CEGUI::MouseEventArgs& we =
+			static_cast<const CEGUI::MouseEventArgs&>(evt);
+	
+	CEGUI::Combobox* cbo = static_cast<CEGUI::Combobox*>(we.window);
+	
+	CEGUI::ListboxItem* item = cbo->getSelectedItem();
+	
+	if (item != 0)
+	{
+		DEBUG5("selected Language %s",item->getText().c_str());
+		StrListItem* sitem = static_cast<StrListItem*>(item);
+		Gettext::setLocale(sitem->m_data.c_str());
+	}
+	
+	return true;
+}
+

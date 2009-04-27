@@ -374,22 +374,7 @@ bool Application::setupResources()
 bool Application::initGettext()
 {
 	DEBUG("initializing internationalisation");
-/*
-	bool result = false;
-	
-	result = setlocale( LC_MESSAGES, "" );
-	
-	bindtextdomain ("sumwars_sumwars","../translation/");
-	bind_textdomain_codeset ("sumwars_sumwars","UTF-8");
-	
-	bindtextdomain ("sumwars_events","../translation/");
-	bind_textdomain_codeset ("sumwars_events","UTF-8");
-	
-	bindtextdomain ("sumwars_xml","../translation/");
-	bind_textdomain_codeset ("sumwars_xml","UTF-8");
-	
-	textdomain ("sumwars_sumwars");
-	*/
+
 	Gettext::init("");
 	return true;
 }

@@ -85,6 +85,12 @@ class OptionsWindow : public Window
 		bool onSoundVolumeChanged(const CEGUI::EventArgs& evt);
 		
 		/**
+		 * \fn bool onLanguageSelected(const CEGUI::EventArgs& evt)
+		 * \brief Behandelt Auswahl einer neuen Sprache
+		 */
+		bool onLanguageSelected(const CEGUI::EventArgs& evt);
+		
+		/**
 		 * \var OIS::Keyboard *m_keyboard
 		 * \brief Repraesentation der Tastatur
 		 */

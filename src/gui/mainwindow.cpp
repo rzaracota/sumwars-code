@@ -199,6 +199,17 @@ void MainWindow::update()
 	
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 
+	// Sprache anpassen
+	if (Gettext::getLocaleChanged())
+	{
+		DEBUG("language changed");
+		std::map<std::string, Window*>::iterator it;
+		for (it= m_sub_windows.begin(); it != m_sub_windows.end(); ++it)
+		{
+			it->second->updateTranslation();
+		}
+	}
+	
 	// Flags, welche Fenster gezeigt werden
 	int wflags = m_document->getGUIState()->m_shown_windows;
 

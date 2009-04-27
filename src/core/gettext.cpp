@@ -1,4 +1,5 @@
 #include "gettext.h"
+#include "debug.h"
 
 char* Gettext::m_locale;
 
@@ -38,6 +39,11 @@ void Gettext::setLocale(const char* locale)
 		{
 			m_locale = ret;
 			m_changed = true;
+			DEBUG5("setting locale to %s",ret);
+		}
+		else
+		{
+			DEBUG5("setting locale %s not succesful",locale);
 		}
 	}
 }
