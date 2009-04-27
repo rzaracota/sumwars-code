@@ -297,6 +297,12 @@ class MainWindow :
 	 */
 	bool consumeEvent(const CEGUI::EventArgs& evt);
 	
+	/**
+	 * \fn bool onPartyMemberImageClicked(const CEGUI::EventArgs& evt)
+	 * \brief Behandelt Click auf Partymitglied
+	 */
+	bool onPartyMemberClicked(const CEGUI::EventArgs& evt);
+	
 
 	private:
 

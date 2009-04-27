@@ -430,7 +430,7 @@ bool Player::onGamefieldClick(ClientCommand* command)
 
 	// Actionen auf self brauchen kein Zielobjekt
 	dist = Action::getActionInfo(command->m_action)->m_distance;
-	if ( dist == Action::SELF || dist == Action::PARTY_MULTI)
+	if ( dist == Action::SELF || dist == Action::PARTY_MULTI || dist == Action::PARTY)
 		command->m_id=0;
 
 
@@ -481,11 +481,18 @@ bool Player::onGamefieldClick(ClientCommand* command)
 				{
 					if (wo->getState()==STATE_ACTIVE)
 					{
-						com->m_type =command->m_action;
-
-						com->m_goal_object_id = command->m_id;
-						com->m_goal = command->m_goal;
-						com->m_range = getBaseAttrMod()->m_attack_range;
+						if (getPosition().distanceTo(command->m_goal) < 16)
+						{
+							com->m_type =command->m_action;
+	
+							com->m_goal_object_id = command->m_id;
+							com->m_goal = command->m_goal;
+							com->m_range = getBaseAttrMod()->m_attack_range;
+						}
+						else
+						{
+							DEBUG("goal is too far away");
+						}
 					}
 				}
 				else if (wo->isCreature() && ( rel == WorldObject::ALLIED || rel == WorldObject::NEUTRAL))
@@ -569,9 +576,12 @@ bool Player::onGamefieldClick(ClientCommand* command)
 		}
 		else if (dist == Action::PARTY_MULTI || dist == Action::PARTY)
 		{
-			com->m_type = command->m_action;
-			com->m_goal = command->m_goal;
-			com->m_goal_object_id =0;
+			if (getPosition().distanceTo(command->m_goal) < 16)
+			{
+				com->m_type = command->m_action;
+				com->m_goal = command->m_goal;
+				com->m_goal_object_id =0;
+			}
 		}
 		else if (dist == Action::RANGED)
 		{

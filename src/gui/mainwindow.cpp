@@ -867,6 +867,7 @@ bool MainWindow::setupPartyInfo()
 		img->setSize(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.07f)));
 		img->setID(i);
 		img->setVisible(false);
+		img->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&MainWindow::onPartyMemberClicked, this));
 		
 		stream.str("");
 		stream << "PartyMemberHealthBar";
@@ -2082,6 +2083,7 @@ void MainWindow::updatePartyInfo()
 			stream << "PartyMemberImage";
 			stream << i;
 			img = win_mgr.getWindow(stream.str());
+			img->setID(pl->getId());
 			
 			// Bild setzen und anzeigen
 			if (!img->isVisible())
@@ -2497,7 +2499,36 @@ bool MainWindow::consumeEvent(const CEGUI::EventArgs& evt)
 	return true;
 }
 
+bool MainWindow::onPartyMemberClicked(const CEGUI::EventArgs& evt)
+{
+	const CEGUI::MouseEventArgs& we =
+			static_cast<const CEGUI::MouseEventArgs&>(evt);
+	unsigned int id = we.window->getID();
+	
+	Player* pl = static_cast<Player*> (World::getWorld()->getLocalPlayer());
+	if (World::getWorld() ==0 || pl ==0 || pl->getRegion() ==0)
+		return true;
+	
+	// Spieler auf den die Aktion wirkt
+	WorldObject* pl2 = pl->getRegion()->getObject(id);
+	if (pl2 ==0)
+		return true;
+	
+	DEBUG("party member Click %i",id);
+	
+	m_document->getGUIState()->m_cursor_object_id = id;
+	if (we.button == CEGUI::LeftButton)
+	{
+		m_document->onLeftMouseButtonClick(pl2->getPosition());
+	}
 
+	if (we.button == CEGUI::RightButton)
+	{
+		m_document->onRightMouseButtonClick(pl2->getPosition());
+	}
+
+	return true;
+}
 
 
 
