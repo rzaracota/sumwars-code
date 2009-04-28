@@ -235,7 +235,7 @@ void Dialogue::setTopicBase(std::string topic_base)
 
 bool Dialogue::checkTopic(std::string topic)
 {
-	if (topic == "start" || topic == "end")
+	if (topic == "start" || topic == "end" || topic == "abort")
 		return true;
 
 	Event* st = m_topics[m_topic_base].getSpeakTopic(topic);
@@ -250,6 +250,19 @@ bool Dialogue::checkTopic(std::string topic)
 
 void Dialogue::changeTopic(std::string topic)
 {
+	if (topic =="abort")
+	{
+		if (m_topic == "start")
+		{
+			topic = "end";
+		}
+		else
+		{
+			return;
+		}
+	}
+	
+	
 	if (topic == "end")
 	{
 		// Gespraech beenden
@@ -269,6 +282,8 @@ void Dialogue::changeTopic(std::string topic)
 	m_speech.clear();
 	m_started = true;
 
+	m_topic = topic;
+	
 	Event* st;
 
 	if (topic == "start")

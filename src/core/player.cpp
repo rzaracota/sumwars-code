@@ -1326,6 +1326,14 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 			}
 			
 			i = command->m_id;
+			
+			if (i==-1)
+			{
+				// Gespraech beenden
+				dia->changeTopic("abort");
+				break;
+			}
+			
 			it = getSpeakText().m_answers.begin();
 			while (it != getSpeakText().m_answers.end() && i >0)
 			{

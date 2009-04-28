@@ -366,6 +366,12 @@ class Dialogue
 		bool m_trade;
 		
 		/**
+		 * \var std::string m_topic
+		 * \brief aktuelles Thema
+		 */
+		std::string m_topic;
+		
+		/**
 		 * \var int m_id
 		 * \brief ID des Dialogs
 		 */
