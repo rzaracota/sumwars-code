@@ -117,7 +117,6 @@ bool Player::init()
 	FightStatistic& fstat= getFightStatistic();
 	
 	m_network_slot=-1;
-	m_package_number =0;
 	setType("PLAYER");
 	m_category = HUMAN;
 
@@ -140,9 +139,8 @@ bool Player::init()
 	m_equipement = new Equipement(5,14,30);
 	m_equipement->setGold(50);
 
-	m_save_timer= 3000;
-
 	m_candidate_party = -1;
+	m_message_clear_timer =0;
 
 	// Attribute auf Basiswerte setzen
 	int i;
@@ -1853,9 +1851,16 @@ void Player::addMessage(std::string msg)
 	if (msg == "")
 		return;
 
+	if (m_messages != "")
+	{
+		m_messages += "\n";
+	}
+	else
+	{
+		m_message_clear_timer = msg.size()*500;
+	}
 	m_messages += msg;
-	m_messages += "\n";
-
+	
 	// Anzahl Newlines zaehlen
 	int cnt =0;
 	int pos = 0;
@@ -1866,7 +1871,7 @@ void Player::addMessage(std::string msg)
 		pos=m_messages.find_first_of('\n',pos+1);
 	}
 	cnt --;
-	while (cnt >20)
+	while (cnt >10)
 	{
 		pos=m_messages.find_first_of('\n');
 		m_messages = m_messages.substr(pos+1);
@@ -2444,5 +2449,31 @@ void Player::setUsingWaypoint(bool val)
 	DEBUG5("player %i using waypoint ",getId());
 	m_using_waypoint = val;
 	addToNetEventMask(NetEvent::DATA_WAYPOINT);
+}
+
+void Player::updateMessageTimer(float time)
+{
+	if (m_messages == "")
+		return;
+	
+	m_message_clear_timer -= time;
+	
+	if (m_message_clear_timer <0)
+	{
+		int pos=m_messages.find_first_of('\n');
+		if (pos == -1)
+		{
+			m_messages = "";
+		}
+		else
+		{
+			m_messages = m_messages.substr(pos+1);
+			pos=m_messages.find_first_of('\n');
+			if (pos == -1)
+				pos = m_messages.size();
+			
+			m_message_clear_timer = pos * 500;
+		}
+	}
 }
 

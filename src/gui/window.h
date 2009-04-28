@@ -56,10 +56,10 @@ class Window
 		}
 		
 		/**
-		 * \fn CEGUI::FrameWindow* getCEGUIWindow()
+		 * \fn CEGUI::Window* getCEGUIWindow()
 		 * \brief Gibt das zugrunde liegende CEGUI Window aus
 		 */
-		CEGUI::FrameWindow* getCEGUIWindow()
+		CEGUI::Window* getCEGUIWindow()
 		{
 			return m_window;
 		}
@@ -68,10 +68,10 @@ class Window
 		
 	protected:
 		/**
-		 * \var CEGUI::FrameWindow* m_window
+		 * \var CEGUI::Window* m_window
 		 * \brief das darunter liegende CEGUI Window
 		 */
-		CEGUI::FrameWindow* m_window;
+		CEGUI::Window* m_window;
 		
 		/**
 		 * \var Document* m_document

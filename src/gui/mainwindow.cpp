@@ -399,7 +399,7 @@ void MainWindow::update()
 			}
 			
 			// Chat Fenster anzeigen wenn entsprechendes Flag gesetzt
-			CEGUI::FrameWindow* chat_window = (CEGUI::FrameWindow*) win_mgr.getWindow("ChatWindow");
+			CEGUI::FrameWindow* chat_window = (CEGUI::FrameWindow*) win_mgr.getWindow("Chatline");
 			if (wflags & Document::CHAT)
 			{
 				// Fokus setzen, wenn das Fenster gerade geoeffnet wurde
@@ -480,6 +480,7 @@ void MainWindow::update()
 		updateItemInfo();
 		updateRegionInfo();
 		updateSpeechBubbles();
+		updateChatContent();
 		
 		// Bild am Curso aktualisieren
 		updateCursorItemImage();
@@ -496,7 +497,7 @@ void MainWindow::update()
 		if (wflags & Document::CHAT)
 		{
 			// Fenster CharacterInfo aktualisieren
-			m_sub_windows["ChatWindow"]->update();
+			m_sub_windows["Chatline"]->update();
 		}
 
 		if (wflags & Document::MINIMAP)
@@ -614,6 +615,7 @@ bool MainWindow::setupGameScreen()
 		setupItemInfo();
 		setupRegionInfo();
 		setupSaveExitWindow();
+		setupChatContent();
 		
 		// Chatfenster anlegen
 		setupChatWindow();
@@ -738,7 +740,7 @@ void MainWindow::setupSkilltree()
 void MainWindow::setupChatWindow()
 {
 	Window* wnd = new ChatLine(m_document);
-	m_sub_windows["ChatWindow"] = wnd;
+	m_sub_windows["Chatline"] = wnd;
 	
 	
 	// Inventar anfangs ausblenden
@@ -946,6 +948,25 @@ void MainWindow::setupSaveExitWindow()
 	// Inventar anfangs ausblenden
 	m_game_screen->addChildWindow(wnd->getCEGUIWindow());
 	wnd->getCEGUIWindow()->setVisible(false);
+}
+
+void MainWindow::setupChatContent()
+{
+	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
+	
+	CEGUI::Window* label;
+	label = static_cast<CEGUI::MultiLineEditbox*>(win_mgr.createWindow("TaharezLook/StaticText", "ChatContent"));
+	m_game_screen->addChildWindow(label);
+	label->setProperty("FrameEnabled", "false");
+	//label->setProperty("BackgroundEnabled", "false");
+	label->setPosition(CEGUI::UVector2(cegui_reldim(0.07f), cegui_reldim( 0.63f)));
+	label->setSize(CEGUI::UVector2(cegui_reldim(.43f), cegui_reldim( 0.2f)));
+	label->setProperty("BackgroundColours", "tl:44000000 tr:44000000 bl:44000000 br:44000000");
+	label->setProperty("VertFormatting", "VertCentred");
+	label->setText("");
+	label->setAlwaysOnTop(true);
+	label->setMousePassThroughEnabled(true);
+	label->setID(0);
 }
 
 void  MainWindow::setWindowExtents(int width, int height){
@@ -1374,7 +1395,7 @@ void MainWindow::updateItemInfo()
 					label->setText((CEGUI::utf8*) name.c_str());
 				}
 				
-				if (fabs( label->getArea().getWidth().d_scale - len) > 0.01)
+				if (fabs( label->getArea().getWidth().d_scale - len) > 0.001)
 				{
 					DEBUG5("old value %f new value %f",label->getArea().getWidth().d_scale, len);
 					label->setSize(CEGUI::UVector2(cegui_reldim(len), cegui_reldim( 0.03f)));
@@ -1714,7 +1735,7 @@ void MainWindow::updateItemInfo()
 				label->setText((CEGUI::utf8*) name.c_str());
 			}
 			
-			if (fabs( label->getArea().getWidth().d_scale - reallen) > 0.005)
+			if (fabs( label->getArea().getWidth().d_scale - reallen) > 0.001)
 			{
 				DEBUG5("old value %f new value %f",label->getArea().getWidth().d_scale, len);
 				label->setSize(CEGUI::UVector2(cegui_reldim(reallen), cegui_reldim( 0.03f)));
@@ -2217,6 +2238,70 @@ void MainWindow::updateRegionInfo()
 		}
 		
 	}
+}
+
+void MainWindow::updateChatContent()
+{
+	static Timer timer;
+	int windows = m_document->getGUIState()->m_shown_windows;
+	
+	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
+	Player* pl = m_document->getLocalPlayer();
+	
+	CEGUI::Window* label;
+	label =  win_mgr.getWindow("ChatContent");
+	
+	if (label->getText() != (CEGUI::utf8*) pl->getMessages().c_str())
+	{
+		label->setText((CEGUI::utf8*) pl->getMessages().c_str());
+		
+	}
+	
+	bool vis = true;
+	if (label->getText() == "" || ( windows & Document::PARTY || windows & Document::CHARINFO || windows & Document::QUEST_INFO))
+	{
+		vis = false;
+	}
+	else
+	{
+		// Fenster auf die richtige Groesse bringen
+		CEGUI::Font* fnt = label->getFont();
+		CEGUI::Rect area(CEGUI::System::getSingleton().getRenderer()->getRect());
+		
+		CEGUI::String text = label->getText();
+		float width = PixelAligned(fnt->getFormattedTextExtent(text, area, CEGUI::LeftAligned));
+		
+		float maxwidth = area.getSize().d_width * 0.43;
+		width += 3;
+		if (width > maxwidth)
+		{
+			width = maxwidth;
+		}
+		
+		CEGUI::Rect larea = area;
+		larea.setWidth(width);
+		float height = PixelAligned(fnt->getFormattedLineCount(text, larea, CEGUI::WordWrapLeftAligned) * fnt->getLineSpacing());
+		
+		float relwidth = width / area.getSize().d_width;
+		float relheight = (height+6) / area.getSize().d_height;
+		
+		if ( fabs(label->getArea().getWidth().d_scale - relwidth) > 0.0001
+				   || fabs(label->getArea().getHeight().d_scale - relheight) > 0.0001)
+		{
+			label->setPosition(CEGUI::UVector2(cegui_reldim(0.07f), cegui_reldim( 0.82f - relheight)));
+			label->setSize(CEGUI::UVector2(cegui_reldim(relwidth), cegui_reldim(relheight)));
+		}
+		
+		pl->updateMessageTimer(timer.getTime());
+	}
+	
+	if (label->isVisible() != vis)
+	{
+		label->setVisible(vis);
+		
+	}
+	
+	timer.start();
 }
 
 Vector MainWindow::getIngamePos(float screenx, float screeny, bool relative)

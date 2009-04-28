@@ -639,6 +639,12 @@ public:
 	 */
 	virtual bool canBeAttacked();
 	
+	/**
+	 * \fn void updateMessageTimer(float time)
+	 * \brief aktualisiert den Nachrichten Timer
+	 */
+	void updateMessageTimer(float time);
+	
 
 //Protected stuff
 protected:
@@ -662,17 +668,6 @@ private:
 	 */
 	int m_network_slot;
 	
-	/**
-	 * \var m_package_number
-	 * \brief Gibt Anzahl der gesendeten Datenpakete an
-	 */
-	int m_package_number;
-	
-	/**
-	 * \var float m_save_timer
-	 * \brief Timer bei dessen Ablauf ein Savegame gesendet wird
-	 */
-	float m_save_timer;
 	
 	
 	
@@ -805,6 +800,12 @@ protected:
 	 * \brief Speichert die Lua Anweisungen zwischen, die die Questvariablen des Spielers setzen
 	 */
 	std::list<std::string> m_lua_instructions;
+	
+	/**
+	 * \var float m_message_clear_timer
+	 * \brief Timer, der fuer das entfernen von Nachrichten zustaendig ist
+	 */
+	float m_message_clear_timer;
 	
 	//Constructors
 	//Accessor Methods

@@ -176,6 +176,12 @@ class MainWindow :
 	void setupSaveExitWindow();
 	
 	/**
+	 * \fn void setupChatContent()
+	 * \brief Erstellt Fenster fuer Chattext
+	 */
+	void setupChatContent();
+	
+	/**
 	 * \fn bool initInputs()
 	 * \brief Initialisiert die Eingabegeraete
 	 */
@@ -228,6 +234,12 @@ class MainWindow :
 	 * \brief Erstellt Fenster mit Informationen zur Region
 	 */
 	void updateRegionInfo();
+	
+	/**
+	 * \fn void updateChatContent()
+	 * \brief Aktualisiert Fenster fuer Chattext
+	 */
+	void updateChatContent();
 
 
 	/**
