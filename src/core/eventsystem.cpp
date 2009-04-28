@@ -29,6 +29,7 @@ void EventSystem::init()
 
 	luaL_openlibs(m_lua);
 
+	lua_register(m_lua, "getRegion", getRegion);
 	lua_register(m_lua, "getObjectValue", getObjectValue);
 	lua_register(m_lua, "get", getObjectValue);
 	lua_register(m_lua, "setObjectValue", setObjectValue);
@@ -205,6 +206,7 @@ Shape EventSystem::getArea(lua_State *L, int& index)
 	return s;
 }
 
+
 void EventSystem::pushVector(lua_State *L, Vector v)
 {
 	lua_newtable(L);
@@ -216,6 +218,17 @@ void EventSystem::pushVector(lua_State *L, Vector v)
 	lua_pushnumber(L,v.m_y);
 	lua_settable(L, -3);
 }
+
+int EventSystem::getRegion(lua_State *L)
+{
+	if (m_region != 0)
+	{
+		lua_pushstring(L,m_region->getName().c_str());
+		return 1;
+	}
+	return 0;
+}
+
 
 int EventSystem::getObjectValue(lua_State *L)
 {

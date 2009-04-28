@@ -395,6 +395,13 @@ class EventSystem
 		static int teleportPlayer(lua_State *L);
 		
 		/**
+		 * \fn static int getRegion(lua_State *L)
+		 * \brief Gibt den Namen der aktuellen Region aus
+		 * \param L Lua Status
+		 */
+		static int getRegion(lua_State *L);
+		
+		/**
 		 * \fn static int writeString(lua_State *L)
 		 * \brief schreibt einen String in den Stream
 		 * \param L Lua Status
