@@ -44,6 +44,67 @@ class SaveExitWindow : public Window
 		bool onExitGameAborted(const CEGUI::EventArgs& evt);
 };
 
+/**
+ * \class MessageQuestion
+ * \brief Fenster fuer eine Ja / Nein Frage
+ */
+class MessageQuestionWindow : public Window
+{
+
+	public:
+		/**
+		 * \fn MessageQuestionWindow (Document* doc
+		* \brief Konstruktor
+		*/
+		MessageQuestionWindow (Document* doc, std::string name, std::string question, std::string button1,CEGUI::Event::Subscriber subscriber1,  std::string button2, CEGUI::Event::Subscriber subscriber2);
+	
+		/**
+		 * \fn virtual void update()
+		 * \brief aktualisiert den Inhalt des Fensters
+		 */
+		virtual void update()
+		{
+			
+		}
+		
+		/**
+		 * \fn virtual void updateTranslation
+		 * \brief aktualisiert die Uebersetzungen
+		 */
+		virtual void updateTranslation();
+		
+		/**
+		 * \fn void setQuestion(std::string question)
+		 * \brief Aendert den Text der Frage
+		 */
+		void setQuestion(std::string question);
+	
+	private:
+		/**
+		 * \var std::string m_name
+		 * \brief Name des Fensters
+		 */
+		std::string m_name;
+		
+		/**
+		 * \var std::string m_question
+		 * \brief Text der Frage
+		 */
+		std::string m_question;
+		
+		/**
+		 * \var std::string m_button1
+		 * \brief Beschriftung des ersten Buttons
+		 */
+		std::string m_button1;
+		
+		/**
+		 * \var std::string m_button2
+		 * \brief Beschriftung des zweiten Buttons
+		 */
+		std::string m_button2;
+		
+};
 
 #endif
 

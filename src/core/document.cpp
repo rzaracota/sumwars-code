@@ -148,8 +148,18 @@ void Document::setSaveFile(string s)
 		if (data)
 			delete[] data;
 		
-		m_modified |= SAVEGAME_MODIFIED;
+		
 	}
+	else
+	{
+		if (m_temp_player)
+		{
+			delete m_temp_player;
+			m_temp_player =0;
+		}
+		m_save_file ="";
+	}
+	m_modified |= SAVEGAME_MODIFIED;
 	file.close();
 }
 
@@ -1315,6 +1325,11 @@ bool Document::onKeyPress(KeyCode key)
 			else if (m_gui_state.m_shown_windows & TRADE)
 			{
 				onButtonCloseTrade();
+			}
+			else if (m_gui_state.m_shown_windows & QUESTIONBOX)
+			{
+				// Versuch, aktuelles Gespraech abzubrechen
+				onAnswerClick(-1);
 			}
 			else
 			{

@@ -32,6 +32,20 @@ class SavegameList : public Window
 		 * \brief aktualisiert die Uebersetzungen
 		 */
 		virtual void updateTranslation();
+		
+		/**
+		 * \fn bool onDeleteCharConfirmClicked(const CEGUI::EventArgs& evt)
+		 * \brief Behandelt Klick auf Button Charakter loeschen (yes)
+		 */
+		bool onDeleteCharConfirmClicked(const CEGUI::EventArgs& evt);
+		
+		
+		/**
+		 * \fn bool onDeleteCharAbortClicked(const CEGUI::EventArgs& evt)
+		 * \brief Behandelt Klick auf Button Charakter loeschen (no)
+		 */
+		bool onDeleteCharAbortClicked(const CEGUI::EventArgs& evt);
+		
 
 		
 	private:
@@ -43,9 +57,17 @@ class SavegameList : public Window
 		
 		/**
 		 * \fn bool onNewCharClicked(const CEGUI::EventArgs& evt)
-		 * \brief Behandelt Auswahl eines Savegames in der Liste
+		 * \brief Behandelt Klick auf Button neuer Charakter
 		 */
 		bool onNewCharClicked(const CEGUI::EventArgs& evt);
+		
+		/**
+		 * \fn bool onDeleteCharClicked(const CEGUI::EventArgs& evt)
+		 * \brief Behandelt Klick auf Button Charakter loeschen
+		 */
+		bool onDeleteCharClicked(const CEGUI::EventArgs& evt);
+		
+		
 
 		/**
 		 * \fn bool onSavegameSelected(const CEGUI::EventArgs& evt)

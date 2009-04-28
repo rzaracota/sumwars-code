@@ -72,3 +72,84 @@ bool SaveExitWindow::onExitGameAborted(const CEGUI::EventArgs& evt)
 	return true;
 }
 
+MessageQuestionWindow::MessageQuestionWindow (Document* doc, std::string name,std::string question, std::string button1,CEGUI::Event::Subscriber subscriber1,  std::string button2, CEGUI::Event::Subscriber subscriber2)
+	:Window(doc)
+{
+	m_button1 = button1;
+	m_button2 = button2;
+	m_question = question;
+	
+	std::string wname = name;
+	
+	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
+	CEGUI::PushButton* btn;
+	CEGUI::Window* label;
+	
+	CEGUI::FrameWindow* message = (CEGUI::FrameWindow*) win_mgr.createWindow("TaharezLook/FrameWindow", wname);
+	m_window = message;
+	
+	
+	message->setPosition(CEGUI::UVector2(cegui_reldim(0.3f), cegui_reldim( 0.25f))); //0.0/0.8
+	message->setSize(CEGUI::UVector2(cegui_reldim(0.4f), cegui_reldim( 0.2f))); //1.0/0.2
+	message->setProperty("FrameEnabled","false");
+	message->setProperty("TitlebarEnabled","false");
+	message->setProperty("CloseButtonEnabled","false");
+	message->setVisible(false);
+	
+	wname = name;
+	wname += "Button1";
+	btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", wname));
+	message->addChildWindow(btn);
+	btn->setPosition(CEGUI::UVector2(cegui_reldim(0.20f), cegui_reldim( 0.6f)));
+	btn->setSize(CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim( 0.3f)));
+	btn->subscribeEvent(CEGUI::PushButton::EventClicked, subscriber1);
+	
+	wname = name;
+	wname += "Button2";
+	btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", wname));
+	message->addChildWindow(btn);
+	btn->setPosition(CEGUI::UVector2(cegui_reldim(0.60f), cegui_reldim( 0.6f)));
+	btn->setSize(CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim( 0.3f)));
+	btn->subscribeEvent(CEGUI::PushButton::EventClicked, subscriber2);
+	
+	wname = name;
+	wname += "Label";
+	label = win_mgr.createWindow("TaharezLook/StaticText", wname);
+	message->addChildWindow(label);
+	label->setProperty("FrameEnabled", "true");
+	label->setProperty("BackgroundEnabled", "true");
+	label->setPosition(CEGUI::UVector2(cegui_reldim(0.25f), cegui_reldim(0.1f)));
+	label->setSize(CEGUI::UVector2(cegui_reldim(0.5f), cegui_reldim( 0.3f)));	
+	
+	m_name = name;
+	updateTranslation();
+	
+}
+
+void MessageQuestionWindow::updateTranslation()
+{
+	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
+	CEGUI::Window* label;
+	
+	std::string wname = m_name;
+	wname += "Button1";
+	CEGUI::PushButton* btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow( wname));
+	btn->setText((CEGUI::utf8*) gettext(m_button1.c_str()));
+	
+	wname = m_name;
+	wname += "Button2";
+	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow( wname));
+	btn->setText((CEGUI::utf8*) gettext(m_button2.c_str()));
+	
+	wname = m_name;
+	wname += "Label";
+	label = win_mgr.getWindow(wname);
+	label->setText((CEGUI::utf8*) gettext(m_question.c_str()));
+}
+
+void MessageQuestionWindow::setQuestion(std::string question)
+{
+	m_question = question;
+	updateTranslation();
+}
+

@@ -122,11 +122,15 @@ bool MainWindow::setupMainMenu()
 		img->moveToBack ();
 		img->setMousePassThroughEnabled(true);
 
-		Window* wnd = new SavegameList(m_document);
-		m_sub_windows["SavegameList"] = wnd;
-		m_main_menu->addChildWindow(wnd->getCEGUIWindow());
+		SavegameList* sgl = new SavegameList(m_document);
+		m_sub_windows["SavegameList"] = sgl;
+		m_main_menu->addChildWindow(sgl->getCEGUIWindow());
 		
-		wnd = new MainMenu(m_document);
+		MessageQuestionWindow * delchar = new MessageQuestionWindow(m_document,"DeleteChar","Really delete savegame?", "Yes",CEGUI::Event::Subscriber(&SavegameList:: onDeleteCharConfirmClicked, sgl),"No",CEGUI::Event::Subscriber(&SavegameList:: onDeleteCharAbortClicked, sgl));
+		m_sub_windows["DeleteChar"] = delchar;
+		m_main_menu->addChildWindow(delchar->getCEGUIWindow());
+		
+		Window * wnd = new MainMenu(m_document);
 		m_sub_windows["MainMenu"] = wnd;
 		m_main_menu->addChildWindow(wnd->getCEGUIWindow());
 		
@@ -963,6 +967,7 @@ void MainWindow::setupChatContent()
 	label->setSize(CEGUI::UVector2(cegui_reldim(.43f), cegui_reldim( 0.2f)));
 	label->setProperty("BackgroundColours", "tl:44000000 tr:44000000 bl:44000000 br:44000000");
 	label->setProperty("VertFormatting", "VertCentred");
+	label->setProperty("HorzFormatting", "WordWrapLeftAligned");
 	label->setText("");
 	label->setAlwaysOnTop(true);
 	label->setMousePassThroughEnabled(true);
