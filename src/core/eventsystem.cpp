@@ -1375,6 +1375,7 @@ void EventSystem::readSavegame(CharConv* savegame, int playerid, bool local_play
 	char c=1;
 	while (c==1)
 	{
+		c=0;
 		savegame->fromBuffer(c);
 		if (c==0)
 			break;
@@ -1385,7 +1386,7 @@ void EventSystem::readSavegame(CharConv* savegame, int playerid, bool local_play
 			doString(instr.c_str());
 
 			tablename = instr.substr(0,instr.find_first_of ('='));
-			DEBUG("table name %s",tablename.c_str());
+			DEBUG5("table name %s",tablename.c_str());
 			stream.str("");
 			stream << "quests."<<tablename <<" = "<<tablename;
 			DEBUG5("instr %s",stream.str().c_str());

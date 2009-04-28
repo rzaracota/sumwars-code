@@ -2085,7 +2085,8 @@ bool Player::checkWaypoint(short id)
 
 void Player::toSavegame(CharConv* cv)
 {
-
+	
+	
 	int i;
 	// Version richtig setzen
 	cv->toBuffer((short) World::getVersion());
@@ -2247,6 +2248,8 @@ void Player::fromSavegame(CharConv* cv, bool local)
 	getBaseAttrMod()->m_max_health = getBaseAttr()->m_max_health;
 	calcBaseAttrMod();
 	
+	
+	
 	// Questinformationen
 	// Daten werden aus der lua Umgebung genommen, wenn die Welt schon laeuft
 	// sonst werden sie im Spieler zwischengespeichert
@@ -2270,7 +2273,6 @@ void Player::fromSavegame(CharConv* cv, bool local)
 	else
 	{
 		EventSystem::readSavegame(cv,getId(), local);
-		cv->printNewline();
 	}
 	
 	// IDs der Wegpunkte
