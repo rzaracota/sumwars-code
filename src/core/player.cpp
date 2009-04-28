@@ -273,7 +273,7 @@ bool Player::init()
 		bas->m_resistances_cap[3] =60;
 		
 	
-		si = ItemFactory::createItem(Item::WEAPON,"ice_wnd");
+		si = ItemFactory::createItem(Item::WEAPON,"spruce_wnd");
 		equ->swapItem(si,Equipement::WEAPON);
 
 		// Debugging
