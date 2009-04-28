@@ -1,0 +1,122 @@
+<Quest name="Fortify Dwarfenfroward" table_name="defend_dwarfenfroward">
+	
+	<Init>
+		local a = 2
+	</Init>
+	
+	<Description>
+		if (defend_dwarfenfroward.finished) then
+			return _("Quest finished")
+		else
+			return _("Quest description")
+		end
+	</Description>
+	
+	<NPC refname="General Greif">
+		<!--
+		<Topic name="defend_dwarfenfroward" start_option="Defend Dwarfenfroward">
+			<Condition>
+				if (defend_dwarfenfroward.finished ~= true and defend_dwarfenfroward.freed ~= true) then
+					return true
+				else
+					return false
+				end
+			</Condition>
+			<Effect>
+				insertTrigger("start_defend_dwarfenfroward")
+			</Effect>
+		</Topic>
+		-->
+		<Topic name="scene3_dialogue">
+			<Effect>
+				addCameraPosition(0,get(getRole("PL"),"position"),20,40,20);
+				addCameraPosition(20,get(getRole("PL"),"position"),220,60,30);
+				
+				-- Party kommt auf den Kommandostand zu, waehrend
+				-- General G und DE in einen Streit verwickelt sind
+				
+				speak("DE",_("...haben meine Windelementare"),1000);
+				speak("General G",_("Na großartig. Und mit"),1000);
+				speak("DE",_("Keine Sorge. Mein Kollege"),1000);
+				speak("General G",_("Ja sicher. Auch wenn ich"),1000);
+				speak("PL",_("Verzeiht wenn ich mich so"),1000);
+				speak("General G",_("Und wer seid ihr?"),1000);
+				speak("PL",_("Die Verstärkung."),1000);
+				speak("General G",_("Sicher seid ihr das."),1000);
+				speak("DE",_("Ich glaube, dieser"),1000);
+				speak("General G",_("Das soll eure grandiose"),1000);
+				speak("DE",_("Ihr werdet den Wert unserer"),1000);
+				speak("General G",_("Was sagt ihr da?"),1000);
+				speak("ANY",_("Mir persönlich gefaellt"),1000);
+				speak("PL",_("Wenn der Preis stimmt,"),1000);
+				speak("General G",_("Großartig. Einfach großartig."),1000);
+				
+				-- Party macht sich auf den Weg.
+				
+				speak("General G",_("Ich hoffe, ihr habt"),1000);
+				speak("DE",_("Macht euch keine Sorgen."),1000);
+				
+				-- => Hauptquest: Verteidige Zwergentrutz
+				
+				changeTopic("end_cutscene");
+			</Effect>
+		</Topic>
+		
+		<Topic name="end_cutscene">
+			<Effect>
+				setCutsceneMode(false);
+			</Effect>
+		</Topic>
+	</NPC>
+	
+	
+	<Region name="dwarfenfroward">
+		<Event trigger="player_moved" once="true">
+			<Condition>
+				return (unitIsInArea(trigger.player,"GeneralGreifArea"))
+			</Condition>
+			<Effect>
+				-- insertTrigger("start_scene")
+				createDialogue();
+				addSpeaker(general_greif,"General G");
+				addSpeaker(maga_convocatis_darna_eistaucher,"DE");
+				addSpeaker(trigger.player,"Player");
+				addStandardSpeakers();
+				setCutsceneMode(true);
+				setTopicBase("General Greif");
+				changeTopic("scene3_dialogue");
+			</Effect>
+		</Event>
+		<!--
+		<Event trigger="start_scene">
+			<Effect>
+				-- setCutsceneMode(true);
+				-- addCameraPosition(1000,get(getRole("PL"),"position"),20,50,25);
+				-- startTimer("scene_1",1500);
+			</Effect>
+		</Event>
+		
+		<Event trigger="scene_1">
+			<Effect>
+				createDialogue();
+				addSpeaker(soren_windclaw,"SW");
+				addSpeaker(defend_dwarfenfroward_tmp.guard1,"W1");
+				addSpeaker(defend_dwarfenfroward_tmp.guard2,"W2");
+				addSpeaker(trigger.player,"Player");
+				addStandardSpeakers();
+				setTopicBase("Soren Windclaw");
+				changeTopic("scene1_dialogue");
+			</Effect>
+		</Event>
+		
+		<Event trigger ="command_complete" once="true">
+			<Effect>
+				print(trigger.command);
+				setCutsceneMode(false);
+			</Effect>
+		</Event>
+		-->
+	</Region>
+	
+</Quest>
+

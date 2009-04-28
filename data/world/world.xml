@@ -413,6 +413,12 @@
 			<Effect>
 				sergeant_wober = createObject("peasant", "locSergeant");
 				setRefName(sergeant_wober, "Sergeant Wober");
+				general_greif = createObject("peasant", "locGeneral");
+				setRefName(general_greif, "General Greif");
+				maga_convocatis_darna_eistaucher = createObject("peasant", "locGeneral");
+				setRefName(maga_convocatis_darna_eistaucher, "Maga Convocatis Darna Eistaucher");
+				
+				addArea("GeneralGreifArea","circle","locGeneral",5);
 			</Effect>
 		</Event>
 	</Region>
