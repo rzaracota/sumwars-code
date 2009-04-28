@@ -1,6 +1,8 @@
 #ifndef LISTITEM_H
 #define LISTITEM_H
 
+#include "CEGUI.h"
+
 /**
  * \class ListItem
  * \brief Eintrag einer CEGUI Auswahlliste

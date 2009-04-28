@@ -1,8 +1,19 @@
 #ifndef SCENE_H
 #define SCENE_H
 
+#include "OgreSceneManager.h"
+#include "OgreEntity.h"
+#include "OgreTextureManager.h"
+#include "OgreParticleSystem.h"
+#include "OgreRoot.h"
+#include "OgreRenderWindow.h"
+#include "OgreRenderTarget.h"
+#include "OgreViewport.h"
+#include "OgreStaticGeometry.h"
+#include "OgreHardwarePixelBuffer.h"
+#include "OgreRenderTexture.h"
+
 #include <map>
-#include "Ogre.h"
 #include <string>
 
 #include "itemloader.h"
@@ -11,6 +22,7 @@
 #include "worldobject.h"
 #include "sound.h"
 #include "player.h"
+
 
 
 /**

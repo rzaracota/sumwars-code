@@ -1,7 +1,6 @@
 #ifndef QUESTINFO_H
 #define QUESTINFO_H
 
-#include "Ogre.h"
 
 #include "window.h"
 #include "listitem.h"

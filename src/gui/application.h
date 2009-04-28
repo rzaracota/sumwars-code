@@ -4,8 +4,10 @@
 
 
 
-#include "Ogre.h"
-#include <OgreTimer.h>
+#include "OgreTimer.h"
+#include "OgreWindowEventUtilities.h"
+#include "OgreLogManager.h"
+#include "OgreMeshManager.h"
 
 // needed to be able to create the CEGUI renderer interface
 #include "OgreCEGUIRenderer.h"

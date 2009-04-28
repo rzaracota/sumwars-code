@@ -1,10 +1,11 @@
 #include "scene.h"
 
-#include "CEGUI.h"
 #include "OgreCEGUIRenderer.h"
 #include "OgreCEGUITexture.h"
 #include "OgreCEGUIResourceProvider.h"
 #include <OgrePanelOverlayElement.h>
+
+#include "CEGUI.h"
 
 #define USE_OBJECTLOADER
 #define USE_ITEMLOADER

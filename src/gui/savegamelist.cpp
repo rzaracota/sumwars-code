@@ -1,5 +1,6 @@
-
+#include "OgreResourceGroupManager.h"
 #include "savegamelist.h"
+
 
 SavegameList::SavegameList (Document* doc)
 	:Window(doc)

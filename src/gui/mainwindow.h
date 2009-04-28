@@ -3,14 +3,16 @@
 #define MAIN_WINDOW_H
 
 
-#include "Ogre.h"
 
 // needed to be able to create the CEGUI renderer interface
 #include "OgreCEGUIRenderer.h"
 
 // CEGUI includes
-#include "CEGUI.h"
 
+#include "OgreRoot.h"
+#include "OgreRenderWindow.h"
+#include "OgreStringConverter.h"
+#include "OgreEntity.h"
 
 // OIS
 #include "OISEvents.h"

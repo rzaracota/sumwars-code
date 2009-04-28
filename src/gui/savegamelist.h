@@ -1,7 +1,6 @@
 #ifndef SAVEGAMELIST_H
 #define SAVEGAMELIST_H
 
-#include "Ogre.h"
 
 #include "window.h"
 

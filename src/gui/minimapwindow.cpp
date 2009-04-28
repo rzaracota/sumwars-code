@@ -1,9 +1,10 @@
-#include "minimapwindow.h"
 
 #include "OgreCEGUIRenderer.h"
 #include "OgreCEGUITexture.h"
 #include "OgreCEGUIResourceProvider.h"
 #include "scene.h"
+
+#include "minimapwindow.h"
 
 #include "OgreResource.h"
 

@@ -1,7 +1,6 @@
 #ifndef WORLDMAP_H
 #define WORLDMAP_H
 
-#include "Ogre.h"
 
 #include "window.h"
 
