@@ -103,21 +103,21 @@ function getRole(role)
 	if (role == "PL") then
 		return getPartyleader()[1];
 	elseif (role == "ANY") then
-		if (getPlayers()[2] ~= nil and getPlayers()[2] ~= getPartyleader[1]) then
+		if (getPlayers()[2] ~= nil and getPlayers()[2] ~= getPartyleader()[1]) then
 			return getPlayers()[2];
 		else
 			return getPlayers()[1];
 		end;
 	elseif (role == "ANYast") then
-		if (getPlayers()[3] ~= nil and getPlayers()[3] ~= getPartyleader[1]) then
+		if (getPlayers()[3] ~= nil and getPlayers()[3] ~= getPartyleader()[1]) then
 			return getPlayers()[3];
-		elseif (getPlayers()[2] ~= nil and getPlayers()[2] ~= getPartyleader[1]) then
+		elseif (getPlayers()[2] ~= nil and getPlayers()[2] ~= getPartyleader()[1]) then
 			return getPlayers()[2];
 		else
 			return getPlayers()[1];
 		end;
 	elseif (role == "ANYplus") then
-		if (getPlayers()[3] ~= nil and getPlayers()[3] ~= getPartyleader[1]) then
+		if (getPlayers()[3] ~= nil and getPlayers()[3] ~= getPartyleader()[1]) then
 			return getPlayers()[3];
 		else
 			return getPlayers()[2];
@@ -158,7 +158,12 @@ function getRole(role)
 end;
 
 
-function addStandardSpeakers()
+-- position: Position, an der Spieler miteinander sprechen sollen
+-- range: Reichweite aus der Spieler herangeholt werden
+--        ("world","region","area")
+-- area: wurde bei range "area" angegeben, so ist hier das Gebiet anzugeben
+
+function addStandardSpeakers(region,location)
 	addSpeaker(getRole("PL"),"PL");
 	addSpeaker(getRole("ANY"),"ANY");
 	addSpeaker(getRole("ANYast"),"ANYast");
@@ -171,6 +176,14 @@ function addStandardSpeakers()
 	addSpeaker(getRole("PRIast"),"PRIast");
 	addSpeaker(getRole("ARCast"),"ARCast");
 	addSpeaker(getRole("MAGast"),"MAGast");
+	
+	if (region ~= nil and location ~= nil) then
+		local players = getPlayers();
+		local i,player;
+		for i,player in ipairs(players) do
+			teleportPlayer(player,region,location);
+		end;
+	end;
 end;
 
 

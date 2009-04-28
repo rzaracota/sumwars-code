@@ -1,11 +1,11 @@
-<Quest name="Defend Dwarfenfroward" table_name="defend_dwarfenfroward">
+<Quest name="Fortify Dwarfenfroward" table_name="fortify_dwarfenfroward">
 	
 	<Init>
 		local a = 2
 	</Init>
 	
 	<Description>
-		if (defend_dwarfenfroward.finished) then
+		if (fortify_dwarfenfroward.finished) then
 			return _("Quest finished")
 		else
 			return _("Quest description")
@@ -13,21 +13,25 @@
 	</Description>
 	
 	<NPC refname="Soren Windclaw">
-		<Topic name="defend_dwarfenfroward" start_option="Defend Dwarfenfroward">
+		<!--
+		<Topic name="fortify_dwarfenfroward" start_option="Defend Dwarfenfroward">
 			<Condition>
-				if (defend_dwarfenfroward.finished ~= true and defend_dwarfenfroward.freed ~= true) then
+				if (fortify_dwarfenfroward.finished ~= true and fortify_dwarfenfroward.freed ~= true) then
 					return true
 				else
 					return false
 				end
 			</Condition>
 			<Effect>
-				insertTrigger("start_defend_dwarfenfroward")
+				insertTrigger("start_fortify_dwarfenfroward")
 			</Effect>
 		</Topic>
-		
+		-->
 		<Topic name="scene1_dialogue">
 			<Effect>
+				addCameraPosition(0,get(getRole("PL"),"position"),20,40,20);
+				addCameraPosition(20,get(getRole("PL"),"position"),220,60,30);
+				
 				-- Die Helden werden von mehreren Waechtern durch einen Gang geführt.
 				-- Rechts und Links kann man aus den Keller merkwuerdige Geraeusche hoeren
 				-- und Magisch anmutende Dinge sehen.
@@ -113,6 +117,8 @@
 				-- jeden Handlungsspielraum unterbindet
 				
 				speak("SW",_("Das war der schwaechste Elementar,"),1000);
+				
+				changeTopic("end_cutscene");
 			</Effect>
 		</Topic>
 		
@@ -126,11 +132,19 @@
 				local players = getPlayers();
 				local i,player;
 				for i,player in ipairs(players) do
-					if (getPlayerPrivateVar(player,"defend_dwarfenfroward.reward") ~= true) then
-						setPlayerPrivateVar(player,"defend_dwarfenfroward.reward",true);
+					if (getPlayerPrivateVar(player,"fortify_dwarfenfroward.reward") ~= true) then
+						setPlayerPrivateVar(player,"fortify_dwarfenfroward.reward",true);
 						setObjectValue(player,"gold", getObjectValue(player,"gold") + 200);
 					end;
 				end;
+				
+				changeTopic("end_cutscene");
+			</Effect>
+		</Topic>
+		
+		<Topic name="end_cutscene">
+			<Effect>
+				setCutsceneMode(false);
 			</Effect>
 		</Topic>
 	</NPC>
@@ -141,8 +155,8 @@
 			<Effect>
 				soren_windclaw = createObject("peasant", "locSorenWindclaw");
 				setRefName(soren_windclaw, "Soren Windclaw");
-				defend_dwarfenfroward_tmp.guard1 = createObject("peasant", "locSorenWindclaw");
-				defend_dwarfenfroward_tmp.guard2 = createObject("peasant", "locSorenWindclaw");
+				fortify_dwarfenfroward_tmp.guard1 = createObject("peasant", "locSorenWindclaw");
+				fortify_dwarfenfroward_tmp.guard2 = createObject("peasant", "locSorenWindclaw");
 				addArea("SorenWindclawArea","circle","locSorenWindclaw",5);
 			</Effect>
 		</Event>
@@ -155,10 +169,11 @@
 				-- insertTrigger("start_scene")
 				createDialogue();
 				addSpeaker(soren_windclaw,"SW");
-				addSpeaker(defend_dwarfenfroward_tmp.guard1,"W1");
-				addSpeaker(defend_dwarfenfroward_tmp.guard2,"W2");
+				addSpeaker(fortify_dwarfenfroward_tmp.guard1,"W1");
+				addSpeaker(fortify_dwarfenfroward_tmp.guard2,"W2");
 				addSpeaker(trigger.player,"Player");
 				addStandardSpeakers();
+				setCutsceneMode(true);
 				setTopicBase("Soren Windclaw");
 				changeTopic("scene1_dialogue");
 			</Effect>
@@ -176,8 +191,8 @@
 			<Effect>
 				createDialogue();
 				addSpeaker(soren_windclaw,"SW");
-				addSpeaker(defend_dwarfenfroward_tmp.guard1,"W1");
-				addSpeaker(defend_dwarfenfroward_tmp.guard2,"W2");
+				addSpeaker(fortify_dwarfenfroward_tmp.guard1,"W1");
+				addSpeaker(fortify_dwarfenfroward_tmp.guard2,"W2");
 				addSpeaker(trigger.player,"Player");
 				addStandardSpeakers();
 				setTopicBase("Soren Windclaw");
