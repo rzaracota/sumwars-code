@@ -929,7 +929,7 @@ bool Player::onItemClick(ClientCommand* command)
 			{
 				// Item befand sich im Guertel
 				// suchen nach einem aehnlichen Item zum nachruecken
-				for (int i=10;i<30;i++)
+				for (int i=29;i>=0;i--)
 				{
 					it = m_equipement->getItem(Equipement::SMALL_ITEMS+i);
 
