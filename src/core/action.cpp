@@ -189,9 +189,9 @@ void Action::init()
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_enum_name = "bash";
-	a->m_animation[NO_WEAPON].push_back("attackUnarmed");
-	a->m_animation[ONE_HANDED].push_back("attack");
-	a->m_animation[TWO_HANDED].push_back("attackTwoHands");
+	a->m_animation[NO_WEAPON].push_back("specialAttackOneHand");
+	a->m_animation[ONE_HANDED].push_back("specialAttackOneHand");
+	a->m_animation[TWO_HANDED].push_back("specialAttackOneHand");
 
 
 	a = &(Action::m_base_info[Action::HAMMER_BASH]);
@@ -207,9 +207,9 @@ void Action::init()
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_enum_name = "hammer_bash";
-	a->m_animation[NO_WEAPON].push_back("attackUnarmed");
-	a->m_animation[ONE_HANDED].push_back("attack");
-	a->m_animation[TWO_HANDED].push_back("attackTwoHands");
+	a->m_animation[NO_WEAPON].push_back("specialAttackOneHand");
+	a->m_animation[ONE_HANDED].push_back("specialAttackOneHand");
+	a->m_animation[TWO_HANDED].push_back("specialAttackOneHand");
 
 	a = &(Action::m_base_info[Action::AROUND_BLOW]);
 	a->m_timer_nr=1;
@@ -224,6 +224,9 @@ void Action::init()
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_enum_name = "around_blow";
+	a->m_animation[NO_WEAPON].push_back("sweepStrikeOneHand");
+	a->m_animation[ONE_HANDED].push_back("sweepStrikeOneHand");
+	a->m_animation[TWO_HANDED].push_back("sweepStrikeOneHand");
 
 	a = &(Action::m_base_info[Action::WHIRL_BLOW]);
 	a->m_timer_nr=1;
@@ -238,6 +241,9 @@ void Action::init()
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_enum_name = "whirl_blow";
+	a->m_animation[NO_WEAPON].push_back("sweepStrikeOneHand");
+	a->m_animation[ONE_HANDED].push_back("sweepStrikeOneHand");
+	a->m_animation[TWO_HANDED].push_back("sweepStrikeOneHand");
 
 	a = &(Action::m_base_info[Action::SMASH]);
 	a->m_timer_nr=1;
