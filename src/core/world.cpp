@@ -874,11 +874,21 @@ void World::handleMessage(std::string msg, int slot)
 	// als Client: Nachricht an den Server senden
 	if (m_server && msg[0]!='$')
 	{
+		
 		// Name des Senders an die Nachricht haengen
 		smsg = "[";
 		if (m_player_slots->count(slot)>0)
 		{
-			smsg += (*m_player_slots)[slot]->getName();
+			Player* pl = static_cast<Player*>((*m_player_slots)[slot]);
+			smsg += pl->getName();
+			
+			if (pl->getSpeakText().m_text == "" && pl->getDialogue() == 0)
+			{
+				CreatureSpeakText text;
+				text.m_text = msg;
+				text.m_time = msg.size()*100 + 1000;
+				pl->speakText(text);
+			}
 		}
 		smsg += "] ";
 		smsg += msg;

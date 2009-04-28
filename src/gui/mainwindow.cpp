@@ -1837,7 +1837,7 @@ void MainWindow::updateSpeechBubbles()
 			continue;
 		
 		cr = static_cast<Creature*>(*it);
-		pos = m_scene->getProjection(cr->getShape()->m_center,1.8f);
+		pos = m_scene->getProjection(cr->getShape()->m_center,2.5f);
 		
 		// nur Kreaturen behandeln, die wirklich zu sehen sind
 		if (pos.first <0 || pos.first >1 || pos.second <0 || pos.second >1)
