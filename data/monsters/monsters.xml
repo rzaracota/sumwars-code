@@ -234,7 +234,7 @@ AIR
 
 <!-- Goblins -->
 
-<!-- Goblinschl�ger -->
+<!-- Goblinschlaeger -->
 <!-- L1 -->
 <Monster type="MONSTER" subtype="goblin" name="goblin brawler" fraction="MONSTER" category="GOBLIN" layer="NORMAL">
 	<Mesh file="goblin.mesh" />
@@ -342,6 +342,73 @@ AIR
 	
 	<AI ai_sight_range="12" />
 </Monster>
+
+<!-- Goblin Knochenschuettler -->
+<!-- L4 -->
+<Monster type="MONSTER" subtype="goblin_bon" name="boneshaker" fraction="MONSTER" category="GOBLIN" layer="NORMAL">
+	<Mesh file="goblin.mesh" />
+	<ExtraMesh bone="itemRightHand" file="goblin_stf.mesh" />
+	<ExtraMesh bone="EllbogenRechts" file="goblin_glv.mesh" />
+	<ExtraMesh bone="KnieRechts" file="gobLeg_arm.mesh" />
+	<ExtraMesh bone="Crown" file="goblin_hlm.mesh" />
+	<Dropslots >
+		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" max_gold="50" min_level="0" max_level="5" magic_prob="0.1" magic_power="300" />
+		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.05" pgold="0.05" max_gold="30" min_level="0" max_level="3" magic_prob="0.2" magic_power="250" />
+	</Dropslots>
+	
+	<BasicAttributes
+					experience="12"
+					level="4"
+					max_health="50"
+					armor="15"
+					block="10"
+					attack="10"
+					power="45"
+					strength="15"
+					dexterity="15"
+					magic_power="25"
+					willpower="30"
+					resistances_physical="0"
+					resistances_air="20"
+					resistances_ice="10"
+					resistances_fire="0"
+					resistances_cap_physical="50"
+					resistances_cap_air="50"
+					resistances_cap_ice="50"
+					resistances_cap_fire="50"
+					walk_speed="2500"
+					attack_speed="1000"
+					step_length="0.8"
+					attack_range="1"
+					>
+		<Ability type="walk">
+			<Animation name="walk" />
+		</Ability>
+
+		<Ability type="magic_attack">
+			<Animation name="attack" />
+			<Animation name="attack2"/>
+		</Ability>
+		
+		<Ability type="lightning">
+			<Animation name="attack2"/>
+		</Ability>
+
+		<Ability type="blade_storm">
+			<Animation name="attack2"/>
+		</Ability>
+		
+		<Ability type="die">
+			<Animation name="die" />
+		</Ability>
+		
+	</BasicAttributes>
+	
+	<Geometry radius="0.5" />
+	
+	<AI ai_sight_range="12" />
+</Monster>
+
 
 <!-- Goblinjaeger -->
 <!-- L2 -->
@@ -1298,6 +1365,14 @@ AIR
 	<SubGroup subtype="goblin_war" number="4" prob="0.7" />
 	<SubGroup subtype="goblin_wrc" number="1" prob="1.0" />
 	<SubGroup subtype="goblin_pch" number="3" prob="0.7" />
+	<SubGroup subtype="goblin_rob" number="3" prob="0.7" />
+</MonsterGroup>
+
+<MonsterGroup name="goblin_bone" >
+	<SubGroup subtype="gob_dog" number="4" prob="0.7" />
+	<SubGroup subtype="goblin" number="4" prob="0.7" />
+	<SubGroup subtype="goblin_bon" number="1" prob="1.0" />
+	<SubGroup subtype="goblin_bow" number="3" prob="0.7" />
 	<SubGroup subtype="goblin_rob" number="3" prob="0.7" />
 </MonsterGroup>
 
