@@ -10,7 +10,7 @@
 class ListItem : public CEGUI::ListboxTextItem
 {
 	public:
-		ListItem(const CEGUI::String& text, uint id=0) : ListboxTextItem(text,id)
+		ListItem(const CEGUI::String& text, unsigned int id=0) : ListboxTextItem(text,id)
 		{
 			setSelectionBrushImage("TaharezLook", "MultiListSelectionBrush");
 			setAutoDeleted (true);
@@ -25,7 +25,7 @@ class ListItem : public CEGUI::ListboxTextItem
 class StrListItem : public ListItem
 {
 	public:
-		StrListItem(const CEGUI::String& text, std::string data, uint id=0) : ListItem(text,id)
+		StrListItem(const CEGUI::String& text, std::string data, unsigned int id=0) : ListItem(text,id)
 		{
 			setSelectionBrushImage("TaharezLook", "MultiListSelectionBrush");
 			m_data = data;

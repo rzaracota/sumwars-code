@@ -1333,6 +1333,9 @@ void Action::init()
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_enum_name = "holy_light";
+	a->m_animation[NO_WEAPON].push_back("attackUnarmed");
+	a->m_animation[ONE_HANDED].push_back("attack");
+	a->m_animation[TWO_HANDED].push_back("attackTwoHands");
 
 	a = &(Action::m_base_info[HOLY_FIRE]);
 	a->m_timer_nr=1;
@@ -1347,6 +1350,9 @@ void Action::init()
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_enum_name = "holy_fire";
+	a->m_animation[NO_WEAPON].push_back("attackUnarmed");
+	a->m_animation[ONE_HANDED].push_back("attack");
+	a->m_animation[TWO_HANDED].push_back("attackTwoHands");
 
 	a = &(Action::m_base_info[BURNING_RAGE]);
 	a->m_timer_nr=2;
@@ -1361,6 +1367,9 @@ void Action::init()
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_enum_name = "burning_rage";
+	a->m_animation[NO_WEAPON].push_back("castMagicStrong");
+	a->m_animation[ONE_HANDED].push_back("castMagicStrong");
+	a->m_animation[TWO_HANDED].push_back("castMagicStrong");
 
 	a = &(Action::m_base_info[CURE_BLIND_MUTE]);
 	a->m_timer_nr=1;
@@ -1375,6 +1384,9 @@ void Action::init()
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_enum_name = "cure_blind_mute";
+	a->m_animation[NO_WEAPON].push_back("castMagicStrong");
+	a->m_animation[ONE_HANDED].push_back("castMagicStrong");
+	a->m_animation[TWO_HANDED].push_back("castMagicStrong");
 
 	a = &(Action::m_base_info[CURE_BLIND_MUTE_PARTY]);
 	a->m_timer_nr=2;
@@ -1389,6 +1401,9 @@ void Action::init()
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_enum_name = "cure_blind_mute_party";
+	a->m_animation[NO_WEAPON].push_back("castMagicStrong");
+	a->m_animation[ONE_HANDED].push_back("castMagicStrong");
+	a->m_animation[TWO_HANDED].push_back("castMagicStrong");
 
 	a = &(Action::m_base_info[BLAZING_SHIELD]);
 	a->m_timer_nr=2;
@@ -1403,6 +1418,9 @@ void Action::init()
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_enum_name = "blazing_shield";
+	a->m_animation[NO_WEAPON].push_back("castMagicStrong");
+	a->m_animation[ONE_HANDED].push_back("castMagicStrong");
+	a->m_animation[TWO_HANDED].push_back("castMagicStrong");
 
 	a = &(Action::m_base_info[LIGHT_BEAM]);
 	a->m_timer_nr=1;
@@ -1417,6 +1435,9 @@ void Action::init()
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_enum_name = "light_beam";
+	a->m_animation[NO_WEAPON].push_back("castMagicStrong");
+	a->m_animation[ONE_HANDED].push_back("castMagicStrong");
+	a->m_animation[TWO_HANDED].push_back("castMagicStrong");
 
 	a = &(Action::m_base_info[BURNING_SUN]);
 	a->m_timer_nr=1;
@@ -1431,6 +1452,9 @@ void Action::init()
 	a->m_req_ability[1] = Action::CURE_BLIND_MUTE;
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_enum_name = "burning_sun";
+	a->m_animation[NO_WEAPON].push_back("castMagicStrong");
+	a->m_animation[ONE_HANDED].push_back("castMagicStrong");
+	a->m_animation[TWO_HANDED].push_back("castMagicStrong");
 
 	a = &(Action::m_base_info[BREAK_BINDING]);
 	a->m_timer_nr=1;
@@ -1445,6 +1469,9 @@ void Action::init()
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_enum_name = "break_binding";
+	a->m_animation[NO_WEAPON].push_back("attackUnarmed");
+	a->m_animation[ONE_HANDED].push_back("attack");
+	a->m_animation[TWO_HANDED].push_back("attackTwoHands");
 
 	a = &(Action::m_base_info[DISRUPT_BINDING]);
 	a->m_timer_nr=1;
@@ -1459,6 +1486,9 @@ void Action::init()
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_enum_name = "disrupt_binding";
+	a->m_animation[NO_WEAPON].push_back("attackUnarmed");
+	a->m_animation[ONE_HANDED].push_back("attack");
+	a->m_animation[TWO_HANDED].push_back("attackTwoHands");
 
 	a = &(Action::m_base_info[MAGIC_SHIELD]);
 	a->m_timer_nr=2;
@@ -1473,6 +1503,9 @@ void Action::init()
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_enum_name = "magic_shield";
+	a->m_animation[NO_WEAPON].push_back("castMagicStrong");
+	a->m_animation[ONE_HANDED].push_back("castMagicStrong");
+	a->m_animation[TWO_HANDED].push_back("castMagicStrong");
 
 	a = &(Action::m_base_info[CURE_POIS_BURN]);
 	a->m_timer_nr=1;
@@ -1487,6 +1520,9 @@ void Action::init()
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_enum_name = "cure_pois_burn";
+	a->m_animation[NO_WEAPON].push_back("castMagicStrong");
+	a->m_animation[ONE_HANDED].push_back("castMagicStrong");
+	a->m_animation[TWO_HANDED].push_back("castMagicStrong");
 
 	a = &(Action::m_base_info[CURE_POIS_BURN_PARTY]);
 	a->m_timer_nr=2;
@@ -1501,6 +1537,9 @@ void Action::init()
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_enum_name = "cure_pois_burn_party";
+	a->m_animation[NO_WEAPON].push_back("castMagicStrong");
+	a->m_animation[ONE_HANDED].push_back("castMagicStrong");
+	a->m_animation[TWO_HANDED].push_back("castMagicStrong");
 
 	a = &(Action::m_base_info[ACID]);
 	a->m_timer_nr=1;
@@ -1515,6 +1554,9 @@ void Action::init()
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_enum_name = "acid";
+	a->m_animation[NO_WEAPON].push_back("castMagicStrong");
+	a->m_animation[ONE_HANDED].push_back("castMagicStrong");
+	a->m_animation[TWO_HANDED].push_back("castMagicStrong");
 
 	a = &(Action::m_base_info[HEAL]);
 	a->m_timer_nr=1;
@@ -1529,6 +1571,9 @@ void Action::init()
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_enum_name = "heal";
+	a->m_animation[NO_WEAPON].push_back("castMagicStrong");
+	a->m_animation[ONE_HANDED].push_back("castMagicStrong");
+	a->m_animation[TWO_HANDED].push_back("castMagicStrong");
 
 	a = &(Action::m_base_info[HEAL_PARTY]);
 	a->m_timer_nr=2;
@@ -1543,6 +1588,9 @@ void Action::init()
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_enum_name = "heal_party";
+	a->m_animation[NO_WEAPON].push_back("castMagicStrong");
+	a->m_animation[ONE_HANDED].push_back("castMagicStrong");
+	a->m_animation[TWO_HANDED].push_back("castMagicStrong");
 
 	a = &(Action::m_base_info[DIVINE_WIND]);
 	a->m_timer_nr=1;
@@ -1557,6 +1605,9 @@ void Action::init()
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_enum_name = "divine_wind";
+	a->m_animation[NO_WEAPON].push_back("attackUnarmed");
+	a->m_animation[ONE_HANDED].push_back("attack");
+	a->m_animation[TWO_HANDED].push_back("attackTwoHands");
 
 	a = &(Action::m_base_info[DIVINE_STORM]);
 	a->m_timer_nr=1;
@@ -1571,6 +1622,9 @@ void Action::init()
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_enum_name = "divine_storm";
+	a->m_animation[NO_WEAPON].push_back("attackUnarmed");
+	a->m_animation[ONE_HANDED].push_back("attack");
+	a->m_animation[TWO_HANDED].push_back("attackTwoHands");
 
 	a = &(Action::m_base_info[BLADE_STORM]);
 	a->m_timer_nr=2;
@@ -1585,6 +1639,9 @@ void Action::init()
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_enum_name = "blade_storm";
+	a->m_animation[NO_WEAPON].push_back("castMagicStrong");
+	a->m_animation[ONE_HANDED].push_back("castMagicStrong");
+	a->m_animation[TWO_HANDED].push_back("castMagicStrong");
 
 	a = &(Action::m_base_info[CURE_CONF_BSRK]);
 	a->m_timer_nr=1;
@@ -1599,6 +1656,9 @@ void Action::init()
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_enum_name = "cure_conf_bsrk";
+	a->m_animation[NO_WEAPON].push_back("castMagicStrong");
+	a->m_animation[ONE_HANDED].push_back("castMagicStrong");
+	a->m_animation[TWO_HANDED].push_back("castMagicStrong");
 
 	a = &(Action::m_base_info[CURE_CONF_BSRK_PARTY]);
 	a->m_timer_nr=2;
@@ -1613,6 +1673,9 @@ void Action::init()
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_enum_name = "cure_conf_bsrk_party";
+	a->m_animation[NO_WEAPON].push_back("castMagicStrong");
+	a->m_animation[ONE_HANDED].push_back("castMagicStrong");
+	a->m_animation[TWO_HANDED].push_back("castMagicStrong");
 
 	a = &(Action::m_base_info[HYPNOSIS]);
 	a->m_timer_nr=1;
@@ -1627,6 +1690,9 @@ void Action::init()
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_enum_name = "hypnosis";
+	a->m_animation[NO_WEAPON].push_back("castMagicStrong");
+	a->m_animation[ONE_HANDED].push_back("castMagicStrong");
+	a->m_animation[TWO_HANDED].push_back("castMagicStrong");
 
 	a = &(Action::m_base_info[HYPNOSIS2]);
 	a->m_timer_nr=1;
@@ -1641,6 +1707,9 @@ void Action::init()
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_enum_name = "hypnosis2";
+	a->m_animation[NO_WEAPON].push_back("castMagicStrong");
+	a->m_animation[ONE_HANDED].push_back("castMagicStrong");
+	a->m_animation[TWO_HANDED].push_back("castMagicStrong");
 
 	a = &(Action::m_base_info[KEEN_MIND]);
 	a->m_timer_nr=2;
@@ -1655,6 +1724,9 @@ void Action::init()
 	a->m_req_ability[1] = Action::NOACTION;
 	a->m_req_ability[2] = Action::NOACTION;
 	a->m_enum_name = "keen_mind";
+	a->m_animation[NO_WEAPON].push_back("castMagicStrong");
+	a->m_animation[ONE_HANDED].push_back("castMagicStrong");
+	a->m_animation[TWO_HANDED].push_back("castMagicStrong");
 
 	for (int i =0;i<192;i++)
 	{
