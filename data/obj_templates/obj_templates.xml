@@ -34,6 +34,14 @@ FIXED_OBJECT
 	</Environment>
 </ObjectTemplate>
 
+<ObjectTemplate name="$wall" type="FIXED_OBJECT">
+	<Environment name="hills">
+		<Object name="wall1" />
+		<Object name="wall2" />
+		<Object name="wall3" />
+	</Environment>
+</ObjectTemplate>
+
 <ObjectTemplate name="$border_m" type="FIXED_OBJECT">
 	<Environment name="meadow">
 		<Object name="fence_m1" />

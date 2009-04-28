@@ -882,7 +882,7 @@ msgstr "Vagabundenhut"
 
 #: hat.xml
 msgid "apprentice cap"
-msgstr ""
+msgstr "Lehrlingskappe"
 
 #: hat.xml
 msgid "novice hat"
@@ -942,7 +942,7 @@ msgstr "Flickenrobe"
 
 #: robes.xml
 msgid "apprentice robe"
-msgstr "Lehrlingskappe"
+msgstr "Lehrlingsrobe"
 
 #: robes.xml
 msgid "novice robe"
