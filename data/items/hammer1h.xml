@@ -28,46 +28,9 @@
 		damage_max_physical="7"
 		damage_attack="27"
 		damage_power="29"
-		attack_range="1.4"
+		attack_range="1.1"
 		two_handed="no"
 		dattack_speed="300"
-	/>
-	<DropChance
-		level="1"
-		probability="1.0"
-	/>
-</Item>
-
-<!-- Goblin Club -->
-<Item type="weapon" subtype="goblin_hmr" name="goblin club" size="medium">
-	<Image image="set:goblin_hmr.png image:full_image" />
-	<Mesh file="goblin_hmr.mesh" />
-	<Attribute
-		level_requirement="1"
-		character_requirement="15"
-		min_enchant="20"
-		max_enchant="40"
-		modchance_strength_mod="0.1"
-		modchance_dexterity_mod="0.1"
-		modchance_magic_power_mod="0.05"
-		modchance_damage_phys_mod="0.15"
-		modchance_damage_fire_mod="0.10"
-		modchance_damage_ice_mod="0.10"
-		modchance_damage_air_mod="0.10"
-		modchance_damage_mult_phys_mod="0.1"
-		modchance_attack_mod="0.1"
-		modchance_power_mod="0.1"
-	/>
-	<EquipEffect />
-	<WeaponAttribute
-		weapon_type="hammer"
-		damage_min_physical="2"
-		damage_max_physical="10"
-		damage_attack="20"
-		damage_power="25"
-		attack_range="1.4"
-		two_handed="no"
-		dattack_speed="0"
 	/>
 	<DropChance
 		level="1"
@@ -102,7 +65,7 @@
 					damage_max_physical="16"
 					damage_attack="30"
 					damage_power="35"
-					attack_range="1.3"
+					attack_range="1.1"
 					two_handed="no"
 					dattack_speed="150"
 					/>
@@ -110,43 +73,6 @@
 			   level="1"
 			   probability="1.0"
 			   />
-</Item>
-
-<!-- Nagelkeule -->
-<Item type="weapon" subtype="nail_hmr" name="nail club" size="medium">
-	<Image image="set:nail_hmr.png image:full_image" />
-	<Mesh file="nail_hmr.mesh" />
-	<Attribute
-		level_requirement="4"
-		character_requirement="15"
-		min_enchant="25"
-		max_enchant="80"
-		modchance_strength_mod="0.1"
-		modchance_dexterity_mod="0.1"
-		modchance_magic_power_mod="0.05"
-		modchance_damage_phys_mod="0.15"
-		modchance_damage_fire_mod="0.10"
-		modchance_damage_ice_mod="0.10"
-		modchance_damage_air_mod="0.10"
-		modchance_damage_mult_phys_mod="0.1"
-		modchance_attack_mod="0.1"
-		modchance_power_mod="0.1"
-	/>
-	<EquipEffect />
-	<WeaponAttribute
-		weapon_type="hammer"
-		damage_min_physical="9"
-		damage_max_physical="17"
-		damage_attack="26"
-		damage_power="40"
-		attack_range="1.5"
-		two_handed="no"
-		dattack_speed="300"
-	/>
-	<DropChance
-		level="1"
-		probability="1.0"
-	/>
 </Item>
 
 <!-- Eisenhammer -->
@@ -176,7 +102,7 @@
 		damage_max_physical="18"
 		damage_attack="32"
 		damage_power="49"
-		attack_range="1.6"
+		attack_range="1.5"
 		two_handed="no"
 		dattack_speed="-120"
 	/>
@@ -213,7 +139,7 @@
 		damage_max_physical="22"
 		damage_attack="32"
 		damage_power="53"
-		attack_range="1.4"
+		attack_range="1.3"
 		two_handed="no"
 		dattack_speed="-100"
 	/>

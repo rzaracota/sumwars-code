@@ -63,7 +63,7 @@
 <!-- Holzschild 5 XX-->
 <Item type="shield" subtype="wood_shd" name="wood shield" size="medium">
 	 <Image image="set:shield.png image:full_image" />
-	<Mesh file="shield.mesh" />
+	<Mesh file="wood_shd.mesh" />
 	<Attribute
 		level_requirement="5"
 		character_requirement="15"

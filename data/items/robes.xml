@@ -22,6 +22,9 @@
 	
 	<EquipEffect
 				darmor="10"
+				dresistances_fire="8"
+				dresistances_ice="10"
+				dresistances_air="15"
 				>
 	</EquipEffect>
 	
@@ -53,6 +56,9 @@
 	
 	<EquipEffect
 				darmor="12"
+				dresistances_fire="12"
+				dresistances_ice="16"
+				dresistances_air="20"
 				>
 	</EquipEffect>
 	
@@ -84,6 +90,9 @@
 	
 	<EquipEffect
 				darmor="20"
+				dresistances_fire="21"
+				dresistances_ice="14"
+				dresistances_air="18"
 				>
 	</EquipEffect>
 	
@@ -115,6 +124,9 @@
 	
 	<EquipEffect
 				darmor="25"
+				dresistances_fire="16"
+				dresistances_ice="16"
+				dresistances_air="16"
 				>
 	</EquipEffect>
 	
@@ -146,6 +158,9 @@
 	
 	<EquipEffect
 				darmor="30"
+				dresistances_fire="12"
+				dresistances_ice="18"
+				dresistances_air="22"
 				>
 	</EquipEffect>
 	
@@ -177,6 +192,9 @@
 	
 	<EquipEffect
 				darmor="45"
+				dresistances_fire="20"
+				dresistances_ice="20"
+				dresistances_air="20"
 				>
 	</EquipEffect>
 	
