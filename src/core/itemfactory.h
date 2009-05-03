@@ -100,13 +100,12 @@ public:
 	static void registerItem(Item::Type type, Item::Subtype subtype, ItemBasicData* data);
 	
 	/**
-	 * \fn static void registerItemDrop(Item::Type type, Item::Subtype subtype, DropChance chance)
+	 * \fn static void registerItemDrop(Item::Subtype subtype, DropChance chance)
 	 * \brief Registriert ein Item, das gedroppt werden kann
-	 * \param type Typ des Items
 	 * \param subtype Subtyp des Items
 	 * \param chance Chance, das das Item gedroppt wird
 	 */
-	static void registerItemDrop(Item::Type type, Item::Subtype subtype, DropChance chance);
+	static void registerItemDrop(Item::Subtype subtype, DropChance chance);
 
 	/**
 	 * \fn static Item* createItem(DropSlot &slot)
@@ -138,13 +137,6 @@ public:
 	 * \brief Gibt allokierten Speicher frei
 	 */
 	static void cleanup();
-	
-	/**
-	 * \fn void loadItemData(std::string file)
-	 * \brief Laedt Daten zu Gegenstaenden aus der angegebenen Datei
-	 * \param file Item XML Datei
-	 */
-	static void loadItemData(std::string file);
 
 
 	private:

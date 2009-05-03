@@ -157,40 +157,6 @@ Scene::~Scene()
 	delete m_projectiles;
 }
 
-void Scene::loadItemData(std::string file)
-{
-	// Item Meshes aus XML-Datei Laden
-	ItemLoader* itemloader = 0;
-	itemloader = new ItemLoader;
-
-	std::list<ItemMeshData*>* item_mesh_list;
-	item_mesh_list = itemloader->loadItemMeshData(file.c_str());
-
-	if (item_mesh_list != 0)
-	{
-		// Daten auslesen und registrieren
-		std::list<ItemMeshData*>::iterator iter = item_mesh_list->begin();
-		while (iter != item_mesh_list->end())
-		{
-			registerItem((*iter)->m_subtype, (*iter)->m_mesh);
-			*iter++;
-		}
-
-		// Liste aus Speicher loeschen
-		iter = item_mesh_list->begin();
-		while (iter != item_mesh_list->end())
-		{
-			delete *iter;
-			*iter++;
-		}
-	}
-
-	delete item_mesh_list;
-	item_mesh_list = 0;
-	delete itemloader;
-	itemloader = 0;
-}
-
 
 void Scene::registerMeshes()
 {

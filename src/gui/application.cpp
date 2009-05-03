@@ -542,10 +542,7 @@ bool Application::loadResources()
 
 
 
-	ItemLoader itemloader;
-	std::list<ItemImageData> item_image_data_list;
-	std::list<ItemImageData>::iterator jt;
-
+	
 	// Items initialisieren
 	ItemFactory::init();
 	files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("items","*.xml");
@@ -555,18 +552,7 @@ bool Application::loadResources()
 		file += "/";
 		file += it->filename;
 
-		ItemFactory::loadItemData(file);
-		Scene::loadItemData(file);
-
-		// Mesh Images aus XML Laden
-		item_image_data_list.clear();
-		itemloader.loadItemImageData(file.c_str(), item_image_data_list);
-
-		for (jt=item_image_data_list.begin(); jt!=item_image_data_list.end(); jt++)
-		{
-			DEBUG5("registering image %s for item %s",jt->m_image.c_str(), jt->m_subtype.c_str());
-			ItemWindow::registerItemImage(jt->m_subtype,jt->m_image);
-		}
+		ItemLoader::loadItemData(file.c_str());
 
 		updateStartScreen(0.3);
 	}
@@ -580,8 +566,6 @@ bool Application::loadResources()
 		file += "/";
 		file += it->filename;
 
-		//ObjectFactory::loadMonsterData(file);
-		//Scene::loadMonsterData(file);
 		ObjectLoader::loadMonsterData(file.c_str());
 
 		updateStartScreen(0.4);

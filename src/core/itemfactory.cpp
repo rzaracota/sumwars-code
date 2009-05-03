@@ -303,10 +303,9 @@ std::string ItemFactory::getItemName(Item::Subtype subtype)
 	return it->second->m_name;
 }
 
-void ItemFactory::registerItemDrop(Item::Type type,Item::Subtype subtype, DropChance chance)
+void ItemFactory::registerItemDrop(Item::Subtype subtype, DropChance chance)
 {
 	m_item_probabilities.insert(make_pair(subtype, chance));
-	m_item_types.insert(make_pair(subtype,type));
 }
 
 void ItemFactory::registerItem(Item::Type type,Item::Subtype subtype, ItemBasicData* data)
@@ -314,82 +313,6 @@ void ItemFactory::registerItem(Item::Type type,Item::Subtype subtype, ItemBasicD
 	DEBUG5("registered item %s %p",subtype.c_str(), data->m_weapon_attr);
 	m_item_data.insert(make_pair(subtype, data));
 	m_item_types.insert(make_pair(subtype,type));
-}
-
-void ItemFactory::loadItemData(std::string file)
-{
-	// Items aus XML Laden
-	ItemLoader itemloader;
-
-	std::list<ItemBasicData*>* item_list;
-	item_list = itemloader.loadItemBasicData(file.c_str());
-
-	if (item_list != 0)
-	{
-		std::list<ItemBasicData*>::iterator iter = item_list->begin();
-		while (iter != item_list->end())
-		{
-			// Debugging: Anzeigen der geladenen Items
-			/*
-			cout << "m_useup_effect" << " = " << (*iter)->m_useup_effect << endl;
-			cout << "m_equip_effect" << " = " << (*iter)->m_equip_effect << endl;
-			cout << "m_weapon_attr" << " = " << (*iter)->m_weapon_attr << endl;
-
-			cout << "     m_damage.m_min_damage[Damage::PHYSICAL]" << " = " << (*iter)->m_weapon_attr->m_damage.m_min_damage[Damage::PHYSICAL] << endl;
-			cout << "     m_damage.m_max_damage[Damage::PHYSICAL]" << " = " << (*iter)->m_weapon_attr->m_damage.m_min_damage[Damage::PHYSICAL] << endl;
-			cout << "     m_damage.m_min_damage[Damage::AIR]" << " = " << (*iter)->m_weapon_attr->m_damage.m_min_damage[Damage::AIR] << endl;
-			cout << "     m_damage.m_max_damage[Damage::AIR]" << " = " << (*iter)->m_weapon_attr->m_damage.m_min_damage[Damage::AIR] << endl;
-			cout << "     m_damage.m_min_damage[Damage::ICE]" << " = " << (*iter)->m_weapon_attr->m_damage.m_min_damage[Damage::ICE] << endl;
-			cout << "     m_damage.m_max_damage[Damage::ICE]" << " = " << (*iter)->m_weapon_attr->m_damage.m_min_damage[Damage::ICE] << endl;
-			cout << "     m_damage.m_min_damage[Damage::FIRE]" << " = " << (*iter)->m_weapon_attr->m_damage.m_min_damage[Damage::FIRE] << endl;
-			cout << "     m_damage.m_max_damage[Damage::FIRE]" << " = " << (*iter)->m_weapon_attr->m_damage.m_min_damage[Damage::FIRE] << endl;
-			cout << "     m_attack_range" << " = " << (*iter)->m_weapon_attr->m_attack_range << endl;
-			cout << "     m_two_handed" << " = " << (*iter)->m_weapon_attr->m_two_handed << endl;
-			cout << "     m_dattack_speed" << " = " << (*iter)->m_weapon_attr->m_dattack_speed << endl;
-
-			cout << "m_level_req" << " = " << static_cast<int>((*iter)->m_level_req) << endl;
-			cout << "m_char_req" << " = " << static_cast<int>((*iter)->m_char_req) << endl;
-			cout << "m_subtype" << " = " << (*iter)->m_subtype << endl;
-			cout << "m_type" << " = " << (*iter)->m_type << endl;
-			cout << "m_size" << " = " << (*iter)->m_size << endl;
-			cout << "m_price" << " = " << (*iter)->m_price << endl;
-			cout << "m_min_enchant" << " = " << (*iter)->m_min_enchant << endl;
-			cout << "m_max_enchant" << " = " << (*iter)->m_max_enchant << endl;
-			cout << "------------------------------------------------" << endl;
-			*/
-			registerItem((*iter)->m_type,(*iter)->m_subtype, *iter);
-			
-			iter++;
-		}
-	}
-
-
-	std::list<DropChanceData*>* drop_chance_list;
-	drop_chance_list = itemloader.loadDropChanceData(file.c_str());
-
-	if (drop_chance_list != 0)
-	{
-		// Daten auslesen und registrieren
-		std::list<DropChanceData*>::iterator iter = drop_chance_list->begin();
-		while (iter != drop_chance_list->end())
-		{
-			registerItemDrop( (*iter)->m_type, (*iter)->m_subtype, DropChance( (*iter)->m_level, (*iter)->m_probability, (*iter)->m_size) );
-			iter++;
-		}
-
-		// Liste aus Speicher loeschen
-		iter = drop_chance_list->begin();
-		while (iter != drop_chance_list->end())
-		{
-			delete *iter;
-			iter++;
-		}
-	}
-
-	delete item_list;
-	item_list = 0;
-	delete drop_chance_list;
-	drop_chance_list = 0;
 }
 
 void ItemFactory::init()

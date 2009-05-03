@@ -1,906 +1,19 @@
+#include "scene.h"
+
 #include "itemloader.h"
+#include "itemwindow.h"
 
-int ItemLoader::generateItemBasicData(TiXmlElement* pElement, std::string element)
+
+
+
+bool ItemLoader::loadItemData(const char* pFilename)
 {
-	if ( !pElement ) return 0;
-
-	TiXmlAttribute* pAttrib=pElement->FirstAttribute();
-	int i=0;
-	int ival;
-	double dval;
-
-	if (element == "Item" && pAttrib)
-	{
-		if (m_item_data == 0)
-		{
-			m_item_data = new ItemBasicData;
-		}
-
-		while (element == "Item" && pAttrib)
-		{
-			if (!strcmp(pAttrib->Name(), "type"))
-			{
-				if (!strcmp(pAttrib->Value(), "armor"))
-					m_item_data->m_type = Item::ARMOR;
-				else if (!strcmp(pAttrib->Value(), "helmet"))
-					m_item_data->m_type = Item::HELMET;
-				else if (!strcmp(pAttrib->Value(), "gloves"))
-					m_item_data->m_type = Item::GLOVES;
-				else if (!strcmp(pAttrib->Value(), "weapon"))
-					m_item_data->m_type = Item::WEAPON;
-				else if (!strcmp(pAttrib->Value(), "shield"))
-					m_item_data->m_type = Item::SHIELD;
-				else if (!strcmp(pAttrib->Value(), "potion"))
-					m_item_data->m_type = Item::POTION;
-				else if (!strcmp(pAttrib->Value(), "ring"))
-					m_item_data->m_type = Item::RING;
-				else if (!strcmp(pAttrib->Value(), "amulet"))
-					m_item_data->m_type = Item::AMULET;
-				else if (!strcmp(pAttrib->Value(), "gold_type"))
-					m_item_data->m_type = Item::GOLD_TYPE;
-			}
-			else if (!strcmp(pAttrib->Name(), "subtype"))
-			{
-				m_item_data->m_subtype = pAttrib->Value();
-				if (m_item_data->m_name=="")
-				{
-					m_item_data->m_name = m_item_data->m_subtype;
-				}
-				DEBUG5("found item %s",m_item_data->m_subtype.c_str());
-			}
-			else if (!strcmp(pAttrib->Name(), "size"))
-			{
-				if (!strcmp(pAttrib->Value(), "gold"))
-					m_item_data->m_size = Item::GOLD;
-				else if (!strcmp(pAttrib->Value(), "small"))
-					m_item_data->m_size = Item::SMALL;
-				else if (!strcmp(pAttrib->Value(), "medium"))
-					m_item_data->m_size = Item::MEDIUM;
-				else if (!strcmp(pAttrib->Value(), "big"))
-					m_item_data->m_size = Item::BIG;
-			}
-			else if (!strcmp(pAttrib->Name(), "name"))
-			{
-				m_item_data->m_name = pAttrib->Value();
-			}
-
-			i++;
-			pAttrib=pAttrib->Next();
-		}
-	}
-
-	if (element == "UseupEffect" && pAttrib)
-	{
-		if (m_item_data->m_useup_effect == 0)
-			m_item_data->m_useup_effect = new CreatureDynAttrMod;
-
-		while (element == "UseupEffect" && pAttrib)
-		{
-			if (!strcmp(pAttrib->Name(), "dhealth") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
-				m_item_data->m_useup_effect->m_dhealth = static_cast<float>(dval);
-			else if (!strcmp(pAttrib->Name(), "dstatus_mod_immune_time0") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
-				m_item_data->m_useup_effect->m_dstatus_mod_immune_time[0] = static_cast<float>(dval);
-			else if (!strcmp(pAttrib->Name(), "dstatus_mod_immune_time1") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
-				m_item_data->m_useup_effect->m_dstatus_mod_immune_time[1] = static_cast<float>(dval);
-			else if (!strcmp(pAttrib->Name(), "dstatus_mod_immune_time2") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
-				m_item_data->m_useup_effect->m_dstatus_mod_immune_time[2] = static_cast<float>(dval);
-			else if (!strcmp(pAttrib->Name(), "dstatus_mod_immune_time3") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
-				m_item_data->m_useup_effect->m_dstatus_mod_immune_time[3] = static_cast<float>(dval);
-			else if (!strcmp(pAttrib->Name(), "dstatus_mod_immune_time4") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
-				m_item_data->m_useup_effect->m_dstatus_mod_immune_time[4] = static_cast<float>(dval);
-			else if (!strcmp(pAttrib->Name(), "dstatus_mod_immune_time5") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
-				m_item_data->m_useup_effect->m_dstatus_mod_immune_time[5] = static_cast<float>(dval);
-			else if (!strcmp(pAttrib->Name(), "dstatus_mod_immune_time6") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
-				m_item_data->m_useup_effect->m_dstatus_mod_immune_time[6] = static_cast<float>(dval);
-			else if (!strcmp(pAttrib->Name(), "dstatus_mod_immune_time7") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
-				m_item_data->m_useup_effect->m_dstatus_mod_immune_time[7] = static_cast<float>(dval);
-
-			i++;
-			pAttrib=pAttrib->Next();
-		}
-	}
-
-	if (element == "EquipEffect" /*&& pAttrib*/)
-	{
-		if (m_item_data->m_equip_effect == 0)
-		{
-			m_item_data->m_equip_effect = new CreatureBaseAttrMod;
-			
-			// Flags auf neutrale Werte setzen
-			m_item_data->m_equip_effect->m_xspecial_flags = 0;
-			for (int i=0; i<6; i++)
-			{
-				m_item_data->m_equip_effect->m_xabilities[i] = 0;
-			}
-			m_item_data->m_equip_effect->m_ximmunity = 0;
-		}
-		
-		while (element == "EquipEffect" && pAttrib)
-		{
-			if (!strcmp(pAttrib->Name(), "darmor") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
-				m_item_data->m_equip_effect->m_darmor = static_cast<short>(ival);
-			else if (!strcmp(pAttrib->Name(), "dblock") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
-				m_item_data->m_equip_effect->m_dblock = static_cast<short>(ival);
-			else if (!strcmp(pAttrib->Name(), "dmax_health") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
-				m_item_data->m_equip_effect->m_dmax_health = static_cast<float>(dval);
-			else if (!strcmp(pAttrib->Name(), "dattack") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
-				m_item_data->m_equip_effect->m_dattack = static_cast<short>(ival);
-			else if (!strcmp(pAttrib->Name(), "dstrength") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
-				m_item_data->m_equip_effect->m_dstrength = static_cast<short>(ival);
-			else if (!strcmp(pAttrib->Name(), "ddexterity") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
-				m_item_data->m_equip_effect->m_ddexterity = static_cast<short>(ival);
-			else if (!strcmp(pAttrib->Name(), "dmagic_power") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
-				m_item_data->m_equip_effect->m_dmagic_power = static_cast<short>(ival);
-			else if (!strcmp(pAttrib->Name(), "dwillpower") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
-				m_item_data->m_equip_effect->m_dwillpower = static_cast<short>(ival);
-			else if (!strcmp(pAttrib->Name(), "dresistances_physical") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
-				m_item_data->m_equip_effect->m_dresistances[Damage::PHYSICAL] = static_cast<short>(ival);
-			else if (!strcmp(pAttrib->Name(), "dresistances_air") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
-				m_item_data->m_equip_effect->m_dresistances[Damage::AIR] = static_cast<short>(ival);
-			else if (!strcmp(pAttrib->Name(), "dresistances_ice") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
-				m_item_data->m_equip_effect->m_dresistances[Damage::ICE] = static_cast<short>(ival);
-			else if (!strcmp(pAttrib->Name(), "dresistances_fire") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
-				m_item_data->m_equip_effect->m_dresistances[Damage::FIRE] = static_cast<short>(ival);
-			else if (!strcmp(pAttrib->Name(), "dresistances_cap_physical") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
-				m_item_data->m_equip_effect->m_dresistances_cap[Damage::PHYSICAL] = static_cast<short>(ival);
-			else if (!strcmp(pAttrib->Name(), "dresistances_cap_air") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
-				m_item_data->m_equip_effect->m_dresistances_cap[Damage::AIR] = static_cast<short>(ival);
-			else if (!strcmp(pAttrib->Name(), "dresistances_cap_ice") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
-				m_item_data->m_equip_effect->m_dresistances_cap[Damage::ICE] = static_cast<short>(ival);
-			else if (!strcmp(pAttrib->Name(), "dresistances_cap_fire") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
-				m_item_data->m_equip_effect->m_dresistances_cap[Damage::FIRE] = static_cast<short>(ival);
-			else if (!strcmp(pAttrib->Name(), "dwalk_speed") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
-				m_item_data->m_equip_effect->m_dwalk_speed = static_cast<short>(ival);
-			else if (!strcmp(pAttrib->Name(), "dattack_speed") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
-				m_item_data->m_equip_effect->m_dattack_speed = static_cast<short>(ival);
-			else if (!strcmp(pAttrib->Name(), "time") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
-				m_item_data->m_equip_effect->m_time = static_cast<float>(dval);
-
-			i++;
-			pAttrib=pAttrib->Next();
-		}
-	}
-	
-	if (element == "XSpecialFlag" && pAttrib)
-	{
-		while (element == "XSpecialFlag" && pAttrib)
-		{
-			if (!strcmp(pAttrib->Name(), "type"))
-			{
-				if (!strcmp(pAttrib->Value(), "noflags"))
-					m_item_data->m_equip_effect->m_xspecial_flags |= Damage::NOFLAGS;
-				else if (!strcmp(pAttrib->Value(), "unblockable"))
-					m_item_data->m_equip_effect->m_xspecial_flags |= Damage::UNBLOCKABLE;
-				else if (!strcmp(pAttrib->Value(), "ignore_armor"))
-					m_item_data->m_equip_effect->m_xspecial_flags |= Damage::IGNORE_ARMOR;
-				else if (!strcmp(pAttrib->Value(), "extra_human_dmg"))
-					m_item_data->m_equip_effect->m_xspecial_flags |= Damage::EXTRA_HUMAN_DMG;
-				else if (!strcmp(pAttrib->Value(), "extra_demon_dmg"))
-					m_item_data->m_equip_effect->m_xspecial_flags |= Damage::EXTRA_DEMON_DMG;
-				else if (!strcmp(pAttrib->Value(), "extra_undead_dmg"))
-					m_item_data->m_equip_effect->m_xspecial_flags |= Damage::EXTRA_UNDEAD_DMG;
-				else if (!strcmp(pAttrib->Value(), "extra_dwarf_dmg"))
-					m_item_data->m_equip_effect->m_xspecial_flags |= Damage::EXTRA_DWARF_DMG;
-				else if (!strcmp(pAttrib->Value(), "extra_drake_dmg"))
-					m_item_data->m_equip_effect->m_xspecial_flags |= Damage::EXTRA_DRAKE_DMG;
-				else if (!strcmp(pAttrib->Value(), "extra_fairy_dmg"))
-					m_item_data->m_equip_effect->m_xspecial_flags |= Damage::EXTRA_FAIRY_DMG;
-				else if (!strcmp(pAttrib->Value(), "extra_goblin_dmg"))
-					m_item_data->m_equip_effect->m_xspecial_flags |= Damage::EXTRA_GOBLIN_DMG;
-				else if (!strcmp(pAttrib->Value(), "extra_animal_dmg"))
-					m_item_data->m_equip_effect->m_xspecial_flags |= Damage::EXTRA_ANIMAL_DMG;
-				else if (!strcmp(pAttrib->Value(), "extra_summoned_dmg"))
-					m_item_data->m_equip_effect->m_xspecial_flags |= Damage::EXTRA_SUMMONED_DMG;
-			}
-
-			i++;
-			pAttrib=pAttrib->Next();
-		}
-	}
-	
-	if (element == "XAbility" && pAttrib)
-	{
-		while (element == "XAbility" && pAttrib)
-		{
-			if (!strcmp(pAttrib->Name(), "type"))
-			{
-					m_item_data->m_equip_effect->m_xabilities[Action::getActionType(pAttrib->Value())/32] |= 1<<(Action::getActionType(pAttrib->Value())%32);
-			}
-
-			i++;
-			pAttrib=pAttrib->Next();
-		}
-	}
-	
-	if (element == "XImmunity" && pAttrib)
-	{
-		while (element == "XImmunity" && pAttrib)
-		{
-			if (!strcmp(pAttrib->Name(), "type"))
-			{
-				if (!strcmp(pAttrib->Value(), "blind"))
-					m_item_data->m_equip_effect->m_ximmunity |= 1<<Damage::BLIND;
-				else if (!strcmp(pAttrib->Value(), "poisoned"))
-					m_item_data->m_equip_effect->m_ximmunity |= 1<<Damage::POISONED;
-				else if (!strcmp(pAttrib->Value(), "berserk"))
-					m_item_data->m_equip_effect->m_ximmunity |= 1<<Damage::BERSERK;
-				else if (!strcmp(pAttrib->Value(), "confused"))
-					m_item_data->m_equip_effect->m_ximmunity |= 1<<Damage::CONFUSED;
-				else if (!strcmp(pAttrib->Value(), "mute"))
-					m_item_data->m_equip_effect->m_ximmunity |= 1<<Damage::MUTE;
-				else if (!strcmp(pAttrib->Value(), "paralyzed"))
-					m_item_data->m_equip_effect->m_ximmunity |= 1<<Damage::PARALYZED;
-				else if (!strcmp(pAttrib->Value(), "frozen"))
-					m_item_data->m_equip_effect->m_ximmunity |= 1<<Damage::FROZEN;
-				else if (!strcmp(pAttrib->Value(), "burning"))
-					m_item_data->m_equip_effect->m_ximmunity |= 1<<Damage::BURNING;
-			}
-
-			i++;
-			pAttrib=pAttrib->Next();
-		}
-	}
-	
-	if (element == "WeaponAttribute" && pAttrib)
-	{
-		
-		
-		if (m_item_data->m_weapon_attr == 0)
-		{
-			m_item_data->m_weapon_attr = new WeaponAttr;
-			
-			// Flags auf neutrale Werte setzen
-			m_item_data->m_weapon_attr->m_damage.m_special_flags = 0;
-		}
-		
-		while (element == "WeaponAttribute" && pAttrib)
-		{
-			if (!strcmp(pAttrib->Name(), "damage_min_physical") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
-				m_item_data->m_weapon_attr->m_damage.m_min_damage[Damage::PHYSICAL] = static_cast<float>(dval);
-			else if (!strcmp(pAttrib->Name(), "damage_max_physical") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
-				m_item_data->m_weapon_attr->m_damage.m_max_damage[Damage::PHYSICAL] = static_cast<float>(dval);
-			else if (!strcmp(pAttrib->Name(), "damage_min_air") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
-				m_item_data->m_weapon_attr->m_damage.m_min_damage[Damage::AIR] = static_cast<float>(dval);
-			else if (!strcmp(pAttrib->Name(), "damage_max_air") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
-				m_item_data->m_weapon_attr->m_damage.m_max_damage[Damage::AIR] = static_cast<float>(dval);
-			else if (!strcmp(pAttrib->Name(), "damage_min_ice") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
-				m_item_data->m_weapon_attr->m_damage.m_min_damage[Damage::ICE] = static_cast<float>(dval);
-			else if (!strcmp(pAttrib->Name(), "damage_max_ice") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
-				m_item_data->m_weapon_attr->m_damage.m_max_damage[Damage::ICE] = static_cast<float>(dval);
-			else if (!strcmp(pAttrib->Name(), "damage_min_fire") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
-				m_item_data->m_weapon_attr->m_damage.m_min_damage[Damage::FIRE] = static_cast<float>(dval);
-			else if (!strcmp(pAttrib->Name(), "damage_max_fire") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
-				m_item_data->m_weapon_attr->m_damage.m_max_damage[Damage::FIRE] = static_cast<float>(dval);
-			else if (!strcmp(pAttrib->Name(), "multiplier_physical") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
-				m_item_data->m_weapon_attr->m_damage.m_multiplier[Damage::PHYSICAL] = static_cast<float>(dval);
-			else if (!strcmp(pAttrib->Name(), "multiplier_air") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
-				m_item_data->m_weapon_attr->m_damage.m_multiplier[Damage::AIR] = static_cast<float>(dval);
-			else if (!strcmp(pAttrib->Name(), "multiplier_ice") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
-				m_item_data->m_weapon_attr->m_damage.m_multiplier[Damage::ICE] = static_cast<float>(dval);
-			else if (!strcmp(pAttrib->Name(), "multiplier_fire") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
-				m_item_data->m_weapon_attr->m_damage.m_multiplier[Damage::FIRE] = static_cast<float>(dval);
-			else if (!strcmp(pAttrib->Name(), "damage_attack") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
-				m_item_data->m_weapon_attr->m_damage.m_attack = static_cast<float>(dval);
-			else if (!strcmp(pAttrib->Name(), "damage_power") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
-				m_item_data->m_weapon_attr->m_damage.m_power = static_cast<float>(dval);
-			else if (!strcmp(pAttrib->Name(), "status_mod_power0") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
-				m_item_data->m_weapon_attr->m_damage.m_status_mod_power[0] = static_cast<short>(ival);
-			else if (!strcmp(pAttrib->Name(), "status_mod_power1") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
-				m_item_data->m_weapon_attr->m_damage.m_status_mod_power[1] = static_cast<short>(ival);
-			else if (!strcmp(pAttrib->Name(), "status_mod_power2") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
-				m_item_data->m_weapon_attr->m_damage.m_status_mod_power[2] = static_cast<short>(ival);
-			else if (!strcmp(pAttrib->Name(), "status_mod_power3") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
-				m_item_data->m_weapon_attr->m_damage.m_status_mod_power[3] = static_cast<short>(ival);
-			else if (!strcmp(pAttrib->Name(), "status_mod_power4") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
-				m_item_data->m_weapon_attr->m_damage.m_status_mod_power[4] = static_cast<short>(ival);
-			else if (!strcmp(pAttrib->Name(), "status_mod_power5") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
-				m_item_data->m_weapon_attr->m_damage.m_status_mod_power[5] = static_cast<short>(ival);
-			else if (!strcmp(pAttrib->Name(), "status_mod_power6") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
-				m_item_data->m_weapon_attr->m_damage.m_status_mod_power[6] = static_cast<short>(ival);
-			else if (!strcmp(pAttrib->Name(), "status_mod_power7") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
-				m_item_data->m_weapon_attr->m_damage.m_status_mod_power[7] = static_cast<short>(ival);
-			else if (!strcmp(pAttrib->Name(), "attack_range") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
-				m_item_data->m_weapon_attr->m_attack_range = static_cast<float>(dval);
-			else if (!strcmp(pAttrib->Name(), "two_handed"))
-			{
-				if (!strcmp(pAttrib->Value(), "yes"))
-					m_item_data->m_weapon_attr->m_two_handed = true;
-				else
-					m_item_data->m_weapon_attr->m_two_handed = false;
-			}
-			else if (!strcmp(pAttrib->Name(), "dattack_speed") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
-				m_item_data->m_weapon_attr->m_dattack_speed = static_cast<short>(ival);
-            else if (!strcmp(pAttrib->Name(), "weapon_type"))
-			{
-				if (!strcmp(pAttrib->Value(), "sword"))
-					m_item_data->m_weapon_attr->m_weapon_type = WeaponAttr::SWORD;
-                else if (!strcmp(pAttrib->Value(), "axe"))
-					m_item_data->m_weapon_attr->m_weapon_type = WeaponAttr::AXE;
-				else if (!strcmp(pAttrib->Value(), "hammer"))
-					m_item_data->m_weapon_attr->m_weapon_type = WeaponAttr::HAMMER;
-				else if (!strcmp(pAttrib->Value(), "staff"))
-					m_item_data->m_weapon_attr->m_weapon_type = WeaponAttr::STAFF;
-				else if (!strcmp(pAttrib->Value(), "bow"))
-					m_item_data->m_weapon_attr->m_weapon_type = WeaponAttr::BOW;
-				else if (!strcmp(pAttrib->Value(), "crossbow"))
-					m_item_data->m_weapon_attr->m_weapon_type = WeaponAttr::CROSSBOW;
-
-			}
-
-			i++;
-			pAttrib=pAttrib->Next();
-		}
-	}
-
-	if (element == "SpecialFlag" && pAttrib)
-	{
-		while (element == "SpecialFlag" && pAttrib)
-		{
-			if (!strcmp(pAttrib->Name(), "type"))
-			{
-				if (!strcmp(pAttrib->Value(), "noflags"))
-					m_item_data->m_weapon_attr->m_damage.m_special_flags |= Damage::NOFLAGS;
-				else if (!strcmp(pAttrib->Value(), "unblockable"))
-					m_item_data->m_weapon_attr->m_damage.m_special_flags |= Damage::UNBLOCKABLE;
-				else if (!strcmp(pAttrib->Value(), "ignore_armor"))
-					m_item_data->m_weapon_attr->m_damage.m_special_flags |= Damage::IGNORE_ARMOR;
-				else if (!strcmp(pAttrib->Value(), "extra_human_dmg"))
-					m_item_data->m_weapon_attr->m_damage.m_special_flags |= Damage::EXTRA_HUMAN_DMG;
-				else if (!strcmp(pAttrib->Value(), "extra_demon_dmg"))
-					m_item_data->m_weapon_attr->m_damage.m_special_flags |= Damage::EXTRA_DEMON_DMG;
-				else if (!strcmp(pAttrib->Value(), "extra_undead_dmg"))
-					m_item_data->m_weapon_attr->m_damage.m_special_flags |= Damage::EXTRA_UNDEAD_DMG;
-				else if (!strcmp(pAttrib->Value(), "extra_dwarf_dmg"))
-					m_item_data->m_weapon_attr->m_damage.m_special_flags |= Damage::EXTRA_DWARF_DMG;
-				else if (!strcmp(pAttrib->Value(), "extra_drake_dmg"))
-					m_item_data->m_weapon_attr->m_damage.m_special_flags |= Damage::EXTRA_DRAKE_DMG;
-				else if (!strcmp(pAttrib->Value(), "extra_fairy_dmg"))
-					m_item_data->m_weapon_attr->m_damage.m_special_flags |= Damage::EXTRA_FAIRY_DMG;
-				else if (!strcmp(pAttrib->Value(), "extra_goblin_dmg"))
-					m_item_data->m_weapon_attr->m_damage.m_special_flags |= Damage::EXTRA_GOBLIN_DMG;
-				else if (!strcmp(pAttrib->Value(), "extra_animal_dmg"))
-					m_item_data->m_weapon_attr->m_damage.m_special_flags |= Damage::EXTRA_ANIMAL_DMG;
-				else if (!strcmp(pAttrib->Value(), "extra_summoned_dmg"))
-					m_item_data->m_weapon_attr->m_damage.m_special_flags |= Damage::EXTRA_SUMMONED_DMG;
-			}
-
-			i++;
-			pAttrib=pAttrib->Next();
-		}
-	}
-
-	if (element == "Attribute" && pAttrib)
-	{
-		while (element == "Attribute" && pAttrib)
-		{
-			if (!strcmp(pAttrib->Name(), "level_requirement") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
-				m_item_data->m_level_req = static_cast<char>(ival);
-			else if (!strcmp(pAttrib->Name(), "character_requirement") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
-				m_item_data->m_char_req = static_cast<char>(ival);
-			else if (!strcmp(pAttrib->Name(), "price") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
-				m_item_data->m_price = ival;
-			else if (!strcmp(pAttrib->Name(), "min_enchant") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
-				m_item_data->m_min_enchant = static_cast<float>(dval);
-			else if (!strcmp(pAttrib->Name(), "max_enchant") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
-				m_item_data->m_max_enchant = static_cast<float>(dval);
-
-			else if (!strcmp(pAttrib->Name(), "modchance_health_mod") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
-				m_item_data->m_modchance[ItemFactory::HEALTH_MOD] = static_cast<float>(dval);
-			else if (!strcmp(pAttrib->Name(), "modchance_armor_mod") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
-				m_item_data->m_modchance[ItemFactory::ARMOR_MOD] = static_cast<float>(dval);
-			else if (!strcmp(pAttrib->Name(), "modchance_block_mod") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
-				m_item_data->m_modchance[ItemFactory::BLOCK_MOD] = static_cast<float>(dval);
-			else if (!strcmp(pAttrib->Name(), "modchance_strength_mod") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
-				m_item_data->m_modchance[ItemFactory::STRENGTH_MOD] = static_cast<float>(dval);
-			else if (!strcmp(pAttrib->Name(), "modchance_dexterity_mod") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
-				m_item_data->m_modchance[ItemFactory::DEXTERITY_MOD] = static_cast<float>(dval);
-			else if (!strcmp(pAttrib->Name(), "modchance_magic_power_mod") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
-				m_item_data->m_modchance[ItemFactory::MAGIC_POWER_MOD] = static_cast<float>(dval);
-			else if (!strcmp(pAttrib->Name(), "modchance_willpower_mod") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
-				m_item_data->m_modchance[ItemFactory::WILLPOWER_MOD] = static_cast<float>(dval);
-			else if (!strcmp(pAttrib->Name(), "modchance_resist_phys_mod") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
-				m_item_data->m_modchance[ItemFactory::RESIST_PHYS_MOD] = static_cast<float>(dval);
-			else if (!strcmp(pAttrib->Name(), "modchance_resist_fire_mod") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
-				m_item_data->m_modchance[ItemFactory::RESIST_FIRE_MOD] = static_cast<float>(dval);
-			else if (!strcmp(pAttrib->Name(), "modchance_resist_ice_mod") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
-				m_item_data->m_modchance[ItemFactory::RESIST_ICE_MOD] = static_cast<float>(dval);
-			else if (!strcmp(pAttrib->Name(), "modchance_resist_air_mod") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
-				m_item_data->m_modchance[ItemFactory::RESIST_AIR_MOD] = static_cast<float>(dval);
-			else if (!strcmp(pAttrib->Name(), "modchance_resist_all_mod") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
-				m_item_data->m_modchance[ItemFactory::RESIST_ALL_MOD] = static_cast<float>(dval);
-			else if (!strcmp(pAttrib->Name(), "modchance_damage_phys_mod") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
-				m_item_data->m_modchance[ItemFactory::DAMAGE_PHYS_MOD] = static_cast<float>(dval);
-			else if (!strcmp(pAttrib->Name(), "modchance_damage_fire_mod") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
-				m_item_data->m_modchance[ItemFactory::DAMAGE_FIRE_MOD] = static_cast<float>(dval);
-			else if (!strcmp(pAttrib->Name(), "modchance_damage_ice_mod") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
-				m_item_data->m_modchance[ItemFactory::DAMAGE_ICE_MOD] = static_cast<float>(dval);
-			else if (!strcmp(pAttrib->Name(), "modchance_damage_air_mod") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
-				m_item_data->m_modchance[ItemFactory::DAMAGE_AIR_MOD] = static_cast<float>(dval);
-			else if (!strcmp(pAttrib->Name(), "modchance_damage_mult_phys_mod") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
-				m_item_data->m_modchance[ItemFactory::DAMAGE_MULT_PHYS_MOD] = static_cast<float>(dval);
-			else if (!strcmp(pAttrib->Name(), "modchance_damage_mult_fire_mod") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
-				m_item_data->m_modchance[ItemFactory::DAMAGE_MULT_FIRE_MOD] = static_cast<float>(dval);
-			else if (!strcmp(pAttrib->Name(), "modchance_damage_mult_ice_mod") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
-				m_item_data->m_modchance[ItemFactory::DAMAGE_MULT_ICE_MOD] = static_cast<float>(dval);
-			else if (!strcmp(pAttrib->Name(), "modchance_damage_mult_air_mod") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
-				m_item_data->m_modchance[ItemFactory::DAMAGE_MULT_AIR_MOD] = static_cast<float>(dval);
-			else if (!strcmp(pAttrib->Name(), "modchance_attack_speed_mod") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
-				m_item_data->m_modchance[ItemFactory::ATTACK_SPEED_MOD] = static_cast<float>(dval);
-			else if (!strcmp(pAttrib->Name(), "modchance21") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
-				m_item_data->m_modchance[21] = static_cast<float>(dval);
-			else if (!strcmp(pAttrib->Name(), "modchance_attack_mod") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
-				m_item_data->m_modchance[ItemFactory::ATTACK_MOD] = static_cast<float>(dval);
-			else if (!strcmp(pAttrib->Name(), "modchance_power_mod") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
-				m_item_data->m_modchance[ItemFactory::POWER_MOD] = static_cast<float>(dval);
-			else if (!strcmp(pAttrib->Name(), "modchance_mage_fire_skills_mod") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
-				m_item_data->m_modchance[ItemFactory::MAGE_FIRE_SKILLS_MOD] = static_cast<float>(dval);
-			else if (!strcmp(pAttrib->Name(), "modchance_mage_ice_skills_mod") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
-				m_item_data->m_modchance[ItemFactory::MAGE_ICE_SKILLS_MOD] = static_cast<float>(dval);
-			else if (!strcmp(pAttrib->Name(), "modchance_mage_air_skills_mod") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
-				m_item_data->m_modchance[ItemFactory::MAGE_AIR_SKILLS_MOD] = static_cast<float>(dval);
-			else if (!strcmp(pAttrib->Name(), "modchance27") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
-				m_item_data->m_modchance[27] = static_cast<float>(dval);
-			else if (!strcmp(pAttrib->Name(), "modchance28") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
-				m_item_data->m_modchance[28] = static_cast<float>(dval);
-			else if (!strcmp(pAttrib->Name(), "modchance29") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
-				m_item_data->m_modchance[29] = static_cast<float>(dval);
-			else if (!strcmp(pAttrib->Name(), "modchance39") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
-				m_item_data->m_modchance[30] = static_cast<float>(dval);
-
-			i++;
-			pAttrib=pAttrib->Next();
-		}
-	}
-
-	return i;
-}
-
-
-void ItemLoader::searchItemBasicData(TiXmlNode* pParent)
-{
-	if ( !pParent ) return;
-
-	TiXmlNode* pChild;
-//	TiXmlText* pText;
-
-	int t = pParent->Type();
-	int num;
-
-	switch ( t )
-	{
-	case TiXmlNode::ELEMENT:
-		//printf( "Element [%s]", pParent->Value() );
-		num = generateItemBasicData(pParent->ToElement(), pParent->Value());
-		/*switch(num)
-		{
-			case 0:  printf( " (No attributes)"); break;
-			case 1:  printf( "%s1 attribute", getIndentAlt(indent)); break;
-			default: printf( "%s%d attributes", getIndentAlt(indent), num); break;
-		}*/
-		break;
-	/*
-	case TiXmlNode::TEXT:
-		pText = pParent->ToText();
-		printf( "Text: [%s]", pText->Value() );
-		break;
-	*/
-	default:
-		break;
-	}
-
-	for ( pChild = pParent->FirstChild(); pChild != 0; pChild = pChild->NextSibling())
-	{
-		searchItemBasicData(pChild);
-
-		if ( !strcmp(pChild->Value(), "Item") && pChild->Type() == TiXmlNode::ELEMENT)
-		{
-			
-			m_item_list->push_back(m_item_data);
-
-			m_item_data = 0;
-			DEBUG5("Item loaded");
-
-
-		}
-	}
-}
-
-
-std::list<ItemBasicData*>* ItemLoader::loadItemBasicData(const char* pFilename)
-{
-	// Standard Modifikator Verteilung fuer Waffen
-	/*for (int i=0; i<31; i++)
-	{
-		m_weapon_mod[i] = 0;
-	}
-	m_weapon_mod[ItemFactory::DEXTERITY_MOD] = 0.1;
-	m_weapon_mod[ItemFactory::MAGIC_POWER_MOD] = 0.05;
-	m_weapon_mod[ItemFactory::STRENGTH_MOD] = 0.1;
-	m_weapon_mod[ItemFactory::DAMAGE_PHYS_MOD] = 0.15;
-	m_weapon_mod[ItemFactory::DAMAGE_FIRE_MOD] = 0.10;
-	m_weapon_mod[ItemFactory::DAMAGE_ICE_MOD] = 0.10;
-	m_weapon_mod[ItemFactory::DAMAGE_AIR_MOD] = 0.10;
-	m_weapon_mod[ItemFactory::ATTACK_MOD] = 0.1;
-	m_weapon_mod[ItemFactory::POWER_MOD] = 0.1;
-	m_weapon_mod[ItemFactory::DAMAGE_MULT_PHYS_MOD] = 0.1;*/
-
-	m_item_data = 0;
-	m_item_list = new std::list<ItemBasicData*>;
-
 	TiXmlDocument doc(pFilename);
 	bool loadOkay = doc.LoadFile();
 
 	if (loadOkay)
 	{
-		DEBUG5("Loading %s", pFilename);
-		searchItemBasicData(&doc);
-		DEBUG5("Loading %s finished", pFilename);
-		return m_item_list;
-	}
-	else
-	{
-		ERRORMSG("Failed to load file %s", pFilename);
-		return 0;
-	}
-}
-
-//##############################################################################
-
-int ItemLoader::generateDropChanceData(TiXmlElement* pElement, std::string element)
-{
-	if ( !pElement ) return 0;
-
-	TiXmlAttribute* pAttrib=pElement->FirstAttribute();
-	int i=0;
-	int ival;
-	double dval;
-
-	if (element == "Item" && pAttrib)
-	{
-		if (m_item_data == 0)
-		{
-			m_drop_chance_data = new DropChanceData;
-		}
-
-		while (element == "Item" && pAttrib)
-		{
-			if (!strcmp(pAttrib->Name(), "type"))
-			{
-				if (!strcmp(pAttrib->Value(), "armor"))
-					m_drop_chance_data->m_type = Item::ARMOR;
-				else if (!strcmp(pAttrib->Value(), "helmet"))
-					m_drop_chance_data->m_type = Item::HELMET;
-				else if (!strcmp(pAttrib->Value(), "gloves"))
-					m_drop_chance_data->m_type = Item::GLOVES;
-				else if (!strcmp(pAttrib->Value(), "weapon"))
-					m_drop_chance_data->m_type = Item::WEAPON;
-				else if (!strcmp(pAttrib->Value(), "shield"))
-					m_drop_chance_data->m_type = Item::SHIELD;
-				else if (!strcmp(pAttrib->Value(), "potion"))
-					m_drop_chance_data->m_type = Item::POTION;
-				else if (!strcmp(pAttrib->Value(), "ring"))
-					m_drop_chance_data->m_type = Item::RING;
-				else if (!strcmp(pAttrib->Value(), "amulet"))
-					m_drop_chance_data->m_type = Item::AMULET;
-				else if (!strcmp(pAttrib->Value(), "gold_type"))
-					m_drop_chance_data->m_type = Item::GOLD_TYPE;
-			}
-			else if (!strcmp(pAttrib->Name(), "subtype"))
-			{
-				m_drop_chance_data->m_subtype = pAttrib->Value();
-			}
-			else if (!strcmp(pAttrib->Name(), "size"))
-			{
-				if (!strcmp(pAttrib->Value(), "gold"))
-					m_drop_chance_data->m_size = Item::GOLD;
-				else if (!strcmp(pAttrib->Value(), "small"))
-					m_drop_chance_data->m_size = Item::SMALL;
-				else if (!strcmp(pAttrib->Value(), "medium"))
-					m_drop_chance_data->m_size = Item::MEDIUM;
-				else if (!strcmp(pAttrib->Value(), "big"))
-					m_drop_chance_data->m_size = Item::BIG;
-			}
-
-			i++;
-			pAttrib=pAttrib->Next();
-		}
-	}
-
-	if (element == "DropChance" && pAttrib)
-	{
-		while (element == "DropChance" && pAttrib)
-		{
-			if (!strcmp(pAttrib->Name(), "level") && pAttrib->QueryIntValue(&ival) == TIXML_SUCCESS)
-				m_drop_chance_data->m_level = ival;
-			else if (!strcmp(pAttrib->Name(), "probability") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
-				m_drop_chance_data->m_probability = static_cast<float>(dval);
-
-			i++;
-			pAttrib=pAttrib->Next();
-		}
-	}
-
-	return i;
-}
-
-
-void ItemLoader::searchDropChanceData(TiXmlNode* pParent)
-{
-	if ( !pParent ) return;
-
-	TiXmlNode* pChild;
-//	TiXmlText* pText;
-
-	int t = pParent->Type();
-	int num;
-
-	switch ( t )
-	{
-	case TiXmlNode::ELEMENT:
-		//printf( "Element [%s]", pParent->Value() );
-		num = generateDropChanceData(pParent->ToElement(), pParent->Value());
-		/*switch(num)
-		{
-			case 0:  printf( " (No attributes)"); break;
-			case 1:  printf( "%s1 attribute", getIndentAlt(indent)); break;
-			default: printf( "%s%d attributes", getIndentAlt(indent), num); break;
-		}*/
-		break;
-	/*
-	case TiXmlNode::TEXT:
-		pText = pParent->ToText();
-		printf( "Text: [%s]", pText->Value() );
-		break;
-	*/
-	default:
-		break;
-	}
-
-	for ( pChild = pParent->FirstChild(); pChild != 0; pChild = pChild->NextSibling())
-	{
-		searchDropChanceData(pChild);
-
-		if ( !strcmp(pChild->Value(), "Item") && pChild->Type() == TiXmlNode::ELEMENT)
-		{
-			m_drop_chance_data_list->push_back(m_drop_chance_data);
-			m_drop_chance_data = 0;
-			DEBUG5("DropChance loaded");
-		}
-	}
-}
-
-
-std::list<DropChanceData*>* ItemLoader::loadDropChanceData(const char* pFilename)
-{
-	m_drop_chance_data = 0;
-	m_drop_chance_data_list = new std::list<DropChanceData*>;
-
-	TiXmlDocument doc(pFilename);
-	bool loadOkay = doc.LoadFile();
-
-	if (loadOkay)
-	{
-		DEBUG5("Loading %s", pFilename);
-		searchDropChanceData(&doc);
-		DEBUG5("Loading %s finished", pFilename);
-		return m_drop_chance_data_list;
-	}
-	else
-	{
-		ERRORMSG("Failed to load file %s", pFilename);
-		return 0;
-	}
-}
-
-//##############################################################################
-
-int ItemLoader::generateItemMeshData(TiXmlElement* pElement, std::string element)
-{
-	if ( !pElement ) return 0;
-
-	TiXmlAttribute* pAttrib=pElement->FirstAttribute();
-	int i=0;
-
-	if (element == "Item" && pAttrib)
-	{
-		if (m_item_mesh_data == 0)
-		{
-			m_item_mesh_data = new ItemMeshData;
-		}
-
-		while (element == "Item" && pAttrib)
-		{
-			if (!strcmp(pAttrib->Name(), "subtype"))
-				m_item_mesh_data->m_subtype = pAttrib->Value();
-
-			i++;
-			pAttrib=pAttrib->Next();
-		}
-	}
-
-	if (element == "Mesh" && pAttrib)
-	{
-		while (element == "Mesh" && pAttrib)
-		{
-			if (!strcmp(pAttrib->Name(), "file"))
-				m_item_mesh_data->m_mesh = pAttrib->Value();
-
-			i++;
-			pAttrib=pAttrib->Next();
-		}
-	}
-
-	return i;
-}
-
-
-void ItemLoader::searchItemMeshData(TiXmlNode* pParent)
-{
-	if ( !pParent ) return;
-
-	TiXmlNode* pChild;
-//	TiXmlText* pText;
-
-	int t = pParent->Type();
-	int num;
-
-	switch ( t )
-	{
-	case TiXmlNode::ELEMENT:
-		//printf( "Element [%s]", pParent->Value() );
-		num = generateItemMeshData(pParent->ToElement(), pParent->Value());
-		/*switch(num)
-		{
-			case 0:  printf( " (No attributes)"); break;
-			case 1:  printf( "%s1 attribute", getIndentAlt(indent)); break;
-			default: printf( "%s%d attributes", getIndentAlt(indent), num); break;
-		}*/
-		break;
-	/*
-	case TiXmlNode::TEXT:
-		pText = pParent->ToText();
-		printf( "Text: [%s]", pText->Value() );
-		break;
-	*/
-	default:
-		break;
-	}
-
-	for ( pChild = pParent->FirstChild(); pChild != 0; pChild = pChild->NextSibling())
-	{
-		searchItemMeshData(pChild);
-
-		if ( !strcmp(pChild->Value(), "Item") && pChild->Type() == TiXmlNode::ELEMENT)
-		{
-			m_item_mesh_list->push_back(m_item_mesh_data);
-			m_item_mesh_data = 0;
-			DEBUG5("Item Mesh loaded");
-		}
-	}
-}
-
-
-std::list<ItemMeshData*>* ItemLoader::loadItemMeshData(const char* pFilename)
-{
-	m_item_mesh_data = 0;
-	m_item_mesh_list = new std::list<ItemMeshData*>;
-
-	TiXmlDocument doc(pFilename);
-	bool loadOkay = doc.LoadFile();
-
-	if (loadOkay)
-	{
-		DEBUG5("Loading %s", pFilename);
-		searchItemMeshData(&doc);
-		DEBUG5("Loading %s finished", pFilename);
-		return m_item_mesh_list;
-	}
-	else
-	{
-		ERRORMSG("Failed to load file %s", pFilename);
-		return 0;
-	}
-}
-
-
-//##############################  ItemImageData  ###############################
-
-int ItemLoader::generateItemImageData(TiXmlElement* pElement, std::string element, std::list<ItemImageData> &item_image_data_list)
-{
-	if ( !pElement ) return 0;
-
-	TiXmlAttribute* pAttrib=pElement->FirstAttribute();
-	int i=0;
-
-	if (element == "Item")
-	{
-		DEBUG5("Item");
-
-		while (element == "Item" && pAttrib)
-		{
-			if (!strcmp(pAttrib->Name(), "subtype"))
-				m_item_image_data.m_subtype = pAttrib->Value();
-
-			i++;
-			pAttrib=pAttrib->Next();
-		}
-	}
-
-	if (element == "Image")
-	{
-		DEBUG5("Image");
-		while (element == "Image" && pAttrib)
-		{
-			if (!strcmp(pAttrib->Name(), "image"))
-				m_item_image_data.m_image = pAttrib->Value();
-
-			i++;
-			pAttrib=pAttrib->Next();
-		}
-	}
-
-	return i;
-}
-
-
-void ItemLoader::searchItemImageData(TiXmlNode* pParent, std::list<ItemImageData> &item_image_data_list)
-{
-	if ( !pParent ) return;
-
-	TiXmlNode* pChild;
-
-	int t = pParent->Type();
-	int num;
-
-	switch ( t )
-	{
-	case TiXmlNode::ELEMENT:
-		//printf( "Element [%s]", pParent->Value() );
-		num = generateItemImageData(pParent->ToElement(), pParent->Value(), item_image_data_list);
-		/*switch(num)
-		{
-			case 0:  printf( " (No attributes)"); break;
-			case 1:  printf( "%s1 attribute", getIndentAlt(indent)); break;
-			default: printf( "%s%d attributes", getIndentAlt(indent), num); break;
-		}*/
-		break;
-	/*
-	case TiXmlNode::TEXT:
-		pText = pParent->ToText();
-		printf( "Text: [%s]", pText->Value() );
-		break;
-	*/
-	default:
-		break;
-	}
-
-	for ( pChild = pParent->FirstChild(); pChild != 0; pChild = pChild->NextSibling())
-	{
-		searchItemImageData(pChild, item_image_data_list);
-
-		if ( !strcmp(pChild->Value(), "Item") && pChild->Type() == TiXmlNode::ELEMENT)
-		{
-			item_image_data_list.push_back(m_item_image_data);
-			DEBUG5("Item Image loaded");
-		}
-	}
-}
-
-
-bool ItemLoader::loadItemImageData(const char* pFilename, std::list<ItemImageData> &item_image_data_list)
-{
-
-	/*object_list = new std::list<FixedObjectData*>;
-	subtype_list = new std::list<std::string>;*/
-
-	TiXmlDocument doc(pFilename);
-	bool loadOkay = doc.LoadFile();
-
-	if (loadOkay)
-	{
-		DEBUG5("Loading %s", pFilename);
-		searchItemImageData(&doc, item_image_data_list);
-		DEBUG5("Loading %s finished", pFilename);
+		loadItems(&doc);
 		return true;
 	}
 	else
@@ -910,13 +23,311 @@ bool ItemLoader::loadItemImageData(const char* pFilename, std::list<ItemImageDat
 	}
 }
 
-
-
-ItemLoader::~ItemLoader()
+void ItemLoader::loadItems(TiXmlNode* node)
 {
-	// FIXME Löschen der Listen erfolgt nach dem Aufruf der Methoden manuell
-	//       in der rufenden Funktion. Dies eventuell hier implementieren.
-	//       Daten in m_item_list (std::list<ItemBasicData*>) duerfen nicht geloescht
-	//       werden!
+	TiXmlNode* child;
+	if (node->Type()==TiXmlNode::ELEMENT && !strcmp(node->Value(), "Item"))
+	{
+		loadItem(node);
+	}
+	else
+	{
+		for ( child = node->FirstChild(); child != 0; child = child->NextSibling())
+		{
+			loadItems(child);
+		}
+	}
+}
+
+void ItemLoader::loadItem(TiXmlNode* node)
+{
+	ItemBasicData* item_data = new ItemBasicData;
+	
+	ElementAttrib attr;
+	attr.parseElement(node->ToElement());
+	
+	std::string type;
+	attr.getString("type", type);
+	if (type == "armor")
+		item_data->m_type = Item::ARMOR;
+	else if (type == "weapon")
+		item_data->m_type = Item::WEAPON;
+	else if (type == "helmet")
+		item_data->m_type = Item::HELMET;
+	else if (type == "gloves")
+		item_data->m_type = Item::GLOVES;
+	else if (type == "ring")
+		item_data->m_type = Item::RING;
+	else if (type == "amulet")
+		item_data->m_type = Item::AMULET;
+	else if (type == "shield")
+		item_data->m_type = Item::SHIELD;
+	else if (type == "potion")
+		item_data->m_type = Item::POTION;
+	else
+		ERRORMSG("item without base type");
+	
+	attr.getString("subtype", item_data->m_subtype);
+	attr.getString("name", item_data->m_name);
+	std::string size;
+	attr.getString("size", size);
+	if (size == "small")
+		item_data->m_size = Item::SMALL;
+	else if (size == "medium")
+		item_data->m_size = Item::MEDIUM;
+	else if (size == "big")
+		item_data->m_size = Item::BIG;
+	else
+		ERRORMSG("item without subtype");
+	
+	TiXmlNode* child;
+	for ( child = node->FirstChild(); child != 0; child = child->NextSibling())
+	{
+		if (child->Type()==TiXmlNode::ELEMENT) 
+		{
+			attr.parseElement(child->ToElement());
+			
+			if (!strcmp(child->Value(), "Image"))
+			{
+				std::string image;
+				attr.getString("image", image);
+				if (item_data->m_subtype != "")
+				{
+					DEBUG5("registered Item image %s %s",item_data->m_subtype.c_str(),image.c_str());
+					ItemWindow::registerItemImage(item_data->m_subtype, image);
+				}
+			}
+			else if (!strcmp(child->Value(), "Mesh"))
+			{
+				std::string file;
+				attr.getString("file", file);
+				if (item_data->m_subtype != "")
+				{
+					DEBUG5("registered Item mesh %s %s",item_data->m_subtype.c_str(),file.c_str());
+					Scene::registerItem(item_data->m_subtype,file);
+				}
+			}
+			else if (!strcmp(child->Value(), "Attribute"))
+			{
+				short levelreq =0;
+				attr.getShort("level_requirement", levelreq,0);
+				item_data ->m_level_req = levelreq;
+				short charreq =15;
+				attr.getShort("char_requirement", charreq,15);
+				item_data ->m_char_req = charreq;
+				
+				attr.getFloat("min_enchant",item_data->m_min_enchant,0);
+				attr.getFloat("max_enchant",item_data->m_max_enchant,0);
+				attr.getInt("price",item_data->m_price);
+				
+				attr.getFloat("modchance_health_mod",item_data->m_modchance[ItemFactory::HEALTH_MOD],0);
+				attr.getFloat("modchance_strength_mod",item_data->m_modchance[ItemFactory::STRENGTH_MOD],0);
+				attr.getFloat("modchance_willpower_mod",item_data->m_modchance[ItemFactory::WILLPOWER_MOD],0);
+				attr.getFloat("modchance_dexterity_mod",item_data->m_modchance[ItemFactory::DEXTERITY_MOD],0);
+				attr.getFloat("modchance_magic_power_mod",item_data->m_modchance[ItemFactory::MAGIC_POWER_MOD],0);
+				attr.getFloat("modchance_armor_mod",item_data->m_modchance[ItemFactory::ARMOR_MOD],0);
+				attr.getFloat("modchance_block_mod",item_data->m_modchance[ItemFactory::BLOCK_MOD],0);
+				
+				attr.getFloat("modchance_resist_phys_mod",item_data->m_modchance[ItemFactory::RESIST_PHYS_MOD],0);
+				attr.getFloat("modchance_resist_fire_mod",item_data->m_modchance[ItemFactory::RESIST_FIRE_MOD],0);
+				attr.getFloat("modchance_resist_ice_mod",item_data->m_modchance[ItemFactory::RESIST_ICE_MOD],0);
+				attr.getFloat("modchance_resist_air_mod",item_data->m_modchance[ItemFactory::RESIST_AIR_MOD],0);
+				
+				attr.getFloat("modchance_damage_phys_mod",item_data->m_modchance[ItemFactory::DAMAGE_PHYS_MOD],0);
+				attr.getFloat("modchance_damage_fire_mod",item_data->m_modchance[ItemFactory::DAMAGE_FIRE_MOD],0);
+				attr.getFloat("modchance_damage_ice_mod",item_data->m_modchance[ItemFactory::DAMAGE_ICE_MOD],0);
+				attr.getFloat("modchance_damage_air_mod",item_data->m_modchance[ItemFactory::DAMAGE_AIR_MOD],0);
+				
+				attr.getFloat("modchance_damage_mult_phys_mod",item_data->m_modchance[ItemFactory::DAMAGE_MULT_PHYS_MOD],0);
+				attr.getFloat("modchance_damage_mult_fire_mod",item_data->m_modchance[ItemFactory::DAMAGE_MULT_FIRE_MOD],0);
+				attr.getFloat("modchance_damage_mult_ice_mod",item_data->m_modchance[ItemFactory::DAMAGE_MULT_ICE_MOD],0);
+				attr.getFloat("modchance_damage_mult_air_mod",item_data->m_modchance[ItemFactory::DAMAGE_MULT_AIR_MOD],0);
+				
+				attr.getFloat("modchance_attack_speed_mod",item_data->m_modchance[ItemFactory::ATTACK_SPEED_MOD],0);
+				attr.getFloat("modchance_attack_mod",item_data->m_modchance[ItemFactory::ATTACK_MOD],0);
+				attr.getFloat("modchance_power_mod",item_data->m_modchance[ItemFactory::POWER_MOD],0);
+					
+			}
+			else if (!strcmp(child->Value(), "DropChance"))
+			{
+				
+				int level;
+				float prob;
+				attr.getInt("level",level,0);
+				attr.getFloat("probability",prob,0);
+				ItemFactory::registerItemDrop(item_data->m_subtype, DropChance(level,prob,item_data->m_size));
+			}
+			else if (!strcmp(child->Value(), "UseupEffect"))
+			{
+				if (item_data->m_useup_effect ==0)
+					item_data->m_useup_effect  = new CreatureDynAttrMod;
+				
+				attr.getFloat("dhealth", item_data->m_useup_effect->m_dhealth);
+				attr.getFloat("dstatus_blind_immune_time", item_data->m_useup_effect->m_dstatus_mod_immune_time[Damage::BLIND]);
+				attr.getFloat("dstatus_poison_immune_time", item_data->m_useup_effect->m_dstatus_mod_immune_time[Damage::POISONED]);
+				attr.getFloat("dstatus_berserk_immune_time", item_data->m_useup_effect->m_dstatus_mod_immune_time[Damage::BERSERK]);
+				attr.getFloat("dstatus_confuse_immune_time", item_data->m_useup_effect->m_dstatus_mod_immune_time[Damage::CONFUSED]);
+				attr.getFloat("dstatus_mute_immune_time", item_data->m_useup_effect->m_dstatus_mod_immune_time[Damage::MUTE]);
+				attr.getFloat("dstatus_paralyze_immune_time", item_data->m_useup_effect->m_dstatus_mod_immune_time[Damage::PARALYZED]);
+				attr.getFloat("dstatus_frozen_immune_time", item_data->m_useup_effect->m_dstatus_mod_immune_time[Damage::FROZEN]);
+				attr.getFloat("dstatus_burning_immune_time", item_data->m_useup_effect->m_dstatus_mod_immune_time[Damage::BURNING]);
+				
+			}
+			else if (!strcmp(child->Value(), "EquipEffect"))
+			{
+				if (item_data->m_equip_effect == 0)
+					item_data->m_equip_effect = new CreatureBaseAttrMod;
+				
+				attr.getShort("darmor",item_data->m_equip_effect->m_darmor);
+				attr.getShort("dblock",item_data->m_equip_effect->m_dblock);
+				attr.getFloat("dmax_health",item_data->m_equip_effect->m_dmax_health);
+				attr.getShort("dattack",item_data->m_equip_effect->m_dattack);
+				attr.getShort("dpower",item_data->m_equip_effect->m_dpower);
+				attr.getShort("dstrength",item_data->m_equip_effect->m_dstrength);
+				attr.getShort("ddexterity",item_data->m_equip_effect->m_ddexterity);
+				attr.getShort("dwillpower",item_data->m_equip_effect->m_dwillpower);
+				attr.getShort("dmagic_power",item_data->m_equip_effect->m_dmagic_power);
+				
+				attr.getShort("dwalk_speed",item_data->m_equip_effect->m_dwalk_speed);
+				attr.getShort("dattack_speed",item_data->m_equip_effect->m_dattack_speed);
+				
+				attr.getShort("dresistances_physical",item_data->m_equip_effect->m_dresistances[Damage::PHYSICAL]);
+				attr.getShort("dresistances_fire",item_data->m_equip_effect->m_dresistances[Damage::FIRE]);
+				attr.getShort("dresistances_ice",item_data->m_equip_effect->m_dresistances[Damage::ICE]);
+				attr.getShort("dresistances_air",item_data->m_equip_effect->m_dresistances[Damage::AIR]);
+				
+				attr.getShort("dresistances_cap_physical",item_data->m_equip_effect->m_dresistances_cap[Damage::PHYSICAL]);
+				attr.getShort("dresistances_cap_fire",item_data->m_equip_effect->m_dresistances_cap[Damage::FIRE]);
+				attr.getShort("dresistances_cap_ice",item_data->m_equip_effect->m_dresistances_cap[Damage::ICE]);
+				attr.getShort("dresistances_cap_air",item_data->m_equip_effect->m_dresistances_cap[Damage::AIR]);
+			}
+			else if (!strcmp(child->Value(), "SpecialFlag"))
+			{
+				if (item_data->m_weapon_attr == 0)
+					item_data->m_weapon_attr = new WeaponAttr;
+				
+				std::string type;
+				attr.getString("type",type);
+				
+				short flags = item_data->m_weapon_attr->m_damage.m_special_flags;
+				if (type ==  "unblockable")
+					flags |= Damage::UNBLOCKABLE;
+				else if (type ==  "ignore_armor")
+					flags |= Damage::IGNORE_ARMOR;
+				else if (type ==   "extra_human_dmg")
+					flags |= Damage::EXTRA_HUMAN_DMG;
+				else if (type ==   "extra_demon_dmg")
+					flags |= Damage::EXTRA_DEMON_DMG;
+				else if (type ==   "extra_undead_dmg")
+					flags |= Damage::EXTRA_UNDEAD_DMG;
+				else if (type ==   "extra_dwarf_dmg")
+					flags |= Damage::EXTRA_DWARF_DMG;
+				else if (type ==   "extra_drake_dmg")
+					flags |= Damage::EXTRA_DRAKE_DMG;
+				else if (type ==   "extra_fairy_dmg")
+					flags |= Damage::EXTRA_FAIRY_DMG;
+				else if (type ==   "extra_goblin_dmg")
+					flags |= Damage::EXTRA_GOBLIN_DMG;
+				else if (type ==   "extra_animal_dmg")
+					flags |= Damage::EXTRA_ANIMAL_DMG;
+				else if (type ==   "extra_summoned_dmg")
+					flags |= Damage::EXTRA_SUMMONED_DMG;
+			}
+			else if (!strcmp(child->Value(), "Immunity"))
+			{
+				if (item_data->m_equip_effect == 0)
+					item_data->m_equip_effect = new CreatureBaseAttrMod;
+				
+				std::string type;
+				attr.getString("type",type);
+				
+				if (type == "blind")
+					item_data->m_equip_effect->m_ximmunity |= 1<<Damage::BLIND;
+				else if (type ==  "poisoned")
+					item_data->m_equip_effect->m_ximmunity |= 1<<Damage::POISONED;
+				else if (type ==  "berserk")
+					item_data->m_equip_effect->m_ximmunity |= 1<<Damage::BERSERK;
+				else if (type ==  "confused")
+					item_data->m_equip_effect->m_ximmunity |= 1<<Damage::CONFUSED;
+				else if (type ==  "mute")
+					item_data->m_equip_effect->m_ximmunity |= 1<<Damage::MUTE;
+				else if (type ==  "paralyzed")
+					item_data->m_equip_effect->m_ximmunity |= 1<<Damage::PARALYZED;
+				else if (type ==  "frozen")
+					item_data->m_equip_effect->m_ximmunity |= 1<<Damage::FROZEN;
+				else if (type ==  "burning")
+					item_data->m_equip_effect->m_ximmunity |= 1<<Damage::BURNING;
+			}
+			else if (!strcmp(child->Value(), "Ability"))
+			{
+				if (item_data->m_equip_effect == 0)
+					item_data->m_equip_effect = new CreatureBaseAttrMod;
+				
+				std::string type;
+				attr.getString("type",type);
+				
+				int act = Action::getActionType(type);
+				item_data->m_equip_effect->m_xabilities[act/32] |= 1<<(act%32);
+			}
+			else if (!strcmp(child->Value(), "WeaponAttribute"))
+			{
+				if (item_data->m_weapon_attr == 0)
+					item_data->m_weapon_attr = new WeaponAttr;
+				
+				std::string type;
+				attr.getString("type",type);
+				if (type == "sword")
+					item_data->m_weapon_attr->m_weapon_type = WeaponAttr::SWORD;
+				else if (type == "axe")
+					item_data->m_weapon_attr->m_weapon_type = WeaponAttr::AXE;
+				else if (type == "hammer")
+					item_data->m_weapon_attr->m_weapon_type = WeaponAttr::HAMMER;
+				else if (type == "staff")
+					item_data->m_weapon_attr->m_weapon_type = WeaponAttr::STAFF;
+				else if (type == "bow")
+					item_data->m_weapon_attr->m_weapon_type = WeaponAttr::BOW;
+				else if (type == "crossbow")
+					item_data->m_weapon_attr->m_weapon_type = WeaponAttr::CROSSBOW;
+				
+				Damage& dmg = item_data->m_weapon_attr->m_damage;
+				attr.getFloat("damage_min_physical",dmg.m_min_damage[Damage::PHYSICAL]);
+				attr.getFloat("damage_min_fire",dmg.m_min_damage[Damage::FIRE]);
+				attr.getFloat("damage_min_ice",dmg.m_min_damage[Damage::ICE]);
+				attr.getFloat("damage_min_air",dmg.m_min_damage[Damage::AIR]);
+				
+				attr.getFloat("damage_max_physical",dmg.m_max_damage[Damage::PHYSICAL]);
+				attr.getFloat("damage_max_fire",dmg.m_max_damage[Damage::FIRE]);
+				attr.getFloat("damage_max_ice",dmg.m_max_damage[Damage::ICE]);
+				attr.getFloat("damage_max_air",dmg.m_max_damage[Damage::AIR]);
+				
+				attr.getFloat("multiplier_physical",dmg.m_multiplier[Damage::PHYSICAL],1);
+				attr.getFloat("multiplier_fire",dmg.m_multiplier[Damage::FIRE],1);
+				attr.getFloat("multiplier_ice",dmg.m_multiplier[Damage::ICE],1);
+				attr.getFloat("multiplier_air",dmg.m_multiplier[Damage::AIR],1);
+				
+				attr.getFloat("damage_attack",dmg.m_attack);
+				attr.getFloat("damage_power",dmg.m_power);
+				
+				attr.getShort("damage_blind_power", dmg.m_status_mod_power[Damage::BLIND]);
+				attr.getShort("damage_poison_power", dmg.m_status_mod_power[Damage::POISONED]);
+				attr.getShort("damage_berserk_power", dmg.m_status_mod_power[Damage::BERSERK]);
+				attr.getShort("damage_confuse_power", dmg.m_status_mod_power[Damage::CONFUSED]);
+				attr.getShort("damage_mute_power", dmg.m_status_mod_power[Damage::MUTE]);
+				attr.getShort("damage_paralyze_power", dmg.m_status_mod_power[Damage::PARALYZED]);
+				attr.getShort("damage_frozen_power", dmg.m_status_mod_power[Damage::FROZEN]);
+				attr.getShort("damage_burning_power", dmg.m_status_mod_power[Damage::BURNING]);
+				
+				attr.getShort("dattack_speed", item_data->m_weapon_attr->m_dattack_speed);
+				std::string twohanded;
+				attr.getString("two_handed",twohanded);
+				item_data->m_weapon_attr->m_two_handed = (twohanded == "yes");
+				attr.getFloat("attack_range", item_data->m_weapon_attr->m_attack_range);
+					
+			}
+		}
+	}
+	
+	DEBUG5("registered Item %s",item_data->m_subtype.c_str());
+	ItemFactory::registerItem(item_data->m_type, item_data->m_subtype, item_data);
 }
 

@@ -159,14 +159,6 @@ class Scene
 		return m_drop_items;
 	}
 	
-	/**
-	 * \fn static void loadItemData(std::string file)
-	 * \brief laedt die Informationen zum Darstellen der Items
-	 * \param file Items XML Datei
-	 */
-	static void loadItemData(std::string file);
-	
-
 	
 	/**
 	 * \fn std::pair<float,float> getProjection(Vector pos, float height=0)
