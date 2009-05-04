@@ -30,7 +30,7 @@
 		<Topic name="scene1_dialogue">
 			<Effect>
 				addCameraPosition(0,get(getRole("PL"),"position"),20,40,20);
-				addCameraPosition(20,get(getRole("PL"),"position"),220,60,30);
+				addCameraPosition(20000,get(getRole("PL"),"position"),220,60,30);
 				
 				-- Die Helden werden von mehreren Waechtern durch einen Gang geführt.
 				-- Rechts und Links kann man aus den Keller merkwuerdige Geraeusche hoeren
