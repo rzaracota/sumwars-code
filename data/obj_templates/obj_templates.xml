@@ -60,6 +60,15 @@ FIXED_OBJECT
 	</Environment>
 </ObjectTemplate>
 
+<ObjectTemplate name="$border_t" type="FIXED_OBJECT">
+	<Environment name="meadow">
+		<Object name="fence_t1" />
+	</Environment>
+	<Environment name="hills">
+		<Object name="wall_t1" />
+	</Environment>
+</ObjectTemplate>
+
 <ObjectTemplate name="$border_c" type="FIXED_OBJECT">
 	<Environment name="meadow">
 		<Object name="fence_c1" />
