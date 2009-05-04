@@ -55,6 +55,14 @@ function fullHeal(obj)
 	end;
 end;
 
+function lookAt(obj,pos)
+	local opos = getPosition(obj);
+	local dirx = pos[1] - opos[1];
+	local diry = pos[2] - opos[2];
+	local angle = math.atan2(diry,dirx)*180 / 3.14159;
+	setObjectValue(obj,"angle",angle);
+end;
+
 
 -- Objekte mit bestimmten Eigenschaften herrausfiltern
 function getPlayersInArea(area)

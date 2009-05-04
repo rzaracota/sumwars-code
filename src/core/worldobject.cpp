@@ -104,6 +104,11 @@ int WorldObject::getValue(std::string valname)
 			lua_pushstring(EventSystem::getLuaState() ,getSubtype().c_str() );
 			return 1;
 		}
+		else if (valname == "angle")
+		{
+			lua_pushnumber(EventSystem::getLuaState() , getShape()->m_angle *180/3.14159);
+			return 1;
+		}
 		else if (valname == "position")
 		{
 			EventSystem::pushVector(EventSystem::getLuaState(),getShape()->m_center);
@@ -154,6 +159,16 @@ bool WorldObject::setValue(std::string valname)
 		else if (fraction == "neutral") setFraction(FRAC_NEUTRAL_TO_ALL);
 		
 		DEBUG("fraction is now %i",getFraction());
+		return true;
+	}
+	else if (valname == "angle")
+	{
+		float angle = lua_tonumber(EventSystem::getLuaState() ,-1) * 3.14159 / 180;
+		lua_pop(EventSystem::getLuaState(), 1);
+		addToNetEventMask(NetEvent::DATA_SHAPE);
+		
+		setAngle(angle);
+		
 		return true;
 	}
 	else if (valname == "position")
