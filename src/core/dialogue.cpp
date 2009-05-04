@@ -304,6 +304,16 @@ void Dialogue::changeTopic(std::string topic)
 		std::list< std::pair<std::string, std::string> >::iterator jt;
 		for (jt = lst.begin(); jt != lst.end(); ++jt)
 		{
+			if (jt->second == "start_dialogue")
+			{
+				st = m_topics[m_topic_base].getSpeakTopic(jt->second);
+				if (st->checkCondition())
+				{
+					EventSystem::setRegion(m_region);
+					st->doEffect();
+				}
+				continue;
+			}
 			if (checkTopic(jt->second))
 			{
 				DEBUG5("added answer %s %s",jt->first.c_str(),jt->second.c_str());

@@ -699,6 +699,7 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 					EventSystem::setDialogue(dia);
 					dia->addSpeaker(getId(),"player");
 					dia->addSpeaker(goalobj->getId(),cr->getRefName());
+					dia->addSpeaker(goalobj->getId(),"npc");
 					dia->changeTopic("start");
 					getRegion()->insertDialogue(dia);
 				}

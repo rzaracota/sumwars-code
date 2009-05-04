@@ -90,6 +90,14 @@
 	</Trade>
 	
 	<Topic name="trade" start_option="Trade" />
+	
+	<Topic name="start_dialogue" >
+		<Effect>
+			local player = getSpeaker("player");
+			local npc = getSpeaker("npc");
+			lookAt(npc,getPosition(player));
+		</Effect>
+	</Topic>
 </NPC>
 
 <NPC refname="Sergeant Lutterer">

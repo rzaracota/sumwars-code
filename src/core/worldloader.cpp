@@ -372,7 +372,7 @@ void  WorldLoader::loadNPC( TiXmlNode* node)
 				loadEvent(child,ev,dummy);
 				
 				Dialogue::getTopicList(refname).addTopic(topic,ev);
-				if (start_op != "")
+				if (start_op != "" || topic == "start_dialogue")
 				{
 					Dialogue::getTopicList(refname).addStartTopic(start_op, topic);
 				}
