@@ -6,7 +6,7 @@
 	<Mesh file="armor.mesh" />
 	<Attribute
 			level_requirement="1"
-			character_requirement="15" 
+			character_requirement="mage" 
 			min_enchant="30"
 			max_enchant="60"
 			modchance_health_mod="0.10"

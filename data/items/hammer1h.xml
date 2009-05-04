@@ -1,4 +1,4 @@
-﻿<!-- HAMMER -->
+<!-- HAMMER -->
 <!-- ONE HANDED HAMMER -->
 
 <!-- hammer -->
@@ -7,7 +7,7 @@
 	<Mesh file="hammer_hmr.mesh" />
 	<Attribute
 		level_requirement="1"
-		character_requirement="15"
+		character_requirement="warrior,priest"
 		min_enchant="20"
 		max_enchant="40"
 		modchance_strength_mod="0.1"

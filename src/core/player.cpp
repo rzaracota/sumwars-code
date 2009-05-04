@@ -1010,7 +1010,7 @@ bool Player::checkItemRequirements(Item* itm)
 	if (getSubtype() == "priest")
 		mask = Item::REQ_PRIEST;
 
-	if (itm->m_char_req & mask != mask)
+	if ((itm->m_char_req & mask) != mask)
 	{
 		// Spieler darf das Item nicht benutzen (falsche Spielerklasse)
 		DEBUG5("wrong subtype");

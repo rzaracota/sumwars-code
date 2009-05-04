@@ -379,6 +379,37 @@ std::string Item::getDescription()
 	{
 		out_stream<<"\n" << gettext("Required level")<<": "<<(int) m_level_req;
 	}
+	if (m_char_req != 15)
+	{
+		out_stream<<"\n" << gettext("Required class")<<": ";
+		bool first = true;
+		if (m_char_req & REQ_WARRIOR)
+		{
+			out_stream<<gettext("Warrior");
+			first = false;
+		}
+		if (m_char_req & REQ_MAGE)
+		{
+			if (!first)
+				out_stream<<", ";
+			out_stream<<gettext("Magician");
+			first = false;
+		}
+		if (m_char_req & REQ_ARCHER)
+		{
+			if (!first)
+				out_stream<<", ";
+			out_stream<<gettext("Archer");
+			first = false;
+		}
+		if (m_char_req & REQ_PRIEST)
+		{
+			if (!first)
+				out_stream<<", ";
+			out_stream<<gettext("Priest");
+			first = false;
+		}
+	}
 
 	// TODO: Beschraenkung nach Charakterklasse
 

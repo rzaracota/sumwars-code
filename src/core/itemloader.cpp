@@ -112,10 +112,29 @@ void ItemLoader::loadItem(TiXmlNode* node)
 				short levelreq =0;
 				attr.getShort("level_requirement", levelreq,0);
 				item_data ->m_level_req = levelreq;
-				short charreq =15;
-				attr.getShort("char_requirement", charreq,15);
-				item_data ->m_char_req = charreq;
-				
+				std::string charreq;
+				attr.getString("character_requirement", charreq,"all");
+				short creq =0;
+				if (charreq == "all" || charreq == "15")
+					creq = 15;
+				if (charreq.find("warrior") != std::string::npos)
+				{
+					creq |= Item::REQ_WARRIOR;
+				}
+				if (charreq.find("archer") != std::string::npos)
+				{
+					creq |= Item::REQ_ARCHER;
+				}
+				if (charreq.find("mage") != std::string::npos)
+				{
+					creq |= Item::REQ_MAGE;
+				}
+				if (charreq.find("priest") != std::string::npos)
+				{
+					creq |= Item::REQ_PRIEST;
+				}
+				item_data->m_char_req = creq;
+						
 				attr.getFloat("min_enchant",item_data->m_min_enchant,0);
 				attr.getFloat("max_enchant",item_data->m_max_enchant,0);
 				attr.getInt("price",item_data->m_price);
@@ -323,6 +342,10 @@ void ItemLoader::loadItem(TiXmlNode* node)
 				item_data->m_weapon_attr->m_two_handed = (twohanded == "yes");
 				attr.getFloat("attack_range", item_data->m_weapon_attr->m_attack_range);
 					
+			}
+			else if (child->Type()!=TiXmlNode::COMMENT)
+			{
+				DEBUG("unexpected element of <Item>: %s",child->Value());
 			}
 		}
 	}
