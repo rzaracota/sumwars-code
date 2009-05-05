@@ -15,7 +15,7 @@
 	<NPC refname="Sergeant Lutterer">
 		<Topic name="besieged_farm" start_option="Besieged Farm">
 			<Condition>
-				if (besieged_farm.finished ~= true and besieged_farm.freed ~= true) then
+				if (besieged_farm.finished ~= true and besieged_farm.freed ~= true and besieged_farm.scene3 == true) then
 					return true
 				else
 					return false
@@ -111,6 +111,140 @@
 	</NPC>
 	
 	
+	<NPC refname="Prince Charming">
+		<Topic name="scene1_dialogue">
+			<Effect>
+				addCameraPosition(0,get(getRole("PL"),"position"),20,40,20);
+				addCameraPosition(20000,get(getRole("PL"),"position"),220,60,30);
+
+				-- PC und LvR reden mit SL, als die Helden dazu kommen. Eine größer Menge von Soldaten wartet auf ihren Abmarsch.
+
+				speak("SL",_("Ich flehe euch an"),1000);
+
+				-- PC: dreht sich zu SL, aber LvR ist schneller
+
+				speak("LvR",_("Schweigt! Die Sicherheit des"),1000);
+				speak("PC",_("..."),1000);
+				speak("LvR",_("Außerdem habt ihr sogar"),1000);
+				speak("SL",_("Aber der werte Magus"),1000);
+				speak("RF",_("Sehr wohl! Das Verfolgen"),1000);
+				speak("PC",_("Und ihr habt wirklich"),1000);
+				speak("RF",_("Es tut mir aufrichtig"),1000);
+				speak("PC",_("Danke, das reicht."),1000);
+
+				-- RF (vor den Kopf gestoßen)
+
+				speak("WARast",_("Selbstzufriedener Schmarotzer"),1000);
+				speak("MAGast",_("Ich hoffe nur, das"),1000);
+				speak("LvR",_("Allein die Anwesenheit"),1000);
+				speak("SL",_("!"),1000);
+				speak("LvR",_("Habt ihr nichts"),1000);
+				speak("ANY",_("Und da sagt man"),1000);
+
+				-- SL entfernt sich. PC und LvR wenden sich zu ihren Pferden, als MB aufgeregt in das Dorf gerannt kommt.
+
+				speak("MB",_("Wachen! Wachen! Hilfe!"),1000);
+				speak("LvR",_("Schaffte den"),1000);
+				-- Wache1 und Wahe2 (etwas zögerlich): Jawohl.
+
+				-- Die zwei Wachen stuermen vor, sie fuehlen sich nicht ganz wohl in ihrer Haut.
+
+				speak("PC",_("Wartet! Was ist passiert?"),1000);
+
+				-- MB wirft sich nieder
+
+				speak("MB",_("Vergebt mir, mein Prinz"),1000);
+				speak("PC",_("Wir..."),1000);
+				speak("LvR",_("Mein Prinz! Wir"),1000);
+				speak("PC",_("Ich weiss!"),1000);
+
+				-- PC greift in seine Satteltasche, zieht ein Säckchen hervor und hält es hoch.
+
+				speak("PC",_("200 Goldstücke jedem,"),1000);
+				speak("LvR",_("tz"),1000);
+				speak("ANY",_("200 für jeden."),1000);
+
+				-- Der Kommunikationskristall erscheint und spricht zu den Helden
+
+				speak("SW",_("Denkt nicht einmal daran!"),1000);
+
+				addQuestion(_("Dem Bauern helfen?"));
+				addAnswer(_("Yes"),"help_peasant");
+				addAnswer(_("No"),"dont_help_peasant");
+			</Effect>
+		</Topic>
+		
+		<Topic name="help_peasant">
+			<Effect>
+				speak("WAR",_("Nur ein Stein"),1000);
+				speak("ANYplus",_("Und es gibt Geld"),1000);
+				speak("PC",_(""),1000);
+				speak("SW",_(""),1000);
+				if (getPlayers[2] == nil) then
+					speak("PL",_("ICH Dann ist es beschlossen."),1000);
+				else
+					speak("PL",_("WIR Dann ist es beschlossen."),1000);
+				end;
+				speak("MAGast",_("Ja, zeig ihm,"),1000);
+				if (getPlayers[2] == nil) then
+					speak("PL",_("ICH Prinz,"),1000);
+				else
+					speak("PL",_("WIR Prinz,"),1000);
+				end;
+				speak("LvR",_("Bei Marek!"),1000);
+				speak("PC",_("Wer seid ihr?"),1000);
+				speak("SL",_("Das ist doch..."),1000);
+				if (getPlayers[2] == nil) then
+					speak("PC",_("ICH"),1000);
+				else
+					speak("PC",_("WIR"),1000);
+				end;
+				speak("WARast",_("unter der Knute eines gewissen"),1000);
+				speak("SW",_("Windklaue! Du"),1000);
+				speak("WARast",_("ups..."),1000);
+				speak("PL",_("Ist das ein Problem"),1000);
+				speak("PC",_("... wahrscheinlich nicht."),1000);
+				speak("LvR",_("Seid ihr sicher,"),1000);
+				if (getPlayers[2] == nil) then
+					speak("PC",_("ICH"),1000);
+				else
+					speak("PC",_("WIR"),1000);
+				end;
+
+				-- PC wirft SL das Saeckchen zu, der es faengt.
+
+				speak("SL",_("Sehr wohl mein Prinz."),1000);
+
+				-- => Quest: „Der belagerte Bauernhof“
+
+				besieged_farm.started == true;
+
+				changeTopic("end_cutscene");
+			</Effect>
+		</Topic>
+		
+		<Topic name="dont_help_peasant">
+			<Effect>
+				speak("PC",_("Niemand? Sergeant!"),1000);
+				speak("SL",_("Mein Prinz?"),1000);
+				speak("PC",_("Mein Wort steht."),1000);
+				speak("SL",_("Wie ihr es wuenscht,"),1000);
+				speak("PC",_("Es tut mir Leid,"),1000);
+
+				-- LvR (schuettelt hinter dem Ruecken des Prinzen nur den Kopf): MB bricht zusammen
+
+				changeTopic("end_cutscene");
+			</Effect>
+		</Topic>
+		
+		<Topic name="end_cutscene">
+			<Effect>
+				besieged_farm.scene3 = true;
+				setCutsceneMode(false);
+			</Effect>
+		</Topic>
+	</NPC>
+	
 	<Region name="aisNorthMeadow">
 		<Event trigger ="create_region" once = "true">
 			<Effect>
@@ -145,6 +279,32 @@
 			</Condition>
 			<Effect>
 				besieged_farm.freed = true
+			</Effect>
+		</Event>
+	</Region>
+	
+	<Region name="joringsbridge">
+		<Event trigger="player_moved" once="true">
+			<Condition>
+				if (fortify_dwarfenfroward.scene1 == true and besieged_farm.scene3 ~= true) then
+					return (unitIsInArea(trigger.player,"PrinceArea"));
+				else
+					return false;
+				end;
+			</Condition>
+			<Effect>
+				createDialogue();
+				addSpeaker(prince_charming,"PC");
+				addSpeaker(leonard_von_robenforst,"LvR");
+				addSpeaker(sergeant_lutterer,"SL");
+				addSpeaker(magus_convocatis_relau_feuerweber,"RF");
+				addSpeaker(michel_bron,"MB");
+				-- SW durch den Log-Kristall
+				addSpeaker(trigger.player,"Player");
+				addStandardSpeakers();
+				setCutsceneMode(true);
+				setTopicBase("Prince Charming");
+				changeTopic("scene3_dialogue");
 			</Effect>
 		</Event>
 	</Region>

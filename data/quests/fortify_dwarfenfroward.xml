@@ -144,6 +144,7 @@
 		
 		<Topic name="end_cutscene">
 			<Effect>
+				fortify_dwarfenfroward.scene1 = true;
 				setCutsceneMode(false);
 			</Effect>
 		</Topic>
@@ -163,7 +164,11 @@
 		
 		<Event trigger="player_moved" once="true">
 			<Condition>
-				return (unitIsInArea(trigger.player,"SorenWindclawArea"))
+				if (fortify_dwarfenfroward.scene1 ~= true) then
+					return (unitIsInArea(trigger.player,"SorenWindclawArea"));
+				else
+					return false;
+				end;
 			</Condition>
 			<Effect>
 				-- insertTrigger("start_scene")

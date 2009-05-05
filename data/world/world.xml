@@ -274,8 +274,22 @@
 				gertlinde_kampfer = createObject("peasant_f", "locHerbalist");
 				setRefName(gertlinde_kampfer, "Gertlinde Kampfer");
 				addArea("HerbalistArea","circle","locHerbalist",5);
+				
 				sergeant_lutterer = createObject("peasant", "locSergeant");
 				setRefName(sergeant_lutterer, "Sergeant Lutterer");
+				
+				prince_charming = createObject("peasant", "locPrince");
+				setRefName(prince_charming, "Prince Charming");
+				addArea("PrinceArea","circle","locPrince",5);
+				
+				leonard_von_robenforst = createObject("peasant", "locPrince");
+				setRefName(leonard_von_robenforst, "Leonard von Robenforst");
+				
+				michel_bron = createObject("peasant", "locPeasentMichel");
+				setRefName(michel_bron, "Michel Bron");
+				
+				magus_convocatis_relau_feuerweber = createObject("peasant", "locSummoner");
+				setRefName(magus_convocatis_relau_feuerweber, "Magus Convocatis Relau Feuerweber");
 			</Effect>
 		</Event>
 	</Region>
