@@ -471,10 +471,25 @@ void Dialogue::update(float time)
 				}
 
 				cst = &(m_speech.front().second);
+				
+				// Springt ein Topic an, setzt danach aber mit dem alten fort
+				if (!cst->m_answers.empty() && cst->m_text == "#jump_topic#")
+				{
+					Event* st;
+				
+					st = m_topics[m_topic_base].getSpeakTopic(cst->m_answers.front().second);
+					if (st->checkCondition())
+					{
+						EventSystem::setRegion(m_region);
+						st->doEffect();
+					}
+				
+					m_speech.pop_front();
+					cst =0;
+					continue;
+				}
 
 			}
-
-
 
 			if (cst ==0 || m_speech.empty())
 			{
@@ -482,8 +497,7 @@ void Dialogue::update(float time)
 				return;
 			}
 
-			DEBUG5("spoken text %s",cst->m_text.c_str());
-
+			// geht direkt zum naechsten Topic
 			if (!cst->m_answers.empty() && cst->m_text == "#change_topic#")
 			{
 				changeTopic(cst->m_answers.front().second);
@@ -491,6 +505,8 @@ void Dialogue::update(float time)
 			}
 
 			// naechsten Text sprechen
+			DEBUG5("spoken text %s",cst->m_text.c_str());
+
 			cr = static_cast<Creature*>(wo);
 			cr->speakText(*cst);
 

@@ -301,6 +301,13 @@ class EventSystem
 		static int changeTopic(lua_State *L);
 		
 		/**
+		 * \fn static int jumpTopic(lua_State *L)
+		 * \brief Springt ein Topic eines Dialogs an, anschliessend wird mit dem vorhergehenden Topic fortgesetzt
+		 * \param L Lua Status
+		 */
+		static int jumpTopic(lua_State *L);
+		
+		/**
 		 * \fn static int createDialogue(lua_State *L)
 		 * \brief Erzeugt einen neuen Dialog
 		 * \param L Lua Status

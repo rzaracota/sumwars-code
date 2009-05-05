@@ -98,6 +98,22 @@
 			lookAt(npc,getPosition(player));
 		</Effect>
 	</Topic>
+	
+	<Topic name="testtopic" start_option="test" >
+		<Effect>
+			speak('npc',"Hallo",1000);
+			speak('npc', "Nicht reinquatschen",1500)
+			jumpTopic("blahtopic");
+			speak('npc', "Nicht reinquatschen",1500)
+			speak('npc',"Arsch",1000);
+		</Effect>
+	</Topic>
+	
+	<Topic name="blahtopic" >
+		<Effect>
+			unitSpeak(getSpeaker('player'),"Blah!",1000);
+		</Effect>
+	</Topic>	
 </NPC>
 
 <NPC refname="Sergeant Lutterer">

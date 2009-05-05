@@ -44,6 +44,7 @@ void EventSystem::init()
 	lua_register(m_lua, "getLocation", getLocation);
 	lua_register(m_lua, "addLocation", addLocation);
 	lua_register(m_lua, "addArea", addArea);
+	
 	lua_register(m_lua, "startTimer",startTimer);
 	lua_register(m_lua, "insertTrigger",insertTrigger);
 	lua_register(m_lua, "addTriggerVariable", addTriggerVariable);
@@ -56,11 +57,13 @@ void EventSystem::init()
 	lua_register(m_lua, "addUnitCommand", addUnitCommand);
 	lua_register(m_lua, "setCutsceneMode", setCutsceneMode);
 	lua_register(m_lua, "addCameraPosition", addCameraPosition);
+	
 	lua_register(m_lua, "speak", speak);
 	lua_register(m_lua, "unitSpeak", unitSpeak);
 	lua_register(m_lua, "addQuestion", addQuestion);
 	lua_register(m_lua, "addAnswer", addAnswer);
 	lua_register(m_lua, "changeTopic", changeTopic);
+	lua_register(m_lua, "jumpTopic", jumpTopic);
 	lua_register(m_lua, "createDialog", createDialogue);
 	lua_register(m_lua, "createDialogue", createDialogue);
 	lua_register(m_lua, "setTopicBase",setTopicBase );
@@ -69,6 +72,7 @@ void EventSystem::init()
 	lua_register(m_lua, "setRefName", setRefName);
 	lua_register(m_lua, "getRolePlayers", getRolePlayers);
 	lua_register(m_lua, "teleportPlayer", teleportPlayer);
+	
 	lua_register(m_lua, "createEvent", createEvent);
 	lua_register(m_lua, "addCondition", addCondition);
 	lua_register(m_lua, "addEffect", addEffect);
@@ -1095,6 +1099,26 @@ int EventSystem::changeTopic(lua_State *L)
 	return 0;
 }
 
+int EventSystem::jumpTopic(lua_State *L)
+{
+	if (m_dialogue ==0)
+		return 0;
+
+	int argc = lua_gettop(L);
+	if (argc>=1 && lua_isstring(L,1))
+	{
+		std::string topic = lua_tostring(L, 1);
+		m_dialogue->addQuestion("#jump_topic#");
+		m_dialogue->addAnswer("",topic);
+	}
+	else
+	{
+		ERRORMSG("Syntax: addQuestion(string text)");
+	}
+
+	return 0;
+}
+		  
 int EventSystem::createDialogue(lua_State *L)
 {
 	if (m_region ==0)
