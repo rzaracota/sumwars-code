@@ -1219,12 +1219,19 @@ void Region::update(float time)
 		}
 		else
 		{
-			// Polymorpher Funktionsaufruf
-			object->update(time);
 			++iter;
-
 		}
 
+	}
+	
+	for (iter =m_objects->begin(); iter!=m_objects->end(); ++iter)
+	{
+		object = iter->second;
+		if (object->getDestroyed()!=true)
+		{
+			// Polymorpher Funktionsaufruf
+			object->update(time);
+		}
 	}
 	DEBUG5("Update aller WeltObjekte abgeschlossen\n\n");
 

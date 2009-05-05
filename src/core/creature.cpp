@@ -164,6 +164,7 @@ void Creature::die()
 	m_action.m_type =Action::DIE;
 	DEBUG5("object died: %p",this);
 	m_action.m_time =1000;
+	
 	m_action.m_elapsed_time =0;
 
 	addToNetEventMask(NetEvent::DATA_ACTION);
@@ -2591,7 +2592,12 @@ bool Creature::update (float time)
 					setState(STATE_DEAD);
 					m_action.m_type = Action::DEAD;
 					m_action.m_time = 1000;
-
+					// Fliegende Objekte bleiben nicht lange liegen
+					if ((getLayer() & LAYER_BASE) ==0)
+					{
+						m_action.m_time = 50;
+					}
+					
 					addToNetEventMask(NetEvent::DATA_ACTION);
 				}
 				break;
@@ -3727,7 +3733,7 @@ void Creature::getPathDirection(Vector pos,short region, float base_size, short 
 		bsize=4;
 	}
 
-	if ((layer & LAYER_AIR) ==0)
+	if ((layer & LAYER_BASE) ==0)
 	{
 		DEBUG5("switching to flying info");
 		pi = &m_small_flying_path_info;
