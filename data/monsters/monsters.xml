@@ -1156,7 +1156,7 @@ AIR
 
 <!-- Blutschnabel -->
 <Monster type="MONSTER" subtype="bloodbeak" name="bloodbeak" fraction="MONSTER" category="ANIMAL" layer="NORMAL">
-	<Mesh file="woodbird.mesh" />
+	<Mesh file="bloodbeak.mesh" />
 	<Dropslots >
 		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" max_gold="100" min_level="0" max_level="10" magic_prob="0.1" magic_power="1000" />
 		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" max_gold="50" min_level="0" max_level="20" magic_prob="0.2" magic_power="1000" />
@@ -1188,24 +1188,18 @@ AIR
 		attack_range="1"
 	>
 		<Ability type="walk">
-			<Animation name="walk" />
+			<Animation name="fly" />
 		</Ability>
 		
 		<Ability type="attack">
 			<Animation name="attack1" />
-			<Animation name="attack2" />
-			<Animation name="attack3" />
+			<!--<Animation name="attack2" />
+			<Animation name="attack3" />-->
 		</Ability>
 		
 		<Ability type="die">
 			<Animation name="die" />
 		</Ability>
-		
-		<Immunity type="blind"/>
-		<Immunity type="poisoned"/>
-		<Immunity type="berserk"/>
-		<Immunity type="confused"/>
-		<Immunity type="mute"/>
 		
 	</BasicAttributes>
 	
@@ -1428,8 +1422,8 @@ AIR
 	<SubGroup subtype="axe2_skel" number="2" prob="0.7" />
 </MonsterGroup>
 
-<MonsterGroup name="harpies" >
-	<SubGroup subtype="harpy" number="5" prob="0.7" />
+<MonsterGroup name="bloodbeaks" >
+	<SubGroup subtype="bloodbeak" number="5" prob="0.7" />
 </MonsterGroup>
 
 <MonsterGroup name="mandrake_field" >
