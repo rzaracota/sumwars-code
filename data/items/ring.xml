@@ -2,7 +2,7 @@
 
 <!-- Bronzering -->
 <Item type="ring" subtype="bronze_rng" name="bronze ring" size="small">
-	<Image image="set:noMedia.png image:full_image" />
+	<Image image="set:bronze_rng.png image:full_image" />
 	<Mesh file="potion.mesh" />
 	<Attribute
 		level_requirement="2"
@@ -30,7 +30,7 @@
 
 <!-- Bernsteinring -->
 <Item type="ring" subtype="amber_rng" name="amber ring" size="small">
-	<Image image="set:noMedia.png image:full_image" />
+	<Image image="set:bronze_rng.png image:full_image" />
 	<Mesh file="potion.mesh" />
 	<Attribute
 		level_requirement="4"
@@ -58,7 +58,7 @@
 
 <!-- Silberring -->
 <Item type="ring" subtype="silver_rng" name="silver ring" size="small">
-	<Image image="set:noMedia.png image:full_image" />
+	<Image image="set:silver_rng.png image:full_image" />
 	<Mesh file="potion.mesh" />
 	<Attribute
 		level_requirement="8"
@@ -84,9 +84,9 @@
 	/>
 </Item>
 
-<!-- Jettring -->
+<!-- Jettring (schwarzer stein) -->
 <Item type="ring" subtype="jet_rng" name="jet ring" size="small">
-	<Image image="set:noMedia.png image:full_image" />
+	<Image image="set:bronze_rng.png image:full_image" />
 	<Mesh file="potion.mesh" />
 	<Attribute
 		level_requirement="15"
@@ -114,7 +114,7 @@
 
 <!-- Goldring -->
 <Item type="ring" subtype="gold_rng" name="gold ring" size="small">
-	<Image image="set:noMedia.png image:full_image" />
+	<Image image="set:gold_rng.png image:full_image" />
 	<Mesh file="potion.mesh" />
 	<Attribute
 		level_requirement="21"
