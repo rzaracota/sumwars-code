@@ -35,7 +35,7 @@ FIXED_OBJECT
 </ObjectTemplate>
 
 <ObjectTemplate name="$wall" type="FIXED_OBJECT">
-	<Environment name="hills">
+	<Environment name="meadow">
 		<Object name="wall1" />
 		<Object name="wall2" />
 		<Object name="wall3" />
