@@ -4,7 +4,7 @@
 	<Mesh file="pike_pol.mesh" />
 	<Attribute
 		level_requirement="8"
-		character_requirement="15"
+		character_requirement="warrior"
 		min_enchant="35"
 		max_enchant="70"
 		modchance_strength_mod="0.1"

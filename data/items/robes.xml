@@ -40,7 +40,7 @@
 	<Mesh file="armor.mesh" />
 	<Attribute
 			level_requirement="3"
-			character_requirement="15" 
+			character_requirement="mage" 
 			min_enchant="50"
 			max_enchant="100"
 			modchance_health_mod="0.10"
@@ -74,7 +74,7 @@
 	<Mesh file="armor.mesh" />
 	<Attribute
 			level_requirement="5"
-			character_requirement="15" 
+			character_requirement="mage" 
 			min_enchant="60"
 			max_enchant="150"
 			modchance_health_mod="0.10"
@@ -108,7 +108,7 @@
 	<Mesh file="armor.mesh" />
 	<Attribute
 			level_requirement="8"
-			character_requirement="15" 
+			character_requirement="mage" 
 			min_enchant="80"
 			max_enchant="170"
 			modchance_health_mod="0.10"
@@ -142,7 +142,7 @@
 	<Mesh file="armor.mesh" />
 	<Attribute
 			level_requirement="13"
-			character_requirement="15" 
+			character_requirement="mage" 
 			min_enchant="90"
 			max_enchant="220"
 			modchance_health_mod="0.10"
@@ -176,7 +176,7 @@
 	<Mesh file="armor.mesh" />
 	<Attribute
 			level_requirement="19"
-			character_requirement="15" 
+			character_requirement="mage" 
 			min_enchant="100"
 			max_enchant="260"
 			modchance_health_mod="0.10"

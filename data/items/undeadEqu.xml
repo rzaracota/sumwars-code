@@ -4,7 +4,7 @@
 	<Mesh file="broken_shd.mesh" />
 	<Attribute
 		level_requirement="4"
-		character_requirement="15"
+		character_requirement="warrior,priest,mage"
 		min_enchant="35"
 		max_enchant="110"
 		modchance_armor_mod="0.05"
@@ -34,7 +34,7 @@
 	<Mesh file="old_sw.mesh" />
 	<Attribute
 		level_requirement="6"
-		character_requirement="15"
+		character_requirement="warrior"
 		min_enchant="40"
 		max_enchant="100"
 		modchance_strength_mod="0.1"
@@ -50,8 +50,8 @@
 	<EquipEffect />
 		<WeaponAttribute
 		weapon_type="sword"
-		damage_min_physical="11"
-		damage_max_physical="17"
+		damage_min_physical="13"
+		damage_max_physical="19"
 		damage_attack="38"
 		damage_power="39"
 		attack_range="1.4"

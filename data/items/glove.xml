@@ -5,7 +5,7 @@
 	<Mesh file="potion.mesh" />
 	<Attribute
 		level_requirement="2"
-		character_requirement="15"
+		character_requirement="all"
 		min_enchant="20"
 		max_enchant="40"
 		modchance_armor_mod="0.12"
@@ -37,7 +37,7 @@
 	<Mesh file="potion.mesh" />
 	<Attribute
 		level_requirement="7"
-		character_requirement="15"
+		character_requirement="priest,mage"
 		min_enchant="80"
 		max_enchant="200"
 		modchance_armor_mod="0.12"
@@ -69,7 +69,7 @@
 	<Mesh file="potion.mesh" />
 	<Attribute
 		level_requirement="13"
-		character_requirement="15"
+		character_requirement="all"
 		min_enchant="80"
 		max_enchant="200"
 		modchance_armor_mod="0.12"
@@ -101,7 +101,7 @@
 	<Mesh file="potion.mesh" />
 	<Attribute
 		level_requirement="11"
-		character_requirement="15"
+		character_requirement="warrior,priest"
 		min_enchant="20"
 		max_enchant="40"
 		modchance_armor_mod="0.12"
@@ -133,7 +133,7 @@
 	<Mesh file="potion.mesh" />
 	<Attribute
 		level_requirement="15"
-		character_requirement="15"
+		character_requirement="mage,priest"
 		min_enchant="20"
 		max_enchant="40"
 		modchance_armor_mod="0.12"
@@ -165,7 +165,7 @@
 	<Mesh file="potion.mesh" />
 	<Attribute
 		level_requirement="16"
-		character_requirement="15"
+		character_requirement="archer"
 		min_enchant="80"
 		max_enchant="200"
 		modchance_armor_mod="0.12"
@@ -197,7 +197,7 @@
 	<Mesh file="potion.mesh" />
 	<Attribute
 		level_requirement="18"
-		character_requirement="15"
+		character_requirement="warrior,archer"
 		min_enchant="20"
 		max_enchant="40"
 		modchance_armor_mod="0.12"

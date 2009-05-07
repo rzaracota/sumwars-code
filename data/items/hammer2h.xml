@@ -6,7 +6,7 @@
 	<Mesh file="sledge_hmr.mesh" />
 	<Attribute
 		level_requirement="1"
-		character_requirement="15"
+		character_requirement="warrior,priest"
 		min_enchant="40"
 		max_enchant="80"
 		modchance_strength_mod="0.1"
@@ -43,7 +43,7 @@
 	<Mesh file="bronze_hmr.mesh" />
 	<Attribute
 		level_requirement="3"
-		character_requirement="15"
+		character_requirement="priest"
 		min_enchant="60"
 		max_enchant="170"
 		modchance_strength_mod="0.1"
@@ -80,7 +80,7 @@
 	<Mesh file="long_hmr.mesh" />
 	<Attribute
 		level_requirement="5"
-		character_requirement="15"
+		character_requirement="priest"
 		min_enchant="75"
 		max_enchant="260"
 		modchance_strength_mod="0.1"
@@ -118,7 +118,7 @@
 	<Mesh file="sledgehammer.mesh" />
 	<Attribute
 		level_requirement="8"
-		character_requirement="15"
+		character_requirement="priest"
 		min_enchant="80"
 		max_enchant="330"
 		modchance_strength_mod="0.1"
@@ -156,7 +156,7 @@
 	<Mesh file="sledgehammer.mesh" />
 	<Attribute
 		level_requirement="13"
-		character_requirement="15"
+		character_requirement="priest"
 		min_enchant="120"
 		max_enchant="410"
 		modchance_strength_mod="0.1"
@@ -194,7 +194,7 @@
 	<Mesh file="sledgehammer.mesh" />
 	<Attribute
 		level_requirement="19"
-		character_requirement="15"
+		character_requirement="priest"
 		min_enchant="140"
 		max_enchant="510"
 		modchance_strength_mod="0.1"
@@ -234,7 +234,7 @@
 	<Mesh file="sledgehammer.mesh" />
 	<Attribute
 		level_requirement="25"
-		character_requirement="15"
+		character_requirement="priest"
 		min_enchant="160"
 		max_enchant="600"
 		modchance_strength_mod="0.1"
@@ -271,7 +271,7 @@
 	<Mesh file="sledgehammer.mesh" />
 	<Attribute
 		level_requirement="30"
-		character_requirement="15"
+		character_requirement="priest"
 		min_enchant="180"
 		max_enchant="700"
 		modchance_strength_mod="0.1"
@@ -308,7 +308,7 @@
 	<Mesh file="sledgehammer.mesh" />
 	<Attribute
 		level_requirement="35"
-		character_requirement="15"
+		character_requirement="priest"
 		min_enchant="200"
 		max_enchant="810"
 		modchance_strength_mod="0.1"
@@ -346,7 +346,7 @@
 	<Mesh file="sledgehammer.mesh" />
 	<Attribute
 		level_requirement="40"
-		character_requirement="15"
+		character_requirement="priest"
 		min_enchant="220"
 		max_enchant="910"
 		modchance_strength_mod="0.1"
@@ -384,7 +384,7 @@
 	<Mesh file="sledgehammer.mesh" />
 	<Attribute
 		level_requirement="45"
-		character_requirement="15"
+		character_requirement="priest"
 		min_enchant="240"
 		max_enchant="1030"
 		modchance_strength_mod="0.1"
@@ -422,7 +422,7 @@
 	<Mesh file="sledgehammer.mesh" />
 	<Attribute
 		level_requirement="50"
-		character_requirement="15"
+		character_requirement="priest"
 		min_enchant="160"
 		max_enchant="1130"
 		modchance_strength_mod="0.1"
@@ -460,7 +460,7 @@
 	<Mesh file="sledgehammer.mesh" />
 	<Attribute
 		level_requirement="55"
-		character_requirement="15"
+		character_requirement="priest"
 		min_enchant="280"
 		max_enchant="1230"
 		modchance_strength_mod="0.1"
@@ -498,7 +498,7 @@
 	<Mesh file="battleaxe.mesh" />
 	<Attribute
 		level_requirement="60"
-		character_requirement="15"
+		character_requirement="priest"
 		min_enchant="300"
 		max_enchant="1300"
 		modchance_strength_mod="0.1"
@@ -535,7 +535,7 @@
 	<Mesh file="sledgehammer.mesh" />
 	<Attribute
 		level_requirement="65"
-		character_requirement="15"
+		character_requirement="priest"
 		min_enchant="320"
 		max_enchant="1430"
 		modchance_strength_mod="0.1"
@@ -573,7 +573,7 @@
 	<Mesh file="sledgehammer.mesh" />
 	<Attribute
 		level_requirement="70"
-		character_requirement="15"
+		character_requirement="priest"
 		min_enchant="340"
 		max_enchant="1530"
 		modchance_strength_mod="0.1"
@@ -611,7 +611,7 @@
 	<Mesh file="sledgehammer.mesh" />
 	<Attribute
 		level_requirement="75"
-		character_requirement="15"
+		character_requirement="priest"
 		min_enchant="380"
 		max_enchant="1680"
 		modchance_strength_mod="0.1"
@@ -649,7 +649,7 @@
 	<Mesh file="sledgehammer.mesh" />
 	<Attribute
 		level_requirement="80"
-		character_requirement="15"
+		character_requirement="priest"
 		min_enchant="410"
 		max_enchant="2100"
 		modchance_strength_mod="0.1"

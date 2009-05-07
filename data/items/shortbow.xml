@@ -6,7 +6,7 @@
 	<Image image="set:bow.png image:full_image" />
 	<Attribute
 		level_requirement="1"
-		character_requirement="15"
+		character_requirement="archer"
 		min_enchant="30"
 		max_enchant="60"
 		modchance_strength_mod="0.1"
@@ -36,49 +36,13 @@
 	/>
 </Item>
 
-<!-- Goblinbogen -->
-<Item type="weapon" subtype="goblin_sbw" name="goblin bow" size="medium">
-	<Mesh file="goblin_sbw.mesh" />
-	<Image image="set:goblin_sbw.png image:full_image" />
-	<Attribute
-		level_requirement="2"
-		character_requirement="4"
-		min_enchant="20"
-		max_enchant="50"
-		modchance_strength_mod="0.1"
-		modchance_dexterity_mod="0.15"
-		modchance_damage_phys_mod="0.15"
-		modchance_damage_fire_mod="0.10"
-		modchance_damage_ice_mod="0.10"
-		modchance_damage_air_mod="0.10"
-		modchance_damage_mult_phys_mod="0.1"
-		modchance_attack_mod="0.1"
-		modchance_power_mod="0.1"
-	/>
-	<EquipEffect />
-		<WeaponAttribute
-		weapon_type="bow"
-		damage_min_physical="4"
-		damage_max_physical="7"
-		damage_attack="38"
-		damage_power="27"
-		attack_range="8"
-		two_handed="yes"
-		dattack_speed="200"
-	/>
-	<DropChance
-		level="1"
-		probability="1.0"
-	/>
-</Item>
-
 <!-- Eibenkurzbogen -->
 <Item type="weapon" subtype="yew_sbw" name="yew shortbow" size="medium">
 	<Mesh file="bow.mesh" />
 	<Image image="set:bow.png image:full_image" />
 	<Attribute
 		level_requirement="3"
-		character_requirement="15"
+		character_requirement="archer"
 		min_enchant="45"
 		max_enchant="120"
 		modchance_strength_mod="0.10"
@@ -114,7 +78,7 @@
 	<Image image="set:bow.png image:full_image" />
 	<Attribute
 		level_requirement="5"
-		character_requirement="15"
+		character_requirement="archer"
 		min_enchant="60"
 		max_enchant="195"
 		modchance_strength_mod="0.1"
@@ -150,7 +114,7 @@
 	<Mesh file="bow.mesh" />
 	<Attribute
 		level_requirement="8"
-		character_requirement="15"
+		character_requirement="archer"
 		min_enchant="75"
 		max_enchant="255"
 		modchance_strength_mod="0.1"
@@ -187,7 +151,7 @@
 	<Mesh file="bow.mesh" />
 	<Attribute
 		level_requirement="13"
-		character_requirement="15"
+		character_requirement="archer"
 		min_enchant="90"
 		max_enchant="300"
 		modchance_strength_mod="0.1"
@@ -223,7 +187,7 @@
 	<Mesh file="bow.mesh" />
 	<Attribute
 		level_requirement="19"
-		character_requirement="15"
+		character_requirement="archer"
 		min_enchant="70"
 		max_enchant="250"
 		modchance_strength_mod="0.1"
@@ -259,7 +223,7 @@
 	<Mesh file="bow.mesh" />
 	<Attribute
 		level_requirement="25"
-		character_requirement="15"
+		character_requirement="archer"
 		min_enchant="120"
 		max_enchant="450"
 		modchance_strength_mod="0.1"
@@ -297,7 +261,7 @@
 	<Mesh file="bow.mesh" />
 	<Attribute
 		level_requirement="30"
-		character_requirement="15"
+		character_requirement="archer"
 		min_enchant="135"
 		max_enchant="525"
 		modchance_strength_mod="0.1"
@@ -333,7 +297,7 @@
 	<Mesh file="bow.mesh" />
 	<Attribute
 		level_requirement="35"
-		character_requirement="15"
+		character_requirement="archer"
 		min_enchant="150"
 		max_enchant="600"
 		modchance_strength_mod="0.1"
@@ -369,7 +333,7 @@
 	<Mesh file="bow.mesh" />
 	<Attribute
 		level_requirement="40"
-		character_requirement="15"
+		character_requirement="archer"
 		min_enchant="170"
 		max_enchant="675"
 		modchance_strength_mod="0.1"
@@ -405,7 +369,7 @@
 	<Mesh file="bow.mesh" />
 	<Attribute
 		level_requirement="45"
-		character_requirement="15"
+		character_requirement="archer"
 		min_enchant="180"
 		max_enchant="750"
 		modchance_strength_mod="0.1"
@@ -441,7 +405,7 @@
 	<Mesh file="bow.mesh" />
 	<Attribute
 		level_requirement="50"
-		character_requirement="15"
+		character_requirement="archer"
 		min_enchant="195"
 		max_enchant="775"
 		modchance_strength_mod="0.1"
@@ -478,7 +442,7 @@
 	<Mesh file="bow.mesh" />
 	<Attribute
 		level_requirement="55"
-		character_requirement="15"
+		character_requirement="archer"
 		min_enchant="210"
 		max_enchant="900"
 		modchance_strength_mod="0.1"
@@ -515,7 +479,7 @@
 	<Mesh file="bow.mesh" />
 	<Attribute
 		level_requirement="60"
-		character_requirement="15"
+		character_requirement="archer"
 		min_enchant="225"
 		max_enchant="925"
 		modchance_strength_mod="0.1"
@@ -551,7 +515,7 @@
 	<Mesh file="bow.mesh" />
 	<Attribute
 		level_requirement="65"
-		character_requirement="15"
+		character_requirement="archer"
 		min_enchant="240"
 		max_enchant="1050"
 		modchance_strength_mod="0.1"
@@ -587,7 +551,7 @@
 	<Mesh file="bow.mesh" />
 	<Attribute
 		level_requirement="70"
-		character_requirement="15"
+		character_requirement="archer"
 		min_enchant="255"
 		max_enchant="1075"
 		modchance_strength_mod="0.1"
@@ -623,7 +587,7 @@
 	<Mesh file="bow.mesh" />
 	<Attribute
 		level_requirement="75"
-		character_requirement="15"
+		character_requirement="archer"
 		min_enchant="270"
 		max_enchant="1200"
 		modchance_strength_mod="0.1"
@@ -659,7 +623,7 @@
 	<Mesh file="bow.mesh" />
 	<Attribute
 		level_requirement="80"
-		character_requirement="15"
+		character_requirement="archer"
 		min_enchant="300"
 		max_enchant="1500"
 		modchance_strength_mod="0.1"

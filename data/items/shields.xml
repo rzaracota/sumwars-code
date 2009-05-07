@@ -6,7 +6,7 @@
 	<Mesh file="shield.mesh" />
 	<Attribute
 		level_requirement="1"
-		character_requirement="15"
+		character_requirement="warrior,priest,mage"
 		min_enchant="20"
 		max_enchant="40"
 		modchance_armor_mod="0.05"
@@ -36,7 +36,7 @@
 	<Mesh file="shield.mesh" />
 	<Attribute
 		level_requirement="3"
-		character_requirement="15"
+		character_requirement="warrior,priest,mage"
 		min_enchant="30"
 		max_enchant="60"
 		modchance_armor_mod="0.05"
@@ -66,7 +66,7 @@
 	<Mesh file="wood_shd.mesh" />
 	<Attribute
 		level_requirement="5"
-		character_requirement="15"
+		character_requirement="warrior,priest,mage"
 		min_enchant="40"
 		max_enchant="130"
 		modchance_armor_mod="0.05"
@@ -96,7 +96,7 @@
 	<Mesh file="shield.mesh" />
 	<Attribute
 		level_requirement="8"
-		character_requirement="15"
+		character_requirement="warrior,priest,mage"
 		min_enchant="50"
 		max_enchant="160"
 		modchance_armor_mod="0.05"
@@ -126,7 +126,7 @@
 	<Mesh file="shield.mesh" />
 	<Attribute
 		level_requirement="13"
-		character_requirement="15"
+		character_requirement="warrior,priest,mage"
 		min_enchant="60"
 		max_enchant="190"
 		modchance_armor_mod="0.05"
@@ -156,7 +156,7 @@
 	<Mesh file="shield.mesh" />
 	<Attribute
 		level_requirement="19"
-		character_requirement="15"
+		character_requirement="warrior,priest,mage"
 		min_enchant="100"
 		max_enchant="250"
 		modchance_armor_mod="0.05"

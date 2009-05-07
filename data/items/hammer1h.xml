@@ -44,7 +44,7 @@
 	<Mesh file="cermon_hmr.mesh" />
 	<Attribute
 			  level_requirement="3"
-			  character_requirement="15"
+			  character_requirement="priest"
 			  min_enchant="30"
 			  max_enchant="80"
 			  modchance_strength_mod="0.1"
@@ -81,7 +81,7 @@
 	<Mesh file="iron_hmr.mesh" />
 	<Attribute
 		level_requirement="5"
-		character_requirement="15"
+		character_requirement="priest"
 		min_enchant="40"
 		max_enchant="130"
 		modchance_strength_mod="0.1"
@@ -118,7 +118,7 @@
 	<Mesh file="iroclb_hmr.mesh" />
 	<Attribute
 		level_requirement="7"
-		character_requirement="15"
+		character_requirement="warrior,priest"
 		min_enchant="45"
 		max_enchant="140"
 		modchance_strength_mod="0.1"
@@ -155,7 +155,7 @@
 	<Mesh file="hammer.mesh" />
 	<Attribute
 		level_requirement="8"
-		character_requirement="15"
+		character_requirement="priest"
 		min_enchant="40"
 		max_enchant="160"
 		modchance_strength_mod="0.1"
@@ -192,7 +192,7 @@
 	<Mesh file="hammer.mesh" />
 	<Attribute
 		level_requirement="13"
-		character_requirement="15"
+		character_requirement="priest"
 		min_enchant="60"
 		max_enchant="200"
 		modchance_strength_mod="0.1"
@@ -229,7 +229,7 @@
 	<Mesh file="hammer.mesh" />
 	<Attribute
 		level_requirement="19"
-		character_requirement="15"
+		character_requirement="priest"
 		min_enchant="70"
 		max_enchant="250"
 		modchance_strength_mod="0.1"
@@ -266,7 +266,7 @@
 	<Mesh file="hammer.mesh" />
 	<Attribute
 		level_requirement="25"
-		character_requirement="15"
+		character_requirement="priest"
 		min_enchant="80"
 		max_enchant="300"
 		modchance_strength_mod="0.1"
@@ -303,7 +303,7 @@
 	<Mesh file="hammer.mesh" />
 	<Attribute
 		level_requirement="30"
-		character_requirement="15"
+		character_requirement="priest"
 		min_enchant="90"
 		max_enchant="350"
 		modchance_strength_mod="0.1"
@@ -340,7 +340,7 @@
 	<Mesh file="hammer.mesh" />
 	<Attribute
 		level_requirement="35"
-		character_requirement="15"
+		character_requirement="priest"
 		min_enchant="100"
 		max_enchant="400"
 		modchance_strength_mod="0.1"
@@ -377,7 +377,7 @@
 	<Mesh file="hammer.mesh" />
 	<Attribute
 		level_requirement="40"
-		character_requirement="15"
+		character_requirement="priest"
 		min_enchant="110"
 		max_enchant="450"
 		modchance_strength_mod="0.1"
@@ -414,7 +414,7 @@
 	<Mesh file="axe.mesh" />
 	<Attribute
 		level_requirement="45"
-		character_requirement="15"
+		character_requirement="priest"
 		min_enchant="120"
 		max_enchant="500"
 		modchance_strength_mod="0.1"
@@ -451,7 +451,7 @@
 	<Mesh file="hammer.mesh" />
 	<Attribute
 		level_requirement="50"
-		character_requirement="15"
+		character_requirement="priest"
 		min_enchant="130"
 		max_enchant="550"
 		modchance_strength_mod="0.1"
@@ -488,7 +488,7 @@
 	<Mesh file="hammer.mesh" />
 	<Attribute
 		level_requirement="55"
-		character_requirement="15"
+		character_requirement="priest"
 		min_enchant="140"
 		max_enchant="600"
 		modchance_strength_mod="0.1"
@@ -525,7 +525,7 @@
 	<Mesh file="hammer.mesh" />
 	<Attribute
 		level_requirement="60"
-		character_requirement="15"
+		character_requirement="priest"
 		min_enchant="150"
 		max_enchant="650"
 		modchance_strength_mod="0.1"
@@ -562,7 +562,7 @@
 	<Mesh file="axe.mesh" />
 	<Attribute
 		level_requirement="65"
-		character_requirement="15"
+		character_requirement="priest"
 		min_enchant="150"
 		max_enchant="700"
 		modchance_strength_mod="0.1"
@@ -599,7 +599,7 @@
 	<Mesh file="hammer.mesh" />
 	<Attribute
 			  level_requirement="70"
-		character_requirement="15"
+		character_requirement="priest"
 		min_enchant="170"
 		max_enchant="750"
 		modchance_strength_mod="0.1"
@@ -636,7 +636,7 @@
 	<Mesh file="hammer.mesh" />
 	<Attribute
 		level_requirement="75"
-		character_requirement="15"
+		character_requirement="priest"
 		min_enchant="170"
 		max_enchant="780"
 		modchance_strength_mod="0.1"
@@ -673,7 +673,7 @@
 	<Mesh file="hammer.mesh" />
 	<Attribute
 		level_requirement="80"
-		character_requirement="15"
+		character_requirement="priest"
 		min_enchant="200"
 		max_enchant="1000"
 		modchance_strength_mod="0.1"

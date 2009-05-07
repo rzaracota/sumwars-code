@@ -5,7 +5,7 @@
 	<Mesh file="helmet.mesh" />
 	<Attribute
 		level_requirement="1"
-		character_requirement="15"
+		character_requirement="all"
 		min_enchant="20"
 		max_enchant="40"
 		modchance_health_mod="0.1"
@@ -36,7 +36,7 @@
 	<Mesh file="helmet.mesh" />
 	<Attribute
 		level_requirement="3"
-		character_requirement="15"
+		character_requirement="all"
 		min_enchant="30"
 		max_enchant="60"
 		modchance_health_mod="0.1"
@@ -67,7 +67,7 @@
 	<Mesh file="helmet.mesh" />
 	<Attribute
 		level_requirement="5"
-		character_requirement="15"
+		character_requirement="warrior,priest,archer"
 		min_enchant="50"
 		max_enchant="100"
 		modchance_health_mod="0.1"
@@ -98,7 +98,7 @@
 	<Mesh file="helmet.mesh" />
 	<Attribute
 		level_requirement="8"
-		character_requirement="15"
+		character_requirement="warrior,archer"
 		min_enchant="60"
 		max_enchant="150"
 		modchance_health_mod="0.1"
@@ -129,7 +129,7 @@
 	<Mesh file="helmet.mesh" />
 	<Attribute
 		level_requirement="8"
-		character_requirement="15"
+		character_requirement="priest"
 		min_enchant="50"
 		max_enchant="170"
 		modchance_health_mod="0.1"
@@ -160,7 +160,7 @@
 	<Mesh file="helmet.mesh" />
 	<Attribute
 		level_requirement="13"
-		character_requirement="15"
+		character_requirement="warrior,priest"
 		min_enchant="60"
 		max_enchant="190"
 		modchance_health_mod="0.1"
@@ -191,7 +191,7 @@
 	<Mesh file="helmet.mesh" />
 	<Attribute
 		level_requirement="13"
-		character_requirement="15"
+		character_requirement="archer"
 		min_enchant="60"
 		max_enchant="180"
 		modchance_health_mod="0.1"
@@ -222,7 +222,7 @@
 	<Mesh file="helmet.mesh" />
 	<Attribute
 		level_requirement="19"
-		character_requirement="15"
+		character_requirement="warrior,archer"
 		min_enchant="70"
 		max_enchant="210"
 		modchance_health_mod="0.1"
@@ -253,7 +253,7 @@
 	<Mesh file="helmet.mesh" />
 	<Attribute
 		level_requirement="19"
-		character_requirement="15"
+		character_requirement="priest"
 		min_enchant="75"
 		max_enchant="230"
 		modchance_health_mod="0.1"

@@ -6,7 +6,7 @@
 	<Mesh file="spruce_stf.mesh" />
 	<Attribute
 			  level_requirement="1"
-			  character_requirement="15"
+			  character_requirement="mage"
 			  min_enchant="40"
 			  max_enchant="120"
 			  modchance_willpower_mod="0.1"
@@ -39,7 +39,7 @@
 	<Mesh file="aprnt_stf.mesh" />
 	<Attribute
 			  level_requirement="3"
-			  character_requirement="15"
+			  character_requirement="mage"
 			  min_enchant="60"
 			  max_enchant="160"
 			  modchance_willpower_mod="0.1"
@@ -72,7 +72,7 @@
 	<Mesh file="basicStaff.mesh" />
 	<Attribute
 			  level_requirement="5"
-			  character_requirement="15"
+			  character_requirement="mage"
 			  min_enchant="80"
 			  max_enchant="260"
 			  modchance_willpower_mod="0.1"
@@ -104,7 +104,7 @@
 	<Mesh file="basicStaff.mesh" />
 	<Attribute
 			  level_requirement="8"
-			  character_requirement="15"
+			  character_requirement="mage"
 			  min_enchant="100"
 			  max_enchant="340"
 			  modchance_willpower_mod="0.2"
@@ -139,7 +139,7 @@
 	<Mesh file="basicStaff.mesh" />
 	<Attribute
 			  level_requirement="13"
-			  character_requirement="15"
+			  character_requirement="mage"
 			  min_enchant="120"
 			  max_enchant="400"
 			  modchance_willpower_mod="0.1"
@@ -171,7 +171,7 @@
 	<Mesh file="basicStaff.mesh" />
 	<Attribute
 			  level_requirement="19"
-			  character_requirement="15"
+			  character_requirement="mage"
 			  min_enchant="140"
 			  max_enchant="500"
 			  modchance_willpower_mod="0.1"
@@ -203,7 +203,7 @@
 	<Mesh file="basicStaff.mesh" />
 	<Attribute
 			  level_requirement="25"
-			  character_requirement="15"
+			  character_requirement="mage"
 			  min_enchant="160"
 			  max_enchant="600"
 			  modchance_willpower_mod="0.1"
@@ -235,7 +235,7 @@
 	<Mesh file="basicStaff.mesh" />
 	<Attribute
 			  level_requirement="30"
-			  character_requirement="15"
+			  character_requirement="mage"
 			  min_enchant="180"
 			  max_enchant="700"
 			  modchance_willpower_mod="0.1"
@@ -267,7 +267,7 @@
 	<Mesh file="basicStaff.mesh" />
 	<Attribute
 			  level_requirement="35"
-			  character_requirement="15"
+			  character_requirement="mage"
 			  min_enchant="200"
 			  max_enchant="800"
 			  modchance_willpower_mod="0.1"
@@ -299,7 +299,7 @@
 	<Mesh file="basicStaff.mesh" />
 	<Attribute
 			  level_requirement="40"
-			  character_requirement="15"
+			  character_requirement="mage"
 			  min_enchant="220"
 			  max_enchant="900"
 			  modchance_willpower_mod="0.1"
@@ -331,7 +331,7 @@
 	<Mesh file="basicStaff.mesh" />
 	<Attribute
 			  level_requirement="45"
-			  character_requirement="15"
+			  character_requirement="mage"
 			  min_enchant="240"
 			  max_enchant="1000"
 			  modchance_willpower_mod="0.1"
@@ -363,7 +363,7 @@
 	<Mesh file="basicStaff.mesh" />
 	<Attribute
 			  level_requirement="50"
-			  character_requirement="15"
+			  character_requirement="mage"
 			  min_enchant="260"
 			  max_enchant="1100"
 			  modchance_willpower_mod="0.1"
@@ -395,7 +395,7 @@
 	<Mesh file="basicStaff.mesh" />
 	<Attribute
 			  level_requirement="55"
-			  character_requirement="15"
+			  character_requirement="mage"
 			  min_enchant="280"
 			  max_enchant="1200"
 			  modchance_willpower_mod="0.1"
@@ -427,7 +427,7 @@
 	<Mesh file="basicStaff.mesh" />
 	<Attribute
 			  level_requirement="60"
-			  character_requirement="15"
+			  character_requirement="mage"
 			  min_enchant="300"
 			  max_enchant="1300"
 			  modchance_willpower_mod="0.1"
@@ -459,7 +459,7 @@
 	<Mesh file="basicStaff.mesh" />
 	<Attribute
 			  level_requirement="65"
-			  character_requirement="15"
+			  character_requirement="mage"
 			  min_enchant="320"
 			  max_enchant="1400"
 			  modchance_willpower_mod="0.1"
@@ -491,7 +491,7 @@
 	<Mesh file="basicStaff.mesh" />
 	<Attribute
 			  level_requirement="70"
-			  character_requirement="15"
+			  character_requirement="mage"
 			  min_enchant="340"
 			  max_enchant="1500"
 			  modchance_willpower_mod="0.1"
@@ -523,7 +523,7 @@
 	<Mesh file="basicStaff.mesh" />
 	<Attribute
 			  level_requirement="75"
-			  character_requirement="15"
+			  character_requirement="mage"
 			  min_enchant="360"
 			  max_enchant="1600"
 			  modchance_willpower_mod="0.1"
@@ -558,7 +558,7 @@
 	<Mesh file="basicStaff.mesh" />
 	<Attribute
 			  level_requirement="80"
-			  character_requirement="15"
+			  character_requirement="mage"
 			  min_enchant="400"
 			  max_enchant="2000"
 			  modchance_willpower_mod="0.2"

@@ -4,7 +4,7 @@
 	<Image image="set:potion_health.png image:full_image" />
 	<Mesh file="potion.mesh" />
 	<Attribute
-		character_requirement="15"
+		character_requirement="all"
 		price = "20"
   />
   
@@ -24,7 +24,7 @@
 	<Image image="set:potion_health.png image:full_image" />
 	<Mesh file="potion.mesh" />
 	<Attribute
-		character_requirement="15"
+		character_requirement="all"
 		price = "80"
   />
   
@@ -44,7 +44,7 @@
 	<Image image="set:potion_health.png image:full_image" />
 	<Mesh file="potion.mesh" />
 	<Attribute
-		character_requirement="15"
+		character_requirement="all"
 		price = "100"
   />
   
@@ -64,7 +64,7 @@
 	<Image image="set:potion_health.png image:full_image" />
 	<Mesh file="potion.mesh" />
 	<Attribute
-		character_requirement="15"
+		character_requirement="all"
 		price = "100"
   />
   
@@ -84,7 +84,7 @@
 	<Image image="set:potion_health.png image:full_image" />
 	<Mesh file="potion.mesh" />
 	<Attribute
-		character_requirement="15"
+		character_requirement="all"
 		price = "100"
   />
   
@@ -104,7 +104,7 @@
 	<Image image="set:potion_health.png image:full_image" />
 	<Mesh file="potion.mesh" />
 	<Attribute
-		character_requirement="15"
+		character_requirement="all"
 		price = "100"
   />
   
@@ -124,7 +124,7 @@
 	<Image image="set:potion_health.png image:full_image" />
 	<Mesh file="potion.mesh" />
 	<Attribute
-		character_requirement="15"
+		character_requirement="all"
 		price = "100"
   />
   
@@ -144,7 +144,7 @@
 	<Image image="set:potion_health.png image:full_image" />
 	<Mesh file="potion.mesh" />
 	<Attribute
-		character_requirement="15"
+		character_requirement="all"
 		price = "100"
   />
   
@@ -164,7 +164,7 @@
 	<Image image="set:potion_health.png image:full_image" />
 	<Mesh file="potion.mesh" />
 	<Attribute
-		character_requirement="15"
+		character_requirement="all"
 		price = "100"
   />
   
@@ -184,7 +184,7 @@
 	<Image image="set:potion_health.png image:full_image" />
 	<Mesh file="potion.mesh" />
 	<Attribute
-		character_requirement="15"
+		character_requirement="all"
 		price = "100"
   />
   

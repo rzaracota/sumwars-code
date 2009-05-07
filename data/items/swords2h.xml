@@ -1,124 +1,5 @@
 ﻿<?xml version="1.0" ?>
 
-<!-- Bei Gegenstaenden, die keine Waffen sind kann "WeaponAttribute" weggelassen werden. -->
-
-<!-- general
-<Item type="weapon" subtype="short_sw" size="big">
-	<Mesh file="sword.mesh" />
-	<Attribute
-		level_requirement="char"
-		character_requirement="char"
-		price="int"
-		min_enchant="float"
-		max_enchant="float"
-		modchance_health_mod="float"
-		modchance_armor_mod="float"
-		modchance_block_mod="float"
-s		modchance_strength_mod="float"
-s		modchance_dexterity_mod="float"
-s		modchance_magic_power_mod="float"
-		modchance_willpower_mod="float"
-		modchance_resist_phys_mod="float"
-		modchance_resist_fire_mod="float"
-		modchance_resist_ice_mod="float"
-		modchance_resist_air_mod="float"
-		modchance_resist_all_mod="float"
-s		modchance_damage_phys_mod="float"
-s		modchance_damage_fire_mod="float"
-s		modchance_damage_ice_mod="float"
-s		modchance_damage_air_mod="float"
-		modchance_damage_mult_phys_mod="float"
-		modchance_damage_mult_fire_mod="float"
-		modchance_damage_mult_ice_mod="float"
-		modchance_damage_mult_air_mod="float"
-		modchance_attack_speed_mod="float"
-		modchance21="float"
-		modchance_attack_mod="float"
-		modchance_power_mod="float"
-		modchance_mage_fire_skills_mod="float"
-		modchance_mage_ice_skills_mod="float"
-		modchance_mage_air_skills_mod="float"
-		modchance27="float"
-		modchance28="float"
-		modchance29="float"
-		modchance30="float"
-	/>
-	<UseupEffect
-		dhealth="float"
-		dstatus_mod_immune_time0="float"
-		dstatus_mod_immune_time1="float"
-		dstatus_mod_immune_time2="float"
-		dstatus_mod_immune_time3="float"
-		dstatus_mod_immune_time4="float"
-		dstatus_mod_immune_time5="float"
-		dstatus_mod_immune_time6="float"
-		dstatus_mod_immune_time7="float"
-	/>
-	<EquipEffect
-		darmor="short"
-		dblock="short"
-		dmax_health="float"
-		dattack="short"
-		dstrength="short"
-		ddexterity="short"
-		dmagic_power="short"
-		dwillpower="short"
-		dresistances_physical="short"
-		dresistances_cap_physical="short"
-		dresistances_air="short"
-		dresistances_cap_air="short"
-		dresistances_ice="short"
-		dresistances_cap_ice="short"
-		dresistances_fire="short"
-		dresistances_cap_fire="short"
-		dwalk_speed="short"
-		dattack_speed="short"
-		xspecial_flags="int"
-		time="float"
-		xabilities0="int"
-		xabilities1="int"
-		xabilities2="int"
-		xabilities3="int"
-		xabilities4="int"
-		xabilities5="int"
-		ximmunity="char"
-	/>
-	<WeaponAttribute
-		weapon_type="sword"
-		damage_min_physical="float"
-		damage_max_physical="float"
-		damage_min_air="float"
-		damage_max_air="float"
-		damage_min_ice="float"
-		damage_max_ice="float"
-		damage_min_fire="float"
-		damage_max_fire="float"
-		multiplier_physical="float"
-		multiplier_air="float"
-		multiplier_ice="float"
-		multiplier_fire="float"
-		damage_attack="float"
-		damage_power="float"
-		status_mod_power0="short"
-		status_mod_power1="short"
-		status_mod_power2="short"
-		status_mod_power3="short"
-		status_mod_power4="short"
-		status_mod_power5="short"
-		status_mod_power6="short"
-		status_mod_power7="short"
-		special_flags="short"
-		attack_range="float"
-		two_handed="no"
-		dattack_speed="short"
-	/>
-	<DropChance
-		level="int"
-		probability="float"
-	/>
-</Item>
--->
-
 <!-- TWO HANDED SWORDS -->
 <!-- farmers two hand sword-->
 <Item type="weapon" subtype="farm2h_sw" name="farmer sword" size="big">
@@ -126,7 +7,7 @@ s		modchance_damage_air_mod="float"
 	<Mesh file="farm2h_sw.mesh" />
 	<Attribute
 		level_requirement="1"
-		character_requirement="15"
+		character_requirement="warrior,priest"
 		min_enchant="30"
 		max_enchant="70"
 		modchance_strength_mod="0.1"
@@ -163,7 +44,7 @@ s		modchance_damage_air_mod="float"
 	<Mesh file="merc2h_sw.mesh" />
 	<Attribute
 		level_requirement="3"
-		character_requirement="15"
+		character_requirement="warrior"
 		min_enchant="55"
 		max_enchant="160"
 		modchance_strength_mod="0.1"
@@ -200,7 +81,7 @@ s		modchance_damage_air_mod="float"
 	<Mesh file="merc2h_sw.mesh" />
 	<Attribute
 		level_requirement="5"
-		character_requirement="15"
+		character_requirement="warrior"
 		min_enchant="60"
 		max_enchant="260"
 		modchance_strength_mod="0.1"
@@ -237,7 +118,7 @@ s		modchance_damage_air_mod="float"
 	<Mesh file="merc2h_sw.mesh" />
 	<Attribute
 		level_requirement="8"
-		character_requirement="15"
+		character_requirement="warrior"
 		min_enchant="80"
 		max_enchant="340"
 		modchance_strength_mod="0.1"
@@ -274,7 +155,7 @@ s		modchance_damage_air_mod="float"
 	<Mesh file="merc2h_sw.mesh" />
 	<Attribute
 		level_requirement="13"
-		character_requirement="15"
+		character_requirement="warrior"
 		min_enchant="100"
 		max_enchant="400"
 		modchance_strength_mod="0.1"
@@ -311,7 +192,7 @@ s		modchance_damage_air_mod="float"
 	<Mesh file="merc2h_sw.mesh" />
 	<Attribute
 		level_requirement="19"
-		character_requirement="15"
+		character_requirement="warrior"
 		min_enchant="130"
 		max_enchant="500"
 		modchance_strength_mod="0.1"
@@ -348,7 +229,7 @@ s		modchance_damage_air_mod="float"
 	<Mesh file="merc2h_sw.mesh" />
 	<Attribute
 		level_requirement="25"
-		character_requirement="15"
+		character_requirement="warrior"
 		min_enchant="120"
 		max_enchant="520"
 		modchance_strength_mod="0.1"
@@ -385,7 +266,7 @@ s		modchance_damage_air_mod="float"
 	<Mesh file="merc2h_sw.mesh" />
 	<Attribute
 		level_requirement="30"
-		character_requirement="15"
+		character_requirement="warrior"
 		min_enchant="170"
 		max_enchant="700"
 		modchance_strength_mod="0.1"
@@ -422,7 +303,7 @@ s		modchance_damage_air_mod="float"
 	<Mesh file="merc2h_sw.mesh" />
 	<Attribute
 		level_requirement="35"
-		character_requirement="15"
+		character_requirement="warrior"
 		min_enchant="180"
 		max_enchant="750"
 		modchance_strength_mod="0.1"
@@ -459,7 +340,7 @@ s		modchance_damage_air_mod="float"
 	<Mesh file="merc2h_sw.mesh" />
 	<Attribute
 		level_requirement="40"
-		character_requirement="15"
+		character_requirement="warrior"
 		min_enchant="220"
 		max_enchant="900"
 		modchance_strength_mod="0.1"
@@ -496,7 +377,7 @@ s		modchance_damage_air_mod="float"
 	<Mesh file="merc2h_sw.mesh" />
 	<Attribute
 		level_requirement="45"
-		character_requirement="15"
+		character_requirement="warrior"
 		min_enchant="240"
 		max_enchant="1000"
 		modchance_strength_mod="0.1"
@@ -535,7 +416,7 @@ s		modchance_damage_air_mod="float"
 	<Mesh file="merc2h_sw.mesh" />
 	<Attribute
 		level_requirement="50"
-		character_requirement="15"
+		character_requirement="warrior"
 		min_enchant="260"
 		max_enchant="1100"
 		modchance_strength_mod="0.1"
@@ -572,7 +453,7 @@ s		modchance_damage_air_mod="float"
 	<Mesh file="merc2h_sw.mesh" />
 	<Attribute
 		level_requirement="55"
-		character_requirement="15"
+		character_requirement="warrior"
 		min_enchant="200"
 		max_enchant="1200"
 		modchance_strength_mod="0.1"
@@ -609,7 +490,7 @@ s		modchance_damage_air_mod="float"
 	<Mesh file="merc2h_sw.mesh" />
 	<Attribute
 		level_requirement="60"
-		character_requirement="15"
+		character_requirement="warrior"
 		min_enchant="280"
 		max_enchant="1400"
 		modchance_strength_mod="0.1"
@@ -646,7 +527,7 @@ s		modchance_damage_air_mod="float"
 	<Mesh file="merc2h_sw.mesh" />
 	<Attribute
 		level_requirement="65"
-		character_requirement="15"
+		character_requirement="warrior"
 		min_enchant="320"
 		max_enchant="1400"
 		modchance_strength_mod="0.1"
@@ -685,7 +566,7 @@ s		modchance_damage_air_mod="float"
 	<Mesh file="merc2h_sw.mesh" />
 	<Attribute
 		level_requirement="70"
-		character_requirement="15"
+		character_requirement="warrior"
 		min_enchant="320"
 		max_enchant="1500"
 		modchance_strength_mod="0.1"
@@ -722,7 +603,7 @@ s		modchance_damage_air_mod="float"
 	<Mesh file="merc2h_sw.mesh" />
 	<Attribute
 		level_requirement="75"
-		character_requirement="15"
+		character_requirement="warrior"
 		min_enchant="350"
 		max_enchant="1600"
 		modchance_strength_mod="0.1"
@@ -759,7 +640,7 @@ s		modchance_damage_air_mod="float"
 	<Mesh file="merc2h_sw.mesh" />
 	<Attribute
 		level_requirement="80"
-		character_requirement="15"
+		character_requirement="warrior"
 		min_enchant="380"
 		max_enchant="2000"
 		modchance_strength_mod="0.1"

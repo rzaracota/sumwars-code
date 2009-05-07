@@ -6,7 +6,7 @@
 	<Mesh file="great_axe.mesh" />
 	<Attribute
 		level_requirement="1"
-		character_requirement="15"
+		character_requirement="warrior,priest"
 		min_enchant="35"
 		max_enchant="70"
 		modchance_strength_mod="0.1"
@@ -43,7 +43,7 @@
 	<Mesh file="great_axe.mesh" />
 	<Attribute
 		level_requirement="3"
-		character_requirement="15"
+		character_requirement="warrior,priest"
 		min_enchant="55"
 		max_enchant="160"
 		modchance_strength_mod="0.1"
@@ -80,7 +80,7 @@
 	<Mesh file="great_axe.mesh" />
 	<Attribute
 		level_requirement="5"
-		character_requirement="15"
+		character_requirement="warrior,priest"
 		min_enchant="75"
 		max_enchant="260"
 		modchance_strength_mod="0.1"
@@ -117,7 +117,7 @@
 	<Mesh file="great_axe.mesh" />
 	<Attribute
 		level_requirement="8"
-		character_requirement="15"
+		character_requirement="warrior,priest"
 		min_enchant="75"
 		max_enchant="320"
 		modchance_strength_mod="0.1"
@@ -154,7 +154,7 @@
 	<Mesh file="great_axe.mesh" />
 	<Attribute
 		level_requirement="13"
-		character_requirement="15"
+		character_requirement="warrior,priest"
 		min_enchant="115"
 		max_enchant="400"
 		modchance_strength_mod="0.1"
@@ -191,7 +191,7 @@
 	<Mesh file="great_axe.mesh" />
 	<Attribute
 		level_requirement="19"
-		character_requirement="15"
+		character_requirement="warrior,priest"
 		min_enchant="135"
 		max_enchant="500"
 		modchance_strength_mod="0.1"
@@ -228,7 +228,7 @@
 	<Mesh file="great_axe.mesh" />
 	<Attribute
 		level_requirement="25"
-		character_requirement="15"
+		character_requirement="warrior,priest"
 		min_enchant="155"
 		max_enchant="600"
 		modchance_strength_mod="0.1"
@@ -265,7 +265,7 @@
 	<Mesh file="great_axe.mesh" />
 	<Attribute
 		level_requirement="30"
-		character_requirement="15"
+		character_requirement="warrior,priest"
 		min_enchant="175"
 		max_enchant="700"
 		modchance_strength_mod="0.1"
@@ -302,7 +302,7 @@
 	<Mesh file="great_axe.mesh" />
 	<Attribute
 		level_requirement="35"
-		character_requirement="15"
+		character_requirement="warrior,priest"
 		min_enchant="195"
 		max_enchant="800"
 		modchance_strength_mod="0.1"
@@ -339,7 +339,7 @@
 	<Mesh file="great_axe.mesh" />
 	<Attribute
 		level_requirement="40"
-		character_requirement="15"
+		character_requirement="warrior,priest"
 		min_enchant="215"
 		max_enchant="900"
 		modchance_strength_mod="0.1"
@@ -376,7 +376,7 @@
 	<Mesh file="great_axe.mesh" />
 	<Attribute
 		level_requirement="45"
-		character_requirement="15"
+		character_requirement="warrior,priest"
 		min_enchant="235"
 		max_enchant="1000"
 		modchance_strength_mod="0.1"
@@ -413,7 +413,7 @@
 	<Mesh file="great_axe.mesh" />
 	<Attribute
 		level_requirement="50"
-		character_requirement="15"
+		character_requirement="warrior,priest"
 		min_enchant="255"
 		max_enchant="1100"
 		modchance_strength_mod="0.1"
@@ -450,7 +450,7 @@
 	<Mesh file="great_axe.mesh" />
 	<Attribute
 		level_requirement="55"
-		character_requirement="15"
+		character_requirement="warrior,priest"
 		min_enchant="275"
 		max_enchant="1200"
 		modchance_strength_mod="0.1"
@@ -487,7 +487,7 @@
 	<Mesh file="great_axe.mesh" />
 	<Attribute
 		level_requirement="60"
-		character_requirement="15"
+		character_requirement="warrior,priest"
 		min_enchant="300"
 		max_enchant="1350"
 		modchance_strength_mod="0.1"
@@ -524,7 +524,7 @@
 	<Mesh file="great_axe.mesh" />
 	<Attribute
 		level_requirement="65"
-		character_requirement="15"
+		character_requirement="warrior,priest"
 		min_enchant="315"
 		max_enchant="1400"
 		modchance_strength_mod="0.1"
@@ -561,7 +561,7 @@
 	<Mesh file="great_axe.mesh" />
 	<Attribute
 		level_requirement="70"
-		character_requirement="15"
+		character_requirement="warrior,priest"
 		min_enchant="335"
 		max_enchant="1500"
 		modchance_strength_mod="0.1"
@@ -598,7 +598,7 @@
 	<Mesh file="great_axe.mesh" />
 	<Attribute
 		level_requirement="75"
-		character_requirement="15"
+		character_requirement="warrior,priest"
 		min_enchant="375"
 		max_enchant="1600"
 		modchance_strength_mod="0.1"
@@ -637,7 +637,7 @@
 	<Mesh file="great_axe.mesh" />
 	<Attribute
 		level_requirement="80"
-		character_requirement="15"
+		character_requirement="warrior,priest"
 		min_enchant="395"
 		max_enchant="2000"
 		modchance_strength_mod="0.1"
