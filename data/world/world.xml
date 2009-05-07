@@ -55,7 +55,7 @@
 		<Settings dimx="8" dimy="8" region_template="councilhall" ground="grass1"/>
 		<ExitDirections north="true" south="false" west="false" east="false" />
 		<Exits>
-			<Exit name="exit_north" destination_region="medMercCamp" destination_location="entry_south" >
+			<Exit name="exit_north" destination_region="medBackalley" destination_location="entry_south" >
 				<Shape shape="RECT" extent_x="4.0" extent_y ="4.0" />
 			</Exit>
 		</Exits>
@@ -64,6 +64,26 @@
 			<Environment height="1.0" name="meadow" />
 		</Environments>
 	</Region>
+
+<!-- Medair, Hintergassen zwischen Konzil und Soeldnerlager-->
+	<Region id="17" name="medBackalley">
+		<Settings dimx="12" dimy="12" area_percent="0.3" complexity="0.3" granularity="4"  ground="grass1"/>
+		
+		<ExitDirections north="true" south="true" west="false" east="false" />
+		
+		<Exits>
+			<Exit name="exit_north" destination_region="medMercCamp" destination_location="entry_south" >
+				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
+			</Exit>
+			<Exit name="exit_south" destination_region="elCnlLobby" destination_location="entry_north" >
+				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
+			</Exit>
+		</Exits>
+		
+		<Environments>
+			<Environment height="1.0" name="meadow" />
+		</Environments>
+	</Region>	
 	
 <!-- Medair, Soeldnerlager [Stadt]-->
 <!-- Orte: Fenor Marken -->
@@ -75,7 +95,7 @@
 		<ExitDirections north="true" south="true" west="false" east="false" />
 		
 		<Exits>
-			<Exit name="exit_south" destination_region="elCnlLobby" destination_location="entry_north" >
+			<Exit name="exit_south" destination_region="medBackalley" destination_location="entry_north" >
 				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
 			</Exit>
 
@@ -132,7 +152,6 @@
 		<SpawnGroups>
 			<SpawnGroup group_name="goblins_l1" number="18" />
 			<SpawnGroup group_name="goblins_bow_l1" number="12" />
-			<SpawnGroup group_name="goblin_bone" number="3" />
 		</SpawnGroups>
 	</Region>
 
@@ -165,8 +184,9 @@
 		</NamedObjectGroups>
 		
 		<SpawnGroups>
-			<SpawnGroup group_name="goblins_bow_l3" number="18" />
+			<SpawnGroup group_name="goblins_bow_l3" number="16" />
 			<SpawnGroup group_name="goblins_robber_l3" number="12" />
+			<SpawnGroup group_name="goblin_bone" number="3" />
 		</SpawnGroups>
 	</Region>
 	
@@ -178,7 +198,7 @@
 		<ExitDirections north="true" south="true" west="false" east="false" />
 		
 		<Exits>
-			<Exit name="exit_south" destination_region="aisPlains" destination_location="entry_crypt" >
+			<Exit name="exit_south" destination_region="aisPlains" destination_location="exit_crypt" >
 				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
 			</Exit>
 			<Exit name="exit_north" destination_region="aisMaylonsGraveL2" destination_location="entry_north" >
@@ -238,6 +258,11 @@
 		<Environments>
 			<Environment height="1.0" name="meadow" />
 		</Environments>
+		
+		<SpawnGroups>
+			<SpawnGroup group_name="bloodbeaks" number="18" />
+			<SpawnGroup group_name="goblins_robber_l3" number="12" />
+		</SpawnGroups>
 	</Region>
 	
 <!-- Aisen, Joringsbrueck [laendliches Dorf] -->
@@ -297,7 +322,7 @@
 <!-- Aisen, Noerdliche Wiese [Feld und Wiesen]; ungefaehr 20 Min, eher offen; Level 7 - 12; Sidequests aus Joringsbrueck -->
 <!-- Der Bauernhof(Template) -->
 <!-- Kraeuterbuesche -->
-<!-- Goblinschlaeger, Goblinraeuber, Goblinjaeger, Goblinhunde, Goblinkrieger, Goblinschamanen? -->
+<!-- Goblinschlaeger, Goblinraeuber, Goblinjaeger, Goblinhunde, Goblinkrieger, Goblinschamanen -->
 	<Region id="8" name="aisNorthMeadow">
 		<Settings dimx="32" dimy="32" area_percent="0.4" complexity="0.3" granularity="6"  ground="grass1"/>
 		
@@ -331,7 +356,7 @@
 	</Region>
 	
 <!-- Aisen, Joringsforst [Wald und Wiesen]; ungefaehr 30 Min, halbwegs offen; Level 7 - 12 -->	
-<!-- Goblinschlaeger, Goblinraeuber, Goblinjaeger, Goblinhunde, Goblinkrieger, Goblinschamanen?, Waldalraunen? -->
+<!-- Goblinschlaeger, Goblinraeuber, Goblinjaeger, Goblinhunde, Goblinkrieger, Goblinschamanen, Waldalraunen? -->
 	<Region id="9" name="aisJoringsforest">
 		<Settings dimx="32" dimy="32" area_percent="0.4" complexity="0.3" granularity="6"  ground="grass1"/>
 		
@@ -353,7 +378,7 @@
 	
 <!-- Aisen, Feenwald [Wald und Steine]; ungefaehr 60 Min, eher verwinkelt; Level 10 - 16 -->
 <!-- Robs Versteck(Template) -->
-<!-- Goblinschlaeger, Goblinraeuber, Goblinjaeger, Goblinhunde, Goblinkrieger, Goblinschamanen?, Waldalraunen?, Feen? -->
+<!-- Goblinschlaeger, Goblinraeuber, Goblinjaeger, Goblinhunde, Goblinkrieger, Goblinschamanen, Waldalraunen?, Feen? -->
 	<Region id="10" name="aisFairyforest">
 		<Settings dimx="32" dimy="32" area_percent="0.4" complexity="0.3" granularity="6"  ground="grass1"/>
 		
@@ -369,7 +394,7 @@
 		</Exits>
 		
 		<Environments>
-			<Environment height="1.0" name="meadow" />
+			<Environment height="1.0" name="hills" />
 		</Environments>
 		
 		<NamedObjectGroups>
@@ -378,11 +403,11 @@
 	</Region>
 	
 <!-- Aisen, Wolfsfelsen [Wald und Gebirge]; ungefaehr 35 Min, eher verwinkelt; Level 14 - 17 -->
-<!-- Goblinschlaeger, Goblinraeuber, Goblinjaeger, Goblinhunde, Goblinkrieger, Goblinschamanen?, Harpien, wenige Untote, evtl. ein Lcih oder Neromant -->
+<!-- Goblinschlaeger, Goblinraeuber, Goblinjaeger, Goblinhunde, Goblinkrieger, Goblinschamanen?, Blutschnaebel, wenige Untote, evtl. ein Lich oder Nekromant -->
 	<Region id="11" name="aisWolfstones">
-		<Settings dimx="32" dimy="32" area_percent="0.4" complexity="0.3" granularity="6"  ground="grass1"/>
+		<Settings dimx="12" dimy="12" area_percent="0.4" complexity="0.3" granularity="6"  ground="grass1"/>
 		
-		<ExitDirections north="true" south="true" west="false" east="false" />
+		<ExitDirections north="true" south="true" west="true" east="false" />
 		
 		<Exits>
 			<Exit name="exit_south" destination_region="aisFairyforest" destination_location="entry_north" >
@@ -391,13 +416,250 @@
 			<Exit name="exit_north" destination_region="dwarfenfroward" destination_location="entry_south" >
 				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
 			</Exit>
+			<Exit name="exit_west" destination_region="aisWestwoods" destination_location="entry_east" >
+				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
+			</Exit>
 		</Exits>
 		
 		<Environments>
-			<Environment height="1.0" name="meadow" />
+			<Environment height="1.0" name="hills" />
+		</Environments>
+	</Region>
+
+<!-- Aisen, Westwaelder [Wald und Gebirge]; ungefähr 30 Min, eher verwinkelt; Level 15 - 18 -->
+<!-- Goblins, Goblinhunde, Blutschnaebel-->	
+	<Region id="18" name="aisWestwoods">
+		<Settings dimx="12" dimy="12" area_percent="0.4" complexity="0.3" granularity="6"  ground="grass1"/>
+		
+		<ExitDirections north="false" south="false" west="true" east="true" />
+		
+		<Exits>
+			<Exit name="exit_east" destination_region="aisWolfstones" destination_location="entry_west" >
+				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
+			</Exit>
+			<Exit name="exit_west" destination_region="aisMounPath" destination_location="entry_east" >
+				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
+			</Exit>
+		</Exits>
+		
+		<Environments>
+			<Environment height="1.0" name="hills" />
+		</Environments>
+	</Region>
+
+<!-- Aisen, Gebirgspfad [Wald und Gebirge]; Template -->
+<!-- Ort von Szene 5 -->
+	<Region id="19" name="aisMounPath">
+		<Settings dimx="12" dimy="12" area_percent="0.4" complexity="0.3" granularity="6"  ground="grass1"/>
+		
+		<ExitDirections north="true" south="false" west="false" east="true" />
+		
+		<Exits>
+			<Exit name="exit_east" destination_region="aisWestwoods" destination_location="entry_west" >
+				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
+			</Exit>
+			<Exit name="exit_north" destination_region="aisMistslope" destination_location="entry_south" >
+				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
+			</Exit>
+		</Exits>
+		
+		<Environments>
+			<Environment height="1.0" name="hills" />
 		</Environments>
 	</Region>
 	
+<!-- Aisen, Nebelhang [Wald und Gebirge]; ca. 20 Minuten; eher offen; Level 16 - 18 -->
+<!-- Goblins, einige Untote, Blutschnaebel -->
+	<Region id="20" name="aisMistslope">
+		<Settings dimx="12" dimy="12" area_percent="0.4" complexity="0.3" granularity="6"  ground="grass1"/>
+		
+		<ExitDirections north="true" south="true" west="false" east="false" />
+		
+		<Exits>
+			<Exit name="exit_south" destination_region="aisMounPath" destination_location="entry_north" >
+				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
+			</Exit>
+			<Exit name="exit_north" destination_region="grayCurseCave" destination_location="entry_south" >
+				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
+			</Exit>
+		</Exits>
+		
+		<Environments>
+			<Environment height="1.0" name="hills" />
+		</Environments>
+	</Region>
+	
+<!-- Graue Himmelsleiter, Verfluchte Hoehle; [Hoehle]; ca 30 Minuten; Level 17 - 19 -->
+<!-- Goblins, Goblinhunde-->
+	<Region id="21" name="grayCurseCave">
+		<Settings dimx="12" dimy="12" area_percent="0.4" complexity="0.3" granularity="6"  ground="grass1"/>
+		
+		<ExitDirections north="true" south="true" west="true" east="false" />
+		
+		<Exits>
+			<Exit name="exit_south" destination_region="aisMistslope" destination_location="entry_north" >
+				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
+			</Exit>
+			<Exit name="exit_north" destination_region="grayCurseCaveDep" destination_location="entry_south" >
+				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
+			</Exit>
+			<Exit name="exit_west" destination_region="grayCurseGrotto" destination_location="entry_east" >
+				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
+			</Exit>
+
+		</Exits>
+		
+		<Environments>
+			<Environment height="1.0" name="hills" />
+		</Environments>
+	</Region>
+	
+<!-- Graue Himmelsleiter, Verfluchte Grotte; [Hoehle]; ca. 25 Min; Level 17 - 19 -->
+<!-- Goblins, Goblinhunde -->
+	<Region id="22" name="grayCurseGrotto">
+		<Settings dimx="12" dimy="12" area_percent="0.4" complexity="0.3" granularity="6"  ground="grass1"/>
+		
+		<ExitDirections north="true" south="false" west="true" east="true" />
+		
+		<Exits>
+			<Exit name="exit_east" destination_region="grayCurseCave" destination_location="entry_west" >
+				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
+			</Exit>
+			<Exit name="exit_north" destination_region="grayCurseGrotDep" destination_location="entry_south" >
+				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
+			</Exit>
+			<Exit name="exit_west" destination_region="grayWolfcave" destination_location="entry_east" >
+				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
+			</Exit>
+		</Exits>
+		
+		<Environments>
+			<Environment height="1.0" name="hills" />
+		</Environments>
+	</Region>
+	
+<!-- Graue Himmelsleiter, Wolfshoehle; [Hoehle]; ca. 20 Min; Level 17- 19 -->
+<!-- Goblinhunde, DER Goblinhundemonsterboss -->
+	<Region id="23" name="grayWolfcave">
+		<Settings dimx="12" dimy="12" area_percent="0.4" complexity="0.3" granularity="6"  ground="grass1"/>
+		
+		<ExitDirections north="false" south="false" west="false" east="true" />
+		
+		<Exits>
+			<Exit name="exit_east" destination_region="grayCurseGrotto" destination_location="entry_west" >
+				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
+			</Exit>
+		</Exits>
+		
+		<Environments>
+			<Environment height="1.0" name="hills" />
+		</Environments>
+	</Region>
+	
+<!-- Graue Himmelsleiter, Verfluchte Grotte, Tiefe; ca. 20 Min; Level 17 - 19 -->
+<!-- Goblins -->
+	<Region id="24" name="grayCurseGrotDep">
+		<Settings dimx="12" dimy="12" area_percent="0.4" complexity="0.3" granularity="6"  ground="grass1"/>
+		
+		<ExitDirections north="false" south="true" west="false" east="false" />
+		
+		<Exits>
+			<Exit name="exit_south" destination_region="grayCurseGrotto" destination_location="entry_north" >
+				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
+			</Exit>
+		</Exits>
+		
+		<Environments>
+			<Environment height="1.0" name="hills" />
+		</Environments>
+	</Region>
+	
+<!-- Graue Himmelsleiter, Verfluchte Hoehle, Tiefe; ca. 30 Min; Level 17 - 20 -->
+<!-- Untote -->
+<!-- Ort: Der Spalt (Wo der Lich mit seinen Skeletten graebt, ein Template)-->
+<!-- Beide Ausgaenge muessen verschließbar sein. Der Suedausgang wird verschlossen, der Westausgang geoeffnet -->
+	<Region id="25" name="grayCurseCaveDep">
+		<Settings dimx="12" dimy="12" area_percent="0.4" complexity="0.3" granularity="6"  ground="grass1"/>
+		
+		<ExitDirections north="false" south="true" west="false" east="true" />
+		
+		<Exits>
+			<Exit name="exit_south" destination_region="grayCurseCave" destination_location="entry_north" >
+				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
+			</Exit>
+			<Exit name="exit_east" destination_region="grayCurseCaveEast" destination_location="entry_west" >
+				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
+			</Exit>
+		</Exits>
+		
+		<Environments>
+			<Environment height="1.0" name="hills" />
+		</Environments>
+	</Region>
+	
+<!-- Graue Himmelsleiter, Verfluchte Hoehle, Osten -->
+<!-- Untote -->
+	<Region id="26" name="grayCurseCaveEast">
+		<Settings dimx="12" dimy="12" area_percent="0.4" complexity="0.3" granularity="6"  ground="grass1"/>
+		
+		<ExitDirections north="false" south="false" west="true" east="true" />
+		
+		<Exits>
+			<Exit name="exit_west" destination_region="grayCurseCaveDep" destination_location="entry_east" >
+				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
+			</Exit>
+			<Exit name="exit_east" destination_region="grayCurseLake" destination_location="entry_west" >
+				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
+			</Exit>
+		</Exits>
+		
+		<Environments>
+			<Environment height="1.0" name="hills" />
+		</Environments>
+	</Region>
+	
+<!-- Graue Himmelsleiter, Verfluchter See; Template-->
+<!-- Das Teichmonster-->
+	<Region id="27" name="grayCurseLake">
+		<Settings dimx="12" dimy="12" area_percent="0.4" complexity="0.3" granularity="6"  ground="grass1"/>
+		
+		<ExitDirections north="false" south="false" west="true" east="true" />
+		
+		<Exits>
+			<Exit name="exit_west" destination_region="grayCurseCaveEast" destination_location="entry_east" >
+				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
+			</Exit>
+			<Exit name="exit_east" destination_region="aisEastslope" destination_location="entry_west" >
+				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
+			</Exit>
+		</Exits>
+		
+		<Environments>
+			<Environment height="1.0" name="hills" />
+		</Environments>
+	</Region>
+	
+<!-- Aisen, Osthang; [Wald, Gebirge]; ca. 20 Min; Level 18 - 21 -->
+<!-- Goblins, Goblinhunde, Blutschnaebel -->	
+	<Region id="28" name="aisEastslope">
+		<Settings dimx="12" dimy="12" area_percent="0.4" complexity="0.3" granularity="6"  ground="grass1"/>
+		
+		<ExitDirections north="false" south="false" west="true" east="true" />
+		
+		<Exits>
+			<Exit name="exit_west" destination_region="grayCurseLake" destination_location="entry_east" >
+				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
+			</Exit>
+			<Exit name="exit_east" destination_region="dwarfenfroward" destination_location="entry_west" >
+				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
+			</Exit>
+		</Exits>
+		
+		<Environments>
+			<Environment height="1.0" name="hills" />
+		</Environments>
+	</Region>
+
 <!-- Aisen, Zwergentrutz [Grenzfeste] -->
 <!-- Entsatz -->
 <!-- Der Lich -->
@@ -406,13 +668,16 @@
 	<Region id="12" name="dwarfenfroward">
 		<Settings dimx="32" dimy="32" region_template="dwarfenfroward"  ground="grass1"/>
 		
-		<ExitDirections north="true" south="true" west="false" east="false" />
+		<ExitDirections north="true" south="true" west="true" east="false" />
 		
 		<Exits>
 			<Exit name="exit_south" destination_region="aisWolfstones" destination_location="entry_north" >
 				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
 			</Exit>
 			<Exit name="exit_north" destination_region="necFieldcamp" destination_location="entry_south" >
+				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
+			</Exit>
+			<Exit name="exit_west" destination_region="aisEastslope" destination_location="entry_east" >
 				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
 			</Exit>
 			<Exit name="exit_rampart" destination_region="dwarfenfrowardRampart" destination_location="entry_south" >
@@ -438,11 +703,11 @@
 		</Event>
 	</Region>
 	
-<!-- Aisen, Zwergentrutz Stadtmauer; ungefaehr 20 min, relativ starres Design; Level 16 - 19 -->
+<!-- Aisen, Zwergentrutz Stadtmauer; ungefaehr 20 min, Template; Level 16 - 19 -->
 <!-- Zombies, Skelette -->
 <!-- Locations fuer die Verteidigenden Wachen? -->
 	<Region id="13" name="dwarfenfrowardRampart">
-		<Settings dimx="32" dimy="8" area_percent="0.3" complexity="0.3" granularity="4"  ground="grass1"/>
+		<Settings dimx="32" dimy="12" area_percent="0.3" complexity="0.3" granularity="4"  ground="grass1"/>
 		
 		<ExitDirections north="true" south="true" west="false" east="false" />
 		
