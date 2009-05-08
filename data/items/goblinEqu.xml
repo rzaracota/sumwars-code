@@ -2,7 +2,7 @@
 <!-- WAR, PRI, ARC, MAG-->
 <!-- Zusaetzliches Mesh: gobLeg_arm.mesh -->
 <Item type="armor" subtype="goblin_arm" name="goblin armor" size="medium">
-	<Image image="set:noMedia.png image:full_image" />
+	<Image image="set:gobLeg_arm.png image:full_image" />
 	<Mesh file="armor.mesh" />
 	<Attribute
 			level_requirement="3"
@@ -33,8 +33,8 @@
 
 <!-- Goblinarmschiene -->
 <!-- WAR, PRI, ARC, MAG -->
-<Item type="gloves" subtype="leath_glv" name="goblin bracer" size="medium">
-	<Image image="set:noMedia.png image:full_image" />
+<Item type="gloves" subtype="goblin_glv" name="goblin bracer" size="medium">
+	<Image image="set:goblin_glv.png image:full_image" />
 	<Mesh file="goblin_glv.mesh" />
 	<Attribute
 		level_requirement="2"
@@ -65,7 +65,7 @@
 
 <!-- Schamanenmaske -->
 <Item type="helmet" subtype="goblin_hlm" name="shaman mask" size="medium">
-	<Image image="set:noMedia.png image:full_image" />
+	<Image image="set:goblin_hlm.png image:full_image" />
 	<Mesh file="goblin_hlm.mesh" />
 	<Attribute
 			level_requirement="5"
@@ -171,7 +171,7 @@
 
 <!-- Schamanenstab -->
 <Item type="weapon" subtype="goblin_stf" name="shaman staff" size="big">
-	<Image image="set:spruce_stf.png image:full_image" />
+	<Image image="set:goblin_stf.png image:full_image" />
 	<Mesh file="goblin_stf.mesh" />
 	<Attribute
 			  level_requirement="13"

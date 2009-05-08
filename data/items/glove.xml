@@ -1,7 +1,7 @@
 <!-- Lederhandschuhe -->
 <!-- WAR, PRI, ARC, MAG -->
 <Item type="gloves" subtype="leath_glv" name="leather gloves" size="medium">
-	<Image image="set:noMedia.png image:full_image" />
+	<Image image="set:goblin_glv.png image:full_image" />
 	<Mesh file="potion.mesh" />
 	<Attribute
 		level_requirement="2"
@@ -33,7 +33,7 @@
 <!-- Schlangenlederhandschuhe -->
 <!-- PRI, MAG -->
 <Item type="gloves" subtype="snake_glv" name="snakehide gloves" size="medium">
-	<Image image="set:noMedia.png image:full_image" />
+	<Image image="set:goblin_glv.png image:full_image" />
 	<Mesh file="potion.mesh" />
 	<Attribute
 		level_requirement="7"
@@ -65,7 +65,7 @@
 <!-- Wildlederhandschuhe -->
 <!-- WAR, PRI, ARC, MAG -->
 <Item type="gloves" subtype="bucskn_glv" name="buckskin gloves" size="medium">
-	<Image image="set:noMedia.png image:full_image" />
+	<Image image="set:goblin_glv.png image:full_image" />
 	<Mesh file="potion.mesh" />
 	<Attribute
 		level_requirement="13"
@@ -97,7 +97,7 @@
 <!-- Kettenhandschuhe -->
 <!-- WAR, PRI -->
 <Item type="gloves" subtype="chain_glv" name="chain gloves" size="medium">
-	<Image image="set:noMedia.png image:full_image" />
+	<Image image="set:goblin_glv.png image:full_image" />
 	<Mesh file="potion.mesh" />
 	<Attribute
 		level_requirement="11"
@@ -129,7 +129,7 @@
 <!-- Spinnenseidehandschuhe -->
 <!-- MAG, PRI -->
 <Item type="gloves" subtype="spider_glv" name="spidersilk gloves" size="medium">
-	<Image image="set:noMedia.png image:full_image" />
+	<Image image="set:goblin_glv.png image:full_image" />
 	<Mesh file="potion.mesh" />
 	<Attribute
 		level_requirement="15"
@@ -161,7 +161,7 @@
 <!-- Shuetzenhandschuhe -->
 <!-- ARC -->
 <Item type="gloves" subtype="marksm_glv" name="marksman gloves" size="medium">
-	<Image image="set:noMedia.png image:full_image" />
+	<Image image="set:goblin_glv.png image:full_image" />
 	<Mesh file="potion.mesh" />
 	<Attribute
 		level_requirement="16"
@@ -193,7 +193,7 @@
 <!-- Assassinenhandschuhe -->
 <!-- WAR, ARC -->
 <Item type="gloves" subtype="assass_glv" name="assassin gloves" size="medium">
-	<Image image="set:noMedia.png image:full_image" />
+	<Image image="set:goblin_glv.png image:full_image" />
 	<Mesh file="potion.mesh" />
 	<Attribute
 		level_requirement="18"
