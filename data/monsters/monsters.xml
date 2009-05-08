@@ -1035,7 +1035,7 @@ AIR
 
 <!-- Phantom -->
 <!-- Noch kein Mesh -->
-<Monster type="MONSTER" subtype="phantom" name="phantom" fraction="UNDEAD" category="UNDEAD" layer="NORMAL">
+<Monster type="MONSTER" subtype="phantom" name="phantom" fraction="UNDEAD" category="UNDEAD" layer="AIR">
 	<Mesh file="skeleton.mesh" />
 	<Dropslots >
 		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" max_gold="100" min_level="0" max_level="10" magic_prob="0.1" magic_power="1000" />
@@ -1155,7 +1155,7 @@ AIR
 </Monster>
 
 <!-- Blutschnabel -->
-<Monster type="MONSTER" subtype="bloodbeak" name="bloodbeak" fraction="MONSTER" category="ANIMAL" layer="NORMAL">
+<Monster type="MONSTER" subtype="bloodbeak" name="bloodbeak" fraction="MONSTER" category="ANIMAL" layer="AIR">
 	<Mesh file="bloodbeak.mesh" />
 	<Dropslots >
 		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" max_gold="100" min_level="0" max_level="10" magic_prob="0.1" magic_power="1000" />
