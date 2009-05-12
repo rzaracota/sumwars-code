@@ -686,7 +686,10 @@ AIR
 <!-- L10 -->
 <Monster type="MONSTER" subtype="goblin_sh" name="goblin shaman" fraction="MONSTER" category="GOBLIN" layer="NORMAL">
 	<Mesh file="goblin.mesh" />
-	<ExtraMesh bone="itemRightHand" file="ice_wnd.mesh" />
+	<ExtraMesh bone="itemRightHand" file="goblin_stf.mesh" />
+	<ExtraMesh bone="EllbogenRechts" file="goblin_glv.mesh" />
+	<ExtraMesh bone="KnieRechts" file="gobLeg_arm.mesh" />
+	<ExtraMesh bone="Crown" file="goblin_hlm.mesh" />
 	<Dropslots >
 		<Dropslot pbig="0.01" pmedium="0.02" psmall="0.04" pgold="0.02" max_gold="30" min_level="0" max_level="12" magic_prob="0.1" magic_power="500" />
 		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" max_gold="20" min_level="0" max_level="9" magic_prob="0.2" magic_power="400" />
