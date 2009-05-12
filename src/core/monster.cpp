@@ -56,6 +56,7 @@ Monster::Monster( int id,MonsterBasicData& data)
 
 	m_ai.m_goals = new WorldObjectValueList;
 	m_ai.m_visible_goals = new WorldObjectValueList;
+	m_ai.m_allies = new WorldObjectValueList;
 	m_ai.m_state = Ai::ACTIVE;
 	m_ai.m_vars = data.m_ai_vars;
 	m_ai.m_chase_player_id =0;
@@ -86,6 +87,7 @@ Monster::~Monster()
 	// allokierten Speicher freigeben
 	delete m_ai.m_goals;
 	delete m_ai.m_visible_goals;
+	delete m_ai.m_allies;
 }
 
 bool Monster::destroy()
@@ -98,6 +100,7 @@ bool Monster::init()
 	//eigene Initialisierung
 	m_ai.m_goals = new WorldObjectValueList;
 	m_ai.m_visible_goals = new WorldObjectValueList;
+	m_ai.m_allies = new WorldObjectValueList;
 
 	// Basistyp setzen
 	setType("MONSTER");
@@ -165,9 +168,15 @@ void Monster::updateCommand()
 	
 	m_ai.m_goals->clear();
 	m_ai.m_visible_goals->clear();
+	m_ai.m_allies->clear();
 
 	// eigene Koordinaten
 	Vector &pos = getShape()->m_center;
+	
+	Shape s;
+	s.m_center = pos;
+	s.m_type = Shape::CIRCLE;
+	s.m_radius = 12;
 	
 	DEBUG5("update monster command %i %s",getId(), getSubtype().c_str());
 	DEBUG5("randaction prob %f",m_ai.m_vars.m_randaction_prob);
@@ -186,6 +195,7 @@ void Monster::updateCommand()
 	// Liste der Spieler
 	WorldObjectMap* players = getRegion()->getPlayers();
 	WorldObjectList ret;
+	
 
 	Creature* pl;
 	
@@ -297,6 +307,25 @@ void Monster::updateCommand()
 		}
 	}
 
+	// Verbuendete ermitteln
+	
+	s.m_center = pos;
+	s.m_radius = 12;
+	ret.clear();
+	getRegion()->getObjectsInShape(&s, &ret, LAYER_AIR,CREATURE,0);
+	WorldObjectList::iterator it;
+	
+	
+	for (it=ret.begin();it!=ret.end();++it)
+	{
+		if (World::getWorld()->getRelation(m_fraction,(*it)) == WorldObject::ALLIED)
+		{
+			dist = getShape()->getDistance(*((*it)->getShape()));
+			m_ai.m_allies->push_back(std::make_pair(*it,dist) );
+		}
+	}
+	
+	
 	// Kommando ermitteln
 	m_ai.m_command.m_type = Action::NOACTION;
 	m_ai.m_command_value =0;
@@ -334,43 +363,45 @@ void Monster::calcBestCommand()
 	int i,act;
 
 
-
-	// Basisaktionen bewerten
-	for (act = Action::ATTACK;act<=Action::HOLY_ATTACK;act++)
+	if (!m_ai.m_goals->empty())
 	{
-		if (!checkAbility((Action::ActionType) act))
+		// Basisaktionen bewerten
+		for (act = Action::ATTACK;act<=Action::HOLY_ATTACK;act++)
 		{
-			// Faehigkeit steht nicht zur Verfuegung
-			continue;
-		}
-
-
-		// Kommando evaluieren
-		evalCommand((Action::ActionType) act);
-
-
-	}
-
-	// Faehigkeiten bewerten
-	// Schleife ueber Faehigkeitengruppen
-	for (i=1;i<6;i++)
-	{
-		if (getBaseAttrMod()->m_abilities[i]!=0)
-		{
-			// Monster besitzt eine Faehigkeit aus der Gruppe
-
-			// Schleife ueber die Faehigkeiten
-			for (act = i*32;act <(i+1)*32;act++)
+			if (!checkAbility((Action::ActionType) act))
 			{
-				if (!checkAbility((Action::ActionType) act))
+				// Faehigkeit steht nicht zur Verfuegung
+				continue;
+			}
+	
+	
+			// Kommando evaluieren
+			evalCommand((Action::ActionType) act);
+	
+	
+		}
+	
+		// Faehigkeiten bewerten
+		// Schleife ueber Faehigkeitengruppen
+		for (i=1;i<6;i++)
+		{
+			if (getBaseAttrMod()->m_abilities[i]!=0)
+			{
+				// Monster besitzt eine Faehigkeit aus der Gruppe
+	
+				// Schleife ueber die Faehigkeiten
+				for (act = i*32;act <(i+1)*32;act++)
 				{
-					// Faehigkeit steht nicht zur Verfuegung
-					continue;
+					if (!checkAbility((Action::ActionType) act))
+					{
+						// Faehigkeit steht nicht zur Verfuegung
+						continue;
+					}
+	
+	
+					// Kommando evaluieren
+					evalCommand((Action::ActionType) act);
 				}
-
-
-				// Kommando evaluieren
-				evalCommand((Action::ActionType) act);
 			}
 		}
 	}
@@ -382,6 +413,10 @@ void Monster::evalCommand(Action::ActionType act)
 	WorldObjectValueList::iterator it;
 	WorldObjectValueList* goal_list=0;
 	Creature* cgoal=0;
+	
+	// Liste, die nur das Objekt selber enthaelt
+	WorldObjectValueList self;
+	self.push_back(std::make_pair(this,0) );
 
 	float dist;
 	float value;
@@ -416,13 +451,12 @@ void Monster::evalCommand(Action::ActionType act)
 	else if (aci->m_distance == Action::SELF)
 	{
 		// Faehigkeit auf selbst, es gibt keine ziele
-		goal_list =0;
+		goal_list =&self;
 	}
 	else if (aci->m_distance == Action::PARTY || aci->m_distance == Action::PARTY_MULTI)
 	{
 		// Faehigkeiten auf Verbuendete
-		// TODO Liste anlegen
-		return;
+		goal_list = m_ai.m_allies;
 	}
 
 	if (aci->m_timer_nr==1 && m_timer1>0 || aci->m_timer_nr==2 && m_timer2>0)
@@ -435,6 +469,11 @@ void Monster::evalCommand(Action::ActionType act)
 	Damage dmg;
 	calcDamage(act,dmg);
 	m_ai.m_command_count ++;
+	
+	// weitere Wirkungen der Aktion ausrechnen
+	CreatureBaseAttrMod cbam;
+	CreatureDynAttrMod cdam;
+	calcActionAttrMod(act,cbam,cdam);
 
 	if (goal_list)
 	{
@@ -446,7 +485,32 @@ void Monster::evalCommand(Action::ActionType act)
 			dist = it->second;
 
 			// Bewertung:
-			value = (dmg.getSumMinDamage()+dmg.getSumMaxDamage())/dist;
+			
+			
+			value =0;
+			if (aci->m_distance == Action::SELF || aci->m_distance == Action::PARTY || aci->m_distance == Action::PARTY_MULTI)
+			{
+				float extra_value =0;
+				extra_value += 2*(cbam.m_dstrength + cbam.m_dwillpower +  cbam.m_dmagic_power + cbam.m_ddexterity);
+				extra_value += cbam.m_dpower + cbam.m_dattack + cbam.m_dblock;
+				
+				// TODO: bessere Bewertungen
+				extra_value += cbam.m_dwalk_speed / 50;
+				extra_value += cbam.m_dattack_speed / 20;
+				
+				if (aci->m_distance == Action::PARTY_MULTI)
+				{
+					extra_value *= m_ai.m_allies->size();
+				}
+				
+				DEBUG5("extra value %f",extra_value);
+				
+				value += extra_value;
+			}
+			else
+			{
+				value = (dmg.getSumMinDamage()+dmg.getSumMaxDamage())/(dist+0.1);
+			}
 
 			if (aci->m_distance == Action::MELEE || ranged_move)
 			{
@@ -454,6 +518,7 @@ void Monster::evalCommand(Action::ActionType act)
 			}
 			
 			bool takerand = m_ai.m_rand_command && (Random::randi(m_ai.m_command_count) ==1);
+			DEBUG5("value %f",value);
 
 			if (value > m_ai.m_command_value || takerand)
 			{

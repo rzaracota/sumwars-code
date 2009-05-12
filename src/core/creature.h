@@ -301,6 +301,15 @@ public:
 	virtual void calcDamage(Action::ActionType act,Damage& dmg);
 	
 	/**
+	 * \fn virtual void calcActionAttrMod(Action::ActionType act,CreatureBaseAttrMod & bmod, CreatureDynAttrMod& dmod)
+	 * \brief Berechnet den Attributaenderung fuer die aktuell ausgefuehrte Aktion
+	 * \param act Aktion, die ausgefuehrt wird
+	 * \param bmod Basisattribute, die geaendert werden. Kann entweder die Kreatur selbst oder das Ziel der Aktion betreffen
+	 * \param dmod CreatureDynAttrMod
+	 */
+	virtual void calcActionAttrMod(Action::ActionType act,CreatureBaseAttrMod & bmod, CreatureDynAttrMod& dmod);
+	
+	/**
 	 * \fn virtual Action::ActionEquip getActionEquip()
 	 * \brief Gibt aus, ob die Aktion einhaendig oder zweihaendig ausgefuehrt wird
 	 */

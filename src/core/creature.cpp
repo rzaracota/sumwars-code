@@ -625,10 +625,11 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 	}
 
     //	Action::ActionType baseact = Action::getActionInfo(m_action.m_type)->m_base_action;
+	Action::ActionInfo* ainfo = Action::getActionInfo(m_action.m_type);
 
 	// Wenn die Aktion auf Nahkampf beruht Schaden an das Zielobjekt austeilen
 	// Ausname: Rundumschlag
-	if (Action::getActionInfo(m_action.m_type)->m_distance == Action::MELEE)
+	if (ainfo->m_distance == Action::MELEE)
 	{
 		if (cgoal && m_action.m_type!=Action::AROUND_BLOW 
 				  &&  m_action.m_type!=Action::WHIRL_BLOW
@@ -662,6 +663,8 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 
 	// Struktur fuer Modifikationen der dyn. Attribute, initialisiert mit Nullen
 	CreatureDynAttrMod cdam;
+	
+	calcActionAttrMod(m_action.m_type,cbam,cdam);
 
 
 	// Daten fuer Geschosse: Zielrichtung und Startpunkt
@@ -685,7 +688,12 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 	// Faehigkeit Eispfeile
 	if (m_base_attr_mod.m_special_flags & ICE_ARROWS)
 		arrow = "ICE_ARROW";
-
+	
+	
+	if (ainfo->m_distance == Action::SELF)
+	{
+		applyBaseAttrMod(&cbam);
+	}
 
 		// Behandlung der Wirkung der Aktion nach Aktionstyp
 	switch(m_action.m_type)
@@ -763,7 +771,7 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 			// an alle Schaden austeilen
 			for (it=res.begin();it!=res.end();++it)
 			{
-				if ((*it)->getType() != "FIXED_OBJECT")
+				if ((*it)->getType() != "FIXED_OBJECT" && World::getWorld()->getRelation(getFraction(),(*it)->getFraction()) ==  HOSTILE)
 				{
 					cr = (Creature*) (*it);
 					cr->takeDamage(&m_damage);
@@ -771,12 +779,6 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 				}
 			}
 			
-			if (m_action.m_type == Action::SCARE)
-			{
-				cbam.m_time =60000;
-				cbam.m_darmor = getBaseAttrMod()->m_armor;
- 				applyBaseAttrMod(&cbam);
-			}
 			break;
 			
 		case Action::BERSERK:
@@ -804,31 +806,6 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 				}
 			}
 			break;
-		case Action::FLAMESWORD:
-			// Modifikationen:
-			// Flags fuer 120 sec
-			cbam.m_time =120000;
-			cbam.m_xspecial_flags |= (FLAMESWORD | FIRESWORD);
-			applyBaseAttrMod(&cbam);
-			break;
-
-		case Action::FIRESWORD:
-			// Modifikationen:
-			// Flag fuer 60 sec
-			cbam.m_time =60000;
-			cbam.m_xspecial_flags |=  FIRESWORD;
-			applyBaseAttrMod(&cbam);
-			break;
-
-		case Action::FLAMEARMOR:
-			// Modifikationen:
-			// Flag, 50% Feuerres,25% Feuermaxres fuer 60 sec
-			cbam.m_time = 100000;
-			cbam.m_xspecial_flags |= FLAMEARMOR;
-			cbam.m_dresistances_cap[Damage::FIRE] = 25;
-			cbam.m_dresistances[Damage::FIRE] = 50;
-			applyBaseAttrMod(&cbam);
-			break;
 
 		case Action::REGENERATE:
 			// 50% der Lebenspunkte wieder auffuellen
@@ -837,25 +814,7 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 			break;
 
 		case Action::ANGER:
-			// Modifikationen:
-			// doppelte Staerke, halbierte Ruestung, Berserker fuer 30 sec
-			cbam.m_time = 40000;
-			cbam.m_dstrength =m_base_attr.m_strength;
-			cbam.m_darmor = -m_base_attr_mod.m_armor /2;
-			applyBaseAttrMod(&cbam);
-			m_dyn_attr.m_status_mod_time[Damage::BERSERK] = 30000;
-			addToNetEventMask(NetEvent::DATA_STATUS_MODS);
-			break;
-
 		case Action::FURY:
-			
-			// Modifikationen:
-			// doppelte Staerke, -25% Ruestung, Berserker, erhoehte Angriffsgeschwindigkeit fuer 80 sec
-			cbam.m_time = 40000;
-			cbam.m_dstrength =m_base_attr.m_strength;
-			cbam.m_darmor = -m_base_attr_mod.m_armor /4;
-			cbam.m_dattack_speed = 1000;
-			applyBaseAttrMod(&cbam);
 			m_dyn_attr.m_status_mod_time[Damage::BERSERK] = 30000;
 			addToNetEventMask(NetEvent::DATA_STATUS_MODS);
 			break;
@@ -954,13 +913,6 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 			getRegion()->insertProjectile(pr,sproj);
 			break;
 
-		case Action::STATIC_SHIELD:
-			// Modifikation:
-			// Flag fuer 18 Sekunden
-			cbam.m_time =18000;
-			cbam.m_xspecial_flags |= (STATIC_SHIELD);
-			applyBaseAttrMod(&cbam);
-			break;
 
 		// Schuetze Faehigkeiten
 		case Action::RANGE_ATTACK:
@@ -1068,64 +1020,7 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 			getRegion()->insertProjectile(pr,sproj);
 			break;
 
-		case Action::AIMED_SHOT:
-			// Modifikationen:
-			// 50% mehr Geschick fuer 50 sec
-			cbam.m_time = 50000;
-			cbam.m_ddexterity =m_base_attr.m_dexterity/2;
-			applyBaseAttrMod(&cbam);
-			break;
-
-		case Action::BOW_SPIRIT:
-			// Modifikationen
-			// 50% mehr Geschick, Flag fuer 50 sec
-			cbam.m_time = 50000;
-			cbam.m_ddexterity =m_base_attr.m_dexterity/2;
-			cbam.m_xspecial_flags |= CRIT_HITS;
-			applyBaseAttrMod(&cbam);
-			break;
-
-		case Action::ICE_ARROWS:
-			// Modifikationen:
-			// Flag fuer 80 sec
-			cbam.m_time = 80000;
-			cbam.m_xspecial_flags |= ICE_ARROWS;
-			applyBaseAttrMod(&cbam);
-			break;
-
-		case Action::FREEZING_ARROWS:
-			// Modifikationen:
-			// Flags fuer 80 sec
-			cbam.m_time = 80000;
-			cbam.m_xspecial_flags |= (ICE_ARROWS | FROST_ARROWS);
-			applyBaseAttrMod(&cbam);
-			break;
-
-		case Action::WIND_ARROWS:
-			// Modifikationen:
-			// Flag fuer 80 sec
-			cbam.m_time = 80000;
-			cbam.m_xspecial_flags |= WIND_ARROWS;
-			applyBaseAttrMod(&cbam);
-			break;
-
-		case Action::STORM_ARROWS:
-			// Modifikationen:
-			// Flags fuer 80 sec
-			cbam.m_time = 80000;
-			cbam.m_xspecial_flags |= (WIND_ARROWS | STORM_ARROWS);
-			applyBaseAttrMod(&cbam);
-			break;
-
-		case Action::WIND_WALK:
-			// Modifikationen:
-			// Flag, erhoehte Laufgeschwindigkeit fuer 25 sec
-			cbam.m_time = 25000;
-			cbam.m_xspecial_flags |= WIND_WALK;
-			cbam.m_dwalk_speed = 1500;
-			applyBaseAttrMod(&cbam);
-			break;
-
+		
 		// Priester Faehigkeiten
 		case Action::HOLY_LIGHT:
 		case Action::HOLY_FIRE:
@@ -1135,11 +1030,10 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 			break;
 
 		case Action::BURNING_RAGE:
-			// Modifikationen:
-			// Flag fuer 80 sec
-			cbam.m_time =80000;
-			cbam.m_xspecial_flags |= BURNING_RAGE;
-
+		case Action::BLAZING_SHIELD:	
+		case Action::MAGIC_SHIELD:
+		case Action::BLADE_STORM:
+		case Action::KEEN_MIND:
 			// alle Verbuendeten im Umkreis von 12 suchen und Modifikation anwenden
 			s.m_center = pos;
 			s.m_radius = 12;
@@ -1158,12 +1052,12 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 			break;
 
 		case Action::CURE_BLIND_MUTE:
-			// Modifikation:
-			// heilt blind/stumm (wirkt nur auf Verbuendete)
+		case Action::CURE_POIS_BURN:
+		case Action::CURE_CONF_BSRK:
+		case Action::HEAL:
+			// Modifikation anwenden:
 			if (cgoal !=0)
 			{
-				cdam.m_dstatus_mod_immune_time[Damage::BLIND] = 1;
-				cdam.m_dstatus_mod_immune_time[Damage::MUTE] = 1;
 				if (World::getWorld()->getRelation(fr,cgoal) == WorldObject::ALLIED)
 				{
 					cgoal->applyDynAttrMod(&cdam);
@@ -1171,34 +1065,12 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 			}
 			break;
 
-		case Action::BLAZING_SHIELD:
-			// Modifikationen
-			// 50% der Willenskraft auf Blockwert fuer 60 sec
-			cbam.m_time =60000;
-			cbam.m_dblock = m_base_attr_mod.m_willpower /2;
-
-			// alle Verbuendeten im Umkreis von 12 suchen und Modifikation anwenden
-			s.m_center = pos;
-			s.m_radius = 12;
-			getRegion()->getObjectsInShape(&s, &res,LAYER_AIR,CREATURE,0);
-			for (it=res.begin();it!=res.end();++it)
-			{
-				if (World::getWorld()->getRelation(fr,(*it)) == WorldObject::ALLIED)
-				{
-					if ((*it)->getType() != "FIXED_OBJECT")
-					{
-						cgoal = (Creature*) (*it);
-						cgoal->applyBaseAttrMod(&cbam);
-					}
-				}
-			}
-			break;
 
 		case Action::CURE_BLIND_MUTE_PARTY:
+		case Action::CURE_POIS_BURN_PARTY:
+		case Action::CURE_CONF_BSRK_PARTY:
+		case Action::HEAL_PARTY:
 			// Modifikation:
-			// heilt blind/stumm, immunisiert fuer 30 sec (wirkt nur auf Verbuendete)
-			cdam.m_dstatus_mod_immune_time[Damage::BLIND] = 30000;
-			cdam.m_dstatus_mod_immune_time[Damage::MUTE] = 30000;
 
 			// alle Verbuendeten im Umkreis von 6 um den Zielpunkt suchen und Modifikation anwenden
 			s.m_center = goal;
@@ -1230,7 +1102,7 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 			getRegion()->getObjectsInShape(&s, &res,LAYER_AIR,CREATURE,this);
 			for (it=res.begin();it!=res.end();++it)
 			{
-				if ((*it)->getType() != "FIXED_OBJECT")
+				if ((*it)->getType() != "FIXED_OBJECT" && World::getWorld()->getRelation(getFraction(),(*it)->getFraction()) ==  HOSTILE)
 				{
 					// Projektil Lichtstrahl fuer jedes Objekt erzeugen
 					goal = (*it)->getShape()->m_center;
@@ -1247,107 +1119,13 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 			getRegion()->insertProjectile(pr,goal);
 			break;
 
-		case Action::MAGIC_SHIELD:
-			// Modifikation:
-			// 50% mehr Willenskraft fuer 90 sec
-			cbam.m_time =90000;
-			cbam.m_dwillpower = m_base_attr_mod.m_willpower /2;
-
-			// alle Verbuendeten im Umkreis von 12 suchen und Modifikation anwenden
-			s.m_center = pos;
-			s.m_radius = 12;
-			getRegion()->getObjectsInShape(&s, &res,LAYER_AIR,CREATURE,0);
-			for (it=res.begin();it!=res.end();++it)
-			{
-				if (World::getWorld()->getRelation(fr,(*it)) == WorldObject::ALLIED)
-				{
-					if ((*it)->getType() != "FIXED_OBJECT")
-					{
-						cgoal = (Creature*) (*it);
-						cgoal->applyBaseAttrMod(&cbam);
-					}
-				}
-			}
-			break;
-
-		case Action::CURE_POIS_BURN:
-			// Modifikation:
-			// heilt vergiftet/brennend (wirkt nur auf Verbuendete)
-			if (cgoal !=0)
-			{
-				cdam.m_dstatus_mod_immune_time[Damage::POISONED] = 1;
-				cdam.m_dstatus_mod_immune_time[Damage::BURNING] = 1;
-				if (World::getWorld()->getRelation(fr,cgoal) == WorldObject::ALLIED)
-				{
-					cgoal->applyDynAttrMod(&cdam);
-				}
-			}
-			break;
-
-		case Action::CURE_POIS_BURN_PARTY:
-			// Modifikation:
-			// heilt vergiftet/brennend und immunisiert fuer 30 sec (wirkt nur auf Verbuendete)
-			cdam.m_dstatus_mod_immune_time[Damage::POISONED] = 30000;
-			cdam.m_dstatus_mod_immune_time[Damage::BURNING] = 30000;
-
-			// alle Verbuendeten im Umkreis von 6 um den Zielpunkt suchen und Modifikation anwenden
-			s.m_center = goal;
-			s.m_radius = 6;
-			getRegion()->getObjectsInShape(&s, &res,LAYER_AIR,CREATURE,0);
-			for (it=res.begin();it!=res.end();++it)
-			{
-				if (World::getWorld()->getRelation(fr,(*it)) == WorldObject::ALLIED)
-				{
-					if ((*it)->getType() != "FIXED_OBJECT")
-					{
-						cgoal = (Creature*) (*it);
-						cgoal->applyDynAttrMod(&cdam);
-					}
-				}
-			}
-			break;
-
 		case Action::ACID:
 			// Projektil Saeure erzeugen
 			pr = new Projectile("ACID",&m_damage, World::getWorld()->getValidProjectileId());
 			getRegion()->insertProjectile(pr,goal);
 			break;
 
-		case Action::HEAL:
-			// Modifikation:
-			// 300% der Willenskraft auf HP (nur Verbuendete)
-			if (cgoal !=0)
-			{
-				cdam.m_dhealth = 3* m_base_attr_mod.m_willpower;
-				if (World::getWorld()->getRelation(fr,cgoal) == WorldObject::ALLIED)
-				{
-					cgoal->applyDynAttrMod(&cdam);
-				}
-			}
-			break;
-
-		case Action::HEAL_PARTY:
-			// Modifikation:
-			// 200% der Willenskraft auf HP
-			cdam.m_dhealth = 2* m_base_attr_mod.m_willpower;
-
-			// alle Verbuendeten im Umkreis von 6 um den Zielpunkt suchen und Modifikation anwenden
-			s.m_center = goal;
-			s.m_radius = 6;
-			getRegion()->getObjectsInShape(&s, &res,LAYER_AIR,CREATURE,0);
-			for (it=res.begin();it!=res.end();++it)
-			{
-				if (World::getWorld()->getRelation(fr,(*it)) == WorldObject::ALLIED)
-				{
-					if ((*it)->getType() != "FIXED_OBJECT")
-					{
-						cgoal = (Creature*) (*it);
-						cgoal->applyDynAttrMod(&cdam);
-					}
-				}
-			}
-			break;
-
+	
 		case Action::DIVINE_WIND:
 			// Projektil heiliger Strahl erzeugen
 			pr = new Projectile("DIVINE_BEAM",&m_damage, World::getWorld()->getValidProjectileId());
@@ -1363,7 +1141,7 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 			for (it=res.begin();it!=res.end();++it)
 			{
 				// fuer alle Lebewesen ein Projektil heiliger Strahl erzeugen
-				if ((*it)->getType() != "FIXED_OBJECT")
+				if ((*it)->getType() != "FIXED_OBJECT" && World::getWorld()->getRelation(getFraction(),(*it)->getFraction()) ==  HOSTILE)
 				{
 					goal = (*it)->getShape()->m_center;
 					pr = new Projectile("DIVINE_BEAM",&m_damage, World::getWorld()->getValidProjectileId());
@@ -1372,66 +1150,7 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 			}
 			break;
 
-		case Action::BLADE_STORM:
-			// Modifikation:
-			// Angriffsgeschwindigkeit erhoeht fuer 70 sec
-			cbam.m_time =70000;
-			cbam.m_dattack_speed = 1500;
-
-			// alle Verbuendeten im Umkreis von 12 suchen und Modifikation anwenden
-			s.m_center = pos;
-			s.m_radius = 12;
-			getRegion()->getObjectsInShape(&s,&res,LAYER_AIR,CREATURE,0);
-			for (it=res.begin();it!=res.end();++it)
-			{
-				if (World::getWorld()->getRelation(fr,(*it)) == WorldObject::ALLIED)
-				{
-					if ((*it)->getType() != "FIXED_OBJECT")
-					{
-						cgoal = (Creature*) (*it);
-						cgoal->applyBaseAttrMod(&cbam);
-					}
-				}
-			}
-			break;
-
-		case Action::CURE_CONF_BSRK:
-			// Modifikation:
-			// heilt verwirrt/Berserker (wirkt nur auf Verbuendete)
-			if (cgoal !=0)
-			{
-				cdam.m_dstatus_mod_immune_time[Damage::CONFUSED] = 1;
-				cdam.m_dstatus_mod_immune_time[Damage::BERSERK] = 1;
-				if (World::getWorld()->getRelation(fr,cgoal) == WorldObject::ALLIED)
-				{
-					cgoal->applyDynAttrMod(&cdam);
-				}
-			}
-			break;
-
-		case Action::CURE_CONF_BSRK_PARTY:
-			// Modifikation:
-			// heilt verwirrt/Berserker und immunisiert fuer 30 sec (wirkt nur auf Verbuendete)
-			cdam.m_dstatus_mod_immune_time[Damage::CONFUSED] = 30000;
-			cdam.m_dstatus_mod_immune_time[Damage::BERSERK] = 30000;
-
-			// alle Verbuendeten im Umkreis von 6 um den Zielpunkt suchen und Modifikation anwenden
-			s.m_center = goal;
-			s.m_radius = 6;
-			getRegion()->getObjectsInShape(&s, &res,LAYER_AIR,CREATURE,0);
-			for (it=res.begin();it!=res.end();++it)
-			{
-				if (World::getWorld()->getRelation(fr,(*it)) == WorldObject::ALLIED)
-				{
-					if ((*it)->getType() != "FIXED_OBJECT")
-					{
-						cgoal = (Creature*) (*it);
-						cgoal->applyDynAttrMod(&cdam);
-					}
-				}
-			}
-			break;
-
+		
 		case Action::HYPNOSIS:
 			// Projektil Hypnose erzeugen
 			pr = new Projectile("HYPNOSIS",&m_damage, World::getWorld()->getValidProjectileId());
@@ -1446,34 +1165,11 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 			for (it=res.begin();it!=res.end();++it)
 			{
 				// Fuer alle Lebewesen ein Projektil Hypnose erzeugen
-				if ((*it)->getType() != "FIXED_OBJECT")
+				if ((*it)->getType() != "FIXED_OBJECT" && World::getWorld()->getRelation(getFraction(),(*it)->getFraction()) ==  HOSTILE)
 				{
 					goal = (*it)->getShape()->m_center;
 					pr = new Projectile("HYPNOSIS",&m_damage, World::getWorld()->getValidProjectileId());
 					getRegion()->insertProjectile(pr,goal);
-				}
-			}
-			break;
-
-		case Action::KEEN_MIND:
-			// Modifikation:
-			// 50% der Willenskraft auf Magie
-			cbam.m_time =70000;
-			cbam.m_dmagic_power = m_base_attr_mod.m_willpower/2;
-
-			// alle Verbuendeten im Umkreis von 12 suchen und Modifikation anwenden
-			s.m_center = pos;
-			s.m_radius = 12;
-			getRegion()->getObjectsInShape(&s, &res,LAYER_AIR,CREATURE,0);
-			for (it=res.begin();it!=res.end();++it)
-			{
-				if (World::getWorld()->getRelation(fr,(*it)) == WorldObject::ALLIED)
-				{
-					if ((*it)->getType() != "FIXED_OBJECT")
-					{
-						cgoal = (Creature*) (*it);
-						cgoal->applyBaseAttrMod(&cbam);
-					}
 				}
 			}
 			break;
@@ -2648,6 +2344,216 @@ void Creature::gainLevel()
 
 }
 
+void  Creature::calcActionAttrMod(Action::ActionType act,CreatureBaseAttrMod & bmod, CreatureDynAttrMod& dmod)
+{
+	bmod.init();
+	dmod.init();
+	
+	switch (act)
+	{
+		case Action::SCARE:
+			bmod.m_time =60000;
+			bmod.m_darmor = getBaseAttrMod()->m_armor;
+			break;
+			
+		case Action::BERSERK:
+		case Action::WARCRY:
+			// Nur eine Schaetzung !
+			bmod.m_dwalk_speed = -1000;
+			bmod.m_dattack_speed = -500;
+			break;
+			
+		case Action::FLAMESWORD:
+			// Modifikationen:
+			// Flags fuer 120 sec
+			bmod.m_time =120000;
+			bmod.m_xspecial_flags |= (FLAMESWORD | FIRESWORD);
+			
+		case Action::FIRESWORD:
+			// Modifikationen:
+			// Flag fuer 60 sec
+			bmod.m_time =60000;
+			bmod.m_xspecial_flags |=  FIRESWORD;
+			break;
+
+		case Action::FLAMEARMOR:
+			// Modifikationen:
+			// Flag, 50% Feuerres,25% Feuermaxres fuer 60 sec
+			bmod.m_time = 100000;
+			bmod.m_xspecial_flags |= FLAMEARMOR;
+			bmod.m_dresistances_cap[Damage::FIRE] = 25;
+			bmod.m_dresistances[Damage::FIRE] = 50;
+			break;
+
+		case Action::ANGER:
+			// Modifikationen:
+			// doppelte Staerke, halbierte Ruestung, Berserker fuer 30 sec
+			bmod.m_time = 40000;
+			bmod.m_dstrength =m_base_attr.m_strength;
+			bmod.m_darmor = -m_base_attr_mod.m_armor /2;
+			break;
+
+		case Action::FURY:
+			
+			// Modifikationen:
+			// doppelte Staerke, -25% Ruestung, Berserker, erhoehte Angriffsgeschwindigkeit fuer 80 sec
+			bmod.m_time = 40000;
+			bmod.m_dstrength =m_base_attr.m_strength;
+			bmod.m_darmor = -m_base_attr_mod.m_armor /4;
+			bmod.m_dattack_speed = 1000;
+			break;
+			
+			
+		case Action::STATIC_SHIELD:
+			// Modifikation:
+			// Flag fuer 18 Sekunden
+			bmod.m_time =18000;
+			bmod.m_xspecial_flags |= (STATIC_SHIELD);
+			break;
+			
+		case Action::AIMED_SHOT:
+			// Modifikationen:
+			// 50% mehr Geschick fuer 50 sec
+			bmod.m_time = 50000;
+			bmod.m_ddexterity =m_base_attr.m_dexterity/2;
+			break;
+
+		case Action::BOW_SPIRIT:
+			// Modifikationen
+			// 50% mehr Geschick, Flag fuer 50 sec
+			bmod.m_time = 50000;
+			bmod.m_ddexterity =m_base_attr.m_dexterity/2;
+			bmod.m_xspecial_flags |= CRIT_HITS;
+			break;
+
+		case Action::ICE_ARROWS:
+			// Modifikationen:
+			// Flag fuer 80 sec
+			bmod.m_time = 80000;
+			bmod.m_xspecial_flags |= ICE_ARROWS;
+			break;
+
+		case Action::FREEZING_ARROWS:
+			// Modifikationen:
+			// Flags fuer 80 sec
+			bmod.m_time = 80000;
+			bmod.m_xspecial_flags |= (ICE_ARROWS | FROST_ARROWS);
+			break;
+
+		case Action::WIND_ARROWS:
+			// Modifikationen:
+			// Flag fuer 80 sec
+			bmod.m_time = 80000;
+			bmod.m_xspecial_flags |= WIND_ARROWS;
+			break;
+
+		case Action::STORM_ARROWS:
+			// Modifikationen:
+			// Flags fuer 80 sec
+			bmod.m_time = 80000;
+			bmod.m_xspecial_flags |= (WIND_ARROWS | STORM_ARROWS);
+			break;
+
+		case Action::WIND_WALK:
+			// Modifikationen:
+			// Flag, erhoehte Laufgeschwindigkeit fuer 25 sec
+			bmod.m_time = 25000;
+			bmod.m_xspecial_flags |= WIND_WALK;
+			bmod.m_dwalk_speed = 1500;
+			break;
+
+			
+		case Action::BURNING_RAGE:
+			// Modifikationen:
+			// Flag fuer 80 sec
+			bmod.m_time =80000;
+			bmod.m_xspecial_flags |= BURNING_RAGE;
+			break;
+			
+		case Action::CURE_BLIND_MUTE:
+			// Modifikation:
+			// heilt blind/stumm (wirkt nur auf Verbuendete)
+			dmod.m_dstatus_mod_immune_time[Damage::BLIND] = 1;
+			dmod.m_dstatus_mod_immune_time[Damage::MUTE] = 1;
+			break;
+			
+		case Action::BLAZING_SHIELD:
+			// Modifikationen
+			// 50% der Willenskraft auf Blockwert fuer 60 sec
+			bmod.m_time =60000;
+			bmod.m_dblock = m_base_attr_mod.m_willpower /2;
+			break;
+			
+		case Action::CURE_BLIND_MUTE_PARTY:
+			// Modifikation:
+			// heilt blind/stumm, immunisiert fuer 30 sec (wirkt nur auf Verbuendete)
+			dmod.m_dstatus_mod_immune_time[Damage::BLIND] = 30000;
+			dmod.m_dstatus_mod_immune_time[Damage::MUTE] = 30000;
+			break;
+			
+		case Action::MAGIC_SHIELD:
+			// Modifikation:
+			// 50% mehr Willenskraft fuer 90 sec
+			bmod.m_time =90000;
+			bmod.m_dwillpower = m_base_attr_mod.m_willpower /2;
+			break;
+			
+		case Action::CURE_POIS_BURN:
+			// Modifikation:
+			// heilt vergiftet/brennend (wirkt nur auf Verbuendete)
+			dmod.m_dstatus_mod_immune_time[Damage::POISONED] = 1;
+			dmod.m_dstatus_mod_immune_time[Damage::BURNING] = 1;
+			break;
+			
+		case Action::CURE_POIS_BURN_PARTY:
+			// Modifikation:
+			// heilt vergiftet/brennend und immunisiert fuer 30 sec (wirkt nur auf Verbuendete)
+			dmod.m_dstatus_mod_immune_time[Damage::POISONED] = 30000;
+			dmod.m_dstatus_mod_immune_time[Damage::BURNING] = 30000;
+			break;
+			
+		case Action::BLADE_STORM:
+			// Modifikation:
+			// Angriffsgeschwindigkeit erhoeht fuer 70 sec
+			bmod.m_time =70000;
+			bmod.m_dattack_speed = 1500;
+			break;
+			
+		case Action::CURE_CONF_BSRK:
+			// Modifikation:
+			// heilt verwirrt/Berserker (wirkt nur auf Verbuendete)
+			dmod.m_dstatus_mod_immune_time[Damage::CONFUSED] = 1;
+			dmod.m_dstatus_mod_immune_time[Damage::BERSERK] = 1;
+			break;
+			
+		case Action::CURE_CONF_BSRK_PARTY:
+			// Modifikation:
+			// heilt verwirrt/Berserker und immunisiert fuer 30 sec (wirkt nur auf Verbuendete)
+			dmod.m_dstatus_mod_immune_time[Damage::CONFUSED] = 30000;
+			dmod.m_dstatus_mod_immune_time[Damage::BERSERK] = 30000;
+			break;
+			
+		case Action::KEEN_MIND:
+			// Modifikation:
+			// 50% der Willenskraft auf Magie
+			bmod.m_time =70000;
+			bmod.m_dmagic_power = m_base_attr_mod.m_willpower/2;
+			break;
+			
+		case Action::HEAL:
+			dmod.m_dhealth = 3* m_base_attr_mod.m_willpower;
+			break;
+
+		case Action::HEAL_PARTY:
+			dmod.m_dhealth = 3* m_base_attr_mod.m_willpower;
+			break;
+
+		
+		default:
+			break;
+	}
+	
+}
 
 void Creature::calcDamage(Action::ActionType act,Damage& dmg)
 {

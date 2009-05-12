@@ -73,6 +73,12 @@ struct Ai
 	WorldObjectValueList* m_visible_goals;
 	
 	/**
+	 * \var WorldObjectValueList* m_allies;
+	 * \brief Liste der moeglichen Ziele
+	 */
+	WorldObjectValueList* m_allies;
+	
+	/**
 	 * \var float m_command_value
 	 * \brief Bewertung des aktuellen Kommandos
 	 */
