@@ -2,7 +2,7 @@
 
 <!-- Flickenrobe -->
 <Item type="armor" subtype="rag_rob" name="ragged robe" size="medium">
-	<Image image="set:noMedia.png image:full_image" />
+	<Image image="set:gobLeg_arm.png image:full_image" />
 	<Mesh file="armor.mesh" />
 	<Attribute
 			level_requirement="1"
@@ -36,7 +36,7 @@
 
 <!-- Lehrlingsrobe -->
 <Item type="armor" subtype="prentc_rob" name="apprentice robe" size="medium">
-	<Image image="set:noMedia.png image:full_image" />
+	<Image image="set:gobLeg_arm.png image:full_image" />
 	<Mesh file="armor.mesh" />
 	<Attribute
 			level_requirement="3"
@@ -70,7 +70,7 @@
 
 <!-- Novizenrobe -->
 <Item type="armor" subtype="novice_rob" name="novice robe" size="medium">
-	<Image image="set:noMedia.png image:full_image" />
+	<Image image="set:gobLeg_arm.png image:full_image" />
 	<Mesh file="armor.mesh" />
 	<Attribute
 			level_requirement="5"
@@ -104,7 +104,7 @@
 
 <!-- Alchemistenrobe -->
 <Item type="armor" subtype="alch_rob" name="alchemist robe" size="medium">
-	<Image image="set:noMedia.png image:full_image" />
+	<Image image="set:gobLeg_arm.png image:full_image" />
 	<Mesh file="armor.mesh" />
 	<Attribute
 			level_requirement="8"
@@ -138,7 +138,7 @@
 
 <!-- Gelehrtenrobe -->
 <Item type="armor" subtype="sholar_rob" name="scholar robe" size="medium">
-	<Image image="set:noMedia.png image:full_image" />
+	<Image image="set:gobLeg_arm.png image:full_image" />
 	<Mesh file="armor.mesh" />
 	<Attribute
 			level_requirement="13"
@@ -172,7 +172,7 @@
 
 <!-- Magierrobe -->
 <Item type="armor" subtype="mage_rob" name="magus robe" size="medium">
-	<Image image="set:noMedia.png image:full_image" />
+	<Image image="set:gobLeg_arm.png image:full_image" />
 	<Mesh file="armor.mesh" />
 	<Attribute
 			level_requirement="19"
