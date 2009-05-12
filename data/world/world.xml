@@ -52,7 +52,7 @@
 <!-- Lobby Konzilshalle der Elemtarmagier [fester Ort; Saeulenhalle im roemischen Stil] -->
 <!-- Orte: Soren Windclaw -->
 	<Region id="2" name="elCnlLobby">
-		<Settings dimx="100" dimy="100" region_template="councilhall" ground="grass1"/>
+		<Settings dimx="100" dimy="100" region_template="councilhall" ground="council_ground"/>
 		<ExitDirections north="true" south="false" west="false" east="false" />
 		<Exits>
 			<Exit name="exit_north" destination_region="medBackalley" destination_location="entry_south" >
@@ -500,7 +500,7 @@
 <!-- Graue Himmelsleiter, Verfluchte Hoehle; [Hoehle]; ca 30 Minuten; Level 17 - 19 -->
 <!-- Goblins, Goblinhunde-->
 	<Region id="21" name="grayCurseCave">
-		<Settings dimx="12" dimy="12" area_percent="0.4" complexity="0.3" granularity="6"  ground="grass1"/>
+		<Settings dimx="12" dimy="12" area_percent="0.4" complexity="0.3" granularity="6"  ground="cave_ground"/>
 		
 		<ExitDirections north="true" south="true" west="true" east="false" />
 		
@@ -525,7 +525,7 @@
 <!-- Graue Himmelsleiter, Verfluchte Grotte; [Hoehle]; ca. 25 Min; Level 17 - 19 -->
 <!-- Goblins, Goblinhunde -->
 	<Region id="22" name="grayCurseGrotto">
-		<Settings dimx="12" dimy="12" area_percent="0.4" complexity="0.3" granularity="6"  ground="grass1"/>
+		<Settings dimx="12" dimy="12" area_percent="0.4" complexity="0.3" granularity="6"  ground="cave_ground"/>
 		
 		<ExitDirections north="true" south="false" west="true" east="true" />
 		
@@ -549,7 +549,7 @@
 <!-- Graue Himmelsleiter, Wolfshoehle; [Hoehle]; ca. 20 Min; Level 17- 19 -->
 <!-- Goblinhunde, DER Goblinhundemonsterboss -->
 	<Region id="23" name="grayWolfcave">
-		<Settings dimx="12" dimy="12" area_percent="0.4" complexity="0.3" granularity="6"  ground="grass1"/>
+		<Settings dimx="12" dimy="12" area_percent="0.4" complexity="0.3" granularity="6"  ground="cave_ground"/>
 		
 		<ExitDirections north="false" south="false" west="false" east="true" />
 		
@@ -567,7 +567,7 @@
 <!-- Graue Himmelsleiter, Verfluchte Grotte, Tiefe; ca. 20 Min; Level 17 - 19 -->
 <!-- Goblins -->
 	<Region id="24" name="grayCurseGrotDep">
-		<Settings dimx="12" dimy="12" area_percent="0.4" complexity="0.3" granularity="6"  ground="grass1"/>
+		<Settings dimx="12" dimy="12" area_percent="0.4" complexity="0.3" granularity="6"  ground="cave_ground"/>
 		
 		<ExitDirections north="false" south="true" west="false" east="false" />
 		
@@ -587,7 +587,7 @@
 <!-- Ort: Der Spalt (Wo der Lich mit seinen Skeletten graebt, ein Template)-->
 <!-- Beide Ausgaenge muessen verschließbar sein. Der Suedausgang wird verschlossen, der Westausgang geoeffnet -->
 	<Region id="25" name="grayCurseCaveDep">
-		<Settings dimx="12" dimy="12" area_percent="0.4" complexity="0.3" granularity="6"  ground="grass1"/>
+		<Settings dimx="12" dimy="12" area_percent="0.4" complexity="0.3" granularity="6"  ground="cave_ground"/>
 		
 		<ExitDirections north="false" south="true" west="false" east="true" />
 		
@@ -608,7 +608,7 @@
 <!-- Graue Himmelsleiter, Verfluchte Hoehle, Osten -->
 <!-- Untote -->
 	<Region id="26" name="grayCurseCaveEast">
-		<Settings dimx="12" dimy="12" area_percent="0.4" complexity="0.3" granularity="6"  ground="grass1"/>
+		<Settings dimx="12" dimy="12" area_percent="0.4" complexity="0.3" granularity="6"  ground="cave_ground"/>
 		
 		<ExitDirections north="false" south="false" west="true" east="true" />
 		
@@ -629,7 +629,7 @@
 <!-- Graue Himmelsleiter, Verfluchter See; Template-->
 <!-- Das Teichmonster-->
 	<Region id="27" name="grayCurseLake">
-		<Settings dimx="12" dimy="12" area_percent="0.4" complexity="0.3" granularity="6"  ground="grass1"/>
+		<Settings dimx="12" dimy="12" area_percent="0.4" complexity="0.3" granularity="6"  ground="cave_ground"/>
 		
 		<ExitDirections north="false" south="false" west="true" east="true" />
 		

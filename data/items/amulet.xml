@@ -3,7 +3,7 @@
 <!-- Federnamulett -->
 <Item type="amulet" subtype="feath_aml" name="feather amulet" size="small">
 	<Image image="set:feath_aml.png image:full_image" />
-	<Mesh file="potion.mesh" />
+	<Mesh file="feath_aml.mesh" />
 	<Attribute
 		level_requirement="2"
 		character_requirement="all"
@@ -31,7 +31,7 @@
 <!-- Bernsteinamulett -->
 <Item type="amulet" subtype="amber_aml" name="amber amulet" size="small">
 	<Image image="set:feath_aml.png image:full_image" />
-	<Mesh file="potion.mesh" />
+	<Mesh file="feath_aml.mesh" />
 	<Attribute
 		level_requirement="4"
 		character_requirement="all"
@@ -59,7 +59,7 @@
 <!-- Silberamulet -->
 <Item type="amulet" subtype="silver_rng" name="silver amulet" size="small">
 	<Image image="set:feath_aml.png image:full_image" />
-	<Mesh file="potion.mesh" />
+	<Mesh file="feath_aml.mesh" />
 	<Attribute
 		level_requirement="8"
 		character_requirement="all"
@@ -87,7 +87,7 @@
 <!-- Korallenamulet -->
 <Item type="amulet" subtype="coral_rng" name="coral amulet" size="small">
 	<Image image="set:feath_aml.png image:full_image" />
-	<Mesh file="potion.mesh" />
+	<Mesh file="feath_aml.mesh" />
 	<Attribute
 		level_requirement="15"
 		character_requirement="all"
@@ -115,7 +115,7 @@
 <!-- Goldamulet -->
 <Item type="amulet" subtype="gold_rng" name="gold amulet" size="small">
 	<Image image="set:feath_aml.png image:full_image" />
-	<Mesh file="potion.mesh" />
+	<Mesh file="feath_aml.mesh" />
 	<Attribute
 		level_requirement="21"
 		character_requirement="all"
