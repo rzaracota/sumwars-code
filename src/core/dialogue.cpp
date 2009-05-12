@@ -20,7 +20,14 @@ TopicList::~TopicList()
 
 void TopicList::addTopic(std::string topic, Event* speech)
 {
-	m_topics.insert(std::make_pair(topic,speech));
+	if (m_topics.count(topic) != 0)
+	{
+			WARNING("duplicate topic %s",topic.c_str());
+	}
+	else
+	{
+		m_topics.insert(std::make_pair(topic,speech));
+	}
 
 }
 

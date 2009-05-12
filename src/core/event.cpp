@@ -84,7 +84,7 @@ void Event::setEffect(const char * effect)
 	}
 	else
 	{
-		EventSystem::reportErrors(EventSystem::getLuaState(), err);
+		EventSystem::reportErrors(EventSystem::getLuaState(), err, effect);
 	}
 }
 
@@ -103,7 +103,7 @@ void Event::setCondition(const char * cond)
 	}
 	else
 	{
-		EventSystem::reportErrors(EventSystem::getLuaState(), err);
+		EventSystem::reportErrors(EventSystem::getLuaState(), err,cond);
 	}
 }
 

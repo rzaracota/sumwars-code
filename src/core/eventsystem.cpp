@@ -104,7 +104,7 @@ void EventSystem::doString(const char* instructions)
 
 	if (err!=0)
 	{
-		reportErrors(m_lua, err);
+		reportErrors(m_lua, err,instructions);
 	}
 }
 
@@ -118,12 +118,16 @@ void EventSystem::doFile(const char* file)
 	}
 }
 
-void EventSystem::reportErrors(lua_State *L, int status)
+void EventSystem::reportErrors(lua_State *L, int status, const char* instr)
 {
 	if ( status!=0 )
 	{
 		DEBUG("lua error %s \n", lua_tostring(L, -1));
 		lua_pop(L, 1); // remove error message
+		if (instr != 0)
+		{
+			DEBUG("lua code: \n%s",instr);
+		}
 	}
 }
 

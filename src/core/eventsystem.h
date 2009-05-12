@@ -53,12 +53,13 @@ class EventSystem
 		static void doFile(const char* file);
 		
 		/**
-		 * \fn static void reportErrors(lua_State *L, int status)
+		 * \fn static void reportErrors(lua_State *L, int status, const char* instr =0)
 		 * \brief Funktion um Fehler bei der Ausfuehrung von Skripten zu melden
 		 * \param L Zustandsobjekt von Lua
 		 * \param status von Lua gemeldeter Fehlerzustand
+		 * \param instr Lua Chunk das den Fehler erzeugt hat (optional)
 		 */
-		static void reportErrors(lua_State *L, int status);
+		static void reportErrors(lua_State *L, int status, const char* instr =0);
 		
 		/**
 		 * \fn static void setRegion(Region* region)

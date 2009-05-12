@@ -38,7 +38,7 @@ void Quest::setInit(const char* init)
 	}
 	else
 	{
-		EventSystem::reportErrors(EventSystem::getLuaState(), err);
+		EventSystem::reportErrors(EventSystem::getLuaState(), err,init);
 	}	
 }
 
@@ -58,7 +58,7 @@ void Quest::setDescription(const char* descr)
 	}
 	else
 	{
-		EventSystem::reportErrors(EventSystem::getLuaState(), err);
+		EventSystem::reportErrors(EventSystem::getLuaState(), err,descr);
 	}	
 }
 
