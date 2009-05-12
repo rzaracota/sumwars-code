@@ -1000,9 +1000,24 @@ int EventSystem::speak(lua_State *L)
 int EventSystem::unitSpeak(lua_State *L)
 {
 	int argc = lua_gettop(L);
-	if (argc>=2 && lua_isnumber(L,1) && lua_isstring(L,2))
+	if (argc>=2 && (lua_isnumber(L,1) || lua_isstring(L,1)) && lua_isstring(L,2))
 	{
-		int id = lua_tointeger(L, 1);
+		int id =0;
+		if (lua_isnumber(L,1))
+		{
+			id = lua_tointeger(L, 1);
+		}
+		else
+		{
+			if (m_dialogue !=0)
+			{
+				id = m_dialogue->getSpeaker(lua_tostring(L, 1));
+			}
+		}
+		
+		if (id ==0)
+			return 0;
+		
 		CreatureSpeakText text;
 		text.m_text = lua_tostring(L, 2);
 
