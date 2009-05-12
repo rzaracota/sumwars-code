@@ -1,0 +1,142 @@
+<Quest name="Scene2" table_name="scene2">
+	
+	<Init>
+		local a = 2
+	</Init>
+	
+	<Description>
+		if (scene2.finished) then
+			return _("Quest finished")
+		else
+			return _("Quest description")
+		end
+	</Description>
+	
+	<NPC refname="Soren Windclaw">
+		<!--
+		<Topic name="scene2" start_option="Defend Dwarfenfroward">
+			<Condition>
+				if (scene2.finished ~= true and scene2.freed ~= true) then
+					return true
+				else
+					return false
+				end
+			</Condition>
+			<Effect>
+				insertTrigger("start_scene2")
+			</Effect>
+		</Topic>
+		-->
+		<Topic name="scene2_dialogue">
+			<Effect>
+				addCameraPosition(0,get(getRole("PL"),"position"),20,40,20);
+				addCameraPosition(20000,get(getRole("PL"),"position"),220,60,30);
+
+				speak("PL",_("Koennen wir irgendwie diesen Kristall"),1000);
+				if (getRole("MAG") ~= nil) then
+					speak("MAG",_("Aber ja, ich kenne da einen netten kleinen Trick."),1000);
+				elseif (getRole("PRI") ~= nil) then
+					speak("PRI",_("Aber ja, ich kenne da einen netten kleinen Trick."),1000);
+				else
+					speak("ANY",_("Aber ja, ich kenne da einen netten kleinen Trick."),1000);
+				end;
+
+				-- (beginnt den Kristall zu verzaubern)
+
+				speak("SW",_("Wagt es ja nicht, oder"),1000);
+				if (getRole("MAG") ~= nil) then
+					speak("MAG",_("So, das wars."),1000);
+				elseif (getRole("PRI") ~= nil) then
+					speak("PRI",_("So, das wars."),1000);
+				else
+					speak("ANY",_("So, das wars."),1000);
+				end;
+				speak("PL",_("Und jetzt kann er uns"),1000);
+				if (getRole("MAG") ~= nil) then
+					speak("MAG",_("Nur wenn wir es wollen, aber nerven"),1000);
+				elseif (getRole("PRI") ~= nil) then
+					speak("PRI",_("Nur wenn wir es wollen, aber nerven"),1000);
+				else
+					speak("ANY",_("Nur wenn wir es wollen, aber nerven"),1000);
+				end;
+				speak("PL",_("Sehr gut, Also was haltet ihr von"),1000);
+				speak("ANYast",_("Habe ich das Richtig verstanden?"),1000);
+				speak("WAR",_("Gesagt hat er es, aber ich habe"),1000);
+				speak("MAG",_("Aber das Ding war ohne Zweifel"),1000);
+				speak("WAR",_("Fast in Ohnmacht gefallen bist"),1000);
+				speak("PRI",_("Freiheit. Ich habe schon nicht"),1000);
+				speak("ANYast",_("Trotzdem ist es unwahrscheinlich,"),1000);
+				speak("WAR",_("Wenn es auch nur eine kleine"),1000);
+				speak("MAG",_("Wenn Dummheit ein Gewicht"),1000);
+				speak("WAR",_("Wenn Arroganz einen Geruch"),1000);
+				speak("PL",_("Also gut, wir stimmen ab,"),1000);
+
+				-- => Den Anweisungen der Gilde folgen?
+
+				addQuestion(_("Den Anweisungen der Gilde folgen?"));
+				addAnswer(_("Yes"),"follow_instructions");
+				addAnswer(_("No"),"dont_follow_instructions");
+			</Effect>
+		</Topic>
+		
+		<Topic name="follow_instructions">
+			<Effect>
+				speak("PL",_("Dann ist es entschieden."),1000);
+				
+				-- weiter in das Soeldnerlager.
+				
+				changeTopic("end_cutscene");
+			</Effect>
+		</Topic>
+		
+		<Topic name="dont_follow_instructions">
+			<Effect>
+				speak("PL",_("Die ganze Sache ist wirklich zu unsicher."),1000);
+				
+				-- weiter in das Soeldnerlager.
+				
+				changeTopic("end_cutscene");
+			</Effect>
+		</Topic>
+		
+		<Topic name="end_cutscene">
+			<Effect>
+				deleteObject(scene1_tmp.soren_windclaw_crystal);
+				scene2.scene2 = true;
+				setCutsceneMode(false);
+			</Effect>
+		</Topic>
+	</NPC>
+	
+	
+	<Region name="medBackalley">
+		<Event trigger="create_region" once="true">
+			<Effect>
+				addArea("medBackalleyEntrySouthArea","circle","entry_south",5);
+			</Effect>
+		</Event>
+		
+		<Event trigger="player_moved" once="true">
+			<Condition>
+				if (fortify_dwarfenfroward.scene1 == true and scene2.scene2 ~= true) then
+					return (unitIsInArea(trigger.player,"medBackalleyEntrySouthArea"));
+				else
+					return false;
+				end;
+			</Condition>
+			<Effect>
+				scene2_tmp.soren_windclaw_crystal = createObject("peasant", "entry_south");
+				setRefName(scene2_tmp.soren_windclaw_crystal, "Soren Windclaw");
+				createDialogue();
+				addSpeaker(scene2_tmp.soren_windclaw_crystal,"SW");
+				addSpeaker(trigger.player,"Player");
+				addStandardSpeakers("medBackalley","entry_south");
+				setCutsceneMode(true);
+				setTopicBase("Soren Windclaw");
+				changeTopic("scene2_dialogue");
+			</Effect>
+		</Event>
+	</Region>
+	
+</Quest>
+

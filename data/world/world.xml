@@ -63,6 +63,14 @@
 		<Environments>
 			<Environment height="1.0" name="meadow" />
 		</Environments>
+		
+		<Event trigger="create_region" once="true">
+			<Effect>
+				soren_windclaw = createObject("peasant", "locSorenWindclaw");
+				setRefName(soren_windclaw, "Soren Windclaw");
+				addArea("SorenWindclawArea","circle","locSorenWindclaw",5);
+			</Effect>
+		</Event>
 	</Region>
 
 <!-- Medair, Hintergassen zwischen Konzil und Soeldnerlager-->
@@ -307,11 +315,11 @@
 				setRefName(prince_charming, "Prince Charming");
 				addArea("PrinceArea","circle","locPrince",5);
 				
-				leonard_von_robenforst = createObject("peasant", "locPrince");
+				leonard_von_robenforst = createObject("peasant", "locCouncellor");
 				setRefName(leonard_von_robenforst, "Leonard von Robenforst");
 				
-				michel_bron = createObject("peasant", "locPeasentMichel");
-				setRefName(michel_bron, "Michel Bron");
+				-- michel_bron = createObject("peasant", "locPeasentMichel");
+				-- setRefName(michel_bron, "Michel Bron");
 				
 				magus_convocatis_relau_feuerweber = createObject("peasant", "locSummoner");
 				setRefName(magus_convocatis_relau_feuerweber, "Magus Convocatis Relau Feuerweber");

@@ -154,11 +154,8 @@
 	<Region name="elCnlLobby">
 		<Event trigger="create_region" once="true">
 			<Effect>
-				soren_windclaw = createObject("peasant", "locSorenWindclaw");
-				setRefName(soren_windclaw, "Soren Windclaw");
 				fortify_dwarfenfroward_tmp.guard1 = createObject("peasant", "locSorenWindclaw");
 				fortify_dwarfenfroward_tmp.guard2 = createObject("peasant", "locSorenWindclaw");
-				addArea("SorenWindclawArea","circle","locSorenWindclaw",5);
 			</Effect>
 		</Event>
 		
