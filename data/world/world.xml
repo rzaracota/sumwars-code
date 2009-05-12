@@ -284,6 +284,8 @@
 		
 		<Waypoint world_x="0.6" world_y ="0.6" />
 		
+		<ReviveLocation  location="WaypointLoc" />
+		
 		<ExitDirections north="true" south="true" west="true" east="false" />
 		
 		<Exits>
@@ -434,7 +436,7 @@
 		</Environments>
 	</Region>
 
-<!-- Aisen, Westwaelder [Wald und Gebirge]; ungefähr 30 Min, eher verwinkelt; Level 15 - 18 -->
+<!-- Aisen, Westwaelder [Wald und Gebirge]; ungefï¿½hr 30 Min, eher verwinkelt; Level 15 - 18 -->
 <!-- Goblins, Goblinhunde, Blutschnaebel-->	
 	<Region id="18" name="aisWestwoods">
 		<Settings dimx="12" dimy="12" area_percent="0.4" complexity="0.3" granularity="6"  ground="grass1"/>
@@ -585,7 +587,7 @@
 <!-- Graue Himmelsleiter, Verfluchte Hoehle, Tiefe; ca. 30 Min; Level 17 - 20 -->
 <!-- Untote -->
 <!-- Ort: Der Spalt (Wo der Lich mit seinen Skeletten graebt, ein Template)-->
-<!-- Beide Ausgaenge muessen verschließbar sein. Der Suedausgang wird verschlossen, der Westausgang geoeffnet -->
+<!-- Beide Ausgaenge muessen verschlieï¿½bar sein. Der Suedausgang wird verschlossen, der Westausgang geoeffnet -->
 	<Region id="25" name="grayCurseCaveDep">
 		<Settings dimx="12" dimy="12" area_percent="0.4" complexity="0.3" granularity="6"  ground="cave_ground"/>
 		
@@ -675,6 +677,8 @@
 <!-- Loc: Stadtmauer -->
 	<Region id="12" name="dwarfenfroward">
 		<Settings dimx="32" dimy="32" region_template="dwarfenfroward"  ground="grass1"/>
+		
+		<ReviveLocation  location="WaypointLoc" />
 		
 		<ExitDirections north="true" south="true" west="true" east="false" />
 		

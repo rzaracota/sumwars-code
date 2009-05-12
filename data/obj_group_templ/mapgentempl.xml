@@ -97,21 +97,63 @@
 		  />
 	
 	<ObjectContent>
-		<Object subtype="$border"
-				center_x="0"
-				center_y="3.8"
+		<Object subtype="$border_s"
+				center_x="-3"
+				center_y="3.5"
 				angle = "-90"
 				probability ="1"
 				prob_angle = "false"
 				/>
 		
-		<Object subtype="$border"
-				center_x="3.8"
-				center_y="0"
+		<Object subtype="$border_t"
+				center_x="-1.5"
+				center_y="3.5"
+				angle = "-90"
+				probability ="1"
+				prob_angle = "false"
+				/>
+		
+		<Object subtype="$border_m"
+				center_x="1"
+				center_y="3.5"
+				angle = "-90"
+				probability ="1"
+				prob_angle = "false"
+				/>
+		
+		<Object subtype="$border_c"
+				center_x="3.5"
+				center_y="3.5"
+				angle = "0"
+				probability ="1"
+				prob_angle = "false"
+				/>
+
+		
+		<Object subtype="$border_s"
+				center_x="3.5"
+				center_y="-3"
 				angle = "-180"
 				probability ="1"
 				prob_angle = "false"
 				/>
+		
+		<Object subtype="$border_t"
+				center_x="3.5"
+				center_y="-1.5"
+				angle = "-180"
+				probability ="1"
+				prob_angle = "false"
+				/>
+		
+		<Object subtype="$border_m"
+				center_x="3.5"
+				center_y="1"
+				angle = "-180"
+				probability ="1"
+				prob_angle = "false"
+				/>
+		
 		
 		<Object subtype="$tree"
 				center_x="0.57"

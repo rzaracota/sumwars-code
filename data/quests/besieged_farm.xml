@@ -126,7 +126,7 @@
 			</Effect>
 		</Topic>
 		
-		<Topic name="scene1_dialogue">
+		<Topic name="scene3_dialogue">
 			<Effect>
 				addCameraPosition(0,get(getRole("PL"),"position"),20,40,20);
 				addCameraPosition(20000,get(getRole("PL"),"position"),220,60,30);
@@ -248,7 +248,7 @@
 
 				-- => Quest: „Der belagerte Bauernhof“
 
-				besieged_farm.started == true;
+				besieged_farm.started = true;
 
 				changeTopic("end_cutscene");
 			</Effect>
