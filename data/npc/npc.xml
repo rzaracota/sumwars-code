@@ -128,6 +128,7 @@
 <NPC refname="Gertlinde Kampfer">
 	<Trade refresh_time="300000" price_factor="1.5">
 		<TradeItem subtype="heal_1" number ="20" />
+		<TradeItem subtype="heal_2" number ="20" />
 	</Trade>
 	
 	<Topic name="trade" start_option="Potions" />
