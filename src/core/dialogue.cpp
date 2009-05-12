@@ -235,7 +235,7 @@ void Dialogue::setTopicBase(std::string topic_base)
 
 bool Dialogue::checkTopic(std::string topic)
 {
-	if (topic == "start" || topic == "end" || topic == "abort")
+	if (topic == "start" || topic == "end" || topic == "abort" || topic =="#change_topic#" || "#jump_topic#")
 		return true;
 
 	Event* st = m_topics[m_topic_base].getSpeakTopic(topic);
@@ -431,7 +431,7 @@ void Dialogue::update(float time)
 
 			// Aenderung eingetreten
 			WorldObject* wo=0;
-			Creature* cr;
+			Creature* cr=0;
 			if (!m_started)
 			{
 				stime -= cst->m_time;
@@ -462,8 +462,9 @@ void Dialogue::update(float time)
 				}
 				
 				wo = m_region->getObject( getSpeaker(m_speech.front().first));
+				cr = static_cast<Creature*>(wo);
 
-				if (wo ==0 || !wo->isCreature())
+				if (cr ==0 )
 				{
 					DEBUG("cant speak text %s %s",m_speech.front().first.c_str(),m_speech.front().second.m_text.c_str());
 					m_speech.pop_front();
@@ -503,11 +504,16 @@ void Dialogue::update(float time)
 				changeTopic(cst->m_answers.front().second);
 				return;
 			}
+			else if (cst->m_text == "#change_topic#")
+			{
+				DEBUG("change topic with empty topic list");
+				return;
+			}
 
 			// naechsten Text sprechen
 			DEBUG5("spoken text %s",cst->m_text.c_str());
 
-			cr = static_cast<Creature*>(wo);
+			
 			cr->speakText(*cst);
 
 		}
