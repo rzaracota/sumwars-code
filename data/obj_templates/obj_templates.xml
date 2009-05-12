@@ -32,6 +32,12 @@ FIXED_OBJECT
 		<Object name="wall2" />
 		<Object name="wall3" />
 	</Environment>
+	<Environment name="cave">
+		<Object name="cave_wall1" />
+	</Environment>
+	<Environment name="council">
+		<Object name="konz_wall1" />
+	</Environment>
 </ObjectTemplate>
 
 <ObjectTemplate name="$wall" type="FIXED_OBJECT">
@@ -39,6 +45,12 @@ FIXED_OBJECT
 		<Object name="wall1" />
 		<Object name="wall2" />
 		<Object name="wall3" />
+	</Environment>
+	<Environment name="cave">
+		<Object name="cave_wall1" />
+	</Environment>
+	<Environment name="council">
+		<Object name="konz_wall1" />
 	</Environment>
 </ObjectTemplate>
 
@@ -49,6 +61,12 @@ FIXED_OBJECT
 	<Environment name="hills">
 		<Object name="wall_m1" />
 	</Environment>
+	<Environment name="cave">
+		<Object name="cave_wall_m1" />
+	</Environment>
+	<Environment name="council">
+		<Object name="konz_wall_m1" />
+	</Environment>
 </ObjectTemplate>
 
 <ObjectTemplate name="$border_s" type="FIXED_OBJECT">
@@ -57,6 +75,12 @@ FIXED_OBJECT
 	</Environment>
 	<Environment name="hills">
 		<Object name="wall_s1" />
+	</Environment>
+	<Environment name="cave">
+		<Object name="cave_wall_s1" />
+	</Environment>
+	<Environment name="council">
+		<Object name="konz_wall_s1" />
 	</Environment>
 </ObjectTemplate>
 
@@ -67,6 +91,12 @@ FIXED_OBJECT
 	<Environment name="hills">
 		<Object name="wall_t1" />
 	</Environment>
+	<Environment name="cave">
+		<Object name="cave_wall_t1" />
+	</Environment>
+	<Environment name="council">
+		<Object name="konz_wall_t1" />
+	</Environment>
 </ObjectTemplate>
 
 <ObjectTemplate name="$border_c" type="FIXED_OBJECT">
@@ -75,6 +105,12 @@ FIXED_OBJECT
 	</Environment>
 	<Environment name="hills">
 		<Object name="wall_c1" />
+	</Environment>
+	<Environment name="cave">
+		<Object name="cave_wall_c1" />
+	</Environment>
+	<Environment name="council">
+		<Object name="konz_wall_c1" />
 	</Environment>
 </ObjectTemplate>
 

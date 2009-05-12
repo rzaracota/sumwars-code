@@ -52,7 +52,7 @@
 <!-- Lobby Konzilshalle der Elemtarmagier [fester Ort; Saeulenhalle im roemischen Stil] -->
 <!-- Orte: Soren Windclaw -->
 	<Region id="2" name="elCnlLobby">
-		<Settings dimx="8" dimy="8" region_template="councilhall" ground="grass1"/>
+		<Settings dimx="100" dimy="100" region_template="councilhall" ground="grass1"/>
 		<ExitDirections north="true" south="false" west="false" east="false" />
 		<Exits>
 			<Exit name="exit_north" destination_region="medBackalley" destination_location="entry_south" >
@@ -61,7 +61,7 @@
 		</Exits>
 			
 		<Environments>
-			<Environment height="1.0" name="meadow" />
+			<Environment height="1.0" name="council" />
 		</Environments>
 		
 		<Event trigger="create_region" once="true">
@@ -518,7 +518,7 @@
 		</Exits>
 		
 		<Environments>
-			<Environment height="1.0" name="hills" />
+			<Environment height="1.0" name="cave" />
 		</Environments>
 	</Region>
 	
@@ -542,7 +542,7 @@
 		</Exits>
 		
 		<Environments>
-			<Environment height="1.0" name="hills" />
+			<Environment height="1.0" name="cave" />
 		</Environments>
 	</Region>
 	
@@ -560,7 +560,7 @@
 		</Exits>
 		
 		<Environments>
-			<Environment height="1.0" name="hills" />
+			<Environment height="1.0" name="cave" />
 		</Environments>
 	</Region>
 	
@@ -578,7 +578,7 @@
 		</Exits>
 		
 		<Environments>
-			<Environment height="1.0" name="hills" />
+			<Environment height="1.0" name="cave" />
 		</Environments>
 	</Region>
 	
@@ -601,7 +601,7 @@
 		</Exits>
 		
 		<Environments>
-			<Environment height="1.0" name="hills" />
+			<Environment height="1.0" name="cave" />
 		</Environments>
 	</Region>
 	
@@ -622,7 +622,7 @@
 		</Exits>
 		
 		<Environments>
-			<Environment height="1.0" name="hills" />
+			<Environment height="1.0" name="cave" />
 		</Environments>
 	</Region>
 	
@@ -643,7 +643,7 @@
 		</Exits>
 		
 		<Environments>
-			<Environment height="1.0" name="hills" />
+			<Environment height="1.0" name="cave" />
 		</Environments>
 	</Region>
 	
