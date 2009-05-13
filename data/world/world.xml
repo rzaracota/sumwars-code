@@ -52,7 +52,7 @@
 <!-- Lobby Konzilshalle der Elemtarmagier [fester Ort; Saeulenhalle im roemischen Stil] -->
 <!-- Orte: Soren Windclaw -->
 	<Region id="2" name="elCnlLobby">
-		<Settings dimx="100" dimy="100" region_template="councilhall" ground="council_ground"/>
+		<Settings dimx="19" dimy="19" region_template="councilhall" ground="council_ground"/>
 		<ExitDirections north="true" south="false" west="false" east="false" />
 		<Exits>
 			<Exit name="exit_north" destination_region="medBackalley" destination_location="entry_south" >

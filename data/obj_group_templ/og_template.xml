@@ -72,6 +72,7 @@
 	
 </ObjectGroupTemplate>
 
+<!--
 <ObjectGroupTemplate name = "councilhall" >
 	<Shape
 		  type = "RECT"
@@ -103,6 +104,7 @@
 		<Location name = "locSorenWindclaw" pos_x="0" pos_y="4" />
 	</Locations>
 </ObjectGroupTemplate>
+-->
 
 <!--
 <ObjectGroupTemplate name = "medairMercenaryCamp" >

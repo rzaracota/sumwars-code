@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<ObjectGroupTemplate name="councilmall " version="1.0">
+<ObjectGroupTemplate name="councilhall" version="1.0">
   <Shape
     type="RECT"
     extent_x="38"
@@ -238,7 +238,7 @@
     <Object subtype="konz_wall_c1" 
             center_x="21.5" 
             center_y="-19.10175619" 
-            angle="90" 
+            angle="-90" 
             probability="1" 
             prob_angle="false" 
     />
