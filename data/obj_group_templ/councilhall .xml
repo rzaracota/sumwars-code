@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<ObjectGroupTemplate name="councilhall " version="1.0">
+<ObjectGroupTemplate name="councilmall " version="1.0">
   <Shape
     type="RECT"
     extent_x="38"
