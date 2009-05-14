@@ -88,6 +88,8 @@
 			</Exit>
 		</Exits>
 		
+		
+		
 		<Environments>
 			<Environment height="1.0" name="meadow" />
 		</Environments>
@@ -157,6 +159,10 @@
 			<NameObjectGroup name="willard" object_group="willard" priority="4"/>
 		</NamedObjectGroups>
 		
+		<ObjectGroups>
+			<ObjectGroup object_group="treePatch_med" priority="1" number="3" probability="1"/>
+		</ObjectGroups>
+		
 		<SpawnGroups>
 			<SpawnGroup group_name="goblins_l1" number="18" />
 			<SpawnGroup group_name="goblins_bow_l1" number="12" />
@@ -178,7 +184,7 @@
 			<Exit name="exit_east" destination_region="aisHeath" destination_location="entry_west" >
 				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
 			</Exit>
-			<Exit name="exit_crypt" destination_region="aisMaylonsGraveL1" destination_location="entry_south" >
+			<Exit name="entry_crypt" destination_region="aisMaylonsGraveL1" destination_location="entry_south" >
 				<Shape shape="RECT" extent_x="1.0" extent_y="4.0" />
 			</Exit>
 		</Exits>
@@ -190,6 +196,10 @@
 		<NamedObjectGroups>
 			<NameObjectGroup name="maylonsGrave" object_group="maylonsGrave" priority="4"/>
 		</NamedObjectGroups>
+		
+		<ObjectGroups>
+			<ObjectGroup object_group="treePatch_med" priority="1" number="2" probability="1"/>
+		</ObjectGroups>
 		
 		<SpawnGroups>
 			<SpawnGroup group_name="goblins_bow_l3" number="16" />
@@ -266,6 +276,10 @@
 		<Environments>
 			<Environment height="1.0" name="meadow" />
 		</Environments>
+		
+		<ObjectGroups>
+			<ObjectGroup object_group="treePatch_med" priority="1" number="5" probability="1"/>
+		</ObjectGroups>
 		
 		<SpawnGroups>
 			<SpawnGroup group_name="bloodbeaks" number="18" />
@@ -351,6 +365,7 @@
 		<ObjectGroups>
 			<ObjectGroup object_group="herbalBushes" priority="4" number="10" probability="1.0" />
 			<ObjectGroup object_group="herbalBushes" priority="3" number="15" probability="0.7" />
+			<ObjectGroup object_group="treePatch_med" priority="1" number="4" probability="0.3"/>
 		</ObjectGroups>
 		
 		<Environments>
@@ -407,6 +422,10 @@
 			<Environment height="1.0" name="hills" />
 		</Environments>
 		
+		<ObjectGroups>
+			<ObjectGroup object_group="treePatch_med" priority="1" number="8" probability="0.3"/>
+		</ObjectGroups>
+		
 		<NamedObjectGroups>
 			<NameObjectGroup name="robsHideout" object_group="robsHideout" priority="4"/>
 		</NamedObjectGroups>
@@ -430,6 +449,10 @@
 				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
 			</Exit>
 		</Exits>
+		
+		<ObjectGroups>
+			<ObjectGroup object_group="treePatch_med" priority="1" number="8" probability="0.3"/>
+		</ObjectGroups>
 		
 		<Environments>
 			<Environment height="1.0" name="hills" />

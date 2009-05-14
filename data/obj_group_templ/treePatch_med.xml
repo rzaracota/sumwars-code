@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ObjectGroupTemplate name="treePatch_med" version="1.0">
+  <Shape
+    type="CIRCLE"
+    radius="7.609704384"
+  />
+
+  <WayPoint pos_x="0" pos_y="0" />
+
+  <ObjectContent>
+    <Object subtype="$single_debris" 
+            center_x="-0.315160525" 
+            center_y="-0.5282790527" 
+            angle="58.86141526" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="$single_debris" 
+            center_x="-4.740515031" 
+            center_y="2.315389373" 
+            angle="0" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="$single_debris" 
+            center_x="2.587105821" 
+            center_y="-4.842565302" 
+            angle="-203.6212048" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="$single_debris" 
+            center_x="4.857720467" 
+            center_y="2.779278575" 
+            angle="-80.59373828" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="$single_deb_l" 
+            center_x="1.779452848" 
+            center_y="1.400818092" 
+            angle="41.49886832" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="$tree" 
+            center_x="3.433233022" 
+            center_y="2.282445126" 
+            angle="65.43554591" 
+            probability="1" 
+            prob_angle="true" 
+    />
+    <Object subtype="$tree" 
+            center_x="-2.959055253" 
+            center_y="-4.652145523" 
+            angle="0" 
+            probability="1" 
+            prob_angle="true" 
+    />
+    <Object subtype="$tree" 
+            center_x="6.430215267" 
+            center_y="0.4422981266" 
+            angle="0" 
+            probability="1" 
+            prob_angle="true" 
+    />
+    <Object subtype="stone2" 
+            center_x="-4.665515232" 
+            center_y="-0.1831907993" 
+            angle="0" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="tree4" 
+            center_x="2.118505598" 
+            center_y="4.971627408" 
+            angle="0" 
+            probability="1" 
+            prob_angle="true" 
+    />
+  </ObjectContent>
+
+  <Locations>
+  </Locations>
+
+</ObjectGroupTemplate>
