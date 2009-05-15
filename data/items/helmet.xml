@@ -1,7 +1,7 @@
 <!-- Kappe -->
 <!-- WAR, PRI, ARC, MAG -->
 <Item type="helmet" subtype="cap_hlm" name="cap" size="medium">
-	<Image image="set:noMedia.png image:full_image" />
+	<Image image="set:goblin_hlm.png image:full_image" />
 	<Mesh file="helmet.mesh" />
 	<Attribute
 		level_requirement="1"
@@ -32,7 +32,7 @@
 <!-- Lederkappe -->
 <!-- WAR, PRI, ARC, MAG -->
 <Item type="helmet" subtype="lthcap_hlm" name="leather cap" size="medium">
-	<Image image="set:noMedia.png image:full_image" />
+	<Image image="set:goblin_hlm.png image:full_image" />
 	<Mesh file="helmet.mesh" />
 	<Attribute
 		level_requirement="3"
@@ -63,7 +63,7 @@
 <!-- Lederhelm -->
 <!-- WAR, PRI, ARC -->
 <Item type="helmet" subtype="leath_hlm" name="leather helmet" size="medium">
-	<Image image="set:noMedia.png image:full_image" />
+	<Image image="set:goblin_hlm.png image:full_image" />
 	<Mesh file="helmet.mesh" />
 	<Attribute
 		level_requirement="5"
@@ -94,7 +94,7 @@
 <!-- Soeldnerkopf -->
 <!-- WAR, ARC --><!-- abschreckende Maske um Furcht bei Feinden zu verursachen -->
 <Item type="helmet" subtype="merchd_hlm" name="mercenary head" size="medium">
-	<Image image="set:noMedia.png image:full_image" />
+	<Image image="set:goblin_hlm.png image:full_image" />
 	<Mesh file="helmet.mesh" />
 	<Attribute
 		level_requirement="8"
@@ -125,7 +125,7 @@
 <!-- Novizenhelm -->
 <!-- PRI -->
 <Item type="helmet" subtype="novice_hlm" name="novice headgear" size="medium">
-	<Image image="set:noMedia.png image:full_image" />
+	<Image image="set:goblin_hlm.png image:full_image" />
 	<Mesh file="helmet.mesh" />
 	<Attribute
 		level_requirement="8"
@@ -156,7 +156,7 @@
 <!-- Soeldnerhelm -->
 <!-- WAR, PRI -->
 <Item type="helmet" subtype="merc_hlm" name="mercenary helmet" size="medium">
-	<Image image="set:noMedia.png image:full_image" />
+	<Image image="set:goblin_hlm.png image:full_image" />
 	<Mesh file="helmet.mesh" />
 	<Attribute
 		level_requirement="13"
@@ -187,7 +187,7 @@
 <!-- Waldlaeuferstirband -->
 <!-- ARC -->
 <Item type="helmet" subtype="rngbnd_hlm" name="ranger bandana" size="medium">
-	<Image image="set:noMedia.png image:full_image" />
+	<Image image="set:goblin_hlm.png image:full_image" />
 	<Mesh file="helmet.mesh" />
 	<Attribute
 		level_requirement="13"
@@ -218,7 +218,7 @@
 <!-- Assasssinenkapuze -->
 <!-- WAR, ARC -->
 <Item type="helmet" subtype="assass_hlm" name="assassin hood" size="medium">
-	<Image image="set:noMedia.png image:full_image" />
+	<Image image="set:goblin_hlm.png image:full_image" />
 	<Mesh file="helmet.mesh" />
 	<Attribute
 		level_requirement="19"
@@ -249,7 +249,7 @@
 <!-- Birett -->
 <!-- PRI -->
 <Item type="helmet" subtype="birett_hlm" name="biretta" size="medium">
-	<Image image="set:noMedia.png image:full_image" />
+	<Image image="set:goblin_hlm.png image:full_image" />
 	<Mesh file="helmet.mesh" />
 	<Attribute
 		level_requirement="19"
