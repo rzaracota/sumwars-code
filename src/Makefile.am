@@ -73,6 +73,8 @@ sumwars_SOURCES = core/world.cpp \
 	gui/main_gui.cpp \
 	gui/mainwindow.cpp \
 	gui/scene.cpp \
+	gui/graphicobject.cpp \
+	gui/graphicmanager.cpp \
 	gui/application.cpp \
 	gui/charinfo.cpp \
 	gui/controlpanel.cpp \

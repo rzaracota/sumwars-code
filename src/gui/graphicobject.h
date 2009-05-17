@@ -1,15 +1,15 @@
-#ifndef GRAPHICS_OBJECT_H
-#define GRAPHICS_OBJECT_H
+#ifndef GRAPHIC_OBJECT_H
+#define GRAPHIC_OBJECT_H
 
 #include <string>
 #include "gameobject.h"
 
 
 /**
- * \class GraphicsObject
+ * \class GraphicObject
  * \brief Klasse fuer alle gerenderten Objekte
  */
-class GraphicsObject
+class GraphicObject
 {
 	public:
 		typedef std::string Type;
@@ -35,10 +35,10 @@ class GraphicsObject
 		std::map<std::string, Ogre::MovableObject*> m_attached_objects;
 		
 		/**
-		 * \var std::map<std::string, GraphicsObject*> m_subobjects
+		 * \var std::map<std::string, GraphicObject*> m_subobjects
 		 * \brief UnterObjekte des aktuellen GraphicsObjekts
 		 */
-		std::map<std::string, GraphicsObject*> m_subobjects;
+		std::map<std::string, GraphicObject*> m_subobjects;
 };
 
 
