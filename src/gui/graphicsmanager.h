@@ -1,0 +1,5 @@
+#ifndef GRAPHICS_MANAGER_H
+#define GRAPHICS_MANAGER_H
+
+
+#endif
