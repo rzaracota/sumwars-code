@@ -92,7 +92,7 @@
 				
 				-- weiter in das Soeldnerlager.
 				print("test1");
-				changeTopic("end_cutscene");
+				changeTopic("end_cutscene2");
 			</Effect>
 		</Topic>
 		
@@ -102,11 +102,11 @@
 				
 				-- weiter in das Soeldnerlager.
 				
-				changeTopic("end_cutscene");
+				changeTopic("end_cutscene2");
 			</Effect>
 		</Topic>
 		
-		<Topic name="end_cutscene">
+		<Topic name="end_cutscene2">
 			<Effect>
 				print("test2");
 				scene2.scene2 = true;

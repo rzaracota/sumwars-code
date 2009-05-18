@@ -250,7 +250,7 @@
 
 				besieged_farm.started = true;
 
-				changeTopic("end_cutscene");
+				changeTopic("end_cutscene3");
 			</Effect>
 		</Topic>
 		
@@ -264,11 +264,11 @@
 
 				-- LvR (schuettelt hinter dem Ruecken des Prinzen nur den Kopf): MB bricht zusammen
 
-				changeTopic("end_cutscene");
+				changeTopic("end_cutscene3");
 			</Effect>
 		</Topic>
 		
-		<Topic name="end_cutscene">
+		<Topic name="end_cutscene3">
 			<Effect>
 				besieged_farm.scene3 = true;
 				setCutsceneMode(false);

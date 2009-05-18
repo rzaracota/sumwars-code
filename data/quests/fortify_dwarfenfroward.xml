@@ -118,7 +118,7 @@
 				
 				speak("SW",_("Das war der schwaechste Elementar,"),1000);
 				
-				changeTopic("end_cutscene");
+				changeTopic("end_cutscene1");
 			</Effect>
 		</Topic>
 		
@@ -138,11 +138,11 @@
 					end;
 				end;
 				
-				changeTopic("end_cutscene");
+				changeTopic("end_cutscene1");
 			</Effect>
 		</Topic>
 		
-		<Topic name="end_cutscene">
+		<Topic name="end_cutscene1">
 			<Effect>
 				fortify_dwarfenfroward.scene1 = true;
 				setCutsceneMode(false);
