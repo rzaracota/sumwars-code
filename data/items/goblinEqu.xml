@@ -102,7 +102,7 @@
 	<Mesh file="goblin_hmr.mesh" />
 	<Attribute
 		level_requirement="1"
-		character_requirement="all"
+		character_requirement="warrior,priest"
 		min_enchant="20"
 		max_enchant="40"
 		modchance_strength_mod="0.1"
@@ -139,7 +139,7 @@
 	<Image image="set:crude_sw.png image:full_image" />
 	<Attribute
 		level_requirement="1"
-		character_requirement="all"
+		character_requirement="warrior,priest"
 		min_enchant="20"
 		max_enchant="40"
 		modchance_strength_mod="0.15"
