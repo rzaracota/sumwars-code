@@ -19,6 +19,25 @@ FIXED_OBJECT
 	</Environment>
 </ObjectTemplate>
 
+<ObjectTemplate name="$flower" type="FIXED_OBJECT">
+	<Environment name="meadow">
+		<Object name="flower1" />
+		<Object name="flower2" />
+		<Object name="flower3" />
+		<Object name="flower4" />
+		<Object name="flower5" />
+		<Object name="flower6" />
+	</Environment>
+	<Environment name="hills">
+		<Object name="flower1" />
+		<Object name="flower2" />
+		<Object name="flower3" />
+		<Object name="flower4" />
+		<Object name="flower5" />
+		<Object name="flower6" />
+	</Environment>
+</ObjectTemplate>
+
 <ObjectTemplate name="$border" type="FIXED_OBJECT">
 	<Environment name="meadow">
 		<Object name="fence1" />
