@@ -11,6 +11,69 @@
   <WayPoint pos_x="0" pos_y="0" />
 
   <ObjectContent>
+    <Object subtype="box_b1" 
+            center_x="-7.518851568" 
+            center_y="-3.111813313" 
+            angle="-9.56998852" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="box_b1" 
+            center_x="-2.607698387" 
+            center_y="-17.32156499" 
+            angle="21.8766873" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="box_m1" 
+            center_x="-8.559427978" 
+            center_y="-4.565447707" 
+            angle="-23.53437406" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="box_m1" 
+            center_x="-9.058657038" 
+            center_y="-2.237823759" 
+            angle="0" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="box_m2" 
+            center_x="-9.460704537" 
+            center_y="-3.504390084" 
+            angle="27.82446642" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="box_m2" 
+            center_x="-1.893135113" 
+            center_y="-15.44691352" 
+            angle="0" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="box_m3" 
+            center_x="-6.518850824" 
+            center_y="-7.20298946" 
+            angle="41.28271801" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="box_m3" 
+            center_x="-5.014148928" 
+            center_y="-7.371218705" 
+            angle="87.05307521" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="box_m3" 
+            center_x="13.38879426" 
+            center_y="4.5" 
+            angle="22.73062545" 
+            probability="1" 
+            prob_angle="false" 
+    />
     <Object subtype="$tree" 
             center_x="9.204204662" 
             center_y="16.8312554" 
@@ -571,7 +634,7 @@
     <Location name="locSoldier1" pos_x="-2" pos_y="11" />
     <Location name="locSoldier2" pos_x="-8" pos_y="11" />
     <Location name="locSoldier3" pos_x="13.5" pos_y="-11" />
-    <Location name="locWeaponTrader" pos_x="-6.105002614" pos_y="-6.241855206" />
+    <Location name="locWeaponTrader" pos_x="-5.811448673" pos_y="-5.423464805" />
   </Locations>
 
 </ObjectGroupTemplate>
