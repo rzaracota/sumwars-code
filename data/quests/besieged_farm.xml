@@ -126,6 +126,12 @@
 			</Effect>
 		</Topic>
 		
+		<Topic name="michel_bron_run">
+			<Effect>
+				addUnitCommand(besieged_farm_tmp.michel_bron,"walk",3000,"locPeasentMichel");
+			</Effect>
+		</Topic>
+		
 		<Topic name="scene3_dialogue">
 			<Effect>
 				addCameraPosition(0,get(getRole("PL"),"position"),20,40,20);
@@ -155,12 +161,11 @@
 				speak("MAGast",_("Ich hoffe nur, das"),1000);
 				speak("LvR",_("Allein die Anwesenheit"),1000);
 				speak("SL",_("!"),1000);
+				jumpTopic("michel_bron_run");
 				speak("LvR",_("Habt ihr nichts"),1000);
 				speak("ANY",_("Und da sagt man"),1000);
 
 				-- SL entfernt sich. PC und LvR wenden sich zu ihren Pferden, als MB aufgeregt in das Dorf gerannt kommt.
-				
-				addUnitCommand(besieged_farm_tmp.michel_bron,"walk",3000,"locPeasentMichel");
 				
 				speak("MB",_("Wachen! Wachen! Hilfe!"),1000);
 				speak("LvR",_("Schaffte den"),1000);

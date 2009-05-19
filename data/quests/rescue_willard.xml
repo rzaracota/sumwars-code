@@ -25,58 +25,45 @@
 				if (rescue_willard.started == true) then
 					speak('Fenor Marken',_("You have yet to give the stone to Willard."),1000)
 				else
-					speak('Fenor Marken',_("Hey there!"),1000)
-					speak('Fenor Marken',_("Are you the councils backing?"),1300)
-					speak('player',_("And if it was like that?"),1300)
-					speak('Fenor Marken',_("I heard you were Branded Ones."),1500)
-					speak('Fenor Marken',_("There is something, only someone like you can do."),2000)
-					speak('Fenor Marken',_("With sure success that is."),1500)
-					if (getPlayers()[2] ~= nil and getPlayers()[2] ~= getSpeaker("player")) then
-						local any = getPlayers()[2]
-					else
-						local any = getPlayers()[1]
-					end
-					addSpeaker(any,"any")
-					speak("any",_("Who would have thougt of that?"),1800)
-					speak("any",_("Does an respectable member of the guard want someones thoat cut?"),3000)
-					speak('Fenor Marken',_("Eh? I could've hired a professional assassin for that."),3000)
-					speak('Fenor Marken',_("I thought you were not the kind of Branded Ones"),2200)
-					speak('Fenor Marken',_("that kill everyone crossing their pass."),2000)
-					speak("any",_("My apologies. Maybe my mouth slipped."),1800)
-					speak('player',_("Whatever. What do you really want?"),1000)
-					speak('Fenor Marken',_("Thanks. My name is Fenor Marken."),1800)
-					speak('Fenor Marken',_("It is like that: I have a friend with the gamekeepers."),2800)
-					speak('Fenor Marken',_("He was in the woods with two others when they were attacked by goblins."),3400)
-					speak('Fenor Marken',_("And those cowards left him behind wounded."),1500)
-					speak('player',_("Surely you don't want me to bring back his corpse, do you?"),3000)
-					speak('Fenor Marken',_("No. Willard isn't someone who is killed by some measly goblins."),3000)
-					speak('Fenor Marken',_("I'm sure he's waiting somewhere for help."),1000)
-					speak('Fenor Marken',_("You must be very busy."),1500)
-					speak('Fenor Marken',_("That's why all I ask you is bringing him this phasestone."),2800)
-					speak('Fenor Marken',_("Normally I wouldn't entrust anyone with this"),2500)
-					speak('Fenor Marken',_("out of fear they'd elope with it."),1900)
-					speak('Fenor Marken',_("But you Branded Ones have other means of transportation, havn't you."),3000)
-					speak('Fenor Marken',_("That's why I came to you."),1500)
-					speak('player',_("I understand."),1000)
-					addQuestion(_("Quest annehmen?"))
-					addAnswer(_("Ja"),'start_rescue_willard_quest')
-					addAnswer(_("Nein"),'refuse_rescue_willard_quest')
+					addStandardSpeakers();
+					speak('Fenor Marken',_("Hey there!"),1000);
+					speak('Fenor Marken',_("Are you the councils backing?"),1300);
+					speak('player',_("And if it was like that?"),1300);
+					speak('Fenor Marken',_("I heard you were Branded Ones."),1500);
+					speak('Fenor Marken',_("There is something, only someone like you can do."),2000);
+					speak('Fenor Marken',_("With sure success that is."),1500);
+					speak("ANY",_("Who would have thougt of that?"),1800);
+					speak("ANY",_("Does an respectable member of the guard want someones thoat cut?"),3000);
+					speak('Fenor Marken',_("Eh? I could've hired a professional assassin for that."),3000);
+					speak('Fenor Marken',_("I thought you were not the kind of Branded Ones"),2200);
+					speak('Fenor Marken',_("that kill everyone crossing their pass."),2000);
+					speak("ANY",_("My apologies. Maybe my mouth slipped."),1800);
+					speak('player',_("Whatever. What do you really want?"),1000);
+					speak('Fenor Marken',_("Thanks. My name is Fenor Marken."),1800);
+					speak('Fenor Marken',_("It is like that: I have a friend with the gamekeepers."),2800);
+					speak('Fenor Marken',_("He was in the woods with two others when they were attacked by goblins."),3400);
+					speak('Fenor Marken',_("And those cowards left him behind wounded."),1500);
+					speak('player',_("Surely you don't want me to bring back his corpse, do you?"),3000);
+					speak('Fenor Marken',_("No. Willard isn't someone who is killed by some measly goblins."),3000);
+					speak('Fenor Marken',_("I'm sure he's waiting somewhere for help."),1000);
+					speak('Fenor Marken',_("You must be very busy."),1500);
+					speak('Fenor Marken',_("That's why all I ask you is bringing him this phasestone."),2800);
+					speak('Fenor Marken',_("Normally I wouldn't entrust anyone with this"),2500);
+					speak('Fenor Marken',_("out of fear they'd elope with it."),1900);
+					speak('Fenor Marken',_("But you Branded Ones have other means of transportation, havn't you."),3000);
+					speak('Fenor Marken',_("That's why I came to you."),1500);
+					speak('player',_("I understand."),1000);
+					addQuestion(_("Quest annehmen?"));
+					addAnswer(_("Ja"),'start_rescue_willard_quest');
+					addAnswer(_("Nein"),'refuse_rescue_willard_quest');
 				end
 			</Effect>
 		</Topic>
 		
 		<Topic name="start_rescue_willard_quest" >
 			<Effect>
-				local war = getWarriors()[1]
-				addSpeaker(war,"war")
-				speak("war",_("Your friend is as good as saved."),1000)
-				if (getPlayers()[1] ~= getSpeaker("player")) then
-					local any = getPlayers()[1]
-				else
-					local any = getPlayers()[2]
-				end
-				addSpeaker(any,"any")
-				speak("any",_("And not even asking what the rest is thinking."),2500)
+				speak("WAR",_("Your friend is as good as saved."),1000);
+				speak("ANY",_("And not even asking what the rest is thinking."),2500);
 				speak('Fenor Marken',_("Thank you very much."),1000);
 				rescue_willard.started = true;
 			</Effect>	
@@ -84,7 +71,7 @@
 		
 		<Topic name="refuse_rescue_willard_quest" >
 			<Effect>
-				speak("player",_("Sorry, but we can't waste time searching for some gamekeeper."),3000)
+				speak("player",_("Sorry, but we can't waste time searching for some gamekeeper."),3000);
 				speak('Fenor Marken',_("You're as coldharted as they say."),1800);
 				speak('Fenor Marken',_("If only I could leave here."),1800);
 				speak('Fenor Marken',_("I would search for him myself"),1800);
@@ -97,34 +84,34 @@
 		<Topic name="rescue_willard_reward" start_option="Willard (Reward)">
 			<Condition>
 				if (rescue_willard.finished == true) then
-					return false
+					return false;
 				else
-					return true
-				end
+					return true;
+				end;
 			</Condition>
 			<Effect>
-				rescue_willard.finished = true
-				speak("Willard","Thanks for your help.",1500)
-				speak("Willard","Can I ask another favor of you?",1500)
-				speak("Willard","My leg's wounded and I won't reach Medair on my own.",2000)
-				speak("player", _("You're Willard I suppose."),1500)
-				speak("Willard","That's me. Why do you know my name?",1800)
-				speak("player", _("Your friend Fenor Marken sends us."),1800)
-				speak("player", _("We are to give you a phasestone."),1700)
-				speak("Willard","Holy Gods! He still has that thing?",1800)
-				speak("Willard","That was one of the sins of our youth.",1800)
-				speak("Willard","Mines been used up long ago.",1500)
-				speak("Willard","Good old Fenor. Here, let me show you my appretiation.",2200)
-				speak("Willard","Surely someone in your line of work allways has use for extra money?",2500)
-				speak("player", _("I thank you."),1000)
-				local players = getPlayers()
-				local i,player
+				rescue_willard.finished = true;
+				speak("Willard","Thanks for your help.",1500);
+				speak("Willard","Can I ask another favor of you?",1500);
+				speak("Willard","My leg's wounded and I won't reach Medair on my own.",2000);
+				speak("player", _("You're Willard I suppose."),1500);
+				speak("Willard","That's me. Why do you know my name?",1800);
+				speak("player", _("Your friend Fenor Marken sends us."),1800);
+				speak("player", _("We are to give you a phasestone."),1700);
+				speak("Willard","Holy Gods! He still has that thing?",1800);
+				speak("Willard","That was one of the sins of our youth.",1800);
+				speak("Willard","Mines been used up long ago.",1500);
+				speak("Willard","Good old Fenor. Here, let me show you my appretiation.",2200);
+				speak("Willard","Surely someone in your line of work allways has use for extra money?",2500);
+				speak("player", _("I thank you."),1000);
+				local players = getPlayers();
+				local i,player;
 				for i,player in ipairs(players) do
 					if (getPlayerPrivateVar(player,"rescue_willard.reward") ~= true) then
-						setPlayerPrivateVar(player,"rescue_willard.reward",true)
-						setObjectValue(player,"gold", getObjectValue(player,"gold") + 50)
-					end
-				end
+						setPlayerPrivateVar(player,"rescue_willard.reward",true);
+						setObjectValue(player,"gold", getObjectValue(player,"gold") + 50);
+					end;
+				end;
 			</Effect>
 		</Topic>
 	</NPC>
@@ -184,9 +171,10 @@
 				end
 			</Condition>
 			<Effect>
-				createDialogue()
-				addSpeaker(trigger.player,'finder')
-				speak('finder','Hier steckt also dieser Willard.',1000)
+				-- createDialogue()
+				-- addSpeaker(trigger.player,'finder')
+				-- speak('finder','Hier steckt also dieser Willard.',1000)
+				unitSpeak(trigger.player,_("Hier steckt also dieser Willard."),1000);
 			</Effect>
 		</Event>
 		
