@@ -408,7 +408,8 @@
   <Locations>
     <Location name="entry_north" pos_x="0" pos_y="-19" />
     <Location name="exit_north" pos_x="0" pos_y="-25.5" />
-    <Location name="locSorenWindclaw" pos_x="0.5" pos_y="9.898243806" />
+    <Location name="locParty" pos_x="0" pos_y="3.5" />
+    <Location name="locSorenWindclaw" pos_x="0" pos_y="10" />
   </Locations>
 
 </ObjectGroupTemplate>
