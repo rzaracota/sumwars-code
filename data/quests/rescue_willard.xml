@@ -112,6 +112,13 @@
 						setObjectValue(player,"gold", getObjectValue(player,"gold") + 50);
 					end;
 				end;
+				changeTopic("willard_vanishes");
+			</Effect>
+		</Topic>
+		
+		<Topic name="willard_vanishes">
+			<Effect>
+				deleteObject(rescue_willard_tmp.willard);
 			</Effect>
 		</Topic>
 	</NPC>
