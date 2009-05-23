@@ -1,0 +1,42 @@
+<RenderInfo name="goblin_rob">
+	<Entity source="goblin.mesh"/>
+	<Entity objectname="hammer" bone="itemRightHand" source="goblin_hmr.mesh" />
+	
+	<Action name="walk">
+		<Animation name="walk" />
+	</Action>
+	
+	<Action name="attack">
+		<Animation name="attack" />
+	</Action>
+	<Action name="attack">
+		<Animation name="attack2" />
+	</Action>
+	
+	<Action name="die">
+		<Animation name="die" />
+	</Action>
+	
+	<Action name="doubleattack">
+		<Animation name="attack" start="0.0" end="0.5"/>
+		<Animation name="attack2" start="0.5" end="1.0"/>
+	</Action>
+	
+	<Action name="walkattack">
+		<Animation name="walk" start="0.0" end="0.7"/>
+		<Animation name="attack" start="0.4" end="1.0"/>
+	</Action>
+	
+	<Action name="growattack">
+		<Scale  start="0.0" end="0.5" start_val="1.0" end_val="2.0" />
+		<Animation name="attack" />
+		<Scale  start="0.5" end="1.0" start_val="2.0" end_val="1.0" />
+	</Action>
+	
+	<Action name="looseclub">
+		<Detach time="0.4" objectname="hammer" />
+		<Animation name="walk" />
+		<Entity time="0.9" objectname="hammer" bone="itemRightHand" source="goblin_hmr.mesh" />
+	</Action>
+</RenderInfo>
+	
