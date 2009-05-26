@@ -242,13 +242,14 @@ void Dialogue::setTopicBase(std::string topic_base)
 
 bool Dialogue::checkTopic(std::string topic)
 {
-	if (topic == "start" || topic == "end" || topic == "abort" || topic =="#change_topic#" || "#jump_topic#")
+	if (topic == "start" || topic == "end" || topic == "abort" || topic =="#change_topic#" || topic =="#jump_topic#")
 		return true;
 
 	Event* st = m_topics[m_topic_base].getSpeakTopic(topic);
 
 	if (st !=0)
 	{
+		DEBUG5("checking Topic %s",topic.c_str());
 		return st->checkCondition();
 	}
 
