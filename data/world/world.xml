@@ -744,7 +744,7 @@
 	<Region id="13" name="dwarfenfrowardRampart">
 		<Settings dimx="32" dimy="12" area_percent="0.3" complexity="0.3" granularity="4"  ground="grass1"/>
 		
-		<ExitDirections north="true" south="true" west="false" east="false" />
+		<ExitDirections north="false" south="true" west="false" east="false" />
 		
 		<Exits>
 			<Exit name="exit_south" destination_region="dwarfenfroward" destination_location="entry_rampart" >
