@@ -163,7 +163,7 @@ function getRole(role)
 	elseif (role == "MAGast") then
 		return getMages()[1];
 	elseif (role == "MALEast") then
-		return getMales()()[1];
+		return getMales()[1];
 	elseif (role == "FEMALEast") then
 		return getFemales()[1];
 	end;
