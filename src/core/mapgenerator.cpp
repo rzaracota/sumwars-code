@@ -531,14 +531,29 @@ bool MapGenerator::insertGroupTemplates(MapData* mdata, RegionData* rdata)
 			continue;
 		}
 
-		// Grundform der Gruppe kopieren
-		memcpy(&s , templ->getShape(), sizeof(Shape));
-
+		float angle =0;
 		for (int i=0; i< jt->second.m_number; i++)
 		{
 			if (Random::random() > jt->second.m_probability)
 			{
 				continue;
+			}
+			memcpy(&s , templ->getShape(), sizeof(Shape));
+			
+			// Drehwinkel ermitteln
+			// Kreise beliebig Rechtecke nur um 90°
+			if (s.m_type == Shape::CIRCLE)
+			{
+				angle = 2*3.14159*Random::random();
+			}
+			else
+			{
+				int n = Random::randi(4);
+				if (n%2 == 1)
+				{
+					std::swap(s.m_extent.m_x, s.m_extent.m_y);
+				}
+				angle = 3.14159*(n*90.0)/180.0;
 			}
 
 			// Ort fuer das Template suchen
@@ -553,7 +568,7 @@ bool MapGenerator::insertGroupTemplates(MapData* mdata, RegionData* rdata)
 			// Objektgruppe einfuegen
 			// TODO: Winkel ?
 			DEBUG5("placing group %s at %f %f",jt->second.m_group_name.c_str(), pos.m_x, pos.m_y);
-			mdata->m_region->createObjectGroup(jt->second.m_group_name,pos,0);
+			mdata->m_region->createObjectGroup(jt->second.m_group_name,pos,angle);
 		}
 	}
 	
