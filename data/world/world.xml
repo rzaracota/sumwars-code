@@ -161,6 +161,7 @@
 		
 		<ObjectGroups>
 			<ObjectGroup object_group="treePatch_med" priority="1" number="3" probability="1"/>
+			<ObjectGroup object_group="flowerPatch" priority="1" number="30" probability="1"/>
 		</ObjectGroups>
 		
 		<SpawnGroups>
