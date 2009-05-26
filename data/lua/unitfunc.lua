@@ -162,6 +162,10 @@ function getRole(role)
 		return getArchers()[1];
 	elseif (role == "MAGast") then
 		return getMages()[1];
+	elseif (role == "MALEast") then
+		return getMales()()[1];
+	elseif (role == "FEMALEast") then
+		return getFemales()[1];
 	end;
 end;
 
@@ -184,6 +188,8 @@ function addStandardSpeakers(region,location)
 	addSpeaker(getRole("PRIast"),"PRIast");
 	addSpeaker(getRole("ARCast"),"ARCast");
 	addSpeaker(getRole("MAGast"),"MAGast");
+	addSpeaker(getRole("MALEast"),"MALEast");
+	addSpeaker(getRole("FEMALEast"),"FEMALEast");
 	
 	if (region ~= nil and location ~= nil) then
 		local players = getPlayers();
