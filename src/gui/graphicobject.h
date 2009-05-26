@@ -3,7 +3,7 @@
 
 #include <string>
 #include "gameobject.h"
-
+#include "graphicobjectrenderinfo.h"
 
 /**
  * \class GraphicObject
@@ -29,10 +29,10 @@ class GraphicObject
 		GameObject* m_object;
 		
 		/**
-		 * \var std::map<std::string, Ogre::MovableObject*> m_attached_objects
+		 * \var std::map<std::string, AttachedMovableObject> m_attached_objects
 		 * \brief Ogre Objekte, die zu dem GraphicsObjekt gehoeren
 		 */
-		std::map<std::string, Ogre::MovableObject*> m_attached_objects;
+		std::map<std::string, AttachedMovableObject> m_attached_objects;
 		
 		/**
 		 * \var std::map<std::string, GraphicObject*> m_subobjects
