@@ -42,6 +42,18 @@ void RegionData::addEvent(TriggerType trigger, Event* event)
 	m_events.insert(std::make_pair(trigger,event));
 }
 
+void RegionCamera::addPosition(Position& pos, float time)
+{
+	if (m_next_positions.empty() && World::getWorld()->isServer())
+	{
+		NetEvent event;
+		event.m_type = NetEvent::REGION_CAMERA;
+		event.m_id = m_region->getId();
+		m_region->insertNetEvent(event);
+	}
+	m_next_positions.push_back(std::make_pair(pos,time));
+}
+
 void RegionCamera::update(float time)
 {
 	if (m_next_positions.empty())
@@ -60,6 +72,17 @@ void RegionCamera::update(float time)
 		{
 			Trigger* tr = new Trigger("camera_move_complete");
 			m_region->insertTrigger(tr);
+		}
+		else
+		{
+			if ( World::getWorld()->isServer())
+			{
+				
+				NetEvent event;
+				event.m_type = NetEvent::REGION_CAMERA;
+				event.m_id = m_region->getId();
+				m_region->insertNetEvent(event);
+			}
 		}
 	}
 	else
@@ -80,6 +103,69 @@ void RegionCamera::update(float time)
 		rtime -= time;
 	}
 }
+
+void RegionCamera::toString(CharConv* cv)
+{
+	cv->toBuffer(m_position.m_distance);
+	cv->toBuffer(m_position.m_phi);
+	cv->toBuffer(m_position.m_theta);
+	cv->toBuffer(m_position.m_focus.m_x);
+	cv->toBuffer(m_position.m_focus.m_y);
+	if (m_next_positions.empty())
+	{
+		cv->toBuffer<char>('0');
+	}
+	else
+	{
+		cv->toBuffer<char>('1');
+		Position& pos = m_next_positions.front().first;
+		
+		cv->toBuffer(pos.m_distance);
+		cv->toBuffer(pos.m_phi);
+		cv->toBuffer(pos.m_theta);
+		cv->toBuffer(pos.m_focus.m_x);
+		cv->toBuffer(pos.m_focus.m_y);
+		cv->toBuffer(m_next_positions.front().second);
+			
+	}
+}
+
+void RegionCamera::fromString(CharConv* cv)
+{
+	cv->fromBuffer(m_position.m_distance);
+	cv->fromBuffer(m_position.m_phi);
+	cv->fromBuffer(m_position.m_theta);
+	cv->fromBuffer(m_position.m_focus.m_x);
+	cv->fromBuffer(m_position.m_focus.m_y);
+	
+	char c='0';
+	cv->fromBuffer<char>(c);
+	if (c =='1')
+	{
+		Position pos;
+		
+		cv->fromBuffer(pos.m_distance);
+		cv->fromBuffer(pos.m_phi);
+		cv->fromBuffer(pos.m_theta);
+		cv->fromBuffer(pos.m_focus.m_x);
+		cv->fromBuffer(pos.m_focus.m_y);
+		
+		float time;
+		cv->fromBuffer(time);
+		
+		time -= cv->getDelay();
+		
+		if (time > 0)
+		{
+			addPosition(pos,time);
+		}
+		else
+		{
+			memcpy(&m_position,&pos,sizeof(Position));
+		}
+	}
+}
+
 
 Region::Region(short dimx, short dimy, short id, std::string name, RegionData* data)
 {
@@ -1728,7 +1814,7 @@ void Region::setRegionData(CharConv* cv,WorldObjectMap* players)
 	// statische Objekte einlesen
 	short nr_stat;
 	cv->fromBuffer<short>(nr_stat);
-	DEBUG("static objects: %i",nr_stat);
+	DEBUG5("static objects: %i",nr_stat);
 
 	for (int i=0; i<nr_stat;i++)
 	{

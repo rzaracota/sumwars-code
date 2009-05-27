@@ -397,10 +397,8 @@ class RegionCamera
 		 * \param pos Position die erreicht werden soll
 		 * \param time Zeit in ms, die vergeht, bis ausgehend von der vorhergehenden Position die angegebenen Position erreicht wird
 		 */
-		void addPosition(Position& pos, float time)
-		{
-			m_next_positions.push_back(std::make_pair(pos,time));
-		}
+		void addPosition(Position& pos, float time);
+		
 	
 		/**
 		 * \fn void update(float time)
@@ -408,6 +406,21 @@ class RegionCamera
 		 * \param time Zeit in ms
 		 */
 		void update(float time);
+		
+		/**
+		 * \fn void toString(CharConv* cv)
+		 * \brief Konvertiert das Objekt in einen String und schreibt ihn in der Puffer
+		 * \param cv Ausgabepuffer
+		 */
+		void toString(CharConv* cv);
+			
+			
+		/**
+		 * \fn void fromString(CharConv* cv)
+		 * \brief Erzeugt das Objekt aus einem String
+		 * \param cv Eingabepuffer
+		 */
+		void fromString(CharConv* cv);
 		
 		
 		/**

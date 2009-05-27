@@ -1415,7 +1415,7 @@ void World::updatePlayers()
 
 				if (headerp.m_content == PTYPE_S2C_REGION_CHANGED)
 				{
-					DEBUG("notified that region changed to %i",headerp.m_number);
+					DEBUG5("notified that region changed to %i",headerp.m_number);
 					// der lokale Spieler hat die Region gewechselt
 					// fehlende Daten anfordern
 					if (m_local_player->getRegion()!=0)
@@ -1424,7 +1424,7 @@ void World::updatePlayers()
 					}
 					m_local_player->setState(WorldObject::STATE_REGION_DATA_REQUEST,false);
 					m_local_player->setRegionId(headerp.m_number);
-					DEBUG("state %i",m_local_player->getState());
+					DEBUG5("state %i",m_local_player->getState());
 	
 				}
 
@@ -1673,6 +1673,11 @@ bool World::writeNetEvent(Region* region,NetEvent* event, CharConv* cv)
 			
 			item->toStringComplete(cv);
 		}
+		
+		if (event->m_type == NetEvent::REGION_CAMERA)
+		{
+			region->getCamera().toString(cv);
+		}
 	}
 	else
 	{
@@ -1774,6 +1779,8 @@ bool World::writeNetEvent(Region* region,NetEvent* event, CharConv* cv)
 		DEBUG("party %i changed relation to %i to %i",event->m_data, event->m_id, getParty(event->m_data)->getRelations()[event->m_id]);
 		cv->toBuffer<char>(getParty(event->m_data)->getRelations()[event->m_id]);
 	}
+	
+
 
 	return true;
 }
@@ -2156,7 +2163,7 @@ bool World::processNetEvent(Region* region,CharConv* cv)
 			char rel;
 			cv->fromBuffer(rel);
 			World::getWorld()->getParty( event.m_data )->setRelation(event.m_id, (WorldObject::Relation) rel);
-			DEBUG("party %i changed relation to %i to %i",event.m_data, event.m_id, rel);
+			DEBUG5("party %i changed relation to %i to %i",event.m_data, event.m_id, rel);
 			break;
 			
 			
@@ -2166,6 +2173,14 @@ bool World::processNetEvent(Region* region,CharConv* cv)
 			{
 				region ->setCutsceneMode(mode);
 			}
+			break;
+			
+		case NetEvent::REGION_CAMERA:
+			if (region !=0)
+			{
+				region->getCamera().fromString(cv);
+			}
+			break;
 
 		default:
 			ERRORMSG("unknown event type %i",event.m_type);

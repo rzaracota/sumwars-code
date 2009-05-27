@@ -434,6 +434,7 @@ struct NetEvent
   TRADER_ITEM_SELL = 52,
   
   REGION_CUTSCENE = 40,
+  REGION_CAMERA = 41,
 		
 	};
 	
