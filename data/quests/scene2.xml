@@ -32,49 +32,64 @@
 				addCameraPosition(0,get(getRole("PL"),"position"),20,40,20);
 				addCameraPosition(20000,get(getRole("PL"),"position"),220,60,30);
 
-				speak("PL",_("Koennen wir irgendwie diesen Kristall"),1000);
+				speak("PL",_("Can we blind this crystal somehow?"),1000);
 				if (getRole("MAG") ~= nil) then
-					speak("MAG",_("Aber ja, ich kenne da einen netten kleinen Trick."),1000);
+					speak("MAG",_("But of course."),1000);
+					speak("MAG",_("I know this nice little trick."),1000);
 				elseif (getRole("PRI") ~= nil) then
-					speak("PRI",_("Aber ja, ich kenne da einen netten kleinen Trick."),1000);
+					speak("PRI",_("But of course."),1000);
+					speak("PRI",_("I know this nice little trick."),1000);
 				else
-					speak("ANY",_("Aber ja, ich kenne da einen netten kleinen Trick."),1000);
+					speak("ANY",_("But of course."),1000);
+					speak("ANY",_("I know this nice little trick."),1000);
 				end;
 
 				-- (beginnt den Kristall zu verzaubern)
 
-				speak("SW",_("Wagt es ja nicht, oder"),1000);
+				speak("SW",_("Don't you dare to, or"),1000);
 				jumpTopic("remove_soren");
 				if (getRole("MAG") ~= nil) then
-					speak("MAG",_("So, das wars."),1000);
+					speak("MAG",_("Well, it's done."),1000);
 				elseif (getRole("PRI") ~= nil) then
-					speak("PRI",_("So, das wars."),1000);
+					speak("PRI",_("Well, it's done."),1000);
 				else
-					speak("ANY",_("So, das wars."),1000);
+					speak("ANY",_("Well, it's done."),1000);
 				end;
-				speak("PL",_("Und jetzt kann er uns"),1000);
+				speak("PL",_("And now he can't hear us anymore?"),1000);
 				if (getRole("MAG") ~= nil) then
-					speak("MAG",_("Nur wenn wir es wollen, aber nerven"),1000);
+					speak("MAG",_("Only if we want to."),1000);
+					speak("MAG",_("But he can still annoy us."),1000);
+					speak("MAG",_("We will defenitly notice if he has something to tell to us."),1000);
 				elseif (getRole("PRI") ~= nil) then
-					speak("PRI",_("Nur wenn wir es wollen, aber nerven"),1000);
+					speak("PRI",_("Only if we want to."),1000);
+					speak("PRI",_("But he can still annoy us."),1000);
+					speak("PRI",_("We will defenitly notice if he has something to tell to us."),1000);
 				else
-					speak("ANY",_("Nur wenn wir es wollen, aber nerven"),1000);
+					speak("ANY",_("Only if we want to."),1000);
+					speak("ANY",_("But he can still annoy us."),1000);
+					speak("ANY",_("We will defenitly notice if he has something to tell to us."),1000);
 				end;
-				speak("PL",_("Sehr gut, Also was haltet ihr von"),1000);
-				speak("ANYast",_("Habe ich das Richtig verstanden?"),1000);
-				speak("WAR",_("Gesagt hat er es, aber ich habe"),1000);
-				speak("MAG",_("Aber das Ding war ohne Zweifel"),1000);
-				speak("WAR",_("Fast in Ohnmacht gefallen bist"),1000);
-				speak("PRI",_("Freiheit. Ich habe schon nicht"),1000);
-				speak("ANYast",_("Trotzdem ist es unwahrscheinlich,"),1000);
-				speak("WAR",_("Wenn es auch nur eine kleine"),1000);
-				speak("MAG",_("Wenn Dummheit ein Gewicht"),1000);
-				speak("WAR",_("Wenn Arroganz einen Geruch"),1000);
-				speak("PL",_("Also gut, wir stimmen ab,"),1000);
+				speak("PL",_("Very good."),1000);
+				speak("PL",_("What do you think about this?"),1000);
+				speak("ANYast",_("Did I get this right?"),1000);
+				speak("ANYast",_("Has he really the power to release us of Harad's Curse?"),1000);
+				speak("WAR",_("He said that, but I never heard before that someone took something out of hell."),1000);
+				speak("MAG",_("That thing was real, no doubt about it."),1000);
+				speak("MAG",_("The sight alone gave me goose bumps."),1000);
+				speak("WAR",_("You nearly fainted."),1000);
+				speak("PRI",_("Freedom."),1000);
+				speak("PRI",_("I don't even have memorys of it..."),1000);
+				speak("ANYast",_("Still, it's unlikely that he will keep his promise."),1000);
+				speak("ANYast",_("Even if he has the power to do it we're to valuable to his ends."),1000);
+				speak("ANYast",_("We are truely branded."),1000);
+				speak("WAR",_("If there's even the slightest chance I'm willing to try."),1000);
+				speak("MAG",_("If stupidity had a weight you'd be unable to move."),1000);
+				speak("WAR",_("If arrogance had a smell you'd suffocate instantly"),1000);
+				speak("PL",_("Very well than. Let's vote about our course of action."),1000);
 
 				-- => Den Anweisungen der Gilde folgen?
 
-				addQuestion(_("Den Anweisungen der Gilde folgen?"));
+				addQuestion(_("Follow the guilds orders?"));
 				addAnswer(_("Yes"),"follow_instructions");
 				addAnswer(_("No"),"dont_follow_instructions");
 			</Effect>
@@ -88,7 +103,7 @@
 				
 		<Topic name="follow_instructions">
 			<Effect>
-				speak("PL",_("Dann ist es entschieden."),1000);
+				speak("PL",_("Than it's decided. We'll raise hell if they don't keep their word."),1000);
 				
 				-- weiter in das Soeldnerlager.
 				print("test1");
@@ -98,7 +113,10 @@
 		
 		<Topic name="dont_follow_instructions">
 			<Effect>
-				speak("PL",_("Die ganze Sache ist wirklich zu unsicher."),1000);
+				speak("PL",_("This hole thing is really too precarious."),1000);
+				speak("PL",_("We can't afford open resistance though, "),1000);
+				speak("PL",_("so we'll grind and bear it for the time being."),1000);
+				speak("PL",_("Let's win their trust."),1000);
 				
 				-- weiter in das Soeldnerlager.
 				
