@@ -75,7 +75,7 @@
 
 <!-- Medair, Hintergassen zwischen Konzil und Soeldnerlager-->
 	<Region id="17" name="medBackalley">
-		<Settings dimx="12" dimy="12" area_percent="0.3" complexity="0.3" granularity="4"  ground="grass1"/>
+		<Settings dimx="17" dimy="17" region_template="medBackalley"  ground="grass1"/>
 		
 		<ExitDirections north="true" south="true" west="false" east="false" />
 		
