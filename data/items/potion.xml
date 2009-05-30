@@ -1,10 +1,10 @@
-﻿<!-- POTION -->
+<!-- POTION -->
 <!-- small potion -->
 <Item type="potion" subtype="heal_1" name="small potion" size="small">
 	<Image image="set:potion_health.png image:full_image" />
 	<Mesh file="potion.mesh" />
 	<Attribute
-		character_requirement="all"
+		character_requirement="15"
 		price = "20"
   />
   
@@ -24,7 +24,7 @@
 	<Image image="set:potion_health.png image:full_image" />
 	<Mesh file="potion.mesh" />
 	<Attribute
-		character_requirement="all"
+		character_requirement="15"
 		price = "80"
   />
   
@@ -44,12 +44,12 @@
 	<Image image="set:potion_health.png image:full_image" />
 	<Mesh file="potion.mesh" />
 	<Attribute
-		character_requirement="all"
+		character_requirement="15"
 		price = "100"
   />
   
   <UseupEffect
-		dstatus_mod_immune_time0="8000"
+		dstatus_blind_immune_time="8000"
 	/>
   
   
@@ -64,12 +64,12 @@
 	<Image image="set:potion_health.png image:full_image" />
 	<Mesh file="potion.mesh" />
 	<Attribute
-		character_requirement="all"
+		character_requirement="15"
 		price = "100"
   />
   
   <UseupEffect
-		dstatus_mod_immune_time1="3000"
+		dstatus_poison_immune_time="3000"
 	/>
   
   
@@ -84,12 +84,12 @@
 	<Image image="set:potion_health.png image:full_image" />
 	<Mesh file="potion.mesh" />
 	<Attribute
-		character_requirement="all"
+		character_requirement="15"
 		price = "100"
   />
   
   <UseupEffect
-		dstatus_mod_immune_time2="3000"
+		dstatus_berserk_immune_time="3000"
 	/>
   
   
@@ -104,12 +104,12 @@
 	<Image image="set:potion_health.png image:full_image" />
 	<Mesh file="potion.mesh" />
 	<Attribute
-		character_requirement="all"
+		character_requirement="15"
 		price = "100"
   />
   
   <UseupEffect
-		dstatus_mod_immune_time3="3000"
+		dstatus_confuse_immune_time="3000"
 	/>
   
   
@@ -124,12 +124,12 @@
 	<Image image="set:potion_health.png image:full_image" />
 	<Mesh file="potion.mesh" />
 	<Attribute
-		character_requirement="all"
+		character_requirement="15"
 		price = "100"
   />
   
   <UseupEffect
-		dstatus_mod_immune_time4="3000"
+		dstatus_mute_immune_time="3000"
 	/>
   
   
@@ -144,12 +144,12 @@
 	<Image image="set:potion_health.png image:full_image" />
 	<Mesh file="potion.mesh" />
 	<Attribute
-		character_requirement="all"
+		character_requirement="15"
 		price = "100"
   />
   
   <UseupEffect
-		dstatus_mod_immune_time5="3000"
+		dstatus_paralyze_immune_time="3000"
 	/>
   
   
@@ -164,12 +164,12 @@
 	<Image image="set:potion_health.png image:full_image" />
 	<Mesh file="potion.mesh" />
 	<Attribute
-		character_requirement="all"
+		character_requirement="15"
 		price = "100"
   />
   
   <UseupEffect
-		dstatus_mod_immune_time6="1000"
+		dstatus_frozen_immune_time="1000"
 	/>
   
   
@@ -184,12 +184,12 @@
 	<Image image="set:potion_health.png image:full_image" />
 	<Mesh file="potion.mesh" />
 	<Attribute
-		character_requirement="all"
+		character_requirement="15"
 		price = "100"
   />
   
   <UseupEffect
-		dstatus_mod_immune_time7="1000"
+		dstatus_burning_immune_time="1000"
 	/>
   
   
