@@ -787,6 +787,15 @@ class Region
 		{
 			return m_projectiles;
 		}
+		
+		/**
+		 * \fn GameObjectMap& getGameObjects()
+		 * \brief Gibt die Datenstruktur mit allen Objekten aus
+		 */
+		GameObjectMap& getGameObjects()
+		{
+			return m_game_objects;
+		}
 
 		/**
 		 * \fn void insertNetEvent(NetEvent &event)
@@ -1150,6 +1159,11 @@ class Region
 		*/
 		DropItemMap* m_drop_item_locations;
 	
+		/**
+		 * \var GameObjectMap m_game_objects
+		 * \brief Datenstruktur mit allen (nicht statischen) Spielobjekten der Region
+		 */
+		GameObjectMap m_game_objects;
 	
 		/**
 		* \var short m_id

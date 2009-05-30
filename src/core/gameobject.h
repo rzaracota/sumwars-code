@@ -409,6 +409,25 @@ class GameObject
 			m_height = height;
 		}
 		
+			/**
+		 * \fn bool getDestroyed()
+		 * \brief Gibt zurueck ob das Objekt zerstoert ist
+			 */
+		bool getDestroyed()
+		{
+			return m_destroyed;
+		}
+	
+		/**
+		 * \fn void setDestroyed(bool d)
+		 * \brief Setzt den Status zerstoert
+		 * \param d neuer Status
+		 */
+		void setDestroyed(bool d)
+		{
+			m_destroyed =d;
+		}
+		
 	private:
 		/**
 		 * \var int m_id
@@ -475,8 +494,19 @@ class GameObject
 		 * \brief Gibt die Geschwindigkeit des Objektes an
 		 */
 		Vector m_speed;
+		
+		/**
+		 * \var m_destroyed
+		 * \brief Information, ob das Objekt zerst&ouml;rt ist
+		 */
+		bool m_destroyed;
 };
 
 typedef std::string PlayerLook;
+
+/**
+ * Liste von WorldObject Zeigern sortiert nach ihrer ID
+ */
+typedef std::map<int,GameObject*> GameObjectMap;
 
 #endif

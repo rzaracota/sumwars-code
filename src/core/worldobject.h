@@ -201,7 +201,6 @@ class WorldObject : public GameObject
 	 */
 	virtual  bool  init ()
 	{
-		m_destroyed=false;
 		return true;
 	}
 	
@@ -212,25 +211,6 @@ class WorldObject : public GameObject
 	 * \return bool der angibt, ob die Zerst&ouml;rung erfolgreich war
 	 */
 	virtual  bool  destroy ();
-	
-	/**
-	 * \fn bool getDestroyed()
-	 * \brief Gibt zurueck ob das Objekt zerstoert ist
-	 */
-	bool getDestroyed()
-	{
-		return m_destroyed;
-	}
-	
-	/**
-	 * \fn void setDestroyed(bool d)
-	 * \brief Setzt den Status zerstoert
-	 * \param d neuer Status
-	 */
-	void setDestroyed(bool d)
-	{
-		m_destroyed =d;
-	}
 	
 	/**
 	 * \fn bool moveTo(Vector newpos )
@@ -401,11 +381,7 @@ private:
 	
 	
 	
-	/**
-	 * \var m_destroyed
-	 * \brief Information, ob das Objekt zerst&ouml;rt ist
-	 */
-	bool m_destroyed;
+
 	
 	
 };

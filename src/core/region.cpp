@@ -774,6 +774,7 @@ bool Region::insertObject(WorldObject* object, Vector pos, float angle, bool col
 	if (object->getState() != WorldObject::STATE_STATIC)
 	{
 		result &= (m_objects->insert(std::make_pair(object->getId(),object))).second;
+		result &= (m_game_objects.insert(std::make_pair(object->getId(),object))).second;
 	}
 	else
 	{
@@ -1071,6 +1072,7 @@ bool  Region::insertProjectile(Projectile* object, Vector pos)
 {
 	DEBUG5("projectile inserted: %s %i",object->getSubtype().c_str(), object->getId());
 	m_projectiles->insert(std::make_pair(object->getId(),object));
+	m_game_objects.insert(std::make_pair(object->getId(),object));
 	object->getShape()->m_center = pos;
 	object->setRegionId( m_id);
 
@@ -1110,6 +1112,7 @@ bool  Region::deleteObject (WorldObject* object)
 	if (object->getState() != WorldObject::STATE_STATIC)
 	{
 		m_objects->erase(object->getId());
+		m_game_objects.erase(object->getId());
 	}
 	else
 	{
@@ -1258,6 +1261,7 @@ void Region::deleteProjectile(Projectile* proj)
 		m_projectiles->erase(m_projectiles->find(id));
 		DEBUG5("projectile deleted: %s %i",proj->getSubtype().c_str(), proj->getId());
 	}
+	m_game_objects.erase(id);
 }
 
 void Region::update(float time)
@@ -1327,7 +1331,7 @@ void Region::update(float time)
 	for (it3 = m_projectiles->begin(); it3 !=m_projectiles->end();)
 	{
 		pr = (it3->second);
-		if (pr->getState() == Projectile::STATE_DESTROYED)
+		if (pr->getDestroyed()==true)
 		{
 			// Projektile selbststaendig loeschen darf nur der Server
 			if (World::getWorld()->isServer())
@@ -2215,7 +2219,7 @@ bool  Region::dropItem(Item* item, Vector pos)
 			
 			m_drop_items->insert(std::make_pair(di->getId(),di));
 			m_drop_item_locations->insert(std::make_pair(i,di));
-
+			m_game_objects.insert(std::make_pair(di->getId(),di));
 
 			DEBUG5("items dropped at %f %f locID %i %p",sx/2.0f,sy/2.0f, di->getLocationId(),item);
 
@@ -2382,7 +2386,7 @@ bool Region::deleteItem(int id, bool delitem)
 
 		m_drop_items->erase(it);
 		m_drop_item_locations->erase(it2);
-
+		m_game_objects.erase(id);
 
 
 		return true;

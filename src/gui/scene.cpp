@@ -1580,7 +1580,7 @@ void Scene::createScene()
 {
 	DEBUG5("create Scene");
 
-	// alle Partikelsystem loeschen
+	// alle Partikelsysteme loeschen
 	std::multimap<std::string, Ogre::ParticleSystem*>::iterator kt;
 	for (kt = m_particle_system_pool.begin(); kt !=  m_particle_system_pool.end(); ++kt)
 	{

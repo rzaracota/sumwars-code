@@ -268,6 +268,7 @@ bool Projectile::update(float time)
 
 			case STATE_DESTROYED:
 				DEBUG5("destroyed");
+				setDestroyed(true);
 				time =0;
 				break;
 
