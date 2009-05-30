@@ -2,7 +2,7 @@
 
 #include "itemloader.h"
 #include "itemwindow.h"
-
+#include "graphicmanager.h"
 
 
 
@@ -105,6 +105,8 @@ void ItemLoader::loadItem(TiXmlNode* node)
 				{
 					DEBUG5("registered Item mesh %s %s",item_data->m_subtype.c_str(),file.c_str());
 					Scene::registerItem(item_data->m_subtype,file);
+					GraphicManager::registerGraphicMapping(item_data->m_subtype,file);
+					
 				}
 			}
 			else if (!strcmp(child->Value(), "Attribute"))

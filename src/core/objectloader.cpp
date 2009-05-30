@@ -7,7 +7,7 @@
 #include "objectfactory.h"
 #include "objectloader.h"
 #include "scene.h"
-
+#include "graphicmanager.h"
 
 
 ///// neuer Monsterloader
@@ -121,6 +121,7 @@ bool  ObjectLoader::loadMonster(TiXmlNode* node)
 					Scene::registerObject(subtype, mesh, "");
 					
 					DEBUG5("mesh %s %s",subtype.c_str(), mesh.c_str());
+					GraphicManager::registerGraphicMapping(subtype, mesh);
 				}
 				else if (!strcmp(child->Value(), "ExtraMesh"))
 				{
@@ -395,6 +396,7 @@ bool ObjectLoader::loadFixedObject(TiXmlNode* node)
 				attr.getString("file",mesh);
 				
 				Scene::registerObject(subtype,mesh);
+				GraphicManager::registerGraphicMapping(subtype, mesh);
 			}
 			else if (child->Type()==TiXmlNode::ELEMENT && !strcmp(child->Value(), "Geometry"))
 			{
