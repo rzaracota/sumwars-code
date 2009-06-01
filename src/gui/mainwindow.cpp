@@ -1270,8 +1270,7 @@ void MainWindow::updateItemInfo()
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::Window* label = win_mgr.getWindow("ItemInfoLabel");
 	
-	std::map<int,string>* itms = m_scene->getDropItems();
-	std::map<int,string>::iterator it;
+	
 	
 	DropItem* di;
 	
@@ -1280,7 +1279,7 @@ void MainWindow::updateItemInfo()
 	Vector plpos = player->getShape()->m_center;
 	
 	
-	
+	/*
 	if (m_document->getGUIState()->m_cursor_object == "")
 	{
 		
@@ -1433,8 +1432,11 @@ void MainWindow::updateItemInfo()
 			label->setVisible(false);
 		}
 	}
-	
+	*/
 
+	DropItemMap* itms = player->getRegion()->getDropItems();
+	DropItemMap::iterator it;
+	
 	if (m_document->getGUIState()->m_alt_hold)
 	{
 		label->setVisible(false);
@@ -1526,11 +1528,8 @@ void MainWindow::updateItemInfo()
 		for (it = itms->begin();it != itms->end();++it)
 		{
 			
-			di = World::getWorld()->getRegion(rid)->getDropItem(it->first);
-			if (di ==0)
-			{
-				continue;
-			}
+			di = it->second;
+			
 			
 			name = di->getItem()->getName();
 			DEBUG5(" ");
