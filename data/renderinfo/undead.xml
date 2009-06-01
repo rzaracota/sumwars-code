@@ -1,0 +1,37 @@
+<RenderInfo name="skeletonbase" parent="creaturebase">
+	<Action name="walk">
+		<Animation name="walk" />
+	</Action>
+	
+	<Action name="attack">
+		<Animation name="attack1" />
+	</Action>
+	<Action name="attack">
+		<Animation name="attack2" />
+	</Action>
+	<Action name="attack">
+		<Animation name="attack3" />
+	</Action>
+	
+	<Action name="range_attack">
+		<Animation name="attack1" />
+	</Action>
+	<Action name="range_attack">
+		<Animation name="attack2" />
+	</Action>
+	<Action name="range_attack">
+		<Animation name="attack3" />
+	</Action>
+	
+	<Action name="die">
+		<Animation name="die" />
+	</Action>
+</RenderInfo>
+
+<RenderInfo name="lich" parent="creaturebase">
+	<Entity source="lich.mesh"/>
+</RenderInfo>
+
+<RenderInfo name="skeleton" parent="skeletonbase">
+	<Entity source="skeleton.mesh"/>
+</RenderInfo>

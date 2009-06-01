@@ -6,7 +6,6 @@
 #include "monster.h"
 #include "objectfactory.h"
 #include "objectloader.h"
-#include "scene.h"
 #include "graphicmanager.h"
 
 
@@ -118,17 +117,9 @@ bool  ObjectLoader::loadMonster(TiXmlNode* node)
 				{
 					std::string mesh;
 					attr.getString("file",mesh);
-					Scene::registerObject(subtype, mesh, "");
 					
 					DEBUG5("mesh %s %s",subtype.c_str(), mesh.c_str());
 					GraphicManager::registerGraphicMapping(subtype, mesh);
-				}
-				else if (!strcmp(child->Value(), "ExtraMesh"))
-				{
-					std::string bone,mesh;
-					attr.getString("file",mesh);
-					attr.getString("bone",bone);
-					Scene::registerAttachedMesh(subtype,bone,mesh);	
 				}
 				else if (!strcmp(child->Value(), "Dropslots"))
 				{
@@ -201,18 +192,6 @@ bool  ObjectLoader::loadMonster(TiXmlNode* node)
 							action = Action::getActionType(act);
 							data->m_base_attr.m_abilities[action/32] |= 1<<(action%32);
 							
-							for (TiXmlNode* child3 = child2->FirstChild(); child3 != 0; child3 = child3->NextSibling())
-							{
-								attr.parseElement(child3->ToElement());
-								attr.getString("name",anim);
-								if (anim != "")
-								{
-									animations[action].push_back(anim);
-									
-									DEBUG5("animation %s %s %s",subtype.c_str(),act.c_str(), anim.c_str());
-								}
-							}
-							
 						}
 						else if (!strcmp(child2->Value(), "Immunity"))
 						{
@@ -275,7 +254,6 @@ bool  ObjectLoader::loadMonster(TiXmlNode* node)
 						}
 					}
 					
-					Scene::registerObjectAnimations(subtype,animations);
 				
 				}
 				else if (!strcmp(child->Value(), "Geometry"))
@@ -395,7 +373,6 @@ bool ObjectLoader::loadFixedObject(TiXmlNode* node)
 				std::string mesh;
 				attr.getString("file",mesh);
 				
-				Scene::registerObject(subtype,mesh);
 				GraphicManager::registerGraphicMapping(subtype, mesh);
 			}
 			else if (child->Type()==TiXmlNode::ELEMENT && !strcmp(child->Value(), "Geometry"))

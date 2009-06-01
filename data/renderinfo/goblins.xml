@@ -1,5 +1,5 @@
 
-<RenderInfo name="goblinbase" >
+<RenderInfo name="goblinbase" parent="creaturebase">
 	<Action name="walk">
 		<Animation name="walk" />
 	</Action>

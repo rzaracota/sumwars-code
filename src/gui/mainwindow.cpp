@@ -234,11 +234,6 @@ void MainWindow::update()
 			m_cegui_system->setGUISheet(m_game_screen);
 			m_game_screen->addChildWindow(m_sub_windows["Options"]->getCEGUIWindow());
 			
-			/*
-			CEGUI::Window* label;
-			label = win_mgr.getWindow("CharacterPreviewImage");
-			m_game_screen->addChildWindow(label);
-			*/
 		}
 		m_document->setModified(m_document->getModified() & (~Document::GUISHEET_MODIFIED));
 	}
@@ -993,13 +988,11 @@ void  MainWindow::updateMainMenu()
 	int wflags = m_document->getGUIState()->m_shown_windows;
 	if (wflags & (Document::SAVEGAME_LIST | Document::CHAR_CREATE))
 	{
-		m_scene->changeViewportSize(Scene::VIEW_RIGHT);
 		img->setVisible(false);
 		label->setVisible(true);
 	}
 	else
 	{
-		m_scene->changeViewportSize(Scene::VIEW_FULL);
 		img->setVisible(true);
 		label->setVisible(false);
 	}

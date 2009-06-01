@@ -292,7 +292,6 @@ AIR
 <!-- L3 -->
 <Monster type="MONSTER" subtype="goblin_rob" name="goblin robber" fraction="MONSTER" category="GOBLIN" layer="NORMAL">
 	<Mesh file="goblin_rob" />
-	<ExtraMesh bone="itemRightHand" file="goblin_hmr.mesh" />
 	<Dropslots >
 		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" max_gold="50" min_level="0" max_level="5" magic_prob="0.1" magic_power="250" />
 		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.05" pgold="0.05" max_gold="30" min_level="0" max_level="3" magic_prob="0.2" magic_power="200" />
@@ -323,18 +322,9 @@ AIR
 					step_length="0.8"
 					attack_range="1"
 					>
-		<Ability type="walk">
-			<Animation name="walk" />
-		</Ability>
-		
-		<Ability type="attack">
-			<Animation name="attack" />
-			<Animation name="attack2"/>
-		</Ability>
-		
-		<Ability type="die">
-			<Animation name="die" />
-		</Ability>
+		<Ability type="walk" />
+		<Ability type="attack"/>
+		<Ability type="die" />
 		
 	</BasicAttributes>
 	
@@ -347,10 +337,6 @@ AIR
 <!-- L4 -->
 <Monster type="MONSTER" subtype="goblin_bon" name="boneshaker" fraction="MONSTER" category="GOBLIN" layer="NORMAL">
 	<Mesh file="goblin_bon" />
-	<ExtraMesh bone="itemRightHand" file="goblin_stf.mesh" />
-	<ExtraMesh bone="EllbogenRechts" file="goblin_glv.mesh" />
-	<ExtraMesh bone="KnieRechts" file="gobLeg_arm.mesh" />
-	<ExtraMesh bone="Crown" file="goblin_hlm.mesh" />
 	<Dropslots >
 		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" max_gold="50" min_level="0" max_level="5" magic_prob="0.1" magic_power="300" />
 		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.05" pgold="0.05" max_gold="30" min_level="0" max_level="3" magic_prob="0.2" magic_power="250" />
@@ -381,26 +367,11 @@ AIR
 					step_length="0.8"
 					attack_range="1"
 					>
-		<Ability type="walk">
-			<Animation name="walk" />
-		</Ability>
-
-		<Ability type="magic_attack">
-			<Animation name="attack" />
-			<Animation name="attack2"/>
-		</Ability>
-		
-		<Ability type="lightning">
-			<Animation name="attack2"/>
-		</Ability>
-
-		<Ability type="blade_storm">
-			<Animation name="attack2"/>
-		</Ability>
-		
-		<Ability type="die">
-			<Animation name="die" />
-		</Ability>
+		<Ability type="walk" />
+		<Ability type="attack"/>
+		<Ability type="lightning" />
+		<Ability type="blade_storm" />
+		<Ability type="die" />
 		
 	</BasicAttributes>
 	
@@ -414,7 +385,6 @@ AIR
 <!-- L2 -->
 <Monster type="MONSTER" subtype="goblin_bow" name="goblin hunter" fraction="MONSTER" category="GOBLIN" layer="NORMAL">
 	<Mesh file="goblin_bow" />
-	<ExtraMesh bone="itemRightHand" file="goblin_sbw.mesh" />
 	<Dropslots >
 		<Dropslot pbig="0.02" pmedium="0.07" psmall="0.08" pgold="0.05" max_gold="50" min_level="0" max_level="5" magic_prob="0.1" magic_power="250" />
 		<Dropslot pbig="0.02" pmedium="0.07" psmall="0.05" pgold="0.05" max_gold="30" min_level="0" max_level="3" magic_prob="0.2" magic_power="250" />
@@ -445,18 +415,9 @@ AIR
 					step_length="0.8"
 					attack_range="1"
 					>
-		<Ability type="walk">
-			<Animation name="walk" />
-		</Ability>
-		
-		<Ability type="range_attack">
-			<Animation name="attack" />
-			<Animation name="attack2"/>
-		</Ability>
-		
-		<Ability type="die">
-			<Animation name="die" />
-		</Ability>
+		<Ability type="walk" />
+		<Ability type="range_attack"/>
+		<Ability type="die" />
 		
 	</BasicAttributes>
 	
@@ -498,17 +459,9 @@ AIR
 		step_length="0.5"
 		attack_range="0.5"
 	>
-		<Ability type="walk">
-			<Animation name="walkOneHand" />
-		</Ability>
-		
-		<Ability type="attack">
-			<Animation name="attack" />
-		</Ability>
-		
-		<Ability type="die">
-			<Animation name="die" />
-		</Ability>
+		<Ability type="walk" />
+		<Ability type="attack"/>
+		<Ability type="die" />
 		
 	</BasicAttributes>
 	
@@ -551,18 +504,9 @@ AIR
 		step_length="0.8"
 		attack_range="0.5"
 	>
-		<Ability type="walk">
-			<Animation name="walk" />
-		</Ability>
-		
-		<Ability type="attack">
-			<Animation name="attack" />
-			<Animation name="attack2"/>
-		</Ability>
-		
-		<Ability type="die">
-			<Animation name="die" />
-		</Ability>
+		<Ability type="walk" />
+		<Ability type="attack"/>
+		<Ability type="die" />
 		
 	</BasicAttributes>
 	
@@ -575,8 +519,6 @@ AIR
 <!-- L5 -->
 <Monster type="MONSTER" subtype="goblin_war" name="goblin warrior" fraction="MONSTER" category="GOBLIN" layer="NORMAL">
 	<Mesh file="goblin_war" />
-	<ExtraMesh bone="itemRightHand" file="crude_sw.mesh" />
-	<ExtraMesh bone="itemLeftHand" file="crude_sw.mesh" />
 	<Dropslots >
 		<Dropslot pbig="0.01" pmedium="0.02" psmall="0.04" pgold="0.02" max_gold="50" min_level="0" max_level="9" magic_prob="0.1" magic_power="350" />
 		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" max_gold="30" min_level="0" max_level="5" magic_prob="0.2" magic_power="300" />
@@ -607,18 +549,9 @@ AIR
 					step_length="0.8"
 					attack_range="1"
 					>
-		<Ability type="walk">
-			<Animation name="walk" />
-		</Ability>
-		
-		<Ability type="attack">
-			<Animation name="attack" />
-			<Animation name="attack2"/>
-		</Ability>
-		
-		<Ability type="die">
-			<Animation name="die" />
-		</Ability>
+		<Ability type="walk" />
+		<Ability type="attack"/>
+		<Ability type="die" />
 		
 	</BasicAttributes>
 	
@@ -631,7 +564,6 @@ AIR
 <!-- L7 -->
 <Monster type="MONSTER" subtype="goblin_pch" name="goblin poacher" fraction="MONSTER" category="GOBLIN" layer="NORMAL">
 	<Mesh file="goblin_pch" />
-	<ExtraMesh bone="itemRightHand" file="goblin_sbw.mesh" />
 	<Dropslots >
 		<Dropslot pbig="0.01" pmedium="0.02" psmall="0.04" pgold="0.02" max_gold="50" min_level="0" max_level="12" magic_prob="0.1" magic_power="400" />
 		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" max_gold="30" min_level="0" max_level="8" magic_prob="0.2" magic_power="300" />
@@ -662,18 +594,10 @@ AIR
 					step_length="0.8"
 					attack_range="1"
 					>
-		<Ability type="walk">
-			<Animation name="walk" />
-		</Ability>
 		
-		<Ability type="range_attack">
-			<Animation name="attack" />
-			<Animation name="attack2"/>
-		</Ability>
-		
-		<Ability type="die">
-			<Animation name="die" />
-		</Ability>
+	<Ability type="walk" />
+	<Ability type="range_attack"/>
+	<Ability type="die" />
 		
 	</BasicAttributes>
 	
@@ -686,10 +610,6 @@ AIR
 <!-- L10 -->
 <Monster type="MONSTER" subtype="goblin_sh" name="goblin shaman" fraction="MONSTER" category="GOBLIN" layer="NORMAL">
 	<Mesh file="goblin.mesh" />
-	<ExtraMesh bone="itemRightHand" file="goblin_stf.mesh" />
-	<ExtraMesh bone="EllbogenRechts" file="goblin_glv.mesh" />
-	<ExtraMesh bone="KnieRechts" file="gobLeg_arm.mesh" />
-	<ExtraMesh bone="Crown" file="goblin_hlm.mesh" />
 	<Dropslots >
 		<Dropslot pbig="0.01" pmedium="0.02" psmall="0.04" pgold="0.02" max_gold="30" min_level="0" max_level="12" magic_prob="0.1" magic_power="500" />
 		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" max_gold="20" min_level="0" max_level="9" magic_prob="0.2" magic_power="400" />
@@ -720,18 +640,10 @@ AIR
 		step_length="0.8"
 		attack_range="0.5"
 	>
-		<Ability type="walk">
-			<Animation name="walk" />
-		</Ability>
-		
-		<Ability type="attack">
-			<Animation name="attack" />
-			<Animation name="attack2"/>
-		</Ability>
-		
-		<Ability type="die">
-			<Animation name="die" />
-		</Ability>
+		<Ability type="walk" />
+		<Ability type="range_attack"/>
+		<Ability type="die" />
+
 		
 	</BasicAttributes>
 	
@@ -744,7 +656,6 @@ AIR
 <!-- L11 -->
 <Monster type="MONSTER" subtype="goblin_wrc" name="goblin chieftain" fraction="MONSTER" category="GOBLIN" layer="NORMAL">
 	<Mesh file="goblin_wrc" />
-	<ExtraMesh bone="itemRightHand" file="crude_sw.mesh" />
 	<Dropslots >
 		<Dropslot pbig="0.01" pmedium="0.02" psmall="0.04" pgold="0.02" max_gold="50" min_level="0" max_level="13" magic_prob="0.1" magic_power="550" />
 		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" max_gold="30" min_level="0" max_level="10" magic_prob="0.2" magic_power="500" />
@@ -775,18 +686,10 @@ AIR
 					step_length="0.8"
 					attack_range="1"
 					>
-		<Ability type="walk">
-			<Animation name="walk" />
-		</Ability>
-		
-		<Ability type="attack">
-			<Animation name="attack" />
-			<Animation name="attack2"/>
-		</Ability>
-		
-		<Ability type="die">
-			<Animation name="die" />
-		</Ability>
+	<Ability type="walk" />
+	<Ability type="range_attack"/>
+	<Ability type="die" />
+
 		
 	</BasicAttributes>
 	
@@ -799,7 +702,7 @@ AIR
 
 <!-- Lich -->
 <Monster type="MONSTER" subtype="lich" name="lich" fraction="UNDEAD" category="UNDEAD" layer="NORMAL">
-	<Mesh file="lich.mesh" />
+	<Mesh file="lich" />
 	<Dropslots >
 		<Dropslot pbig="0.1" pmedium="0.2" psmall="0.2" pgold="0.2" max_gold="50" min_level="10" max_level="40" magic_prob="0.5" magic_power="1000" />
 		<Dropslot pbig="0.05" pmedium="0.08" psmall="0.04" pgold="0.3" min_gold="100" max_gold="500" min_level="0" max_level="20" magic_prob="0.2" magic_power="1000" />
@@ -830,21 +733,11 @@ AIR
 		step_length="1.0"
 		attack_range="2"
 	>
-		<Ability type="walk">
-			<Animation name="walk" />
-		</Ability>
 		
-		<Ability type="attack">
-			<Animation name="idle" />
-		</Ability>
-		
-		<Ability type="die">
-			<Animation name="idle" />
-		</Ability>
-		
-		<Ability type="ice_bolt">
-			<Animation name="idle" />
-		</Ability>
+	<Ability type="walk" />
+	<Ability type="attack"/>
+	<Ability type="die" />
+	<Ability type="ice_bolt" />
 		
 		
 		<Immunity type="berserk"/>
@@ -858,7 +751,7 @@ AIR
 
 <!-- skeleton, oldsword -->
 <Monster type="MONSTER" subtype="sword_skel" name="skeleton" fraction="UNDEAD" category="UNDEAD" layer="NORMAL">
-	<Mesh file="skeleton.mesh" />
+	<Mesh file="skeleton" />
 	<Dropslots >
 		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" max_gold="100" min_level="0" max_level="10" magic_prob="0.1" magic_power="1000" />
 		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" max_gold="50" min_level="0" max_level="20" magic_prob="0.2" magic_power="1000" />
@@ -889,19 +782,9 @@ AIR
 		step_length="1.0"
 		attack_range="1"
 	>
-		<Ability type="walk">
-			<Animation name="walk" />
-		</Ability>
-		
-		<Ability type="attack">
-			<Animation name="attack1" />
-			<Animation name="attack2" />
-			<Animation name="attack3" />
-		</Ability>
-		
-		<Ability type="die">
-			<Animation name="die" />
-		</Ability>
+		<Ability type="walk" />
+		<Ability type="attack"/>
+		<Ability type="die" />
 		
 		<Immunity type="blind"/>
 		<Immunity type="poisoned"/>
@@ -918,7 +801,7 @@ AIR
 
 <!-- skeleton, axe -->
 <Monster type="MONSTER" subtype="axe_skel" name="skeleton" fraction="UNDEAD" category="UNDEAD" layer="NORMAL">
-	<Mesh file="skeleton.mesh" />
+	<Mesh file="skeleton" />
 	<Dropslots >
 		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" max_gold="100" min_level="0" max_level="10" magic_prob="0.1" magic_power="1000" />
 		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" max_gold="50" min_level="0" max_level="20" magic_prob="0.2" magic_power="1000" />
@@ -949,19 +832,9 @@ AIR
 		step_length="1.0"
 		attack_range="1"
 	>
-		<Ability type="walk">
-			<Animation name="walk" />
-		</Ability>
-		
-		<Ability type="attack">
-			<Animation name="attack1" />
-			<Animation name="attack2" />
-			<Animation name="attack3" />
-		</Ability>
-		
-		<Ability type="die">
-			<Animation name="die" />
-		</Ability>
+		<Ability type="walk" />
+		<Ability type="attack"/>
+		<Ability type="die" />
 		
 		<Immunity type="blind"/>
 		<Immunity type="poisoned"/>
@@ -978,7 +851,7 @@ AIR
 
 <!-- skeleton, 2haxe -->
 <Monster type="MONSTER" subtype="axe2_skel" name="skeleton" fraction="UNDEAD" category="UNDEAD" layer="NORMAL">
-	<Mesh file="skeleton.mesh" />
+	<Mesh file="skeleton" />
 	<Dropslots >
 		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" max_gold="100" min_level="0" max_level="10" magic_prob="0.1" magic_power="1000" />
 		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" max_gold="50" min_level="0" max_level="20" magic_prob="0.2" magic_power="1000" />
@@ -1009,19 +882,9 @@ AIR
 		step_length="1.0"
 		attack_range="1"
 	>
-		<Ability type="walk">
-			<Animation name="walk" />
-		</Ability>
-		
-		<Ability type="attack">
-			<Animation name="attack1" />
-			<Animation name="attack2" />
-			<Animation name="attack3" />
-		</Ability>
-		
-		<Ability type="die">
-			<Animation name="die" />
-		</Ability>
+		<Ability type="walk" />
+		<Ability type="attack"/>
+		<Ability type="die" />
 		
 		<Immunity type="blind"/>
 		<Immunity type="poisoned"/>
@@ -1039,7 +902,7 @@ AIR
 <!-- Phantom -->
 <!-- Noch kein Mesh -->
 <Monster type="MONSTER" subtype="phantom" name="phantom" fraction="UNDEAD" category="UNDEAD" layer="AIR">
-	<Mesh file="skeleton.mesh" />
+	<Mesh file="skeleton" />
 	<Dropslots >
 		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" max_gold="100" min_level="0" max_level="10" magic_prob="0.1" magic_power="1000" />
 		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" max_gold="50" min_level="0" max_level="20" magic_prob="0.2" magic_power="1000" />
@@ -1070,20 +933,10 @@ AIR
 		step_length="1.0"
 		attack_range="1"
 	>
-		<Ability type="walk">
-			<Animation name="walk" />
-		</Ability>
-		
-		<Ability type="attack">
-			<Animation name="attack1" />
-			<Animation name="attack2" />
-			<Animation name="attack3" />
-		</Ability>
-		
-		<Ability type="die">
-			<Animation name="die" />
-		</Ability>
-		
+		<Ability type="walk" />
+		<Ability type="attack"/>
+		<Ability type="die" />
+	
 		<Immunity type="blind"/>
 		<Immunity type="poisoned"/>
 		<Immunity type="berserk"/>
@@ -1099,7 +952,7 @@ AIR
 
 <!-- Zombie -->
 <Monster type="MONSTER" subtype="zombie" name="zombie" fraction="UNDEAD" category="UNDEAD" layer="NORMAL">
-	<Mesh file="skeleton.mesh" />
+	<Mesh file="skeleton" />
 	<Dropslots >
 		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" max_gold="100" min_level="0" max_level="10" magic_prob="0.1" magic_power="1000" />
 		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" max_gold="50" min_level="0" max_level="20" magic_prob="0.2" magic_power="1000" />
@@ -1130,20 +983,10 @@ AIR
 		step_length="1.0"
 		attack_range="1"
 	>
-		<Ability type="walk">
-			<Animation name="walk" />
-		</Ability>
-		
-		<Ability type="attack">
-			<Animation name="attack1" />
-			<Animation name="attack2" />
-			<Animation name="attack3" />
-		</Ability>
-		
-		<Ability type="die">
-			<Animation name="die" />
-		</Ability>
-		
+		<Ability type="walk" />
+		<Ability type="attack"/>
+		<Ability type="die" />
+	
 		<Immunity type="blind"/>
 		<Immunity type="poisoned"/>
 		<Immunity type="berserk"/>
@@ -1214,7 +1057,7 @@ AIR
 <!-- Kleine Alraune -->
 <!-- hat noch kein Mesh -->
 <Monster type="MONSTER" subtype="mandrake_s" name="small mandragora" fraction="MONSTER" category="ANIMAL" layer="NORMAL">
-	<Mesh file="goblin.mesh" />
+	<Mesh file="goblin" />
 	<Dropslots >
 		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" max_gold="100" min_level="0" max_level="10" magic_prob="0.1" magic_power="1000" />
 		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" max_gold="50" min_level="0" max_level="20" magic_prob="0.2" magic_power="1000" />
@@ -1275,7 +1118,7 @@ AIR
 <!-- Alraune -->
 <!-- hat noch kein Mesh -->
 <Monster type="MONSTER" subtype="mandrake_m" name="mandragora" fraction="MONSTER" category="ANIMAL" layer="NORMAL">
-	<Mesh file="goblin.mesh" />
+	<Mesh file="goblin" />
 	<Dropslots >
 		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" max_gold="100" min_level="0" max_level="10" magic_prob="0.1" magic_power="1000" />
 		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" max_gold="50" min_level="0" max_level="20" magic_prob="0.2" magic_power="1000" />

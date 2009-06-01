@@ -27,57 +27,6 @@
 
 
 /**
- * \struct RenderInfo
- * \brief Enthaelt die Informationen die zum Rendern eines Objektes notwendig sind
- */
-struct RenderInfo
-{
-	/**
-	 * \var std::string m_mesh
-	 * \brief Name des Meshes des Objektes. Leerer String, wenn das Objekt kein Mesh hat
-	 */
-	std::string m_mesh;
-
-	/**
-	* \var std::std::list<pair<std::string,std::string> > m_extra_meshes
-	* \brief Liste der weiteren Meshes die an das Hauptmesh angefuegt werden
-	* erster Teil des Wertepaares: Name des Knochens
-	* zweiter Teil des Wertepaares: Name des Meshes
-	*/
-	std::list<std::pair<std::string,std::string> > m_extra_meshes;
-
-	/**
-	 * \var std::string m_particle_system
-	 * \brief Partikelsystem des Objektes. Leerer String, wenn das Objekt kein Partikelsystem hat
-	 */
-	std::string m_particle_system;
-
-	/**
-	 * \var float m_scaling_factor
-	 * \brief Faktor um den das Mesh und das Partikelsystem skaliert werden
-	 */
-	float m_scaling_factor;
-
-	/**
-	 * \fn RenderInfo() {}
-	 * \brief Konstruktor
-	 */
-	RenderInfo() {}
-	
-	/**
-	 * \fn RenderInfo(std::string mesh, std::string particle_system, float scaling_factor =1.0)
-	 * \brief Konstruktor
-	 */
-	RenderInfo(std::string mesh, std::string particle_system, float scaling_factor =1.0)
-	{
-		m_mesh = mesh;
-		m_particle_system = particle_system;
-		m_scaling_factor = scaling_factor;
-	}
-
-};
-
-/**
  * \class Scene
  * \brief Beschreibt die darzustellende Szene
  */
@@ -85,17 +34,7 @@ class Scene
 {
 	public:
 		
-	/**
-	 * \enum ViewportSize
-	 * \brief verschiedene Anordnungen der Flaeche in die gerendert wird
-	 */
-	enum ViewportSize
-	{
-		VIEW_FULL =1,
-		VIEW_LEFT = 2,
-  		VIEW_RIGHT =3,
-	};
-	
+
 	enum ObjectMask
 	{
 		WORLDOBJECT = 0x1,
@@ -141,31 +80,6 @@ class Scene
 		return m_viewport;
 	}
 	
-	/**
-	 * \fn void changeViewportSize(ViewportSize size)
-	 * \brief Aendert die Flaeche in die gerendert wird
-	 */
-	void changeViewportSize(ViewportSize size);
-
-
-	/**
-	 * \fn std::map<int,string>* getObjects()
-	 * \brief Gibt die Liste der in der Szene dargestellten nicht statischen Objekte aus
-	 */
-	std::map<int,string>* getObjects()
-	{
-		return m_objects;
-	}
-
-	/**
-	 * \fn std::map<int,string>* getDropItems()
-	 * \brief Gibt die Liste der in der Szene dargestellen Gegenstaende aus
-	 */
-	std::map<int,string>* getDropItems()
-	{
-		return m_drop_items;
-	}
-	
 	
 	/**
 	 * \fn std::pair<float,float> getProjection(Vector pos, float height=0)
@@ -190,63 +104,17 @@ class Scene
 	 */
 	void updateCharacterView();
 
-	/**
-	 * \fn static void registerObjectAnimations(GameObject::Subtype subtype, std::map<Action::ActionType, std::vector<std::string> > &animations)
-	 * \brief Registriert die Animationen fuer ein Objekt
-	 * \param subtype Subtyp des Objektes
-	 * \param animations Liste der Animationen sortiert nach Aktionstyp
-	 */
-	static void registerObjectAnimations(GameObject::Subtype subtype, std::map<Action::ActionType, std::vector<std::string> > &animations);
 	
-    /**
-	 * \fn void registerAttachedMesh(GameObject::Subtype subtype, std::string bone, std::string mesh)
-	 * \brief Registriert fuer ein bestehendes Objekt ein Mesh das an das Objekt angefuegt wird
-	 * \param subtype Subtype des Objektes
-	 * \param bone Knochen an den Mesh gehaengt wird
-	 * \param mesh Mesh des angehaengten Objektes
-	 */
-	static void registerAttachedMesh(GameObject::Subtype subtype, std::string bone, std::string mesh);
 	
 	/**
-	 * \fn void registerObject(GameObject::Subtype subtype, std::string mesh, std::string particle_system= "", float scaling_factor =1.0)
-	 * \brief Registriert fuer ein Objekt das zugehoerige Mesh, Partikelsystem, Skalierungsfaktor
-	 * \param subtype Subtyp des Objektes
-	 * \param mesh Mesh fuer das Objekt. Leerer String, wenn kein Mesh verwendet wird
-	 * \param particle_system Name des Partikelsystems. Leerer string, wenn kein Partikelsystem verwendet wird
-	 * \param scaling_factor Faktor um den das Mesh und alle Partikelsystem skaliert werden
-	 */
-	static void registerObject(GameObject::Subtype subtype, std::string mesh, std::string particle_system= "", float scaling_factor =1.0);
-	
-	/**
-	 * \fn static void registerPlayerLook(GameObject::Subtype subtype, PlayerLook look, std::string mesh, bool male = true)
+	 * \fn static void registerPlayerLook(GameObject::Subtype subtype, PlayerLook look, bool male = true)
 	 * \brief Registiert ein fuer einen Spielertyp zulaessiges Aussehen
 	 * \param subtype Spielertyp
 	 * \param look Aussehen
 	 * \param male Gibt Geschlecht an
-	 * \param mesh Ogre Mesh
 	 */
-	static void registerPlayerLook(GameObject::Subtype subtype, PlayerLook look, std::string mesh, bool male = true);
+	static void registerPlayerLook(GameObject::Subtype subtype, PlayerLook look, bool male = true);
 
-	
-
-	/**
-	 * \fn void registerItem(Item::Subtype subtype, std::string mesh, std::string particle_system, float scaling_factor =1.0)
-	 * \brief Registriert fuer ein Item das zugehoerige Mesh, Partikelsystem, Skalierungsfaktor
-	 * \param subtype Subtyp des Items
-	 * \param mesh Mesh fuer das Item. Leerer String, wenn kein Mesh verwendet wird
-	 * \param particle_system Name des Partikelsystems. Leerer string, wenn kein Partikelsystem verwendet wird
-	 */
-	static void registerItem(Item::Subtype subtype, std::string mesh, std::string particle_system= "", float scaling_factor =1.0);
-
-	/**
-	 * \fn void registerProjectile(Projectile::Subtype type, std::string mesh, std::string particle_system = "", float scaling_factor =1.0)
-	 * \brief Registriert fuer ein Projektil das zugehoerige Mesh, Partikelsystem, Skalierungsfaktor
-	 * \param type Subtyp des Projektil
-	 * \param mesh Mesh fuer das Projektil. Leerer String, wenn kein Mesh verwendet wird
-	 * \param particle_system Name des Partikelsystems. Leerer string, wenn kein Partikelsystem verwendet wird
-	 * \param scaling_factor Faktor um den das Mesh und alle Partikelsystem skaliert werden
-	 */
-	static void registerProjectile(Projectile::Subtype type, std::string mesh, std::string particle_system = "", float scaling_factor =1.0);
 
 	static void getMeshInformation(const Ogre::MeshPtr mesh, size_t &vertex_count, Ogre::Vector3* &vertices,  size_t &index_count,
 						unsigned long* &indices,  const Ogre::Vector3 &position,  const Ogre::Quaternion &orient,  const Ogre::Vector3 &scale);
@@ -301,86 +169,6 @@ class Scene
 	void deleteGraphicObject(int id);
 	
 	/**
-	 * \fn void updateObjects()
-	 * \brief Aktualisiert die Darstellung aller Objekte
-	 */
-	void updateObjects();
-
-	/**
-	 * \fn void updateObject(WorldObject* obj);
-	 * \brief Fuegt das Objekt in die Szene ein
-	 */
-	void updateObject(WorldObject* obj);
-
-	/**
-	 * \fn bool updatePlayer(Player* pl, Ogre::Entity* obj_ent, Ogre::SceneManager* scene_manager)
-	 * \brief Aktualisiert die an den Spieler angehaengten Meshes
-	 * \param pl Spieler Objekt
-	 * \param obj_ent Ogre Entity
-	 * \param scene_manager Scene in der der Spieler sich befindet
-	 * \return Gibt an, ob eine Veraenderung eingetreten ist
-	 */
-	bool updatePlayer(Player* pl, Ogre::Entity* obj_ent, Ogre::SceneManager* scene_manager);
-
-	/**
-	 * \fn void  createObject(WorldObject* obj,std::string& name, bool is_static)
-	 * \brief Erzeugt auf Basis eines Objektes eine Ogre Objekt
-	 * \param obj Objekt fuer das eine Ogre Entity erzeugt werden soll
-	 * \param name Name des Objektes
-	 * \param is_static gibt an, ob das Objekt statisch ist
-	 */
-	void  createObject(WorldObject* obj,std::string& name, bool is_static = false);
-
-	/**
-	 * \fn void deleteObject(std::string name)
-	 * \brief Entfernt ein Objekt aus der Szene
-	 * \param name Name des Objektes in Ogre
-	 */
-	void deleteObject(std::string name);
-
-	/**
-	 * \fn void updateItems()
-	 * \brief Aktualisiert die Darstellung aller Items
-	 */
-	void updateItems();
-
-	/**
-	 * \fn void createItem(DropItem* di, std::string& name)
-	 * \brief Erzeugt auf Basis eines Items eine Ogre Entity mit dem angegebenen Name
-	 * \param di Gegenstand fuer den die Entity erzeugt werden soll
-	 * \param name der Entitiy
-	 */
-	 void createItem(DropItem* di, std::string& name);
-
-	/**
-	 * \fn void deleteItem(std::string name)
-	 * \brief Entfernt ein Item aus der Szene
-	 * \param name Name des Objektes in Ogre
-	 */
-	void deleteItem(std::string name);
-
-	/**
-	 * \fn void updateProjectiles()
-	 * \brief Aktualisiert die Darstellung Projektile
-	 */
-	void updateProjectiles();
-
-	/**
-	 * \fn void createProjectile(Projectile* pr, std::string& name)
-	 * \brief Erzeugt auf Basis eines Projektiles eine Ogre Entity mit dem angegebenen Name
-	 * \param pr Projektil fuer das die Entity erzeugt werden soll
-	 * \param name der Entitiy
-	 */
-	void createProjectile(Projectile* pr, std::string& name);
-
-	/**
-	 * \fn void deleteProjectile(std::string name)
-	 * \brief Entfernt ein Projektil aus der Szene
-	 * \param name Name des Objektes in Ogre
-	 */
-	void deleteProjectile(std::string name);
-
-	/**
 	 * \fn Ogre::ParticleSystem* getParticleSystem(std::string type)
 	 * \brief Gibt aus dem Pool ein passendes Partikelsystem aus
 	 * \param type Typ des Partikelsystems
@@ -394,20 +182,11 @@ class Scene
 	void putBackParticleSystem(Ogre::ParticleSystem* part);
 	
 	/**
-	 * \fn void destroySceneNode(std::string& node_name)
-	 * \brief Loescht einen Knoten mit allen angehaengten Objekten
-	 * \param node_name Name Knoten der geloescht werden soll
-	 */
-	void destroySceneNode(std::string& node_name);
-
-	
-	
-	/**
-	 * \var clearObjects()
-	 * \brief entfernt alle Objekte aus der Szene
+	 * \fn void clearObjects()
+	 * \brief Entfernt alle Objekte aus der Szene
 	 */
 	void clearObjects();
-
+	
 	/**
 	 * \var void createScene()
 	 * \brief Erstellt die Szene neu
@@ -422,57 +201,6 @@ class Scene
 	static void registerMeshes();
 
 
-	
-	/**
-	 * \fn RenderInfo getObjectRenderInfo(GameObject::Subtype subtype)
-	 * \brief Gibt die Informationen zum rendern eines Objektes aus
-	 * \param subtype Subtyp des Objektes
-	 */
-	static RenderInfo getObjectRenderInfo(GameObject::Subtype subtype);
-	
-	/**
-	 * \fn static RenderInfo getPlayerRenderInfo(PlayerLook look)
-	 * \brief Gibt zu dem Aussehen des Spielers die Informationen zum Rendern aus
-	 * \param look Aussehen des Spielers
-	 */
-	static RenderInfo getPlayerRenderInfo(PlayerLook look);
-
-	/**
-	 * \fn RenderInfo getItemRenderInfo(Item::Subtype subtype)
-	 * \brief Gibt die Informationen zum rendern eines Gegenstandes aus
-	 * \param subtype Subtyp des Gegenstandes
-	 */
-	static RenderInfo getItemRenderInfo(Item::Subtype subtype);
-
-	/**
-	 * \fn RenderInfo getProjectileRenderInfo(Projectile::Subtype subtype)
-	 * \brief Gibt die Informationen zum rendern eines Objektes aus
-	 * \param subtype Subtyp des Objektes
-	 */
-	static RenderInfo getProjectileRenderInfo(Projectile::Subtype subtype);
-	
-	
-	
-
-
-	/**
-	 * \var std::map<int,string>* m_objects
-	 * \brief IDs der objekte, die aktuell dargestellt werden, sowie deren Namen in Ogre
-	 */
-	std::map<int,string>* m_objects;
-
-	/**
-	 * \var std::map<int,string>* m_drop_items
-	 * \brief IDs der Gegenstaende, die aktuell dargestellt werden, sowie deren Namen in Ogre
-	 */
-	std::map<int,string>* m_drop_items;
-
-	/**
-	 * \var std::map<int,string>* m_projectiles
-	 * \brief IDs der Projektile, die aktuell dargestellt werden, sowie deren Namen in Ogre
-	 */
-	std::map<int,string>* m_projectiles;
-
 	/**
 	 * \var std::map<int,GraphicObject*> m_static_objects
 	 * \brief Graphikobjekte fuer alle statischen Objekte
@@ -485,42 +213,12 @@ class Scene
 	 */
 	std::map<int,GraphicObject*> m_graphic_objects;
 	
-	/**
-	 * \var static std::map<Projectile::Subtype, RenderInfo> m_projectile_render_info
-	 *  \brief Speichert fuer die Projektile die Information zum Rendern
-	 */
-	static std::map<Projectile::Subtype, RenderInfo> m_projectile_render_info;
-
-	/**
-	 * \var static std::map<GameObject::Subtype, RenderInfo> m_object_render_info
-	 *  \brief Speichert fuer die Objekte die Information zum Rendern
-	 */
-	static std::map<GameObject::Subtype, RenderInfo> m_object_render_info;
-	
-	/**
-	 * \var static std::map<PlayerLook, RenderInfo> m_player_render_info
-	 * \brief Speichert fuer die Spieler die Information zum Rendern
-	 */
-	static std::map<PlayerLook, RenderInfo> m_player_render_info;
 	
 	/**
 	 * \var static std::multimap< GameObject::Subtype, std::pair<bool, PlayerLook> > m_player_look
 	 * \brief Speichert, fuer welche Spielerklassen welches Aussehen erlaubt ist
 	 */
 	static std::multimap< GameObject::Subtype, std::pair<bool, PlayerLook> > m_player_look;
-	
-	/**
-	 * \var static std::map<GameObject::Subtype, std::map<Action::ActionType, std::vector<std::string> > > m_object_animations
-	 * \brief Animationen der Objekte (erster Schluessel: Objekttyp, zweiter Schluessel Aktionstyp)
-	 */
-	static std::map<GameObject::Subtype, std::map<Action::ActionType, std::vector<std::string> > > m_object_animations;
-	
-
-	/**
-	 * \var static std::map<Item::Subtype, RenderInfo> m_item_render_info
-	 *  \brief Speichert fuer die Projektile die Information zum Rendern
-	 */
-	static std::map<Item::Subtype, RenderInfo> m_item_render_info;
 
 
 	/**
@@ -569,16 +267,16 @@ class Scene
 	
 	
 	/**
-	 * \var ViewportSize m_viewport_size
-	 * \brief aktuelle Groesse und Platzierung der Flaeche in die gerendert wird
-	 */
-	ViewportSize m_viewport_size;
-	
-	/**
 	 * \var std::string m_temp_player
 	 * \brief Vorschau Objekt auf den aktuellen Spieler
 	 */
 	std::string m_temp_player;
+	
+	/**
+	 * \var GraphicObject* m_temp_player_object
+	 * \brief GraphikObjekt fuer den temporaeren Spieler
+	 */
+	GraphicObject* m_temp_player_object;
 	
 };
 

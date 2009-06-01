@@ -1,9 +1,9 @@
-#include "scene.h"
 
+
+#include "graphicmanager.h"
 #include "itemloader.h"
 #include "itemwindow.h"
-#include "graphicmanager.h"
-
+#include "elementattrib.h"
 
 
 bool ItemLoader::loadItemData(const char* pFilename)
@@ -104,7 +104,6 @@ void ItemLoader::loadItem(TiXmlNode* node)
 				if (item_data->m_subtype != "")
 				{
 					DEBUG5("registered Item mesh %s %s",item_data->m_subtype.c_str(),file.c_str());
-					Scene::registerItem(item_data->m_subtype,file);
 					GraphicManager::registerGraphicMapping(item_data->m_subtype,file);
 					
 				}

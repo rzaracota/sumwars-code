@@ -1,4 +1,4 @@
-<RenderInfo name="playerbase" >
+<RenderInfo name="playerbase" parent="creaturebase">
 	
 	<Action name="noaction">
 		<Animation name="idle" />

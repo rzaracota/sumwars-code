@@ -7,7 +7,6 @@
 
 #include "templateloader.h"
 
-#define USE_OBJECTLOADER
 
 
 std::map<GameObject::Subtype, MonsterBasicData*> ObjectFactory::m_monster_data;

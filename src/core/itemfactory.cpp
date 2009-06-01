@@ -1,6 +1,5 @@
 #include "itemfactory.h"
 
-#define USE_ITEMLOADER
 
 #include <iostream>
 
