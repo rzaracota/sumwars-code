@@ -1,7 +1,5 @@
-<RenderInfo name="goblin_rob">
-	<Entity source="goblin.mesh"/>
-	<Entity objectname="hammer" bone="itemRightHand" source="goblin_hmr.mesh" />
-	
+
+<RenderInfo name="goblinbase" >
 	<Action name="walk">
 		<Animation name="walk" />
 	</Action>
@@ -12,173 +10,84 @@
 	<Action name="attack">
 		<Animation name="attack2" />
 	</Action>
-	
+
 	<Action name="die">
 		<Animation name="die" />
 	</Action>
 	
-	<Action name="doubleattack">
-		<Animation name="attack" start="0.0" end="0.5"/>
-		<Animation name="attack2" start="0.5" end="1.0"/>
-	</Action>
-	
-	<Action name="walkattack">
-		<Animation name="walk" start="0.0" end="0.7"/>
-		<Animation name="attack" start="0.4" end="1.0"/>
-	</Action>
-	
-	<Action name="growattack">
-		<Scale  start="0.0" end="0.5" start_val="1.0" end_val="2.0" />
+	<Action name="range_attack">
 		<Animation name="attack" />
-		<Scale  start="0.5" end="1.0" start_val="2.0" end_val="1.0" />
 	</Action>
-	
-	<Action name="looseclub">
-		<Detach time="0.4" objectname="hammer" />
-		<Animation name="walk" />
-		<Entity time="0.9" objectname="hammer" bone="itemRightHand" source="goblin_hmr.mesh" />
+	<Action name="range_attack">
+		<Animation name="attack2" />
 	</Action>
-	
-	<Action name="bigclubattack">
-		<Scale  objectname="hammer" start="0.0" end="0.5" start_val="1.0" end_val="2.0" />
-		<Animation name="attack" />
-		<Scale objectname="hammer" start="0.5" end="1.0" start_val="2.0" end_val="1.0" />
-	</Action>
-	
-	<Action name="shift">
-		<Movement start="0.0" end="0.5" start_vec="0.0 0.0 0.0" end_vec="50.0 0.0 0.0" />
-		<Movement start="0.5" end="1.0" start_vec="50.0 0.0 0.0" end_vec="0.0 0.0 0.0" />
-	</Action>
-	
-	<Action name="shifthammer">
-		<Movement objectname="hammer" start="0.0" end="0.5" start_vec="0.0 0.0 0.0" end_vec="50.0 0.0 0.0" />
-		<Animation name="attack" />
-		<Movement objectname="hammer" start="0.5" end="1.0" start_vec="50.0 0.0 0.0" end_vec="0.0 0.0 0.0" />
-	</Action>
-	
-	<Action name="rotate">
-		<Rotation start="0.0" end="1.0" start_vec="0.0 0.0 0.0" end_vec="0.0 360.0 0.0" />
-		<Rotation objectname="hammer" start="0.0" end="1.0" start_vec="0.0 0.0 0.0" end_vec="0.0 360.0 0.0" />
-	</Action>
-	
-	<Action name="rotatehammer">
-		<Rotation objectname="hammer" start="0.0" end="1.0" start_vec="0.0 0.0 0.0" end_vec="0.0 360.0 0.0" />
-	</Action>
-	
-	<Action name="firewave">
-		<!--<Entity time="0.0" objectname="firewave" position="0.0 50.0 0.0" source=".mesh" /> -->
-	</Action>
-	
-	<State name="poisoned" >
-		<Activation>
-			<Entity objectname="poison" position="0.0 100.0 0.0" source="goblin_hmr.mesh"/>
-		</Activation>
-		
-		<Active time="2000">
-			<Rotation objectname="poison" start_vec="0.0 0.0 0.0" end_vec="0.0 360.0 0.0" />
-		</Active>
-		
-		<Deactivation>
-			<Detach objectname="poison" />
-		</Deactivation>
-	</State>
-	
-	<State name="burning" >
-		<Activation time="1000" >
-			<!-- <ParticleSystem objectname="fire" position="0.0 50.0 0.0" source="Fireball"/> -->
-			<Entity objectname="fire" position="0.0 50.0 0.0" source="goblin_hmr.mesh"/> 
-			<Scale objectname="fire" start_val="0.1" end_val="1.0" />
-		</Activation>
-		
-		<Deactivation time="1000">
-			<Scale objectname="fire" start_val="1.0" end_val="0.1" />
-			<Detach time="1.0" objectname="fire" />
-		</Deactivation>
-	</State>
 </RenderInfo>
 
-<RenderInfo name="goblin_club">	
+<RenderInfo name="goblin" parent="goblinbase">
 	<Entity source="goblin.mesh"/>
-	<Subobject objectname="hammer" bone="itemRightHand" source="goblin_hammer" />
-	
-	<Action name="growattack">
-		<Scale  start="0.0" end="0.5" start_val="1.0" end_val="2.0" />
-		<Animation name="attack" />
-		<Scale  start="0.5" end="1.0" start_val="2.0" end_val="1.0" />
-	</Action>
-	
-	<Action name="bigclubattack">
-		<Scale  objectname="hammer" start="0.0" end="0.5" start_val="1.0" end_val="2.0" />
-		<Animation name="attack" />
-		<Scale objectname="hammer" start="0.5" end="1.0" start_val="2.0" end_val="1.0" />
-	</Action>
-	
-	<Action name="bigclubattack2">
-		<Animation name="attack" />
-	</Action>
-	
-	<Action name="shift">
-		<Movement start="0.0" end="0.5" start_vec="0.0 0.0 0.0" end_vec="50.0 0.0 0.0" />
-		<Movement start="0.5" end="1.0" start_vec="50.0 0.0 0.0" end_vec="0.0 0.0 0.0" />
-	</Action>
-	
-	<Action name="shifthammer">
-		<Movement objectname="hammer" start="0.0" end="0.5" start_vec="0.0 0.0 0.0" end_vec="50.0 0.0 0.0" />
-		<Animation name="attack" />
-		<Movement objectname="hammer" start="0.5" end="1.0" start_vec="50.0 0.0 0.0" end_vec="0.0 0.0 0.0" />
-	</Action>
-	
-	<Action name="rotate">
-		<Rotation start="0.0" end="1.0" start_vec="0.0 0.0 0.0" end_vec="0.0 360.0 0.0" />
-	</Action>
-	
-	<Action name="rotatehammer">
-		<Rotation objectname="hammer" start="0.0" end="1.0" start_vec="0.0 0.0 0.0" end_vec="0.0 360.0 0.0" />
-	</Action>
 </RenderInfo>
 
-<RenderInfo name="goblin_hammer">	
-	<Entity source="goblin_hmr.mesh"/>
-	
-	<Action name="bigclubattack2">
-		<ParticleSystem time ="0.5" objectname="fire" position="0.0 0.0 -80.0" source="Fireball"/>
-		<Scale start="0.0" end="0.5" start_val="1.0" end_val="2.0" />
-		<Scale start="0.5" end="1.0" start_val="2.0" end_val="1.0" />
-		<Detach time = "0.7" objectname="fire" />
-	</Action>
-</RenderInfo>
-
-<RenderInfo name="warrior_gob">	
-	<Entity source="warrior_m.mesh"/>
-	<Subobject objectname="goblin" bone="itemRightHand" source="goblin_club" />
-	
-	<Action name="bigclubattack2">
-		<Animation name="attack" />
-	</Action>
-</RenderInfo>
-
-<RenderInfo name="goblin_test">
+<RenderInfo name="goblin_rob" parent="goblinbase">
 	<Entity source="goblin.mesh"/>
-	<Subobject objectname="hammer" source="goblin_hammer" />
+	<Entity objectname="weapon" bone="itemRightHand" source="goblin_hmr.mesh" />
+</RenderInfo>
+
+<RenderInfo name="goblin_bon" parent="goblinbase">
+	<Entity source="goblin.mesh"/>
+	<Entity objectname="weapon" bone="itemRightHand" source="goblin_stf.mesh" />
+	<Entity objectname="gloves" bone="EllbogenRechts" source="goblin_glv.mesh" />
+	<Entity objectname="armor" bone="KnieRechts" source="gobLeg_arm.mesh" />
+	<Entity objectname="helmet" bone="Crown" source="goblin_hlm.mesh" />
 	
-	<Action name="shifthammer">
-		<Movement objectname="hammer" start="0.0" end="0.5" start_vec="0.0 0.0 0.0" end_vec="50.0 0.0 0.0" />
-		<Movement objectname="hammer" start="0.5" end="1.0" start_vec="50.0 0.0 0.0" end_vec="0.0 0.0 0.0" />
+	<Action name="magic_attack">
+		<Animation name="attack" />
+	</Action>
+	<Action name="magic_attack">
+		<Animation name="attack2" />
 	</Action>
 	
-	<Action name="rotate">
-		<Rotation start="0.0" end="1.0" start_vec="0.0 0.0 0.0" end_vec="0.0 360.0 0.0" />
+	<Action name="lightning">
+		<Animation name="attack2" />
 	</Action>
 	
-	<Action name="rotatehammer">
-		<Rotation objectname="hammer" start="0.0" end="1.0" start_vec="0.0 0.0 0.0" end_vec="0.0 360.0 0.0" />
+	<Action name="blade_storm">
+		<Animation name="attack2" />
 	</Action>
 </RenderInfo>
 
-<RenderInfo name="goblin_nazi">
-	<Subobject objectname="goblin1" position="0 0 -100" source="goblin_rob" />
-	<Subobject objectname="goblin2" position="0 0 -50" source="goblin_rob" />
-	<Subobject objectname="goblin3" position="0 0 0" source="goblin_rob" />
-	<Subobject objectname="goblin4" position="0 0 50" source="goblin_rob" />
-	<Subobject objectname="goblin5" position="0 0 100" source="goblin_rob" />
-</RenderInfo>	
+<RenderInfo name="goblin_bow" parent="goblinbase">
+	<Entity source="goblin.mesh"/>
+	<Entity objectname="weapon" bone="itemRightHand" source="goblin_sbw.mesh" />
+</RenderInfo>
+
+<RenderInfo name="goblin_dog" parent="goblinbase">
+	<Entity source="gobDog.mesh"/>
+	
+	<Action name="walk">
+		<Animation name="walkOneHand" />
+	</Action>
+	
+	<Action name="attack">
+		<Animation name="attack" />
+	</Action>
+</RenderInfo>
+
+<RenderInfo name="goblin_fgt" parent="goblinbase">
+	<Entity source="gob_brown.mesh"/>
+</RenderInfo>
+
+<RenderInfo name="goblin_war" parent="goblinbase">
+	<Entity source="goblin.mesh"/>
+	<Entity objectname="weapon" bone="itemRightHand" source="crude_sw.mesh" />
+	<Entity objectname="weapon2" bone="itemLeftHand" source="crude_sw.mesh" /> 
+</RenderInfo>
+
+<RenderInfo name="goblin_pch" parent="goblinbase">
+	<Entity source="gob_brown.mesh"/>
+	<Entity objectname="weapon" bone="itemRightHand" source="goblin_sbw.mesh" />
+</RenderInfo>
+
+<RenderInfo name="goblin_wrc" parent="goblinbase">
+	<Entity source="goblin.mesh"/>
+	<Entity objectname="weapon" bone="itemRightHand" source="crude_sw.mesh" />
+</RenderInfo>

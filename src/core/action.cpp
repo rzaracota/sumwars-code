@@ -1755,6 +1755,10 @@ string Action::getName(ActionType type)
 
 }
 
+ string Action::getEnumName(ActionType type)
+{
+	return m_base_info[type].m_enum_name;
+}
 
 string Action::getDescription(ActionType type)
 {

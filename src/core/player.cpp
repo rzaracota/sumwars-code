@@ -2487,3 +2487,16 @@ void Player::updateMessageTimer(float time)
 	}
 }
 
+std::string Player::getActionString()
+{
+	std::string ret = Creature::getActionString();
+	Action::ActionEquip equ = getAction()->m_action_equip;
+	if (equ == Action::NO_WEAPON)
+		ret += "#Unarmed";
+	else if (equ == Action::ONE_HANDED)
+		ret += "#OneHand";
+	else if (equ == Action::TWO_HANDED)
+		ret += "#TwoHands";
+	
+	return ret;
+}

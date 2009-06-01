@@ -90,8 +90,14 @@ class GraphicObject
 		
 		void update(float time);
 		
-	private:
+		bool updateSubobject(MovableObjectInfo& object); 
 		
+		Type getType()
+		{
+			return m_type;
+		}
+		
+	private:
 		void addMovableObject(MovableObjectInfo& object);
 		
 		void removeMovableObject(std::string name);

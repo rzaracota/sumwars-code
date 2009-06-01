@@ -44,7 +44,7 @@
   <Locations>
     <Location name="entry_north" pos_x="0.02761584937" pos_y="0"/>
     <Location name="exit_north" pos_x="0.03338260164" pos_y="-6.568680661" />
-    <Location name="locPeasent" pos_x="-4.682676892" pos_y="-3.295569055" />
+    <Location name="testloc" pos_x="4.682676892" pos_y="-3.295569055" />
 	<Location name="WaypointLoc" pos_x="0" pos_y="0" />
   </Locations>
 

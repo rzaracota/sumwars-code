@@ -796,6 +796,15 @@ class Region
 		{
 			return m_game_objects;
 		}
+		
+		/**
+		 * \fn WorldObjectMap* getStaticObjects()
+		 * \brief Gibt die statischen Objekte aus
+		 */
+		WorldObjectMap* getStaticObjects()
+		{
+			return m_static_objects;
+		}
 
 		/**
 		 * \fn void insertNetEvent(NetEvent &event)

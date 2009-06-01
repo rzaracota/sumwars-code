@@ -1,0 +1,122 @@
+<RenderInfo name="arrow">
+	<Entity source="arrow.mesh"/>
+</RenderInfo>
+
+<RenderInfo name="magic_arrow">
+	<ParticleSystem source="Magic_Arrow"/>
+</RenderInfo>
+
+<RenderInfo name="fire_bolt">
+	<ParticleSystem source="Firebolt"/>
+</RenderInfo>
+
+<RenderInfo name="fire_ball">
+	<ParticleSystem source="Fireball"/>
+</RenderInfo>
+
+<RenderInfo name="fire_wall">
+	<ParticleSystem source="Firewall"/>
+</RenderInfo>
+
+<RenderInfo name="fire_wave">
+	<ParticleSystem source="Firewave"/>
+</RenderInfo>
+
+<RenderInfo name="ice_bolt">
+	<ParticleSystem source="Icebolt"/>
+</RenderInfo>
+
+<RenderInfo name="ice_ring">
+	<ParticleSystem source="Icering"/>
+</RenderInfo>
+
+<RenderInfo name="blizzard">
+	<ParticleSystem source="Blizzard"/>
+</RenderInfo>
+
+<RenderInfo name="freeze">
+	<ParticleSystem source="Freeze"/>
+</RenderInfo>
+
+<RenderInfo name="lightning">
+	<ParticleSystem source="Lightning"/>
+</RenderInfo>
+
+<RenderInfo name="thunderstorm">
+	<ParticleSystem source="Thunderstorm"/>
+</RenderInfo>
+
+<RenderInfo name="chain_lightning">
+	<ParticleSystem source="Chainlightning"/>
+</RenderInfo>
+
+<RenderInfo name="static_shield">
+	<ParticleSystem source="Static_shield"/>
+</RenderInfo>
+
+<RenderInfo name="fire_arrow">
+	<Entity source="arrow.mesh"/>
+	<ParticleSystem objectname="particle" source="Fire_Arrow"/>
+</RenderInfo>
+
+<RenderInfo name="ice_arrow">
+	<Entity source="arrow.mesh"/>
+	<ParticleSystem objectname="particle" source="Ice_Arrow"/>
+</RenderInfo>
+
+
+<RenderInfo name="wind_arrow">
+	<Entity source="arrow.mesh"/>
+	<ParticleSystem objectname="particle"  source="Wind_Arrow"/>
+</RenderInfo>
+
+<RenderInfo name="guided_arrow">
+	<Entity source="arrow.mesh"/>
+	<ParticleSystem objectname="particle" source="Guided_Arrow"/>
+</RenderInfo>
+
+<RenderInfo name="explosion">
+	<ParticleSystem source="Explosion"/>
+</RenderInfo>
+
+<RenderInfo name="fire_explosion">
+	<ParticleSystem source="Fire_Explosion"/>
+</RenderInfo>
+
+<RenderInfo name="ice_explosion">
+	<ParticleSystem source="Ice_Explosion"/>
+</RenderInfo>
+
+<RenderInfo name="wind_explosion">
+	<ParticleSystem source="wind_Explosion"/>
+</RenderInfo>
+
+<RenderInfo name="elem_explosion">
+	<ParticleSystem source="ElemExplosion"/>
+</RenderInfo>
+
+<RenderInfo name="light_beam">
+	<ParticleSystem source="Lightbeam"/>
+</RenderInfo>
+
+<RenderInfo name="divine_beam">
+	<ParticleSystem source="Divine_Beam"/>
+</RenderInfo>
+
+<RenderInfo name="acid">
+	<ParticleSystem source="Acid"/>
+</RenderInfo>
+
+<RenderInfo name="hypnosis">
+	<ParticleSystem source="Hypnosis"/>
+</RenderInfo>
+
+
+
+
+
+
+
+
+
+

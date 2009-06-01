@@ -43,9 +43,11 @@ class GraphicManager
 		
 		static void destroyMovableObject(Ogre::MovableObject* obj);
 		
-		static void registerGraphicMapping(GameObject::Type objecttype, GraphicObject::Type graphic);
+		static void registerGraphicMapping(std::string, GraphicObject::Type graphic);
 		
-		GraphicObject::Type getGraphicType(GameObject::Type objecttype);
+		static GraphicObject::Type getGraphicType(std::string objecttype);
+		
+		static GraphicRenderInfo* getRenderInfo(std::string name);
 		
 	private:
 		static void registerRenderInfo(std::string name, GraphicRenderInfo* info)
@@ -58,7 +60,7 @@ class GraphicManager
 		
 		static std::map<std::string, GraphicRenderInfo*> m_render_infos;
 		
-		static std::map<GameObject::Type, GraphicObject::Type> m_graphic_mapping;
+		static std::map<std::string, GraphicObject::Type> m_graphic_mapping;
 		
 		static void loadRenderInfos(TiXmlNode* node);
 		

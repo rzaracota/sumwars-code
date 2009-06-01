@@ -1,0 +1,326 @@
+<RenderInfo name="playerbase" >
+	
+	<Action name="noaction">
+		<Animation name="idle" />
+	</Action>
+	
+	<Action name="use">
+		<Animation name="idle" />
+	</Action>
+	
+	<Action name="">
+		<Animation name="" />
+	</Action>
+	
+	<Action name="die">
+		<Animation name="die" />
+	</Action>
+	
+	<Action name="walk">
+		<Animation name="walkOneHand" />
+	</Action>
+	
+	<Action name="attack">
+		<Animation name="attack" />
+	</Action>
+	<Action name="attack#Unarmed">
+		<Animation name="attackUnarmed" />
+	</Action>
+	<Action name="attack#OneHand">
+		<Animation name="attack" />
+	</Action>
+	<Action name="attack#TwoHands">
+		<Animation name="attackTwoHands" />
+	</Action>
+	
+	<Action name="magic_attack#Unarmed">
+		<Animation name="attackMagicUnarmed" />
+	</Action>
+	<Action name="magic_attack#OneHand">
+		<Animation name="attackMagicOneHand" />
+	</Action>
+	<Action name="magic_attack#TwoHands">
+		<Animation name="attackMagicTwoHands" />
+	</Action>
+	
+	<Action name="range_attack#Unarmed">
+		<Animation name="attackRangedUnarmed" />
+	</Action>
+	<Action name="range_attack#OneHand">
+		<Animation name="attackRangedUnarmed" />
+	</Action>
+	<Action name="range_attack#TwoHands">
+		<Animation name="attackRangedBow" />
+	</Action>
+	
+	<Action name="magic_attack#Unarmed">
+		<Animation name="attackMagicUnarmed" />
+	</Action>
+	<Action name="magic_attack#OneHand">
+		<Animation name="attackMagicOneHand" />
+	</Action>
+	<Action name="magic_attack#TwoHands">
+		<Animation name="attackMagicTwoHands" />
+	</Action>
+	
+	<Action name="holy_attack#Unarmed" reference="attack#Unarmed" />
+	<Action name="holy_attack#OneHand" reference="attack#OneHand" />
+	<Action name="holy_attack#TwoHands" reference="attack#TwoHands" />
+	
+	<!-- Kriegerfaehigkeiten -->
+	<Action name="bash">
+		<Animation name="specialAttackOneHand" />
+	</Action>
+	
+	<Action name="hammer_bash" reference="bash" />
+	
+	<Action name="around_blow">
+		<Animation name="sweepStrikeOneHand" />
+	</Action>
+	
+	<Action name="whirl_blow" reference="around_blow" />
+	
+	<Action name="smash#Unarmed" reference="attack#Unarmed" />
+	<Action name="smash#OneHand" reference="attack#OneHand" />
+	<Action name="smash#TwoHands" reference="attack#TwoHands" />
+	
+	<Action name="hate_mage#Unarmed" reference="attack#Unarmed" />
+	<Action name="hate_mage#OneHand" reference="attack#OneHand" />
+	<Action name="hate_mage#TwoHands" reference="attack#TwoHands" />
+	
+	<Action name="charge#Unarmed" reference="attack#Unarmed" />
+	<Action name="charge#OneHand" reference="attack#OneHand" />
+	<Action name="charge#TwoHands" reference="attack#TwoHands" />
+	
+	<Action name="storm_charge#Unarmed" reference="charge#Unarmed" />
+	<Action name="storm_charge#OneHand" reference="charge#OneHand" />
+	<Action name="storm_charge#TwoHands" reference="charge#TwoHands" />
+	
+	<!-- Magierfaehigkeiten -->
+	<Action name="fire_bolt">
+		<Animation name="castMagicWeak" />
+	</Action>
+	
+	<Action name="fire_strike" reference="fire_bolt" />
+	
+	<Action name="fire_wave">
+		<Animation name="castMagicStrong" />
+	</Action>
+	
+	<Action name="fire_storm" reference="fire_wave" />
+	
+	<Action name="fire_ball" reference="fire_bolt" />
+	<Action name="inferno_ball" reference="fire_ball" />
+	
+	<Action name="fire_wall">
+		<Animation name="castMagicStrong" />
+	</Action>
+	
+	<Action name="ice_bolt">
+		<Animation name="castMagicWeak" />
+	</Action>
+	
+	<Action name="ice_spike" reference="ice_bolt" />
+	
+	<Action name="snow_storm">
+		<Animation name="castMagicStrong" />
+	</Action>
+	
+	<Action name="blizzard" reference="snow_storm" />
+	
+	<Action name="ice_ring">
+		<Animation name="castMagicWeak" />
+	</Action>
+	
+	<Action name="frost_ring" reference="ice_ring" />
+	
+	<Action name="freeze">
+		<Animation name="castMagicWeak" />
+	</Action>
+
+	<Action name="lightning">
+		<Animation name="castMagicWeak" />
+	</Action>
+	
+	<Action name="lightning_strike" reference="lightning" />
+	
+	<Action name="thunder_storm">
+		<Animation name="castMagicStrong" />
+	</Action>
+	
+	<Action name="thunderstorm2" reference="thunderstorm" />
+	
+	<Action name="chain_lightning">
+		<Animation name="castMagicWeak" />
+	</Action>
+	
+	<Action name="chain_lightning2" reference="chain_lightning" />
+	
+	<Action name="static_shield">
+		<Animation name="castMagicWeak" />
+	</Action>
+	
+	<!-- Bogenschuetze Faehigkeiten -->
+	<Action name="triple_shot#Unarmed" reference="range_attack#Unarmed" />
+	<Action name="triple_shot#OneHand" reference="range_attack#OneHand" />
+	<Action name="triple_shot#TwoHands" reference="range_attack#TwoHands" />
+	
+	<Action name="guided_triple_shot#Unarmed" reference="triple_shot#Unarmed" />
+	<Action name="guided_triple_shot#OneHand" reference="triple_shot#OneHand" />
+	<Action name="guided_triple_shot#TwoHands" reference="triple_shot#TwoHands" />
+	
+	<Action name="multishot#Unarmed" reference="range_attack#Unarmed" />
+	<Action name="multishot#OneHand" reference="range_attack#OneHand" />
+	<Action name="multishot#TwoHands" reference="range_attack#TwoHands" />
+	
+	<Action name="volley_shot#Unarmed" reference="multishot#Unarmed" />
+	<Action name="volley_shot#OneHand" reference="multishot#OneHand" />
+	<Action name="volley_shot#TwoHands" reference="multishot#TwoHands" />
+	
+	<Action name="pierce#Unarmed" reference="range_attack#Unarmed" />
+	<Action name="pierce#OneHand" reference="range_attack#OneHand" />
+	<Action name="pierce#TwoHands" reference="range_attack#TwoHands" />
+	
+	<Action name="weak_point#Unarmed" reference="range_attack#Unarmed" />
+	<Action name="weak_point#OneHand" reference="range_attack#OneHand" />
+	<Action name="weak_point#TwoHands" reference="range_attack#TwoHands" />
+	
+	<Action name="blind_rage#Unarmed" reference="range_attack#Unarmed" />
+	<Action name="blind_rage#OneHand" reference="range_attack#OneHand" />
+	<Action name="blind_rage#TwoHands" reference="range_attack#TwoHands" />
+	
+	<Action name="vacuum#Unarmed" reference="range_attack#Unarmed" />
+	<Action name="vacuum#OneHand" reference="range_attack#OneHand" />
+	<Action name="vacuum#TwoHands" reference="range_attack#TwoHands" />
+	
+	<Action name="death_roulette#Unarmed" reference="range_attack#Unarmed" />
+	<Action name="death_roulette#OneHand" reference="range_attack#OneHand" />
+	<Action name="death_roulette#TwoHands" reference="range_attack#TwoHands" />
+	
+	<Action name="exploding_arrow#Unarmed" reference="range_attack#Unarmed" />
+	<Action name="exploding_arrow#OneHand" reference="range_attack#OneHand" />
+	<Action name="exploding_arrow#TwoHands" reference="range_attack#TwoHands" />
+	
+	<Action name="exploding_cascade#Unarmed" reference="exploding_arrow#Unarmed" />
+	<Action name="exploding_cascade#OneHand" reference="exploding_arrow#OneHand" />
+	<Action name="exploding_cascade#TwoHands" reference="exploding_arrow#TwoHands" />
+	
+	<Action name="ice_arrows">
+		<Animation name="magicArrow" />
+	</Action>
+	
+	<Action name="freezing_arrows" reference="ice_arrows" />
+	<Action name="wind_arrows" reference="ice_arrows" />
+	<Action name="fstorm_arrows" reference="wind_arrows" />
+	
+	<!-- Priester Faehigkeiten -->
+	
+	<Action name="holy_light#Unarmed" reference="holy_attack#Unarmed" />
+	<Action name="holy_light#OneHand" reference="holy_attack#OneHand" />
+	<Action name="holy_light#TwoHands" reference="holy_attack#TwoHands" />
+	
+	<Action name="holy_fire#Unarmed" reference="holy_light#Unarmed" />
+	<Action name="holy_fire#OneHand" reference="holy_light#OneHand" />
+	<Action name="holy_fire#TwoHands" reference="holy_light#TwoHands" />
+	
+	<Action name="burning_rage">
+		<Animation name="castMagicStrong" />
+	</Action>
+	
+	<Action name="cure_blind_mute">
+		<Animation name="castMagicStrong" />
+	</Action>
+	
+	<Action name="cure_blind_mute_party" reference="cure_blind_mute" />
+	
+	<Action name="blazing_shield">
+		<Animation name="castMagicStrong" />
+	</Action>
+	
+	<Action name="light_beam">
+		<Animation name="castMagicStrong" />
+	</Action>
+	
+	<Action name="burning_sun">
+		<Animation name="castMagicStrong" />
+	</Action>
+	
+	<Action name="break_binding#Unarmed" reference="holy_attack#Unarmed" />
+	<Action name="break_binding#OneHand" reference="holy_attack#OneHand" />
+	<Action name="break_binding#TwoHands" reference="holy_attack#TwoHands" />
+	
+	<Action name="disrupt_binding#Unarmed" reference="break_binding#Unarmed" />
+	<Action name="disrupt_binding#OneHand" reference="break_binding#OneHand" />
+	<Action name="disrupt_binding#TwoHands" reference="break_binding#TwoHands" />
+	
+	
+	<Action name="magic_shield">
+		<Animation name="castMagicStrong" />
+	</Action>
+	
+	<Action name="cure_pois_burn">
+		<Animation name="castMagicStrong" />
+	</Action>
+	
+	<Action name="cure_pois_burn_party" reference="cure_pois_burn" />
+	
+	<Action name="acid">
+		<Animation name="castMagicStrong" />
+	</Action>
+	
+	<Action name="heal">
+		<Animation name="castMagicStrong" />
+	</Action>
+	
+	<Action name="heal_party" reference="heal" />
+	
+	<Action name="divine_wind#Unarmed" reference="holy_attack#Unarmed" />
+	<Action name="divine_wind#OneHand" reference="holy_attack#OneHand" />
+	<Action name="divine_wind#TwoHands" reference="holy_attack#TwoHands" />
+	
+	<Action name="divine_storm#Unarmed" reference="divine_wind#Unarmed" />
+	<Action name="divine_storm#OneHand" reference="divine_wind#OneHand" />
+	<Action name="divine_storm#TwoHands" reference="divine_wind#TwoHands" />
+	
+	<Action name="blade_storm">
+		<Animation name="castMagicStrong" />
+	</Action>
+	
+	<Action name="cure_conf_bsrk">
+		<Animation name="castMagicStrong" />
+	</Action>
+	
+	<Action name="cure_conf_bsrk_party" reference="cure_conf_bsrk" />
+	
+	<Action name="hypnosis">
+		<Animation name="castMagicStrong" />
+	</Action>
+	
+	<Action name="hypnosis2" reference="hypnosis" />
+	
+	<Action name="keen_mind">
+		<Animation name="castMagicStrong" />
+	</Action>
+	
+</RenderInfo>
+
+<RenderInfo name="warrior_m" parent="playerbase" >
+	<Entity source="warrior_m.mesh"/>
+</RenderInfo>
+
+<RenderInfo name="mage_m" parent="playerbase" >
+	<Entity source="mage_m.mesh"/>
+</RenderInfo>
+
+<RenderInfo name="archer_f" parent="playerbase" >
+	<Entity source="archer_f.mesh"/>
+</RenderInfo>
+
+<RenderInfo name="priest_f" parent="playerbase" >
+	<Entity source="priest_f.mesh"/>
+</RenderInfo>
+
+
+<RenderInfo name="goblin_hammer">	
+	<Entity source="goblin_hmr.mesh"/>
+</RenderInfo>	

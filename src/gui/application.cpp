@@ -343,7 +343,7 @@ bool Application::setupResources()
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../data/objects", "FileSystem", "objects");
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../data/obj_templates", "FileSystem", "obj_templates");
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../data/obj_group_templ", "FileSystem", "obj_group_templ");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../data/lua", "FileSystem", "lua");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../data/renderinfo", "FileSystem", "renderinfo");	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../data/lua", "FileSystem", "lua");
 
 #if defined(WIN32)
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("c:\\windows\\fonts", "FileSystem", "GUI");
@@ -607,6 +607,18 @@ bool Application::loadResources()
 		ObjectFactory::loadObjectGroupTemplates(file);
 
 		updateStartScreen(0.7);
+	}
+	
+	// Render Infos
+	files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("renderinfo","*.xml");
+	for (it = files->begin(); it != files->end(); ++it)
+	{
+		file = it->archive->getName();
+		file += "/";
+		file += it->filename;
+		GraphicManager::loadRenderInfoData(file.c_str());
+
+		updateStartScreen(0.8);
 	}
 
 	Ogre::MeshManager& mesh_mgr = Ogre::MeshManager::getSingleton();

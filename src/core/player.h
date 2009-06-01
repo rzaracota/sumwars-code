@@ -645,6 +645,11 @@ public:
 	 */
 	void updateMessageTimer(float time);
 	
+	/**
+	 * \fn std::string getActionString()
+	 * \brief Gibt die aktuelle Aktion als String aus
+	 */
+	virtual std::string getActionString();
 
 //Protected stuff
 protected:

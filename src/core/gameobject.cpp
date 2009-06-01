@@ -22,7 +22,7 @@ GameObject::GameObject( int id)
 	m_event_mask=0;
 	m_region_id = -1;
 	m_destroyed=false;
-
+	m_height =0;
 }
 
 

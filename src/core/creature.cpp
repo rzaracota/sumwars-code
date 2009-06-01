@@ -81,6 +81,7 @@ bool Creature::init()
 
 	// keine Aktion/Kommando
 	m_action.m_type = Action::NOACTION;
+	
 	m_command.m_type = Action::NOACTION;
 	m_command.m_damage_mult=1;
 	m_next_command.m_type = Action::NOACTION;
@@ -130,8 +131,8 @@ bool Creature::init()
 	
 	m_action.m_animation_number=0;
 	m_action.m_action_equip = Action::NO_WEAPON;
-	m_action.m_time =0;
-	m_action.m_elapsed_time =0;
+	m_action.m_elapsed_time = 0.0;
+	m_action.m_time = 2000.0;
 	
 	m_dyn_attr.m_health = getBaseAttr()->m_max_health;
 	getBaseAttrMod()->m_max_health = getBaseAttr()->m_max_health;
@@ -4546,5 +4547,21 @@ void Creature::updateFightStat(float hitchance, float armorperc, std::string att
 		
 		DEBUG5("hitchance %f damage perc %f attacked %s",hitchance, armorperc, attacked.c_str());
 	}
+}
+
+std::string Creature::getActionString()
+{
+	if (getState() == STATE_DEAD)
+		return "die";
+
+	return Action::getEnumName(m_action.m_type);
+}
+
+float Creature::getActionPercent()
+{
+	if (getState() == STATE_DEAD)
+		return 0.99;
+	
+	return m_action.m_elapsed_time / m_action.m_time;
 }
 

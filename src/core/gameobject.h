@@ -409,11 +409,11 @@ class GameObject
 			m_height = height;
 		}
 		
-			/**
-		 * \fn bool getDestroyed()
+		/**
+		 * \fn bool virtual getDestroyed()
 		 * \brief Gibt zurueck ob das Objekt zerstoert ist
-			 */
-		bool getDestroyed()
+		 */
+		virtual bool getDestroyed()
 		{
 			return m_destroyed;
 		}
@@ -426,6 +426,24 @@ class GameObject
 		void setDestroyed(bool d)
 		{
 			m_destroyed =d;
+		}
+		
+		/**
+		 * \fn std::string getActionString()
+		 * \brief Gibt die aktuelle Aktion als String aus
+		 */
+		virtual std::string getActionString()
+		{
+			return "";
+		}
+		
+		/**
+		 * \fn virtual float getActionPercent()
+		 * \brief Gibt den Prozentsatz, zu dem die aktuelle Aktion fortgeschritten ist aus
+		 */
+		virtual float getActionPercent()
+		{
+			return 0.0;
 		}
 		
 	private:

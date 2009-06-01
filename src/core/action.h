@@ -367,6 +367,14 @@ public:
 	 * \return Name der Aktion
 	 */
 	static string getName(ActionType type);
+	
+	/**
+	 * \fn static string getEnumName(ActionType type)
+	 * \brief Gibt zu einer Aktion das enum als string aus
+	 * \param type die Aktion
+	 * \return Name der Aktion
+	 */
+	static string getEnumName(ActionType type);
 
 	/**
 	 * \fn static string getDescription(ActionType type)

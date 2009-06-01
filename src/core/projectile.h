@@ -181,7 +181,14 @@ class Projectile : public GameObject
 		m_fraction = fr;
 	}
 	
-	
+	/**
+	 * \fn bool virtual getDestroyed()
+	 * \brief Gibt zurueck ob das Objekt zerstoert ist
+	 */
+	virtual bool getDestroyed()
+	{
+		return getState() == STATE_DESTROYED;
+	}
 	
 	
 	protected:

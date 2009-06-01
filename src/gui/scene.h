@@ -22,7 +22,7 @@
 #include "worldobject.h"
 #include "sound.h"
 #include "player.h"
-
+#include "graphicobject.h"
 
 
 /**
@@ -245,6 +245,53 @@ class Scene
 	private:
 
 	/**
+	 * \fn GraphicObject* createGraphicObject(GameObject* gobj)
+	 * \brief erzeugt zu einem Spielobjekt das passende Graphicobjekt
+	 * \param gobj Spielobjekt
+	 */
+	GraphicObject* createGraphicObject(GameObject* gobj);
+	
+	/**
+	 * \fn void updateGraphicObject(GraphicObject* obj, GameObject* gobj)
+	 * \brief aktualisiert das Graphicobjekt
+	 * \param obj GraphicObjekt
+	 * \param gobj zugehoeriges Spielobjekt
+	 * \param time vergangene Zeit in ms
+	 */
+	void updateGraphicObject(GraphicObject* obj, GameObject* gobj,float time);
+	
+	/**
+	 * \fn bool updatePlayerGraphicObject(GraphicObject* obj, Player* pl)
+	 * \brief aktualisiert das GraphikObjekt eines Spielers
+	 * \param obj GraphikObjekt
+	 * \param pl Spielerobjekt
+	 */
+	bool updatePlayerGraphicObject(GraphicObject* obj, Player* pl);
+	
+	
+	/**
+	 * \fn void updateGraphicObjects(float time)
+	 * \brief aktualisiert alle GraphicObjekte
+	 * \param time vergangene Zeit in ms
+	 */
+	void updateGraphicObjects(float time);
+	
+	/**
+	 * \fn void  insertObject(GameObject* obj,std::string& name, bool is_static)
+	 * \brief Erzeugt auf Basis eines Objektes eine Ogre Objekt
+	 * \param obj Objekt fuer das eine Ogre Entity erzeugt werden soll
+	 * \param is_static gibt an, ob das Objekt statisch ist
+	 */
+	void  insertObject(GameObject* obj, bool is_static = false);
+
+	/**
+	 * \fn void deleteGraphicObject(int id)
+	 * \brief loescht ein Graphicobjekt
+	 * \param id ID des Objekts
+	 */
+	void deleteGraphicObject(int id);
+	
+	/**
 	 * \fn void updateObjects()
 	 * \brief Aktualisiert die Darstellung aller Objekte
 	 */
@@ -416,6 +463,18 @@ class Scene
 	 */
 	std::map<int,string>* m_projectiles;
 
+	/**
+	 * \var std::map<int,GraphicObject*> m_static_objects
+	 * \brief Graphikobjekte fuer alle statischen Objekte
+	 */
+	std::map<int,GraphicObject*> m_static_objects;
+	
+	/**
+	 * \var std::map<int,GraphicObject*> m_graphic_objects
+	 * \brief Graphikobjekte fuer alle nicht statischen Objekte
+	 */
+	std::map<int,GraphicObject*> m_graphic_objects;
+	
 	/**
 	 * \var static std::map<Projectile::Subtype, RenderInfo> m_projectile_render_info
 	 *  \brief Speichert fuer die Projektile die Information zum Rendern

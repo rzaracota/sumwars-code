@@ -26,6 +26,7 @@
 
 #include "mainwindow.h"
 #include "timer.h"
+#include "graphicmanager.h"
 
 /**
  * \class Application

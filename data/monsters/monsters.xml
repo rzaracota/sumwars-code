@@ -237,7 +237,7 @@ AIR
 <!-- Goblinschlaeger -->
 <!-- L1 -->
 <Monster type="MONSTER" subtype="goblin" name="goblin brawler" fraction="MONSTER" category="GOBLIN" layer="NORMAL">
-	<Mesh file="goblin.mesh" />
+	<Mesh file="goblin" />
 	<Dropslots >
 		<Dropslot pbig="0.02" pmedium="0.06" psmall="0.08" pgold="0.05" max_gold="30" min_level="0" max_level="3" magic_prob="0.1" magic_power="100" />
 		<Dropslot pbig="0.02" pmedium="0.06" psmall="0.05" pgold="0.05" max_gold="20" min_level="0" max_level="1" magic_prob="0.2" magic_power="100" />
@@ -291,7 +291,7 @@ AIR
 <!-- Goblinraeuber -->
 <!-- L3 -->
 <Monster type="MONSTER" subtype="goblin_rob" name="goblin robber" fraction="MONSTER" category="GOBLIN" layer="NORMAL">
-	<Mesh file="goblin.mesh" />
+	<Mesh file="goblin_rob" />
 	<ExtraMesh bone="itemRightHand" file="goblin_hmr.mesh" />
 	<Dropslots >
 		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" max_gold="50" min_level="0" max_level="5" magic_prob="0.1" magic_power="250" />
@@ -346,7 +346,7 @@ AIR
 <!-- Goblin Knochenschuettler -->
 <!-- L4 -->
 <Monster type="MONSTER" subtype="goblin_bon" name="boneshaker" fraction="MONSTER" category="GOBLIN" layer="NORMAL">
-	<Mesh file="goblin.mesh" />
+	<Mesh file="goblin_bon" />
 	<ExtraMesh bone="itemRightHand" file="goblin_stf.mesh" />
 	<ExtraMesh bone="EllbogenRechts" file="goblin_glv.mesh" />
 	<ExtraMesh bone="KnieRechts" file="gobLeg_arm.mesh" />
@@ -413,7 +413,7 @@ AIR
 <!-- Goblinjaeger -->
 <!-- L2 -->
 <Monster type="MONSTER" subtype="goblin_bow" name="goblin hunter" fraction="MONSTER" category="GOBLIN" layer="NORMAL">
-	<Mesh file="goblin.mesh" />
+	<Mesh file="goblin_bow" />
 	<ExtraMesh bone="itemRightHand" file="goblin_sbw.mesh" />
 	<Dropslots >
 		<Dropslot pbig="0.02" pmedium="0.07" psmall="0.08" pgold="0.05" max_gold="50" min_level="0" max_level="5" magic_prob="0.1" magic_power="250" />
@@ -468,7 +468,7 @@ AIR
 <!-- Goblin Dog -->
 <!-- L4 -->
 <Monster type="MONSTER" subtype="gob_dog" name="goblin dog" fraction="MONSTER" category="ANIMAL" layer="NORMAL">
-	<Mesh file="gobDog.mesh" />
+	<Mesh file="goblin_dog" />
 	<Dropslots >
 		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" max_gold="70" min_level="0" max_level="5" magic_prob="0.1" magic_power="250" />
 		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" max_gold="50" min_level="0" max_level="3" magic_prob="0.2" magic_power="250" />
@@ -520,7 +520,7 @@ AIR
 <!-- Goblinkaempfer -->
 <!-- L4 -->
 <Monster type="MONSTER" subtype="goblin_fgt" name="goblin fighter" fraction="MONSTER" category="GOBLIN" layer="NORMAL">
-	<Mesh file="gob_brown.mesh" />
+	<Mesh file="goblin_fgt" />
 	<Dropslots >
 		<Dropslot pbig="0.01" pmedium="0.02" psmall="0.04" pgold="0.02" max_gold="30" min_level="0" max_level="6" magic_prob="0.1" magic_power="300" />
 		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" max_gold="20" min_level="0" max_level="3" magic_prob="0.2" magic_power="250" />
@@ -574,7 +574,7 @@ AIR
 <!-- Goblinkrieger -->
 <!-- L5 -->
 <Monster type="MONSTER" subtype="goblin_war" name="goblin warrior" fraction="MONSTER" category="GOBLIN" layer="NORMAL">
-	<Mesh file="goblin.mesh" />
+	<Mesh file="goblin_war" />
 	<ExtraMesh bone="itemRightHand" file="crude_sw.mesh" />
 	<ExtraMesh bone="itemLeftHand" file="crude_sw.mesh" />
 	<Dropslots >
@@ -630,7 +630,7 @@ AIR
 <!-- Goblinwilderer -->
 <!-- L7 -->
 <Monster type="MONSTER" subtype="goblin_pch" name="goblin poacher" fraction="MONSTER" category="GOBLIN" layer="NORMAL">
-	<Mesh file="gob_brown.mesh" />
+	<Mesh file="goblin_pch" />
 	<ExtraMesh bone="itemRightHand" file="goblin_sbw.mesh" />
 	<Dropslots >
 		<Dropslot pbig="0.01" pmedium="0.02" psmall="0.04" pgold="0.02" max_gold="50" min_level="0" max_level="12" magic_prob="0.1" magic_power="400" />
@@ -743,7 +743,7 @@ AIR
 <!-- Goblinhaeuptling -->
 <!-- L11 -->
 <Monster type="MONSTER" subtype="goblin_wrc" name="goblin chieftain" fraction="MONSTER" category="GOBLIN" layer="NORMAL">
-	<Mesh file="goblin.mesh" />
+	<Mesh file="goblin_wrc" />
 	<ExtraMesh bone="itemRightHand" file="crude_sw.mesh" />
 	<Dropslots >
 		<Dropslot pbig="0.01" pmedium="0.02" psmall="0.04" pgold="0.02" max_gold="50" min_level="0" max_level="13" magic_prob="0.1" magic_power="550" />

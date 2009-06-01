@@ -1331,6 +1331,7 @@ void Region::update(float time)
 	for (it3 = m_projectiles->begin(); it3 !=m_projectiles->end();)
 	{
 		pr = (it3->second);
+		DEBUG5("projectile %i",pr->getId());
 		if (pr->getDestroyed()==true)
 		{
 			// Projektile selbststaendig loeschen darf nur der Server
@@ -1343,7 +1344,9 @@ void Region::update(float time)
 				insertNetEvent(event);
 				
 				DEBUG5("deleting projectile %i",pr->getId());
-				m_projectiles->erase(it3++);
+				
+				++it3;
+				deleteProjectile(pr);
 				delete pr;
 				DEBUG5("loesche projektil");
 			}

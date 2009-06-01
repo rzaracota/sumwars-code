@@ -61,7 +61,7 @@ function writeTable(tab,name,data)
 			writeTable(value,key,data);
 		elseif type(value) == "string" then
 			data.str = data.str..sep..key.."='"..value.."'";
-		else
+		elseif (value ~= nil) then
 			data.str = data.str..sep..key.."="..tostring(value);
 		end;
 		sep=",";

@@ -20,7 +20,7 @@ void GraphicManager::cleanup()
 	}
 }
 
-GraphicObject* GraphicManager::createGraphicObject(GraphicObject::Type type, std::string name)
+GraphicRenderInfo* GraphicManager::getRenderInfo(std::string type)
 {
 	std::map<std::string, GraphicRenderInfo*>::iterator it;
 	it = m_render_infos.find(type);
@@ -29,10 +29,21 @@ GraphicObject* GraphicManager::createGraphicObject(GraphicObject::Type type, std
 	{
 		rinfo = it->second;
 	}
+	else
+	{
+		DEBUG5("no render Info for type %s",type.c_str());
+	}
+	return rinfo;
+}
+
+GraphicObject* GraphicManager::createGraphicObject(GraphicObject::Type type, std::string name)
+{
+	GraphicRenderInfo* rinfo =  getRenderInfo(type);
 	
-	GraphicObject* go = new GraphicObject(type, m_render_infos[type],name);
+	GraphicObject* go = new GraphicObject(type, rinfo,name);
 	return go;
 }
+
 
 void GraphicManager::destroyGraphicObject(GraphicObject* obj)
 {
@@ -42,10 +53,10 @@ void GraphicManager::destroyGraphicObject(GraphicObject* obj)
 Ogre::MovableObject* GraphicManager::createMovableObject(MovableObjectInfo& info, std::string name)
 {
 	static int id =0;
-	
 	std::ostringstream stream;
 	stream << id;
 	name += stream.str();
+	id ++;
 	
 	if (info.m_type == MovableObjectInfo::ENTITY)
 	{
@@ -60,7 +71,7 @@ Ogre::MovableObject* GraphicManager::createMovableObject(MovableObjectInfo& info
 		return static_cast<Ogre::MovableObject*>(part);
 	}
 	
-	id ++;
+	
 	
 	return 0;
 }
@@ -94,10 +105,11 @@ void GraphicManager::loadRenderInfos(TiXmlNode* node)
 		ElementAttrib attr;
 		attr.parseElement(node->ToElement());
 		
-		std::string name;
+		std::string name,parent;
 		attr.getString("name",name);
+		attr.getString("parent",parent);
 		
-		info = new GraphicRenderInfo;
+		info = new GraphicRenderInfo(parent);
 		
 		DEBUG5("registering renderinfo for %s",name.c_str());
 		loadRenderInfo(node,info);
@@ -133,9 +145,15 @@ void GraphicManager::loadRenderInfo(TiXmlNode* node, GraphicRenderInfo* info)
 			}
 			else if (!strcmp(child->Value(), "Action"))
 			{
-				std::string actname;
+				std::string actname,refact;
 				attr.getString("name",actname);
-				if (actname != "")
+				attr.getString("reference",refact);
+				if (refact != "")
+				{
+					DEBUG4("found reference %s %s",actname.c_str(), refact.c_str());
+					info->addActionReference(actname, refact);
+				}
+				else if (actname != "")
 				{
 					ActionRenderInfo* ainfo = new ActionRenderInfo;
 					
@@ -339,9 +357,8 @@ void GraphicManager::registerGraphicMapping(GameObject::Type objecttype, Graphic
 	DEBUG5("registered graphic %s for object type %s",graphic.c_str(), objecttype.c_str());
 	m_graphic_mapping[objecttype] = graphic;
 }
-		
 
-GraphicObject::Type GraphicManager::getGraphicType(GameObject::Type objecttype)
+GraphicObject::Type GraphicManager::getGraphicType(std::string objecttype)
 {
 	std::map<GameObject::Type, GraphicObject::Type>::iterator it;
 	it = m_graphic_mapping.find(objecttype);

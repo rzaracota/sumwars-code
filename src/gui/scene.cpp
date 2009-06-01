@@ -10,6 +10,8 @@
 #define USE_OBJECTLOADER
 #define USE_ITEMLOADER
 
+#include "graphicmanager.h"
+
 std::map<Projectile::Subtype, RenderInfo> Scene::m_projectile_render_info;
 
 std::map<GameObject::Subtype, RenderInfo> Scene::m_object_render_info;
@@ -29,7 +31,9 @@ Scene::Scene(Document* doc,Ogre::RenderWindow* window)
 	m_window = window;
 	m_scene_manager = Ogre::Root::getSingleton().getSceneManager("DefaultSceneManager");
 
-
+	GraphicManager::init();
+	GraphicManager::setSceneManager(m_scene_manager);
+	
 	// Kamera anlegen
 	m_camera = m_scene_manager->createCamera("camera");
 	m_camera->setPosition(Ogre::Vector3(0, 1500, 1500));
@@ -209,8 +213,36 @@ void Scene::registerMeshes()
 	registerProjectile("DIVINE_BEAM","","Divine_Beam");
 	registerProjectile("HYPNOSIS","","Hypnosis");
 
+	GraphicManager::registerGraphicMapping("ARROW","arrow");
+	GraphicManager::registerGraphicMapping("MAGIC_ARROW","magic_arrow");
+	GraphicManager::registerGraphicMapping("FIRE_BOLT","fire_bolt");
+	GraphicManager::registerGraphicMapping("FIRE_BALL","fire_ball");
+	GraphicManager::registerGraphicMapping("FIRE_WALL","fire_wall");
+	GraphicManager::registerGraphicMapping("FIRE_WAVE","fire_wave");
+	GraphicManager::registerGraphicMapping("ICE_BOLT","ice_bolt");
+	GraphicManager::registerGraphicMapping("BLIZZARD","blizzard");
+	GraphicManager::registerGraphicMapping("ICE_RING","ice_ring");
+	GraphicManager::registerGraphicMapping("FREEZE","freeze");
+	GraphicManager::registerGraphicMapping("LIGHTNING","lightning");
+	GraphicManager::registerGraphicMapping("THUNDERSTORM","thunderstorm");
+	GraphicManager::registerGraphicMapping("CHAIN_LIGHTNING","chain_lightning");
+	GraphicManager::registerGraphicMapping("STATIC_SHIELD","static_field");
+	GraphicManager::registerGraphicMapping("FIRE_ARROW","fire_arrow");
+	GraphicManager::registerGraphicMapping("ICE_ARROW" ,"ice_arrow");
+	GraphicManager::registerGraphicMapping("WIND_ARROW","wind_arrow");
+	GraphicManager::registerGraphicMapping("GUIDED_ARROW","guided_arrow");
+	GraphicManager::registerGraphicMapping("EXPLOSION","explosion");
+	GraphicManager::registerGraphicMapping("FIRE_EXPLOSION","fire_explosion");
+	GraphicManager::registerGraphicMapping("ICE_EXPLOSION","ice_explosion");
+	GraphicManager::registerGraphicMapping("WIND_EXPLOSION","wind_explosion");
+	GraphicManager::registerGraphicMapping("LIGHT_BEAM","light_beam");
+	GraphicManager::registerGraphicMapping("ELEM_EXPLOSION","elem_explosion");
+	GraphicManager::registerGraphicMapping("ACID","acid");
+	GraphicManager::registerGraphicMapping("DIVINE_BEAM","divine_beam");
+	GraphicManager::registerGraphicMapping("HYPNOSIS","hypnosis");
 
-	registerItem("gold","gold.mesh");
+	
+	GraphicManager::registerGraphicMapping("gold","gold.mesh");
 
 }
 
@@ -357,6 +389,35 @@ void Scene::changeViewportSize(ViewportSize size)
 	*/
 }
 
+GraphicObject* Scene::createGraphicObject(GameObject* gobj)
+{
+	// Typ des GraphicObjekts ermitteln
+	std::string otype;
+	Player* pl = dynamic_cast<Player*>(gobj);
+	GraphicObject::Type type;
+	if (pl != 0 )
+	{
+		type = pl->getPlayerLook();
+	}
+	else
+	{
+		otype = gobj->getSubtype();
+		type = GraphicManager::getGraphicType(otype);
+	}
+	
+	// GraphicObjekt erstellen und ausgeben
+	if (type == "")
+	{
+		return 0;
+	}
+	else
+	{
+		DEBUG5("create graphic Object typ %s for %s",type.c_str(), otype.c_str());
+		return GraphicManager::createGraphicObject(type,gobj->getNameId());
+	}
+}
+
+
 void Scene::update(float ms)
 {
 	DEBUG5("update scene");
@@ -422,6 +483,9 @@ void Scene::update(float ms)
 	Ogre::Light* light= m_scene_manager->getLight("HeroLight");
 	light->setPosition(Ogre::Vector3(pos.m_x*50,300,pos.m_y*50));
 
+	updateGraphicObjects(ms);
+	
+	/*
 	// alle Objekte aktualisieren
 	updateObjects();
 
@@ -432,7 +496,201 @@ void Scene::update(float ms)
 
 
 	updateProjectiles();
+*/
+}
 
+void  Scene::insertObject(GameObject* gobj, bool is_static)
+{
+	GraphicObject* obj = createGraphicObject(gobj);
+
+	DEBUG5("insert graphic object for %s",gobj->getNameId().c_str());
+	if (is_static)
+	{
+		m_static_objects.insert(std::make_pair(gobj->getId(), obj));
+	}
+	else
+	{
+		m_graphic_objects.insert(std::make_pair(gobj->getId(), obj));
+	}
+	if (obj != 0)
+	{	
+		Ogre::SceneNode* node = obj->getTopNode();
+		
+		// Objektes positionieren
+		float x=gobj->getShape()->m_center.m_x;
+		float y=gobj->getShape()->m_center.m_y;
+		Ogre::Vector3 vec(x*50,0,y*50);
+		node->setPosition(vec);
+		
+		// Objekt drehen
+		float angle = gobj->getShape()->m_angle;
+		node->setDirection(sin(angle),0,-cos(angle),Ogre::Node::TS_WORLD);
+		
+		// Monster zufaellig skalieren
+		if (gobj->getType() == "MONSTER")
+		{
+			float scale = 0.9 + 0.2*Random::random();
+			node->setScale(scale,scale,scale);
+		
+		}
+		
+		updateGraphicObject(obj,gobj,0.0);
+	}
+}
+
+void Scene::updateGraphicObject(GraphicObject* obj, GameObject* gobj,float time)
+{
+	if (obj ==0 || gobj==0)
+		return;
+	
+	Ogre::SceneNode* node = obj->getTopNode();
+	
+	// Objektes positionieren
+	float x=gobj->getShape()->m_center.m_x;
+	float z=gobj->getShape()->m_center.m_y;
+	float y = gobj->getHeight();
+	Ogre::Vector3 vec(x*50,y*50,z*50);
+	node->setPosition(vec);
+		
+	// Objekt drehen
+	float angle = gobj->getShape()->m_angle;
+	node->setDirection(sin(angle),0,-cos(angle),Ogre::Node::TS_WORLD);
+	
+	
+	DropItem* di = static_cast<DropItem*>(gobj);
+	if (di != 0)
+	{
+		float anglex = di->getAngleX();
+		node->pitch(Ogre::Radian(anglex));
+	}
+	
+	
+	// Aktion setzen
+	std::string action = gobj->getActionString();
+	float perc = gobj->getActionPercent();
+	
+	obj->updateAction(action,perc);
+	DEBUG5("object %s action %s perc %f",gobj->getNameId().c_str(), action.c_str(), perc);
+
+	Player* pl = dynamic_cast<Player*>(gobj);
+	if (pl != 0)
+	{
+		updatePlayerGraphicObject(obj,pl);
+	}
+	
+	obj->update(time);
+}
+
+bool Scene::updatePlayerGraphicObject(GraphicObject* obj, Player* pl)
+{
+	MovableObjectInfo minfo;
+	bool update = false;
+	
+	// Waffe
+	minfo.m_objectname="weapon";
+	minfo.m_type = MovableObjectInfo::SUBOBJECT;
+	
+	Item* itm;
+	itm = pl->getWeapon();
+	if (itm !=0 && itm->m_weapon_attr !=0)
+	{
+		if (itm->m_weapon_attr->m_weapon_type == WeaponAttr::BOW || itm->m_weapon_attr->m_weapon_type == WeaponAttr::CROSSBOW)
+		{
+			minfo.m_bone = "itemLeftHand";
+		}
+		else
+		{
+			minfo.m_bone = "itemRightHand";
+		}
+		minfo.m_source = GraphicManager::getGraphicType(itm->m_subtype);
+	}
+	else
+	{
+		minfo.m_source="";
+	}
+	obj->updateSubobject(minfo);
+	
+	// Schild
+	minfo.m_objectname="shield";
+	minfo.m_type = MovableObjectInfo::SUBOBJECT;
+	itm = pl->getShield();
+	if (itm !=0)
+	{
+		minfo.m_bone = "itemLeftHand";
+		minfo.m_source = GraphicManager::getGraphicType(itm->m_subtype);
+	}
+	else
+	{
+		minfo.m_source="";
+	}
+	obj->updateSubobject(minfo);
+	
+	DEBUG5("update %s : bone %s source %s", minfo.m_objectname.c_str(), minfo.m_bone.c_str(), minfo.m_source.c_str());
+	return update;
+}
+
+void  Scene::deleteGraphicObject(int id)
+{
+	std::map<int,GraphicObject*>::iterator it;
+	it = m_graphic_objects.find(id);
+	if (it != m_graphic_objects.end())
+	{
+		GraphicManager::destroyGraphicObject(it->second);
+		m_graphic_objects.erase(id);
+	}
+	else
+	{
+		it = m_static_objects.find(id);
+		if (it !=  m_static_objects.end())
+		{
+			GraphicManager::destroyGraphicObject(it->second);
+			m_static_objects.erase(id);
+		}
+	}
+}
+
+void Scene::updateGraphicObjects(float time)
+{
+	Player* player = m_document->getLocalPlayer();
+	GameObjectMap& game_objs = player->getRegion()->getGameObjects();
+	
+	GameObjectMap::iterator it = game_objs.begin();
+	std::map<int,GraphicObject*>::iterator jtold, jt = m_graphic_objects.begin();
+	
+	while (it != game_objs.end() || jt != m_graphic_objects.end())
+	{
+		if (it == game_objs.end() || (jt != m_graphic_objects.end() && it->first > jt->first))
+		{
+			// Objekt jt existiert als Graphisch, aber nicht mehr im Spiel
+			DEBUG5("deleting graphic object %i",jt->first);
+			jtold = jt;
+			++jt;
+			
+			deleteGraphicObject(jtold->first);
+		}
+		else if (jt == m_graphic_objects.end() || (it != game_objs.end() && it->first < jt->first))
+		{
+			// Objekt it existiert im Spiel, aber noch nicht graphisch
+			DEBUG5("inserting graphic object %i",it->first);	
+			
+			insertObject(it->second,false);
+			
+			++it;
+		}
+		else if (it->first == jt->first)
+		{
+			// GraphikObjekt aktualisieren
+			DEBUG5("update graphic objekt %i",it->first);
+			updateGraphicObject(jt->second, it->second,time);
+			++it;
+			++jt;
+		}
+		else
+		{
+			ERRORMSG("Fehler beim Abgleich Graphik <-> ingame");
+		}
+	}
+	
 }
 
 void  Scene::updateObjects()
@@ -1574,6 +1832,19 @@ void Scene::clearObjects()
 	m_objects->clear();
 	m_drop_items->clear();
 	m_projectiles->clear();
+	
+	std::map<int,GraphicObject*>::iterator it;
+	for (it = m_static_objects.begin(); it != m_static_objects.end(); ++it)
+	{
+		GraphicManager::destroyGraphicObject(it->second);
+	}
+	m_static_objects.clear();
+	
+	for (it = m_graphic_objects.begin(); it != m_graphic_objects.end(); ++it)
+	{
+		GraphicManager::destroyGraphicObject(it->second);
+	}
+	m_graphic_objects.clear();
 }
 
 void Scene::createScene()
@@ -1590,8 +1861,8 @@ void Scene::createScene()
 	m_particle_system_pool.clear();
 
 	// alle bisherigen Objekte aus der Szene loeschen
-	m_scene_manager->clearScene();
 	clearObjects();
+	m_scene_manager->clearScene();
 	SoundSystem::clearObjects();
 
 
@@ -1603,8 +1874,9 @@ void Scene::createScene()
 	Region* region = m_document->getLocalPlayer()->getRegion();
 
 	float *colour;
-	colour= region->getHeroLight();
 	m_scene_manager->setAmbientLight(Ogre::ColourValue(0.4,0.4,0.4));
+	
+	colour= region->getHeroLight();
 	Ogre::Light *light = m_scene_manager->createLight("HeroLight");
 	light->setType(Ogre::Light::LT_POINT);
 	light->setDiffuseColour(colour[0], colour[1], colour[2]);
@@ -1622,23 +1894,12 @@ void Scene::createScene()
 
 	if (region !=0)
 	{
-		Shape s;
-		s.m_center = Vector(0,0);
-		s.m_type = Shape::RECT;
-		s.m_extent = Vector(10000,10000);
-
-		region->getObjectsInShape(&s,&stat_objs, WorldObject::LAYER_ALL,WorldObject::FIXED);
-		std::list<WorldObject*>::iterator it;
-		std::string name;
-		for (it = stat_objs.begin(); it !=stat_objs.end();++it)
+		WorldObjectMap* stat_objs = region->getStaticObjects();
+		WorldObjectMap::iterator it;
+		for (it = stat_objs->begin(); it !=stat_objs->end();++it)
 		{
-			name = (*it)->getNameId();
-
-			DEBUG5("create static object %s",name.c_str());
-
 			// Objekt in der Szene erzeugen
-			createObject((*it),name, ((*it)->getState() == WorldObject::STATE_STATIC));
-
+			insertObject(it->second,true);
 		}
 
 		short dimx = region->getDimX();

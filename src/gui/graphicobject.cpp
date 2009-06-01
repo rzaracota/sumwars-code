@@ -48,7 +48,7 @@ GraphicObject::~GraphicObject()
 		}
 	}
 	*/
-	
+	DEBUG5("destroying %s",m_name.c_str());
 	while (! m_dependencies.empty())
 	{
 		removeMovableObject(m_dependencies.begin()->first);
@@ -227,7 +227,7 @@ void GraphicObject::addMovableObject(MovableObjectInfo& object)
 		}
 		attchobj.m_tagpoint = tag;
 		m_subobjects[object.m_objectname] = attchobj;
-		DEBUG("adding subobject %p with name %s", m_subobjects[object.m_objectname].m_object,  object.m_objectname.c_str());
+		DEBUG5("adding subobject %p with name %s", m_subobjects[object.m_objectname].m_object,  object.m_objectname.c_str());
 	}
 	
 	// StartPosition und -Rotation setzen
@@ -372,7 +372,7 @@ void GraphicObject::updateAttachedAction(AttachedAction& attchaction, std::strin
 		initAttachedAction(attchaction,action);
 	}
 	
-	
+	DEBUG5("update action %s %f -> %f", action.c_str(), attchaction.m_current_percent, percent);
 	
 	// Suche nach neu dazu gekommenen Aktionen
 	ActionRenderInfo* arinfo;
@@ -483,6 +483,35 @@ void GraphicObject::updateState(std::string state, bool active)
 	}
 }
 
+bool GraphicObject::updateSubobject(MovableObjectInfo& object)
+{
+	std::map<std::string, AttachedGraphicObject >::iterator it;
+	it = m_subobjects.find(object.m_objectname);
+	
+	bool ret = false;
+	if (it == m_subobjects.end() && object.m_source != "")
+	{
+		// Objekt existiert bisher nicht, soll aber angehaengt sein
+		addMovableObject(object);
+		ret = true;
+	}
+	else if (it != m_subobjects.end() && object.m_source=="")
+	{
+		// Objekt ist angehaengt, soll aber nicht angehaengt sein
+		removeMovableObject(it->first);
+		ret = true;
+	}
+	else if (it != m_subobjects.end () && it->second.m_object->getType() != object.m_source)
+	{
+		// angehaengtes Objekt hat nicht den korrekten Typ;
+		removeMovableObject(it->first);
+		addMovableObject(object);
+		ret = true;
+	}
+	
+	return ret;
+}
+
 void GraphicObject::update(float time)
 {
 	if (m_render_info ==0)
@@ -574,10 +603,13 @@ void GraphicObject::removeActiveRenderPart(ActionRenderpart* part)
 			
 			anim_set = ent->getAllAnimationStates();
 			
-			if (anim_set->hasAnimationState(part->m_animation))
+			if (anim_set!= 0 && anim_set->hasAnimationState(part->m_animation))
 			{
 				anim = ent->getAnimationState(part->m_animation);
-				anim->setEnabled(false);
+				if (anim != 0)
+				{
+					anim->setEnabled(false);
+				}
 			}
 		}
 	}
@@ -604,16 +636,21 @@ void GraphicObject::updateRenderPart(ActionRenderpart* part,float  relpercent)
 		Ogre::Entity* ent = getEntity(part->m_objectname);
 		if (ent != 0)
 		{
+			DEBUG5("anim %s perc %f",part->m_animation.c_str(), relpercent);
 			Ogre::AnimationState* anim;
 			Ogre::AnimationStateSet* anim_set;
 			
 			anim_set = ent->getAllAnimationStates();
 			
-			if (anim_set->hasAnimationState(part->m_animation))
+			if (anim_set != 0 && anim_set->hasAnimationState(part->m_animation))
 			{
+				
 				anim = ent->getAnimationState(part->m_animation);
-				anim->setEnabled(true);
-				anim->setTimePosition(relpercent*anim->getLength());
+				if (anim != 0)
+				{
+					anim->setEnabled(true);
+					anim->setTimePosition(relpercent*anim->getLength());
+				}
 			}
 		}
 	}

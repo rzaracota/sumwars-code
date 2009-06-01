@@ -211,7 +211,7 @@ bool Projectile::update(float time)
 						if (m_flags & MULTI_EXPLODES)
 						{
 							// Flag mehrfach explodierend gesetzt
-							DEBUG("multiexploding");
+							DEBUG5("multiexploding");
 							Vector dir = getSpeed();
 							dir.normalize();
 							dir *= getShape()->m_radius;
