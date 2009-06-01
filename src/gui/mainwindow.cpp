@@ -1137,6 +1137,10 @@ void MainWindow::updateObjectInfo()
 		float dist, mindist = 100000;
 		for (it = result.begin(); it != result.end(); ++it)
 		{
+			dist = it->distance;
+			if (dist > mindist)
+				continue;
+			
 			try
 			{
 				id = Ogre::any_cast<int>(it->movable->getUserAny());
@@ -1165,11 +1169,54 @@ void MainWindow::updateObjectInfo()
 					continue;
 				}
 			}
-				
+			
+			// Pruefung gegen das Polygon
+			// get the entity to check
+			Ogre::Entity *pentity = dynamic_cast<Ogre::Entity*>(it->movable);
+			bool rayhit = true;
+			if (pentity != 0)
+			{
+				rayhit = false;
+				// mesh data to retrieve
+				size_t vertex_count;
+				size_t index_count;
+				Ogre::Vector3 *vertices;
+				unsigned long *indices;
+	
+				// get the mesh information
+				Scene::getMeshInformation(pentity->getMesh(), vertex_count, vertices, index_count, indices,
+										pentity->getParentNode()->getWorldPosition(),
+										pentity->getParentNode()->getWorldOrientation(),
+										pentity->getParentNode()->_getDerivedScale());
+	
+				// test for hitting individual triangles on the mesh
+				for (int i = 0; i < static_cast<int>(index_count); i += 3)
+				{
+					// check for a hit against this triangle
+					std::pair<bool, Ogre::Real> hit = Ogre::Math::intersects(ray, vertices[indices[i]],
+							vertices[indices[i+1]], vertices[indices[i+2]], true, false);
+	
+					// if it was a hit check if its the closest
+					if (hit.first)
+					{
+						if ( (hit.second < dist))
+						{
+							// this is the closest so far, save it off
+							dist = hit.second;
+						}
+						rayhit = true;
+					}
+				}
+	
+				// free the verticies and indicies memory
+				delete[] vertices;
+				delete[] indices;
+			}
+			
 			// Objekt wird vom Kamerastrahl geschnitten
 			// Distance zum Spieler ausrechnen
-			dist = it->distance;
-			if (dist<mindist)
+			
+			if (dist<mindist && rayhit)
 			{
 				// Objekt ist das bisher naechste
 				objid = id;
