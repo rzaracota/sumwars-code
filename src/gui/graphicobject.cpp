@@ -254,12 +254,11 @@ void GraphicObject::addMovableObject(MovableObjectInfo& object)
 	// StartPosition und -Rotation setzen
 	if (node != 0)
 	{
-		node->setPosition(object.m_position);
+		node->setPosition(object.m_position*50);
 		node->setOrientation(1,0,0,0);
 		node->pitch(Ogre::Degree(object.m_rotation[0]));
 		node->yaw(Ogre::Degree(object.m_rotation[1]));
 		node->roll(Ogre::Degree(object.m_rotation[2]));
-		
 	}
 	
 	// Abhaengigkeiten eintragen
@@ -647,6 +646,26 @@ void GraphicObject::removeActiveRenderPart(ActionRenderpart* part)
 			}
 		}
 	}
+	else if (part->m_type == ActionRenderpart::MOVEMENT || part->m_type == ActionRenderpart::ROTATION)
+	{
+		Ogre::Node* node = getParentNode(part->m_objectname);
+		if (node != 0)
+		{
+			Ogre::Vector3 pos = part->m_end_vec ;
+		
+			if (part->m_type == ActionRenderpart::MOVEMENT)
+			{
+				node->setPosition(pos*50);
+			}
+			if (part->m_type == ActionRenderpart::ROTATION)
+			{
+				node->setOrientation(1,0,0,0);
+				node->pitch(Ogre::Degree(pos[0]));
+				node->yaw(Ogre::Degree(pos[1]));
+				node->roll(Ogre::Degree(pos[2]));
+			}
+		}
+	}
 }
 
 void GraphicObject::updateRenderPart(ActionRenderpart* part,float  relpercent)
@@ -696,7 +715,7 @@ void GraphicObject::updateRenderPart(ActionRenderpart* part,float  relpercent)
 			DEBUG5("Movement %f %f %f relpercent %f",pos[0], pos[1],pos[2],relpercent);
 			if (part->m_type == ActionRenderpart::MOVEMENT)
 			{
-				node->setPosition(pos);
+				node->setPosition(pos*50);
 			}
 			if (part->m_type == ActionRenderpart::ROTATION)
 			{

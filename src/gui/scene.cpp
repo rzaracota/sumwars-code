@@ -561,13 +561,12 @@ void Scene::updateGraphicObject(GraphicObject* obj, GameObject* gobj,float time)
 	node->setDirection(sin(angle),0,-cos(angle),Ogre::Node::TS_WORLD);
 	
 	
-	DropItem* di = static_cast<DropItem*>(gobj);
+	DropItem* di = dynamic_cast<DropItem*>(gobj);
 	if (di != 0)
 	{
 		float anglex = di->getAngleX();
 		node->pitch(Ogre::Radian(anglex));
 	}
-	
 	
 	// Aktion setzen
 	std::string action = gobj->getActionString();
