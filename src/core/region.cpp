@@ -867,7 +867,7 @@ bool Region::insertObject(WorldObject* object, Vector pos, float angle, bool col
 	}
 	else
 	{
-		if (object->getLayer() != WorldObject::LAYER_SPECIAL)
+		if (object->getLayer() & WorldObject::LAYER_COLLISION)
 		{
 			// testen ob das Objekt zu den gesondert behandelten grossen Objekten gehoehrt
 			if (object->isLarge())
@@ -1161,7 +1161,7 @@ bool  Region::deleteObject (WorldObject* object)
 		int y = object->getGridLocation()->m_grid_y;
 		DEBUG5("deleting object in grid tile %i %i",x,y);
 	
-		if (object->getLayer() != WorldObject::LAYER_SPECIAL)
+		if (object->getLayer() & WorldObject::LAYER_COLLISION)
 		{
 			Gridunit *gu = (m_data_grid->ind(x,y));
 			result = gu->deleteObject(object);
@@ -1635,7 +1635,7 @@ void Region::getRegionData(CharConv* cv)
 	short nr=0;
 	for (jt = m_objects->begin();jt!=m_objects->end();++jt)
 	{
-		if (jt->second->getLayer() != WorldObject::LAYER_SPECIAL)
+		if (jt->second->getLayer() & WorldObject::LAYER_ALL)
 			nr++;
 	}
 	DEBUG5("nonstatic objects: %i",nr);
@@ -1645,7 +1645,7 @@ void Region::getRegionData(CharConv* cv)
 
 	for (jt = m_objects->begin();jt!=m_objects->end();++jt)
 	{
-		if (jt->second->getLayer() != WorldObject::LAYER_SPECIAL)
+		if (jt->second->getLayer() & WorldObject::LAYER_ALL)
 		{
 			DEBUG5("write offset: %i",cv->getBitStream()->GetNumberOfBitsUsed());
 			(jt->second)->toString(cv);
@@ -1904,7 +1904,7 @@ void Region::getRegionCheckData(CharConv* cv)
 	short nr=0;
 	for (jt = m_objects->begin();jt!=m_objects->end();++jt)
 	{
-		if (jt->second->getLayer() != WorldObject::LAYER_SPECIAL)
+		if (jt->second->getLayer() & WorldObject::LAYER_ALL)
 			nr++;
 	}
 	DEBUG5("nonstatic objects: %i",nr);
@@ -1914,7 +1914,7 @@ void Region::getRegionCheckData(CharConv* cv)
 
 	for (jt = m_objects->begin();jt!=m_objects->end();++jt)
 	{
-		if (jt->second->getLayer() != WorldObject::LAYER_SPECIAL)
+		if (jt->second->getLayer() & WorldObject::LAYER_ALL)
 		{
 			cv->toBuffer((jt->second)->getId());
 			DEBUG5("object: %s",(jt->second)->getNameId().c_str());

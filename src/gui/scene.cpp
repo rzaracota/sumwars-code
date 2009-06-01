@@ -676,8 +676,10 @@ void Scene::updateGraphicObjects(float time)
 		{
 			// Objekt it existiert im Spiel, aber noch nicht graphisch
 			DEBUG5("inserting graphic object %i",it->first);	
-			
-			insertObject(it->second,false);
+			if (it->second->getLayer() != GameObject::LAYER_SPECIAL)
+			{
+				insertObject(it->second,false);
+			}
 			
 			++it;
 		}

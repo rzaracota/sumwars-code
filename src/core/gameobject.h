@@ -26,6 +26,8 @@ class GameObject
 			LAYER_BASE =0x01,
 			LAYER_AIR = 0x02,
 			LAYER_DEAD = 0x04,
+   			LAYER_COLLISION = 0x7,
+			LAYER_NOCOLLISION = 0x8,
 			LAYER_ALL = 0x0F,
 	
 			LAYER_SPECIAL = 0x10,
