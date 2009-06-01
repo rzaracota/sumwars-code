@@ -1,9 +1,10 @@
 #include "graphicobject.h"
 #include "graphicmanager.h"
 
-GraphicObject::GraphicObject(Type type, GraphicRenderInfo* render_info, std::string name)
+GraphicObject::GraphicObject(Type type, GraphicRenderInfo* render_info, std::string name, int id)
 	: m_attached_objects(), m_subobjects(), m_dependencies()
 {
+	m_id = id;
 	m_type = type;
 	m_render_info = render_info;
 	m_name = name;
@@ -104,7 +105,25 @@ Ogre::Node* GraphicObject::getParentNode(std::string name)
 	return node;
 }
 
-
+void GraphicObject::setQueryMask(unsigned int mask)
+{
+	DEBUG5("setting mask %i to %s",mask,m_name.c_str());
+	std::map<std::string, AttachedMovableObject>::iterator it;
+	Ogre::Entity* ent;
+	for (it = m_attached_objects.begin(); it != m_attached_objects.end(); ++it)
+	{
+		ent = dynamic_cast<Ogre::Entity*>(it->second.m_object);
+		ent->setQueryFlags(mask);
+	}
+	
+	std::map<std::string, AttachedGraphicObject  >::iterator gt;
+	GraphicObject* obj;
+	for (gt = m_subobjects.begin(); gt != m_subobjects.end(); ++gt)
+	{
+		obj = gt->second.m_object;
+		obj->setQueryMask(mask);
+	}
+}
 
 void GraphicObject::addMovableObject(MovableObjectInfo& object)
 {
@@ -145,6 +164,8 @@ void GraphicObject::addMovableObject(MovableObjectInfo& object)
 		Ogre::MovableObject* obj;
 		obj = GraphicManager::createMovableObject(object,ostr.str());
 		
+		// Objekt mit ID versehen
+		obj->setUserAny(Ogre::Any(m_id));
 		
 		if (object.m_bone == "")
 		{
@@ -186,7 +207,7 @@ void GraphicObject::addMovableObject(MovableObjectInfo& object)
 			return;
 		}
 		
-		GraphicObject* obj = GraphicManager::createGraphicObject(object.m_source, object.m_objectname);
+		GraphicObject* obj = GraphicManager::createGraphicObject(object.m_source, object.m_objectname, m_id);
 		node = obj->getTopNode();
 		node->getParent()->removeChild(node);
 		

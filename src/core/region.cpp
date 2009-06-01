@@ -322,6 +322,23 @@ Projectile* Region::getProjectile(int id)
 	}
 }
 
+GameObject* Region::getGameObject(int id)
+{
+	GameObjectMap::iterator iter;
+
+	iter = m_game_objects.find(id);
+
+	// Testen ob ein Objekt gefunden wurde
+	if (iter == m_game_objects.end())
+	{
+		return 0;
+	}
+	else
+	{
+		return iter->second;
+	}
+}
+
 bool Region::getFreePlace(Shape* shape, short layer, Vector & pos, WorldObject* omit)
 {
 	// Menge der bereits getesteten Felder

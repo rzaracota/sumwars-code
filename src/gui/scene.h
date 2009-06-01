@@ -94,6 +94,12 @@ class Scene
 		VIEW_LEFT = 2,
   		VIEW_RIGHT =3,
 	};
+	
+	enum ObjectMask
+	{
+		WORLDOBJECT = 0x1,
+		ITEM =  0x2,
+	};
 
 	/**
 	 * \fn Scene(Document* doc,Ogre::RenderWindow* window)

@@ -721,6 +721,13 @@ class Region
 		DropItem* getDropItem(int id);
 
 		/**
+		 * \fn GameObject* getGameObject(int id)
+		 * \brief Gibt das Objekt mit der angegebenen Id  aus
+		 * \param id ID
+		 */
+		GameObject* getGameObject(int id);
+		
+		/**
 		 * \fn void getRegionData(CharConv* cv)
 		 * \brief Schreibt alle Objekte, Projektile, Items und Tiles in einen String
 		 * \param cv Eingabepuffer

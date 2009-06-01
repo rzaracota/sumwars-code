@@ -25,7 +25,7 @@ class GraphicManager
 	
 		static void loadRenderInfoData(const char* pFilename);
 		
-		static GraphicObject* createGraphicObject(GraphicObject::Type type, std::string name);
+		static GraphicObject* createGraphicObject(GraphicObject::Type type, std::string name, int id);
 		
 		static void destroyGraphicObject(GraphicObject* obj);
 		

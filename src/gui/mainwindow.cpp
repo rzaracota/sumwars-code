@@ -1083,16 +1083,19 @@ void MainWindow::updateCursorItemImage()
 void MainWindow::updateObjectInfo()
 {
 	Player* player = m_document->getLocalPlayer();
-	short rid = player->getRegionId();
-	Vector plpos = player->getShape()->m_center;
-
+	Region* reg = player->getRegion();
+	if (reg ==0)
+		return;
+	
 	// Ogre Name des Objektes auf das der Mauszeiger zeigt
 	std::string objname = "";
 
 	// Fenstermanager
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::Window* label = win_mgr.getWindow("ObjectInfoLabel");
+	CEGUI::Window* itmlabel = win_mgr.getWindow("ItemInfoLabel");
 	CEGUI::ProgressBar* bar = static_cast<CEGUI::ProgressBar*>(win_mgr.getWindow( "MonsterHealthProgressBar"));
+	
 	
 	// Position der Maus
 	float x = m_mouse->getMouseState().X.abs;
@@ -1108,156 +1111,200 @@ void MainWindow::updateObjectInfo()
 	Ogre::Camera* camera = m_scene->getCamera();
 	Ogre::Ray ray = camera->getCameraToViewportRay(relx,rely);
 
-	Ogre::Entity* ent;
+	// Query zum Anfragen auf getroffene Objekte
+	Ogre::RaySceneQuery * query = m_scene_manager->createRayQuery(ray);
+	query->setQueryTypeMask(Ogre::SceneManager::ENTITY_TYPE_MASK);
+	query->setSortByDistance (true);
+	query->setQueryMask(Scene::WORLDOBJECT | Scene::ITEM);
 	
+	// Anfrage ausfuehren
+	Ogre::RaySceneQueryResult& result = query->execute();
+	Ogre::RaySceneQueryResult::iterator it;
 	
-	Region* reg = World::getWorld()->getRegion(rid);
-	if (reg ==0)
-		return;
-
-
-	// Ergebnispaar einer Intersection Abfrage
-	std::pair<bool,Ogre::Real> isec;
+	int id=0;
+	int objid =0;
 
 	if (m_mouse->getMouseState().buttons !=0)
 	{
 		// fokussiertes Objekt nicht wechseln, wenn Maustaste gedrueckt
-		objname = m_document->getGUIState()->m_cursor_object;
+		objid = m_document->getGUIState()->m_cursor_object_id;
 	}
 	else
 	{
 
-		std::ostringstream out_stream;
-		out_stream.str("");
-
-
-		// Objekte in der Szene
-		std::map<int,string>* objects = m_scene->getObjects();
-		std::map<int,string>::iterator it;
-
-		// minimale Distanz eines Objektes im Kamerastrahl
-		float mindist = 1000000;
-		float dist;
-		
-		for (it = objects->begin();it != objects->end();++it)
+		WorldObject* wo;
+		GameObject* go;
+		float dist, mindist = 100000;
+		for (it = result.begin(); it != result.end(); ++it)
 		{
-			WorldObject* wo;
-			
-			
-
-			ent = m_scene_manager->getEntity(it->second);
-
-			// Auf Ueberschneidung mit dem Kamerastrahl testen
-			const Ogre::AxisAlignedBox& box = ent->getWorldBoundingBox();
-			isec = ray.intersects(box);
-
-			if (isec.first)
+			try
 			{
-				// nur aktive Objekte beruecksichtigen
-				wo = reg->getObject(it->first);
-				if (wo == 0)
-				{
-					continue;
-				}
-				
-				if (wo->getState() != WorldObject::STATE_ACTIVE)
-					continue;
-				
-				// verbuendete Spieler ueberspringen
+				id = Ogre::any_cast<int>(it->movable->getUserAny());
+			}
+			catch (Ogre::Exception& e)
+			{
+				DEBUG("Object %s has no ID",it->movable->getName().c_str());
+				continue;
+			}
+			DEBUG5("ray scene query dist %f obj %s mask %x id %i",it->distance, it->movable->getName().c_str(),it->movable->getQueryFlags(), id);
+			// nur aktive Objekte beruecksichtigen
+			go = reg->getGameObject(id);
+			if (go == 0)
+			{
+				continue;
+			}
+			if (go->getState() != WorldObject::STATE_ACTIVE)
+				continue;
+			
+			// verbuendete Spieler ueberspringen
+			wo = dynamic_cast<WorldObject*>(go);
+			if (wo != 0)
+			{
 				if (World::getWorld()->getRelation(m_document->getLocalPlayer()->getFraction(), wo->getFraction()) == WorldObject::ALLIED && wo->getType() == "PLAYER")
 				{
 					continue;
 				}
-						
-				// Objekt wird vom Kamerastrahl geschnitten
-				// Distance zum Spieler ausrechnen
-				dist = plpos.distanceTo(wo->getShape()->m_center);
-				if (dist<mindist)
-				{
-					// Objekt ist das bisher naechste
-					objname = it->second;
-					mindist = dist;
-				}
 			}
-
+				
+			// Objekt wird vom Kamerastrahl geschnitten
+			// Distance zum Spieler ausrechnen
+			dist = it->distance;
+			if (dist<mindist)
+			{
+				// Objekt ist das bisher naechste
+				objid = id;
+				mindist = dist;
+			}
 		}
 		m_document->getGUIState()->m_cursor_object=objname;
 
-		if (objname=="")
+		if (objid==0)
 		{
 			// aktuell kein Objekt unterm Mauszeiger
 			m_document->getGUIState()->m_cursor_object_id =0;
+			m_document->getGUIState()->m_cursor_item_id =0;
 
 			label->setVisible(false);
 			bar->setVisible(false);
+			itmlabel->setVisible(false);
 		}
 	}
 
 	std::string name;
 	std::ostringstream string_stream;
-	
-
-	if (objname!="")
+	if (objid!=0)
 	{
 		// es gibt ein ein Objekt unterm Mauszeiger
-		m_document->getGUIState()->m_cursor_item_id =0;
-		label->setVisible(true);
-		bar->setVisible(true);
-		
-		// ID des Objektes ermitteln
-		int pos = objname.find(":");
-		std::string idstring = objname.substr(pos+1);
-		name = objname.substr(0,pos);
-		std::stringstream stream(idstring);
-		int id;
-		stream >> id;
-
-		
-
 		// zur ID gehoerendes Objekt
-		WorldObject* cwo;
-		cwo = World::getWorld()->getRegion(rid)->getObject(id);
-		Creature* cr;
-
-		if (cwo !=0)
+		GameObject* go = reg->getGameObject(objid);
+		if (go != 0)
 		{
-		// Objekt existiert
-			m_document->getGUIState()->m_cursor_object_id = id;
-			
-			if (cwo->getType() !="FIXED_OBJECT")
-			{
-				// Objekt ist ein Lebewesen
-				// Lebenspunkte anfuegen
+			WorldObject* cwo = dynamic_cast<WorldObject*>(go);
+			Creature* cr;
 				
-				cr = static_cast<Creature*>(cwo);
-				string_stream<< dgettext("sumwars_xml",cr->getRefName().c_str());
-				float perc = cr->getDynAttr()->m_health / cr->getBaseAttrMod()->m_max_health;
-				if (bar->getProgress() != perc)
+			if (cwo !=0)
+			{
+				// Objekt existiert
+				m_document->getGUIState()->m_cursor_object_id = id;
+				m_document->getGUIState()->m_cursor_item_id =0;
+				cr = dynamic_cast<Creature*>(cwo);
+				if (cr != 0)
 				{
-					bar->setProgress(perc);
+					if (!bar->isVisible())
+						bar->setVisible(true);
+					
+					// Objekt ist ein Lebewesen
+					// Lebenspunkte anfuegen
+					string_stream<< dgettext("sumwars_xml",cr->getRefName().c_str());
+					float perc = cr->getDynAttr()->m_health / cr->getBaseAttrMod()->m_max_health;
+					if (bar->getProgress() != perc)
+					{
+						bar->setProgress(perc);
+					}
+				}
+				else
+				{
+					string_stream<< dgettext("sumwars_xml",cwo->getName().c_str());
+					bar->setVisible(false);
+				}
+				
+				if (!label->isVisible())
+				{
+					label->setVisible(true);
+				}
+				name = string_stream.str();
+				if (label->getText() != (CEGUI::utf8*) name.c_str())
+				{
+					label->setText((CEGUI::utf8*) name.c_str());
 				}
 			}
 			else
 			{
+				label->setVisible(false);
 				bar->setVisible(false);
+			}
+			
+			DropItem* di = dynamic_cast<DropItem*>(go);
+			if (di != 0)
+			{
+				Item* itm = di->getItem();
+				m_document->getGUIState()->m_cursor_item_id = id;
+				m_document->getGUIState()->m_cursor_object_id =0;
+				
+				if (!m_document->getGUIState()->m_alt_hold)
+				{
+					itmlabel->setVisible(true);
+				}
+				
+				name = itm->getName();
+				
+				float len = itmlabel->getArea().getWidth().d_scale;
+				
+				if (itmlabel->getText() != (CEGUI::utf8*) name.c_str())
+				{
+					CEGUI::Font* font = itmlabel->getFont();
+					float width = font->getTextExtent((CEGUI::utf8*) name.c_str());
+					CEGUI::Rect rect = m_game_screen->getInnerRect();
+					len = width / rect.getWidth();
+					
+					itmlabel->setText((CEGUI::utf8*) name.c_str());
+				}
+				
+				if (fabs( itmlabel->getArea().getWidth().d_scale - len) > 0.001)
+				{
+					DEBUG5("old value %f new value %f",itmlabel->getArea().getWidth().d_scale, len);
+					itmlabel->setSize(CEGUI::UVector2(cegui_reldim(len), cegui_reldim( 0.03f)));
+				}
+				
+				std::string propold = itmlabel->getProperty("TextColours").c_str();
+				std::string propnew = "tl:FFFFFFFF tr:FFFFFFFF bl:FFFFFFFF br:FFFFFFFF";
+				if (itm->m_rarity == Item::MAGICAL)
+				{
+					propnew = "tl:FF8888FF tr:FF8888FF bl:FF8888FF br:FF8888FF";
+				}
+				if (propold != propnew)
+				{
+					itmlabel->setProperty("TextColours", propnew); 
+				}
+				
+				
+				std::pair<float,float> rpos = m_scene->getProjection(di->getPosition());
+				itmlabel->setPosition(CEGUI::UVector2(CEGUI::UDim(std::max(0.0,rpos.first-0.03),0), CEGUI::UDim(std::max(0.0,rpos.second-0.05),0)));
+			}
+			else
+			{
+				itmlabel->setVisible(false);
 			}
 		}
 		else
 		{
+			DEBUG("no object with id %i",objid);
 			m_document->getGUIState()->m_cursor_object_id =0;
-			m_document->getGUIState()->m_cursor_object="";
 		}
 	}
 
 
-	name = string_stream.str();
-
-	if (label->getText() != (CEGUI::utf8*) name.c_str())
-	{
-
-		label->setText((CEGUI::utf8*) name.c_str());
-	}
-
+	
 
 }
 
@@ -1275,165 +1322,8 @@ void MainWindow::updateItemInfo()
 	DropItem* di;
 	
 	Player* player = m_document->getLocalPlayer();
-	short rid = player->getRegionId();
 	Vector plpos = player->getShape()->m_center;
 	
-	
-	/*
-	if (m_document->getGUIState()->m_cursor_object == "")
-	{
-		
-		// Ogre Name des Objektes auf das der Mauszeiger zeigt
-		std::string objname = "";
-	
-		// Position der Maus
-		float x = m_mouse->getMouseState().X.abs;
-		float y = m_mouse->getMouseState().Y.abs;
-	
-	
-		// Position des Mausklicks relativ zum Viewport
-		Ogre::Viewport* viewport = m_scene->getViewport();
-		float relx = x*1.0/(viewport->getActualWidth());
-		float rely = y*1.0/(viewport->getActualHeight());
-	
-		// Strahl von der Kamera durch den angeklickten Punkt
-		Ogre::Camera* camera = m_scene->getCamera();
-		Ogre::Ray ray = camera->getCameraToViewportRay(relx,rely);
-		
-		// Umrechnen in Spielkoordinaten
-		// Ort an dem der Strahl den Boden beruehrt berechnen
-		const Ogre::Vector3& orig = ray.getOrigin();
-		const Ogre::Vector3& dir = ray.getDirection();
-	
-		// Schnittpunkt mit der Ebene y=0 ausrechnen
-		Ogre::Vector3 p = orig + dir*(orig.y/(-dir.y));
-		float gx = p.x/50;
-		float gy = p.z/50;
-	
-		Ogre::Entity* ent;
-		
-		// Nach Items unterm Mauszeiger suchen
-		// Ergebnispaar einer Intersection Abfrage
-		std::pair<bool,Ogre::Real> isec;
-			
-		float mindist = 1000000;
-		float dist;
-		float ix,iy;
-		float mix=0,miy=0;
-		
-		
-		std::ostringstream out_stream;
-		out_stream.str("");
-			
-		for (it = itms->begin();it != itms->end();++it)
-		{
-			ent = m_scene_manager->getEntity(it->second);
-	
-				// Auf Ueberschneidung mit dem Kamerastrahl testen
-			const Ogre::AxisAlignedBox& box = ent->getWorldBoundingBox();
-			isec = ray.intersects(box);
-	
-			if (isec.first)
-			{
-	
-					// Objekt wird vom Kamerastrahl geschnitten
-					// Das Objekt waehlen, dass am naechsten am Mauszeiger ist
-				di = World::getWorld()->getRegion(rid)->getDropItem(it->first);
-				if (di ==0)
-				{
-					continue;
-				}
-					
-				ix = di->getPosition().m_x;
-				iy = di->getPosition().m_y;
-				dist = (gx-ix)*(gx-ix) + (gy-iy)*(gy-iy);
-				if (dist < mindist)
-				{
-					mindist = dist;	
-					objname = it->second;
-					mix=ix;
-					miy=iy;
-						
-				}
-	
-			}
-	
-		}
-	
-		if (objname!="")
-		{
-				// Item gefunden
-				// ID des Objektes ermitteln
-			int pos = objname.find(":");
-			std::string idstring = objname.substr(pos+1);
-			std::string name = objname.substr(0,pos);
-			std::stringstream stream(idstring);
-			int id;
-			stream >> id;
-	
-			DEBUG5("item hover %s id %i",name.c_str(),id);
-	
-			Item* itm = player->getRegion()->getItem(id);
-	
-			if (itm !=0)
-			{
-				// Objekt existiert
-				m_document->getGUIState()->m_cursor_item_id = id;
-				
-				if (!m_document->getGUIState()->m_alt_hold)
-				{
-					label->setVisible(true);
-				}
-				
-				name = itm->getName();
-				
-				float len = label->getArea().getWidth().d_scale;
-				
-				if (label->getText() != (CEGUI::utf8*) name.c_str())
-				{
-					CEGUI::Font* font = label->getFont();
-					float width = font->getTextExtent((CEGUI::utf8*) name.c_str());
-					CEGUI::Rect rect = m_game_screen->getInnerRect();
-					len = width / rect.getWidth();
-					
-					label->setText((CEGUI::utf8*) name.c_str());
-				}
-				
-				if (fabs( label->getArea().getWidth().d_scale - len) > 0.001)
-				{
-					DEBUG5("old value %f new value %f",label->getArea().getWidth().d_scale, len);
-					label->setSize(CEGUI::UVector2(cegui_reldim(len), cegui_reldim( 0.03f)));
-				}
-				
-				std::string propold = label->getProperty("TextColours").c_str();
-				std::string propnew = "tl:FFFFFFFF tr:FFFFFFFF bl:FFFFFFFF br:FFFFFFFF";
-				if (itm->m_rarity == Item::MAGICAL)
-				{
-					propnew = "tl:FF8888FF tr:FF8888FF bl:FF8888FF br:FF8888FF";
-				}
-				if (propold != propnew)
-				{
-					label->setProperty("TextColours", propnew); 
-				}
-				
-				
-				std::pair<float,float> rpos = m_scene->getProjection(Vector(mix,miy));
-				label->setPosition(CEGUI::UVector2(CEGUI::UDim(std::max(0.0,rpos.first-0.03),0), CEGUI::UDim(std::max(0.0,rpos.second-0.05),0)));
-			}
-			else
-			{
-				m_document->getGUIState()->m_cursor_item_id =0;
-				label->setVisible(false);
-			}
-		}
-		else
-		{
-			m_document->getGUIState()->m_cursor_item_id =0;
-			label->setVisible(false);
-		}
-	}
-	*/
-
 	DropItemMap* itms = player->getRegion()->getDropItems();
 	DropItemMap::iterator it;
 	

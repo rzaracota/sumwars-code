@@ -20,7 +20,7 @@ void DropItem::init()
 {
 	setBaseType(DROPITEM);
 	setType("DROPITEM");
-	
+	setState(STATE_ACTIVE);
 	setAngle(Random::random()*3.14159*2);
 
 	float hadd = 0.1;

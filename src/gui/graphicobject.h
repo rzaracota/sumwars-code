@@ -75,7 +75,7 @@ class GraphicObject
 	public:
 		typedef std::string Type;
 		
-		GraphicObject(Type type, GraphicRenderInfo* render_info, std::string name);
+		GraphicObject(Type type, GraphicRenderInfo* render_info, std::string name, int id);
 		
 		~GraphicObject();
 		
@@ -96,6 +96,8 @@ class GraphicObject
 		{
 			return m_type;
 		}
+		
+		void setQueryMask(unsigned int mask);
 		
 	private:
 		void addMovableObject(MovableObjectInfo& object);
@@ -160,6 +162,8 @@ class GraphicObject
 		std::string m_name;
 		
 		AttachedAction m_action;
+		
+		int m_id;
 };
 
 

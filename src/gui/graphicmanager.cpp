@@ -36,11 +36,11 @@ GraphicRenderInfo* GraphicManager::getRenderInfo(std::string type)
 	return rinfo;
 }
 
-GraphicObject* GraphicManager::createGraphicObject(GraphicObject::Type type, std::string name)
+GraphicObject* GraphicManager::createGraphicObject(GraphicObject::Type type, std::string name, int id)
 {
 	GraphicRenderInfo* rinfo =  getRenderInfo(type);
 	
-	GraphicObject* go = new GraphicObject(type, rinfo,name);
+	GraphicObject* go = new GraphicObject(type, rinfo,name,id);
 	return go;
 }
 
@@ -58,22 +58,27 @@ Ogre::MovableObject* GraphicManager::createMovableObject(MovableObjectInfo& info
 	name += stream.str();
 	id ++;
 	
+	Ogre::MovableObject* obj=0;
+	
 	if (info.m_type == MovableObjectInfo::ENTITY)
 	{
 		Ogre::Entity* obj_ent;
 		obj_ent = m_scene_manager->createEntity(name, info.m_source);
-		return static_cast<Ogre::MovableObject*>(obj_ent);
+		obj= static_cast<Ogre::MovableObject*>(obj_ent);
 	}
 	else if (info.m_type == MovableObjectInfo::PARTICLE_SYSTEM)
 	{
 		Ogre::ParticleSystem* part;
 		part = m_scene_manager->createParticleSystem(name, info.m_source);
-		return static_cast<Ogre::MovableObject*>(part);
+		obj= static_cast<Ogre::MovableObject*>(part);
 	}
 	
+	if (obj != 0)
+	{
+		obj->setQueryFlags(0);
+	}
 	
-	
-	return 0;
+	return obj;
 }
 
 void GraphicManager::destroyMovableObject(Ogre::MovableObject* obj)

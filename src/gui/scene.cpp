@@ -405,6 +405,8 @@ GraphicObject* Scene::createGraphicObject(GameObject* gobj)
 		type = GraphicManager::getGraphicType(otype);
 	}
 	
+	
+	
 	// GraphicObjekt erstellen und ausgeben
 	if (type == "")
 	{
@@ -413,7 +415,7 @@ GraphicObject* Scene::createGraphicObject(GameObject* gobj)
 	else
 	{
 		DEBUG5("create graphic Object typ %s for %s",type.c_str(), otype.c_str());
-		return GraphicManager::createGraphicObject(type,gobj->getNameId());
+		return GraphicManager::createGraphicObject(type,gobj->getNameId(), gobj->getId());
 	}
 }
 
@@ -516,22 +518,24 @@ void  Scene::insertObject(GameObject* gobj, bool is_static)
 	{	
 		Ogre::SceneNode* node = obj->getTopNode();
 		
-		// Objektes positionieren
-		float x=gobj->getShape()->m_center.m_x;
-		float y=gobj->getShape()->m_center.m_y;
-		Ogre::Vector3 vec(x*50,0,y*50);
-		node->setPosition(vec);
-		
-		// Objekt drehen
-		float angle = gobj->getShape()->m_angle;
-		node->setDirection(sin(angle),0,-cos(angle),Ogre::Node::TS_WORLD);
-		
 		// Monster zufaellig skalieren
 		if (gobj->getType() == "MONSTER")
 		{
 			float scale = 0.9 + 0.2*Random::random();
 			node->setScale(scale,scale,scale);
 		
+		}
+		
+		if (gobj->getBaseType() == GameObject::WORLDOBJECT)
+		{
+			if (gobj->getState() == WorldObject::STATE_ACTIVE)
+			{
+				obj->setQueryMask(WORLDOBJECT);
+			}
+		}
+		else if (gobj->getBaseType() == GameObject::DROPITEM)
+		{
+			obj->setQueryMask(ITEM);
 		}
 		
 		updateGraphicObject(obj,gobj,0.0);
@@ -1952,6 +1956,7 @@ void Scene::createScene()
 					ground = m_scene_manager->createEntity(stream.str(), "ground");
 					ground->setMaterialName(region->getGroundMaterial());
 					ground->setCastShadows(false);
+					ground->setQueryFlags(0);
 					node->attachObject(ground);
 
 					static_geom->addSceneNode(node);
