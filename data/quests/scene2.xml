@@ -32,16 +32,16 @@
 				addCameraPosition(0,get(getRole("PL"),"position"),20,40,20);
 				addCameraPosition(20000,get(getRole("PL"),"position"),220,60,30);
 
-				speak("PL",_("Can we blind this crystal somehow?"),1000);
+				speak("PL",_("Can we blind this crystal somehow?"),1500);
 				if (getRole("MAG") ~= nil) then
 					speak("MAG",_("But of course."),1000);
-					speak("MAG",_("I know this nice little trick."),1000);
+					speak("MAG",_("I know this nice little trick."),1500);
 				elseif (getRole("PRI") ~= nil) then
 					speak("PRI",_("But of course."),1000);
-					speak("PRI",_("I know this nice little trick."),1000);
+					speak("PRI",_("I know this nice little trick."),1500);
 				else
 					speak("ANY",_("But of course."),1000);
-					speak("ANY",_("I know this nice little trick."),1000);
+					speak("ANY",_("I know this nice little trick."),1500);
 				end;
 
 				-- (beginnt den Kristall zu verzaubern)
@@ -55,37 +55,37 @@
 				else
 					speak("ANY",_("Well, it's done."),1000);
 				end;
-				speak("PL",_("And now he can't hear us anymore?"),1000);
+				speak("PL",_("And now he can't hear us anymore?"),1300);
 				if (getRole("MAG") ~= nil) then
 					speak("MAG",_("Only if we want to."),1000);
-					speak("MAG",_("But he can still annoy us."),1000);
-					speak("MAG",_("We will defenitly notice if he has something to tell to us."),1000);
+					speak("MAG",_("But he can still annoy us."),1200);
+					speak("MAG",_("We will defenitly notice if he has something to tell to us."),2000);
 				elseif (getRole("PRI") ~= nil) then
 					speak("PRI",_("Only if we want to."),1000);
-					speak("PRI",_("But he can still annoy us."),1000);
-					speak("PRI",_("We will defenitly notice if he has something to tell to us."),1000);
+					speak("PRI",_("But he can still annoy us."),1200);
+					speak("PRI",_("We will defenitly notice if he has something to tell to us."),2000);
 				else
 					speak("ANY",_("Only if we want to."),1000);
-					speak("ANY",_("But he can still annoy us."),1000);
-					speak("ANY",_("We will defenitly notice if he has something to tell to us."),1000);
+					speak("ANY",_("But he can still annoy us."),1200);
+					speak("ANY",_("We will defenitly notice if he has something to tell to us."),2000);
 				end;
 				speak("PL",_("Very good."),1000);
-				speak("PL",_("What do you think about this?"),1000);
-				speak("ANYast",_("Did I get this right?"),1000);
-				speak("ANYast",_("Has he really the power to release us of Harad's Curse?"),1000);
-				speak("WAR",_("He said that, but I never heard before that someone took something out of hell."),1000);
-				speak("MAG",_("That thing was real, no doubt about it."),1000);
-				speak("MAG",_("The sight alone gave me goose bumps."),1000);
+				speak("PL",_("What do you think about all this?"),1300);
+				speak("ANYast",_("Did I get this right?"),1200);
+				speak("ANYast",_("Has he really the power to release us of Harad's Curse?"),1800);
+				speak("WAR",_("He said that, but I never heard before that someone took something out of hell."),2200);
+				speak("MAG",_("That thing was real, no doubt about it."),1400);
+				speak("MAG",_("The sight alone gave me goose bumps."),1300);
 				speak("WAR",_("You nearly fainted."),1000);
 				speak("PRI",_("Freedom."),1000);
-				speak("PRI",_("I don't even have memorys of it..."),1000);
-				speak("ANYast",_("Still, it's unlikely that he will keep his promise."),1000);
-				speak("ANYast",_("Even if he has the power to do it we're to valuable to his ends."),1000);
-				speak("ANYast",_("We are truely branded."),1000);
-				speak("WAR",_("If there's even the slightest chance I'm willing to try."),1000);
-				speak("MAG",_("If stupidity had a weight you'd be unable to move."),1000);
-				speak("WAR",_("If arrogance had a smell you'd suffocate instantly"),1000);
-				speak("PL",_("Very well than. Let's vote about our course of action."),1000);
+				speak("PRI",_("I don't even have memorys of it..."),1200);
+				speak("ANYast",_("Still, it's unlikely that he will keep his promise."),1500);
+				speak("ANYast",_("Even if he has the power to do it we're to valuable to his ends."),1900);
+				speak("ANYast",_("We are truely branded."),1200);
+				speak("WAR",_("If there's even the slightest chance I'm willing to try."),1500);
+				speak("MAG",_("If stupidity had a weight you'd be unable to move."),1500);
+				speak("WAR",_("If arrogance had a smell you'd suffocate instantly"),1500);
+				speak("PL",_("Very well than. Let's vote about our course of action."),1600);
 
 				-- => Den Anweisungen der Gilde folgen?
 
@@ -103,7 +103,7 @@
 				
 		<Topic name="follow_instructions">
 			<Effect>
-				speak("PL",_("Than it's decided. We'll raise hell if they don't keep their word."),1000);
+				speak("PL",_("Than it's decided. We'll raise hell if they don't keep their word."),2000);
 				
 				-- weiter in das Soeldnerlager.
 				print("test1");
@@ -113,10 +113,10 @@
 		
 		<Topic name="dont_follow_instructions">
 			<Effect>
-				speak("PL",_("This hole thing is really too precarious."),1000);
-				speak("PL",_("We can't afford open resistance though, "),1000);
-				speak("PL",_("so we'll grind and bear it for the time being."),1000);
-				speak("PL",_("Let's win their trust."),1000);
+				speak("PL",_("This hole thing is really too precarious."),1500);
+				speak("PL",_("We can't afford open resistance though, "),1500);
+				speak("PL",_("so we'll grind and bear it for the time being."),1500);
+				speak("PL",_("Let's win their trust."),1300);
 				
 				-- weiter in das Soeldnerlager.
 				
