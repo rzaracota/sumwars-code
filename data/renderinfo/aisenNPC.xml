@@ -2,6 +2,7 @@
 	<Entity source="guard.mesh"/>
 	<Entity objectname="weapon" bone="itemRightHand" source="pike_pol.mesh" />
 	<Entity objectname="head" bone="crown" source="head1.mesh" />
+	<Entity objectname="helm" bone="crown" source="merc_hlm.mesh" />
 	
 	<Action name="noaction">
 		<Animation name="idlePole" />
