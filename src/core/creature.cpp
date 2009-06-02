@@ -2082,16 +2082,19 @@ bool Creature::update (float time)
 	// Zeit fuer Statusveraenderungen / Immunisierungen reduzieren
 	for (int i=0;i<NR_STATUS_MODS;i++)
 	{
-		m_dyn_attr.m_status_mod_time[i] -= time;
-		if (m_dyn_attr.m_status_mod_time<0)
+		if (m_dyn_attr.m_status_mod_time[i] >0)
 		{
-			m_dyn_attr.m_status_mod_time[i]=0;
-			// aktuelle Aktion abbrechen nach auslaufen von Berserker / verwirrt
-			// (da die Aktion idr ungewollt bzw ungeplant ist)
-			if (i==Damage::BERSERK || i==Damage::CONFUSED)
+			m_dyn_attr.m_status_mod_time[i] -= time;
+			if (m_dyn_attr.m_status_mod_time[i]<0)
 			{
-				m_command.m_type = Action::NOACTION;
-				addToNetEventMask(NetEvent::DATA_COMMAND);
+				m_dyn_attr.m_status_mod_time[i]=0;
+				// aktuelle Aktion abbrechen nach auslaufen von Berserker / verwirrt
+				// (da die Aktion idr ungewollt bzw ungeplant ist)
+				if (i==Damage::BERSERK || i==Damage::CONFUSED)
+				{
+					m_command.m_type = Action::NOACTION;
+					addToNetEventMask(NetEvent::DATA_COMMAND);
+				}
 			}
 		}
 
@@ -4563,5 +4566,59 @@ float Creature::getActionPercent()
 		return 0.99;
 	
 	return m_action.m_elapsed_time / m_action.m_time;
+}
+
+void Creature::getFlags(std::set<std::string>& flags)
+{
+	// Statusmods
+	float* mods = m_dyn_attr.m_status_mod_time;
+	static const std::string modnames[NR_STATUS_MODS]= {"blind", "poisoned", "berserk","confused", "mute", "paralyzed", "frozen", "burning" };
+	for (int i=0; i<NR_STATUS_MODS; i++)
+	{
+		if (mods[i] >0)
+		{
+			flags.insert(modnames[i]);
+		}
+	}
+	
+	// Effekte
+	float* effects = m_dyn_attr.m_effect_time;
+	static const std::string effectnames[NR_EFFECTS]= {"bleed"};
+	for (int i=0; i<NR_EFFECTS; i++)
+	{
+		if (effects[i] >0)
+		{
+			flags.insert(effectnames[i]);
+		}
+	}
+	
+	// weitere Flags
+	int flgs = m_base_attr_mod.m_special_flags;
+	if (flgs & FIRESWORD)
+		flags.insert("firesword");
+	if (flgs & FLAMESWORD)
+		flags.insert("flamesword");
+	if (flgs & FLAMEARMOR)
+		flags.insert("flamearmor");
+	if (flgs & DECOY)
+		flags.insert("decoy");
+	if (flgs & SCARE)
+		flags.insert("scare");
+	if (flgs & CRIT_HITS)
+		flags.insert("critical_hits");
+	if (flgs & ICE_ARROWS)
+		flags.insert("ice_arrows");
+	if (flgs & FROST_ARROWS)
+		flags.insert("frost_arrows");
+	if (flgs & WIND_ARROWS)
+		flags.insert("wind_arrows");
+	if (flgs & STORM_ARROWS)
+		flags.insert("storm_arrows");
+	if (flgs & WIND_WALK)
+		flags.insert("wind_walk");
+	if (flgs & BURNING_RAGE)
+		flags.insert("burning_rage");
+	if (flgs & STATIC_SHIELD)
+		flags.insert("static_shield");
 }
 

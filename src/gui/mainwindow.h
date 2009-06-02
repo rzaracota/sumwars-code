@@ -60,10 +60,11 @@ class MainWindow :
 	bool init();
 
 	/**
-	 * \fn void update()
+	 * \fn void update(float time)
 	 * \brief aktualisiert die Anzeige
+	 * \param time vergangene Zeit in ms
 	 */
-	void update();
+	void update(float time);
 
 	/**
 	 * \fn bool setupGameScreen()

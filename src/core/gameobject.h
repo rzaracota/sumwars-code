@@ -8,6 +8,7 @@ class Region;
 #include "charconv.h"
 #include "networkstruct.h"
 #include <string>
+#include <set>
 
 /**
  * \class GameObject
@@ -447,6 +448,17 @@ class GameObject
 		{
 			return 0.0;
 		}
+		
+		/**
+		 * \fn virtual void getFlags(std::set<std::string>& flags)
+		 * \brief Gibt den Status der bekannten Flags aus
+		 * \param flags Ausgabeparameter: Flags
+		 */
+		virtual void getFlags(std::set<std::string>& flags)
+		{
+			
+		}
+		
 		
 	private:
 		/**

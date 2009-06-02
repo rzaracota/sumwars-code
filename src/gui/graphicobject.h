@@ -88,6 +88,8 @@ class GraphicObject
 		
 		void updateState(std::string state, bool active);
 		
+		void updateAllStates(std::set<std::string>& states);
+		
 		void update(float time);
 		
 		bool updateSubobject(MovableObjectInfo& object); 

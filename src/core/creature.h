@@ -631,6 +631,13 @@ protected:
 	 */
 	virtual float getActionPercent();
 	
+	/**
+	 * \fn virtual void getFlags(std::set<std::string>& flags)
+	 * \brief Gibt den Status der bekannten Flags aus
+	 * \param flags Ausgabeparameter: Flags
+	 */
+	virtual void getFlags(std::set<std::string>& flags);
+	
 //Private stuff
 private:
 	//Fields

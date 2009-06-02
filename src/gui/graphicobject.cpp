@@ -113,7 +113,10 @@ void GraphicObject::setQueryMask(unsigned int mask)
 	for (it = m_attached_objects.begin(); it != m_attached_objects.end(); ++it)
 	{
 		ent = dynamic_cast<Ogre::Entity*>(it->second.m_object);
-		ent->setQueryFlags(mask);
+		if (ent != 0)
+		{
+			ent->setQueryFlags(mask);
+		}
 	}
 	
 	std::map<std::string, AttachedGraphicObject  >::iterator gt;
@@ -468,7 +471,7 @@ void GraphicObject::updateState(std::string state, bool active)
 		actionname +=":activate";
 		if (it == m_attached_states.end() || it->second.m_type == AttachedState::DEACTIVATE)
 		{
-			DEBUG5("activated state %s",state.c_str());
+			DEBUG("activated state %s",state.c_str());
 			// Status aktuell noch nicht gesetzt
 			AttachedState& astate  = m_attached_states[state];
 			astate.m_type = AttachedState::ACTIVATE;
@@ -500,6 +503,39 @@ void GraphicObject::updateState(std::string state, bool active)
 	{
 		obj = gt->second.m_object;
 		obj->updateState(state,active);
+	}
+}
+
+void GraphicObject::updateAllStates(std::set<std::string>& states)
+{
+	std::set<std::string>::iterator it = states.begin();
+	std::map<std::string,  AttachedState>::iterator jt = m_attached_states.begin(),jtold;
+	
+	while (it != states.end() || jt != m_attached_states.end())
+	{
+		if (it == states.end() || (jt != m_attached_states.end() && *it > jt->first))
+		{
+			// Status deaktivieren
+			updateState(jt->first,false);
+			++jt;
+			
+		}
+		else if (jt == m_attached_states.end() || (it != states.end() && *it < jt->first))
+		{
+			// Status auf true setzen
+			updateState(*it,true);
+			++it;
+		}
+		else if (*it == jt->first)
+		{
+			if (jt->second.m_type == AttachedState::DEACTIVATE)
+			{
+				updateState(*it,true);
+			}
+			// Status ist korrekt gesetzt
+			++it;
+			++jt;
+		}
 	}
 }
 
@@ -554,6 +590,7 @@ void GraphicObject::update(float time)
 			if (it->second.m_type == AttachedState::DEACTIVATE)
 			{
 				// Deaktivierung abgeschlossen
+				DEBUG5("deleting attached action %s",it->first.c_str());
 				updateAttachedAction(*attch,act,1.0);
 				m_attached_states.erase(it++);
 				continue;

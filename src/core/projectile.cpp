@@ -998,3 +998,8 @@ std::string Projectile::getActionString()
 		
 	}
 }
+
+void Projectile::getFlags(std::set<std::string>& flags)
+{
+	
+}

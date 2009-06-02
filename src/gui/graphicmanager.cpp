@@ -70,6 +70,7 @@ Ogre::MovableObject* GraphicManager::createMovableObject(MovableObjectInfo& info
 	{
 		Ogre::ParticleSystem* part;
 		part = m_scene_manager->createParticleSystem(name, info.m_source);
+		
 		obj= static_cast<Ogre::MovableObject*>(part);
 	}
 	

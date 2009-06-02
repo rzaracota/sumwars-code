@@ -159,7 +159,7 @@ bool MainWindow::setupMainMenu()
 	return true;
 }
 
-void MainWindow::update()
+void MainWindow::update(float time)
 {
 	// Eingaben abfangen
 	m_mouse->capture();
@@ -471,7 +471,7 @@ void MainWindow::update()
 	{
 
 		// Szene aktualisieren
-		m_scene->update();
+		m_scene->update(time);
 
 		// ObjectInfo aktualisieren
 		updateObjectInfo();

@@ -217,7 +217,7 @@ void Application::run()
 
 			// View aktualisieren
 			DEBUG5("main window update");
-			m_main_window->update();
+			m_main_window->update(frametime);
 
 			t =timer2.getMicroseconds ()/1000.0;
 			time[4] += t;
@@ -643,7 +643,7 @@ void Application::updateStartScreen(float percent)
 	}
 
 	DEBUG5("update time %f  perc: %f",m_timer.getTime(), percent);
-	m_main_window->update();
+	m_main_window->update(m_timer.getTime()/1000);
 
 	m_cegui_system->injectTimePulse(m_timer.getTime()/1000);
 

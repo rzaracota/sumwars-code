@@ -396,6 +396,12 @@ void Scene::updateGraphicObject(GraphicObject* obj, GameObject* gobj,float time)
 		updatePlayerGraphicObject(obj,pl);
 	}
 	
+	// Zustaende aktualisieren
+	std::set<std::string> flags;
+	gobj->getFlags(flags);
+	obj->updateAllStates(flags);
+	
+	
 	obj->update(time);
 }
 
