@@ -344,11 +344,17 @@ class Document
 	}
 
 	/**
-	 * \fn static void* writeSaveFile(void* doc_ptr)
-	 * \param doc_ptr Zeiger auf das Dokument
+	 * \fn void writeSavegame()
+	 * \brief Schreibt ein Savegame des aktuellen Spielers
+	 */
+	void writeSavegame();
+	
+	/**
+	 * \fn static void* writeSaveFile(void* doc_data_ptr)
+	 * \param doc_ptr Zeiger auf ein std::pair(Dokument, Daten)
 	 * \brief Schreibt das Savefile
 	 */
-	static void* writeSaveFile(void* doc_ptr);
+	static void* writeSaveFile(void* doc_data_ptr);
 
 
 	/**

@@ -303,7 +303,7 @@ void Document::createNewCharacter(std::string name)
 			return;
 		}
 		
-		writeSaveFile(this);
+		writeSavegame();
 		
 		getGUIState()->m_shown_windows = Document::START_MENU;
 		setModified(Document::WINDOWS_MODIFIED);
@@ -1402,8 +1402,7 @@ void Document::update(float time)
 			{
 				m_save_timer.start();
 				
-				pthread_t thread;
-				pthread_create(&thread,0,&Document::writeSaveFile,this);
+				writeSavegame();
 				DEBUG5("saving");
 			}
 			
@@ -1428,10 +1427,7 @@ void Document::update(float time)
 
 		case SHUTDOWN_WRITE_SAVEGAME:
 			// Savegame schreiben
-			pthread_t thread;
-			void* ret;
-			pthread_create(&thread,0,&Document::writeSaveFile,this);
-			pthread_join(thread, &ret);
+			writeSavegame();
 
 			m_state = SHUTDOWN;
 			break;
@@ -1549,32 +1545,31 @@ void Document::updateContent(float time)
 
 }
 
-void* Document::writeSaveFile(void* doc_ptr)
+void Document::writeSavegame()
 {
-
-	Document* doc = (Document*) doc_ptr;
-	if (doc->getLocalPlayer()==0)
-		return 0;
+	if (getLocalPlayer()==0)
+		return;
 	
 	CharConv* save;
-	std::stringstream str;
+	
 	
 	bool binary = false;
 	if (!binary)
 	{
-		save = new CharConv(&str);
+		std::stringstream* pstr = new std::stringstream;
+		save = new CharConv(pstr);
 	}
 	else
 	{
 		save = new CharConv(0);
 	}
 	
-	doc->getLocalPlayer()->toSavegame(save);
+	getLocalPlayer()->toSavegame(save);
 	
 	// Shortkeys hinzufuegen
 	ShortkeyMap::iterator it;
 	int nr =0;
-	for (it = doc->m_shortkey_map.begin(); it != doc->m_shortkey_map.end(); ++it)
+	for (it = m_shortkey_map.begin(); it != m_shortkey_map.end(); ++it)
 	{
 		if (it->second >= USE_SKILL_LEFT && it->second < USE_SKILL_RIGHT + 200)
 			nr ++;
@@ -1582,7 +1577,7 @@ void* Document::writeSaveFile(void* doc_ptr)
 	save->printNewline();
 	save->toBuffer(nr);
 	save->printNewline();
-	for (it = doc->m_shortkey_map.begin(); it != doc->m_shortkey_map.end(); ++it)
+	for (it = m_shortkey_map.begin(); it != m_shortkey_map.end(); ++it)
 	{
 		if (it->second >= USE_SKILL_LEFT && it->second < USE_SKILL_RIGHT + 200)
 		{
@@ -1591,6 +1586,20 @@ void* Document::writeSaveFile(void* doc_ptr)
 			save->printNewline();
 		}
 	}
+	
+	// Savegame schreiben (ansynchron)
+	std::pair<Document*, CharConv*>* param = new std::pair<Document*, CharConv*>(this,save);
+	pthread_t thread;
+	pthread_create(&thread,0,&Document::writeSaveFile,param);
+	
+}
+
+void* Document::writeSaveFile(void* doc_data_ptr)
+{
+
+	std::pair<Document*, CharConv*>* param = static_cast< std::pair<Document*, CharConv*>* >(doc_data_ptr);
+	CharConv* save = param->second;
+	Document* doc = param->first;
 	
 	// Savegame schreiben
 	std::stringstream* stream = dynamic_cast<std::stringstream*> (save->getStream());
@@ -1636,8 +1645,13 @@ void* Document::writeSaveFile(void* doc_ptr)
 	{
 		ERRORMSG("cannot open save file: %s",doc->m_save_file.c_str());
 	}
+	if (save->getStream() != 0)
+	{
+		delete save->getStream();
+	}
 	delete save;
-
+	delete param;
+	
 	return 0;
 }
 
