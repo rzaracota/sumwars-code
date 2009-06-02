@@ -84,13 +84,6 @@ Scene::Scene(Document* doc,Ogre::RenderWindow* window)
 	char_camera->setNearClipDistance(5);
 			
 	char_camera->setAspectRatio(1.0);
-			
-		
-			
-	Ogre::Entity *player = char_scene_mng->createEntity("Player", "warrior_m.mesh");
-			
-	Ogre::SceneNode *playerNode = char_scene_mng->getRootSceneNode()->createChildSceneNode("characterNode");
-	playerNode->attachObject(player);
 	
 
 	Ogre::SceneNode *camNode = char_scene_mng->getRootSceneNode()->createChildSceneNode("CharacterCamNode");
@@ -592,7 +585,6 @@ void Scene::updateCharacterView()
 			GraphicManager::destroyGraphicObject(m_temp_player_object);
 			m_temp_player_object =0;
 			update = true;
-			
 		}
 		
 		m_temp_player = pl->getNameId();
