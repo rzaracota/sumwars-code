@@ -973,3 +973,28 @@ void Projectile::processNetEvent(NetEvent* event, CharConv* cv)
 	}
 }
 
+float Projectile::getActionPercent()
+{
+	return (m_timer / m_timer_limit);
+}
+
+std::string Projectile::getActionString()
+{
+	switch (getState())
+	{
+		case STATE_FLYING: 
+			return "fly"; break;
+		case STATE_EXPLODING: 
+			return "explode"; break;
+		case STATE_GROWING: 
+			return "grow"; break;
+		case STATE_STABLE: 
+			return "stable"; break;
+		case STATE_VANISHING: 
+			return "shrink"; break;
+			
+		default:
+			return "noaction"; break;
+		
+	}
+}

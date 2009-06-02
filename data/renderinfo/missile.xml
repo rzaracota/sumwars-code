@@ -1,5 +1,10 @@
 <RenderInfo name="arrow">
-	<Entity source="arrow.mesh" position="0 1.6 0" />
+	<Entity objectname="arrow" source="arrow.mesh" position="0 1.6 0" />
+	
+	<Action name="explode">
+		<Detach objectname="arrow" />
+		<ParticleSystem objectname="explosion" source="Explosion" position="0 1.6 0" />
+	</Action>
 </RenderInfo>
 
 <RenderInfo name="magic_arrow">
@@ -7,108 +12,141 @@
 </RenderInfo>
 
 <RenderInfo name="fire_bolt">
-	<ParticleSystem source="Firebolt" position="0 1.6 0" />
+	<ParticleSystem objectname="particle" source="Firebolt" position="0 1.6 0" />
 </RenderInfo>
 
 <RenderInfo name="fire_ball">
-	<ParticleSystem source="Fireball" position="0 1.6 0" />
+	<ParticleSystem objectname="particle" source="Fireball" position="0 1.6 0" />
 </RenderInfo>
 
 <RenderInfo name="fire_wall">
-	<ParticleSystem source="Firewall" position="0 1.6 0" />
+	<ParticleSystem objectname="particle" source="Firewall" position="0 1.6 0" />
+	
+	<Action name="grow">
+		<Entity objectname="ring" source="dummyRing.mesh" position="0 1.0 0" />
+		<Scale objectname="ring" start_val="0.1" end_val="4.0" />
+	</Action>
+	
+	<Action name="shrink">
+		<Scale objectname="ring" start_val="4.0" end_val="0.1" />
+		<Detach objectname="ring" time="1.0" />
+	</Action>
+	
 </RenderInfo>
 
 <RenderInfo name="fire_wave">
-	<ParticleSystem source="Firewave" position="0 1.6 0" />
+	<ParticleSystem objectname="particle" source="Firewave" position="0 1.6 0" />
 </RenderInfo>
 
 <RenderInfo name="ice_bolt">
-	<ParticleSystem source="Icebolt" position="0 1.6 0" />
+	<ParticleSystem objectname="particle" source="Icebolt" position="0 1.6 0" />
 </RenderInfo>
 
 <RenderInfo name="ice_ring">
-	<ParticleSystem source="Icering" position="0 1.6 0" />
+	<ParticleSystem objectname="particle" source="Icering" position="0 1.6 0" />
 </RenderInfo>
 
 <RenderInfo name="blizzard">
-	<ParticleSystem source="Blizzard" position="0 1.6 0" />
+	<ParticleSystem objectname="particle" source="Blizzard" position="0 1.6 0" />
 </RenderInfo>
 
 <RenderInfo name="freeze">
-	<ParticleSystem source="Freeze" position="0 1.6 0" />
+	<ParticleSystem objectname="particle" source="Freeze" position="0 1.6 0" />
 </RenderInfo>
 
 <RenderInfo name="lightning">
-	<ParticleSystem source="Lightning" position="0 1.6 0" />
+	<ParticleSystem objectname="particle" source="Lightning" position="0 4 0" />
+	
+	<Action name="stable">
+		<Movement objectname="particle" start_vec="0 4 0" end_vec="0 1 0" />
+	</Action>
 </RenderInfo>
 
 <RenderInfo name="thunderstorm">
-	<ParticleSystem source="Thunderstorm" position="0 1.6 0" />
+	<ParticleSystem objectname="particle" source="Thunderstorm" position="0 1.6 0" />
 </RenderInfo>
 
 <RenderInfo name="chain_lightning">
-	<ParticleSystem source="Chainlightning" position="0 1.6 0" />
+	<ParticleSystem objectname="particle" source="Chainlightning" position="0 1.6 0" />
 </RenderInfo>
 
 <RenderInfo name="static_shield">
-	<ParticleSystem source="Static_shield" position="0 1.6 0" />
+	<ParticleSystem objectname="particle" source="Static_shield" position="0 1.6 0" />
 </RenderInfo>
 
 <RenderInfo name="fire_arrow">
-	<Entity source="arrow.mesh" position="0 1.6 0" />
+	<Entity objectname="arrow"  source="arrow.mesh" position="0 1.6 0" />
 	<ParticleSystem objectname="particle" source="Fire_Arrow" position="0 1.6 0" />
+	
+	<Action name="explode">
+		<Detach objectname="arrow" />
+		<Detach objectname="particle" />
+		<ParticleSystem objectname="explosion" source="Fire_Explosion" position="0 1.6 0" />
+	</Action>
 </RenderInfo>
 
 <RenderInfo name="ice_arrow">
-	<Entity source="arrow.mesh" position="0 1.6 0" />
+	<Entity objectname="arrow" source="arrow.mesh" position="0 1.6 0" />
 	<ParticleSystem objectname="particle" source="Ice_Arrow" position="0 1.6 0" />
+	
+	<Action name="explode">
+		<Detach objectname="arrow" />
+		<Detach objectname="particle" />
+		<ParticleSystem objectname="explosion" source="Ice_Explosion" position="0 1.6 0" />
+	</Action>
 </RenderInfo>
 
 
 <RenderInfo name="wind_arrow">
-	<Entity source="arrow.mesh" position="0 1.6 0" />
+	<Entity objectname="arrow" source="arrow.mesh" position="0 1.6 0" />
 	<ParticleSystem objectname="particle"  source="Wind_Arrow" position="0 1.6 0" />
+	
+	<Action name="explode">
+		<Detach objectname="arrow" />
+		<Detach objectname="particle" />
+		<ParticleSystem objectname="explosion" source="Wind_Explosion" position="0 1.6 0" />
+	</Action>
 </RenderInfo>
 
 <RenderInfo name="guided_arrow">
-	<Entity source="arrow.mesh" position="0 1.6 0" />
+	<Entity objectname="arrow" source="arrow.mesh" position="0 1.6 0" />
 	<ParticleSystem objectname="particle" source="Guided_Arrow" position="0 1.6 0" />
 </RenderInfo>
 
 <RenderInfo name="explosion">
-	<ParticleSystem source="Explosion" position="0 1.6 0" />
+	<ParticleSystem objectname="particle" source="Explosion" position="0 1.6 0" />
 </RenderInfo>
 
 <RenderInfo name="fire_explosion">
-	<ParticleSystem source="Fire_Explosion" position="0 1.6 0" />
+	<ParticleSystem objectname="particle" source="Fire_Explosion" position="0 1.6 0" />
 </RenderInfo>
 
 <RenderInfo name="ice_explosion">
-	<ParticleSystem source="Ice_Explosion" position="0 1.6 0" />
+	<ParticleSystem objectname="particle" source="Ice_Explosion" position="0 1.6 0" />
 </RenderInfo>
 
 <RenderInfo name="wind_explosion">
-	<ParticleSystem source="wind_Explosion" position="0 1.6 0" />
+	<ParticleSystem objectname="particle" source="Wind_Explosion" position="0 1.6 0" />
 </RenderInfo>
 
 <RenderInfo name="elem_explosion">
-	<ParticleSystem source="ElemExplosion" position="0 1.6 0" />
+	<ParticleSystem objectname="particle" source="ElemExplosion" position="0 1.6 0" />
 </RenderInfo>
 
 <RenderInfo name="light_beam">
-	<ParticleSystem source="Lightbeam" position="0 1.6 0" />
+	<ParticleSystem objectname="particle" source="Lightbeam" position="0 1.6 0" />
 </RenderInfo>
 
 <RenderInfo name="divine_beam">
-	<ParticleSystem source="Divine_Beam" position="0 1.6 0" />
+	<ParticleSystem objectname="particle" source="Divine_Beam" position="0 1.6 0" />
 </RenderInfo>
 
 <RenderInfo name="acid">
-	<ParticleSystem source="Acid" position="0 1.6 0" />
+	<ParticleSystem objectname="particle" source="Acid" position="0 1.6 0" />
 </RenderInfo>
 
 <RenderInfo name="hypnosis">
-	<ParticleSystem source="Hypnosis" position="0 1.6 0" />
+	<ParticleSystem objectname="particle" source="Hypnosis" position="0 1.6 0" />
 </RenderInfo>
 
 
