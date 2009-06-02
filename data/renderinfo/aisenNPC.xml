@@ -1,0 +1,17 @@
+﻿<RenderInfo name="guard_ais" parent="creaturebase">
+	<Entity source="guard.mesh"/>
+	<Entity objectname="weapon" bone="itemRightHand" source="pike_pol.mesh" />
+	<Entity objectname="head" bone="crown" source="head1.mesh" />
+	
+	<Action name="noaction">
+		<Animation name="idlePole" />
+	</Action>
+	
+	<Action name="die">
+		<Animation name="die" />
+	</Action>
+	
+	<Action name="walk">
+		<Animation name="walkOneHand" />
+	</Action>
+</RenderInfo>

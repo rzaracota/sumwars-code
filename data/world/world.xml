@@ -44,7 +44,6 @@
 -->
 
 
-
 <World  start_region="medMercCamp" start_location="entry_south">
 	
 
@@ -122,12 +121,19 @@
 		
 		<Event trigger ="create_region" once = "true">
 			<Effect>
-				fenor = createObject('peasant', 'locFenor');
+				fenor = createObject('guard', 'locFenor');
 				addArea('FenorArea','circle','locFenor',5);
 				setRefName(fenor, 'Fenor Marken');
 				
 				trader = createObject('peasant', 'locWeaponTrader');
 				setRefName(trader, 'Trader');
+				
+				guard1 = createObject('guard', 'locSoldier1');
+				setRefName(guard1, 'Guard');
+				guard2 = createObject('guard', 'locSoldier2');
+				setRefName(guard2, 'Guard');
+				guard3 = createObject('guard', 'locSoldier3');
+				setRefName(guard3, 'Guard');
 			</Effect>
 		</Event>
 	</Region>
