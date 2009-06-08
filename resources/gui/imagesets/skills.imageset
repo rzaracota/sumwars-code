@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<Imageset Name="skills" Imagefile="skills.tga" NativeHorzRes="1024" NativeVertRes="768" AutoScaled="true" >
+<Imageset Name="skills" Imagefile="skills.png" NativeHorzRes="1024" NativeVertRes="768" AutoScaled="true" >
     <Image Name="bash" XPos="2" YPos="2" Width="90" Height="90" />
     <Image Name="hammer_bash" XPos="94" YPos="2" Width="90" Height="90" />
     <Image Name="around_blow" XPos="186" YPos="2" Width="90" Height="90" />
