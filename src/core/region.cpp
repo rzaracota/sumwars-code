@@ -1795,7 +1795,7 @@ void Region::createItemFromString(CharConv* cv)
 	}
 	m_drop_items->insert(std::make_pair(id,di));
 	m_drop_item_locations->insert(std::make_pair(di->getLocationId(),di));
-
+	m_game_objects.insert(std::make_pair(di->getId(),di));
 }
 
 

@@ -45,6 +45,7 @@ void DropItem::toString(CharConv* cv)
 {
 	GameObject::toString(cv);
 	m_item->toString(cv);
+	cv->toBuffer(m_angle_x);
 }
 
 void DropItem::fromString(CharConv* cv)
@@ -70,7 +71,8 @@ void DropItem::fromString(CharConv* cv)
 	
 	m_item = ItemFactory::createItem((Item::Type) type, subtype,id);
 	m_item->fromString(cv);
-	
+	cv->fromBuffer(m_angle_x);
+
 	m_time = cv->getDelay();
 }
 
@@ -84,14 +86,15 @@ bool DropItem::update(float time)
 	{
 		float acc = -20;
 		float v0 =4;
-		setHeight(hadd+ 2 + v0*m_time/1000 + acc*m_time*m_time/1000000);
-		m_angle_x -= m_drop_speed*time/1000;
+		setHeight(hadd+ 2 + v0*m_time/10000 + acc*m_time*m_time/100000000);
+		m_angle_x -= m_drop_speed*time/10000;
 		
-		if (getHeight() < hadd)
+		if (getHeight() <= hadd)
 		{
 			setHeight(hadd);
 			m_angle_x=0;
 		}
+		//DEBUG("angle_x %f",m_angle_x); 
 		DEBUG5("speed %f height %f angle %f time %f",m_drop_speed,getHeight(),m_angle_x,m_time); 
 	}
 	return true;
