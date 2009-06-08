@@ -90,6 +90,7 @@ void GameObject::toString(CharConv* cv)
 	cv->toBuffer(m_id);
 	cv->toBuffer(m_shape.m_center.m_x);
 	cv->toBuffer(m_shape.m_center.m_y);
+	cv->toBuffer(m_height);
 	cv->toBuffer((char) m_shape.m_type);
 	if (m_shape.m_type==Shape::RECT)
 	{
@@ -114,6 +115,7 @@ void GameObject::fromString(CharConv* cv)
 	// Typ, Subtyp und ID werden extern gelesen
 	cv->fromBuffer<float>(m_shape.m_center.m_x) ;
 	cv->fromBuffer<float>(m_shape.m_center.m_y);
+	cv->fromBuffer(m_height);
 	cv->fromBuffer<char>(ctmp);
 	m_shape.m_type = (Shape::ShapeType) ctmp;
 	if (m_shape.m_type==Shape::RECT)

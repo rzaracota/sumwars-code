@@ -890,7 +890,7 @@ bool Region::insertObject(WorldObject* object, Vector pos, float angle, bool col
 	return result;
 }
 
-int Region::createObject(ObjectTemplateType generictype, Vector pos, float angle, WorldObject::State state)
+int Region::createObject(ObjectTemplateType generictype, Vector pos, float angle, float height, WorldObject::State state)
 {
 	// Umgebung erfahren
 	EnvironmentName env = getEnvironment(pos);
@@ -945,6 +945,7 @@ int Region::createObject(ObjectTemplateType generictype, Vector pos, float angle
 	}
 			
 	// Objekt einfuegen
+	object->setHeight(height);
 	bool ret = insertObject(object,pos,angle,collision_test);
 	if (!ret)
 	{
@@ -1010,7 +1011,7 @@ void Region::createObjectGroup(ObjectGroupTemplateName templname, Vector positio
 					oangle = 2*3.14159*Random::random();
 				}
 
-				int id = createObject(gt->m_type, pos, angle+oangle);
+				int id = createObject(gt->m_type, pos, angle+oangle,gt->m_height);
 				DEBUG5("inserting object %s at %f %f with id %i",gt->m_type.c_str(),pos.m_x, pos.m_y,id);
 
 			}

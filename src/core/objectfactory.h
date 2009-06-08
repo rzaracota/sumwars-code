@@ -157,6 +157,12 @@ class ObjectGroupTemplate
 			 * \brief Wenn auf true gesetzt, wird der winkel zufaellig gesetzt
 			 */
 			bool m_prob_angle;
+			
+			/**
+			 * \var float m_height
+			 * \brief Hoehe, in der das Objekt platziert wird
+			 */
+			float m_height;
 		};
 	
 		/**

@@ -499,19 +499,23 @@ int EventSystem::createObject(lua_State *L)
 
 		if (m_region!=0)
 		{
-			float angle =0;
+			float angle =0,height=0;
 			if (argc>=3 && lua_isnumber(L,3))
 			{
 				angle = lua_tonumber(L, 3);
 			}
+			if (argc>=4 && lua_isnumber(L,4))
+			{
+				height = lua_tonumber(L, 4);
+			}
 
-			ret = m_region->createObject(subtype, pos,angle, WorldObject::STATE_AUTO);
+			ret = m_region->createObject(subtype, pos,angle, height,WorldObject::STATE_AUTO);
 		}
 
 	}
 	else
 	{
-		ERRORMSG("Syntax: createObject( string subtype, {float x, float y}, [angle])");
+		ERRORMSG("Syntax: createObject( string subtype, {float x, float y}, [angle],[height])");
 	}
 
 	lua_pushinteger(EventSystem::getLuaState() , ret);
