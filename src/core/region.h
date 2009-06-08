@@ -103,6 +103,12 @@ class RegionData
 			 * es werden m_number viele Orte ausgewaehlt, aber fuer jeden nur mit dieser Warscheinlichkeit wirklich die Gruppe eingefuegt
 			 */
 			float m_probability;
+			
+			/**
+			 * \var bool m_decoration
+			 * \brief Gibt an, ob es sich um ein rein dekoratives Template handelt. Auf diesen Templates koennen auch Monstergruppen platziert werden
+			 */
+			bool m_decoration;
 		};
 		
 		/**
@@ -157,14 +163,15 @@ class RegionData
 		~RegionData();
 		
 		/**
-		 * \fn void addObjectGroupTemplate(ObjectGroupTemplateName m_group_name, int prio, int number =1, float probability=1.0)
+		 * \fn void addObjectGroupTemplate(ObjectGroupTemplateName m_group_name, int prio, int number =1, float probability=1.0, bool decoration=false)
 		 * \brief Fuegt eine neue Objektgruppe ein
 		 * \param group_name Name der Gruppe
 		 * \param prio Prioritaet der Gruppe
 		 * \param number Anzahl wie oft die Gruppe eingefuegt wird
 		 * \param probability Wahrscheinlichkeit mit der die Gruppe eingefuegt wird
+		 * \param decoration Gibt an, ob es sich um ein rein dekoratives Template handelt
 		 */
-		void addObjectGroupTemplate(ObjectGroupTemplateName group_name, int prio=0, int number =1, float probability=1.0);
+		void addObjectGroupTemplate(ObjectGroupTemplateName group_name, int prio=0, int number =1, float probability=1.0, bool decoration=false);
 		
 		/**
 		 * \fn void  addNamedObjectGroupTemplate(ObjectGroupTemplateName group_name, std::string name, int prio=0)

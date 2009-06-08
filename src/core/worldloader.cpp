@@ -261,14 +261,16 @@ bool WorldLoader::loadRegion(TiXmlNode* node, RegionData* rdata)
 						std::string group_name;
 						int prio,number;
 						float prob;
+						std::string deco;
 						attr.getString("object_group",group_name);
 						attr.getInt("priority",prio,0);	
 						attr.getInt("number",number,1);	
 						attr.getFloat("probability",prob,1.0f);	
+						attr.getString("decoration",deco,"true");	
 						
 						DEBUG5("object group %s  number %i prio %i",group_name.c_str(), number, prio);
 						
-						rdata->addObjectGroupTemplate(group_name,prio, number, prob);
+						rdata->addObjectGroupTemplate(group_name,prio, number, prob,(deco=="true"));
 					}
 					else if (child2->Type()!=TiXmlNode::COMMENT)
 					{

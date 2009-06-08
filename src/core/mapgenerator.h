@@ -142,14 +142,15 @@ class MapGenerator
 	static Region* createRegion(RegionData* rdata);
 	
 	/**
-	 * \fn static bool getTemplatePlace(MapData* mdata, Shape* shape, Vector & place)
+	 * \fn static bool getTemplatePlace(MapData* mdata, Shape* shape, Vector & place, bool deco=false)
 	 * \brief ermittelt einen Ort fuer das Template
 	 * \param mdata temporaere Daten zum Aufbau der Region
 	 * \param shape Grundflaeche des Templates
 	 * \param place Rueckgabewert fuer den Ort
+	 * \param deco wenn auf true gesetzt, dann wird ein Platz fuer ein dekoratives Template gesucht. Auf solchen Templates koennen Spawnpunkte platziert werden
 	 * \return gibt true aus, wenn ein Ort gefunden wurde, sonst false
 	 */
-	static bool getTemplatePlace(MapData* mdata, Shape* shape, Vector & place);
+	static bool getTemplatePlace(MapData* mdata, Shape* shape, Vector & place, bool deco=false);
 	
 	/**
 	 * \fn createPerlinNoise(Matrix2d<float> *data, int dimx, int dimy,int startfreq,float persistance, bool bounds)

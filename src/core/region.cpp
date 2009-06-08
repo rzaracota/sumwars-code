@@ -26,14 +26,15 @@ RegionData::~RegionData()
 	
 }
 
-void RegionData::addObjectGroupTemplate(ObjectGroupTemplateName group_name, int prio, int number,float probability)
+void RegionData::addObjectGroupTemplate(ObjectGroupTemplateName group_name, int prio, int number,float probability, bool decoration)
 {
 	ObjectGroupTemplateSet newgroup;
 	newgroup.m_group_name = group_name;
 	newgroup.m_probability = probability;
 	newgroup.m_number = number;
 	newgroup.m_probability = probability;
-
+	newgroup.m_decoration = decoration;
+	
 	m_object_groups.insert(std::make_pair(prio,newgroup));
 }
 

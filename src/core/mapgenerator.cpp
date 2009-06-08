@@ -557,7 +557,7 @@ bool MapGenerator::insertGroupTemplates(MapData* mdata, RegionData* rdata)
 			}
 
 			// Ort fuer das Template suchen
-			succ = getTemplatePlace(mdata,&s,pos);
+			succ = getTemplatePlace(mdata,&s,pos,jt->second.m_decoration );
 
 			if (succ == false)
 			{
@@ -861,7 +861,7 @@ void MapGenerator::createExits(MapData* mdata, RegionData* rdata)
 	}
 }
 
-bool MapGenerator::getTemplatePlace(MapData* mdata, Shape* shape, Vector & place)
+bool MapGenerator::getTemplatePlace(MapData* mdata, Shape* shape, Vector & place, bool deco)
 {
 	if (shape ==0)
 	{
@@ -1043,6 +1043,12 @@ bool MapGenerator::getTemplatePlace(MapData* mdata, Shape* shape, Vector & place
 
 					// auf der Template Karte als blockiert eintragen
 					*(mdata->m_template_map->ind(i,j)) = -2;
+					
+					// wenn nicht dekorativ hier keine Monster platzieren
+					if (!deco)
+					{
+						*(mdata->m_base_map->ind(i/2,j/2)) = 2;
+					}
 
 				}
 			}
