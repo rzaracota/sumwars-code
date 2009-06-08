@@ -363,6 +363,8 @@ bool ObjectLoader::loadFixedObject(TiXmlNode* node)
 			data->m_layer = WorldObject::LAYER_BASE;
 		else if (layer == "AIR")
 			data->m_layer = WorldObject::LAYER_AIR;
+		else if (layer == "NOCOLLISION")
+			data->m_layer = WorldObject::LAYER_NOCOLLISION;
 		
 		// Schleife ueber die Elemente von Object
 		for ( child = node->FirstChild(); child != 0; child = child->NextSibling())
