@@ -1165,9 +1165,10 @@ void MainWindow::updateObjectInfo()
 			
 			// Pruefung gegen das Polygon
 			// get the entity to check
+			
 			Ogre::Entity *pentity = dynamic_cast<Ogre::Entity*>(it->movable);
 			bool rayhit = true;
-			if (pentity != 0)
+			if (go->getType() == "FIXED_OBJECT" && pentity != 0)
 			{
 				rayhit = false;
 				// mesh data to retrieve
