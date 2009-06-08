@@ -8,10 +8,6 @@
 		<Animation name="idle" />
 	</Action>
 	
-	<Action name="">
-		<Animation name="" />
-	</Action>
-	
 	<Action name="die">
 		<Animation name="die" />
 	</Action>

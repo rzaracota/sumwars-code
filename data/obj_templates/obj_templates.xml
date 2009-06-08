@@ -9,7 +9,7 @@ FIXED_OBJECT
 -->
 
 <ObjectTemplate name="$tree" type="FIXED_OBJECT">
-	<Environment name="meadow">
+	<Environment name="meadow" default="true">
 		<Object name="tree1" />
 		<Object name="tree2" />
 		<Object name="tree3" />
@@ -20,15 +20,7 @@ FIXED_OBJECT
 </ObjectTemplate>
 
 <ObjectTemplate name="$flower" type="FIXED_OBJECT">
-	<Environment name="meadow">
-		<Object name="flower1" />
-		<Object name="flower2" />
-		<Object name="flower3" />
-		<Object name="flower4" />
-		<Object name="flower5" />
-		<Object name="flower6" />
-	</Environment>
-	<Environment name="hills">
+	<Environment name="hills" default="true">
 		<Object name="flower1" />
 		<Object name="flower2" />
 		<Object name="flower3" />

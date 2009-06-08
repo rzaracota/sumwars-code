@@ -30,23 +30,26 @@ GameObject::Subtype ObjectTemplate::getObject(EnvironmentName env)
 	
 	if (it == m_env_objects.end() || it->second.empty())
 	{
-		// nichts gefunden
-		return "";
-	}
-	else
-	{
-		WorldObjectTypeList::iterator jt;
-		int r = Random::randi(it->second.size());
+		it = m_env_objects.find(m_default_environment);
 		
-		jt = it->second.begin();
-		for (int i=0; i<r; ++i)
+		if (it == m_env_objects.end() || it->second.empty())
 		{
-			++jt;
+			// nichts gefunden
+			return "";
 		}
-	
-		return *jt;
-		
 	}
+	
+	WorldObjectTypeList::iterator jt;
+	int r = Random::randi(it->second.size());
+	
+	jt = it->second.begin();
+	for (int i=0; i<r; ++i)
+	{
+		++jt;
+	}
+
+	return *jt;
+
 }
 
 void ObjectGroupTemplate::addObject(ObjectTemplateType objtype, Vector pos, float angle, float probability )
@@ -235,47 +238,6 @@ void ObjectFactory::registerMonsterGroup(MonsterGroupName name, MonsterGroup* da
 	else
 	{
 		m_monster_groups[name] = data;
-	}
-}
-
-
-void ObjectFactory::loadObjectTemplates(std::string file)
-{
-	// ObjectTemplates aus XML Laden
-	TemplateLoader templateloader;
-	std::list<ObjectTemplate*> object_template_list;
-	std::list<std::string> name_list;
-	templateloader.loadObjectTemplate(file.c_str(), object_template_list, name_list);
-	
-	std::list<ObjectTemplate*>::iterator i = object_template_list.begin();
-	std::list<std::string>::iterator k = name_list.begin();
-	while (i != object_template_list.end() && k != name_list.end())
-	{
-		registerObjectTemplate(*k,*i);
-		i++;
-		k++;
-	}
-}
-
-
-void ObjectFactory::loadObjectGroupTemplates(std::string file)
-{
-	// ObjectGroupTemplates aus XML Laden
-	
-	TemplateLoader templateloader;
-	
-	std::list<ObjectGroupTemplate*> object_group_template_list;
-	std::list<std::string> name_list;
-	templateloader.loadObjectGroupTemplate(file.c_str(), object_group_template_list, name_list);
-	
-	std::list<ObjectGroupTemplate*>::iterator i = object_group_template_list.begin();
-	std::list<std::string>::iterator k = name_list.begin();
-	
-	while (i != object_group_template_list.end() && k != name_list.end())
-	{
-		registerObjectGroupTemplate(*k,*i);
-		i++;
-		k++;
 	}
 }
 

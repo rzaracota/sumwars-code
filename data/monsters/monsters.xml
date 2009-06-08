@@ -268,18 +268,9 @@ AIR
 		step_length="0.8"
 		attack_range="0.5"
 	>
-		<Ability type="walk">
-			<Animation name="walk" />
-		</Ability>
-		
-		<Ability type="attack">
-			<Animation name="attack" />
-			<Animation name="attack2"/>
-		</Ability>
-		
-		<Ability type="die">
-			<Animation name="die" />
-		</Ability>
+		<Ability type="walk" />
+		<Ability type="attack" />
+		<Ability type="die" />
 		
 	</BasicAttributes>
 	

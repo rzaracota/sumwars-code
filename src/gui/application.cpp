@@ -2,6 +2,7 @@
 
 #include "tooltip.h"
 #include "itemwindow.h"
+#include "templateloader.h"
 
 Application::Application()
 {
@@ -592,7 +593,7 @@ bool Application::loadResources()
 		file += "/";
 		file += it->filename;
 
-		ObjectFactory::loadObjectTemplates(file);
+		TemplateLoader::loadObjectTemplateData(file.c_str());
 
 		updateStartScreen(0.6);
 	}
@@ -604,7 +605,7 @@ bool Application::loadResources()
 		file = it->archive->getName();
 		file += "/";
 		file += it->filename;
-		ObjectFactory::loadObjectGroupTemplates(file);
+		TemplateLoader::loadObjectGroupTemplateData(file.c_str());
 
 		updateStartScreen(0.7);
 	}

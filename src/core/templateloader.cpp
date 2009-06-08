@@ -10,368 +10,242 @@
 */
 
 #include <iostream>
+#include "objectfactory.h"
+#include "elementattrib.h"
 
 
-//#####################  ObjectTemplate (obj_templates)  #######################
-
-int TemplateLoader::generateObjectTemplate(TiXmlElement* pElement, std::string element, std::list<ObjectTemplate*> &object_template_list, std::list<std::string> &name_list)
+bool TemplateLoader::loadObjectTemplateData(const char* pFilename)
 {
-	if ( !pElement ) return 0;
-
-	TiXmlAttribute* pAttrib=pElement->FirstAttribute();
-	int i=0;
-	
-	if (element == "ObjectTemplate")
-	{
-		DEBUG5("ObjectTemplate");
-		
-		if (m_object_template == 0)
-		{
-			m_object_template = new ObjectTemplate;
-		}
-		
-		while (element == "ObjectTemplate" && pAttrib)
-		{
-			if (!strcmp(pAttrib->Name(), "name"))
-				name_list.push_back(pAttrib->Value());
-			else if (!strcmp(pAttrib->Name(), "type"))
-			{
-				m_object_template->m_type = pAttrib->Value();
-			}
-
-			i++;
-			pAttrib=pAttrib->Next();
-		}
-	}
-	
-	if (element == "Environment")
-	{
-		DEBUG5("Environment");
-		while (element == "Environment" && pAttrib)
-		{
-			if (!strcmp(pAttrib->Name(), "name"))
-				m_current_environment_name = pAttrib->Value();
-
-			i++;
-			pAttrib=pAttrib->Next();
-		}
-	}
-	
-	if (element == "Object")
-	{
-		DEBUG5("Object");
-		while (element == "Object" && pAttrib)
-		{
-			if (!strcmp(pAttrib->Name(), "name"))
-				m_object_template->addObject(m_current_environment_name,pAttrib->Value());
-
-			i++;
-			pAttrib=pAttrib->Next();
-		}
-	}
-	
-	return i;
-}
-
-
-void TemplateLoader::searchObjectTemplate(TiXmlNode* pParent, std::list<ObjectTemplate*> &object_template_list, std::list<std::string> &name_list)
-{
-	if ( !pParent ) return;
-
-	TiXmlNode* pChild;
-//	TiXmlText* pText;
-
-	int t = pParent->Type();
-	int num;
-
-	switch ( t )
-	{
-	case TiXmlNode::ELEMENT:
-		//printf( "Element [%s]", pParent->Value() );
-		num = generateObjectTemplate(pParent->ToElement(), pParent->Value(), object_template_list, name_list);
-		/*switch(num)
-		{
-			case 0:  printf( " (No attributes)"); break;
-			case 1:  printf( "%s1 attribute", getIndentAlt(indent)); break;
-			default: printf( "%s%d attributes", getIndentAlt(indent), num); break;
-		}*/
-		break;
-	/*
-	case TiXmlNode::TEXT:
-		pText = pParent->ToText();
-		printf( "Text: [%s]", pText->Value() );
-		break;
-	*/
-	default:
-		break;
-	}
-
-	for ( pChild = pParent->FirstChild(); pChild != 0; pChild = pChild->NextSibling())
-	{
-		searchObjectTemplate(pChild, object_template_list, name_list);
-
-		if ( !strcmp(pChild->Value(), "ObjectTemplate") && pChild->Type() == TiXmlNode::ELEMENT)
-		{
-			object_template_list.push_back(m_object_template);
-			m_object_template = 0;
-			DEBUG5("ObjectTemplate loaded");
-		}
-	}
-}
-
-
-bool TemplateLoader::loadObjectTemplate(const char* pFilename, std::list<ObjectTemplate*> &object_template_list, std::list<std::string> &name_list)
-{
-	m_object_template = 0;
-	
-	/*object_list = new std::list<FixedObjectData*>;
-	subtype_list = new std::list<std::string>;*/
-
 	TiXmlDocument doc(pFilename);
 	bool loadOkay = doc.LoadFile();
 
 	if (loadOkay)
 	{
-		DEBUG5("Loading %s", pFilename);
-		searchObjectTemplate(&doc, object_template_list, name_list);
-		DEBUG5("Loading %s finished", pFilename);
-		//return m_object_list;
+		loadObjectTemplate(&doc);
 		return true;
 	}
 	else
 	{
-		DEBUG5("Failed to load file %s", pFilename);
+		DEBUG("Failed to load file %s", pFilename);
 		return false;
 	}
 }
 
-
-//####################  ObjectGroupTemplate (og_template)  #####################
-
-int TemplateLoader::generateObjectGroupTemplate(TiXmlElement* pElement, std::string element, std::list<ObjectGroupTemplate*> &object_group_template_list, std::list<std::string> &name_list)
+bool TemplateLoader::loadObjectTemplate(TiXmlNode* node)
 {
-	if ( !pElement ) return 0;
-
-	TiXmlAttribute* pAttrib=pElement->FirstAttribute();
-	int i=0;
-	double dval;
-	
-	if (element == "ObjectGroupTemplate")
+	TiXmlNode* child, *child2;
+	if (node->Type()==TiXmlNode::ELEMENT && !strcmp(node->Value(), "ObjectTemplate"))
 	{
-		DEBUG5("ObjectGroupTemplate");
-		if (m_object_group_template == 0)
-		{
-			m_object_group_template = new ObjectGroupTemplate;
-		}
+		ElementAttrib attr;
+		attr.parseElement(node->ToElement());
 		
-		while (element == "ObjectGroupTemplate" && pAttrib)
+		ObjectTemplate* templ = new ObjectTemplate;
+		attr.getString("type",templ->m_type);
+		
+		std::string name;
+		attr.getString("name",name);
+		
+		for ( child = node->FirstChild(); child != 0; child = child->NextSibling())
 		{
-			if (!strcmp(pAttrib->Name(), "name"))
-				name_list.push_back(pAttrib->Value());
-
-			i++;
-			pAttrib=pAttrib->Next();
-		}
-	}
-	
-	if (element == "Shape")
-	{
-		DEBUG5("Shape");
-		while (element == "Shape" && pAttrib)
-		{
-			if (!strcmp(pAttrib->Name(), "type"))
+			if (child->Type()==TiXmlNode::ELEMENT)
 			{
-				if (!strcmp(pAttrib->Value(), "RECT"))
-					m_temp_shape.type = Shape::RECT;
-				else
-					m_temp_shape.type = Shape::CIRCLE;
+				attr.parseElement(child->ToElement());
+				std::string env,defstr,objname;
+				if (!strcmp(child->Value(), "Environment"))
+				{
+					attr.getString("name",env);
+					attr.getString("default",defstr,"false");
+					
+					if (defstr == "true")
+					{
+						templ->m_default_environment = env;
+						DEBUG5("default environment for %s is %s",name.c_str(), env.c_str());
+					}
+					
+					for ( child2 = child->FirstChild(); child2 != 0; child2 = child2->NextSibling())
+					{
+						if (child2->Type()==TiXmlNode::ELEMENT)
+						{
+							if (!strcmp(child2->Value(), "Object"))
+							{
+								attr.parseElement(child2->ToElement());
+								attr.getString("name",objname);
+								
+								templ->addObject (env,objname);
+								DEBUG5("added object %s to generic object %s for environment %s",objname.c_str(), name.c_str(), env.c_str());
+								
+							}
+							else if (child2->Type()!=TiXmlNode::COMMENT)
+							{
+								DEBUG("unexpected element of <Environment>: %s",child->Value());
+							}
+						}
+					}
+				}
+				else if (child->Type()!=TiXmlNode::COMMENT)
+				{
+					DEBUG("unexpected element of <ObjectTemplate>: %s",child->Value());
+				}
+				
 			}
-			else if (!strcmp(pAttrib->Name(), "angle") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
-				m_temp_shape.angle = (static_cast<float>(dval))*PI/180;
-			else if (!strcmp(pAttrib->Name(), "extent_x") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
-				m_temp_shape.extent_x = static_cast<float>(dval);
-			else if (!strcmp(pAttrib->Name(), "extent_y") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
-				m_temp_shape.extent_y = static_cast<float>(dval);
-			else if (!strcmp(pAttrib->Name(), "radius") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
-				m_temp_shape.radius = static_cast<float>(dval);
-
-			i++;
-			pAttrib=pAttrib->Next();
 		}
+		DEBUG5("found object template %s",name.c_str());
+		
+		ObjectFactory::registerObjectTemplate(name,templ);
 	}
-	
-	if (element == "Waypoint")
+	else
 	{
-		DEBUG5("Waypoint");
-		while (element == "Waypoint" && pAttrib)
+	// rekursiv durchmustern
+		for ( child = node->FirstChild(); child != 0; child = child->NextSibling())
 		{
-			if (!strcmp(pAttrib->Name(), "pos_x") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
-				m_temp_waypoint.pos_x = static_cast<float>(dval);
-			else if (!strcmp(pAttrib->Name(), "pos_y") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
-				m_temp_waypoint.pos_y = static_cast<float>(dval);
+			loadObjectTemplate(child);
+		}
+	}
 
-			i++;
-			pAttrib=pAttrib->Next();
-		}
-	}
-	
-	if (element == "ObjectContent")
-	{
-		DEBUG5("ObjectContent");
-		while (element == "ObjectContent" && pAttrib)
-		{
-			i++;
-			pAttrib=pAttrib->Next();
-		}
-	}
-	
-	if (element == "Object")
-	{
-		DEBUG5("Object");
-		m_temp_group_object.prob_angle = true;
-		while (element == "Object" && pAttrib)
-		{
-			if (!strcmp(pAttrib->Name(), "center_x") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
-				m_temp_group_object.center_x = static_cast<float>(dval);
-			else if (!strcmp(pAttrib->Name(), "center_y") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
-				m_temp_group_object.center_y = static_cast<float>(dval);
-			else if (!strcmp(pAttrib->Name(), "angle") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
-				m_temp_group_object.angle = (static_cast<float>(dval))*PI/180;
-			else if (!strcmp(pAttrib->Name(), "subtype"))
-				m_temp_group_object.type = pAttrib->Value();
-			else if (!strcmp(pAttrib->Name(), "probability") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
-				m_temp_group_object.probability = static_cast<float>(dval);
-			else if (!strcmp(pAttrib->Name(), "prob_angle"))
-			{
-				if (!strcmp(pAttrib->Value(), "true"))
-					m_temp_group_object.prob_angle = true;
-				else
-					m_temp_group_object.prob_angle = false;
-			}
-
-			i++;
-			pAttrib=pAttrib->Next();
-		}
-	}
-	
-	if (element == "Location")
-	{
-		DEBUG5("Location");
-		while (element == "Location" && pAttrib)
-		{
-			if (!strcmp(pAttrib->Name(), "name"))
-				m_temp_location.name = pAttrib->Value();
-			else if (!strcmp(pAttrib->Name(), "pos_x") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
-				m_temp_location.pos_x = static_cast<float>(dval);
-			else if (!strcmp(pAttrib->Name(), "pos_y") && pAttrib->QueryDoubleValue(&dval) == TIXML_SUCCESS)
-				m_temp_location.pos_y = static_cast<float>(dval);
-
-			i++;
-			pAttrib=pAttrib->Next();
-		}
-	}
-	
-	return i;
+	return true;
 }
 
-
-void TemplateLoader::searchObjectGroupTemplate(TiXmlNode* pParent, std::list<ObjectGroupTemplate*> &object_group_template_list, std::list<std::string> &name_list)
+bool TemplateLoader::loadObjectGroupTemplateData(const char* pFilename)
 {
-	if ( !pParent ) return;
-
-	TiXmlNode* pChild;
-
-	int t = pParent->Type();
-	int num;
-
-	switch ( t )
-	{
-	case TiXmlNode::ELEMENT:
-		//printf( "Element [%s]", pParent->Value() );
-		num = generateObjectGroupTemplate(pParent->ToElement(), pParent->Value(), object_group_template_list, name_list);
-		/*switch(num)
-		{
-			case 0:  printf( " (No attributes)"); break;
-			case 1:  printf( "%s1 attribute", getIndentAlt(indent)); break;
-			default: printf( "%s%d attributes", getIndentAlt(indent), num); break;
-		}*/
-		break;
-	
-	default:
-		break;
-	}
-
-	for ( pChild = pParent->FirstChild(); pChild != 0; pChild = pChild->NextSibling())
-	{
-		searchObjectGroupTemplate(pChild, object_group_template_list, name_list);
-
-		if ( !strcmp(pChild->Value(), "Shape") && pChild->Type() == TiXmlNode::ELEMENT)
-		{
-			m_object_group_template->getShape()->m_type = m_temp_shape.type;
-			m_object_group_template->getShape()->m_angle = m_temp_shape.angle;
-
-			if (m_temp_shape.type == Shape::RECT)
-				m_object_group_template->getShape()->m_extent = Vector(m_temp_shape.extent_x,m_temp_shape.extent_y);
-			else
-				m_object_group_template->getShape()->m_radius = m_temp_shape.radius;
-
-			DEBUG5("Shape loaded");
-		}
-		else if ( !strcmp(pChild->Value(), "Waypoint") && pChild->Type() == TiXmlNode::ELEMENT)
-		{
-			m_object_group_template->addWaypoint(Vector(m_temp_waypoint.pos_x,m_temp_waypoint.pos_y));
-			DEBUG5("Waypoint loaded");
-		}
-		else if ( !strcmp(pChild->Value(), "Object") && pChild->Type() == TiXmlNode::ELEMENT)
-		{
-			ObjectGroupTemplate::GroupObject temp_group_object;
-			
-			temp_group_object.m_angle = m_temp_group_object.angle;
-			temp_group_object.m_center = Vector(m_temp_group_object.center_x, m_temp_group_object.center_y);
-			temp_group_object.m_prob_angle = m_temp_group_object.prob_angle;
-			temp_group_object.m_probability = m_temp_group_object.probability;
-			temp_group_object.m_type = m_temp_group_object.type;
-
-			m_object_group_template->addObject(temp_group_object);
-
-			DEBUG5("Object loaded");
-		}
-		else if ( !strcmp(pChild->Value(), "Location") && pChild->Type() == TiXmlNode::ELEMENT)
-		{
-			m_object_group_template->addLocation(m_temp_location.name, Vector(m_temp_location.pos_x,m_temp_location.pos_y));
-			DEBUG5("Location loaded");
-		}
-		else if ( !strcmp(pChild->Value(), "ObjectGroupTemplate") && pChild->Type() == TiXmlNode::ELEMENT)
-		{
-			object_group_template_list.push_back(m_object_group_template);
-			m_object_group_template = 0;
-			DEBUG5("ObjectGroupTemplate loaded");
-		}
-	}
-}
-
-
-bool TemplateLoader::loadObjectGroupTemplate(const char* pFilename, std::list<ObjectGroupTemplate*> &object_group_template_list, std::list<std::string> &name_list)
-{
-	m_object_group_template = 0;
-	
-	/*object_list = new std::list<FixedObjectData*>;
-	subtype_list = new std::list<std::string>;*/
-
 	TiXmlDocument doc(pFilename);
 	bool loadOkay = doc.LoadFile();
 
 	if (loadOkay)
 	{
-		DEBUG5("Loading %s", pFilename);
-		searchObjectGroupTemplate(&doc, object_group_template_list, name_list);
-		DEBUG5("Loading %s finished", pFilename);
+		loadObjectGroupTemplate(&doc);
 		return true;
 	}
 	else
 	{
-		DEBUG5("Failed to load file %s", pFilename);
+		DEBUG("Failed to load file %s", pFilename);
 		return false;
 	}
 }
 
+
+bool TemplateLoader::loadObjectGroupTemplate(TiXmlNode* node)
+{
+	TiXmlNode* child, *child2;
+	if (node->Type()==TiXmlNode::ELEMENT && !strcmp(node->Value(), "ObjectGroupTemplate"))
+	{
+		ElementAttrib attr;
+		attr.parseElement(node->ToElement());
+		
+		std::string name;
+		attr.getString("name",name);
+		
+		ObjectGroupTemplate* templ = new ObjectGroupTemplate;
+		
+		for ( child = node->FirstChild(); child != 0; child = child->NextSibling())
+		{
+			if (child->Type()==TiXmlNode::ELEMENT)
+			{
+				attr.parseElement(child->ToElement());
+				std::string env,defstr,objname;
+				
+				if (!strcmp(child->Value(), "Shape"))
+				{
+					std::string shape;
+					attr.getString("type",shape,"CIRCLE");
+					if (shape == "RECT")
+					{
+						templ->getShape()->m_type = Shape::RECT;
+						attr.getFloat("extent_x",templ->getShape()->m_extent.m_x,0);
+						attr.getFloat("extent_y",templ->getShape()->m_extent.m_y,0);
+					}
+					else
+					{
+						templ->getShape()->m_type = Shape::CIRCLE;
+						attr.getFloat("radius",templ->getShape()->m_radius,0);
+					}
+				}
+				else if (!strcmp(child->Value(), "WayPoint"))
+				{
+					Vector pos;
+					attr.getFloat("pos_x",pos.m_x);
+					attr.getFloat("pos_y",pos.m_y);
+					templ->addWaypoint (pos);
+					DEBUG5("waypoint in %s at %f %f",name.c_str(), pos.m_x,pos.m_y);
+				}
+				else if (!strcmp(child->Value(), "ObjectContent"))
+				{
+					for ( child2 = child->FirstChild(); child2 != 0; child2 = child2->NextSibling())
+					{
+						if (child2->Type()==TiXmlNode::ELEMENT)
+						{
+							if (!strcmp(child2->Value(), "Object"))
+							{
+								ObjectGroupTemplate::GroupObject obj;
+								
+								attr.parseElement(child2->ToElement());
+								std::string prob_angle;
+								
+								attr.getFloat("center_x",obj.m_center.m_x);
+								attr.getFloat("center_y",obj.m_center.m_y);
+								attr.getString("subtype",obj.m_type);
+								attr.getFloat("angle",obj.m_angle,0.0);
+								attr.getFloat("probability",obj.m_probability,1.0);
+								attr.getString("prob_angle",prob_angle);
+								obj.m_prob_angle = (prob_angle == "true");
+								
+								obj.m_angle *= 3.14159 / 180.0;
+								
+								DEBUG5("object for %s: %s at %f %f angle %f prob %f",name.c_str(),obj.m_type.c_str(), obj.m_center.m_x, obj.m_center.m_y, obj.m_angle, obj.m_probability);
+								
+								templ->addObject (obj);
+							}
+							else if (child2->Type()!=TiXmlNode::COMMENT)
+							{
+								DEBUG("unexpected element of <ObjectContent>: %s",child->Value());
+							}
+							
+						}
+					}
+				}
+				else if (!strcmp(child->Value(), "Locations"))
+				{
+					for ( child2 = child->FirstChild(); child2 != 0; child2 = child2->NextSibling())
+					{
+						if (child2->Type()==TiXmlNode::ELEMENT)
+						{
+							if (!strcmp(child2->Value(), "Location"))
+							{
+								std::string lname;
+								Vector pos;
+								
+								attr.parseElement(child2->ToElement());
+								
+								attr.getFloat("pos_x",pos.m_x);
+								attr.getFloat("pos_y",pos.m_y);
+								attr.getString("name",lname);
+								
+								templ->addLocation(lname,pos);
+								DEBUG5("location for %s: %s at %f %f",name.c_str(),lname.c_str(), pos.m_x, pos.m_y);
+							}
+							else if (child2->Type()!=TiXmlNode::COMMENT)
+							{
+								DEBUG("unexpected element of <Locations>: %s",child->Value());
+							}
+						}
+					}
+				}
+				else if (child->Type()!=TiXmlNode::COMMENT)
+				{
+					DEBUG("unexpected element of <ObjectGroupTemplate>: %s",child->Value());
+				}
+			}
+		}
+		
+		ObjectFactory::registerObjectGroupTemplate(name,templ);
+	}
+	else
+	{
+		// rekursiv durchmustern
+		for ( child = node->FirstChild(); child != 0; child = child->NextSibling())
+		{
+			loadObjectGroupTemplate(child);
+		}
+	}
+
+	return true;
+}

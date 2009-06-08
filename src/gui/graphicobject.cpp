@@ -471,7 +471,7 @@ void GraphicObject::updateState(std::string state, bool active)
 		actionname +=":activate";
 		if (it == m_attached_states.end() || it->second.m_type == AttachedState::DEACTIVATE)
 		{
-			DEBUG("activated state %s",state.c_str());
+			DEBUG5("activated state %s",state.c_str());
 			// Status aktuell noch nicht gesetzt
 			AttachedState& astate  = m_attached_states[state];
 			astate.m_type = AttachedState::ACTIVATE;

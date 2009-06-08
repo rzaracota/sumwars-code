@@ -5,14 +5,15 @@
 		  extent_y = "2"
 		  angle ="0"
 		  />
-	
-	<Object subtype="$tree"
+	<ObjectContent>
+		<Object subtype="$tree"
 			center_x="0.8"
 			center_y="-1.7"
 			angle = "0"
 			probability ="0.5"
 			prob_angle = "true"
 			/>
+	</ObjectContent>
 </ObjectGroupTemplate>
 
 <ObjectGroupTemplate name = "trees2" >
@@ -23,19 +24,21 @@
 		  angle ="0"
 		  />
 	
-	<Object subtype="$tree"
-			center_x="1.5"
-			center_y="-1.2"
-			angle = "0"
-			probability ="0.5"
-			prob_angle = "true"
-			/>
-	
-	<Object subtype="$tree"
-			center_x="-1.2"
-			center_y="-0.7"
-			angle = "0"
-			probability ="0.5"
-			prob_angle = "true"
-			/>
+	<ObjectContent>
+		<Object subtype="$tree"
+				center_x="1.5"
+				center_y="-1.2"
+				angle = "0"
+				probability ="0.5"
+				prob_angle = "true"
+				/>
+		
+		<Object subtype="$tree"
+				center_x="-1.2"
+				center_y="-0.7"
+				angle = "0"
+				probability ="0.5"
+				prob_angle = "true"
+				/>
+	</ObjectContent>
 </ObjectGroupTemplate>

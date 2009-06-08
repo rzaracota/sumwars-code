@@ -19,37 +19,39 @@
 		  angle ="0"
 		  />
 	
-	<Object subtype="$border"
-			center_x="0"
-			center_y="7"
-			angle = "-90"
-			probability ="1"
-			prob_angle = "false"
+	<ObjectContent>
+		<Object subtype="$border"
+				center_x="0"
+				center_y="7"
+				angle = "-90"
+				probability ="1"
+				prob_angle = "false"
+					/>
+		
+		<Object subtype="$border"
+				center_x="7"
+				center_y="0"
+				angle = "-180"
+				probability ="1"
+				prob_angle = "false"
 				/>
 	
-	<Object subtype="$border"
-			center_x="7"
-			center_y="0"
-			angle = "-180"
-			probability ="1"
-			prob_angle = "false"
-			/>
-
-	<Object subtype="$border"
-			center_x="0"
-			center_y="-7"
-			angle = "-270"
-			probability ="1"
-			prob_angle = "false"
-			/>
-
-	<Object subtype="$border"
-			center_x="-7"
-			center_y="0"
-			angle = "0"
-			probability ="1"
-			prob_angle = "false"
-			/>
+		<Object subtype="$border"
+				center_x="0"
+				center_y="-7"
+				angle = "-270"
+				probability ="1"
+				prob_angle = "false"
+				/>
+	
+		<Object subtype="$border"
+				center_x="-7"
+				center_y="0"
+				angle = "0"
+				probability ="1"
+				prob_angle = "false"
+				/>
+	</ObjectContent>
 </ObjectGroupTemplate>
 
 
@@ -60,45 +62,46 @@
 		  extent_y = "10.0"
 		  angle ="0"
 		  />
-	
-	<Object subtype="$border"
-			center_x="0"
-			center_y="9"
-			angle = "-90"
-			probability ="1"
-			prob_angle = "false"
-			/>
-	
-	<Object subtype="$border"
-			center_x="9"
-			center_y="0"
-			angle = "-180"
-			probability ="1"
-			prob_angle = "false"
-			/>
-	
-	<Object subtype="$border"
-			center_x="0"
-			center_y="-9"
-			angle = "-270"
-			probability ="1"
-			prob_angle = "false"
-			/>
-	
-	<Object subtype="$border"
-			center_x="-9"
-			center_y="0"
-			angle = "0"
-			probability ="1"
-			prob_angle = "false"
-			/>
-	
-	<Object subtype="$tree"
-			center_x="0"
-			center_y="0"
-			angle = "0"
-			prob_angle = "true"
+	<ObjectContent>
+		<Object subtype="$border"
+				center_x="0"
+				center_y="9"
+				angle = "-90"
+				probability ="1"
+				prob_angle = "false"
 				/>
+		
+		<Object subtype="$border"
+				center_x="9"
+				center_y="0"
+				angle = "-180"
+				probability ="1"
+				prob_angle = "false"
+				/>
+		
+		<Object subtype="$border"
+				center_x="0"
+				center_y="-9"
+				angle = "-270"
+				probability ="1"
+				prob_angle = "false"
+				/>
+		
+		<Object subtype="$border"
+				center_x="-9"
+				center_y="0"
+				angle = "0"
+				probability ="1"
+				prob_angle = "false"
+				/>
+		
+		<Object subtype="$tree"
+				center_x="0"
+				center_y="0"
+				angle = "0"
+				prob_angle = "true"
+					/>
+	</ObjectContent>
 </ObjectGroupTemplate>
 
 
@@ -109,43 +112,44 @@
 		  extent_y = "16.0"
 		  angle ="0"
 		  />
-	
-	<Object subtype="$border"
-			center_x="0"
-			center_y="15"
-			angle = "-90"
-			probability ="1"
-			prob_angle = "false"
-			/>
-	
-	<Object subtype="$border"
-			center_x="15"
-			center_y="0"
-			angle = "-180"
-			probability ="1"
-			prob_angle = "false"
-			/>
-	
-	<Object subtype="$border"
-			center_x="0"
-			center_y="-15"
-			angle = "-270"
-			probability ="1"
-			prob_angle = "false"
-			/>
-	
-	<Object subtype="$border"
-			center_x="-15"
-			center_y="0"
-			angle = "0"
-			probability ="1"
-			prob_angle = "false"
-			/>
-	
-	<Object subtype="$tree"
-			center_x="0"
-			center_y="0"
-			angle = "0"
-			prob_angle = "true"
+	<ObjectContent>
+		<Object subtype="$border"
+				center_x="0"
+				center_y="15"
+				angle = "-90"
+				probability ="1"
+				prob_angle = "false"
 				/>
+		
+		<Object subtype="$border"
+				center_x="15"
+				center_y="0"
+				angle = "-180"
+				probability ="1"
+				prob_angle = "false"
+				/>
+		
+		<Object subtype="$border"
+				center_x="0"
+				center_y="-15"
+				angle = "-270"
+				probability ="1"
+				prob_angle = "false"
+				/>
+		
+		<Object subtype="$border"
+				center_x="-15"
+				center_y="0"
+				angle = "0"
+				probability ="1"
+				prob_angle = "false"
+				/>
+		
+		<Object subtype="$tree"
+				center_x="0"
+				center_y="0"
+				angle = "0"
+				prob_angle = "true"
+					/>
+	</ObjectContent>
 </ObjectGroupTemplate>

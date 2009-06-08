@@ -1,2 +1,34 @@
 <RenderInfo name="creaturebase" >
+	
+	<State name="mute">
+		<Activation>
+			<ParticleSystem objectname="mute" source="Mute" position="0 1 0"  />
+		</Activation>
+		
+		<Deactivation>
+			<Detach objectname="mute"/>
+		</Deactivation>
+	</State>
+	
+	<State name="bleed">
+		<Activation>
+			<ParticleSystem objectname="bleed" source="Hit" position="0 1 0"  />
+		</Activation>
+		
+		<Deactivation>
+			<Detach objectname="bleed"/>
+		</Deactivation>
+	</State>
+	
+	<State name="firesword">
+		<Activation>
+			<ParticleSystem objectname="firesword" source="Firebolt" bone="itemRightHand"/>
+		</Activation>
+		
+		<Deactivation>
+			<Detach objectname="firesword"/>
+		</Deactivation>
+	</State>
+	
+	
 </RenderInfo>

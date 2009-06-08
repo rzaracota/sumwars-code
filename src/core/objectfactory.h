@@ -75,6 +75,12 @@ class ObjectTemplate
 		GameObject::Type m_type;
 		
 		/**
+		 * \var EnvironmentName m_default_environment
+		 * \brief Umgebung, auf die zurueckgegriffen wird, wenn keine Informationen zu einer Umgebung vorliegen
+		 */
+		EnvironmentName m_default_environment;
+		
+		/**
 		 * \fn void addObject(EnvironmentName env, GameObject::Subtype object)
 		 * \brief Fuegt fuer die Umgebung ein Objekt hinzu
 		 * \param env Name der Umgebung
@@ -302,21 +308,6 @@ class ObjectFactory
 	 * \brief Gibt den Name eines Objektes aus
 	 */
 	static std::string getObjectName(GameObject::Subtype subtype);
-	
-	
-	/**
-	 * \fn static void loadObjectTemplates(std::string file)
-	 * \brief Laedt Daten zu festen Objekten aus der Datei
-	 * \param file Objekttemplate XML Datei
-	 */
-	static void loadObjectTemplates(std::string file);
-	
-	/**
-	 * \fn static void loadObjectGroupTemplates(std::string file)
-	 * \brief Laedt Daten zu festen Objektgruppen aus der Datei
-	 * \param file Objektgruppentemplate XML Datei
-	 */
-	static void loadObjectGroupTemplates(std::string file);
 	
 	/**
 	 * \fn static registerMonster(GameObject::Subtype subtype, MonsterBasicData* data)
