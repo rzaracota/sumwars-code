@@ -373,8 +373,9 @@ void Scene::updateGraphicObject(GraphicObject* obj, GameObject* gobj,float time)
 		
 	// Objekt drehen
 	float angle = gobj->getShape()->m_angle;
-	node->setDirection(sin(angle),0,-cos(angle),Ogre::Node::TS_WORLD);
-	
+	//node->setDirection(sin(angle),0,-cos(angle),Ogre::Node::TS_WORLD);
+	node->setOrientation(1,0,0,0);
+	node->yaw(Ogre::Radian(-angle));
 	
 	DropItem* di = dynamic_cast<DropItem*>(gobj);
 	if (di != 0)

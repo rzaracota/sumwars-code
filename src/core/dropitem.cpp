@@ -86,8 +86,8 @@ bool DropItem::update(float time)
 	{
 		float acc = -20;
 		float v0 =4;
-		setHeight(hadd+ 2 + v0*m_time/10000 + acc*m_time*m_time/100000000);
-		m_angle_x -= m_drop_speed*time/10000;
+		setHeight(hadd+ 2 + v0*m_time/1000 + acc*m_time*m_time/1000000);
+		m_angle_x -= m_drop_speed*time/1000;
 		
 		if (getHeight() <= hadd)
 		{
