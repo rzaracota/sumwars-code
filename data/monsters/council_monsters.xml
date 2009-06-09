@@ -1,0 +1,50 @@
+﻿<!-- Feuerkuecken -->
+<!-- L20 -->
+<Monster type="MONSTER" subtype="fireElemS" name="firefletchling" fraction="SUMMONER" category="SUMMONED" layer="NORMAL">
+	<Mesh file="fireElemS" />
+	<Dropslots >
+		<Dropslot pbig="0.10" pmedium="0.25" psmall="0.10" pgold="0.05" max_gold="500" min_level="5" max_level="10" magic_prob="0.1" magic_power="1000" />
+		<Dropslot pbig="0.10" pmedium="0.25" psmall="0.10" pgold="0.05" max_gold="400" min_level="3" max_level="8" magic_prob="0.2" magic_power="800" />
+	</Dropslots>
+	
+	<BasicAttributes
+		experience="8"
+		level="20"
+		max_health="300"
+		armor="10"
+		block="0"
+		attack="60"
+		power="70"
+		strength="75"
+		dexterity="40"
+		magic_power="55"
+		willpower="30"
+		resistances_physical="10"
+		resistances_air="0"
+		resistances_ice="-80"
+		resistances_fire="100"
+		resistances_cap_physical="50"
+		resistances_cap_air="50"
+		resistances_cap_ice="50"
+		resistances_cap_fire="50"
+		walk_speed="3000"
+		attack_speed="1500"
+		step_length="0.8"
+		attack_range="0.5"
+	>
+		<Ability type="walk" />
+		<Ability type="attack" />
+		<Ability type="die" />
+		<Ability type="idle" />
+		<Ability type="fireball" />
+		
+	</BasicAttributes>
+	
+	<Geometry radius="0.5" />
+	
+	<AI ai_sight_range="10" ai_chase_range="20"/>
+</Monster>
+
+<MonsterGroup name="elemental" >
+	<SubGroup subtype="fireElemS" number="1" prob="1.0" />
+</MonsterGroup>

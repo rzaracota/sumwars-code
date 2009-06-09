@@ -63,6 +63,10 @@
 			<Environment height="1.0" name="council" />
 		</Environments>
 		
+<!--		<SpawnGroups>
+			<SpawnGroup group_name="elemental" number="1" />
+		</SpawnGroups>-->
+		
 		<Event trigger="create_region" once="true">
 			<Effect>
 				soren_windclaw = createObject("peasant", "locSorenWindclaw");
@@ -173,6 +177,7 @@
 		<SpawnGroups>
 			<SpawnGroup group_name="goblins_l1" number="18" />
 			<SpawnGroup group_name="goblins_bow_l1" number="12" />
+			<SpawnGroup group_name="elemental" number="30" />
 		</SpawnGroups>
 	</Region>
 
