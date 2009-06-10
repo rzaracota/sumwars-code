@@ -237,7 +237,7 @@
 				if (getPlayers[2] == nil) then
 					speak("PL",_("Prince, I take the job!"),1200);
 				else
-					speak("PL",_(Prince, we take the job!"),1200);
+					speak("PL",_("Prince, we take the job!"),1200);
 				end;
 				
 				jumpTopic("insertion2");

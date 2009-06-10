@@ -116,12 +116,12 @@
 				speak("SW",_("and believe me, no one will be stupid enough to kill you."),1700);
 				
 				addQuestion(_("Continue to be snotty?"));
-				addAnswer(_("Yes"),"be_unkind");
+				addAnswer(_("Yes"),"be_unkind_part1");
 				addAnswer(_("No"),"be_kind");
 			</Effect>
 		</Topic>
 		
-		<Topic name="be_unkind">
+		<Topic name="be_unkind_part1">
 			<Effect>
 				speak("PL",_("You consider yourself very mighty and clever, don't you?"),1700);
 				speak("MAG",_("Surely he has written down that knowledge of his somewhere."),1800);
@@ -140,11 +140,31 @@
 				-- auf 1% LE fallen, werden sie in einem Elementarkaefig gefangen, der
 				-- jeden Handlungsspielraum unterbindet
 				
+				jumpTopic("add_elemental");
+				
+				changeTopic("end_cutscene1_elemental");
+			</Effect>
+		</Topic>
+		
+		<Topic name="be_unkind_part2">
+			<Effect>
 				speak("SW",_("That was the weakest elemental I could possibly summon."),1700);
 				speak("SW",_("Now go. I have no time to waste."),1300);
 				speak("SW",_("The prince will marry soon and there are lots of preparations to make."),1800);
 				
 				changeTopic("end_cutscene1");
+			</Effect>
+		</Topic>
+		
+		<Topic name="add_elemental">
+			<Effect>
+				fortify_dwarfenfroward_tmp.fire_elemental = createObject("fireElemS","locParty");
+			</Effect>
+		</Topic>
+		
+		<Topic name="end_cutscene1_elemental">
+			<Effect>
+				setCutsceneMode(false);
 			</Effect>
 		</Topic>
 		
@@ -176,6 +196,7 @@
 		<Topic name="end_cutscene1">
 			<Effect>
 				fortify_dwarfenfroward.scene1 = true;
+				fortify_dwarfenfroward.started = true;
 				setCutsceneMode(false);
 			</Effect>
 		</Topic>
@@ -199,47 +220,38 @@
 				end;
 			</Condition>
 			<Effect>
-				-- insertTrigger("start_scene")
 				createDialogue();
 				addSpeaker(soren_windclaw,"SW");
 				addSpeaker(fortify_dwarfenfroward_tmp.guard1,"W1");
 				addSpeaker(fortify_dwarfenfroward_tmp.guard2,"W2");
 				addSpeaker(trigger.player,"Player");
-				addStandardSpeakers();
+				addStandardSpeakers("elCnlLobby","locParty");
 				setCutsceneMode(true);
 				setTopicBase("Soren Windclaw");
 				changeTopic("scene1_dialogue");
 			</Effect>
 		</Event>
-		<!--
-		<Event trigger="start_scene">
-			<Effect>
-				-- setCutsceneMode(true);
-				-- addCameraPosition(1000,get(getRole("PL"),"position"),20,50,25);
-				-- startTimer("scene_1",1500);
-			</Effect>
-		</Event>
 		
-		<Event trigger="scene_1">
+		<Event trigger ="unit_die">
+			<Condition>
+				if (trigger.unit == fortify_dwarfenfroward_tmp.fire_elemental) then
+					return true;
+				else
+					return false;
+				end;
+			</Condition>
 			<Effect>
 				createDialogue();
 				addSpeaker(soren_windclaw,"SW");
 				addSpeaker(fortify_dwarfenfroward_tmp.guard1,"W1");
 				addSpeaker(fortify_dwarfenfroward_tmp.guard2,"W2");
 				addSpeaker(trigger.player,"Player");
-				addStandardSpeakers();
+				addStandardSpeakers("elCnlLobby","locParty");
+				setCutsceneMode(true);
 				setTopicBase("Soren Windclaw");
-				changeTopic("scene1_dialogue");
+				changeTopic("be_unkind_part2");
 			</Effect>
 		</Event>
-		
-		<Event trigger ="command_complete" once="true">
-			<Effect>
-				print(trigger.command);
-				setCutsceneMode(false);
-			</Effect>
-		</Event>
-		-->
 	</Region>
 	
 </Quest>

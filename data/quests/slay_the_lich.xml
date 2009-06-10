@@ -1,3 +1,4 @@
+<!--
 <Quest name="Slay the Lich" table_name="slay_the_lich">
 	
 	<Init>
@@ -13,20 +14,6 @@
 	</Description>
 	
 	<NPC refname="General Greif">
-		<!--
-		<Topic name="slay_the_lich" start_option="Defend Dwarfenfroward">
-			<Condition>
-				if (slay_the_lich.finished ~= true and slay_the_lich.freed ~= true) then
-					return true
-				else
-					return false
-				end
-			</Condition>
-			<Effect>
-				insertTrigger("start_slay_the_lich")
-			</Effect>
-		</Topic>
-		-->
 		<Topic name="scene4_dialogue">
 			<Effect>
 				addCameraPosition(0,get(getRole("PL"),"position"),20,40,20);
@@ -89,4 +76,5 @@
 	</Region>
 	
 </Quest>
+-->
 
