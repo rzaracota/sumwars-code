@@ -295,7 +295,7 @@ void ItemLoader::loadItem(TiXmlNode* node)
 					item_data->m_weapon_attr = new WeaponAttr;
 				
 				std::string type;
-				attr.getString("type",type);
+				attr.getString("weapon_type",type);
 				if (type == "sword")
 					item_data->m_weapon_attr->m_weapon_type = WeaponAttr::SWORD;
 				else if (type == "axe")
