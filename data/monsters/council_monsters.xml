@@ -1,4 +1,4 @@
-﻿<!-- Feuerkuecken -->
+<!-- Feuerkuecken -->
 <!-- L20 -->
 <Monster type="MONSTER" subtype="fireElemS" name="firefletchling" fraction="SUMMONER" category="SUMMONED" layer="NORMAL">
 	<Mesh file="fireElemS" />
@@ -36,7 +36,7 @@
 		<Ability type="attack" />
 		<Ability type="die" />
 		<Ability type="idle" />
-		<Ability type="fireball" />
+		<Ability type="fire_ball" />
 		
 	</BasicAttributes>
 	

@@ -1,4 +1,4 @@
-﻿<RenderInfo name="elementalbase" parent="creaturebase">
+<RenderInfo name="elementalbase" parent="creaturebase">
 	<Action name="walk">
 		<Animation name="float" />
 	</Action>
@@ -15,7 +15,7 @@
 		<Animation name="idle" />
 	</Action>
 	
-	<Action name="fireball">
+	<Action name="fire_ball">
 		<Animation name="attack1" />
 	</Action>
 </RenderInfo>
