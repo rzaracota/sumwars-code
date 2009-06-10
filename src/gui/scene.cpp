@@ -451,6 +451,33 @@ bool Scene::updatePlayerGraphicObject(GraphicObject* obj, Player* pl)
 	update |= obj->updateSubobject(minfo);
 	
 	DEBUG5("update %s : bone %s source %s", minfo.m_objectname.c_str(), minfo.m_bone.c_str(), minfo.m_source.c_str());
+	
+	// Handschuhe
+	minfo.m_objectname="gloves";
+	minfo.m_type = MovableObjectInfo::SUBOBJECT;
+	itm = pl->getEquipement()->getItem(Equipement::GLOVES);
+	
+	if (itm !=0)
+	{
+		std::string type = itm->m_subtype;
+		
+		minfo.m_bone = "";
+		minfo.m_source = GraphicManager::getGraphicType(itm->m_subtype);
+		if (pl->getGender() == MALE)
+		{
+			minfo.m_source += "#m";
+		}
+		else
+		{
+			minfo.m_source += "#f";
+		}
+	}
+	else
+	{
+		minfo.m_source="";
+	}
+	update |= obj->updateSubobject(minfo);
+	
 	return update;
 }
 

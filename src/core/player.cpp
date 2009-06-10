@@ -202,7 +202,7 @@ bool Player::init()
 		m_name.assign("Boromir");
 		//bas->m_abilities[1] = 0xffffff;
 		
-		
+		m_gender = MALE;
 
 		si = ItemFactory::createItem(Item::WEAPON,"dagger_sw");
 		equ->swapItem(si,Equipement::WEAPON);
@@ -233,6 +233,7 @@ bool Player::init()
 		m_right_action = Action::RANGE_ATTACK;
 		init = true;
 
+		m_gender = FEMALE;
 		
 		// Debugging
 		m_name.assign("Legolas");
@@ -276,6 +277,7 @@ bool Player::init()
 		si = ItemFactory::createItem(Item::WEAPON,"spruce_wnd");
 		equ->swapItem(si,Equipement::WEAPON);
 
+		m_gender = MALE;
 		// Debugging
 		//bas->m_abilities[3] = 0xffffff;
 	}
@@ -309,6 +311,8 @@ bool Player::init()
 		
 		si = ItemFactory::createItem(Item::WEAPON,"hammer_hmr");
 		equ->swapItem(si,Equipement::WEAPON);
+		
+		m_gender = FEMALE;
 	}
 
 	

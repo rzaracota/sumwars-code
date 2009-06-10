@@ -2,7 +2,7 @@
 <!-- WAR, PRI, ARC, MAG -->
 <Item type="gloves" subtype="leath_glv" name="leather gloves" size="medium">
 	<Image image="set:goblin_glv.png image:full_image" />
-	<Mesh file="potion.mesh" />
+	<Mesh file="gloves" />
 	<Attribute
 		level_requirement="2"
 		character_requirement="all"

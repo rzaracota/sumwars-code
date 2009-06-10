@@ -36,7 +36,11 @@
 #include "servernetwork.h"
 #include "item.h"
 
-
+enum Gender
+{
+	MALE =1,
+	FEMALE = 2,
+};
 
 /**
  * \class PlayerCamera
@@ -650,6 +654,15 @@ public:
 	 * \brief Gibt die aktuelle Aktion als String aus
 	 */
 	virtual std::string getActionString();
+	
+	/**
+	 * \fn Gender getGender()
+	 * \brief Gibt das Geschlecht aus
+	 */
+	Gender getGender()
+	{
+		return m_gender;
+	}
 
 //Protected stuff
 protected:
@@ -776,10 +789,10 @@ protected:
 	PlayerLook m_look;
 	
 	/**
-	 * \var bool m_male
+	 * \var Gender m_gender
 	 * \brief Gibt das Geschlecht an
 	 */
-	bool m_male;
+	Gender m_gender;
 	
 	/**
 	 * \var bool m_using_waypoint
