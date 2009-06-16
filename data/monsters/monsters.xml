@@ -993,7 +993,7 @@ AIR
 
 <!-- Blutschnabel -->
 <Monster type="MONSTER" subtype="bloodbeak" name="bloodbeak" fraction="MONSTER" category="ANIMAL" layer="AIR">
-	<Mesh file="bloodbeak.mesh" />
+	<Mesh file="bloodbeak" />
 	<Dropslots >
 		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" max_gold="100" min_level="0" max_level="10" magic_prob="0.1" magic_power="1000" />
 		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" max_gold="50" min_level="0" max_level="20" magic_prob="0.2" magic_power="1000" />
@@ -1024,19 +1024,11 @@ AIR
 		step_length="1.0"
 		attack_range="1"
 	>
-		<Ability type="walk">
-			<Animation name="fly" />
-		</Ability>
+		<Ability type="walk"/>
 		
-		<Ability type="attack">
-			<Animation name="attack1" />
-			<!--<Animation name="attack2" />
-			<Animation name="attack3" />-->
-		</Ability>
+		<Ability type="attack"/>
 		
-		<Ability type="die">
-			<Animation name="die" />
-		</Ability>
+		<Ability type="die"/>
 		
 	</BasicAttributes>
 	

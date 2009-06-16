@@ -1,0 +1,17 @@
+﻿<RenderInfo name="birdbase" parent="creaturebase">
+	<Action name="walk">
+		<Animation name="fly" />
+	</Action>
+	
+	<Action name="attack">
+		<Animation name="attack1" />
+	</Action>
+
+	<Action name="die">
+		<Animation name="die" />
+	</Action>
+</RenderInfo>
+
+<RenderInfo name="bloodbeak" parent="birdbase">
+	<Entity source="bloodbeak.mesh"/>
+</RenderInfo>
