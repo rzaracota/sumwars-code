@@ -1,4 +1,4 @@
-<RenderInfo name="example_warrior">
+<RenderInfo name="example">
 	<!-- erste Entity wird automatisch mainmesh genannt, alle weiteren muessen Namen haben -->
 	<Entity source="warrior_m.mesh"/>
 	
@@ -11,7 +11,7 @@
 		 "ParticleSystemName" - bei ParticleSystem
 		 "RenderInfoName" - bei Subobject -->
 	<!-- optional: position und rotation (relativ) -->
-	<Entity  objectname="sword" bone="itemRightHand" source="sword_sw.mesh"/>
+	<Entity  objectname="sword" bone="itemRightHand" source="short_sw.mesh"/>
 	<Subobject objectname="shield" bone="mainmesh:itemLeftHand" source="example_shield" />
 	<ParticleSystem objectname="halo" source="shield" position="0.0 50.0 0.0" rotation="90.0 0.0 0.0" />
 	
