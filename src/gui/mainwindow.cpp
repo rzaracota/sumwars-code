@@ -1179,8 +1179,8 @@ void MainWindow::updateObjectInfo()
 	
 				// get the mesh information
 				Scene::getMeshInformation(pentity->getMesh(), vertex_count, vertices, index_count, indices,
-										pentity->getParentNode()->getWorldPosition(),
-										pentity->getParentNode()->getWorldOrientation(),
+										pentity->getParentNode()->_getDerivedPosition(),
+										pentity->getParentNode()->_getDerivedOrientation(),
 										pentity->getParentNode()->_getDerivedScale());
 	
 				// test for hitting individual triangles on the mesh
