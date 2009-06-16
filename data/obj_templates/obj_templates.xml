@@ -179,6 +179,103 @@ FIXED_OBJECT
 	</Environment>
 </ObjectTemplate>
 
+<ObjectTemplate name="$table" type="FIXED_OBJECT">
+	<Environment name="meadow">
+		<Object name="lab_tbl" />
+	</Environment>
+	<Environment name="hills">
+		<Object name="lab_tbl" />
+	</Environment>
+	<Environment name="council">
+		<Object name="lab_tbl" />
+	</Environment>
+</ObjectTemplate>
+
+<ObjectTemplate name="$vase" type="FIXED_OBJECT">
+	<Environment name="meadow">
+		<Object name="vase1" />
+		<Object name="vase2" />
+		<Object name="vase3" />
+		<Object name="vase4" />
+	</Environment>
+	<Environment name="hills">
+		<Object name="vase1" />
+		<Object name="vase2" />
+		<Object name="vase3" />
+		<Object name="vase4" />
+	</Environment>
+	<Environment name="council">
+		<Object name="vase1" />
+		<Object name="vase2" />
+		<Object name="vase3" />
+		<Object name="vase4" />
+	</Environment>
+</ObjectTemplate>
+
+<ObjectTemplate name="$tube" type="FIXED_OBJECT">
+	<Environment name="meadow">
+		<Object name="tube_1" />
+		<Object name="tube_2" />
+	</Environment>
+	<Environment name="hills">
+		<Object name="tube_1" />
+		<Object name="tube_2" />
+	</Environment>
+	<Environment name="council">
+		<Object name="tube_1" />
+		<Object name="tube_2" />
+	</Environment>
+</ObjectTemplate>
+
+<ObjectTemplate name="$tube_ring" type="FIXED_OBJECT">
+	<Environment name="meadow">
+		<Object name="tube_ring" />
+	</Environment>
+	<Environment name="hills">
+		<Object name="tube_ring" />
+	</Environment>
+	<Environment name="council">
+		<Object name="tube_ring" />
+	</Environment>
+</ObjectTemplate>
+
+<ObjectTemplate name="$tube_open" type="FIXED_OBJECT">
+	<Environment name="meadow">
+		<Object name="tube_open" />
+	</Environment>
+	<Environment name="hills">
+		<Object name="tube_open" />
+	</Environment>
+	<Environment name="council">
+		<Object name="tube_open" />
+	</Environment>
+</ObjectTemplate>
+
+<ObjectTemplate name="$tube_corner" type="FIXED_OBJECT">
+	<Environment name="meadow">
+		<Object name="tube_corner45" />
+	</Environment>
+	<Environment name="hills">
+		<Object name="tube_corner45" />
+	</Environment>
+	<Environment name="council">
+		<Object name="tube_corner45" />
+	</Environment>
+</ObjectTemplate>
+
+<ObjectTemplate name="$tube_cross" type="FIXED_OBJECT">
+	<Environment name="meadow">
+		<Object name="tube_cross" />
+	</Environment>
+	<Environment name="hills">
+		<Object name="tube_cross" />
+	</Environment>
+	<Environment name="council">
+		<Object name="tube_cross" />
+	</Environment>
+</ObjectTemplate>
+
+
 <ObjectTemplate name="$stuff_m" type="FIXED_OBJECT">
 	<Environment name="meadow">
 		<Object name="box_m1" />
@@ -190,7 +287,6 @@ FIXED_OBJECT
 		<Object name="box_m2" />
 		<Object name="box_m3" />
 	</Environment>
-	
 </ObjectTemplate>
 
 <ObjectTemplate name="$stuff_b" type="FIXED_OBJECT">
@@ -201,6 +297,7 @@ FIXED_OBJECT
 		<Object name="box_b1" />
 	</Environment>
 </ObjectTemplate>
+
 <ObjectTemplate name="$signpost" type="FIXED_OBJECT">
 	<Environment name="meadow">
 		<Object name="signpost" />
