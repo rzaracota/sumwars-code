@@ -3,8 +3,8 @@
 <ObjectGroupTemplate name="test" version="1.0">
   <Shape
     type="RECT"
-    extent_x="8"
-    extent_y="8"
+    extent_x="5"
+    extent_y="5"
     angle="0"
   />
 
@@ -12,29 +12,30 @@
 
   <ObjectContent>
     <Object subtype="$tree" 
-            center_x="-5.290673067" 
-            center_y="0.1446313899" 
+            center_x="3.28523788" 
+            center_y="6.207080828" 
             angle="0" 
             probability="1" 
             prob_angle="false" 
     />
-    <Object subtype="fence1" 
-            center_x="3.533440735" 
-            center_y="-7.041158476" 
-            angle="0" 
-            probability="1" 
-            prob_angle="false" 
-    />
-    <Object subtype="fence3" 
-            center_x="-3.824807723" 
-            center_y="-6.896019639" 
+    <Object subtype="tree1" 
+            center_x="-3.11125624" 
+            center_y="3.236488872" 
             angle="0" 
             probability="1" 
             prob_angle="false" 
     />
     <Object subtype="tree2" 
-            center_x="-5.276938371" 
-            center_y="-6.08009625" 
+            center_x="-6.099415433" 
+            center_y="5.803058645" 
+            angle="0" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="tree2" 
+            center_x="0" 
+            center_y="0" 
+			height="3.536212765" 
             angle="0" 
             probability="1" 
             prob_angle="false" 
@@ -42,10 +43,7 @@
   </ObjectContent>
 
   <Locations>
-    <Location name="entry_north" pos_x="0.02761584937" pos_y="0"/>
-    <Location name="exit_north" pos_x="0.03338260164" pos_y="-6.568680661" />
-    <Location name="testloc" pos_x="4.682676892" pos_y="-3.295569055" />
-	<Location name="WaypointLoc" pos_x="0" pos_y="0" />
+    <Location name="def_loc" pos_x="4.266748856" pos_y="3.136973898" />
   </Locations>
 
 </ObjectGroupTemplate>
