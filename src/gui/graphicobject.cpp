@@ -16,13 +16,7 @@ GraphicObject::GraphicObject(Type type, GraphicRenderInfo* render_info, std::str
 	
 	if (m_render_info != 0)
 	{
-		std::list<MovableObjectInfo>& objs = render_info->getObjects();
-		std::list<MovableObjectInfo>::iterator it;
-		
-		for (it = objs.begin(); it != objs.end(); ++it)
-		{
-			addMovableObject(*it);
-		}
+		addObjectsFromRenderInfo(render_info);
 	}
 	else
 	{
@@ -55,6 +49,21 @@ GraphicObject::~GraphicObject()
 		removeMovableObject(m_dependencies.begin()->first);
 	}
 	m_top_node->getCreator()->destroySceneNode(m_top_node->getName());
+}
+
+void GraphicObject::addObjectsFromRenderInfo(GraphicRenderInfo* info)
+{
+	std::list<MovableObjectInfo>& objs = info->getObjects();
+	std::list<MovableObjectInfo>::iterator it;
+		
+	for (it = objs.begin(); it != objs.end(); ++it)
+	{
+		addMovableObject(*it);
+	}
+	
+	GraphicRenderInfo* pinfo = info->getParentInfo();
+	if (pinfo != 0)
+		addObjectsFromRenderInfo(pinfo);
 }
 
 Ogre::MovableObject* GraphicObject::getMovableObject(std::string name)
@@ -130,7 +139,7 @@ void GraphicObject::setQueryMask(unsigned int mask)
 
 void GraphicObject::addMovableObject(MovableObjectInfo& object)
 {
-	DEBUG5("adding object %s",object.m_objectname.c_str());
+	DEBUG5("adding object %s type %i",object.m_objectname.c_str(), object.m_type);
 	
 	// Meshname und Knochen an den angefuegt wird
 	std::string bone;
@@ -152,56 +161,7 @@ void GraphicObject::addMovableObject(MovableObjectInfo& object)
 	
 	Ogre::Node* node=0;
 	
-	if (object.m_type != MovableObjectInfo::SUBOBJECT)
-	{
-		// normales Ogre::MovableObject anfuegen
-		if (m_attached_objects.count(object.m_objectname) >0)
-		{
-			WARNING("graphicobject %s: subobject %s already exists",m_name.c_str(), object.m_objectname.c_str());
-			return;
-		}
-		
-		std::ostringstream ostr;
-		ostr << m_name << ":"<<object.m_objectname;
-		
-		Ogre::MovableObject* obj;
-		obj = GraphicManager::createMovableObject(object,ostr.str());
-		
-		// Objekt mit ID versehen
-		obj->setUserAny(Ogre::Any(m_id));
-		
-		if (object.m_bone == "")
-		{
-			// Anfuegen an TopKnoten
-			Ogre::SceneNode* snode = m_top_node->createChildSceneNode();
-			snode->attachObject(obj);
-			
-			snode->setInheritScale(true);
-			node = snode;
-			DEBUG5("node %p parent %p",node,m_top_node );
-		}
-		else
-		{
-			// Anfuegen an einen Knochen
-			Ogre::Entity* ent = getEntity(mesh);
-			if (ent !=0)
-			{
-				Ogre::TagPoint* tag = ent->attachObjectToBone(bone, obj);
-				tag->setInheritScale(false);
-				tag->setScale(Ogre::Vector3(1,1,1));
-				node = tag;
-			}
-			else
-			{
-				DEBUG("could not attach %s to %s",object.m_objectname.c_str(),mesh.c_str());
-				return;
-			}
-		}
-		
-		m_attached_objects[object.m_objectname].m_object_info = object;
-		m_attached_objects[object.m_objectname].m_object = obj;
-	}
-	else
+	if (object.m_type == MovableObjectInfo::SUBOBJECT)
 	{
 		// Unterobjekt einfuegen
 		if (m_subobjects.count(object.m_objectname) >0)
@@ -252,6 +212,72 @@ void GraphicObject::addMovableObject(MovableObjectInfo& object)
 		attchobj.m_tagpoint = tag;
 		m_subobjects[object.m_objectname] = attchobj;
 		DEBUG5("adding subobject %p with name %s", m_subobjects[object.m_objectname].m_object,  object.m_objectname.c_str());
+	}
+	else if (object.m_type == MovableObjectInfo::SOUNDOBJECT)
+	{
+		std::string name = m_name;
+		name += ":";
+		name += object.m_objectname;
+		
+		if (m_soundobjects.count(object.m_objectname) >0)
+		{
+			WARNING("soundobject %s: subobject %s already exists",m_name.c_str(), object.m_objectname.c_str());
+			return;
+		}
+		
+		SoundObject* obj = SoundSystem::createSoundObject(name);
+		
+		m_soundobjects[object.m_objectname] = obj;
+		DEBUG5("adding soundobject with name %s (%s)",object.m_objectname.c_str(),name.c_str());
+	}
+	else 
+	{
+		// normales Ogre::MovableObject anfuegen
+		if (m_attached_objects.count(object.m_objectname) >0)
+		{
+			WARNING("graphicobject %s: subobject %s already exists",m_name.c_str(), object.m_objectname.c_str());
+			return;
+		}
+		
+		std::ostringstream ostr;
+		ostr << m_name << ":"<<object.m_objectname;
+		
+		Ogre::MovableObject* obj;
+		obj = GraphicManager::createMovableObject(object,ostr.str());
+		
+		// Objekt mit ID versehen
+		obj->setUserAny(Ogre::Any(m_id));
+		
+		if (object.m_bone == "")
+		{
+			// Anfuegen an TopKnoten
+			Ogre::SceneNode* snode = m_top_node->createChildSceneNode();
+			snode->attachObject(obj);
+			
+			snode->setInheritScale(true);
+			node = snode;
+			DEBUG5("node %p parent %p",node,m_top_node );
+		}
+		else
+		{
+			// Anfuegen an einen Knochen
+			Ogre::Entity* ent = getEntity(mesh);
+			if (ent !=0)
+			{
+				Ogre::TagPoint* tag = ent->attachObjectToBone(bone, obj);
+				tag->setInheritScale(false);
+				tag->setScale(Ogre::Vector3(1,1,1));
+				node = tag;
+			}
+			else
+			{
+				DEBUG("could not attach %s to %s",object.m_objectname.c_str(),mesh.c_str());
+				return;
+			}
+		}
+		
+		m_attached_objects[object.m_objectname].m_object_info = object;
+		m_attached_objects[object.m_objectname].m_object = obj;
 	}
 	
 	// StartPosition und -Rotation setzen
@@ -310,6 +336,12 @@ void GraphicObject::removeMovableObject(std::string name)
 		{
 			m_attached_objects.erase(it);
 		}
+	}
+	else if (m_soundobjects.find(name) != m_soundobjects.end())
+	{
+		SoundSystem::deleteSoundObject(m_soundobjects[name]);
+		m_soundobjects.erase(name);
+		DEBUG5("removing Soundobject %s",name.c_str());
 	}
 	else
 	{
@@ -634,7 +666,18 @@ void GraphicObject::update(float time)
 		
 		obj->update(time);
 	}
+
 	
+	// SoundObjekte aktualisieren
+	Ogre::Vector3 opos = getTopNode()->_getDerivedPosition();
+	Vector pos(opos.x/50, opos.z / 50);
+	std::map<std::string, SoundObject* >::iterator st;
+	for (st = m_soundobjects.begin(); st != m_soundobjects.end(); ++st)
+	{
+		st->second->setPosition(pos);
+		st->second->update();
+		DEBUG5("setting sound %s position to %f %f",st->first.c_str(),pos.m_x, pos.m_y);
+	}
 }
 
 void GraphicObject::addActiveRenderPart(ActionRenderpart* part)
@@ -643,6 +686,16 @@ void GraphicObject::addActiveRenderPart(ActionRenderpart* part)
 	if (part->m_type == ActionRenderpart::DETACH)
 	{
 		removeMovableObject(part->m_objectname);
+	}
+	else if (part->m_type == ActionRenderpart::SOUND)
+	{
+		std::map<std::string, SoundObject* >::iterator it;
+		it = m_soundobjects.find(part->m_objectname);
+		if (it != m_soundobjects.end())
+		{
+			it->second->setSound(part->m_animation);
+			DEBUG5("setting sound object %s to sound %s",it->first.c_str(), part->m_animation.c_str());
+		}
 	}
 }
 

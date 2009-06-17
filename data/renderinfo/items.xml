@@ -1,0 +1,8 @@
+<RenderInfo name="potion">
+	<Entity  source="potion.mesh"/> 
+	<Soundobject objectname="sound" />
+	
+	<Action name="drop">
+		<Sound objectname="sound" name="drop_potion"/>
+	</Action>
+</RenderInfo>

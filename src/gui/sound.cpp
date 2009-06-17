@@ -1,14 +1,12 @@
 #include "sound.h"
 
 #include "projectile.h"
+#include "elementattrib.h"
+#include <OgreResourceGroupManager.h>
 
 std::multimap<SoundName, Sound> SoundSystem::m_sounds;
 
 std::map<std::string, SoundObject*> SoundSystem::m_sound_objects;
-
-std::map<SoundTarget, SoundName> SoundSystem::m_sounds_targets;
-
-std::map<GameObject::Subtype, SoundName> SoundSystem::m_projectile_sounds;
 
 float SoundSystem::m_sound_volume = 0.0f;
 
@@ -48,15 +46,79 @@ Sound SoundSystem::getSound(SoundName sname)
 
 void SoundSystem::loadSoundFile(std::string file, SoundName sname)
 {
-	int buffernr;
-	buffernr = alutCreateBufferFromFile(file.c_str());
-	if (buffernr !=  AL_NONE)
+	Ogre::FileInfoListPtr files;
+	Ogre::FileInfoList::iterator it;
+	std::string filename;
+	files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("sound",file);
+	
+	for (it = files->begin(); it != files->end(); ++it)
 	{
-		m_sounds.insert(std::make_pair(sname,buffernr));
+		filename = it->archive->getName();
+		filename += "/";
+		filename += it->filename;
+		
+		DEBUG5("loading file %s",filename.c_str());
+		
+		int buffernr;
+		buffernr = alutCreateBufferFromFile(filename.c_str());
+		if (buffernr !=  AL_NONE)
+		{
+			m_sounds.insert(std::make_pair(sname,buffernr));
+			
+		}
+		else
+		{
+			ERRORMSG( "Could not load %s",filename.c_str());
+		}
+	}
+}
+
+void SoundSystem::loadSoundData(const char* pFilename)
+{
+	TiXmlDocument doc(pFilename);
+	bool loadOkay = doc.LoadFile();
+
+	if (loadOkay)
+	{
+		loadSoundInfos(&doc);
 	}
 	else
 	{
-		ERRORMSG( "Could not load %s",file.c_str());
+		ERRORMSG("Failed to load file %s", pFilename);
+	}
+}
+
+void SoundSystem::loadSoundInfos(TiXmlNode* node)
+{
+	TiXmlNode* child;
+	if (node->Type()==TiXmlNode::ELEMENT && !strcmp(node->Value(), "Sound"))
+	{
+		ElementAttrib attr;
+		attr.parseElement(node->ToElement());
+		
+		std::string name,file;
+		attr.getString("name",name);
+		
+		for ( child = node->FirstChild(); child != 0; child = child->NextSibling())
+		{
+			if (child->Type()==TiXmlNode::ELEMENT)
+			{
+				attr.parseElement(child->ToElement());
+				if (!strcmp(child->Value(), "Soundfile"))
+				{
+					attr.getString("source",file);
+					DEBUG5("loading sound file %s for sound %s",file.c_str(), name.c_str());
+					loadSoundFile(file, name);
+				}
+			}
+		}
+	}
+	else
+	{
+		for ( child = node->FirstChild(); child != 0; child = child->NextSibling())
+		{
+			loadSoundInfos(child);
+		}
 	}
 }
 
@@ -73,6 +135,7 @@ void SoundSystem::init()
 
 
 	// Soundfiles laden
+	/*
 	SoundSystem::loadSoundFile("../resources/sound/arrow.wav", "arrow");
 	SoundSystem::loadSoundFile("../resources/sound/cast_ice.wav", "cast_ice");
 	SoundSystem::loadSoundFile("../resources/sound/fire_cast.wav", "cast_fire");
@@ -167,7 +230,7 @@ void SoundSystem::init()
 	m_projectile_sounds["DIVINE_BEAM"] = "cast_fire";
 	m_projectile_sounds["HYPNOSIS"] = "cast_fire";
 
-
+*/
 }
 
 void SoundSystem::setListenerPosition(Vector pos)
@@ -218,7 +281,7 @@ SoundObject* SoundSystem::createSoundObject(std::string name)
 	}
 
 	SoundObject* so;
-	so = new SoundObject();
+	so = new SoundObject(name);
 	m_sound_objects.insert(std::make_pair(name,so));
 	return so;
 
@@ -251,39 +314,12 @@ void SoundSystem::deleteSoundObject(std::string name)
 	}
 }
 
-SoundName SoundSystem::getSoundName(SoundTarget target)
+void SoundSystem::deleteSoundObject(SoundObject* object)
 {
-	static std::map<SoundTarget, SoundName>::iterator it;
-
-	it = m_sounds_targets.find(target);
-	if (it == m_sounds_targets.end())
-	{
-		return "";
-	}
-
-	return it->second;
+	deleteSoundObject(object->getName());
 }
 
-void SoundSystem::registerSound(SoundTarget target, SoundName name)
-{
-	m_sounds_targets.insert(std::make_pair(target,name));
-}
-
-SoundName SoundSystem::getProjectileSound(GameObject::Subtype ptype)
-{
-	std::map<Projectile::Subtype, SoundName>::iterator it;
-
-	it = m_projectile_sounds.find(ptype);
-	if (it != m_projectile_sounds.end())
-	{
-		return it->second;
-	}
-	return "";
-}
-
-
-
-SoundObject::SoundObject(Vector pos)
+SoundObject::SoundObject(std::string name, Vector pos)
 {
 	alGenSources(1, &m_handle);
 	setPosition(pos);
@@ -295,6 +331,7 @@ SoundObject::SoundObject(Vector pos)
 	alSourcef(m_handle,AL_MAX_DISTANCE , 20);
 
 	m_sound_name = "";
+	m_name = name;
 }
 
 SoundObject::~SoundObject()

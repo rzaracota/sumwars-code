@@ -1,3 +1,5 @@
+#ifndef SOUND_H
+#define SOUND_H
 
 #include <AL/al.h>
 #include <AL/alut.h>
@@ -13,6 +15,7 @@
 
 #include "geometry.h"
 #include "gameobject.h"
+#include "tinyxml.h"
 
 /**
  * \brief Name eines Sounds
@@ -58,6 +61,13 @@ class SoundSystem
 		static void loadSoundFile(std::string file, SoundName sname);
 		
 		/**
+		 * \fn static void loadSoundData(const char* pFilename)
+		 * \brief Laedt Daten zu Sounds aus einer XML Datei
+		 * \param pFilename Dateiname
+		 */
+		static void loadSoundData(const char* pFilename);
+		
+		/**
 		 * \fn static void setListenerPosition(Vector pos)
 		 * \brief Setzt die Position an der der Schall gehoehrt wird
 		 */
@@ -96,26 +106,11 @@ class SoundSystem
 		static void deleteSoundObject(std::string name);
 		
 		/**
-		 * \fn static SoundName getSoundName(SoundTarget target)
-		 * \brief Gibt fuer die gegebene Situation den richtigen Sound aus
-		 * \param target Name der Situation
+		 * \fn static void deleteSoundObject(SoundObject* object)
+		 * \brief Loescht das angegebene SoundObjekt
+		 * \param object Soundobjekt
 		 */
-		static SoundName getSoundName(SoundTarget target);
-		
-		/**
-		 * \fn static void registerSound(SoundTarget target, SoundName name)
-		 * \brief Registriert fuer eine gegebene Situation einen Sound
-		 * \param target  Name der Situation
-		 * \param name Name des Sounds
-		 */
-		static void registerSound(SoundTarget target, SoundName name);
-		
-		/**
-		 * \fn static SoundName getProjectileSound(GameObject::Subtype ptype)
-		 * \brief Gibt den Sound fuer ein bestimmtes Projektil aus
-		 * \param ptype Typ des Projektils
-		 */
-		static SoundName getProjectileSound(GameObject::Subtype ptype);
+		static void deleteSoundObject(SoundObject* object);
 		
 		/**
 		 * \fn static void setSoundVolume(float vol)
@@ -135,23 +130,13 @@ class SoundSystem
 	
 	private:
 		
-		/**
-	 * \fn static std::map<GameObject::Subtype, SoundName> m_projectile_sounds
-		 * \brief Sounds die abgespielt werden, wenn Projektile gestartet werden
-		 */
-		static std::map<GameObject::Subtype, SoundName> m_projectile_sounds;
+		static void loadSoundInfos(TiXmlNode* node);
 		
 		/**
 		 * \var static std::multimap<SoundName, Sound> m_sounds
 		 * \brief Bildet die Name der Sounds auf die OpenAL IDs ab
 		 */
 		static std::multimap<SoundName, Sound> m_sounds;
-		
-		/**
-		 * \var static std::map<SoundTarget, SoundName> m_sounds_targets
-		 * \brief Speichert fuer Situationen, in denen Sounds abgespielt werden den Name des Sounds
-		 */
-		static std::map<SoundTarget, SoundName> m_sounds_targets;
 		
 		/**
 		 * \var static std::map<std::string, SoundObject*> m_sound_objects
@@ -175,11 +160,12 @@ class SoundObject
 {
 	public:
 		/**
-		 * \fn SoundObject(Vector pos = Vector(0,0))
+		 * \fn SoundObject(std::string name, Vector pos = Vector(0,0))
 		 * \brief Konstruktor
 		 * \param pos Position
+		 * \param name Name
 		 */
-		SoundObject(Vector pos = Vector(0,0));
+		SoundObject(std::string name, Vector pos = Vector(0,0));
 		
 		/**
 		 * \fn ~SoundObject()
@@ -262,6 +248,16 @@ class SoundObject
 		 */
 		void update();
 		
+		
+		/**
+		 * \fn std::string getName()
+		 * \brief gibt den Name aus
+		 */
+		std::string getName()
+		{
+			return m_name;
+		}
+		
 	private:
 		/**
 		 * \var ALuint m_handle
@@ -275,6 +271,12 @@ class SoundObject
 		 */
 		SoundName m_sound_name;
 	
-	
+		/**
+		 * \var std::string m_name
+		 * \brief Name des Objektes
+		 */
+		std::string m_name;
 };
+
+#endif
 

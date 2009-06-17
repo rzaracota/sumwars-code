@@ -97,3 +97,16 @@ ActionRenderInfo* GraphicRenderInfo::getInheritedActionRenderInfo(std::string ac
 	return info;
 }
 
+GraphicRenderInfo* GraphicRenderInfo::getParentInfo()
+{
+	if (m_parent =="")
+		return 0;
+	
+	if (m_parent_ptr == 0)
+	{
+		m_parent_ptr = GraphicManager::getRenderInfo(m_parent);
+		DEBUG5("parent render info %s %p",m_parent.c_str(), m_parent_ptr);
+	}
+	return m_parent_ptr;
+	
+}

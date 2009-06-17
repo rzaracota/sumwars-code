@@ -2,7 +2,7 @@
 <!-- small potion -->
 <Item type="potion" subtype="heal_1" name="small potion" size="small">
 	<Image image="set:potion_health.png image:full_image" />
-	<Mesh file="potion.mesh" />
+	<Mesh file="potion" />
 	<Attribute
 		character_requirement="15"
 		price = "20"

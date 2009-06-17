@@ -112,6 +112,7 @@ bool Application::init()
 		ERRORMSG("could not load ressources");
 	}
 
+	SoundSystem::init();
 	DEBUG("application initialized");
 	// debugging
 	//MyFrameListener* mfl = new MyFrameListener(m_main_window,m_document);
@@ -334,6 +335,7 @@ bool Application::setupResources()
 
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../resources/gui/schemes", "FileSystem", "GUI");
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../resources/itempictures", "FileSystem", "itempictures");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../resources/sound", "FileSystem", "sound");
 
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../data/world", "FileSystem", "world");
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../data/npc", "FileSystem", "npc");
@@ -344,7 +346,9 @@ bool Application::setupResources()
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../data/objects", "FileSystem", "objects");
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../data/obj_templates", "FileSystem", "obj_templates");
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../data/obj_group_templ", "FileSystem", "obj_group_templ");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../data/renderinfo", "FileSystem", "renderinfo");	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../data/lua", "FileSystem", "lua");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../data/renderinfo", "FileSystem", "renderinfo");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../data/lua", "FileSystem", "lua");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../data/sound", "FileSystem", "sounddata");
 
 #if defined(WIN32)
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("c:\\windows\\fonts", "FileSystem", "GUI");
@@ -620,6 +624,19 @@ bool Application::loadResources()
 		GraphicManager::loadRenderInfoData(file.c_str());
 
 		updateStartScreen(0.8);
+	}
+	
+	// Sounds
+	files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("sounddata","*.xml");
+	for (it = files->begin(); it != files->end(); ++it)
+	{
+		file = it->archive->getName();
+		file += "/";
+		file += it->filename;
+		
+		SoundSystem::loadSoundData(file.c_str());
+
+		updateStartScreen(0.9);
 	}
 
 	Ogre::MeshManager& mesh_mgr = Ogre::MeshManager::getSingleton();

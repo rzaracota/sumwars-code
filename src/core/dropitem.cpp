@@ -106,3 +106,22 @@ int DropItem::getLocationId()
 	short sy = (int) (getPosition().m_y*2.0 + 0.5);
 	return 10000*sx + sy;
 }
+
+float DropItem::getActionPercent()
+{
+	float hadd = 0.1;
+	if (getHeight() > hadd)
+		return m_time/300;
+	
+	return fmod(m_time,2000);
+}
+
+std::string DropItem::getActionString()
+{
+	float hadd = 0.1;
+	if (getHeight() > hadd)
+		return "drop";
+	
+	return "dropped";
+}
+

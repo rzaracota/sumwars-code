@@ -96,6 +96,19 @@ class DropItem : public GameObject
 		 */
 		int getLocationId();
 		
+		/**
+		 * \fn std::string getActionString()
+		 * \brief Gibt die aktuelle Aktion als String aus
+		 */
+		virtual std::string getActionString();
+	
+		
+		/**
+		 * \fn virtual float getActionPercent()
+		 * \brief Gibt den Prozentsatz, zu dem die aktuelle Aktion fortgeschritten ist aus
+		 */
+		virtual float getActionPercent();
+		
 	private:
 		
 		/**

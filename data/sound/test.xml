@@ -1,0 +1,20 @@
+<Sound name="sword_attack">
+	<Soundfile source="sword_atk.wav"/>
+</Sound>
+
+<Sound name="club_attack">
+	<Soundfile source="drob_wood.wav"/>
+</Sound>
+
+<Sound name="arrow">
+	<Soundfile source="arrow.wav"/>
+</Sound>
+
+<Sound name="hero_hit">
+	<Soundfile source="hero_hit.wav"/>
+</Sound>
+
+
+<Sound name="drop_potion">
+	<Soundfile source="drop_potion.wav"/>
+</Sound>

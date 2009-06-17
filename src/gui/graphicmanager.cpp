@@ -38,6 +38,7 @@ GraphicRenderInfo* GraphicManager::getRenderInfo(std::string type)
 
 GraphicObject* GraphicManager::createGraphicObject(GraphicObject::Type type, std::string name, int id)
 {
+	DEBUG5("creating object %s type %s id %i",name.c_str(), type.c_str(),id);
 	GraphicRenderInfo* rinfo =  getRenderInfo(type);
 	
 	GraphicObject* go = new GraphicObject(type, rinfo,name,id);
@@ -47,7 +48,11 @@ GraphicObject* GraphicManager::createGraphicObject(GraphicObject::Type type, std
 
 void GraphicManager::destroyGraphicObject(GraphicObject* obj)
 {
-	delete obj;
+	if (obj != 0)
+	{
+		DEBUG5("removing object %s",obj->getName().c_str());
+		delete obj;
+	}
 }
 
 Ogre::MovableObject* GraphicManager::createMovableObject(MovableObjectInfo& info, std::string name)
@@ -142,7 +147,7 @@ void GraphicManager::loadRenderInfo(TiXmlNode* node, GraphicRenderInfo* info)
 			
 			attr.parseElement(child->ToElement());
 			
-			if ((!strcmp(child->Value(), "Entity")) || (!strcmp(child->Value(), "ParticleSystem")) || (!strcmp(child->Value(), "BillboardSet")) || (!strcmp(child->Value(), "BillboardChain")) || (!strcmp(child->Value(), "Subobject")))
+			if ((!strcmp(child->Value(), "Entity")) || (!strcmp(child->Value(), "ParticleSystem")) || (!strcmp(child->Value(), "BillboardSet")) || (!strcmp(child->Value(), "BillboardChain")) || (!strcmp(child->Value(), "Subobject")) || (!strcmp(child->Value(), "Soundobject")))
 			{
 				MovableObjectInfo minfo;
 				loadMovableObjectInfo(child,&minfo);
@@ -226,7 +231,7 @@ void GraphicManager::loadActionRenderInfo(TiXmlNode* node, ActionRenderInfo* ain
 						
 		attr.parseElement(child->ToElement());
 						
-		if ((!strcmp(child->Value(), "Entity")) || (!strcmp(child->Value(), "ParticleSystem")) || (!strcmp(child->Value(), "BillboardSet")) || (!strcmp(child->Value(), "BillboardChain")) || (!strcmp(child->Value(), "Subobject")) )
+		if ((!strcmp(child->Value(), "Entity")) || (!strcmp(child->Value(), "ParticleSystem")) || (!strcmp(child->Value(), "BillboardSet")) || (!strcmp(child->Value(), "BillboardChain")) || (!strcmp(child->Value(), "Subobject")) ||  (!strcmp(child->Value(), "Soundobject")) )
 		{
 			MovableObjectInfo minfo;
 			loadMovableObjectInfo(child,&minfo);
@@ -255,6 +260,10 @@ void GraphicManager::loadActionRenderInfo(TiXmlNode* node, ActionRenderInfo* ain
 		else if (!strcmp(child->Value(), "Detach"))
 		{
 			arpart.m_type = ActionRenderpart::DETACH;
+		}
+		else if (!strcmp(child->Value(), "Sound"))
+		{
+			arpart.m_type = ActionRenderpart::SOUND;
 		}
 						
 		if (arpart.m_type != ActionRenderpart::NONE)
@@ -323,6 +332,10 @@ void GraphicManager::loadMovableObjectInfo(TiXmlNode* node, MovableObjectInfo* i
 	else if (!strcmp(node->Value(), "Subobject"))
 	{
 		info->m_type = MovableObjectInfo::SUBOBJECT;
+	}
+	else if (!strcmp(node->Value(), "Soundobject"))
+	{
+		info->m_type = MovableObjectInfo::SOUNDOBJECT;
 	}
 	
 	attr.getString("objectname",info->m_objectname,"mainmesh");

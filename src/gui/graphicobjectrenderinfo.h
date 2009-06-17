@@ -19,6 +19,8 @@ struct ActionRenderpart
 		MOVEMENT = 3,
 		SCALE = 4,
 		DETACH = 10,
+  
+		SOUND = 20,
 	};
 
 
@@ -59,6 +61,8 @@ struct MovableObjectInfo
 		BILLBOARD_CHAIN = 4,
 
 		SUBOBJECT = 10,
+  
+		SOUNDOBJECT = 20,
 	};
 
 	Type m_type;
@@ -133,6 +137,8 @@ class GraphicRenderInfo
 		ActionRenderInfo* getInheritedActionRenderInfo(std::string action);
 
 		ActionRenderInfo* getOwnActionRenderInfo(std::string action);
+		
+		GraphicRenderInfo* getParentInfo();
 
 	private:
 		/**

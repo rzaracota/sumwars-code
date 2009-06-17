@@ -1,4 +1,5 @@
 <RenderInfo name="playerbase" parent="creaturebase">
+	<Soundobject objectname="actionsound" />
 	
 	<Action name="noaction">
 		<Animation name="idle" />
@@ -24,6 +25,7 @@
 	</Action>
 	<Action name="attack#OneHand">
 		<Animation name="attack" />
+		<Sound objectname="actionsound" name="sword_attack" start="0.5"/>
 	</Action>
 	<Action name="attack#TwoHands">
 		<Animation name="attackTwoHands" />
@@ -310,6 +312,7 @@
 
 <RenderInfo name="archer_f" parent="playerbase" >
 	<Entity source="archer_f.mesh"/>
+
 </RenderInfo>
 
 <RenderInfo name="priest_f" parent="playerbase" >

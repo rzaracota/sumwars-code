@@ -204,9 +204,13 @@ std::pair<float,float> Scene::getProjection(Vector pos, float height)
 }
 
 
-GraphicObject* Scene::createGraphicObject(GameObject* gobj)
+GraphicObject* Scene::createGraphicObject(GameObject* gobj, std::string name)
 {
 	// Typ des GraphicObjekts ermitteln
+	if (name=="")
+	{
+		name = gobj->getNameId();
+	}
 	std::string otype;
 	Player* pl = dynamic_cast<Player*>(gobj);
 	GraphicObject::Type type;
@@ -230,7 +234,7 @@ GraphicObject* Scene::createGraphicObject(GameObject* gobj)
 	else
 	{
 		DEBUG5("create graphic Object typ %s for %s",type.c_str(), otype.c_str());
-		return GraphicManager::createGraphicObject(type,gobj->getNameId(), gobj->getId());
+		return GraphicManager::createGraphicObject(type,name, gobj->getId());
 	}
 }
 
@@ -297,6 +301,8 @@ void Scene::update(float ms)
 	m_camera->lookAt(Ogre::Vector3(pos.m_x*50,70,pos.m_y*50));
 	DEBUG5("cam position %f %f %f",pos.m_x*50 + r*cos(theta)*cos(phi), r*sin(theta), pos.m_y*50 - r*cos(theta)*sin(phi));
 
+	SoundSystem::setListenerPosition(pos);
+	
 	Ogre::Light* light= m_scene_manager->getLight("HeroLight");
 	light->setPosition(Ogre::Vector3(pos.m_x*50,300,pos.m_y*50));
 
@@ -596,7 +602,6 @@ void Scene::putBackParticleSystem(Ogre::ParticleSystem* part)
 
 void Scene::updateCharacterView()
 {
-	
 	bool update = false;
 	
 	Ogre::SceneManager* scene_mgr = Ogre::Root::getSingleton().getSceneManager("CharacterSceneManager");
@@ -606,6 +611,7 @@ void Scene::updateCharacterView()
 
 	if ((pl ==0 && m_temp_player!=""))
 	{
+		DEBUG("deleting inv player");
 		m_temp_player="";
 		GraphicManager::destroyGraphicObject(m_temp_player_object);
 		m_temp_player_object =0;
@@ -616,6 +622,7 @@ void Scene::updateCharacterView()
 	{
 		if ((pl->getNameId() != m_temp_player))
 		{
+			DEBUG("updating inv player %s to %s",m_temp_player.c_str(), pl->getNameId().c_str());
 			GraphicManager::destroyGraphicObject(m_temp_player_object);
 			m_temp_player_object =0;
 			update = true;
@@ -625,7 +632,7 @@ void Scene::updateCharacterView()
 		if (m_temp_player_object ==0)
 		{
 			update = true;
-			m_temp_player_object = createGraphicObject(pl);
+			m_temp_player_object = createGraphicObject(pl,"tempplayer");
 		}
 		
 		update |= updatePlayerGraphicObject(m_temp_player_object,pl);
@@ -784,8 +791,6 @@ void Scene::createScene()
 
 
 	}
-
-	m_temp_player="";
 
 }
 

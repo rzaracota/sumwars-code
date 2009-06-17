@@ -10,6 +10,7 @@
 #include <string>
 #include "gameobject.h"
 #include "graphicobjectrenderinfo.h"
+#include "sound.h"
 
 class GraphicObject;
 
@@ -101,7 +102,14 @@ class GraphicObject
 		
 		void setQueryMask(unsigned int mask);
 		
+		std::string getName()
+		{
+			return m_name;
+		}
+		
 	private:
+		void addObjectsFromRenderInfo(GraphicRenderInfo* info);
+		
 		void addMovableObject(MovableObjectInfo& object);
 		
 		void removeMovableObject(std::string name);
@@ -139,6 +147,12 @@ class GraphicObject
 		 * \brief UnterObjekte des aktuellen GraphicsObjekts
 		 */
 		std::map<std::string, AttachedGraphicObject > m_subobjects;
+		
+		/**
+		 * \var std::map<std::string, SoundObject* > m_soundobjects
+		 * \brief Soundobjekte des aktuellen GraphicsObjekts
+		 */
+		std::map<std::string, SoundObject* > m_soundobjects;
 		
 		/**
 		 * \var std::map<std::string, std::list<std::string> > m_dependencies

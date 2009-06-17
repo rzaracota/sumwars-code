@@ -122,11 +122,12 @@ class Scene
 	private:
 
 	/**
-	 * \fn GraphicObject* createGraphicObject(GameObject* gobj)
+	 * \fn GraphicObject* createGraphicObject(GameObject* gobj, std::string name="")
 	 * \brief erzeugt zu einem Spielobjekt das passende Graphicobjekt
 	 * \param gobj Spielobjekt
+	 * \param name Name (wenn leer, wird ein Name generiert)
 	 */
-	GraphicObject* createGraphicObject(GameObject* gobj);
+	GraphicObject* createGraphicObject(GameObject* gobj, std::string name="");
 	
 	/**
 	 * \fn void updateGraphicObject(GraphicObject* obj, GameObject* gobj)
