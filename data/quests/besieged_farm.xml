@@ -210,23 +210,23 @@
 		
 		<Topic name="help_peasant">
 			<Effect>
-				if (getPlayers[2] == nil) then
+				if (getPlayers()[2] == nil) then
 					speak("WAR",_("Only a stone would watch deedlessly!"),1500);
 				else
 					speak("WAR",_("Only a stone would watch deedlessly! Let's help."),1600);
 				end;
 				speak("ANYplus",_("And there's money in it. Two birds with one stone."),1600);
-				if (getPlayers[2] == nil) then
+				if (getPlayers()[2] == nil) then
 					speak("PL",_("It's decided. I take the job."),1500);
 				else
 					speak("PL",_("It's decided then. We take the job."),1500);
 				end;
-				if (getPlayers[2] == nil) then
+				if (getPlayers()[2] == nil) then
 					speak("SW",_("What do you think you are doing there? You are ordered to go to dwarfenfroward!"),2300);
 				else
 					speak("SW",_("What do you think you are doing there? You are ordered to go to dwarfenfroward!"),2300);
 				end;
-				if (getPlayers[2] == nil) then
+				if (getPlayers()[2] == nil) then
 					speak("PL",_("When I arrive there was never part of the agreement."),1700);
 					speak("PL",_("If the city has fallen I will simply conquer it back."),1700);
 				else
@@ -234,7 +234,7 @@
 					speak("PL",_("If the city has fallen we will simply conquer it back."),1700);
 					speak("MAGast",_("Yes, give him a good dressing down."),1500);
 				end;
-				if (getPlayers[2] == nil) then
+				if (getPlayers()[2] == nil) then
 					speak("PL",_("Prince, I take the job!"),1200);
 				else
 					speak("PL",_("Prince, we take the job!"),1200);
@@ -242,7 +242,7 @@
 				
 				jumpTopic("insertion2");
 				
-				if (getPlayers[2] == nil) then
+				if (getPlayers()[2] == nil) then
 					speak("PC",_("Aren't you a Branded One?"),1300);
 				else
 					speak("PC",_("Aren't you Branded Ones?"),1300);
@@ -253,7 +253,7 @@
 				speak("PL",_("Is that a problem?"),1000);
 				speak("PC",_("... probably not. Very well, even if I don't like it."),1600);
 				speak("LvR",_("Are you sure? What if they kill the peasents along with the vermin?"),1800);
-				if (getPlayers[2] == nil) then
+				if (getPlayers()[2] == nil) then
 					speak("PC",_("Seargent! Hand over the money only if the goblins are driven away"),1800);
 					speak("PC",_("and the peasents are alive in the end."),1500);
 				else
@@ -292,6 +292,7 @@
 			<Effect>
 				besieged_farm.scene3 = true;
 				setCutsceneMode(false);
+				addUnitCommand(sergeant_lutterer,"walk",3000,"locSergeantHome");
 			</Effect>
 		</Topic>
 	</NPC>
@@ -337,7 +338,7 @@
 	<Region name="joringsbridge">
 		<Event trigger="player_moved" once="true">
 			<Condition>
-				if (scene2.scene2 == true and besieged_farm.scene3 ~= true) then
+				if (fortify_dwarfenfroward.scene1 == true and besieged_farm.scene3 ~= true) then
 					return (unitIsInArea(trigger.player,"PrinceArea"));
 				else
 					return false;

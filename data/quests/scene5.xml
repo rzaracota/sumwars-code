@@ -1,0 +1,191 @@
+<Quest name="Findet den Weg auf dem die Untoten die Stadt umgehen" table_name="scene5">
+	
+	<Init>
+		local a = 2
+	</Init>
+	
+	<Description>
+		if (scene5.finished) then
+			return _("Quest finished")
+		else
+			return _("Quest description")
+		end
+	</Description>
+	
+	<NPC refname="Soren Windclaw">
+		<Topic name="insertion_guard_dies">
+			<Effect>
+				unitSpeak("W1",_("*hurgs*"),1000);
+				setObjectValue(scene5_tmp.guard1,"health",0);
+			</Effect>
+		</Topic>
+		
+		<Topic name="scene5_dialogue1">
+			<Effect>
+				addCameraPosition(0,get(getRole("PL"),"position"),20,40,20);
+				addCameraPosition(20000,get(getRole("PL"),"position"),220,60,30);
+
+				-- Die Party erreicht den Ort des Geschehens. Die Kutsche der Erzmaga
+				-- ist verunglueckt, mehrere Skelettbogenschuetzen beschießen sie mit
+				-- Feuerpfeilen und die Wachen sind allesamt verwundet.
+
+				speak("MALEast",_("Sie ist ja bildschoen!"),1000);
+				speak("PL",_("Du kannst sie spaeter noch anstarren,"),1000);
+				speak("HW",_("Bitte helft uns, die Maga"),1000);
+				
+				-- W1 (Wird toedlich getroffen): *hurgs*
+				jumpTopic("insertion_guard_dies");
+
+				speak("WARast",_("He He, Erntezeit."),1000);
+
+				-- Sie kaempfen. Die Untoten warten mit einer etwas unschoenen
+				-- ueberraschung auf (starkes Monster) werden aber sicherlich bald
+				-- besiegt ;-)
+
+				changeTopic("end_cutscene5_fight");
+			</Effect>
+		</Topic>
+		
+		<Topic name="end_cutscene5_fight">
+			<Effect>
+				setCutsceneMode(false);
+				scene5_tmp.skeletons = createMonsterGroup("lich_skeletons","entry_south");
+			</Effect>
+		</Topic>
+		
+		<Topic name="scene5_dialogue2">
+			<Effect>
+				addCameraPosition(0,get(getRole("PL"),"position"),20,40,20);
+				addCameraPosition(20000,get(getRole("PL"),"position"),220,60,30);
+
+				speak("HW",_("Ich habe noch nie jemanden"),1000);
+				speak("MAGast",_("Ihr kommt wohl nicht allzuviel"),1000);
+				speak("PL",_("Wie geht es der Erzmaga?"),1000);
+				speak("HW",_("Sehr schlecht fuerchte ich."),1000);
+				speak("PL",_("Lasst mich mal sehen"),1000);
+
+				-- PL heilt sie
+				-- Wenn es keinen Priester in der Gruppe gibt, springt der MAG
+				-- mit einem Trank ein, ansonsten der PL
+
+				speak("IvN",_("Ich danke euch, das war Rettung"),1000);
+				speak("PL",_("Wie konnte es eigentlich soweit kommen?"),1000);
+				speak("WARast",_("Jetzt mach mal Halblang!"),1000);
+				speak("IvN",_("Nein Nein, es stimmt schon."),1000);
+				speak("HW",_("Diese Untoten haben uns hier"),1000);
+				speak("ARC",_("ueberraschung! Kein Wunder, das ist ja"),1000);
+				speak("HW",_("Nein, Zwergentrutz ist noch nicht gefallen,"),1000);
+				speak("IvN",_("Das duerfen wir nicht zulassen,"),1000);
+				speak("SW",_("Es war aeußerst unvorsichtig von euch mit"),1000);
+				speak("IvN",_("Die Stadt braucht jeden Mann, den sie kriegen kann!"),1000);
+				speak("PL",_("Ich hab so eine Ahnung"),1000);
+				speak("SW",_("Hoert zu Gezeichnete!"),1000);
+				speak("HW",_("Was?! Das sind Gezeichnete!?!"),1000);
+				speak("IvN",_("Lasst nur, diese sind auf unserer Seite."),1000);
+				speak("SW",_("Findet den Weg,"),1000);
+				speak("IvN",_("Willst du ihnen nicht Verstaerkung"),1000);
+				speak("SW",_("Ich kann machen was ich will!"),1000);
+				speak("PL",_("Natuerlich..."),1000);
+				speak("MAG",_("Langsam geht er mir auf den Senkel..."),1000);
+				speak("WAR",_("Jetzt erst?"),1000);
+				speak("MAGast",_("Magier muessen von Natur"),1000);
+				speak("IvN",_("Ich bin sicher, dass die Untoten"),1000);
+				speak("HW",_("Ich weiß von einem Hoehlensystem"),1000);
+				speak("ARCast",_("Soll uns das schrecken?"),1000);
+				speak("HW",_("... wahrscheinlich nicht."),1000);
+				speak("PL",_("Danke fuer eure Hilfe"),1000);
+				speak("IvN",_("Viel Glueck! Ich hoffe wir"),1000);
+
+				-- Hauptquest: Findet den Weg, auf dem die Untoten die Stadt umgehen
+				
+				changeTopic("end_cutscene5");
+			</Effect>
+		</Topic>
+		
+		<Topic name="end_cutscene5">
+			<Effect>
+				scene5.scene5 = true;
+				scene5.started = true;
+				setCutsceneMode(false);
+			</Effect>
+		</Topic>
+	</NPC>
+	
+	
+	<Region name="aisMounpath">
+		<Event trigger="create_region" once="true">
+			<Effect>
+				addArea("aisMounpathEntryEastArea","circle","entry_east",5);
+			</Effect>
+		</Event>
+		
+		<Event trigger="player_moved" once="true">
+			<Condition>
+				if (scene4.scene4 == true and scene5.scene5 ~= true) then
+					return (unitIsInArea(trigger.player,"aisMounpathEntryEastArea"));
+				else
+					return false;
+				end;
+			</Condition>
+			<Effect>
+				scene5_tmp.guard1 = createObject("peasant", "entry_east");
+				setRefName(scene5_tmp.guard1, "Guard");
+				
+				scene5_tmp.guard2 = createObject("peasant", "entry_east");
+				setRefName(scene5_tmp.guard2, "Guard");
+				setObjectValue(scene5_tmp.guard2,"max_health",10000);
+				setObjectValue(scene5_tmp.guard2,"health",10000);
+				
+				scene5_tmp.erzmaga_ireana = createObject("peasant", "entry_east");
+				setRefName(scene5_tmp.erzmaga_ireana, "Erzmaga Ireana von Nordenburg");
+				setObjectValue(scene5_tmp.erzmaga_ireana,"max_health",10000);
+				setObjectValue(scene5_tmp.erzmaga_ireana,"health",10000);
+				
+				scene5_tmp.hauptmann_der_wache = createObject("peasant", "entry_east");
+				setRefName(scene5_tmp.hauptmann_der_wache, "Hauptmann der Wache");
+				setObjectValue(scene5_tmp.hauptmann_der_wache,"max_health",10000);
+				setObjectValue(scene5_tmp.hauptmann_der_wache,"health",10000);
+				
+				scene5_tmp.elementaristenwaechter = createObject("peasant", "entry_east");
+				setRefName(scene5_tmp.elementaristenwaechter, "Elementaristenwaechter");
+				setObjectValue(scene5_tmp.elementaristenwaechter,"max_health",10000);
+				setObjectValue(scene5_tmp.elementaristenwaechter,"health",10000);
+				
+				createDialogue();
+				addSpeaker(scene5_tmp.guard1,"W1");
+				addSpeaker(scene5_tmp.erzmaga_ireana,"IvN");
+				addSpeaker(scene5_tmp.hauptmann_der_wache,"HW");
+				addSpeaker(scene5_tmp.elementaristenwaechter,"EW");
+				addSpeaker(trigger.player,"Player");
+				addStandardSpeakers("aisMounpath","entry_east");
+				setCutsceneMode(true);
+				setTopicBase("Soren Windclaw");
+				changeTopic("scene5_dialogue1");
+			</Effect>
+		</Event>
+		
+		<Event trigger ="unit_die">
+			<Condition>
+				if (trigger.unit == scene5_tmp.skeletons) then
+					return true;
+				else
+					return false;
+				end;
+			</Condition>
+			<Effect>
+				createDialogue();
+				addSpeaker(scene5_tmp.guard1,"W1");
+				addSpeaker(scene5_tmp.erzmaga_ireana,"IvN");
+				addSpeaker(scene5_tmp.hauptmann_der_wache,"HW");
+				addSpeaker(scene5_tmp.elementaristenwaechter,"EW");
+				addSpeaker(trigger.player,"Player");
+				addStandardSpeakers("aisMounpath","entry_east");
+				setCutsceneMode(true);
+				setTopicBase("Soren Windclaw");
+				changeTopic("scene5_dialogue2");
+			</Effect>
+		</Event>
+	</Region>
+	
+</Quest>
+
