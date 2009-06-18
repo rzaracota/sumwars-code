@@ -49,7 +49,7 @@
 		<Topic name="end_cutscene5_fight">
 			<Effect>
 				setCutsceneMode(false);
-				scene5_tmp.skeletons = createMonsterGroup("lich_skeletons","entry_south");
+				scene5_tmp.skeletons = createMonsterGroup("lich_skeletons","entry_west");
 			</Effect>
 		</Topic>
 		
@@ -112,17 +112,17 @@
 	</NPC>
 	
 	
-	<Region name="aisMounpath">
+	<Region name="aisMounPath">
 		<Event trigger="create_region" once="true">
 			<Effect>
-				addArea("aisMounpathEntryEastArea","circle","entry_east",5);
+				addArea("aisMounPathEntryEastArea","circle","entry_east",8);
 			</Effect>
 		</Event>
 		
 		<Event trigger="player_moved" once="true">
 			<Condition>
 				if (scene4.scene4 == true and scene5.scene5 ~= true) then
-					return (unitIsInArea(trigger.player,"aisMounpathEntryEastArea"));
+					return (unitIsInArea(trigger.player,"aisMounPathEntryEastArea"));
 				else
 					return false;
 				end;
@@ -157,7 +157,7 @@
 				addSpeaker(scene5_tmp.hauptmann_der_wache,"HW");
 				addSpeaker(scene5_tmp.elementaristenwaechter,"EW");
 				addSpeaker(trigger.player,"Player");
-				addStandardSpeakers("aisMounpath","entry_east");
+				addStandardSpeakers("aisMounPath","entry_east");
 				setCutsceneMode(true);
 				setTopicBase("Soren Windclaw");
 				changeTopic("scene5_dialogue1");
@@ -179,7 +179,7 @@
 				addSpeaker(scene5_tmp.hauptmann_der_wache,"HW");
 				addSpeaker(scene5_tmp.elementaristenwaechter,"EW");
 				addSpeaker(trigger.player,"Player");
-				addStandardSpeakers("aisMounpath","entry_east");
+				addStandardSpeakers("aisMounPath","entry_east");
 				setCutsceneMode(true);
 				setTopicBase("Soren Windclaw");
 				changeTopic("scene5_dialogue2");

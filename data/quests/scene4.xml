@@ -35,12 +35,12 @@
 
 				-- Am Nordausgang der Wolfssteine sollte jetzt ein Event aktiv sein, dass den Spielern das Betreten von Zwergentrutz verbietet.
 				
-				jumpTopic("remove_soren");
+				jumpTopic("scene4_remove_soren");
 				changeTopic("end_cutscene4");
 			</Effect>
 		</Topic>
 		
-		<Topic name="remove_soren">
+		<Topic name="scene4_remove_soren">
 			<Effect>
 				deleteObject(scene4_tmp.soren_windclaw_crystal);
 			</Effect>

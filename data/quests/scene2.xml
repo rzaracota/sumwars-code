@@ -47,7 +47,7 @@
 				-- (beginnt den Kristall zu verzaubern)
 
 				speak("SW",_("Don't you dare to, or"),1000);
-				jumpTopic("remove_soren");
+				jumpTopic("scene2_remove_soren");
 				if (getRole("MAG") ~= nil) then
 					speak("MAG",_("Well, it's done."),1000);
 				elseif (getRole("PRI") ~= nil) then
@@ -95,7 +95,7 @@
 			</Effect>
 		</Topic>
 		
-		<Topic name="remove_soren">
+		<Topic name="scene2_remove_soren">
 			<Effect>
 				deleteObject(scene2_tmp.soren_windclaw_crystal);
 			</Effect>
