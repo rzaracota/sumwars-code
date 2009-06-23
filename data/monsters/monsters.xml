@@ -420,7 +420,7 @@ AIR
 <!-- Goblin Dog -->
 <!-- L4 -->
 <Monster type="MONSTER" subtype="gob_dog" name="goblin dog" fraction="MONSTER" category="ANIMAL" layer="NORMAL">
-	<Mesh file="goblin_dog" />
+	<Mesh file="gobDog" />
 	<Dropslots >
 		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" max_gold="70" min_level="0" max_level="5" magic_prob="0.1" magic_power="250" />
 		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" max_gold="50" min_level="0" max_level="3" magic_prob="0.2" magic_power="250" />

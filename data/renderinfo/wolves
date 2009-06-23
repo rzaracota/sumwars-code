@@ -1,0 +1,17 @@
+﻿RenderInfo name="wolfbase" parent="creaturebase">
+	<Action name="walk">
+		<Animation name="walk" />
+	</Action>
+	
+	<Action name="attack">
+		<Animation name="attack1" />
+	</Action>
+
+	<Action name="die">
+		<Animation name="die" />
+	</Action>
+</RenderInfo>
+
+<RenderInfo name="gobDog" parent="wolfbase">
+	<Entity source="gobDog.mesh"/>
+</RenderInfo>
