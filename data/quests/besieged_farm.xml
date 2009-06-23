@@ -293,6 +293,8 @@
 				besieged_farm.scene3 = true;
 				setCutsceneMode(false);
 				addUnitCommand(sergeant_lutterer,"walk",3000,"locSergeantHome");
+				addUnitCommand(prince_charming,"walk",3000,"entry_west");
+				addUnitCommand(leonard_von_robenforst,"walk",3000,"entry_west");
 			</Effect>
 		</Topic>
 	</NPC>
@@ -336,6 +338,12 @@
 	</Region>
 	
 	<Region name="joringsbridge">
+		<Event trigger="create_region" once="true">
+			<Effect>
+				addArea("JoringsbridgeEntryWestArea","circle","entry_west",8);
+			</Effect>
+		</Event>
+		
 		<Event trigger="player_moved" once="true">
 			<Condition>
 				if (fortify_dwarfenfroward.scene1 == true and besieged_farm.scene3 ~= true) then
@@ -361,6 +369,16 @@
 				setCutsceneMode(true);
 				setTopicBase("Prince Charming");
 				changeTopic("scene3_dialogue");
+			</Effect>
+		</Event>
+		
+		<Event trigger="unit_moved" once="true">
+			<Condition>
+				return (unitIsInArea(prince_charming,"JoringsbridgeEntryWestArea"));
+			</Condition>
+			<Effect>
+				deleteObject(prince_charming);
+				deleteObject(leonard_von_robenforst);
 			</Effect>
 		</Event>
 	</Region>

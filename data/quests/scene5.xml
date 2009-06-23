@@ -136,6 +136,11 @@
 				setObjectValue(scene5_tmp.guard2,"max_health",10000);
 				setObjectValue(scene5_tmp.guard2,"health",10000);
 				
+				scene5_tmp.soren_windclaw_crystal = createObject("peasant", "entry_east");
+				setRefName(scene5_tmp.soren_windclaw_crystal, "Soren Windclaw");
+				setObjectValue(scene5_tmp.soren_windclaw_crystal,"max_health",10000);
+				setObjectValue(scene5_tmp.soren_windclaw_crystal,"health",10000);
+				
 				scene5_tmp.erzmaga_ireana = createObject("peasant", "entry_east");
 				setRefName(scene5_tmp.erzmaga_ireana, "Erzmaga Ireana von Nordenburg");
 				setObjectValue(scene5_tmp.erzmaga_ireana,"max_health",10000);
@@ -153,6 +158,7 @@
 				
 				createDialogue();
 				addSpeaker(scene5_tmp.guard1,"W1");
+				addSpeaker(scene5_tmp.soren_windclaw_crystal,"SW");
 				addSpeaker(scene5_tmp.erzmaga_ireana,"IvN");
 				addSpeaker(scene5_tmp.hauptmann_der_wache,"HW");
 				addSpeaker(scene5_tmp.elementaristenwaechter,"EW");
@@ -175,6 +181,7 @@
 			<Effect>
 				createDialogue();
 				addSpeaker(scene5_tmp.guard1,"W1");
+				addSpeaker(scene5_tmp.soren_windclaw_crystal,"SW");
 				addSpeaker(scene5_tmp.erzmaga_ireana,"IvN");
 				addSpeaker(scene5_tmp.hauptmann_der_wache,"HW");
 				addSpeaker(scene5_tmp.elementaristenwaechter,"EW");
