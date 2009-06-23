@@ -950,7 +950,7 @@ int Region::createObject(ObjectTemplateType generictype, Vector pos, float angle
 	bool ret = insertObject(object,pos,angle,collision_test);
 	if (!ret)
 	{
-		DEBUG("insertion failed");
+		DEBUG("insertion of object %s failed",object->getName().c_str());
 	}
 
 	return object->getId();

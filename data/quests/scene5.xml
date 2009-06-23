@@ -49,7 +49,7 @@
 		<Topic name="end_cutscene5_fight">
 			<Effect>
 				setCutsceneMode(false);
-				scene5_tmp.skeletons = createMonsterGroup("lich_skeletons","entry_west");
+				scene5_tmp.skeletons = createObject("sword_skel","entry_east");
 			</Effect>
 		</Topic>
 		
