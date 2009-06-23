@@ -52,6 +52,8 @@
 <!-- Orte: Soren Windclaw -->
 	<Region id="2" name="elCnlLobby">
 		<Settings dimx="75" dimy="75" region_template="councilhall" ground="council_ground"/>
+		
+		
 		<ExitDirections north="true" south="false" west="false" east="false" />
 		<Exits>
 			<Exit name="exit_north" destination_region="medBackalley" destination_location="entry_south" >
@@ -101,6 +103,10 @@
 <!-- Medair, Soeldnerlager [Stadt]-->
 <!-- Orte: Fenor Marken -->
 	<Region id="3" name="medMercCamp">
+		<AmbientLight red="0.4" green="0.4" blue="0.4" />
+		 <HeroLight red="1.0" green="1.0" blue="1.0" /> 
+		<DirectionalLight red="0.3" green="0.3" blue="0.3" />
+		
 		<Settings dimx="20" dimy="20" region_template="medairMercenaryCamp"  ground="grass1"/>
 		
 		<Waypoint world_x="0.5" world_y ="0.9" />
@@ -539,6 +545,10 @@
 	<Region id="21" name="grayCurseCave">
 		<Settings dimx="12" dimy="12" area_percent="0.4" complexity="0.3" granularity="6"  ground="cave_ground"/>
 		
+		<AmbientLight red="0.0" green="0.0" blue="0.0" />
+		<HeroLight red="1.0" green="1.0" blue="1.0" /> 
+		<DirectionalLight red="0.0" green="0.0" blue="0.0" />
+		
 		<ExitDirections north="true" south="true" west="true" east="false" />
 		
 		<Exits>
@@ -562,6 +572,10 @@
 <!-- Graue Himmelsleiter, Verfluchte Grotte; [Hoehle]; ca. 25 Min; Level 17 - 19 -->
 <!-- Goblins, Goblinhunde -->
 	<Region id="22" name="grayCurseGrotto">
+		<AmbientLight red="0.0" green="0.0" blue="0.0" />
+		<HeroLight red="1.0" green="1.0" blue="1.0" /> 
+		<DirectionalLight red="0.0" green="0.0" blue="0.0" />
+		
 		<Settings dimx="12" dimy="12" area_percent="0.4" complexity="0.3" granularity="6"  ground="cave_ground"/>
 		
 		<ExitDirections north="true" south="false" west="true" east="true" />
@@ -586,6 +600,10 @@
 <!-- Graue Himmelsleiter, Wolfshoehle; [Hoehle]; ca. 20 Min; Level 17- 19 -->
 <!-- Goblinhunde, DER Goblinhundemonsterboss -->
 	<Region id="23" name="grayWolfcave">
+		<AmbientLight red="0.0" green="0.0" blue="0.0" />
+		<HeroLight red="1.0" green="1.0" blue="1.0" /> 
+		<DirectionalLight red="0.0" green="0.0" blue="0.0" />
+		
 		<Settings dimx="12" dimy="12" area_percent="0.4" complexity="0.3" granularity="6"  ground="cave_ground"/>
 		
 		<ExitDirections north="false" south="false" west="false" east="true" />
@@ -604,6 +622,10 @@
 <!-- Graue Himmelsleiter, Verfluchte Grotte, Tiefe; ca. 20 Min; Level 17 - 19 -->
 <!-- Goblins -->
 	<Region id="24" name="grayCurseGrotDep">
+		<AmbientLight red="0.0" green="0.0" blue="0.0" />
+		<HeroLight red="1.0" green="1.0" blue="1.0" /> 
+		<DirectionalLight red="0.0" green="0.0" blue="0.0" />
+		
 		<Settings dimx="12" dimy="12" area_percent="0.4" complexity="0.3" granularity="6"  ground="cave_ground"/>
 		
 		<ExitDirections north="false" south="true" west="false" east="false" />
@@ -624,6 +646,10 @@
 <!-- Ort: Der Spalt (Wo der Lich mit seinen Skeletten graebt, ein Template)-->
 <!-- Beide Ausgaenge muessen verschlie�bar sein. Der Suedausgang wird verschlossen, der Westausgang geoeffnet -->
 	<Region id="25" name="grayCurseCaveDep">
+		<AmbientLight red="0.0" green="0.0" blue="0.0" />
+		<HeroLight red="1.0" green="1.0" blue="1.0" /> 
+		<DirectionalLight red="0.0" green="0.0" blue="0.0" />
+		
 		<Settings dimx="12" dimy="12" area_percent="0.4" complexity="0.3" granularity="6"  ground="cave_ground"/>
 		
 		<ExitDirections north="false" south="true" west="false" east="true" />
@@ -645,6 +671,10 @@
 <!-- Graue Himmelsleiter, Verfluchte Hoehle, Osten -->
 <!-- Untote -->
 	<Region id="26" name="grayCurseCaveEast">
+		<AmbientLight red="0.0" green="0.0" blue="0.0" />
+		<HeroLight red="1.0" green="1.0" blue="1.0" /> 
+		<DirectionalLight red="0.0" green="0.0" blue="0.0" />
+		
 		<Settings dimx="12" dimy="12" area_percent="0.4" complexity="0.3" granularity="6"  ground="cave_ground"/>
 		
 		<ExitDirections north="false" south="false" west="true" east="true" />
@@ -666,6 +696,10 @@
 <!-- Graue Himmelsleiter, Verfluchter See; Template-->
 <!-- Das Teichmonster-->
 	<Region id="27" name="grayCurseLake">
+		<AmbientLight red="0.0" green="0.0" blue="0.0" />
+		<HeroLight red="1.0" green="1.0" blue="1.0" /> 
+		<DirectionalLight red="0.0" green="0.0" blue="0.0" />
+		
 		<Settings dimx="12" dimy="12" area_percent="0.4" complexity="0.3" granularity="6"  ground="cave_ground"/>
 		
 		<ExitDirections north="false" south="false" west="true" east="true" />

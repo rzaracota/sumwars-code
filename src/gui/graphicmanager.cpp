@@ -68,7 +68,15 @@ Ogre::MovableObject* GraphicManager::createMovableObject(MovableObjectInfo& info
 	if (info.m_type == MovableObjectInfo::ENTITY)
 	{
 		Ogre::Entity* obj_ent;
-		obj_ent = m_scene_manager->createEntity(name, info.m_source);
+		try
+		{
+			obj_ent = m_scene_manager->createEntity(name, info.m_source);
+		}
+		catch (Ogre::Exception& e)
+		{
+			DEBUG("cant load mesh %s", info.m_source.c_str());
+			obj_ent = m_scene_manager->createEntity(name, "dummy_r.mesh");
+		}
 		obj= static_cast<Ogre::MovableObject*>(obj_ent);
 	}
 	else if (info.m_type == MovableObjectInfo::PARTICLE_SYSTEM)

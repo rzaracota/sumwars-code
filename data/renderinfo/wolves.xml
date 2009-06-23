@@ -1,4 +1,4 @@
-﻿RenderInfo name="wolfbase" parent="creaturebase">
+<RenderInfo name="wolfbase" parent="creaturebase">
 	<Action name="walk">
 		<Animation name="walk" />
 	</Action>
