@@ -56,7 +56,7 @@ Region* MapGenerator::createRegion(RegionData* rdata)
 				continue;
 			}
 
-			Vector pos = templ->getShape()->getAxisExtent();
+			Vector pos(rdata->m_dimx*2, rdata->m_dimy*2);
 			mdata.m_region->createObjectGroup(rdata->m_region_template,pos,0);
 			success = true;
 		}
