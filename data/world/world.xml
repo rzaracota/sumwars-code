@@ -644,7 +644,7 @@
 <!-- Graue Himmelsleiter, Verfluchte Hoehle, Tiefe; ca. 30 Min; Level 17 - 20 -->
 <!-- Untote -->
 <!-- Ort: Der Spalt (Wo der Lich mit seinen Skeletten graebt, ein Template)-->
-<!-- Beide Ausgaenge muessen verschlie�bar sein. Der Suedausgang wird verschlossen, der Westausgang geoeffnet -->
+<!-- Beide Ausgaenge muessen verschliessbar sein. Der Suedausgang wird verschlossen, der Westausgang geoeffnet -->
 	<Region id="25" name="grayCurseCaveDep">
 		<AmbientLight red="0.0" green="0.0" blue="0.0" />
 		<HeroLight red="1.0" green="1.0" blue="1.0" /> 
@@ -652,13 +652,37 @@
 		
 		<Settings dimx="12" dimy="12" area_percent="0.4" complexity="0.3" granularity="6"  ground="cave_ground"/>
 		
-		<ExitDirections north="false" south="true" west="false" east="true" />
+		<ExitDirections north="true" south="true" west="false" east="true" />
 		
 		<Exits>
+			<Exit name="exit_north" destination_region="grayCurseCaveFis" destination_location="entry_south" >
+				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
+			</Exit>
 			<Exit name="exit_south" destination_region="grayCurseCave" destination_location="entry_north" >
 				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
 			</Exit>
 			<Exit name="exit_east" destination_region="grayCurseCaveEast" destination_location="entry_west" >
+				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
+			</Exit>
+		</Exits>
+		
+		<Environments>
+			<Environment height="1.0" name="cave" />
+		</Environments>
+	</Region>
+
+<!-- Graue Himmelsleiter, Verfluchte Hoehle, Spalt; Szene 6 -->
+	<Region id="29" name="grayCurseCaveFis">
+		<AmbientLight red="0.0" green="0.0" blue="0.0" />
+		<HeroLight red="1.0" green="1.0" blue="1.0" /> 
+		<DirectionalLight red="0.0" green="0.0" blue="0.0" />
+		
+		<Settings dimx="12" dimy="12" region_template="CursedFissure"  ground="cave_ground"/>
+		
+		<ExitDirections north="false" south="true" west="false" east="false" />
+		
+		<Exits>
+			<Exit name="exit_south" destination_region="grayCurseCaveDep" destination_location="entry_north" >
 				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
 			</Exit>
 		</Exits>

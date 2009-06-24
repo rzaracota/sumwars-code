@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ObjectGroupTemplate name="CursedFissure" version="1.0">
+  <Shape
+    type="RECT"
+    extent_x="15.25862442"
+    extent_y="15.25862442"
+    angle="0"
+  />
+
+  <WayPoint pos_x="8.5" pos_y="1" />
+
+  <ObjectContent>
+    <Object subtype="$border" 
+            center_x="-4" 
+            center_y="9" 
+            angle="0" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="$border" 
+            center_x="5" 
+            center_y="9" 
+            angle="0" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="$border" 
+            center_x="-8.5" 
+            center_y="4.5" 
+            angle="-90" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="$border" 
+            center_x="9.5" 
+            center_y="4.5" 
+            angle="-90" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="$border" 
+            center_x="-13" 
+            center_y="0" 
+            angle="0" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="$border" 
+            center_x="14" 
+            center_y="0" 
+            angle="0" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="$border" 
+            center_x="-13" 
+            center_y="-8" 
+            angle="0" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="$border" 
+            center_x="14" 
+            center_y="-8" 
+            angle="0" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="$border" 
+            center_x="-8.5" 
+            center_y="-12.5" 
+            angle="-90" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="$border" 
+            center_x="-0.5" 
+            center_y="-12.5" 
+            angle="-90" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="$border" 
+            center_x="7.5" 
+            center_y="-12.5" 
+            angle="-90" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="$border_c" 
+            center_x="-4" 
+            center_y="4.5" 
+            angle="-90" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="$border_c" 
+            center_x="-13" 
+            center_y="4.5" 
+            angle="-180" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="$border_c" 
+            center_x="14" 
+            center_y="4.5" 
+            angle="90" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="$border_c" 
+            center_x="14" 
+            center_y="-12.5" 
+            angle="0" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="$border_c" 
+            center_x="-13" 
+            center_y="-12.5" 
+            angle="-180" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="$border_c" 
+            center_x="5" 
+            center_y="4.5" 
+            angle="-180" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="$border_s" 
+            center_x="12.5" 
+            center_y="-12.5" 
+            angle="-90" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="stone1" 
+            center_x="0.1763999266" 
+            center_y="-1.07643109" 
+            angle="22.53433121" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="stone2" 
+            center_x="-2.740206161" 
+            center_y="-0.9601018302" 
+			height="-1.804112415e-016" 
+            angle="0" 
+            probability="1" 
+            prob_angle="false" 
+    />
+  </ObjectContent>
+
+  <Locations>
+    <Location name="entry_south" pos_x="0.5" pos_y="4" />
+    <Location name="exit_south" pos_x="0.5" pos_y="11.5" />
+    <Location name="locLich" pos_x="0.5" pos_y="-5.5" />
+    <Location name="locNecromancer" pos_x="-2" pos_y="-5.5" />
+    <Location name="locParty" pos_x="-1" pos_y="0.5" />
+    <Location name="locSkeleton1" pos_x="-5.5" pos_y="-11.5" />
+    <Location name="locSkeleton2" pos_x="-2.5" pos_y="-11.5" />
+    <Location name="locSkeleton3" pos_x="0.5" pos_y="-11.5" />
+    <Location name="locSkeleton4" pos_x="3" pos_y="-11.5" />
+    <Location name="locSkeleton5" pos_x="5.5" pos_y="-11" />
+    <Location name="locSkeleton6" pos_x="-8" pos_y="-11" />
+  </Locations>
+
+</ObjectGroupTemplate>
