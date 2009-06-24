@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 
 <Monster type="NPC" subtype="peasant" name="peasant" fraction="HUMAN" category="HUMAN" layer="NORMAL">
-	<Mesh file="warrior_m.mesh" />
+	<Mesh file="peasent_m" />
 	<BasicAttributes
 					experience="0"
 					level="1"
@@ -48,7 +48,7 @@
 </Monster>
 
 <Monster type="NPC" subtype="peasant_f" name="peasant" fraction="HUMAN" category="HUMAN" layer="NORMAL">
-	<Mesh file="priest_f.mesh" />
+	<Mesh file="peasent_f" />
 	<Dropslots >
 		<Dropslot pbig="0.1" pmedium="0.2" psmall="0.2" pgold="0.2" max_gold="50" min_level="0" max_level="10" magic_prob="0.1" magic_power="1000" />
 		<Dropslot pbig="0.1" pmedium="0.2" psmall="0.2" pgold="0.2" max_gold="50" min_level="0" max_level="20" magic_prob="0.2" magic_power="1000" />
