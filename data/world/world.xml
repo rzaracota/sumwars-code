@@ -677,7 +677,7 @@
 		<HeroLight red="1.0" green="1.0" blue="1.0" /> 
 		<DirectionalLight red="0.0" green="0.0" blue="0.0" />
 		
-		<Settings dimx="12" dimy="12" region_template="CursedFissure"  ground="cave_ground"/>
+		<Settings dimx="12" dimy="12" region_template="cursedFissure"  ground="cave_ground"/>
 		
 		<ExitDirections north="false" south="true" west="false" east="false" />
 		
