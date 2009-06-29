@@ -215,9 +215,11 @@ void GraphicObject::addMovableObject(MovableObjectInfo& object)
 	}
 	else if (object.m_type == MovableObjectInfo::SOUNDOBJECT)
 	{
-		std::string name = m_name;
-		name += ":";
-		name += object.m_objectname;
+		static int counter;
+		std::stringstream sname;
+		sname << m_name << ":" << counter << ":"<<object.m_objectname;
+		std::string name = sname.str();
+		counter++;
 		
 		if (m_soundobjects.count(object.m_objectname) >0)
 		{
