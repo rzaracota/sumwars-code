@@ -183,7 +183,6 @@
 		<SpawnGroups>
 			<SpawnGroup group_name="goblins_l1" number="18" />
 			<SpawnGroup group_name="goblins_bow_l1" number="12" />
-			<SpawnGroup group_name="wild_dogs" number="12"/>
 		</SpawnGroups>
 	</Region>
 
@@ -222,7 +221,7 @@
 		<SpawnGroups>
 			<SpawnGroup group_name="goblins_bow_l3" number="16" />
 			<SpawnGroup group_name="goblins_robber_l3" number="12" />
-			<SpawnGroup group_name="goblin_bone" number="3" />
+			<SpawnGroup group_name="wild_dogs" number="4"/>
 		</SpawnGroups>
 	</Region>
 	
@@ -246,7 +245,7 @@
 		</Exits>
 		
 		<Environments>
-			<Environment height="1.0" name="meadow" />
+			<Environment height="1.0" name="cave" />
 		</Environments>
 		
 		<!-- in der Naehe des Eingangs -->
@@ -270,7 +269,7 @@
 		</Exits>
 		
 		<Environments>
-			<Environment height="1.0" name="meadow" />
+			<Environment height="1.0" name="cave" />
 		</Environments>
 		
 		<NamedObjectGroups>
@@ -303,8 +302,9 @@
 		</ObjectGroups>
 		
 		<SpawnGroups>
-			<SpawnGroup group_name="bloodbeaks" number="18" />
-			<SpawnGroup group_name="goblins_robber_l3" number="12" />
+			<SpawnGroup group_name="bloodbeaks" number="12" />
+			<SpawnGroup group_name="goblins_robber_l3" number="12" />			
+			<SpawnGroup group_name="goblin_bone" number="3" />
 		</SpawnGroups>
 	</Region>
 	
@@ -646,7 +646,6 @@
 	
 <!-- Graue Himmelsleiter, Verfluchte Hoehle, Tiefe; ca. 30 Min; Level 17 - 20 -->
 <!-- Untote -->
-<!-- Ort: Der Spalt (Wo der Lich mit seinen Skeletten graebt, ein Template)-->
 <!-- Beide Ausgaenge muessen verschliessbar sein. Der Suedausgang wird verschlossen, der Westausgang geoeffnet -->
 	<Region id="25" name="grayCurseCaveDep">
 		<AmbientLight red="0.0" green="0.0" blue="0.0" />
@@ -683,6 +682,8 @@
 		<Settings dimx="12" dimy="12" region_template="cursedFissure"  ground="cave_ground"/>
 		
 		<ExitDirections north="false" south="true" west="false" east="false" />
+		
+		<ReviveLocation  location="locParty" />
 		
 		<Exits>
 			<Exit name="exit_south" destination_region="grayCurseCaveDep" destination_location="entry_north" >
@@ -778,6 +779,9 @@
 		
 		<ExitDirections north="true" south="true" west="true" east="false" />
 		
+		<Waypoint world_x="0.7" world_y ="0.4" />
+		<ReviveLocation  location="WaypointLoc" />
+		
 		<Exits>
 			<Exit name="exit_south" destination_region="aisWolfstones" destination_location="entry_north" >
 				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
@@ -791,6 +795,9 @@
 			<Exit name="exit_rampart" destination_region="dwarfenfrowardRampart" destination_location="entry_south" >
 				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
 			</Exit>
+			<Exit name="exit_command" destination_region="dwarfenfrowardCommand" destination_location="entry_south" >
+				<Shape shape="RECT" extent_x="1.0" extent_y="1.0" />
+			</Exit>
 		</Exits>
 		
 		<Environments>
@@ -799,17 +806,44 @@
 		
 		<Event trigger ="create_region" once = "true">
 			<Effect>
-				sergeant_wober = createObject("peasant", "locSergeant");
+				sergeant_wober = createObject('guard', "locSergeant");
 				setRefName(sergeant_wober, "Sergeant Wober");
+				
+				guard1 = createObject('guard', 'locCommandGuard1');
+				setRefName(guard1, 'Guard');
+				guard2 = createObject('guard', 'locCommandGuard2');
+				setRefName(guard2, 'Guard');
+			</Effect>
+		</Event>
+	</Region>
+	
+	<Region id="30" name="dwarfenfrowardCommand">
+		<Settings dimx="32" dimy="32" region_template="commandHouse"  ground="council_ground"/>
+		
+		<ExitDirections north="false" south="true" west="false" east="false" />
+		
+		<Exits>
+			<Exit name="exit_south" destination_region="dwarfenfroward" destination_location="entry_command" >
+				<Shape shape="RECT" extent_x="2.0" extent_y="1.0" />
+			</Exit>
+		</Exits>
+		
+		<Environments>
+			<Environment height="1.0" name="council" />
+		</Environments>
+		
+		<Event trigger ="create_region" once = "true">
+			<Effect>
 				general_greif = createObject("peasant", "locGeneral");
 				setRefName(general_greif, "General Greif");
-				maga_convocatis_darna_eistaucher = createObject("peasant", "locGeneral");
+				maga_convocatis_darna_eistaucher = createObject("peasant_f", "locDarna");
 				setRefName(maga_convocatis_darna_eistaucher, "Maga Convocatis Darna Eistaucher");
 				
 				addArea("GeneralGreifArea","circle","locGeneral",5);
 			</Effect>
 		</Event>
 	</Region>
+
 	
 <!-- Aisen, Zwergentrutz Stadtmauer; ungefaehr 20 min, Template; Level 16 - 19 -->
 <!-- Zombies, Skelette -->

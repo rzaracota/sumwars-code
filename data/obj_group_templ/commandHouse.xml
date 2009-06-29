@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ObjectGroupTemplate name="commandHouse" version="1.0">
+  <Shape
+    type="RECT"
+    extent_x="8.849417748"
+    extent_y="9.313717856"
+    angle="0"
+  />
+
+  <WayPoint pos_x="0" pos_y="0" />
+
+  <ObjectContent>
+    <Object subtype="$shelf_m" 
+            center_x="2.5" 
+            center_y="-3.5" 
+            angle="90" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="$shelf_s" 
+            center_x="-5" 
+            center_y="-0.5" 
+            angle="0" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="$shelf_s" 
+            center_x="-5" 
+            center_y="-2.5" 
+            angle="0" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="$shelf_s" 
+            center_x="-5" 
+            center_y="6.5" 
+            angle="0" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="$vase" 
+            center_x="0.6114923489" 
+            center_y="-0.6527538266" 
+			height="1.109276238" 
+            angle="0" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="$vase" 
+            center_x="0.151252162" 
+            center_y="0.1015698082" 
+			height="1.103459977" 
+            angle="0" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="konz_wall1" 
+            center_x="5" 
+            center_y="-0.5" 
+            angle="0" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="konz_wall1" 
+            center_x="0.5" 
+            center_y="-5" 
+            angle="-90" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="konz_wall1" 
+            center_x="-6" 
+            center_y="-0.5" 
+            angle="-180" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="konz_wall_c1" 
+            center_x="5" 
+            center_y="-5" 
+            angle="-90" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="konz_wall_c1" 
+            center_x="-6" 
+            center_y="-5" 
+            angle="-180" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="konz_wall_c1" 
+            center_x="5" 
+            center_y="8" 
+            angle="0" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="konz_wall_c1" 
+            center_x="-6" 
+            center_y="8" 
+            angle="90" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="konz_wall_m1" 
+            center_x="5" 
+            center_y="5.5" 
+            angle="0" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="konz_wall_m1" 
+            center_x="-6" 
+            center_y="5.5" 
+            angle="-180" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="konz_wall_s1" 
+            center_x="-4.5" 
+            center_y="-5" 
+            angle="-90" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="konz_wall_s1" 
+            center_x="3.5" 
+            center_y="8" 
+            angle="-90" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="konz_wall_s1" 
+            center_x="-4.5" 
+            center_y="8" 
+            angle="-90" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="lab_tbl" 
+            center_x="-0.2721479391" 
+            center_y="-0.09112353643" 
+            angle="-103.5268567" 
+            probability="1" 
+            prob_angle="false" 
+    />
+  </ObjectContent>
+
+  <Locations>
+    <Location name="entry_south" pos_x="-0.5" pos_y="6" />
+    <Location name="exit_south" pos_x="-0.5" pos_y="8.5" />
+    <Location name="locDarna" pos_x="-1.069092552" pos_y="-1.811353778" />
+    <Location name="locGeneral" pos_x="1.884041349" pos_y="1.237519823" />
+    <Location name="locParty" pos_x="-0.238816906" pos_y="4.160421199" />
+  </Locations>
+
+</ObjectGroupTemplate>
