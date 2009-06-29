@@ -1246,7 +1246,7 @@ void MainWindow::updateObjectInfo()
 			if (cwo !=0)
 			{
 				// Objekt existiert
-				m_document->getGUIState()->m_cursor_object_id = id;
+				m_document->getGUIState()->m_cursor_object_id = objid;
 				m_document->getGUIState()->m_cursor_item_id =0;
 				cr = dynamic_cast<Creature*>(cwo);
 				if (cr != 0)
