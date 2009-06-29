@@ -1,5 +1,5 @@
 ﻿<RenderInfo name="guard_ais" parent="playerbase">
-	<Entity source="guard.mesh"/>
+	<Entity source="guardAisen.mesh"/>
 	<Entity objectname="weapon" bone="itemRightHand" source="pike_pol.mesh" />
 	<Entity objectname="head" bone="crown" source="head1.mesh" />
 	<Entity objectname="helm" bone="crown" source="merc_hlm.mesh" />

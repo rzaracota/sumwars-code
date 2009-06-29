@@ -943,7 +943,7 @@ AIR
 
 <!-- Zombie -->
 <Monster type="MONSTER" subtype="zombie" name="zombie" fraction="UNDEAD" category="UNDEAD" layer="NORMAL">
-	<Mesh file="skeleton" />
+	<Mesh file="zombie" />
 	<Dropslots >
 		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" max_gold="100" min_level="0" max_level="10" magic_prob="0.1" magic_power="1000" />
 		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" max_gold="50" min_level="0" max_level="20" magic_prob="0.2" magic_power="1000" />

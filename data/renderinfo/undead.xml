@@ -28,10 +28,28 @@
 	</Action>
 </RenderInfo>
 
+<RenderInfo name="zombiebase" parent="creaturebase">
+	<Action name="walk">
+		<Animation name="zombieWalk" />
+	</Action>
+	
+	<Action name="attack">
+		<Animation name="zombieAttack1" />
+	</Action>
+
+	<Action name="die">
+		<Animation name="die" />
+	</Action>
+</RenderInfo>
+
 <RenderInfo name="lich" parent="creaturebase">
 	<Entity source="lich.mesh"/>
 </RenderInfo>
 
 <RenderInfo name="skeleton" parent="skeletonbase">
 	<Entity source="skeleton.mesh"/>
+</RenderInfo>
+
+<RenderInfo name="zombie" parent="zombiebase">
+	<Entity source="zombie_norm.mesh"/>
 </RenderInfo>

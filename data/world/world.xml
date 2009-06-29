@@ -229,10 +229,13 @@
 <!-- Maylons Grab, Ebene 1[unterirdisch], ungefaehr 10 Minuten; Level 14 - 17 -->
 <!-- [kleine Elementare], Zombies, Skelette -->
 	<Region id="15" name="aisMaylonsGraveL1">
-		<Settings dimx="24" dimy="24" area_percent="0.3" complexity="0.3" granularity="4"  ground="grass1"/>
+		<Settings dimx="24" dimy="24" area_percent="0.3" complexity="0.3" granularity="4"  ground="cave_ground"/>
 		
 		<ExitDirections north="true" south="true" west="false" east="false" />
 		
+		<SpawnGroups>
+			<SpawnGroup group_name="zombies" number="12" />
+		</SpawnGroups>
 		<Exits>
 			<Exit name="exit_south" destination_region="aisPlains" destination_location="exit_crypt" >
 				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
@@ -256,7 +259,7 @@
 <!-- [kleine Elementare], Zombies, Skelette, Maylons Mumie -->
 <!-- Orte: Maylons Grabkammer -->
 	<Region id="16" name="aisMaylonsGraveL2">
-		<Settings dimx="24" dimy="24" area_percent="0.3" complexity="0.3" granularity="4"  ground="grass1"/>
+		<Settings dimx="24" dimy="24" area_percent="0.3" complexity="0.3" granularity="4"  ground="cave_ground"/>
 		
 		<ExitDirections north="true" south="false" west="false" east="false" />
 		
