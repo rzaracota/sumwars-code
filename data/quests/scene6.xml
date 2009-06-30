@@ -1,0 +1,127 @@
+<Quest name="Hauptquest: melde dich bei General G" table_name="scene6">
+	
+	<Init>
+		local a = 2
+	</Init>
+	
+	<Description>
+		if (scene6.finished) then
+			return _("Quest finished")
+		else
+			return _("Quest description")
+		end
+	</Description>
+	
+	<NPC refname="Soren Windclaw">
+		<Topic name="insertion_guard_dies">
+			<Effect>
+				unitSpeak("W1",_("*hurgs*"),1000);
+				setObjectValue(scene6_tmp.guard1,"health",0);
+			</Effect>
+		</Topic>
+		
+		<Topic name="scene6_dialogue1">
+			<Effect>
+				addCameraPosition(20000,get(getRole("VN"),"position"),220,60,0);
+
+				speak("L",_("Wie gehen die Arbeiten voran?"),1000);
+				speak("VN",_("Der Stein ist hart, aber wenn ich die Skelette"),1000);
+				
+				addCameraPosition(20000,get(getRole("PL"),"position"),180,40,0);
+				
+				speak("MAGast",_("Los, das ist unsere Chance!"),1000);
+				
+				addQuestion(_("Angreifen oder erst noch zuhoeren?"));
+				addAnswer(_("Attack"),"scene6_attack");
+				addAnswer(_("Listen"),"scene6_listen");
+			</Effect>
+		</Topic>
+		
+		<Topic name="scene6_attack">
+			<Effect>
+				addCameraPosition(20000,get(getRole("PL"),"position"),180,40,0);
+
+				speak("PL",_("Ok, Los!"),1000);
+				
+				changeTopic("end_cutscene6");
+			</Effect>
+		</Topic>
+		
+		<Topic name="scene6_listen">
+			<Effect>
+				addCameraPosition(20000,get(getRole("VN"),"position"),220,60,0);
+
+				speak("PL",_("Wartet, vielleicht erfahren"),1000);
+				speak("L",_("Lass sie ab und zu ausruhen,"),1000);
+				speak("VN",_("Soll der Tunnel nicht zum"),1000);
+				speak("L",_("Nein, die Stadt ist unwichtig."),1000);
+				speak("VN",_("Ich verstehe nicht."),1000);
+				speak("L",_("Und das ist gut so,"),1000);
+				speak("VN",_("Euer Wunsch ist meine Handlung!"),1000);
+
+				addCameraPosition(20000,get(getRole("PL"),"position"),180,40,0);
+
+				speak("PRIast",_("Das ist ein Lich,"),1000);
+				speak("PL",_("Also gut!"),1000);
+				
+				changeTopic("end_cutscene6");
+			</Effect>
+		</Topic>
+		
+		<Topic name="end_cutscene6">
+			<Effect>
+				setCutsceneMode(false);
+			</Effect>
+		</Topic>
+	</NPC>
+	
+	
+	<Region name="grayCurseCaveFis">
+		<Event trigger="create_region" once="true">
+			<Effect>
+				addArea("grayCurseCaveFisEntrySouthArea","circle","entry_south",10);
+				-- addArea("aisMounPathPartyArea","circle","locParty",3);
+			</Effect>
+		</Event>
+		
+		<Event trigger="player_moved" once="true">
+			<Condition>
+				if (scene5.scene5 == true and scene6.scene6 ~= true) then
+					return (unitIsInArea(trigger.player,"grayCurseCaveFisEntrySouthArea"));
+				else
+					return false;
+				end;
+			</Condition>
+			<Effect>
+				scene6_tmp.vorarbeiter_nekromant = createObject("lich","locLich");
+				setRefName(scene6_tmp.vorarbeiter_nekromant, "Vorarbeiter Nekromant");
+				
+				scene6_tmp.nar_asoroth = createObject("lich","locNecromancer");
+				setRefName(scene6_tmp.nar_asoroth, "Nar'Asoroth");
+				
+				scene6_tmp.skeleton1 = createObject("sword_skel","locSkeleton1");
+				scene6_tmp.skeleton2 = createObject("sword_skel","locSkeleton2");
+				scene6_tmp.skeleton3 = createObject("sword_skel","locSkeleton3");
+				scene6_tmp.skeleton4 = createObject("sword_skel","locSkeleton4");
+				scene6_tmp.skeleton5 = createObject("sword_skel","locSkeleton5");
+				scene6_tmp.skeleton6 = createObject("sword_skel","locSkeleton6");
+				
+				scene6_tmp.soren_windclaw_crystal = createObject("peasant", "locParty");
+				setRefName(scene6_tmp.soren_windclaw_crystal, "Soren Windclaw");
+				
+				
+				createDialogue();
+				addSpeaker(scene6_tmp.vorarbeiter_nekromant,"VN");
+				addSpeaker(scene6_tmp.scene6_tmp.nar_asoroth,"L");
+				addSpeaker(scene6_tmp.soren_windclaw_crystal,"SW");
+				addSpeaker(trigger.player,"Player");
+				addStandardSpeakers("grayCurseCaveFis","locParty");
+				setCutsceneMode(true);
+				setTopicBase("Soren Windclaw");
+				changeTopic("scene6_dialogue1");
+			</Effect>
+		</Event>
+	</Region>
+	
+</Quest>
+
