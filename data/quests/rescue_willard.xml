@@ -33,7 +33,7 @@
 					speak('Fenor Marken',_("There is something, only someone like you can do."),2000);
 					speak('Fenor Marken',_("With sure success that is."),1500);
 					speak("ANY",_("Who would have thougt of that?"),1800);
-					speak("ANY",_("Does an respectable member of the guard want someones thoat cut?"),3000);
+					speak("ANY",_("Does a respectable member of the guard want someones thoat cut?"),3000);
 					speak('Fenor Marken',_("Eh? I could've hired a professional assassin for that."),3000);
 					speak('Fenor Marken',_("I thought you were not the kind of Branded Ones"),2200);
 					speak('Fenor Marken',_("that kill everyone crossing their pass."),2000);

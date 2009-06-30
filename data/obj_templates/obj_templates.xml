@@ -187,8 +187,8 @@ FIXED_OBJECT
 
 <ObjectTemplate name="$tube" type="FIXED_OBJECT">
 	<Environment name="council" default = "true">
-		<Object name="tube_1" />
-		<Object name="tube_2" />
+		<Object name="tube1" />
+		<Object name="tube2" />
 	</Environment>
 </ObjectTemplate>
 
