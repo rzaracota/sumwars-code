@@ -13,12 +13,6 @@
 	</Description>
 	
 	<NPC refname="Soren Windclaw">
-		<Topic name="insertion_guard_dies">
-			<Effect>
-				unitSpeak("W1",_("*hurgs*"),1000);
-				setObjectValue(scene6_tmp.guard1,"health",0);
-			</Effect>
-		</Topic>
 		
 		<Topic name="scene6_dialogue1">
 			<Effect>
@@ -112,7 +106,7 @@
 				
 				createDialogue();
 				addSpeaker(scene6_tmp.vorarbeiter_nekromant,"VN");
-				addSpeaker(scene6_tmp.scene6_tmp.nar_asoroth,"L");
+				addSpeaker(scene6_tmp.nar_asoroth,"L");
 				addSpeaker(scene6_tmp.soren_windclaw_crystal,"SW");
 				addSpeaker(trigger.player,"Player");
 				addStandardSpeakers("grayCurseCaveFis","locParty");

@@ -174,6 +174,7 @@
 				scene5_tmp.skeleton7 = createObject("sword_skel","locSkeleton7");
 				scene5_tmp.skeleton8 = createObject("sword_skel","locSkeleton8");
 				
+				<!--
 				addUnitCommand(scene5_tmp.skeleton1, "attack", scene5_tmp.erzmaga_ireana)
 				addUnitCommand(scene5_tmp.skeleton2, "attack", scene5_tmp.guard2)
 				addUnitCommand(scene5_tmp.skeleton3, "attack", scene5_tmp.guard1)
@@ -182,6 +183,7 @@
 				addUnitCommand(scene5_tmp.skeleton6, "attack", scene5_tmp.guard2)
 				addUnitCommand(scene5_tmp.skeleton7, "attack", scene5_tmp.hauptmann_der_wache)
 				addUnitCommand(scene5_tmp.skeleton8, "attack", scene5_tmp.hauptmann_der_wache)
+				-->
 			</Effect>
 		</Event>
 		
@@ -215,14 +217,14 @@
 		
 		<Event trigger ="unit_die">
 			<Condition>
-				if (getObjectValue(scene5_tmp.skeleton1,"health") == 0 and
-					getObjectValue(scene5_tmp.skeleton2,"health") == 0 and
-					getObjectValue(scene5_tmp.skeleton3,"health") == 0 and
-					getObjectValue(scene5_tmp.skeleton4,"health") == 0 and
-					getObjectValue(scene5_tmp.skeleton5,"health") == 0 and
-					getObjectValue(scene5_tmp.skeleton6,"health") == 0 and
-					getObjectValue(scene5_tmp.skeleton7,"health") == 0 and
-					getObjectValue(scene5_tmp.skeleton8,"health") == 0) then
+				if (-getObjectValue(scene5_tmp.skeleton1,"health") >= 0 and
+					-getObjectValue(scene5_tmp.skeleton2,"health") >= 0 and
+					-getObjectValue(scene5_tmp.skeleton3,"health") >= 0 and
+					-getObjectValue(scene5_tmp.skeleton4,"health") >= 0 and
+					-getObjectValue(scene5_tmp.skeleton5,"health") >= 0 and
+					-getObjectValue(scene5_tmp.skeleton6,"health") >= 0 and
+					-getObjectValue(scene5_tmp.skeleton7,"health") >= 0 and
+					-getObjectValue(scene5_tmp.skeleton8,"health") >= 0) then
 					return true;
 				else
 					return false;

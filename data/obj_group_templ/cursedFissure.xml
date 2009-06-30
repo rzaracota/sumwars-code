@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<ObjectGroupTemplate name="CursedFissure" version="1.0">
+<ObjectGroupTemplate name="cursedFissure" version="1.0">
   <Shape
     type="RECT"
     extent_x="15.25862442"
