@@ -91,7 +91,9 @@ void Quest::init()
 		int err = lua_pcall(EventSystem::getLuaState(), 0, LUA_MULTRET, 0);
 		if (err !=0)
 		{
-			EventSystem::reportErrors(EventSystem::getLuaState(), err);
+			std::string expl = "error in initialisation of ";
+			expl += m_table_name;
+			EventSystem::reportErrors(EventSystem::getLuaState(), err,expl.c_str());
 		}
 	}
 }
@@ -119,7 +121,9 @@ std::string Quest::getDescription()
 	int err = lua_pcall(EventSystem::getLuaState(), 0, LUA_MULTRET, 0);
 	if (err !=0)
 	{
-		EventSystem::reportErrors(EventSystem::getLuaState(), err);
+		std::string expl = "error in Description of ";
+		expl += m_name;
+		EventSystem::reportErrors(EventSystem::getLuaState(), err,expl.c_str());
 		return "";
 	}
 	

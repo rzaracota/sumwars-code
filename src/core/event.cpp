@@ -121,7 +121,8 @@ bool Event::checkCondition()
 	int err = lua_pcall(EventSystem::getLuaState(), 0, LUA_MULTRET, 0);
 	if (err !=0)
 	{
-		EventSystem::reportErrors(EventSystem::getLuaState(), err);
+		std::string expl = "error in event condition";		
+		EventSystem::reportErrors(EventSystem::getLuaState(), err,expl.c_str());
 		return false;
 	}
 	
@@ -150,7 +151,8 @@ void Event::doEffect()
 	
 	if (err !=0)
 	{
-		EventSystem::reportErrors(EventSystem::getLuaState(), err);
+		std::string expl = "error in event effect";
+		EventSystem::reportErrors(EventSystem::getLuaState(), err,expl.c_str());
 	}
 }
 

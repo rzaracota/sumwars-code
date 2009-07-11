@@ -114,7 +114,9 @@ void EventSystem::doFile(const char* file)
 
 	if (err!=0)
 	{
-		reportErrors(m_lua, err);
+		std::string expl = "error in file of ";
+		expl += file;
+		reportErrors(m_lua, err,expl.c_str());
 	}
 }
 
@@ -293,7 +295,7 @@ int EventSystem::setObjectValue(lua_State *L)
 		}
 		else
 		{
-			ERRORMSG("getObjectValue: Object doesnt exist");
+			ERRORMSG("setObjectValue: Object doesnt exist");
 		}
 	}
 	else

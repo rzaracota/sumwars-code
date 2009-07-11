@@ -108,6 +108,17 @@ void ItemLoader::loadItem(TiXmlNode* node)
 					
 				}
 			}
+			else if (!strcmp(child->Value(), "RenderInfo"))
+			{
+				std::string file;
+				attr.getString("name", file);
+				if (item_data->m_subtype != "")
+				{
+					DEBUG5("registered Item mesh %s %s",item_data->m_subtype.c_str(),file.c_str());
+					GraphicManager::registerGraphicMapping(item_data->m_subtype,file);
+					
+				}
+			}
 			else if (!strcmp(child->Value(), "Attribute"))
 			{
 				short levelreq =0;

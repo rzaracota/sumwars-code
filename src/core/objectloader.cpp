@@ -121,6 +121,14 @@ bool  ObjectLoader::loadMonster(TiXmlNode* node)
 					DEBUG5("mesh %s %s",subtype.c_str(), mesh.c_str());
 					GraphicManager::registerGraphicMapping(subtype, mesh);
 				}
+				else if (!strcmp(child->Value(), "RenderInfo"))
+				{
+					std::string mesh;
+					attr.getString("name",mesh);
+					
+					DEBUG5("mesh %s %s",subtype.c_str(), mesh.c_str());
+					GraphicManager::registerGraphicMapping(subtype, mesh);
+				}
 				else if (!strcmp(child->Value(), "Dropslots"))
 				{
 					int nr =0;
