@@ -1,7 +1,6 @@
 <Quest name="Findet den Weg auf dem die Untoten die Stadt umgehen" table_name="scene5">
 	
 	<Init>
-		local a = 2
 	</Init>
 	
 	<Description>
@@ -12,7 +11,87 @@
 		end
 	</Description>
 	
-	<NPC refname="Soren Windclaw">
+	<Region name="aisMounPath">
+		<Event trigger="create_region" once="true">
+			<Effect>
+				addArea("aisMounPathEntryEastArea","circle","entry_east",10);
+				addArea("aisMounPathPartyArea","circle","locParty",3);
+				
+				scene5_tmp.guard1 = createObject("guard", "locGuard1");
+				setRefName(scene5_tmp.guard1, "Elementaristenwaechter1");
+				setObjectValue(scene5_tmp.guard1,"max_health",10000);
+				setObjectValue(scene5_tmp.guard1,"health",10000);
+				
+				scene5_tmp.guard2 = createObject("guard", "locGuard2");
+				setRefName(scene5_tmp.guard2, "Elementaristenwaechter2");
+				setObjectValue(scene5_tmp.guard2,"max_health",10000);
+				setObjectValue(scene5_tmp.guard2,"health",10000);
+				
+				scene5_tmp.guard3 = createObject("guard", "locGuard3");
+				setRefName(scene5_tmp.guard3, "Elementaristenwaechter3");
+				
+				scene5_tmp.guard4 = createObject("guard", "locGuard4");
+				setRefName(scene5_tmp.guard4, "Elementaristenwaechter4");
+				
+				
+				scene5_tmp.dead_guard1 = createObject("peasant", "locDeadGuard1");
+				setRefName(scene5_tmp.dead_guard1, "Guard");
+				setObjectValue(scene5_tmp.dead_guard1,"health",0);
+				
+				scene5_tmp.dead_guard2 = createObject("peasant", "locDeadGuard2");
+				setRefName(scene5_tmp.dead_guard2, "Guard");
+				setObjectValue(scene5_tmp.dead_guard2,"health",0);
+				
+				
+				scene5_tmp.erzmaga_ireana = createObject("peasant", "locIreana");
+				setRefName(scene5_tmp.erzmaga_ireana, "Erzmaga Ireana von Nordenburg");
+				setObjectValue(scene5_tmp.erzmaga_ireana,"max_health",10000);
+				setObjectValue(scene5_tmp.erzmaga_ireana,"health",3000);
+				
+				scene5_tmp.hauptmann_der_wache = createObject("peasant", "locCaptain");
+				setRefName(scene5_tmp.hauptmann_der_wache, "Hauptmann der Wache");
+				setObjectValue(scene5_tmp.hauptmann_der_wache,"max_health",10000);
+				setObjectValue(scene5_tmp.hauptmann_der_wache,"health",9000);
+			</Effect>
+		</Event>
+
+		<Event trigger="player_moved" once="true">
+			<Condition>
+				if (scene4.scene4 == true and scene5.scene5 ~= true) then
+				return (unitIsInArea(trigger.player,"aisMounPathPartyArea"));
+				else
+				return false;
+				end;
+			</Condition>
+			<Effect>
+				
+				
+				scene5_tmp.skeletons={};
+				for nr=1,8 do
+					scene5_tmp.skeletons[nr] = createObject("bow_skel","locSkeleton"..nr);
+				end;
+				scene5_tmp.skeletons_nr =8;
+				
+				setCutsceneMode(true);
+				
+				addUnitCommand(scene5_tmp.skeletons[1], "range_attack", scene5_tmp.guard2,"repeat")
+				addUnitCommand(scene5_tmp.skeletons[2], "range_attack", scene5_tmp.guard2,"repeat")
+				addUnitCommand(scene5_tmp.skeletons[3], "range_attack", scene5_tmp.guard4,"repeat")
+				addUnitCommand(scene5_tmp.skeletons[4], "range_attack", scene5_tmp.hauptmann_der_wache,"repeat");
+				
+				
+				addUnitCommand(scene5_tmp.skeletons[5], "range_attack", scene5_tmp.erzmaga_ireana,"repeat")
+				addUnitCommand(scene5_tmp.skeletons[6], "range_attack", scene5_tmp.guard1,"repeat")
+				addUnitCommand(scene5_tmp.skeletons[7], "range_attack", scene5_tmp.guard1,"repeat")
+				addUnitCommand(scene5_tmp.skeletons[8], "range_attack", scene5_tmp.guard3,"repeat")
+				
+				addCameraPosition(0,get(getRole("PL"),"position"),-50,40,20);
+				addCameraPosition(5000,get(scene5_tmp.erzmaga_ireana,"position"),-50,40,20);
+				
+				startTimer('scene5_dialogue1',10000);
+			</Effect>
+		</Event>
+		
 		<Topic name="insertion_guard_dies">
 			<Effect>
 				unitSpeak("W1",_("*hurgs*"),1000);
@@ -20,53 +99,95 @@
 			</Effect>
 		</Topic>
 		
-		<Topic name="scene5_dialogue1">
+		<Event trigger="scene5_dialogue1">
 			<Effect>
-				addCameraPosition(0,get(getRole("PL"),"position"),20,40,20);
-				addCameraPosition(20000,get(getRole("PL"),"position"),220,60,30);
-
+				
+				addCameraPosition(1000,get(getRole("PL"),"position"),-50,40,20);
 				-- Die Party erreicht den Ort des Geschehens. Die Kutsche der Erzmaga
 				-- ist verunglueckt, mehrere Skelettbogenschuetzen beschießen sie mit
 				-- Feuerpfeilen und die Wachen sind allesamt verwundet.
-
+				
+				createDialogue();
+				addSpeaker(scene5_tmp.guard1,"W1");
+				addSpeaker(scene5_tmp.soren_windclaw_crystal,"SW");
+				addSpeaker(scene5_tmp.erzmaga_ireana,"IvN");
+				addSpeaker(scene5_tmp.hauptmann_der_wache,"HW");
+				addSpeaker(scene5_tmp.guard2,"EW");
+				addSpeaker(trigger.player,"Player");
+				addStandardSpeakers("aisMounPath","locParty");
+				
+				speak("nobody","",2000);
 				speak("MALEast",_("Sie ist ja bildschoen!"),1000);
 				speak("PL",_("Du kannst sie spaeter noch anstarren,"),1000);
 				speak("HW",_("Bitte helft uns, die Maga"),1000);
 				
 				-- W1 (Wird toedlich getroffen): *hurgs*
 				jumpTopic("insertion_guard_dies");
-
+				speak("nobody","",1000);
 				speak("WARast",_("He He, Erntezeit."),1000);
-
+				
 				-- Sie kaempfen. Die Untoten warten mit einer etwas unschoenen
 				-- ueberraschung auf (starkes Monster) werden aber sicherlich bald
 				-- besiegt ;-)
-
+				
 				changeTopic("end_cutscene5_fight");
 			</Effect>
-		</Topic>
+		</Event> 
 		
 		<Topic name="end_cutscene5_fight">
 			<Effect>
 				setCutsceneMode(false);
+				
+				for nr=1,8 do
+					clearUnitCommands(scene5_tmp.skeletons[nr]);
+				end;
 			</Effect>
 		</Topic>
 		
-		<Topic name="scene5_dialogue2">
+		<Event trigger ="unit_die">
+			<Condition>
+				return (get(trigger.unit,'subtype') == 'bow_skel')
+			</Condition>
 			<Effect>
-				addCameraPosition(0,get(getRole("PL"),"position"),20,40,20);
-				addCameraPosition(20000,get(getRole("PL"),"position"),220,60,30);
-
+				scene5_tmp.skeletons_nr = scene5_tmp.skeletons_nr -1;
+				if (scene5_tmp.skeletons_nr == 0) then
+				
+					startTimer("scene5_dialogue2",1000);
+				end;
+			</Effect>
+		</Event>
+		
+		<Event trigger="scene5_dialogue2">
+			<Effect>
+				scene5_tmp.soren_windclaw_crystal = createObject("peasant", "locParty");
+				setRefName(scene5_tmp.soren_windclaw_crystal, "Soren Windclaw");
+				setObjectValue(scene5_tmp.soren_windclaw_crystal,"max_health",10000);
+				setObjectValue(scene5_tmp.soren_windclaw_crystal,"health",10000);
+				
+				createDialogue();
+				addSpeaker(scene5_tmp.guard1,"W1");
+				addSpeaker(scene5_tmp.soren_windclaw_crystal,"SW");
+				addSpeaker(scene5_tmp.erzmaga_ireana,"IvN");
+				addSpeaker(scene5_tmp.hauptmann_der_wache,"HW");
+				addSpeaker(scene5_tmp.guard2,"EW");
+				addSpeaker(trigger.player,"Player");
+				addStandardSpeakers("aisMounPath","locParty");
+				
+				setCutsceneMode(true);
+					
+				addCameraPosition(0,get(getRole("PL"),"position"),-50,40,20);
+				addCameraPosition(20000,get(getRole("PL"),"position"),-50,40,20);
+				
 				speak("HW",_("Ich habe noch nie jemanden"),1000);
 				speak("MAGast",_("Ihr kommt wohl nicht allzuviel"),1000);
 				speak("PL",_("Wie geht es der Erzmaga?"),1000);
 				speak("HW",_("Sehr schlecht fuerchte ich."),1000);
 				speak("PL",_("Lasst mich mal sehen"),1000);
-
+				
 				-- PL heilt sie
 				-- Wenn es keinen Priester in der Gruppe gibt, springt der MAG
 				-- mit einem Trank ein, ansonsten der PL
-
+				
 				speak("IvN",_("Ich danke euch, das war Rettung"),1000);
 				speak("PL",_("Wie konnte es eigentlich soweit kommen?"),1000);
 				speak("WARast",_("Jetzt mach mal Halblang!"),1000);
@@ -94,12 +215,12 @@
 				speak("HW",_("... wahrscheinlich nicht."),1000);
 				speak("PL",_("Danke fuer eure Hilfe"),1000);
 				speak("IvN",_("Viel Glueck! Ich hoffe wir"),1000);
-
+				
 				-- Hauptquest: Findet den Weg, auf dem die Untoten die Stadt umgehen
 				
 				changeTopic("end_cutscene5");
 			</Effect>
-		</Topic>
+		</Event>
 		
 		<Topic name="end_cutscene5">
 			<Effect>
@@ -108,142 +229,10 @@
 				setCutsceneMode(false);
 			</Effect>
 		</Topic>
-	</NPC>
-	
-	
-	<Region name="aisMounPath">
-		<Event trigger="create_region" once="true">
-			<Effect>
-				addArea("aisMounPathEntryEastArea","circle","entry_east",10);
-				addArea("aisMounPathPartyArea","circle","locParty",3);
-			</Effect>
-		</Event>
 		
-		<Event trigger="player_moved" once="true">
-			<Condition>
-				if (scene4.scene4 == true and scene5.scene5 ~= true) then
-					return (unitIsInArea(trigger.player,"aisMounPathEntryEastArea"));
-				else
-					return false;
-				end;
-			</Condition>
-			<Effect>
-				scene5_tmp.guard1 = createObject("peasant", "locGuard1");
-				setRefName(scene5_tmp.guard1, "Elementaristenwaechter");
-				setObjectValue(scene5_tmp.guard1,"max_health",10000);
-				setObjectValue(scene5_tmp.guard1,"health",10000);
-				
-				scene5_tmp.guard2 = createObject("peasant", "locGuard2");
-				setRefName(scene5_tmp.guard2, "Elementaristenwaechter");
-				setObjectValue(scene5_tmp.guard2,"max_health",10000);
-				setObjectValue(scene5_tmp.guard2,"health",10000);
-				
-				scene5_tmp.guard3 = createObject("peasant", "locGuard3");
-				setRefName(scene5_tmp.guard3, "Elementaristenwaechter");
-				
-				scene5_tmp.guard4 = createObject("peasant", "locGuard4");
-				setRefName(scene5_tmp.guard4, "Elementaristenwaechter");
-				
-				
-				scene5_tmp.dead_guard1 = createObject("peasant", "locDeadGuard1");
-				setRefName(scene5_tmp.dead_guard1, "Guard");
-				setObjectValue(scene5_tmp.dead_guard1,"health",0);
-				
-				scene5_tmp.dead_guard2 = createObject("peasant", "locDeadGuard2");
-				setRefName(scene5_tmp.dead_guard2, "Guard");
-				setObjectValue(scene5_tmp.dead_guard2,"health",0);
-				
-				
-				scene5_tmp.erzmaga_ireana = createObject("peasant", "locIreana");
-				setRefName(scene5_tmp.erzmaga_ireana, "Erzmaga Ireana von Nordenburg");
-				setObjectValue(scene5_tmp.erzmaga_ireana,"max_health",10000);
-				setObjectValue(scene5_tmp.erzmaga_ireana,"health",10000);
-				
-				scene5_tmp.hauptmann_der_wache = createObject("peasant", "locCaptain");
-				setRefName(scene5_tmp.hauptmann_der_wache, "Hauptmann der Wache");
-				setObjectValue(scene5_tmp.hauptmann_der_wache,"max_health",10000);
-				setObjectValue(scene5_tmp.hauptmann_der_wache,"health",10000);
-				
-				
-				scene5_tmp.skeleton1 = createObject("sword_skel","locSkeleton1");
-				scene5_tmp.skeleton2 = createObject("sword_skel","locSkeleton2");
-				scene5_tmp.skeleton3 = createObject("sword_skel","locSkeleton3");
-				scene5_tmp.skeleton4 = createObject("sword_skel","locSkeleton4");
-				scene5_tmp.skeleton5 = createObject("sword_skel","locSkeleton5");
-				scene5_tmp.skeleton6 = createObject("sword_skel","locSkeleton6");
-				scene5_tmp.skeleton7 = createObject("sword_skel","locSkeleton7");
-				scene5_tmp.skeleton8 = createObject("sword_skel","locSkeleton8");
-				
-				<!--
-				addUnitCommand(scene5_tmp.skeleton1, "attack", scene5_tmp.erzmaga_ireana)
-				addUnitCommand(scene5_tmp.skeleton2, "attack", scene5_tmp.guard2)
-				addUnitCommand(scene5_tmp.skeleton3, "attack", scene5_tmp.guard1)
-				addUnitCommand(scene5_tmp.skeleton4, "attack", scene5_tmp.guard1)
-				addUnitCommand(scene5_tmp.skeleton5, "attack", scene5_tmp.erzmaga_ireana)
-				addUnitCommand(scene5_tmp.skeleton6, "attack", scene5_tmp.guard2)
-				addUnitCommand(scene5_tmp.skeleton7, "attack", scene5_tmp.hauptmann_der_wache)
-				addUnitCommand(scene5_tmp.skeleton8, "attack", scene5_tmp.hauptmann_der_wache)
-				-->
-			</Effect>
-		</Event>
 		
-		<Event trigger="player_moved" once="true">
-			<Condition>
-				if (scene4.scene4 == true and scene5.scene5 ~= true) then
-					return (unitIsInArea(trigger.player,"aisMounPathPartyArea"));
-				else
-					return false;
-				end;
-			</Condition>
-			<Effect>
-				scene5_tmp.soren_windclaw_crystal = createObject("peasant", "locParty");
-				setRefName(scene5_tmp.soren_windclaw_crystal, "Soren Windclaw");
-				setObjectValue(scene5_tmp.soren_windclaw_crystal,"max_health",10000);
-				setObjectValue(scene5_tmp.soren_windclaw_crystal,"health",10000);
-				
-				createDialogue();
-				addSpeaker(scene5_tmp.guard1,"W1");
-				addSpeaker(scene5_tmp.soren_windclaw_crystal,"SW");
-				addSpeaker(scene5_tmp.erzmaga_ireana,"IvN");
-				addSpeaker(scene5_tmp.hauptmann_der_wache,"HW");
-				addSpeaker(scene5_tmp.guard2,"EW");
-				addSpeaker(trigger.player,"Player");
-				addStandardSpeakers("aisMounPath","locParty");
-				setCutsceneMode(true);
-				setTopicBase("Soren Windclaw");
-				changeTopic("scene5_dialogue1");
-			</Effect>
-		</Event>
 		
-		<Event trigger ="unit_die">
-			<Condition>
-				if (-getObjectValue(scene5_tmp.skeleton1,"health") >= 0 and
-					-getObjectValue(scene5_tmp.skeleton2,"health") >= 0 and
-					-getObjectValue(scene5_tmp.skeleton3,"health") >= 0 and
-					-getObjectValue(scene5_tmp.skeleton4,"health") >= 0 and
-					-getObjectValue(scene5_tmp.skeleton5,"health") >= 0 and
-					-getObjectValue(scene5_tmp.skeleton6,"health") >= 0 and
-					-getObjectValue(scene5_tmp.skeleton7,"health") >= 0 and
-					-getObjectValue(scene5_tmp.skeleton8,"health") >= 0) then
-					return true;
-				else
-					return false;
-				end;
-			</Condition>
-			<Effect>
-				createDialogue();
-				addSpeaker(scene5_tmp.guard1,"W1");
-				addSpeaker(scene5_tmp.soren_windclaw_crystal,"SW");
-				addSpeaker(scene5_tmp.erzmaga_ireana,"IvN");
-				addSpeaker(scene5_tmp.hauptmann_der_wache,"HW");
-				addSpeaker(scene5_tmp.guard2,"EW");
-				addSpeaker(trigger.player,"Player");
-				addStandardSpeakers("aisMounPath","entry_east");
-				setCutsceneMode(true);
-				setTopicBase("Soren Windclaw");
-				changeTopic("scene5_dialogue2");
-			</Effect>
-		</Event>
+		
 	</Region>
 	
 </Quest>

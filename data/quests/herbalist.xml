@@ -131,7 +131,7 @@
 			<Effect>
 				herbalist.asked = true
 				local pos = getPosition(trigger.player)
-				addUnitCommand(gertlinde,'walk',1000,pos)
+				addUnitCommand(gertlinde,'walk',pos)
 				startTimer("askGertlinde",1000)
 				addTriggerVariable("player",trigger.player)
 			</Effect>

@@ -128,7 +128,7 @@
 		
 		<Topic name="michel_bron_run">
 			<Effect>
-				addUnitCommand(besieged_farm_tmp.michel_bron,"walk",3000,"locPeasentMichel");
+				addUnitCommand(besieged_farm_tmp.michel_bron,"walk","locPeasentMichel");
 			</Effect>
 		</Topic>
 		
@@ -292,9 +292,9 @@
 			<Effect>
 				besieged_farm.scene3 = true;
 				setCutsceneMode(false);
-				addUnitCommand(sergeant_lutterer,"walk",3000,"locSergeantHome");
-				addUnitCommand(prince_charming,"walk",3000,"entry_west");
-				addUnitCommand(leonard_von_robenforst,"walk",3000,"entry_west");
+				addUnitCommand(sergeant_lutterer,"walk","locSergeantHome");
+				addUnitCommand(prince_charming,"walk","entry_west");
+				addUnitCommand(leonard_von_robenforst,"walk","entry_west");
 			</Effect>
 		</Topic>
 	</NPC>

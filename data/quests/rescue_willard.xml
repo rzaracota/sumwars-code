@@ -135,7 +135,7 @@
 			</Condition>
 			<Effect>
 				rescue_willard.asked = true
-				addUnitCommand(fenor,'walk',1000,trigger.player);
+				addUnitCommand(fenor,'walk',trigger.player);
 				startTimer("askRescueWillard",1000);
 				addTriggerVariable("player",trigger.player);
 			</Effect>
