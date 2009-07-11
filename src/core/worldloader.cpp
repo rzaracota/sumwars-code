@@ -488,10 +488,13 @@ void WorldLoader::loadQuest(TiXmlNode* node, Quest* quest)
 	{
 		if (child->Type()==TiXmlNode::ELEMENT)
 		{
-			if ((!strcmp(child->Value(), "Init")) && child->FirstChild()!=0)
+			if ((!strcmp(child->Value(), "Init")))
 			{
-				text = child->FirstChild()->ToText();
-				quest->setInit(text->Value());
+				if (child->FirstChild()!=0)
+				{
+					text = child->FirstChild()->ToText();
+					quest->setInit(text->Value());
+				}
 				
 			}
 			else if (!strcmp(child->Value(), "Description"))

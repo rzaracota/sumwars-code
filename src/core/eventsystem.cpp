@@ -4,6 +4,10 @@
 #include "item.h"
 #include "dialogue.h"
 
+#ifdef DEBUG_DATABASE
+		std::map<int, std::string> EventSystem::m_code_fragments;
+#endif
+
 lua_State * EventSystem::m_lua=0;
 
 Region* EventSystem::m_region;
@@ -119,6 +123,56 @@ void EventSystem::doFile(const char* file)
 		reportErrors(m_lua, err,expl.c_str());
 	}
 }
+
+void EventSystem::clearCodeReference(int& coderef)
+{
+	if (coderef != LUA_NOREF)
+	{
+		luaL_unref(EventSystem::getLuaState(), LUA_REGISTRYINDEX, coderef);
+		coderef=LUA_NOREF;
+	}
+}
+
+bool EventSystem::executeCodeReference(int coderef)
+{
+	if (coderef ==LUA_NOREF)
+		return true;
+	
+	lua_rawgeti(EventSystem::getLuaState(),LUA_REGISTRYINDEX , coderef);
+	int err = lua_pcall(EventSystem::getLuaState(), 0, LUA_MULTRET, 0);
+	if (err !=0)
+	{	
+		
+#ifdef DEBUG_DATABASE
+		const char* instr = m_code_fragments[coderef].c_str();
+#else
+		char* instr =0;
+#endif
+		EventSystem::reportErrors(EventSystem::getLuaState(), err,instr);
+		return false;
+	}
+	return true;
+}
+
+int EventSystem::createCodeReference(const char* code)
+{
+	int err = luaL_loadstring(EventSystem::getLuaState(),code);
+	int ref;
+	if (err ==0)
+	{
+		ref = luaL_ref(EventSystem::getLuaState(),LUA_REGISTRYINDEX);
+#ifdef DEBUG_DATABASE
+		m_code_fragments[ref] = code;
+#endif
+		return ref;
+	}
+	else
+	{
+		EventSystem::reportErrors(EventSystem::getLuaState(), err,code);
+		return LUA_NOREF;
+	}
+}
+
 
 void EventSystem::reportErrors(lua_State *L, int status, const char* instr)
 {

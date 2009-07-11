@@ -72,39 +72,16 @@ Event::~Event()
 
 void Event::setEffect(const char * effect)
 {
-	if (m_effect != LUA_NOREF)
-	{
-		luaL_unref(EventSystem::getLuaState(), LUA_REGISTRYINDEX, m_effect);
-	}
+	EventSystem::clearCodeReference(m_effect);
 	
-	int err = luaL_loadstring(EventSystem::getLuaState(),effect);
-	if (err ==0)
-	{
-		m_effect = luaL_ref(EventSystem::getLuaState(),LUA_REGISTRYINDEX);
-	}
-	else
-	{
-		EventSystem::reportErrors(EventSystem::getLuaState(), err, effect);
-	}
+	m_effect = EventSystem::createCodeReference(effect);
 }
 
 void Event::setCondition(const char * cond)
 {
-	if (m_condition != LUA_NOREF)
-	{
-		luaL_unref(EventSystem::getLuaState(), LUA_REGISTRYINDEX, m_condition);
-	}
+	EventSystem::clearCodeReference(m_condition);
 	
-	int err = luaL_loadstring(EventSystem::getLuaState(),cond);
-	if (err ==0)
-	{
-		m_condition = luaL_ref(EventSystem::getLuaState(),LUA_REGISTRYINDEX);
-		DEBUG5("condition reference %i",m_condition);
-	}
-	else
-	{
-		EventSystem::reportErrors(EventSystem::getLuaState(), err,cond);
-	}
+	m_condition = EventSystem::createCodeReference(cond);
 }
 
 
@@ -117,14 +94,9 @@ bool Event::checkCondition()
 	}
 	
 	
-	lua_rawgeti(EventSystem::getLuaState(),LUA_REGISTRYINDEX , m_condition);
-	int err = lua_pcall(EventSystem::getLuaState(), 0, LUA_MULTRET, 0);
-	if (err !=0)
-	{
-		std::string expl = "error in event condition";		
-		EventSystem::reportErrors(EventSystem::getLuaState(), err,expl.c_str());
+	bool succ = EventSystem::executeCodeReference(m_condition);
+	if (succ == false)
 		return false;
-	}
 	
 	if (lua_gettop(EventSystem::getLuaState()) >0)
 	{
@@ -141,18 +113,6 @@ bool Event::checkCondition()
 
 void Event::doEffect()
 {
-	if (m_effect == LUA_NOREF)
-	{
-		return;
-	}
-	
-	lua_rawgeti(EventSystem::getLuaState(),LUA_REGISTRYINDEX , m_effect);
-	int err = lua_pcall(EventSystem::getLuaState(), 0, LUA_MULTRET, 0);
-	
-	if (err !=0)
-	{
-		std::string expl = "error in event effect";
-		EventSystem::reportErrors(EventSystem::getLuaState(), err,expl.c_str());
-	}
+	EventSystem::executeCodeReference(m_effect);
 }
 

@@ -15,6 +15,8 @@ extern "C"
 #include "lauxlib.h"
 }
 
+#define DEBUG_DATABASE
+
 class Region;
 class Dialogue;
 
@@ -60,6 +62,29 @@ class EventSystem
 		 * \param instr Lua Chunk das den Fehler erzeugt hat (optional)
 		 */
 		static void reportErrors(lua_State *L, int status, const char* instr =0);
+		
+		/**
+		 * \fn static void clearCodeReference(int& coderef)
+		 * \brief Entfernt eine Reference auf ein Lua Fragment
+		 * \param coderef Referenz auf Lua Code, wird von der Funktion auf 0 gesetzt
+		 */
+		static void clearCodeReference(int& coderef);
+		
+		/**
+		 * \fn static bool executeCodeReference(int coderef)
+		 * \brief Fuehrt eine CodeReferenz aus
+		 * \param coderef Referenz auf Lua Code
+		 * \return Gibt an, ob bei der Ausfuehrung Fehler aufgetreten sind
+		 */
+		static bool executeCodeReference(int coderef);
+		
+		/**
+		 * \fn static int createCodeReference(const char* code)
+		 * \brief Compiliert den Lua Code und gibt eine Referenz auf das Fragment aus
+		 * \param code Lua Code
+		 * \return Referenz, bei einem Fehler 0
+		 */
+		static int createCodeReference(const char* code);
 		
 		/**
 		 * \fn static void setRegion(Region* region)
@@ -507,6 +532,10 @@ class EventSystem
 		 * \brief Liste mit Befehlen mit denen lokale Variablen der Spieler angepasst werden
 		 */
 		static std::map<int, std::string> m_player_varupdates;
+		
+#ifdef DEBUG_DATABASE
+		static std::map<int, std::string> m_code_fragments;
+#endif
 };
 
 

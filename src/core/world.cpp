@@ -999,12 +999,19 @@ void World::handleMessage(std::string msg, int slot)
 			EventSystem::setRegion(m_local_player->getRegion());
 			std::string instr = "";
 			instr += msg.substr(1);
+			std::string ret;
+			
 			EventSystem::doString((char*) instr.c_str());
-			std::string ret = EventSystem::getReturnValue();
-			if (ret != "")
+			do
 			{
-				static_cast<Player*>(m_local_player)->addMessage(ret);
+				ret = EventSystem::getReturnValue();
+				if (ret != "")
+				{
+					DEBUG5("return value %s",ret.c_str());
+					static_cast<Player*>(m_local_player)->addMessage(ret);
+				}
 			}
+			while (ret != "");
 		}
 	}
 }

@@ -26,40 +26,21 @@ Quest::~Quest()
 
 void Quest::setInit(const char* init)
 {
-	if (m_initialisation != LUA_NOREF)
-	{
-		luaL_unref(EventSystem::getLuaState(), LUA_REGISTRYINDEX, m_initialisation);
-	}
+	EventSystem::clearCodeReference(m_initialisation);
 	
-	int err = luaL_loadstring(EventSystem::getLuaState(),init);
-	if (err ==0)
-	{
-		m_initialisation = luaL_ref(EventSystem::getLuaState(),LUA_REGISTRYINDEX);
-	}
-	else
-	{
-		EventSystem::reportErrors(EventSystem::getLuaState(), err,init);
-	}	
+	m_initialisation = EventSystem::createCodeReference(init);
 }
 
 
 void Quest::setDescription(const char* descr)
 {
+	EventSystem::clearCodeReference(m_description);
+	
+	m_description = EventSystem::createCodeReference(descr);
 	if (m_description != LUA_NOREF)
 	{
-		luaL_unref(EventSystem::getLuaState(), LUA_REGISTRYINDEX, m_description);
-	}
-	
-	int err = luaL_loadstring(EventSystem::getLuaState(),descr);
-	if (err ==0)
-	{
 		m_description_code = descr;
-		m_description = luaL_ref(EventSystem::getLuaState(),LUA_REGISTRYINDEX);
 	}
-	else
-	{
-		EventSystem::reportErrors(EventSystem::getLuaState(), err,descr);
-	}	
 }
 
 void Quest::init()
@@ -85,17 +66,7 @@ void Quest::init()
 	DEBUG5("lua init %s",luainit.c_str());
 	EventSystem::doString(luainit.c_str());
 	
-	if (m_initialisation != LUA_NOREF)
-	{
-		lua_rawgeti(EventSystem::getLuaState(),LUA_REGISTRYINDEX ,  m_initialisation);
-		int err = lua_pcall(EventSystem::getLuaState(), 0, LUA_MULTRET, 0);
-		if (err !=0)
-		{
-			std::string expl = "error in initialisation of ";
-			expl += m_table_name;
-			EventSystem::reportErrors(EventSystem::getLuaState(), err,expl.c_str());
-		}
-	}
+	EventSystem::executeCodeReference(m_initialisation);
 }
 
 Quest::State Quest::getState()
@@ -117,17 +88,11 @@ Quest::State Quest::getState()
 
 std::string Quest::getDescription()
 {
-	lua_rawgeti(EventSystem::getLuaState(),LUA_REGISTRYINDEX ,  m_description);
-	int err = lua_pcall(EventSystem::getLuaState(), 0, LUA_MULTRET, 0);
-	if (err !=0)
-	{
-		std::string expl = "error in Description of ";
-		expl += m_name;
-		EventSystem::reportErrors(EventSystem::getLuaState(), err,expl.c_str());
-		return "";
-	}
+	EventSystem::executeCodeReference(m_description);
 	
-	return EventSystem::getReturnValue();
+	std::string ret = EventSystem::getReturnValue();
+	
+	return ret;
 }
 
 std::string Quest::getName()
