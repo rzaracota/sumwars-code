@@ -696,9 +696,8 @@ void Scene::createScene()
 	GraphicManager::destroyGraphicObject(m_temp_player_object);
 	m_temp_player_object =0;
 	m_temp_player="";
-	
 	SoundSystem::clearObjects();
-
+	updateCharacterView();
 
 	// Liste der statischen Objekte
 	Ogre::StaticGeometry* static_geom = m_scene_manager->createStaticGeometry ("StaticGeometry");

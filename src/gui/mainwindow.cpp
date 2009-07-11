@@ -1131,8 +1131,6 @@ void MainWindow::updateObjectInfo()
 		for (it = result.begin(); it != result.end(); ++it)
 		{
 			dist = it->distance;
-			if (dist > mindist)
-				continue;
 			
 			try
 			{
@@ -1153,13 +1151,13 @@ void MainWindow::updateObjectInfo()
 			if (go->getState() != WorldObject::STATE_ACTIVE)
 				continue;
 			
-			// verbuendete Spieler ueberspringen
+			// verbuendete Einheiten bekommen einen Malus - dadurch selektiert man im Kampf bevorzugt Feinde
 			wo = dynamic_cast<WorldObject*>(go);
 			if (wo != 0)
 			{
-				if (World::getWorld()->getRelation(m_document->getLocalPlayer()->getFraction(), wo->getFraction()) == WorldObject::ALLIED && wo->getType() == "PLAYER")
+				if (World::getWorld()->getRelation(m_document->getLocalPlayer()->getFraction(), wo->getFraction()) == WorldObject::ALLIED)
 				{
-					continue;
+					dist *=10;
 				}
 			}
 			
@@ -1168,9 +1166,10 @@ void MainWindow::updateObjectInfo()
 			
 			Ogre::Entity *pentity = dynamic_cast<Ogre::Entity*>(it->movable);
 			bool rayhit = true;
-			if (go->getType() == "FIXED_OBJECT" && pentity != 0)
+			if ((go->getType() == "FIXED_OBJECT" || go->getType() == "DROPITEM")  && pentity != 0)
 			{
 				rayhit = false;
+				
 				// mesh data to retrieve
 				size_t vertex_count;
 				size_t index_count;
@@ -1205,6 +1204,14 @@ void MainWindow::updateObjectInfo()
 				// free the verticies and indicies memory
 				delete[] vertices;
 				delete[] indices;
+				
+				if (rayhit)
+				{
+					dist /=10;
+				}
+				
+				if (go->getType() == "DROPITEM")
+					rayhit = true;
 			}
 			
 			// Objekt wird vom Kamerastrahl geschnitten
