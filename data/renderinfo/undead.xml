@@ -46,9 +46,21 @@
 	<Entity source="lich.mesh"/>
 </RenderInfo>
 
-<RenderInfo name="skeleton" parent="skeletonbase">
+<RenderInfo name="sword_skeleton" parent="skeletonbase">
 	<Entity source="skeleton.mesh"/>
+	<Entity objectname="weapon" bone="itemRightHand" source="old_sw.mesh" />
 </RenderInfo>
+
+<RenderInfo name="axe_skeleton" parent="skeletonbase">
+	<Entity source="skeleton.mesh"/>
+	<Entity objectname="weapon" bone="itemRightHand" source="axe.mesh" />
+</RenderInfo>
+
+<RenderInfo name="bow_skeleton" parent="skeletonbase">
+	<Entity source="skeleton.mesh"/>
+	<Entity objectname="weapon" bone="itemRightHand" source="bow.mesh" />
+</RenderInfo>
+
 
 <RenderInfo name="zombie" parent="zombiebase">
 	<Entity source="zombie_norm.mesh"/>
