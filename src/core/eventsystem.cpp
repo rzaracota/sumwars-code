@@ -601,18 +601,20 @@ int EventSystem::addUnitCommand(lua_State *L)
 					if (act == Action::USE)
 						com.m_range = 0.5;
 
-					if (argc >=4 && lua_isnumber(L,4))
+					if (argc >=3 && lua_isnumber(L,3))
 					{
-						com.m_goal_object_id = lua_tointeger(L,4);
+						com.m_goal_object_id = lua_tointeger(L,3);
+						com.m_goal = cr->getPosition();
 					}
-					else if (argc >=4 && (lua_istable(L,4) || lua_isstring(L,4)))
+					else if (argc >=3 && (lua_istable(L,3) || lua_isstring(L,3)))
 					{
-						com.m_goal = getVector(L,4);
+						com.m_goal = getVector(L,3);
+						com.m_goal_object_id =0;
 					}
 
 					float time = 50000;
-					if (argc>=3 && lua_isnumber(L,3))
-						time = lua_tonumber(L,3);
+					if (argc>=4 && lua_isnumber(L,4))
+						time = lua_tonumber(L,4);
 					cr->insertScriptCommand(com,time);
 				}
 			}
@@ -620,7 +622,7 @@ int EventSystem::addUnitCommand(lua_State *L)
 	}
 	else
 	{
-		ERRORMSG("Syntax: :addUnitCommand(int unitid, string command, float time, [goal_unitid | {goal_x,goal_y}])");
+		ERRORMSG("Syntax: :addUnitCommand(int unitid, string command,  [goal_unitid | {goal_x,goal_y}], [float time])");
 	}
 	return 0;
 

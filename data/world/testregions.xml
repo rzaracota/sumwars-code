@@ -59,10 +59,28 @@
 			 </Environments>
 			 <ReviveLocation  location="entry_south" />
 			
-			<SpawnGroups>
-				<SpawnGroup group_name="goblins_3" number="10" />
-			</SpawnGroups>
-			
+			 <Event trigger ="create_region" once = "true">
+				 <Effect>
+					 local pos = getLocation("entry_south");
+					 pos[2] = pos[2]-12;
+					 pos[1] = pos[1]+12;
+					 addLocation('GuardLocation', pos);
+					 addArea('GuardArea','circle',pos,12);
+					 pos[2] = pos[2]-8;
+					 pos[1] = pos[1]+8;
+					 addLocation('SkelLocation', pos);
+					 guard = createObject('guard','GuardLocation');
+				 </Effect>
+			 </Event>
+			 <Event trigger ="player_moved" once = "true">
+				 <Condition>
+					 return (unitIsInArea(trigger.player,'GuardArea'))
+				 </Condition>
+				 <Effect>
+					 skel = createObject('sword_skel','SkelLocation');
+					 addUnitCommand(skel, "attack", guard)
+				 </Effect>
+			</Event>
 		 </Region>
 		 
 		 <!-- soon to be tutorial-Region-->

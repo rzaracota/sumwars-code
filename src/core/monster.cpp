@@ -160,6 +160,7 @@ void Monster::updateCommand()
 	if (hasScriptCommand())
 	{
 		Creature::updateCommand();
+		return;
 	}
 	
 	// bei Cutscenes keine AI verwenden
@@ -172,11 +173,6 @@ void Monster::updateCommand()
 
 	// eigene Koordinaten
 	Vector &pos = getShape()->m_center;
-	
-	Shape s;
-	s.m_center = pos;
-	s.m_type = Shape::CIRCLE;
-	s.m_radius = 12;
 	
 	DEBUG5("update monster command %i %s",getId(), getSubtype().c_str());
 	DEBUG5("randaction prob %f",m_ai.m_vars.m_randaction_prob);
@@ -192,12 +188,17 @@ void Monster::updateCommand()
 	
 	// moegliche Ziele ermitteln
 
-	// Liste der Spieler
-	WorldObjectMap* players = getRegion()->getPlayers();
-	WorldObjectList ret;
+	// Liste der moeglichen Ziele
+	WorldObjectList potgoals;
+	Shape s;
+	s.m_center = pos;
+	s.m_type = Shape::CIRCLE;
+	s.m_radius = m_ai.m_vars.m_sight_range;
 	
+	getRegion()->getObjectsInShape(&s,&potgoals,LAYER_BASE | LAYER_AIR,WorldObject::CREATURE,0);
 
 	Creature* pl;
+	WorldObjectList ret;
 	
 	// Linie vom Monster zum Ziel
 	Line gline(pos,Vector(0,0));
@@ -207,9 +208,9 @@ void Monster::updateCommand()
 	float dist;
 	if (m_ai.m_mod_time[TAUNT]<=0 || m_ai.m_chase_player_id==0)
 	{
-		for (WorldObjectMap::iterator it = players->begin(); it!=players->end(); ++it)
+		for (WorldObjectList::iterator it = potgoals.begin(); it!=potgoals.end(); ++it)
 		{
-			pl = static_cast<Creature*>(it->second);
+			pl = static_cast<Creature*>(*it);
 			
 			// Spieler nur als Ziel, wenn aktiv und nicht in Dialog
 			if (! pl->canBeAttacked())

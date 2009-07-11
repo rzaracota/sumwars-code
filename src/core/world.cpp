@@ -378,8 +378,10 @@ WorldObject::Relation World::getRelation(WorldObject::Fraction frac, WorldObject
 	
 	if (frac<=  WorldObject::FRAC_MONSTER && frac2<=  WorldObject::FRAC_MONSTER)
 	{
-		// Beziehung zwischen zwei Nicht -Spieler Parteien
-		return WorldObject::NEUTRAL;
+		if (frac == WorldObject::FRAC_HUMAN && frac2 == WorldObject::FRAC_DWARF)
+			return WorldObject::NEUTRAL;
+		
+		return WorldObject::HOSTILE;	
 	}
 	else if (frac<=  WorldObject::FRAC_MONSTER)
 	{

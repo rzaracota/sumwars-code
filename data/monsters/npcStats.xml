@@ -137,6 +137,9 @@
 			<Animation name="walkTwoHands" />
 		</Ability>
 		
+		<Ability type="attack">
+			<Animation name="attackTwoHands" />
+		</Ability>
 		
 		<Ability type="die">
 			<Animation name="die" />
