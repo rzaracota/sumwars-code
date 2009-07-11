@@ -347,6 +347,12 @@ public:
 	void insertScriptCommand(Command &cmd, float time=50000);
 
 	/**
+	 * \fn void clearScriptCommands()
+	 * \brief Loescht alle per Script gesetzten Kommandos
+	 */
+	void clearScriptCommands();
+	
+	/**
 	 * \fn bool hasScriptCommand()
 	 * \brief Gibt true zurueck, wenn das aktuelle Kommando per Script gesetzt wurde
 	 */

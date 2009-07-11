@@ -472,7 +472,7 @@ void Dialogue::update(float time)
 				wo = m_region->getObject( getSpeaker(m_speech.front().first));
 				cr = static_cast<Creature*>(wo);
 
-				if (cr ==0 )
+				if (cr ==0 && m_speech.front().first!="nobody")
 				{
 					DEBUG("cant speak text %s %s",m_speech.front().first.c_str(),m_speech.front().second.m_text.c_str());
 					m_speech.pop_front();
@@ -521,8 +521,10 @@ void Dialogue::update(float time)
 			// naechsten Text sprechen
 			DEBUG5("spoken text %s",cst->m_text.c_str());
 
-			
-			cr->speakText(*cst);
+			if (cr !=0)
+			{
+				cr->speakText(*cst);
+			}
 
 		}
 

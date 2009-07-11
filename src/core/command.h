@@ -43,6 +43,11 @@ class Command {
  * Public stuff
  */
 public:
+	enum Flags
+	{
+		REPEAT = 1,
+ 		
+	};
 	/**
 	 * Fields
 	 */
@@ -64,6 +69,7 @@ public:
 		m_goal_object_id= goal_object_id;
 		m_damage_mult=1;
 		m_range=1;
+		m_flags =0;
 	}
 	
 	/**
@@ -132,6 +138,11 @@ public:
 	 */
 	float m_damage_mult;
 	
+	/**
+	 * \var char m_flags
+	 * \brief bitkodierte Flags
+	 */
+	char m_flags;
 	/**
 	 * Constructors
 	 */

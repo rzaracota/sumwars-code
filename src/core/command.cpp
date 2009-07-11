@@ -6,7 +6,8 @@ void Command::toString(CharConv* cv)
 	cv->toBuffer(m_goal.m_x);
 	cv->toBuffer(m_goal.m_y);
 	cv->toBuffer(m_goal_object_id);
-	cv->toBuffer(m_range);	
+	cv->toBuffer(m_range);
+	cv->toBuffer(m_flags);		
 }
 
 void Command::fromString(CharConv* cv)
@@ -18,6 +19,7 @@ void Command::fromString(CharConv* cv)
 	cv->fromBuffer(m_goal.m_y);
 	cv->fromBuffer(m_goal_object_id);
 	cv->fromBuffer(m_range);
+	cv->fromBuffer(m_flags);
 	m_damage_mult =1;	
 }
 		

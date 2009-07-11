@@ -59,6 +59,7 @@ void EventSystem::init()
 	lua_register(m_lua, "getObjectAt", getObjectAt);
 	lua_register(m_lua, "getObjectsInArea", getObjectsInArea);
 	lua_register(m_lua, "addUnitCommand", addUnitCommand);
+	lua_register(m_lua, "clearUnitCommands",clearUnitCommands); 
 	lua_register(m_lua, "setCutsceneMode", setCutsceneMode);
 	lua_register(m_lua, "addCameraPosition", addCameraPosition);
 	
@@ -667,10 +668,23 @@ int EventSystem::addUnitCommand(lua_State *L)
 						com.m_goal = getVector(L,3);
 						com.m_goal_object_id =0;
 					}
-
+					
+					if (argc>=4)
+					{
+						std::string flags = lua_tostring(L,4);
+						char flg =0;
+						
+						if (flags.find("repeat") != std::string::npos)
+						{
+							flg |= Command::REPEAT;
+							com.m_flags = flg;
+							DEBUG5("flags: %s",flags.c_str());
+						}
+					}
+					
 					float time = 50000;
-					if (argc>=4 && lua_isnumber(L,4))
-						time = lua_tonumber(L,4);
+					if (argc>=5 && lua_isnumber(L,5))
+						time = lua_tonumber(L,5);
 					cr->insertScriptCommand(com,time);
 				}
 			}
@@ -678,10 +692,28 @@ int EventSystem::addUnitCommand(lua_State *L)
 	}
 	else
 	{
-		ERRORMSG("Syntax: :addUnitCommand(int unitid, string command,  [goal_unitid | {goal_x,goal_y}], [float time])");
+		ERRORMSG("Syntax: :addUnitCommand(int unitid, string command,  [goal_unitid | {goal_x,goal_y}], [flags], [float time])");
 	}
 	return 0;
 
+}
+
+int EventSystem::clearUnitCommands(lua_State *L)
+{
+	int argc = lua_gettop(L);
+	if (argc>=1 && lua_isnumber(L,1))
+	{
+		if (m_region ==0)
+			return 0;
+		
+		int id = int (lua_tonumber(L,1));
+		Creature* cr = dynamic_cast<Creature*>(m_region->getObject(id));
+		if (cr != 0)
+		{
+			cr->clearScriptCommands();
+		}
+	}
+	return 0;
 }
 
 int EventSystem::getObjectAt(lua_State *L)

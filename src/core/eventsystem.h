@@ -216,6 +216,12 @@ class EventSystem
 		static int addUnitCommand(lua_State *L);
 		
 		/**
+		 * \fn static int clearUnitCommands(lua_State *L)
+		 * \brief Loescht alle Kommandos einer Einheit
+		 */
+		static int clearUnitCommands(lua_State *L);
+		
+		/**
 		 * \fn static int getObjectAt(lua_State *L)
 		 * \brief Gibt das Objekt an der angegebenen Stelle aus
 		 * \param L Lua Status

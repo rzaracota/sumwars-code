@@ -1406,7 +1406,12 @@ void Creature::insertScriptCommand(Command &cmd, float time)
 		clearCommand(false);
 	}
 	m_script_commands.push_back(std::make_pair(cmd,time));	
-	DEBUG("insert script command %i at %i",cmd.m_type,cmd.m_goal_object_id);
+	DEBUG5("insert script command %i at %i",cmd.m_type,cmd.m_goal_object_id);
+}
+
+void Creature::clearScriptCommands()
+{
+	m_script_commands.clear();
 }
 
 
@@ -1423,7 +1428,10 @@ void Creature::updateCommand()
 			
 			m_command = m_script_commands.front().first;
 			m_script_command_timer = m_script_commands.front().second;
-			m_script_commands.pop_front();
+			if (! (m_command.m_flags & Command::REPEAT) )
+			{
+				m_script_commands.pop_front();
+			}
 			DEBUG5("script command %i time %f",m_command.m_type, m_script_command_timer);
 		}
 		else
