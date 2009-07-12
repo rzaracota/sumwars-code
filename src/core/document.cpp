@@ -1467,7 +1467,7 @@ void Document::updateContent(float time)
 	
 	// Fenster einstellen, die automatisch geoeffnet werden
 	int wmask = getGUIState()->m_shown_windows;
-	if (player->getTradeInfo().m_trade_partner != 0)
+	if (player->getTradeInfo().m_trade_partner != 0 && getGUIState()->m_shown_windows != SAVE_EXIT)
 	{
 		if (getGUIState()->m_shown_windows != (TRADE | INVENTORY))
 		{
