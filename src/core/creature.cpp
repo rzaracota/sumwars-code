@@ -700,7 +700,7 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 	switch(m_action.m_type)
 	{
 		case Action::SPEAK:
-			if (goalobj->isCreature() && getDialogueId() ==0)
+			if (goalobj->isCreature() && getDialogueId() ==0 && getRegion()->getCutsceneMode() == false)
 			{
 				cr = static_cast<Creature*>(goalobj);
 				if (cr->getDialogueId() ==0)
@@ -712,6 +712,8 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 					dia->addSpeaker(goalobj->getId(),"npc");
 					dia->changeTopic("start");
 					getRegion()->insertDialogue(dia);
+					
+					cr->setAngle((getPosition() - cr->getPosition()).angle());
 				}
 			}
 			
