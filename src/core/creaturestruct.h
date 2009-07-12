@@ -444,6 +444,12 @@ struct CreatureSpeakText
 	float m_time;
 	
 	/**
+	 * \var std::string m_script_action
+	 * \brief Luascript, das parallel ausgefuehrt wird. Dient vor allem dazu, zum Text passende Bewegung zu starten
+	 */
+	std::string m_script_action;
+	
+	/**
 	 * \var std::list < std::pair<std::string, std::string> > m_answers
 	 * \brief Liste von moeglichen Antworten und  dem zugehoerigen Thema
 	 */
