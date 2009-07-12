@@ -746,6 +746,10 @@ bool Document::checkSubwindowsAllowed()
 	bool ok = true;
 	ok &= (getState() == RUNNING || getState() == SHUTDOWN_REQUEST);
 	ok &= (getGUIState()->m_shown_windows & (QUESTIONBOX | TRADE)) == 0;
+	if (getLocalPlayer() != 0 && getLocalPlayer()->getRegion() !=0)
+	{
+		ok &= ~getLocalPlayer()->getRegion()->getCutsceneMode();
+	}
 	return ok;
 }
 
@@ -1492,6 +1496,15 @@ void Document::updateContent(float time)
 	{
 		getGUIState()->m_shown_windows &= ~WORLDMAP;
 		m_modified |= WINDOWS_MODIFIED;
+	}
+	
+	if (player->getRegion() !=0 && player->getRegion()->getCutsceneMode())
+	{
+		if (getGUIState()->m_shown_windows & ~SAVE_EXIT != 0)
+		{
+			getGUIState()->m_shown_windows &= SAVE_EXIT;
+			m_modified |= WINDOWS_MODIFIED;
+		}
 	}
 
 	if (m_gui_state.m_left_mouse_pressed)
