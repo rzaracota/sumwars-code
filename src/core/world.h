@@ -108,11 +108,11 @@ public:
 	bool init(int port );
 	
 	/**
-	 * \fn void createRegion(short region)
+	 * \fn bool createRegion(short region)
 	 * \brief Erzeugt die Region mit der angegebenen Nummer
 	 * \param region Nummer der Region, die erzeugt werden soll
 	 */
-	void createRegion(short region);
+	bool createRegion(short region);
 	
 	
 	/**

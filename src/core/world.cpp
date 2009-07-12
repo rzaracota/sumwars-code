@@ -172,7 +172,7 @@ bool World::init(int port)
 }
 
 
-void World::createRegion(short region)
+bool World::createRegion(short region)
 {
 
 
@@ -194,9 +194,13 @@ void World::createRegion(short region)
 		Region* reg = MapGenerator::createRegion(rdata);
 		DEBUG5("region created %p for id %i",reg,region);
 
-		// Debugging
+		if (reg == 0)
+		{
+			return false;
+		}
+		
 		insertRegion(reg,region);
-
+		return true;
 	}
 	else if(type==2)
 	{
@@ -231,6 +235,7 @@ void World::createRegion(short region)
 		reg->createObject("$tree", Vector(1,8));
 
 	}
+	return true;
 }
 
 
@@ -500,7 +505,13 @@ bool World::insertPlayerIntoRegion(WorldObject* player, short region, LocationNa
 					
 					return succ;
 				}
-				createRegion(region);
+				bool succ = createRegion(region);
+				if (succ == false)
+				{
+					static_cast<Player*>(player)->setRevivePosition(m_player_start_location);
+					bool succ = insertPlayerIntoRegion(player, getRegionId(m_player_start_location.first), m_player_start_location.second);
+					return succ;
+				}
 			}
 
 			// ein lokaler Spieler kann jetzt in die erzeugte region

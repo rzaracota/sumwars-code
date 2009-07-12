@@ -13,8 +13,13 @@ Region* MapGenerator::createRegion(RegionData* rdata)
 	MapGenerator::MapData mdata;
 
 	bool success = false;
+	int counter =0;
 	while (!success)
 	{
+		counter ++;
+		if (counter > 10)
+			return 0;
+		
 		// Speicher anfordern
 		MapGenerator::createMapData(&mdata,rdata);
 		
@@ -53,7 +58,7 @@ Region* MapGenerator::createRegion(RegionData* rdata)
 			if (templ ==0)
 			{
 				ERRORMSG("unknown object group %s",rdata->m_region_template.c_str());
-				continue;
+				return 0;
 			}
 
 			Vector pos(rdata->m_dimx*2, rdata->m_dimy*2);
