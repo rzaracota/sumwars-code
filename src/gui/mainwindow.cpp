@@ -165,7 +165,11 @@ void MainWindow::update(float time)
 	m_mouse->capture();
 	m_keyboard->capture();
 	
-	
+	if (m_document->getGUIState()->m_left_mouse_pressed || m_document->getGUIState()->m_right_mouse_pressed)
+	{
+		Vector pos = getIngamePos(m_mouse->getMouseState().X.abs,m_mouse->getMouseState().Y.abs);
+		m_document->getGUIState()->m_clicked = pos;
+	}
 	
 	// Tastenwiederholung erzeugen
 	if (m_key !=0)
@@ -2305,11 +2309,7 @@ bool MainWindow::mouseMoved(const OIS::MouseEvent &evt) {
 	//DEBUG("injection position %i %i",evt.state.X.abs,evt.state.Y.abs);
 	m_document->onMouseMove(evt.state.X.rel, evt.state.Y.rel,evt.state.Z.rel);
 	
-	if (m_document->getGUIState()->m_left_mouse_pressed || m_document->getGUIState()->m_right_mouse_pressed)
-	{
-		Vector pos = getIngamePos(evt.state.X.abs,evt.state.Y.abs);
-		m_document->getGUIState()->m_clicked = pos;
-	}
+	
 	
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::Window* label = win_mgr.getWindow("CursorItemImage");

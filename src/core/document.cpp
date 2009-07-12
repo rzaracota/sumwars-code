@@ -1531,9 +1531,9 @@ void Document::updateContent(float time)
 		}
 	}
 
-	if (m_gui_state.m_right_mouse_pressed_time>= 200)
+	if (m_gui_state.m_right_mouse_pressed)
 	{
-		DEBUG("rechte Maustaste festgehalten");
+		DEBUG5("rechte Maustaste festgehalten");
 		m_gui_state.m_right_mouse_pressed_time += time;
 
 		if (m_gui_state.m_right_mouse_pressed_time>= 200)
