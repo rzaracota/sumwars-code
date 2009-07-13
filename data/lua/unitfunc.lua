@@ -16,7 +16,7 @@ function isFixedObject(obj)
 
 function isCreature(obj)
 		local t = getObjectValue(obj,"type")
-		return (t == "MONSTER" or t=="PLAYER")
+		return (t == "MONSTER" or t=="PLAYER" or t=="NPC")
 		end;
 
 function isAlive(obj)
@@ -61,6 +61,16 @@ function lookAt(obj,pos)
 	local diry = pos[2] - opos[2];
 	local angle = math.atan2(diry,dirx)*180 / 3.14159;
 	setObjectValue(obj,"angle",angle);
+end;
+
+function lookAtObject(obj,obj2)
+	lookAt(obj,get(obj2,"position"));
+end;
+
+function playersLookAt(pos)
+	for key,id in pairs(getPlayers()) do
+		lookAt(id,pos);
+	end;
 end;
 
 

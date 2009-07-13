@@ -15,7 +15,7 @@
 		<Event trigger="create_region" once="true">
 			<Effect>
 				addArea("aisMounPathEntryEastArea","circle","entry_east",10);
-				addArea("aisMounPathPartyArea","circle","locParty",3);
+				addArea("aisMounPathPartyArea","circle","locPartyEntry",3);
 				
 				scene5_tmp.guard1 = createObject("guard", "locGuard1");
 				setRefName(scene5_tmp.guard1, "Elementaristenwaechter1");
@@ -77,12 +77,17 @@
 				addUnitCommand(scene5_tmp.skeletons[2], "range_attack", scene5_tmp.guard2,"repeat")
 				addUnitCommand(scene5_tmp.skeletons[3], "range_attack", scene5_tmp.guard4,"repeat")
 				addUnitCommand(scene5_tmp.skeletons[4], "range_attack", scene5_tmp.hauptmann_der_wache,"repeat");
-				
-				
 				addUnitCommand(scene5_tmp.skeletons[5], "range_attack", scene5_tmp.erzmaga_ireana,"repeat")
 				addUnitCommand(scene5_tmp.skeletons[6], "range_attack", scene5_tmp.guard1,"repeat")
 				addUnitCommand(scene5_tmp.skeletons[7], "range_attack", scene5_tmp.guard1,"repeat")
 				addUnitCommand(scene5_tmp.skeletons[8], "range_attack", scene5_tmp.guard3,"repeat")
+				
+				lookAtObject(scene5_tmp.guard1, scene5_tmp.skeletons[6]);
+				lookAtObject(scene5_tmp.guard2, scene5_tmp.skeletons[2]);
+				lookAtObject(scene5_tmp.guard3, scene5_tmp.skeletons[8]);
+				lookAtObject(scene5_tmp.guard4, scene5_tmp.skeletons[3]);
+				lookAtObject(scene5_tmp.erzmaga_ireana, scene5_tmp.hauptmann_der_wache);
+				lookAtObject(scene5_tmp.hauptmann_der_wache, scene5_tmp.erzmaga_ireana);
 				
 				addCameraPosition(0,get(getRole("PL"),"position"),-50,40,20);
 				addCameraPosition(5000,get(scene5_tmp.erzmaga_ireana,"position"),-50,40,20);
@@ -106,6 +111,9 @@
 				-- ist verunglueckt, mehrere Skelettbogenschuetzen beschießen sie mit
 				-- Feuerpfeilen und die Wachen sind allesamt verwundet.
 				
+				playersLookAt(getPosition(scene5_tmp.erzmaga_ireana));
+				lookAtObject(scene5_tmp.guard1, getRole("PL"));
+				
 				createDialogue();
 				addSpeaker(scene5_tmp.guard1,"W1");
 				addSpeaker(scene5_tmp.soren_windclaw_crystal,"SW");
@@ -113,7 +121,7 @@
 				addSpeaker(scene5_tmp.hauptmann_der_wache,"HW");
 				addSpeaker(scene5_tmp.guard2,"EW");
 				addSpeaker(trigger.player,"Player");
-				addStandardSpeakers("aisMounPath","locParty");
+				addStandardSpeakers("aisMounPath","locPartyEntry");
 				
 				speak("nobody","",2000);
 				speak("MALEast",_("Sie ist ja bildschoen!"),1000);
@@ -151,7 +159,17 @@
 				scene5_tmp.skeletons_nr = scene5_tmp.skeletons_nr -1;
 				if (scene5_tmp.skeletons_nr == 0) then
 				
-					startTimer("scene5_dialogue2",1000);
+					if (isCreature(scene5_tmp.guard2)) then
+						addUnitCommand(scene5_tmp.guard2, "walk", "locGuard2")
+					end;
+					if (isCreature(scene5_tmp.guard3)) then
+						addUnitCommand(scene5_tmp.guard3, "walk", "locGuard3")
+					end;
+					if (isCreature(scene5_tmp.guard4)) then
+						addUnitCommand(scene5_tmp.guard4, "walk", "locGuard4")
+					end;
+				
+					startTimer("scene5_dialogue2",3000);
 				end;
 			</Effect>
 		</Event>
@@ -163,8 +181,9 @@
 				setObjectValue(scene5_tmp.soren_windclaw_crystal,"max_health",10000);
 				setObjectValue(scene5_tmp.soren_windclaw_crystal,"health",10000);
 				
+				
+				
 				createDialogue();
-				addSpeaker(scene5_tmp.guard1,"W1");
 				addSpeaker(scene5_tmp.soren_windclaw_crystal,"SW");
 				addSpeaker(scene5_tmp.erzmaga_ireana,"IvN");
 				addSpeaker(scene5_tmp.hauptmann_der_wache,"HW");
@@ -174,8 +193,12 @@
 				
 				setCutsceneMode(true);
 					
-				addCameraPosition(0,get(getRole("PL"),"position"),-50,40,20);
-				addCameraPosition(20000,get(getRole("PL"),"position"),-50,40,20);
+				addCameraPosition(0,get(getRole("PL"),"position"),-50,40,10);
+				
+				playersLookAt(getPosition(scene5_tmp.erzmaga_ireana));
+				lookAtObject(scene5_tmp.soren_windclaw_crystal, scene5_tmp.erzmaga_ireana);
+				lookAtObject(scene5_tmp.erzmaga_ireana, getRole("PL"));
+				lookAtObject(scene5_tmp.hauptmann_der_wache, getRole("PL"));
 				
 				speak("HW",_("Ich habe noch nie jemanden"),1000);
 				speak("MAGast",_("Ihr kommt wohl nicht allzuviel"),1000);
@@ -225,7 +248,8 @@
 			<Effect>
 				scene5.scene5 = true;
 				scene5.started = true;
-				setCutsceneMode(false);
+				timedExecute("setCutsceneMode(false);",1000);
+				deleteObject(scene5_tmp.soren_windclaw_crystal);
 			</Effect>
 		</Topic>
 

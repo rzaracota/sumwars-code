@@ -81,7 +81,8 @@ void EventSystem::init()
 	lua_register(m_lua, "createEvent", createEvent);
 	lua_register(m_lua, "addCondition", addCondition);
 	lua_register(m_lua, "addEffect", addEffect);
-
+	lua_register(m_lua, "timedExecute",timedExecute);
+	
 	lua_register(m_lua, "writeString", writeString);
 	lua_register(m_lua, "writeNewline", writeNewline);
 	lua_register(m_lua, "writeUpdateString", writeUpdateString);
@@ -212,6 +213,48 @@ bool EventSystem::executeEvent(Event* event)
 	event->doEffect();
 
 	return true;
+}
+
+int EventSystem::timedExecute(lua_State *L)
+{
+	// einzigartiger Name wird durch den counter sichergestellt
+	static int counter=1;
+	
+	int argc = lua_gettop(L);
+	if (argc>=2 && lua_isstring(L,1) && lua_isnumber(L,2))
+	{
+		std::string code = lua_tostring(L,1);
+		float time  = lua_tonumber(L, 2);
+		
+		Region* reg = m_region;
+		if (argc>=3 && lua_isstring(L,3))
+		{
+			reg = World::getWorld()->getRegion(lua_tostring(L,3));
+		}
+		if (reg ==0)
+		{
+			return 0;
+			DEBUG("region for timedExecute does not exist");
+		}
+		
+		m_event = new Event();
+		m_event->setOnce(true);
+		m_event->setEffect(code.c_str());
+		
+		std::stringstream stream;
+		stream << counter << "_event";
+		
+		reg ->addEvent(stream.str(),m_event);
+		Trigger* trigger = new Trigger(stream.str());
+		m_region->insertTimedTrigger(trigger,time);
+		
+		counter++;
+	}
+	else
+	{
+		ERRORMSG("Syntax: timedExecute( string luacode, float time, [string regionname])");
+	}
+	return 0;
 }
 
 Vector EventSystem::getVector(lua_State *L, int index)

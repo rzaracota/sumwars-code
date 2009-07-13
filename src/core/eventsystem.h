@@ -396,6 +396,12 @@ class EventSystem
 		static int addEffect(lua_State *L);
 		
 		/**
+		 * \fn static int timedExecute(lua_State *L)
+		 * \brief Fuehrt zeitversetzt ein Script aus
+		 */
+		static int timedExecute(lua_State *L);
+		
+		/**
 		 * \fn static Vector getVector(lua_State *L, int index)
 		 * \brief Liest einen Vector vom Lua Stack
 		 * \param L Lua Status
