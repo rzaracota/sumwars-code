@@ -1078,10 +1078,14 @@ int EventSystem::speak(lua_State *L)
 		std::string refname = lua_tostring(L, 1);
 		std::string text = lua_tostring(L, 2);
 
-		float time = 1000;
+		float time = 0;
 		if (argc>=3 && lua_isnumber(L,3))
 		{
 			time = lua_tonumber(L,3);
+		}
+		if (time ==0)
+		{
+			time = text.size()*50+500;
 		}
 
 		m_dialogue->speak(refname,text,time);
@@ -1127,10 +1131,14 @@ int EventSystem::unitSpeak(lua_State *L)
 		
 		Creature* cr = dynamic_cast<Creature*>(wo);
 		
-		text.m_time = 1000;
+		text.m_time = 0;
 		if (argc>=3 && lua_isnumber(L,3))
 		{
 			text.m_time = lua_tonumber(L,3);
+		}
+		if (text.m_time ==0)
+		{
+			text.m_time = text.m_text.size()*50+500;
 		}
 
 		if (cr!=0)
