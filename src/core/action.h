@@ -438,17 +438,6 @@ public:
 	 */
 	ActionEquip m_action_equip;
 
-	/**
-	 * \var char m_animation_number
-	 * \brief Nummer der Animation (falls mehrere fuer dieselbe Situation vorhanden sind)
-	 */
-	char m_animation_number;
-	
-	/**
-	 * \var ActionType m_prev_type
-	 * \brief Typ der vorhergehenden Aktion
-	 */
-	ActionType m_prev_type;
 	
 	/**
 	 * \var Vector m_goal

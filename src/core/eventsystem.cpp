@@ -60,6 +60,7 @@ void EventSystem::init()
 	lua_register(m_lua, "getObjectsInArea", getObjectsInArea);
 	lua_register(m_lua, "addUnitCommand", addUnitCommand);
 	lua_register(m_lua, "clearUnitCommands",clearUnitCommands); 
+	lua_register(m_lua, "setUnitAction", setUnitAction);
 	lua_register(m_lua, "setCutsceneMode", setCutsceneMode);
 	lua_register(m_lua, "addCameraPosition", addCameraPosition);
 	
@@ -757,6 +758,66 @@ int EventSystem::clearUnitCommands(lua_State *L)
 		}
 	}
 	return 0;
+}
+
+int  EventSystem::setUnitAction(lua_State *L)
+{
+	int argc = lua_gettop(L);
+	if (argc>=2 && lua_isnumber(L,1) && lua_isstring(L,2) )
+	{
+		if (m_region ==0)
+			return 0;
+
+		int id = int (lua_tonumber(L,1));
+		std::string actstr = lua_tostring(L,2);
+
+		WorldObject* wo = m_region->getObject(id);
+		if (wo !=0)
+		{
+			if (wo->getType() != "FIXED_OBJECT")
+			{
+				Creature* cr = static_cast<Creature*>(wo);
+
+				Action::ActionType act = Action::getActionType(actstr);
+				if (act != Action::NOACTION)
+				{
+					Action action;
+					action.m_action_equip = Action::NO_WEAPON;
+					action.m_type = act;
+					
+					if (argc >=3 && lua_isnumber(L,3))
+					{
+						action.m_goal_object_id = lua_tointeger(L,3);
+						action.m_goal = cr->getPosition();
+					}
+					else if (argc >=3 && (lua_istable(L,3) || lua_isstring(L,3)))
+					{
+						action.m_goal = getVector(L,3);
+						action.m_goal_object_id =0;
+					}
+					else
+					{
+						action.m_goal_object_id =0;
+						action.m_goal = cr->getPosition();
+					}
+					
+					
+					action.m_elapsed_time=0;
+					action.m_time = 1000;
+					if (argc>=4 && lua_isnumber(L,4))
+						action.m_time = lua_tonumber(L,4);
+					
+					cr->setAction(action);
+				}
+			}
+		}
+	}
+	else
+	{
+		ERRORMSG("Syntax: :setUnitAction(int unitid, string command,  [goal_unitid | {goal_x,goal_y}], [float time])");
+	}
+	return 0;
+
 }
 
 int EventSystem::getObjectAt(lua_State *L)

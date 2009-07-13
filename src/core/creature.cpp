@@ -129,7 +129,6 @@ bool Creature::init()
 	m_script_command_timer =0;
 	clearCommand(true);
 	
-	m_action.m_animation_number=0;
 	m_action.m_action_equip = Action::NO_WEAPON;
 	m_action.m_elapsed_time = 0.0;
 	m_action.m_time = 2000.0;
@@ -316,7 +315,6 @@ void Creature::initAction()
 
 	// Daten fuer die Animation setzen
 	m_action.m_action_equip = getActionEquip();
-	m_action.m_animation_number = Random::randi(120);
 
 	// Besondere Initialisierungen
 
@@ -554,10 +552,6 @@ void Creature::performAction(float &time)
 	if (finish)
 	{
 		DEBUG5("finished action");
-		if (m_action.m_type != Action::WALK)
-		{
-			m_action.m_prev_type = m_action.m_type;
-		}
 		
 		if (m_action.m_type == Action::WALK)
 		{
@@ -2309,6 +2303,10 @@ bool Creature::update (float time)
 					}
 					
 					addToNetEventMask(NetEvent::DATA_ACTION);
+					
+					Trigger* tr = new Trigger("unit_dead");
+					tr->addVariable("unit",getId());
+					getRegion()->insertTrigger(tr);
 				}
 				break;
 

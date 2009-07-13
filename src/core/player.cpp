@@ -393,7 +393,6 @@ void  Player::revive()
 	getNextCommand()->m_goal_object_id =0;
 	getNextCommand()->m_range =1;
 
-	getAction()->m_animation_number=0;
 	getAction()->m_action_equip = Action::NO_WEAPON;
 	getAction()->m_time =0;
 	getAction()->m_elapsed_time =0;

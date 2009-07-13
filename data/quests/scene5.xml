@@ -33,11 +33,11 @@
 				setRefName(scene5_tmp.guard4, "Elementaristenwaechter4");
 				
 				
-				scene5_tmp.dead_guard1 = createObject("peasant", "locDeadGuard1");
+				scene5_tmp.dead_guard1 = createObject("guard", "locDeadGuard1");
 				setRefName(scene5_tmp.dead_guard1, "Guard");
 				setObjectValue(scene5_tmp.dead_guard1,"health",0);
 				
-				scene5_tmp.dead_guard2 = createObject("peasant", "locDeadGuard2");
+				scene5_tmp.dead_guard2 = createObject("guard", "locDeadGuard2");
 				setRefName(scene5_tmp.dead_guard2, "Guard");
 				setObjectValue(scene5_tmp.dead_guard2,"health",0);
 				
@@ -54,6 +54,15 @@
 			</Effect>
 		</Event>
 
+		<Event trigger ="unit_dead">
+			<Condition>
+				return (get(trigger.unit,'subtype') == 'guard')
+			</Condition>
+			<Effect>
+				setUnitAction(trigger.unit,"dead",0,600000);
+			</Effect>
+		</Event>
+		
 		<Event trigger="player_moved" once="true">
 			<Condition>
 				if (scene4.scene4 == true and scene5.scene5 ~= true) then

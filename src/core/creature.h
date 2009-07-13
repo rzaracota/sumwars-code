@@ -97,6 +97,16 @@ public:
 	}
 	
 	/**
+	 * \fn void setAction(Action* act)
+	 * \brief Setzt die aktuelle Aktion
+	 **/
+	void setAction(Action& act)
+	{
+		m_action = act;
+		addToNetEventMask(NetEvent::DATA_ACTION);
+	}
+	
+	/**
 	 * \fn Command* getCommand()
 	 * \brief Gibt einen Zeiger auf das aktuelle Kommando zur&uuml;ck
 	 * \return Command*, Zeiger auf das aktuelle Kommando

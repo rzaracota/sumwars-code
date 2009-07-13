@@ -60,6 +60,23 @@ void Action::init()
 	a->m_animation[NO_WEAPON].push_back("die");
 	a->m_animation[ONE_HANDED].push_back("die");
 	a->m_animation[TWO_HANDED].push_back("die");
+	
+	a = &(Action::m_base_info[Action::DEAD]);
+	a->m_timer_nr=0;
+	a->m_standard_time=1000;
+	a->m_timer=0;
+	a->m_base_action = Action::NOACTION;
+	a->m_critical_perc=-1;
+	a->m_distance = SELF;
+	a->m_flags =0;
+	a->m_req_level = 0;
+	a->m_req_ability[0]= Action::NOACTION;
+	a->m_req_ability[1] = Action::NOACTION;
+	a->m_req_ability[2] = Action::NOACTION;
+	a->m_enum_name = "dead";
+	a->m_animation[NO_WEAPON].push_back("die");
+	a->m_animation[ONE_HANDED].push_back("die");
+	a->m_animation[TWO_HANDED].push_back("die");
 
 
 	a = &(Action::m_base_info[Action::WALK]);
@@ -1783,7 +1800,6 @@ void Action::toString(CharConv* cv)
 	cv->toBuffer((short) m_type);
 	cv->toBuffer(m_time);
 	cv->toBuffer((char) m_action_equip);
-	cv->toBuffer(m_animation_number);
 	cv->toBuffer(m_elapsed_time);
 
 
@@ -1798,7 +1814,6 @@ void Action::fromString(CharConv* cv)
 	cv->fromBuffer(m_time);
 	cv->fromBuffer(ctmp);
 	m_action_equip = (ActionEquip) ctmp;
-	cv->fromBuffer(m_animation_number);
 	cv->fromBuffer(m_elapsed_time);
 }
 

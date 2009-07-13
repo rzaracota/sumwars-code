@@ -216,6 +216,12 @@ class EventSystem
 		static int addUnitCommand(lua_State *L);
 		
 		/**
+		 * \fn static int setUnitAction(lua_State *L)
+		 * \brief Setzt die Aktion einer Einheit
+		 */
+		static int setUnitAction(lua_State *L);
+		
+		/**
 		 * \fn static int clearUnitCommands(lua_State *L)
 		 * \brief Loescht alle Kommandos einer Einheit
 		 */
