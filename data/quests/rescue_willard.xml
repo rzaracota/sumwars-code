@@ -23,36 +23,36 @@
 			</Condition>
 			<Effect>
 				if (rescue_willard.started == true) then
-					speak('Fenor Marken',_("You have yet to give the stone to Willard."),1000)
+					speak('Fenor Marken',_("You have yet to give the stone to Willard."))
 				else
 					addStandardSpeakers();
-					speak('Fenor Marken',_("Hey there!"),1000);
-					speak('Fenor Marken',_("Are you the councils backing?"),1300);
-					speak('player',_("And if it was like that?"),1300);
-					speak('Fenor Marken',_("I heard you were Branded Ones."),1500);
-					speak('Fenor Marken',_("There is something, only someone like you can do."),2000);
-					speak('Fenor Marken',_("With sure success that is."),1500);
-					speak("ANY",_("Who would have thougt of that?"),1800);
-					speak("ANY",_("Does a respectable member of the guard want someones thoat cut?"),3000);
-					speak('Fenor Marken',_("Eh? I could've hired a professional assassin for that."),3000);
-					speak('Fenor Marken',_("I thought you were not the kind of Branded Ones"),2200);
-					speak('Fenor Marken',_("that kill everyone crossing their pass."),2000);
-					speak("ANY",_("My apologies. Maybe my mouth slipped."),1800);
-					speak('player',_("Whatever. What do you really want?"),1000);
-					speak('Fenor Marken',_("Thanks. My name is Fenor Marken."),1800);
-					speak('Fenor Marken',_("It is like that: I have a friend with the gamekeepers."),2800);
-					speak('Fenor Marken',_("He was in the woods with two others when they were attacked by goblins."),3400);
-					speak('Fenor Marken',_("And those cowards left him behind wounded."),1500);
-					speak('player',_("Surely you don't want me to bring back his corpse, do you?"),3000);
-					speak('Fenor Marken',_("No. Willard isn't someone who is killed by some measly goblins."),3000);
-					speak('Fenor Marken',_("I'm sure he's waiting somewhere for help."),1000);
-					speak('Fenor Marken',_("You must be very busy."),1500);
-					speak('Fenor Marken',_("That's why all I ask you is bringing him this phasestone."),2800);
-					speak('Fenor Marken',_("Normally I wouldn't entrust anyone with this"),2500);
-					speak('Fenor Marken',_("out of fear they'd elope with it."),1900);
-					speak('Fenor Marken',_("But you Branded Ones have other means of transportation, havn't you."),3000);
-					speak('Fenor Marken',_("That's why I came to you."),1500);
-					speak('player',_("I understand."),1000);
+					speak('Fenor Marken',_("Hey there!"));
+					speak('Fenor Marken',_("Are you the councils backing?"));
+					speak('player',_("And if it was like that?"));
+					speak('Fenor Marken',_("I heard you were Branded Ones."));
+					speak('Fenor Marken',_("There is something, only someone like you can do."));
+					speak('Fenor Marken',_("With sure success that is."));
+					speak("ANY",_("Who would have thougt of that?"));
+					speak("ANY",_("Does a respectable member of the guard want someones thoat cut?"));
+					speak('Fenor Marken',_("Eh? I could've hired a professional assassin for that."));
+					speak('Fenor Marken',_("I thought you were not the kind of Branded Ones"));
+					speak('Fenor Marken',_("that kill everyone crossing their pass."));
+					speak("ANY",_("My apologies. Maybe my mouth slipped."));
+					speak('player',_("Whatever. What do you really want?"));
+					speak('Fenor Marken',_("Thanks. My name is Fenor Marken."));
+					speak('Fenor Marken',_("It is like that: I have a friend with the gamekeepers."));
+					speak('Fenor Marken',_("He was in the woods with two others when they were attacked by goblins."));
+					speak('Fenor Marken',_("And those cowards left him behind wounded."));
+					speak('player',_("Surely you don't want me to bring back his corpse, do you?"));
+					speak('Fenor Marken',_("No. Willard isn't someone who is killed by some measly goblins."));
+					speak('Fenor Marken',_("I'm sure he's waiting somewhere for help."));
+					speak('Fenor Marken',_("You must be very busy."));
+					speak('Fenor Marken',_("That's why all I ask you is bringing him this phasestone."));
+					speak('Fenor Marken',_("Normally I wouldn't entrust anyone with this"));
+					speak('Fenor Marken',_("out of fear they'd elope with it."));
+					speak('Fenor Marken',_("But you Branded Ones have other means of transportation, havn't you."));
+					speak('Fenor Marken',_("That's why I came to you."));
+					speak('player',_("I understand."));
 					addQuestion(_("Quest annehmen?"));
 					addAnswer(_("Ja"),'start_rescue_willard_quest');
 					addAnswer(_("Nein"),'refuse_rescue_willard_quest');
