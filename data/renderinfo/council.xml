@@ -26,7 +26,7 @@
 	</Action>
 	
 	<Action name="attack">
-		<!--<Animation name="attack1" />-->
+		<Animation name="attack" />
 	</Action>
 
 	<Action name="die">
@@ -34,7 +34,11 @@
 	</Action>
 	
 	<Action name="idle">
-		<!--<Animation name="idle" />-->
+		<Animation name="idle1" />
+		<Animation name="idle2" />
+		<Animation name="idle2" />
+		<Animation name="idle2" />
+		<Animation name="idle2" />
 	</Action>
 </RenderInfo>
 
