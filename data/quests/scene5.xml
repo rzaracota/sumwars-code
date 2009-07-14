@@ -82,14 +82,14 @@
 				
 				setCutsceneMode(true);
 				
-				addUnitCommand(scene5_tmp.skeletons[1], "range_attack", scene5_tmp.guard2,"repeat")
-				addUnitCommand(scene5_tmp.skeletons[2], "range_attack", scene5_tmp.guard2,"repeat")
-				addUnitCommand(scene5_tmp.skeletons[3], "range_attack", scene5_tmp.guard4,"repeat")
-				addUnitCommand(scene5_tmp.skeletons[4], "range_attack", scene5_tmp.hauptmann_der_wache,"repeat");
-				addUnitCommand(scene5_tmp.skeletons[5], "range_attack", scene5_tmp.erzmaga_ireana,"repeat")
-				addUnitCommand(scene5_tmp.skeletons[6], "range_attack", scene5_tmp.guard1,"repeat")
-				addUnitCommand(scene5_tmp.skeletons[7], "range_attack", scene5_tmp.guard1,"repeat")
-				addUnitCommand(scene5_tmp.skeletons[8], "range_attack", scene5_tmp.guard3,"repeat")
+				timedExecute('addUnitCommand(scene5_tmp.skeletons[1], "range_attack", scene5_tmp.guard2,"repeat")',400);
+				timedExecute('addUnitCommand(scene5_tmp.skeletons[2], "range_attack", scene5_tmp.guard2,"repeat")',350);
+				timedExecute('addUnitCommand(scene5_tmp.skeletons[3], "range_attack", scene5_tmp.guard4,"repeat")',100);
+				timedExecute('addUnitCommand(scene5_tmp.skeletons[4], "range_attack", scene5_tmp.hauptmann_der_wache,"repeat")',75);
+				timedExecute('addUnitCommand(scene5_tmp.skeletons[5], "range_attack", scene5_tmp.erzmaga_ireana,"repeat")', 800);
+				timedExecute('addUnitCommand(scene5_tmp.skeletons[6], "range_attack", scene5_tmp.guard1,"repeat")', 650);
+				timedExecute('addUnitCommand(scene5_tmp.skeletons[7], "range_attack", scene5_tmp.guard1,"repeat")',523);
+				timedExecute('addUnitCommand(scene5_tmp.skeletons[8], "range_attack", scene5_tmp.guard3,"repeat")', 250);
 				
 				lookAtObject(scene5_tmp.guard1, scene5_tmp.skeletons[6]);
 				lookAtObject(scene5_tmp.guard2, scene5_tmp.skeletons[2]);
@@ -157,6 +157,7 @@
 				for nr=1,8 do
 					clearUnitCommands(scene5_tmp.skeletons[nr]);
 				end;
+				set(scene5_tmp.hauptmann_der_wache,"state","inactive");
 			</Effect>
 		</Topic>
 		
@@ -185,6 +186,8 @@
 		
 		<Event trigger="scene5_dialogue2">
 			<Effect>
+				set(scene5_tmp.hauptmann_der_wache,"state","active");
+
 				scene5_tmp.soren_windclaw_crystal = createObject("peasant", "locParty");
 				setRefName(scene5_tmp.soren_windclaw_crystal, "Soren Windclaw");
 				setObjectValue(scene5_tmp.soren_windclaw_crystal,"max_health",10000);
