@@ -20,6 +20,28 @@
 	</Action>
 </RenderInfo>
 
+<RenderInfo name="slugbase" parent="creaturebase">
+	<Action name="walk">
+		<Animation name="walk" />
+	</Action>
+	
+	<Action name="attack">
+		<!--<Animation name="attack1" />-->
+	</Action>
+
+	<Action name="die">
+		<Animation name="die" />
+	</Action>
+	
+	<Action name="idle">
+		<!--<Animation name="idle" />-->
+	</Action>
+</RenderInfo>
+
 <RenderInfo name="fireElemS" parent="elementalbase">
 	<Entity source="fireElemSmall.mesh"/>
+</RenderInfo>
+
+<RenderInfo name="fireSlug" parent="slugbase">
+	<Entity source="fire_slug.mesh"/>
 </RenderInfo>
