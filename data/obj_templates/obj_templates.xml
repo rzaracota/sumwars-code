@@ -219,6 +219,7 @@ FIXED_OBJECT
 <ObjectTemplate name="$shelf_m" type="FIXED_OBJECT">
 	<Environment name="council" default = "true">
 		<Object name="shelf_m1" />
+		<Object name="shelf_m2" />
 	</Environment>
 </ObjectTemplate>
 
@@ -248,6 +249,65 @@ FIXED_OBJECT
 <ObjectTemplate name="$signpost" type="FIXED_OBJECT">
 	<Environment name="meadow" default = "true">
 		<Object name="signpost" />
+	</Environment>
+</ObjectTemplate>
+
+<ObjectTemplate name="$barrel" type="FIXED_OBJECT">
+	<Environment name="meadow" default = "true">
+		<Object name="barrel1" />
+		<Object name="barrel2" />
+		<Object name="barrel3" />
+	</Environment>
+</ObjectTemplate>
+
+<ObjectTemplate name="$barrel_m" type="FIXED_OBJECT">
+	<Environment name="meadow" default = "true">
+		<Object name="barrel_m1" />
+	</Environment>
+</ObjectTemplate>
+
+<ObjectTemplate name="$board" type="FIXED_OBJECT">
+	<Environment name="meadow" default = "true">
+		<Object name="board1" />
+		<Object name="board2" />
+		<Object name="board3" />
+	</Environment>
+</ObjectTemplate>
+<ObjectTemplate name="$book" type="FIXED_OBJECT">
+	<Environment name="meadow" default = "true">
+		<Object name="book1" />
+		<Object name="book2" />
+		<Object name="book3" />
+		<Object name="book4" />
+		<Object name="book5" />
+		<Object name="book6" />
+		<Object name="book7" />
+		<Object name="book8" />
+		<Object name="book9" />
+		<Object name="book10" />
+	</Environment>
+</ObjectTemplate>
+<ObjectTemplate name="$book_open" type="FIXED_OBJECT">
+	<Environment name="meadow" default = "true">
+		<Object name="book_open1" />
+		<Object name="book_open2" />
+	</Environment>
+</ObjectTemplate>
+<ObjectTemplate name="$cupboard" type="FIXED_OBJECT">
+	<Environment name="meadow" default = "true">
+		<Object name="cupboard_konz" />
+	</Environment>
+</ObjectTemplate>
+<ObjectTemplate name="$lectern" type="FIXED_OBJECT">
+	<Environment name="meadow" default = "true">
+		<Object name="lectern_konz1" />
+		<Object name="lectern_konz2" />
+		<Object name="lectern_konz3" />
+	</Environment>
+</ObjectTemplate>
+<ObjectTemplate name="$tub" type="FIXED_OBJECT">
+	<Environment name="meadow" default = "true">
+		<Object name="tub" />
 	</Environment>
 </ObjectTemplate>
 	
