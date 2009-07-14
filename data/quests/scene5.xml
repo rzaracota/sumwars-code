@@ -47,8 +47,8 @@
 				setObjectValue(scene5_tmp.erzmaga_ireana,"max_health",10000);
 				setObjectValue(scene5_tmp.erzmaga_ireana,"health",3000);
 				
-				scene5_tmp.hauptmann_der_wache = createObject("peasant", "locCaptain");
-				setRefName(scene5_tmp.hauptmann_der_wache, "Hauptmann der Wache");
+				scene5_tmp.hauptmann_der_wache = createObject("guard", "locCaptain");
+				setRefName(scene5_tmp.hauptmann_der_wache, "Guardcaptain");
 				setObjectValue(scene5_tmp.hauptmann_der_wache,"max_health",10000);
 				setObjectValue(scene5_tmp.hauptmann_der_wache,"health",9000);
 			</Effect>
@@ -140,7 +140,7 @@
 				-- W1 (Wird toedlich getroffen): *hurgs*
 				jumpTopic("insertion_guard_dies");
 				speak("nobody","",1000);
-				speak("WARast",_("He He, Erntezeit."),1000);
+				speak("WARast",_("He he. Harvest!"));
 				
 				-- Sie kaempfen. Die Untoten warten mit einer etwas unschoenen
 				-- ueberraschung auf (starkes Monster) werden aber sicherlich bald
@@ -209,43 +209,55 @@
 				lookAtObject(scene5_tmp.erzmaga_ireana, getRole("PL"));
 				lookAtObject(scene5_tmp.hauptmann_der_wache, getRole("PL"));
 				
-				speak("HW",_("Ich habe noch nie jemanden"),1000);
-				speak("MAGast",_("Ihr kommt wohl nicht allzuviel"),1000);
-				speak("PL",_("Wie geht es der Erzmaga?"),1000);
-				speak("HW",_("Sehr schlecht fuerchte ich."),1000);
-				speak("PL",_("Lasst mich mal sehen"),1000);
+				speak("HW",_("I have never seen someone fight like you before."));
+				speak("MAGast",_("You don't get out very often, do you."));
+				speak("PL",_("How is the archmaga?"));
+				speak("HW",_("Very bad, I'm afraid."));
+				speak("PL",_("Let me see."));
 				
 				-- PL heilt sie
 				-- Wenn es keinen Priester in der Gruppe gibt, springt der MAG
 				-- mit einem Trank ein, ansonsten der PL
 				
-				speak("IvN",_("Ich danke euch, das war Rettung"),1000);
-				speak("PL",_("Wie konnte es eigentlich soweit kommen?"),1000);
-				speak("WARast",_("Jetzt mach mal Halblang!"),1000);
-				speak("IvN",_("Nein Nein, es stimmt schon."),1000);
-				speak("HW",_("Diese Untoten haben uns hier"),1000);
-				speak("ARC",_("ueberraschung! Kein Wunder, das ist ja"),1000);
-				speak("HW",_("Nein, Zwergentrutz ist noch nicht gefallen,"),1000);
-				speak("IvN",_("Das duerfen wir nicht zulassen,"),1000);
-				speak("SW",_("Es war aeußerst unvorsichtig von euch mit"),1000);
-				speak("IvN",_("Die Stadt braucht jeden Mann, den sie kriegen kann!"),1000);
-				speak("PL",_("Ich hab so eine Ahnung"),1000);
-				speak("SW",_("Hoert zu Gezeichnete!"),1000);
-				speak("HW",_("Was?! Das sind Gezeichnete!?!"),1000);
-				speak("IvN",_("Lasst nur, diese sind auf unserer Seite."),1000);
-				speak("SW",_("Findet den Weg,"),1000);
-				speak("IvN",_("Willst du ihnen nicht Verstaerkung"),1000);
-				speak("SW",_("Ich kann machen was ich will!"),1000);
-				speak("PL",_("Natuerlich..."),1000);
-				speak("MAG",_("Langsam geht er mir auf den Senkel..."),1000);
-				speak("WAR",_("Jetzt erst?"),1000);
-				speak("MAGast",_("Magier muessen von Natur"),1000);
-				speak("IvN",_("Ich bin sicher, dass die Untoten"),1000);
-				speak("HW",_("Ich weiß von einem Hoehlensystem"),1000);
-				speak("ARCast",_("Soll uns das schrecken?"),1000);
-				speak("HW",_("... wahrscheinlich nicht."),1000);
-				speak("PL",_("Danke fuer eure Hilfe"),1000);
-				speak("IvN",_("Viel Glueck! Ich hoffe wir"),1000);
+				speak("IvN",_("Thank you. That was a close call for a rescue."));
+				speak("PL",_("How could it even come to this?"));
+				speak("PL",_("It's very dangerous to travel so far from the roads."));
+				speak("WARast",_("Come off it!"));
+				speak("IvN",_("No, no, it's the truth."));
+				speak("IvN",_("It was not the best idea, but the streets are not safe these days and thus we wanted to travel concealed."));
+				speak("HW",_("These undead layed an ambush for us here."));
+				speak("ARC",_("Surprise!"));
+				speak("ARC",_("No wander, this is combat area."));
+				speak("HW",_("No, Dwarfenfroward hasn't fallen yet."));
+				speak("HW",_("As long as that city stands the entry to the lands of the undead is blocked."));
+				speak("HW",_("But I fear they have found a way around the citywalls."));
+				speak("IvN",_("We mustn't allow this."));
+				speak("IvN",_("If those monsters could avoid Dwarfenfroward they would advance into Aisen before one week is gone."));
+				speak("SW",_("It was exeedingly careless of you to leave with so few men."));
+				speak("IvN",_("The city needs every man it can get!"));
+				speak("PL",_("I have a feeling what's going to come in a moment..."));
+				--TODO Unterscheidung Einzel/Party
+				speak("SW",_("Listen, Branded Ones!"));
+				speak("HW",_("What?!?"));
+				speak("HW",_("Those are Branded Ones?"));
+				speak("IvN",_("Let it go."));
+				speak("IvN",_("They are on our side."));
+				speak("SW",_("Find the way the undead came here and render it useless."));
+				speak("IvN",_("Don't you want to give them some backup?"));
+				speak("SW",_("I can do what I want!"));
+				speak("PL",_("Of course..."));
+				speak("MAG",_("Slowly he's getting to me..."));
+				speak("WAR",_("Only now?"));
+				speak("MAGast",_("Mages have to be naturally patient."));
+				speak("IvN",_("I'm sure the undead found a hidden cave."));
+				speak("IvN",_("Please take this explosion spell."));
+				speak("IvN",_("It surely will be useful."));
+				speak("HW",_("I know of a cave system north of here."));
+				speak("ARCast",_("Should that frighten us?"));
+				speak("HW",_("... probably not."));
+				speak("PL",_("Thanks for your help."));
+				speak("IvN",_("Good luck!"));
+				speak("IvN",_("I hope we meet again soon."));
 				
 				-- Hauptquest: Findet den Weg, auf dem die Untoten die Stadt umgehen
 				
