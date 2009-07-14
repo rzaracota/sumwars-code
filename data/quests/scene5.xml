@@ -107,7 +107,7 @@
 		
 		<Topic name="insertion_guard_dies">
 			<Effect>
-				unitSpeak("W1",_("*hurgs*"),1000);
+				unitSpeak("W1",_("*urgh*"));
 				setObjectValue(scene5_tmp.guard1,"health",0);
 			</Effect>
 		</Topic>
@@ -133,9 +133,9 @@
 				addStandardSpeakers("aisMounPath","locPartyEntry");
 				
 				speak("nobody","",2000);
-				speak("MALEast",_("Sie ist ja bildschoen!"),1000);
-				speak("PL",_("Du kannst sie spaeter noch anstarren,"),1000);
-				speak("HW",_("Bitte helft uns, die Maga"),1000);
+				speak("MALEast",_("Wow, she's gorgeous"));
+				speak("PL",_("You can stare at her later, we have to erase some undead."));
+				speak("HW",_("Please help us, the maga is badly injured!"));
 				
 				-- W1 (Wird toedlich getroffen): *hurgs*
 				jumpTopic("insertion_guard_dies");

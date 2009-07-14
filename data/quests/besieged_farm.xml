@@ -34,16 +34,16 @@
 		
 		<Topic name="start_besieged_farm_quest" >
 			<Effect>
-				speak("player", _("Do you have a goblin problem in this region?"),1800)
-				speak("Sergeant Lutterer",_("Ah, do you now feel like earning the money?"),1800)
-				speak("Sergeant Lutterer", _("Don't believe I didn't see you hanging around back there."),2000)
+				speak("player", _("Do you have a goblin problem in this region?"))
+				speak("Sergeant Lutterer",_("Ah, do you now feel like earning the money?"))
+				speak("Sergeant Lutterer", _("Don't believe I didn't see you hanging around back there."))
 				speak("Sergeant Lutterer", _("But I won't complain."),1000)
-				speak("Sergeant Lutterer", _("You know how it works: Go west to the Northern Meadow and drive out that goblin scum around Brons farm."),2500)
-				speak("Sergeant Lutterer", _("I don't care, how you do that."),1000)
-				speak("Sergeant Lutterer", _("You can eat them raw and bath in their blood for all I care."),2000)
-				speak("Sergeant Lutterer", _("Just kidding."),1000)
-				speak("Sergeant Lutterer", _(" Come back when you're done."),1000)
-				speak("player", _("We're on our way."),1000)
+				speak("Sergeant Lutterer", _("You know how it works: Go west to the Northern Meadow and drive out that goblin scum around Brons farm."))
+				speak("Sergeant Lutterer", _("I don't care, how you do that."))
+				speak("Sergeant Lutterer", _("You can eat them raw and bath in their blood for all I care."))
+				speak("Sergeant Lutterer", _("Just kidding."))
+				speak("Sergeant Lutterer", _(" Come back when you're done."))
+				speak("player", _("We're on our way."))
 				besieged_farm.started = true
 			</Effect>	
 		</Topic>
@@ -58,11 +58,11 @@
 			</Condition>
 			<Effect>
 				besieged_farm.finished = true
-				speak("player", _("It's done."),1000)
-				speak("Sergeant Lutterer",_("I heard it allready."),1000)
-				speak("Sergeant Lutterer", _("Bron's at the tavern and filling himself for your well-being."), 2000)
-				speak("Sergeant Lutterer", _("But that should be none of you're concern anymore."), 1500)
-				speak("Sergeant Lutterer", _("Here's you're money."), 1000)
+				speak("player", _("It's done."))
+				speak("Sergeant Lutterer",_("I heard it allready."))
+				speak("Sergeant Lutterer", _("Bron's at the tavern and filling himself for your well-being."))
+				speak("Sergeant Lutterer", _("But that should be none of you're concern anymore."))
+				speak("Sergeant Lutterer", _("Here's you're money."))
 				local players = getPlayers()
 				local i,player,count
 				for i,player in ipairs(players) do
@@ -87,14 +87,14 @@
 			</Condition>
 			<Effect>
 				besieged_farm.asked = true
-				speak("player", _("The goblins are gone. Are you allright?"),1500)
-				speak("Brons Tuer",_("I thank you."),1000)
-				speak("Brons Tuer", _("I'm afraid, I can't ask you in."),1500)
-				speak("Brons Tuer", _("The barricades we built are quite heavy and it will take sone time to remove them."),2500)
-				speak("Brons Tuer", _("But I will give word to my husband that we are safe."),1500)
-				speak("player", _("How will you do that?"),1000)
-				speak("Brons Tuer",_("With a crystal. It was part of my dowry and is in my family for generations"),2500)
-				speak("player",_("Of course. Thoughtless of me."),1000)
+				speak("player", _("The goblins are gone. Are you allright?"))
+				speak("Brons Tuer",_("I thank you."))
+				speak("Brons Tuer", _("I'm afraid, I can't ask you in."))
+				speak("Brons Tuer", _("The barricades we built are quite heavy and it will take sone time to remove them."))
+				speak("Brons Tuer", _("But I will give word to my husband that we are safe."))
+				speak("player", _("How will you do that?"))
+				speak("Brons Tuer",_("With a crystal. It was part of my dowry and is in my family for generations"))
+				speak("player",_("Of course. Thoughtless of me."))
 				createDialogue()
 				if (getPlayers()[2] ~= nil) then
 					if (getMages()[1] ~= getSpeaker("player")) then
@@ -103,8 +103,8 @@
 						local mage = getMages()[2]
 					end
 					addSpeaker(mage,"mage")
-					speak("mage",_("Really. Did you think there's still people using carrier pigeons these days?"),2000)
-					speak("player",_("Let's just get the money."),1000)
+					speak("mage",_("Really. Did you think there's still people using carrier pigeons these days?"))
+					speak("player",_("Let's just get the money."))
 				end
 			</Effect>
 		</Topic>
@@ -114,15 +114,15 @@
 	<NPC refname="Prince Charming">
 		<Topic name="insertion1">
 			<Effect>
-				unitSpeak("PC",_("..."),1000);
+				unitSpeak("PC",_("..."));
 			</Effect>
 		</Topic>
 		
 		<Topic name="insertion2">
 			<Effect>
-				unitSpeak("LvR",_("By Marek!"),1000);
-				unitSpeak("PC",_("Who are you?"),1000);
-				unitSpeak("SL",_("This is..."),1000);
+				unitSpeak("LvR",_("By Marek!"));
+				unitSpeak("PC",_("Who are you?"));
+				unitSpeak("SL",_("This is..."));
 			</Effect>
 		</Topic>
 		
@@ -139,68 +139,68 @@
 
 				-- PC und LvR reden mit SL, als die Helden dazu kommen. Eine groesser Menge von Soldaten wartet auf ihren Abmarsch.
 
-				speak("SL",_("I beg you, my prince! Leave at least a handful of soldiers here."),2300);
-				speak("SL",_("I can hardly protect the village now, let alone the surrounding farmsteads."),2400);
+				speak("SL",_("I beg you, my prince! Leave at least a handful of soldiers here."));
+				speak("SL",_("I can hardly protect the village now, let alone the surrounding farmsteads."));
 
 				-- PC: dreht sich zu SL, aber LvR ist schneller
 
-				speak("LvR",_("Silence! The safety of our country takes absolute priority."),2200);
+				speak("LvR",_("Silence! The safety of our country takes absolute priority."));
 				
 				jumpTopic("insertion1");
 				
-				speak("LvR",_("You should be able to deal with a handful of goblins."),1800);
-				speak("LvR",_("Furthermore you have a mighty summoner by your side."),1800);
-				speak("SL",_("But the honorable magus has other tasks!"),1600);
-				speak("RF",_("Indeed."),1000);
-				speak("RF",_("The tracking of lowly goblins is neither my task"),1700);
-				speak("RF",_("nor do I see a great benefit in such an absurd amusement."),1800);
-				speak("RF",_("What would you do if someone attacked the village while I was on a fruitless hunt for goblins."),2800);
-				speak("PC",_("And you really have no time to help out a little?"),1700);
-				speak("RF",_("My earnest apologies, but as much as I'd like to help,"),1700);
-				speak("RF",_("the council has given me very important tasks that leave me no clearance whatsoever."),2400);
-				speak("RF",_("Nonetheless, may I use this unique opportunity"),1700);
-				speak("RF",_("to congratulate you on your imminent marriage with the archmaga Ireana of"),1900);
-				speak("PC",_("Thanks. That's enough."),1000);
+				speak("LvR",_("You should be able to deal with a handful of goblins."));
+				speak("LvR",_("Furthermore you have a mighty summoner by your side."));
+				speak("SL",_("But the honorable magus has other tasks!"));
+				speak("RF",_("Indeed."));
+				speak("RF",_("The tracking of lowly goblins is neither my task"));
+				speak("RF",_("nor do I see a great benefit in such an absurd amusement."));
+				speak("RF",_("What would you do if someone attacked the village while I was on a fruitless hunt for goblins."));
+				speak("PC",_("And you really have no time to help out a little?"));
+				speak("RF",_("My earnest apologies, but as much as I'd like to help,"));
+				speak("RF",_("the council has given me very important tasks that leave me no clearance whatsoever."));
+				speak("RF",_("Nonetheless, may I use this unique opportunity"));
+				speak("RF",_("to congratulate you on your imminent marriage with the archmaga Ireana of"));
+				speak("PC",_("Thanks. That's enough."));
 
 				-- RF (vor den Kopf gestossen)
 
-				speak("WARast",_("Self-satisfied parasite."),1200);
-				speak("MAGast",_("I only hope the kingdom has big granaries, if the greenskins torch the fields here."),2400);
-				speak("LvR",_("The presence of the magus alone will repell every goblin."),1800);
-				speak("LvR",_("Stop annoying the prince with your incompetence."),1700);
-				speak("SL",_("!"),1000);
+				speak("WARast",_("Self-satisfied parasite."));
+				speak("MAGast",_("I only hope the kingdom has big granaries, if the greenskins torch the fields here."));
+				speak("LvR",_("The presence of the magus alone will repell every goblin."));
+				speak("LvR",_("Stop annoying the prince with your incompetence."));
+				speak("SL",_("!"));
 				jumpTopic("michel_bron_run");
-				speak("LvR",_("Don't you have something better to do?!"),1400);
-				speak("ANY",_("And they say we are cold-hearted..."),1400);
+				speak("LvR",_("Don't you have something better to do?!"));
+				speak("ANY",_("And they say we are cold-hearted..."));
 
 				-- SL entfernt sich. PC und LvR wenden sich zu ihren Pferden, als MB aufgeregt in das Dorf gerannt kommt.
 				
-				speak("MB",_("Guards! Guards! Help! My farm is raided by goblins! My family..."),1800);
-				speak("LvR",_("Remove this fool! The prince has more important things to do."),1800);
+				speak("MB",_("Guards! Guards! Help! My farm is raided by goblins! My family..."));
+				speak("LvR",_("Remove this fool! The prince has more important things to do."));
 				-- Wache1 und Wache2 (etwas zoegerlich): Jawohl.
 
 				-- Die zwei Wachen stuermen vor, sie fuehlen sich nicht ganz wohl in ihrer Haut.
 
-				speak("PC",_("Wait! What happened?"),1200);
+				speak("PC",_("Wait! What happened?"));
 
 				-- MB wirft sich nieder
 
-				speak("MB",_("Forgive me, my prince, but my wife and children are still there."),1800);
-				speak("MB",_("I don't know how long the house will hold."),1500);
-				speak("MB",_("I beg you: Help me!"),1000);
-				speak("PC",_("We..."),800);
-				speak("LvR",_("My prince! We have no time to loose! The demons are at our northern border!"),1900);
-				speak("PC",_("I know!"),1000);
+				speak("MB",_("Forgive me, my prince, but my wife and children are still there."));
+				speak("MB",_("I don't know how long the house will hold."));
+				speak("MB",_("I beg you: Help me!"));
+				speak("PC",_("We..."));
+				speak("LvR",_("My prince! We have no time to loose! The demons are at our northern border!"));
+				speak("PC",_("I know!"));
 
 				-- PC greift in seine Satteltasche, zieht ein Saeckchen hervor und haelt es hoch.
 
-				speak("PC",_("200 goldpieces to everyone, who helps this humble man!"),1600);
+				speak("PC",_("200 goldpieces to everyone, who helps this humble man!"));
 				speak("LvR",_("tz"),1000);
-				speak("ANY",_("200 for everyone. That might be worth the efford."),1500);
+				speak("ANY",_("200 for everyone. That might be worth the efford."));
 
 				-- Der Kommunikationskristall erscheint und spricht zu den Helden
 
-				speak("SW",_("Don't even think about it! You have to betake yourselves to dwarfenfroward immediately!"),2200);
+				speak("SW",_("Don't even think about it! You have to betake yourselves to dwarfenfroward immediately!"));
 
 				addQuestion(_("Help the peasent?"));
 				addAnswer(_("Yes"),"help_peasant");
@@ -211,59 +211,59 @@
 		<Topic name="help_peasant">
 			<Effect>
 				if (getPlayers()[2] == nil) then
-					speak("WAR",_("Only a stone would watch deedlessly!"),1500);
+					speak("WAR",_("Only a stone would watch deedlessly!"));
 				else
-					speak("WAR",_("Only a stone would watch deedlessly! Let's help."),1600);
+					speak("WAR",_("Only a stone would watch deedlessly! Let's help."));
 				end;
-				speak("ANYplus",_("And there's money in it. Two birds with one stone."),1600);
+				speak("ANYplus",_("And there's money in it. Two birds with one stone."));
 				if (getPlayers()[2] == nil) then
-					speak("PL",_("It's decided. I take the job."),1500);
+					speak("PL",_("It's decided. I take the job."));
 				else
-					speak("PL",_("It's decided then. We take the job."),1500);
-				end;
-				if (getPlayers()[2] == nil) then
-					speak("SW",_("What do you think you are doing there? You are ordered to go to dwarfenfroward!"),2300);
-				else
-					speak("SW",_("What do you think you are doing there? You are ordered to go to dwarfenfroward!"),2300);
+					speak("PL",_("It's decided then. We take the job."));
 				end;
 				if (getPlayers()[2] == nil) then
-					speak("PL",_("When I arrive there was never part of the agreement."),1700);
-					speak("PL",_("If the city has fallen I will simply conquer it back."),1700);
+					speak("SW",_("What do you think you are doing there? You are ordered to go to dwarfenfroward!"));
 				else
-					speak("PL",_("When we arrive there was never part of the agreement."),1700);
-					speak("PL",_("If the city has fallen we will simply conquer it back."),1700);
-					speak("MAGast",_("Yes, give him a good dressing down."),1500);
+					speak("SW",_("What do you think you are doing there? You are ordered to go to dwarfenfroward!"));
 				end;
 				if (getPlayers()[2] == nil) then
-					speak("PL",_("Prince, I take the job!"),1200);
+					speak("PL",_("When I arrive there was never part of the agreement."));
+					speak("PL",_("If the city has fallen I will simply conquer it back."));
 				else
-					speak("PL",_("Prince, we take the job!"),1200);
+					speak("PL",_("When we arrive there was never part of the agreement."));
+					speak("PL",_("If the city has fallen we will simply conquer it back."));
+					speak("MAGast",_("Yes, give him a good dressing down."));
+				end;
+				if (getPlayers()[2] == nil) then
+					speak("PL",_("Prince, I take the job!"));
+				else
+					speak("PL",_("Prince, we take the job!"));
 				end;
 				
 				jumpTopic("insertion2");
 				
 				if (getPlayers()[2] == nil) then
-					speak("PC",_("Aren't you a Branded One?"),1300);
+					speak("PC",_("Aren't you a Branded One?"));
 				else
-					speak("PC",_("Aren't you Branded Ones?"),1300);
+					speak("PC",_("Aren't you Branded Ones?"));
 				end;
-				speak("WARast",_("Under the heel of a certain Soren Airpaw, at your service."),1700);
-				speak("SW",_("Windclaw! You fool!"),1000);
-				speak("WARast",_("Oops..."),800);
-				speak("PL",_("Is that a problem?"),1000);
-				speak("PC",_("... probably not. Very well, even if I don't like it."),1600);
-				speak("LvR",_("Are you sure? What if they kill the peasents along with the vermin?"),1800);
+				speak("WARast",_("Under the heel of a certain Soren Airpaw, at your service."));
+				speak("SW",_("Windclaw! You fool!"));
+				speak("WARast",_("Oops..."));
+				speak("PL",_("Is that a problem?"));
+				speak("PC",_("... probably not. Very well, even if I don't like it."));
+				speak("LvR",_("Are you sure? What if they kill the peasents along with the vermin?"));
 				if (getPlayers()[2] == nil) then
-					speak("PC",_("Seargent! Hand over the money only if the goblins are driven away"),1800);
-					speak("PC",_("and the peasents are alive in the end."),1500);
+					speak("PC",_("Seargent! Hand over the money only if the goblins are driven away"));
+					speak("PC",_("and the peasents are alive in the end."));
 				else
-					speak("PC",_("Seargent! Hand over the money only if the goblins are driven away"),1800);
-					speak("PC",_("and the peasents are alive in the end."),1500);
+					speak("PC",_("Seargent! Hand over the money only if the goblins are driven away"));
+					speak("PC",_("and the peasents are alive in the end."));
 				end;
 
 				-- PC wirft SL das Saeckchen zu, der es faengt.
 
-				speak("SL",_("As you wish, my prince."),1300);
+				speak("SL",_("As you wish, my prince."));
 
 				-- => Quest: „Der belagerte Bauernhof“
 
@@ -275,12 +275,12 @@
 		
 		<Topic name="dont_help_peasant">
 			<Effect>
-				speak("PC",_("Nobody? Seargent!"),1000);
-				speak("SL",_("My Prince?"),1000);
-				speak("PC",_("My word stands."),1000);
-				speak("PC",_("Hand over the gold if you find someone to help you."),1500);
-				speak("SL",_("As you wish, my prince."),1300);
-				speak("PC",_("I'm sorry, good man. I will pray that your family holds out long enough."),1700);
+				speak("PC",_("Nobody? Seargent!"));
+				speak("SL",_("My Prince?"));
+				speak("PC",_("My word stands."));
+				speak("PC",_("Hand over the gold if you find someone to help you."));
+				speak("SL",_("As you wish, my prince."));
+				speak("PC",_("I'm sorry, good man. I will pray that your family holds out long enough."));
 
 				-- LvR (schuettelt hinter dem Ruecken des Prinzen nur den Kopf): MB bricht zusammen
 

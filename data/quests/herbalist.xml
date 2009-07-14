@@ -24,17 +24,17 @@
 			<Effect>
 				if (herbalist.started == true) then
 					if (herbalist.bushes >= 10) then
-						speak('player',_("Here, old woman. Your herbs."),1300)
-						speak('Gertlinde Kampfer',_("Ah, well done, young one."),1300)
-						speak('Gertlinde Kampfer',_("Let me give you something in return."),1300)
+						speak('player',_("Here, old woman. Your herbs."))
+						speak('Gertlinde Kampfer',_("Ah, well done, young one."))
+						speak('Gertlinde Kampfer',_("Let me give you something in return."))
 						changeTopic("herbalist_reward")
 					else
-						speak('Gertlinde Kampfer',_("You need to collect more herbs."),1400)
+						speak('Gertlinde Kampfer',_("You need to collect more herbs."))
 					end
 				else
-					speak('Gertlinde Kampfer',_("Hey there, young one."),1000)
-					speak('Gertlinde Kampfer',_("I see, you're going to the Northern Meadow."),1500)
-					speak('player',_("That's right."),1000)
+					speak('Gertlinde Kampfer',_("Hey there, young one."))
+					speak('Gertlinde Kampfer',_("I see, you're going to the Northern Meadow."))
+					speak('player',_("That's right."))
 					local spoken = false
 					if (getPlayers()[2] ~= nil) then
 						if (getPriests()[1] ~= getSpeaker("player")) then
@@ -50,23 +50,23 @@
 						addSpeaker(mage,"mage")
 						addSpeaker(priest,"priest")
 						if (mage ~= nil and priest ~= nil) then
-							speak("mage",_("What a feat."),1000)
-							speak("mage",_("We were only just walking through the gate."),2000)
-							speak("priest",_("Peace."),1000)
+							speak("mage",_("What a feat."))
+							speak("mage",_("We were only just walking through the gate."))
+							speak("priest",_("Peace."))
 						end
 					end
-					speak('Gertlinde Kampfer',_("If you're roaming the Meadow anyway and do whatever you're doing,"),3000)
-					speak('Gertlinde Kampfer',_("would you be so kind as to bring me some herbs?"),2000)
-					speak('Gertlinde Kampfer',_("With all those goblins an old lady can't even dare to go out of her door."),3000)
-					speak('player',_("I don't exactly specialize in herbs..."),1800)
-					speak('Gertlinde Kampfer',_("Fiddlesticks!"),1000)
-					speak('Gertlinde Kampfer',_("I don't want you to gather someting exotic."),2000)
-					speak('Gertlinde Kampfer',_("Just Rilfherb."),1300)
-					speak('Gertlinde Kampfer',_("That's big bushes with flashy red flowers."),1800)
-					speak('Gertlinde Kampfer',_("I'm sure you'll recognize it."),1300)
-					speak('Gertlinde Kampfer',_("You'll have to bring at least ten bushels, or else it won't be worth the efford"),3000)
-					speak('Gertlinde Kampfer',_("But only the small green leaves."),1300)
-					speak('Gertlinde Kampfer',_("Not the big and old stuff, that's no good."),1800)
+					speak('Gertlinde Kampfer',_("If you're roaming the Meadow anyway and do whatever you're doing,"))
+					speak('Gertlinde Kampfer',_("would you be so kind as to bring me some herbs?"))
+					speak('Gertlinde Kampfer',_("With all those goblins an old lady can't even dare to go out of her door."))
+					speak('player',_("I don't exactly specialize in herbs..."))
+					speak('Gertlinde Kampfer',_("Fiddlesticks!"))
+					speak('Gertlinde Kampfer',_("I don't want you to gather someting exotic."))
+					speak('Gertlinde Kampfer',_("Just Rilfherb."))
+					speak('Gertlinde Kampfer',_("That's big bushes with flashy red flowers."))
+					speak('Gertlinde Kampfer',_("I'm sure you'll recognize it."))
+					speak('Gertlinde Kampfer',_("You'll have to bring at least ten bushels, or else it won't be worth the efford"))
+					speak('Gertlinde Kampfer',_("But only the small green leaves."))
+					speak('Gertlinde Kampfer',_("Not the big and old stuff, that's no good."))
 					addQuestion(_("Accept Quest?"))
 					addAnswer(_("Yes"),"start_herbalist_quest")
 					addAnswer(_("No"),"refuse_herbalist_quest")
@@ -76,8 +76,8 @@
 		
 		<Topic name="start_herbalist_quest" >
 			<Effect>
-				speak('player', _("Fine, if I see anything, I'll bring it along."),2000)
-				speak('Gertlinde Kampfer',_("Thanks sweety."),1000)
+				speak('player', _("Fine, if I see anything, I'll bring it along."))
+				speak('Gertlinde Kampfer',_("Thanks sweety."))
 				herbalist.bushes = 0
 				herbalist.started = true
 			</Effect>	
@@ -85,11 +85,11 @@
 		
 		<Topic name="refuse_herbalist_quest" >
 			<Effect>
-				speak('player', _("Forget it, herb woman."),1000)
-				speak('player', _("I cocksure won't crawl throug the meadows searching for some bushes."),2800)
-				speak('Gertlinde Kampfer',_("Suit yourself!"),1000)
-				speak('Gertlinde Kampfer',_("But if you change your mind let me know"),1800)
-				speak('Gertlinde Kampfer',_("I won't go anywere."),1200)
+				speak('player', _("Forget it, herb woman."))
+				speak('player', _("I cocksure won't crawl throug the meadows searching for some bushes."))
+				speak('Gertlinde Kampfer',_("Suit yourself!"))
+				speak('Gertlinde Kampfer',_("But if you change your mind let me know."))
+				speak('Gertlinde Kampfer',_("I won't go anywere."))
 			</Effect>	
 		</Topic>
 		
