@@ -1206,6 +1206,12 @@ bool Region::moveObject(WorldObject* object, Vector pos)
 		object->getShape()->m_center = pos;
 		return true;
 	}
+	
+	if (object->getLayer() == WorldObject::LAYER_NOCOLLISION)
+	{
+		object->getShape()->m_center = pos;
+		return true;
+	}
 
 	// Testen ob das Objekt innerhalb des 4*4 Grid in ein neues Feld kommt
 	int x_old = object->getGridLocation()->m_grid_x;

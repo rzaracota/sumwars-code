@@ -3,6 +3,7 @@
 #include "player.h"
 #include "item.h"
 #include "dialogue.h"
+#include "scriptobject.h"
 
 #ifdef DEBUG_DATABASE
 		std::map<int, std::string> EventSystem::m_code_fragments;
@@ -43,6 +44,7 @@ void EventSystem::init()
 	lua_register(m_lua, "unitIsInArea", unitIsInArea);
 	lua_register(m_lua, "objectIsInArea", unitIsInArea);
 	lua_register(m_lua, "createObject", createObject);
+	lua_register(m_lua, "createScriptObject", createScriptObject);
 	lua_register(m_lua, "deleteObject", deleteObject);
 	lua_register(m_lua, "dropItem", dropItem);
 	lua_register(m_lua, "getLocation", getLocation);
@@ -61,6 +63,7 @@ void EventSystem::init()
 	lua_register(m_lua, "addUnitCommand", addUnitCommand);
 	lua_register(m_lua, "clearUnitCommands",clearUnitCommands); 
 	lua_register(m_lua, "setUnitAction", setUnitAction);
+	lua_register(m_lua, "setScriptObjectAnimation",setScriptObjectAnimation);
 	lua_register(m_lua, "setCutsceneMode", setCutsceneMode);
 	lua_register(m_lua, "addCameraPosition", addCameraPosition);
 	
@@ -95,7 +98,7 @@ void EventSystem::init()
 	m_trigger =0;
 	m_dialogue =0;
 
-	doString("quests = {} ; playervars = {}");
+	doString("quests = {} ; playervars = {}; scriptobjectvar = {}");
 }
 
 void  EventSystem::cleanup()
@@ -264,13 +267,17 @@ Vector EventSystem::getVector(lua_State *L, int index)
 	{
 		float x,y;
 
+		int idx = index;
+		if (index <0)
+			idx --;
+		
 		lua_pushinteger(L, 1);
-		lua_gettable(L, index);
+		lua_gettable(L, idx);
 		x = lua_tonumber(L, -1);
 		lua_pop(L, 1);
 
 		lua_pushinteger(L, 2);
-		lua_gettable(L, index);
+		lua_gettable(L, idx);
 		y = lua_tonumber(L, -1);
 		lua_pop(L, 1);
 
@@ -623,6 +630,59 @@ int EventSystem::createObject(lua_State *L)
 	return 1;
 }
 
+int  EventSystem::createScriptObject(lua_State *L)
+{
+	int ret =0;
+	int argc = lua_gettop(L);
+	if (argc>=4)
+	{
+		WorldObject::Subtype subtype = lua_tostring(L, 1);
+		ScriptObject* wo = new ScriptObject(0);
+		
+		std::string render_info = lua_tostring(L, 2);
+		wo->setRenderInfo(render_info);
+		
+		Shape* ps = wo->getShape();
+		int idx=3;
+		*ps = getArea(L,idx);
+		
+		short layer = WorldObject::LAYER_NOCOLLISION;
+		if (argc>=6 && lua_isstring(L,6))
+		{
+			std::string lstr = lua_tostring(L,6);
+			if (lstr == "base")
+			{
+				layer = WorldObject::LAYER_BASE;
+			}
+			else  if (lstr == "air")
+			{
+				layer = WorldObject::LAYER_AIR;
+			}
+			else  if (lstr == "dead")
+			{
+				layer = WorldObject::LAYER_DEAD;
+			}
+			else  if (lstr == "normal")
+			{
+				layer = WorldObject::LAYER_BASE | WorldObject::LAYER_AIR;
+			}
+		}
+		
+		wo->setLayer(layer);
+		wo->setSubtype(subtype);
+		m_region->insertObject(wo, wo->getPosition(),0, true);
+		ret = wo->getId();
+		
+	}
+	else
+	{
+		ERRORMSG("Syntax: createScriptObject( string subtype, string renderinfo, 'circle' | 'rect',{float posx, float posx}, {float extentx, float extentx} | radius), [layer]");
+	}
+	lua_pushinteger(EventSystem::getLuaState() , ret);
+	return 1;
+	
+}
+
 int EventSystem::createMonsterGroup(lua_State *L)
 {
 	int argc = lua_gettop(L);
@@ -818,6 +878,41 @@ int  EventSystem::setUnitAction(lua_State *L)
 	}
 	return 0;
 
+}
+
+int EventSystem::setScriptObjectAnimation(lua_State *L)
+{
+	int argc = lua_gettop(L);
+	if (argc>=3 && lua_isnumber(L,1) && lua_isstring(L,2) && lua_isnumber(L,3))
+	{
+		if (m_region ==0)
+			return 0;
+
+		int id = int (lua_tonumber(L,1));
+		std::string actstr = lua_tostring(L,2);
+
+		
+		ScriptObject* wo = dynamic_cast<ScriptObject*> (m_region->getObject(id));
+		if (wo !=0)
+		{
+			
+			float time = lua_tonumber(L,3);
+			bool repeat = false;
+			if (argc>=4 && lua_isstring(L,4))
+			{
+				std::string repstr = lua_tostring(L,4);
+				repeat = (repstr == "true");
+			}
+			wo->setAnimation(actstr,time,repeat);
+			DEBUG("action %s perc %f",wo->getActionString().c_str(),wo->getActionPercent());
+			
+		}
+	}
+	else
+	{
+		ERRORMSG("Syntax: setScriptObjectAnimation(int objid, string action, float time, [bool repeat])");
+	}
+	return 0;
 }
 
 int EventSystem::getObjectAt(lua_State *L)

@@ -24,7 +24,7 @@
 #include "sound.h"
 #include "player.h"
 #include "graphicobject.h"
-
+#include "scriptobject.h"
 
 /**
  * \class Scene

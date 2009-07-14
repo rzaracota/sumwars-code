@@ -195,6 +195,12 @@ class EventSystem
 		static int createObject(lua_State *L);
 		
 		/**
+		 * \fn static int createScriptObject(lua_State *L)
+		 * \brief erzeugt ein rein scriptgesteuertes Objekt
+		 */
+		static int createScriptObject(lua_State *L);
+		
+		/**
 		 * \fn static int deleteObject(lua_State *L)
 		 * \brief Entfernt ein Objekt
 		 * \param L Lua Status
@@ -226,6 +232,12 @@ class EventSystem
 		 * \brief Loescht alle Kommandos einer Einheit
 		 */
 		static int clearUnitCommands(lua_State *L);
+		
+		/**
+		 * \fn static int setScriptObjectAnimation(lua_State *L)
+		 * \brief Setzt die Animation eines Scriptobjekts
+		 */
+		static int setScriptObjectAnimation(lua_State *L);
 		
 		/**
 		 * \fn static int getObjectAt(lua_State *L)

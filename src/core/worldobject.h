@@ -207,8 +207,8 @@ class WorldObject : public GameObject
 	
 	/**
 	 * \fn virtual bool destroy()
-	 * \brief Zerst&ouml;rt das WorldObject.  Die Funktion ist virtuell und wird von den abgeleiteten Klassen &uuml;berschrieben
-	 * \return bool der angibt, ob die Zerst&ouml;rung erfolgreich war
+	 * \brief Zerstoert das WorldObject.  Die Funktion ist virtuell und wird von den abgeleiteten Klassen &uuml;berschrieben
+	 * \return bool der angibt, ob die Zerstoerung erfolgreich war
 	 */
 	virtual  bool  destroy ();
 	
@@ -225,10 +225,7 @@ class WorldObject : public GameObject
 	 * \brief Das Objekt nimmt Schaden in der in damage angegebenen Art und Hoehe.
 	 * \param damage Schadensart und -hoehe
 	 */
-	virtual bool takeDamage(Damage* damage)
-	{
-		return false;
-	}
+	virtual bool takeDamage(Damage* damage);
 	
 	/**
 	 * \fn virtual void writeNetEvent(NetEvent* event, CharConv* cv)
@@ -248,14 +245,11 @@ class WorldObject : public GameObject
 	
 	/**
 	 * \fn virtual bool reactOnUse (int id)
-	 * \brief Diese Funktion behandelt die Reaktion eines Worldobject, wenn auf es eine Aktion ausgef&uuml;hrt wird.
-	 * \param id Id des Spielers, der die Aktion ausf&uuml;hrt
+	 * \brief Diese Funktion behandelt die Reaktion eines Worldobject, wenn auf es eine Aktion ausgefuehrt wird.
+	 * \param id Id des Spielers, der die Aktion ausfuehrt
 	 * \return bool, der angibt, ob die Behandlung der Aktion erfolgreich war
 	 */
-	virtual  bool  reactOnUse (int id)
-	{
-		return true;
-	}
+	virtual  bool  reactOnUse (int id);
 	
 	/**
 	 * \fn virtual bool isLarge()

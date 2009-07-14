@@ -23,6 +23,7 @@ GameObject::GameObject( int id)
 	m_region_id = -1;
 	m_destroyed=false;
 	m_height =0;
+	m_speed = Vector(0,0);
 }
 
 
@@ -249,3 +250,96 @@ void GameObject::addToNetEventMask(int mask)
 {
 	m_event_mask |= mask;
 }
+
+int GameObject::getValue(std::string valname)
+{
+	if (valname =="id")
+	{
+		lua_pushinteger(EventSystem::getLuaState() , getId() );
+		return 1;
+	}
+	else if (valname == "subtype")
+	{
+		lua_pushstring(EventSystem::getLuaState() ,getSubtype().c_str() );
+		return 1;
+	}
+	else if (valname == "angle")
+	{
+		lua_pushnumber(EventSystem::getLuaState() , getShape()->m_angle *180/3.14159);
+		return 1;
+	}
+	else if (valname == "position")
+	{
+		EventSystem::pushVector(EventSystem::getLuaState(),getShape()->m_center);
+		return 1;
+	}
+	else if (valname == "speed")
+	{
+		EventSystem::pushVector(EventSystem::getLuaState(),m_speed);
+		return 1;
+	}
+	else if (valname == "layer")
+	{
+		if (m_layer == WorldObject::LAYER_BASE)
+		{
+			lua_pushstring(EventSystem::getLuaState() ,"base");
+		}
+		else  if (m_layer ==WorldObject::LAYER_AIR)
+		{
+			lua_pushstring(EventSystem::getLuaState() ,"air");
+		}
+		else  if (m_layer ==WorldObject::LAYER_DEAD)
+		{
+			lua_pushstring(EventSystem::getLuaState() ,"dead");
+		}
+		else  if (m_layer == (WorldObject::LAYER_BASE | WorldObject::LAYER_AIR))
+		{
+			lua_pushstring(EventSystem::getLuaState() ,"normal");
+		}
+		else  if (m_layer == WorldObject::LAYER_NOCOLLISION)
+		{
+			lua_pushstring(EventSystem::getLuaState() ,"nocollision");
+		}
+		else
+		{
+			lua_pushstring(EventSystem::getLuaState() ,"nolayer");
+		}
+		return 1;
+	}
+	else if (valname == "type")
+	{
+			
+		lua_pushstring(EventSystem::getLuaState(),getType().c_str());
+
+		return 1;
+	}
+	
+	return 0;
+}
+
+bool GameObject::setValue(std::string valname)
+{
+	if (valname == "angle")
+	{
+		float angle = lua_tonumber(EventSystem::getLuaState() ,-1) * 3.14159 / 180;
+		lua_pop(EventSystem::getLuaState(), 1);
+		addToNetEventMask(NetEvent::DATA_SHAPE);
+		
+		setAngle(angle);
+		
+		return true;
+	}
+	if (valname == "state")
+	{
+		std::string statestr = lua_tostring(EventSystem::getLuaState(), -1);
+		lua_pop(EventSystem::getLuaState(), 1);
+		
+		if (statestr =="active" && getState() == STATE_INACTIVE)
+			setState(STATE_ACTIVE);
+		if (statestr =="inactive" && getState() == STATE_ACTIVE)
+			setState(STATE_INACTIVE);
+	}
+	
+	return false;
+}
+

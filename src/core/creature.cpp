@@ -3438,6 +3438,8 @@ bool Creature::takeDamage(Damage* d)
 	tr->addVariable("damage",dmg);
 	getRegion()->insertTrigger(tr);
 	
+	WorldObject::takeDamage(d);
+	
 	return true;
 }
 

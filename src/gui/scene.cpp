@@ -218,6 +218,10 @@ GraphicObject* Scene::createGraphicObject(GameObject* gobj, std::string name)
 	{
 		type = pl->getPlayerLook();
 	}
+	else if (gobj->getType() == "SCRIPTOBJECT")
+	{
+		type = static_cast<ScriptObject*>(gobj)->getRenderInfo();
+	}
 	else
 	{
 		otype = gobj->getSubtype();

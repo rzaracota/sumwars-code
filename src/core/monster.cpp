@@ -210,6 +210,9 @@ void Monster::updateCommand()
 	{
 		for (WorldObjectList::iterator it = potgoals.begin(); it!=potgoals.end(); ++it)
 		{
+			if (!(*it)->isCreature())
+				continue;
+			
 			pl = static_cast<Creature*>(*it);
 			
 			// Spieler nur als Ziel, wenn aktiv und nicht in Dialog

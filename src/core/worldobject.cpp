@@ -94,34 +94,7 @@ void WorldObject::fromString(CharConv* cv)
 
 int WorldObject::getValue(std::string valname)
 {
-		if (valname =="id")
-		{
-			lua_pushinteger(EventSystem::getLuaState() , getId() );
-			return 1;
-		}
-		else if (valname == "subtype")
-		{
-			lua_pushstring(EventSystem::getLuaState() ,getSubtype().c_str() );
-			return 1;
-		}
-		else if (valname == "angle")
-		{
-			lua_pushnumber(EventSystem::getLuaState() , getShape()->m_angle *180/3.14159);
-			return 1;
-		}
-		else if (valname == "position")
-		{
-			EventSystem::pushVector(EventSystem::getLuaState(),getShape()->m_center);
-			return 1;
-		}
-		else if (valname == "type")
-		{
-			
-			lua_pushstring(EventSystem::getLuaState(),getType().c_str());
-
-			return 1;
-		}
-		else if (valname == "fraction")
+		if (valname == "fraction")
 		{
 			if (getFraction() >=FRAC_PLAYER_PARTY)
 			{
@@ -134,6 +107,10 @@ int WorldObject::getValue(std::string valname)
 			}
 			return 1;
 		}
+		else
+		{
+			return GameObject::getValue(valname);
+		}
 
 		return 0;
 }
@@ -141,6 +118,7 @@ int WorldObject::getValue(std::string valname)
 
 bool WorldObject::setValue(std::string valname)
 {
+	
 	if (valname == "fraction")
 	{
 		if (getType() == "PLAYER")
@@ -161,22 +139,17 @@ bool WorldObject::setValue(std::string valname)
 		DEBUG("fraction is now %i",getFraction());
 		return true;
 	}
-	else if (valname == "angle")
-	{
-		float angle = lua_tonumber(EventSystem::getLuaState() ,-1) * 3.14159 / 180;
-		lua_pop(EventSystem::getLuaState(), 1);
-		addToNetEventMask(NetEvent::DATA_SHAPE);
-		
-		setAngle(angle);
-		
-		return true;
-	}
 	else if (valname == "position")
 	{
 		Vector pos = EventSystem::getVector(EventSystem::getLuaState(),-1);
 		
 		getRegion()->getFreePlace (getShape(), getLayer(), pos);
 		moveTo(pos);
+		return true;
+	}
+	else 
+	{
+		return GameObject::setValue(valname);
 	}
 	
 	return false;
@@ -190,6 +163,26 @@ void WorldObject::setFraction(Fraction fr)
 void WorldObject::setCategory(Category cat)
 {
 	m_category = cat;
+}
+
+bool WorldObject::takeDamage(Damage* damage)
+{
+	Trigger* tr = new Trigger("object_hit");
+	tr->addVariable("defender",getId());
+	tr->addVariable("attacker",damage->m_attacker_id);
+	getRegion()->insertTrigger(tr);
+	
+	return true;
+}
+
+bool  WorldObject::reactOnUse (int id)
+{
+	Trigger* tr = new Trigger("object_use");
+	tr->addVariable("used_object",getId());
+	tr->addVariable("user",id);
+	getRegion()->insertTrigger(tr);
+	
+	return true;
 }
 
 void WorldObject::writeNetEvent(NetEvent* event, CharConv* cv)
