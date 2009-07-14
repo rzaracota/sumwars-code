@@ -42,7 +42,7 @@
 				setObjectValue(scene5_tmp.dead_guard2,"health",0);
 				
 				
-				scene5_tmp.erzmaga_ireana = createObject("peasant", "locIreana");
+				scene5_tmp.erzmaga_ireana = createObject("peasant_f", "locIreana");
 				setRefName(scene5_tmp.erzmaga_ireana, "Erzmaga Ireana von Nordenburg");
 				setObjectValue(scene5_tmp.erzmaga_ireana,"max_health",10000);
 				setObjectValue(scene5_tmp.erzmaga_ireana,"health",3000);
