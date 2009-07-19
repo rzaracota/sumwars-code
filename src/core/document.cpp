@@ -1213,17 +1213,31 @@ bool Document::onKeyPress(KeyCode key)
 					left = false;
 				}
 				
+				int id =-1;
+				Player* player = getLocalPlayer();
+				std::map<int,LearnableAbility> &ablts = player->getLearnableAbilities();
+				std::map<int,LearnableAbility>::iterator it;
+				for (it = ablts.begin(); it != ablts.end(); ++it)
+				{
+					if (it->second.m_type == act)
+					{
+						id = it->first;
+						break;
+					}
+				}
+				
+				if (id ==-1)
+					return false;
+				
 				if (left)
 				{
-					// TODO: Shortkeys fixen
-					//installShortkey(key,(ShortkeyDestination) (USE_SKILL_LEFT+act));
-					DEBUG5("left short key for action %s",act.c_str());
+					installShortkey(key,(ShortkeyDestination) (USE_SKILL_LEFT+id));
+					DEBUG5("left short key for action %s %i",act.c_str(), USE_SKILL_LEFT+id);
 				}
 				else
 				{
-					// TODO: Shortkeys fixen
-					// installShortkey(key,(ShortkeyDestination) (USE_SKILL_RIGHT+act));
-					DEBUG5("right short key for action %s",act.c_str());
+					installShortkey(key,(ShortkeyDestination) (USE_SKILL_RIGHT+id));
+					DEBUG5("right short key for action %s %i",act.c_str(),USE_SKILL_RIGHT+id );
 				}
 				return true;
 			}
@@ -1276,17 +1290,25 @@ bool Document::onKeyPress(KeyCode key)
 		{
 			onItemRightClick(Equipement::SMALL_ITEMS + (dest-USE_POTION));
 		}
-		/*
-		// TODO: Shortkeys fixen
 		else if (dest>=USE_SKILL_LEFT && dest <USE_SKILL_RIGHT)
 		{
-			setLeftAction((Action::ActionType) (dest-USE_SKILL_LEFT));
+			Player* player = getLocalPlayer();
+			std::map<int,LearnableAbility> &ablts = player->getLearnableAbilities();
+			
+			if (ablts.count(dest-USE_SKILL_LEFT) >0)
+			{
+				setLeftAction(ablts[dest-USE_SKILL_LEFT].m_type);
+			}
 		}
 		else if (dest>=USE_SKILL_RIGHT && dest <USE_SKILL_RIGHT+200)
 		{
-			setRightAction((Action::ActionType) (dest-USE_SKILL_RIGHT));
+			Player* player = getLocalPlayer();
+			std::map<int,LearnableAbility> &ablts = player->getLearnableAbilities();
+			if (ablts.count(dest-USE_SKILL_RIGHT) >0)
+			{
+				setRightAction(ablts[dest-USE_SKILL_RIGHT].m_type);
+			}
 		}
-		*/
 		else if(dest == SHOW_PARTYMENU)
 		{
 			onButtonPartyInfoClicked();

@@ -14,13 +14,10 @@ SkillTree::SkillTree(Document* doc, OIS::Keyboard *keyboard)
 	// Rahmen fuer Skilltree Fenster
 
 	// Bestandteile des Charakterfensters hinzufuegen
-	CEGUI::Window* label;
-	CEGUI::DefaultWindow* tab;
 
 	std::ostringstream outStream;
 	std::string name;
 	std::string lname,bname;
-	unsigned int act;
 	CEGUI::UVector2 pos;
 	
 	m_player_id =0;
@@ -53,7 +50,7 @@ void SkillTree::update()
 	if (player->getId() != m_player_id)
 	{
 		m_player_id = player->getId();
-		DEBUG("new Player id %i",m_player_id);
+		DEBUG5("new Player id %i",m_player_id);
 		
 		// alle bisherigen Tabs und Skills entfernen
 		
@@ -193,11 +190,10 @@ void SkillTree::update()
 		}
 	}
 	
-	/*
+	
 	// Markierer fuer Shortkeys einbauen
 	// Zaehler fuer die Fenster
 	static int acount =0;
-	std::stringstream stream;
 	
 	Document::ShortkeyMap& shortkeys = m_document->getShortkeys();
 	Document::ShortkeyMap::iterator it;
@@ -217,13 +213,22 @@ void SkillTree::update()
 		DEBUG5("shortkey %i to %i",it->first,it->second);
 		key = it->first;
 		
-		act= (Action::ActionType) (it->second-Document::USE_SKILL_LEFT);
 		right = false;
+		int id =0;
 		if (it->second >= Document::USE_SKILL_RIGHT)
 		{
-			act= (Action::ActionType)  (it->second-Document::USE_SKILL_RIGHT);
+			id = it->second - Document::USE_SKILL_RIGHT;
 			right = true;
 		}
+		else
+		{
+			id = it->second - Document::USE_SKILL_LEFT;
+		}
+		
+		if (ablts.count(id) ==0)
+			continue;
+		act= ablts[id].m_type;
+		
 		stream.str("");
 		stream << "SkillShortkeyLabel";
 		stream << nr;
@@ -248,7 +253,7 @@ void SkillTree::update()
 		}
 		
 		stream.str("");
-		stream << Action::getActionInfo((Action::ActionType) act)->m_enum_name << "Label";
+		stream << "SkillImage" << id;
 		label2 = win_mgr.getWindow(stream.str());
 		
 		
@@ -267,10 +272,10 @@ void SkillTree::update()
 			label->setText(keyname);
 		}
 		
-		if ((int) label->getID() != act)
+		if ((int) label->getID() != id)
 		{
-			label->setID(act);
-			pos = m_skill_position[act];
+			label->setID(id);
+			pos = label2->getPosition();
 			if (right)
 			{
 				pos += CEGUI::UVector2(cegui_reldim(0.07f), cegui_reldim( 0.05f));
@@ -300,7 +305,7 @@ void SkillTree::update()
 		label = win_mgr.getWindow(stream.str());
 		label->setVisible(false);
 	}
-	*/
+	
 }
 
 
