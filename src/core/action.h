@@ -374,12 +374,6 @@ public:
 	static ActionType getActionType(std::string name);
 	
 	/**
-	 * \fn static void updateTranslation()
-	 * \brief aktualisiert die Uebersetzung
-	 */
-	static void updateTranslation();
-
-	/**
 	 * \fn void toString(CharConv* cv)
 	 * \brief Konvertiert das Objekt in einen String und schreibt ihn in der Puffer
 	 * \param cvAusgabepuffer

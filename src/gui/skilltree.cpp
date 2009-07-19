@@ -328,6 +328,9 @@ void SkillTree::updateTranslation()
 	// Ueberschriften der Tabs setzen
 	Player* player = m_document->getLocalPlayer();
 	//TODO: generisch ausprogrammieren
+	if (m_nr_tabs <3)
+		return;
+	
 	if (player->getSubtype()=="warrior")
 	{
 		tabs[0]->setText((CEGUI::utf8*) gettext("Fighting skills"));
