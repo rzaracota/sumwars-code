@@ -25,7 +25,7 @@ void PackageHeader::fromString(CharConv* cv)
 void ClientCommand::toString(CharConv* cv)
 {
 	cv->toBuffer<char>((char) m_button);
-	cv->toBuffer<short>((short) m_action);
+	cv->toBuffer(m_action);
 	cv->toBuffer(m_goal.m_x);
 	cv->toBuffer(m_goal.m_y);
 	cv->toBuffer(m_id);
@@ -38,11 +38,9 @@ void ClientCommand::toString(CharConv* cv)
 void ClientCommand::fromString(CharConv* cv)
 {
 	char ctmp;
-	short tmp;
 	cv->fromBuffer<char>(ctmp);
 	m_button = (Button) ctmp;
-	cv->fromBuffer<short>(tmp);
-	m_action = (Action::ActionType) tmp;
+	cv->fromBuffer(m_action);
 	cv->fromBuffer<float>(m_goal.m_x);
 	cv->fromBuffer<float>(m_goal.m_y);
 	cv->fromBuffer<int>(m_id);

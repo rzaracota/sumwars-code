@@ -78,7 +78,7 @@ public:
 	 */
 	Command()
 	{
-		m_type = Action::NOACTION;
+		m_type = "noaction";
 		m_goal = Vector(0,0);
 		m_goal_object_id= 0;
 		m_damage_mult=1;
@@ -104,6 +104,12 @@ public:
 	 * \brief Vergleichsoperator auf Ungleichheit
 	 */
 	bool operator!=(Command& other);
+	
+	/**
+	 * \fn void operator=(Command& other)
+	 * \brief Zuweisungsoperator
+	 */
+	void operator=(Command& other);
 	
 	/**
 	 * Fields

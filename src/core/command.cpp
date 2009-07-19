@@ -2,7 +2,7 @@
 
 void Command::toString(CharConv* cv)
 {
-	cv->toBuffer((short) m_type);
+	cv->toBuffer(m_type);
 	cv->toBuffer(m_goal.m_x);
 	cv->toBuffer(m_goal.m_y);
 	cv->toBuffer(m_goal_object_id);
@@ -12,9 +12,7 @@ void Command::toString(CharConv* cv)
 
 void Command::fromString(CharConv* cv)
 {
-	short tmp;
-	cv->fromBuffer(tmp);
-	m_type = (Action::ActionType) tmp;
+	cv->fromBuffer(m_type);
 	cv->fromBuffer(m_goal.m_x);
 	cv->fromBuffer(m_goal.m_y);
 	cv->fromBuffer(m_goal_object_id);
@@ -33,5 +31,13 @@ bool Command::operator!=(Command& other)
 	
 }
 
-
+void Command::operator=(Command& other)
+{
+	m_type = other.m_type;
+	m_goal = other.m_goal;
+	m_goal_object_id= other.m_goal_object_id;
+	m_damage_mult=other.m_damage_mult;
+	m_range= other.m_range;
+	m_flags =other.m_flags;
+}
 

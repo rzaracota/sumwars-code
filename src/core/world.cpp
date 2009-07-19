@@ -612,7 +612,7 @@ bool World::insertPlayerIntoRegion(WorldObject* player, short region, LocationNa
 
 		// bisheriges Kommando abbrechen
 		static_cast<Creature*>(player)->clearCommand(false);
-		static_cast<Creature*>(player)->getAction()->m_type = Action::NOACTION;
+		static_cast<Creature*>(player)->getAction()->m_type = "noaction";
 
 		if (m_server)
 		{
@@ -835,7 +835,7 @@ void World::handleSavegame(CharConv *cv, int slot)
 
 void World::handleCommand(ClientCommand* comm, int slot, float delay)
 {
-	DEBUG5("Kommando (%f %f) button: %i id: %i action: %i",comm->m_goal.m_x,comm->m_goal.m_y,comm->m_button, comm->m_id,comm->m_action);
+	DEBUG5("Kommando (%f %f) button: %i id: %i action: %s",comm->m_goal.m_x,comm->m_goal.m_y,comm->m_button, comm->m_id,comm->m_action.c_str());
 
 
 	// Wenn man sich nicht auf Serverseite befindet
@@ -1353,7 +1353,6 @@ void World::updatePlayers()
 					cv->fromBuffer(dimx);
 					cv->fromBuffer(dimy);
 
-					// TODO: Name setzen
 					Region* reg = getRegion(headerp.m_number);
 					if (reg ==0)
 					{

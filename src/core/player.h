@@ -42,6 +42,17 @@ enum Gender
 	FEMALE = 2,
 };
 
+struct LearnableAbility
+{
+	Action::ActionType m_type;
+	
+	Vector m_skilltree_position;
+	
+	int m_id;
+	
+	int m_skilltree_tab;
+};
+
 /**
  * \class PlayerCamera
  * \brief Zeigt an, aus welchem Blickwinkel der Spieler die Szene betrachtet
@@ -663,6 +674,24 @@ public:
 	{
 		return m_gender;
 	}
+	
+	/**
+	 * \fn std::map<int,LearnableAbility>& getLearnableAbilities()
+	 * \brief Gibt alle erlernbaren Faehigkeiten aus
+	 */
+	std::map<int,LearnableAbility>& getLearnableAbilities()
+	{
+		return m_learnable_abilities;
+	}
+	
+	/**
+	 * \fn void insertLearnableAbility(Action::ActionType type, Vector position, int tab)
+	 * \brief Fuegt eine erlernbare Faehigkeit hinzu
+	 * \param type Typ der Faehigkeit
+	 * \param position Position im Skilltree
+	 * \param tab Tab in dem dei Faehigkeit auftaucht
+	 */
+	void insertLearnableAbility(Action::ActionType type, Vector position, int tab);
 
 //Protected stuff
 protected:
@@ -824,6 +853,12 @@ protected:
 	 * \brief Timer, der fuer das entfernen von Nachrichten zustaendig ist
 	 */
 	float m_message_clear_timer;
+	
+	/**
+	 * \var std::map<int,LearnableAbility> m_learnable_abilities
+	 * \brief Faehigkeiten, die der Spieler lernen kann
+	 */
+	std::map<int,LearnableAbility> m_learnable_abilities;
 	
 	//Constructors
 	//Accessor Methods

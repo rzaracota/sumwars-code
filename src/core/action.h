@@ -53,6 +53,7 @@ public:
 	 * \enum ActionType
 	 * \brief Aufzaehlung verschiedener Aktionen
 	 */
+	/*
 	enum ActionType
 	{
 		NOACTION=0,
@@ -187,12 +188,15 @@ public:
 
 
 	};
-
+*/
+	
+	typedef  std::string ActionType;
+	
 	/**
-	 * \enum Distance
-	 * \brief Aufzaehlung verschiedener Entfernungen und Zieltypen fuer Aktionen
+	 * \enum TargetType
+	 * \brief Aufzaehlung verschiedener Zieltypen fuer Aktionen
 	 */
-	enum Distance
+	enum TargetType
 	{
 
 		MELEE = 1,
@@ -218,13 +222,6 @@ public:
 	 */
 	struct ActionInfo
 	{
-		ActionInfo()
-		{
-			m_animation[NO_WEAPON].clear();
-			m_animation[ONE_HANDED].clear();
-			m_animation[TWO_HANDED].clear();
-			
-		}
 		/**
 		 * \var int m_timer_nr
 		 * \brief Nummer des Timers, der bei benutzen der Aktion gestartet wird. Moegliche Werte sind 0,1,2
@@ -256,10 +253,10 @@ public:
 		float m_critical_perc;
 
 		/**
-		 * \var Distance m_distance
-		 * \brief Gibt die Distanz an, auf die die Aktion ausgeführt werden kann
+		 * \var TargetType m_target_type
+		 * \brief Gibt die Art des Zielobjekts an
 		 */
-		Distance m_distance;
+		TargetType m_target_type;
 
 		/**
 		 * \var char m_flags
@@ -274,22 +271,10 @@ public:
 		std::string m_name;
 
 		/**
-		 * \var std::string m_enum_name
-		 * \brief Name des Enums als String
-		 */
-		std::string m_enum_name;
-
-		/**
 		 * \var std::string m_description
 		 * \brief Abkuerzung der Beschreibung als String
 		 **/
 		std::string m_description;
-
-		/**
-		* \var list<std::string> m_animation;
-		* \brief Namen der Animationen
-        */
-		std::vector<std::string> m_animation[3];
 
 		/**
 		 * \var short m_req_level
@@ -338,7 +323,7 @@ public:
 	 */
 	Action()
 	{
-		m_type = NOACTION;
+		m_type = "noaction";
 		m_time =0;
 		m_elapsed_time =0;
 	}
@@ -357,7 +342,12 @@ public:
 	 */
 	static ActionInfo* getActionInfo(ActionType type)
 	{
-		return &(m_base_info[type]);
+		std::map<ActionType,ActionInfo>::iterator it;
+		it = m_action_info.find(type);
+		if (it != m_action_info.end())
+			return &(it->second);
+		
+		return 0;
 	}
 
 	/**
@@ -368,14 +358,6 @@ public:
 	 */
 	static string getName(ActionType type);
 	
-	/**
-	 * \fn static string getEnumName(ActionType type)
-	 * \brief Gibt zu einer Aktion das enum als string aus
-	 * \param type die Aktion
-	 * \return Name der Aktion
-	 */
-	static string getEnumName(ActionType type);
-
 	/**
 	 * \fn static string getDescription(ActionType type)
 	 * \brief Gibt zu einer Aktion die Beschreibung aus
@@ -452,16 +434,10 @@ public:
 	int  m_goal_object_id;
 
 	/**
-	 * \var static const ActionInfo m_base_info[192]
+	 * \var static std::map<ActionType,ActionInfo> m_action_info
 	 * \brief Enthaelt Basisinformationen fuer alle Aktionen
 	 */
-	static ActionInfo m_base_info[192];
-
-	/**
-	 * \var static std::map<std::string, ActionType> m_enum_string_to type
-	 * \brief Bildet den Name der Aktion auf den Aktionstyp ab
-	 */
-	static std::map<std::string, ActionType> m_enum_string_to_type;
+	static std::map<ActionType,ActionInfo> m_action_info;
 
 };
 

@@ -437,17 +437,8 @@ void MainWindow::update(float time)
 			if (m_document->getLocalPlayer()!=0)
 			{
 				// Skilltree anzeigen wenn entsprechendes Flag gesetzt
-				CEGUI::TabControl* skilltree = (CEGUI::TabControl*) win_mgr.getWindow("SkilltreeMage");
-				Player* player = m_document->getLocalPlayer();
-	
-				// Skilltree einstellen der der Spielerklasse entspricht
-				if (player->getSubtype() == "warrior")
-					skilltree = (CEGUI::TabControl*) win_mgr.getWindow("SkilltreeWarrior");
-				if (player->getSubtype() == "archer")
-					skilltree = (CEGUI::TabControl*) win_mgr.getWindow("SkilltreeArcher");
-				if (player->getSubtype() == "priest")
-					skilltree = (CEGUI::TabControl*) win_mgr.getWindow("SkilltreePriest");
-	
+				
+				CEGUI::TabControl* skilltree = (CEGUI::TabControl*) win_mgr.getWindow("Skilltree");
 				if (wflags & Document::SKILLTREE)
 				{
 					skilltree->setVisible(true);
@@ -456,7 +447,6 @@ void MainWindow::update(float time)
 				{
 					skilltree->setVisible(false);
 				}
-				
 				
 			}
 		}
@@ -728,16 +718,10 @@ void MainWindow::setupSkilltree()
 	m_sub_windows["SkillTree"] = wnd;
 	
 	// Skilltree anfangs ausblenden
-	m_game_screen->addChildWindow(wnd->getCEGUIWindow(0));
-	m_game_screen->addChildWindow(wnd->getCEGUIWindow(1));
-	m_game_screen->addChildWindow(wnd->getCEGUIWindow(2));
-	m_game_screen->addChildWindow(wnd->getCEGUIWindow(3));
-	
-	wnd->getCEGUIWindow(0)->setVisible(false);
-	wnd->getCEGUIWindow(1)->setVisible(false);
-	wnd->getCEGUIWindow(2)->setVisible(false);
-	wnd->getCEGUIWindow(3)->setVisible(false);
-	
+
+	m_game_screen->addChildWindow(wnd->getCEGUIWindow());
+	wnd->getCEGUIWindow()->setVisible(false);
+
 }
 
 void MainWindow::setupChatWindow()

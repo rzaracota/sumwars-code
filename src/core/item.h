@@ -113,6 +113,12 @@ struct WeaponAttr
 	{
 		init();
 	}
+	
+	/**
+	 * \fn void operator=(WeaponAttr& other)
+	 * \brief Zuweisungsoperator
+	 */
+	void operator=(WeaponAttr& other);
 };
 
 struct ItemBasicData;
@@ -151,7 +157,7 @@ struct Item {
 
 	/**
 	 * \enum Type
-	 * \brief TODO
+	 * \brief Typ des Gegenstandes
 	 */
 	enum Type
 	{

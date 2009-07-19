@@ -103,8 +103,7 @@ bool  ObjectLoader::loadMonster(TiXmlNode* node)
 		// Datenfelder nullen
 		data->m_base_attr.m_immunity =0;
 		data->m_base_attr.m_special_flags =0;
-		for (int i=0; i<6; i++)
-			data->m_base_attr.m_abilities[i] =0;
+		
 		
 		// Schleife ueber die Elemente von Monster
 		for ( child = node->FirstChild(); child != 0; child = child->NextSibling())
@@ -197,8 +196,7 @@ bool  ObjectLoader::loadMonster(TiXmlNode* node)
 							std::string anim,act;
 							Action::ActionType action;
 							attr.getString("type",act);
-							action = Action::getActionType(act);
-							data->m_base_attr.m_abilities[action/32] |= 1<<(action%32);
+							data->m_base_attr.m_abilities.insert(act);
 							
 						}
 						else if (!strcmp(child2->Value(), "Immunity"))

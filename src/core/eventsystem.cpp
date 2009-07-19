@@ -753,13 +753,13 @@ int EventSystem::addUnitCommand(lua_State *L)
 				Creature* cr = static_cast<Creature*>(wo);
 
 				Action::ActionType act = Action::getActionType(actstr);
-				if (act != Action::NOACTION)
+				if (act != "noaction")
 				{
 					Command com;
 					com.m_type = act;
 					com.m_range = cr->getBaseAttrMod()->m_attack_range;
 
-					if (act == Action::USE)
+					if (act == "use")
 						com.m_range = 0.5;
 
 					if (argc >=3 && lua_isnumber(L,3))
@@ -839,7 +839,7 @@ int  EventSystem::setUnitAction(lua_State *L)
 				Creature* cr = static_cast<Creature*>(wo);
 
 				Action::ActionType act = Action::getActionType(actstr);
-				if (act != Action::NOACTION)
+				if (act != "noaction")
 				{
 					Action action;
 					action.m_action_equip = Action::NO_WEAPON;

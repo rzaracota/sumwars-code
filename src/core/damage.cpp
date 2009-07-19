@@ -76,15 +76,60 @@ void Damage::fromString(CharConv* cv)
 
 void Damage::init()
 {
-		// alles nullen
-	memset(this,0, sizeof(Damage));
-	int i;
-
-		// Multiplikatoren auf 1 setzen
-	for (i=0;i<4;i++)
+	m_attack =0;
+	m_power =0;
+	m_attacker_id =0;
+	m_crit_perc =0;
+	m_special_flags =0;
+	
+	for (int i=0; i<NR_STATUS_MODS; i++)
+	{
+		m_status_mod_power[i] =0;
+	}
+	
+	for (int i=0; i<NR_AI_MODS; i++)
+	{
+		m_ai_mod_power[i] =0;
+	}
+	
+	// Multiplikatoren auf 1 setzen
+	for (int i=0;i<4;i++)
+	{
+		m_min_damage[i] =0;
+		m_max_damage[i] =0;
 		m_multiplier[i]=1;
+	}
 
 	m_attacker_fraction = WorldObject::FRAC_HOSTILE_TO_ALL;
+}
+
+void Damage::operator=(Damage& other)
+{
+	m_attack =other.m_attack;
+	m_power =other.m_power;
+	m_attacker_id =other.m_attacker_id;
+	m_crit_perc = other.m_crit_perc;
+	m_special_flags =other.m_special_flags;
+	
+	for (int i=0; i<NR_STATUS_MODS; i++)
+	{
+		m_status_mod_power[i] =other.m_status_mod_power[i];
+	}
+	
+	for (int i=0; i<NR_AI_MODS; i++)
+	{
+		m_ai_mod_power[i] = other.m_ai_mod_power[i];
+	}
+	
+	// Multiplikatoren auf 1 setzen
+	for (int i=0;i<4;i++)
+	{
+		m_min_damage[i] =other.m_min_damage[i];
+		m_max_damage[i] =other.m_max_damage[i];
+		m_multiplier[i]=other.m_multiplier[i];
+	}
+
+	m_attacker_fraction = other.m_attacker_fraction;
 }
 
 std::string Damage::getDamageTypeName(DamageType dt)

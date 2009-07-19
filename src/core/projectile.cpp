@@ -138,7 +138,7 @@ Projectile::Projectile(Subtype subtype, Damage* dmg, int id)
 	setAngle(0);
 	if (dmg !=0)
 	{
-		memcpy(&m_damage, dmg,sizeof(Damage)); 
+		m_damage= *dmg; 
 	}
 
 	clearNetEventMask();
@@ -218,7 +218,7 @@ bool Projectile::update(float time)
 							
 							// Schaden halbieren
 							Damage dmg;
-							memcpy(&dmg,&m_damage,sizeof(Damage));
+							dmg = m_damage;
 							for (int i=0;i<4;i++)
 							{
 								dmg.m_multiplier[i] *= 0.5;

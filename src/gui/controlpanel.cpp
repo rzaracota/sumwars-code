@@ -220,7 +220,7 @@ void ControlPanel::update()
 	
 	// Image Schaden Attacke links
 	label =  win_mgr.getWindow( "LeftClickAbilityImage");
-	name = Action::getActionInfo((Action::ActionType) player->getLeftAction())->m_enum_name;
+	name = player->getLeftAction();
 	if (("set:skills image:" + name) != label->getProperty("Image"))
 	{
 		label->setProperty("Image", "set:skills image:" + name);
@@ -240,7 +240,7 @@ void ControlPanel::update()
 
 	// Image Attacke rechts
 	label =  win_mgr.getWindow( "RightClickAbilityImage");
-	name = Action::getActionInfo((Action::ActionType) player->getRightAction())->m_enum_name;
+	name = player->getRightAction();
 	if (("set:skills image:" + name) != label->getProperty("Image"))
 	{
 		label->setProperty("Image", "set:skills image:" + name);

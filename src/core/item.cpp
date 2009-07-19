@@ -1,6 +1,15 @@
 #include "item.h"
 #include "itemfactory.h"
 
+void WeaponAttr::operator=(WeaponAttr& other)
+{
+	m_weapon_type = other.m_weapon_type;
+	m_damage = other.m_damage;
+	m_attack_range = other.m_attack_range;
+	m_two_handed = other.m_two_handed;
+	m_dattack_speed = other.m_dattack_speed;
+}
+
 ItemBasicData::ItemBasicData()
 {
 	m_useup_effect=0;
@@ -86,7 +95,7 @@ Item::Item(ItemBasicData& data, int id)
 	{
 		DEBUG5("copy useup effect");
 		m_useup_effect = new CreatureDynAttrMod;
-		memcpy(m_useup_effect,data.m_useup_effect,sizeof(CreatureDynAttrMod));
+		*m_useup_effect = *(data.m_useup_effect);
 	}
 	else
 	{
@@ -97,7 +106,7 @@ Item::Item(ItemBasicData& data, int id)
 	{
 		DEBUG5("copy equip effect");
 		m_equip_effect = new CreatureBaseAttrMod;
-		memcpy(m_equip_effect,data.m_equip_effect,sizeof(CreatureBaseAttrMod));
+		*m_equip_effect = *(data.m_equip_effect);
 	}
 	else
 	{
@@ -109,8 +118,8 @@ Item::Item(ItemBasicData& data, int id)
 		DEBUG5("copy weapon attr");
 
 		m_weapon_attr = new WeaponAttr;
-		memcpy(m_weapon_attr,data.m_weapon_attr,sizeof(WeaponAttr));
-		memcpy(&(m_weapon_attr->m_damage) , &(data.m_weapon_attr->m_damage),sizeof(Damage));
+		*m_weapon_attr = *(data.m_weapon_attr);
+		m_weapon_attr->m_damage = data.m_weapon_attr->m_damage;
 
 	}
 	else
@@ -241,9 +250,11 @@ void Item::toStringComplete(CharConv* cv)
 		cv->toBuffer(m_equip_effect->m_dattack_speed);
 		cv->toBuffer(m_equip_effect->m_xspecial_flags);
 
-		for (i=0;i<6;i++)
+		cv->toBuffer<short>(m_equip_effect->m_xabilities.size());
+		std::set<std::string>::iterator it;
+		for (it = m_equip_effect->m_xabilities.begin(); it != m_equip_effect->m_xabilities.end(); ++it)
 		{
-			cv->toBuffer(m_equip_effect->m_xabilities[i]);
+			cv->toBuffer(*it);
 		}
 		cv->toBuffer(m_equip_effect->m_ximmunity);
 
@@ -341,10 +352,15 @@ void Item::fromStringComplete(CharConv* cv)
 		cv->fromBuffer<short>(m_equip_effect->m_dattack_speed);
 		cv->fromBuffer<int>(m_equip_effect->m_xspecial_flags );
 
-		for (i=0;i<6;i++)
+		short nr;
+		cv->fromBuffer<short>(nr);
+		Action::ActionType type;
+		for (int i=0; i<nr; i++)
 		{
-			cv->fromBuffer<int>(m_equip_effect->m_xabilities[i]);
+			cv->fromBuffer(type);
+			m_equip_effect->m_xabilities.insert(type);
 		}
+		
 		cv->fromBuffer<char>(m_equip_effect->m_ximmunity);
 
 	}
@@ -410,8 +426,6 @@ std::string Item::getDescription()
 			first = false;
 		}
 	}
-
-	// TODO: Beschraenkung nach Charakterklasse
 
 	// Effekt beim Verbrauchen
 	if (m_useup_effect)

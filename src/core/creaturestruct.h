@@ -2,12 +2,12 @@
 #ifndef CREATURESTRUCT_H
 #define CREATURESTRUCT_H
 
-
 #include <list>
 #include <string>
 #include <memory.h>
 #include "debug.h"
-
+#include <map>
+#include <set>
 #define NR_STATUS_MODS 8
 
 #define NR_EFFECTS 1
@@ -132,10 +132,10 @@ struct CreatureBaseAttr
 	short  m_attack_speed;
 	
 	/**
-	 * \var m_abilities[6]
+	 * \var std::set<std::string> m_abilities;
 	 * \brief Bitmaske die angibt, welche Fähigkeiten der Spieler benutzen kann.
 	 */
-	int m_abilities[6];
+	std::set<std::string> m_abilities;
 	
 	/**
 	 * \var m_attack_range
@@ -170,6 +170,29 @@ struct CreatureBaseAttr
 	 */
 	bool setValue(std::string valname, int& event_mask);
 	
+	/**
+	 * \fn void init()
+	 * \brief Belegt die Struktur mit Nullen
+	 */
+	void init();
+	
+	
+	/**
+	 * \fn CreatureBaseAttr()
+	 * \brief Konstruktor
+	 */
+	CreatureBaseAttr()
+	{
+		init();
+	}
+	
+	/**
+	 * \fn void operator=(CreatureBaseAttr& other)
+	 * \brief Zuweisungsoperator
+	 * \param other zugewiesene Struktur
+	 */
+	void operator=(CreatureBaseAttr other);
+	
 };
 
 /**
@@ -178,6 +201,7 @@ struct CreatureBaseAttr
  */
 struct CreatureBaseAttrMod
 {
+	
 	/**
 	 * \var m_darmor;
 	 * \brief Aenderung des  R&uuml;stungswerts, beeinflusst den Schaden von Angriffen
@@ -270,10 +294,10 @@ struct CreatureBaseAttrMod
 	float m_time;
 	
 	/**
-	 * \var m_xabilities[6]
-	 * \brief Bitmaske die die Aenderungen der Faehigkeiten angibt. Die angegebene Bitmaske wird mit OR zur bestehenden hinzugefügt.
+	 * \var std::set<std::string> m_xabilities
+	 * \brief Bitmaske die die Aenderungen der Faehigkeiten angibt. 
 	 */
-	int m_xabilities[6];
+	std::set<std::string> m_xabilities;
 	
 	/**
 	 * \var char m_ximmunity
@@ -286,12 +310,8 @@ struct CreatureBaseAttrMod
 	 * \fn void init()
 	 * \brief Belegt die Struktur mit Nullen
 	 */
-	void init()
-	{
-		DEBUG5("init CreatureBaseAttrMod");
-		// alles nullen
-		memset(this,0, sizeof(CreatureBaseAttrMod));
-	}
+	void init();
+	
 	
 	/**
 	 * \fn CreatureBaseAttrMod()
@@ -301,6 +321,13 @@ struct CreatureBaseAttrMod
 	{
 		init();
 	}
+	
+	/**
+	 * \fn void operator=(CreatureBaseAttrMod other)
+	 * \brief Zuweisungsoperator
+	 * \param other zugewiesene Struktur
+	 */
+	void operator=(CreatureBaseAttrMod other);
 	
 };
 
@@ -383,6 +410,12 @@ struct CreatureDynAttr
 	 * \param event_mask Bitmaske, die anzeigt, welche Daten neu uebertragen werden muessen
 	 */
 	bool setValue(std::string valname, int& event_mask);
+	
+	/**
+	 * \fn void operator=(CreatureDynAttr other)
+	 * \brief Zuweisungsoperator
+	 */
+	void operator=(CreatureDynAttr other);
 };
 
 /**
@@ -411,7 +444,11 @@ struct CreatureDynAttrMod
 	{
 		DEBUG5("init CreatureDynAttrMod");
 		// alles nullen
-		memset(this,0, sizeof(CreatureDynAttrMod));
+		m_dhealth =0;
+		for (int i=0; i< NR_STATUS_MODS; i++)
+		{
+			m_dstatus_mod_immune_time[i] =0;
+		}
 	}
 	
 	/**
@@ -422,6 +459,12 @@ struct CreatureDynAttrMod
 	{
 		init();
 	}
+	
+	/**
+	 * \fn void operator=(CreatureDynAttrMod other)
+	 * \brief Zuweisungsoperator
+	*/
+	void operator=(CreatureDynAttrMod other);
 	
 };
 

@@ -237,6 +237,12 @@ struct Damage
 	 * \param valname Name des Wertes
 	 */
 	bool setValue(std::string valname);
+	
+	/**
+	 * \fn void operator=(Damage& other)
+	 * \brief Zuweisungsoperator
+	 */
+	void operator=(Damage& other);
 };
 	
 #endif

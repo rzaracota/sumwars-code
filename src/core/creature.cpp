@@ -80,11 +80,11 @@ bool Creature::init()
 	// eigene Initialisierung
 
 	// keine Aktion/Kommando
-	m_action.m_type = Action::NOACTION;
+	m_action.m_type = "noaction";
 	
-	m_command.m_type = Action::NOACTION;
+	m_command.m_type = "noaction";
 	m_command.m_damage_mult=1;
-	m_next_command.m_type = Action::NOACTION;
+	m_next_command.m_type = "noaction";
 
 	m_trade_id=0;
 	m_speak_id =0;
@@ -161,7 +161,7 @@ void Creature::die()
 	// eigenen Status auf sterbend STATE_DIEING setzen
 	getRegion()->changeObjectGroup(this,DEAD);
 	setState(STATE_DIEING);
-	m_action.m_type =Action::DIE;
+	m_action.m_type ="die";
 	DEBUG5("object died: %p",this);
 	m_action.m_time =1000;
 	
@@ -182,14 +182,14 @@ bool Creature::canBeAttacked()
 void Creature::initAction()
 {
 	//wenn Idle Animation schon laeuft, laufen lassen
-	if (m_action.m_type== Action::NOACTION && m_action.m_elapsed_time>0)
+	if (m_action.m_type== "noaction" && m_action.m_elapsed_time>0)
 	{
 		return;
 
 	}
 	
 	
-	DEBUG5("init Action %i", m_action.m_type);
+	DEBUG5("init Action %s", m_action.m_type.c_str());
 
 	
 
@@ -203,7 +203,7 @@ void Creature::initAction()
 	DEBUG4("timer nr %i",timer);
 
 	// Faehigkeit Ausdauer
-	if (checkAbility(Action::ENDURANCE) && timer ==1)
+	if (checkAbility("endurande") && timer ==1)
 	{
 		DEBUG5("ausdauer");
 		// Timerlaufzeit um 15% verringern
@@ -265,7 +265,7 @@ void Creature::initAction()
 	Action::ActionType baseact = Action::getActionInfo(m_action.m_type)->m_base_action;
 
 	// Zeit der Aktion modifizieren
-	if (baseact == Action::WALK)
+	if (baseact == "walk")
 	{
 			// Bei Aktion laufen die Laufgeschwindigkeit einrechnen
 			m_action.m_time = 1000000 / getBaseAttrMod()->m_walk_speed;
@@ -286,7 +286,7 @@ void Creature::initAction()
 
 
 	// Fuer Aktionen die auf physischen Angriffen beruhen sowie fuer den normalen Magieangriff Waffengeschwindigkeit einrechnen
-	if (baseact == Action::ATTACK || baseact == Action::RANGE_ATTACK || baseact == Action::HOLY_ATTACK || m_action.m_type == Action::MAGIC_ATTACK)
+	if (baseact == "attack" || baseact == "range_attack" || baseact == "holy_attack" || m_action.m_type == "magic_attack")
 	{
 		float atksp = std::min((short) 5000,getBaseAttrMod()->m_attack_speed);
 
@@ -294,7 +294,7 @@ void Creature::initAction()
 		m_action.m_time *= 1000000/atksp;
 
 	}
-	else if (baseact != Action::WALK)
+	else if (baseact != "walk")
 	{
 		m_action.m_time = aci->m_standard_time;
 
@@ -302,25 +302,19 @@ void Creature::initAction()
 
 	DEBUG5("resulting time %f",m_action.m_time);
 	// Drehwinkel setzen
-	if (aci->m_distance != Action::SELF && m_action.m_type != Action::TAKE_ITEM)
+	if (aci->m_target_type != Action::SELF && m_action.m_type != "take_item")
 	{
 		
 		setAngle((m_action.m_goal - getShape()->m_center).angle());
 
 	}
-	if (baseact == Action::WALK)
+	if (baseact == "walk")
 	{
 		setAngle(getShape()->m_angle = getSpeed().angle());
 	}
 
 	// Daten fuer die Animation setzen
 	m_action.m_action_equip = getActionEquip();
-
-	// Besondere Initialisierungen
-
-	if ( m_action.m_type== Action::TRADE)
-	{
-	}
 
 	addToNetEventMask(NetEvent::DATA_ACTION);
 	
@@ -330,7 +324,7 @@ void Creature::initAction()
 	}
 	
 	// wenn keine Aktion berechnet wurde, Kommando beenden
-	if (m_action.m_type == Action::NOACTION && m_command.m_type !=Action::NOACTION)
+	if (m_action.m_type == "noaction" && m_command.m_type !="noaction")
 	{
 		clearCommand(false);
 	}
@@ -339,7 +333,7 @@ void Creature::initAction()
 void Creature::performAction(float &time)
 {
 	// Wenn Idle Aktion ausgefuehrt wird, aber ein Kommando vorliegt, IdleAktion sofort beenden
-	if (m_action.m_type == Action::NOACTION && m_command.m_type != Action::NOACTION)
+	if (m_action.m_type == "noaction" && m_command.m_type != "noaction")
 	{
 		return;
 	}
@@ -387,14 +381,14 @@ void Creature::performAction(float &time)
 		}
 	}
 
-	if (!World::getWorld()->isServer() && m_action.m_type != Action::NOACTION)
+	if (!World::getWorld()->isServer() && m_action.m_type != "noaction")
 	{
-		DEBUG5("perform Action %i for %f msec, %f / %f done", m_action.m_type,dtime,m_action.m_elapsed_time,m_action.m_time);
+		DEBUG5("perform Action %s for %f msec, %f / %f done", m_action.m_type.c_str(),dtime,m_action.m_elapsed_time,m_action.m_time);
 	}
 
 
 	//Behandlung des Laufens
-	if (m_action.m_type == Action::WALK)
+	if (m_action.m_type == "walk")
 	{
 
 		// Kollisionen behandeln
@@ -416,13 +410,13 @@ void Creature::performAction(float &time)
 	// Prozentsatz bei dessen Erreichen die Wirkung der Aktion berechnet wird
 	float pct = Action::getActionInfo(m_action.m_type)->m_critical_perc;
 	
-	if (m_action.m_type != Action::NOACTION)
+	if (m_action.m_type != "noaction")
 	{
 		DEBUG5("pos %f %f  speed %f %f  pct %f",getShape()->m_center.m_x, getShape()->m_center.m_y, getSpeed().m_x,getSpeed().m_y,p1);
 	}
 	
 	// Triple Shot
-	if (m_action.m_type == Action::TRIPLE_SHOT || m_action.m_type == Action::GUIDED_TRIPLE_SHOT)
+	if (m_action.m_type == "triple_shot" || m_action.m_type == "guided_triple_shot")
 	{
 		// Faehigkeit hat drei Prozentsaetze
 		if (p1>0.3)
@@ -465,7 +459,7 @@ void Creature::performAction(float &time)
 		}
 
 		// Zielobjekt ermitteln
-		if (m_action.m_goal_object_id!=0 && m_action.m_type!= Action::TAKE_ITEM)
+		if (m_action.m_goal_object_id!=0 && m_action.m_type!= "take_item")
 		{
 			// Zielobjekt durch ID gegeben, Objekt von der Welt holen
 			goalobj = getRegion()->getObject(m_action.m_goal_object_id);
@@ -475,7 +469,7 @@ void Creature::performAction(float &time)
 			// Kein Zielobjekt per ID gegeben
 			DEBUG5("no Goal ID!");
 			// Im Falle von Nahkampf Ziel anhand des Zielpunktes suchen
-			if (Action::getActionInfo(m_action.m_type)->m_distance == Action::MELEE && m_action.m_type!= Action::TAKE_ITEM)
+			if (Action::getActionInfo(m_action.m_type)->m_target_type == Action::MELEE && m_action.m_type!= "take_item")
 			{
 				DEBUG5("Searching goal %f %f",goal.m_x,goal.m_y);
 				goalobj = getRegion()->getObjectAt(goal,LAYER_AIR);
@@ -484,7 +478,7 @@ void Creature::performAction(float &time)
 		}
 
 		// Party Zauber suchen sich ihr Ziel
-		if (Action::getActionInfo(m_action.m_type)->m_distance == Action::PARTY)
+		if (Action::getActionInfo(m_action.m_type)->m_target_type == Action::PARTY)
 		{
 			Shape s;
 			s.m_type = Shape::CIRCLE;
@@ -519,7 +513,7 @@ void Creature::performAction(float &time)
 		Creature* cgoal=0;
 
 		// Zielobjekt im Nahkampf suchen an der Stelle an der die Waffe trifft
-		if (goalobj ==0 && Action::getActionInfo(m_action.m_type)->m_distance == Action::MELEE && m_action.m_type!= Action::TAKE_ITEM)
+		if (goalobj ==0 && Action::getActionInfo(m_action.m_type)->m_target_type == Action::MELEE && m_action.m_type!= "take_item")
 		{
 			goalobj = getRegion()->getObjectAt(goal,LAYER_AIR);
 		}
@@ -553,7 +547,7 @@ void Creature::performAction(float &time)
 	{
 		DEBUG5("finished action");
 		
-		if (m_action.m_type == Action::WALK)
+		if (m_action.m_type == "walk")
 		{
 			// Trigger erzeugen
 			Trigger* tr = new Trigger("unit_moved");
@@ -572,16 +566,16 @@ void Creature::performAction(float &time)
 		// Kommando ist beendet wenn die gleichnamige Aktion beendet wurde
 		// Ausnahme: Bewegungskommando ist beendet wenn das Ziel erreicht ist
 		Action::ActionType baseact = Action::getActionInfo(m_command.m_type)->m_base_action;
-		if (((m_action.m_type == m_command.m_type) || m_action.m_type == baseact) && m_action.m_type != Action::WALK || m_command.m_type == Action::WALK && getShape()->m_center.distanceTo(goal) < getBaseAttr()->m_step_length 
-				  && !(m_command.m_type == Action::CHARGE || m_command.m_type == Action::STORM_CHARGE))
+		if (((m_action.m_type == m_command.m_type) || m_action.m_type == baseact) && m_action.m_type != "walk" || m_command.m_type == "walk" && getShape()->m_center.distanceTo(goal) < getBaseAttr()->m_step_length 
+				  && !(m_command.m_type == "charge" || m_command.m_type == "storm_charge"))
 		{
-			DEBUG5("finished command %i (base %i) with action %i",m_command.m_type,baseact,m_action.m_type );
-			if (m_command.m_type != Action::NOACTION)
+			DEBUG5("finished command %s (base %s) with action %s",m_command.m_type.c_str(),baseact.c_str(),m_action.m_type.c_str() );
+			if (m_command.m_type != "noaction")
 			{
 				addToNetEventMask(NetEvent::DATA_COMMAND);
 				clearCommand(true);
 			}
-			m_command.m_type = Action::NOACTION;
+			m_command.m_type = "noaction";
 			m_action.m_elapsed_time=0;
 			m_command.m_damage_mult = 1;
 
@@ -591,11 +585,11 @@ void Creature::performAction(float &time)
 		}
 
 		// Aktion ist beendet
-		if (m_action.m_type != Action::NOACTION)
+		if (m_action.m_type != "noaction")
 		{
 			addToNetEventMask(NetEvent::DATA_ACTION);
 		}
-		m_action.m_type = Action::NOACTION;
+		m_action.m_type = "noaction";
 		m_action.m_elapsed_time =0;
 		addToNetEventMask(NetEvent::DATA_ACTION);
 	}
@@ -624,11 +618,11 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 
 	// Wenn die Aktion auf Nahkampf beruht Schaden an das Zielobjekt austeilen
 	// Ausname: Rundumschlag
-	if (ainfo->m_distance == Action::MELEE)
+	if (ainfo->m_target_type == Action::MELEE)
 	{
-		if (cgoal && m_action.m_type!=Action::AROUND_BLOW 
-				  &&  m_action.m_type!=Action::WHIRL_BLOW
-				  && m_action.m_type!=Action::SPEAK)
+		if (cgoal && m_action.m_type!="around_blow" 
+				  &&  m_action.m_type!="whirl_blow"
+				  && m_action.m_type!="speak")
 		{
 			cgoal->takeDamage(&m_damage);
 		}
@@ -685,15 +679,14 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 		arrow = "ICE_ARROW";
 	
 	
-	if (ainfo->m_distance == Action::SELF)
+	if (ainfo->m_target_type == Action::SELF)
 	{
 		applyBaseAttrMod(&cbam);
 	}
 
 		// Behandlung der Wirkung der Aktion nach Aktionstyp
-	switch(m_action.m_type)
+	if (m_action.m_type == "speak")
 	{
-		case Action::SPEAK:
 			if (goalobj->isCreature() && getDialogueId() ==0 && getRegion()->getCutsceneMode() == false)
 			{
 				cr = static_cast<Creature*>(goalobj);
@@ -710,16 +703,16 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 					cr->setAngle((getPosition() - cr->getPosition()).angle());
 				}
 			}
-			
-			break;
+	}
+	else if (m_action.m_type == "use")
+	{	
 		
-		case Action::USE:
 			if (goalobj)
 				goalobj->reactOnUse(getId());
-			break;
-
-		// Kriegerfaehigkeiten
-		case Action::HAMMER_BASH:
+			
+	}
+	else if (m_action.m_type == "hammer_bash")
+	{	
 			
 			// alle Lebewesen im Umkreis von 1.5 um den Zielpunkt auswaehlen
 			m_damage.m_multiplier[Damage::PHYSICAL]=1;
@@ -737,10 +730,10 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 
 				}
 			}
-			break;
+	}
+	else if (m_action.m_type == "around_blow" || m_action.m_type == "whirl_blow")
+	{		
 
-		case Action::AROUND_BLOW:
-		case Action::WHIRL_BLOW:
 			// alle Lebewesen im Umkreis um den Ausfuehrenden auswaehlen
 			// Radius gleich Waffenreichweite
 			s.m_radius += m_command.m_range;
@@ -756,10 +749,9 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 
 				}
 			}
-			break;
-			
-		case Action::DECOY:
-		case Action::SCARE:
+	}
+	else if (m_action.m_type == "decoy" || m_action.m_type == "scare")
+	{		
 			// alle Lebewesen im Umkreis um den Ausfuehrenden auswaehlen
 			// Radius gleich Waffenreichweite
 			s.m_radius =12;
@@ -775,12 +767,10 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 
 				}
 			}
-			
-			break;
-			
-		case Action::BERSERK:
-		case Action::WARCRY:
-			// alle Lebewesen im Umkreis um den Ausfuehrenden auswaehlen
+	}
+	else if (m_action.m_type == "berserk" || m_action.m_type == "warcry")
+	{			
+		// alle Lebewesen im Umkreis um den Ausfuehrenden auswaehlen
 			// Radius gleich Waffenreichweite
 			cbam.m_time =60000;
 			
@@ -796,126 +786,128 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 					cbam.m_dwalk_speed = -cr->getBaseAttrMod()->m_walk_speed/2;
 					cbam.m_dattack_speed = -cr->getBaseAttrMod()->m_attack_speed/2;
 					cr->applyBaseAttrMod(&cbam);
-					if (m_action.m_type == Action::WARCRY)
+					if (m_action.m_type == "warcry")
 					{
 						cr->takeDamage(&m_damage);
 					}
 				}
 			}
-			break;
-
-		case Action::REGENERATE:
+	}
+	else if (m_action.m_type == "regenerate")
+	{
 			// 50% der Lebenspunkte wieder auffuellen
 			m_dyn_attr.m_health = std::min(m_dyn_attr.m_health+0.5f*m_base_attr_mod.m_max_health,m_base_attr_mod.m_max_health);
 			addToNetEventMask(NetEvent::DATA_HP);
-			break;
-
-		case Action::ANGER:
-		case Action::FURY:
+			
+	}
+	else if (m_action.m_type == "anger" || m_action.m_type == "fury")
+	{
 			m_dyn_attr.m_status_mod_time[Damage::BERSERK] = 30000;
 			addToNetEventMask(NetEvent::DATA_STATUS_MODS);
-			break;
+	}
+	else if (m_action.m_type == "magic_attack")
+	{
 
 		// Magierfaehigkeiten
-		case Action::MAGIC_ATTACK:
 			// Projektil magischer Pfeil erzeugen
 			pr = new Projectile("MAGIC_ARROW",&m_damage, World::getWorld()->getValidProjectileId());
 			pr->setSpeed(dir/70);
 			
 			getRegion()->insertProjectile(pr,sproj);
-			break;
-
-		case Action::FIRE_BOLT:
-		case Action::FIRE_STRIKE:
+			
+	}
+	else if (m_action.m_type == "fire_bolt" || m_action.m_type == "fire_strike")
+	{
+		
 			// Projektil Feuerblitz erzeugen
 			pr = new Projectile("FIRE_BOLT",&m_damage,World::getWorld()->getValidProjectileId());
 			pr->setSpeed(dir/70);
 			
 			getRegion()->insertProjectile(pr,sproj);
-			break;
+	}
+	else if (m_action.m_type == "fire_ball" || m_action.m_type == "inferno_ball")
+	{		
 
-		case Action::FIRE_BALL:
-		case Action::INFERNO_BALL:
+		
 			// Projektil Feuerball erzeugen
 			pr = new Projectile("FIRE_BALL",&m_damage, World::getWorld()->getValidProjectileId());
 			pr->setSpeed(dir/70);
 			getRegion()->insertProjectile(pr,sproj);
-			break;
+	}
+	else if (m_action.m_type == "fire_wave" || m_action.m_type == "inferno_storm")
+	{			
 
-		case Action::FIRE_WAVE:
-		case Action::FIRE_STORM:
 			// Projektil Feuerwelle erzeugen
 			pr = new Projectile("FIRE_WAVE",&m_damage, World::getWorld()->getValidProjectileId());
 			getRegion()->insertProjectile(pr,pos);
-			break;
+	}
+	else if (m_action.m_type == "fire_wall" )
+	{			
 
-		case Action::FIRE_WALL:
 			// Projektil Feuersaeule erzeugen
 			pr = new Projectile("FIRE_WALL",&m_damage, World::getWorld()->getValidProjectileId());
 			getRegion()->insertProjectile(pr,goal);
-			break;
+	}
+	else if (m_action.m_type == "ice_bolt" || m_action.m_type == "ice_spike")
+	{		
 
-		case Action::ICE_BOLT:
-		case Action::ICE_SPIKE:
 			// Projektil Eisblitz erzeugen
 			pr = new Projectile("ICE_BOLT",&m_damage, World::getWorld()->getValidProjectileId());
 			pr->setSpeed(dir/70);
 			getRegion()->insertProjectile(pr,sproj);
-			break;
-
-		case Action::SNOW_STORM:
-		case Action::BLIZZARD:
+	}
+	else if (m_action.m_type == "snow_storm" || m_action.m_type == "blizzard")
+	{
 			// Projektil Blizzard erzeugen
 			pr = new Projectile("BLIZZARD",&m_damage, World::getWorld()->getValidProjectileId());
 			getRegion()->insertProjectile(pr,goal);
-			break;
+	}
+	else if (m_action.m_type == "ice_ring" || m_action.m_type == "frost_ring")
+	{		
 
-		case Action::ICE_RING:
-		case Action::FROST_RING:
 			// Projektil Eisring erzeugen
 			pr = new Projectile("ICE_RING",&m_damage, World::getWorld()->getValidProjectileId());
 			getRegion()->insertProjectile(pr,pos);
-			break;
-
-		case Action::FREEZE:
+	}
+	else if (m_action.m_type == "freeze" )
+	{		
 			// Projektil Einfrieren erzeugen
 			pr = new Projectile("FREEZE",&m_damage, World::getWorld()->getValidProjectileId());
 			getRegion()->insertProjectile(pr,goal);
-			break;
+	}
+	else if (m_action.m_type == "lightning" || m_action.m_type == "lightning_strike")
+	{		
+			
 
-		case Action::LIGHTNING:
-		case Action::LIGHTNING_STRIKE:
 			// Projektil Blitz erzeugen
 			pr = new Projectile("LIGHTNING",&m_damage, World::getWorld()->getValidProjectileId());
 			getRegion()->insertProjectile(pr,goal);
-			break;
-
-		case Action::THUNDERSTORM:
-		case Action::THUNDERSTORM2:
+			
+	}
+	else if (m_action.m_type == "thunderstorm" || m_action.m_type == "thunderstorm2")
+	{
 			// Projektil Gewitter erzeugen
 			pr = new Projectile("THUNDERSTORM",&m_damage, World::getWorld()->getValidProjectileId());
 			getRegion()->insertProjectile(pr,goal);
-			break;
-
-		case Action::CHAIN_LIGHTNING:
-		case Action::CHAIN_LIGHTNING2:
+			
+	}
+	else if (m_action.m_type == "chain_lightning" || m_action.m_type == "chain_lightning2")
+	{
 			// Projektil Kettenblitz erzeugen
 			pr = new Projectile("CHAIN_LIGHTNING",&m_damage, World::getWorld()->getValidProjectileId());
-			if (m_action.m_type == Action::CHAIN_LIGHTNING2)
+			if (m_action.m_type == "chain_lightning2")
 			{
 				// Verbesserte Version springt noch viermal extra, daher einfach bei -4 anfangen zu zaehlen
 				pr->setCounter(-4);
 			}
 			pr->setSpeed(dir/50);
 			getRegion()->insertProjectile(pr,sproj);
-			break;
+	}
+	else if (m_action.m_type == "range_attack" || m_action.m_type == "triple_shot" || m_action.m_type == "weak_point" || m_action.m_type == "blind_rage")
+	{		
 
 
 		// Schuetze Faehigkeiten
-		case Action::RANGE_ATTACK:
-		case Action::TRIPLE_SHOT:
-		case Action::WEAK_POINT:
-		case Action::BLIND_RAGE:
 			// Projektil Pfeil erzeugen
 			pr = new Projectile(arrow,&m_damage, World::getWorld()->getValidProjectileId());
 			pr->setSpeed(dir/80);
@@ -923,9 +915,10 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 			DEBUG5("set speed %f %f",tdir.m_x, tdir.m_y);
 			
 			getRegion()->insertProjectile(pr,sproj);
-			break;
-
-		case Action::GUIDED_TRIPLE_SHOT:
+			
+	}
+	else if (m_action.m_type == "guided_triple_shot" )
+	{
 			// Projektil gelenkter Pfeil erzeugen
 			pr = new Projectile("GUIDED_ARROW",&m_damage, World::getWorld()->getValidProjectileId());
 			pr->setSpeed(dir/100);
@@ -936,9 +929,10 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 				pr->setGoalObject(cgoal->getId());
 			}
 			getRegion()->insertProjectile(pr,sproj);
-			break;
+	}
+	else if (m_action.m_type == "multishot" )
+	{		
 
-		case Action::MULTISHOT:
 			// 5 Pfeile erzeugen
 			// mittlerer Pfeil erhaelt die Zielrichtung
 			for (int i=-2;i<=2;i++)
@@ -954,9 +948,10 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 				
 				getRegion()->insertProjectile(pr,sproj);
 			}
-			break;
-
-		case Action::VOLLEY_SHOT:
+			
+	}
+	else if (m_action.m_type == "volley_shot" )
+	{	
 			// 7 Pfeile erzeugen
 			// mittlerer Pfeil erhaelt die Zielrichtung
 			for (int i=-3;i<=3;i++)
@@ -971,9 +966,10 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 				pr->setSpeed(dir2/80);
 				getRegion()->insertProjectile(pr,sproj);
 			}
-			break;
-
-		case Action::PIERCE:
+			
+	}
+	else if (m_action.m_type == "pierce" )
+	{
 			// Projektil Pfeil erzeugen
 			pr = new Projectile(arrow,&m_damage, World::getWorld()->getValidProjectileId());
 			pr->setSpeed(dir/80);
@@ -981,18 +977,19 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 			// Flag durchschlagend setzen
 			pr->setFlags(Projectile::PIERCING);
 			getRegion()->insertProjectile(pr,sproj);
-			break;
-
-		case Action::VACUUM:
+	}
+	else if (m_action.m_type == "vacuum" )
+	{		
+		
 			// Projektil Windpfeil erzeugen
 			pr = new Projectile("WIND_ARROW",&m_damage, World::getWorld()->getValidProjectileId());
 			pr->setSpeed(dir/80);
 			
 			getRegion()->insertProjectile(pr,sproj);
-			break;
-
-		case Action::EXPLODING_ARROW:
-		case Action::EXPLOSION_CASCADE:
+			
+	}
+	else if (m_action.m_type == "exploding_arrow" || m_action.m_type == "exploding_cascade" )
+	{
 			// Projektil Pfeil erzeugen
 			pr = new Projectile(arrow,&m_damage, World::getWorld()->getValidProjectileId());
 			pr->setSpeed(dir/80);
@@ -1000,12 +997,13 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 			// Flag explodierend setzen
 			pr->setFlags(Projectile::EXPLODES);
 			// bei verbesserter Version Flag mehrfach explodierend setzen
-			if (m_action.m_type==Action::EXPLOSION_CASCADE)
+			if (m_action.m_type=="exploding_cascade")
 				pr->setFlags(Projectile::MULTI_EXPLODES);
 			getRegion()->insertProjectile(pr,sproj);
-			break;
-
-		case Action::DEATH_ROULETTE:
+			
+	}
+	else if (m_action.m_type == "death_roulette"  )
+	{
 			// Projektil Pfeil erzeugen
 			pr = new Projectile(arrow,&m_damage, World::getWorld()->getValidProjectileId());
 			pr->setSpeed(dir/80);
@@ -1015,22 +1013,19 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 			// Flag zufaellig weiterspringen setzen
 			pr->setFlags(Projectile::PROB_BOUNCING);
 			getRegion()->insertProjectile(pr,sproj);
-			break;
-
+			
+	}
+	else if (m_action.m_type == "holy_light" || m_action.m_type == "holy_fire" )
+	{
 		
 		// Priester Faehigkeiten
-		case Action::HOLY_LIGHT:
-		case Action::HOLY_FIRE:
 			// Projektil Lichtstrahl erzeugen
 			pr = new Projectile("LIGHT_BEAM",&m_damage, World::getWorld()->getValidProjectileId());
 			getRegion()->insertProjectile(pr,goal);
-			break;
+	}
+	else if (m_action.m_type == "burning_rage" || m_action.m_type == "blazing_shield" || m_action.m_type == "magic_shield" || m_action.m_type == "blade_storm"|| m_action.m_type == "keen_mind" )
+	{		
 
-		case Action::BURNING_RAGE:
-		case Action::BLAZING_SHIELD:	
-		case Action::MAGIC_SHIELD:
-		case Action::BLADE_STORM:
-		case Action::KEEN_MIND:
 			// alle Verbuendeten im Umkreis von 12 suchen und Modifikation anwenden
 			s.m_center = pos;
 			s.m_radius = 12;
@@ -1046,12 +1041,11 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 					}
 				}
 			}
-			break;
-
-		case Action::CURE_BLIND_MUTE:
-		case Action::CURE_POIS_BURN:
-		case Action::CURE_CONF_BSRK:
-		case Action::HEAL:
+			
+	}
+	else if (m_action.m_type == "heal" || m_action.m_type == "cure_blind_mute" || m_action.m_type == "cure_pois_burn" || m_action.m_type == "cure_conf_bsrk")
+	{
+		
 			// Modifikation anwenden:
 			if (cgoal !=0)
 			{
@@ -1060,13 +1054,12 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 					cgoal->applyDynAttrMod(&cdam);
 				}
 			}
-			break;
+			
+	}
+	else if (m_action.m_type == "heal_party" || m_action.m_type == "cure_blind_mute_party" || m_action.m_type == "cure_pois_burn_party" || m_action.m_type == "cure_conf_bsrk_party")
+	{
 
-
-		case Action::CURE_BLIND_MUTE_PARTY:
-		case Action::CURE_POIS_BURN_PARTY:
-		case Action::CURE_CONF_BSRK_PARTY:
-		case Action::HEAL_PARTY:
+		
 			// Modifikation:
 
 			// alle Verbuendeten im Umkreis von 6 um den Zielpunkt suchen und Modifikation anwenden
@@ -1084,15 +1077,19 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 					}
 				}
 			}
-			break;
+			
 
-		case Action::LIGHT_BEAM:
+	}
+	else if (m_action.m_type == "light_beam")
+	{	
+		
 			// Projektil Lichtstrahl erzeugen
 			pr = new Projectile("LIGHT_BEAM",&m_damage, World::getWorld()->getValidProjectileId());
 			getRegion()->insertProjectile(pr,goal);
-			break;
-
-		case Action::BURNING_SUN:
+			
+	}
+	else if (m_action.m_type == "burning_sun")
+	{
 			// alle Lebewesen im Umkreis von 3 um den Zielpunkt suchen
 			s.m_center = goal;
 			s.m_radius = 3;
@@ -1107,30 +1104,35 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 					getRegion()->insertProjectile(pr,goal);
 				}
 			}
-			break;
+	}
+	else if (m_action.m_type == "break_binding" || m_action.m_type == "disrupt_binding")
+	{		
 
-		case Action::BREAK_BINDING:
-		case Action::DISRUPT_BINDING:
+		
 			// Projektil Elementarzerstoerung erzeugen
 			pr = new Projectile("ELEM_EXPLOSION",&m_damage, World::getWorld()->getValidProjectileId());
 			getRegion()->insertProjectile(pr,goal);
-			break;
-
-		case Action::ACID:
+			
+	}
+	else if (m_action.m_type == "acid")
+	{
+		
 			// Projektil Saeure erzeugen
 			pr = new Projectile("ACID",&m_damage, World::getWorld()->getValidProjectileId());
 			getRegion()->insertProjectile(pr,goal);
-			break;
-
+			
+	}
+	else if (m_action.m_type == "divine_wind")
+	{
 	
-		case Action::DIVINE_WIND:
 			// Projektil heiliger Strahl erzeugen
 			pr = new Projectile("DIVINE_BEAM",&m_damage, World::getWorld()->getValidProjectileId());
 			getRegion()->insertProjectile(pr,goal);
-			break;
+			
+	}
+	else if (m_action.m_type == "divine_storm")
+	{
 
-
-		case Action::DIVINE_STORM:
 			// Alle Objekte im Umkreis von 3 um den Zielpunkt suchen
 			s.m_center = goal;
 			s.m_radius = 3;
@@ -1145,16 +1147,18 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 					getRegion()->insertProjectile(pr,goal);
 				}
 			}
-			break;
-
+			
+	}
+	else if (m_action.m_type == "hypnosis")
+	{
 		
-		case Action::HYPNOSIS:
 			// Projektil Hypnose erzeugen
 			pr = new Projectile("HYPNOSIS",&m_damage, World::getWorld()->getValidProjectileId());
 			getRegion()->insertProjectile(pr,goal);
-			break;
+	}
+	else if (m_action.m_type == "hypnosis2")
+	{		
 
-		case Action::HYPNOSIS2:
 			// Alle Objekte im Umkreis von 2 um den Zielpunkt suchen
 			s.m_center = goal;
 			s.m_radius = 2;
@@ -1169,15 +1173,11 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 					getRegion()->insertProjectile(pr,goal);
 				}
 			}
-			break;
-
-        default:
-            break;
 	}
 
 	// Faehigkeit Monsterjaeger
 	// Wenn das Ziel nach der Aktion unter 0 Lebenspunkte hat Bonus austeilen
-	if ((checkAbility(Action::MONSTER_HUNTER) || (checkAbility(Action::MONSTER_SLAYER))) && cgoal && cgoal->getDynAttr()->m_health<0)
+	if ((checkAbility("monster_hunter") || (checkAbility("monster_slayer"))) && cgoal && cgoal->getDynAttr()->m_health<0)
 	{
 		DEBUG5("monster killed, apply mod");
 		CreatureBaseAttrMod cbam;
@@ -1186,7 +1186,7 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 		// 10% mehr Staerke, bei aufgewerteter Version erhoehte Angriffsgeschwindigkeit fuer 10 sec
 		cbam.m_dstrength = getBaseAttr()->m_strength / 10;
 		cbam.m_time = 10000;
-		if (checkAbility(Action::MONSTER_SLAYER))
+		if (checkAbility("monster_slayer"))
 		{
 			cbam.m_dattack_speed = 200;
 		}
@@ -1233,7 +1233,7 @@ void Creature::collisionDetection(float time)
 			}
 
 			// Wenn die Faehigkeit Stuermen ist dann Bewegung beenden
-			if (m_command.m_type == Action::CHARGE || m_command.m_type == Action::STORM_CHARGE)
+			if (m_command.m_type == "charge" || m_command.m_type == "storm_charge")
 			{
 				DEBUG5("charge goal object %i",(*i)->getId());
 				// Behandlung von *Charge*
@@ -1402,7 +1402,7 @@ void Creature::insertScriptCommand(Command &cmd, float time)
 		clearCommand(false);
 	}
 	m_script_commands.push_back(std::make_pair(cmd,time));	
-	DEBUG5("insert script command %i at %i",cmd.m_type,cmd.m_goal_object_id);
+	DEBUG5("insert script command %s at %i",cmd.m_type.c_str(),cmd.m_goal_object_id);
 }
 
 void Creature::clearScriptCommands()
@@ -1414,9 +1414,9 @@ void Creature::clearScriptCommands()
 void Creature::updateCommand()
 {
 	// Wenn aktuelles Kommando keine Aktion vorschreibt
-	DEBUG5("next command: %i ",m_next_command.m_type);
-	if ((!hasScriptCommand() && m_next_command.m_type != Action::NOACTION && !getRegion()->getCutsceneMode()) || 
-			 (!m_script_commands.empty() && m_command.m_type == Action::NOACTION))
+	DEBUG5("next command: %s ",m_next_command.m_type.c_str());
+	if ((!hasScriptCommand() && m_next_command.m_type != "noaction" && !getRegion()->getCutsceneMode()) || 
+			 (!m_script_commands.empty() && m_command.m_type == "noaction"))
 	{
 		// Naechstes Kommando uebernehmen
 		if (!m_script_commands.empty())
@@ -1428,7 +1428,7 @@ void Creature::updateCommand()
 			{
 				m_script_commands.pop_front();
 			}
-			DEBUG5("script command %i time %f",m_command.m_type, m_script_command_timer);
+			DEBUG5("script command %s time %f",m_command.m_type.c_str(), m_script_command_timer);
 		}
 		else
 		{
@@ -1439,7 +1439,7 @@ void Creature::updateCommand()
 			m_command.m_damage_mult = 1;
 	
 			// Naechstes Kommando auf nichts setzen
-			m_next_command.m_type = Action::NOACTION;
+			m_next_command.m_type = "noaction";
 			
 			addToNetEventMask(NetEvent::DATA_NEXT_COMMAND);
 		}
@@ -1463,30 +1463,30 @@ void Creature::calcAction()
 	updateCommand();
 
 	// wenn kein Kommando existiert keine Aktion ausfuehren, beenden
-	if (m_command.m_type == Action::NOACTION)
+	if (m_command.m_type == "noaction")
 	{
-		if (m_action.m_type!= Action::NOACTION)
+		if (m_action.m_type!= "noaction")
 		{
 			addToNetEventMask(NetEvent::DATA_ACTION);
 		}
-		m_action.m_type = Action::NOACTION;
+		m_action.m_type = "noaction";
 		return;
 
 	}
 
 	
 
-	DEBUG5("calc action for command %i",m_command.m_type);
+	DEBUG5("calc action for command %s",m_command.m_type.c_str());
 	addToNetEventMask(NetEvent::DATA_ACTION);
 
 
 	// Reichweite der Aktion berechnen
 	float range = m_command.m_range;
 
-	if (m_command.m_type == Action::WALK)
+	if (m_command.m_type == "walk")
 		range =getShape()->m_radius;
 
-	if (m_command.m_type == Action::TAKE_ITEM)
+	if (m_command.m_type == "take_item")
 		range = 2;
 
 	// Koordinaten des Zielpunktes
@@ -1503,7 +1503,7 @@ void Creature::calcAction()
 	float dist = pos.distanceTo(goal)-getShape()->m_radius;
 
 	// Wenn Zielobjekt per ID gegeben
-	if ( m_command.m_goal_object_id !=0 && m_command.m_type != Action::TAKE_ITEM)
+	if ( m_command.m_goal_object_id !=0 && m_command.m_type != "take_item")
 	{
 		DEBUG5("goal ID: %i",m_command.m_goal_object_id);
 		// Zielobjekt holen
@@ -1514,7 +1514,7 @@ void Creature::calcAction()
 		if (goalobj ==0)
 		{
 			// Zielobjekt existiert nicht mehr, abbrechen
-			m_action.m_type = Action::NOACTION;
+			m_action.m_type = "noaction";
 			m_action.m_elapsed_time =0;
 			clearCommand(false);
 			return;
@@ -1524,7 +1524,7 @@ void Creature::calcAction()
 		if (goalobj->getState() != STATE_ACTIVE)
 		{
 			DEBUG5("refused to interact with inactive objekt %i",m_command.m_goal_object_id);
-			m_action.m_type = Action::NOACTION;
+			m_action.m_type = "noaction";
 			m_action.m_elapsed_time =0;
 			clearCommand(false);
 			return;
@@ -1537,14 +1537,14 @@ void Creature::calcAction()
 		dist = getShape()->getDistance(*(goalobj->getShape()));
 	}
 	
-	if (m_command.m_type == Action::TAKE_ITEM)
+	if (m_command.m_type == "take_item")
 	{
 		
 		DropItem* di = getRegion()->getDropItem(m_command.m_goal_object_id);
 		if (di ==0)
 		{
 			// Zielobjekt existiert nicht mehr, abbrechen
-			m_action.m_type = Action::NOACTION;
+			m_action.m_type = "noaction";
 			m_action.m_elapsed_time =0;
 			clearCommand(false);
 			return;
@@ -1559,16 +1559,14 @@ void Creature::calcAction()
 
 	
 	// Stuermen ohne Zielobjekt hat keinen Zielradius
-	// TODO: nachfragen
-	
-	if ((m_command.m_type == Action::CHARGE || m_command.m_type == Action::STORM_CHARGE) &&  m_command.m_goal_object_id==0)
+	if ((m_command.m_type == "charge" || m_command.m_type == "storm_charge") &&  m_command.m_goal_object_id==0)
 	{
 		range=0;
 		dist =1;
 	}
 	
 
-	if (Action::getActionInfo(m_command.m_type)->m_distance == Action::MELEE || Action::getActionInfo(m_command.m_type)->m_base_action == Action::WALK)
+	if (Action::getActionInfo(m_command.m_type)->m_target_type == Action::MELEE || Action::getActionInfo(m_command.m_type)->m_base_action == "walk")
 	{
 		// Aktion fuer die man an das Ziel hinreichend nahe herankommen muss
 		DEBUG5("range %f dist %f",range,dist);
@@ -1577,7 +1575,7 @@ void Creature::calcAction()
 		if (range > dist)
 		{
 			// Ziel ist in Reichweite, geplante Aktion ausfuehren
-			if (m_command.m_type != Action::WALK)
+			if (m_command.m_type != "walk")
 			{
 				m_action.m_type = m_command.m_type;
 				m_action.m_goal_object_id = m_command.m_goal_object_id;
@@ -1585,7 +1583,7 @@ void Creature::calcAction()
 			}
 			else
 			{
-				m_action.m_type = Action::NOACTION;
+				m_action.m_type = "noaction";
 				clearCommand(true);
 			}
 
@@ -1594,8 +1592,8 @@ void Creature::calcAction()
 		{
 			// Ziel ist nicht in Reichweite, hinlaufen
 
-			m_action.m_type = Action::WALK;
-			if ((m_command.m_type == Action::CHARGE || m_command.m_type == Action::STORM_CHARGE)  )
+			m_action.m_type = "walk";
+			if ((m_command.m_type == "charge" || m_command.m_type == "storm_charge")  )
 			{
 				// Sturmangriff
 				DEBUG5("Charge");
@@ -1611,7 +1609,7 @@ void Creature::calcAction()
 					Vector speed = getSpeed();
 					speed.normalize();
 
-					if (m_command.m_type == Action::CHARGE)
+					if (m_command.m_type == "charge")
 						m_command.m_damage_mult *= 0.85;
 					else
 						m_command.m_damage_mult *= 0.93;
@@ -1637,7 +1635,7 @@ void Creature::calcAction()
 					}
 					else
 					{
-						m_action.m_type = Action::NOACTION;
+						m_action.m_type = "noaction";
 						m_action.m_elapsed_time =0;
 					}
 
@@ -1663,7 +1661,7 @@ void Creature::calcAction()
 	}
 
 	// wenn keine Aktion berechnet wurde, Kommando beenden
-	if (m_action.m_type == Action::NOACTION)
+	if (m_action.m_type == "noaction")
 	{
 		clearCommand(true);
 	}
@@ -1742,7 +1740,7 @@ void Creature::calcStatusModCommand()
 			// Im Falle von Beserker nur Nahkampf
 			if (m_dyn_attr.m_status_mod_time[Damage::BERSERK]>0)
 			{
-				m_command.m_type = Action::ATTACK;
+				m_command.m_type = "attack";
 				if (m_command.m_range >4)
 				{
 					m_command.m_range= 1;
@@ -1752,12 +1750,12 @@ void Creature::calcStatusModCommand()
 		else
 		{
 			// Laufen
-			m_command.m_type = Action::WALK;
+			m_command.m_type = "walk";
 			setSpeed(v);
 			addToNetEventMask(NetEvent::DATA_COMMAND);
 			return;
 		}
-		DEBUG5("confused command %i",m_command.m_type);
+		DEBUG5("confused command %s",m_command.m_type.c_str());
 
 	}
 	else if (m_dyn_attr.m_status_mod_time[Damage::BERSERK]>0)
@@ -1821,7 +1819,7 @@ void Creature::calcStatusModCommand()
 			getDynAttr()->m_timer.start();
 			DEBUG5("attack id %i",id);
 			// Angriff
-			m_command.m_type = Action::ATTACK;
+			m_command.m_type = "attack";
 			m_command.m_goal_object_id = id;
 			m_command.m_goal = goal;
 			m_command.m_range = getBaseAttrMod()->m_attack_range;
@@ -1837,7 +1835,7 @@ void Creature::calcStatusModCommand()
 		else
 		{
 			// nichts machen
-			m_command.m_type = Action::NOACTION;
+			m_command.m_type = "noaction";
 			if (getDynAttr()->m_timer.getTime() >1000)
 			{
 				m_dyn_attr.m_status_mod_time[Damage::BERSERK] =0;
@@ -1981,8 +1979,8 @@ void Creature::calcWalkDir(Vector goal,WorldObject* goalobj)
 	
 	if (dir.getLength() ==0)
 	{
-		m_command.m_type = Action::NOACTION;
-		m_action.m_type = Action::NOACTION;
+		m_command.m_type = "noaction";
+		m_action.m_type = "noaction";
 		m_action.m_elapsed_time =0;
 		m_command.m_damage_mult=1;
 		addToNetEventMask(NetEvent::DATA_COMMAND | NetEvent::DATA_ACTION);
@@ -1999,16 +1997,16 @@ void Creature::calcWalkDir(Vector goal,WorldObject* goalobj)
 void Creature::clearCommand(bool success)
 {
 	
-	if (hasScriptCommand() && m_command.m_type!= Action::NOACTION)
+	if (hasScriptCommand() && m_command.m_type!= "noaction")
 	{
-		DEBUG5("command %i ended with success %i",m_command.m_type, success);
+		DEBUG5("command %s ended with success %i",m_command.m_type.c_str(), success);
 		Trigger* tr = new Trigger("command_complete");
 		tr->addVariable("unit",getId());
-		tr->addVariable("command",Action::getActionInfo(m_command.m_type)->m_enum_name);
+		tr->addVariable("command",m_command.m_type);
 		tr->addVariable("success",success);
 		getRegion()->insertTrigger(tr);
 	}
-	m_command.m_type = Action::NOACTION;
+	m_command.m_type = "noaction";
 	m_command.m_damage_mult = 1;
 	m_command.m_goal = Vector(0,0);
 	m_command.m_goal_object_id =0;
@@ -2096,7 +2094,7 @@ bool Creature::update (float time)
 				// (da die Aktion idr ungewollt bzw ungeplant ist)
 				if (i==Damage::BERSERK || i==Damage::CONFUSED)
 				{
-					m_command.m_type = Action::NOACTION;
+					m_command.m_type = "noaction";
 					addToNetEventMask(NetEvent::DATA_COMMAND);
 				}
 			}
@@ -2264,7 +2262,7 @@ bool Creature::update (float time)
 					while (time>0)
 					{
 						// Wenn keine Aktion gesetzt Aktion ausrechnen und initialisieren
-						if (m_action.m_type == Action::NOACTION)
+						if (m_action.m_type == "noaction")
 						{
 							calcAction();
 							initAction();
@@ -2291,10 +2289,10 @@ bool Creature::update (float time)
 			// sonst, eventuell hier später weitere Stati gesondert bearbeiten STATES_DEAD, STATES_INACTIVE
  			case STATE_DIEING:
 				performAction(time);
-				if (m_action.m_type == Action::NOACTION)
+				if (m_action.m_type == "noaction")
 				{
 					setState(STATE_DEAD);
-					m_action.m_type = Action::DEAD;
+					m_action.m_type = "dead";
 					m_action.m_time = 1000;
 					// Fliegende Objekte bleiben nicht lange liegen
 					if ((getLayer() & LAYER_BASE) ==0)
@@ -2312,7 +2310,7 @@ bool Creature::update (float time)
 
 			case STATE_DEAD:
 				performAction(time);
-				if (m_action.m_type == Action::NOACTION)
+				if (m_action.m_type == "noaction")
 				{
 					setDestroyed(true);
 				}
@@ -2361,51 +2359,54 @@ void  Creature::calcActionAttrMod(Action::ActionType act,CreatureBaseAttrMod & b
 	bmod.init();
 	dmod.init();
 	
-	switch (act)
-	{
-		case Action::SCARE:
+	if (act == "scare")
+	{	
+	
 			bmod.m_time =60000;
 			bmod.m_darmor = getBaseAttrMod()->m_armor;
-			break;
-			
-		case Action::BERSERK:
-		case Action::WARCRY:
+	}
+	else if (act == "berserk")
+	{
 			// Nur eine Schaetzung !
 			bmod.m_dwalk_speed = -1000;
 			bmod.m_dattack_speed = -500;
-			break;
+	}
+	else if (act == "flamesword")
+	{		
 			
-		case Action::FLAMESWORD:
 			// Modifikationen:
 			// Flags fuer 120 sec
 			bmod.m_time =120000;
 			bmod.m_xspecial_flags |= (FLAMESWORD | FIRESWORD);
-			
-		case Action::FIRESWORD:
+	}
+	else if (act == "firesword")
+	{		
 			// Modifikationen:
 			// Flag fuer 60 sec
 			bmod.m_time =60000;
 			bmod.m_xspecial_flags |=  FIRESWORD;
-			break;
-
-		case Action::FLAMEARMOR:
+	}
+	else if (act == "flamearmor")
+	{		
 			// Modifikationen:
 			// Flag, 50% Feuerres,25% Feuermaxres fuer 60 sec
 			bmod.m_time = 100000;
 			bmod.m_xspecial_flags |= FLAMEARMOR;
 			bmod.m_dresistances_cap[Damage::FIRE] = 25;
 			bmod.m_dresistances[Damage::FIRE] = 50;
-			break;
+	}
+	else if (act == "anger")
+	{		
 
-		case Action::ANGER:
 			// Modifikationen:
 			// doppelte Staerke, halbierte Ruestung, Berserker fuer 30 sec
 			bmod.m_time = 40000;
 			bmod.m_dstrength =m_base_attr.m_strength;
 			bmod.m_darmor = -m_base_attr_mod.m_armor /2;
-			break;
+	}
+	else if (act == "fury")
+	{		
 
-		case Action::FURY:
 			
 			// Modifikationen:
 			// doppelte Staerke, -25% Ruestung, Berserker, erhoehte Angriffsgeschwindigkeit fuer 80 sec
@@ -2413,156 +2414,148 @@ void  Creature::calcActionAttrMod(Action::ActionType act,CreatureBaseAttrMod & b
 			bmod.m_dstrength =m_base_attr.m_strength;
 			bmod.m_darmor = -m_base_attr_mod.m_armor /4;
 			bmod.m_dattack_speed = 1000;
-			break;
-			
-			
-		case Action::STATIC_SHIELD:
+	}
+	else if (act == "static_shield")
+	{		
 			// Modifikation:
 			// Flag fuer 18 Sekunden
 			bmod.m_time =18000;
 			bmod.m_xspecial_flags |= (STATIC_SHIELD);
-			break;
-			
-		case Action::AIMED_SHOT:
-			// Modifikationen:
+	}
+	else if (act == "aimed_shot")
+	{			// Modifikationen:
 			// 50% mehr Geschick fuer 50 sec
 			bmod.m_time = 50000;
 			bmod.m_ddexterity =m_base_attr.m_dexterity/2;
-			break;
-
-		case Action::BOW_SPIRIT:
+	}
+	else if (act == "bow_spirit")
+	{
 			// Modifikationen
 			// 50% mehr Geschick, Flag fuer 50 sec
 			bmod.m_time = 50000;
 			bmod.m_ddexterity =m_base_attr.m_dexterity/2;
 			bmod.m_xspecial_flags |= CRIT_HITS;
-			break;
-
-		case Action::ICE_ARROWS:
+	}
+	else if (act == "ice_arrows")
+	{
 			// Modifikationen:
 			// Flag fuer 80 sec
 			bmod.m_time = 80000;
 			bmod.m_xspecial_flags |= ICE_ARROWS;
-			break;
-
-		case Action::FREEZING_ARROWS:
+	}
+	else if (act == "freezing_arrows")
+	{
 			// Modifikationen:
 			// Flags fuer 80 sec
 			bmod.m_time = 80000;
 			bmod.m_xspecial_flags |= (ICE_ARROWS | FROST_ARROWS);
-			break;
-
-		case Action::WIND_ARROWS:
+	}
+	else if (act == "wind_arrows")
+	{
 			// Modifikationen:
 			// Flag fuer 80 sec
 			bmod.m_time = 80000;
 			bmod.m_xspecial_flags |= WIND_ARROWS;
-			break;
-
-		case Action::STORM_ARROWS:
+	}
+	else if (act == "storm_arrows")
+	{
 			// Modifikationen:
 			// Flags fuer 80 sec
 			bmod.m_time = 80000;
 			bmod.m_xspecial_flags |= (WIND_ARROWS | STORM_ARROWS);
-			break;
-
-		case Action::WIND_WALK:
+	}
+	else if (act == "wind_walk")
+	{
 			// Modifikationen:
 			// Flag, erhoehte Laufgeschwindigkeit fuer 25 sec
 			bmod.m_time = 25000;
 			bmod.m_xspecial_flags |= WIND_WALK;
 			bmod.m_dwalk_speed = 1500;
-			break;
-
-			
-		case Action::BURNING_RAGE:
+	}
+	else if (act == "burning_rage")
+	{
 			// Modifikationen:
 			// Flag fuer 80 sec
 			bmod.m_time =80000;
 			bmod.m_xspecial_flags |= BURNING_RAGE;
-			break;
-			
-		case Action::CURE_BLIND_MUTE:
+	}
+	else if (act == "cure_blind_mute")
+	{
 			// Modifikation:
 			// heilt blind/stumm (wirkt nur auf Verbuendete)
 			dmod.m_dstatus_mod_immune_time[Damage::BLIND] = 1;
 			dmod.m_dstatus_mod_immune_time[Damage::MUTE] = 1;
-			break;
-			
-		case Action::BLAZING_SHIELD:
+	}
+	else if (act == "blazing_shield")
+	{
 			// Modifikationen
 			// 50% der Willenskraft auf Blockwert fuer 60 sec
 			bmod.m_time =60000;
 			bmod.m_dblock = m_base_attr_mod.m_willpower /2;
-			break;
-			
-		case Action::CURE_BLIND_MUTE_PARTY:
+	}
+	else if (act == "cure_blind_mute_party")
+	{
 			// Modifikation:
 			// heilt blind/stumm, immunisiert fuer 30 sec (wirkt nur auf Verbuendete)
 			dmod.m_dstatus_mod_immune_time[Damage::BLIND] = 30000;
 			dmod.m_dstatus_mod_immune_time[Damage::MUTE] = 30000;
-			break;
-			
-		case Action::MAGIC_SHIELD:
+	}
+	else if (act == "magic_shield")
+	{
 			// Modifikation:
 			// 50% mehr Willenskraft fuer 90 sec
 			bmod.m_time =90000;
 			bmod.m_dwillpower = m_base_attr_mod.m_willpower /2;
-			break;
-			
-		case Action::CURE_POIS_BURN:
+	}
+	else if (act == "cure_pois_burn")
+	{
 			// Modifikation:
 			// heilt vergiftet/brennend (wirkt nur auf Verbuendete)
 			dmod.m_dstatus_mod_immune_time[Damage::POISONED] = 1;
 			dmod.m_dstatus_mod_immune_time[Damage::BURNING] = 1;
-			break;
-			
-		case Action::CURE_POIS_BURN_PARTY:
+	}
+	else if (act == "cure_pois_burn_party")
+	{
 			// Modifikation:
 			// heilt vergiftet/brennend und immunisiert fuer 30 sec (wirkt nur auf Verbuendete)
 			dmod.m_dstatus_mod_immune_time[Damage::POISONED] = 30000;
 			dmod.m_dstatus_mod_immune_time[Damage::BURNING] = 30000;
-			break;
-			
-		case Action::BLADE_STORM:
+	}
+	else if (act == "blade_storm")
+	{
 			// Modifikation:
 			// Angriffsgeschwindigkeit erhoeht fuer 70 sec
 			bmod.m_time =70000;
-			bmod.m_dattack_speed = 1500;
-			break;
-			
-		case Action::CURE_CONF_BSRK:
+			bmod.m_dattack_speed = 600;
+	}
+	else if (act == "cure_conf_bsrk")
+	{
 			// Modifikation:
 			// heilt verwirrt/Berserker (wirkt nur auf Verbuendete)
 			dmod.m_dstatus_mod_immune_time[Damage::CONFUSED] = 1;
 			dmod.m_dstatus_mod_immune_time[Damage::BERSERK] = 1;
-			break;
-			
-		case Action::CURE_CONF_BSRK_PARTY:
+	}
+	else if (act == "cure_conf_bsrk_party")
+	{
 			// Modifikation:
 			// heilt verwirrt/Berserker und immunisiert fuer 30 sec (wirkt nur auf Verbuendete)
 			dmod.m_dstatus_mod_immune_time[Damage::CONFUSED] = 30000;
 			dmod.m_dstatus_mod_immune_time[Damage::BERSERK] = 30000;
-			break;
-			
-		case Action::KEEN_MIND:
+	}
+	else if (act == "keen_mind")
+	{
 			// Modifikation:
 			// 50% der Willenskraft auf Magie
 			bmod.m_time =70000;
 			bmod.m_dmagic_power = m_base_attr_mod.m_willpower/2;
-			break;
-			
-		case Action::HEAL:
+	}
+	else if (act == "heal")
+	{
 			dmod.m_dhealth = 3* m_base_attr_mod.m_willpower;
-			break;
-
-		case Action::HEAL_PARTY:
+	}
+	else if (act == "heal_party")
+	{
 			dmod.m_dhealth = 3* m_base_attr_mod.m_willpower;
-			break;
-
-		
-		default:
-			break;
 	}
 	
 }
@@ -2575,11 +2568,11 @@ void Creature::calcDamage(Action::ActionType act,Damage& dmg)
 	dmg.m_attacker_id = getId();
 	dmg.m_attacker_fraction = m_fraction;
 
-	DEBUG5("Calc Damage for action %i",m_action.m_type);
+	DEBUG5("Calc Damage for action %s",m_action.m_type.c_str());
 	for (int i=0;i<4;i++)
 		dmg.m_multiplier[i]=1;
 
-	if (act == Action::NOACTION)
+	if (act == "noaction")
 		return;
 
 
@@ -2613,7 +2606,7 @@ void Creature::calcBaseDamage(Action::ActionType act,Damage& dmg)
 	CreatureBaseAttr* basm = getBaseAttrMod();
 
 
-	if (basact == Action::ATTACK)
+	if (basact == "attack")
 	{
 		// Basisaktion ist normaler Angriff
 		DEBUG5("base str %i mod str %i",m_base_attr.m_strength,basm->m_strength);
@@ -2634,7 +2627,7 @@ void Creature::calcBaseDamage(Action::ActionType act,Damage& dmg)
 
 	}
 
-	if (basact == Action::MAGIC_ATTACK)
+	if (basact == "magic_attack")
 	{
 		// Basisaktion ist magischer Angriff
 		dmg.m_min_damage[Damage::FIRE] += basm->m_magic_power/10;
@@ -2648,7 +2641,7 @@ void Creature::calcBaseDamage(Action::ActionType act,Damage& dmg)
 
 	}
 
-	if (basact == Action::RANGE_ATTACK)
+	if (basact == "range_attack")
 	{
 		// Basisaktion ist Fernangriff
 		dmg.m_min_damage[Damage::PHYSICAL] += basm->m_strength/10;
@@ -2666,7 +2659,7 @@ void Creature::calcBaseDamage(Action::ActionType act,Damage& dmg)
 
 	}
 
-	if (basact == Action::HOLY_ATTACK)
+	if (basact == "holy_attack")
 	{
 		// Basisaktion ist heiliger Angriff
 		dmg.m_min_damage[Damage::PHYSICAL] += basm->m_strength/9;
@@ -2690,28 +2683,29 @@ void Creature::calcAbilityDamage(Action::ActionType act,Damage& dmg)
 	// CreatureBaseAttr* basm = getBaseAttrMod();
 
 	// Eigenschaften durch passive  Faehigkeiten
-	if (checkAbility(Action::CRITICAL_STRIKE))
+	if (checkAbility("critical_strike"))
 	{
 		// 10% extra Chance auf kritische Treffer
 		dmg.m_crit_perc += 0.1;
 	}
 
 	// klirrende Kaelte
-	if (checkAbility(Action::CHILL))
+	if (checkAbility("chill"))
 	{
 		// 20% mehr Schaden
 		dmg.m_multiplier[Damage::ICE] *= 1.2;
 	}
 
 	// Ionisation
-	if (checkAbility(Action::IONISATION))
+	if (checkAbility("ionisation"))
 	{
 		// 20% mehr Schaden
 		dmg.m_multiplier[Damage::AIR] *= 1.2;
 	}
 
 	// Entzuenden
-	if (checkAbility(Action::INFLAME) && act >=Action::FIRE_BOLT && act<=Action::FIRE_WALL )
+	// TODO: korrekte Bedingung wiederherstellen
+	if (checkAbility("inflame") && dmg.m_min_damage[Damage::FIRE]>0 )
 	{
 		dmg.m_status_mod_power[Damage::BURNING] += m_base_attr_mod.m_magic_power;
 	}
@@ -2779,257 +2773,251 @@ void Creature::calcAbilityDamage(Action::ActionType act,Damage& dmg)
 
 	// Schaden der Faehigkeit an sich
 
-	switch (act)
+	if (act == "bash")
 	{
-		case Action::BASH:
 			dmg.m_multiplier[Damage::PHYSICAL] *= 2;
-			break;
-
-		case Action::HAMMER_BASH:
+	}
+	else if (act == "hammer_bash")
+	{
 			dmg.m_multiplier[Damage::PHYSICAL] *= 2;
-			break;
-
-		case Action::AROUND_BLOW:
+	}
+	else if (act == "around_blow")
+	{
 			dmg.m_multiplier[Damage::PHYSICAL] *= 0.6;
-			break;
-
-		case Action::WHIRL_BLOW:
+	}
+	else if (act == "whirl_blow")
+	{
 			dmg.m_multiplier[Damage::PHYSICAL] *= 1;
-			break;
-
-		case Action::SMASH:
+	}
+	else if (act == "smash")
+	{
 			dmg.m_multiplier[Damage::PHYSICAL] *= 3;
 			// kann nicht geblockt werden,  Ruestung ignorieren
 			dmg.m_special_flags |= Damage::UNBLOCKABLE;
 			dmg.m_special_flags |= Damage::IGNORE_ARMOR;
-			break;
-
-		case Action::HATE_MAGE:
+	}
+	else if (act == "hate_mage")
+	{
 			dmg.m_multiplier[Damage::PHYSICAL] *= 1;
 			dmg.m_status_mod_power[Damage::MUTE] += m_base_attr_mod.m_strength;
-			break;
-
-		case Action::CHARGE:
+	}
+	else if (act == "charge")
+	{
 			dmg.m_multiplier[Damage::PHYSICAL] *= m_command.m_damage_mult;
 			dmg.m_attack *=m_command.m_damage_mult*0.5;
-			break;
-
-		case Action::STORM_CHARGE:
+	}
+	else if (act == "storm_charge")
+	{
 
 			dmg.m_multiplier[Damage::PHYSICAL] *= m_command.m_damage_mult;
 			dmg.m_attack *=m_command.m_damage_mult*0.5;
 			dmg.m_status_mod_power[Damage::PARALYZED] += (short)  (m_base_attr_mod.m_strength*m_command.m_damage_mult*0.2);
-			break;
-			
-		case Action::DECOY:
+	}
+	else if (act == "decoy")
+	{
 			dmg.m_ai_mod_power[TAUNT] += m_base_attr_mod.m_strength/2 + std::min(m_base_attr_mod.m_strength/2,m_base_attr_mod.m_willpower*2);
 			dmg.m_special_flags |= Damage::UNBLOCKABLE;
-			break;
-			
-		case Action::SCARE:
+	}
+	else if (act == "scare")
+	{
 			dmg.m_ai_mod_power[TAUNT] += m_base_attr_mod.m_strength/2 + std::min(m_base_attr_mod.m_strength/2,m_base_attr_mod.m_willpower*2);
 			dmg.m_special_flags |= Damage::UNBLOCKABLE;
-			break;
-			
-		case Action::WARCRY:
+	}
+	else if (act == "warcry")
+	{
 			dmg.m_status_mod_power[Damage::CONFUSED] += m_base_attr_mod.m_strength/2 + std::min(m_base_attr_mod.m_strength/2,m_base_attr_mod.m_willpower*2) ;
-			break;
-
-		case Action::FIRE_BOLT:
+	}
+	else if (act == "fire_bolt")
+	{
 			dmg.m_min_damage[Damage::FIRE] += m_base_attr_mod.m_magic_power*1;
 			dmg.m_max_damage[Damage::FIRE] += m_base_attr_mod.m_magic_power*2;
 			dmg.m_min_damage[Damage::ICE]=0;
 			dmg.m_max_damage[Damage::ICE]=0;
 			dmg.m_special_flags |= Damage::UNBLOCKABLE;
-			break;
-
-		case Action::FIRE_STRIKE:
+	}
+	else if (act == "fire_strike")
+	{
 			dmg.m_min_damage[Damage::FIRE] += m_base_attr_mod.m_magic_power*3.3;
 			dmg.m_max_damage[Damage::FIRE] += m_base_attr_mod.m_magic_power*5;
 			dmg.m_min_damage[Damage::ICE]=0;
 			dmg.m_max_damage[Damage::ICE]=0;
 			dmg.m_special_flags |= Damage::UNBLOCKABLE;
-			break;
-
-		case Action::FIRE_WAVE:
+	}
+	else if (act == "fire_wave")
+	{
 			dmg.m_min_damage[Damage::FIRE] += m_base_attr_mod.m_magic_power*1.5;
 			dmg.m_max_damage[Damage::FIRE] += m_base_attr_mod.m_magic_power*2;
 			dmg.m_min_damage[Damage::ICE]=0;
 			dmg.m_max_damage[Damage::ICE]=0;
 			dmg.m_special_flags |= Damage::UNBLOCKABLE;
-			break;
-
-		case Action::FIRE_STORM:
+	}
+	else if (act == "fire_storm")
+	{
 			dmg.m_min_damage[Damage::FIRE] += m_base_attr_mod.m_magic_power*2.5;
 			dmg.m_max_damage[Damage::FIRE] += m_base_attr_mod.m_magic_power*3;
 			dmg.m_min_damage[Damage::ICE]=0;
 			dmg.m_max_damage[Damage::ICE]=0;
 			dmg.m_special_flags |= Damage::UNBLOCKABLE;
-			break;
-
-		case Action::FIRE_BALL:
+	}
+	else if (act == "fire_ball")
+	{
 			dmg.m_min_damage[Damage::FIRE] += m_base_attr_mod.m_magic_power*2;
 			dmg.m_max_damage[Damage::FIRE] += m_base_attr_mod.m_magic_power*3;
 			dmg.m_min_damage[Damage::ICE]=0;
 			dmg.m_max_damage[Damage::ICE]=0;
 			dmg.m_special_flags |= Damage::UNBLOCKABLE;
-			break;
-
-		case Action::INFERNO_BALL:
+	}
+	else if (act == "inferno_ball")
+	{
 			dmg.m_min_damage[Damage::FIRE] += m_base_attr_mod.m_magic_power*3.3;
 			dmg.m_max_damage[Damage::FIRE] += m_base_attr_mod.m_magic_power*5;
 			dmg.m_min_damage[Damage::ICE]=0;
 			dmg.m_max_damage[Damage::ICE]=0;
 			dmg.m_special_flags |= Damage::UNBLOCKABLE;
-			break;
-
-		case	Action::FIRE_WALL:
+	}
+	else if (act == "fire_wall")
+	{
 			dmg.m_min_damage[Damage::FIRE] = m_base_attr_mod.m_magic_power/3.0;
 			dmg.m_max_damage[Damage::FIRE] = m_base_attr_mod.m_magic_power/2.0;
 			dmg.m_min_damage[Damage::ICE]=0;
 			dmg.m_max_damage[Damage::ICE]=0;
 			dmg.m_special_flags |= Damage::UNBLOCKABLE;
-			break;
-
-		case	Action::ICE_BOLT:
+	}
+	else if (act == "ice_bolt")
+	{
 			dmg.m_min_damage[Damage::ICE] += m_base_attr_mod.m_magic_power*1.6;
 			dmg.m_max_damage[Damage::ICE] += m_base_attr_mod.m_magic_power*2.2;
 			dmg.m_min_damage[Damage::FIRE]=0;
 			dmg.m_max_damage[Damage::FIRE]=0;
 			dmg.m_special_flags |= Damage::UNBLOCKABLE;
-			break;
-
-		case	Action::ICE_SPIKE:
+	}
+	else if (act == "ice_spike")
+	{
 			dmg.m_min_damage[Damage::ICE] += m_base_attr_mod.m_magic_power*3;
 			dmg.m_max_damage[Damage::ICE] += m_base_attr_mod.m_magic_power*4.5;
 			dmg.m_min_damage[Damage::FIRE]=0;
 			dmg.m_max_damage[Damage::FIRE]=0;
 			dmg.m_special_flags |= Damage::UNBLOCKABLE;
-			break;
-
-		case	Action::SNOW_STORM:
+	}
+	else if (act == "snow_storm")
+	{
 			dmg.m_min_damage[Damage::ICE] = m_base_attr_mod.m_magic_power/3;
 			dmg.m_max_damage[Damage::ICE] = m_base_attr_mod.m_magic_power/2;
 			dmg.m_min_damage[Damage::FIRE]=0;
 			dmg.m_max_damage[Damage::FIRE]=0;
 			dmg.m_special_flags |= Damage::UNBLOCKABLE;
-			break;
-
-		case	Action::BLIZZARD:
+	}
+	else if (act == "blizzard")
+	{
 			dmg.m_min_damage[Damage::ICE] = m_base_attr_mod.m_magic_power/2;
 			dmg.m_max_damage[Damage::ICE] = m_base_attr_mod.m_magic_power/1.3;
 			dmg.m_min_damage[Damage::FIRE]=0;
 			dmg.m_max_damage[Damage::FIRE]=0;
 			dmg.m_special_flags |= Damage::UNBLOCKABLE;
-			break;
-
-		case	Action::ICE_RING:
+	}
+	else if (act == "ice_ring")
+	{
 			dmg.m_min_damage[Damage::ICE] += m_base_attr_mod.m_magic_power;
 			dmg.m_max_damage[Damage::ICE] += m_base_attr_mod.m_magic_power*1.5;
 			dmg.m_min_damage[Damage::FIRE]=0;
 			dmg.m_max_damage[Damage::FIRE]=0;
 			dmg.m_special_flags |= Damage::UNBLOCKABLE;
-			break;
-
-		case	Action::FROST_RING:
+	}
+	else if (act == "frost_ring")
+	{
 			dmg.m_min_damage[Damage::ICE] += m_base_attr_mod.m_magic_power*1.6;
 			dmg.m_max_damage[Damage::ICE] += m_base_attr_mod.m_magic_power*2.4;
 			dmg.m_min_damage[Damage::FIRE]=0;
 			dmg.m_max_damage[Damage::FIRE]=0;
 			dmg.m_special_flags |= Damage::UNBLOCKABLE;
-			break;
-
-		case	Action::FREEZE:
+	}
+	else if (act == "freeze")
+	{
 			dmg.m_min_damage[Damage::FIRE]=0;
 			dmg.m_max_damage[Damage::FIRE]=0;
 			dmg.m_status_mod_power[Damage::FROZEN] = m_base_attr_mod.m_magic_power;
 			dmg.m_special_flags |= Damage::UNBLOCKABLE;
-			break;
-
-		case Action::LIGHTNING:
+	}
+	else if (act == "lightning")
+	{
 			dmg.m_min_damage[Damage::AIR] += m_base_attr_mod.m_magic_power*0.5;
 			dmg.m_max_damage[Damage::AIR] += m_base_attr_mod.m_magic_power*2.5;
 			dmg.m_special_flags |= Damage::UNBLOCKABLE;
-			break;
-
-		case Action::LIGHTNING_STRIKE:
+	}
+	else if (act == "lightning_strike")
+	{
 			dmg.m_min_damage[Damage::AIR] += m_base_attr_mod.m_magic_power*1;
 			dmg.m_max_damage[Damage::AIR] += m_base_attr_mod.m_magic_power*5;
 			dmg.m_special_flags |= Damage::UNBLOCKABLE;
-			break;
-
-		case Action::THUNDERSTORM:
+	}
+	else if (act == "thunderstorm")
+	{
 			dmg.m_min_damage[Damage::AIR] = m_base_attr_mod.m_magic_power/5.0;
 			dmg.m_max_damage[Damage::AIR] = m_base_attr_mod.m_magic_power/1.5;
 			dmg.m_special_flags |= Damage::UNBLOCKABLE;
-			break;
-
-		case Action::THUNDERSTORM2:
+	}
+	else if (act == "thunderstorm2")
+	{
 			dmg.m_min_damage[Damage::AIR] = m_base_attr_mod.m_magic_power/3.0;
 			dmg.m_max_damage[Damage::AIR] = m_base_attr_mod.m_magic_power/1.0;
 			dmg.m_special_flags |= Damage::UNBLOCKABLE;
-			break;
-
-		case Action::CHAIN_LIGHTNING:
+	}
+	else if (act == "chain_lightning")
+	{
 			dmg.m_min_damage[Damage::AIR] += m_base_attr_mod.m_magic_power*1;
 			dmg.m_max_damage[Damage::AIR] += m_base_attr_mod.m_magic_power*2.5;
 			dmg.m_special_flags |= Damage::UNBLOCKABLE;
-			break;
-
-		case Action::CHAIN_LIGHTNING2:
+	}
+	else if (act == "chain_lightning2")
+	{
 			dmg.m_min_damage[Damage::AIR] += m_base_attr_mod.m_magic_power*1.7;
 			dmg.m_max_damage[Damage::AIR] += m_base_attr_mod.m_magic_power*3.5;
 			dmg.m_special_flags |= Damage::UNBLOCKABLE;
-			break;
-
-		// Faehigkeiten Schuetze
-		case Action::GUIDED_TRIPLE_SHOT:
+	}
+	else if (act == "guided_triple_shot")
+	{
 			dmg.m_multiplier[Damage::PHYSICAL] *= 1.5;
-			break;
-
-		case Action::MULTISHOT:
+	}
+	else if (act == "multishot")
+	{
 			dmg.m_multiplier[Damage::PHYSICAL] *=0.75;
-			break;
-
-		case Action::WEAK_POINT:
+	}
+	else if (act == "weak_point")
+	{
 			dmg.m_status_mod_power[Damage::BERSERK] = m_base_attr_mod.m_dexterity;
-			break;
-
-		case Action::BLIND_RAGE:
+	}
+	else if (act == "blind_rage")
+	{
 			dmg.m_status_mod_power[Damage::BLIND] = (short) (m_base_attr_mod.m_dexterity*1.5f);
 			dmg.m_status_mod_power[Damage::BERSERK] = m_base_attr_mod.m_dexterity;
-			break;
-
-		case Action::PIERCE:
+	}
+	else if (act == "pierce")
+	{
 			dmg.m_multiplier[Damage::PHYSICAL] *=1.5;
 			dmg.m_special_flags |= Damage::UNBLOCKABLE;
-			break;
-
-		case Action::VOLLEY_SHOT:
+	}
+	else if (act == "volley_shot")
+	{
 			dmg.m_multiplier[Damage::PHYSICAL] *=1;
-			break;
-
-		case Action::VACUUM:
+	}
+	else if (act == "vacuum")
+	{
 			dmg.m_min_damage[Damage::AIR] += m_base_attr_mod.m_dexterity*1;
 			dmg.m_max_damage[Damage::AIR] += m_base_attr_mod.m_dexterity*2;
 			dmg.m_status_mod_power[Damage::PARALYZED] = m_base_attr_mod.m_dexterity;
 			dmg.m_special_flags |= Damage::UNBLOCKABLE;
-			break;
-
-		case Action::DEATH_ROULETTE:
+	}
+	else if (act == "death_roulette")
+	{
 			dmg.m_multiplier[Damage::PHYSICAL] *=2;
-			break;
-
-		case Action::EXPLODING_ARROW:
-		case Action::EXPLOSION_CASCADE:
+	}
+	else if (act == "exploding_arrow" || act == "exploding_cascade")
+	{
 			dmg.m_multiplier[Damage::PHYSICAL] *=2;
 			dmg.m_special_flags |= Damage::UNBLOCKABLE;
-			break;
-
-
-
-		// Priester Faehigkeiten
-		case Action::HOLY_LIGHT:
+	}
+	else if (act == "holy_light")
+	{
 			dmg.m_min_damage[Damage::PHYSICAL]=0;
 			dmg.m_max_damage[Damage::PHYSICAL]=0;
 			dmg.m_min_damage[Damage::FIRE] +=m_base_attr_mod.m_willpower/3;
@@ -3040,9 +3028,9 @@ void Creature::calcAbilityDamage(Action::ActionType act,Damage& dmg)
 			dmg.m_max_damage[Damage::ICE]=0;
 			dmg.m_special_flags |= Damage::UNBLOCKABLE;
 			dmg.m_special_flags |= Damage::EXTRA_UNDEAD_DMG;
-			break;
-
-		case Action::HOLY_FIRE:
+	}
+	else if (act == "holy_fire")
+	{
 			dmg.m_min_damage[Damage::PHYSICAL]=0;
 			dmg.m_max_damage[Damage::PHYSICAL]=0;
 			dmg.m_min_damage[Damage::FIRE] +=m_base_attr_mod.m_willpower/2;
@@ -3053,34 +3041,32 @@ void Creature::calcAbilityDamage(Action::ActionType act,Damage& dmg)
 			dmg.m_max_damage[Damage::ICE]=0;
 			dmg.m_special_flags |= Damage::UNBLOCKABLE;
 			dmg.m_special_flags |= Damage::EXTRA_UNDEAD_DMG;
-			break;
-
-		case Action::LIGHT_BEAM:
-		case Action::BURNING_SUN:
+	}
+	else if (act == "light_beam" || act == "burning_sun")
+	{
 			dmg.init();
 			dmg.m_attacker_fraction = m_fraction;
 			dmg.m_special_flags |= Damage::UNBLOCKABLE;
 			dmg.m_status_mod_power[Damage::BLIND] = (short) (1.5*m_base_attr_mod.m_willpower);
-			break;
-
-		case Action::HYPNOSIS:
-		case Action::HYPNOSIS2:
+	}
+	else if (act == "hypnosis" || act == "hypnosis2")
+	{
 			dmg.init();
 			dmg.m_attacker_fraction = m_fraction;
 			dmg.m_special_flags |= Damage::UNBLOCKABLE;
 			dmg.m_status_mod_power[Damage::CONFUSED] = m_base_attr_mod.m_willpower;
-			break;
-
-		case Action::BREAK_BINDING:
+	}
+	else if (act == "break_binding" )
+	{
 			dmg.m_min_damage[Damage::ICE] =m_base_attr_mod.m_willpower/6;
 			dmg.m_max_damage[Damage::ICE] =m_base_attr_mod.m_willpower/4;
 			dmg.m_min_damage[Damage::PHYSICAL] += std::min(m_base_attr_mod.m_willpower/3,m_base_attr_mod.m_magic_power*2);
 			dmg.m_max_damage[Damage::PHYSICAL] += std::min(m_base_attr_mod.m_willpower/2,m_base_attr_mod.m_magic_power*3);
 			dmg.m_special_flags |= Damage::UNBLOCKABLE;
 			dmg.m_special_flags |= Damage::EXTRA_SUMMONED_DMG;
-			break;
-
-		case Action::DISRUPT_BINDING:
+	}
+	else if (act == "disrupt_binding" )
+	{
 			dmg.m_min_damage[Damage::ICE]=0;
 			dmg.m_max_damage[Damage::ICE]=0;
 			dmg.m_min_damage[Damage::ICE] +=m_base_attr_mod.m_willpower/3;
@@ -3089,24 +3075,19 @@ void Creature::calcAbilityDamage(Action::ActionType act,Damage& dmg)
 			dmg.m_max_damage[Damage::PHYSICAL] += std::min(m_base_attr_mod.m_willpower/1.33,m_base_attr_mod.m_magic_power*3.0);
 			dmg.m_special_flags |= Damage::UNBLOCKABLE;
 			dmg.m_special_flags |= Damage::EXTRA_SUMMONED_DMG;
-			break;
-
-		case Action::ACID:
+	}
+	else if (act == "acid" )
+	{
 			dmg.init();
 			dmg.m_attacker_fraction = m_fraction;
 			dmg.m_special_flags |= Damage::UNBLOCKABLE;
 			dmg.m_status_mod_power[Damage::POISONED] = 2*m_base_attr_mod.m_willpower;
-			break;
-
-		case Action::DIVINE_WIND:
-		case Action::DIVINE_STORM:
+	}
+	else if (act == "divine_wind" || act == "divine_storm")
+	{
 			dmg.m_min_damage[Damage::AIR] =m_base_attr_mod.m_willpower/2;
 			dmg.m_max_damage[Damage::AIR] =m_base_attr_mod.m_willpower/1;
 			dmg.m_special_flags |= Damage::UNBLOCKABLE;
-			break;
-
-        default:
-            break;
 	}
 
 	// Faehigkeit brennende Wut
@@ -3180,10 +3161,8 @@ void Creature::calcBaseAttrMod()
 
 	}
 
-	for (i=0;i<6;i++)
-	{
-		m_base_attr_mod.m_abilities[i] = m_base_attr.m_abilities[i];
-	}
+	m_base_attr_mod.m_abilities = m_base_attr.m_abilities;
+	
 
 	m_base_attr_mod.m_special_flags = m_base_attr.m_special_flags;
 
@@ -3197,14 +3176,14 @@ void Creature::calcBaseAttrMod()
 	}
 
 	// Wirkungen durch passive Faehigkeiten
-	if (checkAbility(Action::RESIST_ICE))
+	if (checkAbility("resist_ice"))
 	{
 		m_base_attr_mod.m_resistances[Damage::ICE] += 20;
 		m_base_attr_mod.m_resistances[Damage::AIR] += 20;
 		
 	}
 
-	if (checkAbility(Action::RESIST_AIR))
+	if (checkAbility("resist_air"))
 	{
 		m_base_attr_mod.m_resistances[Damage::ICE] += 10;
 		m_base_attr_mod.m_resistances[Damage::AIR] += 10;
@@ -3275,12 +3254,12 @@ bool Creature::takeDamage(Damage* d)
 	m_dyn_attr.m_last_attacker_id = d->m_attacker_id;
 
 	// Wirkungen durch passive Faehigkeiten
-	if (checkAbility(Action::CONCENTRATION))
+	if (checkAbility("concentration"))
 	{
 		d->m_status_mod_power[Damage::CONFUSED]=0;
 	}
 
-	if (checkAbility(Action::MENTAL_WALL))
+	if (checkAbility("mental_wall"))
 	{
 		d->m_status_mod_power[Damage::BERSERK]=0;
 	}
@@ -3307,7 +3286,7 @@ bool Creature::takeDamage(Damage* d)
 	float armor = m_base_attr_mod.m_armor;
 
 	// Faehigkeit Turm in der Schlacht
-	if (checkAbility(Action::STEADFAST) && m_base_attr_mod.m_max_health *0.4 > m_dyn_attr.m_health)
+	if (checkAbility("steadfast") && m_base_attr_mod.m_max_health *0.4 > m_dyn_attr.m_health)
 		armor *=2;
 
 	float armorfak = 1.0;
@@ -3530,13 +3509,11 @@ void Creature::applyBaseAttrMod(CreatureBaseAttrMod* mod, bool add)
 	}
 
 	// Faehigkeiten mit OR hinzufuegen
-	for (i=0;i<6;i++)
+	std::set<std::string>::iterator it;
+	for (it = mod->m_xabilities.begin(); it != mod->m_xabilities.end(); ++it )
 	{
-		m_base_attr_mod.m_abilities[i] |= mod->m_xabilities[i];
-		if (mod->m_xabilities[i]!=0)
-		{
-			addToNetEventMask(NetEvent::DATA_ABILITIES);
-		}
+		m_base_attr_mod.m_abilities.insert(*it);
+		addToNetEventMask(NetEvent::DATA_ABILITIES);
 	}
 
 	// Flags mit OR hinzufuegen
@@ -3604,15 +3581,13 @@ bool Creature::removeBaseAttrMod(CreatureBaseAttrMod* mod)
 	}
 
 	// Wenn Faehigkeit veraendert wurde neu berechnen
-	for (i=0;i<6;i++)
+	
+	if ( mod->m_xabilities.size() !=0)
 	{
-		if ( mod->m_xabilities[i]!=0)
-		{
-			ret = true;
-			addToNetEventMask(NetEvent::DATA_ABILITIES);
-		}
+		ret = true;
+		addToNetEventMask(NetEvent::DATA_ABILITIES);
 	}
-
+	
 	// Wenn Flags veraendert wurden neu berechnen
 	if (mod->m_xspecial_flags!=0)
 	{
@@ -3836,9 +3811,12 @@ void Creature::toString(CharConv* cv)
 	cv->toBuffer(m_timer1_max);
 	cv->toBuffer(m_timer2);
 	cv->toBuffer(m_timer2_max);
-	for (int i=0; i<6; i++)
+	
+	cv->toBuffer<short>(getBaseAttrMod()->m_abilities.size());
+	std::set<std::string>::iterator it;
+	for (it= getBaseAttrMod()->m_abilities.begin(); it != getBaseAttrMod()->m_abilities.end(); ++it)
 	{
-		cv->toBuffer(getBaseAttrMod()->m_abilities[i]);
+		cv->toBuffer(*it);
 	}
 
 	cv->toBuffer(getSpeed().m_x);
@@ -3895,9 +3873,16 @@ void Creature::fromString(CharConv* cv)
 	cv->fromBuffer(m_timer1_max);
 	cv->fromBuffer(m_timer2);
 	cv->fromBuffer(m_timer2_max);
-	for (int i=0; i<6; i++)
+	
+	short nr;
+	cv->fromBuffer(nr);
+	Action::ActionType type;
+	getBaseAttrMod()->m_abilities.clear();
+	for (int i=0; i<nr; i++)
 	{
-		cv->fromBuffer(getBaseAttrMod()->m_abilities[i]);
+		cv->fromBuffer(type);
+		getBaseAttrMod()->m_abilities.insert(type);
+		
 	}
 
 	Vector speed;
@@ -3906,21 +3891,12 @@ void Creature::fromString(CharConv* cv)
 	setSpeed(speed);
 }
 
-bool Creature::checkAbility(Action::ActionType at)
+bool Creature::checkAbility(Action::ActionType act)
 {
-	if (at<0 || at >=192)
-		return false;
-
-	int nr = at / 32;
-	int mask = 1 << (at % 32);
-	DEBUG5("test: %i %i %i",at,nr,mask);
-
-	if ((m_base_attr_mod.m_abilities[nr] & mask) !=0)
-	{
-		DEBUG5("funktioniert %x %x %x",m_base_attr_mod.m_abilities[nr],mask,m_base_attr_mod.m_abilities[nr] & mask);
+	if (act == "noaction")
 		return true;
-	}
-	return false;
+	
+	return ( m_base_attr_mod.m_abilities.count(act) > 0 );
 }
 
 
@@ -3933,7 +3909,9 @@ bool Creature::checkAbilityLearnable(Action::ActionType at)
 	}
 
 	Action::ActionInfo* aci = Action::getActionInfo(at);
-
+	if (aci ==0)
+		return false;
+	
 	if (aci->m_req_level > m_base_attr.m_level)
 	{
 		// Levelvorraussetzung nicht erfuellt
@@ -3988,8 +3966,8 @@ void Creature::writeNetEvent(NetEvent* event, CharConv* cv)
 		cv->toBuffer(getShape()->m_center.m_y);
 		cv->toBuffer(getShape()->m_angle);
 
-		DEBUG5("sending action %i angle %f",m_action.m_type, getShape()->m_angle);
-		if (m_action.m_type!=0)
+		DEBUG5("sending action %s angle %f",m_action.m_type.c_str(), getShape()->m_angle);
+		if (m_action.m_type!="noaction")
 		{
 			float acttime = m_action.m_time - m_action.m_elapsed_time;
 			Vector goal = getShape()->m_center + getSpeed() * acttime;
@@ -4063,10 +4041,13 @@ void Creature::writeNetEvent(NetEvent* event, CharConv* cv)
 
 	if (event->m_data & NetEvent::DATA_ABILITIES)
 	{
-		for (int i=0; i<6; i++)
+		cv->toBuffer<short>(getBaseAttrMod()->m_abilities.size());
+		std::set<std::string>::iterator it;
+		for (it= getBaseAttrMod()->m_abilities.begin(); it != getBaseAttrMod()->m_abilities.end(); ++it)
 		{
-			cv->toBuffer(getBaseAttrMod()->m_abilities[i]);
+			cv->toBuffer(*it);
 		}
+
 	}
 
 	if (event->m_data & NetEvent::DATA_FLAGS )
@@ -4130,7 +4111,7 @@ void Creature::processNetEvent(NetEvent* event, CharConv* cv)
 	if (event->m_data & NetEvent::DATA_COMMAND)
 	{
 		m_command.fromString(cv);
-		DEBUG5("got Command %i",m_command.m_type);
+		DEBUG5("got Command %s",m_command.m_type.c_str());
 	}
 
 	float  atime = m_action.m_time - m_action.m_elapsed_time;
@@ -4236,10 +4217,17 @@ void Creature::processNetEvent(NetEvent* event, CharConv* cv)
 
 	if (event->m_data & NetEvent::DATA_ABILITIES)
 	{
-		for (int i=0; i<6; i++)
+		short nr;
+		cv->fromBuffer(nr);
+		Action::ActionType type;
+		getBaseAttrMod()->m_abilities.clear();
+		for (int i=0; i<nr; i++)
 		{
-			cv->fromBuffer(getBaseAttrMod()->m_abilities[i]);
+			cv->fromBuffer(type);
+			getBaseAttrMod()->m_abilities.insert(type);
+		
 		}
+
 	}
 
 	if (event->m_data & NetEvent::DATA_FLAGS )
@@ -4367,14 +4355,14 @@ void Creature::processNetEvent(NetEvent* event, CharConv* cv)
 				getShape()->m_angle = newangle;
 			}
 
-			m_action.m_type = Action::NOACTION;
+			m_action.m_type = "noaction";
 			m_action.m_elapsed_time =0;
 
 		}
 		else
 		{
 			// Drehwinkel korrekt setzen
-			if (!newmove && m_action.m_type != Action::NOACTION)
+			if (!newmove && m_action.m_type != "noaction")
 			{
 				// Wenn die Aktion nicht laufen ist, Spieler an die richtige Position versetzen
 				moveTo(newpos);
@@ -4382,7 +4370,7 @@ void Creature::processNetEvent(NetEvent* event, CharConv* cv)
 				
 			}
 			
-			if (Action::getActionInfo(m_action.m_type)->m_base_action == Action::WALK)
+			if (Action::getActionInfo(m_action.m_type)->m_base_action == "walk")
 			{
 				setAngle(getSpeed().angle());
 
@@ -4539,7 +4527,7 @@ void Creature::setDialogue(int id)
 		
 		if (id !=0)
 		{
-			getAction()->m_type = Action::NOACTION;
+			getAction()->m_type = "noaction";
 			m_action.m_elapsed_time =0;
 			clearCommand(true);
 		}
@@ -4567,7 +4555,7 @@ std::string Creature::getActionString()
 	if (getState() == STATE_DEAD)
 		return "die";
 
-	return Action::getEnumName(m_action.m_type);
+	return m_action.m_type;
 }
 
 float Creature::getActionPercent()

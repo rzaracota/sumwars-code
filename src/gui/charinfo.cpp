@@ -735,23 +735,23 @@ CharInfo::CharInfo (Document* doc)
 	out_stream.str("");
 	if (player->getSubtype() == "mage")
 	{
-		ttext = (CEGUI::utf8*) (Action::getDescription(Action::MAGIC_ATTACK).c_str());
-		out_stream << Action::getName(Action::MAGIC_ATTACK);
+		ttext = (CEGUI::utf8*) (Action::getDescription("magic_attack").c_str());
+		out_stream << Action::getName("magic_attack");
 	}
 	if (player->getSubtype() == "archer")
 	{
-		ttext = (CEGUI::utf8*) (Action::getDescription(Action::RANGE_ATTACK).c_str());
-		out_stream << Action::getName(Action::RANGE_ATTACK);
+		ttext = (CEGUI::utf8*) (Action::getDescription("range_attack").c_str());
+		out_stream << Action::getName("range_attack");
 	}
 	if (player->getSubtype() == "warrior")
 	{
-		ttext = (CEGUI::utf8*) (Action::getDescription(Action::ATTACK).c_str());
-		out_stream << Action::getName(Action::ATTACK);
+		ttext = (CEGUI::utf8*) (Action::getDescription("attack").c_str());
+		out_stream << Action::getName("attack");
 	}
 	if (player->getSubtype() == "priest")
 	{
-		ttext = (CEGUI::utf8*) (Action::getDescription(Action::HOLY_ATTACK).c_str());
-		out_stream << Action::getName(Action::HOLY_ATTACK);
+		ttext = (CEGUI::utf8*) (Action::getDescription("holy_attack").c_str());
+		out_stream << Action::getName("holy_attack");
 	}
 
 	if (label->getText()!= (CEGUI::utf8*) out_stream.str().c_str())
@@ -833,7 +833,7 @@ CharInfo::CharInfo (Document* doc)
 	}
 
 	// Label Schaden Attacke rechts
-	Action::Distance dist = Action::getActionInfo(player->getRightAction())->m_distance;
+	Action::TargetType dist = Action::getActionInfo(player->getRightAction())->m_target_type;
 	label =  win_mgr.getWindow( "Skill2DmgValueLabel");
 	if (dist == Action::MELEE || dist == Action::RANGED)
 	{	

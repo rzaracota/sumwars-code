@@ -110,7 +110,6 @@ bool Player::init()
 			
 	}
 	
-	DEBUG5("Player::init");
 	//eigene Initialisierung
 	CreatureBaseAttr* bas = getBaseAttr();
 	CreatureDynAttr* dyn = getDynAttr();
@@ -143,9 +142,7 @@ bool Player::init()
 	m_message_clear_timer =0;
 
 	// Attribute auf Basiswerte setzen
-	int i;
-	for (i=1;i<6;i++)
-		bas->m_abilities[i]=0;
+	bas->m_abilities.clear();
 	
 	dyn->m_experience=0;
 	
@@ -161,7 +158,11 @@ bool Player::init()
 	bas->m_resistances_cap[2] =50;
 	bas->m_resistances_cap[3] =50;
 	bas->m_special_flags=0;
-	bas->m_abilities[0] = 0xfffffff;
+	bas->m_abilities.insert("walk");
+	bas->m_abilities.insert("die");
+	bas->m_abilities.insert("dead");
+	bas->m_abilities.insert("take_item");
+	bas->m_abilities.insert("use");
 	
 	fstat.m_last_attacker="";
 	fstat.m_last_attacked="";
@@ -178,6 +179,35 @@ bool Player::init()
 	Equipement* equ = getEquipement();
 	if (getSubtype() == "warrior")
 	{
+		insertLearnableAbility("attack",Vector(0.2,0.05),1);
+		insertLearnableAbility("bash",Vector(0.45,0.05),1);
+		insertLearnableAbility("hammer_bash",Vector(0.45,0.45),1);
+		insertLearnableAbility("around_blow",Vector(0.2,0.25),1);
+		insertLearnableAbility("whirl_blow",Vector(0.2,0.65),1);
+		insertLearnableAbility("smash",Vector(0.45,0.65),1);
+		insertLearnableAbility("hate_mage",Vector(0.7,0.25),1);
+		insertLearnableAbility("charge",Vector(0.7,0.45),1);
+		insertLearnableAbility("storm_charge",Vector(0.7,0.85),1);
+		
+		insertLearnableAbility("block",Vector(0.7,0.25),2);
+		insertLearnableAbility("steadfast",Vector(0.45,0.05),2);
+		insertLearnableAbility("monster_hunter",Vector(0.2,0.25),2);
+		insertLearnableAbility("monster_slayer",Vector(0.2,0.65),2);
+		insertLearnableAbility("endurance",Vector(0.45,0.85),2);
+		insertLearnableAbility("weaponmaster",Vector(0.7,0.45),2);
+		
+		insertLearnableAbility("firesword",Vector(0.7,0.25),3);
+		insertLearnableAbility("flamesword",Vector(0.7,0.65),3);
+		insertLearnableAbility("flamearmor",Vector(0.7,0.45),3);
+		insertLearnableAbility("berserk",Vector(0.2,0.25),3);
+		insertLearnableAbility("warcry",Vector(0.45,0.85),3);
+		insertLearnableAbility("regenerate",Vector(0.45,0.25),3);
+		insertLearnableAbility("decoy",Vector(0.45,0.05),3);
+		insertLearnableAbility("scare",Vector(0.2,0.45),3);
+		insertLearnableAbility("anger",Vector(0.45,0.45),3);
+		insertLearnableAbility("fury",Vector(0.45,0.65),3);
+		
+		bas->m_abilities.insert("attack");
 		dyn->m_health = 200;
 		bas->m_max_health = 200;
 		bas->m_armor = 20;
@@ -192,9 +222,9 @@ bool Player::init()
 		
 		bas->m_attack_range =1;
 		
-		m_base_action = Action::ATTACK;
-		m_left_action = Action::ATTACK;
-		m_right_action = Action::ATTACK;
+		m_base_action = "attack";
+		m_left_action = "attack";
+		m_right_action = "attack";
 		init = true;
 
 		// Debugging
@@ -211,6 +241,36 @@ bool Player::init()
 	}
 	else if (getSubtype() == "archer")
 	{
+		
+		insertLearnableAbility("range_attack",Vector(0.2,0.05),1);
+		insertLearnableAbility("triple_shot",Vector(0.45,0.05),1);
+		insertLearnableAbility("guided_triple_shot",Vector(0.45,0.45),1);
+		insertLearnableAbility("multishot",Vector(0.45,0.25),1);
+		insertLearnableAbility("volley_shot",Vector(0.45,0.65),1);
+		insertLearnableAbility("pierce",Vector(0.7,0.05),1);
+		insertLearnableAbility("weak_point",Vector(0.2,0.25),1);
+		insertLearnableAbility("blind_rage",Vector(0.2,0.45),1);
+		insertLearnableAbility("vacuum",Vector(0.7,0.25),1);
+		insertLearnableAbility("death_roulette",Vector(0.2,0.65),1);
+		insertLearnableAbility("exploding_arrow",Vector(0.7,0.45),1);
+		insertLearnableAbility("exploding_cascade",Vector(0.7,0.85),1);
+		
+		insertLearnableAbility("evade",Vector(0.45,0.05),2);
+		insertLearnableAbility("critical_strike",Vector(0.2,0.25),2);
+		insertLearnableAbility("concentration",Vector(0.45,0.45),2);
+		insertLearnableAbility("mental_wall",Vector(0.45,0.85),2);
+		insertLearnableAbility("resist_ice",Vector(0.7,0.25),2);
+		insertLearnableAbility("resist_air",Vector(0.7,0.65),2);
+		
+		insertLearnableAbility("aimed_shot",Vector(0.45,0.05),3);
+		insertLearnableAbility("bow_spirit",Vector(0.45,0.65),3);
+		insertLearnableAbility("ice_arrows",Vector(0.7,0.45),3);
+		insertLearnableAbility("freezing_arrows",Vector(0.7,0.85),3);
+		insertLearnableAbility("wind_arrows",Vector(0.2,0.25),3);
+		insertLearnableAbility("storm_arrows",Vector(0.2,0.65),3);
+		insertLearnableAbility("wind_walk",Vector(0.7,0.25),3);
+		
+		bas->m_abilities.insert("range_attack");
 		dyn->m_health = 150;
 		bas->m_max_health = 150;
 		bas->m_armor = 15;
@@ -228,9 +288,9 @@ bool Player::init()
 		
 		bas->m_attack_range =20;
 		
-		m_base_action = Action::RANGE_ATTACK;
-		m_left_action = Action::RANGE_ATTACK;
-		m_right_action = Action::RANGE_ATTACK;
+		m_base_action = "range_attack";
+		m_left_action = "range_attack";
+		m_right_action = "range_attack";
 		init = true;
 
 		m_gender = FEMALE;
@@ -246,6 +306,35 @@ bool Player::init()
 	}
 	else if (getSubtype() == "mage")
 	{
+		insertLearnableAbility("magic_attack",Vector(0.2,0.05),1);
+		insertLearnableAbility("fire_bolt",Vector(0.45,0.05),1);
+		insertLearnableAbility("fire_strike",Vector(0.45,0.25),1);
+		insertLearnableAbility("fire_wave",Vector(0.7,0.65),1);
+		insertLearnableAbility("fire_storm",Vector(0.7,0.85),1);
+		insertLearnableAbility("fire_ball",Vector(0.7,0.25),1);
+		insertLearnableAbility("inferno_ball",Vector(0.7,0.45),1);
+		insertLearnableAbility("fire_wall",Vector(0.45,0.65),1);
+		insertLearnableAbility("inflame",Vector(0.2,0.45),1);
+		
+		insertLearnableAbility("ice_bolt",Vector(0.45,0.05),2);
+		insertLearnableAbility("ice_spike",Vector(0.7,0.25),2);
+		insertLearnableAbility("snow_storm",Vector(0.45,0.65),2);
+		insertLearnableAbility("blizzard",Vector(0.45,0.85),2);
+		insertLearnableAbility("ice_ring",Vector(0.2,0.25),2);
+		insertLearnableAbility("frost_ring",Vector(0.2,0.65),2);
+		insertLearnableAbility("freeze",Vector(0.45,0.25),2);
+		insertLearnableAbility("chill",Vector(0.7,0.45),2);
+		
+		insertLearnableAbility("lightning",Vector(0.45,0.05),3);
+		insertLearnableAbility("lightning_strike",Vector(0.7,0.25),3);
+		insertLearnableAbility("thunderstorm",Vector(0.45,0.45),3);
+		insertLearnableAbility("thunderstorm2",Vector(0.45,0.85),3);
+		insertLearnableAbility("chain_lightning",Vector(0.2,0.25),3);
+		insertLearnableAbility("chain_lightning2",Vector(0.2,0.45),3);
+		insertLearnableAbility("static_shield",Vector(0.7,0.65),3);
+		insertLearnableAbility("ionisation",Vector(0.7,0.45),3);
+		
+		bas->m_abilities.insert("magic_attack");
 		dyn->m_health = 100;
 		bas->m_max_health = 100;
 		bas->m_armor = 15;
@@ -260,9 +349,9 @@ bool Player::init()
 		m_name.assign("Gandalf");
 		bas->m_walk_speed = 3000;
 		bas->m_attack_speed=1500;
-		m_base_action = Action::MAGIC_ATTACK;
-		m_left_action = Action::MAGIC_ATTACK;
-		m_right_action = Action::MAGIC_ATTACK;
+		m_base_action = "magic_attack";
+		m_left_action = "magic_attack";
+		m_right_action = "magic_attack";
 		init = true;
 		m_look = "mage_m";
 	
@@ -283,6 +372,35 @@ bool Player::init()
 	}
 	else if (getSubtype() == "priest")
 	{
+		insertLearnableAbility("holy_attack",Vector(0.2,0.05),1);
+		insertLearnableAbility("holy_light",Vector(0.2,0.45),1);
+		insertLearnableAbility("holy_fire",Vector(0.2,0.65),1);
+		insertLearnableAbility("burning_rage",Vector(0.2,0.25),1);
+		insertLearnableAbility("cure_blind_mute",Vector(0.7,0.25),1);
+		insertLearnableAbility("cure_blind_mute_party",Vector(0.7,0.65),1);
+		insertLearnableAbility("blazing_shield",Vector(0.45,0.05),1);
+		insertLearnableAbility("light_beam",Vector(0.45,0.25),1);
+		insertLearnableAbility("burning_sun",Vector(0.45,0.85),1);
+		
+		insertLearnableAbility("break_binding",Vector(0.2,0.45),2);
+		insertLearnableAbility("disrupt_binding",Vector(0.2,0.85),2);
+		insertLearnableAbility("magic_shield",Vector(0.2,0.25),2);
+		insertLearnableAbility("cure_pois_burn",Vector(0.7,0.25),2);
+		insertLearnableAbility("cure_pois_burn_party",Vector(0.7,0.65),2);
+		insertLearnableAbility("acid",Vector(0.7,0.45),2);
+		insertLearnableAbility("heal",Vector(0.45,0.05),2);
+		insertLearnableAbility("heal_party",Vector(0.45,0.45),2);
+		
+		insertLearnableAbility("divine_wind",Vector(0.2,0.25),3);
+		insertLearnableAbility("divine_storm",Vector(0.2,0.65),3);
+		insertLearnableAbility("blade_storm",Vector(0.45,0.05),3);
+		insertLearnableAbility("cure_conf_bsrk",Vector(0.45,0.25),3);
+		insertLearnableAbility("cure_conf_bsrk_party",Vector(0.45,0.45),3);
+		insertLearnableAbility("hypnosis",Vector(0.7,0.45),3);
+		insertLearnableAbility("hypnosis2",Vector(0.7,0.85),3);
+		insertLearnableAbility("keen_mind",Vector(0.7,0.25),3);
+		
+		bas->m_abilities.insert("holy_attack");
 		dyn->m_health = 200;
 		bas->m_max_experience = 100;
 		bas->m_level =1;
@@ -298,9 +416,9 @@ bool Player::init()
 		bas->m_attack_speed=2000;
 		bas->m_attack_range =1;
 
-		m_base_action = Action::HOLY_ATTACK;
-		m_left_action = Action::HOLY_ATTACK;
-		m_right_action = Action::HOLY_ATTACK;
+		m_base_action = "holy_attack";
+		m_left_action = "holy_attack";
+		m_right_action = "holy_attack";
 		init = true;
 
 		m_look = "priest_f";
@@ -347,10 +465,10 @@ void  Player::revive()
 	getDynAttr()->m_health = getBaseAttrMod()->m_max_health;
 
 	// keine Aktion/Kommando
-	getAction()->m_type = Action::NOACTION;
-	getCommand()->m_type = Action::NOACTION;
+	getAction()->m_type = "noaction";
+	getCommand()->m_type = "noaction";
 	getCommand()->m_damage_mult=1;
-	getNextCommand()->m_type = Action::NOACTION;
+	getNextCommand()->m_type = "noaction";
 
 	// Bewegung auf 0 setzen
 	setSpeed(Vector(0,0));
@@ -387,7 +505,7 @@ void  Player::revive()
 
 	setState(STATE_ACTIVE,false);
 	clearCommand(false);
-	getNextCommand()->m_type = Action::NOACTION;
+	getNextCommand()->m_type = "noaction";
 	getNextCommand()->m_damage_mult = 1;
 	getNextCommand()->m_goal = Vector(0,0);
 	getNextCommand()->m_goal_object_id =0;
@@ -416,12 +534,6 @@ bool Player::onGamefieldClick(ClientCommand* command)
 		return true;
 	}
 	
-	
-	if (command->m_action>=192)
-	{
-		ERRORMSG("invalid action");
-		return false;
-	}
 
 	Command* com = getNextCommand();
 	int dist;
@@ -430,13 +542,13 @@ bool Player::onGamefieldClick(ClientCommand* command)
 	WorldObject::Relation rel;
 
 	// Actionen auf self brauchen kein Zielobjekt
-	dist = Action::getActionInfo(command->m_action)->m_distance;
+	dist = Action::getActionInfo(command->m_action)->m_target_type;
 	if ( dist == Action::SELF || dist == Action::PARTY_MULTI || dist == Action::PARTY)
 		command->m_id=0;
 
 
 	// bei Take Item wird in der ID die ID des Items gespeichert
-	if ( command->m_id!=0 && command->m_action != Action::TAKE_ITEM)
+	if ( command->m_id!=0 && command->m_action != "take_item")
 	{
 
 		DEBUG5("Kommando erhalten, zielid: %i",command->m_id);
@@ -467,14 +579,7 @@ bool Player::onGamefieldClick(ClientCommand* command)
 					}
 					else
 					{
-						/*
-						if (wo->getState()==STATES_DEAD)
-						{
-						getNextCommand()->setType(COMMAND_TRADE);
-						getNextCommand()->setGoalObjectId(command->m_id);
-						DEBUG("Monster auspluendern");
-					}
-						*/
+						
 					}
 				}
 
@@ -498,7 +603,7 @@ bool Player::onGamefieldClick(ClientCommand* command)
 				}
 				else if (wo->isCreature() && ( rel == WorldObject::ALLIED || rel == WorldObject::NEUTRAL))
 				{
-					com->m_type =Action::SPEAK;
+					com->m_type ="speak";
 
 					com->m_goal_object_id = command->m_id;
 					com->m_goal = command->m_goal;
@@ -509,7 +614,7 @@ bool Player::onGamefieldClick(ClientCommand* command)
 				if (wo->getType()=="FIXED_OBJECT" )
 				{
 					// festes Objekt benutzen
-					com->m_type =Action::USE;
+					com->m_type ="use";
 					com->m_goal_object_id = command->m_id;
 					com->m_range = 1.0;
 					DEBUG5("use Object %i",command->m_id);
@@ -541,28 +646,28 @@ bool Player::onGamefieldClick(ClientCommand* command)
 		else
 		{
 			// Objekt existiert nicht ( Fehler?)
-			com->m_type =Action::NOACTION;
+			com->m_type ="noaction";
 		}
 
 	}
 	else
 	{
 		// Kein Zielobjekt gegeben
-		DEBUG5("Kommando erhalten, Ziel (%f,%f) button %i action %i dist %i",command->m_goal.m_x, command->m_goal.m_y,command->m_button,command->m_action,dist);
+		DEBUG5("Kommando erhalten, Ziel (%f,%f) button %i action %s dist %i",command->m_goal.m_x, command->m_goal.m_y,command->m_button,command->m_action.c_str(),dist);
 
 		if (command->m_button == LEFT_MOUSE_BUTTON)
 		{
 
 			// linke Maustaste -> immer laufen
-			if (command->m_action == Action::TAKE_ITEM)
+			if (command->m_action == "take_item")
 			{
-				com->m_type = Action::TAKE_ITEM;
+				com->m_type = "take_item";
 				com->m_goal_object_id =command->m_id;
 				DEBUG5("take item");
 			}
 			else
 			{
-				com->m_type = Action::WALK;
+				com->m_type = "walk";
 				com->m_goal_object_id =0;
 			}
 			com->m_goal = command->m_goal;
@@ -603,7 +708,7 @@ bool Player::onGamefieldClick(ClientCommand* command)
 		}
 		else
 		{
-			com->m_type =Action::NOACTION;
+			com->m_type ="noaction";
 		}
 
 	}
@@ -629,7 +734,7 @@ bool Player::onGamefieldClick(ClientCommand* command)
 	}
 
 	addToNetEventMask(NetEvent::DATA_NEXT_COMMAND);
-	DEBUG5("resulting command %i goal %f %f id %i",com->m_type,com->m_goal.m_x,com->m_goal.m_y, com->m_goal_object_id);
+	DEBUG5("resulting command %s goal %f %f id %i",com->m_type.c_str(),com->m_goal.m_x,com->m_goal.m_y, com->m_goal_object_id);
 
 	return true;
 }
@@ -1133,7 +1238,7 @@ void Player::gainLevel()
 
 bool Player::onClientCommand( ClientCommand* command, float delay)
 {
-	DEBUG5("Kommando (%f %f) button: %i id: %i action: %i",command->m_goal.m_x,command->m_goal.m_y,command->m_button,command->m_id, command->m_action);
+	DEBUG5("Kommando (%f %f) button: %i id: %i action: %s",command->m_goal.m_x,command->m_goal.m_y,command->m_button,command->m_id, command->m_action.c_str());
 
 	Party* 	p;
 	Player* pl;
@@ -1152,8 +1257,7 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 	ds.init(prob, 0,20, 0.3, 2000);
 
 	// Kopie des aktuellen Kommandos anlegen
-	Command oldcommand;
-	memcpy(&oldcommand,getNextCommand(),sizeof(Command));
+	Command oldcommand = *(getNextCommand());
 
 	switch(command->m_button)
 	{
@@ -1274,16 +1378,16 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 			if (m_skill_points>0)
 			{
 				// Skill punkte stehen zur Verfuegung
-				if (checkAbilityLearnable(( Action::ActionType) command->m_id))
+				if (checkAbilityLearnable(( Action::ActionType) command->m_action))
 				{
 					// Faehigkeit kann gelernt werden
 
 					m_skill_points--;
 
 					// Bit fuer die Faehigkeit setzen
-					getBaseAttr()->m_abilities[command->m_id/32] |= (1 << (command->m_id%32));
+					getBaseAttr()->m_abilities.insert(command->m_action);
 
-					DEBUG5("lerne Faehigkeit %i", command->m_id);
+					DEBUG5("lerne Faehigkeit %s", command->m_action.c_str());
 
 					calcBaseAttrMod();
 					
@@ -1467,7 +1571,7 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 		// naechstes Kommando hat sich geaendert
 		// die aktuelle Aktion basiert eventuell auf einem veralteten Kommando
 
-		if (getAction()->m_type == Action::NOACTION || getAction()->m_elapsed_time < delay)
+		if (getAction()->m_type == "noaction" || getAction()->m_elapsed_time < delay)
 		{
 			// Aktion basiert auf veraltetem Kommando
 			// abbrechen
@@ -1478,13 +1582,13 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 			initAction();
 			calcDamage(getAction()->m_type,*(getDamage()));
 
-			DEBUG5("new action %i time %f",getAction()->m_type,getAction()->m_time);
+			DEBUG5("new action %s time %f",getAction()->m_type.c_str(),getAction()->m_time);
 
 			// Action entsprechend der Verzoegerung schneller ausfuehren
 			// aber maximal doppelt so schnell
 			float mult = std::max(getAction()->m_time-delay, getAction()->m_time/2)/getAction()->m_time;
 			DEBUG5("delay %f mult %f",delay,mult);
-			if (getAction()->m_type == Action::WALK)
+			if (getAction()->m_type == "walk")
 			{
 				// Laufgeschwindigkeit entsprechend erhoehen
 				Vector speed = getSpeed();
@@ -1507,10 +1611,10 @@ void Player::abortAction()
 	float time = getAction()->m_elapsed_time;
 	Action::ActionInfo* aci = Action::getActionInfo(getAction()->m_type);
 
-	DEBUG5("abort Action %i (elapsed time %f)",getAction()->m_type, time);
+	DEBUG5("abort Action %s (elapsed time %f)",getAction()->m_type.c_str(), time);
 
 
-	if (getAction()->m_type == Action::WALK)
+	if (getAction()->m_type == "walk")
 	{
 		// Position zurueck setzen
 		moveTo(getPosition() - getSpeed()*time);
@@ -1550,7 +1654,7 @@ bool Player::update(float time)
 
 void Player::performActionCritPart(Vector goal, WorldObject* goalobj)
 {
-	if (getAction()->m_type == Action::TAKE_ITEM)
+	if (getAction()->m_type == "take_item")
 	{
 		DEBUG5("take item");
 		// Item suchen
@@ -1824,7 +1928,7 @@ void Player::calcBaseAttrMod()
 	// Faehigkeiten anwenden
 
 	// Faehigkeit ausweichen
-	if (checkAbility(Action::EVADE))
+	if (checkAbility("evade"))
 	{
 		getBaseAttrMod()->m_block += getBaseAttrMod()->m_dexterity;
 	}
@@ -1843,7 +1947,7 @@ void Player::calcBaseAttrMod()
 	}
 
 	// Faehigkeit Blocken
-	if (checkAbility(Action::BLOCK))
+	if (checkAbility("block"))
 	{
 		getBaseAttrMod()->m_block += (short) (0.3f*getBaseAttrMod()->m_block);
 	}
@@ -2098,7 +2202,6 @@ void Player::toSavegame(CharConv* cv)
 {
 	
 	
-	int i;
 	// Version richtig setzen
 	cv->toBuffer((short) World::getVersion());
 	
@@ -2140,15 +2243,18 @@ void Player::toSavegame(CharConv* cv)
 	cv->toBuffer(getDynAttr()->m_experience);
 	cv->printNewline();
 	
-	for (i=0;i<6;i++)
+	cv->toBuffer<short>(getBaseAttr()->m_abilities.size());
+	cv->printNewline();
+	std::set<std::string>::iterator jt;
+	for (jt= getBaseAttr()->m_abilities.begin(); jt != getBaseAttr()->m_abilities.end(); ++jt)
 	{
-		cv->toBuffer(getBaseAttr()->m_abilities[i]);
+		cv->toBuffer(*jt);
 	}
 	cv->printNewline();
 	
-	cv->toBuffer((short) m_base_action);
-	cv->toBuffer((short) m_left_action);
-	cv->toBuffer((short) m_right_action);
+	cv->toBuffer( m_base_action);
+	cv->toBuffer(m_left_action);
+	cv->toBuffer( m_right_action);
 	cv->printNewline();
 	
 	cv->toBuffer(m_revive_position.first);
@@ -2202,8 +2308,10 @@ void Player::fromSavegame(CharConv* cv, bool local)
 	cv->fromBuffer<short>(version);
 
 	cv->fromBuffer(getSubtype());
+	init();
+	
 	cv->fromBuffer(m_name);
-	cv->fromBuffer(m_look);
+	cv->fromBuffer(m_look);	
 	
 	cv->fromBuffer(getBaseAttr()->m_level);
 	cv->fromBuffer<float>(getBaseAttr()->m_max_health);
@@ -2236,20 +2344,21 @@ void Player::fromSavegame(CharConv* cv, bool local)
 	cv->fromBuffer<float>(getBaseAttr()->m_max_experience);
 	cv->fromBuffer<float>(getDynAttr()->m_experience);
 
-	for (int i=0;i<6;i++)
+	short anr;
+	cv->fromBuffer(anr);
+	Action::ActionType type;
+	getBaseAttr()->m_abilities.clear();
+	for (int i=0; i<anr; i++)
 	{
-		cv->fromBuffer<int>(getBaseAttr()->m_abilities[i]);
+		cv->fromBuffer(type);
+		getBaseAttr()->m_abilities.insert(type);
 	}
 
 	DEBUG5("name %s class %s level %i",m_name.c_str(), getSubtype().c_str(), getBaseAttr()->m_level);
 	
-	short tmp;
-	cv->fromBuffer<short>(tmp);
-	m_base_action = (Action::ActionType) tmp;
-	cv->fromBuffer<short>(tmp);
-	m_left_action = (Action::ActionType) tmp;
-	cv->fromBuffer<short>(tmp);
-	m_right_action = (Action::ActionType) tmp;
+	cv->fromBuffer( m_base_action);
+	cv->fromBuffer(m_left_action);
+	cv->fromBuffer( m_right_action);
 	
 	cv->fromBuffer(m_revive_position.first);
 	cv->fromBuffer(m_revive_position.second);
@@ -2503,3 +2612,14 @@ std::string Player::getActionString()
 	
 	return ret;
 }
+
+void Player::insertLearnableAbility(Action::ActionType type, Vector position, int tab)
+{
+	int id = m_learnable_abilities.size();
+	m_learnable_abilities[id].m_type = type;
+	m_learnable_abilities[id].m_skilltree_position = position;
+	m_learnable_abilities[id].m_id = id;
+	m_learnable_abilities[id].m_skilltree_tab = tab;
+	
+}
+

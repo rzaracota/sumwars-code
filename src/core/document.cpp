@@ -68,7 +68,7 @@ Document::Document()
 	getGUIState()->m_cursor_item_id =0;
 	getGUIState()->m_right_mouse_pressed_time=0;
 	getGUIState()->m_left_mouse_pressed_time=0;
-	getGUIState()->m_hover_ability = Action::NOACTION;
+	getGUIState()->m_hover_ability = "noaction";
 	getGUIState()->m_prefer_right_skill = false;
 	
 	// Pointer/Inhalte mit 0 initialisieren
@@ -486,8 +486,6 @@ void Document::onLeftMouseButtonClick(Vector pos)
 
 	DEBUG4("angeklickte Koordinaten: %f %f",pos.m_x,pos.m_y);
 
-	//TODO: suchen welches objekt angeklickt wurde
-
 	m_gui_state.m_clicked_object_id=0;
 	command.m_id=0;
 
@@ -516,7 +514,7 @@ void Document::onLeftMouseButtonClick(Vector pos)
 	if (command.m_id ==0 && m_gui_state.m_cursor_item_id!=0)
 	{
 		// Item angeklickt
-		command.m_action = Action::TAKE_ITEM;
+		command.m_action = "take_item";
 		command.m_id = m_gui_state.m_cursor_item_id;
 
 		DEBUG5("clicked at item %i",m_gui_state.m_cursor_item_id);
@@ -688,7 +686,7 @@ void Document::learnAbility(Action::ActionType act)
 {
 	ClientCommand command;
 	command.m_button = BUTTON_LEARN_ABILITY;
-	command.m_id = act;
+	command.m_action = act;
 	sendCommand(&command);
 }
 
@@ -714,7 +712,7 @@ void Document::onDropItemClick(int id)
 {
 	ClientCommand command;
 	command.m_button=LEFT_MOUSE_BUTTON;
-	command.m_action = Action::TAKE_ITEM;
+	command.m_action = "take_item";
 	command.m_id = id;
 	
 	// Paket an den Server senden
@@ -725,7 +723,7 @@ void Document::onAnswerClick(int id)
 {
 	ClientCommand command;
 	command.m_button=BUTTON_ANSWER;
-	command.m_action = Action::SPEAK_ANSWER;
+	command.m_action = "speak_answer";
 	command.m_id = id;
 	
 	// Paket an den Server senden
@@ -1078,14 +1076,14 @@ void Document::setLeftAction(Action::ActionType act)
 	}
 
 	// passive Faehigkeiten koennen nicht auf Maustasten gelegt werden
-	if (aci->m_distance == Action::PASSIVE)
+	if (aci->m_target_type == Action::PASSIVE)
 		return;
 
 	// Faehigkeiten die nicht auf einfachen Angriffen beruhen koennen nicht auf die linke Maustaste gelegt werden
-	if (aci->m_base_action== Action::NOACTION)
+	if (aci->m_base_action== "noaction")
 		return;
 
-	DEBUG5("Setting Action %i",act);
+	DEBUG5("Setting Action %s",act.c_str());
 	m_gui_state.m_left_mouse_pressed = false;
 
 
@@ -1114,11 +1112,11 @@ void Document::setRightAction(Action::ActionType act)
 	}
 
 	// passive Faehigkeiten koennen nicht auf Maustasten gelegt werden
-	if (aci->m_distance == Action::PASSIVE)
+	if (aci->m_target_type == Action::PASSIVE)
 		return;
 
 
-	DEBUG5("Setting Action %i",act);
+	DEBUG5("Setting Action %s",act.c_str());
 	m_gui_state.m_right_mouse_pressed = false;
 
 	ClientCommand command;
@@ -1139,7 +1137,11 @@ std::string Document::getAbilityDescription(Action::ActionType ability)
 	{
 		// Struktur mit Informationen zur Aktion
 		Action::ActionInfo* aci = Action::getActionInfo(ability);
-
+		if (aci == 0)
+		{
+			out_stream << "no information on ability "<< ability;
+			return out_stream.str();
+		}
 		// Name der Faehigkeit
 		out_stream << Action::getName(ability);
 		
@@ -1166,7 +1168,7 @@ std::string Document::getAbilityDescription(Action::ActionType ability)
 		}
 
 		// Schaden
-		if (aci->m_distance == Action::MELEE || aci->m_distance == Action::RANGED)
+		if (aci->m_target_type == Action::MELEE || aci->m_target_type == Action::RANGED)
 		{
 			Damage dmg;
 			player->calcDamage(ability,dmg);
@@ -1201,25 +1203,27 @@ bool Document::onKeyPress(KeyCode key)
 		{
 			// Kurztaste einrichten
 			Action::ActionType act = getGUIState()->m_hover_ability;
-			if (act != Action::NOACTION && getLocalPlayer()->checkAbility(act))
+			if (act != "noaction" && getLocalPlayer()->checkAbility(act))
 			{
 				Action::ActionInfo* aci = Action::getActionInfo(act);
 			
 				bool left = true;
-				if (getGUIState()->m_prefer_right_skill || aci->m_distance == Action::PASSIVE || aci->m_base_action== Action::NOACTION)
+				if (getGUIState()->m_prefer_right_skill || aci->m_target_type == Action::PASSIVE || aci->m_base_action== "noaction")
 				{
 					left = false;
 				}
 				
 				if (left)
 				{
-					installShortkey(key,(ShortkeyDestination) (USE_SKILL_LEFT+act));
-					DEBUG5("left short key for action %i",act);
+					// TODO: Shortkeys fixen
+					//installShortkey(key,(ShortkeyDestination) (USE_SKILL_LEFT+act));
+					DEBUG5("left short key for action %s",act.c_str());
 				}
 				else
 				{
-					installShortkey(key,(ShortkeyDestination) (USE_SKILL_RIGHT+act));
-					DEBUG5("right short key for action %i",act);
+					// TODO: Shortkeys fixen
+					// installShortkey(key,(ShortkeyDestination) (USE_SKILL_RIGHT+act));
+					DEBUG5("right short key for action %s",act.c_str());
 				}
 				return true;
 			}
@@ -1272,6 +1276,8 @@ bool Document::onKeyPress(KeyCode key)
 		{
 			onItemRightClick(Equipement::SMALL_ITEMS + (dest-USE_POTION));
 		}
+		/*
+		// TODO: Shortkeys fixen
 		else if (dest>=USE_SKILL_LEFT && dest <USE_SKILL_RIGHT)
 		{
 			setLeftAction((Action::ActionType) (dest-USE_SKILL_LEFT));
@@ -1280,6 +1286,7 @@ bool Document::onKeyPress(KeyCode key)
 		{
 			setRightAction((Action::ActionType) (dest-USE_SKILL_RIGHT));
 		}
+		*/
 		else if(dest == SHOW_PARTYMENU)
 		{
 			onButtonPartyInfoClicked();

@@ -34,7 +34,7 @@ Monster::Monster( int id,MonsterBasicData& data)
 	: Creature(   id)
 {
 	
-	memcpy(getBaseAttr(),&data.m_base_attr, sizeof(data.m_base_attr));
+	*(getBaseAttr()) = data.m_base_attr;
 
 	setType(data.m_type);
 	setSubtype(data.m_subtype);
@@ -70,15 +70,7 @@ Monster::Monster( int id,MonsterBasicData& data)
 	getDynAttr()->m_health *= fak;
 	calcBaseAttrMod();
 	
-	m_base_action = Action::NOACTION;
-	for (int i = Action::ATTACK; i<= Action::HOLY_ATTACK; ++i)
-	{
-		if (checkAbility((Action::ActionType) i))
-		{
-			m_base_action = (Action::ActionType) i;
-		}
-	}
-	DEBUG5("base action %i",m_base_action);
+	m_base_action = "noaction";
 	
 }
 
@@ -122,14 +114,8 @@ bool Monster::init()
 		m_ai.m_mod_time[i]=0;
 	}
 	
-	m_base_action = Action::NOACTION;
-	for (int i = Action::ATTACK; i<= Action::HOLY_ATTACK; ++i)
-	{
-		if (checkAbility((Action::ActionType) i))
-		{
-			m_base_action = (Action::ActionType) i;
-		}
-	}
+	m_base_action = "noaction";
+	
 	clearNetEventMask();
 
 	return true;
@@ -331,7 +317,7 @@ void Monster::updateCommand()
 	
 	
 	// Kommando ermitteln
-	m_ai.m_command.m_type = Action::NOACTION;
+	m_ai.m_command.m_type = "noaction";
 	m_ai.m_command_value =0;
 
 	calcBestCommand();
@@ -346,7 +332,7 @@ void Monster::updateCommand()
 		cmd->m_goal_object_id = m_ai.m_command.m_goal_object_id;
 		cmd->m_range = m_ai.m_command.m_range;
 		
-		DEBUG5("calculated command %i",m_ai.m_command.m_type);
+		DEBUG5("calculated command %s",m_ai.m_command.m_type.c_str());
 		
 
 		addToNetEventMask(NetEvent::DATA_COMMAND);
@@ -364,48 +350,18 @@ void Monster::updateCommand()
 
 void Monster::calcBestCommand()
 {
-	int i,act;
-
+	Action::ActionType act;
 
 	if (!m_ai.m_goals->empty())
 	{
-		// Basisaktionen bewerten
-		for (act = Action::ATTACK;act<=Action::HOLY_ATTACK;act++)
+		std::set<std::string>::iterator it;
+		for (it = getBaseAttrMod()->m_abilities.begin(); it != getBaseAttrMod()->m_abilities.end(); ++it)
 		{
-			if (!checkAbility((Action::ActionType) act))
+			act = *it;
+			if (checkAbility( act))
 			{
-				// Faehigkeit steht nicht zur Verfuegung
-				continue;
-			}
-	
-	
-			// Kommando evaluieren
-			evalCommand((Action::ActionType) act);
-	
-	
-		}
-	
-		// Faehigkeiten bewerten
-		// Schleife ueber Faehigkeitengruppen
-		for (i=1;i<6;i++)
-		{
-			if (getBaseAttrMod()->m_abilities[i]!=0)
-			{
-				// Monster besitzt eine Faehigkeit aus der Gruppe
-	
-				// Schleife ueber die Faehigkeiten
-				for (act = i*32;act <(i+1)*32;act++)
-				{
-					if (!checkAbility((Action::ActionType) act))
-					{
-						// Faehigkeit steht nicht zur Verfuegung
-						continue;
-					}
-	
-	
-					// Kommando evaluieren
-					evalCommand((Action::ActionType) act);
-				}
+				// Kommando evaluieren
+				evalCommand(act);
 			}
 		}
 	}
@@ -413,7 +369,7 @@ void Monster::calcBestCommand()
 
 void Monster::evalCommand(Action::ActionType act)
 {
-	DEBUG5("evaluation command %i",act);
+	DEBUG5("evaluation command %s",act.c_str());
 	WorldObjectValueList::iterator it;
 	WorldObjectValueList* goal_list=0;
 	Creature* cgoal=0;
@@ -429,14 +385,19 @@ void Monster::evalCommand(Action::ActionType act)
 	bool ranged_move = false;;
 
 	Action::ActionInfo* aci = Action::getActionInfo(act);
-
+	if (aci == 0)
+	{
+		DEBUG("unknown action %s",act.c_str());
+		return;
+	}
+	
 	// Liste der Ziele festlegen
-	if (aci->m_distance == Action::MELEE)
+	if (aci->m_target_type == Action::MELEE)
 	{
 		// Nahkampfaktionen, Ziele sind alle Objekte im Sichtradius
 		goal_list =m_ai.m_goals;
 	}
-	else if (aci->m_distance == Action::RANGED)
+	else if (aci->m_target_type == Action::RANGED)
 	{
 		// Fernkamfangriff, Ziele sind alle Objekte die direkt Sichtbar sind
 		goal_list = m_ai.m_visible_goals;
@@ -447,17 +408,17 @@ void Monster::evalCommand(Action::ActionType act)
 			goal_list =m_ai.m_goals;
 		}
 	}
-	else if (aci->m_distance == Action::PASSIVE)
+	else if (aci->m_target_type == Action::PASSIVE)
 	{
 		// Passive Faehigkeiten werden nicht betrachtet
 		return;
 	}
-	else if (aci->m_distance == Action::SELF)
+	else if (aci->m_target_type == Action::SELF)
 	{
 		// Faehigkeit auf selbst, es gibt keine ziele
 		goal_list =&self;
 	}
-	else if (aci->m_distance == Action::PARTY || aci->m_distance == Action::PARTY_MULTI)
+	else if (aci->m_target_type == Action::PARTY || aci->m_target_type == Action::PARTY_MULTI)
 	{
 		// Faehigkeiten auf Verbuendete
 		goal_list = m_ai.m_allies;
@@ -492,7 +453,7 @@ void Monster::evalCommand(Action::ActionType act)
 			
 			
 			value =0;
-			if (aci->m_distance == Action::SELF || aci->m_distance == Action::PARTY || aci->m_distance == Action::PARTY_MULTI)
+			if (aci->m_target_type == Action::SELF || aci->m_target_type == Action::PARTY || aci->m_target_type == Action::PARTY_MULTI)
 			{
 				float extra_value =0;
 				extra_value += 2*(cbam.m_dstrength + cbam.m_dwillpower +  cbam.m_dmagic_power + cbam.m_ddexterity);
@@ -502,7 +463,7 @@ void Monster::evalCommand(Action::ActionType act)
 				extra_value += cbam.m_dwalk_speed / 50;
 				extra_value += cbam.m_dattack_speed / 20;
 				
-				if (aci->m_distance == Action::PARTY_MULTI)
+				if (aci->m_target_type == Action::PARTY_MULTI)
 				{
 					extra_value *= m_ai.m_allies->size();
 				}
@@ -516,7 +477,7 @@ void Monster::evalCommand(Action::ActionType act)
 				value = (dmg.getSumMinDamage()+dmg.getSumMaxDamage())/(dist+0.1);
 			}
 
-			if (aci->m_distance == Action::MELEE || ranged_move)
+			if (aci->m_target_type == Action::MELEE || ranged_move)
 			{
 				value *= 3/(3+dist);
 			}
@@ -526,14 +487,14 @@ void Monster::evalCommand(Action::ActionType act)
 
 			if (value > m_ai.m_command_value || takerand)
 			{
-				DEBUG5("set new command %i value %f",act,value);
+				DEBUG5("set new command %s value %f",act.c_str(),value);
 				
 				// aktuelle Aktion ist besser als alle vorher bewerteten
 				m_ai.m_command_value = value;
 				m_ai.m_command.m_type = act;
 				m_ai.m_command.m_goal =cgoal->getShape()->m_center;
 				m_ai.m_command.m_goal_object_id =cgoal->getId();
-				if (aci->m_distance == Action::MELEE)
+				if (aci->m_target_type == Action::MELEE)
 				{
 					m_ai.m_command.m_range = getBaseAttr()->m_attack_range;
 				}
@@ -544,7 +505,7 @@ void Monster::evalCommand(Action::ActionType act)
 								
 				if (ranged_move)
 				{
-					m_ai.m_command.m_type = Action::WALK;
+					m_ai.m_command.m_type = "walk";
 				}
 			}
 		}

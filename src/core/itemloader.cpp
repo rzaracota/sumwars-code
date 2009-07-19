@@ -296,9 +296,7 @@ void ItemLoader::loadItem(TiXmlNode* node)
 				
 				std::string type;
 				attr.getString("type",type);
-				
-				int act = Action::getActionType(type);
-				item_data->m_equip_effect->m_xabilities[act/32] |= 1<<(act%32);
+				item_data->m_equip_effect->m_xabilities.insert(type);
 			}
 			else if (!strcmp(child->Value(), "WeaponAttribute"))
 			{

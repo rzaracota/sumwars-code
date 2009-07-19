@@ -30,16 +30,6 @@ class SkillTree : public Window
 		virtual void updateTranslation();
 
 		
-		/**
-		 * \fn CEGUI::Window* getCEGUIWindow(int index)
-		 * \brief Gibt eines der vier zugrunde liegenden CEGUI Windows aus
-		 * \param index Nummer des Fensters
-		 */
-		CEGUI::Window* getCEGUIWindow(int index)
-		{
-			return m_windows[index];
-		}
-		
 	private:
 		/**
 		 * \fn bool onAbilityHover(const CEGUI::EventArgs& evt)
@@ -71,22 +61,22 @@ class SkillTree : public Window
 		 */
 		bool onSkillLearnMouseClicked(const CEGUI::EventArgs& evt);
 		
-		/**
-		 * \var Zeiger auf die 4 zugrunde liegenden Fenster
-		 */
-		CEGUI::Window* m_windows[4];
 		
 		/**
-		 * \var CEGUI::UVector2 m_skill_position[196]
-		 * \brief Position der Fenster fuer die Skills
-		 */
-		CEGUI::UVector2 m_skill_position[196];
-		
-			/**
 		 * \var OIS::Keyboard *m_keyboard
 		 * \brief Repraesentation der Tastatur
-			 */
+		 */
 		OIS::Keyboard *m_keyboard;
+		
+		/**
+		 * \var int m_player_id
+		 * \brief ID des Spielers
+		 */
+		int m_player_id;
+		
+		int m_nr_tabs;
+		
+		int m_nr_skills;
 };
 
 #endif

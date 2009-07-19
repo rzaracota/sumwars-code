@@ -15,7 +15,6 @@ SkillTree::SkillTree(Document* doc, OIS::Keyboard *keyboard)
 
 	// Bestandteile des Charakterfensters hinzufuegen
 	CEGUI::Window* label;
-	CEGUI::PushButton* button;
 	CEGUI::DefaultWindow* tab;
 
 	std::ostringstream outStream;
@@ -23,613 +22,152 @@ SkillTree::SkillTree(Document* doc, OIS::Keyboard *keyboard)
 	std::string lname,bname;
 	unsigned int act;
 	CEGUI::UVector2 pos;
-	m_skill_position[Action::ATTACK] = CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.05f));
-	m_skill_position[Action::RANGE_ATTACK] = CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.05f));
-	m_skill_position[Action::MAGIC_ATTACK] = CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.05f));
-	m_skill_position[Action::HOLY_ATTACK] = CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.05f));
 	
-	m_skill_position[Action::FIRE_BOLT] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.05f));
-	m_skill_position[Action::FIRE_STRIKE] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.25f));
-	m_skill_position[Action::FIRE_WAVE] = CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.65f));
-	m_skill_position[Action::FIRE_STORM] = CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.85f));
-	m_skill_position[Action::FIRE_BALL] = CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.25f));
-	m_skill_position[Action::INFERNO_BALL] = CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.45f));
-	m_skill_position[Action::FIRE_WALL] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.65f));
-	m_skill_position[Action::INFLAME] = CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.45f));
+	m_player_id =0;
 	
-	m_skill_position[Action::ICE_BOLT] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.05f));
-	m_skill_position[Action::ICE_SPIKE] = CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.25f));
-	m_skill_position[Action::SNOW_STORM] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.65f));
-	m_skill_position[Action::BLIZZARD] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.85f));
-	m_skill_position[Action::ICE_RING] = CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.25f));
-	m_skill_position[Action::FROST_RING] = CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.65f));
-	m_skill_position[Action::FREEZE] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.25f));
-	m_skill_position[Action::CHILL] = CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.45f));
+	CEGUI::TabControl* skilltree = (CEGUI::TabControl*) win_mgr.createWindow("TaharezLook/TabControl", "Skilltree");
+	m_window = skilltree;
+	skilltree->setPosition(CEGUI::UVector2(cegui_reldim(0.52f), cegui_reldim( 0.0f)));
+	skilltree->setSize(CEGUI::UVector2(cegui_reldim(0.48f), cegui_reldim( 0.77f)));
+	skilltree->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&Window::consumeEvent,  (Window*) this));
+	skilltree->setWantsMultiClickEvents(false);
+	skilltree->setAlpha(0.7);
 	
-	m_skill_position[Action::LIGHTNING] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.05f));
-	m_skill_position[Action::LIGHTNING_STRIKE] = CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.25f));
-	m_skill_position[Action::THUNDERSTORM] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.45f));
-	m_skill_position[Action::THUNDERSTORM2] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.85f));
-	m_skill_position[Action::CHAIN_LIGHTNING] = CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.25f));
-	m_skill_position[Action::CHAIN_LIGHTNING2] = CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.45f));
-	m_skill_position[Action::STATIC_SHIELD] = CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.65f));
-	m_skill_position[Action::IONISATION] = CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.45f));
-
-	m_skill_position[Action::BASH] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.05f));
-	m_skill_position[Action::HAMMER_BASH] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.45f));
-	m_skill_position[Action::AROUND_BLOW] = CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.25f));
-	m_skill_position[Action::WHIRL_BLOW] = CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.65f));
-	m_skill_position[Action::SMASH] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.65f));
-	m_skill_position[Action::HATE_MAGE] = CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.25f));
-	m_skill_position[Action::CHARGE] = CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.45f));
-	m_skill_position[Action::STORM_CHARGE] = CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.85f));
-	
-	m_skill_position[Action::BLOCK] = CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.25f));
-	m_skill_position[Action::STEADFAST] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.05f));
-	m_skill_position[Action::MONSTER_HUNTER] = CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.25f));
-	m_skill_position[Action::MONSTER_SLAYER] = CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.65f));
-	m_skill_position[Action::ENDURANCE] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.85f));
-	m_skill_position[Action::WEAPONMASTER] = CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.45f));
-	
-	m_skill_position[Action::FIRESWORD] = CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.25f));
-	m_skill_position[Action::FLAMESWORD] = CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.65f));
-	m_skill_position[Action::FLAMEARMOR] = CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.45f));
-	m_skill_position[Action::BERSERK] = CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.25f));
-	m_skill_position[Action::WARCRY] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.85f));
-	m_skill_position[Action::REGENERATE] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.25f));
-	m_skill_position[Action::DECOY] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.05f));
-	m_skill_position[Action::SCARE] = CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.45f));
-	m_skill_position[Action::ANGER] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.45f));
-	m_skill_position[Action::FURY] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.65f));
-	
-	m_skill_position[Action::TRIPLE_SHOT] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.05f));
-	m_skill_position[Action::GUIDED_TRIPLE_SHOT] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.45f));
-	m_skill_position[Action::MULTISHOT] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.25f));
-	m_skill_position[Action::VOLLEY_SHOT] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.65f));
-	m_skill_position[Action::PIERCE] = CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.05f));
-	m_skill_position[Action::WEAK_POINT] = CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.25f));
-	m_skill_position[Action::BLIND_RAGE] = CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.45f));
-	m_skill_position[Action::VACUUM] = CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.25f));
-	m_skill_position[Action::DEATH_ROULETTE] = CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.65f));
-	m_skill_position[Action::EXPLODING_ARROW] = CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.45f));
-	m_skill_position[Action::EXPLOSION_CASCADE] = CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.85f));
-	
-	m_skill_position[Action::EVADE] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.05f));
-	m_skill_position[Action::CRITICAL_STRIKE] = CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.25f));
-	m_skill_position[Action::CONCENTRATION] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.45f));
-	m_skill_position[Action::MENTAL_WALL] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.85f));
-	m_skill_position[Action::RESIST_ICE] = CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.25f));
-	m_skill_position[Action::RESIST_AIR] = CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.65f));
-	
-	m_skill_position[Action::AIMED_SHOT] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.05f));
-	m_skill_position[Action::BOW_SPIRIT] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.65f));
-	m_skill_position[Action::ICE_ARROWS] = CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.45f));
-	m_skill_position[Action::FREEZING_ARROWS] = CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.85f));
-	m_skill_position[Action::WIND_ARROWS] = CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.25f));
-	m_skill_position[Action::STORM_ARROWS] = CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.65f));
-	m_skill_position[Action::WIND_WALK] = CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.25f));
-	
-	m_skill_position[Action::HOLY_LIGHT] = CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.45f));
-	m_skill_position[Action::HOLY_FIRE] = CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.65f));
-	m_skill_position[Action::BURNING_RAGE] = CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.25f));
-	m_skill_position[Action::CURE_BLIND_MUTE] = CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.25f));
-	m_skill_position[Action:: CURE_BLIND_MUTE_PARTY] = CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.65f));
-	m_skill_position[Action::BLAZING_SHIELD] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.05f));
-	m_skill_position[Action::LIGHT_BEAM] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.25f));
-	m_skill_position[Action::BURNING_SUN] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.85f));
-	
-	m_skill_position[Action::BREAK_BINDING] = CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.45f));
-	m_skill_position[Action::DISRUPT_BINDING] = CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.85f));
-	m_skill_position[Action::MAGIC_SHIELD] = CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.25f));
-	m_skill_position[Action::CURE_POIS_BURN] = CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.25f));
-	m_skill_position[Action::CURE_POIS_BURN_PARTY] = CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.65f));
-	m_skill_position[Action::ACID] = CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.45f));
-	m_skill_position[Action::HEAL] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.05f));
-	m_skill_position[Action::HEAL_PARTY] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.45f));
-	
-	m_skill_position[Action::DIVINE_WIND] = CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.25f));
-	m_skill_position[Action::DIVINE_STORM] = CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.65f));
-	m_skill_position[Action::BLADE_STORM] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.05f));
-	m_skill_position[Action::CURE_CONF_BSRK] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.25f));
-	m_skill_position[Action::CURE_CONF_BSRK_PARTY] = CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim(0.65f));
-	m_skill_position[Action::HYPNOSIS] = CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.45f));
-	m_skill_position[Action::HYPNOSIS2] = CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.85f));
-	m_skill_position[Action::KEEN_MIND] = CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim(0.25f));
-	
-	
-	// Skilltree Magier
-	CEGUI::TabControl* skilltree_mage = (CEGUI::TabControl*) win_mgr.createWindow("TaharezLook/TabControl", "SkilltreeMage");
-	m_windows[0] = skilltree_mage;
-	
-	skilltree_mage->setPosition(CEGUI::UVector2(cegui_reldim(0.52f), cegui_reldim( 0.0f)));
-	skilltree_mage->setSize(CEGUI::UVector2(cegui_reldim(0.48f), cegui_reldim( 0.77f)));
-	skilltree_mage->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&Window::consumeEvent,  (Window*) this));
-	skilltree_mage->setWantsMultiClickEvents(false);
-	skilltree_mage->setAlpha(0.7);
-
-	// Tab Feuermagie
-	tab = (CEGUI::DefaultWindow*) win_mgr.createWindow("TaharezLook/TabContentPane", "SkilltreeMage_1");
-	skilltree_mage->addTab(tab);
-
-	name =Action::getActionInfo(Action::MAGIC_ATTACK)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setProperty("FrameEnabled", "true");
-	label->setProperty("BackgroundEnabled", "true");
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.05f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-	label->setID(Action::MAGIC_ATTACK);
-	label->setProperty("Image", "set:skills image:magic_attack");
-	label->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&SkillTree::onSkillMouseClicked, this));
-	label->subscribeEvent(CEGUI::Window::EventMouseEnters, CEGUI::Event::Subscriber(&SkillTree::onAbilityHover, this));
-
-	for (int i = Action::FIRE_BOLT; i <= Action::INFLAME; i++)
-	{
-		name =Action::getActionInfo((Action::ActionType) i)->m_enum_name;
-		lname = name;
-		label = win_mgr.createWindow("TaharezLook/StaticImage", lname.append( "Label") );
-		tab->addChildWindow(label);
-		label->setPosition(m_skill_position[i]);
-		label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-		
-		
-		pos = m_skill_position[i];
-		pos += CEGUI::UVector2(cegui_reldim(0.14f), cegui_reldim( 0.05f));
-		bname = name;
-		button = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", bname.append( "Button") ));
-		tab->addChildWindow(button);
-		button->setPosition(pos);
-		button->setSize(CEGUI::UVector2(cegui_reldim(0.07f), cegui_reldim( 0.05f)));
-	}
-
-	// Tab Eismagie
-	tab = (CEGUI::DefaultWindow*) win_mgr.createWindow("TaharezLook/TabContentPane", "SkilltreeMage_2");
-	skilltree_mage->addTab(tab);
-	
-	for (int i = Action::ICE_BOLT; i <= Action::CHILL; i++)
-	{
-		name =Action::getActionInfo((Action::ActionType) i)->m_enum_name;
-		lname = name;
-		label = win_mgr.createWindow("TaharezLook/StaticImage", lname.append( "Label") );
-		tab->addChildWindow(label);
-		label->setPosition(m_skill_position[i]);
-		label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-		
-		pos = m_skill_position[i];
-		pos += CEGUI::UVector2(cegui_reldim(0.14f), cegui_reldim( 0.05f));
-		bname = name;
-		button = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", bname.append( "Button") ));
-		tab->addChildWindow(button);
-		button->setPosition(pos);
-		button->setSize(CEGUI::UVector2(cegui_reldim(0.07f), cegui_reldim( 0.05f)));
-		
-	}
-
-
-	// Tab Luftmagie
-	tab = (CEGUI::DefaultWindow*) win_mgr.createWindow("TaharezLook/TabContentPane", "SkilltreeMage_3");
-	skilltree_mage->addTab(tab);
-	
-	for (int i = Action::LIGHTNING; i <= Action::IONISATION; i++)
-	{
-		name =Action::getActionInfo((Action::ActionType) i)->m_enum_name;
-		lname = name;
-		label = win_mgr.createWindow("TaharezLook/StaticImage", lname.append( "Label") );
-		tab->addChildWindow(label);
-		label->setPosition(m_skill_position[i]);
-		label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-		
-		pos = m_skill_position[i];
-		pos += CEGUI::UVector2(cegui_reldim(0.14f), cegui_reldim( 0.05f));
-		bname = name;
-		button = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", bname.append( "Button") ));
-		tab->addChildWindow(button);
-		button->setPosition(pos);
-		button->setSize(CEGUI::UVector2(cegui_reldim(0.07f), cegui_reldim( 0.05f)));
-	}
-	
-	// Label beschriften und verknuepfen
-
-	for (act =Action::FIRE_BOLT;act <=Action::IONISATION;act++)
-	{
-		name =Action::getActionInfo((Action::ActionType) act)->m_enum_name;
-		//lname =Action::getName((Action::ActionType) act);
-		//label = win_mgr.getWindow(name.append( "Label"));
-		label = win_mgr.getWindow(name + "Label");
-		label->setProperty("FrameEnabled", "true");
-		label->setProperty("BackgroundEnabled", "true");
-		label->setID(act);
-		label->setProperty("Image", "set:skills image:" + name);
-		label->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&SkillTree::onSkillMouseClicked, this));
-		label->subscribeEvent(CEGUI::Window::EventMouseEnters, CEGUI::Event::Subscriber(&SkillTree::onAbilityHover, this));
-
-		button = static_cast<CEGUI::PushButton*>(win_mgr.getWindow(name + "Button"));
-		button->setText("+");
-		button->setID(act);
-		button->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&SkillTree::onSkillLearnMouseClicked, this));
-	}
-
-
-	skilltree_mage->setVisible(false);
-
-
-	// Skilltree Krieger
-	CEGUI::TabControl* skilltree_warrior = (CEGUI::TabControl*) win_mgr.createWindow("TaharezLook/TabControl", "SkilltreeWarrior");
-	m_windows[1] = skilltree_warrior;
-
-	
-	skilltree_warrior->setPosition(CEGUI::UVector2(cegui_reldim(0.52f), cegui_reldim( 0.0f)));
-	skilltree_warrior->setSize(CEGUI::UVector2(cegui_reldim(0.48f), cegui_reldim( 0.77f)));
-	skilltree_warrior->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&SkillTree::consumeEvent,  (Window*) this));
-	skilltree_warrior->setWantsMultiClickEvents(false);
-	skilltree_warrior->setAlpha(0.7);
-
-
-	tab = (CEGUI::DefaultWindow*) win_mgr.createWindow("TaharezLook/TabContentPane", "SkilltreeWarrior_1");
-	skilltree_warrior->addTab(tab);
-
-
-	name =Action::getActionInfo(Action::ATTACK)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setProperty("FrameEnabled", "true");
-	label->setProperty("BackgroundEnabled", "false");
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.05f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-	label->setID(Action::ATTACK);
-	label->setProperty("Image", "set:skills image:attack");
-	label->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&SkillTree::onSkillMouseClicked, this));
-	label->subscribeEvent(CEGUI::Window::EventMouseEnters, CEGUI::Event::Subscriber(&SkillTree::onAbilityHover, this));
-
-	for (int i = Action::BASH; i <= Action::STORM_CHARGE; i++)
-	{
-		name =Action::getActionInfo((Action::ActionType) i)->m_enum_name;
-		lname = name;
-		label = win_mgr.createWindow("TaharezLook/StaticImage", lname.append( "Label") );
-		tab->addChildWindow(label);
-		label->setPosition(m_skill_position[i]);
-		label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-		
-		pos = m_skill_position[i];
-		pos += CEGUI::UVector2(cegui_reldim(0.14f), cegui_reldim( 0.05f));
-		bname = name;
-		button = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", bname.append( "Button") ));
-		tab->addChildWindow(button);
-		button->setPosition(pos);
-		button->setSize(CEGUI::UVector2(cegui_reldim(0.07f), cegui_reldim( 0.05f)));
-	}
-	
-
-	tab = (CEGUI::DefaultWindow*) win_mgr.createWindow("TaharezLook/TabContentPane", "SkilltreeWarrior_2");
-	skilltree_warrior->addTab(tab);
-
-	
-	for (int i = Action::BLOCK; i <= Action::WEAPONMASTER; i++)
-	{
-		name =Action::getActionInfo((Action::ActionType) i)->m_enum_name;
-		lname = name;
-		label = win_mgr.createWindow("TaharezLook/StaticImage", lname.append( "Label") );
-		tab->addChildWindow(label);
-		label->setPosition(m_skill_position[i]);
-		label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-		
-		pos = m_skill_position[i];
-		pos += CEGUI::UVector2(cegui_reldim(0.14f), cegui_reldim( 0.05f));
-		bname = name;
-		button = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", bname.append( "Button") ));
-		tab->addChildWindow(button);
-		button->setPosition(pos);
-		button->setSize(CEGUI::UVector2(cegui_reldim(0.07f), cegui_reldim( 0.05f)));
-	}
-	
-
-	tab = (CEGUI::DefaultWindow*) win_mgr.createWindow("TaharezLook/TabContentPane", "SkilltreeWarrior_3");
-	skilltree_warrior->addTab(tab);
-
-	
-	for (int i = Action::FIRESWORD; i <= Action::FURY; i++)
-	{
-		name =Action::getActionInfo((Action::ActionType) i)->m_enum_name;
-		lname = name;
-		label = win_mgr.createWindow("TaharezLook/StaticImage", lname.append( "Label") );
-		tab->addChildWindow(label);
-		label->setPosition(m_skill_position[i]);
-		label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-		
-		pos = m_skill_position[i];
-		pos += CEGUI::UVector2(cegui_reldim(0.14f), cegui_reldim( 0.05f));
-		bname = name;
-		button = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", bname.append( "Button") ));
-		tab->addChildWindow(button);
-		button->setPosition(pos);
-		button->setSize(CEGUI::UVector2(cegui_reldim(0.07f), cegui_reldim( 0.05f)));
-	}
-	
-	for (act =Action::BASH;act <=Action::FURY;act++)
-	{
-		name = Action::getActionInfo((Action::ActionType) act)->m_enum_name;
-		//lname = Action::getName((Action::ActionType) act);
-		//label = win_mgr.getWindow(name.append( "Label"));
-		label = win_mgr.getWindow(name + "Label");
-		label->setProperty("FrameEnabled", "true");
-		label->setProperty("BackgroundEnabled", "true");
-		label->setID(act);
-		label->setProperty("Image", "set:skills image:" + name);
-		label->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&SkillTree::onSkillMouseClicked, this));
-		label->subscribeEvent(CEGUI::Window::EventMouseEnters, CEGUI::Event::Subscriber(&SkillTree::onAbilityHover, this));
-
-		button = static_cast<CEGUI::PushButton*>(win_mgr.getWindow(name + "Button"));
-		button->setText("+");
-		button->setID(act);
-		button->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&SkillTree::onSkillLearnMouseClicked, this));
-		
-		
-	}
-
-	skilltree_warrior->setVisible(false);
-
-
-	// Skilltree Schuetze
-	CEGUI::TabControl* skilltree_archer = (CEGUI::TabControl*) win_mgr.createWindow("TaharezLook/TabControl", "SkilltreeArcher");
-	m_windows[2] = skilltree_archer;
-
-	
-	skilltree_archer->setPosition(CEGUI::UVector2(cegui_reldim(0.52f), cegui_reldim( 0.0f)));
-	skilltree_archer->setSize(CEGUI::UVector2(cegui_reldim(0.48f), cegui_reldim( 0.77f)));
-	skilltree_archer->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&SkillTree::consumeEvent, (Window*) this));
-	skilltree_archer->setWantsMultiClickEvents(false);
-	skilltree_archer->setAlpha(0.7);
-
-
-	tab = (CEGUI::DefaultWindow*) win_mgr.createWindow("TaharezLook/TabContentPane", "SkilltreeArcher_1");
-	skilltree_archer->addTab(tab);
-
-	name =Action::getActionInfo(Action::RANGE_ATTACK)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setProperty("FrameEnabled", "true");
-	label->setProperty("BackgroundEnabled", "true");
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.05f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-	label->setID(Action::RANGE_ATTACK);
-	label->setProperty("Image", "set:skills image:range_attack");
-	label->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&SkillTree::onSkillMouseClicked, this));
-	label->subscribeEvent(CEGUI::Window::EventMouseEnters, CEGUI::Event::Subscriber(&SkillTree::onAbilityHover, this));
-
-	
-	for (int i = Action::TRIPLE_SHOT; i <= Action::EXPLOSION_CASCADE; i++)
-	{
-		name =Action::getActionInfo((Action::ActionType) i)->m_enum_name;
-		lname = name;
-		label = win_mgr.createWindow("TaharezLook/StaticImage", lname.append( "Label") );
-		tab->addChildWindow(label);
-		label->setPosition(m_skill_position[i]);
-		label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-		
-		pos = m_skill_position[i];
-		pos += CEGUI::UVector2(cegui_reldim(0.14f), cegui_reldim( 0.05f));
-		bname = name;
-		button = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", bname.append( "Button") ));
-		tab->addChildWindow(button);
-		button->setPosition(pos);
-		button->setSize(CEGUI::UVector2(cegui_reldim(0.07f), cegui_reldim( 0.05f)));
-	}
-
-	// Tab passive Faehigkeiten
-	tab = (CEGUI::DefaultWindow*) win_mgr.createWindow("TaharezLook/TabContentPane", "SkilltreeArcher_2");
-	skilltree_archer->addTab(tab);
-
-	for (int i = Action::EVADE; i <= Action::RESIST_AIR; i++)
-	{
-		name =Action::getActionInfo((Action::ActionType) i)->m_enum_name;
-		lname = name;
-		label = win_mgr.createWindow("TaharezLook/StaticImage", lname.append( "Label") );
-		tab->addChildWindow(label);
-		label->setPosition(m_skill_position[i]);
-		label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-		
-		pos = m_skill_position[i];
-		pos += CEGUI::UVector2(cegui_reldim(0.14f), cegui_reldim( 0.05f));
-		bname = name;
-		button = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", bname.append( "Button") ));
-		tab->addChildWindow(button);
-		button->setPosition(pos);
-		button->setSize(CEGUI::UVector2(cegui_reldim(0.07f), cegui_reldim( 0.05f)));
-	}
-	
-	// Tab3 <hier Name einsetzen>
-	tab = (CEGUI::DefaultWindow*) win_mgr.createWindow("TaharezLook/TabContentPane", "SkilltreeArcher_3");
-	skilltree_archer->addTab(tab);
-	
-	for (int i = Action::AIMED_SHOT; i <= Action::WIND_WALK; i++)
-	{
-		name =Action::getActionInfo((Action::ActionType) i)->m_enum_name;
-		lname = name;
-		label = win_mgr.createWindow("TaharezLook/StaticImage", lname.append( "Label") );
-		tab->addChildWindow(label);
-		label->setPosition(m_skill_position[i]);
-		label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-		
-		pos = m_skill_position[i];
-		pos += CEGUI::UVector2(cegui_reldim(0.14f), cegui_reldim( 0.05f));
-		bname = name;
-		button = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", bname.append( "Button") ));
-		tab->addChildWindow(button);
-		button->setPosition(pos);
-		button->setSize(CEGUI::UVector2(cegui_reldim(0.07f), cegui_reldim( 0.05f)));
-	}
-	
-	for (act =Action::TRIPLE_SHOT;act <=Action::WIND_WALK;act++)
-	{
-		name =Action::getActionInfo((Action::ActionType) act)->m_enum_name;
-		//lname =Action::getName((Action::ActionType) act);
-		//label = win_mgr.getWindow(name.append( "Label"));
-		label = win_mgr.getWindow(name + "Label");
-		label->setProperty("FrameEnabled", "true");
-		label->setProperty("BackgroundEnabled", "true");
-		label->setID(act);
-		label->setProperty("Image", "set:skills image:" + name);
-		label->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&SkillTree::onSkillMouseClicked, this));
-		label->subscribeEvent(CEGUI::Window::EventMouseEnters, CEGUI::Event::Subscriber(&SkillTree::onAbilityHover, this));
-
-		button = static_cast<CEGUI::PushButton*>(win_mgr.getWindow(name + "Button"));
-		button->setText("+");
-		button->setID(act);
-		button->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&SkillTree::onSkillLearnMouseClicked, this));
-	}
-
-	skilltree_archer->setVisible(false);
-
-
-	// Skilltree Priester
-	CEGUI::TabControl* skilltree_priest = (CEGUI::TabControl*) win_mgr.createWindow("TaharezLook/TabControl", "SkilltreePriest");
-	m_windows[3] = skilltree_priest;
-
-	
-	skilltree_priest->setPosition(CEGUI::UVector2(cegui_reldim(0.52f), cegui_reldim( 0.0f)));
-	skilltree_priest->setSize(CEGUI::UVector2(cegui_reldim(0.48f), cegui_reldim( 0.77f)));
-	skilltree_priest->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&SkillTree::consumeEvent, (Window*) this));
-	skilltree_priest->setWantsMultiClickEvents(false);
-	skilltree_priest->setAlpha(0.7);
-
-
-	// Tab Lichtmagie
-	tab = (CEGUI::DefaultWindow*) win_mgr.createWindow("TaharezLook/TabContentPane", "SkilltreePriest_1");
-	skilltree_priest->addTab(tab);
-
-	name =Action::getActionInfo(Action::HOLY_ATTACK)->m_enum_name;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", name.append( "Label") );
-	tab->addChildWindow(label);
-	label->setProperty("FrameEnabled", "true");
-	label->setProperty("BackgroundEnabled", "true");
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim(0.05f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-	label->setID(Action::HOLY_ATTACK);
-	label->setProperty("Image", "set:skills image:holy_attack");
-	label->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&SkillTree::onSkillMouseClicked, this));
-	label->subscribeEvent(CEGUI::Window::EventMouseEnters, CEGUI::Event::Subscriber(&SkillTree::onAbilityHover, this));
-
-	for (int i = Action::HOLY_LIGHT; i <= Action::BURNING_SUN; i++)
-	{
-		name =Action::getActionInfo((Action::ActionType) i)->m_enum_name;
-		lname = name;
-		label = win_mgr.createWindow("TaharezLook/StaticImage", lname.append( "Label") );
-		tab->addChildWindow(label);
-		label->setPosition(m_skill_position[i]);
-		label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-		
-		pos = m_skill_position[i];
-		pos += CEGUI::UVector2(cegui_reldim(0.14f), cegui_reldim( 0.05f));
-		bname = name;
-		button = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", bname.append( "Button") ));
-		tab->addChildWindow(button);
-		button->setPosition(pos);
-		button->setSize(CEGUI::UVector2(cegui_reldim(0.07f), cegui_reldim( 0.05f)));
-	}
-	
-
-
-	// Tab Wassermagie
-	tab = (CEGUI::DefaultWindow*) win_mgr.createWindow("TaharezLook/TabContentPane", "SkilltreePriest_2");
-	skilltree_priest->addTab(tab);
-
-	for (int i = Action::BREAK_BINDING; i <= Action::HEAL_PARTY; i++)
-	{
-		name =Action::getActionInfo((Action::ActionType) i)->m_enum_name;
-		lname = name;
-		label = win_mgr.createWindow("TaharezLook/StaticImage", lname.append( "Label") );
-		tab->addChildWindow(label);
-		label->setPosition(m_skill_position[i]);
-		label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-		
-		pos = m_skill_position[i];
-		pos += CEGUI::UVector2(cegui_reldim(0.14f), cegui_reldim( 0.05f));
-		bname = name;
-		button = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", bname.append( "Button") ));
-		tab->addChildWindow(button);
-		button->setPosition(pos);
-		button->setSize(CEGUI::UVector2(cegui_reldim(0.07f), cegui_reldim( 0.05f)));
-		button->setText("+");
-	}
-
-	// Tab Windmagie
-	tab = (CEGUI::DefaultWindow*) win_mgr.createWindow("TaharezLook/TabContentPane", "SkilltreePriest_3");
-	skilltree_priest->addTab(tab);
-
-	for (int i = Action::DIVINE_WIND; i <= Action::KEEN_MIND; i++)
-	{
-		name =Action::getActionInfo((Action::ActionType) i)->m_enum_name;
-		lname = name;
-		label = win_mgr.createWindow("TaharezLook/StaticImage", lname.append( "Label") );
-		tab->addChildWindow(label);
-		label->setPosition(m_skill_position[i]);
-		label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
-		
-		pos = m_skill_position[i];
-		pos += CEGUI::UVector2(cegui_reldim(0.14f), cegui_reldim( 0.05f));
-		bname = name;
-		button = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", bname.append( "Button") ));
-		tab->addChildWindow(button);
-		button->setPosition(pos);
-		button->setSize(CEGUI::UVector2(cegui_reldim(0.07f), cegui_reldim( 0.05f)));
-	}
-	
-
-	for (act =Action::HOLY_LIGHT;act <=Action::KEEN_MIND;act++)
-	{
-		name =Action::getActionInfo((Action::ActionType) act)->m_enum_name;
-		label = win_mgr.getWindow(name + "Label");
-		label->setProperty("FrameEnabled", "true");
-		label->setProperty("BackgroundEnabled", "true");
-		label->setID(act);
-		label->setProperty("Image", "set:skills image:" + name);
-		label->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&SkillTree::onSkillMouseClicked, this));
-		label->subscribeEvent(CEGUI::Window::EventMouseEnters, CEGUI::Event::Subscriber(&SkillTree::onAbilityHover, this));
-
-		button = static_cast<CEGUI::PushButton*>(win_mgr.getWindow(name + "Button"));
-		button->setText("+");
-		button->setID(act);
-		button->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&SkillTree::onSkillLearnMouseClicked, this));
-	}
-
-	updateTranslation();
+	m_nr_tabs =0;
+	m_nr_skills =0;
 	
 }
 
 void SkillTree::update()
 {
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
+	Player* player = m_document->getLocalPlayer();
+	CEGUI::TabControl* skilltree = (CEGUI::TabControl*) win_mgr.getWindow("Skilltree");
+	
+	CEGUI::Window* wnd;
+	std::vector<CEGUI::DefaultWindow*> tabs(3);
 	CEGUI::Window* label;
 	CEGUI::PushButton* button;
+	std::stringstream stream;
+	
+	if (player->getId() != m_player_id)
+	{
+		m_player_id = player->getId();
+		DEBUG("new Player id %i",m_player_id);
+		
+		// alle bisherigen Tabs und Skills entfernen
+		
+		for (int i=0; i<m_nr_skills; i++)
+		{
+			stream.str("");
+			stream << "SkillImage"<<i;
+			wnd = win_mgr.getWindow(stream.str());
+			
+			wnd->getParent()->removeChildWindow(wnd);
+			win_mgr.destroyWindow(wnd);
+			
+			stream.str("");
+			stream << "SkillButton"<<i;
+			wnd = win_mgr.getWindow(stream.str());
+			
+			wnd->getParent()->removeChildWindow(wnd);
+			win_mgr.destroyWindow(wnd);
+		}
+		
+		for (int i=0; i<m_nr_tabs; i++)
+		{
+			stream.str("");
+			stream << "SkilltreeTab"<<i;
+			wnd = win_mgr.getWindow(stream.str());
+			
+			skilltree->removeTab(wnd->getID());
+			win_mgr.destroyWindow(wnd);
+		}
+		
+		// neue Tabs
+		// TODO: generisch ausprogrammieren
+		
+		m_nr_tabs =3;
+		for (int i=0; i<m_nr_tabs; i++)
+		{
+			stream.str("");
+			stream << "SkilltreeTab" << i;
+			
+			tabs[i] = (CEGUI::DefaultWindow*) win_mgr.createWindow("TaharezLook/TabContentPane", stream.str());
+			skilltree->addTab(tabs[i]);
+		}
+		
+		CEGUI::UVector2 pos;
+		std::string name,lname,bname;
+		Vector spos;
+		
+		DEBUG5("nr of abilities %i", player->getLearnableAbilities().size());
+		
+		std::map<int,LearnableAbility>::iterator it;
+		int cnt =0;
+		for (it = player->getLearnableAbilities().begin(); it != player->getLearnableAbilities().end(); ++it)
+		{
+			// Label mit dem Bild
+			DEBUG5("ability %s nr %i",it->second.m_type.c_str(),cnt);
+			stream.str("");
+			stream << "SkillImage"<<cnt;
+			label = win_mgr.createWindow("TaharezLook/StaticImage", stream.str());
+			tabs[it->second.m_skilltree_tab-1]->addChildWindow(label);
+			
+			spos = it->second.m_skilltree_position;
+			pos = CEGUI::UVector2(cegui_reldim(spos.m_x), cegui_reldim( spos.m_y));
+			label->setPosition(pos);
+			label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
+		
+			// Button zum Faehigkeit lernen
+			pos += CEGUI::UVector2(cegui_reldim(0.14f), cegui_reldim( 0.05f));
+			stream.str("");
+			stream << "SkillButton"<<cnt;
+			button = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", stream.str()));
+			tabs[it->second.m_skilltree_tab-1]->addChildWindow(button);
+			button->setPosition(pos);
+			button->setSize(CEGUI::UVector2(cegui_reldim(0.07f), cegui_reldim( 0.05f)));
+			
+			// beschriften und verknuepfen
+			label->setProperty("FrameEnabled", "true");
+			label->setProperty("BackgroundEnabled", "true");
+			label->setID(it->first);
+			label->setProperty("Image", "set:skills image:" + it->second.m_type);
+			label->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&SkillTree::onSkillMouseClicked, this));
+			label->subscribeEvent(CEGUI::Window::EventMouseEnters, CEGUI::Event::Subscriber(&SkillTree::onAbilityHover, this));
+
+			button->setText("+");
+			button->setID(it->first);
+			button->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&SkillTree::onSkillLearnMouseClicked, this));
+			
+			cnt ++;
+		}
+		
+		m_nr_skills = cnt;
+		
+		updateTranslation();
+	}
+	
 	std::ostringstream out_stream;
-
-	Player* player = m_document->getLocalPlayer();
-
-	// Enum Wert bei dem die Skillz des Spielers anfangen
-	int i=Action::BASH;
-	if (player->getSubtype() == "mage")
-		i = Action::FIRE_BOLT;
-	if (player->getSubtype() == "archer")
-		i= Action::TRIPLE_SHOT;
-	if (player->getSubtype() == "priest")
-		i= Action::HOLY_LIGHT;
-
+	std::map<int,LearnableAbility> &ablts = player->getLearnableAbilities();
 	bool vis;
+	Action::ActionType act;
 	
 	// Schleife ueber alle Skill labels
-	for (int j=i;j<i+24;j++)
+	for (int j=0;j<m_nr_skills;j++)
 	{
 		out_stream.str("");
-		out_stream << Action::getActionInfo((Action::ActionType) j)->m_enum_name << "Label";
+		out_stream << "SkillImage" << j;
 
 		// Label welches das Skillicon zeigt
 		label = win_mgr.getWindow(out_stream.str());
 
 		// Alpha Wert des Labels
 		float alpha = 0.2;
+		
+		act = ablts[j].m_type;
 
-
-		if (player->checkAbility((Action::ActionType) j))
+		if (player->checkAbility(act))
 		{
 			// Faehigkeit steht zur Verfuegung
 			alpha = 1.0;
@@ -645,16 +183,17 @@ void SkillTree::update()
 		}
 		
 		out_stream.str("");
-		out_stream << Action::getActionInfo((Action::ActionType) j)->m_enum_name << "Button";
+		out_stream << "SkillButton" << j;
 		
 		button = static_cast<CEGUI::PushButton*>(win_mgr.getWindow(out_stream.str()));
-		vis = player->checkAbilityLearnable((Action::ActionType) j) && (player->getSkillPoints()>0);
+		vis = player->checkAbilityLearnable(act) && (player->getSkillPoints()>0);
 		if (button->isVisible() != vis)
 		{
 			button->setVisible(vis);
 		}
 	}
 	
+	/*
 	// Markierer fuer Shortkeys einbauen
 	// Zaehler fuer die Fenster
 	static int acount =0;
@@ -665,7 +204,6 @@ void SkillTree::update()
 	int nr =0;
 	
 	CEGUI::Window *label2;
-	Action::ActionType act;
 	bool right;
 	std::string keyname;
 	int key;
@@ -762,103 +300,116 @@ void SkillTree::update()
 		label = win_mgr.getWindow(stream.str());
 		label->setVisible(false);
 	}
+	*/
 }
 
 
 void SkillTree::updateTranslation()
 {
+	
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-	CEGUI::DefaultWindow* tab;
+	std::vector<CEGUI::DefaultWindow*> tabs(m_nr_tabs);
 	
-	tab = (CEGUI::DefaultWindow*) win_mgr.getWindow("SkilltreeMage_1");
-	tab->setText((CEGUI::utf8*) gettext("Fire magic"));
+	std::stringstream stream;
 	
-	tab = (CEGUI::DefaultWindow*) win_mgr.getWindow("SkilltreeMage_2");
-	tab->setText((CEGUI::utf8*) gettext("Ice magic"));
+	for (int i=0; i<m_nr_tabs; i++)
+	{
+		stream.str("");
+		stream << "SkilltreeTab" << i;
+			
+		tabs[i] = (CEGUI::DefaultWindow*) win_mgr.getWindow(stream.str());
+	}
 	
-	tab = (CEGUI::DefaultWindow*) win_mgr.getWindow("SkilltreeMage_3");
-	tab->setText((CEGUI::utf8*) gettext("Air magic"));
+	// Ueberschriften der Tabs setzen
+	Player* player = m_document->getLocalPlayer();
+	//TODO: generisch ausprogrammieren
+	if (player->getSubtype()=="warrior")
+	{
+		tabs[0]->setText((CEGUI::utf8*) gettext("Fighting skills"));
+		tabs[1]->setText((CEGUI::utf8*) gettext("Passive skills"));
+		tabs[2]->setText((CEGUI::utf8*) gettext("Fighting spirit"));
 	
-	tab = (CEGUI::DefaultWindow*) win_mgr.getWindow("SkilltreeWarrior_1");
-	tab->setText((CEGUI::utf8*) gettext("Fighting skills"));
+	}
+	else if (player->getSubtype()=="mage")
+	{
+		tabs[0]->setText((CEGUI::utf8*) gettext("Fire magic"));
+		tabs[1]->setText((CEGUI::utf8*) gettext("Ice magic"));
+		tabs[2]->setText((CEGUI::utf8*) gettext("Air magic"));
+	}
+	else if (player->getSubtype()=="archer")
+	{
+		tabs[0]->setText((CEGUI::utf8*) gettext("Marksmanship"));
+		tabs[1]->setText((CEGUI::utf8*) gettext("Passive skills"));
+		tabs[2]->setText((CEGUI::utf8*) gettext("Hunter magic"));
+	}
+	else if (player->getSubtype()=="priest")
+	{
+		tabs[0]->setText((CEGUI::utf8*) gettext("Light Magic"));
+		tabs[1]->setText((CEGUI::utf8*) gettext("Water Magic"));
+		tabs[2]->setText((CEGUI::utf8*) gettext("Wind Magic"));
+	}
 	
-	tab = (CEGUI::DefaultWindow*) win_mgr.getWindow("SkilltreeWarrior_2");
-	tab->setText((CEGUI::utf8*) gettext("Passive skills"));
-	
-	tab = (CEGUI::DefaultWindow*) win_mgr.getWindow("SkilltreeWarrior_3");
-	tab->setText((CEGUI::utf8*) gettext("Fighting spirit"));
-	
-	
-	tab = (CEGUI::DefaultWindow*) win_mgr.getWindow("SkilltreeArcher_1");
-	tab->setText((CEGUI::utf8*) gettext("Marksmanship"));
-	
-	tab = (CEGUI::DefaultWindow*) win_mgr.getWindow("SkilltreeArcher_2");
-	tab->setText((CEGUI::utf8*) gettext("Passive skills"));
-	
-	tab = (CEGUI::DefaultWindow*) win_mgr.getWindow("SkilltreeArcher_3");
-	tab->setText((CEGUI::utf8*) gettext("Hunter magic"));
-	
-	
-	tab = (CEGUI::DefaultWindow*) win_mgr.getWindow("SkilltreePriest_1");
-	tab->setText((CEGUI::utf8*) gettext("Light Magic"));
-	
-	tab = (CEGUI::DefaultWindow*) win_mgr.getWindow("SkilltreePriest_2");
-	tab->setText((CEGUI::utf8*) gettext("Water Magic"));
-	
-	tab = (CEGUI::DefaultWindow*) win_mgr.getWindow("SkilltreePriest_3");
-	tab->setText((CEGUI::utf8*) gettext("Wind Magic"));
 }
 
 void SkillTree::updateAbilityTooltip(unsigned int pos)
 {
-
-	if (pos!=Action::NOACTION)
-	{
+	Player* player = m_document->getLocalPlayer();
+	std::map<int,LearnableAbility> &ablts = player->getLearnableAbilities();
+	
+	
 		DEBUG5("update tooltip for %i", pos);
 
 		CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 		CEGUI::Window* label;
 		std::ostringstream out_stream;
 		out_stream.str("");
-		out_stream << Action::getActionInfo((Action::ActionType) pos)->m_enum_name << "Label";
+		out_stream << "SkillImage" << pos;
 
 		label = win_mgr.getWindow(out_stream.str());
 
-		std::string tooltip = m_document->getAbilityDescription((Action::ActionType) pos);
+		std::string tooltip = m_document->getAbilityDescription(ablts[pos].m_type);
 
 		label->setTooltipText((CEGUI::utf8*) tooltip.c_str());
 
-	}
+	
 
 }
 
 bool SkillTree::onSkillMouseClicked(const CEGUI::EventArgs& evt)
 {
+	Player* player = m_document->getLocalPlayer();
+	std::map<int,LearnableAbility> &ablts = player->getLearnableAbilities();
+	
 	const CEGUI::MouseEventArgs& we =
 			static_cast<const CEGUI::MouseEventArgs&>(evt);
 	unsigned int id = we.window->getID();
 
 	if (we.button == CEGUI::LeftButton)
 	{
-		m_document->setLeftAction((Action::ActionType) id);
+		m_document->setLeftAction(ablts[id].m_type);
 	}
 
 	if (we.button == CEGUI::RightButton)
 	{
 		DEBUG5("right button pressed on skill %i",id);
-		m_document->setRightAction((Action::ActionType) id);
+		m_document->setRightAction(ablts[id].m_type);
 	}
+	
 	return true;
+	
 }
 
 bool SkillTree::onSkillLearnMouseClicked(const CEGUI::EventArgs& evt)
 {
+	Player* player = m_document->getLocalPlayer();
+	std::map<int,LearnableAbility> &ablts = player->getLearnableAbilities();
+	
 	const CEGUI::MouseEventArgs& we =
 			static_cast<const CEGUI::MouseEventArgs&>(evt);
 	unsigned int id = we.window->getID();
 	
 	// versuche Faehigkeit zu lernen
-	m_document->learnAbility((Action::ActionType) id);
+	m_document->learnAbility(ablts[id].m_type);
 	
 	return true;
 }
@@ -866,18 +417,22 @@ bool SkillTree::onSkillLearnMouseClicked(const CEGUI::EventArgs& evt)
 bool SkillTree::onAbilityHover(const CEGUI::EventArgs& evt)
 {
 
+	Player* player = m_document->getLocalPlayer();
+	std::map<int,LearnableAbility> &ablts = player->getLearnableAbilities();
+	
 	const CEGUI::MouseEventArgs& we =
 			static_cast<const CEGUI::MouseEventArgs&>(evt);
 	unsigned int id = we.window->getID();
 	DEBUG5("mouse entered Ability %i",id);
 	updateAbilityTooltip(id);
-	m_document->getGUIState()->m_hover_ability = (Action::ActionType) (id);
+	m_document->getGUIState()->m_hover_ability = ablts[id].m_type;
+	
 	return true;
 }
 
 bool SkillTree::onAbilityHoverLeave(const CEGUI::EventArgs& evt)
 {
-	m_document->getGUIState()->m_hover_ability = Action::NOACTION;
+	m_document->getGUIState()->m_hover_ability = "noaction";
 	return true;
 }
 
