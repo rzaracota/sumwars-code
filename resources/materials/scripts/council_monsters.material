@@ -18,6 +18,17 @@ material council_monsters
 				scroll 0 0
 				rotate 0
 			}
+			
+			texture_unit
+             {
+                texture konzil_monsters_ambient.png            
+                tex_coord_set 0
+                colour_op add
+                scale 1 1
+				scroll 0 0
+				rotate 0
+             }
+
 		}
 	}
 }
