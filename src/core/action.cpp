@@ -1638,7 +1638,7 @@ void Action::init()
 
 
 
-string Action::getName(ActionType type)
+std::string Action::getName(ActionType type)
 {
 	ActionInfo* aci = getActionInfo(type);
 	if (aci == 0)
@@ -1651,7 +1651,7 @@ string Action::getName(ActionType type)
 }
 
 
-string Action::getDescription(ActionType type)
+std::string Action::getDescription(ActionType type)
 {
 	ActionInfo* aci = getActionInfo(type);
 	if (aci == 0)

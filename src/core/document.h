@@ -191,14 +191,14 @@ class Document
 		 * \var m_chat_window_content
 		 * \brief Inhalt des Chat-Nachrichtenfensters
 		 */
-		string m_chat_window_content;
+		std::string m_chat_window_content;
 
 
 		/**
 		 * \var m_chat_sendline_content
 		 * \brief Inhalt der Chat-Eingabezeile
 	 	 */
-		string m_chat_sendline_content;
+		std::string m_chat_sendline_content;
 
 		 /**
 		 * \var m_left_mouse_pressed
@@ -327,18 +327,18 @@ class Document
 // Setter und Getter
 
 	/**
-	 * \fn void setSaveFile(string s)
+	 * \fn void setSaveFile(std::string s)
 	 * \brief Setzt den Name des Savefiles
 	 * \param s Name des Savefiles
 	 */
-	void setSaveFile(string s);
+	void setSaveFile(std::string s);
 	
 
 	/**
-	 * \fn string getSaveFile()
+	 * \fn std::string getSaveFile()
 	 * \brief Gibt den Name des Savefiles aus
 	 */
-	string getSaveFile()
+	std::string getSaveFile()
 	{
 		return m_save_file;
 	}
@@ -940,10 +940,10 @@ class Document
 		int m_modified;
 	
 		/**
-		* \var string m_save_file
+		 * \var std::string m_save_file
 		* \brief Dateiname des Savefiles
 		*/
-		string m_save_file;
+		std::string m_save_file;
 	
 		/**
 		* \var State m_state

@@ -15,6 +15,39 @@
 class Item;
 
 /**
+ * \struct AbilityInfo
+ * \brief Struktur fuer die Faehigkeiten eines Lebewesens
+ */
+struct AbilityInfo
+{
+	AbilityInfo()
+	{
+		m_timer_nr =-1;
+		m_time =0;
+		m_timer =0;
+	}
+	
+	
+	/**
+	 * \var int m_timer_nr
+	 * \brief Nummer des Timers, der bei benutzen der Aktion gestartet wird. Moegliche Werte sind 0,1,2. Wenn gleich -1, so wird der Standardtimer verwendet
+	 */
+	int m_timer_nr;
+
+	/**
+	 * \var float m_time
+	 * \brief Zeit in ms, die die Aktion ohne Modifikatoren in Anspruch nimmt. Wenn gleich 0, wird die Standardzeit verwendet
+	 */
+	float m_time;
+	
+	/**
+	 * \var float m_timer
+	 * \brief Gibt die Zeitdauer in ms an, die der Timer laeuft, der beim Benutzen dieser Aktion gestartet wird.
+	 */
+	float m_timer;
+};
+
+/**
  * \struct CreatureBaseAttr
  * \brief Struktor mit den Basisattributen einer Kreatur
  */
@@ -132,10 +165,10 @@ struct CreatureBaseAttr
 	short  m_attack_speed;
 	
 	/**
-	 * \var std::set<std::string> m_abilities;
+	 * \var std::set<std::string, AbilityInfo> m_abilities;
 	 * \brief Bitmaske die angibt, welche Fähigkeiten der Spieler benutzen kann.
 	 */
-	std::set<std::string> m_abilities;
+	std::map<std::string, AbilityInfo> m_abilities;
 	
 	/**
 	 * \var m_attack_range

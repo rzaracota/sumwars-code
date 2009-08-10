@@ -14,7 +14,7 @@ int main (int argc, char *argv[]) {
 	Application* app = new Application();
 
 	// Debugging: Kommandozeilen Parameter auslesen und Savefile setzen
-	string save;
+	std::string save;
 	#ifndef WIN32
 	if (argc>=2)
 	{

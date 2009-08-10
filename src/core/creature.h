@@ -40,6 +40,7 @@
 #include "itemlist.h"
 #include "creaturestruct.h"
 #include "dialogue.h"
+#include "action.h"
 // debugging
 #include <iostream>
 
@@ -54,7 +55,6 @@
  * 
  */
 
-// forward declaration
 /**
  * \class Creature
  * \brief Klasse fuer Lebewesen
@@ -653,6 +653,24 @@ protected:
 	 * \param flags Ausgabeparameter: Flags
 	 */
 	virtual void getFlags(std::set<std::string>& flags);
+	
+	/**
+	 * \fn int getTimerNr(Action::ActionType action)
+	 * \brief Gibt die Timernr fuer die angegebene Aktionaus
+	 */
+	int getTimerNr(Action::ActionType action);
+	
+	/**
+	 * \fn float getTimer(Action::ActionType action)
+	 * \brief Gibt aus, wie lange der Timer nach Ausfuehren der Aktion laeuft
+	 */
+	float getTimer(Action::ActionType action);
+	
+	/**
+	 * \fn float getActionTime(Action::ActionType action)
+	 * \brief Berechnet die Dauer einer Aktion
+	 */
+	float getActionTime(Action::ActionType action);
 	
 //Private stuff
 private:

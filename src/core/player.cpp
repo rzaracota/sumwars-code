@@ -158,11 +158,11 @@ bool Player::init()
 	bas->m_resistances_cap[2] =50;
 	bas->m_resistances_cap[3] =50;
 	bas->m_special_flags=0;
-	bas->m_abilities.insert("walk");
-	bas->m_abilities.insert("die");
-	bas->m_abilities.insert("dead");
-	bas->m_abilities.insert("take_item");
-	bas->m_abilities.insert("use");
+	bas->m_abilities["walk"].m_time=0;
+	bas->m_abilities["die"].m_time =0;
+	bas->m_abilities["dead"].m_time =0;
+	bas->m_abilities["take_item"].m_time =0;
+	bas->m_abilities["use"].m_time =0;
 	
 	fstat.m_last_attacker="";
 	fstat.m_last_attacked="";
@@ -207,7 +207,7 @@ bool Player::init()
 		insertLearnableAbility("anger",Vector(0.45,0.45),3);
 		insertLearnableAbility("fury",Vector(0.45,0.65),3);
 		
-		bas->m_abilities.insert("attack");
+		bas->m_abilities["attack"].m_time;
 		dyn->m_health = 200;
 		bas->m_max_health = 200;
 		bas->m_armor = 20;
@@ -270,7 +270,7 @@ bool Player::init()
 		insertLearnableAbility("storm_arrows",Vector(0.2,0.65),3);
 		insertLearnableAbility("wind_walk",Vector(0.7,0.25),3);
 		
-		bas->m_abilities.insert("range_attack");
+		bas->m_abilities["range_attack"].m_time=0;
 		dyn->m_health = 150;
 		bas->m_max_health = 150;
 		bas->m_armor = 15;
@@ -334,7 +334,7 @@ bool Player::init()
 		insertLearnableAbility("static_shield",Vector(0.7,0.65),3);
 		insertLearnableAbility("ionisation",Vector(0.7,0.45),3);
 		
-		bas->m_abilities.insert("magic_attack");
+		bas->m_abilities["magic_attack"].m_time=0;
 		dyn->m_health = 100;
 		bas->m_max_health = 100;
 		bas->m_armor = 15;
@@ -400,7 +400,7 @@ bool Player::init()
 		insertLearnableAbility("hypnosis2",Vector(0.7,0.85),3);
 		insertLearnableAbility("keen_mind",Vector(0.7,0.25),3);
 		
-		bas->m_abilities.insert("holy_attack");
+		bas->m_abilities["holy_attack"].m_time =0;
 		dyn->m_health = 200;
 		bas->m_max_experience = 100;
 		bas->m_level =1;
@@ -1385,7 +1385,7 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 					m_skill_points--;
 
 					// Bit fuer die Faehigkeit setzen
-					getBaseAttr()->m_abilities.insert(command->m_action);
+					getBaseAttr()->m_abilities[command->m_action].m_time=0;
 
 					DEBUG5("lerne Faehigkeit %s", command->m_action.c_str());
 
@@ -2245,12 +2245,16 @@ void Player::toSavegame(CharConv* cv)
 	
 	cv->toBuffer<short>(getBaseAttr()->m_abilities.size());
 	cv->printNewline();
-	std::set<std::string>::iterator jt;
+	std::map<std::string, AbilityInfo>::iterator jt;
 	for (jt= getBaseAttr()->m_abilities.begin(); jt != getBaseAttr()->m_abilities.end(); ++jt)
 	{
-		cv->toBuffer(*jt);
+		cv->toBuffer(jt->first);
+		cv->toBuffer(jt->second.m_timer_nr);
+		cv->toBuffer(jt->second.m_time);
+		cv->toBuffer(jt->second.m_timer);		
+		cv->printNewline();
 	}
-	cv->printNewline();
+	
 	
 	cv->toBuffer( m_base_action);
 	cv->toBuffer(m_left_action);
@@ -2348,10 +2352,17 @@ void Player::fromSavegame(CharConv* cv, bool local)
 	cv->fromBuffer(anr);
 	Action::ActionType type;
 	getBaseAttr()->m_abilities.clear();
+	int timer_nr;
+	float time, timer;
 	for (int i=0; i<anr; i++)
 	{
 		cv->fromBuffer(type);
-		getBaseAttr()->m_abilities.insert(type);
+		cv->fromBuffer(timer_nr);
+		cv->fromBuffer(time);
+		cv->fromBuffer(timer);		
+		getBaseAttr()->m_abilities[type].m_timer_nr = timer_nr;
+		getBaseAttr()->m_abilities[type].m_timer =timer;
+		getBaseAttr()->m_abilities[type].m_time = time;
 	}
 
 	DEBUG5("name %s class %s level %i",m_name.c_str(), getSubtype().c_str(), getBaseAttr()->m_level);

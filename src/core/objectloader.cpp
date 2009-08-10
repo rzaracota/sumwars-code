@@ -196,7 +196,7 @@ bool  ObjectLoader::loadMonster(TiXmlNode* node)
 							std::string anim,act;
 							Action::ActionType action;
 							attr.getString("type",act);
-							data->m_base_attr.m_abilities.insert(act);
+							data->m_base_attr.m_abilities[act].m_timer = 0;
 							
 						}
 						else if (!strcmp(child2->Value(), "Immunity"))

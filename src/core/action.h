@@ -38,8 +38,6 @@
 #include <map>
 #include <vector>
 
-using std::string;
-
 /**
  * \struct Action
  * \brief Beschreibt eine Aktion, welche eine Figur ausf&uuml;hren kann. Eine Aktion ist dabei die kleinste Einheit einer Handlung.
@@ -351,20 +349,20 @@ public:
 	}
 
 	/**
-	 * \fn static string getName(ActionType type)
+	 * \fn static std::string getName(ActionType type)
 	 * \brief Gibt zu einer Aktion den Namen aus
 	 * \param type die Aktion
 	 * \return Name der Aktion
 	 */
-	static string getName(ActionType type);
+	static std::string getName(ActionType type);
 	
 	/**
-	 * \fn static string getDescription(ActionType type)
+	 * \fn static std::string getDescription(ActionType type)
 	 * \brief Gibt zu einer Aktion die Beschreibung aus
 	 * \param type die Aktion
 	 * \return Beschreibung der Aktion
 	 */
-	static string getDescription(ActionType type);
+	static std::string getDescription(ActionType type);
 	
 	/**
 	 * \fn static ActionType getType(std::string name)

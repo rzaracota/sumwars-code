@@ -129,7 +129,7 @@ bool WorldLoader::loadRegion(TiXmlNode* node, RegionData* rdata)
 			}
 			else if (!strcmp(child->Value(), "ExitDirections"))
 			{
-				string boolstr;
+				std::string boolstr;
 				attr.getString("north",boolstr,"false");
 				rdata->m_exit_directions[NORTH] = (boolstr =="true");
 				attr.getString("south",boolstr,"false");

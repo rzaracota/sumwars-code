@@ -354,10 +354,10 @@ void Monster::calcBestCommand()
 
 	if (!m_ai.m_goals->empty())
 	{
-		std::set<std::string>::iterator it;
+		std::map<std::string, AbilityInfo>::iterator it;
 		for (it = getBaseAttrMod()->m_abilities.begin(); it != getBaseAttrMod()->m_abilities.end(); ++it)
 		{
-			act = *it;
+			act = it->first;
 			if (checkAbility( act))
 			{
 				// Kommando evaluieren

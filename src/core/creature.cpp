@@ -179,6 +179,66 @@ bool Creature::canBeAttacked()
 	return (getState() == STATE_ACTIVE && getDialogueId() == 0);
 }
 
+int Creature::getTimerNr(Action::ActionType action)
+{
+	std::map<std::string, AbilityInfo>::iterator it;
+	it = getBaseAttrMod()->m_abilities.find(action);
+	
+	if (it != getBaseAttrMod()->m_abilities.end())
+	{
+		// wenn gleich -1, so wird der Standardtimer verwendet
+		if (it->second.m_timer_nr != -1)
+			return it->second.m_timer_nr;
+		
+		Action::ActionInfo* aci = Action::getActionInfo(action);
+		if (aci ==0)
+			return 0;
+		
+		return aci->m_timer_nr;
+	}
+	return 0;
+}
+
+float Creature::getTimer(Action::ActionType action)
+{
+	std::map<std::string, AbilityInfo>::iterator it;
+	it = getBaseAttrMod()->m_abilities.find(action);
+	
+	if (it != getBaseAttrMod()->m_abilities.end())
+	{
+		// wenn gleich -1, so wird der Standardtimer verwendet
+		if (it->second.m_timer_nr != -1)
+			return it->second.m_timer;
+		
+		Action::ActionInfo* aci = Action::getActionInfo(action);
+		if (aci ==0)
+			return 0;
+		
+		return aci->m_timer;
+	}
+	return 0;
+}
+
+float Creature::getActionTime(Action::ActionType action)
+{
+	std::map<std::string, AbilityInfo>::iterator it;
+	it = getBaseAttrMod()->m_abilities.find(action);
+	
+	if (it != getBaseAttrMod()->m_abilities.end())
+	{
+		// wenn gleich 0, so wird der Standardtimer verwendet
+		if (it->second.m_time != 0)
+			return it->second.m_time;
+		
+		Action::ActionInfo* aci = Action::getActionInfo(action);
+		if (aci ==0)
+			return 0;
+		
+		return aci->m_standard_time;
+	}
+	return 0;	
+}
+
 void Creature::initAction()
 {
 	//wenn Idle Animation schon laeuft, laufen lassen
@@ -197,29 +257,29 @@ void Creature::initAction()
 	Action::ActionInfo* aci = Action::getActionInfo(m_action.m_type);
 
 	//Timer und Timerlaufzeit ermitteln
-	int timer =aci->m_timer_nr;
-	float time = aci->m_timer;
+	int timernr = getTimerNr(m_action.m_type);
+	float timer = getTimer(m_action.m_type);
 
-	DEBUG4("timer nr %i",timer);
+	DEBUG4("timer nr %i",timernr);
 
 	// Faehigkeit Ausdauer
-	if (checkAbility("endurande") && timer ==1)
+	if (checkAbility("endurance") && timer ==1)
 	{
 		DEBUG5("ausdauer");
 		// Timerlaufzeit um 15% verringern
-		time *= 0.85;
+		timer *= 0.85;
 	}
 
 
 	// Testen ob der benoetigte Timer frei ist
 	// Wenn der benoetigte Timer noch laeuft wird die Basisaktion ausgefuehrt
-	if (timer==1)
+	if (timernr==1)
 	{
 		if (m_timer1==0)
 		{
 			// Timer ist frei, Timer starten
-			m_timer1 = time;
-			m_timer1_max = time;
+			m_timer1 = timer;
+			m_timer1_max = timer;
 			addToNetEventMask(NetEvent::DATA_TIMER);
 		}
 		else
@@ -230,13 +290,13 @@ void Creature::initAction()
 
 		}
 	}
-	else if (timer==2)
+	else if (timernr==2)
 	{
 		if (m_timer2==0)
 		{
 			// Timer ist frei, Timer starten
-			m_timer2 = time;
-			m_timer2_max = time;
+			m_timer2 = timer;
+			m_timer2_max = timer;
 			addToNetEventMask( NetEvent::DATA_TIMER);
 		}
 		else
@@ -250,17 +310,17 @@ void Creature::initAction()
 	// Stumm behandeln
 	if (m_dyn_attr.m_status_mod_time[Damage::MUTE]>0 )
 	{
-				// Wenn die Aktion durch Stumm beeinfluss wird
+		// Wenn die Aktion durch Stumm beeinfluss wird
 		if (aci->m_flags & Action::MUTE_AFFECTED)
 		{
-					// Basisaktion verwenden
+			// Basisaktion verwenden
 			m_action.m_type = aci->m_base_action;
-			DEBUG("using Base Action due to mute");
+			DEBUG5("using Base Action due to mute");
 		}
 	}
 
 	// setzen der Standarddauer der Aktion
-	m_action.m_time = aci->m_standard_time;
+	m_action.m_time = getActionTime(m_action.m_type);
 
 	Action::ActionType baseact = Action::getActionInfo(m_action.m_type)->m_base_action;
 
@@ -273,8 +333,6 @@ void Creature::initAction()
 			speed *= getBaseAttr()->m_step_length/m_action.m_time;
 			setSpeed(speed);
 			
-			//collisionDetection(m_action.m_time);
-
 			DEBUG5("walk time %f walk speed %i",m_action.m_time,getBaseAttrMod()->m_walk_speed);
 			DEBUG5("pos %f %f speed %f %f",getShape()->m_center.m_x, getShape()->m_center.m_y, getSpeed().m_x,getSpeed().m_y);
 	}
@@ -521,7 +579,7 @@ void Creature::performAction(float &time)
 		// Wenn ein Zielobjekt existiert
 		if (goalobj !=0)
 		{
-			if (goalobj->getType()== "FIXED_OBJECT")
+			if (!goalobj->isCreature())
 			{
 				cgoal =0;
 				// Ziel existiert nicht mehr, evtl abbrechen
@@ -604,7 +662,7 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 	// Zielobjekt als Creature* pointer
 	// null, wenn das Objekt kein Lebewesen ist
 	Creature* cgoal =0;
-	if (goalobj!=0 && goalobj->getType() == "FIXED_OBJECT")
+	if (goalobj !=0 && !goalobj->isCreature())
 	{
 		cgoal =0;
 	}
@@ -723,7 +781,7 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 			// an alle einfachen Schaden austeilen
 			for (it=res.begin();it!=res.end();++it)
 			{
-				if ((*it)->getType() != "FIXED_OBJECT")
+				if ((*it)->isCreature())
 				{
 					cr = (Creature*) (*it);
 					cr->takeDamage(&m_damage);
@@ -742,7 +800,7 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 			// an alle Schaden austeilen
 			for (it=res.begin();it!=res.end();++it)
 			{
-				if ((*it)->getType() != "FIXED_OBJECT")
+				if ((*it)->isCreature())
 				{
 					cr = (Creature*) (*it);
 					cr->takeDamage(&m_damage);
@@ -760,7 +818,7 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 			// an alle Schaden austeilen
 			for (it=res.begin();it!=res.end();++it)
 			{
-				if ((*it)->getType() != "FIXED_OBJECT" && World::getWorld()->getRelation(getFraction(),(*it)->getFraction()) ==  HOSTILE)
+				if ((*it)->isCreature() && World::getWorld()->getRelation(getFraction(),(*it)->getFraction()) ==  HOSTILE)
 				{
 					cr = (Creature*) (*it);
 					cr->takeDamage(&m_damage);
@@ -780,7 +838,7 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 			// an alle Schaden austeilen
 			for (it=res.begin();it!=res.end();++it)
 			{
-				if ((*it)->getType() != "FIXED_OBJECT" && World::getWorld()->getRelation(getFraction(),(*it)->getFraction()) ==  HOSTILE)
+				if ((*it)->isCreature() && World::getWorld()->getRelation(getFraction(),(*it)->getFraction()) ==  HOSTILE)
 				{
 					cr = (Creature*) (*it);
 					cbam.m_dwalk_speed = -cr->getBaseAttrMod()->m_walk_speed/2;
@@ -1034,7 +1092,7 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 			{
 				if (World::getWorld()->getRelation(fr,(*it)) == WorldObject::ALLIED)
 				{
-					if ((*it)->getType() != "FIXED_OBJECT")
+					if ((*it)->isCreature())
 					{
 						cgoal = (Creature*) (*it);
 						cgoal->applyBaseAttrMod(&cbam);
@@ -1070,7 +1128,7 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 			{
 				if (World::getWorld()->getRelation(fr,(*it)) == WorldObject::ALLIED)
 				{
-					if ((*it)->getType() != "FIXED_OBJECT")
+					if ((*it)->isCreature())
 					{
 						cgoal = (Creature*) (*it);
 						cgoal->applyDynAttrMod(&cdam);
@@ -1096,7 +1154,7 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 			getRegion()->getObjectsInShape(&s, &res,LAYER_AIR,CREATURE,this);
 			for (it=res.begin();it!=res.end();++it)
 			{
-				if ((*it)->getType() != "FIXED_OBJECT" && World::getWorld()->getRelation(getFraction(),(*it)->getFraction()) ==  HOSTILE)
+				if ((*it)->isCreature() && World::getWorld()->getRelation(getFraction(),(*it)->getFraction()) ==  HOSTILE)
 				{
 					// Projektil Lichtstrahl fuer jedes Objekt erzeugen
 					goal = (*it)->getShape()->m_center;
@@ -1140,7 +1198,7 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 			for (it=res.begin();it!=res.end();++it)
 			{
 				// fuer alle Lebewesen ein Projektil heiliger Strahl erzeugen
-				if ((*it)->getType() != "FIXED_OBJECT" && World::getWorld()->getRelation(getFraction(),(*it)->getFraction()) ==  HOSTILE)
+				if ((*it)->isCreature() && World::getWorld()->getRelation(getFraction(),(*it)->getFraction()) ==  HOSTILE)
 				{
 					goal = (*it)->getShape()->m_center;
 					pr = new Projectile("DIVINE_BEAM",&m_damage, World::getWorld()->getValidProjectileId());
@@ -1166,7 +1224,7 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 			for (it=res.begin();it!=res.end();++it)
 			{
 				// Fuer alle Lebewesen ein Projektil Hypnose erzeugen
-				if ((*it)->getType() != "FIXED_OBJECT" && World::getWorld()->getRelation(getFraction(),(*it)->getFraction()) ==  HOSTILE)
+				if ((*it)->isCreature() && World::getWorld()->getRelation(getFraction(),(*it)->getFraction()) ==  HOSTILE)
 				{
 					goal = (*it)->getShape()->m_center;
 					pr = new Projectile("HYPNOSIS",&m_damage, World::getWorld()->getValidProjectileId());
@@ -1509,8 +1567,6 @@ void Creature::calcAction()
 		// Zielobjekt holen
 		goalobj = getRegion()->getObject(m_command.m_goal_object_id);
 
-
-
 		if (goalobj ==0)
 		{
 			// Zielobjekt existiert nicht mehr, abbrechen
@@ -1523,7 +1579,7 @@ void Creature::calcAction()
 		// Ziel muss aktiv sein
 		if (goalobj->getState() != STATE_ACTIVE)
 		{
-			DEBUG5("refused to interact with inactive objekt %i",m_command.m_goal_object_id);
+			DEBUG5("refused to interact with inactive object %i",m_command.m_goal_object_id);
 			m_action.m_type = "noaction";
 			m_action.m_elapsed_time =0;
 			clearCommand(false);
@@ -1537,9 +1593,9 @@ void Creature::calcAction()
 		dist = getShape()->getDistance(*(goalobj->getShape()));
 	}
 	
+	// Aktion Item aufheben
 	if (m_command.m_type == "take_item")
 	{
-		
 		DropItem* di = getRegion()->getDropItem(m_command.m_goal_object_id);
 		if (di ==0)
 		{
@@ -1857,7 +1913,7 @@ void Creature::calcWalkDir(Vector goal,WorldObject* goalobj)
 	Vector dir;
 
 	// wenn als Ziel ein Lebenwesen angegeben ist
-	if (goalobj !=0 && goalobj->getType() != "FIXED_OBJECT" )
+	if (goalobj !=0 && goalobj->isCreature() )
 	{
 		DEBUG5("using pot field of object %i",goalobj->getId());
 		Creature* cr = (Creature*) goalobj;
@@ -2025,8 +2081,6 @@ bool Creature::update (float time)
 		DEBUG("elapsed time %f all time %f",m_action.m_elapsed_time,	m_action.m_time);
 	}
 
-	float ptime = time;
-
 	DEBUG5("Update des Creatureobjekts [%i] wird gestartet", getId());
 	// interne Variable um Fehler zu speichern
 	bool result=true;
@@ -2089,6 +2143,7 @@ bool Creature::update (float time)
 			m_dyn_attr.m_status_mod_time[i] -= time;
 			if (m_dyn_attr.m_status_mod_time[i]<0)
 			{
+				// Statusmod beenden
 				m_dyn_attr.m_status_mod_time[i]=0;
 				// aktuelle Aktion abbrechen nach auslaufen von Berserker / verwirrt
 				// (da die Aktion idr ungewollt bzw ungeplant ist)
@@ -2181,7 +2236,7 @@ bool Creature::update (float time)
 			for (it=res.begin();it!=res.end();++it)
 			{
 				// Schaden austeilen
-				if ((*it)->getType() != "FIXED_OBJECT")
+				if ((*it)->isCreature())
 				{
 					cr = (Creature*) (*it);
 					cr->takeDamage(&d);
@@ -2271,13 +2326,6 @@ bool Creature::update (float time)
 
 						// Aktion ausfuehren
 						performAction(time);
-
-						if (ptime < 1000 && time > 1000)
-						{
-							DEBUG("prev time %f time set to %f",ptime, time);
-							ptime = time;
-						}
-
 
 					}
 				}
@@ -3500,7 +3548,7 @@ void Creature::applyBaseAttrMod(CreatureBaseAttrMod* mod, bool add)
 	m_base_attr_mod.m_walk_speed = std::max(m_base_attr_mod.m_walk_speed,(short) 200);
 	m_base_attr_mod.m_attack_speed = std::max(m_base_attr_mod.m_attack_speed,(short) 200);
 
-	// Resiszenzen dazu addieren
+	// Resistenzen dazu addieren
 	for (i=0;i<4;i++)
 	{
 		m_base_attr_mod.m_resistances[i] += mod->m_dresistances[i];
@@ -3512,7 +3560,7 @@ void Creature::applyBaseAttrMod(CreatureBaseAttrMod* mod, bool add)
 	std::set<std::string>::iterator it;
 	for (it = mod->m_xabilities.begin(); it != mod->m_xabilities.end(); ++it )
 	{
-		m_base_attr_mod.m_abilities.insert(*it);
+		m_base_attr_mod.m_abilities[*it].m_time =0;
 		addToNetEventMask(NetEvent::DATA_ABILITIES);
 	}
 
@@ -3813,10 +3861,13 @@ void Creature::toString(CharConv* cv)
 	cv->toBuffer(m_timer2_max);
 	
 	cv->toBuffer<short>(getBaseAttrMod()->m_abilities.size());
-	std::set<std::string>::iterator it;
+	std::map<std::string, AbilityInfo>::iterator it;
 	for (it= getBaseAttrMod()->m_abilities.begin(); it != getBaseAttrMod()->m_abilities.end(); ++it)
 	{
-		cv->toBuffer(*it);
+		cv->toBuffer(it->first);
+		cv->toBuffer(it->second.m_timer_nr);
+		cv->toBuffer(it->second.m_time);
+		cv->toBuffer(it->second.m_timer);		
 	}
 
 	cv->toBuffer(getSpeed().m_x);
@@ -3878,11 +3929,17 @@ void Creature::fromString(CharConv* cv)
 	cv->fromBuffer(nr);
 	Action::ActionType type;
 	getBaseAttrMod()->m_abilities.clear();
+	int timer_nr;
+	float time, timer;
 	for (int i=0; i<nr; i++)
 	{
 		cv->fromBuffer(type);
-		getBaseAttrMod()->m_abilities.insert(type);
-		
+		cv->fromBuffer(timer_nr);
+		cv->fromBuffer(time);
+		cv->fromBuffer(timer);		
+		getBaseAttrMod()->m_abilities[type].m_timer_nr = timer_nr;
+		getBaseAttrMod()->m_abilities[type].m_timer =timer;
+		getBaseAttrMod()->m_abilities[type].m_time = time;
 	}
 
 	Vector speed;
@@ -4042,10 +4099,13 @@ void Creature::writeNetEvent(NetEvent* event, CharConv* cv)
 	if (event->m_data & NetEvent::DATA_ABILITIES)
 	{
 		cv->toBuffer<short>(getBaseAttrMod()->m_abilities.size());
-		std::set<std::string>::iterator it;
+		std::map<std::string, AbilityInfo>::iterator it;
 		for (it= getBaseAttrMod()->m_abilities.begin(); it != getBaseAttrMod()->m_abilities.end(); ++it)
 		{
-			cv->toBuffer(*it);
+			cv->toBuffer(it->first);
+			cv->toBuffer(it->second.m_timer_nr);
+			cv->toBuffer(it->second.m_time);
+			cv->toBuffer(it->second.m_timer);		
 		}
 
 	}
@@ -4219,13 +4279,18 @@ void Creature::processNetEvent(NetEvent* event, CharConv* cv)
 	{
 		short nr;
 		cv->fromBuffer(nr);
+		int timer_nr;
+		float time, timer;
 		Action::ActionType type;
-		getBaseAttrMod()->m_abilities.clear();
 		for (int i=0; i<nr; i++)
 		{
 			cv->fromBuffer(type);
-			getBaseAttrMod()->m_abilities.insert(type);
-		
+			cv->fromBuffer(timer_nr);
+			cv->fromBuffer(time);
+			cv->fromBuffer(timer);		
+			getBaseAttrMod()->m_abilities[type].m_timer_nr = timer_nr;
+			getBaseAttrMod()->m_abilities[type].m_timer = timer;
+			getBaseAttrMod()->m_abilities[type].m_time = time;
 		}
 
 	}

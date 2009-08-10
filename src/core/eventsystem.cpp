@@ -1466,7 +1466,7 @@ int EventSystem::addSpeaker(lua_State *L)
 		
 		int speaker = int (lua_tonumber(L, 1));
 
-		string refname ="";
+		std::string refname ="";
 		if (argc>=1 && lua_isstring(L,1))
 		{
 			refname = lua_tostring(L,2);

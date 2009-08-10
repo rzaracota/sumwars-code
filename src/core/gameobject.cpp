@@ -137,13 +137,13 @@ void GameObject::fromString(CharConv* cv)
 	m_state = (State) ctmp;
 }
 
-string GameObject::getName()
+std::string GameObject::getName()
 {
 	return ObjectFactory::getObjectName(m_subtype);
 }
 
 
-string GameObject::getNameId()
+std::string GameObject::getNameId()
 {
 	std::ostringstream out_stream;
 

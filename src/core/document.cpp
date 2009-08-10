@@ -110,7 +110,7 @@ void Document::startGame(bool server)
 	m_state = LOAD_SAVEGAME;
 }
 
-void Document::setSaveFile(string s)
+void Document::setSaveFile(std::string s)
 {
 	std::fstream file(s.c_str(),std::ios::in| std::ios::binary);
 	if (file.is_open())
@@ -167,7 +167,7 @@ void Document::loadSavegame()
 {
 	// Savegame einlesen
 	DEBUG("lese savegame");
-	string fname = m_save_file;
+	std::string fname = m_save_file;
 	DEBUG5("savegame is %s",fname.c_str());
 
 	std::fstream file(fname.c_str(),std::ios::in| std::ios::binary);
