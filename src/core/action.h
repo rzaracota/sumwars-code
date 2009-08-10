@@ -37,6 +37,7 @@
 #include "geometry.h"
 #include <map>
 #include <vector>
+#include "../tinyxml/tinyxml.h"
 
 /**
  * \struct Action
@@ -386,6 +387,28 @@ public:
 	 */
 	void fromString(CharConv* cv);
 	
+	/**
+	 * \fn static void loadAbilities(TiXmlNode* node)
+	 * \brief Laedt die Faehigkeiten aus dem angegebenen XML Dokument
+	 * \param node XML Dokument
+	 */
+	static void loadAbilities(TiXmlNode* node);
+	
+	/**
+	 * \fn 	static void loadAbility(TiXmlNode* node)
+	 * \brief Laedt eine Faehigkeit aus dem angegebenen XML Knoten
+	 * \param node XML Knoten
+	 */
+	static void loadAbility(TiXmlNode* node);
+	
+	/**
+	 * \fn loadAbilityData(const char* pFilename);
+	 * \brief Liest die Daten zu einer Faehigkeit aus einer XML Datei
+	 * \param pFilename Name der XML Datei
+	 */
+	static bool loadAbilityData(const char* pFilename);
+	
+	static void toxml();
 
 	//Fields
 	/**

@@ -1,9 +1,11 @@
 #include "action.h"
+#include "elementattrib.h"
 
 std::map<Action::ActionType,Action::ActionInfo> Action::m_action_info;
 
 void Action::init()
 {
+	/*
 	DEBUG5("initialising actions");
 	Action::ActionInfo* a;
 
@@ -907,6 +909,7 @@ void Action::init()
 	a->m_name = "Ionisation";
 	a->m_description = "The mage has become one with the storm, leading to 20 percent extra damage from his lightning spells.";
 
+	
 	// Schuetze Faehigkeiten
 	a = &(Action::m_action_info["triple_shot"]);
 	a->m_timer_nr=1;
@@ -1270,6 +1273,7 @@ void Action::init()
 	a->m_name = "North Hunter";
 	a->m_description = "The archers good longterm relations with the spirits of wind and ice has caused his resistence and his maximum resistance of these elements to rise by 10 percent.";
 
+	
 	// Priester Faehigkeiten
 	a = &(Action::m_action_info["holy_light"]);
 	a->m_timer_nr=1;
@@ -1631,12 +1635,110 @@ void Action::init()
 	a->m_req_ability[2] = "noaction";
 	a->m_name = "Keen Mind";
 	a->m_description = "The priest increases everyones spellpower for a short time. Everyones spells will surely be more effective. With increasing willpower the priest can hold this effect longer.";
-
-
+*/
+	
 }
 
 
+bool Action::loadAbilityData(const char* pFilename)
+{
+	DEBUG("loading file: %s",pFilename);
+	TiXmlDocument doc(pFilename);
+	bool loadOkay = doc.LoadFile();
 
+	if (loadOkay)
+	{
+		loadAbilities(&doc);
+		return true;
+	}
+	else
+	{
+		DEBUG("Failed to load file %s", pFilename);
+		return false;
+	}
+}
+
+void Action::loadAbilities(TiXmlNode* node)
+{
+	TiXmlNode* child;
+	if (node->Type()==TiXmlNode::ELEMENT && !strcmp(node->Value(), "Ability"))
+	{
+		loadAbility(node);
+	}
+	else
+	{
+		for ( child = node->FirstChild(); child != 0; child = child->NextSibling())
+		{
+			loadAbilities(child);
+		}
+	}
+}
+
+void Action::loadAbility(TiXmlNode* node)
+{
+	ElementAttrib attr;
+	attr.parseElement(node->ToElement());
+	
+	ActionType type;
+	attr.getString("type", type);
+	
+	Action::ActionInfo* a;
+	Action::ActionInfo aa;
+	
+	a=&aa;
+	a = &(Action::m_action_info[type]);
+	attr.getString("name",a->m_name);
+	attr.getString("description",a->m_description);
+	attr.getString("base_ability",a->m_base_action,"noaction");
+	attr.getFloat("time",a->m_standard_time,1);
+	attr.getInt("timer_nr",a->m_timer_nr,0);
+	attr.getFloat("timer_value",a->m_timer,0);
+	attr.getFloat("critical_percent",a->m_critical_perc,0);
+	std::string target;
+	attr.getString("target_type",target,"melee");
+	if (target =="melee")
+		a->m_target_type = MELEE;	
+	else if (target =="ranged")
+		a->m_target_type = RANGED;	
+	else if (target =="self")
+		a->m_target_type = SELF;	
+	else if (target =="party")
+		a->m_target_type = PARTY;	
+	else if (target =="party_all")
+		a->m_target_type = PARTY_MULTI;	
+	else if (target =="passive")
+		a->m_target_type = PASSIVE;	
+	else
+	{
+		ERRORMSG("invalid target type for ability %s",type.c_str());
+	}
+	DEBUG5("ability %s %s %f %i %f %f %s %s",type.c_str(), a->m_name.c_str(), a->m_standard_time, a->m_timer_nr, a->m_timer, a->m_critical_perc, target.c_str(), a->m_base_action.c_str());
+		
+	TiXmlNode* child;
+	for ( child = node->FirstChild(); child != 0; child = child->NextSibling())
+	{
+		if (child->Type()==TiXmlNode::ELEMENT) 
+		{
+			attr.parseElement(child->ToElement());
+			
+			if (!strcmp(child->Value(), "Flag"))
+			{
+				attr.parseElement(child->ToElement());
+				std::string flag;
+				attr.getString("name",flag);
+				if (flag == "mute_affected")
+				{
+					a->m_flags |= MUTE_AFFECTED;
+				}
+				DEBUG5("  flag: %s",flag.c_str());
+			}
+			else if (child->Type()!=TiXmlNode::COMMENT)
+			{
+				DEBUG("unexpected element of <Ability>: %s",child->Value());
+			}
+		}
+	}
+}
 
 std::string Action::getName(ActionType type)
 {
@@ -1693,6 +1795,47 @@ void Action::fromString(CharConv* cv)
 	cv->fromBuffer(ctmp);
 	m_action_equip = (ActionEquip) ctmp;
 	cv->fromBuffer(m_elapsed_time);
+}
+
+
+
+void Action::toxml()
+{
+	TiXmlDocument doc;
+	
+	std::map<ActionType,ActionInfo>::iterator it;
+	TiXmlElement * elem;
+	TiXmlElement * elem2;
+	for (it = m_action_info.begin(); it != m_action_info.end(); ++it)
+	{
+		elem = new TiXmlElement("Ability");
+		elem->SetAttribute("type",it->first.c_str());
+		elem->SetAttribute("name",it->second.m_name.c_str());
+		elem->SetAttribute("description",it->second.m_description.c_str());
+		elem->SetDoubleAttribute("time",it->second.m_standard_time);
+		elem->SetDoubleAttribute("timer_nr",it->second.m_timer_nr);
+		elem->SetDoubleAttribute("timer_value",it->second.m_timer);
+		elem->SetAttribute("base_ability",it->second.m_base_action.c_str());
+		elem->SetDoubleAttribute("critical_percent",it->second.m_critical_perc);
+		if (it->second.m_target_type == MELEE)			
+			elem->SetAttribute("target_type","melee");
+		else if (it->second.m_target_type == RANGED)
+			elem->SetAttribute("target_type","ranged");
+		else if (it->second.m_target_type == PARTY)
+			elem->SetAttribute("target_type","party");
+		else if (it->second.m_target_type == PASSIVE)
+			elem->SetAttribute("target_type","passive");
+		else if (it->second.m_target_type == PARTY_MULTI)
+			elem->SetAttribute("target_type","party_all");
+		if (it->second.m_flags & MUTE_AFFECTED)
+		{
+			elem2 = new TiXmlElement("Flag");
+			elem2->SetAttribute("name","mute_affected");
+			elem->LinkEndChild(elem2);
+		}
+		doc.LinkEndChild(elem);
+	}
+	doc.SaveFile("../data/abilities/base_abilities.xml");
 }
 
 

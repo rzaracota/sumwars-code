@@ -342,6 +342,7 @@ bool Application::setupResources()
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../data/quests", "FileSystem", "quests");
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../save", "FileSystem", "Savegame");
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../data/items", "FileSystem", "items");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../data/abilities", "FileSystem", "abilities");
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../data/monsters", "FileSystem", "monsters");
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../data/objects", "FileSystem", "objects");
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../data/obj_templates", "FileSystem", "obj_templates");
@@ -543,7 +544,17 @@ bool Application::loadResources()
 
 	// Aktionen initialisieren
 	Action::init();
-	
+	files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("abilities","*.xml");
+	for (it = files->begin(); it != files->end(); ++it)
+	{
+		file = it->archive->getName();
+		file += "/";
+		file += it->filename;
+
+		Action::loadAbilityData(file.c_str());
+
+		updateStartScreen(0.25);
+	}
 
 
 

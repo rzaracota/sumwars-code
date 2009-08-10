@@ -1,0 +1,16 @@
+<!--
+<Ability type="string"
+	name="string"
+	description="string"
+	time="float"
+	timer_nr="int"			(default: 0)
+	timer_value="float"		(default: 0)
+	base_ability="string" 	(default:noaction)
+	target_type="self"
+	critical_perc=""		(default: 0)
+	>
+	moegliche Flags:
+		mute_affected
+	<Flag name="" />
+</Ability>
+-->
