@@ -6,6 +6,7 @@
 #include <list>
 #include <vector>
 #include "monsterbase.h"
+#include "playerbase.h"
 #include "action.h"
 #include "elementattrib.h"
 
@@ -47,6 +48,14 @@ class ObjectLoader
 	 */
 	static bool loadMonster(TiXmlNode* node);
 	
+	/**
+	 * \fn static bool loadCreatureBaseAttr(TiXmlNode* node, CreatureBaseAttr& attr)
+	 * \brief Laedt die Daten der Struktur aus dem Knoten
+	 * \param node XML Knoten
+	 * \param attr eingelesene Struktur
+	 **/
+	static bool loadCreatureBaseAttr(TiXmlNode* node, CreatureBaseAttr& attr);
+	
 	// neuer FixedObject loader
 	
 	/**
@@ -63,6 +72,19 @@ class ObjectLoader
 	 */
 	static bool loadFixedObject(TiXmlNode* node);
 	
+	/**
+	 * \fn loadPlayerData(const char* pFilename);
+	 * \brief Liest die Daten zu einer Spielerklasse aus einer XML Datei
+	 * \param pFilename Name der XML Datei
+	 */
+	static bool loadPlayerData(const char* pFilename);
+	
+	/**
+	 * \fn bool loadPlayerTiXmlNode* node)
+	 * \brief Liest die Daten zu einem Spielerklasse aus dem Knoten
+	 * \param node XML Knoten
+	 */
+	static bool loadPlayer(TiXmlNode* node);
 	private:
 	
 

@@ -313,6 +313,10 @@ void MainWindow::update(float time)
 		CEGUI::FrameWindow* char_create = (CEGUI::FrameWindow*) win_mgr.getWindow("CharCreate");
 		if (wflags & Document::CHAR_CREATE)
 		{
+			if (!char_create->isVisible())
+			{	
+				static_cast<CharCreate*>(m_sub_windows["CharCreate"])->updateClassList();
+			}
 			char_create->setVisible(true);
 		}
 		else

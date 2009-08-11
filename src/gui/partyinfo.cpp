@@ -276,26 +276,16 @@ void PartyInfo::update()
 		stream << nr;
 		
 		label = win_mgr.getWindow(stream.str());
-		if (pl->getSubtype() == "warrior")
+		PlayerBasicData* pdata = ObjectFactory::getPlayerData(pl->getSubtype());
+		if (pdata != 0)
 		{
-			stream.str(gettext("Warrior"));
+			stream.str(gettext(pdata->m_name.c_str()));
 		}
-		else if (pl->getSubtype() == "mage")
+		else
 		{
-			stream.str(gettext("Magician"));
+			stream.str("");
 		}
-		else if (pl->getSubtype() == "archer")
-		{
-			stream.str( gettext("Archer"));
-		}
-		else if (pl->getSubtype() == "priest")
-		{
-			stream.str(gettext("Priest"));
-		}
-		if (label->isVisible()!=true)
-		{
-			label->setVisible(true);
-		}
+		
 		if (label->getText() != (CEGUI::utf8*)  stream.str().c_str())
 		{
 			label->setText((CEGUI::utf8*)  stream.str().c_str());

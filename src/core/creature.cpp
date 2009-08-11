@@ -2650,7 +2650,11 @@ void Creature::calcDamage(Action::ActionType act,Damage& dmg)
 void Creature::calcBaseDamage(Action::ActionType act,Damage& dmg)
 {
 	// Basisaktion
-	Action::ActionType basact = Action::getActionInfo(act)->m_base_action;
+	Action::ActionInfo* aci = Action::getActionInfo(act);
+	if (aci == 0)
+		return;
+	
+	Action::ActionType basact = aci->m_base_action;
 	CreatureBaseAttr* basm = getBaseAttrMod();
 
 
@@ -3956,36 +3960,6 @@ bool Creature::checkAbility(Action::ActionType act)
 	return ( m_base_attr_mod.m_abilities.count(act) > 0 );
 }
 
-
-bool Creature::checkAbilityLearnable(Action::ActionType at)
-{
-	if (checkAbility(at))
-	{
-		// Faehigkeit ist schon erlernt
-		return false;
-	}
-
-	Action::ActionInfo* aci = Action::getActionInfo(at);
-	if (aci ==0)
-		return false;
-	
-	if (aci->m_req_level > m_base_attr.m_level)
-	{
-		// Levelvorraussetzung nicht erfuellt
-		return false;
-	}
-
-
-	for (int i=0;i<3;i++)
-	{
-		if (!checkAbility(aci->m_req_ability[i]))
-		{
-			// Faehigkeiten Vorraussetzung nicht erfuellt
-			return false;
-		}
-	}
-	return true;
-}
 
 float Creature::getTimerPercent(int timer)
 {

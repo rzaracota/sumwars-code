@@ -22,6 +22,8 @@
 #include "eventsystem.h"
 #include "itemfactory.h"
 
+#include "../tinyxml/tinyxml.h"
+
 PlayerCamera::PlayerCamera()
 {
 	m_distance = 20;
@@ -115,7 +117,6 @@ bool Player::init()
 	CreatureDynAttr* dyn = getDynAttr();
 	FightStatistic& fstat= getFightStatistic();
 	
-	m_network_slot=-1;
 	setType("PLAYER");
 	m_category = HUMAN;
 
@@ -124,10 +125,7 @@ bool Player::init()
 	setLayer(LAYER_BASE | LAYER_AIR);
 	getShape()->m_angle =0;
 
-	bas->m_step_length=1.5;
-	bas->m_attack_range=0.5;
-	bas->m_level=1;
-
+	
 	m_attribute_points=0;
 	m_skill_points=0;
 
@@ -137,32 +135,11 @@ bool Player::init()
 
 	m_equipement = new Equipement(5,14,30);
 	m_equipement->setGold(50);
-
+	
 	m_candidate_party = -1;
 	m_message_clear_timer =0;
 
-	// Attribute auf Basiswerte setzen
-	bas->m_abilities.clear();
-	
 	dyn->m_experience=0;
-	
-	bas->m_max_experience = 100;
-	bas->m_level =1;
-	bas->m_block=0;
-	bas->m_resistances[0] =0;
-	bas->m_resistances[1] =0;
-	bas->m_resistances[2] =0;
-	bas->m_resistances[3] =0;
-	bas->m_resistances_cap[0] =50;
-	bas->m_resistances_cap[1] =50;
-	bas->m_resistances_cap[2] =50;
-	bas->m_resistances_cap[3] =50;
-	bas->m_special_flags=0;
-	bas->m_abilities["walk"].m_time=0;
-	bas->m_abilities["die"].m_time =0;
-	bas->m_abilities["dead"].m_time =0;
-	bas->m_abilities["take_item"].m_time =0;
-	bas->m_abilities["use"].m_time =0;
 	
 	fstat.m_last_attacker="";
 	fstat.m_last_attacked="";
@@ -173,282 +150,64 @@ bool Player::init()
 	
 	m_using_waypoint = false;
 	
-	bool init = false;
 	
-	Item* si;
-	Equipement* equ = getEquipement();
-	if (getSubtype() == "warrior")
+	PlayerBasicData* pdata = ObjectFactory::getPlayerData(getSubtype());
+	if (pdata == 0)
+		return true;
+	
+	(*bas) = pdata->m_base_attr;
+	m_base_action = pdata->m_base_ability;
+	m_left_action = pdata->m_base_ability;
+	m_right_action = pdata->m_base_ability;
+	bas->m_abilities[pdata->m_base_ability].m_timer_nr = -1;
+	m_learnable_abilities = pdata->m_learnable_abilities;
+	
+	std::list<GameObject::Subtype>::iterator it;
+	Item* item;
+	for( it = pdata->m_start_items.begin(); it != pdata->m_start_items.end(); ++it)
 	{
-		insertLearnableAbility("attack",Vector(0.2,0.05),1);
-		insertLearnableAbility("bash",Vector(0.45,0.05),1);
-		insertLearnableAbility("hammer_bash",Vector(0.45,0.45),1);
-		insertLearnableAbility("around_blow",Vector(0.2,0.25),1);
-		insertLearnableAbility("whirl_blow",Vector(0.2,0.65),1);
-		insertLearnableAbility("smash",Vector(0.45,0.65),1);
-		insertLearnableAbility("hate_mage",Vector(0.7,0.25),1);
-		insertLearnableAbility("charge",Vector(0.7,0.45),1);
-		insertLearnableAbility("storm_charge",Vector(0.7,0.85),1);
-		
-		insertLearnableAbility("block",Vector(0.7,0.25),2);
-		insertLearnableAbility("steadfast",Vector(0.45,0.05),2);
-		insertLearnableAbility("monster_hunter",Vector(0.2,0.25),2);
-		insertLearnableAbility("monster_slayer",Vector(0.2,0.65),2);
-		insertLearnableAbility("endurance",Vector(0.45,0.85),2);
-		insertLearnableAbility("weaponmaster",Vector(0.7,0.45),2);
-		
-		insertLearnableAbility("firesword",Vector(0.7,0.25),3);
-		insertLearnableAbility("flamesword",Vector(0.7,0.65),3);
-		insertLearnableAbility("flamearmor",Vector(0.7,0.45),3);
-		insertLearnableAbility("berserk",Vector(0.2,0.25),3);
-		insertLearnableAbility("warcry",Vector(0.45,0.85),3);
-		insertLearnableAbility("regenerate",Vector(0.45,0.25),3);
-		insertLearnableAbility("decoy",Vector(0.45,0.05),3);
-		insertLearnableAbility("scare",Vector(0.2,0.45),3);
-		insertLearnableAbility("anger",Vector(0.45,0.45),3);
-		insertLearnableAbility("fury",Vector(0.45,0.65),3);
-		
-		bas->m_abilities["attack"].m_time;
-		dyn->m_health = 200;
-		bas->m_max_health = 200;
-		bas->m_armor = 20;
-		bas->m_attack = 30;
-		bas->m_power = 30;
-		bas->m_strength = 50;
-		bas->m_dexterity = 20;
-		bas->m_magic_power = 10;
-		bas->m_willpower = 20;
-		bas->m_walk_speed = 3000;
-		bas->m_attack_speed=2000;
-		
-		bas->m_attack_range =1;
-		
-		m_base_action = "attack";
-		m_left_action = "attack";
-		m_right_action = "attack";
-		init = true;
-
-		// Debugging
-		m_look = "warrior_m";
-		m_name.assign("Boromir");
-		//bas->m_abilities[1] = 0xffffff;
-		
-		m_gender = MALE;
-
-		si = ItemFactory::createItem(Item::WEAPON,"dagger_sw");
-		equ->swapItem(si,Equipement::WEAPON);
-
-		
+		item = ItemFactory::createItem(ItemFactory::getBaseType(*it),*it);
+		insertItem(item);
 	}
-	else if (getSubtype() == "archer")
-	{
-		
-		insertLearnableAbility("range_attack",Vector(0.2,0.05),1);
-		insertLearnableAbility("triple_shot",Vector(0.45,0.05),1);
-		insertLearnableAbility("guided_triple_shot",Vector(0.45,0.45),1);
-		insertLearnableAbility("multishot",Vector(0.45,0.25),1);
-		insertLearnableAbility("volley_shot",Vector(0.45,0.65),1);
-		insertLearnableAbility("pierce",Vector(0.7,0.05),1);
-		insertLearnableAbility("weak_point",Vector(0.2,0.25),1);
-		insertLearnableAbility("blind_rage",Vector(0.2,0.45),1);
-		insertLearnableAbility("vacuum",Vector(0.7,0.25),1);
-		insertLearnableAbility("death_roulette",Vector(0.2,0.65),1);
-		insertLearnableAbility("exploding_arrow",Vector(0.7,0.45),1);
-		insertLearnableAbility("exploding_cascade",Vector(0.7,0.85),1);
-		
-		insertLearnableAbility("evade",Vector(0.45,0.05),2);
-		insertLearnableAbility("critical_strike",Vector(0.2,0.25),2);
-		insertLearnableAbility("concentration",Vector(0.45,0.45),2);
-		insertLearnableAbility("mental_wall",Vector(0.45,0.85),2);
-		insertLearnableAbility("resist_ice",Vector(0.7,0.25),2);
-		insertLearnableAbility("resist_air",Vector(0.7,0.65),2);
-		
-		insertLearnableAbility("aimed_shot",Vector(0.45,0.05),3);
-		insertLearnableAbility("bow_spirit",Vector(0.45,0.65),3);
-		insertLearnableAbility("ice_arrows",Vector(0.7,0.45),3);
-		insertLearnableAbility("freezing_arrows",Vector(0.7,0.85),3);
-		insertLearnableAbility("wind_arrows",Vector(0.2,0.25),3);
-		insertLearnableAbility("storm_arrows",Vector(0.2,0.65),3);
-		insertLearnableAbility("wind_walk",Vector(0.7,0.25),3);
-		
-		bas->m_abilities["range_attack"].m_time=0;
-		dyn->m_health = 150;
-		bas->m_max_health = 150;
-		bas->m_armor = 15;
-		bas->m_attack = 30;
-		bas->m_power = 20;
-		bas->m_strength = 25;
-		bas->m_dexterity = 45;
-		bas->m_magic_power = 15;
-		bas->m_willpower = 15;
-		bas->m_walk_speed = 3000;
-		bas->m_attack_speed=1500;
-		bas->m_attack_range =20;
-		
-		m_look = "archer_f";
-		
-		bas->m_attack_range =20;
-		
-		m_base_action = "range_attack";
-		m_left_action = "range_attack";
-		m_right_action = "range_attack";
-		init = true;
-
-		m_gender = FEMALE;
-		
-		// Debugging
-		m_name.assign("Legolas");
-		//bas->m_abilities[2] = 0xffffff;
-
-		si = ItemFactory::createItem(Item::WEAPON,"pract_sbw");
-		equ->swapItem(si,Equipement::WEAPON);
-		
-		
-	}
-	else if (getSubtype() == "mage")
-	{
-		insertLearnableAbility("magic_attack",Vector(0.2,0.05),1);
-		insertLearnableAbility("fire_bolt",Vector(0.45,0.05),1);
-		insertLearnableAbility("fire_strike",Vector(0.45,0.25),1);
-		insertLearnableAbility("fire_wave",Vector(0.7,0.65),1);
-		insertLearnableAbility("fire_storm",Vector(0.7,0.85),1);
-		insertLearnableAbility("fire_ball",Vector(0.7,0.25),1);
-		insertLearnableAbility("inferno_ball",Vector(0.7,0.45),1);
-		insertLearnableAbility("fire_wall",Vector(0.45,0.65),1);
-		insertLearnableAbility("inflame",Vector(0.2,0.45),1);
-		
-		insertLearnableAbility("ice_bolt",Vector(0.45,0.05),2);
-		insertLearnableAbility("ice_spike",Vector(0.7,0.25),2);
-		insertLearnableAbility("snow_storm",Vector(0.45,0.65),2);
-		insertLearnableAbility("blizzard",Vector(0.45,0.85),2);
-		insertLearnableAbility("ice_ring",Vector(0.2,0.25),2);
-		insertLearnableAbility("frost_ring",Vector(0.2,0.65),2);
-		insertLearnableAbility("freeze",Vector(0.45,0.25),2);
-		insertLearnableAbility("chill",Vector(0.7,0.45),2);
-		
-		insertLearnableAbility("lightning",Vector(0.45,0.05),3);
-		insertLearnableAbility("lightning_strike",Vector(0.7,0.25),3);
-		insertLearnableAbility("thunderstorm",Vector(0.45,0.45),3);
-		insertLearnableAbility("thunderstorm2",Vector(0.45,0.85),3);
-		insertLearnableAbility("chain_lightning",Vector(0.2,0.25),3);
-		insertLearnableAbility("chain_lightning2",Vector(0.2,0.45),3);
-		insertLearnableAbility("static_shield",Vector(0.7,0.65),3);
-		insertLearnableAbility("ionisation",Vector(0.7,0.45),3);
-		
-		bas->m_abilities["magic_attack"].m_time=0;
-		dyn->m_health = 100;
-		bas->m_max_health = 100;
-		bas->m_armor = 15;
-		bas->m_attack = 10;
-		bas->m_power = 10;
-		bas->m_strength = 15;
-		bas->m_dexterity = 15;
-		bas->m_magic_power = 45;
-		bas->m_willpower = 25;
-		bas->m_attack_range =20;
-
-		m_name.assign("Gandalf");
-		bas->m_walk_speed = 3000;
-		bas->m_attack_speed=1500;
-		m_base_action = "magic_attack";
-		m_left_action = "magic_attack";
-		m_right_action = "magic_attack";
-		init = true;
-		m_look = "mage_m";
 	
-		bas->m_resistances[1] =10;
-		bas->m_resistances[2] =10;
-		bas->m_resistances[3] =10;
-		bas->m_resistances_cap[1] =60;
-		bas->m_resistances_cap[2] =60;
-		bas->m_resistances_cap[3] =60;
-		
-	
-		si = ItemFactory::createItem(Item::WEAPON,"spruce_wnd");
-		equ->swapItem(si,Equipement::WEAPON);
-
-		m_gender = MALE;
-		// Debugging
-		//bas->m_abilities[3] = 0xffffff;
-	}
-	else if (getSubtype() == "priest")
-	{
-		insertLearnableAbility("holy_attack",Vector(0.2,0.05),1);
-		insertLearnableAbility("holy_light",Vector(0.2,0.45),1);
-		insertLearnableAbility("holy_fire",Vector(0.2,0.65),1);
-		insertLearnableAbility("burning_rage",Vector(0.2,0.25),1);
-		insertLearnableAbility("cure_blind_mute",Vector(0.7,0.25),1);
-		insertLearnableAbility("cure_blind_mute_party",Vector(0.7,0.65),1);
-		insertLearnableAbility("blazing_shield",Vector(0.45,0.05),1);
-		insertLearnableAbility("light_beam",Vector(0.45,0.25),1);
-		insertLearnableAbility("burning_sun",Vector(0.45,0.85),1);
-		
-		insertLearnableAbility("break_binding",Vector(0.2,0.45),2);
-		insertLearnableAbility("disrupt_binding",Vector(0.2,0.85),2);
-		insertLearnableAbility("magic_shield",Vector(0.2,0.25),2);
-		insertLearnableAbility("cure_pois_burn",Vector(0.7,0.25),2);
-		insertLearnableAbility("cure_pois_burn_party",Vector(0.7,0.65),2);
-		insertLearnableAbility("acid",Vector(0.7,0.45),2);
-		insertLearnableAbility("heal",Vector(0.45,0.05),2);
-		insertLearnableAbility("heal_party",Vector(0.45,0.45),2);
-		
-		insertLearnableAbility("divine_wind",Vector(0.2,0.25),3);
-		insertLearnableAbility("divine_storm",Vector(0.2,0.65),3);
-		insertLearnableAbility("blade_storm",Vector(0.45,0.05),3);
-		insertLearnableAbility("cure_conf_bsrk",Vector(0.45,0.25),3);
-		insertLearnableAbility("cure_conf_bsrk_party",Vector(0.45,0.45),3);
-		insertLearnableAbility("hypnosis",Vector(0.7,0.45),3);
-		insertLearnableAbility("hypnosis2",Vector(0.7,0.85),3);
-		insertLearnableAbility("keen_mind",Vector(0.7,0.25),3);
-		
-		bas->m_abilities["holy_attack"].m_time =0;
-		dyn->m_health = 200;
-		bas->m_max_experience = 100;
-		bas->m_level =1;
-		bas->m_max_health = 200;
-		bas->m_armor = 20;
-		bas->m_attack = 20;
-		bas->m_power = 30;
-		bas->m_strength = 25;
-		bas->m_dexterity = 15;
-		bas->m_magic_power = 15;
-		bas->m_willpower = 45;
-		bas->m_walk_speed = 3000;
-		bas->m_attack_speed=2000;
-		bas->m_attack_range =1;
-
-		m_base_action = "holy_attack";
-		m_left_action = "holy_attack";
-		m_right_action = "holy_attack";
-		init = true;
-
-		m_look = "priest_f";
-
-		// Debugging
-		//bas->m_abilities[4] = 0xffffff;
-		m_name.assign("Elrond");
-		
-		si = ItemFactory::createItem(Item::WEAPON,"hammer_hmr");
-		equ->swapItem(si,Equipement::WEAPON);
-		
-		m_gender = FEMALE;
-	}
-
-	
-	si = ItemFactory::createItem(Item::POTION,"heal_1");
-	equ->swapItem(si,Equipement::SMALL_ITEMS);
-
-	si = ItemFactory::createItem(Item::POTION,"heal_1");
-	equ->swapItem(si,Equipement::SMALL_ITEMS+1);
-	
+	bas->m_level=1;
 	getBaseAttrMod()->m_max_health = getBaseAttr()->m_max_health;
 	
-	if (init)
-	{
-		// Modifizierte Basisattribute erzeugen
-		calcBaseAttrMod();
-	}
+	// Modifizierte Basisattribute erzeugen
+	calcBaseAttrMod();
 	
 	clearNetEventMask();
+	
+	/*
+	TiXmlDocument doc;
+	TiXmlElement * elem;
+	TiXmlElement * elem2;
+	LearnableAbilityMap::iterator it;
+	Action::ActionInfo* aci; 
+	std::list<Action::ActionType>::iterator jt;
+	
+	for (it = getLearnableAbilities().begin(); it != getLearnableAbilities().end(); ++it)
+	{
+		aci = Action::getActionInfo(it->second.m_type);
+		elem = new TiXmlElement("LearnableAbility");
+		elem->SetAttribute("type",it->second.m_type.c_str());
+		elem->SetAttribute("skilltree_tab",it->second.m_skilltree_tab);
+		elem->SetDoubleAttribute("skilltree_posx",it->second.m_skilltree_position.m_x);
+		elem->SetDoubleAttribute("skilltree_posy",it->second.m_skilltree_position.m_y);
+		elem->SetAttribute("required_level",aci->m_req_level);
+		for(int i=0; i<3; i++)
+		{
+			if (aci->m_req_ability[i] != "noaction")
+			{
+				elem2 = new TiXmlElement("RequiredAbility");
+				elem2->SetAttribute("type",aci->m_req_ability[i].c_str());
+				elem->LinkEndChild(elem2);
+			}
+		}
+		doc.LinkEndChild(elem);
+	}
+	doc.SaveFile("tmp.xml");
+	*/
 	return true;
 }
 
@@ -1709,64 +1468,6 @@ bool Player::checkRole(std::string role)
 }
 
 
-void Player::sendDetailedItem(short pos)
-{
-	/*
-	Item* it = static_cast<Item*>(m_equipement->getItem(pos));
-
-	if (it!=0)
-	{
-		ServerNetwork* net = World::getWorld()->getNetwork();
-		int len;
-
-		// Puffer fuer Item
-		CharConv cv;
-		ServerHeader header;
-
-		memset(&header,0,sizeof(header));
-		header.m_content = PTYPE_S2C_ITEM;
-		header.m_detailed_item = pos;
-		header.toString(&cv);
-		it->toStringComplete(&cv,pos);
-		net->pushSlotMessage(m_network_slot, cv.getBitStream());
-
-	}
-	*/
-}
-
-
-void Player::sendAbilityDamage(Action::ActionType act)
-{
-	/*
-	// Wertebereich fuer Aktionen pruefen
-	if (act<0 || act >=192)
-		return;
-
-	ServerNetwork* net = World::getWorld()->getNetwork();
-	int len;
-
-	// Puffer
-	CharConv cv;
-	ServerHeader header;
-
-	// Header erstellen
-	memset(&header,0,sizeof(header));
-	header.m_content = PTYPE_S2C_DAMAGE;
-	// Typ der Aktion wird im Feld fuer Item untergebracht...
-	header.m_detailed_item = act;
-	header.toString(&cv);
-
-	// Damage berechnen
-	Damage dmg;
-	calcDamage(act,dmg);
-
-	// Daten in den Puffer schreiben
-	dmg.toString(&cv);
-	net->pushSlotMessage(m_network_slot, cv.getBitStream());
-
-	*/
-}
-
 
 void Player::calcBaseDamage(Action::ActionType act,Damage& dmg)
 {
@@ -2632,5 +2333,43 @@ void Player::insertLearnableAbility(Action::ActionType type, Vector position, in
 	m_learnable_abilities[id].m_id = id;
 	m_learnable_abilities[id].m_skilltree_tab = tab;
 	
+}
+
+void Player::insertLearnableAbility(LearnableAbility& ability)
+{
+	int id = m_learnable_abilities.size();
+	m_learnable_abilities[id] = ability;
+	m_learnable_abilities[id].m_id = id;
+}
+
+bool Player::checkAbilityLearnable(Action::ActionType at)
+{
+	if (checkAbility(at))
+	{
+		// Faehigkeit ist schon erlernt
+		return false;
+	}
+
+	LearnableAbilityMap::iterator it;
+	
+	for (it = m_learnable_abilities.begin(); it != m_learnable_abilities.end(); ++it)
+	{
+		if (it->second.m_type == at)
+		{
+			// Levelvorraussetzungen
+			if (getBaseAttr()->m_level < it->second.m_req_level)
+				return false;
+			
+			// Faehigkeitenvorraussetzungen
+			std::list<Action::ActionType>::iterator jt;
+			for (jt = it->second.m_req_abilities.begin(); jt != it->second.m_req_abilities.end(); ++jt)
+			{
+				if (!checkAbility(*jt))
+					return false;
+			}
+			return true;
+		}
+	}
+	return false;
 }
 

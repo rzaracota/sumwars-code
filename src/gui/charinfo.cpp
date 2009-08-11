@@ -466,23 +466,16 @@ CharInfo::CharInfo (Document* doc)
 
 	// Label Klasse
 	label =  win_mgr.getWindow("ClassLabel");
-	out_stream.str("");
-	if (player->getSubtype() == "warrior")
+	PlayerBasicData* pdata = ObjectFactory::getPlayerData(player->getSubtype());
+	if (pdata != 0)
 	{
-		out_stream.str(gettext("Warrior"));
+		out_stream.str(gettext(pdata->m_name.c_str()));
 	}
-	else if (player->getSubtype() == "mage")
+	else
 	{
-		out_stream.str( gettext("Magician"));
+		out_stream.str("");
 	}
-	else if (player->getSubtype() == "archer")
-	{
-		out_stream.str( gettext("Archer"));
-	}
-	else if (player->getSubtype() == "priest")
-	{
-		out_stream.str( gettext("Priest"));
-	}
+	
 	if (label->getText()!= (CEGUI::utf8*) out_stream.str().c_str())
 	{
 		DEBUG("set class label");
@@ -733,27 +726,17 @@ CharInfo::CharInfo (Document* doc)
 	// Label Schaden Basisattacke
 	label =  win_mgr.getWindow( "BaseDmgLabel");
 	out_stream.str("");
-	if (player->getSubtype() == "mage")
+	if (pdata != 0)
 	{
-		ttext = (CEGUI::utf8*) (Action::getDescription("magic_attack").c_str());
-		out_stream << Action::getName("magic_attack");
+		ttext = (CEGUI::utf8*) (Action::getDescription(pdata->m_base_ability).c_str());
+		out_stream << Action::getName(pdata->m_base_ability);
+		
 	}
-	if (player->getSubtype() == "archer")
+	else
 	{
-		ttext = (CEGUI::utf8*) (Action::getDescription("range_attack").c_str());
-		out_stream << Action::getName("range_attack");
+		ttext= (CEGUI::utf8*) "";
 	}
-	if (player->getSubtype() == "warrior")
-	{
-		ttext = (CEGUI::utf8*) (Action::getDescription("attack").c_str());
-		out_stream << Action::getName("attack");
-	}
-	if (player->getSubtype() == "priest")
-	{
-		ttext = (CEGUI::utf8*) (Action::getDescription("holy_attack").c_str());
-		out_stream << Action::getName("holy_attack");
-	}
-
+	
 	if (label->getText()!= (CEGUI::utf8*) out_stream.str().c_str())
 	{
 		label->setText((CEGUI::utf8*) out_stream.str().c_str());
@@ -951,7 +934,7 @@ bool CharInfo::onIncreaseAttributeButtonClicked(const CEGUI::EventArgs& evt)
 	const CEGUI::MouseEventArgs& we =
 			static_cast<const CEGUI::MouseEventArgs&>(evt);
 	unsigned int id = we.window->getID();
-	DEBUG("left button pressed on skill %i",id);
+	DEBUG5("left button pressed on skill %i",id);
 	m_document->increaseAttribute((CreatureBaseAttr::Attribute) id);
 	return true;
 }

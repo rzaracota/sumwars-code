@@ -5,7 +5,7 @@
 
 #include <map>
 #include "monsterbase.h"
-
+#include "playerbase.h"
 #include "../tinyxml/tinyxml.h"
 #include <string>
 #include <list>
@@ -316,12 +316,27 @@ class ObjectFactory
 	static std::string getObjectName(GameObject::Subtype subtype);
 	
 	/**
+	 * \fn static PlayerBasicData* getPlayerData(GameObject::Subtype subtype)
+	 * \brief Gibt zu dem angegebenen Spielertyp die Daten fuer die Initialisierung aus. Gibt 0 aus, wenn der Spielertyp nicht registriert ist.
+	 * \param subtype Spielertyp
+	 */
+	static PlayerBasicData* getPlayerData(GameObject::Subtype subtype);
+	
+	/**
 	 * \fn static registerMonster(GameObject::Subtype subtype, MonsterBasicData* data)
 	 * \brief Registriert die Daten fuer ein bestimmten Monstertyp
 	 * \param subtype Subtyp des Monsters
 	 * \param data Daten des Monsters
 	 */
 	static void registerMonster(GameObject::Subtype subtype, MonsterBasicData* data);
+	
+	/**
+	 * \fn static registerPlayer(GameObject::Subtype subtype, PlayerBasicData* data)
+	 * \brief Registriert die Daten fuer ein bestimmten Spielertyp
+	 * \param subtype Subtyp der Spielerklasse
+	 * \param data Daten der Spielerklasse
+	 */
+	static void registerPlayer(GameObject::Subtype subtype, PlayerBasicData* data);
 	
 	/**
 	 * \fn static void registerFixedObject(GameObject::Subtype subtype, FixedObjectData* data)
@@ -368,6 +383,15 @@ class ObjectFactory
 	 */
 	static void cleanup();
 	
+	/**
+	 * \fn static std::map<GameObject::Subtype, PlayerBasicData*>& getPlayerData()
+	 * \brief Gibt Daten zu allen registrierten Spielern aus
+	 */
+	static std::map<GameObject::Subtype, PlayerBasicData*>& getPlayerData()
+	{
+		return m_player_data;
+	}
+	
 	private:	
 	/**
 	 * \var static std::map<GameObject::Subtype, MonsterBasicData*> m_monster_data
@@ -380,6 +404,12 @@ class ObjectFactory
 	 * \brief Basisdaten zu den festen Objekten
 	 */
 	static std::map<GameObject::Subtype, FixedObjectData*> m_fixed_object_data;
+	
+	/**
+	 * \var static std::map<GameObject::Subtype, PlayerBasicData*> m_player_data
+	 * \brief Basisdaten zu Spielerklassen
+	 */
+	static std::map<GameObject::Subtype, PlayerBasicData*> m_player_data;
 	
 	/**
 	 * \var static std::map<ObjectTemplateType, ObjectTemplate*> m_object_templates

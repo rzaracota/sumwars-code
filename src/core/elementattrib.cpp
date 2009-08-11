@@ -98,3 +98,28 @@ void ElementAttrib::getFloat(std::string attrib, float& data, float def )
 			data = def;
 		}
 }
+
+void ElementAttrib::getBool(std::string attrib, bool& data, bool def)
+{
+	std::map<std::string, TiXmlAttribute*>::iterator it;
+	it = m_attribs.find(attrib);
+		
+	if (it == m_attribs.end())
+	{
+		data = def;
+		return;
+	}
+	
+	if (it->second->Value() == "true")
+	{
+		data = true;
+	}
+	else if (it->second->Value() == "false")
+	{
+		data = false;
+	}
+	else
+	{
+		data = def;
+	}
+}

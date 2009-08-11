@@ -8,7 +8,7 @@
 #include "templateloader.h"
 
 
-
+// globale Daten
 std::map<GameObject::Subtype, MonsterBasicData*> ObjectFactory::m_monster_data;
 
 std::map<GameObject::Subtype, FixedObjectData*> ObjectFactory::m_fixed_object_data;
@@ -21,6 +21,7 @@ std::map< MonsterGroupName, MonsterGroup*>  ObjectFactory::m_monster_groups;
 
 std::map<GameObject::Subtype, GameObject::Type> ObjectFactory::m_object_types;
 
+std::map<GameObject::Subtype, PlayerBasicData*> ObjectFactory::m_player_data;
 
 GameObject::Subtype ObjectTemplate::getObject(EnvironmentName env)
 {
@@ -189,6 +190,19 @@ GameObject::Type ObjectFactory::getObjectBaseType(GameObject::Subtype subtype)
 	return "NONE";
 }
 
+PlayerBasicData* ObjectFactory::getPlayerData(GameObject::Subtype subtype)
+{
+	std::map<GameObject::Subtype, PlayerBasicData*>::iterator it;
+	it = m_player_data.find(subtype);
+	
+	if (it == m_player_data.end())
+	{
+		return 0;
+	}
+	
+	return it->second;
+}
+
 
 void ObjectFactory::registerMonster(GameObject::Subtype subtype, MonsterBasicData* data)
 {
@@ -202,6 +216,14 @@ void ObjectFactory::registerFixedObject(GameObject::Subtype subtype, FixedObject
 {
 	m_object_types.insert(std::make_pair(subtype, "FIXED_OBJECT"));
 	m_fixed_object_data.insert(std::make_pair(subtype,data));
+}
+
+void ObjectFactory::registerPlayer(GameObject::Subtype subtype, PlayerBasicData* data)
+{
+	m_object_types.insert(std::make_pair(subtype, "PLAYER"));
+	
+	DEBUG5("registered playerclass for subtype %s",subtype.c_str());
+	m_player_data.insert(std::make_pair(subtype,data));
 }
 
 void ObjectFactory::registerObjectTemplate(ObjectTemplateType type, ObjectTemplate* templ)
@@ -255,32 +277,42 @@ void ObjectFactory::cleanup()
 	{
 		delete it1->second;
 	}
+	m_monster_data.clear();
 
 	std::map<GameObject::Subtype, FixedObjectData*>::iterator it2;
 	for (it2 = m_fixed_object_data.begin(); it2 != m_fixed_object_data.end(); ++it2)
 	{
 		delete it2->second;
 	} 
-	
+	m_fixed_object_data.clear();
 	
 	std::map<ObjectTemplateType, ObjectTemplate*>::iterator it3;
 	for (it3 = m_object_templates.begin(); it3 != m_object_templates.end(); ++it3)
 	{
 		delete it3->second;
 	} 
+	m_object_templates.clear();
 	
 	std::map<ObjectGroupTemplateName, ObjectGroupTemplate*>::iterator it4;
 	for (it4 = m_object_group_templates.begin(); it4!= m_object_group_templates.end(); ++it4)
 	{
 		delete it4->second;
 	} 
-	
+	m_object_group_templates.clear();
 	
 	std::map< MonsterGroupName, MonsterGroup*>::iterator it5;
 	for (it5 = m_monster_groups.begin(); it5!=m_monster_groups.end(); ++it5)
 	{
 		delete it5->second;
-	} 
+	}
+	m_monster_groups.clear();
+	
+	std::map<GameObject::Subtype, PlayerBasicData*>::iterator it6;
+	for (it6= m_player_data.begin(); it6 != m_player_data.end(); ++it6)
+	{
+		delete it6->second;
+	}
+	m_player_data.clear();
 }
 
 

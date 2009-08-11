@@ -156,110 +156,8 @@ bool  ObjectLoader::loadMonster(TiXmlNode* node)
 				}
 				else if (!strcmp(child->Value(), "BasicAttributes"))
 				{
-					// Basisattribute setzen
-					attr.getFloat("experience",data->m_base_attr.m_max_experience,0);
-					short level;
-					attr.getShort("level",level,1);
-					data->m_base_attr.m_level = level;
-					attr.getFloat("max_health",data->m_base_attr.m_max_health,1);
-					attr.getShort("armor",data->m_base_attr.m_armor,0);
-					attr.getShort("block",data->m_base_attr.m_block,0);
-					attr.getShort("attack",data->m_base_attr.m_attack,1);
-					attr.getShort("power",data->m_base_attr.m_power,1);
-					attr.getShort("strength",data->m_base_attr.m_strength,1);
-					attr.getShort("dexterity",data->m_base_attr.m_dexterity,1);
-					attr.getShort("magic_power",data->m_base_attr.m_magic_power,1);
-					attr.getShort("willpower",data->m_base_attr.m_willpower,1);
-					attr.getShort("resistances_fire",data->m_base_attr.m_resistances[Damage::FIRE],0);
-					attr.getShort("resistances_ice",data->m_base_attr.m_resistances[Damage::ICE],0);
-					attr.getShort("resistances_air",data->m_base_attr.m_resistances[Damage::AIR],0);
-					attr.getShort("resistances_physical",data->m_base_attr.m_resistances[Damage::PHYSICAL],0);
-					attr.getShort("resistances_fire",data->m_base_attr.m_resistances[Damage::FIRE],0);
-					attr.getShort("resistances_ice",data->m_base_attr.m_resistances[Damage::ICE],0);
-					attr.getShort("resistances_air",data->m_base_attr.m_resistances[Damage::AIR],0);
-					attr.getShort("resistances_physical",data->m_base_attr.m_resistances[Damage::PHYSICAL],0);
-					attr.getShort("walk_speed",data->m_base_attr.m_walk_speed,2000);	
-					attr.getShort("attack_speed",data->m_base_attr.m_attack_speed,1500);	
-					attr.getFloat("step_length",data->m_base_attr.m_step_length,1);
-					attr.getFloat("attack_range",data->m_base_attr.m_attack_range,1);
-
-					// Animationen
-					std::map<Action::ActionType, std::vector<std::string> > animations;
 					
-					// Schleife ueber die Elemente von BasicAttributes
-					for (TiXmlNode* child2 = child->FirstChild(); child2 != 0; child2 = child2->NextSibling())
-					{
-						attr.parseElement(child2->ToElement());
-						
-						if (!strcmp(child2->Value(), "Ability"))
-						{
-							std::string anim,act;
-							Action::ActionType action;
-							attr.getString("type",act);
-							data->m_base_attr.m_abilities[act].m_timer = 0;
-							
-						}
-						else if (!strcmp(child2->Value(), "Immunity"))
-						{
-							std::string type;
-							attr.getString("type",type);
-							
-							// string -> enum
-							if (type == "blind")
-								data->m_base_attr.m_immunity |= 1<<Damage::BLIND;
-							else if (type ==  "poisoned")
-								data->m_base_attr.m_immunity |= 1<<Damage::POISONED;
-							else if (type ==  "berserk")
-								data->m_base_attr.m_immunity |= 1<<Damage::BERSERK;
-							else if (type ==  "confused")
-								data->m_base_attr.m_immunity |= 1<<Damage::CONFUSED;
-							else if (type ==  "mute")
-								data->m_base_attr.m_immunity |= 1<<Damage::MUTE;
-							else if (type ==  "paralyzed")
-								data->m_base_attr.m_immunity |= 1<<Damage::PARALYZED;
-							else if (type ==  "frozen")
-								data->m_base_attr.m_immunity |= 1<<Damage::FROZEN;
-							else if (type ==  "burning")
-								data->m_base_attr.m_immunity |= 1<<Damage::BURNING;
-							
-						}
-						else if (!strcmp(child2->Value(), "SpecialFlag"))
-						{
-							std::string type;
-							attr.getString("type",type);
-							
-							// string -> enum
-							if (type== "noflags")
-								data->m_base_attr.m_special_flags |= Damage::NOFLAGS;
-							else if (type ==  "unblockable")
-								data->m_base_attr.m_special_flags |= Damage::UNBLOCKABLE;
-							else if (type ==  "ignore_armor")
-								data->m_base_attr.m_special_flags |= Damage::IGNORE_ARMOR;
-							else if (type == "extra_human_dmg")
-								data->m_base_attr.m_special_flags |= Damage::EXTRA_HUMAN_DMG;
-							else if (type == "extra_demon_dmg")
-								data->m_base_attr.m_special_flags |= Damage::EXTRA_DEMON_DMG;
-							else if (type ==  "extra_undead_dmg")
-								data->m_base_attr.m_special_flags |= Damage::EXTRA_UNDEAD_DMG;
-							else if (type == "extra_dwarf_dmg")
-								data->m_base_attr.m_special_flags |= Damage::EXTRA_DWARF_DMG;
-							else if (type == "extra_drake_dmg")
-								data->m_base_attr.m_special_flags |= Damage::EXTRA_DRAKE_DMG;
-							else if (type == "extra_fairy_dmg")
-								data->m_base_attr.m_special_flags |= Damage::EXTRA_FAIRY_DMG;
-							else if (type == "extra_goblin_dmg")
-								data->m_base_attr.m_special_flags |= Damage::EXTRA_GOBLIN_DMG;
-							else if (type == "extra_animal_dmg")
-								data->m_base_attr.m_special_flags |= Damage::EXTRA_ANIMAL_DMG;
-							else if (type == "extra_summoned_dmg")
-								data->m_base_attr.m_special_flags |= Damage::EXTRA_SUMMONED_DMG;
-						}
-						else if (child2->Type()!=TiXmlNode::COMMENT)
-						{
-							DEBUG("unexpected element of <BasicAttributes>: %s",child2->Value());
-						}
-					}
-					
+					loadCreatureBaseAttr(child,data->m_base_attr);
 				
 				}
 				else if (!strcmp(child->Value(), "Geometry"))
@@ -324,6 +222,223 @@ bool  ObjectLoader::loadMonster(TiXmlNode* node)
 		for ( child = node->FirstChild(); child != 0; child = child->NextSibling())
 		{
 			loadMonster(child);
+		}
+	}
+	
+	return true;
+}
+
+bool  ObjectLoader::loadCreatureBaseAttr(TiXmlNode* node, CreatureBaseAttr& basattr)
+{
+	ElementAttrib attr;
+	attr.parseElement(node->ToElement());
+	
+	// Basisattribute setzen
+	attr.getFloat("experience",basattr.m_max_experience,0);
+	short level;
+	attr.getShort("level",level,1);
+	basattr.m_level = level;
+	attr.getFloat("max_health",basattr.m_max_health,1);
+	attr.getShort("armor",basattr.m_armor,0);
+	attr.getShort("block",basattr.m_block,0);
+	attr.getShort("attack",basattr.m_attack,1);
+	attr.getShort("power",basattr.m_power,1);
+	attr.getShort("strength",basattr.m_strength,1);
+	attr.getShort("dexterity",basattr.m_dexterity,1);
+	attr.getShort("magic_power",basattr.m_magic_power,1);
+	attr.getShort("willpower",basattr.m_willpower,1);
+	attr.getShort("resistances_fire",basattr.m_resistances[Damage::FIRE],0);
+	attr.getShort("resistances_ice",basattr.m_resistances[Damage::ICE],0);
+	attr.getShort("resistances_air",basattr.m_resistances[Damage::AIR],0);
+	attr.getShort("resistances_physical",basattr.m_resistances[Damage::PHYSICAL],0);
+	attr.getShort("resistances_fire",basattr.m_resistances[Damage::FIRE],0);
+	attr.getShort("resistances_ice",basattr.m_resistances[Damage::ICE],0);
+	attr.getShort("resistances_air",basattr.m_resistances[Damage::AIR],0);
+	attr.getShort("resistances_physical",basattr.m_resistances[Damage::PHYSICAL],0);
+	attr.getShort("walk_speed",basattr.m_walk_speed,2000);	
+	attr.getShort("attack_speed",basattr.m_attack_speed,1500);	
+	attr.getFloat("step_length",basattr.m_step_length,1);
+	attr.getFloat("attack_range",basattr.m_attack_range,1);
+
+					
+	// Schleife ueber die Elemente von BasicAttributes
+	TiXmlNode* child = node;
+	for (TiXmlNode* child2 = child->FirstChild(); child2 != 0; child2 = child2->NextSibling())
+	{
+		attr.parseElement(child2->ToElement());
+						
+		if (!strcmp(child2->Value(), "Ability"))
+		{
+			std::string anim,act;
+			Action::ActionType action;
+			attr.getString("type",act);
+			basattr.m_abilities[act].m_timer = 0;
+							
+		}
+		else if (!strcmp(child2->Value(), "Immunity"))
+		{
+			std::string type;
+			attr.getString("type",type);
+							
+							// string -> enum
+			if (type == "blind")
+				basattr.m_immunity |= 1<<Damage::BLIND;
+			else if (type ==  "poisoned")
+				basattr.m_immunity |= 1<<Damage::POISONED;
+			else if (type ==  "berserk")
+				basattr.m_immunity |= 1<<Damage::BERSERK;
+			else if (type ==  "confused")
+				basattr.m_immunity |= 1<<Damage::CONFUSED;
+			else if (type ==  "mute")
+				basattr.m_immunity |= 1<<Damage::MUTE;
+			else if (type ==  "paralyzed")
+				basattr.m_immunity |= 1<<Damage::PARALYZED;
+			else if (type ==  "frozen")
+				basattr.m_immunity |= 1<<Damage::FROZEN;
+			else if (type ==  "burning")
+				basattr.m_immunity |= 1<<Damage::BURNING;
+							
+		}
+		else if (!strcmp(child2->Value(), "SpecialFlag"))
+		{
+			std::string type;
+			attr.getString("type",type);
+							
+							// string -> enum
+			if (type== "noflags")
+				basattr.m_special_flags |= Damage::NOFLAGS;
+			else if (type ==  "unblockable")
+				basattr.m_special_flags |= Damage::UNBLOCKABLE;
+			else if (type ==  "ignore_armor")
+				basattr.m_special_flags |= Damage::IGNORE_ARMOR;
+			else if (type == "extra_human_dmg")
+				basattr.m_special_flags |= Damage::EXTRA_HUMAN_DMG;
+			else if (type == "extra_demon_dmg")
+				basattr.m_special_flags |= Damage::EXTRA_DEMON_DMG;
+			else if (type ==  "extra_undead_dmg")
+				basattr.m_special_flags |= Damage::EXTRA_UNDEAD_DMG;
+			else if (type == "extra_dwarf_dmg")
+				basattr.m_special_flags |= Damage::EXTRA_DWARF_DMG;
+			else if (type == "extra_drake_dmg")
+				basattr.m_special_flags |= Damage::EXTRA_DRAKE_DMG;
+			else if (type == "extra_fairy_dmg")
+				basattr.m_special_flags |= Damage::EXTRA_FAIRY_DMG;
+			else if (type == "extra_goblin_dmg")
+				basattr.m_special_flags |= Damage::EXTRA_GOBLIN_DMG;
+			else if (type == "extra_animal_dmg")
+				basattr.m_special_flags |= Damage::EXTRA_ANIMAL_DMG;
+			else if (type == "extra_summoned_dmg")
+				basattr.m_special_flags |= Damage::EXTRA_SUMMONED_DMG;
+		}
+		else if (child2->Type()!=TiXmlNode::COMMENT)
+		{
+			DEBUG("unexpected element of <BasicAttributes>: %s",child2->Value());
+		}
+	}
+	
+	return true;
+}
+
+bool ObjectLoader::loadPlayerData(const char* pFilename)
+{
+	TiXmlDocument doc(pFilename);
+	bool loadOkay = doc.LoadFile();
+
+	if (loadOkay)
+	{
+		loadPlayer(&doc);
+		return true;
+	}
+	else
+	{
+		DEBUG("Failed to load file %s", pFilename);
+		return false;
+	}
+}
+
+bool ObjectLoader::loadPlayer(TiXmlNode* node)
+{
+	TiXmlNode* child;
+	if (node->Type()==TiXmlNode::ELEMENT && !strcmp(node->Value(), "PlayerClass"))
+	{
+		ElementAttrib attr;
+		attr.parseElement(node->ToElement());
+		
+		PlayerBasicData* data = new PlayerBasicData;
+		attr.getString("type",data->m_subtype);
+		attr.getString("name",data->m_name,data->m_subtype);
+		for ( child = node->FirstChild(); child != 0; child = child->NextSibling())
+		{
+			attr.parseElement(child->ToElement());
+			if (!strcmp(child->Value(), "BasicAttributes"))
+			{
+				loadCreatureBaseAttr(child, data->m_base_attr);
+			}
+			else if (!strcmp(child->Value(), "BasicAbility"))
+			{
+				attr.getString("type",data->m_base_ability);
+			}
+			else if (!strcmp(child->Value(), "Look"))
+			{
+				std::string gender;
+				std::string look;
+				attr.getString("name",look);
+				attr.getString("gender",gender);
+				Scene::registerPlayerLook(data->m_subtype,look, gender=="male");
+			}
+			else if (!strcmp(child->Value(), "SkilltreeTabs"))
+			{
+				attr.getString("tab1",data->m_tabnames[0]);
+				attr.getString("tab2",data->m_tabnames[1]);
+				attr.getString("tab3",data->m_tabnames[2]);
+			}
+			else if (!strcmp(child->Value(), "Item"))
+			{
+				GameObject::Subtype type;
+				attr.getString("type",type);
+				data->m_start_items.push_back(type);
+			}
+			else if (!strcmp(child->Value(), "LearnableAbility"))
+			{
+				int id = data->m_learnable_abilities.size();
+				LearnableAbility& ablt = data->m_learnable_abilities[id];
+				ablt.m_id = id;
+				attr.getString("type",ablt.m_type);
+				attr.getInt("skilltree_tab",ablt.m_skilltree_tab);
+				attr.getFloat("skilltree_posx",ablt.m_skilltree_position.m_x);
+				attr.getFloat("skilltree_posy",ablt.m_skilltree_position.m_y);
+				attr.getShort("required_level",ablt.m_req_level);
+				
+				for (TiXmlNode* child2 = child->FirstChild(); child2 != 0; child2 = child2->NextSibling())
+				{
+					attr.parseElement(child2->ToElement());
+					if (!strcmp(child2->Value(), "RequiredAbility"))
+					{
+						Action::ActionType atype;
+						attr.getString("type",atype);
+						ablt.m_req_abilities.push_back(atype);
+					}
+					else if (child2->Type()!=TiXmlNode::COMMENT)
+					{
+						DEBUG("unexpected element of <LearnableAbility>: %s",child2->Value());
+					}
+					
+				}
+			}
+			else if (child->Type()!=TiXmlNode::COMMENT)
+			{
+				DEBUG("unexpected element of <PlayerClass>: %s",child->Value());
+			}
+		}
+		ObjectFactory::registerPlayer(data->m_subtype,data);
+		
+	}
+	else
+	{
+		// rekursiv durchmustern
+		for ( child = node->FirstChild(); child != 0; child = child->NextSibling())
+		{
+			loadPlayer(child);
 		}
 	}
 	

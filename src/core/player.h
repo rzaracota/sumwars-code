@@ -36,22 +36,7 @@
 #include "servernetwork.h"
 #include "item.h"
 
-enum Gender
-{
-	MALE =1,
-	FEMALE = 2,
-};
-
-struct LearnableAbility
-{
-	Action::ActionType m_type;
-	
-	Vector m_skilltree_position;
-	
-	int m_id;
-	
-	int m_skilltree_tab;
-};
+#include "playerbase.h"
 
 /**
  * \class PlayerCamera
@@ -171,27 +156,6 @@ public:
 	~Player();
 	
 	
-	//Accessor Methods
-	/**
-	 * \fn int getNetworkSlot()
-	 * \brief Gibt die Nummer des Netzwerkslots zum Senden von Datenpaketen zur&uuml;ck
-	 * \return int Nummer des Netzwerkslots
-	 */
-	int getNetworkSlot()
-	{
-		return m_network_slot;
-	}
-	
-	
-	/**
-	 * \fn void setNetworkSlot(int value)
-	 * \brief Setzt die Nummer des Netzwerkslots zum Senden von Datenpaketen
-	 * \param value Nummer des Netzwerkslots
-	 */
-	void setNetworkSlot(int value)
-	{
-		m_network_slot = value;
-	}
 	
 	
 	
@@ -316,21 +280,6 @@ public:
 	
 	
 	/**
-	 * \fn void sendDetailedItem(short pos)
-	 * \brief Sendet detaillierte Informationen ueber ein Item
-	 * \param pos Position des Items
-	 */
-	void sendDetailedItem(short pos);
-	
-	
-	/**
-	 * \fn void sendAbilityDamage(Action::ActionType act)
-	 * \brief Sendet den Schaden einer Aktion
-	 * \param act Aktionstyp
-	 */
-	void sendAbilityDamage(Action::ActionType act);
-	
-	/**
 	 * \fn virtual void toString(CharConv* cv)
 	 * \brief Konvertiert das Objekt in einen String und schreibt es in der Puffer
 	 * \param cv Ausgabepuffer
@@ -402,6 +351,14 @@ public:
 	bool checkRole(std::string role);
 	
 
+	/**
+	 * \fn bool checkAbilityLearnable(Action::ActionType at)
+	 * \brief Testet ob eine Faehigkeit erlernbar ist
+	 * \param at Faehigkeit
+	 * \return true, wenn die Faehigkeit erlernbar ist
+	 */
+	bool checkAbilityLearnable(Action::ActionType at);
+	
 	/**
 	 * \fn virtual Action::ActionEquip getActionEquip()
 	 * \brief Gibt aus, ob die Aktion einhaendig oder zweihaendig ausgefuehrt wird
@@ -676,10 +633,10 @@ public:
 	}
 	
 	/**
-	 * \fn std::map<int,LearnableAbility>& getLearnableAbilities()
+	 * \fn LearnableAbilityMap& getLearnableAbilities()
 	 * \brief Gibt alle erlernbaren Faehigkeiten aus
 	 */
-	std::map<int,LearnableAbility>& getLearnableAbilities()
+	LearnableAbilityMap& getLearnableAbilities()
 	{
 		return m_learnable_abilities;
 	}
@@ -692,6 +649,13 @@ public:
 	 * \param tab Tab in dem dei Faehigkeit auftaucht
 	 */
 	void insertLearnableAbility(Action::ActionType type, Vector position, int tab);
+	
+	/**
+	 * \fn void insertLearnableAbility(LearnableAbility& ability)
+	 * \brief Fuegt eine erlernbare Faehigkeit hinzu
+	 * \param ability erlernbare Faehigkeit
+	 */
+	void insertLearnableAbility(LearnableAbility& ability);
 
 //Protected stuff
 protected:
@@ -708,16 +672,6 @@ protected:
 	
 //Private stuff
 private:
-	//Fields
-	/**
-	 * \var m_network_slot
-	 * \brief Nummer des Netzwerkslots zum Senden der Datenpakete
-	 */
-	int m_network_slot;
-	
-	
-	
-	
 	
 	
 	
@@ -855,10 +809,10 @@ protected:
 	float m_message_clear_timer;
 	
 	/**
-	 * \var std::map<int,LearnableAbility> m_learnable_abilities
+	 * \var LearnableAbilityMap m_learnable_abilities
 	 * \brief Faehigkeiten, die der Spieler lernen kann
 	 */
-	std::map<int,LearnableAbility> m_learnable_abilities;
+	LearnableAbilityMap m_learnable_abilities;
 	
 	//Constructors
 	//Accessor Methods

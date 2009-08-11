@@ -5,7 +5,7 @@ std::map<Action::ActionType,Action::ActionInfo> Action::m_action_info;
 
 void Action::init()
 {
-	/*
+/*	
 	DEBUG5("initialising actions");
 	Action::ActionInfo* a;
 
@@ -1635,8 +1635,7 @@ void Action::init()
 	a->m_req_ability[2] = "noaction";
 	a->m_name = "Keen Mind";
 	a->m_description = "The priest increases everyones spellpower for a short time. Everyones spells will surely be more effective. With increasing willpower the priest can hold this effect longer.";
-*/
-	
+	*/
 }
 
 

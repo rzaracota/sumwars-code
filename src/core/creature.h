@@ -294,14 +294,6 @@ public:
 	bool checkAbility(Action::ActionType at);
 
 	
-		/**
-	 * \fn bool checkAbilityLearnable(Action::ActionType at)
-	 * \brief Testet ob eine Faehigkeit erlernbar ist
-	 * \param at Faehigkeit
-	 * \return true, wenn die Faehigkeit erlernbar ist
-		 */
-	bool checkAbilityLearnable(Action::ActionType at);
-	
 	/**
 	 * \fn virtual void calcDamage(Action::ActionType act,Damage& dmg)
 	 * \brief Berechnet den Schaden fuer die aktuell ausgefuehrte Aktion

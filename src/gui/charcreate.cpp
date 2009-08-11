@@ -56,10 +56,6 @@ CharCreate::CharCreate (Document* doc)
 	char_create->addChildWindow(classlist);
 	classlist->setPosition(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.2f)));
 	classlist->setSize(CEGUI::UVector2(cegui_reldim(0.8f), cegui_reldim( 0.2f)));
-	classlist->addItem(new StrListItem((CEGUI::utf8*) gettext("Warrior"),"warrior"));
-	classlist->addItem(new StrListItem((CEGUI::utf8*) gettext("Archer"),"archer"));
-	classlist->addItem(new StrListItem((CEGUI::utf8*) gettext("Mage"),"mage"));
-	classlist->addItem(new StrListItem((CEGUI::utf8*) gettext("Priest"),"priest"));
 	classlist->subscribeEvent(CEGUI::Listbox::EventSelectionChanged, CEGUI::Event::Subscriber(&CharCreate::onClassSelected, this));
 
 	CEGUI::Listbox* looklist = (CEGUI::Listbox*) win_mgr.createWindow("TaharezLook/Listbox", "LookList");
@@ -131,6 +127,20 @@ void CharCreate::updateTranslation()
 
 	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("CharCreateButton"));
 	btn->setText((CEGUI::utf8*) gettext("Create"));
+}
+
+void CharCreate::updateClassList()
+{
+	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
+	CEGUI::Listbox* classlist = (CEGUI::Listbox*) win_mgr.getWindow("ClassList");
+	classlist->resetList();
+	
+	std::map<GameObject::Subtype, PlayerBasicData*>& pcdata = ObjectFactory::getPlayerData();
+	std::map<GameObject::Subtype, PlayerBasicData*>::iterator it;
+	for (it = pcdata.begin(); it != pcdata.end(); ++it)
+	{
+		classlist->addItem(new StrListItem((CEGUI::utf8*) gettext(it->second->m_name.c_str()),it->first));
+	}
 }
 
 bool CharCreate::onClassSelected(const CEGUI::EventArgs& evt)

@@ -29,6 +29,12 @@ class CharCreate : public Window
 		 */
 		virtual void updateTranslation();
 		
+		/**
+		 * \fn void updateClassList()
+		 * \brief aktualisiert die Liste der Spielerklassen
+		 */
+		void updateClassList();
+		
 	private:
 	/**
 	 * \fn bool onClassSelected(const CEGUI::EventArgs& evt)

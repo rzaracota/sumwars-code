@@ -55,7 +55,16 @@ class ElementAttrib
 		 * \param def Zahl, die ausgegeben wird, wenn das Attribut nicht existiert oder sich nicht zu float konvertieren laesst
 		 */
 		void getFloat(std::string attrib, float& data, float def =0);
-	
+		
+		/**
+		 * \fn void getBool(std::string attrib, bool& data, bool def =false)
+		 * \brief Gibt ein Attribut als bool aus.
+		 * \param attrib Name des Attributs
+		 * \param data Ausgabeparameter fuer die Daten
+		 * \param def Resultat das ausgegeben wird, wenn das Attribut nicht existiert oder sich nicht zu bool konvertieren laesst
+		 */
+		void getBool(std::string attrib, bool& data, bool def =false);
+		
 	private:
 		/**
 		 * \var std::map<std::string, TiXmlAttribute*> m_attribs

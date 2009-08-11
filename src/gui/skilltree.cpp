@@ -327,34 +327,13 @@ void SkillTree::updateTranslation()
 	
 	// Ueberschriften der Tabs setzen
 	Player* player = m_document->getLocalPlayer();
-	//TODO: generisch ausprogrammieren
 	if (m_nr_tabs <3)
 		return;
 	
-	if (player->getSubtype()=="warrior")
+	PlayerBasicData* pdata = ObjectFactory::getPlayerData(player->getSubtype());
+	for (int i=0; i<3; i++)
 	{
-		tabs[0]->setText((CEGUI::utf8*) gettext("Fighting skills"));
-		tabs[1]->setText((CEGUI::utf8*) gettext("Passive skills"));
-		tabs[2]->setText((CEGUI::utf8*) gettext("Fighting spirit"));
-	
-	}
-	else if (player->getSubtype()=="mage")
-	{
-		tabs[0]->setText((CEGUI::utf8*) gettext("Fire magic"));
-		tabs[1]->setText((CEGUI::utf8*) gettext("Ice magic"));
-		tabs[2]->setText((CEGUI::utf8*) gettext("Air magic"));
-	}
-	else if (player->getSubtype()=="archer")
-	{
-		tabs[0]->setText((CEGUI::utf8*) gettext("Marksmanship"));
-		tabs[1]->setText((CEGUI::utf8*) gettext("Passive skills"));
-		tabs[2]->setText((CEGUI::utf8*) gettext("Hunter magic"));
-	}
-	else if (player->getSubtype()=="priest")
-	{
-		tabs[0]->setText((CEGUI::utf8*) gettext("Light Magic"));
-		tabs[1]->setText((CEGUI::utf8*) gettext("Water Magic"));
-		tabs[2]->setText((CEGUI::utf8*) gettext("Wind Magic"));
+		tabs[i]->setText((CEGUI::utf8*) gettext(pdata->m_tabnames[i].c_str()));
 	}
 	
 }

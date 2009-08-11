@@ -344,6 +344,7 @@ bool Application::setupResources()
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../data/items", "FileSystem", "items");
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../data/abilities", "FileSystem", "abilities");
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../data/monsters", "FileSystem", "monsters");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../data/playerclasses", "FileSystem", "playerclasses");
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../data/objects", "FileSystem", "objects");
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../data/obj_templates", "FileSystem", "obj_templates");
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../data/obj_group_templ", "FileSystem", "obj_group_templ");
@@ -544,6 +545,7 @@ bool Application::loadResources()
 
 	// Aktionen initialisieren
 	Action::init();
+	
 	files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("abilities","*.xml");
 	for (it = files->begin(); it != files->end(); ++it)
 	{
@@ -557,7 +559,18 @@ bool Application::loadResources()
 	}
 
 
+	// Spielerklassen initialisieren
+	files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("playerclasses","*.xml");
+	for (it = files->begin(); it != files->end(); ++it)
+	{
+		file = it->archive->getName();
+		file += "/";
+		file += it->filename;
 
+		ObjectLoader::loadPlayerData(file.c_str());
+
+		updateStartScreen(0.25);
+	}
 	
 	// Items initialisieren
 	ItemFactory::init();

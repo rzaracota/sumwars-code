@@ -136,11 +136,6 @@ Scene::~Scene()
 void Scene::registerMeshes()
 {
 	// Meshes fuer Objekte registrieren
-	registerPlayerLook("warrior","warrior_m", true);
-	registerPlayerLook("mage","mage_m", true);
-	registerPlayerLook("priest","priest_f", false);
-	registerPlayerLook("archer","archer_f",false);
-
 	GraphicManager::registerGraphicMapping("ARROW","arrow");
 	GraphicManager::registerGraphicMapping("MAGIC_ARROW","magic_arrow");
 	GraphicManager::registerGraphicMapping("FIRE_BOLT","fire_bolt");
@@ -626,7 +621,7 @@ void Scene::updateCharacterView()
 	{
 		if ((pl->getNameId() != m_temp_player))
 		{
-			DEBUG("updating inv player %s to %s",m_temp_player.c_str(), pl->getNameId().c_str());
+			DEBUG5("updating inv player %s to %s",m_temp_player.c_str(), pl->getNameId().c_str());
 			GraphicManager::destroyGraphicObject(m_temp_player_object);
 			m_temp_player_object =0;
 			update = true;

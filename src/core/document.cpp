@@ -1216,7 +1216,7 @@ bool Document::onKeyPress(KeyCode key)
 				int id =-1;
 				Player* player = getLocalPlayer();
 				std::map<int,LearnableAbility> &ablts = player->getLearnableAbilities();
-				std::map<int,LearnableAbility>::iterator it;
+				LearnableAbilityMap::iterator it;
 				for (it = ablts.begin(); it != ablts.end(); ++it)
 				{
 					if (it->second.m_type == act)
