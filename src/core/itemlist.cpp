@@ -636,7 +636,8 @@ void Equipement::fromStringComplete(CharConv* cv)
 		cv->fromBuffer(type);
 		cv->fromBuffer(subtype);
 		cv->fromBuffer(id);
-		
+		if (World::getWorld() !=0 && World::getWorld()->isServer())
+			id =0;
 		DEBUG5("pos %i type %i subtype %s",pos,type, subtype.c_str());
 		
 		it = ItemFactory::createItem((Item::Type) type, std::string(subtype),id);
