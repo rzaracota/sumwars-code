@@ -124,28 +124,9 @@ void ItemLoader::loadItem(TiXmlNode* node)
 				short levelreq =0;
 				attr.getShort("level_requirement", levelreq,0);
 				item_data ->m_level_req = levelreq;
+				
 				std::string charreq;
-				attr.getString("character_requirement", charreq,"all");
-				short creq =0;
-				if (charreq == "all" || charreq == "15")
-					creq = 15;
-				if (charreq.find("warrior") != std::string::npos)
-				{
-					creq |= Item::REQ_WARRIOR;
-				}
-				if (charreq.find("archer") != std::string::npos)
-				{
-					creq |= Item::REQ_ARCHER;
-				}
-				if (charreq.find("mage") != std::string::npos)
-				{
-					creq |= Item::REQ_MAGE;
-				}
-				if (charreq.find("priest") != std::string::npos)
-				{
-					creq |= Item::REQ_PRIEST;
-				}
-				item_data->m_char_req = creq;
+				attr.getString("character_requirement",item_data->m_char_req ,"all");
 						
 				attr.getFloat("min_enchant",item_data->m_min_enchant,0);
 				attr.getFloat("max_enchant",item_data->m_max_enchant,0);

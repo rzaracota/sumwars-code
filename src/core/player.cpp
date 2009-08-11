@@ -872,20 +872,15 @@ bool Player::checkItemRequirements(Item* itm)
 	}
 	
 	// testen ob Item fuer die Charakterklasse zugelassen ist
-	char mask = Item::REQ_WARRIOR;
-	if (getSubtype() == "mage")
-		mask = Item::REQ_MAGE;
-	if (getSubtype() == "archer")
-		mask = Item::REQ_ARCHER;
-	if (getSubtype() == "priest")
-		mask = Item::REQ_PRIEST;
-
-	if ((itm->m_char_req & mask) != mask)
+	if (itm->m_char_req != "all" && itm->m_char_req != "15")
 	{
 		// Spieler darf das Item nicht benutzen (falsche Spielerklasse)
-		DEBUG5("wrong subtype");
-		return false;
+		if (itm->m_char_req.find(getSubtype()) == std::string::npos)
+		{
+			return false;
+		}
 	}
+	
 	return true;
 }
 

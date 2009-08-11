@@ -178,19 +178,7 @@ struct Item {
 	 */
 	typedef std::string Subtype;
 
-	/**
-	 * \enum CharRequirement
-	 * \brief Aufzaehlung der Charakterklassen als Vorraussetzung fuer das Verwendung eines Gegenstandes
-	 */
-	enum CharRequirement
-	{
-		REQ_WARRIOR=1,
-		REQ_MAGE=2,
-		REQ_ARCHER=4,
-		REQ_PRIEST=8,
-		REQ_NONE=15,
-	};
-
+	
 	/**
 	 * \fn enum InfoFlags
 	 * \brief Zaehlt auf, welche Informationen zu einem Item vorliegen koennen
@@ -336,10 +324,10 @@ struct Item {
 	char m_level_req;
 
 	/**
-	 * \var char m_char_req
+	 * \var std::string m_char_req
 	 * \brief Anforderungen an die Charakterklasse
 	 */
-	char m_char_req;
+	std::string m_char_req;
 
 	/**
 	 * \var float m_magic_power
@@ -387,10 +375,10 @@ struct ItemBasicData
 	char m_level_req;
 
 	/**
-	 * \var char m_char_req
+	 * \var std::string m_char_req
 	 * \brief Anforderungen an die Charakterklasse
 	 */
-	char m_char_req;
+	std::string m_char_req;
 
 	/**
 	 * \var m_subtype;

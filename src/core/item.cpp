@@ -16,7 +16,7 @@ ItemBasicData::ItemBasicData()
 	m_equip_effect=0;
 	m_weapon_attr=0;
 	m_level_req = 0;
-	m_char_req = Item::REQ_NONE;
+	m_char_req = "all";
 
 	for (int i=0;i<31;i++)
 	{
@@ -64,7 +64,7 @@ Item::Item(int id)
 	m_level_req = 0;
 	m_magic_power =0;
 	m_rarity = NORMAL;
-	m_char_req = REQ_NONE;
+	m_char_req = "all";
 	m_size = SMALL;
 }
 
@@ -285,7 +285,7 @@ void Item::fromStringComplete(CharConv* cv)
 
 	cv->fromBuffer<int>(m_price);
 	cv->fromBuffer<char>(m_level_req);
-	cv->fromBuffer<char>(m_char_req);
+	cv->fromBuffer(m_char_req);
 	cv->fromBuffer<float>(m_magic_power);
 
 	char mask = NOINFO;
@@ -395,36 +395,32 @@ std::string Item::getDescription()
 	{
 		out_stream<<"\n" << gettext("Required level")<<": "<<(int) m_level_req;
 	}
-	if (m_char_req != 15)
+	
+	if (m_char_req != "15" && m_char_req != "all")
 	{
+		size_t pos=0,pos2;
 		out_stream<<"\n" << gettext("Required class")<<": ";
-		bool first = true;
-		if (m_char_req & REQ_WARRIOR)
+		
+		std::string type;
+		PlayerBasicData* pdata;
+		do
 		{
-			out_stream<<gettext("Warrior");
-			first = false;
-		}
-		if (m_char_req & REQ_MAGE)
-		{
-			if (!first)
+			pos2 = m_char_req.find_first_of(",|",pos);
+			type = m_char_req.substr(pos,pos2);
+			
+			pdata = ObjectFactory::getPlayerData(type);
+			if (pdata != 0)
+			{
+				type = pdata->m_name;
+			}
+			
+			if (pos != 0)
 				out_stream<<", ";
-			out_stream<<gettext("Magician");
-			first = false;
+			out_stream<<gettext(type.c_str());
+			pos = pos2+1;
 		}
-		if (m_char_req & REQ_ARCHER)
-		{
-			if (!first)
-				out_stream<<", ";
-			out_stream<<gettext("Archer");
-			first = false;
-		}
-		if (m_char_req & REQ_PRIEST)
-		{
-			if (!first)
-				out_stream<<", ";
-			out_stream<<gettext("Priest");
-			first = false;
-		}
+		while (pos2 != std::string::npos);
+		
 	}
 
 	// Effekt beim Verbrauchen
