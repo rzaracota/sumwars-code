@@ -152,6 +152,7 @@ bool Player::init()
 	
 	
 	PlayerBasicData* pdata = ObjectFactory::getPlayerData(getSubtype());
+	
 	if (pdata == 0)
 		return true;
 	
@@ -171,6 +172,7 @@ bool Player::init()
 	}
 	
 	bas->m_level=1;
+	bas->m_max_experience = 100;
 	getBaseAttrMod()->m_max_health = getBaseAttr()->m_max_health;
 	
 	// Modifizierte Basisattribute erzeugen
@@ -474,8 +476,9 @@ bool Player::onGamefieldClick(ClientCommand* command)
 
 	if (!checkAbility(com->m_type))
 	{
+		DEBUG("Basisaktion von %s verwendet",com->m_type.c_str());
 		com->m_type = Action::getActionInfo(com->m_type)->m_base_action;
-		DEBUG("Basisaktion verwendet");
+		
 	}
 
 	if (meleedir)
