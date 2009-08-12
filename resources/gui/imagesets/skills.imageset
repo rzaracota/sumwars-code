@@ -14,7 +14,7 @@
     <Image Name="firesword" XPos="2" YPos="186" Width="90" Height="90" />
     <Image Name="flamesword" XPos="94" YPos="186" Width="90" Height="90" />
     <Image Name="flamearmor" XPos="186" YPos="186" Width="90" Height="90" />
-    <Image Name="berserk" XPos="278" YPos="186" Width="90" Height="90" />
+    <Image Name="battle_cry" XPos="278" YPos="186" Width="90" Height="90" />
     <Image Name="warcry" XPos="370" YPos="186" Width="90" Height="90" />
     <Image Name="regenerate" XPos="2" YPos="278" Width="90" Height="90" />
     <Image Name="anger" XPos="94" YPos="278" Width="90" Height="90" />

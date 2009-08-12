@@ -37,7 +37,40 @@
 #include "geometry.h"
 #include <map>
 #include <vector>
+#include <list>
 #include "../tinyxml/tinyxml.h"
+
+extern "C"
+{
+	
+#include "lua.h"
+#include "lualib.h"
+#include "lauxlib.h"
+}
+
+/**
+ * \var struct HybridImplementation
+ * \brief Struktur fuer die Beschreibung einer Implementation ind C++ und/oder Lua
+ */
+struct HybridImplementation
+{
+	/**
+	 * \var std::string m_cpp_impl
+	 * \brief Kennstrings anhand denen ein oder mehrere Stuecke Quellcode selektiert werden
+	 */
+	std::list<std::string> m_cpp_impl;
+	
+	/**
+	 * \var int m_lua_impl
+	 * \brief Handle fuer Lua-Code
+	 */
+	int m_lua_impl;
+	
+	HybridImplementation()
+	{
+		m_lua_impl = LUA_NOREF;
+	}
+};
 
 /**
  * \struct Action
@@ -276,18 +309,41 @@ public:
 		std::string m_description;
 
 		/**
-		 * \var short m_req_level
-		 * \brief Level, welches benoetigt wird, um die Faehigkeit zu erlernen
+		 * \var float m_radius
+		 * \brief Wirkungsradius der Aktion. Genaue Verwendung des Wertes haengt von der Implementation der Aktion ab
 		 */
-		short m_req_level;
+		float m_radius;
+		
+		
+		/**
+		 * \var std::string m_projectile_type
+		 * \brief Typ eines erzeugten Geschosses
+		 */
+		std::string m_projectile_type;
+		
+		/**
+		 * \var float m_projectile_speed
+		 * \brief Geschwindigkeit des Geschosses
+		 */
+		float m_projectile_speed;
+		
+		/**
+		 * \var char m_projectile_flags
+		 * \brief Flags des Geschosses
+		 */
+		char m_projectile_flags;
+		
+		/**
+		 * \var int m_projectile_counter
+		 * \brief Zaehler fuer das Geschoss. Genaue Verwendung haengt vom Geschosstyp ab
+		 */
+		int m_projectile_counter;
 
 		/**
-		 * \var ActionType m_req_ability[3]
-		 * \brief Faehigkeiten, die benoetigt werden um die Faehigkeit zu erlernen
+		 * \var HybridImplementation m_effect
+		 * \brief Effekt der Aktion
 		 */
-		ActionType m_req_ability[3];
-
-
+		HybridImplementation m_effect;
 	};
 
 	/**
@@ -407,6 +463,14 @@ public:
 	 * \param pFilename Name der XML Datei
 	 */
 	static bool loadAbilityData(const char* pFilename);
+	
+	/**
+	 * \fn static bool loadHybridImplementation(TiXmlNode* node, HybridImplementation& impl)
+	 * \brief laedt Daten fuer eine hybride Implementation
+	 * \param node XML Knoten
+	 * \param impl Struktur in die die Daten geladen werden
+	 */
+	static bool loadHybridImplementation(TiXmlNode* node, HybridImplementation& impl);
 	
 	static void toxml();
 

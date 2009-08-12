@@ -1899,8 +1899,6 @@ bool Player::checkWaypoint(short id)
 
 void Player::toSavegame(CharConv* cv)
 {
-	
-	
 	// Version richtig setzen
 	cv->toBuffer((short) World::getVersion());
 	
@@ -1911,6 +1909,7 @@ void Player::toSavegame(CharConv* cv)
 	
 	cv->toBuffer(getBaseAttr()->m_level);
 	cv->toBuffer(getBaseAttr()->m_max_health);
+	cv->toBuffer<char>(m_gender);
 	cv->printNewline();
 
 	cv->toBuffer(getBaseAttr()->m_armor);
@@ -2016,10 +2015,16 @@ void Player::fromSavegame(CharConv* cv, bool local)
 	cv->fromBuffer(m_name);
 	cv->fromBuffer(m_look);	
 	
+	
+	
 	cv->fromBuffer(getBaseAttr()->m_level);
 	cv->fromBuffer<float>(getBaseAttr()->m_max_health);
 	getDynAttr()->m_health = getBaseAttr()->m_max_health;
 
+	char gender;
+	cv->fromBuffer(gender);
+	m_gender = (Gender) gender;
+	
 	cv->fromBuffer(getBaseAttr()->m_armor);
 	cv->fromBuffer(getBaseAttr()->m_attack);
 	if (version>=10)

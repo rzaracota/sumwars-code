@@ -86,7 +86,7 @@
 	<LearnableAbility type="flamearmor" skilltree_tab="3" skilltree_posx="0.700000" skilltree_posy="0.450000" required_level="15">
 		<RequiredAbility type="firesword" />
 	</LearnableAbility>
-	<LearnableAbility type="berserk" skilltree_tab="3" skilltree_posx="0.200000" skilltree_posy="0.250000" required_level="5">
+	<LearnableAbility type="battle_cry" skilltree_tab="3" skilltree_posx="0.200000" skilltree_posy="0.250000" required_level="5">
 		<RequiredAbility type="decoy" />
 	</LearnableAbility>
 	<LearnableAbility type="warcry" skilltree_tab="3" skilltree_posx="0.450000" skilltree_posy="0.850000" required_level="60">
@@ -96,7 +96,7 @@
 	<LearnableAbility type="regenerate" skilltree_tab="3" skilltree_posx="0.450000" skilltree_posy="0.250000" required_level="5" />
 	<LearnableAbility type="decoy" skilltree_tab="3" skilltree_posx="0.450000" skilltree_posy="0.050000" required_level="1" />
 	<LearnableAbility type="scare" skilltree_tab="3" skilltree_posx="0.200000" skilltree_posy="0.450000" required_level="15">
-		<RequiredAbility type="berserk" />
+		<RequiredAbility type="battle_cry" />
 	</LearnableAbility>
 	<LearnableAbility type="anger" skilltree_tab="3" skilltree_posx="0.450000" skilltree_posy="0.450000" required_level="15" />
 	<LearnableAbility type="fury" skilltree_tab="3" skilltree_posx="0.450000" skilltree_posy="0.650000" required_level="35">

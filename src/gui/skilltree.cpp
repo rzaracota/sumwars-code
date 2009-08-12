@@ -344,7 +344,7 @@ void SkillTree::updateAbilityTooltip(unsigned int pos)
 	std::map<int,LearnableAbility> &ablts = player->getLearnableAbilities();
 	
 	
-		DEBUG5("update tooltip for %i", pos);
+	DEBUG5("update tooltip for %i %s", pos, ablts[pos].m_type.c_str());
 
 		CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 		CEGUI::Window* label;

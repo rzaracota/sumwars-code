@@ -1,6 +1,9 @@
 #include "action.h"
 #include "elementattrib.h"
 
+#include "eventsystem.h"
+#include "projectile.h"
+
 std::map<Action::ActionType,Action::ActionInfo> Action::m_action_info;
 
 void Action::init()
@@ -1641,7 +1644,7 @@ void Action::init()
 
 bool Action::loadAbilityData(const char* pFilename)
 {
-	DEBUG("loading file: %s",pFilename);
+	DEBUG5("loading file: %s",pFilename);
 	TiXmlDocument doc(pFilename);
 	bool loadOkay = doc.LoadFile();
 
@@ -1682,10 +1685,10 @@ void Action::loadAbility(TiXmlNode* node)
 	attr.getString("type", type);
 	
 	Action::ActionInfo* a;
-	Action::ActionInfo aa;
 	
-	a=&aa;
 	a = &(Action::m_action_info[type]);
+	
+	a->m_projectile_type="";
 	attr.getString("name",a->m_name);
 	attr.getString("description",a->m_description);
 	attr.getString("base_ability",a->m_base_action,"noaction");
@@ -1693,6 +1696,7 @@ void Action::loadAbility(TiXmlNode* node)
 	attr.getInt("timer_nr",a->m_timer_nr,0);
 	attr.getFloat("timer_value",a->m_timer,0);
 	attr.getFloat("critical_percent",a->m_critical_perc,0);
+	attr.getFloat("radius",a->m_radius,0);
 	std::string target;
 	attr.getString("target_type",target,"melee");
 	if (target =="melee")
@@ -1714,6 +1718,7 @@ void Action::loadAbility(TiXmlNode* node)
 	DEBUG5("ability %s %s %f %i %f %f %s %s",type.c_str(), a->m_name.c_str(), a->m_standard_time, a->m_timer_nr, a->m_timer, a->m_critical_perc, target.c_str(), a->m_base_action.c_str());
 		
 	TiXmlNode* child;
+	TiXmlNode* child2;
 	for ( child = node->FirstChild(); child != 0; child = child->NextSibling())
 	{
 		if (child->Type()==TiXmlNode::ELEMENT) 
@@ -1730,6 +1735,50 @@ void Action::loadAbility(TiXmlNode* node)
 					a->m_flags |= MUTE_AFFECTED;
 				}
 				DEBUG5("  flag: %s",flag.c_str());
+			}
+			else if (!strcmp(child->Value(), "Effect"))
+			{
+				loadHybridImplementation(child, a->m_effect);
+			}
+			else if (!strcmp(child->Value(), "Projectile"))
+			{
+				attr.parseElement(child->ToElement());
+				attr.getString("type", a->m_projectile_type,"");
+				attr.getInt("counter", a->m_projectile_counter);
+				attr.getFloat("speed", a->m_projectile_speed);
+				a->m_projectile_flags =0;
+				for ( child2 = child->FirstChild(); child2 != 0; child2 = child2->NextSibling())
+				{
+					if (child2->Type()==TiXmlNode::ELEMENT) 
+					{
+						attr.parseElement(child2->ToElement());
+						if (!strcmp(child->Value(), "Flag"))
+						{
+							std::string flag;
+							attr.getString("name",flag);
+							if (flag == "explodes")
+							{
+								a->m_projectile_flags |= Projectile::EXPLODES;
+							}
+							else if (flag == "multi_explodes")
+							{
+								a->m_projectile_flags |= Projectile::MULTI_EXPLODES;
+							}
+							else if (flag == "piercing")
+							{
+								a->m_projectile_flags |= Projectile::PIERCING;
+							}
+							else if (flag == "bouncing")
+							{
+								a->m_projectile_flags |= Projectile::BOUNCING;
+							}
+							else if (flag == "prob_bouncing")
+							{
+								a->m_projectile_flags |= Projectile::PROB_BOUNCING;
+							}
+						}
+					}
+				}
 			}
 			else if (child->Type()!=TiXmlNode::COMMENT)
 			{
@@ -1796,7 +1845,38 @@ void Action::fromString(CharConv* cv)
 	cv->fromBuffer(m_elapsed_time);
 }
 
-
+bool Action::loadHybridImplementation(TiXmlNode* node, HybridImplementation& impl)
+{
+	TiXmlNode* child;
+	TiXmlText* text;
+	ElementAttrib attr;
+	for ( child = node->FirstChild(); child != 0; child = child->NextSibling())
+	{
+		if (child->Type()==TiXmlNode::ELEMENT) 
+		{
+			attr.parseElement(child->ToElement());
+			
+			if (!strcmp(child->Value(), "CppImplementation"))
+			{
+				std::string type;
+				ElementAttrib attr;
+				attr.parseElement(child->ToElement());
+				attr.getString("type",type);
+				
+				impl.m_cpp_impl.push_back(type);
+			}
+			else if (!strcmp(child->Value(), "LuaImplementation"))
+			{
+				text = child->FirstChild()->ToText();
+				if (text != 0)
+				{
+					impl.m_lua_impl = EventSystem::createCodeReference(text->Value());
+				}
+			}
+		}
+	}
+	return true;
+}
 
 void Action::toxml()
 {

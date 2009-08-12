@@ -633,6 +633,15 @@ public:
 	}
 	
 	/**
+	 * \fn void setGender(Gender gender)
+	 * \brief Setzt das Geschlecht
+	 */
+	void setGender(Gender gender)
+	{
+		m_gender = gender;
+	}
+	
+	/**
 	 * \fn LearnableAbilityMap& getLearnableAbilities()
 	 * \brief Gibt alle erlernbaren Faehigkeiten aus
 	 */

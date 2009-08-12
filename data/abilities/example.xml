@@ -8,9 +8,44 @@
 	base_ability="string" 	(default:noaction)
 	target_type="self"
 	critical_perc=""		(default: 0)
+	range ="int"
 	>
 	moegliche Flags:
 		mute_affected
 	<Flag name="" />
+	
+	moegliche Implementationen:
+		
+		dmg_at_target
+		dmg_at_enemies_in_radius
+		dmg_at_enemies_around_target
+		
+		basemod_at_self
+		basemod_at_allies_in_radius
+		basemod_at_target
+		basemod_at_enemies_in_radius
+		
+		dynmod_at_self
+		dynmod_at_allies_in_radius
+		dynmod_at_target
+		dynmod_at_enemies_in_radius
+		
+		proj_at_target
+		proj_fly_at_target
+		proj_at_self
+		
+		hammer_bash
+		battlecry
+		berserk
+		regenerate
+		multishot
+		volleyshot
+		
+	<Effect implementation="string">
+		lua-Code
+	</Effect>
+	<Projectile type="string" counter="int" speed="float">
+		<Flag name="string">
+	</Projectile>
 </Ability>
 -->

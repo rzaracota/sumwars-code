@@ -1155,9 +1155,20 @@ std::string Document::getAbilityDescription(Action::ActionType ability)
 		{
 			// Spieler besitzt Faehigkeit nicht
 			avlb = false;
-
-			// Level ab dem Faehigkeit verfuegbar ist
-			out_stream <<"\n"<< gettext("Required level")<<": " << aci->m_req_level;
+			
+			PlayerBasicData* pdata = ObjectFactory::getPlayerData(player->getSubtype());
+			if (pdata !=0)
+			{
+				LearnableAbilityMap::iterator it;
+				for (it = pdata->m_learnable_abilities.begin(); it != pdata->m_learnable_abilities.end(); ++it)
+				{
+					if (it->second.m_type == ability)
+					{
+						out_stream <<"\n"<< gettext("Required level")<<": " << it->second.m_req_level;
+					}
+				}
+			}
+			
 		}
 
 		// Timerinfo

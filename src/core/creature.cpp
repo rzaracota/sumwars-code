@@ -671,11 +671,45 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 		cgoal = (Creature*) goalobj;
 	}
 
-    //	Action::ActionType baseact = Action::getActionInfo(m_action.m_type)->m_base_action;
-	Action::ActionInfo* ainfo = Action::getActionInfo(m_action.m_type);
+   Action::ActionInfo* ainfo = Action::getActionInfo(m_action.m_type);
+   if (ainfo ==0 )
+	   return;
 
+	
+	WorldObjectList res;
+	res.clear();
+	WorldObjectList::iterator it;
+
+	// Koordinaten das ausfuehrenden Objektes
+	Vector &pos = getShape()->m_center;
+
+	Creature* cr =0;
+	Projectile* pr =0;
+
+	// Struktur fuer Basisattributmods, initialisiert mit Nullen
+	CreatureBaseAttrMod cbam;
+	
+	// Struktur fuer Modifikationen der dyn. Attribute, initialisiert mit Nullen
+	CreatureDynAttrMod cdam;
+	
+	calcActionAttrMod(m_action.m_type,cbam,cdam);
+
+	// Projectiltyp
+	Projectile::Subtype projtype = ainfo->m_projectile_type;
+
+	//Faehigkeit Windpfeile
+	if (projtype == "ARROW" && m_base_attr_mod.m_special_flags & WIND_ARROWS)
+		projtype = "WIND_ARROW";
+
+	// Faehigkeit Eispfeile
+	if (projtype == "ARROW" && m_base_attr_mod.m_special_flags & ICE_ARROWS)
+		projtype = "ICE_ARROW";
+	
+	
 	// Wenn die Aktion auf Nahkampf beruht Schaden an das Zielobjekt austeilen
 	// Ausname: Rundumschlag
+	// TODO: Daten in XML auslagern
+	/*
 	if (ainfo->m_target_type == Action::MELEE)
 	{
 		if (cgoal && m_action.m_type!="around_blow" 
@@ -685,64 +719,267 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 			cgoal->takeDamage(&m_damage);
 		}
 	}
-
-
-
-	WorldObjectList res;
-	res.clear();
-	WorldObjectList::iterator it;
-
-	// Koordinaten das ausfuehrenden Objektes
-	Vector &pos = getShape()->m_center;
-
-	// Form, wird initialisiert mit der Form des Ausfuehrenden
-	Shape s;
-	s.m_center = pos;
-	s.m_type = Shape::CIRCLE;
-	s.m_radius = getShape()->m_radius;
-
-	Creature* cr =0;
-
-	// Struktur fuer Basisattributmods, initialisiert mit Nullen
-	CreatureBaseAttrMod cbam;
-
-	Projectile* pr =0;
-
-	// Struktur fuer Modifikationen der dyn. Attribute, initialisiert mit Nullen
-	CreatureDynAttrMod cdam;
+*/
 	
-	calcActionAttrMod(m_action.m_type,cbam,cdam);
-
-
-	// Daten fuer Geschosse: Zielrichtung und Startpunkt
-	Vector dir = goal - pos;
-	Vector dir2,tdir;
-	dir.normalize();
-	
-	// Startpunkt fuer Geschosse
-	// aeusserer Rand des Ausfuehrenden plus 5%
-	Vector sproj;
-	Fraction fr = m_fraction;
-	sproj = pos + dir*1.05*s.m_radius;
-
-	// Standardtyp fuer Pfeile festlegen
-	Projectile::Subtype arrow = "ARROW";
-
-	//Faehigkeit Windpfeile
-	if (m_base_attr_mod.m_special_flags & WIND_ARROWS)
-		arrow = "WIND_ARROW";
-
-	// Faehigkeit Eispfeile
-	if (m_base_attr_mod.m_special_flags & ICE_ARROWS)
-		arrow = "ICE_ARROW";
-	
-	
-	if (ainfo->m_target_type == Action::SELF)
+	std::list<std::string>::iterator kt;
+	for (kt = ainfo->m_effect.m_cpp_impl.begin(); kt != ainfo->m_effect.m_cpp_impl.end(); ++kt)
 	{
-		applyBaseAttrMod(&cbam);
-	}
+		// Form, wird initialisiert mit der Form des Ausfuehrenden
+		Shape s;
+		s.m_center = pos;
+		s.m_type = Shape::CIRCLE;
+		s.m_radius = ainfo->m_radius;
+		
+		if (s.m_radius < 0)
+		{
+			s.m_radius = getShape()->m_radius + m_command.m_range;
+		}
+		
+		// Daten fuer Geschosse: Zielrichtung und Startpunkt
+		Vector dir = goal - pos;
+		Vector dir2,tdir;
+		dir.normalize();
+	
+		// Startpunkt fuer Geschosse
+		// aeusserer Rand des Ausfuehrenden plus 5%
+		Vector sproj;
+		Fraction fr = m_fraction;
+		sproj = pos + dir*1.05*s.m_radius;
+		
+		if (*kt == "dmg_at_target")
+		{
+			if (cgoal != 0)
+			{
+				cgoal->takeDamage(&m_damage);
+			}
+		}
+		else if (*kt == "dmg_at_enemies_in_radius")
+		{
+			getRegion()->getObjectsInShape(&s, &res,LAYER_AIR,CREATURE,this);
 
-		// Behandlung der Wirkung der Aktion nach Aktionstyp
+			// an alle Schaden austeilen
+			for (it=res.begin();it!=res.end();++it)
+			{
+				if ((*it)->isCreature())
+				{
+					cr = (Creature*) (*it);
+					cr->takeDamage(&m_damage);
+
+				}
+			}
+		}
+		else if (*kt == "dmg_at_enemies_around_target")
+		{
+			s.m_center = goal;
+			getRegion()->getObjectsInShape(&s, &res,LAYER_AIR,CREATURE,this);
+
+			// an alle einfachen Schaden austeilen
+			for (it=res.begin();it!=res.end();++it)
+			{
+				if ((*it)->isCreature())
+				{
+					cr = (Creature*) (*it);
+					cr->takeDamage(&m_damage);
+
+				}
+			}
+		}
+		else if (*kt == "basemod_at_self")
+		{
+			applyBaseAttrMod(&cbam);
+		}
+		else if (*kt == "basemod_at_allies_in_radius")
+		{
+			s.m_center = pos;
+			getRegion()->getObjectsInShape(&s, &res, LAYER_AIR,CREATURE,0);
+			for (it=res.begin();it!=res.end();++it)
+			{
+				if (World::getWorld()->getRelation(fr,(*it)) == WorldObject::ALLIED)
+				{
+					if ((*it)->isCreature())
+					{
+						cgoal = (Creature*) (*it);
+						cgoal->applyBaseAttrMod(&cbam);
+					}
+				}
+			}
+		}
+		else if (*kt == "basemod_at_target")
+		{
+			if (cgoal != 0)
+			{
+				cgoal->applyBaseAttrMod(&cbam);
+			}
+		}
+		else if (*kt == "basemod_at_enemies_in_radius")
+		{
+			s.m_center = pos;
+			getRegion()->getObjectsInShape(&s, &res, LAYER_AIR,CREATURE,0);
+			for (it=res.begin();it!=res.end();++it)
+			{
+				if (World::getWorld()->getRelation(fr,(*it)) == WorldObject::HOSTILE)
+				{
+					if ((*it)->isCreature())
+					{
+						cgoal = (Creature*) (*it);
+						cgoal->applyBaseAttrMod(&cbam);
+					}
+				}
+			}
+		}
+		else if (*kt == "dynmod_at_self")
+		{
+			applyDynAttrMod(&cdam);
+		}
+		else if (*kt == "dynmod_at_allies_in_radius")
+		{
+			s.m_center = pos;
+			getRegion()->getObjectsInShape(&s, &res, LAYER_AIR,CREATURE,0);
+			for (it=res.begin();it!=res.end();++it)
+			{
+				if (World::getWorld()->getRelation(fr,(*it)) == WorldObject::ALLIED)
+				{
+					if ((*it)->isCreature())
+					{
+						cgoal = (Creature*) (*it);
+						cgoal->applyDynAttrMod(&cdam);
+					}
+				}
+			}
+		}
+		else if (*kt == "dynmod_at_target")
+		{
+			if (cgoal != 0)
+			{
+				cgoal->applyDynAttrMod(&cdam);
+			}
+		}
+		else if (*kt == "dynmod_at_enemies_in_radius")
+		{
+			s.m_center = pos;
+			getRegion()->getObjectsInShape(&s, &res, LAYER_AIR,CREATURE,0);
+			for (it=res.begin();it!=res.end();++it)
+			{
+				if (World::getWorld()->getRelation(fr,(*it)) == WorldObject::HOSTILE)
+				{
+					if ((*it)->isCreature())
+					{
+						cgoal = (Creature*) (*it);
+						cgoal->applyDynAttrMod(&cdam);
+					}
+				}
+			}
+		}
+		else if (*kt == "proj_at_target")
+		{
+			pr = new Projectile(projtype,&m_damage);
+			pr->setFlags(ainfo->m_projectile_flags);
+			pr->setCounter(ainfo->m_projectile_counter);
+			getRegion()->insertProjectile(pr,goal);
+		}
+		else if (*kt == "proj_fly_at_target")
+		{
+			pr = new Projectile(projtype,&m_damage);
+			pr->setFlags(ainfo->m_projectile_flags);
+			pr->setCounter(ainfo->m_projectile_counter);
+			pr->setSpeed(dir*(ainfo->m_projectile_speed/1000000));
+			
+			getRegion()->insertProjectile(pr,sproj);
+		}
+		else if (*kt == "proj_at_self")
+		{
+			pr = new Projectile(projtype,&m_damage, World::getWorld()->getValidProjectileId());
+			pr->setFlags(ainfo->m_projectile_flags);
+			pr->setCounter(ainfo->m_projectile_counter);
+			
+			getRegion()->insertProjectile(pr,pos);
+		}
+		// spezielle Implementationen
+		else if (*kt == "hammer_bash")
+		{
+			m_damage.m_multiplier[Damage::PHYSICAL]=1;
+			s.m_center = goal;
+			s.m_radius = 1.5;
+			getRegion()->getObjectsInShape(&s, &res,LAYER_AIR,CREATURE,this);
+
+			// an alle einfachen Schaden austeilen
+			for (it=res.begin();it!=res.end();++it)
+			{
+				if ((*it)->isCreature())
+				{
+					cr = (Creature*) (*it);
+					cr->takeDamage(&m_damage);
+
+				}
+			}
+		}
+		else if (*kt == "multishot" )
+		{		
+
+			// 5 Pfeile erzeugen
+			// mittlerer Pfeil erhaelt die Zielrichtung
+			for (int i=-2;i<=2;i++)
+			{
+				dir2 = dir;
+				dir2.m_x += i*0.2*dir.m_y;
+				dir2.m_y += i*0.2*dir.m_x;
+				dir2.normalize();
+
+				sproj = pos+dir2* 1.05 * s.m_radius;
+				pr = new Projectile(projtype,&m_damage, World::getWorld()->getValidProjectileId());
+				pr->setSpeed(dir2/80);
+				
+				getRegion()->insertProjectile(pr,sproj);
+			}
+			
+		}
+		else if (*kt == "volley_shot" )
+		{	
+			// 7 Pfeile erzeugen
+			// mittlerer Pfeil erhaelt die Zielrichtung
+			for (int i=-3;i<=3;i++)
+			{
+				dir2 = dir;
+				dir2.m_x += i*0.2*dir.m_y;
+				dir2.m_y += i*0.2*dir.m_x;
+				dir2.normalize();
+
+				sproj = pos+dir2* 1.05 * s.m_radius;
+				pr = new Projectile(projtype,&m_damage, World::getWorld()->getValidProjectileId());
+				pr->setSpeed(dir2/80);
+				getRegion()->insertProjectile(pr,sproj);
+			}
+			
+		}
+		else if (*kt == "battle_cry" )
+		{			
+		// alle Lebewesen im Umkreis um den Ausfuehrenden auswaehlen
+			// Radius gleich Waffenreichweite
+			cbam.m_time =60000;
+			
+			getRegion()->getObjectsInShape(&s, &res,LAYER_AIR,CREATURE,this);
+
+			// an alle Schaden austeilen
+			for (it=res.begin();it!=res.end();++it)
+			{
+				if ((*it)->isCreature() && World::getWorld()->getRelation(getFraction(),(*it)->getFraction()) ==  HOSTILE)
+				{
+					cr = (Creature*) (*it);
+					cbam.m_dwalk_speed = -cr->getBaseAttrMod()->m_walk_speed/2;
+					cbam.m_dattack_speed = -cr->getBaseAttrMod()->m_attack_speed/2;
+					cr->applyBaseAttrMod(&cbam);
+				}
+			}
+		}
+		else if (*kt == "berserk")
+		{
+			m_dyn_attr.m_status_mod_time[Damage::BERSERK] = 30000;
+			addToNetEventMask(NetEvent::DATA_STATUS_MODS);
+		}
+		
+	}
+	/*
+	// Behandlung der Wirkung der Aktion nach Aktionstyp
 	if (m_action.m_type == "speak")
 	{
 			if (goalobj->isCreature() && getDialogueId() ==0 && getRegion()->getCutsceneMode() == false)
@@ -1232,7 +1469,7 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 				}
 			}
 	}
-
+*/
 	// Faehigkeit Monsterjaeger
 	// Wenn das Ziel nach der Aktion unter 0 Lebenspunkte hat Bonus austeilen
 	if ((checkAbility("monster_hunter") || (checkAbility("monster_slayer"))) && cgoal && cgoal->getDynAttr()->m_health<0)
@@ -2451,6 +2688,10 @@ void  Creature::calcActionAttrMod(Action::ActionType act,CreatureBaseAttrMod & b
 			bmod.m_time = 40000;
 			bmod.m_dstrength =m_base_attr.m_strength;
 			bmod.m_darmor = -m_base_attr_mod.m_armor /2;
+	}
+	else if (act == "regenerate")
+	{
+		dmod.m_dhealth = 0.5f*m_base_attr_mod.m_max_health;
 	}
 	else if (act == "fury")
 	{		
