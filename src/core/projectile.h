@@ -95,6 +95,16 @@ class Projectile : public GameObject
 	}
 	
 	/**
+	 * \fn void addFlags(char f)
+	 * \brief Fuegt Flags hinzu
+	 * \param f Flags
+	 */
+	void addFlags(char f)
+	{
+		m_flags |= f;
+	}
+	
+	/**
 	 * \fn Damage* getDamage()
 	 * \brief Gibt Struktur mit Schadensinformationen aus
 	 * \return Damage Objekt

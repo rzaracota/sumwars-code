@@ -873,14 +873,14 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 		else if (*kt == "proj_at_target")
 		{
 			pr = new Projectile(projtype,&m_damage);
-			pr->setFlags(ainfo->m_projectile_flags);
+			pr->addFlags(ainfo->m_projectile_flags);
 			pr->setCounter(ainfo->m_projectile_counter);
 			getRegion()->insertProjectile(pr,goal);
 		}
 		else if (*kt == "proj_fly_at_target")
 		{
 			pr = new Projectile(projtype,&m_damage);
-			pr->setFlags(ainfo->m_projectile_flags);
+			pr->addFlags(ainfo->m_projectile_flags);
 			pr->setCounter(ainfo->m_projectile_counter);
 			pr->setSpeed(dir*(ainfo->m_projectile_speed/1000000));
 			
@@ -889,7 +889,7 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 		else if (*kt == "proj_at_self")
 		{
 			pr = new Projectile(projtype,&m_damage, World::getWorld()->getValidProjectileId());
-			pr->setFlags(ainfo->m_projectile_flags);
+			pr->addFlags(ainfo->m_projectile_flags);
 			pr->setCounter(ainfo->m_projectile_counter);
 			
 			getRegion()->insertProjectile(pr,pos);
@@ -3695,7 +3695,7 @@ bool Creature::takeDamage(Damage* d)
 		dmg.m_attacker_fraction = m_fraction;
 		
 		// Projektil Statikschild erzeugen
-		Projectile* pr = new Projectile("STATIC_SHIELD",&dmg, World::getWorld()->getValidProjectileId());
+		Projectile* pr = new Projectile("STATIC_SHIELD",&dmg);
 
 		pr->getShape()->m_radius =getShape()->m_radius+1;
 		getRegion()->insertProjectile(pr,getShape()->m_center);

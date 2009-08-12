@@ -441,77 +441,386 @@
 	</Effect>
 </Ability>
 
+
 <!-- Magier -->
-<Ability type="blizzard" name="Blizzard" description="The mage summons a leathal cold blizzard that freezes every enemy caught in it to death." time="1401.000000" timer_nr="2.000000" timer_value="14000.000000" base_ability="magic_attack" critical_percent="0.800000" target_type="ranged">
+<Ability type="blizzard"
+		 name="Blizzard" 
+		 description="The mage summons a leathal cold blizzard that freezes every enemy caught in it to death."
+		 time="1401.000000" 
+		 timer_nr="2.000000"
+		 timer_value="14000.000000" 
+		 base_ability="magic_attack" 
+		 critical_percent="0.800000"
+		 target_type="ranged">
 	<Flag name="mute_affected" />
+	<Effect>
+		<CppImplementation type="proj_at_target" />
+	</Effect>
+	<Projectile type="BLIZZARD"/>
 </Ability>
-<Ability type="chain_lightning" name="Chainlightning" description="The mage unleashes a ball of lightning, that may jump from one enemy to another. It hits a maximum of five enemies and the damage is reduced everytime it jumps." time="801.000000" timer_nr="1.000000" timer_value="7000.000000" base_ability="magic_attack" critical_percent="0.800000" target_type="ranged">
+
+<Ability type="chain_lightning"
+		 name="Chainlightning"
+		 description="The mage unleashes a ball of lightning, that may jump from one enemy to another. It hits a maximum of five enemies and the damage is reduced everytime it jumps." 
+		 time="801.000000" 
+		 timer_nr="1.000000" 
+		 timer_value="7000.000000" 
+		 base_ability="magic_attack" 
+		 critical_percent="0.800000" 
+		 target_type="ranged">
 	<Flag name="mute_affected" />
+	<Effect>
+		<CppImplementation type="proj_fly_at_target" />
+	</Effect>
+	<Projectile type="CHAIN_LIGHTNING" speed="12000"/>
 </Ability>
-<Ability type="chain_lightning2" name="Ball lightning" description="The mage unleashes a mighty ball lightning, that can jump over to nearby enemies. A maximum of nine enemies is hit and the damage is reduced with every jump." time="801.000000" timer_nr="1.000000" timer_value="7000.000000" base_ability="magic_attack" critical_percent="0.800000" target_type="ranged">
+
+<Ability type="chain_lightning2"
+		 name="Ball lightning" 
+		 description="The mage unleashes a mighty ball lightning, that can jump over to nearby enemies. A maximum of nine enemies is hit and the damage is reduced with every jump." 
+		 time="801.000000" 
+		 timer_nr="1.000000"
+		 timer_value="7000.000000" 
+		 base_ability="magic_attack" 
+		 critical_percent="0.800000" 
+		 target_type="ranged">
 	<Flag name="mute_affected" />
+	<Effect>
+		<CppImplementation type="proj_fly_at_target" />
+	</Effect>
+	<Projectile type="CHAIN_LIGHTNING" speed="12000"/>
 </Ability>
-<Ability type="chill" name="Chilling cold" description="The mage has understood everything about ice and snow, allowing him to increase the effectiveness of his icespells by 20%." time="0.000000" timer_nr="0.000000" timer_value="0.000000" base_ability="noaction" critical_percent="0.000000" target_type="passive" />
-<Ability type="fire_ball" name="Fireball" description="The mage casts a bolt of fire, that explodes upon hitting an enemy. Other enemies nearby the victim are also caught in the explosion." time="1001.000000" timer_nr="1.000000" timer_value="6000.000000" base_ability="magic_attack" critical_percent="0.800000" target_type="ranged">
+
+<Ability type="chill"
+		 name="Chilling cold"
+		 description="The mage has understood everything about ice and snow, allowing him to increase the effectiveness of his icespells by 20%."
+		 time="0.000000"
+		 timer_nr="0.000000" 
+		 timer_value="0.000000"
+		 base_ability="noaction" 
+		 critical_percent="0.000000" 
+		 target_type="passive" />
+
+<Ability type="fire_ball"
+		 name="Fireball" 
+		 description="The mage casts a bolt of fire, that explodes upon hitting an enemy. Other enemies nearby the victim are also caught in the explosion." 
+		 time="1001.000000" 
+		 timer_nr="1.000000"
+		 timer_value="6000.000000" 
+		 base_ability="magic_attack" 
+		 critical_percent="0.800000" 
+		 target_type="ranged">
 	<Flag name="mute_affected" />
+	<Effect>
+		<CppImplementation type="proj_fly_at_target" />
+	</Effect>
+	<Projectile type="FIRE_BALL" speed="12000" />
 </Ability>
-<Ability type="fire_bolt" name="Firebolt" description="The mage unleashes a small bolt of fire, that damages a single enemy." time="701.000000" timer_nr="1.000000" timer_value="2500.000000" base_ability="magic_attack" critical_percent="0.800000" target_type="ranged">
+
+<Ability type="fire_bolt"
+		 name="Firebolt" 
+		 description="The mage unleashes a small bolt of fire, that damages a single enemy." 
+		 time="701.000000" 
+		 timer_nr="1.000000" 
+		 timer_value="2500.000000" 
+		 base_ability="magic_attack" 
+		 critical_percent="0.800000"
+		 target_type="ranged">
 	<Flag name="mute_affected" />
+	<Effect>
+		<CppImplementation type="proj_fly_at_target" />
+	</Effect>
+	<Projectile type="FIRE_BOLT" speed="12000" />
 </Ability>
-<Ability type="fire_storm" name="Firestorm" description="The mage conjures a deadly wave of fire, that burns every enemy in a circle around him." time="1301.000000" timer_nr="2.000000" timer_value="15000.000000" base_ability="magic_attack" critical_percent="0.800000" target_type="ranged">
+
+<Ability type="fire_storm"
+		 name="Firestorm" 
+		 description="The mage conjures a deadly wave of fire, that burns every enemy in a circle around him." 
+		 time="1301.000000" 
+		 timer_nr="2.000000" 
+		 timer_value="15000.000000" 
+		 base_ability="magic_attack"
+		 critical_percent="0.800000"
+		 target_type="ranged">
 	<Flag name="mute_affected" />
+	<Effect>
+		<CppImplementation type="proj_at_self" />
+	</Effect>
+	<Projectile type="FIRE_WAVE" />
 </Ability>
-<Ability type="fire_strike" name="Fireblow" description="The mage casts a strong bolt of fire, that damages one enemy." time="701.000000" timer_nr="1.000000" timer_value="2500.000000" base_ability="magic_attack" critical_percent="0.800000" target_type="ranged">
+
+<Ability type="fire_strike"
+		 name="Fireblow" 
+		 description="The mage casts a strong bolt of fire, that damages one enemy." 
+		 time="701.000000" 
+		 timer_nr="1.000000" 
+		 timer_value="2500.000000" 
+		 base_ability="magic_attack" 
+		 critical_percent="0.800000" 
+		 target_type="ranged">
 	<Flag name="mute_affected" />
+	<Effect>
+		<CppImplementation type="proj_fly_at_target" />
+	</Effect>
+	<Projectile type="FIRE_BOLT" speed="12000" />
 </Ability>
-<Ability type="fire_wall" name="Firecolumn" description="The mage conjurs a column made of hellfire, that will stay for 5 seconds and turn every enemy stupid enough to stay in there to ashes." time="1001.000000" timer_nr="2.000000" timer_value="12000.000000" base_ability="magic_attack" critical_percent="0.800000" target_type="ranged">
+
+<Ability type="fire_wall"
+		 name="Firecolumn" 
+		 description="The mage conjurs a column made of hellfire, that will stay for 5 seconds and turn every enemy stupid enough to stay in there to ashes."
+		 time="1001.000000" 
+		 timer_nr="2.000000" 
+		 timer_value="12000.000000"
+		 base_ability="magic_attack" 
+		 critical_percent="0.800000" 
+		 target_type="ranged">
 	<Flag name="mute_affected" />
+	<Effect>
+		<CppImplementation type="proj_at_target" />
+	</Effect>
+	<Projectile type="FIRE_WAVE" />
 </Ability>
-<Ability type="fire_wave" name="Flame wave" description="The mage conjures a wave of flames, that damages enemies in a circle around him." time="1301.000000" timer_nr="2.000000" timer_value="15000.000000" base_ability="magic_attack" critical_percent="0.800000" target_type="ranged">
+
+<Ability type="fire_wave"
+		 name="Flame wave"
+		 description="The mage conjures a wave of flames, that damages enemies in a circle around him."
+		 time="1301.000000"
+		 timer_nr="2.000000"
+		 timer_value="15000.000000"
+		 base_ability="magic_attack"
+		 critical_percent="0.800000"
+		 target_type="ranged">
 	<Flag name="mute_affected" />
+	<Effect>
+		<CppImplementation type="proj_at_self" />
+	</Effect>
+	<Projectile type="FIRE_WAVE" />
 </Ability>
-<Ability type="freeze" name="Freeze" description="The mage catches an enemy in a block of pure ice, instantly sealing his movements." time="1001.000000" timer_nr="2.000000" timer_value="11000.000000" base_ability="magic_attack" critical_percent="0.800000" target_type="ranged">
+
+<Ability type="freeze"
+		 name="Freeze"
+		 description="The mage catches an enemy in a block of pure ice, instantly sealing his movements."
+		 time="1001.000000"
+		 timer_nr="2.000000"
+		 timer_value="11000.000000"
+		 base_ability="magic_attack"
+		 critical_percent="0.800000"
+		 target_type="ranged">
 	<Flag name="mute_affected" />
+	<Effect>
+		<CppImplementation type="proj_at_target" />
+	</Effect>
+	<Projectile type="FREEZE" />
 </Ability>
-<Ability type="frost_ring" name="Frost ring" description="The mage calls upon a deadlier version of the icering." time="1001.000000" timer_nr="1.000000" timer_value="7000.000000" base_ability="magic_attack" critical_percent="0.800000" target_type="ranged">
+
+<Ability type="frost_ring"
+		 name="Frost ring"
+		 description="The mage calls upon a deadlier version of the icering."
+		 time="1001.000000" 
+		 timer_nr="1.000000"
+		 timer_value="7000.000000"
+		 base_ability="magic_attack"
+		 critical_percent="0.800000"
+		 target_type="ranged">
 	<Flag name="mute_affected" />
+	<Effect>
+		<CppImplementation type="proj_at_self" />
+	</Effect>
+	<Projectile type="ICE_RING" />
 </Ability>
-<Ability type="ice_bolt" name="Icicle" description="The mage casts a shard of pure ice, that damages his foes." time="701.000000" timer_nr="1.000000" timer_value="3000.000000" base_ability="magic_attack" critical_percent="0.800000" target_type="ranged">
+
+<Ability type="ice_bolt"
+		 name="Icicle"
+		 description="The mage casts a shard of pure ice, that damages his foes."
+		 time="701.000000"
+		 timer_nr="1.000000"
+		 timer_value="3000.000000"
+		 base_ability="magic_attack"
+		 critical_percent="0.800000"
+		 target_type="ranged">
 	<Flag name="mute_affected" />
+	<Effect>
+		<CppImplementation type="proj_fly_at_target" />
+	</Effect>
+	<Projectile type="ICE_BOLT" speed="12000" />
 </Ability>
-<Ability type="ice_ring" name="Ice ring" description="The mage casts a ring of ice around himself that will damage enemies in range." time="1001.000000" timer_nr="1.000000" timer_value="7000.000000" base_ability="magic_attack" critical_percent="0.800000" target_type="ranged">
+
+<Ability type="ice_ring"
+		 name="Ice ring"
+		 description="The mage casts a ring of ice around himself that will damage enemies in range."
+		 time="1001.000000"
+		 timer_nr="1.000000"
+		 timer_value="7000.000000"
+		 base_ability="magic_attack"
+		 critical_percent="0.800000"
+		 target_type="ranged">
 	<Flag name="mute_affected" />
+	<Effect>
+		<CppImplementation type="proj_at_self" />
+	</Effect>
+	<Projectile type="ICE_RING" />
 </Ability>
-<Ability type="ice_spike" name="Spear of ice" description="The mage attacks one enemy with a powerful spear of magical ice." time="701.000000" timer_nr="1.000000" timer_value="3000.000000" base_ability="magic_attack" critical_percent="0.800000" target_type="ranged">
+
+<Ability type="ice_spike"
+		 name="Spear of ice"
+		 description="The mage attacks one enemy with a powerful spear of magical ice."
+		 time="701.000000"
+		 timer_nr="1.000000"
+		 timer_value="3000.000000"
+		 base_ability="magic_attack"
+		 critical_percent="0.800000"
+		 target_type="ranged">
 	<Flag name="mute_affected" />
+	<Effect>
+		<CppImplementation type="proj_fly_at_target" />
+	</Effect>
+	<Projectile type="ICE_BOLT" speed="12000" />
 </Ability>
-<Ability type="inferno_ball" name="Infernoball" description="The mage casts an even more powerful fireball." time="1001.000000" timer_nr="1.000000" timer_value="6000.000000" base_ability="magic_attack" critical_percent="0.800000" target_type="ranged">
+
+<Ability type="inferno_ball"
+		 name="Infernoball"
+		 description="The mage casts an even more powerful fireball."
+		 time="1001.000000"
+		 timer_nr="1.000000"
+		 timer_value="6000.000000"
+		 base_ability="magic_attack"
+		 critical_percent="0.800000"
+		 target_type="ranged">
 	<Flag name="mute_affected" />
+	<Effect>
+		<CppImplementation type="proj_fly_at_target" />
+	</Effect>
+	<Projectile type="FIRE_BALL" speed="12000" />
 </Ability>
-<Ability type="inflame" name="Ignite" description="The mage embraces the heat of fire, so that victims of his firespells will likely suffer burn." time="0.000000" timer_nr="0.000000" timer_value="0.000000" base_ability="noaction" critical_percent="0.000000" target_type="passive" />
-<Ability type="ionisation" name="Ionisation" description="The mage has become one with the storm, leading to 20 percent extra damage from his lightning spells." time="0.000000" timer_nr="0.000000" timer_value="0.000000" base_ability="noaction" critical_percent="0.000000" target_type="passive" />
-<Ability type="lightning" name="Lightning" description="The mage summons a lightning to attack one foe." time="501.000000" timer_nr="1.000000" timer_value="2000.000000" base_ability="magic_attack" critical_percent="0.800000" target_type="ranged">
+
+<Ability type="inflame"
+		 name="Ignite"
+		 description="The mage embraces the heat of fire, so that victims of his firespells will likely suffer burn."
+		 time="0.000000"
+		 timer_nr="0.000000"
+		 timer_value="0.000000"
+		 base_ability="noaction"
+		 critical_percent="0.000000"
+		 target_type="passive" />
+
+<Ability type="ionisation"
+		 name="Ionisation"
+		 description="The mage has become one with the storm, leading to 20 percent extra damage from his lightning spells." time="0.000000"
+		 timer_nr="0.000000"
+		 timer_value="0.000000"
+		 base_ability="noaction"
+		 critical_percent="0.000000"
+		 target_type="passive" />
+
+<Ability type="lightning"
+		 name="Lightning"
+		 description="The mage summons a lightning to attack one foe."
+		 time="501.000000"
+		 timer_nr="1.000000"
+		 timer_value="2000.000000"
+		 base_ability="magic_attack"
+		 critical_percent="0.800000"
+		 target_type="ranged">
 	<Flag name="mute_affected" />
+	<Effect>
+		<CppImplementation type="proj_at_target" />
+	</Effect>
+	<Projectile type="LIGHTNING" />
 </Ability>
-<Ability type="lightning_strike" name="Lightning strike" description="The mage calls upon a mighty lightning to kill an enemy." time="501.000000" timer_nr="1.000000" timer_value="2000.000000" base_ability="magic_attack" critical_percent="0.800000" target_type="ranged">
+
+<Ability type="lightning_strike"
+		 name="Lightning strike"
+		 description="The mage calls upon a mighty lightning to kill an enemy."
+		 time="501.000000"
+		 timer_nr="1.000000"
+		 timer_value="2000.000000"
+		 base_ability="magic_attack"
+		 critical_percent="0.800000"
+		 target_type="ranged">
 	<Flag name="mute_affected" />
+	<Effect>
+		<CppImplementation type="proj_at_target" />
+	</Effect>
+	<Projectile type="LIGHTNING" />
 </Ability>
-<Ability type="snow_storm" name="Snow storm" description="The mage calls upon a snow storm to kill every enemy in a circle." time="1401.000000" timer_nr="2.000000" timer_value="14000.000000" base_ability="magic_attack" critical_percent="0.800000" target_type="ranged">
+
+<Ability type="snow_storm"
+		 name="Snow storm"
+		 description="The mage calls upon a snow storm to kill every enemy in a circle."
+		 time="1401.000000"
+		 timer_nr="2.000000"
+		 timer_value="14000.000000"
+		 base_ability="magic_attack"
+		 critical_percent="0.800000"
+		 target_type="ranged">
 	<Flag name="mute_affected" />
+	<Effect>
+		<CppImplementation type="proj_at_target" />
+	</Effect>
+	<Projectile type="BLIZZARD" />
 </Ability>
-<Ability type="static_shield" name="Static shield" description="The mage surrounds himself with an armor of lightning, that will stun and damage enemies who are bolt enough to attack in close combat." time="501.000000" timer_nr="2.000000" timer_value="40000.000000" base_ability="noaction" critical_percent="0.800000">
+
+<Ability type="static_shield"
+		 name="Static shield"
+		 description="The mage surrounds himself with an armor of lightning, that will stun and damage enemies who are bolt enough to attack in close combat."
+		 time="501.000000" 
+		 timer_nr="2.000000"
+		 timer_value="40000.000000"
+		 base_ability="noaction"
+		 critical_percent="0.800000">
 	<Flag name="mute_affected" />
+	<Effect>
+		<CppImplementation type="basemod_at_self" />
+	</Effect>
 </Ability>
-<Ability type="thunderstorm" name="Thunderstorm" description="The mage summons a thunderstorm that will assault enemies in its range with lightnings." time="1301.000000" timer_nr="2.000000" timer_value="12000.000000" base_ability="magic_attack" critical_percent="0.800000" target_type="ranged">
+
+<Ability type="thunderstorm"
+		 name="Thunderstorm"
+		 description="The mage summons a thunderstorm that will assault enemies in its range with lightnings." 
+		 time="1301.000000"
+		 timer_nr="2.000000"
+		 timer_value="12000.000000"
+		 base_ability="magic_attack"
+		 critical_percent="0.800000"
+		 target_type="ranged">
 	<Flag name="mute_affected" />
+	<Effect>
+		<CppImplementation type="proj_at_target" />
+	</Effect>
+	<Projectile type="THUNDERSTORM" />
 </Ability>
-<Ability type="thunderstorm2" name="Tempest" description="The mage summons a ferocious tempest that bombards enemies in its wake with lightnings." time="1301.000000" timer_nr="2.000000" timer_value="12000.000000" base_ability="magic_attack" critical_percent="0.800000" target_type="ranged">
+
+<Ability type="thunderstorm2"
+		 name="Tempest"
+		 description="The mage summons a ferocious tempest that bombards enemies in its wake with lightnings."
+		 time="1301.000000"
+		 timer_nr="2.000000"
+		 timer_value="12000.000000"
+		 base_ability="magic_attack"
+		 critical_percent="0.800000"
+		 target_type="ranged">
 	<Flag name="mute_affected" />
+	<Effect>
+		<CppImplementation type="proj_at_target" />
+	</Effect>
+	<Projectile type="THUNDERSTORM" />
 </Ability>
 
 
 <!-- Schuetze -->
-<Ability type="aimed_shot" name="Snipe" description="The archers deadly precision causes his shots to deal more damage than normal." time="801.000000" timer_nr="2.000000" timer_value="140000.000000" base_ability="noaction" critical_percent="0.660000" />
+<Ability type="aimed_shot"
+		 name="Snipe"
+		 description="The archers deadly precision causes his shots to deal more damage than normal."
+		 time="801.000000"
+		 timer_nr="2.000000"
+		 timer_value="140000.000000"
+		 base_ability="noaction"
+		 critical_percent="0.660000" >
+	<Effect>
+		<CppImplementation type="basemod_at_self" />
+	</Effect>
+</Ability>
+
 <Ability type="blind_rage" name="Blind Rage" description="The archer attacks the enemies eyes, causing him to go berserk, but be blinded at the same time." time="1.000000" timer_nr="1.000000" timer_value="4000.000000" base_ability="range_attack" critical_percent="0.660000" target_type="ranged" />
 <Ability type="bow_spirit" name="Bow Spirit" description="The archer becomes one with his weapon, dealing more damage over a longer time. Additionally his critical strike chance is increased. This effect stacks with Elfeyes." time="801.000000" timer_nr="2.000000" timer_value="140000.000000" base_ability="noaction" critical_percent="0.660000" />
 <Ability type="concentration" name="Concentration" description="The archers steady mind can no longer be confused." time="0.000000" timer_nr="0.000000" timer_value="0.000000" base_ability="noaction" critical_percent="0.000000" target_type="passive" />
