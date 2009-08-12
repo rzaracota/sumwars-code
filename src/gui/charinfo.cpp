@@ -446,7 +446,7 @@ CharInfo::CharInfo (Document* doc)
 	Player* player = m_document->getLocalPlayer();
 	FightStatistic* fstat = &(player->getFightStatistic());
 	std::string tooltip;
-	CEGUI::utf8* ttext=0;
+	CEGUI::String ttext="";
 
 	// Fenstermanager
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
@@ -729,8 +729,7 @@ CharInfo::CharInfo (Document* doc)
 	if (pdata != 0)
 	{
 		ttext = (CEGUI::utf8*) (Action::getDescription(pdata->m_base_ability).c_str());
-		out_stream << Action::getName(pdata->m_base_ability);
-		
+		out_stream << Action::getName(pdata->m_base_ability);	
 	}
 	else
 	{
@@ -788,10 +787,10 @@ CharInfo::CharInfo (Document* doc)
 	{
 		label->setText((CEGUI::utf8*) out_stream.str().c_str());
 	}
-	tooltip = dmgl.getDamageString();
-	if (tooltip != label->getTooltipText())
+	ttext = (CEGUI::utf8*) (dmgl.getDamageString().c_str());
+	if (ttext != label->getTooltipText())
 	{
-		label->setTooltipText(tooltip);
+		label->setTooltipText(ttext);
 	}
 	
 
@@ -826,10 +825,10 @@ CharInfo::CharInfo (Document* doc)
 		{
 			label->setText((CEGUI::utf8*) out_stream.str().c_str());
 		}
-		tooltip = dmgr.getDamageString();
-		if (tooltip != label->getTooltipText())
+		ttext = (CEGUI::utf8*) dmgr.getDamageString().c_str();
+		if (ttext != label->getTooltipText())
 		{
-			label->setTooltipText(tooltip);
+			label->setTooltipText(ttext);
 		}
 	}
 	else
