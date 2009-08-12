@@ -1233,57 +1233,284 @@
 	<Projectile type="LIGHT_BEAM" speed="12000" />
 </Ability>
 
-<Ability type="cure_blind_mute" name="Gentle Glow" description="The priest bathes a partymember in a mild light, releaving him of blindness and silence." time="501.000000" timer_nr="1.000000" timer_value="3000.000000" base_ability="noaction" critical_percent="0.660000" target_type="party">
-	<Flag name="mute_affected" />
+<Ability type="cure_blind_mute"
+		 name="Gentle Glow"
+		 description="The priest bathes a partymember in a mild light, releaving him of blindness and silence."
+		 time="501.000000"
+		 timer_nr="1.000000"
+		 timer_value="3000.000000"
+		 base_ability="noaction"
+		 critical_percent="0.660000"
+		 target_type="party">
+	<Effect>
+		<CppImplementation type="dynmod_at_target" />
+	</Effect>
 </Ability>
-<Ability type="cure_blind_mute_party" name="Omniscent Eye" description="The party will be immune to blind and berserk for some time. With increasing willpower the priest can hold this effect longer." time="501.000000" timer_nr="2.000000" timer_value="6000.000000" base_ability="noaction" critical_percent="0.660000" target_type="party_all">
-	<Flag name="mute_affected" />
+
+<Ability type="cure_blind_mute_party"
+		 name="Omniscent Eye"
+		 description="The party will be immune to blind and berserk for some time. With increasing willpower the priest can hold this effect longer."
+		 time="501.000000"
+		 timer_nr="2.000000"
+		 timer_value="6000.000000" 
+		 base_ability="noaction"
+		 critical_percent="0.660000"
+		 target_type="party_all"
+		 radius="12">
+	<Effect>
+		<CppImplementation type="dynmod_at_allies_in_radius" />
+	</Effect>
 </Ability>
-<Ability type="cure_conf_bsrk" name="Restore Concentration" description="The priest heals one friend from confusion and berserk." time="501.000000" timer_nr="1.000000" timer_value="3000.000000" base_ability="noaction" critical_percent="0.660000" target_type="party">
+
+<Ability type="cure_conf_bsrk"
+		 name="Restore Concentration"
+		 description="The priest heals one friend from confusion and berserk."
+		 time="501.000000"
+		 timer_nr="1.000000"
+		 timer_value="3000.000000"
+		 base_ability="noaction"
+		 critical_percent="0.660000"
+		 target_type="party">
 	<Flag name="mute_affected" />
+	<Effect>
+		<CppImplementation type="dynmod_at_target" />
+	</Effect>
 </Ability>
-<Ability type="cure_conf_bsrk_party" name="Spirit Shield" description="The priest grants immunity to berserk and confuse to all his partymembers for a small amount of time. With increasing willpower the priest can hold this effect longer." time="501.000000" timer_nr="2.000000" timer_value="6000.000000" base_ability="noaction" critical_percent="0.660000" target_type="party_all">
+
+<Ability type="cure_conf_bsrk_party"
+		 name="Spirit Shield"
+		 description="The priest grants immunity to berserk and confuse to all his partymembers for a small amount of time. With increasing willpower the priest can hold this effect longer."
+		 time="501.000000"
+		 timer_nr="2.000000"
+		 timer_value="6000.000000"
+		 base_ability="noaction"
+		 critical_percent="0.660000"
+		 target_type="party_all"
+		 radius="12">
 	<Flag name="mute_affected" />
+	<Effect>
+		<CppImplementation type="dynmod_at_allies_in_radius" />
+	</Effect>
 </Ability>
-<Ability type="cure_pois_burn" name="Ease Pain" description="The priest treats a partymemener with healing water that washes away every poison and stops burns." time="501.000000" timer_nr="1.000000" timer_value="3000.000000" base_ability="noaction" critical_percent="0.660000" target_type="party">
+
+<Ability type="cure_pois_burn"
+		 name="Ease Pain"
+		 description="The priest treats a partymemener with healing water that washes away every poison and stops burns."
+		 time="501.000000"
+		 timer_nr="1.000000"
+		 timer_value="3000.000000"
+		 base_ability="noaction"
+		 critical_percent="0.660000"
+		 target_type="party">
 	<Flag name="mute_affected" />
+	<Effect>
+		<CppImplementation type="dynmod_at_target" />
+	</Effect>
 </Ability>
-<Ability type="cure_pois_burn_party" name="Remedial Water" description="The priests grants every partymember immunity to poison and burn for a small amount of time while healing these effects. With increasing willpower the priest can hold this effect longer." time="501.000000" timer_nr="2.000000" timer_value="6000.000000" base_ability="noaction" critical_percent="0.660000" target_type="party_all">
+
+<Ability type="cure_pois_burn_party"
+		 name="Remedial Water"
+		 description="The priests grants every partymember immunity to poison and burn for a small amount of time while healing these effects. With increasing willpower the priest can hold this effect longer."
+		 time="501.000000"
+		 timer_nr="2.000000"
+		 timer_value="6000.000000"
+		 base_ability="noaction"
+		 critical_percent="0.660000" 
+		 target_type="party_all"
+		 radius="12">
 	<Flag name="mute_affected" />
+	<Effect>
+		<CppImplementation type="dynmod_at_allies_in_radius" />
+	</Effect>
 </Ability>
-<Ability type="disrupt_binding" name="Dismissing Strike" description="The priest strikes with all his might. While normal monsters have little to fear from this attack elementals will be easily destroyed by it." time="1.000000" timer_nr="1.000000" timer_value="4000.000000" base_ability="holy_attack" critical_percent="0.660000" target_type="melee">
+
+<Ability type="disrupt_binding"
+		 name="Dismissing Strike"
+		 description="The priest strikes with all his might. While normal monsters have little to fear from this attack elementals will be easily destroyed by it."
+		 time="1.000000"
+		 timer_nr="1.000000"
+		 timer_value="4000.000000"
+		 base_ability="holy_attack"
+		 critical_percent="0.660000"
+		 target_type="melee">
 	<Flag name="mute_affected" />
+	<Effect>
+		<CppImplementation type="dmg_at_target" />
+	</Effect>
 </Ability>
-<Ability type="divine_storm" name="God Strike" description="Only strong and durable demons will be able to resist the priests sacred strike." time="1.000000" timer_nr="1.000000" timer_value="6000.000000" base_ability="holy_attack" critical_percent="0.660000" target_type="melee">
+
+<Ability type="divine_storm"
+		 name="God Strike"
+		 description="Only strong and durable demons will be able to resist the priests sacred strike."
+		 time="1.000000"
+		 timer_nr="1.000000"
+		 timer_value="6000.000000"
+		 base_ability="holy_attack"
+		 critical_percent="0.660000"
+		 target_type="melee"
+		 radius="3">
 	<Flag name="mute_affected" />
+	<Effect>
+		<CppImplementation type="proj_at_enemies_around_target" />
+	</Effect>
+	<Projectile type="DIVINE_BEAM"/>
 </Ability>
-<Ability type="divine_wind" name="Windstrike" description="The priest creates a vortex with his attack, that can suck a demonic creature right back to hell." time="1.000000" timer_nr="1.000000" timer_value="3000.000000" base_ability="holy_attack" critical_percent="0.660000" target_type="melee">
+
+<Ability type="divine_wind"
+		 name="Windstrike"
+		 description="The priest creates a vortex with his attack, that can suck a demonic creature right back to hell."
+		 time="1.000000"
+		 timer_nr="1.000000"
+		 timer_value="3000.000000"
+		 base_ability="holy_attack"
+		 critical_percent="0.660000"
+		 target_type="melee">
 	<Flag name="mute_affected" />
+	<Effect>
+		<CppImplementation type="proj_at_target" />
+	</Effect>
+	<Projectile type="DIVINE_BEAM" />
 </Ability>
-<Ability type="heal" name="Cure" description="The priest restores the hitpoints of one partymemeber." time="701.000000" timer_nr="1.000000" timer_value="5000.000000" base_ability="noaction" critical_percent="0.660000" target_type="party">
+
+<Ability type="heal"
+		 name="Cure"
+		 description="The priest restores the hitpoints of one partymemeber."
+		 time="701.000000"
+		 timer_nr="1.000000"
+		 timer_value="5000.000000"
+		 base_ability="noaction"
+		 critical_percent="0.660000"
+		 target_type="party">
 	<Flag name="mute_affected" />
+	<Effect>
+		<CppImplementation type="dynmod_at_target" />
+	</Effect>
 </Ability>
-<Ability type="heal_party" name="Grand Cure" description="The priest restores hitpoints for every partymember." time="701.000000" timer_nr="2.000000" timer_value="10000.000000" base_ability="noaction" critical_percent="0.660000" target_type="party_all">
+
+<Ability type="heal_party"
+		 name="Grand Cure"
+		 description="The priest restores hitpoints for every partymember."
+		 time="701.000000"
+		 timer_nr="2.000000"
+		 timer_value="10000.000000" 
+		 base_ability="noaction"
+		 critical_percent="0.660000"
+		 target_type="party_all"
+		 radius="12">
 	<Flag name="mute_affected" />
+	<Effect>
+		<CppImplementation type="dynmod_at_allies_in_radius" />
+	</Effect>
 </Ability>
-<Ability type="holy_fire" name="Sanctified Strike" description="The priest attacks with godly power, easily sending undead creatures back to their graves." time="1.000000" timer_nr="1.000000" timer_value="4000.000000" base_ability="holy_attack" critical_percent="0.660000" target_type="melee">
+
+<Ability type="holy_fire"
+		 name="Sanctified Strike"
+		 description="The priest attacks with godly power, easily sending undead creatures back to their graves."
+		 time="1.000000"
+		 timer_nr="1.000000" 
+		 timer_value="4000.000000"
+		 base_ability="holy_attack"
+		 critical_percent="0.660000"
+		 target_type="melee">
 	<Flag name="mute_affected" />
+	<Effect>
+		<CppImplementation type="proj_at_target" />
+	</Effect>
+	<Projectile type="LIGHT_BEAM" />
 </Ability>
-<Ability type="holy_light" name="Bright Blow" description="The priest attacks an enemy with a blow imbued with holy power. Undead will be severely damaged by the sacred energies." time="1.000000" timer_nr="1.000000" timer_value="4000.000000" base_ability="holy_attack" critical_percent="0.660000" target_type="melee">
+
+<Ability type="holy_light" 
+		 name="Bright Blow"
+		 description="The priest attacks an enemy with a blow imbued with holy power. Undead will be severely damaged by the sacred energies."
+		 time="1.000000"
+		 timer_nr="1.000000" 
+		 timer_value="4000.000000" 
+		 base_ability="holy_attack"
+		 critical_percent="0.660000"
+		 target_type="melee">
 	<Flag name="mute_affected" />
+	<Effect>
+		<CppImplementation type="proj_at_target" />
+	</Effect>
+	<Projectile type="LIGHT_BEAM" />
 </Ability>
-<Ability type="hypnosis" name="Hypnosis" description="The priest confuses a monster, causing it to attack at random." time="701.000000" timer_nr="1.000000" timer_value="4000.000000" base_ability="noaction" critical_percent="0.660000" target_type="ranged">
+
+<Ability type="hypnosis"
+		 name="Hypnosis"
+		 description="The priest confuses a monster, causing it to attack at random."
+		 time="701.000000"
+		 timer_nr="1.000000"
+		 timer_value="4000.000000"
+		 base_ability="noaction"
+		 critical_percent="0.660000"
+		 target_type="ranged">
 	<Flag name="mute_affected" />
+	<Effect>
+		<CppImplementation type="proj_at_target" />
+	</Effect>
+	<Projectile type="HYPNOSIS" />
 </Ability>
-<Ability type="hypnosis2" name="Hypnotic Vortex" description="The priest creates a distracting vortex with the ability to confuse every enemy caught in it." time="701.000000" timer_nr="1.000000" timer_value="7000.000000" base_ability="noaction" critical_percent="0.660000" target_type="ranged">
+
+<Ability type="hypnosis2"
+		 name="Hypnotic Vortex"
+		 description="The priest creates a distracting vortex with the ability to confuse every enemy caught in it."
+		 time="701.000000"
+		 timer_nr="1.000000"
+		 timer_value="7000.000000"
+		 base_ability="noaction"
+		 critical_percent="0.660000"
+		 target_type="ranged"
+		 radius="3">
 	<Flag name="mute_affected" />
+	<Effect>
+		<CppImplementation type="proj_at_enemies_around_target" />
+	</Effect>
+	<Projectile type="HYPNOSIS" />
 </Ability>
-<Ability type="keen_mind" name="Keen Mind" description="The priest increases everyones spellpower for a short time. Everyones spells will surely be more effective. With increasing willpower the priest can hold this effect longer." time="701.000000" timer_nr="2.000000" timer_value="180000.000000" base_ability="noaction" critical_percent="0.660000" target_type="party_all">
+
+<Ability type="keen_mind" name="Keen Mind"
+		 description="The priest increases everyones spellpower for a short time. Everyones spells will surely be more effective. With increasing willpower the priest can hold this effect longer."
+		 time="701.000000"
+		 timer_nr="2.000000"
+		 timer_value="180000.000000"
+		 base_ability="noaction"
+		 critical_percent="0.660000"
+		 target_type="party_all"
+		 radius="12">
 	<Flag name="mute_affected" />
+	<Effect>
+		<CppImplementation type="basemod_at_allies_in_radius" />
+	</Effect>
 </Ability>
-<Ability type="light_beam" name="Glistening Glare" description="The priest casts a dazzling light, that can cause an enemy to be affected by blind." time="701.000000" timer_nr="1.000000" timer_value="3000.000000" base_ability="noaction" critical_percent="0.660000" target_type="ranged">
+
+<Ability type="light_beam"
+		 name="Glistening Glare"
+		 description="The priest casts a dazzling light, that can cause an enemy to be affected by blind."
+		 time="701.000000"
+		 timer_nr="1.000000"
+		 timer_value="3000.000000"
+		 base_ability="noaction
+		 " critical_percent="0.660000"
+		 target_type="ranged">
 	<Flag name="mute_affected" />
+	<Effect>
+		<CppImplementation type="proj_at_target" />
+	</Effect>
+	<Projectile type="LIGHT_BEAM" />
 </Ability>
-<Ability type="magic_shield" name="Magic Shield" description="The priests protecting influence raises the willpower of all partymembers temporarily. With increasing willpower the priest can hold this effect longer." time="1001.000000" timer_nr="2.000000" timer_value="200000.000000" base_ability="noaction" critical_percent="0.660000" target_type="party_all">
+
+<Ability type="magic_shield"
+		 name="Magic Shield"
+		 description="The priests protecting influence raises the willpower of all partymembers temporarily. With increasing willpower the priest can hold this effect longer."
+		 time="1001.000000"
+		 timer_nr="2.000000"
+		 timer_value="200000.000000" 
+		 base_ability="noaction"
+		 critical_percent="0.660000"
+		 target_type="party_all"
+		 radius="12">
 	<Flag name="mute_affected" />
+	<Effect>
+		<CppImplementation type="basemod_at_allies_in_radius" />
+	</Effect>
 </Ability>

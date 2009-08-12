@@ -739,12 +739,6 @@ protected:
 	Damage m_right_damage;
 	
 	/**
-	 * \var Action::ActionType m_base_action
-	 * \brief Basisaktion des Spielers
-	 */
-	Action::ActionType m_base_action;
-	
-	/**
 	 * \var Action::ActionType m_left_action
 	 * \brief Aktion die auf mit linke Maustaste ausgeloest wird
 	 */

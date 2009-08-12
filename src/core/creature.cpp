@@ -248,14 +248,23 @@ void Creature::initAction()
 
 	}
 	
-	
 	DEBUG5("init Action %s", m_action.m_type.c_str());
-
-	
 
 	m_action.m_elapsed_time = 0;
 	Action::ActionInfo* aci = Action::getActionInfo(m_action.m_type);
 
+	// Stumm behandeln
+	if (m_dyn_attr.m_status_mod_time[Damage::MUTE]>0 )
+	{
+		// Wenn die Aktion durch Stumm beeinfluss wird
+		if (aci->m_flags & Action::MUTE_AFFECTED)
+		{
+			// Basisaktion verwenden
+			m_action.m_type = aci->m_base_action;
+			DEBUG5("using Base Action due to mute");
+		}
+	}
+	
 	//Timer und Timerlaufzeit ermitteln
 	int timernr = getTimerNr(m_action.m_type);
 	float timer = getTimer(m_action.m_type);
@@ -304,18 +313,6 @@ void Creature::initAction()
 			// Timer laeuft noch, Basisaktion verwenden
 			m_action.m_type = aci->m_base_action;
 			aci = Action::getActionInfo(m_action.m_type);
-		}
-	}
-
-	// Stumm behandeln
-	if (m_dyn_attr.m_status_mod_time[Damage::MUTE]>0 )
-	{
-		// Wenn die Aktion durch Stumm beeinfluss wird
-		if (aci->m_flags & Action::MUTE_AFFECTED)
-		{
-			// Basisaktion verwenden
-			m_action.m_type = aci->m_base_action;
-			DEBUG5("using Base Action due to mute");
 		}
 	}
 
@@ -875,6 +872,7 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 			pr = new Projectile(projtype,&m_damage);
 			pr->addFlags(ainfo->m_projectile_flags);
 			pr->setCounter(ainfo->m_projectile_counter);
+			
 			getRegion()->insertProjectile(pr,goal);
 		}
 		else if (*kt == "proj_fly_at_target")
@@ -888,11 +886,47 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 		}
 		else if (*kt == "proj_at_self")
 		{
-			pr = new Projectile(projtype,&m_damage, World::getWorld()->getValidProjectileId());
-			pr->addFlags(ainfo->m_projectile_flags);
-			pr->setCounter(ainfo->m_projectile_counter);
+			
 			
 			getRegion()->insertProjectile(pr,pos);
+		}
+		else if (*kt == "proj_at_enemies_around_target")
+		{
+			s.m_center = goal;
+			getRegion()->getObjectsInShape(&s, &res,LAYER_AIR,CREATURE,this);
+
+			// an alle einfachen Schaden austeilen
+			for (it=res.begin();it!=res.end();++it)
+			{
+				if ((*it)->isCreature() && World::getWorld()->getRelation(fr,(*it)) == WorldObject::HOSTILE)
+				{
+					pr = new Projectile(projtype,&m_damage);
+					pr->addFlags(ainfo->m_projectile_flags);
+					pr->setCounter(ainfo->m_projectile_counter);
+					
+					cr = (Creature*) (*it);
+					getRegion()->insertProjectile(pr,cr->getShape()->m_center);
+				}
+			}
+		}
+		else if (*kt == "proj_at_enemies_in_radius")
+		{
+			s.m_center = pos;
+			getRegion()->getObjectsInShape(&s, &res,LAYER_AIR,CREATURE,this);
+
+			// an alle einfachen Schaden austeilen
+			for (it=res.begin();it!=res.end();++it)
+			{
+				if ((*it)->isCreature() && World::getWorld()->getRelation(fr,(*it)) == WorldObject::HOSTILE)
+				{
+					pr = new Projectile(projtype,&m_damage);
+					pr->addFlags(ainfo->m_projectile_flags);
+					pr->setCounter(ainfo->m_projectile_counter);
+					
+					cr = (Creature*) (*it);
+					getRegion()->insertProjectile(pr,cr->getShape()->m_center);
+				}
+			}
 		}
 		// spezielle Implementationen
 		else if (*kt == "hammer_bash")
@@ -1972,9 +2006,15 @@ void Creature::calcStatusModCommand()
 		// aktuelle Bewegungsrichtung
 		Vector v = getSpeed();
 		float range = m_base_attr.m_step_length;
-
+		if (v.getLength() == 0)
+		{
+			v.m_x = Random::random();
+			v.m_y = Random::random();
+		}
+		
 		// Normieren der Bewegungsgeschwindigkeit
 		v.normalize();
+		
 		
 		// zufaellige Richtung auswuerfeln und normieren
 		Vector dir(1-rand()*2.0/RAND_MAX, 1-rand()*2.0/RAND_MAX) ;
@@ -2310,6 +2350,7 @@ void Creature::clearCommand(bool success)
 
 bool Creature::update (float time)
 {
+	
 	Timer timer;
 	timer.start();
 

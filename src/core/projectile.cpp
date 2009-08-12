@@ -127,6 +127,8 @@ Projectile::Projectile(Subtype subtype, Damage* dmg, int id)
 	else if (st == "LIGHT_BEAM" || st == "DIVINE_BEAM" || st == "ACID" || st == "HYPNOSIS" )
 	{
 		r=0.1;
+		m_timer_limit = 200;
+		setState(STATE_STABLE,false);
 	}
 	else if (st == "")
 	{

@@ -1395,6 +1395,7 @@ void Player::abortAction()
 
 bool Player::update(float time)
 {
+	
 	// Aufruf des updates für von Creature
 	Creature::update(time);
 
