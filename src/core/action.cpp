@@ -1752,7 +1752,7 @@ void Action::loadAbility(TiXmlNode* node)
 					if (child2->Type()==TiXmlNode::ELEMENT) 
 					{
 						attr.parseElement(child2->ToElement());
-						if (!strcmp(child->Value(), "Flag"))
+						if (!strcmp(child2->Value(), "Flag"))
 						{
 							std::string flag;
 							attr.getString("name",flag);
@@ -1767,6 +1767,7 @@ void Action::loadAbility(TiXmlNode* node)
 							else if (flag == "piercing")
 							{
 								a->m_projectile_flags |= Projectile::PIERCING;
+								
 							}
 							else if (flag == "bouncing")
 							{
@@ -1776,6 +1777,7 @@ void Action::loadAbility(TiXmlNode* node)
 							{
 								a->m_projectile_flags |= Projectile::PROB_BOUNCING;
 							}
+							DEBUG5(" %s flags %i",a->m_projectile_type.c_str(), a->m_projectile_flags);
 						}
 					}
 				}

@@ -33,6 +33,8 @@
 		proj_at_target
 		proj_fly_at_target
 		proj_at_self
+		proj_at_enemies_around_target
+		proj_at_enemies_in_radius
 		
 		hammer_bash
 		battlecry
