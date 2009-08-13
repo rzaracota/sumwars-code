@@ -12,6 +12,17 @@
 		<CppImplementation type="proj_at_target" />
 	</Effect>
 	<Projectile type="BLIZZARD"/>
+	<Damage>
+		<CppImplementation type="magic_attack" />
+		<CppImplementation type="weapon_damage" />
+		<LuaImplementation>
+			local magic = get(self,"magic_power");
+			local idmg = getDamageValue("ice_dmg");
+			setDamageValue("ice_dmg", {idmg[1] + magic*0.5, idmg[2] + magic*0.8});
+			setDamageValue("fire_dmg",{0,0});
+		</LuaImplementation>	
+	</Damage>
+	
 </Ability>
 
 <Ability type="chain_lightning"
@@ -28,6 +39,15 @@
 		<CppImplementation type="proj_fly_at_target" />
 	</Effect>
 	<Projectile type="CHAIN_LIGHTNING" speed="12000"/>
+	<Damage>
+		<CppImplementation type="magic_attack" />
+		<CppImplementation type="weapon_damage" />
+		<LuaImplementation>
+			local magic = get(self,"magic_power");
+			local admg = getDamageValue("air_dmg");
+			setDamageValue("air_dmg", {admg[1] + magic*0.6, admg[2] + magic*3});
+		</LuaImplementation>	
+	</Damage>
 </Ability>
 
 <Ability type="chain_lightning2"
@@ -44,6 +64,15 @@
 		<CppImplementation type="proj_fly_at_target" />
 	</Effect>
 	<Projectile type="CHAIN_LIGHTNING" speed="12000"/>
+	<Damage>
+		<CppImplementation type="magic_attack" />
+		<CppImplementation type="weapon_damage" />
+		<LuaImplementation>
+			local magic = get(self,"magic_power");
+			local admg = getDamageValue("air_dmg");
+			setDamageValue("air_dmg", {admg[1] + magic*1, admg[2] + magic*5});
+		</LuaImplementation>	
+	</Damage>
 </Ability>
 
 <Ability type="chill"
@@ -70,6 +99,16 @@
 		<CppImplementation type="proj_fly_at_target" />
 	</Effect>
 	<Projectile type="FIRE_BALL" speed="12000" />
+	<Damage>
+		<CppImplementation type="magic_attack" />
+		<CppImplementation type="weapon_damage" />
+		<LuaImplementation>
+			local magic = get(self,"magic_power");
+			local fdmg = getDamageValue("fire_dmg");
+			setDamageValue("fire_dmg", {fdmg[1] + magic*2, fdmg[2] + magic*3});
+			setDamageValue("ice_dmg",{0,0});
+		</LuaImplementation>	
+	</Damage>
 </Ability>
 
 <Ability type="fire_bolt"
@@ -86,6 +125,16 @@
 		<CppImplementation type="proj_fly_at_target" />
 	</Effect>
 	<Projectile type="FIRE_BOLT" speed="12000" />
+	<Damage>
+		<CppImplementation type="magic_attack" />
+		<CppImplementation type="weapon_damage" />
+		<LuaImplementation>
+			local magic = get(self,"magic_power");
+			local fdmg = getDamageValue("fire_dmg");
+			setDamageValue("fire_dmg", {fdmg[1] + magic, fdmg[2] + magic*2});
+			setDamageValue("ice_dmg",{0,0});
+		</LuaImplementation>	
+	</Damage>
 </Ability>
 
 <Ability type="fire_storm"
@@ -102,6 +151,16 @@
 		<CppImplementation type="proj_at_self" />
 	</Effect>
 	<Projectile type="FIRE_WAVE" />
+	<Damage>
+		<CppImplementation type="magic_attack" />
+		<CppImplementation type="weapon_damage" />
+		<LuaImplementation>
+			local magic = get(self,"magic_power");
+			local fdmg = getDamageValue("fire_dmg");
+			setDamageValue("fire_dmg", {fdmg[1] + magic*2.5, fdmg[2] + magic*3});
+			setDamageValue("ice_dmg",{0,0});
+		</LuaImplementation>	
+	</Damage>
 </Ability>
 
 <Ability type="fire_strike"
@@ -118,6 +177,16 @@
 		<CppImplementation type="proj_fly_at_target" />
 	</Effect>
 	<Projectile type="FIRE_BOLT" speed="12000" />
+	<Damage>
+		<CppImplementation type="magic_attack" />
+		<CppImplementation type="weapon_damage" />
+		<LuaImplementation>
+			local magic = get(self,"magic_power");
+			local fdmg = getDamageValue("fire_dmg");
+			setDamageValue("fire_dmg", {fdmg[1] + magic*3, fdmg[2] + magic*5});
+			setDamageValue("ice_dmg",{0,0});
+		</LuaImplementation>	
+	</Damage>
 </Ability>
 
 <Ability type="fire_wall"
@@ -134,6 +203,16 @@
 		<CppImplementation type="proj_at_target" />
 	</Effect>
 	<Projectile type="FIRE_WAVE" />
+	<Damage>
+		<CppImplementation type="magic_attack" />
+		<CppImplementation type="weapon_damage" />
+		<LuaImplementation>
+			local magic = get(self,"magic_power");
+			local fdmg = getDamageValue("fire_dmg");
+			setDamageValue("fire_dmg", {fdmg[1] + magic*0.33, fdmg[2] + magic*0.5});
+			setDamageValue("ice_dmg",{0,0});
+		</LuaImplementation>	
+	</Damage>
 </Ability>
 
 <Ability type="fire_wave"
@@ -150,6 +229,16 @@
 		<CppImplementation type="proj_at_self" />
 	</Effect>
 	<Projectile type="FIRE_WAVE" />
+	<Damage>
+		<CppImplementation type="magic_attack" />
+		<CppImplementation type="weapon_damage" />
+		<LuaImplementation>
+			local magic = get(self,"magic_power");
+			local fdmg = getDamageValue("fire_dmg");
+			setDamageValue("fire_dmg", {fdmg[1] + magic*1.5, fdmg[2] + magic*2});
+			setDamageValue("ice_dmg",{0,0});
+		</LuaImplementation>	
+	</Damage>
 </Ability>
 
 <Ability type="freeze"
@@ -166,6 +255,15 @@
 		<CppImplementation type="proj_at_target" />
 	</Effect>
 	<Projectile type="FREEZE" />
+	<Damage>
+		<CppImplementation type="magic_attack" />
+		<CppImplementation type="weapon_damage" />
+		<LuaImplementation>
+			local magic = get(self,"magic_power");
+			setDamageValue("frozen", magic);
+			setDamageValue("fire_dmg",{0,0});
+		</LuaImplementation>	
+	</Damage>
 </Ability>
 
 <Ability type="frost_ring"
@@ -182,6 +280,16 @@
 		<CppImplementation type="proj_at_self" />
 	</Effect>
 	<Projectile type="ICE_RING" />
+	<Damage>
+		<CppImplementation type="magic_attack" />
+		<CppImplementation type="weapon_damage" />
+		<LuaImplementation>
+			local magic = get(self,"magic_power");
+			local idmg = getDamageValue("ice_dmg");
+			setDamageValue("ice_dmg", {idmg[1] + magic*1.6, idmg[2] + magic*2.4});
+			setDamageValue("fire_dmg",{0,0});
+		</LuaImplementation>	
+	</Damage>
 </Ability>
 
 <Ability type="ice_bolt"
@@ -198,6 +306,16 @@
 		<CppImplementation type="proj_fly_at_target" />
 	</Effect>
 	<Projectile type="ICE_BOLT" speed="12000" />
+	<Damage>
+		<CppImplementation type="magic_attack" />
+		<CppImplementation type="weapon_damage" />
+		<LuaImplementation>
+			local magic = get(self,"magic_power");
+			local idmg = getDamageValue("ice_dmg");
+			setDamageValue("ice_dmg", {idmg[1] + magic*1.6, idmg[2] + magic*2.2});
+			setDamageValue("fire_dmg",{0,0});
+		</LuaImplementation>	
+	</Damage>
 </Ability>
 
 <Ability type="ice_ring"
@@ -214,6 +332,16 @@
 		<CppImplementation type="proj_at_self" />
 	</Effect>
 	<Projectile type="ICE_RING" />
+	<Damage>
+		<CppImplementation type="magic_attack" />
+		<CppImplementation type="weapon_damage" />
+		<LuaImplementation>
+			local magic = get(self,"magic_power");
+			local idmg = getDamageValue("ice_dmg");
+			setDamageValue("ice_dmg", {idmg[1] + magic, idmg[2] + magic*1.5});
+			setDamageValue("fire_dmg",{0,0});
+		</LuaImplementation>	
+	</Damage>
 </Ability>
 
 <Ability type="ice_spike"
@@ -230,6 +358,16 @@
 		<CppImplementation type="proj_fly_at_target" />
 	</Effect>
 	<Projectile type="ICE_BOLT" speed="12000" />
+	<Damage>
+		<CppImplementation type="magic_attack" />
+		<CppImplementation type="weapon_damage" />
+		<LuaImplementation>
+			local magic = get(self,"magic_power");
+			local idmg = getDamageValue("ice_dmg");
+			setDamageValue("ice_dmg", {idmg[1] + magic*3, idmg[2] + magic*4.5});
+			setDamageValue("fire_dmg",{0,0});
+		</LuaImplementation>	
+	</Damage>
 </Ability>
 
 <Ability type="inferno_ball"
@@ -246,6 +384,16 @@
 		<CppImplementation type="proj_fly_at_target" />
 	</Effect>
 	<Projectile type="FIRE_BALL" speed="12000" />
+	<Damage>
+		<CppImplementation type="magic_attack" />
+		<CppImplementation type="weapon_damage" />
+		<LuaImplementation>
+			local magic = get(self,"magic_power");
+			local fdmg = getDamageValue("fire_dmg");
+			setDamageValue("fire_dmg", {fdmg[1] + magic*3.3, fdmg[2] + magic*5});
+			setDamageValue("ice_dmg",{0,0});
+		</LuaImplementation>	
+	</Damage>
 </Ability>
 
 <Ability type="inflame"
@@ -281,6 +429,16 @@
 		<CppImplementation type="proj_at_target" />
 	</Effect>
 	<Projectile type="LIGHTNING" />
+	
+	<Damage>
+		<CppImplementation type="magic_attack" />
+		<CppImplementation type="weapon_damage" />
+		<LuaImplementation>
+			local magic = get(self,"magic_power");
+			local admg = getDamageValue("air_dmg");
+			setDamageValue("air_dmg", {admg[1] + magic*0.5, admg[2] + magic*2.5});
+		</LuaImplementation>	
+	</Damage>
 </Ability>
 
 <Ability type="lightning_strike"
@@ -297,6 +455,15 @@
 		<CppImplementation type="proj_at_target" />
 	</Effect>
 	<Projectile type="LIGHTNING" />
+	<Damage>
+		<CppImplementation type="magic_attack" />
+		<CppImplementation type="weapon_damage" />
+		<LuaImplementation>
+			local magic = get(self,"magic_power");
+			local admg = getDamageValue("air_dmg");
+			setDamageValue("air_dmg", {admg[1] + magic*1, admg[2] + magic*5});
+		</LuaImplementation>	
+	</Damage>
 </Ability>
 
 <Ability type="snow_storm"
@@ -313,6 +480,16 @@
 		<CppImplementation type="proj_at_target" />
 	</Effect>
 	<Projectile type="BLIZZARD" />
+	<Damage>
+		<CppImplementation type="magic_attack" />
+		<CppImplementation type="weapon_damage" />
+		<LuaImplementation>
+			local magic = get(self,"magic_power");
+			local idmg = getDamageValue("ice_dmg");
+			setDamageValue("ice_dmg", {idmg[1] + magic*0.33, idmg[2] + magic*0.5});
+			setDamageValue("fire_dmg",{0,0});
+		</LuaImplementation>	
+	</Damage>
 </Ability>
 
 <Ability type="static_shield"
@@ -343,6 +520,15 @@
 		<CppImplementation type="proj_at_target" />
 	</Effect>
 	<Projectile type="THUNDERSTORM" />
+	<Damage>
+		<CppImplementation type="magic_attack" />
+		<CppImplementation type="weapon_damage" />
+		<LuaImplementation>
+			local magic = get(self,"magic_power");
+			local admg = getDamageValue("air_dmg");
+			setDamageValue("air_dmg", {admg[1] + magic*0.2, admg[2] + magic});
+		</LuaImplementation>	
+	</Damage>
 </Ability>
 
 <Ability type="thunderstorm2"
@@ -359,4 +545,13 @@
 		<CppImplementation type="proj_at_target" />
 	</Effect>
 	<Projectile type="THUNDERSTORM" />
+	<Damage>
+		<CppImplementation type="magic_attack" />
+		<CppImplementation type="weapon_damage" />
+		<LuaImplementation>
+			local magic = get(self,"magic_power");
+			local admg = getDamageValue("air_dmg");
+			setDamageValue("air_dmg", {admg[1] + magic*0.3, admg[2] + magic*1.5});
+		</LuaImplementation>	
+	</Damage>
 </Ability>

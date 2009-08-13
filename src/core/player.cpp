@@ -1824,9 +1824,13 @@ void Player::readItemComplete(CharConv* cv)
 
 void Player::recalcDamage()
 {
-	calcDamage(m_base_action,m_base_damage);
-	calcDamage(m_left_action,m_left_damage);
-	calcDamage(m_right_action,m_right_damage);
+	// nur, wenn das Spiel schon *richtig laeuft*
+	if (World::getWorld() != 0 && World::getWorld()->getPlayer(getId()) == this)
+	{
+		calcDamage(m_base_action,m_base_damage);
+		calcDamage(m_left_action,m_left_damage);
+		calcDamage(m_right_action,m_right_damage);
+	}
 }
 
 void Player::addWaypoint(short id, bool check_party)

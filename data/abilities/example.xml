@@ -14,6 +14,7 @@
 		mute_affected
 	<Flag name="" />
 	
+	<Effect >
 	moegliche Implementationen:
 		
 		dmg_at_target
@@ -43,11 +44,34 @@
 		multishot
 		volleyshot
 		
-	<Effect implementation="string">
-		lua-Code
+		<CppImplementation type="string" />
+		<LuaImplementation>
+			Lua Code
+		</LuaImplementation>	
 	</Effect>
+	
+	<Damage>
+		moegliche Implementationen:
+			attack
+			range_attack
+			holy_attack
+			magic_attack
+			weapon_damage
+			
+			charge
+			storm_charge
+			
+			
+		
+		<CppImplementation type="string" />
+		<LuaImplementation>
+			Lua Code
+		</LuaImplementation>	
+	</Damage>
+	
 	<Projectile type="string" counter="int" speed="float">
 		<Flag name="string">
 	</Projectile>
+	
 </Ability>
 -->

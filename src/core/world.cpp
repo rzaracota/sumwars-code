@@ -681,11 +681,8 @@ void World::handleSavegame(CharConv *cv, int slot)
 		// Daten aus dem Savegame laden
 
 		pl->setState(WorldObject::STATE_ACTIVE,false);
-
-		// Debugging: Region, Koordinaten setzen
-		pl->setRegionId(0);
-		pl->getShape()->m_center = Vector(9,10);
-
+		pl->recalcDamage();
+		
 		RegionLocation regloc = pl->getRevivePosition();
 		short id = getRegionId(regloc.first);
 		if (id != -1)

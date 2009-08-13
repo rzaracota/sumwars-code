@@ -368,6 +368,11 @@ int EventSystem::getObjectValue(lua_State *L)
 			wo = m_region->getObject(id);
 		}
 
+		if (wo ==0)
+		{
+			wo = World::getWorld()->getPlayer(id);
+		}
+		
 		if (wo !=0)
 		{
 			ret = wo->getValue(valname);
@@ -399,6 +404,12 @@ int EventSystem::setObjectValue(lua_State *L)
 		if (m_region !=0)
 		{
 			wo = m_region->getObject(id);
+		}
+		
+		
+		if (wo ==0)
+		{
+			wo = World::getWorld()->getPlayer(id);
 		}
 
 		if (wo !=0)

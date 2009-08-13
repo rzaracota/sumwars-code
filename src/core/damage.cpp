@@ -321,9 +321,9 @@ int Damage::getValue(std::string valname)
 {
 	if (valname =="fire_dmg")
 	{
-		lua_pushnumber(EventSystem::getLuaState() , m_min_damage[FIRE]);
-		lua_pushnumber(EventSystem::getLuaState() , m_max_damage[FIRE]);
-		return 2;
+		Vector v(m_min_damage[FIRE], m_max_damage[FIRE]);
+		EventSystem::pushVector(EventSystem::getLuaState(), v);
+		return 1;
 	}
 	else if (valname =="fire_mult")
 	{
@@ -332,9 +332,9 @@ int Damage::getValue(std::string valname)
 	}
 	else if (valname =="ice_dmg")
 	{
-		lua_pushnumber(EventSystem::getLuaState() , m_min_damage[ICE]);
-		lua_pushnumber(EventSystem::getLuaState() , m_max_damage[ICE]);
-		return 2;
+		Vector v(m_min_damage[ICE], m_max_damage[ICE]);
+		EventSystem::pushVector(EventSystem::getLuaState(), v);
+		return 1;
 	}
 	else if (valname =="ice_mult")
 	{
@@ -343,8 +343,9 @@ int Damage::getValue(std::string valname)
 	}
 	else if (valname =="air_dmg")
 	{
-		lua_pushnumber(EventSystem::getLuaState() , m_min_damage[AIR]);
-		lua_pushnumber(EventSystem::getLuaState() , m_max_damage[AIR]);
+		Vector v(m_min_damage[AIR], m_max_damage[AIR]);
+		EventSystem::pushVector(EventSystem::getLuaState(), v);
+		return 1;
 		return 2;
 	}
 	else if (valname =="air_mult")
@@ -354,8 +355,9 @@ int Damage::getValue(std::string valname)
 	}
 	else if (valname =="phys_dmg")
 	{
-		lua_pushnumber(EventSystem::getLuaState() , m_min_damage[PHYSICAL]);
-		lua_pushnumber(EventSystem::getLuaState() , m_max_damage[PHYSICAL]);
+		Vector v(m_min_damage[PHYSICAL], m_max_damage[PHYSICAL]);
+		EventSystem::pushVector(EventSystem::getLuaState(), v);
+		return 1;
 		return 2;
 	}
 	else if (valname =="phys_mult")
@@ -383,7 +385,7 @@ int Damage::getValue(std::string valname)
 		lua_pushnumber(EventSystem::getLuaState() , m_status_mod_power[BLIND]);
 		return 1;
 	}
-	else if (valname =="poison")
+	else if (valname =="poisoned")
 	{
 		lua_pushnumber(EventSystem::getLuaState() , m_status_mod_power[POISONED]);
 		return 1;
@@ -393,7 +395,7 @@ int Damage::getValue(std::string valname)
 		lua_pushnumber(EventSystem::getLuaState() , m_status_mod_power[BERSERK]);
 		return 1;
 	}
-	else if (valname =="confuse")
+	else if (valname =="confused")
 	{
 		lua_pushnumber(EventSystem::getLuaState() , m_status_mod_power[CONFUSED]);
 		return 1;
@@ -403,12 +405,12 @@ int Damage::getValue(std::string valname)
 		lua_pushnumber(EventSystem::getLuaState() , m_status_mod_power[MUTE]);
 		return 1;
 	}
-	else if (valname =="paralyze")
+	else if (valname =="paralyzed")
 	{
 		lua_pushnumber(EventSystem::getLuaState() , m_status_mod_power[PARALYZED]);
 		return 1;
 	}
-	else if (valname =="freeze")
+	else if (valname =="frozen")
 	{
 		lua_pushnumber(EventSystem::getLuaState() , m_status_mod_power[FROZEN]);
 		return 1;
@@ -416,6 +418,11 @@ int Damage::getValue(std::string valname)
 	else if (valname =="burning")
 	{
 		lua_pushnumber(EventSystem::getLuaState() , m_status_mod_power[BURNING]);
+		return 1;
+	}
+	else if (valname =="taunt")
+	{
+		lua_pushnumber(EventSystem::getLuaState() , m_ai_mod_power[TAUNT]);
 		return 1;
 	}
 	else if (valname =="blockable")
@@ -438,8 +445,6 @@ int Damage::getValue(std::string valname)
 
 bool Damage::setValue(std::string valname)
 {
-	int argc = lua_gettop(EventSystem::getLuaState());
-
 	if (valname =="fire_dmg")
 	{
 		Vector v = EventSystem::getVector(EventSystem::getLuaState(),-1);
@@ -514,7 +519,7 @@ bool Damage::setValue(std::string valname)
 		lua_pop(EventSystem::getLuaState(), 1);
 		return true;
 	}
-	else if (valname =="poison")
+	else if (valname =="poisoned")
 	{
 		m_status_mod_power[POISONED] = (short) lua_tonumber(EventSystem::getLuaState(),-1);
 		lua_pop(EventSystem::getLuaState(), 1);
@@ -526,7 +531,7 @@ bool Damage::setValue(std::string valname)
 		lua_pop(EventSystem::getLuaState(), 1);
 		return true;
 	}
-	else if (valname =="confuse")
+	else if (valname =="confused")
 	{
 		m_status_mod_power[CONFUSED] = (short) lua_tonumber(EventSystem::getLuaState(),-1);
 		lua_pop(EventSystem::getLuaState(), 1);
@@ -538,13 +543,13 @@ bool Damage::setValue(std::string valname)
 		lua_pop(EventSystem::getLuaState(), 1);
 		return true;
 	}
-	else if (valname =="paralyze")
+	else if (valname =="paralyzed")
 	{
 		m_status_mod_power[PARALYZED] = (short) lua_tonumber(EventSystem::getLuaState(),-1);
 		lua_pop(EventSystem::getLuaState(), 1);
 		return true;
 	}
-	else if (valname =="freeze")
+	else if (valname =="frozen")
 	{
 		m_status_mod_power[FROZEN] = (short) lua_tonumber(EventSystem::getLuaState(),-1);
 		lua_pop(EventSystem::getLuaState(), 1);
@@ -553,6 +558,12 @@ bool Damage::setValue(std::string valname)
 	else if (valname =="burning")
 	{
 		m_status_mod_power[BURNING] = (short) lua_tonumber(EventSystem::getLuaState(),-1);
+		lua_pop(EventSystem::getLuaState(), 1);
+		return true;
+	}
+	else if (valname =="taunt")
+	{
+		m_ai_mod_power[TAUNT] = (short) lua_tonumber(EventSystem::getLuaState(),-1);
 		lua_pop(EventSystem::getLuaState(), 1);
 		return true;
 	}

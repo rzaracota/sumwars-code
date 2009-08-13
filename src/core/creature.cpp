@@ -2462,8 +2462,10 @@ void Creature::calcDamage(Action::ActionType act,Damage& dmg)
 		lua_pushnumber(EventSystem::getLuaState(),getId());
 		lua_setglobal(EventSystem::getLuaState(), "self");
 		
+		//Timer t;
+		//t.start();
 		EventSystem::executeCodeReference(ainfo->m_damage.m_lua_impl);
-		
+		//DEBUG("time %f",t.getTime());
 		EventSystem::setDamage(0);
 		
 	}
