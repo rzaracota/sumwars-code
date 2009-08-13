@@ -79,6 +79,10 @@
 	<Effect>
 		<CppImplementation type="dmg_at_target" />
 	</Effect>
+	<Damage>
+		<CppImplementation type="attack" />
+		<CppImplementation type="weapon_damage" />
+	</Damage>
 </Ability>
 
 <Ability type="holy_attack" 
@@ -92,6 +96,10 @@
 	<Effect>
 		<CppImplementation type="dmg_at_target" />
 	</Effect>
+	<Damage>
+		<CppImplementation type="holy_attack" />
+		<CppImplementation type="weapon_damage" />
+	</Damage>
 </Ability>
 
 <Ability type="magic_attack" 
@@ -106,6 +114,10 @@
 		<CppImplementation type="proj_fly_at_target" />
 	</Effect>
 	<Projectile type="MAGIC_ARROW" speed="12000" />
+	<Damage>
+		<CppImplementation type="magic_attack" />
+		<CppImplementation type="weapon_damage" />
+	</Damage>
 </Ability>
 
 <Ability type="range_attack" 
@@ -121,4 +133,8 @@
 		<CppImplementation type="proj_fly_at_target" />
 	</Effect>
 	<Projectile type="ARROW" speed="12000" />
+	<Damage>
+		<CppImplementation type="range_attack" />
+		<CppImplementation type="weapon_damage" />
+	</Damage>
 </Ability>

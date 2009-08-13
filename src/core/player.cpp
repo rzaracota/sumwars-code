@@ -1468,81 +1468,83 @@ bool Player::checkRole(std::string role)
 
 
 
-void Player::calcBaseDamage(Action::ActionType act,Damage& dmg)
+void Player::calcBaseDamage(std::string impl,Damage& dmg)
 {
-	Creature::calcBaseDamage(act,dmg);
+	Creature::calcBaseDamage(impl,dmg);
 
-
-	Damage::DamageType dmgtype = Damage::FIRE;
-	float maxdmg =0;
-	
-	Item* item;
-	for (int j=1; j<=8; j++)
+	if (impl == "weapon_damage")
 	{
-		item = getEquipement()->getItem(j);
-		if (j == Equipement::WEAPON)
+		Damage::DamageType dmgtype = Damage::FIRE;
+		float maxdmg =0;
+		
+		Item* item;
+		for (int j=1; j<=8; j++)
 		{
-			item = getWeapon();
-		}
-		if (j == Equipement::SHIELD)
-			item = getShield();
-		
-		if (item!=0 && item->m_weapon_attr !=0)
-		{
-			// Schaden der Waffe
-			Damage& wdmg=item->m_weapon_attr->m_damage;
-
-			int i;
-			
-		
-		
-			// Schaden uebernehmen
-			for (i=0;i<4;i++)
+			item = getEquipement()->getItem(j);
+			if (j == Equipement::WEAPON)
 			{
-				dmg.m_min_damage[i] += wdmg.m_min_damage[i];
-				dmg.m_max_damage[i] += wdmg.m_max_damage[i];
-				dmg.m_multiplier[i] *= wdmg.m_multiplier[i];
+				item = getWeapon();
+			}
+			if (j == Equipement::SHIELD)
+				item = getShield();
 			
-				if (j == Equipement::WEAPON)
+			if (item!=0 && item->m_weapon_attr !=0)
+			{
+				// Schaden der Waffe
+				Damage& wdmg=item->m_weapon_attr->m_damage;
+	
+				int i;
+				
+			
+			
+				// Schaden uebernehmen
+				for (i=0;i<4;i++)
 				{
-					if ((wdmg.m_min_damage[i]+ wdmg.m_max_damage[i]) * wdmg.m_multiplier[i]>maxdmg)
+					dmg.m_min_damage[i] += wdmg.m_min_damage[i];
+					dmg.m_max_damage[i] += wdmg.m_max_damage[i];
+					dmg.m_multiplier[i] *= wdmg.m_multiplier[i];
+				
+					if (j == Equipement::WEAPON)
 					{
-						maxdmg = (wdmg.m_min_damage[i]+ wdmg.m_max_damage[i]) * wdmg.m_multiplier[i];
-						dmgtype = (Damage::DamageType) i;
+						if ((wdmg.m_min_damage[i]+ wdmg.m_max_damage[i]) * wdmg.m_multiplier[i]>maxdmg)
+						{
+							maxdmg = (wdmg.m_min_damage[i]+ wdmg.m_max_damage[i]) * wdmg.m_multiplier[i];
+							dmgtype = (Damage::DamageType) i;
+						}
 					}
 				}
-			}
-		
 			
-
-			// Statusmods uebernehmen
-			for (i=0;i<NR_STATUS_MODS;i++)
-			{
-				dmg.m_status_mod_power[i] += wdmg.m_status_mod_power[i];
+				
+	
+				// Statusmods uebernehmen
+				for (i=0;i<NR_STATUS_MODS;i++)
+				{
+					dmg.m_status_mod_power[i] += wdmg.m_status_mod_power[i];
+				}
+	
+				// weitere Attribute
+				dmg.m_power += wdmg.m_power;
+				dmg.m_attack += wdmg.m_attack;
+				dmg.m_crit_perc += wdmg.m_crit_perc;
+				dmg.m_special_flags |= wdmg.m_special_flags;
+	
 			}
-
-			// weitere Attribute
-			dmg.m_power += wdmg.m_power;
-			dmg.m_attack += wdmg.m_attack;
-			dmg.m_crit_perc += wdmg.m_crit_perc;
-			dmg.m_special_flags |= wdmg.m_special_flags;
-
+			
 		}
 		
-	}
-	
-	if (getSubtype() == "mage")
-	{
-		CreatureBaseAttr* basm = getBaseAttrMod();
-		dmg.m_min_damage[Damage::FIRE] -= basm->m_magic_power/10;
-		dmg.m_min_damage[Damage::FIRE] -= basm->m_willpower/20;
-		dmg.m_max_damage[Damage::FIRE] -= basm->m_magic_power/6;
-		dmg.m_max_damage[Damage::FIRE] -= basm->m_willpower/15;
-			
-		dmg.m_min_damage[dmgtype] += basm->m_magic_power/10;
-		dmg.m_min_damage[dmgtype] += basm->m_willpower/20;
-		dmg.m_max_damage[dmgtype] += basm->m_magic_power/6;
-		dmg.m_max_damage[dmgtype] += basm->m_willpower/15;
+		if (getSubtype() == "mage")
+		{
+			CreatureBaseAttr* basm = getBaseAttrMod();
+			dmg.m_min_damage[Damage::FIRE] -= basm->m_magic_power/10;
+			dmg.m_min_damage[Damage::FIRE] -= basm->m_willpower/20;
+			dmg.m_max_damage[Damage::FIRE] -= basm->m_magic_power/6;
+			dmg.m_max_damage[Damage::FIRE] -= basm->m_willpower/15;
+				
+			dmg.m_min_damage[dmgtype] += basm->m_magic_power/10;
+			dmg.m_min_damage[dmgtype] += basm->m_willpower/20;
+			dmg.m_max_damage[dmgtype] += basm->m_magic_power/6;
+			dmg.m_max_damage[dmgtype] += basm->m_willpower/15;
+		}
 	}
 }
 
@@ -1825,19 +1827,6 @@ void Player::recalcDamage()
 	calcDamage(m_base_action,m_base_damage);
 	calcDamage(m_left_action,m_left_damage);
 	calcDamage(m_right_action,m_right_damage);
-
-	/*
-	for (int i=0;i<4;i++)
-	{
-		printf("%s %f - %f\n",Damage::getDamageTypeName((Damage::DamageType) i).c_str(),m_left_damage.m_min_damage[i],m_left_damage.m_max_damage[i]);
-	}
-
-	for (int i=0;i<4;i++)
-	{
-		printf("%s %f - %f\n",Damage::getDamageTypeName((Damage::DamageType) i).c_str(),m_right_damage.m_min_damage[i],m_right_damage.m_max_damage[i]);
-	}
-*/
-
 }
 
 void Player::addWaypoint(short id, bool check_party)

@@ -11,18 +11,17 @@
 
 lua_State * EventSystem::m_lua=0;
 
-Region* EventSystem::m_region;
+Region* EventSystem::m_region =0;
 
-Trigger*  EventSystem::m_trigger;
+Trigger*  EventSystem::m_trigger=0;
 
-Dialogue*  EventSystem::m_dialogue;
+Dialogue*  EventSystem::m_dialogue=0;
 
-Damage* EventSystem::m_damage;
+Damage* EventSystem::m_damage=0;
 
-CreatureBaseAttr* EventSystem::m_base_attr;
+CreatureBaseAttr* EventSystem::m_base_attr=0;
 
-CreatureDynAttr* EventSystem::m_dyn_attr;
-
+CreatureDynAttr* EventSystem::m_dyn_attr=0;
 
 CharConv* EventSystem::m_charconv =0;
 
@@ -446,20 +445,18 @@ int EventSystem::getDamageValue(lua_State *L)
 {
 	int ret =0;
 	int argc = lua_gettop(L);
-	if (argc>=2 && lua_isstring(L,1) && lua_isstring(L,2))
+	if (argc>=1 && lua_isstring(L,1))
 	{
-		std::string dmgname = lua_tostring(L, 1);
-		std::string valname = lua_tostring(L, 2);
+		std::string valname = lua_tostring(L, 1);
 
-		Damage* dmg =getDamage(dmgname);
-		if (dmg != 0)
+		if (m_damage != 0)
 		{
-			ret = dmg->getValue(valname);
+			ret = m_damage->getValue(valname);
 		}
 	}
 	else
 	{
-		ERRORMSG("Syntax: getDamageValue( string damagename, string valname)");
+		ERRORMSG("Syntax: getDamageValue(string valname)");
 	}
 
 	return ret;
@@ -468,21 +465,18 @@ int EventSystem::getDamageValue(lua_State *L)
 int EventSystem::setDamageValue(lua_State *L)
 {
 	int argc = lua_gettop(L);
-	if (argc>=3 && lua_isstring(L,1) && lua_isstring(L,2))
+	if (argc>=2 && lua_isstring(L,1))
 	{
-		std::string dmgname = lua_tostring(L, 1);
-		std::string valname = lua_tostring(L, 2);
+		std::string valname = lua_tostring(L, 1);
 
-		Damage* dmg =getDamage(dmgname);
-		
-		if (dmg != 0)
+		if (m_damage != 0)
 		{
-			dmg->setValue(valname);
+			m_damage->setValue(valname);
 		}
 	}
 	else
 	{
-		ERRORMSG("Syntax: setDamageValue( string damagename, string valname, value, [value])");
+		ERRORMSG("Syntax: setDamageValue(string valname, value, [value])");
 	}
 
 	return 0;
@@ -491,41 +485,38 @@ int EventSystem::setDamageValue(lua_State *L)
 int EventSystem::createProjectile(lua_State *L)
 {
 	int argc = lua_gettop(L);
-	if (argc >= 3 && lua_isstring(L,1) && lua_isstring(L,2)  && (lua_istable(L,3) || lua_isstring(L,3)))
+	if (argc >= 3 && lua_isstring(L,1)  && (lua_istable(L,2) || lua_isstring(L,2)))
 	{
-		if (m_region !=0)
+		if (m_region !=0 && m_damage != 0)
 		{
 			std::string tname = lua_tostring(L, 1);
-			std::string dmgname = lua_tostring(L, 2);
-			Vector pos = getVector(L,3);
+			Vector pos = getVector(L,2);
 
 			float speed = 10.0;
-			DEBUG5("name %s dmg %s %f %f",tname.c_str(), dmgname.c_str(),pos.m_x,pos.m_y);
-
+			
 			// Schaden
-			Damage* dmg =getDamage(dmgname);
 			// Projektil erzeugen
-			Projectile* pr = new Projectile(tname, dmg);
+			Projectile* pr = new Projectile(tname, m_damage);
 
 			// Richtung, Geschwindigkeit ermitteln
-			if (argc>=4 && (lua_istable(L,4) || lua_isstring(L,4)))
+			if (argc>=3 && (lua_istable(L,3) || lua_isstring(L,3)))
 			{
 
-				Vector goal = getVector(L,4);
+				Vector goal = getVector(L,3);
 				Vector dir = goal - pos;
 				dir.normalize();
 
-				if (argc>=5  && lua_isnumber(L,5))
+				if (argc>=4  && lua_isnumber(L,4))
 				{
-					speed = lua_tonumber(L, 5);
+					speed = lua_tonumber(L, 4);
 				}
 
 				// Geschwindigkeit wird in m/ms gemessen
 				pr->setSpeed(dir *speed/1000);
 
-				if (argc>=6 && lua_isnumber(L,6))
+				if (argc>=5 && lua_isnumber(L,5))
 				{
-					float dist = lua_tonumber(L, 6);
+					float dist = lua_tonumber(L, 5);
 					pos += dir*dist;
 				}
 			}
@@ -536,7 +527,7 @@ int EventSystem::createProjectile(lua_State *L)
 	}
 	else
 	{
-		ERRORMSG("Syntax: createProjectile( string type, string dmgname, {startx, starty}, [{goalx, goaly}] , [speed], [dist])");
+		ERRORMSG("Syntax: createProjectile( string type, {startx, starty}, [{goalx, goaly}] , [speed], [dist])");
 	}
 	return 0;
 }
@@ -1838,16 +1829,4 @@ int EventSystem::luagettext(lua_State *L)
 
 }
 
-Damage* EventSystem::getDamage(std::string dmgname)
-{
-	if (dmgname=="current")
-	{
-		return m_damage;
-	}
-	else if (m_region !=0)
-	{
-		return &(m_region->getDamageObject(dmgname));
-	}
-	return 0;
-}
 

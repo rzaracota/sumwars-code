@@ -344,6 +344,24 @@ public:
 		 * \brief Effekt der Aktion
 		 */
 		HybridImplementation m_effect;
+		
+		/**
+		 * \var HybridImplementation m_damage
+		 * \brief Schaden der Aktion
+		 */
+		HybridImplementation m_damage;
+		
+		/**
+		 * \var HybridImplementation m_base_mod
+		 * \brief BasisModifikation der Aktion
+		 */
+		HybridImplementation m_base_mod;
+		
+		/**
+		 * \var HybridImplementation m_dyn_mod
+		 * \brief Modifikation dynamischer Attribute durch die Aktion
+		 */
+		HybridImplementation m_dyn_mod;
 	};
 
 	/**

@@ -38,6 +38,11 @@
 			createProjectile(projectile_type,"current",getPosition(self),goal,projectile_speed/1000,0.5);
 		</LuaImplementation>
 	</Effect>
+	<Damage>
+		<CppImplementation type="fire_ball" />
+	</Damage>
+	
+	
 </Ability>
 
 
@@ -59,6 +64,9 @@
 			set(obj,"fraction",frac);
 		</LuaImplementation>
 	</Effect>
+	<BaseAttributesMod>
+		
+	</BaseAttributesMod>
 </Ability>
 
 <Ability type="teststatushealer"
@@ -79,4 +87,7 @@
 			set(obj,"fraction",frac);
 		</LuaImplementation>
 	</Effect>
+	<DynAttributesMod>
+		
+	</DynAttributesMod>	
 </Ability>

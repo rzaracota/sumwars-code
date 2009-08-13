@@ -325,11 +325,21 @@ int Damage::getValue(std::string valname)
 		lua_pushnumber(EventSystem::getLuaState() , m_max_damage[FIRE]);
 		return 2;
 	}
+	else if (valname =="fire_mult")
+	{
+		lua_pushnumber(EventSystem::getLuaState() , m_multiplier[FIRE]);
+		return 1;
+	}
 	else if (valname =="ice_dmg")
 	{
 		lua_pushnumber(EventSystem::getLuaState() , m_min_damage[ICE]);
 		lua_pushnumber(EventSystem::getLuaState() , m_max_damage[ICE]);
 		return 2;
+	}
+	else if (valname =="ice_mult")
+	{
+		lua_pushnumber(EventSystem::getLuaState() , m_multiplier[ICE]);
+		return 1;
 	}
 	else if (valname =="air_dmg")
 	{
@@ -337,11 +347,21 @@ int Damage::getValue(std::string valname)
 		lua_pushnumber(EventSystem::getLuaState() , m_max_damage[AIR]);
 		return 2;
 	}
+	else if (valname =="air_mult")
+	{
+		lua_pushnumber(EventSystem::getLuaState() , m_multiplier[AIR]);
+		return 1;
+	}
 	else if (valname =="phys_dmg")
 	{
 		lua_pushnumber(EventSystem::getLuaState() , m_min_damage[PHYSICAL]);
 		lua_pushnumber(EventSystem::getLuaState() , m_max_damage[PHYSICAL]);
 		return 2;
+	}
+	else if (valname =="phys_mult")
+	{
+		lua_pushnumber(EventSystem::getLuaState() , m_multiplier[PHYSICAL]);
+		return 1;
 	}
 	else if (valname =="attack")
 	{
@@ -413,7 +433,6 @@ int Damage::getValue(std::string valname)
 		lua_pushinteger(EventSystem::getLuaState() , m_attacker_id);
 		return 1;
 	}
-	//(19:37:01)  Esmil:  Lastmerlin: lua_createtable(L, 3, 0); lua_pushnumber(L, x); lua_rawseti(L, -2, 1); ... lua_pushnumber(L,  z); lua_rawseti(L, -2, 3);
 	return 0;
 }
 
@@ -423,125 +442,125 @@ bool Damage::setValue(std::string valname)
 
 	if (valname =="fire_dmg")
 	{
-		float d1,d2;
-		d2 = d1 = lua_tonumber(EventSystem::getLuaState(),3);
-		if (argc>=4)
-			d2 = lua_tonumber(EventSystem::getLuaState(),4);
-		m_min_damage[FIRE] = d1;
-		m_max_damage[FIRE] = d2;
+		Vector v = EventSystem::getVector(EventSystem::getLuaState(),-1);
+		m_min_damage[FIRE] = v.m_x;
+		m_max_damage[FIRE] = v.m_y;
+		return true;
+	}
+	else if (valname =="fire_mult")
+	{
+		m_multiplier[FIRE] = lua_tonumber(EventSystem::getLuaState(),-1);
+		lua_pop(EventSystem::getLuaState(), 1);
 		return true;
 	}
 	else if (valname =="ice_dmg")
 	{
-		float d1,d2;
-		d2= d1 = lua_tonumber(EventSystem::getLuaState(),3);
-		if (argc>=4)
-			d2 = lua_tonumber(EventSystem::getLuaState(),4);
-		m_min_damage[ICE] = d1;
-		m_max_damage[ICE] = d2;
+		Vector v = EventSystem::getVector(EventSystem::getLuaState(),-1);
+		m_min_damage[ICE] = v.m_x;
+		m_max_damage[ICE] = v.m_y;
+		return true;
+	}
+	else if (valname =="ice_mult")
+	{
+		m_multiplier[ICE] = lua_tonumber(EventSystem::getLuaState(),-1);
+		lua_pop(EventSystem::getLuaState(), 1);
 		return true;
 	}
 	else if (valname =="air_dmg")
 	{
-		float d1,d2;
-		d2= d1 = lua_tonumber(EventSystem::getLuaState(),3);
-		if (argc>=4)
-			d2 = lua_tonumber(EventSystem::getLuaState(),4);
-		m_min_damage[AIR] = d1;
-		m_max_damage[AIR] = d2;
+		Vector v = EventSystem::getVector(EventSystem::getLuaState(),-1);
+		m_min_damage[AIR] = v.m_x;
+		m_max_damage[AIR] = v.m_y;
 		return true;
+	}
+	else if (valname =="air_mult")
+	{
+		m_multiplier[AIR] = lua_tonumber(EventSystem::getLuaState(),-1);
+		lua_pop(EventSystem::getLuaState(), 1);
 	}
 	else if (valname =="phys_dmg")
 	{
-		float d1,d2;
-		d2= d1 = lua_tonumber(EventSystem::getLuaState(),3);
-		if (argc>=4)
-			d2 = lua_tonumber(EventSystem::getLuaState(),4);
-		m_min_damage[PHYSICAL] = d1;
-		m_max_damage[PHYSICAL] = d2;
+		Vector v = EventSystem::getVector(EventSystem::getLuaState(),-1);
+		m_min_damage[PHYSICAL] = v.m_x;
+		m_max_damage[PHYSICAL] = v.m_y;
 		return true;
+	}
+	else if (valname =="phys_mult")
+	{
+		m_multiplier[PHYSICAL] = lua_tonumber(EventSystem::getLuaState(),-1);
+		lua_pop(EventSystem::getLuaState(), 1);
 	}
 	else if (valname =="attack")
 	{
-		float f;
-		f = lua_tonumber(EventSystem::getLuaState(),3);
-		m_attack = f;
+		m_attack = lua_tonumber(EventSystem::getLuaState(),-1);
+		lua_pop(EventSystem::getLuaState(), 1);
 		return true;
 	}
 	else if (valname =="power")
 	{
-		float f;
-		f = lua_tonumber(EventSystem::getLuaState(),3);
-		m_power = f;
+		m_power = lua_tonumber(EventSystem::getLuaState(),-1);
+		lua_pop(EventSystem::getLuaState(), 1);
 		return true;
 	}
 	else if (valname =="crit_chance")
 	{
-		float f;
-		f = lua_tonumber(EventSystem::getLuaState(),3);
-		m_crit_perc = f;
+		m_crit_perc = lua_tonumber(EventSystem::getLuaState(),-1);
+		lua_pop(EventSystem::getLuaState(), 1);
 		return true;
 	}
 	else if (valname =="blind")
 	{
-		float f;
-		f = lua_tonumber(EventSystem::getLuaState(),3);
-		m_status_mod_power[BLIND] = short(f);
+		m_status_mod_power[BLIND] = (short) lua_tonumber(EventSystem::getLuaState(),-1);
+		lua_pop(EventSystem::getLuaState(), 1);
 		return true;
 	}
 	else if (valname =="poison")
 	{
-		float f;
-		f = lua_tonumber(EventSystem::getLuaState(),3);
-		m_status_mod_power[POISONED] = short(f);
+		m_status_mod_power[POISONED] = (short) lua_tonumber(EventSystem::getLuaState(),-1);
+		lua_pop(EventSystem::getLuaState(), 1);
 		return true;
 	}
 	else if (valname =="berserk")
 	{
-		float f;
-		f = lua_tonumber(EventSystem::getLuaState(),3);
-		m_status_mod_power[BERSERK] = short(f);
+		m_status_mod_power[BERSERK] = (short) lua_tonumber(EventSystem::getLuaState(),-1);
+		lua_pop(EventSystem::getLuaState(), 1);
 		return true;
 	}
 	else if (valname =="confuse")
 	{
-		float f;
-		f = lua_tonumber(EventSystem::getLuaState(),3);
-		m_status_mod_power[CONFUSED] = short(f);
+		m_status_mod_power[CONFUSED] = (short) lua_tonumber(EventSystem::getLuaState(),-1);
+		lua_pop(EventSystem::getLuaState(), 1);
 		return true;
 	}
 	else if (valname =="mute")
 	{
-		float f;
-		f = lua_tonumber(EventSystem::getLuaState(),3);
-		m_status_mod_power[MUTE] = short(f);
+		m_status_mod_power[MUTE] = (short) lua_tonumber(EventSystem::getLuaState(),-1);
+		lua_pop(EventSystem::getLuaState(), 1);
 		return true;
 	}
 	else if (valname =="paralyze")
 	{
-		float f;
-		f = lua_tonumber(EventSystem::getLuaState(),3);
-		m_status_mod_power[PARALYZED] = short(f);
+		m_status_mod_power[PARALYZED] = (short) lua_tonumber(EventSystem::getLuaState(),-1);
+		lua_pop(EventSystem::getLuaState(), 1);
 		return true;
 	}
 	else if (valname =="freeze")
 	{
-		float f;
-		f = lua_tonumber(EventSystem::getLuaState(),3);
-		m_status_mod_power[FROZEN] = short(f);
+		m_status_mod_power[FROZEN] = (short) lua_tonumber(EventSystem::getLuaState(),-1);
+		lua_pop(EventSystem::getLuaState(), 1);
 		return true;
 	}
 	else if (valname =="burning")
 	{
-		float f;
-		f = lua_tonumber(EventSystem::getLuaState(),3);
-		m_status_mod_power[BURNING] = short(f);
+		m_status_mod_power[BURNING] = (short) lua_tonumber(EventSystem::getLuaState(),-1);
+		lua_pop(EventSystem::getLuaState(), 1);
 		return true;
 	}
 	else if (valname =="blockable")
 	{
 		bool b;
-		b = lua_toboolean(EventSystem::getLuaState(),3);
+		b = lua_toboolean(EventSystem::getLuaState(),-1);
+		lua_pop(EventSystem::getLuaState(), 1);
 		if (!b)
 		{
 			m_special_flags |= UNBLOCKABLE ;
@@ -556,7 +575,8 @@ bool Damage::setValue(std::string valname)
 	else if (valname =="ignore_armor")
 	{
 		bool b;
-		b = lua_toboolean(EventSystem::getLuaState(),3);
+		b = lua_toboolean(EventSystem::getLuaState(),-1);
+		lua_pop(EventSystem::getLuaState(), 1);
 		if (b)
 		{
 			m_special_flags |= IGNORE_ARMOR ;
@@ -570,7 +590,8 @@ bool Damage::setValue(std::string valname)
 	else if (valname =="attacker")
 	{
 		int i;
-		i = lua_tointeger(EventSystem::getLuaState(),3);
+		i = lua_tointeger(EventSystem::getLuaState(),-1);
+		lua_pop(EventSystem::getLuaState(), 1);
 		m_attacker_id = i;
 		return true;
 	}

@@ -140,13 +140,6 @@ class EventSystem
 		{
 			m_dyn_attr = dyn_attr;
 		}
-		
-		/**
-		 * \fn static Damage* getDamage(std::string damagename)
-		 * \brief Gibt Schadensobjekt mit dem angegebenen Name aus
-		 * \param damagename Name des Schadensobjektes
-		 */
-		static Damage* getDamage(std::string damagename);
 
 		/**
 		 * \fn static std::string getReturnValue()

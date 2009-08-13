@@ -110,6 +110,18 @@ void Action::loadAbility(TiXmlNode* node)
 			{
 				loadHybridImplementation(child, a->m_effect);
 			}
+			else if (!strcmp(child->Value(), "Damage"))
+			{
+				loadHybridImplementation(child, a->m_damage);
+			}
+			else if (!strcmp(child->Value(), "BaseAttributesMod"))
+			{
+				loadHybridImplementation(child, a->m_base_mod);
+			}
+			else if (!strcmp(child->Value(), "DynAttributesMod"))
+			{
+				loadHybridImplementation(child, a->m_dyn_mod);
+			}
 			else if (!strcmp(child->Value(), "Projectile"))
 			{
 				attr.parseElement(child->ToElement());

@@ -198,12 +198,12 @@ public:
 	virtual void recalcDamage();
 	
 	/**
-	 * \fn virtual void calcBaseDamage(Action::ActionType act,Damage& dmg)
-	 * \param act Aktion, die ausgefuehrt wird
+	 * \fn virtual void calcBaseDamage(std::string impl,Damage& dmg)
+	 * \param impl String der bestimmt, welche Implementation verwendet wird
 	 * \param dmg Schaden der Aktion
 	 * \brief Berechnet den Basisschaden einer Aktion
 	 */
-	virtual void calcBaseDamage(Action::ActionType act,Damage& dmg);
+	virtual void calcBaseDamage(std::string impl,Damage& dmg);
 	
 	/**
 	 * \fn virtual void calcBaseAttrMod()

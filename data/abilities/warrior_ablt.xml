@@ -25,6 +25,13 @@
 	<Effect>
 		<CppImplementation type="dmg_at_enemies_in_radius" />
 	</Effect>
+	<Damage>
+		<CppImplementation type="attack" />
+		<CppImplementation type="weapon_damage" />
+		<LuaImplementation>
+			setDamageValue("phys_mult", getDamageValue("phys_mult")*0.7);
+		</LuaImplementation>	
+	</Damage>
 </Ability>
 
 <Ability type="bash" 
@@ -39,6 +46,13 @@
 	<Effect>
 		<CppImplementation type="dmg_at_target" />
 	</Effect>
+	<Damage>
+		<CppImplementation type="attack" />
+		<CppImplementation type="weapon_damage" />
+		<LuaImplementation>
+			setDamageValue("phys_mult", getDamageValue("phys_mult")*2);
+		</LuaImplementation>	
+	</Damage>
 </Ability>
 
 <Ability type="battle_cry"
@@ -77,6 +91,11 @@
 	<Effect>
 		<CppImplementation type="dmg_at_target" />
 	</Effect>
+	<Damage>
+		<CppImplementation type="attack" />
+		<CppImplementation type="weapon_damage" />
+		<CppImplementation type="charge" />
+	</Damage>
 </Ability>
 
 <Ability type="decoy"
@@ -172,6 +191,13 @@
 		<CppImplementation type="dmg_at_target" />
 		<CppImplementation type="hammer_bash" />
 	</Effect>
+	<Damage>
+		<CppImplementation type="attack" />
+		<CppImplementation type="weapon_damage" />
+		<LuaImplementation>
+			setDamageValue("phys_mult", getDamageValue("phys_mult")*2);
+		</LuaImplementation>	
+	</Damage>
 </Ability>
 
 <Ability type="hate_mage" 
@@ -186,6 +212,13 @@
 	<Effect>
 		<CppImplementation type="dmg_at_target" />
 	</Effect>
+	<Damage>
+		<CppImplementation type="attack" />
+		<CppImplementation type="weapon_damage" />
+		<LuaImplementation>
+			setDamageValue("mute", get(self,"strength"));
+		</LuaImplementation>	
+	</Damage>
 </Ability>
 
 <Ability type="monster_hunter" 
@@ -248,6 +281,15 @@
 	<Effect>
 		<CppImplementation type="dmg_at_target" />
 	</Effect>
+	<Damage>
+		<CppImplementation type="attack" />
+		<CppImplementation type="weapon_damage" />
+		<LuaImplementation>
+			setDamageValue("phys_mult", getDamageValue("phys_mult")*3);
+			setDamageValue("blockable",false);
+			setDamageValue("ignore_armor",true);
+		</LuaImplementation>	
+	</Damage>
 </Ability>
 
 <Ability type="steadfast" 
@@ -272,6 +314,11 @@
 	<Effect>
 		<CppImplementation type="dmg_at_target" />
 	</Effect>
+	<Damage>
+		<CppImplementation type="attack" />
+		<CppImplementation type="weapon_damage" />
+		<CppImplementation type="storm_charge" />
+	</Damage>
 </Ability>
 
 <Ability type="warcry"
@@ -312,6 +359,10 @@
 	<Effect>
 		<CppImplementation type="dmg_at_enemies_in_radius" />
 	</Effect>
+	<Damage>
+		<CppImplementation type="attack" />
+		<CppImplementation type="weapon_damage" />
+	</Damage>
 </Ability>
 
 

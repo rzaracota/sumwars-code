@@ -624,6 +624,12 @@ void Creature::performAction(float &time)
 		if (((m_action.m_type == m_command.m_type) || m_action.m_type == baseact) && m_action.m_type != "walk" || m_command.m_type == "walk" && getShape()->m_center.distanceTo(goal) < getBaseAttr()->m_step_length 
 				  && !(m_command.m_type == "charge" || m_command.m_type == "storm_charge"))
 		{
+			bool recalc = false;
+			
+			if (m_command.m_type == "charge" || m_command.m_type == "storm_charge")
+			{
+				recalc = true;
+			}
 			DEBUG5("finished command %s (base %s) with action %s",m_command.m_type.c_str(),baseact.c_str(),m_action.m_type.c_str() );
 			if (m_command.m_type != "noaction")
 			{
@@ -636,7 +642,10 @@ void Creature::performAction(float &time)
 
 
 			// Schaden neu berechnen
-			recalcDamage();
+			if (recalc)
+			{
+				recalcDamage();
+			}
 		}
 
 		// Aktion ist beendet
@@ -1000,6 +1009,7 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 	
 	if (ainfo->m_effect.m_lua_impl != LUA_NOREF)
 	{
+		
 		EventSystem::setRegion(getRegion());
 		EventSystem::setDamage(&m_damage);
 		
@@ -1024,6 +1034,7 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 		EventSystem::executeCodeReference(ainfo->m_effect.m_lua_impl);
 		
 		EventSystem::setDamage(0);
+		
 	}
 	
 	// Faehigkeit Monsterjaeger
@@ -2420,123 +2431,42 @@ void Creature::calcDamage(Action::ActionType act,Damage& dmg)
 	dmg.m_attacker_id = getId();
 	dmg.m_attacker_fraction = m_fraction;
 
-	DEBUG5("Calc Damage for action %s",m_action.m_type.c_str());
 	for (int i=0;i<4;i++)
 		dmg.m_multiplier[i]=1;
 
 	if (act == "noaction")
 		return;
 
-
-	// Schaden durch Basisattribute und ggf Ausruestung
-	calcBaseDamage(act,dmg);
-
-	// Modifikation des Schadens durch Faehigkeiten
-	calcAbilityDamage(act,dmg);
-
-	// Statusmods
-	// Blind
-	if (m_dyn_attr.m_status_mod_time[Damage::BLIND]>0)
-	{
-		// keine kritischen Treffer, Attackewert halbieren
-		dmg.m_crit_perc=0;
-		dmg.m_attack *= 0.5;
-	}
-
-	// verwirrt
-	if (m_dyn_attr.m_status_mod_time[Damage::CONFUSED]>0)
-	{
-		// Fraktion auf feindlich gegen alle setzen
-		dmg.m_attacker_fraction = FRAC_HOSTILE_TO_ALL;
-	}
-}
-
-void Creature::calcBaseDamage(Action::ActionType act,Damage& dmg)
-{
-	// Basisaktion
-	Action::ActionInfo* aci = Action::getActionInfo(act);
-	if (aci == 0)
+	DEBUG5("Calc Damage for action %s",act.c_str());
+	
+	Action::ActionInfo* ainfo = Action::getActionInfo(act);
+	if (ainfo ==0 )
 		return;
 	
-	Action::ActionType basact = aci->m_base_action;
-	CreatureBaseAttr* basm = getBaseAttrMod();
-
-
-	if (basact == "attack")
+	std::list<std::string>::iterator kt;
+	for (kt = ainfo->m_damage.m_cpp_impl.begin(); kt != ainfo->m_damage.m_cpp_impl.end(); ++kt)
 	{
-		// Basisaktion ist normaler Angriff
-		DEBUG5("base str %i mod str %i",m_base_attr.m_strength,basm->m_strength);
+		
+		// Schaden durch Basisattribute und ggf Ausruestung
+		calcBaseDamage(*kt,dmg);
 
-		dmg.m_min_damage[Damage::PHYSICAL] += basm->m_strength/4;
-		dmg.m_min_damage[Damage::PHYSICAL] += basm->m_dexterity/10;
-		dmg.m_max_damage[Damage::PHYSICAL] += basm->m_strength/3;
-		dmg.m_max_damage[Damage::PHYSICAL] += basm->m_dexterity/8;
-
-
-		dmg.m_attack += basm->m_attack;
-		dmg.m_attack += basm->m_dexterity/2;
-
-		dmg.m_power += basm->m_power;
-		dmg.m_power += basm->m_strength/2;
-
-		dmg.m_special_flags = Damage::NOFLAGS;
-
+		// Modifikation des Schadens durch Faehigkeiten
+		calcAbilityDamage(*kt,dmg);
 	}
-
-	if (basact == "magic_attack")
+	
+	if (ainfo->m_damage.m_lua_impl != LUA_NOREF)
 	{
-		// Basisaktion ist magischer Angriff
-		dmg.m_min_damage[Damage::FIRE] += basm->m_magic_power/10;
-		dmg.m_min_damage[Damage::FIRE] += basm->m_willpower/20;
-		dmg.m_max_damage[Damage::FIRE] += basm->m_magic_power/6;
-		dmg.m_max_damage[Damage::FIRE] += basm->m_willpower/15;
-
-		dmg.m_special_flags = Damage::UNBLOCKABLE;
-
-		dmg.m_attack=0;
-
+		EventSystem::setRegion(getRegion());
+		EventSystem::setDamage(&dmg);
+		
+		lua_pushnumber(EventSystem::getLuaState(),getId());
+		lua_setglobal(EventSystem::getLuaState(), "self");
+		
+		EventSystem::executeCodeReference(ainfo->m_damage.m_lua_impl);
+		
+		EventSystem::setDamage(0);
+		
 	}
-
-	if (basact == "range_attack")
-	{
-		// Basisaktion ist Fernangriff
-		dmg.m_min_damage[Damage::PHYSICAL] += basm->m_strength/10;
-		dmg.m_min_damage[Damage::PHYSICAL] += basm->m_dexterity/6;
-		dmg.m_max_damage[Damage::PHYSICAL] += basm->m_strength/8;
-		dmg.m_max_damage[Damage::PHYSICAL] += basm->m_dexterity/4;
-
-		dmg.m_attack += basm->m_attack;
-		dmg.m_attack += basm->m_dexterity/2;
-
-		dmg.m_power += basm->m_power;
-		dmg.m_power += basm->m_dexterity/2;
-
-		dmg.m_special_flags = Damage::NOFLAGS;
-
-	}
-
-	if (basact == "holy_attack")
-	{
-		// Basisaktion ist heiliger Angriff
-		dmg.m_min_damage[Damage::PHYSICAL] += basm->m_strength/9;
-		dmg.m_min_damage[Damage::PHYSICAL] += basm->m_willpower/6;
-		dmg.m_max_damage[Damage::PHYSICAL] += basm->m_strength/6;
-		dmg.m_max_damage[Damage::PHYSICAL] += basm->m_willpower/3;
-
-		dmg.m_attack += basm->m_attack;
-		dmg.m_attack += basm->m_dexterity/2;
-
-		dmg.m_power += basm->m_power;
-		dmg.m_power += basm->m_willpower/2;
-
-		dmg.m_special_flags = Damage::NOFLAGS;
-
-	}
-}
-
-void Creature::calcAbilityDamage(Action::ActionType act,Damage& dmg)
-{
-	// CreatureBaseAttr* basm = getBaseAttrMod();
 
 	// Eigenschaften durch passive  Faehigkeiten
 	if (checkAbility("critical_strike"))
@@ -2587,6 +2517,9 @@ void Creature::calcAbilityDamage(Action::ActionType act,Damage& dmg)
 			// Statusmod brennend austeilen
 			dmg.m_status_mod_power[Damage::BURNING] += m_base_attr_mod.m_magic_power*3;
 		}
+		
+		dmg.m_multiplier[Damage::FIRE] *= dmg.m_multiplier[Damage::PHYSICAL];
+		dmg.m_multiplier[Damage::PHYSICAL]=1;
 	}
 
 	// Elfenaugen
@@ -2611,6 +2544,7 @@ void Creature::calcAbilityDamage(Action::ActionType act,Damage& dmg)
 			// Statusmod einfrieren
 			dmg.m_status_mod_power[Damage::FROZEN] += m_base_attr_mod.m_magic_power*3;
 		}
+		dmg.m_multiplier[Damage::ICE] *= dmg.m_multiplier[Damage::PHYSICAL];
 	}
 
 	// Windpfeile
@@ -2625,10 +2559,126 @@ void Creature::calcAbilityDamage(Action::ActionType act,Damage& dmg)
 		{
 			dmg.m_multiplier[Damage::AIR] *= 1.4;
 		}
+		dmg.m_multiplier[Damage::AIR] *= dmg.m_multiplier[Damage::PHYSICAL];
+	}
+	
+	// Statusmods
+	// Blind
+	if (m_dyn_attr.m_status_mod_time[Damage::BLIND]>0)
+	{
+		// keine kritischen Treffer, Attackewert halbieren
+		dmg.m_crit_perc=0;
+		dmg.m_attack *= 0.5;
 	}
 
-	// Schaden der Faehigkeit an sich
+	// verwirrt
+	if (m_dyn_attr.m_status_mod_time[Damage::CONFUSED]>0)
+	{
+		// Fraktion auf feindlich gegen alle setzen
+		dmg.m_attacker_fraction = FRAC_HOSTILE_TO_ALL;
+	}
+	
+	// Faehigkeit brennende Wut
+	if (getBaseAttrMod()->m_special_flags & BURNING_RAGE)
+	{
+		// 50% mehr physischen Schaden
+		dmg.m_multiplier[Damage::PHYSICAL] *= 1.5;
+	}
+}
 
+void Creature::calcBaseDamage(std::string impl ,Damage& dmg)
+{
+	CreatureBaseAttr* basm = getBaseAttrMod();
+	if (impl == "attack")
+	{
+		// Basisaktion ist normaler Angriff
+		DEBUG5("base str %i mod str %i",m_base_attr.m_strength,basm->m_strength);
+
+		dmg.m_min_damage[Damage::PHYSICAL] += basm->m_strength/4;
+		dmg.m_min_damage[Damage::PHYSICAL] += basm->m_dexterity/10;
+		dmg.m_max_damage[Damage::PHYSICAL] += basm->m_strength/3;
+		dmg.m_max_damage[Damage::PHYSICAL] += basm->m_dexterity/8;
+
+
+		dmg.m_attack += basm->m_attack;
+		dmg.m_attack += basm->m_dexterity/2;
+
+		dmg.m_power += basm->m_power;
+		dmg.m_power += basm->m_strength/2;
+
+		dmg.m_special_flags = Damage::NOFLAGS;
+
+	}
+
+	if (impl == "magic_attack")
+	{
+		// Basisaktion ist magischer Angriff
+		dmg.m_min_damage[Damage::FIRE] += basm->m_magic_power/10;
+		dmg.m_min_damage[Damage::FIRE] += basm->m_willpower/20;
+		dmg.m_max_damage[Damage::FIRE] += basm->m_magic_power/6;
+		dmg.m_max_damage[Damage::FIRE] += basm->m_willpower/15;
+
+		dmg.m_special_flags = Damage::UNBLOCKABLE;
+
+		dmg.m_attack=0;
+
+	}
+
+	if (impl == "range_attack")
+	{
+		// Basisaktion ist Fernangriff
+		dmg.m_min_damage[Damage::PHYSICAL] += basm->m_strength/10;
+		dmg.m_min_damage[Damage::PHYSICAL] += basm->m_dexterity/6;
+		dmg.m_max_damage[Damage::PHYSICAL] += basm->m_strength/8;
+		dmg.m_max_damage[Damage::PHYSICAL] += basm->m_dexterity/4;
+
+		dmg.m_attack += basm->m_attack;
+		dmg.m_attack += basm->m_dexterity/2;
+
+		dmg.m_power += basm->m_power;
+		dmg.m_power += basm->m_dexterity/2;
+
+		dmg.m_special_flags = Damage::NOFLAGS;
+
+	}
+
+	if (impl == "holy_attack")
+	{
+		// Basisaktion ist heiliger Angriff
+		dmg.m_min_damage[Damage::PHYSICAL] += basm->m_strength/9;
+		dmg.m_min_damage[Damage::PHYSICAL] += basm->m_willpower/6;
+		dmg.m_max_damage[Damage::PHYSICAL] += basm->m_strength/6;
+		dmg.m_max_damage[Damage::PHYSICAL] += basm->m_willpower/3;
+
+		dmg.m_attack += basm->m_attack;
+		dmg.m_attack += basm->m_dexterity/2;
+
+		dmg.m_power += basm->m_power;
+		dmg.m_power += basm->m_willpower/2;
+
+		dmg.m_special_flags = Damage::NOFLAGS;
+
+	}
+}
+
+void Creature::calcAbilityDamage(std::string impl, Damage& dmg)
+{
+	// CreatureBaseAttr* basm = getBaseAttrMod();
+
+	if (impl == "charge")
+	{
+		dmg.m_multiplier[Damage::PHYSICAL] *= m_command.m_damage_mult;
+		dmg.m_attack *=m_command.m_damage_mult*0.5;
+	}
+	else if (impl == "storm_charge")
+	{
+
+		dmg.m_multiplier[Damage::PHYSICAL] *= m_command.m_damage_mult;
+		dmg.m_attack *=m_command.m_damage_mult*0.5;
+		dmg.m_status_mod_power[Damage::PARALYZED] += (short)  (m_base_attr_mod.m_strength*m_command.m_damage_mult*0.2);
+	}
+	// Schaden der Faehigkeit an sich
+/*
 	if (act == "bash")
 	{
 			dmg.m_multiplier[Damage::PHYSICAL] *= 2;
@@ -2656,18 +2706,6 @@ void Creature::calcAbilityDamage(Action::ActionType act,Damage& dmg)
 	{
 			dmg.m_multiplier[Damage::PHYSICAL] *= 1;
 			dmg.m_status_mod_power[Damage::MUTE] += m_base_attr_mod.m_strength;
-	}
-	else if (act == "charge")
-	{
-			dmg.m_multiplier[Damage::PHYSICAL] *= m_command.m_damage_mult;
-			dmg.m_attack *=m_command.m_damage_mult*0.5;
-	}
-	else if (act == "storm_charge")
-	{
-
-			dmg.m_multiplier[Damage::PHYSICAL] *= m_command.m_damage_mult;
-			dmg.m_attack *=m_command.m_damage_mult*0.5;
-			dmg.m_status_mod_power[Damage::PARALYZED] += (short)  (m_base_attr_mod.m_strength*m_command.m_damage_mult*0.2);
 	}
 	else if (act == "decoy")
 	{
@@ -2946,36 +2984,10 @@ void Creature::calcAbilityDamage(Action::ActionType act,Damage& dmg)
 			dmg.m_special_flags |= Damage::UNBLOCKABLE;
 	}
 
-	// Faehigkeit brennende Wut
-	if (getBaseAttrMod()->m_special_flags & BURNING_RAGE)
-	{
-		// 50% mehr physischen Schaden
-		dmg.m_multiplier[Damage::PHYSICAL] *= 1.5;
-	}
-
-	// temporaere Effekte, Multiplikatoren umsetzen
-
-	// Feuerschwert
-	if (m_base_attr_mod.m_special_flags & FIRESWORD)
-	{
-		dmg.m_multiplier[Damage::FIRE] *= dmg.m_multiplier[Damage::PHYSICAL];
-		dmg.m_multiplier[Damage::PHYSICAL]=1;
-	}
-
-	// Eispfeile
-	if (m_base_attr_mod.m_special_flags & ICE_ARROWS)
-	{
-		dmg.m_multiplier[Damage::ICE] *= dmg.m_multiplier[Damage::PHYSICAL];
-	}
-
-	// Windpfeile
-	if (m_base_attr_mod.m_special_flags & WIND_ARROWS)
-	{
-		dmg.m_multiplier[Damage::AIR] *= dmg.m_multiplier[Damage::PHYSICAL];
-	}
+	
 
 
-
+*/
 }
 
 
