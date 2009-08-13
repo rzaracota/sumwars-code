@@ -3251,6 +3251,12 @@ bool Creature::takeDamage(Damage* d)
 
 	DEBUG5("sum dmg %f / %f",dmg,getDynAttr()->m_health );
 
+	// Extraschaden berechnen
+	if (d->m_extra_dmg_race == getRace() && getRace() != "")
+	{
+		dmg *= 3;
+	}
+	
 	// Lebenspunkte abziehen
 	getDynAttr()->m_health -= dmg;
 
@@ -3698,8 +3704,6 @@ void Creature::toString(CharConv* cv)
 void Creature::fromString(CharConv* cv)
 {
 	WorldObject::fromString(cv);
-	char ctmp;
-	short stmp;
 	cv->fromBuffer(m_refname);
 	
 	m_action.fromString(cv);

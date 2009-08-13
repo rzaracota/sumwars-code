@@ -36,7 +36,7 @@ void Damage::toString(CharConv* cv)
 	}
 
 	cv->toBuffer(m_special_flags);
-	//cv->toBuffer(m_extra_dmg_race);
+	cv->toBuffer(m_extra_dmg_race);
 
 }
 
@@ -70,7 +70,7 @@ void Damage::fromString(CharConv* cv)
 	}
 
 	cv->fromBuffer<short>(m_special_flags );
-	//cv->fromBuffer(m_extra_dmg_race);
+	cv->fromBuffer(m_extra_dmg_race);
 }
 
 
@@ -101,6 +101,7 @@ void Damage::init()
 	}
 
 	m_attacker_fraction = WorldObject::FRAC_HOSTILE_TO_ALL;
+	m_extra_dmg_race = "";
 }
 
 void Damage::operator=(Damage& other)
@@ -436,6 +437,11 @@ int Damage::getValue(std::string valname)
 		lua_pushboolean(EventSystem::getLuaState() , (m_special_flags & IGNORE_ARMOR));
 		return 1;
 	}
+	else if (valname =="extra_dmg_race")
+	{
+		lua_pushstring(EventSystem::getLuaState() , m_extra_dmg_race.c_str());
+		return 1;
+	}
 	else if (valname =="attacker")
 	{
 		lua_pushinteger(EventSystem::getLuaState() , m_attacker_id);
@@ -597,6 +603,12 @@ bool Damage::setValue(std::string valname)
 		{
 			m_special_flags &= ~IGNORE_ARMOR ;
 		}
+		return true;
+	}
+	else if (valname =="extra_dmg_race")
+	{
+		m_extra_dmg_race= lua_tostring(EventSystem::getLuaState(),-1);
+		lua_pop(EventSystem::getLuaState(), 1);
 		return true;
 	}
 	else if (valname =="attacker")
