@@ -305,6 +305,7 @@ bool  ObjectLoader::loadCreatureBaseAttr(TiXmlNode* node, CreatureBaseAttr& basa
 			attr.getString("type",type);
 							
 							// string -> enum
+			/*
 			if (type== "noflags")
 				basattr.m_special_flags |= Damage::NOFLAGS;
 			else if (type ==  "unblockable")
@@ -329,6 +330,7 @@ bool  ObjectLoader::loadCreatureBaseAttr(TiXmlNode* node, CreatureBaseAttr& basa
 				basattr.m_special_flags |= Damage::EXTRA_ANIMAL_DMG;
 			else if (type == "extra_summoned_dmg")
 				basattr.m_special_flags |= Damage::EXTRA_SUMMONED_DMG;
+			*/
 		}
 		else if (child2->Type()!=TiXmlNode::COMMENT)
 		{

@@ -220,7 +220,7 @@ void ItemLoader::loadItem(TiXmlNode* node)
 				
 				std::string type;
 				attr.getString("type",type);
-				
+				/*
 				short flags = item_data->m_weapon_attr->m_damage.m_special_flags;
 				if (type ==  "unblockable")
 					flags |= Damage::UNBLOCKABLE;
@@ -244,6 +244,7 @@ void ItemLoader::loadItem(TiXmlNode* node)
 					flags |= Damage::EXTRA_ANIMAL_DMG;
 				else if (type ==   "extra_summoned_dmg")
 					flags |= Damage::EXTRA_SUMMONED_DMG;
+				*/
 			}
 			else if (!strcmp(child->Value(), "Immunity"))
 			{

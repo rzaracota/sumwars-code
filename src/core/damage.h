@@ -87,6 +87,11 @@ struct Damage
 	 */
 	short m_ai_mod_power[NR_AI_MODS];
 	
+	/**
+	 * \var WorldObject::Category m_extra_dmg_category
+	 * \brief Kategorie gegen den der Schaden verdreifacht wird
+	 */
+	WorldObject::Category m_extra_dmg_category;
 	
 	/**
 	 * \var m_special_flags
@@ -132,15 +137,6 @@ struct Damage
 		NOFLAGS =0,
 		UNBLOCKABLE = 0x1,
 		IGNORE_ARMOR = 0x2,
-		EXTRA_HUMAN_DMG = 0x10,
-		EXTRA_DEMON_DMG = 0x20,
-		EXTRA_UNDEAD_DMG = 0x40,
-		EXTRA_DWARF_DMG = 0x80,
-		EXTRA_DRAKE_DMG = 0x100,
-		EXTRA_FAIRY_DMG = 0x200,
-		EXTRA_GOBLIN_DMG = 0x400,
-		EXTRA_ANIMAL_DMG = 0x800,
-		EXTRA_SUMMONED_DMG = 0x1000
 	};
 	
 	/**

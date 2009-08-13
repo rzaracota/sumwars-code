@@ -24,6 +24,14 @@
 		<CppImplementation type="proj_fly_at_target" />
 	</Effect>
 	<Projectile type="ARROW" speed="12000" />
+	<Damage>
+		<CppImplementation type="range_attack" />
+		<CppImplementation type="weapon_damage" />
+		<LuaImplementation>
+			setDamageValue("berserk", get(self,"dexterity"));
+			setDamageValue("blind", get(self,"dexterity"));
+		</LuaImplementation>	
+	</Damage>
 </Ability>
 
 <Ability type="bow_spirit"
@@ -75,6 +83,13 @@
 	<Projectile type="ARROW" speed="12000" >
 		<Flag name="prob_bouncing" />
 	</Projectile>
+	<Damage>
+		<CppImplementation type="range_attack" />
+		<CppImplementation type="weapon_damage" />
+		<LuaImplementation>
+			setDamageValue("phys_mult", getDamageValue("phys_mult")*2);
+		</LuaImplementation>	
+	</Damage>
 </Ability>
 
 <Ability type="evade"
@@ -102,6 +117,14 @@
 	<Projectile type="ARROW" speed="12000" >
 		<Flag name="explodes" />
 	</Projectile>
+	<Damage>
+		<CppImplementation type="range_attack" />
+		<CppImplementation type="weapon_damage" />
+		<LuaImplementation>
+			setDamageValue("phys_mult", getDamageValue("phys_mult")*2);
+			setDamageValue("blockable",false);
+		</LuaImplementation>	
+	</Damage>
 </Ability>
 
 <Ability type="exploding_cascade"
@@ -119,6 +142,14 @@
 	<Projectile type="ARROW" speed="12000" >
 		<Flag name="multi_explodes" />
 	</Projectile>
+	<Damage>
+		<CppImplementation type="range_attack" />
+		<CppImplementation type="weapon_damage" />
+		<LuaImplementation>
+			setDamageValue("phys_mult", getDamageValue("phys_mult")*2);
+			setDamageValue("blockable",false);
+		</LuaImplementation>	
+	</Damage>
 </Ability>
 
 <Ability type="freezing_arrows"
@@ -148,6 +179,10 @@
 		<CppImplementation type="proj_fly_at_target" />
 	</Effect>
 	<Projectile type="GUIDED_ARROW" speed="12000" />
+	<Damage>
+		<CppImplementation type="range_attack" />
+		<CppImplementation type="weapon_damage" />
+	</Damage>
 </Ability>
 
 <Ability type="ice_arrows"
@@ -187,6 +222,13 @@
 		<CppImplementation type="multishot" />
 	</Effect>
 	<Projectile type="ARROW" speed="12000" />
+	<Damage>
+		<CppImplementation type="range_attack" />
+		<CppImplementation type="weapon_damage" />
+		<LuaImplementation>
+			setDamageValue("phys_mult", getDamageValue("phys_mult")*0.75);
+		</LuaImplementation>	
+	</Damage>
 </Ability>
 
 <Ability type="pierce"
@@ -204,6 +246,14 @@
 	<Projectile type="ARROW" speed="12000" >
 		<Flag name="piercing" />
 	</Projectile>
+	<Damage>
+		<CppImplementation type="range_attack" />
+		<CppImplementation type="weapon_damage" />
+		<LuaImplementation>
+			setDamageValue("phys_mult", getDamageValue("phys_mult")*1.5);
+			setDamageValue("blockable",false);
+		</LuaImplementation>	
+	</Damage>
 </Ability>
 
 <Ability type="resist_air"
@@ -252,6 +302,10 @@
 		<CppImplementation type="proj_fly_at_target" />
 	</Effect>
 	<Projectile type="ARROW" speed="12000" />
+	<Damage>
+		<CppImplementation type="range_attack" />
+		<CppImplementation type="weapon_damage" />
+	</Damage>
 </Ability>
 
 <Ability type="vacuum"
@@ -265,6 +319,17 @@
 		<CppImplementation type="proj_fly_at_target" />
 	</Effect>
 	<Projectile type="WIND_ARROW" speed="12000" />
+	<Damage>
+		<CppImplementation type="range_attack" />
+		<CppImplementation type="weapon_damage" />
+		<LuaImplementation>
+			local dex = get(self,"dexterity")
+			local admg = getDamageValue("air_dmg");
+			setDamageValue("air_dmg", {admg[1] + dex, admg[2] + dex*2});
+			setDamageValue("paralyzed",dex);
+			setDamageValue("blockable",false);
+		</LuaImplementation>	
+	</Damage>
 </Ability>
 
 <Ability type="volley_shot"
@@ -280,6 +345,10 @@
 		<CppImplementation type="volley_shot" />
 	</Effect>
 	<Projectile type="ARROW" speed="12000" />
+	<Damage>
+		<CppImplementation type="range_attack" />
+		<CppImplementation type="weapon_damage" />
+	</Damage>
 </Ability>
 
 <Ability type="weak_point"
@@ -295,6 +364,13 @@
 		<CppImplementation type="proj_fly_at_target" />
 	</Effect>
 	<Projectile type="ARROW" speed="12000" />
+	<Damage>
+		<CppImplementation type="range_attack" />
+		<CppImplementation type="weapon_damage" />
+		<LuaImplementation>
+			setDamageValue("berserk", get(self,"dexterity"));
+		</LuaImplementation>	
+	</Damage>
 </Ability>
 
 <Ability type="wind_arrows"
