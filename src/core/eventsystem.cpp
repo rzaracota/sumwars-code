@@ -19,9 +19,9 @@ Dialogue*  EventSystem::m_dialogue=0;
 
 Damage* EventSystem::m_damage=0;
 
-CreatureBaseAttr* EventSystem::m_base_attr=0;
+CreatureBaseAttrMod* EventSystem::m_base_mod=0;
 
-CreatureDynAttr* EventSystem::m_dyn_attr=0;
+CreatureDynAttrMod* EventSystem::m_dyn_mod=0;
 
 CharConv* EventSystem::m_charconv =0;
 

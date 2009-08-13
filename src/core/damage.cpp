@@ -101,7 +101,7 @@ void Damage::init()
 	}
 
 	m_attacker_fraction = WorldObject::FRAC_HOSTILE_TO_ALL;
-	m_extra_dmg_race = "";
+	m_extra_dmg_race = "norace";
 }
 
 void Damage::operator=(Damage& other)

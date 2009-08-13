@@ -20,8 +20,8 @@ extern "C"
 class Region;
 class Dialogue;
 class Damage;
-struct CreatureBaseAttr;
-struct CreatureDynAttr;
+struct CreatureBaseAttrMod;
+struct CreatureDynAttrMod;
 
 /**
  * \class EventSystem
@@ -122,23 +122,23 @@ class EventSystem
 		}
 		
 		/**
-		 * \fn static void setCreatureBaseAttr(CreatureBaseAttr* base_attr)
+		 * \fn static void setCreatureBaseAttrMod(CreatureBaseAttrMod* base_mod)
 		 * \brief setzt per Lua modifizierbare Basisattribute
-		 * \param base_attr Basisattribute
+		 * \param base_mod Modifikationen der Basisattribute
 		 */
-		static void setCreatureBaseAttr(CreatureBaseAttr* base_attr)
+		static void setCreatureBaseAttrMod(CreatureBaseAttrMod* base_mod)
 		{
-			m_base_attr = base_attr;
+			m_base_mod = base_mod;
 		}
 		
 		/**
-		 * \fn static void setCreatureDynAttr(CreatureDynAttr* dyn_attr)
+		 * \fn static void setCreatureDynAttrMod(CreatureDynAttr* dyn_mod)
 		 * \brief setzt per Lua modifizierbare dynamische Aattribute
-		 * \param dyn_attr dynamische Attribute
+		 * \param dyn_attr Modifikationen der dynamischen Attribute
 		 */
-		static void setCreatureDynAttr(CreatureDynAttr* dyn_attr)
+		static void setCreatureDynAttrMod(CreatureDynAttrMod* dyn_mod)
 		{
-			m_dyn_attr = dyn_attr;
+			m_dyn_mod = dyn_mod;
 		}
 
 		/**
@@ -198,6 +198,34 @@ class EventSystem
 		 * \param L Lua Status
 		 */
 		static int setDamageValue(lua_State *L);
+		
+		/**
+		 * \fn static int setBaseModValue(lua_State *L)
+		 * \brief Setzt ein Attribut der BaseAttr Struktur
+		 * \param L Lua Status
+		 */
+		static int setBaseModValue(lua_State *L);
+		
+		/**
+		 * \fn static int getBaseModValue(lua_State *L)
+		 * \brief Gibt ein Attribut der BaseAttr Struktur aus
+		 * \param L Lua Status
+		 */
+		static int getBaseModValue(lua_State *L);
+		
+		/**
+		 * \fn static int setBaseAttrValue(lua_State *L)
+		 * \brief Setzt ein Attribut der BaseAttr Struktur
+		 * \param L Lua Status
+		 */
+		static int setBaseAttrValue(lua_State *L);
+		
+		/**
+		 * \fn static int getBaseAttrValue(lua_State *L)
+		 * \brief Gibt ein Attribut der BaseAttr Struktur aus
+		 * \param L Lua Status
+		 */
+		static int getBaseAttrValue(lua_State *L);
 		
 		/**
 		 * \fn static int createProjectile(lua_State *L)
@@ -591,16 +619,16 @@ class EventSystem
 		static Damage* m_damage;
 		
 		/**
-		 * \var static CreatureBaseAttr* m_base_attr
+		 * \var static CreatureBaseAttrMod* m_base_mod
 		 * \brief Objekt mit Basisattributen von Kreaturen
 		 */
-		static CreatureBaseAttr* m_base_attr;
+		static CreatureBaseAttrMod* m_base_mod;
 		
 		/**
-		 * \var static CreatureDynAttr* m_dyn_attr
+		 * \var static CreatureDynAttrMod* m_dyn_mod
 		 * \brief Objekt mit dynamischen Attributen von Kreaturen
 		 */
-		static CreatureDynAttr* m_dyn_attr;
+		static CreatureDynAttrMod* m_dyn_mod;
 		
 		/**
 		 * \var static CharConv* m_charconv

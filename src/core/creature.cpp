@@ -3254,6 +3254,7 @@ bool Creature::takeDamage(Damage* d)
 	// Extraschaden berechnen
 	if (d->m_extra_dmg_race == getRace() && getRace() != "")
 	{
+		DEBUG("triple damage");
 		dmg *= 3;
 	}
 	

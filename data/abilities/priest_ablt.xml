@@ -12,6 +12,13 @@
 		<CppImplementation type="proj_at_target" />
 	</Effect>
 	<Projectile type="ACID" />
+	<Damage>
+		<LuaImplementation>
+			local willpower = get(self,"willpower");
+			setDamageValue("blockable",false);
+			setDamageValue("poisoned",willpower*1.5);
+		</LuaImplementation>	
+	</Damage>
 </Ability>
 
 <Ability type="blade_storm"
@@ -59,6 +66,18 @@
 	<Effect>
 		<CppImplementation type="dmg_at_target" />
 	</Effect>
+	<Damage>
+		<LuaImplementation>
+			local willpower = get(self,"willpower");
+			local magic = get(self,"magic_power");
+			local edmg = math.min(willpower/3,magic*2);
+			local pdmg = getDamageValue("phys_dmg");
+			setDamageValue("phys_dmg", {pdmg[1] + edmg, pdmg[2]  + edmg*2});
+			setDamageValue("ice_dmg",{willpower*0.33,willpower*0.66});
+			setDamageValue("blockable",false);
+			setDamageValue("extra_dmg_race","elemental");
+		</LuaImplementation>	
+	</Damage>
 </Ability>
 
 <Ability type="burning_rage"
@@ -91,7 +110,15 @@
 	<Effect>
 		<CppImplementation type="proj_at_enemies_around_target" />
 	</Effect>
-	<Projectile type="LIGHT_BEAM" speed="12000" />
+	<Projectile type="LIGHT_BEAM" />
+	
+	<Damage>
+		<LuaImplementation>
+			local willpower = get(self,"willpower");
+			setDamageValue("blockable",false);
+			setDamageValue("blind",willpower);
+		</LuaImplementation>	
+	</Damage>
 </Ability>
 
 <Ability type="cure_blind_mute"
@@ -198,6 +225,18 @@
 	<Effect>
 		<CppImplementation type="dmg_at_target" />
 	</Effect>
+	<Damage>
+		<LuaImplementation>
+			local willpower = get(self,"willpower");
+			local magic = get(self,"magic_power");
+			local edmg = math.min(willpower/3,magic*2);
+			local pdmg = getDamageValue("phys_dmg");
+			setDamageValue("phys_dmg", {pdmg[1] + edmg*1.5, pdmg[2]  + edmg*3});
+			setDamageValue("ice_dmg",{willpower*0.5,willpower});
+			setDamageValue("blockable",false);
+			setDamageValue("extra_dmg_race","elemental");
+		</LuaImplementation>	
+	</Damage>
 </Ability>
 
 <Ability type="divine_storm"
@@ -215,6 +254,14 @@
 		<CppImplementation type="proj_at_enemies_around_target" />
 	</Effect>
 	<Projectile type="DIVINE_BEAM"/>
+	<Damage>
+		<LuaImplementation>
+			local willpower = get(self,"willpower");
+			setDamageValue("blockable",false);
+			setDamageValue("air_dmg",{willpower*0.5,willpower});
+			setDamageValue("extra_dmg_race","demon");
+		</LuaImplementation>	
+	</Damage>
 </Ability>
 
 <Ability type="divine_wind"
@@ -231,6 +278,14 @@
 		<CppImplementation type="proj_at_target" />
 	</Effect>
 	<Projectile type="DIVINE_BEAM" />
+	<Damage>
+		<LuaImplementation>
+			local willpower = get(self,"willpower");
+			setDamageValue("blockable",false);
+			setDamageValue("air_dmg",{willpower*0.5,willpower});
+			setDamageValue("extra_dmg_race","demon");
+		</LuaImplementation>	
+	</Damage>
 </Ability>
 
 <Ability type="heal"
@@ -278,6 +333,18 @@
 		<CppImplementation type="proj_at_target" />
 	</Effect>
 	<Projectile type="LIGHT_BEAM" />
+	<Damage>
+		<LuaImplementation>
+			local willpower = get(self,"willpower");
+			local magic = get(self,"magic_power");
+			local edmg = math.min(willpower/3,magic*2);
+			local fdmg = getDamageValue("fire_dmg");
+			setDamageValue("fire_dmg", {fdmg[1] + willpower*0.33 + edmg, fdmg[2] + willpower*0.66 + edmg*2});
+			setDamageValue("ice_dmg",{0,0});
+			setDamageValue("blockable",false);
+			setDamageValue("extra_dmg_race","undead");
+		</LuaImplementation>	
+	</Damage>
 </Ability>
 
 <Ability type="holy_light" 
@@ -294,6 +361,18 @@
 		<CppImplementation type="proj_at_target" />
 	</Effect>
 	<Projectile type="LIGHT_BEAM" />
+	<Damage>
+		<LuaImplementation>
+			local willpower = get(self,"willpower");
+			local magic = get(self,"magic_power");
+			local edmg = math.min(willpower/3,magic*2);
+			local fdmg = getDamageValue("fire_dmg");
+			setDamageValue("fire_dmg", {fdmg[1] + willpower*0.25 + edmg*75, fdmg[2] + willpower*0.5 + edmg*1.5});
+			setDamageValue("ice_dmg",{0,0});
+			setDamageValue("blockable",false);
+			setDamageValue("extra_dmg_race","undead");
+		</LuaImplementation>	
+	</Damage>
 </Ability>
 
 <Ability type="hypnosis"
@@ -310,6 +389,13 @@
 		<CppImplementation type="proj_at_target" />
 	</Effect>
 	<Projectile type="HYPNOSIS" />
+	<Damage>
+		<LuaImplementation>
+			local willpower = get(self,"willpower");
+			setDamageValue("blockable",false);
+			setDamageValue("confused",willpower);
+		</LuaImplementation>	
+	</Damage>
 </Ability>
 
 <Ability type="hypnosis2"
@@ -327,6 +413,13 @@
 		<CppImplementation type="proj_at_enemies_around_target" />
 	</Effect>
 	<Projectile type="HYPNOSIS" />
+	<Damage>
+		<LuaImplementation>
+			local willpower = get(self,"willpower");
+			setDamageValue("blockable",false);
+			setDamageValue("confused",willpower);
+		</LuaImplementation>	
+	</Damage>
 </Ability>
 
 <Ability type="keen_mind"
@@ -359,6 +452,13 @@
 		<CppImplementation type="proj_at_target" />
 	</Effect>
 	<Projectile type="LIGHT_BEAM" />
+	<Damage>
+		<LuaImplementation>
+			local willpower = get(self,"willpower");
+			setDamageValue("blockable",false);
+			setDamageValue("blind",willpower);
+		</LuaImplementation>	
+	</Damage>
 </Ability>
 
 <Ability type="magic_shield"
