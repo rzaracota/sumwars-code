@@ -1546,12 +1546,11 @@ void Region::update(float time)
 	}
 	
 	// Schleife ueber die Trigger
-	EventSystem::setRegion(this);
-	
 	std::multimap<TriggerType, Event*>::iterator it, itend, jt;
 	
 	while (!m_triggers.empty())
 	{
+		EventSystem::setRegion(this);
 		TriggerType type;
 		type = m_triggers.front()->getType();
 		

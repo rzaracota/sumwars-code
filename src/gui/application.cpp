@@ -543,22 +543,6 @@ bool Application::loadResources()
 	updateStartScreen(0.2);
 	Ogre::ResourceGroupManager::getSingleton().loadResourceGroup("GUI");
 
-	// Aktionen initialisieren
-	Action::init();
-	
-	files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("abilities","*.xml");
-	for (it = files->begin(); it != files->end(); ++it)
-	{
-		file = it->archive->getName();
-		file += "/";
-		file += it->filename;
-
-		Action::loadAbilityData(file.c_str());
-
-		updateStartScreen(0.25);
-	}
-
-
 	// Spielerklassen initialisieren
 	files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("playerclasses","*.xml");
 	for (it = files->begin(); it != files->end(); ++it)

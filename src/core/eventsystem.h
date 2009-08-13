@@ -19,6 +19,9 @@ extern "C"
 
 class Region;
 class Dialogue;
+class Damage;
+struct CreatureBaseAttr;
+struct CreatureDynAttr;
 
 /**
  * \class EventSystem
@@ -107,6 +110,43 @@ class EventSystem
 			m_dialogue = dialogue;
 		}
 		
+		
+		/**
+		 * \fn static void setDamage(Damage* damage)
+		 * \brief Setzt das aktuelle Schadensobjekt
+		 * \param damage Schaden
+		 */
+		static void setDamage(Damage* damage)
+		{
+			m_damage = damage;
+		}
+		
+		/**
+		 * \fn static void setCreatureBaseAttr(CreatureBaseAttr* base_attr)
+		 * \brief setzt per Lua modifizierbare Basisattribute
+		 * \param base_attr Basisattribute
+		 */
+		static void setCreatureBaseAttr(CreatureBaseAttr* base_attr)
+		{
+			m_base_attr = base_attr;
+		}
+		
+		/**
+		 * \fn static void setCreatureDynAttr(CreatureDynAttr* dyn_attr)
+		 * \brief setzt per Lua modifizierbare dynamische Aattribute
+		 * \param dyn_attr dynamische Attribute
+		 */
+		static void setCreatureDynAttr(CreatureDynAttr* dyn_attr)
+		{
+			m_dyn_attr = dyn_attr;
+		}
+		
+		/**
+		 * \fn static Damage* getDamage(std::string damagename)
+		 * \brief Gibt Schadensobjekt mit dem angegebenen Name aus
+		 * \param damagename Name des Schadensobjektes
+		 */
+		static Damage* getDamage(std::string damagename);
 
 		/**
 		 * \fn static std::string getReturnValue()
@@ -550,6 +590,24 @@ class EventSystem
 		 * \brief das zuletzt per Script erzeugte Event
 		 */
 		static Event* m_event;
+		
+		/**
+		 * \var static Damage* m_damage
+		 * \brief aktuelles Schadenobjekt
+		 */
+		static Damage* m_damage;
+		
+		/**
+		 * \var static CreatureBaseAttr* m_base_attr
+		 * \brief Objekt mit Basisattributen von Kreaturen
+		 */
+		static CreatureBaseAttr* m_base_attr;
+		
+		/**
+		 * \var static CreatureDynAttr* m_dyn_attr
+		 * \brief Objekt mit dynamischen Attributen von Kreaturen
+		 */
+		static CreatureDynAttr* m_dyn_attr;
 		
 		/**
 		 * \var static CharConv* m_charconv

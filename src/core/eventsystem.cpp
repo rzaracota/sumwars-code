@@ -17,6 +17,13 @@ Trigger*  EventSystem::m_trigger;
 
 Dialogue*  EventSystem::m_dialogue;
 
+Damage* EventSystem::m_damage;
+
+CreatureBaseAttr* EventSystem::m_base_attr;
+
+CreatureDynAttr* EventSystem::m_dyn_attr;
+
+
 CharConv* EventSystem::m_charconv =0;
 
 Event* EventSystem::m_event =0;
@@ -444,9 +451,10 @@ int EventSystem::getDamageValue(lua_State *L)
 		std::string dmgname = lua_tostring(L, 1);
 		std::string valname = lua_tostring(L, 2);
 
-		if (m_region !=0)
+		Damage* dmg =getDamage(dmgname);
+		if (dmg != 0)
 		{
-			ret = m_region->getDamageObject(dmgname).getValue(valname);
+			ret = dmg->getValue(valname);
 		}
 	}
 	else
@@ -460,14 +468,16 @@ int EventSystem::getDamageValue(lua_State *L)
 int EventSystem::setDamageValue(lua_State *L)
 {
 	int argc = lua_gettop(L);
-	if (argc>=3 && lua_isstring(L,1) && lua_isstring(L,2) &&  lua_isnumber(L,3))
+	if (argc>=3 && lua_isstring(L,1) && lua_isstring(L,2))
 	{
 		std::string dmgname = lua_tostring(L, 1);
 		std::string valname = lua_tostring(L, 2);
 
-		if (m_region !=0)
+		Damage* dmg =getDamage(dmgname);
+		
+		if (dmg != 0)
 		{
-			m_region->getDamageObject(dmgname).setValue(valname);
+			dmg->setValue(valname);
 		}
 	}
 	else
@@ -493,10 +503,9 @@ int EventSystem::createProjectile(lua_State *L)
 			DEBUG5("name %s dmg %s %f %f",tname.c_str(), dmgname.c_str(),pos.m_x,pos.m_y);
 
 			// Schaden
-			Damage* dmg = &(m_region->getDamageObject(dmgname));
-
+			Damage* dmg =getDamage(dmgname);
 			// Projektil erzeugen
-			Projectile* pr = new Projectile(tname, dmg, World::getWorld()->getValidProjectileId());
+			Projectile* pr = new Projectile(tname, dmg);
 
 			// Richtung, Geschwindigkeit ermitteln
 			if (argc>=4 && (lua_istable(L,4) || lua_isstring(L,4)))
@@ -1827,5 +1836,18 @@ int EventSystem::luagettext(lua_State *L)
 	doString(text.c_str());
 	return 1;
 
+}
+
+Damage* EventSystem::getDamage(std::string dmgname)
+{
+	if (dmgname=="current")
+	{
+		return m_damage;
+	}
+	else if (m_region !=0)
+	{
+		return &(m_region->getDamageObject(dmgname));
+	}
+	return 0;
 }
 

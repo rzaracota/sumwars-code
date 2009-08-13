@@ -98,7 +98,9 @@ int WorldObject::getValue(std::string valname)
 		{
 			if (getFraction() >=FRAC_PLAYER_PARTY)
 			{
-				lua_pushstring(EventSystem::getLuaState(),"player");
+				std::stringstream stream;
+				stream << "player" << (getFraction() - FRAC_PLAYER_PARTY);
+				lua_pushstring(EventSystem::getLuaState(),stream.str().c_str());
 			}
 			else
 			{
@@ -135,7 +137,15 @@ bool WorldObject::setValue(std::string valname)
 		else if (fraction == "summoner") setFraction(FRAC_SUMMONER);
 		else if (fraction == "monster") setFraction(FRAC_MONSTER);
 		else if (fraction == "neutral") setFraction(FRAC_NEUTRAL_TO_ALL);
-		
+		else if (fraction.find("player") != std::string::npos)
+		{
+ 			std::string num = fraction.substr(6);
+			std::stringstream stream(num);
+			int number;
+			stream >> number;
+			setFraction((GameObject::Fraction) (FRAC_PLAYER_PARTY + number));
+			
+		}
 		DEBUG("fraction is now %i",getFraction());
 		return true;
 	}

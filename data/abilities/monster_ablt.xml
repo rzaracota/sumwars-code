@@ -1,0 +1,82 @@
+<Ability type="summon_skel"
+		 name="Summon Skeleton"
+		 description="Creates a skeleton."
+		 time="701.000000"
+		 timer_nr="1.000000"
+		 timer_value="5000.000000"
+		 base_ability="noaction"
+		 critical_percent="0.660000"
+		 target_type="ranged">
+	<Flag name="mute_affected" />
+	<Effect>
+		<LuaImplementation>
+			local frac = get(self,"fraction");
+			local obj = createObject("bow_skel",goal);
+			print(frac)
+			set(obj,"fraction",frac);
+		</LuaImplementation>
+	</Effect>
+</Ability>
+
+<Ability type="testfireball"
+		 name="Fireball"
+		 description="Alternativer Feuerball."
+		 time="201.000000"
+		 timer_nr="1.000000"
+		 timer_value="200.000000"
+		 base_ability="noaction"
+		 critical_percent="0.660000"
+		 target_type="ranged">
+	<Flag name="mute_affected" />
+	<Projectile type="FIRE_BALL" speed="20000"/>
+	<Effect>
+		<LuaImplementation>
+			print("test");
+			setDamageValue("current", "phys_dmg", 50,100);
+			setDamageValue("current", "blockable", false);
+			setDamageValue("current", "ignore_armor", true);
+			createProjectile(projectile_type,"current",getPosition(self),goal,projectile_speed/1000,0.5);
+		</LuaImplementation>
+	</Effect>
+</Ability>
+
+
+<Ability type="testbooster"
+		 name="Booster"
+		 description="completely overpowered Booster"
+		 time="701.000000"
+		 timer_nr="1.000000"
+		 timer_value="5000.000000"
+		 base_ability="noaction"
+		 critical_percent="0.660000"
+		 target_type="party_multi">
+	<Flag name="mute_affected" />
+	<Effect>
+		<LuaImplementation>
+			local frac = get(self,"fraction");
+			local obj = createObject("bow_skel",goal);
+			print(frac)
+			set(obj,"fraction",frac);
+		</LuaImplementation>
+	</Effect>
+</Ability>
+
+<Ability type="teststatushealer"
+				  name="Healer"
+				  description="Heilt alles"
+				  time="701.000000"
+				  timer_nr="1.000000"
+				  timer_value="5000.000000"
+				  base_ability="noaction"
+				  critical_percent="0.660000"
+				  target_type="party">
+	<Flag name="mute_affected" />
+	<Effect>
+		<LuaImplementation>
+			local frac = get(self,"fraction");
+			local obj = createObject("bow_skel",goal);
+			print(frac)
+			set(obj,"fraction",frac);
+		</LuaImplementation>
+	</Effect>
+</Ability>

@@ -99,6 +99,20 @@ bool World::init(int port)
 		file += it->filename;
 		EventSystem::doFile(file.c_str());
 	}
+	
+	// Aktionen initialisieren
+	Action::init();
+	
+	files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("abilities","*.xml");
+	for (it = files->begin(); it != files->end(); ++it)
+	{
+		file = it->archive->getName();
+		file += "/";
+		file += it->filename;
+
+		Action::loadAbilityData(file.c_str());
+
+	}
 
 	if (m_server)
 	{
