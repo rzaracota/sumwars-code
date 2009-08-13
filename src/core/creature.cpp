@@ -3633,9 +3633,6 @@ void Creature::toString(CharConv* cv)
 {
 	DEBUG5("Creature::tostring");
 	WorldObject::toString(cv);
-	cv->toBuffer((short) m_category);
-	cv->toBuffer((char) m_fraction);
-
 	cv->toBuffer(m_refname);
 	
 	m_action.toString(cv);
@@ -3703,12 +3700,6 @@ void Creature::fromString(CharConv* cv)
 	WorldObject::fromString(cv);
 	char ctmp;
 	short stmp;
-	cv->fromBuffer<short>(stmp);
-	m_category = (Category) stmp;
-
-	cv->fromBuffer<char>(ctmp);
-	m_fraction = (Fraction) ctmp;
-
 	cv->fromBuffer(m_refname);
 	
 	m_action.fromString(cv);

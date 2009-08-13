@@ -74,10 +74,10 @@ struct MonsterBasicData
 	GameObject::Type m_subtype;
 	
 	/**
-	 * \var WorldObject::Category m_category
-	 * \brief Kategorie des Objektes
+	 * \var WorldObject::Race m_race
+	 * \brief Rasse des Monsters
 	 */
-	WorldObject::Category m_category;
+	WorldObject::Race m_race;
 
 	/**
 	 * \var WorldObject::Fraction m_fraction

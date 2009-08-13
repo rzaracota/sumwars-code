@@ -20,7 +20,7 @@ MONSTER
 HOSTILE_TO_ALL
 PLAYER_PARTY
 
-* Moegliche Werte fuer category:
+* Moegliche Werte fuer race:
 NOCATEGORY
 HUMAN
 DEMON
@@ -175,7 +175,7 @@ AIR
 
 
 <!--
-<Monster type="MONSTER" subtype="goblin" fraction="MONSTER" category="GOBLIN" layer="NORMAL">
+<Monster type="MONSTER" subtype="goblin" fraction="MONSTER" race="goblin" layer="NORMAL">
 	<RenderInfo name="goblin.mesh" />
 	<Dropslots pbig="0.1" pmedium="0.2" psmall="0.2" pgold="0.2">
 		<Dropslot min_level="0" max_level="20" magic_prob="0.3" magic_power="500" />
@@ -236,7 +236,7 @@ AIR
 
 <!-- Goblinschlaeger -->
 <!-- L1 -->
-<Monster type="MONSTER" subtype="goblin" name="goblin brawler" fraction="MONSTER" category="GOBLIN" layer="NORMAL">
+<Monster type="MONSTER" subtype="goblin" name="goblin brawler" fraction="MONSTER" race="goblin" layer="NORMAL">
 	<RenderInfo name="goblin" />
 	<Dropslots >
 		<Dropslot pbig="0.02" pmedium="0.06" psmall="0.08" pgold="0.05" max_gold="30" min_level="0" max_level="3" magic_prob="0.1" magic_power="100" />
@@ -281,7 +281,7 @@ AIR
 
 <!-- Goblinraeuber -->
 <!-- L3 -->
-<Monster type="MONSTER" subtype="goblin_rob" name="goblin robber" fraction="MONSTER" category="GOBLIN" layer="NORMAL">
+<Monster type="MONSTER" subtype="goblin_rob" name="goblin robber" fraction="MONSTER" race="goblin" layer="NORMAL">
 	<RenderInfo name="goblin_rob" />
 	<Dropslots >
 		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" max_gold="50" min_level="0" max_level="5" magic_prob="0.1" magic_power="250" />
@@ -326,7 +326,7 @@ AIR
 
 <!-- Goblin Knochenschuettler -->
 <!-- L4 -->
-<Monster type="MONSTER" subtype="goblin_bon" name="boneshaker" fraction="MONSTER" category="GOBLIN" layer="NORMAL">
+<Monster type="MONSTER" subtype="goblin_bon" name="boneshaker" fraction="MONSTER" race="goblin" layer="NORMAL">
 	<RenderInfo name="goblin_bon" />
 	<Dropslots >
 		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" max_gold="50" min_level="0" max_level="5" magic_prob="0.1" magic_power="300" />
@@ -374,7 +374,7 @@ AIR
 
 <!-- Goblinjaeger -->
 <!-- L2 -->
-<Monster type="MONSTER" subtype="goblin_bow" name="goblin hunter" fraction="MONSTER" category="GOBLIN" layer="NORMAL">
+<Monster type="MONSTER" subtype="goblin_bow" name="goblin hunter" fraction="MONSTER" race="goblin" layer="NORMAL">
 	<RenderInfo name="goblin_bow" />
 	<Dropslots >
 		<Dropslot pbig="0.02" pmedium="0.07" psmall="0.08" pgold="0.05" max_gold="50" min_level="0" max_level="5" magic_prob="0.1" magic_power="250" />
@@ -419,7 +419,7 @@ AIR
 
 <!-- Goblin Dog -->
 <!-- L4 -->
-<Monster type="MONSTER" subtype="gob_dog" name="goblin dog" fraction="MONSTER" category="ANIMAL" layer="NORMAL">
+<Monster type="MONSTER" subtype="gob_dog" name="goblin dog" fraction="MONSTER" race="animal" layer="NORMAL">
 	<RenderInfo name="gobDog" />
 	<Dropslots >
 		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" max_gold="70" min_level="0" max_level="5" magic_prob="0.1" magic_power="250" />
@@ -463,7 +463,7 @@ AIR
 
 <!-- Goblinkaempfer -->
 <!-- L4 -->
-<Monster type="MONSTER" subtype="goblin_fgt" name="goblin fighter" fraction="MONSTER" category="GOBLIN" layer="NORMAL">
+<Monster type="MONSTER" subtype="goblin_fgt" name="goblin fighter" fraction="MONSTER" race="goblin" layer="NORMAL">
 	<RenderInfo name="goblin_fgt" />
 	<Dropslots >
 		<Dropslot pbig="0.01" pmedium="0.02" psmall="0.04" pgold="0.02" max_gold="30" min_level="0" max_level="6" magic_prob="0.1" magic_power="300" />
@@ -508,7 +508,7 @@ AIR
 
 <!-- Goblinkrieger -->
 <!-- L5 -->
-<Monster type="MONSTER" subtype="goblin_war" name="goblin warrior" fraction="MONSTER" category="GOBLIN" layer="NORMAL">
+<Monster type="MONSTER" subtype="goblin_war" name="goblin warrior" fraction="MONSTER" race="goblin" layer="NORMAL">
 	<RenderInfo name="goblin_war" />
 	<Dropslots >
 		<Dropslot pbig="0.01" pmedium="0.02" psmall="0.04" pgold="0.02" max_gold="50" min_level="0" max_level="9" magic_prob="0.1" magic_power="350" />
@@ -553,7 +553,7 @@ AIR
 
 <!-- Goblinwilderer -->
 <!-- L7 -->
-<Monster type="MONSTER" subtype="goblin_pch" name="goblin poacher" fraction="MONSTER" category="GOBLIN" layer="NORMAL">
+<Monster type="MONSTER" subtype="goblin_pch" name="goblin poacher" fraction="MONSTER" race="goblin" layer="NORMAL">
 	<RenderInfo name="goblin_pch" />
 	<Dropslots >
 		<Dropslot pbig="0.01" pmedium="0.02" psmall="0.04" pgold="0.02" max_gold="50" min_level="0" max_level="12" magic_prob="0.1" magic_power="400" />
@@ -599,7 +599,7 @@ AIR
 
 <!-- Goblinschamane -->
 <!-- L10 -->
-<Monster type="MONSTER" subtype="goblin_sh" name="goblin shaman" fraction="MONSTER" category="GOBLIN" layer="NORMAL">
+<Monster type="MONSTER" subtype="goblin_sh" name="goblin shaman" fraction="MONSTER" race="goblin" layer="NORMAL">
 	<RenderInfo name="goblin.mesh" />
 	<Dropslots >
 		<Dropslot pbig="0.01" pmedium="0.02" psmall="0.04" pgold="0.02" max_gold="30" min_level="0" max_level="12" magic_prob="0.1" magic_power="500" />
@@ -645,7 +645,7 @@ AIR
 
 <!-- Goblinhaeuptling -->
 <!-- L11 -->
-<Monster type="MONSTER" subtype="goblin_wrc" name="goblin chieftain" fraction="MONSTER" category="GOBLIN" layer="NORMAL">
+<Monster type="MONSTER" subtype="goblin_wrc" name="goblin chieftain" fraction="MONSTER" race="goblin" layer="NORMAL">
 	<RenderInfo name="goblin_wrc" />
 	<Dropslots >
 		<Dropslot pbig="0.01" pmedium="0.02" psmall="0.04" pgold="0.02" max_gold="50" min_level="0" max_level="13" magic_prob="0.1" magic_power="550" />
@@ -692,7 +692,7 @@ AIR
 <!-- Untote -->
 
 <!-- Lich -->
-<Monster type="MONSTER" subtype="lich" name="lich" fraction="UNDEAD" category="UNDEAD" layer="NORMAL">
+<Monster type="MONSTER" subtype="lich" name="lich" fraction="UNDEAD" race="undead" layer="NORMAL">
 	<RenderInfo name="lich" />
 	<Dropslots >
 		<Dropslot pbig="0.1" pmedium="0.2" psmall="0.2" pgold="0.2" max_gold="50" min_level="10" max_level="40" magic_prob="0.5" magic_power="1000" />
@@ -741,7 +741,7 @@ AIR
 </Monster>
 
 <!-- skeleton, oldsword -->
-<Monster type="MONSTER" subtype="sword_skel" name="skeleton" fraction="UNDEAD" category="UNDEAD" layer="NORMAL">
+<Monster type="MONSTER" subtype="sword_skel" name="skeleton" fraction="UNDEAD" race="undead" layer="NORMAL">
 	<RenderInfo name="skeleton" />
 	<Dropslots >
 		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" max_gold="100" min_level="0" max_level="10" magic_prob="0.1" magic_power="1000" />
@@ -790,7 +790,7 @@ AIR
 	<AI ai_sight_range="12" />
 </Monster>
 
-<Monster type="MONSTER" subtype="bow_skel" name="skeleton" fraction="UNDEAD" category="UNDEAD" layer="NORMAL">
+<Monster type="MONSTER" subtype="bow_skel" name="skeleton" fraction="UNDEAD" race="undead" layer="NORMAL">
 	<RenderInfo name="bow_skeleton" />
 	<Dropslots >
 		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" max_gold="100" min_level="0" max_level="10" magic_prob="0.1" magic_power="1000" />
@@ -841,7 +841,7 @@ AIR
 
 
 <!-- skeleton, axe -->
-<Monster type="MONSTER" subtype="axe_skel" name="skeleton" fraction="UNDEAD" category="UNDEAD" layer="NORMAL">
+<Monster type="MONSTER" subtype="axe_skel" name="skeleton" fraction="UNDEAD" race="undead" layer="NORMAL">
 	<RenderInfo name="skeleton" />
 	<Dropslots >
 		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" max_gold="100" min_level="0" max_level="10" magic_prob="0.1" magic_power="1000" />
@@ -891,7 +891,7 @@ AIR
 </Monster>
 
 <!-- skeleton, 2haxe -->
-<Monster type="MONSTER" subtype="axe2_skel" name="skeleton" fraction="UNDEAD" category="UNDEAD" layer="NORMAL">
+<Monster type="MONSTER" subtype="axe2_skel" name="skeleton" fraction="UNDEAD" race="undead" layer="NORMAL">
 	<RenderInfo name="skeleton" />
 	<Dropslots >
 		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" max_gold="100" min_level="0" max_level="10" magic_prob="0.1" magic_power="1000" />
@@ -942,7 +942,7 @@ AIR
 
 <!-- Phantom -->
 <!-- Noch kein Mesh -->
-<Monster type="MONSTER" subtype="phantom" name="phantom" fraction="UNDEAD" category="UNDEAD" layer="AIR">
+<Monster type="MONSTER" subtype="phantom" name="phantom" fraction="UNDEAD" race="undead" layer="AIR">
 	<RenderInfo name="skeleton" />
 	<Dropslots >
 		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" max_gold="100" min_level="0" max_level="10" magic_prob="0.1" magic_power="1000" />
@@ -992,7 +992,7 @@ AIR
 </Monster>
 
 <!-- Zombie -->
-<Monster type="MONSTER" subtype="zombie" name="zombie" fraction="UNDEAD" category="UNDEAD" layer="NORMAL">
+<Monster type="MONSTER" subtype="zombie" name="zombie" fraction="UNDEAD" race="undead" layer="NORMAL">
 	<RenderInfo name="zombie" />
 	<Dropslots >
 		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" max_gold="100" min_level="0" max_level="10" magic_prob="0.1" magic_power="1000" />
@@ -1042,7 +1042,7 @@ AIR
 </Monster>
 
 <!-- Blutschnabel -->
-<Monster type="MONSTER" subtype="bloodbeak" name="bloodbeak" fraction="MONSTER" category="ANIMAL" layer="AIR">
+<Monster type="MONSTER" subtype="bloodbeak" name="bloodbeak" fraction="MONSTER" race="animal" layer="AIR">
 	<RenderInfo name="bloodbeak" />
 	<Dropslots >
 		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" max_gold="100" min_level="0" max_level="10" magic_prob="0.1" magic_power="1000" />
@@ -1089,7 +1089,7 @@ AIR
 
 <!-- Kleine Alraune -->
 <!-- hat noch kein Mesh -->
-<Monster type="MONSTER" subtype="mandrake_s" name="small mandragora" fraction="MONSTER" category="ANIMAL" layer="NORMAL">
+<Monster type="MONSTER" subtype="mandrake_s" name="small mandragora" fraction="MONSTER" race="ANIMAL" layer="NORMAL">
 	<RenderInfo name="goblin" />
 	<Dropslots >
 		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" max_gold="100" min_level="0" max_level="10" magic_prob="0.1" magic_power="1000" />
@@ -1150,7 +1150,7 @@ AIR
 
 <!-- Alraune -->
 <!-- hat noch kein Mesh -->
-<Monster type="MONSTER" subtype="mandrake_m" name="mandragora" fraction="MONSTER" category="ANIMAL" layer="NORMAL">
+<Monster type="MONSTER" subtype="mandrake_m" name="mandragora" fraction="MONSTER" race="animal" layer="NORMAL">
 	<RenderInfo name="goblin" />
 	<Dropslots >
 		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" max_gold="100" min_level="0" max_level="10" magic_prob="0.1" magic_power="1000" />

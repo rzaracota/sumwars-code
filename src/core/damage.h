@@ -88,10 +88,10 @@ struct Damage
 	short m_ai_mod_power[NR_AI_MODS];
 	
 	/**
-	 * \var WorldObject::Category m_extra_dmg_category
-	 * \brief Kategorie gegen den der Schaden verdreifacht wird
+	 * \var WorldObject::Race m_extra_dmg_race
+	 * \brief Rasse gegen den der Schaden verdreifacht wird
 	 */
-	WorldObject::Category m_extra_dmg_category;
+	WorldObject::Race m_extra_dmg_race;
 	
 	/**
 	 * \var m_special_flags

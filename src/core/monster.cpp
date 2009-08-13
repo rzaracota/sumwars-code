@@ -38,7 +38,7 @@ Monster::Monster( int id,MonsterBasicData& data)
 
 	setType(data.m_type);
 	setSubtype(data.m_subtype);
-	m_category = data.m_category;
+	m_race = data.m_race;
 	m_fraction = data.m_fraction;
 
 

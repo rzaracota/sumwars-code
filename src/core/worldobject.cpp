@@ -13,7 +13,7 @@ WorldObject::WorldObject( int id)
 	init();
 	
 	m_fraction = NOFRACTION;
-	m_category = NOCATEGORY;
+	m_race = "";
 }
 
 bool WorldObject::isCreature()
@@ -75,7 +75,7 @@ void WorldObject::toString(CharConv* cv)
 	DEBUG5("worldobject::tostring");
 	GameObject::toString(cv);
 	cv->toBuffer<short>(m_fraction);
-	cv->toBuffer<short>(m_category);
+	cv->toBuffer(m_race);
 	
 }
 
@@ -86,8 +86,8 @@ void WorldObject::fromString(CharConv* cv)
 	cv->fromBuffer<short>(tmp);
 	setFraction( (Fraction) tmp);
 	
-	cv->fromBuffer<short>(tmp);
-	setCategory( (Category) tmp);
+	cv->fromBuffer(m_race);
+	
 }
 
 
@@ -170,9 +170,9 @@ void WorldObject::setFraction(Fraction fr)
 	m_fraction = fr;
 }
 
-void WorldObject::setCategory(Category cat)
+void WorldObject::setRace(Race race)
 {
-	m_category = cat;
+	m_race = race;
 }
 
 bool WorldObject::takeDamage(Damage* damage)

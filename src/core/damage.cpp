@@ -36,7 +36,7 @@ void Damage::toString(CharConv* cv)
 	}
 
 	cv->toBuffer(m_special_flags);
-	//cv->toBuffer(m_extra_dmg_category);
+	//cv->toBuffer(m_extra_dmg_race);
 
 }
 
@@ -70,7 +70,7 @@ void Damage::fromString(CharConv* cv)
 	}
 
 	cv->fromBuffer<short>(m_special_flags );
-	//cv->fromBuffer(m_extra_dmg_category);
+	//cv->fromBuffer(m_extra_dmg_race);
 }
 
 
@@ -130,7 +130,7 @@ void Damage::operator=(Damage& other)
 	}
 
 	m_attacker_fraction = other.m_attacker_fraction;
-	m_extra_dmg_category = other.m_extra_dmg_category;
+	m_extra_dmg_race = other.m_extra_dmg_race;
 }
 
 std::string Damage::getDamageTypeName(DamageType dt)

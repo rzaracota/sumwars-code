@@ -118,7 +118,7 @@ bool Player::init()
 	FightStatistic& fstat= getFightStatistic();
 	
 	setType("PLAYER");
-	m_category = HUMAN;
+	m_race = "human";
 
 	getShape()->m_type = Shape::CIRCLE;
 	getShape()->m_radius = 0.5;

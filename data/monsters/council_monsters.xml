@@ -1,7 +1,7 @@
 
 <!-- Feuerschnecke-->
 <!-- L1-->
-<Monster type="MONSTER" subtype="fireSlug" name="fire slug" fraction="SUMMONER" category="SUMMONED" layer="NORMAL">
+<Monster type="MONSTER" subtype="fireSlug" name="fire slug" fraction="SUMMONER" race="elemental" layer="NORMAL">
 	<Mesh file="fireSlug" />
 	<Dropslots >
 		<Dropslot pbig="0.10" pmedium="0.25" psmall="0.10" pgold="0.05" max_gold="500" min_level="5" max_level="10" magic_prob="0.1" magic_power="1000" />
@@ -47,7 +47,7 @@
 
 <!-- Feuerkuecken -->
 <!-- L20 -->
-<Monster type="MONSTER" subtype="fireElemS" name="firefletchling" fraction="SUMMONER" category="SUMMONED" layer="NORMAL">
+<Monster type="MONSTER" subtype="fireElemS" name="firefletchling" fraction="SUMMONER" race="elemental" layer="NORMAL">
 	<Mesh file="fireElemS" />
 	<Dropslots >
 		<Dropslot pbig="0.10" pmedium="0.25" psmall="0.10" pgold="0.05" max_gold="500" min_level="5" max_level="10" magic_prob="0.1" magic_power="1000" />

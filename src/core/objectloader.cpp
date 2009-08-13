@@ -39,16 +39,16 @@ bool  ObjectLoader::loadMonster(TiXmlNode* node)
 		MonsterBasicData* data = new MonsterBasicData;
 		
 		// Typinformationen auslesen
-		std::string type,subtype, category, fraction,layer;
+		std::string type,subtype, race, fraction,layer;
 		attr.getString("type",data->m_type,"MONSTER");
 		attr.getString("subtype",subtype);
-		attr.getString("category",category);
+		attr.getString("race",race);
 		attr.getString("fraction",fraction,"MONSTER");
 		attr.getString("layer",layer,"NORMAL");
 		attr.getString("name",data->m_name,subtype);
 		data->m_subtype = subtype;
 		
-		DEBUG5("monster: %s %s %s %s",type.c_str(), subtype.c_str(), category.c_str(), fraction.c_str());
+		DEBUG5("monster: %s %s %s %s",type.c_str(), subtype.c_str(), race.c_str(), fraction.c_str());
 		
 		// String in enums umwandeln
 
@@ -71,27 +71,7 @@ bool  ObjectLoader::loadMonster(TiXmlNode* node)
 		else if (fraction == "PLAYER_PARTY")
 			data->m_fraction = WorldObject::FRAC_PLAYER_PARTY;
 	
-		
-		if (category == "NOCATEGORY")
-			data->m_category = WorldObject::NOCATEGORY;
-		else if (category == "HUMAN")
-			data->m_category = WorldObject::HUMAN;
-		else if (category == "DEMON")
-			data->m_category = WorldObject::DEMON;
-		else if (category == "UNDEAD")
-			data->m_category = WorldObject::UNDEAD;
-		else if (category == "DWARF")
-			data->m_category = WorldObject::DWARF;
-		else if (category == "DRAKE")
-			data->m_category = WorldObject::DRAKE;
-		else if (category =="FAIRY")
-			data->m_category = WorldObject::FAIRY;
-		else if (category == "GOBLIN")
-			data->m_category = WorldObject::GOBLIN;
-		else if (category == "ANIMAL")
-			data->m_category = WorldObject::ANIMAL;
-		else if (category == "SUMMONED")
-			data->m_category = WorldObject::SUMMONED;
+		data->m_race = race;
 		
 		if (layer == "NORMAL")
 			data->m_layer = WorldObject::LAYER_BASE | WorldObject::LAYER_AIR;

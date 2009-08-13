@@ -111,25 +111,7 @@ class WorldObject : public GameObject
 	};
 	
 
-	/**
-	 * \enum Category
-	 * \brief Verschiedene Kategorien von Lebewesen
-	 */
-	enum Category
-	{
-		NOCATEGORY =0,
-		HUMAN = 0x10,
-		DEMON = 0x20,
-		UNDEAD = 0x40,
-		DWARF = 0x80,
-		DRAKE = 0x100,
-		FAIRY = 0x200,
-		GOBLIN = 0x400,
-		ANIMAL = 0x800,
-		SUMMONED = 0x1000
-	};
-
-	
+	typedef std::string Race;
 	
 	/**
 	 * \enum State
@@ -280,20 +262,20 @@ class WorldObject : public GameObject
 	void setFraction(Fraction fr);
 	
 	/**
-	 * \fn Category getCategory()
-	 * \brief Gibt die Kategorie aus
+	 * \fn Race getRace()
+	 * \brief Gibt die Rasse aus
 	 */
-	Category getCategory()
+	Race getRace()
 	{
-		return m_category;
+		return m_race;
 	}
 	
 	/**
-	 * \fn void setCategory(Category cat)
+	 * \fn void setRace(Race race)
 	 * \brief Setzt die Kategorie
 	 * \param cat neue Kategorie
 	 */
-	void setCategory(Category cat);
+	void setRace(Race race);
 	
 	
 	/**
@@ -351,10 +333,10 @@ class WorldObject : public GameObject
 		
 
 	/**
-	 * \var Category m_category
+	 * \var Race m_race
 	 * \brief Kategorie des Objektes
 	 */
-	Category m_category;
+	Race m_race;
 
 	/**
 	 * \var Fraction m_fraction
