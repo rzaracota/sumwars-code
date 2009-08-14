@@ -1632,13 +1632,7 @@ void Player::calcBaseAttrMod()
 	// Faehigkeit ausweichen
 	if (checkAbility("evade"))
 	{
-		getBaseAttrMod()->m_block += getBaseAttrMod()->m_dexterity;
-	}
-
-		// Faehigkeit Windwandern
-	if (getBaseAttrMod()->m_special_flags & WIND_WALK)
-	{
-		getBaseAttrMod()->m_block += getBaseAttrMod()->m_dexterity/ 4;
+		getBaseAttrMod()->m_block += getBaseAttrMod()->m_dexterity/5;
 	}
 
 

@@ -342,9 +342,9 @@ World::~World()
 	delete m_players;
 	delete m_events;
 	
+	Action::cleanup();
 	Dialogue::cleanup();
 	EventSystem::cleanup();
-	
 }
 
 Region* World::getRegion(int rid)

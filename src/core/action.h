@@ -85,142 +85,6 @@ public:
 	 * \enum ActionType
 	 * \brief Aufzaehlung verschiedener Aktionen
 	 */
-	/*
-	enum ActionType
-	{
-		NOACTION=0,
-		WALK=1,
-		USE=2,
-		TRADE=3,
-		ATTACK=4,
-		RANGE_ATTACK=5,
-		MAGIC_ATTACK=6,
-		HOLY_ATTACK=7,
-		DEFEND=9,
-		WAIT=10,
-		DIE=11,
-		DEAD=12,
-		TAKE_ITEM =13,
-  		SPEAK =14,
-		SPEAK_ANSWER =15,
-
-		BASH = 32,		//a
-		HAMMER_BASH=33,		//b
-		AROUND_BLOW = 34,	//c
-		WHIRL_BLOW= 35,		//d
-		SMASH = 36,		//e
-		HATE_MAGE = 37,		//f
-		CHARGE = 38,		//g
-		STORM_CHARGE = 39,	//h
-
-		BLOCK = 40,
-		STEADFAST = 41,
-		MONSTER_HUNTER = 42,
-		MONSTER_SLAYER = 43,
-		ENDURANCE = 44,
-		WEAPONMASTER = 45,
-
-		FIRESWORD = 46,		//n
-		FLAMESWORD = 47,	//o
-		FLAMEARMOR = 48,	//p
-		BERSERK = 49,		//q
-		WARCRY = 50,		//r
-		REGENERATE = 51,	//s
-		DECOY = 52,		//t
-		SCARE = 53,		//u
-		ANGER = 54,		//v
-		FURY = 55,		//w
-
-		// Schuetze Faehigkeiten
-		TRIPLE_SHOT = 64,	//a
-		GUIDED_TRIPLE_SHOT = 65,//b
-		MULTISHOT = 66,		//c
-		VOLLEY_SHOT =67,	//d
-		PIERCE = 68,		//e
-		WEAK_POINT = 69,	//f
-		BLIND_RAGE = 70,	//g
-		VACUUM = 71,		//h
-		DEATH_ROULETTE = 72,	//i
-		EXPLODING_ARROW = 73,	//j
-		EXPLOSION_CASCADE= 74,	//k
-
-		EVADE = 75,
-		CRITICAL_STRIKE = 76,
-		CONCENTRATION = 77,
-		MENTAL_WALL = 78,
-		RESIST_ICE = 79,
-		RESIST_AIR = 80,
-
-		AIMED_SHOT = 81,	//r
-		BOW_SPIRIT = 82,	//s
-		ICE_ARROWS = 83,	//t
-		FREEZING_ARROWS = 84,	//u
-		WIND_ARROWS = 85,	//v
-		STORM_ARROWS = 86,	//w
-		WIND_WALK = 87,		//x
-
-
-		FIRE_BOLT =96,		//a
-		FIRE_STRIKE = 97,	//b
-		FIRE_WAVE = 98,		//c
-		FIRE_STORM = 99,	//d
-		FIRE_BALL = 100,	//e
-		INFERNO_BALL = 101,	//f
-		FIRE_WALL = 102,	//g
-		INFLAME = 103,
-
-		ICE_BOLT = 104,		//j
-		ICE_SPIKE = 105,	//k
-		SNOW_STORM = 106,	//l
-		BLIZZARD = 107,		//m
-		ICE_RING = 108,		//n
-		FROST_RING = 109,	//o
-		FREEZE = 110,		//p
-		CHILL = 111,
-
-		LIGHTNING = 112,	//r
-		LIGHTNING_STRIKE = 113,	//s
-		THUNDERSTORM = 114,	//t
-		THUNDERSTORM2 = 115,	//u
-		CHAIN_LIGHTNING = 116,	//v
-		CHAIN_LIGHTNING2 = 117,	//w
-		STATIC_SHIELD = 118,	//x
-		IONISATION = 119,
-
-
-		// Priester Faehigkeiten
-		HOLY_LIGHT = 128,	//a
-		HOLY_FIRE = 129,	//b
-		BURNING_RAGE = 130,	//c
-		CURE_BLIND_MUTE = 131,	//d
-		CURE_BLIND_MUTE_PARTY = 132,	//e
-		BLAZING_SHIELD = 133,	//f
-		LIGHT_BEAM = 134,	//g
-		BURNING_SUN = 135,	//h
-
-		BREAK_BINDING = 136,	//i
-		DISRUPT_BINDING = 137,	//j
-		MAGIC_SHIELD = 138,	//k
-		CURE_POIS_BURN = 139,	//l
-		CURE_POIS_BURN_PARTY = 140,	//m
-		ACID = 141,		//n
-		HEAL = 142,		//o
-		HEAL_PARTY = 143,	//p
-
-		DIVINE_WIND = 144,	//q
-		DIVINE_STORM = 145,	//r
-		BLADE_STORM = 146,	//s
-		CURE_CONF_BSRK = 147,	//t
-		CURE_CONF_BSRK_PARTY = 148,	//u
-		HYPNOSIS = 149,		//v
-		HYPNOSIS2 = 150,	//w
-		KEEN_MIND = 151		//x
-
-
-
-
-	};
-*/
 	
 	typedef  std::string ActionType;
 	
@@ -406,6 +270,12 @@ public:
 	 * \brief initialisiert die statischen Variablen
 	 */
 	static void init();
+	
+	/**
+	 * \fn static void cleanup()
+	 * \brief loescht alle Daten
+	 */
+	static void cleanup();
 
 	/**
 	 * \fn static ActionInfo* getActionInfo(ActionType type)

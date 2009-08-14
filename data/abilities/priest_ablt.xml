@@ -35,6 +35,12 @@
 	<Effect>
 		<CppImplementation type="basemod_at_allies_in_radius" />
 	</Effect>
+	<BaseAttributesMod>
+		<LuaImplementation>
+			setBaseModValue("time",70000);
+			setBaseModValue("attack_speed",700)
+		</LuaImplementation>
+	</BaseAttributesMod>
 </Ability>
 
 <Ability type="blazing_shield"
@@ -51,6 +57,12 @@
 	<Effect>
 		<CppImplementation type="basemod_at_allies_in_radius" />
 	</Effect>
+	<BaseAttributesMod>
+		<LuaImplementation>
+			setBaseModValue("time",60000);
+			setBaseModValue("block",get(self,"willpower")*0.25)
+		</LuaImplementation>
+	</BaseAttributesMod>
 </Ability>
 
 <Ability type="break_binding"
@@ -94,6 +106,12 @@
 	<Effect>
 		<CppImplementation type="basemod_at_allies_in_radius" />
 	</Effect>
+	<BaseAttributesMod>
+		<CppImplementation type="burning_rage" />
+		<LuaImplementation>
+			setBaseModValue("time",80000);
+		</LuaImplementation>
+	</BaseAttributesMod>
 </Ability>
 
 <Ability type="burning_sun"
@@ -133,6 +151,12 @@
 	<Effect>
 		<CppImplementation type="dynmod_at_target" />
 	</Effect>
+	<DynAttributesMod>
+		<LuaImplementation>
+			setDynModValue("blind_immune_time",1);
+			setDynModValue("mute_immune_time",1);
+		</LuaImplementation>
+	</DynAttributesMod>
 </Ability>
 
 <Ability type="cure_blind_mute_party"
@@ -148,6 +172,12 @@
 	<Effect>
 		<CppImplementation type="dynmod_at_allies_in_radius" />
 	</Effect>
+	<DynAttributesMod>
+		<LuaImplementation>
+			setDynModValue("blind_immune_time",30000);
+			setDynModValue("mute_immune_time",30000);
+		</LuaImplementation>
+	</DynAttributesMod>
 </Ability>
 
 <Ability type="cure_conf_bsrk"
@@ -163,6 +193,12 @@
 	<Effect>
 		<CppImplementation type="dynmod_at_target" />
 	</Effect>
+	<DynAttributesMod>
+		<LuaImplementation>
+			setDynModValue("confused_immune_time",1);
+			setDynModValue("berserk_immune_time",1);
+		</LuaImplementation>
+	</DynAttributesMod>
 </Ability>
 
 <Ability type="cure_conf_bsrk_party"
@@ -179,6 +215,12 @@
 	<Effect>
 		<CppImplementation type="dynmod_at_allies_in_radius" />
 	</Effect>
+	<DynAttributesMod>
+		<LuaImplementation>
+			setDynModValue("confused_immune_time",30000);
+			setDynModValue("berserk_immune_time",30000);
+		</LuaImplementation>
+	</DynAttributesMod>
 </Ability>
 
 <Ability type="cure_pois_burn"
@@ -194,6 +236,12 @@
 	<Effect>
 		<CppImplementation type="dynmod_at_target" />
 	</Effect>
+	<DynAttributesMod>
+		<LuaImplementation>
+			setDynModValue("poisoned_immune_time",1);
+			setDynModValue("burning_immune_time",1);
+		</LuaImplementation>
+	</DynAttributesMod>
 </Ability>
 
 <Ability type="cure_pois_burn_party"
@@ -210,6 +258,12 @@
 	<Effect>
 		<CppImplementation type="dynmod_at_allies_in_radius" />
 	</Effect>
+	<DynAttributesMod>
+		<LuaImplementation>
+			setDynModValue("poisoned_immune_time",30000);
+			setDynModValue("burning_immune_time",30000);
+		</LuaImplementation>
+	</DynAttributesMod>
 </Ability>
 
 <Ability type="disrupt_binding"
@@ -301,6 +355,11 @@
 	<Effect>
 		<CppImplementation type="dynmod_at_target" />
 	</Effect>
+	<DynAttributesMod>
+		<LuaImplementation>
+			setDynModValue("health",3*get(self,"willpower"));
+		</LuaImplementation>
+	</DynAttributesMod>
 </Ability>
 
 <Ability type="heal_party"
@@ -317,6 +376,11 @@
 	<Effect>
 		<CppImplementation type="dynmod_at_allies_in_radius" />
 	</Effect>
+	<DynAttributesMod>
+		<LuaImplementation>
+			setDynModValue("health",3*get(self,"willpower"));
+		</LuaImplementation>
+	</DynAttributesMod>
 </Ability>
 
 <Ability type="holy_fire"
@@ -367,7 +431,7 @@
 			local magic = get(self,"magic_power");
 			local edmg = math.min(willpower/3,magic*2);
 			local fdmg = getDamageValue("fire_dmg");
-			setDamageValue("fire_dmg", {fdmg[1] + willpower*0.25 + edmg*75, fdmg[2] + willpower*0.5 + edmg*1.5});
+			setDamageValue("fire_dmg", {fdmg[1] + willpower*0.25 + edmg*0.75, fdmg[2] + willpower*0.5 + edmg*1.5});
 			setDamageValue("ice_dmg",{0,0});
 			setDamageValue("blockable",false);
 			setDamageValue("extra_dmg_race","undead");
@@ -436,6 +500,12 @@
 	<Effect>
 		<CppImplementation type="basemod_at_allies_in_radius" />
 	</Effect>
+	<BaseAttributesMod>
+		<LuaImplementation>
+			setBaseModValue("time",70000);
+			setBaseModValue("magic_power",get(self,"willpower")*0.5)
+		</LuaImplementation>
+	</BaseAttributesMod>
 </Ability>
 
 <Ability type="light_beam"
@@ -475,4 +545,10 @@
 	<Effect>
 		<CppImplementation type="basemod_at_allies_in_radius" />
 	</Effect>
+	<BaseAttributesMod>
+		<LuaImplementation>
+			setBaseModValue("time",60000);
+			setBaseModValue("willpower",get(self,"willpower")*0.5)
+		</LuaImplementation>
+	</BaseAttributesMod>
 </Ability>

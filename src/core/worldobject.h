@@ -128,8 +128,6 @@ class WorldObject : public GameObject
 		FIRESWORD = 0x1,
 		FLAMESWORD = 0x2,
 		FLAMEARMOR = 0x4,
-		DECOY = 0x8,
-		SCARE = 0x10,
 		CRIT_HITS = 0x20,
 		ICE_ARROWS = 0x40,
 		FROST_ARROWS = 0x80,
@@ -138,7 +136,6 @@ class WorldObject : public GameObject
 		WIND_WALK = 0x400,
 		BURNING_RAGE = 0x800,
 		STATIC_SHIELD = 0x1000
-
 	};
 
 

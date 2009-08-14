@@ -261,7 +261,7 @@ void Creature::initAction()
 		{
 			// Basisaktion verwenden
 			m_action.m_type = aci->m_base_action;
-			DEBUG5("using Base Action due to mute");
+			DEBUG("using Base Action due to mute");
 		}
 	}
 	
@@ -357,7 +357,7 @@ void Creature::initAction()
 
 	DEBUG5("resulting time %f",m_action.m_time);
 	// Drehwinkel setzen
-	if (aci->m_target_type != Action::SELF && m_action.m_type != "take_item")
+	if (aci->m_target_type != Action::SELF && m_action.m_type != "take_item" && m_action.m_type != "noaction")
 	{
 		
 		setAngle((m_action.m_goal - getShape()->m_center).angle());
@@ -2226,7 +2226,50 @@ void  Creature::calcActionAttrMod(Action::ActionType act,CreatureBaseAttrMod & b
 	std::list<std::string>::iterator kt;
 	for (kt = ainfo->m_base_mod.m_cpp_impl.begin(); kt != ainfo->m_base_mod.m_cpp_impl.end(); ++kt)
 	{
-		
+		if (*kt == "flamesword")
+		{
+			bmod.m_xspecial_flags |= (FLAMESWORD | FIRESWORD);
+		}
+		else if (*kt == "firesword")
+		{
+			bmod.m_xspecial_flags |= FIRESWORD;
+		}
+		else if (*kt == "flamearmor")
+		{
+			bmod.m_xspecial_flags |= FLAMEARMOR;
+		}
+		else if (*kt == "crit_hits")
+		{
+			bmod.m_xspecial_flags |= CRIT_HITS;
+		}
+		else if (*kt == "ice_arrows")
+		{
+			bmod.m_xspecial_flags |= ICE_ARROWS;
+		}
+		else if (*kt == "frost_arrows")
+		{
+			bmod.m_xspecial_flags |= (ICE_ARROWS | FROST_ARROWS);
+		}
+		else if (*kt == "wind_arrows")
+		{
+			bmod.m_xspecial_flags |= WIND_ARROWS;
+		}
+		else if (*kt == "storm_arrows")
+		{
+			bmod.m_xspecial_flags |= (WIND_ARROWS | STORM_ARROWS);
+		}
+		else if (*kt == "wind_walk")
+		{
+			bmod.m_xspecial_flags |= WIND_WALK;
+		}
+		else if (*kt == "burning_rage")
+		{
+			bmod.m_xspecial_flags |=  BURNING_RAGE;
+		}
+		else if (*kt == "static_shield")
+		{
+			bmod.m_xspecial_flags |= STATIC_SHIELD;
+		}
 	}
 	
 	// Lua Implementation fuer bmod
@@ -2248,6 +2291,7 @@ void  Creature::calcActionAttrMod(Action::ActionType act,CreatureBaseAttrMod & b
 	for (kt = ainfo->m_dyn_mod.m_cpp_impl.begin(); kt != ainfo->m_dyn_mod.m_cpp_impl.end(); ++kt)
 	{
 		
+
 	}
 	
 	// Lua Implementation fuer bmod
@@ -4499,10 +4543,6 @@ void Creature::getFlags(std::set<std::string>& flags)
 		flags.insert("flamesword");
 	if (flgs & FLAMEARMOR)
 		flags.insert("flamearmor");
-	if (flgs & DECOY)
-		flags.insert("decoy");
-	if (flgs & SCARE)
-		flags.insert("scare");
 	if (flgs & CRIT_HITS)
 		flags.insert("critical_hits");
 	if (flgs & ICE_ARROWS)

@@ -497,13 +497,19 @@
 		 description="The mage surrounds himself with an armor of lightning, that will stun and damage enemies who are bolt enough to attack in close combat."
 		 time="501.000000" 
 		 timer_nr="2.000000"
-		 timer_value="40000.000000"
+		 timer_value="30000.000000"
 		 base_ability="noaction"
 		 critical_percent="0.800000">
 	<Flag name="mute_affected" />
 	<Effect>
 		<CppImplementation type="basemod_at_self" />
 	</Effect>
+	<BaseAttributesMod>
+		<CppImplementation type="static_shield" />
+		<LuaImplementation>
+			setBaseModValue("time",18000);
+		</LuaImplementation>
+	</BaseAttributesMod>
 </Ability>
 
 <Ability type="thunderstorm"

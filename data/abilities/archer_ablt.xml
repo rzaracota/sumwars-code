@@ -9,6 +9,12 @@
 	<Effect>
 		<CppImplementation type="basemod_at_self" />
 	</Effect>
+	<BaseAttributesMod>
+		<LuaImplementation>
+			setBaseModValue("time",50000);
+			setBaseModValue("dexterity",0.5*get(self,"dexterity"));
+		</LuaImplementation>
+	</BaseAttributesMod>
 </Ability>
 
 <Ability type="blind_rage"
@@ -45,6 +51,13 @@
 	<Effect>
 		<CppImplementation type="basemod_at_self" />
 	</Effect>
+	<BaseAttributesMod>
+		<CppImplementation type="crit_hits" />
+		<LuaImplementation>
+			setBaseModValue("time",50000);
+			setBaseModValue("dexterity",0.5*get(self,"dexterity"));
+		</LuaImplementation>
+	</BaseAttributesMod>
 </Ability>
 
 <Ability type="concentration"
@@ -164,6 +177,12 @@
 	<Effect>
 		<CppImplementation type="basemod_at_self" />
 	</Effect>
+	<BaseAttributesMod>
+		<CppImplementation type="frost_arrows" />
+		<LuaImplementation>
+			setBaseModValue("time",100000);
+		</LuaImplementation>
+	</BaseAttributesMod>
 </Ability>
 
 <Ability type="guided_triple_shot"
@@ -197,6 +216,12 @@
 	<Effect>
 		<CppImplementation type="basemod_at_self" />
 	</Effect>
+	<BaseAttributesMod>
+		<CppImplementation type="ice_arrows" />
+		<LuaImplementation>
+			setBaseModValue("time",80000);
+		</LuaImplementation>
+	</BaseAttributesMod>
 </Ability>
 
 <Ability type="mental_wall"
@@ -288,6 +313,12 @@
 	<Effect>
 		<CppImplementation type="basemod_at_self" />
 	</Effect>
+	<BaseAttributesMod>
+		<CppImplementation type="storm_arrows" />
+		<LuaImplementation>
+			setBaseModValue("time",100000);
+		</LuaImplementation>
+	</BaseAttributesMod>
 </Ability>
 
 <Ability type="triple_shot"
@@ -385,6 +416,12 @@
 	<Effect>
 		<CppImplementation type="basemod_at_self" />
 	</Effect>
+	<BaseAttributesMod>
+		<CppImplementation type="wind_arrows" />
+		<LuaImplementation>
+			setBaseModValue("time",80000);
+		</LuaImplementation>
+	</BaseAttributesMod>
 </Ability>
 
 <Ability type="wind_walk"
@@ -399,5 +436,13 @@
 	<Effect>
 		<CppImplementation type="basemod_at_self" />
 	</Effect>
+	<BaseAttributesMod>
+		<CppImplementation type="wind_walk" />
+		<LuaImplementation>
+			setBaseModValue("time",30000);
+			setBaseModValue("walk_speed",1500);
+			setBaseModValue("block",0.2*get(self,"dexterity"));
+		</LuaImplementation>
+	</BaseAttributesMod>
 </Ability>
 

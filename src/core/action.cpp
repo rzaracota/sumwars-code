@@ -11,6 +11,28 @@ void Action::init()
 
 }
 
+void Action::cleanup()
+{
+	std::map<Action::ActionType,Action::ActionInfo>::iterator it;
+	for (it = m_action_info.begin(); it != m_action_info.end(); ++it)
+	{
+		if (it->second.m_effect.m_lua_impl != LUA_NOREF)
+			EventSystem::clearCodeReference(it->second.m_effect.m_lua_impl);
+		
+		if (it->second.m_damage.m_lua_impl != LUA_NOREF)
+			EventSystem::clearCodeReference(it->second.m_damage.m_lua_impl);
+		
+		if (it->second.m_base_mod.m_lua_impl != LUA_NOREF)
+			EventSystem::clearCodeReference(it->second.m_base_mod.m_lua_impl);
+		
+		if (it->second.m_dyn_mod.m_lua_impl != LUA_NOREF)
+			EventSystem::clearCodeReference(it->second.m_dyn_mod.m_lua_impl);
+
+	}
+	
+	m_action_info.clear();
+}
+
 
 bool Action::loadAbilityData(const char* pFilename)
 {
@@ -54,9 +76,16 @@ void Action::loadAbility(TiXmlNode* node)
 	ActionType type;
 	attr.getString("type", type);
 	
-	Action::ActionInfo* a;
+	if (m_action_info.count(type) != 0)
+	{
+		WARNING("Ability info for %s already exists",type.c_str());
+		return;
+	}
+
 	
+	Action::ActionInfo* a;
 	a = &(Action::m_action_info[type]);
+	
 	
 	a->m_projectile_type="";
 	attr.getString("name",a->m_name);
@@ -89,6 +118,7 @@ void Action::loadAbility(TiXmlNode* node)
 		
 	TiXmlNode* child;
 	TiXmlNode* child2;
+	a->m_flags =0;
 	for ( child = node->FirstChild(); child != 0; child = child->NextSibling())
 	{
 		if (child->Type()==TiXmlNode::ELEMENT) 

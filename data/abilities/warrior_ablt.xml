@@ -150,6 +150,12 @@
 	<Effect>
 		<CppImplementation type="basemod_at_self" />
 	</Effect>
+	<BaseAttributesMod>
+		<CppImplementation type="firesword" />
+		<LuaImplementation>
+			setBaseModValue("time",60000);
+		</LuaImplementation>
+	</BaseAttributesMod>
 </Ability>
 
 <Ability type="flamearmor" 
@@ -164,6 +170,14 @@
 	<Effect>
 		<CppImplementation type="basemod_at_self" />
 	</Effect>
+	<BaseAttributesMod>
+		<CppImplementation type="flamearmor" />
+		<LuaImplementation>
+			setBaseModValue("time",100000);
+			setBaseModValue("max_resist_fire",25);
+			setBaseModValue("resist_fire",50);
+		</LuaImplementation>
+	</BaseAttributesMod>
 </Ability>
 
 <Ability type="flamesword" 
@@ -178,6 +192,12 @@
 	<Effect>
 		<CppImplementation type="basemod_at_self" />
 	</Effect>
+	<BaseAttributesMod>
+		<CppImplementation type="flamesword" />
+		<LuaImplementation>
+			setBaseModValue("time",120000);
+		</LuaImplementation>
+	</BaseAttributesMod>
 </Ability>
 
 <Ability type="fury" 
@@ -192,6 +212,15 @@
 		<CppImplementation type="berserk" />
 		<CppImplementation type="basemod_at_self" />
 	</Effect>
+	<BaseAttributesMod>
+		<LuaImplementation>
+			local str = get(self,"strength");
+			setBaseModValue("time",40000);
+			setBaseModValue("strength",str);
+			setBaseModValue("attack_speed",1000);
+			setBaseModValue("armor",-0.25*get(self,"armor"));
+		</LuaImplementation>
+	</BaseAttributesMod>
 </Ability>
 
 <Ability type="hammer_bash" 
@@ -262,12 +291,17 @@
 		 description="The warrior regains up to 50 percent hitpoints of his total hitpoints through the sheer power of his will."
 		 time="1001.000000" 
 		 timer_nr="2.000000" 
-		 timer_value="200000.000000"
+		 timer_value="40000.000000"
 		 base_ability="noaction" 
 		 critical_percent="0.800000" >
 	<Effect>
 		<CppImplementation type="dynmod_at_self" />
 	</Effect>
+	<DynAttributesMod>
+		<LuaImplementation>
+			setDynModValue("health",0.5*get(self,"max_health"));
+		</LuaImplementation>
+	</DynAttributesMod>
 </Ability>
 
 <Ability type="scare" 
@@ -291,6 +325,12 @@
 			setDamageValue("blockable", false);
 		</LuaImplementation>	
 	</Damage>
+	<BaseAttributesMod>
+		<LuaImplementation>
+			setBaseModValue("time",60000);
+			setBaseModValue("armor",get(self,"armor"));
+		</LuaImplementation>
+	</BaseAttributesMod>
 </Ability>
 
 <Ability type="smash"

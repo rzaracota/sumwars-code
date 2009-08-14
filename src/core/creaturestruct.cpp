@@ -782,49 +782,49 @@ bool CreatureDynAttrMod::setValue(std::string valname)
 		lua_pop(EventSystem::getLuaState(), 1);
 		return true;
 	}
-	else if (valname =="blind_time")
+	else if (valname =="blind_immune_time")
 	{
 		m_dstatus_mod_immune_time[Damage::BLIND] = lua_tonumber(EventSystem::getLuaState() ,-1);
 		lua_pop(EventSystem::getLuaState(), 1);
 		return true;
 	}
-	else if (valname =="poisoned_time")
+	else if (valname =="poisoned_immune_time")
 	{
 		m_dstatus_mod_immune_time[Damage::POISONED] = lua_tonumber(EventSystem::getLuaState() ,-1);
 		lua_pop(EventSystem::getLuaState(), 1);
 		return true;
 	}
-	else if (valname =="berserk_time")
+	else if (valname =="berserk_immune_time")
 	{
 		m_dstatus_mod_immune_time[Damage::BERSERK] = lua_tonumber(EventSystem::getLuaState() ,-1);
 		lua_pop(EventSystem::getLuaState(), 1);
 		return true;
 	}
-	else if (valname =="confused_time")
+	else if (valname =="confused_immune_time")
 	{
 		m_dstatus_mod_immune_time[Damage::CONFUSED] = lua_tonumber(EventSystem::getLuaState() ,-1);
 		lua_pop(EventSystem::getLuaState(), 1);
 		return true;
 	}
-	else if (valname =="mute_time")
+	else if (valname =="mute_immune_time")
 	{
 		m_dstatus_mod_immune_time[Damage::MUTE] = lua_tonumber(EventSystem::getLuaState() ,-1);
 		lua_pop(EventSystem::getLuaState(), 1);
 		return true;
 	}
-	else if (valname =="paralyzed_time")
+	else if (valname =="paralyzed_immune_time")
 	{
 		m_dstatus_mod_immune_time[Damage::PARALYZED] = lua_tonumber(EventSystem::getLuaState() ,-1);
 		lua_pop(EventSystem::getLuaState(), 1);
 		return true;
 	}
-	else if (valname =="frozen_time")
+	else if (valname =="frozen_immune_time")
 	{
 		m_dstatus_mod_immune_time[Damage::FROZEN] = lua_tonumber(EventSystem::getLuaState() ,-1);
 		lua_pop(EventSystem::getLuaState(), 1);
 		return true;
 	}
-	else if (valname =="burning_time")
+	else if (valname =="burning_immune_time")
 	{
 		m_dstatus_mod_immune_time[Damage::BURNING] = lua_tonumber(EventSystem::getLuaState() ,-1);
 		lua_pop(EventSystem::getLuaState(), 1);
