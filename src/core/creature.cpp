@@ -2218,6 +2218,54 @@ void  Creature::calcActionAttrMod(Action::ActionType act,CreatureBaseAttrMod & b
 	bmod.init();
 	dmod.init();
 	
+	Action::ActionInfo* ainfo = Action::getActionInfo(m_action.m_type);
+	if (ainfo ==0 )
+		return;
+	
+	// Cpp Implementation fuer Bmod
+	std::list<std::string>::iterator kt;
+	for (kt = ainfo->m_base_mod.m_cpp_impl.begin(); kt != ainfo->m_base_mod.m_cpp_impl.end(); ++kt)
+	{
+		
+	}
+	
+	// Lua Implementation fuer bmod
+	if (ainfo->m_base_mod.m_lua_impl != LUA_NOREF)
+	{
+		
+		EventSystem::setRegion(getRegion());
+		EventSystem::setCreatureBaseAttrMod(&bmod);
+			
+		lua_pushnumber(EventSystem::getLuaState(),getId());
+		lua_setglobal(EventSystem::getLuaState(), "self");
+		
+		EventSystem::executeCodeReference(ainfo->m_base_mod.m_lua_impl);
+		
+		EventSystem::setCreatureBaseAttrMod(0);
+	}
+	
+	// Cpp Implementation fuer dmod
+	for (kt = ainfo->m_dyn_mod.m_cpp_impl.begin(); kt != ainfo->m_dyn_mod.m_cpp_impl.end(); ++kt)
+	{
+		
+	}
+	
+	// Lua Implementation fuer bmod
+	if (ainfo->m_dyn_mod.m_lua_impl != LUA_NOREF)
+	{
+		
+		EventSystem::setRegion(getRegion());
+		EventSystem::setCreatureDynAttrMod(&dmod);
+			
+		lua_pushnumber(EventSystem::getLuaState(),getId());
+		lua_setglobal(EventSystem::getLuaState(), "self");
+		
+		EventSystem::executeCodeReference(ainfo->m_dyn_mod.m_lua_impl);
+		
+		EventSystem::setCreatureDynAttrMod(0);
+	}
+	
+	/*
 	if (act == "scare")
 	{	
 	
@@ -2420,7 +2468,7 @@ void  Creature::calcActionAttrMod(Action::ActionType act,CreatureBaseAttrMod & b
 	{
 			dmod.m_dhealth = 3* m_base_attr_mod.m_willpower;
 	}
-	
+	*/
 }
 
 void Creature::calcDamage(Action::ActionType act,Damage& dmg)

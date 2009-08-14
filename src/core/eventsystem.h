@@ -214,18 +214,18 @@ class EventSystem
 		static int getBaseModValue(lua_State *L);
 		
 		/**
-		 * \fn static int setBaseAttrValue(lua_State *L)
-		 * \brief Setzt ein Attribut der BaseAttr Struktur
+		 * \fn static int setDynModValue(lua_State *L)
+		 * \brief Setzt ein Attribut der DynAttr Struktur
 		 * \param L Lua Status
 		 */
-		static int setBaseAttrValue(lua_State *L);
+		static int setDynModValue(lua_State *L);
 		
 		/**
-		 * \fn static int getBaseAttrValue(lua_State *L)
-		 * \brief Gibt ein Attribut der BaseAttr Struktur aus
+		 * \fn static int getDynModValue(lua_State *L)
+		 * \brief Gibt ein Attribut der DynAttr Struktur aus
 		 * \param L Lua Status
 		 */
-		static int getBaseAttrValue(lua_State *L);
+		static int getDynModValue(lua_State *L);
 		
 		/**
 		 * \fn static int createProjectile(lua_State *L)

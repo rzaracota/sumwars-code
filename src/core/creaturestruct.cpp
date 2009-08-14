@@ -341,6 +341,229 @@ void CreatureBaseAttrMod::operator=(CreatureBaseAttrMod other)
 	m_ximmunity =other.m_ximmunity;
 }
 
+int CreatureBaseAttrMod::getValue(std::string valname)
+{
+	if (valname =="strength")
+	{
+		lua_pushinteger(EventSystem::getLuaState() , m_dstrength );
+		return 1;
+	}
+	if (valname =="time")
+	{
+		lua_pushnumber(EventSystem::getLuaState() , m_time );
+		return 1;
+	}
+	else if (valname =="dexterity")
+	{
+		lua_pushinteger(EventSystem::getLuaState() , m_ddexterity );
+		return 1;
+	}
+	else if (valname =="willpower")
+	{
+		lua_pushinteger(EventSystem::getLuaState() , m_dwillpower );
+		return 1;
+	}
+	else if (valname =="magic_power")
+	{
+		lua_pushinteger(EventSystem::getLuaState() , m_dmagic_power );
+		return 1;
+	}
+	else if (valname =="max_health")
+	{
+		lua_pushnumber(EventSystem::getLuaState() , m_dmax_health );
+		return 1;
+	}
+	else if (valname =="block")
+	{
+		lua_pushinteger(EventSystem::getLuaState() , m_dblock );
+		return 1;
+	}
+	else if (valname =="attack")
+	{
+		lua_pushinteger(EventSystem::getLuaState() , m_dattack );
+		return 1;
+	}
+	else if (valname =="armor")
+	{
+		lua_pushinteger(EventSystem::getLuaState() , m_darmor );
+		return 1;
+	}
+	else if (valname =="resist_fire")
+	{
+		lua_pushinteger(EventSystem::getLuaState() , m_dresistances[Damage::FIRE] );
+		return 1;
+	}
+	else if (valname =="resist_ice")
+	{
+		lua_pushinteger(EventSystem::getLuaState() , m_dresistances[Damage::ICE] );
+		return 1;
+	}
+	else if (valname =="resist_air")
+	{
+		lua_pushinteger(EventSystem::getLuaState() , m_dresistances[Damage::AIR] );
+		return 1;
+	}
+	else if (valname =="resist_phys")
+	{
+		lua_pushinteger(EventSystem::getLuaState() , m_dresistances[Damage::PHYSICAL] );
+		return 1;
+	}
+	else if (valname =="max_resist_ice")
+	{
+		lua_pushinteger(EventSystem::getLuaState() , m_dresistances_cap[Damage::ICE] );
+		return 1;
+	}
+	else if (valname =="max_resist_air")
+	{
+		lua_pushinteger(EventSystem::getLuaState() , m_dresistances_cap[Damage::AIR] );
+		return 1;
+	}
+	else if (valname =="max_resist_fire")
+	{
+		lua_pushinteger(EventSystem::getLuaState() , m_dresistances_cap[Damage::FIRE] );
+		return 1;
+	}
+	else if (valname =="max_resist_phys")
+	{
+		lua_pushinteger(EventSystem::getLuaState() , m_dresistances_cap[Damage::PHYSICAL] );
+		return 1;
+	}
+	else if (valname =="attack_speed")
+	{
+		lua_pushinteger(EventSystem::getLuaState() , m_dattack_speed );
+		return 1;
+	}
+	else if (valname =="walk_speed")
+	{
+		lua_pushinteger(EventSystem::getLuaState() ,m_dwalk_speed );
+		return 1;
+	}
+	
+	return 0;
+}
+
+
+bool CreatureBaseAttrMod::setValue(std::string valname)
+{
+	if (valname =="time")
+	{
+		m_time = lua_tonumber(EventSystem::getLuaState() ,-1);
+		lua_pop(EventSystem::getLuaState(), 1);
+		return true;
+	}
+	else if (valname =="strength")
+	{
+		m_dstrength = lua_tointeger(EventSystem::getLuaState() ,-1);
+		lua_pop(EventSystem::getLuaState(), 1);
+		return true;
+	}
+	else if (valname =="dexterity")
+	{
+		m_ddexterity = lua_tointeger(EventSystem::getLuaState() ,-1);
+		lua_pop(EventSystem::getLuaState(), 1);
+		return true;
+	}
+	else if (valname =="willpower")
+	{
+		m_dwillpower = lua_tointeger(EventSystem::getLuaState() ,-1);
+		lua_pop(EventSystem::getLuaState(), 1);
+		return true;
+	}
+	else if (valname =="magic_power")
+	{
+		m_dmagic_power = lua_tointeger(EventSystem::getLuaState() ,-1);
+		lua_pop(EventSystem::getLuaState(), 1);
+		return true;
+	}
+	else if (valname =="max_health")
+	{
+		m_dmax_health = lua_tonumber(EventSystem::getLuaState() ,-1);
+		lua_pop(EventSystem::getLuaState(), 1);
+		return true;
+	}
+	else if (valname =="block")
+	{
+		m_dblock = lua_tointeger(EventSystem::getLuaState() ,-1);
+		lua_pop(EventSystem::getLuaState(), 1);
+		return true;
+	}
+	else if (valname =="attack")
+	{
+		m_dattack = lua_tointeger(EventSystem::getLuaState() ,-1);
+		lua_pop(EventSystem::getLuaState(), 1);
+		return true;
+	}
+	else if (valname =="armor")
+	{
+		m_darmor = lua_tointeger(EventSystem::getLuaState() ,-1);
+		lua_pop(EventSystem::getLuaState(), 1);
+		return true;
+	}
+	else if (valname =="resist_fire")
+	{
+		m_dresistances[Damage::FIRE] = lua_tointeger(EventSystem::getLuaState() ,-1);
+		lua_pop(EventSystem::getLuaState(), 1);
+		return true;
+		
+	}
+	else if (valname =="resist_ice")
+	{
+		m_dresistances[Damage::ICE] = lua_tointeger(EventSystem::getLuaState() ,-1);
+		lua_pop(EventSystem::getLuaState(), 1);
+		return true;
+	}
+	else if (valname =="resist_air")
+	{
+		m_dresistances[Damage::AIR] = lua_tointeger(EventSystem::getLuaState() ,-1);
+		lua_pop(EventSystem::getLuaState(), 1);
+		return true;
+	}
+	else if (valname =="resist_phys")
+	{
+		m_dresistances[Damage::PHYSICAL] = lua_tointeger(EventSystem::getLuaState() ,-1);
+		lua_pop(EventSystem::getLuaState(), 1);
+		return true;
+	}
+	else if (valname =="max_resist_ice")
+	{
+		m_dresistances_cap[Damage::ICE] = lua_tointeger(EventSystem::getLuaState() ,-1);
+		lua_pop(EventSystem::getLuaState(), 1);
+		return true;
+	}
+	else if (valname =="max_resist_air")
+	{
+		m_dresistances_cap[Damage::AIR] = lua_tointeger(EventSystem::getLuaState() ,-1);
+		lua_pop(EventSystem::getLuaState(), 1);
+		return true;
+	}
+	else if (valname =="max_resist_fire")
+	{
+		m_dresistances_cap[Damage::FIRE] = lua_tointeger(EventSystem::getLuaState() ,-1);
+		lua_pop(EventSystem::getLuaState(), 1);
+		return true;
+	}
+	else if (valname =="max_resist_phys")
+	{
+		m_dresistances_cap[Damage::PHYSICAL] = lua_tointeger(EventSystem::getLuaState() ,-1);
+		lua_pop(EventSystem::getLuaState(), 1);
+		return true;
+	}
+	else if (valname =="attack_speed")
+	{
+		m_dattack_speed = lua_tointeger(EventSystem::getLuaState() ,-1);
+		lua_pop(EventSystem::getLuaState(), 1);
+		return true;
+	}
+	else if (valname =="walk_speed")
+	{
+		m_dwalk_speed = lua_tointeger(EventSystem::getLuaState() ,-1);
+		lua_pop(EventSystem::getLuaState(), 1);
+		return true;
+	}
+	
+	return false;
+}
+
 int CreatureDynAttr::getValue(std::string valname)
 {
 	if (valname =="health")
@@ -496,6 +719,119 @@ void CreatureDynAttrMod::operator=(CreatureDynAttrMod other)
 	{
 		m_dstatus_mod_immune_time[i] = other.m_dstatus_mod_immune_time[i];
 	}
+}
+
+int CreatureDynAttrMod::getValue(std::string valname)
+{
+	if (valname =="health")
+	{
+		lua_pushnumber(EventSystem::getLuaState() , m_dhealth );
+		return 1;
+	}
+	else if (valname =="blind_immune_time")
+	{
+		lua_pushnumber(EventSystem::getLuaState() , m_dstatus_mod_immune_time[Damage::BLIND]);
+		return 1;
+		
+	}
+	else if (valname =="poisoned_immune_time")
+	{
+		lua_pushnumber(EventSystem::getLuaState() , m_dstatus_mod_immune_time[Damage::POISONED]);
+		return 1;
+	}
+	else if (valname =="berserk_immune_time")
+	{
+		lua_pushnumber(EventSystem::getLuaState() , m_dstatus_mod_immune_time[Damage::BERSERK]);
+		return 1;
+	}
+	else if (valname =="confused_immune_time")
+	{
+		lua_pushnumber(EventSystem::getLuaState() , m_dstatus_mod_immune_time[Damage::CONFUSED]);
+		return 1;
+	}
+	else if (valname =="mute_immune_time")
+	{
+		lua_pushnumber(EventSystem::getLuaState() , m_dstatus_mod_immune_time[Damage::MUTE]);
+		return 1;
+	}
+	else if (valname =="paralyzed_immune_time")
+	{
+		lua_pushnumber(EventSystem::getLuaState() , m_dstatus_mod_immune_time[Damage::PARALYZED]);
+		return 1;
+	}
+	else if (valname =="frozen_immune_time")
+	{
+		lua_pushnumber(EventSystem::getLuaState() , m_dstatus_mod_immune_time[Damage::FROZEN]);
+		return 1;
+	}
+	else if (valname =="burning_immune_time")
+	{
+		lua_pushnumber(EventSystem::getLuaState() , m_dstatus_mod_immune_time[Damage::BURNING]);
+		return 1;
+	}
+	
+	return 0;
+}
+
+
+bool CreatureDynAttrMod::setValue(std::string valname)
+{
+	if (valname =="health")
+	{
+		m_dhealth = lua_tonumber(EventSystem::getLuaState() ,-1);
+		lua_pop(EventSystem::getLuaState(), 1);
+		return true;
+	}
+	else if (valname =="blind_time")
+	{
+		m_dstatus_mod_immune_time[Damage::BLIND] = lua_tonumber(EventSystem::getLuaState() ,-1);
+		lua_pop(EventSystem::getLuaState(), 1);
+		return true;
+	}
+	else if (valname =="poisoned_time")
+	{
+		m_dstatus_mod_immune_time[Damage::POISONED] = lua_tonumber(EventSystem::getLuaState() ,-1);
+		lua_pop(EventSystem::getLuaState(), 1);
+		return true;
+	}
+	else if (valname =="berserk_time")
+	{
+		m_dstatus_mod_immune_time[Damage::BERSERK] = lua_tonumber(EventSystem::getLuaState() ,-1);
+		lua_pop(EventSystem::getLuaState(), 1);
+		return true;
+	}
+	else if (valname =="confused_time")
+	{
+		m_dstatus_mod_immune_time[Damage::CONFUSED] = lua_tonumber(EventSystem::getLuaState() ,-1);
+		lua_pop(EventSystem::getLuaState(), 1);
+		return true;
+	}
+	else if (valname =="mute_time")
+	{
+		m_dstatus_mod_immune_time[Damage::MUTE] = lua_tonumber(EventSystem::getLuaState() ,-1);
+		lua_pop(EventSystem::getLuaState(), 1);
+		return true;
+	}
+	else if (valname =="paralyzed_time")
+	{
+		m_dstatus_mod_immune_time[Damage::PARALYZED] = lua_tonumber(EventSystem::getLuaState() ,-1);
+		lua_pop(EventSystem::getLuaState(), 1);
+		return true;
+	}
+	else if (valname =="frozen_time")
+	{
+		m_dstatus_mod_immune_time[Damage::FROZEN] = lua_tonumber(EventSystem::getLuaState() ,-1);
+		lua_pop(EventSystem::getLuaState(), 1);
+		return true;
+	}
+	else if (valname =="burning_time")
+	{
+		m_dstatus_mod_immune_time[Damage::BURNING] = lua_tonumber(EventSystem::getLuaState() ,-1);
+		lua_pop(EventSystem::getLuaState(), 1);
+		return true;
+	}
+	
+	return false;
 }
 
 void CreatureSpeakText::operator=( CreatureSpeakText& other)

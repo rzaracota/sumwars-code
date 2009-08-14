@@ -10,6 +10,14 @@
 		<CppImplementation type="berserk" />
 		<CppImplementation type="basemod_at_self" />
 	</Effect>
+	<BaseAttributesMod>
+		<LuaImplementation>
+			local str = get(self,"strength");
+			setBaseModValue("time",40000);
+			setBaseModValue("strength",str);
+			setBaseModValue("armor",-0.5*get(self,"armor"));
+		</LuaImplementation>
+	</BaseAttributesMod>	
 </Ability>
 
 <Ability type="around_blow" 

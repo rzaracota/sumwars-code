@@ -362,6 +362,20 @@ struct CreatureBaseAttrMod
 	 */
 	void operator=(CreatureBaseAttrMod other);
 	
+	/**
+	 * \fn int getValue(std::string valname)
+	 * \brief Schiebt den gewuenschten Attributwert eines Objektes auf den Lua Stack
+	 * \param valname Name des Wertes
+	 */
+	int getValue(std::string valname);
+	
+	/**
+	 * \fn virtual bool setValue(std::string valname)
+	 * \brief Setzt den gewuenschten Attributwert eines Objektes
+	 * \param valname Name des Wertes
+	 */
+	bool setValue(std::string valname);
+	
 };
 
 /**
@@ -498,6 +512,20 @@ struct CreatureDynAttrMod
 	 * \brief Zuweisungsoperator
 	*/
 	void operator=(CreatureDynAttrMod other);
+	
+	/**
+	 * \fn int getValue(std::string valname)
+	 * \brief Schiebt den gewuenschten Attributwert eines Objektes auf den Lua Stack
+	 * \param valname Name des Wertes
+	 */
+	int getValue(std::string valname);
+	
+	/**
+	 * \fn virtual bool setValue(std::string valname)
+	 * \brief Setzt den gewuenschten Attributwert eines Objektes
+	 * \param valname Name des Wertes
+	 */
+	bool setValue(std::string valname);
 	
 };
 

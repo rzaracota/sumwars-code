@@ -49,10 +49,12 @@ void EventSystem::init()
 	lua_register(m_lua, "pointIsInArea", pointIsInArea);
 	lua_register(m_lua, "unitIsInArea", unitIsInArea);
 	lua_register(m_lua, "objectIsInArea", unitIsInArea);
+	
 	lua_register(m_lua, "createObject", createObject);
 	lua_register(m_lua, "createScriptObject", createScriptObject);
 	lua_register(m_lua, "deleteObject", deleteObject);
 	lua_register(m_lua, "dropItem", dropItem);
+	
 	lua_register(m_lua, "getLocation", getLocation);
 	lua_register(m_lua, "addLocation", addLocation);
 	lua_register(m_lua, "addArea", addArea);
@@ -60,8 +62,14 @@ void EventSystem::init()
 	lua_register(m_lua, "startTimer",startTimer);
 	lua_register(m_lua, "insertTrigger",insertTrigger);
 	lua_register(m_lua, "addTriggerVariable", addTriggerVariable);
+	
 	lua_register(m_lua, "setDamageValue", setDamageValue);
 	lua_register(m_lua, "getDamageValue", getDamageValue);
+	lua_register(m_lua, "setBaseModValue", setBaseModValue);
+	lua_register(m_lua, "getBaseModValue", getBaseModValue);
+	lua_register(m_lua, "setDynModValue", setDynModValue);
+	lua_register(m_lua, "getDynModValue", getDynModValue);
+	
 	lua_register(m_lua, "createProjectile", createProjectile);
 	lua_register(m_lua, "createMonsterGroup", createMonsterGroup);
 	lua_register(m_lua, "getObjectAt", getObjectAt);
@@ -487,7 +495,89 @@ int EventSystem::setDamageValue(lua_State *L)
 	}
 	else
 	{
-		ERRORMSG("Syntax: setDamageValue(string valname, value, [value])");
+		ERRORMSG("Syntax: setDamageValue(string valname, value)");
+	}
+
+	return 0;
+}
+
+int EventSystem::getBaseModValue(lua_State *L)
+{
+	int ret =0;
+	int argc = lua_gettop(L);
+	if (argc>=1 && lua_isstring(L,1))
+	{
+		std::string valname = lua_tostring(L, 1);
+
+		if (m_base_mod != 0)
+		{
+			ret = m_base_mod->getValue(valname);
+		}
+	}
+	else
+	{
+		ERRORMSG("Syntax: getBaseModValue(string valname)");
+	}
+
+	return ret;
+}
+
+int EventSystem::setBaseModValue(lua_State *L)
+{
+	int argc = lua_gettop(L);
+	if (argc>=2 && lua_isstring(L,1))
+	{
+		std::string valname = lua_tostring(L, 1);
+
+		if (m_base_mod != 0)
+		{
+			m_base_mod->setValue(valname);
+		}
+	}
+	else
+	{
+		ERRORMSG("Syntax: setBaseModValue(string valname, value)");
+	}
+
+	return 0;
+}
+
+int EventSystem::getDynModValue(lua_State *L)
+{
+	int ret =0;
+	int argc = lua_gettop(L);
+	if (argc>=1 && lua_isstring(L,1))
+	{
+		std::string valname = lua_tostring(L, 1);
+
+		if (m_dyn_mod != 0)
+		{
+			ret = m_dyn_mod->getValue(valname);
+		}
+	}
+	else
+	{
+		ERRORMSG("Syntax: getDynModValue(string valname)");
+	}
+
+	return ret;
+}
+
+int EventSystem::setDynModValue(lua_State *L)
+{
+	int argc = lua_gettop(L);
+	if (argc>=2 && lua_isstring(L,1))
+	{
+		std::string valname = lua_tostring(L, 1);
+
+		if (m_dyn_mod != 0)
+		{
+			m_dyn_mod->setValue(valname);
+		}
+	}
+	else
+	{
+		ERRORMSG("Syntax: setDynModValue(string valname, value)");
 	}
 
 	return 0;
