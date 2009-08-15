@@ -489,7 +489,11 @@ void Projectile::handleFlying(float dtime)
 
 	// Objekt an der aktuellen Position suchen
 	getRegion()->getObjectsOnLine(line,&hitobj,getLayer(),WorldObject::CREATURE | WorldObject::FIXED,0);
-
+	if (hitobj.empty())
+	{
+		getRegion()->getObjectsInShape(getShape(),&hitobj,getLayer(),WorldObject::CREATURE,0);
+	}
+	
 	// Alle Objekte herausfiltern die verbuendet sind, sowie das zuletzt gerade getroffene Objekt
 	if (!hitobj.empty())
 	{
@@ -766,6 +770,7 @@ void Projectile::doEffect(GameObject* target)
 				
 				while (!hitobj.empty() && (World::getWorld()->getRelation(getFraction(),hit->getFraction()) == WorldObject:: ALLIED ))
 				{
+					i = hitobj.begin();
 					i=hitobj.erase(i);
 					if (i!=hitobj.end())
 						hit=(*i);
