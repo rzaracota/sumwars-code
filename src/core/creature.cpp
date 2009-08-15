@@ -1043,6 +1043,28 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 			m_dyn_attr.m_status_mod_time[Damage::BERSERK] = 30000;
 			addToNetEventMask(NetEvent::DATA_STATUS_MODS);
 		}
+		else if (*kt == "speak")
+		{
+			if (goalobj->isCreature() && getDialogueId() ==0)
+			{
+				cr = static_cast<Creature*>(goalobj);
+				if (cr->getDialogueId() ==0)
+				{
+					Dialogue* dia = new Dialogue(getRegion(), cr->getRefName());
+					EventSystem::setDialogue(dia);
+					dia->addSpeaker(getId(),"player");
+					dia->addSpeaker(goalobj->getId(),cr->getRefName());
+					dia->addSpeaker(goalobj->getId(),"npc");
+					dia->changeTopic("start");
+					getRegion()->insertDialogue(dia);
+				}
+			}
+		}
+		else if (*kt == "use")
+		{
+			if (goalobj)
+				goalobj->reactOnUse(getId());
+		}
 		
 	}
 	
