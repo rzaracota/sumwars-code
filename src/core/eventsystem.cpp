@@ -597,7 +597,11 @@ int EventSystem::createProjectile(lua_State *L)
 			
 			// Schaden
 			// Projektil erzeugen
-			Projectile* pr = new Projectile(tname, m_damage);
+			Projectile* pr = ObjectFactory::createProjectile(tname);
+			if (pr ==0)
+				return 0;
+			
+			pr->setDamage(m_damage);
 
 			// Richtung, Geschwindigkeit ermitteln
 			if (argc>=3 && (lua_istable(L,3) || lua_isstring(L,3)))

@@ -1,0 +1,366 @@
+<!--
+<Projectile
+		subtype="string"
+		radius="float"
+		lifetime="float"
+		counter="int"
+		new_projectile_type="string"
+		implementation = "string"
+		>
+	
+	moegliche Flags:
+		explodes
+		multi_explodes
+		bouncing
+		prob_bouncing
+		piercing
+	<Flag name="string" />
+	
+	moegliche Implementationen:
+		fly
+		fly_guided
+		grow
+		grow_effect_at_each
+		stationary
+		stationary_multi_effect
+
+	moegliche Effekte
+		dmg_at_target
+		
+	<Effect>
+		<CppImplementation type="string" />
+		<LuaImplementation>
+			Lua Code
+		</LuaImplementation>
+	</Effect>
+</Projectile>
+-->
+
+<Projectile
+		   subtype="ARROW"
+		   radius="0.1"
+		   lifetime="2000"
+		   implementation = "fly"
+		   >
+	<RenderInfo name="arrow" />
+	<Effect>
+		<CppImplementation type="dmg_at_target" />
+	</Effect>	
+</Projectile>
+
+<Projectile
+		   subtype="MAGIC_ARROW"
+		   radius="0.1"
+		   lifetime="2000"
+		   implementation = "fly"
+		   >
+	<RenderInfo name="magic_arrow" />
+	<Effect>
+		<CppImplementation type="dmg_at_target" />
+	</Effect>	
+</Projectile>
+
+<Projectile
+		   subtype="FIRE_BOLT"
+		   radius="0.2"
+		   lifetime="2000"
+		   implementation = "fly"
+		   >
+	<RenderInfo name="fire_bolt" />
+	<Effect>
+		<CppImplementation type="dmg_at_target" />
+	</Effect>	
+</Projectile>
+
+<Projectile
+		   subtype="FIRE_BALL"
+		   radius="0.3"
+		   lifetime="2000"
+		   implementation = "fly"
+		   >
+	<RenderInfo name="fire_ball" />
+	<Flags name="exploding" />
+	<Effect>
+		<CppImplementation type="dmg_at_target" />
+	</Effect>	
+</Projectile>
+
+<Projectile
+		   subtype="FIRE_WALL"
+		   radius="2"
+		   lifetime="5000"
+		   implementation = "fly"
+		   >
+	<RenderInfo name="stationary_multi_effect" />
+	<Effect>
+		<CppImplementation type="dmg_at_target" />
+	</Effect>	
+</Projectile>
+
+<Projectile
+		   subtype="FIRE_WAVE"
+		   lifetime="1000"
+		   radius="7"
+		   implementation = "grow_effect_at_each"
+		   >
+	<RenderInfo name="fire_wave" />
+	<Effect>
+		<CppImplementation type="dmg_at_target" />
+	</Effect>	
+</Projectile>
+
+<Projectile
+		   subtype="ICE_BOLT"
+		   radius="0.2"
+		   lifetime="2000"
+		   implementation = "fly"
+		   >
+	<RenderInfo name="ice_bolt" />
+	<Effect>
+		<CppImplementation type="dmg_at_target" />
+	</Effect>	
+</Projectile>
+
+<Projectile
+		   subtype="BLIZZARD"
+		   radius="3"
+		   lifetime="2500"
+		   counter="5"
+		   implementation = "stationary_multi_effect"
+		   >
+	<RenderInfo name="blizzard" />
+	<Effect>
+		<CppImplementation type="dmg_at_target" />
+	</Effect>	
+</Projectile>
+
+<Projectile
+		   subtype="ICE_RING"
+		   lifetime="800"
+		   radius="4"
+		   implementation = "grow_effect_at_each"
+		   >
+	<RenderInfo name="ice_ring" />
+	<Effect>
+		<CppImplementation type="dmg_at_target" />
+	</Effect>	
+</Projectile>
+
+<Projectile
+		   subtype="FREEZE"
+		   lifetime="300"
+		   radius="4"
+		   implementation = "stationary"
+		   >
+	<RenderInfo name="freeze" />
+	<Effect>
+		<CppImplementation type="dmg_at_target" />
+	</Effect>	
+</Projectile>
+
+<Projectile
+		   subtype="LIGHTNING"
+		   lifetime="250"
+		   radius="0.5"
+		   implementation = "stationary"
+		   >
+	<RenderInfo name="lightning" />
+	<Effect>
+		<CppImplementation type="dmg_at_target" />
+	</Effect>	
+</Projectile>
+
+<Projectile
+		   subtype="THUNDERSTORM"
+		   lifetime="9000"
+		   radius="5"
+		   counter="30"
+		   implementation = "stationary_multi_effect"
+		   >
+	<RenderInfo name="thunderstorm" />
+	<Effect>
+		<CppImplementation type="dmg_at_target" />
+	</Effect>	
+</Projectile>
+
+<Projectile
+		   subtype="CHAIN_LIGHTNING"
+		   lifetime="2000"
+		   radius="0.3"
+		   implementation = "fly"
+		   counter="5"
+		   >
+	<RenderInfo name="chain_lightning" />
+	<Flags name="bouncing" />
+	<Effect>
+		<CppImplementation type="dmg_at_target" />
+	</Effect>	
+</Projectile>
+
+<Projectile
+		   subtype="STATIC_SHIELD"
+		   lifetime="150"
+		   radius="1.5"
+		   implementation = "stationary"
+		   >
+	<RenderInfo name="static_field" />
+	<Effect>
+		<CppImplementation type="dmg_at_target" />
+	</Effect>	
+</Projectile>
+
+<Projectile
+		   subtype="FIRE_ARROW"
+		   radius="0.1"
+		   lifetime="2000"
+		   implementation = "fly"
+		   >
+	<RenderInfo name="fire_arrow" />
+	<Effect>
+		<CppImplementation type="dmg_at_target" />
+	</Effect>	
+</Projectile>
+
+<Projectile
+		   subtype="ICE_ARROW"
+		   radius="0.1"
+		   lifetime="2000"
+		   implementation = "fly"
+		   >
+	<RenderInfo name="ice_arrow" />
+	<Effect>
+		<CppImplementation type="dmg_at_target" />
+	</Effect>	
+</Projectile>
+
+<Projectile
+		   subtype="WIND_ARROW"
+		   radius="0.1"
+		   lifetime="2000"
+		   implementation = "fly"
+		   >
+	<RenderInfo name="wind_arrow" />
+	<Effect>
+		<CppImplementation type="dmg_at_target" />
+	</Effect>	
+</Projectile>
+
+<Projectile
+		   subtype="GUIDED_ARROW"
+		   radius="0.1"
+		   lifetime="2000"
+		   implementation = "fly_guided"
+		   >
+	<RenderInfo name="guided_arrow" />
+	<Effect>
+		<CppImplementation type="dmg_at_target" />
+	</Effect>	
+</Projectile>
+
+<Projectile
+		   subtype="EXPLOSION"
+		   lifetime="200"
+		   radius="1.5"
+		   implementation = "stationary"
+		   >
+	<RenderInfo name="explosion" />
+	<Effect>
+		<CppImplementation type="dmg_at_target" />
+	</Effect>	
+</Projectile>
+
+<Projectile
+		   subtype="WIND_EXPLOSION"
+		   lifetime="200"
+		   radius="1.5"
+		   implementation = "stationary"
+		   >
+	<RenderInfo name="wind_explosion" />
+	<Effect>
+		<CppImplementation type="dmg_at_target" />
+	</Effect>	
+</Projectile>
+
+<Projectile
+		   subtype="ICE_EXPLOSION"
+		   lifetime="200"
+		   radius="1.5"
+		   implementation = "stationary"
+		   >
+	<RenderInfo name="ice_explosion" />
+	<Effect>
+		<CppImplementation type="dmg_at_target" />
+	</Effect>	
+</Projectile>
+
+<Projectile
+		   subtype="FIRE_EXPLOSION"
+		   lifetime="200"
+		   radius="1.5"
+		   implementation = "stationary"
+		   >
+	<RenderInfo name="fire_explosion" />
+	<Effect>
+		<CppImplementation type="dmg_at_target" />
+	</Effect>	
+</Projectile>
+
+<Projectile
+		   subtype="ELEM_EXPLOSION"
+		   lifetime="200"
+		   radius="1.5"
+		   implementation = "stationary"
+		   >
+	<RenderInfo name="elem_explosion" />
+	<Effect>
+		<CppImplementation type="dmg_at_target" />
+	</Effect>	
+</Projectile>
+
+<Projectile
+		   subtype="LIGHT_BEAM"
+		   lifetime="200"
+		   radius="0.5"
+		   implementation = "stationary"
+		   >
+	<RenderInfo name="light_beam" />
+	<Effect>
+		<CppImplementation type="dmg_at_target" />
+	</Effect>	
+</Projectile>
+
+<Projectile
+		   subtype="DIVINE_BEAM"
+		   lifetime="200"
+		   radius="0.5"
+		   implementation = "stationary"
+		   >
+	<RenderInfo name="divine_beam" />
+	<Effect>
+		<CppImplementation type="dmg_at_target" />
+	</Effect>	
+</Projectile>
+
+<Projectile
+		   subtype="HYPNOSIS"
+		   lifetime="200"
+		   radius="0.5"
+		   implementation = "stationary"
+		   >
+	<RenderInfo name="hypnosis" />
+	<Effect>
+		<CppImplementation type="dmg_at_target" />
+	</Effect>	
+</Projectile>
+
+<Projectile
+		   subtype="ACID"
+		   lifetime="200"
+		   radius="0.5"
+		   implementation = "stationary"
+		   >
+	<RenderInfo name="acid" />
+	<Effect>
+		<CppImplementation type="dmg_at_target" />
+	</Effect>	
+</Projectile>

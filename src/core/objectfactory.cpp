@@ -4,7 +4,7 @@
 #include "monster.h"
 #include "world.h"
 #include "player.h"
-
+#include "projectile.h"
 #include "templateloader.h"
 
 
@@ -22,6 +22,8 @@ std::map< MonsterGroupName, MonsterGroup*>  ObjectFactory::m_monster_groups;
 std::map<GameObject::Subtype, GameObject::Type> ObjectFactory::m_object_types;
 
 std::map<GameObject::Subtype, PlayerBasicData*> ObjectFactory::m_player_data;
+
+std::map<GameObject::Subtype, ProjectileBasicData*> ObjectFactory::m_projectile_data;
 
 GameObject::Subtype ObjectTemplate::getObject(EnvironmentName env)
 {
@@ -142,6 +144,21 @@ WorldObject* ObjectFactory::createObject(GameObject::Type type, GameObject::Subt
 	return ret;
 }
 
+Projectile* ObjectFactory::createProjectile(GameObject::Subtype subtype, int id)
+{
+	std::map<GameObject::Subtype, ProjectileBasicData*>::iterator it;
+	it = m_projectile_data.find(subtype);
+	
+	if (it == m_projectile_data.end())
+	{
+		ERRORMSG("subtype for projectile not found: %s",subtype.c_str());
+		return 0;
+	}
+	
+	Projectile* pr = new Projectile(*(it->second),id);
+	return pr;
+}
+
 std::string ObjectFactory::getObjectName(GameObject::Subtype subtype)
 {
 	std::map<GameObject::Subtype, MonsterBasicData*>::iterator i;
@@ -203,7 +220,19 @@ PlayerBasicData* ObjectFactory::getPlayerData(GameObject::Subtype subtype)
 	return it->second;
 }
 
-
+ProjectileBasicData* ObjectFactory::getProjectileData(GameObject::Subtype subtype)
+{
+	std::map<GameObject::Subtype, ProjectileBasicData*>::iterator it;
+	it = m_projectile_data.find(subtype);
+	
+	if (it == m_projectile_data.end())
+	{
+		return 0;
+	}
+	
+	return it->second;
+}
+		
 void ObjectFactory::registerMonster(GameObject::Subtype subtype, MonsterBasicData* data)
 {
 	m_object_types.insert(std::make_pair(subtype, "MONSTER"));
@@ -216,6 +245,12 @@ void ObjectFactory::registerFixedObject(GameObject::Subtype subtype, FixedObject
 {
 	m_object_types.insert(std::make_pair(subtype, "FIXED_OBJECT"));
 	m_fixed_object_data.insert(std::make_pair(subtype,data));
+}
+
+void ObjectFactory::registerProjectile(GameObject::Subtype subtype, ProjectileBasicData* data)
+{
+	m_object_types.insert(std::make_pair(subtype, "PROJECTILE"));
+	m_projectile_data.insert(std::make_pair(subtype,data));
 }
 
 void ObjectFactory::registerPlayer(GameObject::Subtype subtype, PlayerBasicData* data)
@@ -313,6 +348,13 @@ void ObjectFactory::cleanup()
 		delete it6->second;
 	}
 	m_player_data.clear();
+	
+	std::map<GameObject::Subtype, ProjectileBasicData*>::iterator it7;
+	for (it7= m_projectile_data.begin(); it7 != m_projectile_data.end(); ++it7)
+	{
+		delete it7->second;
+	} 
+	m_projectile_data.clear();
 }
 
 

@@ -9,7 +9,7 @@
 #include "playerbase.h"
 #include "action.h"
 #include "elementattrib.h"
-
+#include "projectilebase.h"
 
 #include "../tinyxml/tinyxml.h"
 #include <string>
@@ -31,8 +31,6 @@ class ObjectLoader
 	
 
 
-	
-	// neuer Monsterdata loader
 	
 	/**
 	 * \fn loadMonsterData(const char* pFilename);
@@ -56,8 +54,6 @@ class ObjectLoader
 	 **/
 	static bool loadCreatureBaseAttr(TiXmlNode* node, CreatureBaseAttr& attr);
 	
-	// neuer FixedObject loader
-	
 	/**
 	 * \fn loadFixedObjectData(const char* pFilename);
 	 * \brief Liest die Daten zu festen Objekten aus einer XML Datei
@@ -71,6 +67,20 @@ class ObjectLoader
 	 * \param node XML Knoten
 	 */
 	static bool loadFixedObject(TiXmlNode* node);
+	
+	/**
+	 * \fn loadProjectileData(const char* pFilename);
+	 * \brief Liest die Daten zu Projectilen aus einer XML Datei
+	 * \param pFilename Name der XML Datei
+	 */
+	static bool loadProjectileData(const char* pFilename);
+	
+	/**
+	 * \fn bool loadProjectile(TiXmlNode* node)
+	 * \brief Liest die Daten zu einem Projectil aus dem Knoten
+	 * \param node XML Knoten
+	 */
+	static bool loadProjectile(TiXmlNode* node);
 	
 	/**
 	 * \fn loadPlayerData(const char* pFilename);

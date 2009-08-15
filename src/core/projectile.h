@@ -10,8 +10,10 @@
 #include "networkstruct.h"
 #include <list>
 #include "gameobject.h"
-
+#include "projectilebase.h"
 class World;
+
+
 
 /**
  * \class Projectile
@@ -38,11 +40,18 @@ class Projectile : public GameObject
 	/**
 	 * \fn Projectile( ProjectileType type, Damage* dmg,  int id=0)
 	 * \param subtype Typ des Projektils
-	 * \param dmg Schaden den das Projektil anrichtet
 	 * \param id ID des Projektils
 	 * \brief Konstruktor
 	 */
-	Projectile( Subtype subtype, Damage* dmg, int id=0);
+	Projectile(Subtype subtype,int id=0);
+	
+	/**
+	 * \fn Projectile(ProjectileBasicData &data,int id=0)
+	 * \param data Daten fuer die Initialisierung
+	 * \param id ID des Projektils
+	 * \brief Konstruktor
+	 */
+	Projectile(ProjectileBasicData &data,int id=0);
 	
 	/**
 	 * \fn virtual ~Projectile()
@@ -50,7 +59,8 @@ class Projectile : public GameObject
 	 */
 	virtual ~Projectile()
 	{
-		
+		if (m_damage != 0)
+			delete m_damage;
 	}
 	
 	/**
@@ -112,8 +122,15 @@ class Projectile : public GameObject
 	 */
 	Damage* getDamage()
 	{
-		return &m_damage;
+		return m_damage;
 	}
+	
+	/**
+	 * \fn void setDamage(Damage* dmg)
+	 * \brief Setzt die Schadensinformationen
+	 * \param dmg Damage Objekt
+	 */
+	void setDamage(Damage* dmg);
 	
 	/**
 	 * \fn void setGoalObject(int id)
@@ -207,10 +224,10 @@ class Projectile : public GameObject
 	virtual std::string getActionString();
 	
 		
-		/**
+	/**
 	 * \fn virtual float getActionPercent()
 	 * \brief Gibt den Prozentsatz, zu dem die aktuelle Aktion fortgeschritten ist aus
-		 */
+	 */
 	virtual float getActionPercent();
 	
 	/**
@@ -252,13 +269,17 @@ class Projectile : public GameObject
 		*/
 		void handleStable(float dtime);
 		
-		
+		/**
+		 * \fn void doEffect(GameObject* target=0)
+		 * \brief Fuehrt den Effekt aus
+		 */
+		void doEffect(GameObject* target=0);
 		
 		/**
-		* \var Damage m_damage
+		* \var Damage* m_damage
 		* \brief Schaden den das Projektil anrichtet
 		*/
-		Damage m_damage;
+		Damage* m_damage;
 		
 		/**
 		* \var int m_last_hit_object_id
@@ -286,19 +307,19 @@ class Projectile : public GameObject
 		
 		
 		/**
-		* \fn float m_timer
+		* \var float m_timer
 		* \brief Timer, Verwendung je nach Art des Projektils und aktuellem Zustand
 		*/
 		float m_timer;
 		
 		/**
-		* \fn float m_timer_limit
+		* \var float m_timer_limit
 		* \brief Wert, bei dessen Erreichen durch den Timer eine Statusveraenderung eintritt
 		*/
 		float m_timer_limit;
 		
 		/**
-		* \fn m_counter
+		* \var m_counter
 		* \brief Zaehler, Verwendung je Art des Projektils und aktuellem Zustand
 		*/
 		int m_counter;
@@ -308,6 +329,12 @@ class Projectile : public GameObject
 		 * \brief Fraktion des Objektes
 		 */
 		Fraction m_fraction;
+		
+		/**
+		 * \var std::string m_implementation
+		 * \brief Steuert die Verhaltensweise
+		 */
+		std::string m_implementation;
 
 };
 

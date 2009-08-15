@@ -345,6 +345,7 @@ bool Application::setupResources()
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../data/abilities", "FileSystem", "abilities");
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../data/monsters", "FileSystem", "monsters");
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../data/playerclasses", "FileSystem", "playerclasses");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../data/projectiles", "FileSystem", "projectiles");
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../data/objects", "FileSystem", "objects");
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../data/obj_templates", "FileSystem", "obj_templates");
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../data/obj_group_templ", "FileSystem", "obj_group_templ");
@@ -580,6 +581,19 @@ bool Application::loadResources()
 		file += it->filename;
 
 		ObjectLoader::loadMonsterData(file.c_str());
+
+		updateStartScreen(0.4);
+	}
+	
+	// TODO: funktioniert nur, solange kein LUA Code enthalten
+	files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("projectiles","*.xml");
+	for (it = files->begin(); it != files->end(); ++it)
+	{
+		file = it->archive->getName();
+		file += "/";
+		file += it->filename;
+
+		ObjectLoader::loadProjectileData(file.c_str());
 
 		updateStartScreen(0.4);
 	}

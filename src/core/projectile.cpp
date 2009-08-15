@@ -1,16 +1,13 @@
 #include "projectile.h"
 #include "world.h"
+#include "objectfactory.h"
 
 
 
-
-Projectile::Projectile(Subtype subtype, Damage* dmg, int id)
+Projectile::Projectile(Subtype subtype,  int id)
 	: GameObject(id)
 {
-	if (dmg !=0)
-	{
-		setFraction(dmg->m_attacker_fraction);
-	}
+	m_damage =0;
 	setSubtype(subtype);
 	m_timer =0;
 	setLayer(WorldObject::LAYER_AIR);
@@ -138,13 +135,63 @@ Projectile::Projectile(Subtype subtype, Damage* dmg, int id)
 
 	getShape()->m_radius =r;
 	setAngle(0);
-	if (dmg !=0)
-	{
-		m_damage= *dmg; 
-	}
+	
 
 	clearNetEventMask();
 }
+
+Projectile::Projectile(ProjectileBasicData &data,int id)
+	: GameObject(id)
+{
+	m_damage =0;
+	setSubtype(data.m_subtype);
+	m_timer =0;
+	setLayer(WorldObject::LAYER_AIR);
+	setType("PROJECTILE");
+	setBaseType(PROJECTILE);
+	
+	m_last_hit_object_id =0;
+	m_flags =data.m_flags;
+	setState(STATE_FLYING,false);
+	m_counter =data.m_counter;
+	m_goal_object =0;
+	m_timer_limit = data.m_lifetime;
+	m_implementation = data.m_implementation;
+	getShape()->m_radius = data.m_radius;
+	setAngle(0);
+	
+	if (m_implementation == "fly")
+	{
+		setState(STATE_FLYING,false);
+	}
+	else if (m_implementation == "fly_guided")
+	{
+		setState(STATE_FLYING,false);
+	}
+	else if (m_implementation == "grow")
+	{
+		m_max_radius = data.m_radius;
+		getShape()->m_radius=0;
+		setState(STATE_GROWING,false);
+	}
+	else if (m_implementation == "grow_effect_at_each")
+	{
+		m_max_radius = data.m_radius;
+		getShape()->m_radius=0;
+		setState(STATE_GROWING,false);
+	}
+	else if (m_implementation == "stationary")
+	{
+		setState(STATE_STABLE,false);
+	}
+	else if (m_implementation == "stationary_multi_effect")
+	{
+		setState(STATE_STABLE,false);
+		m_timer_limit /= m_counter;
+	}
+	
+}
+
 
 bool Projectile::update(float time)
 {
@@ -207,7 +254,7 @@ bool Projectile::update(float time)
 						for (i=hitobj.begin();i!=hitobj.end();++i)
 						{
 							// Schaden austeilen
-							(*i)->takeDamage(&m_damage);
+							(*i)->takeDamage(m_damage);
 						}
 
 						if (m_flags & MULTI_EXPLODES)
@@ -220,7 +267,7 @@ bool Projectile::update(float time)
 							
 							// Schaden halbieren
 							Damage dmg;
-							dmg = m_damage;
+							dmg = (*m_damage);
 							for (int i=0;i<4;i++)
 							{
 								dmg.m_multiplier[i] *= 0.5;
@@ -228,28 +275,44 @@ bool Projectile::update(float time)
 
 							// vier neue Projektile erzeugen
 							Projectile* pr;
-							pr = new Projectile(getSubtype(),&dmg);
-							pr->setFlags(Projectile::EXPLODES);
-							pr->setMaxRadius(1);
-							getRegion()->insertProjectile(pr,getPosition() + dir );
+							pr = ObjectFactory::createProjectile(getSubtype());
+							if (pr != 0)
+							{
+								pr->setDamage(&dmg);
+								pr->setFlags(Projectile::EXPLODES);
+								pr->setMaxRadius(1);
+								getRegion()->insertProjectile(pr,getPosition() + dir );
+							}
 							
 							dir.m_x = -dir.m_x;
-							pr = new Projectile(getSubtype(),&dmg);
-							pr->setFlags(Projectile::EXPLODES);
-							pr->setMaxRadius(1);
-							getRegion()->insertProjectile(pr,getPosition() + dir);
+							pr = ObjectFactory::createProjectile(getSubtype());
+							if (pr != 0)
+							{
+								pr->setDamage(&dmg);
+								pr->setFlags(Projectile::EXPLODES);
+								pr->setMaxRadius(1);
+								getRegion()->insertProjectile(pr,getPosition() + dir);
+							}
 
 							dir.m_y = -dir.m_y;
-							pr = new Projectile(getSubtype(),&dmg);
-							pr->setFlags(Projectile::EXPLODES);
-							pr->setMaxRadius(1);
-							getRegion()->insertProjectile(pr,getPosition() + dir);
+							pr = ObjectFactory::createProjectile(getSubtype());
+							if (pr != 0)
+							{
+								pr->setDamage(&dmg);
+								pr->setFlags(Projectile::EXPLODES);
+								pr->setMaxRadius(1);
+								getRegion()->insertProjectile(pr,getPosition() + dir);
+							}
 
 							dir.m_x = -dir.m_x;
-							pr = new Projectile(getSubtype(),&dmg);
-							pr->setFlags(Projectile::EXPLODES);
-							pr->setMaxRadius(1);
-							getRegion()->insertProjectile(pr,getPosition() + dir);
+							pr = ObjectFactory::createProjectile(getSubtype());
+							if (pr != 0)
+							{
+								pr->setDamage(&dmg);
+								pr->setFlags(Projectile::EXPLODES);
+								pr->setMaxRadius(1);
+								getRegion()->insertProjectile(pr,getPosition() + dir);
+							}
 
 						}
 					}
@@ -306,7 +369,7 @@ bool Projectile::update(float time)
 		{
 			// Schaden austeilen
 			hit = (*i);
-			hit->takeDamage(&m_damage);
+			hit->takeDamage(m_damage);
 		}
 	}
 
@@ -509,7 +572,7 @@ void Projectile::handleFlying(float dtime)
 			}
 			if (World::getWorld()->isServer())
 			{
-				hit->takeDamage(&m_damage);
+				hit->takeDamage(m_damage);
 			}
 
 		}
@@ -619,7 +682,7 @@ void Projectile::handleFlying(float dtime)
 
 				// bei Kettenblitz Schaden pro Sprung um 20% reduzieren
 				if (getSubtype() == "CHAIN_LIGHTNING")
-					m_damage.m_multiplier[Damage::AIR] *= 0.8;
+					m_damage->m_multiplier[Damage::AIR] *= 0.8;
 
 			}
 			else
@@ -702,7 +765,7 @@ void Projectile::handleGrowing(float dtime)
 				}
 
 				// Schaden austeilen
-				hit->takeDamage(&m_damage);
+				hit->takeDamage(m_damage);
 				m_last_hit_object_id = hit->getId();
 			}
 		}
@@ -752,7 +815,7 @@ void Projectile::handleStable(float dtime)
 			{
 				// Schaden austeilen
 				hit = (*i);
-				hit->takeDamage(&m_damage);
+				hit->takeDamage(m_damage);
 			}
 
 			// Schaden wird in 5 Wellen austeilt
@@ -774,7 +837,7 @@ void Projectile::handleStable(float dtime)
 			{
 				// Schaden austeilen
 				hit = (*i);
-				hit->takeDamage(&m_damage);
+				hit->takeDamage(m_damage);
 			}
 		}
 
@@ -823,8 +886,12 @@ void Projectile::handleStable(float dtime)
 				DEBUG5("hit obj %i",hit->getId());
 
 				// beim Ziel Projektil vom Typ Blitz erzeugen
-				pr = new Projectile("LIGHTNING",&m_damage, World::getWorld()->getValidId());
-				getRegion()->insertProjectile(pr,hit->getShape()->m_center);
+				pr = ObjectFactory::createProjectile("LIGHTNING");
+				if (pr !=0)
+				{
+					pr->setDamage(m_damage);
+					getRegion()->insertProjectile(pr,hit->getShape()->m_center);
+				}
 			}
 
 			// Gewitter besteht aus 30 Blitzen
@@ -869,7 +936,7 @@ void Projectile::handleStable(float dtime)
 			{
 				// Ziel gefunden, Schaden austeilen
 				m_last_hit_object_id = hit->getId();
-				hit->takeDamage(&m_damage);
+				hit->takeDamage(m_damage);
 			}
 			else
 			{
@@ -893,7 +960,7 @@ void Projectile::toString(CharConv* cv)
 	cv->toBuffer(m_flags);
 	cv->toBuffer(m_max_radius);
 	cv->toBuffer(m_goal_object);
-
+	cv->toBuffer(m_implementation);
 }
 
 void Projectile::fromString(CharConv* cv)
@@ -912,6 +979,7 @@ void Projectile::fromString(CharConv* cv)
 	cv->fromBuffer(m_flags);
 	cv->fromBuffer(m_max_radius);
 	cv->fromBuffer(m_goal_object);
+	cv->fromBuffer(m_implementation);
 }
 
 void Projectile::writeNetEvent(NetEvent* event, CharConv* cv)
@@ -1005,3 +1073,21 @@ void Projectile::getFlags(std::set<std::string>& flags)
 {
 	
 }
+
+void Projectile::setDamage(Damage* dmg)
+{
+	if (m_damage != 0)
+		delete m_damage;
+	
+	if (dmg !=0)
+	{
+		m_damage = new Damage;
+		(*m_damage) = (*dmg); 
+		setFraction(dmg->m_attacker_fraction);
+	}
+	else
+	{
+		m_damage =0;
+	}
+}
+

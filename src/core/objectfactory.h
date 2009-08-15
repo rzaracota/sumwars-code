@@ -6,6 +6,7 @@
 #include <map>
 #include "monsterbase.h"
 #include "playerbase.h"
+#include "projectilebase.h"
 #include "../tinyxml/tinyxml.h"
 #include <string>
 #include <list>
@@ -279,6 +280,13 @@ class ObjectFactory
 	 */
 	static WorldObject* createObject(GameObject::Type type, GameObject::Subtype subtype, int id=0);
 	
+	/**
+	 * \fn static Projectile* createProjectile(GameObject::Subtype subtype, int id=0)
+	 * \brief erzeugt ein Projektil des geforderten Subtypes
+	 * \param subtype Subtype des Objekts
+	 * \param id ID des Objektes. Wenn id==0 wird eine neue ID generiert
+	 */
+	static Projectile* createProjectile(GameObject::Subtype subtype, int id=0);
 	
 	/**
 	 * \fn static GameObject::Subtype getObjectType(ObjectTemplateType generictype, EnvironmentName env)
@@ -302,8 +310,7 @@ class ObjectFactory
 	static MonsterGroup* getMonsterGroup(MonsterGroupName name);
 	
 	/**
-	 * \fn static GameObject::Type getObjectBaseType(GameObject::
-	Subtype subtype)
+	 * \fn static GameObject::Type getObjectBaseType(GameObject::Subtype subtype)
 	 * \brief Gibt den Basistyp des Objekts aus
 	 * \param subtype Subtyp des Objekts
 	 */
@@ -321,6 +328,13 @@ class ObjectFactory
 	 * \param subtype Spielertyp
 	 */
 	static PlayerBasicData* getPlayerData(GameObject::Subtype subtype);
+	
+	/**
+	 * \fn static ProjectileBasicData* getProjectileData(GameObject::Subtype subtype)
+	 * \brief Gibt zu angegebenen Typ die Daten eines Projectils aus
+	 * \param subtype Subtype des Projektils
+	 */
+	static ProjectileBasicData* getProjectileData(GameObject::Subtype subtype);
 	
 	/**
 	 * \fn static registerMonster(GameObject::Subtype subtype, MonsterBasicData* data)
@@ -345,6 +359,14 @@ class ObjectFactory
 	 * \param data Daten des festen Objekts
 	 */
 	static void registerFixedObject(GameObject::Subtype subtype, FixedObjectData* data);
+	
+	/**
+	 * \fn static void registerProjectile(GameObject::Subtype subtype, ProjectileBasicData* data)
+	 * \brief Registriert die Daten fuer ein Projectil
+	 * \param subtype Subtyp des Objektes
+	 * \param data Daten des festen Projectils
+	 */
+	static void registerProjectile(GameObject::Subtype subtype, ProjectileBasicData* data);
 	
 	/**
 	 * \fn static registerObjectTemplate(ObjectTemplateType type, ObjectTemplate* templ)
@@ -404,6 +426,12 @@ class ObjectFactory
 	 * \brief Basisdaten zu den festen Objekten
 	 */
 	static std::map<GameObject::Subtype, FixedObjectData*> m_fixed_object_data;
+	
+	/**
+	 * \var static std::map<GameObject::Subtype, ProjectileBasicData*> m_projectile_data
+	 * \brief Basisdaten zu Geschossen
+	 */
+	static std::map<GameObject::Subtype, ProjectileBasicData*> m_projectile_data;
 	
 	/**
 	 * \var static std::map<GameObject::Subtype, PlayerBasicData*> m_player_data

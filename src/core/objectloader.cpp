@@ -7,9 +7,8 @@
 #include "objectfactory.h"
 #include "objectloader.h"
 #include "graphicmanager.h"
+#include "projectile.h"
 
-
-///// neuer Monsterloader
 
 bool ObjectLoader::loadMonsterData(const char* pFilename)
 {
@@ -427,7 +426,6 @@ bool ObjectLoader::loadPlayer(TiXmlNode* node)
 	return true;
 }
 
-// neuer FixedObject loader
 bool ObjectLoader::loadFixedObjectData(const char* pFilename)
 {
 	TiXmlDocument doc(pFilename);
@@ -516,3 +514,106 @@ bool ObjectLoader::loadFixedObject(TiXmlNode* node)
 	return true;
 }
 
+bool ObjectLoader::loadProjectileData(const char* pFilename)
+{
+	TiXmlDocument doc(pFilename);
+	bool loadOkay = doc.LoadFile();
+
+	if (loadOkay)
+	{
+		loadProjectile(&doc);
+		return true;
+	}
+	else
+	{
+		DEBUG("Failed to load file %s", pFilename);
+		return false;
+	}
+}
+
+
+bool ObjectLoader::loadProjectile(TiXmlNode* node)
+{
+	TiXmlNode* child;
+	if (node->Type()==TiXmlNode::ELEMENT && !strcmp(node->Value(), "Projectile"))
+	{
+		ElementAttrib attr;
+		attr.parseElement(node->ToElement());
+		
+		ProjectileBasicData* data = new ProjectileBasicData;
+		data->m_flags =0;
+		
+		attr.getString("subtype",data->m_subtype);
+		attr.getFloat("radius",data->m_radius,0.1);
+		attr.getFloat("lifetime",data->m_lifetime);
+		attr.getInt("counter",data->m_counter);
+		attr.getString("new_projectile_type",data->m_new_projectile_type);
+		attr.getString("implementation",data->m_implementation);
+		
+		// Schleife ueber die Elemente von Object
+		for ( child = node->FirstChild(); child != 0; child = child->NextSibling())
+		{
+			if (child->Type()==TiXmlNode::ELEMENT)
+			{
+				attr.parseElement(child->ToElement());
+				if (!strcmp(child->Value(), "Mesh"))
+				{
+					std::string mesh;
+					attr.getString("file",mesh);
+					
+					DEBUG5("mesh %s %s",data->m_subtype.c_str(), mesh.c_str());
+					GraphicManager::registerGraphicMapping(data->m_subtype, mesh);
+				}
+				else if (!strcmp(child->Value(), "RenderInfo"))
+				{
+					std::string mesh;
+					attr.getString("name",mesh);
+					
+					DEBUG5("mesh %s %s",data->m_subtype.c_str(), mesh.c_str());
+					GraphicManager::registerGraphicMapping(data->m_subtype, mesh);
+				}
+				else if (!strcmp(child->Value(), "Flag"))
+				{
+					std::string flag;
+					attr.getString("name",flag);
+					if (flag == "explodes")
+					{
+						data->m_flags |= Projectile::EXPLODES;
+					}
+					else if (flag == "multi_explodes")
+					{
+						data->m_flags |= Projectile::MULTI_EXPLODES;
+					}
+					else if (flag == "piercing")
+					{
+						data->m_flags |= Projectile::PIERCING;
+								
+					}
+					else if (flag == "bouncing")
+					{
+						data->m_flags |= Projectile::BOUNCING;
+					}
+					else if (flag == "prob_bouncing")
+					{
+						data->m_flags |= Projectile::PROB_BOUNCING;
+					}
+				}
+				else if (!strcmp(child->Value(), "Effect"))
+				{
+					Action::loadHybridImplementation(child,data->m_effect);
+				}
+			}
+		}
+	
+		ObjectFactory::registerProjectile(data->m_subtype,data);
+	}
+	else
+	{
+		// rekursiv durchmustern
+		for ( child = node->FirstChild(); child != 0; child = child->NextSibling())
+		{
+			loadProjectile(child);
+		}
+	}	
+	return true;
+}

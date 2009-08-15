@@ -1764,7 +1764,7 @@ void Region::createProjectileFromString(CharConv* cv)
 
 	DEBUG5("new projectile %s  id %i",subt.c_str(),id);
 
-	proj = new Projectile(subt,0, id);
+	proj = ObjectFactory::createProjectile(subt,id);
 
 	proj->fromString(cv);
 

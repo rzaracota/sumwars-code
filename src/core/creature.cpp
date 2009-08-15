@@ -863,26 +863,40 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 		}
 		else if (*kt == "proj_at_target")
 		{
-			pr = new Projectile(projtype,&m_damage);
-			pr->addFlags(ainfo->m_projectile_flags);
-			pr->setCounter(ainfo->m_projectile_counter);
-			
-			getRegion()->insertProjectile(pr,goal);
+			pr = ObjectFactory::createProjectile(projtype);
+			if (pr !=0)
+			{
+				pr->setDamage(&m_damage);
+				pr->addFlags(ainfo->m_projectile_flags);
+				pr->setCounter(ainfo->m_projectile_counter);
+				
+				getRegion()->insertProjectile(pr,goal);
+			}
 		}
 		else if (*kt == "proj_fly_at_target")
 		{
-			pr = new Projectile(projtype,&m_damage);
-			pr->addFlags(ainfo->m_projectile_flags);
-			pr->setCounter(ainfo->m_projectile_counter);
-			pr->setSpeed(dir*(ainfo->m_projectile_speed/1000000));
-			
-			getRegion()->insertProjectile(pr,sproj);
+			pr = ObjectFactory::createProjectile(projtype);
+			if (pr !=0)
+			{
+				pr->setDamage(&m_damage);
+				pr->addFlags(ainfo->m_projectile_flags);
+				pr->setCounter(ainfo->m_projectile_counter);
+				pr->setSpeed(dir*(ainfo->m_projectile_speed/1000000));
+				
+				getRegion()->insertProjectile(pr,sproj);
+			}
 		}
 		else if (*kt == "proj_at_self")
 		{
 			
-			
-			getRegion()->insertProjectile(pr,pos);
+			pr = ObjectFactory::createProjectile(projtype);
+			if (pr !=0)
+			{
+				pr->setDamage(&m_damage);
+				pr->addFlags(ainfo->m_projectile_flags);
+				pr->setCounter(ainfo->m_projectile_counter);
+				getRegion()->insertProjectile(pr,pos);
+			}
 		}
 		else if (*kt == "proj_at_enemies_around_target")
 		{
@@ -894,7 +908,8 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 			{
 				if ((*it)->isCreature() && World::getWorld()->getRelation(fr,(*it)) == WorldObject::HOSTILE)
 				{
-					pr = new Projectile(projtype,&m_damage);
+					pr = ObjectFactory::createProjectile(projtype);
+					pr->setDamage(&m_damage);
 					pr->addFlags(ainfo->m_projectile_flags);
 					pr->setCounter(ainfo->m_projectile_counter);
 					
@@ -913,12 +928,16 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 			{
 				if ((*it)->isCreature() && World::getWorld()->getRelation(fr,(*it)) == WorldObject::HOSTILE)
 				{
-					pr = new Projectile(projtype,&m_damage);
-					pr->addFlags(ainfo->m_projectile_flags);
-					pr->setCounter(ainfo->m_projectile_counter);
-					
-					cr = (Creature*) (*it);
-					getRegion()->insertProjectile(pr,cr->getShape()->m_center);
+					pr = ObjectFactory::createProjectile(projtype);
+					if (pr !=0)
+					{
+						pr->setDamage(&m_damage);
+						pr->addFlags(ainfo->m_projectile_flags);
+						pr->setCounter(ainfo->m_projectile_counter);
+						
+						cr = (Creature*) (*it);
+						getRegion()->insertProjectile(pr,cr->getShape()->m_center);
+					}
 				}
 			}
 		}
@@ -954,10 +973,14 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 				dir2.normalize();
 
 				sproj = pos+dir2* 1.05 * s.m_radius;
-				pr = new Projectile(projtype,&m_damage, World::getWorld()->getValidProjectileId());
-				pr->setSpeed(dir2/80);
-				
-				getRegion()->insertProjectile(pr,sproj);
+				pr = ObjectFactory::createProjectile(projtype);
+				if (pr !=0)
+				{
+					pr->setDamage(&m_damage);
+					pr->setSpeed(dir2/80);
+					
+					getRegion()->insertProjectile(pr,sproj);
+				}
 			}
 			
 		}
@@ -973,9 +996,13 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 				dir2.normalize();
 
 				sproj = pos+dir2* 1.05 * s.m_radius;
-				pr = new Projectile(projtype,&m_damage, World::getWorld()->getValidProjectileId());
-				pr->setSpeed(dir2/80);
-				getRegion()->insertProjectile(pr,sproj);
+				pr = ObjectFactory::createProjectile(projtype);
+				if (pr !=0)
+				{
+					pr->setDamage(&m_damage);
+					pr->setSpeed(dir2/80);
+					getRegion()->insertProjectile(pr,sproj);
+				}
 			}
 			
 		}
@@ -3371,10 +3398,13 @@ bool Creature::takeDamage(Damage* d)
 		dmg.m_attacker_fraction = m_fraction;
 		
 		// Projektil Statikschild erzeugen
-		Projectile* pr = new Projectile("STATIC_SHIELD",&dmg);
-
-		pr->getShape()->m_radius =getShape()->m_radius+1;
-		getRegion()->insertProjectile(pr,getShape()->m_center);
+		Projectile* pr = ObjectFactory::createProjectile("STATIC_SHIELD");
+		if (pr !=0)
+		{
+			pr->setDamage(&dmg);
+			pr->getShape()->m_radius =getShape()->m_radius+1;
+			getRegion()->insertProjectile(pr,getShape()->m_center);
+		}
 	}
 	
 	
