@@ -403,11 +403,16 @@ std::string Item::getDescription()
 		
 		std::string type;
 		PlayerBasicData* pdata;
+		bool end = false;
 		do
 		{
 			pos2 = m_char_req.find_first_of(",|",pos);
-			type = m_char_req.substr(pos,pos2);
-			
+			if (pos2 == std::string::npos)
+			{
+				pos2 = m_char_req.length();
+				end = true;
+			}
+			type = m_char_req.substr(pos,pos2-pos);
 			pdata = ObjectFactory::getPlayerData(type);
 			if (pdata != 0)
 			{
@@ -419,7 +424,7 @@ std::string Item::getDescription()
 			out_stream<<gettext(type.c_str());
 			pos = pos2+1;
 		}
-		while (pos2 != std::string::npos);
+		while (!end);
 		
 	}
 
