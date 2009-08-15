@@ -71,6 +71,11 @@ class Projectile : public GameObject
  	*/
 	virtual  bool  update ( float time);
 
+	/**
+	 * \fn void destroy()
+	 * \brief Zerstoert das Geschoss
+	 */
+	void destroy();
 		
 	/**
 	 * \fn void setCounter(short cnt)

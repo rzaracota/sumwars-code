@@ -11,7 +11,7 @@
 	<Effect>
 		<CppImplementation type="proj_at_target" />
 	</Effect>
-	<Projectile type="ACID" />
+	<Projectile type="acid" />
 	<Damage>
 		<LuaImplementation>
 			local willpower = get(self,"willpower");
@@ -128,7 +128,7 @@
 	<Effect>
 		<CppImplementation type="proj_at_enemies_around_target" />
 	</Effect>
-	<Projectile type="LIGHT_BEAM" />
+	<Projectile type="light_beam" />
 	
 	<Damage>
 		<LuaImplementation>
@@ -307,7 +307,7 @@
 	<Effect>
 		<CppImplementation type="proj_at_enemies_around_target" />
 	</Effect>
-	<Projectile type="DIVINE_BEAM"/>
+	<Projectile type="divine_beam"/>
 	<Damage>
 		<LuaImplementation>
 			local willpower = get(self,"willpower");
@@ -331,7 +331,7 @@
 	<Effect>
 		<CppImplementation type="proj_at_target" />
 	</Effect>
-	<Projectile type="DIVINE_BEAM" />
+	<Projectile type="divine_beam" />
 	<Damage>
 		<LuaImplementation>
 			local willpower = get(self,"willpower");
@@ -396,7 +396,7 @@
 	<Effect>
 		<CppImplementation type="proj_at_target" />
 	</Effect>
-	<Projectile type="LIGHT_BEAM" />
+	<Projectile type="light_beam" />
 	<Damage>
 		<LuaImplementation>
 			local willpower = get(self,"willpower");
@@ -424,7 +424,7 @@
 	<Effect>
 		<CppImplementation type="proj_at_target" />
 	</Effect>
-	<Projectile type="LIGHT_BEAM" />
+	<Projectile type="light_beam" />
 	<Damage>
 		<LuaImplementation>
 			local willpower = get(self,"willpower");
@@ -452,7 +452,7 @@
 	<Effect>
 		<CppImplementation type="proj_at_target" />
 	</Effect>
-	<Projectile type="HYPNOSIS" />
+	<Projectile type="hypnosis" />
 	<Damage>
 		<LuaImplementation>
 			local willpower = get(self,"willpower");
@@ -476,7 +476,7 @@
 	<Effect>
 		<CppImplementation type="proj_at_enemies_around_target" />
 	</Effect>
-	<Projectile type="HYPNOSIS" />
+	<Projectile type="hypnosis" />
 	<Damage>
 		<LuaImplementation>
 			local willpower = get(self,"willpower");
@@ -514,14 +514,14 @@
 		 time="701.000000"
 		 timer_nr="1.000000"
 		 timer_value="3000.000000"
-		 base_ability="noaction
-		 " critical_percent="0.660000"
+		 base_ability="noaction"
+		 critical_percent="0.660000"
 		 target_type="ranged">
 	<Flag name="mute_affected" />
 	<Effect>
 		<CppImplementation type="proj_at_target" />
 	</Effect>
-	<Projectile type="LIGHT_BEAM" />
+	<Projectile type="light_beam" />
 	<Damage>
 		<LuaImplementation>
 			local willpower = get(self,"willpower");

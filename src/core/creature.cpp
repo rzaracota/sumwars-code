@@ -704,12 +704,12 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 	Projectile::Subtype projtype = ainfo->m_projectile_type;
 
 	//Faehigkeit Windpfeile
-	if (projtype == "ARROW" && m_base_attr_mod.m_special_flags & WIND_ARROWS)
-		projtype = "WIND_ARROW";
+	if (projtype == "arrow" && m_base_attr_mod.m_special_flags & WIND_ARROWS)
+		projtype = "wind_arrow";
 
 	// Faehigkeit Eispfeile
-	if (projtype == "ARROW" && m_base_attr_mod.m_special_flags & ICE_ARROWS)
-		projtype = "ICE_ARROW";
+	if (projtype == "arrow" && m_base_attr_mod.m_special_flags & ICE_ARROWS)
+		projtype = "ice_arrow";
 	
 		
 	std::list<std::string>::iterator kt;
@@ -868,8 +868,10 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 			{
 				pr->setDamage(&m_damage);
 				pr->addFlags(ainfo->m_projectile_flags);
-				pr->setCounter(ainfo->m_projectile_counter);
-				
+				if (ainfo->m_projectile_counter !=0)
+				{
+					pr->setCounter(ainfo->m_projectile_counter);
+				}
 				getRegion()->insertProjectile(pr,goal);
 			}
 		}
@@ -880,7 +882,10 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 			{
 				pr->setDamage(&m_damage);
 				pr->addFlags(ainfo->m_projectile_flags);
-				pr->setCounter(ainfo->m_projectile_counter);
+				if (ainfo->m_projectile_counter !=0)
+				{
+					pr->setCounter(ainfo->m_projectile_counter);
+				}
 				pr->setSpeed(dir*(ainfo->m_projectile_speed/1000000));
 				
 				getRegion()->insertProjectile(pr,sproj);
@@ -894,7 +899,10 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 			{
 				pr->setDamage(&m_damage);
 				pr->addFlags(ainfo->m_projectile_flags);
-				pr->setCounter(ainfo->m_projectile_counter);
+				if (ainfo->m_projectile_counter !=0)
+				{
+					pr->setCounter(ainfo->m_projectile_counter);
+				}
 				getRegion()->insertProjectile(pr,pos);
 			}
 		}
@@ -911,8 +919,10 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 					pr = ObjectFactory::createProjectile(projtype);
 					pr->setDamage(&m_damage);
 					pr->addFlags(ainfo->m_projectile_flags);
-					pr->setCounter(ainfo->m_projectile_counter);
-					
+					if (ainfo->m_projectile_counter !=0)
+					{
+						pr->setCounter(ainfo->m_projectile_counter);
+					}
 					cr = (Creature*) (*it);
 					getRegion()->insertProjectile(pr,cr->getShape()->m_center);
 				}
@@ -933,8 +943,10 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 					{
 						pr->setDamage(&m_damage);
 						pr->addFlags(ainfo->m_projectile_flags);
-						pr->setCounter(ainfo->m_projectile_counter);
-						
+						if (ainfo->m_projectile_counter !=0)
+						{
+							pr->setCounter(ainfo->m_projectile_counter);
+						}
 						cr = (Creature*) (*it);
 						getRegion()->insertProjectile(pr,cr->getShape()->m_center);
 					}
@@ -3398,7 +3410,7 @@ bool Creature::takeDamage(Damage* d)
 		dmg.m_attacker_fraction = m_fraction;
 		
 		// Projektil Statikschild erzeugen
-		Projectile* pr = ObjectFactory::createProjectile("STATIC_SHIELD");
+		Projectile* pr = ObjectFactory::createProjectile("static_shield");
 		if (pr !=0)
 		{
 			pr->setDamage(&dmg);

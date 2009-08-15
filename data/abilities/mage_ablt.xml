@@ -11,7 +11,7 @@
 	<Effect>
 		<CppImplementation type="proj_at_target" />
 	</Effect>
-	<Projectile type="BLIZZARD"/>
+	<Projectile type="blizzard"/>
 	<Damage>
 		<CppImplementation type="magic_attack" />
 		<CppImplementation type="weapon_damage" />
@@ -33,12 +33,13 @@
 		 timer_value="7000.000000" 
 		 base_ability="magic_attack" 
 		 critical_percent="0.800000" 
-		 target_type="ranged">
+		 target_type="ranged"
+		 >
 	<Flag name="mute_affected" />
 	<Effect>
 		<CppImplementation type="proj_fly_at_target" />
 	</Effect>
-	<Projectile type="CHAIN_LIGHTNING" speed="12000"/>
+	<Projectile type="chain_lightning" speed="12000" counter="5"/>
 	<Damage>
 		<CppImplementation type="magic_attack" />
 		<CppImplementation type="weapon_damage" />
@@ -58,12 +59,13 @@
 		 timer_value="7000.000000" 
 		 base_ability="magic_attack" 
 		 critical_percent="0.800000" 
-		 target_type="ranged">
+		 target_type="ranged"
+		 >
 	<Flag name="mute_affected" />
 	<Effect>
 		<CppImplementation type="proj_fly_at_target" />
 	</Effect>
-	<Projectile type="CHAIN_LIGHTNING" speed="12000"/>
+	<Projectile type="chain_lightning" speed="12000" counter="9"/>
 	<Damage>
 		<CppImplementation type="magic_attack" />
 		<CppImplementation type="weapon_damage" />
@@ -98,7 +100,7 @@
 	<Effect>
 		<CppImplementation type="proj_fly_at_target" />
 	</Effect>
-	<Projectile type="FIRE_BALL" speed="12000" />
+	<Projectile type="fire_ball" speed="12000" />
 	<Damage>
 		<CppImplementation type="magic_attack" />
 		<CppImplementation type="weapon_damage" />
@@ -124,7 +126,7 @@
 	<Effect>
 		<CppImplementation type="proj_fly_at_target" />
 	</Effect>
-	<Projectile type="FIRE_BOLT" speed="12000" />
+	<Projectile type="fire_bolt" speed="12000" />
 	<Damage>
 		<CppImplementation type="magic_attack" />
 		<CppImplementation type="weapon_damage" />
@@ -150,7 +152,7 @@
 	<Effect>
 		<CppImplementation type="proj_at_self" />
 	</Effect>
-	<Projectile type="FIRE_WAVE" />
+	<Projectile type="fire_wave" />
 	<Damage>
 		<CppImplementation type="magic_attack" />
 		<CppImplementation type="weapon_damage" />
@@ -176,7 +178,7 @@
 	<Effect>
 		<CppImplementation type="proj_fly_at_target" />
 	</Effect>
-	<Projectile type="FIRE_BOLT" speed="12000" />
+	<Projectile type="fire_bolt" speed="12000" />
 	<Damage>
 		<CppImplementation type="magic_attack" />
 		<CppImplementation type="weapon_damage" />
@@ -202,7 +204,7 @@
 	<Effect>
 		<CppImplementation type="proj_at_target" />
 	</Effect>
-	<Projectile type="FIRE_WAVE" />
+	<Projectile type="fire_wall" />
 	<Damage>
 		<CppImplementation type="magic_attack" />
 		<CppImplementation type="weapon_damage" />
@@ -228,7 +230,7 @@
 	<Effect>
 		<CppImplementation type="proj_at_self" />
 	</Effect>
-	<Projectile type="FIRE_WAVE" />
+	<Projectile type="fire_wave" />
 	<Damage>
 		<CppImplementation type="magic_attack" />
 		<CppImplementation type="weapon_damage" />
@@ -254,7 +256,7 @@
 	<Effect>
 		<CppImplementation type="proj_at_target" />
 	</Effect>
-	<Projectile type="FREEZE" />
+	<Projectile type="freeze" />
 	<Damage>
 		<CppImplementation type="magic_attack" />
 		<CppImplementation type="weapon_damage" />
@@ -279,7 +281,7 @@
 	<Effect>
 		<CppImplementation type="proj_at_self" />
 	</Effect>
-	<Projectile type="ICE_RING" />
+	<Projectile type="ice_ring" />
 	<Damage>
 		<CppImplementation type="magic_attack" />
 		<CppImplementation type="weapon_damage" />
@@ -305,7 +307,7 @@
 	<Effect>
 		<CppImplementation type="proj_fly_at_target" />
 	</Effect>
-	<Projectile type="ICE_BOLT" speed="12000" />
+	<Projectile type="ice_bolt" speed="12000" />
 	<Damage>
 		<CppImplementation type="magic_attack" />
 		<CppImplementation type="weapon_damage" />
@@ -331,7 +333,7 @@
 	<Effect>
 		<CppImplementation type="proj_at_self" />
 	</Effect>
-	<Projectile type="ICE_RING" />
+	<Projectile type="ice_ring" />
 	<Damage>
 		<CppImplementation type="magic_attack" />
 		<CppImplementation type="weapon_damage" />
@@ -357,7 +359,7 @@
 	<Effect>
 		<CppImplementation type="proj_fly_at_target" />
 	</Effect>
-	<Projectile type="ICE_BOLT" speed="12000" />
+	<Projectile type="ice_bolt" speed="12000" />
 	<Damage>
 		<CppImplementation type="magic_attack" />
 		<CppImplementation type="weapon_damage" />
@@ -383,7 +385,7 @@
 	<Effect>
 		<CppImplementation type="proj_fly_at_target" />
 	</Effect>
-	<Projectile type="FIRE_BALL" speed="12000" />
+	<Projectile type="fire_ball" speed="12000" />
 	<Damage>
 		<CppImplementation type="magic_attack" />
 		<CppImplementation type="weapon_damage" />
@@ -428,7 +430,7 @@
 	<Effect>
 		<CppImplementation type="proj_at_target" />
 	</Effect>
-	<Projectile type="LIGHTNING" />
+	<Projectile type="lightning" />
 	
 	<Damage>
 		<CppImplementation type="magic_attack" />
@@ -454,7 +456,7 @@
 	<Effect>
 		<CppImplementation type="proj_at_target" />
 	</Effect>
-	<Projectile type="LIGHTNING" />
+	<Projectile type="lightning" />
 	<Damage>
 		<CppImplementation type="magic_attack" />
 		<CppImplementation type="weapon_damage" />
@@ -479,7 +481,7 @@
 	<Effect>
 		<CppImplementation type="proj_at_target" />
 	</Effect>
-	<Projectile type="BLIZZARD" />
+	<Projectile type="blizzard" />
 	<Damage>
 		<CppImplementation type="magic_attack" />
 		<CppImplementation type="weapon_damage" />
@@ -525,7 +527,7 @@
 	<Effect>
 		<CppImplementation type="proj_at_target" />
 	</Effect>
-	<Projectile type="THUNDERSTORM" />
+	<Projectile type="thunderstorm" />
 	<Damage>
 		<CppImplementation type="magic_attack" />
 		<CppImplementation type="weapon_damage" />
@@ -550,7 +552,7 @@
 	<Effect>
 		<CppImplementation type="proj_at_target" />
 	</Effect>
-	<Projectile type="THUNDERSTORM" />
+	<Projectile type="thunderstorm" />
 	<Damage>
 		<CppImplementation type="magic_attack" />
 		<CppImplementation type="weapon_damage" />

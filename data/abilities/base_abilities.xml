@@ -113,7 +113,7 @@
 	<Effect>
 		<CppImplementation type="proj_fly_at_target" />
 	</Effect>
-	<Projectile type="MAGIC_ARROW" speed="12000" />
+	<Projectile type="magic_arrow" speed="12000" />
 	<Damage>
 		<CppImplementation type="magic_attack" />
 		<CppImplementation type="weapon_damage" />
@@ -132,7 +132,7 @@
 	<Effect>
 		<CppImplementation type="proj_fly_at_target" />
 	</Effect>
-	<Projectile type="ARROW" speed="12000" />
+	<Projectile type="arrow" speed="12000" />
 	<Damage>
 		<CppImplementation type="range_attack" />
 		<CppImplementation type="weapon_damage" />

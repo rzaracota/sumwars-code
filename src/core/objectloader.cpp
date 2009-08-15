@@ -550,6 +550,8 @@ bool ObjectLoader::loadProjectile(TiXmlNode* node)
 		attr.getString("new_projectile_type",data->m_new_projectile_type);
 		attr.getString("implementation",data->m_implementation);
 		
+		DEBUG5("type %s counter %i data %p",data->m_subtype.c_str(), data->m_counter,data);
+		
 		// Schleife ueber die Elemente von Object
 		for ( child = node->FirstChild(); child != 0; child = child->NextSibling())
 		{

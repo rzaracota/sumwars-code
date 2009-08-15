@@ -1,7 +1,7 @@
 #include "projectile.h"
 #include "world.h"
 #include "objectfactory.h"
-
+#include "creature.h"
 
 
 Projectile::Projectile(Subtype subtype,  int id)
@@ -189,13 +189,13 @@ Projectile::Projectile(ProjectileBasicData &data,int id)
 		setState(STATE_STABLE,false);
 		m_timer_limit /= m_counter;
 	}
-	
+	clearNetEventMask();
+	DEBUG5("type %s flags %i",getSubtype().c_str(), m_flags);
 }
 
 
 bool Projectile::update(float time)
 {
-
 	// Zeit die beim aktuellen Durchlauf der Schleife verbraucht wird
 	float dtime;
 	// true, wenn Timer die Grenze erreicht
@@ -203,7 +203,6 @@ bool Projectile::update(float time)
 	// Liste der getroffenen Objekte
 	WorldObjectList hitobj;
 	WorldObjectList::iterator i;
-	WorldObject* hit;
 
 	while (time>0.1)
 	{
@@ -236,7 +235,7 @@ bool Projectile::update(float time)
 				break;
 
 			case STATE_EXPLODING:
-				DEBUG5("exploding");
+				DEBUG("exploding");
 				// Radius vergroessern
 				getShape()->m_radius += (m_max_radius)*dtime/(m_timer_limit);
 
@@ -248,14 +247,7 @@ bool Projectile::update(float time)
 					if (World::getWorld()->isServer())
 					{
 
-						// Alle Objekte im Explosionsradius suchen
-						hitobj.clear();
-						getRegion()->getObjectsInShape(getShape(),&hitobj,getLayer(),WorldObject::CREATURE,0);
-						for (i=hitobj.begin();i!=hitobj.end();++i)
-						{
-							// Schaden austeilen
-							(*i)->takeDamage(m_damage);
-						}
+						doEffect();
 
 						if (m_flags & MULTI_EXPLODES)
 						{
@@ -279,7 +271,6 @@ bool Projectile::update(float time)
 							if (pr != 0)
 							{
 								pr->setDamage(&dmg);
-								pr->setFlags(Projectile::EXPLODES);
 								pr->setMaxRadius(1);
 								getRegion()->insertProjectile(pr,getPosition() + dir );
 							}
@@ -289,7 +280,6 @@ bool Projectile::update(float time)
 							if (pr != 0)
 							{
 								pr->setDamage(&dmg);
-								pr->setFlags(Projectile::EXPLODES);
 								pr->setMaxRadius(1);
 								getRegion()->insertProjectile(pr,getPosition() + dir);
 							}
@@ -299,7 +289,6 @@ bool Projectile::update(float time)
 							if (pr != 0)
 							{
 								pr->setDamage(&dmg);
-								pr->setFlags(Projectile::EXPLODES);
 								pr->setMaxRadius(1);
 								getRegion()->insertProjectile(pr,getPosition() + dir);
 							}
@@ -309,7 +298,6 @@ bool Projectile::update(float time)
 							if (pr != 0)
 							{
 								pr->setDamage(&dmg);
-								pr->setFlags(Projectile::EXPLODES);
 								pr->setMaxRadius(1);
 								getRegion()->insertProjectile(pr,getPosition() + dir);
 							}
@@ -337,39 +325,11 @@ bool Projectile::update(float time)
 				time =0;
 				break;
 
-			case STATE_VANISHING:
-				// Status verschwindend
-				if (getSubtype() == "FIRE_WALL")
-				{
-					// Radius reduzieren
-					getShape()->m_radius -= 2* dtime/(m_timer_limit);
-				}
-				if (m_timer >= m_timer_limit)
-				{
-					setState(STATE_DESTROYED);
-				}
-
-
 
 			default:
 				time =0;
 				break;
 
-		}
-	}
-
-	if (getSubtype() == "FIRE_WALL" && World::getWorld()->timerLimit(1))
-	{
-		// Typ Feuersaeule
-
-
-		// Objekte suchen die die Saeule beruehren
-		getRegion()->getObjectsInShape(getShape(),&hitobj,getLayer(),WorldObject::CREATURE,0);
-		for (i=hitobj.begin();i!=hitobj.end();++i)
-		{
-			// Schaden austeilen
-			hit = (*i);
-			hit->takeDamage(m_damage);
 		}
 	}
 
@@ -391,7 +351,7 @@ void Projectile::handleFlying(float dtime)
 	
 	Vector speed = getSpeed();
 
-	if (getSubtype() == "GUIDED_ARROW")
+	if (m_implementation == "fly_guided")
 	{
 		// Lenkpfeil
 
@@ -549,55 +509,27 @@ void Projectile::handleFlying(float dtime)
 		DEBUG5("hit object");
 		i = hitobj.begin();
 		hit = (*i);
+		
+		if (World::getWorld()->isServer())
+		{
+			doEffect(hit);
+		}
+		
 		//DEBUG("hit object %p",hit);
 
 		//DEBUG("hit object %i at %f %f",hit->getId(),hit->getGeometry()->m_shape.m_coordinate_x,hit->getGeometry()->m_shape.m_coordinate_y);
-		if (!(m_flags & (EXPLODES | MULTI_EXPLODES) ))
+		
+		if (m_flags & PIERCING)
 		{
-			// erstem getroffenen Objekt Schaden zufuegen
-
-			DEBUG5("deal damage %p",hit);
-			DEBUG5("deal damage to %i",(*i)->getId());
-			if (m_flags & PIERCING)
-			{
-				// Projektil fliegt weiter
-				m_last_hit_object_id = hit->getId();
-			}
-			else
-			{
-				// Projektil wird zerstoert
-				DEBUG5("hit obj %i",hit->getId());
-				setState(STATE_DESTROYED);
-				m_timer=0;
-			}
-			if (World::getWorld()->isServer())
-			{
-				hit->takeDamage(m_damage);
-			}
-
+			// Projektil fliegt weiter
+			m_last_hit_object_id = hit->getId();
 		}
 		else
 		{
-			// Projektil explodiert
-			// Status auf explodierend setzen, Radius, Timer setzen
-			DEBUG5("exploding");
-			 setState(STATE_EXPLODING);
-			 
-			if (getSubtype() == "FIRE_BALL" || getSubtype() == "FIRE_ARROW")
-				setSubtype("FIRE_EXPLOSION");
-			else if (getSubtype() == "ICE_ARROW")
-				setSubtype("ICE_EXPLOSION");
-			else if (getSubtype() == "WIND_ARROW")
-				setSubtype("WIND_EXPLOSION");
-			else
-				setSubtype("EXPLOSION");
-
-			m_max_radius = 1.5;
-
+			// Projektil wird zerstoert
+			DEBUG5("hit obj %i",hit->getId());
+			destroy();
 			m_timer=0;
-			setTimerLimit(200);
-
-			addToNetEventMask(NetEvent::DATA_MAX_RADIUS);
 		}
 
 		// true, wenn das Projektil zu einem weiteren Ziel weiterspringt
@@ -617,6 +549,7 @@ void Projectile::handleFlying(float dtime)
 
 		if (hit->isCreature() && bounce)
 		{
+			DEBUG5("bouncing");
 			Vector speed = getSpeed();
 			// Projektil hat ein Lebewesen getroffen, springt weiter
 			setState(STATE_FLYING);
@@ -680,9 +613,12 @@ void Projectile::handleFlying(float dtime)
 				DEBUG5("dir %f %f",dir.m_x,dir.m_y);
 				m_timer =0;
 
-				// bei Kettenblitz Schaden pro Sprung um 20% reduzieren
-				if (getSubtype() == "CHAIN_LIGHTNING")
-					m_damage->m_multiplier[Damage::AIR] *= 0.8;
+				// Schaden pro Sprung um 20% reduzieren
+				if (m_flags & BOUNCING)
+				{
+					for (int i=0; i<4; i++)
+						m_damage->m_multiplier[i] *= 0.8;
+				}
 
 			}
 			else
@@ -691,9 +627,9 @@ void Projectile::handleFlying(float dtime)
 				setState(STATE_DESTROYED);
 			}
 
-			// Zaehler, bei 5 Spruengen Projektil zerstoeren
-			m_counter ++;
-			if (m_counter>=5)
+			// Zaehler,nach hinreichend vielen Spruengen Projektil zerstoeren
+			m_counter --;
+			if (m_counter <= 0)
 			{
 				setState(STATE_DESTROYED);
 			}
@@ -719,7 +655,7 @@ void Projectile::handleGrowing(float dtime)
 	// Radius erhoehen
 	getShape()->m_radius += m_max_radius* dtime/(m_timer_limit);
 
-	if ((getSubtype() == "FIRE_WAVE" || getSubtype() == "ICE_RING") && World::getWorld()->isServer())
+	if (World::getWorld()->isServer())
 	{
 		// Schaden an die neu getroffenen Lebewesen austeilen
 		rnew = getShape()->m_radius;
@@ -765,26 +701,15 @@ void Projectile::handleGrowing(float dtime)
 				}
 
 				// Schaden austeilen
-				hit->takeDamage(m_damage);
-				m_last_hit_object_id = hit->getId();
+				doEffect(hit);
 			}
 		}
 	}
 
 	if (m_timer >= m_timer_limit)
 	{
-		// Timer abgelaufen
-
 		// Standardverhalten Projektil zerstoeren
-		setState(STATE_DESTROYED);
-
-		if (getSubtype() == "FIRE_WALL")
-		{
-			// fuer Feuersaeule: Uebergang in stabilen Zustand
-			m_timer =0;
-			setTimerLimit(5000);
-			setState(STATE_STABLE);
-		}
+		destroy();
 	}
 
 }
@@ -792,61 +717,103 @@ void Projectile::handleGrowing(float dtime)
 void Projectile::handleStable(float dtime)
 {
 
-	WorldObjectList hitobj;
-	WorldObjectList::iterator i;
-	WorldObject* hit;
-
-	// aktuelle Position
-	Vector pos= getPosition();
-	Vector dir;
-	Projectile* pr;
-
 	if (m_timer >= m_timer_limit && World::getWorld()->isServer())
 	{
 		// Timer Limit erreicht
-		setState(STATE_DESTROYED);
-
-		if (getSubtype() == "BLIZZARD")
+		
+		doEffect();
+		
+		// Schaden wird in Wellen austeilt
+		m_counter --;
+		if (m_counter >0)
 		{
-
-			// Alle Objekte in der Flaeche suchen
-			getRegion()->getObjectsInShape(getShape(),&hitobj,getLayer(),WorldObject::CREATURE,0);
-			for (i=hitobj.begin();i!=hitobj.end();++i)
-			{
-				// Schaden austeilen
-				hit = (*i);
-				hit->takeDamage(m_damage);
-			}
-
-			// Schaden wird in 5 Wellen austeilt
-			if (m_counter <5)
-			{
 				// naechste Welle: Timer zuruecksetzen, Zaehler erhoehen
-				m_counter ++;
-				m_timer =0;
-				setState(STATE_STABLE);
+			m_timer =0;
+		}
+		else
+		{
+			destroy();
+		}
+	}
+}
 
+
+void Projectile::doEffect(GameObject* target)
+{
+	ProjectileBasicData* pdata = ObjectFactory::getProjectileData(getSubtype());
+	if (pdata ==0)
+		return;
+	
+	std::list<std::string>::iterator kt;
+	for (kt = pdata->m_effect.m_cpp_impl.begin(); kt !=  pdata->m_effect.m_cpp_impl.end(); ++kt)
+	{
+		if (*kt == "dmg_at_target")
+		{
+			// Wenn bisher kein Ziel angegeben, wird eines im Bereich des Projektils gesucht
+			if (target ==0)
+			{
+				
+				WorldObjectList hitobj;
+				WorldObjectList::iterator i;
+			
+				getRegion()->getObjectsInShape(getShape(),&hitobj,getLayer(),WorldObject::CREATURE,0);
+				
+				WorldObject* hit =0;
+				if (!hitobj.empty())
+				{
+					hit = hitobj.front();
+				}
+				
+				while (!hitobj.empty() && (World::getWorld()->getRelation(getFraction(),hit->getFraction()) == WorldObject:: ALLIED ))
+				{
+					i=hitobj.erase(i);
+					if (i!=hitobj.end())
+						hit=(*i);
+				}
+				
+				target = hit;
+			}
+			
+			Creature* ctarget = dynamic_cast<Creature*>(target);
+			if (ctarget != 0)
+			{
+				ctarget->takeDamage(m_damage);
+				m_last_hit_object_id = ctarget->getId();
 			}
 		}
-
-		if (getSubtype() == "FREEZE" || getSubtype() == "STATIC_SHIELD")
+		else if (*kt == "dmg_at_enemies_in_radius")
 		{
-			// Alle Objekte in der Flaeche suchen
+			WorldObjectList hitobj;
+			WorldObjectList::iterator i;
+			
 			getRegion()->getObjectsInShape(getShape(),&hitobj,getLayer(),WorldObject::CREATURE,0);
 			for (i=hitobj.begin();i!=hitobj.end();++i)
 			{
-				// Schaden austeilen
-				hit = (*i);
-				hit->takeDamage(m_damage);
+							// Schaden austeilen
+				(*i)->takeDamage(m_damage);
 			}
 		}
-
-		if (getSubtype() ==  "THUNDERSTORM")
+		else if (*kt == "create_projectile")
 		{
+			Projectile* pr = ObjectFactory::createProjectile(pdata->m_new_projectile_type);
+			if (pr !=0)
+			{
+				pr->setDamage(m_damage);
+				pr->setSpeed(getSpeed());
+ 				getRegion()->insertProjectile(pr,getShape()->m_center);
+			}
+		}
+		else if (*kt == "thunderstorm")
+		{
+			WorldObjectList hitobj;
+			WorldObjectList::iterator i;
+			WorldObject* hit;
+			
 			float r = getShape()->m_radius;
 			// Punkt in der Flaeche des Zaubers auswuerfeln
-			dir = Vector(r, r);
-
+			Vector dir = Vector(r, r);
+			Vector pos = getShape()->m_center;
+			
 			while (dir.getLength() > r)
 			{
 				dir.m_x = r*(1 - 2*rand()*1.0/RAND_MAX);
@@ -885,68 +852,102 @@ void Projectile::handleStable(float dtime)
 
 				DEBUG5("hit obj %i",hit->getId());
 
-				// beim Ziel Projektil vom Typ Blitz erzeugen
-				pr = ObjectFactory::createProjectile("LIGHTNING");
+				// beim Ziel neues Projektil erzeugen
+				Projectile* pr = ObjectFactory::createProjectile(pdata->m_new_projectile_type);
 				if (pr !=0)
 				{
 					pr->setDamage(m_damage);
 					getRegion()->insertProjectile(pr,hit->getShape()->m_center);
 				}
 			}
+		}
+	}
+	
+	
+	
+}
 
-			// Gewitter besteht aus 30 Blitzen
-			if (m_counter <30)
+void Projectile::destroy()
+{
+	
+	setState(STATE_DESTROYED);
+	
+	ProjectileBasicData* pdata = ObjectFactory::getProjectileData(getSubtype());
+	if (pdata ==0)
+		return;
+	
+	if (m_flags & EXPLODES)
+	{
+		Projectile* pr = ObjectFactory::createProjectile(pdata->m_new_projectile_type);
+		if (pr !=0)
+		{
+			pr->setDamage(m_damage);
+			getRegion()->insertProjectile(pr,getShape()->m_center);
+			pr->setSpeed(getSpeed());
+			
+			if (m_flags & MULTI_EXPLODES)
 			{
-				// naechster Blitz: Timer zuruecksetzen
-				m_counter ++;
-				m_timer =0;
-				setState(STATE_STABLE);
-
+				pr->addFlags(MULTI_EXPLODES);
 			}
-
+		}
+	}
+	else if (m_flags & MULTI_EXPLODES)
+	{
+							// Flag mehrfach explodierend gesetzt
+		DEBUG5("multiexploding");
+		Vector dir = getSpeed();
+		dir.normalize();
+		dir *= getShape()->m_radius;
+							
+							// Schaden halbieren
+		Damage dmg;
+		dmg = (*m_damage);
+		for (int i=0;i<4;i++)
+		{
+			dmg.m_multiplier[i] *= 0.5;
 		}
 
-		if (getSubtype() == "FIRE_WALL")
+							// vier neue Projektile erzeugen
+		Projectile* pr;
+		pr = ObjectFactory::createProjectile(getSubtype());
+		if (pr != 0)
 		{
-			// Zauber Feuersaeule
-			// Uebergang zum Zustand verschwindend
-			m_timer =0;
-			setTimerLimit(200);
-			setState(STATE_VANISHING);
+			pr->setDamage(&dmg);
+			pr->setMaxRadius(1);
+			getRegion()->insertProjectile(pr,getPosition() + dir );
+		}
+							
+		dir.m_x = -dir.m_x;
+		pr = ObjectFactory::createProjectile(getSubtype());
+		if (pr != 0)
+		{
+			pr->setDamage(&dmg);
+			pr->setMaxRadius(1);
+			getRegion()->insertProjectile(pr,getPosition() + dir);
 		}
 
-		if (getSubtype() == "LIGHTNING" || getSubtype() =="LIGHT_BEAM"  || getSubtype() =="ELEM_EXPLOSION" || getSubtype() =="ACID" || getSubtype() =="DIVINE_BEAM"  || getSubtype() =="HYPNOSIS")
+		dir.m_y = -dir.m_y;
+		pr = ObjectFactory::createProjectile(getSubtype());
+		if (pr != 0)
 		{
-			// Objekt an der Stelle suchen an der der Zauber wirkt
-			Shape s;
-			s.m_center = pos;
-			s.m_type = Shape::CIRCLE;
-			s.m_radius = 0.5;
-			WorldObjectList hits;
-			getRegion()->getObjectsInShape( &s,&hits, getLayer() );
-			if (!hits.empty())
-			{
-				hit = hits.front();
-			}
-			else
-			{
-				hit =0;
-			}
-			if (hit !=0)
-			{
-				// Ziel gefunden, Schaden austeilen
-				m_last_hit_object_id = hit->getId();
-				hit->takeDamage(m_damage);
-			}
-			else
-			{
-				DEBUG("hit nothing");
-			}
+			pr->setDamage(&dmg);
+			pr->setMaxRadius(1);
+			getRegion()->insertProjectile(pr,getPosition() + dir);
+		}
+
+		dir.m_x = -dir.m_x;
+		pr = ObjectFactory::createProjectile(getSubtype());
+		if (pr != 0)
+		{
+			pr->setDamage(&dmg);
+			pr->setMaxRadius(1);
+			getRegion()->insertProjectile(pr,getPosition() + dir);
 		}
 
 	}
+	
+	
 }
-
 
 void Projectile::toString(CharConv* cv)
 {
@@ -1054,14 +1055,10 @@ std::string Projectile::getActionString()
 	{
 		case STATE_FLYING: 
 			return "fly"; break;
-		case STATE_EXPLODING: 
-			return "explode"; break;
 		case STATE_GROWING: 
 			return "grow"; break;
 		case STATE_STABLE: 
 			return "stable"; break;
-		case STATE_VANISHING: 
-			return "shrink"; break;
 			
 		default:
 			return "noaction"; break;

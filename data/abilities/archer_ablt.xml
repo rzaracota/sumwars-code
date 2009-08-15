@@ -29,7 +29,7 @@
 	<Effect>
 		<CppImplementation type="proj_fly_at_target" />
 	</Effect>
-	<Projectile type="ARROW" speed="12000" />
+	<Projectile type="arrow" speed="12000" />
 	<Damage>
 		<CppImplementation type="range_attack" />
 		<CppImplementation type="weapon_damage" />
@@ -93,7 +93,7 @@
 	<Effect>
 		<CppImplementation type="proj_fly_at_target" />
 	</Effect>
-	<Projectile type="ARROW" speed="12000" >
+	<Projectile type="arrow" speed="12000" >
 		<Flag name="prob_bouncing" />
 	</Projectile>
 	<Damage>
@@ -127,7 +127,7 @@
 	<Effect>
 		<CppImplementation type="proj_fly_at_target" />
 	</Effect>
-	<Projectile type="ARROW" speed="12000" >
+	<Projectile type="arrow" speed="12000" >
 		<Flag name="explodes" />
 	</Projectile>
 	<Damage>
@@ -152,7 +152,8 @@
 	<Effect>
 		<CppImplementation type="proj_fly_at_target" />
 	</Effect>
-	<Projectile type="ARROW" speed="12000" >
+	<Projectile type="arrow" speed="12000" >
+		<Flag name="explodes" />
 		<Flag name="multi_explodes" />
 	</Projectile>
 	<Damage>
@@ -197,7 +198,7 @@
 	<Effect>
 		<CppImplementation type="proj_fly_at_target" />
 	</Effect>
-	<Projectile type="GUIDED_ARROW" speed="12000" />
+	<Projectile type="guided_arrow" speed="12000" />
 	<Damage>
 		<CppImplementation type="range_attack" />
 		<CppImplementation type="weapon_damage" />
@@ -246,7 +247,7 @@
 	<Effect>
 		<CppImplementation type="multishot" />
 	</Effect>
-	<Projectile type="ARROW" speed="12000" />
+	<Projectile type="arrow" speed="12000" />
 	<Damage>
 		<CppImplementation type="range_attack" />
 		<CppImplementation type="weapon_damage" />
@@ -268,7 +269,7 @@
 	<Effect>
 		<CppImplementation type="proj_fly_at_target" />
 	</Effect>
-	<Projectile type="ARROW" speed="12000" >
+	<Projectile type="arrow" speed="12000" >
 		<Flag name="piercing" />
 	</Projectile>
 	<Damage>
@@ -332,7 +333,7 @@
 	<Effect>
 		<CppImplementation type="proj_fly_at_target" />
 	</Effect>
-	<Projectile type="ARROW" speed="12000" />
+	<Projectile type="arrow" speed="12000" />
 	<Damage>
 		<CppImplementation type="range_attack" />
 		<CppImplementation type="weapon_damage" />
@@ -349,7 +350,7 @@
 	<Effect>
 		<CppImplementation type="proj_fly_at_target" />
 	</Effect>
-	<Projectile type="WIND_ARROW" speed="12000" />
+	<Projectile type="wind_arrow" speed="12000" />
 	<Damage>
 		<CppImplementation type="range_attack" />
 		<CppImplementation type="weapon_damage" />
@@ -375,7 +376,7 @@
 	<Effect>
 		<CppImplementation type="volley_shot" />
 	</Effect>
-	<Projectile type="ARROW" speed="12000" />
+	<Projectile type="arrow" speed="12000" />
 	<Damage>
 		<CppImplementation type="range_attack" />
 		<CppImplementation type="weapon_damage" />
@@ -394,7 +395,7 @@
 	<Effect>
 		<CppImplementation type="proj_fly_at_target" />
 	</Effect>
-	<Projectile type="ARROW" speed="12000" />
+	<Projectile type="arrow" speed="12000" />
 	<Damage>
 		<CppImplementation type="range_attack" />
 		<CppImplementation type="weapon_damage" />

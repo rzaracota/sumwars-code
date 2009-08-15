@@ -136,35 +136,6 @@ Scene::~Scene()
 void Scene::registerMeshes()
 {
 	// Meshes fuer Objekte registrieren
-	GraphicManager::registerGraphicMapping("ARROW","arrow");
-	GraphicManager::registerGraphicMapping("MAGIC_ARROW","magic_arrow");
-	GraphicManager::registerGraphicMapping("FIRE_BOLT","fire_bolt");
-	GraphicManager::registerGraphicMapping("FIRE_BALL","fire_ball");
-	GraphicManager::registerGraphicMapping("FIRE_WALL","fire_wall");
-	GraphicManager::registerGraphicMapping("FIRE_WAVE","fire_wave");
-	GraphicManager::registerGraphicMapping("ICE_BOLT","ice_bolt");
-	GraphicManager::registerGraphicMapping("BLIZZARD","blizzard");
-	GraphicManager::registerGraphicMapping("ICE_RING","ice_ring");
-	GraphicManager::registerGraphicMapping("FREEZE","freeze");
-	GraphicManager::registerGraphicMapping("LIGHTNING","lightning");
-	GraphicManager::registerGraphicMapping("THUNDERSTORM","thunderstorm");
-	GraphicManager::registerGraphicMapping("CHAIN_LIGHTNING","chain_lightning");
-	GraphicManager::registerGraphicMapping("STATIC_SHIELD","static_field");
-	GraphicManager::registerGraphicMapping("FIRE_ARROW","fire_arrow");
-	GraphicManager::registerGraphicMapping("ICE_ARROW" ,"ice_arrow");
-	GraphicManager::registerGraphicMapping("WIND_ARROW","wind_arrow");
-	GraphicManager::registerGraphicMapping("GUIDED_ARROW","guided_arrow");
-	GraphicManager::registerGraphicMapping("EXPLOSION","explosion");
-	GraphicManager::registerGraphicMapping("FIRE_EXPLOSION","fire_explosion");
-	GraphicManager::registerGraphicMapping("ICE_EXPLOSION","ice_explosion");
-	GraphicManager::registerGraphicMapping("WIND_EXPLOSION","wind_explosion");
-	GraphicManager::registerGraphicMapping("LIGHT_BEAM","light_beam");
-	GraphicManager::registerGraphicMapping("ELEM_EXPLOSION","elem_explosion");
-	GraphicManager::registerGraphicMapping("ACID","acid");
-	GraphicManager::registerGraphicMapping("DIVINE_BEAM","divine_beam");
-	GraphicManager::registerGraphicMapping("HYPNOSIS","hypnosis");
-
-	
 	GraphicManager::registerGraphicMapping("gold","gold.mesh");
 
 }
