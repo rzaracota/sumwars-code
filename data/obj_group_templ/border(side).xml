@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ObjectGroupTemplate name="border(side)" version="1.0">
+  <Shape
+    type="RECT"
+    extent_x="4"
+    extent_y="4"
+    angle="0"
+  />
+
+  <WayPoint pos_x="0" pos_y="0" />
+
+  <ObjectContent>
+    <Object subtype="$flower" 
+            center_x="1.525257198" 
+            center_y="-2.099183613" 
+                        height="8.881784197e-016" 
+            angle="0" 
+            probability="0.7" 
+            prob_angle="true" 
+    />
+    <Object subtype="$flower" 
+            center_x="-3.316986702" 
+            center_y="2.526306749" 
+            angle="0" 
+            probability="0.7" 
+            prob_angle="true" 
+    />
+    <Object subtype="$flower" 
+            center_x="-1.749813487" 
+            center_y="-0.3856507703" 
+            angle="0" 
+            probability="0.7" 
+            prob_angle="true" 
+    />
+    <Object subtype="$flower" 
+            center_x="-2.049856745" 
+            center_y="0.3498532597" 
+                        height="8.881784197e-016" 
+            angle="0" 
+            probability="0.7" 
+            prob_angle="true" 
+    />
+    <Object subtype="$flower" 
+            center_x="-2.701535429" 
+            center_y="-1.074944195" 
+                        height="1.776356839e-015" 
+            angle="0" 
+            probability="0.7" 
+            prob_angle="true" 
+    />
+    <Object subtype="$flower" 
+            center_x="-0.2801391738" 
+            center_y="-2.198086401" 
+                        height="8.881784197e-016" 
+            angle="0" 
+            probability="0.7" 
+            prob_angle="true" 
+    />
+    <Object subtype="$flower" 
+            center_x="1.175002275" 
+            center_y="2.604743559" 
+                        height="8.881784197e-016" 
+            angle="0" 
+            probability="0.7" 
+            prob_angle="true" 
+    />
+    <Object subtype="$flower" 
+            center_x="3.092914254" 
+            center_y="-0.01858138587" 
+                        height="8.881784197e-016" 
+            angle="0" 
+            probability="0.7" 
+            prob_angle="true" 
+    />
+    <Object subtype="$flower" 
+            center_x="3.182572822" 
+            center_y="2.032939605" 
+                        height="8.881784197e-016" 
+            angle="0" 
+            probability="0.7" 
+            prob_angle="true" 
+    />
+    <Object subtype="$flower" 
+            center_x="0.3050660054" 
+            center_y="-0.894027797" 
+                        height="8.881784197e-016" 
+            angle="0" 
+            probability="0.7" 
+            prob_angle="true" 
+    />
+    <Object subtype="$single_debris" 
+            center_x="1.515188493" 
+            center_y="1.487834608" 
+                        height="-1.065814104e-014" 
+            angle="0" 
+            probability="0.4" 
+            prob_angle="true" 
+    />
+    <Object subtype="$tree" 
+            center_x="-1.667817635" 
+            center_y="1.821203917" 
+            angle="0" 
+            probability="0.5" 
+            prob_angle="true" 
+    />
+    <Object subtype="$tree" 
+            center_x="-2.51716751" 
+            center_y="-1.89043747" 
+            angle="0" 
+            probability="0.5" 
+            prob_angle="true" 
+    />
+    <Object subtype="$tree" 
+            center_x="2.782072423" 
+            center_y="-2.286468789" 
+            angle="0" 
+            probability="0.5" 
+            prob_angle="true" 
+    />
+    <Object subtype="$tree" 
+            center_x="1.865390801" 
+            center_y="0.07263681349" 
+                        height="-1.776356839e-015" 
+            angle="0" 
+            probability="0.5" 
+            prob_angle="true" 
+    />
+    <Object subtype="$border" 
+            center_x="0" 
+            center_y="3.5" 
+            angle="-90" 
+            probability="1" 
+            prob_angle="false" 
+    />
+  </ObjectContent>
+
+  <Locations>
+  </Locations>
+
+</ObjectGroupTemplate>

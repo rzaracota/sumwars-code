@@ -9,306 +9,320 @@ FIXED_OBJECT
 -->
 
 <ObjectTemplate name="$tree" type="FIXED_OBJECT">
-	<Environment name="meadow" default="true">
-		<Object name="tree1" />
-		<Object name="tree2" />
-		<Object name="tree3" />
-	</Environment>
-	<Environment name="hills">
-		<Object name="tree4" />
-	</Environment>
+        <Environment name="meadow" default="true">
+                <Object name="tree1" />
+                <Object name="tree2" />
+                <Object name="tree3" />
+        </Environment>
+        <Environment name="hills">
+                <Object name="tree4" />
+        </Environment>
 </ObjectTemplate>
 
 <ObjectTemplate name="$flower" type="FIXED_OBJECT">
-	<Environment name="hills" default="true">
-		<Object name="flower1" />
-		<Object name="flower2" />
-		<Object name="flower3" />
-		<Object name="flower4" />
-		<Object name="flower5" />
-		<Object name="flower6" />
-	</Environment>
+        <Environment name="hills" default="true">
+                <Object name="flower1" />
+                <Object name="flower2" />
+                <Object name="flower3" />
+                <Object name="flower4" />
+                <Object name="flower5" />
+                <Object name="flower6" />
+        </Environment>
 </ObjectTemplate>
 
 <ObjectTemplate name="$border" type="FIXED_OBJECT">
-	<Environment name="hills">
-		<Object name="wall1" />
-		<Object name="wall2" />
-		<Object name="wall3" />
-	</Environment>
-	<Environment name="meadow">
-		<Object name="fence1" />
-		<Object name="fence2" />
-		<Object name="fence3" />
-		<Object name="fence4" />
-		<Object name="fence5" />
-	</Environment>
-	<Environment name="cave">
-		<Object name="cave_wall1" />
-	</Environment>
-	<Environment name="council">
-		<Object name="konz_wall1" />
-	</Environment>
+        <Environment name="hills">
+                <Object name="wall1" />
+                <Object name="wall2" />
+                <Object name="wall3" />
+        </Environment>
+        <Environment name="meadow">
+                <Object name="fence1" />
+                <Object name="fence2" />
+                <Object name="fence3" />
+                <Object name="fence4" />
+                <Object name="fence5" />
+        </Environment>
+        <Environment name="cave">
+                <Object name="cave_wall1" />
+        </Environment>
+        <Environment name="council">
+                <Object name="konz_wall1" />
+        </Environment>
 </ObjectTemplate>
 
 <ObjectTemplate name="$wall" type="FIXED_OBJECT">
-	<Environment name="meadow" default = "true">
-		<Object name="wall1" />
-		<Object name="wall2" />
-		<Object name="wall3" />
-	</Environment>
-	<Environment name="cave">
-		<Object name="cave_wall1" />
-	</Environment>
-	<Environment name="council">
-		<Object name="konz_wall1" />
-	</Environment>
+        <Environment name="meadow" default = "true">
+                <Object name="wall1" />
+                <Object name="wall2" />
+                <Object name="wall3" />
+        </Environment>
+        <Environment name="cave">
+                <Object name="cave_wall1" />
+        </Environment>
+        <Environment name="council">
+                <Object name="konz_wall1" />
+        </Environment>
 </ObjectTemplate>
 
 <ObjectTemplate name="$border_m" type="FIXED_OBJECT">
-	<Environment name="hills">
-		<Object name="wall_m1" />
-	</Environment>
-	<Environment name="meadow">
-		<Object name="fence_m1" />
-	</Environment>
-	<Environment name="cave">
-		<Object name="cave_wall_m1" />
-	</Environment>
-	<Environment name="council">
-		<Object name="konz_wall_m1" />
-	</Environment>
+        <Environment name="hills">
+                <Object name="wall_m1" />
+        </Environment>
+        <Environment name="meadow">
+                <Object name="fence_m1" />
+        </Environment>
+        <Environment name="cave">
+                <Object name="cave_wall_m1" />
+        </Environment>
+        <Environment name="council">
+                <Object name="konz_wall_m1" />
+        </Environment>
 </ObjectTemplate>
 
 <ObjectTemplate name="$border_s" type="FIXED_OBJECT">
-	<Environment name="hills">
-		<Object name="wall_s1" />
-	</Environment>
-	<Environment name="meadow">
-		<Object name="fence_s1" />
-	</Environment>
-	<Environment name="cave">
-		<Object name="cave_wall_s1" />
-	</Environment>
-	<Environment name="council">
-		<Object name="konz_wall_s1" />
-	</Environment>
+        <Environment name="hills">
+                <Object name="wall_s1" />
+        </Environment>
+        <Environment name="meadow">
+                <Object name="fence_s1" />
+        </Environment>
+        <Environment name="cave">
+                <Object name="cave_wall_s1" />
+        </Environment>
+        <Environment name="council">
+                <Object name="konz_wall_s1" />
+        </Environment>
 </ObjectTemplate>
 
 <ObjectTemplate name="$border_t" type="FIXED_OBJECT">
-	<Environment name="hills">
-		<Object name="wall_t1" />
-	</Environment>
-	<Environment name="meadow">
-		<Object name="fence_t1" />
-	</Environment>
-	<Environment name="cave">
-		<Object name="cave_wall_t1" />
-	</Environment>
-	<Environment name="council">
-		<Object name="konz_wall_t1" />
-	</Environment>
+        <Environment name="hills">
+                <Object name="wall_t1" />
+        </Environment>
+        <Environment name="meadow">
+                <Object name="fence_t1" />
+        </Environment>
+        <Environment name="cave">
+                <Object name="cave_wall_t1" />
+        </Environment>
+        <Environment name="council">
+                <Object name="konz_wall_t1" />
+        </Environment>
 </ObjectTemplate>
 
-<ObjectTemplate name="$border_c" type="FIXED_OBJECT">
-	<Environment name="hills">
-		<Object name="wall_c1" />
-	</Environment>
-	<Environment name="meadow">
-		<Object name="fence_c1" />
-	</Environment>
-	<Environment name="cave">
-		<Object name="cave_wall_c1" />
-	</Environment>
-	<Environment name="council">
-		<Object name="konz_wall_c1" />
-	</Environment>
+<ObjectTemplate name="$border_cIn" type="FIXED_OBJECT">
+        <Environment name="hills">
+                <Object name="wall_cIn1" />
+        </Environment>
+        <Environment name="meadow">
+                <Object name="fence_cIn1" />
+        </Environment>
+        <Environment name="cave">
+                <Object name="cave_wall_cIn1" />
+        </Environment>
+        <Environment name="council">
+                <Object name="konz_wall_cIn1" />
+        </Environment>
+</ObjectTemplate>
+
+<ObjectTemplate name="$border_cOut" type="FIXED_OBJECT">
+        <Environment name="hills">
+                <Object name="wall_cOut1" />
+        </Environment>
+        <Environment name="meadow">
+                <Object name="fence_cOut1" />
+        </Environment>
+        <Environment name="cave">
+                <Object name="cave_wall_cOut1" />
+        </Environment>
+        <Environment name="council">
+                <Object name="konz_wall_cOut1" />
+        </Environment>
 </ObjectTemplate>
 
 <ObjectTemplate name="$house" type="FIXED_OBJECT">
-	<Environment name="meadow" default = "true">
-		<Object name="houseAisen1" />
-		<Object name="houseAisen2" />
-		<Object name="houseAisen3" />
-		<Object name="houseAisen4" />
-	</Environment>
+        <Environment name="meadow" default = "true">
+                <Object name="houseAisen1" />
+                <Object name="houseAisen2" />
+                <Object name="houseAisen3" />
+                <Object name="houseAisen4" />
+        </Environment>
 </ObjectTemplate>
 
 
 <ObjectTemplate name="$single_block" type="FIXED_OBJECT">
-	<Environment name="meadow">
-		<Object name="tree1" />
-		<Object name="tree2" />
-	</Environment>
-	<Environment name="hills">
-		<Object name="tree3" />
-		<Object name="tree4" />
-	</Environment>
+        <Environment name="meadow">
+                <Object name="tree1" />
+                <Object name="tree2" />
+        </Environment>
+        <Environment name="hills">
+                <Object name="tree3" />
+                <Object name="tree4" />
+        </Environment>
 </ObjectTemplate>
 
 <ObjectTemplate name="$single_debris" type="FIXED_OBJECT">
-	<Environment name="meadow">
-		<Object name="stone1" />
-	</Environment>
-	<Environment name="hills">
-		<Object name="stone2" />
-	</Environment>
+        <Environment name="meadow">
+                <Object name="stone1" />
+        </Environment>
+        <Environment name="hills">
+                <Object name="stone2" />
+        </Environment>
 </ObjectTemplate>
 
 <ObjectTemplate name="$single_deb_l" type="FIXED_OBJECT">
-	<Environment name="meadow">
-		<Object name="stone_l1" />
-	</Environment>
-	<Environment name="hills">
-		<Object name="stone_l1" />
-	</Environment>
+        <Environment name="meadow">
+                <Object name="stone_l1" />
+        </Environment>
+        <Environment name="hills">
+                <Object name="stone_l1" />
+        </Environment>
 </ObjectTemplate>
 
 <ObjectTemplate name="$waypoint" type="FIXED_OBJECT">
-	<Environment name="meadow">
-		<Object name="waypoint" default = "true"/>
-	</Environment>
+        <Environment name="meadow">
+                <Object name="waypoint" default = "true"/>
+        </Environment>
 </ObjectTemplate>
 
 <ObjectTemplate name="$table" type="FIXED_OBJECT">
-	<Environment name="council" default = "true">
-		<Object name="lab_tbl" />
-	</Environment>
+        <Environment name="council" default = "true">
+                <Object name="lab_tbl" />
+        </Environment>
 </ObjectTemplate>
 
 <ObjectTemplate name="$vase" type="FIXED_OBJECT">
-	<Environment name="meadow" default = "true">
-		<Object name="vase1" />
-		<Object name="vase2" />
-		<Object name="vase3" />
-		<Object name="vase4" />
-	</Environment>
+        <Environment name="meadow" default = "true">
+                <Object name="vase1" />
+                <Object name="vase2" />
+                <Object name="vase3" />
+                <Object name="vase4" />
+        </Environment>
 </ObjectTemplate>
 
 <ObjectTemplate name="$tube" type="FIXED_OBJECT">
-	<Environment name="council" default = "true">
-		<Object name="tube1" />
-		<Object name="tube2" />
-	</Environment>
+        <Environment name="council" default = "true">
+                <Object name="tube1" />
+                <Object name="tube2" />
+        </Environment>
 </ObjectTemplate>
 
 <ObjectTemplate name="$tube_ring" type="FIXED_OBJECT">
-	<Environment name="council" default = "true">
-		<Object name="tube_ring" />
-	</Environment>
+        <Environment name="council" default = "true">
+                <Object name="tube_ring" />
+        </Environment>
 </ObjectTemplate>
 
 <ObjectTemplate name="$tube_open" type="FIXED_OBJECT">
-	<Environment name="council" default = "true">
-		<Object name="tube_open" />
-	</Environment>
+        <Environment name="council" default = "true">
+                <Object name="tube_open" />
+        </Environment>
 </ObjectTemplate>
 
 <ObjectTemplate name="$tube_corner" type="FIXED_OBJECT">
-	<Environment name="council" default = "true">
-		<Object name="tube_corner45" />
-	</Environment>
+        <Environment name="council" default = "true">
+                <Object name="tube_corner45" />
+        </Environment>
 </ObjectTemplate>
 
 <ObjectTemplate name="$tube_cross" type="FIXED_OBJECT">
-	<Environment name="council" default = "true">
-		<Object name="tube_cross" />
-	</Environment>
+        <Environment name="council" default = "true">
+                <Object name="tube_cross" />
+        </Environment>
 </ObjectTemplate>
 
 <ObjectTemplate name="$shelf_m" type="FIXED_OBJECT">
-	<Environment name="council" default = "true">
-		<Object name="shelf_m1" />
-		<Object name="shelf_m2" />
-	</Environment>
+        <Environment name="council" default = "true">
+                <Object name="shelf_m1" />
+                <Object name="shelf_m2" />
+        </Environment>
 </ObjectTemplate>
 
 <ObjectTemplate name="$shelf_s" type="FIXED_OBJECT">
-	<Environment name="council" default = "true">
-		<Object name="shelf_s1" />
-		<Object name="shelf_s2" />
-		<Object name="shelf_s3" />
-	</Environment>
+        <Environment name="council" default = "true">
+                <Object name="shelf_s1" />
+                <Object name="shelf_s2" />
+                <Object name="shelf_s3" />
+        </Environment>
 </ObjectTemplate>
 
 
 <ObjectTemplate name="$stuff_m" type="FIXED_OBJECT">
-	<Environment name="meadow" default = "true">
-		<Object name="box_m1" />
-		<Object name="box_m2" />
-		<Object name="box_m3" />
-	</Environment>
+        <Environment name="meadow" default = "true">
+                <Object name="box_m1" />
+                <Object name="box_m2" />
+                <Object name="box_m3" />
+        </Environment>
 </ObjectTemplate>
 
 <ObjectTemplate name="$stuff_b" type="FIXED_OBJECT">
-	<Environment name="meadow" default = "true">
-		<Object name="box_b1" />
-	</Environment>
+        <Environment name="meadow" default = "true">
+                <Object name="box_b1" />
+        </Environment>
 </ObjectTemplate>
 
 <ObjectTemplate name="$signpost" type="FIXED_OBJECT">
-	<Environment name="meadow" default = "true">
-		<Object name="signpost" />
-	</Environment>
+        <Environment name="meadow" default = "true">
+                <Object name="signpost" />
+        </Environment>
 </ObjectTemplate>
 
 <ObjectTemplate name="$barrel" type="FIXED_OBJECT">
-	<Environment name="meadow" default = "true">
-		<Object name="barrel1" />
-		<Object name="barrel2" />
-		<Object name="barrel3" />
-	</Environment>
+        <Environment name="meadow" default = "true">
+                <Object name="barrel1" />
+                <Object name="barrel2" />
+                <Object name="barrel3" />
+        </Environment>
 </ObjectTemplate>
 
 <ObjectTemplate name="$barrel_m" type="FIXED_OBJECT">
-	<Environment name="meadow" default = "true">
-		<Object name="barrel_m1" />
-	</Environment>
+        <Environment name="meadow" default = "true">
+                <Object name="barrel_m1" />
+        </Environment>
 </ObjectTemplate>
 
 <ObjectTemplate name="$board" type="FIXED_OBJECT">
-	<Environment name="meadow" default = "true">
-		<Object name="board1" />
-		<Object name="board2" />
-		<Object name="board3" />
-	</Environment>
+        <Environment name="meadow" default = "true">
+                <Object name="board1" />
+                <Object name="board2" />
+                <Object name="board3" />
+        </Environment>
 </ObjectTemplate>
 <ObjectTemplate name="$book" type="FIXED_OBJECT">
-	<Environment name="meadow" default = "true">
-		<Object name="book1" />
-		<Object name="book2" />
-		<Object name="book3" />
-		<Object name="book4" />
-		<Object name="book5" />
-		<Object name="book6" />
-		<Object name="book7" />
-		<Object name="book8" />
-		<Object name="book9" />
-		<Object name="book10" />
-	</Environment>
+        <Environment name="meadow" default = "true">
+                <Object name="book1" />
+                <Object name="book2" />
+                <Object name="book3" />
+                <Object name="book4" />
+                <Object name="book5" />
+                <Object name="book6" />
+                <Object name="book7" />
+                <Object name="book8" />
+                <Object name="book9" />
+                <Object name="book10" />
+        </Environment>
 </ObjectTemplate>
 <ObjectTemplate name="$book_open" type="FIXED_OBJECT">
-	<Environment name="meadow" default = "true">
-		<Object name="book_open1" />
-		<Object name="book_open2" />
-	</Environment>
+        <Environment name="meadow" default = "true">
+                <Object name="book_open1" />
+                <Object name="book_open2" />
+        </Environment>
 </ObjectTemplate>
 <ObjectTemplate name="$cupboard" type="FIXED_OBJECT">
-	<Environment name="meadow" default = "true">
-		<Object name="cupboard_konz" />
-	</Environment>
+        <Environment name="meadow" default = "true">
+                <Object name="cupboard_konz" />
+        </Environment>
 </ObjectTemplate>
 <ObjectTemplate name="$lectern" type="FIXED_OBJECT">
-	<Environment name="meadow" default = "true">
-		<Object name="lectern_konz1" />
-		<Object name="lectern_konz2" />
-		<Object name="lectern_konz3" />
-	</Environment>
+        <Environment name="meadow" default = "true">
+                <Object name="lectern_konz1" />
+                <Object name="lectern_konz2" />
+                <Object name="lectern_konz3" />
+        </Environment>
 </ObjectTemplate>
 <ObjectTemplate name="$tub" type="FIXED_OBJECT">
-	<Environment name="meadow" default = "true">
-		<Object name="tub" />
-	</Environment>
+        <Environment name="meadow" default = "true">
+                <Object name="tub" />
+        </Environment>
 </ObjectTemplate>
-	
 
