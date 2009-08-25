@@ -71,6 +71,8 @@ Ogre::MovableObject* GraphicManager::createMovableObject(MovableObjectInfo& info
 		try
 		{
 			obj_ent = m_scene_manager->createEntity(name, info.m_source);
+			// TODO: genauer einstellen
+			obj_ent->setCastShadows(true);
 		}
 		catch (Ogre::Exception& e)
 		{

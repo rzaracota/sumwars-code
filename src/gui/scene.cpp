@@ -685,7 +685,8 @@ void Scene::createScene()
 	light->setDiffuseColour(colour[0], colour[1], colour[2]);
 	light->setSpecularColour(0.0, 0.0, 0.0);
 	light->setAttenuation(1000,0.5,0.000,0.00001);
-	DEBUG5("hero light %f %f %f",colour[0], colour[1], colour[2]);
+	light->setCastShadows(false);
+	DEBUG("hero light %f %f %f",colour[0], colour[1], colour[2]);
 
 	colour= region->getDirectionalLight();
 	light = m_scene_manager->createLight("RegionLight");
@@ -693,7 +694,7 @@ void Scene::createScene()
 	light->setDiffuseColour(colour[0], colour[1], colour[2]);
 	light->setSpecularColour(colour[0], colour[1], colour[2]);
 	light->setDirection(Ogre::Vector3(-1,-1,-1));
-	DEBUG5("directional light %f %f %f",colour[0], colour[1], colour[2]);
+	DEBUG("directional light %f %f %f",colour[0], colour[1], colour[2]);
 
 	if (region !=0)
 	{
@@ -730,7 +731,7 @@ void Scene::createScene()
 
 		colour= region->getAmbientLight();
 		m_scene_manager->setAmbientLight(Ogre::ColourValue(colour[0], colour[1], colour[2]));
-		DEBUG5("ambient light %f %f %f",colour[0], colour[1], colour[2]);
+		DEBUG("ambient light %f %f %f",colour[0], colour[1], colour[2]);
 		//m_scene_manager->setAmbientLight(Ogre::ColourValue(0.0,0.0,0.0));
 
 		// Boden erstellen
@@ -754,7 +755,7 @@ void Scene::createScene()
 					stream << "GroundEntity"<<i<<"_"<<j;
 					ground = m_scene_manager->createEntity(stream.str(), "ground");
 					ground->setMaterialName(region->getGroundMaterial());
-					ground->setCastShadows(false);
+					ground->setCastShadows(true);
 					ground->setQueryFlags(0);
 					node->attachObject(ground);
 
@@ -763,7 +764,17 @@ void Scene::createScene()
 			}
 		}
 
-
+		// Schatten
+		//m_scene_manager->setAmbientLight(Ogre::ColourValue(0.0,0.0,0.0));
+		
+		light = m_scene_manager->getLight("RegionLight");
+		light->setCastShadows(true);
+		m_scene_manager->setShadowTextureConfig(0,2048,2048,Ogre::PF_X8R8G8B8);
+		m_scene_manager->setShadowColour( Ogre::ColourValue(0.5, 0.5, 0.5) );
+		m_scene_manager->setShadowTechnique(Ogre::SHADOWTYPE_TEXTURE_ADDITIVE);
+		
+		//m_scene_manager->setAmbientLight(Ogre::ColourValue(0.0,0.0,0.0));
+		//m_scene_manager->setShadowFarDistance (10);
 	}
 
 }
