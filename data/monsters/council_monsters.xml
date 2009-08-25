@@ -1,11 +1,12 @@
+<!-- Monster des Konzils der Elementarbeschwoerer -->
 
 <!-- Feuerschnecke-->
 <!-- L1-->
 <Monster type="MONSTER" subtype="fireSlug" name="fire slug" fraction="SUMMONER" race="elemental" layer="NORMAL">
 	<Mesh file="fireSlug" />
 	<Dropslots >
-		<Dropslot pbig="0.10" pmedium="0.25" psmall="0.10" pgold="0.05" max_gold="500" min_level="5" max_level="10" magic_prob="0.1" magic_power="1000" />
-		<Dropslot pbig="0.10" pmedium="0.25" psmall="0.10" pgold="0.05" max_gold="400" min_level="3" max_level="8" magic_prob="0.2" magic_power="800" />
+		<Dropslot pbig="0.10" pmedium="0.25" psmall="0.10" pgold="0.05" max_gold="500" min_level="1" max_level="3" magic_prob="0.1" magic_power="100" />
+		<Dropslot pbig="0.10" pmedium="0.25" psmall="0.10" pgold="0.05" max_gold="400" min_level="1" max_level="2" magic_prob="0.2" magic_power="60" />
 	</Dropslots>
 	
 	<BasicAttributes
@@ -55,7 +56,7 @@
 	</Dropslots>
 	
 	<BasicAttributes
-		experience="8"
+		experience="200"
 		level="20"
 		max_health="300"
 		armor="10"
@@ -76,7 +77,7 @@
 		resistances_cap_fire="50"
 		walk_speed="3000"
 		attack_speed="1500"
-		step_length="0.8"
+		step_length="1.0"
 		attack_range="0.5"
 	>
 		<Ability type="walk" />
@@ -87,9 +88,61 @@
 		
 	</BasicAttributes>
 	
-	<Geometry radius="0.5" />
+	<Geometry radius="2.0" />
 	
 	<AI ai_sight_range="10" ai_chase_range="20"/>
+</Monster>
+
+<!-- Inferno Behemoth -->
+<!-- L65 -->
+<Monster type="MONSTER" subtype="infBehemoth" name="inferno behemoth" fraction="SUMMONER" category="SUMMONED" layer="NORMAL">
+	<Mesh file="infBehemoth" />
+	<Dropslots >
+		<Dropslot pbig="0.3" pmedium="0.45" psmall="0.05" pgold="0.05" max_gold="500" min_level="50" max_level="70" magic_prob="0.3" magic_power="1800" />
+		<Dropslot pbig="0.20" pmedium="0.25" psmall="0.10" pgold="0.05" max_gold="400" min_level="45" max_level="65" magic_prob="0.2" magic_power="1400" />
+	</Dropslots>
+	
+	<BasicAttributes
+		experience="5000"
+		level="65"
+		max_health="3800"
+		armor="500"
+		block="60"
+		attack="400"
+		power="700"
+		strength="750"
+		dexterity="160"
+		magic_power="550"
+		willpower="600"
+		resistances_physical="40"
+		resistances_air="10"
+		resistances_ice="-30"
+		resistances_fire="100"
+		resistances_cap_physical="50"
+		resistances_cap_air="50"
+		resistances_cap_ice="50"
+		resistances_cap_fire="100"
+		walk_speed="1000"
+		attack_speed="800"
+		step_length="0.8"
+		attack_range="5"
+	>
+		<Ability type="walk" />
+		<Ability type="attack" />
+		<Ability type="die" />
+		<Ability type="idle" />
+		<Ability type="fire_ball" />
+		<Ability type="hammer_bash" />
+		<Ability type="whirl_blow" />
+		<Ability type="storm_charge" />
+		<Ability type="inflame" />
+		<Ability type="firestorm" />
+		
+	</BasicAttributes>
+	
+	<Geometry radius="2.0" />
+	
+	<AI ai_sight_range="20" ai_chase_range="20"/>
 </Monster>
 
 <MonsterGroup name="elemental" >
@@ -98,4 +151,8 @@
 
 <MonsterGroup name="slugs" >
 	<SubGroup subtype="fireSlug" number="20" prob="0.7" />
+</MonsterGroup>
+
+<MonsterGroup name="theThingFromTheDarkAbyssOfFire" >
+	<SubGroup subtype="infBehemoth" number="1" prob="1.0" />
 </MonsterGroup>

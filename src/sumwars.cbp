@@ -150,6 +150,8 @@
 		<Unit filename="core\random.h" />
 		<Unit filename="core\region.cpp" />
 		<Unit filename="core\region.h" />
+		<Unit filename="core\scriptobject.cpp" />
+		<Unit filename="core\scriptobject.h" />
 		<Unit filename="core\servernetwork.cpp" />
 		<Unit filename="core\servernetwork.h" />
 		<Unit filename="core\spawnpoint.cpp" />

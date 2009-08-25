@@ -42,10 +42,50 @@
 	</Action>
 </RenderInfo>
 
+<RenderInfo name="behemothbase" parent="creaturebase">
+	<Action name="walk">
+		<Animation name="idle" />
+	</Action>
+	
+	<Action name="attack">
+		<Animation name="attack1" />
+	</Action>
+
+	<Action name="die">
+		<Animation name="die" />
+	</Action>
+	
+	<Action name="idle">
+		<Animation name="idle" />
+	</Action>
+
+	<Action name="fire_ball">
+	</Action>
+
+	<Action name="hammer_bash">
+	</Action>
+
+	<Action name="whirl_blow">
+	</Action>
+
+	<Action name="storm_charge">
+	</Action>
+
+	<Action name="inflame">
+	</Action>
+
+	<Action name="firestorm">
+	</Action>	
+</RenderInfo>
+
 <RenderInfo name="fireElemS" parent="elementalbase">
 	<Entity source="fireElemSmall.mesh"/>
 </RenderInfo>
 
 <RenderInfo name="fireSlug" parent="slugbase">
 	<Entity source="fire_slug.mesh"/>
+</RenderInfo>
+
+<RenderInfo name="infBehemoth" parent="behemothbase">
+	<Entity source="infernoBehemoth.mesh"/>
 </RenderInfo>
