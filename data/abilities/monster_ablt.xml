@@ -12,7 +12,6 @@
 		<LuaImplementation>
 			local frac = get(self,"fraction");
 			local obj = createObject("bow_skel",goal);
-			print(frac)
 			set(obj,"fraction",frac);
 		</LuaImplementation>
 	</Effect>

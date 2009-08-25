@@ -19,7 +19,6 @@
 	moegliche Implementationen:
 		fly
 		fly_guided
-		grow
 		grow_effect_at_each
 		stationary
 		stationary_multi_effect

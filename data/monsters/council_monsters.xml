@@ -130,13 +130,13 @@
 		<Ability type="walk" />
 		<Ability type="attack" />
 		<Ability type="die" />
-		<Ability type="idle" />
+		<Ability type="noaction" />
 		<Ability type="fire_ball" />
 		<Ability type="hammer_bash" />
 		<Ability type="whirl_blow" />
 		<Ability type="storm_charge" />
 		<Ability type="inflame" />
-		<Ability type="firestorm" />
+		<Ability type="fire_storm" />
 		
 	</BasicAttributes>
 	
