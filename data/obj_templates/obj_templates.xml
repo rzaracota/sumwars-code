@@ -111,7 +111,7 @@ FIXED_OBJECT
 </ObjectTemplate>
 
 <ObjectTemplate name="$border_cIn" type="FIXED_OBJECT">
-        <Environment name="hills">
+        <Environment name="hills" default = "true">
                 <Object name="wall_cIn1" />
         </Environment>
         <Environment name="meadow">
@@ -126,7 +126,7 @@ FIXED_OBJECT
 </ObjectTemplate>
 
 <ObjectTemplate name="$border_cOut" type="FIXED_OBJECT">
-        <Environment name="hills">
+        <Environment name="hills" default = "true">
                 <Object name="wall_cOut1" />
         </Environment>
         <Environment name="meadow">
