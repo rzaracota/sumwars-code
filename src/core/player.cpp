@@ -303,7 +303,17 @@ bool Player::onGamefieldClick(ClientCommand* command)
 	WorldObject::Relation rel;
 
 	// Actionen auf self brauchen kein Zielobjekt
-	dist = Action::getActionInfo(command->m_action)->m_target_type;
+	Action::ActionInfo* ainfo = Action::getActionInfo(command->m_action);
+	if (ainfo == 0)
+	{	
+		ERRORMSG("action information missing for action %s",command->m_action.c_str());
+		dist = Action::SELF;
+	}
+	else
+	{
+		dist = ainfo->m_target_type;
+	}
+	
 	if ( dist == Action::SELF || dist == Action::PARTY_MULTI || dist == Action::PARTY)
 		command->m_id=0;
 
@@ -476,9 +486,11 @@ bool Player::onGamefieldClick(ClientCommand* command)
 
 	if (!checkAbility(com->m_type))
 	{
-		DEBUG("Basisaktion von %s verwendet",com->m_type.c_str());
-		com->m_type = Action::getActionInfo(com->m_type)->m_base_action;
-		
+		if (ainfo != 0)
+		{
+			DEBUG("Basisaktion von %s verwendet",com->m_type.c_str());
+			com->m_type = ainfo->m_base_action;
+		}
 	}
 
 	if (meleedir)

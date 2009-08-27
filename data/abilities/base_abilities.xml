@@ -16,6 +16,16 @@
 		 base_ability="noaction" 
 		 critical_percent="-1.000000" />
 
+<Ability type="summoned" 
+		 name="summoned" 
+		 description="first action that is performed by a summoned monster" 
+		 time="1000.000000" 
+		 timer_nr="0.000000" 
+		 timer_value="0.000000" 
+		 base_ability="noaction" 
+		 critical_percent="-1.000000" 
+		 target_type="self"/>
+
 <Ability type="noaction" 
 		 name="no action" 
 		 description="" 

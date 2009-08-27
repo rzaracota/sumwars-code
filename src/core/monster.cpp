@@ -72,6 +72,15 @@ Monster::Monster( int id,MonsterBasicData& data)
 	
 	m_base_action = "noaction";
 	
+	if (checkAbility("summoned"))
+	{
+		float time = getBaseAttr()->m_abilities["summoned"].m_time;
+		getAction()->m_type = "summoned";
+		getAction()->m_time = time;
+		
+		getCommand()->m_type = "summoned";
+	}
+	
 }
 
 Monster::~Monster()

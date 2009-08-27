@@ -3,6 +3,10 @@
 		<Animation name="walk" />
 	</Action>
 	
+	<Action name="summoned">
+		<Animation name="raise" />
+	</Action>
+	
 	<Action name="attack">
 		<Animation name="attack1" />
 	</Action>

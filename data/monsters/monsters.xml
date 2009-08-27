@@ -824,6 +824,7 @@ AIR
 					>
 		<Ability type="walk" />
 		<Ability type="range_attack"/>
+		<Ability type="summoned" time="2000" />
 		<Ability type="die" />
 		
 		<Immunity type="blind"/>

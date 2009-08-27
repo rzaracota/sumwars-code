@@ -319,7 +319,12 @@ void Creature::initAction()
 	// setzen der Standarddauer der Aktion
 	m_action.m_time = getActionTime(m_action.m_type);
 
-	Action::ActionType baseact = Action::getActionInfo(m_action.m_type)->m_base_action;
+	Action::ActionType baseact = "noaction";
+	Action::ActionInfo* ainfo = Action::getActionInfo(m_action.m_type);
+	if (ainfo != 0)
+	{	
+		baseact = ainfo->m_base_action;
+	}
 
 	// Zeit der Aktion modifizieren
 	if (baseact == "walk")
@@ -460,10 +465,18 @@ void Creature::performAction(float &time)
 
 
 	// Behandlung der Wirkung der Aktion
-	
+	Action::ActionInfo* ainfo = Action::getActionInfo(m_action.m_type);
+	if (ainfo == 0)
+	{	
+		ERRORMSG("action information missing for action %s",m_action.m_type.c_str());
+		m_action.m_type ="noaction";
+		clearCommand(false);
+		return;
+		
+	}
 
 	// Prozentsatz bei dessen Erreichen die Wirkung der Aktion berechnet wird
-	float pct = Action::getActionInfo(m_action.m_type)->m_critical_perc;
+	float pct = ainfo->m_critical_perc;
 	
 	if (m_action.m_type != "noaction")
 	{
@@ -524,7 +537,7 @@ void Creature::performAction(float &time)
 			// Kein Zielobjekt per ID gegeben
 			DEBUG5("no Goal ID!");
 			// Im Falle von Nahkampf Ziel anhand des Zielpunktes suchen
-			if (Action::getActionInfo(m_action.m_type)->m_target_type == Action::MELEE && m_action.m_type!= "take_item")
+			if (ainfo->m_target_type == Action::MELEE && m_action.m_type!= "take_item")
 			{
 				DEBUG5("Searching goal %f %f",goal.m_x,goal.m_y);
 				goalobj = getRegion()->getObjectAt(goal,LAYER_AIR);
@@ -533,7 +546,7 @@ void Creature::performAction(float &time)
 		}
 
 		// Party Zauber suchen sich ihr Ziel
-		if (Action::getActionInfo(m_action.m_type)->m_target_type == Action::PARTY)
+		if (ainfo->m_target_type == Action::PARTY)
 		{
 			Shape s;
 			s.m_type = Shape::CIRCLE;
@@ -568,7 +581,7 @@ void Creature::performAction(float &time)
 		Creature* cgoal=0;
 
 		// Zielobjekt im Nahkampf suchen an der Stelle an der die Waffe trifft
-		if (goalobj ==0 && Action::getActionInfo(m_action.m_type)->m_target_type == Action::MELEE && m_action.m_type!= "take_item")
+		if (goalobj ==0 && ainfo->m_target_type == Action::MELEE && m_action.m_type!= "take_item")
 		{
 			goalobj = getRegion()->getObjectAt(goal,LAYER_AIR);
 		}
@@ -620,7 +633,7 @@ void Creature::performAction(float &time)
 
 		// Kommando ist beendet wenn die gleichnamige Aktion beendet wurde
 		// Ausnahme: Bewegungskommando ist beendet wenn das Ziel erreicht ist
-		Action::ActionType baseact = Action::getActionInfo(m_command.m_type)->m_base_action;
+		Action::ActionType baseact = ainfo->m_base_action;
 		if (((m_action.m_type == m_command.m_type) || m_action.m_type == baseact) && m_action.m_type != "walk" || m_command.m_type == "walk" && getShape()->m_center.distanceTo(goal) < getBaseAttr()->m_step_length 
 				  && !(m_command.m_type == "charge" || m_command.m_type == "storm_charge"))
 		{
@@ -4379,7 +4392,8 @@ void Creature::processNetEvent(NetEvent* event, CharConv* cv)
 				
 			}
 			
-			if (Action::getActionInfo(m_action.m_type)->m_base_action == "walk")
+			Action::ActionInfo* ainfo = Action::getActionInfo(m_action.m_type);
+			if (ainfo !=0 && ainfo->m_base_action == "walk")
 			{
 				setAngle(getSpeed().angle());
 

@@ -252,7 +252,10 @@ bool  ObjectLoader::loadCreatureBaseAttr(TiXmlNode* node, CreatureBaseAttr& basa
 			Action::ActionType action;
 			attr.getString("type",act);
 			basattr.m_abilities[act].m_timer = 0;
-							
+			attr.getFloat("time",basattr.m_abilities[act].m_time);
+			attr.getInt("timer_nr",basattr.m_abilities[act].m_timer_nr);
+			attr.getFloat("timer_value",basattr.m_abilities[act].m_timer);
+			
 		}
 		else if (!strcmp(child2->Value(), "Immunity"))
 		{
