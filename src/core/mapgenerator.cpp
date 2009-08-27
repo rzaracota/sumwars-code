@@ -669,12 +669,26 @@ void MapGenerator::createBorder(MapData* mdata, RegionData* rdata)
 
 
 	
-	// fuer jedes markierte werden die 4 Nachbarfelder angesehen
+	// fuer jedes markierte Feld werden die 4 Nachbarfelder angesehen
 	// die 4 Informationen werden als 4bit Zahl interpretiert
+	// blockierte Felder erhalten eine 0, freie eine 1
+	//
 	// es gibt 6 verschiedene Konstellationen fuer die Nachbarfelder
 	// die 4bit Zahl dient als Index um die Konstellation und den Drehwinkel zu erhalten
-
+	//
+	// Aufbau der Bitmaske:
+	// 
+	//  D
+	// A*B
+	//  C
+	// => Bitmaske ABCD
+	
 	// Liste mit den 6 verschiedenen Moeglichenkeiten welche Nachbarfelder besetzt sind
+	// Form der 6 Template (+ frei, # blockiert):
+	//
+	// ?+?   ?+?   ?+?   ?+?   ?#?   ?+?
+	// ###   ##+   ###   ##+   ###   +#+
+	// ?#?   ?#?   ?+?   ?+?   ?#?   ?+?
 	std::string borders[6] = {"border(side)","border(corner)","border(twoside)","border(twocorner)","border(filled)","border(single_block)"};
 
 	// Maske dafuer, welche Situation vorliegt
@@ -685,51 +699,95 @@ void MapGenerator::createBorder(MapData* mdata, RegionData* rdata)
 	int mask =0;
 	int nbi, nbj;
 
-	ObjectGroupTemplateName templ;
+	// Abstaende der Diagonalen
+	int diag[4][2] ={{-1,-1},{-1,1},{1,1},{1,-1}};
+	
+	// Fuer die Diagonalen wird eine aehnliche Bitmaske erstellt:
+	// // eine 1 wird gesetzt, wenn das Feld selbst frei ist, die beiden Felder daneben aber besetzt
+	//
+	// B C
+	//  *
+	// A D
+	// => Bitmaske ABCD
+	
+	// Liste mit den verschiedenen Moeglichenkeiten welche Nachbarfelder besetzt sind
+	// Form der Template (+ frei, # blockiert):
+	//
+	// ###   ###   ##+   +##   +#+   +#+
+	// ###   ###   ###   ###   ###   ###
+	// ###   ##+   ##+   ##+   ##+   +#+
+	
+	std::string smallcorners[8] = {"","one_smallcorner","two_smallcorner","diag_smallcorner","three_smallcorner","four_smallcorner"};
+		
+	int diagbmask[16]=    {0,1,1,2,1,3,2,4, 1,2,3,4,2,4,4,5};
+	int diagrotmask[16] = {0,0,1,0,2,0,1,0, 3,3,3,3,2,2,1,0};
+	
+	int diagi, diagj;
+	int dmask;
+	
+	ObjectGroupTemplateName templ,diagtempl;
 	float angle;
 
 	bool skip;
 
-	Matrix2d<char> maskmap(hdimx,hdimy);
-	maskmap.clear();
-
-	for (int i=0; i<hdimx; i++)
+	
+	for (int j=0; j< hdimy;j++)
 	{
-		for (int j=0; j< hdimy;j++)
+		for (int i=0; i<hdimx; i++)
 		{
 			skip = false;
 			if (*(mdata->m_base_map->ind(i,j)) != -1)
 			{
+				std::cout << "  ";
 				continue;
 			}
 
 			mask =0;
-			// Bitmaske aufbauen
+			dmask =0;
+			
+			// Bitmasken aufbauen
 			for (int k=0; k<4; k++)
 			{
 				nbi = i + nb[k][0];
 				nbj = j + nb[k][1];
 
 				mask *=2;
-				if ( nbi<0 || nbj<0 || nbi>=hdimx || nbj>=hdimy)
+				dmask  *= 2;
+				
+				if ( nbi>=0 && nbj>=0 && nbi<hdimx && nbj<hdimy)
 				{
-					continue;
-				}
-
-				if (*(mdata->m_base_map->ind(nbi,nbj)) >= 1)
-				{
-					mask +=1;
-				}
+					if (*(mdata->m_base_map->ind(nbi,nbj)) >= 1)
+					{
+						mask +=1;
+					}
 
 				// Wenn eines der Nachbarfelder im *leeren Raum* liegt
 				// dann keine Objekte setzen
-				if (*(mdata->m_base_map->ind(nbi,nbj)) == 0)
+					if (*(mdata->m_base_map->ind(nbi,nbj)) == 0)
+					{
+						skip = true;
+					}
+				}
+
+			
+				
+				// Bitmaske fuer Diagonalen
+				diagi = i + diag[k][0];
+				diagj = j + diag[k][1];
+				
+				if ( diagi>=0 && diagj>=0 && diagi<hdimx && diagj<hdimy)
 				{
-					skip = true;
+					if (*(mdata->m_base_map->ind(diagi,diagj)) >= 1 &&
+						*(mdata->m_base_map->ind(diagi,j)) == -1 &&
+						*(mdata->m_base_map->ind(i,diagj)) == -1)
+					{
+						dmask +=1;
+					}
 				}
 
 			}
-
+			
+			std::cout << diagrotmask[dmask] <<" ";
 			if (skip)
 				continue;
 
@@ -739,11 +797,20 @@ void MapGenerator::createBorder(MapData* mdata, RegionData* rdata)
 
 			DEBUG5("placing type (%i %i) %i %i %s",i,j,mask, bmask[mask]+1, borders[bmask[mask]].c_str());
 			mdata->m_region->createObjectGroup(templ,Vector(i*8+4,j*8+4),angle);
-			//std::cout << "\n";
-
-			*(maskmap.ind(i,j)) = bmask[mask]+1;
-
+			
+			// TODO Templates mergen ?
+			if (diagbmask[dmask] != 0)
+			{
+				diagtempl = "border(";
+				diagtempl += smallcorners[diagbmask[dmask]];
+				diagtempl += ")";
+				float diagangle = diagrotmask[dmask] *PI/2;
+				DEBUG5("placing type (%i %i) %i %s",i,j,diagbmask[dmask], diagtempl.c_str());
+				
+				mdata->m_region->createObjectGroup(diagtempl,Vector(i*8+4,j*8+4),diagangle);
+			}
 		}
+		std::cout << "\n";
 	}
 
 

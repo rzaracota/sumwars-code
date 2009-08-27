@@ -114,3 +114,143 @@
                 <Location name = "WaypointLoc" pos_x="0" pos_y="0" />
         </Locations>
 </ObjectGroupTemplate>
+
+
+<ObjectGroupTemplate name = "border(one_smallcorner)" >
+	<Shape
+		  type = "RECT"
+		  extent_x = "4"
+		  extent_y = "4"
+		  angle ="0"
+		  />
+	<ObjectContent>
+		<Object subtype="signpost"
+				center_x="3.5"
+				center_y="-3.5"
+				angle = "0"
+				probability ="1.0"
+				prob_angle = "true"
+				/>
+	</ObjectContent>
+</ObjectGroupTemplate>
+
+<ObjectGroupTemplate name = "border(two_smallcorner)" >
+	<Shape
+		  type = "RECT"
+		  extent_x = "4"
+		  extent_y = "4"
+		  angle ="0"
+		  />
+	<ObjectContent>
+		<Object subtype="signpost"
+				center_x="3.5"
+				center_y="-3.5"
+				angle = "0"
+				probability ="1.0"
+				prob_angle = "true"
+				/>
+		<Object subtype="signpost"
+				center_x="3.5"
+				center_y="3.5"
+				angle = "0"
+				probability ="1.0"
+				prob_angle = "true"
+				/>
+	</ObjectContent>
+</ObjectGroupTemplate>
+
+<ObjectGroupTemplate name = "border(diag_smallcorner)" >
+	<Shape
+		  type = "RECT"
+		  extent_x = "4"
+		  extent_y = "4"
+		  angle ="0"
+		  />
+	<ObjectContent>
+		<Object subtype="signpost"
+				center_x="3.5"
+				center_y="-3.5"
+				angle = "0"
+				probability ="1.0"
+				prob_angle = "true"
+				/>
+		<Object subtype="signpost"
+				center_x="-3.5"
+				center_y="3.5"
+				angle = "0"
+				probability ="1.0"
+				prob_angle = "true"
+				/>
+	</ObjectContent>
+</ObjectGroupTemplate>
+
+<ObjectGroupTemplate name = "border(three_smallcorner)" >
+	<Shape
+		  type = "RECT"
+		  extent_x = "4"
+		  extent_y = "4"
+		  angle ="0"
+		  />
+	<ObjectContent>
+		<Object subtype="signpost"
+				center_x="3.5"
+				center_y="-3.5"
+				angle = "0"
+				probability ="1.0"
+				prob_angle = "true"
+				/>
+		<Object subtype="signpost"
+				center_x="3.5"
+				center_y="3.5"
+				angle = "0"
+				probability ="1.0"
+				prob_angle = "true"
+				/>
+		<Object subtype="signpost"
+				center_x="-3.5"
+				center_y="3.5"
+				angle = "0"
+				probability ="1.0"
+				prob_angle = "true"
+				/>
+	</ObjectContent>
+</ObjectGroupTemplate>
+
+<ObjectGroupTemplate name = "border(four_smallcorner)" >
+	<Shape
+		  type = "RECT"
+		  extent_x = "4"
+		  extent_y = "4"
+		  angle ="0"
+		  />
+	<ObjectContent>
+		<Object subtype="signpost"
+				center_x="3.5"
+				center_y="-3.5"
+				angle = "0"
+				probability ="1.0"
+				prob_angle = "true"
+				/>
+		<Object subtype="signpost"
+				center_x="3.5"
+				center_y="3.5"
+				angle = "0"
+				probability ="1.0"
+				prob_angle = "true"
+				/>
+		<Object subtype="signpost"
+				center_x="-3.5"
+				center_y="3.5"
+				angle = "0"
+				probability ="1.0"
+				prob_angle = "true"
+				/>
+		<Object subtype="signpost"
+				center_x="-3.5"
+				center_y="-3.5"
+				angle = "0"
+				probability ="1.0"
+				prob_angle = "true"
+				/>
+	</ObjectContent>
+</ObjectGroupTemplate>
