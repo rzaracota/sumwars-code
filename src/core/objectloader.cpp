@@ -359,6 +359,12 @@ bool ObjectLoader::loadPlayer(TiXmlNode* node)
 			{
 				attr.getString("type",data->m_base_ability);
 			}
+			else if (!strcmp(child->Value(), "ItemRequirementTag"))
+			{
+				std::string name;
+				attr.getString("name",name);
+				data->m_item_req_tags.push_back(name);
+			}
 			else if (!strcmp(child->Value(), "Look"))
 			{
 				std::string gender;

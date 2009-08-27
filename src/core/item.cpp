@@ -402,8 +402,14 @@ std::string Item::getDescription()
 		out_stream<<"\n" << gettext("Required class")<<": ";
 		
 		std::string type;
-		PlayerBasicData* pdata;
 		bool end = false;
+		
+		// alle Klassen ermitteln, die das Item verwenden koennen
+		//  fuer jedes Teilstueck in dem string werden alle Klassen gesucht, die das entsprechende Tag besitzen
+		std::set<std::string> classes;
+		std::set<std::string>::iterator ct;
+		std::map<GameObject::Subtype, PlayerBasicData*>& pdata = ObjectFactory::getPlayerData();
+		std::map<GameObject::Subtype, PlayerBasicData*>::iterator it;
 		do
 		{
 			pos2 = m_char_req.find_first_of(",|",pos);
@@ -413,18 +419,35 @@ std::string Item::getDescription()
 				end = true;
 			}
 			type = m_char_req.substr(pos,pos2-pos);
-			pdata = ObjectFactory::getPlayerData(type);
-			if (pdata != 0)
-			{
-				type = pdata->m_name;
-			}
 			
-			if (pos != 0)
-				out_stream<<", ";
-			out_stream<<gettext(type.c_str());
+			// Schleife ueber die Spielerklassen
+			for (it = pdata.begin(); it != pdata.end(); ++it)
+			{
+				// Schleife ueber die Tags der Klasse
+				std::list<std::string>::iterator jt;
+				for (jt = it->second->m_item_req_tags.begin(); jt != it->second->m_item_req_tags.end(); ++jt)
+				{
+					if (*jt == type)
+					{
+						classes.insert(it->second->m_name);
+					}
+				}
+				
+			}
 			pos = pos2+1;
 		}
 		while (!end);
+		
+		// Ausgabe schreiben
+		bool first = true;
+		for (ct = classes.begin(); ct != classes.end(); ++ct)
+		{
+			if (!first)
+				out_stream<<", ";
+			out_stream<<gettext(ct->c_str());
+			
+			first = false;
+		}
 		
 	}
 

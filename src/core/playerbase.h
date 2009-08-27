@@ -82,6 +82,12 @@ struct PlayerBasicData
 	std::string m_tabnames[3];
 	
 	/**
+	 * \var std::list<std::string> m_item_req_tags
+	 * \brief Liste von Tags, wenn im Itemrequirement eines Items eines der Tags auftaucht, kann das Item verwendet werden
+	 */
+	std::list<std::string> m_item_req_tags;
+	
+	/**
 	 * \var std::list<GameObject::Subtype> m_start_items
 	 * \brief Liste der Items, mit denen ein Spieler in das Spiel startet
 	 */

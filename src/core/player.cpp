@@ -874,11 +874,22 @@ bool Player::checkItemRequirements(Item* itm)
 	// testen ob Item fuer die Charakterklasse zugelassen ist
 	if (itm->m_char_req != "all" && itm->m_char_req != "15")
 	{
-		// Spieler darf das Item nicht benutzen (falsche Spielerklasse)
-		if (itm->m_char_req.find(getSubtype()) == std::string::npos)
+		// alle Item Requirement Tags der Klasse durchmustern
+		// wenn eines gefunden wird, dass in der Item Beschreibung enthalten wird, kann das Item verwendet werden
+		
+		PlayerBasicData* pdata = ObjectFactory::getPlayerData(getSubtype());
+		if (pdata != 0)
 		{
-			return false;
+			std::list<std::string>::iterator it;
+			for (it = pdata->m_item_req_tags.begin(); it != pdata->m_item_req_tags.end(); ++it)
+			{
+				if (itm->m_char_req.find(*it) != std::string::npos)
+				{
+					return true;
+				}
+			}
 		}
+		return false;
 	}
 	
 	return true;

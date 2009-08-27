@@ -37,6 +37,8 @@
 		<Ability type="testbooster" />
 		<Ability type="teststatushealer" />
 	</BasicAttributes>
+	<ItemRequirementTag name="warrior" />
+	<ItemRequirementTag name="mage" />
 	<BasicAbility type="attack" />
 	<Look name="warrior_m" gender="male" />
 	<SkilltreeTabs tab1="test skills1" tab2="test skills2" tab3="test skills2" />
