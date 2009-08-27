@@ -20,6 +20,8 @@ struct LearnableAbility
 	
 	int m_skilltree_tab;
 	
+	std::string m_image;
+	
 	short m_req_level;
 	
 	std::list<Action::ActionType> m_req_abilities;

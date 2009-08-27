@@ -395,6 +395,7 @@ bool ObjectLoader::loadPlayer(TiXmlNode* node)
 				attr.getFloat("skilltree_posx",ablt.m_skilltree_position.m_x);
 				attr.getFloat("skilltree_posy",ablt.m_skilltree_position.m_y);
 				attr.getShort("required_level",ablt.m_req_level);
+				attr.getString("image",ablt.m_image);
 				
 				for (TiXmlNode* child2 = child->FirstChild(); child2 != 0; child2 = child2->NextSibling())
 				{

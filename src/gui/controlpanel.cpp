@@ -218,12 +218,30 @@ void ControlPanel::update()
 		bar->setTooltipText(out_stream.str());
 	}
 	
+	std::map<int,LearnableAbility>::iterator iter;
+	std::map<int,LearnableAbility>& ablt = player->getLearnableAbilities();
+	
 	// Image Schaden Attacke links
 	label =  win_mgr.getWindow( "LeftClickAbilityImage");
 	name = player->getLeftAction();
-	if (("set:skills image:" + name) != label->getProperty("Image"))
+	
+	std::string imagename = "";
+	for (iter = ablt.begin(); iter != ablt.end(); ++iter)
 	{
-		label->setProperty("Image", "set:skills image:" + name);
+		if (iter->second.m_type == name)
+		{
+			imagename = iter->second.m_image;
+		}
+	}
+	
+	if (imagename == "")
+	{
+		imagename = "set:skills image:";
+		imagename += name;
+	}
+	if (imagename != label->getProperty("Image"))
+	{
+		label->setProperty("Image",imagename);
 	}
 
 	// Balken fuer Schaden Attacke links
@@ -241,9 +259,22 @@ void ControlPanel::update()
 	// Image Attacke rechts
 	label =  win_mgr.getWindow( "RightClickAbilityImage");
 	name = player->getRightAction();
-	if (("set:skills image:" + name) != label->getProperty("Image"))
+	for (iter = ablt.begin(); iter != ablt.end(); ++iter)
 	{
-		label->setProperty("Image", "set:skills image:" + name);
+		if (iter->second.m_type == name)
+		{
+			imagename = iter->second.m_image;
+		}
+	}
+	
+	if (imagename == "")
+	{
+		imagename = "set:skills image:";
+		imagename += name;
+	}
+	if (imagename != label->getProperty("Image"))
+	{
+		label->setProperty("Image",imagename);
 	}
 
 	// Balken fuer Schaden Attacke rechts

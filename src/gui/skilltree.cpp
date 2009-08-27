@@ -129,7 +129,13 @@ void SkillTree::update()
 			label->setProperty("FrameEnabled", "true");
 			label->setProperty("BackgroundEnabled", "true");
 			label->setID(it->first);
-			label->setProperty("Image", "set:skills image:" + it->second.m_type);
+			std::string imagename = it->second.m_image;
+			if (imagename == "")
+			{
+				imagename = "set:skills image:";
+				imagename += it->second.m_type;
+			}
+			label->setProperty("Image", imagename);
 			label->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&SkillTree::onSkillMouseClicked, this));
 			label->subscribeEvent(CEGUI::Window::EventMouseEnters, CEGUI::Event::Subscriber(&SkillTree::onAbilityHover, this));
 
