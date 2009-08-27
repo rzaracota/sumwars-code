@@ -597,50 +597,57 @@ void Monster::die()
 		// Object per ID von der World holen
 		WorldObject* object;
 		object = getRegion()->getObject(id);
+		Creature* cr = dynamic_cast<Creature*>(object);
 		Player* pl = dynamic_cast<Player*>(object);
 		Player* pl2;
 		short diff;
 		
 		Shape* sh = getShape();
-		if (pl!=0)
+		if (cr!=0)
 		{
-			if (pl->getState() == STATE_ACTIVE)
+			if (cr->getState() == STATE_ACTIVE)
 			{
 				
 
 				float exp = getBaseAttr()->m_max_experience;
-				pl->gainExperience(exp);
+				if (pl != 0)
+				{
+					pl->gainExperience(exp);
+				}
 
 				// Verteilen der Exp auf Spieler in der Nähe
-				std::set<int>& members = pl->getParty()->getMembers();
-				std::set<int>::iterator i;
-
-				for (i=members.begin();i!=members.end();i++)
+				Party* party = World::getWorld()->getPartyFrac(cr->getFraction());
+				if (party != 0)
 				{
-					pl2 = dynamic_cast<Player*>(getRegion()->getObject(*i));
-					
-					// An den Spieler der das Monster getoetet hat nicht doppelt verteilen...
-					if (pl2 == pl)
-						continue;
-					
-					// Spieler ist nicht in der Region
-					if (pl2 ==0)
-						continue;
-					
-					if (pl2->getShape()->getDistance(*sh) <20)
+					std::set<int>& members = party->getMembers();
+					std::set<int>::iterator i;
+	
+					for (i=members.begin();i!=members.end();i++)
 					{
-						// volle xp nur wenn das Monster nicht zu stark war
-						diff = getBaseAttr()->m_level - pl2->getBaseAttr()->m_level;
-						if (diff >5)
+						pl2 = dynamic_cast<Player*>(getRegion()->getObject(*i));
+						
+						// An den Spieler der das Monster getoetet hat nicht doppelt verteilen...
+						if (pl2 == pl)
+							continue;
+						
+						// Spieler ist nicht in der Region
+						if (pl2 ==0)
+							continue;
+						
+						if (pl2->getShape()->getDistance(*sh) <20)
 						{
-							pl2->gainExperience(exp*pow(0.86,diff));
-						}
-						else
-						{
-							pl2->gainExperience(exp);
+							// volle xp nur wenn das Monster nicht zu stark war
+							diff = getBaseAttr()->m_level - pl2->getBaseAttr()->m_level;
+							if (diff >5)
+							{
+								pl2->gainExperience(exp*pow(0.86,diff));
+							}
+							else
+							{
+								pl2->gainExperience(exp);
+							}
 						}
 					}
-					
 				}
 				
 
