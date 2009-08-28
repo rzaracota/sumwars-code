@@ -158,8 +158,8 @@ void Monster::updateCommand()
 		return;
 	}
 	
-	// bei Cutscenes keine AI verwenden
-	if (getRegion()->getCutsceneMode())
+	// bei Cutscenes und Dialogen keine AI verwenden
+	if (getRegion()->getCutsceneMode() || getDialogueId() != 0)
 		return;
 	
 	m_ai.m_goals->clear();
