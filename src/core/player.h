@@ -227,7 +227,7 @@ public:
 	 */
 	Party* getParty()
 	{
-		return World::getWorld()->getPartyFrac(getFraction());
+		return World::getWorld()->getParty(getFraction());
 	}
 	
 	/**

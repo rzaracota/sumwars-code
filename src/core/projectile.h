@@ -11,6 +11,7 @@
 #include <list>
 #include "gameobject.h"
 #include "projectilebase.h"
+#include "fraction.h"
 class World;
 
 
@@ -195,20 +196,20 @@ class Projectile : public GameObject
 	}
 	
 	/** 
-	 * \fn Fraction getFraction()
+	 * \fn Fraction::Id getFraction()
 	* \brief Gibt die Fraktion aus
 	*/
-	Fraction getFraction()
+	Fraction::Id getFraction()
 	{
 		return m_fraction;
 	}
 	
 	/**
-	 * \fn void setFraction(Fraction fr)
+	 * \fn void setFraction(Fraction::Id fr)
 	 * \brief setzt die Fraktion
 	 * \param fr Fraktion
 	 */
-	void setFraction(Fraction fr)
+	void setFraction(Fraction::Id fr)
 	{
 		m_fraction = fr;
 	}
@@ -330,10 +331,10 @@ class Projectile : public GameObject
 		int m_counter;
 		
 		/**
-		 * \var Fraction m_fraction
+		 * \var Fraction::Id m_fraction
 		 * \brief Fraktion des Objektes
 		 */
-		Fraction m_fraction;
+		Fraction::Id m_fraction;
 		
 		/**
 		 * \var std::string m_implementation

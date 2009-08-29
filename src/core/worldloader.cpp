@@ -1,5 +1,6 @@
 #include "worldloader.h"
 #include "world.h"
+#include "fraction.h"
 
 #include <iostream>
 
@@ -80,6 +81,10 @@ bool WorldLoader::loadRegions(TiXmlNode* node)
 		World::getWorld()->registerRegionData(rdata, rdata->m_id);
 		loadRegion(node,rdata);
 		
+	}
+	else if (!strcmp(node->Value(), "Fraction"))
+	{
+		loadFraction(node);
 	}
 	else
 	{
@@ -546,9 +551,51 @@ void WorldLoader::loadQuest(TiXmlNode* node, Quest* quest)
 				}
 				
 			}
+			else if (!strcmp(child->Value(), "Fraction"))
+			{
+				loadFraction(child);
+			}
 			else if (child->Type()!=TiXmlNode::COMMENT)
 			{
 				DEBUG("unexpected element of <Quest>: %s",child->Value());
+			}
+		}
+	}
+}
+
+void WorldLoader::loadFraction( TiXmlNode* node)
+{
+	ElementAttrib attr;
+	attr.parseElement(node->ToElement());
+	
+	std::string type;
+	attr.getString("type",type);
+	
+	if (type == "")
+		return;
+	World::getWorld()->createFraction(type);
+	
+	TiXmlNode* child;
+	for ( child = node->FirstChild(); child != 0; child = child->NextSibling())
+	{
+		if (child->Type()==TiXmlNode::ELEMENT)
+		{
+			if ((!strcmp(child->Value(), "Relation")))
+			{
+				std::string fraction,relation;
+				Fraction::Relation rel = Fraction::NEUTRAL;
+				
+				attr.parseElement(child->ToElement());
+				attr.getString("fraction",fraction);
+				attr.getString("relation",relation);
+				
+				if (relation == "ALLIED"  || relation == "allied")
+					rel = Fraction::ALLIED;
+				
+				if (relation == "HOSTILE"  || relation == "hostile")
+					rel = Fraction::HOSTILE;
+				
+				World::getWorld()->setRelation(type,fraction,rel);
 			}
 		}
 	}

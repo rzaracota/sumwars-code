@@ -90,7 +90,7 @@ bool Player::destroy()
 {
 	DEBUG5("leave Party");
 	DEBUG5("destroy");
-	World::getWorld()->getPartyFrac(m_fraction)->removeMember(getId());
+	World::getWorld()->getParty(m_fraction)->removeMember(getId());
 	return Creature::destroy();
 }
 
@@ -126,7 +126,7 @@ bool Player::init()
 	m_attribute_points=0;
 	m_skill_points=0;
 
-	m_fraction = NOFRACTION;
+	m_fraction = Fraction::NOFRACTION;
 
 	m_secondary_equip = false;
 
@@ -297,7 +297,7 @@ bool Player::onGamefieldClick(ClientCommand* command)
 	int dist;
 	bool meleedir = false;
 	WorldObject* wo;
-	WorldObject::Relation rel;
+	Fraction::Relation rel;
 
 	// Actionen auf self brauchen kein Zielobjekt
 	Action::ActionInfo* ainfo = Action::getActionInfo(command->m_action);
@@ -332,7 +332,7 @@ bool Player::onGamefieldClick(ClientCommand* command)
 				// Linke Maustaste: Aktion nur ausfuehren, wenn tatsaechlich ein passendenes Objekt vorhanden ist
 
 				// Fuer Aktionen der Art Nah oder Fernkampf braucht man eine feindliche Kreatur
-				if (rel == WorldObject::HOSTILE && (dist == Action::MELEE || dist == Action::RANGED))
+				if (rel == Fraction::HOSTILE && (dist == Action::MELEE || dist == Action::RANGED))
 				{
 
 					if (wo->getState()==STATE_ACTIVE)
@@ -351,7 +351,7 @@ bool Player::onGamefieldClick(ClientCommand* command)
 					}
 				}
 
-				if (rel == WorldObject::ALLIED && dist == Action::PARTY)
+				if (rel == Fraction::ALLIED && dist == Action::PARTY)
 				{
 					if (wo->getState()==STATE_ACTIVE)
 					{
@@ -369,7 +369,7 @@ bool Player::onGamefieldClick(ClientCommand* command)
 						}
 					}
 				}
-				else if (wo->isCreature() && ( rel == WorldObject::ALLIED || rel == WorldObject::NEUTRAL))
+				else if (wo->isCreature() && ( rel == Fraction::ALLIED || rel == Fraction::NEUTRAL))
 				{
 					com->m_type ="speak";
 
@@ -1061,11 +1061,11 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 				}
 				else if (command->m_button == BUTTON_WAR)
 				{
-					getParty()->setRelation(p->getId() , HOSTILE);
+					getParty()->setRelation(p->getId() , Fraction::HOSTILE);
 				}
 				else if (command->m_button == BUTTON_PEACE)
 				{
-					getParty()->setRelation(p->getId() , NEUTRAL);
+					getParty()->setRelation(p->getId() ,  Fraction::NEUTRAL);
 				}
 			}
 			break;

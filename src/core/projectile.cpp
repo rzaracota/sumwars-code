@@ -383,7 +383,7 @@ void Projectile::handleFlying(float dtime)
 			{
 				i = hitobj.begin();
 				hit=(*i);
-				while (!hitobj.empty() && World::getWorld()->getRelation(getFraction(),hit) != WorldObject::HOSTILE)
+				while (!hitobj.empty() && World::getWorld()->getRelation(getFraction(),hit) != Fraction::HOSTILE)
 				{
 					i=hitobj.erase(i);
 					if (i!=hitobj.end())
@@ -500,7 +500,7 @@ void Projectile::handleFlying(float dtime)
 		i = hitobj.begin();
 		hit = (*i);
 
-		while (!hitobj.empty() && (World::getWorld()->getRelation(getFraction(),hit->getFraction()) == WorldObject:: ALLIED || hit->getId() == m_last_hit_object_id ))
+		while (!hitobj.empty() && (World::getWorld()->getRelation(getFraction(),hit->getFraction()) == Fraction::ALLIED || hit->getId() == m_last_hit_object_id ))
 		{
 			i=hitobj.erase(i);
 			if (i!=hitobj.end())
@@ -582,7 +582,7 @@ void Projectile::handleFlying(float dtime)
 					continue;
 
 				// alle nicht feindlich gesinnten Objekte ausschliessen
-				if (World::getWorld()->getRelation(getFraction(),(*i)) != WorldObject::HOSTILE)
+				if (World::getWorld()->getRelation(getFraction(),(*i)) != Fraction::HOSTILE)
 					continue;
 
 				// kein zurueckspringen zu dem davor zuletzt getroffenen Objekt
@@ -687,7 +687,7 @@ void Projectile::handleGrowing(float dtime)
 				DEBUG5("covering obj %i",hit->getId());
 
 				// Kein Schaden an nicht feindliche Objekte austeilen
-				if (World::getWorld()->getRelation(getFraction(),hit) != WorldObject::HOSTILE)
+				if (World::getWorld()->getRelation(getFraction(),hit) != Fraction::HOSTILE)
 					continue;
 
 				// kein Schaden an Objekte austeilen, die sich im inneren Kreis befinden
@@ -768,7 +768,7 @@ void Projectile::doEffect(GameObject* target)
 					hit = hitobj.front();
 				}
 				
-				while (!hitobj.empty() && (World::getWorld()->getRelation(getFraction(),hit->getFraction()) == WorldObject:: ALLIED ))
+				while (!hitobj.empty() && (World::getWorld()->getRelation(getFraction(),hit->getFraction()) == Fraction:: ALLIED ))
 				{
 					i = hitobj.begin();
 					i=hitobj.erase(i);
@@ -840,7 +840,7 @@ void Projectile::doEffect(GameObject* target)
 			{
 				i = hitobj.begin();
 				hit = (*i);
-				while (i != hitobj.end() && World::getWorld()->getRelation(getFraction(),hit) != WorldObject::HOSTILE)
+				while (i != hitobj.end() && World::getWorld()->getRelation(getFraction(),hit) != Fraction::HOSTILE)
 				{
 					i=hitobj.erase(i);
 					if (i!=hitobj.end())
@@ -958,7 +958,7 @@ void Projectile::toString(CharConv* cv)
 {
 	GameObject::toString(cv);
 	
-	cv->toBuffer((char) getFraction());
+	cv->toBuffer(getFraction());
 	cv->toBuffer(m_timer);
 	cv->toBuffer(m_timer_limit);
 	cv->toBuffer(getSpeed().m_x);
@@ -973,11 +973,10 @@ void Projectile::fromString(CharConv* cv)
 {
 	GameObject::fromString(cv);
 	
-	char tmp;
-	cv->fromBuffer<char>(tmp);
-	m_fraction = (WorldObject::Fraction) tmp;
-	cv->fromBuffer<float>(m_timer);
-	cv->fromBuffer<float>(m_timer_limit);
+	
+	cv->fromBuffer(m_fraction);
+	cv->fromBuffer(m_timer);
+	cv->fromBuffer(m_timer_limit);
 	Vector speed;
 	cv->fromBuffer(speed.m_x);
 	cv->fromBuffer(speed.m_y);

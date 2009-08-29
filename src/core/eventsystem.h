@@ -526,6 +526,20 @@ class EventSystem
 		static int getRegion(lua_State *L);
 		
 		/**
+		 * \fn static int getRelation(lua_State *L)
+		 * \brief gibt das Verhaeltnis zweiter Fraktionen aus
+		 * \param L Lua Status
+		 */
+		static int getRelation(lua_State *L);
+		
+		/**
+		 * \fn static int setRelation(lua_State *L)
+		 * \brief Setzt das Verhaeltnis zweier Fraktionen
+		 */
+		static int setRelation(lua_State *L);
+		
+		
+		/**
 		 * \fn static int writeString(lua_State *L)
 		 * \brief schreibt einen String in den Stream
 		 * \param L Lua Status

@@ -766,13 +766,13 @@ void Scene::createScene()
 
 		// Schatten
 		//m_scene_manager->setAmbientLight(Ogre::ColourValue(0.0,0.0,0.0));
-		
+		/*
 		light = m_scene_manager->getLight("RegionLight");
 		light->setCastShadows(true);
 		m_scene_manager->setShadowTextureConfig(0,2048,2048,Ogre::PF_X8R8G8B8);
 		m_scene_manager->setShadowColour( Ogre::ColourValue(0.5, 0.5, 0.5) );
 		m_scene_manager->setShadowTechnique(Ogre::SHADOWTYPE_TEXTURE_ADDITIVE);
-		
+		*/
 		//m_scene_manager->setAmbientLight(Ogre::ColourValue(0.0,0.0,0.0));
 		//m_scene_manager->setShadowFarDistance (10);
 	}

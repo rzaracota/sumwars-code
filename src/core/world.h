@@ -42,7 +42,7 @@
 #include "party.h"
 #include "quest.h"
 #include "waypoint.h"
-
+#include "fraction.h"
 
 
 /**
@@ -283,19 +283,6 @@ public:
 	 * \param id ID
 	 */
 	Party* getParty(int id);
-	
-	/**
-	 * \fn Party* getPartyFrac(WorldObject::Fraction frac)
-	 * \brief Gibt die Party zurueck, welche zu der angegebenen Fraktion gehoert
-	 * \param frac Fraktion eines Spielers
-	 */
-	Party* getPartyFrac(WorldObject::Fraction frac)
-	{
-		if (frac<WorldObject::FRAC_PLAYER_PARTY || frac >=WorldObject::FRAC_PLAYER_PARTY + m_max_nr_players)
-			return 0;
-		
-		return getParty(frac - WorldObject::FRAC_PLAYER_PARTY);
-	}
 
 	/**
 	 * \fn WorldObject* getLocalPlayer()
@@ -313,20 +300,37 @@ public:
 	Party* getEmptyParty();
 
 	/**
-	 * \fn Party::Relation getRelation(WorldObject::Fraction frac, WorldObject* wo)
+	 * \fn Party::Relation getRelation(Fraction::Id frac, WorldObject* wo)
 	 * \brief Gibt die Beziehung eines Lebewesens zu einer Fraktion
 	 * \param frac Fraktion
 	 * \param wo Objekt
 	 */
-	WorldObject::Relation getRelation(WorldObject::Fraction frac, WorldObject* wo);
+	Fraction::Relation getRelation(Fraction::Id frac, WorldObject* wo);
 	
 	/**
-	 * \fn WorldObject::Relation getRelation(WorldObject::Fraction frac, WorldObject::Fraction frac2)
+	 * \fn Fraction::Relation getRelation(Fraction::Id frac, Fraction::Id frac2)
 	 * \brief Gibt die Beziehung zwischen zwei Fraktionen aus
 	 * \param frac erste Fraktion
 	 * \param frac2 zweite Fraktion
 	 */
-	WorldObject::Relation getRelation(WorldObject::Fraction frac, WorldObject::Fraction frac2);
+	Fraction::Relation getRelation(Fraction::Id frac, Fraction::Id frac2);
+	
+	/**
+	 * \fn Fraction::Relation getRelation(Fraction::Type fractionname1, Fraction::Type fractionname2)
+	 * \brief Gibt die Beziehung zwischen zwei Fraktionen aus
+	 * \param fractionname1 Name von Fraktion 1
+	 * \param fractionname2 Name von Fraktion 2
+	 */
+	Fraction::Relation getRelation(Fraction::Type fractionname1, Fraction::Type fractionname2);
+	
+	/**
+	 * \fn void setRelation(Fraction::Type fractionname1, Fraction::Type fractionname2, Fraction::Relation relation)
+	 * \brief Setzt das Verhaeltnis zwischen zwei Fraktionen
+	 * \param fractionname1 Name von Fraktion 1
+	 * \param fractionname2 Name von Fraktion 2
+	 * \param relation Verhaeltnis zwischen den zwei Fraktionen
+	 */
+	void setRelation(Fraction::Type fractionname1, Fraction::Type fractionname2, Fraction::Relation relation);
 
 
 	/**
@@ -383,6 +387,39 @@ public:
 	{
 		return m_players;
 	}
+	
+	/**
+	 * \fn Fraction* getFraction(Fraction::Id id)
+	 * \brief Gibt die Fraktion mit der angegebenen ID aus
+	 * \param id ID
+	 */
+	Fraction* getFraction(Fraction::Id id);
+	
+	/**
+	 * \fn Fraction* getFraction(Fraction::Type fractionname)
+	 * \brief Gibt Fraktion mit dem angegebenen Name aus
+	 * \param fractionname Name einer Fraktion
+	 */
+	Fraction* getFraction(Fraction::Type fractionname)
+	{
+		return getFraction(getFractionId(fractionname));
+	}
+	
+	/**
+	 * \fn Fraction::Id getFractionId(Fraction::Type fractionname)
+	 * \brief Gibt die ID der Fraktion mit dem angegebenen Name aus
+	 * \param fractionname Name einer Fraktion
+	 */
+	Fraction::Id getFractionId(Fraction::Type fractionname);
+	
+	/**
+	 * \fn void createFraction(Fraction::Type name)
+	 * \brief Erzeugt eine neue Fraktion
+	 * \param name Name der Fraktion
+	 * \param human Gibt an, ob es sich um einer Fraktion von Spielern handelt
+	 * \param id Id der Fraktion. Falls -1 angegeben wird, wird automatisch eine ID berechnet
+	 */
+	void createFraction(Fraction::Type name);
 	
 	/**
 	 * \fn bool isServer()
@@ -557,6 +594,12 @@ private:
 	 */
 	std::vector<Party> m_parties;
 
+	/**
+	 * \var std::map<Fraction::Id, Fraction*> m_fractions
+	 * \brief Liste aller Fraktionen im Spiel
+	 */
+	std::map<Fraction::Id, Fraction*> m_fractions;
+	
 	/**
 	 * \var m_player_slots
 	 * \brief Liste der Spieler in der Welt mit ihren Slots

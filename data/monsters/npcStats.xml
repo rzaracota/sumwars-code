@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 
-<Monster type="NPC" subtype="peasant" name="peasant" fraction="HUMAN" race="human" layer="NORMAL">
+<Monster type="NPC" subtype="peasant" name="peasant" fraction="human" race="human" layer="NORMAL">
 	<Mesh file="peasant_m" />
 	<BasicAttributes
 					experience="0"
@@ -47,7 +47,7 @@
 	<AI ai_sight_range="8" />
 </Monster>
 
-<Monster type="NPC" subtype="peasant_f" name="peasant" fraction="HUMAN" race="human" layer="NORMAL">
+<Monster type="NPC" subtype="peasant_f" name="peasant" fraction="human" race="human" layer="NORMAL">
 	<Mesh file="peasant_f" />
 	<Dropslots >
 		<Dropslot pbig="0.1" pmedium="0.2" psmall="0.2" pgold="0.2" max_gold="50" min_level="0" max_level="10" magic_prob="0.1" magic_power="1000" />
@@ -98,7 +98,7 @@
 	<AI ai_sight_range="8" />
 </Monster>
 
-<Monster type="NPC" subtype="guard" name="guard" fraction="HUMAN" race="human" layer="NORMAL">
+<Monster type="NPC" subtype="guard" name="guard" fraction="human" race="human" layer="NORMAL">
 	<Mesh file="guard_ais" />
 	<Dropslots >
 		<Dropslot pbig="0.1" pmedium="0.2" psmall="0.2" pgold="0.2" max_gold="50" min_level="0" max_level="10" magic_prob="0.1" magic_power="1000" />

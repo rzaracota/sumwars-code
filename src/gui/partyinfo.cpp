@@ -178,7 +178,7 @@ void PartyInfo::update()
 {
 	Player* player = m_document->getLocalPlayer();
 	Player* pl;
-	Party* party =  World::getWorld()->getPartyFrac(player->getFraction());
+	Party* party =  World::getWorld()->getParty(player->getFraction());
 	
 	// Gibt an, ob der Spieler aktuell Alleinspieler ist
 	bool solo = false;
@@ -200,7 +200,7 @@ void PartyInfo::update()
 	bool leader2;
 	DEBUG5("party %i solo %i leader %i",party->getId(),solo,leader);
 	
-	WorldObject::Relation rel,rel2;
+	Fraction::Relation rel,rel2;
 	
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	std::ostringstream stream;
@@ -321,7 +321,7 @@ void PartyInfo::update()
 		
 		// Bewerbung erlauben, wenn der andere Spieler ein Partyleiter und man selbst Solo
 		vis = false;
-		if (solo && player->getCandidateParty() ==-1 && leader2 && party->getId() != pl->getParty()->getId() && party->getCandidates().count(pl->getId())==0 && rel == WorldObject::NEUTRAL && rel2 == WorldObject::NEUTRAL)
+		if (solo && player->getCandidateParty() ==-1 && leader2 && party->getId() != pl->getParty()->getId() && party->getCandidates().count(pl->getId())==0 && rel == Fraction::NEUTRAL && rel2 == Fraction::NEUTRAL)
 		{
 			vis = true;
 		}
@@ -370,7 +370,7 @@ void PartyInfo::update()
 		
 		// Frieden Button anbieten, wenn aktuelles Verhaeltnis feindlich ist
 		vis = false;
-		if (leader && leader2 && rel == WorldObject::HOSTILE)
+		if (leader && leader2 && rel == Fraction::HOSTILE)
 		{
 			vis = true;
 		}
@@ -386,7 +386,7 @@ void PartyInfo::update()
 		
 		// Krieg Button anbieten, wenn aktuelles Verhaeltnis neutral ist
 		vis = false;
-		if (leader && leader2 && rel == WorldObject::NEUTRAL && player->getCandidateParty() != pl->getParty()->getId() && pl->getCandidateParty() != player->getParty()->getId())
+		if (leader && leader2 && rel == Fraction::NEUTRAL && player->getCandidateParty() != pl->getParty()->getId() && pl->getCandidateParty() != player->getParty()->getId())
 		{
 			vis = true;
 		}

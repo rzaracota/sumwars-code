@@ -378,51 +378,120 @@ void World::insertRegion(Region* region, int rnr)
 
 }
 
-WorldObject::Relation World::getRelation(WorldObject::Fraction frac, WorldObject::Fraction frac2)
+Fraction::Relation World::getRelation(Fraction::Id frac, Fraction::Id frac2)
 {
 	if (frac > frac2)
 		return getRelation(frac2,frac);
 	
-	if (frac == WorldObject::FRAC_HOSTILE_TO_ALL || frac2 == WorldObject::FRAC_HOSTILE_TO_ALL)
-		return WorldObject::HOSTILE;
+	// Sonderfaelle
+	if (frac == Fraction::HOSTILE_TO_ALL || frac2 == Fraction::HOSTILE_TO_ALL)
+		return Fraction::HOSTILE;
 	
-	if (frac == WorldObject::FRAC_NEUTRAL_TO_ALL || frac2 == WorldObject::FRAC_NEUTRAL_TO_ALL)
-		return WorldObject::NEUTRAL;
+	if (frac == Fraction::NEUTRAL_TO_ALL || frac2 == Fraction::NEUTRAL_TO_ALL)
+		return Fraction::NEUTRAL;
 	
 	if (frac == frac2)
-		return WorldObject::ALLIED;
+		return Fraction::ALLIED;
 	
-	if (frac == WorldObject::NOFRACTION)
-		return WorldObject::NEUTRAL;
+	if (frac == Fraction::NOFRACTION)
+		return Fraction::NEUTRAL;
 	
-	if (frac<=  WorldObject::FRAC_MONSTER && frac2<=  WorldObject::FRAC_MONSTER)
+	if (frac>=  Fraction::MONSTER && frac2>=  Fraction::MONSTER)
 	{
-		if (frac == WorldObject::FRAC_HUMAN && frac2 == WorldObject::FRAC_DWARF)
-			return WorldObject::NEUTRAL;
-		
-		return WorldObject::HOSTILE;	
+		// Beziehung Nicht-Spieler - Nicht-Spieler
+		Fraction* fraction = getFraction(frac);
+		return fraction->getRelation(frac2);
 	}
-	else if (frac<=  WorldObject::FRAC_MONSTER)
+	else if (frac<  Fraction::MONSTER)
 	{
 	
 		// Beziehung zwischen Spieler und Nicht-Spieler Partei
-		WorldObject::Relation data[7] = {WorldObject::NEUTRAL, WorldObject::ALLIED, WorldObject::HOSTILE,WorldObject::HOSTILE,  WorldObject::NEUTRAL, WorldObject::HOSTILE,WorldObject::HOSTILE};
+		Fraction* fraction = getFraction(frac2);
+		if (fraction ==0)
+			return Fraction::NEUTRAL;
 		
-		return data[frac];
+		return fraction->getRelation(Fraction::PLAYER);
 	}
 	else
 	{
 		// Beziehung zwischen Spielern
-		return std::min(m_parties[frac - WorldObject::FRAC_PLAYER_PARTY].getRelations()[frac2- WorldObject::FRAC_PLAYER_PARTY], m_parties[frac2 - WorldObject::FRAC_PLAYER_PARTY].getRelations()[frac- WorldObject::FRAC_PLAYER_PARTY]);
+		return std::min(m_parties[frac].getRelations()[frac2], m_parties[frac2].getRelations()[frac]);
 	}
 	
 	
 }
 
-WorldObject::Relation World::getRelation(WorldObject::Fraction frac, WorldObject* wo)
+Fraction::Relation World::getRelation(Fraction::Id frac, WorldObject* wo)
 {
-	WorldObject::Fraction f = wo->getFraction();
+	Fraction::Id f = wo->getFraction();
 	return getRelation(frac,f);
+}
+
+Fraction::Relation World::getRelation(Fraction::Type fractionname1, Fraction::Type fractionname2)
+{
+	Fraction::Id id1 = getFractionId(fractionname1);
+	Fraction::Id id2 = getFractionId(fractionname2);
+	
+	if (id1 == Fraction::NOFRACTION)
+	{
+		ERRORMSG("Fraction %s does not exist",fractionname1.c_str());
+		return Fraction::NEUTRAL;
+	}
+	
+	if (id2 == Fraction::NOFRACTION)
+	{
+		ERRORMSG("Fraction %s does not exist",fractionname2.c_str());
+		return Fraction::NEUTRAL;
+	}
+	
+	return getRelation(id1,id2);
+}
+
+void World::setRelation(Fraction::Type fractionname1, Fraction::Type fractionname2, Fraction::Relation relation)
+{
+	Fraction::Id id1 = getFractionId(fractionname1);
+	Fraction::Id id2 = getFractionId(fractionname2);
+	
+	if (id1 == Fraction::NOFRACTION)
+	{
+		ERRORMSG("Fraction %s does not exist",fractionname1.c_str());
+		return;
+	}
+	
+	if (id2 == Fraction::NOFRACTION)
+	{
+		ERRORMSG("Fraction %s does not exist",fractionname2.c_str());
+		return;
+	}
+	
+	
+	// id1 muss die kleinere ID sind, aber keine der PseudoIds fuer Player, Hostile, Neutral
+	if (id1 > id2)
+		std::swap(id1,id2);
+	
+	if (id1 < Fraction::MONSTER)
+	{
+		if (id2 >= Fraction::MONSTER)
+		{
+			std::swap(id1,id2);
+		}
+		else
+		{
+			// Spieler - Spieler relation kann nicht mit dieser Funktion gesetzt werden
+			return;
+		}
+	}
+	
+	Fraction * frac = getFraction(id1);
+	if (frac !=0 )
+	{
+		frac->setRelation(id2,relation);
+	}
+	else
+	{
+		ERRORMSG("Fraction %s or %s does not exist",fractionname1.c_str(), fractionname2.c_str());
+	}
+	
 }
 
 
@@ -1397,7 +1466,7 @@ void World::updatePlayers()
 
 					char frac;
 					cv->fromBuffer(frac);
-					m_local_player->setFraction((WorldObject::Fraction) frac);
+					m_local_player->setFraction((Fraction::Id) frac);
 					DEBUG("fraction %i",frac);
 
 					insertPlayer(m_local_player, LOCAL_SLOT);
@@ -2192,7 +2261,7 @@ bool World::processNetEvent(Region* region,CharConv* cv)
 		case NetEvent::PARTY_RELATION_CHANGED:
 			char rel;
 			cv->fromBuffer(rel);
-			World::getWorld()->getParty( event.m_data )->setRelation(event.m_id, (WorldObject::Relation) rel);
+			World::getWorld()->getParty( event.m_data )->setRelation(event.m_id, (Fraction::Relation) rel);
 			DEBUG5("party %i changed relation to %i to %i",event.m_data, event.m_id, rel);
 			break;
 			
@@ -2586,8 +2655,81 @@ WorldObject* World::getPlayer(int id)
 
 Party* World::getParty(int id)
 {
+	if (id >= Fraction::NEUTRAL_TO_ALL)
+		return 0;
+	
+	if (id <0)
+		return 0;
+	
 	if (id >= (int) m_parties.size())
 		m_parties.resize(id+1);
 		
 	return &(m_parties[id]);
 }
+
+
+Fraction* World::getFraction(Fraction::Id id)
+{
+	std::map<Fraction::Id, Fraction*>::iterator it =  m_fractions.find(id);
+	if (it == m_fractions.end())
+		return 0;
+	
+	return it->second;
+}
+
+Fraction::Id World::getFractionId(Fraction::Type fractionname)
+{
+	
+	if (fractionname == "player")
+		return Fraction::PLAYER;
+	
+	if (fractionname.find("player_") != std::string::npos)
+	{
+		// Id aus dem String extrahieren
+		int pos = fractionname.find("player_") + 7;
+		
+		std::stringstream stream;
+		stream.str( fractionname.substr(pos));
+		int nr;
+		stream >> nr;
+		return Fraction::PLAYER + nr;
+	}
+	
+	if (fractionname == "DEFAULT" || fractionname=="default")
+		return Fraction::DEFAULT;
+	
+	if (fractionname == "NEUTRAL_TO_ALL" || fractionname=="neutral_to_all")
+		return Fraction::NEUTRAL_TO_ALL;
+	
+	if (fractionname == "HOSTILE_TO_ALL" || fractionname=="hostile_to_all")
+		return Fraction::HOSTILE_TO_ALL;
+	
+	std::map<Fraction::Id, Fraction*>::iterator it;
+	for (it = m_fractions.begin(); it != m_fractions.end(); ++it)
+	{
+		if (it->second->getType() == fractionname)
+			return it->first;
+	}
+	
+	return Fraction::NOFRACTION;
+}
+		
+void World::createFraction(Fraction::Type name)
+{
+	// Fraktion mit dem gleichen Name oder gleicher Id zuerst loeschen
+	Fraction::Id oldid = World::getFractionId(name);
+	Fraction* frac = World::getFraction(oldid);
+	if (frac != 0)
+	{
+		delete frac;
+		m_fractions.erase(oldid);
+		ERRORMSG("duplicate fraction with name %s",name.c_str());
+	}
+	
+
+	Fraction::Id id = m_fractions.size() +1+ Fraction::MONSTER;
+	
+	frac = new Fraction(id, name);
+	m_fractions[id] = frac;
+}
+

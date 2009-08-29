@@ -100,7 +100,7 @@ void Damage::init()
 		m_multiplier[i]=1;
 	}
 
-	m_attacker_fraction = WorldObject::FRAC_HOSTILE_TO_ALL;
+	m_attacker_fraction = Fraction::HOSTILE_TO_ALL;
 	m_extra_dmg_race = "norace";
 }
 

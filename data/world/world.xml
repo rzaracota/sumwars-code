@@ -46,6 +46,31 @@
 
 <World  start_region="medMercCamp" start_location="entry_south">
 	
+	<Fraction type="human">
+		<Relation fraction="default" relation="neutral" />
+		<Relation fraction="player" relation="allied" />
+	</Fraction>
+	
+	<Fraction type="monster">
+		<Relation fraction="default" relation="neutral" />
+		<Relation fraction="player" relation="hostile" />
+		<Relation fraction="human" relation="hostile" />
+	</Fraction>
+	
+	<Fraction type="undead">
+		<Relation fraction="default" relation="hostile" />
+		<Relation fraction="player" relation="hostile" />
+		<Relation fraction="monster" relation="hostile" />
+		<Relation fraction="human" relation="hostile" />
+	</Fraction>
+	
+	<Fraction type="summoner">
+		<Relation fraction="default" relation="hostile" />
+		<Relation fraction="player" relation="hostile" />
+		<Relation fraction="human" relation="hostile" />
+		<Relation fraction="monster" relation="hostile" />
+		<Relation fraction="undead" relation="hostile" />
+	</Fraction>
 
 
 <!-- Lobby Konzilshalle der Elemtarmagier [fester Ort; Saeulenhalle im roemischen Stil] -->

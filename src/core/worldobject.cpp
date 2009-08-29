@@ -12,7 +12,7 @@ WorldObject::WorldObject( int id)
 	setBaseType(WORLDOBJECT);
 	init();
 	
-	m_fraction = NOFRACTION;
+	m_fraction = Fraction::NOFRACTION;
 	m_race = "";
 }
 
@@ -74,7 +74,7 @@ void WorldObject::toString(CharConv* cv)
 {
 	DEBUG5("worldobject::tostring");
 	GameObject::toString(cv);
-	cv->toBuffer<short>(m_fraction);
+	cv->toBuffer(m_fraction);
 	cv->toBuffer(m_race);
 	
 }
@@ -82,10 +82,7 @@ void WorldObject::toString(CharConv* cv)
 void WorldObject::fromString(CharConv* cv)
 {
 	GameObject::fromString(cv);
-	short tmp;
-	cv->fromBuffer<short>(tmp);
-	setFraction( (Fraction) tmp);
-	
+	cv->fromBuffer(m_fraction);	
 	cv->fromBuffer(m_race);
 	
 }
@@ -96,16 +93,21 @@ int WorldObject::getValue(std::string valname)
 {
 		if (valname == "fraction")
 		{
-			if (getFraction() >=FRAC_PLAYER_PARTY)
+			if (getFraction() < Fraction::NEUTRAL_TO_ALL)
 			{
 				std::stringstream stream;
-				stream << "player" << (getFraction() - FRAC_PLAYER_PARTY);
+				stream << "player_" << getFraction();
 				lua_pushstring(EventSystem::getLuaState(),stream.str().c_str());
 			}
 			else
 			{
-				static std::string frac[10] = {"none","human","demon","undead","dwarf","summoner","monster","","neutral","hostile"};
-				lua_pushstring(EventSystem::getLuaState(),frac[getFraction()].c_str());
+				Fraction* frac = World::getWorld()->getFraction( getFraction() );
+				static std::string fractype = "";
+				if (frac != 0)
+				{
+					fractype = frac->getType();
+				}
+				lua_pushstring(EventSystem::getLuaState(),fractype.c_str());
 			}
 			return 1;
 		}
@@ -130,22 +132,8 @@ bool WorldObject::setValue(std::string valname)
 		}
 		std::string fraction  = lua_tostring(EventSystem::getLuaState() ,-1);
 		lua_pop(EventSystem::getLuaState(), 1);
-		if (fraction == "human") setFraction(FRAC_HUMAN);
-		else if (fraction == "demon") setFraction(FRAC_DEMON);
-		else if (fraction == "undead") setFraction(FRAC_UNDEAD);
-		else if (fraction == "dwarf") setFraction(FRAC_DWARF);
-		else if (fraction == "summoner") setFraction(FRAC_SUMMONER);
-		else if (fraction == "monster") setFraction(FRAC_MONSTER);
-		else if (fraction == "neutral") setFraction(FRAC_NEUTRAL_TO_ALL);
-		else if (fraction.find("player") != std::string::npos)
-		{
- 			std::string num = fraction.substr(6);
-			std::stringstream stream(num);
-			int number;
-			stream >> number;
-			setFraction((GameObject::Fraction) (FRAC_PLAYER_PARTY + number));
-			
-		}
+		Fraction::Id id = World::getWorld()->getFractionId(fraction);
+		setFraction(id);
 		DEBUG("fraction is now %i",getFraction());
 		return true;
 	}
@@ -165,7 +153,7 @@ bool WorldObject::setValue(std::string valname)
 	return false;
 }
 
-void WorldObject::setFraction(Fraction fr)
+void WorldObject::setFraction(Fraction::Id fr)
 {
 	m_fraction = fr;
 }

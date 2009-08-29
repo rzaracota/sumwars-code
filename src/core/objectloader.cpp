@@ -49,26 +49,7 @@ bool  ObjectLoader::loadMonster(TiXmlNode* node)
 		
 		DEBUG5("monster: %s %s %s %s",type.c_str(), subtype.c_str(), race.c_str(), fraction.c_str());
 		
-		// String in enums umwandeln
-
-		if (fraction ==  "NOFRACTION")
-			data->m_fraction = WorldObject::NOFRACTION;
-		else if (fraction == "HUMAN")
-			data->m_fraction = WorldObject::FRAC_HUMAN;
-		else if (fraction == "DEMON")
-			data->m_fraction = WorldObject::FRAC_DEMON;
-		else if (fraction == "UNDEAD")
-			data->m_fraction = WorldObject::FRAC_UNDEAD;
-		else if (fraction == "DWARF")
-			data->m_fraction = WorldObject::FRAC_DWARF;
-		else if (fraction == "SUMMONER")
-			data->m_fraction = WorldObject::FRAC_SUMMONER;
-		else if (fraction == "MONSTER")
-			data->m_fraction = WorldObject::FRAC_MONSTER;
-		else if (fraction == "HOSTILE_TO_ALL")
-			data->m_fraction = WorldObject::FRAC_HOSTILE_TO_ALL;
-		else if (fraction == "PLAYER_PARTY")
-			data->m_fraction = WorldObject::FRAC_PLAYER_PARTY;
+		data->m_fraction_name = fraction;
 	
 		data->m_race = race;
 		

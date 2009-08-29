@@ -84,17 +84,6 @@ class WorldObject : public GameObject
 
 	public:
 
-	/**
-	 * \enum Relation
-	 * \brief Listet die verschiedenen Beziehungen zwischen Parties auf
-	 */
-	enum Relation
-	{
-		NEUTRAL = 0,
-		ALLIED = 1,
- 		HOSTILE =2
-	};
-
 	
 	/**
 	 * \enum Group
@@ -243,20 +232,20 @@ class WorldObject : public GameObject
 
 	
 	/**
-	 * \fn Fraction getFraction()
+	 * \fn Fraction::Id getFraction()
 	 * \brief Gibt die Fraktion aus
 	 */
-	Fraction getFraction()
+	Fraction::Id getFraction()
 	{
 		return m_fraction;
 	}
 	
 	/**
-	 * \fn void setFraction(Fraction fr)
+	 * \fn void setFraction(Fraction::Id fr)
 	 * \brief setzt die Fraktion
 	 * \param fr Fraktion
 	 */
-	void setFraction(Fraction fr);
+	void setFraction(Fraction::Id fr);
 	
 	/**
 	 * \fn Race getRace()
@@ -336,10 +325,10 @@ class WorldObject : public GameObject
 	Race m_race;
 
 	/**
-	 * \var Fraction m_fraction
+	 * \var Fraction::Id m_fraction
 	 * \brief Fraktion des Objektes
 	 */
-	Fraction m_fraction;
+	Fraction::Id m_fraction;
 		
 //Private stuff
 private:

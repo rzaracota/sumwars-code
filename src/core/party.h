@@ -71,21 +71,21 @@ class Party
 	}
 
 	/**
-	 * \fn std::map<int, WorldObject::Relation>& getRelations()
+	 * \fn std::map<int, Fraction::Relation>& getRelations()
 	 * \brief Gibt Beziehungen zu den anderen Parties aus
 	 */
-	std::map<int, WorldObject::Relation>& getRelations()
+	std::map<int, Fraction::Relation>& getRelations()
 	{
 		return m_relations;
 	}
 	
 	/**
-	 * \fn void setRelation(int id, WorldObject::Relation rel)
+	 * \fn void setRelation(int id, Fraction::Relation rel)
 	 * \brief Setzt die Beziehung zwischen zwei Parties
 	 * \param id Id der Party
 	 * \param rel Beziehung
 	 */
-	void setRelation(int id, WorldObject::Relation rel);
+	void setRelation(int id, Fraction::Relation rel);
 
 	/**
 	 * \fn int getId()
@@ -218,10 +218,10 @@ class Party
 	std::set<int> m_candidates;
 
 	/**
-	 * \var std::map<int, WorldObject::Relation> m_relations
+	 * \var std::map<int, Fraction::Relation> m_relations
 	 * \brief Beziehungen zu anderen Parties
 	 */
-	std::map<int, WorldObject::Relation> m_relations;
+	std::map<int, Fraction::Relation> m_relations;
 	
 	/**
 	 * \var std::map<short,Minimap*> m_minimaps

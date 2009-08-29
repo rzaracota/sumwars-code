@@ -1,3 +1,5 @@
+#pragma once
+
 #include "debug.h"
 #include <string>
 #include <map>
@@ -20,17 +22,33 @@ class Fraction
 			HOSTILE =2
 		};
 		
+		/**
+		 * \enum SpecialFraction
+		 * \brief einige besondere Werte fuer Fraktionids
+		 */
+		enum SpecialFraction
+		{
+			DEFAULT = -2,
+			NOFRACTION = -1,
+			PLAYER =0,
+			NEUTRAL_TO_ALL= 9998,
+			HOSTILE_TO_ALL = 9999,
+			MONSTER = 10000,
+		};
+		
 		typedef std::string Type;
 
+		typedef short Id;
 		
 		/**
-		 * \fn Fraction()
+		 * \fn Fraction(Id id, Type type)
 		 * \brief Konstruktor
 		 */
-		Fraction(int id, Type type, bool human)
+		Fraction(Id id, Type type)
 		{
 			m_id = id;
 			m_type = type;
+			m_relations[DEFAULT] = NEUTRAL;
 		}
 		
 		
@@ -53,19 +71,30 @@ class Fraction
 		}
 		
 		/**
-		 * \fn Relation getRelation(int id)
+		 * \fn Relation getRelation(Id id)
 		 * \brief Gibt Verhaeltnis zur Fraktion mit der ID id aus
 		 * \param id ID einer anderen Fraktion
 		 */
-		Relation getRelation(int id);
+		Relation getRelation(Id id);
+		
+		/**
+		 * \fn void setRelation(Id id, Relation relation)
+		 * \brief Setzt des Verhaeltnis zu einer Fraktion
+		 * \param id ID der Fraktion
+		 * \param relation Verhaeltnis
+		 */
+		void setRelation(Id id, Relation relation)
+		{
+			m_relations[id] = relation;
+		}
 	
 		
 	private:
 		/**
-		 * \var int m_id
+		 * \var Id m_id
 		 * \brief Nummer der Fraktion
 		 */
-		int m_id;
+		Id m_id;
 		
 		/**
 		 * \var Type m_type
@@ -80,14 +109,8 @@ class Fraction
 		std::string m_name;
 		
 		/**
-		 * \var std::map<int, Relation> m_relations
-		 * \brief Gibt Verhaeltnis zu anderen Fraktionen an
+		 * \var std::map<Id, Relation> m_relations
+		 * \brief Gibt Verhaeltnis zu anderen Fraktionen an, gespeichert wird nur Verhaeltnis zu Fraktionen mit hoeherer ID
 		 */
-		std::map<int, Relation> m_relations;
-		
-		/**
-		 * \var bool m_human_fraction
-		 * \brief Gibt an, ob es sich um eine Fraktion von Spielern handelt
-		 */
-		bool m_human_fraction;
+		std::map<Id, Relation> m_relations;
 };

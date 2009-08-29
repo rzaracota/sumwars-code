@@ -76,6 +76,12 @@ class WorldLoader
 	void loadEvent( TiXmlNode* node, Event *ev, TriggerType &type);
 	
 	/**
+	 * \fn void loadFraction( TiXmlNode* node)
+	 * \brief Laedt Daten zu einer Fraktion aus der XML Datei
+	 */
+	void loadFraction( TiXmlNode* node);
+	
+	/**
 	 * \fn void loadNPC( TiXmlNode* node)
 	 * \brief Laedt die Daten zu einem NPC aus einem Knoten
 	 * \param node XML Knoten

@@ -101,6 +101,9 @@ void EventSystem::init()
 	lua_register(m_lua, "addEffect", addEffect);
 	lua_register(m_lua, "timedExecute",timedExecute);
 	
+	lua_register(m_lua, "getRelation",getRelation);
+	lua_register(m_lua, "setRelation",setRelation);
+	
 	lua_register(m_lua, "writeString", writeString);
 	lua_register(m_lua, "writeNewline", writeNewline);
 	lua_register(m_lua, "writeUpdateString", writeUpdateString);
@@ -1657,7 +1660,7 @@ int EventSystem::getRolePlayers(lua_State *L)
 	{
 		lua_newtable(L);
 
-		std::set< int >& members = World::getWorld()->getPartyFrac(WorldObject::FRAC_PLAYER_PARTY)->getMembers();
+		std::set< int >& members = World::getWorld()->getParty(Fraction::PLAYER)->getMembers();
 		std::set< int >::iterator it;
 
 		WorldObject* wo;
@@ -1791,6 +1794,55 @@ int EventSystem::addEffect(lua_State *L)
 	else
 	{
 		ERRORMSG("Syntax: addEffect(string luacode)");		
+	}
+	return 0;
+}
+
+int EventSystem::getRelation(lua_State *L)
+{
+	int argc = lua_gettop(L);
+	if (argc>=2 && lua_isstring(L,1) && lua_isstring(L,2))
+	{
+		std::string frac1 = lua_tostring(L,1);
+		std::string frac2 = lua_tostring(L,2);
+		
+		Fraction::Relation rel = World::getWorld()->getRelation(frac1,frac2);
+		std::string result="neutral";
+		if (rel == Fraction::ALLIED)
+			result="allied";
+		if (rel == Fraction::HOSTILE)
+			result="hostile";
+		
+		lua_pushstring(L,result.c_str());
+		return 1;
+	}
+	else
+	{
+		ERRORMSG("Syntax: getRelation(string fraction1, string fraction2)");		
+	}
+	return 0;
+}
+
+int EventSystem::setRelation(lua_State *L)
+{
+	int argc = lua_gettop(L);
+	if (argc>=3 && lua_isstring(L,1) && lua_isstring(L,2) && lua_isstring(L,3))
+	{
+		std::string frac1 = lua_tostring(L,1);
+		std::string frac2 = lua_tostring(L,2);
+		std::string relation = lua_tostring(L,3);
+		
+		Fraction::Relation rel = Fraction::NEUTRAL;
+		if (relation == "allied" || relation =="ALLIED")
+			rel = Fraction::ALLIED;
+		if (relation == "hostile"  || relation == "HOSTILE")
+			rel = Fraction::HOSTILE;
+		
+		World::getWorld()->setRelation(frac1,frac2,rel);
+	}
+	else
+	{
+		ERRORMSG("Syntax: setRelation(string fraction1, string fraction2, 'neutral' | 'allied' | 'hostile')");		
 	}
 	return 0;
 }

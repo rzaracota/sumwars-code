@@ -39,7 +39,7 @@ Monster::Monster( int id,MonsterBasicData& data)
 	setType(data.m_type);
 	setSubtype(data.m_subtype);
 	m_race = data.m_race;
-	m_fraction = data.m_fraction;
+	m_fraction = World::getWorld()->getFractionId(data.m_fraction_name);
 
 
 	memcpy(m_drop_slots,&data.m_drop_slots, 4*sizeof(DropSlot));
@@ -214,7 +214,7 @@ void Monster::updateCommand()
 			if (! pl->canBeAttacked())
 				continue;
 			
-			if (World::getWorld()->getRelation(getFraction(), pl ) != HOSTILE)
+			if (World::getWorld()->getRelation(getFraction(), pl ) != Fraction::HOSTILE)
 				continue;
 				
 			dist = getShape()->getDistance(*(pl->getShape()));
@@ -235,7 +235,7 @@ void Monster::updateCommand()
 				WorldObjectList::iterator it;
 				for (it = ret.begin(); it != ret.end();)
 				{
-					if (World::getWorld()->getRelation(m_fraction,*it) == ALLIED )
+					if (World::getWorld()->getRelation(m_fraction,*it) == Fraction::ALLIED )
 					{
 						it = ret.erase(it);
 					}
@@ -279,7 +279,7 @@ void Monster::updateCommand()
 		{
 			
 		
-			if (World::getWorld()->getRelation(getFraction(), pl ) == HOSTILE)
+			if (World::getWorld()->getRelation(getFraction(), pl ) == Fraction::HOSTILE)
 			{
 				dist = getShape()->getDistance(*(pl->getShape()));
 				if (dist < m_ai.m_vars.m_chase_distance)
@@ -317,7 +317,7 @@ void Monster::updateCommand()
 	
 	for (it=ret.begin();it!=ret.end();++it)
 	{
-		if (World::getWorld()->getRelation(m_fraction,(*it)) == WorldObject::ALLIED)
+		if (World::getWorld()->getRelation(m_fraction,(*it)) == Fraction::ALLIED)
 		{
 			dist = getShape()->getDistance(*((*it)->getShape()));
 			m_ai.m_allies->push_back(std::make_pair(*it,dist) );
@@ -550,7 +550,7 @@ bool Monster::takeDamage(Damage* damage)
 					
 					if (mon != 0)
 					{
-						if (World::getWorld()->getRelation(getFraction(),mon) == ALLIED)
+						if (World::getWorld()->getRelation(getFraction(),mon) == Fraction::ALLIED)
 						{
 							ai = &(mon->getAi());
 							if (ai->m_chase_player_id==0)
@@ -625,7 +625,7 @@ void Monster::die()
 				}
 
 				// Verteilen der Exp auf Spieler in der Nähe
-				Party* party = World::getWorld()->getPartyFrac(cr->getFraction());
+				Party* party = World::getWorld()->getParty(cr->getFraction());
 				if (party != 0)
 				{
 					std::set<int>& members = party->getMembers();

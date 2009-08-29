@@ -1147,7 +1147,7 @@ void MainWindow::updateObjectInfo()
 			wo = dynamic_cast<WorldObject*>(go);
 			if (wo != 0)
 			{
-				if (World::getWorld()->getRelation(m_document->getLocalPlayer()->getFraction(), wo->getFraction()) == WorldObject::ALLIED)
+				if (World::getWorld()->getRelation(m_document->getLocalPlayer()->getFraction(), wo->getFraction()) == Fraction::ALLIED)
 				{
 					dist *=10;
 				}
@@ -2031,7 +2031,7 @@ void MainWindow::updatePartyInfo()
 		float hperc;
 		Player* player = m_document->getLocalPlayer();
 		Player* pl;
-		Party* party = World::getWorld()->getPartyFrac(player->getFraction());
+		Party* party = World::getWorld()->getParty(player->getFraction());
 		
 		std::set<int>::iterator it;
 		// Schleife ueber die Mitglieder der Party des Spielers

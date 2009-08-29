@@ -63,10 +63,10 @@ struct Damage
 	int m_attacker_id;
 	
 	/**
-	 * \var WorldObject::Fraction m_attacker_fraction
+	 * \var Fraction::Id m_attacker_fraction
 	 * \brief Fraktion des Angreifers
 	 */
-	WorldObject::Fraction m_attacker_fraction;
+	Fraction::Id m_attacker_fraction;
 	
 
 	/**

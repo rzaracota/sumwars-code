@@ -9,6 +9,7 @@ class Region;
 #include "networkstruct.h"
 #include <string>
 #include <set>
+#include "fraction.h"
 
 /**
  * \class GameObject
@@ -79,24 +80,6 @@ class GameObject
 			WORLDOBJECT =1,
 			PROJECTILE = 2,
 			DROPITEM = 3,
-		};
-		
-		/**
-		 * \enum Fraction
-		 * \brief Parteien fuer die Lebewesen kaempfen koennen
-		 */
-		enum Fraction
-		{
-			NOFRACTION = 0,
-			FRAC_HUMAN = 1,
-			FRAC_DEMON = 2,
-			FRAC_UNDEAD = 3,
-			FRAC_DWARF = 4,
-			FRAC_SUMMONER = 5,
-			FRAC_MONSTER = 6,
-			FRAC_NEUTRAL_TO_ALL =8,
-			FRAC_HOSTILE_TO_ALL=9,
-			FRAC_PLAYER_PARTY = 10,
 		};
 		
 		

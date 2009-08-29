@@ -1,9 +1,12 @@
-Fraction:: getRelation(int id)
+#include "fraction.h"
+
+Fraction::Relation Fraction::getRelation(Id id)
 {
-	std::map<int, Relation>::iterator it;
+	std::map<Id, Relation>::iterator it;
 	it = m_relations.find(id);
 	if (it == m_relations.end())
-		return NEUTRAL;
+		return m_relations[DEFAULT];
 			
 	return it->second;
 }
+

@@ -80,10 +80,10 @@ struct MonsterBasicData
 	WorldObject::Race m_race;
 
 	/**
-	 * \var WorldObject::Fraction m_fraction
+	 * \var std::string m_fraction_name
 	 * \brief Fraktion des Objektes
 	 */
-	WorldObject::Fraction m_fraction;
+	std::string m_fraction_name;
 	
 	/**
 	 * \var DropSlot m_drop_slots[4]

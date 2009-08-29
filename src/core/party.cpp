@@ -7,7 +7,7 @@ void Party::init(int id)
 	
 	m_leader_id =0;
 	m_id = id;
-	m_relations[id] = WorldObject::ALLIED;
+	m_relations[id] = Fraction::ALLIED;
 }
 
 
@@ -107,7 +107,7 @@ void Party::addMember(int id)
 	
 	
 	
-	player->setFraction((WorldObject::Fraction) (getId() + WorldObject::FRAC_PLAYER_PARTY));
+	player->setFraction(getId());
 	
 	if (World::getWorld()->isServer())
 	{
@@ -173,7 +173,7 @@ void Party::acceptCandidate(int id)
 	addMember(id);
 }
 
-void Party::setRelation(int id, WorldObject::Relation rel)
+void Party::setRelation(int id, Fraction::Relation rel)
 {
 	m_relations[id] = rel;
 	
@@ -208,7 +208,7 @@ void Party::toString(CharConv* cv)
 	}
 	
 	cv->toBuffer<char>(m_relations.size());
-	std::map<int, WorldObject::Relation>::iterator jt;
+	std::map<int, Fraction::Relation>::iterator jt;
 	for (jt = m_relations.begin(); jt != m_relations.end(); ++jt)
 	{
 		cv->toBuffer<char>(jt->first);
@@ -242,13 +242,13 @@ void Party::fromString(CharConv* cv)
 	}
 	
 	cv->fromBuffer<char>(nr_rel);
-	std::map<int, WorldObject::Relation>::iterator jt;
+	std::map<int, Fraction::Relation>::iterator jt;
 	char rel, pid;
 	for (int i=0; i<nr_rel; i++)
 	{
 		cv->fromBuffer<char>(pid);
 		cv->fromBuffer<char>(rel);
-		m_relations[pid] = (WorldObject::Relation) rel;
+		m_relations[pid] = (Fraction::Relation) rel;
 		
 	}
 }

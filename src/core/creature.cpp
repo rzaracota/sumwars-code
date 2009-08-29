@@ -563,7 +563,7 @@ void Creature::performAction(float &time)
 			
 			for (it = res.begin(); it != res.end(); ++it)
 			{
-				if (World::getWorld()->getRelation(getFraction(), (*it)->getFraction()) == ALLIED)
+				if (World::getWorld()->getRelation(getFraction(), (*it)->getFraction()) == Fraction::ALLIED)
 				{
 					if (goal.distanceTo((*it)->getShape()->m_center) < dist)
 					{
@@ -747,7 +747,7 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 		// Startpunkt fuer Geschosse
 		// aeusserer Rand des Ausfuehrenden plus 5%
 		Vector sproj;
-		Fraction fr = m_fraction;
+		Fraction::Id fr = m_fraction;
 		sproj = pos + dir*1.05*s.m_radius;
 		
 		if (*kt == "dmg_at_target")
@@ -798,7 +798,7 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 			getRegion()->getObjectsInShape(&s, &res, LAYER_AIR,CREATURE,0);
 			for (it=res.begin();it!=res.end();++it)
 			{
-				if (World::getWorld()->getRelation(fr,(*it)) == WorldObject::ALLIED)
+				if (World::getWorld()->getRelation(fr,(*it)) == Fraction::ALLIED)
 				{
 					if ((*it)->isCreature())
 					{
@@ -821,7 +821,7 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 			getRegion()->getObjectsInShape(&s, &res, LAYER_AIR,CREATURE,0);
 			for (it=res.begin();it!=res.end();++it)
 			{
-				if (World::getWorld()->getRelation(fr,(*it)) == WorldObject::HOSTILE)
+				if (World::getWorld()->getRelation(fr,(*it)) == Fraction::HOSTILE)
 				{
 					if ((*it)->isCreature())
 					{
@@ -841,7 +841,7 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 			getRegion()->getObjectsInShape(&s, &res, LAYER_AIR,CREATURE,0);
 			for (it=res.begin();it!=res.end();++it)
 			{
-				if (World::getWorld()->getRelation(fr,(*it)) == WorldObject::ALLIED)
+				if (World::getWorld()->getRelation(fr,(*it)) == Fraction::ALLIED)
 				{
 					if ((*it)->isCreature())
 					{
@@ -864,7 +864,7 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 			getRegion()->getObjectsInShape(&s, &res, LAYER_AIR,CREATURE,0);
 			for (it=res.begin();it!=res.end();++it)
 			{
-				if (World::getWorld()->getRelation(fr,(*it)) == WorldObject::HOSTILE)
+				if (World::getWorld()->getRelation(fr,(*it)) == Fraction::HOSTILE)
 				{
 					if ((*it)->isCreature())
 					{
@@ -927,7 +927,7 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 			// an alle einfachen Schaden austeilen
 			for (it=res.begin();it!=res.end();++it)
 			{
-				if ((*it)->isCreature() && World::getWorld()->getRelation(fr,(*it)) == WorldObject::HOSTILE)
+				if ((*it)->isCreature() && World::getWorld()->getRelation(fr,(*it)) == Fraction::HOSTILE)
 				{
 					pr = ObjectFactory::createProjectile(projtype);
 					pr->setDamage(&m_damage);
@@ -949,7 +949,7 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 			// an alle einfachen Schaden austeilen
 			for (it=res.begin();it!=res.end();++it)
 			{
-				if ((*it)->isCreature() && World::getWorld()->getRelation(fr,(*it)) == WorldObject::HOSTILE)
+				if ((*it)->isCreature() && World::getWorld()->getRelation(fr,(*it)) == Fraction::HOSTILE)
 				{
 					pr = ObjectFactory::createProjectile(projtype);
 					if (pr !=0)
@@ -1042,7 +1042,7 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 			// an alle Schaden austeilen
 			for (it=res.begin();it!=res.end();++it)
 			{
-				if ((*it)->isCreature() && World::getWorld()->getRelation(getFraction(),(*it)->getFraction()) ==  HOSTILE)
+				if ((*it)->isCreature() && World::getWorld()->getRelation(getFraction(),(*it)->getFraction()) ==  Fraction::HOSTILE)
 				{
 					cr = (Creature*) (*it);
 					cbam.m_dwalk_speed = -cr->getBaseAttrMod()->m_walk_speed/2;
@@ -1736,7 +1736,7 @@ void Creature::calcStatusModCommand()
 
 			DEBUG5("checking obj %i",(*i)->getId());
 			// Fuer feindliche Lebewesen
-			if (World::getWorld()->getRelation(m_fraction,*i) == WorldObject::HOSTILE)
+			if (World::getWorld()->getRelation(m_fraction,*i) == Fraction::HOSTILE)
 			{
 				// Abstand zum eigenen Mittelpunkt berechnen
 				DEBUG5("hostile");
@@ -2743,7 +2743,7 @@ void Creature::calcDamage(Action::ActionType act,Damage& dmg)
 	if (m_dyn_attr.m_status_mod_time[Damage::CONFUSED]>0)
 	{
 		// Fraktion auf feindlich gegen alle setzen
-		dmg.m_attacker_fraction = FRAC_HOSTILE_TO_ALL;
+		dmg.m_attacker_fraction = Fraction::HOSTILE_TO_ALL;
 	}
 	
 	// Faehigkeit brennende Wut
@@ -3241,7 +3241,7 @@ bool Creature::takeDamage(Damage* d)
 
 	DEBUG5("take Damage %i",getId());
 	// Testen ob der Verursacher des Schadens feindlich gesinnt ist
-	if (World::getWorld()->getRelation(d->m_attacker_fraction,this) != HOSTILE)
+	if (World::getWorld()->getRelation(d->m_attacker_fraction,this) != Fraction::HOSTILE)
 	{
 		// Verursacher ist nicht feindlich, kein Schaden
 		DEBUG5("not hostile, no dmg");
