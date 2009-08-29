@@ -1720,6 +1720,8 @@ void Player::toString(CharConv* cv)
 
 	cv->toBuffer(getBaseAttr()->m_level);
 
+	cv->toBuffer(m_look);
+	
 	// Items
 	char cnt =0;
 	Item* item;
@@ -1767,7 +1769,8 @@ void Player::fromString(CharConv* cv)
 	m_name = tmp;
 
 	cv->fromBuffer(getBaseAttr()->m_level);
-
+	cv->fromBuffer(m_look);
+	
 	char cnt;
 	cv->fromBuffer(cnt);
 	DEBUG5("number of items: %i",cnt);
