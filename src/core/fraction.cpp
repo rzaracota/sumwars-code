@@ -1,5 +1,7 @@
 #include "fraction.h"
 
+
+
 Fraction::Relation Fraction::getRelation(Id id)
 {
 	std::map<Id, Relation>::iterator it;
@@ -8,5 +10,40 @@ Fraction::Relation Fraction::getRelation(Id id)
 		return m_relations[DEFAULT];
 			
 	return it->second;
+}
+
+void Fraction::toString(CharConv* cv)
+{
+	cv->toBuffer(m_id);
+	cv->toBuffer(m_type);
+	cv->toBuffer(m_name);
+	
+	cv->toBuffer<int>(m_relations.size());
+	
+	
+	std::map<Id, Relation>::iterator it;
+	for (it = m_relations.begin(); it != m_relations.end(); ++it)
+	{
+		cv->toBuffer(it->first);
+		cv->toBuffer<char>(it->second);
+	}
+}
+
+void Fraction::fromString(CharConv* cv)
+{
+	cv->fromBuffer(m_name);
+	
+	cv->toBuffer(m_relations.size());
+	
+	int nr;
+	cv->fromBuffer(nr);
+	char tmp;
+	Fraction::Id id;
+	for (int i=0; i<nr; i++)
+	{
+		cv->fromBuffer(id);
+		cv->fromBuffer(tmp);
+		m_relations[id] = (Relation) tmp;
+	}
 }
 

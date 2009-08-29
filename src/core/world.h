@@ -324,6 +324,15 @@ public:
 	Fraction::Relation getRelation(Fraction::Type fractionname1, Fraction::Type fractionname2);
 	
 	/**
+	 * \fn void setRelation(Fraction::Id frac, Fraction::Id frac2, Fraction::Relation relation)
+	 * \brief Setzt das Verhaeltnis zwischen zwei Fraktionen
+	 * \param frac erste Fraktion
+	 * \param frac2 zweite Fraktion
+	 * \param relation Verhaeltnis zwischen den zwei Fraktionen
+	 */
+	void setRelation(Fraction::Id frac, Fraction::Id frac2, Fraction::Relation relation);
+	
+	/**
 	 * \fn void setRelation(Fraction::Type fractionname1, Fraction::Type fractionname2, Fraction::Relation relation)
 	 * \brief Setzt das Verhaeltnis zwischen zwei Fraktionen
 	 * \param fractionname1 Name von Fraktion 1

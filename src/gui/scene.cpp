@@ -686,7 +686,7 @@ void Scene::createScene()
 	light->setSpecularColour(0.0, 0.0, 0.0);
 	light->setAttenuation(1000,0.5,0.000,0.00001);
 	light->setCastShadows(false);
-	DEBUG("hero light %f %f %f",colour[0], colour[1], colour[2]);
+	DEBUG5("hero light %f %f %f",colour[0], colour[1], colour[2]);
 
 	colour= region->getDirectionalLight();
 	light = m_scene_manager->createLight("RegionLight");
@@ -694,7 +694,7 @@ void Scene::createScene()
 	light->setDiffuseColour(colour[0], colour[1], colour[2]);
 	light->setSpecularColour(colour[0], colour[1], colour[2]);
 	light->setDirection(Ogre::Vector3(-1,-1,-1));
-	DEBUG("directional light %f %f %f",colour[0], colour[1], colour[2]);
+	DEBUG5("directional light %f %f %f",colour[0], colour[1], colour[2]);
 
 	if (region !=0)
 	{
@@ -731,7 +731,7 @@ void Scene::createScene()
 
 		colour= region->getAmbientLight();
 		m_scene_manager->setAmbientLight(Ogre::ColourValue(colour[0], colour[1], colour[2]));
-		DEBUG("ambient light %f %f %f",colour[0], colour[1], colour[2]);
+		DEBUG5("ambient light %f %f %f",colour[0], colour[1], colour[2]);
 		//m_scene_manager->setAmbientLight(Ogre::ColourValue(0.0,0.0,0.0));
 
 		// Boden erstellen

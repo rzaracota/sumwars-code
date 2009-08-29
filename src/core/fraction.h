@@ -1,6 +1,7 @@
 #pragma once
 
 #include "debug.h"
+#include "charconv.h"
 #include <string>
 #include <map>
 
@@ -88,6 +89,20 @@ class Fraction
 			m_relations[id] = relation;
 		}
 	
+		/**
+		 * \fn void toString(CharConv* cv)
+		 * \brief Konvertiert das Objekt in einen String und schreibt ihn in der Puffer
+		 * \param cv Ausgabepuffer
+		 */
+		void toString(CharConv* cv);
+
+
+		/**
+		 * \fn virtual void fromString(CharConv* cv)
+		 * \brief Erzeugt das Objekt aus einem String
+		 * \param cv Eingabepuffer
+		 */
+		void fromString(CharConv* cv);
 		
 	private:
 		/**

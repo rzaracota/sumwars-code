@@ -447,23 +447,9 @@ Fraction::Relation World::getRelation(Fraction::Type fractionname1, Fraction::Ty
 	return getRelation(id1,id2);
 }
 
-void World::setRelation(Fraction::Type fractionname1, Fraction::Type fractionname2, Fraction::Relation relation)
+void World::setRelation(Fraction::Id frac, Fraction::Id frac2, Fraction::Relation relation)
 {
-	Fraction::Id id1 = getFractionId(fractionname1);
-	Fraction::Id id2 = getFractionId(fractionname2);
-	
-	if (id1 == Fraction::NOFRACTION)
-	{
-		ERRORMSG("Fraction %s does not exist",fractionname1.c_str());
-		return;
-	}
-	
-	if (id2 == Fraction::NOFRACTION)
-	{
-		ERRORMSG("Fraction %s does not exist",fractionname2.c_str());
-		return;
-	}
-	
+	Fraction::Id id1 = frac, id2 = frac2;
 	
 	// id1 muss die kleinere ID sind, aber keine der PseudoIds fuer Player, Hostile, Neutral
 	if (id1 > id2)
@@ -482,15 +468,43 @@ void World::setRelation(Fraction::Type fractionname1, Fraction::Type fractionnam
 		}
 	}
 	
-	Fraction * frac = getFraction(id1);
-	if (frac !=0 )
+	Fraction * fraction = getFraction(id1);
+	if (fraction !=0 )
 	{
-		frac->setRelation(id2,relation);
+		fraction->setRelation(id2,relation);
+		
+		NetEvent event;
+		event.m_id = id1;
+		event.m_data = id2;
+		event.m_type = NetEvent::FRACTION_RELATION_CHANGED;
+		
+		insertNetEvent(event);
 	}
 	else
 	{
-		ERRORMSG("Fraction %s or %s does not exist",fractionname1.c_str(), fractionname2.c_str());
+		ERRORMSG("Fraction %i does not exist",id1);
 	}
+}
+
+void World::setRelation(Fraction::Type fractionname1, Fraction::Type fractionname2, Fraction::Relation relation)
+{
+	Fraction::Id id1 = getFractionId(fractionname1);
+	Fraction::Id id2 = getFractionId(fractionname2);
+	
+	if (id1 == Fraction::NOFRACTION)
+	{
+		ERRORMSG("Fraction %s does not exist",fractionname1.c_str());
+		return;
+	}
+	
+	if (id2 == Fraction::NOFRACTION)
+	{
+		ERRORMSG("Fraction %s does not exist",fractionname2.c_str());
+		return;
+	}
+	
+	
+	setRelation(id1,id2,relation);
 	
 }
 
@@ -859,10 +873,7 @@ void World::handleSavegame(CharConv *cv, int slot)
 				}
 			
 				m_network->pushSlotMessage(msg3.getBitStream(),slot);
-			}
 			
-			if (slot != LOCAL_SLOT)
-			{
 				// Informationen ueber Parties senden
 				PackageHeader header4;
 				header4.m_content =PTYPE_S2C_PARTY;
@@ -881,10 +892,7 @@ void World::handleSavegame(CharConv *cv, int slot)
 						m_network->pushSlotMessage(msg3.getBitStream(),slot);
 					}
 				}
-			}
 			
-			if (slot != LOCAL_SLOT)
-			{
 				// Informationen ueber Parties senden
 				PackageHeader header5;
 				header5.m_number =1;
@@ -902,6 +910,25 @@ void World::handleSavegame(CharConv *cv, int slot)
 
 						it->second->toString(&msg5);
 						m_network->pushSlotMessage(msg5.getBitStream(),slot);
+					
+				}
+				
+				PackageHeader header6;
+				header6.m_number =1;
+				header6.m_content =PTYPE_S2C_FRACTION;
+
+				std::map< Fraction::Id, Fraction* >::iterator ft;
+				
+				for (ft = m_fractions.begin(); ft != m_fractions.end(); ++ft)
+				{
+					
+					DEBUG5("sending data for Fraction %s",ft->second->getType().c_str());
+						
+					CharConv msg6;
+					header6.toString(&msg6);
+
+					ft->second->toString(&msg6);
+					m_network->pushSlotMessage(msg6.getBitStream(),slot);
 					
 				}
 			}
@@ -1422,8 +1449,7 @@ void World::updatePlayers()
 					}
 
 				}
-
-				if (headerp.m_content == PTYPE_S2C_REGION)
+				else if (headerp.m_content == PTYPE_S2C_REGION)
 				{
 					// Daten zu einer Region erhalten
 					DEBUG("got data for region %i",headerp.m_number);
@@ -1455,8 +1481,7 @@ void World::updatePlayers()
 						insertRegion(reg, headerp.m_number);
 					}
 				}
-
-				if (headerp.m_content == PTYPE_S2C_INITIALISATION)
+				else if (headerp.m_content == PTYPE_S2C_INITIALISATION)
 				{
 					int id;
 					cv->fromBuffer(id);
@@ -1471,8 +1496,7 @@ void World::updatePlayers()
 
 					insertPlayer(m_local_player, LOCAL_SLOT);
 				}
-				
-				if (headerp.m_content == PTYPE_S2C_WAYPOINTS)
+				else if (headerp.m_content == PTYPE_S2C_WAYPOINTS)
 				{
 					DEBUG("got waypoints");
 					std::map<short,WaypointInfo>& winfos = World::getWorld()->getWaypointData();
@@ -1492,14 +1516,12 @@ void World::updatePlayers()
 						DEBUG5("got waypoint info %i %s %f %f",regid, wi.m_name.c_str(), wi.m_world_coord.m_x,wi.m_world_coord.m_y);
 					}
 				}
-
-				if (headerp.m_content == PTYPE_S2C_PARTY)
+				else if (headerp.m_content == PTYPE_S2C_PARTY)
 				{
 					int id = headerp.m_number;
 					getParty(id)->fromString(cv);
-				}
-				
-				if (headerp.m_content == PTYPE_S2C_QUEST)
+				}				
+				else if (headerp.m_content == PTYPE_S2C_QUEST)
 				{
 					std::string name,tabname;
 					cv->fromBuffer(name);
@@ -1511,8 +1533,20 @@ void World::updatePlayers()
 					qu->init();
 					addQuest(tabname,qu);
 				}
-
-				if (headerp.m_content == PTYPE_S2C_REGION_CHANGED)
+				else if (headerp.m_content == PTYPE_S2C_FRACTION)
+				{
+					Fraction::Id id;
+					Fraction::Type type;
+					cv->fromBuffer(id);
+					cv->fromBuffer(type);
+					
+					Fraction* frac = new Fraction(id, type);
+					frac->fromString(cv);
+					m_fractions[id] = frac;
+					
+					
+				}
+				else if (headerp.m_content == PTYPE_S2C_REGION_CHANGED)
 				{
 					DEBUG5("notified that region changed to %i",headerp.m_number);
 					// der lokale Spieler hat die Region gewechselt
@@ -1526,8 +1560,7 @@ void World::updatePlayers()
 					DEBUG5("state %i",m_local_player->getState());
 	
 				}
-
-				if (headerp.m_content == PTYPE_S2C_EVENT)
+				else if (headerp.m_content == PTYPE_S2C_EVENT)
 				{
 					Region* reg = m_local_player->getRegion();
 
@@ -1544,8 +1577,7 @@ void World::updatePlayers()
 					}
 
 				}
-
-				if (headerp.m_content == PTYPE_S2C_MESSAGE)
+				else if (headerp.m_content == PTYPE_S2C_MESSAGE)
 				{
 					char* buf = new char[headerp.m_number+1];
 					buf[headerp.m_number] = 0;
@@ -1555,21 +1587,27 @@ void World::updatePlayers()
 
 					delete buf;
 				}
-				
-				if (headerp.m_content == PTYPE_S2C_LUA_CHUNK)
+				else if (headerp.m_content == PTYPE_S2C_LUA_CHUNK)
 				{
 					std::string chunk;
 					cv->fromBuffer(chunk);
 					DEBUG5("got lua chunk %s",chunk.c_str());
 					EventSystem::doString(chunk.c_str());
 				}
-
-				if (headerp.m_content == PTYPE_S2C_DATA_CHECK)
+				else if (headerp.m_content == PTYPE_S2C_DATA_CHECK)
 				{
 					if (m_local_player->getRegion() !=0)
 					{
 						m_local_player->getRegion() ->	checkRegionData(cv);
 					}
+				}
+				else if (headerp.m_content == PTYPE_C2S_MESSAGE)
+				{
+					
+				}
+				else
+				{
+					DEBUG("got package with unknown type %i", headerp.m_content);
 				}
 				
 				delete cv;
@@ -1861,6 +1899,13 @@ bool World::writeNetEvent(Region* region,NetEvent* event, CharConv* cv)
 			return false;
 	}
 
+	
+	if (event->m_type == NetEvent::FRACTION_RELATION_CHANGED)
+	{
+		Fraction::Relation rel = getRelation(event->m_id, event->m_data);
+		cv->toBuffer<char>(rel);
+	}
+	
 	if (event->m_type == NetEvent::PLAYER_PARTY_CANDIDATE)
 	{
 		object = (*m_players)[event->m_id];
@@ -2258,6 +2303,15 @@ bool World::processNetEvent(Region* region,CharConv* cv)
 				return false;
 			}
 			break;
+			
+		case NetEvent::FRACTION_RELATION_CHANGED:
+			char tmp;
+			cv->fromBuffer(tmp);
+			setRelation(event.m_id, event.m_data, (Fraction::Relation) tmp);
+			DEBUG("set relation %i %i to %i",event.m_id, event.m_data, (int) tmp);
+			
+			break;
+			
 		case NetEvent::PARTY_RELATION_CHANGED:
 			char rel;
 			cv->fromBuffer(rel);

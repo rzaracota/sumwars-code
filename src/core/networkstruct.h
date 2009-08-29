@@ -132,6 +132,11 @@ enum PackageType
     * \brief Daten der Quests
     */
    PTYPE_S2C_QUEST,
+   
+    /**
+	* \brief Daten der Fraktionen
+	 */
+   PTYPE_S2C_FRACTION,
 };
 
 /**
@@ -425,6 +430,7 @@ struct NetEvent
   PLAYER_PARTY_CANDIDATE = 25,
 
   PARTY_RELATION_CHANGED = 28,
+  FRACTION_RELATION_CHANGED = 29,
 		
   ITEM_DROPPED = 30,
   ITEM_REMOVED = 31,
