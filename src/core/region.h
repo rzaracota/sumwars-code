@@ -670,6 +670,12 @@ class Region
 		 * \brief liest die Daten zu einem Gegenstand aus dem Bitstream und erzeugt es
 		 */
 		void createItemFromString(CharConv* cv);
+		
+		/**
+		 * \fn void createDialogueFromString(CharConv* cv)
+		 * \brief Liest einen Dialog aus dem Bitstream und erzeugt ihn
+		 */
+		void createDialogueFromString(CharConv* cv);
 
 		/**
 		 * \fn void deleteProjectile(Projectile* proj)
@@ -1025,6 +1031,13 @@ class Region
 		 * \param dia Dialog
 		 */
 		void insertDialogue(Dialogue* dia);
+		
+		/**
+		 * \fn void deleteDialogue(Dialogue* dia)
+		 * \brief Loescht einen Dialog
+		 * \param dia Dialog
+		 */
+		void deleteDialogue(Dialogue* dia);
 		
 		/**
 		 * \fn short getDimX()

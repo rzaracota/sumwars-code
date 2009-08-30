@@ -122,9 +122,16 @@ bool NPCTrade::checkRefresh(Equipement* &equ)
 
 
 
-Dialogue::Dialogue(Region* region, std::string topic_base)
+Dialogue::Dialogue(Region* region, std::string topic_base,int id)
 {
-	m_id = World::getWorld()->getValidId();
+	if (id ==0)
+	{
+		m_id = World::getWorld()->getValidId();
+	}
+	else
+	{
+		m_id = id;
+	}
 	m_region = region;
 	m_topic_base = topic_base;
 	m_main_player_id =0;
@@ -470,11 +477,11 @@ void Dialogue::setSpeakerPosition(int id, Position pos)
 				
 	// neuen Sprecher aktivieren
 	m_speaker_state[id].m_visible = true;
-	m_speaker_state[id].m_text_visible = true;
 	m_speaker_state[id].m_position = pos;
 	m_active_speaker[pos] = id;
 	
 	DEBUG5("set speaker %i at position %i",id,pos);
+	m_event_mask =1;
 }
 
 Dialogue::SpeakerState* Dialogue::getSpeakerState(Position pos)
@@ -627,6 +634,20 @@ void Dialogue::update(float time)
 				cr->speakText(*cst);
 				
 				setSpeakerPosition(id,pos);
+				for (int i=0; i<4; i++)
+				{
+					if (m_active_speaker[i] != 0)
+					{
+						if (i== pos)
+						{
+							m_speaker_state[m_active_speaker[i]].m_text_visible = true;
+						}
+						else
+						{
+							m_speaker_state[m_active_speaker[i]].m_text_visible = false;
+						}
+					}
+				}
 				
 				// Emotion setzen
 				if (cst->m_emotion != "")
@@ -635,6 +656,8 @@ void Dialogue::update(float time)
 				}
 				
 				cr->getSpeakText().m_emotion = m_speaker_state[id].m_emotion;
+				
+				m_event_mask =1;
 			}
 
 		}
@@ -644,6 +667,44 @@ void Dialogue::update(float time)
 	if (m_speech.empty() && !m_trade)
 	{
 		m_finished = true;
+	}
+}
+
+void Dialogue::toString(CharConv* cv)
+{
+	// nur die relevanten Daten werden geschrieben: die aktuell sichtbaren 4 Spieler
+	cv->toBuffer(m_id);
+	for (int i=0; i<4; i++)
+	{
+		cv->toBuffer(m_active_speaker[i]);
+		if (m_active_speaker[i] != 0)
+		{
+			SpeakerState& state = m_speaker_state[m_active_speaker[i]];
+			cv->toBuffer(state.m_id);
+			cv->toBuffer(state.m_emotion);
+			cv->toBuffer<short>(state.m_position);
+			cv->toBuffer(state.m_visible);
+			cv->toBuffer(state.m_text_visible);
+		}
+	}
+}
+
+void Dialogue::fromString(CharConv* cv)
+{
+	for (int i=0; i<4; i++)
+	{
+		cv->fromBuffer(m_active_speaker[i]);
+		if (m_active_speaker[i] != 0)
+		{
+			short tmp;
+			SpeakerState& state = m_speaker_state[m_active_speaker[i]];
+			cv->fromBuffer(state.m_id);
+			cv->fromBuffer(state.m_emotion);
+			cv->fromBuffer<short>(tmp);
+			state.m_position = (Position) tmp;
+			cv->fromBuffer(state.m_visible);
+			cv->fromBuffer(state.m_text_visible);
+		}
 	}
 }
 

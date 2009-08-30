@@ -226,13 +226,13 @@ class Dialogue
 	
 	
 		/**
-		 * \fn Dialogue(Region* region, std::string topic_base="global")
+		 * \fn Dialogue(Region* region, std::string topic_base="global", int id=0)
 		 * \brief Konstruktor
 		 * \param region Region, in der das Gespraech stattfindet
 		 * \param id ID des Dialogs
 		 * \param topic_base Name des NPC, aus dessen Repertoire die Topics genommen werden
 		 */
-		Dialogue(Region* region, std::string topic_base="global");
+		Dialogue(Region* region, std::string topic_base="global", int id =0);
 		
 		/**
 		 * \fn ~Dialogue()
@@ -389,6 +389,39 @@ class Dialogue
 		 */
 		Position calcSpeakerPosition(int id);
 		
+		/**
+		 * \fn void toString(CharConv* cv)
+		 * \brief Konvertiert das Objekt in einen String und schreibt ihn in der Puffer
+		 * \param cv Ausgabepuffer
+		 */
+		void toString(CharConv* cv);
+
+
+		/**
+		 * \fn void fromString(CharConv* cv)
+		 * \brief Erzeugt das Objekt aus einem String
+		 * \param cv Eingabepuffer
+		 */
+		void fromString(CharConv* cv);
+		
+		/**
+		 * \fn void clearNetEventMask()
+		 * \brief Setzt die Bitmaske der NetEvents auf 0
+		 */
+		void clearNetEventMask()
+		{
+			m_event_mask =0;
+		}
+		
+		/**
+		 * \fn int& getEventMaskRef()
+		 * \brief Gibt eine Rerenz auf die Eventmaske aus
+		 */
+		int& getEventMaskRef()
+		{
+			return m_event_mask;
+		}
+		
 	private:
 		
 		/**
@@ -463,6 +496,12 @@ class Dialogue
 		 * \brief ID des Dialogs
 		 */
 		int m_id;
+		
+		/**
+		 * \var int m_event_mask
+		 * \brief Eventmaske des Dialogs
+		 */
+		int m_event_mask;
 		
 		/**
 		 * \var static std::map<std::string , TopicList > m_topics

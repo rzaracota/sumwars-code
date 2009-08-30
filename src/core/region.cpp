@@ -1588,21 +1588,37 @@ void Region::update(float time)
 	}
 	
 	// update der Dialoge
-	std::map<int, Dialogue*>::iterator it5;
-	for (it5 = m_dialogues.begin(); it5!= m_dialogues.end(); )
+	if (World::getWorld()->isServer())
 	{
-		EventSystem::setDialogue(it5->second);
-		
-		it5->second->update(time);
-		
-		if (it5->second->isFinished())
+		std::map<int, Dialogue*>::iterator it5;
+		Dialogue* dia;
+		for (it5 = m_dialogues.begin(); it5!= m_dialogues.end(); )
 		{
-			delete it5->second;
-			m_dialogues.erase(it5++);
-		}
-		else
-		{
-			++it5;
+			EventSystem::setDialogue(it5->second);
+			
+			it5->second->update(time);
+			
+			if (it5->second->getEventMaskRef() != 0)
+			{
+				DEBUG5("update dialogue %i",it5->second->getId());
+				NetEvent event;
+ 				event.m_type = NetEvent::DIALOGUE_STAT_CHANGED;
+				event.m_data = it5->second->getEventMaskRef();
+				event.m_id = it5->second->getId();
+				insertNetEvent(event);
+				it5->second->clearNetEventMask();
+			}
+			
+			if (it5->second->isFinished())
+			{
+				dia = it5->second;
+				++it5;
+				deleteDialogue(dia);
+			}
+			else
+			{
+				++it5;
+			}
 		}
 	}
 	
@@ -1616,10 +1632,7 @@ void Region::getRegionData(CharConv* cv)
 	cv->toBuffer((short) m_dimy);
 
 	// Name der Region
-	char stmp[21];
-	stmp[20] = '\0';
-	strncpy(stmp,m_name.c_str(),20);
-	cv->toBuffer(stmp,20);
+	cv->toBuffer(m_name);
 
 	cv->toBuffer(m_ground_material);
 	
@@ -1680,6 +1693,14 @@ void Region::getRegionData(CharConv* cv)
 	for (lt = m_drop_items->begin(); lt != m_drop_items->end(); ++lt)
 	{
 		lt->second->toString(cv);
+	}
+	
+	// Dialoge eintragen
+	std::map<int, Dialogue*>::iterator dt;
+	cv->toBuffer<short> ((short) m_dialogues.size());
+	for (dt = m_dialogues.begin(); dt != m_dialogues.end(); ++dt)
+	{
+		dt->second->toString(cv);
 	}
 	
 	// Cutscene modus
@@ -1803,17 +1824,30 @@ void Region::createItemFromString(CharConv* cv)
 	m_game_objects.insert(std::make_pair(di->getId(),di));
 }
 
+void Region::createDialogueFromString(CharConv* cv)
+{
+	int id;
+	cv->fromBuffer(id);
+	
+	if (m_dialogues.count(id) >0)
+	{
+		DEBUG("Dialogue %i already exists",id);
+		deleteDialogue(m_dialogues[id]);
+	}	
+	
+	Dialogue* dia = new Dialogue(this,"",id);
+	dia->fromString(cv);
+	insertDialogue(dia);
+	
+}
 
 void Region::setRegionData(CharConv* cv,WorldObjectMap* players)
 {
 	// Groesse der Region wird schon vorher eingelesen
 
 	// Name der Region
-	char stmp[21];
-	stmp[20] ='\0';
-	cv->fromBuffer(stmp,20);
-	m_name = stmp;
-	DEBUG5("name of region: %s",stmp);
+	
+	cv->fromBuffer(m_name);
 	cv->fromBuffer(m_ground_material);
 
 
@@ -1885,6 +1919,15 @@ void Region::setRegionData(CharConv* cv,WorldObjectMap* players)
 		createItemFromString(cv);
 
 	}
+	
+	// Dialoge einlesen
+	short nr_dia;
+	cv->fromBuffer<short>(nr_dia);
+	for (int i=0; i< nr_dia; i++)
+	{
+		createDialogueFromString(cv);
+	}
+	
 
 	// Cutscene modus
 	cv->fromBuffer(m_cutscene_mode);
@@ -2517,5 +2560,34 @@ Dialogue* Region::getDialogue(int id)
 void Region::insertDialogue(Dialogue* dia)
 {
 	m_dialogues.insert(std::make_pair(dia->getId(),dia));
+	
+	if (World::getWorld()->isServer())
+	{
+		NetEvent event;
+		event.m_type = NetEvent::DIALOGUE_CREATED;
+		event.m_id = dia->getId();
+		insertNetEvent(event);
+	}
+	DEBUG5("insert Dialogue %i",dia->getId());
 }
 
+void Region::deleteDialogue(Dialogue* dia)
+{
+	DEBUG5("delete Dialogue %i",dia->getId());
+	std::map<int, Dialogue*>::iterator it;
+	it = m_dialogues.find(dia->getId());
+	if (it != m_dialogues.end())
+	{
+		m_dialogues.erase(it);
+	}
+	
+	if (World::getWorld()->isServer())
+	{
+		NetEvent event;
+		event.m_type = NetEvent::DIALOGUE_DESTROYED;
+		event.m_id = dia->getId();
+		insertNetEvent(event);
+	}
+	
+	delete dia;
+}

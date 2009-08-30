@@ -1733,8 +1733,7 @@ bool World::writeNetEvent(Region* region,NetEvent* event, CharConv* cv)
 			DEBUG5("object created %s %i",object->getSubtype().c_str(), object->getId());
 			object->toString(cv);
 		}
-
-		if (event->m_type == NetEvent::OBJECT_STAT_CHANGED)
+		else if (event->m_type == NetEvent::OBJECT_STAT_CHANGED)
 		{
 			if (m_players->count(event->m_id) ==1)
 			{
@@ -1754,15 +1753,13 @@ bool World::writeNetEvent(Region* region,NetEvent* event, CharConv* cv)
 				return false;
 
 		}
-
-		if (event->m_type == NetEvent::PROJECTILE_CREATED)
+		else if (event->m_type == NetEvent::PROJECTILE_CREATED)
 		{
 			proj = region->getProjectile(event->m_id);
 			proj->toString(cv);
 			proj->clearNetEventMask();
 		}
-
-		if (event->m_type == NetEvent::PROJECTILE_STAT_CHANGED)
+		else if (event->m_type == NetEvent::PROJECTILE_STAT_CHANGED)
 		{
 			proj = region->getProjectile(event->m_id);
 			if (proj !=0)
@@ -1772,8 +1769,7 @@ bool World::writeNetEvent(Region* region,NetEvent* event, CharConv* cv)
 			else
 				return false;
 		}
-
-		if (event->m_type == NetEvent::ITEM_DROPPED)
+		else if (event->m_type == NetEvent::ITEM_DROPPED)
 		{
 			DropItem* di;
 			di = region->getDropItem(event->m_id);
@@ -1786,8 +1782,7 @@ bool World::writeNetEvent(Region* region,NetEvent* event, CharConv* cv)
 			else
 				return false;
 		}
-		
-		if (event->m_type == NetEvent::TRADER_INVENTORY_REFRESH)
+		else if (event->m_type == NetEvent::TRADER_INVENTORY_REFRESH)
 		{
 			Creature* npc = dynamic_cast<Creature*>(region->getObject(event->m_id));
 			if (npc ==0 || npc->getEquipement() ==0)
@@ -1795,8 +1790,7 @@ bool World::writeNetEvent(Region* region,NetEvent* event, CharConv* cv)
 			
 			npc->getEquipement()->toStringComplete(cv);
 		}
-		
-		if (event->m_type == NetEvent::TRADER_ITEM_BUY)
+		else if (event->m_type == NetEvent::TRADER_ITEM_BUY)
 		{
 			Creature* npc = dynamic_cast<Creature*>(region->getObject(event->m_id));
 			if (npc ==0 || npc->getEquipement() ==0)
@@ -1810,10 +1804,25 @@ bool World::writeNetEvent(Region* region,NetEvent* event, CharConv* cv)
 			
 			item->toStringComplete(cv);
 		}
-		
-		if (event->m_type == NetEvent::REGION_CAMERA)
+		else if (event->m_type == NetEvent::REGION_CAMERA)
 		{
 			region->getCamera().toString(cv);
+		}
+		else if (event->m_type == NetEvent::DIALOGUE_CREATED)
+		{
+			Dialogue* dia = region->getDialogue(event->m_id);
+			if (dia != 0)
+			{
+				dia->toString(cv);
+			}
+		}
+		else if (event->m_type == NetEvent::DIALOGUE_STAT_CHANGED)
+		{
+			Dialogue* dia = region->getDialogue(event->m_id);
+			if (dia != 0)
+			{
+				dia->toString(cv);
+			}
 		}
 	}
 	else
@@ -1941,6 +1950,7 @@ bool World::processNetEvent(Region* region,CharConv* cv)
 	WorldObject* object;
 	Creature* cr;
 	Projectile* proj;
+	Dialogue* dia;
  	Item* item;
 	int id;
 	bool mode;
@@ -2334,7 +2344,50 @@ bool World::processNetEvent(Region* region,CharConv* cv)
 				region->getCamera().fromString(cv);
 			}
 			break;
-
+			
+		case NetEvent::DIALOGUE_CREATED:
+			if (region !=0)
+			{
+				region->createDialogueFromString(cv);
+			}
+			else
+			{
+				return false;
+			}
+			break;
+			
+		case NetEvent::DIALOGUE_DESTROYED:
+			if (region !=0)
+			{
+				dia = region->getDialogue(event.m_id);
+				if (dia != 0)
+				{
+					region->deleteDialogue(dia);
+				}
+			}
+			else
+			{
+				return false;
+			}
+			break;
+			
+		case NetEvent::DIALOGUE_STAT_CHANGED:
+			if (region !=0)
+			{
+				dia = region->getDialogue(event.m_id);
+				if (dia != 0)
+				{
+					int id;
+					cv->fromBuffer(id);
+					dia->fromString(cv);
+				}
+			}
+			else
+			{
+				return false;
+			}
+			break;
+			
 		default:
 			ERRORMSG("unknown event type %i",event.m_type);
 

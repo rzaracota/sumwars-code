@@ -16,6 +16,7 @@ DialogueWindow::DialogueWindow(Document* doc, Scene* scene)
 	lower_bar->setPosition(CEGUI::UVector2(cegui_reldim(0.0f), cegui_reldim( 0.85f)));
 	lower_bar->setSize(CEGUI::UVector2(cegui_reldim(1.0f), cegui_reldim( 0.15f)));
 	lower_bar->setAlwaysOnTop(true);
+	lower_bar->setVisible(false);
 	
 	game_screen->addChildWindow(lower_bar);
 	
@@ -26,6 +27,7 @@ DialogueWindow::DialogueWindow(Document* doc, Scene* scene)
 	upper_bar->setPosition(CEGUI::UVector2(cegui_reldim(0.0f), cegui_reldim( 0.0f)));
 	upper_bar->setSize(CEGUI::UVector2(cegui_reldim(1.0f), cegui_reldim( 0.15f)));
 	upper_bar->setAlwaysOnTop(true);
+	upper_bar->setVisible(false);
 	
 	game_screen->addChildWindow(upper_bar);
 	
