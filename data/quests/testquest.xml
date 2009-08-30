@@ -5,8 +5,10 @@
 				addSpeaker(guard1,"guard1");
 				addSpeaker(guard2,"guard2");
 				speak('Fenor Marken',_("Das ist ein Test"),"set:hatch_axe.png image:full_image");
+				setSpeakerEmotion('Fenor Marken',"set:merc_hlm.png image:full_image");
 				speak('player',_("und noch ein Test"),"set:hatch_axe.png image:full_image");
 				speak('Fenor Marken',_("wieder ein Test"));
+				setSpeakerPosition('Fenor Marken',"upper_left");
 				speak('guard1',"ich bin die erste Wache","set:bronze_axe.png image:full_image")
 				speak('guard2',"ich bin die zweite Wache","set:bronze_axe.png image:full_image")
 				speak('Fenor Marken',"ich bin Fenor Marken","set:axe2H.png image:full_image")

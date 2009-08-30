@@ -405,6 +405,19 @@ class EventSystem
 		static int addAnswer(lua_State *L);
 		
 		/**
+		 * \fn static int setSpeakerEmotion(lua_State *L)
+		 * \brief Setzt die Emotion eines Sprechers
+		 * \param L Lua Status
+		 */
+		static int setSpeakerEmotion(lua_State *L);
+		
+		/**
+		 * \fn static int setSpeakerPosition(lua_State *L)
+		 * \brief Setzt die Position, auf der ein Sprecher erscheint
+		 */
+		static int setSpeakerPosition(lua_State *L);
+		
+		/**
 		 * \fn static int changeTopic(lua_State *L)
 		 * \brief Wechselt das Thema des aktuelle Dialogs
 		 * \param L Lua Status

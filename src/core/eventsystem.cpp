@@ -83,6 +83,8 @@ void EventSystem::init()
 	
 	lua_register(m_lua, "speak", speak);
 	lua_register(m_lua, "unitSpeak", unitSpeak);
+	lua_register(m_lua, "setSpeakerEmotion", setSpeakerEmotion);
+	lua_register(m_lua, "setSpeakerPosition", setSpeakerPosition);
 	lua_register(m_lua, "addQuestion", addQuestion);
 	lua_register(m_lua, "addAnswer", addAnswer);
 	lua_register(m_lua, "changeTopic", changeTopic);
@@ -1514,6 +1516,46 @@ int EventSystem::addAnswer(lua_State *L)
 	else
 	{
 		ERRORMSG("Syntax: addAnswer(string text, string topic)")
+	}
+
+	return 0;
+}
+
+int EventSystem::setSpeakerEmotion(lua_State *L)
+{
+	if (m_dialogue ==0)
+		return 0;
+	
+	int argc = lua_gettop(L);
+	if (argc>=2 && lua_isstring(L,1) && lua_isstring(L,2))
+	{
+		std::string refname = lua_tostring(L, 1);
+		std::string emotion = lua_tostring(L, 2);
+		m_dialogue->speak(refname,"#emotion#",emotion,0);
+	}
+	else
+	{
+		ERRORMSG("Syntax: setSpeakerEmotion(string refname, string emotion)");
+	}
+
+	return 0;
+}
+
+int EventSystem::setSpeakerPosition(lua_State *L)
+{
+	if (m_dialogue ==0)
+		return 0;
+	
+	int argc = lua_gettop(L);
+	if (argc>=2 && lua_isstring(L,1) && lua_isstring(L,2))
+	{
+		std::string refname = lua_tostring(L, 1);
+		std::string position = lua_tostring(L, 2);
+		m_dialogue->speak(refname,"#position#",position,0);
+	}
+	else
+	{
+		ERRORMSG("Syntax: setSpeakerPosition(string refname, string position)");
 	}
 
 	return 0;

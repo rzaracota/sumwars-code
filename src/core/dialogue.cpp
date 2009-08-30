@@ -465,24 +465,45 @@ Dialogue::Position Dialogue::calcSpeakerPosition(int id)
 
 void Dialogue::setSpeakerPosition(int id, Position pos)
 {
-	if (pos<0 || pos>=4 || m_speaker_state.count(id) == 0)
+	if (pos<NONE || pos>AUTOMATIC || pos == UNKNOWN || m_speaker_state.count(id) == 0)
 		return;
 	
-	// Sprecher der bisher auf der Position pos war verdraengen
-	int prev_speaker = m_active_speaker[pos];
-	if (prev_speaker != 0 && prev_speaker != id)
+	m_event_mask =1;
+	
+	if (pos == AUTOMATIC)
+		pos = calcSpeakerPosition(id);
+	
+	// Spieler entfernen
+	// bisherige Position ermitteln:
+	Position oldpos = m_speaker_state[id].m_position;
+	if (oldpos != UNKNOWN && pos != oldpos)
 	{
-		m_speaker_state[prev_speaker].m_visible = false;
-		m_speaker_state[prev_speaker].m_text_visible = false;
+		m_active_speaker[oldpos] =0;
 	}
-				
-	// neuen Sprecher aktivieren
-	m_speaker_state[id].m_visible = true;
-	m_speaker_state[id].m_position = pos;
-	m_active_speaker[pos] = id;
+	
+	// Sprecher der bisher auf der Position pos war verdraengen
+	if (pos != NONE)
+	{
+		int prev_speaker = m_active_speaker[pos];
+		if (prev_speaker != 0 && prev_speaker != id)
+		{
+			m_speaker_state[prev_speaker].m_visible = false;
+			m_speaker_state[prev_speaker].m_text_visible = false;
+		}
+					
+		// neuen Sprecher aktivieren
+		m_speaker_state[id].m_visible = true;
+		m_speaker_state[id].m_position = pos;
+		m_active_speaker[pos] = id;
+	}
+	else
+	{
+		m_speaker_state[id].m_visible = false;
+		m_speaker_state[id].m_text_visible = false;
+	}
 	
 	DEBUG5("set speaker %i at position %i",id,pos);
-	m_event_mask =1;
+	
 }
 
 Dialogue::SpeakerState* Dialogue::getSpeakerState(Position pos)
@@ -575,6 +596,38 @@ void Dialogue::update(float time)
 				}
 				
 				cst = &(m_speech.front().second);
+				
+				if (cst->m_text == "#emotion#")
+				{
+					cr->getSpeakText().m_emotion = cst->m_emotion;
+					m_event_mask =1;
+					m_speech.pop_front();
+					cst =0;
+					continue;
+				}
+				
+				if (cst->m_text == "#position#")
+				{
+ 					std::string posstr = cst->m_emotion;
+					Position pos = UNKNOWN;
+					if (posstr == "none")
+						pos = NONE;
+					else if (posstr == "upper_left")
+						pos = UPPER_LEFT;
+					else if (posstr == "upper_right")
+						pos = UPPER_RIGHT;
+					else if (posstr == "lower_left")
+						pos = LOWER_LEFT;
+					else if (posstr == "lower_right")
+						pos = LOWER_RIGHT;
+					
+					setSpeakerPosition(id,pos);
+					
+					m_event_mask =1;
+					cst =0;
+					m_speech.pop_front();
+					continue;
+				}
 				
 				// Springt ein Topic an, setzt danach aber mit dem alten fort
 				if (!cst->m_answers.empty() && cst->m_text == "#jump_topic#")

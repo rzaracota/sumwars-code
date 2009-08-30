@@ -180,11 +180,13 @@ class Dialogue
 		*/
 		enum Position
 		{
+			NONE = -2,
 			UNKNOWN =-1,
 			UPPER_LEFT =0,
 			UPPER_RIGHT = 1,
 			LOWER_LEFT = 2,
 			LOWER_RIGHT = 3,
+			AUTOMATIC = 4
 		};
 		
 		/**
