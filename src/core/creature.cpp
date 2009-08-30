@@ -4099,6 +4099,7 @@ void Creature::writeNetEvent(NetEvent* event, CharConv* cv)
 	if (event->m_data & NetEvent::DATA_SPEAK_TEXT)
 	{
 		cv->toBuffer(getSpeakText().m_text);
+		cv->toBuffer(getSpeakText().m_emotion);
 		cv->toBuffer(getSpeakText().m_time);
 		
 		cv->toBuffer<short>(getSpeakText().m_answers.size());
@@ -4290,6 +4291,7 @@ void Creature::processNetEvent(NetEvent* event, CharConv* cv)
 	{
 		getSpeakText().clear();
 		cv->fromBuffer(getSpeakText().m_text);
+		cv->fromBuffer(getSpeakText().m_emotion);
 		cv->fromBuffer(getSpeakText().m_time);
 		
 		short n;

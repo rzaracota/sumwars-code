@@ -228,18 +228,19 @@ void Dialogue::addSpeaker(int id, std::string refname)
 
 }
 
-void Dialogue::speak(std::string refname, std::string text, float time)
+void Dialogue::speak(std::string refname, std::string text, std::string emotion,float time)
 {
 	CreatureSpeakText txt;
 	txt.m_text = text;
 	txt.m_time = time;
+	txt.m_emotion = emotion;
 
 	m_speech.push_back(std::make_pair(refname,txt));
 }
 
 void Dialogue::addQuestion(std::string text)
 {
-	speak("main_player",text,0);
+	speak("main_player",text,"");
 
 }
 

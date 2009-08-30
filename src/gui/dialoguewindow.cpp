@@ -195,6 +195,10 @@ void DialogueWindow::update()
 					if (wname->getText() != (CEGUI::utf8*) name.c_str())
 					{
 						wname->setText((CEGUI::utf8*) name.c_str());
+					}
+					
+					if (!wname->isVisible())
+					{
 						wname->setVisible(true);
 					}
 					
@@ -219,6 +223,11 @@ void DialogueWindow::update()
 						wtext->setVisible(true);
 					}
 					
+					std::string image = cr->getSpeakText().m_emotion;
+					if (wimage->getProperty("Image") != image && image != "")
+					{
+						wimage->setProperty("Image",image);
+					}
 					if (!wimage->isVisible())
 					{
 						wimage->setVisible(true);
