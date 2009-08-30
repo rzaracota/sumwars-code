@@ -425,6 +425,12 @@ class Dialogue
 			return m_event_mask;
 		}
 		
+		/**
+		 * \fn void skipText(int id)
+		 * \brief Spieler signalisiert, dass er den aktuellen Text ueberspringen moechte
+		 */
+		void skipText(int id);
+		
 	private:
 		
 		/**
@@ -517,6 +523,20 @@ class Dialogue
 		 * \brief Liste der Handelsinformationen fuer alle Spieler
 		 */
 		static std::map<std::string, NPCTrade > m_npc_trades;
+		
+		/**
+		 * \var int m_nr_players
+		 * \brief Anzahl Spieler die an dem Dialog beteiligt sind
+		 */
+		int m_nr_players;
+		
+		/**
+		 * \var int m_skip_counter
+		 * \brief Die Spieler, die den aktuellen Text ueberspringen wollen
+		 */
+		std::set<int> m_player_skips;
+		
+		
 		
 };
 

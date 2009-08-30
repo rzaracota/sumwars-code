@@ -1337,6 +1337,17 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 				}
 			}
 			break;
+			
+		case BUTTON_SKIP_DIALOGUE_TEXT:
+			if (World::getWorld()->isServer())
+			{
+				dia = getDialogue();
+				if (dia !=0)
+				{
+					dia->skipText(getId());
+				}
+			}
+			break;
 		
 
 		default:

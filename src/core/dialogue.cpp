@@ -139,6 +139,7 @@ Dialogue::Dialogue(Region* region, std::string topic_base,int id)
 
 	m_started = true;
 	m_trade = false;
+	m_nr_players =0;
 	
 	for (int i=0; i<4; i++)
 	{
@@ -207,10 +208,14 @@ void Dialogue::addSpeaker(int id, std::string refname)
 
 	m_speaker.insert(std::make_pair(refname,id));
 
-	if (m_main_player_id ==0 && cr->getType() == "PLAYER")
+	if (cr->getType() == "PLAYER")
 	{
-		m_main_player_id = cr->getId();
-		m_speaker["main_player"] = m_main_player_id;
+		m_nr_players ++;
+		if (m_main_player_id ==0 )
+		{
+			m_main_player_id = cr->getId();
+			m_speaker["main_player"] = m_main_player_id;
+		}
 	}
 	
 	// ggf Spielerstatus erstellen
@@ -549,7 +554,8 @@ void Dialogue::update(float time)
 		}
 		else
 		{
-
+			m_player_skips.clear();
+			
 			// Aenderung eingetreten
 			WorldObject* wo=0;
 			Creature* cr=0;
@@ -762,3 +768,21 @@ void Dialogue::fromString(CharConv* cv)
 	}
 }
 
+void Dialogue::skipText(int id)
+{
+	m_player_skips.insert(id);
+	if (m_player_skips.size() == m_nr_players)
+	{
+		// aktuellen Text ueberspringen
+		CreatureSpeakText* cst;
+		if (!m_speech.empty())
+		{
+			cst = &(m_speech.front().second);
+			// Fragen und Handel kann nicht so uebersprungen werden
+			if (!cst->m_answers.empty() || m_trade)
+				return;
+			
+			cst->m_time =0;
+		}
+	}
+}

@@ -1021,6 +1021,13 @@ void Document::onButtonWorldmap()
 	
 }
 
+void Document::onSkipDialogueTextClicked()
+{
+	ClientCommand command;
+	command.m_button = BUTTON_SKIP_DIALOGUE_TEXT;
+	sendCommand(&command);
+}
+
 void Document::onButtonWaypointClicked(int id)
 {
 	if (getLocalPlayer()->isUsingWaypoint())

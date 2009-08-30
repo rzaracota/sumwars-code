@@ -599,7 +599,11 @@ class Document
 	 */
 	void onSwapEquip();
 	
-	
+	/**
+	 * \fn void onSkipDialogueTextClicked()
+	 * \brief Behandelt Click auf Dialogtext
+	 */
+	void onSkipDialogueTextClicked();
 
 	/**
 	 * \fn void onLeftMouseButtonClick (Vector pos)

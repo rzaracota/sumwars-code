@@ -15,6 +15,7 @@ DialogueWindow::DialogueWindow(Document* doc, Scene* scene)
 	lower_bar->setProperty("CloseButtonEnabled","false");
 	lower_bar->setPosition(CEGUI::UVector2(cegui_reldim(0.0f), cegui_reldim( 0.85f)));
 	lower_bar->setSize(CEGUI::UVector2(cegui_reldim(1.0f), cegui_reldim( 0.15f)));
+	lower_bar->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&DialogueWindow::onTextClicked, this));
 	lower_bar->setAlwaysOnTop(true);
 	lower_bar->setVisible(false);
 	
@@ -27,6 +28,7 @@ DialogueWindow::DialogueWindow(Document* doc, Scene* scene)
 	upper_bar->setPosition(CEGUI::UVector2(cegui_reldim(0.0f), cegui_reldim( 0.0f)));
 	upper_bar->setSize(CEGUI::UVector2(cegui_reldim(1.0f), cegui_reldim( 0.15f)));
 	upper_bar->setAlwaysOnTop(true);
+	lower_bar->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&DialogueWindow::onTextClicked, this));
 	upper_bar->setVisible(false);
 	
 	game_screen->addChildWindow(upper_bar);
@@ -96,6 +98,7 @@ DialogueWindow::DialogueWindow(Document* doc, Scene* scene)
 	label->setProperty("BackgroundEnabled", "true");
 	label->setProperty("HorzFormatting", "WordWrapLeftAligned");
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.12f), cegui_reldim(0.29f)));
+	label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&DialogueWindow::onTextClicked, this));
 	label->setSize(CEGUI::UVector2(cegui_reldim(0.38f), cegui_reldim( 0.66f)));
 	
 	
@@ -105,6 +108,7 @@ DialogueWindow::DialogueWindow(Document* doc, Scene* scene)
 	label->setProperty("BackgroundEnabled", "true");
 	label->setProperty("HorzFormatting", "WordWrapLeftAligned");
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.5f), cegui_reldim(0.29f)));
+	label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&DialogueWindow::onTextClicked, this));
 	label->setSize(CEGUI::UVector2(cegui_reldim(0.38f), cegui_reldim( 0.66f)));
 	
 	label = win_mgr.createWindow("TaharezLook/StaticText", "SpeakerTextLabel2");
@@ -113,6 +117,7 @@ DialogueWindow::DialogueWindow(Document* doc, Scene* scene)
 	label->setProperty("BackgroundEnabled", "true");
 	label->setProperty("HorzFormatting", "WordWrapLeftAligned");
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.12f), cegui_reldim(0.29f)));
+	label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&DialogueWindow::onTextClicked, this));
 	label->setSize(CEGUI::UVector2(cegui_reldim(0.38f), cegui_reldim( 0.66f)));
 	
 	
@@ -122,6 +127,7 @@ DialogueWindow::DialogueWindow(Document* doc, Scene* scene)
 	label->setProperty("BackgroundEnabled", "true");
 	label->setProperty("HorzFormatting", "WordWrapLeftAligned");
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.5f), cegui_reldim(0.29f)));
+	label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&DialogueWindow::onTextClicked, this));
 	label->setSize(CEGUI::UVector2(cegui_reldim(0.38f), cegui_reldim( 0.66f)));
 	
 }
@@ -563,4 +569,10 @@ bool DialogueWindow::onAnswerClicked(const CEGUI::EventArgs& evt)
 	return true;
 }
 
+
+bool DialogueWindow::onTextClicked(const CEGUI::EventArgs& evt)
+{
+	m_document->onSkipDialogueTextClicked();
+	return true;
+}
 

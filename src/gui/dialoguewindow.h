@@ -53,6 +53,12 @@ class DialogueWindow : public Window
 		 */
 		bool onAnswerClicked(const CEGUI::EventArgs& evt);
 		
+		/**
+		 * \fn bool bool onTextClicked(const CEGUI::EventArgs& evt)
+		 * \brief regiert auf einen Click auf einen Dialogtext
+		 */
+		bool onTextClicked(const CEGUI::EventArgs& evt);
+		
 	private:
 		/**
 		 * \var Scene* m_scene
