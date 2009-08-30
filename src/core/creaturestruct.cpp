@@ -838,6 +838,9 @@ void CreatureSpeakText::operator=( CreatureSpeakText& other)
 {
 	m_text = other.m_text;
 	m_time = other.m_time;
+	
+	m_emotion = other.m_emotion;
+	
 	m_answers = other.m_answers;
 }
 

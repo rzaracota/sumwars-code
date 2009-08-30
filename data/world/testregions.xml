@@ -295,6 +295,7 @@
 			<Environments>
 				<Environment height="0.2" name="meadow" />
 			</Environments>
+			<ReviveLocation  location="center" />
 			
 		</Region>	
 		

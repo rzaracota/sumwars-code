@@ -541,6 +541,13 @@ struct CreatureSpeakText
 	 */
 	std::string m_text;
 	
+	
+	/**
+	 * \var std::string m_emotion
+	 * \brief Bild das zum Text angezeigt wird
+	 */
+	std::string m_emotion;
+	
 	/**
 	 * \var float m_time
 	 * \brief Gibt an, wie lange der Text zu sehen ist

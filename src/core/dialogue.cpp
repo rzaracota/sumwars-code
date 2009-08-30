@@ -132,6 +132,11 @@ Dialogue::Dialogue(Region* region, std::string topic_base)
 
 	m_started = true;
 	m_trade = false;
+	
+	for (int i=0; i<4; i++)
+	{
+		m_active_speaker[i] =0;
+	}
 }
 
 Dialogue::~Dialogue()
@@ -199,6 +204,19 @@ void Dialogue::addSpeaker(int id, std::string refname)
 	{
 		m_main_player_id = cr->getId();
 		m_speaker["main_player"] = m_main_player_id;
+	}
+	
+	// ggf Spielerstatus erstellen
+	std::map<int,SpeakerState>::iterator it;
+	it = m_speaker_state.find(id);
+	if (it == m_speaker_state.end())
+	{
+		SpeakerState& state = m_speaker_state[id];
+		state.m_id = id;
+		state.m_emotion = "";
+		state.m_position = UNKNOWN;
+		state.m_visible = false;
+		state.m_text_visible = false;
 	}
 
 }
@@ -404,6 +422,72 @@ int Dialogue::getSpeaker(std::string refname)
 	return it->second;
 }
 
+Dialogue::Position Dialogue::calcSpeakerPosition(int id)
+{
+	WorldObject* wo =0;
+	wo = m_region->getObject(id);
+	if (wo ==0 || !wo->isCreature())
+	{
+		ERRORMSG("Speaker %i is not a creature", id);
+		return Dialogue::UNKNOWN;
+	}
+	
+	Position base = UPPER_RIGHT;
+	Position alt = UPPER_LEFT;
+	
+	if (wo->getType() == "PLAYER")
+	{
+		base = LOWER_LEFT;
+		alt = LOWER_RIGHT;
+	}
+	
+	// zuerst Basisposition bevorzugen
+	// zuerst unbelegte Positionen Bevorzugen
+	if (m_active_speaker[base] == 0)
+		return base;
+	
+	if (m_active_speaker[alt] == 0)
+		return alt;
+	
+	if (m_speaker_state[m_active_speaker[base]].m_text_visible == false)
+		return base;
+	
+	return alt;
+}
+
+void Dialogue::setSpeakerPosition(int id, Position pos)
+{
+	if (pos<0 || pos>=4 || m_speaker_state.count(id) == 0)
+		return;
+	
+	// Sprecher der bisher auf der Position pos war verdraengen
+	int prev_speaker = m_active_speaker[pos];
+	if (prev_speaker != 0 && prev_speaker != id)
+	{
+		m_speaker_state[prev_speaker].m_visible = false;
+		m_speaker_state[prev_speaker].m_text_visible = false;
+	}
+				
+	// neuen Sprecher aktivieren
+	m_speaker_state[id].m_visible = true;
+	m_speaker_state[id].m_text_visible = true;
+	m_speaker_state[id].m_position = pos;
+	m_active_speaker[pos] = id;
+	
+	DEBUG5("set speaker %i at position %i",id,pos);
+}
+
+Dialogue::SpeakerState* Dialogue::getSpeakerState(Position pos)
+{
+	if (pos<0 || pos >=4)
+		return 0;
+	
+	if (m_active_speaker[pos] == 0)
+		return 0;
+	
+	return &(m_speaker_state[m_active_speaker[pos]]);
+}
+
 void Dialogue::update(float time)
 {
 
@@ -460,6 +544,8 @@ void Dialogue::update(float time)
 
 			// Naechsten zulaessigen Text suchen
 			cst =0;
+			int id;
+			Position pos=UNKNOWN;
 			while (cst==0 && !m_speech.empty())
 			{
 				// Change Topic braucht keinen Sprecher
@@ -469,7 +555,8 @@ void Dialogue::update(float time)
 					break;
 				}
 				
-				wo = m_region->getObject( getSpeaker(m_speech.front().first));
+				id = getSpeaker(m_speech.front().first);
+				wo = m_region->getObject(id );
 				cr = static_cast<Creature*>(wo);
 
 				if (cr ==0 && m_speech.front().first!="nobody")
@@ -478,7 +565,7 @@ void Dialogue::update(float time)
 					m_speech.pop_front();
 					continue;
 				}
-
+				
 				cst = &(m_speech.front().second);
 				
 				// Springt ein Topic an, setzt danach aber mit dem alten fort
@@ -498,6 +585,20 @@ void Dialogue::update(float time)
 					continue;
 				}
 
+				
+				// Falls die Position des Spielers im Dialog noch unbekannt: Position berechnen
+				pos = m_speaker_state[id].m_position;
+				if (pos == UNKNOWN)
+				{
+					pos = calcSpeakerPosition(id);
+				}
+				
+				if (pos == UNKNOWN)
+				{
+					continue;
+				}
+				
+				
 			}
 
 			if (cst ==0 || m_speech.empty())
@@ -524,6 +625,16 @@ void Dialogue::update(float time)
 			if (cr !=0)
 			{
 				cr->speakText(*cst);
+				
+				setSpeakerPosition(id,pos);
+				
+				// Emotion setzen
+				if (cst->m_emotion != "")
+				{
+					m_speaker_state[id].m_emotion = cst->m_emotion;
+				}
+				
+				cr->getSpeakText().m_emotion = m_speaker_state[id].m_emotion;
 			}
 
 		}

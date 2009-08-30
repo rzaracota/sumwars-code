@@ -226,11 +226,7 @@ class MainWindow :
 	 */
 	void updateCharCreate();
 	
-	/**
-	 * \fn void updateSpeechBubbles()
-	 * \brief aktualisiert die Sprechblasen
-	 */
-	void updateSpeechBubbles();
+	
 	
 	/**
 	 * \fn void updateRegionInfo()
@@ -270,12 +266,7 @@ class MainWindow :
 	 */
 	bool onDropItemClicked(const CEGUI::EventArgs& evt);
 	
-	/**
-	 * \fn bool onAnswerClicked(const CEGUI::EventArgs& evt);
-	 * \brief Behandelt das Klick auf eine Antwort in einem Gespraech
-	 * \param evt CEGUI Event Parameter
-	 */
-	bool onAnswerClicked(const CEGUI::EventArgs& evt);
+	
 
 	/**
 	 * \fn bool keyPressed(const OIS::KeyEvent &evt)

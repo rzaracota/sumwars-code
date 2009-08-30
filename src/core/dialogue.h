@@ -164,6 +164,8 @@ class NPCTrade
 		Timer m_refresh_timer;
 };
 
+
+
 /**
  * \class Dialogue
  * \brief Klasse fuer einen Gespraech zwischen mehreren Spielern / NPC's
@@ -171,6 +173,58 @@ class NPCTrade
 class Dialogue
 {
 	public:
+		
+		/**
+		* \enum Position
+		* \brief Position, an der der Spieler angezeigt wird
+		*/
+		enum Position
+		{
+			UNKNOWN =-1,
+			UPPER_LEFT =0,
+			UPPER_RIGHT = 1,
+			LOWER_LEFT = 2,
+			LOWER_RIGHT = 3,
+		};
+		
+		/**
+		* \struct SpeakerState
+		* \brief Status eines Sprechers im Dialog
+		*/
+		struct SpeakerState
+		{
+			/**
+			* \var int m_id
+			* \brief ID des Sprechers
+			*/
+			int m_id;
+			
+			/**
+			* \var std::string m_emotion
+			* \brief aktuelle Emotion
+			*/
+			std::string m_emotion;
+			
+			/**
+			* \var Position m_position
+			* \brief Position des Sprechers im Dialogfenster (oberer / untere Balken, links/rechts)
+			*/
+			Position m_position;
+			
+			/**
+			* \var bool m_visible
+			* \brief Gibt an, ob der Sprecher gerade sichtbar ist
+			*/
+			bool m_visible;
+			
+			/**
+			* \var bool m_text_visible
+			* \brief Gibt an, ob der Text gerade angezeigt wird
+			*/
+			bool m_text_visible;
+		};
+	
+	
 		/**
 		 * \fn Dialogue(Region* region, std::string topic_base="global")
 		 * \brief Konstruktor
@@ -314,6 +368,27 @@ class Dialogue
 			return (m_npc_trades.count(npcname) >0);
 		}
 	
+		/**
+		 * \fn  SpeakerState* getSpeakerState(Position pos)
+		 * \brief Gibt den Zustand des Sprechers auf der Position pos an
+		 * \param pos Position eines Sprechers
+		 */
+		SpeakerState* getSpeakerState(Position pos);
+		
+		/**
+		 * \fn void setSpeakerPosition(int id, Position pos)
+		 * \brief Setzt die Position eines Sprechers
+		 * \param id ID des Sprechers
+		 * \param pos Position
+		 */
+		void setSpeakerPosition(int id, Position pos);
+		
+		/**
+		 * \fn Position calcSpeakerPosition(int id)
+		 * \brief Berechnet die beste Position fuer einen Sprecher
+		 */
+		Position calcSpeakerPosition(int id);
+		
 	private:
 		
 		/**
@@ -331,9 +406,21 @@ class Dialogue
 		
 		/**
 		 * \var std::map<std::string, int> m_speaker
-		 * \brief Liste aller Sprecher
+		 * \brief Liste aller Sprecher, eventuell ein Spieler mehrmals unter verschiedenen Rollen 
 		 */
 		std::map<std::string, int> m_speaker;
+		
+		/**
+		 * \var std::map<int,SpeakerState> m_speaker_state
+		 * \brief Zustand fuer jeden Sprecher
+		 */
+		std::map<int,SpeakerState> m_speaker_state;
+		
+		/**
+		 * \var int m_active_speaker[4]
+		 * \brief Gibt die IDs der aktiven Sprecher an
+		 */
+		int m_active_speaker[4];
 		
 		/**
 		 * \var  Region* m_region

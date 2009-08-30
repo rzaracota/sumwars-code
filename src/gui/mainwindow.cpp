@@ -22,7 +22,7 @@
 #include "networkwindows.h"
 #include "worldmap.h"
 #include "messageboxes.h"
-
+#include "dialoguewindow.h"
 
 MainWindow::MainWindow(Ogre::Root* ogreroot, CEGUI::System* ceguisystem,Ogre::RenderWindow* window,Document* doc)
 {
@@ -476,7 +476,6 @@ void MainWindow::update(float time)
 		
 		updateItemInfo();
 		updateRegionInfo();
-		updateSpeechBubbles();
 		updateChatContent();
 		
 		// Bild am Curso aktualisieren
@@ -530,6 +529,8 @@ void MainWindow::update(float time)
 			// Skilltree aktualisieren
 			m_sub_windows["Trade"]->update();
 		}
+		
+		m_sub_windows["DialogueWindow"]->update();
 		
 		// + Buttons fuer Levelup aktualisieren
 		bool vis = false;
@@ -628,6 +629,8 @@ bool MainWindow::setupGameScreen()
 		setupTrade();
 		
 		setupWorldmap();
+		
+		m_sub_windows["DialogueWindow"] = new DialogueWindow(m_document,m_scene);
 		
 		CEGUI::Window* label;
 		label = win_mgr.createWindow("TaharezLook/StaticImage", "CharacterPreviewImage");
@@ -1720,294 +1723,6 @@ void MainWindow::updateItemInfo()
 	}
 }
 
-void MainWindow::updateSpeechBubbles()
-{
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-	
-	// Zaehler wie viele Labels existieren
-	static int lcount =0;
-	
-	// Zaehler, wie viele Antwortmoeglichkeiten existieren
-	static int acount =0;
-	
-	Player* player = m_document->getLocalPlayer();
-	
-	if (player ==0 || player->getRegion() ==0)
-		return;
-	
-	CEGUI::Window* label;
-	CEGUI::FrameWindow* ques;
-	
-	// Objekte im Umkreis von 20 Meter holen
-	std::list<WorldObject*> objs;
-	std::list<WorldObject*>::iterator it;
-	
-	Shape s;
-	s.m_center = player->getShape()->m_center;
-	s.m_type = Shape::RECT;
-	s.m_extent = Vector(20,20);
-	player->getRegion()->getObjectsInShape(&s,&objs);
-	
-	std::pair<float,float> pos;
-	
-	Creature* cr;
-	
-	int nr =0;
-	std::string text;
-	
-	std::stringstream stream;
-	
-	CreatureSpeakText* question=0;
-	
-	for (it = objs.begin(); it != objs.end(); ++it)
-	{
-		// nur Kreaturen behandeln
-		if (!(*it)->isCreature())
-			continue;
-		
-		cr = static_cast<Creature*>(*it);
-		pos = m_scene->getProjection(cr->getShape()->m_center,2.5f);
-		
-		// nur Kreaturen behandeln, die wirklich zu sehen sind
-		if (pos.first <0 || pos.first >1 || pos.second <0 || pos.second >1)
-			continue;
-		
-		text = cr->getSpeakText().m_text;
-		
-		if (text == "")
-			continue;
-		
-		// Fragen werden gesondert behandelt
-		if (!cr->getSpeakText().m_answers.empty())
-		{
-			if (cr == player)
-				question = &(cr->getSpeakText());
-			continue;
-		}
-		
-		stream.str("");
-		stream << "SpeechLabel";
-		stream << nr;
-		
-		if (nr >= lcount)
-		{
-			lcount ++;
-			label = win_mgr.createWindow("TaharezLook/StaticText", stream.str());
-			m_game_screen->addChildWindow(label);
-			label->setProperty("FrameEnabled", "true");
-			label->setProperty("BackgroundEnabled", "true");
-			label->setProperty("HorzFormatting", "WordWrapLeftAligned");
-			
-			label->setText("");
-			label->setAlpha(0.9);
-			
-		}
-		else
-		{
-			label = win_mgr.getWindow(stream.str());
-		}
-		
-			
-			
-		if (label->getText() != (CEGUI::utf8*) text.c_str())
-		{
-			CEGUI::Font* font = label->getFont();
-			
-			label->setText((CEGUI::utf8*) text.c_str());
-			
-			float width = font->getTextExtent((CEGUI::utf8*) text.c_str())+15;
-			float height = font->getFontHeight() +15;
-			CEGUI::Rect rect = m_game_screen->getInnerRect();
-			
-			// Testen ob der Text auf eine Zeile passt
-			float maxwidth = rect.getWidth()/6;
-			if (width < maxwidth)
-			{
-				// einzelne Zeile
-				label->setSize(CEGUI::UVector2(CEGUI::UDim(0,width),  CEGUI::UDim(0,height)));
-				label->setPosition(CEGUI::UVector2(CEGUI::UDim(pos.first,-width/2), CEGUI::UDim(pos.second,-height)));
-			}
-			else
-			{
-				// mehrere Zeilen
-				rect.setWidth(maxwidth-15);
-				
-				int lines = font->getFormattedLineCount((CEGUI::utf8*) text.c_str(),rect, CEGUI::WordWrapLeftAligned);
-				height = lines * font->getFontHeight() +15;
-				
-				label->setSize(CEGUI::UVector2(CEGUI::UDim(0,maxwidth),  CEGUI::UDim(0,height)));
-				label->setPosition(CEGUI::UVector2(CEGUI::UDim(pos.first,-maxwidth/2), CEGUI::UDim(pos.second,-height)));
-			}
-			
-			
-		}
-		label->setVisible(true);
-		
-		nr++;
-		
-	}
-	
-	// restliche Label verstecken
-	for (; nr<lcount; nr++)
-	{
-		stream.str("");
-		stream << "SpeechLabel";
-		stream << nr;
-			
-		label = win_mgr.getWindow(stream.str());
-		label->setVisible(false);
-	}
-	
-	// Fenster fuer eine Frage
-	if (question !=0)
-	{
-		int wflags = m_document->getGUIState()->m_shown_windows;
-		if (wflags != Document::QUESTIONBOX)
-		{
-			wflags = m_document->getGUIState()->m_shown_windows= Document::QUESTIONBOX;
-			m_document->setModified(m_document->getModified() | Document::WINDOWS_MODIFIED);
-		}
-		
-		
-		if (acount ==0)
-		{
-			ques = (CEGUI::FrameWindow*) win_mgr.createWindow("TaharezLook/FrameWindow", "QuestionWindow");
-			ques->setProperty("FrameEnabled","false");
-			ques->setProperty("TitlebarEnabled","false");
-			ques->setProperty("CloseButtonEnabled","false");
-			m_game_screen->addChildWindow(ques);
-			ques->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&MainWindow::consumeEvent, this));
-			ques->setVisible(false);
-			
-			label = win_mgr.createWindow("TaharezLook/StaticText", "QuestionLabel");
-			ques->addChildWindow(label);
-			label->setProperty("FrameEnabled", "false");
-			label->setProperty("BackgroundEnabled", "false");
-
-		}
-		else
-		{
-			ques = (CEGUI::FrameWindow*)win_mgr.getWindow("QuestionWindow");
-			label = (CEGUI::Window*) win_mgr.getWindow("QuestionLabel");
-			label->setProperty("HorzFormatting", "WordWrapLeftAligned");
-		}
-		
-		// Wenn das Frage Fenster schon sichtbar ist -> keine Aenderung
-		if (ques->isVisible())
-		{
-			return;
-		}
-		nr =0;
-		
-		// Groesse des Fensters ermitteln
-		float height=5,width=0;
-		float elemheight, elemwidth;
-		int lines;
-		float horzoffset = 10;
-		
-		CEGUI::Rect rect = m_game_screen->getInnerRect();
-		float maxwidth = rect.getWidth()/6;
-		rect.setWidth(maxwidth-15);
-		
-		CEGUI::Font* font = label->getFont();
-		float lineheight = font->getFontHeight();
-		
-		CEGUI::utf8* ctext;
-		ctext = (CEGUI::utf8*) question->m_text.c_str();
-		elemwidth =font->getTextExtent(ctext);
-		elemheight = lineheight;
-		
-		if (elemwidth > maxwidth)
-		{
-			elemwidth = maxwidth;
-			lines = font->getFormattedLineCount(ctext,rect, CEGUI::WordWrapLeftAligned);
-			elemheight = lines * lineheight;
-		}
-		width = std::max(width,elemwidth);
-		
-		if (label->getText() != ctext)
-		{
-			label->setText(ctext);
-		}
-		
-		label->setPosition(CEGUI::UVector2(CEGUI::UDim(0,horzoffset), CEGUI::UDim(0,height)));
-		label->setSize(CEGUI::UVector2(cegui_reldim(1.0f), CEGUI::UDim(0,elemheight)));
-		
-		height += elemheight + 20;
-		
-		// Antworten einfuegen
-		std::list < std::pair<std::string, std::string> >::iterator it;
-		for (it = question->m_answers.begin(); it != question->m_answers.end(); ++it)
-		{
-			stream.str("");
-			stream << "AnswerLabel";
-			stream << nr;
-			
-			if (nr >= acount)
-			{
-				acount ++;
-				label = win_mgr.createWindow("TaharezLook/StaticText", stream.str());
-				ques->addChildWindow(label);
-				label->setProperty("FrameEnabled", "false");
-				label->setProperty("BackgroundEnabled", "false");
-				label->setProperty("HorzFormatting", "WordWrapLeftAligned");
-				label->setID(nr);
-				label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&MainWindow::onAnswerClicked, this));
-			}
-			else
-			{
-				label = win_mgr.getWindow(stream.str());
-			}
-			
-			ctext = (CEGUI::utf8*) dgettext("sumwars_xml",it->first.c_str());
-			elemwidth =font->getTextExtent(ctext);
-			elemheight = lineheight+5;
-		
-			if (elemwidth > maxwidth)
-			{
-				elemwidth = maxwidth;
-				lines = font->getFormattedLineCount(ctext,rect, CEGUI::WordWrapLeftAligned);
-				elemheight = lines * lineheight;
-			}
-			width = std::max(width,elemwidth);
-			
-			if (label->getText() != ctext)
-			{
-				label->setText(ctext);
-			}
-			
-			label->setPosition(CEGUI::UVector2(CEGUI::UDim(0,horzoffset), CEGUI::UDim(0,height)));
-			label->setSize(CEGUI::UVector2(cegui_reldim(1.0f), CEGUI::UDim(0,elemheight)));
-			label->setVisible(true);
-			
-			height += elemheight + 5;
-			nr++;
-		}
-		
-		width += 2* horzoffset;
-		ques->setPosition(CEGUI::UVector2(CEGUI::UDim(0.5f,-width/2), cegui_reldim(0.2)));
-		ques->setSize(CEGUI::UVector2(CEGUI::UDim(0,width), CEGUI::UDim(0,height)));
-		ques->setVisible(true);
-		
-		// restliche Antwortlabels ausblenden
-		for (; nr<acount; nr++)
-		{
-			stream.str("");
-			stream << "AnswerLabel";
-			stream << nr;
-			
-			label = win_mgr.getWindow(stream.str());
-			label->setVisible(false);
-		}
-	}
-	else if (acount !=0)
-	{
-		m_document->getGUIState()->m_shown_windows &= ~Document::QUESTIONBOX;
-		ques = (CEGUI::FrameWindow*) win_mgr.getWindow("QuestionWindow");
-		ques->setVisible(false);
-		
-	}
-}
 
 void MainWindow::updatePartyInfo()
 {
@@ -2510,15 +2225,7 @@ bool MainWindow::onDropItemClicked(const CEGUI::EventArgs& evt)
 }
 
 
-bool MainWindow::onAnswerClicked(const CEGUI::EventArgs& evt)
-{
-	const CEGUI::MouseEventArgs& we =
-			static_cast<const CEGUI::MouseEventArgs&>(evt);
-	unsigned int id = we.window->getID();
-	
-	m_document->onAnswerClick(id);
-	return true;
-}
+
 
 bool MainWindow::consumeEvent(const CEGUI::EventArgs& evt)
 {
