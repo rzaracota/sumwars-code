@@ -23,7 +23,7 @@
 			</Condition>
 			<Effect>
 				if (rob_the_robber.started == true) then
-					speak("Sergeant Lutterer",_("You havn't killed Rob yet."),1000)
+					speak("Sergeant Lutterer",_("You havn't killed Rob yet."))
 				else
 					speak("player",_("Excuse me, Seargent, but I noticed that wanted poster."))
 					speak("player",_("Isn't a bounty of 3000 Goldpieces a bit exaggerated?"))

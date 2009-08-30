@@ -35,26 +35,26 @@
 				-- Party kommt auf den Kommandostand zu, waehrend
 				-- General G und DE in einen Streit verwickelt sind
 				
-				speak("DE",_("...haben meine Windelementare"),1000);
-				speak("General G",_("Na großartig. Und mit"),1000);
-				speak("DE",_("Keine Sorge. Mein Kollege"),1000);
-				speak("General G",_("Ja sicher. Auch wenn ich"),1000);
-				speak("PL",_("Verzeiht wenn ich mich so"),1000);
-				speak("General G",_("Und wer seid ihr?"),1000);
-				speak("PL",_("Die Verstärkung."),1000);
-				speak("General G",_("Sicher seid ihr das."),1000);
-				speak("DE",_("Ich glaube, dieser"),1000);
-				speak("General G",_("Das soll eure grandiose"),1000);
-				speak("DE",_("Ihr werdet den Wert unserer"),1000);
-				speak("General G",_("Was sagt ihr da?"),1000);
-				speak("ANY",_("Mir persönlich gefaellt"),1000);
-				speak("PL",_("Wenn der Preis stimmt,"),1000);
-				speak("General G",_("Großartig. Einfach großartig."),1000);
+				speak("DE",_("...haben meine Windelementare"));
+				speak("General G",_("Na großartig. Und mit"));
+				speak("DE",_("Keine Sorge. Mein Kollege"));
+				speak("General G",_("Ja sicher. Auch wenn ich"));
+				speak("PL",_("Verzeiht wenn ich mich so"));
+				speak("General G",_("Und wer seid ihr?"));
+				speak("PL",_("Die Verstärkung."));
+				speak("General G",_("Sicher seid ihr das."));
+				speak("DE",_("Ich glaube, dieser"));
+				speak("General G",_("Das soll eure grandiose"));
+				speak("DE",_("Ihr werdet den Wert unserer"));
+				speak("General G",_("Was sagt ihr da?"));
+				speak("ANY",_("Mir persönlich gefaellt"));
+				speak("PL",_("Wenn der Preis stimmt,"));
+				speak("General G",_("Großartig. Einfach großartig."));
 				
 				-- Party macht sich auf den Weg.
 				
-				speak("General G",_("Ich hoffe, ihr habt"),1000);
-				speak("DE",_("Macht euch keine Sorgen."),1000);
+				speak("General G",_("Ich hoffe, ihr habt"));
+				speak("DE",_("Macht euch keine Sorgen."));
 				
 				-- => Hauptquest: Verteidige Zwergentrutz
 				

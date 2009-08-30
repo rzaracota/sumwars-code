@@ -23,7 +23,7 @@
 			</Condition>
 			<Effect>
 				if (besieged_farm.started == true) then
-					speak("Sergeant Lutterer",_("You haven't saved Brons farm yet."),1000)
+					speak("Sergeant Lutterer",_("You haven't saved Brons farm yet."))
 				else
 					addQuestion(_("Accept Quest?"))
 					addAnswer(_("Yes"),"start_besieged_farm_quest")
@@ -37,7 +37,7 @@
 				speak("player", _("Do you have a goblin problem in this region?"))
 				speak("Sergeant Lutterer",_("Ah, do you now feel like earning the money?"))
 				speak("Sergeant Lutterer", _("Don't believe I didn't see you hanging around back there."))
-				speak("Sergeant Lutterer", _("But I won't complain."),1000)
+				speak("Sergeant Lutterer", _("But I won't complain."))
 				speak("Sergeant Lutterer", _("You know how it works: Go west to the Northern Meadow and drive out that goblin scum around Brons farm."))
 				speak("Sergeant Lutterer", _("I don't care, how you do that."))
 				speak("Sergeant Lutterer", _("You can eat them raw and bath in their blood for all I care."))

@@ -92,13 +92,13 @@
 	<NPC refname="Maylons Ghost">
 		<Topic name="maylons_grave_freed">
 			<Effect>
-				speak("Maylons Ghost",_("text11"),1000);
+				speak("Maylons Ghost",_("text11"));
 				if (maylons_grave.goblins_killed ~= true) then
-					speak("Maylons Ghost",_("text12"),1000);
-					speak("PL",_("text13"),1000);
+					speak("Maylons Ghost",_("text12"));
+					speak("PL",_("text13"));
 					if (maylons_grave.started == true) then
 						maylons_grave.finished = true;
-						speak("Maylons Ghost",_("text14_reward"),1000);
+						speak("Maylons Ghost",_("text14_reward"));
 						-- drop suitable weapons
 						-- dropItem("???", "cryptGraveChamber");
 						-- dropItem("???", "cryptGraveChamber");

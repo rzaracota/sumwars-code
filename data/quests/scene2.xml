@@ -37,10 +37,10 @@
 					speak("MAG",_("But of course."));
 					speak("MAG",_("I know this nice little trick."));
 				elseif (getRole("PRI") ~= nil) then
-					speak("PRI",_("But of course."),1000);
+					speak("PRI",_("But of course."));
 					speak("PRI",_("I know this nice little trick."));
 				else
-					speak("ANY",_("But of course."),1000);
+					speak("ANY",_("But of course."));
 					speak("ANY",_("I know this nice little trick."));
 				end;
 

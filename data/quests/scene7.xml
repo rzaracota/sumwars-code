@@ -18,29 +18,29 @@
 				addCameraPosition(0,get(getRole("PL"),"position"),20,40,20);
 				addCameraPosition(20000,get(getRole("PL"),"position"),220,60,30);
 
-				speak("MAGast",_("Wow, ist das schoen."),1000);
-				speak("WARast",_("Wirst du jetzt sentimental?"),1000);
-				speak("MAGast",_("... Der Anblick hat mich nur an mein Leben"),1000);
-				speak("ANY",_("Du kannst dich an dein Leben vor der"),1000);
-				speak("MAGast",_("... Nur schemenhaft."),1000);
-				speak("PL",_("Manchmal wuenschte ich,"),1000);
-				speak("WARast",_("Ich kenne genug Menschen,"),1000);
-				speak("PL",_("... nur aeußerlich."),1000);
-				speak("MAGast",_("..."),1000);
+				speak("MAGast",_("Wow, ist das schoen."));
+				speak("WARast",_("Wirst du jetzt sentimental?"));
+				speak("MAGast",_("... Der Anblick hat mich nur an mein Leben"));
+				speak("ANY",_("Du kannst dich an dein Leben vor der"));
+				speak("MAGast",_("... Nur schemenhaft."));
+				speak("PL",_("Manchmal wuenschte ich,"));
+				speak("WARast",_("Ich kenne genug Menschen,"));
+				speak("PL",_("... nur aeußerlich."));
+				speak("MAGast",_("..."));
 
 				-- (sie schweigen einen Moment.)
 
-				speak("ANY",_("Meint ihr wirklich, dass es"),1000);
-				speak("PRIast",_("Selbst die grossen"),1000);
-				speak("ANY",_("Ich hoffe du hast"),1000);
-				speak("MAGast",_("Warum hat es eigentlich"),1000);
+				speak("ANY",_("Meint ihr wirklich, dass es"));
+				speak("PRIast",_("Selbst die grossen"));
+				speak("ANY",_("Ich hoffe du hast"));
+				speak("MAGast",_("Warum hat es eigentlich"));
 
 				-- Alle zucken mit den Schultern, keiner weiss es
 
-				speak("PL",_("Wir muessen jetzt weiter."),1000);
-				speak("MAGast",_("Nur noch einen Moment bitte."),1000);
-				speak("ARCast",_("Was ist das eigentlich dort auf dem Wasser?"),1000);
-				speak("ANYast",_("Sieht aus wie ein..."),1000);
+				speak("PL",_("Wir muessen jetzt weiter."));
+				speak("MAGast",_("Nur noch einen Moment bitte."));
+				speak("ARCast",_("Was ist das eigentlich dort auf dem Wasser?"));
+				speak("ANYast",_("Sieht aus wie ein..."));
 
 				changeTopic("end_cutscene7_fight");
 			</Effect>
@@ -50,7 +50,7 @@
 			<Effect>
 				setCutsceneMode(false);
 				scene7_tmp.pondmonster = createObject("fireElemS","entry_west");
-				unitSpeak(scene7_tmp.pondmonster,_("*Roar!*"),1000);
+				unitSpeak(scene7_tmp.pondmonster,_("*Roar!*"));
 			</Effect>
 		</Topic>
 	</NPC>

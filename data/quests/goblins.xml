@@ -23,16 +23,16 @@
 			<Effect>
 				if (goblins.started) then
 					if (goblins.nr >=10) then
-						speak('player', _("I have killed them"),1000)
-						speak('peasant',_("you are soo great"),1000);
+						speak('player', _("I have killed them"))
+						speak('peasant',_("you are soo great"));
 						changeTopic('finish_gob_quest');
 					else
-						speak('peasant',_("Go and kill some more..."),1000);
+						speak('peasant',_("Go and kill some more..."));
 					end
 				else
-					speak('peasant',_("There are some stupid goblins around"),1000);
-					speak('peasant',_("If you kill 10 of them you get a reward"),1000);
-					speak('peasant',_("Interested?"),1000);
+					speak('peasant',_("There are some stupid goblins around"));
+					speak('peasant',_("If you kill 10 of them you get a reward"));
+					speak('peasant',_("Interested?"));
 					addQuestion(_("Accept Quest?"));
 					addAnswer(_("Yes"),'start_gob_quest'); 
 					addAnswer(_("No"),'end');
@@ -46,9 +46,9 @@
 				return (getPlayerPrivateVar(getSpeaker('player'),"goblins.reward2") ~= true)
 			</Condition>
 			<Effect>
-				speak('peasant',_("A second reward ?"),1000);
+				speak('peasant',_("A second reward ?"));
 				speak('player', _("Yeah"),1000)
-				speak('peasant',_("I give you a goblin club"),1000);
+				speak('peasant',_("I give you a goblin club"));
 				setPlayerPrivateVar(getSpeaker('player'),"goblins.reward2",true);
 				changeTopic('goblins_reward2');
 			</Effect>
@@ -58,7 +58,7 @@
 		<Topic name="start_gob_quest" >
 			<Effect>
 				speak('player', _("Nearly done"),1000)
-				speak('peasant',_("Have fun"),1000);
+				speak('peasant',_("Have fun"));
 				goblins.started = true;
 				goblins.nr =0;
 			</Effect>	

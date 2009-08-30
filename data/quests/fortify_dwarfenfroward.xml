@@ -52,7 +52,7 @@
 				speak("ANYast",_("It feels like..."));
 				speak("PL",_("Quiet!"));
 				speak("W2",_("My Lord! The... Branded Ones are here now."));
-				speak("SW",_("Very well."),1000);
+				speak("SW",_("Very well."));
 				speak("SW",_("You're presence is no longer 	needed."));
 				speak("W1",_("But my Lord, those are"));
 				speak("SW",_("..."));

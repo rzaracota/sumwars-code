@@ -132,14 +132,14 @@
 				addSpeaker(trigger.player,"Player");
 				addStandardSpeakers("aisMounPath","locPartyEntry");
 				
-				speak("nobody","",2000);
+				speak("nobody","","",2000);
 				speak("MALEast",_("Wow, she's gorgeous"));
 				speak("PL",_("You can stare at her later, we have to erase some undead."));
 				speak("HW",_("Please help us, the maga is badly injured!"));
 				
 				-- W1 (Wird toedlich getroffen): *hurgs*
 				jumpTopic("insertion_guard_dies");
-				speak("nobody","",1000);
+				speak("nobody","","",1000);
 				speak("WARast",_("He he. Harvest!"));
 				
 				-- Sie kaempfen. Die Untoten warten mit einer etwas unschoenen

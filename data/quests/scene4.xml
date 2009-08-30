@@ -20,18 +20,18 @@
 
 				-- Mitten auf der Landstraße springt der Kristall auf und SW meldet sich
 
-				speak("PL",_("Was ist denn jetzt?"),1500);
-				speak("SW",_("Ihr muesst jetzt sofort"),1500);
-				speak("ANYast",_("Wer?"),1500);
-				speak("SW",_("Die Erzmaga Ireana von Nordenburg"),1500);
-				speak("ARCast",_("Wird das extra bezahlt?"),1500);
-				speak("MAGast",_("Wie bitte? Ich dachte das"),1500);
-				speak("SW",_("Jetzt fangt nicht an zu diskutieren"),1500);
-				speak("PL",_("Was meint ihr Freunde,"),1500);
-				speak("MAGast",_("Weiss nicht so genau..."),1500);
-				speak("ARCast",_("Wird das extra bezahlt?"),1500);
-				speak("SW",_("Argh! Muss ich euch erst"),1500);
-				speak("PL",_("Schon gut, spare deinen Atem"),1500);
+				speak("PL",_("Was ist denn jetzt?"));
+				speak("SW",_("Ihr muesst jetzt sofort"));
+				speak("ANYast",_("Wer?"));
+				speak("SW",_("Die Erzmaga Ireana von Nordenburg"));
+				speak("ARCast",_("Wird das extra bezahlt?"));
+				speak("MAGast",_("Wie bitte? Ich dachte das"));
+				speak("SW",_("Jetzt fangt nicht an zu diskutieren"));
+				speak("PL",_("Was meint ihr Freunde,"));
+				speak("MAGast",_("Weiss nicht so genau..."));
+				speak("ARCast",_("Wird das extra bezahlt?"));
+				speak("SW",_("Argh! Muss ich euch erst"));
+				speak("PL",_("Schon gut, spare deinen Atem"));
 
 				-- Am Nordausgang der Wolfssteine sollte jetzt ein Event aktiv sein, dass den Spielern das Betreten von Zwergentrutz verbietet.
 				

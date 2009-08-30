@@ -62,19 +62,19 @@
 		
 		<Topic name="start_rescue_willard_quest" >
 			<Effect>
-				speak("WAR",_("Your friend is as good as saved."),1000);
-				speak("ANY",_("And not even asking what the rest is thinking."),2500);
-				speak('Fenor Marken',_("Thank you very much."),1000);
+				speak("WAR",_("Your friend is as good as saved."));
+				speak("ANY",_("And not even asking what the rest is thinking."));
+				speak('Fenor Marken',_("Thank you very much."));
 				rescue_willard.started = true;
 			</Effect>	
 		</Topic>
 		
 		<Topic name="refuse_rescue_willard_quest" >
 			<Effect>
-				speak("player",_("Sorry, but we can't waste time searching for some gamekeeper."),3000);
-				speak('Fenor Marken',_("You're as coldharted as they say."),1800);
-				speak('Fenor Marken',_("If only I could leave here."),1800);
-				speak('Fenor Marken',_("I would search for him myself"),1800);
+				speak("player",_("Sorry, but we can't waste time searching for some gamekeeper."));
+				speak('Fenor Marken',_("You're as coldharted as they say."));
+				speak('Fenor Marken',_("If only I could leave here."));
+				speak('Fenor Marken',_("I would search for him myself"));
 			</Effect>	
 		</Topic>
 	</NPC>
@@ -91,19 +91,19 @@
 			</Condition>
 			<Effect>
 				rescue_willard.finished = true;
-				speak("Willard","Thanks for your help.",1500);
-				speak("Willard","Can I ask another favor of you?",1500);
-				speak("Willard","My leg's wounded and I won't reach Medair on my own.",2000);
-				speak("player", _("You're Willard I suppose."),1500);
-				speak("Willard","That's me. Why do you know my name?",1800);
-				speak("player", _("Your friend Fenor Marken sends us."),1800);
-				speak("player", _("We are to give you a phasestone."),1700);
-				speak("Willard","Holy Gods! He still has that thing?",1800);
-				speak("Willard","That was one of the sins of our youth.",1800);
-				speak("Willard","Mines been used up long ago.",1500);
-				speak("Willard","Good old Fenor. Here, let me show you my appretiation.",2200);
-				speak("Willard","Surely someone in your line of work allways has use for extra money?",2500);
-				speak("player", _("I thank you."),1000);
+				speak("Willard","Thanks for your help.");
+				speak("Willard","Can I ask another favor of you?");
+				speak("Willard","My leg's wounded and I won't reach Medair on my own.");
+				speak("player", _("You're Willard I suppose."));
+				speak("Willard","That's me. Why do you know my name?");
+				speak("player", _("Your friend Fenor Marken sends us."));
+				speak("player", _("We are to give you a phasestone."));
+				speak("Willard","Holy Gods! He still has that thing?");
+				speak("Willard","That was one of the sins of our youth.");
+				speak("Willard","Mines been used up long ago.");
+				speak("Willard","Good old Fenor. Here, let me show you my appretiation.");
+				speak("Willard","Surely someone in your line of work allways has use for extra money?");
+				speak("player", _("I thank you."));
 				local players = getPlayers();
 				local i,player;
 				for i,player in ipairs(players) do
@@ -179,8 +179,8 @@
 			<Effect>
 				-- createDialogue()
 				-- addSpeaker(trigger.player,'finder')
-				-- speak('finder','Hier steckt also dieser Willard.',1000)
-				unitSpeak(trigger.player,_("Hier steckt also dieser Willard."),1000);
+				-- speak('finder','Hier steckt also dieser Willard.')
+				unitSpeak(trigger.player,_("Hier steckt also dieser Willard."));
 			</Effect>
 		</Event>
 		

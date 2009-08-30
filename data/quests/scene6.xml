@@ -23,7 +23,7 @@
 				
 				addCameraPosition(20000,get(getRole("PL"),"position"),180,40,0);
 				
-				speak("MAGast",_("Los, das ist unsere Chance!"),1000);
+				speak("MAGast",_("Los, das ist unsere Chance!"));
 				
 				addQuestion(_("Angreifen oder erst noch zuhoeren?"));
 				addAnswer(_("Attack"),"scene6_attack");
@@ -45,18 +45,18 @@
 			<Effect>
 				addCameraPosition(20000,get(getRole("VN"),"position"),220,60,0);
 
-				speak("PL",_("Wartet, vielleicht erfahren"),1000);
-				speak("L",_("Lass sie ab und zu ausruhen,"),1000);
-				speak("VN",_("Soll der Tunnel nicht zum"),1000);
-				speak("L",_("Nein, die Stadt ist unwichtig."),1000);
-				speak("VN",_("Ich verstehe nicht."),1000);
-				speak("L",_("Und das ist gut so,"),1000);
-				speak("VN",_("Euer Wunsch ist meine Handlung!"),1000);
+				speak("PL",_("Wartet, vielleicht erfahren"));
+				speak("L",_("Lass sie ab und zu ausruhen,"));
+				speak("VN",_("Soll der Tunnel nicht zum"));
+				speak("L",_("Nein, die Stadt ist unwichtig."));
+				speak("VN",_("Ich verstehe nicht."));
+				speak("L",_("Und das ist gut so,"));
+				speak("VN",_("Euer Wunsch ist meine Handlung!"));
 
 				addCameraPosition(20000,get(getRole("PL"),"position"),180,40,0);
 
-				speak("PRIast",_("Das ist ein Lich,"),1000);
-				speak("PL",_("Also gut!"),1000);
+				speak("PRIast",_("Das ist ein Lich,"));
+				speak("PL",_("Also gut!"));
 				
 				changeTopic("end_cutscene6");
 			</Effect>
