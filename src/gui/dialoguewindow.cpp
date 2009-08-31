@@ -28,7 +28,7 @@ DialogueWindow::DialogueWindow(Document* doc, Scene* scene)
 	upper_bar->setPosition(CEGUI::UVector2(cegui_reldim(0.0f), cegui_reldim( 0.0f)));
 	upper_bar->setSize(CEGUI::UVector2(cegui_reldim(1.0f), cegui_reldim( 0.15f)));
 	upper_bar->setAlwaysOnTop(true);
-	lower_bar->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&DialogueWindow::onTextClicked, this));
+	upper_bar->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&DialogueWindow::onTextClicked, this));
 	upper_bar->setVisible(false);
 	
 	game_screen->addChildWindow(upper_bar);
@@ -230,7 +230,7 @@ void DialogueWindow::update()
 					}
 					
 					std::string image = cr->getSpeakText().m_emotion;
-					if (wimage->getProperty("Image") != image && image != "")
+					if (wimage->getProperty("Image") != image)
 					{
 						wimage->setProperty("Image",image);
 					}

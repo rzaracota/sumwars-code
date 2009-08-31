@@ -229,6 +229,8 @@ void Dialogue::addSpeaker(int id, std::string refname)
 		state.m_position = UNKNOWN;
 		state.m_visible = false;
 		state.m_text_visible = false;
+		
+		cr->getSpeakText().m_emotion="";
 	}
 
 }
@@ -771,7 +773,7 @@ void Dialogue::fromString(CharConv* cv)
 void Dialogue::skipText(int id)
 {
 	m_player_skips.insert(id);
-	if (m_player_skips.size() == m_nr_players)
+	if ((int) m_player_skips.size() == m_nr_players)
 	{
 		// aktuellen Text ueberspringen
 		CreatureSpeakText* cst;
@@ -786,3 +788,4 @@ void Dialogue::skipText(int id)
 		}
 	}
 }
+
