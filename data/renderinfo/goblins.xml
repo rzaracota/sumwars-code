@@ -21,6 +21,10 @@
 	<Action name="range_attack">
 		<Animation name="attack2" />
 	</Action>
+	
+	<Action name="noaction">
+		<Animation name="walk" />
+	</Action>
 </RenderInfo>
 
 <RenderInfo name="goblin" parent="goblinbase">

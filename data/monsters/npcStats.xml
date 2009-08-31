@@ -39,18 +39,9 @@
 					attack_range="0.5"
 					>
 		
-		<Ability type="noaction">
-			<Animation name="idle" />
-		</Ability>
-		
-		<Ability type="walk">
-			<Animation name="walkOneHand" />
-		</Ability>
-		
-		
+		<Ability type="noaction"/>
+		<Ability type="walk"/>
 		<Ability type="die">
-			<Animation name="die" />
-		</Ability>
 		
 	</BasicAttributes>
 	
@@ -89,19 +80,9 @@
 					step_length="1.2"
 					attack_range="0.5"
 					>
-		
-		<Ability type="noaction">
-			<Animation name="idle" />
-		</Ability>
-		
-		<Ability type="walk">
-			<Animation name="walkOneHand" />
-		</Ability>
-		
-		
+		<Ability type="noaction"/>
+		<Ability type="walk"/>
 		<Ability type="die">
-			<Animation name="die" />
-		</Ability>
 		
 	</BasicAttributes>
 	
@@ -142,21 +123,12 @@
 					attack_range="0.5"
 					>
 		
-		<Ability type="noaction">
-			<Animation name="idlePole" />
-		</Ability>
-		
-		<Ability type="walk">
-			<Animation name="walkTwoHands" />
-		</Ability>
-		
-		<Ability type="attack">
-			<Animation name="attackTwoHands" />
-		</Ability>
-		
+		<Ability type="noaction"/>
+		<Ability type="walk"/>
 		<Ability type="die">
-			<Animation name="die" />
-		</Ability>
+		
+		<Ability type="attack"/>
+	
 		
 	</BasicAttributes>
 	

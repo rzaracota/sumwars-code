@@ -37,7 +37,7 @@
 		<Ability type="walk" />
 		<Ability type="attack" />
 		<Ability type="die" />
-		<Ability type="idle" />
+		<Ability type="noaction" />
 	</BasicAttributes>
 	
 	<Geometry radius="0.5" />
@@ -83,7 +83,7 @@
 		<Ability type="walk" />
 		<Ability type="attack" />
 		<Ability type="die" />
-		<Ability type="idle" />
+		<Ability type="noaction" />
 		<Ability type="fire_ball" />
 		
 	</BasicAttributes>

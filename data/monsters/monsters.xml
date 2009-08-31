@@ -271,6 +271,7 @@ AIR
 		<Ability type="walk" />
 		<Ability type="attack" />
 		<Ability type="die" />
+		<Ability type="noaction" />
 		
 	</BasicAttributes>
 	
@@ -316,6 +317,7 @@ AIR
 		<Ability type="walk" />
 		<Ability type="attack"/>
 		<Ability type="die" />
+		<Ability type="noaction" />
 		
 	</BasicAttributes>
 	
@@ -363,7 +365,7 @@ AIR
 		<Ability type="lightning" />
 		<Ability type="blade_storm" />
 		<Ability type="die" />
-		
+		<Ability type="noaction" />
 	</BasicAttributes>
 	
 	<Geometry radius="0.5" />
@@ -409,7 +411,7 @@ AIR
 		<Ability type="walk" />
 		<Ability type="range_attack"/>
 		<Ability type="die" />
-		
+		<Ability type="noaction" />
 	</BasicAttributes>
 	
 	<Geometry radius="0.5" />
@@ -453,7 +455,7 @@ AIR
 		<Ability type="walk" />
 		<Ability type="attack"/>
 		<Ability type="die" />
-		
+		<Ability type="noaction" />
 	</BasicAttributes>
 	
 	<Geometry radius="0.5" />
@@ -498,7 +500,7 @@ AIR
 		<Ability type="walk" />
 		<Ability type="attack"/>
 		<Ability type="die" />
-		
+		<Ability type="noaction" />
 	</BasicAttributes>
 	
 	<Geometry radius="0.5" />
@@ -543,7 +545,7 @@ AIR
 		<Ability type="walk" />
 		<Ability type="attack"/>
 		<Ability type="die" />
-		
+		<Ability type="noaction" />
 	</BasicAttributes>
 	
 	<Geometry radius="0.5" />
@@ -586,10 +588,10 @@ AIR
 					attack_range="1"
 					>
 		
-	<Ability type="walk" />
-	<Ability type="range_attack"/>
-	<Ability type="die" />
-		
+		<Ability type="walk" />
+		<Ability type="range_attack"/>
+		<Ability type="die" />
+		<Ability type="noaction" />
 	</BasicAttributes>
 	
 	<Geometry radius="0.5" />
@@ -634,7 +636,7 @@ AIR
 		<Ability type="walk" />
 		<Ability type="range_attack"/>
 		<Ability type="die" />
-
+		<Ability type="noaction" />
 		
 	</BasicAttributes>
 	
@@ -680,7 +682,7 @@ AIR
 	<Ability type="walk" />
 	<Ability type="range_attack"/>
 	<Ability type="die" />
-
+	<Ability type="noaction" />
 		
 	</BasicAttributes>
 	
@@ -729,7 +731,7 @@ AIR
 	<Ability type="attack"/>
 	<Ability type="die" />
 	<Ability type="ice_bolt" />
-		
+	<Ability type="noaction" />
 		
 		<Immunity type="berserk"/>
 		<Immunity type="confused"/>
@@ -776,6 +778,7 @@ AIR
 		<Ability type="walk" />
 		<Ability type="attack"/>
 		<Ability type="die" />
+		<Ability type="noaction" />
 		
 		<Immunity type="blind"/>
 		<Immunity type="poisoned"/>
@@ -826,6 +829,7 @@ AIR
 		<Ability type="range_attack"/>
 		<Ability type="summoned" time="2000" />
 		<Ability type="die" />
+		<Ability type="noaction" />
 		
 		<Immunity type="blind"/>
 		<Immunity type="poisoned"/>
@@ -877,6 +881,7 @@ AIR
 		<Ability type="walk" />
 		<Ability type="attack"/>
 		<Ability type="die" />
+		<Ability type="noaction" />
 		
 		<Immunity type="blind"/>
 		<Immunity type="poisoned"/>
@@ -927,6 +932,7 @@ AIR
 		<Ability type="walk" />
 		<Ability type="attack"/>
 		<Ability type="die" />
+		<Ability type="noaction" />
 		
 		<Immunity type="blind"/>
 		<Immunity type="poisoned"/>
@@ -978,7 +984,8 @@ AIR
 		<Ability type="walk" />
 		<Ability type="attack"/>
 		<Ability type="die" />
-	
+		<Ability type="noaction" />
+		
 		<Immunity type="blind"/>
 		<Immunity type="poisoned"/>
 		<Immunity type="berserk"/>
@@ -1028,7 +1035,8 @@ AIR
 		<Ability type="walk" />
 		<Ability type="attack"/>
 		<Ability type="die" />
-	
+		<Ability type="noaction" />
+		
 		<Immunity type="blind"/>
 		<Immunity type="poisoned"/>
 		<Immunity type="berserk"/>
@@ -1078,7 +1086,7 @@ AIR
 		<Ability type="walk"/>
 		
 		<Ability type="attack"/>
-		
+		<Ability type="noaction" />
 		<Ability type="die"/>
 		
 	</BasicAttributes>
@@ -1122,19 +1130,10 @@ AIR
 		step_length="1.0"
 		attack_range="1"
 	>
-		<Ability type="walk">
-			<Animation name="walk" />
-		</Ability>
-		
-		<Ability type="attack">
-			<Animation name="attack1" />
-			<Animation name="attack2" />
-			<Animation name="attack3" />
-		</Ability>
-		
-		<Ability type="die">
-			<Animation name="die" />
-		</Ability>
+		<Ability type="walk"/>		
+		<Ability type="attack"/>
+		<Ability type="die" />
+		<Ability type="noaction" />
 		
 		<Immunity type="blind"/>
 		<Immunity type="poisoned"/>
@@ -1183,19 +1182,11 @@ AIR
 		step_length="1.0"
 		attack_range="1"
 	>
-		<Ability type="walk">
-			<Animation name="walk" />
-		</Ability>
-		
-		<Ability type="attack">
-			<Animation name="attack1" />
-			<Animation name="attack2" />
-			<Animation name="attack3" />
-		</Ability>
-		
-		<Ability type="die">
-			<Animation name="die" />
-		</Ability>
+		<Ability type="walk"/>		
+		<Ability type="attack"/>
+		<Ability type="die" />
+		<Ability type="noaction" />
+
 		
 		<Immunity type="blind"/>
 		<Immunity type="poisoned"/>
