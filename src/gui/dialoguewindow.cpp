@@ -18,6 +18,7 @@ DialogueWindow::DialogueWindow(Document* doc, Scene* scene)
 	lower_bar->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&DialogueWindow::onTextClicked, this));
 	lower_bar->setAlwaysOnTop(true);
 	lower_bar->setVisible(false);
+	lower_bar->setWantsMultiClickEvents(false);
 	
 	game_screen->addChildWindow(lower_bar);
 	
@@ -30,6 +31,7 @@ DialogueWindow::DialogueWindow(Document* doc, Scene* scene)
 	upper_bar->setAlwaysOnTop(true);
 	upper_bar->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&DialogueWindow::onTextClicked, this));
 	upper_bar->setVisible(false);
+	upper_bar->setWantsMultiClickEvents(false);
 	
 	game_screen->addChildWindow(upper_bar);
 	
@@ -100,7 +102,7 @@ DialogueWindow::DialogueWindow(Document* doc, Scene* scene)
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.12f), cegui_reldim(0.29f)));
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&DialogueWindow::onTextClicked, this));
 	label->setSize(CEGUI::UVector2(cegui_reldim(0.38f), cegui_reldim( 0.66f)));
-	
+	label->setWantsMultiClickEvents(false);
 	
 	label = win_mgr.createWindow("TaharezLook/StaticText", "SpeakerTextLabel1");
 	upper_bar->addChildWindow(label);
@@ -110,6 +112,7 @@ DialogueWindow::DialogueWindow(Document* doc, Scene* scene)
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.5f), cegui_reldim(0.29f)));
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&DialogueWindow::onTextClicked, this));
 	label->setSize(CEGUI::UVector2(cegui_reldim(0.38f), cegui_reldim( 0.66f)));
+	label->setWantsMultiClickEvents(false);
 	
 	label = win_mgr.createWindow("TaharezLook/StaticText", "SpeakerTextLabel2");
 	lower_bar->addChildWindow(label);
@@ -119,7 +122,7 @@ DialogueWindow::DialogueWindow(Document* doc, Scene* scene)
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.12f), cegui_reldim(0.29f)));
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&DialogueWindow::onTextClicked, this));
 	label->setSize(CEGUI::UVector2(cegui_reldim(0.38f), cegui_reldim( 0.66f)));
-	
+	label->setWantsMultiClickEvents(false);
 	
 	label = win_mgr.createWindow("TaharezLook/StaticText", "SpeakerTextLabel3");
 	lower_bar->addChildWindow(label);
@@ -129,7 +132,7 @@ DialogueWindow::DialogueWindow(Document* doc, Scene* scene)
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.5f), cegui_reldim(0.29f)));
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&DialogueWindow::onTextClicked, this));
 	label->setSize(CEGUI::UVector2(cegui_reldim(0.38f), cegui_reldim( 0.66f)));
-	
+	label->setWantsMultiClickEvents(false);
 }
 
 void DialogueWindow::update()

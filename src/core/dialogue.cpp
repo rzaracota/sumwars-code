@@ -210,7 +210,6 @@ void Dialogue::addSpeaker(int id, std::string refname)
 
 	if (cr->getType() == "PLAYER")
 	{
-		m_nr_players ++;
 		if (m_main_player_id ==0 )
 		{
 			m_main_player_id = cr->getId();
@@ -231,6 +230,10 @@ void Dialogue::addSpeaker(int id, std::string refname)
 		state.m_text_visible = false;
 		
 		cr->getSpeakText().m_emotion="";
+		if (cr->getType() == "PLAYER")
+		{
+			m_nr_players ++;
+		}
 	}
 
 }
@@ -773,7 +776,7 @@ void Dialogue::fromString(CharConv* cv)
 void Dialogue::skipText(int id)
 {
 	m_player_skips.insert(id);
-	DEBUG("players %i skips %i",m_nr_players, m_player_skips.size());
+	DEBUG5("players %i skips %i",m_nr_players, m_player_skips.size());
 	if ((int) m_player_skips.size() == m_nr_players)
 	{
 		// aktuellen Text ueberspringen
