@@ -855,3 +855,13 @@ void CreatureSpeakText::clear()
 	m_answers.clear();
 }
 
+std::string EmotionSet::getEmotionImage(std::string emotion)
+{
+	std::map<std::string, std::string>::iterator it;
+	it = m_emotion_images.find(emotion);
+	if (it == m_emotion_images.end())
+		return m_default_image;
+	
+	return it->second;
+}
+

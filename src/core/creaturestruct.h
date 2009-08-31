@@ -655,4 +655,29 @@ struct FightStatistic
 	float m_block_chance;
 };
 
+/**
+ * \struct EmotionSet
+ * \brief Satz von Emotionsbildern fuer Kreaturen
+ */
+struct EmotionSet
+{
+	/**
+	 * \fn std::string getEmotionImage(std::string emotion)
+	 * \brief Gibt zu einer Emotion das passende Bild aus
+	 */
+	std::string getEmotionImage(std::string emotion);
+	
+	/**
+	 * \var std::map<std::string, std::string> m_emotion_images
+	 * \brief Bildet Name der Emotion auf das Bild ab
+	 */
+	std::map<std::string, std::string> m_emotion_images;
+	
+	/**
+	 * \var std::string m_default_image
+	 * \brief StandardBild, das angezeigt wird, wenn in der Map kein Eintrag vorhanden ist
+	 */
+	std::string m_default_image;
+};
+
 #endif

@@ -229,7 +229,7 @@ void DialogueWindow::update()
 						wtext->setVisible(true);
 					}
 					
-					std::string image = cr->getSpeakText().m_emotion;
+					std::string image = cr->getEmotionImage(cr->getSpeakText().m_emotion);
 					if (wimage->getProperty("Image") != image)
 					{
 						wimage->setProperty("Image",image);

@@ -90,6 +90,13 @@ class ObjectLoader
 	static bool loadPlayerData(const char* pFilename);
 	
 	/**
+	 * \fn static bool loadEmotionSet(TiXmlNode* node)
+	 * \brief Liest die Daten zu einem Emotionset aus einem Knoten
+	 * \param node XML Knoten
+	 */
+	static bool loadEmotionSet(TiXmlNode* node);
+	
+	/**
 	 * \fn bool loadPlayerTiXmlNode* node)
 	 * \brief Liest die Daten zu einem Spielerklasse aus dem Knoten
 	 * \param node XML Knoten

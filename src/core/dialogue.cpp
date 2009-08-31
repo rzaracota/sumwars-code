@@ -608,6 +608,7 @@ void Dialogue::update(float time)
 				if (cst->m_text == "#emotion#")
 				{
 					cr->getSpeakText().m_emotion = cst->m_emotion;
+					m_speaker_state[id].m_emotion = cst->m_emotion;
 					m_event_mask =1;
 					m_speech.pop_front();
 					cst =0;
@@ -718,7 +719,6 @@ void Dialogue::update(float time)
 				}
 				
 				cr->getSpeakText().m_emotion = m_speaker_state[id].m_emotion;
-				
 				m_event_mask =1;
 			}
 

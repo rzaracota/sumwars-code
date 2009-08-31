@@ -114,6 +114,12 @@ struct MonsterBasicData
 	 * \brief Name des Monsters
 	 */
 	std::string m_name;
+	
+	/**
+	 * \var  std::string m_emotion_set
+	 * \brief Name des Satzes der Emotionsbilder
+	 */
+	std::string m_emotion_set;
 };
 
 /**

@@ -80,7 +80,7 @@ Monster::Monster( int id,MonsterBasicData& data)
 		
 		getCommand()->m_type = "summoned";
 	}
-	
+	m_emotion_set = data.m_emotion_set;
 }
 
 Monster::~Monster()

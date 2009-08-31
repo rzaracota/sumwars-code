@@ -394,6 +394,21 @@ class ObjectFactory
 	static void registerMonsterGroup(MonsterGroupName name, MonsterGroup* data);
 	
 	/**
+	 * \fn static void registerEmotionSet(std::string name, EmotionSet* set)
+	 * \brief Registriert ein neues EmotionSet
+	 * \param name Name
+	 * \param set Daten
+	 */
+	static void registerEmotionSet(std::string name, EmotionSet* set);
+	
+	/**
+	 * \fn static EmotionSet* getEmotionSet(std::string name)
+	 * \brief Gibt das Emotionset mit dem angegebenen Name aus
+	 * \param name Name
+	 */
+	static EmotionSet* getEmotionSet(std::string name);
+	
+	/**
 	 * \fn static init()
 	 * \brief registriert die Daten der Monster
 	 */
@@ -464,7 +479,11 @@ class ObjectFactory
 	static std::map<GameObject::Subtype, GameObject::Type> m_object_types;
 	
 	
-	
+	/**
+	 * \var static std::map<std::string, EmotionSet*> m_emotion_sets
+	 * \brief Alle Saetze von Emotionsbildern
+	 */
+	static std::map<std::string, EmotionSet*> m_emotion_sets;
 	
 };
 

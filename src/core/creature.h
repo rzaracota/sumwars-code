@@ -1,7 +1,4 @@
 /*
-	Ein kleines Rollenspiel
-	Copyright (C) 2007 Hans Wulf, Chris Drechsler, Daniel Erler
-
 	This program is free software; you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
 	the Free Software Foundation; either version 2 of the License, or
@@ -510,6 +507,12 @@ public:
 		return m_fight_statistic;
 	}
 	
+	/**
+	 * \fn std::string getEmotionImage(std::string emotion)
+	 * \brief Gibt zu einer Emotion das passende Bild aus
+	 */
+	std::string getEmotionImage(std::string emotion);
+	
 protected:
 	
 	/**
@@ -664,6 +667,8 @@ protected:
 	 */
 	float getActionTime(Action::ActionType action);
 	
+	
+	
 //Private stuff
 private:
 	//Fields
@@ -760,91 +765,94 @@ private:
 	protected:
 	
 	
-	/**
-	 * \var int m_dialogue_id
-	 * \brief ID des Dialogs, an dem sich die Kreatur beteiligt
-	 */
-	int m_dialogue_id;
+		/**
+		* \var int m_dialogue_id
+		* \brief ID des Dialogs, an dem sich die Kreatur beteiligt
+		*/
+		int m_dialogue_id;
+			
+		/**
+		* \var m_timer1
+		* \brief Gibt die Zeit in ms an, fuer welche Aktionen die Timer1 benoetigen nicht benutzt werden koennen
+		*/
+		float m_timer1;
 		
-	/**
-	 * \var m_timer1
-	 * \brief Gibt die Zeit in ms an, fuer welche Aktionen die Timer1 benoetigen nicht benutzt werden koennen
-	 */
-	float m_timer1;
-	
-	/**
-	 * \var m_timer2
-	 * \brief Gibt die Zeit in ms an, fuer welche Aktionen die Timer2 benoetigen nicht benutzt werden koennen
-	 */
-	float m_timer2;
-	
-	/**
-	 * \var float m_timer2_max
-	 * \brief Zeit von Timer2 in ms beim starten des Timers
-	 */
-	float m_timer2_max;
-	
-	/**
-	 * \var float m_timer1_max
-	 * \brief Zeit von Timer1 in ms beim starten des Timers
-	 */
-	float m_timer1_max;
-	
-	/**
-	 * \var Action::ActionType m_base_action
-	 * \brief Grundaktion
-	 */
-	Action::ActionType m_base_action;
-	
-	/**
-	 * \var m_equipement
-	 * \brief Enthaelt die Ausruestung des Spielers
-	 */
-	Equipement* m_equipement;
-	
-	/**
-	 * \var FightStatistic m_fight_statistic
-	 * \brief statistische Daten zum Kampf
-	 */
-	FightStatistic m_fight_statistic;
-	
-	/**
-	 * \var PathfindInfo* m_small_path_info
-	 * \brief Wegsucheinformationen fuer kleine Kreaturen (Information ueber den Weg zu diesem Objekt)
-	 */
-	PathfindInfo* m_small_path_info;
-	
-	/**
-	 * \var PathfindInfo* m_small_flying_path_info
-	 * \brief Wegsucheinformationen fuer kleine fliegende Kreaturen (Information ueber den Weg zu diesem Objekt)
-	 */
-	PathfindInfo* m_small_flying_path_info;
-	
-	
-	/**
-	 * \var PathfindInfo* m_medium_path_info
-	 * \brief Wegsucheinformationen fuer mittelgrosse Kreaturen (Information ueber den Weg zu diesem Objekt)
-	 */
-	PathfindInfo* m_medium_path_info;
-	
-	
-	/**
-	 * \var PathfindInfo* m_big_path_info
-	 * \brief Wegsucheinformationen fuer grosse Kreaturen (Information ueber den Weg zu diesem Objekt)
-	 */
-	PathfindInfo* m_big_path_info;
-	
-	
-	/**
-	 * \var PathfindInfo* m_small_path_info
-	 * \brief eigene Wegsucheinformationen, wenn das Zielobjekt keine Kreatur ist
-	 */
-	PathfindInfo* m_path_info;
-	
+		/**
+		* \var m_timer2
+		* \brief Gibt die Zeit in ms an, fuer welche Aktionen die Timer2 benoetigen nicht benutzt werden koennen
+		*/
+		float m_timer2;
+		
+		/**
+		* \var float m_timer2_max
+		* \brief Zeit von Timer2 in ms beim starten des Timers
+		*/
+		float m_timer2_max;
+		
+		/**
+		* \var float m_timer1_max
+		* \brief Zeit von Timer1 in ms beim starten des Timers
+		*/
+		float m_timer1_max;
+		
+		/**
+		 * \var  std::string m_emotion_set
+		 * \brief Name des Satzes der Emotionsbilder
+		 */
+		std::string m_emotion_set;
+		
+		/**
+		* \var Action::ActionType m_base_action
+		* \brief Grundaktion
+		*/
+		Action::ActionType m_base_action;
+		
+		/**
+		* \var m_equipement
+		* \brief Enthaelt die Ausruestung des Spielers
+		*/
+		Equipement* m_equipement;
+		
+		/**
+		* \var FightStatistic m_fight_statistic
+		* \brief statistische Daten zum Kampf
+		*/
+		FightStatistic m_fight_statistic;
+		
+		/**
+		* \var PathfindInfo* m_small_path_info
+		* \brief Wegsucheinformationen fuer kleine Kreaturen (Information ueber den Weg zu diesem Objekt)
+		*/
+		PathfindInfo* m_small_path_info;
+		
+		/**
+		* \var PathfindInfo* m_small_flying_path_info
+		* \brief Wegsucheinformationen fuer kleine fliegende Kreaturen (Information ueber den Weg zu diesem Objekt)
+		*/
+		PathfindInfo* m_small_flying_path_info;
+		
+		
+		/**
+		* \var PathfindInfo* m_medium_path_info
+		* \brief Wegsucheinformationen fuer mittelgrosse Kreaturen (Information ueber den Weg zu diesem Objekt)
+		*/
+		PathfindInfo* m_medium_path_info;
+		
+		
+		/**
+		* \var PathfindInfo* m_big_path_info
+		* \brief Wegsucheinformationen fuer grosse Kreaturen (Information ueber den Weg zu diesem Objekt)
+		*/
+		PathfindInfo* m_big_path_info;
+		
+		
+		/**
+		* \var PathfindInfo* m_small_path_info
+		* \brief eigene Wegsucheinformationen, wenn das Zielobjekt keine Kreatur ist
+		*/
+		PathfindInfo* m_path_info;
+		
 
-	//Constructors
-	//Accessor Methods
-	//Operations
 };
 
 #endif //CREATURE_H

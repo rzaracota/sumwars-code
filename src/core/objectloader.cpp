@@ -88,6 +88,10 @@ bool  ObjectLoader::loadMonster(TiXmlNode* node)
 					DEBUG5("mesh %s %s",subtype.c_str(), mesh.c_str());
 					GraphicManager::registerGraphicMapping(subtype, mesh);
 				}
+				else if (!strcmp(child->Value(), "EmotionSet"))
+				{
+					attr.getString("name",data->m_emotion_set);
+				}
 				else if (!strcmp(child->Value(), "Dropslots"))
 				{
 					int nr =0;
@@ -175,6 +179,10 @@ bool  ObjectLoader::loadMonster(TiXmlNode* node)
 		}
 		
 		ObjectFactory::registerMonsterGroup(name,data);
+	}
+	else if (!strcmp(node->Value(), "EmotionSet"))
+	{
+		loadEmotionSet(node);
 	}
 	else
 	{
@@ -608,5 +616,39 @@ bool ObjectLoader::loadProjectile(TiXmlNode* node)
 			loadProjectile(child);
 		}
 	}	
+	return true;
+}
+
+bool ObjectLoader::loadEmotionSet(TiXmlNode* node)
+{
+	EmotionSet* es = new EmotionSet;
+	TiXmlNode* child;
+	
+	std::string name;
+	
+	ElementAttrib attr;
+	attr.parseElement(node->ToElement());
+	
+	attr.getString("name",name);
+	attr.getString("default_image",es->m_default_image);
+	
+	for ( child = node->FirstChild(); child != 0; child = child->NextSibling())
+	{
+		if (child->Type()==TiXmlNode::ELEMENT && !strcmp(child->Value(), "Emotion"))
+		{
+			ElementAttrib attr;
+			attr.parseElement(child->ToElement());
+			
+			std::string emotion;
+			std::string image;
+			attr.getString("name",emotion);
+			attr.getString("image",image);
+			
+			es->m_emotion_images[emotion] = image;
+			DEBUG5("Emotion set %s emotion %s image %s",name.c_str(), emotion.c_str(), image.c_str());
+		}
+	}
+	
+	ObjectFactory::registerEmotionSet(name,es);
 	return true;
 }

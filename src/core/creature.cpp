@@ -143,6 +143,8 @@ bool Creature::init()
 	getTradeInfo().m_trade_partner =0;
 	getTradeInfo().m_last_sold_item=0;
 	
+	m_emotion_set="";
+	
 	return tmp;
 }
 
@@ -3870,7 +3872,7 @@ void Creature::toString(CharConv* cv)
 	cv->toBuffer(getSpeed().m_x);
 	cv->toBuffer(getSpeed().m_y);
 
-
+	cv->toBuffer(m_emotion_set);
 }
 
 void Creature::fromString(CharConv* cv)
@@ -3935,6 +3937,8 @@ void Creature::fromString(CharConv* cv)
 	cv->fromBuffer(speed.m_x);
 	cv->fromBuffer(speed.m_y);
 	setSpeed(speed);
+	
+	cv->fromBuffer(m_emotion_set);
 }
 
 bool Creature::checkAbility(Action::ActionType act)
@@ -4101,6 +4105,7 @@ void Creature::writeNetEvent(NetEvent* event, CharConv* cv)
 		cv->toBuffer(getSpeakText().m_text);
 		cv->toBuffer(getSpeakText().m_emotion);
 		cv->toBuffer(getSpeakText().m_time);
+		cv->toBuffer(m_emotion_set);
 		
 		cv->toBuffer<short>(getSpeakText().m_answers.size());
 		
@@ -4293,6 +4298,7 @@ void Creature::processNetEvent(NetEvent* event, CharConv* cv)
 		cv->fromBuffer(getSpeakText().m_text);
 		cv->fromBuffer(getSpeakText().m_emotion);
 		cv->fromBuffer(getSpeakText().m_time);
+		cv->fromBuffer(m_emotion_set);
 		
 		short n;
 		cv->fromBuffer<short>(n);
@@ -4408,6 +4414,11 @@ void Creature::processNetEvent(NetEvent* event, CharConv* cv)
 
 int Creature::getValue(std::string valname)
 {
+	if (valname == "emotionset")
+	{
+		lua_pushstring(EventSystem::getLuaState() , m_emotion_set.c_str() );
+		return 1;
+	}
 	int ret = m_base_attr.getValue(valname);
 	if (ret >0)
 	{
@@ -4427,6 +4438,13 @@ int Creature::getValue(std::string valname)
 
 bool Creature::setValue(std::string valname)
 {
+	if (valname == "emotionset")
+	{
+		m_emotion_set = lua_tostring(EventSystem::getLuaState() ,-1);
+		lua_pop(EventSystem::getLuaState(), 1);
+		addToNetEventMask(NetEvent::DATA_SPEAK_TEXT);
+		return 0;
+	}
 	bool ret;
 	ret = m_base_attr.setValue(valname, getEventMaskRef());
 	if (ret >0)
@@ -4642,4 +4660,14 @@ void Creature::getFlags(std::set<std::string>& flags)
 	if (flgs & STATIC_SHIELD)
 		flags.insert("static_shield");
 }
+
+std::string Creature::getEmotionImage(std::string emotion)
+{
+	EmotionSet* es = ObjectFactory::getEmotionSet(m_emotion_set);
+	if (es ==0)
+		return "";
+	
+	return es->getEmotionImage(emotion);
+}
+
 

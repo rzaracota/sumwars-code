@@ -25,6 +25,8 @@ std::map<GameObject::Subtype, PlayerBasicData*> ObjectFactory::m_player_data;
 
 std::map<GameObject::Subtype, ProjectileBasicData*> ObjectFactory::m_projectile_data;
 
+std::map<std::string, EmotionSet*> ObjectFactory::m_emotion_sets;
+
 GameObject::Subtype ObjectTemplate::getObject(EnvironmentName env)
 {
 	// Daten aus der Map suchen
@@ -298,6 +300,28 @@ void ObjectFactory::registerMonsterGroup(MonsterGroupName name, MonsterGroup* da
 	}
 }
 
+void ObjectFactory::registerEmotionSet(std::string name, EmotionSet* set)
+{
+	if (m_emotion_sets.count(name)>0)
+	{
+		ERRORMSG("Emotionset with name %s already exists",name.c_str());
+	}
+		else
+	{
+		m_emotion_sets[name] = set;
+	}
+}
+
+EmotionSet* ObjectFactory::getEmotionSet(std::string name)
+{
+	std::map<std::string, EmotionSet*>::iterator it;
+	it = m_emotion_sets.find(name);
+	if (it == m_emotion_sets.end())
+		return 0;
+  
+	return it->second;
+}
+
 void ObjectFactory::init()
 {
 
@@ -355,6 +379,13 @@ void ObjectFactory::cleanup()
 		delete it7->second;
 	} 
 	m_projectile_data.clear();
+	
+	std::map<std::string, EmotionSet*>::iterator it8;
+	for (it8 = m_emotion_sets.begin(); it8 != m_emotion_sets.end(); ++it8)
+	{
+		delete it8->second;
+	}
+	m_emotion_sets.clear();
 }
 
 
