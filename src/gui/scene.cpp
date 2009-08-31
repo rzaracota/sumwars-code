@@ -10,7 +10,7 @@
 #include "graphicmanager.h"
 
 
-std::multimap< GameObject::Subtype, std::pair<bool, PlayerLook> > Scene::m_player_look;
+
 
 
 Scene::Scene(Document* doc,Ogre::RenderWindow* window)
@@ -141,23 +141,6 @@ void Scene::registerMeshes()
 }
 
 
-void Scene::registerPlayerLook(GameObject::Subtype subtype, PlayerLook look, bool male)
-{
-	m_player_look.insert(std::make_pair(subtype, std::make_pair(male,look)));
-}
-
-void Scene::getPlayerLook(GameObject::Subtype subtype, std::list< std::pair<bool, PlayerLook> > &looks)
-{
-	std::multimap< GameObject::Subtype, std::pair<bool, PlayerLook> >::iterator it,jt;
-	it = m_player_look.lower_bound(subtype);
-	jt = m_player_look.upper_bound(subtype);
-
-	while (it != jt)
-	{
-		looks.push_back(it->second);
-		++it;
-	}
-}
 
 
 std::pair<float,float> Scene::getProjection(Vector pos, float height)
@@ -182,7 +165,7 @@ GraphicObject* Scene::createGraphicObject(GameObject* gobj, std::string name)
 	GraphicObject::Type type;
 	if (pl != 0 )
 	{
-		type = pl->getPlayerLook();
+		type = pl->getPlayerLook().m_render_info;
 	}
 	else if (gobj->getType() == "SCRIPTOBJECT")
 	{

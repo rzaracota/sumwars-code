@@ -36,7 +36,7 @@
 	<BasicAbility type="attack" />
 	<ItemRequirementTag name="warrior" />
 	
-	<Look name="warrior_m" gender="male" />
+	<Look name="warrior" render_info="warrior_m" gender="male" emotionset="human_standard"/>
 	<SkilltreeTabs tab1="Fighting skills" tab2="Passive skills" tab3="Fighting spirit" />
 	
 	<Item type="dagger_sw" />
@@ -146,7 +146,7 @@
 	
 	
 	<BasicAbility type="magic_attack" />
-	<Look name="mage_m" gender="male" />
+	<Look name="mage" render_info="mage_m" gender="male" emotionset="human_standard"/>
 	<SkilltreeTabs tab1="Fire magic" tab2="Ice magic" tab3="Air magic" />
 	
 	<Item type="spruce_wnd" />
@@ -258,7 +258,8 @@
 	
 	
 	<BasicAbility type="range_attack" />
-	<Look name="archer_f" gender="female" />
+	<Look name="archer" render_info="archer_f" gender="female" emotionset="human_standard"/>
+	
 	<SkilltreeTabs tab1="Marksmanship" tab2="Passive skills" tab3="Hunter magic" />
 	
 	<Item type="pract_sbw" />
@@ -359,7 +360,8 @@
 	<ItemRequirementTag name="priest" />
 	
 	<BasicAbility type="holy_attack" />
-	<Look name="priest_f" gender="female" />
+	<Look name="priest" render_info="priest_f" gender="female" emotionset="human_standard"/>
+	
 	<SkilltreeTabs tab1="Light Magic" tab2="Water Magic" tab3="Wind Magic" />
 	
 	<Item type="hammer_hmr" />

@@ -96,16 +96,16 @@ void CharCreate::update()
 		StrListItem * sitm = (StrListItem *) itm;
 		
 		// alle moeglichen Looks fuer die Klasse ermitteln und Liste erneuern
-		std::list< std::pair<bool, PlayerLook> > looks;
-		std::list< std::pair<bool, PlayerLook> >::iterator it;
-		Scene::getPlayerLook(sitm->m_data,looks);
+		std::list< PlayerLook > looks;
+		std::list< PlayerLook >::iterator it;
+		ObjectFactory::getPlayerLooks(sitm->m_data,looks);
 		
 		CEGUI::Listbox* looklist = (CEGUI::Listbox*) win_mgr.getWindow("LookList");
 		looklist->resetList();
 		
 		for (it = looks.begin(); it !=	looks.end(); ++it)
 		{
-			looklist->addItem(new StrListItem(it->second,it->second));
+			looklist->addItem(new StrListItem(it->m_name,it->m_name));
 		}
 	}
 }
@@ -184,7 +184,11 @@ bool CharCreate::onLookSelected(const CEGUI::EventArgs& evt)
 		CEGUI::ListboxItem * itm2 = classlist->getFirstSelectedItem();
 		StrListItem * sitm2 = (StrListItem *) itm2;
 		
-		m_document->setNewCharacter(sitm2->m_data,sitm->m_data);
+		PlayerLook* plook = ObjectFactory::getPlayerLook(sitm2->m_data,sitm->m_data);
+		if (plook != 0)
+		{
+			m_document->setNewCharacter(sitm2->m_data,*plook);
+		}
 	}
 	
 	return true;

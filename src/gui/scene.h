@@ -89,15 +89,7 @@ class Scene
 	 */
 	std::pair<float,float> getProjection(Vector pos, float height=0);
 	
-	/**
-	 * \fn static void getPlayerLook(GameObject::Subtype subtype, std::list< std::pair<bool, PlayerLook> > &looks)
-	 * \brief Gibt fuer eine gegebene Spielerklasse alle Moeglichkeiten des Aussehens aus
-	 * \param subtype Spielerklasse
-	 * \param looks Ausgabe: Vektor mit allen Varianten
-	 */
-	static void getPlayerLook(GameObject::Subtype subtype, std::list< std::pair<bool, PlayerLook> > &looks);
-	
-	
+
 	/**
 	 * \fn void updateCharacterView()
 	 * \brief aktualisiert die Ansicht des Spielers
@@ -106,14 +98,7 @@ class Scene
 
 	
 	
-	/**
-	 * \fn static void registerPlayerLook(GameObject::Subtype subtype, PlayerLook look, bool male = true)
-	 * \brief Registiert ein fuer einen Spielertyp zulaessiges Aussehen
-	 * \param subtype Spielertyp
-	 * \param look Aussehen
-	 * \param male Gibt Geschlecht an
-	 */
-	static void registerPlayerLook(GameObject::Subtype subtype, PlayerLook look, bool male = true);
+	
 
 
 	static void getMeshInformation(const Ogre::MeshPtr mesh, size_t &vertex_count, Ogre::Vector3* &vertices,  size_t &index_count,
@@ -215,11 +200,7 @@ class Scene
 	std::map<int,GraphicObject*> m_graphic_objects;
 	
 	
-	/**
-	 * \var static std::multimap< GameObject::Subtype, std::pair<bool, PlayerLook> > m_player_look
-	 * \brief Speichert, fuer welche Spielerklassen welches Aussehen erlaubt ist
-	 */
-	static std::multimap< GameObject::Subtype, std::pair<bool, PlayerLook> > m_player_look;
+	
 
 
 	/**

@@ -27,6 +27,8 @@ std::map<GameObject::Subtype, ProjectileBasicData*> ObjectFactory::m_projectile_
 
 std::map<std::string, EmotionSet*> ObjectFactory::m_emotion_sets;
 
+std::multimap< GameObject::Subtype, PlayerLook> ObjectFactory::m_player_look;
+
 GameObject::Subtype ObjectTemplate::getObject(EnvironmentName env)
 {
 	// Daten aus der Map suchen
@@ -312,6 +314,12 @@ void ObjectFactory::registerEmotionSet(std::string name, EmotionSet* set)
 	}
 }
 
+void ObjectFactory::registerPlayerLook(GameObject::Subtype subtype, PlayerLook look)
+{
+	m_player_look.insert(std::make_pair(subtype, look));
+}
+
+
 EmotionSet* ObjectFactory::getEmotionSet(std::string name)
 {
 	std::map<std::string, EmotionSet*>::iterator it;
@@ -320,6 +328,34 @@ EmotionSet* ObjectFactory::getEmotionSet(std::string name)
 		return 0;
   
 	return it->second;
+}
+
+void ObjectFactory::getPlayerLooks(GameObject::Subtype subtype, std::list<  PlayerLook> &looks)
+{
+	std::multimap< GameObject::Subtype,  PlayerLook >::iterator it,jt;
+	it = m_player_look.lower_bound(subtype);
+	jt = m_player_look.upper_bound(subtype);
+
+	while (it != jt)
+	{
+		looks.push_back(it->second);
+		++it;
+	}
+}
+
+PlayerLook* ObjectFactory::getPlayerLook(GameObject::Subtype subtype, std::string name)
+{
+	std::multimap< GameObject::Subtype,  PlayerLook >::iterator it,jt;
+	it = m_player_look.lower_bound(subtype);
+	jt = m_player_look.upper_bound(subtype);
+
+	while (it != jt)
+	{
+		if (it->second.m_name == name)
+			return &(it->second);
+		++it;
+	}
+	return 0;
 }
 
 void ObjectFactory::init()

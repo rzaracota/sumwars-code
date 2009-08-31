@@ -627,7 +627,7 @@ public:
 	 */
 	Gender getGender()
 	{
-		return m_gender;
+		return m_look.m_gender;
 	}
 	
 	/**
@@ -636,7 +636,7 @@ public:
 	 */
 	void setGender(Gender gender)
 	{
-		m_gender = gender;
+		m_look.m_gender = gender;
 	}
 	
 	/**
@@ -771,12 +771,6 @@ protected:
 	 * \brief bestimmt das Aussehen des Spielers
 	 */
 	PlayerLook m_look;
-	
-	/**
-	 * \var Gender m_gender
-	 * \brief Gibt das Geschlecht an
-	 */
-	Gender m_gender;
 	
 	/**
 	 * \var bool m_using_waypoint

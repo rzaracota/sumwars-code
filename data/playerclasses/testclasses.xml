@@ -40,7 +40,7 @@
 	<ItemRequirementTag name="warrior" />
 	<ItemRequirementTag name="mage" />
 	<BasicAbility type="attack" />
-	<Look name="warrior_m" gender="male" />
+	<Look name="test" render_info="warrior_m" gender="male" emotionset="human_standard"/>
 	<SkilltreeTabs tab1="test skills1" tab2="test skills2" tab3="test skills2" />
 	
 	<Item type="dagger_sw" />

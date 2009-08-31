@@ -402,6 +402,15 @@ class ObjectFactory
 	static void registerEmotionSet(std::string name, EmotionSet* set);
 	
 	/**
+	 * \fn static void registerPlayerLook(GameObject::Subtype subtype, PlayerLook look)
+	 * \brief Registiert ein fuer einen Spielertyp zulaessiges Aussehen
+	 * \param subtype Spielertyp
+	 * \param look Aussehen
+	 * \param male Gibt Geschlecht an
+	 */
+	static void registerPlayerLook(GameObject::Subtype subtype, PlayerLook look);
+	
+	/**
 	 * \fn static EmotionSet* getEmotionSet(std::string name)
 	 * \brief Gibt das Emotionset mit dem angegebenen Name aus
 	 * \param name Name
@@ -428,6 +437,20 @@ class ObjectFactory
 	{
 		return m_player_data;
 	}
+	
+	/**
+	 * \fn static void getPlayerLooks(GameObject::Subtype subtype, std::list< std::pair<bool, PlayerLook> > &looks)
+	 * \brief Gibt fuer eine gegebene Spielerklasse alle Moeglichkeiten des Aussehens aus
+	 * \param subtype Spielerklasse
+	 * \param looks Ausgabe: Vektor mit allen Varianten
+	 */
+	static void getPlayerLooks(GameObject::Subtype subtype, std::list< PlayerLook > &looks);
+	
+	/**
+	 * \fn static PlayerLook* getPlayerLook(GameObject::Subtype subtype, std::string name)
+	 * \brief Gibt zu dem angegebenen Spielertyp und Lookname die Informationen zum Aussehen aus
+	 */
+	static PlayerLook* getPlayerLook(GameObject::Subtype subtype, std::string name);
 	
 	private:	
 	/**
@@ -484,6 +507,12 @@ class ObjectFactory
 	 * \brief Alle Saetze von Emotionsbildern
 	 */
 	static std::map<std::string, EmotionSet*> m_emotion_sets;
+	
+	/**
+	 * \var static std::multimap< GameObject::Subtype,  PlayerLook > m_player_look
+	 * \brief Speichert, fuer welche Spielerklassen welches Aussehen erlaubt ist
+	 */
+	static std::multimap< GameObject::Subtype, PlayerLook > m_player_look;
 	
 };
 

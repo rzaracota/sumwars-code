@@ -359,11 +359,16 @@ bool ObjectLoader::loadPlayer(TiXmlNode* node)
 			}
 			else if (!strcmp(child->Value(), "Look"))
 			{
+				PlayerLook look;
 				std::string gender;
-				std::string look;
-				attr.getString("name",look);
+				look.m_gender = MALE;
+				attr.getString("name",look.m_name);
+				attr.getString("render_info",look.m_render_info);
 				attr.getString("gender",gender);
-				Scene::registerPlayerLook(data->m_subtype,look, gender=="male");
+				if (gender == "female" || gender == "FEMALE")
+					look.m_gender = FEMALE;
+				attr.getString("emotionset",look.m_emotion_set);
+				ObjectFactory::registerPlayerLook(data->m_subtype,look);
 			}
 			else if (!strcmp(child->Value(), "SkilltreeTabs"))
 			{

@@ -773,6 +773,7 @@ void Dialogue::fromString(CharConv* cv)
 void Dialogue::skipText(int id)
 {
 	m_player_skips.insert(id);
+	DEBUG("players %i skips %i",m_nr_players, m_player_skips.size());
 	if ((int) m_player_skips.size() == m_nr_players)
 	{
 		// aktuellen Text ueberspringen

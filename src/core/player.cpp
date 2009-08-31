@@ -1727,12 +1727,10 @@ void Player::toString(CharConv* cv)
 	DEBUG5("Player::tostring");
 	Creature::toString(cv);
 
-	cv->toBuffer((char*) m_name.c_str(),32);
+	cv->toBuffer(m_name);
 
 	cv->toBuffer(getBaseAttr()->m_level);
-
-	cv->toBuffer(m_look);
-	
+	m_look.toString(cv);
 	// Items
 	char cnt =0;
 	Item* item;
@@ -1775,13 +1773,11 @@ void Player::toString(CharConv* cv)
 void Player::fromString(CharConv* cv)
 {
 	Creature::fromString(cv);
-	char tmp[32];
-	cv->fromBuffer(tmp,32);
-	m_name = tmp;
+	cv->fromBuffer(m_name);
 
 	cv->fromBuffer(getBaseAttr()->m_level);
-	cv->fromBuffer(m_look);
-	
+	m_look.fromString(cv);
+	m_emotion_set = m_look.m_emotion_set;
 	char cnt;
 	cv->fromBuffer(cnt);
 	DEBUG5("number of items: %i",cnt);
@@ -1926,12 +1922,11 @@ void Player::toSavegame(CharConv* cv)
 	
 	cv->toBuffer(getSubtype());
 	cv->toBuffer(m_name);
-	cv->toBuffer(m_look);
+	m_look.toString(cv);
 	cv->printNewline();
 	
 	cv->toBuffer(getBaseAttr()->m_level);
 	cv->toBuffer(getBaseAttr()->m_max_health);
-	cv->toBuffer<char>(m_gender);
 	cv->printNewline();
 
 	cv->toBuffer(getBaseAttr()->m_armor);
@@ -2026,7 +2021,8 @@ void Player::toSavegame(CharConv* cv)
 
 void Player::fromSavegame(CharConv* cv, bool local)
 {
-
+	DEBUG("from Savegame");
+	
 	
 	short version;
 	cv->fromBuffer<short>(version);
@@ -2035,18 +2031,13 @@ void Player::fromSavegame(CharConv* cv, bool local)
 	init();
 	
 	cv->fromBuffer(m_name);
-	cv->fromBuffer(m_look);	
-	
-	
+	m_look.fromString(cv);	
+	m_emotion_set = m_look.m_emotion_set;
 	
 	cv->fromBuffer(getBaseAttr()->m_level);
 	cv->fromBuffer<float>(getBaseAttr()->m_max_health);
 	getDynAttr()->m_health = getBaseAttr()->m_max_health;
 
-	char gender;
-	cv->fromBuffer(gender);
-	m_gender = (Gender) gender;
-	
 	cv->fromBuffer(getBaseAttr()->m_armor);
 	cv->fromBuffer(getBaseAttr()->m_attack);
 	if (version>=10)

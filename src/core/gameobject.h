@@ -531,8 +531,6 @@ class GameObject
 		bool m_destroyed;
 };
 
-typedef std::string PlayerLook;
-
 /**
  * Liste von WorldObject Zeigern sortiert nach ihrer ID
  */

@@ -10,6 +10,76 @@ enum Gender
  FEMALE = 2,
 };
 
+/**
+ * \struct PlayerLook
+ * \brief Enthaelt grundlegende Informationen fuer die Darstellung des Spielers
+ */
+struct PlayerLook
+{
+	/**
+	 * \var std::string m_name
+	 * \brief Geschlecht des Spielers
+	 */
+	Gender m_gender;
+	
+	/**
+	 * \var std::string m_name
+	 * \brief Name des Looks
+	 */
+	std::string m_name;
+	
+	/**
+	 * \var std::string m_render_info
+	 * \brief Name des RenderInfo
+	 */
+	std::string m_render_info;
+	
+	/**
+	 * \var std::string m_emotion_set
+	 * \brief Name des Satzes von Emotionen des Spielers
+	 */
+	std::string m_emotion_set;
+	
+	/**
+	 * \fn void operator=(PlayerLook other)
+	 * \brief Zuweisungsoperator
+	 */
+	void operator=(PlayerLook other)
+	{
+		m_gender = other.m_gender;
+		m_render_info = other.m_render_info;
+		m_emotion_set = other.m_emotion_set;
+		m_name = other.m_name;
+	}
+	
+	/**
+	 * \fn void toString(CharConv* cv)
+	 * \brief Konvertiert das Objekt in einen String und schreibt ihn in der Puffer
+	 * \param cv Ausgabepuffer
+	*/
+	void toString(CharConv* cv)
+	{
+		cv->toBuffer<char>(m_gender);
+		cv->toBuffer(m_render_info);
+		cv->toBuffer(m_emotion_set);
+	}
+
+
+	/**
+	 * \fn void fromString(CharConv* cv)
+	 * \brief Erzeugt das Objekt aus einem String
+	 * \param cv Eingabepuffer
+	 */
+	void fromString(CharConv* cv)
+	{
+		char tmp;
+		cv->fromBuffer(tmp);
+		m_gender = (Gender) tmp;
+		cv->fromBuffer(m_render_info);
+		cv->fromBuffer(m_emotion_set);
+	}
+};
+
 struct LearnableAbility
 {
 	Action::ActionType m_type;

@@ -70,6 +70,9 @@ Item::Item(int id)
 
 Item::Item(ItemBasicData& data, int id)
 {
+	m_magic_power =0;
+	m_rarity = NORMAL;
+	
 	if (id ==0)
 	{
 		if (World::getWorld() !=0)

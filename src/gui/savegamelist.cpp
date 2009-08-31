@@ -83,19 +83,20 @@ void SavegameList::update()
 	Ogre::FileInfoList::iterator it;
 	files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("Savegame","*.sav");
 	
-	std::ifstream file;
-	char head[60];
+	std::fstream file;
 	char bin;
 	int n=0;
-	int lev;
+	char lev;
 	std::string cl;
 	
-	std::string name,look;
+	std::string name;
 	std::string classname;
 	std::ostringstream stream;
-	char* bp;
 	std::string filename;
+	PlayerLook look;
+	short version;
 	// iterieren ueber die Files
+	unsigned char* data;
 	for (it = files->begin(); it!= files->end();++it)
 	{
 		filename = it->archive->getName();
@@ -111,41 +112,28 @@ void SavegameList::update()
 
 			file.get(bin);
 			
-			if (bin =='0')
+			CharConv* save;
+			data =0;
+			if (bin == '0')
 			{
-				int version;
-				file >> version;
-				file >> classname;
-				file >> name;
-				file >> look;
-				file >> lev;
+				save = new CharConv(&file);
 			}
 			else
 			{
+				int len;
+				file.read((char*) &len,4);
+				data = new unsigned char[len];
+				file.read((char*) data,len);
 			
-				// Daten einlesen
-				for (int i=1;i<60;i++)
-				{
-					file.get(head[i]);
-				}
-				
-				// nicht benoetigte Headerdaten ueberspringen
-				bp = head+7;
-	
-				char ctmp[11];
-				ctmp[10] = '\0';
-				strncpy(ctmp,bp,10);
-				classname = ctmp;
-	
-				bp +=10;
-				char ntmp[33];
-				ntmp[32] = '\0';
-				strncpy(ntmp,bp,32);
-				name = ntmp;
-				
-				// Level einlesen
-				lev = *(bp+52);
+				save = new CharConv(data,len);
 			}
+			
+			save->fromBuffer(version);
+			save->fromBuffer(classname);
+			save->fromBuffer(name);
+			look.fromString(save);
+			save->fromBuffer(lev);
+			
 			stream.str("");
 			stream << (int) lev;
 			savelist->setItem(new ListItem(stream.str()),2,n);
@@ -154,6 +142,10 @@ void SavegameList::update()
 			n++;
 
 			file.close();
+			
+			delete save;
+			if (data != 0)
+				 delete data;
 		}
 	}
 	
