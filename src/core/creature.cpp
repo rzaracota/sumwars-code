@@ -1089,6 +1089,7 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 					dia->setSpeakerPosition(goalobj->getId(), Dialogue::UPPER_RIGHT);
 					dia->changeTopic("start");
 					getRegion()->insertDialogue(dia);
+					EventSystem::setDialogue(0);
 				}
 			}
 		}
@@ -1944,6 +1945,7 @@ void Creature::calcWalkDir(Vector goal,WorldObject* goalobj)
 		m_action.m_elapsed_time =0;
 		m_command.m_damage_mult=1;
 		addToNetEventMask(NetEvent::DATA_COMMAND | NetEvent::DATA_ACTION);
+		clearCommand(true);
 		return;
 	}
 	else
@@ -1956,7 +1958,7 @@ void Creature::calcWalkDir(Vector goal,WorldObject* goalobj)
 
 void Creature::clearCommand(bool success)
 {
-	
+	DEBUG5("clear command %s %f",m_command.m_type.c_str() , m_script_command_timer);
 	if (hasScriptCommand() && m_command.m_type!= "noaction")
 	{
 		DEBUG5("command %s ended with success %i",m_command.m_type.c_str(), success);

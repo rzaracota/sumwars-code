@@ -431,6 +431,16 @@ class Dialogue
 		 */
 		void skipText(int id);
 		
+		/**
+		 * \fn void setActive(bool active)
+		 * \brief Aktiviert und Deaktiviert den Dialog
+		 * \param active neuer Zustand
+		 */
+		void setActive(bool active)
+		{
+			m_active = active;
+		}
+		
 	private:
 		
 		/**
@@ -536,7 +546,11 @@ class Dialogue
 		 */
 		std::set<int> m_player_skips;
 		
-		
+		/**
+		 * \var bool m_active
+		 * \brief auf true gesetzt, wenn der Dialog aktiv ist
+		 */
+		bool m_active;
 		
 };
 

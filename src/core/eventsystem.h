@@ -467,6 +467,19 @@ class EventSystem
 		static int setRefName(lua_State *L);
 		
 		/**
+		 * \fn static int setDialogueActive(lua_State *L)
+		 * \brief Aktiviert beziehungsweise deaktiviert einen Dialog
+		 * \param L Lua Status
+		 */
+		static int setDialogueActive(lua_State *L);
+		
+		/**
+		 * \fn static int setCurrentDialogue(lua_State *L)
+		 * \brief Setzt einen Dialog
+		 */
+		static int setCurrentDialogue(lua_State *L);
+		
+		/**
 		 * \fn static int createEvent(lua_State *L)
 		 * \brief Erzeugt ein neues Event. Auf dieses Event beziehen sich die folgenden addCondition und addEffect Aufrufe
 		 *  \param L Lua Status

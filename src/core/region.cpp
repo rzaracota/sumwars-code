@@ -1620,6 +1620,7 @@ void Region::update(float time)
 				++it5;
 			}
 		}
+		EventSystem::setDialogue(0);
 	}
 	
 	m_camera.update(time);

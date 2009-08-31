@@ -136,18 +136,23 @@
 			<Effect>
 				rescue_willard.asked = true
 				addUnitCommand(fenor,'walk',trigger.player);
-				startTimer("askRescueWillard",1000);
-				addTriggerVariable("player",trigger.player);
-			</Effect>
-		</Event>
-		
-		<Event trigger ="askRescueWillard" once = "true">
-			<Effect>
 				createDialogue()
 				addSpeaker(trigger.player,'player')
 				addSpeaker(fenor,'Fenor Marken')
 				setTopicBase('Fenor Marken')
 				changeTopic('rescue_willard')
+				setDialogueActive(false);
+			</Effect>
+		</Event>
+		
+		<Event trigger ="command_complete" once = "true">
+			<Condition>
+				return (trigger.unit == fenor) 
+			</Condition>	
+			<Effect>
+				print("lua: command_complete")
+				setCurrentDialogue(fenor);
+				setDialogueActive(true);
 			</Effect>
 		</Event>
 		

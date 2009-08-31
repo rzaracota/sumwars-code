@@ -145,6 +145,7 @@ Dialogue::Dialogue(Region* region, std::string topic_base,int id)
 	{
 		m_active_speaker[i] =0;
 	}
+	m_active = true;
 }
 
 Dialogue::~Dialogue()
@@ -559,6 +560,11 @@ void Dialogue::update(float time)
 		}
 		else
 		{
+			
+			// bei inaktivem Dialog keine neuen Saetze erzeugen
+			if (!m_active)
+				return;
+			
 			m_player_skips.clear();
 			
 			// Aenderung eingetreten

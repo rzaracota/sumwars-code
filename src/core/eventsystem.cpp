@@ -94,6 +94,9 @@ void EventSystem::init()
 	lua_register(m_lua, "setTopicBase",setTopicBase );
 	lua_register(m_lua, "addSpeaker", addSpeaker);
 	lua_register(m_lua, "getSpeaker", getSpeaker);
+	lua_register(m_lua, "setDialogueActive", setDialogueActive);
+	lua_register(m_lua, "setCurrentDialogue", setCurrentDialogue);
+	
 	lua_register(m_lua, "setRefName", setRefName);
 	lua_register(m_lua, "getRolePlayers", getRolePlayers);
 	lua_register(m_lua, "teleportPlayer", teleportPlayer);
@@ -1704,6 +1707,43 @@ int EventSystem::setRefName(lua_State *L)
 		ERRORMSG("Syntax: setRefName(int id, string name)");
 	}
 
+	return 0;
+}
+
+int EventSystem::setDialogueActive(lua_State *L)
+{
+	int argc = lua_gettop(L);
+	if (argc>=1 &&  lua_isboolean(L,1))
+	{
+		if (m_dialogue ==0)
+			return 0;
+		
+		bool act = lua_toboolean(L,1);
+		m_dialogue->setActive(act);
+	}
+	else
+	{
+		ERRORMSG("Syntax: setDialogueActive(true | false)");
+	}
+	return 0;
+}
+
+int EventSystem::setCurrentDialogue(lua_State *L)
+{
+	int argc = lua_gettop(L);
+	if (argc>=1 &&  lua_isnumber(L,1))
+	{
+		int id = int (lua_tonumber(L,1));
+		WorldObject* wo = m_region->getObject(id);
+		if (wo!=0 && wo->isCreature())
+		{
+			m_dialogue = static_cast<Creature*>(wo)->getDialogue();
+		}
+	}
+	else
+	{
+		ERRORMSG("Syntax: setCurrentDialogue(int objectid)");
+	}
 	return 0;
 }
 

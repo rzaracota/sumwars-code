@@ -1236,6 +1236,7 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 			clearSpeakText();
 			EventSystem::setDialogue(dia);
 			dia->changeTopic(it->second);
+			EventSystem::setDialogue(0);
 			break;
 			
 		case BUTTON_TRADE_END:
