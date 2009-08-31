@@ -341,7 +341,7 @@ void Monster::updateCommand()
 		cmd->m_goal_object_id = m_ai.m_command.m_goal_object_id;
 		cmd->m_range = m_ai.m_command.m_range;
 		
-		DEBUG5("calculated command %s",m_ai.m_command.m_type.c_str());
+		DEBUG("calculated command %s",m_ai.m_command.m_type.c_str());
 		
 
 		addToNetEventMask(NetEvent::DATA_COMMAND);
@@ -433,11 +433,13 @@ void Monster::evalCommand(Action::ActionType act)
 		goal_list = m_ai.m_allies;
 	}
 
-	if (aci->m_timer_nr==1 && m_timer1>0 || aci->m_timer_nr==2 && m_timer2>0)
+	int timernr = getTimerNr(act);
+	if (timernr==1 && m_timer1>0 || timernr==2 && m_timer2>0)
 	{
 		// Aktion erfordert einen Timer, der nicht frei ist
 		return;
 	}
+	DEBUG5("action %s timer %i",act.c_str(), timernr);
 
 	// Schaden der Aktion ausrechnen
 	Damage dmg;

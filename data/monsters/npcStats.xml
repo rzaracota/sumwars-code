@@ -41,7 +41,7 @@
 		
 		<Ability type="noaction"/>
 		<Ability type="walk"/>
-		<Ability type="die">
+		<Ability type="die"/>
 		
 	</BasicAttributes>
 	
@@ -82,7 +82,7 @@
 					>
 		<Ability type="noaction"/>
 		<Ability type="walk"/>
-		<Ability type="die">
+		<Ability type="die"/>
 		
 	</BasicAttributes>
 	
@@ -125,7 +125,7 @@
 		
 		<Ability type="noaction"/>
 		<Ability type="walk"/>
-		<Ability type="die">
+		<Ability type="die"/>
 		
 		<Ability type="attack"/>
 	

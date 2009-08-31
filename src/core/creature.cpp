@@ -190,11 +190,15 @@ int Creature::getTimerNr(Action::ActionType action)
 	{
 		// wenn gleich -1, so wird der Standardtimer verwendet
 		if (it->second.m_timer_nr != -1)
+		{
 			return it->second.m_timer_nr;
+		}
 		
 		Action::ActionInfo* aci = Action::getActionInfo(action);
 		if (aci ==0)
+		{
 			return 0;
+		}
 		
 		return aci->m_timer_nr;
 	}
