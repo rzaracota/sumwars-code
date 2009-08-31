@@ -498,6 +498,7 @@ void Creature::performAction(float &time)
 	// Zielobjekt der Aktion
 	WorldObject* goalobj =0;
 	Vector goal = m_action.m_goal;
+
 	
 	// Testen ob der kritische Prozentsatz durch das aktuelle Zeitquantum ueberschritten wurde
 	if (p1<pct && pct <=p2 && World::getWorld()->isServer())
@@ -615,6 +616,19 @@ void Creature::performAction(float &time)
 	// Wenn die Aktion beenden wurde evtl Kommando abschließen
 	if (finish)
 	{
+		float disttogoal = getShape()->m_center.distanceTo(goal);
+		if (m_action.m_goal_object_id!=0 && m_action.m_type!= "take_item")
+		{
+			// Zielobjekt durch ID gegeben, Objekt von der Welt holen
+			goalobj = getRegion()->getObject(m_action.m_goal_object_id);
+			if (goalobj != 0)
+			{
+				goal = goalobj->getShape()->m_center;
+				disttogoal = goalobj->getShape()->getDistance(*(getShape()));
+			}
+			
+		}
+		
 		DEBUG5("finished action");
 		
 		if (m_action.m_type == "walk")
@@ -636,7 +650,7 @@ void Creature::performAction(float &time)
 		// Kommando ist beendet wenn die gleichnamige Aktion beendet wurde
 		// Ausnahme: Bewegungskommando ist beendet wenn das Ziel erreicht ist
 		Action::ActionType baseact = ainfo->m_base_action;
-		if (((m_action.m_type == m_command.m_type) || m_action.m_type == baseact) && m_action.m_type != "walk" || m_command.m_type == "walk" && getShape()->m_center.distanceTo(goal) < getBaseAttr()->m_step_length 
+		if (((m_action.m_type == m_command.m_type) || m_action.m_type == baseact) && m_action.m_type != "walk" || m_command.m_type == "walk" && disttogoal < getBaseAttr()->m_step_length 
 				  && !(m_command.m_type == "charge" || m_command.m_type == "storm_charge"))
 		{
 			bool recalc = false;
@@ -649,6 +663,7 @@ void Creature::performAction(float &time)
 			if (m_command.m_type != "noaction")
 			{
 				addToNetEventMask(NetEvent::DATA_COMMAND);
+				DEBUG5("goal %f %f goalobj %i",goal.m_x, goal.m_y, m_action.m_goal_object_id);
 				clearCommand(true);
 			}
 			m_command.m_type = "noaction";
@@ -1368,7 +1383,7 @@ void Creature::updateCommand()
 			{
 				m_script_commands.pop_front();
 			}
-			DEBUG5("script command %s time %f",m_command.m_type.c_str(), m_script_command_timer);
+			DEBUG5("script command %s at %i time %f",m_command.m_type.c_str(), m_command.m_goal_object_id, m_script_command_timer);
 		}
 		else
 		{
@@ -1588,6 +1603,7 @@ void Creature::calcAction()
 
 			}
 		}
+		m_action.m_goal_object_id = m_command.m_goal_object_id;
 
 	}
 	else
