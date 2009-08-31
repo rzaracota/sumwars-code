@@ -341,7 +341,7 @@ void Monster::updateCommand()
 		cmd->m_goal_object_id = m_ai.m_command.m_goal_object_id;
 		cmd->m_range = m_ai.m_command.m_range;
 		
-		DEBUG("calculated command %s",m_ai.m_command.m_type.c_str());
+		DEBUG5("calculated command %s",m_ai.m_command.m_type.c_str());
 		
 
 		addToNetEventMask(NetEvent::DATA_COMMAND);
@@ -382,6 +382,15 @@ void Monster::evalCommand(Action::ActionType act)
 	WorldObjectValueList::iterator it;
 	WorldObjectValueList* goal_list=0;
 	Creature* cgoal=0;
+	
+	std::map<std::string, AbilityInfo>::iterator at;
+	at = getBaseAttrMod()->m_abilities.find(act);
+	if (at == getBaseAttrMod()->m_abilities.end())
+		return;
+	
+	AbilityInfo& abltinfo = at->second;
+	if (abltinfo.m_rating <0)
+		return;
 	
 	// Liste, die nur das Objekt selber enthaelt
 	WorldObjectValueList self;
@@ -432,6 +441,10 @@ void Monster::evalCommand(Action::ActionType act)
 		// Faehigkeiten auf Verbuendete
 		goal_list = m_ai.m_allies;
 	}
+	else if (aci->m_target_type == Action::NONE)
+	{
+		return;
+	}
 
 	int timernr = getTimerNr(act);
 	if (timernr==1 && m_timer1>0 || timernr==2 && m_timer2>0)
@@ -440,16 +453,6 @@ void Monster::evalCommand(Action::ActionType act)
 		return;
 	}
 	DEBUG5("action %s timer %i",act.c_str(), timernr);
-
-	// Schaden der Aktion ausrechnen
-	Damage dmg;
-	calcDamage(act,dmg);
-	m_ai.m_command_count ++;
-	
-	// weitere Wirkungen der Aktion ausrechnen
-	CreatureBaseAttrMod cbam;
-	CreatureDynAttrMod cdam;
-	calcActionAttrMod(act,cbam,cdam);
 
 	if (goal_list)
 	{
@@ -461,42 +464,17 @@ void Monster::evalCommand(Action::ActionType act)
 			dist = it->second;
 
 			// Bewertung:
-			
-			
-			value =0;
-			if (aci->m_target_type == Action::SELF || aci->m_target_type == Action::PARTY || aci->m_target_type == Action::PARTY_MULTI)
-			{
-				float extra_value =0;
-				extra_value += 2*(cbam.m_dstrength + cbam.m_dwillpower +  cbam.m_dmagic_power + cbam.m_ddexterity);
-				extra_value += cbam.m_dpower + cbam.m_dattack + cbam.m_dblock;
-				
-				// TODO: bessere Bewertungen
-				extra_value += cbam.m_dwalk_speed / 50;
-				extra_value += cbam.m_dattack_speed / 20;
-				
-				if (aci->m_target_type == Action::PARTY_MULTI)
-				{
-					extra_value *= m_ai.m_allies->size();
-				}
-				
-				DEBUG5("extra value %f",extra_value);
-				
-				value += extra_value;
-			}
-			else
-			{
-				value = (dmg.getSumMinDamage()+dmg.getSumMaxDamage())/(dist+0.1);
-			}
+			value = abltinfo.m_rating;
+			value += Random::randf(abltinfo.m_random_rating);
+			value += goal_list->size() * abltinfo.m_all_target_rating;
 
 			if (aci->m_target_type == Action::MELEE || ranged_move)
 			{
-				value *= 3/(3+dist);
+				value *= 3/(3+std::max(0.0f,dist - getBaseAttr()->m_attack_range));
 			}
-			
-			bool takerand = m_ai.m_rand_command && (Random::randi(m_ai.m_command_count) ==1);
-			DEBUG5("value %f",value);
 
-			if (value > m_ai.m_command_value || takerand)
+			DEBUG5("command %s at %i rating value %f",act.c_str(),cgoal->getId(),value);
+			if (value > m_ai.m_command_value)
 			{
 				DEBUG5("set new command %s value %f",act.c_str(),value);
 				

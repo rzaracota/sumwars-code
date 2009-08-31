@@ -35,7 +35,7 @@
 		attack_range="0.5"
 	>
 		<Ability type="walk" />
-		<Ability type="attack" />
+		<Ability type="attack"  rating="1"/>
 		<Ability type="die" />
 		<Ability type="noaction" />
 	</BasicAttributes>
@@ -81,10 +81,10 @@
 		attack_range="0.5"
 	>
 		<Ability type="walk" />
-		<Ability type="attack" />
+		<Ability type="attack"  rating="1"/>
 		<Ability type="die" />
 		<Ability type="noaction" />
-		<Ability type="fire_ball" />
+		<Ability type="fire_ball"  rating="3"/>
 		
 	</BasicAttributes>
 	
@@ -128,15 +128,15 @@
 		attack_range="5"
 	>
 		<Ability type="walk" />
-		<Ability type="attack" />
+		<Ability type="attack" rating="1"/>
 		<Ability type="die" />
 		<Ability type="noaction" />
-		<Ability type="fire_ball" />
-		<Ability type="hammer_bash" />
-		<Ability type="whirl_blow" />
-		<Ability type="storm_charge" />
+		<Ability type="fire_ball" rating="1.5" />
+		<Ability type="hammer_bash" rating="2" />
+		<Ability type="whirl_blow" rating="0" all_target_rating="0.75"/>
+		<Ability type="storm_charge" rating="3" />
 		<Ability type="inflame" />
-		<Ability type="fire_storm" />
+		<Ability type="fire_storm" rating="3"/>
 		
 	</BasicAttributes>
 	

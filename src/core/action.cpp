@@ -97,8 +97,10 @@ void Action::loadAbility(TiXmlNode* node)
 	attr.getFloat("critical_percent",a->m_critical_perc,0);
 	attr.getFloat("radius",a->m_radius,0);
 	std::string target;
-	attr.getString("target_type",target,"melee");
-	if (target =="melee")
+	attr.getString("target_type",target,"none");
+	if (target =="none")
+		a->m_target_type = NONE;
+	else if (target =="melee")
 		a->m_target_type = MELEE;	
 	else if (target =="ranged")
 		a->m_target_type = RANGED;	

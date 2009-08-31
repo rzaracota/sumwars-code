@@ -23,8 +23,7 @@
 		 timer_nr="0.000000" 
 		 timer_value="0.000000" 
 		 base_ability="noaction" 
-		 critical_percent="-1.000000" 
-		 target_type="self"/>
+		 critical_percent="-1.000000" />
 
 <Ability type="noaction" 
 		 name="no action" 

@@ -269,7 +269,7 @@ AIR
 		attack_range="0.5"
 	>
 		<Ability type="walk" />
-		<Ability type="attack" />
+		<Ability type="attack" rating="1"/>
 		<Ability type="die" />
 		<Ability type="noaction" />
 		
@@ -315,7 +315,7 @@ AIR
 					attack_range="1"
 					>
 		<Ability type="walk" />
-		<Ability type="attack"/>
+		<Ability type="attack" rating="1"/>
 		<Ability type="die" />
 		<Ability type="noaction" />
 		
@@ -361,9 +361,9 @@ AIR
 					attack_range="1"
 					>
 		<Ability type="walk" />
-		<Ability type="attack"/>
-		<Ability type="lightning" />
-		<Ability type="blade_storm" />
+		<Ability type="attack"  rating="1"/>
+		<Ability type="lightning"  rating="2"/>
+		<Ability type="blade_storm"  rating="0" all_target_rating="0.5"/>
 		<Ability type="die" />
 		<Ability type="noaction" />
 	</BasicAttributes>
@@ -409,7 +409,7 @@ AIR
 					attack_range="1"
 					>
 		<Ability type="walk" />
-		<Ability type="range_attack"/>
+		<Ability type="range_attack" rating="1"/>
 		<Ability type="die" />
 		<Ability type="noaction" />
 	</BasicAttributes>
@@ -453,7 +453,7 @@ AIR
 		attack_range="0.5"
 	>
 		<Ability type="walk" />
-		<Ability type="attack"/>
+		<Ability type="attack" rating="1"/>
 		<Ability type="die" />
 		<Ability type="noaction" />
 	</BasicAttributes>
@@ -498,7 +498,7 @@ AIR
 		attack_range="0.5"
 	>
 		<Ability type="walk" />
-		<Ability type="attack"/>
+		<Ability type="attack" rating="1"/>
 		<Ability type="die" />
 		<Ability type="noaction" />
 	</BasicAttributes>
@@ -543,7 +543,7 @@ AIR
 					attack_range="1"
 					>
 		<Ability type="walk" />
-		<Ability type="attack"/>
+		<Ability type="attack" rating="1"/>
 		<Ability type="die" />
 		<Ability type="noaction" />
 	</BasicAttributes>
@@ -589,7 +589,7 @@ AIR
 					>
 		
 		<Ability type="walk" />
-		<Ability type="range_attack"/>
+		<Ability type="range_attack" rating="1"/>
 		<Ability type="die" />
 		<Ability type="noaction" />
 	</BasicAttributes>
@@ -634,7 +634,7 @@ AIR
 		attack_range="0.5"
 	>
 		<Ability type="walk" />
-		<Ability type="range_attack"/>
+		<Ability type="range_attack" rating="1"/>
 		<Ability type="die" />
 		<Ability type="noaction" />
 		
@@ -680,7 +680,7 @@ AIR
 					attack_range="1"
 					>
 	<Ability type="walk" />
-	<Ability type="range_attack"/>
+	<Ability type="range_attack" rating="1"/>
 	<Ability type="die" />
 	<Ability type="noaction" />
 		
@@ -728,9 +728,9 @@ AIR
 	>
 		
 	<Ability type="walk" />
-	<Ability type="attack"/>
+	<Ability type="attack" rating="1"/>
 	<Ability type="die" />
-	<Ability type="ice_bolt" />
+	<Ability type="ice_bolt"  rating="3"/>
 	<Ability type="noaction" />
 		
 		<Immunity type="berserk"/>
@@ -776,7 +776,7 @@ AIR
 		attack_range="1"
 	>
 		<Ability type="walk" />
-		<Ability type="attack"/>
+		<Ability type="attack" rating="1"/>
 		<Ability type="die" />
 		<Ability type="noaction" />
 		
@@ -826,7 +826,7 @@ AIR
 					attack_range="1"
 					>
 		<Ability type="walk" />
-		<Ability type="range_attack"/>
+		<Ability type="range_attack" rating="1"/>
 		<Ability type="summoned" time="2000" />
 		<Ability type="die" />
 		<Ability type="noaction" />
@@ -879,7 +879,7 @@ AIR
 		attack_range="1"
 	>
 		<Ability type="walk" />
-		<Ability type="attack"/>
+		<Ability type="attack" rating="1"/>
 		<Ability type="die" />
 		<Ability type="noaction" />
 		
@@ -930,7 +930,7 @@ AIR
 		attack_range="1"
 	>
 		<Ability type="walk" />
-		<Ability type="attack"/>
+		<Ability type="attack" rating="1"/>
 		<Ability type="die" />
 		<Ability type="noaction" />
 		
@@ -982,7 +982,7 @@ AIR
 		attack_range="1"
 	>
 		<Ability type="walk" />
-		<Ability type="attack"/>
+		<Ability type="attack" rating="1"/>
 		<Ability type="die" />
 		<Ability type="noaction" />
 		
@@ -1033,7 +1033,7 @@ AIR
 		attack_range="1"
 	>
 		<Ability type="walk" />
-		<Ability type="attack"/>
+		<Ability type="attack" rating="1"/>
 		<Ability type="die" />
 		<Ability type="noaction" />
 		
@@ -1085,7 +1085,7 @@ AIR
 	>
 		<Ability type="walk"/>
 		
-		<Ability type="attack"/>
+		<Ability type="attack" rating="1"/>
 		<Ability type="noaction" />
 		<Ability type="die"/>
 		
@@ -1131,7 +1131,7 @@ AIR
 		attack_range="1"
 	>
 		<Ability type="walk"/>		
-		<Ability type="attack"/>
+		<Ability type="attack" rating="1"/>
 		<Ability type="die" />
 		<Ability type="noaction" />
 		
@@ -1183,7 +1183,7 @@ AIR
 		attack_range="1"
 	>
 		<Ability type="walk"/>		
-		<Ability type="attack"/>
+		<Ability type="attack" rating="1"/>
 		<Ability type="die" />
 		<Ability type="noaction" />
 

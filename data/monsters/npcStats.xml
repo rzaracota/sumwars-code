@@ -127,7 +127,7 @@
 		<Ability type="walk"/>
 		<Ability type="die"/>
 		
-		<Ability type="attack"/>
+		<Ability type="attack" rating="1"/>
 	
 		
 	</BasicAttributes>

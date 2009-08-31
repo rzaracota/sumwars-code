@@ -64,7 +64,7 @@ public:
 	 */
 	enum TargetType
 	{
-
+		NONE=0,
 		MELEE = 1,
 		RANGED = 2,
 		PASSIVE = 4,

@@ -25,6 +25,9 @@ struct AbilityInfo
 		m_timer_nr =-1;
 		m_time =0;
 		m_timer =0;
+		m_rating=0;
+		m_all_target_rating =0;
+		m_random_rating=0;
 	}
 	
 	
@@ -45,6 +48,24 @@ struct AbilityInfo
 	 * \brief Gibt die Zeitdauer in ms an, die der Timer laeuft, der beim Benutzen dieser Aktion gestartet wird.
 	 */
 	float m_timer;
+	
+	/**
+	 * \var float m_rating
+	 * \brief Bewertung der Aktion durch die KI
+	 */
+	float m_rating;
+	
+	/**
+	 * \var float m_all_target_rating
+	 * \brief Bewertung, die mit der Anzahl Ziele Multipliziert wird
+	 */
+	float m_all_target_rating;
+		
+	/**
+	 * \var float m_random_rating
+	 * \brief Wert, der maximal zufaellig dazu addiert wird
+	 */
+	float m_random_rating;
 };
 
 /**
