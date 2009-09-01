@@ -2,7 +2,7 @@
 <!-- WAR, PRI, ARC, MAG-->
 <Item type="armor" subtype="cloth_arm" name="cloth armor" size="medium">
 	<Image image="set:gobLeg_Arm.png image:full_image" />
-	<Mesh file="armor.mesh" />
+	<RenderInfo name="leathArm" />
 	<Attribute
 			level_requirement="1"
 			character_requirement="all"
@@ -34,7 +34,7 @@
 <!-- WAR, PRI, ARC, MAG-->
 <Item type="armor" subtype="leath_arm" name="leather armor" size="medium">
 	<Image image="set:gobLeg_Arm.png image:full_image" />
-	<Mesh file="armor.mesh" />
+	<RenderInfo name="leathArm" />
 	<Attribute
 			level_requirement="3"
 			character_requirement="all" 
@@ -66,7 +66,7 @@
 <!-- WAR, PRI, ARC-->
 <Item type="armor" subtype="rivet_arm" name="rivet armor" size="medium">
 	<Image image="set:gobLeg_Arm.png image:full_image" />
-	<Mesh file="armor.mesh" />
+	<RenderInfo name="leathArm" />
 	<Attribute
 			level_requirement="5"
 			character_requirement="warrior,priest,archer" 
@@ -98,7 +98,7 @@
 <!-- WAR, ARC-->
 <Item type="armor" subtype="bandit_arm" name="bandit armor" size="medium">
 	<Image image="set:gobLeg_Arm.png image:full_image" />
-	<Mesh file="armor.mesh" />
+	<RenderInfo name="leathArm" />
 	<Attribute
 			level_requirement="8"
 			character_requirement="warrior,archer" 
@@ -130,7 +130,7 @@
 <!-- PRI-->
 <Item type="armor" subtype="novice_arm" name="novice armor" size="medium">
 	<Image image="set:gobLeg_Arm.png image:full_image" />
-	<Mesh file="armor.mesh" />
+	<RenderInfo name="leathArm" />
 	<Attribute
 			level_requirement="8"
 			character_requirement="priest" 
@@ -162,7 +162,7 @@
 <!-- WAR, PRI-->
 <Item type="armor" subtype="merc_arm" name="mercenary armor" size="medium">
 	<Image image="set:gobLeg_Arm.png image:full_image" />
-	<Mesh file="armor.mesh" />
+	<RenderInfo name="leathArm" />
 	<Attribute
 			level_requirement="13"
 			character_requirement="warrior,priest" 
@@ -194,7 +194,7 @@
 <!-- ARC -->
 <Item type="armor" subtype="rngsh_arm" name="ranger shirt" size="medium">
 	<Image image="set:gobLeg_Arm.png image:full_image" />
-	<Mesh file="armor.mesh" />
+	<RenderInfo name="leathArm" />
 	<Attribute
 			level_requirement="13"
 			character_requirement="archer" 
@@ -226,7 +226,7 @@
 <!-- WAR, ARC -->
 <Item type="armor" subtype="assass_arm" name="assassin armor" size="medium">
 	<Image image="set:gobLeg_Arm.png image:full_image" />
-	<Mesh file="armor.mesh" />
+	<RenderInfo name="leathArm" />
 	<Attribute
 			level_requirement="19"
 			character_requirement="warrior,archer" 
@@ -259,7 +259,7 @@
 <!-- PRI -->
 <Item type="armor" subtype="temple_arm" name="temple armor" size="medium">
 	<Image image="set:gobLeg_Arm.png image:full_image" />
-	<Mesh file="armor.mesh" />
+	<RenderInfo name="leathArm" />
 	<Attribute
 			level_requirement="19"
 			character_requirement="priest" 
