@@ -83,6 +83,24 @@
 			</Event>
 		 </Region>
 		 
+		 <Region id="1002" name="spawnAbyss">
+			 <Settings dimx="32" dimy="32" area_percent="0.3" complexity="0.4" granularity="6" ground="grass1"/>
+			 <ExitDirections north="false" south="true" west="false" east="false" />
+			 <Exits>
+				 <Exit name="exit_south" destination_region="region1" destination_location="entry_north" >
+					 <Shape shape="RECT" extent_x="4.0" extent_y ="4.0" />
+				 </Exit>
+			 </Exits> 
+			 <Environments>
+				 <Environment height="0.6" name="meadow" />
+				 <Environment height="1.0" name="hills" />
+			 </Environments>
+			 <ReviveLocation  location="entry_south" />
+			<SpawnGroups>
+				<SpawnGroup group_name="allGoblins" number="10" />
+			</SpawnGroups>
+		</Region>
+		 
 		 <!-- soon to be tutorial-Region-->
 		 <Region id="0" name="region0">
 			 <Settings dimx="64" dimy="64" area_percent="0.30" complexity="0.4" granularity="8" ground="grass1"/>

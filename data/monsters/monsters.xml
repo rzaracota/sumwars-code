@@ -1205,8 +1205,17 @@ AIR
 
 <MonsterGroup name="goblins" >
 	<SubGroup subtype="goblin" number="4" prob="0.7" />
-	<SubGroup subtype="goblin_bow" number="3" prob="0.7" />
-	<SubGroup subtype="goblin_rob" number="3" prob="0.7" />
+</MonsterGroup>
+
+<MonsterGroup name="allGoblins" >
+	<SubGroup subtype="goblin" number="1" prob="1" />
+	<SubGroup subtype="goblin_rob" number="1" prob="1" />
+	<SubGroup subtype="goblin_bon" number="1" prob="1" />
+	<SubGroup subtype="goblin_bow" number="1" prob="1" />
+	<SubGroup subtype="goblin_fgt" number="1" prob="1" />
+	<SubGroup subtype="goblin_war" number="1" prob="1" />
+	<SubGroup subtype="goblin_pch" number="1" prob="1" />
+	<SubGroup subtype="goblin_sh" number="1" prob="1" />
 </MonsterGroup>
 
 <MonsterGroup name="goblin_bandits" >

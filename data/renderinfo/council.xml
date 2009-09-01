@@ -35,16 +35,34 @@
 	
 	<Action name="noaction">
 		<Animation name="idle1" />
-		<Animation name="idle2" />
-		<Animation name="idle2" />
-		<Animation name="idle2" />
+	</Action>
+</RenderInfo>
+
+<RenderInfo name="lousebase" parent="creaturebase">
+	<Action name="walk">
+		<Animation name="walk" />
+	</Action>
+	
+	<Action name="attack">
+		<Animation name="attack" />
+	</Action>
+
+	<Action name="die">
+		<Animation name="die" />
+	</Action>
+	
+	<Action name="noaction">
+		<Animation name="idle1" />
+	</Action>
+	<Action name="noaction">
 		<Animation name="idle2" />
 	</Action>
 </RenderInfo>
 
+
 <RenderInfo name="behemothbase" parent="creaturebase">
 	<Action name="walk">
-		<Animation name="idle" />
+		<Animation name="walk" />
 	</Action>
 	
 	<Action name="attack">
@@ -84,6 +102,10 @@
 
 <RenderInfo name="fireSlug" parent="slugbase">
 	<Entity source="fire_slug.mesh"/>
+</RenderInfo>
+
+<RenderInfo name="fireLouse" parent="lousebase">
+	<Entity source="fireLouse.mesh"/>
 </RenderInfo>
 
 <RenderInfo name="infBehemoth" parent="behemothbase">

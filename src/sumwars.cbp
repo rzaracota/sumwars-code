@@ -103,6 +103,8 @@
 		<Unit filename="core\eventsystem.h" />
 		<Unit filename="core\fixedobject.cpp" />
 		<Unit filename="core\fixedobject.h" />
+		<Unit filename="core\fraction.cpp" />
+		<Unit filename="core\fraction.h" />
 		<Unit filename="core\gameobject.cpp" />
 		<Unit filename="core\gameobject.h" />
 		<Unit filename="core\geometry.cpp" />

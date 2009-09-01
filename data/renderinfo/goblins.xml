@@ -28,16 +28,16 @@
 </RenderInfo>
 
 <RenderInfo name="goblin" parent="goblinbase">
-	<Entity source="goblin.mesh"/>
+	<Entity source="goblinGreen.mesh"/>
 </RenderInfo>
 
 <RenderInfo name="goblin_rob" parent="goblinbase">
-	<Entity source="goblin.mesh"/>
+	<Entity source="goblinGreen.mesh"/>
 	<Entity objectname="weapon" bone="itemRightHand" source="goblin_hmr.mesh" />
 </RenderInfo>
 
 <RenderInfo name="goblin_bon" parent="goblinbase">
-	<Entity source="goblin.mesh"/>
+	<Entity source="goblinGreen.mesh"/>
 	<Entity objectname="weapon" bone="itemRightHand" source="goblin_stf.mesh" />
 	<Entity objectname="gloves" bone="EllbogenRechts" source="goblin_glv.mesh" />
 	<Entity objectname="armor" bone="KnieRechts" source="gobLeg_arm.mesh" />
@@ -60,7 +60,7 @@
 </RenderInfo>
 
 <RenderInfo name="goblin_bow" parent="goblinbase">
-	<Entity source="goblin.mesh"/>
+	<Entity source="goblinGreen.mesh"/>
 	<Entity objectname="weapon" bone="itemRightHand" source="goblin_sbw.mesh" />
 </RenderInfo>
 
@@ -77,21 +77,21 @@
 </RenderInfo>
 
 <RenderInfo name="goblin_fgt" parent="goblinbase">
-	<Entity source="gob_brown.mesh"/>
+	<Entity source="goblinBrown.mesh"/>
 </RenderInfo>
 
 <RenderInfo name="goblin_war" parent="goblinbase">
-	<Entity source="goblin.mesh"/>
+	<Entity source="goblinGreen.mesh"/>
 	<Entity objectname="weapon" bone="itemRightHand" source="crude_sw.mesh" />
 	<Entity objectname="weapon2" bone="itemLeftHand" source="crude_sw.mesh" /> 
 </RenderInfo>
 
 <RenderInfo name="goblin_pch" parent="goblinbase">
-	<Entity source="gob_brown.mesh"/>
+	<Entity source="goblinBrown.mesh"/>
 	<Entity objectname="weapon" bone="itemRightHand" source="goblin_sbw.mesh" />
 </RenderInfo>
 
 <RenderInfo name="goblin_wrc" parent="goblinbase">
-	<Entity source="goblin.mesh"/>
+	<Entity source="goblinGreen.mesh"/>
 	<Entity objectname="weapon" bone="itemRightHand" source="crude_sw.mesh" />
 </RenderInfo>

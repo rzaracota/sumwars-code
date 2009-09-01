@@ -10,6 +10,10 @@
 	<Action name="die">
 		<Animation name="die" />
 	</Action>
+	
+	<Action name="noaction">
+		<Animation name="fly" />
+	</Action>
 </RenderInfo>
 
 <RenderInfo name="bloodbeak" parent="birdbase">

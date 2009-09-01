@@ -1,12 +1,12 @@
 <!-- Monster des Konzils der Elementarbeschwoerer -->
 
-<!-- Feuerschnecke-->
-<!-- L1-->
-<Monster type="MONSTER" subtype="fireSlug" name="fire slug" fraction="summoner" race="elemental" layer="NORMAL">
+<!-- Feuerschnecke -->
+<!-- L1 -->
+<Monster type="MONSTER" subtype="fireSlug" name="Fire Slug" fraction="summoner" race="elemental" layer="NORMAL">
 	<Mesh file="fireSlug" />
 	<Dropslots >
-		<Dropslot pbig="0.10" pmedium="0.25" psmall="0.10" pgold="0.05" max_gold="500" min_level="1" max_level="3" magic_prob="0.1" magic_power="100" />
-		<Dropslot pbig="0.10" pmedium="0.25" psmall="0.10" pgold="0.05" max_gold="400" min_level="1" max_level="2" magic_prob="0.2" magic_power="60" />
+		<Dropslot pbig="0.10" pmedium="0.25" psmall="0.10" pgold="0.05" max_gold="10" min_level="1" max_level="3" magic_prob="0.1" magic_power="100" />
+		<Dropslot pbig="0.10" pmedium="0.25" psmall="0.10" pgold="0.05" max_gold="2" min_level="1" max_level="2" magic_prob="0.2" magic_power="60" />
 	</Dropslots>
 	
 	<BasicAttributes
@@ -35,9 +35,11 @@
 		attack_range="0.5"
 	>
 		<Ability type="walk" />
+
 		<Ability type="attack"  rating="1"/>
 		<Ability type="die"/>
 		<Ability type="noaction" time="5000"/>
+
 	</BasicAttributes>
 	
 	<Geometry radius="0.5" />
@@ -45,10 +47,56 @@
 	<AI ai_sight_range="10" ai_chase_range="20"/>
 </Monster>
 
+<!-- Feuerassel -->
+<!-- Level 5 -->
+<Monster type="MONSTER" subtype="fireLouse" name="Fire Louse" fraction="summoner" race="elemental" layer="NORMAL">
+	<Mesh file="fireLouse" />
+	<Dropslots >
+		<Dropslot pbig="0.10" pmedium="0.25" psmall="0.10" pgold="0.05" max_gold="50" min_level="1" max_level="3" magic_prob="0.1" magic_power="100" />
+		<Dropslot pbig="0.10" pmedium="0.25" psmall="0.10" pgold="0.05" max_gold="10" min_level="1" max_level="2" magic_prob="0.2" magic_power="60" />
+	</Dropslots>
+	
+	<BasicAttributes
+		experience="10"
+		level="1"
+		max_health="15"
+		armor="2"
+		block="0"
+		attack="12"
+		power="10"
+		strength="8"
+		dexterity="14"
+		magic_power="20"
+		willpower="15"
+		resistances_physical="0"
+		resistances_air="0"
+		resistances_ice="-80"
+		resistances_fire="20"
+		resistances_cap_physical="50"
+		resistances_cap_air="50"
+		resistances_cap_ice="50"
+		resistances_cap_fire="50"
+		walk_speed="3000"
+		attack_speed="1500"
+		step_length="0.8"
+		attack_range="1.0"
+	>
+	
+		<Ability type="walk" />
+		<Ability type="attack" />
+		<Ability type="die" />
+		<Ability type="noaction" />
+	</BasicAttributes>
+	
+	<Geometry radius="1.0" />
+	
+	<AI ai_sight_range="10" ai_chase_range="20"/>
+</Monster>
+
 
 <!-- Feuerkuecken -->
 <!-- L20 -->
-<Monster type="MONSTER" subtype="fireElemS" name="firefletchling" fraction="summoner" race="elemental" layer="NORMAL">
+<Monster type="MONSTER" subtype="fireElemS" name="Firefletchling" fraction="summoner" race="elemental" layer="NORMAL">
 	<Mesh file="fireElemS" />
 	<Dropslots >
 		<Dropslot pbig="0.10" pmedium="0.25" psmall="0.10" pgold="0.05" max_gold="500" min_level="5" max_level="10" magic_prob="0.1" magic_power="1000" />
@@ -83,9 +131,10 @@
 		<Ability type="walk" />
 		<Ability type="attack"  rating="1"/>
 		<Ability type="die" />
+
 		<Ability type="noaction" />
 		<Ability type="fire_ball"  rating="3"/>
-		
+
 	</BasicAttributes>
 	
 	<Geometry radius="2.0" />
@@ -95,7 +144,7 @@
 
 <!-- Inferno Behemoth -->
 <!-- L65 -->
-<Monster type="MONSTER" subtype="infBehemoth" name="inferno behemoth" fraction="summoner" category="SUMMONED" layer="NORMAL">
+<Monster type="MONSTER" subtype="infBehemoth" name="Inferno Behemoth" fraction="summoner" category="SUMMONED" layer="NORMAL">
 	<Mesh file="infBehemoth" />
 	<Dropslots >
 		<Dropslot pbig="0.3" pmedium="0.45" psmall="0.05" pgold="0.05" max_gold="500" min_level="50" max_level="70" magic_prob="0.3" magic_power="1800" />
@@ -151,6 +200,10 @@
 
 <MonsterGroup name="slugs" >
 	<SubGroup subtype="fireSlug" number="20" prob="0.7" />
+</MonsterGroup>
+
+<MonsterGroup name="louses" >
+	<SubGroup subtype="fireLouse" number="2" prob="1.0" />
 </MonsterGroup>
 
 <MonsterGroup name="theThingFromTheDarkAbyssOfFire" >
