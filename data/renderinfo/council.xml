@@ -11,7 +11,7 @@
 		<Animation name="die" />
 	</Action>
 	
-	<Action name="idle">
+	<Action name="noaction">
 		<Animation name="idle" />
 	</Action>
 	
@@ -33,7 +33,7 @@
 		<Animation name="die" />
 	</Action>
 	
-	<Action name="idle">
+	<Action name="noaction">
 		<Animation name="idle1" />
 		<Animation name="idle2" />
 		<Animation name="idle2" />
@@ -55,7 +55,7 @@
 		<Animation name="die" />
 	</Action>
 	
-	<Action name="idle">
+	<Action name="noaction">
 		<Animation name="idle" />
 	</Action>
 

@@ -36,8 +36,8 @@
 	>
 		<Ability type="walk" />
 		<Ability type="attack"  rating="1"/>
-		<Ability type="die" />
-		<Ability type="noaction" />
+		<Ability type="die"/>
+		<Ability type="noaction" time="5000"/>
 	</BasicAttributes>
 	
 	<Geometry radius="0.5" />

@@ -165,7 +165,7 @@ void Creature::die()
 	setState(STATE_DIEING);
 	m_action.m_type ="die";
 	DEBUG5("object died: %p",this);
-	m_action.m_time =1000;
+	m_action.m_time =getActionTime("die");
 	
 	m_action.m_elapsed_time =0;
 
@@ -184,9 +184,9 @@ bool Creature::canBeAttacked()
 int Creature::getTimerNr(Action::ActionType action)
 {
 	std::map<std::string, AbilityInfo>::iterator it;
-	it = getBaseAttrMod()->m_abilities.find(action);
+	it = getBaseAttr()->m_abilities.find(action);
 	
-	if (it != getBaseAttrMod()->m_abilities.end())
+	if (it != getBaseAttr()->m_abilities.end())
 	{
 		// wenn gleich -1, so wird der Standardtimer verwendet
 		if (it->second.m_timer_nr != -1)
@@ -208,9 +208,9 @@ int Creature::getTimerNr(Action::ActionType action)
 float Creature::getTimer(Action::ActionType action)
 {
 	std::map<std::string, AbilityInfo>::iterator it;
-	it = getBaseAttrMod()->m_abilities.find(action);
+	it = getBaseAttr()->m_abilities.find(action);
 	
-	if (it != getBaseAttrMod()->m_abilities.end())
+	if (it != getBaseAttr()->m_abilities.end())
 	{
 		// wenn gleich -1, so wird der Standardtimer verwendet
 		if (it->second.m_timer_nr != -1)
@@ -228,9 +228,9 @@ float Creature::getTimer(Action::ActionType action)
 float Creature::getActionTime(Action::ActionType action)
 {
 	std::map<std::string, AbilityInfo>::iterator it;
-	it = getBaseAttrMod()->m_abilities.find(action);
+	it = getBaseAttr()->m_abilities.find(action);
 	
-	if (it != getBaseAttrMod()->m_abilities.end())
+	if (it != getBaseAttr()->m_abilities.end())
 	{
 		// wenn gleich 0, so wird der Standardtimer verwendet
 		if (it->second.m_time != 0)
@@ -324,7 +324,7 @@ void Creature::initAction()
 
 	// setzen der Standarddauer der Aktion
 	m_action.m_time = getActionTime(m_action.m_type);
-
+		
 	Action::ActionType baseact = "noaction";
 	Action::ActionInfo* ainfo = Action::getActionInfo(m_action.m_type);
 	if (ainfo != 0)
@@ -360,11 +360,6 @@ void Creature::initAction()
 		m_action.m_time *= 1000000/atksp;
 
 	}
-	else if (baseact != "walk")
-	{
-		m_action.m_time = aci->m_standard_time;
-
-	}
 
 	DEBUG5("resulting time %f",m_action.m_time);
 	// Drehwinkel setzen
@@ -394,6 +389,7 @@ void Creature::initAction()
 	{
 		clearCommand(false);
 	}
+	DEBUG5("action %s time %f",m_action.m_type.c_str(), m_action.m_time);
 }
 
 void Creature::performAction(float &time)
