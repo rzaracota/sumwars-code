@@ -208,8 +208,6 @@
 		<SpawnGroups>
 			<SpawnGroup group_name="goblins_l1" number="18" />
 			<SpawnGroup group_name="goblins_bow_l1" number="12" />
-			<!--<SpawnGroup group_name="slugs" number="12" />-->
-			<SpawnGroup group_name="theThingFromTheDarkAbyssOfFire" number="12" />
 		</SpawnGroups>
 	</Region>
 
