@@ -57,6 +57,9 @@ end;
 
 function lookAt(obj,pos)
 	local opos = getPosition(obj);
+	if (opos == nil) then
+		return;
+	end;
 	local dirx = pos[1] - opos[1];
 	local diry = pos[2] - opos[2];
 	local angle = math.atan2(diry,dirx)*180 / 3.14159;
@@ -100,7 +103,7 @@ function getMages()
 end;
 
 function getArchers()
-	return getRolePlayers("mage");
+	return getRolePlayers("archer");
 end;
 
 function getPriests()
@@ -210,4 +213,59 @@ function addStandardSpeakers(region,location)
 	end;
 end;
 
+-- Gibt einen Sprecher fuer eine Rolle zurueck, dessen ID nicht in der Liste forbiddenids ist
+-- role: string, Sprecherrolle
+-- forbiddenids: Tabelle, int->bool, falls fuer eine ID true angegeben ist, so wird dieser Spieler nicht gewaehlt
+function getRolePlayer(role, forbiddenids)
+	local cand = getRolePlayers(role);
+	local id,key
+	for key,id in pairs(cand) do
+		if (forbiddenids == nil or forbiddenids[id] ~= true) then
+			return id;
+		end;
+	end;
+	return 0;
+end;
+
+function getRolePlayerNonPref(role, nonprefids)
+	local id = getRolePlayer(role,nonprefids);
+	if (id == 0) then
+		id = getRolePlayer(role);
+	end;
+	return id;
+end;
+
+function getRolePlayerPref(role,prefid)
+	local cand = getRolePlayers(role);
+	local id,key
+	for key,id in pairs(cand) do
+		if (id == prefid) then
+			return id;
+		end;
+	end;
+	if (cand[1] == nil) then
+		return 0;
+	end;
+	return cand[1];
+end;
+
+-- Teleportiert die komplette Party an die Position location in Region region
+function assembleParty(region,location)
+	if (region ~= nil and location ~= nil) then
+		local players = getPlayers();
+		local i,player;
+		for i,player in ipairs(players) do
+			teleportPlayer(player,region,location);
+		end;
+	end;
+end;
+
+-- Fuegt alle Spieler dem Dialog hinzu
+function addAllPlayersToDialog()
+	local players = getPlayers();
+	local i,player;
+	for i,player in ipairs(players) do
+		addSpeaker(player,get(player,"name"));
+	end;
+end;
 

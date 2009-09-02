@@ -35,7 +35,7 @@
     <Object subtype="book1" 
             center_x="35.5" 
             center_y="1.5" 
-			height="-6.938893904e-018" 
+                        height="-1.387778781e-017" 
             angle="0" 
             probability="1" 
             prob_angle="false" 
@@ -43,7 +43,7 @@
     <Object subtype="book2" 
             center_x="36.5" 
             center_y="2" 
-			height="-6.938893904e-018" 
+                        height="-1.387778781e-017" 
             angle="0" 
             probability="1" 
             prob_angle="false" 
@@ -51,7 +51,7 @@
     <Object subtype="book3" 
             center_x="35.2754827" 
             center_y="2.205190519" 
-			height="-6.938893904e-018" 
+                        height="-1.387778781e-017" 
             angle="0" 
             probability="1" 
             prob_angle="false" 
@@ -59,7 +59,7 @@
     <Object subtype="book4" 
             center_x="37.5" 
             center_y="2" 
-			height="-6.938893904e-018" 
+                        height="-1.387778781e-017" 
             angle="0" 
             probability="1" 
             prob_angle="false" 
@@ -67,7 +67,7 @@
     <Object subtype="book5" 
             center_x="36.5" 
             center_y="1" 
-			height="-6.938893904e-018" 
+                        height="-1.387778781e-017" 
             angle="0" 
             probability="1" 
             prob_angle="false" 
@@ -117,7 +117,7 @@
     <Object subtype="book_open2" 
             center_x="31.5" 
             center_y="0" 
-			height="-0.05" 
+                        height="-0.05" 
             angle="0" 
             probability="1" 
             prob_angle="false" 
@@ -181,7 +181,7 @@
     <Object subtype="$tube" 
             center_x="-33.5" 
             center_y="-14" 
-			height="1.387778781e-017" 
+                        height="1.387778781e-017" 
             angle="-45" 
             probability="1" 
             prob_angle="false" 
@@ -231,7 +231,7 @@
     <Object subtype="$tube_ring" 
             center_x="-51.5" 
             center_y="22" 
-			height="6.938893904e-018" 
+                        height="6.938893904e-018" 
             angle="0" 
             probability="1" 
             prob_angle="false" 
@@ -239,7 +239,7 @@
     <Object subtype="$vase" 
             center_x="27.06955306" 
             center_y="-20.52375887" 
-			height="1.12645059" 
+                        height="1.12645059" 
             angle="0" 
             probability="1" 
             prob_angle="false" 
@@ -247,7 +247,7 @@
     <Object subtype="$vase" 
             center_x="26.14314724" 
             center_y="-20.17138517" 
-			height="1.119181827" 
+                        height="1.119181827" 
             angle="0" 
             probability="1" 
             prob_angle="false" 
@@ -255,7 +255,7 @@
     <Object subtype="$vase" 
             center_x="26.4734329" 
             center_y="-20.53655594" 
-			height="1.073821889" 
+                        height="1.073821889" 
             angle="0" 
             probability="1" 
             prob_angle="false" 
@@ -264,13 +264,6 @@
             center_x="66.5" 
             center_y="-69.5" 
             angle="-90" 
-            probability="1" 
-            prob_angle="false" 
-    />
-    <Object subtype="konz_wall1" 
-            center_x="81.5" 
-            center_y="74.5" 
-            angle="90" 
             probability="1" 
             prob_angle="false" 
     />
@@ -352,22 +345,8 @@
             prob_angle="false" 
     />
     <Object subtype="konz_wall1" 
-            center_x="41.5" 
-            center_y="66.5" 
-            angle="-90" 
-            probability="1" 
-            prob_angle="false" 
-    />
-    <Object subtype="konz_wall1" 
             center_x="30.5" 
             center_y="68.5" 
-            angle="-90" 
-            probability="1" 
-            prob_angle="false" 
-    />
-    <Object subtype="konz_wall1" 
-            center_x="30.5" 
-            center_y="64.5" 
             angle="-90" 
             probability="1" 
             prob_angle="false" 
@@ -383,27 +362,6 @@
             center_x="24" 
             center_y="54" 
             angle="-180" 
-            probability="1" 
-            prob_angle="false" 
-    />
-    <Object subtype="konz_wall1" 
-            center_x="30.5" 
-            center_y="65.5" 
-            angle="90" 
-            probability="1" 
-            prob_angle="false" 
-    />
-    <Object subtype="konz_wall1" 
-            center_x="52" 
-            center_y="43" 
-            angle="0" 
-            probability="1" 
-            prob_angle="false" 
-    />
-    <Object subtype="konz_wall1" 
-            center_x="44.5" 
-            center_y="63.5" 
-            angle="90" 
             probability="1" 
             prob_angle="false" 
     />
@@ -488,13 +446,6 @@
             center_x="28.5" 
             center_y="33.5" 
             angle="90" 
-            probability="1" 
-            prob_angle="false" 
-    />
-    <Object subtype="konz_wall1" 
-            center_x="52" 
-            center_y="13" 
-            angle="0" 
             probability="1" 
             prob_angle="false" 
     />
@@ -772,7 +723,7 @@
             prob_angle="false" 
     />
     <Object subtype="konz_wall1" 
-            center_x="17.5" 
+            center_x="13" 
             center_y="85.5" 
             angle="-180" 
             probability="1" 
@@ -1059,44 +1010,9 @@
             prob_angle="false" 
     />
     <Object subtype="konz_wall1" 
-            center_x="23" 
-            center_y="54" 
-            angle="0" 
-            probability="1" 
-            prob_angle="false" 
-    />
-    <Object subtype="konz_wall1" 
-            center_x="22" 
-            center_y="54" 
-            angle="0" 
-            probability="1" 
-            prob_angle="false" 
-    />
-    <Object subtype="konz_wall1" 
-            center_x="13.5" 
-            center_y="78.5" 
-            angle="90" 
-            probability="1" 
-            prob_angle="false" 
-    />
-    <Object subtype="konz_wall1" 
             center_x="-25.5" 
             center_y="-60.5" 
             angle="90" 
-            probability="1" 
-            prob_angle="false" 
-    />
-    <Object subtype="konz_wall1" 
-            center_x="30.5" 
-            center_y="67.5" 
-            angle="-90" 
-            probability="1" 
-            prob_angle="false" 
-    />
-    <Object subtype="konz_wall1" 
-            center_x="30.5" 
-            center_y="66.5" 
-            angle="-90" 
             probability="1" 
             prob_angle="false" 
     />
@@ -2521,27 +2437,6 @@
             probability="1" 
             prob_angle="false" 
     />
-    <Object subtype="konz_wall_m1" 
-            center_x="23.5" 
-            center_y="78.5" 
-            angle="90" 
-            probability="1" 
-            prob_angle="false" 
-    />
-    <Object subtype="konz_wall_m1" 
-            center_x="23" 
-            center_y="60" 
-            angle="0" 
-            probability="1" 
-            prob_angle="false" 
-    />
-    <Object subtype="konz_wall_m1" 
-            center_x="22" 
-            center_y="60" 
-            angle="0" 
-            probability="1" 
-            prob_angle="false" 
-    />
     <Object subtype="konz_wall_s1" 
             center_x="22.5" 
             center_y="49.5" 
@@ -3154,7 +3049,7 @@
     <Object subtype="lab_tbl" 
             center_x="32.5373536" 
             center_y="1.851751358" 
-			height="-3.552713679e-015" 
+                        height="-3.552713679e-015" 
             angle="-90" 
             probability="1" 
             prob_angle="false" 
@@ -3204,7 +3099,7 @@
     <Object subtype="tube_ring" 
             center_x="11.5" 
             center_y="-22" 
-			height="6.938893904e-018" 
+                        height="6.938893904e-018" 
             angle="0" 
             probability="1" 
             prob_angle="false" 
@@ -3220,16 +3115,31 @@
     <Location name="exit_north" pos_x="16.5" pos_y="-117.5" />
     <Location name="exit_south" pos_x="104.5" pos_y="70" />
     <Location name="exit_west" pos_x="-34.5" pos_y="-65" />
+    <Location name="locBackroute1" pos_x="50" pos_y="42.5" />
+    <Location name="locBackroute2" pos_x="58" pos_y="42" />
+    <Location name="locBackroute3" pos_x="57" pos_y="12.5" />
+    <Location name="locBackroute4" pos_x="49.5" pos_y="12.5" />
+    <Location name="locBackroute5" pos_x="26.5" pos_y="19" />
+    <Location name="locBackroute6" pos_x="17.5" pos_y="19" />
+    <Location name="locBehemoth" pos_x="17" pos_y="70" />
+    <Location name="locBehemoth3" pos_x="18" pos_y="59" />
+    <Location name="locBehemothStart" pos_x="18.5" pos_y="85.5" />
+    <Location name="locDerred" pos_x="92" pos_y="80.5" />
+    <Location name="locDestroyedWall" pos_x="21" pos_y="78.5" />
     <Location name="locElemental" pos_x="24" pos_y="-60.5" />
+    <Location name="locEntryPlayer" pos_x="90.5" pos_y="85" />
+    <Location name="locEvilMachine" pos_x="91" pos_y="95" />
     <Location name="locGuard1" pos_x="52.5" pos_y="-65.5" />
     <Location name="locGuard2" pos_x="-17.5" pos_y="-65" />
     <Location name="locGuard3" pos_x="16.5" pos_y="-33" />
     <Location name="locMerc1" pos_x="18" pos_y="-64.94500165" />
     <Location name="locMerc2" pos_x="15.74001295" pos_y="-62.44165668" />
     <Location name="locParty" pos_x="16.4642177" pos_y="-67.94500165" />
+    <Location name="locSlugs" pos_x="36" pos_y="48" />
     <Location name="locSorenWindclaw" pos_x="16" pos_y="-57.66335743" />
-    <Location name="locWay1" pos_x="53.5" pos_y="71" />
-    <Location name="locWay2" pos_x="17" pos_y="70.5" />
+    <Location name="locTolec" pos_x="94" pos_y="87" />
+    <Location name="locWay1" pos_x="81.5" pos_y="70" />
+    <Location name="locWay2" pos_x="40.5" pos_y="70.5" />
     <Location name="locWay3" pos_x="16.88749348" pos_y="-0.2167682145" />
     <Location name="locWay4" pos_x="16.5" pos_y="-39.5" />
     <Location name="locWay5" pos_x="36.5" pos_y="-51" />
@@ -3237,6 +3147,7 @@
     <Location name="locWay7" pos_x="25" pos_y="-87.5" />
     <Location name="locWay8" pos_x="16.5" pos_y="-88" />
     <Location name="locWay9" pos_x="16" pos_y="-72.32559007" />
+    <Location name="locWorker" pos_x="12.5" pos_y="76.5" />
   </Locations>
 
 </ObjectGroupTemplate>

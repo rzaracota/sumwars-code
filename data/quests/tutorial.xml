@@ -1,0 +1,219 @@
+<Quest name="Tutorial" table_name="tutorial">
+	
+	<Fraction type="tutorialWorker">
+		<Relation fraction="default" relation="neutral" />
+	</Fraction>	
+	
+	<Fraction type="tutorialBehemoth">
+		<Relation fraction="default" relation="neutral" />
+		<Relation fraction="tutorialWorker" relation="hostile" />
+	</Fraction>
+	
+	<Init>
+		-- Anzahl getoeteter Schnecken
+		tutorial.slugs =0;
+		tutorial.phase="intro"
+	</Init>
+	
+	<Description>
+		if (tutorial.finished) then
+			return _("Tutorial finished")
+		else
+			return _("Quest description")
+		end
+	</Description>
+	
+	<Region name="elCnlLobby">
+		<Event trigger="create_region" once="true">
+			<Effect>
+				addArea("entryPlayerArea","circle","locEntryPlayer",5);
+				
+				tutorial_tmp.tolec = createObject("council_guard", "locTolec");
+				setRefName(tutorial_tmp.tolec, "Tolec");
+				lookAt(tutorial_tmp.tolec,getLocation("locEntryPlayer"));
+				
+				tutorial_tmp.derred = createObject("council_guard", "locDerred");
+				setRefName(tutorial_tmp.derred, "Derred");
+				lookAt(tutorial_tmp.derred,getLocation("locEntryPlayer"));
+			</Effect>
+		</Event>
+		
+		<Event trigger="player_moved" once="true">
+			<Condition>
+				if (tutorial.phase == "intro") then
+					return (unitIsInArea(trigger.player,"entryPlayerArea"));
+				else
+					return false;
+				end;
+			</Condition>
+			<Effect>
+				createDialogue();
+				addAllPlayersToDialog();
+				addSpeaker(tutorial_tmp.tolec,"Tolec");
+				addSpeaker(tutorial_tmp.derred,"Derred");
+				local leader = getRolePlayer("leader");
+				local blockedspeaker={};
+				blockedspeaker[leader] = true;
+				local solo = (getPlayers()[2] == nil);
+				
+				addSpeaker(leader,"PL");
+				speak("PL",_("*args*"));
+				-- TODO: (aufrappeln)
+				speak("PL",_("Bei Harads Knochen! Das war mindestens so schlimm wie die ersten Jahre in der Hölle! Wo bin ich hier?"));
+				
+				if (not solo) then
+					speak("PL",_("Und wer sind die anderen müden Gestalten?"));
+				end;
+				
+				local warrior = getRolePlayerNonPref("warrior",blockedspeaker);
+				local mage = getRolePlayerNonPref("mage",blockedspeaker);
+				local archer = getRolePlayerNonPref("archer",blockedspeaker);
+				local priest = getRolePlayerNonPref("priest",blockedspeaker);
+				
+				addSpeaker(warrior,"warrior");
+				addSpeaker(mage,"mage");
+				addSpeaker(archer,"archer");
+				addSpeaker(priest,"priest");
+				
+				if (warrior ~= leader) then
+					speak("warrior",_("Suchst du Streit? Wer ist für diesen Schlammassel verantwortlich!?!"));
+				end;
+				-- TODO:  (blickt sich um)
+				
+				speak("warrior",_("Beinahe hätte ich den verdammten Oger gehabt und plötzlich reißt mir jemand die Eingeweide raus, der noch nicht mal in meiner Nähe steht!"));
+				
+				if (warrior ~=0 and mage ~= 0) then
+					speak("mage",_("Ah ja! Die Wunder geistigen Kapazität von Knüppelschwingern."));
+					speak("warrior",_("Ich zeig dir gleich die Ausdauerkapazitäten von Magiesprutzern!"));
+				end;
+				
+				speak("mage",_("Welch abstoßendes Ambiente. Ich habe nicht darum gebeten, hier zu sein... ich hatte gerade einen so ansprechenden und sicheren Ort gefunden."));
+				
+				speak("Tolec",_("Entschuldigt..."));
+				speak("Derred",_("Nein, du musst das viel bestimmter sagen."));
+				
+				if (priest ~= 0) then
+					lookAt(priest,getLocation("locEvilMachine"));
+				end;
+				speak("priest",_("Es scheint, als besäße hier jemand größeres Wissen über die Art und Weise, wie Harad uns am Leben hält und bewegt."));
+				speak("archer",_("Wer auch immer hier das Sagen hat: Er hat sich besser überlegt, worauf er sich einlässt. Viel Geld könnte mich wieder gnädig stimmen."));
+				
+				speak("Tolec",_("Bitte entschuldigt die etwas raue Ankunft. Lord Magister Soren Windklaue erbittet eure Audienz."))
+				
+				local magopt = getRolePlayerPref("all",mage);
+				local waropt = getRolePlayerPref("all",warrior);
+				local arcopt = getRolePlayerPref("all",archer);
+				addSpeaker(magopt,"magopt");
+				addSpeaker(waropt,"waropt");
+				addSpeaker(arcopt,"arcopt");
+				
+				speak("magopt",_("Ach so!"));
+				speak("magopt",_("Lord"));
+				speak("magopt",_("Magister"));
+				speak("magopt",_("Windklaue."));
+				speak("magopt",_("Warum habt ihr das nicht gleich gesagt?"));
+				speak("Derred",_("Nun, wenn Ihr uns bitte folgen würdet?"));
+				if (not solo) then
+					speak("waropt",_("Wollt ihr uns verarschen? Wer bitte schön ist denn dieser Windwichtel?"));
+				else
+					speak("PL",_("Wollt ihr mich verarschen? Wer bitte schön ist denn dieser Windwichtel?"));
+				end;
+				
+				if (mage ~= waropt) then
+					speak("mage",_("Eine brillante Frage. Kurz und Präzise. Vielleicht kann man doch mit ihm arbeiten."));
+				end;
+				
+				speak("Derred",_("Ähm..."));
+				if (priest ~= waropt) then
+					speak("priest",_("Nur die Ruhe, mein Sohn. Nimm dir Zeit, über die Antwort nachzudenken. Es könnte deine Letzte sein."));
+				end;
+				
+				executeInDialog("addUnitCommand("..leader..",'walk',tutorial_tmp.derred)");
+				speak("PL",_("Raus damit. Wo sind wir und wer hat den Nerv, Gezeichnete gegen sich auf zu bringen?!"));
+				speak("Tolec",_("Nun, der Lord Magister hat versichert, dass er Euch das alles genau erklären wird."));
+				speak("Derred",_("Außerdem war Eure Ankunft... etwas beschwerlich. Ihr dürftet im Moment nicht einmal in der Lage sein, uns gefährlich zu werden."));
+				speak("waropt",_("Was habt ihr getan ihr Bastarde?!"));
+				speak("Tolec",_("Keine Angst, wir haben strikten Befehl, euch nicht zu töten."));
+				
+				speak("arcopt",_("Der Kerl scheint zu wissen, was er tut."));
+				if (arcopt ~= leader) then
+					speak("PL",_("Das ist nicht der richtige Zeitpunkt, um beeindruckt zu sein."));
+				end;
+				
+				speak("Derred",_("Schön. Da das geklärt ist, möchte ich Euch bitten, mir eure Ausrüstung zu überlassen."));
+				speak("Tolec",_("Freundlich bitten."));
+				speak("Derred",_("Wir können kein Risiko eingehen und innerhalb der Konzils seid Ihr sicher."));
+				speak("arcopt",_("Konzil? Das Konzil der Elementarbeschwörer?! Ist das hier Aisen?"));
+				speak("Tolec",_("Ja, aber das tut jetzt nichts zur Sache!"));
+				if ( not solo) then
+					speak("PL",_("Was wenn wir gar keine Lust haben unsere Waffen ab zu geben?"));
+				else
+					speak("PL",_("Was wenn ich gar keine Lust habe unsere Waffen ab zu geben?"));
+				end;
+				
+				speak("Tolec",_("Es tut uns leid, wir können euch nicht vorher aus dem Sicherheitsbereich lassen."));
+				speak("magopt",_("Sicherheitsbereich?! Das ist ein verdammtes Gefängnis!"));
+				speak("Derred",_("Es ist eure Entscheidung"));
+				
+				setTopicBase("Derred");
+				changeTopic("give_weapons");
+			</Effect>	
+		</Event>
+	</Region>
+
+	<NPC refname="Derred">
+		<Topic name="give_weapons" start_option="Waffen abgeben">
+			<Condition>
+				return (tutorial.phase == "intro")
+			</Condition>
+			<Effect>
+				addAllPlayersToDialog();
+				addSpeaker(tutorial_tmp.tolec,"Tolec");
+				addSpeaker(tutorial_tmp.derred,"Derred");
+				
+				addQuestion("Wollt ihr die Waffen abgeben?");
+				addAnswer("Ja","give_weapons_yes");
+				addAnswer("Nein","give_weapons_no");
+			</Effect>
+		</Topic>
+		
+		<Topic name="give_weapons_yes">
+			<Effect>
+				local warrior = getRolePlayer("warrior");
+				local waropt = getRolePlayerPref("all",warrior);
+				local solo = (getPlayers()[2] == nil);
+				addSpeaker(waropt,"waropt");
+				if (not solo) then
+					speak("waropt",_("Wie es aussieht haben wir keine Wahl..."));
+				else
+					speak("waropt",_("Wie es aussieht habe ich keine Wahl..."));
+				end;
+				
+				tutorial.phase="learnwalk"
+			</Effect>
+		</Topic>
+		
+		<Topic name="give_weapons_no">
+			<Effect>
+				speak("player",_("Vergesst es!"));
+				speak("Tolec",_("Wir ihr es wünscht, aber dieser Raum ist sicher. Ihr werdet ihn nicht verlassen, wenn ihr nicht eure Waffen abgebt."));
+				speak("Derred",_("Sagt einfach bescheid, wenn ihr es euch anders überlegt habt."));
+			</Effect>
+		</Topic>
+		
+	</NPC>
+	
+	
+	<NPC refname="Tolec">
+		<Topic name="give_weapons" start_option="Waffen abgeben">
+			<Condition>
+				return (tutorial.phase == "intro")
+			</Condition>
+			<Effect>
+				speak("Tolec",_("Meldet euch bei Derred, falls Ihr es euch anders überlegt habt."));
+			</Effect>
+		</Topic>	
+	</NPC>
+	
+</Quest>
+	

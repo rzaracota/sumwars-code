@@ -44,7 +44,7 @@
 -->
 
 
-<World  start_region="medMercCamp" start_location="entry_south">
+<World  start_region="elCnlLobby" start_location="locEntryPlayer">
 	
 	<Fraction type="human">
 		<Relation fraction="default" relation="neutral" />
