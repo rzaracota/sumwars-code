@@ -269,3 +269,29 @@ function addAllPlayersToDialog()
 	end;
 end;
 
+function addStandardRoles()
+	local leader = getRolePlayer("leader");
+	local blockedspeaker={};
+	blockedspeaker[leader] = true;
+	addSpeaker(leader,"PL");
+	
+	local warrior = getRolePlayerNonPref("warrior",blockedspeaker);
+	local mage = getRolePlayerNonPref("mage",blockedspeaker);
+	local archer = getRolePlayerNonPref("archer",blockedspeaker);
+	local priest = getRolePlayerNonPref("priest",blockedspeaker);
+	
+	addSpeaker(warrior,"warrior");
+	addSpeaker(mage,"mage");
+	addSpeaker(archer,"archer");
+	addSpeaker(priest,"priest");
+	
+	local magopt = getRolePlayerPref("all",mage);
+	local waropt = getRolePlayerPref("all",warrior);
+	local arcopt = getRolePlayerPref("all",archer);
+	local priopt = getRolePlayerPref("all",priest);
+	addSpeaker(magopt,"magopt");
+	addSpeaker(waropt,"waropt");
+	addSpeaker(arcopt,"arcopt");
+	addSpeaker(priopt,"priopt");
+end;
+

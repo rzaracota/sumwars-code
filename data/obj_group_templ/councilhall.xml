@@ -35,7 +35,7 @@
     <Object subtype="book1" 
             center_x="35.5" 
             center_y="1.5" 
-                        height="-1.387778781e-017" 
+                        height="-2.775557562e-017" 
             angle="0" 
             probability="1" 
             prob_angle="false" 
@@ -43,7 +43,7 @@
     <Object subtype="book2" 
             center_x="36.5" 
             center_y="2" 
-                        height="-1.387778781e-017" 
+                        height="-2.775557562e-017" 
             angle="0" 
             probability="1" 
             prob_angle="false" 
@@ -51,7 +51,7 @@
     <Object subtype="book3" 
             center_x="35.2754827" 
             center_y="2.205190519" 
-                        height="-1.387778781e-017" 
+                        height="-2.775557562e-017" 
             angle="0" 
             probability="1" 
             prob_angle="false" 
@@ -59,7 +59,7 @@
     <Object subtype="book4" 
             center_x="37.5" 
             center_y="2" 
-                        height="-1.387778781e-017" 
+                        height="-2.775557562e-017" 
             angle="0" 
             probability="1" 
             prob_angle="false" 
@@ -67,7 +67,7 @@
     <Object subtype="book5" 
             center_x="36.5" 
             center_y="1" 
-                        height="-1.387778781e-017" 
+                        height="-2.775557562e-017" 
             angle="0" 
             probability="1" 
             prob_angle="false" 
@@ -3126,15 +3126,24 @@
     <Location name="locBehemothStart" pos_x="18.5" pos_y="85.5" />
     <Location name="locDerred" pos_x="92" pos_y="80.5" />
     <Location name="locDestroyedWall" pos_x="21" pos_y="78.5" />
+    <Location name="locDoorBehemothEast" pos_x="26" pos_y="71.5" />
+    <Location name="locDoorBehemothNorth" pos_x="17" pos_y="62" />
+    <Location name="locDoorBehemothWest" pos_x="8.5" pos_y="70.5" />
+    <Location name="locDoorGuardNorth" pos_x="15" pos_y="59.5" />
+    <Location name="locDoorGuardWest" pos_x="6.5" pos_y="69.5" />
     <Location name="locElemental" pos_x="24" pos_y="-60.5" />
     <Location name="locEntryPlayer" pos_x="90.5" pos_y="85" />
     <Location name="locEvilMachine" pos_x="91" pos_y="95" />
     <Location name="locGuard1" pos_x="52.5" pos_y="-65.5" />
     <Location name="locGuard2" pos_x="-17.5" pos_y="-65" />
     <Location name="locGuard3" pos_x="16.5" pos_y="-33" />
+    <Location name="locLibrarySecretDoor" pos_x="52" pos_y="13" />
     <Location name="locMerc1" pos_x="18" pos_y="-64.94500165" />
     <Location name="locMerc2" pos_x="15.74001295" pos_y="-62.44165668" />
     <Location name="locParty" pos_x="16.4642177" pos_y="-67.94500165" />
+    <Location name="locSlugFarmBackdoor" pos_x="39.5" pos_y="68" />
+    <Location name="locSlugFarmDoor" pos_x="22" pos_y="46.5" />
+    <Location name="locSlugFarmFoodDoor" pos_x="52" pos_y="42" />
     <Location name="locSlugs" pos_x="36" pos_y="48" />
     <Location name="locSorenWindclaw" pos_x="16" pos_y="-57.66335743" />
     <Location name="locTolec" pos_x="94" pos_y="87" />
@@ -3148,6 +3157,7 @@
     <Location name="locWay8" pos_x="16.5" pos_y="-88" />
     <Location name="locWay9" pos_x="16" pos_y="-72.32559007" />
     <Location name="locWorker" pos_x="12.5" pos_y="76.5" />
+    <Location name="locWorker2" pos_x="17.5" pos_y="73.5" />
   </Locations>
 
 </ObjectGroupTemplate>

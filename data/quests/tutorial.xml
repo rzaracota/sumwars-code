@@ -1,14 +1,5 @@
 <Quest name="Tutorial" table_name="tutorial">
 	
-	<Fraction type="tutorialWorker">
-		<Relation fraction="default" relation="neutral" />
-	</Fraction>	
-	
-	<Fraction type="tutorialBehemoth">
-		<Relation fraction="default" relation="neutral" />
-		<Relation fraction="tutorialWorker" relation="hostile" />
-	</Fraction>
-	
 	<Init>
 		-- Anzahl getoeteter Schnecken
 		tutorial.slugs =0;
@@ -19,6 +10,13 @@
 		if (tutorial.finished) then
 			return _("Tutorial finished")
 		else
+			if (tutorial.phase == "intro") then
+				return _("Gib deine Waffen bei Derred ab.");
+			elseif (tutorial.phase == "learnwalk") then
+				return _("Folge Tolec und Derred.")
+			elseif (tutorial.phase == "fightslugs") then
+				return _("Tötet alle Feuerschnecken in dem Gehege");
+			end
 			return _("Quest description")
 		end
 	</Description>
@@ -27,14 +25,20 @@
 		<Event trigger="create_region" once="true">
 			<Effect>
 				addArea("entryPlayerArea","circle","locEntryPlayer",5);
+				addArea("waypoint1Area","circle","locWay1",8);
+				addArea("waypoint2Area","circle","locWay2",8);
 				
-				tutorial_tmp.tolec = createObject("council_guard", "locTolec");
+				local tolecpos = "locTolec";
+				tutorial_tmp.tolec = createObject("council_guard", tolecpos);
 				setRefName(tutorial_tmp.tolec, "Tolec");
 				lookAt(tutorial_tmp.tolec,getLocation("locEntryPlayer"));
 				
-				tutorial_tmp.derred = createObject("council_guard", "locDerred");
+				local derredpos = "locDerred";
+				tutorial_tmp.derred = createObject("council_guard", derredpos);
 				setRefName(tutorial_tmp.derred, "Derred");
 				lookAt(tutorial_tmp.derred,getLocation("locEntryPlayer"));
+				
+				tutorial_tmp.destroyed_wall = createObject("konz_wall1","locDestroyedWall",90)
 			</Effect>
 		</Event>
 		
@@ -47,6 +51,7 @@
 				end;
 			</Condition>
 			<Effect>
+				tutorial.started = true;
 				createDialogue();
 				addAllPlayersToDialog();
 				addSpeaker(tutorial_tmp.tolec,"Tolec");
@@ -188,8 +193,10 @@
 				else
 					speak("waropt",_("Wie es aussieht habe ich keine Wahl..."));
 				end;
+				speak("Derred",_("Sehr Gut. Folgt mir bitte."));
 				
 				tutorial.phase="learnwalk"
+				insertTrigger("start_learnwalk");
 			</Effect>
 		</Topic>
 		
@@ -213,6 +220,272 @@
 				speak("Tolec",_("Meldet euch bei Derred, falls Ihr es euch anders überlegt habt."));
 			</Effect>
 		</Topic>	
+	</NPC>
+	
+	<Region name="elCnlLobby">
+	
+		<Event trigger="player_moved" once="true">
+			<Condition>
+				if (tutorial.phase == "learnwalk" and tutorial_tmp.learnwalkstarted ~= true) then
+					return (unitIsInArea(trigger.player,"entryPlayerArea"));
+				else
+					return false;
+				end;
+			</Condition>
+			<Effect>
+				insertTrigger("start_learnwalk");
+				unitSpeak(tutorial_tmp.derred,_("Folgt mir bitte."));
+			</Effect>	
+		</Event>
+		
+		<Event trigger="start_learnwalk" once="true">
+			<Effect>
+				addUnitCommand(tutorial_tmp.tolec,"walk","locWay1");
+				addUnitCommand(tutorial_tmp.derred,"walk","locWay1");
+				tutorial_tmp.learnwalkstarted = true;
+				tutorial_tmp.tolecway1 = true;
+			</Effect>	
+		</Event>
+		
+		<Event trigger="command_complete">
+			<Condition>
+				return (trigger.unit == tutorial_tmp.tolec 
+				and tutorial.phase == "learnwalk"
+				and tutorial_tmp.tolecway1 == true);
+			</Condition>	
+			<Effect>
+				startTimer("check_walk_success",15000);
+			</Effect>	
+		</Event>
+		
+		<Event trigger="check_walk_success">
+			<Condition>
+				return (tutorial_tmp.walk_success ~= true);
+			</Condition>
+			<Effect>
+				tutorial_tmp.tolecway1 = false;
+				addUnitCommand(tutorial_tmp.tolec,"walk","locDerred");
+			</Effect>	
+		</Event>
+		
+		<Event trigger="command_complete">
+			<Condition>
+				return (trigger.unit == tutorial_tmp.tolec 
+				and tutorial.phase == "learnwalk"
+				and tutorial_tmp.tolecway1 == false);
+			</Condition>	
+			<Effect>
+				unitSpeak(tutorial_tmp.tolec,_("Wo bleibt Ihr denn? Hat Euch der Transport so sehr zugesetzt, dass ihr nicht mal mehr wisst, wie man sich bewegt? Klickt einfach mit der linken Maustaste auf eine Stelle auf dem Boden, dann kommt das alles von ganz allein wieder."));
+				startTimer("tolec_back_way1",2000);
+			</Effect>
+		</Event>
+		
+		<Event trigger="tolec_back_way1">
+			<Effect>
+				tutorial_tmp.tolecway1 = true;
+				addUnitCommand(tutorial_tmp.tolec,"walk","locWay1");
+			</Effect>	
+		</Event>
+		
+		
+		<Event trigger="player_moved" once="true">
+			<Condition>
+				if (tutorial.phase == "learnwalk") then
+					return (unitIsInArea(trigger.player,"waypoint1Area"));
+				else
+					return false;
+				end;
+			</Condition>
+			<Effect>
+				tutorial_tmp.walk_success = true;
+				if (tutorial_tmp.tolecway1 == false) then
+					clearUnitCommands(tutorial_tmp.tolec);
+					addUnitCommand(tutorial_tmp.tolec,"walk","locWay1");
+				end;
+				addUnitCommand(tutorial_tmp.tolec,"walk","locWay2");
+				addUnitCommand(tutorial_tmp.derred,"walk","locWay2");
+			</Effect>
+		</Event>
+		
+		<Event trigger="player_moved" once="true">
+			<Condition>
+				if (tutorial.phase == "learnwalk") then
+					return (unitIsInArea(trigger.player,"waypoint2Area"));
+				else
+					return false;
+				end;
+			</Condition>
+			<Effect>
+				insertTrigger("behemoth_start");
+			</Effect>
+		</Event>
+		
+		
+		<Event trigger="behemoth_start" once="true">
+			<Effect>
+				setCutsceneMode(true);
+				tutorial_tmp.behemoth = createObject("infBehemoth","locBehemothStart");
+				lookAt(tutorial_tmp.behemoth,getLocation("locDestroyedWall"));
+				
+				tutorial_tmp.worker = createObject("council_guard","locWorker");
+				setRefName(tutorial_tmp.worker, "Arbeiter");
+				
+				tutorial_tmp.worker2 = createObject("council_guard","locWorker2");
+				setRefName(tutorial_tmp.worker2, "Arbeiter");
+				
+				tutorial_tmp.bguard1 = createObject("council_guard","locDoorGuardNorth");
+				setRefName(tutorial_tmp.bguard1, "Wache");
+				lookAt(tutorial_tmp.bguard1,getLocation("locBehemoth"));
+				
+				tutorial_tmp.bguard2 = createObject("council_guard","locDoorGuardWest");
+				setRefName(tutorial_tmp.bguard2, "Wache");
+				lookAt(tutorial_tmp.bguard2,getLocation("locBehemoth"));
+				
+				addCameraPosition(0,"locBehemothStart" , 90,20, 50);
+				startTimer("behemoth_attack1",2000);
+			</Effect>
+		</Event>
+		
+		<Event trigger="behemoth_attack1" once="true">
+			<Effect>
+				-- TODO: Explosionen
+				addUnitCommand(tutorial_tmp.behemoth,"attack","locDestroyedWall");
+				startTimer("destroy_wall",1500);
+				addUnitCommand(tutorial_tmp.behemoth,"attack",tutorial_tmp.worker2);
+				addUnitCommand(tutorial_tmp.behemoth,"walk","locBehemoth");
+				startTimer("closeBehemothDoor1",10000);
+			</Effect>
+		</Event>
+		
+		<Event trigger="destroy_wall" once="true">
+			<Effect>
+				deleteObject(tutorial_tmp.destroyed_wall)
+				unitSpeak(tutorial_tmp.worker,_("*Argh!!!*"));
+				set(tutorial_tmp.worker,"health",0);
+			</Effect>
+		</Event>
+		
+		<Event trigger="unit_hit" once="true">
+			<Condition>
+				return (trigger.defender == tutorial_tmp.worker2);
+			</Condition>	
+			<Effect>
+				set(tutorial_tmp.worker2,"health",0);
+			</Effect>	
+		</Event>
+		
+		<Event trigger="closeBehemothDoor1" once="true">
+			<Effect>
+				addCameraPosition(500, "locDoorGuardWest" , 0,30, 20);
+				unitSpeak(tutorial_tmp.bguard2,_("Bei Marek! Verschließt die Tore!!!"));
+				timedExecute("createObject('konz_wall1','locDoorBehemothWest')",1500);
+				startTimer("closeBehemothDoor2",2500);
+			</Effect>
+		</Event>
+		
+		<Event trigger="closeBehemothDoor2" once="true">
+			<Effect>
+				addCameraPosition(500, "locDoorGuardNorth" , 90,30, 20);
+				timedExecute("createObject('konz_wall1','locDoorBehemothNorth',90)",1500);
+				startTimer("explain_fight",2500);
+			</Effect>
+		</Event>
+		
+		<Event trigger="explain_fight" once="true">
+			<Effect>
+				setCutsceneMode(false);
+				assembleParty("elCnlLobby","locWaypoint2");
+				createDialogue();
+				addAllPlayersToDialog();
+				addSpeaker(tutorial_tmp.tolec,"Tolec");
+				addSpeaker(tutorial_tmp.derred,"Derred");
+				
+				local solo = (getPlayers()[2] == nil);
+				addStandardRoles();
+				
+				local leader = getSpeaker("PL");
+				local waropt = getSpeaker("waropt");
+				local mage = getSpeaker("mage");
+				
+				speak("Tolec",_("Mareks Schild! Das DING ist frei! Alle zurück! Los, los, los!"));
+				speak("Derred",_("Da kommen wir nicht vorbei. Was machen wir jetzt?"));
+				speak("PL",_("Ist das Ding da echt so schlimm?"));
+				speak("Derred",_("Habt ihr keine Augen im Kopf? Das Teil ist riesig!"));
+				speak("waropt",_("Größe ist nicht alles."));
+				speak("arcopt",_("Sieht für mich aus wie die Fahrkarte nach draußen. Kann nicht schmerzhafter sein als die Ankunft."));
+				speak("Tolec",_("Äh ja... deswegen..."));
+				speak("priopt",_("Was?"));
+				speak("Tolec",_("Der Lord Magister Windklaue befürchtete, Ihr könntet Euch nach eurem Eintreffen selbst entleiben, um wieder zu verschwinden, deswegen hat er... Maßnahmen getroffen"));
+				
+				executeInDialog("addUnitCommand("..waropt..",'walk',tutorial_tmp.tolec)");
+				speak("waropt",_("Maßnahmen?"));
+				speak("Derred",_("Nun, wir verstehen nicht viel davon, aber anscheinend sterbt Ihr nicht, sondern könnt einfach, wo Ihr wollt wiederauferstehen, nachdem euer Körper zerstört wurde."));
+				if (not solo) then
+					speak("priopt",_("Und? Niemand von uns hat um diese Fähigkeit gebeten."));
+				else
+					speak("priopt",_("Und? Ich habe nicht um diese Fähigkeit gebeten."));
+				end;
+				
+				speak("Derred",_("Nun, in eurem jetzigen Zustand könnt ihr das nur an Orten großer magischer Konzentration, die ihr bereits besucht habt. Mit anderen Worten..."));
+				speak("waropt",_("...nur dahinten bei dem ganzen Krempel."));
+				if (mage ~= waropt and waropt ~= 0) then
+					speak("mage",_("Krempel würde ich das nicht unbedingt nennen."))
+				end;
+				
+				speak("Tolec",_("Genau, nur an dieser Stelle."));
+				speak("PL",_("Es wird Zeit, dass wir mit diesem Windklaue reden. Scheint ja ein gewitztes Kerlchen zu sein."));
+				speak("arcopt",_("Ist sicher nicht allzu gesund so gewitzt zu sein."));
+				speak("Derred",_("Äh, ja, gut. Da der Weg nach vorne momentan versperrt ist, müssen wir wohl versuchen, durch das Gehege mit den neuen Experimenten zu kommen."))
+				speak("Derred",_("Es gibt da eine Hintertür für die Fütterung und angeblich..."));
+				speak("Tolec",_("...hat sich der alte Feuerwirbel eine Geheimtür als Direktverbindung zur Küche eingebaut. Das könnte klappen! Aber die Viecher sind nicht ungefährlich."));
+				speak("Derred",_("Das sind doch nur diese Schnecklinge."));
+				speak("Tolec",_("Na, ich weiß ja nicht... ich hab keine Lust, nur wegen so einem schleimigen Feueratem drei Wochen das Bett zu hüten."));
+				
+				if (not solo) then
+					speak("priopt", _("Bei Harad! Das kann man sich ja unmöglich antun. Gebt uns unsere Waffen und wir kümmern uns darum."));
+				else
+					speak("priopt", _("Bei Harad! Das kann man sich ja unmöglich antun. Gib mir meine  Waffe und ich kümmere mich darum."));
+				end;
+				speak("Derred",_("Nun, da habt Ihr nicht unrecht..."));
+				speak("Tolec",_("Ja, in Anbetracht der schwierigen Umstände können wir das wohl machen. Hier bittesehr."));
+				
+				speak("warrior",_("Was soll das denn sein? Wo ist meine Waffe?"));
+				speak("Tolec",_("Ähm... Lord Magister Windklaue befürchtete, dass es zu einer Situation kommen könnte, in der ihr auf, äh, Waffengewalt zurückgreifen müsst. Deswegen hat er uns diese hier mitgegeben."));
+				speak("Derred",_("Ihr versteht sicherlich, dass ihr hier nicht mit ungeprüften Waffen umherlaufen könnt."));
+				
+				speak("waropt",_("Langsam fangt ihr an zu nerven."));
+				speak("arcopt",_("Woran hat der eigentlich nicht gedacht? Der ist doch eindeutig paranoid."));
+				-- TODO: Waffen ins Inventar legen
+				-- noch nicht anlegen !
+				speak("Derred",_("Ihr... könnt euch noch erinnern, wie man eine Waffe benutzt richtig? Uns wurde gesagt, dass die ersten Minuten sind, als träte man zum ersten Mal in die Welt."));
+				
+				tutorial.phase = "fightslugs";
+				setTopicBase("Derred");
+				addQuestion(_("Inventar erklären?"));
+				addAnswer("Ja","explain_inventory");
+				addAnswer("Nein","explain_inv_no");
+			</Effect>
+		</Event>
+	</Region>
+	
+	<NPC refname="Derred">
+		<Topic name="explain_inventory" start_option="Inventar erklären">
+			<Condition>
+				return (tutorial.phase == "fightslugs" and tutorial_tmp.slugdoor_open ~= true)
+			</Condition>
+			<Effect>
+				speak("Derred",_("Zuerst müsst Ihr euer Inventar öffnen. Dies tut ihr standardmäßig mit der 'i'-Taste. Alternativ könnt ihr auch auf den Inventarknopf unten in der Statusleiste drücken."));
+				speak("Derred",_("Im Inventar seht ihr dann Eure Gegenstände. Sie sind unterteilt nach ihrer Größe."));
+				speak("Derred",_("Die Waffe, die Ihr gerade 	erhalten habt ist ein mittelgroßer Gegenstand und befindet sich deshalb im mittleren Feld"));
+				speak("Derred",_("Klickt die Waffe mit der linken Maustaste an und klickt danach auf das Waffenfeld in Eurer Ausrüstung über dem Inventar. Und schon habt ihr sie angelegt."));
+				changeTopic("explain_inv_no");
+			</Effect>
+		</Topic>
+		<Topic name="explain_inv_no">
+			<Effect>
+				speak("Derred",_("Sprecht mit Tolec sobald ihr bereit seid"));
+			</Effect>
+		</Topic>
 	</NPC>
 	
 </Quest>
