@@ -157,13 +157,15 @@ void DialogueWindow::update()
 	
 	if (bar_vis)
 	{
+		CEGUI::Window* wimage;
+		CEGUI::Window* wname;
+		CEGUI::Window* wtext;
+		
 		Dialogue* dia =  reg->getDialogue( player->getDialogueId() );
 		if (dia != 0)
 		{
 			// Schleife fuer die 4 moeglichen Sprecher eines Dialogs
-			CEGUI::Window* wimage;
-			CEGUI::Window* wname;
-			CEGUI::Window* wtext;
+		
 			
 			std::string image, name, text;
 			
@@ -251,6 +253,31 @@ void DialogueWindow::update()
 				}
 			}
 		}
+		else
+		{
+			for (int i=0; i<4; i++)
+			{
+				std::stringstream stream;
+				stream.str("");
+				stream << "SpeakerEmotionImage";
+				stream << i;
+				wimage = win_mgr.getWindow(stream.str());
+						
+				stream.str("");
+				stream << "SpeakerNameLabel";
+				stream << i;
+				wname = win_mgr.getWindow(stream.str());
+				
+				stream.str("");
+				stream << "SpeakerTextLabel";
+				stream << i;
+				wtext = win_mgr.getWindow(stream.str());
+				
+				wimage->setVisible(false);
+				wname->setVisible(false);
+				wtext->setVisible(false);
+			}
+		}
 	}
 	
 	updateSpeechBubbles();
@@ -284,11 +311,15 @@ void DialogueWindow::updateSpeechBubbles()
 	std::list<WorldObject*> objs;
 	std::list<WorldObject*>::iterator it;
 	
+	float r = 20;
+	if (player->getRegion()->getCutsceneMode () == true)
+		r = 1000;
+	
 	Shape s;
 	s.m_center = player->getShape()->m_center;
 	s.m_type = Shape::RECT;
-	s.m_extent = Vector(20,20);
-	player->getRegion()->getObjectsInShape(&s,&objs);
+	s.m_extent = Vector(r,r);
+	player->getRegion()->getObjectsInShape(&s,&objs,WorldObject::LAYER_ALL,WorldObject::CREATURE);
 	
 	std::pair<float,float> pos;
 	
@@ -316,10 +347,11 @@ void DialogueWindow::updateSpeechBubbles()
 		cr = static_cast<Creature*>(*it);
 		pos = m_scene->getProjection(cr->getShape()->m_center,2.5f);
 		
+		
 		// nur Kreaturen behandeln, die wirklich zu sehen sind
 		if (pos.first <0 || pos.first >1 || pos.second <0 || pos.second >1)
 			continue;
-		
+				
 		text = cr->getSpeakText().m_text;
 		
 		if (text == "")
@@ -333,9 +365,9 @@ void DialogueWindow::updateSpeechBubbles()
 			continue;
 		}
 		
-		// Wenn der Spieler sich in einem Gespraech befindet, nur die dazugehoerigen Texte darstellen
+		// Wenn der Spieler sich in einem Gespraech befindet, die dazugehoerigen Texte darstellen nicht hier darstellen
 		// diese werden in den Balken dargestellt
-		if (bar_vis)
+		if (cr->getDialogueId() !=0 && cr->getDialogueId() == player->getDialogueId())
 			continue;
 		
 		stream.str("");
@@ -373,7 +405,7 @@ void DialogueWindow::updateSpeechBubbles()
 			CEGUI::Rect rect = game_screen->getInnerRect();
 			
 			// Testen ob der Text auf eine Zeile passt
-			float maxwidth = rect.getWidth()/6;
+			float maxwidth = rect.getWidth()/4;
 			if (width < maxwidth)
 			{
 				// einzelne Zeile
@@ -459,7 +491,7 @@ void DialogueWindow::updateSpeechBubbles()
 		float horzoffset = 10;
 		
 		CEGUI::Rect rect = game_screen->getInnerRect();
-		float maxwidth = rect.getWidth()/6;
+		float maxwidth = rect.getWidth()/4;
 		rect.setWidth(maxwidth-15);
 		
 		CEGUI::Font* font = label->getFont();

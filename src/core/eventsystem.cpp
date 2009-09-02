@@ -725,6 +725,7 @@ int EventSystem::createObject(lua_State *L)
 			if (argc>=3 && lua_isnumber(L,3))
 			{
 				angle = lua_tonumber(L, 3);
+				angle *= 3.14159 / 180;
 			}
 			if (argc>=4 && lua_isnumber(L,4))
 			{
