@@ -1078,7 +1078,7 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 			if (goalobj->isCreature() && getDialogueId() ==0)
 			{
 				cr = static_cast<Creature*>(goalobj);
-				if (cr->getDialogueId() ==0)
+				if (cr->getDialogueId() ==0 && !(cr->hasScriptCommand()))
 				{
 					Dialogue* dia = new Dialogue(getRegion(), cr->getRefName());
 					EventSystem::setDialogue(dia);
