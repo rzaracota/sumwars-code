@@ -96,6 +96,7 @@ void EventSystem::init()
 	lua_register(m_lua, "getSpeaker", getSpeaker);
 	lua_register(m_lua, "setDialogueActive", setDialogueActive);
 	lua_register(m_lua, "setCurrentDialogue", setCurrentDialogue);
+	lua_register(m_lua, "executeInDialog",executeInDialog);
 	
 	lua_register(m_lua, "setRefName", setRefName);
 	lua_register(m_lua, "getRolePlayers", getRolePlayers);
@@ -1603,7 +1604,27 @@ int EventSystem::jumpTopic(lua_State *L)
 
 	return 0;
 }
-		  
+
+int EventSystem::executeInDialog(lua_State *L)
+{
+	if (m_dialogue ==0)
+		return 0;
+	
+	int argc = lua_gettop(L);
+	if (argc>=1 && lua_isstring(L,1))
+	{
+		std::string code = lua_tostring(L, 1);
+		m_dialogue->speak("","#execute#",code);
+	}
+	else
+	{
+		ERRORMSG("Syntax: executeInDialog(luacode)");
+	}
+
+	return 0;
+}
+
+
 int EventSystem::createDialogue(lua_State *L)
 {
 	if (m_region ==0)

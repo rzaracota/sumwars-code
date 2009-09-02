@@ -178,6 +178,9 @@ void Dialogue::cleanup()
 
 void Dialogue::addSpeaker(int id, std::string refname)
 {
+	if (id ==0)
+		return;
+	
 	// Pruefen, ob die Kreatur existiert
 	WorldObject* wo =0;
 	wo = m_region->getObject(id);
@@ -601,13 +604,20 @@ void Dialogue::update(float time)
 					break;
 				}
 				
+				if (m_speech.front().second.m_text == "#execute#")
+				{
+					EventSystem::doString(m_speech.front().second.m_emotion.c_str());
+					m_speech.pop_front();
+					continue;
+				}
+				
 				id = getSpeaker(m_speech.front().first);
 				wo = m_region->getObject(id );
 				cr = static_cast<Creature*>(wo);
 
 				if (cr ==0 && m_speech.front().first!="nobody")
 				{
-					DEBUG("cant speak text %s %s",m_speech.front().first.c_str(),m_speech.front().second.m_text.c_str());
+					DEBUG5("cant speak text %s %s",m_speech.front().first.c_str(),m_speech.front().second.m_text.c_str());
 					m_speech.pop_front();
 					continue;
 				}

@@ -432,6 +432,12 @@ class EventSystem
 		static int jumpTopic(lua_State *L);
 		
 		/**
+		 * \fn static int executeInDialog(lua_State *L)
+		 * \brief Fuehrt innerhalb eines Dialogs ein Stueck Script aus
+		 */
+		static int executeInDialog(lua_State *L);
+		
+		/**
 		 * \fn static int createDialogue(lua_State *L)
 		 * \brief Erzeugt einen neuen Dialog
 		 * \param L Lua Status
