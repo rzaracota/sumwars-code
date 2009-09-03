@@ -9,3 +9,10 @@ function listToString(list)
 		end;
 		return str.."}";
 end;
+
+function locnameToLocation(loc)
+	if (type(loc) == "string") then
+		loc = getLocation(loc);
+	end;
+	return loc;
+end;
