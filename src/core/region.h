@@ -1120,6 +1120,18 @@ class Region
 		{
 			m_teleport_players.insert(std::make_pair(playerid,regionloc));
 		}
+		
+		/**
+		 * \fn void setNamedId(std::string name, int id)
+		 * \brief Speichert Id unter einem bestimmten Name
+		 */
+		void setNamedId(std::string name, int id);
+		
+		/**
+		 * \fn int getIdByName(std::string name)
+		 * \brief Gibt die ID mit dem angegebenen Name aus
+		 */
+		int getIdByName(std::string name);
 
 		
 	private:
@@ -1285,6 +1297,12 @@ class Region
 		 * \brief Liste der Spieler die sich aus der Region per Wegpunkt entfernen
 		 */
 		std::map<int,RegionLocation>  m_teleport_players;
+		
+		/**
+		 * \var std::map<std::string,int> m_name_ids
+		 * \brief Ids benamter Objekte
+		 */
+		std::map<std::string,int> m_name_ids;
 		
 		/**
 		 * \var RegionCamera m_camera

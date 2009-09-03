@@ -314,6 +314,18 @@ class EventSystem
 		static int getObjectsInArea(lua_State *L);
 		
 		/**
+		 * \fn static int setObjectNameRef(lua_State *L)
+		 * \brief Setzt fuer ein Objekt einen Referenzname
+		 */
+		static int setObjectNameRef(lua_State *L);
+		
+		/**
+		 * \fn static int getObjectByNameRef(lua_State *L)
+		 * \brief Gibt das Objekt mit dem angegebenen Referenzname aus
+		 */
+		static int getObjectByNameRef(lua_State *L);
+		
+		/**
 		 * \fn static int dropItem(lua_State *L)
 		 * \brief Laesst einen Gegenstand fallen
 		 * \param L Lua Status

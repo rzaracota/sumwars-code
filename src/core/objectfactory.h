@@ -136,6 +136,12 @@ class ObjectGroupTemplate
 			ObjectTemplateType m_type;
 			
 			/**
+			 * \var std::string m_name
+			 * \brief Name des Objektes. Der Name wird nur registriert, wenn er nicht leer ist
+			 */
+			std::string m_name;
+			
+			/**
 			 * \var Vector m_center
 			 * \brief Ortsvektor des Mittelpunktes relativ zum Mittelpunkt des Templates
 			 */

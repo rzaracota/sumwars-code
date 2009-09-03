@@ -969,7 +969,7 @@ void Region::createObjectGroup(ObjectGroupTemplateName templname, Vector positio
 
 	if (templ != 0)
 	{
-		if (name != "" || !(templ->getLocations()->empty()))
+		if (name != "")
 		{
 			tr = new Trigger("create_template");
 			tr->addVariable("templname",templname);
@@ -1014,7 +1014,15 @@ void Region::createObjectGroup(ObjectGroupTemplateName templname, Vector positio
 
 				int id = createObject(gt->m_type, pos, angle+oangle,gt->m_height);
 				DEBUG5("inserting object %s at %f %f with id %i",gt->m_type.c_str(),pos.m_x, pos.m_y,id);
-
+				
+				if (gt->m_name != "")
+				{
+					setNamedId(gt->m_name,id);
+					if (tr != 0)
+					{
+						tr->addVariable(gt->m_name,id);
+					}
+				}
 			}
 		}
 
@@ -1027,7 +1035,10 @@ void Region::createObjectGroup(ObjectGroupTemplateName templname, Vector positio
 			pos += position;
 
 			addLocation(lt->first,pos);
-			tr->addVariable(lt->first,pos);
+			if (tr != 0)
+			{
+				tr->addVariable(lt->first,pos);
+			}
 			DEBUG5("template location %s",lt->first.c_str());
 		}
 		
@@ -2591,4 +2602,19 @@ void Region::deleteDialogue(Dialogue* dia)
 	}
 	
 	delete dia;
+}
+
+void Region::setNamedId(std::string name, int id)
+{
+	m_name_ids[name] = id;
+}
+
+int Region::getIdByName(std::string name)
+{
+	std::map<std::string,int>::iterator it;
+	it = m_name_ids.find(name);
+	if (it == m_name_ids.end())
+		return 0;
+	
+	return it->second;
 }

@@ -183,6 +183,7 @@ bool TemplateLoader::loadObjectGroupTemplate(TiXmlNode* node)
 								attr.getFloat("center_x",obj.m_center.m_x);
 								attr.getFloat("center_y",obj.m_center.m_y);
 								attr.getString("subtype",obj.m_type);
+								attr.getString("name",obj.m_name);
 								attr.getFloat("angle",obj.m_angle,0.0);
 								attr.getFloat("height",obj.m_height,0.0);
 								attr.getFloat("probability",obj.m_probability,1.0);

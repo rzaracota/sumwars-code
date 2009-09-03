@@ -50,6 +50,9 @@ void EventSystem::init()
 	lua_register(m_lua, "unitIsInArea", unitIsInArea);
 	lua_register(m_lua, "objectIsInArea", unitIsInArea);
 	
+	lua_register(m_lua, "setObjectNameRef",setObjectNameRef);
+	lua_register(m_lua, "getObjectByNameRef",getObjectByNameRef);
+	
 	lua_register(m_lua, "createObject", createObject);
 	lua_register(m_lua, "createScriptObject", createScriptObject);
 	lua_register(m_lua, "deleteObject", deleteObject);
@@ -706,6 +709,47 @@ int EventSystem::pointIsInArea(lua_State *L)
 
 	lua_pushboolean(EventSystem::getLuaState() , ret);
 	return 1;
+}
+
+int EventSystem::setObjectNameRef(lua_State *L)
+{
+	int argc = lua_gettop(L);
+	if (argc>=2 && lua_isnumber(L,1)  && lua_isstring(L,2))
+	{
+		int id = lua_tonumber(L,1);
+		std::string name = lua_tostring(L,2);
+		
+		
+		if (m_region !=0)
+		{
+			m_region->setNamedId(name,id);
+		}
+	}
+	else
+	{
+		ERRORMSG("Syntax: setObjectNameRef(int id, string name)");
+	}
+	return 0;
+}
+
+int EventSystem::getObjectByNameRef(lua_State *L)
+{
+	int argc = lua_gettop(L);
+	if (argc>=1 &&  lua_isstring(L,1))
+	{
+		std::string name = lua_tostring(L,1);
+		if (m_region !=0)
+		{
+			int id = m_region->getIdByName(name);
+			lua_pushnumber(L, id);
+			return 1;
+		}
+	}
+	else
+	{
+		ERRORMSG("Syntax: getObjectByNameRef(string name)");
+	}
+	return 0;
 }
 
 int EventSystem::createObject(lua_State *L)
