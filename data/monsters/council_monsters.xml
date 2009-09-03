@@ -199,7 +199,7 @@
 </MonsterGroup>
 
 <MonsterGroup name="slugs" >
-	<SubGroup subtype="fireSlug" number="20" prob="0.7" />
+	<SubGroup subtype="fireSlug" number="10" prob="1.0" />
 </MonsterGroup>
 
 <MonsterGroup name="louses" >
@@ -209,3 +209,8 @@
 <MonsterGroup name="theThingFromTheDarkAbyssOfFire" >
 	<SubGroup subtype="infBehemoth" number="1" prob="1.0" />
 </MonsterGroup>
+
+<MonsterGroup name="tutorialSlugs" >
+	<SubGroup subtype="fireSlug" number="10" prob="1.0" />
+</MonsterGroup>
+

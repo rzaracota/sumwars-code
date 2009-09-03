@@ -1,9 +1,8 @@
 <Quest name="Tutorial" table_name="tutorial">
 	
 	<Init>
-		-- Anzahl getoeteter Schnecken
-		tutorial.slugs =0;
 		tutorial.phase="intro"
+		tutorial.phasenr =0;
 	</Init>
 	
 	<Description>
@@ -24,21 +23,49 @@
 	<Region name="elCnlLobby">
 		<Event trigger="create_region" once="true">
 			<Effect>
-				addArea("entryPlayerArea","circle","locEntryPlayer",5);
-				addArea("waypoint1Area","circle","locWay1",8);
-				addArea("waypoint2Area","circle","locWay2",8);
+				if (tutorial.finished == false) then
+					addArea("entryPlayerArea","circle","locEntryPlayer",5);
+					addArea("waypoint1Area","circle","locWay1",8);
+					addArea("waypoint2Area","circle","locWay2",8);
+					
+					local tolecpos = "locTolec";
+					local derredpos = "locDerred";
+					if (tutorial.phase == "fightslugs") then
+						tolecpos = "locWay2";
+						derredpos = "locWay2";
+					end;
+					if (tutorial.phase == "findSecretDoor") then
+						tolecpos = "locSlugs";
+						derredpos = "locSlugs";
+					end;
+					
+					tutorial_tmp.tolec = createObject("council_guard", tolecpos);
+					setRefName(tutorial_tmp.tolec, "Tolec");
+					
+					tutorial_tmp.derred = createObject("council_guard", derredpos);
+					setRefName(tutorial_tmp.derred, "Derred");
+					
+					-- nur bei den Phasen intro, learnwalk, fightslugs
+					if (2 >= tutorial.phasenr) then
+						createMonsterGroup("tutorialSlugs","locSlugs",10);
+						tutorial_tmp.slugdoor = createObject('konz_wall1','locSlugFarmBackdoor',90);
+					end;
+					
+					tutorial_tmp.bguard1 = createObject("council_guard","locDoorGuardNorth");
+					setRefName(tutorial_tmp.bguard1, "Wache");
+					lookAt(tutorial_tmp.bguard1,getLocation("locBehemoth"));
 				
-				local tolecpos = "locTolec";
-				tutorial_tmp.tolec = createObject("council_guard", tolecpos);
-				setRefName(tutorial_tmp.tolec, "Tolec");
-				lookAt(tutorial_tmp.tolec,getLocation("locEntryPlayer"));
-				
-				local derredpos = "locDerred";
-				tutorial_tmp.derred = createObject("council_guard", derredpos);
-				setRefName(tutorial_tmp.derred, "Derred");
-				lookAt(tutorial_tmp.derred,getLocation("locEntryPlayer"));
-				
-				tutorial_tmp.destroyed_wall = createObject("konz_wall1","locDestroyedWall",90)
+					tutorial_tmp.bguard2 = createObject("council_guard","locDoorGuardWest");
+					setRefName(tutorial_tmp.bguard2, "Wache");
+					lookAt(tutorial_tmp.bguard2,getLocation("locBehemoth"));
+					
+					-- ab Phase fightslugs
+					if (tutorial.phasenr > 1) then
+						tutorial_tmp.behemoth = createObject("infBehemoth","locBehemoth");
+						createObject('konz_wall1','locDoorBehemothWest')
+						createObject('konz_wall1','locDoorBehemothNorth',90)
+					end;
+				end;
 			</Effect>
 		</Event>
 		
@@ -51,15 +78,30 @@
 				end;
 			</Condition>
 			<Effect>
+				assembleParty("elCnlLobby","locEntryPlayer","locDerred");
+				tutorial_tmp.assemble = "intro";
+			</Effect>
+		</Event>
+		<Event trigger="party_complete" once="true">
+			<Condition>
+				return (tutorial_tmp.assemble == "intro");
+			</Condition>
+			<Effect>
+				tutorial_tmp.assemble = nil;
+				groupObjectsArc(getPlayers(),"locEntryPlayer","locDerred");
 				tutorial.started = true;
 				createDialogue();
 				addAllPlayersToDialog();
 				addSpeaker(tutorial_tmp.tolec,"Tolec");
 				addSpeaker(tutorial_tmp.derred,"Derred");
+				
 				local leader = getRolePlayer("leader");
 				local blockedspeaker={};
 				blockedspeaker[leader] = true;
 				local solo = (getPlayers()[2] == nil);
+				
+				lookAtObject(tutorial_tmp.tolec,leader);
+				lookAtObject(tutorial_tmp.derred,leader);
 				
 				addSpeaker(leader,"PL");
 				speak("PL",_("*args*"));
@@ -196,6 +238,7 @@
 				speak("Derred",_("Sehr Gut. Folgt mir bitte."));
 				
 				tutorial.phase="learnwalk"
+				tutorial.phasenr =1;
 				insertTrigger("start_learnwalk");
 			</Effect>
 		</Topic>
@@ -333,16 +376,12 @@
 				tutorial_tmp.worker2 = createObject("council_guard","locWorker2");
 				setRefName(tutorial_tmp.worker2, "Arbeiter");
 				
-				tutorial_tmp.bguard1 = createObject("council_guard","locDoorGuardNorth");
-				setRefName(tutorial_tmp.bguard1, "Wache");
-				lookAt(tutorial_tmp.bguard1,getLocation("locBehemoth"));
 				
-				tutorial_tmp.bguard2 = createObject("council_guard","locDoorGuardWest");
-				setRefName(tutorial_tmp.bguard2, "Wache");
-				lookAt(tutorial_tmp.bguard2,getLocation("locBehemoth"));
 				
 				addCameraPosition(0,"locBehemothStart" , 90,20, 50);
 				startTimer("behemoth_attack1",2000);
+				
+				tutorial_tmp.destroyed_wall = createObject("konz_wall1","locDestroyedWall",90)
 			</Effect>
 		</Event>
 		
@@ -395,6 +434,15 @@
 			<Effect>
 				setCutsceneMode(false);
 				assembleParty("elCnlLobby","locWaypoint2");
+				tutorial_tmp.assemble = "explain_fight";
+				</Effect>
+		</Event>
+		<Event trigger="party_complete" once="true">
+			<Condition>
+				return (tutorial_tmp.assemble == "explain_fight");
+			</Condition>
+			<Effect>
+				tutorial_tmp.assemble = nil;
 				createDialogue();
 				addAllPlayersToDialog();
 				addSpeaker(tutorial_tmp.tolec,"Tolec");
@@ -406,6 +454,9 @@
 				local leader = getSpeaker("PL");
 				local waropt = getSpeaker("waropt");
 				local mage = getSpeaker("mage");
+				
+				lookAtObject(tutorial_tmp.tolec,leader);
+				lookAtObject(tutorial_tmp.derred,leader);
 				
 				speak("Tolec",_("Mareks Schild! Das DING ist frei! Alle zurück! Los, los, los!"));
 				speak("Derred",_("Da kommen wir nicht vorbei. Was machen wir jetzt?"));
@@ -460,6 +511,8 @@
 				speak("Derred",_("Ihr... könnt euch noch erinnern, wie man eine Waffe benutzt richtig? Uns wurde gesagt, dass die ersten Minuten sind, als träte man zum ersten Mal in die Welt."));
 				
 				tutorial.phase = "fightslugs";
+				tutorial.phasenr = 2;
+				
 				setTopicBase("Derred");
 				addQuestion(_("Inventar erklären?"));
 				addAnswer("Ja","explain_inventory");
@@ -488,5 +541,178 @@
 		</Topic>
 	</NPC>
 	
+	<NPC refname="Tolec">
+		<Topic name="attack_slugs" start_option="Schnecken angreifen">
+			<Condition>
+				return (tutorial.phase == "fightslugs" and tutorial_tmp.slugdoor_open ~= true)
+			</Condition>
+			<Effect>
+				addSpeaker(tutorial_tmp.derred,"Derred");
+				addStandardRoles();
+				addAllPlayersToDialog();
+				local solo = (getPlayers()[2] == nil);
+				
+				speak("Tolec",_("Aber wir ihr kämpft wisst ihr doch noch, oder?"));
+				speak("PL",_("Reingehen, anklicken, töten. Das vergisst man niemals als Gezeichneter."));
+				speak("Derred",_("Anklicken?"));
+				speak("Tolec",_("Keine Ahnung, der Lord Magister hat gesagt, die verstehen das schon."));
+				speak("waropt",_("Lasst uns diese Experimente das Fürchten lehren!"));
+				speak("arcopt",_("Ich hoffe, die haben auch eine Seele."))
+				if (getSpeaker("priopt") ~= getSpeaker("arcopt")) then
+					speak("priopt",_("Keine Sorge. Selbst ein Golem hat eine. Da werden die Dinger keine Ausnahme sein."));
+				end;
+				speak("Tolec",_("Sehr gut, haltet uns einfach diese Dinger vom Hals, während wir versuchen die Luke zu  öffnen."));
+				speak("Derred",_("Ich geh da nicht rein, wenn die Viecher noch auf freiem Fuß sind!"));
+				
+				executeInDialog("startTimer('open_slugdoor',1500)");
+				-- TODO: Position von Tolec verbessern
+				executeInDialog("addUnitCommand(tutorial_tmp.tolec,'walk','locSlugFarmBackdoor')");
+			</Effect>
+		</Topic>
+	</NPC>
+	
+	<Region name="elCnlLobby">
+		<Event trigger="open_slugdoor" once="true">
+			<Effect>
+				tutorial_tmp.slugdoor_open = true;
+				deleteObject(tutorial_tmp.slugdoor)
+				tutorial_tmp.slugs =0;
+				
+				-- TODO: KI eleganter deaktivieren
+				clearUnitCommands(tutorial_tmp.tolec);
+				set(tutorial_tmp.tolec,"state","inactive");
+				set(tutorial_tmp.derred,"state","inactive");
+			</Effect>
+		</Event>
+		
+		<Event trigger="unit_dead">
+			<Condition>
+				return (tutorial.phase == "fightslugs" and get(trigger.unit,"subtype") == "fireSlug")
+			</Condition>
+			<Effect>
+				tutorial_tmp.slugs = tutorial_tmp.slugs +1;
+				if (tutorial_tmp.slugs == 10) then
+					set(tutorial_tmp.tolec,"state","active");
+					set(tutorial_tmp.derred,"state","active");
+					addUnitCommand(tutorial_tmp.tolec,'walk',"locSlugs");
+					addUnitCommand(tutorial_tmp.derred,'walk',"locSlugs");
+				end
+			</Effect>
+		</Event>
+		
+		<Event trigger="command_complete" once="true">
+			<Condition>
+				return (tutorial.phase == "fightslugs" and tutorial_tmp.slugs == 10 and trigger.unit == tutorial_tmp.tolec)
+			</Condition>
+			<Effect>
+				assembleParty("elCnlLobby","locSlugs");
+				tutorial_tmp.assemble = "fightslugs";
+				</Effect>
+		</Event>
+		<Event trigger="party_complete" once="true">
+			<Condition>
+				return (tutorial_tmp.assemble == "fightslugs");
+			</Condition>
+			<Effect>
+				tutorial_tmp.assemble = nil;
+				groupObjectsArc(getPlayers(),"locWaypoint2","locSlugs");
+				
+				createDialogue();
+				addSpeaker(tutorial_tmp.derred,"Derred");
+				addSpeaker(tutorial_tmp.tolec,"Tolec");
+				addStandardRoles();
+				addAllPlayersToDialog();
+				
+				speak("Derred",_("Ihh, die Dinger sind echt widerlich"));
+				speak("any",_("Was seid ihr denn für Mimosen?"));
+				speak("Derred",_("Suchst du streit, du Schwächling?!"));
+				speak("Tolec",_("Warte mal, irgendwie sind sie stärker geworden."));
+				speak("leader",_("Euer Hexenkram mag uns ja geschwächt haben, aber mit jeden getöteten Wesen nehmen wir einen Teil seiner Kraft auf und werden stärker."));
+				speak("any",_("Überleg dir also lieber, wen du hier Schwächling nennst!"));
+				speak("Tolec",_("Hm, stimmt der Lord Magister hat gesagt, das so etwas passieren kann. Wisst ihr auch, wie ihr diese Kraft in vernünftige Fähigkeiten umwandelt?"));
+				
+				tutorial_tmp.behemoth_show = true;
+				tutorial.phase = "findSecretDoor";
+				tutorial.phasenr = 3;
+				
+				setTopicBase("Tolec");
+				addQuestion("Levelup erklären?");
+				addAnswer("Ja","explain_levelup");
+				addAnswer("Nein","tutorial_lvlup_continue");
+				
+			</Effect>
+		</Event>
+	</Region>
+	
+	<NPC refname="Tolec">
+		<Topic name="explain_levelup" start_option="Levelup erklären">
+			<Condition>
+				return (tutorial.phase == "findSecretDoor" and tutorial_tmp.fooddoor_open ~= true)
+			</Condition>
+			<Effect>
+				addSpeaker(tutorial_tmp.derred,"Derred");
+				if (getSpeaker("priopt") == 0) then
+					addSpeaker(getSpeaker("player"),"priopt");
+				end;
+				speak("Tolec",_("Ihr könnt jedes Mal eure Attribute verbessern und von Zeit zu Zeit habt ihr sogar genug Energie für eine neue Fähigkeit."));
+				speak("Derred",_("Ja genau, das war doch das, mit dem großen Plus in der linken unteren Ecke. Klickt einfach darauf und verteilt dann im Attributfenster oben eure Attribut Punkte."));
+				speak("Tolec",_("Genau, und den Fähigkeitenpunkt könnt ihr im Fähigkeitenfenster verteilen. Der Lord Magister hat gesagt, dass ihr die aus drei verschiedenen Kategorien wählen könnt."));
+				speak("Derred",_("In Abhängigkeit von eurer... Charaktermasse"));
+				speak("Tolec",_("Charakterklasse."));
+				speak("Derred",_("Oh, genau!"));
+				
+				speak("priopt",_("Ich frage mich, woher dieser Soren so viel über die Gefallenen weiß..."));
+				speak("warrior",_("Magier sind äußerst merkwürdig. Alle."));
+				if (getSpeaker("warrior") ~= 0) then
+					speak("mage",_("Besser merkwürdig als..."));
+				end;
+				changeTopic("tutorial_lvlup_continue");
+			</Effect>
+		</Topic>
+		<Topic name="tutorial_lvlup_continue" >
+			<Effect>
+				if (tutorial_tmp.behemoth_show == true) then
+					insertTrigger("behemoth_show2");
+				end;
+			</Effect>
+		</Topic>
+	</NPC>
+	
+	<Region name="elCnlLobby">
+		<Event trigger="behemoth_show2" once="true">
+			<Effect>
+				startTimer("behemoth_show_end",6000);
+				setCutsceneMode(true);
+				local pos = getLocation("locBehemoth");
+				addCameraPosition(0,"locBehemoth" , 90,20, 50);
+				addCameraPosition(1000,"locBehemoth" , 90,20, 50);
+				local i
+				for i=1,50 do
+					addCameraPosition(100,{pos[1] + math.random(11)-6,pos[2]+ math.random(11)-6} , 90,20, 50);
+				end;
+				addCameraPosition(0,"locBehemoth" , 90,20, 50);
+				
+			</Effect>
+		</Event>
+		<Event trigger="behemoth_show_end" once="true">
+			<Effect>
+				setCutsceneMode(false);
+				createDialogue();
+				addAllPlayersToDialog();
+				addSpeaker(tutorial_tmp.tolec,"Tolec");
+				addSpeaker(tutorial_tmp.derred,"Derred");
+				
+				speak("Tolec",_("Dieses Verdammte Ding. Ich hoffe die Wände halten."))
+				speak("Derred",_("Verteilt schnell euren neuen Punkte und dann nichts wie weg von hier."));
+			</Effect>
+		</Event>
+		
+		<Event trigger="party_complete">
+			<Effect>
+				print("test")
+			</Effect>
+		</Event>
+	</Region>
+		
 </Quest>
 	
