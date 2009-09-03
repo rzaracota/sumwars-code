@@ -179,6 +179,13 @@ class EventSystem
 		static int setObjectValue(lua_State *L);
 		
 		/**
+		 * \fn static int moveObject(lua_State *L)
+		 * \brief Verschiebt ein Objekt an einen neuen Ort
+		 * \param L Lua Status
+		 */
+		static int moveObject(lua_State *L);
+		
+		/**
 		 * \fn static int objectIsInRegion(lua_State *L)
 		 * \brief Gibt aus, ob ein Objekt in der aktuellen Region ist
 		 * \param L Lua Status

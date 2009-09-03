@@ -45,6 +45,7 @@ void EventSystem::init()
 	lua_register(m_lua, "get", getObjectValue);
 	lua_register(m_lua, "setObjectValue", setObjectValue);
 	lua_register(m_lua, "set", setObjectValue);
+	lua_register(m_lua, "moveObject",moveObject);
 	lua_register(m_lua, "objectIsInRegion", objectIsInRegion);
 	lua_register(m_lua, "pointIsInArea", pointIsInArea);
 	lua_register(m_lua, "unitIsInArea", unitIsInArea);
@@ -446,6 +447,31 @@ int EventSystem::setObjectValue(lua_State *L)
 		ERRORMSG("Syntax: setObjectValue( int id, string valname, value)");
 	}
 
+	return 0;
+}
+
+int EventSystem::moveObject(lua_State *L)
+{
+	int argc = lua_gettop(L);
+	if (argc>=2 && lua_isnumber(L,1) && (lua_isstring(L,2) || lua_istable(L,2)))
+	{
+		int id = (int) lua_tonumber(L,1);
+		Vector pos = getVector(L,2);
+		
+		if (m_region ==0)
+			return 0;
+		
+		WorldObject* wo = m_region->getObject(id);
+		if (wo ==0)
+			return 0;
+		
+		wo->getRegion()->getFreePlace (wo->getShape(), wo->getLayer(), pos,wo);
+		wo->moveTo(pos);
+	}
+	else
+	{
+		ERRORMSG("Syntax: moveObject(int objectid, Vector pos)");
+	}
 	return 0;
 }
 
@@ -1870,7 +1896,6 @@ int EventSystem::teleportPlayer(lua_State *L)
 		RegionLocation regloc;
 		regloc.first = regname;
 		regloc.second = locname;
-
 		WorldObject* wo =World::getWorld()->getPlayer(id);
 		if (wo !=0 && wo->getRegion() !=0)
 		{
@@ -1880,16 +1905,20 @@ int EventSystem::teleportPlayer(lua_State *L)
 				Vector pos = wo->getRegion()->getLocation(locname);
 				wo->getRegion()->getFreePlace (wo->getShape(), wo->getLayer(), pos);
 				wo->moveTo(pos);
+				lua_pushboolean(L,false);
+				return 1;
 			}
 			else
 			{
 				wo->getRegion()->insertPlayerTeleport(wo->getId(),regloc);
+				lua_pushboolean(L,true);
+				return 1;
 			}
 		}
 	}
 	else
 	{
-		ERRORMSG("Syntax: objectIsInRegion( int playerid, string regionname, string locationname)");
+		ERRORMSG("Syntax: teleportPlayer(int playerid, string regionname, string locationname)");
 	}
 	return 0;
 }

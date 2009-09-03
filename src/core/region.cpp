@@ -823,6 +823,24 @@ bool Region::insertObject(WorldObject* object, Vector pos, float angle, bool col
 		tr->addVariable("player", object->getId());
 		insertTrigger(tr);
 
+		// pruefen ob Party komplett in der Region
+		Party* party = pl->getParty();
+		std::set< int > & members = party->getMembers();
+		std::set< int >::iterator it;
+		bool complete = true;
+		for (it = members.begin(); it != members.end(); ++it)
+		{
+			if (getObject(*it) == 0)
+			{
+				complete = false;
+			}
+		}
+		
+		if (complete)
+		{
+			tr = new Trigger("party_complete");
+			insertTrigger(tr);
+		}
 	}
 	else
 	{
