@@ -100,7 +100,8 @@ bool Creature::init()
 	m_medium_path_info=0;
 	m_big_path_info=0;
 	m_path_info=0;
-
+	m_pathfind_counter =0;
+	
 	// Timer nullen
 	m_timer1 =0;
 	m_timer2 =0;
@@ -1339,10 +1340,18 @@ void Creature::handleCollision(Shape* s2)
 
 	// neue Geschwindigkeit normieren
 	Vector speed = getSpeed();
-	speed.normalize();
 	DEBUG5("new speed %f %f", getSpeed().m_x, getSpeed().m_y);
-	speed *= getBaseAttr()->m_step_length/m_action.m_time;
-	setSpeed(speed);
+	if (speed.getLength() < 0.00001)
+	{
+		clearCommand(false);
+	}
+	else
+	{
+		speed.normalize();
+		DEBUG5("new speed %f %f", getSpeed().m_x, getSpeed().m_y);
+		speed *= getBaseAttr()->m_step_length/m_action.m_time;
+		setSpeed(speed);
+	}
 	
 }
 
@@ -1358,12 +1367,13 @@ void Creature::insertScriptCommand(Command &cmd, float time)
 		clearCommand(false);
 	}
 	m_script_commands.push_back(std::make_pair(cmd,time));	
-	DEBUG5("insert script command %s at %i",cmd.m_type.c_str(),cmd.m_goal_object_id);
+	DEBUG5("insert script command %s at %i flag %i",cmd.m_type.c_str(),cmd.m_goal_object_id,cmd.m_flags);
 }
 
 void Creature::clearScriptCommands()
 {
 	m_script_commands.clear();
+	m_script_command_timer =0;
 }
 
 
@@ -1383,6 +1393,7 @@ void Creature::updateCommand()
 			if (! (m_command.m_flags & Command::REPEAT) )
 			{
 				m_script_commands.pop_front();
+				
 			}
 			DEBUG5("script command %s at %i time %f",m_command.m_type.c_str(), m_command.m_goal_object_id, m_script_command_timer);
 		}
@@ -1951,17 +1962,39 @@ void Creature::calcWalkDir(Vector goal,WorldObject* goalobj)
 	else
 	{
 		// TODO: Wende über 90 Grad behandeln
+		Vector oldspeed = getSpeed();
+		if (oldspeed * dir <0)
+		{
+			DEBUG5("Wende um >180 Grad");
+			m_pathfind_counter +=10;
+			if (m_pathfind_counter == 30)
+			{
+				m_command.m_type = "noaction";
+				m_action.m_type = "noaction";
+				m_action.m_elapsed_time =0;
+				m_command.m_damage_mult=1;
+				addToNetEventMask(NetEvent::DATA_COMMAND | NetEvent::DATA_ACTION);
+				clearCommand(false);
+			}
+		}
+		else
+		{
+			m_pathfind_counter -=8;
+			if (m_pathfind_counter<0)
+				m_pathfind_counter =0;
+		}
+		
 		setSpeed(dir);
-
+		
 	}
 }
 
 void Creature::clearCommand(bool success)
 {
-	DEBUG5("clear command %s %f",m_command.m_type.c_str() , m_script_command_timer);
+	DEBUG5("%s clear command %s %f",getRefName().c_str(),m_command.m_type.c_str() , m_script_command_timer);
 	if (hasScriptCommand() && m_command.m_type!= "noaction")
 	{
-		DEBUG5("command %s ended with success %i",m_command.m_type.c_str(), success);
+		DEBUG5("command %s by %s ended with success %i",m_command.m_type.c_str(), getRefName().c_str(), success);
 		Trigger* tr = new Trigger("command_complete");
 		tr->addVariable("unit",getId());
 		tr->addVariable("command",m_command.m_type);

@@ -83,6 +83,7 @@ public:
 		m_goal_object_id= 0;
 		m_damage_mult=1;
 		m_range=1;
+		m_flags =0;
 	}
 	
 	/**

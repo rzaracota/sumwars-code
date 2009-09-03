@@ -852,7 +852,11 @@ private:
 		*/
 		PathfindInfo* m_path_info;
 		
-
+		/**
+		 * \var float m_pathfind_counter
+		 * \brief Zaehler, der zaehlt wie oft kein verbessernder Weg gefunden wurde, bei einem Wert von 3 wird der Befehl abgebrochen
+		 */
+		float m_pathfind_counter;
 };
 
 #endif //CREATURE_H

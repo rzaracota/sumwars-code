@@ -808,16 +808,22 @@ int EventSystem::createMonsterGroup(lua_State *L)
 		MonsterGroupName group= lua_tostring(L, 1);
 		Vector pos = getVector(L,2);
 
+		float radius = 3;
+		if (argc>=3 && lua_isstring(L,3))
+		{
+			radius = lua_tonumber(L,3);
+		}
+		
 		if (m_region!=0)
 		{
 
-			m_region->createMonsterGroup(group, pos);
+			m_region->createMonsterGroup(group, pos,radius);
 		}
-
+		
 	}
 	else
 	{
-		ERRORMSG("Syntax: createMonsterGroup( string monstergroup, {float x, float y}])");
+		ERRORMSG("Syntax: createMonsterGroup( string monstergroup, {float x, float y}[, float radius])");
 	}
 	return 0;
 }
