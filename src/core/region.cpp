@@ -1106,7 +1106,7 @@ void Region::createMonsterGroup(MonsterGroupName mgname, Vector position, float 
 			if (Random::random() < mt->m_prob)
 			{
 				count ++;
-				int id = createObject(mt->m_subtype, pos);
+				int id = createObject(mt->m_subtype, pos,2*3.14159*Random::random());
 				DEBUG5("inserting monster %s at %f %f with id %i",mt->m_subtype.c_str(),pos.m_x, pos.m_y,id);
 			}
 		}
