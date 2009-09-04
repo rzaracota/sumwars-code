@@ -1154,6 +1154,9 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 
 void Creature::collisionDetection(float time)
 {
+	if (getSpeed().getLength() < 0.000001)
+		return;
+	
 	WorldObjectList result;
 	// Punkt zu dem das Objekt bewegt werden soll
 	Vector newpos = getShape()->m_center + getSpeed()*time;
@@ -1341,9 +1344,15 @@ void Creature::handleCollision(Shape* s2)
 	// neue Geschwindigkeit normieren
 	Vector speed = getSpeed();
 	DEBUG5("new speed %f %f", getSpeed().m_x, getSpeed().m_y);
-	if (speed.getLength() < 0.00001)
+	if (speed.getLength() < 0.000001)
 	{
-		clearCommand(false);
+		setSpeed(Vector(0,0));
+		m_pathfind_counter +=15;
+		DEBUG5("counter %f",m_pathfind_counter);
+		if (m_pathfind_counter>=30)
+		{
+			clearCommand(false);
+		}
 	}
 	else
 	{
@@ -1951,12 +1960,11 @@ void Creature::calcWalkDir(Vector goal,WorldObject* goalobj)
 	
 	if (dir.getLength() ==0)
 	{
-		m_command.m_type = "noaction";
+		clearCommand(true);
 		m_action.m_type = "noaction";
 		m_action.m_elapsed_time =0;
 		m_command.m_damage_mult=1;
 		addToNetEventMask(NetEvent::DATA_COMMAND | NetEvent::DATA_ACTION);
-		clearCommand(true);
 		return;
 	}
 	else
@@ -1965,16 +1973,15 @@ void Creature::calcWalkDir(Vector goal,WorldObject* goalobj)
 		Vector oldspeed = getSpeed();
 		if (oldspeed * dir <0)
 		{
-			DEBUG5("Wende um >180 Grad");
 			m_pathfind_counter +=10;
-			if (m_pathfind_counter == 30)
+			DEBUG5("counter %f",m_pathfind_counter);
+			if (m_pathfind_counter >= 30)
 			{
-				m_command.m_type = "noaction";
+				clearCommand(false);
 				m_action.m_type = "noaction";
 				m_action.m_elapsed_time =0;
 				m_command.m_damage_mult=1;
 				addToNetEventMask(NetEvent::DATA_COMMAND | NetEvent::DATA_ACTION);
-				clearCommand(false);
 			}
 		}
 		else
