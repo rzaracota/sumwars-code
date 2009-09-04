@@ -27,6 +27,8 @@
 					addArea("entryPlayerArea","circle","locEntryPlayer",5);
 					addArea("waypoint1Area","circle","locWay1",8);
 					addArea("waypoint2Area","circle","locWay2",8);
+					addArea("dangerArea","circle","locDanger",4);
+					addArea("locDoorArea","circle","locLibrarySecretDoor",2);
 					
 					local tolecpos = "locTolec";
 					local derredpos = "locDerred";
@@ -35,8 +37,8 @@
 						derredpos = "locWay2";
 					end;
 					if (tutorial.phase == "findSecretDoor") then
-						tolecpos = "locSlugs";
-						derredpos = "locSlugs";
+						tolecpos = "locSlugView";
+						derredpos = "locSlugView";
 					end;
 					
 					tutorial_tmp.tolec = createObject("council_guard", tolecpos);
@@ -49,6 +51,12 @@
 					if (2 >= tutorial.phasenr) then
 						createMonsterGroup("tutorialSlugs","locSlugs",10);
 						tutorial_tmp.slugdoor = createObject('konz_wall1','locSlugFarmBackdoor',90);
+					end;
+					
+					if (3>= tutorial.phasenr) then
+						tutorial_tmp.fooddoor = createObject('konz_wall1','locSlugFarmFoodDoor');
+						createMonsterGroup("tutorialLouses","locBackroute3",5);
+						tutorial_tmp.libraryDoor = createObject('konz_wall1','locLibrarySecretDoor');
 					end;
 					
 					tutorial_tmp.bguard1 = createObject("council_guard","locDoorGuardNorth");
@@ -443,6 +451,7 @@
 			</Condition>
 			<Effect>
 				tutorial_tmp.assemble = nil;
+				groupObjectsArc(getPlayers(),"locBehemothView","locWaypoint2");
 				createDialogue();
 				addAllPlayersToDialog();
 				addSpeaker(tutorial_tmp.tolec,"Tolec");
@@ -594,8 +603,8 @@
 				if (tutorial_tmp.slugs == 10) then
 					set(tutorial_tmp.tolec,"state","active");
 					set(tutorial_tmp.derred,"state","active");
-					addUnitCommand(tutorial_tmp.tolec,'walk',"locSlugs");
-					addUnitCommand(tutorial_tmp.derred,'walk',"locSlugs");
+					addUnitCommand(tutorial_tmp.tolec,'walk',"locSlugView");
+					addUnitCommand(tutorial_tmp.derred,'walk',"locSlugView");
 				end
 			</Effect>
 		</Event>
@@ -615,7 +624,7 @@
 			</Condition>
 			<Effect>
 				tutorial_tmp.assemble = nil;
-				groupObjectsArc(getPlayers(),"locWaypoint2","locSlugs");
+				groupObjectsArc(getPlayers(),"locSlugs","locSlugView");
 				
 				createDialogue();
 				addSpeaker(tutorial_tmp.derred,"Derred");
@@ -713,6 +722,120 @@
 			</Effect>
 		</Event>
 	</Region>
+	
+	<NPC refname="Derred">
+		<Topic name="open_fooddoor" start_option="Futterklappe öffnen">
+			<Condition>
+				return (tutorial.phase == "findSecretDoor" and tutorial_tmp.fooddoor_open ~= true)
+			</Condition>
+			<Effect>
+				addUnitCommand(tutorial_tmp.derred,"walk","locBackroute1");
+				tutorial_tmp.backroute =1;
+			</Effect>
+		</Topic>
+	</NPC>
+	
+	<Region name="elCnlLobby">
+		<Event trigger="command_complete" once="true">
+			<Condition>
+				return (trigger.unit == tutorial_tmp.derred and tutorial_tmp.backroute ==1 and tutorial_tmp.fooddoor_open ~= true)
+			</Condition>
+			<Effect>
+				timedExecute("deleteObject(tutorial_tmp.fooddoor)",1000);
+				startTimer("go_backroute2",1500);
+			</Effect>
+		</Event>
+		<Event trigger="go_backroute2" once="true">
+			<Effect>
+				addUnitCommand(tutorial_tmp.derred,"walk","locBackroute2");
+				addUnitCommand(tutorial_tmp.tolec,"walk","locBackroute1");
+				addUnitCommand(tutorial_tmp.tolec,"walk","locBackroute2");
+				tutorial_tmp.see_louse = false;
+			</Effect>
+		</Event>
+		<Event trigger="player_moved" once="true">
+			<Condition>
+				if (tutorial_tmp.see_louse == false) then
+					return (unitIsInArea(trigger.player,"dangerArea"));
+				else
+					return false;
+				end;
+			</Condition>
+			<Effect>
+				setCutsceneMode(true);				
+				addCameraPosition(0,"locDanger" , -90,40, 20);
+				addCameraPosition(1000,"locBackroute3" , -90,40, 20);
+				addCameraPosition(2000,"locBackroute3" , -90,40, 20);
+				addCameraPosition(1000,"locDanger" , -90,40, 20);
+				startTimer("louse_dialog",4000);
+			</Effect>
+		</Event>
+		<Event trigger="louse_dialog" >
+			<Effect>
+				createDialogue();
+				setCutsceneMode(false);
+				addAllPlayersToDialog();
+				addStandardRoles();
+				addSpeaker(tutorial_tmp.tolec,"Tolec");
+				addSpeaker(tutorial_tmp.derred,"Derred");
+				
+				speak("PL",_("Noch mehr von den Viechern?"));
+				speak("Tolec",_("Uäks! Die scheinen irgendwie ausgebrochen zu sein. Hoffentlich vermehren die sich nicht in den Felsspalten."));
+				speak("mage",_("Habt ihr schon mal was von Sicherheitsvorkehrungen gehört?"));
+				speak("Derred",_("Da Hinten muss irgendwo die Geheimtür sein."));
+				speak("arcopt",_("Ihr wisst gar nicht sicher, ob sie da ist?"));
+				
+				tutorial_tmp.louses =0;
+			</Effect>
+		</Event>
 		
+		<Event trigger="unit_dead">
+			<Condition>
+				return (tutorial.phase == "findSecretDoor" and get(trigger.unit,"subtype") == "fireLouse")
+			</Condition>
+			<Effect>
+				tutorial_tmp.louses = tutorial_tmp.louses +1;
+				if (tutorial_tmp.louses == 4) then
+					tutorial_tmp.can_find_door = true
+				end;
+			</Effect>
+		</Event>
+		<Event trigger="player_moved" once="true">
+			<Condition>
+				if (tutorial_tmp.can_find_door == true) then
+					return (unitIsInArea(trigger.player,"locDoorArea"));
+				else
+					return false;
+				end;
+			</Condition>
+			<Effect>
+				deleteObject(tutorial_tmp.libraryDoor);
+				addUnitCommand(tutorial_tmp.tolec,"walk","locBackroute3");
+				addUnitCommand(tutorial_tmp.derred,"walk","locBackroute3");
+				tutorial_tmp.path=1;
+				tutorial_tmp.path_active = true;
+				tutorial_tmp.path_points={"locBackroute3", "locBackroute4", "locBackroute5", "locBackroute6", "locWay3","locWay4","locWay5","locWay6","locWay7","locWay8","locWay9"};
+			</Effect>
+		</Event>
+		
+		<Event trigger="command_complete">
+			<Condition>
+				return (trigger.unit == tutorial_tmp.tolec and tutorial_tmp.path_active == true);
+			</Condition>
+			<Effect>
+				tutorial_tmp.path = tutorial_tmp.path +1;
+				local newpoint = tutorial_tmp.path_points[tutorial_tmp.path]
+				if (newpoint ~= nil) then
+					addUnitCommand(tutorial_tmp.tolec,"walk",newpoint);
+					addUnitCommand(tutorial_tmp.derred,"walk",newpoint);
+					local players = getPlayers();
+					local id, pl;
+					for i,pl in ipairs(players) do
+						addUnitCommand(pl,"walk",newpoint);
+					end;
+				end
+			</Effect>
+		</Event>
+	</Region>
 </Quest>
 	

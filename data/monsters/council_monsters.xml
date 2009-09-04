@@ -83,7 +83,7 @@
 	>
 	
 		<Ability type="walk" />
-		<Ability type="attack" />
+		<Ability type="attack" rating="1"/>
 		<Ability type="die" />
 		<Ability type="noaction" />
 	</BasicAttributes>
@@ -212,5 +212,9 @@
 
 <MonsterGroup name="tutorialSlugs" >
 	<SubGroup subtype="fireSlug" number="10" prob="1.0" />
+</MonsterGroup>
+
+<MonsterGroup name="tutorialLouses" >
+	<SubGroup subtype="fireLouse" number="4" prob="1.0" />
 </MonsterGroup>
 
