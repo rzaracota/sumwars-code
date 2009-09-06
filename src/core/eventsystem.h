@@ -308,6 +308,18 @@ class EventSystem
 		static int setScriptObjectAnimation(lua_State *L);
 		
 		/**
+		 * \fn  static int setScriptObjectFlag(lua_State *L)
+		 * \brief Setzt ein Flag eines Scriptobject
+		 */
+		static int setScriptObjectFlag(lua_State *L);
+		
+		/**
+		 * \fn static int getScriptObjectFlag(lua_State *L)
+		 * \brief Gibt den Status eines Flag eines Scriptobject aus
+		 */
+		static int getScriptObjectFlag(lua_State *L);
+		
+		/**
 		 * \fn static int getObjectAt(lua_State *L)
 		 * \brief Gibt das Objekt an der angegebenen Stelle aus
 		 * \param L Lua Status

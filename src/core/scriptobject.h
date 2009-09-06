@@ -122,6 +122,24 @@ class ScriptObject: public WorldObject
 		 */
 		virtual void processNetEvent(NetEvent* event, CharConv* cv);
 		
+		/**
+		 * \fn virtual void getFlags(std::set<std::string>& flags)
+		 * \brief Gibt den Status der bekannten Flags aus
+		 * \param flags Ausgabeparameter: Flags
+		 */
+		virtual void getFlags(std::set<std::string>& flags)
+		{
+			flags = m_flags;
+		}
+		
+		/**
+		 * \fn void setFlag(std::string flag, bool set= true)
+		 * \brief Setzt oder entfernt ein Flag
+		 * \param flag Name des Flags
+		 * \param set wenn set gleich true, so wird das Flag gesetzt, ansonsten wird es entfernt
+		 */
+		void setFlag(std::string flag, bool set= true);
+		
 	private:
 		/**
 		 * \var std::string m_render_info
@@ -152,6 +170,12 @@ class ScriptObject: public WorldObject
 		 * \brief wenn auf true gesetzt, so wird die Animation wiederholt
 		 */
 		bool m_animation_repeat;
+		
+		/**
+		 * \var std::set<std::string> m_flags
+		 * \brief Gesetzte Flags des Scriptobject
+		 */
+		std::set<std::string> m_flags;
 		
 };
 #endif

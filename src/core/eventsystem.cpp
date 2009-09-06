@@ -82,6 +82,8 @@ void EventSystem::init()
 	lua_register(m_lua, "clearUnitCommands",clearUnitCommands); 
 	lua_register(m_lua, "setUnitAction", setUnitAction);
 	lua_register(m_lua, "setScriptObjectAnimation",setScriptObjectAnimation);
+	lua_register(m_lua, "setScriptObjectFlag",setScriptObjectFlag);
+	lua_register(m_lua, "getScriptObjectFlag",getScriptObjectFlag);	
 	lua_register(m_lua, "setCutsceneMode", setCutsceneMode);
 	lua_register(m_lua, "addCameraPosition", addCameraPosition);
 	
@@ -742,7 +744,7 @@ int EventSystem::setObjectNameRef(lua_State *L)
 	int argc = lua_gettop(L);
 	if (argc>=2 && lua_isnumber(L,1)  && lua_isstring(L,2))
 	{
-		int id = lua_tonumber(L,1);
+		int id = int(lua_tonumber(L,1));
 		std::string name = lua_tostring(L,2);
 		
 		
@@ -1105,6 +1107,66 @@ int EventSystem::setScriptObjectAnimation(lua_State *L)
 	}
 	return 0;
 }
+
+int EventSystem::setScriptObjectFlag(lua_State *L)
+{
+	int argc = lua_gettop(L);
+	if (argc>=2 && lua_isnumber(L,1) && lua_isstring(L,2))
+	{
+		if (m_region ==0)
+			return 0;
+
+		int id = int (lua_tonumber(L,1));
+		std::string flag = lua_tostring(L,2);
+
+		
+		ScriptObject* wo = dynamic_cast<ScriptObject*> (m_region->getObject(id));
+		if (wo !=0)
+		{
+			bool set = true;
+			if (argc>=3 && lua_isboolean(L,3))
+			{
+				set = lua_toboolean(L,3);
+			}
+			wo->setFlag(flag,set);
+		}
+	}
+	else
+	{
+		ERRORMSG("Syntax: setScriptObjectFlag(int objid, string flagname [,bool set])");
+	}
+	return 0;	
+}
+
+int EventSystem::getScriptObjectFlag(lua_State *L)
+{
+	int argc = lua_gettop(L);
+	if (argc>=2 && lua_isnumber(L,1) && lua_isstring(L,2))
+	{
+		if (m_region ==0)
+			return 0;
+
+		int id = int (lua_tonumber(L,1));
+		std::string flag = lua_tostring(L,2);
+
+		
+		ScriptObject* wo = dynamic_cast<ScriptObject*> (m_region->getObject(id));
+		if (wo !=0)
+		{
+			std::set<std::string> flags;
+			wo->getFlags(flags);
+			bool set = (flags.count(flag) > 0);
+			lua_pushboolean(L,set);
+			return 1;
+		}
+	}
+	else
+	{
+		ERRORMSG("Syntax: setScriptObjectFlag(int objid, string flagname [,bool set])");
+	}
+	return 0;	
+}
+
 
 int EventSystem::getObjectAt(lua_State *L)
 {

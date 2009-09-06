@@ -302,18 +302,21 @@
 			
 			<Waypoint world_x="0.4" world_y ="0.4" />
 		
-			<Settings dimx="8" dimy="8" region_template="test" />
-			
-			<Exits>
-				<Exit name="exit_north" destination_region="region0" destination_location="entry_south" >
-					<Shape shape="RECT" extent_x="4.0" extent_y ="4.0" />
-				</Exit>
-			</Exits>
+			<Settings dimx="20" dimy="20" region_template="test" />
 			
 			<Environments>
 				<Environment height="0.2" name="meadow" />
 			</Environments>
 			<ReviveLocation  location="center" />
+			
+			<Event trigger ="object_use" >
+				<Effect>
+					print(trigger.user, trigger.used_object);
+					local set = getScriptObjectFlag(trigger.used_object,"open");
+					print(set)
+					setScriptObjectFlag(trigger.used_object,"open",not set);
+				</Effect>
+			</Event>
 			
 		</Region>	
 		

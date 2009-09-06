@@ -3,8 +3,8 @@
 <ObjectGroupTemplate name="test" version="1.0">
   <Shape
     type="RECT"
-    extent_x="5"
-    extent_y="5"
+    extent_x="40"
+    extent_y="40"
     angle="0"
   />
 
@@ -18,35 +18,14 @@
             probability="1" 
             prob_angle="false" 
     />
-	<!--
-    <Object subtype="tree1" 
-            center_x="-3.11125624" 
-            center_y="3.236488872" 
-            angle="0" 
-            probability="1" 
-            prob_angle="false" 
-    />
-    <Object subtype="tree2" 
-            center_x="-6.099415433" 
-            center_y="5.803058645" 
-            angle="0" 
-            probability="1" 
-            prob_angle="false" 
-    />
-    <Object subtype="tree2" 
-            center_x="0" 
-            center_y="0" 
-			height="3.536212765" 
-            angle="0" 
-            probability="1" 
-            prob_angle="false" 
-    />
-	-->
+	
   </ObjectContent>
 
   <Locations>
-    <Location name="def_loc" pos_x="4.266748856" pos_y="3.136973898" />
-	<Location name="center" pos_x="0" pos_y="0" />
+	  <Location name="loc1" pos_x="0" pos_y="-5" />
+	  <Location name="loc2" pos_x="-5" pos_y="-5" />
+	  <Location name="loc3" pos_x="5" pos_y="-5" />
+		<Location name="center" pos_x="0" pos_y="0" />
   </Locations>
   
 
