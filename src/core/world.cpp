@@ -29,6 +29,7 @@
 #include "networkstruct.h"
 #include "worldloader.h"
 #include "templateloader.h"
+#include "objectloader.h"
 
 #include "OgreResourceGroupManager.h"
 
@@ -111,6 +112,52 @@ bool World::init(int port)
 		file += it->filename;
 
 		Action::loadAbilityData(file.c_str());
+
+	}
+	
+	files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("playerclasses","*.xml");
+	for (it = files->begin(); it != files->end(); ++it)
+	{
+		file = it->archive->getName();
+		file += "/";
+		file += it->filename;
+
+		ObjectLoader::loadPlayerData(file.c_str());
+
+	}
+	
+	ObjectFactory::init();
+	files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("monsters","*.xml");
+	for (it = files->begin(); it != files->end(); ++it)
+	{
+		file = it->archive->getName();
+		file += "/";
+		file += it->filename;
+
+		ObjectLoader::loadMonsterData(file.c_str());
+
+	}
+	
+	// TODO: funktioniert nur, solange kein LUA Code enthalten
+	files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("projectiles","*.xml");
+	for (it = files->begin(); it != files->end(); ++it)
+	{
+		file = it->archive->getName();
+		file += "/";
+		file += it->filename;
+
+		ObjectLoader::loadProjectileData(file.c_str());
+	}
+
+	// feste Objekte Initialisieren
+	files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("objects","*.xml");
+	for (it = files->begin(); it != files->end(); ++it)
+	{
+		file = it->archive->getName();
+		file += "/";
+		file += it->filename;
+
+		ObjectLoader::loadObjectData(file.c_str());
 
 	}
 
@@ -342,6 +389,7 @@ World::~World()
 	delete m_players;
 	delete m_events;
 	
+	ObjectFactory::cleanupObjectData();
 	Action::cleanup();
 	Dialogue::cleanup();
 	EventSystem::cleanup();

@@ -309,15 +309,6 @@
 			</Environments>
 			<ReviveLocation  location="center" />
 			
-			<Event trigger ="object_use" >
-				<Effect>
-					print(trigger.user, trigger.used_object);
-					local set = getScriptObjectFlag(trigger.used_object,"open");
-					print(set)
-					setScriptObjectFlag(trigger.used_object,"open",not set);
-				</Effect>
-			</Event>
-			
 		</Region>	
 		
 		<Region id="1" name="region1">

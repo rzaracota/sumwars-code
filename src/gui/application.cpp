@@ -572,44 +572,6 @@ bool Application::loadResources()
 	}
 
 	// Monster initialisieren
-	ObjectFactory::init();
-	files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("monsters","*.xml");
-	for (it = files->begin(); it != files->end(); ++it)
-	{
-		file = it->archive->getName();
-		file += "/";
-		file += it->filename;
-
-		ObjectLoader::loadMonsterData(file.c_str());
-
-		updateStartScreen(0.4);
-	}
-	
-	// TODO: funktioniert nur, solange kein LUA Code enthalten
-	files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("projectiles","*.xml");
-	for (it = files->begin(); it != files->end(); ++it)
-	{
-		file = it->archive->getName();
-		file += "/";
-		file += it->filename;
-
-		ObjectLoader::loadProjectileData(file.c_str());
-
-		updateStartScreen(0.4);
-	}
-
-	// feste Objekte Initialisieren
-	files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("objects","*.xml");
-	for (it = files->begin(); it != files->end(); ++it)
-	{
-		file = it->archive->getName();
-		file += "/";
-		file += it->filename;
-
-		ObjectLoader::loadFixedObjectData(file.c_str());
-
-		updateStartScreen(0.5);
-	}
 
 	// Objekt Templates
 	files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("obj_templates","*.xml");

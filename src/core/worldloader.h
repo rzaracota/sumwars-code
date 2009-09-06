@@ -29,79 +29,79 @@ class WorldLoader
 	
 	
 	/**
-	 * \fn bool loadNPCData(const char* pFilename)
+	 * \fn static bool loadNPCData(const char* pFilename)
 	 * \brief Liest die Daten zu NPCs aus einer XML Datei
 	 * \param pFilename Name der XML Datei
 	 */
-	bool loadNPCData(const char* pFilename);
+	static bool loadNPCData(const char* pFilename);
 	
 	/**
-	 * \fn loadQuestsData(const char* pFilename)
+	 * \fn static loadQuestsData(const char* pFilename)
 	 * \brief Liest die Daten zu Quests aus einer XML Datei
 	 * \param pFilename Name der XML Datei
 	 */
-	bool loadQuestsData(const char* pFilename);
+	static bool loadQuestsData(const char* pFilename);
 	
 	/**
-	 * \fn bool loadRegionData(const char* pFilename)
+	 * \fn static bool loadRegionData(const char* pFilename)
 	 * \brief Laedt die Daten zu den Regionen aus der XML
 	 * \param pFilename Name der XML Datei
 	 */
-	bool loadRegionData(const char* pFilename);
-	
-	private:
+	static bool loadRegionData(const char* pFilename);
 	
 	/**
-	 * \fn bool loadRegions(TiXmlNode* node)
-	 * \brief Lade die Daten zu Regionen aus einer XML Datei
-	 * \param node XMl Knoten
-	 */
-	bool loadRegions(TiXmlNode* node);
-		
-	/**
-	 * \fn bool loadRegion(TiXmlNode* node, RegionData* rdata)
-	 * \brief Laedt die Daten zu einer Region aus einem XML Knoten
-	 * \param node Knoten der die Daten enthaelt
-	 * \param rdata Datenstruktur in die die Daten geschrieben werden
-	 */
-	bool loadRegion(TiXmlNode* node, RegionData* rdata);
-		
-	/**
-	 * \fn void loadEvent( TiXmlNode* node, Event *ev, TriggerType &type)
+	 * \fn static void loadEvent( TiXmlNode* node, Event *ev, TriggerType &type)
 	 * \brief Laedt die Daten zu einem Event aus einem XML Knoten
 	 * \param node Knoten der die Daten enthaelt
 	 * \param ev Event in das die Daten geschrieben werden
 	 * \param type Typ des Triggers, der das Event ausloesen soll (Ausgabeparameter)
 	 */
-	void loadEvent( TiXmlNode* node, Event *ev, TriggerType &type);
+	static void loadEvent( TiXmlNode* node, Event *ev, TriggerType &type);
+	
+	private:
 	
 	/**
-	 * \fn void loadFraction( TiXmlNode* node)
+	 * \fn static bool loadRegions(TiXmlNode* node)
+	 * \brief Lade die Daten zu Regionen aus einer XML Datei
+	 * \param node XMl Knoten
+	 */
+		static bool loadRegions(TiXmlNode* node);
+		
+	/**
+	* \fn static bool loadRegion(TiXmlNode* node, RegionData* rdata)
+	 * \brief Laedt die Daten zu einer Region aus einem XML Knoten
+	 * \param node Knoten der die Daten enthaelt
+	 * \param rdata Datenstruktur in die die Daten geschrieben werden
+	 */
+	static bool loadRegion(TiXmlNode* node, RegionData* rdata);
+	
+	/**
+	 * \fn static void loadFraction( TiXmlNode* node)
 	 * \brief Laedt Daten zu einer Fraktion aus der XML Datei
 	 */
-	void loadFraction( TiXmlNode* node);
+	static void loadFraction( TiXmlNode* node);
 	
 	/**
-	 * \fn void loadNPC( TiXmlNode* node)
+	 * \fn static void loadNPC( TiXmlNode* node)
 	 * \brief Laedt die Daten zu einem NPC aus einem Knoten
 	 * \param node XML Knoten
 	 */
-	void loadNPC( TiXmlNode* node);
+	static void loadNPC( TiXmlNode* node);
 	
 	/**
-	 * \fn void loadQuests(TiXmlNode* node)
+	 * \fn static void loadQuests(TiXmlNode* node)
 	 * \brief Liest die Daten zu Quests aus einer XML Datei
 	 * \param node XML Knoten
 	 */
-	void loadQuests(TiXmlNode* node);
+	static void loadQuests(TiXmlNode* node);
 	
 	/**
-	 * \fn void loadQuest(TiXmlNode* node, Quest* quest)
+	 * \fn static void loadQuest(TiXmlNode* node, Quest* quest)
 	 * \brief Laedt die Daten zu einem Quest
 	 * \param node Knoten, der die Daten enthaelt
 	 * \param quest Klasse, in die die Daten geschrieben werden
 	 */
-	void loadQuest(TiXmlNode* node, Quest* quest);
+	static void loadQuest(TiXmlNode* node, Quest* quest);
 	
 
 };

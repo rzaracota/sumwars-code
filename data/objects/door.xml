@@ -1,0 +1,11 @@
+<ScriptObject type="SCRIPTOBJECT" subtype="door" layer="NORMAL">
+	<RenderInfo name="testdoor"/>
+	<Geometry shape="RECT" extent_x="0.3529384471" extent_y="1.866731536"/>
+	
+	<Event trigger="object_use">
+		<Effect>
+			local set = getScriptObjectFlag(trigger.used_object,'open')
+			setScriptObjectFlag(trigger.used_object,'open',not set)
+		</Effect>
+	</Event>
+</ScriptObject>

@@ -10,6 +10,8 @@
 #include "../tinyxml/tinyxml.h"
 #include <string>
 #include <list>
+#include "event.h"
+
 
 
 class World;
@@ -34,6 +36,43 @@ struct FixedObjectData
 	Shape m_shape;
 };
 
+/**
+ * \struct ScriptObjectData
+ * \brief Struktur mit Daten von ScriptObjekten
+ */
+struct ScriptObjectData
+{
+	/**
+	 * \var FixedObjectData m_fixed_data
+	 * \brief Basisdaten analog zu FixedObject
+	 */
+	FixedObjectData m_fixed_data;
+	
+	/**
+	 * \var std::string m_render_info
+	 * \brief Name der RenderInfo Daten fuer das Objekt
+	 */
+	std::string m_render_info;
+	
+	/**
+	 * \var std::multimap<TriggerType, Event*> m_events
+	 * \brief Fuer dieses Objekt registrierte Events
+	 */
+	std::multimap<TriggerType, Event*> m_events;
+	
+	/**
+	 * \fn ~ScriptObjectData()
+	 * \brief Destruktor
+	 */
+	~ScriptObjectData()
+	{
+		std::multimap<TriggerType, Event*>::iterator it;
+		for (it = m_events.begin(); it != m_events.end(); ++it)
+		{
+			delete it->second;
+		}
+	}
+};
 
 /**
  * Bezeichnung fuer eine Umgebung
@@ -367,6 +406,14 @@ class ObjectFactory
 	static void registerFixedObject(GameObject::Subtype subtype, FixedObjectData* data);
 	
 	/**
+	 * \fn static void registerScriptObject(GameObject::Subtype subtype, ScriptObjectData* data)
+	 * \brief Registriert Daten fuer einen Typ scriptbare Objekte
+	 * \param subtype Subtyp des Objektes
+	 * \param data Daten des  Objekts
+	 */
+	static void registerScriptObject(GameObject::Subtype subtype, ScriptObjectData* data);
+	
+	/**
 	 * \fn static void registerProjectile(GameObject::Subtype subtype, ProjectileBasicData* data)
 	 * \brief Registriert die Daten fuer ein Projectil
 	 * \param subtype Subtyp des Objektes
@@ -436,6 +483,12 @@ class ObjectFactory
 	static void cleanup();
 	
 	/**
+	 * \fn static void cleanupObjectData()
+	 * \brief Loescht die Daten fuer Monster, FixedObject, Projectile, Scriptobject
+	 */
+	static void cleanupObjectData();
+	
+	/**
 	 * \fn static std::map<GameObject::Subtype, PlayerBasicData*>& getPlayerData()
 	 * \brief Gibt Daten zu allen registrierten Spielern aus
 	 */
@@ -470,6 +523,12 @@ class ObjectFactory
 	 * \brief Basisdaten zu den festen Objekten
 	 */
 	static std::map<GameObject::Subtype, FixedObjectData*> m_fixed_object_data;
+	
+	/**
+	 * \var static std::map<GameObject::Subtype, ScriptObjectData*> m_script_object_data
+	 * \brief Basisdaten zu ScriptObjekten
+	 */
+	static std::map<GameObject::Subtype, ScriptObjectData*> m_script_object_data;
 	
 	/**
 	 * \var static std::map<GameObject::Subtype, ProjectileBasicData*> m_projectile_data

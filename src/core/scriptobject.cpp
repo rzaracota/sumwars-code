@@ -215,3 +215,4 @@ void ScriptObject::activateTrigger(Trigger* trigger)
 		}
 	}
 }
+

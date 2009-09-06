@@ -6,6 +6,7 @@
 #include "monster.h"
 #include "objectfactory.h"
 #include "objectloader.h"
+#include "worldloader.h"
 #include "graphicmanager.h"
 #include "projectile.h"
 
@@ -432,14 +433,14 @@ bool ObjectLoader::loadPlayer(TiXmlNode* node)
 	return true;
 }
 
-bool ObjectLoader::loadFixedObjectData(const char* pFilename)
+bool ObjectLoader::loadObjectData(const char* pFilename)
 {
 	TiXmlDocument doc(pFilename);
 	bool loadOkay = doc.LoadFile();
 
 	if (loadOkay)
 	{
-		loadFixedObject(&doc);
+		loadObject(&doc);
 		return true;
 	}
 	else
@@ -449,16 +450,27 @@ bool ObjectLoader::loadFixedObjectData(const char* pFilename)
 	}
 }
 
-bool ObjectLoader::loadFixedObject(TiXmlNode* node)
+bool ObjectLoader::loadObject(TiXmlNode* node)
 {
 	
 	TiXmlNode* child;
-	if (node->Type()==TiXmlNode::ELEMENT && !strcmp(node->Value(), "Object"))
+	if (node->Type()==TiXmlNode::ELEMENT && (!strcmp(node->Value(), "Object") || !strcmp(node->Value(), "ScriptObject")))
 	{
 		ElementAttrib attr;
 		attr.parseElement(node->ToElement());
 		
-		FixedObjectData* data = new FixedObjectData;
+		FixedObjectData* data;
+		ScriptObjectData* sdata =0;
+		if (!strcmp(node->Value(), "ScriptObject"))
+		{
+			sdata = new ScriptObjectData;
+			data = &(sdata->m_fixed_data);
+		}
+		else
+		{
+			data = new FixedObjectData;
+		}
+		
 		GameObject::Subtype subtype;
 		attr.getString("subtype",subtype);
 		std::string layer;
@@ -483,6 +495,22 @@ bool ObjectLoader::loadFixedObject(TiXmlNode* node)
 				attr.getString("file",mesh);
 				
 				GraphicManager::registerGraphicMapping(subtype, mesh);
+				if (sdata != 0)
+				{
+					sdata->m_render_info = mesh;
+				}
+			}
+			else if (child->Type()==TiXmlNode::ELEMENT && !strcmp(child->Value(), "RenderInfo"))
+			{
+				
+				std::string mesh;
+				attr.parseElement(child->ToElement());
+				attr.getString("name",mesh);
+				GraphicManager::registerGraphicMapping(subtype, mesh);
+				if (sdata != 0)
+				{
+					sdata->m_render_info = mesh;
+				}
 			}
 			else if (child->Type()==TiXmlNode::ELEMENT && !strcmp(child->Value(), "Geometry"))
 			{
@@ -501,20 +529,35 @@ bool ObjectLoader::loadFixedObject(TiXmlNode* node)
 					attr.getFloat("radius",data->m_shape.m_radius,0);
 				}
 			}
+			else if (child->Type()==TiXmlNode::ELEMENT && !strcmp(child->Value(), "Event") && sdata != 0)
+			{
+				TriggerType type;
+				Event* ev = new Event();
+				WorldLoader::loadEvent(child, ev,type);
+				sdata->m_events.insert(std::make_pair(type,ev));
+			}
 			else if (child->Type()!=TiXmlNode::COMMENT)
 			{
 				DEBUG5("unexpected element of <Object>: %s",child->Value());
 			}
 			
 		}
-		ObjectFactory::registerFixedObject(subtype,data);
+		
+		if (sdata ==0)
+		{
+			ObjectFactory::registerFixedObject(subtype,data);
+		}
+		else
+		{
+			ObjectFactory::registerScriptObject(subtype,sdata);
+		}
 	}
 	else
 	{
 		// rekursiv durchmustern
 		for ( child = node->FirstChild(); child != 0; child = child->NextSibling())
 		{
-			loadFixedObject(child);
+			loadObject(child);
 		}
 	}	
 	return true;

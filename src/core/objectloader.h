@@ -55,18 +55,26 @@ class ObjectLoader
 	static bool loadCreatureBaseAttr(TiXmlNode* node, CreatureBaseAttr& attr);
 	
 	/**
-	 * \fn loadFixedObjectData(const char* pFilename);
-	 * \brief Liest die Daten zu festen Objekten aus einer XML Datei
+	 * \fn static bool loadShape(TiXmlNode* node, Shape& shape)
+	 * \brief laedt Daten zu einer Flaeche aus einem Knoten
+	 * \param node XML Knoten
+	 * \param shape eingelesene Struktur
+	 **/
+	static bool loadShape(TiXmlNode* node, Shape& shape);
+	
+	/**
+	 * \fn loadObjectData(const char* pFilename);
+	 * \brief Liest die Daten zu Objekten aus einer XML Datei
 	 * \param pFilename Name der XML Datei
 	 */
-	static bool loadFixedObjectData(const char* pFilename);
+	static bool loadObjectData(const char* pFilename);
 	
 	/**
 	 * \fn bool loadFixedObject(TiXmlNode* node)
-	 * \brief Liest die Daten zu einem festen Object aus dem Knoten
+	 * \brief Liest die Daten zu einem Object aus dem Knoten
 	 * \param node XML Knoten
 	 */
-	static bool loadFixedObject(TiXmlNode* node);
+	static bool loadObject(TiXmlNode* node);
 	
 	/**
 	 * \fn loadProjectileData(const char* pFilename);
