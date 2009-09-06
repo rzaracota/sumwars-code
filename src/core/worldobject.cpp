@@ -177,6 +177,7 @@ bool  WorldObject::reactOnUse (int id)
 {
 	Trigger* tr = new Trigger("object_use");
 	tr->addVariable("used_object",getId());
+	tr->addVariable("_id",getId());
 	tr->addVariable("user",id);
 	getRegion()->insertTrigger(tr);
 	

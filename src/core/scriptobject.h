@@ -2,6 +2,7 @@
 #define SCRIPTOBJECT_H
 
 #include "worldobject.h"
+#include "event.h"
 
 /**
  * \class ScriptObject
@@ -140,6 +141,21 @@ class ScriptObject: public WorldObject
 		 */
 		void setFlag(std::string flag, bool set= true);
 		
+		/**
+		 * \fn void addEvent(TriggerType type, Event* event)
+		 * \brief Fuegt ein neues Event hinzu
+		 * \param trigger Typ des Triggers durch den das Event ausgeloest wird
+		 * \param event Event
+		 */
+		void addEvent(TriggerType trigger, Event* event);
+		
+		/**
+		 * \fn void activateTrigger(Trigger* trigger)
+		 * \brief loest alle durch den Trigger gesteuerten Events aus
+		 * \param trigger Ausloeser
+		 */
+		void activateTrigger(Trigger* trigger);
+		
 	private:
 		/**
 		 * \var std::string m_render_info
@@ -176,6 +192,12 @@ class ScriptObject: public WorldObject
 		 * \brief Gesetzte Flags des Scriptobject
 		 */
 		std::set<std::string> m_flags;
+		
+		/**
+		 * \var std::multimap<TriggerType, Event*> m_events
+		 * \brief Liste der registrierten Events, aufgelistet nach dem Trigger durch den sie ausgeloest werden
+		 */
+		std::multimap<TriggerType, Event*> m_events;
 		
 };
 #endif

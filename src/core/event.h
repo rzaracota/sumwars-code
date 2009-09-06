@@ -92,12 +92,27 @@ class Trigger
 			return m_type;
 		}
 		
+		/**
+		 * \fn int getObjectId()
+		 * \brief Gibt die ID des Objekts aus, auf das der Trigger zusaetzlich angewendet wird
+		 */
+		int getObjectId()
+		{
+			return m_object_id;
+		}
+		
 	private:
 		/**
 		 * \var TriggerType m_type
 		 * \brief Typ des Ausloesers
 		 */
 		TriggerType m_type;
+		
+		/**
+		 * \var int m_id
+		 * \brief Id des Objektes auf das der Trigger zusaetzlich angewendet wird
+		 */
+		int m_object_id;
 		
 		/**
 		 * \var std::string m_lua_variables

@@ -3,6 +3,7 @@
 #include "player.h"
 #include "eventsystem.h"
 #include "itemfactory.h"
+#include "scriptobject.h"
 
 RegionData::RegionData()
 {
@@ -1610,6 +1611,16 @@ void Region::update(float time)
 				m_events.erase(jt);
 			}
 			
+		}
+		
+		int id = m_triggers.front()->getObjectId();
+		if (id != 0)
+		{
+			ScriptObject* so = dynamic_cast<ScriptObject*>(getObject(id));
+			if (so != 0)
+			{
+				so->activateTrigger(m_triggers.front());
+			}
 		}
 		
 		delete m_triggers.front();

@@ -23,6 +23,12 @@ ScriptObject::~ScriptObject()
 	std::stringstream stream;
 	stream << "scriptobjectvar["<<getId()<<"]=nil";
 	EventSystem::doString(stream.str().c_str());
+	
+	std::multimap<TriggerType, Event*>::iterator it;
+	for (it = m_events.begin(); it != m_events.end(); ++it)
+	{
+		delete it->second;
+	}
 }
 
 bool ScriptObject::takeDamage(Damage* damage)
@@ -170,3 +176,42 @@ void ScriptObject::setFlag(std::string flag, bool set)
 	}
 }
 
+void ScriptObject::addEvent(TriggerType trigger, Event* event)
+{
+	m_events.insert(std::make_pair(trigger,event));
+}
+
+void ScriptObject::activateTrigger(Trigger* trigger)
+{
+	std::multimap<TriggerType, Event*>::iterator it, itend, jt;
+	TriggerType type;
+	type = trigger->getType();
+		
+	DEBUG5("trigger: %s",type.c_str());
+		
+	// Schleife ueber die ausgeloesten Events
+	it = m_events.lower_bound(type);
+	itend = m_events.upper_bound(type);
+	while (it != itend)
+	{
+		jt = it;
+		++it;
+			
+		// vom Trigger definierte Variablen einfuegen
+		EventSystem::doString((char*) trigger->getLuaVariables().c_str());
+		DEBUG5("lua code \n %s",trigger->getLuaVariables().c_str());
+			
+			// Event ausfuehren
+		bool ret = EventSystem::executeEvent(jt->second);
+			
+		if (ret)
+			DEBUG5("event on trigger: %s",type.c_str());
+			
+		// einmalige Ereignisse loeschen, wenn erfolgreich ausgefuehrt
+		if (jt->second->getOnce() &&  ret)
+		{
+			delete jt->second;
+			m_events.erase(jt);
+		}
+	}
+}

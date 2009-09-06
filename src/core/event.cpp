@@ -6,6 +6,7 @@ Trigger::Trigger(TriggerType type)
 {
 	m_type = type,
 	m_lua_variables = "trigger = {} \n";
+	m_object_id =0;
 }
 
 void Trigger::addVariable(std::string name, int value)
@@ -13,6 +14,11 @@ void Trigger::addVariable(std::string name, int value)
 	std::stringstream stream;
 	stream <<"trigger."<< name << " = " << value << "\n";
 	m_lua_variables += stream.str();
+	
+	if (name=="_id")
+	{
+		m_object_id = value;
+	}
 }
 
 void Trigger::addVariable(std::string name, bool value)
@@ -37,6 +43,11 @@ void Trigger::addVariable(std::string name, float value)
 	std::stringstream stream;
 	stream <<"trigger."<< name << " = " << value << "\n";
 	m_lua_variables += stream.str();
+	
+	if (name=="_id")
+	{
+		m_object_id = int(value);
+	}
 }
 
 void Trigger::addVariable(std::string name, std::string value)

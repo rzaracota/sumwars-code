@@ -112,6 +112,7 @@ void EventSystem::init()
 	lua_register(m_lua, "addCondition", addCondition);
 	lua_register(m_lua, "addEffect", addEffect);
 	lua_register(m_lua, "timedExecute",timedExecute);
+	lua_register(m_lua, "createScriptObjectEvent", createScriptObjectEvent);
 	
 	lua_register(m_lua, "getRelation",getRelation);
 	lua_register(m_lua, "setRelation",setRelation);
@@ -1165,6 +1166,35 @@ int EventSystem::getScriptObjectFlag(lua_State *L)
 		ERRORMSG("Syntax: setScriptObjectFlag(int objid, string flagname [,bool set])");
 	}
 	return 0;	
+}
+
+int EventSystem::createScriptObjectEvent(lua_State *L)
+{
+	int argc = lua_gettop(L);
+	if (argc>=2 && lua_isnumber(L,1) && lua_isstring(L,2))
+	{
+		int id = int (lua_tonumber(L,1));
+		std::string trigger = lua_tostring(L,2);
+		bool once = false;
+		if (argc>=2 && lua_isboolean(L,3))
+		{
+			once = lua_toboolean(L,3);
+		}
+	
+		ScriptObject* wo = dynamic_cast<ScriptObject*> (m_region->getObject(id));
+		if (wo !=0)
+		{
+			m_event = new Event();
+			m_event->setOnce(once);
+			wo->addEvent(trigger,m_event);
+		}
+	}
+	else
+	{
+		ERRORMSG("Syntax: createScriptObjectEvent(objectid id, string triggername [,bool once])");
+	}
+	return 0;
+	
 }
 
 

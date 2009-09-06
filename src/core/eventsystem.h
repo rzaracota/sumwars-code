@@ -320,6 +320,12 @@ class EventSystem
 		static int getScriptObjectFlag(lua_State *L);
 		
 		/**
+		 * \fn static int createScriptObjectEvent(lua_State *L)
+		 * \brief Erzeugt ein Event fuer ein Scriptevent
+		 */
+		static int createScriptObjectEvent(lua_State *L);
+		
+		/**
 		 * \fn static int getObjectAt(lua_State *L)
 		 * \brief Gibt das Objekt an der angegebenen Stelle aus
 		 * \param L Lua Status
