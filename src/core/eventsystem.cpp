@@ -468,12 +468,21 @@ int EventSystem::moveObject(lua_State *L)
 		if (wo ==0)
 			return 0;
 		
-		wo->getRegion()->getFreePlace (wo->getShape(), wo->getLayer(), pos,wo);
+		bool check = true;
+		if (argc>=3 && lua_isboolean(L,3))
+		{
+			check = lua_toboolean(L,3);
+		}
+		
+		if (check)
+		{
+			wo->getRegion()->getFreePlace (wo->getShape(), wo->getLayer(), pos,wo);
+		}
 		wo->moveTo(pos);
 	}
 	else
 	{
-		ERRORMSG("Syntax: moveObject(int objectid, Vector pos)");
+		ERRORMSG("Syntax: moveObject(int objectid, Vector pos [,bool collision_check])");
 	}
 	return 0;
 }

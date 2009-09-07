@@ -3,11 +3,26 @@
 	
 	<State name="open">
 		<Activation time="500">
-			<Movement start="0.0" end="1.0" start_vec="0.0 0.0 0.0" end_vec="1.0 0.0 0.0" />
+			<Movement start="0.0" end="1.0" start_vec="0.0 0.0 4.0" end_vec="0.0 0.0 0.0" />
 		</Activation>
 		
 		<Deactivation time="500">
-			<Movement start="0.0" end="1.0" start_vec="1.0 0.0 0.0" end_vec="0.0 0.0 0.0" />
+			<Movement start="0.0" end="1.0" start_vec="0.0 0.0 -4.0" end_vec="0.0 0.0 0.0" />
 		</Deactivation>
 	</State>
+	
 </RenderInfo>
+
+<RenderInfo name="testswitch">
+	<Entity source="signpost.mesh" rotation="0.0 0.0 30.0"/>
+	
+	<State name="on">
+		<Activation time="200">
+			<Rotation start="0.0" end="1.0" start_vec="0.0 0.0 30.0" end_vec="0.0 0.0 -30.0" />
+		</Activation>
+		
+		<Deactivation time="200">
+			<Rotation start="0.0" end="1.0" start_vec="0.0 0.0 -30.0" end_vec="0.0 0.0 30.0" />
+		</Deactivation>
+	</State>
+</RenderInfo>	

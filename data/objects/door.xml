@@ -6,6 +6,31 @@
 		<Effect>
 			local set = getScriptObjectFlag(trigger.used_object,'open')
 			setScriptObjectFlag(trigger.used_object,'open',not set)
+			local pos = get(trigger.used_object,"position")
+			printTable(pos);
+			if (set) then
+				pos[2] = pos[2] +4;
+			else
+				pos[2] = pos[2] -4;
+			end;
+			moveObject(trigger.used_object,pos,false)
+		</Effect>
+	</Event>
+</ScriptObject>
+
+<ScriptObject type="SCRIPTOBJECT" subtype="switch" layer="NORMAL">
+	<RenderInfo name="testswitch"/>
+	<Geometry shape="CIRCLE" radius="0.3"/>
+	
+	<Event trigger="object_use">
+		<Effect>
+			local set = getScriptObjectFlag(trigger.used_object,'on')
+			setScriptObjectFlag(trigger.used_object,'on',not set)
+			
+			insertTrigger("object_use");
+			local doorid = scriptobjectvar[trigger._id]["door"];
+			addTriggerVariable("_id",doorid);
+			addTriggerVariable("used_object",doorid);
 		</Effect>
 	</Event>
 </ScriptObject>
