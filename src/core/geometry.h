@@ -374,6 +374,13 @@ struct Shape
 	bool intersects(Line& line);
 	
 	/**
+	 * \fn Vector projectionOnBorder(Vector point)
+	 * \brief Bildet die Projektion eines Punktes auf den Rand
+	 * \param point projizierter Punkt
+	 */
+	Vector projectionOnBorder(Vector point);
+	
+	/**
 	 * \fn float distance(Shape& s2)
 	 * \brief Gibt die Distanz zwischen den beiden Flaechen aus
 	 * \param s2 zweite Flaeche

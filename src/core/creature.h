@@ -602,11 +602,11 @@ protected:
 
 	
 	/**
-	 * \fn void handleCollision(Shape* s)
+	 * \fn bool handleCollision(Shape* s)
 	 * \brief Fuehrt die Behandlung einer Kollision mit einem Objekt mit der angegebenen Grundfläche aus
 	 * \param s Form der Grundfläche des kollidierenden Objektes
 	 */
-	void handleCollision(Shape* s);
+	bool handleCollision(Shape* s);
 	
 	/**
 	 * \fn void collisionDetection(float time)

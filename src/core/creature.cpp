@@ -1209,31 +1209,57 @@ void Creature::collisionDetection(float time)
 
 		}
 
-		// neuen erreichten Punkt ausrechnen und testen ob dieser akzeptabel ist
-		newpos = getShape()->m_center + getSpeed()*time;
-		
-
-		// Kreis um den neuen Zielpunkt
-		scopy.m_center = newpos;
-		DEBUG5("neue Koordinaten %f %f",newpos.m_x, newpos.m_y);
-		scopy.m_radius = getShape()->m_radius;
-		result.clear();
-
-		// Suchen der Objekte um den neuen Zielpunkt
-		getRegion()->getObjectsInShape(&(scopy),&result,layer, CREATURE | FIXED,this);
-
-		// Wenn immer noch Kollision vorliegt Bewegung beenden
-		if (result.size()!=0)
+		if (getSpeed().getLength() > 0.000001)
 		{
-			DEBUG5("still colliding");
-
-			setSpeed(Vector(0,0));
+			// neuen erreichten Punkt ausrechnen und testen ob dieser akzeptabel ist
+			newpos = getShape()->m_center + getSpeed()*time;
+			
+	
+			// Kreis um den neuen Zielpunkt
+			scopy.m_center = newpos;
+			DEBUG5("neue Koordinaten %f %f",newpos.m_x, newpos.m_y);
+			scopy.m_radius = getShape()->m_radius;
+			result.clear();
+	
+			// Suchen der Objekte um den neuen Zielpunkt
+			getRegion()->getObjectsInShape(&(scopy),&result,layer, CREATURE | FIXED,this);
+	
+			// Testen ob die Richtung fuer alle diese Objekte akzeptabel ist
+			bool change;
+			for (i= result.begin();i!=result.end();++i)
+			{
+				DEBUG5("Kollision %i",(*i)->getId());
+				s2 =(*i)->getShape();
+				// Kollision behandeln
+				change = handleCollision(s2);
+				
+				// Richtung wurde geaendert, war also nicht akzeptabel
+				// Bewegung abbrechen
+				if (change)
+				{
+					DEBUG5("still colliding");
+					setSpeed(Vector(0,0));
+					break;
+				}
+				
+			}
+		}
+		
+		// Kommando abbrechen, wenn man zu lange sich nicht bewegen kann
+		if (getSpeed().getLength() <= 0.000001)
+		{
+			m_pathfind_counter +=15;
+			DEBUG5("counter %f",m_pathfind_counter);
+			if (m_pathfind_counter>=30)
+			{
+				clearCommand(false);
+			}
 		}
 
 	}
 }
 
-void Creature::handleCollision(Shape* s2)
+bool Creature::handleCollision(Shape* s2)
 {
 	// eigene Koordinaten
 	Vector pos = getShape()->m_center;
@@ -1241,6 +1267,41 @@ void Creature::handleCollision(Shape* s2)
 	// Koordinaten des kollidierenden Objektes
 	Vector cpos = s2->m_center;
 	
+	DEBUG5("collision %f %f",cpos.m_x, cpos.m_y);
+	DEBUG5("player pos %f %f",pos.m_x, pos.m_y);
+	DEBUG5("old speed %f %f", getSpeed().m_x, getSpeed().m_y);
+	
+	// erlaubte Richtung berechnen
+	// Projektion des Punktes auf den Rand der Flaeche
+	Vector proj = s2->projectionOnBorder(pos);
+	if (proj.distanceTo(pos) < 0.0001)
+		proj = cpos;
+	
+	DEBUG5("projection %f %f",proj.m_x, proj.m_y);
+	
+	// Vektor der erlaubten Richtung
+	// immer von der Flaeche weg
+	Vector dir = pos - proj;
+	if (cpos.distanceTo(proj) > cpos.distanceTo(pos))
+		dir = proj - pos;
+	
+	DEBUG5("direction %f %f",dir.m_x, dir.m_y);
+	
+	// Erlaubt sind alle Richtungen, die maximal einen rechten Winkel mit der erlaubten Richtung bilden
+	Vector sp = getSpeed();
+	if (dir*sp < 0)
+	{
+		// Geschwindigkeit aendern
+		sp.normalPartTo(dir);
+		setSpeed(sp);
+	}
+	else
+	{
+		return false;
+	}
+	
+	/*
+	// alte Kollisionsengine
 	bool circ = true;
 
 	DEBUG5("old speed %f %f", getSpeed().m_x, getSpeed().m_y);
@@ -1340,19 +1401,13 @@ void Creature::handleCollision(Shape* s2)
 		speed.normalPartTo(dir);
 		setSpeed(speed);
 	}
-
+*/
 	// neue Geschwindigkeit normieren
 	Vector speed = getSpeed();
 	DEBUG5("new speed %f %f", getSpeed().m_x, getSpeed().m_y);
 	if (speed.getLength() < 0.000001)
 	{
 		setSpeed(Vector(0,0));
-		m_pathfind_counter +=15;
-		DEBUG5("counter %f",m_pathfind_counter);
-		if (m_pathfind_counter>=30)
-		{
-			clearCommand(false);
-		}
 	}
 	else
 	{
@@ -1361,6 +1416,11 @@ void Creature::handleCollision(Shape* s2)
 		speed *= getBaseAttr()->m_step_length/m_action.m_time;
 		setSpeed(speed);
 	}
+	
+	//char dummy;
+	//std::cin >> dummy;
+	
+	return true;
 	
 }
 

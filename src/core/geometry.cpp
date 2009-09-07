@@ -358,5 +358,85 @@ float Shape::getDistance(Shape& s2)
 	return 0;
 }
 
-
+Vector Shape::projectionOnBorder(Vector point)
+{
+	if (m_type == Shape::CIRCLE)
+	{
+		// Vector vom Zentrum zum Punkt
+		Vector dir = point;
+		dir -= m_center;
+		
+		// Punkt auf dem Kreis in dieser Richtung
+		dir.normalize();
+		dir *= m_radius;
+		
+		dir += m_center;
+		return dir;
+	}
+	else
+	{
+		Vector proj;
+		
+		// Drehen des Bezugssystems, sodass das Rechteck ausgerichtet ist
+		Vector locpos = point - m_center;
+		locpos.rotate(-m_angle);
+		
+		// signalisiert Fall Projektion auf Kante parallel zur x-Achse oder y-Achse
+		bool projx = false;
+		bool projy = false;
+		if (fabs(locpos.m_x) < m_extent.m_x)
+			projx = true;
+		if (fabs(locpos.m_y) < m_extent.m_y)
+			projy = true;
+		
+		if (projx && projy)
+		{
+			// Entscheidung fuer die Kante, die naeher ist
+			float diffx = std::min(fabs(locpos.m_x-m_extent.m_x), fabs(locpos.m_x+m_extent.m_x));
+			float diffy = std::min(fabs(locpos.m_y-m_extent.m_y), fabs(locpos.m_y+m_extent.m_y));
+			if (diffx < diffy)
+				projx = false;
+			else
+				projy = false;
+		}
+		
+		if (projx)
+		{
+			// Fall Projektion auf Kante parallel zur y-Achse
+			proj.m_x = locpos.m_x;
+			if (locpos.m_y >0)
+				proj.m_y = m_extent.m_y;
+			else
+				proj.m_y = -m_extent.m_y;
+		}
+		else if (projy)
+		{
+			// Fall Projektion auf Kante parallel zur y-Achse
+			proj.m_y = locpos.m_y;
+			if (locpos.m_x >0)
+				proj.m_x = m_extent.m_x;
+			else
+				proj.m_x = -m_extent.m_x;
+		}
+		else
+		{
+			// Projektion auf eine Ecke
+			if (locpos.m_y >0)
+				proj.m_y = m_extent.m_y;
+			else
+				proj.m_y = -m_extent.m_y;
+			
+			if (locpos.m_x >0)
+				proj.m_x = m_extent.m_x;
+			else
+				proj.m_x = -m_extent.m_x;
+		}
+		
+		// zurueckrechnen auf globale Position
+		proj.rotate(m_angle);
+		proj += m_center;
+		
+		return proj;
+	}
+}
 
