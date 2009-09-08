@@ -431,6 +431,7 @@ bool Application::initCEGUI()
 
 	// Font setzen
 	CEGUI::FontManager::getSingleton().createFont("DejaVuSerif-8.font", (CEGUI::utf8*)"GUI");
+	CEGUI::FontManager::getSingleton().createFont("DejaVuSans-10.font", (CEGUI::utf8*)"GUI");
 	m_cegui_system->setDefaultFont((CEGUI::utf8*)"DejaVuSerif-8");
 
 	// eigene Factorys einfuegen

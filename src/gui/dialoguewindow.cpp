@@ -24,6 +24,7 @@ DialogueWindow::DialogueWindow(Document* doc, Scene* scene)
 	
 	CEGUI::FrameWindow* upper_bar = (CEGUI::FrameWindow*) win_mgr.createWindow("TaharezLook/FrameWindow", "DialogueUpperBar");
 	upper_bar->setProperty("FrameEnabled","false");
+	upper_bar->setProperty("SizingEnabled","false");
 	upper_bar->setProperty("TitlebarEnabled","false");
 	upper_bar->setProperty("CloseButtonEnabled","false");
 	upper_bar->setPosition(CEGUI::UVector2(cegui_reldim(0.0f), cegui_reldim( 0.0f)));
@@ -34,6 +35,24 @@ DialogueWindow::DialogueWindow(Document* doc, Scene* scene)
 	upper_bar->setWantsMultiClickEvents(false);
 	
 	game_screen->addChildWindow(upper_bar);
+	
+	label = win_mgr.createWindow("TaharezLook/StaticImage", "UpperBarBackground");
+	upper_bar->addChildWindow(label);
+	label->setProperty("FrameEnabled", "false");
+	label->setProperty("BackgroundEnabled", "true");
+	label->setProperty("MousePassThroughEnabled", "true");
+	label->moveToBack ();
+	label->setPosition(CEGUI::UVector2(cegui_reldim(0.00f), cegui_reldim( 0.00f)));
+	label->setSize(CEGUI::UVector2(cegui_reldim(1.0f), cegui_reldim( 0.95f)));
+	
+	label = win_mgr.createWindow("TaharezLook/StaticImage", "LowerBarBackground");
+	lower_bar->addChildWindow(label);
+	label->setProperty("FrameEnabled", "false");
+	label->setProperty("BackgroundEnabled", "true");
+	label->setProperty("MousePassThroughEnabled", "true");
+	label->moveToBack ();
+	label->setPosition(CEGUI::UVector2(cegui_reldim(0.00f), cegui_reldim( 0.05f)));
+	label->setSize(CEGUI::UVector2(cegui_reldim(1.0f), cegui_reldim( 0.95f)));
 	
 	label = win_mgr.createWindow("TaharezLook/StaticImage", "SpeakerEmotionImage0");
 	upper_bar->addChildWindow(label);
@@ -46,7 +65,7 @@ DialogueWindow::DialogueWindow(Document* doc, Scene* scene)
 	upper_bar->addChildWindow(label);
 	label->setProperty("FrameEnabled", "true");
 	label->setProperty("BackgroundEnabled", "true");
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.88f), cegui_reldim( 0.05f)));
+	label->setPosition(CEGUI::UVector2(cegui_reldim(0.89f), cegui_reldim( 0.05f)));
 	label->setSize(CEGUI::UVector2(cegui_reldim(0.10f), cegui_reldim( 0.9f)));
 	
 	label = win_mgr.createWindow("TaharezLook/StaticImage", "SpeakerEmotionImage2");
@@ -60,7 +79,7 @@ DialogueWindow::DialogueWindow(Document* doc, Scene* scene)
 	lower_bar->addChildWindow(label);
 	label->setProperty("FrameEnabled", "true");
 	label->setProperty("BackgroundEnabled", "true");
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.88f), cegui_reldim( 0.05f)));
+	label->setPosition(CEGUI::UVector2(cegui_reldim(0.89f), cegui_reldim( 0.05f)));
 	label->setSize(CEGUI::UVector2(cegui_reldim(0.10f), cegui_reldim( 0.9f)));
 	
 	
@@ -69,35 +88,37 @@ DialogueWindow::DialogueWindow(Document* doc, Scene* scene)
 	label->setProperty("FrameEnabled", "false");
 	label->setProperty("BackgroundEnabled", "true");
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.12f), cegui_reldim(0.05f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim( 0.22f)));
+	label->setSize(CEGUI::UVector2(cegui_reldim(0.3f), cegui_reldim( 0.22f)));
 	
 	
 	label = win_mgr.createWindow("TaharezLook/StaticText", "SpeakerNameLabel1");
 	upper_bar->addChildWindow(label);
 	label->setProperty("FrameEnabled", "false");
+	label->setProperty("HorzFormatting", "RightAligned");
 	label->setProperty("BackgroundEnabled", "true");
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.5f), cegui_reldim(0.05f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim( 0.22f)));
+	label->setPosition(CEGUI::UVector2(cegui_reldim(0.58f), cegui_reldim(0.05f)));
+	label->setSize(CEGUI::UVector2(cegui_reldim(0.3f), cegui_reldim( 0.22f)));
 	
 	label = win_mgr.createWindow("TaharezLook/StaticText", "SpeakerNameLabel2");
 	lower_bar->addChildWindow(label);
 	label->setProperty("FrameEnabled", "false");
 	label->setProperty("BackgroundEnabled", "true");
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.12f), cegui_reldim(0.05f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim( 0.22f)));
+	label->setSize(CEGUI::UVector2(cegui_reldim(0.3f), cegui_reldim( 0.22f)));
 	
 	
 	label = win_mgr.createWindow("TaharezLook/StaticText", "SpeakerNameLabel3");
 	lower_bar->addChildWindow(label);
 	label->setProperty("FrameEnabled", "false");
 	label->setProperty("BackgroundEnabled", "true");
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.5f), cegui_reldim(0.05f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim( 0.22f)));
+	label->setPosition(CEGUI::UVector2(cegui_reldim(0.58f), cegui_reldim(0.05f)));
+	label->setSize(CEGUI::UVector2(cegui_reldim(0.3f), cegui_reldim( 0.22f)));
 	
 	label = win_mgr.createWindow("TaharezLook/StaticText", "SpeakerTextLabel0");
 	upper_bar->addChildWindow(label);
 	label->setProperty("FrameEnabled", "false");
 	label->setProperty("BackgroundEnabled", "true");
+	label->setFont("DejaVuSans-10");
 	label->setProperty("HorzFormatting", "WordWrapLeftAligned");
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.12f), cegui_reldim(0.29f)));
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&DialogueWindow::onTextClicked, this));
@@ -108,6 +129,7 @@ DialogueWindow::DialogueWindow(Document* doc, Scene* scene)
 	upper_bar->addChildWindow(label);
 	label->setProperty("FrameEnabled", "false");
 	label->setProperty("BackgroundEnabled", "true");
+	label->setFont("DejaVuSans-10");
 	label->setProperty("HorzFormatting", "WordWrapLeftAligned");
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.5f), cegui_reldim(0.29f)));
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&DialogueWindow::onTextClicked, this));
@@ -118,6 +140,7 @@ DialogueWindow::DialogueWindow(Document* doc, Scene* scene)
 	lower_bar->addChildWindow(label);
 	label->setProperty("FrameEnabled", "false");
 	label->setProperty("BackgroundEnabled", "true");
+	label->setFont("DejaVuSans-10");
 	label->setProperty("HorzFormatting", "WordWrapLeftAligned");
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.12f), cegui_reldim(0.29f)));
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&DialogueWindow::onTextClicked, this));
@@ -128,6 +151,7 @@ DialogueWindow::DialogueWindow(Document* doc, Scene* scene)
 	lower_bar->addChildWindow(label);
 	label->setProperty("FrameEnabled", "false");
 	label->setProperty("BackgroundEnabled", "true");
+	label->setFont("DejaVuSans-10");
 	label->setProperty("HorzFormatting", "WordWrapLeftAligned");
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.5f), cegui_reldim(0.29f)));
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&DialogueWindow::onTextClicked, this));
