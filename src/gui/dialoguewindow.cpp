@@ -147,6 +147,11 @@ void DialogueWindow::update()
 		bar_vis = true;
 	}
 	
+	if (m_document->getGUIState()->m_shown_windows & Document::TRADE)
+	{
+		bar_vis = false;
+	}
+	
 	CEGUI::FrameWindow* upper_bar = static_cast<CEGUI::FrameWindow*>( win_mgr.getWindow("DialogueUpperBar"));
 	CEGUI::FrameWindow* lower_bar = static_cast<CEGUI::FrameWindow*>( win_mgr.getWindow("DialogueLowerBar"));
 	if (upper_bar->isVisible() != bar_vis)
