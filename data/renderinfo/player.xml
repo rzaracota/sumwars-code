@@ -16,6 +16,12 @@
 	<Action name="walk">
 		<Animation name="walkOneHand" />
 	</Action>
+	<Action name="walk#Unarmed">
+		<Animation name="walkUnarmed" />
+	</Action>
+	<Action name="walk#TwoHands">
+		<Animation name="walkBow" />
+	</Action>
 	
 	<Action name="attack">
 		<Animation name="attack" />
@@ -33,12 +39,20 @@
 	
 	<Action name="magic_attack#Unarmed">
 		<Animation name="attackMagicUnarmed" />
+		<ParticleSystem objectname="magicEnergy" bone="mainmesh:itemRightHand" source="Magic_Arrow" position="0.0 0.0 0.0" />
+		<Detach time="0.5" objectname="magicEnergy" />
+		<ParticleSystem objectname="magicEnergyLeft" bone="mainmesh:itemLeftHand" source="Magic_Arrow" position="0.0 0.0 0.0" />
+		<Detach time="0.37" objectname="magicEnergyLeft" />
 	</Action>
 	<Action name="magic_attack#OneHand">
 		<Animation name="attackMagicOneHand" />
+		<ParticleSystem objectname="magicEnergy" bone="mainmesh:itemRightHand" source="Magic_Arrow" position="0.0 0.0 -.50" />
+		<Detach time="0.4" objectname="magicEnergy" />
 	</Action>
 	<Action name="magic_attack#TwoHands">
 		<Animation name="attackMagicTwoHands" />
+		<ParticleSystem objectname="magicEnergy" bone="mainmesh:itemRightHand" source="Magic_Arrow" position="0.0 0.0 -1.00" />
+		<Detach time="0.4" objectname="magicEnergy" />
 	</Action>
 	
 	<Action name="range_attack#Unarmed">
@@ -49,16 +63,6 @@
 	</Action>
 	<Action name="range_attack#TwoHands">
 		<Animation name="attackRangedBow" />
-	</Action>
-	
-	<Action name="magic_attack#Unarmed">
-		<Animation name="attackMagicUnarmed" />
-	</Action>
-	<Action name="magic_attack#OneHand">
-		<Animation name="attackMagicOneHand" />
-	</Action>
-	<Action name="magic_attack#TwoHands">
-		<Animation name="attackMagicTwoHands" />
 	</Action>
 	
 	<Action name="holy_attack#Unarmed" reference="attack#Unarmed" />
@@ -98,63 +102,122 @@
 	<Action name="fire_bolt">
 		<Animation name="castMagicWeak" />
 	</Action>
+	<Action name="fire_bolt#Unarmed">
+		<Animation name="castMagicWeakUnarmed" />
+	</Action>
 	
 	<Action name="fire_strike" reference="fire_bolt" />
+	<Action name="fire_strike#Unarmed" reference="fire_bolt#Unarmed" />
 	
 	<Action name="fire_wave">
 		<Animation name="castMagicStrong" />
+		<ParticleSystem time = "0.1" objectname="magicEnergy" bone="mainmesh:itemLeftHand" source="FireLine" position="0.0 0.0 0.0" />
+		<Detach time="0.65" objectname="magicEnergy" />
+		<ParticleSystem time = "0.7" objectname="fire" bone="mainmesh:itemLeftHand" source="HandFire" position="0.0 0.0 0.0" />
+		<Detach time="0.9" objectname="fire" />
+	</Action>
+	<Action name="fire_wave#Unarmed">
+		<Animation name="castMagicStrongUnarmed" />
 	</Action>
 	
 	<Action name="fire_storm" reference="fire_wave" />
+	<Action name="fire_storm#Unarmed" reference="fire_wave#Unarmed" />
 	
 	<Action name="fire_ball" reference="fire_bolt" />
+	<Action name="fire_ball#Unarmed" reference="fire_bolt#Unarmed" />
 	<Action name="inferno_ball" reference="fire_ball" />
+	<Action name="inferno_ball#Unarmed" reference="fire_bolt#Unarmed" />
 	
 	<Action name="fire_wall">
 		<Animation name="castMagicStrong" />
+		<ParticleSystem time = "0.1" objectname="magicEnergy" bone="mainmesh:itemLeftHand" source="FireLine" position="0.0 0.0 0.0" />
+		<Detach time="0.65" objectname="magicEnergy" />
+		<ParticleSystem time = "0.7" objectname="fire" bone="mainmesh:itemLeftHand" source="HandFire" position="0.0 0.0 0.0" />
+		<Detach time="0.9" objectname="fire" />
+	</Action>
+	<Action name="fire_wall#Unarmed">
+		<Animation name="castMagicStrongUnarmed" />
 	</Action>
 	
 	<Action name="ice_bolt">
 		<Animation name="castMagicWeak" />
 	</Action>
+	<Action name="ice_bolt#Unarmed">
+		<Animation name="castMagicWeakUnarmed" />
+	</Action>
 	
 	<Action name="ice_spike" reference="ice_bolt" />
+	<Action name="ice_spike#Unarmed" reference="ice_bolt#Unarmed" />
 	
 	<Action name="snow_storm">
 		<Animation name="castMagicStrong" />
+		<ParticleSystem time = "0.1" objectname="magicEnergy" bone="mainmesh:itemLeftHand" source="IceLine" position="0.0 0.0 0.0" />
+		<Detach time="0.65" objectname="magicEnergy" />
+		<ParticleSystem time = "0.7" objectname="ice" bone="mainmesh:itemLeftHand" source="HandIce" position="0.0 0.0 0.0" />
+		<Detach time="0.9" objectname="ice" />
+	</Action>
+	<Action name="snow_storm#Unarmed">
+		<Animation name="castMagicStrongUnarmed" />
 	</Action>
 	
 	<Action name="blizzard" reference="snow_storm" />
+	<Action name="blizzard#Unarmed" reference="snow_storm#Unarmed" />
 	
 	<Action name="ice_ring">
 		<Animation name="castMagicWeak" />
 	</Action>
+	<Action name="ice_ring#Unarmed">
+		<Animation name="castMagicStrongUnarmed" />
+	</Action>
 	
 	<Action name="frost_ring" reference="ice_ring" />
+	<Action name="frost_ring#Unarmed" reference="ice_ring#Unarmed" />
 	
 	<Action name="freeze">
+		<Animation name="castMagicWeak" />
+	</Action>
+	<Action name="freeze#Unarmed">
 		<Animation name="castMagicWeak" />
 	</Action>
 
 	<Action name="lightning">
 		<Animation name="castMagicWeak" />
 	</Action>
+	<Action name="lightning#Unarmed">
+		<Animation name="castMagicWeakUnarmed" />
+	</Action>
 	
 	<Action name="lightning_strike" reference="lightning" />
+	<Action name="lightning_strike#Unarmed" reference="lightning#Unarmed" />
 	
-	<Action name="thunder_storm">
+	<Action name="thunderstorm">
 		<Animation name="castMagicStrong" />
+		<ParticleSystem time = "0.1" objectname="magicEnergy" bone="mainmesh:itemLeftHand" source="LightningLine" position="0.0 0.0 0.0" />
+		<Detach time="0.65" objectname="magicEnergy" />
+		<ParticleSystem time = "0.7" objectname="lightning" bone="mainmesh:itemLeftHand" source="HandLightning" position="0.0 0.0 0.0" />
+		<Detach time="0.9" objectname="lightning" />
+	</Action>
+	<Action name="thunderstorm#Unarmed">
+		<Animation name="castMagicStrongUnarmed" />
 	</Action>
 	
 	<Action name="thunderstorm2" reference="thunderstorm" />
+	<Action name="thunderstorm2#Unarmed" reference="thunderstorm#Unarmed" />
 	
 	<Action name="chain_lightning">
 		<Animation name="castMagicWeak" />
 	</Action>
+	<Action name="chain_lightning#Unarmed">
+		<Animation name="castMagicWeak" />
+	</Action>
 	
 	<Action name="chain_lightning2" reference="chain_lightning" />
+	<Action name="chain_lightning2#Unarmed" reference="chain_lightning#Unarmed" />
 	
 	<Action name="static_shield">
+		<Animation name="castMagicWeak" />
+	</Action>
+	<Action name="static_shield#Unarmed">
 		<Animation name="castMagicWeak" />
 	</Action>
 	
@@ -309,13 +372,23 @@
 <RenderInfo name="mage_m" parent="playerbase" >
 	<Entity source="mage_m.mesh"/>
 </RenderInfo>
+<RenderInfo name="mage_f" parent="playerbase" >
+	<Entity source="archer_f.mesh"/>
+	<Entity objectname="head" bone="crown" source="head_f1.mesh" />
+</RenderInfo>
 
 <RenderInfo name="archer_f" parent="playerbase" >
 	<Entity source="archer_f.mesh"/>
-
+	<Entity objectname="head" bone="crown" source="head_f1.mesh" />
 </RenderInfo>
 
 <RenderInfo name="priest_f" parent="playerbase" >
 	<Entity source="priest_f.mesh"/>
 </RenderInfo>
 	
+<RenderInfo name="archer" parent="playerbase">
+	<Entity source="archer_f.mesh"/>
+	<Entity objectname="head" bone="crown" source="head_f1.mesh" />
+	<Entity objectname="weapon2" bone="itemRightHand" source="spruce_stf.mesh" />
+	
+</RenderInfo>

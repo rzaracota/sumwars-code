@@ -7,7 +7,6 @@
 			local set = getScriptObjectFlag(trigger.used_object,'open')
 			setScriptObjectFlag(trigger.used_object,'open',not set)
 			local pos = get(trigger.used_object,"position")
-			printTable(pos);
 			if (set) then
 				pos[2] = pos[2] +4;
 			else

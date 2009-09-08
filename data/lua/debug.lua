@@ -13,5 +13,20 @@ function xx(layer)
 end;
 		
 function cc()
-	setScriptObjectAnimation(test,"walk",1000,"true");
+	door = createObject("door","loc1");
+	switch = createObject("switch","loc3");
+	scriptobjectvar[switch]["door"] = door;
+	
+	local pos = getLocation("loc1");
+	pos2 ={pos[1] - 0.7; pos[2] +4};
+	createObject("wall_m1",pos2);
+	pos2 ={pos[1] - 0.7; pos[2] -4};
+	createObject("wall_m1",pos2);
+	
+end;
+
+function vv()
+	insertTrigger("object_use");
+	addTriggerVariable("_id",door);
+	addTriggerVariable("used_object",door);
 end;

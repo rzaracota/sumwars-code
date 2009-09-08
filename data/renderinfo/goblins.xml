@@ -5,30 +5,48 @@
 	</Action>
 	
 	<Action name="attack">
-		<Animation name="attack" />
+		<Animation name="attackArmed1" />
 	</Action>
 	<Action name="attack">
-		<Animation name="attack2" />
+		<Animation name="attackArmed2" />
 	</Action>
 
 	<Action name="die">
 		<Animation name="die" />
 	</Action>
 	
-	<Action name="range_attack">
-		<Animation name="attack" />
+	<Action name="noaction">
+		<Animation name="idle1" />
 	</Action>
-	<Action name="range_attack">
-		<Animation name="attack2" />
+	<Action name="noaction">
+		<Animation name="idle2" />
+	</Action>
+	<Action name="noaction">
+		<Animation name="idle3" />
 	</Action>
 	
-	<Action name="noaction">
-		<Animation name="walk" />
+	<Action name="range_attack">
+		<Animation name="attackRanged1" />
+	</Action>
+	
+	<Action name="magic_attack">
+		<Animation name="attackMagic1" />
+	</Action>
+	
+	<Action name="magic_attack">
+		<Animation name="attackMagic2" />
 	</Action>
 </RenderInfo>
 
 <RenderInfo name="goblin" parent="goblinbase">
 	<Entity source="goblinGreen.mesh"/>
+	
+	<Action name="attack">
+		<Animation name="attack1" />
+	</Action>
+	<Action name="attack">
+		<Animation name="attack2" />
+	</Action>
 </RenderInfo>
 
 <RenderInfo name="goblin_rob" parent="goblinbase">
@@ -39,29 +57,32 @@
 <RenderInfo name="goblin_bon" parent="goblinbase">
 	<Entity source="goblinGreen.mesh"/>
 	<Entity objectname="weapon" bone="itemRightHand" source="goblin_stf.mesh" />
-	<Entity objectname="gloves" bone="EllbogenRechts" source="goblin_glv.mesh" />
-	<Entity objectname="armor" bone="KnieRechts" source="gobLeg_arm.mesh" />
-	<Entity objectname="helmet" bone="Crown" source="goblin_hlm.mesh" />
-	
-	<Action name="magic_attack">
-		<Animation name="attack" />
-	</Action>
-	<Action name="magic_attack">
-		<Animation name="attack2" />
-	</Action>
+	<Entity objectname="gloves" bone="ellbowRight" source="goblin_glv.mesh" />
+	<Entity objectname="armor" bone="kneeRight" source="gobLeg_arm.mesh" />
+	<Entity objectname="helmet" bone="crown" source="goblin_hlm.mesh" />
 	
 	<Action name="lightning">
-		<Animation name="attack2" />
+		<Animation name="castMagicWeak" />
 	</Action>
 	
 	<Action name="blade_storm">
-		<Animation name="attack2" />
+		<Animation name="castMagicStrong" />
 	</Action>
+	
 </RenderInfo>
 
 <RenderInfo name="goblin_bow" parent="goblinbase">
 	<Entity source="goblinGreen.mesh"/>
-	<Entity objectname="weapon" bone="itemRightHand" source="goblin_sbw.mesh" />
+	<Entity objectname="weapon" bone="itemLeftHand" source="goblin_sbw.mesh" />
+	<Action name="walk">
+		<Animation name="walkRanged" />
+	</Action>
+	<Action name="noaction">
+		<Animation name="idleRanged1" />
+	</Action>
+	<Action name="noaction">
+		<Animation name="idleRanged2" />
+	</Action>
 </RenderInfo>
 
 <RenderInfo name="goblin_dog" parent="goblinbase">
@@ -82,8 +103,8 @@
 
 <RenderInfo name="goblin_war" parent="goblinbase">
 	<Entity source="goblinGreen.mesh"/>
-	<Entity objectname="weapon" bone="itemRightHand" source="crude_sw.mesh" />
-	<Entity objectname="weapon2" bone="itemLeftHand" source="crude_sw.mesh" /> 
+	<Entity objectname="weapon" bone="itemRightHand" source="old_sw.mesh" />
+	<Entity objectname="weapon2" bone="itemLeftHand" source="goblin_shd.mesh" /> 
 </RenderInfo>
 
 <RenderInfo name="goblin_pch" parent="goblinbase">

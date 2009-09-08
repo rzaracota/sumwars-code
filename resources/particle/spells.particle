@@ -21,6 +21,53 @@ Fireball
 }
 }
 
+HandFire
+{
+    material Flare
+    particle_width 10
+    particle_height 10
+    cull_each false
+    quota 10000
+    billboard_type oriented_self
+ 
+
+   emitter Point
+{
+        angle 360
+        emission_rate 275
+        time_to_live 0.1
+        direction 1 0 0
+        velocity_min 150
+        velocity_max 250
+        colour_range_start 1 0 0
+        colour_range_end 1 0 0
+}
+}
+
+
+FireLine
+{
+    material Flare
+    particle_width 20
+    particle_height 20
+    cull_each false
+    quota 10000
+    billboard_type oriented_self
+ 
+
+   emitter Point
+{
+        angle 0
+        emission_rate 450
+        time_to_live 3.0
+        direction 1 1 1
+        velocity_min 1
+        velocity_max 2
+        colour_range_start 1 0 0
+        colour_range_end 1 0 0
+}
+}
+
 Magic_Arrow
 {
 	material 		Flare
@@ -139,6 +186,53 @@ Firewave
         velocity_max 300
         colour_range_start 1 0 0
         colour_range_end 1 0 0
+}
+}
+
+HandIce
+{
+    material Flare
+    particle_width 10
+    particle_height 10
+    cull_each false
+    quota 10000
+    billboard_type oriented_self
+ 
+
+   emitter Point
+{
+        angle 360
+        emission_rate 275
+        time_to_live 0.1
+        direction 1 0 0
+        velocity_min 150
+        velocity_max 250
+        colour_range_start 0.6 0.6 1
+        colour_range_end 0.2 0.2 0.6
+}
+}
+
+
+IceLine
+{
+    material Flare
+    particle_width 20
+    particle_height 20
+    cull_each false
+    quota 10000
+    billboard_type oriented_self
+ 
+
+   emitter Point
+{
+        angle 0
+        emission_rate 450
+        time_to_live 3.0
+        direction 1 1 1
+        velocity_min 1
+        velocity_max 2
+        colour_range_start 0.6 0.6 1
+        colour_range_end 0.2 0.2 0.6
 }
 }
 
@@ -282,6 +376,53 @@ Lightning
         velocity_max 300
         colour_range_start 1 1 0
         colour_range_end 1 1 0
+}
+}
+
+HandLightning
+{
+    material Flare
+    particle_width 10
+    particle_height 10
+    cull_each false
+    quota 10000
+    billboard_type oriented_self
+ 
+
+   emitter Point
+{
+        angle 360
+        emission_rate 275
+        time_to_live 0.1
+        direction 1 0 0
+        velocity_min 150
+        velocity_max 250
+        colour_range_start 1 1 0
+        colour_range_end 1 1 0
+}
+}
+
+
+LightningLine
+{
+    material Flare
+    particle_width 20
+    particle_height 20
+    cull_each false
+    quota 10000
+    billboard_type oriented_self
+ 
+
+   emitter Point
+{
+        angle 0
+        emission_rate 450
+        time_to_live 3.0
+        direction 1 1 1
+        velocity_min 1
+        velocity_max 2
+        colour_range_start 0 1 0
+        colour_range_end 1 0 0
 }
 }
 

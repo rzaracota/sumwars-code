@@ -263,9 +263,9 @@ AIR
 		resistances_cap_air="50"
 		resistances_cap_ice="50"
 		resistances_cap_fire="50"
-		walk_speed="3000"
+		walk_speed="1500"
 		attack_speed="1500"
-		step_length="0.8"
+		step_length="1.0"
 		attack_range="0.5"
 	>
 		<Ability type="walk" />
@@ -362,8 +362,8 @@ AIR
 					>
 		<Ability type="walk" />
 		<Ability type="attack"  rating="1"/>
-		<Ability type="lightning"  rating="2"/>
-		<Ability type="blade_storm"  rating="0" all_target_rating="0.5"/>
+		<Ability type="lightning"  rating="2" timer_nr="1" timer_value="10000"/>
+		<Ability type="blade_storm"  rating="0" all_target_rating="0.5" timer_nr="2" timer_value="160000"/>
 		<Ability type="die" />
 		<Ability type="noaction" />
 	</BasicAttributes>

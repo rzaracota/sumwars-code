@@ -517,7 +517,7 @@
 <Ability type="thunderstorm"
 		 name="Thunderstorm"
 		 description="The mage summons a thunderstorm that will assault enemies in its range with lightnings." 
-		 time="1301.000000"
+		 time="2000.000000"
 		 timer_nr="2.000000"
 		 timer_value="12000.000000"
 		 base_ability="magic_attack"

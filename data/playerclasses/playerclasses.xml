@@ -147,6 +147,8 @@
 	
 	<BasicAbility type="magic_attack" />
 	<Look name="mage" render_info="mage_m" gender="male" emotionset="human_standard"/>
+	<Look name="mage_f" render_info="mage_f" gender="female" emotionset="human_standard"/>
+	
 	<SkilltreeTabs tab1="Fire magic" tab2="Ice magic" tab3="Air magic" />
 	
 	<Item type="spruce_wnd" />

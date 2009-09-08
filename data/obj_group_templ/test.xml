@@ -25,6 +25,9 @@
 	  <Location name="loc1" pos_x="0" pos_y="-5" />
 	  <Location name="loc2" pos_x="-5" pos_y="-5" />
 	  <Location name="loc3" pos_x="5" pos_y="-5" />
+	  <Location name="loc4" pos_x="0" pos_y="0.4" />
+	  <Location name="loc5" pos_x="0.5" pos_y="-0.4" />
+	  <Location name="loc6" pos_x="-0.5" pos_y="-0.4" />
 		<Location name="center" pos_x="0" pos_y="0" />
   </Locations>
   
