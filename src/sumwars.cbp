@@ -184,6 +184,8 @@
 		<Unit filename="gui\chatline.h" />
 		<Unit filename="gui\controlpanel.cpp" />
 		<Unit filename="gui\controlpanel.h" />
+		<Unit filename="gui\dialoguewindow.cpp" />
+		<Unit filename="gui\dialoguewindow.h" />
 		<Unit filename="gui\graphicmanager.cpp" />
 		<Unit filename="gui\graphicmanager.h" />
 		<Unit filename="gui\graphicobject.cpp" />
