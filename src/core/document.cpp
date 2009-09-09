@@ -1527,6 +1527,16 @@ void Document::updateContent(float time)
 			m_modified |= WINDOWS_MODIFIED;
 		}
 	}
+	else if (player->getDialogueId() != 0 
+				|| (player->getRegion() !=0 && player->getRegion()->getCutsceneMode () == true))
+	{
+		
+		if (getGUIState()->m_shown_windows != (NO_WINDOWS))
+		{
+			getGUIState()->m_shown_windows = NO_WINDOWS;
+			m_modified |= WINDOWS_MODIFIED;
+		}
+	}
 	
 	if (player->getTradeInfo().m_trade_partner == 0 && (wmask & TRADE))
 	{
