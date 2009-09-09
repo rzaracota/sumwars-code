@@ -369,7 +369,7 @@ bool Player::onGamefieldClick(ClientCommand* command)
 						}
 					}
 				}
-				else if (wo->isCreature() && ( rel == Fraction::ALLIED || rel == Fraction::NEUTRAL))
+				else if (wo->isCreature() && ( rel == Fraction::ALLIED || rel == Fraction::NEUTRAL) && wo != this)
 				{
 					com->m_type ="speak";
 
