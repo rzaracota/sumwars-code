@@ -31,6 +31,9 @@ FIXED_OBJECT
 </ObjectTemplate>
 
 <ObjectTemplate name="$border" type="FIXED_OBJECT">
+		<Environment name="council">
+                <Object name="konz_wall1" />
+        </Environment>
         <Environment name="hills">
                 <Object name="wall1" />
                 <Object name="wall2" />
@@ -45,9 +48,6 @@ FIXED_OBJECT
         </Environment>
         <Environment name="cave">
                 <Object name="cave_wall1" />
-        </Environment>
-        <Environment name="council">
-                <Object name="konz_wall1" />
         </Environment>
 </ObjectTemplate>
 
@@ -66,7 +66,10 @@ FIXED_OBJECT
 </ObjectTemplate>
 
 <ObjectTemplate name="$border_m" type="FIXED_OBJECT">
-        <Environment name="hills">
+        <Environment name="council">
+                <Object name="konz_wall_m1" />
+        </Environment>
+		<Environment name="hills">
                 <Object name="wall_m1" />
         </Environment>
         <Environment name="meadow">
@@ -75,13 +78,14 @@ FIXED_OBJECT
         <Environment name="cave">
                 <Object name="cave_wall_m1" />
         </Environment>
-        <Environment name="council">
-                <Object name="konz_wall_m1" />
-        </Environment>
+        
 </ObjectTemplate>
 
 <ObjectTemplate name="$border_s" type="FIXED_OBJECT">
-        <Environment name="hills">
+        <Environment name="council">
+                <Object name="konz_wall_s1" />
+        </Environment>
+		<Environment name="hills">
                 <Object name="wall_s1" />
         </Environment>
         <Environment name="meadow">
@@ -90,13 +94,14 @@ FIXED_OBJECT
         <Environment name="cave">
                 <Object name="cave_wall_s1" />
         </Environment>
-        <Environment name="council">
-                <Object name="konz_wall_s1" />
-        </Environment>
+        
 </ObjectTemplate>
 
 <ObjectTemplate name="$border_t" type="FIXED_OBJECT">
-        <Environment name="hills">
+        <Environment name="council">
+                <Object name="konz_wall_t1" />
+        </Environment>
+		<Environment name="hills">
                 <Object name="wall_t1" />
         </Environment>
         <Environment name="meadow">
@@ -105,13 +110,14 @@ FIXED_OBJECT
         <Environment name="cave">
                 <Object name="cave_wall_t1" />
         </Environment>
-        <Environment name="council">
-                <Object name="konz_wall_t1" />
-        </Environment>
+       
 </ObjectTemplate>
 
 <ObjectTemplate name="$border_cIn" type="FIXED_OBJECT">
-        <Environment name="hills" default = "true">
+        <Environment name="council">
+                <Object name="konz_wall_cIn1" />
+        </Environment>
+		<Environment name="hills" default = "true">
                 <Object name="wall_cIn1" />
         </Environment>
         <Environment name="meadow">
@@ -120,13 +126,14 @@ FIXED_OBJECT
         <Environment name="cave">
                 <Object name="cave_wall_cIn1" />
         </Environment>
-        <Environment name="council">
-                <Object name="konz_wall_cIn1" />
-        </Environment>
+        
 </ObjectTemplate>
 
 <ObjectTemplate name="$border_cOut" type="FIXED_OBJECT">
-        <Environment name="hills" default = "true">
+        <Environment name="council">
+                <Object name="konz_wall_cOut1" />
+        </Environment>
+		<Environment name="hills" default = "true">
                 <Object name="wall_cOut1" />
         </Environment>
         <Environment name="meadow">
@@ -135,9 +142,7 @@ FIXED_OBJECT
         <Environment name="cave">
                 <Object name="cave_wall_cOut1" />
         </Environment>
-        <Environment name="council">
-                <Object name="konz_wall_cOut1" />
-        </Environment>
+        
 </ObjectTemplate>
 
 <ObjectTemplate name="$house" type="FIXED_OBJECT">
@@ -326,3 +331,42 @@ FIXED_OBJECT
         </Environment>
 </ObjectTemplate>
 
+<ObjectTemplate name="$prison" type="FIXED_OBJECT">
+        <Environment name="meadow" default = "true">
+                <Object name="fence1" />
+                <Object name="fence2" />
+                <Object name="fence3" />
+                <Object name="fence4" />
+                <Object name="fence5" />
+        </Environment>
+</ObjectTemplate>
+
+<ObjectTemplate name="$prison_m" type="FIXED_OBJECT">
+        <Environment name="meadow" default = "true">
+                <Object name="fence_m1" />
+        </Environment>
+</ObjectTemplate>
+
+<ObjectTemplate name="$prison_s" type="FIXED_OBJECT">
+        <Environment name="meadow" default = "true">
+                <Object name="fence_s1" />
+        </Environment>
+</ObjectTemplate>
+
+<ObjectTemplate name="$prison_t" type="FIXED_OBJECT">
+        <Environment name="meadow" default = "true">
+                <Object name="fence_t1" />
+        </Environment>
+</ObjectTemplate>
+
+<ObjectTemplate name="$prison_cIn" type="FIXED_OBJECT">
+         <Environment name="meadow" default = "true">
+                <Object name="fence_cIn1" />
+        </Environment>
+</ObjectTemplate>
+
+<ObjectTemplate name="$prison_cOut" type="FIXED_OBJECT">
+        <Environment name="meadow" default = "true">
+                <Object name="fence_cOut1" />
+        </Environment>
+</ObjectTemplate>

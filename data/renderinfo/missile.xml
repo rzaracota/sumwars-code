@@ -25,12 +25,8 @@
 </RenderInfo>
 
 <RenderInfo name="fire_wall">
-	<ParticleSystem objectname="particle" source="Firewall" position="0 1.6 0" />
 	
-	<Action name="grow">
-		<Entity objectname="ring" source="dummyRing.mesh" position="0 1.0 0" />
-		<Scale objectname="ring" start_val="0.1" end_val="4.0" />
-	</Action>
+	<ParticleSystem objectname="column" source="Firewall" position="0 1.2 0" />
 	
 	<Action name="shrink">
 		<Scale objectname="ring" start_val="4.0" end_val="0.1" />
@@ -40,7 +36,12 @@
 </RenderInfo>
 
 <RenderInfo name="fire_wave">
-	<ParticleSystem objectname="particle" source="Firewave" position="0 1.6 0" />
+	<ParticleSystem objectname="particle" source="Firewave" position="0 1.2 0" />
+	
+	<Action name="grow">
+		<Scale objectname="particle" start_val="0.5" end_val="7.0" />
+	</Action>
+	
 </RenderInfo>
 
 <RenderInfo name="ice_bolt">
@@ -49,6 +50,10 @@
 
 <RenderInfo name="ice_ring">
 	<ParticleSystem objectname="particle" source="Icering" position="0 1.6 0" />
+	
+	<Action name="grow">
+		<Scale objectname="particle" start_val="0.5" end_val="4.0" />
+	</Action>
 </RenderInfo>
 
 <RenderInfo name="blizzard">
@@ -119,7 +124,11 @@
 </RenderInfo>
 
 <RenderInfo name="explosion">
-	<ParticleSystem objectname="particle" source="Explosion" position="0 1.6 0" />
+
+	<ParticleSystem objectname="particle" source="Explosion" position="0 1.3 0" />
+	<Action name="stable">
+		<Scale  objectname = "particle" start_val="0.1" end_val="1.0" />
+	</Action>
 </RenderInfo>
 
 <RenderInfo name="fire_explosion">

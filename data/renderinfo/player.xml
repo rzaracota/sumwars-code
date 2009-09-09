@@ -111,8 +111,8 @@
 	
 	<Action name="fire_wave">
 		<Animation name="castMagicStrong" />
-		<ParticleSystem time = "0.1" objectname="magicEnergy" bone="mainmesh:itemLeftHand" source="FireLine" position="0.0 0.0 0.0" />
-		<Detach time="0.65" objectname="magicEnergy" />
+		<ParticleSystem time = "0.1" objectname="magicEnergy" bone="mainmesh:magicEffects" source="FireLine" position="0.0 0.0 0.0" />
+		<Detach time="1.0" objectname="magicEnergy" />
 		<ParticleSystem time = "0.7" objectname="fire" bone="mainmesh:itemLeftHand" source="HandFire" position="0.0 0.0 0.0" />
 		<Detach time="0.9" objectname="fire" />
 	</Action>
@@ -130,8 +130,8 @@
 	
 	<Action name="fire_wall">
 		<Animation name="castMagicStrong" />
-		<ParticleSystem time = "0.1" objectname="magicEnergy" bone="mainmesh:itemLeftHand" source="FireLine" position="0.0 0.0 0.0" />
-		<Detach time="0.65" objectname="magicEnergy" />
+		<ParticleSystem time = "0.1" objectname="magicEnergy" bone="mainmesh:magicEffects" source="FireLine" position="0.0 0.0 0.0" />
+		<Detach time="1.0" objectname="magicEnergy" />
 		<ParticleSystem time = "0.7" objectname="fire" bone="mainmesh:itemLeftHand" source="HandFire" position="0.0 0.0 0.0" />
 		<Detach time="0.9" objectname="fire" />
 	</Action>
@@ -152,7 +152,7 @@
 	<Action name="snow_storm">
 		<Animation name="castMagicStrong" />
 		<ParticleSystem time = "0.1" objectname="magicEnergy" bone="mainmesh:itemLeftHand" source="IceLine" position="0.0 0.0 0.0" />
-		<Detach time="0.65" objectname="magicEnergy" />
+		<Detach time="1.0" objectname="magicEnergy" />
 		<ParticleSystem time = "0.7" objectname="ice" bone="mainmesh:itemLeftHand" source="HandIce" position="0.0 0.0 0.0" />
 		<Detach time="0.9" objectname="ice" />
 	</Action>
@@ -192,9 +192,9 @@
 	
 	<Action name="thunderstorm">
 		<Animation name="castMagicStrong" />
-		<ParticleSystem time = "0.1" objectname="magicEnergy" bone="mainmesh:itemLeftHand" source="LightningLine" position="0.0 0.0 0.0" />
-		<Detach time="0.65" objectname="magicEnergy" />
-		<ParticleSystem time = "0.7" objectname="lightning" bone="mainmesh:itemLeftHand" source="HandLightning" position="0.0 0.0 0.0" />
+		<ParticleSystem time = "0.1" objectname="magicEnergy" bone="mainmesh:magicEffects" source="LightningLine" position="0.0 0.0 0.0" />
+		<Detach time="1.0" objectname="magicEnergy" />
+		<ParticleSystem time = "0.7" objectname="lightning" bone="mainmesh:itemRightHand" source="HandLightning" position="0.0 0.0 -1.0" />
 		<Detach time="0.9" objectname="lightning" />
 	</Action>
 	<Action name="thunderstorm#Unarmed">
@@ -387,8 +387,7 @@
 </RenderInfo>
 	
 <RenderInfo name="archer" parent="playerbase">
-	<Entity source="archer_f.mesh"/>
-	<Entity objectname="head" bone="crown" source="head_f1.mesh" />
-	<Entity objectname="weapon2" bone="itemRightHand" source="spruce_stf.mesh" />
+	<Entity objectname="circle1" source="basicCircle.mesh" />
+	<Entity objectname="circle2" source="basicCircle.mesh" position = "1 0 0" />
 	
 </RenderInfo>
