@@ -220,10 +220,10 @@ bool  ObjectLoader::loadCreatureBaseAttr(TiXmlNode* node, CreatureBaseAttr& basa
 	attr.getShort("resistances_ice",basattr.m_resistances[Damage::ICE],0);
 	attr.getShort("resistances_air",basattr.m_resistances[Damage::AIR],0);
 	attr.getShort("resistances_physical",basattr.m_resistances[Damage::PHYSICAL],0);
-	attr.getShort("resistances_fire",basattr.m_resistances[Damage::FIRE],0);
-	attr.getShort("resistances_ice",basattr.m_resistances[Damage::ICE],0);
-	attr.getShort("resistances_air",basattr.m_resistances[Damage::AIR],0);
-	attr.getShort("resistances_physical",basattr.m_resistances[Damage::PHYSICAL],0);
+	attr.getShort("resistances_cap_fire",basattr.m_resistances_cap[Damage::FIRE],50);
+	attr.getShort("resistances_cap_ice",basattr.m_resistances_cap[Damage::ICE],50);
+	attr.getShort("resistances_cap_air",basattr.m_resistances_cap[Damage::AIR],50);
+	attr.getShort("resistances_cap_physical",basattr.m_resistances_cap[Damage::PHYSICAL],50);
 	attr.getShort("walk_speed",basattr.m_walk_speed,2000);	
 	attr.getShort("attack_speed",basattr.m_attack_speed,1500);	
 	attr.getFloat("step_length",basattr.m_step_length,1);
