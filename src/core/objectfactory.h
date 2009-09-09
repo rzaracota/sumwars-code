@@ -250,6 +250,24 @@ class ObjectGroupTemplate
 		}
 		
 		/**
+		 * \fn std::map<AreaName, Shape>& getAreas()
+		 * \brief Gibt die Struktur mit den Gebieten aus
+		 */
+		std::map<AreaName, Shape>& getAreas()
+		{
+			return m_areas;
+		}
+		
+		/**
+		 * \fn void addArea(AreaName name, Shape area)
+		 * \brief Fuegt eine neue Flaeche ein
+		 */
+		void addArea(AreaName name, Shape area)
+		{
+			m_areas.insert(std::make_pair(name,area));	
+		}
+		
+		/**
 		 * \fn void addWaypoint(Vector pos)
 		 * \brief Fuegt einen Wegpunkt in das Template ein
 		 * \param pos Position
@@ -303,6 +321,12 @@ class ObjectGroupTemplate
 		 * \brief Orte mit Namen
 		 */
 		std::map<LocationName, Vector> m_locations;
+		
+		/**
+		 * \var std::map<AreaName, Shape> m_areas
+		 * \brief Orte mit Namen
+		 */
+		std::map<AreaName, Shape> m_areas;
 };
 
 

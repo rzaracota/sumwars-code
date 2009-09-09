@@ -1061,6 +1061,18 @@ void Region::createObjectGroup(ObjectGroupTemplateName templname, Vector positio
 			DEBUG5("template location %s",lt->first.c_str());
 		}
 		
+		std::map<AreaName, Shape>::iterator at;
+		Shape sh;
+		for (at = templ->getAreas().begin(); at != templ->getAreas().end(); ++at)
+		{
+			sh = at->second;
+			sh.m_angle += angle;
+			sh.m_center.rotate(angle);
+			sh.m_center += position;
+			
+			addArea(at->first,sh);
+		}
+		
 		// Trigger der besagt dass das Template eingefuegt wurde
 		if (tr !=0)
 		{

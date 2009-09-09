@@ -235,6 +235,49 @@ bool TemplateLoader::loadObjectGroupTemplate(TiXmlNode* node)
 						}
 					}
 				}
+				else if (!strcmp(child->Value(), "Areas"))
+				{
+					for ( child2 = child->FirstChild(); child2 != 0; child2 = child2->NextSibling())
+					{
+						if (child2->Type()==TiXmlNode::ELEMENT)
+						{
+							if (!strcmp(child2->Value(), "Area"))
+							{
+								std::string lname;
+								Shape shape;
+								
+								attr.parseElement(child2->ToElement());
+								std::string stype;
+								
+								attr.getFloat("center_x",shape.m_center.m_x);
+								attr.getFloat("center_y",shape.m_center.m_y);
+								attr.getString("type",stype,"CIRCLE");
+								if (stype == "RECT")
+								{
+									shape.m_type = Shape::RECT;
+									attr.getFloat("extent_x",shape.m_extent.m_x,0);
+									attr.getFloat("extent_y",shape.m_extent.m_y,0);
+								}
+								else
+								{
+									shape.m_type = Shape::CIRCLE;
+									attr.getFloat("radius",shape.m_radius,0);
+								}
+								attr.getFloat("angle",shape.m_angle);
+								shape.m_angle *= 3.14159 / 180.0;
+								attr.getString("name",lname);
+								
+								templ->addArea(lname,shape);
+								
+								DEBUG5("area for %s: %s",name.c_str(),lname.c_str());
+							}
+							else if (child2->Type()!=TiXmlNode::COMMENT)
+							{
+								DEBUG("unexpected element of <Areas>: %s",child->Value());
+							}
+						}
+					}
+				}
 				else if (child->Type()!=TiXmlNode::COMMENT)
 				{
 					DEBUG("unexpected element of <ObjectGroupTemplate>: %s",child->Value());

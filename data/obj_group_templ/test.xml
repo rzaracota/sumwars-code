@@ -30,6 +30,19 @@
 	  <Location name="loc6" pos_x="-0.5" pos_y="-0.4" />
 		<Location name="center" pos_x="0" pos_y="0" />
   </Locations>
-  
-
+  <Areas>
+	  <Area name="area1" type="RECT"
+			center_x="-5"
+			center_y="5"
+			extent_x="15"
+			extent_y="1"
+    		angle="90"
+			/>
+	  <Area name="area2" type="CIRCLE"
+			center_x="-5"
+			center_y="5"
+			radius="4"
+			angle="0"
+			/>
+  </Areas>
 </ObjectGroupTemplate>
