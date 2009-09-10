@@ -1,0 +1,111 @@
+<NPC refname="Gertlinde Kampfer">
+	<Trade refresh_time="300000" price_factor="1.4">
+		<TradeItem subtype="heal_1" number ="30" />
+		<TradeItem subtype="heal_2" number ="30" />
+	</Trade>
+	
+	<Topic name="trade" start_option="Potions" />
+</NPC>
+
+<NPC refname="Sybill">
+	<Trade refresh_time="600000" price_factor="1.5">
+		<TradeItem subtype="bronze_sw"  number="1" number_magical="0"/>
+		<TradeItem subtype="sabre_sw"  number="1" number_magical="0"/>
+		<TradeItem subtype="legions_sw"  number="1" number_magical="0"/>
+		<TradeItem subtype="steel2h_sw"  number="1" number_magical="0"/>
+		<TradeItem subtype="smash_sw"  number="1" number_magical="0"/>
+		<TradeItem subtype="horse_sw"  number="1" number_magical="0"/>
+		<TradeItem subtype="cleave_axe"  number="1" number_magical="0"/>
+		<TradeItem subtype="iron_axe"  number="1" number_magical="0"/>
+		<TradeItem subtype="riping_axe"  number="1" number_magical="0"/>
+		<TradeItem subtype="execut_axe"  number="1" number_magical="0"/>
+		<TradeItem subtype="iron_hmr"  number="1" number_magical="0"/>
+		<TradeItem subtype="maul_hmr"  number="1" number_magical="0"/>
+		<TradeItem subtype="guard_hmr"  number="1" number_magical="0"/>
+		<TradeItem subtype="silver_hmr"  number="1" number_magical="0"/>
+		<TradeItem subtype="short_sbw"  number="1" number_magical="0"/>
+		<TradeItem subtype="hunter_sbw"  number="1" number_magical="0"/>
+		<TradeItem subtype="rattan_sbw"  number="1" number_magical="0"/>
+		<TradeItem subtype="yew_lbw"  number="1" number_magical="0"/>
+		<TradeItem subtype="long_lbw"  number="1" number_magical="0"/>
+		<TradeItem subtype="soldr_lbw"  number="1" number_magical="0"/>
+		<TradeItem subtype="novice_wnd"  number="1" number_magical="0"/>
+		<TradeItem subtype="rock_wnd"  number="1" number_magical="0"/>
+		<TradeItem subtype="alder_wnd"  number="1" number_magical="0"/>
+		<TradeItem subtype="rock_stf"  number="1" number_magical="0"/>
+		<TradeItem subtype="alder_stf"  number="1" number_magical="0"/>
+	</Trade>
+	
+	<Topic name="trade" start_option="Trade" />
+</NPC>
+
+<NPC refname="Halgor">
+	<Trade refresh_time="600000" price_factor="1.5">
+		<TradeItem subtype="rivet_arm"  number="1" number_magical="0"/>
+		<TradeItem subtype="novice_arm"  number="1" number_magical="0"/>
+		<TradeItem subtype="merc_arm"  number="1" number_magical="0"/>
+		<TradeItem subtype="bandit_arm"  number="1" number_magical="0"/>
+		<TradeItem subtype="rngsh_arm"  number="1" number_magical="0"/>
+		<TradeItem subtype="leath_hlm"  number="1" number_magical="0"/>
+		<TradeItem subtype="merchd_hlm"  number="1" number_magical="0"/>
+		<TradeItem subtype="novice_hlm"  number="1" number_magical="0"/>
+		<TradeItem subtype="merc_hlm"  number="1" number_magical="0"/>
+		<TradeItem subtype="rngbnd_hlm"  number="1" number_magical="0"/>
+		<TradeItem subtype="novice_rob"  number="1" number_magical="0"/>
+		<TradeItem subtype="alch_rob"  number="1" number_magical="0"/>
+		<TradeItem subtype="sholar_rob"  number="1" number_magical="0"/>
+		<TradeItem subtype="snake_glv"  number="1" number_magical="0"/>
+		<TradeItem subtype="chain_glv"  number="1" number_magical="0"/>
+		<TradeItem subtype="bucskn_glv"  number="1" number_magical="0"/>
+		<TradeItem subtype="wood_shd"  number="1" number_magical="0"/>
+		<TradeItem subtype="bronze_shd"  number="1" number_magical="0"/>
+		<TradeItem subtype="iron_shd"  number="1" number_magical="0"/>
+		<TradeItem subtype="novice_hat"  number="1" number_magical="0"/>
+		<TradeItem subtype="alch_hat"  number="1" number_magical="0"/>
+		<TradeItem subtype="beret_hat"  number="1" number_magical="0"/>
+	</Trade>	
+	<Topic name="trade" start_option="Trade" />
+</NPC>
+
+<NPC refname="Marco">
+	<Trade refresh_time="600000" price_factor="2.5">
+		<TradeItem subtype="sabre_sw"  number="0" number_magical="1" min_enchant="100" max_enchant="400"/>
+		<TradeItem subtype="legions_sw"  number="0" number_magical="1" min_enchant="100" max_enchant="400"/>
+		<TradeItem subtype="smash_sw"  number="0" number_magical="1" min_enchant="100" max_enchant="400"/>
+		<TradeItem subtype="maul_hmr"  number="0" number_magical="1" min_enchant="100" max_enchant="400"/>
+		<TradeItem subtype="mrnstr_hmr"  number="0" number_magical="1" min_enchant="100" max_enchant="400"/>
+		<TradeItem subtype="guard_hmr"  number="0" number_magical="1" min_enchant="100" max_enchant="400"/>
+		<TradeItem subtype="long_lbw"  number="0" number_magical="1" min_enchant="100" max_enchant="400"/>
+		<TradeItem subtype="hunter_sbw"  number="0" number_magical="1" min_enchant="100" max_enchant="400"/>
+		<TradeItem subtype="rock_stf"  number="0" number_magical="1" min_enchant="100" max_enchant="400"/>
+		<TradeItem subtype="rock_wnd"  number="0" number_magical="1" min_enchant="100" max_enchant="400"/>
+		<TradeItem subtype="alder_wnd"  number="0" number_magical="1" min_enchant="100" max_enchant="400"/>
+		<TradeItem subtype="bandit_arm"  number="0" number_magical="1" min_enchant="100" max_enchant="400"/>
+		<TradeItem subtype="novice_arm"  number="0" number_magical="1" min_enchant="100" max_enchant="400"/>
+		<TradeItem subtype="alch_rob"  number="0" number_magical="1" min_enchant="100" max_enchant="400"/>
+		<TradeItem subtype="chain_glv"  number="0" number_magical="1" min_enchant="100" max_enchant="400"/>
+		<TradeItem subtype="snake_glv"  number="0" number_magical="1" min_enchant="100" max_enchant="400"/>
+		<TradeItem subtype="alch_hat"  number="0" number_magical="1" min_enchant="100" max_enchant="400"/>
+		<TradeItem subtype="novice_hlm"  number="0" number_magical="1" min_enchant="100" max_enchant="400"/>
+		<TradeItem subtype="merchd_hlm"  number="0" number_magical="1" min_enchant="100" max_enchant="400"/>
+		<TradeItem subtype="bronze_shd"  number="0" number_magical="1" min_enchant="100" max_enchant="400"/>
+		<TradeItem subtype="amber_rng"  number="0" number_magical="5" min_enchant="100" max_enchant="250"/>
+		<TradeItem subtype="silver_rng"  number="0" number_magical="5" min_enchant="100" max_enchant="400"/>
+		<TradeItem subtype="amber_aml"  number="0" number_magical="5" min_enchant="100" max_enchant="250"/>
+		<TradeItem subtype="silver_aml"  number="0" number_magical="5" min_enchant="100" max_enchant="400"/>
+	</Trade>	
+	
+	<Topic name="trade" start_option="Trade" />
+</NPC>
+
+<NPC refname="Sergeant Lutterer">
+</NPC>
+
+<NPC refname="Michel Bron">
+</NPC>
+
+<NPC refname="Leonard von Robenforst">
+</NPC>
+
+<NPC refname="Magus Convocatis Relau Feuerweber">
+</NPC>

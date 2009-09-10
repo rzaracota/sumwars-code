@@ -114,6 +114,7 @@
 <!-- Schlachtebeil -->
 <Item type="weapon" subtype="cleave_axe" name="cleaver" size="medium">
 	<Mesh file="axe.mesh" />
+	<Image image="set:ironha_axe.png image:full_image" />
 	<Attribute
 		level_requirement="8"
 		character_requirement="warrior,priest"
@@ -150,6 +151,7 @@
 <!-- Eisenaxt -->
 <Item type="weapon" subtype="iron_axe" name="iron axe" size="medium">
 	<Mesh file="axe.mesh" />
+	<Image image="set:ironha_axe.png image:full_image" />
 	<Attribute
 		level_requirement="13"
 		character_requirement="warrior,priest"

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" ?>
+<?xml version="1.0" ?>
 
 <!-- TWO HANDED SWORDS -->
 <!-- farmers two hand sword-->
@@ -154,7 +154,7 @@
 	<Image image="set:sword.png image:full_image" />
 	<Mesh file="merc2h_sw.mesh" />
 	<Attribute
-		level_requirement="13"
+		level_requirement="12"
 		character_requirement="warrior"
 		min_enchant="100"
 		max_enchant="400"

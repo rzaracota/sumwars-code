@@ -89,12 +89,19 @@ bool NPCTrade::checkRefresh(Equipement* &equ)
 			{
 				type = ItemFactory::getBaseType(it->m_subtype);
 				itm = ItemFactory::createItem(type,it->m_subtype);
-				itm->m_price = (int) (itm->m_price * m_cost_multiplier);
-
-				// einfuegen und erfolg testen
-				if (equ->insertItem(itm,false) == Equipement::NONE)
+				if (itm != 0)
 				{
-					delete itm;
+					itm->m_price = (int) (itm->m_price * m_cost_multiplier);
+	
+					// einfuegen und erfolg testen
+					if (equ->insertItem(itm,false) == Equipement::NONE)
+					{
+						delete itm;
+					}
+				}
+				else
+				{
+					ERRORMSG("could not create Item %s",it->m_subtype.c_str());
 				}
 			}
 

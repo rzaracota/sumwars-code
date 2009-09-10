@@ -418,10 +418,10 @@ void  WorldLoader::loadNPC( TiXmlNode* node)
 					attr.getInt("number", tradeobj.m_number,1);
 					attr.getInt("number_magical",tradeobj.m_number_magical,0);
 					attr.getFloat("min_enchant", tradeobj.m_min_enchant,0);
-					attr.getFloat("max_enchant", tradeobj.m_min_enchant,0);
+					attr.getFloat("max_enchant", tradeobj.m_max_enchant,0);
 					
 					tradeinfo.m_trade_objects.push_back(tradeobj);
-					DEBUG5("new trade Object for %s : %s %i %i %f %f",refname.c_str(),tradeobj.m_subtype.c_str(), tradeobj.m_number, tradeobj.m_number_magical, tradeobj.m_min_enchant, tradeobj.m_min_enchant);
+					DEBUG5("new trade Object for %s : %s %i %i %f %f",refname.c_str(),tradeobj.m_subtype.c_str(), tradeobj.m_number, tradeobj.m_number_magical, tradeobj.m_min_enchant, tradeobj.m_max_enchant);
 				}
 			}
 			else if (child->Type()!=TiXmlNode::COMMENT)

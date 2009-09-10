@@ -161,8 +161,14 @@
 				setRefName(fenor, 'Fenor Marken');
 				
 				trader = createObject('peasant', 'locWeaponTrader');
-				setRefName(trader, 'Trader');
+				setRefName(trader, 'Robert');
 				
+				trader = createObject('peasant', 'locArmorTrader');
+				setRefName(trader, 'Elgor');
+
+				trader = createObject('peasant', 'locPotionTrader');
+				setRefName(trader, 'Cain');
+
 				guard1 = createObject('guard', 'locSoldier1');
 				setRefName(guard1, 'Guard');
 				guard2 = createObject('guard', 'locSoldier2');
@@ -385,6 +391,15 @@
 				
 				magus_convocatis_relau_feuerweber = createObject("peasant", "locSummoner");
 				setRefName(magus_convocatis_relau_feuerweber, "Magus Convocatis Relau Feuerweber");
+				
+				trader = createObject('peasant_f', 'locWeaponTrader');
+				setRefName(trader, 'Sybill');
+				
+				trader = createObject('peasant', 'locArmorTrader');
+				setRefName(trader, 'Halgor');
+				
+				trader = createObject('peasant', 'locBlackmarket');
+				setRefName(trader, 'Marco');
 			</Effect>
 		</Event>
 	</Region>

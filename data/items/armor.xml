@@ -1,6 +1,6 @@
 <!-- Tuchruestung -->
 <!-- WAR, PRI, ARC, MAG-->
-<Item type="armor" subtype="cloth_arm" name="cloth armor" size="medium">
+<Item type="armor" subtype="cloth_arm" name="cloth armor" size="big">
 	<Image image="set:gobLeg_Arm.png image:full_image" />
 	<RenderInfo name="leathArm" />
 	<Attribute
@@ -32,7 +32,7 @@
 
 <!-- Lederruestung -->
 <!-- WAR, PRI, ARC, MAG-->
-<Item type="armor" subtype="leath_arm" name="leather armor" size="medium">
+<Item type="armor" subtype="leath_arm" name="leather armor" size="big">
 	<Image image="set:gobLeg_Arm.png image:full_image" />
 	<RenderInfo name="leathArm" />
 	<Attribute
@@ -64,7 +64,7 @@
 
 <!-- Nietenruestung -->
 <!-- WAR, PRI, ARC-->
-<Item type="armor" subtype="rivet_arm" name="rivet armor" size="medium">
+<Item type="armor" subtype="rivet_arm" name="rivet armor" size="big">
 	<Image image="set:gobLeg_Arm.png image:full_image" />
 	<RenderInfo name="leathArm" />
 	<Attribute
@@ -96,7 +96,7 @@
 
 <!-- Banditenruestung -->
 <!-- WAR, ARC-->
-<Item type="armor" subtype="bandit_arm" name="bandit armor" size="medium">
+<Item type="armor" subtype="bandit_arm" name="bandit armor" size="big">
 	<Image image="set:gobLeg_Arm.png image:full_image" />
 	<RenderInfo name="leathArm" />
 	<Attribute
@@ -128,7 +128,7 @@
 
 <!-- Novizenruestung -->
 <!-- PRI-->
-<Item type="armor" subtype="novice_arm" name="novice armor" size="medium">
+<Item type="armor" subtype="novice_arm" name="novice armor" size="big">
 	<Image image="set:gobLeg_Arm.png image:full_image" />
 	<RenderInfo name="leathArm" />
 	<Attribute
@@ -160,7 +160,7 @@
 
 <!-- Soeldnerruestung -->
 <!-- WAR, PRI-->
-<Item type="armor" subtype="merc_arm" name="mercenary armor" size="medium">
+<Item type="armor" subtype="merc_arm" name="mercenary armor" size="big">
 	<Image image="set:gobLeg_Arm.png image:full_image" />
 	<RenderInfo name="leathArm" />
 	<Attribute
@@ -192,7 +192,7 @@
 
 <!-- Waldlaeuferhemd -->
 <!-- ARC -->
-<Item type="armor" subtype="rngsh_arm" name="ranger shirt" size="medium">
+<Item type="armor" subtype="rngsh_arm" name="ranger shirt" size="big">
 	<Image image="set:gobLeg_Arm.png image:full_image" />
 	<RenderInfo name="leathArm" />
 	<Attribute
@@ -224,7 +224,7 @@
 
 <!-- Assassinenruestung -->
 <!-- WAR, ARC -->
-<Item type="armor" subtype="assass_arm" name="assassin armor" size="medium">
+<Item type="armor" subtype="assass_arm" name="assassin armor" size="big">
 	<Image image="set:gobLeg_Arm.png image:full_image" />
 	<RenderInfo name="leathArm" />
 	<Attribute
@@ -257,7 +257,7 @@
 
 <!-- Tempelruestung -->
 <!-- PRI -->
-<Item type="armor" subtype="temple_arm" name="temple armor" size="medium">
+<Item type="armor" subtype="temple_arm" name="temple armor" size="big">
 	<Image image="set:gobLeg_Arm.png image:full_image" />
 	<RenderInfo name="leathArm" />
 	<Attribute

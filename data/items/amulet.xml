@@ -57,7 +57,7 @@
 </Item>
 
 <!-- Silberamulet -->
-<Item type="amulet" subtype="silver_rng" name="silver amulet" size="small">
+<Item type="amulet" subtype="silver_aml" name="silver amulet" size="small">
 	<Image image="set:feath_aml.png image:full_image" />
 	<Mesh file="feath_aml.mesh" />
 	<Attribute
@@ -85,7 +85,7 @@
 </Item>
 
 <!-- Korallenamulet -->
-<Item type="amulet" subtype="coral_rng" name="coral amulet" size="small">
+<Item type="amulet" subtype="coral_aml" name="coral amulet" size="small">
 	<Image image="set:feath_aml.png image:full_image" />
 	<Mesh file="feath_aml.mesh" />
 	<Attribute
@@ -113,7 +113,7 @@
 </Item>
 
 <!-- Goldamulet -->
-<Item type="amulet" subtype="gold_rng" name="gold amulet" size="small">
+<Item type="amulet" subtype="gold_aml" name="gold amulet" size="small">
 	<Image image="set:feath_aml.png image:full_image" />
 	<Mesh file="feath_aml.mesh" />
 	<Attribute

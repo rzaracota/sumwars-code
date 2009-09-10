@@ -1,137 +1,8 @@
 <?xml version="1.0" ?>
 
-<NPC refname="peasant">
-	<!--
-	<Trade refresh_time="600000" price_factor="1.5">
-	
-		<TradeItem subtype="heal_1" number ="20" />
-		<TradeItem subtype="heal_2" number="15" />
-		<TradeItem subtype="hatch_axe"  number="1" number_magical="2" min_echant="100" max_enchant="500"/>
-		<TradeItem subtype="bronze_axe"  number="1" number_magical="2" min_echant="100" max_enchant="500"/>
-		<TradeItem subtype="lumber_axe"  number="1" number_magical="2" min_echant="100" max_enchant="500"/>
-		<TradeItem subtype="hammer_hmr"  number="1" number_magical="2" min_echant="100" max_enchant="500"/>
-		<TradeItem subtype="cermon_hmr"  number="1" number_magical="2" min_echant="100" max_enchant="500"/>
-		<TradeItem subtype="crude_sw"  number="1" number_magical="2" min_echant="100" max_enchant="500"/>
-		<TradeItem subtype="short_sw"  number="1" number_magical="1" min_echant="100" max_enchant="500"/>
-		<TradeItem subtype="bronze_sw"  number="1"/>
-		<TradeItem subtype="farm2h_sw"/>
-		<TradeItem subtype="merc2h_sw"  number="1" number_magical="2" min_echant="100" max_enchant="500"/>
-		<TradeItem subtype="long_lbw"  number="1" number_magical="2" min_echant="100" max_enchant="500"/>
-		<TradeItem subtype="leath_glv"  number="1" number_magical="2" min_echant="100" max_enchant="500"/>
-		<TradeItem subtype="wood_shd"  number="1" number_magical="2" min_echant="100" max_enchant="500"/>
-	</Trade>
-	
-	<Topic name="trade" start_option="Handel" />
-	
-	<Topic name="topic1" start_option="das erste Thema">
-		<Effect>
-			speak('peasant', 'blah',800);
-			speak('peasant2', 'muhaha',800);
-			speak('player','blubb',800);
-		</Effect>
-	</Topic>
-	
-	<Topic name="frage" start_option="dumme Fragen stellen">
-		<Effect>
-			speak('player', 'frage2',1000) ;
-			speak('peasant','antwort2.1',1000);
-			speak('peasant','antwort2.2',1000);
-			addQuestion('Was jetzt?');
-			addAnswer('nochmal das ganze','start'); 
-			addAnswer('was neues','neues');
-			addAnswer('was ganz neues ?','ganz_neues');
-			addAnswer('ciao','end'); 
-		</Effect>
-	</Topic>
-	
-	<Topic name="neues" >
-		<Effect>
-			speak('player', 'Gibts was neues?',1000)
-			speak('peasant','es gibt nix neues',1000);
-			speak('peasant','',1000);
-			speak('peasant','echt nicht',1000);
-			changeTopic('start');
-			neues = 1
-		</Effect>
-	</Topic>
-	
-	<Topic name="ganz_neues">
-		<Condition>
-			return (neues==1)
-		</Condition>
-		<Effect>
-			speak('player', 'Und Jetzt?',1000);
-			speak('peasant','du nervst!',1000);
-		</Effect>
-	</Topic>
-	-->
-</NPC>
 
-
-<NPC refname="Fenor Marken">
-</NPC>
-
-<NPC refname="Trader">
-	<Trade refresh_time="600000" price_factor="1.5">
-		<TradeItem subtype="heal_1" number ="20" />
-		<TradeItem subtype="heal_2" number="15" />
-		<TradeItem subtype="hatch_axe"  number="1" number_magical="2" min_echant="100" max_enchant="200"/>
-		<TradeItem subtype="bronze_axe"  number="1" number_magical="2" min_echant="100" max_enchant="200"/>
-		<TradeItem subtype="lumber_axe"  number="1" number_magical="2" min_echant="100" max_enchant="200"/>
-		<TradeItem subtype="hammer_hmr"  number="1" number_magical="2" min_echant="100" max_enchant="200"/>
-		<TradeItem subtype="cermon_hmr"  number="1" number_magical="2" min_echant="100" max_enchant="200"/>
-		<TradeItem subtype="short_sw"  number="1" number_magical="1" min_echant="100" max_enchant="200"/>
-		<TradeItem subtype="bronze_sw"  number="1"/>
-		<TradeItem subtype="farm2h_sw"/>
-		<TradeItem subtype="merc2h_sw"  number="1" number_magical="2" min_echant="100" max_enchant="200"/>
-		<TradeItem subtype="long_lbw"  number="1" number_magical="2" min_echant="100" max_enchant="200"/>
-		<TradeItem subtype="leath_glv"  number="1" number_magical="2" min_echant="100" max_enchant="200"/>
-		<TradeItem subtype="wood_shd"  number="1" number_magical="2" min_echant="100" max_enchant="200"/>
-	</Trade>
-	
-	<Topic name="trade" start_option="Trade" />
-	
-	<Topic name="start_dialogue" >
-		<Effect>
-			local player = getSpeaker("player");
-			local npc = getSpeaker("npc");
-			lookAt(npc,getPosition(player));
-		</Effect>
-	</Topic>
-	
-	<Topic name="testtopic" start_option="test" >
-		<Effect>
-			speak('npc',"Hallo",1000);
-			speak('npc', "Nicht reinquatschen",1500)
-			jumpTopic("blahtopic");
-			speak('npc', "Nicht reinquatschen",1500)
-			speak('npc',"Arsch",1000);
-		</Effect>
-	</Topic>
-	
-	<Topic name="blahtopic" >
-		<Effect>
-			unitSpeak(getSpeaker('player'),"Blah!",1000);
-		</Effect>
-	</Topic>	
-</NPC>
-
-<NPC refname="Sergeant Lutterer">
-</NPC>
-
-<NPC refname="Michel Bron">
-</NPC>
 
 <NPC refname="Brons Tuer">
-</NPC>
-
-<NPC refname="Gertlinde Kampfer">
-	<Trade refresh_time="300000" price_factor="1.5">
-		<TradeItem subtype="heal_1" number ="20" />
-		<TradeItem subtype="heal_2" number ="20" />
-	</Trade>
-	
-	<Topic name="trade" start_option="Potions" />
 </NPC>
 
 <NPC refname="Sergeant Wober">
@@ -158,11 +29,6 @@
 <NPC refname="Prince Charming">
 </NPC>
 
-<NPC refname="Leonard von Robenforst">
-</NPC>
-
-<NPC refname="Magus Convocatis Relau Feuerweber">
-</NPC>
 
 <NPC refname="Erzmaga Ireana von Nordenburg">
 </NPC>

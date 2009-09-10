@@ -626,8 +626,8 @@ void Item::calcPrice()
 		// Modifikation beim anlegen
 		CreatureBaseAttrMod* cbasm = m_equip_effect;
 
-		value += cbasm->m_darmor*0.5;
-		value += cbasm->m_dblock*0.5;
+		value += cbasm->m_darmor;
+		value += cbasm->m_dblock;
 		value += cbasm->m_dattack*0.1;
 		value += cbasm->m_dmax_health*0.2;
 		value += cbasm->m_dstrength;

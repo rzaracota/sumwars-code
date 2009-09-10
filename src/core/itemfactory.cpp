@@ -80,11 +80,12 @@ Item* ItemFactory::createGold(int value, int id)
 
 void ItemFactory::createMagicMods(Item* item, float* modchance, float magic_power, float min_enchant, float max_enchant)
 {
+	DEBUG5("magic power %f min_enchant %f",magic_power, min_enchant);
 	if (magic_power < min_enchant)
 		return;
 	
 	// Modifikationen des Items auswuerfeln
-	DEBUG4("mods auswuerfeln");
+	DEBUG5("mods auswuerfeln");
 
 	magic_power = std::min(magic_power, max_enchant*4);
 	item->m_magic_power =0;
@@ -136,10 +137,10 @@ void ItemFactory::createMagicMods(Item* item, float* modchance, float magic_powe
 		sqrtmp = sqrt(mp);
 		logmp = log(mp);
 		magic_power -= mp;
-		DEBUG5("ausgewuerfelt: Starke der Verzauberung: %f",mp);
-
+		
 			// Modifikation auswuerfeln
 		mod = Random::randDiscrete(modprob,31,sum);
+		DEBUG5("ausgewuerfelt: Starke der Verzauberung: %f",mp);
 		DEBUG5("Art der Verzauberung: %i",mod);
 
 		num_mods++;
