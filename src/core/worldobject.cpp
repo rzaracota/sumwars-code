@@ -14,6 +14,7 @@ WorldObject::WorldObject( int id)
 	
 	m_fraction = Fraction::NOFRACTION;
 	m_race = "";
+	m_interaction_flags =0;
 }
 
 bool WorldObject::isCreature()
@@ -76,7 +77,7 @@ void WorldObject::toString(CharConv* cv)
 	GameObject::toString(cv);
 	cv->toBuffer(m_fraction);
 	cv->toBuffer(m_race);
-	
+	cv->toBuffer(m_interaction_flags);
 }
 
 void WorldObject::fromString(CharConv* cv)
@@ -84,7 +85,7 @@ void WorldObject::fromString(CharConv* cv)
 	GameObject::fromString(cv);
 	cv->fromBuffer(m_fraction);	
 	cv->fromBuffer(m_race);
-	
+	cv->fromBuffer(m_interaction_flags);
 }
 
 

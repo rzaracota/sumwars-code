@@ -127,7 +127,16 @@ class WorldObject : public GameObject
 		STATIC_SHIELD = 0x1000
 	};
 
-
+	/**
+	 * \enum InteractionFlags
+	 * \brief eine Reihe von Einstellungen die die Interaktion mit dem Spieler und anderen Objekte beeinflussen
+	 */
+	enum InteractionFlags
+	{
+		COLLISION_DETECTION=0x1,
+		EXACT_MOUSE_PICKING = 0x2,
+		USABLE = 0x4
+	};
 
 
 	//Fields
@@ -263,6 +272,27 @@ class WorldObject : public GameObject
 	 */
 	void setRace(Race race);
 	
+	/**
+	 * \fn void setInteractionFlags(char flags)
+	 * \brief Setzt die Flags fuer die Interaktion
+	 * \param flags gesetzte Flags
+	 */
+	void setInteractionFlags(char flags)
+	{
+		m_interaction_flags = flags;
+	}
+	
+	/**
+	 * \fn bool checkInteractionFlag(InteractionFlags flag)
+	 * \brief Prueft ob ein Flag gesetzt ist
+	 * \param flag Flag
+	 */
+	bool checkInteractionFlag(InteractionFlags flag)
+	{
+		return (m_interaction_flags & flag);
+	}
+	
+	
 	
 	/**
 	 * \fn WorldObject::Group getGroup()
@@ -329,6 +359,12 @@ class WorldObject : public GameObject
 	 * \brief Fraktion des Objektes
 	 */
 	Fraction::Id m_fraction;
+	
+	/**
+	 * \var char m_interaction_flags
+	 * \brief einige Flags fuer die Interaktion
+	 */
+	char m_interaction_flags;
 		
 //Private stuff
 private:

@@ -16,6 +16,7 @@ ScriptObject::ScriptObject(int id)
 	m_animation_elapsed_time = 0;
 	m_animation_repeat =false;
 	
+	m_interaction_flags =  EXACT_MOUSE_PICKING | USABLE;
 }
 
 ScriptObject::~ScriptObject()

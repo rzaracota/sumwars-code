@@ -464,6 +464,7 @@ bool ObjectLoader::loadObject(TiXmlNode* node)
 		if (!strcmp(node->Value(), "ScriptObject"))
 		{
 			sdata = new ScriptObjectData;
+			sdata->m_interaction_flags = WorldObject::USABLE | WorldObject::EXACT_MOUSE_PICKING;
 			data = &(sdata->m_fixed_data);
 		}
 		else
@@ -535,6 +536,29 @@ bool ObjectLoader::loadObject(TiXmlNode* node)
 				Event* ev = new Event();
 				WorldLoader::loadEvent(child, ev,type);
 				sdata->m_events.insert(std::make_pair(type,ev));
+			}
+			else if (child->Type()==TiXmlNode::ELEMENT && !strcmp(child->Value(), "Flags") && sdata != 0)
+			{
+				std::string flag;
+				attr.parseElement(child->ToElement());
+				attr.getString("usable",flag,"");
+				if (flag == "true")
+					sdata->m_interaction_flags |= WorldObject::USABLE;
+				else if (flag == "false")
+					sdata->m_interaction_flags &= ~WorldObject::USABLE;
+				
+				attr.getString("exact_picking",flag,"");
+				if (flag == "true")
+					sdata->m_interaction_flags |= WorldObject::EXACT_MOUSE_PICKING;
+				else if (flag == "false")
+					sdata->m_interaction_flags &= ~WorldObject::EXACT_MOUSE_PICKING;
+				
+				attr.getString("collision_detect",flag,"");
+				if (flag == "true")
+					sdata->m_interaction_flags |= WorldObject::COLLISION_DETECTION;
+				else if (flag == "false")
+					sdata->m_interaction_flags &= ~WorldObject::COLLISION_DETECTION;
+				
 			}
 			else if (child->Type()!=TiXmlNode::COMMENT)
 			{

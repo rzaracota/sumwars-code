@@ -90,6 +90,8 @@ bool Creature::init()
 	m_speak_id =0;
 	m_dialogue_id =0;
 	m_equipement =0;
+	
+	m_interaction_flags = COLLISION_DETECTION;
 
 	// Bewegung auf 0 setzen
 	setSpeed(Vector(0,0));

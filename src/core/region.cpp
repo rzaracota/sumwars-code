@@ -782,11 +782,13 @@ void Region::getObjectsOnLine(Line& line,  WorldObjectList* result,short layer, 
 }
 
 
-bool Region::insertObject(WorldObject* object, Vector pos, float angle, bool collision_test)
+bool Region::insertObject(WorldObject* object, Vector pos, float angle )
 {
 	DEBUG5("try to insert %s at %f %f",object->getSubtype().c_str(), pos.m_x,pos.m_y);
 	bool result = true;
-
+	
+	bool collision_test = object->checkInteractionFlag(WorldObject::COLLISION_DETECTION);
+	
 	object->setRegionId(m_id);
 
 	 // Einfügen in den Binärbaum
@@ -923,8 +925,6 @@ int Region::createObject(ObjectTemplateType generictype, Vector pos, float angle
 		return 0;
 	}
 	
-	bool collision_test=true;
-	
 	// Basistyp ermitteln
 	WorldObject::Type type = ObjectFactory::getObjectBaseType(subtype);
 	if (type == "NONE")
@@ -959,14 +959,10 @@ int Region::createObject(ObjectTemplateType generictype, Vector pos, float angle
 		}
 	}
 	
-	if (object->getType() == "FIXED_OBJECT")
-	{
-		collision_test= false;
-	}
 			
 	// Objekt einfuegen
 	object->setHeight(height);
-	bool ret = insertObject(object,pos,angle,collision_test);
+	bool ret = insertObject(object,pos,angle);
 	if (!ret)
 	{
 		DEBUG("insertion of object %s failed",object->getName().c_str());

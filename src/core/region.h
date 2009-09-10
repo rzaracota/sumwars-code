@@ -476,15 +476,14 @@ class Region
 		~Region();
 
 		/**
-		 * \fn insertObject (WorldObject* object, Vector pos, float angle=0, bool collision_test =false)
+		 * \fn insertObject (WorldObject* object, Vector pos, float angle=0)
 		 * \brief Fuegt ein bereits existierendes WorldObject ein
 		 * \param object Zeiger auf das Objekt, welches eingefuegt werden soll
 		 * \param pos Position an der das Objekt eingefuegt wird
 		 * \param angle Drehwinkel des Objektes
-		 * \param collision_test wenn auf true gesetzt, wird geprueft ob das Objekt mit einem anderen kollidiert und die Positions in dem Fall leicht geaendert
 		 * \return bool, der angibt, ob die Operation erfolgreich war
 		 */
-		bool insertObject (WorldObject* object, Vector pos, float angle=0, bool collision_test =false);
+		bool insertObject (WorldObject* object, Vector pos, float angle=0);
 		
 		/**
 		 * \fn int createObject(ObjectTemplateType generictype, Vector pos, float angle=0, float height=0, WorldObject::State state = WorldObject::STATE_ACTIVE)

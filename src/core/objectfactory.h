@@ -61,6 +61,12 @@ struct ScriptObjectData
 	std::multimap<TriggerType, Event*> m_events;
 	
 	/**
+	 * \var char m_interaction_flags
+	 * \brief Flags, die die Interaktion des Objekts mit der Umgebung bestimmen
+	 */
+	char m_interaction_flags;
+	
+	/**
 	 * \fn ~ScriptObjectData()
 	 * \brief Destruktor
 	 */

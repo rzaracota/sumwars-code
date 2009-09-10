@@ -867,7 +867,7 @@ int  EventSystem::createScriptObject(lua_State *L)
 		
 		wo->setLayer(layer);
 		wo->setSubtype(subtype);
-		m_region->insertObject(wo, wo->getPosition(),0, true);
+		m_region->insertObject(wo, wo->getPosition(),0);
 		ret = wo->getId();
 		
 	}

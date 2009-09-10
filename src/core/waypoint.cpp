@@ -17,6 +17,8 @@ bool Waypoint::init ()
 
 	setState(STATE_ACTIVE,false);
 	setSubtype("waypoint");
+	
+	m_interaction_flags = EXACT_MOUSE_PICKING | USABLE;
 	return true;
 }
 
