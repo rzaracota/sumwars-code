@@ -1531,9 +1531,9 @@ void Document::updateContent(float time)
 				|| (player->getRegion() !=0 && player->getRegion()->getCutsceneMode () == true))
 	{
 		
-		if (getGUIState()->m_shown_windows != (NO_WINDOWS))
+		if (getGUIState()->m_shown_windows & (~QUESTIONBOX) != 0)
 		{
-			getGUIState()->m_shown_windows = NO_WINDOWS;
+			getGUIState()->m_shown_windows &= QUESTIONBOX;
 			m_modified |= WINDOWS_MODIFIED;
 		}
 	}
