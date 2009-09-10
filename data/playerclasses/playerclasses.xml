@@ -37,6 +37,7 @@
 	<ItemRequirementTag name="warrior" />
 	
 	<Look name="warrior" render_info="warrior_m" gender="male" emotionset="human_standard"/>
+	<Look name="fencer" render_info="warrior_f" gender="female" emotionset="human_standard"/>
 	<SkilltreeTabs tab1="Fighting skills" tab2="Passive skills" tab3="Fighting spirit" />
 	
 	<Item type="dagger_sw" />

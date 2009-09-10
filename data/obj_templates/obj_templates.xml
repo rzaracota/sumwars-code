@@ -371,9 +371,9 @@ FIXED_OBJECT
         </Environment>
 </ObjectTemplate>
 
-<ObjectTemplate name="$door_arch" type="FIXED_OBJECT">
+<ObjectTemplate name="$door_arc" type="FIXED_OBJECT">
         <Environment name="council" default = "true">
-                <Object name="konz_door_arch" />
+                <Object name="konz_door_arc" />
         </Environment>
 </ObjectTemplate>
 
@@ -392,5 +392,11 @@ FIXED_OBJECT
 <ObjectTemplate name="$door_sec_l" type="SCRIPTOBJECT">
         <Environment name="council" default = "true">
                 <Object name="shelf_door_l1" />
+        </Environment>
+</ObjectTemplate>
+
+<ObjectTemplate name="$money" type="FIXED_OBJECT">
+        <Environment name="council" default = "true">
+                <Object name="gold" />
         </Environment>
 </ObjectTemplate>

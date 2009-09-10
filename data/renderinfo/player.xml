@@ -4,6 +4,9 @@
 	<Action name="noaction">
 		<Animation name="idle" />
 	</Action>
+	<Action name="noaction#TwoHands">
+		<Animation name="idleTwoHands" />
+	</Action>
 	
 	<Action name="use">
 		<Animation name="idle" />
@@ -17,10 +20,13 @@
 		<Animation name="walkOneHand" />
 	</Action>
 	<Action name="walk#Unarmed">
+	<Action name="walk#OneHand">
+		<Animation name="walkOneHand" />
+	</Action>
 		<Animation name="walkUnarmed" />
 	</Action>
 	<Action name="walk#TwoHands">
-		<Animation name="walkBow" />
+		<Animation name="walkTwoHands" />
 	</Action>
 	
 	<Action name="attack">
@@ -367,6 +373,11 @@
 
 <RenderInfo name="warrior_m" parent="playerbase" >
 	<Entity source="warrior_m.mesh"/>
+</RenderInfo>
+
+<RenderInfo name="warrior_f" parent="playerbase" >
+	<Entity source="archer_f.mesh"/>
+	<Entity objectname="head" bone="crown" source="head_f1.mesh" />
 </RenderInfo>
 
 <RenderInfo name="mage_m" parent="playerbase" >
