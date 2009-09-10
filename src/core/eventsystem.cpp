@@ -1335,6 +1335,20 @@ int EventSystem::dropItem(lua_State *L)
 	return 0;
 }
 
+int EventSystem::dropRandomItem(lua_State *L)
+{
+	int argc = lua_gettop(L);
+	if (argc>=2 && (lua_istable(L,2) || lua_isstring(L,2)) && lua_isstring(L,1))
+	{
+		
+	}
+	else
+	{
+		ERRORMSG("Syntax: :dropItem({bigprob, mediumprob, smallprob, goldprob},{float x,float y},int min_level, int max_level, int min_gold, int max_gold, float magic_prob, [magic_power]");
+	}
+	return 0;
+}
+
 int EventSystem::addLocation(lua_State *L)
 {
 	int argc = lua_gettop(L);

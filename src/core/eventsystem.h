@@ -358,6 +358,12 @@ class EventSystem
 		static int dropItem(lua_State *L);
 		
 		/**
+		 * \fn static int dropRandomItem(lua_State *L)
+		 * \brief Erzeugt einen zufaelligen Gegenstand
+		 */
+		static int dropRandomItem(lua_State *L);
+		
+		/**
 		 * \fn static int addLocation(lua_State *L)
 		 * \brief Fuegt einen neuen Ort hinzu
 		 * \param L Lua Status

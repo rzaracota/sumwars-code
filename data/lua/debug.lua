@@ -13,20 +13,9 @@ function xx(layer)
 end;
 		
 function cc()
-	door = createObject("door","loc1");
-	switch = createObject("switch","loc3");
-	scriptobjectvar[switch]["door"] = door;
-	
-	local pos = getLocation("loc1");
-	pos2 ={pos[1] - 0.7; pos[2] +4};
-	createObject("wall_m1",pos2);
-	pos2 ={pos[1] - 0.7; pos[2] -4};
-	createObject("wall_m1",pos2);
-	
+	door = createObject("shelf_door_l1","loc1",90);
 end;
 
 function vv()
-	insertTrigger("object_use");
-	addTriggerVariable("_id",door);
-	addTriggerVariable("used_object",door);
+	
 end;

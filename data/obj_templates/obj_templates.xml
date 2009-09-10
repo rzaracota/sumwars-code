@@ -370,3 +370,27 @@ FIXED_OBJECT
                 <Object name="fence_cOut1" />
         </Environment>
 </ObjectTemplate>
+
+<ObjectTemplate name="$door_arch" type="FIXED_OBJECT">
+        <Environment name="council" default = "true">
+                <Object name="konz_door_arch" />
+        </Environment>
+</ObjectTemplate>
+
+<ObjectTemplate name="$door_SciFi_m" type="SCRIPTOBJECT">
+        <Environment name="council" default = "true">
+                <Object name="konz_door1" />
+        </Environment>
+</ObjectTemplate>
+
+<ObjectTemplate name="$door_sec_r" type="SCRIPTOBJECT">
+        <Environment name="council" default = "true">
+                <Object name="shelf_door_r1" />
+        </Environment>
+</ObjectTemplate>
+
+<ObjectTemplate name="$door_sec_l" type="SCRIPTOBJECT">
+        <Environment name="council" default = "true">
+                <Object name="shelf_door_l1" />
+        </Environment>
+</ObjectTemplate>
