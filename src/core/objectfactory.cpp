@@ -172,6 +172,7 @@ WorldObject* ObjectFactory::createObject(GameObject::Type type, GameObject::Subt
 		ret->setLayer(data->m_fixed_data.m_layer);
 		ScriptObject* so = static_cast<ScriptObject*>(ret);
 		so->setRenderInfo(data->m_render_info);
+		so->setInteractionFlags(data->m_interaction_flags);
 		
 		std::multimap<TriggerType, Event*>::iterator et;
 		Event* ev;

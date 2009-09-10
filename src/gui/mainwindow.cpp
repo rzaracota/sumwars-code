@@ -1150,6 +1150,11 @@ void MainWindow::updateObjectInfo()
 			wo = dynamic_cast<WorldObject*>(go);
 			if (wo != 0)
 			{
+				if (wo->checkInteractionFlag(WorldObject::USABLE) == false)
+				{
+					continue;
+				}
+				
 				if (World::getWorld()->getRelation(m_document->getLocalPlayer()->getFraction(), wo->getFraction()) == Fraction::ALLIED)
 				{
 					dist *=10;
@@ -1161,7 +1166,7 @@ void MainWindow::updateObjectInfo()
 			
 			Ogre::Entity *pentity = dynamic_cast<Ogre::Entity*>(it->movable);
 			bool rayhit = true;
-			if ((go->getType() == "FIXED_OBJECT" || go->getType() == "DROPITEM")  && pentity != 0)
+			if ((wo!=0 && wo->checkInteractionFlag(WorldObject::EXACT_MOUSE_PICKING) || go->getType() == "DROPITEM")  && pentity != 0)
 			{
 				rayhit = false;
 				
