@@ -10,6 +10,7 @@
 #include "action.h"
 #include "elementattrib.h"
 #include "projectilebase.h"
+#include "treasurebase.h"
 
 #include "../tinyxml/tinyxml.h"
 #include <string>

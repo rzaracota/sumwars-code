@@ -59,7 +59,7 @@ struct DropSlot
 	 */
 	DropSlot()
 	{
-		for (int i=0;i<4;i++)
+		for (int i=0;i<5;i++)
 		{
 			m_size_probability[i]=0;
 		}
@@ -69,6 +69,22 @@ struct DropSlot
 		m_magic_probability =0;
 		m_magic_power =0;
 	};
+	
+	/**
+	 * \fn void operator=(DropSlot& other)
+	 * \brief Kopieroperator
+	 */
+	void operator=(DropSlot& other)
+	{
+		for (int i=0; i<5; i++)
+			m_size_probability[i]= other.m_size_probability[i];
+		m_magic_power = other.m_magic_power;
+		m_magic_probability = other.m_magic_probability;
+		m_max_gold = other.m_max_gold,
+		m_min_gold = other.m_min_gold;
+		m_min_level = other.m_min_level;
+		m_max_level = other.m_max_level;
+	}
 	
 	/**
 	 * \fn void init(float size_prob[4], int min_level, int max_level, float magic_prob, float magic_power)

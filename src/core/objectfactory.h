@@ -4,9 +4,11 @@
 
 
 #include <map>
+#include "fixedbase.h"
 #include "monsterbase.h"
 #include "playerbase.h"
 #include "projectilebase.h"
+#include "treasurebase.h"
 #include "../tinyxml/tinyxml.h"
 #include <string>
 #include <list>
@@ -17,24 +19,6 @@
 class World;
 
 
-/**
- * \struct FixedObjectData
- * \brief Struktur mit den Daten von fixenObjekten
- */
-struct FixedObjectData
-{
-	/**
-	 * \var short m_layer
-	 * \brief Ebene in der sich das Objekt befindet
-	 */
-	short m_layer;
-
-	/**
-	 * \var Shape m_shape
-	 * \brief Form des Objektes
-	 */
-	Shape m_shape;
-};
 
 /**
  * \struct ScriptObjectData
@@ -452,6 +436,14 @@ class ObjectFactory
 	static void registerProjectile(GameObject::Subtype subtype, ProjectileBasicData* data);
 	
 	/**
+	 * \fn static void registerTreasure(GameObject::Subtype subtype, TreasureBasicData* data)
+	 * \brief Registriert die Daten fuer ein Projectil
+	 * \param subtype Subtyp des Objektes
+	 * \param data Daten des festen Projectils
+	 */
+	static void registerTreasure(GameObject::Subtype subtype, TreasureBasicData* data);
+	
+	/**
 	 * \fn static registerObjectTemplate(ObjectTemplateType type, ObjectTemplate* templ)
 	 * \brief Registriert ein neues Objekttemplate
 	 * \param type Typ des Templates
@@ -565,6 +557,12 @@ class ObjectFactory
 	 * \brief Basisdaten zu Geschossen
 	 */
 	static std::map<GameObject::Subtype, ProjectileBasicData*> m_projectile_data;
+	
+	/**
+	 * \var static std::map<GameObject::Subtype, TreasureBasicData*> m_treasure_data
+	 * \brief Basisdaten zu Schaetzen
+	*/
+	static std::map<GameObject::Subtype, TreasureBasicData*> m_treasure_data;
 	
 	/**
 	 * \var static std::map<GameObject::Subtype, PlayerBasicData*> m_player_data

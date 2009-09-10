@@ -951,7 +951,7 @@ int EventSystem::addUnitCommand(lua_State *L)
 		WorldObject* wo = m_region->getObject(id);
 		if (wo !=0)
 		{
-			if (wo->getType() != "FIXED_OBJECT")
+			if (wo->isCreature())
 			{
 				Creature* cr = static_cast<Creature*>(wo);
 
@@ -1037,7 +1037,7 @@ int  EventSystem::setUnitAction(lua_State *L)
 		WorldObject* wo = m_region->getObject(id);
 		if (wo !=0)
 		{
-			if (wo->getType() != "FIXED_OBJECT")
+			if (wo->isCreature())
 			{
 				Creature* cr = static_cast<Creature*>(wo);
 

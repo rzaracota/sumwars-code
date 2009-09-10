@@ -13,7 +13,7 @@ function xx(layer)
 end;
 		
 function cc()
-	door = createObject("shelf_door_l1","loc1",90);
+	door = createObject("treasure_box_m1","loc1",90);
 end;
 
 function vv()

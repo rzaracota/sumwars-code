@@ -19,7 +19,7 @@ WorldObject::WorldObject( int id)
 
 bool WorldObject::isCreature()
 {
-	return (getBaseType() == WORLDOBJECT && getType() != "FIXED_OBJECT");
+	return (getBaseType() == WORLDOBJECT && getType() != "FIXED_OBJECT" && getType() != "TREASURE");
 }
 
 bool WorldObject::isLarge()

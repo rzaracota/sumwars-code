@@ -7,6 +7,7 @@
 #include "projectile.h"
 #include "scriptobject.h"
 #include "templateloader.h"
+#include "treasure.h"
 
 
 // globale Daten
@@ -31,6 +32,8 @@ std::map<GameObject::Subtype, ProjectileBasicData*> ObjectFactory::m_projectile_
 std::map<std::string, EmotionSet*> ObjectFactory::m_emotion_sets;
 
 std::multimap< GameObject::Subtype, PlayerLook> ObjectFactory::m_player_look;
+
+std::map<GameObject::Subtype, TreasureBasicData*> ObjectFactory::m_treasure_data;
 
 GameObject::Subtype ObjectTemplate::getObject(EnvironmentName env)
 {
@@ -183,6 +186,23 @@ WorldObject* ObjectFactory::createObject(GameObject::Type type, GameObject::Subt
 		}
 		
 	}
+	else if (type =="TREASURE")
+	{
+		TreasureBasicData* data;
+		std::map<GameObject::Subtype, TreasureBasicData*>::iterator i;
+
+		i = m_treasure_data.find(subtype);
+		if (i== m_treasure_data.end())
+		{
+			ERRORMSG("subtype not found: %s",subtype.c_str());
+			return 0;
+		}
+		data = i->second;
+		
+		ret = new Treasure(id,*data);
+		ret->setSubtype(subtype);
+	}
+	
 	return ret;
 }
 
@@ -301,6 +321,12 @@ void ObjectFactory::registerProjectile(GameObject::Subtype subtype, ProjectileBa
 	m_projectile_data.insert(std::make_pair(subtype,data));
 }
 
+void ObjectFactory::registerTreasure(GameObject::Subtype subtype, TreasureBasicData* data)
+{
+	m_object_types.insert(std::make_pair(subtype, "TREASURE"));
+	m_treasure_data.insert(std::make_pair(subtype,data));
+}
+
 void ObjectFactory::registerPlayer(GameObject::Subtype subtype, PlayerBasicData* data)
 {
 	m_object_types.insert(std::make_pair(subtype, "PLAYER"));
@@ -411,19 +437,7 @@ void ObjectFactory::init()
 
 void ObjectFactory::cleanup()
 {
-	std::map<GameObject::Subtype, MonsterBasicData*>::iterator it1;
-	for (it1 = m_monster_data.begin(); it1 != m_monster_data.end(); ++it1)
-	{
-		delete it1->second;
-	}
-	m_monster_data.clear();
-
-	std::map<GameObject::Subtype, FixedObjectData*>::iterator it2;
-	for (it2 = m_fixed_object_data.begin(); it2 != m_fixed_object_data.end(); ++it2)
-	{
-		delete it2->second;
-	} 
-	m_fixed_object_data.clear();
+	cleanupObjectData();
 	
 	std::map<ObjectTemplateType, ObjectTemplate*>::iterator it3;
 	for (it3 = m_object_templates.begin(); it3 != m_object_templates.end(); ++it3)
@@ -439,12 +453,7 @@ void ObjectFactory::cleanup()
 	} 
 	m_object_group_templates.clear();
 	
-	std::map< MonsterGroupName, MonsterGroup*>::iterator it5;
-	for (it5 = m_monster_groups.begin(); it5!=m_monster_groups.end(); ++it5)
-	{
-		delete it5->second;
-	}
-	m_monster_groups.clear();
+
 	
 	std::map<GameObject::Subtype, PlayerBasicData*>::iterator it6;
 	for (it6= m_player_data.begin(); it6 != m_player_data.end(); ++it6)
@@ -453,28 +462,6 @@ void ObjectFactory::cleanup()
 	}
 	m_player_data.clear();
 	
-	std::map<GameObject::Subtype, ProjectileBasicData*>::iterator it7;
-	for (it7= m_projectile_data.begin(); it7 != m_projectile_data.end(); ++it7)
-	{
-		delete it7->second;
-	} 
-	m_projectile_data.clear();
-	
-	std::map<std::string, EmotionSet*>::iterator it8;
-	for (it8 = m_emotion_sets.begin(); it8 != m_emotion_sets.end(); ++it8)
-	{
-		delete it8->second;
-	}
-	m_emotion_sets.clear();
-	
-	std::map<GameObject::Subtype, ScriptObjectData*>::iterator it9;
-	for (it9 = m_script_object_data.begin(); it9 !=m_script_object_data.end(); ++it9)
-	{
-		delete it9->second;
-	}
-	m_script_object_data.clear();
-	
-	m_object_types.clear();
 }
 
 void ObjectFactory::cleanupObjectData()
@@ -493,26 +480,19 @@ void ObjectFactory::cleanupObjectData()
 	} 
 	m_fixed_object_data.clear();
 	
-	std::map<GameObject::Subtype, ProjectileBasicData*>::iterator it7;
-	for (it7= m_projectile_data.begin(); it7 != m_projectile_data.end(); ++it7)
-	{
-		delete it7->second;
-	} 
-	m_projectile_data.clear();
-	
-	std::map<GameObject::Subtype, ScriptObjectData*>::iterator it9;
-	for (it9 = m_script_object_data.begin(); it9 !=m_script_object_data.end(); ++it9)
-	{
-		delete it9->second;
-	}
-	m_script_object_data.clear();
-	
 	std::map< MonsterGroupName, MonsterGroup*>::iterator it5;
 	for (it5 = m_monster_groups.begin(); it5!=m_monster_groups.end(); ++it5)
 	{
 		delete it5->second;
 	}
 	m_monster_groups.clear();
+	
+	std::map<GameObject::Subtype, ProjectileBasicData*>::iterator it7;
+	for (it7= m_projectile_data.begin(); it7 != m_projectile_data.end(); ++it7)
+	{
+		delete it7->second;
+	} 
+	m_projectile_data.clear();
 	
 	// TODO: Emotionset wirklich loeschen ???
 	std::map<std::string, EmotionSet*>::iterator it8;
@@ -521,6 +501,20 @@ void ObjectFactory::cleanupObjectData()
 		delete it8->second;
 	}
 	m_emotion_sets.clear();
+	
+	std::map<GameObject::Subtype, ScriptObjectData*>::iterator it9;
+	for (it9 = m_script_object_data.begin(); it9 !=m_script_object_data.end(); ++it9)
+	{
+		delete it9->second;
+	}
+	m_script_object_data.clear();
+	
+	std::map<GameObject::Subtype, TreasureBasicData*>::iterator it10;
+	for (it10 = m_treasure_data.begin(); it10 != m_treasure_data.end(); ++it10)
+	{
+		delete it10->second;
+	}
+	m_treasure_data.clear();
 }
 
 

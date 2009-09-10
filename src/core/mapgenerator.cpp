@@ -938,7 +938,6 @@ void MapGenerator::createExits(MapData* mdata, RegionData* rdata)
 		mdata->m_region->insertObject(wo,pos);
 		mdata->m_region->getWaypointLocation() = pos;
 		
-		//WorldObject* wo = ObjectFactory::createObject(WorldObject::TypeInfo::TYPE_FIXED_OBJECT,"tree1");
 		//mdata->m_region->insertObject(wo,pos);
 		DEBUG("waypoint at %f %f %i",pos.m_x, pos.m_y,wo->getId());
 		

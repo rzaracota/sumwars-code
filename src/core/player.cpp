@@ -379,7 +379,7 @@ bool Player::onGamefieldClick(ClientCommand* command)
 				}
 				
 				
-				if (wo->getType()=="FIXED_OBJECT" || wo->getType()=="SCRIPTOBJECT")
+				if (!wo->isCreature())
 				{
 					// festes Objekt benutzen
 					com->m_type ="use";

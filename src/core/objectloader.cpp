@@ -454,18 +454,27 @@ bool ObjectLoader::loadObject(TiXmlNode* node)
 {
 	
 	TiXmlNode* child;
-	if (node->Type()==TiXmlNode::ELEMENT && (!strcmp(node->Value(), "Object") || !strcmp(node->Value(), "ScriptObject")))
+	if (node->Type()==TiXmlNode::ELEMENT && (!strcmp(node->Value(), "Object") 
+		   || !strcmp(node->Value(), "ScriptObject")
+		   || !strcmp(node->Value(), "Treasure")))
 	{
 		ElementAttrib attr;
 		attr.parseElement(node->ToElement());
 		
 		FixedObjectData* data;
 		ScriptObjectData* sdata =0;
+		TreasureBasicData* tdata =0;
+		
 		if (!strcmp(node->Value(), "ScriptObject"))
 		{
 			sdata = new ScriptObjectData;
 			sdata->m_interaction_flags = WorldObject::USABLE | WorldObject::EXACT_MOUSE_PICKING;
 			data = &(sdata->m_fixed_data);
+		}
+		else if (!strcmp(node->Value(), "Treasure"))
+		{
+			tdata = new TreasureBasicData;
+			data = &(tdata->m_fixed_data);
 		}
 		else
 		{
@@ -560,6 +569,32 @@ bool ObjectLoader::loadObject(TiXmlNode* node)
 					sdata->m_interaction_flags &= ~WorldObject::COLLISION_DETECTION;
 				
 			}
+			else if (child->Type()==TiXmlNode::ELEMENT && !strcmp(child->Value(), "Dropslots") && tdata != 0)
+			{
+				int nr =0;
+				for (TiXmlNode* child2 = child->FirstChild(); child2 != 0; child2 = child2->NextSibling())
+				{
+					attr.parseElement(child2->ToElement());
+					attr.getFloat("pbig",tdata->m_drop_slots[nr].m_size_probability[Item::BIG],0);
+					attr.getFloat("pmedium",tdata->m_drop_slots[nr].m_size_probability[Item::MEDIUM],0);
+					attr.getFloat("psmall",tdata->m_drop_slots[nr].m_size_probability[Item::SMALL],0);
+					attr.getFloat("pgold",tdata->m_drop_slots[nr].m_size_probability[Item::GOLD],0);
+					tdata->m_drop_slots[nr].m_size_probability[4] =1;
+					for (int i=0; i<4; i++)
+						tdata->m_drop_slots[nr].m_size_probability[4] -= tdata->m_drop_slots[nr].m_size_probability[i];
+						
+					attr.getInt("min_level",tdata->m_drop_slots[nr].m_min_level,0);
+					attr.getInt("max_level",tdata->m_drop_slots[nr].m_max_level,0);
+					attr.getInt("min_gold",tdata->m_drop_slots[nr].m_min_gold,1);
+					attr.getInt("max_gold",tdata->m_drop_slots[nr].m_max_gold,1);
+					attr.getFloat("magic_prob",tdata->m_drop_slots[nr].m_magic_probability,0);
+					attr.getFloat("magic_power",tdata->m_drop_slots[nr].m_magic_power,0);
+						
+					DEBUG5("Dropslot %i %i %f %f", tdata->m_drop_slots[nr].m_min_level,tdata->m_drop_slots[nr].m_max_level,  tdata->m_drop_slots[nr].m_magic_probability, tdata->m_drop_slots[nr].m_magic_power);
+					nr ++;
+				}
+					
+			}
 			else if (child->Type()!=TiXmlNode::COMMENT)
 			{
 				DEBUG5("unexpected element of <Object>: %s",child->Value());
@@ -567,13 +602,20 @@ bool ObjectLoader::loadObject(TiXmlNode* node)
 			
 		}
 		
-		if (sdata ==0)
+		if (sdata !=0)
 		{
-			ObjectFactory::registerFixedObject(subtype,data);
+			ObjectFactory::registerScriptObject(subtype,sdata);
+			
+		}
+		else if (tdata !=0)
+		{
+			DEBUG("Treasure %s",subtype.c_str());
+			tdata->m_subtype = subtype;
+			ObjectFactory::registerTreasure(subtype,tdata);
 		}
 		else
 		{
-			ObjectFactory::registerScriptObject(subtype,sdata);
+			ObjectFactory::registerFixedObject(subtype,data);
 		}
 	}
 	else

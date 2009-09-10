@@ -72,6 +72,7 @@ sumwars_SOURCES = core/world.cpp \
 	core/gettext.cpp \
 	core/scriptobject.cpp \
 	core/fraction.cpp \
+	core/treasure.cpp \
 	gui/main_gui.cpp \
 	gui/mainwindow.cpp \
 	gui/scene.cpp \

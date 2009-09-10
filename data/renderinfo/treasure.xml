@@ -1,0 +1,12 @@
+<RenderInfo name="treasure_box" >
+	<Entity objectname="closed" source="box_m1.mesh"/>
+	
+	<State name="open">
+		<Activation time="500">
+			<Detach objectname="closed"/>
+			<Entity objectname="open" source="box_m3.mesh"/>
+		</Activation>
+	</State>
+	
+</RenderInfo>
+

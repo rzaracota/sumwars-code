@@ -135,7 +135,7 @@ class WorldObject : public GameObject
 	{
 		COLLISION_DETECTION=0x1,
 		EXACT_MOUSE_PICKING = 0x2,
-		USABLE = 0x4
+		USABLE = 0x4,
 	};
 
 
@@ -300,7 +300,7 @@ class WorldObject : public GameObject
 	 */
 	WorldObject::Group getGroup()
 	{
-		if (getType() == "FIXED_OBJECT")
+		if (!isCreature())
 			return WorldObject::FIXED;
 		if (getState() == STATE_DEAD || getState() == STATE_DIEING )
 			return WorldObject::DEAD;
