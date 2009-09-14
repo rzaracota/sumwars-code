@@ -5,6 +5,13 @@
 	</Trade>
 	
 	<Topic name="trade" start_option="Potions" />
+	
+	<Topic name="start_dialogue" >
+		<Effect>
+			local pl = getSpeaker("main_player");
+			set(pl,"health",get(pl,"max_health"));
+		</Effect>
+	</Topic>
 </NPC>
 
 <NPC refname="Sybill">
@@ -68,7 +75,7 @@
 </NPC>
 
 <NPC refname="Marco">
-	<Trade refresh_time="600000" price_factor="2.5">
+	<Trade refresh_time="600000" price_factor="4">
 		<TradeItem subtype="sabre_sw"  number="0" number_magical="1" min_enchant="100" max_enchant="400"/>
 		<TradeItem subtype="legions_sw"  number="0" number_magical="1" min_enchant="100" max_enchant="400"/>
 		<TradeItem subtype="smash_sw"  number="0" number_magical="1" min_enchant="100" max_enchant="400"/>

@@ -61,6 +61,13 @@
 	</Trade>
 	
 	<Topic name="trade" start_option="Trade" />
+	
+	<Topic name="start_dialogue" >
+		<Effect>
+			local pl = getSpeaker("main_player");
+			set(pl,"health",get(pl,"max_health"));
+		</Effect>
+	</Topic>
 </NPC>
 
 <NPC refname="Fenor Marken">

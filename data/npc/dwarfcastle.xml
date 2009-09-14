@@ -1,0 +1,98 @@
+<NPC refname="Haffgar">
+	<Trade refresh_time="600000" price_factor="1.5">
+		<TradeItem subtype="legions_sw"  number="1" number_magical="0"/>
+		<TradeItem subtype="long_sw"  number="1" number_magical="0"/>
+		<TradeItem subtype="horse_sw"  number="1" number_magical="0"/>
+		<TradeItem subtype="bast_sw"  number="1" number_magical="0"/>
+		<TradeItem subtype="mrnstr_hmr"  number="1" number_magical="0"/>
+		<TradeItem subtype="crow_hmr"  number="1" number_magical="0"/>
+		<TradeItem subtype="silver_hmr"  number="1" number_magical="0"/>
+		<TradeItem subtype="glow_hmr"  number="1" number_magical="0"/>
+		<TradeItem subtype="rattan_sbw"  number="1" number_magical="0"/>
+		<TradeItem subtype="bandit_sbw"  number="1" number_magical="0"/>
+		<TradeItem subtype="soldr_lbw"  number="1" number_magical="0"/>
+		<TradeItem subtype="horn_lbw"  number="1" number_magical="0"/>
+		<TradeItem subtype="iron_axe"  number="1" number_magical="0"/>
+		<TradeItem subtype="merc_axe"  number="1" number_magical="0"/>
+		<TradeItem subtype="smash_axe"  number="1" number_magical="0"/>
+		<TradeItem subtype="ogrhac_axe"  number="1" number_magical="0"/>
+		<TradeItem subtype="alder_wnd"  number="1" number_magical="0"/>
+		<TradeItem subtype="magus_wnd"  number="1" number_magical="0"/>
+		<TradeItem subtype="alder_stf"  number="1" number_magical="0"/>
+		<TradeItem subtype="magus_stf"  number="1" number_magical="0"/>
+	</Trade>
+
+	<Topic name="trade" start_option="Trade" />
+</NPC>
+
+<NPC refname="Amelia">
+	<Trade refresh_time="600000" price_factor="1.5">
+		<TradeItem subtype="merc_arm"  number="1" number_magical="0"/>
+		<TradeItem subtype="rngsh_arm"  number="1" number_magical="0"/>
+		<TradeItem subtype="assass_arm"  number="1" number_magical="0"/>
+		<TradeItem subtype="temple_arm"  number="1" number_magical="0"/>
+		<TradeItem subtype="sholar_rob"  number="1" number_magical="0"/>
+		<TradeItem subtype="mage_rob"  number="1" number_magical="0"/>
+		<TradeItem subtype="iron_shd"  number="1" number_magical="0"/>
+		<TradeItem subtype="steel_shd"  number="1" number_magical="0"/>
+		<TradeItem subtype="merc_hlm"  number="1" number_magical="0"/>
+		<TradeItem subtype="rngbnd_hlm"  number="1" number_magical="0"/>
+		<TradeItem subtype="assass_hlm"  number="1" number_magical="0"/>
+		<TradeItem subtype="spider_glv"  number="1" number_magical="0"/>
+		<TradeItem subtype="marksm_glv"  number="1" number_magical="0"/>
+		<TradeItem subtype="assass_glv"  number="1" number_magical="0"/>
+	</Trade>	
+	<Topic name="trade" start_option="Trade" />
+</NPC>
+
+<NPC refname="Drago">
+	<Trade refresh_time="300000" price_factor="1.5">
+		<TradeItem subtype="heal_2" number ="30" />
+		<TradeItem subtype="heal_fr" number ="5" />
+		<TradeItem subtype="heal_br" number ="5" />
+	</Trade>
+	
+	<Topic name="trade" start_option="Potions" />
+	
+	<Topic name="start_dialogue" >
+		<Effect>
+			local pl = getSpeaker("main_player");
+			set(pl,"health",get(pl,"max_health"));
+		</Effect>
+	</Topic>
+</NPC>
+
+<NPC refname="Flynn">
+	<Trade refresh_time="600000" price_factor="4">
+		<TradeItem subtype="legions_sw"  number="0" number_magical="1" min_enchant="200" max_enchant="650"/>
+		<TradeItem subtype="long_sw"  number="0" number_magical="1" min_enchant="200" max_enchant="650"/>
+		<TradeItem subtype="horse_sw"  number="0" number_magical="1" min_enchant="200" max_enchant="650"/>
+		<TradeItem subtype="mrnstr_hmr"  number="0" number_magical="1" min_enchant="200" max_enchant="650"/>
+		<TradeItem subtype="crow_hmr"  number="0" number_magical="1" min_enchant="200" max_enchant="650"/>
+		<TradeItem subtype="silver_hmr"  number="0" number_magical="1" min_enchant="200" max_enchant="650"/>
+		<TradeItem subtype="rattan_sbw"  number="0" number_magical="1" min_enchant="200" max_enchant="650"/>
+		<TradeItem subtype="bandit_sbw"  number="0" number_magical="1" min_enchant="200" max_enchant="650"/>
+		<TradeItem subtype="soldr_lbw"  number="0" number_magical="1" min_enchant="200" max_enchant="650"/>
+		<TradeItem subtype="iron_axe"  number="0" number_magical="1" min_enchant="200" max_enchant="650"/>
+		<TradeItem subtype="smash_axe"  number="0" number_magical="1" min_enchant="200" max_enchant="650"/>
+		<TradeItem subtype="alder_wnd"  number="0" number_magical="1" min_enchant="200" max_enchant="650"/>
+		<TradeItem subtype="magus_wnd"  number="0" number_magical="1" min_enchant="200" max_enchant="650"/>
+		<TradeItem subtype="alder_stf"  number="0" number_magical="1" min_enchant="200" max_enchant="650"/>
+		
+		<TradeItem subtype="merc_arm"  number="0" number_magical="1" min_enchant="200" max_enchant="650"/>
+		<TradeItem subtype="rngsh_arm"  number="0" number_magical="1" min_enchant="200" max_enchant="650"/>
+		<TradeItem subtype="sholar_rob"  number="0" number_magical="1" min_enchant="200" max_enchant="650"/>
+		<TradeItem subtype="iron_shd"  number="0" number_magical="1" min_enchant="200" max_enchant="650"/>
+		<TradeItem subtype="merc_hlm"  number="0" number_magical="1" min_enchant="200" max_enchant="650"/>
+		<TradeItem subtype="rngbnd_hlm"  number="0" number_magical="1" min_enchant="200" max_enchant="650"/>
+		<TradeItem subtype="spider_glv"  number="0" number_magical="1" min_enchant="200" max_enchant="650"/>
+		<TradeItem subtype="marksm_glv"  number="0" number_magical="1" min_enchant="200" max_enchant="650"/>
+		<TradeItem subtype="assass_glv"  number="0" number_magical="1" min_enchant="200" max_enchant="650"/>
+		
+		<TradeItem subtype="silver_rng"  number="0" number_magical="5" min_enchant="100" max_enchant="400"/>
+		<TradeItem subtype="jet_rng"  number="0" number_magical="5" min_enchant="200" max_enchant="650"/>
+		<TradeItem subtype="silver_aml"  number="0" number_magical="5" min_enchant="100" max_enchant="400"/>
+		<TradeItem subtype="coral_aml"  number="0" number_magical="5" min_enchant="200" max_enchant="650"/>
+	</Trade>
+	<Topic name="trade" start_option="Trade" />
+</NPC>	
