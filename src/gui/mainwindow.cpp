@@ -642,6 +642,15 @@ bool MainWindow::setupGameScreen()
 		label->setMousePassThroughEnabled(true);
 		label->setInheritsAlpha(false);
 		label->setProperty("Image", "set:character image:character_img"); 
+		
+		label = win_mgr.createWindow("TaharezLook/StaticText", "CharacterPreviewBackground");
+		m_main_menu->addChildWindow(label);
+		label->setProperty("FrameEnabled", "false");
+		label->setProperty("BackgroundEnabled", "true");
+		label->setPosition(CEGUI::UVector2(cegui_reldim(0.5f), cegui_reldim( 0.0)));
+		label->setSize(CEGUI::UVector2(cegui_reldim(0.5f), cegui_reldim( 1.0f)));
+		label->setMousePassThroughEnabled(true);
+		label->moveToBack();
 	}
 	catch (CEGUI::Exception e)
 	{
@@ -979,17 +988,21 @@ void  MainWindow::updateMainMenu()
 	img  = win_mgr.getWindow("StartScreenImage");
 	CEGUI::Window* label;
 	label = win_mgr.getWindow("CharacterPreviewImage");
+	CEGUI::Window* label2;
+	label2 = win_mgr.getWindow("CharacterPreviewBackground");
 	
 	int wflags = m_document->getGUIState()->m_shown_windows;
 	if (wflags & (Document::SAVEGAME_LIST | Document::CHAR_CREATE))
 	{
 		img->setVisible(false);
 		label->setVisible(true);
+		label2->setVisible(true);
 	}
 	else
 	{
 		img->setVisible(true);
 		label->setVisible(false);
+		label2->setVisible(false);
 	}
 
 }

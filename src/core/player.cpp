@@ -2022,7 +2022,7 @@ void Player::toSavegame(CharConv* cv)
 
 void Player::fromSavegame(CharConv* cv, bool local)
 {
-	DEBUG("from Savegame");
+	DEBUG5("from Savegame");
 	
 	
 	short version;
