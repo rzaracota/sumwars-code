@@ -599,15 +599,19 @@ void Scene::updateCharacterView()
 
 	if (pl !=0)
 	{
-		if ((pl->getNameId() != m_temp_player))
+		std::string correctname = pl->getNameId();
+		correctname += pl->getPlayerLook().m_render_info;
+		
+		if ((correctname != m_temp_player))
 		{
-			DEBUG5("updating inv player %s to %s",m_temp_player.c_str(), pl->getNameId().c_str());
+			DEBUG5("updating inv player %s to %s",m_temp_player.c_str(), correctname.c_str());
 			GraphicManager::destroyGraphicObject(m_temp_player_object);
 			m_temp_player_object =0;
 			update = true;
 		}
 		
-		m_temp_player = pl->getNameId();
+		m_temp_player = correctname;
+		
 		if (m_temp_player_object ==0)
 		{
 			update = true;
