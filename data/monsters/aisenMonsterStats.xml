@@ -1,0 +1,45 @@
+﻿<!-- Blutschnabel -->
+<Monster type="MONSTER" subtype="bloodbeak" name="bloodbeak" fraction="monster" race="animal" layer="AIR">
+	<RenderInfo name="bloodbeak" />
+	<Dropslots >
+		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" max_gold="100" min_level="0" max_level="10" magic_prob="0.1" magic_power="1000" />
+		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" max_gold="50" min_level="0" max_level="20" magic_prob="0.2" magic_power="1000" />
+	</Dropslots>
+	
+	<BasicAttributes
+		experience="10"
+		level="3"
+		max_health="100"
+		armor="48"
+		block="10"
+		attack="37"
+		power="25"
+		strength="25"
+		dexterity="15"
+		magic_power="0"
+		willpower="10"
+		resistances_physical="20"
+		resistances_air="0"
+		resistances_ice="0"
+		resistances_fire="-50"
+		resistances_cap_physical="50"
+		resistances_cap_air="50"
+		resistances_cap_ice="50"
+		resistances_cap_fire="0"
+		walk_speed="3000"
+		attack_speed="1500"
+		step_length="1.0"
+		attack_range="1"
+	>
+		<Ability type="walk"/>
+		
+		<Ability type="attack" rating="1"/>
+		<Ability type="noaction" />
+		<Ability type="die"/>
+		
+	</BasicAttributes>
+	
+	<Geometry radius="0.5" />
+	
+	<AI ai_sight_range="12" />
+</Monster>

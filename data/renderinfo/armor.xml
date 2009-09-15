@@ -1,0 +1,11 @@
+<RenderInfo name="leathArm" parent="playerbase">
+	<Entity source="leathArm.mesh"/> 
+</RenderInfo>
+
+<RenderInfo name="leathArm#m" parent="playerbase">
+	<Entity source="leathArmMW.mesh"/> 
+</RenderInfo>
+
+<RenderInfo name="leathArm#f" parent="playerbase">
+	<Entity source="leathArmFA.mesh"/> 
+</RenderInfo>

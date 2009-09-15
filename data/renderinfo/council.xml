@@ -27,6 +27,8 @@
 	
 	<Action name="attack">
 		<Animation name="attack" />
+		<ParticleSystem time = "0.3" objectname="spit" bone="mainmesh:crown" source="SlugSpit" position="0.0 -0.1 -0.07" />
+		<Detach time="0.9" objectname="spit" />
 	</Action>
 
 	<Action name="die">

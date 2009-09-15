@@ -1,3 +1,41 @@
+
+SlugSpit
+{
+    material Flare
+    particle_width 20
+    particle_height 20
+    cull_each false
+    quota 10000
+    billboard_type oriented_self
+ 
+
+   emitter Point
+{
+        angle 30
+        emission_rate 275
+        time_to_live 0.3
+        direction 0 0 -1
+        velocity_min 250
+        velocity_max 300
+        colour_range_start 0.3 0 0
+        colour_range_end 0.3 0 0
+}
+
+    affector LinearForce
+{
+        force_vector      0 0 -100
+        force_application add
+}
+    // Fader
+    affector ColourFader
+{
+        red -0.25
+        green -0.25
+        blue -0.25
+}
+
+}
+
 TestRing
 {
     material        Flare
@@ -52,7 +90,7 @@ Fireball
 
    emitter Point
 {
-        angle 360
+        angle 30
         emission_rate 275
         time_to_live 0.2
         direction 1 0 0
@@ -61,6 +99,14 @@ Fireball
         colour_range_start 1 0 0
         colour_range_end 1 0 0
 }
+
+    affector ColourFader
+{
+        red -0.25
+        green -0.25
+        blue -0.25
+}
+
 }
 
 HandFire
@@ -155,7 +201,7 @@ Firebolt
         angle 25
         emission_rate 275
         time_to_live 0.1
-        direction 1 1 1
+        direction 1 0 0
         velocity_min 250
         velocity_max 300
         colour_range_start 1 0 0
@@ -673,27 +719,41 @@ Guided_Arrow
 
 Explosion
 {
-    material Flare
-    particle_width 20
-    particle_height 20
-    cull_each false
-    quota 10000
-    billboard_type oriented_self
- 
-
-   emitter Cylinder
+    material        Flare
+    particle_width  70
+    particle_height 70
+	cull_each       false
+    quota           10000
+    billboard_type  oriented_self
+    
+    // Area emitter
+    emitter Ring
 {
-        angle 360
-        emission_rate 275
-        time_to_live 0.2
-        direction 1 0 0
-        velocity_min 250
-        velocity_max 300
-        colour_range_start 1 0 1
-        colour_range_end 1 0 1
-        width	240
-        heigt	240
-        depth	120
+        angle           30
+        emission_rate   6000
+        time_to_live    0.2
+        direction       0 1 0
+        velocity    	0
+        colour_range_start  1 0 0
+        colour_range_end    0.5 0.5 0
+        width           100
+        height          100
+        depth           30
+}
+
+    // Make em float upwards
+    affector LinearForce
+{
+        force_vector      0 100 0
+        force_application add
+}
+
+    // Fader
+    affector ColourFader
+{
+        red -0.25
+        green -0.25
+        blue -0.25
 }
 }
 
@@ -732,20 +792,19 @@ Ice_Explosion
     quota 10000
     billboard_type oriented_self
  
-
-   emitter Cylinder
+    emitter Ring
 {
         angle 360
-        emission_rate 275
+        emission_rate 3000
         time_to_live 0.2
         direction 1 0 0
         velocity_min 250
         velocity_max 300
         colour_range_start 0.6 0.6 1
         colour_range_end 0.2 0.2 0.6
-        width	240
-        heigt	240
-        depth	120
+        width	150
+        heigt	150
+        depth	50
 }
 }
 
@@ -758,20 +817,19 @@ Wind_Explosion
     quota 10000
     billboard_type oriented_self
  
-
-   emitter Cylinder
+   emitter Ring
 {
         angle 360
-        emission_rate 275
+        emission_rate 3000
         time_to_live 0.2
         direction 1 0 0
         velocity_min 250
         velocity_max 300
         colour_range_start 1 1 0
         colour_range_end 1 1 0
-        width	240
-        heigt	240
-        depth	120
+        width	150
+        heigt	150
+        depth	50
 }
 }
 
@@ -887,5 +945,201 @@ Hypnosis
         velocity_max 300
         colour_range_start 1 0 1
         colour_range_end 0.9 0 0.6
+}
+}
+
+CastCureBurn
+{
+    material Flare
+    particle_width 20
+    particle_height 20
+    cull_each false
+    quota 10000
+    billboard_type oriented_self
+ 
+
+   emitter Point
+{
+        angle 360
+        emission_rate 275
+        time_to_live 2
+        direction 1 0 0
+        velocity_min 15
+        velocity_max 20
+        colour_range_start 0.2 0 0
+        colour_range_end 0.2 0.2 0
+}
+}
+
+CastCureBurnParty
+{
+    material Flare
+    particle_width 20
+    particle_height 20
+    cull_each false
+    quota 10000
+    billboard_type oriented_self
+ 
+
+   emitter Point
+{
+        angle 360
+        emission_rate 2000
+        time_to_live 4
+        direction 0 1 0
+        velocity_min 40
+        velocity_max 60
+        colour_range_start 0.2 0 0
+        colour_range_end 0.2 0.2 0
+}
+
+    affector LinearForce
+{
+        force_vector      0 -50 0
+        force_application add
+}
+}
+
+AntiBurnLine
+{
+    material Flare
+    particle_width 20
+    particle_height 20
+    cull_each false
+    quota 10000
+    billboard_type oriented_self
+ 
+
+   emitter Point
+{
+        angle 360
+        emission_rate 275
+        time_to_live 2
+        direction 1 0 0
+        velocity_min 3
+        velocity_max 5
+        colour_range_start 0.2 0 0
+        colour_range_end 0.2 0.2 0
+}
+}
+
+CastHeal
+{
+    material Flare
+    particle_width 20
+    particle_height 20
+    cull_each false
+    quota 10000
+    billboard_type oriented_self
+ 
+
+   emitter Point
+{
+        angle 360
+        emission_rate 275
+        time_to_live 2
+        direction 1 0 0
+        velocity_min 15
+        velocity_max 20
+        colour_range_start 0 0.3 0
+        colour_range_end 0.1 0.2 0
+}
+}
+
+CastHealParty
+{
+    material Flare
+    particle_width 20
+    particle_height 20
+    cull_each false
+    quota 10000
+    billboard_type oriented_self
+ 
+
+   emitter Point
+{
+        angle 360
+        emission_rate 2000
+        time_to_live 4
+        direction 0 1 0
+        velocity_min 40
+        velocity_max 60
+        colour_range_start 0 0.3 0
+        colour_range_end 0.1 0.2 0
+}
+
+    affector LinearForce
+{
+        force_vector      0 -50 0
+        force_application add
+}
+}
+
+HealingLine
+{
+    material Flare
+    particle_width 20
+    particle_height 20
+    cull_each false
+    quota 10000
+    billboard_type oriented_self
+ 
+
+   emitter Point
+{
+        angle 360
+        emission_rate 275
+        time_to_live 2
+        direction 1 0 0
+        velocity_min 3
+        velocity_max 5
+        colour_range_start 0 0.3 0
+        colour_range_end 0.1 0.2 0
+}
+}
+
+CastAcid
+{
+    material Flare
+    particle_width 20
+    particle_height 20
+    cull_each false
+    quota 10000
+    billboard_type oriented_self
+ 
+
+   emitter Point
+{
+        angle 360
+        emission_rate 275
+        time_to_live 2
+        direction 1 0 0
+        velocity_min 15
+        velocity_max 20
+        colour_range_start 0 0.3 0
+        colour_range_end 0 0.2 0.1
+}
+}
+
+CastBlind
+{
+    material Flare
+    particle_width 20
+    particle_height 20
+    cull_each false
+    quota 10000
+    billboard_type oriented_self
+ 
+
+   emitter Point
+{
+        angle 360
+        emission_rate 275
+        time_to_live 2
+        direction 1 0 0
+        velocity_min 15
+        velocity_max 20
+        colour_range_start 0.2 0.2 0.2
+        colour_range_end 0.2 0.2 0.2
 }
 }

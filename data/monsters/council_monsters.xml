@@ -5,8 +5,8 @@
 <Monster type="MONSTER" subtype="fireSlug" name="Fire Slug" fraction="summoner" race="elemental" layer="NORMAL">
 	<Mesh file="fireSlug" />
 	<Dropslots >
-		<Dropslot pbig="0.10" pmedium="0.25" psmall="0.10" pgold="0.05" max_gold="10" min_level="1" max_level="3" magic_prob="0.1" magic_power="100" />
-		<Dropslot pbig="0.10" pmedium="0.25" psmall="0.10" pgold="0.05" max_gold="2" min_level="1" max_level="2" magic_prob="0.2" magic_power="60" />
+		<Dropslot pbig="0.01" pmedium="0.15" psmall="0.02" pgold="0.05" max_gold="10" min_level="1" max_level="3" magic_prob="0.1" magic_power="50" />
+		<Dropslot pbig="0.01" pmedium="0.15" psmall="0.02" pgold="0.05" max_gold="2" min_level="1" max_level="2" magic_prob="0.2" magic_power="30" />
 	</Dropslots>
 	
 	<BasicAttributes
@@ -32,7 +32,7 @@
 		walk_speed="3000"
 		attack_speed="1500"
 		step_length="0.8"
-		attack_range="0.5"
+		attack_range="2.0"
 	>
 		<Ability type="walk" />
 
@@ -164,8 +164,8 @@
 		magic_power="10"
 		willpower="600"
 		resistances_physical="40"
-		resistances_air="10"
-		resistances_ice="-30"
+		resistances_air="40"
+		resistances_ice="-10"
 		resistances_fire="100"
 		resistances_cap_physical="50"
 		resistances_cap_air="50"
