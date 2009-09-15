@@ -1,11 +1,11 @@
 <RenderInfo name="gloves" parent="playerbase">
-	<Entity source="potion.mesh"/> 
+	<Entity source="plate_glv.mesh"/> 
 </RenderInfo>
 
 <RenderInfo name="gloves#m" parent="playerbase">
-	<Entity source="plate_glv.mesh"/> 
+	<Entity source="plate_glvM.mesh"/> 
 </RenderInfo>
 
 <RenderInfo name="gloves#f" parent="playerbase">
-	<Entity source="plate_glv.mesh"/> 
+	<Entity source="plate_glvF.mesh"/> 
 </RenderInfo>

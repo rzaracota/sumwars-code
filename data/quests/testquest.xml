@@ -2,7 +2,6 @@
 	<NPC refname="Fenor Marken">
 		<Topic name="testtopic1" start_option="Test">
 			<Effect>
-				set(fenor,"emotionset","fenor_emotion");
 				addSpeaker(guard1,"guard1");
 				addSpeaker(guard2,"guard2");
 				speak('Fenor Marken',_("Das ist ein Test"));

@@ -183,7 +183,7 @@
 <!-- Orte: verwundeter Soldat, Template -->
 <!-- Goblinschlaeger, Goblinraeuber, Goblinjaeger-->
 	<Region id="4" name="aisMeadow">
-		<Settings dimx="32" dimy="32" area_percent="0.3" complexity="0.4" granularity="6"  ground="grass1"/>
+		<Settings dimx="48" dimy="48" area_percent="0.3" complexity="0.4" granularity="6"  ground="grass1"/>
 		
 		<Waypoint world_x="0.4" world_y ="0.8" />
 		

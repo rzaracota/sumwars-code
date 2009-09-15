@@ -2928,7 +2928,7 @@ void Creature::calcBaseDamage(std::string impl ,Damage& dmg)
 		dmg.m_attack += basm->m_dexterity/2;
 
 		dmg.m_power += basm->m_power;
-		dmg.m_power += basm->m_dexterity/2;
+		dmg.m_power += basm->m_strength/2;
 
 		dmg.m_special_flags = Damage::NOFLAGS;
 
@@ -2946,7 +2946,7 @@ void Creature::calcBaseDamage(std::string impl ,Damage& dmg)
 		dmg.m_attack += basm->m_dexterity/2;
 
 		dmg.m_power += basm->m_power;
-		dmg.m_power += basm->m_willpower/2;
+		dmg.m_power += basm->m_strength/2;
 
 		dmg.m_special_flags = Damage::NOFLAGS;
 

@@ -532,6 +532,7 @@
 
 <RenderInfo name="priest_f" parent="playerbase" >
 	<Entity source="priest_f.mesh"/>
+	<Entity objectname="head" bone="crown" source="head_f1.mesh" />
 </RenderInfo>
 	
 <RenderInfo name="archer" parent="playerbase">
