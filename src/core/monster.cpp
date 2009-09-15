@@ -629,7 +629,7 @@ void Monster::die()
 							diff = getBaseAttr()->m_level - pl2->getBaseAttr()->m_level;
 							if (diff >5)
 							{
-								pl2->gainExperience(exp*pow(0.86,diff));
+								pl2->gainExperience(exp*pow(0.9,diff));
 							}
 							else
 							{

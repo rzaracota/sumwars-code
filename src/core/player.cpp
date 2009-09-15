@@ -993,7 +993,7 @@ void Player::gainLevel()
 
 	// maximale Erfahrungspunkte erhoehen
 	getBaseAttr()->m_max_experience += getBaseAttr()->m_level*100;
-	getBaseAttr()->m_max_experience *= 1.2;
+	getBaseAttr()->m_max_experience *= 1.14;
 
 
 	// Attributpunkte hinzufuegen

@@ -623,7 +623,7 @@ CharInfo::CharInfo (Document* doc)
 	// Label Exp
 	label =  win_mgr.getWindow("ExperienceValueLabel");
 	out_stream.str("");
-	out_stream << (int) player->getDynAttr()->m_experience <<"/" <<(int) player->getBaseAttr()->m_max_experience;
+	out_stream << (unsigned int) player->getDynAttr()->m_experience <<"/" <<(unsigned int) player->getBaseAttr()->m_max_experience;
 	if (label->getText()!= (CEGUI::utf8*) out_stream.str().c_str())
 	{
 		label->setText((CEGUI::utf8*) out_stream.str().c_str());
