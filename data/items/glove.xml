@@ -2,7 +2,7 @@
 <!-- WAR, PRI, ARC, MAG -->
 <Item type="gloves" subtype="leath_glv" name="leather gloves" size="medium">
 	<Image image="set:goblin_glv.png image:full_image" />
-	<Mesh file="gloves" />
+	<RenderInfo name="gloves" />
 	<Attribute
 		level_requirement="2"
 		character_requirement="all"
@@ -34,7 +34,7 @@
 <!-- PRI, MAG -->
 <Item type="gloves" subtype="snake_glv" name="snakehide gloves" size="medium">
 	<Image image="set:goblin_glv.png image:full_image" />
-	<Mesh file="potion.mesh" />
+	<RenderInfo name="gloves" />
 	<Attribute
 		level_requirement="7"
 		character_requirement="priest,mage"
@@ -66,7 +66,7 @@
 <!-- WAR, PRI, ARC, MAG -->
 <Item type="gloves" subtype="bucskn_glv" name="buckskin gloves" size="medium">
 	<Image image="set:goblin_glv.png image:full_image" />
-	<Mesh file="potion.mesh" />
+	<RenderInfo name="gloves" />
 	<Attribute
 		level_requirement="13"
 		character_requirement="all"
@@ -98,7 +98,7 @@
 <!-- WAR, PRI -->
 <Item type="gloves" subtype="chain_glv" name="chain gloves" size="medium">
 	<Image image="set:goblin_glv.png image:full_image" />
-	<Mesh file="potion.mesh" />
+	<RenderInfo name="gloves" />
 	<Attribute
 		level_requirement="11"
 		character_requirement="warrior,priest"
@@ -130,7 +130,7 @@
 <!-- MAG, PRI -->
 <Item type="gloves" subtype="spider_glv" name="spidersilk gloves" size="medium">
 	<Image image="set:goblin_glv.png image:full_image" />
-	<Mesh file="potion.mesh" />
+	<RenderInfo name="gloves" />
 	<Attribute
 		level_requirement="15"
 		character_requirement="mage,priest"
@@ -162,7 +162,7 @@
 <!-- ARC -->
 <Item type="gloves" subtype="marksm_glv" name="marksman gloves" size="medium">
 	<Image image="set:goblin_glv.png image:full_image" />
-	<Mesh file="potion.mesh" />
+	<RenderInfo name="gloves" />
 	<Attribute
 		level_requirement="16"
 		character_requirement="archer"
@@ -194,7 +194,7 @@
 <!-- WAR, ARC -->
 <Item type="gloves" subtype="assass_glv" name="assassin gloves" size="medium">
 	<Image image="set:goblin_glv.png image:full_image" />
-	<Mesh file="potion.mesh" />
+	<RenderInfo name="gloves" />
 	<Attribute
 		level_requirement="18"
 		character_requirement="warrior,archer"
