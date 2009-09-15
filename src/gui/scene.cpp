@@ -378,7 +378,7 @@ bool Scene::updatePlayerGraphicObject(GraphicObject* obj, Player* pl)
 	itm = pl->getWeapon();
 	if (itm !=0 && itm->m_weapon_attr !=0)
 	{
-		if (itm->m_weapon_attr->m_weapon_type == WeaponAttr::BOW || itm->m_weapon_attr->m_weapon_type == WeaponAttr::CROSSBOW)
+		if (itm->m_weapon_attr->m_weapon_type == "bow" || itm->m_weapon_attr->m_weapon_type == "crossbow")
 		{
 			minfo.m_bone = "itemLeftHand";
 		}

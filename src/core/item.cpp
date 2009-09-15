@@ -266,7 +266,7 @@ void Item::toStringComplete(CharConv* cv)
 	if (m_weapon_attr!=0)
 	{
 		DEBUG5("writing weapon attr");
-		cv->toBuffer<char>(m_weapon_attr->m_weapon_type);
+		cv->toBuffer(m_weapon_attr->m_weapon_type);
 		m_weapon_attr->m_damage.toString(cv);
 		cv->toBuffer(m_weapon_attr->m_attack_range);
 		cv->toBuffer(m_weapon_attr->m_two_handed);
@@ -371,9 +371,7 @@ void Item::fromStringComplete(CharConv* cv)
 	if (m_weapon_attr!=0)
 	{
 		DEBUG5("loading weapon attr");
-		char tmp;
-		cv->fromBuffer<char>(tmp);
-		m_weapon_attr->m_weapon_type = (WeaponAttr::WeaponType) tmp;
+		cv->fromBuffer(m_weapon_attr->m_weapon_type);
 		m_weapon_attr->m_damage.fromString(cv);
 		cv->fromBuffer<float>(m_weapon_attr->m_attack_range);
 		cv->fromBuffer<bool>(m_weapon_attr->m_two_handed);

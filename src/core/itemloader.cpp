@@ -286,19 +286,7 @@ void ItemLoader::loadItem(TiXmlNode* node)
 					item_data->m_weapon_attr = new WeaponAttr;
 				
 				std::string type;
-				attr.getString("weapon_type",type);
-				if (type == "sword")
-					item_data->m_weapon_attr->m_weapon_type = WeaponAttr::SWORD;
-				else if (type == "axe")
-					item_data->m_weapon_attr->m_weapon_type = WeaponAttr::AXE;
-				else if (type == "hammer")
-					item_data->m_weapon_attr->m_weapon_type = WeaponAttr::HAMMER;
-				else if (type == "staff")
-					item_data->m_weapon_attr->m_weapon_type = WeaponAttr::STAFF;
-				else if (type == "bow")
-					item_data->m_weapon_attr->m_weapon_type = WeaponAttr::BOW;
-				else if (type == "crossbow")
-					item_data->m_weapon_attr->m_weapon_type = WeaponAttr::CROSSBOW;
+				attr.getString("weapon_type",item_data->m_weapon_attr->m_weapon_type);
 				
 				Damage& dmg = item_data->m_weapon_attr->m_damage;
 				attr.getFloat("damage_min_physical",dmg.m_min_damage[Damage::PHYSICAL]);

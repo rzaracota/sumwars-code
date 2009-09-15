@@ -49,19 +49,7 @@
  */
 struct WeaponAttr
 {
-    /**
-     * \enum WeaponType
-     * \brief zaehlt verschiedene Arten von Waffen auf
-     */
-    enum WeaponType
-    {
-        SWORD = 1,
-        HAMMER = 2,
-        AXE = 2,
-        STAFF = 5,
-        BOW = 10,
-        CROSSBOW = 11,
-    };
+	typedef std::string WeaponType;
 
     /**
      * \var WeaponType m_weapon_type

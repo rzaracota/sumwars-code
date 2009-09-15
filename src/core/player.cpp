@@ -2339,6 +2339,13 @@ std::string Player::getActionString()
 	else if (equ == Action::TWO_HANDED)
 		ret += "#TwoHands";
 	
+	Item* weapon=getWeapon();
+	if (weapon != 0)
+	{
+		ret += "#";
+		ret += weapon->m_weapon_attr->m_weapon_type;
+	}
+	
 	return ret;
 }
 
