@@ -137,6 +137,8 @@ struct Damage
 		NOFLAGS =0,
 		UNBLOCKABLE = 0x1,
 		IGNORE_ARMOR = 0x2,
+		NOVISUALIZE = 0x4,
+		VISUALIZE_SMALL = 0x8,
 	};
 	
 	/**

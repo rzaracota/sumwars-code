@@ -1968,6 +1968,16 @@ void MainWindow::updateDamageVisualizer()
 			label->setText((CEGUI::utf8*) stream.str().c_str());
 		}
 		
+		std::string fontname = "DejaVuSerif-16";
+		if (it->second.m_size == 1)
+		{
+			fontname = "DejaVuSerif-12";
+		}
+		if (label->getFont()->getProperty("Name") != fontname)
+		{
+			label->setFont(fontname);
+		}
+		
 		CEGUI::Font* font = label->getFont();
 			
 		float width = font->getTextExtent((CEGUI::utf8*) stream.str().c_str())+15;

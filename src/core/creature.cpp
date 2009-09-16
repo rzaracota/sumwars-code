@@ -2969,317 +2969,10 @@ void Creature::calcAbilityDamage(std::string impl, Damage& dmg)
 		dmg.m_attack *=m_command.m_damage_mult*0.5;
 		dmg.m_status_mod_power[Damage::PARALYZED] += (short)  (m_base_attr_mod.m_strength*m_command.m_damage_mult*0.2);
 	}
-	// Schaden der Faehigkeit an sich
-/*
-	if (act == "bash")
+	else if (impl == "small_numbers")
 	{
-			dmg.m_multiplier[Damage::PHYSICAL] *= 2;
+		dmg.m_special_flags |= Damage::VISUALIZE_SMALL;	
 	}
-	else if (act == "hammer_bash")
-	{
-			dmg.m_multiplier[Damage::PHYSICAL] *= 2;
-	}
-	else if (act == "around_blow")
-	{
-			dmg.m_multiplier[Damage::PHYSICAL] *= 0.6;
-	}
-	else if (act == "whirl_blow")
-	{
-			dmg.m_multiplier[Damage::PHYSICAL] *= 1;
-	}
-	else if (act == "smash")
-	{
-			dmg.m_multiplier[Damage::PHYSICAL] *= 3;
-			// kann nicht geblockt werden,  Ruestung ignorieren
-			dmg.m_special_flags |= Damage::UNBLOCKABLE;
-			dmg.m_special_flags |= Damage::IGNORE_ARMOR;
-	}
-	else if (act == "hate_mage")
-	{
-			dmg.m_multiplier[Damage::PHYSICAL] *= 1;
-			dmg.m_status_mod_power[Damage::MUTE] += m_base_attr_mod.m_strength;
-	}
-	else if (act == "decoy")
-	{
-			dmg.m_ai_mod_power[TAUNT] += m_base_attr_mod.m_strength/2 + std::min(m_base_attr_mod.m_strength/2,m_base_attr_mod.m_willpower*2);
-			dmg.m_special_flags |= Damage::UNBLOCKABLE;
-	}
-	else if (act == "scare")
-	{
-			dmg.m_ai_mod_power[TAUNT] += m_base_attr_mod.m_strength/2 + std::min(m_base_attr_mod.m_strength/2,m_base_attr_mod.m_willpower*2);
-			dmg.m_special_flags |= Damage::UNBLOCKABLE;
-	}
-	else if (act == "warcry")
-	{
-			dmg.m_status_mod_power[Damage::CONFUSED] += m_base_attr_mod.m_strength/2 + std::min(m_base_attr_mod.m_strength/2,m_base_attr_mod.m_willpower*2) ;
-	}
-	else if (act == "fire_bolt")
-	{
-			dmg.m_min_damage[Damage::FIRE] += m_base_attr_mod.m_magic_power*1;
-			dmg.m_max_damage[Damage::FIRE] += m_base_attr_mod.m_magic_power*2;
-			dmg.m_min_damage[Damage::ICE]=0;
-			dmg.m_max_damage[Damage::ICE]=0;
-			dmg.m_special_flags |= Damage::UNBLOCKABLE;
-	}
-	else if (act == "fire_strike")
-	{
-			dmg.m_min_damage[Damage::FIRE] += m_base_attr_mod.m_magic_power*3.3;
-			dmg.m_max_damage[Damage::FIRE] += m_base_attr_mod.m_magic_power*5;
-			dmg.m_min_damage[Damage::ICE]=0;
-			dmg.m_max_damage[Damage::ICE]=0;
-			dmg.m_special_flags |= Damage::UNBLOCKABLE;
-	}
-	else if (act == "fire_wave")
-	{
-			dmg.m_min_damage[Damage::FIRE] += m_base_attr_mod.m_magic_power*1.5;
-			dmg.m_max_damage[Damage::FIRE] += m_base_attr_mod.m_magic_power*2;
-			dmg.m_min_damage[Damage::ICE]=0;
-			dmg.m_max_damage[Damage::ICE]=0;
-			dmg.m_special_flags |= Damage::UNBLOCKABLE;
-	}
-	else if (act == "fire_storm")
-	{
-			dmg.m_min_damage[Damage::FIRE] += m_base_attr_mod.m_magic_power*2.5;
-			dmg.m_max_damage[Damage::FIRE] += m_base_attr_mod.m_magic_power*3;
-			dmg.m_min_damage[Damage::ICE]=0;
-			dmg.m_max_damage[Damage::ICE]=0;
-			dmg.m_special_flags |= Damage::UNBLOCKABLE;
-	}
-	else if (act == "fire_ball")
-	{
-			dmg.m_min_damage[Damage::FIRE] += m_base_attr_mod.m_magic_power*2;
-			dmg.m_max_damage[Damage::FIRE] += m_base_attr_mod.m_magic_power*3;
-			dmg.m_min_damage[Damage::ICE]=0;
-			dmg.m_max_damage[Damage::ICE]=0;
-			dmg.m_special_flags |= Damage::UNBLOCKABLE;
-	}
-	else if (act == "inferno_ball")
-	{
-			dmg.m_min_damage[Damage::FIRE] += m_base_attr_mod.m_magic_power*3.3;
-			dmg.m_max_damage[Damage::FIRE] += m_base_attr_mod.m_magic_power*5;
-			dmg.m_min_damage[Damage::ICE]=0;
-			dmg.m_max_damage[Damage::ICE]=0;
-			dmg.m_special_flags |= Damage::UNBLOCKABLE;
-	}
-	else if (act == "fire_wall")
-	{
-			dmg.m_min_damage[Damage::FIRE] = m_base_attr_mod.m_magic_power/3.0;
-			dmg.m_max_damage[Damage::FIRE] = m_base_attr_mod.m_magic_power/2.0;
-			dmg.m_min_damage[Damage::ICE]=0;
-			dmg.m_max_damage[Damage::ICE]=0;
-			dmg.m_special_flags |= Damage::UNBLOCKABLE;
-	}
-	else if (act == "ice_bolt")
-	{
-			dmg.m_min_damage[Damage::ICE] += m_base_attr_mod.m_magic_power*1.6;
-			dmg.m_max_damage[Damage::ICE] += m_base_attr_mod.m_magic_power*2.2;
-			dmg.m_min_damage[Damage::FIRE]=0;
-			dmg.m_max_damage[Damage::FIRE]=0;
-			dmg.m_special_flags |= Damage::UNBLOCKABLE;
-	}
-	else if (act == "ice_spike")
-	{
-			dmg.m_min_damage[Damage::ICE] += m_base_attr_mod.m_magic_power*3;
-			dmg.m_max_damage[Damage::ICE] += m_base_attr_mod.m_magic_power*4.5;
-			dmg.m_min_damage[Damage::FIRE]=0;
-			dmg.m_max_damage[Damage::FIRE]=0;
-			dmg.m_special_flags |= Damage::UNBLOCKABLE;
-	}
-	else if (act == "snow_storm")
-	{
-			dmg.m_min_damage[Damage::ICE] = m_base_attr_mod.m_magic_power/3;
-			dmg.m_max_damage[Damage::ICE] = m_base_attr_mod.m_magic_power/2;
-			dmg.m_min_damage[Damage::FIRE]=0;
-			dmg.m_max_damage[Damage::FIRE]=0;
-			dmg.m_special_flags |= Damage::UNBLOCKABLE;
-	}
-	else if (act == "blizzard")
-	{
-			dmg.m_min_damage[Damage::ICE] = m_base_attr_mod.m_magic_power/2;
-			dmg.m_max_damage[Damage::ICE] = m_base_attr_mod.m_magic_power/1.3;
-			dmg.m_min_damage[Damage::FIRE]=0;
-			dmg.m_max_damage[Damage::FIRE]=0;
-			dmg.m_special_flags |= Damage::UNBLOCKABLE;
-	}
-	else if (act == "ice_ring")
-	{
-			dmg.m_min_damage[Damage::ICE] += m_base_attr_mod.m_magic_power;
-			dmg.m_max_damage[Damage::ICE] += m_base_attr_mod.m_magic_power*1.5;
-			dmg.m_min_damage[Damage::FIRE]=0;
-			dmg.m_max_damage[Damage::FIRE]=0;
-			dmg.m_special_flags |= Damage::UNBLOCKABLE;
-	}
-	else if (act == "frost_ring")
-	{
-			dmg.m_min_damage[Damage::ICE] += m_base_attr_mod.m_magic_power*1.6;
-			dmg.m_max_damage[Damage::ICE] += m_base_attr_mod.m_magic_power*2.4;
-			dmg.m_min_damage[Damage::FIRE]=0;
-			dmg.m_max_damage[Damage::FIRE]=0;
-			dmg.m_special_flags |= Damage::UNBLOCKABLE;
-	}
-	else if (act == "freeze")
-	{
-			dmg.m_min_damage[Damage::FIRE]=0;
-			dmg.m_max_damage[Damage::FIRE]=0;
-			dmg.m_status_mod_power[Damage::FROZEN] = m_base_attr_mod.m_magic_power;
-			dmg.m_special_flags |= Damage::UNBLOCKABLE;
-	}
-	else if (act == "lightning")
-	{
-			dmg.m_min_damage[Damage::AIR] += m_base_attr_mod.m_magic_power*0.5;
-			dmg.m_max_damage[Damage::AIR] += m_base_attr_mod.m_magic_power*2.5;
-			dmg.m_special_flags |= Damage::UNBLOCKABLE;
-	}
-	else if (act == "lightning_strike")
-	{
-			dmg.m_min_damage[Damage::AIR] += m_base_attr_mod.m_magic_power*1;
-			dmg.m_max_damage[Damage::AIR] += m_base_attr_mod.m_magic_power*5;
-			dmg.m_special_flags |= Damage::UNBLOCKABLE;
-	}
-	else if (act == "thunderstorm")
-	{
-			dmg.m_min_damage[Damage::AIR] = m_base_attr_mod.m_magic_power/5.0;
-			dmg.m_max_damage[Damage::AIR] = m_base_attr_mod.m_magic_power/1.5;
-			dmg.m_special_flags |= Damage::UNBLOCKABLE;
-	}
-	else if (act == "thunderstorm2")
-	{
-			dmg.m_min_damage[Damage::AIR] = m_base_attr_mod.m_magic_power/3.0;
-			dmg.m_max_damage[Damage::AIR] = m_base_attr_mod.m_magic_power/1.0;
-			dmg.m_special_flags |= Damage::UNBLOCKABLE;
-	}
-	else if (act == "chain_lightning")
-	{
-			dmg.m_min_damage[Damage::AIR] += m_base_attr_mod.m_magic_power*1;
-			dmg.m_max_damage[Damage::AIR] += m_base_attr_mod.m_magic_power*2.5;
-			dmg.m_special_flags |= Damage::UNBLOCKABLE;
-	}
-	else if (act == "chain_lightning2")
-	{
-			dmg.m_min_damage[Damage::AIR] += m_base_attr_mod.m_magic_power*1.7;
-			dmg.m_max_damage[Damage::AIR] += m_base_attr_mod.m_magic_power*3.5;
-			dmg.m_special_flags |= Damage::UNBLOCKABLE;
-	}
-	else if (act == "guided_triple_shot")
-	{
-			dmg.m_multiplier[Damage::PHYSICAL] *= 1.5;
-	}
-	else if (act == "multishot")
-	{
-			dmg.m_multiplier[Damage::PHYSICAL] *=0.75;
-	}
-	else if (act == "weak_point")
-	{
-			dmg.m_status_mod_power[Damage::BERSERK] = m_base_attr_mod.m_dexterity;
-	}
-	else if (act == "blind_rage")
-	{
-			dmg.m_status_mod_power[Damage::BLIND] = (short) (m_base_attr_mod.m_dexterity*1.5f);
-			dmg.m_status_mod_power[Damage::BERSERK] = m_base_attr_mod.m_dexterity;
-	}
-	else if (act == "pierce")
-	{
-			dmg.m_multiplier[Damage::PHYSICAL] *=1.5;
-			dmg.m_special_flags |= Damage::UNBLOCKABLE;
-	}
-	else if (act == "volley_shot")
-	{
-			dmg.m_multiplier[Damage::PHYSICAL] *=1;
-	}
-	else if (act == "vacuum")
-	{
-			dmg.m_min_damage[Damage::AIR] += m_base_attr_mod.m_dexterity*1;
-			dmg.m_max_damage[Damage::AIR] += m_base_attr_mod.m_dexterity*2;
-			dmg.m_status_mod_power[Damage::PARALYZED] = m_base_attr_mod.m_dexterity;
-			dmg.m_special_flags |= Damage::UNBLOCKABLE;
-	}
-	else if (act == "death_roulette")
-	{
-			dmg.m_multiplier[Damage::PHYSICAL] *=2;
-	}
-	else if (act == "exploding_arrow" || act == "exploding_cascade")
-	{
-			dmg.m_multiplier[Damage::PHYSICAL] *=2;
-			dmg.m_special_flags |= Damage::UNBLOCKABLE;
-	}
-	else if (act == "holy_light")
-	{
-			dmg.m_min_damage[Damage::PHYSICAL]=0;
-			dmg.m_max_damage[Damage::PHYSICAL]=0;
-			dmg.m_min_damage[Damage::FIRE] +=m_base_attr_mod.m_willpower/3;
-			dmg.m_max_damage[Damage::FIRE] +=m_base_attr_mod.m_willpower/2;
-			dmg.m_min_damage[Damage::FIRE] += std::min(m_base_attr_mod.m_willpower/6,m_base_attr_mod.m_magic_power*2);
-			dmg.m_max_damage[Damage::FIRE] += std::min(m_base_attr_mod.m_willpower/4,m_base_attr_mod.m_magic_power*3);
-			dmg.m_min_damage[Damage::ICE]=0;
-			dmg.m_max_damage[Damage::ICE]=0;
-			dmg.m_special_flags |= Damage::UNBLOCKABLE;
-			dmg.m_special_flags |= Damage::EXTRA_UNDEAD_DMG;
-	}
-	else if (act == "holy_fire")
-	{
-			dmg.m_min_damage[Damage::PHYSICAL]=0;
-			dmg.m_max_damage[Damage::PHYSICAL]=0;
-			dmg.m_min_damage[Damage::FIRE] +=m_base_attr_mod.m_willpower/2;
-			dmg.m_max_damage[Damage::FIRE] +=m_base_attr_mod.m_willpower/1.33;
-			dmg.m_min_damage[Damage::FIRE] += std::min(m_base_attr_mod.m_willpower/6,m_base_attr_mod.m_magic_power*2);
-			dmg.m_max_damage[Damage::FIRE] += std::min(m_base_attr_mod.m_willpower/4,m_base_attr_mod.m_magic_power*3);
-			dmg.m_min_damage[Damage::ICE]=0;
-			dmg.m_max_damage[Damage::ICE]=0;
-			dmg.m_special_flags |= Damage::UNBLOCKABLE;
-			dmg.m_special_flags |= Damage::EXTRA_UNDEAD_DMG;
-	}
-	else if (act == "light_beam" || act == "burning_sun")
-	{
-			dmg.init();
-			dmg.m_attacker_fraction = m_fraction;
-			dmg.m_special_flags |= Damage::UNBLOCKABLE;
-			dmg.m_status_mod_power[Damage::BLIND] = (short) (1.5*m_base_attr_mod.m_willpower);
-	}
-	else if (act == "hypnosis" || act == "hypnosis2")
-	{
-			dmg.init();
-			dmg.m_attacker_fraction = m_fraction;
-			dmg.m_special_flags |= Damage::UNBLOCKABLE;
-			dmg.m_status_mod_power[Damage::CONFUSED] = m_base_attr_mod.m_willpower;
-	}
-	else if (act == "break_binding" )
-	{
-			dmg.m_min_damage[Damage::ICE] =m_base_attr_mod.m_willpower/6;
-			dmg.m_max_damage[Damage::ICE] =m_base_attr_mod.m_willpower/4;
-			dmg.m_min_damage[Damage::PHYSICAL] += std::min(m_base_attr_mod.m_willpower/3,m_base_attr_mod.m_magic_power*2);
-			dmg.m_max_damage[Damage::PHYSICAL] += std::min(m_base_attr_mod.m_willpower/2,m_base_attr_mod.m_magic_power*3);
-			dmg.m_special_flags |= Damage::UNBLOCKABLE;
-			dmg.m_special_flags |= Damage::EXTRA_SUMMONED_DMG;
-	}
-	else if (act == "disrupt_binding" )
-	{
-			dmg.m_min_damage[Damage::ICE]=0;
-			dmg.m_max_damage[Damage::ICE]=0;
-			dmg.m_min_damage[Damage::ICE] +=m_base_attr_mod.m_willpower/3;
-			dmg.m_max_damage[Damage::ICE] +=m_base_attr_mod.m_willpower/2;
-			dmg.m_min_damage[Damage::PHYSICAL] += std::min(m_base_attr_mod.m_willpower/2,m_base_attr_mod.m_magic_power*2);
-			dmg.m_max_damage[Damage::PHYSICAL] += std::min(m_base_attr_mod.m_willpower/1.33,m_base_attr_mod.m_magic_power*3.0);
-			dmg.m_special_flags |= Damage::UNBLOCKABLE;
-			dmg.m_special_flags |= Damage::EXTRA_SUMMONED_DMG;
-	}
-	else if (act == "acid" )
-	{
-			dmg.init();
-			dmg.m_attacker_fraction = m_fraction;
-			dmg.m_special_flags |= Damage::UNBLOCKABLE;
-			dmg.m_status_mod_power[Damage::POISONED] = 2*m_base_attr_mod.m_willpower;
-	}
-	else if (act == "divine_wind" || act == "divine_storm")
-	{
-			dmg.m_min_damage[Damage::AIR] =m_base_attr_mod.m_willpower/2;
-			dmg.m_max_damage[Damage::AIR] =m_base_attr_mod.m_willpower/1;
-			dmg.m_special_flags |= Damage::UNBLOCKABLE;
-	}
-
-	
-
-
-*/
 }
 
 
@@ -3425,9 +3118,11 @@ bool Creature::takeDamage(Damage* d)
 	}
 
 	// Testen auf kritische Treffer
+	bool critical = false;
 	if (rand()*rez <d->m_crit_perc)
 	{
 		DEBUG5("critical");
+		critical = true;
 		d->m_multiplier[Damage::PHYSICAL] *= 3;
 	}
 
@@ -3544,8 +3239,9 @@ bool Creature::takeDamage(Damage* d)
 	// Extraschaden berechnen
 	if (d->m_extra_dmg_race == getRace() && getRace() != "")
 	{
-		DEBUG("triple damage");
+		DEBUG5("triple damage");
 		dmg *= 3;
+		critical = true;
 	}
 	
 	// Lebenspunkte abziehen
@@ -3590,9 +3286,14 @@ bool Creature::takeDamage(Damage* d)
 	WorldObject::takeDamage(d);
 	
 	// Visualisierung erzeugen
-	if (getRegion()!= 0 && World::getWorld()->isServer() && dmg>0.5)
+	if (getRegion()!= 0 && World::getWorld()->isServer() && dmg>0.5 && !(d->m_special_flags & Damage::NOVISUALIZE))
 	{
-		getRegion()->visualizeDamage(int(dmg),getShape()->m_center);
+		short size =2;
+		if ((d->m_special_flags & Damage::VISUALIZE_SMALL) && !critical)
+		{
+			size =1;
+		}
+		getRegion()->visualizeDamage(int(dmg),getShape()->m_center,size);
 	}
 	
 	return true;

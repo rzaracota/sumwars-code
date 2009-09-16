@@ -437,6 +437,16 @@ int Damage::getValue(std::string valname)
 		lua_pushboolean(EventSystem::getLuaState() , (m_special_flags & IGNORE_ARMOR));
 		return 1;
 	}
+	else if (valname =="visualize")
+	{
+		lua_pushboolean(EventSystem::getLuaState() , !(m_special_flags & NOVISUALIZE ));
+		return 1;
+	}
+	else if (valname =="visualize_small")
+	{
+		lua_pushboolean(EventSystem::getLuaState() , (m_special_flags & VISUALIZE_SMALL ));
+		return 1;
+	}
 	else if (valname =="extra_dmg_race")
 	{
 		lua_pushstring(EventSystem::getLuaState() , m_extra_dmg_race.c_str());
@@ -602,6 +612,36 @@ bool Damage::setValue(std::string valname)
 		else
 		{
 			m_special_flags &= ~IGNORE_ARMOR ;
+		}
+		return true;
+	}
+	else if (valname =="visualize")
+	{
+		bool b;
+		b = lua_toboolean(EventSystem::getLuaState(),-1);
+		lua_pop(EventSystem::getLuaState(), 1);
+		if (!b)
+		{
+			m_special_flags |= NOVISUALIZE ;
+		}
+		else
+		{
+			m_special_flags &= ~NOVISUALIZE;
+		}
+		return true;
+	}
+	else if (valname =="visualize_small")
+	{
+		bool b;
+		b = lua_toboolean(EventSystem::getLuaState(),-1);
+		lua_pop(EventSystem::getLuaState(), 1);
+		if (b)
+		{
+			m_special_flags |= VISUALIZE_SMALL;
+		}
+		else
+		{
+			m_special_flags &= ~VISUALIZE_SMALL;
 		}
 		return true;
 	}
