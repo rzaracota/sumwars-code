@@ -3589,6 +3589,12 @@ bool Creature::takeDamage(Damage* d)
 	
 	WorldObject::takeDamage(d);
 	
+	// Visualisierung erzeugen
+	if (getRegion()!= 0 && World::getWorld()->isServer() && dmg>0.5)
+	{
+		getRegion()->visualizeDamage(int(dmg),getShape()->m_center);
+	}
+	
 	return true;
 }
 

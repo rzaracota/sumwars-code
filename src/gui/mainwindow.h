@@ -235,6 +235,12 @@ class MainWindow :
 	void updateRegionInfo();
 	
 	/**
+	 * \fn void updateDamageVisualizer()
+	 * \brief aktualisiert die Schadenanzeiger
+	 */
+	void updateDamageVisualizer();
+	
+	/**
 	 * \fn void updateChatContent()
 	 * \brief Aktualisiert Fenster fuer Chattext
 	 */

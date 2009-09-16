@@ -25,113 +25,6 @@ Projectile::Projectile(Subtype subtype,  int id)
 	float r=0.1;
 	// Radius, Timerlaufzeit und Status je nach Typ setzen
 	Subtype st = getSubtype();
-	if (st == "FIRE_BOLT")
-	{
-		r=0.1;
-	}
-	else if (st == "ICE_BOLT")
-	{
-		r=0.1;
-	}
-	else if (st == "LIGHTNING")
-	{
-		r=0.15;
-		setState(STATE_STABLE,false);
-		m_timer_limit = 250;
-	}
-	else if (st == "FIRE_BALL")
-	{
-		r=0.2;
-		m_max_radius = 1.5;
-		m_flags = EXPLODES;
-	}
-	else if (st == "FIRE_WALL")
-	{
-		r=0;
-		setState(STATE_GROWING,false);
-		m_timer_limit = 200;
-		m_max_radius = 2;
-	}
-	else if (st == "FIRE_WAVE")
-	{
-		r=0;
-		setState(STATE_GROWING,false);
-		m_timer_limit = 1000;
-		m_max_radius = 7;
-	}
-	else if (st == "ICE_RING")
-	{
-		r=0;
-		setState(STATE_GROWING,false);
-		m_timer_limit = 800;
-		m_max_radius = 4;
-	}
-	else if (st == "FREEZE")
-	{
-		r=4;
-		setState(STATE_STABLE,false);
-		m_timer_limit = 300;
-	}
-	else if (st == "BLIZZARD")
-	{
-		r=3;
-		setState(STATE_STABLE,false);
-		m_timer_limit = 500;
-	}
-	else if (st == "THUNDERSTORM")
-	{
-		r=5;
-		setState(STATE_STABLE,false);
-		m_timer_limit = 300;
-	}
-	else if (st == "CHAIN_LIGHTNING")
-	{
-		r=0.15;
-		m_flags = BOUNCING;
-	}
-	else if (st == "STATIC_SHIELD")
-	{
-		r=1.5;
-		setState(STATE_STABLE,false);
-		m_timer_limit = 150;
-	}
-	else if (st == "ARROW")
-	{
-		r=0.1;
-	}
-	else if (st == "GUIDED_ARROW")
-	{
-		r=0.1;
-		m_timer_limit = 1000;
-	}
-	else if (st == "")
-	{
-		r=0.1;
-	}
-	else if (st == "")
-	{
-		r=0.1;
-	}
-	else if (st == "")
-	{
-		r=0.1;
-	}
-	else if (st == "EXPLOSION"  ||st == "ICE_EXPLOSION" || st == "WIND_EXPLOSION" || st == "FIRE_EXPLOSION" || st == "ELEM_EXPLOSION")
-	{
-		m_timer_limit = 200;
-		setState(STATE_EXPLODING,false);
-	}
-	else if (st == "LIGHT_BEAM" || st == "DIVINE_BEAM" || st == "ACID" || st == "HYPNOSIS" )
-	{
-		r=0.1;
-		m_timer_limit = 200;
-		setState(STATE_STABLE,false);
-	}
-	else if (st == "")
-	{
-		r=0.1;
-	}
-
 
 	getShape()->m_radius =r;
 	setAngle(0);
@@ -234,78 +127,6 @@ bool Projectile::update(float time)
 
 				break;
 
-			case STATE_EXPLODING:
-				DEBUG("exploding");
-				// Radius vergroessern
-				getShape()->m_radius += (m_max_radius)*dtime/(m_timer_limit);
-
-				// Wenn Timer Limit erreicht
-				if (m_timer >= m_timer_limit)
-				{
-					setState(STATE_DESTROYED);
-
-					if (World::getWorld()->isServer())
-					{
-
-						doEffect();
-
-						if (m_flags & MULTI_EXPLODES)
-						{
-							// Flag mehrfach explodierend gesetzt
-							DEBUG5("multiexploding");
-							Vector dir = getSpeed();
-							dir.normalize();
-							dir *= getShape()->m_radius;
-							
-							// Schaden halbieren
-							Damage dmg;
-							dmg = (*m_damage);
-							for (int i=0;i<4;i++)
-							{
-								dmg.m_multiplier[i] *= 0.5;
-							}
-
-							// vier neue Projektile erzeugen
-							Projectile* pr;
-							pr = ObjectFactory::createProjectile(getSubtype());
-							if (pr != 0)
-							{
-								pr->setDamage(&dmg);
-								pr->setMaxRadius(1);
-								getRegion()->insertProjectile(pr,getPosition() + dir );
-							}
-							
-							dir.m_x = -dir.m_x;
-							pr = ObjectFactory::createProjectile(getSubtype());
-							if (pr != 0)
-							{
-								pr->setDamage(&dmg);
-								pr->setMaxRadius(1);
-								getRegion()->insertProjectile(pr,getPosition() + dir);
-							}
-
-							dir.m_y = -dir.m_y;
-							pr = ObjectFactory::createProjectile(getSubtype());
-							if (pr != 0)
-							{
-								pr->setDamage(&dmg);
-								pr->setMaxRadius(1);
-								getRegion()->insertProjectile(pr,getPosition() + dir);
-							}
-
-							dir.m_x = -dir.m_x;
-							pr = ObjectFactory::createProjectile(getSubtype());
-							if (pr != 0)
-							{
-								pr->setDamage(&dmg);
-								pr->setMaxRadius(1);
-								getRegion()->insertProjectile(pr,getPosition() + dir);
-							}
-
-						}
-					}
-				}
-				break;
 
 			case STATE_GROWING:
 				// Status wachsend behandeln
@@ -912,7 +733,8 @@ void Projectile::destroy()
 			dmg.m_multiplier[i] *= 0.5;
 		}
 
-							// vier neue Projektile erzeugen
+		// vier neue Projektile erzeugen
+		dir.rotate(PI / 4);
 		Projectile* pr;
 		pr = ObjectFactory::createProjectile(getSubtype());
 		if (pr != 0)
@@ -922,7 +744,7 @@ void Projectile::destroy()
 			getRegion()->insertProjectile(pr,getPosition() + dir );
 		}
 							
-		dir.m_x = -dir.m_x;
+		dir.rotate(PI / 2);
 		pr = ObjectFactory::createProjectile(getSubtype());
 		if (pr != 0)
 		{
@@ -931,7 +753,7 @@ void Projectile::destroy()
 			getRegion()->insertProjectile(pr,getPosition() + dir);
 		}
 
-		dir.m_y = -dir.m_y;
+		dir.rotate(PI / 2);
 		pr = ObjectFactory::createProjectile(getSubtype());
 		if (pr != 0)
 		{
@@ -940,7 +762,7 @@ void Projectile::destroy()
 			getRegion()->insertProjectile(pr,getPosition() + dir);
 		}
 
-		dir.m_x = -dir.m_x;
+		dir.rotate(PI / 2);
 		pr = ObjectFactory::createProjectile(getSubtype());
 		if (pr != 0)
 		{

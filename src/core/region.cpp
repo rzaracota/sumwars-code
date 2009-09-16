@@ -1672,6 +1672,21 @@ void Region::update(float time)
 	}
 	
 	m_camera.update(time);
+	
+	// Schadensanzeigen aktualisieren
+	std::map<int,DamageVisualizer>::iterator dit;
+	for (dit = m_damage_visualizer.begin(); dit != m_damage_visualizer.end(); )
+	{
+		dit->second.m_time -= time;
+		if (dit->second.m_time <= 0)
+		{
+			m_damage_visualizer.erase(dit++);
+		}
+		else
+		{
+			++dit;
+		}
+	}
 }
 
 void Region::getRegionData(CharConv* cv)
@@ -2655,3 +2670,23 @@ int Region::getIdByName(std::string name)
 	
 	return it->second;
 }
+
+void Region::visualizeDamage(int number, Vector position, short size)
+{
+	static int id =0;
+	id ++;
+	DamageVisualizer& dmgvis = m_damage_visualizer[id];
+	dmgvis.m_time = 1000;
+	dmgvis.m_number = number;
+	dmgvis.m_position = position;
+	dmgvis.m_size = size;
+	
+	if (World::getWorld()->isServer())
+	{
+		NetEvent event;
+		event.m_type = NetEvent::DAMAGE_VISUALIZER_CREATED;
+		event.m_id = id;
+		insertNetEvent(event);
+	}
+}
+

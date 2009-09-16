@@ -477,6 +477,7 @@ void MainWindow::update(float time)
 		updateItemInfo();
 		updateRegionInfo();
 		updateChatContent();
+		updateDamageVisualizer();
 		
 		// Bild am Curso aktualisieren
 		updateCursorItemImage();
@@ -1904,6 +1905,99 @@ void MainWindow::updateRegionInfo()
 			}
 		}
 		
+	}
+}
+
+void MainWindow::updateDamageVisualizer()
+{
+	// Zaehler wie viele Labels fuer Schaden existieren
+	static int lcount =0;
+	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
+	CEGUI::Window* label;
+			
+	Player* player = m_document->getLocalPlayer();
+	Region* reg = player->getRegion();
+	std::map<int,DamageVisualizer>& dmgvis = reg->getDamageVisualizer();
+	std::map<int,DamageVisualizer>::iterator it;
+	
+	int nr =0;
+	std::stringstream stream;
+	
+	std::pair<float,float> pos;
+	
+	float maxtime = 1000.f;
+	
+	for (it = dmgvis.begin(); it != dmgvis.end(); ++it)
+	{
+		pos = m_scene->getProjection(it->second.m_position,1.0f);
+		pos.second -= 0.1*(maxtime -it->second.m_time)/maxtime;
+		
+		
+		// nur Kreaturen behandeln, die wirklich zu sehen sind
+		if (pos.first <0 || pos.first >1 || pos.second <0 || pos.second >1)
+			continue;
+		
+		stream.str("");
+		stream << "DamageVisualizerLabel";
+		stream << nr;
+		
+		if (nr >= lcount)
+		{
+			lcount ++;
+			label = win_mgr.createWindow("TaharezLook/StaticText", stream.str());
+			m_game_screen->addChildWindow(label);
+			label->setProperty("FrameEnabled", "false");
+			label->setProperty("BackgroundEnabled", "false");
+			label->setText("");
+			label->setAlpha(0.9);
+			label->setFont("DejaVuSerif-12");
+			label->setProperty("TextColours","tl:FFFF5555 tr:FFFF5555 bl:FFFF5555 br:FFFF5555" ); 
+			label->	setMousePassThroughEnabled(true);
+		}
+		else
+		{
+			label = win_mgr.getWindow(stream.str());
+				
+		}
+		
+		stream.str("");
+		stream << it->second.m_number;
+		
+		if (label->getText() != (CEGUI::utf8*) stream.str().c_str())
+		{
+			label->setText((CEGUI::utf8*) stream.str().c_str());
+		}
+		
+		CEGUI::Font* font = label->getFont();
+			
+		float width = font->getTextExtent((CEGUI::utf8*) stream.str().c_str())+15;
+		float height = font->getFontHeight() +15;
+			
+		label->setSize(CEGUI::UVector2(CEGUI::UDim(0,width),  CEGUI::UDim(0,height)));
+		label->setPosition(CEGUI::UVector2(CEGUI::UDim(pos.first,-width/2), CEGUI::UDim(pos.second,-height)));
+		
+		float fadetime = 400;
+		if (it->second.m_time < fadetime)
+		{
+			label->setAlpha(0.9 * it->second.m_time / fadetime);
+		}
+		else
+		{
+			label->setAlpha(0.9);
+		}
+		
+		label->setVisible(true);
+		nr ++;
+	}
+	
+	for (; nr<lcount; nr++)
+	{
+		stream.str("");
+		stream << "DamageVisualizerLabel";
+		stream << nr;
+			
+		label = win_mgr.getWindow(stream.str());
+		label->setVisible(false);
 	}
 }
 

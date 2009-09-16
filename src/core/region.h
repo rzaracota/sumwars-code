@@ -29,6 +29,37 @@ typedef std::string RegionName;
 typedef std::pair<RegionName, LocationName> RegionLocation;
 
 /**
+ * \struct DamageVisualizer
+ * \brief Objekt fuer die Visualisierung von Schaden
+ */
+struct DamageVisualizer
+{
+	/**
+	 * \var int m_number
+	 * \brief Dargestellte Zahl
+	 */
+	int m_number;
+	
+	/**
+	 * \var float m_time
+	 * \brief Zeit, die die Zahl noch dargestellt wird
+	 */
+	float m_time;
+	
+	/**
+	 * \var short m_size
+	 * \brief Schriftgroesse
+	 */
+	short m_size;
+	
+	/**
+	 * \var Vector m_position
+	 * \brief Dargestellter Ort
+	 */
+	Vector m_position;
+};
+
+/**
  * \enum ExitDirection
  * \brief Verschiedene Richtungen in denen man die Region verlassen kann
  */
@@ -1121,6 +1152,24 @@ class Region
 		}
 		
 		/**
+		 * \fn std::map<int,DamageVisualizer>& getDamageVisualizer()
+		 * \brief Gibt die Schadensanzegier aus
+		 */
+		std::map<int,DamageVisualizer>& getDamageVisualizer()
+		{
+			return m_damage_visualizer;
+		}
+		
+		/**
+		 * \fn void visualizeDamage(int number, Vector position, short size=1)
+		 * \brief Fuegt Schadenanzeige hinzu
+		 * \param number Dargestellte Zahl
+		 * \param position Position an der der Schaden dargestellt wird
+		 * \param size Schriftgroesse
+		 */
+		void visualizeDamage(int number, Vector position, short size=1);
+		
+		/**
 		 * \fn void setNamedId(std::string name, int id)
 		 * \brief Speichert Id unter einem bestimmten Name
 		 */
@@ -1302,6 +1351,12 @@ class Region
 		 * \brief Ids benamter Objekte
 		 */
 		std::map<std::string,int> m_name_ids;
+		
+		/**
+		 * \var std::map<int,DamageVisualizer> m_damage_visualizer;
+		 * \brief Visualisierer fuer Schaden
+		 */
+		std::map<int,DamageVisualizer> m_damage_visualizer;
 		
 		/**
 		 * \var RegionCamera m_camera

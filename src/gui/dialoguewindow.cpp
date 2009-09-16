@@ -118,7 +118,7 @@ DialogueWindow::DialogueWindow(Document* doc, Scene* scene)
 	upper_bar->addChildWindow(label);
 	label->setProperty("FrameEnabled", "false");
 	label->setProperty("BackgroundEnabled", "true");
-	label->setFont("DejaVuSans-10");
+	label->setFont("DejaVuSerif-10");
 	label->setProperty("HorzFormatting", "WordWrapLeftAligned");
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.12f), cegui_reldim(0.29f)));
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&DialogueWindow::onTextClicked, this));
@@ -129,7 +129,7 @@ DialogueWindow::DialogueWindow(Document* doc, Scene* scene)
 	upper_bar->addChildWindow(label);
 	label->setProperty("FrameEnabled", "false");
 	label->setProperty("BackgroundEnabled", "true");
-	label->setFont("DejaVuSans-10");
+	label->setFont("DejaVuSerif-10");
 	label->setProperty("HorzFormatting", "WordWrapLeftAligned");
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.5f), cegui_reldim(0.29f)));
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&DialogueWindow::onTextClicked, this));
@@ -140,7 +140,7 @@ DialogueWindow::DialogueWindow(Document* doc, Scene* scene)
 	lower_bar->addChildWindow(label);
 	label->setProperty("FrameEnabled", "false");
 	label->setProperty("BackgroundEnabled", "true");
-	label->setFont("DejaVuSans-10");
+	label->setFont("DejaVuSerif-10");
 	label->setProperty("HorzFormatting", "WordWrapLeftAligned");
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.12f), cegui_reldim(0.29f)));
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&DialogueWindow::onTextClicked, this));
@@ -151,7 +151,7 @@ DialogueWindow::DialogueWindow(Document* doc, Scene* scene)
 	lower_bar->addChildWindow(label);
 	label->setProperty("FrameEnabled", "false");
 	label->setProperty("BackgroundEnabled", "true");
-	label->setFont("DejaVuSans-10");
+	label->setFont("DejaVuSerif-10");
 	label->setProperty("HorzFormatting", "WordWrapLeftAligned");
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.5f), cegui_reldim(0.29f)));
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&DialogueWindow::onTextClicked, this));

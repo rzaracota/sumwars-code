@@ -1872,6 +1872,19 @@ bool World::writeNetEvent(Region* region,NetEvent* event, CharConv* cv)
 				dia->toString(cv);
 			}
 		}
+		else if (event->m_type == NetEvent::DAMAGE_VISUALIZER_CREATED)
+		{
+			std::map<int,DamageVisualizer>& dmgvis = region->getDamageVisualizer();
+			std::map<int,DamageVisualizer>::iterator it= dmgvis.find(event->m_id);
+			if (it != dmgvis.end())
+			{
+				cv->toBuffer(it->second.m_number);
+				cv->toBuffer(it->second.m_time);
+				cv->toBuffer(it->second.m_size);
+				cv->toBuffer(it->second.m_position.m_x);
+				cv->toBuffer(it->second.m_position.m_y);	
+			}
+		}
 	}
 	else
 	{
@@ -2433,6 +2446,20 @@ bool World::processNetEvent(Region* region,CharConv* cv)
 			else
 			{
 				return false;
+			}
+			break;
+			
+		case NetEvent::DAMAGE_VISUALIZER_CREATED:
+			if (region != 0)
+			{
+				DamageVisualizer& dmgvis = region->getDamageVisualizer()[event.m_id];
+				cv->fromBuffer(dmgvis.m_number);
+				cv->fromBuffer(dmgvis.m_time);
+				dmgvis.m_time -= cv->getDelay();
+				cv->fromBuffer(dmgvis.m_size);
+				cv->fromBuffer(dmgvis.m_position.m_x);
+				cv->fromBuffer(dmgvis.m_position.m_y);	
+				
 			}
 			break;
 			
