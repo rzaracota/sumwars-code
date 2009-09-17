@@ -859,6 +859,13 @@ short Player::insertItem(Item* itm, bool use_equip)
 	
 				World::getWorld()->insertNetEvent(event);
 			}
+			
+			// Wenn an der Ausruestung etwas geaendert wurde
+			if (pos <Equipement::CURSOR_ITEM)
+			{
+				// modifizierte Basisattribute neu berechnen
+				calcBaseAttrMod();
+			}
 		}
 		else
 		{
