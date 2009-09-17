@@ -329,7 +329,7 @@ bool Application::setupResources()
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../resources/gui/fonts", "FileSystem", "GUI");
 
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../resources/gui/imagesets", "FileSystem", "GUI");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../resources/emotionsets", "FileSystem", "GUI");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../resources/emotionsets", "FileSystem", "emotionsets");
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../resources/gui/layouts", "FileSystem", "GUI");
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../resources/gui/looknfeel", "FileSystem", "GUI");
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../resources/gui/schemes", "FileSystem", "GUI");
@@ -413,10 +413,8 @@ bool Application::initCEGUI()
 	CEGUI::SchemeManager::getSingleton().loadScheme((CEGUI::utf8*)"TaharezLook.scheme", (CEGUI::utf8*)"GUI");
 
 	// Imagesets laden
-	//CEGUI::Imageset* imgset = CEGUI::ImagesetManager::getSingleton().createImageset("test.imageset");
 	CEGUI::ImagesetManager::getSingleton().createImageset("skills.imageset");
-
-
+	
 	try
 	{
 		CEGUI::ImagesetManager::getSingleton().createImagesetFromImageFile ("startscreen.png","startscreen.png",(CEGUI::utf8*)"GUI");
@@ -532,6 +530,17 @@ bool Application::loadResources()
 
 	// Imagesets laden
 	files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("itempictures","*.imageset");
+	for (it = files->begin(); it != files->end(); ++it)
+	{
+
+		file = it->filename;
+
+		CEGUI::ImagesetManager::getSingleton().createImageset(file);
+
+		updateStartScreen(0.9);
+	}
+	
+	files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("emotionsets","*.imageset");
 	for (it = files->begin(); it != files->end(); ++it)
 	{
 
