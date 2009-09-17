@@ -723,7 +723,7 @@ bool Monster::setValue(std::string valname)
 	}
 	else
 	{
-		ret = Creature::getValue(valname);
+		ret = Creature::setValue(valname);
 	}
 	return ret;
 }

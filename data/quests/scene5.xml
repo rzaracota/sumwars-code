@@ -82,14 +82,14 @@
 				
 				setCutsceneMode(true);
 				
-				timedExecute('addUnitCommand(scene5_tmp.skeletons[1], "range_attack", scene5_tmp.guard2,"repeat")',400);
-				timedExecute('addUnitCommand(scene5_tmp.skeletons[2], "range_attack", scene5_tmp.guard2,"repeat")',350);
-				timedExecute('addUnitCommand(scene5_tmp.skeletons[3], "range_attack", scene5_tmp.guard4,"repeat")',100);
-				timedExecute('addUnitCommand(scene5_tmp.skeletons[4], "range_attack", scene5_tmp.hauptmann_der_wache,"repeat")',75);
-				timedExecute('addUnitCommand(scene5_tmp.skeletons[5], "range_attack", scene5_tmp.erzmaga_ireana,"repeat")', 800);
-				timedExecute('addUnitCommand(scene5_tmp.skeletons[6], "range_attack", scene5_tmp.guard1,"repeat")', 650);
-				timedExecute('addUnitCommand(scene5_tmp.skeletons[7], "range_attack", scene5_tmp.guard1,"repeat")',523);
-				timedExecute('addUnitCommand(scene5_tmp.skeletons[8], "range_attack", scene5_tmp.guard3,"repeat")', 250);
+				timedExecute('addUnitCommand(scene5_tmp.skeletons[1], "range_attack", scene5_tmp.guard2,0,"repeat")',400);
+				timedExecute('addUnitCommand(scene5_tmp.skeletons[2], "range_attack", scene5_tmp.guard2,0,"repeat")',350);
+				timedExecute('addUnitCommand(scene5_tmp.skeletons[3], "range_attack", scene5_tmp.guard4,0,"repeat")',100);
+				timedExecute('addUnitCommand(scene5_tmp.skeletons[4], "range_attack", scene5_tmp.hauptmann_der_wache,0,"repeat")',75);
+				timedExecute('addUnitCommand(scene5_tmp.skeletons[5], "range_attack", scene5_tmp.erzmaga_ireana,0,"repeat")', 800);
+				timedExecute('addUnitCommand(scene5_tmp.skeletons[6], "range_attack", scene5_tmp.guard1,0,"repeat")', 650);
+				timedExecute('addUnitCommand(scene5_tmp.skeletons[7], "range_attack", scene5_tmp.guard1,0,"repeat")',523);
+				timedExecute('addUnitCommand(scene5_tmp.skeletons[8], "range_attack", scene5_tmp.guard3,0,"repeat")', 250);
 				
 				lookAtObject(scene5_tmp.guard1, scene5_tmp.skeletons[6]);
 				lookAtObject(scene5_tmp.guard2, scene5_tmp.skeletons[2]);

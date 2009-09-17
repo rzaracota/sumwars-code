@@ -61,6 +61,10 @@
 		<Animation name="walkTwoHands" />
 	</Action>
 	
+	<Action name="walk#TwoHands#bow">
+		<Animation name="walkBow" />
+	</Action>
+	
 	<Action name="attack">
 		<Animation name="attack" />
 	</Action>
