@@ -341,7 +341,7 @@ void Monster::updateCommand()
 		cmd->m_goal_object_id = m_ai.m_command.m_goal_object_id;
 		cmd->m_range = m_ai.m_command.m_range;
 		
-		DEBUG5("calculated command %s",m_ai.m_command.m_type.c_str());
+		DEBUG4("calculated command %s for %s",m_ai.m_command.m_type.c_str(),getSubtype().c_str());
 		
 
 		addToNetEventMask(NetEvent::DATA_COMMAND);
@@ -500,6 +500,7 @@ void Monster::evalCommand(Action::ActionType act)
 				if (ranged_move)
 				{
 					m_ai.m_command.m_type = "walk";
+					m_ai.m_command.m_range = getShape()->m_radius;
 				}
 			}
 		}
