@@ -23,25 +23,5 @@
   TestWelt
   -->
 
-<MonsterGroup name="goblins_l1" >
-	<SubGroup subtype="goblin" number="2" prob="1.0" />
-	<SubGroup subtype="goblin" number="2" prob="0.5" />
-</MonsterGroup>
 
-<MonsterGroup name="goblins_bow_l1" >
-	<SubGroup subtype="goblin" number="1" prob="1.0" />
-	<SubGroup subtype="goblin_bow" number="1" prob="1.0" />
-	<SubGroup subtype="goblin_bow" number="1" prob="0.7" />
-</MonsterGroup>
 
-<MonsterGroup name="goblins_bow_l3" >
-	<SubGroup subtype="goblin" number="1" prob="1.0" />
-	<SubGroup subtype="goblin_bow" number="2" prob="1.0" />
-	<SubGroup subtype="goblin_bow" number="2" prob="0.5" />
-</MonsterGroup>
-
-<MonsterGroup name="goblins_robber_l3" >
-	<SubGroup subtype="goblin" number="2" prob="1.0" />
-	<SubGroup subtype="goblin_rob" number="1" prob="1.0" />
-	<SubGroup subtype="goblin" number="2" prob="0.5" />
-</MonsterGroup>

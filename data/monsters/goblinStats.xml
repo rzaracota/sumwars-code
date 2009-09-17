@@ -1,16 +1,16 @@
-﻿<!-- Goblins -->
+<!-- Goblins -->
 
 <!-- Goblinschlaeger -->
 <!-- L1 -->
 <Monster type="MONSTER" subtype="goblin" name="goblin brawler" fraction="monster" race="goblin" layer="NORMAL">
 	<RenderInfo name="goblin" />
 	<Dropslots >
-		<Dropslot pbig="0.02" pmedium="0.06" psmall="0.08" pgold="0.05" max_gold="30" min_level="0" max_level="3" magic_prob="0.1" magic_power="100" />
-		<Dropslot pbig="0.02" pmedium="0.06" psmall="0.05" pgold="0.05" max_gold="20" min_level="0" max_level="1" magic_prob="0.2" magic_power="100" />
+		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.05" pgold="0.05" max_gold="30" min_level="0" max_level="3" magic_prob="0.1" magic_power="150" />
+		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.03" pgold="0.05" max_gold="20" min_level="0" max_level="2" magic_prob="0.2" magic_power="150" />
 	</Dropslots>
 	
 	<BasicAttributes
-		experience="8"
+		experience="7"
 		level="1"
 		max_health="30"
 		armor="10"
@@ -46,6 +46,52 @@
 	<AI ai_sight_range="10" ai_chase_range="20"/>
 </Monster>
 
+<!-- Goblin Schuetze
+	 L2 -->
+<Monster type="MONSTER" subtype="goblin_bow" name="goblin hunter" fraction="monster" race="goblin" layer="NORMAL">
+	<RenderInfo name="goblin_bow" />
+	<Dropslots >
+		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.05" pgold="0.05" max_gold="50" min_level="1" max_level="5" magic_prob="0.1" magic_power="200" />
+		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.03" pgold="0.05" max_gold="30" min_level="1" max_level="3" magic_prob="0.2" magic_power="200" />
+	</Dropslots>
+	
+	<BasicAttributes
+					experience="9"
+					level="2"
+					max_health="25"
+					armor="10"
+					block="0"
+					attack="20"
+					power="25"
+					strength="25"
+					dexterity="10"
+					magic_power="5"
+					willpower="10"
+					resistances_physical="0"
+					resistances_air="0"
+					resistances_ice="0"
+					resistances_fire="0"
+					resistances_cap_physical="50"
+					resistances_cap_air="50"
+					resistances_cap_ice="50"
+					resistances_cap_fire="50"
+					walk_speed="2500"
+					attack_speed="1000"
+					step_length="0.8"
+					attack_range="1"
+					>
+		<Ability type="walk" />
+		<Ability type="range_attack" rating="1"/>
+		<Ability type="die" />
+		<Ability type="noaction" time = "5000" />
+	</BasicAttributes>
+	
+	<Geometry radius="0.5" />
+	
+	<AI ai_sight_range="12" ai_shoot_range="6" />
+</Monster>
+
+
 <!-- Goblinraeuber -->
 <!-- L3 -->
 <Monster type="MONSTER" subtype="goblin_rob" name="goblin robber" fraction="monster" race="goblin" layer="NORMAL">
@@ -76,7 +122,7 @@
 					resistances_cap_ice="50"
 					resistances_cap_fire="50"
 					walk_speed="2500"
-					attack_speed="1500"
+					attack_speed="1200"
 					step_length="0.8"
 					attack_range="1"
 					>
@@ -140,61 +186,16 @@
 </Monster>
 
 
-<!-- Goblinjaeger -->
-<!-- L2 -->
-<Monster type="MONSTER" subtype="goblin_bow" name="goblin hunter" fraction="monster" race="goblin" layer="NORMAL">
-	<RenderInfo name="goblin_bow" />
-	<Dropslots >
-		<Dropslot pbig="0.02" pmedium="0.07" psmall="0.08" pgold="0.05" max_gold="50" min_level="0" max_level="5" magic_prob="0.1" magic_power="250" />
-		<Dropslot pbig="0.02" pmedium="0.07" psmall="0.05" pgold="0.05" max_gold="30" min_level="0" max_level="3" magic_prob="0.2" magic_power="250" />
-	</Dropslots>
-	
-	<BasicAttributes
-					experience="9"
-					level="2"
-					max_health="25"
-					armor="10"
-					block="0"
-					attack="20"
-					power="25"
-					strength="25"
-					dexterity="10"
-					magic_power="5"
-					willpower="10"
-					resistances_physical="0"
-					resistances_air="0"
-					resistances_ice="0"
-					resistances_fire="0"
-					resistances_cap_physical="50"
-					resistances_cap_air="50"
-					resistances_cap_ice="50"
-					resistances_cap_fire="50"
-					walk_speed="2500"
-					attack_speed="1000"
-					step_length="0.8"
-					attack_range="1"
-					>
-		<Ability type="walk" />
-		<Ability type="range_attack" rating="1"/>
-		<Ability type="die" />
-		<Ability type="noaction" time = "5000" />
-	</BasicAttributes>
-	
-	<Geometry radius="0.5" />
-	
-	<AI ai_sight_range="12" ai_shoot_range="6" />
-</Monster>
-
 <!-- Goblinhund -->
 <!-- L4 -->
 <Monster type="MONSTER" subtype="gob_dog" name="goblin dog" fraction="monster" race="animal" layer="NORMAL">
 	<RenderInfo name="gobDog" />
 	<Dropslots >
-		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" max_gold="70" min_level="0" max_level="5" magic_prob="0.1" magic_power="250" />
-		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" max_gold="50" min_level="0" max_level="3" magic_prob="0.2" magic_power="250" />
+		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.04" pgold="0.05" max_gold="70" min_level="0" max_level="6" magic_prob="0.1" magic_power="250" />
+		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.04" pgold="0.05" max_gold="50" min_level="0" max_level="4" magic_prob="0.2" magic_power="250" />
 	</Dropslots>
 	<BasicAttributes
-		experience="6"
+		experience="15"
 		level="4"
 		max_health="100"
 		armor="10"
@@ -456,3 +457,35 @@
 	
 	<AI ai_sight_range="12" />
 </Monster>
+
+
+
+<MonsterGroup name="goblins_l1" >
+	<SubGroup subtype="goblin" number="2" prob="1.0" />
+	<SubGroup subtype="goblin" number="2" prob="0.5" />
+</MonsterGroup>
+
+<MonsterGroup name="goblins_bow_l1" >
+	<SubGroup subtype="goblin" number="1" prob="1.0" />
+	<SubGroup subtype="goblin_bow" number="1" prob="1.0" />
+	<SubGroup subtype="goblin_bow" number="1" prob="0.7" />
+</MonsterGroup>
+
+<MonsterGroup name="goblins_bow_l3" >
+	<SubGroup subtype="goblin" number="1" prob="1.0" />
+	<SubGroup subtype="goblin_bow" number="2" prob="1.0" />
+	<SubGroup subtype="goblin_bow" number="2" prob="0.5" />
+</MonsterGroup>
+
+<MonsterGroup name="goblins_l3" >
+	<SubGroup subtype="goblin" number="2" prob="1.0" />
+	<SubGroup subtype="goblin_rob" number="1" prob="1.0" />
+	<SubGroup subtype="goblin_rob" number="1" prob="0.5" />
+</MonsterGroup>
+
+<MonsterGroup name="goblins_dogs_l3" >
+	<SubGroup subtype="gob_dog" number="1" prob="1.0" />
+	<SubGroup subtype="gob_dog" number="2" prob="0.7" />
+	<SubGroup subtype="goblin_bow" number="1" prob="1.0" />
+	<SubGroup subtype="goblin_rob" number="1" prob="0.5" />
+</MonsterGroup>

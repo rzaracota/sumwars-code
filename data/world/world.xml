@@ -181,9 +181,9 @@
 	
 <!-- Aisen, Aisener Wiesen [Feld und Wiesen]; ungefaehr eine viertel Stunde, eher offen; Level 1 - 3 -->
 <!-- Orte: verwundeter Soldat, Template -->
-<!-- Goblinschlaeger, Goblinraeuber, Goblinjaeger-->
+<!-- Goblinschlaeger, Goblinjaeger-->
 	<Region id="4" name="aisMeadow">
-		<Settings dimx="48" dimy="48" area_percent="0.3" complexity="0.4" granularity="6"  ground="grass1"/>
+		<Settings dimx="46" dimy="46" area_percent="0.3" complexity="0.4" granularity="6"  ground="grass1"/>
 		
 		<Waypoint world_x="0.4" world_y ="0.8" />
 		
@@ -212,8 +212,8 @@
 		</ObjectGroups>
 		
 		<SpawnGroups>
-			<SpawnGroup group_name="goblins_l1" number="18" />
-			<SpawnGroup group_name="goblins_bow_l1" number="12" />
+			<SpawnGroup group_name="goblins_l1" number="27" />
+			<SpawnGroup group_name="goblins_bow_l1" number="18" />
 		</SpawnGroups>
 	</Region>
 
@@ -221,7 +221,7 @@
 <!-- Goblinschlaeger, Goblinraeuber, Goblinjaeger, Goblinhunde, Feldalraunen?(falls wir welche bekommen) -->
 <!-- Orte: entry_Crypt, exit_Crypt => Maylons Grab(Template) -->
 	<Region id="5" name="aisPlains">
-		<Settings dimx="32" dimy="32" area_percent="0.3" complexity="0.4" granularity="6"  ground="grass1" />
+		<Settings dimx="48" dimy="48" area_percent="0.3" complexity="0.4" granularity="6"  ground="grass1" />
 		<Waypoint world_x="0.55" world_y ="0.7" />
 		<ExitDirections north="false" south="true" west="false" east="true" />
 		
@@ -250,9 +250,9 @@
 		</ObjectGroups>
 		
 		<SpawnGroups>
-			<SpawnGroup group_name="goblins_bow_l3" number="16" />
-			<SpawnGroup group_name="goblins_robber_l3" number="12" />
-			<SpawnGroup group_name="wild_dogs" number="4"/>
+			<SpawnGroup group_name="goblins_bow_l3" number="20" />
+			<SpawnGroup group_name="goblins_l3" number="15" />
+			<SpawnGroup group_name="goblins_dogs_l3" number="15"/>
 		</SpawnGroups>
 	</Region>
 	

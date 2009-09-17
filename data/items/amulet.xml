@@ -24,7 +24,7 @@
 	
 	<DropChance
 		level="2"
-		probability=".05"
+		probability=".1"
 	/>
 </Item>
 
@@ -52,7 +52,7 @@
 	
 	<DropChance
 		level="4"
-		probability="0.05"
+		probability="0.1"
 	/>
 </Item>
 
@@ -80,7 +80,7 @@
 	
 	<DropChance
 		level="8"
-		probability="0.05"
+		probability="0.1"
 	/>
 </Item>
 
@@ -108,7 +108,7 @@
 	
 	<DropChance
 		level="15"
-		probability="0.05"
+		probability="0.1"
 	/>
 </Item>
 
@@ -136,6 +136,6 @@
 	
 	<DropChance
 		level="21"
-		probability="0.05"
+		probability="0.1"
 	/>
 </Item>

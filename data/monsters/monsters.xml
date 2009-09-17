@@ -367,9 +367,6 @@ AIR
 	<SubGroup subtype="gob_dog" number="4" prob="0.7" />
 </MonsterGroup>
 
-<MonsterGroup name="wild_dogs" >
-	<SubGroup subtype="gob_dog" number="8" prob="0.7" />
-</MonsterGroup>
 
 <MonsterGroup name="goblin_band" >
 	<SubGroup subtype="goblin_war" number="4" prob="0.7" />
