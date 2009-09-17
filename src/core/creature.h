@@ -264,7 +264,7 @@ public:
 	 * \brief Bricht das aktuelle Kommando ab
 	 * \param success Gibt an, ob die Ausfuehrung erfolgreich war
 	 */
-	void clearCommand(bool success);
+	virtual void clearCommand(bool success);
 	
 	/**
 	 * \fn virtual void toString(CharConv* cv)
@@ -343,13 +343,13 @@ public:
 	 * \param cmd Kommando
 	 * \param time Zeit die bleibt um das Kommando zu beenden
 	 */
-	void insertScriptCommand(Command &cmd, float time=50000);
+	virtual void insertScriptCommand(Command &cmd, float time=50000);
 
 	/**
 	 * \fn void clearScriptCommands()
 	 * \brief Loescht alle per Script gesetzten Kommandos
 	 */
-	void clearScriptCommands();
+	virtual void clearScriptCommands();
 	
 	/**
 	 * \fn bool hasScriptCommand()

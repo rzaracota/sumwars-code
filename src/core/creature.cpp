@@ -3297,7 +3297,7 @@ bool Creature::takeDamage(Damage* d)
 		{
 			size =1;
 		}
-		getRegion()->visualizeDamage(int(dmg),getShape()->m_center,size);
+		getRegion()->visualizeDamage(int(dmg + 0.5),getShape()->m_center,size);
 	}
 	
 	return true;

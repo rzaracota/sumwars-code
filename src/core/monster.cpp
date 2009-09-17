@@ -347,6 +347,11 @@ void Monster::updateCommand()
 		addToNetEventMask(NetEvent::DATA_COMMAND);
 
 	}
+	else if ((m_ai.m_state & Ai::ACTIVE) && m_ai.m_command.m_type == "noaction" && m_ai.m_secondary_command.m_type != "noaction")
+	{
+		*(getCommand()) = m_ai.m_secondary_command;
+		addToNetEventMask(NetEvent::DATA_COMMAND);
+	}
 	else
 	{
 		DEBUG5("AI state %i ai value %f",m_ai.m_state,m_ai.m_command_value);
@@ -656,6 +661,72 @@ void Monster::die()
 	Creature::die();
 }
 
+void Monster::insertScriptCommand(Command &cmd, float time)
+{
+	if (cmd.m_flags & Command::SECONDARY)
+	{
+		m_ai.m_secondary_command = cmd;
+	}
+	else
+	{
+		Creature::insertScriptCommand(cmd,time);
+	}
+}
+
+void Monster::clearScriptCommands()
+{
+	Creature::clearScriptCommands();
+	
+	m_ai.m_secondary_command.m_type = "noaction";
+}
+
+int Monster::getValue(std::string valname)
+{
+	int ret=0;
+	if (valname == "ai_state")
+	{
+		if (m_ai.m_state == Ai::ACTIVE)
+		{
+			lua_pushstring(EventSystem::getLuaState() ,"active");
+			ret =1;
+		}
+		else if (m_ai.m_state == Ai::INACTIVE)
+		{
+			lua_pushstring(EventSystem::getLuaState() ,"inactive");
+			ret =1;
+		}
+	}
+	else
+	{
+		ret = Creature::getValue(valname);
+	}
+	return ret;
+}
+
+bool Monster::setValue(std::string valname)
+{
+	bool ret = false;
+	if (valname == "ai_state")
+	{
+		std::string state= lua_tostring(EventSystem::getLuaState() ,-1);
+		lua_pop(EventSystem::getLuaState(), 1);
+		if (state == "active")
+		{
+			m_ai.m_state = Ai::ACTIVE;
+			ret = true;
+		}
+		else if (state =="inactive")
+		{
+			m_ai.m_state = Ai::INACTIVE;
+			ret = true;
+		}
+	}
+	else
+	{
+		ret = Creature::getValue(valname);
+	}
+	return ret;
+}
 
 
 

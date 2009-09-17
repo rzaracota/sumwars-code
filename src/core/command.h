@@ -45,8 +45,8 @@ class Command {
 public:
 	enum Flags
 	{
-		REPEAT = 1,
- 		
+		REPEAT = 0x1,
+ 		SECONDARY = 0x2,
 	};
 	/**
 	 * Fields

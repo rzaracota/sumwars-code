@@ -984,7 +984,6 @@ int EventSystem::addUnitCommand(lua_State *L)
 						float range = lua_tonumber(L,4);
 						if (range > 0)
 							com.m_range = range;
-						DEBUG("range %f",com.m_range);
 					}
 					
 					if (argc>=5)
@@ -995,9 +994,13 @@ int EventSystem::addUnitCommand(lua_State *L)
 						if (flags.find("repeat") != std::string::npos)
 						{
 							flg |= Command::REPEAT;
-							com.m_flags = flg;
-							DEBUG5("flags: %s",flags.c_str());
+							
 						}
+						if (flags.find("secondary") != std::string::npos)
+						{
+							flg |= Command::SECONDARY;
+						}
+						com.m_flags = flg;
 					}
 					
 					float time = 50000;

@@ -121,6 +121,13 @@ struct Ai
 	 * \brief Status der AI des Monsters
 	 */
 	int m_state;
+	
+	
+	/**
+	 * \var Command m_secondary_command
+	 * \brief Sekundaerkommando
+	 */
+	Command m_secondary_command;
 };
 
 /**
@@ -229,6 +236,35 @@ class Monster : public Creature {
 			// Monster per default immer einhaendig;
 			return Action::ONE_HANDED;
 		}
+		
+		/**
+		 * \fn void insertScriptCommand(Command &cmd, float time=50000)
+		 * \brief Fuegt fuer die Kreatur ein neues Kommando per Script hinzu
+		 * \param cmd Kommando
+		 * \param time Zeit die bleibt um das Kommando zu beenden
+		 */
+		virtual void insertScriptCommand(Command &cmd, float time=50000);
+
+		/**
+		 * \fn void clearScriptCommands()
+		 * \brief Loescht alle per Script gesetzten Kommandos
+		 */
+		virtual void clearScriptCommands();
+		
+		/**
+		 * \fn virtual int getValue(std::string valname)
+		 * \brief Schiebt den gewuenschten Attributwert eines Objektes auf den Lua Stack
+		 * \param valname Name des Wertes
+		 */
+		virtual int getValue(std::string valname);
+	
+		/**
+		 * \fn virtual bool setValue(std::string valname)
+		 * \brief Setzt den gewuenschten Attributwert eines Objektes
+		 * \param valname Name des Wertes
+		 */
+		virtual bool setValue(std::string valname);
+		
 		
 		/**
 		 * \fn Ai& getAi()
