@@ -115,17 +115,6 @@ bool World::init(int port)
 
 	}
 	
-	files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("playerclasses","*.xml");
-	for (it = files->begin(); it != files->end(); ++it)
-	{
-		file = it->archive->getName();
-		file += "/";
-		file += it->filename;
-
-		ObjectLoader::loadPlayerData(file.c_str());
-
-	}
-	
 	ObjectFactory::init();
 	files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("monsters","*.xml");
 	for (it = files->begin(); it != files->end(); ++it)

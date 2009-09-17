@@ -515,6 +515,14 @@ void ObjectFactory::cleanupObjectData()
 		delete it10->second;
 	}
 	m_treasure_data.clear();
+	
+	
+	// Zuordnung Klassenname -> Spieler wieder eintragen
+	std::map<GameObject::Subtype, PlayerBasicData*>::iterator it;
+	for (it = m_player_data.begin(); it != m_player_data.end(); ++it)
+	{
+		m_object_types.insert(std::make_pair(it->first, "PLAYER"));
+	}
 }
 
 
