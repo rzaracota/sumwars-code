@@ -184,6 +184,13 @@ bool CharCreate::onLookSelected(const CEGUI::EventArgs& evt)
 		CEGUI::ListboxItem * itm2 = classlist->getFirstSelectedItem();
 		StrListItem * sitm2 = (StrListItem *) itm2;
 		
+		if (sitm2 == 0)
+		{
+			CEGUI::Listbox* looklist = (CEGUI::Listbox*) win_mgr.getWindow("LookList");
+			looklist->resetList();
+			return true;
+		}
+		
 		PlayerLook* plook = ObjectFactory::getPlayerLook(sitm2->m_data,sitm->m_data);
 		if (plook != 0)
 		{
