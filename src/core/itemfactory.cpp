@@ -158,6 +158,7 @@ void ItemFactory::createMagicMods(Item* item, float* modchance, float magic_powe
 		else if (mod > RESIST_ALL_MOD && item->m_weapon_attr ==0)
 		{
 			item->m_weapon_attr = new WeaponAttr;
+			item->m_weapon_attr->m_weapon_type = "notype";
 		}
 
 			// Wirkung der Modifikation

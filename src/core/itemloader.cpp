@@ -67,7 +67,7 @@ void ItemLoader::loadItem(TiXmlNode* node)
 	else
 		ERRORMSG("item without base type");
 	
-	attr.getString("subtype", item_data->m_subtype);
+	attr.getString("subtype", item_data->m_subtype,"notype");
 	attr.getString("name", item_data->m_name);
 	std::string size;
 	attr.getString("size", size);
@@ -286,7 +286,7 @@ void ItemLoader::loadItem(TiXmlNode* node)
 					item_data->m_weapon_attr = new WeaponAttr;
 				
 				std::string type;
-				attr.getString("weapon_type",item_data->m_weapon_attr->m_weapon_type);
+				attr.getString("weapon_type",item_data->m_weapon_attr->m_weapon_type,"notype");
 				
 				Damage& dmg = item_data->m_weapon_attr->m_damage;
 				attr.getFloat("damage_min_physical",dmg.m_min_damage[Damage::PHYSICAL]);
