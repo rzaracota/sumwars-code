@@ -37,6 +37,7 @@
 	<Damage>
 		<CppImplementation type="attack" />
 		<CppImplementation type="weapon_damage" />
+		<CppImplementation type="small_numbers" />
 		<LuaImplementation>
 			setDamageValue("phys_mult", getDamageValue("phys_mult")*0.7);
 		</LuaImplementation>	
@@ -444,6 +445,7 @@
 	<Damage>
 		<CppImplementation type="attack" />
 		<CppImplementation type="weapon_damage" />
+		<CppImplementation type="small_numbers" />
 	</Damage>
 </Ability>
 

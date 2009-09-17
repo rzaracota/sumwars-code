@@ -4,11 +4,15 @@
 	</Action>
 	
 	<Action name="attack">
-		<Animation name="attack1" />
+		<Animation name="attack" />
 	</Action>
 
 	<Action name="die">
 		<Animation name="die" />
+	</Action>
+	
+	<Action name="noaction">
+		<Animation name="idle1" />
 	</Action>
 </RenderInfo>
 

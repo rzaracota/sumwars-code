@@ -103,6 +103,7 @@
 	<Damage>
 		<CppImplementation type="attack" />
 		<CppImplementation type="weapon_damage" />
+		<CppImplementation type="small_numbers" />
 	</Damage>
 </Ability>
 
@@ -120,6 +121,7 @@
 	<Damage>
 		<CppImplementation type="holy_attack" />
 		<CppImplementation type="weapon_damage" />
+		<CppImplementation type="small_numbers" />
 	</Damage>
 </Ability>
 
@@ -138,6 +140,7 @@
 	<Damage>
 		<CppImplementation type="magic_attack" />
 		<CppImplementation type="weapon_damage" />
+		<CppImplementation type="small_numbers" />
 	</Damage>
 </Ability>
 
@@ -157,5 +160,6 @@
 	<Damage>
 		<CppImplementation type="range_attack" />
 		<CppImplementation type="weapon_damage" />
+		<CppImplementation type="small_numbers" />
 	</Damage>
 </Ability>

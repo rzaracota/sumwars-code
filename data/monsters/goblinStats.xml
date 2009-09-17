@@ -1,4 +1,4 @@
-<!-- Goblins -->
+﻿<!-- Goblins -->
 
 <!-- Goblinschlaeger -->
 <!-- L1 -->
@@ -21,6 +21,14 @@
 		dexterity="10"
 		magic_power="5"
 		willpower="10"
+		resistances_physical="0"
+		resistances_air="0"
+		resistances_ice="0"
+		resistances_fire="0"
+		resistances_cap_physical="50"
+		resistances_cap_air="50"
+		resistances_cap_ice="50"
+		resistances_cap_fire="50"
 		walk_speed="1500"
 		attack_speed="1500"
 		step_length="1.0"
@@ -35,44 +43,7 @@
 	
 	<Geometry radius="0.5" />
 	
-	<AI ai_sight_range="10" ai_chase_range="15"/>
-</Monster>
-
-<!-- Goblinjaeger -->
-<!-- L2 -->
-<Monster type="MONSTER" subtype="goblin_bow" name="goblin hunter" fraction="monster" race="goblin" layer="NORMAL">
-	<RenderInfo name="goblin_bow" />
-	<Dropslots >
-		<Dropslot pbig="0.02" pmedium="0.07" psmall="0.08" pgold="0.05" max_gold="50" min_level="0" max_level="5" magic_prob="0.1" magic_power="250" />
-		<Dropslot pbig="0.02" pmedium="0.07" psmall="0.05" pgold="0.05" max_gold="30" min_level="0" max_level="3" magic_prob="0.2" magic_power="250" />
-	</Dropslots>
-	
-	<BasicAttributes
-					experience="9"
-					level="2"
-					max_health="25"
-					armor="10"
-					block="0"
-					attack="20"
-					power="25"
-					strength="25"
-					dexterity="10"
-					magic_power="5"
-					willpower="10"
-					walk_speed="2500"
-					attack_speed="1000"
-					step_length="0.8"
-					attack_range="1"
-					>
-		<Ability type="walk" />
-		<Ability type="range_attack" rating="1"/>
-		<Ability type="die" />
-		<Ability type="noaction" time = "5000" />
-	</BasicAttributes>
-	
-	<Geometry radius="0.5" />
-	
-	<AI ai_sight_range="12" ai_shoot_range="6" ai_chase_range="15"/>
+	<AI ai_sight_range="10" ai_chase_range="20"/>
 </Monster>
 
 <!-- Goblinraeuber -->
@@ -169,9 +140,52 @@
 </Monster>
 
 
+<!-- Goblinjaeger -->
+<!-- L2 -->
+<Monster type="MONSTER" subtype="goblin_bow" name="goblin hunter" fraction="monster" race="goblin" layer="NORMAL">
+	<RenderInfo name="goblin_bow" />
+	<Dropslots >
+		<Dropslot pbig="0.02" pmedium="0.07" psmall="0.08" pgold="0.05" max_gold="50" min_level="0" max_level="5" magic_prob="0.1" magic_power="250" />
+		<Dropslot pbig="0.02" pmedium="0.07" psmall="0.05" pgold="0.05" max_gold="30" min_level="0" max_level="3" magic_prob="0.2" magic_power="250" />
+	</Dropslots>
+	
+	<BasicAttributes
+					experience="9"
+					level="2"
+					max_health="25"
+					armor="10"
+					block="0"
+					attack="20"
+					power="25"
+					strength="25"
+					dexterity="10"
+					magic_power="5"
+					willpower="10"
+					resistances_physical="0"
+					resistances_air="0"
+					resistances_ice="0"
+					resistances_fire="0"
+					resistances_cap_physical="50"
+					resistances_cap_air="50"
+					resistances_cap_ice="50"
+					resistances_cap_fire="50"
+					walk_speed="2500"
+					attack_speed="1000"
+					step_length="0.8"
+					attack_range="1"
+					>
+		<Ability type="walk" />
+		<Ability type="range_attack" rating="1"/>
+		<Ability type="die" />
+		<Ability type="noaction" time = "5000" />
+	</BasicAttributes>
+	
+	<Geometry radius="0.5" />
+	
+	<AI ai_sight_range="12" ai_shoot_range="6" />
+</Monster>
 
-
-<!-- Goblin Dog -->
+<!-- Goblinhund -->
 <!-- L4 -->
 <Monster type="MONSTER" subtype="gob_dog" name="goblin dog" fraction="monster" race="animal" layer="NORMAL">
 	<RenderInfo name="gobDog" />
@@ -200,9 +214,9 @@
 		resistances_cap_ice="50"
 		resistances_cap_fire="50"
 		walk_speed="2500"
-		attack_speed="2000"
-		step_length="0.5"
-		attack_range="0.5"
+		attack_speed="1000"
+		step_length="1"
+		attack_range="1.5"
 	>
 		<Ability type="walk" />
 		<Ability type="attack" rating="1"/>
