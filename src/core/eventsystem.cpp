@@ -963,8 +963,11 @@ int EventSystem::addUnitCommand(lua_State *L)
 					com.m_range = cr->getBaseAttrMod()->m_attack_range;
 
 					if (act == "use")
-						com.m_range = 0.5;
-
+						com.m_range = 1.0;
+					
+					if (act == "walk")
+						com.m_range =cr->getShape()->m_radius;
+					
 					if (argc >=3 && lua_isnumber(L,3))
 					{
 						com.m_goal_object_id = lua_tointeger(L,3);
@@ -976,9 +979,17 @@ int EventSystem::addUnitCommand(lua_State *L)
 						com.m_goal_object_id =0;
 					}
 					
-					if (argc>=4)
+					if (argc>=4 && lua_isnumber(L,4))
 					{
-						std::string flags = lua_tostring(L,4);
+						float range = lua_tonumber(L,4);
+						if (range > 0)
+							com.m_range = range;
+						DEBUG("range %f",com.m_range);
+					}
+					
+					if (argc>=5)
+					{
+						std::string flags = lua_tostring(L,5);
 						char flg =0;
 						
 						if (flags.find("repeat") != std::string::npos)
@@ -990,8 +1001,8 @@ int EventSystem::addUnitCommand(lua_State *L)
 					}
 					
 					float time = 50000;
-					if (argc>=5 && lua_isnumber(L,5))
-						time = lua_tonumber(L,5);
+					if (argc>=6 && lua_isnumber(L,6))
+						time = lua_tonumber(L,6);
 					cr->insertScriptCommand(com,time);
 				}
 			}
@@ -999,7 +1010,7 @@ int EventSystem::addUnitCommand(lua_State *L)
 	}
 	else
 	{
-		ERRORMSG("Syntax: :addUnitCommand(int unitid, string command,  [goal_unitid | {goal_x,goal_y}], [flags], [float time])");
+		ERRORMSG("Syntax: :addUnitCommand(int unitid, string command,  [goal_unitid | {goal_x,goal_y}], [range], [flags], [float time])");
 	}
 	return 0;
 

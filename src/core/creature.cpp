@@ -1521,8 +1521,12 @@ void Creature::calcAction()
 	// Reichweite der Aktion berechnen
 	float range = m_command.m_range;
 
+	/*
 	if (m_command.m_type == "walk")
+	{
 		range =getShape()->m_radius;
+	}
+	*/
 
 	if (m_command.m_type == "take_item")
 		range = 2;

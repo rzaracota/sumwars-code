@@ -437,6 +437,7 @@ bool Player::onGamefieldClick(ClientCommand* command)
 			{
 				com->m_type = "walk";
 				com->m_goal_object_id =0;
+				com->m_range = getShape()->m_radius;
 			}
 			com->m_goal = command->m_goal;
 
