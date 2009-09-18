@@ -15,6 +15,8 @@
 				return _("Folge Tolec und Derred.")
 			elseif (tutorial.phase == "fightslugs") then
 				return _("Tötet alle Feuerschnecken in dem Gehege");
+			elseif (tutorial.phase == "fightslugs") then
+				return _("Tötet alle Feuerschnecken in dem Gehege");
 			end
 			return _("Quest description")
 		end
@@ -25,8 +27,6 @@
 			<Effect>
 				if (tutorial.finished == false) then
 					addArea("entryPlayerArea","circle","locEntryPlayer",5);
-					addArea("waypoint1Area","circle","locWay1",8);
-					addArea("waypoint2Area","circle","locWay2",8);
 					addArea("dangerArea","circle","locDanger",4);
 					addArea("locDoorArea","circle","locLibrarySecretDoor",2);
 					
@@ -41,22 +41,17 @@
 						derredpos = "locSlugView";
 					end;
 					
-					tutorial_tmp.tolec = createObject("council_guard", tolecpos);
+					tutorial_tmp.tolec = createObject("tolec", tolecpos);
+					set(tutorial_tmp.tolec,"ai_state","inactive");
 					setRefName(tutorial_tmp.tolec, "Tolec");
 					
-					tutorial_tmp.derred = createObject("council_guard", derredpos);
+					tutorial_tmp.derred = createObject("derred", derredpos);
+					set(tutorial_tmp.derred,"ai_state","inactive");
 					setRefName(tutorial_tmp.derred, "Derred");
 					
 					-- nur bei den Phasen intro, learnwalk, fightslugs
 					if (2 >= tutorial.phasenr) then
-						createMonsterGroup("tutorialSlugs","locSlugs",10);
-						tutorial_tmp.slugdoor = createObject('konz_wall1','locSlugFarmBackdoor',90);
-					end;
-					
-					if (3>= tutorial.phasenr) then
-						tutorial_tmp.fooddoor = createObject('konz_wall1','locSlugFarmFoodDoor');
-						createMonsterGroup("tutorialLouses","locBackroute3",5);
-						tutorial_tmp.libraryDoor = createObject('konz_wall1','locLibrarySecretDoor');
+						createMonsterGroup("tutorialSlugs","locSlugs",8);
 					end;
 					
 					tutorial_tmp.bguard1 = createObject("council_guard","locDoorGuardNorth");
@@ -70,10 +65,35 @@
 					-- ab Phase fightslugs
 					if (tutorial.phasenr > 1) then
 						tutorial_tmp.behemoth = createObject("infBehemoth","locBehemoth");
-						createObject('konz_wall1','locDoorBehemothWest')
-						createObject('konz_wall1','locDoorBehemothNorth',90)
 					end;
 				end;
+				
+				door = getObjectByNameRef("doorSouth");
+				scriptobjectvar[door]["locked"] = true;
+				
+				door = getObjectByNameRef("slugFarmBackdoor");
+				scriptobjectvar[door]["locked"] = true;
+				
+				door = getObjectByNameRef("doorKitchen");
+				scriptobjectvar[door]["locked"] = true;
+				
+				door = getObjectByNameRef("doorDepth");
+				scriptobjectvar[door]["locked"] = true;
+				
+				door = getObjectByNameRef("doorEast");
+				scriptobjectvar[door]["locked"] = true;
+				
+				door = getObjectByNameRef("doorWest");
+				scriptobjectvar[door]["locked"] = true;
+				
+				door = getObjectByNameRef("doorPrison");
+				scriptobjectvar[door]["locked"] = true;
+				
+				door = getObjectByNameRef("doorSlugFarm");
+				scriptobjectvar[door]["locked"] = true;
+				
+				door = getObjectByNameRef("slugFarmFoodDoor");
+				scriptobjectvar[door]["locked"] = true;
 			</Effect>
 		</Event>
 		
@@ -110,6 +130,9 @@
 				
 				lookAtObject(tutorial_tmp.tolec,leader);
 				lookAtObject(tutorial_tmp.derred,leader);
+				playersLookAt(get(tutorial_tmp.tolec,"position"));
+				print(get(getPlayers()[1],"angle"));
+				timedExecute('print(get(getPlayers()[1],"angle"));',1000);
 				
 				addSpeaker(leader,"PL");
 				speak("PL",_("*args*"));
@@ -148,8 +171,9 @@
 				speak("Derred",_("Nein, du musst das viel bestimmter sagen."));
 				
 				if (priest ~= 0) then
-					lookAt(priest,getLocation("locEvilMachine"));
+					executeInDialog('lookAt('..priest..',getLocation("locEvilMachine"))');
 				end;
+				
 				speak("priest",_("Es scheint, als besäße hier jemand größeres Wissen über die Art und Weise, wie Harad uns am Leben hält und bewegt."));
 				speak("archer",_("Wer auch immer hier das Sagen hat: Er hat sich besser überlegt, worauf er sich einlässt. Viel Geld könnte mich wieder gnädig stimmen."));
 				
@@ -183,7 +207,7 @@
 					speak("priest",_("Nur die Ruhe, mein Sohn. Nimm dir Zeit, über die Antwort nachzudenken. Es könnte deine Letzte sein."));
 				end;
 				
-				executeInDialog("addUnitCommand("..leader..",'walk',tutorial_tmp.derred)");
+				executeInDialog("addUnitCommand("..leader..",'walk',tutorial_tmp.derred,3)");
 				speak("PL",_("Raus damit. Wo sind wir und wer hat den Nerv, Gezeichnete gegen sich auf zu bringen?!"));
 				speak("Tolec",_("Nun, der Lord Magister hat versichert, dass er Euch das alles genau erklären wird."));
 				speak("Derred",_("Außerdem war Eure Ankunft... etwas beschwerlich. Ihr dürftet im Moment nicht einmal in der Lage sein, uns gefährlich zu werden."));
