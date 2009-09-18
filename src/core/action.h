@@ -172,6 +172,12 @@ public:
 		 * \brief Zaehler fuer das Geschoss. Genaue Verwendung haengt vom Geschosstyp ab
 		 */
 		int m_projectile_counter;
+		
+		/**
+		 * \var float m_projectile_radius
+		 * \brief Radius eines Geschosses
+		 */
+		float m_projectile_radius;
 
 		/**
 		 * \var HybridImplementation m_effect

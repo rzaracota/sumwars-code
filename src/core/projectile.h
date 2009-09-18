@@ -97,8 +97,23 @@ class Projectile : public GameObject
 	{
 		m_max_radius = mr;
 	}
-		
-		
+	
+	/**
+	 * \fn void setRadius(float r)
+	 * \brief Setzt den Radius
+	 * \param r Radius
+	 */
+	void setRadius(float r)
+	{
+		if (m_implementation == "grow_effect_at_each" || m_implementation == "grow")
+		{
+			m_max_radius =r;
+		}
+		else
+		{
+			getShape()->m_radius = r;
+		}
+	}
 	
 	/**
 	 * \fn void setFlags(char f)

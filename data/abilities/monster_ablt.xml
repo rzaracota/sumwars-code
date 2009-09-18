@@ -90,3 +90,29 @@
 		
 	</DynAttributesMod>	
 </Ability>
+
+<Ability type="behemoth_fire_storm"
+		 name="Firestorm" 
+		 description="Firestorm with increased range." 
+		 time="1301.000000" 
+		 timer_nr="2.000000" 
+		 timer_value="15000.000000" 
+		 base_ability="magic_attack"
+		 critical_percent="0.800000"
+		 target_type="ranged">
+	<Flag name="mute_affected" />
+	<Effect>
+		<CppImplementation type="proj_at_self" />
+	</Effect>
+	<Projectile type="behemoth_fire_wave"/>
+	<Damage>
+		<CppImplementation type="magic_attack" />
+		<CppImplementation type="weapon_damage" />
+		<LuaImplementation>
+			local magic = get(self,"magic_power");
+			local fdmg = getDamageValue("fire_dmg");
+			setDamageValue("fire_dmg", {fdmg[1] + magic*2.5, fdmg[2] + magic*3});
+			setDamageValue("ice_dmg",{0,0});
+		</LuaImplementation>	
+	</Damage>
+</Ability>

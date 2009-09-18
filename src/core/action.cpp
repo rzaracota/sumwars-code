@@ -160,6 +160,7 @@ void Action::loadAbility(TiXmlNode* node)
 				attr.getString("type", a->m_projectile_type,"");
 				attr.getInt("counter", a->m_projectile_counter);
 				attr.getFloat("speed", a->m_projectile_speed);
+				attr.getFloat("radius", a->m_projectile_radius);
 				a->m_projectile_flags =0;
 				for ( child2 = child->FirstChild(); child2 != 0; child2 = child2->NextSibling())
 				{

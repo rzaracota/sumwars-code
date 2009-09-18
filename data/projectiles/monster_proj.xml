@@ -1,0 +1,10 @@
+<Projectile  subtype="behemoth_fire_wave"
+			 lifetime="1000"
+			 radius="11"
+			 implementation = "grow_effect_at_each"
+			 >
+	<RenderInfo name="behemoth_fire_wave" />
+	<Effect>
+		<CppImplementation type="dmg_at_target" />
+	</Effect>	
+</Projectile>

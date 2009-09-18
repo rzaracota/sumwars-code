@@ -64,7 +64,7 @@
 					
 					-- ab Phase fightslugs
 					if (tutorial.phasenr > 1) then
-						tutorial_tmp.behemoth = createObject("infBehemoth","locBehemoth");
+						tutorial_tmp.behemoth = createObject("tutorialBehemoth","locBehemoth");
 					end;
 				end;
 				
@@ -86,8 +86,10 @@
 				door = getObjectByNameRef("doorWest");
 				scriptobjectvar[door]["locked"] = true;
 				
-				door = getObjectByNameRef("doorPrison");
-				scriptobjectvar[door]["locked"] = true;
+				if (tutorial.phasenr == 0) then
+					door = getObjectByNameRef("doorPrison");
+					scriptobjectvar[door]["locked"] = true;
+				end;
 				
 				door = getObjectByNameRef("doorSlugFarm");
 				scriptobjectvar[door]["locked"] = true;
@@ -131,8 +133,6 @@
 				lookAtObject(tutorial_tmp.tolec,leader);
 				lookAtObject(tutorial_tmp.derred,leader);
 				playersLookAt(get(tutorial_tmp.tolec,"position"));
-				print(get(getPlayers()[1],"angle"));
-				timedExecute('print(get(getPlayers()[1],"angle"));',1000);
 				
 				addSpeaker(leader,"PL");
 				speak("PL",_("*args*"));
@@ -227,7 +227,7 @@
 				if ( not solo) then
 					speak("PL",_("Was wenn wir gar keine Lust haben unsere Waffen ab zu geben?"));
 				else
-					speak("PL",_("Was wenn ich gar keine Lust habe unsere Waffen ab zu geben?"));
+					speak("PL",_("Was wenn ich gar keine Lust habe meine Waffen ab zu geben?"));
 				end;
 				
 				speak("Tolec",_("Es tut uns leid, wir können euch nicht vorher aus dem Sicherheitsbereich lassen."));
@@ -269,9 +269,11 @@
 				end;
 				speak("Derred",_("Sehr Gut. Folgt mir bitte."));
 				
+				door_toggle("doorPrison")
+				
 				tutorial.phase="learnwalk"
 				tutorial.phasenr =1;
-				insertTrigger("start_learnwalk");
+				startTimer("start_learnwalk",3000);
 			</Effect>
 		</Topic>
 		
@@ -315,8 +317,8 @@
 		
 		<Event trigger="start_learnwalk" once="true">
 			<Effect>
-				addUnitCommand(tutorial_tmp.tolec,"walk","locWay1");
-				addUnitCommand(tutorial_tmp.derred,"walk","locWay1");
+				addUnitCommand(tutorial_tmp.tolec,"walk","locWay1",1);
+				addUnitCommand(tutorial_tmp.derred,"walk","locWay1",1);
 				tutorial_tmp.learnwalkstarted = true;
 				tutorial_tmp.tolecway1 = true;
 			</Effect>	
@@ -399,7 +401,7 @@
 		<Event trigger="behemoth_start" once="true">
 			<Effect>
 				setCutsceneMode(true);
-				tutorial_tmp.behemoth = createObject("infBehemoth","locBehemothStart");
+				tutorial_tmp.behemoth = createObject("tutorialBehemoth","locBehemothStart");
 				lookAt(tutorial_tmp.behemoth,getLocation("locDestroyedWall"));
 				
 				tutorial_tmp.worker = createObject("council_guard","locWorker");
@@ -410,7 +412,7 @@
 				
 				
 				
-				addCameraPosition(0,"locBehemothStart" , 90,20, 50);
+				addCameraPosition(0,"locBehemothStart" , 90,20, 30);
 				startTimer("behemoth_attack1",2000);
 				
 				tutorial_tmp.destroyed_wall = createObject("konz_wall1","locDestroyedWall",90)
@@ -420,19 +422,21 @@
 		<Event trigger="behemoth_attack1" once="true">
 			<Effect>
 				-- TODO: Explosionen
-				addUnitCommand(tutorial_tmp.behemoth,"attack","locDestroyedWall");
-				startTimer("destroy_wall",1500);
-				addUnitCommand(tutorial_tmp.behemoth,"attack",tutorial_tmp.worker2);
-				addUnitCommand(tutorial_tmp.behemoth,"walk","locBehemoth");
-				startTimer("closeBehemothDoor1",10000);
+				addUnitCommand(tutorial_tmp.behemoth,"behemoth_fire_storm","locDestroyedWall");
 			</Effect>
 		</Event>
 		
-		<Event trigger="destroy_wall" once="true">
+		<Event trigger="unit_hit" once="true">
+			<Condition>
+				return (trigger.defender == tutorial_tmp.worker);
+			</Condition>
 			<Effect>
 				deleteObject(tutorial_tmp.destroyed_wall)
 				unitSpeak(tutorial_tmp.worker,_("*Argh!!!*"));
 				set(tutorial_tmp.worker,"health",0);
+				
+				addUnitCommand(tutorial_tmp.behemoth,"hammer_bash",tutorial_tmp.worker2);
+				addUnitCommand(tutorial_tmp.behemoth,"walk","locBehemoth");
 			</Effect>
 		</Event>
 		
@@ -442,6 +446,7 @@
 			</Condition>	
 			<Effect>
 				set(tutorial_tmp.worker2,"health",0);
+				startTimer("closeBehemothDoor1",2000);
 			</Effect>	
 		</Event>
 		
@@ -740,11 +745,6 @@
 			</Effect>
 		</Event>
 		
-		<Event trigger="party_complete">
-			<Effect>
-				print("test")
-			</Effect>
-		</Event>
 	</Region>
 	
 	<NPC refname="Derred">
@@ -858,6 +858,12 @@
 						addUnitCommand(pl,"walk",newpoint);
 					end;
 				end
+			</Effect>
+		</Event>
+		
+		<Event trigger="player_moved" once="true">
+			<Effect>
+				insertTrigger("behemoth_start");
 			</Effect>
 		</Event>
 	</Region>

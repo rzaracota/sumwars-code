@@ -905,6 +905,10 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 				{
 					pr->setCounter(ainfo->m_projectile_counter);
 				}
+				if (ainfo->m_projectile_radius != 0)
+				{
+					pr->setRadius(ainfo->m_projectile_radius);
+				}
 				getRegion()->insertProjectile(pr,goal);
 			}
 		}
@@ -918,6 +922,10 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 				if (ainfo->m_projectile_counter !=0)
 				{
 					pr->setCounter(ainfo->m_projectile_counter);
+				}
+				if (ainfo->m_projectile_radius != 0)
+				{
+					pr->setRadius(ainfo->m_projectile_radius);
 				}
 				pr->setSpeed(dir*(ainfo->m_projectile_speed/1000000));
 				
@@ -935,6 +943,11 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 				if (ainfo->m_projectile_counter !=0)
 				{
 					pr->setCounter(ainfo->m_projectile_counter);
+				}
+				DEBUG("proj radius %f",ainfo->m_projectile_radius);
+				if (ainfo->m_projectile_radius != 0)
+				{
+					pr->setRadius(ainfo->m_projectile_radius);
 				}
 				getRegion()->insertProjectile(pr,pos);
 			}
@@ -955,6 +968,10 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 					if (ainfo->m_projectile_counter !=0)
 					{
 						pr->setCounter(ainfo->m_projectile_counter);
+					}
+					if (ainfo->m_projectile_radius != 0)
+					{
+						pr->setRadius(ainfo->m_projectile_radius);
 					}
 					cr = (Creature*) (*it);
 					getRegion()->insertProjectile(pr,cr->getShape()->m_center);
@@ -980,6 +997,10 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 						{
 							pr->setCounter(ainfo->m_projectile_counter);
 						}
+						if (ainfo->m_projectile_radius != 0)
+						{
+							pr->setRadius(ainfo->m_projectile_radius);
+						}
 						cr = (Creature*) (*it);
 						getRegion()->insertProjectile(pr,cr->getShape()->m_center);
 					}
@@ -997,7 +1018,7 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 			// an alle einfachen Schaden austeilen
 			for (it=res.begin();it!=res.end();++it)
 			{
-				if ((*it)->isCreature())
+				if ((*it)->isCreature() && (*it)!=goalobj)
 				{
 					cr = (Creature*) (*it);
 					cr->takeDamage(&m_damage);
@@ -2232,6 +2253,7 @@ bool Creature::update (float time)
 			d.m_max_damage[Damage::FIRE] = 500*m_base_attr_mod.m_magic_power*0.0005;
 			d.m_multiplier[Damage::FIRE]=1;
 			d.m_attacker_fraction = m_fraction;
+			d.m_special_flags |= Damage::NOVISUALIZE;
 
 			WorldObjectList res;
 			res.clear();
