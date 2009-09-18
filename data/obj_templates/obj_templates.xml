@@ -251,6 +251,13 @@ FIXED_OBJECT
         </Environment>
 </ObjectTemplate>
 
+<ObjectTemplate name="$shelf_cabinet" type="FIXED_OBJECT">
+        <Environment name="council" default = "true">
+                <Object name="cabinet1" />
+                <Object name="cabinet2" />
+                <Object name="cabinet3" />
+        </Environment>
+</ObjectTemplate>
 
 <ObjectTemplate name="$stuff_m" type="FIXED_OBJECT">
         <Environment name="meadow" default = "true">
@@ -314,7 +321,7 @@ FIXED_OBJECT
         </Environment>
 </ObjectTemplate>
 <ObjectTemplate name="$cupboard" type="FIXED_OBJECT">
-        <Environment name="meadow" default = "true">
+        <Environment name="council" default = "true">
                 <Object name="cupboard_konz" />
         </Environment>
 </ObjectTemplate>
@@ -328,6 +335,13 @@ FIXED_OBJECT
 <ObjectTemplate name="$tub" type="FIXED_OBJECT">
         <Environment name="meadow" default = "true">
                 <Object name="tub" />
+        </Environment>
+</ObjectTemplate>
+
+<ObjectTemplate name="$chair" type="FIXED_OBJECT">
+        <Environment name="meadow" default = "true">
+                <Object name="chair_konz" />
+				<Object name="stool_konz" />
         </Environment>
 </ObjectTemplate>
 
@@ -397,6 +411,6 @@ FIXED_OBJECT
 
 <ObjectTemplate name="$money" type="FIXED_OBJECT">
         <Environment name="council" default = "true">
-                <Object name="gold" />
+                <Object name="goldsack" />
         </Environment>
 </ObjectTemplate>
