@@ -14,9 +14,11 @@
 			elseif (tutorial.phase == "learnwalk") then
 				return _("Folge Tolec und Derred.")
 			elseif (tutorial.phase == "fightslugs") then
-				return _("Tötet alle Feuerschnecken in dem Gehege");
-			elseif (tutorial.phase == "fightslugs") then
-				return _("Tötet alle Feuerschnecken in dem Gehege");
+				return _("Töte alle Feuerschnecken in dem Gehege.");
+			elseif (tutorial.phase == "findSecretDoor") then
+				return _("Finde den geheimen Zugang zur Bibliothek.");
+			elseif (tutorial.phase == "killlouses") then
+				return _("Töte alle Abkömmlinge des Behemoth.");
 			end
 			return _("Quest description")
 		end
@@ -27,8 +29,9 @@
 			<Effect>
 				if (tutorial.finished == false) then
 					addArea("entryPlayerArea","circle","locEntryPlayer",5);
-					addArea("dangerArea","circle","locDanger",4);
-					addArea("locDoorArea","circle","locLibrarySecretDoor",2);
+					addArea("dangerArea","circle","locBackroute2",4);
+					addArea("locDoorArea","circle","locLibrarySecretDoor",3);
+					addArea("seeLouseArea","circle","locBackroute5",4);
 					
 					local tolecpos = "locTolec";
 					local derredpos = "locDerred";
@@ -39,6 +42,10 @@
 					if (tutorial.phase == "findSecretDoor") then
 						tolecpos = "locSlugView";
 						derredpos = "locSlugView";
+					end;
+					if (tutorial.phase == "killlouses") then
+						tolecpos = "locBackroute5";
+						derredpos = "locBackroute5";
 					end;
 					
 					tutorial_tmp.tolec = createObject("tolec", tolecpos);
@@ -52,6 +59,7 @@
 					-- nur bei den Phasen intro, learnwalk, fightslugs
 					if (2 >= tutorial.phasenr) then
 						createMonsterGroup("tutorialSlugs","locSlugs",8);
+						tutorial_tmp.slugs =0;
 					end;
 					
 					tutorial_tmp.bguard1 = createObject("council_guard","locDoorGuardNorth");
@@ -66,12 +74,52 @@
 					if (tutorial.phasenr > 1) then
 						tutorial_tmp.behemoth = createObject("tutorialBehemoth","locBehemoth");
 					end;
+				
+				
+					local door;
+					
+					door = getObjectByNameRef("doorBehemothNorth");
+					scriptobjectvar[door]["locked"] = true;
+					door = getObjectByNameRef("doorBehemothWest");
+					scriptobjectvar[door]["locked"] = true;
+					
+					door = getObjectByNameRef("doorScene1");
+					scriptobjectvar[door]["locked"] = true;
+					
+					door = getObjectByNameRef("doorScene1");
+					scriptobjectvar[door]["locked"] = true;
+					
+					if (2 > tutorial.phasenr) then
+						door_toggle("doorBehemothNorth");
+						door_toggle("doorBehemothWest");
+					end;
+					
+					if (3 > tutorial.phasenr) then
+						door = getObjectByNameRef("slugFarmBackdoor");
+						scriptobjectvar[door]["locked"] = true;
+					end;
+					
+					if (tutorial.phasenr == 0) then
+						door = getObjectByNameRef("doorPrison");
+						scriptobjectvar[door]["locked"] = true;
+					end;
+					
+					door = getObjectByNameRef("doorSlugFarm");
+					scriptobjectvar[door]["locked"] = true;
+					
+					if (4 > tutorial.phasenr) then
+						door = getObjectByNameRef("slugFarmFoodDoor");
+						scriptobjectvar[door]["locked"] = true;
+					end;
+					
+					if (4 == tutorial.phasenr) then
+						createMonsterGroup("tutorialLouses","locLouses",6);
+					end;
+					
+					tutorial_tmp.louses =0;
 				end;
 				
 				door = getObjectByNameRef("doorSouth");
-				scriptobjectvar[door]["locked"] = true;
-				
-				door = getObjectByNameRef("slugFarmBackdoor");
 				scriptobjectvar[door]["locked"] = true;
 				
 				door = getObjectByNameRef("doorKitchen");
@@ -84,18 +132,7 @@
 				scriptobjectvar[door]["locked"] = true;
 				
 				door = getObjectByNameRef("doorWest");
-				scriptobjectvar[door]["locked"] = true;
-				
-				if (tutorial.phasenr == 0) then
-					door = getObjectByNameRef("doorPrison");
 					scriptobjectvar[door]["locked"] = true;
-				end;
-				
-				door = getObjectByNameRef("doorSlugFarm");
-				scriptobjectvar[door]["locked"] = true;
-				
-				door = getObjectByNameRef("slugFarmFoodDoor");
-				scriptobjectvar[door]["locked"] = true;
 			</Effect>
 		</Event>
 		
@@ -118,7 +155,7 @@
 			</Condition>
 			<Effect>
 				tutorial_tmp.assemble = nil;
-				groupObjectsArc(getPlayers(),"locEntryPlayer","locDerred");
+				groupObjectsArc(getPlayers(),"locEntryPlayer","locTolec");
 				tutorial.started = true;
 				createDialogue();
 				addAllPlayersToDialog();
@@ -410,8 +447,6 @@
 				tutorial_tmp.worker2 = createObject("council_guard","locWorker2");
 				setRefName(tutorial_tmp.worker2, "Arbeiter");
 				
-				
-				
 				addCameraPosition(0,"locBehemothStart" , 90,20, 30);
 				startTimer("behemoth_attack1",2000);
 				
@@ -454,16 +489,16 @@
 			<Effect>
 				addCameraPosition(500, "locDoorGuardWest" , 0,30, 20);
 				unitSpeak(tutorial_tmp.bguard2,_("Bei Marek! Verschließt die Tore!!!"));
-				timedExecute("createObject('konz_wall1','locDoorBehemothWest')",1500);
-				startTimer("closeBehemothDoor2",2500);
+				timedExecute("door_toggle('doorBehemothWest')",1500);
+				startTimer("closeBehemothDoor2",3000);
 			</Effect>
 		</Event>
 		
 		<Event trigger="closeBehemothDoor2" once="true">
 			<Effect>
 				addCameraPosition(500, "locDoorGuardNorth" , 90,30, 20);
-				timedExecute("createObject('konz_wall1','locDoorBehemothNorth',90)",1500);
-				startTimer("explain_fight",2500);
+				timedExecute("door_toggle('doorBehemothNorth')",1500);
+				startTimer("explain_fight",3000);
 			</Effect>
 		</Event>
 		
@@ -481,6 +516,9 @@
 			<Effect>
 				tutorial_tmp.assemble = nil;
 				groupObjectsArc(getPlayers(),"locBehemothView","locWaypoint2");
+				moveObject(tutorial_tmp.tolec,"locWaypoint2");
+				moveObject(tutorial_tmp.derred, "locWaypoint2");
+				
 				createDialogue();
 				addAllPlayersToDialog();
 				addSpeaker(tutorial_tmp.tolec,"Tolec");
@@ -495,6 +533,7 @@
 				
 				lookAtObject(tutorial_tmp.tolec,leader);
 				lookAtObject(tutorial_tmp.derred,leader);
+				playersLookAt(get(tutorial_tmp.tolec,"position"));
 				
 				speak("Tolec",_("Mareks Schild! Das DING ist frei! Alle zurück! Los, los, los!"));
 				speak("Derred",_("Da kommen wir nicht vorbei. Was machen wir jetzt?"));
@@ -522,7 +561,11 @@
 				end;
 				
 				speak("Tolec",_("Genau, nur an dieser Stelle."));
-				speak("PL",_("Es wird Zeit, dass wir mit diesem Windklaue reden. Scheint ja ein gewitztes Kerlchen zu sein."));
+				if (not solo) then
+					speak("PL",_("Es wird Zeit, dass wir mit diesem Windklaue reden. Scheint ja ein gewitztes Kerlchen zu sein."));
+				else
+					speak("PL",_("Es wird Zeit, dass ich mit diesem Windklaue rede. Scheint ja ein gewitztes Kerlchen zu sein."));
+				end;
 				speak("arcopt",_("Ist sicher nicht allzu gesund so gewitzt zu sein."));
 				speak("Derred",_("Äh, ja, gut. Da der Weg nach vorne momentan versperrt ist, müssen wir wohl versuchen, durch das Gehege mit den neuen Experimenten zu kommen."))
 				speak("Derred",_("Es gibt da eine Hintertür für die Fütterung und angeblich..."));
@@ -565,7 +608,8 @@
 				return (tutorial.phase == "fightslugs" and tutorial_tmp.slugdoor_open ~= true)
 			</Condition>
 			<Effect>
-				speak("Derred",_("Zuerst müsst Ihr euer Inventar öffnen. Dies tut ihr standardmäßig mit der 'i'-Taste. Alternativ könnt ihr auch auf den Inventarknopf unten in der Statusleiste drücken."));
+				speak("Derred",_("Zuerst müsst Ihr euer Inventar öffnen. Dies tut ihr standardmäßig mit der 'i'-Taste."));
+				speak("Derred",_("Alternativ könnt ihr auch auf den Inventarknopf unten in der Statusleiste drücken."));
 				speak("Derred",_("Im Inventar seht ihr dann Eure Gegenstände. Sie sind unterteilt nach ihrer Größe."));
 				speak("Derred",_("Die Waffe, die Ihr gerade 	erhalten habt ist ein mittelgroßer Gegenstand und befindet sich deshalb im mittleren Feld"));
 				speak("Derred",_("Klickt die Waffe mit der linken Maustaste an und klickt danach auf das Waffenfeld in Eurer Ausrüstung über dem Inventar. Und schon habt ihr sie angelegt."));
@@ -603,8 +647,9 @@
 				speak("Derred",_("Ich geh da nicht rein, wenn die Viecher noch auf freiem Fuß sind!"));
 				
 				executeInDialog("startTimer('open_slugdoor',1500)");
-				-- TODO: Position von Tolec verbessern
-				executeInDialog("addUnitCommand(tutorial_tmp.tolec,'walk','locSlugFarmBackdoor')");
+				local door = getObjectByNameRef("slugFarmBackdoor");
+				executeInDialog("addUnitCommand(tutorial_tmp.tolec,'walk',"..door..",2)");
+				tutorial_tmp.slug_door_pos = get(door,"position");
 			</Effect>
 		</Topic>
 	</NPC>
@@ -612,14 +657,8 @@
 	<Region name="elCnlLobby">
 		<Event trigger="open_slugdoor" once="true">
 			<Effect>
-				tutorial_tmp.slugdoor_open = true;
-				deleteObject(tutorial_tmp.slugdoor)
-				tutorial_tmp.slugs =0;
-				
-				-- TODO: KI eleganter deaktivieren
+				door_toggle("slugFarmBackdoor");
 				clearUnitCommands(tutorial_tmp.tolec);
-				set(tutorial_tmp.tolec,"state","inactive");
-				set(tutorial_tmp.derred,"state","inactive");
 			</Effect>
 		</Event>
 		
@@ -630,17 +669,17 @@
 			<Effect>
 				tutorial_tmp.slugs = tutorial_tmp.slugs +1;
 				if (tutorial_tmp.slugs == 10) then
-					set(tutorial_tmp.tolec,"state","active");
-					set(tutorial_tmp.derred,"state","active");
-					addUnitCommand(tutorial_tmp.tolec,'walk',"locSlugView");
-					addUnitCommand(tutorial_tmp.derred,'walk',"locSlugView");
+					addUnitCommand(tutorial_tmp.tolec,'walk',tutorial_tmp.slug_door_pos,1);
+					addUnitCommand(tutorial_tmp.derred,'walk',tutorial_tmp.slug_door_pos,1);
+					addUnitCommand(tutorial_tmp.tolec,'walk',"locSlugView",2);
+					addUnitCommand(tutorial_tmp.derred,'walk',"locSlugView",2);
 				end
 			</Effect>
 		</Event>
 		
 		<Event trigger="command_complete" once="true">
 			<Condition>
-				return (tutorial.phase == "fightslugs" and tutorial_tmp.slugs == 10 and trigger.unit == tutorial_tmp.tolec)
+				return (tutorial.phase == "fightslugs" and tutorial_tmp.slugs == 10 and trigger.unit == tutorial_tmp.tolec and trigger.last_command)
 			</Condition>
 			<Effect>
 				assembleParty("elCnlLobby","locSlugs");
@@ -654,12 +693,19 @@
 			<Effect>
 				tutorial_tmp.assemble = nil;
 				groupObjectsArc(getPlayers(),"locSlugs","locSlugView");
+				moveObject(tutorial_tmp.tolec,"locSlugView");
+				moveObject(tutorial_tmp.derred, "locSlugView");
 				
 				createDialogue();
 				addSpeaker(tutorial_tmp.derred,"Derred");
 				addSpeaker(tutorial_tmp.tolec,"Tolec");
 				addStandardRoles();
 				addAllPlayersToDialog();
+				
+				local leader = getRolePlayer("leader");
+				lookAtObject(tutorial_tmp.tolec,leader);
+				lookAtObject(tutorial_tmp.derred,leader);
+				playersLookAt(get(tutorial_tmp.tolec,"position"));
 				
 				speak("Derred",_("Ihh, die Dinger sind echt widerlich"));
 				speak("any",_("Was seid ihr denn für Mimosen?"));
@@ -676,7 +722,7 @@
 				setTopicBase("Tolec");
 				addQuestion("Levelup erklären?");
 				addAnswer("Ja","explain_levelup");
-				addAnswer("Nein","tutorial_lvlup_continue");
+				addAnswer("Nein","explain_levelup_continue");
 				
 			</Effect>
 		</Event>
@@ -704,16 +750,16 @@
 				if (getSpeaker("warrior") ~= 0) then
 					speak("mage",_("Besser merkwürdig als..."));
 				end;
-				changeTopic("tutorial_lvlup_continue");
-			</Effect>
-		</Topic>
-		<Topic name="tutorial_lvlup_continue" >
-			<Effect>
-				if (tutorial_tmp.behemoth_show == true) then
-					insertTrigger("behemoth_show2");
+				if (tutorial_tmp.behemoth_show) then
+					changeTopic("explain_levelup_continue");
 				end;
 			</Effect>
 		</Topic>
+		<Topic name="explain_levelup_continue" >
+			<Effect>
+				insertTrigger("behemoth_show2");
+			</Effect>
+		</Topic>	
 	</NPC>
 	
 	<Region name="elCnlLobby">
@@ -722,13 +768,13 @@
 				startTimer("behemoth_show_end",6000);
 				setCutsceneMode(true);
 				local pos = getLocation("locBehemoth");
-				addCameraPosition(0,"locBehemoth" , 90,20, 50);
-				addCameraPosition(1000,"locBehemoth" , 90,20, 50);
+				addCameraPosition(0,"locBehemoth" , 90,20, 20);
+				addCameraPosition(1000,"locBehemoth" , 90,20, 20);
 				local i
 				for i=1,50 do
-					addCameraPosition(100,{pos[1] + math.random(11)-6,pos[2]+ math.random(11)-6} , 90,20, 50);
+					addCameraPosition(100,{pos[1] + math.random(11)-6,pos[2]+ math.random(11)-6} , 90,20, 20);
 				end;
-				addCameraPosition(0,"locBehemoth" , 90,20, 50);
+				addCameraPosition(0,"locBehemoth" , 90,20, 20);
 				
 			</Effect>
 		</Event>
@@ -753,7 +799,8 @@
 				return (tutorial.phase == "findSecretDoor" and tutorial_tmp.fooddoor_open ~= true)
 			</Condition>
 			<Effect>
-				addUnitCommand(tutorial_tmp.derred,"walk","locBackroute1");
+				local door = getObjectByNameRef("slugFarmFoodDoor");
+				addUnitCommand(tutorial_tmp.derred,"walk",door,2);
 				tutorial_tmp.backroute =1;
 			</Effect>
 		</Topic>
@@ -765,15 +812,15 @@
 				return (trigger.unit == tutorial_tmp.derred and tutorial_tmp.backroute ==1 and tutorial_tmp.fooddoor_open ~= true)
 			</Condition>
 			<Effect>
-				timedExecute("deleteObject(tutorial_tmp.fooddoor)",1000);
-				startTimer("go_backroute2",1500);
+				timedExecute("door_toggle('slugFarmFoodDoor')",1000);
+				startTimer("go_backroute2",2000);
 			</Effect>
 		</Event>
 		<Event trigger="go_backroute2" once="true">
 			<Effect>
 				addUnitCommand(tutorial_tmp.derred,"walk","locBackroute2");
 				addUnitCommand(tutorial_tmp.tolec,"walk","locBackroute1");
-				addUnitCommand(tutorial_tmp.tolec,"walk","locBackroute2");
+				addUnitCommand(tutorial_tmp.tolec,"walk","locBackroute2",1);
 				tutorial_tmp.see_louse = false;
 			</Effect>
 		</Event>
@@ -786,15 +833,42 @@
 				end;
 			</Condition>
 			<Effect>
+				tutorial_tmp.slug1 = createObject("fireSlug","locBackroute3");
+				tutorial_tmp.slug2 = createObject("fireSlug","locBackroute3");
+				tutorial_tmp.slug3 = createObject("fireSlug","locBackroute3");
+				
 				setCutsceneMode(true);				
 				addCameraPosition(0,"locDanger" , -90,40, 20);
 				addCameraPosition(1000,"locBackroute3" , -90,40, 20);
-				addCameraPosition(2000,"locBackroute3" , -90,40, 20);
-				addCameraPosition(1000,"locDanger" , -90,40, 20);
-				startTimer("louse_dialog",4000);
+				startTimer("slugs2_scene",4000);
+				
 			</Effect>
 		</Event>
-		<Event trigger="louse_dialog" >
+		<Event trigger="slugs2_scene" once="true">
+			<Effect>
+				tutorial_tmp.slug2_out =0;
+				addUnitCommand(tutorial_tmp.slug1,"walk","locMutantSlugs");
+				addUnitCommand(tutorial_tmp.slug2,"walk","locMutantSlugs");
+				addUnitCommand(tutorial_tmp.slug3,"walk","locMutantSlugs");
+			</Effect>
+		</Event>
+		
+		<Event trigger="command_complete" >
+			<Condition>
+				return (get(trigger.unit,"subtype") == "fireSlug")
+			</Condition>	
+			<Effect>
+				tutorial_tmp.slug2_out = tutorial_tmp.slug2_out +1;
+				deleteObject(trigger.unit);
+				if (tutorial_tmp.slug2_out == 3) then
+					addCameraPosition(300,"locBackroute3" , -90,40, 20);
+					addCameraPosition(2000,"locBackroute3" , -90,40, 20);
+					addCameraPosition(1000,"locDanger" , -90,40, 20);
+					startTimer("slugs2_dialog",4000);
+				end;
+			</Effect>
+		</Event>
+		<Event trigger="slugs2_dialog" >
 			<Effect>
 				createDialogue();
 				setCutsceneMode(false);
@@ -809,21 +883,182 @@
 				speak("Derred",_("Da Hinten muss irgendwo die Geheimtür sein."));
 				speak("arcopt",_("Ihr wisst gar nicht sicher, ob sie da ist?"));
 				
-				tutorial_tmp.louses =0;
+				executeInDialog("insertTrigger('walk_backroute3')");
 			</Effect>
 		</Event>
 		
+		<Event trigger="walk_backroute3" >
+			<Effect>
+				addUnitCommand(tutorial_tmp.derred,"walk","locBackroute3",1);
+				addUnitCommand(tutorial_tmp.tolec,"walk","locBackroute3",1);
+			</Effect>
+		</Event>
+		
+		<Event trigger="object_use" once="true">
+			<Condition>
+				return (tutorial.phase == "findSecretDoor" and trigger.used_object == getObjectByNameRef("doorSecretLibrary"))
+			</Condition>	
+			<Effect>
+				addUnitCommand(tutorial_tmp.derred,"walk","locBackroute4",1);
+				addUnitCommand(tutorial_tmp.tolec,"walk","locBackroute4",1);
+				addUnitCommand(tutorial_tmp.derred,"walk","locBackroute5",1);
+				addUnitCommand(tutorial_tmp.tolec,"walk","locBackroute5",1);
+			</Effect>
+		</Event>
+		
+		<Event trigger="player_moved" once="true">
+			<Condition>
+				if (tutorial.phase == "findSecretDoor") then
+					return (unitIsInArea(trigger.player,"seeLouseArea"));
+				else
+					return false;
+				end;
+			</Condition>
+			<Effect>
+				setCutsceneMode(true);
+				local door = getObjectByNameRef("doorBehemothNorth");
+				addCameraPosition(0,get(door,"position") , 45,40, 25);
+				
+				addUnitCommand(tutorial_tmp.behemoth,"attack",door);
+				tutorial_tmp.behemoth_door_attack = true;
+			</Effect>
+		</Event>
+		
+		<Event trigger="command_complete" once="true">
+			<Condition>
+				return (trigger.unit == tutorial_tmp.behemoth 
+				and tutorial_tmp.behemoth_door_attack == true);
+			</Condition>	
+			<Effect>
+				tutorial_tmp.behemoth_door_attack = false;
+				local door = getObjectByNameRef("doorBehemothNorth");
+				deleteObject(door);
+				addUnitCommand(tutorial_tmp.bguard1,"walk","locLouses");
+				addUnitCommand(tutorial_tmp.behemoth,"fire_ball",tutorial_tmp.bguard1);
+			</Effect>	
+		</Event>
+		<Event trigger="unit_dead" once="true">
+			<Condition>
+				return (trigger.unit== tutorial_tmp.bguard1)
+			</Condition>
+			<Effect>
+				local pos = get(tutorial_tmp.behemoth,"position");
+				tutorial_tmp.lousepos = { pos[1],pos[2]-2 };
+				tutorial_tmp.louse={};
+				tutorial_tmp.louse_count =0;
+				insertTrigger("create_louse");
+			</Effect>	
+		</Event>
+		
+		<Event trigger="create_louse">
+			<Effect>
+				if (tutorial_tmp.louse_count ~= 4) then
+					tutorial_tmp.louse_count = tutorial_tmp.louse_count +1;
+					tutorial_tmp.louse[tutorial_tmp.louse_count] = createObject("fireLouse",tutorial_tmp.lousepos);
+					addUnitCommand(tutorial_tmp.louse[tutorial_tmp.louse_count], "walk","locLouses",2);
+					startTimer("create_louse",2000);
+				else
+					startTimer("louse_dialogue",2000);
+				end;
+			</Effect>	
+		</Event>
+		
+		<Event trigger="louse_dialogue"  once="true">
+			<Effect>
+				assembleParty("elCnlLobby","locEntryPlayer","locPartyLib");
+				tutorial_tmp.assemble = "louses";
+			</Effect>	
+		</Event>
+		
+		<Event trigger="party_complete" once="true">
+			<Condition>
+				return (tutorial_tmp.assemble == "louses");
+			</Condition>
+			<Effect>
+				setCutsceneMode(false);
+				tutorial_tmp.assemble = nil;
+				moveObject(tutorial_tmp.tolec,"locBackroute5");
+				moveObject(tutorial_tmp.derred, "locBackroute5");
+				groupObjectsArc(getPlayers(),"locPartyLib","locBackroute5");
+				createDialogue();
+				addAllPlayersToDialog();
+				addSpeaker(tutorial_tmp.tolec,"Tolec");
+				addSpeaker(tutorial_tmp.derred,"Derred");
+				
+				local solo = (getPlayers()[2] == nil);
+				addStandardRoles();
+				
+				local leader = getSpeaker("PL");
+				
+				lookAtObject(tutorial_tmp.tolec,leader);
+				lookAtObject(tutorial_tmp.derred,leader);
+				playersLookAt(get(tutorial_tmp.tolec,"position"));
+				
+				speak("Derred",_("Das Biest erzeugt neue Monster!"));
+				speak("Tolec",_("Die sind sicher gefährlich."));
+				speak("Derred",_("Ich schlage vor, Ihr kümmert euch darum."));
+				speak("Derred",_("Mit Hilfe eurer neuen Fähigkeit sollte das kein Problem darstellen."));
+			
+				tutorial.phase = "killlouses";
+				tutorial.phasenr = 4;
+				
+				setTopicBase("Derred");
+				addQuestion(_("Fähigkeiten erklären?"));
+				addAnswer("Ja","explain_skills");
+				addAnswer("Nein","end");
+			</Effect>	
+		</Event>
+	</Region>
+	
+	
+	<NPC refname="Tolec">
+		<Topic name="open_lousedoor" start_option="Tür öffnen">
+			<Condition>
+				return (tutorial.phase == "killlouses")
+			</Condition>
+			<Effect>
+				speak("Tolec",_("Geht ruhig vor und öffnet die Tür selbst."));
+			</Effect>
+		</Topic>
+	</NPC>
+	
+	<NPC refname="Derred">
+		<Topic name="explain_skills" start_option="Fähigkeiten erklären">
+			<Condition>
+				return (tutorial.phase == "killlouses")
+			</Condition>
+			<Effect>
+				speak("Derred",_("Mit der Taste 't' öffnet Ihr das Fähigkeitenfenster. Hier könnt Ihr eine Fähigkeit auswählen."));
+				speak("Derred",_("Klickt einfach mit der Maustaste, mit der Ihr die Fähigkeit später einsetzen wollt, auf das Fähigkeitenbild."));
+				speak("Derred",_("Die Fähigkeiten sind in zwei Gruppen unterteilt."));
+				speak("Derred",_("Nachdem Ihr eine Fähigkeit eingesetzt habt, könnt Ihr alle Fähigkeiten dieser Gruppe für eine Weile nicht verwenden."));
+				speak("Derred",_("Schaut auf das Bild in der unteren Leiste um zu erfahren, ob eine Fähigkeit einsatzbereit ist."));
+			</Effect>
+		</Topic>
+	</NPC>
+	
+	<Region name="elCnlLobby">
+	
 		<Event trigger="unit_dead">
 			<Condition>
-				return (tutorial.phase == "findSecretDoor" and get(trigger.unit,"subtype") == "fireLouse")
+				return (tutorial.phase == "killlouses" and get(trigger.unit,"subtype") == "fireLouse")
 			</Condition>
 			<Effect>
 				tutorial_tmp.louses = tutorial_tmp.louses +1;
 				if (tutorial_tmp.louses == 4) then
-					tutorial_tmp.can_find_door = true
+					addUnitCommand(tutorial_tmp.derred,"walk","locBackroute6",4);
+					addUnitCommand(tutorial_tmp.tolec,"walk","locBackroute6",4);
+					tutorial_tmp.door = getObjectByNameRef("doorScene1");
+					addUnitCommand(tutorial_tmp.derred,"walk",tutorial_tmp.door,1);
+					addUnitCommand(tutorial_tmp.tolec,"walk",tutorial_tmp.door,1);
+					
+					tutorial.finished = true;
 				end;
 			</Effect>
 		</Event>
+		
+		
+		<!--
 		<Event trigger="player_moved" once="true">
 			<Condition>
 				if (tutorial_tmp.can_find_door == true) then
@@ -866,6 +1101,14 @@
 				insertTrigger("behemoth_start");
 			</Effect>
 		</Event>
+		-->
+		<!--
+		<Event trigger="command_complete">
+			<Effect>
+				print("command "..trigger.command.." complete by "..trigger.unit.." last "..tostring(trigger.last_command));
+			</Effect>
+		</Event>
+		-->
 	</Region>
 </Quest>
 	

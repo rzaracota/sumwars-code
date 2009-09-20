@@ -241,10 +241,14 @@ float Creature::getActionTime(Action::ActionType action)
 		
 		Action::ActionInfo* aci = Action::getActionInfo(action);
 		if (aci ==0)
+		{
+			DEBUG("Information for action %s missing ",action.c_str());
 			return 0;
+		}
 		
 		return aci->m_standard_time;
 	}
+	DEBUG("creature %s cant use action %s",getSubtype().c_str(), action.c_str());
 	return 0;	
 }
 
@@ -278,8 +282,11 @@ void Creature::initAction()
 	int timernr = getTimerNr(m_action.m_type);
 	float timer = getTimer(m_action.m_type);
 
-	DEBUG4("timer nr %i",timernr);
-
+	if (timer != 0)
+	{
+		DEBUG5("timer nr %i time %f Action %s",timernr,timer,m_action.m_type.c_str());
+	}
+	
 	// Faehigkeit Ausdauer
 	if (checkAbility("endurance") && timer ==1)
 	{
@@ -384,7 +391,7 @@ void Creature::initAction()
 	
 	if (m_action.m_time ==0)
 	{
-		ERRORMSG("Aktion mit Dauer 0 erzeugt");
+		ERRORMSG("Aktion mit Dauer 0 erzeugt fuer Kommand %s",m_command.m_type.c_str());
 	}
 	
 	// wenn keine Aktion berechnet wurde, Kommando beenden
@@ -944,7 +951,7 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 				{
 					pr->setCounter(ainfo->m_projectile_counter);
 				}
-				DEBUG("proj radius %f",ainfo->m_projectile_radius);
+				DEBUG5("proj radius %f",ainfo->m_projectile_radius);
 				if (ainfo->m_projectile_radius != 0)
 				{
 					pr->setRadius(ainfo->m_projectile_radius);
@@ -2088,11 +2095,13 @@ void Creature::clearCommand(bool success)
 	DEBUG5("%s clear command %s %f",getRefName().c_str(),m_command.m_type.c_str() , m_script_command_timer);
 	if (hasScriptCommand() && m_command.m_type!= "noaction")
 	{
+		m_script_command_timer =0;
 		DEBUG5("command %s by %s ended with success %i",m_command.m_type.c_str(), getRefName().c_str(), success);
 		Trigger* tr = new Trigger("command_complete");
 		tr->addVariable("unit",getId());
 		tr->addVariable("command",m_command.m_type);
 		tr->addVariable("success",success);
+		tr->addVariable("last_command",!(hasScriptCommand()));
 		getRegion()->insertTrigger(tr);
 	}
 	m_command.m_type = "noaction";
@@ -2100,7 +2109,7 @@ void Creature::clearCommand(bool success)
 	m_command.m_goal = Vector(0,0);
 	m_command.m_goal_object_id =0;
 	m_command.m_range =1;
-	m_script_command_timer =0;
+	m_script_command_timer =0;	
 	addToNetEventMask(NetEvent::DATA_COMMAND);
 }
 
