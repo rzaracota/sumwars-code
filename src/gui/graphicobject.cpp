@@ -195,7 +195,19 @@ void GraphicObject::addMovableObject(MovableObjectInfo& object)
 				// Anfuegen an den Knoten an dem die Entity haengt
 				// und verfolgen des neu angelegten TagPoint
 				Ogre::SkeletonInstance* skel= ent->getSkeleton();
+				if (skel == 0)
+				{
+					ERRORMSG("could not attach %s to %s (entity has no skeleton)",object.m_objectname.c_str(),mesh.c_str());
+					return;
+				}
+
 				Ogre::Bone* boneptr = skel->getBone(bone);
+				if (boneptr == 0)
+				{
+					ERRORMSG("could not attach %s to %s (skeleton has no bone %s",object.m_objectname.c_str(),mesh.c_str(),bone.c_str());
+					return;
+				}
+				
 				tag = skel->createTagPointOnBone (boneptr);
 				attchobj.m_entity = ent;
 				tag->setInheritScale(false);
@@ -205,7 +217,7 @@ void GraphicObject::addMovableObject(MovableObjectInfo& object)
 			}
 			else
 			{
-				DEBUG("could not attach %s to %s",object.m_objectname.c_str(),mesh.c_str());
+				ERRORMSG("could not attach %s to %s (entity does not exist)",object.m_objectname.c_str(),mesh.c_str());
 				return;
 			}
 		}
@@ -266,14 +278,22 @@ void GraphicObject::addMovableObject(MovableObjectInfo& object)
 			Ogre::Entity* ent = getEntity(mesh);
 			if (ent !=0)
 			{
-				Ogre::TagPoint* tag = ent->attachObjectToBone(bone, obj);
-				tag->setInheritScale(false);
-				tag->setScale(Ogre::Vector3(1,1,1));
-				node = tag;
+				try
+				{
+					Ogre::TagPoint* tag = ent->attachObjectToBone(bone, obj);
+					tag->setInheritScale(false);
+					tag->setScale(Ogre::Vector3(1,1,1));
+					node = tag;
+				}
+				catch (std::exception& e)
+				{
+					ERRORMSG("could not attach %s to %s (no skeleton or no bone %s)",object.m_objectname.c_str(),mesh.c_str(),bone.c_str());
+					return;
+				}
 			}
 			else
 			{
-				DEBUG("could not attach %s to %s",object.m_objectname.c_str(),mesh.c_str());
+				ERRORMSG("could not attach %s to %s (entity does not exist)",object.m_objectname.c_str(),mesh.c_str());
 				return;
 			}
 		}
