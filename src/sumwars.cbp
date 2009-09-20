@@ -162,6 +162,9 @@
 		<Unit filename="core\templateloader.h" />
 		<Unit filename="core\tiles.h" />
 		<Unit filename="core\timer.h" />
+		<Unit filename="core\treasure.cpp" />
+		<Unit filename="core\treasure.h" />
+		<Unit filename="core\treasurebase.h" />
 		<Unit filename="core\unionfindtree.cpp" />
 		<Unit filename="core\unionfindtree.h" />
 		<Unit filename="core\variable.cpp" />

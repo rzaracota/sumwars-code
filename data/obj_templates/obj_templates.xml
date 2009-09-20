@@ -154,7 +154,6 @@ FIXED_OBJECT
         </Environment>
 </ObjectTemplate>
 
-
 <ObjectTemplate name="$single_block" type="FIXED_OBJECT">
         <Environment name="meadow">
                 <Object name="tree1" />
@@ -337,6 +336,11 @@ FIXED_OBJECT
                 <Object name="tub" />
         </Environment>
 </ObjectTemplate>
+<ObjectTemplate name="$crystal" type="FIXED_OBJECT">
+        <Environment name="council" default = "true">
+                <Object name="comCrystal" />
+        </Environment>
+</ObjectTemplate>
 
 <ObjectTemplate name="$chair" type="FIXED_OBJECT">
         <Environment name="meadow" default = "true">
@@ -346,42 +350,45 @@ FIXED_OBJECT
 </ObjectTemplate>
 
 <ObjectTemplate name="$prison" type="FIXED_OBJECT">
-        <Environment name="meadow" default = "true">
-                <Object name="fence1" />
-                <Object name="fence2" />
-                <Object name="fence3" />
-                <Object name="fence4" />
-                <Object name="fence5" />
+        <Environment name="council" default = "true">
+                <Object name="prison_wall1" />
         </Environment>
 </ObjectTemplate>
 
 <ObjectTemplate name="$prison_m" type="FIXED_OBJECT">
-        <Environment name="meadow" default = "true">
-                <Object name="fence_m1" />
+        <Environment name="council" default = "true">
+                <Object name="prison_wall_m1" />
         </Environment>
 </ObjectTemplate>
 
 <ObjectTemplate name="$prison_s" type="FIXED_OBJECT">
-        <Environment name="meadow" default = "true">
-                <Object name="fence_s1" />
+        <Environment name="council" default = "true">
+                <Object name="prison_wall_s1" />
         </Environment>
 </ObjectTemplate>
 
 <ObjectTemplate name="$prison_t" type="FIXED_OBJECT">
-        <Environment name="meadow" default = "true">
-                <Object name="fence_t1" />
+        <Environment name="council" default = "true">
+                <Object name="prison_wall_t1" />
+				<Object name="prison_wall_t2" />
+        </Environment>
+</ObjectTemplate>
+
+<ObjectTemplate name="$prison_w" type="FIXED_OBJECT">
+        <Environment name="council" default = "true">
+                <Object name="prison_door_w1" />
         </Environment>
 </ObjectTemplate>
 
 <ObjectTemplate name="$prison_cIn" type="FIXED_OBJECT">
-         <Environment name="meadow" default = "true">
-                <Object name="fence_cIn1" />
+         <Environment name="council" default = "true">
+                <Object name="prison_wall_cIn1" />
         </Environment>
 </ObjectTemplate>
 
 <ObjectTemplate name="$prison_cOut" type="FIXED_OBJECT">
-        <Environment name="meadow" default = "true">
-                <Object name="fence_cOut1" />
+        <Environment name="council" default = "true">
+                <Object name="prison_wall_cOut1" />
         </Environment>
 </ObjectTemplate>
 
@@ -389,11 +396,20 @@ FIXED_OBJECT
         <Environment name="council" default = "true">
                 <Object name="konz_door_arc" />
         </Environment>
+		<Environment name="dungeon">
+                <Object name="prison_door_arc1" />
+        </Environment>
 </ObjectTemplate>
 
 <ObjectTemplate name="$door_SciFi_m" type="SCRIPTOBJECT">
         <Environment name="council" default = "true">
                 <Object name="konz_door1" />
+        </Environment>
+</ObjectTemplate>
+
+<ObjectTemplate name="$door_wing_m" type="SCRIPTOBJECT">
+        <Environment name="dungeon" default = "true">
+                <Object name="prison_door_m1" />
         </Environment>
 </ObjectTemplate>
 
@@ -412,5 +428,18 @@ FIXED_OBJECT
 <ObjectTemplate name="$money" type="FIXED_OBJECT">
         <Environment name="council" default = "true">
                 <Object name="goldsack" />
+        </Environment>
+</ObjectTemplate>
+
+<ObjectTemplate name="$ground" type="FIXED_OBJECT">
+        <Environment name="cave" default = "true">
+                <Object name="ground" />
+				<Object name="ground_m" />
+				<Object name="ground_s" />
+				<Object name="ground_t" />
+				<Object name="ground_c" />
+				<Object name="ground_squ_l" />
+				<Object name="ground_squ_m" />
+				<Object name="ground_squ_s" />
         </Environment>
 </ObjectTemplate>

@@ -108,3 +108,29 @@
 		</Effect>
 	</Event>
 </ScriptObject>
+
+<ScriptObject type="SCRIPTOBJECT" subtype="prison_door_m1" layer="NORMAL">
+	<RenderInfo name="prison_door_m1"/>
+	<Geometry shape="RECT" extent_x="0.1" extent_y="1"/>
+	
+	<Event trigger="object_use">
+		<Effect>
+			
+			local stat = getScriptObjectFlag(trigger.used_object,'open')
+			setScriptObjectFlag(trigger.used_object,'open',not stat)
+			print(get(trigger.used_object,"angle"))
+			local pos = get(trigger.used_object,"position")
+			print(trigger.used_object);
+			if (stat) then
+				set(trigger.used_object,"angle",-90);
+				pos[1] = pos[1] -2;
+				pos[2] = pos[2] +1;
+			else
+				set(trigger.used_object,"angle",-130);
+				pos[1] = pos[1] +2;
+				pos[2] = pos[2] -1;
+			end;
+			moveObject(trigger.used_object,pos,false)
+		</Effect>
+	</Event>
+</ScriptObject>
