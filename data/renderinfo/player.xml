@@ -514,6 +514,7 @@
 
 <RenderInfo name="warrior_m" parent="playerbase" >
 	<Entity source="warrior_m.mesh"/>
+	<Entity objectname="head" bone="crown" source="head1.mesh" />
 </RenderInfo>
 
 <RenderInfo name="warrior_f" parent="playerbase" >
@@ -523,17 +524,26 @@
 
 <RenderInfo name="mage_m" parent="playerbase" >
 	<Entity source="mage_m.mesh"/>
+	<Entity objectname="head" bone="crown" source="head_f1.mesh" />
 </RenderInfo>
 <RenderInfo name="mage_f" parent="playerbase" >
 	<Entity source="archer_f.mesh"/>
 	<Entity objectname="head" bone="crown" source="head_f1.mesh" />
 </RenderInfo>
 
+<RenderInfo name="archer_m" parent="playerbase" >
+	<Entity source="mage_m.mesh"/>
+	<Entity objectname="head" bone="crown" source="head_f1.mesh" />
+</RenderInfo>
 <RenderInfo name="archer_f" parent="playerbase" >
 	<Entity source="archer_f.mesh"/>
 	<Entity objectname="head" bone="crown" source="head_f1.mesh" />
 </RenderInfo>
 
+<RenderInfo name="priest_m" parent="playerbase" >
+	<Entity source="mage_m.mesh"/>
+	<Entity objectname="head" bone="crown" source="head_f1.mesh" />
+</RenderInfo>
 <RenderInfo name="priest_f" parent="playerbase" >
 	<Entity source="priest_f.mesh"/>
 	<Entity objectname="head" bone="crown" source="head_f1.mesh" />

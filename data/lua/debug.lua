@@ -19,3 +19,13 @@ end;
 function vv()
 	
 end;
+
+function jump(region, location)
+	player = getPlayers()[1];
+	teleportPlayer(player,region,location);
+end;
+
+function camp()
+	player = getPlayers()[1];
+	teleportPlayer(player,"medMercCamp","entry_north");
+end;
