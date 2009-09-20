@@ -5613,7 +5613,7 @@
     <Object subtype="$cupboard" 
             center_x="40.79580589" 
             center_y="9.334773712" 
-			height="-1.110223025e-016" 
+			height="-1.179611964e-016" 
             angle="13.63607916" 
             probability="1" 
             prob_angle="false" 
@@ -7078,7 +7078,7 @@
     <Object subtype="$vase" 
             center_x="44" 
             center_y="23" 
-			height="7.632783294e-017" 
+			height="8.326672685e-017" 
             angle="0" 
             probability="1" 
             prob_angle="false" 
@@ -7182,7 +7182,7 @@
     <Object subtype="$vase" 
             center_x="46.5" 
             center_y="26" 
-			height="7.632783294e-017" 
+			height="8.326672685e-017" 
             angle="0" 
             probability="1" 
             prob_angle="false" 
@@ -7190,7 +7190,7 @@
     <Object subtype="$vase" 
             center_x="41" 
             center_y="24.5" 
-			height="7.632783294e-017" 
+			height="8.326672685e-017" 
             angle="0" 
             probability="1" 
             prob_angle="false" 
@@ -7198,7 +7198,7 @@
     <Object subtype="$vase" 
             center_x="41" 
             center_y="27.5" 
-			height="7.632783294e-017" 
+			height="8.326672685e-017" 
             angle="0" 
             probability="1" 
             prob_angle="false" 
@@ -7206,7 +7206,7 @@
     <Object subtype="$vase" 
             center_x="44" 
             center_y="29" 
-			height="7.632783294e-017" 
+			height="8.326672685e-017" 
             angle="0" 
             probability="1" 
             prob_angle="false" 
@@ -7453,7 +7453,7 @@
     <Location name="locLouses" pos_x="11" pos_y="15" />
     <Location name="locMerc1" pos_x="19.5" pos_y="-39" />
     <Location name="locMerc2" pos_x="14.5" pos_y="-39" />
-    <Location name="locMutantSlugs" pos_x="59" pos_y="12" />
+    <Location name="locMutantSlugs" pos_x="58.67805556" pos_y="12" />
     <Location name="locParty" pos_x="16.5" pos_y="-43" />
     <Location name="locSlugView" pos_x="41" pos_y="46.5" />
     <Location name="locSlugs" pos_x="40.5" pos_y="50" />
