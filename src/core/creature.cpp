@@ -3180,7 +3180,7 @@ bool Creature::takeDamage(Damage* d)
 		armor *=2;
 
 	float armorfak = 1.0;
-	if (armor>0 && !(d->m_special_flags & Damage::IGNORE_ARMOR))
+	if (armor>0 && !(d->m_special_flags & Damage::IGNORE_ARMOR) && dmgt>0)
 	{
 		armorfak = atan(d->m_power/armor)/(3.1415/2);
 		DEBUG5("power %f armor %f -> damage perc. %f",d->m_power, armor, armorfak);

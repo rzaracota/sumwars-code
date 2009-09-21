@@ -143,7 +143,7 @@
 
 <Ability type="goblin_lightning"
 		 name="Lightning"
-		 description="The mage summons a lightning to attack one foe."
+		 description=""
 		 time="501.000000"
 		 timer_nr="1.000000"
 		 timer_value="2000.000000"

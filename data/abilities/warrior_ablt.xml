@@ -299,7 +299,7 @@
 		 description="The warrior regains up to 50 percent hitpoints of his total hitpoints through the sheer power of his will."
 		 time="1001.000000" 
 		 timer_nr="2.000000" 
-		 timer_value="40000.000000"
+		 timer_value="60000.000000"
 		 base_ability="noaction" 
 		 critical_percent="0.800000"
 		 target_type="self">

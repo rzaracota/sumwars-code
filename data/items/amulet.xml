@@ -24,7 +24,7 @@
 	
 	<DropChance
 		level="2"
-		probability=".1"
+		probability="0.1"
 	/>
 </Item>
 
