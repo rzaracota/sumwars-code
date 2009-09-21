@@ -116,3 +116,51 @@
 		</LuaImplementation>	
 	</Damage>
 </Ability>
+
+<Ability type="goblin_magic_shield"
+		 name="Magic Shield"
+		 description=""
+		 time="1001.000000"
+		 timer_nr="2.000000"
+		 timer_value="200000.000000" 
+		 base_ability="noaction"
+		 critical_percent="0.660000"
+		 target_type="party_all"
+		 radius="12">
+	<Flag name="mute_affected" />
+	<Effect>
+		<CppImplementation type="basemod_at_allies_in_radius" />
+	</Effect>
+	<BaseAttributesMod>
+		<LuaImplementation>
+			setBaseModValue("time",30000);
+			setBaseModValue("resist_ice",20);
+			setBaseModValue("resist_fire",20);
+			setBaseModValue("resist_air",20);
+		</LuaImplementation>
+	</BaseAttributesMod>
+</Ability>
+
+<Ability type="goblin_lightning"
+		 name="Lightning"
+		 description="The mage summons a lightning to attack one foe."
+		 time="501.000000"
+		 timer_nr="1.000000"
+		 timer_value="2000.000000"
+		 base_ability="magic_attack"
+		 critical_percent="0.800000"
+		 target_type="ranged">
+	<Flag name="mute_affected" />
+	<Effect>
+		<CppImplementation type="proj_at_target" />
+	</Effect>
+	<Projectile type="lightning" />
+	
+	<Damage>
+		<LuaImplementation>
+			local magic = get(self,"magic_power");
+			local admg = getDamageValue("air_dmg");
+			setDamageValue("air_dmg", {admg[1] + magic*0.5, admg[2] + magic*1.5});
+		</LuaImplementation>	
+	</Damage>
+</Ability>
