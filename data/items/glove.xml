@@ -221,3 +221,35 @@
 		probability="1.0"
 	/>
 </Item>
+
+<!-- Assassinenhandschuhe -->
+<!-- WAR, PRI -->
+<Item type="gloves" subtype="shark_glv" name="shark gloves" size="medium">
+	<Image image="set:goblin_glv.png image:full_image" />
+	<RenderInfo name="sharkGloves" />
+	<Attribute
+		level_requirement="23"
+		character_requirement="warrior,priest"
+		min_enchant="100"
+		max_enchant="200"
+		modchance_armor_mod="0.12"
+		modchance_resist_phys_mod="0.10"
+		modchance_resist_fire_mod="0.12"
+		modchance_resist_ice_mod="0.12"
+		modchance_resist_air_mod="0.12"
+		modchance_resist_all_mod="0.1"
+		modchance_strength_mod="0.1"
+		modchance_dexterity_mod="0.12"
+		modchance_magic_power_mod="0.1"
+		/>
+
+  <EquipEffect
+		darmor="45"
+  >
+	</EquipEffect>
+
+	<DropChance
+		level="23"
+		probability="1.0"
+	/>
+</Item>

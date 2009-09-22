@@ -32,6 +32,8 @@
 					addArea("dangerArea","circle","locBackroute2",4);
 					addArea("locDoorArea","circle","locLibrarySecretDoor",3);
 					addArea("seeLouseArea","circle","locBackroute5",4);
+					addArea("mutantSlugsArea","rect","locBackroute3",{3,3});
+					
 					
 					local tolecpos = "locTolec";
 					local derredpos = "locDerred";
@@ -659,6 +661,7 @@
 			<Effect>
 				door_toggle("slugFarmBackdoor");
 				clearUnitCommands(tutorial_tmp.tolec);
+				tutorial_tmp.slugdoor_open = true;
 			</Effect>
 		</Event>
 		
@@ -814,6 +817,7 @@
 			<Effect>
 				timedExecute("door_toggle('slugFarmFoodDoor')",1000);
 				startTimer("go_backroute2",2000);
+				tutorial_tmp.fooddoor_open = true;
 			</Effect>
 		</Event>
 		<Event trigger="go_backroute2" once="true">
@@ -833,9 +837,9 @@
 				end;
 			</Condition>
 			<Effect>
-				tutorial_tmp.slug1 = createObject("fireSlug","locBackroute3");
-				tutorial_tmp.slug2 = createObject("fireSlug","locBackroute3");
-				tutorial_tmp.slug3 = createObject("fireSlug","locBackroute3");
+				createMonsterGroup("tutorialMutantSlugs","locBackroute3",3);
+				tutorial_tmp.slugs = getObjectsInArea("mutantSlugsArea","normal","monster");
+				tutorial_tmp.slugnr = table.getn(tutorial_tmp.slugs);
 				
 				setCutsceneMode(true);				
 				addCameraPosition(0,"locDanger" , -90,40, 20);
@@ -846,21 +850,22 @@
 		</Event>
 		<Event trigger="slugs2_scene" once="true">
 			<Effect>
-				tutorial_tmp.slug2_out =0;
-				addUnitCommand(tutorial_tmp.slug1,"walk","locMutantSlugs");
-				addUnitCommand(tutorial_tmp.slug2,"walk","locMutantSlugs");
-				addUnitCommand(tutorial_tmp.slug3,"walk","locMutantSlugs");
+				tutorial_tmp.slugs_out =0;
+				local i
+				for i=1,tutorial_tmp.slugnr do
+					addUnitCommand(tutorial_tmp.slugs[i],"walk","locMutantSlugs");
+				end;
 			</Effect>
 		</Event>
 		
 		<Event trigger="command_complete" >
 			<Condition>
-				return (get(trigger.unit,"subtype") == "fireSlug")
+				return (get(trigger.unit,"subtype") == "fireSlug" or get(trigger.unit,"subtype") == "mutantSlug")
 			</Condition>	
 			<Effect>
-				tutorial_tmp.slug2_out = tutorial_tmp.slug2_out +1;
+				tutorial_tmp.slugs_out = tutorial_tmp.slugs_out +1;
 				deleteObject(trigger.unit);
-				if (tutorial_tmp.slug2_out == 3) then
+				if (tutorial_tmp.slugs_out == tutorial_tmp.slugnr) then
 					addCameraPosition(300,"locBackroute3" , -90,40, 20);
 					addCameraPosition(2000,"locBackroute3" , -90,40, 20);
 					addCameraPosition(1000,"locDanger" , -90,40, 20);

@@ -1,5 +1,23 @@
 <RenderInfo name="potion">
-	<Entity  source="potion.mesh"/> 
+	<Entity  source="heal_1.mesh"/> 
+	<Soundobject objectname="sound" />
+	
+	<Action name="drop">
+		<Sound objectname="sound" name="drop_potion"/>
+	</Action>
+</RenderInfo>
+
+<RenderInfo name="mediumPotion">
+	<Entity  source="heal_2.mesh"/> 
+	<Soundobject objectname="sound" />
+	
+	<Action name="drop">
+		<Sound objectname="sound" name="drop_potion"/>
+	</Action>
+</RenderInfo>
+
+<RenderInfo name="antiFreeze">
+	<Entity  source="heal_fr.mesh"/> 
 	<Soundobject objectname="sound" />
 	
 	<Action name="drop">

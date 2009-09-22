@@ -198,3 +198,37 @@
 			   probability="1.0"
 			   />
 </Item>
+
+<!-- Konzilsturban -->
+<Item type="helmet" subtype="turban_hat" name="turban" size="medium">
+	<Image image="set:goblin_hlm.png image:full_image" />
+	<Mesh file="turban_hat.mesh" />
+	<Attribute
+			level_requirement="22"
+			character_requirement="mage" 
+			min_enchant="125"
+			max_enchant="290"
+			modchance_health_mod="0.10"
+			modchance_armor_mod="0.08"
+			modchance_resist_phys_mod="0.10"
+			modchance_resist_fire_mod="0.13"
+			modchance_resist_ice_mod="0.14"
+			modchance_resist_air_mod="0.13"
+			modchance_resist_all_mod="0.05"
+			modchance_dexterity_mod="0.13"
+			modchance_willpower_mod="0.14"
+			/>
+	
+	<EquipEffect
+				darmor="36"
+				dresistances_fire="15"
+				dresistances_ice="8"
+				dresistances_wind="12"
+				>
+	</EquipEffect>
+	
+	<DropChance
+			   level="20"
+			   probability="1.0"
+			   />
+</Item>

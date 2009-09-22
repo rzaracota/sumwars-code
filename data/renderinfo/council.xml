@@ -61,7 +61,6 @@
 	</Action>
 </RenderInfo>
 
-
 <RenderInfo name="behemothbase" parent="creaturebase">
 	<Action name="walk">
 		<Animation name="walk" />
@@ -107,6 +106,10 @@
 
 <RenderInfo name="fireSlug" parent="slugbase">
 	<Entity source="fire_slug.mesh"/>
+</RenderInfo>
+
+<RenderInfo name="mutantSlug" parent="slugbase">
+	<Entity source="fire_slug_mutant.mesh"/>
 </RenderInfo>
 
 <RenderInfo name="fireLouse" parent="lousebase">

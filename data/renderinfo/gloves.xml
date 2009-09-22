@@ -1,11 +1,22 @@
 <RenderInfo name="gloves" parent="playerbase">
 	<Entity source="plate_glv.mesh"/> 
 </RenderInfo>
-
 <RenderInfo name="gloves#m" parent="playerbase">
 	<Entity source="plate_glvM.mesh"/> 
 </RenderInfo>
-
 <RenderInfo name="gloves#f" parent="playerbase">
 	<Entity source="plate_glvF.mesh"/> 
+</RenderInfo>
+
+<RenderInfo name="sharkGloves" parent="playerbase">
+	<Entity source="shark_glv.mesh"/> 
+</RenderInfo>
+<RenderInfo name="sharkGloves#m" parent="playerbase">
+	<Entity source="shark_glv.mesh"/> 
+</RenderInfo>
+<RenderInfo name="sharkGloves#f" parent="playerbase">
+	<Entity source="shark_glv.mesh"/> 
+</RenderInfo>
+<RenderInfo name="sharkGlovesGuard" parent="guardPole">
+	<Entity source="shark_glv.mesh"/>
 </RenderInfo>

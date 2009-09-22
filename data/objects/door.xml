@@ -109,28 +109,37 @@
 	</Event>
 </ScriptObject>
 
-<ScriptObject type="SCRIPTOBJECT" subtype="prison_door_m1" layer="NORMAL">
+<ScriptObject type="SCRIPTOBJECT" subtype="prison_door_m1" layer="BASE">
 	<RenderInfo name="prison_door_m1"/>
 	<Geometry shape="RECT" extent_x="0.1" extent_y="1"/>
+	<Flags usable="true" exact_picking="false" collision_detect="false" />
 	
 	<Event trigger="object_use">
 		<Effect>
-			
-			local stat = getScriptObjectFlag(trigger.used_object,'open')
-			setScriptObjectFlag(trigger.used_object,'open',not stat)
-			print(get(trigger.used_object,"angle"))
-			local pos = get(trigger.used_object,"position")
-			print(trigger.used_object);
-			if (stat) then
-				set(trigger.used_object,"angle",-90);
-				pos[1] = pos[1] -2;
-				pos[2] = pos[2] +1;
-			else
-				set(trigger.used_object,"angle",-130);
-				pos[1] = pos[1] +2;
-				pos[2] = pos[2] -1;
-			end;
-			moveObject(trigger.used_object,pos,false)
+			if (scriptobjectvar[trigger.used_object]["locked"] ~= true or trigger.lock_override) then
+				local stat = getScriptObjectFlag(trigger.used_object,'open')
+				setScriptObjectFlag(trigger.used_object,'open',not stat)
+
+				local pos = get(trigger.used_object,"position")
+				local shift={-0.8,1.65};
+				local angRot = get(trigger.used_object,"angle");
+				local ang = angRot
+				if (not stat) then
+					ang = ang - 130;
+					shift[1] = 0.8;
+					shift[2] = -1.65;
+				else
+					ang = ang + 130;
+					angRot = angRot + 130;
+				end;
+				
+				vecrotate(shift,angRot);
+				vecadd(pos,shift);
+				set(trigger.used_object,"angle",ang);
+				
+				
+				moveObject(trigger.used_object,pos,false)
+			end
 		</Effect>
 	</Event>
 </ScriptObject>

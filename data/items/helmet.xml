@@ -276,3 +276,34 @@
 		probability="1.0"
 	/>
 </Item>
+
+<!-- Kettenturban -->
+<!-- WAR, PRI, ARC -->
+<Item type="helmet" subtype="turban_hlm" name="chain turban" size="medium">
+	<Image image="set:merc_hlm.png image:full_image" />
+	<Mesh file="turban_hlm.mesh" />
+	<Attribute
+		level_requirement="23"
+		character_requirement="warrior,archer,priest"
+		min_enchant="90"
+		max_enchant="260"
+		modchance_health_mod="0.1"
+		modchance_armor_mod="0.1"
+		modchance_resist_phys_mod="0.10"
+		modchance_resist_fire_mod="0.15"
+		modchance_resist_ice_mod="0.15"
+		modchance_resist_air_mod="0.15"
+		modchance_resist_all_mod="0.15"
+		modchance_willpower_mod="0.1"
+	/>
+
+  <EquipEffect
+		darmor="41"
+  >
+	</EquipEffect>
+
+	<DropChance
+		level="21"
+		probability="1.0"
+	/>
+</Item>

@@ -1,11 +1,32 @@
 <RenderInfo name="leathArm" parent="playerbase">
 	<Entity source="leathArm.mesh"/> 
 </RenderInfo>
-
 <RenderInfo name="leathArm#m" parent="playerbase">
 	<Entity source="leathArmMW.mesh"/> 
 </RenderInfo>
-
 <RenderInfo name="leathArm#f" parent="playerbase">
 	<Entity source="leathArmFA.mesh"/> 
+</RenderInfo>
+
+<RenderInfo name="counclArm" parent="playerbase">
+	<Entity source="councl_arm.mesh"/> 
+</RenderInfo>
+<RenderInfo name="counclArm#m" parent="playerbase">
+	<Entity source="councl_arm.mesh"/> 
+</RenderInfo>
+<RenderInfo name="counclArm#f" parent="playerbase">
+	<Entity source="councl_arm.mesh"/> 
+</RenderInfo>
+
+<RenderInfo name="counclRob" parent="playerbase">
+	<Entity source="councl_rob.mesh"/> 
+</RenderInfo>
+<RenderInfo name="counclRob#m" parent="playerbase">
+	<Entity source="councl_rob.mesh"/> 
+</RenderInfo>
+<RenderInfo name="counclRob#f" parent="playerbase">
+	<Entity source="councl_rob.mesh"/> 
+</RenderInfo>
+<RenderInfo name="counclRobeSoren" parent="guardPole">
+	<Entity source="councl_rob.mesh"/>
 </RenderInfo>

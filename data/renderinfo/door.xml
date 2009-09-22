@@ -93,23 +93,14 @@
 
 <RenderInfo name="prison_door_m1" >
 	<Entity source="prison_door1.mesh" position = " 0.0 0.0 -1.0" />
-	<!-- <Entity objectname = "wingR" source="prison_door_w1.mesh" position = " 0.0 0.0 -1.50" /> 
-	<Entity objectname = "wingL" source="prison_door_w1.mesh" position = " 0.0 0.0 1.50" />
-	<Rotation objectname = "wingR" start_vec="0.0 0.0 0.0" end_vec="0.0 90.0 0.0" /> -->
 	
 	<State name="open">
 		<Activation time="500">
-			<!-- <Rotation start="0.0" end="1.0" start_vec="0.0 0.0 0.0" end_vec="0.0 -130.0 0.0" /> -->
+			<Rotation start="0.0" end="1.0" start_vec="0.0 -130.0 0.0" end_vec="0.0 0.0 0.0" />
 		</Activation>
 		
 		<Deactivation time="500">
-			<!-- <Rotation start="0.0" end="1.0" start_vec="0.0 -130.0 0.0" end_vec="0.0 0.0 0.0" /> -->
+			<Rotation start="0.0" end="1.0" start_vec="0.0 130.0 0.0" end_vec="0.0 0.0 0.0" />
 		</Deactivation>
 	</State>
-	
-	<Action name="open">
-			<!-- <Rotation start="0.0" end="1.0" start_vec="0.0 0.0 0.0" end_vec="0.0 -130.0 0.0" />
-			<Rotation objectname = "wingL" start="0.0" end="0.0" start_vec="0.0 0.0 0.0" end_vec="0.0 180.0 0.0" /> -->
-	</Action>
-	
 </RenderInfo>
