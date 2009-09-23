@@ -1,0 +1,47 @@
+<RenderInfo name = "guardPole" parent="playerbase">
+	<Action name="noaction">
+		<Animation name="idlePole" />
+	</Action>
+	
+	<Action name="die">
+		<Animation name="die" />
+	</Action>
+	
+	<Action name="walk">
+		<Animation name="walkOneHand" />
+	</Action>
+</RenderInfo>
+
+<RenderInfo name="guardPole_cnl" parent="guardPole">
+	<Entity source="guardCnl.mesh"/>
+	<Entity objectname="weapon" bone="itemRightHand" source="speer_pol.mesh" />
+	<Subobject objectname="armor" source="counclArm#m" />
+	<Subobject objectname="gloves" source="sharkGlovesGuard" />
+	<Entity objectname="head" bone="crown" source="head1.mesh" />
+	<Entity objectname="helm" bone="crown" source="turban_hlm.mesh" />
+	<Entity objectname="shoulderR" bone="shoulderJointRight" source="konzPlateR.mesh" />
+	<Entity objectname="shoulderL" bone="shoulderJointLeft" source="konzPlateL.mesh" />
+</RenderInfo>
+
+<RenderInfo name = "tolec" parent="guardPole_cnl">
+</RenderInfo>
+
+<RenderInfo name = "derred" parent="playerbase">
+	<Entity source="guardCnl.mesh"/>
+	<Entity objectname="weapon" bone="itemRightHand" source="council_sw.mesh" />
+	<Entity objectname="shield" bone="itemLeftHand" source="council_shd.mesh" />
+	<Subobject objectname="armor" source="counclArm#m" />
+	<Subobject objectname="gloves" source="sharkGloves#m" />
+	<Entity objectname="head" bone="crown" source="head1.mesh" />
+	<Entity objectname="helm" bone="crown" source="turban_hlm.mesh" />
+	<Entity objectname="shoulderR" bone="shoulderJointRight" source="konzPlateR.mesh" />
+	<Entity objectname="shoulderL" bone="shoulderJointLeft" source="konzPlateL.mesh" />
+</RenderInfo>
+
+<RenderInfo name = "soren" parent="guardPole">
+	<Entity source="soren.mesh"/>
+	<Entity objectname="head" bone="crown" source="head_m2.mesh" />
+	<Entity objectname="hat" bone="crown" source="turban_hat.mesh" />
+	<Subobject objectname="robe" source="counclRobeSoren" />
+	<Entity objectname="weapon" bone="itemRightHand" source="council_stf.mesh" />
+</RenderInfo>

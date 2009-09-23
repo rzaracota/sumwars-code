@@ -88,7 +88,7 @@ function addAllPlayersToDialog()
 	local players = getPlayers();
 	local i,player;
 	for i,player in ipairs(players) do
-		addSpeaker(player,get(player,"name"));
+		addSpeaker(player,get(player,"name"),true);
 	end;
 end;
 
@@ -104,18 +104,18 @@ function addStandardRoles()
 	local priest = getRolePlayerNonPref("priest",blockedspeaker);
 	local any = getRolePlayerNonPref("all",blockedspeaker);
 	
-	addSpeaker(warrior,"warrior");
-	addSpeaker(mage,"mage");
-	addSpeaker(archer,"archer");
-	addSpeaker(priest,"priest");
-	addSpeaker(any,"any");
+	addSpeaker(warrior,"warrior",true);
+	addSpeaker(mage,"mage",true);
+	addSpeaker(archer,"archer",true);
+	addSpeaker(priest,"priest",true);
+	addSpeaker(any,"any",true);
 	
 	local magopt = getRolePlayerPref("all",mage);
 	local waropt = getRolePlayerPref("all",warrior);
 	local arcopt = getRolePlayerPref("all",archer);
 	local priopt = getRolePlayerPref("all",priest);
-	addSpeaker(magopt,"magopt");
-	addSpeaker(waropt,"waropt");
-	addSpeaker(arcopt,"arcopt");
-	addSpeaker(priopt,"priopt");
+	addSpeaker(magopt,"magopt",true);
+	addSpeaker(waropt,"waropt",true);
+	addSpeaker(arcopt,"arcopt",true);
+	addSpeaker(priopt,"priopt",true);
 end;

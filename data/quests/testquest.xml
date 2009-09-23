@@ -7,6 +7,7 @@
 				speak('Fenor Marken',_("Das ist ein Test"));
 				setSpeakerEmotion('Fenor Marken',"angry");
 				speak('player',_("und noch ein Test"));
+				executeInDialog("timedExecute('deleteObject(fenor)',200)");
 				speak('Fenor Marken',_("wieder ein Test"));
 				--setSpeakerPosition('Fenor Marken',"upper_left");
 				speak('guard1',"ich bin die erste Wache")

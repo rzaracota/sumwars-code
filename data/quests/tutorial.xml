@@ -31,7 +31,6 @@
 					addArea("entryPlayerArea","circle","locEntryPlayer",5);
 					addArea("dangerArea","circle","locBackroute2",4);
 					addArea("locDoorArea","circle","locLibrarySecretDoor",3);
-					addArea("seeLouseArea","circle","locBackroute5",4);
 					addArea("mutantSlugsArea","rect","locBackroute3",{3,3});
 					
 					
@@ -161,8 +160,8 @@
 				tutorial.started = true;
 				createDialogue();
 				addAllPlayersToDialog();
-				addSpeaker(tutorial_tmp.tolec,"Tolec");
-				addSpeaker(tutorial_tmp.derred,"Derred");
+				addSpeaker(tutorial_tmp.tolec,"Tolec",true);
+				addSpeaker(tutorial_tmp.derred,"Derred",true);
 				
 				local leader = getRolePlayer("leader");
 				local blockedspeaker={};
@@ -173,7 +172,7 @@
 				lookAtObject(tutorial_tmp.derred,leader);
 				playersLookAt(get(tutorial_tmp.tolec,"position"));
 				
-				addSpeaker(leader,"PL");
+				addSpeaker(leader,"PL",true);
 				speak("PL",_("*args*"));
 				-- TODO: (aufrappeln)
 				speak("PL",_("Bei Harads Knochen! Das war mindestens so schlimm wie die ersten Jahre in der Hölle! Wo bin ich hier?"));
@@ -187,10 +186,10 @@
 				local archer = getRolePlayerNonPref("archer",blockedspeaker);
 				local priest = getRolePlayerNonPref("priest",blockedspeaker);
 				
-				addSpeaker(warrior,"warrior");
-				addSpeaker(mage,"mage");
-				addSpeaker(archer,"archer");
-				addSpeaker(priest,"priest");
+				addSpeaker(warrior,"warrior",true);
+				addSpeaker(mage,"mage",true);
+				addSpeaker(archer,"archer",true);
+				addSpeaker(priest,"priest",true);
 				
 				if (warrior ~= leader) then
 					speak("warrior",_("Suchst du Streit? Wer ist für diesen Schlammassel verantwortlich!?!"));
@@ -286,8 +285,8 @@
 			</Condition>
 			<Effect>
 				addAllPlayersToDialog();
-				addSpeaker(tutorial_tmp.tolec,"Tolec");
-				addSpeaker(tutorial_tmp.derred,"Derred");
+				addSpeaker(tutorial_tmp.tolec,"Tolec",true);
+				addSpeaker(tutorial_tmp.derred,"Derred",true);
 				
 				addQuestion("Wollt ihr die Waffen abgeben?");
 				addAnswer("Ja","give_weapons_yes");
@@ -523,8 +522,8 @@
 				
 				createDialogue();
 				addAllPlayersToDialog();
-				addSpeaker(tutorial_tmp.tolec,"Tolec");
-				addSpeaker(tutorial_tmp.derred,"Derred");
+				addSpeaker(tutorial_tmp.tolec,"Tolec",true);
+				addSpeaker(tutorial_tmp.derred,"Derred",true);
 				
 				local solo = (getPlayers()[2] == nil);
 				addStandardRoles();
@@ -631,7 +630,7 @@
 				return (tutorial.phase == "fightslugs" and tutorial_tmp.slugdoor_open ~= true)
 			</Condition>
 			<Effect>
-				addSpeaker(tutorial_tmp.derred,"Derred");
+				addSpeaker(tutorial_tmp.derred,"Derred",true);
 				addStandardRoles();
 				addAllPlayersToDialog();
 				local solo = (getPlayers()[2] == nil);
@@ -700,8 +699,8 @@
 				moveObject(tutorial_tmp.derred, "locSlugView");
 				
 				createDialogue();
-				addSpeaker(tutorial_tmp.derred,"Derred");
-				addSpeaker(tutorial_tmp.tolec,"Tolec");
+				addSpeaker(tutorial_tmp.derred,"Derred",true);
+				addSpeaker(tutorial_tmp.tolec,"Tolec",true);
 				addStandardRoles();
 				addAllPlayersToDialog();
 				
@@ -737,7 +736,7 @@
 				return (tutorial.phase == "findSecretDoor" and tutorial_tmp.fooddoor_open ~= true)
 			</Condition>
 			<Effect>
-				addSpeaker(tutorial_tmp.derred,"Derred");
+				addSpeaker(tutorial_tmp.derred,"Derred",true);
 				if (getSpeaker("priopt") == 0) then
 					addSpeaker(getSpeaker("player"),"priopt");
 				end;
@@ -786,8 +785,8 @@
 				setCutsceneMode(false);
 				createDialogue();
 				addAllPlayersToDialog();
-				addSpeaker(tutorial_tmp.tolec,"Tolec");
-				addSpeaker(tutorial_tmp.derred,"Derred");
+				addSpeaker(tutorial_tmp.tolec,"Tolec",true);
+				addSpeaker(tutorial_tmp.derred,"Derred",true);
 				
 				speak("Tolec",_("Dieses Verdammte Ding. Ich hoffe die Wände halten."))
 				speak("Derred",_("Verteilt schnell euren neuen Punkte und dann nichts wie weg von hier."));
@@ -879,8 +878,8 @@
 				setCutsceneMode(false);
 				addAllPlayersToDialog();
 				addStandardRoles();
-				addSpeaker(tutorial_tmp.tolec,"Tolec");
-				addSpeaker(tutorial_tmp.derred,"Derred");
+				addSpeaker(tutorial_tmp.tolec,"Tolec",true);
+				addSpeaker(tutorial_tmp.derred,"Derred",true);
 				
 				speak("PL",_("Noch mehr von den Viechern?"));
 				speak("Tolec",_("Uäks! Die scheinen irgendwie ausgebrochen zu sein. Hoffentlich vermehren die sich nicht in den Felsspalten."));
@@ -987,8 +986,8 @@
 				groupObjectsArc(getPlayers(),"locPartyLib","locBackroute5");
 				createDialogue();
 				addAllPlayersToDialog();
-				addSpeaker(tutorial_tmp.tolec,"Tolec");
-				addSpeaker(tutorial_tmp.derred,"Derred");
+				addSpeaker(tutorial_tmp.tolec,"Tolec",true);
+				addSpeaker(tutorial_tmp.derred,"Derred",true);
 				
 				local solo = (getPlayers()[2] == nil);
 				addStandardRoles();

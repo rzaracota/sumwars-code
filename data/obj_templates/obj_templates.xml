@@ -65,6 +65,38 @@ FIXED_OBJECT
         </Environment>
 </ObjectTemplate>
 
+
+<ObjectTemplate name="$border_balustrade" type="FIXED_OBJECT">
+        <Environment name="council" default = "true">
+                <Object name="konz_balustrade1" />
+        </Environment>
+</ObjectTemplate>
+<ObjectTemplate name="$border_balustrade_m" type="FIXED_OBJECT">
+        <Environment name="council" default = "true">
+                <Object name="konz_balustrade_m1" />
+        </Environment>
+</ObjectTemplate>
+<ObjectTemplate name="$border_balustrade_s" type="FIXED_OBJECT">
+        <Environment name="council" default = "true">
+                <Object name="konz_balustrade_s1" />
+        </Environment>
+</ObjectTemplate>
+<ObjectTemplate name="$border_balustrade_t" type="FIXED_OBJECT">
+        <Environment name="council" default = "true">
+                <Object name="konz_balustrade_t1" />
+        </Environment>
+</ObjectTemplate>
+<ObjectTemplate name="$border_balustrade_cIn" type="FIXED_OBJECT">
+        <Environment name="council" default = "true">
+                <Object name="konz_balustrade_cIn1" />
+        </Environment>
+</ObjectTemplate>
+<ObjectTemplate name="$border_balustrade_cOut" type="FIXED_OBJECT">
+        <Environment name="council" default = "true">
+                <Object name="konz_balustrade_cout1" />
+        </Environment>
+</ObjectTemplate>
+
 <ObjectTemplate name="$border_m" type="FIXED_OBJECT">
         <Environment name="council">
                 <Object name="konz_wall_m1" />
@@ -443,3 +475,24 @@ FIXED_OBJECT
 				<Object name="ground_squ_s" />
         </Environment>
 </ObjectTemplate>
+
+<ObjectTemplate name="$corpse_slugs_dissect" type="FIXED_OBJECT">
+        <Environment name="council" default = "true">
+                <Object name="fireSlugExp1" />
+				<Object name="mutantSlugExp1" />
+        </Environment>
+</ObjectTemplate>
+<ObjectTemplate name="$corpse_slugs_overhaul" type="FIXED_OBJECT">
+        <Environment name="council" default = "true">
+				<Object name="fireSlugExp2" />
+				<Object name="mutantSlugExp2" />
+        </Environment>
+</ObjectTemplate>
+<ObjectTemplate name="$corpse_slugs_dead" type="FIXED_OBJECT">
+        <Environment name="council" default = "true">
+                <Object name="fireSlugExp3" />
+				<Object name="mutantSlugExp3" />
+        </Environment>
+</ObjectTemplate>
+
+
