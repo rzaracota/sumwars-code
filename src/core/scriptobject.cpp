@@ -121,6 +121,8 @@ void ScriptObject::setAnimation(std::string anim, float time, bool repeat)
 
 void ScriptObject::writeNetEvent(NetEvent* event, CharConv* cv)
 {
+	WorldObject::writeNetEvent(event,cv);
+	
 	if (event->m_data & NetEvent::DATA_ACTION)
 	{
 		cv->toBuffer(m_animation);
@@ -142,6 +144,8 @@ void ScriptObject::writeNetEvent(NetEvent* event, CharConv* cv)
 
 void ScriptObject::processNetEvent(NetEvent* event, CharConv* cv)
 {
+	WorldObject::processNetEvent(event,cv);
+	
 	if (event->m_data & NetEvent::DATA_ACTION)
 	{
 		cv->fromBuffer(m_animation);
