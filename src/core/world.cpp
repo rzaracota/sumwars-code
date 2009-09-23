@@ -1408,6 +1408,7 @@ void World::updatePlayers()
 			// NetEvents fuer die Spieler generieren
 			if (pl->getNetEventMask() !=0)
 			{
+				DEBUG5(" send player event id %i data %i",pl->getId(), pl->getNetEventMask());
 				NetEvent event;
 				event.m_type = NetEvent::OBJECT_STAT_CHANGED;
 				event.m_data = pl->getNetEventMask();

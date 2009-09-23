@@ -329,7 +329,7 @@ bool GameObject::setValue(std::string valname)
 		
 		return true;
 	}
-	if (valname == "state")
+	else if (valname == "state")
 	{
 		std::string statestr = lua_tostring(EventSystem::getLuaState(), -1);
 		lua_pop(EventSystem::getLuaState(), 1);
@@ -338,6 +338,35 @@ bool GameObject::setValue(std::string valname)
 			setState(STATE_ACTIVE);
 		if (statestr =="inactive" && getState() == STATE_ACTIVE)
 			setState(STATE_INACTIVE);
+	}
+	else if (valname == "layer")
+	{
+		std::string layer = lua_tostring(EventSystem::getLuaState(), -1);
+		lua_pop(EventSystem::getLuaState(), 1);
+		addToNetEventMask(NetEvent::DATA_SHAPE);
+		
+		if (layer == "base")
+		{
+			setLayer(WorldObject::LAYER_BASE);
+		}
+		else  if (layer =="air")
+		{
+			setLayer(WorldObject::LAYER_AIR);
+		}
+		else  if (layer =="dead")
+		{
+			setLayer(WorldObject::WorldObject::LAYER_DEAD);
+		}
+		else  if (layer == "normal")
+		{
+			setLayer(WorldObject::LAYER_BASE | WorldObject::LAYER_AIR);
+		}
+		else  if (layer == "nocollision")
+		{
+			setLayer(WorldObject::LAYER_NOCOLLISION);
+		}
+		
+		return true;
 	}
 	
 	return false;

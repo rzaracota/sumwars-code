@@ -608,6 +608,14 @@ class Region
 		 * \param group neue Gruppe des Objektes
 		 */
 		bool changeObjectGroup(WorldObject* object,WorldObject::Group group );
+		
+		/**
+		 * \fn bool changeObjectLayer(WorldObject* object,WorldObject::Layer layer)
+		 * \brief Aendert die Ebene eines Objektes
+		 * \param object Object fuer das die Ebene geaendert werden soll
+		 * \param layer neue Ebene des Objektes
+		 */
+		bool changeObjectLayer(WorldObject* object,WorldObject::Layer layer);
 
 		/**
 		 * \fn WorldObject* getObject ( int id)

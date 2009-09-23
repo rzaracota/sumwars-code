@@ -148,6 +148,35 @@ bool WorldObject::setValue(std::string valname)
 	}
 	else 
 	{
+		if (valname == "layer")
+		{
+			std::string layer = lua_tostring(EventSystem::getLuaState(), -1);
+			short newlayer = getLayer();
+			if (layer == "base")
+			{
+				newlayer = WorldObject::LAYER_BASE;
+			}
+			else  if (layer =="air")
+			{
+				newlayer = WorldObject::LAYER_AIR;
+			}
+			else  if (layer =="dead")
+			{
+				newlayer = WorldObject::WorldObject::LAYER_DEAD;
+			}
+			else  if (layer == "normal")
+			{
+				newlayer = WorldObject::LAYER_BASE | WorldObject::LAYER_AIR;
+			}
+			else  if (layer == "nocollision")
+			{
+				newlayer = WorldObject::LAYER_NOCOLLISION;
+			}
+			if (getRegion() != 0)
+			{
+				getRegion()->changeObjectLayer(this,(WorldObject::Layer) newlayer);
+			}
+		}
 		return GameObject::setValue(valname);
 	}
 	
@@ -192,5 +221,16 @@ void WorldObject::writeNetEvent(NetEvent* event, CharConv* cv)
 
 void WorldObject::processNetEvent(NetEvent* event, CharConv* cv)
 {
+	short oldlayer = getLayer();
 	GameObject::processNetEvent(event,cv);
+	
+	// wenn die Layer geaendert wird, die alte Layer vorruebergehend wiederherstellen
+	// der Region die Aenderung mitteilen und wiederherstellen
+	if (oldlayer != getLayer() && getRegion() != 0)
+	{
+		short newlayer = getLayer();
+		setLayer((WorldObject::Layer) oldlayer);
+		getRegion()->changeObjectLayer(this, (WorldObject::Layer) newlayer);
+		setLayer((WorldObject::Layer) newlayer);
+	}
 }

@@ -3836,6 +3836,8 @@ float Creature::getTimerPercent(int timer)
 
 void Creature::writeNetEvent(NetEvent* event, CharConv* cv)
 {
+	WorldObject::writeNetEvent(event,cv);
+	
 	if (event->m_data & NetEvent::DATA_COMMAND)
 	{
 		m_command.toString(cv);
@@ -3994,6 +3996,8 @@ void Creature::writeNetEvent(NetEvent* event, CharConv* cv)
 
 void Creature::processNetEvent(NetEvent* event, CharConv* cv)
 {
+	WorldObject::processNetEvent(event,cv);
+	
 	DEBUG5("object %i processing NetEvent %i data %i",getId(),event->m_type, event->m_data);
 	if (event->m_data & NetEvent::DATA_COMMAND)
 	{

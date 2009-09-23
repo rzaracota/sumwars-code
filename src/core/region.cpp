@@ -1312,6 +1312,80 @@ bool Region::changeObjectGroup(WorldObject* object,WorldObject::Group group )
 
 }
 
+bool Region::changeObjectLayer(WorldObject* object,WorldObject::Layer layer)
+{
+	short oldlayer = object->getLayer();
+	if (oldlayer == layer)
+		return true;
+	
+	bool result = true;
+	
+	if (oldlayer == WorldObject::LAYER_NOCOLLISION)
+	{
+		// Einfuegen in das Grid
+		Vector pos = object->getShape()->m_center;
+
+	 	// Einfuegen in das Grid
+		int x_g = (int) floor(0.25*pos.m_x);
+		int y_g = (int) floor(0.25*pos.m_y);
+		object->getGridLocation()->m_grid_x = x_g;
+		object->getGridLocation()->m_grid_y = y_g;
+
+
+	 	// Testen ob das Objekt in der Region liegt
+		if (x_g<0 || y_g<0 || x_g>=m_dimx || y_g>=m_dimy)
+		{
+			DEBUG5("create Object at %f %f",pos.m_x, pos.m_y);
+			return false;
+		}
+		else
+		{
+			if (object->isLarge())
+			{
+				DEBUG5("object %s is large",object->getName().c_str());
+				m_large_objects.insert(std::make_pair(object->getId(),object));
+				result = true;
+			}
+			else
+			{
+				Gridunit *gu = (m_data_grid->ind(x_g,y_g));
+
+				result = gu->insertObject(object);
+				DEBUG("insert into grid %i %i",x_g,y_g);
+			}
+		}
+	}
+	
+	if (layer == WorldObject::LAYER_NOCOLLISION)
+	{
+		if (object->isLarge())
+		{
+			if (m_large_objects.count(object->getId()) == 0)
+			{
+				result = false;
+			}
+			else
+			{
+				m_large_objects.erase(object->getId());
+			}
+		}
+		else
+		{
+			// aus dem Grid loeschen
+			int x = object->getGridLocation()->m_grid_x;
+			int y = object->getGridLocation()->m_grid_y;
+			DEBUG("deleting object in grid tile %i %i",x,y);
+			
+			Gridunit *gu = (m_data_grid->ind(x,y));
+			result = gu->deleteObject(object);
+			
+		}
+	}
+	
+	return result;
+}
+
+
 void Region::deleteProjectile(Projectile* proj)
 {
 	if (proj ==0)
