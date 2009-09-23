@@ -255,12 +255,20 @@ class Dialogue
 		static void cleanup();
 		
 		/**
-		 * \fn void addSpeaker(int id, std::string refname)
+		 * \fn void addSpeaker(int id, std::string refname, bool force = false)
 		 * \brief Fuegt der Gespraech einen Sprecher hinzu
 		 * \param id ID des Sprechers
 		 * \param refname Name unter dem der Sprecher angesprochen wird
+		 * \param force wenn auf true gesetzt, wird der Spieler aus seinem bisherigen Gespraech entfernt, falls er schon einen Dialog hat
 		 */
-		void addSpeaker(int id, std::string refname="");
+		void addSpeaker(int id, std::string refname="", bool force = false);
+		
+		/**
+		 * \fn void removeSpeaker(int id)
+		 * \brief Entfernt einen Sprecher aus dem Gespraech
+		 * \param id ID des Sprechers
+		 */
+		void removeSpeaker(int id);
 		
 		/**
 		 * \fn void speak(std::string refname, std::string text, std::string emotion, float time = 500)

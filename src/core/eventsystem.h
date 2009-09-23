@@ -495,6 +495,13 @@ class EventSystem
 		static int addSpeaker(lua_State *L);
 		
 		/**
+		 * \fn static int removeSpeaker(lua_State *L)
+		 * \brief fuegt dem Dialog einen Sprecher hinzu
+		 * \param L Lua Status
+		 */
+		static int removeSpeaker(lua_State *L);
+		
+		/**
 		 * \fn static int getSpeaker(lua_State *L)
 		 * \brief Gibt zu einem Sprecher das Objekt aus
 		 * \param L Lua Status

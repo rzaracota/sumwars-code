@@ -183,7 +183,7 @@ void Dialogue::cleanup()
 	m_npc_trades.clear();
 }
 
-void Dialogue::addSpeaker(int id, std::string refname)
+void Dialogue::addSpeaker(int id, std::string refname, bool force)
 {
 	if (id ==0)
 		return;
@@ -208,8 +208,16 @@ void Dialogue::addSpeaker(int id, std::string refname)
 	{
 		if (cr->getDialogueId()!= m_id)
 		{
-			ERRORMSG("cant add %i: %s to dialogue: has already dialogue",id, refname.c_str());
-			return;
+			if (!force)
+			{
+				ERRORMSG("cant add %i: %s to dialogue: has already dialogue",id, refname.c_str());
+				return;
+			}
+			else
+			{
+				cr->getDialogue()->removeSpeaker(cr->getId());
+				cr->setDialogue(m_id);
+			}
 		}
 	}
 	else
@@ -247,6 +255,49 @@ void Dialogue::addSpeaker(int id, std::string refname)
 		}
 	}
 
+}
+
+void Dialogue::removeSpeaker(int id)
+{
+	DEBUG("remove %i",id);
+	WorldObject* wo =0;
+	wo = m_region->getObject(id);
+	Creature* cr = dynamic_cast<Creature*>(wo);
+	if (cr == 0 || cr->getDialogueId() != m_id)
+		return;
+	
+	setSpeakerPosition(id, NONE);
+	
+	if (cr->getType() == "PLAYER")
+	{
+		m_nr_players --;
+	}
+	
+	while (!m_speech.empty() && getSpeaker(m_speech.front().first) == id)
+	{
+		m_started = true;
+		m_speech.pop_front();
+	}
+	
+	// alle Sprecherrollen des Spielers loeschen
+	std::map<std::string, int>::iterator it;
+	for (it = m_speaker.begin(); it != m_speaker.end(); )
+	{
+		if (it->second == id)
+		{
+			m_speaker.erase(it++);
+		}
+		else
+		{
+			++it;
+		}
+	}
+	
+	// Status des Spielers loeschen
+	m_speaker_state.erase(id);
+	
+	cr->setDialogue(0);
+	cr->clearSpeakText();
 }
 
 void Dialogue::speak(std::string refname, std::string text, std::string emotion,float time)

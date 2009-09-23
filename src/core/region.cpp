@@ -1165,6 +1165,15 @@ bool  Region::deleteObject (WorldObject* object)
 		
 	}
 	
+	if (object->isCreature())
+	{
+		Creature* cr = dynamic_cast<Creature*>(object);
+		if (cr != 0 && cr->getDialogue() != 0)
+		{
+			cr->getDialogue()->removeSpeaker(object->getId());
+		}
+	}
+	
 	 // Aus dem Binärbaum loeschen
 	if (object->getState() != WorldObject::STATE_STATIC)
 	{
