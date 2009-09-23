@@ -803,16 +803,25 @@ void World::handleSavegame(CharConv *cv, int slot)
 		pl->setState(WorldObject::STATE_ACTIVE,false);
 		pl->recalcDamage();
 		
-		RegionLocation regloc = pl->getRevivePosition();
-		short id = getRegionId(regloc.first);
-		if (id != -1)
+		// Auf Serverseite Spieler gleich in Region einfuegen, auf Clientseite auf Informationen warten
+		if (isServer())
 		{
-			insertPlayerIntoRegion(pl,id, regloc.second);
+			RegionLocation regloc = pl->getRevivePosition();
+		
+			short id = getRegionId(regloc.first);
+			if (id != -1)
+			{
+				insertPlayerIntoRegion(pl,id, regloc.second);
+			}
+			else
+			{
+				pl->setRevivePosition(m_player_start_location);
+				insertPlayerIntoRegion(pl, getRegionId(m_player_start_location.first), m_player_start_location.second);
+			}
 		}
 		else
 		{
-			pl->setRevivePosition(m_player_start_location);
-			insertPlayerIntoRegion(pl, getRegionId(m_player_start_location.first), m_player_start_location.second);
+			
 		}
 
 
