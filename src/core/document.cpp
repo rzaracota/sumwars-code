@@ -1527,13 +1527,13 @@ void Document::updateContent(float time)
 			m_modified |= WINDOWS_MODIFIED;
 		}
 	}
-	else if (player->getDialogueId() != 0 
+	
+	if (player->getDialogueId() != 0 
 				|| (player->getRegion() !=0 && player->getRegion()->getCutsceneMode () == true))
 	{
-		
-		if (getGUIState()->m_shown_windows & (~QUESTIONBOX) != 0)
+		if ((getGUIState()->m_shown_windows & (~(QUESTIONBOX | SAVE_EXIT))) != 0)
 		{
-			getGUIState()->m_shown_windows &= QUESTIONBOX;
+			getGUIState()->m_shown_windows &= (QUESTIONBOX  | SAVE_EXIT);
 			m_modified |= WINDOWS_MODIFIED;
 		}
 	}
