@@ -1111,6 +1111,9 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 				cr = static_cast<Creature*>(goalobj);
 				if (cr->getDialogueId() ==0 && !(cr->hasScriptCommand()))
 				{
+					Vector dir = getShape()->m_center - cr->getShape()->m_center;
+					cr->setAngle(dir.angle());
+					setAngle(dir.angle() + PI);
 					Dialogue* dia = new Dialogue(getRegion(), cr->getRefName());
 					EventSystem::setDialogue(dia);
 					dia->addSpeaker(getId(),"player");
