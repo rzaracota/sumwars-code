@@ -10,6 +10,68 @@ void WeaponAttr::operator=(WeaponAttr& other)
 	m_dattack_speed = other.m_dattack_speed;
 }
 
+int WeaponAttr::getValue(std::string valname)
+{
+	if (valname =="weapon_type")
+	{
+		lua_pushstring(EventSystem::getLuaState() , m_weapon_type.c_str() );
+		return 1;
+	}
+	else if (valname == "attack_range")
+	{
+		lua_pushnumber(EventSystem::getLuaState() , m_attack_range );
+		return 1;
+	}
+	else if (valname == "two_handed")
+	{
+		lua_pushboolean(EventSystem::getLuaState() , m_two_handed );
+		return 1;
+	}
+	else if (valname == "attack_speed")
+	{
+		lua_pushnumber(EventSystem::getLuaState() , m_dattack_speed );
+		return 1;
+	}
+	else
+	{
+		return m_damage.getValue(valname);
+	}
+	return 0;
+}
+
+bool WeaponAttr::setValue(std::string valname)
+{
+	if (valname =="weapon_type")
+	{
+		m_weapon_type = lua_tostring(EventSystem::getLuaState() ,-1);
+		lua_pop(EventSystem::getLuaState(), 1);
+		return true;
+	}
+	else if (valname == "attack_range")
+	{
+		m_attack_range = lua_tonumber(EventSystem::getLuaState() ,-1);
+		lua_pop(EventSystem::getLuaState(), 1);
+		return true;
+	}
+	else if (valname == "two_handed")
+	{
+		m_two_handed = lua_toboolean(EventSystem::getLuaState() ,-1);
+		lua_pop(EventSystem::getLuaState(), 1);
+		return true;
+	}
+	else if (valname == "attack_speed")
+	{
+		m_dattack_speed =(short) lua_tonumber(EventSystem::getLuaState() ,-1);
+		lua_pop(EventSystem::getLuaState(), 1);
+		return true;
+	}
+	else
+	{
+		return m_damage.setValue(valname);
+	}
+	return false;
+}
+
 ItemBasicData::ItemBasicData()
 {
 	m_useup_effect=0;
@@ -188,6 +250,197 @@ void Item::fromString(CharConv* cv)
 	{
 		cv->fromBuffer(m_price);
 	}
+}
+
+int Item::getValue(std::string valname)
+{
+	if (valname =="type")
+	{
+		if (m_type ==ARMOR)
+			lua_pushstring(EventSystem::getLuaState() , "armor" );
+		else if (m_type ==HELMET)
+			lua_pushstring(EventSystem::getLuaState() , "helmet" );
+		else  if (m_type ==GLOVES)
+			lua_pushstring(EventSystem::getLuaState() , "gloves" );
+		else  if (m_type ==WEAPON)
+			lua_pushstring(EventSystem::getLuaState() , "weapon" );
+		else  if (m_type ==SHIELD)
+			lua_pushstring(EventSystem::getLuaState() , "shield" );
+		else  if (m_type ==POTION)
+			lua_pushstring(EventSystem::getLuaState() , "potion" );
+		else  if (m_type ==RING)
+			lua_pushstring(EventSystem::getLuaState() , "ring" );
+		else  if (m_type ==AMULET)
+			lua_pushstring(EventSystem::getLuaState() , "amulet" );
+		else  if (m_type ==GOLD_TYPE)
+			lua_pushstring(EventSystem::getLuaState() , "gold" );
+		else 
+			lua_pushstring(EventSystem::getLuaState() , "noitem" );
+		return 1;
+	}
+	else if (valname =="subtype")
+	{
+		lua_pushstring(EventSystem::getLuaState() , m_subtype.c_str() );
+		return 1;
+	}
+	else if (valname == "size")
+	{
+		if (m_size == BIG)
+			lua_pushstring(EventSystem::getLuaState() , "big" );
+		else if (m_size == MEDIUM)
+			lua_pushstring(EventSystem::getLuaState() , "medium" );
+		else if (m_size == SMALL)
+			lua_pushstring(EventSystem::getLuaState() , "small" );
+		else if (m_size == GOLD)
+			lua_pushstring(EventSystem::getLuaState() , "gold" );
+		return 1;
+	}
+	else if (valname == "price" || valname == "value")
+	{
+		lua_pushnumber(EventSystem::getLuaState() , m_price );
+		return 1;
+	}
+	else if (valname == "magic_power")
+	{
+		lua_pushnumber(EventSystem::getLuaState() , m_magic_power );
+		return 1;
+	}
+	else if (valname == "char_requirement")
+	{
+		lua_pushstring(EventSystem::getLuaState() , m_char_req.c_str() );
+		return 1;		
+	}
+	else if (valname == "level_requirement")
+	{
+		lua_pushnumber(EventSystem::getLuaState() , m_level_req );
+		return 1;
+	}
+	else if (valname == "rarity")
+	{
+		if (m_rarity == NORMAL)
+			lua_pushstring(EventSystem::getLuaState() , "normal" );
+		else if (m_rarity == MAGICAL)
+			lua_pushstring(EventSystem::getLuaState() , "magical" );
+		else if (m_rarity == RARE)
+			lua_pushstring(EventSystem::getLuaState() , "rare" );
+		else if (m_rarity == UNIQUE)
+			lua_pushstring(EventSystem::getLuaState() , "unique" );
+		
+		return 1;
+	}
+	else
+	{
+		int ret = 0;
+		if (m_weapon_attr != 0)
+			ret = m_weapon_attr->getValue(valname);
+		if (ret != 0)
+			return ret;
+		
+		if (m_useup_effect != 0)
+			ret = m_useup_effect->getValue(valname);
+		if (ret != 0)
+			return ret;
+		
+		if (m_equip_effect != 0)
+			ret = m_equip_effect->getValue(valname);
+		if (ret != 0)
+			return ret;
+		
+	}
+	return 0;
+}
+
+bool Item::setValue(std::string valname)
+{
+	if (valname =="subtype")
+	{
+		m_subtype = lua_tostring(EventSystem::getLuaState() ,-1);
+		lua_pop(EventSystem::getLuaState(), 1);
+		return true;
+	}
+	else if (valname == "size")
+	{
+		std::string sizestr = lua_tostring(EventSystem::getLuaState() ,-1);
+		lua_pop(EventSystem::getLuaState(), 1);
+		if (sizestr == "big")
+			m_size = BIG;
+		else if (sizestr == "medium")
+			m_size = MEDIUM;
+		else if (sizestr == "small")
+			m_size = SMALL;
+		
+		return true;
+	}
+	else if (valname == "price" || valname == "value")
+	{
+		m_price = (int) lua_tonumber(EventSystem::getLuaState() ,-1);
+		lua_pop(EventSystem::getLuaState(), 1);
+		return true;
+	}
+	else if (valname == "magic_power")
+	{
+		m_magic_power = lua_tonumber(EventSystem::getLuaState() ,-1);
+		lua_pop(EventSystem::getLuaState(), 1);
+		return true;
+	}
+	else if (valname == "char_requirement")
+	{
+		m_char_req = lua_tostring(EventSystem::getLuaState() ,-1);
+		lua_pop(EventSystem::getLuaState(), 1);
+		return true;		
+	}
+	else if (valname == "level_requirement")
+	{
+		m_level_req = lua_tonumber(EventSystem::getLuaState() ,-1);
+		lua_pop(EventSystem::getLuaState(), 1);
+		return true;
+	}
+	else if (valname == "rarity")
+	{
+		std::string rstr = lua_tostring(EventSystem::getLuaState() ,-1);
+		lua_pop(EventSystem::getLuaState(), 1);
+		if (rstr == "normal")
+			m_rarity = NORMAL;
+		if (rstr == "magical")
+			m_rarity = MAGICAL;
+		if (rstr == "rare")
+			m_rarity = RARE;
+		if (rstr == "unique")
+			m_rarity = UNIQUE;
+		
+		return true;
+	}
+	else
+	{
+		bool ret = false;
+		if (m_weapon_attr != 0)
+			ret = m_weapon_attr->setValue(valname);
+		if (ret == true)
+			return ret;
+		
+		if (m_useup_effect != 0)
+			ret = m_useup_effect->setValue(valname);
+		if (ret == true)
+			return ret;
+		
+		// Equip Effekt wird auf Verdacht erzeugt und wieder geloescht, wenn kein Wert geschrieben wurde
+		bool created = false;
+		if (m_equip_effect != 0)
+		{
+			m_equip_effect = new CreatureBaseAttrMod;
+			created = true;
+		}
+		ret = m_equip_effect->setValue(valname);
+		if (ret == true)
+			return ret;
+		
+		if (created)
+		{
+			delete m_equip_effect;
+			m_equip_effect = 0;
+		}
+	}
+	return false;
 }
 
 

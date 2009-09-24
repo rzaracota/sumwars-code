@@ -2,6 +2,7 @@
 #include "region.h"
 #include "player.h"
 #include "item.h"
+#include "itemfactory.h"
 #include "dialogue.h"
 #include "scriptobject.h"
 
@@ -22,6 +23,9 @@ Damage* EventSystem::m_damage=0;
 CreatureBaseAttrMod* EventSystem::m_base_mod=0;
 
 CreatureDynAttrMod* EventSystem::m_dyn_mod=0;
+
+Item* EventSystem::m_item=0;
+bool EventSystem::m_item_in_game = false;
 
 CharConv* EventSystem::m_charconv =0;
 
@@ -57,7 +61,19 @@ void EventSystem::init()
 	lua_register(m_lua, "createObject", createObject);
 	lua_register(m_lua, "createScriptObject", createScriptObject);
 	lua_register(m_lua, "deleteObject", deleteObject);
+	
 	lua_register(m_lua, "dropItem", dropItem);
+	lua_register(m_lua, "createItem", createItem);
+	lua_register(m_lua, "createRandomItem", createRandomItem);
+	lua_register(m_lua, "getItemValue", getItemValue);
+	lua_register(m_lua, "setItemValue", setItemValue);
+	lua_register(m_lua, "searchPlayerItem", searchPlayerItem);
+	lua_register(m_lua, "getPlayerItem", getPlayerItem);
+	lua_register(m_lua, "removePlayerItem", removePlayerItem);
+	lua_register(m_lua, "insertPlayerItem",insertPlayerItem );
+	lua_register(m_lua, "getInventoryPosition",getInventoryPosition );
+	lua_register(m_lua, "deleteItem", deleteItem);
+	
 	
 	lua_register(m_lua, "getLocation", getLocation);
 	lua_register(m_lua, "addLocation", addLocation);
@@ -233,6 +249,13 @@ std::string EventSystem::getReturnValue()
 		return ret;
 	}
 	return "";
+}
+
+void EventSystem::setItem(Item* item)
+{
+	if (!m_item_in_game && m_item != 0)
+		delete m_item;
+	m_item = item;
 }
 
 bool EventSystem::executeEvent(Event* event)
@@ -1327,42 +1350,308 @@ int EventSystem::getObjectsInArea(lua_State *L)
 int EventSystem::dropItem(lua_State *L)
 {
 	int argc = lua_gettop(L);
-	if (argc>=2 && (lua_istable(L,2) || lua_isstring(L,2)) && lua_isstring(L,1))
+	if (argc>=1 && (lua_istable(L,1) || lua_isstring(L,1)))
 	{
-		Item::Subtype subtype = lua_tostring(L, 1);
-		Vector pos = getVector(L,2);
+		Vector pos = getVector(L,1);
 
-		float magic_power=0;
-		if (argc>=3 && lua_isnumber(L,3))
+		if (m_region!=0 && m_item != 0 && m_item_in_game == false)
 		{
-			magic_power= lua_tonumber(L, 3);
-		}
-
-		if (m_region!=0)
-		{
-			m_region->dropItem(subtype, pos, int (magic_power));
+			m_region->dropItem(m_item,pos);
+			m_item_in_game = true;
 		}
 	}
 	else
 	{
-		ERRORMSG("Syntax: :dropItem(string itemtype,{float x,float y}, [magic_power]");
+		ERRORMSG("Syntax: :dropItem({float x,float y}");
 	}
 	return 0;
 }
 
-int EventSystem::dropRandomItem(lua_State *L)
+
+int EventSystem::createItem(lua_State *L)
 {
 	int argc = lua_gettop(L);
-	if (argc>=2 && (lua_istable(L,2) || lua_isstring(L,2)) && lua_isstring(L,1))
+	if (argc>=1  && lua_isstring(L,1))
 	{
-		
+		Item::Subtype subtype = lua_tostring(L, 1);
+	
+
+		float magic_power=0;
+		if (argc>=2 && lua_isnumber(L,2))
+		{
+			magic_power= lua_tonumber(L, 2);
+		}
+		Item::Rarity rarity = Item::NORMAL;
+		if (argc>=3 && lua_isnumber(L,3))
+		{
+			std::string rar = lua_tostring(L, 3);
+			if (rar == "magical")
+				rarity = Item::MAGICAL;
+			if (rar == "rare")
+				rarity = Item::RARE;
+			if (rar == "unique")
+				rarity = Item::UNIQUE;
+		}
+
+		Item* item = ItemFactory::createItem(ItemFactory::getBaseType(subtype),subtype,0,magic_power,rarity);
+		setItem(item);
+		m_item_in_game = false;
 	}
 	else
 	{
-		ERRORMSG("Syntax: :dropItem({bigprob, mediumprob, smallprob, goldprob},{float x,float y},int min_level, int max_level, int min_gold, int max_gold, float magic_prob, [magic_power]");
+		ERRORMSG("Syntax: createItem(string itemtype, [magic_power],[rarity]");
+	}
+	return 0;
+	
+}
+
+int EventSystem::createRandomItem(lua_State *L)
+{
+	int argc = lua_gettop(L);
+	if (argc >=3 && lua_istable(L,1) && lua_istable(L,2) && lua_istable(L,3))
+	{
+		DropSlot ds;
+		ds.m_size_probability[4] = 1;
+		for (int i=1; i<=4; i++)
+		{
+			lua_pushinteger(L, i);
+			lua_gettable(L, 1);
+			ds.m_size_probability[i-1] = lua_tonumber(L, -1);
+			ds.m_size_probability[4] -= ds.m_size_probability[i-1];
+			lua_pop(L, 1);
+		}
+		
+		// Vektor zum Tabelle laden missbrauchen
+		Vector vec;
+		vec = getVector(L,2);
+		ds. m_min_level = (int) vec.m_x;
+		ds. m_max_level = (int) vec.m_y;
+		
+		vec = getVector(L,3);
+		ds.m_min_gold = (int) vec.m_x;
+		ds.m_max_gold = (int) vec.m_y;
+		
+		if (argc>=4 && lua_isnumber(L,4))
+		{
+			ds.m_magic_probability = lua_tonumber(L,4);
+		}
+		
+		if (argc>=5 && lua_isnumber(L,5))
+		{
+			ds.m_magic_power = lua_tonumber(L,5);
+		}
+		
+		Item* item = ItemFactory::createItem(ds);
+		setItem(item);
+		m_item_in_game = false;
+
+	}
+	else
+	{
+		ERRORMSG("Syntax: createRandomItem({prob_big, prob_medium, pro_small, prob_gold},{min_level, max_level},{min_gold, max_gold}, magic_prob, magic_power)");
 	}
 	return 0;
 }
+
+int EventSystem::getItemValue(lua_State *L)
+{
+	int argc = lua_gettop(L);
+	if (argc>=1  && lua_isstring(L,1))
+	{
+		std::string valname = lua_tostring(L, 1);
+		if (m_item != 0)
+		{
+			return m_item->getValue(valname);
+		}
+		return 0;
+	}
+	else
+	{
+		ERRORMSG("Syntax: getItemValue(string valname)");
+	}
+	return 0;
+}
+
+int EventSystem::setItemValue(lua_State *L)
+{
+	int argc = lua_gettop(L);
+	if (argc>=1  && lua_isstring(L,1))
+	{
+		std::string valname = lua_tostring(L, 1);
+		if (m_item != 0)
+		{
+			m_item->setValue(valname);
+		}
+		return 0;
+	}
+	else
+	{
+		ERRORMSG("Syntax: setItemValue(string valname, value)");
+	}
+	return 0;
+}
+
+int EventSystem::searchPlayerItem(lua_State *L)
+{
+	int argc = lua_gettop(L);
+	if (argc>=2  && lua_isnumber(L,1) && lua_isstring(L,2))
+	{
+		int id = lua_tointeger(L, 1);
+		std::string subtype = lua_tostring(L, 2);
+		Player* pl = dynamic_cast<Player*>(World::getWorld()->getPlayer(id));
+		if (pl != 0)
+		{
+			short startpos = 0;
+			if (argc>=3  && lua_isnumber(L,3))
+			{
+				startpos = lua_tointeger(L, 3);
+			}
+			else if (argc>=3  && lua_isstring(L,3))
+			{
+				std::string posstr = lua_tostring(L, 3);
+				startpos = Equipement::stringToPosition(posstr, pl->isUsingSecondaryEquip ());
+			}
+			short ret = pl->getEquipement()->findItem(subtype,startpos);
+			lua_pushnumber(L,ret);
+			return 1;
+		}
+		return 0;
+	}
+	else
+	{
+		ERRORMSG("Syntax: searchPlayerItem(int playerid, string subtype, [int startpos])");
+	}
+	return 0;
+}
+
+int EventSystem::getPlayerItem(lua_State *L)
+{
+	int argc = lua_gettop(L);
+	if (argc>=2  && lua_isnumber(L,1) && (lua_isnumber(L,2) || lua_isstring(L,2)))
+	{
+		int id = lua_tointeger(L, 1);
+		std::string subtype = lua_tostring(L, 2);
+		Player* pl = dynamic_cast<Player*>(World::getWorld()->getPlayer(id));
+		if (pl != 0)
+		{
+			short pos =0;
+			if (lua_isnumber(L,2))
+			{
+				pos = (short) lua_tonumber(L,2);
+			}
+			else
+			{
+				std::string subtype = lua_tostring(L,2);
+				pos = pl->getEquipement()->findItem(subtype);
+			}
+			
+			Item* item = pl->getEquipement()->getItem(pos);
+			if (item != 0)
+			{
+				setItem(item);
+				m_item_in_game = true;
+			}
+		}
+	}
+	else
+	{
+		ERRORMSG("Syntax: getPlayerItem(int playerid, string subtype | short itempos)");
+	}
+	return 0;
+}
+
+int EventSystem::removePlayerItem(lua_State *L)
+{
+	int argc = lua_gettop(L);
+	if (argc>=2  && lua_isnumber(L,1) && (lua_isnumber(L,2) || lua_isstring(L,2)))
+	{
+		int id = lua_tointeger(L, 1);
+		std::string subtype = lua_tostring(L, 2);
+		Player* pl = dynamic_cast<Player*>(World::getWorld()->getPlayer(id));
+		if (pl != 0)
+		{
+			short pos =0;
+			if (lua_isnumber(L,2))
+			{
+				pos = (short) lua_tonumber(L,2);
+			}
+			else
+			{
+				std::string subtype = lua_tostring(L,2);
+				pos = pl->getEquipement()->findItem(subtype);
+			}
+			
+			Item* item = 0;
+			pl->getEquipement()->swapItem(item,pos);
+			if (item != 0)
+			{
+				setItem(item);
+				m_item_in_game = false;
+			}
+		}
+	}
+	else
+	{
+		ERRORMSG("Syntax: removePlayerItem(int playerid, string subtype | short itempos)");
+	}
+	return 0;
+}
+
+int EventSystem::getInventoryPosition(lua_State *L)
+{
+	int argc = lua_gettop(L);
+	if (argc>=2  && lua_isnumber(L,1) &&  lua_isstring(L,2))
+	{
+		int id = lua_tointeger(L, 1);
+		std::string posstr = lua_tostring(L, 2);
+		Player* pl = dynamic_cast<Player*>(World::getWorld()->getPlayer(id));
+		if (pl != 0)
+		{
+			short ret = Equipement::stringToPosition(posstr, pl->isUsingSecondaryEquip ());
+			lua_pushnumber(L,ret);
+			return 1;
+		}
+	}
+	else
+	{
+		ERRORMSG("Syntax: removePlayerItem(int playerid, string subtype | short itempos)");
+	}
+	return 0;
+}
+
+int EventSystem::insertPlayerItem(lua_State *L)
+{
+	int argc = lua_gettop(L);
+	if (argc>=1  && lua_isnumber(L,1))
+	{
+		int id = lua_tointeger(L, 1);
+		Player* pl = dynamic_cast<Player*>(World::getWorld()->getPlayer(id));
+		if (pl != 0 && m_item_in_game == false)
+		{
+			bool equip = true;
+			if (argc>=2  && lua_isboolean(L,2))
+			{
+				equip = lua_toboolean(L,2);
+			}
+			pl->insertItem(m_item,equip);
+			m_item_in_game = true;
+		}
+	}
+	else
+	{
+		ERRORMSG("Syntax: insertPlayerItem(int playerid, [bool equip])");
+	}
+	
+	return 0;
+}
+
+int EventSystem::deleteItem(lua_State *L)
+{
+	setItem(0);
+	m_item_in_game = false;
+	return 0;
+}
+
 
 int EventSystem::addLocation(lua_State *L)
 {

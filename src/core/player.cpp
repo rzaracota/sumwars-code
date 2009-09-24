@@ -838,7 +838,10 @@ bool Player::onItemClick(ClientCommand* command)
 short Player::insertItem(Item* itm, bool use_equip)
 {
 	if (itm ==0)
+	{
 		ERRORMSG("tried to insert null item");
+		return 0;
+	}
 	bool may_equip = use_equip && checkItemRequirements(itm);
 	
 	short pos = getEquipement()->insertItem(itm,true,may_equip, m_secondary_equip);

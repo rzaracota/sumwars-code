@@ -392,6 +392,85 @@ short  Equipement::insertItem(Item* item, bool check_useup,bool use_equip, bool 
 
 }
 
+short Equipement::findItem(Item::Subtype subtype,short startpos)
+{
+	int start = startpos;
+	for (int i=std::max(0,start); i<CURSOR_ITEM; i++)
+	{
+		if (m_body_items[i] !=0 && m_body_items[i]->m_subtype == subtype)
+			return i;
+	}
+	
+	Item* item;
+	for (int i= std::max(int(BIG_ITEMS),start); i< BIG_ITEMS+m_inventory.getMaxBig(); i++)
+	{
+		item = m_inventory.getItem(Item::BIG, i - BIG_ITEMS);
+		if (item != 0 && item->m_subtype == subtype)
+			return i;
+	}
+	
+	for (int i= std::max(int(BIG_ITEMS),start); i< BIG_ITEMS+m_inventory.getMaxBig(); i++)
+	{
+		item = m_inventory.getItem(Item::BIG, i - BIG_ITEMS);
+		if (item != 0 && item->m_subtype == subtype)
+			return i;
+	}
+	
+	for (int i= std::max(int(MEDIUM_ITEMS),start); i< MEDIUM_ITEMS+m_inventory.getMaxMedium(); i++)
+	{
+		item = m_inventory.getItem(Item::MEDIUM, i - MEDIUM_ITEMS);
+		if (item != 0 && item->m_subtype == subtype)
+			return i;
+	}
+	
+	for (int i= std::max(int(SMALL_ITEMS),start); i< SMALL_ITEMS+m_inventory.getMaxSmall(); i++)
+	{
+		item = m_inventory.getItem(Item::SMALL, i - SMALL_ITEMS);
+		if (item != 0 && item->m_subtype == subtype)
+			return i;
+	}
+	
+	return NONE;
+}
+
+short Equipement::stringToPosition(std::string posstr, bool secondary)
+{
+	if (posstr == "armor")
+		return ARMOR;
+	else if (posstr == "helmet")
+		return HELMET;
+	else if (posstr == "gloves")
+		return GLOVES;
+	else if (posstr == "shield")
+	{
+		if (!secondary)
+			return SHIELD;
+		else
+			return SHIELD2;
+	}
+	else if (posstr == "weapon")
+	{
+		if (!secondary)
+			return WEAPON;
+		else
+			return WEAPON2;
+	}
+	else if (posstr == "ring_left")
+		return RING_LEFT;
+	else if (posstr == "ring_right")
+		return RING_RIGHT;
+	else if (posstr == "amulet")
+		return AMULET;
+	else if (posstr == "big_items")
+		return BIG_ITEMS;
+	else if (posstr == "medium_items")
+		return MEDIUM_ITEMS;
+	else if (posstr == "small_items")
+		return SMALL_ITEMS;
+
+ 	return NONE;
+}
+
 int Equipement::getNumberItems()
 {
 	int nr =0;

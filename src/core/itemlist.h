@@ -272,6 +272,22 @@ class Equipement
 	short insertItem(Item* item, bool check_useup=true, bool use_equip= false, bool use_secondary=false);
 	
 	/**
+	 * \fn short findItem(Item::Subtype subtype, short startpos = 0)
+	 * \param subtype Itemtyp
+	 * \param startpos Es werden nur Position groesser oder gleich startpos durchsucht
+	 * \brief Gibt die erste Position aus, auf der sich ein Item mit dem angegebenen Typ befindet. Gibt 0 aus, wenn keine Position gefunden wurde
+	 */
+	short findItem(Item::Subtype subtype, short startpos = 0);
+	
+	/**
+	 * \fn short stringToPosition(std::string posstr, bool secondary = false)
+	 * \brief Konvertiert Positionsstring in eine position
+	 * \param posstr String der eine Position bezeichnet
+	 * \param secondary Wenn auf true gesetzt, wird die sekundaere Ausruestung ausgegeben
+	 */
+	static short stringToPosition(std::string posstr, bool secondary = false);
+	
+	/**
 	 * \fn bool swapCursorItem(int pos)
 	 * \param pos Position des Items
 	 * \brief Tauscht das aktuelle Cursoritem mit dem an der angegebenen Position

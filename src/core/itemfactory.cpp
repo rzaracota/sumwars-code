@@ -81,8 +81,17 @@ Item* ItemFactory::createGold(int value, int id)
 void ItemFactory::createMagicMods(Item* item, float* modchance, float magic_power, float min_enchant, float max_enchant)
 {
 	DEBUG5("magic power %f min_enchant %f",magic_power, min_enchant);
-	if (magic_power < min_enchant)
-		return;
+	if (magic_power < min_enchant && magic_power != 0)
+	{
+		if (item->m_type == Item::RING || item->m_type == Item::AMULET)
+		{
+			magic_power = min_enchant+1;
+		}
+		else
+		{
+			return;
+		}
+	}
 	
 	// Modifikationen des Items auswuerfeln
 	DEBUG5("mods auswuerfeln");
@@ -123,7 +132,7 @@ void ItemFactory::createMagicMods(Item* item, float* modchance, float magic_powe
 
 		// Anzahl verschiedene Verzauberungen
 	int num_mods=0;
-	while (magic_power>min_enchant && num_mods<4)
+	while (magic_power>=min_enchant && num_mods<4)
 	{
 		if (item->m_rarity == Item::NORMAL)
 		{
@@ -193,25 +202,25 @@ void ItemFactory::createMagicMods(Item* item, float* modchance, float magic_powe
 				break;
 
 			case RESIST_PHYS_MOD:
-				item->m_equip_effect->m_dresistances[Damage::PHYSICAL] += (short) ceil(sqrtmp*0.5);
+				item->m_equip_effect->m_dresistances[Damage::PHYSICAL] += (short) ceil(sqrtmp*0.3);
 				break;
 
 			case RESIST_FIRE_MOD:
-				item->m_equip_effect->m_dresistances[Damage::FIRE] += (short) ceil(sqrtmp*1.0);
+				item->m_equip_effect->m_dresistances[Damage::FIRE] += (short) ceil(sqrtmp*0.6);
 				break;
 
 			case RESIST_ICE_MOD:
-				item->m_equip_effect->m_dresistances[Damage::ICE] += (short) ceil(sqrtmp*1.0);
+				item->m_equip_effect->m_dresistances[Damage::ICE] += (short) ceil(sqrtmp*0.6);
 				break;
 
 			case RESIST_AIR_MOD:
-				item->m_equip_effect->m_dresistances[Damage::AIR] += (short) ceil(sqrtmp*1.0);
+				item->m_equip_effect->m_dresistances[Damage::AIR] += (short) ceil(sqrtmp*0.6);
 				break;
 
 			case RESIST_ALL_MOD:
-				item->m_equip_effect->m_dresistances[Damage::FIRE] += (short) ceil(sqrtmp*0.5);
-				item->m_equip_effect->m_dresistances[Damage::ICE] += (short) ceil(sqrtmp*0.5);
-				item->m_equip_effect->m_dresistances[Damage::AIR] += (short) ceil(sqrtmp*0.5);
+				item->m_equip_effect->m_dresistances[Damage::FIRE] += (short) ceil(sqrtmp*0.3);
+				item->m_equip_effect->m_dresistances[Damage::ICE] += (short) ceil(sqrtmp*0.3);
+				item->m_equip_effect->m_dresistances[Damage::AIR] += (short) ceil(sqrtmp*0.3);
 				break;
 
 			case DAMAGE_PHYS_MOD:

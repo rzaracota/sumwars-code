@@ -22,6 +22,7 @@ class Dialogue;
 class Damage;
 struct CreatureBaseAttrMod;
 struct CreatureDynAttrMod;
+struct Item;
 
 /**
  * \class EventSystem
@@ -140,6 +141,13 @@ class EventSystem
 		{
 			m_dyn_mod = dyn_mod;
 		}
+		
+		/**
+		 * \fn 		static void setItem(Item* item)
+		 * \brief Setzt das aktuelle Item
+		 * \param item Item
+		 */
+		static void setItem(Item* item);
 
 		/**
 		 * \fn static std::string getReturnValue()
@@ -357,11 +365,66 @@ class EventSystem
 		 */
 		static int dropItem(lua_State *L);
 		
+		
 		/**
-		 * \fn static int dropRandomItem(lua_State *L)
+		 * \fn static int createItem(lua_State *L)
+		 * \brief Erzeugt einen neuen Gegenstand und speichert ihn in dem aktuellen Gegenstand
+		 */
+		static int createItem(lua_State *L);
+		
+		/**
+		 * \fn static int createRandomItem(lua_State *L)
 		 * \brief Erzeugt einen zufaelligen Gegenstand
 		 */
-		static int dropRandomItem(lua_State *L);
+		static int createRandomItem(lua_State *L);
+		
+		/**
+		 * \fn static int getItemValue(lua_State *L)
+		 * \brief Gibt einen Wert des aktuellen Items aus
+		 */
+		static int getItemValue(lua_State *L);
+		
+		/**
+		 * \fn static int setItemValue(lua_State *L)
+		 * \brief Setzt einen Wert des aktuellen Items aus
+		 */
+		static int setItemValue(lua_State *L);
+		
+		/**
+		 * \fn static int searchPlayerItem(lua_State *L)
+		 * \brief Durchsucht das Inventar eines Spieler nach einem Item
+		 */
+		static int searchPlayerItem(lua_State *L);
+		
+		/**
+		 * \fn static int getPlayerItem(lua_State *L)
+		 * \brief Setzt ein Item des Spielers als aktuelles Item
+		 */
+		static int getPlayerItem(lua_State *L);
+		
+		/**
+		 * \fn static int removePlayerItem(lua_State *L)
+		 * \brief Entfernt ein Item aus dem Inventar des Spielers. Das Item bleibt als aktuelles Item erhalten
+		 */
+		static int removePlayerItem(lua_State *L);
+		
+		/**
+		 * \fn static int insertPlayerItem(lua_State *L)
+		 * \brief Fuegt das aktuelle Item in das Inventar des Spielers ein
+		 */
+		static int insertPlayerItem(lua_State *L);
+		
+		/**
+		 * \fn static int getInventoryPosition(lua_State *L)
+		 * \brief Gibt die Nummer einer Position im Inventar aus
+		 */
+		static int getInventoryPosition(lua_State *L);
+		
+		/**
+		 * \fn static int deleteItem(lua_State *L)
+		 * \brief Loescht das aktuelle Item
+		 */
+		static int deleteItem(lua_State *L);
 		
 		/**
 		 * \fn static int addLocation(lua_State *L)
@@ -725,6 +788,18 @@ class EventSystem
 		 * \brief Objekt mit dynamischen Attributen von Kreaturen
 		 */
 		static CreatureDynAttrMod* m_dyn_mod;
+		
+		/**
+		 * \var static Item* m_item
+		 * \brief aktuelles Item
+		 */
+		static Item* m_item;
+		
+		/**
+		 * \var  static bool m_item_in_game
+		 * \brief Gibt an, ob das aktuelle Item sich im Inventar eines Spieler oder auf dem Boden befindet
+		 */
+		static bool m_item_in_game;
 		
 		/**
 		 * \var static CharConv* m_charconv

@@ -348,7 +348,6 @@ int Damage::getValue(std::string valname)
 		Vector v(m_min_damage[AIR], m_max_damage[AIR]);
 		EventSystem::pushVector(EventSystem::getLuaState(), v);
 		return 1;
-		return 2;
 	}
 	else if (valname =="air_mult")
 	{
@@ -360,7 +359,6 @@ int Damage::getValue(std::string valname)
 		Vector v(m_min_damage[PHYSICAL], m_max_damage[PHYSICAL]);
 		EventSystem::pushVector(EventSystem::getLuaState(), v);
 		return 1;
-		return 2;
 	}
 	else if (valname =="phys_mult")
 	{

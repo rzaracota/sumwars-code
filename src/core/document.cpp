@@ -1527,8 +1527,7 @@ void Document::updateContent(float time)
 			m_modified |= WINDOWS_MODIFIED;
 		}
 	}
-	
-	if (player->getDialogueId() != 0 
+	else if (player->getDialogueId() != 0 
 				|| (player->getRegion() !=0 && player->getRegion()->getCutsceneMode () == true))
 	{
 		if ((getGUIState()->m_shown_windows & (~(QUESTIONBOX | SAVE_EXIT))) != 0)

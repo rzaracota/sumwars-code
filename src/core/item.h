@@ -107,6 +107,20 @@ struct WeaponAttr
 	 * \brief Zuweisungsoperator
 	 */
 	void operator=(WeaponAttr& other);
+	
+	/**
+	 * \fn virtual int getValue(std::string valname)
+	 * \brief Schiebt den gewuenschten Attributwert eines Objektes auf den Lua Stack
+	 * \param valname Name des Wertes
+	 */
+	virtual int getValue(std::string valname);
+	
+	/**
+	 * \fn virtual bool setValue(std::string valname)
+	 * \brief Setzt den gewuenschten Attributwert eines Objektes
+	 * \param valname Name des Wertes
+	 */
+	virtual bool setValue(std::string valname);
 };
 
 struct ItemBasicData;
@@ -226,6 +240,20 @@ struct Item {
 	 * \param cv Eingabepuffer
 	 */
 	virtual void fromString(CharConv* cv);
+	
+	/**
+	 * \fn virtual int getValue(std::string valname)
+	 * \brief Schiebt den gewuenschten Attributwert eines Objektes auf den Lua Stack
+	 * \param valname Name des Wertes
+	 */
+	virtual int getValue(std::string valname);
+	
+	/**
+	 * \fn virtual bool setValue(std::string valname)
+	 * \brief Setzt den gewuenschten Attributwert eines Objektes
+	 * \param valname Name des Wertes
+	 */
+	virtual bool setValue(std::string valname);
 
 
 	/**

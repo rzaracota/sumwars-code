@@ -67,7 +67,7 @@ struct DropSlot
 		m_min_level =-1;
 		m_max_level =-1;
 		m_magic_probability =0;
-		m_magic_power =0;
+		m_magic_power =1;
 	};
 	
 	/**
