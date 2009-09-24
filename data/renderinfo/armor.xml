@@ -12,21 +12,24 @@
 	<Entity source="councl_arm.mesh"/> 
 </RenderInfo>
 <RenderInfo name="counclArm#m" parent="playerbase">
-	<Entity source="councl_arm.mesh"/> 
+	<Entity source="councl_armMW.mesh"/> 
 </RenderInfo>
 <RenderInfo name="counclArm#f" parent="playerbase">
-	<Entity source="councl_arm.mesh"/> 
+	<Entity source="councl_armMW.mesh"/> 
+</RenderInfo>
+<RenderInfo name="counclArmTolec" parent="guardPole">
+	<Entity source="councl_armMW.mesh"/> 
 </RenderInfo>
 
 <RenderInfo name="counclRob" parent="playerbase">
 	<Entity source="councl_rob.mesh"/> 
 </RenderInfo>
 <RenderInfo name="counclRob#m" parent="playerbase">
-	<Entity source="councl_rob.mesh"/> 
+	<Entity source="councl_robMM.mesh"/> 
 </RenderInfo>
 <RenderInfo name="counclRob#f" parent="playerbase">
-	<Entity source="councl_rob.mesh"/> 
+	<Entity source="councl_robMM.mesh"/> 
 </RenderInfo>
 <RenderInfo name="counclRobeSoren" parent="guardPole">
-	<Entity source="councl_rob.mesh"/>
+	<Entity source="councl_robMM.mesh"/>
 </RenderInfo>

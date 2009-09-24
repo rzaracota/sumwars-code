@@ -149,7 +149,7 @@
 	
 	<BasicAbility type="magic_attack" />
 
-	<Look name="wizard" render_info="mage_m" gender="male" emotionset="human_standard"/>
+	<Look name="wizard" render_info="mage_m" gender="male" emotionset="councilMage_emotion"/>
 	<Look name="sorceress" render_info="mage_f" gender="female" emotionset="human_standard"/>
 	
 	<SkilltreeTabs tab1="Fire magic" tab2="Ice magic" tab3="Air magic" />

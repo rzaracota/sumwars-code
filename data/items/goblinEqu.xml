@@ -35,7 +35,7 @@
 <!-- WAR, PRI, ARC, MAG -->
 <Item type="gloves" subtype="goblin_glv" name="goblin bracer" size="medium">
 	<Image image="set:goblin_glv.png image:full_image" />
-	<Mesh file="goblin_glv.mesh" />
+	<RenderInfo name = "goblinGloves"/>
 	<Attribute
 		level_requirement="2"
 		character_requirement="all"

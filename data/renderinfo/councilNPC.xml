@@ -15,7 +15,7 @@
 <RenderInfo name="guardPole_cnl" parent="guardPole">
 	<Entity source="guardCnl.mesh"/>
 	<Entity objectname="weapon" bone="itemRightHand" source="speer_pol.mesh" />
-	<Subobject objectname="armor" source="counclArm#m" />
+	<Subobject objectname="armor" source="counclArmTolec" />
 	<Subobject objectname="gloves" source="sharkGlovesGuard" />
 	<Entity objectname="head" bone="crown" source="head1.mesh" />
 	<Entity objectname="helm" bone="crown" source="turban_hlm.mesh" />
@@ -44,4 +44,25 @@
 	<Entity objectname="hat" bone="crown" source="turban_hat.mesh" />
 	<Subobject objectname="robe" source="counclRobeSoren" />
 	<Entity objectname="weapon" bone="itemRightHand" source="council_stf.mesh" />
+</RenderInfo>
+
+<RenderInfo name = "slave_worker" parent="playerbase">
+	<Entity source="slave_m.mesh"/>
+	<Entity objectname="weapon" bone="itemRightHand" source="hammer_hmr.mesh" />
+	<Entity objectname="head" bone="crown" source="head_m1.mesh" />
+	<Entity objectname="helm" bone="crown" source="capWhite.mesh" />
+	
+	<Action name = "noaction">
+		<Animation name = "attack"/>
+	</Action>
+</RenderInfo>
+<RenderInfo name = "slave_miner" parent="playerbase">
+	<Entity source="slave_m.mesh"/>
+	<Entity objectname="weapon" bone="itemRightHand" source="pick_axe.mesh" />
+	<Entity objectname="head" bone="crown" source="head_m1.mesh" />
+	<Entity objectname="helm" bone="crown" source="capBlue.mesh" />
+	
+	<Action name = "noaction">
+		<Animation name = "attackTwoHands"/>
+	</Action>
 </RenderInfo>
