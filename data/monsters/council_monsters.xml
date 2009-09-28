@@ -278,7 +278,7 @@
 		<Ability type="fire_ball" rating="2.5" />
 		<Ability type="hammer_bash" rating="2" />
 		<Ability type="inflame" />
-		<Ability type="behemoth_fire_storm" rating="0"/>
+		<Ability type="behemoth_fire_storm" rating="0" timer_nr="0"/>
 		
 	</BasicAttributes>
 	

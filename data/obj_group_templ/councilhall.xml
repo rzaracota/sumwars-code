@@ -2548,13 +2548,6 @@
             prob_angle="false" 
     />
     <Object subtype="$border" 
-            center_x="13.5" 
-            center_y="79.5" 
-            angle="90" 
-            probability="1" 
-            prob_angle="false" 
-    />
-    <Object subtype="$border" 
             center_x="-2.5" 
             center_y="73.5" 
             angle="90" 
@@ -5081,6 +5074,13 @@
             probability="1" 
             prob_angle="false" 
     />
+    <Object subtype="$border_m" 
+            center_x="11.5" 
+            center_y="79.5" 
+            angle="90" 
+            probability="1" 
+            prob_angle="false" 
+    />
     <Object subtype="$border_s" 
             center_x="22.5" 
             center_y="-12.5" 
@@ -5358,6 +5358,13 @@
             center_x="14" 
             center_y="81" 
             angle="-180" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="$border_s" 
+            center_x="24.5" 
+            center_y="79.5" 
+            angle="90" 
             probability="1" 
             prob_angle="false" 
     />
@@ -6369,6 +6376,13 @@
             probability="1" 
             prob_angle="false" 
     />
+    <Object subtype="$border_s" 
+            center_x="14.5" 
+            center_y="79.5" 
+            angle="90" 
+            probability="1" 
+            prob_angle="false" 
+    />
     <Object subtype="$border_t" 
             center_x="21" 
             center_y="23.5" 
@@ -6463,6 +6477,13 @@
             probability="1" 
             prob_angle="false" 
     />
+    <Object subtype="$prison" name="behemothPrison" 
+            center_x="19.5" 
+            center_y="79.5" 
+            angle="-90" 
+            probability="1" 
+            prob_angle="false" 
+    />
     <Object subtype="$prison_m" 
             center_x="78.5" 
             center_y="80" 
@@ -6496,6 +6517,13 @@
             center_x="57.5" 
             center_y="63.33859249" 
             angle="-90" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="$scaffolding" 
+            center_x="12.5" 
+            center_y="78" 
+            angle="90" 
             probability="1" 
             prob_angle="false" 
     />
@@ -12042,7 +12070,7 @@
             prob_angle="false" 
     />
     <Object subtype="scaffolding_s1" name="workerScaffolding" 
-            center_x="16" 
+            center_x="17" 
             center_y="78" 
             angle="90" 
             probability="1" 
@@ -12111,7 +12139,7 @@
     <Location name="locBackroute5" pos_x="27" pos_y="20" />
     <Location name="locBackroute6" pos_x="17.5" pos_y="20" />
     <Location name="locBehemoth" pos_x="17" pos_y="70" />
-    <Location name="locBehemothDoorEast" pos_x="32.5" pos_y="72" />
+    <Location name="locBehemothDoorEast" pos_x="26" pos_y="72" />
     <Location name="locBehemothRaid" pos_x="16.5" pos_y="63.5" />
     <Location name="locBehemothStart" pos_x="18.5" pos_y="85.5" />
     <Location name="locBehemothView" pos_x="44" pos_y="70.5" />
@@ -12121,7 +12149,6 @@
     <Location name="locDanger4" pos_x="62" pos_y="23.5" />
     <Location name="locDanger5" pos_x="62" pos_y="28.5" />
     <Location name="locDerred" pos_x="79.89515959" pos_y="81.33735032" />
-    <Location name="locDestroyedWall" pos_x="21.5" pos_y="79.5" />
     <Location name="locDoorGuardNorth" pos_x="16" pos_y="59.5" />
     <Location name="locDoorGuardWest" pos_x="6.5" pos_y="69.5" />
     <Location name="locElemental" pos_x="23" pos_y="-43" />
@@ -12153,7 +12180,7 @@
     <Location name="locWay2" pos_x="40.5" pos_y="70.5" />
     <Location name="locWay3" pos_x="16.5" pos_y="-8.5" />
     <Location name="locWay4" pos_x="16.5" pos_y="-28" />
-    <Location name="locWorker" pos_x="16" pos_y="78" />
+    <Location name="locWorker" pos_x="17" pos_y="78" />
     <Location name="locWorker2" pos_x="17.5" pos_y="73.5" />
   </Locations>
 

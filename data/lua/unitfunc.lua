@@ -77,6 +77,9 @@ function playersLookAt(pos)
 	end;
 end;
 
+function speakPause(time)
+	speak("nobody","","",time);
+end;
 
 -- Objekte mit bestimmten Eigenschaften herrausfiltern
 function getPlayersInArea(area)

@@ -1027,7 +1027,14 @@ void Region::createObjectGroup(ObjectGroupTemplateName templname, Vector positio
 					oangle = 2*3.14159*Random::random();
 				}
 
-				int id = createObject(gt->m_type, pos, angle+oangle,gt->m_height);
+				int id;
+				WorldObject::State state = WorldObject::STATE_NONE;
+				if (gt->m_name != "")
+				{
+					state = WorldObject::STATE_ACTIVE;
+				}
+				
+				id = createObject(gt->m_type, pos, angle+oangle,gt->m_height,state);
 				DEBUG5("inserting object %s at %f %f with id %i",gt->m_type.c_str(),pos.m_x, pos.m_y,id);
 				
 				if (gt->m_name != "")

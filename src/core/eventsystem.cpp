@@ -1614,7 +1614,7 @@ int EventSystem::getInventoryPosition(lua_State *L)
 	}
 	else
 	{
-		ERRORMSG("Syntax: removePlayerItem(int playerid, string subtype | short itempos)");
+		ERRORMSG("Syntax: getInventoryPosition(int playerid, string position)");
 	}
 	return 0;
 }
