@@ -9,7 +9,6 @@
 #include "OgreMovableObject.h"
 #include "graphicobject.h"
 #include "graphicobjectrenderinfo.h"
-#include "gameobject.h"
 
 #include "../tinyxml/tinyxml.h"
 #include <string>

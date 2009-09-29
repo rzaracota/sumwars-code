@@ -211,9 +211,8 @@ void GraphicObject::addMovableObject(MovableObjectInfo& object)
 				tag = skel->createTagPointOnBone (boneptr);
 				attchobj.m_entity = ent;
 				tag->setInheritScale(false);
-				
+				tag->setInheritParentEntityScale(true);
 				ent->getParentSceneNode()->addChild(node);
-				node = tag;
 			}
 			else
 			{
@@ -261,7 +260,8 @@ void GraphicObject::addMovableObject(MovableObjectInfo& object)
 		
 		// Objekt mit ID versehen
 		obj->setUserAny(Ogre::Any(m_id));
-		
+		Ogre::TagPoint* tag =0;
+		Ogre::Entity* ent =0;
 		if (object.m_bone == "")
 		{
 			// Anfuegen an TopKnoten
@@ -275,13 +275,14 @@ void GraphicObject::addMovableObject(MovableObjectInfo& object)
 		else
 		{
 			// Anfuegen an einen Knochen
-			Ogre::Entity* ent = getEntity(mesh);
+			ent = getEntity(mesh);
 			if (ent !=0)
 			{
 				try
 				{
-					Ogre::TagPoint* tag = ent->attachObjectToBone(bone, obj);
+					tag = ent->attachObjectToBone(bone, obj);
 					tag->setInheritScale(false);
+					tag->setInheritParentEntityScale(true);
 					tag->setScale(Ogre::Vector3(1,1,1));
 					node = tag;
 				}
@@ -300,6 +301,8 @@ void GraphicObject::addMovableObject(MovableObjectInfo& object)
 		
 		m_attached_objects[object.m_objectname].m_object_info = object;
 		m_attached_objects[object.m_objectname].m_object = obj;
+		m_attached_objects[object.m_objectname].m_tagpoint = tag;
+		m_attached_objects[object.m_objectname].m_entity = ent;
 	}
 	
 	// StartPosition und -Rotation setzen
@@ -310,6 +313,8 @@ void GraphicObject::addMovableObject(MovableObjectInfo& object)
 		node->pitch(Ogre::Degree(object.m_rotation[0]));
 		node->yaw(Ogre::Degree(object.m_rotation[1]));
 		node->roll(Ogre::Degree(object.m_rotation[2]));
+		
+		DEBUG5("object %s scale %f",object.m_objectname.c_str(), node->_getDerivedScale().x);
 	}
 	
 	// Abhaengigkeiten eintragen

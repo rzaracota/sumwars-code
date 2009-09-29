@@ -1,6 +1,5 @@
 #include "sound.h"
 
-#include "projectile.h"
 #include "elementattrib.h"
 #include <OgreResourceGroupManager.h>
 

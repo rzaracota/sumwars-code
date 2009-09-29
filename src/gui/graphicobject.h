@@ -8,7 +8,6 @@
 #include "OgreSceneManager.h"
 
 #include <string>
-#include "gameobject.h"
 #include "graphicobjectrenderinfo.h"
 #include "sound.h"
 
@@ -18,6 +17,8 @@ struct AttachedMovableObject
 {
 	MovableObjectInfo m_object_info;
 	Ogre::MovableObject* m_object;
+	Ogre::TagPoint* m_tagpoint;
+	Ogre::Entity* m_entity;
 };
 
 struct AttachedGraphicObject

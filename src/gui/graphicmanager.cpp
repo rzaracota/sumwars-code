@@ -4,7 +4,7 @@
 
 std::map<std::string, GraphicRenderInfo*> GraphicManager::m_render_infos;
 Ogre::SceneManager* GraphicManager::m_scene_manager;
-std::map<GameObject::Type, GraphicObject::Type> GraphicManager::m_graphic_mapping;
+std::map<std::string, GraphicObject::Type> GraphicManager::m_graphic_mapping;
 
 void GraphicManager::init()
 {
@@ -381,7 +381,7 @@ void GraphicManager::loadMovableObjectInfo(TiXmlNode* node, MovableObjectInfo* i
 	
 }
 
-void GraphicManager::registerGraphicMapping(GameObject::Type objecttype, GraphicObject::Type graphic)
+void GraphicManager::registerGraphicMapping(std::string objecttype, GraphicObject::Type graphic)
 {
 	DEBUG5("registered graphic %s for object type %s",graphic.c_str(), objecttype.c_str());
 	m_graphic_mapping[objecttype] = graphic;
@@ -389,7 +389,7 @@ void GraphicManager::registerGraphicMapping(GameObject::Type objecttype, Graphic
 
 GraphicObject::Type GraphicManager::getGraphicType(std::string objecttype)
 {
-	std::map<GameObject::Type, GraphicObject::Type>::iterator it;
+	std::map<std::string, GraphicObject::Type>::iterator it;
 	it = m_graphic_mapping.find(objecttype);
 	
 	if (it != m_graphic_mapping.end())

@@ -14,7 +14,6 @@
 #include <set>
 
 #include "geometry.h"
-#include "gameobject.h"
 #include "../tinyxml/tinyxml.h"
 
 /**
