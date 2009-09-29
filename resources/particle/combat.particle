@@ -5,7 +5,7 @@ Hit
     particle_height 40
     cull_each       false
     quota           10000
-    billboard_type  oriented_self
+    billboard_type  point
     
     // Area emitter
     emitter Point
@@ -39,11 +39,11 @@ Hit
 SpecialAttackLineWhite
 {
     material Flare
-    particle_width 30
-    particle_height 10
+    particle_width 20
+    particle_height 20
     cull_each false
     quota 10000
-    billboard_type oriented_self
+    billboard_type point
  
 
    emitter Point
@@ -54,8 +54,8 @@ SpecialAttackLineWhite
         direction 1 1 1
         velocity_min 1
         velocity_max 2
-        colour_range_start 0.1 0.1 0.1
-		colour_range_end 0.1 0.1 0.1
+        colour_range_start 0.3 0.3 0.3
+		colour_range_end 0.3 0.3 0.3
 }
 }
 
@@ -66,7 +66,7 @@ SpecialAttackLineSweepStrike
     particle_height 30
     cull_each false
     quota 10000
-    billboard_type oriented_self
+    billboard_type point
  
 
    emitter Point
@@ -89,7 +89,7 @@ Warcry
     particle_height 10
     cull_each false
     quota 10000
-    billboard_type oriented_self
+    billboard_type point
  
 
    emitter Point
@@ -112,7 +112,7 @@ Heal
     particle_height 10
     cull_each false
     quota 10000
-    billboard_type oriented_self
+    billboard_type point
  
 
    emitter Point
@@ -135,7 +135,7 @@ FireSword
     particle_height 20
     cull_each false
     quota 10000
-    billboard_type oriented_self
+    billboard_type point
  
 
    emitter Point
@@ -171,7 +171,7 @@ BurningBlade
     particle_height 20
     cull_each false
     quota 10000
-    billboard_type oriented_self
+    billboard_type point
  
 
    emitter Point

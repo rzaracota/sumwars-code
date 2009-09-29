@@ -24,11 +24,11 @@
 		<Activation>
 			<ParticleSystem objectname="firesword1" source="BurningBlade" bone="itemRightHand" position= "0 0 -0.3"/>
 			<Rotation objectname="firesword1" start="0.0" end="0.0" start_vec="0.0 0.0 0.0" end_vec="0.0 180.0 0.0" />
-			<ParticleSystem objectname="firesword2" source="BurningBlade" bone="itemRightHand" position= "0 0 -0.5"/>
+			<ParticleSystem objectname="firesword2" source="BurningBlade" bone="itemRightHand" position= "0 0 -0.6"/>
 			<Rotation objectname="firesword2" start="0.0" end="0.0" start_vec="0.0 0.0 0.0" end_vec="0.0 180.0 0.0" />
-			<ParticleSystem objectname="firesword3" source="BurningBlade" bone="itemRightHand" position= "0 0 -0.8"/>
+			<ParticleSystem objectname="firesword3" source="BurningBlade" bone="itemRightHand" position= "0 0 -0.9"/>
 			<Rotation objectname="firesword3" start="0.0" end="0.0" start_vec="0.0 0.0 0.0" end_vec="0.0 180.0 0.0" />
-			<ParticleSystem objectname="firesword4" source="BurningBlade" bone="itemRightHand" position= "0 0 -1.0"/>
+			<ParticleSystem objectname="firesword4" source="BurningBlade" bone="itemRightHand" position= "0 0 -3"/>
 			<Rotation objectname="firesword4" start="0.0" end="0.0" start_vec="0.0 0.0 0.0" end_vec="0.0 180.0 0.0" />
 		</Activation>
 		
@@ -39,6 +39,74 @@
 			<Detach objectname="firesword4"/>
 		</Deactivation>
 	</State>
+<!--	<State name="firesword#TwoHands#axe">
+		<Activation>
+			<ParticleSystem objectname="firesword1" source="BurningBlade" bone="itemRightHand" position= "-0.7 0 -3.2"/>
+			<Rotation objectname="firesword1" start="0.0" end="0.0" start_vec="0.0 0.0 0.0" end_vec="0.0 180.0 0.0" />
+			<ParticleSystem objectname="firesword2" source="BurningBlade" bone="itemRightHand" position= "-0.8 0 -3.3"/>
+			<Rotation objectname="firesword2" start="0.0" end="0.0" start_vec="0.0 0.0 0.0" end_vec="0.0 180.0 0.0" />
+			<ParticleSystem objectname="firesword3" source="BurningBlade" bone="itemRightHand" position= "0 0 -3"/>
+			<Rotation objectname="firesword3" start="0.0" end="0.0" start_vec="0.0 0.0 0.0" end_vec="0.0 180.0 0.0" />
+			<ParticleSystem objectname="firesword4" source="BurningBlade" bone="itemRightHand" position= "0 0 -3.4"/>
+			<Rotation objectname="firesword4" start="0.0" end="0.0" start_vec="0.0 0.0 0.0" end_vec="0.0 180.0 0.0" />
+		</Activation>
+		
+		<Deactivation>
+			<Detach objectname="firesword1"/>
+			<Detach objectname="firesword2"/>
+			<Detach objectname="firesword3"/>
+			<Detach objectname="firesword4"/>
+		</Deactivation>
+	</State> -->
+	
+	<State name="bleed">
+		<Activation>
+			<ParticleSystem objectname="bleed" source="Hit" position="0 1 0"  />
+		</Activation>
+		
+		<Deactivation>
+			<Detach objectname="bleed"/>
+		</Deactivation>
+	</State>
+	
+	<State name="wind_arrows">
+		<Activation>
+			<ParticleSystem objectname="magic" source="HandLightning" bone="itemLeftHand" position="0 0 0"  />
+		</Activation>
+		
+		<Deactivation>
+			<Detach objectname="magic"/>
+		</Deactivation>
+	</State>
+	<State name="storm_arrows" reference = "wind_arrows">
+		<Activation>
+			<ParticleSystem objectname="magic" source="HandLightning" bone="itemLeftHand" position="0 0 0"  />
+		</Activation>
+		
+		<Deactivation>
+			<Detach objectname="magic"/>
+		</Deactivation>
+	</State>
 	
 	
+	<State name="ice_arrows">
+		<Activation>
+			<ParticleSystem objectname="magic" source="HandIce" bone="itemLeftHand" position="0 0 0"  />
+		</Activation>
+		
+		<Deactivation>
+			<Detach objectname="magic"/>
+		</Deactivation>
+	</State>
+	<State name="frost_arrows" reference = "ice_arrows">
+		<Activation>
+			<ParticleSystem objectname="magic" source="HandIce" bone="itemLeftHand" position="0 0 0"  />
+		</Activation>
+		
+		<Deactivation>
+			<Detach objectname="magic"/>
+		</Deactivation>
+	</State>
+	
+
 </RenderInfo>
