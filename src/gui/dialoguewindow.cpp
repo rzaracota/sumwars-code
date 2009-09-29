@@ -455,6 +455,12 @@ void DialogueWindow::updateSpeechBubbles()
 			
 			
 		}
+		else
+		{
+			float width = label->getPixelSize().d_width;
+			float height = label->getPixelSize().d_height;
+			label->setPosition(CEGUI::UVector2(CEGUI::UDim(pos.first,-width/2), CEGUI::UDim(pos.second,-height)));
+		}
 		label->setVisible(true);
 		
 		nr++;
