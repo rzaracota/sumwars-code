@@ -19,6 +19,7 @@ struct AttachedMovableObject
 	Ogre::MovableObject* m_object;
 	Ogre::TagPoint* m_tagpoint;
 	Ogre::Entity* m_entity;
+	Ogre::SceneNode* m_tag_trackpoint;
 };
 
 struct AttachedGraphicObject
@@ -26,6 +27,7 @@ struct AttachedGraphicObject
 	Ogre::TagPoint* m_tagpoint;
 	Ogre::Entity* m_entity;
 	GraphicObject* m_object;
+	Ogre::SceneNode* m_tag_trackpoint;
 };
 
 struct ObjectDependency

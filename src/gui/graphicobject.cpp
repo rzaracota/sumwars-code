@@ -185,6 +185,7 @@ void GraphicObject::addMovableObject(MovableObjectInfo& object)
 			getTopNode()->addChild(node);
 			
 			node->setInheritScale(true);
+			attchobj.m_tag_trackpoint =0;
 		}
 		else
 		{
@@ -212,7 +213,8 @@ void GraphicObject::addMovableObject(MovableObjectInfo& object)
 				attchobj.m_entity = ent;
 				tag->setInheritScale(false);
 				tag->setInheritParentEntityScale(true);
-				ent->getParentSceneNode()->addChild(node);
+				attchobj.m_tag_trackpoint = ent->getParentSceneNode()->createChildSceneNode();
+				attchobj.m_tag_trackpoint->addChild(node);
 			}
 			else
 			{
@@ -262,15 +264,20 @@ void GraphicObject::addMovableObject(MovableObjectInfo& object)
 		obj->setUserAny(Ogre::Any(m_id));
 		Ogre::TagPoint* tag =0;
 		Ogre::Entity* ent =0;
+		
+		
+		Ogre::SceneNode* snode = GraphicManager::getSceneManager()->getRootSceneNode()->createChildSceneNode();
+		snode->getParent()->removeChild(snode);
+		snode->setInheritScale(true);
+		snode->attachObject(obj);
+		node = snode;
+		
 		if (object.m_bone == "")
 		{
 			// Anfuegen an TopKnoten
-			Ogre::SceneNode* snode = m_top_node->createChildSceneNode();
-			snode->attachObject(obj);
-			
-			snode->setInheritScale(true);
-			node = snode;
+			getTopNode()->addChild(node);
 			DEBUG5("node %p parent %p",node,m_top_node );
+			m_attached_objects[object.m_objectname].m_tag_trackpoint = 0;
 		}
 		else
 		{
@@ -278,19 +285,27 @@ void GraphicObject::addMovableObject(MovableObjectInfo& object)
 			ent = getEntity(mesh);
 			if (ent !=0)
 			{
-				try
+				// Anfuegen an den Knoten an dem die Entity haengt
+				// und verfolgen des neu angelegten TagPoint
+				Ogre::SkeletonInstance* skel= ent->getSkeleton();
+				if (skel == 0)
 				{
-					tag = ent->attachObjectToBone(bone, obj);
-					tag->setInheritScale(false);
-					tag->setInheritParentEntityScale(true);
-					tag->setScale(Ogre::Vector3(1,1,1));
-					node = tag;
-				}
-				catch (std::exception& e)
-				{
-					ERRORMSG("could not attach %s to %s (no skeleton or no bone %s)",object.m_objectname.c_str(),mesh.c_str(),bone.c_str());
+					ERRORMSG("could not attach %s to %s (entity has no skeleton)",object.m_objectname.c_str(),mesh.c_str());
 					return;
 				}
+
+				Ogre::Bone* boneptr = skel->getBone(bone);
+				if (boneptr == 0)
+				{
+					ERRORMSG("could not attach %s to %s (skeleton has no bone %s",object.m_objectname.c_str(),mesh.c_str(),bone.c_str());
+					return;
+				}
+				
+				tag = skel->createTagPointOnBone(boneptr);
+				tag->setInheritScale(false);
+				tag->setInheritParentEntityScale(true);
+				m_attached_objects[object.m_objectname].m_tag_trackpoint = ent->getParentSceneNode()->createChildSceneNode();
+				m_attached_objects[object.m_objectname].m_tag_trackpoint->addChild(node);
 			}
 			else
 			{
@@ -359,6 +374,19 @@ void GraphicObject::removeMovableObject(std::string name)
 		
 		std::map<std::string, AttachedMovableObject>::iterator it;
 		it = m_attached_objects.find(name);
+		
+		tag = it->second.m_tagpoint;	
+		if (tag !=0 && it->second.m_entity!=0)
+		{
+			DEBUG5("tag %p parent %p",tag, it->second.m_entity);
+			it->second.m_entity->getSkeleton()->freeTagPoint(tag);
+		}
+		
+		if (it->second.m_tag_trackpoint != 0)
+		{
+			it->second.m_tag_trackpoint->getCreator()->destroySceneNode(it->second.m_tag_trackpoint->getName());
+		}
+		
 		if (it != m_attached_objects.end())
 		{
 			m_attached_objects.erase(it);
@@ -389,6 +417,11 @@ void GraphicObject::removeMovableObject(std::string name)
 				jt->second.m_entity->getSkeleton()->freeTagPoint(tag);
 			}
 			GraphicManager::destroyGraphicObject(obj);
+			
+			if (jt->second.m_tag_trackpoint != 0)
+			{
+				jt->second.m_tag_trackpoint->getCreator()->destroySceneNode(jt->second.m_tag_trackpoint->getName());
+			}
 			
 			m_subobjects.erase(jt);
 		}
@@ -454,7 +487,7 @@ void GraphicObject::updateAttachedAction(AttachedAction& attchaction, std::strin
 		initAttachedAction(attchaction,action);
 	}
 	
-	DEBUG5("update action %s %f -> %f", action.c_str(), attchaction.m_current_percent, percent);
+	DEBUG5("update action %s %f -> %f in %s", action.c_str(), attchaction.m_current_percent, percent,m_name.c_str());
 	
 	// Suche nach neu dazu gekommenen Aktionen
 	ActionRenderInfo* arinfo;
@@ -686,14 +719,31 @@ void GraphicObject::update(float time)
 			const Ogre::Vector3& pos = tag->_getDerivedPosition();
 			const Ogre::Quaternion& dir = tag ->_getDerivedOrientation();
 			const Ogre::Vector3& scal = tag->_getDerivedScale();
-			obj->getTopNode()->setPosition(pos);
-			obj->getTopNode()->setOrientation(dir);
-			obj->getTopNode()->setScale(scal);
+			gt->second.m_tag_trackpoint->setPosition(pos);
+			gt->second.m_tag_trackpoint->setOrientation(dir);
+			gt->second.m_tag_trackpoint->setScale(scal);
 		}
 		
 		obj->update(time);
 	}
 
+	// an Knochen gehaengte MovableObjects aktualisieren
+	std::map<std::string, AttachedMovableObject>::iterator mt;
+	Ogre::MovableObject* mobj;
+	for (mt = m_attached_objects.begin(); mt != m_attached_objects.end(); ++mt)
+	{
+		tag = mt->second.m_tagpoint;
+		mobj = mt->second.m_object;
+		if (tag != 0)
+		{
+			const Ogre::Vector3& pos = tag->_getDerivedPosition();
+			const Ogre::Quaternion& dir = tag ->_getDerivedOrientation();
+			const Ogre::Vector3& scal = tag->_getDerivedScale();
+			mt->second.m_tag_trackpoint->setPosition(pos);
+			mt->second.m_tag_trackpoint->setOrientation(dir);
+			mt->second.m_tag_trackpoint->setScale(scal);
+		}
+	}
 	
 	// SoundObjekte aktualisieren
 	Ogre::Vector3 opos = getTopNode()->_getDerivedPosition();
