@@ -622,6 +622,12 @@ public:
 	virtual std::string getActionString();
 	
 	/**
+	 * \fn std::string getActionWeaponSuffix()
+	 * \brief Gibt die durch die Waffe bestimmte Erweiterung des Aktionsname aus
+	 */
+	std::string getActionWeaponSuffix();
+	
+	/**
 	 * \fn Gender getGender()
 	 * \brief Gibt das Geschlecht aus
 	 */

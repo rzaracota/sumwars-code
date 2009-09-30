@@ -2339,9 +2339,9 @@ void Player::updateMessageTimer(float time)
 	}
 }
 
-std::string Player::getActionString()
+std::string Player::getActionWeaponSuffix()
 {
-	std::string ret = Creature::getActionString();
+	std::string ret ="";
 	Item* weapon=getWeapon();
 	if (weapon == 0)
 		ret += "#Unarmed";
@@ -2355,6 +2355,13 @@ std::string Player::getActionString()
 		ret += "#";
 		ret += weapon->m_weapon_attr->m_weapon_type;
 	}
+	return ret;
+}
+
+std::string Player::getActionString()
+{
+	std::string ret = Creature::getActionString();
+	ret += getActionWeaponSuffix();
 	
 	return ret;
 }

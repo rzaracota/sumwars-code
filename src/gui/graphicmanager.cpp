@@ -201,19 +201,21 @@ void GraphicManager::loadRenderInfo(TiXmlNode* node, GraphicRenderInfo* info)
 							attr.parseElement(child2->ToElement());
 							
 							std::string act= state;
-							
+							std::string prefix;
 							if (!strcmp(child2->Value(), "Activation"))
 							{
-								act +=":activate";
+								prefix ="activate:";
 							}
 							else if (!strcmp(child2->Value(), "Active"))
 							{
-								act += ":active";
+								 prefix = "active:";
 							}
 							else if (!strcmp(child2->Value(), "Deactivation"))
 							{
-								act += ":deactivate";
+								prefix = "deactivate:";
 							}
+							prefix += act;
+							act = prefix;
 							
 							ActionRenderInfo* ainfo = new ActionRenderInfo;
 							

@@ -555,12 +555,16 @@ void GraphicObject::updateState(std::string state, bool active)
 		return;
 
 	std::string actionname = state;
+	std::string prefix;
 	std::map<std::string,  AttachedState>::iterator it;
 	it = m_attached_states.find(state);
 
 	if (active)
 	{
-		actionname +=":activate";
+		prefix = "activate:";
+		prefix += actionname;
+		actionname = prefix;
+		
 		if (it == m_attached_states.end() || it->second.m_type == AttachedState::DEACTIVATE)
 		{
 			DEBUG5("activated state %s",state.c_str());
@@ -582,7 +586,10 @@ void GraphicObject::updateState(std::string state, bool active)
 			DEBUG5("deactivated state %s",state.c_str());
 			// Status ist intern noch aktiv
 			// aktuelle Aktion beenden
-			actionname +=":deactivate";
+			prefix = "deactivate:";
+			prefix += actionname;
+			actionname = prefix;
+			
 			updateAttachedAction(it->second.m_attached_action, actionname, 0.0);
 			it->second.m_type = AttachedState::DEACTIVATE;
 		}
@@ -695,7 +702,10 @@ void GraphicObject::update(float time)
 					// Aktivierung abgeschlossen
 					it->second.m_type = AttachedState::ACTIVE;
 					act = it->first;
-					act += ":active";
+					
+					std::string prefix = "active:";
+					prefix += act;
+					act = prefix;
 				}
 			}
 		}

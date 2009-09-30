@@ -359,7 +359,25 @@ void Scene::updateGraphicObject(GraphicObject* obj, GameObject* gobj,float time)
 	// Zustaende aktualisieren
 	std::set<std::string> flags;
 	gobj->getFlags(flags);
-	obj->updateAllStates(flags);
+	if (pl != 0)
+	{
+		std::set<std::string> flags_suffix;
+		
+		std::string suffix = pl->getActionWeaponSuffix();
+		std::set<std::string>::iterator it;
+		std::string tmp;
+		for (it = flags.begin(); it !=flags.end(); ++it)
+		{
+			tmp = (*it);
+			tmp += suffix;
+			flags_suffix.insert(tmp);
+		}
+		obj->updateAllStates(flags_suffix);
+	}
+	else
+	{
+		obj->updateAllStates(flags);
+	}
 	
 	
 	obj->update(time);
