@@ -392,6 +392,8 @@ bool Scene::updatePlayerGraphicObject(GraphicObject* obj, Player* pl)
 	minfo.m_objectname="weapon";
 	minfo.m_type = MovableObjectInfo::SUBOBJECT;
 	
+	std::string& suffix = pl->getPlayerLook().m_item_suffix;
+	
 	Item* itm;
 	itm = pl->getWeapon();
 	if (itm !=0 && itm->m_weapon_attr !=0)
@@ -405,6 +407,8 @@ bool Scene::updatePlayerGraphicObject(GraphicObject* obj, Player* pl)
 			minfo.m_bone = "itemRightHand";
 		}
 		minfo.m_source = GraphicManager::getGraphicType(itm->m_subtype);
+		if (minfo.m_source.find(".mesh") == std::string::npos)
+			minfo.m_source += suffix;
 	}
 	else
 	{
@@ -420,6 +424,8 @@ bool Scene::updatePlayerGraphicObject(GraphicObject* obj, Player* pl)
 	{
 		minfo.m_bone = "itemLeftHand";
 		minfo.m_source = GraphicManager::getGraphicType(itm->m_subtype);
+		if (minfo.m_source.find(".mesh") == std::string::npos)
+			minfo.m_source += suffix;
 	}
 	else
 	{
@@ -440,14 +446,8 @@ bool Scene::updatePlayerGraphicObject(GraphicObject* obj, Player* pl)
 		
 		minfo.m_bone = "";
 		minfo.m_source = GraphicManager::getGraphicType(itm->m_subtype);
-		if (pl->getGender() == MALE)
-		{
-			minfo.m_source += "#m";
-		}
-		else
-		{
-			minfo.m_source += "#f";
-		}
+		if (minfo.m_source.find(".mesh") == std::string::npos)
+			minfo.m_source += suffix;
 	}
 	else
 	{
@@ -456,28 +456,23 @@ bool Scene::updatePlayerGraphicObject(GraphicObject* obj, Player* pl)
 	update |= obj->updateSubobject(minfo);
 	
 	// Helm
-	minfo.m_objectname="gloves";
+	minfo.m_objectname="helmet";
 	minfo.m_type = MovableObjectInfo::SUBOBJECT;
-	itm = pl->getEquipement()->getItem(Equipement::GLOVES);
+	itm = pl->getEquipement()->getItem(Equipement::HELMET);
+	minfo.m_bone = "crown";
 	
 	if (itm !=0)
 	{
 		std::string type = itm->m_subtype;
 		
-		minfo.m_bone = "";
+		
 		minfo.m_source = GraphicManager::getGraphicType(itm->m_subtype);
-		if (pl->getGender() == MALE)
-		{
-			minfo.m_source += "#m";
-		}
-		else
-		{
-			minfo.m_source += "#f";
-		}
+		if (minfo.m_source.find(".mesh") == std::string::npos)
+			minfo.m_source += suffix;
 	}
 	else
 	{
-		minfo.m_source="";
+		minfo.m_source= pl->getPlayerLook().m_hair;
 	}
 	update |= obj->updateSubobject(minfo);
 	
@@ -492,14 +487,9 @@ bool Scene::updatePlayerGraphicObject(GraphicObject* obj, Player* pl)
 		
 		minfo.m_bone = "";
 		minfo.m_source = GraphicManager::getGraphicType(itm->m_subtype);
-		if (pl->getGender() == MALE)
-		{
-			minfo.m_source += "#m";
-		}
-		else
-		{
-			minfo.m_source += "#f";
-		}
+		if (minfo.m_source.find(".mesh") == std::string::npos)
+			minfo.m_source += suffix;
+
 	}
 	else
 	{

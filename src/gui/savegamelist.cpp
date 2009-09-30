@@ -103,7 +103,7 @@ void SavegameList::update()
 		filename = it->archive->getName();
 		filename += "/";
 		filename += it->filename;
-		DEBUG("file found %s",filename.c_str());
+		DEBUG5("file found %s",filename.c_str());
 		//File oeffnen
 
 		file.open(filename.c_str(),std::ios::in| std::ios::binary);
