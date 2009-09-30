@@ -2342,15 +2342,14 @@ void Player::updateMessageTimer(float time)
 std::string Player::getActionString()
 {
 	std::string ret = Creature::getActionString();
-	Action::ActionEquip equ = getAction()->m_action_equip;
-	if (equ == Action::NO_WEAPON)
+	Item* weapon=getWeapon();
+	if (weapon == 0)
 		ret += "#Unarmed";
-	else if (equ == Action::ONE_HANDED)
+	else if (weapon->m_weapon_attr->m_two_handed == false)
 		ret += "#OneHand";
-	else if (equ == Action::TWO_HANDED)
+	else if (weapon->m_weapon_attr->m_two_handed == true)
 		ret += "#TwoHands";
 	
-	Item* weapon=getWeapon();
 	if (weapon != 0)
 	{
 		ret += "#";
