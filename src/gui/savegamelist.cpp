@@ -95,7 +95,7 @@ void SavegameList::update()
 	std::ostringstream stream;
 	std::string filename;
 	PlayerLook look;
-	short version;
+	int version;
 	// iterieren ueber die Files
 	unsigned char* data;
 	for (it = files->begin(); it!= files->end();++it)
@@ -130,6 +130,8 @@ void SavegameList::update()
 			}
 			
 			save->fromBuffer(version);
+			save->setVersion(version);
+			
 			save->fromBuffer(classname);
 			save->fromBuffer(name);
 			look.fromString(save);

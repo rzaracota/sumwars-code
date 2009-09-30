@@ -35,6 +35,19 @@ struct PlayerLook
 	std::string m_render_info;
 	
 	/**
+	 * \var std::string m_item_suffix
+	 * \brief Suffix, das an die Itemnamen angehaengt wird
+	 * Das ermoeglicht verschiedenes Aussehen der Items bei verschiedenen Spielern
+	 */
+	std::string m_item_suffix;
+	
+	/**
+	 * \var std::string m_hair
+	 * \brief Renderinfo fuer das Haar
+	 */
+	std::string m_hair;
+	
+	/**
 	 * \var std::string m_emotion_set
 	 * \brief Name des Satzes von Emotionen des Spielers
 	 */
@@ -44,58 +57,77 @@ struct PlayerLook
 	 * \fn void operator=(PlayerLook other)
 	 * \brief Zuweisungsoperator
 	 */
-	void operator=(PlayerLook other)
-	{
-		m_gender = other.m_gender;
-		m_render_info = other.m_render_info;
-		m_emotion_set = other.m_emotion_set;
-		m_name = other.m_name;
-	}
+	void operator=(PlayerLook other);
 	
 	/**
 	 * \fn void toString(CharConv* cv)
 	 * \brief Konvertiert das Objekt in einen String und schreibt ihn in der Puffer
 	 * \param cv Ausgabepuffer
 	*/
-	void toString(CharConv* cv)
-	{
-		cv->toBuffer<char>(m_gender);
-		cv->toBuffer(m_render_info);
-		cv->toBuffer(m_emotion_set);
-	}
-
+	void toString(CharConv* cv);
+	
 
 	/**
 	 * \fn void fromString(CharConv* cv)
 	 * \brief Erzeugt das Objekt aus einem String
 	 * \param cv Eingabepuffer
 	 */
-	void fromString(CharConv* cv)
-	{
-		char tmp;
-		cv->fromBuffer(tmp);
-		m_gender = (Gender) tmp;
-		cv->fromBuffer(m_render_info);
-		cv->fromBuffer(m_emotion_set);
-	}
+	void fromString(CharConv* cv);
+	
 };
 
+/**
+ * \struct LearnableAbility
+ * \brief Struktur fuer die Beschreibung einer erlernbaren Faehigkeit
+ */
 struct LearnableAbility
 {
+	/**
+	 * \var Action::ActionType m_type
+	 * \brief Name der Aktion
+	 */
 	Action::ActionType m_type;
 	
+	/**
+	 * \var Vector m_skilltree_position
+	 * \brief Position des Bilds im Skilltree (relativ zur Groesse des Fensters)
+	 */
 	Vector m_skilltree_position;
 	
+	/**
+	 * \var int m_id
+	 * \brief interne ID
+	 */
 	int m_id;
 	
+	/**
+	 * \var int m_skilltree_tab
+	 * \brief Nummer des Tabs auf dem die Faehigkeit dargestellt wird (1,2,3)
+	 */
 	int m_skilltree_tab;
 	
+	/**
+	 * \var std::string m_image
+	 * \brief Name des Bildes
+	 */
 	std::string m_image;
 	
+	/**
+	 * \var short m_req_level
+	 * \brief Erforderliches Level
+	 */
 	short m_req_level;
 	
+	/**
+	 * \var std::list<Action::ActionType> m_req_abilities
+	 * \brief Vorher zu erlernende Faehigkeiten
+	 */
 	std::list<Action::ActionType> m_req_abilities;
 	
+	/**
+	 * \var LearnableAbility& operator=(LearnableAbility other)
+	 * \brief Zuweisungsoperator
+	 */
 	LearnableAbility& operator=(LearnableAbility other)
 	{
 		m_type = other.m_type;

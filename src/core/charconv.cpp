@@ -8,6 +8,7 @@ CharConv::CharConv()
 	m_bitstream.Write((char) ID_TIMESTAMP);
 	m_bitstream.Write(m_timestamp);
 	m_stream =0;
+	m_version =0;
 }
 
 CharConv::CharConv(int dummy)
@@ -104,7 +105,14 @@ void CharConv::toBuffer(std::string s)
 	}
 	else
 	{
-		(*m_stream) << s << " ";
+		if (s=="")
+		{
+			(*m_stream) << "#empty# ";
+		}
+		else
+		{
+			(*m_stream) << s << " ";
+		}
 	}
 }
 
@@ -122,6 +130,10 @@ void CharConv::fromBuffer(std::string& s)
 	else
 	{
 		(*m_stream) >> s ;
+		if (s == "#empty#")
+		{
+			s="";
+		}
 	}
 }
 

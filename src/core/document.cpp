@@ -1779,7 +1779,7 @@ void Document::loadSettings()
 		std::set<KeyCode>::iterator jt;
 		
 		m_shortkey_map.clear();
-		short version;
+		int version;
 		file >> version;
 		
 		float soundvolume;

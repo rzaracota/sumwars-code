@@ -1930,7 +1930,8 @@ bool Player::checkWaypoint(short id)
 void Player::toSavegame(CharConv* cv)
 {
 	// Version richtig setzen
-	cv->toBuffer((short) World::getVersion());
+	cv->toBuffer(World::getVersion());
+	cv->setVersion(World::getVersion());
 	
 	cv->toBuffer(getSubtype());
 	cv->toBuffer(m_name);
@@ -2036,8 +2037,9 @@ void Player::fromSavegame(CharConv* cv, bool local)
 	DEBUG5("from Savegame");
 	
 	
-	short version;
-	cv->fromBuffer<short>(version);
+	int version;
+	cv->fromBuffer(version);
+	cv->setVersion(version);
 
 	cv->fromBuffer(getSubtype());
 	init();

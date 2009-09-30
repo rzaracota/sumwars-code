@@ -34,7 +34,7 @@
 #include "OgreResourceGroupManager.h"
 
 World* World::m_world=0;
-short World::m_version = 11;
+int World::m_version = 13;
 
 void  World::createWorld(bool server, int port, bool cooperative, int max_players)
 {

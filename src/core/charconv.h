@@ -248,6 +248,25 @@ class CharConv
 		m_id = id;
 	}
 	
+	/**
+	 * \fn  int getVersion()
+	 * \brief Gibt die Version aus
+	 */
+	int getVersion()
+	{
+		return m_version;
+	}
+	
+	/**
+	 * \fn void setVersion(int version)
+	 * \brief Setzt die Version
+	 * \param version Version
+	 */
+	void setVersion(int version)
+	{
+		m_version = version;
+	}
+	
 	
 	private:
 		/**
@@ -273,6 +292,12 @@ class CharConv
 		 * \brief ID
 		 */
 		int m_id;
+		
+		/**
+		 * \var int m_version
+		 * \brief Versionsnummer der Daten, die gerade geschrieben oder gelesen werden
+		 */
+		int m_version;
 	
 };
 

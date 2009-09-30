@@ -536,10 +536,10 @@ public:
 	}
 	
 	/**
-	 * \fn static short getVersion()
+	 * \fn static int getVersion()
 	 * \brief Gibt die Version aus
 	 */
-	static short getVersion()
+	static int getVersion()
 	{
 		return m_version;
 	}
@@ -695,9 +695,9 @@ private:
 	static World* m_world;
 	
 	/**
-	 * \var static short m_version
+	 * \var static int m_version
 	 * \brief Versionsnummer
 	 */
-	static short m_version;
+	static int m_version;
 };
 #endif //WORLD_H

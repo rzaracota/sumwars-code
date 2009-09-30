@@ -45,6 +45,7 @@ sumwars_SOURCES = core/world.cpp \
 	core/creature.cpp \
 	core/pathfind.cpp \
 	core/fixedobject.cpp \
+	core/playerbase.cpp \
 	core/player.cpp \
 	core/monster.cpp \
 	core/itemfactory.cpp \

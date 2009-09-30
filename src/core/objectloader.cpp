@@ -371,6 +371,8 @@ bool ObjectLoader::loadPlayer(TiXmlNode* node)
 				if (gender == "female" || gender == "FEMALE")
 					look.m_gender = FEMALE;
 				attr.getString("emotionset",look.m_emotion_set);
+				attr.getString("hair",look.m_hair);
+				attr.getString("item_suffix",look.m_item_suffix);
 				ObjectFactory::registerPlayerLook(data->m_subtype,look);
 			}
 			else if (!strcmp(child->Value(), "SkilltreeTabs"))
