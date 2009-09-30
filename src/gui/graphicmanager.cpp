@@ -31,7 +31,14 @@ GraphicRenderInfo* GraphicManager::getRenderInfo(std::string type)
 	}
 	else
 	{
+		
 		DEBUG5("no render Info for type %s",type.c_str());
+		size_t pos = type.find_last_of('#');
+		if (pos != std::string::npos)
+		{
+			type.erase(pos);
+			rinfo = getRenderInfo(type);
+		}
 	}
 	return rinfo;
 }
