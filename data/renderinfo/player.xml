@@ -785,17 +785,14 @@
 <RenderInfo name="warrior_m" parent="playerbaseM" >
 	<Entity source="warrior_m.mesh"/>
 	<Entity objectname="head" bone="crown" source="head1.mesh" />
-	<Entity objectname="hair" bone="crown" source="hair_w1.mesh" />
 </RenderInfo>
 <RenderInfo name="warrior_f" parent="playerbase" >
 	<Entity source="archer_f.mesh"/>
-	<Entity objectname="head" bone="crown" source="head_f1.mesh" />
 </RenderInfo>
 
 <RenderInfo name="mage_m" parent="playerbaseM" >
 	<Entity source="mage_m.mesh"/>
 	<Entity objectname="head" bone="crown" source="head_m1.mesh" />
-	<Entity objectname="hair" bone="crown" source="hair_m1.mesh" />
 </RenderInfo>
 <RenderInfo name="mage_f" parent="playerbase" >
 	<Entity source="archer_f.mesh"/>
@@ -805,7 +802,6 @@
 <RenderInfo name="archer_m" parent="playerbaseM" >
 	<Entity source="mage_m.mesh"/>
 	<Entity objectname="head" bone="crown" source="head_m1.mesh" />
-	<Entity objectname="hair" bone="crown" source="hair_m1.mesh" />
 </RenderInfo>
 <RenderInfo name="archer_f" parent="playerbase" >
 	<Entity source="archer_f.mesh"/>
@@ -824,7 +820,6 @@
 <RenderInfo name="stuntman" parent="playerbaseM">
 	<Entity source="warrior_m.mesh" />
 	<Entity objectname="head" bone="crown" source="head_m1.mesh" />
-	<Entity objectname="hair" bone="crown" source="hair_w1.mesh" />
 	<Entity objectname="hat" bone="crown" source="goblin_hlmMW.mesh" />
 	<!--<Entity objectname="weapon" bone="itemRightHand" source="long_sw.mesh" />
 	
