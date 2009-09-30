@@ -72,11 +72,12 @@ SavegameList::SavegameList (Document* doc)
 }
 
 void SavegameList::update()
-{		
+{	
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 
 	CEGUI::MultiColumnList* savelist = (CEGUI::MultiColumnList*) win_mgr.getWindow("SavegameList");
 	savelist->resetList();
+	savelist->setSortDirection( CEGUI::ListHeaderSegment::None);
 	
 	// Liste aller Files im Save Ordner der Form *.sav
 	Ogre::FileInfoListPtr files;
@@ -102,7 +103,7 @@ void SavegameList::update()
 		filename = it->archive->getName();
 		filename += "/";
 		filename += it->filename;
-		DEBUG5("file found %s",filename.c_str());
+		DEBUG("file found %s",filename.c_str());
 		//File oeffnen
 
 		file.open(filename.c_str(),std::ios::in| std::ios::binary);
