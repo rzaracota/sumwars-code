@@ -788,6 +788,7 @@
 </RenderInfo>
 <RenderInfo name="warrior_f" parent="playerbase" >
 	<Entity source="archer_f.mesh"/>
+	<Entity objectname="head" bone="crown" source="head_f1.mesh" />
 </RenderInfo>
 
 <RenderInfo name="mage_m" parent="playerbaseM" >

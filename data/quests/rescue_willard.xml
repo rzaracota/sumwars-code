@@ -164,7 +164,7 @@
 				addArea('WillardArea','circle','locWillard',20);
 				addArea('WillardEnemiesArea','circle','locWillard',15);
 				if (rescue_willard.freed ~= true) then
-					rescue_willard_tmp.monsters = createMonsterGroup("goblins","locWillard")
+					rescue_willard_tmp.monsters = createMonsterGroup("willard_goblins","locWillard")
 				end
 				if (rescue_willard.freed == true and rescue_willard.finished ~= true) then
 					rescue_willard_tmp.willard = createObject('peasant', 'locWillard')

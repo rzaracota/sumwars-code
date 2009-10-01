@@ -110,3 +110,4 @@ GraphicRenderInfo* GraphicRenderInfo::getParentInfo()
 	return m_parent_ptr;
 	
 }
+

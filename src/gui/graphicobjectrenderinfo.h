@@ -50,6 +50,7 @@ struct MovableObjectInfo
 		m_bone = "";
 		m_position = Ogre::Vector3(0,0,0);
 		m_rotation = Ogre::Vector3(0,0,0);
+		m_scale = 1.0f;
 	}
 
 	enum Type
@@ -71,6 +72,7 @@ struct MovableObjectInfo
 	std::string m_bone;
 	Ogre::Vector3 m_position;
 	Ogre::Vector3 m_rotation;
+	float m_scale;
 };
 
 /**

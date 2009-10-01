@@ -117,6 +117,7 @@
 	</Damage>
 </Ability>
 
+
 <Ability type="goblin_magic_shield"
 		 name="Magic Shield"
 		 description=""
@@ -142,7 +143,7 @@
 </Ability>
 
 <Ability type="goblin_lightning"
-		 name="Lightning"
+		 name="Goblin Lightning"
 		 description=""
 		 time="501.000000"
 		 timer_nr="1.000000"
@@ -164,3 +165,47 @@
 		</LuaImplementation>	
 	</Damage>
 </Ability>
+
+<Ability type="monster_bash" 
+		 name="monster Bash" 
+		 description="Attacks one enemy for serious damage." 
+		 time="1.000000" 
+		 timer_nr="1.000000" 
+		 timer_value="2000.000000" 
+		 base_ability="attack" 
+		 critical_percent="0.660000" 
+		 target_type="melee" >
+	<Effect>
+		<CppImplementation type="dmg_at_target" />
+	</Effect>
+	<Damage>
+		<CppImplementation type="attack" />
+		<LuaImplementation>
+			setDamageValue("phys_mult", getDamageValue("phys_mult")*2);
+		</LuaImplementation>	
+	</Damage>
+</Ability>
+
+<Ability type="fire_shot" 
+		 name="Fire arrow"
+		 description="Basic ranged attack" 
+		 time="1.000000" 
+		 timer_nr="0.000000" 
+		 timer_value="0.000000" 
+		 base_ability="range_attack" 
+		 critical_percent="0.660000" 
+		 target_type="ranged" >
+	<Effect>
+		<CppImplementation type="proj_fly_at_target" />
+	</Effect>
+	<Projectile type="fire_arrow" speed="12000" />
+	<Damage>
+		<CppImplementation type="range_attack" />
+		<LuaImplementation>
+			local magic = get(self,"magic_power");
+			local fdmg = getDamageValue("fire_dmg");
+			setDamageValue("fire_dmg", {fdmg[1] + magic*0.5, fdmg[2] + magic*1.0});
+		</LuaImplementation>
+	</Damage>
+</Ability>
+

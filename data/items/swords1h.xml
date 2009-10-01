@@ -3,7 +3,7 @@
 <!-- ONE HANDED SWORDS -->
 <!-- Dagger -->
 <Item type="weapon" subtype="dagger_sw" name="dagger" size="medium">
-	<Mesh file="dagger_sw.mesh" />
+	<RenderInfo name = "dagger"/>
 	<Image image="set:dagger_sw.png image:full_image" />
 	<Attribute
 		level_requirement="1"
@@ -39,7 +39,7 @@
 
 <!-- Short Sword -->
 <Item type="weapon" subtype="short_sw" name="shortsword" size="medium">
-	<Mesh file="short_sw.mesh" />
+	<RenderInfo name = "shortsword"/>
 	<Image image="set:short_sw.png image:full_image" />
 	<Attribute
 		level_requirement="3"
@@ -75,7 +75,7 @@
 
 <!-- Bronze Sword -->
 <Item type="weapon" subtype="bronze_sw" name="bronzesword" size="medium">
-	<Mesh file="bronze_sw.mesh" />
+	<RenderInfo name = "bronzesword"/>
 	<Image image="set:bronze_sw.png image:full_image" />
 	<Attribute
 		level_requirement="5"
@@ -112,7 +112,7 @@
 <!-- -Sabre -->
 <Item type="weapon" subtype="sabre_sw" name="sabre" size="medium">
 	<Image image="set:sabre_sw.png image:full_image" />
-	<Mesh file="sabre_sw.mesh" />
+	<RenderInfo name="sabre" />
 	<Attribute
 		level_requirement="8"
 		character_requirement="warrior"
@@ -148,9 +148,9 @@
 </Item>
 
 <!-- Legions Blade-->
-<Item type="weapon" subtype="legions_sw" name="legion blade" size="medium">
+<Item type="weapon" subtype="legion_sw" name="legion blade" size="medium">
 	<Image image="set:sword.png image:full_image" />
-	<Mesh file="sword.mesh" />
+	<RenderInfo name="legionBlade" />
 	<Attribute
 		level_requirement="13"
 		character_requirement="warrior"

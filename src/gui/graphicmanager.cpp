@@ -360,6 +360,7 @@ void GraphicManager::loadMovableObjectInfo(TiXmlNode* node, MovableObjectInfo* i
 	attr.getString("objectname",info->m_objectname,"mainmesh");
 	attr.getString("source",info->m_source);
 	attr.getString("bone",info->m_bone);
+	attr.getFloat("scale",info->m_scale,1.0);
 	
 	std::string pos,rot;
 							

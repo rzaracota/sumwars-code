@@ -5,8 +5,8 @@
 <Monster type="MONSTER" subtype="goblin" name="goblin brawler" fraction="monster" race="goblin" layer="NORMAL">
 	<RenderInfo name="goblin" />
 	<Dropslots >
-		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.05" pgold="0.05" max_gold="30" min_level="0" max_level="3" magic_prob="0.1" magic_power="150" />
-		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.03" pgold="0.05" max_gold="20" min_level="0" max_level="2" magic_prob="0.2" magic_power="150" />
+		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.05" pgold="0.05" min_gold="1" max_gold="30" min_level="0" max_level="3" magic_prob="0.1" magic_power="150" />
+		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.03" pgold="0.05" min_gold="1" max_gold="20" min_level="0" max_level="2" magic_prob="0.2" magic_power="150" />
 	</Dropslots>
 	
 	<BasicAttributes
@@ -51,8 +51,8 @@
 <Monster type="MONSTER" subtype="goblin_bow" name="goblin hunter" fraction="monster" race="goblin" layer="NORMAL">
 	<RenderInfo name="goblin_bow" />
 	<Dropslots >
-		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.05" pgold="0.05" max_gold="50" min_level="1" max_level="5" magic_prob="0.1" magic_power="200" />
-		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.03" pgold="0.05" max_gold="30" min_level="1" max_level="3" magic_prob="0.2" magic_power="200" />
+		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.05" pgold="0.05" min_gold="5" max_gold="50" min_level="1" max_level="5" magic_prob="0.1" magic_power="200" />
+		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.03" pgold="0.05" min_gold="1" max_gold="30" min_level="1" max_level="3" magic_prob="0.2" magic_power="200" />
 	</Dropslots>
 	
 	<BasicAttributes
@@ -97,18 +97,18 @@
 <Monster type="MONSTER" subtype="goblin_rob" name="goblin robber" fraction="monster" race="goblin" layer="NORMAL">
 	<RenderInfo name="goblin_rob" />
 	<Dropslots >
-		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.05" pgold="0.05" max_gold="50" min_level="0" max_level="5" magic_prob="0.1" magic_power="250" />
-		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.03" pgold="0.05" max_gold="30" min_level="0" max_level="3" magic_prob="0.2" magic_power="200" />
+		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.05" pgold="0.05" min_gold="5" max_gold="50" min_level="0" max_level="5" magic_prob="0.1" magic_power="250" />
+		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.03" pgold="0.05" min_gold="1" max_gold="30" min_level="0" max_level="3" magic_prob="0.2" magic_power="200" />
 	</Dropslots>
 	
 	<BasicAttributes
 					experience="12"
 					level="3"
-					max_health="50"
+					max_health="55"
 					armor="15"
 					block="0"
-					attack="15"
-					power="45"
+					attack="20"
+					power="60"
 					strength="25"
 					dexterity="10"
 					magic_power="5"
@@ -138,14 +138,159 @@
 	<AI ai_sight_range="12" />
 </Monster>
 
+<!-- Drakazz Goblin Unique -->
+<Monster type="MONSTER" subtype="goblin_drakrazz" name="drakrazz" fraction="monster" race="goblin" layer="NORMAL">
+	<RenderInfo name="goblin_drakrazz" />
+	<Dropslots >
+		<Dropslot pbig="0.06" pmedium="0.15" psmall="0.05" pgold="0.05" min_gold="30" max_gold="100" min_level="0" max_level="7" magic_prob="0.3" magic_power="350" />
+		<Dropslot pbig="0.06" pmedium="0.15" psmall="0.03" pgold="0.05" min_gold="20" max_gold="60" min_level="0" max_level="5" magic_prob="0.3" magic_power="300" />
+		<Dropslot pbig="0.00" pmedium="0.0" psmall="0.4" pgold="0.00" min_gold="20" max_gold="60" min_level="0" max_level="5" magic_prob="0.2" magic_power="300" />
+		<Dropslot pbig="0.00" pmedium="0.0" psmall="0.00" pgold="1.00" min_gold="20" max_gold="50" />
+	</Dropslots>
+	
+	<BasicAttributes
+					experience="50"
+					level="6"
+					max_health="200"
+					armor="20"
+					block="0"
+					attack="20"
+					power="55"
+					strength="35"
+					dexterity="20"
+					magic_power="5"
+					willpower="15"
+					resistances_physical="0"
+					resistances_air="0"
+					resistances_ice="0"
+					resistances_fire="0"
+					resistances_cap_physical="50"
+					resistances_cap_air="50"
+					resistances_cap_ice="50"
+					resistances_cap_fire="50"
+					walk_speed="2500"
+					attack_speed="1200"
+					step_length="1.0"
+					attack_range="1.2"
+					>
+		<Ability type="walk" />
+		<Ability type="attack" rating="1"/>
+		<Ability type="monster_bash" rating="2" timer_value="3000"/>
+		<Ability type="die" />
+		<Ability type="noaction" />
+		
+	</BasicAttributes>
+	
+	<Geometry radius="0.5" />
+	
+	<AI ai_sight_range="12" />
+</Monster>
+
+<!-- Roruz Goblin Unique
+	  -->
+<Monster type="MONSTER" subtype="goblin_roruz" name="roruz" fraction="monster" race="goblin" layer="NORMAL">
+	<RenderInfo name="goblin_roruz" />
+	<Dropslots >
+		<Dropslot pbig="0.06" pmedium="0.15" psmall="0.05" pgold="0.05" min_gold="30" max_gold="100" min_level="2" max_level="8" magic_prob="0.3" magic_power="350" />
+		<Dropslot pbig="0.06" pmedium="0.15" psmall="0.03" pgold="0.05" min_gold="20" max_gold="60" min_level="2" max_level="6" magic_prob="0.3" magic_power="300" />
+		<Dropslot pbig="0.00" pmedium="0.0" psmall="0.4" pgold="0.00" min_gold="20" max_gold="60" min_level="1" max_level="6" magic_prob="0.2" magic_power="300" />
+		<Dropslot pbig="0.00" pmedium="0.0" psmall="0.00" pgold="1.00" min_gold="20" max_gold="50" />
+	</Dropslots>
+	
+	<BasicAttributes
+					experience="60"
+					level="6"
+					max_health="200"
+					armor="15"
+					block="0"
+					attack="90"
+					power="50"
+					strength="25"
+					dexterity="20"
+					magic_power="15"
+					willpower="10"
+					resistances_physical="0"
+					resistances_air="0"
+					resistances_ice="0"
+					resistances_fire="30"
+					resistances_cap_physical="50"
+					resistances_cap_air="50"
+					resistances_cap_ice="50"
+					resistances_cap_fire="50"
+					walk_speed="2500"
+					attack_speed="1000"
+					step_length="1.0"
+					attack_range="1"
+					>
+		<Ability type="walk" />
+		<Ability type="range_attack" rating="1"/>
+		<Ability type="fire_shot" rating="2" timer_nr='1' timer_value="3000"/>
+		<Ability type="die" />
+		<Ability type="noaction" time = "5000" />
+	</BasicAttributes>
+	
+	<Geometry radius="0.5" />
+	
+	<AI ai_sight_range="12" ai_shoot_range="12" />
+</Monster>
+
+<!-- Nubreck Goblin Unique -->
+<Monster type="MONSTER" subtype="goblin_nubreck" name="Nubreck" fraction="monster" race="goblin" layer="NORMAL">
+	<RenderInfo name="goblin_nubreck" />
+	<Dropslots >
+		<Dropslot pbig="0.06" pmedium="0.15" psmall="0.05" pgold="0.05" min_gold="30" max_gold="100" min_level="3" max_level="9" magic_prob="0.3" magic_power="400" />
+		<Dropslot pbig="0.06" pmedium="0.15" psmall="0.03" pgold="0.05" min_gold="20" max_gold="60" min_level="3" max_level="6" magic_prob="0.3" magic_power="300" />
+		<Dropslot pbig="0.00" pmedium="0.0" psmall="0.4" pgold="0.00" min_gold="20" max_gold="60" min_level="2" max_level="6" magic_prob="0.2" magic_power="300" />
+		<Dropslot pbig="0.00" pmedium="0.0" psmall="0.00" pgold="1.00" min_gold="20" max_gold="50" />
+	</Dropslots>
+	
+	<BasicAttributes
+					experience="70"
+					level="7"
+					max_health="250"
+					armor="25"
+					block="25"
+					attack="50"
+					power="100"
+					strength="40"
+					dexterity="20"
+					magic_power="5"
+					willpower="15"
+					resistances_physical="0"
+					resistances_air="20"
+					resistances_ice="20"
+					resistances_fire="20"
+					resistances_cap_physical="50"
+					resistances_cap_air="50"
+					resistances_cap_ice="50"
+					resistances_cap_fire="50"
+					walk_speed="2500"
+					attack_speed="1200"
+					step_length="1.0"
+					attack_range="1.4"
+					>
+		<Ability type="walk" />
+		<Ability type="attack" rating="1"/>
+		<Ability type="monster_bash" rating="2" timer_value="3000"/>
+		<Ability type="die" />
+		<Ability type="noaction" />
+		
+	</BasicAttributes>
+	
+	<Geometry radius="0.5" />
+	
+	<AI ai_sight_range="12" />
+</Monster>
+
+
 
 <!-- Goblinhund -->
 <!-- L4 -->
 <Monster type="MONSTER" subtype="gob_dog" name="goblin dog" fraction="monster" race="animal" layer="NORMAL">
 	<RenderInfo name="gobDog" />
 	<Dropslots >
-		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.04" pgold="0.05" max_gold="70" min_level="2" max_level="6" magic_prob="0.1" magic_power="250" />
-		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.04" pgold="0.05" max_gold="50" min_level="1" max_level="4" magic_prob="0.2" magic_power="250" />
+		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.04" pgold="0.05" min_gold="10" max_gold="70" min_level="2" max_level="6" magic_prob="0.1" magic_power="250" />
+		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.04" pgold="0.05" min_gold="5" max_gold="50" min_level="1" max_level="4" magic_prob="0.2" magic_power="250" />
 	</Dropslots>
 	<BasicAttributes
 		experience="15"
@@ -153,8 +298,8 @@
 		max_health="100"
 		armor="10"
 		block="0"
-		attack="20"
-		power="35"
+		attack="45"
+		power="45"
 		strength="10"
 		dexterity="20"
 		magic_power="0"
@@ -188,8 +333,8 @@
 <Monster type="MONSTER" subtype="goblin_bon" name="boneshaker" fraction="monster" race="goblin" layer="NORMAL">
 	<RenderInfo name="goblin_bon" />
 	<Dropslots >
-		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.05" pgold="0.05" max_gold="50" min_level="3" max_level="6" magic_prob="0.1" magic_power="300" />
-		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.03" pgold="0.05" max_gold="30" min_level="1" max_level="4" magic_prob="0.2" magic_power="250" />
+		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.05" pgold="0.05" min_gold="10" max_gold="50" min_level="3" max_level="6" magic_prob="0.1" magic_power="300" />
+		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.03" pgold="0.05" min_gold="5" max_gold="30" min_level="1" max_level="4" magic_prob="0.2" magic_power="250" />
 	</Dropslots>
 	
 	<BasicAttributes
@@ -492,6 +637,18 @@
 	<SubGroup subtype="goblin_rob" number="1" prob="0.5" />
 </MonsterGroup>
 
+<MonsterGroup name="goblins_roruz" >
+	<SubGroup subtype="goblin" number="2" prob="1.0" />
+	<SubGroup subtype="goblin_rob" number="1" prob="1.0" />
+	<SubGroup subtype="goblin_rob" number="1" prob="0.5" />
+	<SubGroup subtype="goblin_bow" number="2" prob="1.0" />
+	<SubGroup subtype="goblin_roruz" number="1" prob="1.0" />
+</MonsterGroup>
+
+<MonsterGroup name="goblins_nubreck" >
+	<SubGroup subtype="goblin_rob" number="4" prob="1.0" />
+	<SubGroup subtype="goblin_nubreck" number="1" prob="1.0" />
+</MonsterGroup>
 <MonsterGroup name="goblins_l5" >
 	<SubGroup subtype="goblin_rob" number="1" prob="1.0" />
 	<SubGroup subtype="goblin_rob" number="1" prob="0.5" />
@@ -512,3 +669,10 @@
 	<SubGroup subtype="goblin_bow" number="2" prob="0.5" />
 </MonsterGroup>
 
+
+
+<MonsterGroup name="willard_goblins" >
+	<SubGroup subtype="goblin" number="4" prob="1.0" />
+	<SubGroup subtype="goblin_bow" number="2" prob="1.0" />
+	<SubGroup subtype="goblin_drakrazz" number="1" prob="1.0" />
+</MonsterGroup>

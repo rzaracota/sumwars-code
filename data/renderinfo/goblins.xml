@@ -10,6 +10,10 @@
 	<Action name="attack">
 		<Animation name="attackArmed2" />
 	</Action>
+	
+	<Action name="monster_bash" reference="attack" />
+	
+	<Action name="fire_shot" reference="range_attack" />
 
 	<Action name="die">
 		<Animation name="die" />
@@ -52,6 +56,33 @@
 <RenderInfo name="goblin_rob" parent="goblinbase">
 	<Entity source="goblinGreen.mesh"/>
 	<Entity objectname="weapon" bone="itemRightHand" source="goblin_hmr.mesh" />
+</RenderInfo>
+
+<RenderInfo name="goblin_drakrazz" parent="goblinbase">
+	<Entity source="goblinGreen.mesh" scale="1.2"/>
+	<Entity objectname="weapon" bone="itemRightHand" source="goblin_hmr.mesh" />
+</RenderInfo>
+
+<RenderInfo name="goblin_roruz" parent="goblinbase">
+	<Entity source="goblinGreen.mesh" scale="1.2"/>
+	<Entity objectname="weapon" bone="itemLeftHand" source="goblin_sbw.mesh" />
+	<ParticleSystem objectname="fire" bone="itemLeftHand" source="HandFire" />
+	<Action name="walk">
+		<Animation name="walkRanged" />
+	</Action>
+	<Action name="noaction">
+		<Animation name="idleRanged1" />
+	</Action>
+	<Action name="noaction">
+		<Animation name="idleRanged2" />
+	</Action>
+</RenderInfo>
+
+<RenderInfo name="goblin_nubreck" parent="goblinbase">
+	<Entity source="goblinGreen.mesh" scale="1.2"/>
+	<Entity objectname="weapon" bone="itemRightHand" source="nail_hmr.mesh" />
+	<Entity objectname="armor" bone="kneeRight" source="gobLeg_arm.mesh" />
+	<Entity objectname="shield" bone="itemLeftHand" source="goblin_shd.mesh" />
 </RenderInfo>
 
 <RenderInfo name="goblin_bon" parent="goblinbase">

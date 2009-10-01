@@ -328,6 +328,7 @@ void GraphicObject::addMovableObject(MovableObjectInfo& object)
 		node->pitch(Ogre::Degree(object.m_rotation[0]));
 		node->yaw(Ogre::Degree(object.m_rotation[1]));
 		node->roll(Ogre::Degree(object.m_rotation[2]));
+		node->setScale(Ogre::Vector3(object.m_scale, object.m_scale, object.m_scale));
 		
 		DEBUG5("object %s scale %f",object.m_objectname.c_str(), node->_getDerivedScale().x);
 	}

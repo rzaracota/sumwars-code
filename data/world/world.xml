@@ -253,6 +253,8 @@
 			<SpawnGroup group_name="goblins_bow_l3" number="20" />
 			<SpawnGroup group_name="goblins_l3" number="15" />
 			<SpawnGroup group_name="goblins_dogs_l3" number="15"/>
+			<SpawnGroup group_name="goblins_roruz" number="1"/>
+			<SpawnGroup group_name="goblins_nubreck" number="1"/>
 		</SpawnGroups>
 	</Region>
 	

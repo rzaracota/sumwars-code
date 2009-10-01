@@ -86,7 +86,7 @@
 
 <RenderInfo name="fire_arrow">
 	<Entity objectname="arrow"  source="arrow.mesh" position="0 1.6 0" />
-	<ParticleSystem objectname="particle" source="Fire_Arrow" position="0 1.6 0" />
+	<ParticleSystem objectname="particle" source="Firebolt" position="0 1.6 0" />
 	
 	<Action name="explode">
 		<Detach objectname="arrow" />
