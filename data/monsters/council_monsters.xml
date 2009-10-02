@@ -57,7 +57,7 @@
 	<BasicAttributes
 		experience="10"
 		level="1"
-		max_health="15"
+		max_health="30"
 		armor="2"
 		block="0"
 		attack="12"

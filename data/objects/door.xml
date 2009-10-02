@@ -66,20 +66,22 @@
 	
 	<Event trigger="object_use">
 		<Effect>
-			local set = getScriptObjectFlag(trigger.used_object,'open')
-			setScriptObjectFlag(trigger.used_object,'open',not set)
-			
-			local pos = get(trigger.used_object,"position")
-			local shift={-0.7,4};
-			if (not set) then
-				shift[1] = 0.7;
-				shift[2] = -4;
-			end
-			
-			vecrotate(shift,get(trigger.used_object,"angle"));
-			vecadd(pos,shift);
-			
-			moveObject(trigger.used_object,pos,false)
+			if (scriptobjectvar[trigger.used_object]["locked"] ~= true or trigger.lock_override) then
+				local set = getScriptObjectFlag(trigger.used_object,'open')
+				setScriptObjectFlag(trigger.used_object,'open',not set)
+				
+				local pos = get(trigger.used_object,"position")
+				local shift={-0.7,4};
+				if (not set) then
+					shift[1] = 0.7;
+					shift[2] = -4;
+				end
+				
+				vecrotate(shift,get(trigger.used_object,"angle"));
+				vecadd(pos,shift);
+				
+				moveObject(trigger.used_object,pos,false)
+			end;
 		</Effect>
 	</Event>
 </ScriptObject>
@@ -91,20 +93,22 @@
 	
 	<Event trigger="object_use">
 		<Effect>
-			local set = getScriptObjectFlag(trigger.used_object,'open')
-			setScriptObjectFlag(trigger.used_object,'open',not set)
-			
-			local pos = get(trigger.used_object,"position")
-			local shift={-0.7,-4};
-			if (not set) then
-			shift[1] = 0.7;
-			shift[2] = 4;
-			end
-			
-			vecrotate(shift,get(trigger.used_object,"angle"));
-			vecadd(pos,shift);
-			
-			moveObject(trigger.used_object,pos,false)
+			if (scriptobjectvar[trigger.used_object]["locked"] ~= true or trigger.lock_override) then
+				local set = getScriptObjectFlag(trigger.used_object,'open')
+				setScriptObjectFlag(trigger.used_object,'open',not set)
+				
+				local pos = get(trigger.used_object,"position")
+				local shift={-0.7,-4};
+				if (not set) then
+				shift[1] = 0.7;
+				shift[2] = 4;
+				end
+				
+				vecrotate(shift,get(trigger.used_object,"angle"));
+				vecadd(pos,shift);
+				
+				moveObject(trigger.used_object,pos,false)
+			end;
 		</Effect>
 	</Event>
 </ScriptObject>

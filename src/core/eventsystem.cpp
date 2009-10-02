@@ -1463,6 +1463,11 @@ int EventSystem::getItemValue(lua_State *L)
 		{
 			return m_item->getValue(valname);
 		}
+		else if (valname == "type")
+		{
+			lua_pushstring(L,"noitem");
+			return 1;
+		}
 		return 0;
 	}
 	else
