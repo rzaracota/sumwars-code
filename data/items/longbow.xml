@@ -135,7 +135,7 @@
 		damage_attack="54"
 		damage_power="53"
 		attack_range="8"
-		two_handed="no"
+		two_handed="yes"
 		dattack_speed="-700"
 	/>
 	<DropChance

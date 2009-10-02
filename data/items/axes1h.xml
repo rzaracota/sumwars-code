@@ -2,7 +2,7 @@
 
 <!-- hatchet / Beil -->
 <Item type="weapon" subtype="hatch_axe" name="hatchet" size="medium">
-	<Mesh file="hatch_axe.mesh" />
+	<RenderInfo name = "hatchet" />
 	<Image image="set:hatch_axe.png image:full_image" />
 	<Attribute
 		level_requirement="1"
@@ -39,7 +39,7 @@
 
 <!-- bronze_axe-->
 <Item type="weapon" subtype="bronze_axe" name="bronze axe" size="medium">
-	<Mesh file="bronze_axe.mesh" />
+	<RenderInfo name = "bronzeAxe" />
 	<Image image="set:bronze_axe.png image:full_image" />
 	<Attribute
 		level_requirement="3"
@@ -76,7 +76,7 @@
 
 <!-- Eisenbeil -->
 <Item type="weapon" subtype="ironha_axe" name="iron hatchet" size="medium">
-	<Mesh file="ironha_axe.mesh" />
+	<RenderInfo name = "ironHatchet" />
 	<Image image="set:ironha_axe.png image:full_image" />
 	<Attribute
 		level_requirement="5"
@@ -113,7 +113,7 @@
 
 <!-- Schlachtebeil -->
 <Item type="weapon" subtype="cleave_axe" name="cleaver" size="medium">
-	<Mesh file="axe.mesh" />
+	<RenderInfo name= "ironHatchet" />
 	<Image image="set:ironha_axe.png image:full_image" />
 	<Attribute
 		level_requirement="8"
@@ -150,7 +150,7 @@
 
 <!-- Eisenaxt -->
 <Item type="weapon" subtype="iron_axe" name="iron axe" size="medium">
-	<Mesh file="axe.mesh" />
+	<RenderInfo name= "ironHatchet" />
 	<Image image="set:ironha_axe.png image:full_image" />
 	<Attribute
 		level_requirement="13"
@@ -188,7 +188,7 @@
 <!-- Soeldneraxt -->
 <Item type="weapon" subtype="merc_axe" name="mercenary axe" size="medium">
 	<Image image="set:axe.png image:full_image" />
-	<Mesh file="axe.mesh" />
+	<RenderInfo name= "ironHatchet" />
 	<Attribute
 		level_requirement="19"
 		character_requirement="warrior,priest"
@@ -225,7 +225,7 @@
 <!-- Stahlaxt -->
 <Item type="weapon" subtype="steel_axe" name="steel axe" size="medium">
 	<Image image="set:axe.png image:full_image" />
-	<Mesh file="axe.mesh" />
+	<RenderInfo name= "ironHatchet" />
 	<Attribute
 		level_requirement="25"
 		character_requirement="warrior,priest"
@@ -262,7 +262,7 @@
 <!-- Kampfaxt -->
 <Item type="weapon" subtype="battle_axe" name="battle axe" size="medium">
 	<Image image="set:axe.png image:full_image" />
-	<Mesh file="axe.mesh" />
+	<RenderInfo name= "ironHatchet" />
 	<Attribute
 		level_requirement="30"
 		character_requirement="warrior,priest"
@@ -299,7 +299,7 @@
 <!-- Waechteraxt -->
 <Item type="weapon" subtype="guard_axe" name="guard axe" size="medium">
 	<Image image="set:axe.png image:full_image" />
-	<Mesh file="axe.mesh" />
+	<RenderInfo name= "ironHatchet" />
 	<Attribute
 		level_requirement="35"
 		character_requirement="warrior,priest"
@@ -336,7 +336,7 @@
 <!-- Minotaurenaxt -->
 <Item type="weapon" subtype="mino_axe" name="minotaur axe" size="medium">
 	<Image image="set:axe.png image:full_image" />
-	<Mesh file="axe.mesh" />
+	<RenderInfo name= "ironHatchet" />
 	<Attribute
 		level_requirement="40"
 		character_requirement="warrior,priest"
@@ -373,7 +373,7 @@
 <!-- Donneraxt -->
 <Item type="weapon" subtype="wind_axe" name="thunder axe" size="medium">
 	<Image image="set:axe.png image:full_image" />
-	<Mesh file="axe.mesh" />
+	<RenderInfo name= "ironHatchet" />
 	<Attribute
 		level_requirement="45"
 		character_requirement="warrior,priest"
@@ -412,7 +412,7 @@
 <!-- Daemonenaxt -->
 <Item type="weapon" subtype="demon_axe" name="demon axe" size="medium">
 	<Image image="set:axe.png image:full_image" />
-	<Mesh file="axe.mesh" />
+	<RenderInfo name= "ironHatchet" />
 	<Attribute
 		level_requirement="50"
 		character_requirement="warrior,priest"
@@ -449,7 +449,7 @@
 <!-- Obsidianaxt -->
 <Item type="weapon" subtype="obsid_axe" name="obsidian axe" size="medium">
 	<Image image="set:axe.png image:full_image" />
-	<Mesh file="axe.mesh" />
+	<RenderInfo name= "ironHatchet" />
 	<Attribute
 		level_requirement="55"
 		character_requirement="warrior,priest"
@@ -486,7 +486,7 @@
 <!-- Vulkanaxt -->
 <Item type="weapon" subtype="vulcan_axe" name="vulcano axe" size="medium">
 	<Image image="set:axe.png image:full_image" />
-	<Mesh file="axe.mesh" />
+	<RenderInfo name= "ironHatchet" />
 	<Attribute
 		level_requirement="60"
 		character_requirement="warrior,priest"
@@ -525,7 +525,7 @@
 <!-- Berserkeraxt -->
 <Item type="weapon" subtype="bersrk_axe" name="berserker axe" size="medium">
 	<Image image="set:axe.png image:full_image" />
-	<Mesh file="axe.mesh" />
+	<RenderInfo name= "ironHatchet" />
 	<Attribute
 		level_requirement="65"
 		character_requirement="warrior,priest"
@@ -562,7 +562,7 @@
 <!-- Diamantaxt -->
 <Item type="weapon" subtype="diamnt_axe" name="diamont axe" size="medium">
 	<Image image="set:axe.png image:full_image" />
-	<Mesh file="axe.mesh" />
+	<RenderInfo name= "ironHatchet" />
 	<Attribute
 		level_requirement="70"
 		character_requirement="warrior,priest"
@@ -599,7 +599,7 @@
 <!-- Zwergenaxt -->
 <Item type="weapon" subtype="dwarf_axe" name="dwarfen axe" size="medium">
 	<Image image="set:axe.png image:full_image" />
-	<Mesh file="axe.mesh" />
+	<RenderInfo name= "ironHatchet" />
 	<Attribute
 		level_requirement="75"
 		character_requirement="warrior,priest"
@@ -636,7 +636,7 @@
 <!-- Hoellenaxt -->
 <Item type="weapon" subtype="hell_axe" name="hell axe" size="medium">
 	<Image image="set:axe.png image:full_image" />
-	<Mesh file="axe.mesh" />
+	<RenderInfo name= "ironHatchet" />
 	<Attribute
 		level_requirement="80"
 		character_requirement="warrior,priest"

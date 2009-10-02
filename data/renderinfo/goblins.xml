@@ -147,3 +147,24 @@
 	<Entity source="goblinGreen.mesh"/>
 	<Entity objectname="weapon" bone="itemRightHand" source="crude_sw.mesh" />
 </RenderInfo>
+
+<RenderInfo name="goblin_hero" parent="goblinbase">
+	<Entity source="goblinGreen.mesh"/>
+	<Entity objectname="weapon" bone="itemRightHand" source="sledge_hmr.mesh" />
+	
+	<Action name="noaction">
+		<Animation name="hammerIdle" />
+	</Action>
+	
+	<Action name="walk">
+		<Animation name="hammerWalk" />
+	</Action>
+	
+	<Action name="attack">
+		<Animation name="hammerAttack" />
+	</Action>
+	
+	<Action name="bash">
+		<Animation name="hammerBash" />
+	</Action>
+</RenderInfo>

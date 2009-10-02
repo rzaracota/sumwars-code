@@ -3,46 +3,29 @@
 <ObjectGroupTemplate name="test" version="1.0">
   <Shape
     type="RECT"
-    extent_x="40"
-    extent_y="40"
+    extent_x="8.8474941"
+    extent_y="8.8474941"
     angle="0"
   />
 
   <WayPoint pos_x="0" pos_y="0" />
 
   <ObjectContent>
-    <Object subtype="$tree" 
-            center_x="3.28523788" 
-            center_y="6.207080828" 
-            angle="0" 
+    <Object subtype="mojo_tortured" 
+            center_x="-0.3414280489" 
+            center_y="-1.162400466e-016" 
+			height="-2.775557562e-017" 
+            angle="1.950649368e-014" 
             probability="1" 
             prob_angle="false" 
     />
-	
   </ObjectContent>
 
   <Locations>
-	  <Location name="loc1" pos_x="0" pos_y="-5" />
-	  <Location name="loc2" pos_x="-5" pos_y="-5" />
-	  <Location name="loc3" pos_x="5" pos_y="-5" />
-	  <Location name="loc4" pos_x="0" pos_y="0.4" />
-	  <Location name="loc5" pos_x="0.5" pos_y="-0.4" />
-	  <Location name="loc6" pos_x="-0.5" pos_y="-0.4" />
-		<Location name="center" pos_x="0" pos_y="0" />
+    <Location name="center" pos_x="4.92718999" pos_y="0" />
   </Locations>
+
   <Areas>
-	  <Area name="area1" type="RECT"
-			center_x="-5"
-			center_y="5"
-			extent_x="15"
-			extent_y="1"
-    		angle="90"
-			/>
-	  <Area name="area2" type="CIRCLE"
-			center_x="-5"
-			center_y="5"
-			radius="4"
-			angle="0"
-			/>
   </Areas>
+
 </ObjectGroupTemplate>

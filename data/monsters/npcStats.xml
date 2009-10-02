@@ -180,7 +180,7 @@
 
 <Monster type="NPC" subtype="guard" name="Guard" fraction="human" race="human" layer="NORMAL">
 	<Mesh file="guard_ais" />
-	<EmotionSet name="farmer" />
+	<EmotionSet name="councilMage_emotion" />
 	<Dropslots >
 		<Dropslot pbig="0.1" pmedium="0.2" psmall="0.2" pgold="0.2" max_gold="50" min_level="0" max_level="10" magic_prob="0.1" magic_power="1000" />
 		<Dropslot pbig="0.1" pmedium="0.2" psmall="0.2" pgold="0.2" max_gold="50" min_level="0" max_level="20" magic_prob="0.2" magic_power="1000" />

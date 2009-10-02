@@ -4,7 +4,7 @@
 <!-- hammer -->
 <Item type="weapon" subtype="hammer_hmr" name="hammer" size="medium">
 	<Image image="set:hammer.png image:full_image" />
-	<Mesh file="hammer_hmr.mesh" />
+	<RenderInfo name= "hammer" />
 	<Attribute
 		level_requirement="1"
 		character_requirement="warrior,priest"
@@ -41,7 +41,7 @@
 <!-- Zeremonienhammer -->
 <Item type="weapon" subtype="cermon_hmr" name="cermeonial hammer" size="medium">
 	<Image image="set:cermon_hmr.png image:full_image" />
-	<Mesh file="cermon_hmr.mesh" />
+	<RenderInfo name = "ceremonialHammer" />
 	<Attribute
 			  level_requirement="3"
 			  character_requirement="priest"
@@ -78,7 +78,7 @@
 <!-- Eisenhammer -->
 <Item type="weapon" subtype="iron_hmr" name="iron hammer" size="medium">
 	<Image image="set:iron_hmr.png image:full_image" />
-	<Mesh file="iron_hmr.mesh" />
+	<RenderInfo name = "ironHammer" />
 	<Attribute
 		level_requirement="5"
 		character_requirement="priest"
@@ -115,7 +115,7 @@
 <!-- Eisenbeschlagene Keule -->
 <Item type="weapon" subtype="iroclb_hmr" name="iron club" size="medium">
 	<Image image="set:iroclb_hmr.png image:full_image" />
-	<Mesh file="iroclb_hmr.mesh" />
+	<RenderInfo name = "ironClub" />
 	<Attribute
 		level_requirement="7"
 		character_requirement="warrior,priest"
@@ -152,7 +152,7 @@
 <!-- Schlaegel -->
 <Item type="weapon" subtype="maul_hmr" name="maul" size="medium">
 	<Image image="set:hammer.png image:full_image" />
-	<Mesh file="hammer.mesh" />
+	<RenderInfo name= "ironHammer" />
 	<Attribute
 		level_requirement="8"
 		character_requirement="priest"
@@ -189,7 +189,7 @@
 <!-- Morgenstern -->
 <Item type="weapon" subtype="mrnstr_hmr" name="morning star" size="medium">
 	<Image image="set:hammer.png image:full_image" />
-	<Mesh file="hammer.mesh" />
+	<RenderInfo name= "ironHammer" />
 	<Attribute
 		level_requirement="13"
 		character_requirement="priest"
@@ -226,7 +226,7 @@
 <!-- Kraehenkopf -->
 <Item type="weapon" subtype="crow_hmr" name="crowhead" size="medium">
 	<Image image="set:hammer.png image:full_image" />
-	<Mesh file="hammer.mesh" />
+	<RenderInfo name= "ironHammer" />
 	<Attribute
 		level_requirement="19"
 		character_requirement="priest"
@@ -263,7 +263,7 @@
 <!-- Reiterhammer -->
 <Item type="weapon" subtype="rider_hmr" name="rider hammer" size="medium">
 	<Image image="set:hammer.png image:full_image" />
-	<Mesh file="hammer.mesh" />
+	<RenderInfo name= "ironHammer" />
 	<Attribute
 		level_requirement="25"
 		character_requirement="priest"
@@ -300,7 +300,7 @@
 <!-- Streitkolben -->
 <Item type="weapon" subtype="mace_hmr" name="mace" size="medium">
 	<Image image="set:hammer.png image:full_image" />
-	<Mesh file="hammer.mesh" />
+	<RenderInfo name= "ironHammer" />
 	<Attribute
 		level_requirement="30"
 		character_requirement="priest"
@@ -337,7 +337,7 @@
 <!-- Stahlhammer -->
 <Item type="weapon" subtype="steel_hmr" name="steel hammer" size="medium">
 	<Image image="set:hammer.png image:full_image" />
-	<Mesh file="hammer.mesh" />
+	<RenderInfo name= "ironHammer" />
 	<Attribute
 		level_requirement="35"
 		character_requirement="priest"
@@ -374,7 +374,7 @@
 <!-- Kriegshammer -->
 <Item type="weapon" subtype="battle_hmr" name="battle hammer" size="medium">
 	<Image image="set:hammer.png image:full_image" />
-	<Mesh file="hammer.mesh" />
+	<RenderInfo name= "ironHammer" />
 	<Attribute
 		level_requirement="40"
 		character_requirement="priest"
@@ -411,7 +411,7 @@
 <!-- Schmetterkopf -->
 <Item type="weapon" subtype="smash_hmr" name="smashhead" size="medium">
 	<Image image="set:axe.png image:full_image" />
-	<Mesh file="axe.mesh" />
+	<RenderInfo name= "ironHammer" />
 	<Attribute
 		level_requirement="45"
 		character_requirement="priest"
@@ -448,7 +448,7 @@
 <!-- Stahlstreitkolben -->
 <Item type="weapon" subtype="stlmce_hmr" name="steel mace" size="medium">
 	<Image image="set:hammer.png image:full_image" />
-	<Mesh file="hammer.mesh" />
+	<RenderInfo name= "ironHammer" />
 	<Attribute
 		level_requirement="50"
 		character_requirement="priest"
@@ -485,7 +485,7 @@
 <!-- Stahlschlaegel -->
 <Item type="weapon" subtype="stlml_hmr" name="steel maul" size="medium">
 	<Image image="set:hammer.png image:full_image" />
-	<Mesh file="hammer.mesh" />
+	<RenderInfo name= "ironHammer" />
 	<Attribute
 		level_requirement="55"
 		character_requirement="priest"
@@ -522,7 +522,7 @@
 <!-- Sechskantstreitkolben -->
 <Item type="weapon" subtype="mace6_hmr" name="sixedged mace" size="medium">
 	<Image image="set:hammer.png image:full_image" />
-	<Mesh file="hammer.mesh" />
+	<RenderInfo name= "ironHammer" />
 	<Attribute
 		level_requirement="60"
 		character_requirement="priest"
@@ -559,7 +559,7 @@
 <!-- Silberhammer -->
 <Item type="weapon" subtype="silver_hmr" name="silver hammer" size="medium">
 	<Image image="set:axe.png image:full_image" />
-	<Mesh file="axe.mesh" />
+	<RenderInfo name= "ironHammer" />
 	<Attribute
 		level_requirement="65"
 		character_requirement="priest"
@@ -596,7 +596,7 @@
 <!-- Diamanthammer -->
 <Item type="weapon" subtype="diamnt_hmr" name="diamont hammer" size="medium">
 	<Image image="set:hammer.png image:full_image" />
-	<Mesh file="hammer.mesh" />
+	<RenderInfo name= "ironHammer" />
 	<Attribute
 			  level_requirement="70"
 		character_requirement="priest"
@@ -633,7 +633,7 @@
 <!-- Priesterstreitkolben -->
 <Item type="weapon" subtype="prsmce_hmr" name="priest mace" size="medium">
 	<Image image="set:hammer.png image:full_image" />
-	<Mesh file="hammer.mesh" />
+	<RenderInfo name= "ironHammer" />
 	<Attribute
 		level_requirement="75"
 		character_requirement="priest"
@@ -670,7 +670,7 @@
 <!-- Heiliger Hammer -->
 <Item type="weapon" subtype="holy_hmr" name="holy hammer" size="medium">
 	<Image image="set:hammer.png image:full_image" />
-	<Mesh file="hammer.mesh" />
+	<RenderInfo name= "ironHammer" />
 	<Attribute
 		level_requirement="80"
 		character_requirement="priest"

@@ -164,6 +164,7 @@ FireSword
 }
 
 }
+
 BurningBlade
 {
     material Flare
@@ -198,5 +199,100 @@ BurningBlade
         green -0.25
         blue -0.25
 }
+
+}
+
+BurningBladeShort
+{
+    material Flare
+    particle_width 20
+    particle_height 20
+    cull_each false
+    quota 10000
+    billboard_type point
+ 
+
+   emitter Point
+{
+        angle 15
+        emission_rate 275
+        time_to_live 0.075
+        direction 0 0 1
+        velocity_min 150
+        velocity_max 200
+        colour_range_start 0.3 0 0
+        colour_range_end 0.3 0.1 0
+}
+
+    affector LinearForce
+{
+        force_vector      0 30 100
+        force_application add
+}
+    // Fader
+    affector ColourFader
+{
+        red -0.25
+        green -0.25
+        blue -0.25
+}
+
+}
+
+BurningAxe
+{
+    material Flare
+    particle_width 20
+    particle_height 20
+    cull_each false
+    quota 10000
+    billboard_type point
+ 
+
+   emitter Point
+{
+        angle 25
+        emission_rate 150
+        time_to_live 0.08
+        direction 1 0 0
+        velocity_min 75
+        velocity_max 150
+        colour_range_start 0.6 0 0
+        colour_range_end 0.6 0.3 0
+}
+}
+
+BurningAxeRing
+{
+    material        Flare
+    particle_width  15
+    particle_height 15
+	cull_each       false
+    quota           10000
+    billboard_type  point
+    
+    // Area emitter
+    emitter Cylinder
+{
+        angle           30
+        emission_rate   1200
+        time_to_live    0.06
+        direction       0 1 0
+        velocity    	30
+        colour_range_start  0.9 0 0
+        colour_range_end    0.6 0.3 0
+        width           40
+        height          35
+        depth           15
+}
+
+    // Fader
+    affector ColourFader
+{
+        red -0.25
+        green -0.25
+        blue -0.25
+}
+
 
 }

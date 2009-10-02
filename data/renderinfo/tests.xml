@@ -53,4 +53,8 @@
 	<Action name="attack">
 		<Sound objectname="swordsound" name="club_attack" start="0.5"/>
 	</Action>
+</RenderInfo>
+
+<RenderInfo name="ParticleLine">
+	<ParticleSystem objectname="line" source="Firewave" position="0.0 1.0 0.0" rotation="0.0 0.0 0.0" />
 </RenderInfo>	

@@ -149,7 +149,7 @@ FireLine
         angle 0
         emission_rate 450
         time_to_live 3.0
-        direction 1 1 1
+        direction 0 1 0
         velocity_min 1
         velocity_max 2
         colour_range_start 1 0 0
@@ -700,14 +700,14 @@ Fire_Arrow
 
    emitter Point
 {
-        angle 360
+        angle 25
         emission_rate 275
-        time_to_live 0.2
+        time_to_live 0.1
         direction 1 0 0
         velocity_min 250
         velocity_max 300
         colour_range_start 1 0 0
-        colour_range_end 1 0 0
+        colour_range_end 1 0.5 0
 }
 }
 

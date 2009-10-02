@@ -20,13 +20,3 @@
 <RenderInfo name="sharkGlovesGuard" parent="guardPole">
 	<Entity source="shark_glv.mesh"/>
 </RenderInfo>
-
-<RenderInfo name="goblinGloves" parent="playerbase">
-	<Entity source="goblin_glv.mesh"/> 
-</RenderInfo>
-<RenderInfo name="goblinGloves#m" parent="playerbase">
-	<Entity source="goblin_glvMW.mesh"/> 
-</RenderInfo>
-<RenderInfo name="goblinGloves#f" parent="playerbase">
-	<Entity source="goblin_glvMW.mesh"/> 
-</RenderInfo>

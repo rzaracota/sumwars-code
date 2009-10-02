@@ -144,6 +144,8 @@
 		<Unit filename="core\pathfind.h" />
 		<Unit filename="core\player.cpp" />
 		<Unit filename="core\player.h" />
+		<Unit filename="core\playerbase.cpp" />
+		<Unit filename="core\playerbase.h" />
 		<Unit filename="core\projectile.cpp" />
 		<Unit filename="core\projectile.h" />
 		<Unit filename="core\quest.cpp" />

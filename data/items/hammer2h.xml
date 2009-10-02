@@ -3,7 +3,7 @@
 <!-- Vorschlaghammer -->
 <Item type="weapon" subtype="sledge_hmr" name="sledgehammer" size="big">
 	<Image image="set:sledgehammer.png image:full_image" />
-	<Mesh file="sledge_hmr.mesh" />
+	<RenderInfo name = "sledgeHammer" />
 	<Attribute
 		level_requirement="1"
 		character_requirement="warrior,priest"
@@ -40,7 +40,7 @@
 <!-- Bronzehammer -->
 <Item type="weapon" subtype="bronze_hmr" name="bronze hammer" size="big">
 	<Image image="set:bronze_hmr.png image:full_image" />
-	<Mesh file="bronze_hmr.mesh" />
+	<RenderInfo name = "bronzeHammer" />
 	<Attribute
 		level_requirement="3"
 		character_requirement="priest"
@@ -77,7 +77,7 @@
 <!-- Langstiel -->
 <Item type="weapon" subtype="long_hmr" name="longshaft" size="big">
 	<Image image="set:long_hmr.png image:full_image" />
-	<Mesh file="long_hmr.mesh" />
+	<RenderInfo name = "longshaft" />
 	<Attribute
 		level_requirement="5"
 		character_requirement="priest"
@@ -115,7 +115,7 @@
 <!-- Waechterhammer -->
 <Item type="weapon" subtype="guard_hmr" name="guard hammer" size="big">
 	<Image image="set:sledgehammer.png image:full_image" />
-	<Mesh file="sledgehammer.mesh" />
+	<RenderInfo name= "sledgeHammer" />
 	<Attribute
 		level_requirement="8"
 		character_requirement="priest"
@@ -153,7 +153,7 @@
 <!-- Silberschrecken -->
 <Item type="weapon" subtype="silver_hmr" name="silverterror" size="big">
 	<Image image="set:sledgehammer.png image:full_image" />
-	<Mesh file="sledgehammer.mesh" />
+	<RenderInfo name= "sledgeHammer" />
 	<Attribute
 		level_requirement="13"
 		character_requirement="priest"
@@ -191,7 +191,7 @@
 <!-- Glimmhammer -->
 <Item type="weapon" subtype="glow_hmr" name="glow hammer" size="big">
 	<Image image="set:sledgehammer.png image:full_image" />
-	<Mesh file="sledgehammer.mesh" />
+	<RenderInfo name= "sledgeHammer" />
 	<Attribute
 		level_requirement="19"
 		character_requirement="priest"
@@ -231,7 +231,7 @@
 <!-- Knochenbrecher -->
 <Item type="weapon" subtype="bone_hmr" name="bonebreaker" size="big">
 	<Image image="set:sledgehammer.png image:full_image" />
-	<Mesh file="sledgehammer.mesh" />
+	<RenderInfo name= "sledgeHammer" />
 	<Attribute
 		level_requirement="25"
 		character_requirement="priest"
@@ -268,7 +268,7 @@
 <!-- Truemmerkopf -->
 <Item type="weapon" subtype="smash_hmr" name="smashhead" size="big">
 	<Image image="set:sledgehammer.png image:full_image" />
-	<Mesh file="sledgehammer.mesh" />
+	<RenderInfo name= "sledgeHammer" />
 	<Attribute
 		level_requirement="30"
 		character_requirement="priest"
@@ -305,7 +305,7 @@
 <!-- Aisen Kriegshammer -->
 <Item type="weapon" subtype="aisen_hmr" name="aisener warhammer" size="big">
 	<Image image="set:sledgehammer.png image:full_image" />
-	<Mesh file="sledgehammer.mesh" />
+	<RenderInfo name= "sledgeHammer" />
 	<Attribute
 		level_requirement="35"
 		character_requirement="priest"
@@ -343,7 +343,7 @@
 <!-- Urteilshammer -->
 <Item type="weapon" subtype="jugmnt_hmr" name="judgement hammer" size="big">
 	<Image image="set:sledgehammer.png image:full_image" />
-	<Mesh file="sledgehammer.mesh" />
+	<RenderInfo name= "sledgeHammer" />
 	<Attribute
 		level_requirement="40"
 		character_requirement="priest"
@@ -381,7 +381,7 @@
 <!-- Priesterhammer -->
 <Item type="weapon" subtype="priest_hmr" name="priest hammer" size="big">
 	<Image image="set:sledgehammer.png image:full_image" />
-	<Mesh file="sledgehammer.mesh" />
+	<RenderInfo name= "sledgeHammer" />
 	<Attribute
 		level_requirement="45"
 		character_requirement="priest"
@@ -419,7 +419,7 @@
 <!-- Obsidianhammer -->
 <Item type="weapon" subtype="obsid_hmr" name="obsidian hammer" size="big">
 	<Image image="set:sledgehammer.png image:full_image" />
-	<Mesh file="sledgehammer.mesh" />
+	<RenderInfo name= "sledgeHammer" />
 	<Attribute
 		level_requirement="50"
 		character_requirement="priest"
@@ -457,7 +457,7 @@
 <!-- Richthammer -->
 <Item type="weapon" subtype="judge_hmr" name="judge hammer" size="big">
 	<Image image="set:sledgehammer.png image:full_image" />
-	<Mesh file="sledgehammer.mesh" />
+	<RenderInfo name= "sledgeHammer" />
 	<Attribute
 		level_requirement="55"
 		character_requirement="priest"
@@ -532,7 +532,7 @@
 <!-- Zwergenstahlhammer -->
 <Item type="weapon" subtype="dwfstl_hmr" name="dwarfensteel hammer" size="big">
 	<Image image="set:sledgehammer.png image:full_image" />
-	<Mesh file="sledgehammer.mesh" />
+	<RenderInfo name= "sledgeHammer" />
 	<Attribute
 		level_requirement="65"
 		character_requirement="priest"
@@ -570,7 +570,7 @@
 <!-- Elementenjaeger -->
 <Item type="weapon" subtype="elem_hmr" name="elementhunter" size="big">
 	<Image image="set:sledgehammer.png image:full_image" />
-	<Mesh file="sledgehammer.mesh" />
+	<RenderInfo name= "sledgeHammer" />
 	<Attribute
 		level_requirement="70"
 		character_requirement="priest"
@@ -608,7 +608,7 @@
 <!-- Exorzistenhammer -->
 <Item type="weapon" subtype="exocis_hmr" name="exorcists hammer" size="big">
 	<Image image="set:sledgehammer.png image:full_image" />
-	<Mesh file="sledgehammer.mesh" />
+	<RenderInfo name= "sledgeHammer" />
 	<Attribute
 		level_requirement="75"
 		character_requirement="priest"
@@ -646,7 +646,7 @@
 <!-- Welterschuetterer -->
 <Item type="weapon" subtype="world_hmr" name="worldshaker" size="big">
 	<Image image="set:sledgehammer.png image:full_image" />
-	<Mesh file="sledgehammer.mesh" />
+	<RenderInfo name= "sledgeHammer" />
 	<Attribute
 		level_requirement="80"
 		character_requirement="priest"

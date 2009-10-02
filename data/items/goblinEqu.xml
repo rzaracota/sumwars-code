@@ -99,7 +99,7 @@
 <!-- Goblin Keule -->
 <Item type="weapon" subtype="goblin_hmr" name="goblin club" size="medium">
 	<Image image="set:goblin_hmr.png image:full_image" />
-	<Mesh file="goblin_hmr.mesh" />
+	<RenderInfo name = "goblinClub" />
 	<Attribute
 		level_requirement="1"
 		character_requirement="warrior,priest"
@@ -135,7 +135,7 @@
 
 <!-- Rostiger Dolch-->
 <Item type="weapon" subtype="crude_sw" name="rusty dagger" size="medium">
-	<Mesh file="crude_sw.mesh" />
+	<RenderInfo name = "rustyDagger" />
 	<Image image="set:crude_sw.png image:full_image" />
 	<Attribute
 		level_requirement="1"
@@ -204,7 +204,7 @@
 <!-- Nagelkeule -->
 <Item type="weapon" subtype="nail_hmr" name="nail club" size="medium">
 	<Image image="set:nail_hmr.png image:full_image" />
-	<Mesh file="nail_hmr.mesh" />
+	<RenderInfo name = "nailClub" />
 	<Attribute
 		level_requirement="4"
 		character_requirement="warrior,priest"

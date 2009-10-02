@@ -84,7 +84,6 @@
 	<Action name="walk#TwoHands#axe">
 		<Animation name="walkTwoHandsHammer" />
 	</Action>
-
 	<Action name="walk#TwoHands#bow">
 		<Animation name="walkBow" />
 	</Action>
@@ -102,6 +101,12 @@
 	<Action name="attack#TwoHands">
 		<Animation name="attackTwoHands" />
 	</Action>
+	<Action name="attack#TwoHands#hammer">
+		<Animation name="attackTwoHandsBlunt" />
+	</Action>
+	<Action name="attack#TwoHands#axe">
+		<Animation name="attackTwoHandsBlunt" />
+	</Action>
 	
 	<Action name="magic_attack#Unarmed">
 		<Animation name="attackMagicUnarmed" />
@@ -112,12 +117,12 @@
 	</Action>
 	<Action name="magic_attack#OneHand">
 		<Animation name="attackMagicOneHand" />
-		<ParticleSystem objectname="magicEnergy" bone="mainmesh:itemRightHand" source="Magic_Arrow" position="0.0 0.0 -2.0" />
+		<ParticleSystem objectname="magicEnergy" bone="mainmesh:itemRightHand" source="Magic_Arrow" position="0.0 0.0 -1.0" />
 		<Detach time="0.4" objectname="magicEnergy" />
 	</Action>
 	<Action name="magic_attack#TwoHands">
 		<Animation name="attackMagicTwoHands" />
-		<ParticleSystem objectname="magicEnergy" bone="mainmesh:itemRightHand" source="Magic_Arrow" position="0.0 0.0 -1.00" />
+		<ParticleSystem objectname="magicEnergy" bone="mainmesh:itemRightHand" source="Magic_Arrow" position="0.0 0.0 -1.4" />
 		<Detach time="0.4" objectname="magicEnergy" />
 	</Action>
 	
@@ -134,18 +139,19 @@
 	<Action name="holy_attack#Unarmed" reference="attack#Unarmed" />
 	<Action name="holy_attack#OneHand" reference="attack#OneHand" />
 	<Action name="holy_attack#TwoHands" reference="attack#TwoHands" />
+	<Action name="holy_attack#TwoHands" reference="attack#TwoHands#hammer" />
+	<Action name="holy_attack#TwoHands" reference="attack#TwoHands#axe" />
 	
 	<!-- Kriegerfaehigkeiten -->
 	<Action name="bash">
 		<Animation name="specialAttackOneHand" />
 		<ParticleSystem time = "0.5" objectname="attackLine" bone="mainmesh:itemRightHand" source="SpecialAttackLineWhite" position="0.0 0.0 -1.0" />
-		<!-- <ParticleSystem time = "0.1" objectname="jumpLine" bone="mainmesh:itemRightHand" source="SpecialAttackLineYellow" position="0.0 0.0 -1.0" />
 		<Detach time="0.3" objectname="jumpLine" /> -->
 		<Detach time="0.65" objectname="attackLine" />
 	</Action>
 	<Action name="bash#TwoHands">
 		<Animation name="specialAttackTwoHands" />
-		<ParticleSystem time = "0.23" objectname="attackLine" bone="mainmesh:magicEffects" source="SpecialAttackLineWhite" position="0.0 0.0 1.0" />
+		<ParticleSystem time = "0.23" objectname="attackLine" bone="mainmesh:magicEffects" source="SpecialAttackLineWhite" position="0.0 0.0 0.0" />
 		<Detach time="0.6" objectname="attackLine" />
 	</Action>
 	
@@ -398,7 +404,7 @@
 	<Action name="holy_fire#OneHand" reference="holy_light#OneHand" />
 	<Action name="holy_fire#TwoHands" reference="holy_light#TwoHands" />
 	
-	<Action name="burning_rage">
+	<Action name="burning_rage" reference = "cure_pois_burn_party">
 		<Animation name="castMagicStrong" />
 	</Action>
 	
@@ -410,7 +416,7 @@
 	
 	<Action name="cure_blind_mute_party" reference="cure_blind_mute" />
 	
-	<Action name="blazing_shield">
+	<Action name="blazing_shield" reference = "cure_pois_burn_party">
 		<Animation name="priestMagicStrong" />
 	</Action>
 	
@@ -420,7 +426,7 @@
 		<Detach time="0.65" objectname="healing" />
 	</Action>
 	
-	<Action name="burning_sun">
+	<Action name="burning_sun" reference = "cure_pois_burn_party">
 		<Animation name="priestMagicStrong" />
 	</Action>
 	
@@ -433,7 +439,7 @@
 	<Action name="disrupt_binding#TwoHands" reference="break_binding#TwoHands" />
 	
 	
-	<Action name="magic_shield">
+	<Action name="magic_shield" reference = "cure_pois_burn_party">
 		<Animation name="priestMagicStrong" />
 	</Action>
 	
@@ -515,22 +521,22 @@
 	<Action name="divine_storm#OneHand" reference="divine_wind#OneHand" />
 	<Action name="divine_storm#TwoHands" reference="divine_wind#TwoHands" />
 	
-	<Action name="blade_storm">
+	<Action name="blade_storm" reference = "cure_pois_burn_party">
 		<Animation name="priestMagicStrong" />
 	</Action>
 	
 	<Action name="cure_conf_bsrk" reference = "heal">
 	</Action>
 	
-	<Action name="cure_conf_bsrk_party" reference="cure_conf_bsrk" />
+	<Action name="cure_conf_bsrk_party" reference="cure_pois_burn_party" />
 	
-	<Action name="hypnosis">
+	<Action name="hypnosis" reference="cure_pois_burn_party">
 		<Animation name="priestMagicStrong" />
 	</Action>
 	
 	<Action name="hypnosis2" reference="hypnosis" />
 	
-	<Action name="keen_mind">
+	<Action name="keen_mind" reference="cure_pois_burn_party">
 		<Animation name="priestMagicStrong" />
 	</Action>
 	
@@ -548,7 +554,9 @@
 		<ParticleSystem objectname="magicEnergy" bone="mainmesh:magicEffects" source="Magic_Arrow" position="0.0 0.0 0.0" />
 		<Detach time="0.5" objectname="magicEnergy" />
 	</Action>
-<!-- Kriegerfaehigkeiten -->
+
+	
+	<!-- Kriegerfaehigkeiten -->
 	<Action name="bash">
 		<Animation name="specialAttackOneHand" />
 		<ParticleSystem time = "0.3" objectname="attackLine" bone="mainmesh:itemRightHand" source="SpecialAttackLineWhite" position="0.0 0.0 -1.5" />
@@ -780,11 +788,136 @@
 		<Animation name="castMagicWeak" />
 	</Action>
 	
+<!-- Priester Faehigkeiten -->
+	
+	<Action name="burning_rage" reference = "cure_pois_burn_party">
+		<Animation name="castMagicStrong" />
+	</Action>
+	
+	<Action name="cure_blind_mute">
+		<Animation name="priestMagicSmall" />
+		<ParticleSystem time = "0.3" objectname="healing" bone="mainmesh:itemRightHand" source="CastHeal" position="0.0 0.0 -1.5" />
+		<Detach time="0.65" objectname="healing" />
+	</Action>
+	
+	<Action name="cure_blind_mute_party" reference="cure_blind_mute" />
+	
+	<Action name="blazing_shield" reference = "cure_pois_burn_party">
+		<Animation name="priestMagicStrong" />
+	</Action>
+	
+	<Action name="light_beam">
+		<Animation name="priestMagicSmall" />
+		<ParticleSystem time = "0.3" objectname="healing" bone="mainmesh:itemRightHand" source="CastBlind" position="0.0 0.0 -1.5" />
+		<Detach time="0.65" objectname="healing" />
+	</Action>
+	
+	<Action name="burning_sun" reference = "cure_pois_burn_party">
+		<Animation name="priestMagicStrong" />
+	</Action>
+	
+	<Action name="magic_shield" reference = "cure_pois_burn_party">
+		<Animation name="priestMagicStrong" />
+	</Action>
+	
+	<Action name="cure_pois_burn" >
+		<Animation name="priestMagicSmall" />
+		<ParticleSystem time = "0.3" objectname="healing" bone="mainmesh:itemRightHand" source="CastCureBurn" position="0.0 0.0 -1.5" />
+		<Detach time="0.65" objectname="healing" />
+	</Action>
+	
+	<Action name="cure_pois_burn_party" >
+		<Animation name="priestMagicStrong" />
+		<ParticleSystem time = "0.25" objectname="healing" bone="mainmesh:magicEffects" source="CastCureBurnParty" position="0.0 0.0 0.0" />
+		<Detach time="0.95" objectname="healing" />
+		
+		<ParticleSystem time = "0.25" objectname="handleHeal" bone="mainmesh:itemRightHand" source="AntiBurnLine" position="0.0 0.0 0.0" />
+		<Detach time="0.7" objectname="handleHeal" />
+		<Movement  objectname="handleHeal" start="0.26" end="0.4" start_vec="0.0 0.0 0.0" end_vec="0.0 0.0 -1.5" />
+		
+		<ParticleSystem time = "0.4" objectname="healStar1" bone="mainmesh:itemRightHand" source="AntiBurnLine" position="2.0 0.0 -1.4" />
+		<Detach time="0.7" objectname="healStar1" />
+		<Movement  objectname="healStar1" start="0.4" end="0.6" start_vec="0.0 0.0 -1.4" end_vec="2.0 0.0 -1.4" />
+		
+		<ParticleSystem time = "0.4" objectname="healStar2" bone="mainmesh:itemRightHand" source="AntiBurnLine" position="0.0 2.0 -1.2" />
+		<Detach time="0.7" objectname="healStar2" />
+		<Movement  objectname="healStar2" start="0.4" end="0.6" start_vec="0.0 0.0 -1.4" end_vec="0.0 2.0 -1.2" />
+		 
+		<ParticleSystem time = "0.4" objectname="healStar3" bone="mainmesh:itemRightHand" source="AntiBurnLine" position="0.0 -2.0 -1.3" />
+		<Detach time="0.7" objectname="healStar3" />
+		<Movement  objectname="healStar3" start="0.4" end="0.6" start_vec="0.0 0.0 -1.4" end_vec="0.0 -2.0 -1.3" />
+		
+		<ParticleSystem time = "0.4" objectname="healStar4" bone="mainmesh:itemRightHand" source="AntiBurnLine" position="-2.0 0.0 -1.0" />
+		<Detach time="0.7" objectname="healStar4" />
+		<Movement  objectname="healStar4" start="0.4" end="0.6" start_vec="0.0 0.0 -1.4" end_vec="-2.0 0.0 -0.8" />
+		
+	</Action>
+	
+	<Action name="acid">
+		<Animation name="priestMagicSmall" />
+		<ParticleSystem time = "0.3" objectname="acid" bone="mainmesh:itemRightHand" source="CastAcid" position="0.0 0.0 -1.5" />
+		<Detach time="0.65" objectname="acid" />
+	</Action>
+	
+	<Action name="heal">
+		<Animation name="priestMagicSmall" />
+		<ParticleSystem time = "0.2" objectname="healing" bone="mainmesh:itemRightHand" source="CastHeal" position="0.0 0.0 -1.5" />
+		<Detach time="0.9" objectname="healing" />
+		<ParticleSystem time = "0.2" objectname="handMagic" bone="mainmesh:magicEffects" source="CastHeal" position="0.0 0.0 0" />
+		<Detach time="0.9" objectname="handMagic" />
+	</Action>
+	
+	<Action name="heal_party" >
+		<Animation name="priestMagicStrong" />
+		<ParticleSystem time = "0.25" objectname="healing" bone="mainmesh:magicEffects" source="CastHealParty" position="0.0 0.0 0.0" />
+		<Detach time="0.95" objectname="healing" />
+		
+		<ParticleSystem time = "0.25" objectname="handleHeal" bone="mainmesh:itemRightHand" source="HealingLine" position="0.0 0.0 0.0" />
+		<Detach time="0.7" objectname="handleHeal" />
+		<Movement  objectname="handleHeal" start="0.26" end="0.4" start_vec="0.0 0.0 0.0" end_vec="0.0 0.0 -1." />
+		
+		<ParticleSystem time = "0.4" objectname="healStar1" bone="mainmesh:itemRightHand" source="HealingLine" position="2.0 0.0 -1.4" />
+		<Detach time="0.7" objectname="healStar1" />
+		<Movement  objectname="healStar1" start="0.4" end="0.6" start_vec="0.0 0.0 -1.4" end_vec="2.0 0.0 -1.4" />
+		
+		<ParticleSystem time = "0.4" objectname="healStar2" bone="mainmesh:itemRightHand" source="HealingLine" position="0.0 2.0 -1.2" />
+		<Detach time="0.7" objectname="healStar2" />
+		<Movement  objectname="healStar2" start="0.4" end="0.6" start_vec="0.0 0.0 -1.4" end_vec="0.0 2.0 -1.2" />
+		 
+		<ParticleSystem time = "0.4" objectname="healStar3" bone="mainmesh:itemRightHand" source="HealingLine" position="0.0 -2.0 -1.3" />
+		<Detach time="0.7" objectname="healStar3" />
+		<Movement  objectname="healStar3" start="0.4" end="0.6" start_vec="0.0 0.0 -1.4" end_vec="0.0 -2.0 -1.3" />
+		
+		<ParticleSystem time = "0.4" objectname="healStar4" bone="mainmesh:itemRightHand" source="HealingLine" position="-2.0 0.0 -1.0" />
+		<Detach time="0.7" objectname="healStar4" />
+		<Movement  objectname="healStar4" start="0.4" end="0.6" start_vec="0.0 0.0 -1.4" end_vec="-2.0 0.0 -0.8" />
+	</Action>
+	
+	<Action name="blade_storm" reference = "cure_pois_burn_party">
+		<Animation name="priestMagicStrong" />
+	</Action>
+	
+	<Action name="cure_conf_bsrk" reference = "heal">
+	</Action>
+	
+	<Action name="cure_conf_bsrk_party" reference="cure_pois_burn_party" />
+	
+	<Action name="hypnosis" reference="cure_pois_burn_party">
+		<Animation name="priestMagicStrong" />
+	</Action>
+	
+	<Action name="hypnosis2" reference="hypnosis" />
+	
+	<Action name="keen_mind" reference="cure_pois_burn_party">
+		<Animation name="priestMagicStrong" />
+	</Action>
+	
 </RenderInfo>
 
 <RenderInfo name="warrior_m" parent="playerbaseM" >
 	<Entity source="warrior_m.mesh"/>
 	<Entity objectname="head" bone="crown" source="head1.mesh" />
+	<Entity objectname="hair" bone="crown" source="hair_w1.mesh" />
 </RenderInfo>
 <RenderInfo name="warrior_f" parent="playerbase" >
 	<Entity source="archer_f.mesh"/>
@@ -794,6 +927,7 @@
 <RenderInfo name="mage_m" parent="playerbaseM" >
 	<Entity source="mage_m.mesh"/>
 	<Entity objectname="head" bone="crown" source="head_m1.mesh" />
+	<Entity objectname="hair" bone="crown" source="hair_m1.mesh" />
 </RenderInfo>
 <RenderInfo name="mage_f" parent="playerbase" >
 	<Entity source="archer_f.mesh"/>
@@ -803,6 +937,7 @@
 <RenderInfo name="archer_m" parent="playerbaseM" >
 	<Entity source="mage_m.mesh"/>
 	<Entity objectname="head" bone="crown" source="head_m1.mesh" />
+	<Entity objectname="hair" bone="crown" source="hair_m1.mesh" />
 </RenderInfo>
 <RenderInfo name="archer_f" parent="playerbase" >
 	<Entity source="archer_f.mesh"/>
@@ -820,20 +955,10 @@
 	
 <RenderInfo name="stuntman" parent="playerbaseM">
 	<Entity source="warrior_m.mesh" />
-	<Entity objectname="head" bone="crown" source="head_m1.mesh" />
+	<Entity objectname="head" bone="crown" source="head1.mesh" />
+	<Entity objectname="hair" bone="crown" source="hair_m1.mesh" />
 	<Entity objectname="hat" bone="crown" source="goblin_hlmMW.mesh" />
-	<!--<Entity objectname="weapon" bone="itemRightHand" source="long_sw.mesh" />
-	
-	<Entity objectname="shield" bone="itemLeftHand" source="wood_shd.mesh"/>-->
-	<Action name = "fireSword">
-		<Animation name = "attackTwoHands"/>
-		<ParticleSystem objectname="firesword1" source="BurningBlade" bone="itemRightHand" position= "-0.7 0 -3.2"/>
-		<Rotation objectname="firesword1" start="0.0" end="0.0" start_vec="0.0 0.0 0.0" end_vec="0.0 180.0 0.0" />
-		<ParticleSystem objectname="firesword2" source="BurningBlade" bone="itemRightHand" position= "-0.8 0 -3.3"/>
-		<Rotation objectname="firesword2" start="0.0" end="0.0" start_vec="0.0 0.0 0.0" end_vec="0.0 180.0 0.0" />
-		<ParticleSystem objectname="firesword3" source="BurningBlade" bone="itemRightHand" position= "0 0 -3"/>
-		<Rotation objectname="firesword3" start="0.0" end="0.0" start_vec="0.0 0.0 0.0" end_vec="0.0 180.0 0.0" />
-		<ParticleSystem objectname="firesword4" source="BurningBlade" bone="itemRightHand" position= "0 0 -3.4"/>
-		<Rotation objectname="firesword4" start="0.0" end="0.0" start_vec="0.0 0.0 0.0" end_vec="0.0 180.0 0.0" />
-	</Action>
+	<Entity objectname="weapon" bone="itemRightHand" source="hammer_hmr.mesh" />
+	<Entity objectname="weapon1" bone="itemRightHand" source="sledge_hmr.mesh" />
+	<Entity objectname="shield" bone="itemLeftHand" source="wood_shd.mesh" />
 </RenderInfo>

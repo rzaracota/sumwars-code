@@ -302,7 +302,7 @@
 			
 			<Waypoint world_x="0.4" world_y ="0.4" />
 		
-			<Settings dimx="20" dimy="20" region_template="test" />
+			<Settings dimx="20" dimy="20" region_template="test" ground = "grass1"/>
 			
 			<Environments>
 				<Environment height="0.2" name="meadow" />
