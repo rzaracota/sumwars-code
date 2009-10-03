@@ -391,7 +391,7 @@ bool Item::setValue(std::string valname)
 	}
 	else if (valname == "level_requirement")
 	{
-		m_level_req = lua_tonumber(EventSystem::getLuaState() ,-1);
+		m_level_req = char(lua_tonumber(EventSystem::getLuaState() ,-1));
 		lua_pop(EventSystem::getLuaState(), 1);
 		return true;
 	}

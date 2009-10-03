@@ -51,8 +51,7 @@
 						groupObjectsArc({tutorial_tmp.tolec,tutorial_tmp.derred} ,"locSlugView","locSlugs",nil,30);
 					end;
 					if (tutorial.phase == "killlouses") then
-						tolecpos = "locBackroute5";
-						derredpos = "locBackroute5";
+						groupObjectsArc({tutorial_tmp.tolec,tutorial_tmp.derred} ,"locBackroute5","locPartyLib",nil,30);
 					end;
 					
 					-- nur bei den Phasen intro, learnwalk, fightslugs
@@ -121,6 +120,7 @@
 					end;
 					
 					tutorial_tmp.louses =0;
+					tutorial_tmp.louse_count = 4;
 				end;
 				
 				door = getObjectByNameRef("doorSouth");
@@ -137,6 +137,10 @@
 				
 				door = getObjectByNameRef("doorWest");
 					scriptobjectvar[door]["locked"] = true;
+					
+				tutorial_tmp.slave1 = createObject("slave_miner","locSlave4",90);
+				tutorial_tmp.slave2 = createObject("slave_miner","locSlave5",90);
+				tutorial_tmp.slave3 = createObject("slave_miner","locSlave6",90);
 			</Effect>
 		</Event>
 		
@@ -1242,7 +1246,7 @@
 					speak("leader",_("Bei den ganzen Mistviechern, die hier frei in der Gegend rumspringen glaube ich fast, die wollen uns nur als Kammerjäger..."),"unhappy");
 				end;
 				
-				executeInDialog("insertTrigger('behemoth_attack_4')");
+				executeInDialog("insertTrigger('tolec_open_libdoor')");
 			</Effect>	
 		</Event>
 		
@@ -1293,6 +1297,7 @@
 				addUnitCommand(tutorial_tmp.behemoth,"fire_ball",tutorial_tmp.bguard1);
 			</Effect>	
 		</Event>
+		
 		<Event trigger="unit_dead" once="true">
 			<Condition>
 				return (trigger.unit== tutorial_tmp.bguard1)
@@ -1302,8 +1307,31 @@
 				tutorial_tmp.lousepos = { pos[1],pos[2]-2 };
 				tutorial_tmp.louse={};
 				tutorial_tmp.louse_count =0;
-				insertTrigger("create_louse");
+				insertTrigger("slaves_flee");
 			</Effect>	
+		</Event>
+		
+		<Event trigger="slaves_flee"  once="true">
+			<Effect>
+				timedExecute('addCameraPosition(500,"locSlave6" , 0,45, 25)',1000);
+				addUnitCommand(tutorial_tmp.slave1,"walk","locWay3");
+				addUnitCommand(tutorial_tmp.slave2,"walk","locWay3");
+				addUnitCommand(tutorial_tmp.slave3,"walk","locWay3");
+				unitSpeak(tutorial_tmp.slave3,_("Hilfe!"),"fear",2000);
+				tutorial_tmp.delslaves = true;
+				
+				timedExecute('addCameraPosition(500,"locDoorGuardNorth" , 45,45, 25);',4000);
+				startTimer("create_louse",5000);
+			</Effect>	
+		</Event>
+		
+		<Event trigger="unit_moved" >
+			<Condition>
+				return (get(trigger.unit,"subtype") == "slave_miner" and tutorial_tmp.delslaves==true and unitIsInArea(trigger.unit,"fleeingSlaves"))
+			</Condition>	
+			<Effect>
+				deleteObject(trigger.unit);
+			</Effect>
 		</Event>
 		
 		<Event trigger="create_louse">
@@ -1314,33 +1342,71 @@
 					addUnitCommand(tutorial_tmp.louse[tutorial_tmp.louse_count], "walk","locLouses",2);
 					startTimer("create_louse",1500+math.random(1500));
 				else
-					startTimer("louse_dialogue",2000);
+					tutorial_tmp.louses = 0;
+					timedExecute('addCameraPosition(1000,"locBackroute5" , -90,70, 20)',1000);
+					startTimer("tolec_retreat",2000);
 				end;
 			</Effect>	
 		</Event>
 		
-		<Event trigger="louse_dialogue"  once="true">
+		<Event trigger="tolec_retreat"  once="true">
 			<Effect>
-				print("louse_dia");
+				unitSpeak(tutorial_tmp.tolec,_("Ups"));
+				addUnitCommand(tutorial_tmp.tolec,"walk","locBackroute5");
+				tutorial_tmp.tolec_retreat = true;
 			</Effect>	
 		</Event>
-	</Region>
-	
-	
-	<NPC refname="Tolec">
-		<Topic name="open_lousedoor" start_option="Tür öffnen">
+		
+		<Event trigger="command_complete" once="true">
 			<Condition>
-				return (tutorial.phase == "killlouses")
-			</Condition>
+				return (trigger.unit == tutorial_tmp.tolec 
+				and tutorial_tmp.tolec_retreat == true);
+			</Condition>	
 			<Effect>
-				speak("Tolec",_("Geht ruhig vor und öffnet die Tür selbst."));
-			</Effect>
-		</Topic>
-	</NPC>
-	
-	
-	
-	<Region name="elCnlLobby">
+				tutorial_tmp.tolec_retreat = nil;
+				local door = getObjectByNameRef("doorLibrary");
+				lookAtObject(tutorial_tmp.tolec,door);
+				door_toggle(door);
+				startTimer("louse_dialog",2000);
+			</Effect>	
+		</Event>
+		
+		<Event trigger="louse_dialog" once="true">
+			<Effect>
+				setCutsceneMode(false);
+				groupObjectsArc(getPlayers(),"locPartyLib","locBackroute5");
+				groupObjectsArc({tutorial_tmp.tolec,tutorial_tmp.derred} ,"locBackroute5","locPartyLib",nil,30);
+				
+				createDialogue();
+				addAllPlayersToDialog();
+				local solo = (getPlayers()[2] == nil);
+				addStandardRoles();
+				
+				addSpeaker(tutorial_tmp.tolec,"Tolec",true);
+				addSpeaker(tutorial_tmp.derred,"Derred",true);
+				
+				speak("Derred",_("Was für ein Tag. Wusstest du, dass das Ding auch noch kleine Monster spucken kann?"),"unhappy");
+				speak("Tolec",_("Darüber hat der Lord Magister nichts gesagt..."),"thoughtful");
+				speak("magopt",_("Etwas, das nicht im Buch des allwissenden Luftpfote geschrieben steht?"),"sneer");
+				speak("Tolec",_("Windklaue, du Häretiker!"),"threaten");
+				if (solo) then
+					speak("Derred",_("Einen Verfluchten freut das sicher noch, wenn er alle Nase lang was zum Töten hat."),"disgust");
+					speak("any",_("ich bin ein Gezeichneter! Das ist viel schlimmer als ein Fluch."),"threaten");
+					speak("Tolec",_("Der mächtige Akeran hat dich wahrlich schlimm gestraft."),"thoughtful");
+					speak("PL",_("Verschone mich mit deinem Elementaristengelaber und gib den Weg frei!"),"angry");
+					speak("warrior",_("Ich bin wohl wirklich der Kammerjäger."),"bored");
+				else
+					speak("Derred",_("Die Verfluchten freut das sicher noch, wenn sie alle Nase lang was zum Töten haben."),"disgust");
+					speak("any",_("Wir sind Gezeichnete! Das ist viel schlimmer als ein Fluch."),"threaten");
+					speak("Tolec",_("Der mächtige Akeran hat sie wahrlich schlimm gestraft."),"thoughtful");
+					speak("PL",_("Verschone uns mit deinem Elementaristengelaber und gib den Weg frei!"),"angry");
+					speak("warrior",_("Wir sind wohl wirklich die Kammerjäger."),"bored");
+				end;
+				
+				tutorial.phase = "killlouses";
+				tutorial.phasenr = 4;
+			</Effect>	
+		</Event>
 	
 		<Event trigger="unit_dead">
 			<Condition>
@@ -1348,7 +1414,10 @@
 			</Condition>
 			<Effect>
 				tutorial_tmp.louses = tutorial_tmp.louses +1;
-				if (tutorial_tmp.louses == 4) then
+				if (tutorial_tmp.louses == tutorial_tmp.louse_count) then
+					local door = getObjectByNameRef("doorLibrary");
+					door_setopen(door,true);
+					
 					addUnitCommand(tutorial_tmp.derred,"walk","locBackroute6",4);
 					addUnitCommand(tutorial_tmp.tolec,"walk","locBackroute6",4);
 					tutorial_tmp.door = getObjectByNameRef("doorScene1");
@@ -1359,6 +1428,10 @@
 				end;
 			</Effect>
 		</Event>
+		
+		
 	</Region>
+	
+	
 </Quest>
 	

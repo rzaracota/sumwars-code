@@ -97,6 +97,7 @@ function addStandardRoles()
 	local blockedspeaker={};
 	blockedspeaker[leader] = true;
 	addSpeaker(leader,"PL");
+	addSpeaker(leader,"leader");
 	
 	local warrior = getRolePlayerNonPref("warrior",blockedspeaker);
 	local mage = getRolePlayerNonPref("mage",blockedspeaker);
