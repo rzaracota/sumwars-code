@@ -75,7 +75,7 @@
 
 <!-- Bronze Sword -->
 <Item type="weapon" subtype="bronze_sw" name="bronzesword" size="medium">
-	<RenderInfo name = "bronzesword"/>
+	<RenderInfo name = "bronzeSword"/>
 	<Image image="set:bronze_sw.png image:full_image" />
 	<Attribute
 		level_requirement="5"
