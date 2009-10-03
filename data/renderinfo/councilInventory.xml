@@ -1,0 +1,7 @@
+﻿<RenderInfo name="mojoTortured">
+	<Entity name = "mojo_tortured.mesh" />
+	
+	<State name="stable">
+		<Animation name = "idle"/>
+	</State>
+</RenderInfo>

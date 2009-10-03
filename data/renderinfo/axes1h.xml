@@ -1,0 +1,50 @@
+﻿<RenderInfo name="hatchetBase">
+	<State name="firesword">
+		<Activation>
+			<ParticleSystem objectname="firesword1" source="BurningAxe" position= "0 0 -0.5"/>
+			<Rotation objectname="firesword1" start="0.0" end="0.0" start_vec="0.0 0.0 0.0" end_vec="0.0 180.0 0.0" />
+		</Activation>
+		
+		<Deactivation>
+			<Detach objectname="firesword1"/>
+		</Deactivation>
+	</State>	
+</RenderInfo>
+
+<RenderInfo name="oneHandAxeBase">
+	<State name="firesword">
+		<Activation>
+			<ParticleSystem objectname="firesword1" source="BurningAxe" position= "0 0 -0.8"/>
+			<Rotation objectname="firesword1" start="0.0" end="0.0" start_vec="0.0 0.0 0.0" end_vec="0.0 180.0 0.0" />
+		</Activation>
+		
+		<Deactivation>
+			<Detach objectname="firesword1"/>
+		</Deactivation>
+	</State>	
+</RenderInfo>
+
+<RenderInfo name = "hatchet" parent = "hatchetBase">
+	<Entity source = "hatch_axe.mesh"/>
+</RenderInfo>
+
+<RenderInfo name = "bronzeAxe" parent = "oneHandAxeBase">
+	<Entity source = "bronze_axe.mesh"/>
+</RenderInfo>
+
+<RenderInfo name = "ironHatchet" parent = "oneHandAxeBase">
+	<Entity source = "ironha_axe.mesh"/>
+	
+	<State name="firesword">
+		<Activation>
+			<ParticleSystem objectname="firesword1" source="BurningAxe" position= "0 0 -0.8"/>
+			<Rotation objectname="firesword1" start="0.0" end="0.0" start_vec="0.0 0.0 0.0" end_vec="0.0 180.0 0.0" />
+			<ParticleSystem objectname="firesword2" source="BurningBladeShort" position= "-0.2 0 -0.8"/>
+		</Activation>
+		
+		<Deactivation>
+			<Detach objectname="firesword1"/>
+			<Detach objectname = "firesword2"/>
+		</Deactivation>
+	</State>
+</RenderInfo>

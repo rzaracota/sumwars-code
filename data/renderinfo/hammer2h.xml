@@ -1,0 +1,25 @@
+﻿<RenderInfo name="twoHandHammerBase">
+
+	<State name="firesword">
+		<Activation>
+		<ParticleSystem objectname="firesword1" source="BurningAxeRing" position= "0 0 -1.3"/>
+		<Rotation objectname="firesword1" start="0.0" end="0.0" start_vec="0.0 0.0 0.0" end_vec="0.0 180.0 0.0" />
+		</Activation>
+		
+		<Deactivation>
+			<Detach objectname="firesword1"/>
+		</Deactivation>
+	</State>	
+</RenderInfo>
+
+<RenderInfo name = "sledgeHammer" parent= "twoHandHammerBase">
+	<Entity source = "sledge_hmr.mesh"/>
+</RenderInfo>
+
+<RenderInfo name = "bronzeHammer" parent= "twoHandHammerBase">
+	<Entity source = "bronze_hmr.mesh"/>
+</RenderInfo>
+
+<RenderInfo name = "longshaft" parent= "twoHandHammerBase">
+	<Entity source = "long_hmr.mesh"/>
+</RenderInfo>

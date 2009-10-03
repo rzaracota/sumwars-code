@@ -1,0 +1,66 @@
+﻿<RenderInfo name="shortSwordBase">
+	<State name="firesword">
+		<Activation>
+			<ParticleSystem objectname="firesword1" source="BurningBlade" position= "0 0 -0.2"/>
+			<Rotation objectname="firesword1" start="0.0" end="0.0" start_vec="0.0 0.0 0.0" end_vec="0.0 180.0 0.0" />
+			<ParticleSystem objectname="firesword2" source="BurningBlade" position= "0 0 -0.4"/>
+			<Rotation objectname="firesword2" start="0.0" end="0.0" start_vec="0.0 0.0 0.0" end_vec="0.0 180.0 0.0" />
+			<ParticleSystem objectname="firesword3" source="BurningBlade" position= "0 0 -0.6"/>
+			<Rotation objectname="firesword3" start="0.0" end="0.0" start_vec="0.0 0.0 0.0" end_vec="0.0 180.0 0.0" />
+		</Activation>
+		
+		<Deactivation>
+			<Detach objectname="firesword1"/>
+			<Detach objectname="firesword2"/>
+			<Detach objectname="firesword3"/>
+		</Deactivation>
+	</State>
+	
+</RenderInfo>
+<RenderInfo name="oneHandSwordBase">
+	<State name="firesword">
+		<Activation>
+			<ParticleSystem objectname="firesword1" source="BurningBlade" position= "0 0 -0.2"/>
+			<Rotation objectname="firesword1" start="0.0" end="0.0" start_vec="0.0 0.0 0.0" end_vec="0.0 180.0 0.0" />
+			<ParticleSystem objectname="firesword2" source="BurningBlade" position= "0 0 -0.4"/>
+			<Rotation objectname="firesword2" start="0.0" end="0.0" start_vec="0.0 0.0 0.0" end_vec="0.0 180.0 0.0" />
+			<ParticleSystem objectname="firesword3" source="BurningBlade" position= "0 0 -0.7"/>
+			<Rotation objectname="firesword3" start="0.0" end="0.0" start_vec="0.0 0.0 0.0" end_vec="0.0 180.0 0.0" />
+			<ParticleSystem objectname="firesword4" source="BurningBlade" position= "0 0 -0.9"/>
+			<Rotation objectname="firesword4" start="0.0" end="0.0" start_vec="0.0 0.0 0.0" end_vec="0.0 180.0 0.0" />
+		</Activation>
+		
+		<Deactivation>
+			<Detach objectname="firesword1"/>
+			<Detach objectname="firesword2"/>
+			<Detach objectname="firesword3"/>
+			<Detach objectname="firesword4"/>
+		</Deactivation>
+	</State>	
+</RenderInfo>
+
+<RenderInfo name="dagger" parent= "shortSwordBase">
+	<Entity source="dagger_sw.mesh"/>
+</RenderInfo>
+
+<RenderInfo name="shortSword" parent= "shortSwordBase">
+	<Entity source="short_sw.mesh"/>
+</RenderInfo>
+
+<RenderInfo name="bronzeSword" parent= "oneHandSwordBase">
+	<Entity source="bronze_sw.mesh"/>
+	
+
+</RenderInfo>
+
+<RenderInfo name="sabre" parent= "oneHandSwordBase">
+	<Entity source="sabre_sw.mesh"/>
+</RenderInfo>
+
+<RenderInfo name="legionBlade" parent= "oneHandSwordBase">
+	<Entity source="long_sw.mesh"/>
+</RenderInfo>
+
+<RenderInfo name="longSword" parent= "oneHandSwordBase">
+	<Entity source="long_sw.mesh"/>
+</RenderInfo>
