@@ -322,6 +322,8 @@ void DialogueWindow::updateSpeechBubbles()
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::Window* game_screen =  win_mgr.getWindow("GameScreen");
 	
+	int picsize = 50;
+	
 	// Zaehler wie viele Labels existieren
 	static int lcount =0;
 	
@@ -334,7 +336,9 @@ void DialogueWindow::updateSpeechBubbles()
 		return;
 	
 	CEGUI::Window* label;
+	CEGUI::Window* image;
 	CEGUI::FrameWindow* ques;
+	CEGUI::FrameWindow* speakframe;
 	
 	// Objekte im Umkreis von 20 Meter holen
 	std::list<WorldObject*> objs;
@@ -399,26 +403,70 @@ void DialogueWindow::updateSpeechBubbles()
 		if (cr->getDialogueId() !=0 && cr->getDialogueId() == player->getDialogueId())
 			continue;
 		
-		stream.str("");
-		stream << "SpeechLabel";
-		stream << nr;
-		
 		if (nr >= lcount)
 		{
 			lcount ++;
+			
+			stream.str("");
+			stream << "SpeechFrame";
+			stream << nr;
+			
+			
+			speakframe = (CEGUI::FrameWindow*) win_mgr.createWindow("TaharezLook/FrameWindow", stream.str());
+			speakframe->setProperty("FrameEnabled","false");
+			speakframe->setProperty("TitlebarEnabled","false");
+			speakframe->setProperty("CloseButtonEnabled","false");
+			game_screen->addChildWindow(speakframe);
+			speakframe->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&Window::consumeEvent, (Window*) this));
+			speakframe->setVisible(false);
+			speakframe->setSize(CEGUI::UVector2(CEGUI::UDim(0,200), CEGUI::UDim(0,picsize+10)));
+			
+			stream.str("");
+			stream << "SpeechLabel";
+			stream << nr;
+			
 			label = win_mgr.createWindow("TaharezLook/StaticText", stream.str());
-			game_screen->addChildWindow(label);
+			speakframe->addChildWindow(label);
 			label->setProperty("FrameEnabled", "true");
 			label->setProperty("BackgroundEnabled", "true");
 			label->setProperty("HorzFormatting", "WordWrapLeftAligned");
+			label->setSize(CEGUI::UVector2(CEGUI::UDim(0,80), CEGUI::UDim(0,picsize)));
+			label->setPosition(CEGUI::UVector2(CEGUI::UDim(0,picsize+10), CEGUI::UDim(0,5)));
 			
 			label->setText("");
 			label->setAlpha(0.9);
 			
+			stream.str("");
+			stream << "SpeechIamge";
+			stream << nr;
+			
+			image = win_mgr.createWindow("TaharezLook/StaticImage", stream.str());
+			speakframe->addChildWindow(image);
+			speakframe->addChildWindow(image);
+			image->setProperty("BackgroundEnabled", "true");
+			image->setSize(CEGUI::UVector2(CEGUI::UDim(0,picsize), CEGUI::UDim(0,picsize)));
+			image->setPosition(CEGUI::UVector2(CEGUI::UDim(0,5), CEGUI::UDim(0,5)));
+		
+			
 		}
 		else
 		{
+			stream.str("");
+			stream << "SpeechFrame";
+			stream << nr;
+			
+			speakframe = static_cast<CEGUI::FrameWindow*>( win_mgr.getWindow(stream.str()) );
+			
+			stream.str("");
+			stream << "SpeechLabel";
+			stream << nr;
 			label = win_mgr.getWindow(stream.str());
+			
+			stream.str("");
+			stream << "SpeechIamge";
+			stream << nr;
+			image = win_mgr.getWindow(stream.str());
+			
 		}
 		
 			
@@ -429,6 +477,7 @@ void DialogueWindow::updateSpeechBubbles()
 			
 			label->setText((CEGUI::utf8*) text.c_str());
 			
+			
 			float width = font->getTextExtent((CEGUI::utf8*) text.c_str())+15;
 			float height = font->getFontHeight() +15;
 			CEGUI::Rect rect = game_screen->getInnerRect();
@@ -438,8 +487,9 @@ void DialogueWindow::updateSpeechBubbles()
 			if (width < maxwidth)
 			{
 				// einzelne Zeile
-				label->setSize(CEGUI::UVector2(CEGUI::UDim(0,width),  CEGUI::UDim(0,height)));
-				label->setPosition(CEGUI::UVector2(CEGUI::UDim(pos.first,-width/2), CEGUI::UDim(pos.second,-height)));
+				label->setSize(CEGUI::UVector2(CEGUI::UDim(0,width),  CEGUI::UDim(0,picsize)));
+				speakframe->setSize(CEGUI::UVector2(CEGUI::UDim(0,picsize+15+width), CEGUI::UDim(0,picsize+10)));
+				image->setPosition(CEGUI::UVector2(CEGUI::UDim(0,5), CEGUI::UDim(0,5)));
 			}
 			else
 			{
@@ -449,19 +499,33 @@ void DialogueWindow::updateSpeechBubbles()
 				int lines = font->getFormattedLineCount((CEGUI::utf8*) text.c_str(),rect, CEGUI::WordWrapLeftAligned);
 				height = lines * font->getFontHeight() +15;
 				
-				label->setSize(CEGUI::UVector2(CEGUI::UDim(0,maxwidth),  CEGUI::UDim(0,height)));
-				label->setPosition(CEGUI::UVector2(CEGUI::UDim(pos.first,-maxwidth/2), CEGUI::UDim(pos.second,-height)));
+				if (height < picsize)
+				{
+					label->setSize(CEGUI::UVector2(CEGUI::UDim(0,maxwidth),  CEGUI::UDim(0,picsize)));
+					speakframe->setSize(CEGUI::UVector2(CEGUI::UDim(0,picsize+15+maxwidth), CEGUI::UDim(0,picsize+10)));
+					image->setPosition(CEGUI::UVector2(CEGUI::UDim(0,5), CEGUI::UDim(0,5)));
+				}
+				else
+				{
+					label->setSize(CEGUI::UVector2(CEGUI::UDim(0,maxwidth),  CEGUI::UDim(0,height)));
+					speakframe->setSize(CEGUI::UVector2(CEGUI::UDim(0,picsize+15+maxwidth), CEGUI::UDim(0,height+10)));
+					image->setPosition(CEGUI::UVector2(CEGUI::UDim(0,5), CEGUI::UDim(0,(height-picsize)/2 + 5)));
+				}
 			}
-			
-			
 		}
-		else
+		
+		float width = speakframe->getPixelSize().d_width;
+		float height = speakframe->getPixelSize().d_height;
+		speakframe->setPosition(CEGUI::UVector2(CEGUI::UDim(pos.first,-width/2), CEGUI::UDim(pos.second,-height)));
+		
+		speakframe->setVisible(true);
+		
+		// Emotionimage setzen
+		std::string imagestr = cr->getEmotionImage(cr->getSpeakText().m_emotion);
+		if (image->getProperty("Image") != imagestr)
 		{
-			float width = label->getPixelSize().d_width;
-			float height = label->getPixelSize().d_height;
-			label->setPosition(CEGUI::UVector2(CEGUI::UDim(pos.first,-width/2), CEGUI::UDim(pos.second,-height)));
+			image->setProperty("Image",imagestr);
 		}
-		label->setVisible(true);
 		
 		nr++;
 		
@@ -471,11 +535,11 @@ void DialogueWindow::updateSpeechBubbles()
 	for (; nr<lcount; nr++)
 	{
 		stream.str("");
-		stream << "SpeechLabel";
+		stream << "SpeechFrame";
 		stream << nr;
+		speakframe = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow(stream.str()));
 			
-		label = win_mgr.getWindow(stream.str());
-		label->setVisible(false);
+		speakframe->setVisible(false);
 	}
 	
 	// Fenster fuer eine Frage
