@@ -14,7 +14,6 @@ Projectile::Projectile(Subtype subtype,  int id)
 	setType("PROJECTILE");
 	setBaseType(PROJECTILE);
 	
-	m_last_hit_object_id =0;
 	m_flags =0;
 	setState(STATE_FLYING,false);
 	m_timer_limit = 1500;
@@ -43,7 +42,6 @@ Projectile::Projectile(ProjectileBasicData &data,int id)
 	setType("PROJECTILE");
 	setBaseType(PROJECTILE);
 	
-	m_last_hit_object_id =0;
 	m_flags =data.m_flags;
 	setState(STATE_FLYING,false);
 	m_counter =data.m_counter;
@@ -321,7 +319,7 @@ void Projectile::handleFlying(float dtime)
 		i = hitobj.begin();
 		hit = (*i);
 
-		while (!hitobj.empty() && (World::getWorld()->getRelation(getFraction(),hit->getFraction()) == Fraction::ALLIED || hit->getId() == m_last_hit_object_id ))
+		while (!hitobj.empty() && (World::getWorld()->getRelation(getFraction(),hit->getFraction()) == Fraction::ALLIED || m_hit_objects_ids.count(hit->getId()) >0))
 		{
 			i=hitobj.erase(i);
 			if (i!=hitobj.end())
@@ -343,11 +341,12 @@ void Projectile::handleFlying(float dtime)
 		//DEBUG("hit object %p",hit);
 
 		//DEBUG("hit object %i at %f %f",hit->getId(),hit->getGeometry()->m_shape.m_coordinate_x,hit->getGeometry()->m_shape.m_coordinate_y);
+		m_hit_objects_ids.insert(hit->getId());
 		
 		if (m_flags & PIERCING)
 		{
 			// Projektil fliegt weiter
-			m_last_hit_object_id = hit->getId();
+			
 		}
 		else
 		{
@@ -390,7 +389,6 @@ void Projectile::handleFlying(float dtime)
 			hitobj.clear();
 			getRegion()->getObjectsInShape(&s,&hitobj,WorldObject::LAYER_AIR,WorldObject::CREATURE,0);
 			rmin = sqr(s.m_radius);
-			lid = hit->getId();
 			hit =0;
 
 			for (i=hitobj.begin();i!=hitobj.end();++i)
@@ -398,16 +396,12 @@ void Projectile::handleFlying(float dtime)
 				// Durchmustern der potentiellen Ziele
 				DEBUG5("testing obj %i, lid %i",(*i)->getId(),lid);
 
-				// letztes getroffendes Objekt ausschliessen
-				if (lid==(*i)->getId())
+				// bereits getroffene Objekte ausschliessen
+				if (m_hit_objects_ids.count((*i)->getId()) > 0)
 					continue;
 
 				// alle nicht feindlich gesinnten Objekte ausschliessen
 				if (World::getWorld()->getRelation(getFraction(),(*i)) != Fraction::HOSTILE)
-					continue;
-
-				// kein zurueckspringen zu dem davor zuletzt getroffenen Objekt
-				if (m_last_hit_object_id== (*i)->getId())
 					continue;
 
 				// Abstand zur aktuellen Position ermitteln
@@ -423,7 +417,6 @@ void Projectile::handleFlying(float dtime)
 				}
 			}
 
-			m_last_hit_object_id = lid;
 			if (hit!=0)
 			{
 				// Es wurde ein Ziel gefunden
@@ -442,7 +435,7 @@ void Projectile::handleFlying(float dtime)
 				if (m_flags & BOUNCING)
 				{
 					for (int i=0; i<4; i++)
-						m_damage->m_multiplier[i] *= 0.8;
+						m_damage->m_multiplier[i] *= 0.7;
 				}
 
 			}
@@ -492,43 +485,31 @@ void Projectile::handleGrowing(float dtime)
 
 		// Alle Objekte suchen die sich in dem Kreis befinden
 		getRegion()->getObjectsInShape(getShape(),&hitobj,getLayer(),WorldObject::CREATURE,0);
-		lid = m_last_hit_object_id;
 		DEBUG5("last hit id = %i",lid);
 		rmin =0;
 
-		// Flaeche die vor dem Update ueberdeckt wurde minus 10%
-		s.m_radius = rold-(rnew-rold)*0.1;
-
-		// Schaden wird nur an die Objekte ausgeteilt, die im neuen, aber nicht im alten Kreis sind
-		if (!hitobj.empty())
+		// Schaden austeilen
+		for (i=hitobj.begin();i!=hitobj.end();++i)
 		{
-			for (i=hitobj.begin();i!=hitobj.end();++i)
+			hit = (*i);
+			DEBUG5("covering obj %i",hit->getId());
+
+			// Kein Schaden an nicht feindliche Objekte austeilen
+			if (World::getWorld()->getRelation(getFraction(),hit) != Fraction::HOSTILE)
+				continue;
+
+
+			// kein Schaden an das bereits getroffene Objekt austeilen
+			if (m_hit_objects_ids.count(hit->getId()) > 0)
 			{
-				hit = (*i);
-				DEBUG5("covering obj %i",hit->getId());
-
-				// Kein Schaden an nicht feindliche Objekte austeilen
-				if (World::getWorld()->getRelation(getFraction(),hit) != Fraction::HOSTILE)
-					continue;
-
-				// kein Schaden an Objekte austeilen, die sich im inneren Kreis befinden
-				if (hit->getShape()->intersects(s))
-				{
-					DEBUG5("is inside inner circle");
-					continue;
-				}
-
-				// kein Schaden an das zuletzt getroffene Objekt austeilen
-				if (hit->getId() == lid)
-				{
-					DEBUG5("is last hit obj %i",hit->getId());
-					continue;
-				}
-
-				// Schaden austeilen
-				doEffect(hit);
+				continue;
 			}
+
+			// Schaden austeilen
+			doEffect(hit);
+			m_hit_objects_ids.insert(hit->getId());
 		}
+		
 	}
 
 	if (m_timer >= m_timer_limit)
@@ -604,7 +585,6 @@ void Projectile::doEffect(GameObject* target)
 			if (ctarget != 0)
 			{
 				ctarget->takeDamage(m_damage);
-				m_last_hit_object_id = ctarget->getId();
 			}
 		}
 		else if (*kt == "dmg_at_enemies_in_radius")

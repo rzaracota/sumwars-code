@@ -303,10 +303,10 @@ class Projectile : public GameObject
 		Damage* m_damage;
 		
 		/**
-		* \var int m_last_hit_object_id
-		* \brief Zeiger auf das zuletzt getroffene Objekt
+		 * \var std::set<int> m_hit_objects_ids;
+		 * \brief Menge aller bereits getroffenen Objekte
 		*/
-		int m_last_hit_object_id;
+		std::set<int> m_hit_objects_ids;
 		
 		/**
 		* \var char m_flags
