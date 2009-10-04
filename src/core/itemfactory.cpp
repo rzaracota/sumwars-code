@@ -389,7 +389,7 @@ Item* ItemFactory::createItem(DropSlot &slot)
 				continue;
 
 			// Testen ob Level ausreicht
-			if (fabs(i->second.m_level) > slot.m_max_level || i->second.m_level <slot.m_min_level )
+			if (fabs(i->second.m_level) > slot.m_max_level || (i->second.m_level>0 && i->second.m_level <slot.m_min_level))
 				continue;
 
 			// Wahrscheinlichkeit fuer Drop berechnen
