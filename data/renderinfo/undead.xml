@@ -1,34 +1,6 @@
-<RenderInfo name="skeletonbase" parent="creaturebase">
-	<Action name="walk">
-		<Animation name="walk" />
-	</Action>
-	
-	<Action name="summoned">
-		<Animation name="raise" />
-	</Action>
-	
-	<Action name="attack">
-		<Animation name="attack1" />
-	</Action>
-	<Action name="attack">
-		<Animation name="attack2" />
-	</Action>
-	<Action name="attack">
-		<Animation name="attack3" />
-	</Action>
-	
-	<Action name="range_attack">
-		<Animation name="attack1" />
-	</Action>
-	<Action name="range_attack">
-		<Animation name="attack2" />
-	</Action>
-	<Action name="range_attack">
-		<Animation name="attack3" />
-	</Action>
-	
+<RenderInfo name="skeletonbase" parent="playerbase">
 	<Action name="die">
-		<Animation name="die" />
+		<Animation name="dieOneHand" />
 	</Action>
 </RenderInfo>
 
@@ -57,12 +29,15 @@
 
 <RenderInfo name="axe_skeleton" parent="skeletonbase">
 	<Entity source="skeleton.mesh"/>
-	<Entity objectname="weapon" bone="itemRightHand" source="axe.mesh" />
+	<Entity objectname="weapon" bone="itemRightHand" source="ironha_axe.mesh" />
 </RenderInfo>
 
 <RenderInfo name="bow_skeleton" parent="skeletonbase">
 	<Entity source="skeleton.mesh"/>
-	<Entity objectname="weapon" bone="itemRightHand" source="bow.mesh" />
+	<Entity objectname="weapon" bone="itemLeftHand" source="bow.mesh" />
+	<Action name="die">
+		<Animation name="dieBowUndead" />
+	</Action>
 </RenderInfo>
 
 

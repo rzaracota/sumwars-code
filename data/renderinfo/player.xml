@@ -47,6 +47,11 @@
 		<Animation name = "point" />
 	</Action>
 	
+	<Action name = "pointing">
+		<Animation name = "pointing" />
+	</Action>
+	
+	
 	<Action name = "depoint">
 		<Animation name = "depoint" />
 	</Action>
@@ -58,9 +63,24 @@
 	<Action name = "warcry">
 		<Animation name = "warcry" />
 	</Action>
+
+	<Action name = "talk">
+		<Animation name = "talk" />
+	</Action>
+
 	
 	<Action name="die">
 		<Animation name="die" />
+	</Action>
+	<Action name="die">
+		<Animation name="dieOneHand" />
+	</Action>
+	<Action name="die#bow">
+		<Animation name="die" />
+	</Action>
+	
+	<Action name="summoned">
+		<Animation name="raise" />
 	</Action>
 	
 	<Action name="walk">
@@ -126,6 +146,9 @@
 		<Detach time="0.4" objectname="magicEnergy" />
 	</Action>
 	
+	<Action name="range_attack">
+		<Animation name="attackRangedBow" />
+	</Action>
 	<Action name="range_attack#Unarmed">
 		<Animation name="attackRangedUnarmed" />
 	</Action>
@@ -224,6 +247,8 @@
 	</Action>
 	<Action name="fire_bolt#Unarmed">
 		<Animation name="castMagicWeakUnarmed" />
+		<ParticleSystem time = "0.1" objectname="magicEnergy" bone="mainmesh:itemRightHand" source="HandFire" position="0.0 0.0 0.0" />
+		<Detach time="0.9" objectname="magicEnergy" />
 	</Action>
 	
 	<Action name="fire_strike" reference="fire_bolt" />
@@ -393,6 +418,32 @@
 	<Action name="freezing_arrows" reference="ice_arrows" />
 	<Action name="wind_arrows" reference="ice_arrows" />
 	<Action name="storm_arrows" reference="wind_arrows" />
+	
+	<Action name="aimed_shot" >
+		<Animation name = "castBowBuff" />
+		<ParticleSystem time = "0.2" objectname="magicEnergy1" source="BowBuff" position="0.0 0.0 0.0" />
+		<Movement objectname = "magicEnergy1" start="0.2" end="0.9" start_vec="0.0 0.0 0.0" end_vec="0.0 2.0 0.0" />
+		<Rotation objectname = "magicEnergy1" start="0.2" end="0.9" start_vec="0.0 0.0 0.0" end_vec="0.0 90.0 0.0" />
+		<Detach time="0.9" objectname="magicEnergy1" />
+		
+		<ParticleSystem time = "0.2" objectname="magicEnergy2" source="BowBuff" position="0.0 0.0 0.0" />
+		<Movement objectname = "magicEnergy2" start="0.2" end="0.9" start_vec="0.0 0.0 0.0" end_vec="0.0 2.0 0.0" />
+		<Rotation objectname = "magicEnergy2" start="0.2" end="0.9" start_vec="0.0 90.0 0.0" end_vec="0.0 180.0 0.0" />
+		<Detach time="0.9" objectname="magicEnergy2" />
+		
+		<ParticleSystem time = "0.2" objectname="magicEnergy3" source="BowBuff" position="0.0 0.0 0.0" />
+		<Movement objectname = "magicEnergy3" start="0.2" end="0.9" start_vec="0.0 0.0 0.0" end_vec="0.0 2.0 0.0" />
+		<Rotation objectname = "magicEnergy3" start="0.2" end="0.9" start_vec="0.0 180.0 0.0" end_vec="0.0 270.0 0.0" />
+		<Detach time="0.9" objectname="magicEnergy3" />
+		
+		<ParticleSystem time = "0.2" objectname="magicEnergy4" source="BowBuff" position="0.0 0.0 0.0" />
+		<Movement objectname = "magicEnergy4" start="0.2" end="0.9" start_vec="0.0 0.0 0.0" end_vec="0.0 2.0 0.0" />
+		<Rotation objectname = "magicEnergy4" start="0.2" end="0.9" start_vec="0.0 270.0 0.0" end_vec="0.0 360.0 0.0" />
+		<Detach time="0.9" objectname="magicEnergy4" />
+	</Action>
+	
+	<Action name="bow_spirit" reference = "aimed_shot"/>
+	<Action name="wind_walk" reference = "aimed_shot"/>
 	
 	<!-- Priester Faehigkeiten -->
 	
@@ -569,7 +620,7 @@
 	</Action>
 	<Action name="bash#TwoHands">
 		<Animation name="specialAttackTwoHands" />
-		<ParticleSystem time = "0.1" objectname="attackLine" bone="itemRightHand" source="SpecialAttackLineWhite" position="0.0 0.0 -4.0" />
+		<ParticleSystem time = "0.1" objectname="attackLine" bone="itemRightHand" source="SpecialAttackLineWhite" position="0.0 0.0 -1.7" />
 		<Detach time="0.5" objectname="attackLine" />
 	</Action>
 	
@@ -667,8 +718,10 @@
 		<ParticleSystem time = "0" objectname="magicEnergy" bone="mainmesh:itemLeftHand" source="Magic_Arrow" position="0.0 0.0 0.0" />
 		<Detach time = "0.8" objectname = "magicEnergy"/>
 	</Action>
-	<Action name="fire_bolt#Unarmed" reference ="fire_bolt">
+	<Action name="fire_bolt#Unarmed">
 		<Animation name="castMagicWeakUnarmed" />
+		<ParticleSystem time = "0.1" objectname="magicEnergy" bone="mainmesh:itemRightHand" source="HandFire" position="0.0 0.0 0.0" />
+		<Detach time="1.0" objectname="magicEnergy" />
 	</Action>
 	
 	<Action name="fire_strike" reference="fire_bolt" />
@@ -682,8 +735,12 @@
 		<Scale objectname="ring" start = "0.6" end = "0.7" start_val="1.0" end_val="2.5" />
 		<Detach time = "0.7" objectname = "ring" />
 	</Action>
-	<Action name="fire_wave#Unarmed" reference="fire_wave">
+	<Action name="fire_wave#Unarmed">
 		<Animation name="castMagicStrongUnarmed" />
+		<ParticleSystem time = "0" objectname="circle" source="FireAura" position="0.0 0.0 0.0" />
+		<Detach time = "0.9" objectname = "circle"/>
+		<ParticleSystem time = "0.1" objectname="magicEnergy" bone = "itemRightHand" source="HandFire" position="0.0 0.0 0.0" />
+		<Detach time = "0.9" objectname = "magicEnergy"/>
 	</Action>
 	
 	<Action name="fire_storm" reference="fire_wave" />
@@ -702,7 +759,7 @@
 		<Scale objectname="ring" start = "0.6" end = "0.7" start_val="1.0" end_val="2.5" />
 		<Detach time = "0.7" objectname = "ring" />
 	</Action>
-	<Action name="fire_wall#Unarmed" reference = "fire_wall">
+	<Action name="fire_wall#Unarmed">
 		<Animation name="castMagicStrongUnarmed" />
 	</Action>
 
@@ -752,6 +809,8 @@
 	</Action>
 	<Action name="lightning#Unarmed">
 		<Animation name="castMagicWeakUnarmed" />
+		<ParticleSystem time = "0.1" objectname="magicEnergy" bone="mainmesh:itemRightHand" source="HandLightning" position="0.0 0.0 0.0" />
+		<Detach time="0.9" objectname="magicEnergy" />
 	</Action>
 	
 	<Action name="lightning_strike" reference="lightning" />
@@ -920,7 +979,7 @@
 	<Entity objectname="hair" bone="crown" source="hair_w1.mesh" />
 </RenderInfo>
 <RenderInfo name="warrior_f" parent="playerbase" >
-	<Entity source="archer_f.mesh"/>
+	<Entity source="priest_f.mesh"/>
 	<Entity objectname="head" bone="crown" source="head_f1.mesh" />
 </RenderInfo>
 
@@ -954,11 +1013,17 @@
 </RenderInfo>
 	
 <RenderInfo name="stuntman" parent="playerbaseM">
-	<Entity source="warrior_m.mesh" />
+	<Entity source="mage_m.mesh" />
 	<Entity objectname="head" bone="crown" source="head1.mesh" />
 	<Entity objectname="hair" bone="crown" source="hair_m1.mesh" />
 	<Entity objectname="hat" bone="crown" source="goblin_hlmMW.mesh" />
-	<Entity objectname="weapon" bone="itemRightHand" source="hammer_hmr.mesh" />
-	<Entity objectname="weapon1" bone="itemRightHand" source="sledge_hmr.mesh" />
 	<Entity objectname="shield" bone="itemLeftHand" source="wood_shd.mesh" />
+</RenderInfo>
+
+<RenderInfo name="stuntgirl" parent="playerbase">
+	<Entity source="archer_f.mesh" />
+	<Entity objectname="head" bone="crown" source="head_f1.mesh" />
+	<Entity objectname="hair" bone="crown" source="hair_m1.mesh" />
+	<Entity objectname="hat" bone="crown" source="goblin_hlmMW.mesh" />
+	<Entity objectname="shield" bone="itemLeftHand" source="goblin_sbw.mesh" />
 </RenderInfo>

@@ -38,6 +38,15 @@
 	<Action name="noaction">
 		<Animation name="idle1" />
 	</Action>
+	
+	<Action name="noaction">
+		<Animation name="idle1" />
+	</Action>
+	
+	<Action name="summoned">
+		<Animation name="rise" />
+	</Action>
+	
 </RenderInfo>
 
 <RenderInfo name="lousebase" parent="creaturebase">

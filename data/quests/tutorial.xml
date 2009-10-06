@@ -425,7 +425,7 @@
 				and tutorial_tmp.tolecway1 == false);
 			</Condition>	
 			<Effect>
-				unitSpeak(tutorial_tmp.tolec,_("Wo bleibt Ihr denn? Hat Euch der Transport so sehr zugesetzt, dass ihr nicht mal mehr wisst, wie man sich bewegt? Klickt einfach mit der linken Maustaste auf eine Stelle auf dem Boden, dann kommt das alles von ganz allein wieder."));
+				unitSpeak(tutorial_tmp.tolec,_("Wo bleibt Ihr denn? Hat Euch der Transport so sehr zugesetzt, dass ihr nicht mal mehr wisst, wie man sich bewegt? Klickt einfach mit der linken Maustaste auf eine Stelle auf dem Boden, dann kommt das alles von ganz allein wieder."),"unhappy");
 				startTimer("tolec_back_way1",2000);
 			</Effect>
 		</Event>
@@ -505,7 +505,7 @@
 				return (trigger.defender == tutorial_tmp.worker);
 			</Condition>
 			<Effect>
-				unitSpeak(tutorial_tmp.worker,_("*Argh!!!*"));
+				unitSpeak(tutorial_tmp.worker,_("*Argh!!!*"),"injured3");
 				set(tutorial_tmp.worker,"health",0);
 				
 				startTimer("behemoth_attack2",1000);
@@ -548,7 +548,7 @@
 		<Event trigger="closeBehemothDoor1" once="true">
 			<Effect>
 				addCameraPosition(500, "locDoorGuardWest" , 0,30, 20);
-				unitSpeak(tutorial_tmp.bguard2,_("Bei Akeran! Verschließt die Tore!!!"));
+				unitSpeak(tutorial_tmp.bguard2,_("Bei Akeran! Verschließt die Tore!!!"),"fear");
 				timedExecute("door_toggle('doorBehemothWest')",1500);
 				startTimer("closeBehemothDoor2",3000);
 			</Effect>
@@ -567,7 +567,7 @@
 				addCameraPosition(500, "locBehemothDoorEast" , -90,70, 20);
 				addUnitCommand(tutorial_tmp.tolec,"walk","locWay2",1);
 				addUnitCommand(tutorial_tmp.derred,"walk","locWay2",1);
-				unitSpeak(tutorial_tmp.tolec,_("Akerans Schild! Das DING ist frei! Alle zurück! Los, los, los!"));
+				unitSpeak(tutorial_tmp.tolec,_("Akerans Schild! Das DING ist frei! Alle zurück! Los, los, los!"),"fear");
 				startTimer("explain_fight",3000);
 			</Effect>
 		</Event>
@@ -1294,6 +1294,8 @@
 				local door = getObjectByNameRef("doorBehemothNorth");
 				deleteObject(door);
 				addUnitCommand(tutorial_tmp.bguard1,"walk","locLouses");
+				unitSpeak(tutorial_tmp.bguard1,_("Hilfe!"),"fear");
+				
 				addUnitCommand(tutorial_tmp.behemoth,"fire_ball",tutorial_tmp.bguard1);
 			</Effect>	
 		</Event>

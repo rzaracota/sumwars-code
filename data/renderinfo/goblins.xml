@@ -168,3 +168,25 @@
 		<Animation name="hammerBash" />
 	</Action>
 </RenderInfo>
+
+<RenderInfo name="goblin_killer" parent="goblinbase">
+	<Entity source="goblinGreen.mesh"/>
+	<Entity objectname="weapon1" bone="itemRightHand" source="old_sw.mesh" />
+	<Entity objectname="weapon2" bone="itemLeftHand" source="old_sw.mesh" />
+	
+	<Action name="noaction">
+		<Animation name="idleTwinBlades" />
+	</Action>
+	<Action name="noaction">
+		<Animation name="idleTwinBlades" />
+	</Action>
+	<Action name="noaction">
+		<Animation name="twinBladeJuggling" />
+	</Action>
+	<Action name="attack">
+		<Animation name="attackTwinBlades" />
+	</Action>
+	<Action name="around_blow">
+		<Animation name="sweepStrike" />
+	</Action>
+</RenderInfo>

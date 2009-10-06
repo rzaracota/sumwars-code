@@ -37,6 +37,7 @@
 
 		<Ability type="attack"  rating="1"/>
 		<Ability type="die"/>
+		<Ability type="summoned"/>
 		<Ability type="noaction" time="5000"/>
 
 	</BasicAttributes>
