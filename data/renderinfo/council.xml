@@ -68,6 +68,9 @@
 	<Action name="noaction">
 		<Animation name="idle2" />
 	</Action>
+	<Action name="summoned">
+		<Animation name="jump" />
+	</Action>
 </RenderInfo>
 
 <RenderInfo name="behemothbase" parent="creaturebase">

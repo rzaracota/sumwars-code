@@ -37,7 +37,7 @@
 
 		<Ability type="attack"  rating="1"/>
 		<Ability type="die"/>
-		<Ability type="summoned"/>
+		<Ability type="summoned"  time = "2000"/>
 		<Ability type="noaction" time="5000"/>
 
 	</BasicAttributes>
@@ -85,6 +85,7 @@
 		<Ability type="attack"  rating="1"/>
 		<Ability type="die"/>
 		<Ability type="noaction" time="5000"/>
+		<Ability type="summoned" time = "2000"/>
 
 	</BasicAttributes>
 	
@@ -132,6 +133,7 @@
 		<Ability type="attack" rating="1"/>
 		<Ability type="die" />
 		<Ability type="noaction" />
+		<Ability type="summoned" time = "2000"/>
 	</BasicAttributes>
 	
 	<Geometry radius="1.0" />

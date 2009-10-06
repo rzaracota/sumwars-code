@@ -1306,7 +1306,7 @@
 			</Condition>
 			<Effect>
 				local pos = get(tutorial_tmp.behemoth,"position");
-				tutorial_tmp.lousepos = { pos[1],pos[2]-2 };
+				tutorial_tmp.lousepos = { pos[1],pos[2]-6 };
 				tutorial_tmp.louse={};
 				tutorial_tmp.louse_count =0;
 				insertTrigger("slaves_flee");
@@ -1342,7 +1342,7 @@
 					tutorial_tmp.louse_count = tutorial_tmp.louse_count +1;
 					tutorial_tmp.louse[tutorial_tmp.louse_count] = createObject("fireLouse",tutorial_tmp.lousepos);
 					addUnitCommand(tutorial_tmp.louse[tutorial_tmp.louse_count], "walk","locLouses",2);
-					startTimer("create_louse",1500+math.random(1500));
+					startTimer("create_louse",2500+math.random(1500));
 				else
 					tutorial_tmp.louses = 0;
 					timedExecute('addCameraPosition(1000,"locBackroute5" , -90,70, 20)',1000);
