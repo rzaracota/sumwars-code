@@ -17,10 +17,10 @@
 					<Add option="-DDEBUG_LEVEL=5" />
 				</Compiler>
 				<Linker>
-					<Add library="OgreMain_d" />
-					<Add library="OIS_d" />
-					<Add library="OgreGUIRenderer_d" />
-					<Add library="CEGUIBase_d" />
+					<Add library="OgreMain" />
+					<Add library="OIS" />
+					<Add library="OgreGUIRenderer" />
+					<Add library="CEGUIBase" />
 				</Linker>
 			</Target>
 			<Target title="Release">

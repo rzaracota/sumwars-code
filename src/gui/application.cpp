@@ -35,11 +35,8 @@ bool Application::init()
 	// pluginfile: plugins.cfg
 	// configfile: keines
 #ifdef WIN32
-#ifdef _DEBUG
-	m_ogre_root = new Ogre::Root("plugins_win_d.cfg", "ogre.cfg");
-#else
+
 	m_ogre_root = new Ogre::Root("plugins_win.cfg", "ogre.cfg");
-#endif
 #else
 	m_ogre_root = new Ogre::Root("plugins.cfg", "ogre.cfg");
 #endif
@@ -414,7 +411,7 @@ bool Application::initCEGUI()
 
 	// Imagesets laden
 	CEGUI::ImagesetManager::getSingleton().createImageset("skills.imageset");
-	
+
 	try
 	{
 		CEGUI::ImagesetManager::getSingleton().createImagesetFromImageFile ("startscreen.png","startscreen.png",(CEGUI::utf8*)"GUI");
@@ -439,7 +436,7 @@ bool Application::initCEGUI()
 	// eigene Factorys einfuegen
 	CEGUI::WindowFactoryManager::getSingleton().addFactory( new TextWrapTooltipFactory );
 	CEGUI::WindowFactoryManager::getSingleton().addFalagardWindowMapping ("TextWrapTooltip", "CEGUI/Tooltip", "TaharezLook/Tooltip","Falagard/Tooltip");
-	
+
 	// default ToolTip erzeugen
 	CEGUI::System::getSingleton().setDefaultTooltip( (CEGUI::utf8*)"TextWrapTooltip" );
 	CEGUI::Tooltip* ttip = CEGUI::System::getSingleton().getDefaultTooltip();
@@ -451,7 +448,7 @@ bool Application::initCEGUI()
 bool Application::createDocument()
 {
 	SoundSystem::init();
-	
+
 	DEBUG("create document\n");
 	m_document = new Document();
 
@@ -465,7 +462,7 @@ bool Application::createDocument()
 	m_document->installShortkey(OIS::KC_TAB,Document::SHOW_MINIMAP);
 	m_document->installShortkey(OIS::KC_F10,Document::SHOW_OPTIONS);
 	m_document->installShortkey(OIS::KC_W,Document::SWAP_EQUIP);
-	
+
 	m_document->installShortkey(OIS::KC_RETURN,Document::SHOW_CHATBOX_NO_TOGGLE,false);
 	m_document->installShortkey(OIS::KC_1,Document::USE_POTION,false);
 	m_document->installShortkey(OIS::KC_2,(Document::ShortkeyDestination) (Document::USE_POTION+1),false);
@@ -477,7 +474,7 @@ bool Application::createDocument()
 	m_document->installShortkey(OIS::KC_8,(Document::ShortkeyDestination) (Document::USE_POTION+7),false);
 	m_document->installShortkey(OIS::KC_9,(Document::ShortkeyDestination) (Document::USE_POTION+8),false);
 	m_document->installShortkey(OIS::KC_0,(Document::ShortkeyDestination) (Document::USE_POTION+9),false);
- 	
+
 	m_document->installSpecialKey(OIS::KC_ESCAPE);
 	m_document->installSpecialKey(OIS::KC_LSHIFT);
 	m_document->installSpecialKey(OIS::KC_LCONTROL);
@@ -496,7 +493,7 @@ bool Application::createDocument()
 	m_document->installShortkey(OIS::KC_L,(Document::ShortkeyDestination) (Document::CHEAT+0));
 
 	m_document->loadSettings();
-	
+
 	return true;
 }
 
@@ -512,7 +509,7 @@ bool Application::createView()
 bool Application::loadResources()
 {
 	TiXmlBase::SetCondenseWhiteSpace(false);
-	
+
 	Ogre::FileInfoListPtr files;
 	Ogre::FileInfoList::iterator it;
 	std::string file;
@@ -539,7 +536,7 @@ bool Application::loadResources()
 
 		updateStartScreen(0.9);
 	}
-	
+
 	files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("emotionsets","*.imageset");
 	for (it = files->begin(); it != files->end(); ++it)
 	{
@@ -570,7 +567,7 @@ bool Application::loadResources()
 
 		updateStartScreen(0.25);
 	}
-	
+
 	// Items initialisieren
 	ItemFactory::init();
 	files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("items","*.xml");
@@ -611,7 +608,7 @@ bool Application::loadResources()
 
 		updateStartScreen(0.7);
 	}
-	
+
 	// Render Infos
 	files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("renderinfo","*.xml");
 	for (it = files->begin(); it != files->end(); ++it)
@@ -623,7 +620,7 @@ bool Application::loadResources()
 
 		updateStartScreen(0.8);
 	}
-	
+
 	// Sounds
 	files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("sounddata","*.xml");
 	for (it = files->begin(); it != files->end(); ++it)
@@ -631,7 +628,7 @@ bool Application::loadResources()
 		file = it->archive->getName();
 		file += "/";
 		file += it->filename;
-		
+
 		SoundSystem::loadSoundData(file.c_str());
 
 		updateStartScreen(0.9);
