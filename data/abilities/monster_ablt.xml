@@ -186,6 +186,27 @@
 	</Damage>
 </Ability>
 
+<Ability type="monster_whirl" 
+		 name="Sweeping blow" 
+		 description="Attacks every enemy in weapon range with slightly reduced damage." 
+		 time="1.000000" 
+		 timer_nr="1.000000" 
+		 timer_value="1300.000000" 
+		 base_ability="attack" 
+		 critical_percent="0.600000" 
+		 target_type="melee"
+		 radius = "-1">
+	<Effect>
+		<CppImplementation type="dmg_at_enemies_in_radius" />
+	</Effect>
+	<Damage>
+		<CppImplementation type="attack" />
+		<LuaImplementation>
+			setDamageValue("phys_mult", getDamageValue("phys_mult")*1.5);
+		</LuaImplementation>	
+	</Damage>
+</Ability>
+
 <Ability type="fire_shot" 
 		 name="Fire arrow"
 		 description="Basic ranged attack" 

@@ -338,6 +338,7 @@
 			<SpawnGroup group_name="goblins_bow_l5" number="10" />
 			<SpawnGroup group_name="goblins_l5" number="20" />
 			<SpawnGroup group_name="goblins_dogs_l5" number="20"/>
+			<SpawnGroup group_name="goblins_gobrusch" number="1"/>
 		</SpawnGroups>
 	</Region>
 	
