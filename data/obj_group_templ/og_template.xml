@@ -217,6 +217,7 @@
 </ObjectGroupTemplate>
 -->
 
+<!--
 <ObjectGroupTemplate name = "maylonsGraveL1Goblins" >
 	<Shape
 		  type = "RECT"
@@ -237,7 +238,7 @@
 		<Location name = "cryptGoblins" pos_x="0" pos_y="0" />
 	</Locations>
 </ObjectGroupTemplate>
-
+-->
 <ObjectGroupTemplate name = "maylonsGraveL2Chamber" >
 	<Shape
 		  type = "RECT"

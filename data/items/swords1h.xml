@@ -39,7 +39,7 @@
 
 <!-- Short Sword -->
 <Item type="weapon" subtype="short_sw" name="shortsword" size="medium">
-	<RenderInfo name = "shortsword"/>
+	<RenderInfo name = "shortSword"/>
 	<Image image="set:short_sw.png image:full_image" />
 	<Attribute
 		level_requirement="3"

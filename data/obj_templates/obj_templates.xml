@@ -170,6 +170,66 @@ FIXED_OBJECT
                 <Object name="konz_wall1" />
         </Environment>
 </ObjectTemplate>
+<ObjectTemplate name="$wall_m" type="FIXED_OBJECT">
+		<Environment name="meadow" default = "true">
+                <Object name="wall_m1" />
+        </Environment>
+        <Environment name="council">
+                <Object name="konz_wall_m1" />
+        </Environment>
+        <Environment name="cave">
+                <Object name="cave_wall_m1" />
+        </Environment>
+        
+</ObjectTemplate>
+<ObjectTemplate name="$wall_s" type="FIXED_OBJECT">
+		<Environment name="meadow" default = "true">
+                <Object name="wall_s1" />
+        </Environment>
+        <Environment name="council">
+                <Object name="konz_wall_s1" />
+        </Environment>
+         <Environment name="cave">
+                <Object name="cave_wall_s1" />
+        </Environment>
+        
+</ObjectTemplate>
+<ObjectTemplate name="$wall_t" type="FIXED_OBJECT">
+		<Environment name="meadow" default = "true">
+                <Object name="wall_t1" />
+        </Environment>
+        <Environment name="council">
+                <Object name="konz_wall_t1" />
+        </Environment>
+        <Environment name="cave">
+                <Object name="cave_wall_t1" />
+        </Environment>
+       
+</ObjectTemplate>
+<ObjectTemplate name="$wall_cIn" type="FIXED_OBJECT">
+		<Environment name="meadow" default = "true">
+                <Object name="wall_cIn1" />
+        </Environment>
+        <Environment name="council">
+                <Object name="konz_wall_cIn1" />
+        </Environment>
+        <Environment name="cave">
+                <Object name="cave_wall_cIn1" />
+        </Environment>
+        
+</ObjectTemplate>
+<ObjectTemplate name="$wall_cOut" type="FIXED_OBJECT">
+		<Environment name="meadow" default = "true">
+                <Object name="wall_cOut1" />
+        </Environment>
+        <Environment name="council">
+                <Object name="konz_wall_cOut1" />
+        </Environment>
+        <Environment name="cave">
+                <Object name="cave_wall_cOut1" />
+        </Environment>
+        
+</ObjectTemplate>
 
 <ObjectTemplate name="$house" type="FIXED_OBJECT">
         <Environment name="meadow" default = "true">
@@ -190,7 +250,6 @@ FIXED_OBJECT
                 <Object name="tree4" />
         </Environment>
 </ObjectTemplate>
-
 <ObjectTemplate name="$single_debris" type="FIXED_OBJECT">
         <Environment name="meadow">
                 <Object name="stone1" />
@@ -199,7 +258,6 @@ FIXED_OBJECT
                 <Object name="stone2" />
         </Environment>
 </ObjectTemplate>
-
 <ObjectTemplate name="$single_deb_l" type="FIXED_OBJECT">
         <Environment name="meadow">
                 <Object name="stone_l1" />
@@ -215,46 +273,27 @@ FIXED_OBJECT
         </Environment>
 </ObjectTemplate>
 
-<ObjectTemplate name="$table" type="FIXED_OBJECT">
-        <Environment name="council" default = "true">
-                <Object name="lab_tbl" />
-        </Environment>
-</ObjectTemplate>
-
-<ObjectTemplate name="$vase" type="FIXED_OBJECT">
-        <Environment name="meadow" default = "true">
-                <Object name="vase1" />
-                <Object name="vase2" />
-                <Object name="vase3" />
-                <Object name="vase4" />
-        </Environment>
-</ObjectTemplate>
-
 <ObjectTemplate name="$tube" type="FIXED_OBJECT">
         <Environment name="council" default = "true">
                 <Object name="tube1" />
                 <Object name="tube2" />
         </Environment>
 </ObjectTemplate>
-
 <ObjectTemplate name="$tube_ring" type="FIXED_OBJECT">
         <Environment name="council" default = "true">
                 <Object name="tube_ring" />
         </Environment>
 </ObjectTemplate>
-
 <ObjectTemplate name="$tube_open" type="FIXED_OBJECT">
         <Environment name="council" default = "true">
                 <Object name="tube_open" />
         </Environment>
 </ObjectTemplate>
-
 <ObjectTemplate name="$tube_corner" type="FIXED_OBJECT">
         <Environment name="council" default = "true">
                 <Object name="tube_corner45" />
         </Environment>
 </ObjectTemplate>
-
 <ObjectTemplate name="$tube_cross" type="FIXED_OBJECT">
         <Environment name="council" default = "true">
                 <Object name="tube_cross" />
@@ -267,7 +306,6 @@ FIXED_OBJECT
                 <Object name="shelf_m2" />
         </Environment>
 </ObjectTemplate>
-
 <ObjectTemplate name="$shelf_s" type="FIXED_OBJECT">
         <Environment name="council" default = "true">
                 <Object name="shelf_s1" />
@@ -275,7 +313,6 @@ FIXED_OBJECT
                 <Object name="shelf_s3" />
         </Environment>
 </ObjectTemplate>
-
 <ObjectTemplate name="$shelf_cabinet" type="FIXED_OBJECT">
         <Environment name="council" default = "true">
                 <Object name="cabinet1" />
@@ -291,7 +328,6 @@ FIXED_OBJECT
                 <Object name="box_m3" />
         </Environment>
 </ObjectTemplate>
-
 <ObjectTemplate name="$stuff_b" type="FIXED_OBJECT">
         <Environment name="meadow" default = "true">
                 <Object name="box_b1" />
@@ -311,13 +347,30 @@ FIXED_OBJECT
                 <Object name="barrel3" />
         </Environment>
 </ObjectTemplate>
-
+<ObjectTemplate name="$barrel_open" type="FIXED_OBJECT">
+        <Environment name="meadow" default = "true">
+                <Object name="barrel4" />
+        </Environment>
+</ObjectTemplate>
 <ObjectTemplate name="$barrel_m" type="FIXED_OBJECT">
         <Environment name="meadow" default = "true">
                 <Object name="barrel_m1" />
         </Environment>
 </ObjectTemplate>
 
+<ObjectTemplate name="$table" type="FIXED_OBJECT">
+        <Environment name="council" default = "true">
+                <Object name="lab_tbl" />
+        </Environment>
+</ObjectTemplate>
+<ObjectTemplate name="$vase" type="FIXED_OBJECT">
+        <Environment name="meadow" default = "true">
+                <Object name="vase1" />
+                <Object name="vase2" />
+                <Object name="vase3" />
+                <Object name="vase4" />
+        </Environment>
+</ObjectTemplate>
 <ObjectTemplate name="$board" type="FIXED_OBJECT">
         <Environment name="meadow" default = "true">
                 <Object name="board1" />
@@ -380,38 +433,32 @@ FIXED_OBJECT
                 <Object name="prison_wall1" />
         </Environment>
 </ObjectTemplate>
-
 <ObjectTemplate name="$prison_m" type="FIXED_OBJECT">
         <Environment name="council" default = "true">
                 <Object name="prison_wall_m1" />
         </Environment>
 </ObjectTemplate>
-
 <ObjectTemplate name="$prison_s" type="FIXED_OBJECT">
         <Environment name="council" default = "true">
                 <Object name="prison_wall_s1" />
         </Environment>
 </ObjectTemplate>
-
 <ObjectTemplate name="$prison_t" type="FIXED_OBJECT">
         <Environment name="council" default = "true">
                 <Object name="prison_wall_t1" />
 				<Object name="prison_wall_t2" />
         </Environment>
 </ObjectTemplate>
-
 <ObjectTemplate name="$prison_w" type="FIXED_OBJECT">
         <Environment name="council" default = "true">
                 <Object name="prison_door_w1" />
         </Environment>
 </ObjectTemplate>
-
 <ObjectTemplate name="$prison_cIn" type="FIXED_OBJECT">
          <Environment name="council" default = "true">
                 <Object name="prison_wall_cIn1" />
         </Environment>
 </ObjectTemplate>
-
 <ObjectTemplate name="$prison_cOut" type="FIXED_OBJECT">
         <Environment name="council" default = "true">
                 <Object name="prison_wall_cOut1" />
@@ -426,37 +473,31 @@ FIXED_OBJECT
                 <Object name="prison_door_arc1" />
         </Environment>
 </ObjectTemplate>
-
 <ObjectTemplate name="$door_SciFi_m" type="SCRIPTOBJECT">
         <Environment name="council" default = "true">
                 <Object name="konz_door1" />
         </Environment>
 </ObjectTemplate>
-
 <ObjectTemplate name="$door_wing_m" type="SCRIPTOBJECT">
         <Environment name="dungeon" default = "true">
                 <Object name="prison_door_m1" />
         </Environment>
 </ObjectTemplate>
-
 <ObjectTemplate name="$door_sec_r" type="SCRIPTOBJECT">
         <Environment name="council" default = "true">
                 <Object name="shelf_door_r1" />
         </Environment>
 </ObjectTemplate>
-
 <ObjectTemplate name="$door_sec_l" type="SCRIPTOBJECT">
         <Environment name="council" default = "true">
                 <Object name="shelf_door_l1" />
         </Environment>
 </ObjectTemplate>
-
 <ObjectTemplate name="$money" type="FIXED_OBJECT">
         <Environment name="council" default = "true">
                 <Object name="goldsack" />
         </Environment>
 </ObjectTemplate>
-
 <ObjectTemplate name="$ground" type="FIXED_OBJECT">
         <Environment name="cave" default = "true">
                 <Object name="ground" />
@@ -517,11 +558,67 @@ FIXED_OBJECT
                 <Object name="ladder1" />
         </Environment>
 </ObjectTemplate>
+<ObjectTemplate name="$misc_weaponsStand" type="FIXED_OBJECT">
+        <Environment name="meadow" default = "true">
+                <Object name="swordStand" />
+        </Environment>
+</ObjectTemplate>
+<ObjectTemplate name="$misc_weaponsLean" type="FIXED_OBJECT">
+        <Environment name="meadow" default = "true">
+                <Object name="swordLean" />
+        </Environment>
+</ObjectTemplate>
+<ObjectTemplate name="$misc_weapons2Stand" type="FIXED_OBJECT">
+        <Environment name="meadow" default = "true">
+                <Object name="sword2HStand" />
+				<Object name="axe2HStand" />
+				<Object name="hammer2HStand" />
+        </Environment>
+</ObjectTemplate>
+<ObjectTemplate name="$misc_weapons2Lean" type="FIXED_OBJECT">
+        <Environment name="meadow" default = "true">
+                <Object name="sword2HLean" />
+				<Object name="axe2HLean" />
+				<Object name="hammer2HLean" />
+        </Environment>
+</ObjectTemplate>
+<ObjectTemplate name="$misc_shieldsLeanL" type="FIXED_OBJECT">
+        <Environment name="meadow" default = "true">
+				<Object name="metalShieldLean" />
+        </Environment>
+</ObjectTemplate>
+<ObjectTemplate name="$misc_shieldsLeanS" type="FIXED_OBJECT">
+        <Environment name="meadow" default = "true">
+                <Object name="woodShieldLean" />
+        </Environment>
+</ObjectTemplate>
+<ObjectTemplate name="$misc_shieldsLie" type="FIXED_OBJECT">
+        <Environment name="meadow" default = "true">
+			<Object name="woodShieldLie" />
+			<Object name="metalShieldLie" />
+        </Environment>
+</ObjectTemplate>
+<ObjectTemplate name="$misc_potions" type="FIXED_OBJECT">
+        <Environment name="meadow" default = "true">
+			<Object name="heal_1" />
+			<Object name="heal_2" />
+			<Object name="heal_fr" />
+        </Environment>
+</ObjectTemplate>
 
 <ObjectTemplate name="$void_mojo" type="SCRIPTOBJECT">
         <Environment name="council" default = "true">
                 <Object name="mojo_tortured" />
         </Environment>
 </ObjectTemplate>
-
+<ObjectTemplate name="$void_mojoFrame" type="FIXED_OBJECT">
+        <Environment name="council" default = "true">
+                <Object name="modWP_frame" />
+        </Environment>
+</ObjectTemplate>
+<ObjectTemplate name="$void_mojoTop" type="FIXED_OBJECT">
+        <Environment name="council" default = "true">
+                <Object name="modWP_top" />
+        </Environment>
+</ObjectTemplate>
 

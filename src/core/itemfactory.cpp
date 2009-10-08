@@ -350,7 +350,6 @@ Item* ItemFactory::createItem(DropSlot &slot, float factor )
 		return 0;
 
 	DEBUG5("drop item %i %i",slot.m_min_level, slot.m_max_level);
-	DEBUG("prob distr. %f %f %f %f %f",slot.m_size_probability[0],slot.m_size_probability[1],slot.m_size_probability[2],slot.m_size_probability[3],slot.m_size_probability[4]);
 	
 	float probs[5];
 	probs[Item::SIZE_NONE] =1;
@@ -368,10 +367,7 @@ Item* ItemFactory::createItem(DropSlot &slot, float factor )
 			probs[i] /= div;
 		}
 	}
-	
-	DEBUG("faktor %f",factor);
-	DEBUG("prob distr %f %f %f %f", probs[0],probs[1],probs[2],probs[3]);
-	
+		
 	int size = Random::randDiscrete(probs,5);
 
 	// kein Item ausgewurfelt

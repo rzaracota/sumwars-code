@@ -232,8 +232,8 @@
 			<Exit name="exit_east" destination_region="aisHeath" destination_location="entry_west" >
 				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
 			</Exit>
-			<Exit name="entry_crypt" destination_region="aisMaylonsGraveL1" destination_location="entry_south" >
-				<Shape shape="RECT" extent_x="1.0" extent_y="4.0" />
+			<Exit name="entry_crypt" destination_region="aisMaylonsGraveEntry" destination_location="entry_south" >
+				<Shape shape="RECT" extent_x="2.0" extent_y="1.0" />
 			</Exit>
 		</Exits>
 
@@ -257,7 +257,30 @@
 			<SpawnGroup group_name="goblins_nubreck" number="1"/>
 		</SpawnGroups>
 	</Region>
-	
+
+<!-- Maylons Grab, Eingang[Template] -->
+	<Region id="45" name="aisMaylonsGraveEntry">
+		<Settings dimx="16" dimy="32"region_template="maylonsGraveEntry"  ground="council_ground"/>
+		
+		<ExitDirections north="true" south="true" west="false" east="false" />
+		
+		<SpawnGroups>
+			<SpawnGroup group_name="zombies" number="12" />
+		</SpawnGroups>
+		<Exits>
+			<Exit name="exit_south" destination_region="aisPlains" destination_location="exit_crypt" >
+				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
+			</Exit>
+			<Exit name="exit_north" destination_region="aisMaylonsGraveL1" destination_location="entry_south" >
+				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
+			</Exit>
+		</Exits>
+		
+		<Environments>
+			<Environment height="1.0" name="cave" />
+		</Environments>
+	</Region>
+
 <!-- Maylons Grab, Ebene 1[unterirdisch], ungefaehr 10 Minuten; Level 14 - 17 -->
 <!-- [kleine Elementare], Zombies, Skelette -->
 	<Region id="15" name="aisMaylonsGraveL1">
@@ -270,14 +293,14 @@
 			<SpawnGroup group_name="zombies" number="12" />
 		</SpawnGroups>
 		<Exits>
-			<Exit name="exit_south" destination_region="aisPlains" destination_location="exit_crypt" >
+			<Exit name="exit_south" destination_region="aisMaylonsGraveEntry" destination_location="entry_north" >
 				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
 			</Exit>
 			<Exit name="exit_north" destination_region="aisMaylonsGraveL2" destination_location="entry_north" >
 				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
 			</Exit>
 		</Exits>
-		
+	
 		<Environments>
 			<Environment height="1.0" name="cave" />
 		</Environments>
@@ -899,7 +922,7 @@
 <!-- Zombies, Skelette -->
 <!-- Locations fuer die Verteidigenden Wachen? -->
 	<Region id="13" name="dwarfenfrowardRampart">
-		<Settings dimx="32" dimy="12" area_percent="0.3" complexity="0.3" granularity="4"  ground="grass1"/>
+		<Settings dimx="32" dimy="36" region_template = "dwarfenwallRampart"  ground="grass1"/>
 		
 		<ExitDirections north="false" south="true" west="false" east="false" />
 		

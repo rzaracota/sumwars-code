@@ -650,7 +650,7 @@ void Monster::die()
 		}
 
 		int nrplayers = World::getWorld()->getPlayers()->size();
-		float faktor = 1+10.4*(nrplayers-1);
+		float faktor = 1+0.4*(nrplayers-1);
 		Item* si;
 		for (int i=0;i<4;i++)
 		{
