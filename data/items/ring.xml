@@ -20,11 +20,12 @@
 		modchance_damage_mult_fire_mod="0.1"
 		modchance_damage_mult_ice_mod="0.1"
 		modchance_damage_mult_air_mod="0.1"
+		price = "40"
 	/>
 	
 	<DropChance
 		level="2"
-		probability="0.1"
+		probability="0.2"
 	/>
 </Item>
 
@@ -35,6 +36,7 @@
 	<Attribute
 		level_requirement="4"
 		character_requirement="all"
+		price = "60"
 		min_enchant="50"
 		max_enchant="80"
 		modchance_magic_power_mod="0.1"
@@ -52,7 +54,7 @@
 	
 	<DropChance
 		level="4"
-		probability="0.1"
+		probability="0.2"
 	/>
 </Item>
 
@@ -63,6 +65,7 @@
 	<Attribute
 		level_requirement="8"
 		character_requirement="all"
+		price = "100"
 		min_enchant="90"
 		max_enchant="140"
 		modchance_magic_power_mod="0.1"
@@ -80,7 +83,7 @@
 	
 	<DropChance
 		level="8"
-		probability="0.1"
+		probability="0.2"
 	/>
 </Item>
 
@@ -91,6 +94,7 @@
 	<Attribute
 		level_requirement="15"
 		character_requirement="all"
+		price = "160"
 		min_enchant="130"
 		max_enchant="200"
 		modchance_magic_power_mod="0.1"
@@ -108,7 +112,7 @@
 	
 	<DropChance
 		level="15"
-		probability="0.1"
+		probability="0.2"
 	/>
 </Item>
 
@@ -119,6 +123,7 @@
 	<Attribute
 		level_requirement="21"
 		character_requirement="all"
+		price = "250"
 		min_enchant="160"
 		max_enchant="250"
 		modchance_magic_power_mod="0.1"
@@ -136,6 +141,6 @@
 	
 	<DropChance
 		level="21"
-		probability="0.1"
+		probability="0.2"
 	/>
 </Item>
