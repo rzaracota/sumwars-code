@@ -342,7 +342,7 @@ void ItemFactory::cleanup()
 	}
 }
 
-Item* ItemFactory::createItem(DropSlot &slot)
+Item* ItemFactory::createItem(DropSlot &slot, float factor )
 {
 	DEBUG5("get item by dropslot");
 	// wenn maximales Level unter 0 liegt kein Item ausgeben
@@ -350,8 +350,29 @@ Item* ItemFactory::createItem(DropSlot &slot)
 		return 0;
 
 	DEBUG5("drop item %i %i",slot.m_min_level, slot.m_max_level);
-	DEBUG5("prob distr. %f %f %f %f %f",slot.m_size_probability[0],slot.m_size_probability[1],slot.m_size_probability[2],slot.m_size_probability[3],slot.m_size_probability[4]);
-	int size = Random::randDiscrete(slot.m_size_probability,5);
+	DEBUG("prob distr. %f %f %f %f %f",slot.m_size_probability[0],slot.m_size_probability[1],slot.m_size_probability[2],slot.m_size_probability[3],slot.m_size_probability[4]);
+	
+	float probs[5];
+	probs[Item::SIZE_NONE] =1;
+	for (int i=0; i<4; i++)
+	{
+		probs[i] = slot.m_size_probability[i]* factor;
+		probs[Item::SIZE_NONE] -= slot.m_size_probability[i]* factor;
+	}
+	
+	if (probs[Item::SIZE_NONE] < 0)
+	{
+		float div = 1-probs[Item::SIZE_NONE];
+		for (int i=0; i<4; i++)
+		{
+			probs[i] /= div;
+		}
+	}
+	
+	DEBUG("faktor %f",factor);
+	DEBUG("prob distr %f %f %f %f", probs[0],probs[1],probs[2],probs[3]);
+	
+	int size = Random::randDiscrete(probs,5);
 
 	// kein Item ausgewurfelt
 	if (size ==4)

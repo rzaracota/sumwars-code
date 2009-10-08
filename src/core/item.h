@@ -141,6 +141,7 @@ struct Item {
 		SMALL = 2,
 		MEDIUM = 1,
 		BIG = 0,
+		SIZE_NONE =4,
 	};
 
 	/**

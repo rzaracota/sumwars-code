@@ -1,5 +1,6 @@
 #include "charconv.h"
 #include "debug.h"
+#include "world.h"
 
 CharConv::CharConv()
 	: m_bitstream()
@@ -8,13 +9,14 @@ CharConv::CharConv()
 	m_bitstream.Write((char) ID_TIMESTAMP);
 	m_bitstream.Write(m_timestamp);
 	m_stream =0;
-	m_version =0;
+	m_version =World::getWorld()->getVersion();
 }
 
 CharConv::CharConv(int dummy)
 	: m_bitstream()
 {
 	m_stream =0;
+	m_version =World::getWorld()->getVersion();
 }
 
 CharConv::CharConv(unsigned char* data, unsigned int size)
@@ -22,6 +24,7 @@ CharConv::CharConv(unsigned char* data, unsigned int size)
 {
 	m_timestamp = RakNet::GetTime();
 	m_stream=0;
+	m_version =World::getWorld()->getVersion();
 }
 
 CharConv::CharConv(Packet* packet)
@@ -38,7 +41,15 @@ CharConv::CharConv(Packet* packet)
 		m_timestamp = RakNet::GetTime();
 	}
 	m_stream=0;
+	m_version =World::getWorld()->getVersion();
 }
+
+CharConv::CharConv(std::iostream* stream)
+{
+	m_stream = stream;
+	m_version =World::getWorld()->getVersion();
+}
+
 
 void CharConv::toBuffer(const char* data, unsigned int size)
 {

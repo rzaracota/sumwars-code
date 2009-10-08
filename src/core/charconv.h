@@ -34,10 +34,7 @@ class CharConv
 	 * \fn CharConv(std::iostream* stream)
 	 * \param stream Datenstrom, in den Daten geschrieben werden
 	 */
-	CharConv(std::iostream* stream)
-	{
-		m_stream = stream;
-	}
+	CharConv(std::iostream* stream);
 	
 	/**
 	 * \fn CharConv(unsigned char* data, unsigned int size)

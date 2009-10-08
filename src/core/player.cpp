@@ -1766,9 +1766,9 @@ void Player::toString(CharConv* cv)
 {
 	DEBUG5("Player::tostring");
 	Creature::toString(cv);
-
+	
 	cv->toBuffer(m_name);
-
+	
 	cv->toBuffer(getBaseAttr()->m_level);
 	m_look.toString(cv);
 	// Items
@@ -1782,8 +1782,7 @@ void Player::toString(CharConv* cv)
 	}
 	DEBUG5("number of items: %i",cnt);
 	cv->toBuffer(cnt);
-
-
+	
 	for ( short i = Equipement::ARMOR; i<= Equipement::SHIELD2; i++)
 	{
 		item = getEquipement()->getItem(i);
@@ -1821,8 +1820,6 @@ void Player::fromString(CharConv* cv)
 	char cnt;
 	cv->fromBuffer(cnt);
 	DEBUG5("number of items: %i",cnt);
-
-
 	for ( short i = 0; i< cnt; i++)
 	{
 		readItem(cv);
@@ -1853,7 +1850,7 @@ void Player::readItem(CharConv* cv)
 	cv->fromBuffer<char>(type);
 	cv->fromBuffer(subtype);
 	cv->fromBuffer(id);
-
+	
 	item = ItemFactory::createItem((Item::Type) type, subtype,id);
 	if (item != 0)
 	{

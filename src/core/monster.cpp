@@ -649,10 +649,12 @@ void Monster::die()
 			}
 		}
 
+		int nrplayers = World::getWorld()->getPlayers()->size();
+		float faktor = 1+10.4*(nrplayers-1);
 		Item* si;
 		for (int i=0;i<4;i++)
 		{
-			si = ItemFactory::createItem(m_drop_slots[i]);
+			si = ItemFactory::createItem(m_drop_slots[i],faktor);
 			if (si!=0)
 			{
 				getRegion()->dropItem(si,getShape()->m_center);

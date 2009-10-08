@@ -1441,7 +1441,10 @@ int EventSystem::createRandomItem(lua_State *L)
 			ds.m_magic_power = lua_tonumber(L,5);
 		}
 		
-		Item* item = ItemFactory::createItem(ds);
+		int nrplayers = World::getWorld()->getPlayers()->size();
+		float faktor = 1+0.4*(nrplayers-1);
+		
+		Item* item = ItemFactory::createItem(ds,faktor);
 		setItem(item);
 		m_item_in_game = false;
 

@@ -108,10 +108,12 @@ public:
 	static void registerItemDrop(Item::Subtype subtype, DropChance chance);
 
 	/**
-	 * \fn static Item* createItem(DropSlot &slot)
+	 * \fn static Item* createItem(DropSlot &slot, float factor = 1.0)
 	 * \brief Erzeugt einen Gegenstand anhand eines Dropslots. Wenn kein Item entsteht wird NULL ausgegeben
+	 * \param slot Dropslot mit Beschreibung der Wahrscheinlichkeiten
+	 * \param prob_factor Faktor fuer die Dropwahrscheinlichkeit
 	 */
-	static Item* createItem(DropSlot &slot);
+	static Item* createItem(DropSlot &slot, float factor = 1.0);
 	
 	/**
 	 * \fn static Item::Type getBaseType(Item::Subtype subtype)

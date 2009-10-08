@@ -16,7 +16,7 @@ void PlayerLook::toString(CharConv* cv)
 	cv->toBuffer<char>(m_gender);
 	cv->toBuffer(m_render_info);
 	cv->toBuffer(m_emotion_set);
-	if (cv->getVersion() >= 13)
+	if (World::getWorld()->getVersion() >= 13)
 	{
 		cv->toBuffer(m_hair);
 		cv->toBuffer(m_item_suffix);
@@ -35,6 +35,5 @@ void PlayerLook::fromString(CharConv* cv)
 		cv->fromBuffer(m_hair);
 		cv->fromBuffer(m_item_suffix);
 	}
-
 }
 
