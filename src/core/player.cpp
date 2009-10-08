@@ -165,7 +165,7 @@ bool Player::init()
 	for( it = pdata->m_start_items.begin(); it != pdata->m_start_items.end(); ++it)
 	{
 		item = ItemFactory::createItem(ItemFactory::getBaseType(*it),*it);
-		insertItem(item);
+		insertItem(item,true,false);
 	}
 	
 	bas->m_level=1;
@@ -854,7 +854,7 @@ bool Player::onItemClick(ClientCommand* command)
 	return true;
 }
 
-short Player::insertItem(Item* itm, bool use_equip)
+short Player::insertItem(Item* itm, bool use_equip, bool emit_event)
 {
 	if (itm ==0)
 	{
@@ -870,7 +870,7 @@ short Player::insertItem(Item* itm, bool use_equip)
 		if (pos != Equipement::NONE)
 		{
 			// Gegenstand ins Inventar aufgenommen
-			if (World::getWorld()->isServer() && getId() !=0)
+			if (World::getWorld()->isServer() && getId() !=0 && emit_event)
 			{
 	
 				NetEvent event;

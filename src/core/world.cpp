@@ -2818,7 +2818,7 @@ void World::calcPathDirection(PathfindInfo* pathinfo, Vector pos, Vector& dir)
 
 void World::insertNetEvent(NetEvent &event)
 {
-
+	DEBUG5("new world Netevent %i %i type %i",event.m_id, event.m_data,event.m_type);
 	m_events->push_back(event);
 
 }

@@ -256,13 +256,14 @@ public:
 	bool onItemClick(ClientCommand* command);
 	
 	/**
-	 * \fn bool insertItem(Item* itm, bool use_equip = true)
+	 * \fn bool insertItem(Item* itm, bool use_equip = true, bool emit_event=true)
 	 * \brief Fuegt ein Items in das Inventar ein
 	 * \param itm einzufuegendes Item
 	 * \param use_equip wenn auf true gesetzt, wird das Item falls moeglich als Ausruestungsgegenstand verwendet
+	 * \param emit_event Wenn auf true gesetzt, wird ein Event erzeugt, dass auf das Item hinweist
 	 * \return Position an der das Item eingefuegt wurde
 	 */
-	short insertItem(Item* itm, bool use_equip = true);
+	short insertItem(Item* itm, bool use_equip = true, bool emit_event=true);
 	
 	/**
 	 * \fn bool checkItemRequirements(Item* itm)
