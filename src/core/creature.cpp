@@ -470,7 +470,7 @@ void Creature::performAction(float &time)
 		Vector newpos = getShape()->m_center + getSpeed()*dtime;
 
 		// Bewegung ausfuehren
-		moveTo(newpos);
+		moveTo(newpos,false);
 
 	}
 

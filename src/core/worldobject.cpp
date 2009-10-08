@@ -51,18 +51,26 @@ bool WorldObject::isLarge()
 	return false;
 }
 
-bool WorldObject::moveTo(Vector newpos)
+bool WorldObject::moveTo(Vector newpos, bool emit_event)
 {
+	bool ret = true;
 	if (World::getWorld()==0 || getRegion()==0)
 	{
 		setPosition(newpos);
 
-		return true;
+		ret =  true;
 	}
 	else
 	{
-		return getRegion()->moveObject(this, newpos);
+		ret =  getRegion()->moveObject(this, newpos);
+		
 	}
+	
+	if (emit_event)
+	{
+		addToNetEventMask(NetEvent::DATA_SHAPE);
+	}
+	return ret;
 }
 
 

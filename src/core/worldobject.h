@@ -190,12 +190,13 @@ class WorldObject : public GameObject
 	virtual  bool  destroy ();
 	
 	/**
-	 * \fn bool moveTo(Vector newpos )
+	 * \fn bool moveTo(Vector newpos, bool emit_event= true )
 	 * \brief Verschiebt das Objekt an einen neuen Ort
 	 * \param newpos neue Position
+	 * \param emit_event Position wird anderen Clients nur mitgeteilt, wenn emit_event auf true gesetzt ist
 	 * 
 	 */
-	bool moveTo(Vector newpos);
+	bool moveTo(Vector newpos, bool emit_event = true);
 	
 	/**
 	 * \fn bool takeDamage(Damage* damage)
