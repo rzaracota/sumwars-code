@@ -56,9 +56,9 @@
 	</Dropslots>
 	
 	<BasicAttributes
-		experience="10"
+		experience="15"
 		level="1"
-		max_health="30"
+		max_health="40"
 		armor="2"
 		block="0"
 		attack="12"
@@ -104,14 +104,14 @@
 	</Dropslots>
 	
 	<BasicAttributes
-		experience="10"
+		experience="20"
 		level="1"
 		max_health="80"
 		armor="2"
 		block="0"
 		attack="12"
 		power="10"
-		strength="8"
+		strength="20"
 		dexterity="14"
 		magic_power="20"
 		willpower="15"

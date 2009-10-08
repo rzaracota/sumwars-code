@@ -794,8 +794,10 @@ bool Player::onItemClick(ClientCommand* command)
 					stream << "#townportal" << getId();
 					getRegion()->addLocation(stream.str(), getShape()->m_center);
 					
-					m_portal_position.first = getRegion()->getIdString();
-					m_portal_position.second = stream.str();
+					RegionLocation regloc;
+					regloc.first = getRegion()->getIdString();
+					regloc.second = stream.str();
+					setPortalPosition(regloc);
 					
 					getRegion()->insertPlayerTeleport(getId(), m_revive_position);
 					clearCommand(true);
@@ -1367,7 +1369,10 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 				else if (command->m_id == -1 && m_portal_position.first != "")
 				{
 					getRegion()->insertPlayerTeleport(getId(), m_portal_position);
-					m_portal_position.first = "";
+					RegionLocation regloc;
+					regloc.first = "";
+					regloc.second="";
+					setPortalPosition(regloc);
 					clearCommand(true);
 				}
 			}
@@ -1850,12 +1855,15 @@ void Player::readItem(CharConv* cv)
 	cv->fromBuffer(id);
 
 	item = ItemFactory::createItem((Item::Type) type, subtype,id);
-	item->fromString(cv);
-	getEquipement()->swapItem(item,pos);
-
-	if (item !=0)
+	if (item != 0)
 	{
-		delete item;
+		item->fromString(cv);
+		getEquipement()->swapItem(item,pos);
+
+		if (item !=0)
+		{
+			delete item;
+		}
 	}
 }
 
@@ -2263,6 +2271,8 @@ void Player::writeNetEvent(NetEvent* event, CharConv* cv)
 	{
 		cv->toBuffer(m_revive_position.first);
 		cv->toBuffer(m_revive_position.second);
+		cv->toBuffer(m_portal_position.first);
+		cv->toBuffer(m_portal_position.second);
 		DEBUG5("writing revive position %s %s",m_revive_position.first.c_str(), m_revive_position.second.c_str())
 	}
 	
@@ -2297,6 +2307,8 @@ void Player::processNetEvent(NetEvent* event, CharConv* cv)
 	{
 		cv->fromBuffer(m_revive_position.first);
 		cv->fromBuffer(m_revive_position.second);
+		cv->fromBuffer(m_portal_position.first);
+		cv->fromBuffer(m_portal_position.second);
 		DEBUG5("reading revive position %s %s",m_revive_position.first.c_str(), m_revive_position.second.c_str())
 	}
 	
@@ -2328,6 +2340,12 @@ void Player::setRevivePosition(RegionLocation regloc)
 {
 	DEBUG("changed revive position");
 	m_revive_position = regloc;
+	addToNetEventMask(NetEvent::DATA_REVIVE_LOCATION);
+}
+
+void Player::setPortalPosition(RegionLocation regloc)
+{
+	m_portal_position = regloc;
 	addToNetEventMask(NetEvent::DATA_REVIVE_LOCATION);
 }
 

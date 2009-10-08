@@ -664,6 +664,13 @@ public:
 	}
 	
 	/**
+	 * \fn void setPortalPosition(RegionLocation regloc)
+	 * \brief Setzt die Position des Town Portals
+	 * \param regloc Region und Ort, an dem das Portal steht
+	 */
+	void setPortalPosition(RegionLocation regloc);
+	
+	/**
 	 * \fn void insertLearnableAbility(Action::ActionType type, Vector position, int tab)
 	 * \brief Fuegt eine erlernbare Faehigkeit hinzu
 	 * \param type Typ der Faehigkeit

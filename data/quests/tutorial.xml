@@ -1090,7 +1090,7 @@
 		
 		<Event trigger="mutant_slug_attack" >
 			<Effect>
-				tutorial_tmp.mutslug_timer = { 0,1300,2400,12000,14000,18000,19000, 23000};
+				tutorial_tmp.mutslug_timer = { 0,1300,2400,11000,13000,16000,17000, 20000};
 				tutorial_tmp.mutslug_locs = {"locDanger1","locDanger4","locDanger3", "locDanger2", "locDanger5", "locDanger3", "locDanger2", "locDanger4"};
 				tutorial_tmp.mutslug_type = {"mutantSlug","fireSlug","mutantSlug","fireSlug", "mutantSlug","fireSlug","mutantSlug","mutantSlug"};
 				tutorial_tmp.mutslug_number = 8;

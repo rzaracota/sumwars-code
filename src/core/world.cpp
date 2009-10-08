@@ -917,7 +917,15 @@ void World::handleSavegame(CharConv *cv, int slot)
 					msg3.toBuffer(lt->second.m_world_coord.m_y);
 					DEBUG5("sending waypoint info %i %s %f %f",lt->first, lt->second.m_name.c_str(), lt->second.m_world_coord.m_x,lt->second.m_world_coord.m_y);
 				}
-			
+				
+				std::map<std::string, int>::iterator rnt;
+				msg3.toBuffer<int>(m_region_name_id.size());
+				for (rnt = m_region_name_id.begin(); rnt != m_region_name_id.end(); ++rnt)
+				{
+					msg3.toBuffer(rnt->first);
+					msg3.toBuffer(rnt->second);
+				}
+				
 				m_network->pushSlotMessage(msg3.getBitStream(),slot);
 			
 				// Informationen ueber Parties senden
@@ -1562,6 +1570,20 @@ void World::updatePlayers()
 						winfos[regid] = wi;
 						DEBUG5("got waypoint info %i %s %f %f",regid, wi.m_name.c_str(), wi.m_world_coord.m_x,wi.m_world_coord.m_y);
 					}
+					
+					int nrregions;
+					cv->fromBuffer(nrregions);
+					m_region_name_id.clear();
+					
+					std::string regname;
+					int id;
+					for (int i = 0; i < nrregions; i++)
+					{
+						cv->fromBuffer(regname);
+						cv->fromBuffer(id);
+						m_region_name_id.insert(std::make_pair(regname,id));
+					}
+					
 				}
 				else if (headerp.m_content == PTYPE_S2C_PARTY)
 				{
