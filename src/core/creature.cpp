@@ -399,7 +399,7 @@ void Creature::initAction()
 	{
 		clearCommand(false);
 	}
-	DEBUG5("action %s time %f",m_action.m_type.c_str(), m_action.m_time);
+	DEBUG5("action %s time %f angle %f",m_action.m_type.c_str(), m_action.m_time,getShape()->m_angle);
 }
 
 void Creature::performAction(float &time)
@@ -4144,7 +4144,7 @@ void Creature::processNetEvent(NetEvent* event, CharConv* cv)
 	{
 		cv->fromBuffer(newspeed.m_x);
 		cv->fromBuffer(newspeed.m_y);
-		if (newspeed.getLength() > 0.001f)
+		if (newspeed.getLength() > 0.00001f)
 		{
 			newmove = true;
 		}
@@ -4252,7 +4252,6 @@ void Creature::processNetEvent(NetEvent* event, CharConv* cv)
 
 	if (newact)
 	{
-
 		m_action.m_elapsed_time += delay;
 		
 		if (m_action.m_elapsed_time> m_action.m_time)
@@ -4280,7 +4279,7 @@ void Creature::processNetEvent(NetEvent* event, CharConv* cv)
 			}
 			
 			Action::ActionInfo* ainfo = Action::getActionInfo(m_action.m_type);
-			if (ainfo !=0 && ainfo->m_base_action == "walk")
+			if (ainfo !=0 && ainfo->m_base_action == "walk" && newmove)
 			{
 				setAngle(getSpeed().angle());
 

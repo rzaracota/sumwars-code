@@ -76,7 +76,7 @@
 				
 					local door;
 					
-					door = getObjectByNameRef("doorBehemothNorth");
+					local door = getObjectByNameRef("doorBehemothNorth");
 					scriptobjectvar[door]["locked"] = true;
 					door = getObjectByNameRef("doorBehemothWest");
 					scriptobjectvar[door]["locked"] = true;
@@ -906,7 +906,9 @@
 				addCameraPosition(0,"locBehemoth" , 90,20, 20);
 				addCameraPosition(1000,"locBehemoth" , 90,20, 20);
 				
+				moveObject(tutorial_tmp.behemoth, "locBehemoth");
 				lookAtObject(tutorial_tmp.behemoth, tutorial_tmp.bguard1);
+				
 				addUnitCommand(tutorial_tmp.behemoth,"behemoth_fire_storm",tutorial_tmp.bguard1);
 				addUnitCommand(tutorial_tmp.behemoth,"behemoth_fire_storm",tutorial_tmp.bguard1);
 			</Effect>
