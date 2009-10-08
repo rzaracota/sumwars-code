@@ -143,7 +143,11 @@ function updatePlayerVariable(var,refvar,prefix,lplayers)
 			-- keine Tabelle
 			if (refval ~= value) then
 				refvar[key] = value;
-				str = prefix.."."..key.."="..tostring(value)..";";
+				if (type(value) == "string") then
+					str = prefix.."."..key.."='"..tostring(value).."';";
+				else
+					str = prefix.."."..key.."="..tostring(value)..";";
+				end;
 				--print("changed variable: "..str);
 				for pid,pdata in pairs(lplayers) do
 					writeUpdateString(pid,str);

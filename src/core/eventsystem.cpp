@@ -1559,6 +1559,11 @@ int EventSystem::getPlayerItem(lua_State *L)
 				setItem(item);
 				m_item_in_game = true;
 			}
+			else
+			{
+				setItem(0);
+				m_item_in_game = false;
+			}
 		}
 	}
 	else
