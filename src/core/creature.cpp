@@ -4236,7 +4236,14 @@ void Creature::processNetEvent(NetEvent* event, CharConv* cv)
 		{
 			DEBUG5("pos %f %f speed %f %f", getShape()->m_center.m_x, getShape()->m_center.m_y, getSpeed().m_x, getSpeed().m_y); 
 			// Bewegungsgeschwindigkeit so setzen, dass Ziel in der richtigen Zeit erreicht wird
-			setSpeed((goal - getShape()->m_center) * (1/goaltime));
+			Vector calcspeed = (goal - getShape()->m_center) * (1/goaltime);
+			setSpeed(calcspeed);
+			
+			if (calcspeed.getLength() > 4* newspeed.getLength())
+			{
+				moveTo(goal - newspeed * goaltime);
+				setSpeed(newspeed);
+			}
 			DEBUG5("goal %f %f newspeed %f %f", goal.m_x, goal.m_y, getSpeed().m_x, getSpeed().m_y); 
 		}
 
