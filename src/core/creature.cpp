@@ -4122,9 +4122,10 @@ void Creature::processNetEvent(NetEvent* event, CharConv* cv)
 			cv->fromBuffer(timer_nr);
 			cv->fromBuffer(time);
 			cv->fromBuffer(timer);		
-			getBaseAttrMod()->m_abilities[type].m_timer_nr = timer_nr;
-			getBaseAttrMod()->m_abilities[type].m_timer = timer;
-			getBaseAttrMod()->m_abilities[type].m_time = time;
+			getBaseAttr()->m_abilities[type].m_timer_nr = timer_nr;
+			getBaseAttr()->m_abilities[type].m_timer = timer;
+			getBaseAttr()->m_abilities[type].m_time = time;
+			calcBaseAttrMod();
 		}
 
 	}

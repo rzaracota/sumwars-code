@@ -982,7 +982,7 @@ void Player::increaseAttribute(CreatureBaseAttr::Attribute attr)
 			getBaseAttr()->m_max_health += 5;
 			getBaseAttrMod()->m_max_health += 5;
 			getDynAttr()->m_health +=5;
-			addToNetEventMask(NetEvent::DATA_HP | NetEvent::DATA_ATTRIBUTES_LEVEL);
+			addToNetEventMask(NetEvent::DATA_HP );
 			break;
 		case (CreatureBaseAttr::DEXTERITY):
 			getBaseAttr()->m_dexterity++;
@@ -999,7 +999,7 @@ void Player::increaseAttribute(CreatureBaseAttr::Attribute attr)
 	}
 	
 	calcBaseAttrMod();
-	addToNetEventMask(NetEvent::DATA_SKILL_ATTR_POINTS);
+	addToNetEventMask(NetEvent::DATA_SKILL_ATTR_POINTS | NetEvent::DATA_ATTRIBUTES_LEVEL );
 	
 }
 
@@ -1198,7 +1198,7 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 
 					calcBaseAttrMod();
 					
-					addToNetEventMask( NetEvent::DATA_SKILL_ATTR_POINTS);
+					addToNetEventMask( NetEvent::DATA_SKILL_ATTR_POINTS | NetEvent::DATA_ABILITIES);
 				}
 			}
 			break;
