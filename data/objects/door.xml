@@ -1,22 +1,3 @@
-<ScriptObject type="SCRIPTOBJECT" subtype="door" layer="NORMAL">
-	<RenderInfo name="testdoor"/>
-	<Geometry shape="RECT" extent_x="0.3529384471" extent_y="1.866731536"/>
-	
-	<Event trigger="object_use">
-		<Effect>
-			local set = getScriptObjectFlag(trigger.used_object,'open')
-			setScriptObjectFlag(trigger.used_object,'open',not set)
-			local pos = get(trigger.used_object,"position")
-			if (set) then
-				pos[2] = pos[2] +4;
-			else
-				pos[2] = pos[2] -4;
-			end;
-			moveObject(trigger.used_object,pos,false)
-		</Effect>
-	</Event>
-</ScriptObject>
-
 <ScriptObject type="SCRIPTOBJECT" subtype="switch" layer="NORMAL">
 	<RenderInfo name="testswitch"/>
 	<Geometry shape="CIRCLE" radius="0.3"/>
@@ -41,7 +22,7 @@
 	
 	<Event trigger="object_use">
 		<Effect>
-			if (scriptobjectvar[trigger.used_object]["locked"] ~= true or trigger.lock_override) then
+			if ((scriptobjectvar[trigger.used_object]["locked"] ~= true or trigger.lock_override) and scriptobjectvar[trigger.used_object]["lockdown"] ~= true) then
 				local set = getScriptObjectFlag(trigger.used_object,'open')
 				setScriptObjectFlag(trigger.used_object,'open',not set)
 				
@@ -55,6 +36,9 @@
 				vecadd(pos,shift);
 				
 				moveObject(trigger.used_object,pos,false)
+				
+				scriptobjectvar[trigger.used_object]["lockdown"] = true;
+				timedExecute('scriptobjectvar['..trigger.used_object..']["lockdown"] = nil',1500);
 			end
 		</Effect>
 	</Event>
@@ -66,7 +50,7 @@
 	
 	<Event trigger="object_use">
 		<Effect>
-			if (scriptobjectvar[trigger.used_object]["locked"] ~= true or trigger.lock_override) then
+			if ((scriptobjectvar[trigger.used_object]["locked"] ~= true or trigger.lock_override) and scriptobjectvar[trigger.used_object]["lockdown"] ~= true) then
 				local set = getScriptObjectFlag(trigger.used_object,'open')
 				setScriptObjectFlag(trigger.used_object,'open',not set)
 				
@@ -81,6 +65,9 @@
 				vecadd(pos,shift);
 				
 				moveObject(trigger.used_object,pos,false)
+				
+				scriptobjectvar[trigger.used_object]["lockdown"] = true;
+				timedExecute('scriptobjectvar['..trigger.used_object..']["lockdown"] = nil',1000);
 			end;
 		</Effect>
 	</Event>
@@ -93,7 +80,7 @@
 	
 	<Event trigger="object_use">
 		<Effect>
-			if (scriptobjectvar[trigger.used_object]["locked"] ~= true or trigger.lock_override) then
+			if ((scriptobjectvar[trigger.used_object]["locked"] ~= true or trigger.lock_override) and scriptobjectvar[trigger.used_object]["lockdown"] ~= true) then
 				local set = getScriptObjectFlag(trigger.used_object,'open')
 				setScriptObjectFlag(trigger.used_object,'open',not set)
 				
@@ -108,6 +95,9 @@
 				vecadd(pos,shift);
 				
 				moveObject(trigger.used_object,pos,false)
+				
+				scriptobjectvar[trigger.used_object]["lockdown"] = true;
+				timedExecute('scriptobjectvar['..trigger.used_object..']["lockdown"] = nil',1000);
 			end;
 		</Effect>
 	</Event>
@@ -120,7 +110,7 @@
 	
 	<Event trigger="object_use">
 		<Effect>
-			if (scriptobjectvar[trigger.used_object]["locked"] ~= true or trigger.lock_override) then
+			if ((scriptobjectvar[trigger.used_object]["locked"] ~= true or trigger.lock_override) and scriptobjectvar[trigger.used_object]["lockdown"] ~= true) then
 				local stat = getScriptObjectFlag(trigger.used_object,'open')
 				setScriptObjectFlag(trigger.used_object,'open',not stat)
 
@@ -143,6 +133,9 @@
 				
 				
 				moveObject(trigger.used_object,pos,false)
+				
+				scriptobjectvar[trigger.used_object]["lockdown"] = true;
+				timedExecute('scriptobjectvar['..trigger.used_object..']["lockdown"] = nil',500);
 			end
 		</Effect>
 	</Event>
