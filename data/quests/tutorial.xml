@@ -163,7 +163,7 @@
 			</Condition>
 			<Effect>
 				tutorial_tmp.assemble = nil;
-				groupObjectsArc(getPlayers(),"locEntryPlayer","locTolec");
+				groupObjectsArc(getPlayers(),"locEntryPlayer","locTolec",nil,45);
 				tutorial.started = true;
 				createDialogue();
 				addAllPlayersToDialog();
@@ -585,7 +585,7 @@
 			</Condition>
 			<Effect>
 				tutorial_tmp.assemble = nil;
-				groupObjectsArc(getPlayers(),"locBehemothView","locWay2");
+				groupObjectsArc(getPlayers(),"locBehemothView","locWay2",nil,45);
 				moveObject(tutorial_tmp.tolec,"locWay2");
 				moveObject(tutorial_tmp.derred, "locWay2");
 				
@@ -825,7 +825,7 @@
 			</Condition>
 			<Effect>
 				tutorial_tmp.assemble = nil;
-				groupObjectsArc(getPlayers(),"locSlugs","locSlugView");
+				groupObjectsArc(getPlayers(),"locSlugs","locSlugView",nil,45);
 				moveObject(tutorial_tmp.tolec,"locSlugView");
 				moveObject(tutorial_tmp.derred, "locSlugView");
 				groupObjectsArc({tutorial_tmp.tolec,tutorial_tmp.derred} ,"locSlugView","locSlugs",nil,30);
@@ -1223,7 +1223,7 @@
 				tutorial_tmp.assemble = nil;
 				moveObject(tutorial_tmp.tolec,"locBackroute5");
 				moveObject(tutorial_tmp.derred, "locBackroute5");
-				groupObjectsArc(getPlayers(),"locPartyLib","locBackroute5");
+				groupObjectsArc(getPlayers(),"locPartyLib","locBackroute5",nil,45);
 				groupObjectsArc({tutorial_tmp.tolec,tutorial_tmp.derred} ,"locBackroute5","locPartyLib",nil,30);
 				
 				createDialogue();
@@ -1376,7 +1376,7 @@
 		<Event trigger="louse_dialog" once="true">
 			<Effect>
 				setCutsceneMode(false);
-				groupObjectsArc(getPlayers(),"locPartyLib","locBackroute5");
+				groupObjectsArc(getPlayers(),"locPartyLib","locBackroute5",nil,45);
 				groupObjectsArc({tutorial_tmp.tolec,tutorial_tmp.derred} ,"locBackroute5","locPartyLib",nil,30);
 				
 				createDialogue();

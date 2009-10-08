@@ -5,7 +5,8 @@ function getRolePlayer(role, forbiddenids)
 	local cand = getRolePlayers(role);
 	local id,key
 	for key,id in pairs(cand) do
-		if (forbiddenids == nil or forbiddenids[id] ~= true) then
+		if (not (type(forbiddenids) == "table" and forbiddenids[id] ~= true)
+				  and not (type(forbiddenids) == "number" and  id ~= forbiddenids))then
 			return id;
 		end;
 	end;

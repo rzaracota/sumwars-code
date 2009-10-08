@@ -225,7 +225,6 @@ function setPlayerPrivateVar(id,varstr,value)
 	else
 		data.str = varstr.."="..tostring(value)..";"
 	end;
-	print(data.str);
 	writeUpdateString(id,data.str);
 end;
 

@@ -1596,6 +1596,15 @@ int EventSystem::removePlayerItem(lua_State *L)
 				setItem(item);
 				m_item_in_game = false;
 			}
+			
+			if (pos < Equipement::CURSOR_ITEM)
+			{
+				NetEvent event;
+				event.m_id = pl->getId();
+				event.m_data = pos;
+				event.m_type = NetEvent::PLAYER_ITEM_REMOVE;
+				World::getWorld()->insertNetEvent(event);
+			}
 		}
 	}
 	else

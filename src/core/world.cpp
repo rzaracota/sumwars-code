@@ -1722,8 +1722,11 @@ void World::updatePlayers()
 					DEBUG5(" send global event %i id %i data %i",lt->m_type,lt->m_id, lt->m_data);
 
 					header.toString(msg);
-					writeNetEvent(reg,&(*lt),msg);
-					m_network->pushSlotMessage(msg->getBitStream(),slot);
+					bool ret = writeNetEvent(reg,&(*lt),msg);
+					if (ret)
+					{
+						m_network->pushSlotMessage(msg->getBitStream(),slot);
+					}
 					delete msg;
 				}
 
@@ -1748,7 +1751,6 @@ void World::updatePlayers()
 				}
 
 				// Lua Chunk
-				
 				std::string chunk = EventSystem::getPlayerVarString(pl->getId());
 				if (chunk != "")
 				{
@@ -2291,22 +2293,16 @@ bool World::processNetEvent(Region* region,CharConv* cv)
 			break;
 
 		case NetEvent::PLAYER_ITEM_REMOVE:
-
 			if (m_players->count(event.m_id)>0)
 			{
 				object = (*m_players)[event.m_id];
-				if (object != m_local_player)
-				{
-					Item* item =0;
-					static_cast<Player*>(object)->getEquipement()->swapItem(item,event.m_data);
+				
+				Item* item =0;
+				static_cast<Player*>(object)->getEquipement()->swapItem(item,event.m_data);
 
-					if (item !=0)
-						delete item;
-				}
-				else
-				{
-					return false;
-				}
+				if (item !=0)
+					delete item;
+			
 			}
 			else
 			{
