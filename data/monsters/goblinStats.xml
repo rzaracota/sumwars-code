@@ -423,7 +423,7 @@
 	<AI ai_sight_range="12" />
 </Monster>
 
-<!-- gobrusch Goblin Unique -->
+<!-- dobrusch Goblin Unique -->
 <Monster type="MONSTER" subtype="goblin_dobrusch" name="Dobrusch" fraction="monster" race="goblin" layer="NORMAL">
 	<RenderInfo name="goblin_dobrusch" />
 	<Dropslots >

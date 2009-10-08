@@ -33,7 +33,7 @@ bool  Waypoint::update (float time)
 		Shape s;
 		s.m_type = Shape::CIRCLE;
 		s.m_center = getShape()->m_center;
-		s.m_radius = 4;
+		s.m_radius = 12;
 
 		Player* pl;
 

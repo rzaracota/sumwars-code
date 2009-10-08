@@ -226,7 +226,7 @@ bool World::createRegion(short region)
 {
 
 
-	DEBUG("creating region %i",region);
+	DEBUG5("creating region %i",region);
 	int type = 1;
 	if (type==1)
 	{
@@ -1545,7 +1545,7 @@ void World::updatePlayers()
 				}
 				else if (headerp.m_content == PTYPE_S2C_WAYPOINTS)
 				{
-					DEBUG("got waypoints");
+					DEBUG5("got waypoints");
 					std::map<short,WaypointInfo>& winfos = World::getWorld()->getWaypointData();
 					winfos.clear();
 					

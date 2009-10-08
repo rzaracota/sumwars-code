@@ -215,7 +215,7 @@ bool WorldLoader::loadRegion(TiXmlNode* node, RegionData* rdata)
 			{
 				attr.getString("location",rdata->m_revive_location);
 			}
-			else if (!strcmp(child->Value(), "Waypoint"))
+			else if (!strcmp(child->Value(), "WorldPosition"))
 			{
 				WaypointInfo winfo;
 				winfo.m_id = rdata->m_id;
@@ -223,7 +223,10 @@ bool WorldLoader::loadRegion(TiXmlNode* node, RegionData* rdata)
 				attr.getFloat("world_x",winfo.m_world_coord.m_x);
 				attr.getFloat("world_y",winfo.m_world_coord.m_y);
 				
-				rdata->m_has_waypoint = true;
+				bool waypoint;
+				attr.getBool("waypoint",waypoint,false);
+				rdata->m_has_waypoint = waypoint;
+				
 				World::getWorld()->addWaypoint(winfo.m_id,winfo);
 			}
 			else if (!strcmp(child->Value(), "Event"))

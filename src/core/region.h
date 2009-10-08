@@ -1189,7 +1189,14 @@ class Region
 		 */
 		int getIdByName(std::string name);
 
-		
+		/**
+		 * \fn std::string getIdString()
+		 * \brief Gibt den ID String aus
+		 */
+		std::string getIdString()
+		{
+			return m_name;
+		}
 	private:
 		/**
 		* \var m_dimx

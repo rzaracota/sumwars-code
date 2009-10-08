@@ -655,6 +655,15 @@ public:
 	}
 	
 	/**
+	 * \fn RegionLocation& getPortalPosition()
+	 * \brief Gibt die Position aus, an die der Spieler per Portal zurueck gebracht wird
+	 */
+	RegionLocation& getPortalPosition()
+	{
+		return m_portal_position;
+	}
+	
+	/**
 	 * \fn void insertLearnableAbility(Action::ActionType type, Vector position, int tab)
 	 * \brief Fuegt eine erlernbare Faehigkeit hinzu
 	 * \param type Typ der Faehigkeit
@@ -790,6 +799,12 @@ protected:
 	 * \brief Ort an dem der Spieler wiedererweckt wird
 	 */
 	RegionLocation m_revive_position;
+	
+	/**
+	 * \var RegionLocation m_portal_position
+	 * \brief Ort an den der Spieler per TownPortal zurueckgebracht wird
+	 */
+	RegionLocation m_portal_position;
 	
 	/**
 	 * \var std::set<short> m_waypoints

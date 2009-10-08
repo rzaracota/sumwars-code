@@ -1,4 +1,17 @@
 <!-- POTION -->
+<Item type="potion" subtype="town_portal" name="scroll of town portal" size="small">
+	<Image image="set:potion_health.png image:full_image" />
+	<Mesh file="potion" />
+	<Attribute
+			  character_requirement="15"
+			  price = "30"
+			  />
+	<DropChance
+			   level="-1"
+			   probability="1.0"
+			   />
+</Item>
+
 <!-- small potion -->
 <Item type="potion" subtype="heal_1" name="small potion" size="small">
 	<Image image="set:potion_health.png image:full_image" />

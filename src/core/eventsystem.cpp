@@ -2348,7 +2348,7 @@ int EventSystem::teleportPlayer(lua_State *L)
 		WorldObject* wo =World::getWorld()->getPlayer(id);
 		if (wo !=0 && wo->getRegion() !=0)
 		{
-			if (wo->getRegion()->getName() == regname)
+			if (wo->getRegion()->getIdString() == regname)
 			{
 				// Spieler ist schon in der Richtigen Region
 				Vector pos = wo->getRegion()->getLocation(locname);

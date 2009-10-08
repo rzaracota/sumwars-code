@@ -788,11 +788,28 @@ bool Player::onItemClick(ClientCommand* command)
 			if (it->m_useup_effect==0)
 			{
 				// Item kann nicht verbraucht werden
-				return true;
+				if (it->m_subtype =="town_portal" && getRegion() != 0 && getRegion()->getIdString() !=  m_revive_position.first)
+				{
+					std::stringstream stream;
+					stream << "#townportal" << getId();
+					getRegion()->addLocation(stream.str(), getShape()->m_center);
+					
+					m_portal_position.first = getRegion()->getIdString();
+					m_portal_position.second = stream.str();
+					
+					getRegion()->insertPlayerTeleport(getId(), m_revive_position);
+					clearCommand(true);
+				}
+				else
+				{
+					return true;
+				}
 			}
-
-			// Wirkung des Items
-			applyDynAttrMod(it->m_useup_effect);
+			else
+			{
+				// Wirkung des Items
+				applyDynAttrMod(it->m_useup_effect);
+			}
 
 			// entfernen aus dem Inventar durch Tausch mit einem Nullpointer
 			Item* swap=0;
@@ -1345,6 +1362,12 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 					regloc.first = winfos[command->m_id].m_name;
 					regloc.second="WaypointLoc";
 					getRegion()->insertPlayerTeleport(getId(), regloc);
+					clearCommand(true);
+				}
+				else if (command->m_id == -1 && m_portal_position.first != "")
+				{
+					getRegion()->insertPlayerTeleport(getId(), m_portal_position);
+					m_portal_position.first = "";
 					clearCommand(true);
 				}
 			}

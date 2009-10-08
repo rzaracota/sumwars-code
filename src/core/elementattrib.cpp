@@ -109,12 +109,11 @@ void ElementAttrib::getBool(std::string attrib, bool& data, bool def)
 		data = def;
 		return;
 	}
-	
-	if (it->second->Value() == "true")
+	if (std::string(it->second->Value()) =="true")
 	{
 		data = true;
 	}
-	else if (it->second->Value() == "false")
+	else if (std::string(it->second->Value()) == "false")
 	{
 		data = false;
 	}

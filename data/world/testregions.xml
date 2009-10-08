@@ -107,7 +107,7 @@
 			 
 			 <ExitDirections north="true" south="true" west="false" east="false" />
 			 
-			 <Waypoint world_x="0.5" world_y ="0.5" />
+			 <WorldPosition world_x="0.5" world_y ="0.5" />
 			 
 			 <Exits>
 				 <Exit name="exit_south" destination_region="region1" destination_location="entry_north" >
@@ -300,7 +300,7 @@
 					 
 		<Region id="1000" name="testregion">
 			
-			<Waypoint world_x="0.4" world_y ="0.4" />
+			<WorldPosition world_x="0.4" world_y ="0.4" />
 		
 			<Settings dimx="20" dimy="20" region_template="test" ground = "grass1"/>
 			

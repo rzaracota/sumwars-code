@@ -818,7 +818,7 @@ bool Region::insertObject(WorldObject* object, Vector pos, float angle )
 		
 		if (m_revive_location != "")
 		{
-			pl->setRevivePosition(std::make_pair(getName(),m_revive_location));
+			pl->setRevivePosition(std::make_pair(getIdString(),m_revive_location));
 			DEBUG("player will now revive at %s",m_revive_location.c_str());
 		}
 		
