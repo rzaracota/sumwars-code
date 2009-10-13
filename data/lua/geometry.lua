@@ -17,3 +17,9 @@ function vecsub(vec1,vec2)
 	vec1[2] = vec1[2] - vec2[2];
 end;
 
+function vecnormal(vec)
+	local l = math.sqrt(vec[1]*vec[1] + vec[2]*vec[2]);
+	vec[1] = vec[1] / l;
+	vec[2] = vec[2] / l;
+end
+

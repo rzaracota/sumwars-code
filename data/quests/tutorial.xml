@@ -69,9 +69,7 @@
 					lookAt(tutorial_tmp.bguard2,getLocation("locBehemoth"));
 					
 					-- ab Phase fightslugs
-					if (tutorial.phasenr > 1) then
-						tutorial_tmp.behemoth = createObject("tutorialBehemoth","locBehemoth");
-					end;
+					
 				
 				
 					local door;
@@ -141,6 +139,16 @@
 				tutorial_tmp.slave1 = createObject("slave_miner","locSlave4",90);
 				tutorial_tmp.slave2 = createObject("slave_miner","locSlave5",90);
 				tutorial_tmp.slave3 = createObject("slave_miner","locSlave6",90);
+				
+				if (tutorial.phasenr > 1) then
+					tutorial_tmp.behemoth = createObject("tutorialBehemoth","locBehemoth");
+					deleteObject(getObjectByNameRef("behemothPrison"));
+					deleteObject(getObjectByNameRef("workerScaffolding"));
+				end;
+				
+				if (tutorial.phasenr > 3) then
+					deleteObject(getObjectByNameRef("doorBehemothNorth"));
+				end;
 			</Effect>
 		</Event>
 		
@@ -189,10 +197,10 @@
 					speak("PL",_("Und wer sind die anderen müden Gestalten?"),"surprised");
 				end;
 				
-				local warrior = getRolePlayerNonPref("warrior",blockedspeaker);
-				local mage = getRolePlayerNonPref("mage",blockedspeaker);
-				local archer = getRolePlayerNonPref("archer",blockedspeaker);
-				local priest = getRolePlayerNonPref("priest",blockedspeaker);
+				local warrior = getRolePlayerNonPref("warrior",nil,blockedspeaker);
+				local mage = getRolePlayerNonPref("mage",nil,blockedspeaker);
+				local archer = getRolePlayerNonPref("archer",nil,blockedspeaker);
+				local priest = getRolePlayerNonPref("priest",nil,blockedspeaker);
 				
 				addSpeaker(warrior,"warrior",true);
 				addSpeaker(mage,"mage",true);
@@ -226,9 +234,9 @@
 				
 				speak("Tolec",_("Bitte entschuldigt die etwas raue Ankunft. Lord Magister Soren Windklaue erbittet eure Audienz."),"unhappy")
 				
-				local magopt = getRolePlayerPref("all",mage);
-				local waropt = getRolePlayerPref("all",warrior);
-				local arcopt = getRolePlayerPref("all",archer);
+				local magopt = getRolePlayerPref("all",nil,mage);
+				local waropt = getRolePlayerPref("all",nil,warrior);
+				local arcopt = getRolePlayerPref("all",nil,archer);
 				addSpeaker(magopt,"magopt");
 				addSpeaker(waropt,"waropt");
 				addSpeaker(arcopt,"arcopt");
@@ -256,7 +264,7 @@
 					if (priest ~= 0) then
 						blockedspeaker={};
 						blockedspeaker[priest] = true;
-						local any1 = getRolePlayer("all",priest);
+						local any1 = getRolePlayer("all",nil,priest);
 						addSpeaker(any1,"any1",true);
 						speak("any1",_("Es könnte deine Letzte sein."),"threaten");
 					end;
@@ -314,7 +322,7 @@
 		<Topic name="give_weapons_yes">
 			<Effect>
 				local warrior = getRolePlayer("warrior");
-				local waropt = getRolePlayerPref("all",warrior);
+				local waropt = getRolePlayerPref("all",nil,warrior);
 				local solo = (getPlayers()[2] == nil);
 				addSpeaker(waropt,"waropt");
 				if (not solo) then
@@ -496,7 +504,7 @@
 		
 		<Event trigger="behemoth_attack1" once="true">
 			<Effect>
-				addUnitCommand(tutorial_tmp.behemoth,"behemoth_fire_storm",tutorial_tmp.worker);
+				addUnitCommand(tutorial_tmp.behemoth,"tutorial_behemoth_fire_storm",tutorial_tmp.worker);
 			</Effect>
 		</Event>
 		
@@ -515,7 +523,7 @@
 		
 		<Event trigger="behemoth_attack2" once="true">
 			<Effect>
-				addUnitCommand(tutorial_tmp.behemoth,"behemoth_fire_storm",tutorial_tmp.worker2);
+				addUnitCommand(tutorial_tmp.behemoth,"tutorial_behemoth_fire_storm",tutorial_tmp.worker2);
 				startTimer("destroy_bprison",1500);
 				startTimer("behemoth_attack3",2000);
 			</Effect>
@@ -909,8 +917,8 @@
 				moveObject(tutorial_tmp.behemoth, "locBehemoth");
 				lookAtObject(tutorial_tmp.behemoth, tutorial_tmp.bguard1);
 				
-				addUnitCommand(tutorial_tmp.behemoth,"behemoth_fire_storm",tutorial_tmp.bguard1);
-				addUnitCommand(tutorial_tmp.behemoth,"behemoth_fire_storm",tutorial_tmp.bguard1);
+				addUnitCommand(tutorial_tmp.behemoth,"tutorial_behemoth_fire_storm",tutorial_tmp.bguard1);
+				addUnitCommand(tutorial_tmp.behemoth,"tutorial_behemoth_fire_storm",tutorial_tmp.bguard1);
 			</Effect>
 		</Event>
 		<Event trigger="behemoth_show_end" once="true">
@@ -1437,7 +1445,70 @@
 		
 	</Region>
 	
-	
+	<Region name="elCnlLobby">
+		<Event trigger="create_region" once="true">
+			<Effect>
+				local slug = createObject("mutantSlug","locLabRat");
+				set(slug,"health",0.7*get(slug,"health"));
+			</Effect>	
+		</Event>
+		<Event trigger="player_moved" once="true">
+			<Condition>
+				return (unitIsInArea(trigger.player,"stupidLabSpeech") and tutorial.lab_comment ~= true);
+			</Condition>
+			<Effect>
+				local players = getObjectsInArea("circle",get(trigger.player,"position"),15,"normal","player");
+				tutorial.lab_comment = true;
+				
+				createDialogue();
+				addPlayersToDialog(players);
+				addStandardRoles( listToSet(players));
+				
+				local solo = (table.getn(players) == 1)
+				
+				local leader = getSpeaker("leader");
+				local archer = getSpeaker("archer");
+				local mage = getSpeaker("mage");
+				
+				speak("leader",_("Wow. Die halten hier aber echt was von Ordnung und gründlicher Forschung. Wie viele Schnecken muss man aufschneiden um zu glauben, dass sie schleimig sind?"),"sneer");
+				if (solo ~= true) then
+					speak("archer",_("Schaut euch doch mal um, das Zeug muss ein Vermögen wert sein!"),"excited");
+				else
+					speak("archer",_("Sie dir das an, das Zeug muss ein Vermögen wert sein!"),"excited");
+				end;
+				if (archer ~= nil) then
+					speak("warrior",_("Der Plunder?"),"bored");
+				end;
+				if (leader ~= mage) then
+					speak("mage",_("Banause"),"unhappy");
+				end;
+			</Effect>	
+		</Event>
+		
+		<Event trigger="player_moved" once="true">
+			<Condition>
+				return (unitIsInArea(trigger.player,"theSlugsEscaped") and tutorial.lab_comment2 ~= true);
+			</Condition>
+			<Effect>
+				tutorial.lab_comment2 = true;
+				unitSpeak(trigger.player,_("Wenn die nicht überall diese überflüssigen Ballustraden ins Nichts hätten, müssten sie jetzt auch keine entflohenen Schnecklinge vom Boden wischen."),"sneer");
+			</Effect>	
+		</Event>
+		
+		<Event trigger="unit_hit">
+			<Condition>
+				return (trigger.defender == tutorial_tmp.behemoth);
+			</Condition>
+			<Effect>
+				clearUnitCommands(tutorial_tmp.behemoth);
+				addUnitCommand(tutorial_tmp.behemoth, "tutorial_fire_ball",trigger.attacker);
+				if (get(tutorial_tmp.behemoth,"max_health")*0.5 > get(tutorial_tmp.behemoth,"health")) then
+					clearUnitCommands(tutorial_tmp.behemoth);
+					addUnitCommand(tutorial_tmp.behemoth, "tutorial_fire_wall",trigger.attacker);
+				end;
+			</Effect>	
+		</Event>
+	</Region>
 </Quest>
 
 <Quest name="private vars" table_name="private_vars">

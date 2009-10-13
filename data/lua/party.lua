@@ -1,11 +1,13 @@
 -- Gibt einen Sprecher fuer eine Rolle zurueck, dessen ID nicht in der Liste forbiddenids ist
 -- role: string, Sprecherrolle
+-- availableids: Tabelle, int->bool, falls fuer eine ID true angegeben ist, so darf dieser Spieler gewaehlt werden
 -- forbiddenids: Tabelle, int->bool, falls fuer eine ID true angegeben ist, so wird dieser Spieler nicht gewaehlt
-function getRolePlayer(role, forbiddenids)
+function getRolePlayer(role, availableids,forbiddenids)
 	local cand = getRolePlayers(role);
 	local id,key
 	for key,id in pairs(cand) do
-		if (not (type(forbiddenids) == "table" and forbiddenids[id] ~= true)
+		if ((availableids == nil or availableids[id] == true) and 
+			not (type(forbiddenids) == "table" and forbiddenids[id] ~= true)
 				  and not (type(forbiddenids) == "number" and  id ~= forbiddenids))then
 			return id;
 		end;
@@ -13,16 +15,18 @@ function getRolePlayer(role, forbiddenids)
 	return 0;
 end;
 
-function getRolePlayerNonPref(role, nonprefids)
-	local id = getRolePlayer(role,nonprefids);
+-- Waehlt einen Spieler, wobei die Spieler in nonprefids nicht bevorzugs werden
+function getRolePlayerNonPref(role,availableids, nonprefids)
+	local id = getRolePlayer(role,availableids,nonprefids);
 	if (id == 0) then
-		id = getRolePlayer(role);
+		id = getRolePlayer(role,availableids);
 	end;
 	return id;
 end;
 
-function getRolePlayerPref(role,prefid)
-	local cand = getRolePlayers(role);
+-- Gibt einen Spieler mit der passenden Rolle aus, wobei der Spieler mit der angegebenen ID bevorzugt wird
+function getRolePlayerPref(role,availableids, prefid)
+	local cand = getRolePlayers(role,availableids);
 	local id,key
 	for key,id in pairs(cand) do
 		if (id == prefid) then
@@ -93,18 +97,25 @@ function addAllPlayersToDialog()
 	end;
 end;
 
-function addStandardRoles()
-	local leader = getRolePlayer("leader");
+function addPlayersToDialog(players)
+	local i,player;
+	for i,player in ipairs(players) do
+		addSpeaker(player,get(player,"name"),true);
+	end;
+end;
+
+function addStandardRoles(availableids)
+	local leader = getRolePlayer("leader",availableids);
 	local blockedspeaker={};
 	blockedspeaker[leader] = true;
 	addSpeaker(leader,"PL");
 	addSpeaker(leader,"leader");
 	
-	local warrior = getRolePlayerNonPref("warrior",blockedspeaker);
-	local mage = getRolePlayerNonPref("mage",blockedspeaker);
-	local archer = getRolePlayerNonPref("archer",blockedspeaker);
-	local priest = getRolePlayerNonPref("priest",blockedspeaker);
-	local any = getRolePlayerNonPref("all",blockedspeaker);
+	local warrior = getRolePlayerNonPref("warrior",availableids,blockedspeaker);
+	local mage = getRolePlayerNonPref("mage",availableids,blockedspeaker);
+	local archer = getRolePlayerNonPref("archer",availableids,blockedspeaker);
+	local priest = getRolePlayerNonPref("priest",availableids,blockedspeaker);
+	local any = getRolePlayerNonPref("all",availableids,blockedspeaker);
 	
 	addSpeaker(warrior,"warrior",true);
 	addSpeaker(mage,"mage",true);
@@ -112,10 +123,10 @@ function addStandardRoles()
 	addSpeaker(priest,"priest",true);
 	addSpeaker(any,"any",true);
 	
-	local magopt = getRolePlayerPref("all",mage);
-	local waropt = getRolePlayerPref("all",warrior);
-	local arcopt = getRolePlayerPref("all",archer);
-	local priopt = getRolePlayerPref("all",priest);
+	local magopt = getRolePlayerPref("all",availableids,mage);
+	local waropt = getRolePlayerPref("all",availableids,warrior);
+	local arcopt = getRolePlayerPref("all",availableids,archer);
+	local priopt = getRolePlayerPref("all",availableids,priest);
 	addSpeaker(magopt,"magopt",true);
 	addSpeaker(waropt,"waropt",true);
 	addSpeaker(arcopt,"arcopt",true);

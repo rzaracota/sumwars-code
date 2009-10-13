@@ -10,6 +10,15 @@ function listToString(list)
 		return str.."}";
 end;
 
+function listToSet(list)
+	local ret = {};
+	local i, obj
+	for i,obj in ipairs(list) do
+		ret[obj] = true;
+	end;
+	return ret;
+end;
+
 function locnameToLocation(loc)
 	if (type(loc) == "string") then
 		loc = getLocation(loc);

@@ -279,9 +279,11 @@
 		<Ability type="die" />
 		<Ability type="noaction" />
 		<Ability type="fire_ball" rating="2.5" />
+		<Ability type="tutorial_fire_ball" rating="0" timer_nr="0"/>
+		<Ability type="tutorial_fire_wall" rating="0" timer_nr="0"/>
 		<Ability type="hammer_bash" rating="2" />
 		<Ability type="inflame" />
-		<Ability type="behemoth_fire_storm" rating="0" timer_nr="0"/>
+		<Ability type="tutorial_behemoth_fire_storm" rating="0" timer_nr="0"/>
 		
 	</BasicAttributes>
 	

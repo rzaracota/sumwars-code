@@ -117,6 +117,32 @@
 	</Damage>
 </Ability>
 
+<Ability type="tutorial_behemoth_fire_storm"
+		 name="Firestorm" 
+		 description="Firestorm with increased range." 
+		 time="1301.000000" 
+		 timer_nr="2.000000" 
+		 timer_value="15000.000000" 
+		 base_ability="magic_attack"
+		 critical_percent="0.800000"
+		 target_type="ranged">
+	<Flag name="mute_affected" />
+	<Effect>
+		<CppImplementation type="proj_at_self" />
+	</Effect>
+	<Projectile type="tutorial_behemoth_fire_wave"/>
+	<Damage>
+		<CppImplementation type="magic_attack" />
+		<CppImplementation type="weapon_damage" />
+		<LuaImplementation>
+			local magic = get(self,"magic_power");
+			local fdmg = getDamageValue("fire_dmg");
+			setDamageValue("fire_dmg", {fdmg[1] + magic*2.5, fdmg[2] + magic*3});
+			setDamageValue("ice_dmg",{0,0});
+		</LuaImplementation>	
+	</Damage>
+</Ability>
+
 
 <Ability type="goblin_magic_shield"
 		 name="Magic Shield"
@@ -230,3 +256,54 @@
 	</Damage>
 </Ability>
 
+<Ability type="tutorial_fire_ball"
+		 name="Fireball" 
+		 description="The mage casts a bolt of fire, that explodes upon hitting an enemy. Other enemies nearby the victim are also caught in the explosion." 
+		 time="701.000000" 
+		 timer_nr="0.000000"
+		 timer_value="0000.000000" 
+		 base_ability="magic_attack" 
+		 critical_percent="0.800000" 
+		 target_type="ranged">
+	<Flag name="mute_affected" />
+	<Effect>
+		<CppImplementation type="proj_fly_at_target" />
+	</Effect>
+	<Projectile type="fire_ball" speed="20000" />
+	<Damage>
+		<CppImplementation type="magic_attack" />
+		<CppImplementation type="weapon_damage" />
+		<LuaImplementation>
+			local magic = get(self,"magic_power");
+			local fdmg = getDamageValue("fire_dmg");
+			setDamageValue("fire_dmg", {fdmg[1] + magic*2, fdmg[2] + magic*3});
+			setDamageValue("ice_dmg",{0,0});
+		</LuaImplementation>	
+	</Damage>
+</Ability>
+
+<Ability type="tutorial_fire_wall"
+		 name="Firecolumn" 
+		 description=""
+		 time="501.000000" 
+		 timer_nr="2.000000" 
+		 timer_value="12000.000000"
+		 base_ability="magic_attack" 
+		 critical_percent="0.800000" 
+		 target_type="ranged">
+	<Flag name="mute_affected" />
+	<Effect>
+		<CppImplementation type="proj_at_target" />
+	</Effect>
+	<Projectile type="fire_wall" />
+	<Damage>
+		<CppImplementation type="magic_attack" />
+		<CppImplementation type="weapon_damage" />
+		<LuaImplementation>
+			local magic = get(self,"magic_power");
+			local fdmg = getDamageValue("fire_dmg");
+			setDamageValue("fire_dmg", {fdmg[1] + magic*0.33, fdmg[2] + magic*0.5});
+			setDamageValue("ice_dmg",{0,0});
+		</LuaImplementation>	
+	</Damage>
+</Ability>
