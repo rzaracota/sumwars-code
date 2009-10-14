@@ -1,32 +1,181 @@
-<Quest name="Fortify Dwarfenfroward" table_name="fortify_dwarfenfroward">
+<Quest name="Fortify Dwarfenwall" table_name="fortify_dwall">
 	
 	<Init>
 		local a = 2
 	</Init>
 	
 	<Description>
-		if (fortify_dwarfenfroward.finished) then
+		if (fortify_dwall.finished) then
 			return _("Quest finished")
 		else
 			return _("Quest description")
 		end
 	</Description>
+	<Region name="elCnlLobby">
+		<Event trigger="create_region" once="true">
+			<Effect>
+				if (fortify_dwall.scene1 ~= true) then
+					fortify_dwall_tmp.soren = createObject("peasant", "locSorenWindclaw");
+					setRefName(fortify_dwall_tmp.soren, "Soren Windclaw");
+					
+					if (tutorial.finished == true) then
+						fortify_dwall_tmp.tolec = createObject("tolec", "locTolecScene1");
+						set(fortify_dwall_tmp.tolec,"ai_state","inactive");
+						setRefName(fortify_dwall_tmp.tolec, "Tolec");
+						set(fortify_dwall_tmp.tolec,"angle",90);
+						
+						fortify_dwall_tmp.derred = createObject("derred", "locDerredScene1");
+						set(fortify_dwall_tmp.derred,"ai_state","inactive");
+						setRefName(fortify_dwall_tmp.derred, "Derred");
+						set(fortify_dwall_tmp.derred,"angle",90);
+					else
+						fortify_dwall_tmp.derred = tutorial_tmp.derred;
+						fortify_dwall_tmp.tolec = tutorial_tmp.tolec;
+					end;
+				end;
+			</Effect>	
+		</Event>
+	</Region>
 	
-	<NPC refname="Soren Windclaw">
-		<!--
-		<Topic name="fortify_dwarfenfroward" start_option="Defend Dwarfenfroward">
+	<NPC refname="Derred">
+		<Topic name="start_scene1" start_option="Windklaue sprechen">
 			<Condition>
-				if (fortify_dwarfenfroward.finished ~= true and fortify_dwarfenfroward.freed ~= true) then
-					return true
-				else
-					return false
-				end
+				return (tutorial.finished == true and fortify_dwall.scene1 ~= true)
 			</Condition>
 			<Effect>
-				insertTrigger("start_fortify_dwarfenfroward")
+				insertTrigger("start_scene1");
+				speak("Derred",_("Folgt uns bitte."));
 			</Effect>
 		</Topic>
-		-->
+	</NPC>
+	
+	<NPC refname="Tolec">
+		<Topic name="start_scene1" start_option="Windklaue sprechen">
+			<Condition>
+				return (tutorial.finished == true and fortify_dwarfenwall.scene1 ~= true)
+			</Condition>
+			<Effect>
+				insertTrigger("start_scene1");
+				speak("Tolec",_("Folgt uns bitte."));
+			</Effect>
+		</Topic>
+	</NPC>
+	
+	<Region name="elCnlLobby">
+		<Event trigger="start_scene1" once="true">
+			<Effect>
+				setCutsceneMode(true);
+				
+				local door = getObjectByNameRef("doorScene1");
+				door_setopen(door,true);
+				addCameraPosition(0,get(door,"position"), -90,60, 20);
+				addCameraPosition(4000,get(door,"position"), -90,60, 20);
+				addCameraPosition(5000,"locWay4", -90,60, 20);
+				
+				startTimer("guard_scene1_walk1",2000);
+				startTimer("players_scene1_walk1",3000);
+				startTimer("guard_scene1_walk2",9000);
+			</Effect>
+		</Event>
+		
+		<Event trigger="guard_scene1_walk1" once="true">
+			<Effect>
+				addUnitCommand(fortify_dwall_tmp.tolec,"walk","locWay3");
+				addUnitCommand(fortify_dwall_tmp.tolec,"walk","locWay4");
+				addUnitCommand(fortify_dwall_tmp.derred,"walk","locWay4");
+				fortify_dwall_tmp.tgoal = "locWay4";
+				fortify_dwall_tmp.dgoal = "locWay4";
+				
+			</Effect>
+		</Event>
+		
+		<Event trigger="players_scene1_walk1" once="true">
+			<Effect>
+				local players = getPlayers();
+				local i,player;
+				for i,player in ipairs(players) do
+					addUnitCommand(player,"walk","locWay3");
+					addUnitCommand(player,"walk","locWay4");
+				end;
+			</Effect>
+		</Event>
+		
+		<Event trigger="command_complete">
+			<Condition>
+				return (trigger.unit ==fortify_dwall_tmp.tolec and fortify_dwall_tmp.tgoal ~= nil and trigger.success == false)
+			</Condition>
+			<Effect>
+				moveObject(trigger.unit,fortify_dwall_tmp.tgoal);
+				fortify_dwall_tmp.tgoal = nil;
+			</Effect>
+		</Event>
+		
+		<Event trigger="command_complete">
+			<Condition>
+				return (trigger.unit ==fortify_dwall_tmp.derred and fortify_dwall_tmp.dgoal ~= nil and trigger.success == false)
+			</Condition>
+			<Effect>
+				moveObject(trigger.unit,fortify_dwall_tmp.dgoal);
+				fortify_dwall_tmp.dgoal = nil;
+			</Effect>
+		</Event>
+		
+		<Event trigger="guard_scene1_walk2" once="true">
+			<Effect>
+				createDialogue();
+				addAllPlayersToDialog();
+				addStandardRoles();
+				
+				addSpeaker(fortify_dwall_tmp.tolec,"Tolec");
+				
+				local mageopt = getSpeaker("magopt");
+				local waropt= getSpeaker("waropt");
+				local leader= getSpeaker("leader");
+				
+				speak("magopt",_("Als wenn das Theater hier irgend jemanden beeindrucken würde..."),"bored");
+				if (mageopt ~= waropt) then
+					speak("waropt",_("Na klar! Jetzt hast du wieder eine große Klappe."),"unhappy");
+					speak("magopt",_("Warum gebe ich mich doch gleich mit deiner Gesellschaft ab?"),"grin");
+				end;
+				speak("Tolec",_("Endlich sind wir da!"),"excited");
+				executeInDialog("insertTrigger('guard_scene1_walk3')");
+			</Effect>
+		</Event>
+		
+		<Event trigger="guard_scene1_walk3" once="true">
+			<Effect>
+				local door = getObjectByNameRef("doorSorenSouth");
+				door_setopen(door,true);
+				startTimer("guard_scene1_walk4",2000);
+			</Effect>
+		</Event>
+		
+		<Event trigger="guard_scene1_walk4" once="true">
+			<Effect>
+				addUnitCommand(fortify_dwall_tmp.tolec,"walk","locMerc2");
+				addUnitCommand(fortify_dwall_tmp.derred,"walk","locMerc1");
+				fortify_dwall_tmp.tgoal = "locMerc2";
+				fortify_dwall_tmp.dgoal = "locMerc1";
+				
+				addCameraPosition(5000,"locParty", -90,60, 20);
+				startTimer("guard_scene1_walk5",7000);
+			</Effect>
+		</Event>
+		
+		<Event trigger="guard_scene1_walk5" once="true">
+			<Effect>
+				createDialogue();
+				addSpeaker(fortify_dwall_tmp.tolec,"Tolec");
+				addSpeaker(fortify_dwall_tmp.derred,"Derred");
+				addspeaker(fortify_dwall_tmp.soren,"Soren Windclaw");
+			</Effect>
+		</Event>
+	</Region>
+	
+	
+	
+		
+	<NPC refname="Soren Windclaw">
 		<Topic name="scene1_dialogue">
 			<Effect>
 				addCameraPosition(0,get(getRole("PL"),"position"),20,40,20);
@@ -104,7 +253,7 @@
 				speak("PRIast",_("Peace!"));
 				speak("SW",_("The first thing you have to learn are obviously manners."));
 				speak("SW",_("Consider it as a small bonus:"));
-				speak("SW",_("Before your real assignment you will go to dwarfenfroward as backup."));
+				speak("SW",_("Before your real assignment you will go to dwarfenwall as backup."));
 				speak("SW",_("Show the undead there who the real favourite of the deathgod is."));
 				speak("PL",_("Smells like exploitation."));
 				speak("PRI",_("Besides the necromancers don't follow Harad."));
@@ -158,7 +307,7 @@
 		
 		<Topic name="add_elemental">
 			<Effect>
-				fortify_dwarfenfroward_tmp.fire_elemental = createObject("fireElemS","locParty");
+				fortify_dwarfenwall_tmp.fire_elemental = createObject("fireElemS","locParty");
 			</Effect>
 		</Topic>
 		
@@ -183,8 +332,8 @@
 				local players = getPlayers();
 				local i,player;
 				for i,player in ipairs(players) do
-					if (getPlayerPrivateVar(player,"fortify_dwarfenfroward.reward") ~= true) then
-						setPlayerPrivateVar(player,"fortify_dwarfenfroward.reward",true);
+					if (getPlayerPrivateVar(player,"fortify_dwarfenwall.reward") ~= true) then
+						setPlayerPrivateVar(player,"fortify_dwarfenwall.reward",true);
 						setObjectValue(player,"gold", getObjectValue(player,"gold") + 200);
 					end;
 				end;
@@ -195,8 +344,8 @@
 		
 		<Topic name="end_cutscene1">
 			<Effect>
-				fortify_dwarfenfroward.scene1 = true;
-				fortify_dwarfenfroward.started = true;
+				fortify_dwarfenwall.scene1 = true;
+				fortify_dwarfenwall.started = true;
 				setCutsceneMode(false);
 			</Effect>
 		</Topic>
@@ -204,16 +353,10 @@
 	
 	
 	<Region name="elCnlLobby">
-		<Event trigger="create_region" once="true">
-			<Effect>
-				fortify_dwarfenfroward_tmp.guard1 = createObject("peasant", "locSorenWindclaw");
-				fortify_dwarfenfroward_tmp.guard2 = createObject("peasant", "locSorenWindclaw");
-			</Effect>
-		</Event>
 		
 		<Event trigger="player_moved" once="true">
 			<Condition>
-				if (fortify_dwarfenfroward.scene1 ~= true) then
+				if (fortify_dwarfenwall.scene1 ~= true) then
 					return (unitIsInArea(trigger.player,"SorenWindclawArea"));
 				else
 					return false;
@@ -222,8 +365,8 @@
 			<Effect>
 				createDialogue();
 				addSpeaker(soren_windclaw,"SW");
-				addSpeaker(fortify_dwarfenfroward_tmp.guard1,"W1");
-				addSpeaker(fortify_dwarfenfroward_tmp.guard2,"W2");
+				addSpeaker(fortify_dwarfenwall_tmp.guard1,"W1");
+				addSpeaker(fortify_dwarfenwall_tmp.guard2,"W2");
 				addSpeaker(trigger.player,"Player");
 				addStandardSpeakers("elCnlLobby","locParty");
 				setCutsceneMode(true);
@@ -234,7 +377,7 @@
 		
 		<Event trigger ="unit_die">
 			<Condition>
-				if (trigger.unit == fortify_dwarfenfroward_tmp.fire_elemental) then
+				if (trigger.unit == fortify_dwarfenwall_tmp.fire_elemental) then
 					return true;
 				else
 					return false;
@@ -243,8 +386,8 @@
 			<Effect>
 				createDialogue();
 				addSpeaker(soren_windclaw,"SW");
-				addSpeaker(fortify_dwarfenfroward_tmp.guard1,"W1");
-				addSpeaker(fortify_dwarfenfroward_tmp.guard2,"W2");
+				addSpeaker(fortify_dwarfenwall_tmp.guard1,"W1");
+				addSpeaker(fortify_dwarfenwall_tmp.guard2,"W2");
 				addSpeaker(trigger.player,"Player");
 				addStandardSpeakers("elCnlLobby","locParty");
 				setCutsceneMode(true);

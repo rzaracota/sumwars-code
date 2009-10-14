@@ -5907,7 +5907,7 @@
     <Object subtype="$cupboard" 
             center_x="40.79580589" 
             center_y="9.334773712" 
-			height="-3.955169525e-016" 
+			height="-4.024558464e-016" 
             angle="13.63607916" 
             probability="1" 
             prob_angle="false" 
@@ -7190,7 +7190,7 @@
     <Object subtype="$vase" 
             center_x="44" 
             center_y="23" 
-			height="2.91433544e-016" 
+			height="2.983724379e-016" 
             angle="0" 
             probability="1" 
             prob_angle="false" 
@@ -7294,7 +7294,7 @@
     <Object subtype="$vase" 
             center_x="46.5" 
             center_y="26" 
-			height="2.91433544e-016" 
+			height="2.983724379e-016" 
             angle="0" 
             probability="1" 
             prob_angle="false" 
@@ -7302,7 +7302,7 @@
     <Object subtype="$vase" 
             center_x="41" 
             center_y="24.5" 
-			height="2.91433544e-016" 
+			height="2.983724379e-016" 
             angle="0" 
             probability="1" 
             prob_angle="false" 
@@ -7310,7 +7310,7 @@
     <Object subtype="$vase" 
             center_x="41" 
             center_y="27.5" 
-			height="2.91433544e-016" 
+			height="2.983724379e-016" 
             angle="0" 
             probability="1" 
             prob_angle="false" 
@@ -7318,7 +7318,7 @@
     <Object subtype="$vase" 
             center_x="44" 
             center_y="29" 
-			height="2.91433544e-016" 
+			height="2.983724379e-016" 
             angle="0" 
             probability="1" 
             prob_angle="false" 
@@ -12079,6 +12079,7 @@
     <Location name="locDanger4" pos_x="61" pos_y="23.5" />
     <Location name="locDanger5" pos_x="61" pos_y="28.5" />
     <Location name="locDerred" pos_x="79.89515959" pos_y="81.33735032" />
+    <Location name="locDerredScene1" pos_x="19" pos_y="-2.5" />
     <Location name="locDoorGuardNorth" pos_x="16" pos_y="59.5" />
     <Location name="locDoorGuardWest" pos_x="6.5" pos_y="69.5" />
     <Location name="locElemental" pos_x="23" pos_y="-43" />
@@ -12087,6 +12088,7 @@
     <Location name="locGuard1" pos_x="52.5" pos_y="-65" />
     <Location name="locGuard2" pos_x="-17.5" pos_y="-65" />
     <Location name="locGuard3" pos_x="19.5" pos_y="-42.5" />
+    <Location name="locGuardsAway" pos_x="35" pos_y="-47" />
     <Location name="locLabRat" pos_x="-20.26426509" pos_y="27.45968837" />
     <Location name="locLouses" pos_x="11" pos_y="15" />
     <Location name="locMerc1" pos_x="19.5" pos_y="-39" />
@@ -12106,6 +12108,7 @@
     <Location name="locSlugs" pos_x="40.5" pos_y="50" />
     <Location name="locSorenWindclaw" pos_x="16.5" pos_y="-55" />
     <Location name="locTolec" pos_x="79.93412642" pos_y="85.94380144" />
+    <Location name="locTolecScene1" pos_x="14" pos_y="-2.5" />
     <Location name="locWay1" pos_x="82.5" pos_y="70" />
     <Location name="locWay2" pos_x="40.5" pos_y="70.5" />
     <Location name="locWay3" pos_x="16.5" pos_y="-8.5" />
@@ -12116,6 +12119,7 @@
 
   <Areas>
     <Area name="areaDanger" angle="-0" center_x="57.40121667" center_y="30" type="RECT" extent_x="3.325019655" extent_y="1" />
+    <Area name="areaGuardAway" angle="-0" center_x="52.5" center_y="-64.5" type="CIRCLE" radius="3.288131249" />
     <Area name="areaSkills" angle="-0" center_x="49.69820569" center_y="15.26436871" type="RECT" extent_x="1" extent_y="3.763688744" />
     <Area name="fleeingSlaves" angle="-0" center_x="16.50954351" center_y="-3.216086266" type="RECT" extent_x="3.471971033" extent_y="1" />
     <Area name="seeLouseArea" angle="-0" center_x="28.22147973" center_y="19.07794019" type="RECT" extent_x="4.084187772" extent_y="4.084187772" />

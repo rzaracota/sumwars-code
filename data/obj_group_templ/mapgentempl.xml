@@ -115,6 +115,7 @@
         </Locations>
 </ObjectGroupTemplate>
 
+<!--
 <ObjectGroupTemplate name="border(side)(left_smallcorner)" version="1.0">
 	<Shape
 		  type="RECT"
@@ -810,6 +811,7 @@
 	</ObjectContent>
 </ObjectGroupTemplate>
 
+
 <ObjectGroupTemplate name = "border(diag_smallcorner)" >
 	<Shape
 		  type = "RECT"
@@ -834,6 +836,7 @@
 				/>
 	</ObjectContent>
 </ObjectGroupTemplate>
+
 
 <ObjectGroupTemplate name = "border(three_smallcorner)" >
 	<Shape
@@ -866,6 +869,7 @@
 				/>
 	</ObjectContent>
 </ObjectGroupTemplate>
+
 
 <ObjectGroupTemplate name = "border(four_smallcorner)" >
 	<Shape
@@ -905,3 +909,4 @@
 				/>
 	</ObjectContent>
 </ObjectGroupTemplate>
+-->

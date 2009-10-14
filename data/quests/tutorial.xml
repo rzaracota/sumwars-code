@@ -1438,6 +1438,7 @@
 					addUnitCommand(tutorial_tmp.tolec,"walk",tutorial_tmp.door,1);
 					
 					tutorial.finished = true;
+					tutorial.phase="finished";
 				end;
 			</Effect>
 		</Event>
