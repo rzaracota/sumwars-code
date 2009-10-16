@@ -5907,7 +5907,7 @@
     <Object subtype="$cupboard" 
             center_x="40.79580589" 
             center_y="9.334773712" 
-			height="-4.024558464e-016" 
+			height="-4.371503159e-016" 
             angle="13.63607916" 
             probability="1" 
             prob_angle="false" 
@@ -7190,7 +7190,7 @@
     <Object subtype="$vase" 
             center_x="44" 
             center_y="23" 
-			height="2.983724379e-016" 
+			height="3.191891196e-016" 
             angle="0" 
             probability="1" 
             prob_angle="false" 
@@ -7294,7 +7294,7 @@
     <Object subtype="$vase" 
             center_x="46.5" 
             center_y="26" 
-			height="2.983724379e-016" 
+			height="3.191891196e-016" 
             angle="0" 
             probability="1" 
             prob_angle="false" 
@@ -7302,7 +7302,7 @@
     <Object subtype="$vase" 
             center_x="41" 
             center_y="24.5" 
-			height="2.983724379e-016" 
+			height="3.191891196e-016" 
             angle="0" 
             probability="1" 
             prob_angle="false" 
@@ -7310,7 +7310,7 @@
     <Object subtype="$vase" 
             center_x="41" 
             center_y="27.5" 
-			height="2.983724379e-016" 
+			height="3.191891196e-016" 
             angle="0" 
             probability="1" 
             prob_angle="false" 
@@ -7318,7 +7318,7 @@
     <Object subtype="$vase" 
             center_x="44" 
             center_y="29" 
-			height="2.983724379e-016" 
+			height="3.191891196e-016" 
             angle="0" 
             probability="1" 
             prob_angle="false" 
@@ -11914,23 +11914,58 @@
             prob_angle="false" 
     />
     <Object subtype="prison_wall_cOut1" 
-            center_x="-21" 
+            center_x="-22" 
             center_y="28.5" 
             angle="0" 
             probability="1" 
             prob_angle="false" 
     />
     <Object subtype="prison_wall_cOut1" 
-            center_x="-21" 
-            center_y="26.5" 
+            center_x="-22" 
+            center_y="25.5" 
             angle="90" 
             probability="1" 
             prob_angle="false" 
     />
     <Object subtype="prison_wall_cOut1" 
             center_x="-19" 
-            center_y="26.5" 
+            center_y="25.5" 
             angle="-180" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="prison_wall_t2" 
+            center_x="-19" 
+            center_y="26.5" 
+            angle="0" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="prison_wall_t2" 
+            center_x="-22" 
+            center_y="27.5" 
+            angle="0" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="prison_wall_t2" 
+            center_x="-21" 
+            center_y="25.5" 
+            angle="-90" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="prison_wall_t2" 
+            center_x="-21" 
+            center_y="28.5" 
+            angle="-90" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="prison_wall_t2" 
+            center_x="-20" 
+            center_y="25.5" 
+            angle="-90" 
             probability="1" 
             prob_angle="false" 
     />
@@ -11942,16 +11977,9 @@
             prob_angle="false" 
     />
     <Object subtype="prison_wall_t2" 
-            center_x="-21" 
-            center_y="27.5" 
-            angle="0" 
-            probability="1" 
-            prob_angle="false" 
-    />
-    <Object subtype="prison_wall_t2" 
-            center_x="-20" 
+            center_x="-22" 
             center_y="26.5" 
-            angle="-90" 
+            angle="0" 
             probability="1" 
             prob_angle="false" 
     />
@@ -12073,6 +12101,8 @@
     <Location name="locBehemothRaid" pos_x="16.5" pos_y="67" />
     <Location name="locBehemothStart" pos_x="18.5" pos_y="85.5" />
     <Location name="locBehemothView" pos_x="44" pos_y="70.5" />
+    <Location name="locCamera" pos_x="16.5" pos_y="-48" />
+    <Location name="locCollectParty" pos_x="16.5" pos_y="-24.5" />
     <Location name="locDanger1" pos_x="61" pos_y="32.5" />
     <Location name="locDanger2" pos_x="61" pos_y="27.5" />
     <Location name="locDanger3" pos_x="61" pos_y="24.5" />
@@ -12080,6 +12110,7 @@
     <Location name="locDanger5" pos_x="61" pos_y="28.5" />
     <Location name="locDerred" pos_x="79.89515959" pos_y="81.33735032" />
     <Location name="locDerredScene1" pos_x="19" pos_y="-2.5" />
+    <Location name="locDerredSlugs" pos_x="40" pos_y="67.5" />
     <Location name="locDoorGuardNorth" pos_x="16" pos_y="59.5" />
     <Location name="locDoorGuardWest" pos_x="6.5" pos_y="69.5" />
     <Location name="locElemental" pos_x="23" pos_y="-43" />
@@ -12089,7 +12120,7 @@
     <Location name="locGuard2" pos_x="-17.5" pos_y="-65" />
     <Location name="locGuard3" pos_x="19.5" pos_y="-42.5" />
     <Location name="locGuardsAway" pos_x="35" pos_y="-47" />
-    <Location name="locLabRat" pos_x="-20.26426509" pos_y="27.45968837" />
+    <Location name="locLabRat" pos_x="-20.5" pos_y="27" />
     <Location name="locLouses" pos_x="11" pos_y="15" />
     <Location name="locMerc1" pos_x="19.5" pos_y="-39" />
     <Location name="locMerc2" pos_x="14.5" pos_y="-39" />
@@ -12109,6 +12140,7 @@
     <Location name="locSorenWindclaw" pos_x="16.5" pos_y="-55" />
     <Location name="locTolec" pos_x="79.93412642" pos_y="85.94380144" />
     <Location name="locTolecScene1" pos_x="14" pos_y="-2.5" />
+    <Location name="locTolecSlugs" pos_x="36.5" pos_y="68.5" />
     <Location name="locWay1" pos_x="82.5" pos_y="70" />
     <Location name="locWay2" pos_x="40.5" pos_y="70.5" />
     <Location name="locWay3" pos_x="16.5" pos_y="-8.5" />

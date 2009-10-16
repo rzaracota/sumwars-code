@@ -36,12 +36,16 @@
 		
 	<Ability type="walk" />
 	<Ability type="attack" rating="1"/>
-	<Ability type="die" />
+	<Ability type="die" time = "3000" />
 	<Ability type="ice_bolt"  rating="3"/>
 	<Ability type="noaction" />
-		
-		<Immunity type="berserk"/>
-		<Immunity type="confused"/>
+	<Ability type="summon_skelBow" rating="4"/>
+	<Ability type="summon_skelSword" rating="4"/>
+	<Ability type="summon_skelAxe" rating="4"/>
+	<Ability type="summon_skelAxe2" rating="4"/>
+
+	<Immunity type="berserk"/>
+	<Immunity type="confused"/>
 	</BasicAttributes>
 	
 	<Geometry radius="1.0" />
@@ -51,7 +55,7 @@
 
 <!-- skeleton, oldsword -->
 <Monster type="MONSTER" subtype="sword_skel" name="skeleton" fraction="undead" race="undead" layer="NORMAL">
-	<RenderInfo name="skeleton" />
+	<RenderInfo name="sword_skeleton" />
 	<Dropslots >
 		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" max_gold="100" min_level="0" max_level="10" magic_prob="0.1" magic_power="1000" />
 		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" max_gold="50" min_level="0" max_level="20" magic_prob="0.2" magic_power="1000" />
@@ -154,7 +158,7 @@
 
 <!-- skeleton, axe -->
 <Monster type="MONSTER" subtype="axe_skel" name="skeleton" fraction="undead" race="undead" layer="NORMAL">
-	<RenderInfo name="skeleton" />
+	<RenderInfo name="axe_skeleton" />
 	<Dropslots >
 		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" max_gold="100" min_level="0" max_level="10" magic_prob="0.1" magic_power="1000" />
 		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" max_gold="50" min_level="0" max_level="20" magic_prob="0.2" magic_power="1000" />
@@ -205,7 +209,7 @@
 
 <!-- skeleton, 2haxe -->
 <Monster type="MONSTER" subtype="axe2_skel" name="skeleton" fraction="undead" race="undead" layer="NORMAL">
-	<RenderInfo name="skeleton" />
+	<RenderInfo name="axe2_skeleton" />
 	<Dropslots >
 		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" max_gold="100" min_level="0" max_level="10" magic_prob="0.1" magic_power="1000" />
 		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" max_gold="50" min_level="0" max_level="20" magic_prob="0.2" magic_power="1000" />
@@ -234,7 +238,7 @@
 		walk_speed="3000"
 		attack_speed="1500"
 		step_length="1.0"
-		attack_range="1"
+		attack_range="1.8"
 	>
 		<Ability type="walk" />
 		<Ability type="attack" rating="1"/>

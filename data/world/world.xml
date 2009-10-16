@@ -90,6 +90,17 @@
 			<Environment height="1.0" name="council" />
 		</Environments>
 		
+<!--		<SpawnGroups>
+			<SpawnGroup group_name="elemental" number="1" />
+		</SpawnGroups>-->
+		
+		<Event trigger="create_region" once="true">
+			<Effect>
+				soren_windclaw = createObject("peasant", "locSorenWindclaw");
+				setRefName(soren_windclaw, "Soren Windclaw");
+				addArea("SorenWindclawArea","circle","locSorenWindclaw",5);
+			</Effect>
+		</Event>
 	</Region>
 
 <!-- Medair, Hintergassen zwischen Konzil und Soeldnerlager-->
@@ -835,7 +846,7 @@
 <!-- Rob, der Raeuber, Ende -->
 <!-- Loc: Stadtmauer -->
 	<Region id="12" name="dwarfenfroward">
-		<Settings dimx="32" dimy="32" region_template="dwarfenfroward"  ground="grass1"/>
+		<Settings dimx="36" dimy="28" region_template="dwarfenfroward"  ground="grass1"/>
 		
 		<ReviveLocation  location="WaypointLoc" />
 		
@@ -880,7 +891,7 @@
 	</Region>
 	
 	<Region id="30" name="dwarfenfrowardCommand">
-		<Settings dimx="32" dimy="32" region_template="commandHouse"  ground="council_ground"/>
+		<Settings dimx="4" dimy="6" region_template="commandHouse"  ground="council_ground"/>
 		
 		<ExitDirections north="false" south="true" west="false" east="false" />
 		

@@ -1,0 +1,9 @@
+﻿<RenderInfo name="vagabondHat" >
+	<Entity source="vag_hat.mesh"/> 
+</RenderInfo>
+<RenderInfo name="vagabondHat#m" >
+	<Entity source="vag_hatMageM.mesh"/> 
+</RenderInfo>
+<RenderInfo name="vagabondHat#f" >
+	<Entity source="vag_hatMageM.mesh"/> 
+</RenderInfo>

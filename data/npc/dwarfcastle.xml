@@ -1,6 +1,6 @@
 <NPC refname="Haffgar">
 	<Trade refresh_time="600000" price_factor="1.5">
-		<TradeItem subtype="legions_sw"  number="1" number_magical="0"/>
+		<TradeItem subtype="legion_sw"  number="1" number_magical="0"/>
 		<TradeItem subtype="long_sw"  number="1" number_magical="0"/>
 		<TradeItem subtype="horse_sw"  number="1" number_magical="0"/>
 		<TradeItem subtype="bast_sw"  number="1" number_magical="0"/>
@@ -64,7 +64,7 @@
 
 <NPC refname="Flynn">
 	<Trade refresh_time="600000" price_factor="4">
-		<TradeItem subtype="legions_sw"  number="0" number_magical="1" min_enchant="200" max_enchant="650"/>
+		<TradeItem subtype="legion_sw"  number="0" number_magical="1" min_enchant="200" max_enchant="650"/>
 		<TradeItem subtype="long_sw"  number="0" number_magical="1" min_enchant="200" max_enchant="650"/>
 		<TradeItem subtype="horse_sw"  number="0" number_magical="1" min_enchant="200" max_enchant="650"/>
 		<TradeItem subtype="mrnstr_hmr"  number="0" number_magical="1" min_enchant="200" max_enchant="650"/>

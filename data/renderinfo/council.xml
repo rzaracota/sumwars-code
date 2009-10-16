@@ -91,6 +91,14 @@
 	</Action>
 
 	<Action name="fire_ball">
+		<Animation name = "throwFireball" />
+		<ParticleSystem objectname="hellfire" bone="mainmesh:tailTipRight" source="Firetail" position="0.0 0.0 0.0" />
+		<Detach time="0.8" objectname="hellfire" />
+	</Action>
+	<Action name="tutorial_fire_ball">
+		<Animation name = "throwFireball" />
+		<ParticleSystem objectname="hellfire" bone="mainmesh:tailTipRight" source="Firetail" position="0.0 0.0 0.0" />
+		<Detach time="0.8" objectname="hellfire" />
 	</Action>
 
 	<Action name="hammer_bash">
@@ -108,7 +116,33 @@
 	<Action name="inflame">
 	</Action>
 
-	<Action name="firestorm">
+	<Action name="behemoth_fire_storm">
+		<Animation name = "fireWave" />
+		<ParticleSystem objectname="hellfire1" bone="mainmesh:tailTipRight" source="Firetail" position="0.0 0.0 0.0" />
+		<Detach time="0.8" objectname="hellfire1" />
+		<ParticleSystem objectname="hellfire2" bone="mainmesh:tailTipLeft" source="Firetail" position="0.0 0.0 0.0" />
+		<Detach time="0.8" objectname="hellfire2" />
+		<ParticleSystem objectname="hellfire3" bone="mainmesh:tailTipMiddle" source="Firetail" position="0.0 0.0 0.0" />
+		<Detach time="0.8" objectname="hellfire3" />
+	</Action>
+	<Action name="tutorial_behemoth_fire_storm">
+		<Animation name = "fireWave" />
+		<ParticleSystem objectname="hellfire1" bone="mainmesh:tailTipRight" source="Firetail" position="0.0 0.0 0.0" />
+		<Detach time="0.8" objectname="hellfire1" />
+		<ParticleSystem objectname="hellfire2" bone="mainmesh:tailTipLeft" source="Firetail" position="0.0 0.0 0.0" />
+		<Detach time="0.8" objectname="hellfire2" />
+		<ParticleSystem objectname="hellfire3" bone="mainmesh:tailTipMiddle" source="Firetail" position="0.0 0.0 0.0" />
+		<Detach time="0.8" objectname="hellfire3" />
+	</Action>
+	
+	<Action name="tutorial_fire_wall">
+		<Animation name = "fireWave" />
+		<ParticleSystem objectname="hellfire1" bone="mainmesh:tailTipRight" source="Firetail" position="0.0 0.0 0.0" />
+		<Detach time="0.8" objectname="hellfire1" />
+		<ParticleSystem objectname="hellfire2" bone="mainmesh:tailTipLeft" source="Firetail" position="0.0 0.0 0.0" />
+		<Detach time="0.8" objectname="hellfire2" />
+		<ParticleSystem objectname="hellfire3" bone="mainmesh:tailTipMiddle" source="Firetail" position="0.0 0.0 0.0" />
+		<Detach time="0.8" objectname="hellfire3" />
 	</Action>	
 </RenderInfo>
 

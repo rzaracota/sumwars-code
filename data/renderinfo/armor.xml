@@ -15,7 +15,6 @@
 	<Entity source="councl_armMW.mesh"/> 
 </RenderInfo>
 <RenderInfo name="counclArm#f" parent="playerbase">
-	<Entity source="councl_armMW.mesh"/> 
 </RenderInfo>
 <RenderInfo name="counclArmTolec" parent="guardPole">
 	<Entity source="councl_armMW.mesh"/> 
@@ -28,7 +27,6 @@
 	<Entity source="councl_robMM.mesh"/> 
 </RenderInfo>
 <RenderInfo name="counclRob#f" parent="playerbase">
-	<Entity source="councl_robMM.mesh"/> 
 </RenderInfo>
 <RenderInfo name="counclRobeSoren" parent="guardPole">
 	<Entity source="councl_robMM.mesh"/>

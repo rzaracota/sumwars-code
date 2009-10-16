@@ -21,23 +21,13 @@
 	
 	<State name="open">
 		<Activation time="1500">
-			<Movement start="0.0" end="0.0" start_vec="0.0 0.0 0.0" end_vec="0.0 0.0 4.0" />
-			<Movement objectname = "rightWing" start="0.0" end="0.0" start_vec="0.0 0.0 0.0" end_vec="0.0 0.0 4.0" />
-			<Movement objectname = "leftWing" start="0.0" end="0.0" start_vec="0.0 0.0 0.0" end_vec="0.0 0.0 4.0" />
-			<Movement objectname = "lock" start="0.0" end="0.0" start_vec="0.0 1.592 0.0" end_vec="0.0 1.592 4.0" />
-		
 			<Rotation objectname = "lock" start="0.0" end="0.5" start_vec="0.0 0.0 0.0" end_vec="180.0 0.0 0.0" />
-			<Movement objectname = "rightWing" start="0.5" end="1.0" start_vec="0.0 0.0 4.0" end_vec="0.0 0.0 6.0" />
-			<Movement objectname = "leftWing" start="0.5" end="1.0" start_vec="0.0 0.0 4.0" end_vec="0.0 0.0 2.0" />
-			<Movement objectname = "lock" start="0.5" end="1.0" start_vec="0.0 1.592 4.0" end_vec="0.0 1.592 2.0" />
+			<Movement objectname = "rightWing" start="0.5" end="1.0" start_vec="0.0 0.0 0.0" end_vec="0.0 0.0 2.0" />
+			<Movement objectname = "leftWing" start="0.5" end="1.0" start_vec="0.0 0.0 0.0" end_vec="0.0 0.0 -2.0" />
+			<Movement objectname = "lock" start="0.5" end="1.0" start_vec="0.0 1.592 0.0" end_vec="0.0 1.592 -2.0" />
 		</Activation>
 		
 		<Deactivation time="1500">
-			<Movement start="0.0" end="0.0" start_vec="0.0 0.0 -4.0" end_vec="0.0 0.0 0.0" />
-			<Movement objectname = "rightWing" start="0.0" end="0.0" start_vec="0.0 0.0 2.0" end_vec="0.0 0.0 2.0" />
-			<Movement objectname = "leftWing" start="0.0" end="0.0" start_vec="0.0 0.0 -2.0" end_vec="0.0 0.0 -2.0" />
-			<Movement objectname = "lock" start="0.0" end="0.0" start_vec="0.0 1.592 -2.0" end_vec="0.0 1.592 -2.0" />
-			
 			<Rotation objectname = "lock" start="0.0" end="0.5" start_vec="180.0 0.0 0.0" end_vec="0.0 0.0 0.0"/>
 			<Movement objectname = "rightWing" start="0.5" end="1.0" start_vec="0.0 0.0 2.0" end_vec="0.0 0.0 0.0" />
 			<Movement objectname = "leftWing" start="0.5" end="1.0" start_vec="0.0 0.0 -2.0" end_vec="0.0 0.0 0.0" />
@@ -82,7 +72,7 @@
 	
 	<State name="open">
 		<Activation time="500">
-			<Rotation start="0.0" end="1.0" start_vec="0.0 -130.0 0.0" end_vec="0.0 0.0 0.0" />
+			<Rotation start="0.0" end="1.0" start_vec="0.0 0.0 0.0" end_vec="0.0 130.0 0.0" />
 		</Activation>
 		
 		<Deactivation time="500">

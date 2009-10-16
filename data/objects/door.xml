@@ -27,15 +27,10 @@
 				setScriptObjectFlag(trigger.used_object,'open',not set)
 				
 				local pos = get(trigger.used_object,"position")
-				local shift={0,4};
+				setObjectValue(trigger.used_object,'layer','normal')
 				if (not set) then
-					shift[2] = -4;
+					setObjectValue(trigger.used_object,'layer','nocollision');
 				end
-				
-				vecrotate(shift,get(trigger.used_object,"angle"));
-				vecadd(pos,shift);
-				
-				moveObject(trigger.used_object,pos,false)
 				
 				scriptobjectvar[trigger.used_object]["lockdown"] = true;
 				timedExecute('scriptobjectvar['..trigger.used_object..']["lockdown"] = nil',1500);
@@ -113,27 +108,11 @@
 			if ((scriptobjectvar[trigger.used_object]["locked"] ~= true or trigger.lock_override) and scriptobjectvar[trigger.used_object]["lockdown"] ~= true) then
 				local stat = getScriptObjectFlag(trigger.used_object,'open')
 				setScriptObjectFlag(trigger.used_object,'open',not stat)
-
-				local pos = get(trigger.used_object,"position")
-				local shift={-0.8,1.65};
-				local angRot = get(trigger.used_object,"angle");
-				local ang = angRot
+				setObjectValue(trigger.used_object,'layer','normal')
 				if (not stat) then
-					ang = ang - 130;
-					shift[1] = 0.8;
-					shift[2] = -1.65;
-				else
-					ang = ang + 130;
-					angRot = angRot + 130;
+					setObjectValue(trigger.used_object,'layer','nocollision');
 				end;
-				
-				vecrotate(shift,angRot);
-				vecadd(pos,shift);
-				set(trigger.used_object,"angle",ang);
-				
-				
-				moveObject(trigger.used_object,pos,false)
-				
+
 				scriptobjectvar[trigger.used_object]["lockdown"] = true;
 				timedExecute('scriptobjectvar['..trigger.used_object..']["lockdown"] = nil',500);
 			end

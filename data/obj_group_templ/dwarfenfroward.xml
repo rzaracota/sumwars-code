@@ -316,7 +316,7 @@
     <Object subtype="$stuff_m" 
             center_x="-34.47606825" 
             center_y="37.84808385" 
-			height="-9.518768001e-005" 
+			height="-9.518768e-005" 
             angle="-27.51068956" 
             probability="1" 
             prob_angle="false" 
@@ -882,7 +882,7 @@
     <Object subtype="houseAisen1" 
             center_x="-1.109296313" 
             center_y="35.56458237" 
-			height="-7.202571872e-015" 
+			height="-7.209510766e-015" 
             angle="0" 
             probability="1" 
             prob_angle="false" 
@@ -1029,7 +1029,7 @@
     <Object subtype="houseAisen4" 
             center_x="18.60483791" 
             center_y="4.442792998" 
-			height="-7.126244039e-015" 
+			height="-7.133182933e-015" 
             angle="-193.4481909" 
             probability="1" 
             prob_angle="false" 
@@ -1052,7 +1052,7 @@
     <Object subtype="houseAisen4" 
             center_x="-3.21409012" 
             center_y="42.26589568" 
-			height="3.455569164e-015" 
+			height="3.44863027e-015" 
             angle="-180" 
             probability="1" 
             prob_angle="false" 
@@ -1068,7 +1068,7 @@
     <Object subtype="houseAisen4" 
             center_x="-19.79129143" 
             center_y="32.26810044" 
-			height="7.202571872e-015" 
+			height="7.209510766e-015" 
             angle="40.15037877" 
             probability="1" 
             prob_angle="false" 
@@ -1108,6 +1108,13 @@
     <Object subtype="stone1" 
             center_x="-19.28120835" 
             center_y="-34.48746009" 
+            angle="0" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="stone1" 
+            center_x="23.5" 
+            center_y="-13.5" 
             angle="0" 
             probability="1" 
             prob_angle="false" 
@@ -1197,6 +1204,14 @@
             probability="1" 
             prob_angle="true" 
     />
+    <Object subtype="stone_l1" name="blocadeNorth" 
+            center_x="20.91611483" 
+            center_y="-16.2276798" 
+			height="-3.552713679e-015" 
+            angle="-49.68656605" 
+            probability="1" 
+            prob_angle="false" 
+    />
   </ObjectContent>
 
   <Locations>
@@ -1215,7 +1230,6 @@
     <Location name="locBlackmarket" pos_x="-35.27017312" pos_y="34.78807392" />
     <Location name="locCommandGuard1" pos_x="13.43941115" pos_y="14.15818404" />
     <Location name="locCommandGuard2" pos_x="15.5" pos_y="17.5" />
-    <Location name="locDebris" pos_x="20.5" pos_y="-15" />
     <Location name="locHealer" pos_x="-12.42665932" pos_y="8.647521214" />
     <Location name="locNoEntry1" pos_x="-28.5" pos_y="-24.5" />
     <Location name="locNoEntry2" pos_x="-3" pos_y="-21" />

@@ -1,0 +1,4 @@
+<Object type="FIXED_OBJECT" subtype="heal_1" layer="NORMAL">
+        <Mesh file="heal_1.mesh" />
+        <Geometry shape="CIRCLE" radius="0.1391326889"/>
+</Object>

@@ -18,7 +18,7 @@
 	<Trade refresh_time="600000" price_factor="1.5">
 		<TradeItem subtype="bronze_sw"  number="1" number_magical="0"/>
 		<TradeItem subtype="sabre_sw"  number="1" number_magical="0"/>
-		<TradeItem subtype="legions_sw"  number="1" number_magical="0"/>
+		<TradeItem subtype="legion_sw"  number="1" number_magical="0"/>
 		<TradeItem subtype="steel2h_sw"  number="1" number_magical="0"/>
 		<TradeItem subtype="smash_sw"  number="1" number_magical="0"/>
 		<TradeItem subtype="horse_sw"  number="1" number_magical="0"/>
@@ -77,7 +77,7 @@
 <NPC refname="Marco">
 	<Trade refresh_time="600000" price_factor="4">
 		<TradeItem subtype="sabre_sw"  number="0" number_magical="1" min_enchant="100" max_enchant="400"/>
-		<TradeItem subtype="legions_sw"  number="0" number_magical="1" min_enchant="100" max_enchant="400"/>
+		<TradeItem subtype="legion_sw"  number="0" number_magical="1" min_enchant="100" max_enchant="400"/>
 		<TradeItem subtype="smash_sw"  number="0" number_magical="1" min_enchant="100" max_enchant="400"/>
 		<TradeItem subtype="maul_hmr"  number="0" number_magical="1" min_enchant="100" max_enchant="400"/>
 		<TradeItem subtype="mrnstr_hmr"  number="0" number_magical="1" min_enchant="100" max_enchant="400"/>

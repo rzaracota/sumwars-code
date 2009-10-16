@@ -97,6 +97,35 @@
 	<Emotion name="injured3" image="set:emo_councilMage image:injured3" />
 </EmotionSet>
 
+<EmotionSet name="gertlinde_emotion"
+			default_image="set:emo_gertlinde image:normal" >
+	<Emotion name="normal" image="set:emo_gertlinde image:normal" />
+	<Emotion name="surprised" image="set:emo_gertlinde image:surprised" />
+	<Emotion name="thoughtful" image="set:emo_gertlinde image:thoughtful" />
+	<Emotion name="happy" image="set:emo_gertlinde image:happy" />
+	<Emotion name="amused" image="set:emo_gertlinde image:amused" />
+	<Emotion name="excited" image="set:emo_gertlinde image:excited" />
+	<Emotion name="inlove" image="set:emo_gertlinde image:inlove" />
+	<Emotion name="bored" image="set:emo_gertlinde image:bored" />
+	<Emotion name="unhappy" image="set:emo_gertlinde image:unhappy" />
+	<Emotion name="sad" image="set:emo_gertlinde image:sad" />
+	<Emotion name="pain" image="set:emo_gertlinde image:pain" />
+	<Emotion name="sneer" image="set:emo_gertlinde image:sneer" />
+	<Emotion name="grin" image="set:emo_gertlinde image:grin" />
+	<Emotion name="offended" image="set:emo_gertlinde image:offended" />
+	<Emotion name="threaten" image="set:emo_gertlinde image:threaten" />
+	<Emotion name="angry" image="set:emo_gertlinde image:angry" />
+	<Emotion name="warcry" image="set:emo_gertlinde image:warcry" />
+	<Emotion name="injured" image="set:emo_gertlinde image:injured" />
+	<Emotion name="injured2" image="set:emo_gertlinde image:injured2" />
+	<Emotion name="injured3" image="set:emo_gertlinde image:injured3" />
+	<Emotion name="fear" image="set:emo_gertlinde image:fear" />
+	<Emotion name="panic" image="set:emo_gertlinde image:panic" />
+	<Emotion name="aloof" image="set:emo_gertlinde image:aloof" />
+	<Emotion name="disgust" image="set:emo_gertlinde image:disgust" />
+</EmotionSet>
+
+
 
 <Monster type="NPC" subtype="peasant" name="Peasant" fraction="human" race="human" layer="NORMAL">
 	<Mesh file="peasant_m" />
@@ -139,10 +168,6 @@
 
 <Monster type="NPC" subtype="peasant_f" name="Peasant" fraction="human" race="human" layer="NORMAL">
 	<Mesh file="peasant_f" />
-	<Dropslots >
-		<Dropslot pbig="0.1" pmedium="0.2" psmall="0.2" pgold="0.2" max_gold="50" min_level="0" max_level="10" magic_prob="0.1" magic_power="1000" />
-		<Dropslot pbig="0.1" pmedium="0.2" psmall="0.2" pgold="0.2" max_gold="50" min_level="0" max_level="20" magic_prob="0.2" magic_power="1000" />
-	</Dropslots>
 	<BasicAttributes
 					experience="0"
 					level="1"
@@ -181,10 +206,6 @@
 <Monster type="NPC" subtype="guard" name="Guard" fraction="human" race="human" layer="NORMAL">
 	<Mesh file="guard_ais" />
 	<EmotionSet name="councilMage_emotion" />
-	<Dropslots >
-		<Dropslot pbig="0.1" pmedium="0.2" psmall="0.2" pgold="0.2" max_gold="50" min_level="0" max_level="10" magic_prob="0.1" magic_power="1000" />
-		<Dropslot pbig="0.1" pmedium="0.2" psmall="0.2" pgold="0.2" max_gold="50" min_level="0" max_level="20" magic_prob="0.2" magic_power="1000" />
-	</Dropslots>
 	<BasicAttributes
 					experience="0"
 					level="20"
@@ -227,10 +248,6 @@
 <Monster type="NPC" subtype="council_guard" name="Council Guard" fraction="human" race="human" layer="NORMAL">
 	<RenderInfo name="guard_ais" />
 	<EmotionSet name="human_standard" />
-	<Dropslots >
-		<Dropslot pbig="0.1" pmedium="0.2" psmall="0.2" pgold="0.2" max_gold="50" min_level="0" max_level="10" magic_prob="0.1" magic_power="1000" />
-		<Dropslot pbig="0.1" pmedium="0.2" psmall="0.2" pgold="0.2" max_gold="50" min_level="0" max_level="20" magic_prob="0.2" magic_power="1000" />
-	</Dropslots>
 	<BasicAttributes
 					experience="0"
 					level="20"
@@ -273,10 +290,6 @@
 <Monster type="NPC" subtype="tolec" name="Tolec" fraction="human" race="human" layer="NORMAL">
 	<RenderInfo name="tolec" />
 	<EmotionSet name="human_standard" />
-	<Dropslots >
-		<Dropslot pbig="0.1" pmedium="0.2" psmall="0.2" pgold="0.2" max_gold="50" min_level="0" max_level="10" magic_prob="0.1" magic_power="1000" />
-		<Dropslot pbig="0.1" pmedium="0.2" psmall="0.2" pgold="0.2" max_gold="50" min_level="0" max_level="20" magic_prob="0.2" magic_power="1000" />
-	</Dropslots>
 	<BasicAttributes
 					experience="0"
 					level="20"
@@ -319,10 +332,6 @@
 <Monster type="NPC" subtype="derred" name="Derred" fraction="human" race="human" layer="NORMAL">
 	<RenderInfo name="derred" />
 	<EmotionSet name="human_standard" />
-	<Dropslots >
-		<Dropslot pbig="0.1" pmedium="0.2" psmall="0.2" pgold="0.2" max_gold="50" min_level="0" max_level="10" magic_prob="0.1" magic_power="1000" />
-		<Dropslot pbig="0.1" pmedium="0.2" psmall="0.2" pgold="0.2" max_gold="50" min_level="0" max_level="20" magic_prob="0.2" magic_power="1000" />
-	</Dropslots>
 	<BasicAttributes
 					experience="0"
 					level="20"
@@ -365,10 +374,6 @@
 <Monster type="NPC" subtype="soren" name="Soren Windclaw" fraction="human" race="human" layer="NORMAL">
 	<RenderInfo name="soren" />
 	<EmotionSet name="human_standard" />
-	<Dropslots >
-		<Dropslot pbig="0.1" pmedium="0.2" psmall="0.2" pgold="0.2" max_gold="50" min_level="0" max_level="10" magic_prob="0.1" magic_power="1000" />
-		<Dropslot pbig="0.1" pmedium="0.2" psmall="0.2" pgold="0.2" max_gold="50" min_level="0" max_level="20" magic_prob="0.2" magic_power="1000" />
-	</Dropslots>
 	<BasicAttributes
 					experience="0"
 					level="80"

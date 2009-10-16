@@ -59,5 +59,14 @@
 		</Deactivation>
 	</State>
 	
-
+	<State name="blade_storm" reference = "ice_arrows">
+		<Activation>
+			<ParticleSystem objectname="magicEnergy1" source="BowBuff" position="0.0 2.0 0.0" />
+			<Rotation objectname = "magicEnergy1" start="0.2" end="0.9" start_vec="0.0 0.0 0.0" end_vec="0.0 360.0 0.0" />
+		</Activation>
+		
+		<Deactivation>
+			<Detach objectname="magicEnergy1" />
+		</Deactivation>
+	</State>
 </RenderInfo>

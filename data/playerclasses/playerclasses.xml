@@ -37,7 +37,7 @@
 	<ItemRequirementTag name="warrior" />
 	
 	<Look name="warrior" render_info="warrior_m" gender="male" emotionset="human_standard" hair="hair_w1.mesh" item_suffix="#m"/>
-	<Look name="fencer" render_info="warrior_f" gender="female" emotionset="human_standard" hair="hair_m1.mesh" item_suffix="#f"/>
+	<Look name="fencer" render_info="warrior_f" gender="female" emotionset="gertlinde_emotion" hair="hair_fs1.mesh" item_suffix="#f"/>
 	
 	<SkilltreeTabs tab1="Fighting skills" tab2="Passive skills" tab3="Fighting spirit" />
 	
@@ -150,7 +150,7 @@
 	<BasicAbility type="magic_attack" />
 
 	<Look name="wizard" render_info="mage_m" gender="male" emotionset="councilMage_emotion"  hair="hair_m1.mesh" item_suffix="#m"/>
-	<Look name="sorceress" render_info="mage_f" gender="female" emotionset="human_standard"  hair="hair_m1.mesh" item_suffix="#f"/>
+	<Look name="sorceress" render_info="mage_f" gender="female" emotionset="gertlinde_emotion"  hair="hair_fs2.mesh" item_suffix="#f"/>
 	
 	<SkilltreeTabs tab1="Fire magic" tab2="Ice magic" tab3="Air magic" />
 	
@@ -265,7 +265,7 @@
 	<BasicAbility type="range_attack" />
 
 	<Look name="ranger" render_info="archer_m" gender="male" emotionset="human_standard"  hair="hair_m1.mesh" item_suffix="#m"/>
-	<Look name="archer" render_info="archer_f" gender="female" emotionset="human_standard"  hair="hair_m1.mesh" item_suffix="#m"/>
+	<Look name="archer" render_info="archer_f" gender="female" emotionset="gertlinde_emotion"  hair="hair_fs3.mesh" item_suffix="#f"/>
 	
 	<SkilltreeTabs tab1="Marksmanship" tab2="Passive skills" tab3="Hunter magic" />
 	
@@ -369,7 +369,7 @@
 	<BasicAbility type="holy_attack" />
 
 	<Look name="priest" render_info="priest_m" gender="male" emotionset="human_standard"  hair="hair_w1.mesh" item_suffix="#m"/>
-	<Look name="priestess" render_info="priest_f" gender="female" emotionset="human_standard"  hair="hair_m1.mesh" item_suffix="#f"/>
+	<Look name="priestess" render_info="priest_f" gender="female" emotionset="gertlinde_emotion"  hair="hair_fs1.mesh" item_suffix="#f"/>
 
 	<SkilltreeTabs tab1="Light Magic" tab2="Water Magic" tab3="Wind Magic" />
 	
