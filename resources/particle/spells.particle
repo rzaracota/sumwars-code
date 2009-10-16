@@ -37,6 +37,73 @@ SlugSpit
 
 }
 
+//Lich - summon_skel
+Earth
+{
+    material Flare
+    particle_width 20
+    particle_height 20
+    cull_each false
+    quota 10000
+    billboard_type point
+ 
+
+   emitter Point
+{
+        angle 40
+        emission_rate 20
+        time_to_live 0.2
+        direction 0 -1 0
+        velocity_min 250
+        velocity_max 300
+        colour_range_start 0 0 1 
+        colour_range_end 0 0.4 0.9
+}
+}
+
+SummonBuff
+{
+    material        Flare
+    particle_width  15
+    particle_height 15
+    cull_each       false
+    quota           10000
+    billboard_type  point
+
+    // Area emitter
+    emitter Point
+{
+        angle           15
+        emission_rate   20
+        time_to_live    2
+        position        0 0 50
+        direction       0 -1 0
+        velocity_min  	15
+        velocity_max  	20
+        colour_range_start  0 0.4 0.8 0.0
+        colour_range_end    0.2 0.5 0.8 0.0
+        width           10
+        height          10
+        depth           10
+}
+
+    // Fader
+    affector ColourFader2
+{
+        red1 +0.4
+        green1 +0.4
+        blue1 +0.4
+        alpha1 +0.7
+
+        red2 -0.25
+        green2 -0.25
+        blue2 -0.25
+        alpha2 -0.3333
+
+        state_change 3.5
+}
+}
+
 TestRing
 {
     material        Flare
@@ -142,7 +209,6 @@ Fireball
         blue -0.25
 }
 
-<<<<<<< .mine
 }
 
 HandFire
@@ -419,6 +485,110 @@ FireAura
 }
 }
 
+//Burning Behemoth
+Firetail
+{
+    material Flare
+    particle_width 20
+    particle_height 20
+    cull_each false
+    quota 10000
+    billboard_type point
+ 
+
+   emitter Point
+{
+        angle 360
+        emission_rate 2075
+        time_to_live 0.2
+        direction 1 0 0
+        velocity_min 250
+        velocity_max 300
+        colour_range_start 1 0.3 0
+        colour_range_end 0.5 0.3 0
+}
+
+    affector ColourFader
+{
+        red -0.25
+        green -0.25
+        blue -0.25
+}
+
+}
+
+//Burning Sphere - dieing Lich
+Firesphere
+{
+    material Flare
+    particle_width 20
+    particle_height 20
+    cull_each false
+    quota 10000
+    billboard_type point
+ 
+
+   emitter Point
+{
+        angle 360
+        emission_rate 2075
+        time_to_live 0.1
+        direction 1 0 0
+        velocity_min 150
+        velocity_max 200
+        colour_range_start 1 0.3 0
+        colour_range_end 0.5 0.3 0
+}
+
+    affector ColourFader
+{
+        red -0.25
+        green -0.25
+        blue -0.25
+}
+
+}
+
+LichDeadColumn
+{
+    material        Flare
+    particle_width  30
+    particle_height 30
+	cull_each       false
+    quota           10000
+    billboard_type  point
+    
+    // Area emitter
+    emitter Cylinder
+{
+        angle           30
+        emission_rate   400
+        time_to_live    5
+        direction       0 1 0
+        velocity    	0
+        colour_range_start  1 0 0
+        colour_range_end    0.5 0.5 0
+        width           100
+        height          100
+        depth           60
+}
+
+    // Make em float upwards
+    affector LinearForce
+{
+        force_vector      0 100 0
+        force_application add
+}
+
+    // Fader
+    affector ColourFader
+{
+        red -0.25
+        green -0.25
+        blue -0.25
+}
+}
+
 //ICE
 
 HandIce
@@ -598,6 +768,38 @@ Freeze
         height          10
         depth           30
 }
+}
+
+//freezing Sphere - dieing Lich
+Icesphere
+{
+    material Flare
+    particle_width 20
+    particle_height 20
+    cull_each false
+    quota 10000
+    billboard_type point
+ 
+
+   emitter Point
+{
+        angle 360
+        emission_rate 2075
+        time_to_live 0.1
+        direction 1 0 0
+        velocity_min 150
+        velocity_max 200
+        colour_range_start  0.3 0.3 0.3 0.0
+        colour_range_end    0.8 0.8 0.8 0.0
+}
+
+    affector ColourFader
+{
+        red -0.25
+        green -0.25
+        blue -0.25
+}
+
 }
 
 //LIGHTNING
@@ -1123,7 +1325,6 @@ Hypnosis
         colour_range_start 1 0 1
         colour_range_end 0.9 0 0.6
 }
-<<<<<<< .mine
 }
 
 CastCureBurn
