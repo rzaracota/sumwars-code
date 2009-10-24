@@ -209,6 +209,8 @@ void Monster::updateCommand()
 				continue;
 			
 			pl = static_cast<Creature*>(*it);
+			if (pl->getBaseAttrMod()->m_special_flags & IGNORED_BY_AI)
+				continue;
 			
 			// Spieler nur als Ziel, wenn aktiv und nicht in Dialog
 			if (! pl->canBeAttacked())

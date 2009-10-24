@@ -4295,6 +4295,12 @@ int Creature::getValue(std::string valname)
 		lua_pushstring(EventSystem::getLuaState() , m_emotion_set.c_str() );
 		return 1;
 	}
+	else if (valname == "ignored_by_ai")
+	{
+		lua_pushboolean(EventSystem::getLuaState(), bool(getBaseAttrMod()->m_special_flags & IGNORED_BY_AI));
+		return 1;
+	}
+	
 	int ret = m_base_attr.getValue(valname);
 	if (ret >0)
 	{
@@ -4319,8 +4325,24 @@ bool Creature::setValue(std::string valname)
 		m_emotion_set = lua_tostring(EventSystem::getLuaState() ,-1);
 		lua_pop(EventSystem::getLuaState(), 1);
 		addToNetEventMask(NetEvent::DATA_SPEAK_TEXT);
-		return 0;
+		return true;
 	}
+	else if (valname == "ignored_by_ai")
+	{
+		bool ignore = lua_toboolean(EventSystem::getLuaState() ,-1);
+		lua_pop(EventSystem::getLuaState(), 1);
+		if (ignore)
+		{
+			getBaseAttr()->m_special_flags |= IGNORED_BY_AI;
+		}
+		else
+		{
+			getBaseAttr()->m_special_flags &= (~IGNORED_BY_AI);
+		}
+		calcBaseAttrMod();
+		return true;
+	}
+	
 	bool ret;
 	ret = m_base_attr.setValue(valname, getEventMaskRef());
 	if (ret >0)

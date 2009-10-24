@@ -124,7 +124,9 @@ class WorldObject : public GameObject
 		STORM_ARROWS = 0x200,
 		WIND_WALK = 0x400,
 		BURNING_RAGE = 0x800,
-		STATIC_SHIELD = 0x1000
+		STATIC_SHIELD = 0x1000,
+  
+		IGNORED_BY_AI = 0x4000000
 	};
 
 	/**
