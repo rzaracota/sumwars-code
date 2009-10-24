@@ -161,14 +161,176 @@
 		
 		<Event trigger="guard_scene1_walk5" once="true">
 			<Effect>
-				createDialogue();
-				addSpeaker(fortify_dwall_tmp.tolec,"Tolec");
-				addSpeaker(fortify_dwall_tmp.derred,"Derred");
-				addspeaker(fortify_dwall_tmp.soren,"Soren Windclaw");
+				addUnitCommand(fortify_dwall_tmp.derred,"walk","locGuard3");
+				fortify_dwall_tmp.tgoal = nil;
+				assembleParty("elCnlLobby","locWay4");
+				startTimer("scene1_intro",2000);
 			</Effect>
 		</Event>
+		<Event trigger="scene1_intro" once="true">
+			<Effect>
+				createDialogue();
+				addAllPlayersToDialog();
+				addStandardRoles();
+				
+				addSpeaker(fortify_dwall_tmp.tolec,"Tolec");
+				addSpeaker(fortify_dwall_tmp.derred,"Derred");
+				addSpeaker(fortify_dwall_tmp.soren,"Soren Windclaw");
+				
+				speak("Derred",_("Mein Lord! Die... Gezeichneten sind jetzt da."));
+				speak("Soren Windclaw",_("Sehr gut."));
+				executeInDialog("insertTrigger('scene1_tback')");
+				speakPause(3000);
+				speak("any",_("Spürt ihr das?!! Das fühlt sich an wie-"),"panic");
+				if (getSpeaker("leader") ~= getSpeaker("any")) then
+					speak("leader",_("Scht!"),"unhappy");
+				end;
+				local solo = (getPlayers()[2] == nil);
+				if (solo) then
+					speak("Tolec",_("Er erwartet dich jetzt"));
+				else
+					speak("Tolec",_("Er erwartet euch jetzt"));
+				end;
+				executeInDialog("insertTrigger('enter_soren_room')");
+			</Effect>
+		</Event>
+		
+		<Event trigger="scene1_tback" once="true">
+			<Effect>
+				local door = getObjectByNameRef("doorSorenSouth");
+				addUnitCommand(fortify_dwall_tmp.tolec,"walk",get(door,"position"),1);
+				addCameraPosition(3000,"locWay4", -90,60, 20);
+			</Effect>
+		</Event>
+		
+		
+		<Event trigger="enter_soren_room" once="true">
+			<Effect>
+				local players = getPlayers();
+				local i,player;
+				for i,player in ipairs(players) do
+					addUnitCommand(player,"walk","locParty");
+				end;
+				addUnitCommand(fortify_dwall_tmp.tolec,"walk","locMerc2");
+				addCameraPosition(3000,"locSorenWindclaw", -90,60, 20);
+				startTimer("scene1_assemble",4000);
+			</Effect>
+		</Event>
+		
+		
+		<Event trigger="scene1_assemble" once="true">
+			<Effect>
+				assembleParty("elCnlLobby","locParty","locSorenWindclaw");
+				fortify_dwall_tmp.assemble = "scene1";
+			</Effect>
+		</Event>
+		
+		<Event trigger="party_complete" once="true">
+			<Condition>
+				return (fortify_dwall_tmp.assemble == "intro");
+			</Condition>
+			<Effect>
+				fortify_dwall_tmp.assemble = nil;
+				groupObjectsArc(getPlayers(),"locParty","locSorenWindclaw",nil,45);
+				
+				createDialogue();
+				addAllPlayersToDialog();
+				addSpeaker(fortify_dwall_tmp.tolec,"Tolec",true);
+				addSpeaker(fortify_dwall_tmp.derred,"Derred",true);
+				addSpeaker(fortify_dwall_tmp.soren,"Soren",true);
+				
+				local solo = (getPlayers()[2] == nil);
+				
+				speak("Soren",_("You're presence is no longer 	needed."));
+				speak("Tolec",_("But my Lord, those are"));
+				speak("Soren",_("..."));
+				speak("Tolec",_("As you wish. My apologies."));
+				speak("Derred",_("Come on, he knows what he's doing."));
+				
+				-- Beide Wachen verschwinden aus dem Raum.
+				
+				speak"magopt",_("Nice shack!"),"sneer");
+				speak("waropt",_("Well, the corners are a bit dirty though."),"thoughtful");
+				speak("waropt",_("...um nicht zu sagen: schleimig."),"grin");
+				speak("priest",_("Those ritual objects have seen better times, too."));
+				speak("Soren",_("Yes, they warned me that you're difficult."));
+				speak("waropt",_("Difficult?"),"surprised");
+				speak("waropt",_("You're putting in so much effort,"),"sneer");
+				speak("waropt",_("and everything you get is 'difficult'."));
+				speak"magopt",_("Pft. I feel like flaring off the whole place."),"unhappy");
+				local magopt = getSpeaker("magopt");
+				if (magopt ~= 0 and magopt ~= getSpeaker("any")) thrn
+					speak("any",_("With all those wimps here it's not really worth the effort, isn't it?"),"amused");
+				end;
+				speak("leader",_("Wenn noch mehr von Riesendinger frei kommen könnte das ein paar Schwierigkeiten machen..."));
+				speak("arcopt",_("Und die Chance ist recht hoch... die Monster hier haben schließlich alle ihren eigenen Kopf."),"grin");
+				speak("priest",_("I know this nice little ban..."));
+				speak("Soren",_("Would you please take a quick look at this crystall."),"bored");
+				
+				-- Er haelt einen Kristall in die Luft. Die Gruppe verstummt sofort und
+				-- dreht sich in Richtung des Gegenstandes.
+				
+				speak("any",_("Is that a...?"),"fear");
+				speak("Soren",_("Quite so."),"grin");
+				speak("Soren",_("It is a crystall straight from the heart of Harad's hell."));
+				speak("PL",_("How is it possible that you're still alive?"),"surprised");
+				speak("Soren",_("Indeed the right question."),"grin");
+				speak("Soren",_("With an answer, that could release every one of you from your suffering."));
+				speak("Soren",_("But before I give it to you, you have to do something for me."));
+				speak("any",_("May Harad curse you!"),"angry");
+				speak("Soren",_("Ts Ts. Wie unhöflich den Namen des Verfluchten in Akerans Hallen zu verwenden."),"unhappy");
+				speak("leader",_("Das ist eine verdammte Räuberhöhle."),"threaten");
+				speak("Soren",_("Euch entgeht der eigentliche Punkt."),"bored");
+				speak("Soren",_("Until then you should remember that it is entirely in you hands"),"threaten");
+				speak("Soren",_("how long you will be under this curse."));
+				speak("Soren",_("Fulfil my orders to the councils satisfaction"));
+				speak("Soren",_("and I have the power to release you of the claws of the deathgod."));
+				speak("Soren",_("If not, however..."));
+				speak("leader",_("We know that one allready. Cut the speach."),"bored");
+				if (getSpeaker("leader") ~= getSpeaker("any")) then
+					speak("any",_("What?!"),"surprised");
+					speak("any",_("The curse can be taken from us? Why do I hear this only know?"));
+				end;
+				speak("Soren",_("As you wish."),"grin");
+				speak("Soren",_("The task is pretty dangerous and you are likely to die more than once."));
+				speak("PL",_("Harad's curse has to have some advantage."));
+				speak("waropt",_("If only the pain wasn't so bad everytime..."),"sad");
+				if (getSpeaker("waropt") ~= getSpeaker("magopt")) then
+					speak"magopt",_("Even here you have to whine."));
+				end;
+				if (not solo) then
+					speak("Soren",_("You are indeed a bunch of trying people."));
+				else
+					speak("Soren",_("Ihr seid in der Tat eine schwierige Gestalt"));
+				end;
+				speak"magopt",_("He's beginning to make me angry."),"angry");
+				if (getSpeaker("priest") ~= getSpeaker("magopt")) then
+					speak("priest",_("Peace!"));
+				end;
+				speak("Soren",_("The first thing you have to learn are obviously manners."),"threaten");
+				speak("Soren",_("Consider it as a small bonus:"),"aloof");
+				speak("Soren",_("Before your real assignment you will go to dwarfenwall as backup."));
+				speak("Soren",_("Show the undead there who the real favourite of the deathgod is."));
+				speak("PL",_("Smells like exploitation."),"unhappy");
+				speak("priopt",_("Besides the necromancers don't follow Harad."),"thoughtful");
+				speak("any",_("This robegnome ranks pretty high among all the cheesy rats"),"unhappy");
+				speak("any",_("for whom we pulled chestnuts out of the fire."),"unhappy");
+				if (not solo) then
+					speak("waropt",_("Ich verstehe auch nicht, warum wir hier nach seiner Pfeife tanzen. Er ist doch schließlich-"),"threaten");
+					speak("any",_("Nur ein Mensch!!"),"warcry");
+				end;
+				speak("Soren",_("You obviously misjudge your position."),"normal");
+				speak("Soren",_("What do you think will happen, if your revealed in town?."));
+				speak("Soren",_("We know everything about your kind,"));
+				speak("Soren",_("and believe me, no one will be stupid enough to kill you."));
+				
+				addQuestion(_("Continue to be snotty?"));
+				addAnswer(_("Yes"),"be_unkind_part1");
+				addAnswer(_("No"),"be_kind");
+			</Effect>
+		</Event>
+		
 	</Region>
-	
 	
 	
 		
@@ -182,12 +344,12 @@
 				-- Rechts und Links kann man aus den Keller merkwuerdige Geraeusche hoeren
 				-- und Magisch anmutende Dinge sehen.
 				
-				speak("MAG",_("As if that show would impress anyone..."));
-				speak("WAR",_("Of course! We're at the Council of Summoners"));
-				speak("WAR",_("and you're still talking big?!"),1400);
-				speak("MAG",_("Why exactly was it that I put up with your company?"));
+				speak"magopt",_("As if that show would impress anyone..."));
+				speak("waropt",_("Of course! We're at the Council of Summoners"));
+				speak("waropt",_("and you're still talking big?!"),1400);
+				speak"magopt",_("Why exactly was it that I put up with your company?"));
 				speak("PL",_("Hush! You can argue later."));
-				speak("W1",_("We're here."));
+				speak("Tolec",_("We're here."));
 				
 				-- Die Tuer wird geoeffnet und die Gruppe tritt in einen Art geheimen
 				-- Verschwoerungsraum. Das Licht ist reduziert und roetlich. Alles deutet
@@ -197,69 +359,69 @@
 				speak("ANYast",_("Do you feel that??!"));
 				speak("ANYast",_("It feels like..."));
 				speak("PL",_("Quiet!"));
-				speak("W2",_("My Lord! The... Branded Ones are here now."));
-				speak("SW",_("Very well."));
-				speak("SW",_("You're presence is no longer 	needed."));
-				speak("W1",_("But my Lord, those are"));
-				speak("SW",_("..."));
-				speak("W1",_("As you wish. My apologies."));
-				speak("W2",_("Come on, he knows what he's doing."));
+				speak("Derred",_("My Lord! The... Branded Ones are here now."));
+				speak("Soren",_("Very well."));
+				speak("Soren",_("You're presence is no longer 	needed."));
+				speak("Tolec",_("But my Lord, those are"));
+				speak("Soren",_("..."));
+				speak("Tolec",_("As you wish. My apologies."));
+				speak("Derred",_("Come on, he knows what he's doing."));
 				
 				-- Beide Wachen verschwinden aus dem Raum.
 				
-				speak("MAG",_("Nice shack!"));
-				speak("WAR",_("Well, the corners are a bit dirty though."));
-				speak("PRIast",_("Those ritual objects have seen better times, too."));
-				speak("SW",_("Yes, they warned me that you're difficult."));
-				speak("WAR",_("Difficult?"));
-				speak("WAR",_("You're putting in so much efford,"));
-				speak("WAR",_("and everything you get is 'difficult'."));
-				speak("MAG",_("Pft. I feel like flaring off the whole place."));
+				speak"magopt",_("Nice shack!"));
+				speak("waropt",_("Well, the corners are a bit dirty though."));
+				speak("priest",_("Those ritual objects have seen better times, too."));
+				speak("Soren",_("Yes, they warned me that you're difficult."));
+				speak("waropt",_("Difficult?"));
+				speak("waropt",_("You're putting in so much efford,"));
+				speak("waropt",_("and everything you get is 'difficult'."));
+				speak"magopt",_("Pft. I feel like flaring off the whole place."));
 				speak("ANYast",_("With all those wimps here it's not really worth the efford, isn't it?"));
 				speak("PL",_("The elemental guards might be a hassle..."));
-				speak("PRIast",_("I know this nice little ban..."));
-				speak("SW",_("Would you please take a quick look at this crystall."));
+				speak("priest",_("I know this nice little ban..."));
+				speak("Soren",_("Would you please take a quick look at this crystall."));
 				
 				-- Er haelt einen Kristall in die Luft. Die Gruppe verstummt sofort und
 				-- dreht sich in Richtung des Gegenstandes.
 				
 				speak("ANY",_("Is that a...?"));
-				speak("SW",_("Quite so."));
-				speak("SW",_("It is a crystall straight from the heart of Harad's hell."));
+				speak("Soren",_("Quite so."));
+				speak("Soren",_("It is a crystall straight from the heart of Harad's hell."));
 				speak("PL",_("How is it possible that you're still alive?"));
-				speak("SW",_("Indeed the right question."));
-				speak("SW",_("With an answer, that could release every one of you from your suffering."));
-				speak("SW",_("But before I give it to you, you have to do something for me."));
+				speak("Soren",_("Indeed the right question."));
+				speak("Soren",_("With an answer, that could release every one of you from your suffering."));
+				speak("Soren",_("But before I give it to you, you have to do something for me."));
 				speak("ANYast",_("May Harad curse you!"));
-				speak("SW",_("Maybe he has time for that after he is done with you."));
-				speak("SW",_("Until then you should remember that it is entirely in you hands"));
-				speak("SW",_("how long you will be under this curse."));
-				speak("SW",_("Fulfil my orders to the councils satisfaction"));
-				speak("SW",_("and I have the power to release you of the claws of the deathgod."));
-				speak("SW",_("If not, however..."));
+				speak("Soren",_("Maybe he has time for that after he is done with you."));
+				speak("Soren",_("Until then you should remember that it is entirely in you hands"));
+				speak("Soren",_("how long you will be under this curse."));
+				speak("Soren",_("Fulfil my orders to the councils satisfaction"));
+				speak("Soren",_("and I have the power to release you of the claws of the deathgod."));
+				speak("Soren",_("If not, however..."));
 				speak("PL",_("We know that one allready. Cut the speach."));
 				speak("ANYast",_("What?!"));
 				speak("ANYast",_("The curse can be taken from us? Why do I hear this only know?"));
-				speak("SW",_("As you wish."));
-				speak("SW",_("The task is pretty dangerous and you are likely to die more than once."));
+				speak("Soren",_("As you wish."));
+				speak("Soren",_("The task is pretty dangerous and you are likely to die more than once."));
 				speak("PL",_("Harad's curse has to have some advantage."));
-				speak("WAR",_("If only the pain wasn't so bad everytime..."));
-				speak("MAG",_("Even here you have to whine."));
-				speak("SW",_("You are indeed a bunch of trying people."));
-				speak("MAG",_("He's beginning to make me angry."));
-				speak("PRIast",_("Peace!"));
-				speak("SW",_("The first thing you have to learn are obviously manners."));
-				speak("SW",_("Consider it as a small bonus:"));
-				speak("SW",_("Before your real assignment you will go to dwarfenwall as backup."));
-				speak("SW",_("Show the undead there who the real favourite of the deathgod is."));
+				speak("waropt",_("If only the pain wasn't so bad everytime..."));
+				speak"magopt",_("Even here you have to whine."));
+				speak("Soren",_("You are indeed a bunch of trying people."));
+				speak"magopt",_("He's beginning to make me angry."));
+				speak("priest",_("Peace!"));
+				speak("Soren",_("The first thing you have to learn are obviously manners."));
+				speak("Soren",_("Consider it as a small bonus:"));
+				speak("Soren",_("Before your real assignment you will go to dwarfenwall as backup."));
+				speak("Soren",_("Show the undead there who the real favourite of the deathgod is."));
 				speak("PL",_("Smells like exploitation."));
 				speak("PRI",_("Besides the necromancers don't follow Harad."));
 				speak("ANYplus",_("This robegnome ranks pretty high among all the cheesy rats"));
 				speak("ANYplus",_("for whom we pulled chestnuts out of the fire."));
-				speak("SW",_("You obviously misjudge your position."));
-				speak("SW",_("What do you think will happen, if your revealed in town?."));
-				speak("SW",_("We know everything about your kind,"));
-				speak("SW",_("and believe me, no one will be stupid enough to kill you."));
+				speak("Soren",_("You obviously misjudge your position."));
+				speak("Soren",_("What do you think will happen, if your revealed in town?."));
+				speak("Soren",_("We know everything about your kind,"));
+				speak("Soren",_("and believe me, no one will be stupid enough to kill you."));
 				
 				addQuestion(_("Continue to be snotty?"));
 				addAnswer(_("Yes"),"be_unkind_part1");
@@ -270,16 +432,16 @@
 		<Topic name="be_unkind_part1">
 			<Effect>
 				speak("PL",_("You consider yourself very mighty and clever, don't you?"));
-				speak("MAG",_("Surely he has written down that knowledge of his somewhere."));
-				speak("MAG",_("We can search for it after he's dead."));
-				speak("WAR",_("A good opportunity, indeed."));
-				speak("SW",_("Yes, they warned me about that, too."));
+				speak"magopt",_("Surely he has written down that knowledge of his somewhere."));
+				speak"magopt",_("We can search for it after he's dead."));
+				speak("waropt",_("A good opportunity, indeed."));
+				speak("Soren",_("Yes, they warned me about that, too."));
 				
 				-- Er beschwoert einen kleinen Feuerelementar vor sich und haelt einen
 				-- weiteren Kristall in die Luft.
 				
-				speak("SW",_("I will keep an eye on you and give you orders with this crystal."));
-				speak("SW",_("This simple elemental will remind you now that immortality has little meaning here."));
+				speak("Soren",_("I will keep an eye on you and give you orders with this crystal."));
+				speak("Soren",_("This simple elemental will remind you now that immortality has little meaning here."));
 				
 				-- Die Gruppe kaempft gegen den Elementar. Es sollte ein schwerer Kampf
 				-- sein, der aber schaffbar ist. Niemand stirbt, aber sobald die Chars
@@ -294,9 +456,9 @@
 		
 		<Topic name="be_unkind_part2">
 			<Effect>
-				speak("SW",_("That was the weakest elemental I could possibly summon."));
-				speak("SW",_("Now go. I have no time to waste."));
-				speak("SW",_("The prince will marry soon and there are lots of preparations to make."));
+				speak("Soren",_("That was the weakest elemental I could possibly summon."));
+				speak("Soren",_("Now go. I have no time to waste."));
+				speak("Soren",_("The prince will marry soon and there are lots of preparations to make."));
 				
 				changeTopic("end_cutscene1");
 			</Effect>
@@ -318,12 +480,12 @@
 			<Effect>
 				speak("PL",_("Of course. With our freedom as the price"));
 				speak("PL",_("we will do everything in our might to be successful."));
-				speak("WAR",_("I don't like it."));
-				speak("SW",_("Very well."));
-				speak("SW",_("I must take care of the preparations for the princes wedding now."));
-				speak("SW",_("There is no time for further explanations."));
-				speak("SW",_("Take this crystall and some gold."));
-				speak("SW",_("I will send you orders with it when the time comes."));
+				speak("waropt",_("I don't like it."));
+				speak("Soren",_("Very well."));
+				speak("Soren",_("I must take care of the preparations for the princes wedding now."));
+				speak("Soren",_("There is no time for further explanations."));
+				speak("Soren",_("Take this crystall and some gold."));
+				speak("Soren",_("I will send you orders with it when the time comes."));
 				
 				-- Jeder der Gruppe erhält 200 GM. Anschließend verlassen sie den Saal.
 				local players = getPlayers();
@@ -361,9 +523,10 @@
 			</Condition>
 			<Effect>
 				createDialogue();
-				addSpeaker(soren_windclaw,"SW");
-				addSpeaker(fortify_dwall_tmp.guard1,"W1");
-				addSpeaker(fortify_dwall_tmp.guard2,"W2");
+				addSpeaker(soren_windclaw,"Soren");
+				addSpeaker(fortify_dwall_tmp.guard1,"Tolec");
+				addSpeaker(fortify_dwall_tmp.guard2,"Derred");
+
 				addSpeaker(trigger.player,"Player");
 				addStandardSpeakers("elCnlLobby","locParty");
 				setCutsceneMode(true);
@@ -382,10 +545,10 @@
 			</Condition>
 			<Effect>
 				createDialogue();
-				addSpeaker(soren_windclaw,"SW");
-				addSpeaker(fortify_dwall_tmp.guard1,"W1");
-				addSpeaker(fortify_dwall_tmp.guard2,"W2");
-				addSpeaker(trigger.player,"Player");
+				addSpeaker(soren_windclaw,"Soren");
+				addSpeaker(fortify_dwall_tmp.guard1,"Tolec");
+				addSpeaker(fortify_dwall_tmp.guard2,"Derred");
+
 				addStandardSpeakers("elCnlLobby","locParty");
 				setCutsceneMode(true);
 				setTopicBase("Soren Windclaw");
