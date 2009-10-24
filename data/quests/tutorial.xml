@@ -119,6 +119,9 @@
 					
 					tutorial_tmp.louses =0;
 					tutorial_tmp.louse_count = 4;
+					
+					set(tutorial_tmp.tolec,"ignored_by_ai",true);
+					set(tutorial_tmp.derred,"ignored_by_ai",true);
 				end;
 				
 				door = getObjectByNameRef("doorSouth");
