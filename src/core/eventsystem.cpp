@@ -235,7 +235,23 @@ void EventSystem::reportErrors(lua_State *L, int status, const char* instr)
 		lua_pop(L, 1); // remove error message
 		if (instr != 0)
 		{
-			DEBUG("lua code: \n%s",instr);
+			std::string cstr = instr;
+			std::string line;
+			size_t pos=0;
+			size_t pos2 = cstr.find('\n',pos);
+			int n=1;
+			while (pos2 != std::string::npos)
+			{
+				line = cstr.substr(pos, pos2-pos);
+				printf("%3i %s\n",n,line.c_str());
+				
+				pos = pos2+1;
+				pos2 = cstr.find('\n',pos);
+				n++;
+			}
+			
+			line = cstr.substr(pos);
+			printf("%3i %s\n",n,line.c_str());
 		}
 	}
 }
