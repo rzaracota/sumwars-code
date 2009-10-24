@@ -28,9 +28,6 @@
 						set(fortify_dwall_tmp.derred,"ai_state","inactive");
 						setRefName(fortify_dwall_tmp.derred, "Derred");
 						set(fortify_dwall_tmp.derred,"angle",90);
-					else
-						fortify_dwall_tmp.derred = tutorial_tmp.derred;
-						fortify_dwall_tmp.tolec = tutorial_tmp.tolec;
 					end;
 				end;
 			</Effect>	
@@ -52,7 +49,7 @@
 	<NPC refname="Tolec">
 		<Topic name="start_scene1" start_option="Windklaue sprechen">
 			<Condition>
-				return (tutorial.finished == true and fortify_dwarfenwall.scene1 ~= true)
+				return (tutorial.finished == true and fortify_dwall.scene1 ~= true)
 			</Condition>
 			<Effect>
 				insertTrigger("start_scene1");
@@ -307,7 +304,7 @@
 		
 		<Topic name="add_elemental">
 			<Effect>
-				fortify_dwarfenwall_tmp.fire_elemental = createObject("fireElemS","locParty");
+				fortify_dwall_tmp.fire_elemental = createObject("fireElemS","locParty");
 			</Effect>
 		</Topic>
 		
@@ -332,8 +329,8 @@
 				local players = getPlayers();
 				local i,player;
 				for i,player in ipairs(players) do
-					if (getPlayerPrivateVar(player,"fortify_dwarfenwall.reward") ~= true) then
-						setPlayerPrivateVar(player,"fortify_dwarfenwall.reward",true);
+					if (getPlayerPrivateVar(player,"fortify_dwall.reward") ~= true) then
+						setPlayerPrivateVar(player,"fortify_dwall.reward",true);
 						setObjectValue(player,"gold", getObjectValue(player,"gold") + 200);
 					end;
 				end;
@@ -344,8 +341,8 @@
 		
 		<Topic name="end_cutscene1">
 			<Effect>
-				fortify_dwarfenwall.scene1 = true;
-				fortify_dwarfenwall.started = true;
+				fortify_dwall.scene1 = true;
+				fortify_dwall.started = true;
 				setCutsceneMode(false);
 			</Effect>
 		</Topic>
@@ -356,7 +353,7 @@
 		
 		<Event trigger="player_moved" once="true">
 			<Condition>
-				if (fortify_dwarfenwall.scene1 ~= true) then
+				if (fortify_dwall.scene1 ~= true) then
 					return (unitIsInArea(trigger.player,"SorenWindclawArea"));
 				else
 					return false;
@@ -365,8 +362,8 @@
 			<Effect>
 				createDialogue();
 				addSpeaker(soren_windclaw,"SW");
-				addSpeaker(fortify_dwarfenwall_tmp.guard1,"W1");
-				addSpeaker(fortify_dwarfenwall_tmp.guard2,"W2");
+				addSpeaker(fortify_dwall_tmp.guard1,"W1");
+				addSpeaker(fortify_dwall_tmp.guard2,"W2");
 				addSpeaker(trigger.player,"Player");
 				addStandardSpeakers("elCnlLobby","locParty");
 				setCutsceneMode(true);
@@ -377,7 +374,7 @@
 		
 		<Event trigger ="unit_die">
 			<Condition>
-				if (trigger.unit == fortify_dwarfenwall_tmp.fire_elemental) then
+				if (trigger.unit == fortify_dwall_tmp.fire_elemental) then
 					return true;
 				else
 					return false;
@@ -386,8 +383,8 @@
 			<Effect>
 				createDialogue();
 				addSpeaker(soren_windclaw,"SW");
-				addSpeaker(fortify_dwarfenwall_tmp.guard1,"W1");
-				addSpeaker(fortify_dwarfenwall_tmp.guard2,"W2");
+				addSpeaker(fortify_dwall_tmp.guard1,"W1");
+				addSpeaker(fortify_dwall_tmp.guard2,"W2");
 				addSpeaker(trigger.player,"Player");
 				addStandardSpeakers("elCnlLobby","locParty");
 				setCutsceneMode(true);

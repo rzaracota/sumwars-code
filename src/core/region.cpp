@@ -1367,7 +1367,7 @@ bool Region::changeObjectLayer(WorldObject* object,WorldObject::Layer layer)
 				Gridunit *gu = (m_data_grid->ind(x_g,y_g));
 
 				result = gu->insertObject(object);
-				DEBUG("insert into grid %i %i",x_g,y_g);
+				DEBUG5("insert into grid %i %i",x_g,y_g);
 			}
 		}
 	}
@@ -1390,7 +1390,7 @@ bool Region::changeObjectLayer(WorldObject* object,WorldObject::Layer layer)
 			// aus dem Grid loeschen
 			int x = object->getGridLocation()->m_grid_x;
 			int y = object->getGridLocation()->m_grid_y;
-			DEBUG("deleting object in grid tile %i %i",x,y);
+			DEBUG5("deleting object in grid tile %i %i",x,y);
 			
 			Gridunit *gu = (m_data_grid->ind(x,y));
 			result = gu->deleteObject(object);

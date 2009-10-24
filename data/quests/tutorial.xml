@@ -1035,7 +1035,7 @@
 			</Condition>	
 			<Effect>
 				if (trigger.success ~= true) then
-					addUnitCommand(tutorial_tmp.slugs[i],"walk","locMutantSlugs");
+					addUnitCommand(trigger.unit,"walk","locMutantSlugs");
 					return;
 				end;
 				
@@ -1351,7 +1351,7 @@
 			<Effect>
 				if (tutorial_tmp.louse_count ~= 4) then
 					tutorial_tmp.louse_count = tutorial_tmp.louse_count +1;
-					tutorial_tmp.louse[tutorial_tmp.louse_count] = createObject("fireLouse",tutorial_tmp.lousepos);
+					tutorial_tmp.louse[tutorial_tmp.louse_count] = createObject("fireLouse",tutorial_tmp.lousepos,270);
 					addUnitCommand(tutorial_tmp.louse[tutorial_tmp.louse_count], "walk","locLouses",2);
 					startTimer("create_louse",2500+math.random(1500));
 				else
@@ -1434,11 +1434,14 @@
 					addUnitCommand(tutorial_tmp.derred,"walk","locBackroute6",4);
 					addUnitCommand(tutorial_tmp.tolec,"walk","locBackroute6",4);
 					tutorial_tmp.door = getObjectByNameRef("doorScene1");
-					addUnitCommand(tutorial_tmp.derred,"walk",tutorial_tmp.door,1);
-					addUnitCommand(tutorial_tmp.tolec,"walk",tutorial_tmp.door,1);
+					addUnitCommand(tutorial_tmp.derred,"walk","locDerredScene1",1);
+					addUnitCommand(tutorial_tmp.tolec,"walk","locTolecScene1",1);
 					
 					tutorial.finished = true;
 					tutorial.phase="finished";
+					
+					fortify_dwall_tmp.derred = tutorial_tmp.derred;
+					fortify_dwall_tmp.tolec = tutorial_tmp.tolec;
 				end;
 			</Effect>
 		</Event>
