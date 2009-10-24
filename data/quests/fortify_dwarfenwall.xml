@@ -192,6 +192,7 @@
 					speak("Tolec",_("Er erwartet euch jetzt"));
 				end;
 				executeInDialog("insertTrigger('enter_soren_room')");
+
 			</Effect>
 		</Event>
 		
@@ -227,7 +228,7 @@
 		
 		<Event trigger="party_complete" once="true">
 			<Condition>
-				return (fortify_dwall_tmp.assemble == "intro");
+				return (fortify_dwall_tmp.assemble == "scene1");
 			</Condition>
 			<Effect>
 				fortify_dwall_tmp.assemble = nil;
@@ -249,7 +250,7 @@
 				
 				-- Beide Wachen verschwinden aus dem Raum.
 				
-				speak"magopt",_("Nice shack!"),"sneer");
+				speak("magopt",_("Nice shack!"),"sneer");
 				speak("waropt",_("Well, the corners are a bit dirty though."),"thoughtful");
 				speak("waropt",_("...um nicht zu sagen: schleimig."),"grin");
 				speak("priest",_("Those ritual objects have seen better times, too."));
@@ -257,9 +258,9 @@
 				speak("waropt",_("Difficult?"),"surprised");
 				speak("waropt",_("You're putting in so much effort,"),"sneer");
 				speak("waropt",_("and everything you get is 'difficult'."));
-				speak"magopt",_("Pft. I feel like flaring off the whole place."),"unhappy");
+				speak("magopt",_("Pft. I feel like flaring off the whole place."),"unhappy");
 				local magopt = getSpeaker("magopt");
-				if (magopt ~= 0 and magopt ~= getSpeaker("any")) thrn
+				if (magopt ~= 0 and magopt ~= getSpeaker("any")) then
 					speak("any",_("With all those wimps here it's not really worth the effort, isn't it?"),"amused");
 				end;
 				speak("leader",_("Wenn noch mehr von Riesendinger frei kommen könnte das ein paar Schwierigkeiten machen..."));
@@ -296,14 +297,14 @@
 				speak("PL",_("Harad's curse has to have some advantage."));
 				speak("waropt",_("If only the pain wasn't so bad everytime..."),"sad");
 				if (getSpeaker("waropt") ~= getSpeaker("magopt")) then
-					speak"magopt",_("Even here you have to whine."));
+					speak("magopt",_("Even here you have to whine."));
 				end;
 				if (not solo) then
 					speak("Soren",_("You are indeed a bunch of trying people."));
 				else
 					speak("Soren",_("Ihr seid in der Tat eine schwierige Gestalt"));
 				end;
-				speak"magopt",_("He's beginning to make me angry."),"angry");
+				speak("magopt",_("He's beginning to make me angry."),"angry");
 				if (getSpeaker("priest") ~= getSpeaker("magopt")) then
 					speak("priest",_("Peace!"));
 				end;
@@ -344,10 +345,10 @@
 				-- Rechts und Links kann man aus den Keller merkwuerdige Geraeusche hoeren
 				-- und Magisch anmutende Dinge sehen.
 				
-				speak"magopt",_("As if that show would impress anyone..."));
+				speak("magopt",_("As if that show would impress anyone..."));
 				speak("waropt",_("Of course! We're at the Council of Summoners"));
 				speak("waropt",_("and you're still talking big?!"),1400);
-				speak"magopt",_("Why exactly was it that I put up with your company?"));
+				speak("magopt",_("Why exactly was it that I put up with your company?"));
 				speak("PL",_("Hush! You can argue later."));
 				speak("Tolec",_("We're here."));
 				
@@ -369,14 +370,14 @@
 				
 				-- Beide Wachen verschwinden aus dem Raum.
 				
-				speak"magopt",_("Nice shack!"));
+				speak("magopt",_("Nice shack!"));
 				speak("waropt",_("Well, the corners are a bit dirty though."));
 				speak("priest",_("Those ritual objects have seen better times, too."));
 				speak("Soren",_("Yes, they warned me that you're difficult."));
 				speak("waropt",_("Difficult?"));
 				speak("waropt",_("You're putting in so much efford,"));
 				speak("waropt",_("and everything you get is 'difficult'."));
-				speak"magopt",_("Pft. I feel like flaring off the whole place."));
+				speak("magopt",_("Pft. I feel like flaring off the whole place."));
 				speak("ANYast",_("With all those wimps here it's not really worth the efford, isn't it?"));
 				speak("PL",_("The elemental guards might be a hassle..."));
 				speak("priest",_("I know this nice little ban..."));
@@ -406,9 +407,9 @@
 				speak("Soren",_("The task is pretty dangerous and you are likely to die more than once."));
 				speak("PL",_("Harad's curse has to have some advantage."));
 				speak("waropt",_("If only the pain wasn't so bad everytime..."));
-				speak"magopt",_("Even here you have to whine."));
+				speak("magopt",_("Even here you have to whine."));
 				speak("Soren",_("You are indeed a bunch of trying people."));
-				speak"magopt",_("He's beginning to make me angry."));
+				speak("magopt",_("He's beginning to make me angry."));
 				speak("priest",_("Peace!"));
 				speak("Soren",_("The first thing you have to learn are obviously manners."));
 				speak("Soren",_("Consider it as a small bonus:"));
@@ -432,8 +433,8 @@
 		<Topic name="be_unkind_part1">
 			<Effect>
 				speak("PL",_("You consider yourself very mighty and clever, don't you?"));
-				speak"magopt",_("Surely he has written down that knowledge of his somewhere."));
-				speak"magopt",_("We can search for it after he's dead."));
+				speak("magopt",_("Surely he has written down that knowledge of his somewhere."));
+				speak("magopt",_("We can search for it after he's dead."));
 				speak("waropt",_("A good opportunity, indeed."));
 				speak("Soren",_("Yes, they warned me about that, too."));
 				
