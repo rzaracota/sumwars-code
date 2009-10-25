@@ -659,7 +659,7 @@ void Scene::updateCharacterView()
 	{
 		if (m_temp_player_object !=0)
 		{
-			// m_temp_player_object->updateAction("attack",0.5);
+			m_temp_player_object->updateAction("noaction",0.5);
 			m_temp_player_object->update(0);
 		}
 		

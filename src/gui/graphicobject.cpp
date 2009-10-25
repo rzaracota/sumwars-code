@@ -733,6 +733,8 @@ void GraphicObject::update(float time)
 			gt->second.m_tag_trackpoint->setPosition(pos);
 			gt->second.m_tag_trackpoint->setOrientation(dir);
 			gt->second.m_tag_trackpoint->setScale(scal);
+			
+			DEBUG5("attch position %s   %f %f %f",obj->getName().c_str(), pos.x, pos.y,pos.z);
 		}
 		
 		obj->update(time);
@@ -868,6 +870,7 @@ void GraphicObject::updateRenderPart(ActionRenderpart* part,float  relpercent)
 				{
 					anim->setEnabled(true);
 					anim->setTimePosition(relpercent*anim->getLength());
+					ent->_updateAnimation();
 				}
 			}
 		}
