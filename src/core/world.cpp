@@ -1703,7 +1703,7 @@ void World::updatePlayers()
 				// Anzahl der NetEvents
 
 				reg = pl->getRegion();
-				if (pl->getState() != WorldObject::STATE_ACTIVE && pl->getState() != WorldObject::STATE_DEAD && pl->getState() != WorldObject::STATE_DIEING)
+				if (pl->getState() != WorldObject::STATE_ACTIVE && pl->getState() != WorldObject::STATE_DEAD && pl->getState() != WorldObject::STATE_DIEING && pl->getState() != WorldObject::STATE_INACTIVE)
 				{
 					reg =0;
 				}

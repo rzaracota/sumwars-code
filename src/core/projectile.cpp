@@ -601,12 +601,15 @@ void Projectile::doEffect(GameObject* target)
 		}
 		else if (*kt == "create_projectile")
 		{
-			Projectile* pr = ObjectFactory::createProjectile(pdata->m_new_projectile_type);
-			if (pr !=0)
+			if (World::getWorld()->isServer())
 			{
-				pr->setDamage(m_damage);
-				pr->setSpeed(getSpeed());
- 				getRegion()->insertProjectile(pr,getShape()->m_center);
+				Projectile* pr = ObjectFactory::createProjectile(pdata->m_new_projectile_type);
+				if (pr !=0)
+				{
+					pr->setDamage(m_damage);
+					pr->setSpeed(getSpeed());
+					getRegion()->insertProjectile(pr,getShape()->m_center);
+				}
 			}
 		}
 		else if (*kt == "thunderstorm")
@@ -659,11 +662,14 @@ void Projectile::doEffect(GameObject* target)
 				DEBUG5("hit obj %i",hit->getId());
 
 				// beim Ziel neues Projektil erzeugen
-				Projectile* pr = ObjectFactory::createProjectile(pdata->m_new_projectile_type);
-				if (pr !=0)
+				if (World::getWorld()->isServer())
 				{
-					pr->setDamage(m_damage);
-					getRegion()->insertProjectile(pr,hit->getShape()->m_center);
+					Projectile* pr = ObjectFactory::createProjectile(pdata->m_new_projectile_type);
+					if (pr !=0)
+					{
+						pr->setDamage(m_damage);
+						getRegion()->insertProjectile(pr,hit->getShape()->m_center);
+					}
 				}
 			}
 		}
@@ -684,16 +690,19 @@ void Projectile::destroy()
 	
 	if (m_flags & EXPLODES)
 	{
-		Projectile* pr = ObjectFactory::createProjectile(pdata->m_new_projectile_type);
-		if (pr !=0)
+		if (World::getWorld()->isServer())
 		{
-			pr->setDamage(m_damage);
-			getRegion()->insertProjectile(pr,getShape()->m_center);
-			pr->setSpeed(getSpeed());
-			
-			if (m_flags & MULTI_EXPLODES)
+			Projectile* pr = ObjectFactory::createProjectile(pdata->m_new_projectile_type);
+			if (pr !=0)
 			{
-				pr->addFlags(MULTI_EXPLODES);
+				pr->setDamage(m_damage);
+				getRegion()->insertProjectile(pr,getShape()->m_center);
+				pr->setSpeed(getSpeed());
+				
+				if (m_flags & MULTI_EXPLODES)
+				{
+					pr->addFlags(MULTI_EXPLODES);
+				}
 			}
 		}
 	}
@@ -714,43 +723,45 @@ void Projectile::destroy()
 		}
 
 		// vier neue Projektile erzeugen
-		dir.rotate(PI / 4);
-		Projectile* pr;
-		pr = ObjectFactory::createProjectile(getSubtype());
-		if (pr != 0)
+		if (World::getWorld()->isServer())
 		{
-			pr->setDamage(&dmg);
-			pr->setMaxRadius(1);
-			getRegion()->insertProjectile(pr,getPosition() + dir );
+			dir.rotate(PI / 4);
+			Projectile* pr;
+			pr = ObjectFactory::createProjectile(getSubtype());
+			if (pr != 0)
+			{
+				pr->setDamage(&dmg);
+				pr->setMaxRadius(1);
+				getRegion()->insertProjectile(pr,getPosition() + dir );
+			}
+								
+			dir.rotate(PI / 2);
+			pr = ObjectFactory::createProjectile(getSubtype());
+			if (pr != 0)
+			{
+				pr->setDamage(&dmg);
+				pr->setMaxRadius(1);
+				getRegion()->insertProjectile(pr,getPosition() + dir);
+			}
+	
+			dir.rotate(PI / 2);
+			pr = ObjectFactory::createProjectile(getSubtype());
+			if (pr != 0)
+			{
+				pr->setDamage(&dmg);
+				pr->setMaxRadius(1);
+				getRegion()->insertProjectile(pr,getPosition() + dir);
+			}
+	
+			dir.rotate(PI / 2);
+			pr = ObjectFactory::createProjectile(getSubtype());
+			if (pr != 0)
+			{
+				pr->setDamage(&dmg);
+				pr->setMaxRadius(1);
+				getRegion()->insertProjectile(pr,getPosition() + dir);
+			}
 		}
-							
-		dir.rotate(PI / 2);
-		pr = ObjectFactory::createProjectile(getSubtype());
-		if (pr != 0)
-		{
-			pr->setDamage(&dmg);
-			pr->setMaxRadius(1);
-			getRegion()->insertProjectile(pr,getPosition() + dir);
-		}
-
-		dir.rotate(PI / 2);
-		pr = ObjectFactory::createProjectile(getSubtype());
-		if (pr != 0)
-		{
-			pr->setDamage(&dmg);
-			pr->setMaxRadius(1);
-			getRegion()->insertProjectile(pr,getPosition() + dir);
-		}
-
-		dir.rotate(PI / 2);
-		pr = ObjectFactory::createProjectile(getSubtype());
-		if (pr != 0)
-		{
-			pr->setDamage(&dmg);
-			pr->setMaxRadius(1);
-			getRegion()->insertProjectile(pr,getPosition() + dir);
-		}
-
 	}
 	
 	
