@@ -40,7 +40,7 @@
 
 <RenderInfo name = "soren" parent="guardPole">
 	<Entity source="soren.mesh"/>
-	<Entity objectname="head" bone="crown" source="head_m2.mesh" />
+	<Entity objectname="head" bone="crown" source="head_m1.mesh" />
 	<Entity objectname="hat" bone="crown" source="turban_hat.mesh" />
 	<Subobject objectname="robe" source="counclRobeSoren" />
 	<Entity objectname="weapon" bone="itemRightHand" source="council_stf.mesh" />

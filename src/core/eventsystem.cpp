@@ -157,6 +157,7 @@ void  EventSystem::cleanup()
 
 void EventSystem::doString(const char* instructions)
 {
+	//DEBUG("instr %s",instructions);
 	int err  = luaL_dostring(m_lua, instructions);
 
 	if (err!=0)
@@ -190,6 +191,12 @@ bool EventSystem::executeCodeReference(int coderef)
 {
 	if (coderef ==LUA_NOREF)
 		return true;
+	/*
+#ifdef DEBUG_DATABASE
+	const char* instr = m_code_fragments[coderef].c_str();
+	DEBUG("instr %s",instr);
+#endif
+	*/	
 	
 	lua_rawgeti(EventSystem::getLuaState(),LUA_REGISTRYINDEX , coderef);
 	int err = lua_pcall(EventSystem::getLuaState(), 0, LUA_MULTRET, 0);
@@ -198,6 +205,7 @@ bool EventSystem::executeCodeReference(int coderef)
 		
 #ifdef DEBUG_DATABASE
 		const char* instr = m_code_fragments[coderef].c_str();
+		DEBUG("instr %s",instr);
 #else
 		char* instr =0;
 #endif

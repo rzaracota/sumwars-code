@@ -259,7 +259,7 @@ void Dialogue::addSpeaker(int id, std::string refname, bool force)
 
 void Dialogue::removeSpeaker(int id)
 {
-	DEBUG("remove %i",id);
+	DEBUG5("remove %i",id);
 	WorldObject* wo =0;
 	wo = m_region->getObject(id);
 	Creature* cr = dynamic_cast<Creature*>(wo);

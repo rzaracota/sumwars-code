@@ -4354,6 +4354,22 @@ bool Creature::setValue(std::string valname)
 	ret = m_dyn_attr.setValue(valname, getEventMaskRef());
 	if (ret >0)
 	{
+		if (m_dyn_attr.m_health >0 && (getState() == STATE_DIEING || getState() == STATE_DEAD))
+		{
+			if (getType() == "PLAYER")
+			{
+				getRegion()->changeObjectGroup(this,PLAYER);
+			}
+			else
+			{
+				getRegion()->changeObjectGroup(this,CREATURE);
+			}
+			setState(STATE_ACTIVE);
+			
+			m_action.m_type ="noaction";
+			m_action.m_elapsed_time =0;
+			addToNetEventMask(NetEvent::DATA_ACTION | NetEvent::DATA_STATE);
+		}
 		return ret;
 	}
 	

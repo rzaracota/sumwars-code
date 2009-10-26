@@ -37,6 +37,88 @@ SlugSpit
 
 }
 
+//blockade of fire
+FirewallBlock
+{
+    material        Flare
+    particle_width  30
+    particle_height 30
+	cull_each       false
+    quota           10000
+    billboard_type  point
+    
+    // Area emitter
+    emitter Cylinder
+{
+        angle           30
+        emission_rate   400
+        time_to_live    5
+        direction       0 1 0
+        velocity    	0
+        colour_range_start  1 0 0
+        colour_range_end    0.5 0.5 0
+        width           50
+        height          250
+        depth           60
+}
+
+    // Make em float upwards
+    affector LinearForce
+{
+        force_vector      0 100 0
+        force_application add
+}
+
+    // Fader
+    affector ColourFader
+{
+        red -0.25
+        green -0.25
+        blue -0.25
+}
+
+
+}
+// cage of fire
+FireCage
+{
+    material        Flare
+    particle_width  20
+    particle_height 20
+	cull_each       false
+    quota          	3000
+    billboard_type  point
+    
+    // Area emitter
+    emitter Ring
+{
+        angle           10
+        emission_rate   1500
+        time_to_live    1.5
+        direction       0 1 0
+        velocity    	0
+        colour_range_start  1 0 0
+        colour_range_end    0.5 0.5 0
+        width           150
+        height          150
+        depth           20
+}
+
+    // Make em float upwards
+    affector LinearForce
+{
+        force_vector      0 100 0
+        force_application add
+}
+
+    // Fader
+    affector ColourFader
+{
+        red -0.25
+        green -0.25
+        blue -0.25
+}
+}
 //Lich - summon_skel
 Earth
 {

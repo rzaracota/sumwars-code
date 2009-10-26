@@ -266,6 +266,14 @@
             probability="1" 
             prob_angle="false" 
     />
+    <Object subtype="$tube_ring" 
+            center_x="-1" 
+            center_y="26" 
+			height="6.938893904e-018" 
+            angle="-90" 
+            probability="1" 
+            prob_angle="false" 
+    />
     <Object subtype="houseAisen1" 
             center_x="-12.2695192" 
             center_y="-3.057014151" 
@@ -418,14 +426,25 @@
             probability="1" 
             prob_angle="false" 
     />
+    <Object subtype="tube1" 
+            center_x="-1" 
+            center_y="35" 
+            angle="-90" 
+            probability="1" 
+            prob_angle="false" 
+    />
   </ObjectContent>
 
   <Locations>
     <Location name="entry_north" pos_x="-0.5" pos_y="-14.5" />
     <Location name="entry_south" pos_x="-1" pos_y="16" />
     <Location name="exit_north" pos_x="-0.5" pos_y="-20.5" />
-    <Location name="exit_south" pos_x="-1" pos_y="20.5" />
-    <Location name="locScene2" pos_x="-1.5" pos_y="4" />
+    <Location name="exit_south" pos_x="-1" pos_y="21" />
+    <Location name="locScene3" pos_x="-1.5" pos_y="8.16927167" />
   </Locations>
+
+  <Areas>
+    <Area name="areaScene3" angle="-0" center_x="-1.459536582" center_y="4.157435558" type="RECT" extent_x="3.727006319" extent_y="1.629652967" />
+  </Areas>
 
 </ObjectGroupTemplate>

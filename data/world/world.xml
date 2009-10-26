@@ -72,7 +72,6 @@
 		<Relation fraction="undead" relation="hostile" />
 	</Fraction>
 
-
 <!-- Lobby Konzilshalle der Elemtarmagier [fester Ort; Saeulenhalle im roemischen Stil] -->
 <!-- Orte: Soren Windclaw -->
 	<Region id="2" name="elCnlLobby">

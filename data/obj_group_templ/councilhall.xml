@@ -5907,7 +5907,7 @@
     <Object subtype="$cupboard" 
             center_x="40.79580589" 
             center_y="9.334773712" 
-			height="-4.371503159e-016" 
+			height="-4.440892099e-016" 
             angle="13.63607916" 
             probability="1" 
             prob_angle="false" 
@@ -7190,7 +7190,7 @@
     <Object subtype="$vase" 
             center_x="44" 
             center_y="23" 
-			height="3.191891196e-016" 
+			height="3.261280135e-016" 
             angle="0" 
             probability="1" 
             prob_angle="false" 
@@ -7294,7 +7294,7 @@
     <Object subtype="$vase" 
             center_x="46.5" 
             center_y="26" 
-			height="3.191891196e-016" 
+			height="3.261280135e-016" 
             angle="0" 
             probability="1" 
             prob_angle="false" 
@@ -7302,7 +7302,7 @@
     <Object subtype="$vase" 
             center_x="41" 
             center_y="24.5" 
-			height="3.191891196e-016" 
+			height="3.261280135e-016" 
             angle="0" 
             probability="1" 
             prob_angle="false" 
@@ -7310,7 +7310,7 @@
     <Object subtype="$vase" 
             center_x="41" 
             center_y="27.5" 
-			height="3.191891196e-016" 
+			height="3.261280135e-016" 
             angle="0" 
             probability="1" 
             prob_angle="false" 
@@ -7318,7 +7318,7 @@
     <Object subtype="$vase" 
             center_x="44" 
             center_y="29" 
-			height="3.191891196e-016" 
+			height="3.261280135e-016" 
             angle="0" 
             probability="1" 
             prob_angle="false" 
@@ -12116,6 +12116,8 @@
     <Location name="locElemental" pos_x="23" pos_y="-43" />
     <Location name="locEntryPlayer" pos_x="75.5" pos_y="83" />
     <Location name="locEvilMachine" pos_x="70.5" pos_y="81" />
+    <Location name="locFireWallEast" pos_x="32.79829631" pos_y="-44.42756119" />
+    <Location name="locFireWallWest" pos_x="1.266581572" pos_y="-44.22557157" />
     <Location name="locGuard1" pos_x="52.5" pos_y="-65" />
     <Location name="locGuard2" pos_x="-17.5" pos_y="-65" />
     <Location name="locGuard3" pos_x="19.5" pos_y="-42.5" />

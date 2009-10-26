@@ -15,8 +15,10 @@
 		<Event trigger="create_region" once="true">
 			<Effect>
 				if (fortify_dwall.scene1 ~= true) then
-					fortify_dwall_tmp.soren = createObject("peasant", "locSorenWindclaw");
+					fortify_dwall_tmp.soren = createObject("soren", "locSorenWindclaw");
 					setRefName(fortify_dwall_tmp.soren, "Soren Windclaw");
+					set(fortify_dwall_tmp.soren,"angle",-90);
+					set(fortify_dwall_tmp.soren,"fraction","neutral_to_all");
 					
 					if (tutorial.finished == true) then
 						fortify_dwall_tmp.tolec = createObject("tolec", "locTolecScene1");
@@ -133,6 +135,9 @@
 				if (mageopt ~= waropt) then
 					speak("waropt",_("Na klar! Jetzt hast du wieder eine große Klappe."),"unhappy");
 					speak("magopt",_("Warum gebe ich mich doch gleich mit deiner Gesellschaft ab?"),"grin");
+					if (leader ~= mageopt and leader ~= waropt) then
+						speak("leader",_("Scht! Streiten könnt ihr euch später."));
+					end;
 				end;
 				speak("Tolec",_("Endlich sind wir da!"),"excited");
 				executeInDialog("insertTrigger('guard_scene1_walk3')");
@@ -226,6 +231,37 @@
 			</Effect>
 		</Event>
 		
+		<Event trigger="guards_out" once="true">
+			<Effect>
+				addUnitCommand(fortify_dwall_tmp.tolec,"walk","locGuardsAway");
+				addUnitCommand(fortify_dwall_tmp.derred,"walk","locGuardsAway");
+				addUnitCommand(fortify_dwall_tmp.tolec,"walk","locGuard1");
+				addUnitCommand(fortify_dwall_tmp.derred,"walk","locGuard1");
+				
+				local door = getObjectByNameRef("doorSorenSouth");
+				door_setopen(door,false);
+				scriptobjectvar[door]["locked"] = true;
+			</Effect>
+		</Event>
+		
+		<Event trigger="unit_moved" >
+			<Condition>
+				return ((trigger.unit == fortify_dwall_tmp.tolec or trigger.unit == fortify_dwall_tmp.derred) and unitIsInArea(trigger.unit,"areaGuardAway"))
+			</Condition>	
+			<Effect>
+				timedExecute("deleteObject("..trigger.unit..")",100);
+			</Effect>
+		</Event>
+		
+		<Event trigger="turn_soren" once="true">
+			<Effect>
+				timedExecute("set(fortify_dwall_tmp.soren,'angle',-45)",0);
+				timedExecute("set(fortify_dwall_tmp.soren,'angle',0)",300);
+				timedExecute("set(fortify_dwall_tmp.soren,'angle',45)",600);
+				timedExecute("set(fortify_dwall_tmp.soren,'angle',90)",900);
+			</Effect>
+		</Event>
+		
 		<Event trigger="party_complete" once="true">
 			<Condition>
 				return (fortify_dwall_tmp.assemble == "scene1");
@@ -236,19 +272,25 @@
 				
 				createDialogue();
 				addAllPlayersToDialog();
+				addStandardRoles();
+				
 				addSpeaker(fortify_dwall_tmp.tolec,"Tolec",true);
 				addSpeaker(fortify_dwall_tmp.derred,"Derred",true);
 				addSpeaker(fortify_dwall_tmp.soren,"Soren",true);
 				
+				addCameraPosition(3000,"locCamera", -90,60, 30);
+				
 				local solo = (getPlayers()[2] == nil);
+				local magopt = getSpeaker("magopt");
 				
-				speak("Soren",_("You're presence is no longer 	needed."));
-				speak("Tolec",_("But my Lord, those are"));
-				speak("Soren",_("..."));
-				speak("Tolec",_("As you wish. My apologies."));
-				speak("Derred",_("Come on, he knows what he's doing."));
+				speak("Soren",_("You're presence is no longer needed."),"aloof");
+				speak("Tolec",_("But my Lord, those are"),"surprised");
+				executeInDialog("insertTrigger('turn_soren')");
+				speak("Soren",_("..."),"threaten",2500);
+				speak("Tolec",_("As you wish. My apologies."),"fear");
+				speak("Derred",_("Come on, he knows what he's doing."),"fear");
 				
-				-- Beide Wachen verschwinden aus dem Raum.
+				executeInDialog("insertTrigger('guards_out')");
 				
 				speak("magopt",_("Nice shack!"),"sneer");
 				speak("waropt",_("Well, the corners are a bit dirty though."),"thoughtful");
@@ -262,18 +304,18 @@
 				local magopt = getSpeaker("magopt");
 				if (magopt ~= 0 and magopt ~= getSpeaker("any")) then
 					speak("any",_("With all those wimps here it's not really worth the effort, isn't it?"),"amused");
+					speak("leader",_("Wenn noch mehr von Riesendinger frei kommen könnte das ein paar Schwierigkeiten machen..."));
+					speak("arcopt",_("Und die Chance ist recht hoch... die Monster hier haben schließlich alle ihren eigenen Kopf."),"grin");
+					speak("priest",_("I know this nice little ban..."));
 				end;
-				speak("leader",_("Wenn noch mehr von Riesendinger frei kommen könnte das ein paar Schwierigkeiten machen..."));
-				speak("arcopt",_("Und die Chance ist recht hoch... die Monster hier haben schließlich alle ihren eigenen Kopf."),"grin");
-				speak("priest",_("I know this nice little ban..."));
-				speak("Soren",_("Would you please take a quick look at this crystall."),"bored");
+				speak("Soren",_("Would you please take a quick look at this stone."),"bored");
 				
 				-- Er haelt einen Kristall in die Luft. Die Gruppe verstummt sofort und
 				-- dreht sich in Richtung des Gegenstandes.
 				
 				speak("any",_("Is that a...?"),"fear");
 				speak("Soren",_("Quite so."),"grin");
-				speak("Soren",_("It is a crystall straight from the heart of Harad's hell."));
+				speak("Soren",_("It is a stone straight from the heart of Harad's hell."));
 				speak("PL",_("How is it possible that you're still alive?"),"surprised");
 				speak("Soren",_("Indeed the right question."),"grin");
 				speak("Soren",_("With an answer, that could release every one of you from your suffering."));
@@ -321,121 +363,37 @@
 					speak("any",_("Nur ein Mensch!!"),"warcry");
 				end;
 				speak("Soren",_("You obviously misjudge your position."),"normal");
-				speak("Soren",_("What do you think will happen, if your revealed in town?."));
+				speak("Soren",_("What do you think will happen, if your revealed in town?"));
 				speak("Soren",_("We know everything about your kind,"));
 				speak("Soren",_("and believe me, no one will be stupid enough to kill you."));
 				
+				setTopicBase("Soren Windclaw");
 				addQuestion(_("Continue to be snotty?"));
-				addAnswer(_("Yes"),"be_unkind_part1");
+				addAnswer(_("Yes"),"be_unkind");
 				addAnswer(_("No"),"be_kind");
 			</Effect>
 		</Event>
-		
+
 	</Region>
 	
 	
 		
 	<NPC refname="Soren Windclaw">
-		<Topic name="scene1_dialogue">
+		<Topic name="be_unkind">
 			<Effect>
-				addCameraPosition(0,get(getRole("PL"),"position"),20,40,20);
-				addCameraPosition(20000,get(getRole("PL"),"position"),220,60,30);
+				local solo = (getPlayers()[2] == nil);
 				
-				-- Die Helden werden von mehreren Waechtern durch einen Gang geführt.
-				-- Rechts und Links kann man aus den Keller merkwuerdige Geraeusche hoeren
-				-- und Magisch anmutende Dinge sehen.
-				
-				speak("magopt",_("As if that show would impress anyone..."));
-				speak("waropt",_("Of course! We're at the Council of Summoners"));
-				speak("waropt",_("and you're still talking big?!"),1400);
-				speak("magopt",_("Why exactly was it that I put up with your company?"));
-				speak("PL",_("Hush! You can argue later."));
-				speak("Tolec",_("We're here."));
-				
-				-- Die Tuer wird geoeffnet und die Gruppe tritt in einen Art geheimen
-				-- Verschwoerungsraum. Das Licht ist reduziert und roetlich. Alles deutet
-				-- auf schmerzhafte Experimente hin. Auf einem erhoehten Podest steht ein
-				-- hoch gewachsener Magier mit dem Ruecken zur Gruppe.
-				
-				speak("ANYast",_("Do you feel that??!"));
-				speak("ANYast",_("It feels like..."));
-				speak("PL",_("Quiet!"));
-				speak("Derred",_("My Lord! The... Branded Ones are here now."));
-				speak("Soren",_("Very well."));
-				speak("Soren",_("You're presence is no longer 	needed."));
-				speak("Tolec",_("But my Lord, those are"));
-				speak("Soren",_("..."));
-				speak("Tolec",_("As you wish. My apologies."));
-				speak("Derred",_("Come on, he knows what he's doing."));
-				
-				-- Beide Wachen verschwinden aus dem Raum.
-				
-				speak("magopt",_("Nice shack!"));
-				speak("waropt",_("Well, the corners are a bit dirty though."));
-				speak("priest",_("Those ritual objects have seen better times, too."));
-				speak("Soren",_("Yes, they warned me that you're difficult."));
-				speak("waropt",_("Difficult?"));
-				speak("waropt",_("You're putting in so much efford,"));
-				speak("waropt",_("and everything you get is 'difficult'."));
-				speak("magopt",_("Pft. I feel like flaring off the whole place."));
-				speak("ANYast",_("With all those wimps here it's not really worth the efford, isn't it?"));
-				speak("PL",_("The elemental guards might be a hassle..."));
-				speak("priest",_("I know this nice little ban..."));
-				speak("Soren",_("Would you please take a quick look at this crystall."));
-				
-				-- Er haelt einen Kristall in die Luft. Die Gruppe verstummt sofort und
-				-- dreht sich in Richtung des Gegenstandes.
-				
-				speak("ANY",_("Is that a...?"));
-				speak("Soren",_("Quite so."));
-				speak("Soren",_("It is a crystall straight from the heart of Harad's hell."));
-				speak("PL",_("How is it possible that you're still alive?"));
-				speak("Soren",_("Indeed the right question."));
-				speak("Soren",_("With an answer, that could release every one of you from your suffering."));
-				speak("Soren",_("But before I give it to you, you have to do something for me."));
-				speak("ANYast",_("May Harad curse you!"));
-				speak("Soren",_("Maybe he has time for that after he is done with you."));
-				speak("Soren",_("Until then you should remember that it is entirely in you hands"));
-				speak("Soren",_("how long you will be under this curse."));
-				speak("Soren",_("Fulfil my orders to the councils satisfaction"));
-				speak("Soren",_("and I have the power to release you of the claws of the deathgod."));
-				speak("Soren",_("If not, however..."));
-				speak("PL",_("We know that one allready. Cut the speach."));
-				speak("ANYast",_("What?!"));
-				speak("ANYast",_("The curse can be taken from us? Why do I hear this only know?"));
-				speak("Soren",_("As you wish."));
-				speak("Soren",_("The task is pretty dangerous and you are likely to die more than once."));
-				speak("PL",_("Harad's curse has to have some advantage."));
-				speak("waropt",_("If only the pain wasn't so bad everytime..."));
-				speak("magopt",_("Even here you have to whine."));
-				speak("Soren",_("You are indeed a bunch of trying people."));
-				speak("magopt",_("He's beginning to make me angry."));
-				speak("priest",_("Peace!"));
-				speak("Soren",_("The first thing you have to learn are obviously manners."));
-				speak("Soren",_("Consider it as a small bonus:"));
-				speak("Soren",_("Before your real assignment you will go to dwarfenwall as backup."));
-				speak("Soren",_("Show the undead there who the real favourite of the deathgod is."));
-				speak("PL",_("Smells like exploitation."));
-				speak("PRI",_("Besides the necromancers don't follow Harad."));
-				speak("ANYplus",_("This robegnome ranks pretty high among all the cheesy rats"));
-				speak("ANYplus",_("for whom we pulled chestnuts out of the fire."));
-				speak("Soren",_("You obviously misjudge your position."));
-				speak("Soren",_("What do you think will happen, if your revealed in town?."));
-				speak("Soren",_("We know everything about your kind,"));
-				speak("Soren",_("and believe me, no one will be stupid enough to kill you."));
-				
-				addQuestion(_("Continue to be snotty?"));
-				addAnswer(_("Yes"),"be_unkind_part1");
-				addAnswer(_("No"),"be_kind");
-			</Effect>
-		</Topic>
-		
-		<Topic name="be_unkind_part1">
-			<Effect>
-				speak("PL",_("You consider yourself very mighty and clever, don't you?"));
-				speak("magopt",_("Surely he has written down that knowledge of his somewhere."));
-				speak("magopt",_("We can search for it after he's dead."));
-				speak("waropt",_("A good opportunity, indeed."));
+				speak("PL",_("You consider yourself very mighty and clever, don't you?"),"angry");
+				if (not solo) then
+					speak("magopt",_("Surely he has written down that knowledge of his somewhere."),"thoughtful");
+					speak("magopt",_("We can search for it after he's dead."));
+					if (getSpeaker("magopt") ~= getSpeaker("waropt")) then
+						speak("waropt",_("A good opportunity, indeed."),"grin");
+					end;
+				else
+					speak("leader",_("Surely you have written down that knowledge of yours somewhere."),"thoughtful");
+					speak("leader",_("I can search for it after your untimely death."));
+				end;
 				speak("Soren",_("Yes, they warned me about that, too."));
 				
 				-- Er beschwoert einen kleinen Feuerelementar vor sich und haelt einen
@@ -443,37 +401,7 @@
 				
 				speak("Soren",_("I will keep an eye on you and give you orders with this crystal."));
 				speak("Soren",_("This simple elemental will remind you now that immortality has little meaning here."));
-				
-				-- Die Gruppe kaempft gegen den Elementar. Es sollte ein schwerer Kampf
-				-- sein, der aber schaffbar ist. Niemand stirbt, aber sobald die Chars
-				-- auf 1% LE fallen, werden sie in einem Elementarkaefig gefangen, der
-				-- jeden Handlungsspielraum unterbindet
-				
-				jumpTopic("add_elemental");
-				
-				changeTopic("end_cutscene1_elemental");
-			</Effect>
-		</Topic>
-		
-		<Topic name="be_unkind_part2">
-			<Effect>
-				speak("Soren",_("That was the weakest elemental I could possibly summon."));
-				speak("Soren",_("Now go. I have no time to waste."));
-				speak("Soren",_("The prince will marry soon and there are lots of preparations to make."));
-				
-				changeTopic("end_cutscene1");
-			</Effect>
-		</Topic>
-		
-		<Topic name="add_elemental">
-			<Effect>
-				fortify_dwall_tmp.fire_elemental = createObject("fireElemS","locParty");
-			</Effect>
-		</Topic>
-		
-		<Topic name="end_cutscene1_elemental">
-			<Effect>
-				setCutsceneMode(false);
+				executeInDialog("insertTrigger('fire_elemental')");
 			</Effect>
 		</Topic>
 		
@@ -498,21 +426,26 @@
 					end;
 				end;
 				
-				changeTopic("end_cutscene1");
-			</Effect>
-		</Topic>
-		
-		<Topic name="end_cutscene1">
-			<Effect>
-				fortify_dwall.scene1 = true;
-				fortify_dwall.started = true;
-				setCutsceneMode(false);
+				executeInDialog("setCutsceneMode(false)");
+				executeInDialog("insertTrigger('teleport_out')");
 			</Effect>
 		</Topic>
 	</NPC>
 	
 	
 	<Region name="elCnlLobby">
+		<Event trigger="fire_elemental" once="true">
+			<Effect>
+				setCutsceneMode(false);
+				fortify_dwall_tmp.elemental = createObject("fireElemS","locElemental");
+				fortify_dwall_tmp.playernr = table.getn(getPlayers());
+				fortify_dwall_tmp.inactive_pl = {};
+				fortify_dwall_tmp.inactive_pl_nr = 0;
+				fortify_dwall_tmp.inactive_pl_wall = {};
+				fortify_dwall_tmp.fwall1 = createObject("blockFireWall","locFireWallEast",-45);
+				fortify_dwall_tmp.fwall2 = createObject("blockFireWall","locFireWallWest",45);
+			</Effect>
+		</Event>
 		
 		<Event trigger="player_moved" once="true">
 			<Condition>
@@ -538,22 +471,90 @@
 		
 		<Event trigger ="unit_die">
 			<Condition>
-				if (trigger.unit == fortify_dwall_tmp.fire_elemental) then
-					return true;
-				else
-					return false;
-				end;
+				return (fortify_dwall_tmp.elemental ~= nil and get(trigger.unit,"type") == "PLAYER");
 			</Condition>
 			<Effect>
+				fortify_dwall_tmp.inactive_pl_nr = fortify_dwall_tmp.inactive_pl_nr+1;
+				
+				set(trigger.unit,"health",1);
+				set(trigger.unit,"state","inactive");
+				fortify_dwall_tmp.inactive_pl[fortify_dwall_tmp.inactive_pl_nr] = trigger.unit;
+				local pos = get(trigger.unit,"position");
+				fortify_dwall_tmp.inactive_pl_wall[fortify_dwall_tmp.inactive_pl_nr] = createObject("fireCage",pos);
+				
+				fortify_dwall_tmp.playernr = fortify_dwall_tmp.playernr-1;
+				if (fortify_dwall_tmp.playernr == 0) then
+					startTimer("remove_fire_walls",1000);
+					startTimer("reactivate_player",2000);
+				end;
+			</Effect>	
+		</Event>
+		
+		<Event trigger ="unit_die" once="true" >
+			<Condition>
+				return (trigger.unit == fortify_dwall_tmp.elemental);
+			</Condition>
+			<Effect>
+				fortify_dwall_tmp.elemental = nil
+				startTimer("reactivate_player",1000);
+			</Effect>
+		</Event>
+		
+		<Event trigger ="remove_fire_walls" once="true" >
+			<Effect>
+				local i;
+				for i=1,fortify_dwall_tmp.inactive_pl_nr do
+					deleteObject(fortify_dwall_tmp.inactive_pl_wall[i]);
+				end;
+				deleteObject(fortify_dwall_tmp.fwall1);
+				deleteObject(fortify_dwall_tmp.fwall2);
+			</Effect>
+		</Event>
+		
+		<Event trigger ="reactivate_player" once="true" >
+			<Effect>
+				local i;
+				for i=1,fortify_dwall_tmp.inactive_pl_nr do
+					set(fortify_dwall_tmp.inactive_pl[i],"state","active");
+					fullHeal(fortify_dwall_tmp.inactive_pl[i]);
+					deleteObject(fortify_dwall_tmp.inactive_pl_wall[i]);
+				end;
+				
+				if (fortify_dwall_tmp.elemental ~= nil) then
+					deleteObject(fortify_dwall_tmp.elemental);
+					fortify_dwall_tmp.elemental = nil;
+					startTimer("elemental_end",2000);
+					fortify_dwall_tmp.elemental_defeat = false;
+				else
+					startTimer("elemental_end",1000);
+					fortify_dwall_tmp.elemental_defeat = true;
+				end
+			</Effect>
+		</Event>
+		
+		<Event trigger ="elemental_end" once="true" >
+			<Effect>
 				createDialogue();
-				addSpeaker(soren_windclaw,"Soren");
-				addSpeaker(fortify_dwall_tmp.guard1,"Tolec");
-				addSpeaker(fortify_dwall_tmp.guard2,"Derred");
-
-				addStandardSpeakers("elCnlLobby","locParty");
-				setCutsceneMode(true);
-				setTopicBase("Soren Windclaw");
-				changeTopic("be_unkind_part2");
+				addAllPlayersToDialog();
+				addStandardRoles();
+				
+				addSpeaker(fortify_dwall_tmp.soren,"Soren",true);
+				
+				if (fortify_dwall_tmp.elemental_defeat) then
+					speak("leader",_("Na bitte, das war doch eher zahm."),"injured2");
+				end;
+				
+				speak("Soren",_("That was the weakest elemental I could possibly summon."));
+				speak("Soren",_("Now go. I have no time to waste."));
+				speak("Soren",_("The prince will marry soon and there are lots of preparations to make."));
+				
+				executeInDialog("insertTrigger('teleport_out')");
+			</Effect>
+		</Event>
+		
+		<Event trigger ="teleport_out" once="true" >
+			<Effect>
+				assembleParty("medBackalley","locScene3","entry_north");
 			</Effect>
 		</Event>
 	</Region>

@@ -1,3 +1,13 @@
-﻿<RenderInfo name="mojoTortured">
+<RenderInfo name="mojoTortured">
 	<Entity source = "mojo_tortured.mesh" />
+</RenderInfo>
+
+<RenderInfo name="blockFireWall">
+	<ParticleSystem objectname = "fireWall1" source = "FirewallBlock" position = "0 0 2.5" />
+	<ParticleSystem objectname = "fireWall2" source = "FirewallBlock" position = "0 0 0" />
+	<ParticleSystem objectname = "fireWall3" source = "FirewallBlock" position = "0 0 -2.5" />
+</RenderInfo>
+
+<RenderInfo name="fireCage">
+	<ParticleSystem objectname = "fireRing" source = "FireCage" rotation= "0 0 0" />
 </RenderInfo>
