@@ -93,14 +93,6 @@
 <!--		<SpawnGroups>
 			<SpawnGroup group_name="elemental" number="1" />
 		</SpawnGroups>-->
-		
-		<Event trigger="create_region" once="true">
-			<Effect>
-				soren_windclaw = createObject("peasant", "locSorenWindclaw");
-				setRefName(soren_windclaw, "Soren Windclaw");
-				addArea("SorenWindclawArea","circle","locSorenWindclaw",5);
-			</Effect>
-		</Event>
 	</Region>
 
 <!-- Medair, Hintergassen zwischen Konzil und Soeldnerlager-->
@@ -260,7 +252,7 @@
 
 <!-- Maylons Grab, Eingang[Template] -->
 	<Region id="45" name="aisMaylonsGraveEntry">
-		<Settings dimx="16" dimy="32"region_template="maylonsGraveEntry"  ground="council_ground"/>
+		<Settings dimx="16" dimy="32" region_template="maylonsGraveEntry"  ground="council_ground"/>
 		
 		<ExitDirections north="true" south="true" west="false" east="false" />
 		
@@ -535,7 +527,7 @@
 			<Exit name="exit_south" destination_region="aisFairyforest" destination_location="entry_north" >
 				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
 			</Exit>
-			<Exit name="exit_north" destination_region="dwarfenfroward" destination_location="entry_south" >
+			<Exit name="exit_north" destination_region="dwarfenwall" destination_location="entry_south" >
 				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
 			</Exit>
 			<Exit name="exit_west" destination_region="aisWestwoods" destination_location="entry_east" >
@@ -830,7 +822,7 @@
 			<Exit name="exit_west" destination_region="grayCurseLake" destination_location="entry_east" >
 				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
 			</Exit>
-			<Exit name="exit_east" destination_region="dwarfenfroward" destination_location="entry_west" >
+			<Exit name="exit_east" destination_region="dwarfenwall" destination_location="entry_west" >
 				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
 			</Exit>
 		</Exits>
@@ -845,8 +837,8 @@
 <!-- Der Lich -->
 <!-- Rob, der Raeuber, Ende -->
 <!-- Loc: Stadtmauer -->
-	<Region id="12" name="dwarfenfroward">
-		<Settings dimx="36" dimy="28" region_template="dwarfenfroward"  ground="grass1"/>
+	<Region id="12" name="dwarfenwall">
+		<Settings dimx="36" dimy="28" region_template="dwarfenwall"  ground="grass1"/>
 		
 		<ReviveLocation  location="WaypointLoc" />
 		
@@ -865,10 +857,10 @@
 			<Exit name="exit_west" destination_region="aisEastslope" destination_location="entry_east" >
 				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
 			</Exit>
-			<Exit name="exit_rampart" destination_region="dwarfenfrowardRampart" destination_location="entry_south" >
+			<Exit name="exit_rampart" destination_region="dwarfenwallRampart" destination_location="entry_south" >
 				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
 			</Exit>
-			<Exit name="exit_command" destination_region="dwarfenfrowardCommand" destination_location="entry_south" >
+			<Exit name="exit_command" destination_region="dwarfenwallCommand" destination_location="entry_south" >
 				<Shape shape="RECT" extent_x="1.0" extent_y="1.0" />
 			</Exit>
 		</Exits>
@@ -890,13 +882,13 @@
 		</Event>
 	</Region>
 	
-	<Region id="30" name="dwarfenfrowardCommand">
+	<Region id="30" name="dwarfenwallCommand">
 		<Settings dimx="4" dimy="6" region_template="commandHouse"  ground="council_ground"/>
 		
 		<ExitDirections north="false" south="true" west="false" east="false" />
 		
 		<Exits>
-			<Exit name="exit_south" destination_region="dwarfenfroward" destination_location="entry_command" >
+			<Exit name="exit_south" destination_region="dwarfenwall" destination_location="entry_command" >
 				<Shape shape="RECT" extent_x="2.0" extent_y="1.0" />
 			</Exit>
 		</Exits>
@@ -921,13 +913,13 @@
 <!-- Aisen, Zwergentrutz Stadtmauer; ungefaehr 20 min, Template; Level 16 - 19 -->
 <!-- Zombies, Skelette -->
 <!-- Locations fuer die Verteidigenden Wachen? -->
-	<Region id="13" name="dwarfenfrowardRampart">
+	<Region id="13" name="dwarfenwallRampart">
 		<Settings dimx="32" dimy="36" region_template = "dwarfenwallRampart"  ground="grass1"/>
 		
 		<ExitDirections north="false" south="true" west="false" east="false" />
 		
 		<Exits>
-			<Exit name="exit_south" destination_region="dwarfenfroward" destination_location="entry_rampart" >
+			<Exit name="exit_south" destination_region="dwarfenwall" destination_location="entry_rampart" >
 				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
 			</Exit>
 		</Exits>
@@ -946,7 +938,7 @@
 		<ExitDirections north="false" south="true" west="false" east="false" />
 		
 		<Exits>
-			<Exit name="exit_south" destination_region="dwarfenfroward" destination_location="entry_north" >
+			<Exit name="exit_south" destination_region="dwarfenwall" destination_location="entry_north" >
 				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
 			</Exit>
 		</Exits>

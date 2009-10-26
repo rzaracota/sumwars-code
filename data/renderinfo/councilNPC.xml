@@ -23,10 +23,10 @@
 	<Entity objectname="shoulderL" bone="shoulderJointLeft" source="konzPlateL.mesh" />
 </RenderInfo>
 
-<RenderInfo name = "tolec" parent="guardPole_cnl">
+<RenderInfo name = "derred" parent="guardPole_cnl">
 </RenderInfo>
 
-<RenderInfo name = "derred" parent="playerbase">
+<RenderInfo name = "tolec" parent="playerbase">
 	<Entity source="guardCnl.mesh"/>
 	<Entity objectname="weapon" bone="itemRightHand" source="council_sw.mesh" />
 	<Entity objectname="shield" bone="itemLeftHand" source="council_shd.mesh" />

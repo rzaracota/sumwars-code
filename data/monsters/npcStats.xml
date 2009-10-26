@@ -125,6 +125,34 @@
 	<Emotion name="disgust" image="set:emo_gertlinde image:disgust" />
 </EmotionSet>
 
+<EmotionSet name="derred_emotion"
+			default_image="set:emo_derred image:normal" >
+	<Emotion name="normal" image="set:emo_derred image:normal" />
+	<Emotion name="surprised" image="set:emo_derred image:surprised" />
+	<Emotion name="thoughtful" image="set:emo_derred image:thoughtful" />
+	<Emotion name="happy" image="set:emo_derred image:happy" />
+	<Emotion name="amused" image="set:emo_derred image:amused" />
+	<Emotion name="excited" image="set:emo_derred image:excited" />
+	<Emotion name="inlove" image="set:emo_derred image:inlove" />
+	<Emotion name="bored" image="set:emo_derred image:bored" />
+	<Emotion name="unhappy" image="set:emo_derred image:unhappy" />
+	<Emotion name="sad" image="set:emo_derred image:sad" />
+	<Emotion name="pain" image="set:emo_derred image:pain" />
+	<Emotion name="sneer" image="set:emo_derred image:sneer" />
+	<Emotion name="grin" image="set:emo_derred image:grin" />
+	<Emotion name="offended" image="set:emo_derred image:offended" />
+	<Emotion name="threaten" image="set:emo_derred image:threaten" />
+	<Emotion name="angry" image="set:emo_derred image:angry" />
+	<Emotion name="warcry" image="set:emo_derred image:warcry" />
+	<Emotion name="injured" image="set:emo_derred image:injured" />
+	<Emotion name="injured2" image="set:emo_derred image:injured2" />
+	<Emotion name="injured3" image="set:emo_derred image:injured3" />
+	<Emotion name="fear" image="set:emo_derred image:fear" />
+	<Emotion name="panic" image="set:emo_derred image:panic" />
+	<Emotion name="aloof" image="set:emo_derred image:aloof" />
+	<Emotion name="disgust" image="set:emo_derred image:disgust" />
+</EmotionSet>
+
 
 
 <Monster type="NPC" subtype="peasant" name="Peasant" fraction="human" race="human" layer="NORMAL">
@@ -331,7 +359,7 @@
 
 <Monster type="NPC" subtype="derred" name="Derred" fraction="human" race="human" layer="NORMAL">
 	<RenderInfo name="derred" />
-	<EmotionSet name="human_standard" />
+	<EmotionSet name="derred_emotion" />
 	<BasicAttributes
 					experience="0"
 					level="20"

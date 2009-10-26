@@ -161,6 +161,22 @@
 	</Action>
 </RenderInfo>
 
+<RenderInfo name="scy_skeleton" parent="skeletonbase">
+	<Entity source="skeleton.mesh"/>
+	<Entity objectname="weapon" bone="itemRightHand" source="blood_scy.mesh" scale="0.7"/>
+	
+	<Action name = "attack">
+		<Animation name = "attackScythe"/>
+	</Action>
+	
+	<Action name = "walk">
+		<Animation name = "walkTwoHandsHammer"/>
+	</Action>
+	
+	<Action name = "noaction">
+		<Animation name = "idleScytheSkel"/>
+	</Action>
+</RenderInfo>
 
 <RenderInfo name="zombie" parent="zombiebase">
 	<Entity source="zombie_norm.mesh"/>

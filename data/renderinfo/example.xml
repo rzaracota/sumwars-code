@@ -10,10 +10,10 @@
 		 "meshname.mesh" - bei Entity
 		 "ParticleSystemName" - bei ParticleSystem
 		 "RenderInfoName" - bei Subobject -->
-	<!-- optional: position und rotation (relativ) -->
+	<!-- optional: position und rotation (relativ), scale -->
 	<Entity  objectname="sword" bone="itemRightHand" source="short_sw.mesh"/>
 	<Subobject objectname="shield" bone="mainmesh:itemLeftHand" source="example_shield" />
-	<ParticleSystem objectname="halo" source="shield" position="0.0 50.0 0.0" rotation="90.0 0.0 0.0" />
+	<ParticleSystem objectname="halo" source="shield" position="0.0 50.0 0.0" rotation="90.0 0.0 0.0" scale = "0.5"/>
 	
 	
 	<Action name="actioname">

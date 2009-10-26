@@ -51,7 +51,6 @@
 		<Animation name = "pointing" />
 	</Action>
 	
-	
 	<Action name = "depoint">
 		<Animation name = "depoint" />
 	</Action>
@@ -67,7 +66,28 @@
 	<Action name = "talk">
 		<Animation name = "talk" />
 	</Action>
+	
+	<Action name = "sitBarrel">
+		<Animation name = "idleSitBarrel" />
+	</Action>
 
+	<Action name = "sitChair">
+		<Animation name = "idleSitChair" />
+	</Action>
+	
+	<Action name="lie">
+		<Animation name="lieOneHand" />
+	</Action>
+	<Action name="lie#bow">
+		<Animation name="lieBow" />
+	</Action>
+	
+	<Action name="getUp">
+		<Animation name="getUpOneHand" />
+	</Action>
+	<Action name="getUp#bow">
+		<Animation name="getUpBow" />
+	</Action>
 	
 	<Action name="die">
 		<Animation name="die" />
@@ -1010,11 +1030,13 @@
 </RenderInfo>
 	
 <RenderInfo name="stuntman" parent="playerbaseM">
-	<Entity source="mage_m.mesh" />
+	<Entity source="warrior_m.mesh" />
 	<Entity objectname="head" bone="crown" source="head1.mesh" />
 	<Entity objectname="hair" bone="crown" source="hair_m1.mesh" />
 	<Entity objectname="hat" bone="crown" source="vag_hatMageM.mesh" />
-	<Entity objectname="weapon" bone="itemRightHand" source="blood_scy.mesh" />
+	<!--<Entity objectname="weapon" bone="itemRightHand" source="merc2h_sw.mesh" />-->
+	<Entity objectname="shield" bone="itemLeftHand" source="goblin_sbw.mesh" />
+	<!--<Entity objectname="barrel" source="chair_konz.mesh" />-->
 </RenderInfo>
 
 <RenderInfo name="stuntgirl" parent="playerbase">
