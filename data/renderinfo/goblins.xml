@@ -14,7 +14,7 @@
 	<Action name="monster_bash" reference="attack" />
 	
 	<Action name="fire_shot" reference="range_attack" />
-
+	
 	<Action name="die">
 		<Animation name="die" />
 	</Action>
@@ -35,14 +35,10 @@
 	
 	<Action name="magic_attack">
 		<Animation name="attackMagic1" />
-		<ParticleSystem objectname="magicEnergy" bone="mainmesh:itemRightHand" source="Magic_Arrow" position="0.0 0.0 -0.9" />
-		<Detach time="0.4" objectname="magicEnergy" />
 	</Action>
 	
 	<Action name="magic_attack">
 		<Animation name="attackMagic2" />
-		<ParticleSystem objectname="magicEnergy" bone="mainmesh:itemLeftHand" source="Magic_Arrow" position="0.0 0.0 0.0" />
-		<Detach time="0.4" objectname="magicEnergy" />
 	</Action>
 </RenderInfo>
 
@@ -96,34 +92,45 @@
 	<Entity objectname="armor" bone="kneeRight" source="gobLeg_arm.mesh" />
 	<Entity objectname="helmet" bone="crown" source="goblin_hlm.mesh" />
 	
-	<Action name="goblin_lightning">
+	<Action name="lightning">
 		<Animation name="castMagicWeak" />
 	</Action>
 	
-	<Action name="goblin_magic_shield">
+	<Action name="blade_storm">
 		<Animation name="castMagicStrong" />
-		<ParticleSystem time = "0.2" objectname="magicEnergy1" source="BowBuff" position="0.0 0.0 0.0" />
-		<Movement objectname = "magicEnergy1" start="0.2" end="0.9" start_vec="0.0 0.0 0.0" end_vec="0.0 2.0 0.0" />
-		<Rotation objectname = "magicEnergy1" start="0.2" end="0.9" start_vec="0.0 0.0 0.0" end_vec="0.0 180.0 0.0" />
-		<Detach time="0.9" objectname="magicEnergy1" />
-		
-		<ParticleSystem time = "0.2" objectname="magicEnergy2" source="BowBuff" position="0.0 0.0 0.0" />
-		<Movement objectname = "magicEnergy2" start="0.2" end="0.9" start_vec="0.0 0.0 0.0" end_vec="0.0 2.0 0.0" />
-		<Rotation objectname = "magicEnergy2" start="0.2" end="0.9" start_vec="0.0 90.0 0.0" end_vec="0.0 270.0 0.0" />
-		<Detach time="0.9" objectname="magicEnergy2" />
-		
-		<ParticleSystem time = "0.2" objectname="magicEnergy3" source="BowBuff" position="0.0 0.0 0.0" />
-		<Movement objectname = "magicEnergy3" start="0.2" end="0.9" start_vec="0.0 0.0 0.0" end_vec="0.0 2.0 0.0" />
-		<Rotation objectname = "magicEnergy3" start="0.2" end="0.9" start_vec="0.0 180.0 0.0" end_vec="0.0 360.0 0.0" />
-		<Detach time="0.9" objectname="magicEnergy3" />
-		
-		<ParticleSystem time = "0.2" objectname="magicEnergy4" source="BowBuff" position="0.0 0.0 0.0" />
-		<Movement objectname = "magicEnergy4" start="0.2" end="0.9" start_vec="0.0 0.0 0.0" end_vec="0.0 2.0 0.0" />
-		<Rotation objectname = "magicEnergy4" start="0.2" end="0.9" start_vec="0.0 270.0 0.0" end_vec="0.0 490.0 0.0" />
-		<Detach time="0.9" objectname="magicEnergy4" />
 	</Action>
 	
 </RenderInfo>
+
+<RenderInfo name="goblin_gobrusch" parent="goblinbase">
+	<Entity source="goblinGreen.mesh" scale="1.2"/>
+	<Entity objectname="weapon1" bone="itemRightHand" source="old_sw.mesh" />
+	<Entity objectname="weapon2" bone="itemLeftHand" source="old_sw.mesh" />
+	
+	<Action name="noaction">
+		<Animation name="idleTwinBlades" />
+	</Action>
+	<Action name="noaction">
+		<Animation name="idleTwinBlades" />
+	</Action>
+	<Action name="noaction">
+		<Animation name="twinBladeJuggling" />
+	</Action>
+	<Action name="attack">
+		<Animation name="attackTwinBlades" />
+	</Action>
+	<Action name="monster_whirl">
+		<Animation name="sweepStrike" />
+	</Action>
+</RenderInfo>
+
+<RenderInfo name="goblin_dobrusch" parent="goblinbase">
+	<Entity source="goblinGreen.mesh" scale="1.3"/>
+	<Entity objectname="weapon1" bone="itemRightHand" source="old_sw.mesh" />
+	<Entity objectname="weapon2" bone="itemLeftHand" source="goblin_shd.mesh" scale="1.3"/>
+	
+</RenderInfo>
+
 
 <RenderInfo name="goblin_bow" parent="goblinbase">
 	<Entity source="goblinGreen.mesh"/>
@@ -213,3 +220,4 @@
 		<Animation name="sweepStrike" />
 	</Action>
 </RenderInfo>
+
