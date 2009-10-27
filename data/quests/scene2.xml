@@ -142,7 +142,7 @@
 		
 		<Event trigger="player_moved" once="true">
 			<Condition>
-				if (fortify_dwarfenfroward.scene1 == true and scene2.scene2 ~= true and getPlayers()[2] ~= nil) then
+				if (fortify_dwall.scene1 == true and scene2.scene2 ~= true and getPlayers()[2] ~= nil) then
 					return (unitIsInArea(trigger.player,"medBackalleyEntrySouthArea"));
 				else
 					return false;

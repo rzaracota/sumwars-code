@@ -356,12 +356,15 @@
 				speak("Soren",_("Show the undead there who the real favourite of the deathgod is."));
 				speak("PL",_("Smells like exploitation."),"unhappy");
 				speak("priopt",_("Besides the necromancers don't follow Harad."),"thoughtful");
-				speak("any",_("This robegnome ranks pretty high among all the cheesy rats"),"unhappy");
-				speak("any",_("for whom we pulled chestnuts out of the fire."),"unhappy");
-				if (not solo) then
-					speak("waropt",_("Ich verstehe auch nicht, warum wir hier nach seiner Pfeife tanzen. Er ist doch schließlich-"),"threaten");
-					speak("any",_("Nur ein Mensch!!"),"warcry");
+				if (getSpeaker("PL") ~= getSpeaker("any")) then
+					speak("any",_("This robegnome ranks pretty high among all the cheesy rats"),"unhappy");
+					speak("any",_("for whom we pulled chestnuts out of the fire."),"unhappy");
+					if (getSpeaker("waropt") ~= getSpeaker("any")) then
+						speak("waropt",_("Ich verstehe auch nicht, warum wir hier nach seiner Pfeife tanzen. Er ist doch schließlich-"),"threaten");
+						speak("any",_("Nur ein Mensch!!"),"warcry");
+					end;
 				end;
+				
 				speak("Soren",_("You obviously misjudge your position."),"normal");
 				speak("Soren",_("What do you think will happen, if your revealed in town?"));
 				speak("Soren",_("We know everything about your kind,"));
@@ -496,7 +499,8 @@
 			</Condition>
 			<Effect>
 				fortify_dwall_tmp.elemental = nil
-				startTimer("reactivate_player",1000);
+				startTimer("remove_fire_walls",1000);
+				startTimer("reactivate_player",2000);
 			</Effect>
 		</Event>
 		
@@ -517,7 +521,6 @@
 				for i=1,fortify_dwall_tmp.inactive_pl_nr do
 					set(fortify_dwall_tmp.inactive_pl[i],"state","active");
 					fullHeal(fortify_dwall_tmp.inactive_pl[i]);
-					deleteObject(fortify_dwall_tmp.inactive_pl_wall[i]);
 				end;
 				
 				if (fortify_dwall_tmp.elemental ~= nil) then
