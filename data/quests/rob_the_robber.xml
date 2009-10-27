@@ -46,10 +46,10 @@
 				speak("player", _("3000 Goldpieces make a fine addition to the travelling funds."))
 				speak("Sergeant Lutterer",_("Then take his necklace."))
 				speak("Sergeant Lutterer",_("They say he really treasures it"))
-				speak("Sergeant Lutterer",_("and if you bring it to dwarfenfroward"))
+				speak("Sergeant Lutterer",_("and if you bring it to dwarfenwall"))
 				speak("Sergeant Lutterer",_("and show it to seargent Wober, they'll believe you."))
 				speak("Sergeant Lutterer",_("We think he's hiding in the fairyforest right now."))
-				speak("Sergeant Lutterer",_("Between here and Dwarfenfroward."))
+				speak("Sergeant Lutterer",_("Between here and dwarfenwall."))
 				rob_the_robber.started = true
 			</Effect>	
 		</Topic>

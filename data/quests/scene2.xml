@@ -14,7 +14,7 @@
 	
 	<NPC refname="Soren Windclaw">
 		<!--
-		<Topic name="scene2" start_option="Defend Dwarfenfroward">
+		<Topic name="scene2" start_option="Defend Dwarfenwall">
 			<Condition>
 				if (scene2.finished ~= true and scene2.freed ~= true) then
 					return true

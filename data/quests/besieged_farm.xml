@@ -200,7 +200,7 @@
 
 				-- Der Kommunikationskristall erscheint und spricht zu den Helden
 
-				speak("SW",_("Don't even think about it! You have to betake yourselves to dwarfenfroward immediately!"));
+				speak("SW",_("Don't even think about it! You have to betake yourselves to dwarfenwall immediately!"));
 
 				addQuestion(_("Help the peasent?"));
 				addAnswer(_("Yes"),"help_peasant");
@@ -222,9 +222,9 @@
 					speak("PL",_("It's decided then. We take the job."));
 				end;
 				if (getPlayers()[2] == nil) then
-					speak("SW",_("What do you think you are doing there? You are ordered to go to dwarfenfroward!"));
+					speak("SW",_("What do you think you are doing there? You are ordered to go to dwarfenwall!"));
 				else
-					speak("SW",_("What do you think you are doing there? You are ordered to go to dwarfenfroward!"));
+					speak("SW",_("What do you think you are doing there? You are ordered to go to dwarfenwall!"));
 				end;
 				if (getPlayers()[2] == nil) then
 					speak("PL",_("When I arrive there was never part of the agreement."));
@@ -346,7 +346,7 @@
 		
 		<Event trigger="player_moved" once="true">
 			<Condition>
-				if (fortify_dwarfenfroward.scene1 == true and besieged_farm.scene3 ~= true) then
+				if (fortify_dwarfenwall.scene1 == true and besieged_farm.scene3 ~= true) then
 					return (unitIsInArea(trigger.player,"PrinceArea"));
 				else
 					return false;

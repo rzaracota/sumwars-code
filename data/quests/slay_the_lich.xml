@@ -56,7 +56,7 @@
 	</NPC>
 	
 	
-	<Region name="dwarfenfroward">
+	<Region name="dwarfenwall">
 		<Event trigger="player_moved" once="true">
 			<Condition>
 				return (unitIsInArea(trigger.player,"GeneralGreifArea"))

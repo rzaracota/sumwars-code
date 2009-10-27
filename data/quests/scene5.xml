@@ -231,11 +231,11 @@
 				speak("HW",_("These undead layed an ambush for us here."));
 				speak("ARC",_("Surprise!"));
 				speak("ARC",_("No wander, this is combat area."));
-				speak("HW",_("No, Dwarfenfroward hasn't fallen yet."));
+				speak("HW",_("No, Dwarfenwall hasn't fallen yet."));
 				speak("HW",_("As long as that city stands the entry to the lands of the undead is blocked."));
 				speak("HW",_("But I fear they have found a way around the citywalls."));
 				speak("IvN",_("We mustn't allow this."));
-				speak("IvN",_("If those monsters could avoid Dwarfenfroward they would advance into Aisen before one week is gone."));
+				speak("IvN",_("If those monsters could avoid Dwarfenwall they would advance into Aisen before one week is gone."));
 				speak("SW",_("It was exeedingly careless of you to leave with so few men."));
 				speak("IvN",_("The city needs every man it can get!"));
 				speak("PL",_("I have a feeling what's going to come in a moment..."));

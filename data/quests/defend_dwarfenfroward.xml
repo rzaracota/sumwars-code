@@ -1,11 +1,11 @@
-<Quest name="Fortify Dwarfenfroward" table_name="defend_dwarfenfroward">
+<Quest name="Fortify dwarfenwall" table_name="defend_dwall">
 	
 	<Init>
 		local a = 2
 	</Init>
 	
 	<Description>
-		if (defend_dwarfenfroward.finished) then
+		if (defend_dwall.finished) then
 			return _("Quest finished")
 		else
 			return _("Quest description")
@@ -14,16 +14,16 @@
 	
 	<NPC refname="General Greif">
 		<!--
-		<Topic name="defend_dwarfenfroward" start_option="Defend Dwarfenfroward">
+		<Topic name="defend_dwall" start_option="Defend dwarfenwall">
 			<Condition>
-				if (defend_dwarfenfroward.finished ~= true and defend_dwarfenfroward.freed ~= true) then
+				if (defend_dwall.finished ~= true and defend_dwall.freed ~= true) then
 					return true
 				else
 					return false
 				end
 			</Condition>
 			<Effect>
-				insertTrigger("start_defend_dwarfenfroward")
+				insertTrigger("start_defend_dwall")
 			</Effect>
 		</Topic>
 		-->
@@ -70,7 +70,7 @@
 	</NPC>
 	
 	
-	<Region name="dwarfenfroward">
+	<Region name="dwarfenwall">
 		<Event trigger="player_moved" once="true">
 			<Condition>
 				return (unitIsInArea(trigger.player,"GeneralGreifArea"))
@@ -100,8 +100,8 @@
 			<Effect>
 				createDialogue();
 				addSpeaker(soren_windclaw,"SW");
-				addSpeaker(defend_dwarfenfroward_tmp.guard1,"W1");
-				addSpeaker(defend_dwarfenfroward_tmp.guard2,"W2");
+				addSpeaker(defend_dwall_tmp.guard1,"W1");
+				addSpeaker(defend_dwall_tmp.guard2,"W2");
 				addSpeaker(trigger.player,"Player");
 				addStandardSpeakers();
 				setTopicBase("Soren Windclaw");
