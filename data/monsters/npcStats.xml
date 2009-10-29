@@ -518,3 +518,42 @@
 	
 	<AI ai_sight_range="8" />
 </Monster>
+
+<Monster type="NPC" subtype="theTrader" name="The Trader" fraction="neutral_to_all" race="human" layer="NORMAL">
+	<RenderInfo name="theTrader" />
+	<EmotionSet name="human_standard" />
+	<BasicAttributes
+					experience="1500"
+					level="85"
+					max_health="1340"
+					armor="120"
+					block="40"
+					attack="90"
+					strength="120"
+					dexterity="90"
+					magic_power="75"
+					willpower="200"
+					resistances_physical="30"
+					resistances_air="80"
+					resistances_ice="70"
+					resistances_fire="50"
+					resistances_cap_physical="100"
+					resistances_cap_air="100"
+					resistances_cap_ice="100"
+					resistances_cap_fire="100"
+					walk_speed="2500"
+					attack_speed="1000"
+					step_length="1.2"
+					attack_range="0.5"
+					>
+		
+		<Ability type="noaction"/>
+		<Ability type="walk"/>
+		<Ability type="die"/>
+		
+	</BasicAttributes>
+	
+	<Geometry radius="0.5" />
+	
+	<AI ai_sight_range="8" />
+</Monster>

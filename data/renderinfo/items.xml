@@ -24,3 +24,12 @@
 		<Sound objectname="sound" name="drop_potion"/>
 	</Action>
 </RenderInfo>
+
+<RenderInfo name="antiPoison">
+	<Entity  source="heal_ps.mesh"/> 
+	<Soundobject objectname="sound" />
+	
+	<Action name="drop">
+		<Sound objectname="sound" name="drop_potion"/>
+	</Action>
+</RenderInfo>

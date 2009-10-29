@@ -364,7 +364,6 @@
 		<WorldPosition world_x="0.6" world_y ="0.8" waypoint="true"/>
 		
 		<ExitDirections north="true" south="true" west="false" east="true" />
-		<ReviveLocation  location="WaypointLoc" />
 		
 		<Exits>
 			<Exit name="exit_east" destination_region="aisDarkClearing" destination_location="entry_west" >

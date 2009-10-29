@@ -1,3 +1,13 @@
+<RenderInfo name="leatherGloves" parent="playerbase">
+	<Entity source="leath_glv.mesh"/> 
+</RenderInfo>
+<RenderInfo name="leatherGloves#m" parent="playerbase">
+	<Entity source="leath_glvM.mesh"/> 
+</RenderInfo>
+<RenderInfo name="leatherGloves#f" parent="playerbase">
+	<Entity source="plate_glvF.mesh"/> 
+</RenderInfo>
+
 <RenderInfo name="gloves" parent="playerbase">
 	<Entity source="plate_glv.mesh"/> 
 </RenderInfo>
@@ -12,11 +22,10 @@
 	<Entity source="shark_glv.mesh"/> 
 </RenderInfo>
 <RenderInfo name="sharkGloves#m" parent="playerbase">
-	<Entity source="shark_glv.mesh"/> 
+	<Entity source="shark_glvM.mesh"/> 
 </RenderInfo>
 <RenderInfo name="sharkGloves#f" parent="playerbase">
-	<Entity source="shark_glv.mesh"/> 
 </RenderInfo>
 <RenderInfo name="sharkGlovesGuard" parent="guardPole">
-	<Entity source="shark_glv.mesh"/>
+	<Entity source="shark_glvM.mesh"/>
 </RenderInfo>

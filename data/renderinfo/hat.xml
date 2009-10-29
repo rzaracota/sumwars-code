@@ -7,3 +7,23 @@
 <RenderInfo name="vagabondHat#f" >
 	<Entity source="vag_hatMageM.mesh"/> 
 </RenderInfo>
+
+<RenderInfo name="peasentHat" >
+	<Entity source="peasent_hat.mesh"/> 
+</RenderInfo>
+<RenderInfo name="peasentHat#m" >
+	<Entity source="peasent_hatM.mesh"/> 
+</RenderInfo>
+<RenderInfo name="peasentHat#f" >
+	<Entity source="peasent_hatF.mesh"/> 
+</RenderInfo>
+
+<RenderInfo name="crown" >
+	<Entity source="crown.mesh"/> 
+</RenderInfo>
+<RenderInfo name="crown#m" >
+	<Entity source="crownM.mesh"/> 
+</RenderInfo>
+<RenderInfo name="crown#f" >
+	<Entity source="crownM.mesh"/> 
+</RenderInfo>

@@ -255,7 +255,8 @@ FIXED_OBJECT
                 <Object name="stone1" />
         </Environment>
         <Environment name="hills">
-                <Object name="stone2" />
+			<Object name="stone1" />
+            <Object name="stone2" />
         </Environment>
 </ObjectTemplate>
 <ObjectTemplate name="$single_deb_l" type="FIXED_OBJECT">

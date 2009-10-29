@@ -45,3 +45,11 @@
 <NPC refname="Nar'Asoroth">
 </NPC>
 
+<NPC refname="The Trader">
+	<Trade refresh_time="600000" price_factor="1.0">
+		<TradeItem subtype="town_portal"  number="20" number_magical="0"/>
+	</Trade>
+	
+	<Topic name="trade" start_option="Leere Schriftrollen kaufen" />
+</NPC>
+

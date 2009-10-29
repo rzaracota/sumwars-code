@@ -20,10 +20,12 @@
 <RenderInfo name="peasant_m" parent="playerbase">
 	<Entity source="warrior_m.mesh"/>
 	<Entity objectname="head" bone="crown" source="head1.mesh" />
+	<Entity objectname="hat" bone="crown" source="peasent_hatM.mesh" />
 </RenderInfo>
 
 <RenderInfo name="peasant_f" parent="playerbase">
 	<Entity source="priest_f.mesh"/>
 	<Entity objectname="head" bone="crown" source="head_f1.mesh" />
+	<Entity objectname="hat" bone="crown" source="peasent_hatM.mesh" />
 </RenderInfo>
 

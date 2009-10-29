@@ -391,7 +391,7 @@
 					max_health="300"
 					armor="25"
 					block="0"
-					attack="50"
+					attack="100"
 					power="200"
 					strength="50"
 					dexterity="30"
@@ -470,6 +470,54 @@
 	<AI ai_sight_range="12" />
 </Monster>
 
+
+<!-- Lurdrak Goblin Unique -->
+<Monster type="MONSTER" subtype="goblin_lurdrak" name="Lurdrak with the Hammer" fraction="monster" race="goblin" layer="NORMAL">
+	<RenderInfo name="goblin_lurdrak" />
+	<Dropslots >
+		<Dropslot pbig="0.06" pmedium="0.15" psmall="0.05" pgold="0.05" min_gold="50" max_gold="150" min_level="5" max_level="10" magic_prob="0.3" magic_power="450" />
+		<Dropslot pbig="0.06" pmedium="0.15" psmall="0.03" pgold="0.05" min_gold="30" max_gold="60" min_level="4" max_level="5" magic_prob="0.3" magic_power="300" />
+		<Dropslot pbig="0.00" pmedium="0.0" psmall="0.4" pgold="0.00" min_gold="30" max_gold="60" min_level="4" max_level="7" magic_prob="0.2" magic_power="300" />
+		<Dropslot pbig="0.00" pmedium="0.0" psmall="0.00" pgold="1.00" min_gold="50" max_gold="100" />
+	</Dropslots>
+	
+	<BasicAttributes
+					experience="160"
+					level="10"
+					max_health="450"
+					armor="30"
+					block="0"
+					attack="50"
+					power="150"
+					strength="70"
+					dexterity="20"
+					magic_power="5"
+					willpower="15"
+					resistances_physical="0"
+					resistances_air="0"
+					resistances_ice="0"
+					resistances_fire="0"
+					resistances_cap_physical="50"
+					resistances_cap_air="50"
+					resistances_cap_ice="50"
+					resistances_cap_fire="50"
+					walk_speed="1500"
+					attack_speed="650"
+					step_length="1.0"
+					attack_range="1.8"
+					>
+		<Ability type="walk" />
+		<Ability type="attack" rating="1"/>
+		<Ability type="monster_bash" rating="2" timer_nr="1" timer_value="4000"/>
+		<Ability type="die" />
+		<Ability type="noaction" />
+		
+	</BasicAttributes>
+	
+	<Geometry radius="0.5" />
+	
+	<AI ai_sight_range="12" />
+</Monster>
 
 <!-- Goblinkaempfer -->
 <!-- L4 -->
