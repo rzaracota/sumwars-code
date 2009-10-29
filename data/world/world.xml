@@ -75,6 +75,10 @@
 <!-- Lobby Konzilshalle der Elemtarmagier [fester Ort; Saeulenhalle im roemischen Stil] -->
 <!-- Orte: Soren Windclaw -->
 	<Region id="2" name="elCnlLobby">
+		<AmbientLight red="0.4" green="0.4" blue="0.4" />
+		<HeroLight red="1.0" green="1.0" blue="1.0" /> 
+		<DirectionalLight red="0.3" green="0.3" blue="0.3" />
+		
 		<Settings dimx="60" dimy="65" region_template="councilhall" ground="council_ground"/>
 		<WorldPosition world_x="0.6" world_y ="0.94" />
 		
@@ -96,6 +100,10 @@
 
 <!-- Medair, Hintergassen zwischen Konzil und Soeldnerlager-->
 	<Region id="17" name="medBackalley">
+		<AmbientLight red="0.4" green="0.4" blue="0.4" />
+		<HeroLight red="1.0" green="1.0" blue="1.0" /> 
+		<DirectionalLight red="0.3" green="0.3" blue="0.3" />
+		
 		<Settings dimx="17" dimy="17" region_template="medBackalley"  ground="grass1"/>
 		<WorldPosition world_x="0.5" world_y ="0.94" />
 		<ExitDirections north="true" south="true" west="false" east="false" />
@@ -120,7 +128,7 @@
 <!-- Orte: Fenor Marken -->
 	<Region id="3" name="medMercCamp">
 		<AmbientLight red="0.4" green="0.4" blue="0.4" />
-		 <HeroLight red="1.0" green="1.0" blue="1.0" /> 
+		<HeroLight red="1.0" green="1.0" blue="1.0" /> 
 		<DirectionalLight red="0.3" green="0.3" blue="0.3" />
 		
 		<Settings dimx="20" dimy="20" region_template="medairMercenaryCamp"  ground="grass1"/>
@@ -174,6 +182,10 @@
 <!-- Orte: verwundeter Soldat, Template -->
 <!-- Goblinschlaeger, Goblinjaeger-->
 	<Region id="4" name="aisMeadow">
+		<AmbientLight red="0.4" green="0.4" blue="0.4" />
+		<HeroLight red="1.0" green="1.0" blue="1.0" /> 
+		<DirectionalLight red="0.3" green="0.3" blue="0.3" />
+		
 		<Settings dimx="46" dimy="46" area_percent="0.3" complexity="0.4" granularity="6"  ground="grass1"/>
 		
 		<WorldPosition world_x="0.4" world_y ="0.8"/>
@@ -212,6 +224,10 @@
 <!-- Goblinschlaeger, Goblinraeuber, Goblinjaeger, Goblinhunde, Feldalraunen?(falls wir welche bekommen) -->
 <!-- Orte: entry_Crypt, exit_Crypt => Maylons Grab(Template) -->
 	<Region id="5" name="aisPlains">
+		<AmbientLight red="0.4" green="0.4" blue="0.4" />
+		<HeroLight red="1.0" green="1.0" blue="1.0" /> 
+		<DirectionalLight red="0.3" green="0.3" blue="0.3" />
+		
 		<Settings dimx="48" dimy="48" area_percent="0.3" complexity="0.4" granularity="6"  ground="grass1" />
 		<WorldPosition world_x="0.55" world_y ="0.7" waypoint="true"/>
 		<ExitDirections north="false" south="true" west="false" east="true" />
@@ -251,6 +267,10 @@
 
 <!-- Maylons Grab, Eingang[Template] -->
 	<Region id="45" name="aisMaylonsGraveEntry">
+		<AmbientLight red="0.4" green="0.4" blue="0.4" />
+		<HeroLight red="1.0" green="1.0" blue="1.0" /> 
+		<DirectionalLight red="0.3" green="0.3" blue="0.3" />
+		
 		<Settings dimx="16" dimy="32" region_template="maylonsGraveEntry"  ground="council_ground"/>
 		
 		<ExitDirections north="true" south="true" west="false" east="false" />
@@ -275,6 +295,10 @@
 <!-- Maylons Grab, Ebene 1[unterirdisch], ungefaehr 10 Minuten; Level 14 - 17 -->
 <!-- [kleine Elementare], Zombies, Skelette -->
 	<Region id="15" name="aisMaylonsGraveL1">
+		<AmbientLight red="0.4" green="0.4" blue="0.4" />
+		<HeroLight red="1.0" green="1.0" blue="1.0" /> 
+		<DirectionalLight red="0.3" green="0.3" blue="0.3" />
+		
 		<Settings dimx="24" dimy="24" area_percent="0.3" complexity="0.3" granularity="4"  ground="cave_ground"/>
 		
 		<ExitDirections north="true" south="true" west="false" east="false" />
@@ -306,6 +330,10 @@
 <!-- [kleine Elementare], Zombies, Skelette, Maylons Mumie -->
 <!-- Orte: Maylons Grabkammer -->
 	<Region id="16" name="aisMaylonsGraveL2">
+		<AmbientLight red="0.4" green="0.4" blue="0.4" />
+		<HeroLight red="1.0" green="1.0" blue="1.0" /> 
+		<DirectionalLight red="0.3" green="0.3" blue="0.3" />
+		
 		<Settings dimx="24" dimy="24" area_percent="0.3" complexity="0.3" granularity="4"  ground="cave_ground"/>
 		<WorldPosition world_x="0.3" world_y ="0.8"/>
 
@@ -329,6 +357,10 @@
 <!-- Aisen, Stille Heide [Feld und Wiesen]; ungefaehr 20 Min, eher offen; Level 5-6 -->
 <!-- Goblinschlaeger, Goblinraeuber, Goblinjaeger, Goblinhunde, Goblinkrieger, Goblinschamanen? -->
 	<Region id="6" name="aisHeath">
+		<AmbientLight red="0.4" green="0.4" blue="0.4" />
+		<HeroLight red="1.0" green="1.0" blue="1.0" /> 
+		<DirectionalLight red="0.3" green="0.3" blue="0.3" />
+		
 		<Settings dimx="48" dimy="48" area_percent="0.4" complexity="0.3" granularity="6"  ground="grass1"/>
 		<WorldPosition world_x="0.6" world_y ="0.8"/>
 
@@ -360,6 +392,10 @@
 	</Region>
 	
 	<Region id="2070" name="aisStonePlains">
+		<AmbientLight red="0.4" green="0.4" blue="0.4" />
+		<HeroLight red="1.0" green="1.0" blue="1.0" /> 
+		<DirectionalLight red="0.3" green="0.3" blue="0.3" />
+		
 		<Settings dimx="48" dimy="48" area_percent="0.5" complexity="0.3" granularity="8"  ground="grass1"/>
 		<WorldPosition world_x="0.6" world_y ="0.8" waypoint="true"/>
 		
@@ -382,22 +418,31 @@
 		</Environments>
 		
 		<ObjectGroups>
-			<ObjectGroup object_group="treePatch_med" priority="1" number="20" probability="1"/>
+			<ObjectGroup object_group="stones1" priority="1" number="30" probability="0.8"/>
+			<ObjectGroup object_group="stones2" priority="1" number="30" probability="0.8"/>
+			<ObjectGroup object_group="stonesLarge1" priority="1" number="10" probability="0.8"/>
 		</ObjectGroups>
 		
 		<SpawnGroups>
-			<SpawnGroup group_name="goblins_gobrusch" number="1"/>
+			<SpawnGroup group_name="goblins_lurdrak" number="1"/>
+			<SpawnGroup group_name="goblins_l6" number="15"/>
+			<SpawnGroup group_name="goblins_l7" number="20"/>
+			<SpawnGroup group_name="goblins_club_l7" number="10"/>
 		</SpawnGroups>
 	</Region>
 	
 	<Region id="2080" name="aisDarkClearing">
+		<AmbientLight red="0.4" green="0.4" blue="0.4" />
+		<HeroLight red="1.0" green="1.0" blue="1.0" /> 
+		<DirectionalLight red="0.3" green="0.3" blue="0.3" />
+		
 		<Settings dimx="36" dimy="36" area_percent="0.4" complexity="0.4" granularity="6"  ground="grass1"/>
 		<WorldPosition world_x="0.6" world_y ="0.8"/>
 		
 		<ExitDirections north="false" south="false" west="true" east="false" />
 		
 		<Exits>
-			<Exit name="exit_west" destination_region="aisPlains" destination_location="entry_east" >
+			<Exit name="exit_west" destination_region="aisStonePlains" destination_location="entry_east" >
 				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
 			</Exit>
 		</Exits>
@@ -411,7 +456,9 @@
 		</NamedObjectGroups>
 		
 		<ObjectGroups>
-			<ObjectGroup object_group="treePatch_med" priority="1" number="2" probability="1"/>
+			<ObjectGroup object_group="trees1" priority="1" number="10" probability="0.8"/>
+			<ObjectGroup object_group="trees2" priority="1" number="10" probability="0.8"/>
+			<ObjectGroup object_group="treesLarge1" priority="1" number="5" probability="0.8"/>
 		</ObjectGroups>
 		
 		<SpawnGroups>
@@ -420,6 +467,10 @@
 	</Region>
 	
 	<Region id="2090" name="aisWideHeath">
+		<AmbientLight red="0.4" green="0.4" blue="0.4" />
+		<HeroLight red="1.0" green="1.0" blue="1.0" /> 
+		<DirectionalLight red="0.3" green="0.3" blue="0.3" />
+		
 		<Settings dimx="48" dimy="48" area_percent="0.4" complexity="0.2" granularity="8"  ground="grass1"/>
 		<WorldPosition world_x="0.6" world_y ="0.8"/>
 		
@@ -454,6 +505,10 @@
 <!-- Prinz, Ratgeber, Magier, Bauer, Sergeant -->
 <!-- Kraeutersammler -->
 	<Region id="7" name="joringsbridge">
+		<AmbientLight red="0.4" green="0.4" blue="0.4" />
+		<HeroLight red="1.0" green="1.0" blue="1.0" /> 
+		<DirectionalLight red="0.3" green="0.3" blue="0.3" />
+		
 		<Settings dimx="23" dimy="23" region_template="joringsbridge"  ground="grass1"/>
 		
 		<WorldPosition world_x="0.6" world_y ="0.6" waypoint="true" />
@@ -517,6 +572,10 @@
 <!-- Kraeuterbuesche -->
 <!-- Goblinschlaeger, Goblinraeuber, Goblinjaeger, Goblinhunde, Goblinkrieger, Goblinschamanen -->
 	<Region id="8" name="aisNorthMeadow">
+		<AmbientLight red="0.4" green="0.4" blue="0.4" />
+		<HeroLight red="1.0" green="1.0" blue="1.0" /> 
+		<DirectionalLight red="0.3" green="0.3" blue="0.3" />
+		
 		<Settings dimx="32" dimy="32" area_percent="0.4" complexity="0.3" granularity="6"  ground="grass1"/>
 		<WorldPosition world_x="0.6" world_y ="0.55"/>
 
@@ -553,6 +612,10 @@
 <!-- Aisen, Joringsforst [Wald und Wiesen]; ungefaehr 30 Min, halbwegs offen; Level 7 - 12 -->	
 <!-- Goblinschlaeger, Goblinraeuber, Goblinjaeger, Goblinhunde, Goblinkrieger, Goblinschamanen, Waldalraunen? -->
 	<Region id="9" name="aisJoringsforest">
+		<AmbientLight red="0.4" green="0.4" blue="0.4" />
+		<HeroLight red="1.0" green="1.0" blue="1.0" /> 
+		<DirectionalLight red="0.3" green="0.3" blue="0.3" />
+		
 		<Settings dimx="32" dimy="32" area_percent="0.4" complexity="0.3" granularity="6"  ground="grass1"/>
 		<WorldPosition world_x="0.6" world_y ="0.50"/>
 		<ExitDirections north="false" south="true" west="true" east="false" />
@@ -575,6 +638,10 @@
 <!-- Robs Versteck(Template) -->
 <!-- Goblinschlaeger, Goblinraeuber, Goblinjaeger, Goblinhunde, Goblinkrieger, Goblinschamanen, Waldalraunen?, Feen? -->
 	<Region id="10" name="aisFairyforest">
+		<AmbientLight red="0.4" green="0.4" blue="0.4" />
+		<HeroLight red="1.0" green="1.0" blue="1.0" /> 
+		<DirectionalLight red="0.3" green="0.3" blue="0.3" />
+		
 		<Settings dimx="32" dimy="32" area_percent="0.4" complexity="0.3" granularity="6"  ground="grass1"/>
 		<WorldPosition world_x="0.5" world_y ="0.50"/>
 		
@@ -605,6 +672,10 @@
 <!-- Aisen, Wolfsfelsen [Wald und Gebirge]; ungefaehr 35 Min, eher verwinkelt; Level 14 - 17 -->
 <!-- Goblinschlaeger, Goblinraeuber, Goblinjaeger, Goblinhunde, Goblinkrieger, Goblinschamanen?, Blutschnaebel, wenige Untote, evtl. ein Lich oder Nekromant -->
 	<Region id="11" name="aisWolfstones">
+		<AmbientLight red="0.4" green="0.4" blue="0.4" />
+		<HeroLight red="1.0" green="1.0" blue="1.0" /> 
+		<DirectionalLight red="0.3" green="0.3" blue="0.3" />
+		
 		<Settings dimx="12" dimy="12" area_percent="0.4" complexity="0.3" granularity="6"  ground="grass1"/>
 		<WorldPosition world_x="0.45" world_y ="0.50"/>
 		
@@ -634,6 +705,10 @@
 <!-- Aisen, Westwaelder [Wald und Gebirge]; ungef�hr 30 Min, eher verwinkelt; Level 15 - 18 -->
 <!-- Goblins, Goblinhunde, Blutschnaebel-->	
 	<Region id="18" name="aisWestwoods">
+		<AmbientLight red="0.4" green="0.4" blue="0.4" />
+		<HeroLight red="1.0" green="1.0" blue="1.0" /> 
+		<DirectionalLight red="0.3" green="0.3" blue="0.3" />
+		
 		<Settings dimx="12" dimy="12" area_percent="0.4" complexity="0.3" granularity="6"  ground="grass1"/>
 		<WorldPosition world_x="0.40" world_y ="0.50"/>
 		
@@ -656,6 +731,10 @@
 <!-- Aisen, Gebirgspfad [Wald und Gebirge]; Template -->
 <!-- Ort von Szene 5 -->
 	<Region id="19" name="aisMounPath">
+		<AmbientLight red="0.4" green="0.4" blue="0.4" />
+		<HeroLight red="1.0" green="1.0" blue="1.0" /> 
+		<DirectionalLight red="0.3" green="0.3" blue="0.3" />
+		
 		<Settings dimx="20" dimy="20" region_template="meetIreana"  ground="grass1"/>
 		
 		<ExitDirections north="true" south="false" west="false" east="true" />
@@ -677,6 +756,10 @@
 <!-- Aisen, Nebelhang [Wald und Gebirge]; ca. 20 Minuten; eher offen; Level 16 - 18 -->
 <!-- Goblins, einige Untote, Blutschnaebel -->
 	<Region id="20" name="aisMistslope">
+		<AmbientLight red="0.4" green="0.4" blue="0.4" />
+		<HeroLight red="1.0" green="1.0" blue="1.0" /> 
+		<DirectionalLight red="0.3" green="0.3" blue="0.3" />
+		
 		<Settings dimx="12" dimy="12" area_percent="0.4" complexity="0.3" granularity="6"  ground="grass1"/>
 		
 		<ExitDirections north="true" south="true" west="false" east="false" />
@@ -925,6 +1008,10 @@
 <!-- Rob, der Raeuber, Ende -->
 <!-- Loc: Stadtmauer -->
 	<Region id="12" name="dwarfenwall">
+		<AmbientLight red="0.4" green="0.4" blue="0.4" />
+		<HeroLight red="1.0" green="1.0" blue="1.0" /> 
+		<DirectionalLight red="0.3" green="0.3" blue="0.3" />
+		
 		<Settings dimx="36" dimy="28" region_template="dwarfenwall"  ground="grass1"/>
 		
 		<ReviveLocation  location="WaypointLoc" />
@@ -970,6 +1057,10 @@
 	</Region>
 	
 	<Region id="30" name="dwarfenwallCommand">
+		<AmbientLight red="0.4" green="0.4" blue="0.4" />
+		<HeroLight red="1.0" green="1.0" blue="1.0" /> 
+		<DirectionalLight red="0.3" green="0.3" blue="0.3" />
+		
 		<Settings dimx="4" dimy="6" region_template="commandHouse"  ground="council_ground"/>
 		
 		<ExitDirections north="false" south="true" west="false" east="false" />
@@ -1001,6 +1092,10 @@
 <!-- Zombies, Skelette -->
 <!-- Locations fuer die Verteidigenden Wachen? -->
 	<Region id="13" name="dwarfenwallRampart">
+		<AmbientLight red="0.4" green="0.4" blue="0.4" />
+		<HeroLight red="1.0" green="1.0" blue="1.0" /> 
+		<DirectionalLight red="0.3" green="0.3" blue="0.3" />
+		
 		<Settings dimx="32" dimy="36" region_template = "dwarfenwallRampart"  ground="grass1"/>
 		
 		<ExitDirections north="false" south="true" west="false" east="false" />
@@ -1020,6 +1115,10 @@
 <!-- Ende der Demo, der Lich als quasi-Endgegner -->
 <!-- Zombies, Skelette, Liche/Nekromanten?, DER Lich-->
 	<Region id="14" name="necFieldcamp">
+		<AmbientLight red="0.4" green="0.4" blue="0.4" />
+		<HeroLight red="1.0" green="1.0" blue="1.0" /> 
+		<DirectionalLight red="0.3" green="0.3" blue="0.3" />
+		
 		<Settings dimx="32" dimy="32" area_percent="0.4" complexity="0.3" granularity="6"  ground="grass1"/>
 		
 		<ExitDirections north="false" south="true" west="false" east="false" />

@@ -3179,9 +3179,14 @@ bool Creature::takeDamage(Damage* d)
 	float armor = m_base_attr_mod.m_armor;
 
 	// Faehigkeit Turm in der Schlacht
-	if (checkAbility("steadfast") && m_base_attr_mod.m_max_health *0.4 > m_dyn_attr.m_health)
-		armor *=2;
-
+	float physfaktor = 1.0;
+	if (checkAbility("steadfast"))
+	{
+		float maxhealth = getBaseAttrMod()->m_max_health;
+		physfaktor = 1.0 - 0.6*(maxhealth - m_dyn_attr.m_health)/maxhealth;
+	}
+	dmgt *= physfaktor;
+	
 	float armorfak = 1.0;
 	if (armor>0 && !(d->m_special_flags & Damage::IGNORE_ARMOR) && dmgt>0)
 	{

@@ -520,24 +520,24 @@
 </Monster>
 
 <!-- Goblinkaempfer -->
-<!-- L4 -->
-<Monster type="MONSTER" subtype="goblin_fgt" name="goblin fighter" fraction="monster" race="goblin" layer="NORMAL">
-	<RenderInfo name="goblin_fgt" />
+<!-- L6 -->
+<Monster type="MONSTER" subtype="goblin_fighter" name="goblin fighter" fraction="monster" race="goblin" layer="NORMAL">
+	<RenderInfo name="goblin_fighter" />
 	<Dropslots >
-		<Dropslot pbig="0.01" pmedium="0.02" psmall="0.04" pgold="0.02" max_gold="30" min_level="0" max_level="6" magic_prob="0.1" magic_power="300" />
-		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" max_gold="20" min_level="0" max_level="3" magic_prob="0.2" magic_power="250" />
+		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.05" pgold="0.05" min_gold="5" max_gold="60" min_level="3" max_level="8" magic_prob="0.1" magic_power="250" />
+		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.04" pgold="0.05" min_gold="1" max_gold="40" min_level="1" max_level="6" magic_prob="0.2" magic_power="200" />
 	</Dropslots>
 	
 	<BasicAttributes
-		experience="8"
-		level="4"
-		max_health="80"
+		experience="23"
+		level="6"
+		max_health="120"
 		armor="25"
 		block="0"
-		attack="45"
-		power="40"
+		attack="30"
+		power="60"
 		strength="25"
-		dexterity="20"
+		dexterity="15"
 		magic_power="5"
 		willpower="20"
 		resistances_physical="0"
@@ -548,21 +548,69 @@
 		resistances_cap_air="50"
 		resistances_cap_ice="50"
 		resistances_cap_fire="50"
-		walk_speed="3000"
-		attack_speed="1500"
+		walk_speed="2500"
+		attack_speed="1000"
 		step_length="0.8"
-		attack_range="0.5"
+		attack_range="1.0"
 	>
 		<Ability type="walk" />
 		<Ability type="attack" rating="1"/>
+		<Ability type="monster_bash" rating="1" timer_value="10000"/>
 		<Ability type="die" />
 		<Ability type="noaction" />
 	</BasicAttributes>
 	
 	<Geometry radius="0.5" />
 	
-	<AI ai_sight_range="10" ai_chase_range="20"/>
+	<AI ai_sight_range="12" ai_chase_range="20"/>
 </Monster>
+
+<!-- Goblinwilderer -->
+<!-- L7 -->
+<Monster type="MONSTER" subtype="goblin_poacher" name="goblin poacher" fraction="monster" race="goblin" layer="NORMAL">
+	<RenderInfo name="goblin_poacher" />
+	<Dropslots >
+		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.05" pgold="0.05" min_gold="5" max_gold="60" min_level="4" max_level="9" magic_prob="0.1" magic_power="250" />
+		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.04" pgold="0.05" min_gold="1" max_gold="40" min_level="2" max_level="6" magic_prob="0.2" magic_power="200" />
+	</Dropslots>
+	
+	<BasicAttributes
+					experience="26"
+					level="7"
+					max_health="80"
+					armor="15"
+					block="15"
+					attack="80"
+					power="35"
+					strength="25"
+					dexterity="25"
+					magic_power="5"
+					willpower="20"
+					resistances_physical="0"
+					resistances_air="0"
+					resistances_ice="0"
+					resistances_fire="0"
+					resistances_cap_physical="50"
+					resistances_cap_air="50"
+					resistances_cap_ice="50"
+					resistances_cap_fire="50"
+					walk_speed="2500"
+					attack_speed="900"
+					step_length="0.8"
+					attack_range="1"
+					>
+		
+		<Ability type="walk" />
+		<Ability type="range_attack" rating="1"/>
+		<Ability type="die" />
+		<Ability type="noaction" />
+	</BasicAttributes>
+	
+	<Geometry radius="0.5" />
+	
+	<AI ai_sight_range="12" ai_shoot_range="7" />
+</Monster>
+
 
 <!-- Goblinkrieger -->
 <!-- L5 -->
@@ -609,51 +657,6 @@
 	<AI ai_sight_range="12" />
 </Monster>
 
-<!-- Goblinwilderer -->
-<!-- L7 -->
-<Monster type="MONSTER" subtype="goblin_pch" name="goblin poacher" fraction="monster" race="goblin" layer="NORMAL">
-	<RenderInfo name="goblin_pch" />
-	<Dropslots >
-		<Dropslot pbig="0.01" pmedium="0.02" psmall="0.04" pgold="0.02" max_gold="50" min_level="0" max_level="12" magic_prob="0.1" magic_power="400" />
-		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" max_gold="30" min_level="0" max_level="8" magic_prob="0.2" magic_power="300" />
-	</Dropslots>
-	
-	<BasicAttributes
-					experience="10"
-					level="7"
-					max_health="60"
-					armor="30"
-					block="0"
-					attack="30"
-					power="25"
-					strength="25"
-					dexterity="40"
-					magic_power="5"
-					willpower="20"
-					resistances_physical="0"
-					resistances_air="0"
-					resistances_ice="0"
-					resistances_fire="0"
-					resistances_cap_physical="50"
-					resistances_cap_air="50"
-					resistances_cap_ice="50"
-					resistances_cap_fire="50"
-					walk_speed="2500"
-					attack_speed="1500"
-					step_length="0.8"
-					attack_range="1"
-					>
-		
-		<Ability type="walk" />
-		<Ability type="range_attack" rating="1"/>
-		<Ability type="die" />
-		<Ability type="noaction" />
-	</BasicAttributes>
-	
-	<Geometry radius="0.5" />
-	
-	<AI ai_sight_range="12" ai_shoot_range="5" />
-</Monster>
 
 <!-- Goblinschamane -->
 <!-- L10 -->
@@ -791,6 +794,7 @@
 	<SubGroup subtype="goblin_rob" number="4" prob="1.0" />
 	<SubGroup subtype="goblin_nubreck" number="1" prob="1.0" />
 </MonsterGroup>
+
 <MonsterGroup name="goblins_l5" >
 	<SubGroup subtype="goblin_rob" number="1" prob="1.0" />
 	<SubGroup subtype="goblin_rob" number="1" prob="0.5" />
@@ -817,8 +821,29 @@
 	<SubGroup subtype="goblin_dobrusch" number="1" prob="1.0" />
 </MonsterGroup>	
 
-<MonsterGroup name="willard_goblins" >
-	<SubGroup subtype="goblin" number="4" prob="1.0" />
-	<SubGroup subtype="goblin_bow" number="2" prob="1.0" />
-	<SubGroup subtype="goblin_drakrazz" number="1" prob="1.0" />
+
+<MonsterGroup name="goblins_l6" >
+	<SubGroup subtype="goblin_fighter" number="2" prob="1.0" />
+	<SubGroup subtype="goblin_fighter" number="1" prob="0.5" />
+	<SubGroup subtype="gob_dog" number="1" prob="0.5" />
+	<SubGroup subtype="goblin_bon" number="1" prob="1.0" />
+</MonsterGroup>
+
+<MonsterGroup name="goblins_l7" >
+	<SubGroup subtype="goblin_fighter" number="1" prob="1.0" />
+	<SubGroup subtype="goblin_fighter" number="1" prob="0.7" />
+	<SubGroup subtype="goblin_poacher" number="1" prob="1.0" />
+	<SubGroup subtype="goblin_poacher" number="2" prob="0.5" />
+	<SubGroup subtype="gob_dog" number="1" prob="0.5" />
+</MonsterGroup>
+
+<MonsterGroup name="goblins_club_l7" >
+	<SubGroup subtype="goblin_poacher" number="2" prob="1.0" />
+	<SubGroup subtype="goblin_rob" number="2" prob="1.0" />
+	<SubGroup subtype="goblin_fighter" number="1" prob="0.7" />
+</MonsterGroup>	
+
+<MonsterGroup name="goblins_lurdrak" >
+	<SubGroup subtype="goblin_lurdrak" number="1" prob="1.0" />
+	<SubGroup subtype="goblin_poacher" number="3" prob="1.0" />
 </MonsterGroup>
