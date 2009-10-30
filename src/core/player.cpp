@@ -1517,6 +1517,16 @@ bool Player::checkRole(std::string role)
 		return true;
 	}
 	
+	if (role == "male" && getGender()==MALE)
+	{
+		return true;
+	}
+	
+	if (role == "female" && getGender()==FEMALE)
+	{
+		return true;
+	}
+	
 	if (role == getSubtype())
 	{
 		return true;

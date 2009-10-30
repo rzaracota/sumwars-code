@@ -161,13 +161,13 @@
 	<Region name="aisMeadow">
 		<Event trigger ="create_region" once = "true">
 			<Effect>
-				addArea('WillardArea','circle','locWillard',20);
-				addArea('WillardEnemiesArea','circle','locWillard',15);
+				addArea('WillardArea','circle','willard:locWillard',20);
+				addArea('WillardEnemiesArea','circle','willard:locWillard',15);
 				if (rescue_willard.freed ~= true) then
-					rescue_willard_tmp.monsters = createMonsterGroup("willard_goblins","locWillard")
+					rescue_willard_tmp.monsters = createMonsterGroup("willard_goblins","willard:locWillard")
 				end
 				if (rescue_willard.freed == true and rescue_willard.finished ~= true) then
-					rescue_willard_tmp.willard = createObject('peasant', 'locWillard')
+					rescue_willard_tmp.willard = createObject('peasant', 'willard:locWillard')
 					setRefName(rescue_willard_tmp.willard, 'Willard')
 				end
 			</Effect>
@@ -227,7 +227,7 @@
 				end
 			</Condition>
 			<Effect>
-				rescue_willard_tmp.willard = createObject('peasant', 'locWillard')
+				rescue_willard_tmp.willard = createObject('peasant', 'willard:locWillard')
 				setRefName(rescue_willard_tmp.willard, 'Willard')
 				rescue_willard.freed = true
 			</Effect>

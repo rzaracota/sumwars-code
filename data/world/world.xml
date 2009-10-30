@@ -239,7 +239,7 @@
 			<Exit name="exit_east" destination_region="aisHeath" destination_location="entry_west" >
 				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
 			</Exit>
-			<Exit name="entry_crypt" destination_region="aisMaylonsGraveEntry" destination_location="entry_south" >
+			<Exit name="maylonsGrave:entry_crypt" destination_region="aisMaylonsGraveEntry" destination_location="entry_south" >
 				<Shape shape="RECT" extent_x="2.0" extent_y="1.0" />
 			</Exit>
 		</Exits>
@@ -279,7 +279,7 @@
 			<SpawnGroup group_name="zombies" number="12" />
 		</SpawnGroups>
 		<Exits>
-			<Exit name="exit_south" destination_region="aisPlains" destination_location="exit_crypt" >
+			<Exit name="exit_south" destination_region="aisPlains" destination_location="maylonsGrave:exit_crypt" >
 				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
 			</Exit>
 			<Exit name="exit_north" destination_region="aisMaylonsGraveL1" destination_location="entry_south" >
@@ -319,11 +319,6 @@
 		<Environments>
 			<Environment height="1.0" name="cave" />
 		</Environments>
-		
-		<!-- in der Naehe des Eingangs -->
-		<NamedObjectGroups>
-			<NameObjectGroup name= "cryptGobins" object_group="maylonsGraveL1Goblins" priority="4"/>
-		</NamedObjectGroups>
 	</Region>
 	
 <!-- Maylons Grab, Ebene 2[unterirdisch], ungefaehr 10 Minuten; Level 16 - 19 -->
@@ -452,7 +447,7 @@
 		</Environments>
 		
 		<NamedObjectGroups>
-			<NameObjectGroup name="temple" object_group="willard" priority="4"/>
+			<NameObjectGroup name="temple" object_group="goblinSanctuary" priority="4"/>
 		</NamedObjectGroups>
 		
 		<ObjectGroups>
@@ -464,6 +459,15 @@
 		<SpawnGroups>
 			<SpawnGroup group_name="goblins_gobrusch" number="1"/>
 		</SpawnGroups>
+		
+		<Event trigger ="create_region" once = "true">
+			<Effect>
+				createObject("goblin_regresh", "temple:locGoblinShaman");
+				createObject("goblin_tguard", "temple:locGoblinGuard1");
+				createObject("goblin_apprtc", "temple:locGoblinGuard2");
+				createObject("goblin_tguard", "temple:locGoblinGuard3");
+			</Effect>
+		</Event>
 	</Region>
 	
 	<Region id="2090" name="aisWideHeath">

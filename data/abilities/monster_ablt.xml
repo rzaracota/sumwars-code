@@ -225,7 +225,7 @@
 <Ability type="goblin_lightning"
 		 name="Goblin Lightning"
 		 description=""
-		 time="501.000000"
+		 time="1300.000000"
 		 timer_nr="1.000000"
 		 timer_value="2000.000000"
 		 base_ability="magic_attack"
@@ -245,6 +245,77 @@
 		</LuaImplementation>	
 	</Damage>
 </Ability>
+
+<Ability type="goblin_icebolt"
+		 name="Icicle"
+		 description="The mage casts a shard of pure ice, that damages his foes."
+		 time="1500.000000"
+		 timer_nr="1.000000"
+		 timer_value="3000.000000"
+		 base_ability="magic_attack"
+		 critical_percent="0.800000"
+		 target_type="ranged">
+	<Flag name="mute_affected" />
+	<Effect>
+		<CppImplementation type="proj_fly_at_target" />
+	</Effect>
+	<Projectile type="ice_bolt" speed="12000" />
+	<Damage>
+		<LuaImplementation>
+			local magic = get(self,"magic_power");
+			local idmg = getDamageValue("ice_dmg");
+			setDamageValue("ice_dmg", {idmg[1] + magic*1, idmg[2] + magic*1.2});
+		</LuaImplementation>	
+	</Damage>
+</Ability>
+
+<Ability type="goblin_chain_lightning"
+		 name="Chainlightning"
+		 description="" 
+		 time="1200.000000" 
+		 timer_nr="1.000000" 
+		 timer_value="7000.000000" 
+		 base_ability="magic_attack" 
+		 critical_percent="0.800000" 
+		 target_type="ranged"
+		 >
+	<Flag name="mute_affected" />
+	<Effect>
+		<CppImplementation type="proj_fly_at_target" />
+	</Effect>
+	<Projectile type="chain_lightning" speed="12000" counter="5"/>
+	<Damage>
+		<LuaImplementation>
+			local magic = get(self,"magic_power");
+			local admg = getDamageValue("air_dmg");
+			setDamageValue("air_dmg", {admg[1] + magic*0.5, admg[2] + magic*1.5});
+		</LuaImplementation>	
+	</Damage>
+</Ability>
+
+<Ability type="goblin_blizzard"
+		 name="Blizzard" 
+		 description="The mage summons a leathal cold blizzard that freezes every enemy caught in it to death."
+		 time="1400.000000" 
+		 timer_nr="2.000000"
+		 timer_value="14000.000000" 
+		 base_ability="magic_attack" 
+		 critical_percent="0.800000"
+		 target_type="ranged">
+	<Flag name="mute_affected" />
+	<Effect>
+		<CppImplementation type="proj_at_target" />
+	</Effect>
+	<Projectile type="blizzard"/>
+	<Damage>
+		<LuaImplementation>
+			local magic = get(self,"magic_power");
+			local idmg = getDamageValue("ice_dmg");
+			setDamageValue("ice_dmg", {idmg[1] + magic*0.3, idmg[2] + magic*0.4});
+		</LuaImplementation>	
+	</Damage>
+</Ability>
+
 
 <Ability type="monster_bash" 
 		 name="monster Bash" 

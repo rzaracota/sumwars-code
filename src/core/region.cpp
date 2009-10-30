@@ -1056,12 +1056,19 @@ void Region::createObjectGroup(ObjectGroupTemplateName templname, Vector positio
 			pos.rotate(angle);
 			pos += position;
 
-			addLocation(lt->first,pos);
+			std::string locname;
+			if (name != "")
+			{
+				locname += name;
+				locname += ":";
+			}
+			locname += lt->first;
+			addLocation(locname,pos);
 			if (tr != 0)
 			{
 				tr->addVariable(lt->first,pos);
 			}
-			DEBUG5("template location %s",lt->first.c_str());
+			DEBUG5("template location %s",locname.c_str());
 		}
 		
 		std::map<AreaName, Shape>::iterator at;
@@ -1073,7 +1080,15 @@ void Region::createObjectGroup(ObjectGroupTemplateName templname, Vector positio
 			sh.m_center.rotate(angle);
 			sh.m_center += position;
 			
-			addArea(at->first,sh);
+			std::string aname;
+			if (name != "")
+			{
+				aname += name;
+				aname += ":";
+			}
+			aname += at->first;
+			
+			addArea(aname,sh);
 		}
 		
 		// Trigger der besagt dass das Template eingefuegt wurde

@@ -58,7 +58,7 @@ FirewallBlock
         colour_range_start  1 0 0
         colour_range_end    0.5 0.5 0
         width           50
-        height          250
+        height          200
         depth           60
 }
 
@@ -184,6 +184,38 @@ SummonBuff
 
         state_change 3.5
 }
+}
+
+//freezing Sphere - dieing Lich
+Icesphere
+{
+    material Flare
+    particle_width 20
+    particle_height 20
+    cull_each false
+    quota 10000
+    billboard_type point
+ 
+
+   emitter Point
+{
+        angle 360
+        emission_rate 2075
+        time_to_live 0.1
+        direction 1 0 0
+        velocity_min 150
+        velocity_max 200
+        colour_range_start  0.3 0.3 0.3 0.0
+        colour_range_end    0.8 0.8 0.8 0.0
+}
+
+    affector ColourFader
+{
+        red -0.25
+        green -0.25
+        blue -0.25
+}
+
 }
 
 TestRing
@@ -852,60 +884,29 @@ Freeze
 }
 }
 
-//freezing Sphere - dieing Lich
-Icesphere
-{
-    material Flare
-    particle_width 20
-    particle_height 20
-    cull_each false
-    quota 10000
-    billboard_type point
- 
-
-   emitter Point
-{
-        angle 360
-        emission_rate 2075
-        time_to_live 0.1
-        direction 1 0 0
-        velocity_min 150
-        velocity_max 200
-        colour_range_start  0.3 0.3 0.3 0.0
-        colour_range_end    0.8 0.8 0.8 0.0
-}
-
-    affector ColourFader
-{
-        red -0.25
-        green -0.25
-        blue -0.25
-}
-
-}
-
 //LIGHTNING
 
 Lightning
 {
     material Flare
-    particle_width 20
-    particle_height 20
+    particle_width 30
+    particle_height 500
     cull_each false
-    quota 10000
-    billboard_type point
+    quota 4000
+	billboard_type  oriented_common
+    common_direction 0 -1 0
  
 
    emitter Point
 {
         angle 360
-        emission_rate 275
-        time_to_live 0.2
+        emission_rate 10
+        time_to_live 4
         direction 1 0 0
-        velocity_min 250
-        velocity_max 300
-        colour_range_start 1 1 0
-        colour_range_end 1 1 0
+        velocity_min 0
+        velocity_max 0
+        colour_range_start 1 1 0.1 
+        colour_range_end 0.5 0.5 0
 }
 }
 
@@ -926,9 +927,8 @@ HandLightning
         time_to_live 0.1
         direction 1 0 0
         velocity_min 150
-        velocity_max 250
-        colour_range_start 1 1 0
-        colour_range_end 1 1 0
+        velocity_max 250        colour_range_start 1 1 0.1 
+        colour_range_end 0.5 0.5 0
 }
 }
 
@@ -951,8 +951,8 @@ LightningLine
         direction 1 1 1
         velocity_min 1
         velocity_max 2
-        colour_range_start 0 1 0
-        colour_range_end 1 0 0
+        colour_range_start 1 1 0.1 
+        colour_range_end 0.5 0.5 0
 }
 }
 
@@ -1000,16 +1000,19 @@ Chainlightning
     billboard_type point
  
 
-   emitter Point
+   emitter Ellipsoid
 {
         angle 360
-        emission_rate 275
-        time_to_live 0.2
-        direction 1 0 0
+        emission_rate 600
+        time_to_live 0.01
+        direction 0 1 0
         velocity_min 250
         velocity_max 300
-        colour_range_start 1 1 0
-        colour_range_end 1 1 0
+        colour_range_start 1 1 0.3 
+        colour_range_end 0.5 0.5 0
+		height 30
+		width 30
+		depth 30
 }
 }
 
@@ -1031,8 +1034,8 @@ Static_Shield
         direction 1 0 0
         velocity_min 250
         velocity_max 300
-        colour_range_start 1 1 0
-        colour_range_end 1 1 0
+        colour_range_start 1 1 0.1 
+        colour_range_end 0.5 0.5 0
         width           120
         height          120
         depth           0
@@ -1105,8 +1108,8 @@ Wind_Arrow
         direction 1 0 0
         velocity_min 250
         velocity_max 300
-        colour_range_start 1 1 0
-        colour_range_end 1 1 0
+        colour_range_start 1 1 0.1 
+        colour_range_end 0.5 0.5 0
 }
 }
 
@@ -1139,22 +1142,23 @@ Explosion
     particle_width  70
     particle_height 70
 	cull_each       false
-    quota           10000
+    quota           3000
     billboard_type  point
     
     // Area emitter
-    emitter Ring
+    emitter Ellipsoid
 {
-        angle           30
-        emission_rate   6000
+        angle           360
+        emission_rate   600
         time_to_live    0.2
         direction       0 1 0
-        velocity    	0
+        velocity    	10
         colour_range_start  1 0 0
         colour_range_end    0.5 0.5 0
-        width           100
-        height          100
-        depth           30
+        width           200
+        height          200
+        depth           160
+
 }
 
     // Make em float upwards
@@ -1175,77 +1179,90 @@ Explosion
 
 Fire_Explosion
 {
-    material Flare
-    particle_width 20
-    particle_height 20
-    cull_each false
-    quota 10000
-    billboard_type point
- 
-
-   emitter Ring
+    material        Flare
+    particle_width  70
+    particle_height 70
+	cull_each       false
+    quota           3000
+    billboard_type  point
+    
+    // Area emitter
+    emitter Ellipsoid
 {
-        angle 360
-        emission_rate 3000
-        time_to_live 0.2
-        direction 1 0 0
-        velocity_min 250
-        velocity_max 300
-        colour_range_start 1 0 0
-        colour_range_end 1 0 0
-        width	150
-        heigt	150
-        depth	50
+        angle           360
+        emission_rate   600
+        time_to_live    0.2
+        direction       0 1 0
+        velocity    	10
+        colour_range_start  1 0 0
+        colour_range_end    0.5 0.5 0
+        width           200
+        height          200
+        depth           160
+
+}
+
+    // Make em float upwards
+    affector LinearForce
+{
+        force_vector      0 100 0
+        force_application add
+}
+
+    // Fader
+    affector ColourFader
+{
+        red -0.25
+        green -0.25
+        blue -0.25
 }
 }
 
 Ice_Explosion
 {
     material Flare
-    particle_width 20
-    particle_height 20
+    particle_width 70
+    particle_height 70
     cull_each false
-    quota 10000
+    quota 3000
     billboard_type point
  
-    emitter Ring
+    emitter Ellipsoid
 {
-        angle 360
-        emission_rate 3000
-        time_to_live 0.2
-        direction 1 0 0
-        velocity_min 250
-        velocity_max 300
+        angle           360
+        emission_rate   600
+        time_to_live    0.2
+        direction       0 1 0
+        velocity    	10
         colour_range_start 0.6 0.6 1
         colour_range_end 0.2 0.2 0.6
-        width	150
-        heigt	150
-        depth	50
+        width           200
+        height          200
+        depth           160
 }
 }
 
 Wind_Explosion
 {
     material Flare
-    particle_width 20
-    particle_height 20
+    particle_width 70
+    particle_height 70
     cull_each false
-    quota 10000
+    quota 3000
     billboard_type point
  
-   emitter Ring
+    emitter Ellipsoid
 {
-        angle 360
-        emission_rate 3000
-        time_to_live 0.2
-        direction 1 0 0
-        velocity_min 250
-        velocity_max 300
-        colour_range_start 1 1 0
-        colour_range_end 1 1 0
-        width	150
-        heigt	150
-        depth	50
+        angle           360
+        emission_rate   600
+        time_to_live    0.2
+        direction       0 1 0
+        velocity    	10
+        colour_range_start 1 1 0.1 
+        colour_range_end 0.5 0.5 0
+        width           200
+        height          200
+        depth           160
 }
 }
 

@@ -100,9 +100,9 @@
 						maylons_grave.finished = true;
 						speak("Maylons Ghost",_("text14_reward"));
 						-- drop suitable weapons
-						-- dropItem("???", "cryptGraveChamber");
-						-- dropItem("???", "cryptGraveChamber");
-						-- dropItem("???", "cryptGraveChamber");
+						-- dropItem("???", "graveChamber:cryptGraveChamber");
+						-- dropItem("???", "graveChamber:cryptGraveChamber");
+						-- dropItem("???", "graveChamber:cryptGraveChamber");
 					end;
 				end;
 			</Effect>
@@ -170,10 +170,10 @@
 	<Region name="aisMaylonsGraveL2">
 		<Event trigger ="create_region" once = "true">
 			<Effect>
-				addArea("MaylonUndeadArea","circle","cryptGraveChamber",15);
+				addArea("MaylonUndeadArea","circle","graveChamber:cryptGraveChamber",15);
 				if (maylons_grave.freed ~= true) then
-					createMonsterGroup("undead_weak","cryptGraveChamber");
-					createMonsterGroup("lich_skeletons","cryptGraveChamber");
+					createMonsterGroup("undead_weak","graveChamber:cryptGraveChamber");
+					createMonsterGroup("lich_skeletons","graveChamber:cryptGraveChamber");
 				end;
 			</Effect>
 		</Event>
@@ -189,7 +189,7 @@
 			</Condition>
 			<Effect>
 				maylons_grave.freed = true;
-				maylons_grave_tmp.maylons_ghost = createObject("peasant", "cryptGraveChamber");
+				maylons_grave_tmp.maylons_ghost = createObject("peasant", "graveChamber:cryptGraveChamber");
 				setRefName(maylons_grave_tmp.maylons_ghost, "Maylons Ghost");
 				createDialogue();
 				addSpeaker(maylons_grave_tmp.maylons_ghost,"Maylons Ghost");

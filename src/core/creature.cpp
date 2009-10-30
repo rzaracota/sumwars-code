@@ -3183,7 +3183,7 @@ bool Creature::takeDamage(Damage* d)
 	if (checkAbility("steadfast"))
 	{
 		float maxhealth = getBaseAttrMod()->m_max_health;
-		physfaktor = 1.0 - 0.6*(maxhealth - m_dyn_attr.m_health)/maxhealth;
+		physfaktor = 1.0 - 0.5*(maxhealth - m_dyn_attr.m_health)/maxhealth;
 	}
 	dmgt *= physfaktor;
 	
