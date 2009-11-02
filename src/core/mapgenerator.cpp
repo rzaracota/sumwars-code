@@ -121,6 +121,8 @@ void MapGenerator::createMapData(MapData* mdata, RegionData* rdata)
 	mdata->m_template_map->clear();
 	mdata->m_region = new Region(rdata->m_dimx,rdata->m_dimy,rdata->m_id,rdata->m_name,rdata);
 	mdata->m_template_index_map = new Matrix2d<int>(rdata->m_dimx,rdata->m_dimy);
+	mdata->m_template_places.clear();
+	mdata->m_border.clear();
 }
 
 void MapGenerator::createBaseMap(MapData* mdata, RegionData* rdata)
@@ -344,6 +346,9 @@ void MapGenerator::createBaseMap(MapData* mdata, RegionData* rdata)
 
  void MapGenerator::createTemplateMap(MapData* mdata, RegionData* rdata)
 {
+	Matrix2d<int>  markval(rdata->m_dimx,rdata->m_dimy);
+	markval.clear();
+	
 	// Delta zu Nachbarfeldern
 	int nb[4][2] = {{-1,0},{1,0},{0,-1},{0,1}};
 
@@ -397,9 +402,11 @@ void MapGenerator::createBaseMap(MapData* mdata, RegionData* rdata)
 
 						mdata->m_template_places[1].push_back(nbif * 10000 + nbjf);
 						*(mdata->m_template_index_map->ind(nbif,nbjf)) = mdata->m_template_places[1].size()-1;
+						
+						
 					}
 
-
+					markval[nbif][nbjf] =1;
 				}
 
 			}
@@ -417,8 +424,7 @@ void MapGenerator::createBaseMap(MapData* mdata, RegionData* rdata)
 	int markercnt =2;
 	std::pair<int,int> point;
 	int x,y,nbx,nby;
-
-
+	
 	while (!qu.empty())
 	{
 		// Feld entnehmen
@@ -461,8 +467,27 @@ void MapGenerator::createBaseMap(MapData* mdata, RegionData* rdata)
 			(*(mdata->m_template_map))[nbx][nby]= markercnt;
 			mdata->m_template_places[markercnt].push_back(nbx*10000+nby);
 			*(mdata->m_template_index_map->ind(nbx,nby)) = mdata->m_template_places[markercnt].size() -1;
+			
+			markval[nbx][nby] = markercnt;
 		}
 	}
+	
+	/*
+	for (int i=0; i< rdata->m_dimx; i++)
+	{
+		for (int j=0; j<rdata->m_dimy; j++)
+		{
+			std::cout << markval[i][j] << " ";
+		}
+		std::cout << "\n";
+	}
+	
+	std::map< int, std::vector<int> >::iterator mt;
+	for (mt = mdata->m_template_places.begin(); mt != mdata->m_template_places.end(); ++mt)
+	{
+		DEBUG("templates size %i: %i",mt->first, mt->second.size());
+	}
+	*/
 }
 
 bool MapGenerator::insertGroupTemplates(MapData* mdata, RegionData* rdata)
@@ -499,6 +524,25 @@ bool MapGenerator::insertGroupTemplates(MapData* mdata, RegionData* rdata)
 		{
 			// Obligatorisches Template konnte nicht platziert werden
 			DEBUG("could not place template %s",it->second.m_group_name.c_str());
+			/*
+			int hdimx = rdata->m_dimx/2;
+			int hdimy = rdata->m_dimy/2;
+			for (int i=0; i<hdimx; i++)
+			{
+				for (int j=0; j< hdimy;j++)
+				{
+					if (*(mdata->m_base_map->ind(i,j)) != -1)
+					{
+						std::cout << "  ";
+					}
+					else
+					{
+						std::cout << "# ";
+					}
+				}
+				std::cout << "\n";
+			}
+			*/
 			return false;
 		}
 
@@ -787,7 +831,7 @@ void MapGenerator::createBorder(MapData* mdata, RegionData* rdata)
 
 			}
 			
-			//std::cout << diagbmask[dmask] <<" ";
+			//std::cout << bmask[dmask] <<" ";
 			if (skip)
 				continue;
 

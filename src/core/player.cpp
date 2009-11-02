@@ -1366,7 +1366,7 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 					getRegion()->insertPlayerTeleport(getId(), regloc);
 					clearCommand(true);
 				}
-				else if (command->m_id == -1 && m_portal_position.first != "")
+				else if (command->m_id == -999 && m_portal_position.first != "")
 				{
 					getRegion()->insertPlayerTeleport(getId(), m_portal_position);
 					RegionLocation regloc;

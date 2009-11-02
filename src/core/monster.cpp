@@ -237,7 +237,7 @@ void Monster::updateCommand()
 				WorldObjectList::iterator it;
 				for (it = ret.begin(); it != ret.end();)
 				{
-					if (World::getWorld()->getRelation(m_fraction,*it) == Fraction::ALLIED )
+					if (World::getWorld()->getRelation(m_fraction,*it) == Fraction::ALLIED)
 					{
 						it = ret.erase(it);
 					}
@@ -255,13 +255,13 @@ void Monster::updateCommand()
 				}
 				else
 				{
-					/*
+					
 					WorldObjectList::iterator it;
 					for (it = ret.begin(); it != ret.end();++it)
 					{
 						DEBUG("blocking obj %i",(*it)->getId());
 					}
-					*/
+					DEBUG("dist %f max dist %f",dist, m_ai.m_vars.m_shoot_range);
 				}
 			}
 		}
@@ -343,7 +343,7 @@ void Monster::updateCommand()
 		cmd->m_goal_object_id = m_ai.m_command.m_goal_object_id;
 		cmd->m_range = m_ai.m_command.m_range;
 		
-		DEBUG4("calculated command %s for %s",m_ai.m_command.m_type.c_str(),getSubtype().c_str());
+		DEBUG("calculated command %s for %s",m_ai.m_command.m_type.c_str(),getSubtype().c_str());
 		
 
 		addToNetEventMask(NetEvent::DATA_COMMAND);
@@ -385,7 +385,6 @@ void Monster::calcBestCommand()
 
 void Monster::evalCommand(Action::ActionType act)
 {
-	DEBUG5("evaluation command %s",act.c_str());
 	WorldObjectValueList::iterator it;
 	WorldObjectValueList* goal_list=0;
 	Creature* cgoal=0;
@@ -503,6 +502,8 @@ void Monster::evalCommand(Action::ActionType act)
 				{
 					m_ai.m_command.m_type = "walk";
 					m_ai.m_command.m_range = getShape()->m_radius;
+					
+					DEBUG("%p: %i , %p: %i (%f)", m_ai.m_visible_goals, m_ai.m_visible_goals->size(), m_ai.m_goals, m_ai.m_goals->size(), m_ai.m_vars.m_shoot_range);
 				}
 			}
 		}

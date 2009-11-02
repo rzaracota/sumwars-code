@@ -126,7 +126,7 @@ void Worldmap::update()
 			
 			pos = it->second.m_world_coord;
 			
-			label->setID(-1);
+			label->setID(-999);
 			if (player->checkWaypoint(id))
 			{
 				label->setPosition(CEGUI::UVector2(cegui_reldim(pos.m_x+0.015f), cegui_reldim(pos.m_y)));
