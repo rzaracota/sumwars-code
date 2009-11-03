@@ -892,19 +892,10 @@ void GraphicObject::updateRenderPart(ActionRenderpart* part,float  relpercent)
 			
 			if (highlight_ent != 0)
 			{
-				anim_set = highlight_ent->getAllAnimationStates();
-			
-				if (anim_set != 0 && anim_set->hasAnimationState(part->m_animation))
-				{
-				
-					anim = highlight_ent->getAnimationState(part->m_animation);
-					if (anim != 0)
-					{
-						anim->setEnabled(true);
-						anim->setTimePosition(relpercent*anim->getLength());
-						highlight_ent->_updateAnimation();
-					}
-				}
+				Ogre::AnimationState* h_anim;
+				Ogre::AnimationStateSet* h_anim_set;
+				h_anim_set = highlight_ent->getAllAnimationStates();
+				anim_set->copyMatchingState(h_anim_set);
 			}
 		}
 		
