@@ -416,6 +416,11 @@ class MainWindow :
 	 */
 	unsigned int m_key;
 	
+	/**
+	 * \var int m_highlight_id
+	 * \brief ID des gerade per Highlight markierten Objektes
+	 */
+	int m_highlight_id;
 
 };
 

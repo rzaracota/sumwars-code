@@ -259,9 +259,9 @@ void Monster::updateCommand()
 					WorldObjectList::iterator it;
 					for (it = ret.begin(); it != ret.end();++it)
 					{
-						DEBUG("blocking obj %i",(*it)->getId());
+						DEBUG5("blocking obj %i",(*it)->getId());
 					}
-					DEBUG("dist %f max dist %f",dist, m_ai.m_vars.m_shoot_range);
+					DEBUG5("dist %f max dist %f",dist, m_ai.m_vars.m_shoot_range);
 				}
 			}
 		}
@@ -343,7 +343,7 @@ void Monster::updateCommand()
 		cmd->m_goal_object_id = m_ai.m_command.m_goal_object_id;
 		cmd->m_range = m_ai.m_command.m_range;
 		
-		DEBUG("calculated command %s for %s",m_ai.m_command.m_type.c_str(),getSubtype().c_str());
+		DEBUG5("calculated command %s for %s",m_ai.m_command.m_type.c_str(),getSubtype().c_str());
 		
 
 		addToNetEventMask(NetEvent::DATA_COMMAND);
@@ -503,7 +503,7 @@ void Monster::evalCommand(Action::ActionType act)
 					m_ai.m_command.m_type = "walk";
 					m_ai.m_command.m_range = getShape()->m_radius;
 					
-					DEBUG("%p: %i , %p: %i (%f)", m_ai.m_visible_goals, m_ai.m_visible_goals->size(), m_ai.m_goals, m_ai.m_goals->size(), m_ai.m_vars.m_shoot_range);
+					DEBUG5("%p: %i , %p: %i (%f)", m_ai.m_visible_goals, m_ai.m_visible_goals->size(), m_ai.m_goals, m_ai.m_goals->size(), m_ai.m_vars.m_shoot_range);
 				}
 			}
 		}

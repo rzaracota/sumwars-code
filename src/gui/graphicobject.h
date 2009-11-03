@@ -19,6 +19,7 @@ struct AttachedMovableObject
 	Ogre::MovableObject* m_object;
 	Ogre::TagPoint* m_tagpoint;
 	Ogre::Entity* m_entity;
+	Ogre::Entity* m_highlight_entity;
 	Ogre::SceneNode* m_tag_trackpoint;
 };
 
@@ -110,6 +111,8 @@ class GraphicObject
 			return m_name;
 		}
 		
+		void setHighlight(bool highlight, std::string material);
+		
 	private:
 		void addObjectsFromRenderInfo(GraphicRenderInfo* info);
 		
@@ -127,11 +130,15 @@ class GraphicObject
 		
 		Ogre::MovableObject* getMovableObject(std::string name);
 		
+		Ogre::MovableObject* getHighlightObject(std::string name);
+		
 		Ogre::Entity* getEntity(std::string name);
 		
 		Ogre::Node* getParentNode(std::string name);
 		
 		void initAttachedAction(AttachedAction& attchaction, std::string action);
+		
+		
 		
 		/**
 		 * \var Type m_type
@@ -176,13 +183,41 @@ class GraphicObject
 		 */
 		std::map<std::string,  AttachedState> m_attached_states;
 		
+		/**
+		 * \var Ogre::SceneNode* m_top_node
+		 * \brief oberster Ogre Scenenode
+		 */
 		Ogre::SceneNode* m_top_node;
 		
+		/**
+		 * \var std::string m_name
+		 * \brief Name des Objektes
+		 */
 		std::string m_name;
 		
+		/**
+		 * \var AttachedAction m_action
+		 * \brief Aktion, die das Objekt gerade darstellt
+		 */
 		AttachedAction m_action;
 		
+		/**
+		 * \var int m_id
+		 * \brief ID
+		 */
 		int m_id;
+		
+		/**
+		 * \var bool m_highlight
+		 * \brief Gibt an, ob das Objekt gerade den highlight effekt aktiviert hat
+		 */
+		bool m_highlight;
+		
+		/**
+		 * \var std::string m_hightlight_material
+		 * \brief Zusatzmaterial, mit dem das Highlighting dargestellt wird
+		 */
+		std::string m_hightlight_material;
 };
 
 

@@ -97,7 +97,12 @@ class Scene
 	void updateCharacterView();
 
 	
-	
+	/**
+	 * \fn GraphicObject* getGraphicObject(int id)
+	 * \brief Gibt GraphikObjekt mit der angegebenen ID aus
+	 * \param id ID
+	 */
+	GraphicObject* getGraphicObject(int id);
 	
 
 
@@ -106,6 +111,7 @@ class Scene
 	
 	private:
 
+		
 	/**
 	 * \fn GraphicObject* createGraphicObject(GameObject* gobj, std::string name="")
 	 * \brief erzeugt zu einem Spielobjekt das passende Graphicobjekt

@@ -141,7 +141,13 @@ void Scene::registerMeshes()
 }
 
 
-
+GraphicObject* Scene::getGraphicObject(int id)
+{
+	std::map<int,GraphicObject*>::iterator it =  m_graphic_objects.find(id);
+	if (it == m_graphic_objects.end())
+		return 0;
+	return it->second;
+}
 
 std::pair<float,float> Scene::getProjection(Vector pos, float height)
 {

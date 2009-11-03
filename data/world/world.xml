@@ -431,7 +431,7 @@
 		<HeroLight red="1.0" green="1.0" blue="1.0" /> 
 		<DirectionalLight red="0.3" green="0.3" blue="0.3" />
 		
-		<Settings dimx="36" dimy="36" area_percent="0.4" complexity="0.4" granularity="6"  ground="grass1"/>
+		<Settings dimx="42" dimy="42" area_percent="0.36" complexity="0.4" granularity="6"  ground="grass1"/>
 		<WorldPosition world_x="0.6" world_y ="0.8"/>
 		
 		<ExitDirections north="false" south="false" west="true" east="false" />
@@ -457,13 +457,14 @@
 		</ObjectGroups>
 		
 		<SpawnGroups>
-			<SpawnGroup group_name="goblins_gobrusch" number="1"/>
+	<!--		<SpawnGroup group_name="goblins_temple1" number="15"/>
+			<SpawnGroup group_name="goblins_temple2" number="15"/> -->
 		</SpawnGroups>
 		
 		<Event trigger ="create_region" once = "true">
 			<Effect>
 				createObject("goblin_regresh", "temple:locGoblinShaman");
-				createObject("goblin_tguard", "temple:locGoblinGuard1");
+					createObject("goblin_tguard", "temple:locGoblinGuard1");
 				createObject("goblin_apprtc", "temple:locGoblinGuard2");
 				createObject("goblin_tguard", "temple:locGoblinGuard3");
 			</Effect>

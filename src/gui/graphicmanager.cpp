@@ -62,6 +62,23 @@ void GraphicManager::destroyGraphicObject(GraphicObject* obj)
 	}
 }
 
+void GraphicManager::detachMovableObject(Ogre::MovableObject* obj)
+{
+	Ogre::Node* node = obj->getParentNode();
+	Ogre::SceneNode* snode = dynamic_cast<Ogre::SceneNode*>(node);
+	Ogre::TagPoint* tag = dynamic_cast<Ogre::TagPoint*>(node);
+		
+	if (snode != 0)
+	{
+		snode->detachObject(obj);
+	}
+	else if (tag != 0)
+	{
+			
+		tag->getParentEntity()->detachObjectFromBone(obj);
+	}
+}
+
 Ogre::MovableObject* GraphicManager::createMovableObject(MovableObjectInfo& info, std::string name)
 {
 	static int id =0;

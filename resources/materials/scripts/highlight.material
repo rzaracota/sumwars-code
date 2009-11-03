@@ -1,0 +1,119 @@
+fragment_program red_highlight_ps glsl
+{
+	source p_red_highlight.glsl
+
+}
+
+fragment_program white_highlight_ps glsl
+{
+	source p_white_highlight.glsl
+
+}
+
+vertex_program highlight_vs glsl
+{
+	source v_highlight.glsl
+}
+
+material red_highlight
+{
+	technique
+	{
+		pass
+		{
+			scene_blend alpha_blend
+			depth_check on
+			lighting off
+			
+			fragment_program_ref red_highlight_ps 
+			{
+				param_named alpha_value float 0.4
+			}
+		}
+		
+	}
+}
+
+
+material red_highlight_alpha
+{
+	technique
+	{
+		pass
+		{
+			scene_blend alpha_blend
+			depth_check on
+			lighting off
+			
+			fragment_program_ref red_highlight_ps 
+			{
+				param_named alpha_value float 0.0
+			}
+		}
+
+		pass
+		{
+			scene_blend alpha_blend
+			depth_check on
+			lighting off
+			
+			fragment_program_ref red_highlight_ps 
+			{
+				param_named alpha_value float 0.0
+			}
+			
+		}
+		
+	}
+}
+
+material red_highlight_alpha_nodepth
+{
+	technique
+	{
+		pass
+		{
+			scene_blend alpha_blend
+			depth_check off
+			lighting off
+			
+			fragment_program_ref red_highlight_ps 
+			{
+				param_named alpha_value float 0.2
+			}
+			vertex_program_ref highlight_vs 
+			{
+				param_named size_value float 1.1
+			}
+		}
+	
+	}
+}
+
+material white_highlight_alpha_nodepth
+{
+	technique
+	{
+		pass
+		{
+			scene_blend alpha_blend
+			depth_check off
+			lighting off
+			
+			fragment_program_ref white_highlight_ps 
+			{
+				param_named alpha_value float 0.2
+			}
+			
+			vertex_program_ref highlight_vs 
+			{
+				param_named size_value float 1.1
+			}
+		}
+	}
+}
+
+
+
+
+

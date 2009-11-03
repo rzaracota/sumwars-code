@@ -25,6 +25,8 @@ GraphicObject::GraphicObject(Type type, GraphicRenderInfo* render_info, std::str
 		mainmesh.m_type = MovableObjectInfo::ENTITY;
 		addMovableObject(mainmesh);
 	}
+	
+	m_highlight = false;
 }
 
 GraphicObject::~GraphicObject()
@@ -75,6 +77,17 @@ Ogre::MovableObject* GraphicObject::getMovableObject(std::string name)
 		return 0;
 	
 	return m_attached_objects[name].m_object;
+}
+
+Ogre::MovableObject* GraphicObject::getHighlightObject(std::string name)
+{
+	if (name == "")
+		name ="mainmesh";
+	
+	if (m_attached_objects.count(name) == 0)
+		return 0;
+	
+	return m_attached_objects[name].m_highlight_entity;
 }
 
 Ogre::Entity* GraphicObject::getEntity(std::string name)
@@ -318,6 +331,7 @@ void GraphicObject::addMovableObject(MovableObjectInfo& object)
 		m_attached_objects[object.m_objectname].m_object = obj;
 		m_attached_objects[object.m_objectname].m_tagpoint = tag;
 		m_attached_objects[object.m_objectname].m_entity = ent;
+		m_attached_objects[object.m_objectname].m_highlight_entity = 0;
 	}
 	
 	// StartPosition und -Rotation setzen
@@ -359,20 +373,20 @@ void GraphicObject::removeMovableObject(std::string name)
 		Ogre::Node* node = obj->getParentNode();
 		Ogre::SceneNode* snode = dynamic_cast<Ogre::SceneNode*>(node);
 		Ogre::TagPoint* tag = dynamic_cast<Ogre::TagPoint*>(node);
-		
-		if (snode != 0)
-		{
-			snode->detachObject(obj);
-			snode->getCreator()->destroySceneNode(snode->getName());
-		}
-		else if (tag != 0)
-		{
-			
-			tag->getParentEntity()->detachObjectFromBone(obj);
-		}
+		GraphicManager::detachMovableObject(obj);
 		
 		GraphicManager::destroyMovableObject(obj);
 		
+		// Entfernen der Highlight Entity;
+		obj = getHighlightObject(name);
+		if (obj != 0)
+		{
+			GraphicManager::detachMovableObject(obj);
+		
+			GraphicManager::destroyMovableObject(obj);
+		}
+		
+		snode->getCreator()->destroySceneNode(snode->getName());
 		std::map<std::string, AttachedMovableObject>::iterator it;
 		it = m_attached_objects.find(name);
 		
@@ -854,6 +868,8 @@ void GraphicObject::updateRenderPart(ActionRenderpart* part,float  relpercent)
 	if (part->m_type == ActionRenderpart::ANIMATION)
 	{
 		Ogre::Entity* ent = getEntity(part->m_objectname);
+		Ogre::Entity* highlight_ent = static_cast<Ogre::Entity*>(getHighlightObject(part->m_objectname));
+		
 		if (ent != 0)
 		{
 			DEBUG5("anim %s perc %f",part->m_animation.c_str(), relpercent);
@@ -873,7 +889,25 @@ void GraphicObject::updateRenderPart(ActionRenderpart* part,float  relpercent)
 					ent->_updateAnimation();
 				}
 			}
+			
+			if (highlight_ent != 0)
+			{
+				anim_set = highlight_ent->getAllAnimationStates();
+			
+				if (anim_set != 0 && anim_set->hasAnimationState(part->m_animation))
+				{
+				
+					anim = highlight_ent->getAnimationState(part->m_animation);
+					if (anim != 0)
+					{
+						anim->setEnabled(true);
+						anim->setTimePosition(relpercent*anim->getLength());
+						highlight_ent->_updateAnimation();
+					}
+				}
+			}
 		}
+		
 	}
 	else if (part->m_type == ActionRenderpart::SCALE)
 	{
@@ -907,4 +941,59 @@ void GraphicObject::updateRenderPart(ActionRenderpart* part,float  relpercent)
 			}
 		}
 	}
+}
+
+void GraphicObject::setHighlight(bool highlight, std::string material)
+{
+	// nach *unten* durchreichen
+	std::map<std::string, AttachedGraphicObject >::iterator it;
+	for (it = m_subobjects.begin(); it != m_subobjects.end(); ++it)
+	{
+		it->second.m_object->setHighlight(highlight,material);	
+	}
+	
+	if (highlight == m_highlight)
+		return;
+	
+	if (highlight && !m_highlight)
+	{
+		// Highlight einschalten
+		std::map<std::string, AttachedMovableObject>::iterator at;
+		for (at = m_attached_objects.begin(); at != m_attached_objects.end(); ++at)
+		{
+			if (at->second.m_object->getMovableType() == "Entity")
+			{
+				// Kopie der Entity erschaffen, die fuer das Highlighting da ist
+				std::string name = at->first;
+				name += "_highlight";
+				
+				at->second.m_highlight_entity = static_cast<Ogre::Entity*>(GraphicManager::createMovableObject(at->second.m_object_info,name));
+				
+				at->second.m_highlight_entity->setMaterialName(material);
+				
+				Ogre::SceneNode* node = at->second.m_object->getParentSceneNode();
+				node->attachObject(at->second.m_highlight_entity);
+			}
+		}
+	}
+	else if (!highlight && m_highlight)
+	{
+		// Highlight ausschalten
+		std::map<std::string, AttachedMovableObject>::iterator at;
+		for (at = m_attached_objects.begin(); at != m_attached_objects.end(); ++at)
+		{
+			if (at->second.m_highlight_entity != 0)
+			{
+				// Kopie der Entity erschaffen, die fuer das Highlighting da ist
+				GraphicManager::detachMovableObject(at->second.m_highlight_entity);
+		
+				GraphicManager::destroyMovableObject(at->second.m_highlight_entity);
+				
+				at->second.m_highlight_entity =0;
+			}
+		}
+	}
+	
+	
+	m_highlight = highlight;
 }

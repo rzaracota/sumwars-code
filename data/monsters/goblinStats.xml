@@ -617,13 +617,13 @@
 <Monster type="MONSTER" subtype="goblin_snow" name="snowcaller" fraction="monster" race="goblin" layer="NORMAL">
 	<RenderInfo name="goblin_snow" />
 	<Dropslots >
-		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.05" pgold="0.05" min_gold="10" max_gold="80" min_level="4" max_level="9" magic_prob="0.1" magic_power="300" />
+		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.05" pgold="0.05" min_gold="10" max_gold="80" min_level="4" max_level="10" magic_prob="0.1" magic_power="300" />
 		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.03" pgold="0.05" min_gold="5" max_gold="50" min_level="2" max_level="7" magic_prob="0.2" magic_power="250" />
 	</Dropslots>
 	
 	<BasicAttributes
 					experience="40"
-					level="7"
+					level="8"
 					max_health="80"
 					armor="15"
 					block="10"
@@ -1030,7 +1030,19 @@
 	<SubGroup subtype="goblin_poacher" number="2" prob="1.0" />
 	<SubGroup subtype="goblin_rob" number="2" prob="1.0" />
 	<SubGroup subtype="goblin_fighter" number="1" prob="0.7" />
+	<SubGroup subtype="goblin_poacher" number="2" prob="1.0" />
 </MonsterGroup>	
+
+<MonsterGroup name="goblins_temple1" >
+	<SubGroup subtype="goblin_bon" number="1" prob="1.0" />
+	<SubGroup subtype="goblin_fighter" number="3" prob="0.7" />
+	<SubGroup subtype="goblin_poacher" number="1" prob="1.0" />
+</MonsterGroup>
+
+<MonsterGroup name="goblins_temple2" >
+	<SubGroup subtype="goblin_snow" number="1" prob="1.0" />
+	<SubGroup subtype="goblin_fighter" number="3" prob="0.7" />
+</MonsterGroup>
 
 <MonsterGroup name="goblins_lurdrak" >
 	<SubGroup subtype="goblin_lurdrak" number="1" prob="1.0" />

@@ -42,6 +42,8 @@ class GraphicManager
 		
 		static void destroyMovableObject(Ogre::MovableObject* obj);
 		
+		static void detachMovableObject(Ogre::MovableObject* obj);
+		
 		static void registerGraphicMapping(std::string, GraphicObject::Type graphic);
 		
 		static GraphicObject::Type getGraphicType(std::string objecttype);

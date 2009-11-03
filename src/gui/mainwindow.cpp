@@ -40,6 +40,7 @@ MainWindow::MainWindow(Ogre::Root* ogreroot, CEGUI::System* ceguisystem,Ogre::Re
 	}
 	
 	m_key =0;
+	m_highlight_id =0;
 }
 
 bool MainWindow::init()
@@ -468,9 +469,6 @@ void MainWindow::update(float time)
 	if (m_document->getLocalPlayer()!=0 && m_document->getLocalPlayer()->getRegion()!=0)
 	{
 
-		// Szene aktualisieren
-		m_scene->update(time);
-
 		// ObjectInfo aktualisieren
 		updateObjectInfo();
 		
@@ -478,6 +476,9 @@ void MainWindow::update(float time)
 		updateRegionInfo();
 		updateChatContent();
 		updateDamageVisualizer();
+		
+		// Szene aktualisieren
+		m_scene->update(time);
 		
 		// Bild am Curso aktualisieren
 		updateCursorItemImage();
@@ -1125,7 +1126,7 @@ void MainWindow::updateObjectInfo()
 	
 	int id=0;
 	int objid =0;
-
+	
 	if (m_mouse->getMouseState().buttons !=0)
 	{
 		// fokussiertes Objekt nicht wechseln, wenn Maustaste gedrueckt
@@ -1249,9 +1250,12 @@ void MainWindow::updateObjectInfo()
 			label->setVisible(false);
 			bar->setVisible(false);
 			itmlabel->setVisible(false);
+			
 		}
 	}
-
+	
+	std::string highlightmat ="white_highlight_alpha_nodepth";
+	
 	std::string name;
 	std::ostringstream string_stream;
 	if (objid!=0)
@@ -1298,6 +1302,11 @@ void MainWindow::updateObjectInfo()
 				if (label->getText() != (CEGUI::utf8*) name.c_str())
 				{
 					label->setText((CEGUI::utf8*) name.c_str());
+				}
+				
+				if (World::getWorld()->getRelation(cwo->getFraction(),player) == Fraction::HOSTILE)
+				{
+					highlightmat ="red_highlight_alpha_nodepth";
 				}
 			}
 			else
@@ -1365,8 +1374,28 @@ void MainWindow::updateObjectInfo()
 		}
 	}
 
-
+	int hlid = objid;
+	if (hlid == player->getId())
+		hlid =0;
 	
+	if (m_highlight_id !=  hlid)
+	{
+		GraphicObject* grobj = m_scene->getGraphicObject(m_highlight_id);
+		if (grobj != 0)
+		{
+			grobj->setHighlight(false,"red_highlight_alpha_nodepth");
+		}
+		
+		if (objid != 0)
+		{
+			grobj = m_scene->getGraphicObject(hlid);
+			if (grobj != 0)
+			{
+				grobj->setHighlight(true,highlightmat);
+			}
+		}
+		m_highlight_id = hlid;
+	}
 
 }
 

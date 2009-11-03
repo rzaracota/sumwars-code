@@ -318,6 +318,7 @@ bool Application::setupResources()
 #endif
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../resources/models", "FileSystem", "General");
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../resources/materials/scripts", "FileSystem", "General");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../resources/materials/programs", "FileSystem", "General");
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../resources/materials/textures", "FileSystem", "General");
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../resources/particle", "FileSystem", "General");
 

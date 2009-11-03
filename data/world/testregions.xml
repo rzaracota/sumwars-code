@@ -81,6 +81,10 @@
 					 addUnitCommand(skel, "attack", guard)
 				 </Effect>
 			</Event>
+			
+			<NamedObjectGroups>
+				<NameObjectGroup name="temple" object_group="goblinSanctuary" priority="4"/>
+			</NamedObjectGroups>
 		 </Region>
 		 
 		 <Region id="1002" name="spawnAbyss">
