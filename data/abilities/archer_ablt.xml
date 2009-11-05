@@ -175,7 +175,8 @@
 		 timer_nr="2.000000"
 		 timer_value="240000.000000"
 		 base_ability="noaction"
-		 critical_percent="0.660000">
+		 critical_percent="0.660000"
+		 target_type="self">
 	<Flag name="mute_affected" />
 	<Effect>
 		<CppImplementation type="basemod_at_self" />
