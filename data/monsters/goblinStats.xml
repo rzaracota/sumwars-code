@@ -952,6 +952,12 @@
 	<SubGroup subtype="goblin_bow" number="1" prob="0.7" />
 </MonsterGroup>
 
+<MonsterGroup name="willard_goblins" >
+	<SubGroup subtype="goblin" number="4" prob="1.0" />
+	<SubGroup subtype="goblin_bow" number="2" prob="1.0" />
+	<SubGroup subtype="goblin_drakrazz" number="1" prob="1.0" />
+</MonsterGroup>
+
 <MonsterGroup name="goblins_bow_l3" >
 	<SubGroup subtype="goblin" number="1" prob="1.0" />
 	<SubGroup subtype="goblin_bow" number="2" prob="1.0" />
