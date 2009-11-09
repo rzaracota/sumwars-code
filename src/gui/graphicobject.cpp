@@ -892,7 +892,6 @@ void GraphicObject::updateRenderPart(ActionRenderpart* part,float  relpercent)
 			
 			if (highlight_ent != 0)
 			{
-				Ogre::AnimationState* h_anim;
 				Ogre::AnimationStateSet* h_anim_set;
 				h_anim_set = highlight_ent->getAllAnimationStates();
 				anim_set->copyMatchingState(h_anim_set);
@@ -961,6 +960,7 @@ void GraphicObject::setHighlight(bool highlight, std::string material)
 				at->second.m_highlight_entity = static_cast<Ogre::Entity*>(GraphicManager::createMovableObject(at->second.m_object_info,name));
 				
 				at->second.m_highlight_entity->setMaterialName(material);
+				at->second.m_highlight_entity->setRenderQueueGroup(RENDER_QUEUE_HIGHLIGHT_OBJECTS); 
 				
 				Ogre::SceneNode* node = at->second.m_object->getParentSceneNode();
 				node->attachObject(at->second.m_highlight_entity);

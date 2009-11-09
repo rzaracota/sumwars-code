@@ -15,6 +15,34 @@
 #include <list>
 #include <map>
 
+#include <OgreRenderQueueListener.h> 
+#include <OgreRenderSystem.h>
+#include <OgreRenderQueue.h>
+#include <OgreRenderQueueListener.h> 
+
+#ifndef RENDER_QUEUE_MAIN
+#define RENDER_QUEUE_MAIN 50
+#endif
+
+#define RENDER_QUEUE_HIGHLIGHT_MASK	RENDER_QUEUE_MAIN + 1
+#define RENDER_QUEUE_HIGHLIGHT_OBJECTS	RENDER_QUEUE_MAIN + 2
+#define LAST_STENCIL_OP_RENDER_QUEUE	RENDER_QUEUE_HIGHLIGHT_OBJECTS
+
+#define STENCIL_VALUE_FOR_OUTLINE_GLOW 1
+#define STENCIL_VALUE_FOR_FULL_GLOW 2
+#define STENCIL_FULL_MASK 0xFFFFFFFF
+
+class StencilOpQueueListener : public Ogre::RenderQueueListener 
+{ 
+	public: 
+		virtual void renderQueueStarted(Ogre::uint8 queueGroupId, const Ogre::String& invocation, bool& skipThisInvocation);
+		
+
+		virtual void renderQueueEnded(Ogre::uint8 queueGroupId, const Ogre::String& invocation, bool& repeatThisInvocation);
+
+}; 
+
+
 class GraphicManager
 {
 	public:
@@ -72,6 +100,8 @@ class GraphicManager
 		static void loadActionRenderInfo(TiXmlNode* node, ActionRenderInfo* info);
 		
 		static Ogre::SceneManager* m_scene_manager;
+		
+		static StencilOpQueueListener* m_stencil_listener;
 };
 
 #endif

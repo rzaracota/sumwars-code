@@ -1,79 +1,76 @@
 #include "graphicmanager.h"
 #include "debug.h"
 #include "elementattrib.h"
-#include <OgreRenderQueueListener.h> 
-#include <OgreRenderSystem.h>
 
-#define RENDER_QUEUE_HIGHLIGHT_MASK	RENDER_QUEUE_MAIN + 1
-#define RENDER_QUEUE_HIGHLIGHT_OBJECTS	RENDER_QUEUE_MAIN + 2
-#define LAST_STENCIL_OP_RENDER_QUEUE	RENDER_QUEUE_HIGHLIGHT_OBJECTS
 
-/*
-class StencilOpQueueListener : public Ogre::RenderQueueListener 
-{ 
-	public: 
-		virtual void renderQueueStarted(Ogre::uint8 queueGroupId, const Ogre::String& invocation, bool& skipThisInvocation) 
-		{ 
-			if (queueGroupId == RENDER_QUEUE_OUTLINE_GLOW_OBJECTS) // outline glow object 
-			{ 
-				Ogre::RenderSystem * rendersys = Ogre::Root::getSingleton().getRenderSystem(); 
 
-				rendersys->clearFrameBuffer(Ogre::FBT_STENCIL); 
-				rendersys->setStencilCheckEnabled(true); 
-				rendersys->setStencilBufferParams(Ogre::CMPF_ALWAYS_PASS,
-						STENCIL_VALUE_FOR_OUTLINE_GLOW, STENCIL_FULL_MASK, 
-	  Ogre::SOP_KEEP,Ogre::SOP_KEEP,Ogre::SOP_REPLACE,false);       
-			} 
-			if (queueGroupId == RENDER_QUEUE_OUTLINE_GLOW_GLOWS)  // outline glow
-			{ 
-				Ogre::RenderSystem * rendersys = Ogre::Root::getSingleton().getRenderSystem(); 
-				rendersys->setStencilCheckEnabled(true); 
-				rendersys->setStencilBufferParams(Ogre::CMPF_NOT_EQUAL,
-						STENCIL_VALUE_FOR_OUTLINE_GLOW, STENCIL_FULL_MASK, 
-	  Ogre::SOP_KEEP,Ogre::SOP_KEEP,Ogre::SOP_REPLACE,false);       
-			} 
-			if (queueGroupId == RENDER_QUEUE_FULL_GLOW_ALPHA_GLOW)  // full glow - alpha glow
-			{ 
-				Ogre::RenderSystem * rendersys = Ogre::Root::getSingleton().getRenderSystem(); 
-				rendersys->setStencilCheckEnabled(true); 
-				rendersys->setStencilBufferParams(Ogre::CMPF_ALWAYS_PASS,
-						STENCIL_VALUE_FOR_FULL_GLOW,STENCIL_FULL_MASK, 
-	  Ogre::SOP_KEEP,Ogre::SOP_KEEP,Ogre::SOP_REPLACE,false);       
-			} 
 
-			if (queueGroupId == RENDER_QUEUE_FULL_GLOW_GLOW)  // full glow - glow
-			{ 
-				Ogre::RenderSystem * rendersys = Ogre::Root::getSingleton().getRenderSystem(); 
-				rendersys->setStencilCheckEnabled(true); 
-				rendersys->setStencilBufferParams(Ogre::CMPF_EQUAL,
-						STENCIL_VALUE_FOR_FULL_GLOW,STENCIL_FULL_MASK, 
-	  Ogre::SOP_KEEP,Ogre::SOP_KEEP,Ogre::SOP_ZERO,false);       
-			} 
-
-		} 
-
-		virtual void renderQueueEnded(Ogre::uint8 queueGroupId, const Ogre::String& invocation, bool& repeatThisInvocation) 
-		{ 
-			if (( queueGroupId == LAST_STENCIL_OP_RENDER_QUEUE )
-
-			   ) 
-			{ 
-				Ogre::RenderSystem * rendersys = Ogre::Root::getSingleton().getRenderSystem(); 
-				rendersys->setStencilCheckEnabled(false); 
-				rendersys->setStencilBufferParams(); 
-			} 
-		} 
-
-}; 
-
-*/
 std::map<std::string, GraphicRenderInfo*> GraphicManager::m_render_infos;
 Ogre::SceneManager* GraphicManager::m_scene_manager;
 std::map<std::string, GraphicObject::Type> GraphicManager::m_graphic_mapping;
+StencilOpQueueListener* GraphicManager::m_stencil_listener;
+
+void StencilOpQueueListener::renderQueueStarted(Ogre::uint8 queueGroupId, const Ogre::String& invocation, bool& skipThisInvocation) 
+{ 
+			
+	if (queueGroupId == RENDER_QUEUE_HIGHLIGHT_OBJECTS) // outline glow object 
+	{ 
+		Ogre::RenderSystem * rendersys = Ogre::Root::getSingleton().getRenderSystem(); 
+
+		rendersys->clearFrameBuffer(Ogre::FBT_STENCIL); 
+		rendersys->setStencilCheckEnabled(true); 
+		rendersys->setStencilBufferParams(Ogre::CMPF_NOT_EQUAL,
+										  STENCIL_VALUE_FOR_OUTLINE_GLOW, STENCIL_FULL_MASK, 
+			Ogre::SOP_KEEP,Ogre::SOP_KEEP,Ogre::SOP_REPLACE,false);       
+	} 
+			/*
+	if (queueGroupId == RENDER_QUEUE_OUTLINE_GLOW_GLOWS)  // outline glow
+	{ 
+	Ogre::RenderSystem * rendersys = Ogre::Root::getSingleton().getRenderSystem(); 
+	rendersys->setStencilCheckEnabled(true); 
+	rendersys->setStencilBufferParams(Ogre::CMPF_NOT_EQUAL,
+	STENCIL_VALUE_FOR_OUTLINE_GLOW, STENCIL_FULL_MASK, 
+	Ogre::SOP_KEEP,Ogre::SOP_KEEP,Ogre::SOP_REPLACE,false);       
+} 
+	if (queueGroupId == RENDER_QUEUE_FULL_GLOW_ALPHA_GLOW)  // full glow - alpha glow
+	{ 
+	Ogre::RenderSystem * rendersys = Ogre::Root::getSingleton().getRenderSystem(); 
+	rendersys->setStencilCheckEnabled(true); 
+	rendersys->setStencilBufferParams(Ogre::CMPF_ALWAYS_PASS,
+	STENCIL_VALUE_FOR_FULL_GLOW,STENCIL_FULL_MASK, 
+	Ogre::SOP_KEEP,Ogre::SOP_KEEP,Ogre::SOP_REPLACE,false);       
+} 
+
+	if (queueGroupId == RENDER_QUEUE_FULL_GLOW_GLOW)  // full glow - glow
+	{ 
+	Ogre::RenderSystem * rendersys = Ogre::Root::getSingleton().getRenderSystem(); 
+	rendersys->setStencilCheckEnabled(true); 
+	rendersys->setStencilBufferParams(Ogre::CMPF_EQUAL,
+	STENCIL_VALUE_FOR_FULL_GLOW,STENCIL_FULL_MASK, 
+	Ogre::SOP_KEEP,Ogre::SOP_KEEP,Ogre::SOP_ZERO,false);       
+} 
+			*/
+} 
+
+void StencilOpQueueListener::renderQueueEnded(Ogre::uint8 queueGroupId, const Ogre::String& invocation, bool& repeatThisInvocation) 
+{ 
+	if (( queueGroupId == LAST_STENCIL_OP_RENDER_QUEUE )
+
+	   ) 
+	{ 
+		Ogre::RenderSystem * rendersys = Ogre::Root::getSingleton().getRenderSystem(); 
+		rendersys->setStencilCheckEnabled(false); 
+		rendersys->setStencilBufferParams(); 
+	} 
+} 
 
 void GraphicManager::init()
 {
 	m_scene_manager = Ogre::Root::getSingleton().getSceneManager("DefaultSceneManager");
+	m_stencil_listener = new StencilOpQueueListener;
+	
+	m_scene_manager->addRenderQueueListener(m_stencil_listener);
+
 }
 
 void GraphicManager::cleanup()

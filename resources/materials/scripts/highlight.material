@@ -81,10 +81,6 @@ material red_highlight_alpha_nodepth
 			{
 				param_named alpha_value float 0.2
 			}
-			vertex_program_ref highlight_vs 
-			{
-				param_named size_value float 1.1
-			}
 		}
 	
 	}
@@ -103,11 +99,6 @@ material white_highlight_alpha_nodepth
 			fragment_program_ref white_highlight_ps 
 			{
 				param_named alpha_value float 0.2
-			}
-			
-			vertex_program_ref highlight_vs 
-			{
-				param_named size_value float 1.1
 			}
 		}
 	}

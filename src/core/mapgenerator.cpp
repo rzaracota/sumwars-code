@@ -514,6 +514,7 @@ bool MapGenerator::insertGroupTemplates(MapData* mdata, RegionData* rdata)
 		s.m_type = templ->getShape()->m_type;
 		s.m_extent = templ->getShape()->m_extent;
 		s.m_radius = templ->getShape()->m_radius;
+		s.m_angle = templ->getShape()->m_angle;
 
 		
 		// Ort fuer das Template suchen
@@ -549,7 +550,7 @@ bool MapGenerator::insertGroupTemplates(MapData* mdata, RegionData* rdata)
 		// Objektgruppe einfuegen
 		// TODO: Winkel ?
 		DEBUG5("placing group %s at %f %f",it->second.m_group_name.c_str(), pos.m_x, pos.m_y);
-		mdata->m_region->createObjectGroup(it->second.m_group_name,pos,0, it->second.m_name);
+		mdata->m_region->createObjectGroup(it->second.m_group_name,pos,s.m_angle, it->second.m_name);
 
 		
 	}
