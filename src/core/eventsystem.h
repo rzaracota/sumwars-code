@@ -518,6 +518,13 @@ class EventSystem
 		static int setSpeakerEmotion(lua_State *L);
 		
 		/**
+		 * \fn static int setSpeakerAnimation(lua_State *L)
+		 * \brief Setzt die Animation eines Sprechers
+		 * \param L Lua Status
+		 */
+		static int setSpeakerAnimation(lua_State *L);
+		
+		/**
 		 * \fn static int setSpeakerPosition(lua_State *L)
 		 * \brief Setzt die Position, auf der ein Sprecher erscheint
 		 */

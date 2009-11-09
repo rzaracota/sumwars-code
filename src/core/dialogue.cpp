@@ -692,6 +692,15 @@ void Dialogue::update(float time)
 					continue;
 				}
 				
+				if (cst->m_text == "#animation#" || cst->m_text == "#animation_r#")
+				{
+					cr->setAnimation(cst->m_emotion, cst->m_time, cst->m_text == "#animation_r#");
+					m_event_mask =1;
+					m_speech.pop_front();
+					cst =0;
+					continue;
+				}
+				
 				if (cst->m_text == "#position#")
 				{
  					std::string posstr = cst->m_emotion;

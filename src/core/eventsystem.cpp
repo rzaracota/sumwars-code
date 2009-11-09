@@ -107,6 +107,7 @@ void EventSystem::init()
 	lua_register(m_lua, "unitSpeak", unitSpeak);
 	lua_register(m_lua, "setSpeakerEmotion", setSpeakerEmotion);
 	lua_register(m_lua, "setSpeakerPosition", setSpeakerPosition);
+	lua_register(m_lua, "setSpeakerAnimation", setSpeakerAnimation);
 	lua_register(m_lua, "addQuestion", addQuestion);
 	lua_register(m_lua, "addAnswer", addAnswer);
 	lua_register(m_lua, "changeTopic", changeTopic);
@@ -2082,6 +2083,39 @@ int EventSystem::setSpeakerEmotion(lua_State *L)
 	else
 	{
 		ERRORMSG("Syntax: setSpeakerEmotion(string refname, string emotion)");
+	}
+
+	return 0;
+}
+
+int EventSystem::setSpeakerAnimation(lua_State *L)
+{
+	if (m_dialogue ==0)
+		return 0;
+	
+	int argc = lua_gettop(L);
+	if (argc>=3 && lua_isstring(L,1) && lua_isstring(L,2) && lua_isnumber(L,3))
+	{
+		std::string refname = lua_tostring(L, 1);
+		std::string anim = lua_tostring(L, 2);
+		float time = lua_tonumber(L, 3);
+		
+		std::string txt = "#animation#";
+		if (argc>=4 && lua_isboolean(L,4))
+		{
+			bool repeat = lua_toboolean(L, 4);
+			if (repeat)
+			{
+				DEBUG("repeat");
+				txt="#animation_r#";
+			}
+		}
+		
+		m_dialogue->speak(refname,txt,anim,time);
+	}
+	else
+	{
+		ERRORMSG("Syntax: setSpeakerAnimation(string refname, string emotion, float time, [bool repeat = false])");
 	}
 
 	return 0;
