@@ -30,6 +30,17 @@ FIXED_OBJECT
         </Environment>
 </ObjectTemplate>
 
+<ObjectTemplate name="$plant_bushes" type="FIXED_OBJECT">
+        <Environment name="hills" default="true">
+                <Object name="bush" />
+        </Environment>
+</ObjectTemplate>
+<ObjectTemplate name="$plant_bushes_script" type="SCRIPTOBJECT">
+        <Environment name="hills" default="true">
+                <Object name="berryBush" />
+        </Environment>
+</ObjectTemplate>
+
 <ObjectTemplate name="$border" type="FIXED_OBJECT">
 		<Environment name="council">
                 <Object name="konz_wall1" />
@@ -463,6 +474,27 @@ FIXED_OBJECT
 <ObjectTemplate name="$prison_cOut" type="FIXED_OBJECT">
         <Environment name="council" default = "true">
                 <Object name="prison_wall_cOut1" />
+        </Environment>
+</ObjectTemplate>
+
+<ObjectTemplate name="$barricade" type="FIXED_OBJECT">
+        <Environment name="meadow" default = "true">
+                <Object name="barricade1" />
+        </Environment>
+</ObjectTemplate>
+<ObjectTemplate name="$barricade_m" type="FIXED_OBJECT">
+        <Environment name="meadow" default = "true">
+                <Object name="barricade_m1" />
+        </Environment>
+</ObjectTemplate>
+<ObjectTemplate name="$barricade_s" type="FIXED_OBJECT">
+        <Environment name="meadow" default = "true">
+                <Object name="barricade_s1" />
+        </Environment>
+</ObjectTemplate>
+<ObjectTemplate name="$barricade_t" type="FIXED_OBJECT">
+        <Environment name="meadow" default = "true">
+                <Object name="barricade_t1" />
         </Environment>
 </ObjectTemplate>
 

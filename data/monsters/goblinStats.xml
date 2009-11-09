@@ -613,7 +613,7 @@
 
 
 <!-- Goblin Schneerufer -->
-<!-- L7 -->
+<!-- L8 -->
 <Monster type="MONSTER" subtype="goblin_snow" name="snowcaller" fraction="monster" race="goblin" layer="NORMAL">
 	<RenderInfo name="goblin_snow" />
 	<Dropslots >
@@ -800,6 +800,8 @@
 	
 	<AI ai_sight_range="12" />
 </Monster>
+
+
 
 <!-- Goblinkrieger -->
 <!-- L5 -->

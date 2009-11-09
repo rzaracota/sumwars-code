@@ -11,6 +11,41 @@
   <WayPoint pos_x="0" pos_y="0" />
 
   <ObjectContent>
+    <Object subtype="$barricade" 
+            center_x="-10.10067297" 
+            center_y="31.08088485" 
+            angle="30.74159641" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="$barricade" 
+            center_x="-11.39139202" 
+            center_y="23.01035193" 
+            angle="68.61923377" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="$barricade" 
+            center_x="9.296671027" 
+            center_y="31.92558822" 
+            angle="-217.5410299" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="$barricade" 
+            center_x="-0.5095760882" 
+            center_y="26.13954039" 
+            angle="-269.5193818" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="$barricade" 
+            center_x="10.02823016" 
+            center_y="22.68629489" 
+            angle="-255.1404312" 
+            probability="1" 
+            prob_angle="false" 
+    />
     <Object subtype="$single_block" 
             center_x="-10.86736225" 
             center_y="-3.038883823" 
@@ -666,41 +701,6 @@
             center_x="24.5" 
             center_y="23" 
             angle="0" 
-            probability="1" 
-            prob_angle="false" 
-    />
-    <Object subtype="fence2" 
-            center_x="-10.92202365" 
-            center_y="31.65034874" 
-            angle="-153.6013694" 
-            probability="1" 
-            prob_angle="false" 
-    />
-    <Object subtype="fence2" 
-            center_x="-0.5652417511" 
-            center_y="26.7464725" 
-            angle="-89.33277298" 
-            probability="1" 
-            prob_angle="false" 
-    />
-    <Object subtype="fence2" 
-            center_x="9.646995693" 
-            center_y="31.82000228" 
-            angle="-33.82861561" 
-            probability="1" 
-            prob_angle="false" 
-    />
-    <Object subtype="fence2" 
-            center_x="-10.97078825" 
-            center_y="23.21709204" 
-            angle="-111.3316841" 
-            probability="1" 
-            prob_angle="false" 
-    />
-    <Object subtype="fence2" 
-            center_x="9.593675739" 
-            center_y="22.64565301" 
-            angle="-77.28743625" 
             probability="1" 
             prob_angle="false" 
     />
