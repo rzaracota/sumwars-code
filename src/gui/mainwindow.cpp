@@ -1322,7 +1322,7 @@ void MainWindow::updateObjectInfo()
 				m_document->getGUIState()->m_cursor_item_id = id;
 				m_document->getGUIState()->m_cursor_object_id =0;
 				
-				if (!m_document->getGUIState()->m_alt_hold)
+				if (!m_document->getGUIState()->m_item_labels)
 				{
 					itmlabel->setVisible(true);
 				}
@@ -1418,7 +1418,7 @@ void MainWindow::updateItemInfo()
 	DropItemMap* itms = player->getRegion()->getDropItems();
 	DropItemMap::iterator it;
 	
-	if (m_document->getGUIState()->m_alt_hold)
+	if (m_document->getGUIState()->m_item_labels)
 	{
 		label->setVisible(false);
 		
@@ -2326,11 +2326,6 @@ bool MainWindow::keyPressed(const OIS::KeyEvent &evt) {
 		m_document->getGUIState()->m_shift_hold = true;
 	}
 	
-	if (evt.key == OIS::KC_LMENU)
-	{
-		m_document->getGUIState()->m_alt_hold = true;
-	}
-	
 	if (not ret)
 	{
 		ret = m_document->onKeyPress(evt.key);
@@ -2351,11 +2346,6 @@ bool MainWindow::keyReleased(const OIS::KeyEvent &evt)
 		m_document->getGUIState()->m_shift_hold = false;
 	}
 
-	if (evt.key == OIS::KC_LMENU)
-	{
-		m_document->getGUIState()->m_alt_hold = false;
-	}
-	
 	if (not ret)
 	{
 		ret = m_document->onKeyRelease(evt.key);

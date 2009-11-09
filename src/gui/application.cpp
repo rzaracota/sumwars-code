@@ -463,6 +463,7 @@ bool Application::createDocument()
 	m_document->installShortkey(OIS::KC_TAB,Document::SHOW_MINIMAP);
 	m_document->installShortkey(OIS::KC_F10,Document::SHOW_OPTIONS);
 	m_document->installShortkey(OIS::KC_W,Document::SWAP_EQUIP);
+	m_document->installShortkey(OIS::KC_LMENU,Document::SHOW_ITEMLABELS);
 
 	m_document->installShortkey(OIS::KC_RETURN,Document::SHOW_CHATBOX_NO_TOGGLE,false);
 	m_document->installShortkey(OIS::KC_1,Document::USE_POTION,false);
@@ -478,10 +479,10 @@ bool Application::createDocument()
 
 	m_document->installSpecialKey(OIS::KC_ESCAPE);
 	m_document->installSpecialKey(OIS::KC_LSHIFT);
-	m_document->installSpecialKey(OIS::KC_LCONTROL);
-	m_document->installSpecialKey(OIS::KC_RCONTROL);
-	m_document->installSpecialKey(OIS::KC_RMENU);
-	m_document->installSpecialKey(OIS::KC_LMENU);
+//	m_document->installSpecialKey(OIS::KC_LCONTROL);
+//	m_document->installSpecialKey(OIS::KC_RCONTROL);
+//	m_document->installSpecialKey(OIS::KC_RMENU);
+//	m_document->installSpecialKey(OIS::KC_LMENU);
 	m_document->installSpecialKey(OIS::KC_TAB);
 	m_document->installSpecialKey(OIS::KC_RETURN);
 	m_document->installSpecialKey(OIS::KC_BACK);

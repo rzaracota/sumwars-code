@@ -164,10 +164,11 @@ class Document
 		SHOW_CHATBOX =5,
 		SHOW_CHATBOX_NO_TOGGLE =6,
 		SHOW_QUESTINFO =7,
-  		SHOW_MINIMAP =8,
-		CLOSE_ALL=9,
-		SWAP_EQUIP=10,
-		SHOW_OPTIONS = 11,
+		SHOW_MINIMAP =8,
+		SHOW_ITEMLABELS=9,
+		CLOSE_ALL=19,
+		SWAP_EQUIP=20,
+		SHOW_OPTIONS = 21,
 		USE_POTION = 30,
 		USE_SKILL_LEFT=100,
 		USE_SKILL_RIGHT=300,
@@ -225,10 +226,10 @@ class Document
 		bool m_shift_hold;
 		
 		/**
-		 * \var bool m_alt_hold
+		 * \var bool m_item_labels
 		 * \brief Gibt an, ob die Alt-Taste festgehalten wird
 		 */
-		bool m_alt_hold;
+		bool m_item_labels;
 
 		 /**
 		 * \var m_clicked_object_id

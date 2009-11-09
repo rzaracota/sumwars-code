@@ -12,32 +12,44 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard)
 
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	
-
-	// Rahmen fuer das Menue Savegame auswaehlen
-	
-	
 	CEGUI::FrameWindow* options = (CEGUI::FrameWindow*) win_mgr.createWindow("TaharezLook/FrameWindow", "OptionsWindow");
 	m_window = options;
-	
-	options->setPosition(CEGUI::UVector2(cegui_reldim(0.15f), cegui_reldim( 0.05f))); //0.0/0.8
-	options->setSize(CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim( 0.8f))); //1.0/0.2
 	options->setProperty("FrameEnabled","false");
 	options->setProperty("TitlebarEnabled","false");
 	options->setProperty("CloseButtonEnabled","false");
+	options->setPosition(CEGUI::UVector2(cegui_reldim(0.15f), cegui_reldim( 0.05f))); //0.0/0.8
+	options->setSize(CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim( 0.8f))); //1.0/0.2
 	options->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&OptionsWindow::onAreaMouseButtonPressed, this));
+	
+	// Rahmen fuer das Menue Savegame auswaehlen
+	CEGUI::TabControl* optionstab = (CEGUI::TabControl*) win_mgr.createWindow("TaharezLook/TabControl", "OptionsWindowTab");
+	optionstab->setPosition(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.00f))); 
+	optionstab->setSize(CEGUI::UVector2(cegui_reldim(0.9f), cegui_reldim( 0.9f))); 
+	optionstab->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&OptionsWindow::onAreaMouseButtonPressed, this));
+	options->addChildWindow(optionstab);
+	
+	
+	CEGUI::DefaultWindow* keys = (CEGUI::DefaultWindow*) win_mgr.createWindow("TaharezLook/TabContentPane", "OptionsShortkeys");
+	optionstab->addTab(keys);
+	CEGUI::DefaultWindow* sound = (CEGUI::DefaultWindow*) win_mgr.createWindow("TaharezLook/TabContentPane", "OptionsSound");
+	optionstab->addTab(sound);
+	CEGUI::DefaultWindow* graphic = (CEGUI::DefaultWindow*) win_mgr.createWindow("TaharezLook/TabContentPane", "OptionsGraphic");
+	optionstab->addTab(graphic);
+	CEGUI::DefaultWindow* misc = (CEGUI::DefaultWindow*) win_mgr.createWindow("TaharezLook/TabContentPane", "OptionsMisc");
+	optionstab->addTab(misc);
 	
 	CEGUI::Window* label;
 	
-	int targets[8] = {Document::SHOW_INVENTORY, Document::SHOW_CHARINFO, Document::SHOW_SKILLTREE, Document::SHOW_PARTYMENU, Document::SHOW_CHATBOX, Document::SHOW_QUESTINFO, Document::SHOW_MINIMAP, Document::SWAP_EQUIP};
+	int targets[9] = {Document::SHOW_INVENTORY, Document::SHOW_CHARINFO, Document::SHOW_SKILLTREE, Document::SHOW_PARTYMENU, Document::SHOW_CHATBOX, Document::SHOW_QUESTINFO, Document::SHOW_MINIMAP, Document::SWAP_EQUIP, Document::SHOW_ITEMLABELS};
 	
 	std::ostringstream stream;
-	for (int i=0; i<8; ++i)
+	for (int i=0; i<9; ++i)
 	{
 		stream.str("");
 		stream << "ShortkeyLabel"<<i;
 		
 		label = win_mgr.createWindow("TaharezLook/StaticText", stream.str());
-		options->addChildWindow(label);
+		keys->addChildWindow(label);
 		label->setProperty("FrameEnabled", "true");
 		label->setProperty("BackgroundEnabled", "true");
 		label->setPosition(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( i*0.08+0.02f)));
@@ -49,7 +61,7 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard)
 		stream << "ShortkeyValueLabel"<<i;
 		
 		label = win_mgr.createWindow("TaharezLook/StaticText", stream.str());
-		options->addChildWindow(label);
+		keys->addChildWindow(label);
 		label->setProperty("FrameEnabled", "true");
 		label->setProperty("BackgroundEnabled", "true");
 		label->setPosition(CEGUI::UVector2(cegui_reldim(0.38f), cegui_reldim( i*0.08+0.02f)));
@@ -60,14 +72,14 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard)
 	}
 	
 	label = win_mgr.createWindow("TaharezLook/StaticText", "SoundVolumeLabel");
-	options->addChildWindow(label);
+	sound->addChildWindow(label);
 	label->setProperty("FrameEnabled", "true");
 	label->setProperty("BackgroundEnabled", "true");
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.7)));
 	label->setSize(CEGUI::UVector2(cegui_reldim(0.3f), cegui_reldim( 0.06f)));
 	
 	CEGUI::Scrollbar* slider = static_cast<CEGUI::Scrollbar*>(win_mgr.createWindow("TaharezLook/HorizontalScrollbar", "SoundVolumeSlider"));
-	options->addChildWindow(slider);
+	sound->addChildWindow(slider);
 	slider->setPageSize (0.01f);
 	slider->setDocumentSize(1.0f);
 	slider->setStepSize(0.01f);
@@ -84,14 +96,14 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard)
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&OptionsWindow::onButtonOkClicked, this));
 	
 	label = win_mgr.createWindow("TaharezLook/StaticText", "LanguageLabel");
-	options->addChildWindow(label);
+	misc->addChildWindow(label);
 	label->setProperty("FrameEnabled", "true");
 	label->setProperty("BackgroundEnabled", "true");
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.8)));
 	label->setSize(CEGUI::UVector2(cegui_reldim(0.3f), cegui_reldim( 0.06f)));
 	
 	CEGUI::Combobox* cbo = static_cast<CEGUI::Combobox*>(win_mgr.createWindow("TaharezLook/Combobox","LanguageBox"));
-	options->addChildWindow(cbo);
+	misc->addChildWindow(cbo);
 	cbo->setPosition(CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim( 0.8f)));
 	cbo->setSize(CEGUI::UVector2(cegui_reldim(0.4f), cegui_reldim( 0.3f)));
 	
@@ -119,7 +131,7 @@ void OptionsWindow::update()
 	KeyCode key;
 	std::string keyname;
 	// Schleife ueber die Labels der Kurztasten
-	for (int i=0; i<8; i++)
+	for (int i=0; i<9; i++)
 	{
 		stream.str("");
 		stream << "ShortkeyValueLabel"<<i;
@@ -155,6 +167,15 @@ void OptionsWindow::updateTranslation()
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::Window* label;
 	
+	CEGUI::DefaultWindow* keys =  (CEGUI::DefaultWindow*) win_mgr.getWindow("OptionsShortkeys");
+	keys->setText((CEGUI::utf8*) gettext("Shortkeys"));
+	CEGUI::DefaultWindow* sound = (CEGUI::DefaultWindow*) win_mgr.getWindow("OptionsSound");
+	sound->setText((CEGUI::utf8*) gettext("Sound"));
+	CEGUI::DefaultWindow* graphic = (CEGUI::DefaultWindow*) win_mgr.getWindow("OptionsGraphic");
+	graphic->setText((CEGUI::utf8*) gettext("Graphic"));
+	CEGUI::DefaultWindow* misc = (CEGUI::DefaultWindow*) win_mgr.getWindow("OptionsMisc");
+	misc->setText((CEGUI::utf8*) gettext("Misc"));
+	
 	label = win_mgr.getWindow("ShortkeyLabel0");
 	label->setText((CEGUI::utf8*) gettext("Inventory"));
 	
@@ -178,6 +199,9 @@ void OptionsWindow::updateTranslation()
 	
 	label = win_mgr.getWindow("ShortkeyLabel7");
 	label->setText((CEGUI::utf8*) gettext("Swap equipement"));
+	
+	label = win_mgr.getWindow("ShortkeyLabel8");
+	label->setText((CEGUI::utf8*) gettext("Item Labels"));
 	
 	label = win_mgr.getWindow("SoundVolumeLabel");
 	label->setText((CEGUI::utf8*) gettext("Sound"));

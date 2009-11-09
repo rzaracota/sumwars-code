@@ -58,7 +58,7 @@ Document::Document()
 	getGUIState()->m_right_mouse_pressed= false;
 	getGUIState()->m_middle_mouse_pressed= false;
 	getGUIState()->m_shift_hold = false;
-	getGUIState()->m_alt_hold = false;
+	getGUIState()->m_item_labels = false;
 	getGUIState()->m_sheet= MAIN_MENU;
 	getGUIState()->m_shown_windows = NO_WINDOWS;
 	//getGUIState()->m_pressed_key = OIS::KC_UNASSIGNED;
@@ -1305,6 +1305,10 @@ bool Document::onKeyPress(KeyCode key)
 		{
 			onSwapEquip();
 		}
+		else if (dest == SHOW_ITEMLABELS)
+		{
+			getGUIState()->m_item_labels = true;
+		}
 		else if (dest >=USE_POTION && dest < USE_POTION+10)
 		{
 			onItemRightClick(Equipement::SMALL_ITEMS + (dest-USE_POTION));
@@ -1409,6 +1413,18 @@ bool  Document::onKeyRelease(KeyCode key)
 	if (m_gui_state.m_pressed_key != 0)
 	{
 		m_gui_state.m_pressed_key = 0;
+	}
+	
+	std::map<KeyCode, ShortkeyDestination>::iterator it = m_shortkey_map.find(key);
+	if (it != m_shortkey_map.end())
+	{
+	
+		// Aktion welche mit der Taste verbunden ist
+		ShortkeyDestination dest = it->second;
+		if (dest == SHOW_ITEMLABELS)
+		{
+			getGUIState()->m_item_labels = false;
+		}
 	}
 	return true;
 }
