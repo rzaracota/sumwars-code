@@ -97,7 +97,7 @@ void EventSystem::init()
 	lua_register(m_lua, "addUnitCommand", addUnitCommand);
 	lua_register(m_lua, "clearUnitCommands",clearUnitCommands); 
 	lua_register(m_lua, "setUnitAction", setUnitAction);
-	lua_register(m_lua, "setScriptObjectAnimation",setScriptObjectAnimation);
+	lua_register(m_lua, "setObjectAnimation",setObjectAnimation);
 	lua_register(m_lua, "setScriptObjectFlag",setScriptObjectFlag);
 	lua_register(m_lua, "getScriptObjectFlag",getScriptObjectFlag);	
 	lua_register(m_lua, "setCutsceneMode", setCutsceneMode);
@@ -1145,7 +1145,7 @@ int  EventSystem::setUnitAction(lua_State *L)
 
 }
 
-int EventSystem::setScriptObjectAnimation(lua_State *L)
+int EventSystem::setObjectAnimation(lua_State *L)
 {
 	int argc = lua_gettop(L);
 	if (argc>=3 && lua_isnumber(L,1) && lua_isstring(L,2) && lua_isnumber(L,3))
@@ -1157,7 +1157,7 @@ int EventSystem::setScriptObjectAnimation(lua_State *L)
 		std::string actstr = lua_tostring(L,2);
 
 		
-		ScriptObject* wo = dynamic_cast<ScriptObject*> (m_region->getObject(id));
+		WorldObject* wo =  m_region->getObject(id);
 		if (wo !=0)
 		{
 			
@@ -1169,13 +1169,13 @@ int EventSystem::setScriptObjectAnimation(lua_State *L)
 				repeat = (repstr == "true");
 			}
 			wo->setAnimation(actstr,time,repeat);
-			DEBUG("action %s perc %f",wo->getActionString().c_str(),wo->getActionPercent());
+			DEBUG5("action %s perc %f",wo->getActionString().c_str(),wo->getActionPercent());
 			
 		}
 	}
 	else
 	{
-		ERRORMSG("Syntax: setScriptObjectAnimation(int objid, string action, float time, [bool repeat])");
+		ERRORMSG("Syntax: setObjectAnimation(int objid, string action, float time, [bool repeat])");
 	}
 	return 0;
 }

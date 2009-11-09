@@ -2119,6 +2119,8 @@ void Creature::clearCommand(bool success)
 bool Creature::update (float time)
 {
 	
+	WorldObject::update(time);
+	
 	Timer timer;
 	timer.start();
 
@@ -4518,6 +4520,16 @@ std::string Creature::getActionString()
 {
 	if (getState() == STATE_DEAD)
 		return "die";
+	
+	if (m_action.m_type == "noaction")
+	{
+		// bei Noaction wird das Animationssystem von WorldObject angefragt
+		std::string act = WorldObject::getActionString();
+		if (act != "")
+		{
+			return act;
+		}
+	}
 
 	return m_action.m_type;
 }
@@ -4526,6 +4538,16 @@ float Creature::getActionPercent()
 {
 	if (getState() == STATE_DEAD)
 		return 0.99;
+	
+	if (m_action.m_type == "noaction")
+	{
+		// bei Noaction wird das Animationssystem von WorldObject angefragt
+		std::string act = WorldObject::getActionString();
+		if (act != "")
+		{
+			return WorldObject::getActionPercent();
+		}
+	}
 	
 	return m_action.m_elapsed_time / m_action.m_time;
 }

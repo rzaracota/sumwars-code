@@ -192,6 +192,14 @@ class WorldObject : public GameObject
 	virtual  bool  destroy ();
 	
 	/**
+	 * \fn virtual bool update ( float time)
+	 * \brief Aktualisiert das GameObject, nachdem eine bestimmte Zeit vergangen ist. Alle Aktionen des Objekts werden auf diesem Weg ausgeloest. Die Funktion ist virtuell und wird von den abgeleiteten Klassen ueberschrieben
+	 * \param time Menge der vergangenen Zeit in Millisekunden
+	 * \return bool, der angibt, ob die Aktualisierung fehlerfrei verlaufen ist
+	 */
+	virtual  bool  update ( float time);
+	
+	/**
 	 * \fn bool moveTo(Vector newpos, bool emit_event= true )
 	 * \brief Verschiebt das Objekt an einen neuen Ort
 	 * \param newpos neue Position
@@ -347,6 +355,33 @@ class WorldObject : public GameObject
 	 * \brief Gibt aus, ob es sich um eine Kreatur handelt
 	 */
 	virtual bool isCreature();
+	
+		/**
+		 * \fn std::string getActionString()
+		 * \brief Gibt die aktuelle Aktion als String aus
+		 */
+		virtual std::string getActionString()
+		{
+			return m_animation;
+		}
+		
+		/**
+		 * \fn virtual float getActionPercent()
+		 * \brief Gibt den Prozentsatz, zu dem die aktuelle Aktion fortgeschritten ist aus
+		 */
+		virtual float getActionPercent()
+		{
+			return m_animation_elapsed_time / m_animation_time;
+		}
+		
+		/**
+		 * \fn void setAnimation(std::string anim, float time, bool repeat = false)
+		 * \brief Setzt die Animation eines Objekts
+		 * \param anim Animation
+		 * \param time Dauer der Animation in ms
+		 * \param wenn auf true gesetzt, wird die Animation wiederholt, bis eine andere gesetzt wird
+		 */
+		void setAnimation(std::string anim, float time, bool repeat = false);
 
 	protected:
 		
@@ -381,7 +416,29 @@ private:
 	GridLocation m_grid_location;
 	
 	
-	
+	/**
+	 * \var std::string m_animation
+	 * \brief aktuell gesetzte Animationen
+	 */
+	std::string m_animation;
+		
+		/**
+	 * \var float m_animation_time
+	 * \brief Gesamtdauer der aktuellen Animation
+		 */
+	float m_animation_time;
+		
+		/**
+	 * \var float m_animation_elapsed_time
+	 * \brief bisher verstrichene Zeit der Animation
+		 */
+	float m_animation_elapsed_time;
+		
+		/**
+	 * \var bool m_animation_repeat
+	 * \brief wenn auf true gesetzt, so wird die Animation wiederholt
+		 */
+	bool m_animation_repeat;
 
 	
 	

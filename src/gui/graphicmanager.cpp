@@ -2,11 +2,13 @@
 #include "debug.h"
 #include "elementattrib.h"
 #include <OgreRenderQueueListener.h> 
+#include <OgreRenderSystem.h>
 
 #define RENDER_QUEUE_HIGHLIGHT_MASK	RENDER_QUEUE_MAIN + 1
 #define RENDER_QUEUE_HIGHLIGHT_OBJECTS	RENDER_QUEUE_MAIN + 2
 #define LAST_STENCIL_OP_RENDER_QUEUE	RENDER_QUEUE_HIGHLIGHT_OBJECTS
 
+/*
 class StencilOpQueueListener : public Ogre::RenderQueueListener 
 { 
 	public: 
@@ -64,7 +66,7 @@ class StencilOpQueueListener : public Ogre::RenderQueueListener
 
 }; 
 
-
+*/
 std::map<std::string, GraphicRenderInfo*> GraphicManager::m_render_infos;
 Ogre::SceneManager* GraphicManager::m_scene_manager;
 std::map<std::string, GraphicObject::Type> GraphicManager::m_graphic_mapping;

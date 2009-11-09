@@ -15,6 +15,11 @@ WorldObject::WorldObject( int id)
 	m_fraction = Fraction::NOFRACTION;
 	m_race = "";
 	m_interaction_flags =0;
+	
+	m_animation ="";
+	m_animation_time =1;
+	m_animation_elapsed_time = 0;
+	m_animation_repeat =false;
 }
 
 bool WorldObject::isCreature()
@@ -76,6 +81,32 @@ bool WorldObject::moveTo(Vector newpos, bool emit_event)
 
 bool  WorldObject::destroy()
 {
+	return true;
+}
+
+bool  WorldObject::update ( float time)
+{
+	GameObject::update(time);
+	
+	if (m_animation != "")
+	{
+		m_animation_elapsed_time +=time;
+		
+		if (m_animation_elapsed_time > m_animation_time)
+		{
+			if (m_animation_repeat)
+			{
+				m_animation_elapsed_time -= m_animation_time;
+			}
+			else
+			{
+				m_animation ="";
+				m_animation_time =1;
+				m_animation_elapsed_time = 0;
+			}
+		}
+	}
+	
 	return true;
 }
 
@@ -225,6 +256,14 @@ bool  WorldObject::reactOnUse (int id)
 void WorldObject::writeNetEvent(NetEvent* event, CharConv* cv)
 {
 	GameObject::writeNetEvent(event,cv);
+	
+	if (event->m_data & NetEvent::DATA_ACTION)
+	{
+		cv->toBuffer(m_animation);
+		cv->toBuffer(m_animation_time);
+		cv->toBuffer(m_animation_repeat);
+		cv->toBuffer(m_animation_elapsed_time);
+	}
 }
 
 void WorldObject::processNetEvent(NetEvent* event, CharConv* cv)
@@ -241,4 +280,22 @@ void WorldObject::processNetEvent(NetEvent* event, CharConv* cv)
 		getRegion()->changeObjectLayer(this, (WorldObject::Layer) newlayer);
 		setLayer((WorldObject::Layer) newlayer);
 	}
+	
+	if (event->m_data & NetEvent::DATA_ACTION)
+	{
+		cv->fromBuffer(m_animation);
+		cv->fromBuffer(m_animation_time);
+		cv->fromBuffer(m_animation_repeat);
+		cv->fromBuffer(m_animation_elapsed_time);
+	}
+}
+
+void WorldObject::setAnimation(std::string anim, float time, bool repeat)
+{
+	m_animation = anim; 
+	m_animation_elapsed_time =0;
+	m_animation_time = time;
+	m_animation_repeat = repeat;
+	
+	addToNetEventMask(NetEvent::DATA_ACTION);
 }

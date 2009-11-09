@@ -310,10 +310,10 @@ class EventSystem
 		static int clearUnitCommands(lua_State *L);
 		
 		/**
-		 * \fn static int setScriptObjectAnimation(lua_State *L)
-		 * \brief Setzt die Animation eines Scriptobjekts
+		 * \fn static int setObjectAnimation(lua_State *L)
+		 * \brief Setzt die Animation eines Objekts
 		 */
-		static int setScriptObjectAnimation(lua_State *L);
+		static int setObjectAnimation(lua_State *L);
 		
 		/**
 		 * \fn  static int setScriptObjectFlag(lua_State *L)

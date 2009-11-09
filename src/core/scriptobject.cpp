@@ -11,11 +11,6 @@ ScriptObject::ScriptObject(int id)
 	setState(STATE_ACTIVE);
 	setType("SCRIPTOBJECT");
 	
-	m_animation ="";
-	m_animation_time =1;
-	m_animation_elapsed_time = 0;
-	m_animation_repeat =false;
-	
 	m_interaction_flags =  EXACT_MOUSE_PICKING | USABLE;
 }
 
@@ -84,51 +79,18 @@ bool ScriptObject::setValue(std::string valname)
 
 bool  ScriptObject::update ( float time)
 {
+	WorldObject::update(time);
+	
+	// TODO: Kollisionen etc ??
 	getShape()->m_center += getSpeed()*time;
 	
-	if (m_animation != "")
-	{
-		m_animation_elapsed_time +=time;
-		
-		if (m_animation_elapsed_time > m_animation_time)
-		{
-			if (m_animation_repeat)
-			{
-				m_animation_elapsed_time -= m_animation_time;
-			}
-			else
-			{
-				m_animation ="";
-				m_animation_time =1;
-				m_animation_elapsed_time = 0;
-			}
-		}
-	}
-	
 	return true;
-}
-
-void ScriptObject::setAnimation(std::string anim, float time, bool repeat)
-{
-	m_animation = anim; 
-	m_animation_elapsed_time =0;
-	m_animation_time = time;
-	m_animation_repeat = repeat;
-	
-	addToNetEventMask(NetEvent::DATA_ACTION);
 }
 
 
 void ScriptObject::writeNetEvent(NetEvent* event, CharConv* cv)
 {
 	WorldObject::writeNetEvent(event,cv);
-	
-	if (event->m_data & NetEvent::DATA_ACTION)
-	{
-		cv->toBuffer(m_animation);
-		cv->toBuffer(m_animation_time);
-		cv->toBuffer(m_animation_repeat);
-	}
 	
 	if (event->m_data & NetEvent::DATA_FLAGS)
 	{
@@ -145,14 +107,6 @@ void ScriptObject::writeNetEvent(NetEvent* event, CharConv* cv)
 void ScriptObject::processNetEvent(NetEvent* event, CharConv* cv)
 {
 	WorldObject::processNetEvent(event,cv);
-	
-	if (event->m_data & NetEvent::DATA_ACTION)
-	{
-		cv->fromBuffer(m_animation);
-		cv->fromBuffer(m_animation_time);
-		cv->fromBuffer(m_animation_repeat);
-		m_animation_elapsed_time = 0;
-	}
 	
 	if (event->m_data & NetEvent::DATA_FLAGS)
 	{

@@ -81,32 +81,7 @@ class ScriptObject: public WorldObject
 			m_render_info = render_info;
 		}
 		
-		/**
-		 * \fn std::string getActionString()
-		 * \brief Gibt die aktuelle Aktion als String aus
-		 */
-		virtual std::string getActionString()
-		{
-			return m_animation;
-		}
-		
-		/**
-		 * \fn virtual float getActionPercent()
-		 * \brief Gibt den Prozentsatz, zu dem die aktuelle Aktion fortgeschritten ist aus
-		 */
-		virtual float getActionPercent()
-		{
-			return m_animation_elapsed_time / m_animation_time;
-		}
-		
-		/**
-		 * \fn void setAnimation(std::string anim, float time, bool repeat = false)
-		 * \brief Setzt die Animation eines Objekts
-		 * \param anim Animation
-		 * \param time Dauer der Animation in ms
-		 * \param wenn auf true gesetzt, wird die Animation wiederholt, bis eine andere gesetzt wird
-		 */
-		void setAnimation(std::string anim, float time, bool repeat = false);
+	
 		
 		/**
 		 * \fn virtual void writeNetEvent(NetEvent* event, CharConv* cv)
@@ -162,30 +137,6 @@ class ScriptObject: public WorldObject
 		 * \brief Information zum Rendern des Objekts
 		 */
 		std::string m_render_info;
-		
-		/**
-		 * \var std::string m_animation
-		 * \brief aktuell gesetzte Animationen
-		 */
-		std::string m_animation;
-		
-		/**
-		 * \var float m_animation_time
-		 * \brief Gesamtdauer der aktuellen Animation
-		 */
-		float m_animation_time;
-		
-		/**
-		 * \var float m_animation_elapsed_time
-		 * \brief bisher verstrichene Zeit der Animation
-		 */
-		float m_animation_elapsed_time;
-		
-		/**
-		 * \var bool m_animation_repeat
-		 * \brief wenn auf true gesetzt, so wird die Animation wiederholt
-		 */
-		bool m_animation_repeat;
 		
 		/**
 		 * \var std::set<std::string> m_flags
