@@ -1,0 +1,204 @@
+﻿<World>
+<!-- Graue Himmelsleiter, Verfluchte Hoehle; [Hoehle]; ca 30 Minuten; Level 17 - 19 -->
+<!-- Goblins, Goblinhunde-->
+	<Region id="21" name="grayCurseCave">
+		<Settings dimx="12" dimy="12" area_percent="0.4" complexity="0.3" granularity="6"  ground="cave_ground"/>
+		
+		<AmbientLight red="0.0" green="0.0" blue="0.0" />
+		<HeroLight red="1.0" green="1.0" blue="1.0" /> 
+		<DirectionalLight red="0.0" green="0.0" blue="0.0" />
+		
+		<ExitDirections north="true" south="true" west="true" east="false" />
+		
+		<Exits>
+			<Exit name="exit_south" destination_region="aisMistslope" destination_location="entry_north" >
+				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
+			</Exit>
+			<Exit name="exit_north" destination_region="grayCurseCaveDep" destination_location="entry_south" >
+				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
+			</Exit>
+			<Exit name="exit_west" destination_region="grayCurseGrotto" destination_location="entry_east" >
+				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
+			</Exit>
+
+		</Exits>
+		
+		<Environments>
+			<Environment height="1.0" name="cave" />
+		</Environments>
+	</Region>
+	
+<!-- Graue Himmelsleiter, Verfluchte Grotte; [Hoehle]; ca. 25 Min; Level 17 - 19 -->
+<!-- Goblins, Goblinhunde -->
+	<Region id="22" name="grayCurseGrotto">
+		<AmbientLight red="0.0" green="0.0" blue="0.0" />
+		<HeroLight red="1.0" green="1.0" blue="1.0" /> 
+		<DirectionalLight red="0.0" green="0.0" blue="0.0" />
+		
+		<Settings dimx="12" dimy="12" area_percent="0.4" complexity="0.3" granularity="6"  ground="cave_ground"/>
+		
+		<ExitDirections north="true" south="false" west="true" east="true" />
+		
+		<Exits>
+			<Exit name="exit_east" destination_region="grayCurseCave" destination_location="entry_west" >
+				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
+			</Exit>
+			<Exit name="exit_north" destination_region="grayCurseGrotDep" destination_location="entry_south" >
+				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
+			</Exit>
+			<Exit name="exit_west" destination_region="grayWolfcave" destination_location="entry_east" >
+				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
+			</Exit>
+		</Exits>
+		
+		<Environments>
+			<Environment height="1.0" name="cave" />
+		</Environments>
+	</Region>
+	
+<!-- Graue Himmelsleiter, Wolfshoehle; [Hoehle]; ca. 20 Min; Level 17- 19 -->
+<!-- Goblinhunde, DER Goblinhundemonsterboss -->
+	<Region id="23" name="grayWolfcave">
+		<AmbientLight red="0.0" green="0.0" blue="0.0" />
+		<HeroLight red="1.0" green="1.0" blue="1.0" /> 
+		<DirectionalLight red="0.0" green="0.0" blue="0.0" />
+		
+		<Settings dimx="12" dimy="12" area_percent="0.4" complexity="0.3" granularity="6"  ground="cave_ground"/>
+		
+		<ExitDirections north="false" south="false" west="false" east="true" />
+		
+		<Exits>
+			<Exit name="exit_east" destination_region="grayCurseGrotto" destination_location="entry_west" >
+				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
+			</Exit>
+		</Exits>
+		
+		<Environments>
+			<Environment height="1.0" name="cave" />
+		</Environments>
+	</Region>
+	
+<!-- Graue Himmelsleiter, Verfluchte Grotte, Tiefe; ca. 20 Min; Level 17 - 19 -->
+<!-- Goblins -->
+	<Region id="24" name="grayCurseGrotDep">
+		<AmbientLight red="0.0" green="0.0" blue="0.0" />
+		<HeroLight red="1.0" green="1.0" blue="1.0" /> 
+		<DirectionalLight red="0.0" green="0.0" blue="0.0" />
+		
+		<Settings dimx="12" dimy="12" area_percent="0.4" complexity="0.3" granularity="6"  ground="cave_ground"/>
+		
+		<ExitDirections north="false" south="true" west="false" east="false" />
+		
+		<Exits>
+			<Exit name="exit_south" destination_region="grayCurseGrotto" destination_location="entry_north" >
+				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
+			</Exit>
+		</Exits>
+		
+		<Environments>
+			<Environment height="1.0" name="cave" />
+		</Environments>
+	</Region>
+	
+<!-- Graue Himmelsleiter, Verfluchte Hoehle, Tiefe; ca. 30 Min; Level 17 - 20 -->
+<!-- Untote -->
+<!-- Beide Ausgaenge muessen verschliessbar sein. Der Suedausgang wird verschlossen, der Westausgang geoeffnet -->
+	<Region id="25" name="grayCurseCaveDep">
+		<AmbientLight red="0.0" green="0.0" blue="0.0" />
+		<HeroLight red="1.0" green="1.0" blue="1.0" /> 
+		<DirectionalLight red="0.0" green="0.0" blue="0.0" />
+		
+		<Settings dimx="12" dimy="12" area_percent="0.4" complexity="0.3" granularity="6"  ground="cave_ground"/>
+		
+		<ExitDirections north="true" south="true" west="false" east="true" />
+		
+		<Exits>
+			<Exit name="exit_north" destination_region="grayCurseCaveFis" destination_location="entry_south" >
+				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
+			</Exit>
+			<Exit name="exit_south" destination_region="grayCurseCave" destination_location="entry_north" >
+				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
+			</Exit>
+			<Exit name="exit_east" destination_region="grayCurseCaveEast" destination_location="entry_west" >
+				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
+			</Exit>
+		</Exits>
+		
+		<Environments>
+			<Environment height="1.0" name="cave" />
+		</Environments>
+	</Region>
+
+<!-- Graue Himmelsleiter, Verfluchte Hoehle, Spalt; Szene 6 -->
+	<Region id="29" name="grayCurseCaveFis">
+		<AmbientLight red="0.0" green="0.0" blue="0.0" />
+		<HeroLight red="1.0" green="1.0" blue="1.0" /> 
+		<DirectionalLight red="0.0" green="0.0" blue="0.0" />
+		
+		<Settings dimx="12" dimy="12" region_template="cursedFissure"  ground="cave_ground"/>
+		
+		<ExitDirections north="false" south="true" west="false" east="false" />
+		
+		<ReviveLocation  location="locParty" />
+		
+		<Exits>
+			<Exit name="exit_south" destination_region="grayCurseCaveDep" destination_location="entry_north" >
+				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
+			</Exit>
+		</Exits>
+		
+		<Environments>
+			<Environment height="1.0" name="cave" />
+		</Environments>
+	</Region>
+	
+<!-- Graue Himmelsleiter, Verfluchte Hoehle, Osten -->
+<!-- Untote -->
+	<Region id="26" name="grayCurseCaveEast">
+		<AmbientLight red="0.0" green="0.0" blue="0.0" />
+		<HeroLight red="1.0" green="1.0" blue="1.0" /> 
+		<DirectionalLight red="0.0" green="0.0" blue="0.0" />
+		
+		<Settings dimx="12" dimy="12" area_percent="0.4" complexity="0.3" granularity="6"  ground="cave_ground"/>
+		
+		<ExitDirections north="false" south="false" west="true" east="true" />
+		
+		<Exits>
+			<Exit name="exit_west" destination_region="grayCurseCaveDep" destination_location="entry_east" >
+				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
+			</Exit>
+			<Exit name="exit_east" destination_region="grayCurseLake" destination_location="entry_west" >
+				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
+			</Exit>
+		</Exits>
+		
+		<Environments>
+			<Environment height="1.0" name="cave" />
+		</Environments>
+	</Region>
+	
+<!-- Graue Himmelsleiter, Verfluchter See; Template-->
+<!-- Das Teichmonster-->
+	<Region id="27" name="grayCurseLake">
+		<AmbientLight red="0.0" green="0.0" blue="0.0" />
+		<HeroLight red="1.0" green="1.0" blue="1.0" /> 
+		<DirectionalLight red="0.0" green="0.0" blue="0.0" />
+		
+		<Settings dimx="12" dimy="12" area_percent="0.4" complexity="0.3" granularity="6"  ground="cave_ground"/>
+		
+		<ExitDirections north="false" south="false" west="true" east="true" />
+		
+		<Exits>
+			<Exit name="exit_west" destination_region="grayCurseCaveEast" destination_location="entry_east" >
+				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
+			</Exit>
+			<Exit name="exit_east" destination_region="aisEastslope" destination_location="entry_west" >
+				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
+			</Exit>
+		</Exits>
+		
+		<Environments>
+			<Environment height="1.0" name="cave" />
+		</Environments>
+	</Region>
+</World>

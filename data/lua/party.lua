@@ -115,6 +115,8 @@ function addStandardRoles(availableids)
 	local mage = getRolePlayerNonPref("mage",availableids,blockedspeaker);
 	local archer = getRolePlayerNonPref("archer",availableids,blockedspeaker);
 	local priest = getRolePlayerNonPref("priest",availableids,blockedspeaker);
+	local male = getRolePlayerNonPref("male",availableids,blockedspeaker);
+	local female = getRolePlayerNonPref("female",availableids,blockedspeaker);
 	local any = getRolePlayerNonPref("all",availableids,blockedspeaker);
 	
 	addSpeaker(warrior,"warrior",true);
@@ -122,13 +124,30 @@ function addStandardRoles(availableids)
 	addSpeaker(archer,"archer",true);
 	addSpeaker(priest,"priest",true);
 	addSpeaker(any,"any",true);
+	addSpeaker(male,"male",true);
+	addSpeaker(female,"female",true);
 	
 	local magopt = getRolePlayerPref("all",availableids,mage);
 	local waropt = getRolePlayerPref("all",availableids,warrior);
 	local arcopt = getRolePlayerPref("all",availableids,archer);
 	local priopt = getRolePlayerPref("all",availableids,priest);
+	local malopt = getRolePlayerPref("all",availableids,male);
+	local femopt = getRolePlayerPref("all",availableids,female);
+
 	addSpeaker(magopt,"magopt",true);
 	addSpeaker(waropt,"waropt",true);
 	addSpeaker(arcopt,"arcopt",true);
 	addSpeaker(priopt,"priopt",true);
+	addSpeaker(malopt,"malopt",true);
+	addSpeaker(femopt,"femopt",true);
+end;
+
+function solo()
+	return (getPlayers()[2] == nil);
+end;
+function femaleOnly()
+	return (getRolePlayers("male")[1] == nil);
+end;
+function maleOnly()
+	return (getRolePlayers("female")[1] == nil);
 end;

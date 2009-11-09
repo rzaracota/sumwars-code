@@ -1,0 +1,112 @@
+﻿<World>
+<!-- Aisen, Zwergentrutz [Grenzfeste] -->
+<!-- Entsatz -->
+<!-- Der Lich -->
+<!-- Rob, der Raeuber, Ende -->
+<!-- Loc: Stadtmauer -->
+	<Region id="12" name="dwarfenwall">
+		<AmbientLight red="0.4" green="0.4" blue="0.4" />
+		<HeroLight red="1.0" green="1.0" blue="1.0" /> 
+		<DirectionalLight red="0.3" green="0.3" blue="0.3" />
+		
+		<Settings dimx="36" dimy="28" region_template="dwarfenwall"  ground="grass1"/>
+		
+		<ReviveLocation  location="WaypointLoc" />
+		
+		<ExitDirections north="true" south="true" west="true" east="false" />
+		
+		<WorldPosition world_x="0.7" world_y ="0.4" waypoint="true"/>
+		<ReviveLocation  location="WaypointLoc" />
+		
+		<Exits>
+			<Exit name="exit_south" destination_region="aisWolfstones" destination_location="entry_north" >
+				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
+			</Exit>
+			<Exit name="exit_north" destination_region="necFieldcamp" destination_location="entry_south" >
+				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
+			</Exit>
+			<Exit name="exit_west" destination_region="aisEastslope" destination_location="entry_east" >
+				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
+			</Exit>
+			<Exit name="exit_rampart" destination_region="dwarfenwallRampart" destination_location="entry_south" >
+				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
+			</Exit>
+			<Exit name="exit_command" destination_region="dwarfenwallCommand" destination_location="entry_south" >
+				<Shape shape="RECT" extent_x="1.0" extent_y="1.0" />
+			</Exit>
+		</Exits>
+		
+		<Environments>
+			<Environment height="1.0" name="meadow" />
+		</Environments>
+		
+		<Event trigger ="create_region" once = "true">
+			<Effect>
+				sergeant_wober = createObject('guard', "locSergeant");
+				setRefName(sergeant_wober, "Sergeant Wober");
+				
+				guard1 = createObject('guard', 'locCommandGuard1');
+				setRefName(guard1, 'Guard');
+				guard2 = createObject('guard', 'locCommandGuard2');
+				setRefName(guard2, 'Guard');
+			</Effect>
+		</Event>
+	</Region>
+	
+	<Region id="30" name="dwarfenwallCommand">
+		<AmbientLight red="0.4" green="0.4" blue="0.4" />
+		<HeroLight red="1.0" green="1.0" blue="1.0" /> 
+		<DirectionalLight red="0.3" green="0.3" blue="0.3" />
+		
+		<Settings dimx="4" dimy="6" region_template="commandHouse"  ground="council_ground"/>
+		
+		<ExitDirections north="false" south="true" west="false" east="false" />
+		
+		<Exits>
+			<Exit name="exit_south" destination_region="dwarfenwall" destination_location="entry_command" >
+				<Shape shape="RECT" extent_x="2.0" extent_y="1.0" />
+			</Exit>
+		</Exits>
+		
+		<Environments>
+			<Environment height="1.0" name="council" />
+		</Environments>
+		
+		<Event trigger ="create_region" once = "true">
+			<Effect>
+				general_greif = createObject("peasant", "locGeneral");
+				setRefName(general_greif, "General Greif");
+				maga_convocatis_darna_eistaucher = createObject("peasant_f", "locDarna");
+				setRefName(maga_convocatis_darna_eistaucher, "Maga Convocatis Darna Eistaucher");
+				
+				addArea("GeneralGreifArea","circle","locGeneral",5);
+			</Effect>
+		</Event>
+	</Region>
+
+	
+<!-- Aisen, Zwergentrutz Stadtmauer; ungefaehr 20 min, Template; Level 16 - 19 -->
+<!-- Zombies, Skelette -->
+<!-- Locations fuer die Verteidigenden Wachen? -->
+	<Region id="13" name="dwarfenwallRampart">
+		<AmbientLight red="0.4" green="0.4" blue="0.4" />
+		<HeroLight red="1.0" green="1.0" blue="1.0" /> 
+		<DirectionalLight red="0.3" green="0.3" blue="0.3" />
+		
+		<Settings dimx="32" dimy="36" region_template = "dwarfenwallRampart"  ground="grass1"/>
+		
+		<ExitDirections north="false" south="true" west="false" east="false" />
+		
+		<Exits>
+			<Exit name="exit_south" destination_region="dwarfenwall" destination_location="entry_rampart" >
+				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
+			</Exit>
+		</Exits>
+		
+		<Environments>
+			<Environment height="1.0" name="meadow" />
+		</Environments>
+	</Region>
+	
+
+</World>

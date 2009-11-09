@@ -2,8 +2,8 @@
 
 <!-- Turnierbogen -->
 <Item type="weapon" subtype="turney_lbw" name="tourney bow" size="big">
-	<Mesh file="bow.mesh" />
-	<Image image="set:bow.png image:full_image" />
+	<Mesh file="turney_lbw.mesh" />
+	<Image image="set:turney_lbw.png image:full_image" />
 	<Attribute
 		level_requirement="1"
 		character_requirement="archer"
@@ -38,7 +38,7 @@
 
 <!-- Orkbogen -->
 <Item type="weapon" subtype="orc_lbw" name="orc bow" size="big">
-	<Mesh file="bow.mesh" />
+	<Mesh file="turney_lbw.mesh" />
 	<Image image="set:bow.png image:full_image" />
 	<Attribute
 		level_requirement="3"
@@ -74,7 +74,7 @@
 
 <!-- Eibenbogen -->
 <Item type="weapon" subtype="yew_lbw" name="yew bow" size="big">
-	<Mesh file="bow.mesh" />
+	<Mesh file="turney_lbw.mesh" />
 	<Image image="set:bow.png image:full_image" />
 	<Attribute
 		level_requirement="5"
@@ -111,7 +111,7 @@
 <!-- Langbogen -->
 <Item type="weapon" subtype="long_lbw" name="longbow" size="big">
 	<Image image="set:bow.png image:full_image" />
-	<Mesh file="bow.mesh" />
+	<Mesh file="turney_lbw.mesh" />
 	<Attribute
 		level_requirement="8"
 		character_requirement="archer"
@@ -147,7 +147,7 @@
 <!-- Soldatenbogen -->
 <Item type="weapon" subtype="soldr_lbw" name="soldier bow" size="big">
 	<Image image="set:bow.png image:full_image" />
-	<Mesh file="bow.mesh" />
+	<Mesh file="turney_lbw.mesh" />
 	<Attribute
 		level_requirement="13"
 		character_requirement="archer"
@@ -183,7 +183,7 @@
 <!-- Hornbogen -->
 <Item type="weapon" subtype="horn_lbw" name="horn bow" size="big">
 	<Image image="set:bow.png image:full_image" />
-	<Mesh file="bow.mesh" />
+	<Mesh file="turney_lbw.mesh" />
 	<Attribute
 		level_requirement="19"
 		character_requirement="archer"
@@ -219,7 +219,7 @@
 <!-- Ahornbogen -->
 <Item type="weapon" subtype="maple_lbw" name="maple bow" size="big">
 	<Image image="set:bow.png image:full_image" />
-	<Mesh file="bow.mesh" />
+	<Mesh file="turney_lbw.mesh" />
 	<Attribute
 		level_requirement="25"
 		character_requirement="archer"
@@ -255,7 +255,7 @@
 <!-- Kriegsbogen -->
 <Item type="weapon" subtype="battle_lbw" name="battle bow" size="big">
 	<Image image="set:bow.png image:full_image" />
-	<Mesh file="bow.mesh" />
+	<Mesh file="turney_lbw.mesh" />
 	<Attribute
 		level_requirement="30"
 		character_requirement="archer"
@@ -291,7 +291,7 @@
 <!-- Kompositlangbogen -->
 <Item type="weapon" subtype="compst_lbw" name="composite longbow" size="big">
 	<Image image="set:bow.png image:full_image" />
-	<Mesh file="bow.mesh" />
+	<Mesh file="turney_lbw.mesh" />
 	<Attribute
 		level_requirement="35"
 		character_requirement="archer"
@@ -327,7 +327,7 @@
 <!-- Sturmsaenger -->
 <Item type="weapon" subtype="wind_lbw" name="stormsinger" size="big">
 	<Image image="set:bow.png image:full_image" />
-	<Mesh file="bow.mesh" />
+	<Mesh file="turney_lbw.mesh" />
 	<Attribute
 		level_requirement="40"
 		character_requirement="archer"
@@ -365,7 +365,7 @@
 <!-- Eichenbogen -->
 <Item type="weapon" subtype="oak_lbw" name="oak bow" size="big">
 	<Image image="set:bow.png image:full_image" />
-	<Mesh file="bow.mesh" />
+	<Mesh file="turney_lbw.mesh" />
 	<Attribute
 		level_requirement="45"
 		character_requirement="archer"
@@ -401,7 +401,7 @@
 <!-- Daemonenhornbogen -->
 <Item type="weapon" subtype="demhrn_lbw" name="demonhorn bow" size="big">
 	<Image image="set:bow.png image:full_image" />
-	<Mesh file="bow.mesh" />
+	<Mesh file="turney_lbw.mesh" />
 	<Attribute
 		level_requirement="50"
 		character_requirement="archer"
@@ -437,7 +437,7 @@
 <!-- Waldlaeuferbogen -->
 <Item type="weapon" subtype="ranger_lbw" name="ranger bow" size="big">
 	<Image image="set:bow.png image:full_image" />
-	<Mesh file="bow.mesh" />
+	<Mesh file="turney_lbw.mesh" />
 	<Attribute
 		level_requirement="55"
 		character_requirement="archer"
@@ -474,7 +474,7 @@
 <!-- Eschenlangbogen -->
 <Item type="weapon" subtype="ash_lbw" name="ash longbow" size="big">
 	<Image image="set:bow.png image:full_image" />
-	<Mesh file="bow.mesh" />
+	<Mesh file="turney_lbw.mesh" />
 	<Attribute
 		level_requirement="60"
 		character_requirement="archer"
@@ -511,7 +511,7 @@
 <!-- Engelsbogen -->
 <Item type="weapon" subtype="angel_lbw" name="soul bow" size="big">
 	<Image image="set:bow.png image:full_image" />
-	<Mesh file="bow.mesh" />
+	<Mesh file="turney_lbw.mesh" />
 	<Attribute
 		level_requirement="65"
 		character_requirement="archer"
@@ -547,7 +547,7 @@
 <!-- Daemonenkompositbogen -->
 <Item type="weapon" subtype="demon_lbw" name="demon compositebow" size="big">
 	<Image image="set:bow.png image:full_image" />
-	<Mesh file="bow.mesh" />
+	<Mesh file="turney_lbw.mesh" />
 	<Attribute
 		level_requirement="70"
 		character_requirement="archer"
@@ -583,7 +583,7 @@
 <!-- Heldenbogen -->
 <Item type="weapon" subtype="hero_lbw" name="hero bow" size="big">
 	<Image image="set:bow.png image:full_image" />
-	<Mesh file="bow.mesh" />
+	<Mesh file="turney_lbw.mesh" />
 	<Attribute
 		level_requirement="75"
 		character_requirement="archer"
@@ -619,7 +619,7 @@
 <!-- Elfenbogen -->
 <Item type="weapon" subtype="elf_lbw" name="elf bow" size="big">
 	<Image image="set:bow.png image:full_image" />
-	<Mesh file="bow.mesh" />
+	<Mesh file="turney_lbw.mesh" />
 	<Attribute
 		level_requirement="80"
 		character_requirement="archer"

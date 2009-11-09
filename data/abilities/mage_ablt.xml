@@ -535,7 +535,7 @@
 		<LuaImplementation>
 			local magic = get(self,"magic_power");
 			local admg = getDamageValue("air_dmg");
-			setDamageValue("air_dmg", {admg[1] + magic*0.2, admg[2] + magic});
+			setDamageValue("air_dmg", {admg[1] + magic*0.05, admg[2] + magic*0.2});
 		</LuaImplementation>	
 	</Damage>
 </Ability>

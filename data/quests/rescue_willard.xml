@@ -6,11 +6,54 @@
 	
 	<Description>
 		if (rescue_willard.finished) then
-			return _("Quest finished")
-		else
-			return _("Quest description")
+			return _("Willard ist wieder in Medair und er hat sogar ein bisschen Geld springen lassen. Wer sagt denn, dass es sich nicht auszahlt, die Leute am Leben zu lassen? Zumindest so lange es reichlich Goblins gibt.")
+		elseif(rescue_willard.started==true)then
+			if(rescue_willard_tmp.freed ~= true)then
+				return _("Willard versteckt sich irgendwo in der Aisener Wiese. Er wird sich wegen seiner Verletzung sicher nur zeigen, wenn keine Goblins in der Naehe sind.")
+			else
+				return _("Langes suchen und etliche tote Goblins spaeter ist Willard endlich aufgetaucht. Ich sollte ihm den Stein geben und es hinter mich bringen.")
+			end;
 		end
 	</Description>
+	
+	<Region name="medMercCamp" >
+		<Event trigger ="player_moved" once = "true">
+			<Condition>
+				if (rescue_willard.asked ~= true) then
+					return (unitIsInArea(trigger.player,"areaFenor"))
+				else
+					return false
+				end
+			</Condition>
+			<Effect>
+				rescue_willard.asked = true
+				unitSpeak(fenor,_("Heda!"),"normal");
+				addUnitCommand(fenor,'walk',trigger.player,1.5);
+				createDialogue()
+				addSpeaker(trigger.player,'player')
+				rescue_willard_tmp.player = trigger.player;
+				
+				setTopicBase('Fenor Marken')
+				changeTopic('rescue_willard')
+				setDialogueActive(false);
+			</Effect>
+		</Event>
+	
+		<Event trigger ="command_complete" once = "true">
+			<Condition>
+				return (trigger.unit == fenor) 
+			</Condition>	
+			<Effect>
+				setCurrentDialogue(rescue_willard_tmp.player);
+				addSpeaker(fenor,'Fenor Marken')
+				lookAtObject(fenor,rescue_willard_tmp.player);
+				lookAtObject(rescue_willard_tmp.player,fenor);
+				setDialogueActive(true);
+			</Effect>
+		</Event>
+		
+	</Region>
+	
 	
 	<NPC refname="Fenor Marken">
 		<Topic name="rescue_willard" start_option="Willard">
@@ -23,37 +66,69 @@
 			</Condition>
 			<Effect>
 				if (rescue_willard.started == true) then
-					speak('Fenor Marken',_("You have yet to give the stone to Willard."))
+					if(solo())then
+						speak('Fenor Marken',_("Ich hoffe, Ihr kommt mit Eurer Suche nach Willard voran. _solo"),"sad");
+					else
+						speak('Fenor Marken',_("Ich hoffe, Ihr kommt mit Eurer Suche nach Willard voran."),"sad");
+					end;
+				elseif(rescue_willard.denied == true)then
+					speak('Fenor Marken',_("Habt Ihr es euch etwa anders ueberlegt?"),"sad");
+					addQuestion(_("Nach Willard suchen?"));
+					addAnswer(_("Ja"),'start_rescue_willard_quest');
+					addAnswer(_("Nein"),'refuse_rescue_willard_quest_again');
 				else
-					addStandardSpeakers();
-					speak('Fenor Marken',_("Hey there!"));
-					speak('Fenor Marken',_("Are you the councils backing?"));
-					speak('player',_("And if it was like that?"));
-					speak('Fenor Marken',_("I heard you were Branded Ones."));
-					speak('Fenor Marken',_("There is something, only someone like you can do."));
-					speak('Fenor Marken',_("With sure success that is."));
-					speak("ANY",_("Who would have thougt of that?"));
-					speak("ANY",_("Does a respectable member of the guard want someones thoat cut?"));
-					speak('Fenor Marken',_("Eh? I could've hired a professional assassin for that."));
-					speak('Fenor Marken',_("I thought you were not the kind of Branded Ones"));
-					speak('Fenor Marken',_("that kill everyone crossing their pass."));
-					speak("ANY",_("My apologies. Maybe my mouth slipped."));
-					speak('player',_("Whatever. What do you really want?"));
-					speak('Fenor Marken',_("Thanks. My name is Fenor Marken."));
-					speak('Fenor Marken',_("It is like that: I have a friend with the gamekeepers."));
-					speak('Fenor Marken',_("He was in the woods with two others when they were attacked by goblins."));
-					speak('Fenor Marken',_("And those cowards left him behind wounded."));
-					speak('player',_("Surely you don't want me to bring back his corpse, do you?"));
-					speak('Fenor Marken',_("No. Willard isn't someone who is killed by some measly goblins."));
-					speak('Fenor Marken',_("I'm sure he's waiting somewhere for help."));
-					speak('Fenor Marken',_("You must be very busy."));
-					speak('Fenor Marken',_("That's why all I ask you is bringing him this phasestone."));
-					speak('Fenor Marken',_("Normally I wouldn't entrust anyone with this"));
-					speak('Fenor Marken',_("out of fear they'd elope with it."));
-					speak('Fenor Marken',_("But you Branded Ones have other means of transportation, havn't you."));
-					speak('Fenor Marken',_("That's why I came to you."));
-					speak('player',_("I understand."));
-					addQuestion(_("Quest annehmen?"));
+					addStandardRoles();
+					if(solo() and maleOnly())then
+						speak('Fenor Marken',_("Wenn mich nicht alles taeuscht seid ihr ein Gezeichneter."), "normal");
+					elseif(solo() and femaleOnly())then
+						speak('Fenor Marken',_("Wenn mich nicht alles taeuscht seid ihr eine Gezeichnete."), "normal");
+					else
+						speak('Fenor Marken',_("Wenn mich nicht alles taeuscht seid ihr Gezeichnete."), "normal");
+					end;
+					speak('player',_("Was zum..."),"angry");
+					speak('player',_("Habe ich irgendwo ein Schild auf dem steht: Achtung, gefaehrliches Monster??"),"angry");
+					speak('player',_("Das ist schon das zweite Mal heute!"),"unhappy");
+					speak('Fenor Marken',_("Ich konnte schon immer spueren, wenn jemand ein Gezeichneter war."),"thoughtful");
+					speak('Fenor Marken',_("Aber keine Sorge, ich werde niemanden verraten, solange er sich korrekt verhaelt."),"normal");
+					if(solo())then
+						speak('Fenor Marken',_("Es gibt da etwas, um das ich Euch bitten moechte. _solo"));
+						speak('Fenor Marken',_("Nur jemand wie Ihr koennte das zuverlaessig erledigen. _solo"));
+					else
+						speak('Fenor Marken',_("Es gibt da etwas, um das ich Euch bitten moechte."));
+						speak('Fenor Marken',_("Nur jemand wie Ihr koennte das zuverlaessig erledigen."));
+					end;
+					
+					speak("any",_("Wer haette das gedacht?"),"sneer");
+					speak("any",_("Will ein ehrbares Mitglied der Stadtwache etwa jemandes Kehle durchgeschnitten sehen?"),"unhappy");
+					speak('Fenor Marken',_("Haeh? Dafuer haette ich einen professionellen Attentaeter anheuern koennen."),"aloof");
+					speak('Fenor Marken',_("Ich dachte, Ihr waehrt die Sorte Gezeichnete, die nicht wahllos alle Menschen umbringen, die ihren Weg kreuzen."));
+					speak("any",_("Verzeiht. Vielleicht war mein Mund schneller als mein Kopf."),"sad");
+					speak('player',_("Wie auch immer. Was wollt Ihr wirklich?"),"normal");
+					speak('Fenor Marken',_("Danke. Mein Name ist Fenor Marken."),"normal");
+					speak('Fenor Marken',_("Es ist so: Ich habe einen Freund bei den Wildhuetern."));
+					speak('Fenor Marken',_("Er war mit zwei Kollegen in den Wiesen, als sie von Goblins ueberfallen wurden."),"sad");
+					speak('Fenor Marken',_("Und diese Feiglinge haben ihn verletzt zurueck gelassen!"),"angry");
+					if(solo())then
+						speak('player',_("Sicher wollt Ihr nicht, dass ich seine Leiche zurueck bringe.?"));
+					else
+						speak('player',_("Sicher wollt Ihr nicht, dass wir seine Leiche zurueck bringe.?"));
+					end;
+					speak('Fenor Marken',_("Nein. Willard ist niemand, der sich von ein paar lausigen Goblins umbringen laesst."),"aloof");
+					speak('Fenor Marken',_("Ich bin sicher, er wartet irgendwo darauf, dass ihm jemand zu Hilfe eilt."),"normal");
+					speak('Fenor Marken',_("Nun seid Ihr sicher sehr beschaeftigt."));
+					if(solo())then
+						speak('Fenor Marken',_("Deswegen bitte ich Euch, ihm diesen Phasenstein zu bringen. _solo"));
+					else
+						speak('Fenor Marken',_("Deswegen bitte ich Euch, ihm diesen Phasenstein zu bringen."));
+					end;
+					speak('Fenor Marken',_("Normalerweise wuerde ich das niemandem anvertrauen."),"thoughtful");
+					speak('Fenor Marken',_("Schon gar keinen wildfremden Leuten."),"thoughtful");
+					speak('Fenor Marken',_("Wer wuerde nicht einfach damit verschwinden."),"grin");
+					speak('Fenor Marken',_("Aber ihr Gezeichneten habt andere Mittel und Wege, um zu reisen."),"normal");
+					speak('Fenor Marken',_("Und einen Phasenstein koennt ihr nicht benutzen, weil er Avaera geweiht ist, stimmt's."));
+					speak('Fenor Marken',_("Deswegen habe ich mich an Euch gewandt, als Ihr hier vorbei gekommen seid."));
+					speak('player',_("Ihr wisst recht viel."),"normal");
+					addQuestion(_("Nach Willard suchen?"));
 					addAnswer(_("Ja"),'start_rescue_willard_quest');
 					addAnswer(_("Nein"),'refuse_rescue_willard_quest');
 				end
@@ -62,22 +137,66 @@
 		
 		<Topic name="start_rescue_willard_quest" >
 			<Effect>
-				speak("WAR",_("Your friend is as good as saved."));
-				speak("ANY",_("And not even asking what the rest is thinking."));
-				speak('Fenor Marken',_("Thank you very much."));
+				speak("waropt",_("Euer Freund ist so gut wie gerettet"));
+				if(getSpeaker("waropt") ~= getSpeaker("any")) then
+					speak("any",_("Und fragt nicht mal, was der Rest von uns denkt."));
+				end;
+				if(solo())then
+					speak('Fenor Marken',_("Ich danke Euch _solo"),"happy");
+				else
+					speak('Fenor Marken',_("Ich danke Euch"),"happy");
+				end;
 				rescue_willard.started = true;
+				startTimer("talk_done",4000);
 			</Effect>	
 		</Topic>
 		
 		<Topic name="refuse_rescue_willard_quest" >
 			<Effect>
-				speak("player",_("Sorry, but we can't waste time searching for some gamekeeper."));
-				speak('Fenor Marken',_("You're as coldharted as they say."));
-				speak('Fenor Marken',_("If only I could leave here."));
-				speak('Fenor Marken',_("I would search for him myself"));
+				rescue_willard.denied = true;
+				if(solo())then
+					speak("player",_("Es tut mir Leid, aber ich will meine Zeit nicht damit verschwenden, nach irgendwelchen Wildhuetern zu suchen."));
+					speak('Fenor Marken',_("Ihr seid genauso kaltherzig, wie man es euch nachsagt. _solo"),"sad");
+				else
+					speak("player",_("Es tut mir Leid, aber wir koennen unsere Zeit nicht damit verschwenden, nach irgendwelchen Wildhuetern zu suchen."));
+					speak('Fenor Marken',_("Ihr seid genauso kaltherzig, wie man es euch nachsagt."),"sad");
+				end;
+				speak('Fenor Marken',_("Wenn ich doch nur hier weg koennte."),"angry");
+				speak('Fenor Marken',_("Dann  wuerde ich ihn selbst suchen gehen."),"threaten");
+				startTimer("talk_done",4000);
+			</Effect>	
+		</Topic>
+		<Topic name="refuse_rescue_willard_quest_again" >
+			<Effect>
+				if(solo())then
+					speak('Fenor Marken',_("Was wollt Ihr dann von mir? _solo"),"angry");
+					speak('Fenor Marken',_("Verschwindet, bevor ich jemandem von Euch erzaehle! _solo"),"angry");
+				else
+					speak('Fenor Marken',_("Was wollt Ihr dann von mir?"),"angry");
+					speak('Fenor Marken',_("Verschwindet, bevor ich jemandem von Euch erzaehle!"),"angry");
+				end;
 			</Effect>	
 		</Topic>
 	</NPC>
+	
+	<Region name="medMercCamp" >
+		<Event trigger ="talk_done" once = "true">
+			<Effect>
+				addUnitCommand(fenor,'walk','locFenor');
+				rescue_willard_tmp.walkBack = true;
+			</Effect>
+		</Event>
+	
+		<Event trigger ="command_complete" once = "true">
+			<Condition>
+				return ((trigger.unit == fenor) and (rescue_willard_tmp.walkBack == true)) 
+			</Condition>	
+			<Effect>
+				set(fenor,"angle",90);
+			</Effect>
+		</Event>
+		
+	</Region>
 	
 	
 	<NPC refname="Willard">
@@ -95,7 +214,7 @@
 				speak("Willard","Can I ask another favor of you?");
 				speak("Willard","My leg's wounded and I won't reach Medair on my own.");
 				speak("player", _("You're Willard I suppose."));
-				speak("Willard","That's me. Why do you know my name?");
+				speak("Willard","That's me. How do you know my name?");
 				speak("player", _("Your friend Fenor Marken sends us."));
 				speak("player", _("We are to give you a phasestone."));
 				speak("Willard","Holy Gods! He still has that thing?");
@@ -122,52 +241,17 @@
 			</Effect>
 		</Topic>
 	</NPC>
-	
-	
-	<Region name="medMercCamp" >
-		<Event trigger ="player_moved" once = "true">
-			<Condition>
-				if (rescue_willard.asked ~= true) then
-					return (unitIsInArea(trigger.player,"FenorArea"))
-				else
-					return false
-				end
-			</Condition>
-			<Effect>
-				rescue_willard.asked = true
-				addUnitCommand(fenor,'walk',trigger.player);
-				createDialogue()
-				addSpeaker(trigger.player,'player')
-				addSpeaker(fenor,'Fenor Marken')
-				setTopicBase('Fenor Marken')
-				changeTopic('rescue_willard')
-				setDialogueActive(false);
-			</Effect>
-		</Event>
 		
-		<Event trigger ="command_complete" once = "true">
-			<Condition>
-				return (trigger.unit == fenor) 
-			</Condition>	
-			<Effect>
-				print("lua: command_complete")
-				setCurrentDialogue(fenor);
-				setDialogueActive(true);
-			</Effect>
-		</Event>
-		
-	</Region>
-	
 	<Region name="aisMeadow">
 		<Event trigger ="create_region" once = "true">
 			<Effect>
-				addArea('WillardArea','circle','willard:locWillard',20);
-				addArea('WillardEnemiesArea','circle','willard:locWillard',15);
-				if (rescue_willard.freed ~= true) then
+				addArea('WillardArea','circle','locWillard',20);
+				addArea('WillardEnemiesArea','circle','locWillard',15);
+				local list = getMonstersInArea('WillardEnemiesArea')
+				if (rescue_willard_tmp.freed ~= true) then
 					rescue_willard_tmp.monsters = createMonsterGroup("willard_goblins","willard:locWillard")
-				end
-				if (rescue_willard.freed == true and rescue_willard.finished ~= true) then
-					rescue_willard_tmp.willard = createObject('peasant', 'willard:locWillard')
+				elseif (rescue_willard_tmp.freed == true and rescue_willard.finished ~= true and list[1] == nil) then
+					rescue_willard_tmp.willard = createObject('peasant', 'locWillard')
 					setRefName(rescue_willard_tmp.willard, 'Willard')
 				end
 			</Effect>
@@ -220,16 +304,17 @@
 		<Event trigger ="checkWillardSafety">
 			<Condition>
 				local list = getMonstersInArea('WillardEnemiesArea')
-				if (list[1] == nil and rescue_willard.started == true and rescue_willard.finished ~= true and rescue_willard.freed ~= true) then
+				if (list[1] == nil and rescue_willard.started == true and rescue_willard.finished ~= true and rescue_willard_tmp.freed ~= true) then
 					return true
 				else
 					return false
 				end
 			</Condition>
 			<Effect>
-				rescue_willard_tmp.willard = createObject('peasant', 'willard:locWillard')
+				rescue_willard_tmp.willard = createObject('peasant', 'locWillard')
 				setRefName(rescue_willard_tmp.willard, 'Willard')
-				rescue_willard.freed = true
+				rescue_willard_tmp.freed = true
+				set(rescue_willard_tmp.willard,"ignored_by_ai",true);
 			</Effect>
 		</Event>
 	</Region>

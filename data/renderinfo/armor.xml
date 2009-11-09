@@ -8,6 +8,16 @@
 	<Entity source="leathArmFA.mesh"/> 
 </RenderInfo>
 
+<RenderInfo name="mercArm" parent="playerbase">
+	<Entity source="merc_arm.mesh"/> 
+</RenderInfo>
+<RenderInfo name="mercArm#m" parent="playerbase">
+	<Entity source="merc_armM.mesh"/> 
+</RenderInfo>
+<RenderInfo name="mercArm#f" parent="playerbase">
+	<Entity source="merc_armF.mesh"/>
+</RenderInfo>
+
 <RenderInfo name="counclArm" parent="playerbase">
 	<Entity source="councl_arm.mesh"/> 
 </RenderInfo>
@@ -30,4 +40,16 @@
 </RenderInfo>
 <RenderInfo name="counclRobeSoren" parent="guardPole">
 	<Entity source="councl_robMM.mesh"/>
+</RenderInfo>
+
+<RenderInfo name="necromancerRobe" parent="playerbase">
+	<Entity source="necromancer_robe.mesh"/> 
+</RenderInfo>
+<RenderInfo name="necromancerRobe#m" parent="playerbase">
+	<Entity source="necromancer_robeM.mesh"/> 
+</RenderInfo>
+<RenderInfo name="necromancerRobe#f" parent="playerbase">
+</RenderInfo>
+<RenderInfo name="necromancerRobeEnemy" parent="necromancerBase">
+	<Entity source="necromancer_robeM.mesh"/>
 </RenderInfo>

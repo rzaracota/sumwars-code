@@ -146,10 +146,6 @@
 <!-- L20 -->
 <Monster type="MONSTER" subtype="fireElemS" name="Firefletchling" fraction="summoner" race="elemental" layer="NORMAL">
 	<RenderInfo name="fireElemS" />
-	<Dropslots >
-		<Dropslot pbig="0.10" pmedium="0.25" psmall="0.10" pgold="0.05" max_gold="500" min_level="5" max_level="10" magic_prob="0.1" magic_power="1000" />
-		<Dropslot pbig="0.10" pmedium="0.25" psmall="0.10" pgold="0.05" max_gold="400" min_level="3" max_level="8" magic_prob="0.2" magic_power="800" />
-	</Dropslots>
 	
 	<BasicAttributes
 		experience="200"

@@ -186,7 +186,7 @@
 <!-- long sword  -->
 <Item type="weapon" subtype="long_sw" name="long sword" size="medium">
 	<Image image="set:sword.png image:full_image" />
-	<Mesh file="long_sw.mesh" />
+	<RenderInfo name="longSword"/>
 	<Attribute
 		level_requirement="19"
 		character_requirement="warrior"
@@ -223,7 +223,43 @@
 <!-- coastal sword-->
 <Item type="weapon" subtype="coast_sw" name="sword of the coast" size="medium">
 	<Image image="set:sword.png image:full_image" />
-	<Mesh file="sword.mesh" />
+	<RenderInfo name="longSword"/>
+	<Attribute
+		level_requirement="25"
+		character_requirement="warrior"
+		min_enchant="80"
+		max_enchant="300"
+		modchance_strength_mod="0.15"
+		modchance_dexterity_mod="0.1"
+		modchance_damage_phys_mod="0.15"
+		modchance_damage_fire_mod="0.10"
+		modchance_damage_ice_mod="0.10"
+		modchance_damage_air_mod="0.10"
+		modchance_damage_mult_phys_mod="0.1"
+		modchance_attack_mod="0.1"
+		modchance_power_mod="0.1"
+	/>
+	<EquipEffect />
+		<WeaponAttribute
+		weapon_type="sword"
+		damage_min_physical="27"
+		damage_max_physical="36"
+		damage_attack="70"
+		damage_power="86"
+		attack_range="1.6"
+		two_handed="no"
+		dattack_speed="-300"
+	/>
+	<DropChance
+		level="25"
+		probability="1.0"
+	/>
+</Item>
+
+<!-- council sabre-->
+<Item type="weapon" subtype="council_sw" name="council sabre" size="medium">
+	<Image image="set:council_sw.png image:full_image" />
+	<RenderInfo name="councilSabre"/>
 	<Attribute
 		level_requirement="25"
 		character_requirement="warrior"
@@ -259,7 +295,7 @@
 <!-- scimitar-->
 <Item type="weapon" subtype="scimita_sw" name="scimitar" size="medium">
 	<Image image="set:sword.png image:full_image" />
-	<Mesh file="sword.mesh" />
+	<RenderInfo name="longSword"/>
 	<Attribute
 		level_requirement="30"
 		character_requirement="warrior"
@@ -295,7 +331,7 @@
 <!-- barbar sword-->
 <Item type="weapon" subtype="barbar_sw" name="barbarian sword" size="medium">
 	<Image image="set:sword.png image:full_image" />
-	<Mesh file="sword.mesh" />
+	<RenderInfo name="longSword"/>
 	<Attribute
 		level_requirement="35"
 		character_requirement="warrior"
@@ -331,7 +367,7 @@
 <!-- northlings blade -->
 <Item type="weapon" subtype="northli_sw" name="northlings blade" size="medium">
 	<Image image="set:sword.png image:full_image" />
-	<Mesh file="sword.mesh" />
+	<RenderInfo name="longSword"/>
 	<Attribute
 		level_requirement="40"
 		character_requirement="warrior"
@@ -369,7 +405,7 @@
 <!-- steel sword-->
 <Item type="weapon" subtype="steel_sw" name="steel sword" size="medium">
 	<Image image="set:sword.png image:full_image" />
-	<Mesh file="sword.mesh" />
+	<RenderInfo name="longSword"/>
 	<Attribute
 		level_requirement="45"
 		character_requirement="warrior"
@@ -405,7 +441,7 @@
 <!-- assassins blade-->
 <Item type="weapon" subtype="assassi_sw" name="assassins blade" size="medium">
 	<Image image="set:sword.png image:full_image" />
-	<Mesh file="sword.mesh" />
+	<RenderInfo name="longSword"/>
 	<Attribute
 		level_requirement="50"
 		character_requirement="warrior"
@@ -441,7 +477,7 @@
 <!-- diamond sword-->
 <Item type="weapon" subtype="diamond_sw" name="diamont sword" size="medium">
 	<Image image="set:sword.png image:full_image" />
-	<Mesh file="sword.mesh" />
+	<RenderInfo name="longSword"/>
 	<Attribute
 		level_requirement="55"
 		character_requirement="warrior"
@@ -477,7 +513,7 @@
 <!-- dwarf steel sword-->
 <Item type="weapon" subtype="dwarfst_sw" name="dwarfsteel sword" size="medium">
 	<Image image="set:sword.png image:full_image" />
-	<Mesh file="sword.mesh" />
+	<RenderInfo name="longSword"/>
 	<Attribute
 		level_requirement="60"
 		character_requirement="warrior"
@@ -513,7 +549,7 @@
 <!-- demon blade -->
 <Item type="weapon" subtype="demon_sw" name="demon blade" size="medium">
 	<Image image="set:sword.png image:full_image" />
-	<Mesh file="sword.mesh" />
+	<RenderInfo name="longSword"/>
 	<Attribute
 		level_requirement="65"
 		character_requirement="warrior"
@@ -551,7 +587,7 @@
 <!-- hero blade -->
 <Item type="weapon" subtype="heroe_sw" name="hero blade" size="medium">
 	<Image image="set:sword.png image:full_image" />
-	<Mesh file="sword.mesh" />
+	<RenderInfo name="longSword"/>
 	<Attribute
 		level_requirement="70"
 		character_requirement="warrior"
@@ -587,7 +623,7 @@
 <!-- angel blade -->
 <Item type="weapon" subtype="angel_sw" name="angel blade" size="medium">
 	<Image image="set:sword.png image:full_image" />
-	<Mesh file="sword.mesh" />
+	<RenderInfo name="longSword"/>
 	<Attribute
 		level_requirement="75"
 		character_requirement="warrior"
@@ -623,7 +659,7 @@
 <!-- gods blade -->
 <Item type="weapon" subtype="gods_sw" name="gods blade" size="medium">
 	<Image image="set:sword.png image:full_image" />
-	<Mesh file="sword.mesh" />
+	<RenderInfo name="longSword"/>
 	<Attribute
 		level_requirement="80"
 		character_requirement="warrior"

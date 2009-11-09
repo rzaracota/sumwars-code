@@ -92,7 +92,7 @@
 
 <!-- Bronzeschild 8-->
 <Item type="shield" subtype="bronze_shd" name="bronze shield" size="medium">
-	 <Image image="set:shield.png image:full_image" />
+	<Image image="set:metal_shd.png image:full_image" />
 	<Mesh file="metal_shd.mesh" />
 	<Attribute
 		level_requirement="8"
@@ -122,7 +122,7 @@
 
 <!-- Eisenschild 13 XX-->
 <Item type="shield" subtype="iron_shd" name="iron shield" size="medium">
-	<Image image="set:shield.png image:full_image" />
+	<Image image="set:metal_shd.png image:full_image" />
 	<Mesh file="metal_shd.mesh" />
 	<Attribute
 		level_requirement="13"
@@ -152,7 +152,7 @@
 
 <!-- Stahlschild 19-->
 <Item type="shield" subtype="steel_shd" name="steel shield" size="medium">
-	<Image image="set:shield.png image:full_image" />
+	<Image image="set:metal_shd.png image:full_image" />
 	<Mesh file="metal_shd.mesh" />
 	<Attribute
 		level_requirement="19"

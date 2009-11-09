@@ -165,8 +165,8 @@
 
 <Projectile subtype="thunderstorm"
 		   lifetime="9000"
-		   radius="5"
-		   counter="30"
+		   radius="10"
+		   counter="150"
 		   implementation = "stationary_multi_effect"
 		   new_projectile_type="lightning"
 		   >

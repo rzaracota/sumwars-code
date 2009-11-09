@@ -2,7 +2,7 @@
 
 <!-- Flickenrobe -->
 <Item type="armor" subtype="rag_rob" name="ragged robe" size="medium">
-	<Image image="set:gobLeg_Arm.png image:full_image" />
+	<Image image="set:council_rob.png image:full_image" />
 	<RenderInfo name="counclRob" />
 	<Attribute
 			level_requirement="1"
@@ -36,7 +36,7 @@
 
 <!-- Lehrlingsrobe -->
 <Item type="armor" subtype="prentc_rob" name="apprentice robe" size="medium">
-	<Image image="set:gobLeg_Arm.png image:full_image" />
+	<Image image="set:council_rob.png image:full_image" />
 	<RenderInfo name="counclRob" />
 	<Attribute
 			level_requirement="3"
@@ -70,7 +70,7 @@
 
 <!-- Novizenrobe -->
 <Item type="armor" subtype="novice_rob" name="novice robe" size="medium">
-	<Image image="set:gobLeg_Arm.png image:full_image" />
+	<Image image="set:council_rob.png image:full_image" />
 	<RenderInfo name="counclRob" />
 	<Attribute
 			level_requirement="5"
@@ -104,7 +104,7 @@
 
 <!-- Alchemistenrobe -->
 <Item type="armor" subtype="alch_rob" name="alchemist robe" size="medium">
-	<Image image="set:gobLeg_Arm.png image:full_image" />
+	<Image image="set:council_rob.png image:full_image" />
 	<RenderInfo name="counclRob" />
 	<Attribute
 			level_requirement="8"
@@ -138,8 +138,8 @@
 
 <!-- Gelehrtenrobe -->
 <Item type="armor" subtype="sholar_rob" name="scholar robe" size="medium">
-	<Image image="set:gobLeg_Arm.png image:full_image" />
-	<RenderInfo name="counclRob" />
+	<Image image="set:necromancer_robe.png image:full_image" />
+	<RenderInfo name="necromancerRobe" />
 	<Attribute
 			level_requirement="13"
 			character_requirement="mage" 
@@ -172,7 +172,7 @@
 
 <!-- Magierrobe -->
 <Item type="armor" subtype="mage_rob" name="magus robe" size="medium">
-	<Image image="set:gobLeg_Arm.png image:full_image" />
+	<Image image="set:council_rob.png image:full_image" />
 	<RenderInfo name="counclRob" />
 	<Attribute
 			level_requirement="19"
@@ -206,7 +206,7 @@
 
 <!-- Konzilsrobe -->
 <Item type="armor" subtype="councl_rob" name="council robe" size="medium">
-	<Image image="set:gobLeg_Arm.png image:full_image" />
+	<Image image="set:council_rob.png image:full_image" />
 	<Mesh file="counclRob" />
 	<Attribute
 			level_requirement="27"

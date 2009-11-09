@@ -64,3 +64,6 @@
 <RenderInfo name="longSword" parent= "oneHandSwordBase">
 	<Entity source="long_sw.mesh"/>
 </RenderInfo>
+<RenderInfo name="councilSabre" parent= "oneHandSwordBase">
+	<Entity source="council_sw.mesh"/>
+</RenderInfo>

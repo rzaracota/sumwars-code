@@ -10,6 +10,12 @@
 	<Action name="walk">
 		<Animation name="walkOneHand" />
 	</Action>
+	
+	<Action name="magic_attack">
+		<Animation name="attackMagicTwoHands" />
+		<ParticleSystem objectname="magicEnergy" bone="mainmesh:itemRightHand" source="Magic_Arrow" position="0.0 0.0 -1.4" />
+		<Detach time="0.4" objectname="magicEnergy" />
+	</Action>
 </RenderInfo>
 
 <RenderInfo name="guardPole_cnl" parent="guardPole">

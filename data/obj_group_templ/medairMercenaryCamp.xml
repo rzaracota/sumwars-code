@@ -558,7 +558,7 @@
     <Object subtype="$tree" 
             center_x="9.204204662" 
             center_y="16.8312554" 
-			height="-7.202571872e-015" 
+			height="-7.21644966e-015" 
             angle="0" 
             probability="1" 
             prob_angle="false" 
@@ -615,7 +615,7 @@
     <Object subtype="$tree" 
             center_x="20.96529437" 
             center_y="-22.41761944" 
-			height="-7.202571872e-015" 
+			height="-7.21644966e-015" 
             angle="0" 
             probability="1" 
             prob_angle="true" 
@@ -637,7 +637,7 @@
     <Object subtype="$tree" 
             center_x="2.925222622" 
             center_y="-14.33276133" 
-			height="1.056793542e-014" 
+			height="1.055405763e-014" 
             angle="0" 
             probability="1" 
             prob_angle="true" 
@@ -645,7 +645,7 @@
     <Object subtype="$tree" 
             center_x="-3.560596768" 
             center_y="-27.33400756" 
-			height="3.462508058e-015" 
+			height="3.44863027e-015" 
             angle="0" 
             probability="1" 
             prob_angle="true" 
@@ -788,7 +788,7 @@
     <Object subtype="$vase" 
             center_x="-5.838005652" 
             center_y="-6.940312734" 
-			height="5.551115123e-017" 
+			height="7.632783294e-017" 
             angle="0" 
             probability="1" 
             prob_angle="true" 
@@ -1240,10 +1240,13 @@
     <Location name="locSoldier1" pos_x="-2" pos_y="11" />
     <Location name="locSoldier2" pos_x="-8" pos_y="11" />
     <Location name="locSoldier3" pos_x="13.5" pos_y="-11" />
+    <Location name="locTheTrader" pos_x="10.5" pos_y="7.5" />
+    <Location name="locTheTraderIntro" pos_x="-3" pos_y="9" />
     <Location name="locWeaponTrader" pos_x="-5.811448673" pos_y="-5.423464805" />
   </Locations>
 
   <Areas>
+    <Area name="areaFenor" angle="-0" center_x="9.040474474" center_y="-10.0616373" type="RECT" extent_x="5.16778815" extent_y="2.257700248" />
   </Areas>
 
 </ObjectGroupTemplate>

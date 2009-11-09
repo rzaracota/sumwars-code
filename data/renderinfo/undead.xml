@@ -101,29 +101,23 @@
 
 </RenderInfo>
 
-<RenderInfo name="lich" parent="lichbase">
-	<Entity source="lich.mesh"/>
-	<Entity objectname = "scythe" bone="itemRightHand" source="blood_scy.mesh"/>
+<RenderInfo name = "necromancerBase" parent="playerbase">
+	<Action name="noaction">
+		<Animation name="idlePole" />
+	</Action>
 	
 	<Action name="die">
-		<Animation name="die" />
-		<!--<Scale start="0.3" end="1.0" start_val="1.0" end_val="0.1" />-->
-		<ParticleSystem time = "0" objectname="headFire" bone="mainmesh:crown" source="Firesphere" position="0.0 0.0 0.0" />
-		<ParticleSystem time = "0.2" objectname="handIce1" bone="mainmesh:itemLeftHand" source="Icesphere" position="0.0 -0.20 -0.10" />
-		<ParticleSystem time = "0.2" objectname="handIce2" bone="mainmesh:itemLeftHand" source="Icesphere" position="0.0 0.0 0.0" />
-		<Detach time="0.4" objectname="handIce1" />
-		<Detach time="0.4" objectname="handIce2" />
-		<ParticleSystem time = "0.41" objectname="handIce3" bone="mainmesh:itemLeftHand" source="HandIce" position="0.0 -0.20 -0.10" />
-		<ParticleSystem time = "0.41" objectname="handIce4" bone="mainmesh:itemLeftHand" source="HandIce" position="0.0 0.0 0.0" />
-		<ParticleSystem time = "0.4" objectname="column" source="LichDeadColumn" position="-1.0 0.0 0.0" />
-		<Detach time="0.6" objectname="handIce3" />
-		<Detach time="0.6" objectname="handIce4" />
-		<ParticleSystem time = "0.61" objectname="handIce5" bone="mainmesh:itemLeftHand" source="HandFire" position="0.0 -0.20 -0.10" />
-		<ParticleSystem time = "0.61" objectname="handIce6" bone="mainmesh:itemLeftHand" source="HandFire" position="0.0 0.0 0.0" />
-		<Detach time="0.8" objectname="handIce5" />
-		<Detach time="0.8" objectname="handIce6" />
-		<ParticleSystem time = "0.81" objectname="handIce7" bone="mainmesh:itemLeftHand" source="Firesphere" position="0.0 -0.20 -0.10" />
-		<ParticleSystem time = "0.81" objectname="handIce8" bone="mainmesh:itemLeftHand" source="Firesphere" position="0.0 0.0 0.0" />
+		<Animation name="dieOneHand" />
+	</Action>
+	
+	<Action name="walk">
+		<Animation name="walkOneHand" />
+	</Action>
+	
+	<Action name="magic_attack">
+		<Animation name="attackMagicTwoHands" />
+		<ParticleSystem objectname="magicEnergy" bone="mainmesh:itemRightHand" source="Magic_Arrow" position="0.0 0.0 -1.4" />
+		<Detach time="0.4" objectname="magicEnergy" />
 	</Action>
 </RenderInfo>
 
@@ -180,4 +174,37 @@
 
 <RenderInfo name="zombie" parent="zombiebase">
 	<Entity source="zombie_norm.mesh"/>
+</RenderInfo>
+
+<RenderInfo name = "necromancer" parent="necromancerBase">
+	<Entity source="soren.mesh"/>
+	<Entity objectname="head" bone="crown" source="head_m1.mesh" />
+	<Subobject objectname="robe" source="necromancerRobeEnemy" />
+	<Entity objectname="weapon" bone="itemRightHand" source="aprnt_stf.mesh" />
+</RenderInfo>
+
+<RenderInfo name="lich" parent="lichbase">
+	<Entity source="lich.mesh"/>
+	<Entity objectname = "scythe" bone="itemRightHand" source="blood_scy.mesh"/>
+	
+	<Action name="die">
+		<Animation name="die" />
+		<!--<Scale start="0.3" end="1.0" start_val="1.0" end_val="0.1" />-->
+		<ParticleSystem time = "0" objectname="headFire" bone="mainmesh:crown" source="Firesphere" position="0.0 0.0 0.0" />
+		<ParticleSystem time = "0.2" objectname="handIce1" bone="mainmesh:itemLeftHand" source="Icesphere" position="0.0 -0.20 -0.10" />
+		<ParticleSystem time = "0.2" objectname="handIce2" bone="mainmesh:itemLeftHand" source="Icesphere" position="0.0 0.0 0.0" />
+		<Detach time="0.4" objectname="handIce1" />
+		<Detach time="0.4" objectname="handIce2" />
+		<ParticleSystem time = "0.41" objectname="handIce3" bone="mainmesh:itemLeftHand" source="HandIce" position="0.0 -0.20 -0.10" />
+		<ParticleSystem time = "0.41" objectname="handIce4" bone="mainmesh:itemLeftHand" source="HandIce" position="0.0 0.0 0.0" />
+		<ParticleSystem time = "0.4" objectname="column" source="LichDeadColumn" position="-1.0 0.0 0.0" />
+		<Detach time="0.6" objectname="handIce3" />
+		<Detach time="0.6" objectname="handIce4" />
+		<ParticleSystem time = "0.61" objectname="handIce5" bone="mainmesh:itemLeftHand" source="HandFire" position="0.0 -0.20 -0.10" />
+		<ParticleSystem time = "0.61" objectname="handIce6" bone="mainmesh:itemLeftHand" source="HandFire" position="0.0 0.0 0.0" />
+		<Detach time="0.8" objectname="handIce5" />
+		<Detach time="0.8" objectname="handIce6" />
+		<ParticleSystem time = "0.81" objectname="handIce7" bone="mainmesh:itemLeftHand" source="Firesphere" position="0.0 -0.20 -0.10" />
+		<ParticleSystem time = "0.81" objectname="handIce8" bone="mainmesh:itemLeftHand" source="Firesphere" position="0.0 0.0 0.0" />
+	</Action>
 </RenderInfo>
