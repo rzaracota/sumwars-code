@@ -75,7 +75,7 @@
 </NPC>
 
 <NPC refname="Marco">
-	<Trade refresh_time="600000" price_factor="4">
+	<Trade refresh_time="600000" price_factor="10">
 		<TradeItem subtype="sabre_sw"  number="0" number_magical="1" min_enchant="100" max_enchant="400"/>
 		<TradeItem subtype="legion_sw"  number="0" number_magical="1" min_enchant="100" max_enchant="400"/>
 		<TradeItem subtype="smash_sw"  number="0" number_magical="1" min_enchant="100" max_enchant="400"/>

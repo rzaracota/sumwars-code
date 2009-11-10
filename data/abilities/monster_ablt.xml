@@ -381,6 +381,29 @@
 	</Damage>
 </Ability>
 
+<Ability type="guided_fire_shot" 
+		 name="Fire arrow"
+		 description="Basic ranged attack" 
+		 time="1.000000" 
+		 timer_nr="0.000000" 
+		 timer_value="0.000000" 
+		 base_ability="range_attack" 
+		 critical_percent="0.660000" 
+		 target_type="ranged" >
+	<Effect>
+		<CppImplementation type="proj_fly_at_target" />
+	</Effect>
+	<Projectile type="guided_fire_arrow" speed="12000" />
+	<Damage>
+		<CppImplementation type="range_attack" />
+		<LuaImplementation>
+			local magic = get(self,"magic_power");
+			local fdmg = getDamageValue("fire_dmg");
+			setDamageValue("fire_dmg", {fdmg[1] + magic*0.5, fdmg[2] + magic*1.0});
+		</LuaImplementation>
+	</Damage>
+</Ability>
+
 <Ability type="tutorial_fire_ball"
 		 name="Fireball" 
 		 description="The mage casts a bolt of fire, that explodes upon hitting an enemy. Other enemies nearby the victim are also caught in the explosion." 

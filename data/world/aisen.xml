@@ -1,4 +1,4 @@
-﻿<World>
+<World>
 <!-- Aisen, Aisener Wiesen [Feld und Wiesen]; ungefaehr eine viertel Stunde, eher offen; Level 1 - 3 -->
 <!-- Orte: verwundeter Soldat, Template -->
 <!-- Goblinschlaeger, Goblinjaeger-->
@@ -278,8 +278,8 @@
 		</ObjectGroups>
 		
 		<SpawnGroups>
-	<!--		<SpawnGroup group_name="goblins_temple1" number="15"/>
-			<SpawnGroup group_name="goblins_temple2" number="15"/> -->
+			<SpawnGroup group_name="goblins_temple1" number="15"/>
+			<SpawnGroup group_name="goblins_temple2" number="15"/> 
 		</SpawnGroups>
 		
 		<Event trigger ="create_region" once = "true">
@@ -320,7 +320,9 @@
 		</ObjectGroups>
 		
 		<SpawnGroups>
-			<SpawnGroup group_name="goblins_gobrusch" number="1"/>
+			<SpawnGroup group_name="goblins_l7_rider" number="20"/>
+			<SpawnGroup group_name="goblins_l8" number="20"/>
+			<SpawnGroup group_name="goblins_marblak" number="1"/>
 		</SpawnGroups>
 	</Region>
 	

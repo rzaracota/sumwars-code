@@ -247,6 +247,17 @@
 	</Effect>	
 </Projectile>
 
+<Projectile   subtype="guided_fire_arrow"
+			  radius="0.1"
+			  lifetime="2000"
+			  implementation = "fly_guided"
+			  >
+	<RenderInfo name="fire_arrow" />
+	<Effect>
+		<CppImplementation type="dmg_at_target" />
+	</Effect>	
+</Projectile>
+
 <Projectile  subtype="explosion"
 		   lifetime="200"
 		   radius="1.5"

@@ -63,7 +63,7 @@
 </NPC>
 
 <NPC refname="Flynn">
-	<Trade refresh_time="600000" price_factor="4">
+	<Trade refresh_time="600000" price_factor="10">
 		<TradeItem subtype="legion_sw"  number="0" number_magical="1" min_enchant="200" max_enchant="650"/>
 		<TradeItem subtype="long_sw"  number="0" number_magical="1" min_enchant="200" max_enchant="650"/>
 		<TradeItem subtype="horse_sw"  number="0" number_magical="1" min_enchant="200" max_enchant="650"/>
