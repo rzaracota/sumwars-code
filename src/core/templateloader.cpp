@@ -159,7 +159,9 @@ bool TemplateLoader::loadObjectGroupTemplate(TiXmlNode* node)
 						templ->getShape()->m_type = Shape::CIRCLE;
 						attr.getFloat("radius",templ->getShape()->m_radius,0);
 					}
-					attr.getFloat("angle",templ->getShape()->m_angle,0);
+					float angle;
+					attr.getFloat("angle",angle,0);
+					templ->getShape()->m_angle = angle*3.14159/180;
 				}
 				else if (!strcmp(child->Value(), "WayPoint"))
 				{

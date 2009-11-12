@@ -159,6 +159,12 @@ class RegionData
 			 * \brief Name der Gruppe
 			 */
 			std::string m_name;
+			
+			/**
+			 * \var float m_angle
+			 * \brief Winkel mit dem das Template eingefuegt wird
+			 */
+			float m_angle;
 		};
 		
 		/**
@@ -205,17 +211,19 @@ class RegionData
 		void addObjectGroupTemplate(ObjectGroupTemplateName group_name, int prio=0, int number =1, float probability=1.0, bool decoration=false);
 		
 		/**
-		 * \fn void  addNamedObjectGroupTemplate(ObjectGroupTemplateName group_name, std::string name, int prio=0)
+		 * \fn void  addNamedObjectGroupTemplate(ObjectGroupTemplateName group_name, std::string name,float angle=0, int prio=0)
 		 * \brief Fuegt eine neue Objektgruppe ein
 		 * \param group_name Name der Gruppe
 		 * \param name Name unter dem die Gruppe eingefuegt wird
+		 * \param angle Winkel unter dem das Template eingefuegt wird
 		 * \param prio Prioritaet der Gruppe
 		 */
-		void addNamedObjectGroupTemplate(ObjectGroupTemplateName group_name, std::string name, int prio=0)
+		void addNamedObjectGroupTemplate(ObjectGroupTemplateName group_name, std::string name, float angle=0, int prio=0)
 		{
 			NamedObjectGroupTemplate og;
 			og.m_name = name;
 			og.m_group_name = group_name;
+			og.m_angle = angle;
 			m_named_object_groups.insert( std::make_pair( prio, og));
 		}
 		

@@ -514,8 +514,9 @@ bool MapGenerator::insertGroupTemplates(MapData* mdata, RegionData* rdata)
 		s.m_type = templ->getShape()->m_type;
 		s.m_extent = templ->getShape()->m_extent;
 		s.m_radius = templ->getShape()->m_radius;
-		s.m_angle = templ->getShape()->m_angle;
+		s.m_angle = templ->getShape()->m_angle + it->second.m_angle;
 
+		DEBUG("template angle %f",s.m_angle);
 		
 		// Ort fuer das Template suchen
 		succ = getTemplatePlace(mdata,&s,pos);

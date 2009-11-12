@@ -257,13 +257,16 @@ bool WorldLoader::loadRegion(TiXmlNode* node, RegionData* rdata)
 						attr.parseElement(child2->ToElement());
 						std::string group_name, name;
 						int prio;
+						float angle;
 						attr.getString("name",name);
 						attr.getString("object_group",group_name);
+						attr.getFloat("angle",angle,0);
+						angle *= 3.14159/180;
 						attr.getInt("priority",prio);
 						
 						DEBUG5("named object group %s %s %i",group_name.c_str(), name.c_str(), prio);
 						
-						rdata->addNamedObjectGroupTemplate(group_name,name,prio);
+						rdata->addNamedObjectGroupTemplate(group_name,name,angle, prio);
 					}
 					else if (child2->Type()!=TiXmlNode::COMMENT)
 					{
