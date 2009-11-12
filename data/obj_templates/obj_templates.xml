@@ -17,6 +17,8 @@ FIXED_OBJECT
         <Environment name="hills">
                 <Object name="tree4" />
         </Environment>
+		<Environment name="cave">
+        </Environment>
 </ObjectTemplate>
 
 <ObjectTemplate name="$flower" type="FIXED_OBJECT">

@@ -122,6 +122,16 @@ class ObjectTemplate
 		}
 		
 		/**
+		 * \fn void addEnvironment(EnvironmentName env)
+		 * \brief Fuegt eine Umgebung ein
+		 * \param env Name der Umgebung
+		 */
+		void addEnvironment(EnvironmentName env)
+		{
+			m_env_objects[env];
+		}
+		
+		/**
 		 * \fn GameObject::Subtype getObject(EnvironmentName env)
 		 * \brief Gibt fuer eine gegebene Umgebung ein passendes Objekt aus
 		 * \param env Umgebung

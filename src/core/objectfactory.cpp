@@ -41,7 +41,7 @@ GameObject::Subtype ObjectTemplate::getObject(EnvironmentName env)
 	std::map<EnvironmentName, WorldObjectTypeList >::iterator it;
 	it = m_env_objects.find(env);
 	
-	if (it == m_env_objects.end() || it->second.empty())
+	if (it == m_env_objects.end())
 	{
 		it = m_env_objects.find(m_default_environment);
 		
@@ -50,6 +50,11 @@ GameObject::Subtype ObjectTemplate::getObject(EnvironmentName env)
 			// nichts gefunden
 			return "";
 		}
+	}
+	
+	if (it->second.empty())
+	{
+		return "";
 	}
 	
 	WorldObjectTypeList::iterator jt;

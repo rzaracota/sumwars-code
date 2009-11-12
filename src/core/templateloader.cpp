@@ -56,6 +56,7 @@ bool TemplateLoader::loadObjectTemplate(TiXmlNode* node)
 					attr.getString("name",env);
 					attr.getString("default",defstr,"false");
 					
+					templ->addEnvironment(env);
 					if (defstr == "true")
 					{
 						templ->m_default_environment = env;
