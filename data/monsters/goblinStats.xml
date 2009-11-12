@@ -48,7 +48,7 @@
 
 <!-- Goblin Schuetze
 	 L2 -->
-<Monster type="MONSTER" subtype="goblin_bow" name="goblin hunter" fraction="monster" race="goblin" layer="NORMAL">
+	<Monster type="MONSTER" subtype="goblin_bow" name="goblin hunter" fraction="monster" race="goblin" layer="NORMAL">
 	<RenderInfo name="goblin_bow" />
 	<Dropslots >
 		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.05" pgold="0.05" min_gold="5" max_gold="50" min_level="1" max_level="5" magic_prob="0.1" magic_power="200" />

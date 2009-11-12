@@ -348,7 +348,7 @@
 		 description="Attacks an enemy with an unblockable, armor piercing blow."
 		 time="1.000000" 
 		 timer_nr="1.000000" 
-		 timer_value="3000.000000" 
+		 timer_value="4000.000000" 
 		 base_ability="attack" 
 		 critical_percent="0.800000" 
 		 target_type="melee" >
