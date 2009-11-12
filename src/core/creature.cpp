@@ -4308,7 +4308,17 @@ int Creature::getValue(std::string valname)
 		return 1;
 	}
 	
-	int ret = m_base_attr.getValue(valname);
+	if (valname.find("base:") == 0)
+	{
+		std::string val2 = valname.substr(5);
+		int ret = getBaseAttr()->getValue(val2);
+		if (ret >0)
+		{
+			return ret;
+		}
+	}
+	
+	int ret = getBaseAttrMod()->getValue(valname);
 	if (ret >0)
 	{
 		return ret;
@@ -4350,8 +4360,18 @@ bool Creature::setValue(std::string valname)
 		return true;
 	}
 	
+	if (valname.find("base:") == 0)
+	{
+		std::string val2 = valname.substr(5);
+		int ret = getBaseAttr()->getValue(val2);
+		if (ret >0)
+		{
+			return ret;
+		}
+	}
+	
 	bool ret;
-	ret = m_base_attr.setValue(valname, getEventMaskRef());
+	ret = getBaseAttrMod()->setValue(valname, getEventMaskRef());
 	if (ret >0)
 	{
 		calcBaseAttrMod();
