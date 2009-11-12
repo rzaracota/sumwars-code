@@ -1212,6 +1212,10 @@ bool  Region::deleteObject (WorldObject* object)
 		DEBUG5("Player deleted");
 		m_players->erase(object->getId());
 
+		
+		Trigger* tr = new Trigger("leave_region");
+		tr->addVariable("player", object->getId());
+		insertTrigger(tr);
 	}
 	
 	if (object->isLarge())
