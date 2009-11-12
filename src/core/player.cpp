@@ -1263,10 +1263,10 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 			}
 			
 			DEBUG5("changing topic to %s",it->second.c_str());
-			clearSpeakText();
 			EventSystem::setDialogue(dia);
 			dia->changeTopic(it->second);
 			EventSystem::setDialogue(0);
+			clearSpeakText();
 			break;
 			
 		case BUTTON_TRADE_END:
