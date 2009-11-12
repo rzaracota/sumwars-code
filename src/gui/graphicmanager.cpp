@@ -83,6 +83,11 @@ void GraphicManager::cleanup()
 	}
 	m_render_infos.clear();
 	
+	clearParticlePool();
+}
+
+void GraphicManager::clearParticlePool()
+{
 	std::multimap<std::string, Ogre::ParticleSystem*>::iterator pt;
 	for (pt = m_particle_system_pool.begin(); pt != m_particle_system_pool.end(); ++pt)
 	{

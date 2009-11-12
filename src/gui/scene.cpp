@@ -351,15 +351,15 @@ void Scene::updateGraphicObject(GraphicObject* obj, GameObject* gobj,float time)
 	// Aktion setzen
 	std::string action = gobj->getActionString();
 	float perc = gobj->getActionPercent();
-	
-	obj->updateAction(action,perc);
-	DEBUG5("object %s action %s perc %f",gobj->getNameId().c_str(), action.c_str(), perc);
 
 	Player* pl = dynamic_cast<Player*>(gobj);
 	if (pl != 0)
 	{
 		updatePlayerGraphicObject(obj,pl);
 	}
+	
+	obj->updateAction(action,perc);
+	DEBUG5("object %s action %s perc %f",gobj->getNameId().c_str(), action.c_str(), perc);
 	
 	// Zustaende aktualisieren
 	std::set<std::string> flags;
@@ -655,6 +655,7 @@ void Scene::clearObjects()
 void Scene::createScene()
 {
 	DEBUG5("create Scene");
+	GraphicManager::clearParticlePool();
 
 	// alle bisherigen Objekte aus der Szene loeschen
 	clearObjects();

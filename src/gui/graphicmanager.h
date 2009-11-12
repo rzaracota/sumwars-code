@@ -78,6 +78,8 @@ class GraphicManager
 		
 		static GraphicRenderInfo* getRenderInfo(std::string name);
 		
+		static void clearParticlePool();
+		
 	private:
 		static void registerRenderInfo(std::string name, GraphicRenderInfo* info)
 		{
