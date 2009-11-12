@@ -274,7 +274,12 @@ void GraphicObject::addMovableObject(MovableObjectInfo& object)
 		obj = GraphicManager::createMovableObject(object,ostr.str());
 		
 		// Objekt mit ID versehen
-		obj->setUserAny(Ogre::Any(m_id));
+		// nur bei Entity, da nur diese von Query gefunden werden
+		// 
+		if (obj->getMovableType() == "Entity")
+		{
+			obj->setUserAny(Ogre::Any(m_id));
+		}
 		Ogre::TagPoint* tag =0;
 		Ogre::Entity* ent =0;
 		

@@ -87,6 +87,19 @@ class GraphicManager
 			}
 		}
 		
+		/**
+		 * \fn Ogre::ParticleSystem* getParticleSystem(std::string type)
+		 * \brief Gibt aus dem Pool ein passendes Partikelsystem aus
+		 * \param type Typ des Partikelsystems
+		 */
+		static Ogre::ParticleSystem* getParticleSystem(std::string type);
+	
+		/**
+		 * \fn void putBackParticleSystem(Ogre::ParticleSystem* part)
+		 * \brief Fuegt das Partikelsystem wieder in den Pool ein
+	 	*/
+		static void putBackParticleSystem(Ogre::ParticleSystem* part);
+		
 		static std::map<std::string, GraphicRenderInfo*> m_render_infos;
 		
 		static std::map<std::string, GraphicObject::Type> m_graphic_mapping;
@@ -102,6 +115,12 @@ class GraphicManager
 		static Ogre::SceneManager* m_scene_manager;
 		
 		static StencilOpQueueListener* m_stencil_listener;
+		
+		/**
+		 * \var std::multimap<std::string, Ogre::ParticleSystem*> m_particle_system_pool
+		 * \brief interner Pool von Partikelsystem
+		 */
+		static std::multimap<std::string, Ogre::ParticleSystem*> m_particle_system_pool;
 };
 
 #endif

@@ -37,8 +37,7 @@ Scene::Scene(Document* doc,Ogre::RenderWindow* window)
 	registerMeshes();
 
 	m_region_id = -1;
-	m_particle_system_pool.clear();
-
+	
 	m_temp_player ="";
 	m_temp_player_object =0;
 
@@ -573,52 +572,6 @@ void Scene::updateGraphicObjects(float time)
 }
 
 
-Ogre::ParticleSystem* Scene::getParticleSystem(std::string type)
-{
-	// Im Pool nach einem passenden Partikelsystem suchen
-	std::multimap<std::string, Ogre::ParticleSystem*>::iterator it;
-	it = m_particle_system_pool.find(type);
-
-	Ogre::ParticleSystem* part=0;
-	static int count =0;
-
-	if (it == m_particle_system_pool.end())
-	{
-		// Kein Partikelsystem gefunden
-		// neues erzeugen
-		std::ostringstream name;
-		name << "ParticleSystem"<<count;
-		count ++;
-
-		part = m_scene_manager->createParticleSystem(name.str(), type);
-		part->setUserAny(Ogre::Any(type));
-		part->setKeepParticlesInLocalSpace(true);
-		DEBUG5("created particlesystem %p %s for type %s",part, name.str().c_str(), type.c_str());
-	}
-	else
-	{
-		// Partikelsystem aus dem Pool nehmen
-		part = it->second;
-		m_particle_system_pool.erase(it);
-		DEBUG5("took particlesystem %s for type %s",part->getName().c_str(), type.c_str());
-	}
-
-	part->clear();
-	return part;
-}
-
-void Scene::putBackParticleSystem(Ogre::ParticleSystem* part)
-{
-	// Typ des Partikelsystems ermitteln
-	std::string type;
-	type = Ogre::any_cast<std::string>(part->getUserAny());
-
-	DEBUG5("put back particlesystem %p %s for type %s",part, part->getName().c_str(), type.c_str());
-
-	m_particle_system_pool.insert(std::make_pair(type,part));
-}
-
-
 void Scene::updateCharacterView()
 {
 	bool update = false;
@@ -702,15 +655,6 @@ void Scene::clearObjects()
 void Scene::createScene()
 {
 	DEBUG5("create Scene");
-
-	// alle Partikelsysteme loeschen
-	std::multimap<std::string, Ogre::ParticleSystem*>::iterator kt;
-	for (kt = m_particle_system_pool.begin(); kt !=  m_particle_system_pool.end(); ++kt)
-	{
-		DEBUG5("destroy particle system %s",kt->second->getName().c_str());
-		m_scene_manager->destroyParticleSystem(kt->second);
-	}
-	m_particle_system_pool.clear();
 
 	// alle bisherigen Objekte aus der Szene loeschen
 	clearObjects();

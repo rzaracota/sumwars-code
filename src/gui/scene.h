@@ -161,19 +161,6 @@ class Scene
 	void deleteGraphicObject(int id);
 	
 	/**
-	 * \fn Ogre::ParticleSystem* getParticleSystem(std::string type)
-	 * \brief Gibt aus dem Pool ein passendes Partikelsystem aus
-	 * \param type Typ des Partikelsystems
-	 */
-	Ogre::ParticleSystem* getParticleSystem(std::string type);
-	
-	/**
-	 * \fn void putBackParticleSystem(Ogre::ParticleSystem* part)
-	 * \brief Fuegt das Partikelsystem wieder in den Pool ein
-	 */
-	void putBackParticleSystem(Ogre::ParticleSystem* part);
-	
-	/**
 	 * \fn void clearObjects()
 	 * \brief Entfernt alle Objekte aus der Szene
 	 */
@@ -245,13 +232,6 @@ class Scene
 	 * \brief aktueller Scenemanager
 	 */
 	Ogre::SceneManager* m_scene_manager;
-
-	
-	/**
-	 * \var std::multimap<std::string, Ogre::ParticleSystem*> m_particle_system_pool
-	 * \brief interner Pool von Partikelsystem
-	 */
-	std::multimap<std::string, Ogre::ParticleSystem*> m_particle_system_pool;
 	
 	
 	/**
