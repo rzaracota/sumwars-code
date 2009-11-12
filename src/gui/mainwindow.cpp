@@ -1126,8 +1126,11 @@ void MainWindow::updateObjectInfo()
 	
 	int id=0;
 	int objid =0;
-	
-	if (m_mouse->getMouseState().buttons !=0)
+	if (reg->getCutsceneMode () == true || player->getDialogue () != 0)
+	{
+		objid = 0;
+	}
+	else if (m_mouse->getMouseState().buttons !=0)
 	{
 		// fokussiertes Objekt nicht wechseln, wenn Maustaste gedrueckt
 		objid = m_document->getGUIState()->m_cursor_object_id;
@@ -1241,17 +1244,19 @@ void MainWindow::updateObjectInfo()
 		}
 		m_document->getGUIState()->m_cursor_object=objname;
 
-		if (objid==0)
-		{
-			// aktuell kein Objekt unterm Mauszeiger
-			m_document->getGUIState()->m_cursor_object_id =0;
-			m_document->getGUIState()->m_cursor_item_id =0;
+	}
+	
+	
+	if (objid==0)
+	{
+		// aktuell kein Objekt unterm Mauszeiger
+		m_document->getGUIState()->m_cursor_object_id =0;
+		m_document->getGUIState()->m_cursor_item_id =0;
 
-			label->setVisible(false);
-			bar->setVisible(false);
-			itmlabel->setVisible(false);
+		label->setVisible(false);
+		bar->setVisible(false);
+		itmlabel->setVisible(false);
 			
-		}
 	}
 	
 	std::string highlightmat ="white_highlight_alpha_nodepth";
