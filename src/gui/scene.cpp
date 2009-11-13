@@ -78,8 +78,8 @@ Scene::Scene(Document* doc,Ogre::RenderWindow* window)
 	char_scene_mng->setAmbientLight(Ogre::ColourValue(1,1,1));
 			
 	Ogre::Camera* char_camera = char_scene_mng->createCamera("char_camera");
-	char_camera->setPosition(Ogre::Vector3(250, 80,0));
-	char_camera->lookAt(Ogre::Vector3(0,80,0));
+	char_camera->setPosition(Ogre::Vector3(180, 60,0));
+	char_camera->lookAt(Ogre::Vector3(0,60,0));
 	char_camera->setNearClipDistance(5);
 			
 	char_camera->setAspectRatio(1.0);
@@ -618,8 +618,16 @@ void Scene::updateCharacterView()
 	{
 		if (m_temp_player_object !=0)
 		{
-			m_temp_player_object->updateAction("noaction",0.5);
+			// aktion temporaer fuer den Renderaufruf auf noaction setzen
+			Action actsave = *(pl->getAction());
+			Action tmpact("noaction");
+			pl->setAction(tmpact);
+			std::string act = pl->getActionString();
+			
+			m_temp_player_object->updateAction(act,0.5);
 			m_temp_player_object->update(0);
+			
+			pl->setAction(actsave);
 		}
 		
 		Ogre::Resource* res= Ogre::TextureManager::getSingleton().createOrRetrieve ("character_tex",Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME).first.getPointer();
