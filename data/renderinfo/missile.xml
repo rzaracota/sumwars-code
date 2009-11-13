@@ -18,7 +18,7 @@
 <RenderInfo name="magic_arrow_fire">
 	<ParticleSystem objectname="particle" source="Magic_Arrow_Fire" position="0 1.6 0"/>
 </RenderInfo>
-<RenderInfo name="magic_arrow_lightning">
+<RenderInfo name="magic_arrow_air">
 	<ParticleSystem objectname="particle" source="Magic_Arrow_Lightning" position="0 1.6 0"/>
 </RenderInfo>
 <RenderInfo name="magic_arrow_ice">

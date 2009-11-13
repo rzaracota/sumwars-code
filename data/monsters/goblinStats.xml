@@ -363,7 +363,7 @@
 					attack_range="1"
 					>
 		<Ability type="walk" />
-		<Ability type="magic_attack" rating="1"/>
+		<Ability type="magic_attack_air" rating="1" time = "1400"/>
 		<Ability type="goblin_lightning"  rating="2" timer_nr="1" timer_value="10000"/>
 		<Ability type="goblin_magic_shield"  rating="0" all_target_rating="0.5" timer_nr="2" timer_value="160000"/>
 		<Ability type="die" />
@@ -691,7 +691,7 @@
 					attack_range="1"
 					>
 		<Ability type="walk" />
-		<Ability type="magic_attack" rating="1"/>
+		<Ability type="magic_attack_ice" rating="1" time = "1400"/>
 		<Ability type="goblin_icebolt"  rating="2" timer_nr="1" timer_value="8000"/>
 		<Ability type="die" />
 		<Ability type="noaction" />

@@ -72,12 +72,12 @@
 	</Effect>	
 </Projectile>
 
-<Projectile  subtype="magic_arrow_lightning"
+<Projectile  subtype="magic_arrow_air"
 		   radius="0.1"
 		   lifetime="2000"
 		   implementation = "fly"
 		   >
-	<RenderInfo name="magic_arrow_lightning" />
+	<RenderInfo name="magic_arrow_air" />
 	<Effect>
 		<CppImplementation type="dmg_at_target" />
 	</Effect>	
