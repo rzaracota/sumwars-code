@@ -47,6 +47,12 @@ class MainMenu : public Window
 		 * \brief Behandelt Start eines Einzelspielerspieles
 		 */
 		bool onStartMultiPlayerHost(const CEGUI::EventArgs& evt);
+		
+		/**
+		 * \fn bool onQuitGamePlayerHost(const CEGUI::EventArgs& evt)
+		 * \brief Behandelt Start eines Einzelspielerspieles
+		 */
+		bool onQuitGameHost(const CEGUI::EventArgs& evt);
 };
 
 #endif
