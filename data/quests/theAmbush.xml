@@ -1,0 +1,106 @@
+﻿<Quest name="The Ambush" table_name="ambush">
+	<Description>
+		if (ambush.finished) then
+			return _("Ierana hat es ueberlebt und vor lauter Dankbarkeit gleich fuer den naechsten Auftrag gesorgt. Ich wusste ja schon immer, dass die Konziliker nur einen Kammerjaeger wollten.")
+		else
+			return _("Eine Konzilsmagierin namens Ireana von Nordenburg steckt anscheinend westlich von Zwergentrutz in Schwierigkeiten. Nichts, was ein Gezeichneter nicht loesen koennte.")
+		end
+	</Description>
+	
+	<Region name="aisWolfstones">
+		
+		<Event trigger="create_region" once="true">
+			<Condition>
+				return (ambush.finished ~= true);
+			</Condition>
+			<Effect>
+				startTimer("callForHelp",15000);
+			</Effect>
+		</Event>
+		
+		<Event trigger="callForHelp" once="true">
+			<Effect>
+				setCutsceneMode(true);
+				ambush_tmp.party = get(getPlayers()[1],"position");
+				getNextTileCenter(ambush_tmp.party)
+				addLocation("locCrystal",ambush_tmp.party);
+				ambush_tmp.partyLoc = {0,3.5};
+				if(solo() or (not solo() and (getPlayers[3]==nil)))then
+					ambush_tmp.partyLoc = {0,2};
+				end;
+				vecadd(ambush_tmp.partyLoc,getLocation("locCrystal"));
+				addLocation("locParty",ambush_tmp.partyLoc);
+				addCameraPosition(0,"locCrystal",-80,60, 17);
+				assembleParty("aisWolfstones","locParty");
+				ambush_tmp.theCall = true;
+			</Effect>
+		</Event>
+		
+		<Event trigger="party_complete" once="true">
+			<Condition>
+				return ambush_tmp.theCall == true;
+			</Condition>
+			<Effect>
+				ambush_tmp.theCall = false;
+				
+				if(solo() or (not solo() and getPlayers()[3] == nil))then
+					 groupObjectsArc(getPlayers(),"locParty","locCrystal",nil,90);
+				else
+					groupObjectsArc(getPlayers(),"locParty","locCrystal",nil,360);
+				end;
+
+				playersLookAt("locCrystal");
+				ambush_tmp.soren = createObject("sorenCrystal","locCrystal");
+				addUnitCommand(ambush_tmp.soren,"freezingDeath",ambush_tmp.party);
+				createDialogue();
+				addAllPlayersToDialog();
+				addStandardRoles();
+				addSpeaker(ambush_tmp.soren,"Soren Windclaw");
+				
+				if (solo())then
+					speak("Soren Windclaw",_("Warte!"),"sad",1000);
+					speak("PL",_("Ich beeile mich ja schon!"),"unhappy");
+					speak("Soren Windclaw",_("Du musst jetzt sofort durch die westlichen Wälder."),"unhappy");
+				else
+					speak("PL",_("Wir beeilen uns ja schon!"),"unhappy");
+					speak("Soren Windclaw",_("Ihr muesst jetzt sofort durch die westlichen Wälder."),"unhappy");
+				end;
+					speak("Soren Windclaw",_("Die Verlobte des Prinzen ist in Gefahr."));
+					speak("any",_("Wer?"),"surprised");
+					speak("Soren Windclaw",_("Die Erzmaga Ireana von Nordenburg."),"sad");
+					speak("archer",_("Wird das extra bezahlt?"),"surprised");
+				if(getSpeaker("archer")~=getSpeaker("magopt"))then
+					speak("magopt",_("Wie bitte?"),"thoughtful");
+					speak("magopt",_("Ich dachte das wäre eine von euren tollen Elementaristenamazonen, kann die nicht auf sich selbst aufpassen?"),"bored");
+				end;
+				if(solo())then
+					speak("Soren Windclaw",_("Jetzt fang nicht an zu diskutieren, sondern hilf ihr! Sie braucht deine Hilfe!"),"pain");
+					setSpeakerEmotion("Soren Windclaw","unhappy");
+				else
+					speak("Soren Windclaw",_("Jetzt fangt nicht an zu diskutieren, sondern helft ihr! Sie braucht eure Hilfe!"),"pain");
+					setSpeakerEmotion("Soren Windclaw","unhappy");
+					speak("PL",_("Was meint ihr Freunde, wollen wir da jemanden aus der Patsche helfen?"),"amused");
+					if(getSpeaker("magopt")~=getSpeaker("PL"))then
+						speak("magopt", _("Weiß nicht so genau..."),"bored");
+					end;
+					if(getSpeaker("magopt")~=getSpeaker("waropt"))then
+						speak("waropt", _("Naja, schaden kann das ja eigentlich nicht..."),"thoughtful");
+					end;
+					speak("archer",_("Wird das extra bezahlt??"),"thoughtful");
+					speak("Soren Windclaw",_("Argh! Muss ich euch erst-"),"angry");
+					speak("PL",_("Schon gut, spare deinen Atem,!"),"aloof");
+				end;
+					speak("PL",_("Die Feuerwehr ist ja schon unterwegs."),"sneer");
+					executeInDialog("insertTrigger('speechFinished')");
+			</Effect>
+		</Event>
+			
+		<Event trigger="speechFinished" once="true">
+			<Effect>
+				setCutsceneMode(false);
+				ambush.finished=true;
+				deleteObject(ambush_tmp.soren);
+			</Effect>
+		</Event>
+	</Region>
+</Quest>

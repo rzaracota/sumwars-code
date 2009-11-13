@@ -33,11 +33,19 @@
 		<Animation name="attackRanged1" />
 	</Action>
 	
-	<Action name="magic_attack">
+	<Action name="magic_attack_lightning">
 		<Animation name="attackMagic1" />
 	</Action>
 	
-	<Action name="magic_attack">
+	<Action name="magic_attack_lightning">
+		<Animation name="attackMagic2" />
+	</Action>
+	
+	<Action name="magic_attack_ice">
+		<Animation name="attackMagic1" />
+	</Action>
+	
+	<Action name="magic_attack_ice">
 		<Animation name="attackMagic2" />
 	</Action>
 </RenderInfo>

@@ -1037,6 +1037,7 @@
 	<!--<Entity objectname="weapon" bone="itemRightHand" source="merc2h_sw.mesh" />-->
 	<Entity objectname="shield" bone="itemLeftHand" source="goblin_sbw.mesh" />
 	<!--<Entity objectname="barrel" source="chair_konz.mesh" />-->
+	<ParticleSystem objectname="daRing" source = "TestRing" position="0 2 0"/>
 </RenderInfo>
 
 <RenderInfo name="stuntgirl" parent="playerbase">

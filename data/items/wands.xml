@@ -1,3 +1,5 @@
+<!-- Zauberstaebe -->
+
 <!-- Fichtenzauberstab -->
 <Item type="weapon" subtype="spruce_wnd" name="spruce wand" size="medium">
 	<Image image="set:spruce_wnd.png image:full_image" />
@@ -36,7 +38,7 @@
 	<Image image="set:aprnt_wnd.png image:full_image" />
 	<Mesh file="aprnt_wnd.mesh" />
 	<Attribute
-			  level_requirement="3"
+			  level_requirement="2"
 			  character_requirement="mage"
 			  min_enchant="30"
 			  max_enchant="80"
@@ -50,8 +52,8 @@
 	<EquipEffect />
 	<WeaponAttribute
 					weapon_type="staff"
-					damage_min_air="6"
-					damage_max_air="10"
+					damage_min_air="3"
+					damage_max_air="12"
 					damage_attack="54"
 					damage_power="53"
 					attack_range="20"
@@ -59,7 +61,7 @@
 					dattack_speed="0"
 					/>
 	<DropChance
-			   level="3"
+			   level="2"
 			   probability="1.0"
 			   />
 </Item>
@@ -69,7 +71,7 @@
 	<Image image="set:novice_wnd.png image:full_image" />
 	<Mesh file="novice_wnd.mesh" />
 	<Attribute
-			  level_requirement="5"
+			  level_requirement="4"
 			  character_requirement="mage"
 			  min_enchant="40"
 			  max_enchant="130"
@@ -82,7 +84,7 @@
 	<EquipEffect />
 	<WeaponAttribute
 					weapon_type="staff"
-					damage_min_fire="8"
+					damage_min_fire="6"
 					damage_max_fire="11"
 					damage_attack="54"
 					damage_power="53"
@@ -91,7 +93,37 @@
 					dattack_speed="0"
 					/>
 	<DropChance
-			   level="5"
+			   level="4"
+			   probability="1.0"
+			   />
+</Item>
+
+<!-- Eremitenzauberstab -->
+<Item type="weapon" subtype="hermit_wnd" name="hermit wand" size="medium">
+	<Image image="set:novice_wnd.png image:full_image" />
+	<Mesh file="novice_wnd.mesh" />
+	<Attribute
+			  level_requirement="6"
+			  character_requirement="mage"
+			  min_enchant="45"
+			  max_enchant="140"
+			  modchance_willpower_mod="0.1"
+			  modchance_magic_power_mod="0.2"
+			  modchance_damage_ice_mod="0.40"
+			  modchance_damage_air_mod="0.10"
+			  modchance_damage_mult_ice_mod="0.2"
+			  />
+	<EquipEffect />
+	<WeaponAttribute
+					weapon_type="staff"
+					damage_min_ice="9"
+					damage_max_ice="12"
+					attack_range="20"
+					two_handed="no"
+					dattack_speed="0"
+					/>
+	<DropChance
+			   level="6"
 			   probability="1.0"
 			   />
 </Item>
@@ -101,7 +133,7 @@
 	<Image image="set:spruce_wnd.png image:full_image" />
 	<Mesh file="basicWand.mesh" />
 	<Attribute
-			  level_requirement="8"
+			  level_requirement="7"
 			  character_requirement="mage"
 			  min_enchant="50"
 			  max_enchant="170"
@@ -117,8 +149,8 @@
 	<EquipEffect />
 	<WeaponAttribute
 					weapon_type="staff"
-					damage_min_physical="12"
-					damage_max_physical="15"
+					damage_min_physical="16"
+					damage_max_physical="22"
 					damage_attack="54"
 					damage_power="53"
 					attack_range="20"
@@ -126,7 +158,7 @@
 					dattack_speed="0"
 					/>
 	<DropChance
-			   level="8"
+			   level="7"
 			   probability="1.0"
 			   />
 </Item>
@@ -136,7 +168,7 @@
 	<Image image="set:spruce_wnd.png image:full_image" />
 	<Mesh file="basicWand.mesh" />
 	<Attribute
-			  level_requirement="13"
+			  level_requirement="12"
 			  character_requirement="mage"
 			  min_enchant="60"
 			  max_enchant="200"
@@ -149,8 +181,39 @@
 	<EquipEffect />
 	<WeaponAttribute
 					weapon_type="staff"
-					damage_min_ice="12"
-					damage_max_ice="17"
+					damage_min_ice="13"
+					damage_max_ice="16"
+					attack_range="20"
+					two_handed="no"
+					dattack_speed="0"
+					/>
+	<DropChance
+			   level="12"
+			   probability="1.0"
+			   />
+</Item>
+
+<!-- Bardenzauberstab -->
+<Item type="weapon" subtype="bard_wnd" name="bard's wand" size="medium">
+	<Image image="set:spruce_wnd.png image:full_image" />
+	<Mesh file="basicWand.mesh" />
+	<Attribute
+			  level_requirement="14"
+			  character_requirement="mage"
+			  min_enchant="60"
+			  max_enchant="200"
+			  modchance_willpower_mod="0.1"
+			  modchance_magic_power_mod="0.2"
+			  modchance_damage_ice_mod="0.10"
+			  modchance_damage_air_mod="0.30"
+			  modchance_damage_fire_mod="0.10"
+			  modchance_damage_mult_ice_mod="0.2"
+			  />
+	<EquipEffect />
+	<WeaponAttribute
+					weapon_type="staff"
+					damage_min_air="5"
+					damage_max_air="16"
 					damage_attack="54"
 					damage_power="53"
 					attack_range="20"
@@ -158,7 +221,7 @@
 					dattack_speed="0"
 					/>
 	<DropChance
-			   level="13"
+			   level="14"
 			   probability="1.0"
 			   />
 </Item>
@@ -181,10 +244,8 @@
 	<EquipEffect />
 	<WeaponAttribute
 					weapon_type="staff"
-					damage_min_fire="15"
+					damage_min_fire="12"
 					damage_max_fire="21"
-					damage_attack="54"
-					damage_power="53"
 					attack_range="20"
 					two_handed="no"
 					dattack_speed="0"
@@ -200,7 +261,7 @@
 	<Image image="set:spruce_wnd.png image:full_image" />
 	<Mesh file="basicWand.mesh" />
 	<Attribute
-			  level_requirement="25"
+			  level_requirement="22"
 			  character_requirement="mage"
 			  min_enchant="80"
 			  max_enchant="300"
@@ -214,9 +275,37 @@
 	<WeaponAttribute
 					weapon_type="staff"
 					damage_min_ice="18"
-					damage_max_ice="24"
-					damage_attack="54"
-					damage_power="53"
+					damage_max_ice="23"
+					attack_range="20"
+					two_handed="no"
+					dattack_speed="0"
+					/>
+	<DropChance
+			   level="22"
+			   probability="1.0"
+			   />
+</Item>
+
+<!-- Infernozauberstab -->
+<Item type="weapon" subtype="silver_wnd" name="silver wand" size="medium">
+	<Image image="set:spruce_wnd.png image:full_image" />
+	<Mesh file="basicWand.mesh" />
+	<Attribute
+			  level_requirement="25"
+			  character_requirement="mage"
+			  min_enchant="80"
+			  max_enchant="300"
+			  modchance_willpower_mod="0.1"
+			  modchance_magic_power_mod="0.2"
+			  modchance_damage_fire_mod="0.40"
+			  modchance_damage_air_mod="0.10"
+			  modchance_damage_mult_ice_mod="0.2"
+			  />
+	<EquipEffect />
+	<WeaponAttribute
+					weapon_type="staff"
+					damage_min_fire="16"
+					damage_max_fire="25"
 					attack_range="20"
 					two_handed="no"
 					dattack_speed="0"
@@ -232,7 +321,7 @@
 	<Image image="set:spruce_wnd.png image:full_image" />
 	<Mesh file="basicWand.mesh" />
 	<Attribute
-			  level_requirement="30"
+			  level_requirement="29"
 			  character_requirement="mage"
 			  min_enchant="90"
 			  max_enchant="350"
@@ -247,14 +336,12 @@
 					weapon_type="staff"
 					damage_min_air="21"
 					damage_max_air="27"
-					damage_attack="54"
-					damage_power="53"
 					attack_range="20"
 					two_handed="no"
 					dattack_speed="0"
 					/>
 	<DropChance
-			   level="30"
+			   level="29"
 			   probability="1.0"
 			   />
 </Item>
@@ -264,7 +351,7 @@
 	<Image image="set:spruce_wnd.png image:full_image" />
 	<Mesh file="basicWand.mesh" />
 	<Attribute
-			  level_requirement="35"
+			  level_requirement="34"
 			  character_requirement="mage"
 			  min_enchant="100"
 			  max_enchant="400"
@@ -279,14 +366,12 @@
 					weapon_type="staff"
 					damage_min_fire="24"
 					damage_max_fire="32"
-					damage_attack="54"
-					damage_power="53"
 					attack_range="20"
 					two_handed="no"
 					dattack_speed="0"
 					/>
 	<DropChance
-			   level="35"
+			   level="34"
 			   probability="1.0"
 			   />
 </Item>
@@ -296,7 +381,7 @@
 	<Image image="set:spruce_wnd.png image:full_image" />
 	<Mesh file="basicWand.mesh" />
 	<Attribute
-			  level_requirement="40"
+			  level_requirement="39"
 			  character_requirement="mage"
 			  min_enchant="110"
 			  max_enchant="450"
@@ -311,14 +396,12 @@
 					weapon_type="staff"
 					damage_min_ice="26"
 					damage_max_ice="33"
-					damage_attack="54"
-					damage_power="53"
 					attack_range="20"
 					two_handed="no"
 					dattack_speed="0"
 					/>
 	<DropChance
-			   level="40"
+			   level="39"
 			   probability="1.0"
 			   />
 </Item>
@@ -328,7 +411,7 @@
 	<Image image="set:spruce_wnd.png image:full_image" />
 	<Mesh file="basicWand.mesh" />
 	<Attribute
-			  level_requirement="45"
+			  level_requirement="44"
 			  character_requirement="mage"
 			  min_enchant="120"
 			  max_enchant="500"
@@ -344,13 +427,11 @@
 					damage_min_air="27"
 					damage_max_air="35"
 					damage_attack="54"
-					damage_power="53"
-					attack_range="20"
 					two_handed="no"
 					dattack_speed="0"
 					/>
 	<DropChance
-			   level="45"
+			   level="44"
 			   probability="1.0"
 			   />
 </Item>
@@ -360,7 +441,7 @@
 	<Image image="set:spruce_wnd.png image:full_image" />
 	<Mesh file="basicWand.mesh" />
 	<Attribute
-			  level_requirement="50"
+			  level_requirement="49"
 			  character_requirement="mage"
 			  min_enchant="130"
 			  max_enchant="550"
@@ -375,14 +456,12 @@
 					weapon_type="staff"
 					damage_min_fire="30"
 					damage_max_fire="38"
-					damage_attack="54"
-					damage_power="53"
 					attack_range="20"
 					two_handed="no"
 					dattack_speed="0"
 					/>
 	<DropChance
-			   level="50"
+			   level="49"
 			   probability="1.0"
 			   />
 </Item>
@@ -392,7 +471,7 @@
 	<Image image="set:spruce_wnd.png image:full_image" />
 	<Mesh file="basicWand.mesh" />
 	<Attribute
-			  level_requirement="55"
+			  level_requirement="54"
 			  character_requirement="mage"
 			  min_enchant="140"
 			  max_enchant="600"
@@ -407,14 +486,12 @@
 					weapon_type="staff"
 					damage_min_ice="32"
 					damage_max_ice="42"
-					damage_attack="54"
-					damage_power="53"
 					attack_range="20"
 					two_handed="no"
 					dattack_speed="0"
 					/>
 	<DropChance
-			   level="55"
+			   level="54"
 			   probability="1.0"
 			   />
 </Item>
@@ -424,7 +501,7 @@
 	<Image image="set:spruce_wnd.png image:full_image" />
 	<Mesh file="basicWand.mesh" />
 	<Attribute
-			  level_requirement="60"
+			  level_requirement="59"
 			  character_requirement="mage"
 			  min_enchant="150"
 			  max_enchant="650"
@@ -439,14 +516,12 @@
 					weapon_type="staff"
 					damage_min_fire="34"
 					damage_max_fire="45"
-					damage_attack="54"
-					damage_power="53"
 					attack_range="20"
 					two_handed="no"
 					dattack_speed="0"
 					/>
 	<DropChance
-			   level="60"
+			   level="59"
 			   probability="1.0"
 			   />
 </Item>
@@ -456,7 +531,7 @@
 	<Image image="set:spruce_wnd.png image:full_image" />
 	<Mesh file="basicWand.mesh" />
 	<Attribute
-			  level_requirement="65"
+			  level_requirement="64"
 			  character_requirement="mage"
 			  min_enchant="160"
 			  max_enchant="700"
@@ -471,14 +546,12 @@
 					weapon_type="staff"
 					damage_min_ice="36"
 					damage_max_ice="48"
-					damage_attack="54"
-					damage_power="53"
 					attack_range="20"
 					two_handed="no"
 					dattack_speed="0"
 					/>
 	<DropChance
-			   level="65"
+			   level="64"
 			   probability="1.0"
 			   />
 </Item>
@@ -488,7 +561,7 @@
 	<Image image="set:spruce_wnd.png image:full_image" />
 	<Mesh file="basicWand.mesh" />
 	<Attribute
-			  level_requirement="70"
+			  level_requirement="69"
 			  character_requirement="mage"
 			  min_enchant="170"
 			  max_enchant="750"
@@ -503,14 +576,12 @@
 					weapon_type="staff"
 					damage_min_fire="38"
 					damage_max_fire="51"
-					damage_attack="54"
-					damage_power="53"
 					attack_range="20"
 					two_handed="no"
 					dattack_speed="0"
 					/>
 	<DropChance
-			   level="70"
+			   level="69"
 			   probability="1.0"
 			   />
 </Item>
@@ -520,7 +591,7 @@
 	<Image image="set:spruce_wnd.png image:full_image" />
 	<Mesh file="basicWand.mesh" />
 	<Attribute
-			  level_requirement="75"
+			  level_requirement="74"
 			  character_requirement="mage"
 			  min_enchant="180"
 			  max_enchant="800"
@@ -538,14 +609,12 @@
 					damage_max_fire="26"
 					damage_min_air="20"
 					damage_max_air="27"
-					damage_attack="54"
-					damage_power="53"
 					attack_range="20"
 					two_handed="no"
 					dattack_speed="0"
 					/>
 	<DropChance
-			   level="75"
+			   level="74"
 			   probability="1.0"
 			   />
 </Item>
@@ -572,13 +641,11 @@
 	<WeaponAttribute
 					weapon_type="staff"
 					damage_min_fire="15"
-					damage_max_fire="20"
-					damage_min_air="15"
-					damage_max_air="20"
-					damage_min_ice="15"
+					damage_max_fire="22"
+					damage_min_air="6"
+					damage_max_air="24"
+					damage_min_ice="18"
 					damage_max_ice="20"
-					damage_attack="54"
-					damage_power="53"
 					attack_range="20"
 					two_handed="no"
 					dattack_speed="0"

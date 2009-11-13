@@ -52,6 +52,16 @@
 	<Entity objectname="weapon" bone="itemRightHand" source="council_stf.mesh" />
 </RenderInfo>
 
+<RenderInfo name = "sorenCrystal" >
+	<Entity source="comCrystal.mesh"/>
+	
+	<Action name="noaction">
+		<Movement start="0.0" end="0.5" start_vec="0.0 0.0 0.0" end_vec="0.0 0.30 0.0" />
+		<Movement start="0.5" end="1.0" start_vec="0.0 0.3 0.0" end_vec="0.0 0.0 0.0" />
+	</Action>
+
+</RenderInfo>
+
 <RenderInfo name = "slave_worker" parent="playerbase">
 	<Entity source="slave_m.mesh"/>
 	<Entity objectname="weapon" bone="itemRightHand" source="hammer_hmr.mesh" />

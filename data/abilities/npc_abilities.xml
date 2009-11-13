@@ -1,0 +1,24 @@
+﻿<Ability type="freezingDeath"
+		 name="Freezing Death"
+		 description="The mage conjures a devastating ring of ice, that damages enemies in a circle around him."
+		 time="400.000000"
+		 timer_nr="2.000000"
+		 timer_value="15000.000000"
+		 base_ability="magic_attack"
+		 critical_percent="0.800000"
+		 target_type="ranged">
+	<Flag name="mute_affected" />
+	<Effect>
+		<CppImplementation type="proj_at_self" />
+	</Effect>
+	<Projectile type="freezingDeath" />
+	<Damage>
+		<CppImplementation type="magic_attack" />
+		<CppImplementation type="weapon_damage" />
+		<LuaImplementation>
+			local magic = get(self,"magic_power");
+			local fdmg = getDamageValue("ice_dmg");
+			setDamageValue("ice_dmg", {fdmg[1] + magic*1.5, fdmg[2] + magic*2});
+		</LuaImplementation>	
+	</Damage>
+</Ability>

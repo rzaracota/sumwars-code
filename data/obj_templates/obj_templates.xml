@@ -18,6 +18,7 @@ FIXED_OBJECT
                 <Object name="tree4" />
         </Environment>
 		<Environment name="cave">
+				<Object name= "stone1"/>
         </Environment>
 </ObjectTemplate>
 
@@ -268,6 +269,10 @@ FIXED_OBJECT
                 <Object name="stone1" />
         </Environment>
         <Environment name="hills">
+			<Object name="stone1" />
+            <Object name="stone2" />
+        </Environment>
+		<Environment name="cave">
 			<Object name="stone1" />
             <Object name="stone2" />
         </Environment>

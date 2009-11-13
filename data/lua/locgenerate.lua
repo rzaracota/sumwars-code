@@ -5,12 +5,8 @@ function generateArc(locations, center, radius, number, arcangle, angle)
 	arcangle = arcangle or 120;
 	number = number or 1;
 	local n = table.getn(locations);
-	if (number == 1) then
-		locations[n+1] = {center[1] + math.cos(angle*math.pi/180)*radius, center[2] + math.sin(angle*math.pi/180)*radius};
-		return;
-	end;
-	local angl = angle - 0.5*arcangle;
-	local inc = arcangle / (number-1);
+	local inc = arcangle / (number);
+	local angl = angle - 0.5*arcangle + inc*0.5;
 	local i;
 	for i=0,number-1 do
 		locations[n+1] = {center[1] + math.cos(angl*math.pi/180)*radius, center[2] + math.sin(angl*math.pi/180)*radius};
@@ -43,4 +39,10 @@ function generateRect(locations, center, number, dim, angle, dist)
 		end;
 		number = number - dim;
 	end;
+end;
+
+--setzt den uebergebenen Vector auf den Mittelpunkt des Tiles, zu dem er gehoert
+function getNextTileCenter(vec)
+	vec[1] = math.floor(vec[1]/8) * 8 + 4;
+	vec[2] = math.floor(vec[2]/8) * 8 + 4;
 end;

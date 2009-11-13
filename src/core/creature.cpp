@@ -2949,9 +2949,46 @@ void Creature::calcBaseDamage(std::string impl ,Damage& dmg)
 		dmg.m_min_damage[Damage::FIRE] += basm->m_willpower/20;
 		dmg.m_max_damage[Damage::FIRE] += basm->m_magic_power/6;
 		dmg.m_max_damage[Damage::FIRE] += basm->m_willpower/15;
-
 		dmg.m_special_flags = Damage::UNBLOCKABLE;
+		dmg.m_attack=0;
 
+	}
+	
+	if (impl == "magic_attack_fire")
+	{
+		// Basisaktion ist magischer Angriff
+		dmg.m_min_damage[Damage::FIRE] += basm->m_magic_power/6;
+		dmg.m_max_damage[Damage::FIRE] += basm->m_magic_power/3;
+		dmg.m_special_flags = Damage::UNBLOCKABLE;
+		dmg.m_attack=0;
+	}
+	
+	if (impl == "magic_attack_ice")
+	{
+		// Basisaktion ist magischer Angriff
+		dmg.m_min_damage[Damage::ICE] += basm->m_magic_power/5;
+		dmg.m_max_damage[Damage::ICE] += basm->m_magic_power/4;
+		dmg.m_special_flags = Damage::UNBLOCKABLE;
+		dmg.m_attack=0;
+	}
+	
+	if (impl == "magic_attack_air")
+	{
+		// Basisaktion ist magischer Angriff
+		dmg.m_min_damage[Damage::AIR] += basm->m_magic_power/8;
+		dmg.m_max_damage[Damage::AIR] += basm->m_magic_power/2;
+		dmg.m_special_flags = Damage::UNBLOCKABLE;
+		dmg.m_attack=0;
+	}
+	
+	if (impl == "magic_attack_ice")
+	{
+		// Basisaktion ist magischer Angriff
+		dmg.m_min_damage[Damage::FIRE] += basm->m_magic_power/10;
+		dmg.m_min_damage[Damage::FIRE] += basm->m_willpower/20;
+		dmg.m_max_damage[Damage::FIRE] += basm->m_magic_power/6;
+		dmg.m_max_damage[Damage::FIRE] += basm->m_willpower/15;
+		dmg.m_special_flags = Damage::UNBLOCKABLE;
 		dmg.m_attack=0;
 
 	}

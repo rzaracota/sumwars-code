@@ -504,8 +504,8 @@
 		<HeroLight red="1.0" green="1.0" blue="1.0" /> 
 		<DirectionalLight red="0.3" green="0.3" blue="0.3" />
 		
-		<Settings dimx="12" dimy="12" area_percent="0.4" complexity="0.3" granularity="6"  ground="grass1"/>
-		<WorldPosition world_x="0.45" world_y ="0.50"/>
+		<Settings dimx="24" dimy="24" area_percent="0.4" complexity="0.3" granularity="6"  ground="grass1"/>
+		<WorldPosition world_x="0.45" world_y ="0.50" waypoint="true"/>
 		
 		<ExitDirections north="true" south="true" west="true" east="false" />
 		
@@ -524,6 +524,11 @@
 		<ObjectGroups>
 			<ObjectGroup object_group="treePatch_med" priority="1" number="8" probability="0.3"/>
 		</ObjectGroups>
+		
+		<SpawnGroups>
+			<SpawnGroup group_name="goblins_l1" number="27" />
+			<SpawnGroup group_name="goblins_bow_l1" number="18" />
+		</SpawnGroups>
 		
 		<Environments>
 			<Environment height="1.0" name="hills" />
@@ -596,7 +601,7 @@
 			<Exit name="exit_south" destination_region="aisMounPath" destination_location="entry_north" >
 				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
 			</Exit>
-			<Exit name="exit_north" destination_region="grayCurseCave" destination_location="entry_south" >
+			<Exit name="exit_north" destination_region="greyCurseCave" destination_location="entry_south" >
 				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
 			</Exit>
 		</Exits>
@@ -614,7 +619,7 @@
 		<ExitDirections north="false" south="false" west="true" east="true" />
 		
 		<Exits>
-			<Exit name="exit_west" destination_region="grayCurseLake" destination_location="entry_east" >
+			<Exit name="exit_west" destination_region="greyCurseLake" destination_location="entry_east" >
 				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
 			</Exit>
 			<Exit name="exit_east" destination_region="dwarfenwall" destination_location="entry_west" >

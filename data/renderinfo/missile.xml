@@ -15,6 +15,15 @@
 <RenderInfo name="magic_arrow">
 	<ParticleSystem objectname="particle" source="Magic_Arrow" position="0 1.6 0"/>
 </RenderInfo>
+<RenderInfo name="magic_arrow_fire">
+	<ParticleSystem objectname="particle" source="Magic_Arrow_Fire" position="0 1.6 0"/>
+</RenderInfo>
+<RenderInfo name="magic_arrow_lightning">
+	<ParticleSystem objectname="particle" source="Magic_Arrow_Lightning" position="0 1.6 0"/>
+</RenderInfo>
+<RenderInfo name="magic_arrow_ice">
+	<ParticleSystem objectname="particle" source="Magic_Arrow_Ice" position="0 1.6 0"/>
+</RenderInfo>
 
 <RenderInfo name="fire_bolt">
 	<ParticleSystem objectname="particle" source="Firebolt" position="0 1.6 0" />
@@ -172,6 +181,15 @@
 
 <RenderInfo name="behemoth_fire_wave">
 	<ParticleSystem objectname="particle" source="Firewave" position="0 1.2 0" />
+	
+	<Action name="grow">
+		<Scale objectname="particle" start_val="0.5" end_val="12.0" />
+	</Action>
+	
+</RenderInfo>
+
+<RenderInfo name="freezingDeath">
+	<ParticleSystem objectname="particle" source="Icering" position="0 1.2 0" />
 	
 	<Action name="grow">
 		<Scale objectname="particle" start_val="0.5" end_val="12.0" />

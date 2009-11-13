@@ -5,7 +5,7 @@
 	
 	<Description>
 		if (scene5.finished) then
-			return _("Die gute Nachricht: Durch diesen Tunnel kommt niemand mehr. Die schlechte: Den Rückweg hat es auch verschüttet. Hoffentlich gibt es noch einen anderen Ausgang.")
+			return _("Die gute Nachricht: Durch diesen Tunnel kommt niemand mehr. Die schlechte: Den Rückweg hat es auch verschuettet. Hoffentlich gibt es noch einen anderen Ausgang.")
 		else
 			return _("Die Untoten haben einen Weg unter der Grauen Himmelsleiter gefunden, auf dem sie Zwergentrutz umgehen koennen. Da dies das Königreich Aisen direkt bedroht, muss der Zugang schnellstmoeglich verschlossen werden. Der Durchgang in den Verfluchten Hoelen muss gefunden und mit dem Sprengzauber Ierana von Nordenburgs zerstoert werden.")
 		end
@@ -14,7 +14,6 @@
 	<Region name="aisMounPath">
 		<Event trigger="create_region" once="true">
 			<Effect>
-				addArea("aisMounPathEntryEastArea","circle","entry_east",10);
 				addArea("aisMounPathPartyArea","circle","locPartyEntry",3);
 				
 				scene5_tmp.guard1 = createObject("guard", "locGuard1");
@@ -51,6 +50,12 @@
 				setRefName(scene5_tmp.hauptmann_der_wache, "Guardcaptain");
 				setObjectValue(scene5_tmp.hauptmann_der_wache,"max_health",10000);
 				setObjectValue(scene5_tmp.hauptmann_der_wache,"health",9000);
+				
+				scene5_tmp.tolec = createObject("tolec", "locTolec");
+				setRefName(scene5_tmp.tolec, "Tolec");
+					
+				scene5_tmp.derred = createObject("derred", "locDerred");
+				setRefName(scene5_tmp.derred, "Derred");
 			</Effect>
 		</Event>
 
@@ -65,15 +70,13 @@
 		
 		<Event trigger="player_moved" once="true">
 			<Condition>
-				if (scene4.scene4 == true and scene5.scene5 ~= true) then
+				if (ambush.finished == true and scene5.scene5 ~= true) then
 				return (unitIsInArea(trigger.player,"aisMounPathPartyArea"));
 				else
 				return false;
 				end;
 			</Condition>
 			<Effect>
-				
-				
 				scene5_tmp.skeletons={};
 				for nr=1,8 do
 					scene5_tmp.skeletons[nr] = createObject("bow_skel","locSkeleton"..nr);
@@ -102,6 +105,7 @@
 				addCameraPosition(5000,get(scene5_tmp.erzmaga_ireana,"position"),-50,40,20);
 				
 				startTimer('scene5_dialogue1',10000);
+				print("attacking the convoi")
 			</Effect>
 		</Event>
 		
@@ -114,6 +118,7 @@
 		
 		<Event trigger="scene5_dialogue1">
 			<Effect>
+				print("assembling the party")
 				assembleParty("aisMounPath","locPartyEntry");
 				scene5_tmp.beforeBattle = true;
 			</Effect>
@@ -121,10 +126,11 @@
 		
 		<Event trigger="party_complete">
 			<Condition>
-				return(scene5_tmp_beforeBattle == true);
+				print("checking for started scene")
+				return(scene5_tmp.beforeBattle == true);
 			</Condition>
 			<Effect>
-				
+				print("starting scene")
 				addCameraPosition(1000,get(getRole("PL"),"position"),-50,40,20);
 				-- Die Party erreicht den Ort des Geschehens. Die Kutsche der Erzmaga
 				-- ist verunglueckt, mehrere Skelettbogenschuetzen beschießen sie mit
@@ -145,7 +151,7 @@
 				
 				speakPause(2000);
 				speak("male",_("Wow, she's gorgeous","inlove"));
-				if(getSpeaker("male")~=getSpeaker("PL"))then
+				if((getSpeaker("male")~=getSpeaker("PL"))and (getSpeaker("male")~=nil))then
 					speak("PL",_("You can stare at her later, we have to erase some undead."), "unhappy");
 				end;
 				speak("HW",_("Please help us, the maga is badly injured!", "panic"));
@@ -211,7 +217,7 @@
 			<Effect>
 				set(scene5_tmp.hauptmann_der_wache,"state","active");
 
-				scene5_tmp.soren_windclaw_crystal = createObject("comCrystal", "locParty");
+				scene5_tmp.soren_windclaw_crystal = createObject("sorenCrystal", "locDeadSkeleton4");
 				setRefName(scene5_tmp.soren_windclaw_crystal, "Soren Windclaw");
 				setObjectValue(scene5_tmp.soren_windclaw_crystal,"max_health",10000);
 				setObjectValue(scene5_tmp.soren_windclaw_crystal,"health",10000);
@@ -220,9 +226,10 @@
 				
 				createDialogue();
 				addSpeaker(scene5_tmp.soren_windclaw_crystal,"SW");
-				addSpeaker(scene5_tmp.erzmaga_ireana,"IvN");
-				addSpeaker(scene5_tmp.hauptmann_der_wache,"HW");
-				addSpeaker(scene5_tmp.guard2,"EW");
+				addSpeaker(scene5_tmp.erzmaga_ireana,"IvN",true);
+				addSpeaker(scene5_tmp.hauptmann_der_wache,"HW",true);
+				addSpeaker(scene5_tmp.tolec,"TO",true);
+				addSpeaker(scene5_tmp.derred,"DE",true);
 				addAllPlayersToDialog();
 				addStandardRoles();
 				
@@ -237,6 +244,8 @@
 				
 				speak("HW",_("I have never seen someone fight like you before.", "surprised"));
 				speak("mage",_("You don't get out very often, do you.","sneer"));
+				---einzahl/mehrzahl
+				speak("TO",_("Ihr habt euch praechtig entwickelt, seit wir uns das letzte Mal gesehen haben, oder?","grin"));
 				speak("PL",_("How is the archmaga?","thoughtful"));
 				speak("HW",_("Very bad, I'm afraid.","sad"));
 				if(getSpeaker("priest") ~=nil)then
@@ -248,7 +257,7 @@
 					speak("PL",_("Let me see.","normal"));
 				end;
 				
-				-- PL heilt sie
+				-- PRI heilt sie
 				-- Wenn es keinen Priester in der Gruppe gibt, springt der MAG
 				-- mit einem Trank ein, ansonsten der PL
 				

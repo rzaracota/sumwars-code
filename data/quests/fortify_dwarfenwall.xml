@@ -96,8 +96,48 @@
 					addUnitCommand(player,"walk","locWay3");
 					addUnitCommand(player,"walk","locWay4");
 				end;
+				startTimer("startNagging",700);
 			</Effect>
 		</Event>
+		
+		<Event trigger="startNagging" once="true">
+			<Effect>
+				fortify_dwall_tmp.leader = getRolePlayer("leader");
+				local nonPrefs = {};
+				nonPrefs[fortify_dwall_tmp.leader]=true;
+				fortify_dwall_tmp.mage = getRolePlayerNonPref("magopt", getPlayers(), nonPrefs);
+				nonPrefs[fortify_dwall_tmp.mage]=true;
+				fortify_dwall_tmp.warrior = getRolePlayerNonPref("waropt", getPlayers(), nonPrefs);
+				print("started nagging")
+				print(fortify_dwall_tmp.leader)
+				print(fortify_dwall_tmp.warrior)
+				print(fortify_dwall_tmp.mage)
+				unitSpeak(fortify_dwall_tmp.leader, _("Als wenn das Theater hier irgend jemanden beeindrucken würde..."),"bored");
+				if(fortify_dwall_tmp.mage ~= fortify_dwall_tmp.warrior)then
+					startTimer("continueNagging",1500);
+				end;
+			</Effect>
+		</Event>
+		<Event trigger="continueNagging" once="true">
+			<Effect>
+				unitSpeak(fortify_dwall_tmp.warrior, _("Na klar! Jetzt hast du wieder eine große Klappe."),"unhappy");
+				startTimer("mageTeasing",1500);
+			</Effect>
+		</Event>
+		<Event trigger="mageTeasing" once="true">
+			<Effect>
+				unitSpeak(fortify_dwall_tmp.mage, _("Warum gebe ich mich doch gleich mit deiner Gesellschaft ab?"),"grin");
+				if((fortify_dwall_tmp.mage ~= fortify_dwall_tmp.leader) and (fortify_dwall_tmp.warrior~= fortify_dwall_tmp.leader))then
+					startTimer("leaderIntervene",1500);
+				end;
+			</Effect>
+		</Event>
+		<Event trigger="leaderIntervene" once="true">
+			<Effect>
+				unitSpeak(fortify_dwall_tmp.leader, _("Scht! Streiten könnt ihr euch später."),"unhappy");
+			</Effect>
+		</Event>
+
 		
 		<Event trigger="command_complete">
 			<Condition>
@@ -127,20 +167,17 @@
 				
 				addSpeaker(fortify_dwall_tmp.tolec,"Tolec");
 				
-				local mageopt = getSpeaker("magopt");
-				local waropt= getSpeaker("waropt");
-				local leader= getSpeaker("leader");
-				
-				speak("magopt",_("Als wenn das Theater hier irgend jemanden beeindrucken würde..."),"bored");
-				if (mageopt ~= waropt) then
-					speak("waropt",_("Na klar! Jetzt hast du wieder eine große Klappe."),"unhappy");
-					speak("magopt",_("Warum gebe ich mich doch gleich mit deiner Gesellschaft ab?"),"grin");
-					if (leader ~= mageopt and leader ~= waropt) then
-						speak("leader",_("Scht! Streiten könnt ihr euch später."));
-					end;
-				end;
 				speak("Tolec",_("Endlich sind wir da!"),"excited");
 				executeInDialog("insertTrigger('guard_scene1_walk3')");
+				if(solo())then
+					speak("any",_("(Der Raum da fuehlt sich gar nicht gut an.)"),"fear")
+				else
+					speak("any",_("Spürt ihr das?!! Das fühlt sich an wie-"),"panic");
+					if (getSpeaker("leader") ~= getSpeaker("any")) then
+						speak("leader",_("Scht!"),"unhappy");
+					end;
+				end;
+				
 			</Effect>
 		</Event>
 		
@@ -186,12 +223,7 @@
 				speak("Soren Windclaw",_("Sehr gut."));
 				executeInDialog("insertTrigger('scene1_tback')");
 				speakPause(3000);
-				speak("any",_("Spürt ihr das?!! Das fühlt sich an wie-"),"panic");
-				if (getSpeaker("leader") ~= getSpeaker("any")) then
-					speak("leader",_("Scht!"),"unhappy");
-				end;
-				local solo = (getPlayers()[2] == nil);
-				if (solo) then
+				if (solo()) then
 					speak("Tolec",_("Er erwartet dich jetzt"));
 				else
 					speak("Tolec",_("Er erwartet euch jetzt"));
@@ -280,7 +312,6 @@
 				
 				addCameraPosition(3000,"locCamera", -90,60, 30);
 				
-				local solo = (getPlayers()[2] == nil);
 				local magopt = getSpeaker("magopt");
 				
 				speak("Soren",_("You're presence is no longer needed."),"aloof");
@@ -298,11 +329,17 @@
 				speak("priest",_("Those ritual objects have seen better times, too."));
 				speak("Soren",_("Yes, they warned me that you're difficult."));
 				speak("waropt",_("Difficult?"),"surprised");
-				speak("waropt",_("You're putting in so much effort,"),"sneer");
-				speak("waropt",_("and everything you get is 'difficult'."));
-				speak("magopt",_("Pft. I feel like flaring off the whole place."),"unhappy");
+				if(solo())then
+					speak("waropt",_("I'm putting in so much effort, and everything I get is 'difficult'."),"offended");
+				elseif(getSpeaker("waropt")~=getSpeaker("magopt"))then
+					speak("waropt",_("You're putting in so much effort,"),"sneer");
+					speak("waropt",_("and everything you get is 'difficult'."));
+					speak("magopt",_("Pft. I feel like flaring off the whole place."),"unhappy");
+				else
+					speak("magopt",_("I feel like flaring off the whole place."),"unhappy");
+				end;
 				local magopt = getSpeaker("magopt");
-				if (magopt ~= 0 and magopt ~= getSpeaker("any")) then
+				if (magopt ~= getSpeaker("any")) then
 					speak("any",_("With all those wimps here it's not really worth the effort, isn't it?"),"amused");
 					speak("leader",_("Wenn noch mehr von Riesendinger frei kommen könnte das ein paar Schwierigkeiten machen..."));
 					speak("arcopt",_("Und die Chance ist recht hoch... die Monster hier haben schließlich alle ihren eigenen Kopf."),"grin");
@@ -324,24 +361,25 @@
 				speak("Soren",_("Ts Ts. Wie unhöflich den Namen des Verfluchten in Akerans Hallen zu verwenden."),"unhappy");
 				speak("leader",_("Das ist eine verdammte Räuberhöhle."),"threaten");
 				speak("Soren",_("Euch entgeht der eigentliche Punkt."),"bored");
-				speak("Soren",_("Until then you should remember that it is entirely in you hands"),"threaten");
-				speak("Soren",_("how long you will be under this curse."));
-				speak("Soren",_("Fulfil my orders to the councils satisfaction"));
-				speak("Soren",_("and I have the power to release you of the claws of the deathgod."));
+				speak("Soren",_("You should realise that it is entirely in you hands how long you will be under this curse."),"threaten");
+				speak("Soren",_("Fulfil my orders to the councils satisfaction and I have the power to release you of the claws of the deathgod."));
 				speak("Soren",_("If not, however..."));
-				speak("leader",_("We know that one allready. Cut the speach."),"bored");
+				if(solo())then
+					speak("leader",_("I heard that one a thousand times allready. Cut the speach."),"bored");
+				else
+					speak("leader",_("We know that one allready. Cut the speach."),"bored");
+				end;
 				if (getSpeaker("leader") ~= getSpeaker("any")) then
-					speak("any",_("What?!"),"surprised");
-					speak("any",_("The curse can be taken from us? Why do I hear this only know?"));
+					insertInDialog("getSpeaker('any'), _('What?! The curse can be taken from us? Why do I hear this only know?'),'surprised');")
 				end;
 				speak("Soren",_("As you wish."),"grin");
 				speak("Soren",_("The task is pretty dangerous and you are likely to die more than once."));
-				speak("PL",_("Harad's curse has to have some advantage."));
+				speak("PL",_("Harad's curse has to have some advantage."),"normal");
 				speak("waropt",_("If only the pain wasn't so bad everytime..."),"sad");
 				if (getSpeaker("waropt") ~= getSpeaker("magopt")) then
 					speak("magopt",_("Even here you have to whine."));
 				end;
-				if (not solo) then
+				if (not solo()) then
 					speak("Soren",_("You are indeed a bunch of trying people."));
 				else
 					speak("Soren",_("Ihr seid in der Tat eine schwierige Gestalt"));
@@ -358,17 +396,16 @@
 				speak("priopt",_("Besides the necromancers don't follow Harad."),"thoughtful");
 				if (getSpeaker("PL") ~= getSpeaker("any")) then
 					speak("any",_("This robegnome ranks pretty high among all the cheesy rats"),"unhappy");
-					speak("any",_("for whom we pulled chestnuts out of the fire."),"unhappy");
+					speak("any",_("for whom I pulled chestnuts out of the fire."),"unhappy");
 					if (getSpeaker("waropt") ~= getSpeaker("any")) then
 						speak("waropt",_("Ich verstehe auch nicht, warum wir hier nach seiner Pfeife tanzen. Er ist doch schließlich-"),"threaten");
 						speak("any",_("Nur ein Mensch!!"),"warcry");
 					end;
 				end;
 				
-				speak("Soren",_("You obviously misjudge your position."),"normal");
+				speak("Soren",_("You obviously misjudge your position."),"aloof");
 				speak("Soren",_("What do you think will happen, if your revealed in town?"));
-				speak("Soren",_("We know everything about your kind,"));
-				speak("Soren",_("and believe me, no one will be stupid enough to kill you."));
+				speak("Soren",_("We know everything about your kind, and believe me, no one will be stupid enough to kill you."),"threaten");
 				
 				setTopicBase("Soren Windclaw");
 				addQuestion(_("Continue to be snotty?"));
@@ -384,10 +421,8 @@
 	<NPC refname="Soren Windclaw">
 		<Topic name="be_unkind">
 			<Effect>
-				local solo = (getPlayers()[2] == nil);
-				
 				speak("PL",_("You consider yourself very mighty and clever, don't you?"),"angry");
-				if (not solo) then
+				if (not solo()) then
 					speak("magopt",_("Surely he has written down that knowledge of his somewhere."),"thoughtful");
 					speak("magopt",_("We can search for it after he's dead."));
 					if (getSpeaker("magopt") ~= getSpeaker("waropt")) then

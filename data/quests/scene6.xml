@@ -70,10 +70,10 @@
 	</NPC>
 	
 	
-	<Region name="grayCurseCaveFis">
+	<Region name="greyCurseCaveFis">
 		<Event trigger="create_region" once="true">
 			<Effect>
-				addArea("grayCurseCaveFisEntrySouthArea","circle","entry_south",10);
+				addArea("greyCurseCaveFisEntrySouthArea","circle","entry_south",10);
 				-- addArea("aisMounPathPartyArea","circle","locParty",3);
 			</Effect>
 		</Event>
@@ -81,7 +81,7 @@
 		<Event trigger="player_moved" once="true">
 			<Condition>
 				if (scene5.scene5 == true and scene6.scene6 ~= true) then
-					return (unitIsInArea(trigger.player,"grayCurseCaveFisEntrySouthArea"));
+					return (unitIsInArea(trigger.player,"greyCurseCaveFisEntrySouthArea"));
 				else
 					return false;
 				end;
@@ -109,7 +109,7 @@
 				addSpeaker(scene6_tmp.nar_asoroth,"L");
 				addSpeaker(scene6_tmp.soren_windclaw_crystal,"SW");
 				addSpeaker(trigger.player,"Player");
-				addStandardSpeakers("grayCurseCaveFis","locParty");
+				addStandardSpeakers("greyCurseCaveFis","locParty");
 				setCutsceneMode(true);
 				setTopicBase("Soren Windclaw");
 				changeTopic("scene6_dialogue1");

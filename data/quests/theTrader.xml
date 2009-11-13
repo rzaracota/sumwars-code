@@ -42,6 +42,8 @@
 		
 		<Event trigger="start_theTraderIntro" once = "true">
 			<Effect>
+				setCutsceneMode(true);
+				addCameraPosition(0,"entry_south",-90,50, 20);
 				assembleParty("medMercCamp","entry_south");
 				theTrader_tmp.startTalk = true;
 			</Effect>
@@ -100,8 +102,10 @@
 				speak("theTrader", _("Eine Leere Schriftrolle ist zu meinem großen Bedauern nur zu einem in der Lage:"),"thoughtful");
 				speak("theTrader", _("Einen Weg durch Harads Schwarzen Abgrund schaffen."),"excited");
 				speak("theTrader", _("Und dann auch noch nur zu einer Stelle großer magischer Konzentration wie dem dicken Wegeschrein da hinten."),"sad");
+				executeInDialog("addCameraPosition(1000,'WaypointLoc', -90,50, 20)");
 				--Kamera bewegen
 				speak("theTrader", _("Die Macht erschöpft sich außerdem recht schnell und ist auf eine Person beschränkt."),"thougtful");
+				executeInDialog("addCameraPosition(1000,'entry_south', -90,50, 20)");
 				speak("theTrader", _("Aber Goblins und ähnliches Gekreuch haben in letzter Zeit allerhand gestohlen."),"normal");
 				speak("theTrader", _("Es mag Euch gelegen kommen, einen kurzen Abstecher zu einem gut sortierten Händler zu unternehmen."),"grin");
 				speak("PL", _("Nämlich Euch?"),"sneer");
@@ -119,7 +123,7 @@
 				theTrader.intro="true";
 				executeInDialog("addUnitCommand(theTrader_tmp.theTrader,'walk','locTheTrader')");			
 				speak("arcopt", _("Komischer Kauz."));
-				
+				executeInDialog("setCutsceneMode(false)");
 				local players = getPlayers();
 				local i,player;
 				for i,player in ipairs(players) do

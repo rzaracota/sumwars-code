@@ -184,7 +184,6 @@
 				local leader = getRolePlayer("leader");
 				local blockedspeaker={};
 				blockedspeaker[leader] = true;
-				local solo = (getPlayers()[2] == nil);
 				
 				lookAtObject(tutorial_tmp.tolec,leader);
 				lookAtObject(tutorial_tmp.derred,leader);
@@ -196,7 +195,7 @@
 				speak("PL",_("Bei Harads Knochen!"),"injured2");
 				speak("PL",_("Das war mindestens so schlimm wie die ersten Jahre in der Hölle! Wo bin ich hier?"),"injured");
 				
-				if (not solo) then
+				if (not solo()) then
 					speak("PL",_("Und wer sind die anderen müden Gestalten?"),"surprised");
 				end;
 				
@@ -250,7 +249,7 @@
 				speak("magopt",_("Windklaue."),"grin");
 				speak("magopt",_("Warum habt ihr das nicht gleich gesagt?"),"bored");
 				speak("Derred",_("Nun, wenn Ihr uns bitte folgen würdet?"),"happy");
-				if (not solo) then
+				if (not solo()) then
 					speak("waropt",_("Wollt ihr uns verarschen? Wer bitte schön ist denn dieser Windwichtel?"),"warcry");
 				else
 					speak("PL",_("Wollt ihr mich verarschen? Wer bitte schön ist denn dieser Windwichtel?"),"warcry");
@@ -276,7 +275,8 @@
 				executeInDialog("addUnitCommand("..leader..",'walk',tutorial_tmp.derred,3)");
 				speak("PL",_("Raus damit. Wo sind wir und wer hat den Nerv, Gezeichnete gegen sich auf zu bringen?!"),"threaten");
 				speak("Tolec",_("Nun, der Lord Magister hat versichert, dass er Euch das alles genau erklären wird."),"aloof");
-				speak("Derred",_("Außerdem war Eure Ankunft... etwas beschwerlich. Ihr dürftet im Moment nicht einmal in der Lage sein, uns gefährlich zu werden."),"amused");
+				speak("Derred",_("Außerdem war Eure Ankunft... etwas beschwerlich."),"amused");
+				speak("Derred",_("Ihr dürftet im Moment nicht einmal in der Lage sein, uns gefährlich zu werden."),"amused");
 				speak("waropt",_("Was habt ihr getan ihr Bastarde?!"),"angry");
 				speak("Tolec",_("Keine Angst, wir haben strikten Befehl, euch nicht zu töten."),"sneer");
 				
@@ -290,7 +290,7 @@
 				speak("Derred",_("Wir können kein Risiko eingehen und innerhalb der Konzils seid Ihr sicher."),"normal");
 				speak("arcopt",_("Konzil? Das Konzil der Elementarbeschwörer?! Ist das hier Aisen?"),"surprised");
 				speak("Tolec",_("Ja, aber das tut jetzt nichts zur Sache!"),"angry");
-				if ( not solo) then
+				if ( not solo()) then
 					speak("PL",_("Was wenn wir gar keine Lust haben unsere Waffen ab zu geben?"),"surprised");
 				else
 					speak("PL",_("Was wenn ich gar keine Lust habe meine Waffen ab zu geben?"),"surprised");
@@ -326,9 +326,8 @@
 			<Effect>
 				local warrior = getRolePlayer("warrior");
 				local waropt = getRolePlayerPref("all",nil,warrior);
-				local solo = (getPlayers()[2] == nil);
 				addSpeaker(waropt,"waropt");
-				if (not solo) then
+				if (not solo()) then
 					speak("waropt",_("Wie es aussieht haben wir keine Wahl..."),"unhappy");
 				else
 					speak("waropt",_("Wie es aussieht habe ich keine Wahl..."),"unhappy");
@@ -343,7 +342,8 @@
 		<Topic name="give_weapons_no">
 			<Effect>
 				speak("PL",_("Vergesst es!"),"angry");
-				speak("Tolec",_("Wir ihr es wünscht, aber dieser Raum ist sicher. Ihr werdet ihn nicht verlassen, wenn ihr nicht eure Waffen abgebt."),"aloof");
+				speak("Tolec",_("Wir ihr es wünscht, aber dieser Raum ist sicher."),"aloof");
+				speak("Tolec",_("Ihr werdet ihn nicht verlassen, wenn ihr nicht eure Waffen abgebt."),"aloof");
 				speak("Derred",_("Sagt einfach bescheid, indem ihr einen von uns anklickt, wenn ihr es euch anders überlegt habt."),"bored");
 				setSpeakerEmotion("Tolec","excited");
 				setSpeakerEmotion("Derred","excited");
@@ -606,7 +606,6 @@
 				addSpeaker(tutorial_tmp.derred,"Derred",true);
 				groupObjectsArc({tutorial_tmp.tolec,tutorial_tmp.derred} ,"locWay2","locBehemothView",nil,30);
 				
-				local solo = (getPlayers()[2] == nil);
 				addStandardRoles();
 				
 				local leader = getSpeaker("PL");
@@ -628,9 +627,10 @@
 				
 				executeInDialog("addUnitCommand("..waropt..",'walk',tutorial_tmp.tolec)");
 				speak("waropt",_("Maßnahmen?"),"threaten");
-				speak("Derred",_("Nun, wir verstehen nicht viel davon, aber anscheinend sterbt Ihr nicht, sondern könnt einfach, wo Ihr wollt wiederauferstehen, nachdem euer Körper zerstört wurde."),"thoughtful");
+				speak("Derred",_("Nun, wir verstehen nicht viel davon, aber anscheinend sterbt Ihr nicht wie wir."),"thoughtful");
+				speak("Derred",_("Statt dessen könnt einfach, wo Ihr wollt wiederauferstehen, nachdem euer Körper zerstört wurde."),"thoughtful");
 				speak("Tolec",_("Akeran muss euch wirklich hassen..."),"grin");
-				if (not solo) then
+				if (not solo()) then
 					speak("priopt",_("Und? Niemand von uns hat um diese Fähigkeit gebeten."),"threaten");
 				else
 					speak("priopt",_("Und? Ich habe nicht um diese Fähigkeit gebeten."),"threaten");
@@ -643,7 +643,7 @@
 				end;
 				
 				speak("Tolec",_("Genau, nur an dieser Stelle."),"surprised");
-				if (not solo) then
+				if (not solo()) then
 					speak("PL",_("Es wird Zeit, dass wir mit diesem Windklaue reden. Scheint ja ein gewitztes Kerlchen zu sein."),"unhappy");
 				else
 					speak("PL",_("Es wird Zeit, dass ich mit diesem Windklaue rede. Scheint ja ein gewitztes Kerlchen zu sein."),"unhappy");
@@ -655,7 +655,7 @@
 				speak("Derred",_("Das sind doch nur diese Schnecklinge."),"sneer");
 				speak("Tolec",_("Na, ich weiß ja nicht... ich hab keine Lust, nur wegen so einem schleimigen Feueratem drei Wochen das Bett zu hüten."),"disgust");
 				
-				if (not solo) then
+				if (not solo()) then
 					speak("priopt", _("Bei Harad! Das kann man sich ja unmöglich antun. Gebt uns unsere Waffen und wir kümmern uns darum."),"unhappy");
 				else
 					speak("priopt", _("Bei Harad! Das kann man sich ja unmöglich antun. Gib mir meine  Waffe und ich kümmere mich darum."),"thoughtful");
@@ -668,13 +668,15 @@
 				speak("waropt",_("Was soll das denn sein?"),"surprised")
 				speak("waropt",_("Wo ist meine Waffe?"),"warcry");
 				
-				speak("Tolec",_("Ähm... Lord Magister Windklaue befürchtete, dass es zu einer Situation kommen könnte, in der ihr auf, äh, Waffengewalt zurückgreifen müsst. Deswegen hat er uns diese hier mitgegeben."),"aloof");
+				speak("Tolec",_("Ähm... Lord Magister Windklaue befürchtete, dass es zu einer Situation kommen könnte, in der ihr auf, äh, Waffengewalt zurückgreifen müsst."),"aloof");
+				speak("Tolec",_("Deswegen hat er uns diese hier mitgegeben."),"aloof");
 				speak("Derred",_("Ihr versteht sicherlich, dass ihr hier nicht mit ungeprüften Waffen umherlaufen könnt."),"aloof");
 				
 				speak("waropt",_("Langsam fangt ihr an zu nerven."),"threaten");
 				speak("arcopt",_("Woran hat der eigentlich nicht gedacht? Der ist doch eindeutig paranoid."),"unhappy");
 				
-				speak("Derred",_("Ihr... könnt euch noch erinnern, wie man eine Waffe benutzt richtig? Uns wurde gesagt, dass die ersten Minuten sind, als träte man zum ersten Mal in die Welt."),"aloof");
+				speak("Derred",_("Ihr... könnt euch noch erinnern, wie man eine Waffe benutzt richtig?"),"aloof");
+				speak("Derred",_("Uns wurde gesagt, dass die ersten Minuten sind, als träte man zum ersten Mal in die Welt."),"aloof");
 				
 				tutorial.phase = "fightslugs";
 				tutorial.phasenr = 2;
@@ -755,7 +757,6 @@
 				addSpeaker(tutorial_tmp.derred,"Derred",true);
 				addStandardRoles();
 				addAllPlayersToDialog();
-				local solo = (getPlayers()[2] == nil);
 				
 				local players = getPlayers();
 				local i,player;
@@ -770,7 +771,7 @@
 				end;
 				
 				if (allequip == false) then
-					if (solo) then
+					if (solo()) then
 						speak("Tolec",_("Ihr solltet zunächst eure Waffen anlegen."));
 					else
 						speak("Tolec",_("Ihr solltet alle zunächst eure Waffen anlegen."));
@@ -1140,7 +1141,6 @@
 				addSpeaker(tutorial_tmp.tolec,"Tolec",true);
 				addSpeaker(tutorial_tmp.derred,"Derred",true);
 				
-				local solo = (getPlayers()[2] == nil);
 				addStandardRoles();
 				
 				speak("leader",_("Das sollte die letzte gewesen sein."),"amused");
@@ -1182,9 +1182,8 @@
 		
 		<Topic name="explain_skills_no">
 				<Effect>
-					local solo = (getPlayers()[2] == nil);
 					if (tutorial_tmp.skill_continue) then
-						if (solo) then
+						if (solo()) then
 							speak("arcopt",_("Keine Sorge, ich bin schon fast wieder auf der vollen Höhe."),"sneer");
 						else
 							speak("arcopt",_("Keine Sorge, wir sind schon fast wieder auf der vollen Höhe."),"sneer");
@@ -1193,7 +1192,7 @@
 					
 					speak("Tolec",_("Sehr gut. Die Geheimtür ist hier hinten."),"happy");
 					speak("Derred",_("Warte mal. Am Ende hat der alte Knacker noch eine Falle angebaut."),"thoughtful");
-					if (solo) then
+					if (solo()) then
 						speak("Tolec",_("Stimmt auch wieder. Am besten, du machst das. Da kann wenigstens nichts schlimmes passieren."),"surprised") ;
 					else
 						speak("Tolec",_("Einfach auf die Tür klicken und sehen, was passiert."));
@@ -1245,7 +1244,6 @@
 				addSpeaker(tutorial_tmp.tolec,"Tolec",true);
 				addSpeaker(tutorial_tmp.derred,"Derred",true);
 				
-				local solo = (getPlayers()[2] == nil);
 				addStandardRoles();
 				
 				speak("Tolec",_("Gut,  Feuerwirbel ist nicht da."), "happy");
@@ -1254,7 +1252,7 @@
 				speak("Derred",_("Zuzutrauen wäre es ihm jedenfalls."),"amused");
 				speak("Tolec",_("Spaß bei Seite! Wir müssen weiter. "));
 				
-				if (solo) then
+				if (solo()) then
 					speak("leader",_("Bei den ganzen Mistviechern, die hier frei in der Gegend rumspringen glaube ich fast, die wollen mich nur als Kammerjäger..."),"unhappy");
 				else
 					speak("leader",_("Bei den ganzen Mistviechern, die hier frei in der Gegend rumspringen glaube ich fast, die wollen uns nur als Kammerjäger..."),"unhappy");
@@ -1395,7 +1393,6 @@
 				
 				createDialogue();
 				addAllPlayersToDialog();
-				local solo = (getPlayers()[2] == nil);
 				addStandardRoles();
 				
 				addSpeaker(tutorial_tmp.tolec,"Tolec",true);
@@ -1405,7 +1402,7 @@
 				speak("Tolec",_("Darüber hat der Lord Magister nichts gesagt..."),"thoughtful");
 				speak("magopt",_("Etwas, das nicht im Buch des allwissenden Luftpfote geschrieben steht?"),"sneer");
 				speak("Tolec",_("Windklaue, du Häretiker!"),"threaten");
-				if (solo) then
+				if (solo()) then
 					speak("Derred",_("Einen Verfluchten freut das sicher noch, wenn er alle Nase lang was zum Töten hat."),"disgust");
 					speak("any",_("ich bin ein Gezeichneter! Das ist viel schlimmer als ein Fluch."),"threaten");
 					speak("Tolec",_("Der mächtige Akeran hat dich wahrlich schlimm gestraft."),"thoughtful");
@@ -1471,14 +1468,12 @@
 				addPlayersToDialog(players);
 				addStandardRoles( listToSet(players));
 				
-				local solo = (table.getn(players) == 1)
-				
 				local leader = getSpeaker("leader");
 				local archer = getSpeaker("archer");
 				local mage = getSpeaker("mage");
 				
 				speak("leader",_("Wow. Die halten hier aber echt was von Ordnung und gründlicher Forschung. Wie viele Schnecken muss man aufschneiden um zu glauben, dass sie schleimig sind?"),"sneer");
-				if (solo ~= true) then
+				if (solo() ~= true) then
 					speak("archer",_("Schaut euch doch mal um, das Zeug muss ein Vermögen wert sein!"),"excited");
 				else
 					speak("archer",_("Sie dir das an, das Zeug muss ein Vermögen wert sein!"),"excited");

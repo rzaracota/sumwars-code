@@ -125,7 +125,7 @@
 					speak('Fenor Marken',_("Schon gar keinen wildfremden Leuten."),"thoughtful");
 					speak('Fenor Marken',_("Wer wuerde nicht einfach damit verschwinden."),"grin");
 					speak('Fenor Marken',_("Aber ihr Gezeichneten habt andere Mittel und Wege, um zu reisen."),"normal");
-					speak('Fenor Marken',_("Und einen Phasenstein koennt ihr nicht benutzen, weil er Avaera geweiht ist, stimmt's."));
+					speak('Fenor Marken',_("Und einen Phasenstein koennt ihr nicht benutzen, weil er Avaera geweiht ist, stimmt's?"));
 					speak('Fenor Marken',_("Deswegen habe ich mich an Euch gewandt, als Ihr hier vorbei gekommen seid."));
 					speak('player',_("Ihr wisst recht viel."),"normal");
 					addQuestion(_("Nach Willard suchen?"));

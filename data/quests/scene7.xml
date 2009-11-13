@@ -56,10 +56,10 @@
 	</NPC>
 	
 	
-	<Region name="grayCurseLake">
+	<Region name="greyCurseLake">
 		<Event trigger="create_region" once="true">
 			<Effect>
-				addArea("grayCurseLakeEntryWestArea","circle","entry_west",5);
+				addArea("greyCurseLakeEntryWestArea","circle","entry_west",5);
 			</Effect>
 		</Event>
 		
@@ -67,7 +67,7 @@
 			<Condition>
 				-- if (scene6.scene6 == true and scene7.scene7 ~= true) then
 				if (scene7.scene7 ~= true) then
-					return (unitIsInArea(trigger.player,"grayCurseLakeEntryWestArea"));
+					return (unitIsInArea(trigger.player,"greyCurseLakeEntryWestArea"));
 				else
 					return false;
 				end;
@@ -75,7 +75,7 @@
 			<Effect>
 				createDialogue();
 				addSpeaker(trigger.player,"Player");
-				addStandardSpeakers("grayCurseLake","entry_west");
+				addStandardSpeakers("greyCurseLake","entry_west");
 				setTopicBase("Soren Windclaw");
 				
 				-- if(getPlayers()[2] ~= nil) then

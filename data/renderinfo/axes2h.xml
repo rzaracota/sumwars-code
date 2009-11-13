@@ -14,3 +14,7 @@
 <RenderInfo name = "greatAxe" parent= "twoHandAxeBase">
 	<Entity source = "great_axe.mesh"/>
 </RenderInfo>
+
+<RenderInfo name = "lumberAxe" parent= "twoHandAxeBase">
+	<Entity source = "lumber_axe.mesh"/>
+</RenderInfo>

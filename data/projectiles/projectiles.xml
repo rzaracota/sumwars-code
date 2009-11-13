@@ -61,6 +61,39 @@
 	</Effect>	
 </Projectile>
 
+<Projectile  subtype="magic_arrow_fire"
+		   radius="0.1"
+		   lifetime="2000"
+		   implementation = "fly"
+		   >
+	<RenderInfo name="magic_arrow_fire" />
+	<Effect>
+		<CppImplementation type="dmg_at_target" />
+	</Effect>	
+</Projectile>
+
+<Projectile  subtype="magic_arrow_lightning"
+		   radius="0.1"
+		   lifetime="2000"
+		   implementation = "fly"
+		   >
+	<RenderInfo name="magic_arrow_lightning" />
+	<Effect>
+		<CppImplementation type="dmg_at_target" />
+	</Effect>	
+</Projectile>
+
+<Projectile  subtype="magic_arrow_ice"
+		   radius="0.1"
+		   lifetime="2000"
+		   implementation = "fly"
+		   >
+	<RenderInfo name="magic_arrow_ice" />
+	<Effect>
+		<CppImplementation type="dmg_at_target" />
+	</Effect>	
+</Projectile>
+
 <Projectile subtype="fire_bolt"
 		   radius="0.2"
 		   lifetime="2000"

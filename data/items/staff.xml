@@ -21,8 +21,7 @@
 					weapon_type="staff"
 					damage_min_air="4"
 					damage_max_air="6"
-					damage_attack="54"
-					damage_power="53"
+					multiplier_air="1.06"
 					attack_range="20"
 					two_handed="yes"
 					dattack_speed="-400"
@@ -54,8 +53,7 @@
 					weapon_type="staff"
 					damage_min_air="7"
 					damage_max_air="11"
-					damage_attack="54"
-					damage_power="53"
+					multiplier_air="1.09"
 					attack_range="20"
 					two_handed="yes"
 					dattack_speed="-400"
@@ -86,8 +84,38 @@
 					weapon_type="staff"
 					damage_min_fire="9"
 					damage_max_fire="13"
-					damage_attack="54"
-					damage_power="53"
+					multiplier_fire="1.11"
+					attack_range="20"
+					two_handed="yes"
+					dattack_speed="-400"
+					/>
+	<DropChance
+			   level="5"
+			   probability="1.0"
+			   />
+</Item>
+
+<!-- Eremitenstab -->
+<Item type="weapon" subtype="hermit_stf" name="hermit staff" size="big">
+	<Image image="set:hermit_stf.png image:full_image" />
+	<Mesh file="hermit_stf.mesh" />
+	<Attribute
+			  level_requirement="7"
+			  character_requirement="mage"
+			  min_enchant="90"
+			  max_enchant="300"
+			  modchance_willpower_mod="0.1"
+			  modchance_magic_power_mod="0.2"
+			  modchance_damage_ice_mod="0.40"
+			  modchance_damage_air_mod="0.10"
+			  modchance_damage_mult_ice_mod="0.2"
+			  />
+	<EquipEffect />
+	<WeaponAttribute
+					weapon_type="staff"
+					damage_min_ice="11"
+					damage_max_ice="15"
+					multiplier_ice="1.12"
 					attack_range="20"
 					two_handed="yes"
 					dattack_speed="-400"
@@ -107,22 +135,23 @@
 			  character_requirement="mage"
 			  min_enchant="100"
 			  max_enchant="340"
-			  modchance_willpower_mod="0.2"
+			  modchance_willpower_mod="0.11"
 			  modchance_magic_power_mod="0.2"
-			  modchance_magic_fire_mod="0.10"
-			  modchance_damage_ice_mod="0.10"
-			  modchance_damage_air_mod="0.10"
-			  modchance_damage_mult_ice_mod="0.1"
-			  modchance_damage_mult_air_mod="0.1"
-			  modchance_damage_mult_fire_mod="0.1"
+			  modchance_magic_fire_mod="0.08"
+			  modchance_damage_ice_mod="0.08"
+			  modchance_damage_air_mod="0.08"
+			  modchance_damage_mult_ice_mod="0.15"
+			  modchance_damage_mult_air_mod="0.15"
+			  modchance_damage_mult_fire_mod="0.15"
 			  />
 	<EquipEffect />
 	<WeaponAttribute
 					weapon_type="staff"
-					damage_min_physical="13"
-					damage_max_physical="17"
-					damage_attack="54"
-					damage_power="53"
+					damage_min_physical="26"
+					damage_max_physical="34"
+					multiplier_fire="1.02"
+					multiplier_ice="1.02"
+					multiplier_air="1.02"
 					attack_range="20"
 					two_handed="yes"
 					dattack_speed="-400"
@@ -153,8 +182,39 @@
 					weapon_type="staff"
 					damage_min_ice="14"
 					damage_max_ice="19"
-					damage_attack="54"
-					damage_power="53"
+					multiplier_ice="1.1"
+					attack_range="20"
+					two_handed="yes"
+					dattack_speed="-400"
+					/>
+	<DropChance
+			   level="13"
+			   probability="1.0"
+			   />
+</Item>
+
+<!-- Bardenstab -->
+<Item type="weapon" subtype="bard_stf" name="bard's staff" size="big">
+	<Image image="set:spruce_stf.png image:full_image" />
+	<Mesh file="basicStaff.mesh" />
+	<Attribute
+			  level_requirement="15"
+			  character_requirement="mage"
+			  min_enchant="130"
+			  max_enchant="430"
+			  modchance_willpower_mod="0.1"
+			  modchance_magic_power_mod="0.2"
+			  modchance_damage_ice_mod="0.10"
+			  modchance_damage_air_mod="0.30"
+			  modchance_damage_fire_mod="0.10"
+			  modchance_damage_mult_air_mod="0.2"
+			  />
+	<EquipEffect />
+	<WeaponAttribute
+					weapon_type="staff"
+					damage_min_air="8"
+					damage_max_air="26"
+					multiplier_air="1.11"
 					attack_range="20"
 					two_handed="yes"
 					dattack_speed="-400"
@@ -185,8 +245,7 @@
 					weapon_type="staff"
 					damage_min_fire="17"
 					damage_max_fire="23"
-					damage_attack="54"
-					damage_power="53"
+					multiplier_ice="1.12"
 					attack_range="20"
 					two_handed="yes"
 					dattack_speed="-400"
@@ -202,7 +261,7 @@
 	<Image image="set:spruce_stf.png image:full_image" />
 	<Mesh file="basicStaff.mesh" />
 	<Attribute
-			  level_requirement="25"
+			  level_requirement="23"
 			  character_requirement="mage"
 			  min_enchant="160"
 			  max_enchant="600"
@@ -215,16 +274,46 @@
 	<EquipEffect />
 	<WeaponAttribute
 					weapon_type="staff"
-					damage_min_ice="20"
-					damage_max_ice="27"
-					damage_attack="54"
-					damage_power="53"
+					damage_min_ice="23"
+					damage_max_ice="28"
+					multiplier_ice="1.12"
 					attack_range="20"
 					two_handed="yes"
 					dattack_speed="-400"
 					/>
 	<DropChance
-			   level="25"
+			   level="23"
+			   probability="1.0"
+			   />
+</Item>
+
+<!-- Infernostab -->
+<Item type="weapon" subtype="inferno_stf" name="inferno staff" size="big">
+	<Image image="set:spruce_stf.png image:full_image" />
+	<Mesh file="basicStaff.mesh" />
+	<Attribute
+			  level_requirement="26"
+			  character_requirement="mage"
+			  min_enchant="170"
+			  max_enchant="630"
+			  modchance_willpower_mod="0.1"
+			  modchance_magic_power_mod="0.2"
+			  modchance_damage_fire_mod="0.40"
+			  modchance_damage_air_mod="0.10"
+			  modchance_damage_mult_fire_mod="0.2"
+			  />
+	<EquipEffect />
+	<WeaponAttribute
+					weapon_type="staff"
+					damage_min_fire="24"
+					damage_max_fire="31"
+					multiplier_fire="1.15"
+					attack_range="20"
+					two_handed="yes"
+					dattack_speed="-400"
+					/>
+	<DropChance
+			   level="26"
 			   probability="1.0"
 			   />
 </Item>
@@ -249,8 +338,7 @@
 					weapon_type="staff"
 					damage_min_air="23"
 					damage_max_air="29"
-					damage_attack="54"
-					damage_power="53"
+					multiplier_air="1.16"
 					attack_range="20"
 					two_handed="yes"
 					dattack_speed="-400"
@@ -281,8 +369,7 @@
 					weapon_type="staff"
 					damage_min_fire="26"
 					damage_max_fire="35"
-					damage_attack="54"
-					damage_power="53"
+					multiplier_fire="1.19"
 					attack_range="20"
 					two_handed="yes"
 					dattack_speed="-400"
@@ -313,8 +400,7 @@
 					weapon_type="staff"
 					damage_min_ice="28"
 					damage_max_ice="36"
-					damage_attack="54"
-					damage_power="53"
+					multiplier_ice="1.21"
 					attack_range="20"
 					two_handed="yes"
 					dattack_speed="-400"
@@ -345,8 +431,7 @@
 					weapon_type="staff"
 					damage_min_air="29"
 					damage_max_air="38"
-					damage_attack="54"
-					damage_power="53"
+					multiplier_air="1.22"
 					attack_range="20"
 					two_handed="yes"
 					dattack_speed="-400"
@@ -377,8 +462,7 @@
 					weapon_type="staff"
 					damage_min_fire="33"
 					damage_max_fire="41"
-					damage_attack="54"
-					damage_power="53"
+					multiplier_ice="1.24"
 					attack_range="20"
 					two_handed="yes"
 					dattack_speed="-400"
@@ -409,8 +493,7 @@
 					weapon_type="staff"
 					damage_min_ice="35"
 					damage_max_ice="45"
-					damage_attack="54"
-					damage_power="53"
+					multiplier_ice="1.23"
 					attack_range="20"
 					two_handed="yes"
 					dattack_speed="-400"
@@ -441,8 +524,7 @@
 					weapon_type="staff"
 					damage_min_fire="37"
 					damage_max_fire="49"
-					damage_attack="54"
-					damage_power="53"
+					multiplier_fire="1.24"
 					attack_range="20"
 					two_handed="yes"
 					dattack_speed="-400"
@@ -473,8 +555,7 @@
 					weapon_type="staff"
 					damage_min_ice="40"
 					damage_max_ice="52"
-					damage_attack="54"
-					damage_power="53"
+					multiplier_ice="1.25"
 					attack_range="20"
 					two_handed="yes"
 					dattack_speed="-400"
@@ -505,8 +586,7 @@
 					weapon_type="staff"
 					damage_min_fire="41"
 					damage_max_fire="54"
-					damage_attack="54"
-					damage_power="53"
+					multiplier_fire="1.26"
 					attack_range="20"
 					two_handed="yes"
 					dattack_speed="-400"
@@ -540,8 +620,102 @@
 					damage_max_fire="27"
 					damage_min_air="21"
 					damage_max_air="28"
-					damage_attack="54"
-					damage_power="53"
+					multiplier_air="1.15"
+					multiplier_fire="1.15"
+					attack_range="20"
+					two_handed="yes"
+					dattack_speed="-400"
+					/>
+	<DropChance
+			   level="75"
+			   probability="1.0"
+			   />
+</Item>
+
+<!-- Ifreetstab -->
+<Item type="weapon" subtype="ifreet_stf" name="ifreet staff" size="big">
+	<Image image="set:spruce_stf.png image:full_image" />
+	<Mesh file="basicStaff.mesh" />
+	<Attribute
+			  level_requirement="75"
+			  character_requirement="mage"
+			  min_enchant="350"
+			  max_enchant="1500"
+			  modchance_willpower_mod="0.1"
+			  modchance_magic_power_mod="0.2"
+			  modchance_damage_fire_mod="0.40"
+			  modchance_damage_air_mod="0.10"
+			  modchance_damage_mult_fire_mod="0.2"
+			  />
+	<EquipEffect />
+	<WeaponAttribute
+					weapon_type="staff"
+					damage_min_fire="45"
+					damage_max_fire="58"
+					multiplier_fire="1.3"
+					attack_range="20"
+					two_handed="yes"
+					dattack_speed="-400"
+					/>
+	<DropChance
+			   level="75"
+			   probability="1.0"
+			   />
+</Item>
+
+<!-- Eishexenstab -->
+<Item type="weapon" subtype="icewitch_stf" name="icewitch staff" size="big">
+	<Image image="set:spruce_stf.png image:full_image" />
+	<Mesh file="basicStaff.mesh" />
+	<Attribute
+			  level_requirement="75"
+			  character_requirement="mage"
+			  min_enchant="350"
+			  max_enchant="1500"
+			  modchance_willpower_mod="0.1"
+			  modchance_magic_power_mod="0.2"
+			  modchance_damage_ice_mod="0.40"
+			  modchance_damage_air_mod="0.10"
+			  modchance_damage_mult_ice_mod="0.2"
+			  />
+	<EquipEffect />
+	<WeaponAttribute
+					weapon_type="staff"
+					damage_min_ice="48"
+					damage_max_ice="55"
+					multiplier_ice="1.3"
+					attack_range="20"
+					two_handed="yes"
+					dattack_speed="-400"
+					/>
+	<DropChance
+			   level="75"
+			   probability="1.0"
+			   />
+</Item>
+
+<!-- Sylphenstab -->
+<Item type="weapon" subtype="sylph_stf" name="sylph staff" size="big">
+	<Image image="set:spruce_stf.png image:full_image" />
+	<Mesh file="basicStaff.mesh" />
+	<Attribute
+			  level_requirement="75"
+			  character_requirement="mage"
+			  min_enchant="350"
+			  max_enchant="1500"
+			  modchance_willpower_mod="0.1"
+			  modchance_magic_power_mod="0.2"
+			  modchance_damage_air_mod="0.30"
+			  modchance_damage_ice_mod="0.10"
+			  modchance_damage_fire_mod="0.10"
+			  modchance_damage_mult_air_mod="0.2"
+			  />
+	<EquipEffect />
+	<WeaponAttribute
+					weapon_type="staff"
+					damage_min_air="20"
+					damage_max_air="68"
+					multiplier_air="1.3"
 					attack_range="20"
 					two_handed="yes"
 					dattack_speed="-400"
@@ -561,26 +735,27 @@
 			  character_requirement="mage"
 			  min_enchant="400"
 			  max_enchant="2000"
-			  modchance_willpower_mod="0.2"
+			  modchance_willpower_mod="0.05"
 			  modchance_magic_power_mod="0.2"
 			  modchance_damage_ice_mod="0.10"
 			  modchance_damage_air_mod="0.10"
 			  modchance_danage_fire_mod="0.10"
-			  modchance_damage_mult_ice_mod="0.1"
-			  modchance_damage_mult_air_mod="0.1"
-			  modchance_damage_mult_fire_mod="0.1"
+			  modchance_damage_mult_ice_mod="0.15"
+			  modchance_damage_mult_air_mod="0.15"
+			  modchance_damage_mult_fire_mod="0.15"
 			  />
 	<EquipEffect />
 	<WeaponAttribute
 					weapon_type="staff"
-					damage_min_fire="16"
-					damage_max_fire="21"
-					damage_min_air="16"
-					damage_max_air="21"
-					damage_min_ice="16"
-					damage_max_ice="21"
-					damage_attack="54"
-					damage_power="53"
+					damage_min_fire="14"
+					damage_max_fire="25"
+					damage_min_air="8"
+					damage_max_air="32"
+					damage_min_ice="20"
+					damage_max_ice="22"
+					multiplier_ice="1.25"
+					multiplier_air="1.25"
+					multiplier_fire="1.25"
 					attack_range="20"
 					two_handed="yes"
 					dattack_speed="-400"

@@ -109,37 +109,37 @@
             prob_angle="false" 
     />
     <Object subtype="cave_wall_c1" 
-            center_x="-20" 
+            center_x="-23" 
             center_y="1.5" 
             angle="0" 
             probability="1" 
             prob_angle="false" 
     />
-    <Object subtype="cave_wall_c1" 
-            center_x="-20" 
+    <Object subtype="cave_wall_cIn1" 
+            center_x="-29" 
             center_y="-15.5" 
+            angle="90" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="cave_wall_cOut1" 
+            center_x="-23" 
+            center_y="6.5" 
             angle="-90" 
             probability="1" 
             prob_angle="false" 
     />
-    <Object subtype="cave_wall_c1" 
-            center_x="-23" 
-            center_y="1.5" 
-            angle="0" 
-            probability="1" 
-            prob_angle="false" 
-    />
-    <Object subtype="cave_wall_c1" 
-            center_x="-23" 
-            center_y="6.5" 
-            angle="0" 
-            probability="1" 
-            prob_angle="false" 
-    />
-    <Object subtype="cave_wall_c1" 
-            center_x="-29" 
+    <Object subtype="cave_wall_cOut1" 
+            center_x="-20" 
             center_y="-15.5" 
-            angle="90" 
+            angle="-180" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="cave_wall_cOut1" 
+            center_x="-20" 
+            center_y="1.5" 
+            angle="-90" 
             probability="1" 
             prob_angle="false" 
     />
@@ -153,6 +153,13 @@
     <Object subtype="cave_wall_s1" 
             center_x="-21.5" 
             center_y="1.5" 
+            angle="-90" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="$border_cOut" 
+            center_x="-2" 
+            center_y="-13" 
             angle="-90" 
             probability="1" 
             prob_angle="false" 
@@ -231,20 +238,6 @@
             center_x="19" 
             center_y="-3.5" 
             angle="0" 
-            probability="1" 
-            prob_angle="false" 
-    />
-    <Object subtype="$border_c" 
-            center_x="-2" 
-            center_y="-13" 
-            angle="0" 
-            probability="1" 
-            prob_angle="false" 
-    />
-    <Object subtype="$border_c" 
-            center_x="7" 
-            center_y="-13" 
-            angle="-180" 
             probability="1" 
             prob_angle="false" 
     />
@@ -361,6 +354,13 @@
             probability="1" 
             prob_angle="false" 
     />
+    <Object subtype="$border_cOut" 
+            center_x="7" 
+            center_y="-13" 
+            angle="0" 
+            probability="1" 
+            prob_angle="false" 
+    />
     <Object subtype="$single_deb_l" 
             center_x="-6.447019601" 
             center_y="-15.13607935" 
@@ -421,7 +421,7 @@
     <Object subtype="$tree" 
             center_x="25.46823634" 
             center_y="21.72228494" 
-			height="-1.42247325e-014" 
+			height="-1.423861029e-014" 
             angle="0" 
             probability="1" 
             prob_angle="false" 
@@ -443,7 +443,7 @@
     <Object subtype="$tree" 
             center_x="-11.02169445" 
             center_y="23.25156125" 
-			height="-1.42247325e-014" 
+			height="-1.423861029e-014" 
             angle="0" 
             probability="1" 
             prob_angle="false" 
@@ -474,7 +474,7 @@
     <Object subtype="$tree" 
             center_x="-12.92460157" 
             center_y="-14.72778883" 
-			height="-1.42247325e-014" 
+			height="-1.423861029e-014" 
             angle="0" 
             probability="1" 
             prob_angle="false" 
@@ -550,6 +550,97 @@
             probability="1" 
             prob_angle="false" 
     />
+    <Object subtype="ground" 
+            center_x="-32.5" 
+            center_y="-6.5" 
+            angle="-90" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="ground_c" 
+            center_x="-29" 
+            center_y="-15.5" 
+            angle="0" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="ground_m" 
+            center_x="-26.5" 
+            center_y="5.5" 
+            angle="-90" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="ground_m" 
+            center_x="-24" 
+            center_y="3" 
+            angle="0" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="ground_squ_l" 
+            center_x="-32.5" 
+            center_y="2" 
+            angle="0" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="ground_squ_l" 
+            center_x="-24.5" 
+            center_y="-3" 
+            angle="0" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="ground_squ_l" 
+            center_x="-24.5" 
+            center_y="-11" 
+            angle="0" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="ground_squ_l" 
+            center_x="-32.5" 
+            center_y="-11" 
+            angle="0" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="ground_squ_l" 
+            center_x="-33.5" 
+            center_y="-19" 
+            angle="0" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="ground_squ_m" 
+            center_x="-34.5" 
+            center_y="-4" 
+            angle="0" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="ground_squ_m" 
+            center_x="-26.5" 
+            center_y="3" 
+            angle="0" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="ground_squ_m" 
+            center_x="-30.5" 
+            center_y="-4" 
+            angle="0" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="ground_t" 
+            center_x="-24" 
+            center_y="5.5" 
+            angle="0" 
+            probability="1" 
+            prob_angle="false" 
+    />
     <Object subtype="stone1" 
             center_x="-18.86573517" 
             center_y="19.55899146" 
@@ -601,18 +692,20 @@
     <Location name="exit_east" pos_x="27" pos_y="32" />
     <Location name="exit_north" pos_x="2.5" pos_y="-20.5" />
     <Location name="locCaptain" pos_x="3.5" pos_y="8" />
+    <Location name="locCrystal" pos_x="7" pos_y="10" />
     <Location name="locDeadGuard1" pos_x="9.211932898" pos_y="1.519146096" />
     <Location name="locDeadGuard2" pos_x="-3.761677416" pos_y="5.716542863" />
     <Location name="locDeadSkeleton1" pos_x="-3.7417131" pos_y="4.120731463" />
     <Location name="locDeadSkeleton2" pos_x="7.367742619" pos_y="1.130101775" />
     <Location name="locDeadSkeleton3" pos_x="-5.59495126" pos_y="5.788531647" />
-    <Location name="locDeadSkeleton4" pos_x="2.193789277" pos_y="9.331574698" />
-    <Location name="locGuard1" pos_x="7.078741032" pos_y="6.853666623" />
+    <Location name="locDeadSkeleton4" pos_x="1.5" pos_y="9" />
+    <Location name="locDerred" pos_x="2.5" pos_y="10" />
+    <Location name="locGuard1" pos_x="7.5" pos_y="6.5" />
     <Location name="locGuard2" pos_x="0.039203427" pos_y="8.318315837" />
     <Location name="locGuard3" pos_x="8.881514294" pos_y="7.554688232" />
     <Location name="locGuard4" pos_x="1" pos_y="6.5" />
     <Location name="locIreana" pos_x="5.160535198" pos_y="8.387429204" />
-    <Location name="locParty" pos_x="4.866035764" pos_y="10.07988439" />
+    <Location name="locParty" pos_x="6" pos_y="11.5" />
     <Location name="locPartyEntry" pos_x="13.19112601" pos_y="17.78445671" />
     <Location name="locSkeleton1" pos_x="-12.72636379" pos_y="7.172599671" />
     <Location name="locSkeleton2" pos_x="-11.73690534" pos_y="2.316772207" />
@@ -622,6 +715,11 @@
     <Location name="locSkeleton6" pos_x="10.39669731" pos_y="-4.434134128" />
     <Location name="locSkeleton7" pos_x="-1.969709983" pos_y="-5.804779144" />
     <Location name="locSkeleton8" pos_x="3.067829294" pos_y="-5.91297707" />
+    <Location name="locTolec" pos_x="7" pos_y="8" />
   </Locations>
+
+  <Areas>
+    <Area name="areaIerana" angle="-0" center_x="5" center_y="8.5" type="CIRCLE" radius="4.860517534" />
+  </Areas>
 
 </ObjectGroupTemplate>

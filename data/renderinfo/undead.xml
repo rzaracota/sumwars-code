@@ -156,7 +156,7 @@
 </RenderInfo>
 
 <RenderInfo name="scy_skeleton" parent="skeletonbase">
-	<Entity source="skeleton.mesh"/>
+	<Entity source="skeleton.mesh" scale="1.3"/>
 	<Entity objectname="weapon" bone="itemRightHand" source="blood_scy.mesh" scale="0.7"/>
 	
 	<Action name = "attack">
