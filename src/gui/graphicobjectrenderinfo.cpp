@@ -18,9 +18,9 @@ GraphicRenderInfo::~GraphicRenderInfo()
 	}
 }
 
-ActionRenderInfo* GraphicRenderInfo::getActionRenderInfo(std::string action)
+ActionRenderInfo* GraphicRenderInfo::getActionRenderInfo(std::string action,int random_action_nr)
 {
-	ActionRenderInfo* info = getInheritedActionRenderInfo(action);
+	ActionRenderInfo* info = getInheritedActionRenderInfo(action, random_action_nr);
 	
 	// Falls keine Informationen gefunden: Aktion reduzieren (Anhaenge mit # weglassen)
 	size_t pos = action.find_last_of('#');
@@ -29,13 +29,13 @@ ActionRenderInfo* GraphicRenderInfo::getActionRenderInfo(std::string action)
 		action.erase(pos);
 		DEBUG5("reduced action %s",action.c_str());
 		
-		info = getInheritedActionRenderInfo(action);
+		info = getInheritedActionRenderInfo(action,random_action_nr);
 		pos = action.find_last_of('#');
 	}
 	return info;
 }
 
-ActionRenderInfo* GraphicRenderInfo::getOwnActionRenderInfo(std::string action)
+ActionRenderInfo* GraphicRenderInfo::getOwnActionRenderInfo(std::string action,int random_action_nr)
 {
 	std::multimap<std::string, ActionRenderInfo*>::iterator it,jt;
 	
@@ -50,7 +50,7 @@ ActionRenderInfo* GraphicRenderInfo::getOwnActionRenderInfo(std::string action)
 		rt = m_action_references.find(action);
 		if (rt != m_action_references.end() && rt->second != action)
 		{
-			return getOwnActionRenderInfo(rt->second);
+			return getOwnActionRenderInfo(rt->second, random_action_nr);
 		}
 		else
 		{
@@ -59,28 +59,30 @@ ActionRenderInfo* GraphicRenderInfo::getOwnActionRenderInfo(std::string action)
 	}
 
 	// unter allen gleichmaessig einen auswuerfeln
-	ActionRenderInfo* info = it->second;
+	ActionRenderInfo* info;
 
-	int count =2;
-	++it;
-	while (it != jt)
+	int count =0;
+	std::multimap<std::string, ActionRenderInfo*>::iterator nt = it;
+	while (nt != jt)
 	{
-		if (rand() %count ==0)
-		{
-			info = it->second;
-		}
 		count ++;
-		++it;
-
+		++nt;
 	}
+	
+	int nr = random_action_nr % count;
+	for (int i=0; i<nr; i++)
+	{
+		++it;
+	}
+	info = it->second;
 
 	return info;	
 }
 
-ActionRenderInfo* GraphicRenderInfo::getInheritedActionRenderInfo(std::string action)
+ActionRenderInfo* GraphicRenderInfo::getInheritedActionRenderInfo(std::string action,int  random_action_nr)
 {
 	DEBUG5("get info for %s (%p)",action.c_str(),this);
-	ActionRenderInfo*  info = getOwnActionRenderInfo(action);
+	ActionRenderInfo*  info = getOwnActionRenderInfo(action, random_action_nr);
 	if (info ==0 && m_parent !="")
 	{
 		if (m_parent_ptr == 0)
@@ -91,7 +93,7 @@ ActionRenderInfo* GraphicRenderInfo::getInheritedActionRenderInfo(std::string ac
 		
 		if (m_parent_ptr != 0)
 		{
-			info = m_parent_ptr->getInheritedActionRenderInfo(action);
+			info = m_parent_ptr->getInheritedActionRenderInfo(action, random_action_nr);
 		}
 	}
 	return info;

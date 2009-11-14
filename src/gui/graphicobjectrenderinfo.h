@@ -134,11 +134,11 @@ class GraphicRenderInfo
 			return m_objects;
 		}
 
-		ActionRenderInfo* getActionRenderInfo(std::string action);
+		ActionRenderInfo* getActionRenderInfo(std::string action,int m_random_action_nr=1);
 
-		ActionRenderInfo* getInheritedActionRenderInfo(std::string action);
+		ActionRenderInfo* getInheritedActionRenderInfo(std::string action,int m_random_action_nr=1);
 
-		ActionRenderInfo* getOwnActionRenderInfo(std::string action);
+		ActionRenderInfo* getOwnActionRenderInfo(std::string action,int m_random_action_nr=1);
 		
 		GraphicRenderInfo* getParentInfo();
 

@@ -1,5 +1,6 @@
 #include "graphicobject.h"
 #include "graphicmanager.h"
+#include "random.h"
 
 GraphicObject::GraphicObject(Type type, GraphicRenderInfo* render_info, std::string name, int id)
 	: m_attached_objects(), m_subobjects(), m_dependencies()
@@ -459,10 +460,15 @@ void GraphicObject::removeMovableObject(std::string name)
 
 void GraphicObject::initAttachedAction(AttachedAction& attchaction, std::string action)
 {
+	if (m_own_random_number)
+	{
+		m_random_action_number = Random::randrangei(1,1000000);
+	}
+	
 	attchaction.m_current_action = action;
 	attchaction.m_current_percent = -0.00001;
 	
-	attchaction.m_arinfo = m_render_info->getActionRenderInfo(action);
+	attchaction.m_arinfo = m_render_info->getActionRenderInfo(action,m_random_action_number);
 	if (attchaction.m_arinfo !=0)
 	{
 		attchaction.m_time = attchaction.m_arinfo->m_time;
@@ -470,10 +476,20 @@ void GraphicObject::initAttachedAction(AttachedAction& attchaction, std::string 
 	}
 }
 
-void GraphicObject::updateAction(std::string action, float percent)
+void GraphicObject::updateAction(std::string action, float percent, int random_action_nr)
 {
 	if (m_render_info ==0)
 		return;
+	
+	if (random_action_nr != 0)
+	{
+		m_random_action_number = random_action_nr;
+		m_own_random_number = false;
+	}
+	else
+	{
+		m_own_random_number = true;
+	}
 	
 	DEBUG5("update %s action %s %f",m_name.c_str(),action.c_str(),percent);
 	updateAttachedAction(m_action,action,percent);
@@ -484,7 +500,7 @@ void GraphicObject::updateAction(std::string action, float percent)
 	for (gt = m_subobjects.begin(); gt != m_subobjects.end(); ++gt)
 	{
 		obj = gt->second.m_object;
-		obj->updateAction(action,percent);
+		obj->updateAction(action,percent, m_random_action_number);
 	}
 }
 

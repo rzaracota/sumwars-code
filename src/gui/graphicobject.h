@@ -84,7 +84,7 @@ class GraphicObject
 		
 		~GraphicObject();
 		
-		void updateAction(std::string action, float percent);
+		void updateAction(std::string action, float percent, int random_action_nr=0);
 		
 		Ogre::SceneNode* getTopNode()
 		{
@@ -218,6 +218,19 @@ class GraphicObject
 		 * \brief Zusatzmaterial, mit dem das Highlighting dargestellt wird
 		 */
 		std::string m_hightlight_material;
+		
+		/**
+		 * \var int m_random_action_number
+		 * \brief Zufallszahl, die die Auswahl der Animation bestimmt, falls mehrere zur Verfuegung stehen
+		 * Animationen von Kleidung und Hauptobjekt werden sychonisiert, indem dem Unterobjekt diese Zahl fest vorgegeben wird
+		 */
+		int m_random_action_number;
+		
+		/**
+		 * \var bool m_own_random_number
+		 * \brief Gibt an, ob das Objekt seine eigene Zufallszahl fuer die Auswahl der Aktion generieren darf
+		 */
+		bool m_own_random_number;
 };
 
 
