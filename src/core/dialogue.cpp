@@ -405,7 +405,7 @@ void Dialogue::changeTopic(std::string topic)
 		}
 
 		// Alle Antworten hinzufuegen, deren Themen freigeschaltet sind
-
+		bool noanswer = true;
 		std::list< std::pair<std::string, std::string> >& lst = m_topics[m_topic_base].getStartTopics();
 		std::list< std::pair<std::string, std::string> >::iterator jt;
 		for (jt = lst.begin(); jt != lst.end(); ++jt)
@@ -424,7 +424,13 @@ void Dialogue::changeTopic(std::string topic)
 			{
 				DEBUG5("added answer %s %s",jt->first.c_str(),jt->second.c_str());
 				addAnswer(jt->first, jt->second);
+				noanswer = false;
 			}
+		}
+		
+		if (noanswer)
+		{
+			m_finished = true;
 		}
 		return;
 	}

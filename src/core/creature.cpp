@@ -1122,8 +1122,17 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 					dia->setSpeakerPosition(getId(), Dialogue::LOWER_LEFT);
 					dia->setSpeakerPosition(goalobj->getId(), Dialogue::UPPER_RIGHT);
 					dia->changeTopic("start");
-					getRegion()->insertDialogue(dia);
-					EventSystem::setDialogue(0);
+					
+					if (dia->isFinished())
+					{
+						// keine Gespraechsoption vorhanden
+						delete dia;
+					}
+					else
+					{
+						getRegion()->insertDialogue(dia);
+						EventSystem::setDialogue(0);
+					}
 				}
 			}
 		}
