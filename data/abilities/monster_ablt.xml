@@ -13,6 +13,7 @@
 			local frac = get(self,"fraction");
 			local obj = createObject("bow_skel",goal);
 			set(obj,"fraction",frac);
+			addUnitCommand(obj,"guard",self,15,"secondary");
 		</LuaImplementation>
 	</Effect>
 </Ability>
@@ -31,6 +32,7 @@
 			local frac = get(self,"fraction");
 			local obj = createObject("sword_skel",goal);
 			set(obj,"fraction",frac);
+			addUnitCommand(obj,"guard",self,15,"secondary");
 		</LuaImplementation>
 	</Effect>
 </Ability>
@@ -49,6 +51,7 @@
 			local frac = get(self,"fraction");
 			local obj = createObject("axe_skel",goal);
 			set(obj,"fraction",frac);
+			addUnitCommand(obj,"guard",self,15,"secondary");
 		</LuaImplementation>
 	</Effect>
 </Ability>
@@ -67,6 +70,7 @@
 			local frac = get(self,"fraction");
 			local obj = createObject("axe2_skel",goal);
 			set(obj,"fraction",frac);
+			addUnitCommand(obj,"guard",self,15,"secondary");
 		</LuaImplementation>
 	</Effect>
 </Ability>

@@ -32,7 +32,8 @@
 		<Ability type="trade" />
 		
 		<Ability type="attack" />
-		<Ability type="summon_skel" />
+		<Ability type="summon_skelBow" />
+		<Ability type="summon_skelSword" />
 		<Ability type="testfireball" />
 		<Ability type="testbooster" />
 		<Ability type="teststatushealer" />
@@ -48,8 +49,8 @@
 	<Item type="heal_1" />
 	
 	<LearnableAbility type="attack" skilltree_tab="1" skilltree_posx="0.200000" skilltree_posy="0.050000" required_level="0" image="set:skills image:bash"/>
-	<LearnableAbility type="summon_skel" skilltree_tab="1" skilltree_posx="0.450000" skilltree_posy="0.050000" required_level="1" image="set:skills image:magic_attack"/>
-	<LearnableAbility type="testfireball" skilltree_tab="1" skilltree_posx="0.450000" skilltree_posy="0.450000" required_level="1"/>
+	<LearnableAbility type="summon_skelBow" skilltree_tab="1" skilltree_posx="0.450000" skilltree_posy="0.050000" required_level="1" image="set:skills image:magic_attack"/>
+	<LearnableAbility type="summon_skelSword" skilltree_tab="1" skilltree_posx="0.450000" skilltree_posy="0.450000" required_level="1"/>
 	<LearnableAbility type="testbooster" skilltree_tab="1" skilltree_posx="0.200000" skilltree_posy="0.250000" required_level="1"/>
 	<LearnableAbility type="teststatushealer" skilltree_tab="1" skilltree_posx="0.200000" skilltree_posy="0.650000" required_level="1"/>
 		

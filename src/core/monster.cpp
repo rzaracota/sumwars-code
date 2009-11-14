@@ -197,6 +197,34 @@ void Monster::updateCommand()
 	
 	// Linie vom Monster zum Ziel
 	Line gline(pos,Vector(0,0));
+	
+	// spezielle Sekundaeraktion beschuetzen
+	Vector guard_pos;
+	bool guard = false;
+	if (m_ai.m_secondary_command.m_type == "guard")
+	{
+		
+		if (m_ai.m_secondary_command.m_goal_object_id != 0)
+		{
+			// Beschuetzen eines Objektes
+			WorldObject* obj = getRegion()->getObject(m_ai.m_secondary_command.m_goal_object_id);
+			if (obj != 0)
+			{
+				guard_pos = obj->getShape()->m_center;
+				guard = true;
+			}
+			else
+			{
+				// Objekt existiert nicht mehr
+				m_ai.m_secondary_command.m_type = "noaction";	
+			}
+		}
+		else
+		{
+			guard_pos = m_ai.m_secondary_command.m_goal;
+			guard = true;
+		}
+	}
 
 	// Entfernungen und Sichtbarkeit der Ziele ermitteln
 	// nur, wenn das Monster nicht wegen Taunt einen bestimmten Spieler angreifen muss
@@ -216,7 +244,12 @@ void Monster::updateCommand()
 			if (! pl->canBeAttacked())
 				continue;
 			
+			// nur Feinde
 			if (World::getWorld()->getRelation(getFraction(), pl ) != Fraction::HOSTILE)
+				continue;
+			
+			// bei Befehl guard nur, wenn nicht zu weit vom zu beschuetzenden Ort
+			if (guard && guard_pos.distanceTo(pl->getShape()->m_center) > m_ai.m_secondary_command.m_range)
 				continue;
 				
 			dist = getShape()->getDistance(*(pl->getShape()));
@@ -277,7 +310,8 @@ void Monster::updateCommand()
 		pl = dynamic_cast<Creature*>(getRegion()->getObject(m_ai.m_chase_player_id));
 		
 		// Spieler nur als Ziel, wenn aktiv und nicht in Dialog
-		if (pl!=0 && pl->getState() == STATE_ACTIVE && pl->getDialogueId() == 0)
+		if (pl!=0 && pl->getState() == STATE_ACTIVE && pl->getDialogueId() == 0
+			&& (!guard || guard_pos.distanceTo(pl->getShape()->m_center) <= m_ai.m_secondary_command.m_range))
 		{
 			
 		
@@ -353,6 +387,12 @@ void Monster::updateCommand()
 	{
 		*(getCommand()) = m_ai.m_secondary_command;
 		addToNetEventMask(NetEvent::DATA_COMMAND);
+		
+		if (getCommand()->m_type == "guard")
+		{
+			getCommand()->m_type = "walk";
+			getCommand()->m_range = 2;
+		}
 	}
 	else
 	{

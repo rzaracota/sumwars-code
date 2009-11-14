@@ -86,6 +86,15 @@
 		 critical_percent="-1.000000" 
 		 target_type="melee" />
 
+<Ability type="guard" 
+		 name="guard" 
+		 description="guard" 
+		 time="0.000000" 
+		 timer_nr="0.000000" 
+		 timer_value="0.000000" 
+		 base_ability="walk" 
+		 critical_percent="-1.000000" 
+		 target_type="melee" />
 
 
 <Ability type="attack" 
