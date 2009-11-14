@@ -275,8 +275,9 @@ struct Item {
 	/**
 	 * \fn std::string getDescription()
 	 * \brief Gibt eine Beschreibung in Textform aus
+	 * \param price_factor Wenn ein Faktor ungleich 1 angegeben wird, so wird zusaetzlich der mit Faktor multiplizierte Wert angezeigt
 	 */
-	std::string getDescription();
+	std::string getDescription(float price_factor=1);
 
 	/**
 	 * \fn calcPrice()

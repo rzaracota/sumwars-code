@@ -152,6 +152,12 @@ class NPCTrade
 		float m_cost_multiplier;
 		
 		/**
+		 * \var float m_pay_multiplier
+		 * \brief Faktor mit dem der gezahlte Preis fuer vom Spieler verkaufte Waren multipliziert wird
+		 */
+		float m_pay_multiplier;
+		
+		/**
 		 * \var float m_refresh_time
 		 * \brief Zeit nach der das Angebot erneuert wird in ms
 		 */

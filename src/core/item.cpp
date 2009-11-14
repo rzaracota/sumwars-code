@@ -635,7 +635,7 @@ void Item::fromStringComplete(CharConv* cv)
 
 }
 
-std::string Item::getDescription()
+std::string Item::getDescription(float price_factor)
 {
 
 	// String fuer die Beschreibung
@@ -645,6 +645,10 @@ std::string Item::getDescription()
 	int i;
 	// Levelbeschraenkung
 	out_stream <<gettext("Value")<<": "<<m_price;
+	if (price_factor != 0 && price_factor != 1)
+	{
+		out_stream <<"\n" << gettext("Selling Value")<<": "<<std::max(1,int(m_price*price_factor));
+	}
 	if (m_level_req>0)
 	{
 		out_stream<<"\n" << gettext("Required level")<<": "<<(int) m_level_req;

@@ -99,4 +99,6 @@ bool MainMenu::onStartMultiPlayerHost(const CEGUI::EventArgs& evt)
 bool MainMenu::onQuitGameHost(const CEGUI::EventArgs& evt)
 {
 	m_document->onButtonSaveExitClicked();
+	return true;
 }
+

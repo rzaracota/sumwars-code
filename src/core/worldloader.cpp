@@ -405,14 +405,16 @@ void  WorldLoader::loadNPC( TiXmlNode* node)
 			else if (child->Type()==TiXmlNode::ELEMENT && !strcmp(child->Value(), "Trade"))
 			{
 				attr.parseElement(child->ToElement());
-				float refreshtime,price_factor;
+				float refreshtime,price_factor, buy_factor;
 				attr.getFloat("refresh_time", refreshtime,3600000.0f);
 				attr.getFloat("price_factor",price_factor,1.5f);
+				attr.getFloat("pay_factor",buy_factor,1.0f);
 				
 				DEBUG5("trade conditions %f %f",refreshtime, price_factor);
 				NPCTrade& tradeinfo = Dialogue::getNPCTrade(refname);
 				
 				tradeinfo.m_cost_multiplier = price_factor;
+				tradeinfo.m_pay_multiplier = buy_factor;
 				tradeinfo.m_refresh_time = refreshtime;
 				
 				// TradeObject einlesen

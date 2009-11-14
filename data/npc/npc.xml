@@ -46,7 +46,7 @@
 </NPC>
 
 <NPC refname="The Trader">
-	<Trade refresh_time="600000" price_factor="1.0">
+	<Trade refresh_time="600000" price_factor="1.0" pay_factor="0.1">
 		<TradeItem subtype="town_portal"  number="20" number_magical="0"/>
 	</Trade>
 	

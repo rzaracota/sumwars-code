@@ -31,7 +31,15 @@ bool ItemWindow::onItemHover(const CEGUI::EventArgs& evt)
 	{
 		itm = player->getEquipement()->getItem(id);
 	}
-	updateItemWindowTooltip(we.window,itm ,player);
+	
+	float factor = 1.0;
+	Creature* npc = player->getTradePartner();
+	if (npc != 0)
+	{
+		NPCTrade& tradeinfo = Dialogue::getNPCTrade(npc->getRefName());
+		factor = tradeinfo.m_pay_multiplier;
+	}
+	updateItemWindowTooltip(we.window,itm ,player,-1,factor);
 	return true;
 }
 
@@ -123,7 +131,7 @@ void ItemWindow::updateItemWindow(CEGUI::Window* img, Item* item, Player* player
 	
 }
 
-void ItemWindow::updateItemWindowTooltip(CEGUI::Window* img, Item* item, Player* player, int gold)
+void ItemWindow::updateItemWindowTooltip(CEGUI::Window* img, Item* item, Player* player, int gold,float price_factor)
 {
 	std::string msg;
 	
@@ -133,7 +141,7 @@ void ItemWindow::updateItemWindowTooltip(CEGUI::Window* img, Item* item, Player*
 	}
 	else
 	{
-		msg =item->getDescription();
+		msg =item->getDescription(price_factor);
 	}
 	img->setTooltipText((CEGUI::utf8*) msg.c_str());
 }

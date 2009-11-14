@@ -4517,6 +4517,9 @@ void Creature::buyItem(Item* &item, int& gold)
 	DEBUG5("buy %p",item);
 	if (item != 0 && getEquipement() !=0)
 	{
+		NPCTrade& tradeinfo = Dialogue::getNPCTrade(getRefName());
+		float factor = tradeinfo.m_pay_multiplier;
+		
 		// Geld auszahlen
 		// zuletzt gekauftes Item kann zum vollen Preis zurueck gegebebn werden
 		if (item == m_trade_info.m_last_sold_item)
@@ -4525,7 +4528,7 @@ void Creature::buyItem(Item* &item, int& gold)
 		}
 		else
 		{
-			gold += item->m_price;
+			gold += std::max(1, int(item->m_price*factor));
 		}
 		item->m_price = (int) (item->m_price * m_trade_info.m_price_factor);
 		
