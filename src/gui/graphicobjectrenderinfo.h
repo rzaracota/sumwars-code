@@ -110,6 +110,19 @@ struct ActionRenderInfo
 class GraphicRenderInfo
 {
 	public:
+		enum InheritedParts
+		{
+			INHERIT_ALL = 0xffffffff,
+			INHERIT_ANIMATION = 0x1,
+			INHERIT_ROTATION = 0x2,
+			INHERIT_MOVEMENT = 0x4,
+			INHERIT_SCALE = 0x8,
+			INHERIT_TRANSFORM = 0xe,
+			INHERIT_SOUND = 0x80,
+   
+			INHERIT_OBJECTS = 0x100,
+		};
+		
 		GraphicRenderInfo(std::string parent);
 
 		~GraphicRenderInfo();
@@ -141,6 +154,18 @@ class GraphicRenderInfo
 		ActionRenderInfo* getOwnActionRenderInfo(std::string action,int m_random_action_nr=1);
 		
 		GraphicRenderInfo* getParentInfo();
+		
+		void setInheritMask(unsigned int mask)
+		{
+			m_inherit_mask = mask;	
+		}
+		
+		bool checkActionInheritMask(ActionRenderpart::Type arpart);
+		
+		bool checkInheritMask(unsigned int mask)
+		{
+			return m_inherit_mask & mask;
+		}
 
 	private:
 		/**
@@ -172,6 +197,13 @@ class GraphicRenderInfo
 		 * \brief Zeiger auf das VaterObjekt
 		 */
 		GraphicRenderInfo* m_parent_ptr;
+		
+		/**
+		 * \var unsigned int m_inherit_mask
+		 * \brief Maske, die bestimmt welche geerbten Renderanweisungen ausgefuehrt werden
+		 * Bei Gegenstaenden wird haeufig verlangt, dass zwar die Animationen uebernommen werden, aber keine neuen Objekte (Partikel etc) angehaengt werden
+		 **/
+		unsigned int m_inherit_mask;
 };
 
 #endif

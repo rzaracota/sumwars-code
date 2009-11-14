@@ -54,6 +54,8 @@ struct AttachedAction
 	float m_current_percent;
 	
 	float m_time;
+	
+	bool m_inherited;
 };
 
 
@@ -114,6 +116,8 @@ class GraphicObject
 		void setHighlight(bool highlight, std::string material);
 		
 	private:
+		
+		
 		void addObjectsFromRenderInfo(GraphicRenderInfo* info);
 		
 		void addMovableObject(MovableObjectInfo& object);
@@ -137,7 +141,6 @@ class GraphicObject
 		Ogre::Node* getParentNode(std::string name);
 		
 		void initAttachedAction(AttachedAction& attchaction, std::string action);
-		
 		
 		
 		/**
@@ -222,7 +225,7 @@ class GraphicObject
 		/**
 		 * \var int m_random_action_number
 		 * \brief Zufallszahl, die die Auswahl der Animation bestimmt, falls mehrere zur Verfuegung stehen
-		 * Animationen von Kleidung und Hauptobjekt werden sychonisiert, indem dem Unterobjekt diese Zahl fest vorgegeben wird
+		 * Animationen von Kleidung und Hauptobjekt werden sychonisiert, indem dem Unterobjekten diese Zahl fest vorgegeben wird
 		 */
 		int m_random_action_number;
 		
@@ -231,6 +234,7 @@ class GraphicObject
 		 * \brief Gibt an, ob das Objekt seine eigene Zufallszahl fuer die Auswahl der Aktion generieren darf
 		 */
 		bool m_own_random_number;
+		
 };
 
 

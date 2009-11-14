@@ -7,6 +7,7 @@ GraphicRenderInfo::GraphicRenderInfo(std::string parent)
 {
 	m_parent = parent;
 	m_parent_ptr =0;
+	m_inherit_mask = INHERIT_ALL;
 }
 
 GraphicRenderInfo::~GraphicRenderInfo()
@@ -113,3 +114,22 @@ GraphicRenderInfo* GraphicRenderInfo::getParentInfo()
 	
 }
 
+bool GraphicRenderInfo::checkActionInheritMask(ActionRenderpart::Type arpart)
+{
+	if (m_inherit_mask == INHERIT_ALL)
+		return true;
+	
+	unsigned int mask = 0;
+	if (arpart == ActionRenderpart::ANIMATION)
+		mask = INHERIT_ANIMATION;
+	if (arpart == ActionRenderpart::ROTATION)
+		mask = INHERIT_ROTATION;
+	if (arpart == ActionRenderpart::MOVEMENT)
+		mask = INHERIT_MOVEMENT;
+	if (arpart == ActionRenderpart::SCALE)
+		mask = INHERIT_SCALE;
+	if (arpart == ActionRenderpart::SOUND)
+		mask = INHERIT_SOUND;
+	
+	return checkInheritMask(mask);
+}

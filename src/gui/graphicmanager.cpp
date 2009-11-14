@@ -233,11 +233,33 @@ void GraphicManager::loadRenderInfos(TiXmlNode* node)
 		ElementAttrib attr;
 		attr.parseElement(node->ToElement());
 		
-		std::string name,parent;
+		std::string name,parent, inherit;
 		attr.getString("name",name);
 		attr.getString("parent",parent);
+		attr.getString("inherit",inherit);
 		
 		info = new GraphicRenderInfo(parent);
+		
+		if (inherit != "")
+		{
+			unsigned int mask =0;
+			if (inherit.find("animation") != std::string::npos)
+				mask |= GraphicRenderInfo::INHERIT_ANIMATION;
+			if (inherit.find("rotation") != std::string::npos)
+				mask |= GraphicRenderInfo::INHERIT_ROTATION;
+			if (inherit.find("movement") != std::string::npos)
+				mask |= GraphicRenderInfo::INHERIT_MOVEMENT;
+			if (inherit.find("scale") != std::string::npos)
+				mask |= GraphicRenderInfo::INHERIT_SCALE;
+			if (inherit.find("transform") != std::string::npos)
+				mask |= GraphicRenderInfo::INHERIT_TRANSFORM;
+			if (inherit.find("sound") != std::string::npos)
+				mask |= GraphicRenderInfo::INHERIT_SOUND;
+			if (inherit.find("object") != std::string::npos)
+				mask |= GraphicRenderInfo::INHERIT_OBJECTS;
+				
+			info->setInheritMask(mask);
+		}
 		
 		DEBUG5("registering renderinfo for %s",name.c_str());
 		loadRenderInfo(node,info);

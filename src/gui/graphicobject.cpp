@@ -64,9 +64,14 @@ void GraphicObject::addObjectsFromRenderInfo(GraphicRenderInfo* info)
 		addMovableObject(*it);
 	}
 	
-	GraphicRenderInfo* pinfo = info->getParentInfo();
-	if (pinfo != 0)
-		addObjectsFromRenderInfo(pinfo);
+	if (info->checkInheritMask(GraphicRenderInfo::INHERIT_OBJECTS))
+	{
+		GraphicRenderInfo* pinfo = info->getParentInfo();
+		if (pinfo != 0 )
+		{
+			addObjectsFromRenderInfo(pinfo);
+		}
+	}
 }
 
 Ogre::MovableObject* GraphicObject::getMovableObject(std::string name)
@@ -338,6 +343,8 @@ void GraphicObject::addMovableObject(MovableObjectInfo& object)
 		m_attached_objects[object.m_objectname].m_tagpoint = tag;
 		m_attached_objects[object.m_objectname].m_entity = ent;
 		m_attached_objects[object.m_objectname].m_highlight_entity = 0;
+		
+		DEBUG5("adding movable object with name %s (%s)",object.m_objectname.c_str(),obj->getName().c_str());
 	}
 	
 	// StartPosition und -Rotation setzen
@@ -468,7 +475,15 @@ void GraphicObject::initAttachedAction(AttachedAction& attchaction, std::string 
 	attchaction.m_current_action = action;
 	attchaction.m_current_percent = -0.00001;
 	
-	attchaction.m_arinfo = m_render_info->getActionRenderInfo(action,m_random_action_number);
+	attchaction.m_arinfo = m_render_info->getOwnActionRenderInfo(action,m_random_action_number);
+	attchaction.m_inherited = false;
+	
+	if (attchaction.m_arinfo == 0)
+	{
+		attchaction.m_arinfo = m_render_info->getActionRenderInfo(action,m_random_action_number);
+		attchaction.m_inherited = true;
+	}
+	
 	if (attchaction.m_arinfo !=0)
 	{
 		attchaction.m_time = attchaction.m_arinfo->m_time;
@@ -537,24 +552,31 @@ void GraphicObject::updateAttachedAction(AttachedAction& attchaction, std::strin
 			DEBUG5("render part %s",it->m_animation.c_str());
 			if (attchaction.m_current_percent < it->m_start_time && percent >= it->m_start_time)
 			{
-				DEBUG5("action %s: adding part %s",action.c_str(), it->m_animation.c_str());
-				addActiveRenderPart(&(*it));
-				if (it ->m_type != ActionRenderpart::DETACH)
+				if (attchaction.m_inherited == false || m_render_info->checkActionInheritMask(it->m_type))
 				{
-					attchaction.m_active_parts.push_back(&(*it));
+					DEBUG5("action %s: adding part %s",action.c_str(), it->m_animation.c_str());
+				
+					addActiveRenderPart(&(*it));
+					if (it ->m_type != ActionRenderpart::DETACH)
+					{
+						attchaction.m_active_parts.push_back(&(*it));
+					}
 				}
 			}
 		}
 		
 		
 		// Suche nach neuen grafischen Objekten
-		std::list< std::pair<float,MovableObjectInfo> >:: iterator mt;
-		for (mt = arinfo->m_new_objects.begin(); mt != arinfo->m_new_objects.end(); ++mt)
+		if (attchaction.m_inherited == false || m_render_info->checkInheritMask(GraphicRenderInfo::INHERIT_OBJECTS))
 		{
-			if (attchaction.m_current_percent < mt->first && percent >= mt->first)
+			std::list< std::pair<float,MovableObjectInfo> >:: iterator mt;
+			for (mt = arinfo->m_new_objects.begin(); mt != arinfo->m_new_objects.end(); ++mt)
 			{
-				DEBUG5("adding object %s",mt->second.m_objectname.c_str());
-				addMovableObject(mt->second);
+				if (attchaction.m_current_percent < mt->first && percent >= mt->first)
+				{
+					DEBUG5("adding object %s",mt->second.m_objectname.c_str());
+					addMovableObject(mt->second);
+				}
 			}
 		}
 		

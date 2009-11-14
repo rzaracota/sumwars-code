@@ -1,55 +1,55 @@
-<RenderInfo name="leathArm" parent="playerbase">
+<RenderInfo name="leathArm">
 	<Entity source="leathArm.mesh"/> 
 </RenderInfo>
-<RenderInfo name="leathArm#m" parent="playerbase">
+<RenderInfo name="leathArm#m" parent="playerbaseM" inherit="animation">
 	<Entity source="leathArmMW.mesh"/> 
 </RenderInfo>
-<RenderInfo name="leathArm#f" parent="playerbase">
+<RenderInfo name="leathArm#f" parent="playerbase" inherit="animation">
 	<Entity source="leathArmFA.mesh"/> 
 </RenderInfo>
 
-<RenderInfo name="mercArm" parent="playerbase">
+<RenderInfo name="mercArm">
 	<Entity source="merc_arm.mesh"/> 
 </RenderInfo>
-<RenderInfo name="mercArm#m" parent="playerbase">
+<RenderInfo name="mercArm#m" parent="playerbaseM" inherit="animation">
 	<Entity source="merc_armM.mesh"/> 
 </RenderInfo>
-<RenderInfo name="mercArm#f" parent="playerbase">
+<RenderInfo name="mercArm#f" parent="playerbase" inherit="animation">
 	<Entity source="merc_armF.mesh"/>
 </RenderInfo>
 
-<RenderInfo name="counclArm" parent="playerbase">
+<RenderInfo name="counclArm">
 	<Entity source="councl_arm.mesh"/> 
 </RenderInfo>
-<RenderInfo name="counclArm#m" parent="playerbase">
+<RenderInfo name="counclArm#m" parent="playerbaseM" inherit="animation">
 	<Entity source="councl_armMW.mesh"/> 
 </RenderInfo>
-<RenderInfo name="counclArm#f" parent="playerbase">
+<RenderInfo name="counclArm#f" parent="playerbase" inherit="animation">
 </RenderInfo>
-<RenderInfo name="counclArmTolec" parent="guardPole">
+<RenderInfo name="counclArmTolec" parent="guardPole" inherit="animation">
 	<Entity source="councl_armMW.mesh"/> 
 </RenderInfo>
 
-<RenderInfo name="counclRob" parent="playerbase">
+<RenderInfo name="counclRob">
 	<Entity source="councl_rob.mesh"/> 
 </RenderInfo>
-<RenderInfo name="counclRob#m" parent="playerbase">
+<RenderInfo name="counclRob#m" parent="playerbaseM" inherit="animation">
 	<Entity source="councl_robMM.mesh"/> 
 </RenderInfo>
-<RenderInfo name="counclRob#f" parent="playerbase">
+<RenderInfo name="counclRob#f" parent="playerbase" inherit="animation">
 </RenderInfo>
-<RenderInfo name="counclRobeSoren" parent="guardPole">
+<RenderInfo name="counclRobeSoren" parent="guardPole" inherit="animation">
 	<Entity source="councl_robMM.mesh"/>
 </RenderInfo>
 
-<RenderInfo name="necromancerRobe" parent="playerbase">
+<RenderInfo name="necromancerRobe">
 	<Entity source="necromancer_robe.mesh"/> 
 </RenderInfo>
-<RenderInfo name="necromancerRobe#m" parent="playerbase">
+<RenderInfo name="necromancerRobe#m" parent="playerbaseM" inherit="animation">
 	<Entity source="necromancer_robeM.mesh"/> 
 </RenderInfo>
-<RenderInfo name="necromancerRobe#f" parent="playerbase">
+<RenderInfo name="necromancerRobe#f" parent="playerbase" inherit="animation">
 </RenderInfo>
-<RenderInfo name="necromancerRobeEnemy" parent="necromancerBase">
+<RenderInfo name="necromancerRobeEnemy" parent="necromancerBase" inherit="animation">
 	<Entity source="necromancer_robeM.mesh"/>
 </RenderInfo>

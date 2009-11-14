@@ -1,31 +1,31 @@
-<RenderInfo name="leatherGloves" parent="playerbase">
+<RenderInfo name="leatherGloves">
 	<Entity source="leath_glv.mesh"/> 
 </RenderInfo>
-<RenderInfo name="leatherGloves#m" parent="playerbase">
+<RenderInfo name="leatherGloves#m" parent="playerbaseM" inherit="animation">
 	<Entity source="leath_glvM.mesh"/> 
 </RenderInfo>
-<RenderInfo name="leatherGloves#f" parent="playerbase">
+<RenderInfo name="leatherGloves#f" parent="playerbase" inherit="animation">
 	<Entity source="plate_glvF.mesh"/> 
 </RenderInfo>
 
-<RenderInfo name="gloves" parent="playerbase">
+<RenderInfo name="gloves">
 	<Entity source="plate_glv.mesh"/> 
 </RenderInfo>
-<RenderInfo name="gloves#m" parent="playerbase">
+<RenderInfo name="gloves#m" parent="playerbaseM" inherit="animation">
 	<Entity source="plate_glvM.mesh"/> 
 </RenderInfo>
-<RenderInfo name="gloves#f" parent="playerbase">
+<RenderInfo name="gloves#f" parent="playerbase" inherit="animation">
 	<Entity source="plate_glvF.mesh"/> 
 </RenderInfo>
 
-<RenderInfo name="sharkGloves" parent="playerbase">
+<RenderInfo name="sharkGloves">
 	<Entity source="shark_glv.mesh"/> 
 </RenderInfo>
-<RenderInfo name="sharkGloves#m" parent="playerbase">
+<RenderInfo name="sharkGloves#m" parent="playerbaseM" inherit="animation">
 	<Entity source="shark_glvM.mesh"/> 
 </RenderInfo>
-<RenderInfo name="sharkGloves#f" parent="playerbase">
+<RenderInfo name="sharkGloves#f" parent="playerbase" inherit="animation">
 </RenderInfo>
-<RenderInfo name="sharkGlovesGuard" parent="guardPole">
+<RenderInfo name="sharkGlovesGuard" parent="guardPole" inherit="animation">
 	<Entity source="shark_glvM.mesh"/>
 </RenderInfo>
