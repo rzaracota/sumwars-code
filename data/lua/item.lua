@@ -27,3 +27,8 @@ function hasItem(owner,item)
 		return false;
 	end;
 end;
+
+function hasCurrentItem()
+	return (getItemValue("type") ~= "noitem");
+end;
+	
