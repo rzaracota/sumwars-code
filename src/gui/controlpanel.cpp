@@ -60,6 +60,7 @@ ControlPanel::ControlPanel (Document* doc)
 	btn->setText("C");
 	btn->setWantsMultiClickEvents(false);
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&ControlPanel::onButtonCharInfoClicked, this));
+	
 
 	// Button Chat oeffnen
 	btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", "ChatOpenButton"));
@@ -69,6 +70,7 @@ ControlPanel::ControlPanel (Document* doc)
 	btn->setText("M");
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&ControlPanel::onButtonOpenChatClicked, this));
 	btn->setWantsMultiClickEvents(false);
+	btn->setTooltipText((CEGUI::utf8*) gettext("Chat"));
 
 	// Button SkillTree
 	btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", "SkillTreeButton"));
@@ -79,6 +81,7 @@ ControlPanel::ControlPanel (Document* doc)
 	btn->setID(0);
 	btn->setWantsMultiClickEvents(false);
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&ControlPanel::onButtonSkilltreeClicked, this));
+	
 
 	// Button Party
 	btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", "PartyButton"));
@@ -97,7 +100,7 @@ ControlPanel::ControlPanel (Document* doc)
 	btn->setText("Q");
 	btn->setWantsMultiClickEvents(false);
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&ControlPanel::onButtonQuestInfoClicked, this));
-
+	
 	// Button Speichern und Beenden
 	btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", "SaveExitButton"));
 	ctrl_panel->addChildWindow(btn);
@@ -198,6 +201,8 @@ void ControlPanel::update()
 		bar->setProgress(hperc);
 	}
 	out_stream.str("");
+	out_stream << gettext("Hitpoints");
+	out_stream << ": ";
 	out_stream << (int) player->getDynAttr()->m_health<<"/"<< (int) player->getBaseAttrMod()->m_max_health;
 	if (bar->getTooltipText() != out_stream.str())
 	{
@@ -212,6 +217,8 @@ void ControlPanel::update()
 		bar->setProgress(eperc);
 	}
 	out_stream.str("");
+	out_stream << gettext("Experience");
+	out_stream << ": ";
 	out_stream << (int) player->getDynAttr()->m_experience<<"/"<<(int) player->getBaseAttr()->m_max_experience;
 	if (bar->getTooltipText() != out_stream.str())
 	{
@@ -232,6 +239,13 @@ void ControlPanel::update()
 		{
 			imagename = iter->second.m_image;
 		}
+	}
+	
+	std::string tooltip;
+	tooltip= m_document->getAbilityDescription(name);
+	if (label->getTooltipText() != (CEGUI::utf8*) tooltip.c_str())
+	{
+		label->setTooltipText((CEGUI::utf8*) tooltip.c_str());
 	}
 	
 	if (imagename == "")
@@ -265,6 +279,12 @@ void ControlPanel::update()
 		{
 			imagename = iter->second.m_image;
 		}
+	}
+	
+	tooltip= m_document->getAbilityDescription(name);
+	if (label->getTooltipText() != (CEGUI::utf8*) tooltip.c_str())
+	{
+		label->setTooltipText((CEGUI::utf8*) tooltip.c_str());
 	}
 	
 	if (imagename == "")
@@ -320,6 +340,23 @@ void ControlPanel::updateTranslation()
 	
 	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("SaveExitButton"));
 	btn->setText((CEGUI::utf8*) gettext("Save & Exit"));
+	
+	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("InventoryButton"));
+	btn->setTooltipText((CEGUI::utf8*) gettext("Inventory"));
+	
+	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("CharInfoButton"));
+	btn->setTooltipText((CEGUI::utf8*) gettext("Character"));
+
+	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("SkillTreeButton"));
+	btn->setTooltipText((CEGUI::utf8*) gettext("Skilltree"));
+	
+	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow( "PartyButton"));
+	btn->setTooltipText((CEGUI::utf8*) gettext("Party"));
+	
+	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow( "QuestInfoButton"));
+	btn->setTooltipText((CEGUI::utf8*) gettext("Quests"));
+
+	
 }
 
 bool ControlPanel::onButtonSaveExitClicked(const CEGUI::EventArgs& evt)
