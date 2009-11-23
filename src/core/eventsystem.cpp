@@ -1035,7 +1035,7 @@ int EventSystem::addUnitCommand(lua_State *L)
 							com.m_range = range;
 					}
 					
-					if (argc>=5)
+					if (argc>=5 && lua_isstring(L,5))
 					{
 						std::string flags = lua_tostring(L,5);
 						char flg =0;
