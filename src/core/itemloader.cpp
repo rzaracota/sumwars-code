@@ -199,6 +199,7 @@ void ItemLoader::loadItem(TiXmlNode* node)
 				attr.getShort("ddexterity",item_data->m_equip_effect->m_ddexterity);
 				attr.getShort("dwillpower",item_data->m_equip_effect->m_dwillpower);
 				attr.getShort("dmagic_power",item_data->m_equip_effect->m_dmagic_power);
+				attr.getString("flag",item_data->m_equip_effect->m_flag);
 				
 				attr.getShort("dwalk_speed",item_data->m_equip_effect->m_dwalk_speed);
 				attr.getShort("dattack_speed",item_data->m_equip_effect->m_dattack_speed);

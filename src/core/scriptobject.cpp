@@ -92,48 +92,15 @@ void ScriptObject::writeNetEvent(NetEvent* event, CharConv* cv)
 {
 	WorldObject::writeNetEvent(event,cv);
 	
-	if (event->m_data & NetEvent::DATA_FLAGS)
-	{
-		cv->toBuffer<short>(m_flags.size());
-		std::set<std::string>::iterator it;
-		for (it = m_flags.begin(); it != m_flags.end(); ++it)
-		{
-			cv->toBuffer(*it);
-		}
-	}
+	
 }
 
 
 void ScriptObject::processNetEvent(NetEvent* event, CharConv* cv)
 {
 	WorldObject::processNetEvent(event,cv);
-	
-	if (event->m_data & NetEvent::DATA_FLAGS)
-	{
-		m_flags.clear();
-		std::string flag;
-		short nr;
-		cv->fromBuffer(nr);
-		for (int i=0; i<nr; i++)
-		{
-			cv->fromBuffer(flag);
-			m_flags.insert(flag);
-		}
-	}
 }
 
-void ScriptObject::setFlag(std::string flag, bool set)
-{
-	addToNetEventMask(NetEvent::DATA_FLAGS);
-	if (set == true)
-	{
-		m_flags.insert(flag);
-	}
-	else
-	{
-		m_flags.erase(flag);
-	}
-}
 
 void ScriptObject::addEvent(TriggerType trigger, Event* event)
 {

@@ -274,6 +274,7 @@
 			setBaseModValue("resist_ice",20);
 			setBaseModValue("resist_fire",20);
 			setBaseModValue("resist_air",20);
+			setBaseModValue("flag","bleed");
 		</LuaImplementation>
 	</BaseAttributesMod>
 </Ability>

@@ -354,6 +354,12 @@ struct CreatureBaseAttrMod
 	std::set<std::string> m_xabilities;
 	
 	/**
+	 * \var std::string m_flag
+	 * \brief das zugehoerige Flag wird bei Anwenden des Mods gesetzt und am Ende wieder entfernt
+	 */
+	std::string m_flag;
+	
+	/**
 	 * \var char m_ximmunity
 	 * \brief Bitmaske die die Aenderungen der Immunitäten angibt. Die angegebene Bitmaske wird mit OR zur bestehenden hinzugefügt.
 	 */

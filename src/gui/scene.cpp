@@ -662,17 +662,20 @@ void Scene::clearObjects()
 
 void Scene::createScene()
 {
-	DEBUG5("create Scene");
-	GraphicManager::clearParticlePool();
+	DEBUG("create Scene");
 
 	// alle bisherigen Objekte aus der Szene loeschen
 	clearObjects();
-	m_scene_manager->clearScene();
 	
 	GraphicManager::destroyGraphicObject(m_temp_player_object);
 	m_temp_player_object =0;
 	m_temp_player="";
 	SoundSystem::clearObjects();
+	
+	GraphicManager::clearParticlePool();
+	
+	m_scene_manager->clearScene();
+	
 	updateCharacterView();
 
 	// Liste der statischen Objekte

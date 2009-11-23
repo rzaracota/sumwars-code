@@ -314,6 +314,7 @@ void CreatureBaseAttrMod::init()
 	m_time =0;
 	m_xabilities.clear();
 	m_ximmunity =0;
+	m_flag = "";
 }
 
 
@@ -386,6 +387,11 @@ int CreatureBaseAttrMod::getValue(std::string valname)
 	else if (valname =="armor")
 	{
 		lua_pushinteger(EventSystem::getLuaState() , m_darmor );
+		return 1;
+	}
+	else if (valname =="flag")
+	{
+		lua_pushstring(EventSystem::getLuaState() , m_flag.c_str() );
 		return 1;
 	}
 	else if (valname =="resist_fire")
@@ -496,6 +502,12 @@ bool CreatureBaseAttrMod::setValue(std::string valname)
 	else if (valname =="armor")
 	{
 		m_darmor = lua_tointeger(EventSystem::getLuaState() ,-1);
+		lua_pop(EventSystem::getLuaState(), 1);
+		return true;
+	}
+	else if (valname =="flag")
+	{
+		m_flag = lua_tostring(EventSystem::getLuaState() ,-1);
 		lua_pop(EventSystem::getLuaState(), 1);
 		return true;
 	}

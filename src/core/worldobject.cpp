@@ -121,6 +121,13 @@ void WorldObject::toString(CharConv* cv)
 	cv->toBuffer(m_fraction);
 	cv->toBuffer(m_race);
 	cv->toBuffer(m_interaction_flags);
+	
+	cv->toBuffer<short>(m_flags.size());
+	std::set<std::string>::iterator it;
+	for (it = m_flags.begin(); it != m_flags.end(); ++it)
+	{
+		cv->toBuffer(*it);
+	}
 }
 
 void WorldObject::fromString(CharConv* cv)
@@ -131,6 +138,16 @@ void WorldObject::fromString(CharConv* cv)
 	cv->fromBuffer(m_fraction);	
 	cv->fromBuffer(m_race);
 	cv->fromBuffer(m_interaction_flags);
+	
+	m_flags.clear();
+	std::string flag;
+	short nr;
+	cv->fromBuffer(nr);
+	for (int i=0; i<nr; i++)
+	{
+		cv->fromBuffer(flag);
+		m_flags.insert(flag);
+	}
 }
 
 
@@ -293,6 +310,16 @@ void WorldObject::writeNetEvent(NetEvent* event, CharConv* cv)
 	{
 		cv->toBuffer(m_name);
 	}
+	
+	if (event->m_data & NetEvent::DATA_FLAGS)
+	{
+		cv->toBuffer<short>(m_flags.size());
+		std::set<std::string>::iterator it;
+		for (it = m_flags.begin(); it != m_flags.end(); ++it)
+		{
+			cv->toBuffer(*it);
+		}
+	}
 }
 
 void WorldObject::processNetEvent(NetEvent* event, CharConv* cv)
@@ -324,6 +351,19 @@ void WorldObject::processNetEvent(NetEvent* event, CharConv* cv)
 		cv->fromBuffer(name);
 		m_name = name;
 	}
+	
+	if (event->m_data & NetEvent::DATA_FLAGS)
+	{
+		m_flags.clear();
+		std::string flag;
+		short nr;
+		cv->fromBuffer(nr);
+		for (int i=0; i<nr; i++)
+		{
+			cv->fromBuffer(flag);
+			m_flags.insert(flag);
+		}
+	}
 }
 
 void WorldObject::setAnimation(std::string anim, float time, bool repeat)
@@ -334,4 +374,17 @@ void WorldObject::setAnimation(std::string anim, float time, bool repeat)
 	m_animation_repeat = repeat;
 	
 	addToNetEventMask(NetEvent::DATA_ACTION);
+}
+
+void WorldObject::setFlag(std::string flag, bool set)
+{
+	addToNetEventMask(NetEvent::DATA_FLAGS);
+	if (set == true)
+	{
+		m_flags.insert(flag);
+	}
+	else
+	{
+		m_flags.erase(flag);
+	}
 }

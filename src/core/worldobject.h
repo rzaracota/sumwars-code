@@ -384,6 +384,24 @@ class WorldObject : public GameObject
 		void setAnimation(std::string anim, float time, bool repeat = false);
 		
 		/**
+		 * \fn virtual void getFlags(std::set<std::string>& flags)
+		 * \brief Gibt den Status der bekannten Flags aus
+		 * \param flags Ausgabeparameter: Flags
+		 */
+		virtual void getFlags(std::set<std::string>& flags)
+		{
+			flags = m_flags;
+		}
+		
+		/**
+		 * \fn void setFlag(std::string flag, bool set= true)
+		 * \brief Setzt oder entfernt ein Flag
+		 * \param flag Name des Flags
+		 * \param set wenn set gleich true, so wird das Flag gesetzt, ansonsten wird es entfernt
+		 */
+		void setFlag(std::string flag, bool set= true);
+		
+		/**
 		 * \fn std::string getName()
 		 * \brief Gibt den Name des Objektes aus
 		 */
@@ -465,7 +483,11 @@ private:
 		 */
 	bool m_animation_repeat;
 
-	
+	/**
+	 * \var std::set<std::string> m_flags
+	 * \brief Gesetzte Flags des Scriptobject
+	 */
+	std::set<std::string> m_flags;
 	
 };
 

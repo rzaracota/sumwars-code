@@ -99,7 +99,9 @@ void EventSystem::init()
 	lua_register(m_lua, "setUnitAction", setUnitAction);
 	lua_register(m_lua, "setObjectAnimation",setObjectAnimation);
 	lua_register(m_lua, "setScriptObjectFlag",setScriptObjectFlag);
-	lua_register(m_lua, "getScriptObjectFlag",getScriptObjectFlag);	
+	lua_register(m_lua, "getScriptObjectFlag",getScriptObjectFlag);
+	lua_register(m_lua, "setObjectFlag",setScriptObjectFlag);
+	lua_register(m_lua, "getObjectFlag",getScriptObjectFlag);		
 	lua_register(m_lua, "setCutsceneMode", setCutsceneMode);
 	lua_register(m_lua, "addCameraPosition", addCameraPosition);
 	
@@ -1217,7 +1219,7 @@ int EventSystem::setScriptObjectFlag(lua_State *L)
 		std::string flag = lua_tostring(L,2);
 
 		
-		ScriptObject* wo = dynamic_cast<ScriptObject*> (m_region->getObject(id));
+		WorldObject* wo =  m_region->getObject(id);
 		if (wo !=0)
 		{
 			bool set = true;
@@ -1247,7 +1249,7 @@ int EventSystem::getScriptObjectFlag(lua_State *L)
 		std::string flag = lua_tostring(L,2);
 
 		
-		ScriptObject* wo = dynamic_cast<ScriptObject*> (m_region->getObject(id));
+		WorldObject* wo = m_region->getObject(id);
 		if (wo !=0)
 		{
 			std::set<std::string> flags;

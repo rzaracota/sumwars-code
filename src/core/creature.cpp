@@ -3491,6 +3491,12 @@ void Creature::applyBaseAttrMod(CreatureBaseAttrMod* mod, bool add)
 		m_base_attr_mod.m_abilities[*it].m_time =0;
 		addToNetEventMask(NetEvent::DATA_ABILITIES);
 	}
+	
+	// Flags setzen
+	if (mod->m_flag != "")
+	{
+		setFlag(mod->m_flag, true);
+	}
 
 	// Flags mit OR hinzufuegen
 	m_base_attr_mod.m_special_flags |= mod->m_xspecial_flags;
@@ -3556,8 +3562,14 @@ bool Creature::removeBaseAttrMod(CreatureBaseAttrMod* mod)
 
 	}
 
-	// Wenn Faehigkeit veraendert wurde neu berechnen
+	// Flags entfernen
+	if (mod->m_flag != "")
+	{
+		setFlag(mod->m_flag, false);
+		ret = true;
+	}
 	
+	// Wenn Faehigkeit veraendert wurde neu berechnen
 	if ( mod->m_xabilities.size() !=0)
 	{
 		ret = true;
@@ -4643,6 +4655,8 @@ float Creature::getActionPercent()
 
 void Creature::getFlags(std::set<std::string>& flags)
 {
+	WorldObject::getFlags(flags);
+	
 	// Statusmods
 	float* mods = m_dyn_attr.m_status_mod_time;
 	static const std::string modnames[NR_STATUS_MODS]= {"blind", "poisoned", "berserk","confused", "mute", "paralyzed", "frozen", "burning" };

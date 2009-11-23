@@ -98,23 +98,6 @@ class ScriptObject: public WorldObject
 		 */
 		virtual void processNetEvent(NetEvent* event, CharConv* cv);
 		
-		/**
-		 * \fn virtual void getFlags(std::set<std::string>& flags)
-		 * \brief Gibt den Status der bekannten Flags aus
-		 * \param flags Ausgabeparameter: Flags
-		 */
-		virtual void getFlags(std::set<std::string>& flags)
-		{
-			flags = m_flags;
-		}
-		
-		/**
-		 * \fn void setFlag(std::string flag, bool set= true)
-		 * \brief Setzt oder entfernt ein Flag
-		 * \param flag Name des Flags
-		 * \param set wenn set gleich true, so wird das Flag gesetzt, ansonsten wird es entfernt
-		 */
-		void setFlag(std::string flag, bool set= true);
 		
 		/**
 		 * \fn void addEvent(TriggerType type, Event* event)
@@ -138,11 +121,7 @@ class ScriptObject: public WorldObject
 		 */
 		std::string m_render_info;
 		
-		/**
-		 * \var std::set<std::string> m_flags
-		 * \brief Gesetzte Flags des Scriptobject
-		 */
-		std::set<std::string> m_flags;
+		
 		
 		/**
 		 * \var std::multimap<TriggerType, Event*> m_events
