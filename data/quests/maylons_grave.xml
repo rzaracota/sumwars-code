@@ -113,8 +113,8 @@
 	<Region name="aisMaylonsGraveL1">
 		<Event trigger ="create_region" once = "true">
 			<Effect>
-				addArea("GabReshGoblinArea","circle","cryptGoblins",15);
-				addArea("GabReshArea","circle","cryptGoblins",5);
+				addArea("GabReshGoblinArea",{"circle","cryptGoblins",15});
+				addArea("GabReshArea",{"circle","cryptGoblins",5});
 			if (maylons_grave.goblins_killed ~= true) then
 					maylons_grave_tmp.Goblin1 = createObject("goblin", "cryptGoblins");
 					maylons_grave_tmp.Goblin2 = createObject("goblin", "cryptGoblins");
@@ -170,7 +170,7 @@
 	<Region name="aisMaylonsGraveL2">
 		<Event trigger ="create_region" once = "true">
 			<Effect>
-				addArea("MaylonUndeadArea","circle","graveChamber:cryptGraveChamber",15);
+				addArea("MaylonUndeadArea",{"circle","graveChamber:cryptGraveChamber",15});
 				if (maylons_grave.freed ~= true) then
 					createMonsterGroup("undead_weak","graveChamber:cryptGraveChamber");
 					createMonsterGroup("lich_skeletons","graveChamber:cryptGraveChamber");

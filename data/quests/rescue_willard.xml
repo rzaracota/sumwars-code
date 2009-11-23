@@ -247,8 +247,8 @@
 	<Region name="aisMeadow">
 		<Event trigger ="create_region" once = "true">
 			<Effect>
-				addArea('WillardArea','circle','locWillard',20);
-				addArea('WillardEnemiesArea','circle','locWillard',15);
+				addArea('WillardArea',{'circle','willard:locWillard',20});
+				addArea('WillardEnemiesArea',{'circle','willard:locWillard',15});
 				local list = getMonstersInArea('WillardEnemiesArea')
 				if (rescue_willard_tmp.freed ~= true) then
 					rescue_willard_tmp.monsters = createMonsterGroup("willard_goblins","willard:locWillard")

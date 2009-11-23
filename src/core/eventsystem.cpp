@@ -370,31 +370,58 @@ Vector EventSystem::getVector(lua_State *L, int index)
 	return Vector(0,0);
 }
 
-Shape EventSystem::getArea(lua_State *L, int& index)
+Shape EventSystem::getArea(lua_State *L, int index)
 {
 	Shape s;
+	s.m_center = Vector(0,0);
 	if (lua_isstring(L,index))
 	{
 		std::string name = lua_tostring(L, index);
-		if (name =="circle" || name =="rect")
+		return m_region->getArea(name);
+	}
+	else if (lua_istable(L,index))
+	{
+		int idx = index;
+		if (index <0)
+			idx --;
+		
+		lua_pushinteger(L, 1);
+		lua_gettable(L, idx);
+		std::string type = lua_tostring(L, -1);
+		lua_pop(L, 1);
+		
+		if (type =="circle" || type =="rect")
 		{
-			s.m_center = getVector(L,index+1);
-			if (name =="circle")
+			lua_pushinteger(L, 2);
+			lua_gettable(L, idx);
+			s.m_center = getVector(L,-1);
+			lua_pop(L, 1);
+			
+			if (type =="circle")
 			{
 				s.m_type = Shape::CIRCLE;
-				s.m_radius = lua_tonumber(L,index+2);
+				lua_pushinteger(L, 3);
+				lua_gettable(L, idx);
+				s.m_radius = lua_tonumber(L, -1);
+				lua_pop(L, 1);
 			}
 			else
 			{
 				s.m_type = Shape::RECT;
-				s.m_extent = getVector(L,index+2);
+				lua_pushinteger(L, 3);
+				lua_gettable(L, idx);
+				s.m_extent = getVector(L,-1);
+				lua_pop(L, 1);
 			}
-			index +=2;
 		}
 		else
 		{
-			return m_region->getArea(name);
+			ERRORMSG("getArea: ungueltige Typ fuer Area (muss circle oder rect sein)");
 		}
+	}
+	else
+	{
+		ERRORMSG("getArea: ungueltige Eingabe fuer Area");
 	}
 	
 	
@@ -750,8 +777,7 @@ int EventSystem::unitIsInArea(lua_State *L)
 			WorldObject* wo = m_region->getObject(id);
 			if (wo !=0)
 			{
-				int idx=2;
-				ret = getArea(L,idx).intersects(*(wo->getShape()));
+				ret = getArea(L,2).intersects(*(wo->getShape()));
 			}
 			else
 			{
@@ -773,7 +799,7 @@ int EventSystem::pointIsInArea(lua_State *L)
 {
 	bool ret =false;
 	int argc = lua_gettop(L);
-	if (argc>=2 && (lua_istable(L,1) || lua_isstring(L,1)) && lua_isstring(L,2))
+	if (argc>=2 && (lua_istable(L,1) || lua_isstring(L,1)) && (lua_istable(L,2) || lua_isstring(L,2)))
 	{
 		Vector c = getVector(L,1);
 
@@ -784,8 +810,7 @@ int EventSystem::pointIsInArea(lua_State *L)
 
 		if (m_region !=0)
 		{
-			int idx=2;
-			ret = getArea(L,idx).intersects(s);
+			ret = getArea(L,2).intersects(s);
 		}
 
 	}
@@ -889,13 +914,12 @@ int  EventSystem::createScriptObject(lua_State *L)
 		wo->setRenderInfo(render_info);
 		
 		Shape* ps = wo->getShape();
-		int idx=3;
-		*ps = getArea(L,idx);
+		*ps = getArea(L,3);
 		
 		short layer = WorldObject::LAYER_NOCOLLISION;
-		if (argc>=6 && lua_isstring(L,6))
+		if (argc>=4 && lua_isstring(L,4))
 		{
-			std::string lstr = lua_tostring(L,6);
+			std::string lstr = lua_tostring(L,4);
 			if (lstr == "base")
 			{
 				layer = WorldObject::LAYER_BASE;
@@ -922,7 +946,7 @@ int  EventSystem::createScriptObject(lua_State *L)
 	}
 	else
 	{
-		ERRORMSG("Syntax: createScriptObject( string subtype, string renderinfo, 'circle' | 'rect',{float posx, float posx}, {float extentx, float extentx} | radius), [layer]");
+		ERRORMSG("Syntax: createScriptObject( string subtype, string renderinfo, {'circle' | 'rect',{float posx, float posx}, {float extentx, float extentx} | radius}, [layer]");
 	}
 	lua_pushinteger(EventSystem::getLuaState() , ret);
 	return 1;
@@ -1299,19 +1323,18 @@ int EventSystem::getObjectsInArea(lua_State *L)
 {
 	int argc = lua_gettop(L);
 	lua_newtable(L);
-	if (argc>=1 && lua_isstring(L,1))
+	if (argc>=1 && (lua_isstring(L,1) || lua_istable(L,1)))
 	{
 		if (m_region !=0)
 		{
 			WorldObjectList obj;
 			WorldObjectList::iterator it;
-			int idx = 1;
-			Shape s = getArea(L,idx);
+			Shape s = getArea(L,1);
 
 			short layer = WorldObject::WorldObject::LAYER_BASE | WorldObject::LAYER_AIR;
-			if (argc>=idx+1 && lua_isstring(L,idx+1))
+			if (argc>=3 && lua_isstring(L,3))
 			{
-				std::string lstr = lua_tostring(L,idx+1);
+				std::string lstr = lua_tostring(L,3);
 				if (lstr == "base")
 				{
 					layer = WorldObject::LAYER_BASE;
@@ -1331,11 +1354,11 @@ int EventSystem::getObjectsInArea(lua_State *L)
 			}
 
 			short group = WorldObject::GROUP_ALL;
-			if (argc>=idx+2 && lua_isstring(L,idx+2))
+			if (argc>=2 && lua_isstring(L,2))
 			{
 
-				std::string gstr = lua_tostring(L,idx+2);
-				if (gstr == "unit")
+				std::string gstr = lua_tostring(L,2);
+				if (gstr == "unit" || gstr == "creature")
 				{
 					group = WorldObject::CREATURE;
 				}
@@ -1365,7 +1388,7 @@ int EventSystem::getObjectsInArea(lua_State *L)
 	}
 	else
 	{
-		ERRORMSG("Syntax: getObjectsInArea(string areaname)")
+		ERRORMSG("Syntax: getObjectsInArea(string areaname, string objectgroup, string layer)")
 	}
 
 
@@ -1744,13 +1767,10 @@ int EventSystem::getLocation(lua_State *L)
 int EventSystem::addArea(lua_State *L)
 {
 	int argc = lua_gettop(L);
-	if (argc>=4 && lua_isstring(L,1) && lua_isstring(L,2) && (lua_istable(L,3) || lua_isstring(L,3)) )
+	if (argc>=2 && lua_isstring(L,1) && (lua_isstring(L,2) || (lua_istable(L,2)) ))
 	{
 		AreaName area = lua_tostring(L, 1);
-		std::string type = lua_tostring(L, 2);
-
-		int idx =2;
-		Shape s=getArea(L,idx);
+		Shape s=getArea(L,2);
 
 		if (m_region !=0)
 		{

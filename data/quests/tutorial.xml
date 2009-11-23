@@ -28,10 +28,10 @@
 		<Event trigger="create_region" once="true">
 			<Effect>
 				if (tutorial.finished == false) then
-					addArea("entryPlayerArea","circle","locEntryPlayer",5);
-					addArea("dangerArea","circle","locBackroute2",4);
-					addArea("locDoorArea","circle","locLibrarySecretDoor",3);
-					addArea("mutantSlugsArea","rect","locBackroute3",{5,5});
+					addArea("entryPlayerArea",{"circle","locEntryPlayer",5});
+					addArea("dangerArea",{"circle","locBackroute2",4});
+					addArea("locDoorArea",{"circle","locLibrarySecretDoor",3});
+					addArea("mutantSlugsArea",{"rect","locBackroute3",{5,5}});
 					
 					
 					local tolecpos = "locTolec";
@@ -1461,7 +1461,7 @@
 				return (unitIsInArea(trigger.player,"stupidLabSpeech") and tutorial.lab_comment ~= true);
 			</Condition>
 			<Effect>
-				local players = getObjectsInArea("circle",get(trigger.player,"position"),15,"normal","player");
+				local players = getObjectsInArea({"circle",get(trigger.player,"position"),15},"player");
 				tutorial.lab_comment = true;
 				
 				createDialogue();

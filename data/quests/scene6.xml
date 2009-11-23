@@ -73,8 +73,6 @@
 	<Region name="greyCurseCaveFis">
 		<Event trigger="create_region" once="true">
 			<Effect>
-				addArea("greyCurseCaveFisEntrySouthArea","circle","entry_south",10);
-				-- addArea("aisMounPathPartyArea","circle","locParty",3);
 			</Effect>
 		</Event>
 		

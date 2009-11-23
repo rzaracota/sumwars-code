@@ -83,11 +83,11 @@ end;
 
 -- Objekte mit bestimmten Eigenschaften herrausfiltern
 function getPlayersInArea(area)
-		return getObjectsInArea(area,"normal","player");
+		return getObjectsInArea(area,"player");
 end;
 
 function getMonstersInArea(area)
-		return filter(getObjectsInArea(area,"normal","monster"),isMonster);
+		return getObjectsInArea(area,"monster");
 end;
 
 function getPartyleader()

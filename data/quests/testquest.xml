@@ -55,12 +55,4 @@
 			</Effect>
 		</Topic>
 	</NPC>
-	
-	<Region name="medMercCamp">
-		<Event trigger="create_region" once="true">
-			<Effect>
-				addArea("medBackalleyEntrySouthArea","circle","entry_south",5);
-			</Effect>
-		</Event>
-	<Region>
 </Quest>

@@ -8,7 +8,7 @@
 		if (herbalist.finished) then
 			return _("Und wieder eine gute Tat mehr. Ich koennte mich fast daran gewoehnen.")
 		else
-			return _("Die Kraeuterfrau aus Joringsbrueck will die Beeren von 10 Büschen haben.")
+			return _("Die Kraeuterfrau aus Joringsbrueck will die Beeren von 10 Bï¿½schen haben.")
 		end
 	</Description>
 	
@@ -41,7 +41,7 @@
 				setTopicBase("Gertlinde Kampfer");
 				setDialogueActive(false);
 				herbalist_tmp.player = trigger.player;
-				addArea("areaHerbQuest","circle",get(trigger.player,"position"),5);
+				addArea("areaHerbQuest",{"circle",get(trigger.player,"position"),5});
 				local players = getPlayersInArea("areaHerbQuest");
 				addPlayersToDialog(players);
 				players = listToSet(players);

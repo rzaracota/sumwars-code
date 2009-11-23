@@ -58,7 +58,7 @@
 	<Region name="aisWolfstones">
 		<Event trigger="create_region" once="true">
 			<Effect>
-				addArea("aisWolfstonesEntrySouthArea","circle","entry_south",5);
+				addArea("aisWolfstonesEntrySouthArea",{"circle","entry_south",5});
 			</Effect>
 		</Event>
 		

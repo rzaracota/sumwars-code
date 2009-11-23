@@ -302,7 +302,7 @@
 	<Region name="aisNorthMeadow">
 		<Event trigger ="create_region" once = "true">
 			<Effect>
-				addArea("DoorEnemiesArea","circle","door",15)
+				addArea("DoorEnemiesArea",{"circle","door",15})
 				if (besieged_farm.freed ~= true) then
 					besieged_farm_tmp.monsters = createMonsterGroup("goblins","door")
 				end
@@ -340,7 +340,7 @@
 	<Region name="joringsbridge">
 		<Event trigger="create_region" once="true">
 			<Effect>
-				addArea("JoringsbridgeEntryWestArea","circle","entry_west",8);
+				addArea("JoringsbridgeEntryWestArea",{"circle","entry_west",8});
 			</Effect>
 		</Event>
 		

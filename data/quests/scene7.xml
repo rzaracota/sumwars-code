@@ -59,7 +59,6 @@
 	<Region name="greyCurseLake">
 		<Event trigger="create_region" once="true">
 			<Effect>
-				addArea("greyCurseLakeEntryWestArea","circle","entry_west",5);
 			</Effect>
 		</Event>
 		

@@ -136,7 +136,7 @@
 	<Region name="medBackalley">
 		<Event trigger="create_region" once="true">
 			<Effect>
-				addArea("medBackalleyEntrySouthArea","circle","entry_south",5);
+				addArea("medBackalleyEntrySouthArea",{"circle","entry_south",5});
 			</Effect>
 		</Event>
 		

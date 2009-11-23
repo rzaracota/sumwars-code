@@ -23,7 +23,9 @@ void WorldLoader::loadEvent( TiXmlNode* node, Event *ev, TriggerType &type)
 	{
 		if (!strcmp(child->Value(), "Condition"))
 		{
-			text = child->FirstChild()->ToText();
+			text =0;
+			if (child->FirstChild()!=0)
+				text = child->FirstChild()->ToText();
 			if (text != 0)
 			{
 				ev->setCondition(text->Value());
@@ -31,7 +33,9 @@ void WorldLoader::loadEvent( TiXmlNode* node, Event *ev, TriggerType &type)
 		}
 		else if (!strcmp(child->Value(), "Effect"))
 		{
-			text = child->FirstChild()->ToText();
+			text =0;
+			if (child->FirstChild()!=0)
+				text = child->FirstChild()->ToText();
 			if (text != 0)
 			{
 				ev->setEffect(text->Value());
