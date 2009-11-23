@@ -262,7 +262,7 @@ void  Player::revive()
 	}
 
 	setState(STATE_ACTIVE,false);
-	clearCommand(false);
+	clearCommand(false,true);
 	getNextCommand()->m_type = "noaction";
 	getNextCommand()->m_damage_mult = 1;
 	getNextCommand()->m_goal = Vector(0,0);
@@ -800,7 +800,7 @@ bool Player::onItemClick(ClientCommand* command)
 					setPortalPosition(regloc);
 					
 					getRegion()->insertPlayerTeleport(getId(), m_revive_position);
-					clearCommand(true);
+					clearCommand(true,true);
 				}
 				else
 				{
@@ -1364,7 +1364,7 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 					regloc.first = winfos[command->m_id].m_name;
 					regloc.second="WaypointLoc";
 					getRegion()->insertPlayerTeleport(getId(), regloc);
-					clearCommand(true);
+					clearCommand(true,true);
 				}
 				else if (command->m_id == -999 && m_portal_position.first != "")
 				{
@@ -1373,7 +1373,7 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 					regloc.first = "";
 					regloc.second="";
 					setPortalPosition(regloc);
-					clearCommand(true);
+					clearCommand(true,true);
 				}
 			}
 			break;

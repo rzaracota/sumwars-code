@@ -130,7 +130,7 @@ bool Creature::init()
 
 	setState(STATE_ACTIVE,false);
 	m_script_command_timer =0;
-	clearCommand(true);
+	clearCommand(true,true);
 	
 	m_action.m_action_equip = Action::NO_WEAPON;
 	m_action.m_elapsed_time = 0.0;
@@ -391,13 +391,14 @@ void Creature::initAction()
 	
 	if (m_action.m_time ==0)
 	{
-		ERRORMSG("Aktion mit Dauer 0 erzeugt fuer Kommand %s",m_command.m_type.c_str());
+		clearCommand(false,true);
+		m_action.m_type = "noaction";
 	}
 	
 	// wenn keine Aktion berechnet wurde, Kommando beenden
 	if (m_action.m_type == "noaction" && m_command.m_type !="noaction")
 	{
-		clearCommand(false);
+		clearCommand(false,true);
 	}
 	DEBUG5("action %s time %f angle %f",m_action.m_type.c_str(), m_action.m_time,getShape()->m_angle);
 }
@@ -449,7 +450,7 @@ void Creature::performAction(float &time)
 		if (m_script_command_timer<=0)
 		{
 			m_script_command_timer += time;
-			clearCommand(false);
+			clearCommand(false,false);
 		}
 	}
 
@@ -482,7 +483,7 @@ void Creature::performAction(float &time)
 	{	
 		ERRORMSG("action information missing for action %s",m_action.m_type.c_str());
 		m_action.m_type ="noaction";
-		clearCommand(false);
+		clearCommand(false,true);
 		return;
 		
 	}
@@ -674,7 +675,7 @@ void Creature::performAction(float &time)
 			{
 				addToNetEventMask(NetEvent::DATA_COMMAND);
 				DEBUG5("goal %f %f goalobj %i",goal.m_x, goal.m_y, m_action.m_goal_object_id);
-				clearCommand(true);
+				clearCommand(true,false);
 			}
 			m_command.m_type = "noaction";
 			m_action.m_elapsed_time=0;
@@ -1292,9 +1293,9 @@ void Creature::collisionDetection(float time)
 		{
 			m_pathfind_counter +=15;
 			DEBUG5("counter %f",m_pathfind_counter);
-			if (m_pathfind_counter>=30)
+			if (m_pathfind_counter>=50)
 			{
-				clearCommand(false);
+				clearCommand(false,true);
 			}
 		}
 
@@ -1596,7 +1597,7 @@ void Creature::calcAction()
 			// Zielobjekt existiert nicht mehr, abbrechen
 			m_action.m_type = "noaction";
 			m_action.m_elapsed_time =0;
-			clearCommand(false);
+			clearCommand(false,true);
 			return;
 		}
 
@@ -1606,7 +1607,7 @@ void Creature::calcAction()
 			DEBUG5("refused to interact with inactive object %i",m_command.m_goal_object_id);
 			m_action.m_type = "noaction";
 			m_action.m_elapsed_time =0;
-			clearCommand(false);
+			clearCommand(false,true);
 			return;
 		}
 
@@ -1626,7 +1627,7 @@ void Creature::calcAction()
 			// Zielobjekt existiert nicht mehr, abbrechen
 			m_action.m_type = "noaction";
 			m_action.m_elapsed_time =0;
-			clearCommand(false);
+			clearCommand(false,true);
 			return;
 		}
 		else
@@ -1664,7 +1665,7 @@ void Creature::calcAction()
 			else
 			{
 				m_action.m_type = "noaction";
-				clearCommand(true);
+				clearCommand(true,false);
 			}
 
 		}
@@ -1744,7 +1745,7 @@ void Creature::calcAction()
 	// wenn keine Aktion berechnet wurde, Kommando beenden
 	if (m_action.m_type == "noaction")
 	{
-		clearCommand(true);
+		clearCommand(true,false);
 	}
 }
 
@@ -2066,7 +2067,7 @@ void Creature::calcWalkDir(Vector goal,WorldObject* goalobj)
 	
 	if (dir.getLength() ==0)
 	{
-		clearCommand(true);
+		clearCommand(true,false);
 		m_action.m_type = "noaction";
 		m_action.m_elapsed_time =0;
 		m_command.m_damage_mult=1;
@@ -2081,9 +2082,9 @@ void Creature::calcWalkDir(Vector goal,WorldObject* goalobj)
 		{
 			m_pathfind_counter +=10;
 			DEBUG5("counter %f",m_pathfind_counter);
-			if (m_pathfind_counter >= 30)
+			if (m_pathfind_counter >= 50)
 			{
-				clearCommand(false);
+				clearCommand(false,true);
 				m_action.m_type = "noaction";
 				m_action.m_elapsed_time =0;
 				m_command.m_damage_mult=1;
@@ -2102,7 +2103,7 @@ void Creature::calcWalkDir(Vector goal,WorldObject* goalobj)
 	}
 }
 
-void Creature::clearCommand(bool success)
+void Creature::clearCommand(bool success, bool norepeat)
 {
 	DEBUG5("%s clear command %s %f",getRefName().c_str(),m_command.m_type.c_str() , m_script_command_timer);
 	if (hasScriptCommand() && m_command.m_type!= "noaction")
@@ -2115,6 +2116,13 @@ void Creature::clearCommand(bool success)
 		tr->addVariable("success",success);
 		tr->addVariable("last_command",!(hasScriptCommand()));
 		getRegion()->insertTrigger(tr);
+		
+		// ein wiederholtes Kommando bleibt in der Script Kommand Queue
+		// und muss deshalb auch von dort entfernt werden
+		if (norepeat && (m_command.m_flags & Command::REPEAT) && !m_script_commands.empty())
+		{
+			m_script_commands.pop_front();
+		}
 	}
 	m_command.m_type = "noaction";
 	m_command.m_damage_mult = 1;
@@ -3414,7 +3422,7 @@ void Creature::applyDynAttrMod(CreatureDynAttrMod* mod)
 			
 			if (i==Damage::CONFUSED || i==Damage::BERSERK)
 			{
-				clearCommand(true);
+				clearCommand(true,false);
 				addToNetEventMask(NetEvent::DATA_COMMAND | NetEvent::DATA_ACTION);
 				
 			}
@@ -4576,7 +4584,7 @@ void Creature::setDialogue(int id)
 		{
 			getAction()->m_type = "noaction";
 			m_action.m_elapsed_time =0;
-			clearCommand(true);
+			clearCommand(true,true);
 		}
 	}
 }

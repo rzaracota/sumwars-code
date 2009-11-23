@@ -260,11 +260,12 @@ public:
 	void calcWalkDir(Vector goal,WorldObject* goalobj);
 	
 	/**
-	 * \fn void clearCommand(bool success)
+	 * \fn void clearCommand(bool success, bool norepeat = true)
 	 * \brief Bricht das aktuelle Kommando ab
 	 * \param success Gibt an, ob die Ausfuehrung erfolgreich war
+	 * \param norepeat Wenn auf true gesetzt, so werden auch wird ein zu wiederholendes Kommando komplett abgebrochen (nicht nur der aktuelle Durchlauf)
 	 */
-	virtual void clearCommand(bool success);
+	virtual void clearCommand(bool success, bool norepeat = true);
 	
 	/**
 	 * \fn virtual void toString(CharConv* cv)
