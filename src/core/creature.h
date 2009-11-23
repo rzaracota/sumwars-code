@@ -467,8 +467,8 @@ public:
 	 */
 	virtual std::string getName()
 	{
-		if (m_name == "")
-			return getRefName();
+		if (m_name == "" && m_refname != "")
+			return m_refname;
 			
 		return WorldObject::getName();
 	}
