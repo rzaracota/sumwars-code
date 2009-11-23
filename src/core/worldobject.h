@@ -382,6 +382,25 @@ class WorldObject : public GameObject
 		 * \param wenn auf true gesetzt, wird die Animation wiederholt, bis eine andere gesetzt wird
 		 */
 		void setAnimation(std::string anim, float time, bool repeat = false);
+		
+		/**
+		 * \fn std::string getName()
+		 * \brief Gibt den Name des Objektes aus
+		 */
+		virtual std::string getName()
+		{
+			if (m_name != "")
+				return m_name;
+			
+			return GameObject::getName();
+		}
+		
+		/**
+		 * \fn void setName(std::string name)
+		 * \brief Setzt den Name des Spielers
+		 * \param name Name
+		 */
+		void setName(std::string name);
 
 	protected:
 		
@@ -403,6 +422,12 @@ class WorldObject : public GameObject
 	 * \brief einige Flags fuer die Interaktion
 	 */
 	char m_interaction_flags;
+	
+	/**
+	 * \var std::string m_name
+	 * \brief Name des Objektes, wenn kein Name gesetzt ist, sowird er  aus dem Typ abgeleitet
+	 */
+	std::string m_name;
 		
 //Private stuff
 private:

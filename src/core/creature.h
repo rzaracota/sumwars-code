@@ -458,6 +458,19 @@ public:
 	void setRefName(std::string name)
 	{
 		m_refname = name;
+		addToNetEventMask(NetEvent::DATA_NAME);
+	}
+	
+	/**
+	 * \fn std::string getName()
+	 * \brief Gibt den Name des Objektes aus
+	 */
+	virtual std::string getName()
+	{
+		if (m_name == "")
+			return getRefName();
+			
+		return WorldObject::getName();
 	}
 	
 	/**

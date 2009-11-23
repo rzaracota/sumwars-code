@@ -492,15 +492,6 @@ public:
 	virtual void processNetEvent(NetEvent* event, CharConv* cv);
 	
 	/**
-	 * \fn std::string getName()
-	 * \brief Gibt den Name des Objektes aus
-	 */
-	virtual std::string getName()
-	{
-		return m_name;
-	}
-	
-	/**
 	 * \fn PlayerCamera& getCamera()
 	 * \brief Gibt die Kameraeinstellung des Spielers aus
 	 */
@@ -518,24 +509,7 @@ public:
 		return m_look;
 	}
 	
-	/**
-	 * \fn std::string getRefName()
-	 * \brief Gibt den Referenzname aus, mit dem bei Gespraechen auf die Person verwiesen wird
-	 */
-	virtual std::string getRefName()
-	{
-		return m_name;
-	}
 	
-	/**
-	 * \fn void setName(std::string name)
-	 * \brief Setzt den Name des Spielers
-	 * \param name Name
-	 */
-	void setName(std::string name)
-	{
-		m_name = name;
-	}
 	
 	/**
 	 * \fn RegionLocation getRevivePosition()
@@ -715,12 +689,6 @@ protected:
 	 * \param goalobj Zeiger auf der Zielobjekt, ist NULL wenn kein Zielobjekt existiert
 	 */
 	virtual void performActionCritPart(Vector goal, WorldObject* goalobj);
-	
-	/**
-	 * \var std::string m_name
-	 * \brief Name des Spielers
-	 */
-	std::string m_name;
 	
 	
 	/**

@@ -1286,7 +1286,7 @@ void MainWindow::updateObjectInfo()
 					
 					// Objekt ist ein Lebewesen
 					// Lebenspunkte anfuegen
-					string_stream<< dgettext("sumwars_xml",cr->getRefName().c_str());
+					string_stream<< dgettext("sumwars_xml",cr->getName().c_str());
 					float perc = cr->getDynAttr()->m_health / cr->getBaseAttrMod()->m_max_health;
 					if (bar->getProgress() != perc)
 					{

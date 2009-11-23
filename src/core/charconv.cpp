@@ -112,7 +112,10 @@ void CharConv::toBuffer(std::string s)
 	if (m_stream ==0)
 	{
 		toBuffer<int>(s.size());
-		toBuffer(s.data(), s.size());
+		if (s.size() !=0 )
+		{
+			toBuffer(s.data(), s.size());
+		}
 	}
 	else
 	{
@@ -133,10 +136,17 @@ void CharConv::fromBuffer(std::string& s)
 	{
 		int len;
 		fromBuffer<int>(len);
-		char * data = new char[len];
-		fromBuffer(data,len);
-		s.assign(data,len);
-		delete data;
+		if (len != 0)
+		{
+			char * data = new char[len];
+			fromBuffer(data,len);
+			s.assign(data,len);
+			delete data;
+		}
+		else
+		{
+			s = "";
+		}
 	}
 	else
 	{

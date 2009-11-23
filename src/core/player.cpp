@@ -1777,8 +1777,6 @@ void Player::toString(CharConv* cv)
 	DEBUG5("Player::tostring");
 	Creature::toString(cv);
 	
-	cv->toBuffer(m_name);
-	
 	cv->toBuffer(getBaseAttr()->m_level);
 	m_look.toString(cv);
 	// Items
@@ -1822,7 +1820,6 @@ void Player::toString(CharConv* cv)
 void Player::fromString(CharConv* cv)
 {
 	Creature::fromString(cv);
-	cv->fromBuffer(m_name);
 
 	cv->fromBuffer(getBaseAttr()->m_level);
 	m_look.fromString(cv);
@@ -1972,7 +1969,7 @@ void Player::toSavegame(CharConv* cv)
 	cv->setVersion(World::getVersion());
 	
 	cv->toBuffer(getSubtype());
-	cv->toBuffer(m_name);
+	cv->toBuffer(getName());
 	m_look.toString(cv);
 	cv->printNewline();
 	
@@ -2082,7 +2079,10 @@ void Player::fromSavegame(CharConv* cv, bool local)
 	cv->fromBuffer(getSubtype());
 	init();
 	
-	cv->fromBuffer(m_name);
+	std::string name;
+	cv->fromBuffer(name);
+	setName(name);
+	
 	m_look.fromString(cv);	
 	m_emotion_set = m_look.m_emotion_set;
 	
@@ -2134,7 +2134,7 @@ void Player::fromSavegame(CharConv* cv, bool local)
 		getBaseAttr()->m_abilities[type].m_time = time;
 	}
 
-	DEBUG5("name %s class %s level %i",m_name.c_str(), getSubtype().c_str(), getBaseAttr()->m_level);
+	DEBUG5("name %s class %s level %i",getName().c_str(), getSubtype().c_str(), getBaseAttr()->m_level);
 	
 	cv->fromBuffer( m_base_action);
 	cv->fromBuffer(m_left_action);
@@ -2201,12 +2201,7 @@ void Player::loadEquipement(CharConv* cv)
 
 int Player::getValue(std::string valname)
 {
-	if (valname == "name")
-	{
-		lua_pushstring(EventSystem::getLuaState() , m_name.c_str() );
-		return 1;
-	}
-	else if (valname =="attribute_points")
+	if (valname =="attribute_points")
 	{
 		lua_pushinteger(EventSystem::getLuaState() , m_attribute_points );
 		return 1;

@@ -20,6 +20,8 @@ WorldObject::WorldObject( int id)
 	m_animation_time =1;
 	m_animation_elapsed_time = 0;
 	m_animation_repeat =false;
+	
+	m_name = "";
 }
 
 bool WorldObject::isCreature()
@@ -114,6 +116,8 @@ void WorldObject::toString(CharConv* cv)
 {
 	DEBUG5("worldobject::tostring");
 	GameObject::toString(cv);
+	
+	cv->toBuffer(m_name);
 	cv->toBuffer(m_fraction);
 	cv->toBuffer(m_race);
 	cv->toBuffer(m_interaction_flags);
@@ -122,6 +126,8 @@ void WorldObject::toString(CharConv* cv)
 void WorldObject::fromString(CharConv* cv)
 {
 	GameObject::fromString(cv);
+	
+	cv->fromBuffer(m_name);
 	cv->fromBuffer(m_fraction);	
 	cv->fromBuffer(m_race);
 	cv->fromBuffer(m_interaction_flags);
@@ -131,39 +137,51 @@ void WorldObject::fromString(CharConv* cv)
 
 int WorldObject::getValue(std::string valname)
 {
-		if (valname == "fraction")
+	if (valname == "name")
+	{
+		lua_pushstring(EventSystem::getLuaState() , m_name.c_str() );
+		return 1;
+	}
+	else if (valname == "fraction")
+	{
+		if (getFraction() < Fraction::NEUTRAL_TO_ALL)
 		{
-			if (getFraction() < Fraction::NEUTRAL_TO_ALL)
-			{
-				std::stringstream stream;
-				stream << "player_" << getFraction();
-				lua_pushstring(EventSystem::getLuaState(),stream.str().c_str());
-			}
-			else
-			{
-				Fraction* frac = World::getWorld()->getFraction( getFraction() );
-				static std::string fractype = "";
-				if (frac != 0)
-				{
-					fractype = frac->getType();
-				}
-				lua_pushstring(EventSystem::getLuaState(),fractype.c_str());
-			}
-			return 1;
+			std::stringstream stream;
+			stream << "player_" << getFraction();
+			lua_pushstring(EventSystem::getLuaState(),stream.str().c_str());
 		}
 		else
 		{
-			return GameObject::getValue(valname);
+			Fraction* frac = World::getWorld()->getFraction( getFraction() );
+			static std::string fractype = "";
+			if (frac != 0)
+			{
+				fractype = frac->getType();
+			}
+			lua_pushstring(EventSystem::getLuaState(),fractype.c_str());
 		}
+		return 1;
+	}
+	else
+	{
+		return GameObject::getValue(valname);
+	}
 
-		return 0;
+	return 0;
 }
 
 
 bool WorldObject::setValue(std::string valname)
 {
 	
-	if (valname == "fraction")
+	if (valname == "name")
+	{
+		std::string name = lua_tostring(EventSystem::getLuaState() ,-1);
+		lua_pop(EventSystem::getLuaState(), 1);
+		setName(name);
+		return true;
+	}
+	else if (valname == "fraction")
 	{
 		if (getType() == "PLAYER")
 		{
@@ -232,6 +250,12 @@ void WorldObject::setRace(Race race)
 	m_race = race;
 }
 
+void WorldObject::setName(std::string name)
+{
+	m_name = name;
+	addToNetEventMask(NetEvent::DATA_NAME);
+}
+
 bool WorldObject::takeDamage(Damage* damage)
 {
 	Trigger* tr = new Trigger("object_hit");
@@ -264,6 +288,11 @@ void WorldObject::writeNetEvent(NetEvent* event, CharConv* cv)
 		cv->toBuffer(m_animation_repeat);
 		cv->toBuffer(m_animation_elapsed_time);
 	}
+	
+	if (event->m_data & NetEvent::DATA_NAME)
+	{
+		cv->toBuffer(m_name);
+	}
 }
 
 void WorldObject::processNetEvent(NetEvent* event, CharConv* cv)
@@ -287,6 +316,13 @@ void WorldObject::processNetEvent(NetEvent* event, CharConv* cv)
 		cv->fromBuffer(m_animation_time);
 		cv->fromBuffer(m_animation_repeat);
 		cv->fromBuffer(m_animation_elapsed_time);
+	}
+	
+	if (event->m_data & NetEvent::DATA_NAME)
+	{
+		std::string name;
+		cv->fromBuffer(name);
+		m_name = name;
 	}
 }
 

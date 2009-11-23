@@ -36,7 +36,7 @@ bool ItemWindow::onItemHover(const CEGUI::EventArgs& evt)
 	Creature* npc = player->getTradePartner();
 	if (npc != 0)
 	{
-		NPCTrade& tradeinfo = Dialogue::getNPCTrade(npc->getRefName());
+		NPCTrade& tradeinfo = Dialogue::getNPCTrade(npc->getName());
 		factor = tradeinfo.m_pay_multiplier;
 	}
 	updateItemWindowTooltip(we.window,itm ,player,-1,factor);
