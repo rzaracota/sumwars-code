@@ -141,6 +141,13 @@ void CharCreate::updateClassList()
 	{
 		classlist->addItem(new StrListItem((CEGUI::utf8*) gettext(it->second->m_name.c_str()),it->first));
 	}
+	
+	if (classlist->getItemCount() >0)
+	{
+		int idx =0;
+		classlist->clearAllSelections();
+		classlist->setItemSelectState(idx,true);
+	}
 }
 
 bool CharCreate::onClassSelected(const CEGUI::EventArgs& evt)
