@@ -1,0 +1,5 @@
+﻿<RenderInfo name="campFire">
+	<Entity  source="campFire.mesh"/>
+	<ParticleSystem objectname="fire" source="CampFire"/>
+	<ParticleSystem objectname="fireBase" source="CampFireBase"/>
+</RenderInfo>

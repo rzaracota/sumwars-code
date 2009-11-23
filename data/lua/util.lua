@@ -10,6 +10,7 @@ function listToString(list)
 		return str.."}";
 end;
 
+--wandelt eine indizierte Liste in eine Map-aehnliche Darstellung
 function listToSet(list)
 	local ret = {};
 	local i, obj

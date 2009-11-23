@@ -1028,6 +1028,10 @@
 	<Entity source="priest_f.mesh"/>
 	<Entity objectname="head" bone="crown" source="head_f1.mesh" />
 </RenderInfo>
+
+<RenderInfo name="priestHair">
+	<Entity source="mustache.mesh"/>
+</RenderInfo>
 	
 <RenderInfo name="stuntman" parent="playerbaseM">
 	<Entity source="warrior_m.mesh" />
@@ -1037,7 +1041,7 @@
 	<!--<Entity objectname="weapon" bone="itemRightHand" source="merc2h_sw.mesh" />-->
 	<Entity objectname="shield" bone="itemLeftHand" source="goblin_sbw.mesh" />
 	<!--<Entity objectname="barrel" source="chair_konz.mesh" />-->
-	<ParticleSystem objectname="daRing" source = "TestRing" position="0 2 0"/>
+	<ParticleSystem objectname="daRing" source = "BurningHead" position="0 2 0"/>
 </RenderInfo>
 
 <RenderInfo name="stuntgirl" parent="playerbase">

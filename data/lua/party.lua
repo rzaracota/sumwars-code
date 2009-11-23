@@ -97,6 +97,7 @@ function addAllPlayersToDialog()
 	end;
 end;
 
+--players: indizierte Liste der Spieler
 function addPlayersToDialog(players)
 	local i,player;
 	for i,player in ipairs(players) do
@@ -150,4 +151,7 @@ function femaleOnly()
 end;
 function maleOnly()
 	return (getRolePlayers("female")[1] == nil);
+end;
+function duo()
+	return (not solo() and (getPlayers()[3] == nil)); 
 end;

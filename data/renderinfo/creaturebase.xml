@@ -39,7 +39,6 @@
 		</Deactivation>
 	</State>
 	
-	
 	<State name="ice_arrows">
 		<Activation>
 			<ParticleSystem objectname="magic" source="HandIce" bone="itemLeftHand" position="0 0 0"  />

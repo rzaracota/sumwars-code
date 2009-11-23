@@ -1328,6 +1328,7 @@
   </Locations>
 
   <Areas>
+    <Area name="areaGertlinde" angle="-0" center_x="-19.76590477" center_y="2.091325624" type="RECT" extent_x="2.700091621" extent_y="5.893525043" />
   </Areas>
 
 </ObjectGroupTemplate>

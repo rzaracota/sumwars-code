@@ -1,0 +1,8 @@
+﻿<RenderInfo name="rogue" parent="playerbase">
+	<Entity source="rogue.mesh"/>
+	<Subobject objectname="armor" source="rogueArmorEnemy" />
+	<Entity objectname="head" bone="crown" source="head1.mesh" />
+	<Entity objectname="hair" bone="crown" source="hair_m2.mesh" />
+	<Entity objectname="chinBeard" bone="crown" source="beard_chin.mesh" />
+	<Entity objectname="mustache" bone="crown" source="mustache.mesh" />
+</RenderInfo>

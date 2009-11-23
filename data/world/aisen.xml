@@ -363,10 +363,6 @@
 		
 		<Event trigger ="create_region" once = "true">
 			<Effect>
-				gertlinde_kampfer = createObject("peasant_f", "locHerbalist");
-				setRefName(gertlinde_kampfer, "Gertlinde Kampfer");
-				addArea("HerbalistArea","circle","locHerbalist",5);
-				
 				sergeant_lutterer = createObject("peasant", "locSergeant");
 				setRefName(sergeant_lutterer, "Sergeant Lutterer");
 				

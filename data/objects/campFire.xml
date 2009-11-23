@@ -1,0 +1,4 @@
+<Object type="FIXED_OBJECT" subtype="campFire" layer="NORMAL">
+        <Mesh file="campFire.mesh" />
+        <Geometry shape="CIRCLE" radius="0.753211179"/>
+</Object>

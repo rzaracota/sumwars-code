@@ -346,7 +346,7 @@
 		
 		<Event trigger="player_moved" once="true">
 			<Condition>
-				if (fortify_dwarfenwall.scene1 == true and besieged_farm.scene3 ~= true) then
+				if (fortify_dwall.scene1 == true and besieged_farm.scene3 ~= true) then
 					return (unitIsInArea(trigger.player,"PrinceArea"));
 				else
 					return false;

@@ -3,7 +3,7 @@
 		if (ambush.finished) then
 			return _("Ierana hat es ueberlebt und vor lauter Dankbarkeit gleich fuer den naechsten Auftrag gesorgt. Ich wusste ja schon immer, dass die Konziliker nur einen Kammerjaeger wollten.")
 		else
-			return _("Eine Konzilsmagierin namens Ireana von Nordenburg steckt anscheinend westlich von Zwergentrutz in Schwierigkeiten. Nichts, was ein Gezeichneter nicht loesen koennte.")
+			return _("Eine Konzilsmagierin namens Ireana von Nordenburg steckt anscheinend westlich von Zwergentrutz in Schwierigkeiten. Nichts, was ein Gezeichneter nicht loesen koennte. Wenn sie lange genug ueberlebt...")
 		end
 	</Description>
 	
@@ -58,7 +58,7 @@
 				addSpeaker(ambush_tmp.soren,"Soren Windclaw");
 				
 				if (solo())then
-					speak("Soren Windclaw",_("Warte!"),"sad",1000);
+					speak("Soren Windclaw",_("Warte!"),"sad",2500);
 					speak("PL",_("Ich beeile mich ja schon!"),"unhappy");
 					speak("Soren Windclaw",_("Du musst jetzt sofort durch die westlichen Wälder."),"unhappy");
 				else
@@ -79,7 +79,20 @@
 				else
 					speak("Soren Windclaw",_("Jetzt fangt nicht an zu diskutieren, sondern helft ihr! Sie braucht eure Hilfe!"),"pain");
 					setSpeakerEmotion("Soren Windclaw","unhappy");
-					speak("PL",_("Was meint ihr Freunde, wollen wir da jemanden aus der Patsche helfen?"),"amused");
+					if(duo())then
+						speak("PL",_("Was meinst du, wollen wir da jemandem aus der Patsche helfen?"),"amused");
+						if(getSpeaker("magopt")~=getSpeaker("PL"))then
+							speak("magopt", _("Weiß nicht so genau..."),"bored");
+						elseif(getSpeaker("PL")~=getSpeaker("waropt"))then
+							speak("waropt", _("Naja, schaden kann das ja eigentlich nicht..."),"thoughtful");
+						end;
+						if(getSpeaker("PL")~=getSpeaker("archer"))then
+							speak("archer",_("Wird das extra bezahlt??"),"thoughtful");
+						end;
+						speak("Soren Windclaw",_("Argh! Muss ich euch erst-"),"angry");
+						speak("PL",_("Schon gut, spare deinen Atem,!"),"aloof");
+					end;
+					speak("PL",_("Was meint ihr Freunde, wollen wir da jemandem aus der Patsche helfen?"),"amused");
 					if(getSpeaker("magopt")~=getSpeaker("PL"))then
 						speak("magopt", _("Weiß nicht so genau..."),"bored");
 					end;
@@ -98,7 +111,7 @@
 		<Event trigger="speechFinished" once="true">
 			<Effect>
 				setCutsceneMode(false);
-				ambush.finished=true;
+				ambush.started=true;
 				deleteObject(ambush_tmp.soren);
 			</Effect>
 		</Event>

@@ -26,9 +26,9 @@
 				end
 			</Condition>
 			<Effect>
-				rescue_willard.asked = true
 				unitSpeak(fenor,_("Heda!"),"normal");
 				addUnitCommand(fenor,'walk',trigger.player,1.5);
+				rescue_willard_tmp.proposal = true;
 				createDialogue()
 				addSpeaker(trigger.player,'player')
 				rescue_willard_tmp.player = trigger.player;
@@ -41,9 +41,10 @@
 	
 		<Event trigger ="command_complete" once = "true">
 			<Condition>
-				return (trigger.unit == fenor) 
+				return ((trigger.unit == fenor)and(rescue_willard_tmp.proposal == true)) 
 			</Condition>	
 			<Effect>
+				rescue_willard_tmp.proposal = false;
 				setCurrentDialogue(rescue_willard_tmp.player);
 				addSpeaker(fenor,'Fenor Marken')
 				lookAtObject(fenor,rescue_willard_tmp.player);
@@ -101,7 +102,7 @@
 					speak("any",_("Wer haette das gedacht?"),"sneer");
 					speak("any",_("Will ein ehrbares Mitglied der Stadtwache etwa jemandes Kehle durchgeschnitten sehen?"),"unhappy");
 					speak('Fenor Marken',_("Haeh? Dafuer haette ich einen professionellen Attentaeter anheuern koennen."),"aloof");
-					speak('Fenor Marken',_("Ich dachte, Ihr waehrt die Sorte Gezeichnete, die nicht wahllos alle Menschen umbringen, die ihren Weg kreuzen."));
+					speak('Fenor Marken',_("Ich dachte, Ihr waert die Sorte Gezeichnete, die nicht wahllos alle Menschen umbringen, die ihren Weg kreuzen."));
 					speak("any",_("Verzeiht. Vielleicht war mein Mund schneller als mein Kopf."),"sad");
 					speak('player',_("Wie auch immer. Was wollt Ihr wirklich?"),"normal");
 					speak('Fenor Marken',_("Danke. Mein Name ist Fenor Marken."),"normal");
@@ -109,9 +110,9 @@
 					speak('Fenor Marken',_("Er war mit zwei Kollegen in den Wiesen, als sie von Goblins ueberfallen wurden."),"sad");
 					speak('Fenor Marken',_("Und diese Feiglinge haben ihn verletzt zurueck gelassen!"),"angry");
 					if(solo())then
-						speak('player',_("Sicher wollt Ihr nicht, dass ich seine Leiche zurueck bringe.?"));
+						speak('player',_("Sicher wollt Ihr nicht, dass ich seine Leiche zurueck bringe."));
 					else
-						speak('player',_("Sicher wollt Ihr nicht, dass wir seine Leiche zurueck bringe.?"));
+						speak('player',_("Sicher wollt Ihr nicht, dass wir seine Leiche zurueck bringe."));
 					end;
 					speak('Fenor Marken',_("Nein. Willard ist niemand, der sich von ein paar lausigen Goblins umbringen laesst."),"aloof");
 					speak('Fenor Marken',_("Ich bin sicher, er wartet irgendwo darauf, dass ihm jemand zu Hilfe eilt."),"normal");
@@ -128,6 +129,7 @@
 					speak('Fenor Marken',_("Und einen Phasenstein koennt ihr nicht benutzen, weil er Avaera geweiht ist, stimmt's?"));
 					speak('Fenor Marken',_("Deswegen habe ich mich an Euch gewandt, als Ihr hier vorbei gekommen seid."));
 					speak('player',_("Ihr wisst recht viel."),"normal");
+					exectueInDialog("rescue_willard.asked = true");
 					addQuestion(_("Nach Willard suchen?"));
 					addAnswer(_("Ja"),'start_rescue_willard_quest');
 					addAnswer(_("Nein"),'refuse_rescue_willard_quest');

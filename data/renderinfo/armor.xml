@@ -50,6 +50,7 @@
 </RenderInfo>
 <RenderInfo name="necromancerRobe#f" parent="playerbase" inherit="animation">
 </RenderInfo>
-<RenderInfo name="necromancerRobeEnemy" parent="necromancerBase" inherit="animation">
-	<Entity source="necromancer_robeM.mesh"/>
+
+<RenderInfo name="rogueArmorEnemy" parent="playerbase">
+	<Entity source = "rogue_arm.mesh"/>
 </RenderInfo>

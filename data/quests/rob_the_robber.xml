@@ -28,8 +28,8 @@
 					speak("player",_("Excuse me, Seargent, but I noticed that wanted poster."))
 					speak("player",_("Isn't a bounty of 3000 Goldpieces a bit exaggerated?"))
 					speak("Sergeant Lutterer",_("Oh, that one."))
-					speak("Sergeant Lutterer",_("The bounty hunters keep their hands of him."))
-					speak("Sergeant Lutterer",_("Everytime word has someone killed him"))
+					speak("Sergeant Lutterer",_("The bounty hunters keep their hands off him."))
+					speak("Sergeant Lutterer",_("Everytime word has it that someone killed him"))
 					speak("Sergeant Lutterer",_("he winds up dead himself and Rob's robbing and killing on"))
 					speak("Sergeant Lutterer",_("Pretty lucky, the guy."))
 					speak("Sergeant Lutterer",_("Interested?"))
@@ -73,7 +73,7 @@
 			</Condition>
 			<Effect>
 				if (rob_the_robber.started == true) then
-					speak("Sergeant Wober",_("You havn't killed Rob yet."))
+					speak("Sergeant Wober",_("Bring me his necklace and I'll give you the gold. Not a minute earlier."))
 				else
 					speak("player",_("Excuse me, Seargent, but I noticed that wanted poster."))
 					speak("player",_("Isn't a bounty of 3000 Goldpieces a bit exaggerated?"))

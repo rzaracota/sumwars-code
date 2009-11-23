@@ -1,4 +1,4 @@
-<Quest name="Fortify dwarfenwall" table_name="defend_dwall">
+<Quest name="Defend dwarfenwall" table_name="defend_dwall">
 	
 	<Init>
 		local a = 2

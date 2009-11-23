@@ -1,6 +1,5 @@
 ﻿<World >
-<!-- Lobby Konzilshalle der Elemtarmagier [fester Ort; Saeulenhalle im roemischen Stil] -->
-<!-- Orte: Soren Windclaw -->
+<!-- Lobby Konzilshalle der Elemtarmagier-->
 	<Region id="2" name="elCnlLobby">
 		<AmbientLight red="0.4" green="0.4" blue="0.4" />
 		<HeroLight red="1.0" green="1.0" blue="1.0" /> 
@@ -52,7 +51,6 @@
 	</Region>	
 	
 <!-- Medair, Soeldnerlager [Stadt]-->
-<!-- Orte: Fenor Marken -->
 	<Region id="3" name="medMercCamp">
 		<AmbientLight red="0.4" green="0.4" blue="0.4" />
 		<HeroLight red="1.0" green="1.0" blue="1.0" /> 
@@ -85,22 +83,29 @@
 				fenor = createObject('guard', 'locFenor');
 				addArea('FenorArea','circle','locFenor',5);
 				setRefName(fenor, 'Fenor Marken');
+				set(fenor,"angle",90);
 				
 				trader = createObject('peasant', 'locWeaponTrader');
 				setRefName(trader, 'Robert');
+				set(trader,"angle",25);
 				
 				trader = createObject('peasant', 'locArmorTrader');
 				setRefName(trader, 'Elgor');
+				set(trader,"angle",35);
 
 				trader = createObject('peasant', 'locPotionTrader');
 				setRefName(trader, 'Cain');
-
+				set(trader,"angle",180);
+				
 				guard1 = createObject('guard', 'locSoldier1');
 				setRefName(guard1, 'Guard');
+				set(guard1,"angle",-90);
 				guard2 = createObject('guard', 'locSoldier2');
 				setRefName(guard2, 'Guard');
+				set(guard2,"angle",-90);
 				guard3 = createObject('guard', 'locSoldier3');
 				setRefName(guard3, 'Guard');
+				set(guard3,"angle",90);
 			</Effect>
 		</Event>
 	</Region>
