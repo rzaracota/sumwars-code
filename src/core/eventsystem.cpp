@@ -2542,10 +2542,40 @@ int EventSystem::addEffect(lua_State *L)
 int EventSystem::getRelation(lua_State *L)
 {
 	int argc = lua_gettop(L);
-	if (argc>=2 && lua_isstring(L,1) && lua_isstring(L,2))
+	if (argc>=1 && (lua_isstring(L,1) || lua_isnumber(L,1)))
 	{
-		std::string frac1 = lua_tostring(L,1);
-		std::string frac2 = lua_tostring(L,2);
+		Fraction::Id frac1= Fraction::PLAYER;
+		Fraction::Id frac2= Fraction::PLAYER;
+		 if (lua_isnumber(L,1))
+		{
+			int id = lua_tonumber(L,1);
+			WorldObject* wo = m_region->getObject(id);
+			if (wo != 0)
+			{
+				frac1 = wo->getFraction();
+			}
+		}
+		else if (lua_isstring(L,1))
+		{
+			std::string f1 = lua_tostring(L,1);
+			frac1 = World::getWorld()->getFractionId(f1);
+		}
+		
+		
+		if (lua_isnumber(L,2))
+		{
+			int id = lua_tonumber(L,2);
+			WorldObject* wo = m_region->getObject(id);
+			if (wo != 0)
+			{
+				frac2 = wo->getFraction();
+			}
+		}
+		else if (lua_isstring(L,2))
+		{
+			std::string f2 = lua_tostring(L,2);
+			frac2 = World::getWorld()->getFractionId(f2);
+		}
 		
 		Fraction::Relation rel = World::getWorld()->getRelation(frac1,frac2);
 		std::string result="neutral";

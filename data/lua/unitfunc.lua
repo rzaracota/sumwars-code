@@ -23,6 +23,10 @@ function isAlive(obj)
 		return (isCreature(obj) and getObjectValue(obj,"health")>0) ;
 end;
 
+function isEnemy(obj)
+		return (getRelation(obj) == "hostile");
+end;
+
 
 -- Getter
 function getPosition(obj)
@@ -88,6 +92,10 @@ end;
 
 function getMonstersInArea(area)
 		return getObjectsInArea(area,"monster");
+end;
+		
+function getEnemiesInArea(area)
+	return filter( getObjectsInArea(area,"creature") ,isEnemy);
 end;
 
 function getPartyleader()
