@@ -4482,6 +4482,7 @@ bool Creature::setValue(std::string valname)
 		{
 			gainLevel();
 		}
+		
 		return ret;
 	}
 	

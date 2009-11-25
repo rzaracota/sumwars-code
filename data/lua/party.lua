@@ -155,3 +155,19 @@ end;
 function duo()
 	return (not solo() and (getPlayers()[3] == nil)); 
 end;
+		
+function addPlayersExperience(xp, players)
+	players = players or getPlayers();
+	local i,player;
+	for i,player in ipairs(players) do
+		set(player,"experience",get(player,"experience") + xp);
+	end;
+end;
+
+function addPlayersGold(gold, players)
+	players = players or getPlayers();
+	local i,player;
+	for i,player in ipairs(players) do
+		set(player,"gold",get(player,"gold") + gold);
+	end;
+end;
