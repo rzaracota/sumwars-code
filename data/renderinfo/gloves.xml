@@ -29,3 +29,12 @@
 <RenderInfo name="sharkGlovesGuard" parent="guardPole" inherit="animation">
 	<Entity source="shark_glvM.mesh"/>
 </RenderInfo>
+
+<RenderInfo name="steelGloves">
+	<Entity source="steel_glv.mesh"/> 
+</RenderInfo>
+<RenderInfo name="steelGloves#m" parent="playerbaseM" inherit="animation">
+	<Entity source="steel_glv.mesh"/> 
+</RenderInfo>
+<RenderInfo name="steelGloves#f" parent="playerbase" inherit="animation">
+</RenderInfo>

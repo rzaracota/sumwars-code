@@ -1,0 +1,87 @@
+
+<!-- Schurke -->
+<Monster type="MONSTER" subtype="human_rogue" name="rogue" fraction="monster" race="human" layer="NORMAL">
+	<RenderInfo name="rogue" />
+	<Dropslots >
+		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.05" pgold="0.05" min_gold="5" max_gold="60" min_level="3" max_level="8" magic_prob="0.1" magic_power="250" />
+		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.04" pgold="0.05" min_gold="1" max_gold="40" min_level="1" max_level="6" magic_prob="0.2" magic_power="200" />
+	</Dropslots>
+	
+	<BasicAttributes
+		experience="23"
+		level="6"
+		max_health="120"
+		armor="25"
+		block="0"
+		attack="30"
+		power="60"
+		strength="25"
+		dexterity="15"
+		magic_power="5"
+		willpower="20"
+		resistances_physical="0"
+		resistances_air="0"
+		resistances_ice="0"
+		resistances_fire="0"
+		resistances_cap_physical="50"
+		resistances_cap_air="50"
+		resistances_cap_ice="50"
+		resistances_cap_fire="50"
+		walk_speed="2500"
+		attack_speed="1000"
+		step_length="0.8"
+		attack_range="1.0"
+	>
+		<Ability type="walk" />
+		<Ability type="attack" rating="1"/>
+		<Ability type="monster_bash" rating="1" timer_value="10000"/>
+		<Ability type="die" />
+		<Ability type="noaction" />
+	</BasicAttributes>
+	
+	<Geometry radius="0.5" />
+	
+	<AI ai_sight_range="12" ai_chase_range="20"/>
+</Monster>
+
+<!-- Rob der Raeuber, Feenwald-->
+<Monster type="MONSTER" subtype="human_rob_fairy" name="Rob the Robber" fraction="monster" race="human" layer="NORMAL">
+	<RenderInfo name="rogue" />
+	<EmotionSet name="human_standard" />
+	
+	<BasicAttributes
+		experience="23"
+		level="6"
+		max_health="2500"
+		armor="25"
+		block="0"
+		attack="30"
+		power="60"
+		strength="25"
+		dexterity="15"
+		magic_power="5"
+		willpower="20"
+		resistances_physical="0"
+		resistances_air="0"
+		resistances_ice="0"
+		resistances_fire="0"
+		resistances_cap_physical="50"
+		resistances_cap_air="50"
+		resistances_cap_ice="50"
+		resistances_cap_fire="50"
+		walk_speed="2500"
+		attack_speed="1000"
+		step_length="0.8"
+		attack_range="1.0"
+	>
+		<Ability type="walk" />
+		<Ability type="attack" rating="1"/>
+		<Ability type="monster_bash" rating="1" timer_value="10000"/>
+		<Ability type="die" />
+		<Ability type="noaction" />
+	</BasicAttributes>
+	
+	<Geometry radius="0.5" />
+	
+	<AI ai_sight_range="12" ai_chase_range="20"/>
+</Monster>

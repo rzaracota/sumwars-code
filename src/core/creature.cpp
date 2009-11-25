@@ -4450,14 +4450,14 @@ bool Creature::setValue(std::string valname)
 	
 	bool ret;
 	ret = getBaseAttrMod()->setValue(valname, getEventMaskRef());
-	if (ret >0)
+	if (ret)
 	{
 		calcBaseAttrMod();
 		return ret;
 	}
 	
 	ret = m_dyn_attr.setValue(valname, getEventMaskRef());
-	if (ret >0)
+	if (ret)
 	{
 		if (m_dyn_attr.m_health >0 && (getState() == STATE_DIEING || getState() == STATE_DEAD))
 		{
@@ -4474,6 +4474,13 @@ bool Creature::setValue(std::string valname)
 			m_action.m_type ="noaction";
 			m_action.m_elapsed_time =0;
 			addToNetEventMask(NetEvent::DATA_ACTION | NetEvent::DATA_STATE);
+		}
+		
+		// Solange Level aufsteigen, bis exp < max_exp
+		// Fuer den Fall dass Exp geaendert wurde
+		while (m_dyn_attr.m_experience>= m_base_attr.m_max_experience)
+		{
+			gainLevel();
 		}
 		return ret;
 	}
@@ -4638,7 +4645,7 @@ std::string Creature::getActionString()
 float Creature::getActionPercent()
 {
 	if (getState() == STATE_DEAD)
-		return 0.99;
+		return 0.999999;
 	
 	if (m_action.m_type == "noaction")
 	{

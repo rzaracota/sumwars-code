@@ -140,6 +140,12 @@ FIXED_OBJECT
         
 </ObjectTemplate>
 
+<ObjectTemplate name="$border_crypt_m" type="FIXED_OBJECT">
+        <Environment name="council" default = "true">
+                <Object name="caveCryptPodest" />
+        </Environment>
+</ObjectTemplate>
+
 <ObjectTemplate name="$border_balustrade" type="FIXED_OBJECT">
         <Environment name="council" default = "true">
                 <Object name="konz_balustrade1" />
@@ -643,6 +649,37 @@ FIXED_OBJECT
 			<Object name="heal_1" />
 			<Object name="heal_2" />
 			<Object name="heal_fr" />
+        </Environment>
+</ObjectTemplate>
+<ObjectTemplate name="$misc_sarkophagus" type="FIXED_OBJECT">
+        <Environment name="council" default = "true">
+			<Object name="sarkophagus" />
+        </Environment>
+</ObjectTemplate>
+<ObjectTemplate name="$misc_urn" type="FIXED_OBJECT">
+        <Environment name="cave" default = "true">
+			<Object name="urn1" />
+			<Object name="urn2" />
+			<Object name="urn3" />
+        </Environment>
+</ObjectTemplate>
+
+
+<ObjectTemplate name="$treasure_sarkophagus" type="TREASURE">
+        <Environment name="council" default = "true">
+			<Object name="sarkophagusSimple" />
+			<Object name="sarkophagusImportant" />
+        </Environment>
+</ObjectTemplate>
+<ObjectTemplate name="$treasure_chest" type="TREASURE">
+        <Environment name="meadow" default = "true">
+			<Object name="chestBox" />
+        </Environment>
+</ObjectTemplate>
+
+<ObjectTemplate name="$camp_fire" type="FIXED_OBJECT">
+        <Environment name="meadow" default = "true">
+			<Object name="campFire" />
         </Environment>
 </ObjectTemplate>
 

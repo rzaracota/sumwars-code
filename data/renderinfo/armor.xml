@@ -18,6 +18,15 @@
 	<Entity source="merc_armF.mesh"/>
 </RenderInfo>
 
+<RenderInfo name="steelArm">
+	<Entity source="steel_arm.mesh"/>
+</RenderInfo>
+<RenderInfo name="steelArm#m" parent="playerbaseM" inherit="animation">
+	<Entity source="steel_arm.mesh"/> 
+</RenderInfo>
+<RenderInfo name="steelArm#f" parent="playerbase" inherit="animation">
+</RenderInfo>
+
 <RenderInfo name="counclArm">
 	<Entity source="councl_arm.mesh"/> 
 </RenderInfo>

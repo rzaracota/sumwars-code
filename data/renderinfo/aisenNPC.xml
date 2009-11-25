@@ -29,3 +29,10 @@
 	<Entity objectname="hat" bone="crown" source="peasent_hatM.mesh" />
 </RenderInfo>
 
+<RenderInfo name="general" parent="playerbaseM">
+	<Entity source="knight.mesh"/>
+	<Entity objectname="head" bone="crown" source="head1.mesh" />
+	<Subobject objectname="arm" source="steelArm#m" />
+	<Subobject objectname="glv" source="steelGloves#m" />
+</RenderInfo>
+

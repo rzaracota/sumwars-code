@@ -196,6 +196,7 @@
 
 <Monster type="NPC" subtype="peasant_f" name="Peasant" fraction="human" race="human" layer="NORMAL">
 	<Mesh file="peasant_f" />
+	<EmotionSet name="gertlinde_emotion" />
 	<BasicAttributes
 					experience="0"
 					level="1"
@@ -274,7 +275,7 @@
 </Monster>
 
 <Monster type="NPC" subtype="council_guard" name="Council Guard" fraction="human" race="human" layer="NORMAL">
-	<RenderInfo name="guard_ais" />
+	<RenderInfo name="guardPole_cnl" />
 	<EmotionSet name="human_standard" />
 	<BasicAttributes
 					experience="0"
