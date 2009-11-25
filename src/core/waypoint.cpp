@@ -19,6 +19,8 @@ bool Waypoint::init ()
 	setSubtype("waypoint");
 	
 	m_interaction_flags = EXACT_MOUSE_PICKING | USABLE;
+	
+	m_active = false;
 	return true;
 }
 
@@ -33,7 +35,7 @@ bool  Waypoint::update (float time)
 		Shape s;
 		s.m_type = Shape::CIRCLE;
 		s.m_center = getShape()->m_center;
-		s.m_radius = 12;
+		s.m_radius = 10;
 
 		Player* pl;
 
@@ -42,6 +44,8 @@ bool  Waypoint::update (float time)
 			pl = dynamic_cast<Player*>(it->second);
 			if (pl !=0 && pl->getShape()->intersects(s))
 			{
+				m_active = true;
+				
 				// Spieler ist in der Naehe des Wegpunktes, aktivieren
 				pl->addWaypoint(getRegion()->getId(),true);
 			}
@@ -61,5 +65,13 @@ bool Waypoint::reactOnUse(int id)
 		pl->setUsingWaypoint(true);
 	}
 	return true;
+}
+
+void Waypoint::getFlags(std::set<std::string>& flags)
+{
+	WorldObject::getFlags(flags);
+	
+	if (m_active)
+		flags.insert("active");
 }
 

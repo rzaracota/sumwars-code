@@ -65,6 +65,20 @@ class Waypoint : public FixedObject
 	 * \param id ist die ID des Lebewesens, welche die Aktion benutzen ausgeführt hat
 	 */
 	virtual bool reactOnUse(int id);
+	
+	/**
+	 * \fn virtual void getFlags(std::set<std::string>& flags)
+	 * \brief Gibt den Status der bekannten Flags aus
+	 * \param flags Ausgabeparameter: Flags
+	 */
+	virtual void getFlags(std::set<std::string>& flags);
+	
+	private:
+		/**
+		 * \var m_active 
+		 * \brief Legt fest, ob der Wegpunkt als aktiv dargestellt wird
+		 */
+		bool m_active;
 };
 
 #endif

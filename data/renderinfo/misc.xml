@@ -1,5 +1,24 @@
-﻿<RenderInfo name="campFire">
+<RenderInfo name="campFire">
 	<Entity  source="campFire.mesh"/>
 	<ParticleSystem objectname="fire" source="CampFire"/>
 	<ParticleSystem objectname="fireBase" source="CampFireBase"/>
 </RenderInfo>
+
+<RenderInfo name="waypoint">
+	<Entity  source="waypoint.mesh"/>
+	
+	<State name="active">
+		<Activation time="200">
+			<ParticleSystem objectname="fire1" source="CampFire" position="0.0 5.0 0.0"/>
+			<ParticleSystem objectname="fire2" source="CampFire" position="0.0 5.0 0.0"/>
+			<ParticleSystem objectname="fire3" source="CampFire" position="0.0 5.0 0.0"/>
+			<ParticleSystem objectname="fire4" source="CampFire" position="0.0 5.0 0.0"/>
+			<ParticleSystem objectname="fire5" source="CampFire" position="0.0 5.0 0.0"/>
+		</Activation>
+		
+		<Deactivation time="200">
+			<Detach objectname="fire"/>
+		</Deactivation>
+	</State>
+</RenderInfo>
+
