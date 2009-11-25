@@ -1050,21 +1050,25 @@ void World::handleMessage(std::string msg, int slot)
 	{
 		
 		// Name des Senders an die Nachricht haengen
-		smsg = "[";
+		smsg = "";
 		if (m_player_slots->count(slot)>0)
 		{
 			Player* pl = static_cast<Player*>((*m_player_slots)[slot]);
-			smsg += pl->getName();
-			
-			if (pl->getSpeakText().m_text == "" && pl->getDialogue() == 0)
+			if (pl != 0)
 			{
-				CreatureSpeakText text;
-				text.m_text = msg;
-				text.m_time = msg.size()*100 + 1000;
-				pl->speakText(text);
+				smsg += "[";
+				smsg += pl->getName();
+				
+				if (pl->getSpeakText().m_text == "" && pl->getDialogue() == 0)
+				{
+					CreatureSpeakText text;
+					text.m_text = msg;
+					text.m_time = msg.size()*100 + 1000;
+					pl->speakText(text);
+				}
+				smsg += "] ";
 			}
 		}
-		smsg += "] ";
 		smsg += msg;
 
 		CharConv cv;
@@ -1113,7 +1117,11 @@ void World::handleMessage(std::string msg, int slot)
 	if (msg[0] == '$')
 	{
 		// Cheatcode eingegeben
-		Player* pl = static_cast<Player*>((*m_player_slots)[slot]);
+		Player* pl = 0;
+		if (m_player_slots->count(slot)>0)
+		{
+			pl = static_cast<Player*>((*m_player_slots)[slot]);
+		}
 
 		std::stringstream stream;
 		stream << msg;
@@ -1126,7 +1134,7 @@ void World::handleMessage(std::string msg, int slot)
 		stream >> obj;
 		if (obj == "item")
 		{
-				// Item erzeugen
+			// Item erzeugen
 			std::string name="";
 			int val =0;
 			stream >> name >> val;
@@ -1139,7 +1147,7 @@ void World::handleMessage(std::string msg, int slot)
 				pl->insertItem(itm,true);
 			}
 		}
-		else if (obj == "get")
+		else if (obj == "get" && pl != 0)
 		{
 			EventSystem::setRegion(m_local_player->getRegion());
 			std::string member;
@@ -1155,7 +1163,7 @@ void World::handleMessage(std::string msg, int slot)
 				static_cast<Player*>(m_local_player)->addMessage(ret);
 			}
 		}
-		else if (obj == "set")
+		else if (obj == "set" && pl != 0)
 		{
 			EventSystem::setRegion(m_local_player->getRegion());
 			std::string member, val;

@@ -137,6 +137,9 @@ void EventSystem::init()
 	lua_register(m_lua, "getRelation",getRelation);
 	lua_register(m_lua, "setRelation",setRelation);
 	
+	lua_register(m_lua, "printQuestMessage",printMessage);
+	lua_register(m_lua, "printMessage",printMessage);
+	
 	lua_register(m_lua, "writeString", writeString);
 	lua_register(m_lua, "writeNewline", writeNewline);
 	lua_register(m_lua, "writeUpdateString", writeUpdateString);
@@ -2614,6 +2617,21 @@ int EventSystem::setRelation(lua_State *L)
 	else
 	{
 		ERRORMSG("Syntax: setRelation(string fraction1, string fraction2, 'neutral' | 'allied' | 'hostile')");		
+	}
+	return 0;
+}
+
+int EventSystem::printMessage(lua_State *L)
+{
+	int argc = lua_gettop(L);
+	if (argc>=1 && lua_isstring(L,1))
+	{
+		std::string msg = lua_tostring(L,1);
+		World::getWorld()->handleMessage(msg,NOSLOT);
+	}
+	else
+	{
+		ERRORMSG("Syntax: printMessage(string message)");		
 	}
 	return 0;
 }

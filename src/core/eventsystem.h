@@ -690,6 +690,11 @@ class EventSystem
 		 */
 		static int setRelation(lua_State *L);
 		
+		/**
+		 * \fn static int printMessage(lua_State *L)
+		 * \brief Schreibt eine Nachricht auf den Bildschirm
+		 */
+		static int printMessage(lua_State *L);
 		
 		/**
 		 * \fn static int writeString(lua_State *L)
