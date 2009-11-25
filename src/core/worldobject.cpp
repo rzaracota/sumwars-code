@@ -388,3 +388,15 @@ void WorldObject::setFlag(std::string flag, bool set)
 		m_flags.erase(flag);
 	}
 }
+
+WorldObject::Group WorldObject::getGroup()
+{
+	if (!isCreature())
+		return WorldObject::FIXED;
+	if (getState() == STATE_DEAD || getState() == STATE_DIEING )
+		return WorldObject::DEAD;
+	if (getType() == "PLAYER")
+		return PLAYER;
+	return WorldObject::CREATURE_ONLY;
+			
+}

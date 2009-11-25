@@ -490,7 +490,7 @@ bool  Region::addObjectsInShapeFromGridunit(Shape* shape, Gridunit* gu, WorldObj
 
 		s = wo->getShape();
 
-		if (wo->getLayer() & layer)
+		if ((wo->getLayer() & layer) && (wo->getGroup() & group))
 		{
 			DEBUG5("adding obj %i layer %i",wo->getId(), wo->getLayer());
 			if ((shape ==0) || shape->intersects(*s))
@@ -532,7 +532,7 @@ bool Region::addObjectsOnLineFromGridunit(Line& line, Gridunit* gu, WorldObjectL
 		DEBUG5("testing %p",wo);
 		s = wo->getShape();
 
-		if (wo->getLayer() & layer)
+		if ((wo->getLayer() & layer) && (wo->getGroup() & group))
 		{
 			if (s->intersects(line))
 			{
@@ -626,7 +626,7 @@ bool Region::getObjectsInShape( Shape* shape,  WorldObjectList* result,short lay
 				{
 					DEBUG5("searching dead layer");
 
-					ret =  addObjectsInShapeFromGridunit(shape, gu, result, layer,WorldObject::DEAD, omit, empty_test);
+					ret =  addObjectsInShapeFromGridunit(shape, gu, result, layer,group & WorldObject::DEAD, omit, empty_test);
 					if (!result->empty() && empty_test)
 						return true;
 
@@ -637,7 +637,7 @@ bool Region::getObjectsInShape( Shape* shape,  WorldObjectList* result,short lay
 				{
 					DEBUG5("searching fixed layer");
 
-					ret =  addObjectsInShapeFromGridunit(shape, gu, result, layer,WorldObject::FIXED, omit, empty_test);
+					ret =  addObjectsInShapeFromGridunit(shape, gu, result, layer,group & WorldObject::FIXED, omit, empty_test);
 					if (!result->empty() && empty_test)
 						return true;
 
@@ -647,7 +647,7 @@ bool Region::getObjectsInShape( Shape* shape,  WorldObjectList* result,short lay
 				if (group & WorldObject::CREATURE)
 				{
 
-					ret =  addObjectsInShapeFromGridunit(shape, gu, result, layer,WorldObject::CREATURE, omit, empty_test);
+					ret =  addObjectsInShapeFromGridunit(shape, gu, result, layer,group & WorldObject::CREATURE, omit, empty_test);
 					if (!result->empty() && empty_test)
 						return true;
 
@@ -743,7 +743,7 @@ void Region::getObjectsOnLine(Line& line,  WorldObjectList* result,short layer, 
 			{
 				DEBUG5("searching dead layer");
 
-				addObjectsOnLineFromGridunit(line, gu, result, layer,WorldObject::DEAD, omit);
+				addObjectsOnLineFromGridunit(line, gu, result, layer,group & WorldObject::DEAD, omit);
 			}
 
 				// feste Objekte
@@ -752,7 +752,7 @@ void Region::getObjectsOnLine(Line& line,  WorldObjectList* result,short layer, 
 				DEBUG5("searching fixed layer");
 
 
-				addObjectsOnLineFromGridunit(line, gu, result, layer,WorldObject::FIXED, omit);
+				addObjectsOnLineFromGridunit(line, gu, result, layer,group & WorldObject::FIXED, omit);
 			}
 
 				// lebende Objekte
@@ -760,7 +760,7 @@ void Region::getObjectsOnLine(Line& line,  WorldObjectList* result,short layer, 
 			{
 
 
-				addObjectsOnLineFromGridunit(line, gu, result, layer,WorldObject::CREATURE, omit);
+				addObjectsOnLineFromGridunit(line, gu, result, layer,group & WorldObject::CREATURE, omit);
 			}
 
 
@@ -855,7 +855,7 @@ bool Region::insertObject(WorldObject* object, Vector pos, float angle )
 		insertNetEvent(event);
 		DEBUG5("insert object %i",event.m_id);
 		
-		if (object->getGroup() == WorldObject::CREATURE)
+		if (object->getGroup() & WorldObject::CREATURE)
 		{
 			Trigger* tr = new Trigger("create_unit");
 			tr->addVariable("unit", object->getId());

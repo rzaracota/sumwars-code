@@ -309,15 +309,7 @@ class WorldObject : public GameObject
 	 * \fn WorldObject::Group getGroup()
 	 * \brief Gibt aus zu welcher Gruppierung ein Objekt gehoert
 	 */
-	WorldObject::Group getGroup()
-	{
-		if (!isCreature())
-			return WorldObject::FIXED;
-		if (getState() == STATE_DEAD || getState() == STATE_DIEING )
-			return WorldObject::DEAD;
-		return WorldObject::CREATURE;
-			
-	}
+	WorldObject::Group getGroup();
 
 	/**
 	 * \fn void toString(CharConv* cv)
