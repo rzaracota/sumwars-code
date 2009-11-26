@@ -611,7 +611,6 @@ bool ObjectLoader::loadObject(TiXmlNode* node)
 		}
 		else if (tdata !=0)
 		{
-			DEBUG("Treasure %s",subtype.c_str());
 			tdata->m_subtype = subtype;
 			ObjectFactory::registerTreasure(subtype,tdata);
 		}

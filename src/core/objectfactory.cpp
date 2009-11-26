@@ -54,7 +54,7 @@ GameObject::Subtype ObjectTemplate::getObject(EnvironmentName env)
 	
 	if (it->second.empty())
 	{
-		return "";
+		return "notype";
 	}
 	
 	WorldObjectTypeList::iterator jt;

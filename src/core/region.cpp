@@ -919,6 +919,13 @@ int Region::createObject(ObjectTemplateType generictype, Vector pos, float angle
 
 	// genauen Subtyp ermitteln
 	WorldObject::Subtype subtype = ObjectFactory::getObjectType(generictype, env);
+	
+	if (subtype == "notype")
+	{
+		// Objekt fuer die Umgebung explizit als nichtexistent gesetzt
+		return 0;
+	}
+	
 	if (subtype == "")
 	{
 		DEBUG("no subtype found for generictype %s",generictype.c_str());
