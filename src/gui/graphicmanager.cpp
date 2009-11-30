@@ -488,6 +488,7 @@ void GraphicManager::loadMovableObjectInfo(TiXmlNode* node, MovableObjectInfo* i
 							
 	attr.getString("position",pos);
 	attr.getString("rotation",rot);
+	attr.getBool("highlightable",info->m_highlightable,true);
 	if (pos!= "")
 	{
 		std::stringstream stream;

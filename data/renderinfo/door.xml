@@ -28,9 +28,9 @@
 </RenderInfo>
 
 <RenderInfo name="konz_door1">
-	<Entity source="konz_door_m1.mesh" />
-	<Entity objectname = "rightWing" source="konz_door_wr.mesh" />
-	<Entity objectname = "leftWing" source="konz_door_wl.mesh" />
+	<Entity source="konz_door_m1.mesh" highlightable="false"/>
+	<Entity objectname = "rightWing" source="konz_door_wr.mesh" highlightable="false"/>
+	<Entity objectname = "leftWing" source="konz_door_wl.mesh" highlightable="false"/>
 	<Entity objectname = "lock" source="konz_door_l.mesh" position = "0 1.592 0"/>
 	
 	<State name="open">

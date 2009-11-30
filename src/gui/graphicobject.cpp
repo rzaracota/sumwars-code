@@ -994,7 +994,7 @@ void GraphicObject::setHighlight(bool highlight, std::string material)
 		std::map<std::string, AttachedMovableObject>::iterator at;
 		for (at = m_attached_objects.begin(); at != m_attached_objects.end(); ++at)
 		{
-			if (at->second.m_object->getMovableType() == "Entity")
+			if (at->second.m_object->getMovableType() == "Entity" && at->second.m_object_info.m_highlightable)
 			{
 				// Kopie der Entity erschaffen, die fuer das Highlighting da ist
 				std::string name = at->first;
