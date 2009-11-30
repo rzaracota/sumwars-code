@@ -118,28 +118,6 @@
 	</Locations>
 </ObjectGroupTemplate>
 
-<ObjectGroupTemplate name = "robsHideout" >
-	<Shape
-		  type = "RECT"
-		  extent_x = "4.0"
-		  extent_y = "4.0"
-		  angle ="0"
-		/>
-	<ObjectContent>
-		<Object subtype="$tree"
-			center_x="0"
-			center_y="-2"
-			angle = "0"
-			probability ="1.0"
-			prob_angle = "false"
-			/>
-	</ObjectContent>
-	<Locations>
-		<Location name = "locRob" pos_x="0" pos_y="0" />
-	</Locations>
-</ObjectGroupTemplate>
-
-
 <ObjectGroupTemplate name = "powerlich" >
 	<Shape
 		  type = "RECT"

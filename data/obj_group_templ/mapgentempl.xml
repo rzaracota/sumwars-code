@@ -60,49 +60,6 @@
         </ObjectContent>
 </ObjectGroupTemplate>
 
-<ObjectGroupTemplate name = "border(filled)" >
-        <Shape
-                  type = "RECT"
-                  extent_x = "4"
-                  extent_y = "4"
-                  angle ="0"
-                  />
-
-        <ObjectContent>
-                <Object subtype="$tree"
-                                center_x="0"
-                                center_y="3.6"
-                                angle = "0"
-                                probability ="0.5"
-                                prob_angle = "true"
-                                />
-
-                <Object subtype="$tree"
-                                center_x="-1"
-                                center_y="-2.3"
-                                angle = "0"
-                                probability ="0.5"
-                                prob_angle = "true"
-                                />
-
-                <Object subtype="$tree"
-                                center_x="-1.2"
-                                center_y="3.3"
-                                angle = "0"
-                                probability ="0.5"
-                                prob_angle = "true"
-                                />
-
-                <Object subtype="$tree"
-                                center_x="0.4"
-                                center_y="-1,7"
-                                angle = "0"
-                                probability ="0.5"
-                                prob_angle = "true"
-                                />
-        </ObjectContent>
-</ObjectGroupTemplate>
-
 <ObjectGroupTemplate name = "waypoint_templ" >
         <Shape
                   type = "RECT"

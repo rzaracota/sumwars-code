@@ -74,7 +74,7 @@
 		</NamedObjectGroups>
 		
 		<ObjectGroups>
-			<ObjectGroup object_group="treePatch_med" priority="1" number="2" probability="1"/>
+			<ObjectGroup object_group="treePatch_med" priority="1" number="3" probability="1"/>
 		</ObjectGroups>
 		
 		<SpawnGroups>
@@ -120,11 +120,18 @@
 		<HeroLight red="1.0" green="1.0" blue="1.0" /> 
 		<DirectionalLight red="0.3" green="0.3" blue="0.3" />
 		
-		<Settings dimx="24" dimy="24" area_percent="0.3" complexity="0.3" granularity="4"  ground="cave_ground"/>
+		<Settings dimx="48" dimy="48" area_percent="0.3" complexity="0.3" granularity="4"  ground="cave_ground"/>
 		
 		<ExitDirections north="true" south="true" west="false" east="false" />
 		<WorldPosition world_x="0.3" world_y ="0.8"/>
 
+		<ObjectGroups>
+			<ObjectGroup object_group="cryptShrine" priority="2" number="5" probability="1"/>
+			<ObjectGroup object_group="cryptInlet" priority="2" number="4" probability="1"/>
+			<ObjectGroup object_group="konzColumn" priority="1" number="15" probability="1"/>
+			<ObjectGroup object_group="cryptRoom" priority="3" number="2" probability="1"/>
+		</ObjectGroups>
+		
 		<SpawnGroups>
 			<SpawnGroup group_name="zombies" number="12" />
 		</SpawnGroups>
@@ -150,7 +157,7 @@
 		<HeroLight red="1.0" green="1.0" blue="1.0" /> 
 		<DirectionalLight red="0.3" green="0.3" blue="0.3" />
 		
-		<Settings dimx="24" dimy="24" area_percent="0.3" complexity="0.3" granularity="4"  ground="cave_ground"/>
+		<Settings dimx="56" dimy="56" area_percent="0.3" complexity="0.3" granularity="4"  ground="cave_ground"/>
 		<WorldPosition world_x="0.3" world_y ="0.8"/>
 
 		<ExitDirections north="true" south="false" west="false" east="false" />
@@ -165,8 +172,15 @@
 			<Environment height="1.0" name="cave" />
 		</Environments>
 		
+		<ObjectGroups>
+			<ObjectGroup object_group="cryptShrine" priority="2" number="10" probability="1"/>
+			<ObjectGroup object_group="cryptInlet" priority="3" number="6" probability="1"/>
+			<ObjectGroup object_group="konzColumn" priority="1" number="20" probability="1"/>
+			<ObjectGroup object_group="cryptRoom" priority="4" number="4" probability="1"/>
+		</ObjectGroups>
+		
 		<NamedObjectGroups>
-			<NameObjectGroup name="graveChamber" object_group="maylonsGraveL2Chamber" priority="4"/>
+			<NameObjectGroup name="graveChamber" object_group="maylonsGraveChamber" priority="5"/>
 		</NamedObjectGroups>
 	</Region>	
 	

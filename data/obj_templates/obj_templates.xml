@@ -18,7 +18,6 @@ FIXED_OBJECT
                 <Object name="tree4" />
         </Environment>
 		<Environment name="cave">
-				<Object name= "stone1"/>
         </Environment>
 </ObjectTemplate>
 
@@ -37,6 +36,7 @@ FIXED_OBJECT
         <Environment name="hills" default="true">
                 <Object name="bush" />
         </Environment>
+		<Environment name="cave"/>
 </ObjectTemplate>
 <ObjectTemplate name="$plant_bushes_script" type="SCRIPTOBJECT">
         <Environment name="hills" default="true">
@@ -140,12 +140,6 @@ FIXED_OBJECT
         
 </ObjectTemplate>
 
-<ObjectTemplate name="$border_crypt_m" type="FIXED_OBJECT">
-        <Environment name="council" default = "true">
-                <Object name="caveCryptPodest" />
-        </Environment>
-</ObjectTemplate>
-
 <ObjectTemplate name="$border_balustrade" type="FIXED_OBJECT">
         <Environment name="council" default = "true">
                 <Object name="konz_balustrade1" />
@@ -174,6 +168,18 @@ FIXED_OBJECT
 <ObjectTemplate name="$border_balustrade_cOut" type="FIXED_OBJECT">
         <Environment name="council" default = "true">
                 <Object name="konz_balustrade_cout1" />
+        </Environment>
+</ObjectTemplate>
+
+<ObjectTemplate name="$column_slim" type="FIXED_OBJECT">
+        <Environment name="council">
+                <Object name="konz_column1" />
+        </Environment>
+</ObjectTemplate>
+<ObjectTemplate name="$column_big" type="FIXED_OBJECT">
+        <Environment name="cave">
+                <Object name="cave_column1" />
+				<Object name="cave_column2" />
         </Environment>
 </ObjectTemplate>
 
@@ -544,8 +550,9 @@ FIXED_OBJECT
                 <Object name="goldsack" />
         </Environment>
 </ObjectTemplate>
+
 <ObjectTemplate name="$ground" type="FIXED_OBJECT">
-        <Environment name="cave" default = "true">
+        <Environment name="cave">
                 <Object name="ground" />
 				<Object name="ground_m" />
 				<Object name="ground_s" />
@@ -555,6 +562,54 @@ FIXED_OBJECT
 				<Object name="ground_squ_m" />
 				<Object name="ground_squ_s" />
         </Environment>
+</ObjectTemplate>
+<ObjectTemplate name="$ground_long" type="FIXED_OBJECT">
+        <Environment name="cave">
+                <Object name="ground" />
+        </Environment>
+		<Environment name="meadow" default = "true" />
+</ObjectTemplate>
+<ObjectTemplate name="$ground_medium" type="FIXED_OBJECT">
+        <Environment name="cave">
+                <Object name="ground_m" />
+        </Environment>
+		<Environment name="meadow" default = "true" />
+</ObjectTemplate>
+<ObjectTemplate name="$ground_small" type="FIXED_OBJECT">
+        <Environment name="cave">
+                <Object name="ground_s" />
+        </Environment>
+		<Environment name="meadow" default = "true" />
+</ObjectTemplate>
+<ObjectTemplate name="$ground_tiny" type="FIXED_OBJECT">
+        <Environment name="cave">
+                <Object name="ground_t" />
+        </Environment>
+		<Environment name="meadow" default = "true" />
+</ObjectTemplate>
+<ObjectTemplate name="$ground_corner" type="FIXED_OBJECT">
+        <Environment name="cave">
+                <Object name="ground_c" />
+        </Environment>
+		<Environment name="meadow" default = "true" />
+</ObjectTemplate>
+<ObjectTemplate name="$ground_square" type="FIXED_OBJECT">
+        <Environment name="cave">
+                <Object name="ground_squ_l" />
+        </Environment>
+		<Environment name="meadow" default = "true" />
+</ObjectTemplate>
+<ObjectTemplate name="$ground_square_m" type="FIXED_OBJECT">
+        <Environment name="cave">
+                <Object name="ground_squ_m" />
+        </Environment>
+		<Environment name="meadow" default = "true" />
+</ObjectTemplate>
+<ObjectTemplate name="$ground_square_s" type="FIXED_OBJECT">
+        <Environment name="cave">
+                <Object name="ground_squ_s" />
+        </Environment>
+		<Environment name="meadow" default = "true" />
 </ObjectTemplate>
 
 <ObjectTemplate name="$corpse_slugs_dissect" type="FIXED_OBJECT">
@@ -654,6 +709,7 @@ FIXED_OBJECT
 <ObjectTemplate name="$misc_sarkophagus" type="FIXED_OBJECT">
         <Environment name="council" default = "true">
 			<Object name="sarkophagus" />
+			<Object name="sarkophagusBig" />
         </Environment>
 </ObjectTemplate>
 <ObjectTemplate name="$misc_urn" type="FIXED_OBJECT">
@@ -664,6 +720,11 @@ FIXED_OBJECT
         </Environment>
 </ObjectTemplate>
 
+<ObjectTemplate name="$podest_konz_t" type="FIXED_OBJECT">
+        <Environment name="council" default = "true">
+                <Object name="konz_podest" />
+        </Environment>
+</ObjectTemplate>
 
 <ObjectTemplate name="$treasure_sarkophagus" type="TREASURE">
         <Environment name="council" default = "true">

@@ -370,58 +370,65 @@
 					speak("Soren",_("Mit einer Antwort, die euch alle von euren Leiden befreien wird."));
 				end;
 				speak("Soren",_("Aber bevor ich sie euch gebe, muesst ihr jedoch zuerst etwas für mich tun."));
-				speak("any",_("May Harad curse you!"),"angry");
-				speak("Soren",_("Ts Ts. Wie unhöflich den Namen des Verfluchten in Akerans Hallen zu verwenden."),"unhappy");
-				speak("leader",_("Das ist eine verdammte Räuberhöhle."),"threaten");
+				speak("any",_("Moege Harad dich verfluchen!"),"angry");
+				speak("Soren",_("Ts Ts. Wie unhoeflich den Namen des Verfluchten in Akerans Hallen zu verwenden."),"unhappy");
+				speak("leader",_("Das ist eine verdammte Raeuberhoehle."),"threaten");
 				speak("Soren",_("Euch entgeht der eigentliche Punkt."),"bored");
-				speak("Soren",_("You should realise that it is entirely in you hands how long you will be under this curse."),"threaten");
-				speak("Soren",_("Fulfil my orders to the councils satisfaction and I have the power to release you of the claws of the deathgod."));
-				speak("Soren",_("If not, however..."));
+				speak("Soren",_("Ihr solltet begreifen, dass es ganz an euch liegt, wie lange ihr unter der vollkommenen Knechtschaft des Totengottes stehen werdet."),"threaten");
+				speak("Soren",_("Erfuellt ihr meinen Auftrag zur Zufriedenheit Akerans und des Konzils, habe ich die Macht euch aus seine Klauen zu befreien."), "normal");
+				speak("Soren",_("Für immer."),"bored");
+				speak("Soren",_("If not, however..."),"threaten");
 				if(solo())then
-					speak("leader",_("I heard that one a thousand times allready. Cut the speach."),"bored");
+					speak("leader",_("Hab ich schon tausend Mal gehoert. Spar dir die Rede."),"bored");
 				else
-					speak("leader",_("We know that one allready. Cut the speach."),"bored");
+					speak("leader",_("Das kennen wir schon, also spart dir die langen Reden."),"bored");
 				end;
 				if (getSpeaker("leader") ~= getSpeaker("any")) then
-					insertInDialog("getSpeaker('any'), _('What?! The curse can be taken from us? Why do I hear this only know?'),'surprised');")
+					insertInDialog("getSpeaker('any'), _('Was?!! Der Fluch kann von uns genommen werden? Warum hoere ich das erst jetzt?'),'surprised');")
 				end;
-				speak("Soren",_("As you wish."),"grin");
-				speak("Soren",_("The task is pretty dangerous and you are likely to die more than once."));
-				speak("PL",_("Harad's curse has to have some advantage."),"normal");
-				speak("waropt",_("If only the pain wasn't so bad everytime..."),"sad");
+				speak("Soren",_("Wie ihr es wuenscht."),"grin");
+				speak("Soren",_("Doch ich sollte euch warnen, der Auftrag ist recht gefaehrlich und ihr werdet wahrscheinlich mehr als einmal sterben."));
+				speak("PL",_("Der Fluch von Harad muss ja irgend einen Vorteil haben."),"normal");
+				speak("waropt",_("Bis auf die Schmerzen..."),"sad");
 				if (getSpeaker("waropt") ~= getSpeaker("magopt")) then
-					speak("magopt",_("Even here you have to whine."));
+					speak("magopt",_("Selbst hier musst du noch jammern."),"sneer");
 				end;
 				if (not solo()) then
-					speak("Soren",_("You are indeed a bunch of trying people."));
+					speak("Soren",_("Ihr seid in der Tat ein Haufen schwieriger Gestalten."));
 				else
 					speak("Soren",_("Ihr seid in der Tat eine schwierige Gestalt"));
 				end;
-				speak("magopt",_("He's beginning to make me angry."),"angry");
+				speak("magopt",_("Langsam macht er mich wuetend"),"angry");
 				if (getSpeaker("priest") ~= getSpeaker("magopt")) then
-					speak("priest",_("Peace!"));
+					speak("priest",_("Friede!"));
 				end;
-				speak("Soren",_("The first thing you have to learn are obviously manners."),"threaten");
-				speak("Soren",_("Consider it as a small bonus:"),"aloof");
-				speak("Soren",_("Before your real assignment you will go to dwarfenwall as backup."));
-				speak("Soren",_("Show the undead there who the real favourite of the deathgod is."));
-				speak("PL",_("Smells like exploitation."),"unhappy");
-				speak("priopt",_("Besides the necromancers don't follow Harad."),"thoughtful");
+				if(solo())then
+					speak("Soren",_("Armselige Gestalt!"),"angry");
+					speak("Soren",_("Zuerst muesst Ihr ganz offensichtlich Manieren lernen. _solo"),"threaten");
+				else
+					speak("Soren",_("Armselige Gestalten!"),"angry");
+					speak("Soren",_("Zuerst muesst ihr ganz offensichtlich Manieren lernen."),"threaten");
+				end;
+				speak("Soren",_("Betrachtet es einfach als kleine Gefaelligkeit:"),"aloof");
+				speak("Soren",_("Vor eurem eigentlichen Auftrag geht ihr als Verstaerkung nach Zwergentrutz."));
+				speak("Soren",_("Zeigt den Untoten dort, wer tatsaechlich der Liebling des Totengottes ist."));
+				speak("PL",_("Das schmeckt wie Ausbeutung."),"unhappy");
+				speak("priopt",_("Außerdem folgen Nekromanten nicht Harad."),"thoughtful");
 				if (getSpeaker("PL") ~= getSpeaker("any")) then
-					speak("any",_("This robegnome ranks pretty high among all the cheesy rats"),"unhappy");
-					speak("any",_("for whom I pulled chestnuts out of the fire."),"unhappy");
+					speak("any",_("Unter allen miesen Ratten, für die ich schon die Kastanien aus dem Feuer geholt habe"),"unhappy");
+					speak("any",_("rangiert dieser Robenwicht ziemlich weit an der Spitze."),"unhappy");
 					if (getSpeaker("waropt") ~= getSpeaker("any")) then
 						speak("waropt",_("Ich verstehe auch nicht, warum wir hier nach seiner Pfeife tanzen. Er ist doch schließlich-"),"threaten");
 						speak("any",_("Nur ein Mensch!!"),"warcry");
 					end;
 				end;
 				
-				speak("Soren",_("You obviously misjudge your position."),"aloof");
-				speak("Soren",_("What do you think will happen, if your revealed in town?"));
-				speak("Soren",_("We know everything about your kind, and believe me, no one will be stupid enough to kill you."),"threaten");
+				speak("Soren",_("Ihr verkennt ganz offensichtlich eure Position."),"aloof");
+				speak("Soren",_("Was denkt ihr wohl, was geschieht, wenn ihr in dieser Stadt erkannt werdet?"));
+				speak("Soren",_("Wir wissen alles ueber eure akeranverfluchte Art und niemand waere dumm genug, euch zu toeten, dass koennt ihr mir glauben."),"threaten");
 				
 				setTopicBase("Soren Windclaw");
-				addQuestion(_("Continue to be snotty?"));
+				addQuestion(_("Weiterhin patzig sein?"));
 				addAnswer(_("Yes"),"be_unkind");
 				addAnswer(_("No"),"be_kind");
 			</Effect>
@@ -434,38 +441,38 @@
 	<NPC refname="Soren Windclaw">
 		<Topic name="be_unkind">
 			<Effect>
-				speak("PL",_("You consider yourself very mighty and clever, don't you?"),"angry");
+				speak("PL",_("Ihr haltet euch wohl für besonders mächtig und gerissen?"),"angry");
 				if (not solo()) then
-					speak("magopt",_("Surely he has written down that knowledge of his somewhere."),"thoughtful");
-					speak("magopt",_("We can search for it after he's dead."));
+					speak("magopt",_("Sicherlich hat er sein Wissen hier irgendwo aufgeschrieben."),"thoughtful");
+					speak("magopt",_("Wir koennen danach suchen, sobald er tot ist."));
 					if (getSpeaker("magopt") ~= getSpeaker("waropt")) then
-						speak("waropt",_("A good opportunity, indeed."),"grin");
+						speak("waropt",_("Eine guenstige Gelegenheit. In der Tat."),"grin");
 					end;
 				else
-					speak("leader",_("Surely you have written down that knowledge of yours somewhere."),"thoughtful");
-					speak("leader",_("I can search for it after your untimely death."));
+					speak("leader",_("Sicherlich hast du dein Wissen hier irgendwo aufgeschrieben."),"thoughtful");
+					speak("leader",_("Ich kann auch nach deinem vorzeitigen Tod danach suchen."));
 				end;
-				speak("Soren",_("Yes, they warned me about that, too."));
+				speak("Soren",_("Ja, sie haben mich auch davor gewarnt, dass so etwas geschehen koennte."));
 				
 				-- Er beschwoert einen kleinen Feuerelementar vor sich und haelt einen
 				-- weiteren Kristall in die Luft.
 				
-				speak("Soren",_("I will keep an eye on you and give you orders with this crystal."));
-				speak("Soren",_("This simple elemental will remind you now that immortality has little meaning here."));
+				speak("Soren",_("Mit diesem Kristall werde ich euch im Auge behalten und Anweisungen erteilen."));
+				speak("Soren",_("Dieser einfache Elementar wird euch jetzt daran erinnern, dass Unsterblichkeit an diesem Ort wenig bedeutet."));
 				executeInDialog("insertTrigger('fire_elemental')");
 			</Effect>
 		</Topic>
 		
 		<Topic name="be_kind">
 			<Effect>
-				speak("PL",_("Of course. With our freedom as the price"));
-				speak("PL",_("we will do everything in our might to be successful."));
-				speak("waropt",_("I don't like it."));
-				speak("Soren",_("Very well."));
-				speak("Soren",_("I must take care of the preparations for the princes wedding now."));
-				speak("Soren",_("There is no time for further explanations."));
-				speak("Soren",_("Take this crystall and some gold."));
-				speak("Soren",_("I will send you orders with it when the time comes."));
+				speak("PL",_("Natuerlich."));
+				speak("PL",_("Wenn unsere Freiheit die Belohnung ist, werden wir alles in unserer Macht stehende tun, um erfolgreich zu sein."));
+				speak("waropt",_("Das gefaellt mir nicht."));
+				speak("Soren",_("Nun gut."));
+				speak("Soren",_("Ich muss mich jetzt um die Vorbereitungen für die bevorstehende Heirat des Prinzen kuemmern."));
+				speak("Soren",_("Es ist keine Zeit für weitere Erklaerungen."));
+				speak("Soren",_("Nehmt etwas Gold und diesen Kristall."));
+				speak("Soren",_("Darueber werde ich euch zur rechten Zeit weitere Instruktionen senden. "));
 				
 				-- Jeder der Gruppe erhält 200 GM. Anschließend verlassen sie den Saal.
 				local players = getPlayers();
@@ -595,9 +602,23 @@
 					speak("leader",_("Na bitte, das war doch eher zahm."),"injured2");
 				end;
 				
-				speak("Soren",_("That was the weakest elemental I could possibly summon."));
-				speak("Soren",_("Now go. I have no time to waste."));
-				speak("Soren",_("The prince will marry soon and there are lots of preparations to make."));
+				speak("Soren",_("Das war der schwaechste Elementar, den ich beschwoeren konnte."),"angry");
+				speak("Soren",_("Denkt immer daran."),"threaten");
+				speak("Soren",_("Denkt immer daran."),"normal");
+				speak("Soren",_("Nehmt etwas Gold und ruestet euch im Soeldnerlager noerdlich der Stadt."));
+				speak("Soren",_("Dort findet ihr alles, was ihr braucht."));
+				speak("archer",_("Alles?"),"surprise");
+				setSpeakerEmotion("archer","normal");
+				speak("Soren",_("Ich kann nicht länger meine Zeit verschwenden."),"bored");
+				speak("Soren",_("Der Prinz wird bald heiraten und es gibt noch einige Vorbereitungen zu treffen."),"normal");
+				speak("Soren",_("Ueber diesen Kristall werde ich mit euch in Verbindung bleiben."));
+				speak("arcopt",_("Natuerlich."),"bored");
+				if(solo())then
+					speak("arcopt",_("Ist sicherlich nicht wirklich vom goettlichsten Akeran erlaubt meine Kampfkraft zu erpressen."),"sneer");
+				else
+					speak("arcopt",_("Ist sicherlich nicht wirklich vom goettlichsten Akeran erlaubt, unsere Kampfkraft zu erpressen."),"sneer");
+				end;
+				speak("Soren",_("Verschwindet endlich!"),"angry");
 				
 				executeInDialog("insertTrigger('teleport_out')");
 			</Effect>

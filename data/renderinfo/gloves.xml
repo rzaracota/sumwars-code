@@ -31,10 +31,10 @@
 </RenderInfo>
 
 <RenderInfo name="steelGloves">
-	<Entity source="steel_glv.mesh"/> 
+	<Entity source="steel_glvM.mesh"/> 
 </RenderInfo>
 <RenderInfo name="steelGloves#m" parent="playerbaseM" inherit="animation">
-	<Entity source="steel_glv.mesh"/> 
+	<Entity source="steel_glvM.mesh"/> 
 </RenderInfo>
 <RenderInfo name="steelGloves#f" parent="playerbase" inherit="animation">
 </RenderInfo>

@@ -19,10 +19,10 @@
 </RenderInfo>
 
 <RenderInfo name="steelArm">
-	<Entity source="steel_arm.mesh"/>
+	<Entity source="steel_armM.mesh"/>
 </RenderInfo>
 <RenderInfo name="steelArm#m" parent="playerbaseM" inherit="animation">
-	<Entity source="steel_arm.mesh"/> 
+	<Entity source="steel_armM.mesh"/> 
 </RenderInfo>
 <RenderInfo name="steelArm#f" parent="playerbase" inherit="animation">
 </RenderInfo>

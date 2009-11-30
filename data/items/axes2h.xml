@@ -2,7 +2,7 @@
 
 <!-- Holzfälleraxt -->
 <Item type="weapon" subtype="lumber_axe" name="lumberjack axe" size="big">
-	<Image image="set:axe2H.png image:full_image" />
+	<Image image="set:lumber_axe.png image:full_image" />
 	<RenderInfo name = "lumberAxe" />
 	<Attribute
 		level_requirement="1"

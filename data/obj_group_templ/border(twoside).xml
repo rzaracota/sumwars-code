@@ -11,17 +11,10 @@
   <WayPoint pos_x="0" pos_y="0" />
 
   <ObjectContent>
-    <Object subtype="$border" 
-            center_x="0" 
-            center_y="3.5" 
-            angle="90" 
-            probability="1" 
-            prob_angle="false" 
-    />
     <Object subtype="$flower" 
             center_x="-1.172917805" 
             center_y="0.7747840369" 
-                        height="-2.664535259e-015" 
+			height="-2.664535259e-015" 
             angle="0" 
             probability="0.5" 
             prob_angle="true" 
@@ -64,7 +57,7 @@
     <Object subtype="$flower" 
             center_x="-3.160017772" 
             center_y="-2.59136968" 
-                        height="-1.776356839e-015" 
+			height="-1.776356839e-015" 
             angle="0" 
             probability="0.5" 
             prob_angle="true" 
@@ -72,7 +65,7 @@
     <Object subtype="$flower" 
             center_x="-3.317684864" 
             center_y="-0.05142793486" 
-                        height="-8.881784197e-016" 
+			height="-8.881784197e-016" 
             angle="0" 
             probability="0.5" 
             prob_angle="true" 
@@ -87,7 +80,7 @@
     <Object subtype="$flower" 
             center_x="-3.162034632" 
             center_y="2.582559239" 
-                        height="-8.881784197e-016" 
+			height="-8.881784197e-016" 
             angle="0" 
             probability="0.5" 
             prob_angle="true" 
@@ -95,7 +88,7 @@
     <Object subtype="$flower" 
             center_x="-2.381356321" 
             center_y="1.951721422" 
-                        height="-2.664535259e-015" 
+			height="-2.664535259e-015" 
             angle="0" 
             probability="0.5" 
             prob_angle="true" 
@@ -103,7 +96,7 @@
     <Object subtype="$flower" 
             center_x="-2.471994568" 
             center_y="2.791476895" 
-                        height="-4.440892099e-015" 
+			height="-4.440892099e-015" 
             angle="0" 
             probability="0.5" 
             prob_angle="true" 
@@ -111,7 +104,7 @@
     <Object subtype="$flower" 
             center_x="-1.929814385" 
             center_y="2.111773104" 
-                        height="-2.664535259e-015" 
+			height="-2.664535259e-015" 
             angle="0" 
             probability="0.5" 
             prob_angle="true" 
@@ -119,7 +112,7 @@
     <Object subtype="$flower" 
             center_x="-3.435579253" 
             center_y="1.091833145" 
-                        height="-2.664535259e-015" 
+			height="-2.664535259e-015" 
             angle="0" 
             probability="0.5" 
             prob_angle="true" 
@@ -127,15 +120,57 @@
     <Object subtype="$flower" 
             center_x="-1.172917805" 
             center_y="0.7747840369" 
-                        height="-2.664535259e-015" 
+			height="-2.664535259e-015" 
             angle="0" 
             probability="0.5" 
             prob_angle="true" 
     />
+    <Object subtype="$ground_long" 
+            center_x="0" 
+            center_y="2.5" 
+            angle="-90" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="$ground_long" 
+            center_x="0" 
+            center_y="1.5" 
+            angle="-90" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="$ground_square_m" 
+            center_x="2" 
+            center_y="-1" 
+            angle="0" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="$ground_square_m" 
+            center_x="-2" 
+            center_y="-1" 
+            angle="0" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="$border" 
+            center_x="0" 
+            center_y="3.5" 
+            angle="-90" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="$border" 
+            center_x="0" 
+            center_y="-3.5" 
+            angle="90" 
+            probability="1" 
+            prob_angle="false" 
+    />
     <Object subtype="$single_deb_l" 
             center_x="-0.08061227619" 
             center_y="-0.1360793494" 
-            angle="0" 
+            angle="-0" 
             probability="0.2" 
             prob_angle="true" 
     />
@@ -149,7 +184,7 @@
     <Object subtype="$tree" 
             center_x="1.320329642" 
             center_y="-0.192836492" 
-                        height="1.776356839e-015" 
+			height="1.776356839e-015" 
             angle="0" 
             probability="0.5" 
             prob_angle="true" 
@@ -175,16 +210,12 @@
             probability="0.5" 
             prob_angle="true" 
     />
-    <Object subtype="$border" 
-            center_x="0" 
-            center_y="-3.5" 
-            angle="-90" 
-            probability="1" 
-            prob_angle="false" 
-    />
   </ObjectContent>
 
   <Locations>
   </Locations>
+
+  <Areas>
+  </Areas>
 
 </ObjectGroupTemplate>
