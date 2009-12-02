@@ -990,10 +990,16 @@ void Region::createObjectGroup(ObjectGroupName templname, Vector position, float
 	
 	// Umgebung erfahren
 	EnvironmentName env = getEnvironment(position);
-	templname = ObjectFactory::getObjectGroupType(templname,env);
+	ObjectGroupName templnameneu = ObjectFactory::getObjectGroupType(templname,env);
 	
-	ObjectGroup* templ = ObjectFactory::getObjectGroup(templname);
-
+	if (templnameneu == "notype")
+	{
+		// Objektgruppe fuer die Umgebung explizit als nichtexistent gesetzt
+		return;
+	}
+	
+	ObjectGroup* templ = ObjectFactory::getObjectGroup(templnameneu);
+	
 	if (templ != 0)
 	{
 		if (name != "")

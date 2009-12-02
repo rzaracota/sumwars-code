@@ -495,7 +495,6 @@ bool MapGenerator::insertGroupTemplates(MapData* mdata, RegionData* rdata)
 	// obligatorische Objektgruppen einfuegen
 
 	std::multimap<int, RegionData::NamedObjectGroup >::reverse_iterator it;
-	ObjectGroup* templ;
 	Shape s;
 	Vector pos;
 	bool succ;
@@ -503,18 +502,12 @@ bool MapGenerator::insertGroupTemplates(MapData* mdata, RegionData* rdata)
 	for (it = rdata->m_named_object_groups.rbegin(); it != rdata->m_named_object_groups.rend(); ++it)
 	{
 		// Objektgruppe anhand des Namens suchen
-		templ = ObjectFactory::getObjectGroup(it->second.m_group_name);
-		if (templ ==0)
+		s = ObjectFactory::getObjectGroupShape(it->second.m_group_name);
+		if (s.m_center.m_x < 0)
 		{
 			ERRORMSG("unknown object group %s",it->second.m_group_name.c_str());
 			continue;
 		}
-
-		// Grundform der Gruppe kopieren
-		s.m_type = templ->getShape()->m_type;
-		s.m_extent = templ->getShape()->m_extent;
-		s.m_radius = templ->getShape()->m_radius;
-		s.m_angle = templ->getShape()->m_angle + it->second.m_angle;
 
 		DEBUG("template angle %f",s.m_angle);
 		
@@ -558,6 +551,8 @@ bool MapGenerator::insertGroupTemplates(MapData* mdata, RegionData* rdata)
 	
 	if (rdata->m_has_waypoint)
 	{
+		ObjectGroup* templ;
+	
 		// Wegpunkt einfuegen
 		templ = ObjectFactory::getObjectGroup("waypoint_templ");
 		memcpy(&s , templ->getShape(), sizeof(Shape));
@@ -572,11 +567,12 @@ bool MapGenerator::insertGroupTemplates(MapData* mdata, RegionData* rdata)
 	}
 	
 	// fakultative Objektgruppen einfuegen
+	
 	std::multimap<int, RegionData::ObjectGroupSet >::reverse_iterator jt;
 	for (jt = rdata->m_object_groups.rbegin(); jt != rdata->m_object_groups.rend(); ++jt)
 	{
-		templ = ObjectFactory::getObjectGroup(jt->second.m_group_name);
-		if (templ ==0)
+		s = ObjectFactory::getObjectGroupShape(jt->second.m_group_name);
+		if (s.m_center.m_x < 0)
 		{
 			ERRORMSG("unknown object group %s",jt->second.m_group_name.c_str());
 			continue;
@@ -589,7 +585,6 @@ bool MapGenerator::insertGroupTemplates(MapData* mdata, RegionData* rdata)
 			{
 				continue;
 			}
-			memcpy(&s , templ->getShape(), sizeof(Shape));
 			
 			// Drehwinkel ermitteln
 			// Kreise beliebig Rechtecke nur um 90°
@@ -620,10 +615,8 @@ bool MapGenerator::insertGroupTemplates(MapData* mdata, RegionData* rdata)
 			DEBUG5("placing group %s at %f %f",jt->second.m_group_name.c_str(), pos.m_x, pos.m_y);
 			mdata->m_region->createObjectGroup(jt->second.m_group_name,pos,angle);
 		}
+		
 	}
-	
-	
-
 	return true;
 }
 
@@ -735,7 +728,7 @@ void MapGenerator::createBorder(MapData* mdata, RegionData* rdata)
 	// ?+?   ?+?   ?+?   ?+?   ?#?   ?+?
 	// ###   ##+   ###   ##+   ###   +#+
 	// ?#?   ?#?   ?+?   ?+?   ?#?   ?+?
-	std::string borders[6] = {"border(side)","border(corner)","border(twoside)","border(twocorner)","border(filled)","border(single_block)"};
+	std::string borders[6] = {"$border(side)","$border(corner)","$border(twoside)","$border(twocorner)","$border(filled)","$border(single_block)"};
 
 	// Maske dafuer, welche Situation vorliegt
 	int bmask[16]={4,0,0,2,0,1,1,3,0,1,1,3,2,3,3,5};
@@ -845,21 +838,21 @@ void MapGenerator::createBorder(MapData* mdata, RegionData* rdata)
 			float diagangle = diagrotmask[dmask] *PI/2;
 			
 			// gemeinsames Template aus Innenecken und Rand herstellen
-			if (templ == "border(filled)" && diagtempl !="")
+			if (templ == "$border(filled)" && diagtempl !="")
 			{
-				templ ="border";
+				templ ="$border";
 				templ += diagtempl;
 				angle = diagangle;
 			}
-			else if (templ == "border(side)" && diagtempl == "(one_smallcorner)")
+			else if (templ == "$border(side)" && diagtempl == "(one_smallcorner)")
 			{
 				if (angle == diagangle)
 				{
-					templ = "border(side)(right_smallcorner)";
+					templ = "$border(side)(right_smallcorner)";
 				}
 				else
 				{
-					templ = "border(side)(left_smallcorner)";
+					templ = "$border(side)(left_smallcorner)";
 				}
 			}
 			else
@@ -870,20 +863,6 @@ void MapGenerator::createBorder(MapData* mdata, RegionData* rdata)
 			DEBUG5("placing type (%i %i) %s",i,j,templ.c_str());
 			
 			mdata->m_region->createObjectGroup(templ,Vector(i*8+4,j*8+4),angle);
-			
-			// TODO Templates mergen ?
-			/*
-			if (diagbmask[dmask] != 0)
-			{
-				diagtempl = "border(";
-				diagtempl += smallcorners[diagbmask[dmask]];
-				diagtempl += ")";
-				
-				DEBUG5("placing type (%i %i) %i %s",i,j,diagbmask[dmask], diagtempl.c_str());
-				
-				mdata->m_region->createObjectGroup(diagtempl,Vector(i*8+4,j*8+4),diagangle);
-			}
-			*/
 		}
 		//std::cout << "\n";
 	}

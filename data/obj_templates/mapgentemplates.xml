@@ -1,0 +1,14 @@
+<ObjectGroupTemplate name="$border(side)">
+	<Shape
+		  type="RECT"
+		  extent_x="4"
+		  extent_y="4"
+		  angle="0"
+		  />
+	<Environment name="meadow" default="true">
+		<ObjectGroup name="border(side)" />
+	</Environment>
+	<Environment name="cave">
+		<ObjectGroup name="border(corner)" />
+	</Environment>
+</ObjectGroupTemplate>
