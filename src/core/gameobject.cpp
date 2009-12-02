@@ -258,6 +258,22 @@ int GameObject::getValue(std::string valname)
 		lua_pushinteger(EventSystem::getLuaState() , getId() );
 		return 1;
 	}
+	else if (valname == "region")
+	{
+		Region* reg = getRegion();
+		std::string rname;
+		if (reg !=0)
+		{
+			rname = reg->getName();
+		}
+		else
+		{
+			rname = "noregion";
+		}
+		
+		lua_pushstring(EventSystem::getLuaState() ,rname.c_str() );
+		return 1;
+	}
 	else if (valname == "subtype")
 	{
 		lua_pushstring(EventSystem::getLuaState() ,getSubtype().c_str() );
