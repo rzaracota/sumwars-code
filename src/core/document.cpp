@@ -906,8 +906,9 @@ void Document::onButtonSkilltreeClicked(bool skill_right)
 
 void Document::onButtonOpenChatClicked()
 {
-	if (!checkSubwindowsAllowed())
-		return;
+	// fuer Debugging sehr nuetzlich, das zuzulassen
+	//if (!checkSubwindowsAllowed())
+	//		return;
 	
 	// Cchatfenster oeffnen wenn es gerade geschlossen ist und schliessen, wenn es geoeffnet ist
 	if (getGUIState()->m_shown_windows & CHAT)
@@ -1546,9 +1547,10 @@ void Document::updateContent(float time)
 	else if (player->getDialogueId() != 0 
 				|| (player->getRegion() !=0 && player->getRegion()->getCutsceneMode () == true))
 	{
-		if ((getGUIState()->m_shown_windows & (~(QUESTIONBOX | SAVE_EXIT))) != 0)
+		// Chat ist fuer Debugging zugeschaltet
+		if ((getGUIState()->m_shown_windows & (~(QUESTIONBOX | SAVE_EXIT | CHAT))) != 0)
 		{
-			getGUIState()->m_shown_windows &= (QUESTIONBOX  | SAVE_EXIT);
+			getGUIState()->m_shown_windows &= (QUESTIONBOX  | SAVE_EXIT | CHAT);
 			m_modified |= WINDOWS_MODIFIED;
 		}
 	}

@@ -20,6 +20,7 @@ ChatLine::ChatLine (Document* doc)
 	chatline->subscribeEvent(CEGUI::Window::EventKeyDown, CEGUI::Event::Subscriber(&ChatLine::onKeyPress,  this));
 	
 	chatline->setText("");
+	chatline->setAlwaysOnTop(true);
 	m_window = chatline;
 	
 	updateTranslation();
