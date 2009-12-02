@@ -558,6 +558,12 @@ class EventSystem
 		static int executeInDialog(lua_State *L);
 		
 		/**
+		 * \fn static int addSpeakerInDialog(lua_State *L)
+		 * \brief Fuegt waehrend der Dialog laeuft einen Sprecher hinzu
+		 */
+		static int addSpeakerInDialog(lua_State *L);
+		
+		/**
 		 * \fn static int createDialogue(lua_State *L)
 		 * \brief Erzeugt einen neuen Dialog
 		 * \param L Lua Status

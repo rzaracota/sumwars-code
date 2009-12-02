@@ -277,14 +277,14 @@ class Dialogue
 		void removeSpeaker(int id);
 		
 		/**
-		 * \fn void speak(std::string refname, std::string text, std::string emotion, float time = 500)
+		 * \fn void speak(std::string refname, std::string text, std::string emotion="", float time = 500)
 		 * \brief Fuegt einen neuen gesprochenen Text ein
 		 * \param refname Name unter dem der Sprecher referenziert wird
 		 * \param text gesprochener Text
 		 * \param emotion angezeigte Emotion
 		 * \param time Zeit, die der Text angezeigt wird
 		 */
-		void speak(std::string refname, std::string text,std::string emotion, float time = 500);
+		void speak(std::string refname, std::string text,std::string emotion="", float time = 500);
 		
 		/**
 		 * \fn void addQuestion(std::string text)

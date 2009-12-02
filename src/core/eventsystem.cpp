@@ -119,6 +119,8 @@ void EventSystem::init()
 	lua_register(m_lua, "createDialogue", createDialogue);
 	lua_register(m_lua, "setTopicBase",setTopicBase );
 	lua_register(m_lua, "addSpeaker", addSpeaker);
+	lua_register(m_lua, "addSpeakerInDialogue", addSpeakerInDialog);
+	lua_register(m_lua, "addSpeakerInDialog", addSpeakerInDialog);
 	lua_register(m_lua, "removeSpeaker", removeSpeaker);
 	lua_register(m_lua, "getSpeaker", getSpeaker);
 	lua_register(m_lua, "setDialogueActive", setDialogueActive);
@@ -2256,6 +2258,37 @@ int EventSystem::executeInDialog(lua_State *L)
 	return 0;
 }
 
+int EventSystem::addSpeakerInDialog(lua_State *L)
+{
+	if (m_dialogue ==0)
+		return 0;
+
+	int argc = lua_gettop(L);
+	if (lua_isnil(L,1))
+	{
+		return 0;
+	}
+	
+	if (argc>=1 && lua_isnumber(L,1))
+	{
+		
+		std::string speaker = lua_tostring(L, 1);
+
+		std::string refname ="";
+		if (argc>=2 && lua_isstring(L,2))
+		{
+			refname = lua_tostring(L,2);
+		}
+		
+		m_dialogue->speak(speaker,"#add_speaker#",refname);
+	}
+	else
+	{
+		ERRORMSG("Syntax: addSpeakerInDialog(int speaker, string refname)");
+	}
+
+	return 0;
+}
 
 int EventSystem::createDialogue(lua_State *L)
 {
@@ -2312,14 +2345,16 @@ int EventSystem::removeSpeaker(lua_State *L)
 		return 0;
 
 	int argc = lua_gettop(L);
-	if (argc>=1 && lua_isnumber(L,1))
+	if (argc>=1 && lua_isnumber(L,1) || lua_isstring(L,1))
 	{
-		int speaker = int (lua_tonumber(L, 1));
-		m_dialogue ->removeSpeaker(speaker);
+		
+		std::string refname = lua_tostring(L, 1);
+		std::string txt = "#remove_speaker#";
+		m_dialogue->speak(refname,txt);
 	}
 	else
 	{
-		ERRORMSG("Syntax: removeSpeaker(int speaker)");
+		ERRORMSG("Syntax: removeSpeaker(string refname)");
 	}
 
 	return 0;	

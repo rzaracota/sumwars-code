@@ -273,11 +273,6 @@ void Dialogue::removeSpeaker(int id)
 		m_nr_players --;
 	}
 	
-	while (!m_speech.empty() && getSpeaker(m_speech.front().first) == id)
-	{
-		m_started = true;
-		m_speech.pop_front();
-	}
 	
 	// alle Sprecherrollen des Spielers loeschen
 	std::map<std::string, int>::iterator it;
@@ -308,6 +303,7 @@ void Dialogue::speak(std::string refname, std::string text, std::string emotion,
 	txt.m_emotion = emotion;
 
 	m_speech.push_back(std::make_pair(refname,txt));
+	
 }
 
 void Dialogue::addQuestion(std::string text)
@@ -661,6 +657,8 @@ void Dialogue::update(float time)
 			Position pos=UNKNOWN;
 			while (cst==0 && !m_speech.empty())
 			{
+				DEBUG5("speak %s",m_speech.front().second.m_text.c_str());
+				
 				// Change Topic braucht keinen Sprecher
 				if (m_speech.front().second.m_text == "#change_topic#")
 				{
@@ -675,9 +673,27 @@ void Dialogue::update(float time)
 					continue;
 				}
 				
+				if (m_speech.front().second.m_text == "#add_speaker#")
+				{
+					// ID wird als String uebergeben
+					std::stringstream stream;
+					stream.str(m_speech.front().first);
+					int id;
+					stream >> id;
+					
+					// Refname steckt in Emotion
+					std::string refname = m_speech.front().second.m_emotion;
+					addSpeaker(id,refname,true);
+					
+					m_speech.pop_front();
+					continue;
+				}
+				
 				id = getSpeaker(m_speech.front().first);
 				wo = m_region->getObject(id );
 				cr = static_cast<Creature*>(wo);
+				
+				
 
 				if (cr ==0 && m_speech.front().first!="nobody")
 				{
@@ -746,6 +762,16 @@ void Dialogue::update(float time)
 					cst =0;
 					continue;
 				}
+				
+				if (cst->m_text == "#remove_speaker#")
+				{
+					removeSpeaker(id);
+					m_speech.pop_front();
+					cst =0;
+					continue;
+				}
+				
+				
 
 				
 				// Falls die Position des Spielers im Dialog noch unbekannt: Position berechnen
