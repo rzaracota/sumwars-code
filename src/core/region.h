@@ -549,13 +549,14 @@ class Region
 		void createObjectGroup(ObjectGroupName templname, Vector position, float angle=0, std::string name ="",WorldObject::State state = WorldObject::STATE_NONE );
 		
 		/**
-		 * \fn void createMonsterGroup(MonsterGroupName mgname, Vector position, float radius=3)
+		 * \fn void createMonsterGroup(MonsterGroupName mgname, Vector position, float radius=3, std::list<int>* monsters=0)
 		 * \brief erzeugt an der angegebenen Stelle eine Monstergruppe
 		 * \param mgname Name der Monstergruppe
 		 * \param position Ort an dem die Gruppe erzeugt wird
 		 * \param radius Umkreis in dem die Monster verteilt werden
+		 * \param monsters Wenn eine Liste uebergeben wird, so werden die IDs der erzeugten Monster in die Liste eingefuegt
 		 */
-		void createMonsterGroup(MonsterGroupName mgname, Vector position, float radius=3);
+		void createMonsterGroup(MonsterGroupName mgname, Vector position, float radius=3, std::list<int>* monsters=0);
 
 		/**
 		 * \fn bool getObjectsInShape( Shape* shape,  WorldObjectList* result,short layer=WorldObject::LAYER_ALL, short group = WorldObject::GROUP_ALL, WorldObject* omit=0, bool empty_test = false );

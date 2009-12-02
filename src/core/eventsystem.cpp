@@ -1009,8 +1009,23 @@ int EventSystem::createMonsterGroup(lua_State *L)
 		
 		if (m_region!=0)
 		{
-
-			m_region->createMonsterGroup(group, pos,radius);
+			std::list<int> monsters;
+			m_region->createMonsterGroup(group, pos,radius,&monsters);
+			
+			// lua Tabelle mit den Ids ausgeben
+			lua_newtable(L);
+			
+			int i=1;
+			std::list<int>::iterator it;
+			for (it = monsters.begin(); it != monsters.end(); ++it)
+			{
+				lua_pushinteger(L, i);
+				lua_pushnumber(L, *it);
+				lua_settable(L, -3);
+				
+				i++;
+			}
+			return 1;
 		}
 		
 	}

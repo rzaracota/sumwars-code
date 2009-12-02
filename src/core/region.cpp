@@ -1117,7 +1117,7 @@ void Region::createObjectGroup(ObjectGroupName templname, Vector position, float
 }
 
 
-void Region::createMonsterGroup(MonsterGroupName mgname, Vector position, float radius)
+void Region::createMonsterGroup(MonsterGroupName mgname, Vector position, float radius, std::list<int>* monsters)
 {
 	MonsterGroup * mgroup = ObjectFactory::getMonsterGroup(mgname);
 
@@ -1152,6 +1152,11 @@ void Region::createMonsterGroup(MonsterGroupName mgname, Vector position, float 
 				count ++;
 				int id = createObject(mt->m_subtype, pos,2*3.14159*Random::random());
 				DEBUG5("inserting monster %s at %f %f with id %i",mt->m_subtype.c_str(),pos.m_x, pos.m_y,id);
+				
+				if (monsters != 0)
+				{
+					monsters->push_back(id);
+				}
 			}
 		}
 		DEBUG5("monstergroup %s : %i x %s prob %f",mgname.c_str(), count, mt->m_subtype.c_str(), mt->m_prob);
