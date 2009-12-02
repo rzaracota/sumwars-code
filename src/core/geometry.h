@@ -427,6 +427,20 @@ struct Shape
 		
 	}
 	
+	/**
+	 * \fn Shape& operator=(Shape other)
+	 * \brief Zuweisungsoperator
+	 */
+	Shape& operator=(Shape other)
+	{
+		m_center = other.m_center;
+		m_type = other.m_type;
+		m_radius = other.m_radius;
+		m_extent = other.m_extent;
+		m_angle = other.m_angle;
+		
+		return *this;
+	}
 };
 
 

@@ -538,14 +538,15 @@ class Region
 		int createObject(ObjectTemplateType generictype, Vector pos, float angle=0, float height=0, WorldObject::State state = WorldObject::STATE_NONE);
 		
 		/**
-		 * \fn void createObjectGroup(ObjectGroupName templname, Vector position, float angle=0, std::string name="" )
+		 * \fn void createObjectGroup(ObjectGroupName templname, Vector position, float angle=0, std::string name="",WorldObject::State state = WorldObject::STATE_NONE)
 		 * \brief erzeugt eine Gruppe von Objekten und fuegt sie in die Region ein
 		 * \param templname Name des Templates aus dem die Gruppe erzeugt wird
 		 * \param position Ort an dem die Gruppe eingefuegt wird
 		 * \param angle Drehwinkel mit dem die Gruppe eingefuegt wird
 		 * \param Name des Ortes
+		 * \param state Zustand in dem die Objekte erzeugt werden
 		 */
-		void createObjectGroup(ObjectGroupName templname, Vector position, float angle=0, std::string name ="");
+		void createObjectGroup(ObjectGroupName templname, Vector position, float angle=0, std::string name ="",WorldObject::State state = WorldObject::STATE_NONE );
 		
 		/**
 		 * \fn void createMonsterGroup(MonsterGroupName mgname, Vector position, float radius=3)

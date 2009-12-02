@@ -61,6 +61,7 @@ void EventSystem::init()
 	lua_register(m_lua, "createObject", createObject);
 	lua_register(m_lua, "createScriptObject", createScriptObject);
 	lua_register(m_lua, "deleteObject", deleteObject);
+	lua_register(m_lua, "createObjectGroup", createObjectGroup);
 	
 	lua_register(m_lua, "dropItem", dropItem);
 	lua_register(m_lua, "createItem", createItem);
@@ -904,6 +905,36 @@ int EventSystem::createObject(lua_State *L)
 
 	lua_pushinteger(EventSystem::getLuaState() , ret);
 	return 1;
+}
+
+int EventSystem::createObjectGroup(lua_State *L)
+{
+	int argc = lua_gettop(L);
+	if (argc>=2 && (lua_istable(L,2) || lua_isstring(L,2)) && lua_isstring(L,1))
+	{
+
+
+		ObjectGroupTemplateName type = lua_tostring(L, 1);
+		Vector pos = getVector(L,2);
+
+		if (m_region!=0)
+		{
+			float angle =0;
+			if (argc>=3 && lua_isnumber(L,3))
+			{
+				angle = lua_tonumber(L, 3);
+				angle *= 3.14159 / 180;
+			}
+			m_region->createObjectGroup(type, pos,angle,"",WorldObject::STATE_AUTO);
+		}
+
+	}
+	else
+	{
+		ERRORMSG("Syntax: createObjectGroup( string type, {float x, float y}, [float angle])");
+	}
+
+	return 0;
 }
 
 int  EventSystem::createScriptObject(lua_State *L)

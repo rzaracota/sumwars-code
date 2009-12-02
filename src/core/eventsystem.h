@@ -271,6 +271,13 @@ class EventSystem
 		static int createObject(lua_State *L);
 		
 		/**
+		 * \fn static int createObjectGroup(lua_State *L);
+		 * \brief erzeugt eine neue Objektgruppe
+		 * \param L Lua Status
+		 */
+		static int createObjectGroup(lua_State *L);
+		
+		/**
 		 * \fn static int createScriptObject(lua_State *L)
 		 * \brief erzeugt ein rein scriptgesteuertes Objekt
 		 */

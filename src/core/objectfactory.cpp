@@ -17,7 +17,7 @@ std::map<GameObject::Subtype, FixedObjectData*> ObjectFactory::m_fixed_object_da
 
 std::map<ObjectTemplateType, ObjectTemplate*> ObjectFactory::m_object_templates;
 
-std::map<ObjectGroupName, ObjectGroup*> ObjectFactory::m_object_group_templates;
+std::map<ObjectGroupName, ObjectGroup*> ObjectFactory::m_object_groups;
 
 std::map< MonsterGroupName, MonsterGroup*>  ObjectFactory::m_monster_groups;
 
@@ -35,7 +35,7 @@ std::multimap< GameObject::Subtype, PlayerLook> ObjectFactory::m_player_look;
 
 std::map<GameObject::Subtype, TreasureBasicData*> ObjectFactory::m_treasure_data;
 
-std::map<EnvironmentName, std::multimap< std::string, ObjectGroupName> > ObjectFactory::m_env_templates;
+std::map<ObjectGroupTemplateName, ObjectGroupTemplate*> ObjectFactory::m_object_group_templates;
 
 GameObject::Subtype ObjectTemplate::getObject(EnvironmentName env)
 {
@@ -72,6 +72,42 @@ GameObject::Subtype ObjectTemplate::getObject(EnvironmentName env)
 
 }
 
+ObjectGroupName ObjectGroupTemplate::getObjectGroup(EnvironmentName env)
+{
+	// Daten aus der Map suchen
+	std::map<EnvironmentName, std::list<ObjectGroupName > >::iterator it;
+	it = m_env_object_groups.find(env);
+	
+	if (it == m_env_object_groups.end())
+	{
+		it = m_env_object_groups.find(m_default_environment);
+		
+		if (it == m_env_object_groups.end() || it->second.empty())
+		{
+			// nichts gefunden
+			return "";
+		}
+	}
+	
+	if (it->second.empty())
+	{
+		return "notype";
+	}
+	
+	WorldObjectTypeList::iterator jt;
+	int r = Random::randi(it->second.size());
+	
+	jt = it->second.begin();
+	for (int i=0; i<r; ++i)
+	{
+		++jt;
+	}
+
+	return *jt;
+
+}
+
+
 void ObjectGroup::addObject(ObjectTemplateType objtype, Vector pos, float angle, float probability )
 {
 	GroupObject gobj;
@@ -102,6 +138,57 @@ GameObject::Subtype ObjectFactory::getObjectType(ObjectTemplateType generictype,
 	else
 	{
 		return it->second->getObject(env);
+	}
+}
+
+ObjectGroupName ObjectFactory::getObjectGroupType(ObjectGroupTemplateName generictype, EnvironmentName env)
+{
+	// Namen die nicht mit $ anfangen sind normale Typen
+	if (generictype[0] != '$')
+	{
+		DEBUG5("simple subtype %s",generictype.c_str());
+		return generictype;
+	}
+	
+	// Suchen in der Datenbank
+	std::map<ObjectGroupTemplateName, ObjectGroupTemplate*>::iterator it;
+	it = m_object_group_templates.find(generictype);
+	if (it == m_object_group_templates.end())
+	{
+		return generictype.substr(1);
+	}
+	else
+	{
+		return it->second->getObjectGroup(env);
+	}
+}
+
+Shape ObjectFactory::getObjectGroupShape(ObjectGroupTemplateName generictype)
+{
+	Shape dummy;
+	dummy.m_center = Vector(-1,-1);
+	
+	// Namen die nicht mit $ anfangen sind normale Typen
+	if (generictype[0] != '$')
+	{
+		ObjectGroup* templ = getObjectGroup(generictype);
+		if (templ != 0)
+		{
+			return *(templ->getShape());
+		}
+		return dummy;
+	}
+	
+	// Suchen in der Datenbank
+	std::map<ObjectGroupTemplateName, ObjectGroupTemplate*>::iterator it;
+	it = m_object_group_templates.find(generictype);
+	if (it == m_object_group_templates.end())
+	{
+		return getObjectGroupShape(generictype.substr(1));
+	}
+	else
+	{
+		return it->second->m_shape;
 	}
 }
 
@@ -243,9 +330,9 @@ std::string ObjectFactory::getObjectName(GameObject::Subtype subtype)
 ObjectGroup* ObjectFactory::getObjectGroup(ObjectGroupName name)
 {
 	std::map<ObjectGroupName, ObjectGroup*>::iterator it;
-	it = m_object_group_templates.find(name);
+	it = m_object_groups.find(name);
 	
-	if (it == m_object_group_templates.end())
+	if (it == m_object_groups.end())
 	{
 		return 0;
 	}
@@ -357,13 +444,25 @@ void ObjectFactory::registerObjectTemplate(ObjectTemplateType type, ObjectTempla
 void ObjectFactory::registerObjectGroup(ObjectGroupName name, ObjectGroup* data)
 {
 	
-	if (m_object_group_templates.count(name)>0)
+	if (m_object_groups.count(name)>0)
 	{
 		ERRORMSG("Object group template with name %s already exists",name.c_str());
 	}
 	else
 	{
-		m_object_group_templates[name] = data;
+		m_object_groups[name] = data;
+	}
+}
+
+void ObjectFactory::registerObjectGroupTemplate(ObjectGroupTemplateName type, ObjectGroupTemplate* templ)
+{
+	if (m_object_group_templates.count(type)>0)
+	{
+		ERRORMSG("Object template with name %s already exists",type.c_str());
+	}
+	else
+	{
+		m_object_group_templates[type] = templ;
 	}
 }
 
@@ -394,11 +493,6 @@ void ObjectFactory::registerEmotionSet(std::string name, EmotionSet* set)
 void ObjectFactory::registerPlayerLook(GameObject::Subtype subtype, PlayerLook look)
 {
 	m_player_look.insert(std::make_pair(subtype, look));
-}
-
-void ObjectFactory::registerEnvironmentTemplate(EnvironmentName env, std::string purpose, ObjectGroupName templ)
-{
-	m_env_templates[env].insert(std::make_pair(purpose,templ));
 }
 
 
@@ -460,11 +554,11 @@ void ObjectFactory::cleanup()
 	m_object_templates.clear();
 	
 	std::map<ObjectGroupName, ObjectGroup*>::iterator it4;
-	for (it4 = m_object_group_templates.begin(); it4!= m_object_group_templates.end(); ++it4)
+	for (it4 = m_object_groups.begin(); it4!= m_object_groups.end(); ++it4)
 	{
 		delete it4->second;
 	} 
-	m_object_group_templates.clear();
+	m_object_groups.clear();
 	
 
 	
@@ -474,6 +568,13 @@ void ObjectFactory::cleanup()
 		delete it6->second;
 	}
 	m_player_data.clear();
+	
+	std::map<ObjectGroupTemplateName, ObjectGroupTemplate*>::iterator it13;
+	for (it13 = m_object_group_templates.begin(); it13 != m_object_group_templates.end(); ++it13)
+	{
+		delete it13->second;
+	}
+	m_object_group_templates.clear();
 	
 }
 

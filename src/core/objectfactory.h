@@ -146,6 +146,70 @@ class ObjectTemplate
 typedef std::string ObjectGroupName;
 
 /**
+ * Name eines Templates einer Gruppe von Objekten
+ */
+typedef std::string ObjectGroupTemplateName;
+
+/**
+ * \class ObjectGroupTemplate
+ * \brief Platzhalter fuer eine Gruppe von Objekten. Die Objektgruppe die daraus tatsaechlich erzeugt wird ist von der Umgebung abhaengig
+ */
+class ObjectGroupTemplate
+{
+	private:
+		/**
+		 * \var std::map<EnvironmentName, std::list<ObjectGroupName > > m_env_object_groups
+		 * \brief Gibt fuer jede Umgebung eine Liste von Objektgruppen an, die den Platzhalter ersetzen
+		 */
+		std::map<EnvironmentName, std::list<ObjectGroupName > > m_env_object_groups;
+		
+	
+	public:
+		
+		/**
+		 * \var Shape m_shape
+		 * \brief Grundlegende Form des Templates. Sollte mit der Form aller ersetztenden Gruppen uebereinstimmen
+		 */
+		Shape m_shape;
+		
+		/**
+		 * \var EnvironmentName m_default_environment
+		 * \brief Umgebung, auf die zurueckgegriffen wird, wenn keine Informationen zu einer Umgebung vorliegen
+		 */
+		EnvironmentName m_default_environment;
+		
+		/**
+		 * \fn void addObjectGroup(EnvironmentName env, ObjectGroupName object)
+		 * \brief Fuegt fuer die Umgebung ein Objekt hinzu
+		 * \param env Name der Umgebung
+		 * \param object Typ des Objekts
+		 */
+		void addObjectGroup(EnvironmentName env, ObjectGroupName object)
+		{
+			m_env_object_groups[env].push_back(object);
+		}
+		
+		/**
+		 * \fn void addEnvironment(EnvironmentName env)
+		 * \brief Fuegt eine Umgebung ein
+		 * \param env Name der Umgebung
+		 */
+		void addEnvironment(EnvironmentName env)
+		{
+			m_env_object_groups[env];
+		}
+		
+		/**
+		 * \fn ObjectGroupName getObjectGroup(EnvironmentName env)
+		 * \brief Gibt fuer eine gegebene Umgebung eine passende Objektgruppe aus
+		 * \param env Umgebung
+		 */
+		ObjectGroupName getObjectGroup(EnvironmentName env);
+};
+
+
+
+/**
  * Name eines Ortes
  */
 typedef std::string LocationName;
@@ -366,6 +430,21 @@ class ObjectFactory
 	static GameObject::Subtype getObjectType(ObjectTemplateType generictype, EnvironmentName env);
 	
 	/**
+	 * \fn static ObjectGroupName getObjectType(ObjectGroupTemplateName generictype, EnvironmentName env)
+	 * \brief erzeugt aus einem ObjektGroupTemplate eine Objektgruppe passend zu seiner Umgebung
+	 * \param generictype generischer Typ
+	 * \param env Umgebung
+	 */
+	static ObjectGroupName getObjectGroupType(ObjectGroupTemplateName generictype, EnvironmentName env);
+	
+	/**
+	 * \fn static Shape getObjectGroupShape(ObjectGroupTemplateName generictype)
+	 * \brief Gibt die Groesse einer Objektgruppe aus
+	 * \param generictype generischer Typ
+	 */
+	static Shape getObjectGroupShape(ObjectGroupTemplateName generictype);
+	
+	/**
 	 * \fn static ObjectGroup* getObjectGroup(ObjectGroupName name)
 	 * \brief sucht zu dem betreffenden Name das passende Template heraus
 	 * \param name Name der Objektgruppe
@@ -471,19 +550,12 @@ class ObjectFactory
 	static void registerObjectGroup(ObjectGroupName name, ObjectGroup* data);
 	
 	/**
-	 * \fn void insertTemplate(EnvironmentName env, std::string purpose, ObjectGroupName templ)
-	 * \brief registriert ein Template, das ein einer bestimmten Umgebung an einer bestimmten Position verwendet werden soll
-	 * \param env Name der Umgebung
-	 * \param purpose Verwendungsstelle des Templates
-	 * \param templ Name des Templates
-			 */
-	static void registerEnvironmentTemplate(EnvironmentName env, std::string purpose, ObjectGroupName templ);
-		
-	/**
-	 * \fn ObjectGroupName getTemplate(EnvironmentName env, std::string purpose)
-	 * \brief Gibt ein Template aus, dass in der Umgebung env fuer den Verwendungszweck purpose registiert wurde
+	 * \fn static registerObjectGroupTemplate(ObjectGroupTemplateName type, ObjectGroupTemplate* templ)
+	 * \brief Registriert ein neues ObjektGrouptemplate
+	 * \param type Typ des Templates
+	 * \param templ die Daten
 	 */
-	static ObjectGroupName getEnvironmentTemplate(EnvironmentName env, std::string purpose);
+	static void registerObjectGroupTemplate(ObjectGroupTemplateName type, ObjectGroupTemplate* templ);
 	
 	/**
 	 * \fn static void registerMonsterGroup(MonsterGroupName name, MonsterGroup data)
@@ -602,10 +674,16 @@ class ObjectFactory
 	static std::map<ObjectTemplateType, ObjectTemplate*> m_object_templates;
 	
 	/**
-	 * \var static std::map<ObjectGroupName, ObjectGroup*> m_object_group_templates
+	 * \var static std::map<ObjectGroupTemplateName, ObjectGroupTemplate*> m_object_group_templates
+	 * \brief Datenbank fuer die Objekttemplates, indexiert nach Typ
+	 */
+	static std::map<ObjectGroupTemplateName, ObjectGroupTemplate*> m_object_group_templates;
+	
+	/**
+	 * \var static std::map<ObjectGroupName, ObjectGroup*> m_object_groups
 	 * \brief Datenbank fuer die Objektgruppen indexiert nach Name
 	 */
-	static std::map<ObjectGroupName, ObjectGroup*> m_object_group_templates;
+	static std::map<ObjectGroupName, ObjectGroup*> m_object_groups;
 	
 	/**
 	 * \var static std::map< MonsterGroupName, MonsterGroup*>  m_monster_groups
@@ -631,12 +709,6 @@ class ObjectFactory
 	 * \brief Speichert, fuer welche Spielerklassen welches Aussehen erlaubt ist
 	 */
 	static std::multimap< GameObject::Subtype, PlayerLook > m_player_look;
-	
-	/**
-	 * \fn std::map<EnvironmentName, std::multimap< std::string, ObjectGroupName> > m_env_templates
-	 * \brief Namen aller registrierten Templates
-	 */
-	static std::map<EnvironmentName, std::multimap< std::string, ObjectGroupName> > m_env_templates;
 	
 };
 

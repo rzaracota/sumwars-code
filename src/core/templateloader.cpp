@@ -94,6 +94,84 @@ bool TemplateLoader::loadObjectTemplate(TiXmlNode* node)
 		
 		ObjectFactory::registerObjectTemplate(name,templ);
 	}
+	else if (node->Type()==TiXmlNode::ELEMENT && !strcmp(node->Value(), "ObjectGroupTemplate"))
+	{
+		ElementAttrib attr;
+		attr.parseElement(node->ToElement());
+		
+		ObjectGroupTemplate* templ = new ObjectGroupTemplate;
+		
+		std::string name;
+		attr.getString("name",name);
+		
+		for ( child = node->FirstChild(); child != 0; child = child->NextSibling())
+		{
+			if (child->Type()==TiXmlNode::ELEMENT)
+			{
+				attr.parseElement(child->ToElement());
+				std::string env,defstr,objname;
+				if (!strcmp(child->Value(), "Environment"))
+				{
+					attr.getString("name",env);
+					attr.getString("default",defstr,"false");
+					
+					templ->addEnvironment(env);
+					if (defstr == "true")
+					{
+						templ->m_default_environment = env;
+						DEBUG5("default environment for %s is %s",name.c_str(), env.c_str());
+					}
+					
+					for ( child2 = child->FirstChild(); child2 != 0; child2 = child2->NextSibling())
+					{
+						if (child2->Type()==TiXmlNode::ELEMENT)
+						{
+							if (!strcmp(child2->Value(), "ObjectGroup"))
+							{
+								attr.parseElement(child2->ToElement());
+								attr.getString("name",objname);
+								
+								templ->addObjectGroup (env,objname);
+								DEBUG5("added object group %s to generic object group %s for environment %s",objname.c_str(), name.c_str(), env.c_str());
+								
+							}
+							else if (child2->Type()!=TiXmlNode::COMMENT)
+							{
+								DEBUG("unexpected element of <Environment>: %s",child->Value());
+							}
+						}
+					}
+				}
+				else if (!strcmp(child->Value(), "Shape"))
+				{
+					std::string shape;
+					attr.getString("type",shape,"CIRCLE");
+					if (shape == "RECT")
+					{
+						templ->m_shape.m_type = Shape::RECT;
+						attr.getFloat("extent_x",templ->m_shape.m_extent.m_x,0);
+						attr.getFloat("extent_y",templ->m_shape.m_extent.m_y,0);
+					}
+					else
+					{
+						templ->m_shape.m_type = Shape::CIRCLE;
+						attr.getFloat("radius",templ->m_shape.m_radius,0);
+					}
+					float angle;
+					attr.getFloat("angle",angle,0);
+					templ->m_shape.m_angle = angle*3.14159/180;
+				}
+				else if (child->Type()!=TiXmlNode::COMMENT)
+				{
+					DEBUG5("unexpected element of <ObjectTemplate>: %s",child->Value());
+				}
+				
+			}
+		}
+		DEBUG5("found object group template %s",name.c_str());
+		
+		ObjectFactory::registerObjectGroupTemplate(name,templ);
+	}
 	else
 	{
 	// rekursiv durchmustern

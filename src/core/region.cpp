@@ -980,13 +980,18 @@ int Region::createObject(ObjectTemplateType generictype, Vector pos, float angle
 }
 
 
-void Region::createObjectGroup(ObjectGroupName templname, Vector position, float angle, std::string name)
+void Region::createObjectGroup(ObjectGroupName templname, Vector position, float angle, std::string name,WorldObject::State state)
 {
 	Trigger* tr=0;
 	
 	// Template aus der Datenbank heraussuchen
 	std::map<ObjectGroupName, ObjectGroup*>::iterator it;
 
+	
+	// Umgebung erfahren
+	EnvironmentName env = getEnvironment(position);
+	templname = ObjectFactory::getObjectGroupType(templname,env);
+	
 	ObjectGroup* templ = ObjectFactory::getObjectGroup(templname);
 
 	if (templ != 0)
@@ -1035,11 +1040,6 @@ void Region::createObjectGroup(ObjectGroupName templname, Vector position, float
 				}
 
 				int id;
-				WorldObject::State state = WorldObject::STATE_NONE;
-				if (gt->m_name != "")
-				{
-					state = WorldObject::STATE_ACTIVE;
-				}
 				
 				id = createObject(gt->m_type, pos, angle+oangle,gt->m_height,state);
 				DEBUG5("inserting object %s at %f %f with id %i",gt->m_type.c_str(),pos.m_x, pos.m_y,id);
