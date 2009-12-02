@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<ObjectGroup name="border(side)(two_smallcorner)" version="1.0">
+<ObjectGroupTemplate name="border(side)(two_smallcorner)" version="1.0">
   <Shape
     type="RECT"
     extent_x="4"
@@ -79,56 +79,56 @@
             center_y="-2.5" 
             angle="-90" 
             probability="0.7" 
-            prob_angle="true" 
+            prob_angle="false" 
     />
     <Object subtype="$ground_corner" 
             center_x="-3.5" 
             center_y="-3.5" 
             angle="-90" 
             probability="0.7" 
-            prob_angle="true" 
+            prob_angle="false" 
     />
     <Object subtype="$ground_corner" 
             center_x="3.5" 
             center_y="-3.5" 
             angle="0" 
             probability="0.7" 
-            prob_angle="true" 
+            prob_angle="false" 
     />
     <Object subtype="$ground_long" 
             center_x="0" 
             center_y="-1.5" 
             angle="-90" 
             probability="0.7" 
-            prob_angle="true" 
+            prob_angle="false" 
     />
     <Object subtype="$ground_medium" 
             center_x="-1" 
             center_y="-3.5" 
             angle="-90" 
             probability="0.7" 
-            prob_angle="true" 
+            prob_angle="false" 
     />
     <Object subtype="$ground_small" 
             center_x="2" 
             center_y="-3.5" 
             angle="-90" 
             probability="0.7" 
-            prob_angle="true" 
+            prob_angle="false" 
     />
     <Object subtype="$ground_square_m" 
             center_x="2" 
             center_y="1" 
             angle="0" 
             probability="0.7" 
-            prob_angle="true" 
+            prob_angle="false" 
     />
     <Object subtype="$ground_square_m" 
             center_x="-2" 
             center_y="1" 
             angle="0" 
             probability="0.7" 
-            prob_angle="true" 
+            prob_angle="false" 
     />
     <Object subtype="$border" 
             center_x="0" 
@@ -180,4 +180,4 @@
   <Areas>
   </Areas>
 
-</ObjectGroup>
+</ObjectGroupTemplate>

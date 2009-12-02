@@ -347,7 +347,7 @@ bool Application::setupResources()
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../data/projectiles", "FileSystem", "projectiles");
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../data/objects", "FileSystem", "objects");
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../data/obj_templates", "FileSystem", "obj_templates");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../data/obj_group_templ", "FileSystem", "obj_group_templ");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../data/object_groups", "FileSystem", "object_groups");
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../data/renderinfo", "FileSystem", "renderinfo");
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../data/lua", "FileSystem", "lua");
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../data/sound", "FileSystem", "sounddata");
@@ -600,7 +600,7 @@ bool Application::loadResources()
 	}
 
 	// Objekt Gruppen Templates
-	files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("obj_group_templ","*.xml");
+	files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("object_groups","*.xml");
 	for (it = files->begin(); it != files->end(); ++it)
 	{
 		file = it->archive->getName();
