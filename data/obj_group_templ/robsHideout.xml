@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<ObjectGroupTemplate name="robsHideout" version="1.0">
+<ObjectGroup name="robsHideout" version="1.0">
   <Shape
     type="RECT"
     extent_x="11.12762247"
@@ -87,4 +87,4 @@
   <Areas>
   </Areas>
 
-</ObjectGroupTemplate>
+</ObjectGroup>

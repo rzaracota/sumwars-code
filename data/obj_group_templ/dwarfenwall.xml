@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<ObjectGroupTemplate name="dwarfenwall" version="1.0">
+<ObjectGroup name="dwarfenwall" version="1.0">
   <Shape
     type="RECT"
     extent_x="67.09816122"
@@ -1243,4 +1243,4 @@
     <Area name="areaNoEntry2" angle="-42.87928498" center_x="-27.68034983" center_y="-23.54747979" type="RECT" extent_x="4.1065" extent_y="1.0335" />
   </Areas>
 
-</ObjectGroupTemplate>
+</ObjectGroup>

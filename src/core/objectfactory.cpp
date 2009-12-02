@@ -17,7 +17,7 @@ std::map<GameObject::Subtype, FixedObjectData*> ObjectFactory::m_fixed_object_da
 
 std::map<ObjectTemplateType, ObjectTemplate*> ObjectFactory::m_object_templates;
 
-std::map<ObjectGroupTemplateName, ObjectGroupTemplate*> ObjectFactory::m_object_group_templates;
+std::map<ObjectGroupName, ObjectGroup*> ObjectFactory::m_object_group_templates;
 
 std::map< MonsterGroupName, MonsterGroup*>  ObjectFactory::m_monster_groups;
 
@@ -34,6 +34,8 @@ std::map<std::string, EmotionSet*> ObjectFactory::m_emotion_sets;
 std::multimap< GameObject::Subtype, PlayerLook> ObjectFactory::m_player_look;
 
 std::map<GameObject::Subtype, TreasureBasicData*> ObjectFactory::m_treasure_data;
+
+std::map<EnvironmentName, std::multimap< std::string, ObjectGroupName> > ObjectFactory::m_env_templates;
 
 GameObject::Subtype ObjectTemplate::getObject(EnvironmentName env)
 {
@@ -70,7 +72,7 @@ GameObject::Subtype ObjectTemplate::getObject(EnvironmentName env)
 
 }
 
-void ObjectGroupTemplate::addObject(ObjectTemplateType objtype, Vector pos, float angle, float probability )
+void ObjectGroup::addObject(ObjectTemplateType objtype, Vector pos, float angle, float probability )
 {
 	GroupObject gobj;
 	gobj.m_type = objtype;
@@ -238,9 +240,9 @@ std::string ObjectFactory::getObjectName(GameObject::Subtype subtype)
 	return i->second->m_name;
 }
 
-ObjectGroupTemplate* ObjectFactory::getObjectGroupTemplate(ObjectGroupTemplateName name)
+ObjectGroup* ObjectFactory::getObjectGroup(ObjectGroupName name)
 {
-	std::map<ObjectGroupTemplateName, ObjectGroupTemplate*>::iterator it;
+	std::map<ObjectGroupName, ObjectGroup*>::iterator it;
 	it = m_object_group_templates.find(name);
 	
 	if (it == m_object_group_templates.end())
@@ -352,7 +354,7 @@ void ObjectFactory::registerObjectTemplate(ObjectTemplateType type, ObjectTempla
 	}
 }
 
-void ObjectFactory::registerObjectGroupTemplate(ObjectGroupTemplateName name, ObjectGroupTemplate* data)
+void ObjectFactory::registerObjectGroup(ObjectGroupName name, ObjectGroup* data)
 {
 	
 	if (m_object_group_templates.count(name)>0)
@@ -393,6 +395,12 @@ void ObjectFactory::registerPlayerLook(GameObject::Subtype subtype, PlayerLook l
 {
 	m_player_look.insert(std::make_pair(subtype, look));
 }
+
+void ObjectFactory::registerEnvironmentTemplate(EnvironmentName env, std::string purpose, ObjectGroupName templ)
+{
+	m_env_templates[env].insert(std::make_pair(purpose,templ));
+}
+
 
 
 EmotionSet* ObjectFactory::getEmotionSet(std::string name)
@@ -451,7 +459,7 @@ void ObjectFactory::cleanup()
 	} 
 	m_object_templates.clear();
 	
-	std::map<ObjectGroupTemplateName, ObjectGroupTemplate*>::iterator it4;
+	std::map<ObjectGroupName, ObjectGroup*>::iterator it4;
 	for (it4 = m_object_group_templates.begin(); it4!= m_object_group_templates.end(); ++it4)
 	{
 		delete it4->second;

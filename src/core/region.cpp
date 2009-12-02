@@ -27,9 +27,9 @@ RegionData::~RegionData()
 	
 }
 
-void RegionData::addObjectGroupTemplate(ObjectGroupTemplateName group_name, int prio, int number,float probability, bool decoration)
+void RegionData::addObjectGroup(ObjectGroupName group_name, int prio, int number,float probability, bool decoration)
 {
-	ObjectGroupTemplateSet newgroup;
+	ObjectGroupSet newgroup;
 	newgroup.m_group_name = group_name;
 	newgroup.m_probability = probability;
 	newgroup.m_number = number;
@@ -980,14 +980,14 @@ int Region::createObject(ObjectTemplateType generictype, Vector pos, float angle
 }
 
 
-void Region::createObjectGroup(ObjectGroupTemplateName templname, Vector position, float angle, std::string name)
+void Region::createObjectGroup(ObjectGroupName templname, Vector position, float angle, std::string name)
 {
 	Trigger* tr=0;
 	
 	// Template aus der Datenbank heraussuchen
-	std::map<ObjectGroupTemplateName, ObjectGroupTemplate*>::iterator it;
+	std::map<ObjectGroupName, ObjectGroup*>::iterator it;
 
-	ObjectGroupTemplate* templ = ObjectFactory::getObjectGroupTemplate(templname);
+	ObjectGroup* templ = ObjectFactory::getObjectGroup(templname);
 
 	if (templ != 0)
 	{
@@ -1015,7 +1015,7 @@ void Region::createObjectGroup(ObjectGroupTemplateName templname, Vector positio
 		
 		// Template wurde gefunden
 		// Objekte platzieren
-		std::list<ObjectGroupTemplate::GroupObject>::iterator gt;
+		std::list<ObjectGroup::GroupObject>::iterator gt;
 		Vector pos;
 
 		float oangle=0;

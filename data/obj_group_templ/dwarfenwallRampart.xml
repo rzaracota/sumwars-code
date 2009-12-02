@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<ObjectGroupTemplate name="dwarfenwallRampart" version="1.0">
+<ObjectGroup name="dwarfenwallRampart" version="1.0">
   <Shape
     type="RECT"
     extent_x="60.9274725"
@@ -1087,4 +1087,4 @@
   <Areas>
   </Areas>
 
-</ObjectGroupTemplate>
+</ObjectGroup>

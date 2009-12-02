@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<ObjectGroupTemplate name="medBackalley" version="1.0">
+<ObjectGroup name="medBackalley" version="1.0">
   <Shape
     type="RECT"
     extent_x="32.3633504"
@@ -447,4 +447,4 @@
     <Area name="areaScene3" angle="-0" center_x="-1.459536582" center_y="4.157435558" type="RECT" extent_x="3.727006319" extent_y="1.629652967" />
   </Areas>
 
-</ObjectGroupTemplate>
+</ObjectGroup>

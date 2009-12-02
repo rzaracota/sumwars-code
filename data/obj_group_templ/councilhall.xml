@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<ObjectGroupTemplate name="councilhall" version="1.0">
+<ObjectGroup name="councilhall" version="1.0">
   <Shape
     type="RECT"
     extent_x="115.7595252"
@@ -12164,4 +12164,4 @@
     <Area name="waypoint2Area" angle="-0" center_x="43.56733656" center_y="70.4818439" type="RECT" extent_x="3.939572275" extent_y="3.939572275" />
   </Areas>
 
-</ObjectGroupTemplate>
+</ObjectGroup>

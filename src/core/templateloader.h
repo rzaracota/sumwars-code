@@ -36,19 +36,19 @@ class TemplateLoader
 		static bool loadObjectTemplate(TiXmlNode* node);
 		
 		/**
-		 * \fn static bool loadObjectGroupTemplateData(const char* pFilename)
+		 * \fn static bool loadObjectGroupData(const char* pFilename)
 		 * \brief Liest Daten zu Objektgruppen Templates aus der angegebenen Datei
 		 * \parampFilename Name der XML Datei
 		 */
-		static bool loadObjectGroupTemplateData(const char* pFilename);
+		static bool loadObjectGroupData(const char* pFilename);
 
 		
 		/**
-		 * \fn static bool loadObjectGroupTemplate(TiXmlNode* node)
+		 * \fn static bool loadObjectGroup(TiXmlNode* node)
 		 * \brief Liest die Daten zu einem Objektgruppen Template aus dem Knoten
 		 * \param node XML Knoten
 		 */
-		static bool loadObjectGroupTemplate(TiXmlNode* node);
+		static bool loadObjectGroup(TiXmlNode* node);
 		
 
 };

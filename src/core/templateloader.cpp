@@ -106,14 +106,14 @@ bool TemplateLoader::loadObjectTemplate(TiXmlNode* node)
 	return true;
 }
 
-bool TemplateLoader::loadObjectGroupTemplateData(const char* pFilename)
+bool TemplateLoader::loadObjectGroupData(const char* pFilename)
 {
 	TiXmlDocument doc(pFilename);
 	bool loadOkay = doc.LoadFile();
 
 	if (loadOkay)
 	{
-		loadObjectGroupTemplate(&doc);
+		loadObjectGroup(&doc);
 		return true;
 	}
 	else
@@ -124,10 +124,10 @@ bool TemplateLoader::loadObjectGroupTemplateData(const char* pFilename)
 }
 
 
-bool TemplateLoader::loadObjectGroupTemplate(TiXmlNode* node)
+bool TemplateLoader::loadObjectGroup(TiXmlNode* node)
 {
 	TiXmlNode* child, *child2;
-	if (node->Type()==TiXmlNode::ELEMENT && !strcmp(node->Value(), "ObjectGroupTemplate"))
+	if (node->Type()==TiXmlNode::ELEMENT && !strcmp(node->Value(), "ObjectGroup"))
 	{
 		ElementAttrib attr;
 		attr.parseElement(node->ToElement());
@@ -135,7 +135,7 @@ bool TemplateLoader::loadObjectGroupTemplate(TiXmlNode* node)
 		std::string name;
 		attr.getString("name",name);
 		
-		ObjectGroupTemplate* templ = new ObjectGroupTemplate;
+		ObjectGroup* templ = new ObjectGroup;
 		
 		for ( child = node->FirstChild(); child != 0; child = child->NextSibling())
 		{
@@ -179,7 +179,7 @@ bool TemplateLoader::loadObjectGroupTemplate(TiXmlNode* node)
 						{
 							if (!strcmp(child2->Value(), "Object"))
 							{
-								ObjectGroupTemplate::GroupObject obj;
+								ObjectGroup::GroupObject obj;
 								
 								attr.parseElement(child2->ToElement());
 								std::string prob_angle;
@@ -284,19 +284,19 @@ bool TemplateLoader::loadObjectGroupTemplate(TiXmlNode* node)
 				}
 				else if (child->Type()!=TiXmlNode::COMMENT)
 				{
-					DEBUG("unexpected element of <ObjectGroupTemplate>: %s",child->Value());
+					DEBUG("unexpected element of <ObjectGroup>: %s",child->Value());
 				}
 			}
 		}
 		
-		ObjectFactory::registerObjectGroupTemplate(name,templ);
+		ObjectFactory::registerObjectGroup(name,templ);
 	}
 	else
 	{
 		// rekursiv durchmustern
 		for ( child = node->FirstChild(); child != 0; child = child->NextSibling())
 		{
-			loadObjectGroupTemplate(child);
+			loadObjectGroup(child);
 		}
 	}
 

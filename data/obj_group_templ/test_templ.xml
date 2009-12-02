@@ -1,4 +1,4 @@
-<ObjectGroupTemplate name = "herbalBushes_test" >
+<ObjectGroup name = "herbalBushes_test" >
 	<Shape
 		  type = "RECT"
 		  extent_x = "4.0"
@@ -9,9 +9,9 @@
 	<Locations>
 		<Location name = "herb" pos_x="0" pos_y="0" />
 	</Locations>
-</ObjectGroupTemplate>
+</ObjectGroup>
 
-<ObjectGroupTemplate name = "test1" >
+<ObjectGroup name = "test1" >
 	<Shape
 		  type = "RECT"
 		  extent_x = "8.0"
@@ -52,10 +52,10 @@
 				prob_angle = "false"
 				/>
 	</ObjectContent>
-</ObjectGroupTemplate>
+</ObjectGroup>
 
 
-<ObjectGroupTemplate name = "test2" >
+<ObjectGroup name = "test2" >
 	<Shape
 		  type = "RECT"
 		  extent_x = "10.0"
@@ -102,10 +102,10 @@
 				prob_angle = "true"
 					/>
 	</ObjectContent>
-</ObjectGroupTemplate>
+</ObjectGroup>
 
 
-<ObjectGroupTemplate name = "test3" >
+<ObjectGroup name = "test3" >
 	<Shape
 		  type = "RECT"
 		  extent_x = "16.0"
@@ -152,4 +152,4 @@
 				prob_angle = "true"
 					/>
 	</ObjectContent>
-</ObjectGroupTemplate>
+</ObjectGroup>

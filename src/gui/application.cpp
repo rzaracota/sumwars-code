@@ -606,7 +606,7 @@ bool Application::loadResources()
 		file = it->archive->getName();
 		file += "/";
 		file += it->filename;
-		TemplateLoader::loadObjectGroupTemplateData(file.c_str());
+		TemplateLoader::loadObjectGroupData(file.c_str());
 
 		updateStartScreen(0.7);
 	}

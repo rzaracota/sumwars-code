@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<ObjectGroupTemplate name="cryptRoom" version="1.0">
+<ObjectGroup name="cryptRoom" version="1.0">
   <Shape
     type="RECT"
     extent_x="10.03836625"
@@ -208,4 +208,4 @@
   <Areas>
   </Areas>
 
-</ObjectGroupTemplate>
+</ObjectGroup>

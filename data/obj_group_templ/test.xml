@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<ObjectGroupTemplate name="test" version="1.0">
+<ObjectGroup name="test" version="1.0">
   <Shape
     type="RECT"
     extent_x="8.8474941"
@@ -28,4 +28,4 @@
   <Areas>
   </Areas>
 
-</ObjectGroupTemplate>
+</ObjectGroup>

@@ -270,7 +270,7 @@ bool WorldLoader::loadRegion(TiXmlNode* node, RegionData* rdata)
 						
 						DEBUG5("named object group %s %s %i",group_name.c_str(), name.c_str(), prio);
 						
-						rdata->addNamedObjectGroupTemplate(group_name,name,angle, prio);
+						rdata->addNamedObjectGroup(group_name,name,angle, prio);
 					}
 					else if (child2->Type()!=TiXmlNode::COMMENT)
 					{
@@ -297,7 +297,7 @@ bool WorldLoader::loadRegion(TiXmlNode* node, RegionData* rdata)
 						
 						DEBUG5("object group %s  number %i prio %i",group_name.c_str(), number, prio);
 						
-						rdata->addObjectGroupTemplate(group_name,prio, number, prob,(deco=="true"));
+						rdata->addObjectGroup(group_name,prio, number, prob,(deco=="true"));
 					}
 					else if (child2->Type()!=TiXmlNode::COMMENT)
 					{

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<ObjectGroupTemplate name="cryptShrine" version="1.0">
+<ObjectGroup name="cryptShrine" version="1.0">
   <Shape
     type="RECT"
     extent_x="3.940686509"
@@ -118,4 +118,4 @@
   <Areas>
   </Areas>
 
-</ObjectGroupTemplate>
+</ObjectGroup>

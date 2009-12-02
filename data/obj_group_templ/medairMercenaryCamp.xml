@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<ObjectGroupTemplate name="medairMercenaryCamp" version="1.0">
+<ObjectGroup name="medairMercenaryCamp" version="1.0">
   <Shape
     type="RECT"
     extent_x="31.65290983"
@@ -1249,4 +1249,4 @@
     <Area name="areaFenor" angle="-0" center_x="9.040474474" center_y="-10.0616373" type="RECT" extent_x="5.16778815" extent_y="2.257700248" />
   </Areas>
 
-</ObjectGroupTemplate>
+</ObjectGroup>

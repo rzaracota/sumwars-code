@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<ObjectGroupTemplate name="goblinSanctuary" version="1.0">
+<ObjectGroup name="goblinSanctuary" version="1.0">
   <Shape
     type="CIRCLE"
     radius="24.54604977"
@@ -222,4 +222,4 @@
   <Areas>
   </Areas>
 
-</ObjectGroupTemplate>
+</ObjectGroup>

@@ -53,8 +53,8 @@ Region* MapGenerator::createRegion(RegionData* rdata)
 			DEBUG("region template %s",rdata->m_region_template.c_str());
 			// Region besteht aus einer einzelnen Objektgruppe
 			// Objektgruppe anhand des Namens suchen
-			ObjectGroupTemplate* templ;
-			templ = ObjectFactory::getObjectGroupTemplate(rdata->m_region_template);
+			ObjectGroup* templ;
+			templ = ObjectFactory::getObjectGroup(rdata->m_region_template);
 			if (templ ==0)
 			{
 				ERRORMSG("unknown object group %s",rdata->m_region_template.c_str());
@@ -494,8 +494,8 @@ bool MapGenerator::insertGroupTemplates(MapData* mdata, RegionData* rdata)
 {
 	// obligatorische Objektgruppen einfuegen
 
-	std::multimap<int, RegionData::NamedObjectGroupTemplate >::reverse_iterator it;
-	ObjectGroupTemplate* templ;
+	std::multimap<int, RegionData::NamedObjectGroup >::reverse_iterator it;
+	ObjectGroup* templ;
 	Shape s;
 	Vector pos;
 	bool succ;
@@ -503,7 +503,7 @@ bool MapGenerator::insertGroupTemplates(MapData* mdata, RegionData* rdata)
 	for (it = rdata->m_named_object_groups.rbegin(); it != rdata->m_named_object_groups.rend(); ++it)
 	{
 		// Objektgruppe anhand des Namens suchen
-		templ = ObjectFactory::getObjectGroupTemplate(it->second.m_group_name);
+		templ = ObjectFactory::getObjectGroup(it->second.m_group_name);
 		if (templ ==0)
 		{
 			ERRORMSG("unknown object group %s",it->second.m_group_name.c_str());
@@ -559,7 +559,7 @@ bool MapGenerator::insertGroupTemplates(MapData* mdata, RegionData* rdata)
 	if (rdata->m_has_waypoint)
 	{
 		// Wegpunkt einfuegen
-		templ = ObjectFactory::getObjectGroupTemplate("waypoint_templ");
+		templ = ObjectFactory::getObjectGroup("waypoint_templ");
 		memcpy(&s , templ->getShape(), sizeof(Shape));
 		succ = getTemplatePlace(mdata,&s,pos);
 		if (succ == false)
@@ -572,10 +572,10 @@ bool MapGenerator::insertGroupTemplates(MapData* mdata, RegionData* rdata)
 	}
 	
 	// fakultative Objektgruppen einfuegen
-	std::multimap<int, RegionData::ObjectGroupTemplateSet >::reverse_iterator jt;
+	std::multimap<int, RegionData::ObjectGroupSet >::reverse_iterator jt;
 	for (jt = rdata->m_object_groups.rbegin(); jt != rdata->m_object_groups.rend(); ++jt)
 	{
-		templ = ObjectFactory::getObjectGroupTemplate(jt->second.m_group_name);
+		templ = ObjectFactory::getObjectGroup(jt->second.m_group_name);
 		if (templ ==0)
 		{
 			ERRORMSG("unknown object group %s",jt->second.m_group_name.c_str());
@@ -771,7 +771,7 @@ void MapGenerator::createBorder(MapData* mdata, RegionData* rdata)
 	int diagi, diagj;
 	int dmask;
 	
-	ObjectGroupTemplateName templ,diagtempl;
+	ObjectGroupName templ,diagtempl;
 	float angle;
 
 	bool skip;

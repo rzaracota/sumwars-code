@@ -111,16 +111,16 @@ class RegionData
 	public:
 		
 		/**
-		 * \struct ObjectGroupTemplateSet
+		 * \struct ObjectGroupSet
 		 * \brief Struktur fuer eine Gruppe von Objekten die mehrmals in die Region eingefuegt werden soll
 		 */
-		struct ObjectGroupTemplateSet
+		struct ObjectGroupSet
 		{
 			/**
-			 * \var ObjectGroupTemplateName m_group_name
+			 * \var ObjectGroupName m_group_name
 			 * \brief Name der Gruppe
 			 */
-			ObjectGroupTemplateName m_group_name;
+			ObjectGroupName m_group_name;
 			
 			/**
 			 * \var int m_number
@@ -143,16 +143,16 @@ class RegionData
 		};
 		
 		/**
-		 * \fn struct NamedObjectGroupTemplate
+		 * \fn struct NamedObjectGroup
 		 * \brief Struktur fuer eine Objektgruppe deren Instanz mit einem Namen versehen werden soll
 		 */
-		struct NamedObjectGroupTemplate
+		struct NamedObjectGroup
 		{
 			/**
-			 * \var ObjectGroupTemplateName m_group_name
+			 * \var ObjectGroupName m_group_name
 			 * \brief Name der Gruppe
 			 */
-			ObjectGroupTemplateName m_group_name;
+			ObjectGroupName m_group_name;
 			
 			/**
 			 * \var std::string m_name
@@ -200,7 +200,7 @@ class RegionData
 		~RegionData();
 		
 		/**
-		 * \fn void addObjectGroupTemplate(ObjectGroupTemplateName m_group_name, int prio, int number =1, float probability=1.0, bool decoration=false)
+		 * \fn void addObjectGroup(ObjectGroupName m_group_name, int prio, int number =1, float probability=1.0, bool decoration=false)
 		 * \brief Fuegt eine neue Objektgruppe ein
 		 * \param group_name Name der Gruppe
 		 * \param prio Prioritaet der Gruppe
@@ -208,19 +208,19 @@ class RegionData
 		 * \param probability Wahrscheinlichkeit mit der die Gruppe eingefuegt wird
 		 * \param decoration Gibt an, ob es sich um ein rein dekoratives Template handelt
 		 */
-		void addObjectGroupTemplate(ObjectGroupTemplateName group_name, int prio=0, int number =1, float probability=1.0, bool decoration=false);
+		void addObjectGroup(ObjectGroupName group_name, int prio=0, int number =1, float probability=1.0, bool decoration=false);
 		
 		/**
-		 * \fn void  addNamedObjectGroupTemplate(ObjectGroupTemplateName group_name, std::string name,float angle=0, int prio=0)
+		 * \fn void  addNamedObjectGroup(ObjectGroupName group_name, std::string name,float angle=0, int prio=0)
 		 * \brief Fuegt eine neue Objektgruppe ein
 		 * \param group_name Name der Gruppe
 		 * \param name Name unter dem die Gruppe eingefuegt wird
 		 * \param angle Winkel unter dem das Template eingefuegt wird
 		 * \param prio Prioritaet der Gruppe
 		 */
-		void addNamedObjectGroupTemplate(ObjectGroupTemplateName group_name, std::string name, float angle=0, int prio=0)
+		void addNamedObjectGroup(ObjectGroupName group_name, std::string name, float angle=0, int prio=0)
 		{
-			NamedObjectGroupTemplate og;
+			NamedObjectGroup og;
 			og.m_name = name;
 			og.m_group_name = group_name;
 			og.m_angle = angle;
@@ -325,16 +325,16 @@ class RegionData
 		std::list<RegionExit> m_exits;
 		
 		/**
-		 * \var std::multimap<int,ObjectGroupTemplateSet> m_object_groups
+		 * \var std::multimap<int,ObjectGroupSet> m_object_groups
 		 * \brief die Patterns sortiert nach einer Prioritaet
 		 */
-		std::multimap<int,ObjectGroupTemplateSet> m_object_groups;
+		std::multimap<int,ObjectGroupSet> m_object_groups;
 		
 		/**
-		 * \var std::multimap<int, NamedObjectGroupTemplate > m_named_object_groups
+		 * \var std::multimap<int, NamedObjectGroup > m_named_object_groups
 		 * \brief Objektgruppen mit einem Namen. Diese Objektgruppen werden immer zuerst eingefuegt und sind verpflichtend
 		 */
-		std::multimap<int, NamedObjectGroupTemplate > m_named_object_groups;
+		std::multimap<int, NamedObjectGroup > m_named_object_groups;
 		
 		/**
 		 * \var std::list<std::pair<float, EnvironmentName> > m_environments
@@ -369,10 +369,10 @@ class RegionData
 		std::string m_ground_material;
 		
 		/**
-		 * \var ObjectGroupTemplateName m_region_template
+		 * \var ObjectGroupName m_region_template
 		 * \brief Ist gesetzt, wenn die komplette Region aus einem Template besteht
 		 */
-		ObjectGroupTemplateName m_region_template;
+		ObjectGroupName m_region_template;
 		
 		/**
 		 * \var float m_ambient_light[3]
@@ -538,14 +538,14 @@ class Region
 		int createObject(ObjectTemplateType generictype, Vector pos, float angle=0, float height=0, WorldObject::State state = WorldObject::STATE_NONE);
 		
 		/**
-		 * \fn void createObjectGroup(ObjectGroupTemplateName templname, Vector position, float angle=0, std::string name="" )
+		 * \fn void createObjectGroup(ObjectGroupName templname, Vector position, float angle=0, std::string name="" )
 		 * \brief erzeugt eine Gruppe von Objekten und fuegt sie in die Region ein
 		 * \param templname Name des Templates aus dem die Gruppe erzeugt wird
 		 * \param position Ort an dem die Gruppe eingefuegt wird
 		 * \param angle Drehwinkel mit dem die Gruppe eingefuegt wird
 		 * \param Name des Ortes
 		 */
-		void createObjectGroup(ObjectGroupTemplateName templname, Vector position, float angle=0, std::string name ="");
+		void createObjectGroup(ObjectGroupName templname, Vector position, float angle=0, std::string name ="");
 		
 		/**
 		 * \fn void createMonsterGroup(MonsterGroupName mgname, Vector position, float radius=3)

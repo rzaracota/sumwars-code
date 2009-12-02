@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<ObjectGroupTemplate name="meetIreana" version="1.0">
+<ObjectGroup name="meetIreana" version="1.0">
   <Shape
     type="RECT"
     extent_x="40.46553093"
@@ -730,4 +730,4 @@
     <Area name="areaHelpIerana" angle="-25.69008693" center_x="13.35215928" center_y="18.2970665" type="RECT" extent_x="5.0115" extent_y="1" />
   </Areas>
 
-</ObjectGroupTemplate>
+</ObjectGroup>

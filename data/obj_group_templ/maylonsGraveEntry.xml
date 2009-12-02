@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<ObjectGroupTemplate name="maylonsGraveEntry" version="1.0">
+<ObjectGroup name="maylonsGraveEntry" version="1.0">
   <Shape
     type="RECT"
     extent_x="26.83321529"
@@ -1163,4 +1163,4 @@
     <Area name="goblinArea" angle="-0" center_x="0" center_y="13.5" type="RECT" extent_x="8.718551807" extent_y="1" />
   </Areas>
 
-</ObjectGroupTemplate>
+</ObjectGroup>

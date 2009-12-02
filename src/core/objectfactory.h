@@ -143,7 +143,7 @@ class ObjectTemplate
 /**
  * Name einer Gruppe von Objekten
  */
-typedef std::string ObjectGroupTemplateName;
+typedef std::string ObjectGroupName;
 
 /**
  * Name eines Ortes
@@ -156,10 +156,10 @@ typedef std::string LocationName;
 typedef std::string AreaName;
 
 /**
- * \class ObjectGroupTemplate
+ * \class ObjectGroup
  * \brief Gruppe von Objekten in einer vorgegebenen Anordnung
  */
-class ObjectGroupTemplate
+class ObjectGroup
 {
 	public:
 		/**
@@ -366,11 +366,11 @@ class ObjectFactory
 	static GameObject::Subtype getObjectType(ObjectTemplateType generictype, EnvironmentName env);
 	
 	/**
-	 * \fn static ObjectGroupTemplate* getObjectGroupTemplate(ObjectGroupTemplateName name)
+	 * \fn static ObjectGroup* getObjectGroup(ObjectGroupName name)
 	 * \brief sucht zu dem betreffenden Name das passende Template heraus
 	 * \param name Name der Objektgruppe
 	 */
-	static ObjectGroupTemplate* getObjectGroupTemplate(ObjectGroupTemplateName name);
+	static ObjectGroup* getObjectGroup(ObjectGroupName name);
 	
 	/**
 	 * \fn static MonsterGroup* getMonsterGroup(MonsterGroupName name)
@@ -463,12 +463,27 @@ class ObjectFactory
 	
 	
 	/**
-	 * \fn static registerObjectGroupTemplate(ObjectGroupTemplateName name, ObjectGroupTemplate* data)
+	 * \fn static registerObjectGroup(ObjectGroupName name, ObjectGroup* data)
 	 * \brief Registriert ein neues Template fuer eine Objektgruppe
 	 * \param name der Name des Templates
 	 * \param data die Daten
 	 */
-	static void registerObjectGroupTemplate(ObjectGroupTemplateName name, ObjectGroupTemplate* data);
+	static void registerObjectGroup(ObjectGroupName name, ObjectGroup* data);
+	
+	/**
+	 * \fn void insertTemplate(EnvironmentName env, std::string purpose, ObjectGroupName templ)
+	 * \brief registriert ein Template, das ein einer bestimmten Umgebung an einer bestimmten Position verwendet werden soll
+	 * \param env Name der Umgebung
+	 * \param purpose Verwendungsstelle des Templates
+	 * \param templ Name des Templates
+			 */
+	static void registerEnvironmentTemplate(EnvironmentName env, std::string purpose, ObjectGroupName templ);
+		
+	/**
+	 * \fn ObjectGroupName getTemplate(EnvironmentName env, std::string purpose)
+	 * \brief Gibt ein Template aus, dass in der Umgebung env fuer den Verwendungszweck purpose registiert wurde
+	 */
+	static ObjectGroupName getEnvironmentTemplate(EnvironmentName env, std::string purpose);
 	
 	/**
 	 * \fn static void registerMonsterGroup(MonsterGroupName name, MonsterGroup data)
@@ -587,10 +602,10 @@ class ObjectFactory
 	static std::map<ObjectTemplateType, ObjectTemplate*> m_object_templates;
 	
 	/**
-	 * \var static std::map<ObjectGroupTemplateName, ObjectGroupTemplate*> m_object_group_templates
+	 * \var static std::map<ObjectGroupName, ObjectGroup*> m_object_group_templates
 	 * \brief Datenbank fuer die Objektgruppen indexiert nach Name
 	 */
-	static std::map<ObjectGroupTemplateName, ObjectGroupTemplate*> m_object_group_templates;
+	static std::map<ObjectGroupName, ObjectGroup*> m_object_group_templates;
 	
 	/**
 	 * \var static std::map< MonsterGroupName, MonsterGroup*>  m_monster_groups
@@ -616,6 +631,12 @@ class ObjectFactory
 	 * \brief Speichert, fuer welche Spielerklassen welches Aussehen erlaubt ist
 	 */
 	static std::multimap< GameObject::Subtype, PlayerLook > m_player_look;
+	
+	/**
+	 * \fn std::map<EnvironmentName, std::multimap< std::string, ObjectGroupName> > m_env_templates
+	 * \brief Namen aller registrierten Templates
+	 */
+	static std::map<EnvironmentName, std::multimap< std::string, ObjectGroupName> > m_env_templates;
 	
 };
 

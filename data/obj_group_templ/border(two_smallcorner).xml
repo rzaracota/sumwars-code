@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<ObjectGroupTemplate name="border(two_smallcorner)" version="1.0">
+<ObjectGroup name="border(two_smallcorner)" version="1.0">
   <Shape
     type="RECT"
     extent_x="4"
@@ -190,4 +190,4 @@
   <Areas>
   </Areas>
 
-</ObjectGroupTemplate>
+</ObjectGroup>

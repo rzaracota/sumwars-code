@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<ObjectGroupTemplate name="cursedFissure" version="1.0">
+<ObjectGroup name="cursedFissure" version="1.0">
   <Shape
     type="RECT"
     extent_x="19.80022872"
@@ -773,4 +773,4 @@
   <Areas>
   </Areas>
 
-</ObjectGroupTemplate>
+</ObjectGroup>

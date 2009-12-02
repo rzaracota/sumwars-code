@@ -1,4 +1,4 @@
-<ObjectGroupTemplate name = "trees3" >
+<ObjectGroup name = "trees3" >
         <Shape
                   type = "RECT"
                   extent_x = "4.0"
@@ -40,9 +40,9 @@
                                 />
         </ObjectContent>
 
-</ObjectGroupTemplate>
+</ObjectGroup>
 
-<ObjectGroupTemplate name = "border(single_block)" >
+<ObjectGroup name = "border(single_block)" >
         <Shape
                   type = "RECT"
                   extent_x = "4"
@@ -58,9 +58,9 @@
                                 prob_angle = "true"
                                         />
         </ObjectContent>
-</ObjectGroupTemplate>
+</ObjectGroup>
 
-<ObjectGroupTemplate name = "waypoint_templ" >
+<ObjectGroup name = "waypoint_templ" >
         <Shape
                   type = "RECT"
                   extent_x = "2"
@@ -70,10 +70,10 @@
         <Locations>
                 <Location name = "WaypointLoc" pos_x="0" pos_y="0" />
         </Locations>
-</ObjectGroupTemplate>
+</ObjectGroup>
 
 <!--
-<ObjectGroupTemplate name="border(side)(left_smallcorner)" version="1.0">
+<ObjectGroup name="border(side)(left_smallcorner)" version="1.0">
 	<Shape
 		  type="RECT"
 		  extent_x="4"
@@ -219,10 +219,10 @@
 	<Locations>
 	</Locations>
 	
-</ObjectGroupTemplate>
+</ObjectGroup>
 
 
-<ObjectGroupTemplate name="border(side)(right_smallcorner)" version="1.0">
+<ObjectGroup name="border(side)(right_smallcorner)" version="1.0">
 	<Shape
 		  type="RECT"
 		  extent_x="4"
@@ -368,9 +368,9 @@
 	<Locations>
 	</Locations>
 	
-</ObjectGroupTemplate>
+</ObjectGroup>
 
-<ObjectGroupTemplate name="border(side)(two_smallcorner)" version="1.0">
+<ObjectGroup name="border(side)(two_smallcorner)" version="1.0">
 	<Shape
 		  type="RECT"
 		  extent_x="4"
@@ -523,9 +523,9 @@
 	<Locations>
 	</Locations>
 	
-</ObjectGroupTemplate>
+</ObjectGroup>
 
-<ObjectGroupTemplate name="border(corner)(one_smallcorner)" version="1.0">
+<ObjectGroup name="border(corner)(one_smallcorner)" version="1.0">
 	<Shape
 		  type="RECT"
 		  extent_x="4"
@@ -721,10 +721,10 @@
 	<Locations>
 	</Locations>
 	
-</ObjectGroupTemplate>
+</ObjectGroup>
 
 
-<ObjectGroupTemplate name = "border(one_smallcorner)" >
+<ObjectGroup name = "border(one_smallcorner)" >
 	<Shape
 		  type = "RECT"
 		  extent_x = "4"
@@ -741,9 +741,9 @@
 				/>
 
 	</ObjectContent>
-</ObjectGroupTemplate>
+</ObjectGroup>
 
-<ObjectGroupTemplate name = "border(two_smallcorner)" >
+<ObjectGroup name = "border(two_smallcorner)" >
 	<Shape
 		  type = "RECT"
 		  extent_x = "4"
@@ -766,10 +766,10 @@
 				prob_angle = "true"
 				/>
 	</ObjectContent>
-</ObjectGroupTemplate>
+</ObjectGroup>
 
 
-<ObjectGroupTemplate name = "border(diag_smallcorner)" >
+<ObjectGroup name = "border(diag_smallcorner)" >
 	<Shape
 		  type = "RECT"
 		  extent_x = "4"
@@ -792,43 +792,10 @@
 				prob_angle = "true"
 				/>
 	</ObjectContent>
-</ObjectGroupTemplate>
+</ObjectGroup>
 
 
-<ObjectGroupTemplate name = "border(three_smallcorner)" >
-	<Shape
-		  type = "RECT"
-		  extent_x = "4"
-		  extent_y = "4"
-		  angle ="0"
-		  />
-	<ObjectContent>
-		<Object subtype="signpost"
-				center_x="3.5"
-				center_y="-3.5"
-				angle = "0"
-				probability ="1.0"
-				prob_angle = "true"
-				/>
-		<Object subtype="signpost"
-				center_x="3.5"
-				center_y="3.5"
-				angle = "0"
-				probability ="1.0"
-				prob_angle = "true"
-				/>
-		<Object subtype="signpost"
-				center_x="-3.5"
-				center_y="3.5"
-				angle = "0"
-				probability ="1.0"
-				prob_angle = "true"
-				/>
-	</ObjectContent>
-</ObjectGroupTemplate>
-
-
-<ObjectGroupTemplate name = "border(four_smallcorner)" >
+<ObjectGroup name = "border(three_smallcorner)" >
 	<Shape
 		  type = "RECT"
 		  extent_x = "4"
@@ -857,6 +824,39 @@
 				probability ="1.0"
 				prob_angle = "true"
 				/>
+	</ObjectContent>
+</ObjectGroup>
+
+
+<ObjectGroup name = "border(four_smallcorner)" >
+	<Shape
+		  type = "RECT"
+		  extent_x = "4"
+		  extent_y = "4"
+		  angle ="0"
+		  />
+	<ObjectContent>
+		<Object subtype="signpost"
+				center_x="3.5"
+				center_y="-3.5"
+				angle = "0"
+				probability ="1.0"
+				prob_angle = "true"
+				/>
+		<Object subtype="signpost"
+				center_x="3.5"
+				center_y="3.5"
+				angle = "0"
+				probability ="1.0"
+				prob_angle = "true"
+				/>
+		<Object subtype="signpost"
+				center_x="-3.5"
+				center_y="3.5"
+				angle = "0"
+				probability ="1.0"
+				prob_angle = "true"
+				/>
 		<Object subtype="signpost"
 				center_x="-3.5"
 				center_y="-3.5"
@@ -865,5 +865,5 @@
 				prob_angle = "true"
 				/>
 	</ObjectContent>
-</ObjectGroupTemplate>
+</ObjectGroup>
 -->

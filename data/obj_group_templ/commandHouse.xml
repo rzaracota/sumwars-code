@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<ObjectGroupTemplate name="commandHouse" version="1.0">
+<ObjectGroup name="commandHouse" version="1.0">
   <Shape
     type="RECT"
     extent_x="6.126888184"
@@ -380,4 +380,4 @@
   <Areas>
   </Areas>
 
-</ObjectGroupTemplate>
+</ObjectGroup>

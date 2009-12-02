@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!--
-<ObjectGroupTemplate name = "string" >
+<ObjectGroup name = "string" >
   <Shape
 		type = "RECT"
 		extent_x = "float"
@@ -33,12 +33,12 @@
 	 ...
   </Locations>
 
-</ObjectGroupTemplate>
+</ObjectGroup>
 -->
 
 
 
-<ObjectGroupTemplate name = "test_region_templ" >
+<ObjectGroup name = "test_region_templ" >
 	<Shape
 		  type = "RECT"
 		  extent_x = "16.0"
@@ -70,9 +70,9 @@
 		<Location name = "treeloc" pos_x="0" pos_y="8" />
 	</Locations>
 	
-</ObjectGroupTemplate>
+</ObjectGroup>
 
-<ObjectGroupTemplate name = "willard" >
+<ObjectGroup name = "willard" >
 	<Shape
 		  type = "RECT"
 		  extent_x = "4.0"
@@ -93,9 +93,9 @@
 	<Locations>
 		<Location name = "locWillard" pos_x="0" pos_y="0" />
 	</Locations>
-</ObjectGroupTemplate>
+</ObjectGroup>
 
-<ObjectGroupTemplate name = "maylonsGraveL2Chamber" >
+<ObjectGroup name = "maylonsGraveL2Chamber" >
 	<Shape
 		  type = "RECT"
 		  extent_x = "4.0"
@@ -116,9 +116,9 @@
 	<Locations>
 		<Location name = "cryptGraveChamber" pos_x="0" pos_y="0" />
 	</Locations>
-</ObjectGroupTemplate>
+</ObjectGroup>
 
-<ObjectGroupTemplate name = "powerlich" >
+<ObjectGroup name = "powerlich" >
 	<Shape
 		  type = "RECT"
 		  extent_x = "4.0"
@@ -139,6 +139,6 @@
 	<Locations>
 		<Location name = "locPowerLich" pos_x="0" pos_y="0" />
 	</Locations>
-</ObjectGroupTemplate>
+</ObjectGroup>
 
 

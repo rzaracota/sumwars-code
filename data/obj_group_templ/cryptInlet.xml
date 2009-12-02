@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<ObjectGroupTemplate name="cryptInlet" version="1.0">
+<ObjectGroup name="cryptInlet" version="1.0">
   <Shape
     type="RECT"
     extent_x="10.42843475"
@@ -341,4 +341,4 @@
   <Areas>
   </Areas>
 
-</ObjectGroupTemplate>
+</ObjectGroup>

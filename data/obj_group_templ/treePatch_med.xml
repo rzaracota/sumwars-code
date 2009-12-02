@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<ObjectGroupTemplate name="treePatch_med" version="1.0">
+<ObjectGroup name="treePatch_med" version="1.0">
   <Shape
     type="RECT"
     extent_x="7.609704384"
@@ -303,4 +303,4 @@
   <Locations>
   </Locations>
 
-</ObjectGroupTemplate>
+</ObjectGroup>
