@@ -19,3 +19,15 @@
 		<CppImplementation type="dmg_at_target" />
 	</Effect>	
 </Projectile>
+
+
+<Projectile subtype="throwing_dagger"
+			radius="0.1"
+			lifetime="2000"
+			implementation = "fly"
+			>
+	<RenderInfo name="throwing_dagger" />
+	<Effect>
+		<CppImplementation type="dmg_at_target" />
+	</Effect>
+</Projectile>

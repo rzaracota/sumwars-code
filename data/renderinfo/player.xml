@@ -611,6 +611,10 @@
 		<Animation name="priestMagicStrong" />
 	</Action>
 	
+	<Action name="throw_dagger">
+		<Animation name="attack" />
+	</Action>
+	
 </RenderInfo>
 
 <RenderInfo name="playerbaseM" parent="playerbase">
@@ -990,7 +994,6 @@
 	<Action name="keen_mind" reference="cure_pois_burn_party">
 		<Animation name="priestMagicStrong" />
 	</Action>
-	
 </RenderInfo>
 
 <RenderInfo name="warrior_m" parent="playerbaseM" >

@@ -1,4 +1,24 @@
-﻿<RenderInfo name="rogue" parent="playerbase">
+<RenderInfo name="human_bandit" parent="playerbase">
+	<Entity source="rogue.mesh"/>
+	<Subobject objectname="armor" source="rogueArmorEnemy" />
+	<Entity objectname="weapon" bone="itemRightHand" source="dagger_sw.mesh"  />
+	<Entity objectname="head" bone="crown" source="head1.mesh" />
+	<Entity objectname="hair" bone="crown" source="hair_m2.mesh" />
+	<Entity objectname="chinBeard" bone="crown" source="beard_chin.mesh" />
+	<Entity objectname="mustache" bone="crown" source="mustache.mesh" />
+</RenderInfo>
+
+<RenderInfo name="human_thug" parent="playerbase">
+	<Entity source="rogue.mesh"/>
+	<Subobject objectname="armor" source="rogueArmorEnemy" />
+	<Entity objectname="weapon" bone="itemRightHand" source="goblin_hmr.mesh"  />
+	<Entity objectname="head" bone="crown" source="head1.mesh" />
+	<Entity objectname="hair" bone="crown" source="hair_m2.mesh" />
+	<Entity objectname="chinBeard" bone="crown" source="beard_chin.mesh" />
+	<Entity objectname="mustache" bone="crown" source="mustache.mesh" />
+</RenderInfo>
+
+<RenderInfo name="rogue" parent="playerbase">
 	<Entity source="rogue.mesh"/>
 	<Subobject objectname="armor" source="rogueArmorEnemy" />
 	<Entity objectname="head" bone="crown" source="head1.mesh" />

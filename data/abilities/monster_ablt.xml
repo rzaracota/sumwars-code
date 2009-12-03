@@ -459,3 +459,23 @@
 		</LuaImplementation>
 	</Damage>
 </Ability>
+
+<Ability type="throw_dagger" 
+		 name="throw dagger"
+		 description="Throw a dagger" 
+		 time="1.000000" 
+		 timer_nr="0.000000" 
+		 timer_value="0.000000" 
+		 base_ability="range_attack" 
+		 critical_percent="0.660000" 
+		 target_type="ranged" >
+	<Effect>
+		<CppImplementation type="proj_fly_at_target" />
+	</Effect>
+	<Projectile type="throwing_dagger" speed="10000" />
+	<Damage>
+		<CppImplementation type="range_attack" />
+	</Damage>
+</Ability>
+
+

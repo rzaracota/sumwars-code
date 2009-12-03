@@ -216,7 +216,8 @@
 		<SpawnGroups>
 			<SpawnGroup group_name="goblins_bow_l5" number="10" />
 			<SpawnGroup group_name="goblins_l5" number="20" />
-			<SpawnGroup group_name="goblins_dogs_l5" number="20"/>
+			<SpawnGroup group_name="goblins_dogs_l5" number="15"/>
+			<SpawnGroup group_name="bandits_l6" number="5" />
 			<SpawnGroup group_name="goblins_gobrusch" number="1"/>
 		</SpawnGroups>
 	</Region>
@@ -255,9 +256,10 @@
 		
 		<SpawnGroups>
 			<SpawnGroup group_name="goblins_lurdrak" number="1"/>
-			<SpawnGroup group_name="goblins_l6" number="15"/>
-			<SpawnGroup group_name="goblins_l7" number="20"/>
+			<SpawnGroup group_name="goblins_l6" number="10"/>
+			<SpawnGroup group_name="goblins_l7" number="15"/>
 			<SpawnGroup group_name="goblins_club_l7" number="10"/>
+			<SpawnGroup group_name="bandits_l6" number="10" />
 		</SpawnGroups>
 	</Region>
 	
@@ -334,9 +336,10 @@
 		</ObjectGroups>
 		
 		<SpawnGroups>
-			<SpawnGroup group_name="goblins_l7_rider" number="20"/>
-			<SpawnGroup group_name="goblins_l8" number="20"/>
+			<SpawnGroup group_name="goblins_l7_rider" number="15"/>
+			<SpawnGroup group_name="goblins_l8" number="15"/>
 			<SpawnGroup group_name="goblins_marblak" number="1"/>
+			<SpawnGroup group_name="bandits_l6" number="10" />
 		</SpawnGroups>
 	</Region>
 	
