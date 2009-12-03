@@ -9,15 +9,19 @@
 	
 	<State name="active">
 		<Activation time="200">
-			<ParticleSystem objectname="fire1" source="CampFire" position="0.0 5.0 0.0"/>
-			<ParticleSystem objectname="fire2" source="CampFire" position="0.0 5.0 0.0"/>
-			<ParticleSystem objectname="fire3" source="CampFire" position="0.0 5.0 0.0"/>
-			<ParticleSystem objectname="fire4" source="CampFire" position="0.0 5.0 0.0"/>
-			<ParticleSystem objectname="fire5" source="CampFire" position="0.0 5.0 0.0"/>
+			<ParticleSystem objectname="fire1" source="CampFire" position="0.0 1.1 -1.56"/>
+			<ParticleSystem objectname="fire2" source="CampFire" position="1.47 1.1 -0.161"/>
+			<ParticleSystem objectname="fire3" source="CampFire" position="1.056 1.247 1.192"/>
+			<ParticleSystem objectname="fire4" source="CampFire" position="-0.406 1.22 1.441"/>
+			<ParticleSystem objectname="fire5" source="CampFire" position="-1.479 1.289 -0.097"/>
 		</Activation>
 		
 		<Deactivation time="200">
-			<Detach objectname="fire"/>
+			<Detach objectname="fire1"/>
+			<Detach objectname="fire2"/>
+			<Detach objectname="fire3"/>
+			<Detach objectname="fire4"/>
+			<Detach objectname="fire5"/>
 		</Deactivation>
 	</State>
 </RenderInfo>

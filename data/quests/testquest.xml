@@ -11,8 +11,10 @@
 				speak('Fenor Marken',_("surprised"));
 				setSpeakerEmotion('Fenor Marken',"thoughtful");
 				speak('Fenor Marken',_("thoughtful"));
+				removeSpeaker('Fenor Marken');
 				setSpeakerEmotion('Fenor Marken',"happy");
-				speak('Fenor Marken',_("happy"));
+				speak('Fenor Marken',_("happy"))
+				addSpeakerInDialog(fenor,'Fenor Marken');
 				setSpeakerEmotion('Fenor Marken',"amused");
 				speak('Fenor Marken',_("amused"));
 				setSpeakerEmotion('Fenor Marken',"excited");
@@ -46,7 +48,6 @@
 				setSpeakerEmotion('Fenor Marken',"injured3");
 				speak('Fenor Marken',_("deadly injured"));
 				speak('player',_("und noch ein Test"));
-				executeInDialog("timedExecute('deleteObject(fenor)',200)");
 				speak('Fenor Marken',_("wieder ein Test"));
 				--setSpeakerPosition('Fenor Marken',"upper_left");
 				speak('guard1',"ich bin die erste Wache")

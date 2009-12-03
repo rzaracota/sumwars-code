@@ -10,6 +10,16 @@
 		</Deactivation>
 	</State>
 	
+	<State name="frozen">
+		<Activation>
+			<Entity objectname="frozen" source="iceSmall.mesh"  highlightable="false"/>
+		</Activation>
+		
+		<Deactivation>
+			<Detach objectname="frozen"/>
+		</Deactivation>
+	</State>
+	
 	<State name="bleed">
 		<Activation>
 			<ParticleSystem objectname="bleed" source="Hit" position="0 1.5 0"  />

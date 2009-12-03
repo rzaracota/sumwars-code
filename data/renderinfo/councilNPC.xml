@@ -59,6 +59,11 @@
 		<Movement start="0.0" end="0.5" start_vec="0.0 0.0 0.0" end_vec="0.0 0.30 0.0" />
 		<Movement start="0.5" end="1.0" start_vec="0.0 0.3 0.0" end_vec="0.0 0.0 0.0" />
 	</Action>
+	
+	<Action name = "blindness">
+		<ParticleSystem objectname="sacrifice" source="Hit" position="0.0 1.8 0.0" />
+		<Detach time="0.8" objectname="sacrifice" />
+	</Action>
 
 </RenderInfo>
 

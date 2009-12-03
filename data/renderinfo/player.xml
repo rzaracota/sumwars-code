@@ -136,6 +136,7 @@
 	</Action>
 	<Action name="attack#OneHand">
 		<Animation name="attack" />
+		<Sound objectname="actionsound" name="sword_attack" start="0.5"/>
 	</Action>
 	<Action name="attack#TwoHands">
 		<Animation name="attackTwoHands" />
@@ -994,7 +995,7 @@
 
 <RenderInfo name="warrior_m" parent="playerbaseM" >
 	<Entity source="warrior_m.mesh"/>
-	<Entity objectname="head" bone="crown" source="head1.mesh" />
+	<Entity objectname="head" bone="crown" source="head_ms1.mesh" />
 </RenderInfo>
 <RenderInfo name="warrior_f" parent="playerbase" >
 	<Entity source="priest_f.mesh"/>
@@ -1003,7 +1004,7 @@
 
 <RenderInfo name="mage_m" parent="playerbaseM" >
 	<Entity source="mage_m.mesh"/>
-	<Entity objectname="head" bone="crown" source="head_m1.mesh" />
+	<Entity objectname="head" bone="crown" source="head_mt1.mesh" />
 </RenderInfo>
 <RenderInfo name="mage_f" parent="playerbase" >
 	<Entity source="archer_f.mesh"/>
@@ -1012,7 +1013,7 @@
 
 <RenderInfo name="archer_m" parent="playerbaseM" >
 	<Entity source="mage_m.mesh"/>
-	<Entity objectname="head" bone="crown" source="head_m1.mesh" />
+	<Entity objectname="head" bone="crown" source="head_mt1.mesh" />
 </RenderInfo>
 <RenderInfo name="archer_f" parent="playerbase" >
 	<Entity source="archer_f.mesh"/>
@@ -1021,7 +1022,7 @@
 
 <RenderInfo name="priest_m" parent="playerbaseM" >
 	<Entity source="warrior_m.mesh"/>
-	<Entity objectname="head" bone="crown" source="head1.mesh" />
+	<Entity objectname="head" bone="crown" source="head_ms1.mesh" />
 </RenderInfo>
 <RenderInfo name="priest_f" parent="playerbase" >
 	<Entity source="priest_f.mesh"/>
@@ -1033,14 +1034,16 @@
 </RenderInfo>
 	
 <RenderInfo name="stuntman" parent="playerbaseM">
-	<Entity source="warrior_m.mesh" />
-	<Entity objectname="head" bone="crown" source="head1.mesh" />
-	<Entity objectname="hair" bone="crown" source="hair_m1.mesh" />
-	<Entity objectname="hat" bone="crown" source="vag_hatMageM.mesh" />
-	<!--<Entity objectname="weapon" bone="itemRightHand" source="merc2h_sw.mesh" />-->
-	<Entity objectname="shield" bone="itemLeftHand" source="goblin_sbw.mesh" />
-	<!--<Entity objectname="barrel" source="chair_konz.mesh" />-->
-	<ParticleSystem objectname="daRing" source = "BurningHead" position="0 2 0"/>
+	<Entity source="mage_m.mesh" />
+	<Entity objectname="head" bone="crown" source="head_mt1.mesh" />
+	<Entity objectname="hair" bone="crown" source="hairShort_mt4.mesh" />
+	<Entity objectname="mustache" bone="crown" source="mustache4.mesh" />
+	<!--<Entity objectname="beard" bone="crown" source="beardChin_ms1.mesh" />
+	<Entity objectname="hat" bone="crown" source="vag_hatMageM.mesh" />-->
+	<Entity objectname="weapon" bone="itemRightHand" source="crude_sw.mesh" />
+	<!--<Entity objectname="shield" bone="itemLeftHand" source="goblin_sbw.mesh" />
+	<Entity objectname="barrel" source="chair_konz.mesh" />
+	<ParticleSystem objectname="daRing" source = "BurningHead" position="0 2 0"/>-->
 </RenderInfo>
 
 <RenderInfo name="stuntgirl" parent="playerbase">

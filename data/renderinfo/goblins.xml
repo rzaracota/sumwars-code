@@ -371,3 +371,40 @@
 		<Animation name="idleRanged2" />
 	</Action>
 </RenderInfo>
+
+<!-- Gab'Resh und sein Clan -->
+<RenderInfo name="goblin_gabresh" parent="goblinbase">
+	<Entity source="goblinBrown.mesh"/>
+	<Entity objectname="weapon" bone="itemRightHand" source="goblin_stf.mesh" />
+	<Entity objectname="gloves" bone="ellbowRight" source="goblin_glv.mesh" />
+	<Entity objectname="armor" bone="kneeRight" source="gobLeg_arm.mesh" />
+	<Entity objectname="helmet" bone="crown" source="goblin_hlm.mesh" />
+	
+	<Action name = "freeze">
+		<Animation name = "castMagicWeak"/>
+	</Action>
+	<Action name="goblin_icebolt">
+		<Animation name="castMagicWeak" />
+	</Action>
+</RenderInfo>
+<RenderInfo name="goblin_gabclan_sword" parent="goblinbase">
+	<Entity source="goblinBrown.mesh"/>
+	<Entity objectname="weapon" bone="itemRightHand" source="crude_sw.mesh" />
+	<Entity objectname="shield" bone="itemLeftHand" source="goblin_shd.mesh" />
+	<Entity objectname="gloves" bone="ellbowRight" source="goblin_glv.mesh" />
+</RenderInfo>
+<RenderInfo name="goblin_gabclan_bow" parent="goblinbase">
+	<Entity source="goblinBrown.mesh"/>
+	<Entity objectname="weapon" bone="itemLeftHand" source="goblin_sbw.mesh" />
+	<Entity objectname="armor" bone="kneeRight" source="gobLeg_arm.mesh" />
+	<Entity objectname="gloves" bone="ellbowRight" source="goblin_glv.mesh" />
+	
+	<Action name="walk">
+		<Animation name="walkRanged" />
+	</Action>
+	<Action name="noaction">
+		<Animation name="idleRanged1" />
+	</Action>
+</RenderInfo>
+
+
