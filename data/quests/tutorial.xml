@@ -1032,7 +1032,7 @@
 			</Condition>
 			<Effect>
 				--createMonsterGroup
-				tutorial_tmp.slugs = getObjectsInArea("mutantSlugsArea","normal","monster");
+				tutorial_tmp.slugs = getObjectsInArea({"mutantSlugsArea","normal","monster"});
 				tutorial_tmp.slugnr = table.getn(tutorial_tmp.slugs);
 				
 				setCutsceneMode(true);				

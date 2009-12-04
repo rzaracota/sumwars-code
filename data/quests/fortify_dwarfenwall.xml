@@ -626,7 +626,7 @@
 		
 		<Event trigger ="teleport_out" once="true" >
 			<Effect>
-				assembleParty("medBackalley","locScene3","entry_north");
+				assembleParty("medBackalley","entry_south","entry_north");
 			</Effect>
 		</Event>
 	</Region>
