@@ -1030,6 +1030,143 @@
 	<AI ai_sight_range="12" />
 </Monster>
 
+<!-- Gab'Resh, Maylons Grab -->
+<!-- L8 -->
+<Monster type="MONSTER" subtype="goblin_gabresh" name="Gab'Resh" fraction="monster" race="goblin" layer="NORMAL">
+	<RenderInfo name="goblin_gabresh" />
+	<Dropslots >
+		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.05" pgold="0.05" min_gold="10" max_gold="80" min_level="4" max_level="10" magic_prob="0.1" magic_power="300" />
+		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.03" pgold="0.05" min_gold="5" max_gold="50" min_level="2" max_level="7" magic_prob="0.2" magic_power="250" />
+	</Dropslots>
+	
+	<BasicAttributes
+					experience="40"
+					level="8"
+					max_health="180"
+					armor="15"
+					block="10"
+					attack="10"
+					power="45"
+					strength="15"
+					dexterity="15"
+					magic_power="18"
+					willpower="30"
+					resistances_physical="0"
+					resistances_air="20"
+					resistances_ice="40"
+					resistances_fire="0"
+					resistances_cap_physical="50"
+					resistances_cap_air="50"
+					resistances_cap_ice="70"
+					resistances_cap_fire="50"
+					walk_speed="2000"
+					attack_speed="700"
+					step_length="0.8"
+					attack_range="1"
+					>
+		<Ability type="walk" />
+		<Ability type="magic_attack_ice" rating="1" time = "1400"/>
+		<Ability type="goblin_icebolt"  rating="2" timer_nr="1" timer_value="8000"/>
+		<Ability type="freeze"  rating="1" timer_nr="2" timer_value="16000"/>
+		<Ability type="die" />
+		<Ability type="noaction" />
+	</BasicAttributes>
+	
+	<Geometry radius="0.5" />
+	
+	<AI ai_sight_range="10" />
+</Monster>
+
+<!-- Gab-Clan, Messerkaempfer, Maylons Grab -->
+<!-- L8 -->
+<Monster type="MONSTER" subtype="goblin_gabclan_sword" name="Gab Clan Goblin" fraction="monster" race="goblin" layer="NORMAL">
+	<RenderInfo name="goblin_gabclan_sword" />
+	<Dropslots >
+		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.05" pgold="0.05" min_gold="10" max_gold="80" min_level="4" max_level="10" magic_prob="0.1" magic_power="300" />
+		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.03" pgold="0.05" min_gold="5" max_gold="50" min_level="2" max_level="7" magic_prob="0.2" magic_power="250" />
+	</Dropslots>
+	
+	<BasicAttributes
+					experience="40"
+					level="8"
+					max_health="160"
+					armor="40"
+					block="20"
+					attack="50"
+					power="35"
+					strength="25"
+					dexterity="15"
+					magic_power="7"
+					willpower="15"
+					resistances_physical="0"
+					resistances_air="10"
+					resistances_ice="20"
+					resistances_fire="10"
+					resistances_cap_physical="50"
+					resistances_cap_air="50"
+					resistances_cap_ice="50"
+					resistances_cap_fire="50"
+					walk_speed="2000"
+					attack_speed="1800"
+					step_length="0.8"
+					attack_range="1"
+					>
+		<Ability type="walk" />
+		<Ability type="attack" rating="1"/>
+		<Ability type="die" />
+		<Ability type="noaction" />
+	</BasicAttributes>
+	
+	<Geometry radius="0.5" />
+	
+	<AI ai_sight_range="10" />
+</Monster>
+
+<!-- Gab-Clan, Bogenschuetze, Maylons Grab -->
+<!-- L7 -->
+<Monster type="MONSTER" subtype="goblin_gabclan_bow" name="Gab Clan Goblin" fraction="monster" race="goblin" layer="NORMAL">
+	<RenderInfo name="goblin_gabclan_bow" />
+	<Dropslots >
+		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.05" pgold="0.05" min_gold="5" max_gold="60" min_level="4" max_level="9" magic_prob="0.1" magic_power="250" />
+		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.04" pgold="0.05" min_gold="1" max_gold="40" min_level="2" max_level="6" magic_prob="0.2" magic_power="200" />
+	</Dropslots>
+	
+	<BasicAttributes
+					experience="26"
+					level="7"
+					max_health="80"
+					armor="15"
+					block="15"
+					attack="80"
+					power="35"
+					strength="20"
+					dexterity="30"
+					magic_power="5"
+					willpower="20"
+					resistances_physical="0"
+					resistances_air="0"
+					resistances_ice="0"
+					resistances_fire="0"
+					resistances_cap_physical="50"
+					resistances_cap_air="50"
+					resistances_cap_ice="50"
+					resistances_cap_fire="50"
+					walk_speed="2500"
+					attack_speed="900"
+					step_length="0.8"
+					attack_range="1"
+					>
+		
+		<Ability type="walk" />
+		<Ability type="range_attack" rating="1"/>
+		<Ability type="die" />
+		<Ability type="noaction" time="4000"/>
+	</BasicAttributes>
+	
+	<Geometry radius="0.5" />
+	
+	<AI ai_sight_range="12" ai_shoot_range="7" />
+</Monster>
 
 
 <MonsterGroup name="goblins_l1" >

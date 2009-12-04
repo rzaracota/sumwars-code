@@ -772,24 +772,36 @@
 				
 				if (allequip == false) then
 					if (solo()) then
-						speak("Tolec",_("Ihr solltet zunächst eure Waffen anlegen."));
+						speak("Tolec",_("Ihr solltet zunächst eure Waffe anlegen."));
 					else
 						speak("Tolec",_("Ihr solltet alle zunächst eure Waffen anlegen."));
 					end;
 					return;
 				end
 				
-				speak("Tolec",_("Aber wir ihr kämpft wisst ihr doch noch, oder?"),"surprised");
+				if(solo())then
+					speak("Tolec",_("Aber wir man kaempft wisst Ihr doch noch, oder? _solo"),"surprised");
+				else
+					speak("Tolec",_("Aber wir man kaempft wisst ihr doch noch, oder?"),"surprised");
+				end;
 				speak("PL",_("Reingehen, anklicken, töten. Das vergisst man niemals als Gezeichneter."),"bored");
 				speak("Derred",_("Anklicken?"),"surprised");
-				speak("Tolec",_("Keine Ahnung, der Lord Magister hat gesagt, die verstehen das schon."),"thoughtful");
+				if(solo())then
+					if(femaleOnly())then
+						speak("Tolec",_("Keine Ahnung, der Lord Magister hat gesagt, die versteht das schon."),"thoughtful");
+					else
+						speak("Tolec",_("Keine Ahnung, der Lord Magister hat gesagt, der versteht das schon."),"thoughtful");
+					end;
+				else
+					speak("Tolec",_("Keine Ahnung, der Lord Magister hat gesagt, die verstehen das schon."),"thoughtful");
+				end;
 				speak("waropt",_("Lasst uns diese Experimente das Fürchten lehren!"),"excited");
 				speak("arcopt",_("Ich hoffe, die haben auch eine Seele."),"thoughtful")
 				if (getSpeaker("priopt") ~= getSpeaker("arcopt")) then
 				speak("priopt",_("Keine Sorge. Selbst ein Golem hat eine. Da werden die Dinger keine Ausnahme sein."),"happy");
 				end;
 				speak("Tolec",_("Sehr gut, haltet uns einfach diese Dinger vom Hals, während wir versuchen die Luke zu  öffnen."),"happy");
-				speak("Derred",_("Ich geh da nicht rein, wenn die Viecher noch auf freiem Fuß sind!"),"disgust");
+				speak("Derred",_("Vergiss es! Ich geh da nicht rein, wenn die Viecher noch auf freiem Fuss sind!"),"disgust");
 				
 				executeInDialog("startTimer('open_slugdoor',1500)");
 				local door = getObjectByNameRef("slugFarmBackdoor");
@@ -885,15 +897,23 @@
 				if (getSpeaker("priopt") == 0) then
 					addSpeaker(getSpeaker("player"),"priopt");
 				end;
-				speak("Tolec",_("Ihr könnt jedes Mal eure Attribute verbessern und von Zeit zu Zeit habt ihr sogar genug Energie für eine neue Fähigkeit."),"normal");
-				speak("Derred",_("Ja genau, das war doch das, mit dem großen Plus in der linken unteren Ecke. Klickt einfach darauf und verteilt dann im Attributfenster oben eure Attribut Punkte."),"normal");
-				speak("Tolec",_("Genau, und den Fähigkeitenpunkt könnt ihr im Fähigkeitenfenster verteilen. Der Lord Magister hat gesagt, dass ihr die aus drei verschiedenen Kategorien wählen könnt."));
-				speak("Derred",_("In Abhängigkeit von eurer... Charaktermasse"),"thoughtful");
-				speak("Tolec",_("Charakterklasse."),"unhappy");
-				speak("Derred",_("Oh, genau!"),"surprised");
+				if(solo())then
+					speak("Tolec",_("Ihr könnt jedes Mal eure Attribute verbessern und von Zeit zu Zeit habt ihr sogar genug Energie für eine neue Fähigkeit. _solo"),"normal");
+					speak("Derred",_("Ja genau, das war doch das, mit dem großen Plus in der linken unteren Ecke. Klickt einfach darauf und verteilt dann im Attributfenster oben eure Attribut Punkte. _solo"),"normal");
+					speak("Tolec",_("Genau, und den Fähigkeitenpunkt könnt ihr im Fähigkeitenfenster verteilen. Der Lord Magister hat gesagt, dass ihr die aus drei verschiedenen Kategorien wählen könnt. _solo"));
+					speak("Tolec",_("In Abhängigkeit von eurer... Charaktermasse. _solo"),"thoughtful");
+				else
+					speak("Tolec",_("Ihr könnt jedes Mal eure Attribute verbessern und von Zeit zu Zeit habt ihr sogar genug Energie für eine neue Fähigkeit."),"normal");
+					speak("Derred",_("Ja genau, das war doch das, mit dem großen Plus in der linken unteren Ecke. Klickt einfach darauf und verteilt dann im Attributfenster oben eure Attribut Punkte."),"normal");
+					speak("Tolec",_("Genau, und den Fähigkeitenpunkt könnt ihr im Fähigkeitenfenster verteilen. Der Lord Magister hat gesagt, dass ihr die aus drei verschiedenen Kategorien wählen könnt."));
+					speak("Tolec",_("In Abhängigkeit von eurer... Charaktermasse"),"thoughtful");
+				end;
+				
+				speak("Derred",_("Charakterklasse."),"unhappy");
+				speak("Tolec",_("Oh, genau!"),"surprised");
 				
 				speak("priopt",_("Ich frage mich, woher dieser Soren so viel über die Gefallenen weiß..."),"thoughtful");
-				speak("warrior",_("Magier sind äußerst merkwürdig. Alle."),"unhappy");
+				speak("warrior",_("Magier sind aeusserst merkwuerdig. Alle."),"unhappy");
 				if (getSpeaker("warrior") ~= 0) then
 					speak("mage",_("Besser merkwürdig als..."),"sneer");
 				end;
@@ -988,6 +1008,7 @@
 				return (trigger.unit == tutorial_tmp.derred and tutorial_tmp.backroute ==1 and tutorial_tmp.fooddoor_open ~= true)
 			</Condition>
 			<Effect>
+				createMonsterGroup("tutorialMutantSlugs","locBackroute3",3);
 				timedExecute("door_toggle('slugFarmFoodDoor')",1000);
 				startTimer("go_backroute2",2000);
 				tutorial_tmp.fooddoor_open = true;
@@ -1010,7 +1031,7 @@
 				end;
 			</Condition>
 			<Effect>
-				createMonsterGroup("tutorialMutantSlugs","locBackroute3",3);
+				--createMonsterGroup
 				tutorial_tmp.slugs = getObjectsInArea("mutantSlugsArea","normal","monster");
 				tutorial_tmp.slugnr = table.getn(tutorial_tmp.slugs);
 				

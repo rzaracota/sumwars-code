@@ -36,6 +36,18 @@
 </ObjectGroup>
 -->
 
+<ObjectGroup name = "randomLocation" >
+	<Shape
+		  type = "RECT"
+		  extent_x = "1.0"
+		  extent_y = "1.0"
+		  angle ="0"
+		/>
+		
+	<Locations>
+		<Location name = "locCenter" pos_x="0" pos_y="0" />
+	</Locations>
+</ObjectGroup>
 
 
 <ObjectGroup name = "test_region_templ" >

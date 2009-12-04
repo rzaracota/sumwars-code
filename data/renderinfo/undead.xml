@@ -30,6 +30,10 @@
 	<Action name="die">
 		<Animation name="die" />
 	</Action>
+	
+	<Action name="noaction">
+		<Animation name="idleZombie" />
+	</Action>
 </RenderInfo>
 
 <RenderInfo name="lichbase" parent="creaturebase">
@@ -226,5 +230,18 @@
 		<Detach time="0.8" objectname="handIce6" />
 		<ParticleSystem time = "0.81" objectname="handIce7" bone="mainmesh:itemLeftHand" source="Firesphere" position="0.0 -0.20 -0.10" />
 		<ParticleSystem time = "0.81" objectname="handIce8" bone="mainmesh:itemLeftHand" source="Firesphere" position="0.0 0.0 0.0" />
+	</Action>
+</RenderInfo>
+
+<RenderInfo name="ghost_slim">
+	<Entity source="human_ghost.mesh"/>
+	<Entity objectname="head" bone = "crown" source="head_ghost.mesh"/>
+	
+	<Action name="noaction">
+		<Animation name="float"/>
+	</Action>
+	
+	<Action name="summoned">
+		<Animation name="rise"/>
 	</Action>
 </RenderInfo>

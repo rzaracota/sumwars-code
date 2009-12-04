@@ -38,9 +38,15 @@ FIXED_OBJECT
         </Environment>
 		<Environment name="cave"/>
 </ObjectTemplate>
-<ObjectTemplate name="$plant_bushes_script" type="SCRIPTOBJECT">
+
+<ObjectTemplate name="$script_berry_bush" type="SCRIPTOBJECT">
         <Environment name="hills" default="true">
                 <Object name="berryBush" />
+        </Environment>
+</ObjectTemplate>
+<ObjectTemplate name="$script_sarkophagus" type="SCRIPTOBJECT">
+        <Environment name="cave" default="true">
+                <Object name="sarkophagusMaylon" />
         </Environment>
 </ObjectTemplate>
 

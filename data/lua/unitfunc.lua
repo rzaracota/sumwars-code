@@ -225,5 +225,32 @@ function addStandardSpeakers(region,location)
 	end;
 end;
 
-
+function isArcher(player)
+	if(get(player,"subtype")=="archer")then
+		return true;
+	else
+		return false;
+	end;
+end;
+function isMage(player)
+	if(get(player,"subtype")=="mage")then
+		return true;
+	else
+		return false;
+	end;
+end;
+function isPriest(player)
+	if(get(player,"subtype")=="priest")then
+		return true;
+	else
+		return false;
+	end;
+end;
+function isWarrior(player)
+	if(get(player,"subtype")=="warrior")then
+		return true;
+	else
+		return false;
+	end;
+end;
 

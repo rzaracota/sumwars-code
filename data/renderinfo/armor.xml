@@ -60,6 +60,6 @@
 <RenderInfo name="necromancerRobe#f" parent="playerbase" inherit="animation">
 </RenderInfo>
 
-<RenderInfo name="rogueArmorEnemy" parent="playerbase">
+<RenderInfo name="rogueArmorEnemy" parent="playerbaseM">
 	<Entity source = "rogue_arm.mesh"/>
 </RenderInfo>

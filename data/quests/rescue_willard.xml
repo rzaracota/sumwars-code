@@ -1,9 +1,5 @@
 <Quest name="Ein Freund in Not" table_name="rescue_willard">
 	
-	<Init>
-		local a = 2
-	</Init>
-	
 	<Description>
 		if (rescue_willard.finished) then
 			return _("Willard ist wieder in Medair und er hat sogar ein bisschen Geld springen lassen. Wer sagt denn, dass es sich nicht auszahlt, die Leute am Leben zu lassen? Zumindest so lange es reichlich Goblins gibt.")
@@ -124,7 +120,7 @@
 					end;
 					speak('Fenor Marken',_("Normalerweise wuerde ich das niemandem anvertrauen."),"thoughtful");
 					speak('Fenor Marken',_("Schon gar keinen wildfremden Leuten."),"thoughtful");
-					speak('Fenor Marken',_("Wer wuerde nicht einfach damit verschwinden."),"grin");
+					speak('Fenor Marken',_("Wer wuerde nicht einfach damit verschwinden?"),"grin");
 					speak('Fenor Marken',_("Aber ihr Gezeichneten habt andere Mittel und Wege, um zu reisen."),"normal");
 					speak('Fenor Marken',_("Und einen Phasenstein koennt ihr nicht benutzen, weil er Avaera geweiht ist, stimmt's?"));
 					speak('Fenor Marken',_("Deswegen habe ich mich an Euch gewandt, als Ihr hier vorbei gekommen seid."));

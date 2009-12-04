@@ -631,5 +631,189 @@
 		</Event>
 	</Region>
 	
+	<!-- Kristall in der Hintergasse -->
+	<Region name= "medBackalley">
+		<Event trigger ="player_moved" once = "true">
+			<Condition>
+				return (unitIsInArea(trigger.player,"areaScene3")and(fortify_dwall.crystal~=true));
+			</Condition>
+			<Effect>
+				assembleParty("medBackalley","locScene","locCrystal");
+				fortify_dwall_tmp.assemble = "crystal";
+			</Effect>
+		</Event>
+		<Event trigger="party_complete" once="true">
+			<Condition>
+				return (fortify_dwall_tmp.assemble == "crystal");
+			</Condition>
+			<Effect>
+				fortify_dwall_tmp.assemble = nil;
+				fortify_dwall_tmp.comCrystal = createObject("sorenCrystal","locCrystal");
+				groupObjectsArc(getPlayers(),"locScene","locCrystal",nil,360);
+				createDialogue();
+				addAllPlayersToDialog();
+				addStandardRoles();
+				addSpeaker(fortify_dwall_tmp.comCrystal,"Soren",true);
+				if(not solo())then
+					local leader = getSpeaker("PL");
+					local countermage;
+					if(leader ~= getSpeaker("priopt"))then
+						countermage = getSpeaker("priopt");
+					elseif(leader~= getSpeaker("magopt"))then
+						countermage = getSpeaker("magopt");
+					else
+						countermage = getPlayers()[2];
+					end;
+					addSpeaker(countermage,"countermage");
+				end;
+				local magopt = getSpeaker("magopt");
+				local waropt = getSpeaker("waropt");
+				local soren = fortify_dwall_tmp.comCrystal;
+				
+				if(solo())then
+					speak("PL", _("(Dieser Windklaue ist irgendwie seltsam.)"),"thoughtful");
+					speak("PL", _("(Er weiß zuviel. Und er hat einen echten Stein aus Harads Hoelle.)"));
+					speak("PL", _("(Und dieser Kristall, den er mir untergejubelt hat...)"),"thoughtful");
+					speak("PL", _("(Sieht aus wie ein Spionagekristall. Na, das werden wir gleich wissen.)"),"unhappy");
+					speak("PL", _("Hm... ich werde einfach mal nach Feinden des Konzils Ausschau halten."),"thoughtful");
+					speak("PL", _("Und danach mit ihnen diese Beschwoerer-Wichtel auseinander nehmen."),"amused");
+					speak("PL", _("Das sollte nicht so schwer sein."),"grin");
+					if(femaleOnly())then
+						speak("Soren", _("Das glaubst auch nur du, Gezeichnete!"),"aloof");
+					else
+						speak("Soren", _("Das glaubst auch nur du, Gezeichneter!"),"aloof");
+					end;
+					speak("PL", _("...sprach der spionierende Lord Magister."),"sneer");
+					speak("PL", _("Keine schoenen Angewohnheiten, die du da hast, Luftpfote..."));
+					speak("Soren", _("Windklaue!"),"angry");
+					speak("Soren", _("Und gewoehn dich besser daran, ueberwacht zu werden."),"unhappy");
+					speak("Soren", _("Ich bin kein Idiot"),"grin");
+					setSpeakerEmotion("Soren","normal")
+					speak("PL", _("Aber allwissend bist du auch nicht."),"grin");
+					speak("Soren", _("Und was willst du damit sagen?"),"aloof");
+					speak("PL", _("Na ja... das Ding da ist von der Aisener Magiergilde hergestellt worden, oder etwa nicht?"),"grin");
+					speak("Soren", _("Und?"),"bored");
+					speak("PL", _("Bist ein Fachidiot, was?"),"unhappy");
+					speak("PL", _("Avaera, die Göttin der Magie? Klingelts? Die Leute da sind alle recht fromm."),"normal");
+					speak("PL", _("Die haben bestimmt Avaeras Segen auf den Kristall gesprochen, damit er viel besser funktioniert."),"normal");
+					speak("Soren", _("Huete deine Zunge, Abschaum! Was bitte soll das aendern?"),"angry");
+					speak("PL", _("Alles"),"excited",1500);
+					speak("PL", _("Weißt du, was passiert, wenn das mit dem Blut von Gezeichneten in Beruehrung kommt?"),"sneer");
+					speak("Soren", _("Es ist nicht so, als hätte ich besondes viele von euch Verfluchten zu experimentellen Zwecken hier."),"unhappy");
+					setSpeakerAnimation("Soren", "blindness", 1000);
+					speakPause(1000);
+					removeSpeaker(soren);
+					if(femaleOnly())then
+						executeInDialog('unitSpeak('..soren..', _("Mach das sofort rueckgaengig, oder jede Wache in Aisen wird hinter dir her sein, Verfluchte!"),"threaten")');
+					else
+						executeInDialog('unitSpeak('..soren..', _("Mach das sofort rueckgaengig, oder jede Wache in Aisen wird hinter dir her sein, Verfluchter!"),"threaten")');
+					end;
+					speak("PL", _("Sicher, sicher."),"grin");
+					speak("PL", _("Die werden auch sehr interessiert sein, wo ich hergekommen bin."),"sneer");
+					if(femaleOnly())then
+						speak("PL", _("Und das heißt Gezeichnete."),"unhappy");
+					else
+						speak("PL", _("Und das heißt Gezeichneter."),"unhappy");
+					end;
+						executeInDialog('unitSpeak('..soren..', _("Du bist besser bereit, die Konsequenzen zu tragen, elende Kreatur."),"angry")');
+					speak("PL", _("Blind und Taub, aber nicht stumm, wie?"),"thoughtful");
+					speak("PL", _("Das wird eine echt anstrengende Reise, wenn das so weitergeht..."),"unhappy");
+					speak("PL", _("Beruhige dich, Herr der unangenehemen Luefte!"),"normal");
+					speak("PL", _("Ich kann dich hoeren und wir koennen reden, wenn es sein muss"));
+					speak("PL", _("Das reicht doch, oder?"),"unhappy");
+					speak("archer", _("So viel Geld, als das ich mich von dir die ganze Zeit anstarren lasse, kannst du gar nicht haben."),"grin");
+					speak("mage", _("Bete lieber zu deinem Akeran, dass ich nie einen Weg finde, einen Feuerball durch das Ding zu schicken."),"threaten");
+					speak("priest", _("Tja ja... Wissen über die Götter ist Macht, wenn man ihren Launen ausgesetzt ist."),"amused");
+					speak("warrior", _("Sei lieber froh, dass ich nicht gleich den ganzen Kristall zerschmettert habe."),"unhappy");
+					addSpeaker(fortify_dwall_tmp.comCrystal,"Soren",true);
+					speak("Soren", _("Erlaube dir noch eine solche Unverschaemtheit und ich werde dich in den Hungerturm sperren lassen!"),"threaten");
+					speak("PL", _("Was soll ich nur mit diesen Konzilikern machen?"),"unhappy");
+				else
+					lookAtObject(leader,countermage);
+					setSpeakerPosition("PL","upper_right");
+					speak("PL",_("Koennen wir diesen Kristall irgendwie blind machen?"));
+					speak("PL",_("Bestimmt sitzt der Kerl gerade in einem gemuetlichen Sessel und passt auf, dass wir nicht aus der Reihe tanzen."),"unhappy");
+					speak("PL",_("Ich hab so was schon mal in der Armee gesehen..."), "thoughtful");
+					speak("countermage",_("Aber ja. Ich kenne da einen netten kleinen Trick."),"grin");
+					speak("Soren",_("Wagt es ja nicht, oder-"),"threaten",1500);
+					setSpeakerAnimation("Soren", "blindness", 1000);
+					speakPause(1000);
+					--TODO Haende abklopfen
+					speak("countermage",_("So, das wars."),"happy");
+					speak("PL",_("Und jetzt kann er uns nicht mehr hoeren?"),"normal");
+					speak("countermage",_("Nur, wenn wir es wollen. Unser Blut wirkt bei gesegneten Gegenstaenden einfach Wunder."),"amused");
+					speak("countermage",_("Gut, dass das da von frommen aisener Magiern Avaera gesegnet wurde. Auch wenn die Götting der Magie nicht erfreut ueber meinen Zusatz sein duerfte."),"amused");
+					speak("countermage",_("Nerven kann der gute Soren aber immer noch."),"normal");
+					speak("countermage",_("Wir bekommen es auf jeden Fall mit, wenn er uns etwas sagen will."),"unhappy");
+					speak("PL",_("Sehr gut."),"happy");
+					if(duo())then
+						speak("PL",_("Also, was haeltst du von dieser Sache?"),"normal");
+					else
+						speak("PL",_("Also, was haltet ihr von dieser Sache?"),"normal");
+					end;
+					local list = {};
+					list[getSpeaker("waropt")]=true;
+					local hopeful = getRolePlayer("any", listToSet(getPlayers()),list);
+					addSpeaker(hopeful,"any_hope");
+					speak("any_hope", _("Habe ich das richtig verstanden?"),"surprised");
+					speak("any_hope", _("Hat er wirklich die Macht, uns von Harads Fluch zu befreien?"),"normal");
+					speak("waropt",_("Gesagt hat er es."),"thoughtful");
+					speak("waropt",_("Ich habe jedenfalls noch nie gehoert, dass jemand außer uns irgend etwas aus der Hoelle mitnehmen konnte."),"unhappy");
+					speak("magopt",_("Aber das Ding war ohne Zweifel echt."),"fear")
+					speak("magopt",_("Allein durch den Anblick standen mir alle Haare zu Berge."),"sad");
+					setSpeakerEmotion("magopt", "normal");
+					if(magopt~=waropt)then
+						speak("waropt",_("Fast in Ohnmacht gefallen bist du!"),"amused");
+					end;
+					speak("priopt",_("Er hat uns die Freiheit versprochen."),"thoughtful");
+					setSpeakerEmotion("magopt", "sad");
+					speak("priopt",_("Ich habe nicht mal mehr Erinnerungen daran..."),"sad");
+					speak("any",_("Trotzdem ist es unwahrscheinlich, dass er sein Wort halten wird."),"unhappy");
+					speak("any",_("Selbst wenn er tatsaechlich diese Macht besitzen sollte, sind wir fuer seine Zwecke viel zu wertvoll."),"normal");
+					speak("any",_("Wir sind wahrlich gezeichnet."),"sad");
+					speak("waropt",_("Aber auch wenn es nur eine kleine Moeglichkeit gibt, ich bin bereit, es zu versuchen."),"offended");
+					if(magopt~=waropt)then
+						speak("magopt",_("Wenn Dummheit ein Gewicht haette, koenntest du dich nicht einen Millimeter von der Stelle bewegen."),"unhappy");
+						speak("waropt",_("Wenn Arroganz einen Geruch haette, wuerdest du augenblicklich ersticken."),"unhappy");	
+					end;
+					speak("PL",_("Also gut, wir stimmen ab, wie wir weiter vorgehen."),"normal");
+				end;
+				setTopicBase("Soren Windclaw");
+				addQuestion(_("Den Anweisungen des Konzils folgen?"));
+				addAnswer(_("Ja"),'work_for_council');
+				addAnswer(_("Nein"),'dont_work_for_council');
+			</Effect>
+		</Event>
+	</Region>
+	<NPC refname="Soren Windclaw">
+	<Topic name="work_for_council">
+			<Effect>
+				if(solo())then
+					speak("PL",_("Ich werde erst mal sehen, wie sich die Sache entwickelt."),"thoughtful");
+					speak("PL",_("Bis die Karten alle auf dem Tisch liegen bin ich wieder maechtig genug, um mir notfalls auch mit Gewalt zu holen, was mir zusteht."),"normal");
+				else
+					speak("PL",_("Dann ist es entschieden."),"normal");
+					speak("PL",_("Wehe die halten ihr Versprechen nicht."),"threaten");
+				end;
+				deleteObject(fortify_dwall_tmp.comCrystal)
+			</Effect>
+		</Topic>
+		<Topic name="dont_work_for_council">
+			<Effect>
+				if(solo())then
+					speak("PL",_("Der Kerl wird sein Versprechen nie im Leben halten."),"unhappy");
+					speak("PL",_("Aber in meinem jetzigen Zustand kann ich mich schlecht mit einem ganzen Koenigreich anlegen."),"thoughtful");
+					speak("PL",_("Mache ich also gute Miene zum boesen Spiel und gewinne sein Vertrauen."),"amused");
+					speak("PL",_("Mal sehen, was sich so an Gelegenheiten ergibt."),"grin");
+				else
+					speak("PL",_("Die ganze Sache ist wirklich zu unsicher."),"unhappy");
+					speak("PL",_("Offenen Widerstand koennen wir uns aber noch nicht leisten, also muessen wir gute Miene zum boesen Spiel machen."),"thoughtful");
+					speak("PL",_("Gewinnen wir ihr Vertrauen."),"unhappy");
+				end;
+				deleteObject(fortify_dwall_tmp.comCrystal)
+				fortify_dwall.crystal=true;
+			</Effect>
+		</Topic>
+	</NPC>
 </Quest>
 

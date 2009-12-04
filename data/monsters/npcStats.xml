@@ -588,6 +588,7 @@
 					>
 		
 		<Ability type="noaction" time = "3000"/>
+		<Ability type = "blindness" time="1000"/>
 		<Ability type="freezingDeath" />
 		
 	</BasicAttributes>

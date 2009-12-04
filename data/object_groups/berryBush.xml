@@ -11,7 +11,7 @@
   <WayPoint pos_x="0" pos_y="0" />
 
   <ObjectContent>
-    <Object subtype="$plant_bushes_script" 
+    <Object subtype="$script_berry_bush" 
             center_x="0" 
             center_y="0" 
             angle="-0" 
