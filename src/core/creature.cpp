@@ -111,7 +111,7 @@ bool Creature::init()
 	m_timer2_max =0;
 
 	m_dyn_attr.m_last_attacker_id=0;
-	m_dyn_attr. m_experience=0;
+	m_dyn_attr.m_experience=0;
 
 	// Statusmods auf null setzen
 	int i;
@@ -139,6 +139,7 @@ bool Creature::init()
 	m_dyn_attr.m_health = getBaseAttr()->m_max_health;
 	getBaseAttrMod()->m_max_health = getBaseAttr()->m_max_health;
 	getBaseAttrMod()->m_power =1;
+	m_base_attr.m_max_experience =1;
 	
 	clearNetEventMask();
 	
@@ -4490,7 +4491,7 @@ bool Creature::setValue(std::string valname)
 		
 		// Solange Level aufsteigen, bis exp < max_exp
 		// Fuer den Fall dass Exp geaendert wurde
-		while (m_dyn_attr.m_experience>= m_base_attr.m_max_experience)
+		while (m_dyn_attr.m_experience>= m_base_attr.m_max_experience && m_dyn_attr.m_experience>0)
 		{
 			gainLevel();
 		}
