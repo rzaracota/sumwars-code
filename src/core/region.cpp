@@ -1046,8 +1046,15 @@ void Region::createObjectGroup(ObjectGroupName templname, Vector position, float
 				}
 
 				int id;
+				// Objekte mit Name sollte man loeschen / modifizieren koennen
+				// das wird erreicht, in dem der Status auf Inaktiv statt static gestellt wird
+				WorldObject::State ostate = state;
+				if (gt->m_name != "")
+				{
+					ostate = WorldObject::STATE_AUTO;
+				}
 				
-				id = createObject(gt->m_type, pos, angle+oangle,gt->m_height,state);
+				id = createObject(gt->m_type, pos, angle+oangle,gt->m_height,ostate);
 				DEBUG5("inserting object %s at %f %f with id %i",gt->m_type.c_str(),pos.m_x, pos.m_y,id);
 				
 				if (gt->m_name != "")
