@@ -57,6 +57,8 @@ bool Treasure::reactOnUse(int id)
 	
 	if (!m_open)
 	{
+		addToNetEventMask(NetEvent::DATA_FLAGS);
+		
 		DEBUG("treasure opened");
 		m_open = true;
 		m_open_timer = 0;
@@ -91,6 +93,26 @@ void Treasure::getFlags(std::set<std::string>& flags)
 	if (m_open)
 	{
 		flags.insert("open");
+	}
+}
+
+void Treasure::writeNetEvent(NetEvent* event, CharConv* cv)
+{
+	FixedObject::writeNetEvent(event,cv);
+	
+	if (event->m_data & NetEvent::DATA_FLAGS)
+	{
+		cv->toBuffer(m_open);
+	}
+}
+
+void Treasure::processNetEvent(NetEvent* event, CharConv* cv)
+{
+	FixedObject::processNetEvent(event,cv);
+	
+	if (event->m_data & NetEvent::DATA_FLAGS)
+	{
+		cv->fromBuffer(m_open);
 	}
 }
 
