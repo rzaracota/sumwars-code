@@ -1,4 +1,4 @@
-﻿<World >
+<World >
 <!-- Lobby Konzilshalle der Elemtarmagier-->
 	<Region id="2" name="elCnlLobby">
 		<AmbientLight red="0.4" green="0.4" blue="0.4" />
@@ -81,7 +81,6 @@
 		<Event trigger ="create_region" once = "true">
 			<Effect>
 				fenor = createObject('guard', 'locFenor');
-				addArea('FenorArea','circle','locFenor',5);
 				setRefName(fenor, 'Fenor Marken');
 				set(fenor,"angle",90);
 				

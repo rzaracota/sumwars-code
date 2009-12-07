@@ -208,37 +208,7 @@
 	</Region>
 	
 	<Region name="aisNorthMeadow">
-	<!--
-		<Event trigger ="create_template">
-			<Condition>
-				return (trigger.templname == "herbalBushes")
-			</Condition>
-			<Effect>
-				local tree = createObject('$tree',trigger.herb );
-				createEvent("player_moved",true);
-				local condition = 'return ((unitIsInArea(trigger.player,"circle",'..listToString(trigger.herb)..',6)) and herbalist.started == true and herbalist.finished ~= true)';
-				addCondition(condition);
-				local effect = 'insertTrigger("herb_found"); addTriggerVariable("tree",'..tree..')';
-				addEffect(effect);
-				print("\n");
-				print(condition);
-				print(effect);
-			</Effect>
-		</Event>
 	
-
-		<Event trigger="herb_found">
-			<Effect>
-				deleteObject(trigger.tree);
-				herbalist.bushes = herbalist.bushes + 1;
-				bushes_left = 10 - herbalist.bushes;
-				if (not (bushes_left>0)) then
-					bushes_left = 0
-				end
-				print (_("Collect "..bushes_left.." more herbs."));
-			</Effect>
-		</Event>
-	-->
 		<Event trigger="berryBushPicked">
 			<Effect>
 				herbalist.bushes = herbalist.bushes + 1;

@@ -65,7 +65,7 @@
 					 pos[2] = pos[2]-12;
 					 pos[1] = pos[1]+12;
 					 addLocation('GuardLocation', pos);
-					 addArea('GuardArea','circle',pos,12);
+					 addArea('GuardArea',{'circle',pos,12});
 					 pos[2] = pos[2]-8;
 					 pos[1] = pos[1]+8;
 					 addLocation('SkelLocation', pos);
@@ -145,7 +145,7 @@
 					 pos[2] = pos[2]-8;
 					 addLocation('LichLocation', pos);
 					 addLocation('TestLocation', pos);
-					 addArea('LichArea','circle',pos,6);
+					 addArea('LichArea',{'circle',pos,6});
 				 </Effect>
 			 </Event>
 			 
@@ -174,27 +174,7 @@
 				 </Effect>
 			 </Event>
 			 -->
-			 <!--
-			 <Event trigger ="create_template">
-				 <Condition>
-					 return (trigger.templname == "herbalBushes_test")
-				 </Condition>
-				 <Effect>
-					 local tree = createObject('$tree',trigger.herb );
-					 createEvent("player_moved",true);
-					 local condition = 'return (unitIsInArea(trigger.player,"circle",'..listToString(trigger.herb)..',6))';
-					 addCondition(condition);
-					 local effect = 'insertTrigger("herb_found"); addTriggerVariable("tree",'..tree..')';
-					 addEffect(effect);
-				 </Effect>
-			 </Event>
-			 
-			 <Event trigger="herb_found">
-				 <Effect>
-					 deleteObject(trigger.tree);
-				 </Effect>
-			 </Event>
-			 -->
+		
 			 <!--
 				 <Event trigger ="player_moved" once = "true">
 					 <Condition>

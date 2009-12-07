@@ -15,7 +15,7 @@
 	</Event>
 </ScriptObject>
 
-<ScriptObject type="SCRIPTOBJECT" subtype="konz_door1" layer="NORMAL">
+<ScriptObject  subtype="konz_door1" layer="NORMAL">
 	<RenderInfo name="konz_door1"/>
 	<Geometry shape="RECT" extent_x="0.5" extent_y="2"/>
 	<Flags usable="true" exact_picking="true" collision_detect="false" />

@@ -1,4 +1,4 @@
-﻿<World>
+<World>
 <!-- Aisen, Zwergentrutz [Grenzfeste] -->
 <!-- Entsatz -->
 <!-- Der Lich -->
@@ -79,7 +79,7 @@
 				maga_convocatis_darna_eistaucher = createObject("peasant_f", "locDarna");
 				setRefName(maga_convocatis_darna_eistaucher, "Maga Convocatis Darna Eistaucher");
 				
-				addArea("GeneralGreifArea","circle","locGeneral",5);
+				addArea("GeneralGreifArea",{"circle","locGeneral",5});
 			</Effect>
 		</Event>
 	</Region>

@@ -1008,7 +1008,9 @@
 				return (trigger.unit == tutorial_tmp.derred and tutorial_tmp.backroute ==1 and tutorial_tmp.fooddoor_open ~= true)
 			</Condition>
 			<Effect>
-				createMonsterGroup("tutorialMutantSlugs","locBackroute3",3);
+				tutorial_tmp.slugs = createMonsterGroup("tutorialMutantSlugs","locBackroute3",3);
+				tutorial_tmp.slugnr = table.getn(tutorial_tmp.slugs);
+				
 				timedExecute("door_toggle('slugFarmFoodDoor')",1000);
 				startTimer("go_backroute2",2000);
 				tutorial_tmp.fooddoor_open = true;
@@ -1031,10 +1033,6 @@
 				end;
 			</Condition>
 			<Effect>
-				--createMonsterGroup
-				tutorial_tmp.slugs = getObjectsInArea({"mutantSlugsArea","normal","monster"});
-				tutorial_tmp.slugnr = table.getn(tutorial_tmp.slugs);
-				
 				setCutsceneMode(true);				
 				addCameraPosition(0,"locBackroute2" , -90,40, 20);
 				addCameraPosition(1000,"locBackroute3" , -90,40, 20);

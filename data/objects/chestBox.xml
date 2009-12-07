@@ -1,4 +1,4 @@
-<Treasure type="TREASURE" subtype="chestBox" layer="BASE">
+<Treasure subtype="chestBox" layer="BASE">
         <RenderInfo name="chestBox" />
         <Geometry shape="RECT" extent_x="0.5" extent_y="0.75"/>
 		<!--<Flags usable="true" exact_picking="true" collision_detect="false" />-->

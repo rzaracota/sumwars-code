@@ -387,7 +387,7 @@
 				
 				prince_charming = createObject("peasant", "locPrince");
 				setRefName(prince_charming, "Prince Charming");
-				addArea("PrinceArea","circle","locPrince",5);
+				addArea("PrinceArea",{"circle","locPrince",5});
 				
 				leonard_von_robenforst = createObject("peasant", "locCouncellor");
 				setRefName(leonard_von_robenforst, "Leonard von Robenforst");
