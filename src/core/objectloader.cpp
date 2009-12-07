@@ -40,7 +40,7 @@ bool  ObjectLoader::loadMonster(TiXmlNode* node)
 		
 		// Typinformationen auslesen
 		std::string type,subtype, race, fraction,layer;
-		attr.getString("type",data->m_type,"MONSTER");
+		data->m_type = "MONSTER";
 		attr.getString("subtype",subtype);
 		attr.getString("race",race);
 		attr.getString("fraction",fraction,"MONSTER");
