@@ -1002,17 +1002,14 @@ void Region::createObjectGroup(ObjectGroupName templname, Vector position, float
 	
 	if (templ != 0)
 	{
-		if (name != "")
+		if (name != "" || !templ->getLocations()->empty())
 		{
 			tr = new Trigger("create_template");
 			tr->addVariable("templname",templname);
 			tr->addVariable("name",name);
 			tr->addVariable("position",position);
 			tr->addVariable("angle",angle);
-		}
-		
-		if (name != "")
-		{
+			
 			// Mittelpunkt eintragen
 			std::string locname = name;
 			locname += ":center";
