@@ -8,6 +8,7 @@
 #include "scriptobject.h"
 #include "templateloader.h"
 #include "treasure.h"
+#include "waypoint.h"
 
 
 // globale Daten
@@ -221,7 +222,11 @@ WorldObject* ObjectFactory::createObject(GameObject::Type type, GameObject::Subt
 	}
 	else if (type =="FIXED_OBJECT")
 	{
-	
+		if (subtype == "waypoint")
+		{
+			return new Waypoint(id);
+		}
+		
 		DEBUG5("requested subtype: %s",subtype.c_str());
 		FixedObjectData* data;
 		std::map<GameObject::Subtype, FixedObjectData*>::iterator i;

@@ -44,6 +44,11 @@ bool  Waypoint::update (float time)
 			pl = dynamic_cast<Player*>(it->second);
 			if (pl !=0 && pl->getShape()->intersects(s))
 			{
+				if (m_active == false)
+				{
+					addToNetEventMask(NetEvent::DATA_TIMER);
+				}
+				
 				m_active = true;
 				
 				// Spieler ist in der Naehe des Wegpunktes, aktivieren
@@ -75,3 +80,37 @@ void Waypoint::getFlags(std::set<std::string>& flags)
 		flags.insert("active");
 }
 
+void Waypoint::writeNetEvent(NetEvent* event, CharConv* cv)
+{
+	FixedObject::writeNetEvent(event,cv);
+	
+	if (event->m_data & NetEvent::DATA_TIMER)
+	{
+		cv->toBuffer(m_active);
+	}
+}
+
+void Waypoint::processNetEvent(NetEvent* event, CharConv* cv)
+{
+	FixedObject::processNetEvent(event,cv);
+	
+	if (event->m_data & NetEvent::DATA_TIMER)
+	{
+		cv->fromBuffer(m_active);
+	}
+}
+
+
+void Waypoint::toString(CharConv* cv)
+{
+	FixedObject::toString(cv);
+	
+	cv->toBuffer(m_active);
+}
+
+void Waypoint::fromString(CharConv* cv)
+{
+	FixedObject::fromString(cv);
+	
+	cv->fromBuffer(m_active);
+}

@@ -73,6 +73,36 @@ class Waypoint : public FixedObject
 	 */
 	virtual void getFlags(std::set<std::string>& flags);
 	
+	/**
+	 * \fn virtual void writeNetEvent(NetEvent* event, CharConv* cv)
+	 * \brief Schreibt die Daten zu einem NetEvent in den Bitstream
+	 * \param event NetEvent das beschrieben wird
+	 * \param cv Bitstream
+	 */
+	virtual void writeNetEvent(NetEvent* event, CharConv* cv);
+	
+	
+		/**
+	 * \fn virtual void processNetEvent(NetEvent* event, CharConv* cv)
+	 * \brief Fuehrt die Wirkung eines NetEvents auf das Objekt aus. Weitere Daten werden aus dem Bitstream gelesen
+		 */
+	virtual void processNetEvent(NetEvent* event, CharConv* cv);
+	
+	/**
+	 * \fn void toString(CharConv* cv)
+	 * \brief Konvertiert das Objekt in einen String und schreibt ihn in der Puffer
+	 * \param cv Ausgabepuffer
+	 */
+	virtual void toString(CharConv* cv);
+
+
+	/**
+	 * \fn virtual void fromString(CharConv* cv)
+	 * \brief Erzeugt das Objekt aus einem String
+	 * \param cv Eingabepuffer
+	 */
+	virtual void fromString(CharConv* cv);
+	
 	private:
 		/**
 		 * \var m_active 
