@@ -4051,6 +4051,7 @@ void Creature::writeNetEvent(NetEvent* event, CharConv* cv)
 		cv->toBuffer(getSpeakText().m_text);
 		cv->toBuffer(getSpeakText().m_emotion);
 		cv->toBuffer(getSpeakText().m_time);
+		cv->toBuffer(getSpeakText().m_in_dialogue);
 		cv->toBuffer(m_emotion_set);
 		
 		cv->toBuffer<short>(getSpeakText().m_answers.size());
@@ -4254,6 +4255,7 @@ void Creature::processNetEvent(NetEvent* event, CharConv* cv)
 		cv->fromBuffer(getSpeakText().m_text);
 		cv->fromBuffer(getSpeakText().m_emotion);
 		cv->fromBuffer(getSpeakText().m_time);
+		cv->fromBuffer(getSpeakText().m_in_dialogue);
 		cv->fromBuffer(m_emotion_set);
 		
 		short n;
@@ -4511,6 +4513,12 @@ void Creature::clearSpeakText()
 
 void Creature::speakText(CreatureSpeakText& text)
 {
+	// Text aus Dialogen hat Vorrang
+	if (text.m_in_dialogue == false && !m_speak_text.empty() && m_speak_text.m_in_dialogue)
+	{
+		return;
+	}
+	
 	addToNetEventMask(NetEvent::DATA_SPEAK_TEXT);
 	
 	m_speak_text = text;

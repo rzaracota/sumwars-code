@@ -249,7 +249,7 @@ void DialogueWindow::update()
 						text ="";
 					}
 					
-					if (text == "")
+					if (text == "" || cr->getSpeakText().m_in_dialogue == false)
 					{
 						wtext->setVisible(false);
 					}
@@ -400,7 +400,7 @@ void DialogueWindow::updateSpeechBubbles()
 		
 		// Wenn der Spieler sich in einem Gespraech befindet, die dazugehoerigen Texte darstellen nicht hier darstellen
 		// diese werden in den Balken dargestellt
-		if (cr->getDialogueId() !=0 && cr->getDialogueId() == player->getDialogueId())
+		if (cr->getDialogueId() !=0 && cr->getDialogueId() == player->getDialogueId() && cr->getSpeakText().m_in_dialogue)
 			continue;
 		
 		if (nr >= lcount)
@@ -546,9 +546,9 @@ void DialogueWindow::updateSpeechBubbles()
 	if (question !=0)
 	{
 		int wflags = m_document->getGUIState()->m_shown_windows;
-		if (wflags != Document::QUESTIONBOX)
+		if (wflags != (Document::QUESTIONBOX | Document::CHAT ))
 		{
-			wflags = m_document->getGUIState()->m_shown_windows= Document::QUESTIONBOX;
+			wflags = m_document->getGUIState()->m_shown_windows &= (Document::QUESTIONBOX | Document::CHAT );
 			m_document->setModified(m_document->getModified() | Document::WINDOWS_MODIFIED);
 		}
 		

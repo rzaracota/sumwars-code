@@ -301,7 +301,8 @@ void Dialogue::speak(std::string refname, std::string text, std::string emotion,
 	txt.m_text = text;
 	txt.m_time = time;
 	txt.m_emotion = emotion;
-
+	txt.m_in_dialogue = true;
+	
 	m_speech.push_back(std::make_pair(refname,txt));
 	
 }

@@ -850,7 +850,7 @@ void CreatureSpeakText::operator=( CreatureSpeakText& other)
 {
 	m_text = other.m_text;
 	m_time = other.m_time;
-	
+	m_in_dialogue = other.m_in_dialogue;
 	m_emotion = other.m_emotion;
 	
 	m_answers = other.m_answers;
@@ -864,6 +864,8 @@ bool CreatureSpeakText::empty()
 void CreatureSpeakText::clear()
 {
 	m_text = "";
+	m_in_dialogue = false;
+	
 	m_answers.clear();
 }
 

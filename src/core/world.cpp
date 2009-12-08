@@ -1064,6 +1064,7 @@ void World::handleMessage(std::string msg, int slot)
 					CreatureSpeakText text;
 					text.m_text = msg;
 					text.m_time = msg.size()*100 + 1000;
+					text.m_in_dialogue = false;
 					pl->speakText(text);
 				}
 				smsg += "] ";

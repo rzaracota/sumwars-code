@@ -588,6 +588,12 @@ struct CreatureSpeakText
 	std::string m_script_action;
 	
 	/**
+	 * \var bool m_in_dialogue
+	 * \brief ist auf true gesetzt, wenn der Text im Rahmen eines Dialoges gesprochen wird, sonst false
+	 */
+	bool m_in_dialogue;
+	
+	/**
 	 * \var std::list < std::pair<std::string, std::string> > m_answers
 	 * \brief Liste von moeglichen Antworten und  dem zugehoerigen Thema
 	 */

@@ -126,6 +126,7 @@ void EventSystem::init()
 	lua_register(m_lua, "setDialogueActive", setDialogueActive);
 	lua_register(m_lua, "setCurrentDialogue", setCurrentDialogue);
 	lua_register(m_lua, "executeInDialog",executeInDialog);
+	lua_register(m_lua, "executeInDialogue",executeInDialog);
 	
 	lua_register(m_lua, "setRefName", setRefName);
 	lua_register(m_lua, "getRolePlayers", getRolePlayers);
@@ -2056,6 +2057,7 @@ int EventSystem::unitSpeak(lua_State *L)
 			return 0;
 		
 		CreatureSpeakText text;
+		text.m_in_dialogue = false;
 		text.m_text = lua_tostring(L, 2);
 
 		WorldObject* wo =0;
