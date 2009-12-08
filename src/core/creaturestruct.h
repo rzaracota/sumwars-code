@@ -582,6 +582,12 @@ struct CreatureSpeakText
 	float m_time;
 	
 	/**
+	 * \var float m_displayed_time
+	 * \brief Gibt an, wie lange der Text schon zu sehen war
+	 */
+	float m_displayed_time;
+	
+	/**
 	 * \var std::string m_script_action
 	 * \brief Luascript, das parallel ausgefuehrt wird. Dient vor allem dazu, zum Text passende Bewegung zu starten
 	 */

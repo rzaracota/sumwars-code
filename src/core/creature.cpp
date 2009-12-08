@@ -2162,6 +2162,7 @@ bool Creature::update (float time)
 		else
 		{
 			m_speak_text.m_time -= time;
+			m_speak_text.m_displayed_time += time;
 		}
 	}
 	
@@ -4052,6 +4053,7 @@ void Creature::writeNetEvent(NetEvent* event, CharConv* cv)
 		cv->toBuffer(getSpeakText().m_emotion);
 		cv->toBuffer(getSpeakText().m_time);
 		cv->toBuffer(getSpeakText().m_in_dialogue);
+		cv->toBuffer(getSpeakText().m_displayed_time);
 		cv->toBuffer(m_emotion_set);
 		
 		cv->toBuffer<short>(getSpeakText().m_answers.size());
@@ -4256,6 +4258,7 @@ void Creature::processNetEvent(NetEvent* event, CharConv* cv)
 		cv->fromBuffer(getSpeakText().m_emotion);
 		cv->fromBuffer(getSpeakText().m_time);
 		cv->fromBuffer(getSpeakText().m_in_dialogue);
+		cv->fromBuffer(getSpeakText().m_displayed_time);
 		cv->fromBuffer(m_emotion_set);
 		
 		short n;
@@ -4522,6 +4525,8 @@ void Creature::speakText(CreatureSpeakText& text)
 	addToNetEventMask(NetEvent::DATA_SPEAK_TEXT);
 	
 	m_speak_text = text;
+	m_speak_text.m_displayed_time = 0;
+	
 	DEBUG5("speak %s for %f ms",text.m_text.c_str(), text.m_time);
 	std::list< std::pair<std::string, std::string> >::iterator it;
 	for (it = text.m_answers.begin(); it != text.m_answers.end(); ++it)
@@ -4654,10 +4659,16 @@ std::string Creature::getActionString()
 	if (m_action.m_type == "noaction")
 	{
 		// bei Noaction wird das Animationssystem von WorldObject angefragt
+		// im Fall von Sprechen statt noaction talk ausgeben
 		std::string act = WorldObject::getActionString();
 		if (act != "")
 		{
 			return act;
+		}
+		
+		if (!getSpeakText().empty())
+		{
+			return "talk";
 		}
 	}
 
@@ -4672,10 +4683,16 @@ float Creature::getActionPercent()
 	if (m_action.m_type == "noaction")
 	{
 		// bei Noaction wird das Animationssystem von WorldObject angefragt
+		// im Fall von Sprechen statt noaction talk ausgeben
 		std::string act = WorldObject::getActionString();
 		if (act != "")
 		{
 			return WorldObject::getActionPercent();
+		}
+		
+		if (!getSpeakText().empty())
+		{
+			return fmod(getSpeakText().m_displayed_time,1000.0f)/1000.0f;
 		}
 	}
 	
