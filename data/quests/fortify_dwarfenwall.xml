@@ -478,8 +478,8 @@
 				local players = getPlayers();
 				local i,player;
 				for i,player in ipairs(players) do
-					if (getPlayerPrivateVar(player,"fortify_dwall.reward") ~= true) then
-						setPlayerPrivateVar(player,"fortify_dwall.reward",true);
+					if (getPlayerPrivateVar(player,"fortify_dwall_startpay") ~= true) then
+						setPlayerPrivateVar(player,"fortify_dwall_startpay",true);
 						setObjectValue(player,"gold", getObjectValue(player,"gold") + 200);
 					end;
 				end;

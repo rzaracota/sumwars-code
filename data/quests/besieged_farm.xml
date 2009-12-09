@@ -66,8 +66,8 @@
 				local players = getPlayers()
 				local i,player,count
 				for i,player in ipairs(players) do
-					if (getPlayerPrivateVar(player,"besieged_farm.reward") ~= true) then
-						setPlayerPrivateVar(player,"besieged_farm.reward",true)
+					if (getPlayerPrivateVar(player,"besieged_farm_reward") ~= true) then
+						setPlayerPrivateVar(player,"besieged_farm_reward",true)
 						setObjectValue(player,"gold", getObjectValue(player,"gold") + 200)
 					end
 				end

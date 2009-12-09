@@ -208,7 +208,7 @@
 			</Condition>
 			<Effect>
 				rescue_willard.finished = true;
-				speak("Willard",_("Danke für eure Hilfe."),"excited");
+				speak("Willard",_("Danke fï¿½r eure Hilfe."),"excited");
 				speak("Willard",_("Kann ich euch um noch einen Gefallen bitten?"),"normal");
 				speak("Willard",_("Ich bin am Bein verwundet und schaffe es allein nicht bis nach Medair."),"sad");
 				speak("player", _("Ich nehme an, ihr seid Willard."),"thoughtful");
@@ -224,8 +224,8 @@
 				local players = getPlayers();
 				local i,player;
 				for i,player in ipairs(players) do
-					if (getPlayerPrivateVar(player,"rescue_willard.reward") ~= true) then
-						setPlayerPrivateVar(player,"rescue_willard.reward",true);
+					if (getPlayerPrivateVar(player,"rescue_willard_reward") ~= true) then
+						setPlayerPrivateVar(player,"rescue_willard_reward",true);
 						setObjectValue(player,"gold", getObjectValue(player,"gold") + 50);
 					end;
 				end;

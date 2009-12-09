@@ -43,7 +43,7 @@
 		<Topic name="goblins_reward" start_option="Goblins (Belohnung)">
 			<Condition>
 				if (goblins.finished == false) then return false end;
-				return (getPlayerPrivateVar(getSpeaker('player'),"goblins.reward2") ~= true)
+				return (getPlayerPrivateVar(getSpeaker('player'),"goblinsreward2") ~= true)
 			</Condition>
 			<Effect>
 				speak('peasant',_("A second reward ?"));

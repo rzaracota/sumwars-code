@@ -5,27 +5,27 @@
 		
 		<Event trigger="object_use">
 		<Condition>
-			return ((maylons_grave.finished==true)and(getPlayerPrivateVar(trigger.user,"private_vars.maylonsReward")~=true))
+			return ((maylons_grave.finished==true)and(getPlayerPrivateVar(trigger.user,"maylonsReward")~=true))
 		</Condition>
 		<Effect>
 			local player=trigger.user;
 			if(isArcher(player))then
-				createItem("hunter_sbw",300);
+				createItem("hunter_sbw",350);
 				insertPlayerItem(player,false);
 			elseif(isMage(player))then
 				createItem("rock_stf",350);
 				insertPlayerItem(player,false);
 			elseif(isPriest(player))then
-				createItem("maul_hmr",200);
+				createItem("maul_hmr",350);
 				insertPlayerItem(player,false);
 			elseif(isWarrior(player))then
-				createItem("sabre_sw",200);
+				createItem("sabre_sw",350);
 				insertPlayerItem(player,false);
 			else
 				createItem("heal_2");
 				insertPlayerItem(player,false);
 			end;
-			setPlayerPrivateVar(player,"private_vars.maylonsReward",true)
+			setPlayerPrivateVar(player,"maylonsReward",true)
 		</Effect>
 	</Event>
 </ScriptObject>

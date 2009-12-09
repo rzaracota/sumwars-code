@@ -209,7 +209,7 @@ end;
 
 function getPlayerPrivateVar(id, varstr)
 	local str;
-	str ="_ret = playervars["..id.."]."..varstr;
+	str ="_ret = playervars["..id.."].private_vars."..varstr;
 	eval(str);
 	return _ret;
 end;
@@ -217,6 +217,7 @@ end;
 function setPlayerPrivateVar(id,varstr,value)
 	local str;
 	_ret = value;
+	varstr = "private_vars."..varstr;
 	str ="playervars["..id.."]."..varstr.." = _ret";
 	eval(str);
 	local data={str=""};

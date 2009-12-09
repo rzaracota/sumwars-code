@@ -24,11 +24,11 @@
 					speak("Sergeant Lutterer",_("Passt auf Euren Ruecken auf."))
 				else
 					speak("player",_("Verzeiht, Sergeant, aber mir ist dieser Steckbrief aufgefallen."))
-					speak("player",_("Ist ein Kopfgeld von 3000 Goldstücken nicht ein wenig uebertrieben für einen Mann?"),"thoughtful")
+					speak("player",_("Ist ein Kopfgeld von 3000 Goldstï¿½cken nicht ein wenig uebertrieben fï¿½r einen Mann?"),"thoughtful")
 					setSpeakerEmption("player","normal")
 					speak("Sergeant Lutterer",_("Ach, der."), "sad")
-					speak("Sergeant Lutterer",_("Von dem lassen alle Kopfgeldjäger die Finger."),"thoughtful")
-					speak("Sergeant Lutterer",_("Immer, wenn einer ihn umgebracht haben will, ist er kurze Zeit später selber tot."),"unhappy")
+					speak("Sergeant Lutterer",_("Von dem lassen alle Kopfgeldjï¿½ger die Finger."),"thoughtful")
+					speak("Sergeant Lutterer",_("Immer, wenn einer ihn umgebracht haben will, ist er kurze Zeit spï¿½ter selber tot."),"unhappy")
 					speak("Sergeant Lutterer",_("Und Rob pluendert und mordet weiter."),"angry")
 					speak("Sergeant Lutterer",_("Hat anscheinend Unmengen Glueck, der Kerl"))
 					speak("Sergeant Lutterer",_("Seid ihr interessiert?"))
@@ -42,7 +42,7 @@
 		<Topic name="start_rob_the_robber_quest" >
 			<Effect>
 				speak("player", _("Allerdings.","grin"),1000)
-				speak("player", _("3000 Goldstücke für die Reisekasse sind durchaus interessant."),"normal")
+				speak("player", _("3000 Goldstï¿½cke fï¿½r die Reisekasse sind durchaus interessant."),"normal")
 				speak("player", _("Und ich habe selbst auch recht viel Glueck."),"sneer")
 				setSpeakerEmotion("player","normal")
 				speak("Sergeant Lutterer",_("Dann nehmt ihm sein Halsband ab."))
@@ -76,11 +76,11 @@
 					speak("Sergeant Wober",_("Keine Sekunde frueher!"),"unhappy");
 				else
 					speak("player",_("Verzeiht, Sergeant, aber mir ist dieser Steckbrief aufgefallen."))
-					speak("player",_("Ist ein Kopfgeld von 3000 Goldstücken nicht ein wenig uebertrieben für einen Mann?"),"thoughtful")
+					speak("player",_("Ist ein Kopfgeld von 3000 Goldstï¿½cken nicht ein wenig uebertrieben fï¿½r einen Mann?"),"thoughtful")
 					setSpeakerEmption("player","normal")
 					speak("Sergeant Wober",_("Ach, der."), "sad")
-					speak("Sergeant Wober",_("Von dem lassen alle Kopfgeldjäger die Finger."),"thoughtful")
-					speak("Sergeant Wober",_("Immer, wenn einer ihn umgebracht haben will, ist er kurze Zeit später selber tot."),"unhappy")
+					speak("Sergeant Wober",_("Von dem lassen alle Kopfgeldjï¿½ger die Finger."),"thoughtful")
+					speak("Sergeant Wober",_("Immer, wenn einer ihn umgebracht haben will, ist er kurze Zeit spï¿½ter selber tot."),"unhappy")
 					speak("Sergeant Wober",_("Und Rob pluendert und mordet weiter."),"angry")
 					speak("Sergeant Wober",_("Hat anscheinend Unmengen Glueck, der Kerl"))
 					speak("Sergeant Wober",_("Seid ihr interessiert?"))
@@ -94,7 +94,7 @@
 		<Topic name="start_rob_the_robber_quest" >
 			<Effect>
 				speak("player", _("Allerdings.","grin"),1000)
-				speak("player", _("3000 Goldstücke für die Reisekasse sind durchaus interessant."),"normal")
+				speak("player", _("3000 Goldstï¿½cke fï¿½r die Reisekasse sind durchaus interessant."),"normal")
 				speak("player", _("Und ich habe selbst auch recht viel Glueck."),"sneer")
 				setSpeakerEmotion("player","normal")
 				speak("Sergeant Wober",_("Dann nehmt ihm sein Halsband ab."))
@@ -135,8 +135,8 @@
 					count = count + 1
 				end
 				for i,player in ipairs(players) do
-					if (getPlayerPrivateVar(player,"rob_the_robber.reward") ~= true) then
-						setPlayerPrivateVar(player,"rob_the_robber.reward",true)
+					if (getPlayerPrivateVar(player,"rob_the_robber_reward") ~= true) then
+						setPlayerPrivateVar(player,"rob_the_robber_reward",true)
 						setObjectValue(player,"gold", getObjectValue(player,"gold") + (3000/count))
 					end
 				end
@@ -198,12 +198,12 @@
 			</Condition>
 			<Effect>
 				if(solo())then
-					unitSpeak(rob_the_robber_tmp.rob,_("Ich werde dich vierteilen und Haeuten, ehe ich dich den Woelfen zum fraß ueberlasse!"),"warcry");
+					unitSpeak(rob_the_robber_tmp.rob,_("Ich werde dich vierteilen und Haeuten, ehe ich dich den Woelfen zum fraï¿½ ueberlasse!"),"warcry");
 					if(trigger.attacker~=0)then
 						unitSpeak(trigger.attacker,_("Du redest zu viel!"),"unhappy")
 					end;
 				else
-					unitSpeak(rob_the_robber_tmp.rob,_("Ich werde euch alle vierteilen und Haeuten, ehe ich euch den Woelfen zum fraß ueberlasse!"),"warcry");
+					unitSpeak(rob_the_robber_tmp.rob,_("Ich werde euch alle vierteilen und Haeuten, ehe ich euch den Woelfen zum fraï¿½ ueberlasse!"),"warcry");
 					if(trigger.attacker~=0)then
 						unitSpeak(trigger.attacker,_("Du redest zu viel!"),"unhappy")
 					end;
