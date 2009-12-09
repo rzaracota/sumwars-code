@@ -796,8 +796,13 @@
 				else
 					speak("Tolec",_("Keine Ahnung, der Lord Magister hat gesagt, die verstehen das schon."),"thoughtful");
 				end;
-				speak("waropt",_("Lasst uns diese Experimente das Fürchten lehren!"),"excited");
-				speak("arcopt",_("Ich hoffe, die haben auch eine Seele."),"thoughtful")
+				if(solo())then
+					speak("waropt",_("Dann werde ich diese Experimente mal das Fürchten lehren!"),"excited");
+				elseif(duo())then
+					speak("waropt",_("Lass uns diese Experimente das Fürchten lehren!"),"excited");
+				else
+					speak("waropt",_("Lasst uns diese Experimente das Fürchten lehren!"),"excited");
+				end;				speak("arcopt",_("Ich hoffe, die haben auch eine Seele."),"thoughtful")
 				if (getSpeaker("priopt") ~= getSpeaker("arcopt")) then
 				speak("priopt",_("Keine Sorge. Selbst ein Golem hat eine. Da werden die Dinger keine Ausnahme sein."),"happy");
 				end;
@@ -871,7 +876,11 @@
 				speak("any",_("Was seid ihr denn für Mimosen?"),"sneer");
 				speak("Derred",_("Suchst du streit, du Schwächling?!"),"threaten");
 				speak("Tolec",_("Warte mal, irgendwie sind sie stärker geworden."),"thoughtful");
-				speak("leader",_("Euer Hexenkram mag uns ja geschwächt haben, aber mit jeden getöteten Wesen nehmen wir einen Teil seiner Kraft auf und werden stärker."),"excited");
+				if(solo())then
+					speak("leader",_("Euer Hexenkram mag mich ja geschwaecht haben, aber mit jedem getoeteten Wesen nehme ich einen Teil seiner Kraft auf und werde staerker."),"excited");
+				else
+					speak("leader",_("Euer Hexenkram mag uns ja geschwaecht haben, aber mit jedem getoeteten Wesen nehmen wir einen Teil seiner Kraft auf und werden staerker."),"excited");
+				end;
 				speak("any",_("Überleg dir also lieber, wen du hier Schwächling nennst!"),"grin");
 				speak("Tolec",_("Hm, stimmt der Lord Magister hat gesagt, das so etwas passieren kann. Wisst ihr auch, wie ihr diese Kraft in vernünftige Fähigkeiten umwandelt?"),"thoughtful");
 				
