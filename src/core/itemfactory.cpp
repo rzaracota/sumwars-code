@@ -249,7 +249,7 @@ void ItemFactory::createMagicMods(Item* item, float* modchance, float magic_powe
 				break;
 
 			case DAMAGE_MULT_PHYS_MOD:
-				item->m_weapon_attr->m_damage.m_multiplier[Damage::PHYSICAL] *= (1+sqrtmp*0.01);
+				item->m_weapon_attr->m_damage.m_multiplier[Damage::PHYSICAL] *= (1+sqrtmp*0.006);
 				break;
 
 			case DAMAGE_MULT_FIRE_MOD:
@@ -269,11 +269,11 @@ void ItemFactory::createMagicMods(Item* item, float* modchance, float magic_powe
 				break;
 
 			case ATTACK_MOD:
-				item->m_weapon_attr->m_damage.m_attack += ceil(mp*0.05);
+				item->m_weapon_attr->m_damage.m_attack += ceil(mp*0.3);
 				break;
 
 			case POWER_MOD:
-				item->m_weapon_attr->m_damage.m_power += ceil(mp*0.05);
+				item->m_weapon_attr->m_damage.m_power += ceil(mp*0.3);
 				break;
 
 		}
