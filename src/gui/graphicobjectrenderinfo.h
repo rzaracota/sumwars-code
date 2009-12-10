@@ -18,6 +18,7 @@ struct ActionRenderpart
 		ROTATION = 2,
 		MOVEMENT = 3,
 		SCALE = 4,
+		VISIBILITY = 5, 
 		DETACH = 10,
   
 		SOUND = 20,

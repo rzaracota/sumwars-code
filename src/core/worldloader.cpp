@@ -384,7 +384,13 @@ void  WorldLoader::loadNPC( TiXmlNode* node)
 		Event* ev;
 		TriggerType dummy;
 		NPCTrade::TradeObject tradeobj;
-		attr.getString("refname",refname,"global");
+		attr.getString("refname",refname,"");
+		
+		if (refname == "")
+		{
+			ERRORMSG("NPC Tag mit fehlendem refname attribute");
+			return;
+		}
 		
 		for ( child = node->FirstChild(); child != 0; child = child->NextSibling())
 		{

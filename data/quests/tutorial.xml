@@ -1221,16 +1221,52 @@
 					
 					speak("Tolec",_("Sehr gut. Die Geheimtür ist hier hinten."),"happy");
 					speak("Derred",_("Warte mal. Am Ende hat der alte Knacker noch eine Falle angebaut."),"thoughtful");
-					if (solo()) then
-						speak("Tolec",_("Stimmt auch wieder. Am besten, du machst das. Da kann wenigstens nichts schlimmes passieren."),"surprised") ;
+					if (solo() and femaleOnly()) then
+						speak("Tolec",_("Stimmt auch wieder. Am besten, du machst das, Gezeichnete. Da kann wenigstens nichts schlimmes passieren."),"surprised") ;
+					elseif(solo() and maleOnly())then
+						speak("Tolec",_("Stimmt auch wieder. Am besten, du machst das, Gezeichneter. Da kann wenigstens nichts schlimmes passieren."),"surprised") ;
 					else
-						speak("Tolec",_("Einfach auf die Tür klicken und sehen, was passiert."));
+						speak("Tolec",_("Das koennte sein... Am besten einer von euch klickt auf die Tür und wir sehen, was passiert."),"thoughtful");
 					end;
-					speak("arcopt",_("Klar, schick den Gezeichneten vor."),"unhappy");
-					
+					if(femaleOnly())then
+						speak("arcopt",_("Klar, schick die Gezeichnete vor."),"unhappy");
+					else
+						speak("arcopt",_("Klar, schick den Gezeichneten vor."),"unhappy");
+					end;
 					local door = getObjectByNameRef("doorSecretLibrary");
 					scriptobjectvar[door]["locked"] = false;
 			   </Effect>
+		</Topic>
+	
+		<Topic name="secret_door"  start_option="Geheimtuer oeffnen">
+			<Condition>
+				return (tutorial.phase == "findSecretDoor")
+			</Condition>
+			<Effect>
+				addAllPlayersToDialog();
+				addSpeaker(tutorial_tmp.tolec,"Tolec",true);
+				addSpeaker(tutorial_tmp.derred,"Derred",true);
+				
+				speak("Derred","Seht ihr das Regal da in dem Durchgang? Das ist die Tuer. Einfach bei Seite schieben, indem Ihr darauf klickt.","normal");
+				speak("Derred","Und Ihr solltet wohl darauf hoffen, dass keine Falle daran ist.","grin");
+			</Effect>
+		</Topic>
+	</NPC>
+	
+	<NPC name="Tolec">
+		<Topic name="secret_door" start_option="Geheimtuer oeffnen">
+			<Condition>
+				print(tutorial.phase);
+				return (tutorial.phase == "findSecretDoor")
+			</Condition>
+			<Effect>
+				addAllPlayersToDialog();
+				addSpeaker(tutorial_tmp.tolec,"Tolec",true);
+				addSpeaker(tutorial_tmp.derred,"Derred",true);
+				
+				speak("Tolec","Seht ihr das Regal da in dem Durchgang? Das ist die Tuer. Schiebt sie einfach beiseite, indem Ihr darauf klickt.","normal");
+				speak("Derred","Hoffentlich explodiert nichts.","thoughtful");
+			</Effect>
 		</Topic>
 	</NPC>
 	
@@ -1432,11 +1468,11 @@
 				speak("magopt",_("Etwas, das nicht im Buch des allwissenden Luftpfote geschrieben steht?"),"sneer");
 				speak("Tolec",_("Windklaue, du Häretiker!"),"threaten");
 				if (solo()) then
-					speak("Derred",_("Einen Verfluchten freut das sicher noch, wenn er alle Nase lang was zum Töten hat."),"disgust");
-					speak("any",_("ich bin ein Gezeichneter! Das ist viel schlimmer als ein Fluch."),"threaten");
-					speak("Tolec",_("Der mächtige Akeran hat dich wahrlich schlimm gestraft."),"thoughtful");
+					speak("Derred",_("Einen Verfluchten freut das sicher noch, wenn er alle Nase lang was zum Toeten hat."),"disgust");
+					speak("any",_("Ich bin ein Gezeichneter! Das ist viel schlimmer als ein Fluch."),"threaten");
+					speak("Tolec",_("Der maechtige Akeran hat dich wahrlich schlimm gestraft."),"thoughtful");
 					speak("PL",_("Verschone mich mit deinem Elementaristengelaber und gib den Weg frei!"),"angry");
-					speak("warrior",_("Ich bin wohl wirklich der Kammerjäger."),"bored");
+					speak("warrior",_("Ich bin wohl wirklich der Kammerjaeger."),"bored");
 				else
 					speak("Derred",_("Die Verfluchten freut das sicher noch, wenn sie alle Nase lang was zum Töten haben."),"disgust");
 					speak("any",_("Wir sind Gezeichnete! Das ist viel schlimmer als ein Fluch."),"threaten");
@@ -1507,11 +1543,12 @@
 				local archer = getSpeaker("archer");
 				local mage = getSpeaker("mage");
 				
-				speak("leader",_("Wow. Die halten hier aber echt was von Ordnung und gründlicher Forschung. Wie viele Schnecken muss man aufschneiden um zu glauben, dass sie schleimig sind?"),"sneer");
+				speak("leader",_("Wow. Die halten hier aber echt was von Ordnung und gründlicher Forschung."),"sneer");
+				speak("leader", _("Wie viele Schnecken muss man aufschneiden um zu glauben, dass sie schleimig sind?"),"sneer");
 				if (solo() ~= true) then
 					speak("archer",_("Schaut euch doch mal um, das Zeug muss ein Vermögen wert sein!"),"excited");
 				else
-					speak("archer",_("Sie dir das an, das Zeug muss ein Vermögen wert sein!"),"excited");
+					speak("archer",_("Das Zeug muss ein Vermögen wert sein!"),"excited");
 				end;
 				if (archer ~= nil) then
 					speak("warrior",_("Der Plunder?"),"bored");
@@ -1528,7 +1565,7 @@
 			</Condition>
 			<Effect>
 				tutorial.lab_comment2 = true;
-				unitSpeak(trigger.player,_("Wenn die nicht überall diese überflüssigen Ballustraden ins Nichts hätten, müssten sie jetzt auch keine entflohenen Schnecklinge vom Boden wischen."),"sneer");
+				unitSpeak(trigger.player,_("Wenn die nicht ueberall diese überflüssigen Ballustraden ins Nichts haetten, muessten sie jetzt auch keine entflohenen Schnecklinge vom Boden wischen."),"sneer");
 			</Effect>	
 		</Event>
 		
@@ -1547,7 +1584,3 @@
 		</Event>
 	</Region>
 </Quest>
-
-<Quest name="private vars" table_name="private_vars">
-</Quest>
-	

@@ -398,6 +398,10 @@ void GraphicManager::loadActionRenderInfo(TiXmlNode* node, ActionRenderInfo* ain
 		{
 			arpart.m_type = ActionRenderpart::SCALE;
 		}
+		else if (!strcmp(child->Value(), "Visibility"))
+		{
+			arpart.m_type = ActionRenderpart::VISIBILITY;
+		}
 		else if (!strcmp(child->Value(), "Detach"))
 		{
 			arpart.m_type = ActionRenderpart::DETACH;
@@ -442,6 +446,18 @@ void GraphicManager::loadActionRenderInfo(TiXmlNode* node, ActionRenderInfo* ain
 		if (!strcmp(child->Value(), "Detach"))
 		{
 			attr.getFloat("time",arpart.m_start_time,0.0);
+		}
+		
+		if (!strcmp(child->Value(), "Visibility"))
+		{
+			attr.getFloat("time",arpart.m_start_time,0.0);
+			bool vis;
+			attr.getBool("visible",vis,true);
+			
+			if (vis == false)
+				arpart.m_start_val =0;
+			else
+				arpart.m_start_val = 1;
 		}
 						
 		DEBUG5("adding renderpart %s",arpart.m_animation.c_str());

@@ -557,7 +557,7 @@ void GraphicObject::updateAttachedAction(AttachedAction& attchaction, std::strin
 					DEBUG5("action %s: adding part %s",action.c_str(), it->m_animation.c_str());
 				
 					addActiveRenderPart(&(*it));
-					if (it ->m_type != ActionRenderpart::DETACH)
+					if (it ->m_type != ActionRenderpart::DETACH && it ->m_type != ActionRenderpart::VISIBILITY)
 					{
 						attchaction.m_active_parts.push_back(&(*it));
 					}
@@ -833,6 +833,22 @@ void GraphicObject::addActiveRenderPart(ActionRenderpart* part)
 	if (part->m_type == ActionRenderpart::DETACH)
 	{
 		removeMovableObject(part->m_objectname);
+	}
+	else if (part->m_type == ActionRenderpart::VISIBILITY)
+	{
+		bool visible = (part->m_start_val > 0);
+		Ogre::MovableObject* mobj;
+		mobj = GraphicObject::getMovableObject(part->m_objectname);
+		if (mobj != 0)
+		{
+			mobj->setVisible (visible);
+		}
+		
+		mobj = GraphicObject::getHighlightObject(part->m_objectname);
+		if (mobj != 0)
+		{
+			mobj->setVisible (visible);
+		}
 	}
 	else if (part->m_type == ActionRenderpart::SOUND)
 	{
