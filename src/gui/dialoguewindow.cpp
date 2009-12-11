@@ -395,7 +395,6 @@ void DialogueWindow::updateSpeechBubbles()
 		// Fragen werden gesondert behandelt
 		if (!cr->getSpeakText().m_answers.empty())
 		{
-			DEBUG("question");
 			if (cr == player)
 			{
 				question = &(cr->getSpeakText());
@@ -446,7 +445,6 @@ void DialogueWindow::updateSpeechBubbles()
 			stream << nr;
 			
 			image = win_mgr.createWindow("TaharezLook/StaticImage", stream.str());
-			speakframe->addChildWindow(image);
 			speakframe->addChildWindow(image);
 			image->setProperty("BackgroundEnabled", "true");
 			image->setSize(CEGUI::UVector2(CEGUI::UDim(0,picsize), CEGUI::UDim(0,picsize)));
@@ -550,11 +548,9 @@ void DialogueWindow::updateSpeechBubbles()
 	// Fenster fuer eine Frage
 	if (question !=0)
 	{
-		DEBUG("question");
 		int wflags = m_document->getGUIState()->m_shown_windows;
 		if (wflags != (Document::QUESTIONBOX | Document::CHAT ) || (wflags & Document::QUESTIONBOX) == 0)
 		{
-			DEBUG("set question window");
 			m_document->getGUIState()->m_shown_windows |= Document::QUESTIONBOX;
 			m_document->getGUIState()->m_shown_windows &= (Document::QUESTIONBOX | Document::CHAT );
 			wflags = m_document->getGUIState()->m_shown_windows;

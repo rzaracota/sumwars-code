@@ -238,6 +238,12 @@ void PartyInfo::update()
 			img->setVisible(true);
 		}
 		
+		std::string imagestr = pl->getEmotionImage(pl->getSpeakText().m_emotion);
+		if (img->getProperty("Image") != imagestr)
+		{
+			img->setProperty("Image",imagestr);
+		}
+		
 		stream.str("");
 		stream << "PlayerParty";
 		stream << nr;

@@ -1824,6 +1824,11 @@ void MainWindow::updatePartyInfo()
 			{
 				img->setVisible(true);
 			}
+			std::string imagestr = pl->getEmotionImage(pl->getSpeakText().m_emotion);
+			if (img->getProperty("Image") != imagestr)
+			{
+				img->setProperty("Image",imagestr);
+			}
 			
 			if (img->getTooltipText() != (CEGUI::utf8*) pl->getName().c_str())
 			{
