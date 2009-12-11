@@ -7,6 +7,7 @@ Trigger::Trigger(TriggerType type)
 	m_type = type,
 	m_lua_variables = "trigger = {} \n";
 	m_object_id =0;
+	m_dialogue_id =0;
 }
 
 void Trigger::addVariable(std::string name, int value)
@@ -18,6 +19,11 @@ void Trigger::addVariable(std::string name, int value)
 	if (name=="_id")
 	{
 		m_object_id = value;
+	}
+	
+	if (name =="_dialog" || name == "_dialogue")
+	{
+		m_dialogue_id = value;
 	}
 }
 
@@ -47,6 +53,11 @@ void Trigger::addVariable(std::string name, float value)
 	if (name=="_id")
 	{
 		m_object_id = int(value);
+	}
+	
+	if (name =="_dialog" || name == "_dialogue")
+	{
+		m_dialogue_id = int(value);
 	}
 }
 

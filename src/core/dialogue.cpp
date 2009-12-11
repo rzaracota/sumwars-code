@@ -340,6 +340,10 @@ bool Dialogue::checkTopic(std::string topic)
 	if (topic == "start" || topic == "end" || topic == "abort" || topic =="#change_topic#" || topic =="#jump_topic#")
 		return true;
 
+	// Events werden nicht geprueft!
+	if (m_topic_base == "global")
+		return true;
+	
 	Event* st = m_topics[m_topic_base].getSpeakTopic(topic);
 
 	if (st !=0)
@@ -478,19 +482,30 @@ void Dialogue::changeTopic(std::string topic)
 		player->setTradePartner(npc->getId());
 	}
 
-	st = m_topics[m_topic_base].getSpeakTopic(topic);
-
-	if (st ==0)
+	// globale Dialoge loesen Events aus
+	// lokale Topics
+	if (m_topic_base == "global")
 	{
-		ERRORMSG("topic %s:%s existiert nicht",m_topic_base.c_str(),topic.c_str());
-		m_finished = true;
-		return ;
+		Trigger* tr = new Trigger(topic);
+		tr->addVariable("_dialogue",getId());
+		m_region->insertTrigger(tr);
 	}
-
-	if (st->checkCondition())
+	else
 	{
-		EventSystem::setRegion(m_region);
-		st->doEffect();
+		st = m_topics[m_topic_base].getSpeakTopic(topic);
+	
+		if (st ==0)
+		{
+			ERRORMSG("topic %s:%s existiert nicht",m_topic_base.c_str(),topic.c_str());
+			m_finished = true;
+			return ;
+		}
+	
+		if (st->checkCondition())
+		{
+			EventSystem::setRegion(m_region);
+			st->doEffect();
+		}
 	}
 
 }

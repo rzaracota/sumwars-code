@@ -394,7 +394,7 @@ void  WorldLoader::loadNPC( TiXmlNode* node)
 		
 		if (refname == "")
 		{
-			ERRORMSG("<NPC> tag without refname attribute found");
+			WARNING("<NPC> tag without refname attribute found");
 			return;
 		}
 		

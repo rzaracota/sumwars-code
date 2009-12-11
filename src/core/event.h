@@ -101,6 +101,15 @@ class Trigger
 			return m_object_id;
 		}
 		
+		/**
+		 * \fn int getDialogueId()
+		 * \brief Gibt die ID des Dialogs aus, der in dem Event als Umgebungsvariable gesetzt werden soll
+		 */
+		int getDialogueId()
+		{
+			return m_dialogue_id;
+		}
+		
 	private:
 		/**
 		 * \var TriggerType m_type
@@ -113,6 +122,12 @@ class Trigger
 		 * \brief Id des Objektes auf das der Trigger zusaetzlich angewendet wird
 		 */
 		int m_object_id;
+		
+		/**
+		 * \var int m_dialogue_id
+		 * \brief Id des Dialogs der in dem Event als Umgebungsvariable gesetzt wird
+		 */
+		int m_dialogue_id;
 		
 		/**
 		 * \var std::string m_lua_variables

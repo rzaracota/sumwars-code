@@ -1736,6 +1736,12 @@ void Region::update(float time)
 			EventSystem::doString((char*) m_triggers.front()->getLuaVariables().c_str());
 			DEBUG5("lua code \n %s",m_triggers.front()->getLuaVariables().c_str());
 			
+			// ggf Dialog setzen
+			if (m_triggers.front()->getDialogueId() != 0)
+			{
+				EventSystem::setDialogue( getDialogue( m_triggers.front()->getDialogueId() ) );
+			}
+				
 			// Event ausfuehren
 			bool ret = EventSystem::executeEvent(jt->second);
 			
@@ -1751,6 +1757,7 @@ void Region::update(float time)
 			
 		}
 		
+		// Objektbezogene Events ausloesen
 		int id = m_triggers.front()->getObjectId();
 		if (id != 0)
 		{
