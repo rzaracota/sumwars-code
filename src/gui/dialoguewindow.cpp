@@ -345,7 +345,9 @@ void DialogueWindow::updateSpeechBubbles()
 	std::list<WorldObject*>::iterator it;
 	
 	float r = 20;
-	if (player->getRegion()->getCutsceneMode () == true)
+	bool alldia;
+	alldia = (player->getRegion()->getCutsceneMode () == true) || (player->getDialogueId() != 0);
+	if (alldia)
 		r = 1000;
 	
 	Shape s;
@@ -366,7 +368,7 @@ void DialogueWindow::updateSpeechBubbles()
 	CreatureSpeakText* question=0;
 	
 	bool bar_vis = false;
-	if (player->getRegion()->getCutsceneMode () == true || player->getDialogueId() != 0)
+	if (alldia)
 	{
 		bar_vis = true;
 	}
@@ -382,7 +384,7 @@ void DialogueWindow::updateSpeechBubbles()
 		
 		
 		// nur Kreaturen behandeln, die wirklich zu sehen sind
-		if (pos.first <0 || pos.first >1 || pos.second <0 || pos.second >1)
+		if (!alldia && ( pos.first <0 || pos.first >1 || pos.second <0 || pos.second >1))
 			continue;
 				
 		text = cr->getSpeakText().m_text;
@@ -393,8 +395,11 @@ void DialogueWindow::updateSpeechBubbles()
 		// Fragen werden gesondert behandelt
 		if (!cr->getSpeakText().m_answers.empty())
 		{
+			DEBUG("question");
 			if (cr == player)
+			{
 				question = &(cr->getSpeakText());
+			}
 			continue;
 		}
 		
@@ -545,10 +550,14 @@ void DialogueWindow::updateSpeechBubbles()
 	// Fenster fuer eine Frage
 	if (question !=0)
 	{
+		DEBUG("question");
 		int wflags = m_document->getGUIState()->m_shown_windows;
-		if (wflags != (Document::QUESTIONBOX | Document::CHAT ))
+		if (wflags != (Document::QUESTIONBOX | Document::CHAT ) || (wflags & Document::QUESTIONBOX) == 0)
 		{
-			wflags = m_document->getGUIState()->m_shown_windows &= (Document::QUESTIONBOX | Document::CHAT );
+			DEBUG("set question window");
+			m_document->getGUIState()->m_shown_windows |= Document::QUESTIONBOX;
+			m_document->getGUIState()->m_shown_windows &= (Document::QUESTIONBOX | Document::CHAT );
+			wflags = m_document->getGUIState()->m_shown_windows;
 			m_document->setModified(m_document->getModified() | Document::WINDOWS_MODIFIED);
 		}
 		
