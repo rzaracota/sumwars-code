@@ -115,6 +115,8 @@ class GraphicObject
 		
 		void setHighlight(bool highlight, std::string material);
 		
+		void setVisibility(bool visible);
+		
 	private:
 		
 		

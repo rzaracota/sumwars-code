@@ -827,6 +827,8 @@ void GraphicObject::update(float time)
 	}
 }
 
+
+
 void GraphicObject::addActiveRenderPart(ActionRenderpart* part)
 {
 	
@@ -837,6 +839,8 @@ void GraphicObject::addActiveRenderPart(ActionRenderpart* part)
 	else if (part->m_type == ActionRenderpart::VISIBILITY)
 	{
 		bool visible = (part->m_start_val > 0);
+		
+		// Entities ausblenden
 		Ogre::MovableObject* mobj;
 		mobj = GraphicObject::getMovableObject(part->m_objectname);
 		if (mobj != 0)
@@ -848,6 +852,21 @@ void GraphicObject::addActiveRenderPart(ActionRenderpart* part)
 		if (mobj != 0)
 		{
 			mobj->setVisible (visible);
+		}
+		
+		// all blendet alles aus
+		if (part->m_objectname == "all")
+		{
+			setVisibility(visible);
+		}
+		
+		// Subobjekt ausblenden
+		std::map<std::string, AttachedGraphicObject >::iterator it;
+		it = m_subobjects.find(part->m_objectname);
+			
+		if (it != m_subobjects.end())
+		{
+			it->second.m_object->setVisibility(visible);
 		}
 	}
 	else if (part->m_type == ActionRenderpart::SOUND)
@@ -1047,3 +1066,16 @@ void GraphicObject::setHighlight(bool highlight, std::string material)
 	
 	m_highlight = highlight;
 }
+
+
+void GraphicObject::setVisibility(bool visible)
+{
+	m_top_node->setVisible(visible);
+	
+	std::map<std::string, AttachedGraphicObject >::iterator it;
+	for (it = m_subobjects.begin(); it != m_subobjects.end(); ++it)
+	{
+		it->second.m_object->setVisibility(visible);
+	}
+}
+

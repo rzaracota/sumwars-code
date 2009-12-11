@@ -23,7 +23,7 @@
 		<Rotation start="0.0" end="1.0" start_vec="0.0 0.0 0.0" end_vec="0.0 360.0 0.0" />
 		<Scale  start="0.5" end="1.0" start_val="2.0" end_val="1.0" />
 		<Detach time="0.4" objectname="shield" />
-		
+		<Visibility objectname="shield" time="0.2" visible="false"/>
 		<!-- alle Bestandteile koennen auch dynamisch eingefuegt werden -->
 		<Subobject time="0.9" objectname="shield" bone="mainmesh:itemLeftHand" source="example_shield" />
 	</Action>
