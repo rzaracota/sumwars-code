@@ -166,7 +166,6 @@ void Document::setSaveFile(std::string s)
 void Document::loadSavegame()
 {
 	// Savegame einlesen
-	DEBUG("lese savegame");
 	std::string fname = m_save_file;
 	DEBUG5("savegame is %s",fname.c_str());
 

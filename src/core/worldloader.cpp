@@ -238,6 +238,12 @@ bool WorldLoader::loadRegion(TiXmlNode* node, RegionData* rdata)
 				TriggerType type;
 				Event* ev = new Event();
 				loadEvent(child, ev,type);
+				
+				if (type == "")
+				{
+					WARNING("Detected <Event> Tag without trigger");
+				}
+				
 				World::getWorld()->addEvent(rdata->m_name,type,ev);
 			}
 			else if (!strcmp(child->Value(), "Topic"))
@@ -547,6 +553,11 @@ void WorldLoader::loadQuest(TiXmlNode* node, Quest* quest)
 					{
 						ev = new Event;
 						loadEvent(child2, ev,type);
+						if (type == "")
+						{
+							WARNING("Detected <Event> Tag without trigger");
+						}
+						
 						World::getWorld()->addEvent(rname,type,ev);
 					}
 					else if (!strcmp(child2->Value(), "Topic"))
