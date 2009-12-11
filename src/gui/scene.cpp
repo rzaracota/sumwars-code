@@ -662,7 +662,7 @@ void Scene::clearObjects()
 
 void Scene::createScene()
 {
-	DEBUG("create Scene");
+	DEBUG5("create Scene");
 
 	// alle bisherigen Objekte aus der Szene loeschen
 	clearObjects();

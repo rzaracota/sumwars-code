@@ -45,8 +45,6 @@ ServerNetwork::ServerNetwork(int max_slots)
 
 NetStatus ServerNetwork::init( int auth_port )
 {
-	DEBUG("init servernetwork");
-	
 	SocketDescriptor sock(auth_port,0);
 
 	m_peer->Startup(m_max_slots /* max. Anzahl Verbindungen*/, 10/*sleep time*/, &sock, 1);

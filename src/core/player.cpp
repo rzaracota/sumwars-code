@@ -1151,7 +1151,6 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 
 		case BUTTON_SAVE_QUIT:
 			setState(STATE_QUIT,false);
-			DEBUG("player wants to quit");
 			break;
 
 		case BUTTON_SWAP_EQUIP:
@@ -2340,7 +2339,6 @@ void Player::processNetEvent(NetEvent* event, CharConv* cv)
 
 void Player::setRevivePosition(RegionLocation regloc)
 {
-	DEBUG("changed revive position");
 	m_revive_position = regloc;
 	addToNetEventMask(NetEvent::DATA_REVIVE_LOCATION);
 }

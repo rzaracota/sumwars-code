@@ -1253,7 +1253,7 @@
 		</Topic>
 	</NPC>
 	
-	<NPC name="Tolec">
+	<NPC refname="Tolec">
 		<Topic name="secret_door" start_option="Geheimtuer oeffnen">
 			<Condition>
 				print(tutorial.phase);

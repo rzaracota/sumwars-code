@@ -50,7 +50,7 @@ Region* MapGenerator::createRegion(RegionData* rdata)
 		}
 		else
 		{
-			DEBUG("region template %s",rdata->m_region_template.c_str());
+			DEBUG5("region template %s",rdata->m_region_template.c_str());
 			// Region besteht aus einer einzelnen Objektgruppe
 			// Objektgruppe anhand des Namens suchen
 			ObjectGroup* templ;
@@ -964,7 +964,7 @@ void MapGenerator::createExits(MapData* mdata, RegionData* rdata)
 		mdata->m_region->getWaypointLocation() = pos;
 		
 		//mdata->m_region->insertObject(wo,pos);
-		DEBUG("waypoint at %f %f %i",pos.m_x, pos.m_y,wo->getId());
+		DEBUG5("waypoint at %f %f %i",pos.m_x, pos.m_y,wo->getId());
 		
 		// Bei den Ausgaengen keine Monster
 		if (rdata->m_region_template =="")

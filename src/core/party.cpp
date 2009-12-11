@@ -65,7 +65,6 @@ Minimap* Party::getMinimap(short rid)
 	if (mt == m_minimaps.end())
 	{
 		// Minimap noch nicht vorhanden -> erzeugen
-		DEBUG("creating minimap for region %i",rid);
 		mt = m_minimaps.insert(std::make_pair(rid,World::getWorld()->getRegion(rid)->createMinimap())).first;
 	}
 	return mt->second;

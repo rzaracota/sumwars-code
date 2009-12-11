@@ -193,7 +193,7 @@ bool World::init(int port)
 		
 		
 		
-		DEBUG("server");
+		DEBUG5("server");
 		m_network = new ServerNetwork(m_max_nr_players);
 		
 		
@@ -201,7 +201,7 @@ bool World::init(int port)
 	}
 	else
 	{
-		DEBUG("client");
+		DEBUG5("client");
 		m_network = new ClientNetwork();
 	}
 

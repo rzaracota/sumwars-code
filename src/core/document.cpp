@@ -1502,7 +1502,6 @@ void Document::update(float time)
 			
 		case SHUTDOWN:
 			// Spielwelt abschalten
-			DEBUG("shutdown");
 			
 			World::deleteWorld();
 			

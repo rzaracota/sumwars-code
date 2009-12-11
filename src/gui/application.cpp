@@ -110,7 +110,7 @@ bool Application::init()
 	}
 
 	SoundSystem::init();
-	DEBUG("application initialized");
+	DEBUG("application initialized \n\n");
 	// debugging
 	//MyFrameListener* mfl = new MyFrameListener(m_main_window,m_document);
 	//m_ogre_root->addFrameListener(mfl);
@@ -136,7 +136,6 @@ Application::~Application()
 
 void Application::run()
 {
-	printf("started\n");
 	Ogre::Timer timer;
 	float time[7]={0,0,0,0,0,0,0},t;
 	float frametime;
