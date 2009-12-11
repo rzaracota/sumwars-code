@@ -1,5 +1,5 @@
 ﻿<RenderInfo name="berryBush">
-	<Entity source = "bush.mesh" />
+	<Entity source = "bush.mesh"  highlightable="false"/>
 	<Entity objectname = "berrys" source = "bushBerrys.mesh" />
 	
 	<State name="picked">

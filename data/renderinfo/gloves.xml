@@ -7,6 +7,9 @@
 <RenderInfo name="leatherGloves#f" parent="playerbase" inherit="animation">
 	<Entity source="plate_glvF.mesh"/> 
 </RenderInfo>
+<RenderInfo name="leatherGloves#fs" parent="playerbase" inherit="animation">
+	<Entity source="plate_glvF.mesh"/> 
+</RenderInfo>
 
 <RenderInfo name="gloves">
 	<Entity source="plate_glv.mesh"/> 
@@ -17,6 +20,9 @@
 <RenderInfo name="gloves#f" parent="playerbase" inherit="animation">
 	<Entity source="plate_glvF.mesh"/> 
 </RenderInfo>
+<RenderInfo name="gloves#fs" parent="playerbase" inherit="animation">
+	<Entity source="plate_glvF.mesh"/> 
+</RenderInfo>
 
 <RenderInfo name="sharkGloves">
 	<Entity source="shark_glv.mesh"/> 
@@ -25,6 +31,8 @@
 	<Entity source="shark_glvM.mesh"/> 
 </RenderInfo>
 <RenderInfo name="sharkGloves#f" parent="playerbase" inherit="animation">
+</RenderInfo>
+<RenderInfo name="sharkGloves#fs" parent="playerbase" inherit="animation">
 </RenderInfo>
 <RenderInfo name="sharkGlovesGuard" parent="guardPole" inherit="animation">
 	<Entity source="shark_glvM.mesh"/>
@@ -37,4 +45,6 @@
 	<Entity source="steel_glvM.mesh"/> 
 </RenderInfo>
 <RenderInfo name="steelGloves#f" parent="playerbase" inherit="animation">
+</RenderInfo>
+<RenderInfo name="steelGloves#fs" parent="playerbase" inherit="animation">
 </RenderInfo>

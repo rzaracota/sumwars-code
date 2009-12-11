@@ -7,6 +7,9 @@
 <RenderInfo name="leathArm#f" parent="playerbase" inherit="animation">
 	<Entity source="leathArmFA.mesh"/> 
 </RenderInfo>
+<RenderInfo name="leathArm#fs" parent="playerbase" inherit="animation">
+	<Entity source="leathArm_fs.mesh"/> 
+</RenderInfo>
 
 <RenderInfo name="mercArm">
 	<Entity source="merc_arm.mesh"/> 
@@ -17,6 +20,9 @@
 <RenderInfo name="mercArm#f" parent="playerbase" inherit="animation">
 	<Entity source="merc_armF.mesh"/>
 </RenderInfo>
+<RenderInfo name="mercArm#fs" parent="playerbase" inherit="animation">
+	<Entity source="merc_arm_fs.mesh"/>
+</RenderInfo>
 
 <RenderInfo name="steelArm">
 	<Entity source="steel_armM.mesh"/>
@@ -26,6 +32,8 @@
 </RenderInfo>
 <RenderInfo name="steelArm#f" parent="playerbase" inherit="animation">
 </RenderInfo>
+<RenderInfo name="steelArm#fs" parent="playerbase" inherit="animation">
+</RenderInfo>
 
 <RenderInfo name="counclArm">
 	<Entity source="councl_arm.mesh"/> 
@@ -34,6 +42,8 @@
 	<Entity source="councl_armMW.mesh"/> 
 </RenderInfo>
 <RenderInfo name="counclArm#f" parent="playerbase" inherit="animation">
+</RenderInfo>
+<RenderInfo name="counclArm#fs" parent="playerbase" inherit="animation">
 </RenderInfo>
 <RenderInfo name="counclArmTolec" parent="guardPole" inherit="animation">
 	<Entity source="councl_armMW.mesh"/> 
@@ -47,6 +57,8 @@
 </RenderInfo>
 <RenderInfo name="counclRob#f" parent="playerbase" inherit="animation">
 </RenderInfo>
+<RenderInfo name="counclRob#fs" parent="playerbase" inherit="animation">
+</RenderInfo>
 <RenderInfo name="counclRobeSoren" parent="guardPole" inherit="animation">
 	<Entity source="councl_robMM.mesh"/>
 </RenderInfo>
@@ -59,7 +71,9 @@
 </RenderInfo>
 <RenderInfo name="necromancerRobe#f" parent="playerbase" inherit="animation">
 </RenderInfo>
+<RenderInfo name="necromancerRobe#fs" parent="playerbase" inherit="animation">
+</RenderInfo>
 
-<RenderInfo name="rogueArmorEnemy" parent="playerbaseM">
+<RenderInfo name="rogueArmorEnemy" parent="playerbaseM" inherit="animation">
 	<Entity source = "rogue_arm.mesh"/>
 </RenderInfo>

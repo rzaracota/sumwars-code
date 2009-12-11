@@ -520,6 +520,58 @@
 
 
 <!-- Maylon -->
+<Monster type="MONSTER" subtype="maylonMummy" name="Maylon" fraction="undead" race="undead" layer="NORMAL">
+	<RenderInfo name="lich" />
+	<Dropslots >
+		<Dropslot pbig="0.1" pmedium="0.2" psmall="0.2" pgold="0.2" max_gold="50" min_level="10" max_level="40" magic_prob="0.5" magic_power="1000" />
+		<Dropslot pbig="0.05" pmedium="0.08" psmall="0.04" pgold="0.3" min_gold="100" max_gold="500" min_level="0" max_level="20" magic_prob="0.2" magic_power="1000" />
+	</Dropslots>
+	
+	<BasicAttributes
+		experience="20"
+		level="23"
+		max_health="250"
+		armor="20"
+		block="0"
+		attack="20"
+		power="25"
+		strength="25"
+		dexterity="10"
+		magic_power="35"
+		willpower="30"
+		resistances_physical="30"
+		resistances_air="0"
+		resistances_ice="50"
+		resistances_fire="-50"
+		resistances_cap_physical="80"
+		resistances_cap_air="80"
+		resistances_cap_ice="80"
+		resistances_cap_fire="20"
+		walk_speed="1500"
+		attack_speed="1000"
+		step_length="1.0"
+		attack_range="2"
+	>
+		
+	<Ability type="walk" />
+	<Ability type="attack" rating="1"/>
+	<Ability type="die" time = "3000" />
+	<Ability type="ice_bolt"  rating="3"/>
+	<Ability type="noaction" />
+	<Ability type="summon_skelBow" rating="4"/>
+	<Ability type="summon_skelSword" rating="4"/>
+	<Ability type="summon_skelAxe" rating="4"/>
+	<Ability type="summon_skelAxe2" rating="4"/>
+
+	<Immunity type="berserk"/>
+	<Immunity type="confused"/>
+	</BasicAttributes>
+	
+	<Geometry radius="1.0" />
+	
+	<AI ai_sight_range="15" ai_shoot_range="9" ai_randaction_prob="1.0" />
+</Monster>
+
 <Monster type="MONSTER" subtype="maylon" name="Maylons Ghost" fraction="human" race="undead" layer="AIR">
 	<RenderInfo name="ghost_slim" />
 	
@@ -552,6 +604,57 @@
 		<Ability type="summoned" time="2000"/>
 		<Ability type="die" />
 		<Ability type="noaction" time="4000"/>
+		
+		<Immunity type="blind"/>
+		<Immunity type="poisoned"/>
+		<Immunity type="berserk"/>
+		<Immunity type="confused"/>
+		<Immunity type="mute"/>
+		
+	</BasicAttributes>
+	
+	<Geometry radius="0.5" />
+	
+	<AI ai_sight_range="12" />
+</Monster>
+
+<!-- maylons guardian skeleton -->
+<Monster type="MONSTER" subtype="skel_maylon" name="Guardian Skeleton" fraction="undead" race="undead" layer="NORMAL">
+	<RenderInfo name="axe2_skeleton" />
+	<Dropslots >
+		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" max_gold="100" min_level="0" max_level="10" magic_prob="0.1" magic_power="1000" />
+		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" max_gold="50" min_level="0" max_level="20" magic_prob="0.2" magic_power="1000" />
+	</Dropslots>
+	
+	<BasicAttributes
+		experience="10"
+		level="18"
+		max_health="100"
+		armor="48"
+		block="10"
+		power="25"
+		attack="37"
+		strength="25"
+		dexterity="15"
+		magic_power="0"
+		willpower="10"
+		resistances_physical="20"
+		resistances_air="0"
+		resistances_ice="0"
+		resistances_fire="-50"
+		resistances_cap_physical="50"
+		resistances_cap_air="50"
+		resistances_cap_ice="50"
+		resistances_cap_fire="0"
+		walk_speed="3000"
+		attack_speed="1500"
+		step_length="1.0"
+		attack_range="1.8"
+	>
+		<Ability type="walk" />
+		<Ability type="attack" rating="1"/>
+		<Ability type="die" />
+		<Ability type="noaction" />
 		
 		<Immunity type="blind"/>
 		<Immunity type="poisoned"/>

@@ -557,6 +557,67 @@ FIXED_OBJECT
         </Environment>
 </ObjectTemplate>
 
+<ObjectTemplate name="$ground_abyss" type="FIXED_OBJECT">
+        <Environment name="cave">
+                <Object name="abyss" />
+				<Object name="abyss_m" />
+				<Object name="abyss_s" />
+				<Object name="abyss_t" />
+				<Object name="abyss_c" />
+				<Object name="abyss_squ_l" />
+				<Object name="abyss_squ_m" />
+				<Object name="abyss_squ_s" />
+        </Environment>
+</ObjectTemplate>
+<ObjectTemplate name="$ground_abyss_long" type="FIXED_OBJECT">
+        <Environment name="cave">
+                <Object name="abyss" />
+        </Environment>
+		<Environment name="meadow" default = "true" />
+</ObjectTemplate>
+<ObjectTemplate name="$ground_abyss_medium" type="FIXED_OBJECT">
+        <Environment name="cave">
+                <Object name="abyss_m" />
+        </Environment>
+		<Environment name="meadow" default = "true" />
+</ObjectTemplate>
+<ObjectTemplate name="$ground_abyss_small" type="FIXED_OBJECT">
+        <Environment name="cave">
+                <Object name="abyss_s" />
+        </Environment>
+		<Environment name="meadow" default = "true" />
+</ObjectTemplate>
+<ObjectTemplate name="$ground_abyss_tiny" type="FIXED_OBJECT">
+        <Environment name="cave">
+                <Object name="abyss_t" />
+        </Environment>
+		<Environment name="meadow" default = "true" />
+</ObjectTemplate>
+<ObjectTemplate name="$ground_abyss_corner" type="FIXED_OBJECT">
+        <Environment name="cave">
+                <Object name="abyss_c" />
+        </Environment>
+		<Environment name="meadow" default = "true" />
+</ObjectTemplate>
+<ObjectTemplate name="$ground_abyss_square" type="FIXED_OBJECT">
+        <Environment name="cave">
+                <Object name="abyss_squ_l" />
+        </Environment>
+		<Environment name="meadow" default = "true" />
+</ObjectTemplate>
+<ObjectTemplate name="$ground_abyss_square_m" type="FIXED_OBJECT">
+        <Environment name="cave">
+                <Object name="abyss_squ_m" />
+        </Environment>
+		<Environment name="meadow" default = "true" />
+</ObjectTemplate>
+<ObjectTemplate name="$ground_abyss_square_s" type="FIXED_OBJECT">
+        <Environment name="cave">
+                <Object name="abyss_squ_s" />
+        </Environment>
+		<Environment name="meadow" default = "true" />
+</ObjectTemplate>
+
 <ObjectTemplate name="$ground" type="FIXED_OBJECT">
         <Environment name="cave">
                 <Object name="ground" />
@@ -707,9 +768,9 @@ FIXED_OBJECT
 </ObjectTemplate>
 <ObjectTemplate name="$misc_potions" type="FIXED_OBJECT">
         <Environment name="meadow" default = "true">
-			<Object name="heal_1" />
-			<Object name="heal_2" />
-			<Object name="heal_fr" />
+			<Object name="potionSmall" />
+			<Object name="potionMedium" />
+			<Object name="potionFreeze" />
         </Environment>
 </ObjectTemplate>
 <ObjectTemplate name="$misc_sarkophagus" type="FIXED_OBJECT">

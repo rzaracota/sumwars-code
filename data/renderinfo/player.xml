@@ -66,6 +66,9 @@
 	<Action name = "talk">
 		<Animation name = "talk" />
 	</Action>
+	<Action name = "talk#staff">
+		<Animation name = "talkPole" />
+	</Action>
 	
 	<Action name = "sitBarrel">
 		<Animation name = "idleSitBarrel" />
@@ -106,10 +109,10 @@
 	<Action name="walk">
 		<Animation name="walkOneHand" />
 	</Action>
-	<Action name="walk#Unarmed">
 	<Action name="walk#OneHand">
 		<Animation name="walkOneHand" />
 	</Action>
+	<Action name="walk#Unarmed">
 		<Animation name="walkUnarmed" />
 	</Action>
 	<Action name="walk#TwoHands">
@@ -610,9 +613,18 @@
 	<Action name="keen_mind" reference="cure_pois_burn_party">
 		<Animation name="priestMagicStrong" />
 	</Action>
+
 	
+	<!-- Gegnerskills -->
+	<!-- TODO: Hide&Show -->
 	<Action name="throw_dagger">
-		<Animation name="attack" />
+		<Animation name="throwDagger1" />
+	</Action>
+	<Action name="throw_dagger">
+		<Animation name="throwDagger2" />
+	</Action>
+	<Action name="throw_dagger">
+		<Animation name="throwDagger3" />
 	</Action>
 	
 </RenderInfo>
@@ -1034,25 +1046,4 @@
 
 <RenderInfo name="priestHair">
 	<Entity source="mustache.mesh"/>
-</RenderInfo>
-	
-<RenderInfo name="stuntman" parent="playerbaseM">
-	<Entity source="mage_m.mesh" />
-	<Entity objectname="head" bone="crown" source="head_mt1.mesh" />
-	<Entity objectname="hair" bone="crown" source="hairShort_mt4.mesh" />
-	<Entity objectname="mustache" bone="crown" source="mustache4.mesh" />
-	<!--<Entity objectname="beard" bone="crown" source="beardChin_ms1.mesh" />
-	<Entity objectname="hat" bone="crown" source="vag_hatMageM.mesh" />-->
-	<Entity objectname="weapon" bone="itemRightHand" source="crude_sw.mesh" />
-	<!--<Entity objectname="shield" bone="itemLeftHand" source="goblin_sbw.mesh" />
-	<Entity objectname="barrel" source="chair_konz.mesh" />
-	<ParticleSystem objectname="daRing" source = "BurningHead" position="0 2 0"/>-->
-</RenderInfo>
-
-<RenderInfo name="stuntgirl" parent="playerbase">
-	<Entity source="archer_f.mesh" />
-	<Entity objectname="head" bone="crown" source="head_f1.mesh" />
-	<Entity objectname="hair" bone="crown" source="hair_fs2.mesh" />
-	<Entity objectname="hat" bone="crown" source="goblin_hlmMW.mesh" />
-	<Entity objectname="shield" bone="itemLeftHand" source="goblin_sbw.mesh" />
 </RenderInfo>

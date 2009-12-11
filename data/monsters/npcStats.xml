@@ -96,6 +96,29 @@
 	<Emotion name="injured2" image="set:emo_councilMage image:injured2" />
 	<Emotion name="injured3" image="set:emo_councilMage image:injured3" />
 </EmotionSet>
+<EmotionSet name="councilMageCrystal_emotion"
+			default_image="set:emo_councilMageCrystal image:normal" >
+	<Emotion name="normal" image="set:emo_councilMageCrystal image:normal" />
+	<Emotion name="surprised" image="set:emo_councilMageCrystal image:surprised" />
+	<Emotion name="thoughtful" image="set:emo_councilMageCrystal image:thoughtful" />
+	<Emotion name="happy" image="set:emo_councilMageCrystal image:happy" />
+	<Emotion name="amused" image="set:emo_councilMageCrystal image:amused" />
+	<Emotion name="excited" image="set:emo_councilMageCrystal image:excited" />
+	<Emotion name="inlove" image="set:emo_councilMageCrystal image:inlove" />
+	<Emotion name="bored" image="set:emo_councilMageCrystal image:bored" />
+	<Emotion name="unhappy" image="set:emo_councilMageCrystal image:unhappy" />
+	<Emotion name="sad" image="set:emo_councilMageCrystal image:sad" />
+	<Emotion name="pain" image="set:emo_councilMageCrystal image:pain" />
+	<Emotion name="sneer" image="set:emo_councilMageCrystal image:sneer" />
+	<Emotion name="grin" image="set:emo_councilMageCrystal image:grin" />
+	<Emotion name="offended" image="set:emo_councilMageCrystal image:offended" />
+	<Emotion name="threaten" image="set:emo_councilMageCrystal image:threaten" />
+	<Emotion name="angry" image="set:emo_councilMageCrystal image:angry" />
+	<Emotion name="warcry" image="set:emo_councilMageCrystal image:warcry" />
+	<Emotion name="injured" image="set:emo_councilMageCrystal image:injured" />
+	<Emotion name="injured2" image="set:emo_councilMageCrystal image:injured2" />
+	<Emotion name="injured3" image="set:emo_councilMageCrystal image:injured3" />
+</EmotionSet>
 
 <EmotionSet name="gertlinde_emotion"
 			default_image="set:emo_gertlinde image:normal" >
@@ -151,6 +174,62 @@
 	<Emotion name="panic" image="set:emo_derred image:panic" />
 	<Emotion name="aloof" image="set:emo_derred image:aloof" />
 	<Emotion name="disgust" image="set:emo_derred image:disgust" />
+</EmotionSet>
+
+<EmotionSet name="ireana_emotion"
+			default_image="set:emo_ireana image:normal" >
+	<Emotion name="normal" image="set:emo_ireana image:normal" />
+	<Emotion name="surprised" image="set:emo_ireana image:surprised" />
+	<Emotion name="thoughtful" image="set:emo_ireana image:thoughtful" />
+	<Emotion name="happy" image="set:emo_ireana image:happy" />
+	<Emotion name="amused" image="set:emo_ireana image:amused" />
+	<Emotion name="excited" image="set:emo_ireana image:excited" />
+	<Emotion name="inlove" image="set:emo_ireana image:inlove" />
+	<Emotion name="bored" image="set:emo_ireana image:bored" />
+	<Emotion name="unhappy" image="set:emo_ireana image:unhappy" />
+	<Emotion name="sad" image="set:emo_ireana image:sad" />
+	<Emotion name="pain" image="set:emo_ireana image:pain" />
+	<Emotion name="sneer" image="set:emo_ireana image:sneer" />
+	<Emotion name="grin" image="set:emo_ireana image:grin" />
+	<Emotion name="offended" image="set:emo_ireana image:offended" />
+	<Emotion name="threaten" image="set:emo_ireana image:threaten" />
+	<Emotion name="angry" image="set:emo_ireana image:angry" />
+	<Emotion name="warcry" image="set:emo_ireana image:warcry" />
+	<Emotion name="injured" image="set:emo_ireana image:injured" />
+	<Emotion name="injured2" image="set:emo_ireana image:injured2" />
+	<Emotion name="injured3" image="set:emo_ireana image:injured3" />
+	<Emotion name="fear" image="set:emo_ireana image:fear" />
+	<Emotion name="panic" image="set:emo_ireana image:panic" />
+	<Emotion name="aloof" image="set:emo_ireana image:aloof" />
+	<Emotion name="disgust" image="set:emo_ireana image:disgust" />
+</EmotionSet>
+
+<EmotionSet name="rogue_emotion"
+			default_image="set:emo_rogue image:normal" >
+	<Emotion name="normal" image="set:emo_rogue image:normal" />
+	<Emotion name="surprised" image="set:emo_rogue image:surprised" />
+	<Emotion name="thoughtful" image="set:emo_rogue image:thoughtful" />
+	<Emotion name="happy" image="set:emo_rogue image:happy" />
+	<Emotion name="amused" image="set:emo_rogue image:amused" />
+	<Emotion name="excited" image="set:emo_rogue image:excited" />
+	<Emotion name="inlove" image="set:emo_rogue image:inlove" />
+	<Emotion name="bored" image="set:emo_rogue image:bored" />
+	<Emotion name="unhappy" image="set:emo_rogue image:unhappy" />
+	<Emotion name="sad" image="set:emo_rogue image:sad" />
+	<Emotion name="pain" image="set:emo_rogue image:pain" />
+	<Emotion name="sneer" image="set:emo_rogue image:sneer" />
+	<Emotion name="grin" image="set:emo_rogue image:grin" />
+	<Emotion name="offended" image="set:emo_rogue image:offended" />
+	<Emotion name="threaten" image="set:emo_rogue image:threaten" />
+	<Emotion name="angry" image="set:emo_rogue image:angry" />
+	<Emotion name="warcry" image="set:emo_rogue image:warcry" />
+	<Emotion name="injured" image="set:emo_rogue image:injured" />
+	<Emotion name="injured2" image="set:emo_rogue image:injured2" />
+	<Emotion name="injured3" image="set:emo_rogue image:injured3" />
+	<Emotion name="fear" image="set:emo_rogue image:fear" />
+	<Emotion name="panic" image="set:emo_rogue image:panic" />
+	<Emotion name="aloof" image="set:emo_rogue image:aloof" />
+	<Emotion name="disgust" image="set:emo_rogue image:disgust" />
 </EmotionSet>
 
 
@@ -232,294 +311,6 @@
 	<AI ai_sight_range="8" />
 </Monster>
 
-<Monster type="NPC" subtype="guard" name="Guard" fraction="human" race="human" layer="NORMAL">
-	<Mesh file="guard_ais" />
-	<EmotionSet name="derred_emotion" />
-	<BasicAttributes
-					experience="0"
-					level="20"
-					max_health="260"
-					armor="60"
-					block="0"
-					attack="40"
-					strength="50"
-					dexterity="35"
-					magic_power="15"
-					willpower="20"
-					resistances_physical="30"
-					resistances_air="10"
-					resistances_ice="10"
-					resistances_fire="10"
-					resistances_cap_physical="50"
-					resistances_cap_air="50"
-					resistances_cap_ice="50"
-					resistances_cap_fire="50"
-					walk_speed="2500"
-					attack_speed="2000"
-					step_length="1.2"
-					attack_range="0.5"
-					>
-		
-		<Ability type="noaction"/>
-		<Ability type="walk"/>
-		<Ability type="die"/>
-		
-		<Ability type="attack" rating="1"/>
-	
-		
-	</BasicAttributes>
-	
-	<Geometry radius="0.5" />
-	
-	<AI ai_sight_range="8" />
-</Monster>
-
-<Monster type="NPC" subtype="council_guard" name="Council Guard" fraction="human" race="human" layer="NORMAL">
-	<RenderInfo name="guardPole_cnl" />
-	<EmotionSet name="human_standard" />
-	<BasicAttributes
-					experience="0"
-					level="20"
-					max_health="260"
-					armor="60"
-					block="0"
-					attack="40"
-					strength="50"
-					dexterity="35"
-					magic_power="15"
-					willpower="20"
-					resistances_physical="30"
-					resistances_air="10"
-					resistances_ice="10"
-					resistances_fire="10"
-					resistances_cap_physical="50"
-					resistances_cap_air="50"
-					resistances_cap_ice="50"
-					resistances_cap_fire="50"
-					walk_speed="2500"
-					attack_speed="2000"
-					step_length="1.2"
-					attack_range="0.5"
-					>
-		
-		<Ability type="noaction"/>
-		<Ability type="walk"/>
-		<Ability type="die"/>
-		
-		<Ability type="attack" rating="1"/>
-		
-		
-	</BasicAttributes>
-	
-	<Geometry radius="0.5" />
-	
-	<AI ai_sight_range="8" />
-</Monster>
-
-<Monster type="NPC" subtype="tolec" name="Tolec" fraction="human" race="human" layer="NORMAL">
-	<RenderInfo name="tolec" />
-	<EmotionSet name="human_standard" />
-	<BasicAttributes
-					experience="0"
-					level="83"
-					max_health="1070"
-					armor="230"
-					block="60"
-					attack="120"
-					strength="120"
-					dexterity="55"
-					magic_power="15"
-					willpower="60"
-					resistances_physical="30"
-					resistances_air="17"
-					resistances_ice="23"
-					resistances_fire="40"
-					resistances_cap_physical="50"
-					resistances_cap_air="50"
-					resistances_cap_ice="50"
-					resistances_cap_fire="50"
-					walk_speed="3500"
-					attack_speed="2000"
-					step_length="1.2"
-					attack_range="0.5"
-					>
-		
-		<Ability type="noaction"/>
-		<Ability type="walk"/>
-		<Ability type="die"/>
-		
-		<Ability type="attack" rating="1"/>
-		
-		
-	</BasicAttributes>
-	
-	<Geometry radius="0.5" />
-	
-	<AI ai_sight_range="8" />
-</Monster>
-
-<Monster type="NPC" subtype="derred" name="Derred" fraction="human" race="human" layer="NORMAL">
-	<RenderInfo name="derred" />
-	<EmotionSet name="derred_emotion" />
-	<BasicAttributes
-					experience="0"
-					level="86"
-					max_health="1300"
-					armor="210"
-					block="0"
-					attack="200"
-					strength="150"
-					dexterity="73"
-					magic_power="25"
-					willpower="100"
-					resistances_physical="20"
-					resistances_air="28"
-					resistances_ice="32"
-					resistances_fire="60"
-					resistances_cap_physical="50"
-					resistances_cap_air="50"
-					resistances_cap_ice="50"
-					resistances_cap_fire="50"
-					walk_speed="3500"
-					attack_speed="1300"
-					step_length="1.2"
-					attack_range="0.5"
-					>
-		
-		<Ability type="noaction"/>
-		<Ability type="walk"/>
-		<Ability type="die"/>
-		
-		<Ability type="attack" rating="1"/>
-		
-		
-	</BasicAttributes>
-	
-	<Geometry radius="0.5" />
-	
-	<AI ai_sight_range="8" />
-</Monster>
-
-<Monster type="NPC" subtype="soren" name="Soren Windclaw" fraction="human" race="human" layer="NORMAL">
-	<RenderInfo name="soren" />
-	<EmotionSet name="councilMage_emotion" />
-	<BasicAttributes
-					experience="0"
-					level="80"
-					max_health="8000"
-					armor="60"
-					block="0"
-					attack="40"
-					strength="50"
-					dexterity="35"
-					magic_power="15"
-					willpower="20"
-					resistances_physical="30"
-					resistances_air="55"
-					resistances_ice="50"
-					resistances_fire="60"
-					resistances_cap_physical="90"
-					resistances_cap_air="90"
-					resistances_cap_ice="90"
-					resistances_cap_fire="90"
-					walk_speed="3500"
-					attack_speed="2000"
-					step_length="1.2"
-					attack_range="0.5"
-					>
-		
-		<Ability type="noaction"/>
-		<Ability type="walk"/>
-		<Ability type="die"/>
-		
-		<Ability type="attack" rating="1"/>
-		
-		
-	</BasicAttributes>
-	
-	<Geometry radius="0.5" />
-	
-	<AI ai_sight_range="8" />
-</Monster>
-
-<Monster type="NPC" subtype="slave_worker" name="Worker" fraction="human" race="human" layer="NORMAL">
-	<RenderInfo name = "slave_worker" />
-	<EmotionSet name="human_standard" />
-	<BasicAttributes
-					experience="0"
-					level="1"
-					max_health="75"
-					armor="0"
-					block="0"
-					attack="0"
-					strength="25"
-					dexterity="10"
-					magic_power="0"
-					willpower="5"
-					resistances_physical="-20"
-					resistances_air="0"
-					resistances_ice="0"
-					resistances_fire="0"
-					resistances_cap_physical="50"
-					resistances_cap_air="50"
-					resistances_cap_ice="50"
-					resistances_cap_fire="50"
-					walk_speed="2500"
-					attack_speed="2000"
-					step_length="1.2"
-					attack_range="0.5"
-					>
-		
-		<Ability type="noaction"/>
-		<Ability type="walk"/>
-		<Ability type="die"/>
-		
-	</BasicAttributes>
-	
-	<Geometry radius="0.5" />
-	
-	<AI ai_sight_range="8" />
-</Monster>
-
-<Monster type="NPC" subtype="slave_miner" name="Worker" fraction="human" race="human" layer="NORMAL">
-	<RenderInfo name = "slave_miner" />
-	<EmotionSet name="human_standard" />
-	<BasicAttributes
-					experience="0"
-					level="1"
-					max_health="75"
-					armor="0"
-					block="0"
-					attack="0"
-					strength="25"
-					dexterity="10"
-					magic_power="0"
-					willpower="5"
-					resistances_physical="-20"
-					resistances_air="0"
-					resistances_ice="0"
-					resistances_fire="0"
-					resistances_cap_physical="50"
-					resistances_cap_air="50"
-					resistances_cap_ice="50"
-					resistances_cap_fire="50"
-					walk_speed="2500"
-					attack_speed="2000"
-					step_length="1.2"
-					attack_range="0.5"
-					>
-		
-		<Ability type="noaction"/>
-		<Ability type="walk"/>
-		<Ability type="die"/>
-		
-	</BasicAttributes>
-	
-	<Geometry radius="0.5" />
-	
-	<AI ai_sight_range="8" />
-</Monster>
-
 <Monster type="NPC" subtype="theTrader" name="The Trader" fraction="neutral_to_all" race="human" layer="NORMAL">
 	<RenderInfo name="theTrader" />
 	<EmotionSet name="human_standard" />
@@ -559,41 +350,3 @@
 	<AI ai_sight_range="8" />
 </Monster>
 
-<Monster type="NPC" subtype="sorenCrystal" name="Soren Windclaw" fraction="human" race="human" layer="NORMAL">
-	<RenderInfo name="sorenCrystal" />
-	<EmotionSet name="councilMage_emotion" />
-	<BasicAttributes
-					experience="0"
-					level="80"
-					max_health="8000"
-					armor="60"
-					block="0"
-					attack="40"
-					strength="50"
-					dexterity="35"
-					magic_power="500"
-					willpower="20"
-					resistances_physical="90"
-					resistances_air="90"
-					resistances_ice="90"
-					resistances_fire="90"
-					resistances_cap_physical="90"
-					resistances_cap_air="90"
-					resistances_cap_ice="90"
-					resistances_cap_fire="90"
-					walk_speed="0"
-					attack_speed="2000"
-					step_length="1.2"
-					attack_range="0.5"
-					>
-		
-		<Ability type="noaction" time = "3000"/>
-		<Ability type = "blindness" time="1000"/>
-		<Ability type="freezingDeath" />
-		
-	</BasicAttributes>
-	
-	<Geometry radius="0.5" />
-	
-	<AI ai_sight_range="8" />
-</Monster>

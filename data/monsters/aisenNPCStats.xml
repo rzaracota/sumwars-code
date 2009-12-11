@@ -1,6 +1,136 @@
 ﻿<?xml version="1.0" ?>
+<!-- Dorfwachen, Aisen -->
+<Monster type="NPC" subtype="guard" name="Guard" fraction="human" race="human" layer="NORMAL">
+	<Mesh file="guard_ais" />
+	<EmotionSet name="derred_emotion" />
+	<BasicAttributes
+					experience="0"
+					level="20"
+					max_health="260"
+					armor="60"
+					block="0"
+					attack="40"
+					strength="50"
+					dexterity="35"
+					magic_power="15"
+					willpower="20"
+					resistances_physical="30"
+					resistances_air="10"
+					resistances_ice="10"
+					resistances_fire="10"
+					resistances_cap_physical="50"
+					resistances_cap_air="50"
+					resistances_cap_ice="50"
+					resistances_cap_fire="50"
+					walk_speed="2500"
+					attack_speed="2000"
+					step_length="1.2"
+					attack_range="0.5"
+					>
+		
+		<Ability type="noaction"/>
+		<Ability type="walk"/>
+		<Ability type="die"/>
+		
+		<Ability type="attack" rating="1"/>
+	
+		
+	</BasicAttributes>
+	
+	<Geometry radius="0.5" />
+	
+	<AI ai_sight_range="8" />
+</Monster>
+
+<!-- General Greif -->
 <Monster type="NPC" subtype="general_greif" name="General Greif" fraction="human" race="human" layer="NORMAL">
 	<RenderInfo name="general" />
+	<EmotionSet name="human_standard" />
+	<BasicAttributes
+					experience="0"
+					level="83"
+					max_health="1070"
+					armor="230"
+					block="60"
+					attack="120"
+					strength="120"
+					dexterity="55"
+					magic_power="15"
+					willpower="60"
+					resistances_physical="30"
+					resistances_air="17"
+					resistances_ice="23"
+					resistances_fire="40"
+					resistances_cap_physical="50"
+					resistances_cap_air="50"
+					resistances_cap_ice="50"
+					resistances_cap_fire="50"
+					walk_speed="3500"
+					attack_speed="2000"
+					step_length="1.2"
+					attack_range="0.5"
+					>
+		
+		<Ability type="noaction"/>
+		<Ability type="walk"/>
+		<Ability type="die"/>
+		
+		<Ability type="attack" rating="1"/>
+		
+		
+	</BasicAttributes>
+	
+	<Geometry radius="0.5" />
+	
+	<AI ai_sight_range="8" />
+</Monster>
+
+<!-- Prinz Karlen -->
+<Monster type="NPC" subtype="prince" name="Prince Karlen" fraction="human" race="human" layer="NORMAL">
+	<RenderInfo name="prince" />
+	<EmotionSet name="human_standard" />
+	<BasicAttributes
+					experience="0"
+					level="83"
+					max_health="1070"
+					armor="230"
+					block="60"
+					attack="120"
+					strength="120"
+					dexterity="55"
+					magic_power="15"
+					willpower="60"
+					resistances_physical="30"
+					resistances_air="17"
+					resistances_ice="23"
+					resistances_fire="40"
+					resistances_cap_physical="50"
+					resistances_cap_air="50"
+					resistances_cap_ice="50"
+					resistances_cap_fire="50"
+					walk_speed="3500"
+					attack_speed="2000"
+					step_length="1.2"
+					attack_range="0.5"
+					>
+		
+		<Ability type="noaction"/>
+		<Ability type="walk"/>
+		<Ability type="die"/>
+		
+		<Ability type="attack" rating="1"/>
+		
+		
+	</BasicAttributes>
+	
+	<Geometry radius="0.5" />
+	
+	<AI ai_sight_range="8" />
+</Monster>
+
+<!-- Leonard von Robenforst -->
+<Monster type="NPC" subtype="mentor" name="Leonard von Robenforst" fraction="human" race="human" layer="NORMAL">
+	<RenderInfo name="mentor" />
 	<EmotionSet name="human_standard" />
 	<BasicAttributes
 					experience="0"

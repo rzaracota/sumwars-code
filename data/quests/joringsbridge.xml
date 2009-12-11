@@ -1,0 +1,81 @@
+﻿<Quest name="Joringsbridge" table_name="prince">
+	<Region name="joringsbridge">
+		<Event trigger="create_region">
+			<Condition>
+				return (prince.left_joringsbridge~=true);
+			</Condition>
+			<Effect>
+				prince.karlen = createObject("prince","locPrince");
+				setRefName(prince.karlen, "Prince Karlen");
+				set(prince.karlen,"angle",90);
+				
+				prince.leonard = createObject("mentor","locCouncellor");
+				setRefName(prince.leonard, "Leonard von Robenforst");
+				set(prince.leonard,"angle",90);
+				
+				lookAtObject(prince.karlen,joringsbridge.sergeant);
+				lookAtObject(prince.leonard,joringsbridge.sergeant);
+				lookAtObject(joringsbridge.sergeant,prince.karlen);
+				lookAtObject(joringsbridge.council,joringsbridge.sergeant);
+			</Effect>
+		</Event>
+		
+		<Event trigger="player_moved" once="true">
+			<Condition>
+				return (unitIsInArea(trigger.player,"areaPrince"));
+			</Condition>
+			<Effect>
+				setCutsceneMode(true);
+				addCameraPosition(0,get(trigger.player,"position"), -90,60, 20);
+				addCameraPosition(3000,"locPrince", -90,40, 15);
+				prince_tmp.talk=true;
+				startTimer("get_party",2500)
+			</Effect>
+		</Event>
+		
+		<Event trigger="get_party" once="true">
+			<Effect>
+				assembleParty("joringsbridge","locParty");
+			</Effect>
+		</Event>
+		
+		<Event trigger="party_complete" once="true">
+			<Condition>
+				return(prince_tmp.talk==true);
+			</Condition>
+			<Effect>
+				createDialogue();
+				addAllPlayersToDialog();
+				addStandardRoles();
+				
+				setTopicBase("Sergeant Lutterer");
+				
+				addSpeaker(prince.karlen,"prince",true);
+				addSpeaker(prince.leonard,"mentor",true);
+				addSpeaker(joringsbridge.sergeant,"sergeant",true);
+				addSpeaker(joringsbridge.relau,"council",true);
+				
+				speak("prince",_("Viel geblabber"),"offended",2500);
+				speak("PL",_("Du laberst zu viel!"),"warcry");
+				addQuestion(_("Dem Bauern helfen?"));
+				addAnswer("Ja","help_peasent");
+				addAnswer("Nein","no_help");
+			</Effect>
+		</Event>
+	</Region>
+	
+	<NPC refname="Sergeant Lutterer">
+		<Topic name="help_peasent">
+			<Effect>
+				speak("sergeant",_("Wow. There's someone stupid enough..."),"surprised");
+				setCutsceneMode(false);
+			</Effect>
+		</Topic>
+		<Topic name="no_help">
+			<Effect>
+				speak("sergeant",_("You will be sorry for this!"),"angry");
+				setCutsceneMode(false);
+			</Effect>
+		</Topic>
+	</NPC>
+</Quest>

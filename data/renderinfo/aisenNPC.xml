@@ -15,24 +15,56 @@
 	<Action name="walk">
 		<Animation name="walkOneHand" />
 	</Action>
+	
+	<Action name = "talk">
+		<Animation name = "talkPole" />
+	</Action>
 </RenderInfo>
 
-<RenderInfo name="peasant_m" parent="playerbase">
+<RenderInfo name="unarmedBase" parent="playerbase">
+	<Action name="walk">
+		<Animation name="walkUnarmed" />
+	</Action>
+</RenderInfo>
+
+<RenderInfo name="peasant_m" parent="unarmedBase">
 	<Entity source="warrior_m.mesh"/>
 	<Entity objectname="head" bone="crown" source="head1.mesh" />
 	<Entity objectname="hat" bone="crown" source="peasent_hatM.mesh" />
 </RenderInfo>
 
-<RenderInfo name="peasant_f" parent="playerbase">
+<RenderInfo name="peasant_f" parent="unarmedBase">
 	<Entity source="priest_f.mesh"/>
 	<Entity objectname="head" bone="crown" source="head_f1.mesh" />
 	<Entity objectname="hat" bone="crown" source="peasent_hatM.mesh" />
 </RenderInfo>
 
-<RenderInfo name="general" parent="playerbaseM">
+<!-- momentan nur General Greif, Zivil -->
+<RenderInfo name="general" parent="unarmedBase">
 	<Entity source="knight.mesh"/>
 	<Entity objectname="head" bone="crown" source="head1.mesh" />
-	<Subobject objectname="arm" source="steelArm#m" />
+	<Subobject objectname="arm" source="steelArmUnarmed" />
 	<Subobject objectname="glv" source="steelGloves#m" />
+</RenderInfo>
+<!-- Prinz Karlen von Aisen, Joringsbrueck/Zivil -->
+<RenderInfo name="prince" parent="unarmedBase">
+	<Entity source="knight.mesh"/>
+	<Entity objectname="head" bone="crown" source="head1.mesh" />
+	<Entity objectname="hair" bone="crown" source="hairLong_ms1.mesh" />
+	<Subobject objectname="arm" source="steelArmUnarmed" />
+	<Subobject objectname="glv" source="steelGloves#m" />
+</RenderInfo>
+<RenderInfo name="steelArmUnarmed" parent="unarmedBase" inherit="animation">
+	<Entity source="steel_armM.mesh"/> 
+</RenderInfo>
+<!-- Leonard von Robenforst, Zivil -->
+<RenderInfo name = "mentor" parent="unarmedBase">
+	<Entity source="soren.mesh"/>
+	<Entity objectname="head" bone="crown" source="head_mt1.mesh" />
+	<Entity objectname="hair" bone="crown" source="hairShort_mt5.mesh" />
+	<Subobject objectname="robe" source="officialRobe" />
+</RenderInfo>
+<RenderInfo name = "officialRobe" parent="unarmedBase" inherit="animation">
+	<Entity source="necromancer_robeM.mesh" />
 </RenderInfo>
 

@@ -29,6 +29,8 @@
 		<Animation name="idle3" />
 	</Action>
 	
+	<Action name="talk" reference="nocation"/>
+	
 	<Action name="range_attack">
 		<Animation name="attackRanged1" />
 	</Action>
@@ -65,6 +67,24 @@
 	
 	<Action name="noaction">
 		<Animation name="idleRide" />
+	</Action>
+</RenderInfo>
+
+<RenderInfo name = "throwerBase" parent="creaturebase">
+	<Action name="walk">
+		<Animation name="walkRock" />
+	</Action>
+	
+	<Action name="ranged_attack">
+		<Animation name="throw" />
+	</Action>
+	
+	<Action name="die">
+		<Animation name="die" />
+	</Action>
+	
+	<Action name="noaction">
+		<Animation name="idleRock" />
 	</Action>
 </RenderInfo>
 
@@ -214,6 +234,18 @@
 	<Entity source="goblinGreen.mesh"/>
 	<Subobject objectname="mount" source="gobDog"/>
 	<Entity objectname="weapon" bone="itemRightHand" source="gobSpear_pol.mesh" />
+</RenderInfo>
+
+<RenderInfo name="goblin_youngling" parent="throwerBase">
+	<Entity source="goblinGreen.mesh" scale = "0.7"/>
+	<Entity objectname="weapon" bone="itemRightHand" source="berry.mesh" />
+	
+	<Action name="noaction">
+		<Animation name="idleRock" />
+	</Action>
+	<Action name="noaction">
+		<Animation name="idleBerry" />
+	</Action>
 </RenderInfo>
 
 
@@ -382,6 +414,27 @@
 	
 	<Action name = "freeze">
 		<Animation name = "castMagicWeak"/>
+		
+		<ParticleSystem time = "0.2" objectname="magicEnergy1" source="GoblinFreeze" position="0.0 0.0 0.0" />
+		<Movement objectname = "magicEnergy1" start="0.2" end="0.5" start_vec="0.0 0.0 0.0" end_vec="0.0 2.0 0.0" />
+		<Rotation objectname = "magicEnergy1" start="0.2" end="0.5" start_vec="0.0 0.0 0.0" end_vec="0.0 90.0 0.0" />
+		<Detach time="0.5" objectname="magicEnergy1" />
+		
+		<ParticleSystem time = "0.2" objectname="magicEnergy2" source="GoblinFreeze" position="0.0 0.0 0.0" />
+		<Movement objectname = "magicEnergy2" start="0.2" end="0.5" start_vec="0.0 0.0 0.0" end_vec="0.0 2.0 0.0" />
+		<Rotation objectname = "magicEnergy2" start="0.2" end="0.5" start_vec="0.0 90.0 0.0" end_vec="0.0 180.0 0.0" />
+		<Detach time="0.5" objectname="magicEnergy2" />
+		
+		<ParticleSystem time = "0.2" objectname="magicEnergy3" source="GoblinFreeze" position="0.0 0.0 0.0" />
+		<Movement objectname = "magicEnergy3" start="0.2" end="0.5" start_vec="0.0 0.0 0.0" end_vec="0.0 2.0 0.0" />
+		<Rotation objectname = "magicEnergy3" start="0.2" end="0.5" start_vec="0.0 180.0 0.0" end_vec="0.0 270.0 0.0" />
+		<Detach time="0.5" objectname="magicEnergy3" />
+		
+		<ParticleSystem time = "0.2" objectname="magicEnergy4" source="GoblinFreeze" position="0.0 0.0 0.0" />
+		<Movement objectname = "magicEnergy4" start="0.2" end="0.5" start_vec="0.0 0.0 0.0" end_vec="0.0 2.0 0.0" />
+		<Rotation objectname = "magicEnergy4" start="0.2" end="0.5" start_vec="0.0 270.0 0.0" end_vec="0.0 380.0 0.0" />
+		<Detach time="0.5" objectname="magicEnergy4" />
+		
 	</Action>
 	<Action name="goblin_icebolt">
 		<Animation name="castMagicWeak" />
@@ -404,6 +457,9 @@
 	</Action>
 	<Action name="noaction">
 		<Animation name="idleRanged1" />
+	</Action>
+	<Action name="show">
+		<Animation name="showBow" />
 	</Action>
 </RenderInfo>
 

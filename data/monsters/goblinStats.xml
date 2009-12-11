@@ -1030,6 +1030,7 @@
 	<AI ai_sight_range="12" />
 </Monster>
 
+
 <!-- Gab'Resh, Maylons Grab -->
 <!-- L8 -->
 <Monster type="MONSTER" subtype="goblin_gabresh" name="Gab'Resh" fraction="monster" race="goblin" layer="NORMAL">
@@ -1160,6 +1161,7 @@
 		<Ability type="walk" />
 		<Ability type="range_attack" rating="1"/>
 		<Ability type="die" />
+		<Ability type="show" />
 		<Ability type="noaction" time="4000"/>
 	</BasicAttributes>
 	

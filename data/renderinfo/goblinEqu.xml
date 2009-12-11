@@ -18,11 +18,27 @@
 <RenderInfo name="goblinGloves" parent="playerbase">
 	<Entity source="goblin_glv.mesh"/> 
 </RenderInfo>
-<RenderInfo name="goblinGloves#m" parent="playerbase">
+<RenderInfo name="goblinGloves#m" parent="playerbaseM">
 	<Entity source="goblin_glvMW.mesh"/> 
 </RenderInfo>
 <RenderInfo name="goblinGloves#f" parent="playerbase">
 	<Entity source="goblin_glvF.mesh"/> 
+</RenderInfo>
+<RenderInfo name="goblinGloves#fs" parent="playerbase">
+	<Entity source="goblin_glvF.mesh"/> 
+</RenderInfo>
+
+<RenderInfo name="goblinArmor" parent="playerbase">
+	<Entity source="gobLeg_arm.mesh"/> 
+</RenderInfo>
+<RenderInfo name="goblinArmor#m" parent="playerbaseM">
+	<Entity source="gobLeg_arm_ms.mesh"/> 
+</RenderInfo>
+<RenderInfo name="goblinArmor#f" parent="playerbase">
+	<Entity source="gobLeg_arm_fs.mesh"/> 
+</RenderInfo>
+<RenderInfo name="goblinArmor#fs" parent="playerbase">
+	<Entity source="gobLeg_arm_fs.mesh"/> 
 </RenderInfo>
 
 

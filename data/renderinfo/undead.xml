@@ -233,7 +233,7 @@
 	</Action>
 </RenderInfo>
 
-<RenderInfo name="ghost_slim">
+<RenderInfo name="ghost_slim" parent="creaturbase">
 	<Entity source="human_ghost.mesh"/>
 	<Entity objectname="head" bone = "crown" source="head_ghost.mesh"/>
 	
@@ -243,5 +243,13 @@
 	
 	<Action name="summoned">
 		<Animation name="rise"/>
+	</Action>
+	
+	<Action name="die">
+		<Animation name="ascendToHeaven"/>
+	</Action>
+	
+	<Action name="talk">
+		<Animation name="ghostTalk"/>
 	</Action>
 </RenderInfo>

@@ -3,7 +3,7 @@
 <!-- Zusaetzliches Mesh: gobLeg_arm.mesh -->
 <Item type="armor" subtype="goblin_arm" name="goblin armor" size="medium">
 	<Image image="set:gobLeg_Arm.png image:full_image" />
-	<Mesh file="armor.mesh" />
+	<RenderInfo name="goblinArmor" />
 	<Attribute
 			level_requirement="3"
 			character_requirement="all" 
