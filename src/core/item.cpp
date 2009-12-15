@@ -312,7 +312,7 @@ int Item::getValue(std::string valname)
 	}
 	else if (valname == "level_requirement")
 	{
-		lua_pushnumber(EventSystem::getLuaState() , m_level_req );
+		lua_pushnumber(EventSystem::getLuaState() , fabs(m_level_req) );
 		return 1;
 	}
 	else if (valname == "rarity")

@@ -135,6 +135,8 @@ void EventSystem::init()
 	lua_register(m_lua, "createEvent", createEvent);
 	lua_register(m_lua, "addCondition", addCondition);
 	lua_register(m_lua, "addEffect", addEffect);
+	lua_register(m_lua, "setCondition", addCondition);
+	lua_register(m_lua, "setEffect", addEffect);
 	lua_register(m_lua, "timedExecute",timedExecute);
 	lua_register(m_lua, "createScriptObjectEvent", createScriptObjectEvent);
 	
@@ -2190,7 +2192,7 @@ int EventSystem::setSpeakerAnimation(lua_State *L)
 	}
 	else
 	{
-		ERRORMSG("Syntax: setSpeakerAnimation(string refname, string emotion, float time, [bool repeat = false])");
+		ERRORMSG("Syntax: setSpeakerAnimation(string refname, string animation, float time, [bool repeat = false])");
 	}
 
 	return 0;
@@ -2340,7 +2342,7 @@ int EventSystem::addSpeaker(lua_State *L)
 			refname = lua_tostring(L,2);
 		}
 		
-		bool force = false;
+		bool force = true;
 		if (argc>=3 && lua_isboolean(L,3))
 		{
 			force = lua_toboolean(L,3);
@@ -2371,7 +2373,7 @@ int EventSystem::removeSpeaker(lua_State *L)
 	}
 	else
 	{
-		ERRORMSG("Syntax: removeSpeaker(string refname)");
+		ERRORMSG("Syntax: removeSpeaker(int unitid)");
 	}
 
 	return 0;	

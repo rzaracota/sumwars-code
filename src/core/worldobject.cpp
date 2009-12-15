@@ -278,6 +278,7 @@ bool WorldObject::takeDamage(Damage* damage)
 	Trigger* tr = new Trigger("object_hit");
 	tr->addVariable("defender",getId());
 	tr->addVariable("attacker",damage->m_attacker_id);
+	tr->addVariable("_id",getId());
 	getRegion()->insertTrigger(tr);
 	
 	return true;
