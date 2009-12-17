@@ -329,18 +329,23 @@ void GraphicManager::loadRenderInfo(TiXmlNode* node, GraphicRenderInfo* info)
 						{
 							attr.parseElement(child2->ToElement());
 							
+							float defaulttime;
+							
 							std::string act= state;
 							std::string prefix;
 							if (!strcmp(child2->Value(), "Activation"))
 							{
+								defaulttime = 10;
 								prefix ="activate:";
 							}
 							else if (!strcmp(child2->Value(), "Active"))
 							{
+								defaulttime = 1000;
 								 prefix = "active:";
 							}
 							else if (!strcmp(child2->Value(), "Deactivation"))
 							{
+								defaulttime = 10;
 								prefix = "deactivate:";
 							}
 							prefix += act;
@@ -348,7 +353,7 @@ void GraphicManager::loadRenderInfo(TiXmlNode* node, GraphicRenderInfo* info)
 							
 							ActionRenderInfo* ainfo = new ActionRenderInfo;
 							
-							attr.getFloat("time",ainfo->m_time,10.0);
+							attr.getFloat("time",ainfo->m_time,defaulttime);
 							loadActionRenderInfo(child2,ainfo);
 							info->addActionRenderInfo(act,ainfo);
 							
