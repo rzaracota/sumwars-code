@@ -1244,7 +1244,11 @@ int EventSystem::setObjectAnimation(lua_State *L)
 			
 			float time = lua_tonumber(L,3);
 			bool repeat = false;
-			if (argc>=4 && lua_isstring(L,4))
+			if (argc>=4 && lua_isboolean(L,4))
+			{
+				repeat =lua_toboolean(L,4);
+			}
+			else if (argc>=4 && lua_isstring(L,4))
 			{
 				std::string repstr = lua_tostring(L,4);
 				repeat = (repstr == "true");
