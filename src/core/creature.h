@@ -238,6 +238,10 @@ public:
 	 */
 	bool removeBaseAttrMod(CreatureBaseAttrMod* mod);
 	
+	/**
+	 * Entfernt alle Veraenderungen, die durch saemtliche Modifikation entstanden sind
+	 */
+	void removeAllBaseAttrMod();
 
 	/**
 	 * \fn void getPathDirection(Vector pos,short region, float base_size, short layer,  Vector& dir)
@@ -662,6 +666,11 @@ protected:
 	 * \param flags Ausgabeparameter: Flags
 	 */
 	virtual void getFlags(std::set<std::string>& flags);
+	
+	/**
+	 * Entfernt alle Flags
+	 */
+	virtual void clearFlags();
 	
 	/**
 	 * \fn int getTimerNr(Action::ActionType action)

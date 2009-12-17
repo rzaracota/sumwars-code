@@ -163,7 +163,9 @@ bool Creature::destroy()
 
 void Creature::die()
 {
-
+	clearFlags();
+	removeAllBaseAttrMod();
+	
 	// eigenen Status auf sterbend STATE_DIEING setzen
 	getRegion()->changeObjectGroup(this,DEAD);
 	setState(STATE_DIEING);
@@ -173,7 +175,7 @@ void Creature::die()
 	
 	m_action.m_elapsed_time =0;
 
-	addToNetEventMask(NetEvent::DATA_ACTION);
+	addToNetEventMask(NetEvent::DATA_ACTION | NetEvent::DATA_STATUS_MODS | NetEvent::DATA_FLAGS);
 	
 	Trigger* tr = new Trigger("unit_die");
 	tr->addVariable("unit",getId());
@@ -3486,6 +3488,7 @@ void Creature::applyBaseAttrMod(CreatureBaseAttrMod* mod, bool add)
 	if (mod->m_flag != "")
 	{
 		setFlag(mod->m_flag, true);
+		addToNetEventMask(NetEvent::DATA_FLAGS);
 	}
 
 	// Flags mit OR hinzufuegen
@@ -3580,6 +3583,17 @@ bool Creature::removeBaseAttrMod(CreatureBaseAttrMod* mod)
 	recalcDamage();
 
 	return ret;
+}
+
+void Creature::removeAllBaseAttrMod()
+{
+	m_dyn_attr.m_temp_mods.clear();
+	addToNetEventMask(NetEvent::DATA_FLAGS);
+	addToNetEventMask(NetEvent::DATA_ABILITIES);
+	addToNetEventMask(NetEvent::DATA_ATTRIBUTES_LEVEL | NetEvent::DATA_HP);
+	addToNetEventMask(NetEvent::DATA_ATTACK_WALK_SPEED);
+	
+	calcBaseAttrMod();
 }
 
 void Creature::getPathDirection(Vector pos,short region, float base_size, short layer, Vector& dir)
@@ -4737,6 +4751,19 @@ void Creature::getFlags(std::set<std::string>& flags)
 		flags.insert("burning_rage");
 	if (flgs & STATIC_SHIELD)
 		flags.insert("static_shield");
+}
+
+void Creature::clearFlags()
+{
+	WorldObject::clearFlags();
+	
+	// Status flags loeschen
+	for ( int i=0; i< NR_STATUS_MODS; i++)
+	{
+		m_dyn_attr.m_status_mod_time[i] =0;
+	}
+	
+	m_base_attr_mod.m_special_flags=0;
 }
 
 std::string Creature::getEmotionImage(std::string emotion)

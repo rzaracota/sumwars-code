@@ -390,6 +390,12 @@ void WorldObject::setFlag(std::string flag, bool set)
 	}
 }
 
+void WorldObject::clearFlags()
+{
+	m_flags.clear();
+	addToNetEventMask(NetEvent::DATA_FLAGS);
+}
+
 WorldObject::Group WorldObject::getGroup()
 {
 	if (!isCreature())

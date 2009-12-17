@@ -406,6 +406,11 @@ class WorldObject : public GameObject
 		}
 		
 		/**
+		 * Entfernt alle Flags
+		 */
+		virtual void clearFlags();
+		
+		/**
 		 * \fn void setName(std::string name)
 		 * \brief Setzt den Name des Spielers
 		 * \param name Name
