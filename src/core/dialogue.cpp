@@ -753,8 +753,15 @@ void Dialogue::update(float time)
 						pos = LOWER_LEFT;
 					else if (posstr == "lower_right")
 						pos = LOWER_RIGHT;
+					else
+					{
+						WARNING("Invalid value %s as argument to setSpeakerPosition",posstr.c_str());
+					}
 					
-					setSpeakerPosition(id,pos);
+					if (pos != UNKNOWN)
+					{
+						setSpeakerPosition(id,pos);
+					}
 					
 					m_event_mask =1;
 					cst =0;
