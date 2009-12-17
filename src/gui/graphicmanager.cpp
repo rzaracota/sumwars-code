@@ -329,7 +329,7 @@ void GraphicManager::loadRenderInfo(TiXmlNode* node, GraphicRenderInfo* info)
 						{
 							attr.parseElement(child2->ToElement());
 							
-							float defaulttime;
+							float defaulttime=10;
 							
 							std::string act= state;
 							std::string prefix;

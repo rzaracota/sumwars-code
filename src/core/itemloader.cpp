@@ -65,10 +65,23 @@ void ItemLoader::loadItem(TiXmlNode* node)
 	else if (type == "potion")
 		item_data->m_type = Item::POTION;
 	else
-		ERRORMSG("item without base type");
+	{
+		WARNING("<Item> tag without valid type attribute found (type is %s).",type.c_str());
+	}
 	
 	attr.getString("subtype", item_data->m_subtype,"notype");
+	if (item_data->m_subtype == "notype")
+	{
+		WARNING("<Item> tag without subtype attribute found (type is %s).",type.c_str());
+	}
+	
 	attr.getString("name", item_data->m_name);
+	if (item_data->m_name == "")
+	{
+		WARNING("<Item> tag without name attribute found (subtype is %s).",item_data->m_subtype.c_str());
+	}
+	
+	
 	std::string size;
 	attr.getString("size", size);
 	if (size == "small")
@@ -78,7 +91,13 @@ void ItemLoader::loadItem(TiXmlNode* node)
 	else if (size == "big")
 		item_data->m_size = Item::BIG;
 	else
-		ERRORMSG("item without subtype");
+	{
+		if (item_data->m_name == "")
+		{
+			WARNING("<Item> tag without valid size attribute found (subtype is %s).",item_data->m_subtype.c_str());
+		}
+	}
+	
 	
 	TiXmlNode* child;
 	for ( child = node->FirstChild(); child != 0; child = child->NextSibling())

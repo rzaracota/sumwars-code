@@ -270,6 +270,11 @@ bool WorldLoader::loadRegion(TiXmlNode* node, RegionData* rdata)
 						float angle;
 						attr.getString("name",name);
 						attr.getString("object_group",group_name);
+						if (name == "")
+						{
+							WARNING("<NamedObjectGroup> tag without name found (type is %s)",group_name.c_str());
+						}
+						
 						attr.getFloat("angle",angle,0);
 						angle *= 3.14159/180;
 						attr.getInt("priority",prio);
