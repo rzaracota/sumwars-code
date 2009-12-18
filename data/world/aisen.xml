@@ -380,21 +380,24 @@
 		<Event trigger ="create_region" once = "true">
 			<Effect>
 				joringsbridge ={};
-				joringsbridge.sergeant = createObject("guard", "locSergeant");
+				joringsbridge.sergeant = createObject("guard", "locSergeantHome",170);
 				setRefName(joringsbridge.sergeant, "Sergeant Lutterer");
-				set(joringsbridge.sergeant,"angle",90);
+				if(prince.left_joringsbridge ~= true)then
+					moveObject(joringsbridge.sergeant,"locSergeant");
+					set(joringsbridge.sergeant,"angle",90);
+				end;
 				
 				joringsbridge.council = createObject("council_mage", "locSummoner");
 				setRefName(joringsbridge.council, "Magus Convocatis Relau Fireweaver");
 				set(joringsbridge.council,"angle",90);
 				
-				trader = createObject('peasant_f', 'locWeaponTrader');
-				setRefName(trader, 'Sybill');
-				set(trader,"angle",180);
+				joringsbridge.weapons = createObject('peasant_f', 'locWeaponTrader');
+				setRefName(joringsbridge.weapons, 'Sybill');
+				set(joringsbridge.weapons,"angle",180);
 				
-				trader = createObject('peasant', 'locArmorTrader');
-				setRefName(trader, 'Halgor');
-				set(trader,"angle",230);
+				joringsbridge.armor = createObject('peasant', 'locArmorTrader');
+				setRefName(joringsbridge.armor, 'Halgor');
+				set(joringsbridge.armor,"angle",230);
 				
 				trader = createObject('guard', 'locBlackmarket');
 				setRefName(trader, 'Marco');
@@ -424,7 +427,7 @@
 		</Exits>
 		
 		<NamedObjectGroups>
-			<NameObjectGroup object_group="bronsFarm" priority="4"/>
+			<NameObjectGroup name="bronsFarm" object_group="bronsFarm" priority="4"/>
 		</NamedObjectGroups>
 		
 		<ObjectGroups>
@@ -436,13 +439,6 @@
 		<Environments>
 			<Environment height="1.0" name="meadow" />
 		</Environments>
-		
-		<Event trigger ="create_region" once = "true">
-			<Effect>
-				brons_door = createObject("peasant", "door")
-				setRefName(brons_door, "Brons Tuer")
-			</Effect>
-		</Event>
 	</Region>
 	
 <!-- Aisen, Joringsforst [Wald und Wiesen]; ungefaehr 30 Min, halbwegs offen; Level 7 - 12 -->	

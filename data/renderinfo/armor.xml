@@ -45,7 +45,7 @@
 </RenderInfo>
 <RenderInfo name="counclArm#fs" parent="playerbase" inherit="animation">
 </RenderInfo>
-<RenderInfo name="counclArmTolec" parent="guardPole" inherit="animation">
+<RenderInfo name="counclArmTolec" parent="guardPoleBase" inherit="animation">
 	<Entity source="councl_armMW.mesh"/> 
 </RenderInfo>
 
@@ -59,7 +59,7 @@
 </RenderInfo>
 <RenderInfo name="counclRob#fs" parent="playerbase" inherit="animation">
 </RenderInfo>
-<RenderInfo name="counclRobeSoren" parent="guardPole" inherit="animation">
+<RenderInfo name="counclRobeSoren" parent="guardPoleBase" inherit="animation">
 	<Entity source="councl_robMM.mesh"/>
 </RenderInfo>
 

@@ -23,6 +23,10 @@
 		<Animation name="idleTwoHandsBlunt" />
 	</Action>
 	
+	<Action name="take_item">
+		<Animation name="idle"/>
+	</Action>
+	
 	<Action name="use">
 		<Animation name="idle" />
 	</Action>
@@ -33,6 +37,9 @@
 	
 	<Action name = "sad">
 		<Animation name = "sadOneHand" />
+	</Action>
+	<Action name = "sad#staff">
+		<Animation name = "sadPole" />
 	</Action>
 	
 	<Action name = "think">
@@ -66,7 +73,7 @@
 	<Action name = "talk">
 		<Animation name = "talk" />
 	</Action>
-	<Action name = "talk#staff">
+	<Action name = "talk#TwoHands#staff">
 		<Animation name = "talkPole" />
 	</Action>
 	

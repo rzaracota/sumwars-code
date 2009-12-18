@@ -12,8 +12,8 @@ function isPlayer(obj)
 
 function isFixedObject(obj)
 		return (getObjectValue(obj,"type") == "FIXED_OBJECT")
-		end;
-
+end;
+		
 function isCreature(obj)
 		local t = getObjectValue(obj,"type")
 		return (t == "MONSTER" or t=="PLAYER" or t=="NPC")
@@ -75,6 +75,18 @@ function lookAtObject(obj,obj2)
 	lookAt(obj,get(obj2,"position"));
 end;
 
+function isInRegion(obj)
+	local reg = getRegion()
+	return(get(obj,"region")==reg);
+end;
+
+--every unit in a group looks at a specific location. Ideal for big mobs.
+function groupLookAt(group, pos)
+	for key,id in pairs(group) do
+		lookAt(id,pos);
+	end;
+end;
+
 function playersLookAt(pos)
 	for key,id in pairs(getPlayers()) do
 		lookAt(id,pos);
@@ -88,6 +100,11 @@ end;
 -- Objekte mit bestimmten Eigenschaften herrausfiltern
 function getPlayersInArea(area)
 		return getObjectsInArea(area,"player");
+end;
+
+function getPlayersInRegion(region)
+	getPlayers();
+	
 end;
 
 function getMonstersInArea(area)
@@ -125,9 +142,26 @@ end;
 function getMales()
 	return getRolePlayers("male");
 end;
+function isMale(player)
+	local males = listToSet(getMales());
+	if(males[player]==true)then
+		return true;
+	else
+		return false;
+	end;
+end;
+
 
 function getFemales()
 	return getRolePlayers("female");
+end;
+function isFemale(player)
+	local females = listToSet(getFemales());
+	if(females[player]==true)then
+		return true;
+	else
+		return false;
+	end;
 end;
 
 

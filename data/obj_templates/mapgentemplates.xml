@@ -8,7 +8,19 @@
 	<Environment name="meadow" default="true">
 		<ObjectGroup name="border(side)" />
 	</Environment>
-	<Environment name="cave">
+</ObjectGroupTemplate>
+
+<ObjectGroupTemplate name="$border(corner)">
+	<Shape
+		  type="RECT"
+		  extent_x="4"
+		  extent_y="4"
+		  angle="0"
+		  />
+	<Environment name="meadow" default="true">
 		<ObjectGroup name="border(corner)" />
+	</Environment>
+	<Environment name="cave">
+		<ObjectGroup name="border(corner)cave" />
 	</Environment>
 </ObjectGroupTemplate>

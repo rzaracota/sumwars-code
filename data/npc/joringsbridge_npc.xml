@@ -43,7 +43,7 @@
 		<TradeItem subtype="alder_stf"  number="1" number_magical="0"/>
 	</Trade>
 	
-	<Topic name="trade" start_option="Trade" />
+	<Topic name="trade" start_option="Weapons" />
 </NPC>
 
 <NPC refname="Halgor">
@@ -71,10 +71,11 @@
 		<TradeItem subtype="alch_hat"  number="1" number_magical="0"/>
 		<TradeItem subtype="beret_hat"  number="1" number_magical="0"/>
 	</Trade>	
-	<Topic name="trade" start_option="Trade" />
+	<Topic name="trade" start_option="Armors" />
 </NPC>
 
 <NPC refname="Marco">
+		
 	<Trade refresh_time="600000" price_factor="10">
 		<TradeItem subtype="sabre_sw"  number="0" number_magical="1" min_enchant="100" max_enchant="400"/>
 		<TradeItem subtype="legion_sw"  number="0" number_magical="1" min_enchant="100" max_enchant="400"/>
@@ -102,17 +103,53 @@
 		<TradeItem subtype="silver_aml"  number="0" number_magical="5" min_enchant="100" max_enchant="400"/>
 	</Trade>	
 	
-	<Topic name="trade" start_option="Trade" />
+	<Topic name="trade" start_option='"Fundgegenstaende"' />
+	
+	<Topic name="the_goods" start_option="What are these Items?">
+		<Condition>
+			return(joringsbridge.talkedToMarco ~= true);
+		</Condition>
+		<Effect>
+			speak("Marco",_("Ah, euch ist mein Fundbuero aufgefallen?"),"amused");
+			speak("Marco",_("Ich lagere hier alles, was ich so an verlorenen Gegenstaenden in und um Joringsbrueck finde."));
+			speak("Marco",_("Wenn Euch etwas davon gehoert, sagt einfach Bescheid. Fuer einen geringen Finderlohn koennt Ihr es wiederhaben."))
+			joringsbridge.talkedToMarco = true;
+		</Effect>
+	</Topic>
 </NPC>
 
 <NPC refname="Sergeant Lutterer">
+	<Topic name="Joringsbridge_sergeant" start_option="Joringsbridge">
+		<Effect>
+			addSpeaker(joringsbridge.sergeant,"sergeant");
+			speak("sergeant",_("Die Verantwortung fuer Joringsbrueck zu haben ist nicht immer leicht, selbst, wenn ich genug Soldaten habe."),"thoughtful");
+			speak("sergeant",_("Seit Monaten schafft irgend einer meiner Leute die beschlagnamten magischen Gegenstaende bei Seite."),"sad");
+			speak("sergeant",_("Und ich bin ihm noch keinen Schritt naeher als am Anfang!"),"angry");
+			speak("player",_("(Ein Gardist schafft Gegenstaende bei Seite? Sicher nicht fuer schlechte Zeiten. Ich sollte mich mal umsehen.)"))
+		</Effect>
+	</Topic>
+	
+	<Topic name="surroundings_sergeant" start_option="The surroundings of Joringsbridge">
+		<Effect>
+			addSpeaker(joringsbridge.sergeant,"sergeant");
+			speak("sergeant",_("Ihr seid besser vorsichtig, wenn Ihr das Dorf verlasst."),"thoughtful");
+			speak("sergeant",_("Jetzt, wo fast alle Truppen an den Grenzen stehen, haben wir es mit einer unueberschaubaren Flut von Goblins zu tun."),"normal");
+			speak("sergeant",_("Und alle, die nicht in die Armee eingezogen wurden, scheinen das Banditendasein fuer sich entdeckt zu haben."),"angry");
+			speak("player",_("Danke fuer die Warnung, Sergeant"),"amused");
+		</Effect>
+	</Topic>
 </NPC>
 
 <NPC refname="Michel Bron">
 </NPC>
 
-<NPC refname="Leonard von Robenforst">
-</NPC>
-
-<NPC refname="Magus Convocatis Relau Feuerweber">
+<NPC refname="Magus Convocatis Relau Fireweaver">
+	<Topic name="Joringsbridge_mage" start_option="Joringsbridge">
+		<Effect>
+			addSpeaker(joringsbridge.council,"council");
+			speak("council",_("Ihr seid die Unterstuetzung, die Lord Magister Windklaue geschickt hat, wie?"),"sneer");
+			speak("council",_("Ich empfehle Euch eine schnelle Weiterreise. In diesem Dorf sind schon Menschen an Langeweile gestorben."),"bored");
+			speak("council",_("Wer weiss, ob Eure Konstitution Euch dagegen auch hilft?"),"grin");
+		</Effect>
+	</Topic>
 </NPC>

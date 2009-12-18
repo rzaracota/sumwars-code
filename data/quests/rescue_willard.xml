@@ -69,6 +69,7 @@
 						speak('Fenor Marken',_("Ich hoffe, Ihr kommt mit Eurer Suche nach Willard voran."),"sad");
 					end;
 				elseif(rescue_willard.denied == true)then
+					addStandardRoles();
 					speak('Fenor Marken',_("Habt Ihr es euch etwa anders ueberlegt?"),"sad");
 					addQuestion(_("Nach Willard suchen?"));
 					addAnswer(_("Ja"),'start_rescue_willard_quest');
@@ -247,7 +248,7 @@
 				addArea('WillardEnemiesArea',{'circle','willard:locWillard',15});
 				local list = getMonstersInArea('WillardEnemiesArea')
 				if (rescue_willard_tmp.freed ~= true) then
-					rescue_willard_tmp.monsters = createMonsterGroup("willard_goblins","willard:locWillard")
+					createMonsterGroup("willard_goblins","willard:locWillard")
 				elseif (rescue_willard_tmp.freed == true and rescue_willard.finished ~= true and list[1] == nil) then
 					rescue_willard_tmp.willard = createObject('peasant', 'willard:locWillard')
 					setRefName(rescue_willard_tmp.willard, 'Willard')

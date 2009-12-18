@@ -1069,7 +1069,7 @@
             prob_angle="false" 
     />
     <Object subtype="fence2" 
-            center_x="17.10595681" 
+            center_x="23.03296641" 
             center_y="-15.77470045" 
             angle="38.01472351" 
             probability="1" 
@@ -1085,7 +1085,7 @@
     <Object subtype="fence4" 
             center_x="24.7451276" 
             center_y="-8.90580649" 
-           height="-3.416998161e-007" 
+           height="-3.416998163e-007" 
             angle="-94.87840224" 
             probability="1" 
             prob_angle="false" 
@@ -1120,7 +1120,7 @@
             prob_angle="false" 
     />
     <Object subtype="fence_m1" 
-            center_x="20.07080136" 
+            center_x="25.90457895" 
             center_y="-20.73114006" 
             angle="13.00206372" 
             probability="1" 
@@ -1169,7 +1169,7 @@
             prob_angle="false" 
     />
     <Object subtype="fence_t1" 
-            center_x="9.889004921" 
+            center_x="15.63585523" 
             center_y="-20.88688703" 
            height="-1.776356839e-015" 
             angle="35.80184892" 
@@ -1206,7 +1206,7 @@
             prob_angle="false" 
     />
     <Object subtype="houseAisen2" 
-            center_x="11.29035614" 
+            center_x="17.05265146" 
             center_y="-15.83395365" 
             angle="-41.90560645" 
             probability="1" 
@@ -1250,8 +1250,8 @@
             prob_angle="false" 
     />
     <Object subtype="stone2" 
-            center_x="11.53952919" 
-            center_y="-21.40370371" 
+            center_x="17.23456268" 
+            center_y="-21.54197565" 
            height="-1.804112415e-016" 
             angle="0" 
             probability="1" 
@@ -1315,21 +1315,46 @@
     <Location name="exit_west" pos_x="-32" pos_y="2" />
     <Location name="locArmorTrader" pos_x="9.421989181" pos_y="14.05022238" />
     <Location name="locBlackmarket" pos_x="35.0044924" pos_y="-1.859310085" />
+    <Location name="locCivilist1" pos_x="13.25169379" pos_y="-16.04803418" />
+    <Location name="locCivilist2" pos_x="-8.618493657" pos_y="-9.574400817" />
+    <Location name="locCivilist3" pos_x="-10.68233073" pos_y="-8.857625186" />
     <Location name="locCouncellor" pos_x="3.192832484" pos_y="-4.581163709" />
+    <Location name="locCrystal" pos_x="1.197175797" pos_y="4.176068775" />
     <Location name="locHerbalist" pos_x="-20.30925615" pos_y="4.145131135" />
     <Location name="locHerbalistHome" pos_x="-14.03140691" pos_y="7.242747244" />
+    <Location name="locLeader" pos_x="-0.1601701857" pos_y="2.460693474" />
     <Location name="locParty" pos_x="0" pos_y="5.315196848" />
+    <Location name="locPeasent1" pos_x="-7.5" pos_y="-6.5" />
+    <Location name="locPeasent2" pos_x="-9.5" pos_y="-4.5" />
+    <Location name="locPeasent3" pos_x="-5.446090615" pos_y="6.824053605" />
+    <Location name="locPeasent4" pos_x="3.892157642" pos_y="6.158770944" />
+    <Location name="locPeasent5" pos_x="8.002238236" pos_y="1.070824325" />
+    <Location name="locPeasent6" pos_x="9.069576082" pos_y="-1.366279357" />
+    <Location name="locPeasent7" pos_x="10.01979338" pos_y="0.2982800018" />
     <Location name="locPeasentMichel" pos_x="-4.746550491" pos_y="-2.684898194" />
     <Location name="locPrince" pos_x="0.7217645983" pos_y="-3.833759622" />
     <Location name="locSergeant" pos_x="4.035785273" pos_y="-1.873121241" />
-    <Location name="locSergeantHome" pos_x="15.93911233" pos_y="-3.802507151" />
+    <Location name="locSergeantHome" pos_x="15.76206801" pos_y="-5.100948723" />
     <Location name="locSummoner" pos_x="-2.695593311" pos_y="-6.092511186" />
+    <Location name="locTavern" pos_x="16.3679151" pos_y="-1.843451364" />
+    <Location name="locTheTrader" pos_x="-9.405505138" pos_y="7.5" />
+    <Location name="locTheTraderView" pos_x="-7.240276654" pos_y="5.203735915" />
+    <Location name="locTraderView1" pos_x="8.5" pos_y="4" />
+    <Location name="locTraderView2" pos_x="5" pos_y="8.5" />
+    <Location name="locTraderView3" pos_x="-9" pos_y="2.5" />
+    <Location name="locTroop1" pos_x="8.6812193" pos_y="-12" />
+    <Location name="locTroop2" pos_x="2.84224126" pos_y="-12" />
     <Location name="locWeaponTrader" pos_x="13.96743394" pos_y="10.89279151" />
   </Locations>
 
   <Areas>
+    <Area name="areaArmor" angle="-0" center_x="9.5" center_y="14" type="CIRCLE" radius="1" />
     <Area name="areaGertlinde" angle="-0" center_x="-19.76590477" center_y="2.091325624" type="RECT" extent_x="2.700091621" extent_y="5.893525043" />
+    <Area name="areaJBNorth" angle="-0" center_x="6.234184896" center_y="-21.71456123" type="RECT" extent_x="6.58179219" extent_y="2.500965862" />
     <Area name="areaPrince" angle="-0" center_x="-6.536758466" center_y="14.64616506" type="RECT" extent_x="15.03508672" extent_y="6.37535902" />
+    <Area name="areaSergeant" angle="-0" center_x="15.77711075" center_y="-5.106525315" type="CIRCLE" radius="1" />
+    <Area name="areaTavern" angle="-0" center_x="15.93296274" center_y="-1.32409395" type="RECT" extent_x="2.233476137" extent_y="2.909431065" />
+    <Area name="areaWeapon" angle="-0" center_x="13.85822982" center_y="10.83134585" type="CIRCLE" radius="1" />
   </Areas>
 
 </ObjectGroup>

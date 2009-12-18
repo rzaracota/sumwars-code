@@ -10,17 +10,18 @@
 	<Region name="elCnlLobby">
 		<Event trigger="elemental_end" once="true">
 			<Effect>
-				if(theTrader.intro ~= "true") then
-					theTrader.intro = "false";
+				if(theTrader.intro ~= true) then
+					theTrader.intro = false;
 				end;
 			</Effect>
 		</Event>
 	</Region>
-	
+
+<!-- Medair -->
 	<Region name="medMercCamp">
 		<Event trigger="create_region" once = "true">
 			<Effect>
-				if (theTrader.intro ~= "true") then
+				if (theTrader.intro ~= true) then
 					theTrader_tmp.theTrader = createObject("theTrader", "locTheTraderIntro");
 					setRefName(theTrader_tmp.theTrader, "The Trader");
 					set(theTrader_tmp.theTrader,"angle",120);
@@ -34,7 +35,7 @@
 		
 		<Event trigger="enter_region" once = "true">
 			<Effect>
-				if (theTrader.intro ~= "true") then
+				if (theTrader.intro ~= true) then
 					startTimer("start_theTraderIntro",1000);
 				end;
 			</Effect>
@@ -59,7 +60,7 @@
 				addStandardRoles();
 
 				addSpeaker(theTrader_tmp.theTrader,"theTrader");
-				
+				setTopicBase("The Trader");
 				--greeting by composure of the group
 				if (solo() and femaleOnly()) then
 					speak("theTrader",_("Einen Augenblick, ehrenwerte Dame."));
@@ -69,7 +70,7 @@
 				elseif(femaleOnly()) then
 					speak("theTrader",_("Einen Augenblick, ehrenwerte Damen."));
 				elseif(maleOnly()) then
-					speak("theTrader",_("Einen Augenblick, ehrenwerter Herr."));
+					speak("theTrader",_("Einen Augenblick, ehrenwerte Herren."));
 				else
 					speak("theTrader",_("Einen Augenblick, ehrenwerte Herrschaften."));
 				end;
@@ -96,32 +97,116 @@
 				end;
 				speak("magopt", _("Was sind das für Rollen?"),"normal");
 				
-				-- if (get(getSpeaker("magopt","gender")=="male") then
-					speak("theTrader", _("Ihr seid ein Mensch von Verstand!"),"excited");
-				--end;
+				if(isMale(getSpeaker("magopt")))then
+					speak("theTrader", _("Ihr seid ein Mann von Verstand!"),"excited");
+				else
+					speak("theTrader", _("Ihr seid eine Frau von Verstand!"),"excited");
+				end;
+				
 				speak("theTrader", _("Eine Leere Schriftrolle ist zu meinem großen Bedauern nur zu einem in der Lage:"),"thoughtful");
 				speak("theTrader", _("Einen Weg durch Harads Schwarzen Abgrund schaffen."),"excited");
 				speak("theTrader", _("Und dann auch noch nur zu einer Stelle großer magischer Konzentration wie dem dicken Wegeschrein da hinten."),"sad");
 				executeInDialog("addCameraPosition(1000,'WaypointLoc', -90,50, 20)");
 				--Kamera bewegen
 				speak("theTrader", _("Die Macht erschöpft sich außerdem recht schnell und ist auf eine Person beschränkt."),"thougtful");
-				executeInDialog("addCameraPosition(1000,'entry_south', -90,50, 20)");
-				speak("theTrader", _("Aber Goblins und ähnliches Gekreuch haben in letzter Zeit allerhand gestohlen."),"normal");
-				speak("theTrader", _("Es mag Euch gelegen kommen, einen kurzen Abstecher zu einem gut sortierten Händler zu unternehmen."),"grin");
-				speak("PL", _("Nämlich Euch?"),"sneer");
+				addQuestion(_("Das Wegpunktesystem erklären?"))
+				addAnswer(_("Ja"),"explain_waypoints")
+				addAnswer(_("Nein"),"talk_on")
+			</Effect>
+		</Event>
+	</Region>
+	
+	<NPC refname = "The Trader">
+		<Topic name="explain_waypoints">
+			<Effect>
+				speak("theTrader",_("Wenn Ihr Euch einem Wegeschrein naehert, wird Eure Aura die Schutzgeister dieses Ortes dazu veranlassen, warnende Flammen zu entzuenden."),"normal");
+				speak("theTrader",_("Aber keine Angst, sie haben nicht die Macht, Euch wirklich gefaehrlich zu werden."),"amused");
+				speak("theTrader",_("Dafuer koennt Ihr sicher sein, dass Ihr den Wegeschrein benutzen koennt, wenn Ihr die Flammen seht."),"normal");
+				speak("theTrader",_("Wenn Ihr auf einen Wegeschrein klickt, wird Euer Koerper sich in Harads Schwarzen Abgrund verfluechtigen."),"normal");
+				speak("theTrader",_("Vor Eurem Auge wird dann eine Karte mit allen Orten erscheinen, die Ihr bereits besucht habt."),"normal");
+				speak("theTrader",_("Sie werden als ein Kreis dargestellt."),"normal");
+				speak("theTrader",_("Wenn Ihr ein Portal in der Welt offen habt, wird auch dieses angezeigt, allerdings durch einen roten Punkt."),"normal");
+				speak("theTrader",_("Klickt auf eines dieser Symbole, und Euer Koerper setzt sich in Windeseile am Zielort wieder zusammen."),"normal");
+				changeTopic("talk_on");
+			</Effect>
+		</Topic>
+	
+		<Topic name="talk_on">
+			<Effect>
+				addCameraPosition(1000,'entry_south', -90,50, 20);
+				speak("theTrader", _("Goblins und aehnliches Gekreuch haben in letzter Zeit allerhand gestohlen."),"normal");
+				speak("theTrader", _("Es mag Euch gelegen kommen, einen kurzen Abstecher zu einem gut sortierten Haendler zu unternehmen."),"grin");
+				speak("PL", _("Naemlich Euch?"),"sneer");
 				speak("theTrader", _("Zu meinem Bedauern nein."),"sad");
-				speak("theTrader", _("Wie bereits berichtet habe ich mich mit den Leeren Schriftrollen übernommen und derzeit kein freies Kapital."));
-				speak("theTrader", _("Ich fürchte, ich kann euch nur unzureichende Mengen an Gold für eure Waren bieten."));
+				speak("theTrader", _("Wie bereits berichtet habe ich mich mit den Leeren Schriftrollen uebernommen und derzeit kein freies Kapital."));
+				speak("theTrader", _("Ich fuerchte, ich kann euch nur unzureichende Mengen an Gold für eure Waren bieten."));
 				speak("theTrader", _("Aber ich kann euch noch sehr lange  versorgen, das verspreche ich Euch."),"happy");
-				speak("theTrader", _("Schon deswegen, weil Kundschaft in diesen Breiten rar gesät ist."),"normal");
-				speak("priopt", _("Das ist sie überall."), "normal");
+				speak("theTrader", _("Schon deswegen, weil Kundschaft in diesen Breiten rar gesaet ist."),"normal");
+				speak("priopt", _("Das ist sie ueberall."), "normal");
 				speak("theTrader", _("Und ohne Euch zu nahe zu treten: Das ist auch gut so."),"thoughtful");
-				speak("theTrader", _("Nicht viele Gezeichnete hätten mir so zugehört wie Ihr."),"normal");
+				speak("theTrader", _("Nicht viele Gezeichnete haetten mir so zugehoert wie Ihr."),"normal");
 				speak("theTrader", _("Lasst mich Euch eine Leere Schriftrolle als Werbegeschenk überreichen."),"happy");
 				speak("theTrader", _("Beehrt mich bald wieder."));
-				theTrader_tmp.walkFromIntro = true;
-				theTrader.intro="true";
-				executeInDialog("addUnitCommand(theTrader_tmp.theTrader,'walk','locTheTrader')");			
+				speak("waropt",_('Moment! Muss das Ding denn unbedingt "Leere Schriftrolle heißen?"'),"unhappy");
+				if(getSpeaker("magopt")==getSpeaker("waropt"))then
+					speak("waropt",_("Warum nicht Stadtportal oder so was?"),"thoughtful");
+					speak("theTrader",_("Nun, sie wurden mir als Leere Schriftrollen verkauft, aber wie Ihr sie nennt, ist gaenzlich Euch ueberlassen."),"amused");
+				else
+					speak("waropt",_('Warum nicht einfach "Weg zur Stadt" oder so?'),"thoughtful");
+					setSpeakerEmotion("waropt","offended");
+					speak("magopt",_("Was soll das denn fuer ein Name sein??"),"pain");
+					setSpeakerEmotion("waropt","normal");
+					speak("magopt",_("Wohl eher Stadtportal."),"aloof");
+					speak("theTrader",_("Aber aber, ehrenwerte Kunden!"),"sad");
+					speak("theTrader",_("Sie wurden mir nur als Leere Schriftrollen verkauft, aber wie ihr sie nennt ist voellig Euch ueberlassen!"),"normal");
+				end;
+
+				speak("waropt",_("Und wie benutzt man sie nun?"),"thoughtful");
+				speak("theTrader",_("Wie einen ganz normalen Trank."));
+				addQuestion(_("Den Guertel erklaeren?"))
+				addAnswer(_("Ja"),"explain_belt")
+				addAnswer(_("Nein"),"know_belt")
+			</Effect>
+		</Topic>
+		
+		<Topic name="explain_belt">
+			<Effect>
+				speak("theTrader",_("Nun, ueber Euer Inventar wisst Ihr ja Bescheid, richtig?"),"amused");
+				setSpeakerEmotion("waropt","offended");
+				speak("theTrader",_("Das dachte ich mir."),"amused");
+				speak("theTrader",_("Ganz unten habt Ihr die kleinen Gegenstaende, die in drei Reihen vorhanden sind."),"normal");
+				setSpeakerEmotion("waropt","normal")
+				speak("theTrader",_("Die oberste Reihe repraesentiert Euren Guertel."),"normal");
+				speak("theTrader",_("Wenn Ihr dort zum Beispiel einen Trank platziert, taucht er auch in der Guertelleiste unten auf."),"amused");
+				speak("theTrader",_("Das ist euch sicherlich schon aufgefallen?"),"thougtful");
+				speak("waropt",_("Allerdings."),"amused");
+				speak("waropt",_("Und lange Jahre auf dem Schlachtfeld haben dafuer gesorgt, dass ich benutzte Traenke sofort gegen einen gleichartigen Trank austausche, wenn ich einen benutze"),"grin");
+				speak("theTrader",_("Eine nützliche Faehigkeit."),"excited");
+				if(getSpeaker("magopt")~=getSpeaker("waropt"))then
+					speak("magopt",_("Lernt die nicht jeder, der den Tod vermeiden will?"),"sneer");
+					setSpeakerEmotion("waropt","angry");
+					speak("theTrader",_("Nun, wie de auch sei."),"normal");
+				end;
+				setSpeakerEmotion("waropt","normal");
+				speak("theTrader",_("Wenn Ihr einen Trank verwenden wollt, koennt Ihr das tun, indem Ihr ihn im Inventar oder im Guertel mit rechts anklickt."));
+				speak("theTrader",_("Alternativ koennt ihr auch die Ziffer des Guertelfachs waehlen, in dem er liegt."),"normal");
+				speak("theTrader",_("Also 1 fuer den Trank ganz links, 2 fuer den zweiten von Links und so weiter."))
+				speak("theTrader",_("Das funktioniert fuer alle benutzbaren Gegenstaende gleich, also auch fuer die Schriftrollen."))
+				
+				changeTopic("finish_intro");
+			</Effect>
+		</Topic>
+		
+		<Topic name="know_belt">
+			<Effect>
+				speak("waropt",_("Oh! So einfach?"));
+				changeTopic("finish_intro");
+			</Effect>
+		</Topic>
+		
+		<Topic name="finish_intro">
+			<Effect>
+				addUnitCommand(theTrader_tmp.theTrader,'walk','locTheTrader');			
 				speak("arcopt", _("Komischer Kauz."));
 				executeInDialog("setCutsceneMode(false)");
 				local players = getPlayers();
@@ -130,9 +215,13 @@
 					createItem("town_portal")
 					insertPlayerItem(player,false);
 				end;
+				theTrader_tmp.walkFromIntro = true;
+				theTrader.intro="true";
 			</Effect>
-		</Event>
-		
+		</Topic>
+	</NPC>
+	
+	<Region name="medMercCamp">
 		<Event trigger="command_complete">
 			<Condition>
 				if((trigger.unit==theTrader_tmp.theTrader)and(theTrader_tmp.walkFromIntro==true))then
@@ -147,4 +236,26 @@
 		</Event>
 	</Region>
 
+<!-- Joringsbrueck -->
+	<Region name="joringsbridge">
+		<Event trigger="create_region" once = "true">
+			<Effect>
+				theTrader_tmp.theTraderJB = createObject("theTrader", "locTheTrader");
+				setRefName(theTrader_tmp.theTraderJB, "The Trader");
+			</Effect>
+		</Event>
+	</Region>
+	
+	<NPC refname = "The Trader">
+		<Topic name="joringsbridge_theTrader" start_option="What are you doing here?">
+			<Condition>
+				return(theTrader.talkedInJB ~=true);
+			</Condition>
+			<Effect>
+				speak("The Trader",_("Oh, nun, mir fiel auf, dass Ihr nach Norden wolltet, und ich dachte mir, dass es Euch vielleicht gelegen kaeme, mich in der Naehe zu wissen."),"happy");
+				speak("player",_("Hm, da habt Ihr auch wieder recht."),"thoughtful");
+				theTrader.talkedInJB = true;
+			</Effect>
+		</Topic>
+	</NPC>
 </Quest>

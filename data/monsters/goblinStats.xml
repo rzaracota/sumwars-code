@@ -1172,7 +1172,7 @@
 	<AI ai_sight_range="12" ai_shoot_range="7" />
 </Monster>
 
-
+<!-- Goblingruppen -->
 <MonsterGroup name="goblins_l1" >
 	<SubGroup subtype="goblin" number="2" prob="1.0" />
 	<SubGroup subtype="goblin" number="2" prob="0.5" />
@@ -1304,4 +1304,14 @@
 <MonsterGroup name="goblins_lurdrak" >
 	<SubGroup subtype="goblin_lurdrak" number="1" prob="1.0" />
 	<SubGroup subtype="goblin_poacher" number="3" prob="1.0" />
+</MonsterGroup>
+
+<!-- Brons Farm -->
+<MonsterGroup name="farm_goblins_warchief" >
+	<SubGroup subtype="goblin_lurdrak" number="1" prob="1.0" />
+	<SubGroup subtype="goblin_poacher" number="3" prob="1.0" />
+</MonsterGroup>
+<MonsterGroup name="farm_goblins_shaman" >
+	<SubGroup subtype="goblin_snow" number="1" prob="1.0" />
+	<SubGroup subtype="goblin_fighter" number="3" prob="0.7" />
 </MonsterGroup>

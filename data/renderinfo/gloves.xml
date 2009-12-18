@@ -34,7 +34,7 @@
 </RenderInfo>
 <RenderInfo name="sharkGloves#fs" parent="playerbase" inherit="animation">
 </RenderInfo>
-<RenderInfo name="sharkGlovesGuard" parent="guardPole" inherit="animation">
+<RenderInfo name="sharkGlovesGuard" parent="guardPoleBase" inherit="animation">
 	<Entity source="shark_glvM.mesh"/>
 </RenderInfo>
 

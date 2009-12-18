@@ -1,12 +1,152 @@
-<Quest name="Der belagerte Bauernhof" table_name="besieged_farm">
+<Quest name="Der belagerte Bauernhof" table_name="farm_siege">
 	
 	<Description>
-		if (besieged_farm.finished) then
-			return _("Quest finished")
+		if (farm_siege.finished==true) then
+			return _("Die Bauern sind gerettet, die Goblins erschlagen und die Dienstleistung bezahlt. Was will man mehr?")
+		elseif(farm_siege.rescued==true)then
+			return(_("Die Bauern sind gerettet und die Goblins erschlagen. Zeit, den Lohn fuer all die Muehen in Joringsbrueck abzuholen."))
+		elseif(farm_siege.goblins_cleared==true)then
+			return(_("Die Goblins rund um Brons Farm weilen nicht mehr unter den Lebenden. Ich sollte mal an die Tuer klopfen und sehen, dass alles in Ordnung ist. Keine Bauern, kein Geld."))
 		else
-			return _("The farm of a peasent named Michel Bron is under siege by goblins. His family needs help - and fast.")
+			return _("Der Hof eines Bauern namens Michel Bron wird von Goblins belagert. Seine Familie braucht Hilfe - schnell.")
 		end
 	</Description>
-
+	
+	<NPC refname="Sergeant Lutterer">
+		<Topic name= "get_quest_farm_siege" start_option="Der Bauernhof">
+			<Condition>
+				return(farm_siege.started~=true);
+			</Condition>
+			<Effect>
+				addStandardRoles();
+				addSpeaker(joringsbridge.sergeant,"sergeant");
+					speak("sergeant",_("Ah! Habt ihr doch noch Lust bekommen, Euch das Gold zu verdienen?"),"aloof");
+					if(solo())then
+						speak("sergeant",_("Glaubt ja nicht, ich habe Euch nicht dort herumlungern sehen."));
+					elseif(duo())then
+						speak("sergeant",_("Glaubt ja nicht, ich habe Euch und Euren Freund nicht dort herumlungern sehen."));
+					else
+						speak("sergeant",_("Glaubt ja nicht, ich habe Euch und Eure Freunde nicht dort herumlungern sehen."));
+					end;
+					speak("sergeant",_("Aber ich will mich nicht beschweren."),"thoughtful");
+					speak("sergeant",_("Ihr wisst, wie es laeuft: Geht in die noerdliche Wiese und vertreibt die Goblins, die sich um Brons Hof herum aufhalten."),"normal");
+					speak("sergeant",_("Wie Ihr das anstellt, ist mir egal, und wenn Ihr sie alle roh verschlingt."));
+					speak("sergeant",_("Nur ein Scherz."),"amused");
+					speak("sergeant",_("Wenn Ihr es geschafft habt, kommt Ihr zu mir zurueck."),"normal");
+					speak("PL",_("Schon unterwegs."));
+					farm_siege.started=true;
+			</Effect>
+		</Topic>
+	</NPC>
+	
+	<Region name="aisNorthMeadow">
+		<Event trigger="create_region">
+			<Effect>
+				addArea('areaFarmEnemies',{'circle','bronsFarm:locFarm',20});
+				local list = getMonstersInArea('WillardEnemiesArea')
+				
+				farm_siege_tmp.wife = createObject("peasant_f","bronsFarm:locWife");
+				moveObject(farm_siege_tmp.wife,"bronsFarm:locWife",false);
+				set(farm_siege_tmp.wife,"ignored_by_ai",true);
+				
+				if (farm_siege.goblins_cleared ~= true) then
+					createMonsterGroup("farm_goblins_shaman","bronsFarm:locGoblins1")
+					createMonsterGroup("farm_goblins_warchief","bronsFarm:locGoblins2")
+				end;
+			
+				farm_siege_tmp.door = getObjectByNameRef("bronsFarmDoor");
+				scriptobjectvar[farm_siege_tmp.door]["locked"] = true;
+			</Effect>
+		</Event>
+		
+		<Event trigger ="unit_dead">
+			<Condition>
+				if (farm_siege.started == true and farm_siege.goblins_cleared~= true) then
+					return true
+				else
+					return false
+				end
+			</Condition>
+			<Effect>
+				insertTrigger("checkFarmSafety")
+			</Effect>
+		</Event>
+		
+		
+		<Event trigger ="checkFarmSafety">
+			<Condition>
+				local list = getMonstersInArea('areaFarmEnemies')
+				if (list[2] == nil and farm_siege.started == true and farm_siege.goblins_cleared~= true) then
+					return true
+				else
+					return false
+				end
+			</Condition>
+			<Effect>
+				farm_siege.goblins_cleared=true;
+				local heroes = filter(getPlayers(),isInRegion);
+				unitSpeak(heroes[1],_("Das sollten genug Goblins gewesen sein. Ich sehe besser mal nach Brons Familie."),"thoughtful");
+			</Effect>
+		</Event>
+		
+		<Event trigger="object_use" once="true">
+			<Condition>
+				return((trigger.used_object==farm_siege_tmp.door)and(farm_siege.goblins_cleared==true));
+			</Condition>
+			<Effect>
+				createDialog();
+				
+				local players = getPlayersInArea('areaFarmEnemies')
+				players=listToSet(players);
+				
+				addPlayersToDialog(players);
+				addStandardRoles(players);
+				
+				addSpeaker(farm_siege_tmp.wife,"wife");
+				
+				local leader=getSpeaker("PL");
+				local name = get(leader,"name");
+				print(name);
+				
+				speak("PL",_("Die Goblins sind weg. Geht es euch gut?"),"normal");
+				speak("wife",_("Ich danke euch."));
+				speak("wife",_("Leider koennen wir euch nicht hereinbitten."));
+				speak("wife",_("Unsere Barrikaden sind recht schwer."));
+				speak("wife",_("Aber ich werde meinem Mann Bescheid geben, dass es uns gut geht."));
+				speak("PL",_("Wie denn das?"),"surprised");
+				speak("wife",_("Mit einem Avaeras-Kristall natuerlich. Er wird schon seit Generationen in meiner Familie vererbt."));
+				speak("PL",_("Natuerlich. Dumm von mir."),"normal");
+				if((getSpeaker("mage")~=nil)and(getSpeaker("PL")~=getSpeaker("mage")))then
+					speak("mage",_("Also ehrlich, "..name..". Dachtest du, irgendwer benutzt heutzutage noch Brieftauben?"));
+					if(duo())then
+						speak("PL",_("Lass uns einfach das Geld abholen gehen."),"offended");
+					else
+						speak("PL",_("Lasst uns einfach das Geld abholen gehen."),"offended");
+					end;
+				end;
+				--exp verteilen
+				--addPlayersExperience(3000, "farm_siege_xp")
+				farm_siege.rescued=true;
+			</Effect>
+		</Event>
+	</Region>
+	
+	<NPC refname="Sergeant Lutterer">
+		<Topic name="farm_siege_reward" start_option="Brons Farm">
+			<Condition>
+				return((farm_siege.rescued==true)and(farm_siege.finished ~=true));
+			</Condition>
+			<Effect>
+				addSpeaker(joringsbridge.sergeant,"sergeant")
+				speak("player",_("Es ist vollbracht."));
+				speak("sergeant",_("Hab ich schon gehoert."),"amused");
+				speak("sergeant",_("Michel ist gerade in der Schenke und besaeuft sich auf Euer Wohl."),"amused");
+				speak("sergeant",_("Aber das soll nicht mehr Eure Sorge sein."),"normal");
+				speak("sergeant",_("Hier habt ihr das Geld."),"normal")
+				addPlayersGold(2000, getPlayers());
+				farm_siege.finished=true;
+			</Effect>
+		</Topic>
+	</NPC>
 </Quest>
 

@@ -53,7 +53,11 @@
 		
 		<Event trigger="command_complete" once = "true">
 			<Condition>
-				return ((trigger.unit == herbalist_tmp.gertlinde) and(herbalist.asked == true));
+				if(herbalist.started ~= true)then
+					return ((trigger.unit == herbalist_tmp.gertlinde) and(herbalist.asked == true));
+				else
+					return false;
+				end;
 			</Condition>
 			<Effect>
 				setCurrentDialogue(herbalist_tmp.player);

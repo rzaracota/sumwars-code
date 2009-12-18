@@ -78,4 +78,24 @@
 			<Detach objectname="magicEnergy1" />
 		</Deactivation>
 	</State>
+	
+	<State name="goblin_magic_shield" reference = "ice_arrows">
+		<Activation>
+			<ParticleSystem objectname="buffIce" source="GoblinBuffIce"/>
+			<ParticleSystem objectname="buffFire" source="GoblinBuffFire"/>
+			<ParticleSystem objectname="buffAir" source="GoblinBuffAir"/>
+		</Activation>
+		
+		<Active time="1000">
+			<Rotation objectname="buffIce" start="0.0" end="1.0" start_vec="0.0 0.0 0.0" end_vec="0.0 360.0 0.0" />
+			<Rotation objectname="buffFire" start="0.0" end="1.0" start_vec="0.0 0.0 0.0" end_vec="0.0 360.0 0.0" />
+			<Rotation objectname="buffAir" start="0.0" end="1.0" start_vec="0.0 0.0 0.0" end_vec="0.0 360.0 0.0" />
+		</Active>
+		
+		<Deactivation>
+			<Detach objectname="buffFire" />
+			<Detach objectname="buffIce" />
+			<Detach objectname="buffAir" />
+		</Deactivation>
+	</State>
 </RenderInfo>

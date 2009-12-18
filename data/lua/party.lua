@@ -156,11 +156,15 @@ function duo()
 	return (not solo() and (getPlayers()[3] == nil)); 
 end;
 		
-function addPlayersExperience(xp, players)
-	players = players or getPlayers();
+--reward_id: a string that indicates the privateVar that has to be ~=true if a reward is to be received
+function addPlayersExperience(xp, reward_id)
+	local players = getPlayers();
 	local i,player;
 	for i,player in ipairs(players) do
-		set(player,"experience",get(player,"experience") + xp);
+		if(getPlayerPrivateVar(player,reward_id)~=true)then
+			set(player,"experience",get(player,"experience") + xp);
+			setPlayerPrivateVar(player,reward_id,true);
+		end;
 	end;
 end;
 

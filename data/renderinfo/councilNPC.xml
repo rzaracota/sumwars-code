@@ -1,24 +1,4 @@
-<RenderInfo name = "guardPole" parent="playerbase">
-	<Action name="noaction">
-		<Animation name="idlePole" />
-	</Action>
-	
-	<Action name="die">
-		<Animation name="die" />
-	</Action>
-	
-	<Action name="walk">
-		<Animation name="walkOneHand" />
-	</Action>
-	
-	<Action name="magic_attack">
-		<Animation name="attackMagicTwoHands" />
-		<ParticleSystem objectname="magicEnergy" bone="mainmesh:itemRightHand" source="Magic_Arrow" position="0.0 0.0 -1.4" />
-		<Detach time="0.4" objectname="magicEnergy" />
-	</Action>
-</RenderInfo>
-
-<RenderInfo name="guardPole_cnl" parent="guardPole">
+<RenderInfo name="guardPole_cnl" parent="guardPoleBase">
 	<Entity source="guardCnl.mesh"/>
 	<Entity objectname="weapon" bone="itemRightHand" source="speer_pol.mesh" />
 	<Subobject objectname="armor" source="counclArmTolec" />
@@ -44,12 +24,18 @@
 	<Entity objectname="shoulderL" bone="shoulderJointLeft" source="konzPlateL.mesh" />
 </RenderInfo>
 
-<RenderInfo name = "soren" parent="guardPole">
+<RenderInfo name = "soren" parent="guardPoleBase">
 	<Entity source="soren.mesh"/>
 	<Entity objectname="head" bone="crown" source="head_m1.mesh" />
 	<Entity objectname="hat" bone="crown" source="turban_hat.mesh" />
 	<Subobject objectname="robe" source="counclRobeSoren" />
 	<Entity objectname="weapon" bone="itemRightHand" source="council_stf.mesh" />
+	
+	<Action name="holdItem">
+		<Animation name="showItemPole"/>
+		<Entity  objectname="stone" bone="itemLeftHand" source="stone_void.mesh"/>
+		<Detach objectname="stone" time="0.99"/>
+	</Action>
 </RenderInfo>
 
 <RenderInfo name = "sorenCrystal" >
@@ -88,7 +74,7 @@
 	</Action>
 </RenderInfo>
 
-<RenderInfo name = "councilMage" parent="guardPole">
+<RenderInfo name = "councilMage" parent="guardPoleBase">
 	<Entity source="soren.mesh"/>
 	<Entity objectname="head" bone="crown" source="head_m1.mesh" />
 	<Entity objectname="hat" bone="crown" source="turban_hat.mesh" />

@@ -1,4 +1,4 @@
-<Quest name="Maylons Grave" table_name="maylons_grave">
+<Quest name="Maylons Grab" table_name="maylons_grave">
 	
 	<Description>
 		if (maylons_grave.finished) then
@@ -6,9 +6,9 @@
 		elseif(maylons_grave.goblins_killed==true)then
 			return _("Ich bin in Maylons Grab auf ein paar Goblins gestossen, die irgendwelchen Unsinn gebrabbelt haben und von einem Zombie verfolgt wurden. Irgendetwas geht in diesem Grab vor sich. Vielleicht sollte ich mal einen Blick drauf werfen.");
 		elseif(maylons_grave.listened_to_goblins==true)then
-			return _("Ich bin in Maylons Grab auf ein paar Goblins gestossen, die von einem Zombie verfolgt wurden. Irgendetwas geht in diesem Grab vor sich. Vielleicht sollte ich mal einen Blick drauf werfen.");
-		else
 			return _("Ich bin in Maylons Grab auf ein paar Goblins gestossen. Laut ihrem Schamanen hat ein Nekromant unten in der Krypta einige Untote erweckt. Ich sollte mal einen Blick drauf werfen.");
+		else
+			return _("Ich bin in Maylons Grab auf ein paar Goblins gestossen, die von einem Zombie verfolgt wurden. Irgendetwas geht in diesem Grab vor sich. Vielleicht sollte ich mal einen Blick drauf werfen.");
 		end
 	</Description>
 
@@ -259,24 +259,52 @@
 		<Event trigger="goblinsWalkAway" once ="true">
 			<Effect>
 				addUnitCommand(maylons_grave_tmp.Goblin1,"walk","entry_south")
+				addUnitCommand(maylons_grave_tmp.Goblin2,"walk","entry_south")
+				addUnitCommand(maylons_grave_tmp.Goblin3,"walk","entry_south")
+				addUnitCommand(maylons_grave_tmp.Goblin4,"walk","entry_south")
+				addUnitCommand(maylons_grave_tmp.GabResh,"walk","entry_south") --areaGoblinsAway
+			</Effect>
+		</Event>
+		<Event trigger="unit_moved">
+			<Condition>
+				local unit = get(trigger.unit,"subtype");
+				if((unit == "goblin_gabresh")or(unit == "goblin_gabclan_bow")or(unit == "goblin_gabclan_sword"))then
+					return (unitIsInArea(trigger.unit,"areaGoblinsAway"));
+				end;
+				return false;
+			</Condition>
+			<Effect>
+				deleteObject(trigger.unit);
 			</Effect>
 		</Event>
 	</Region>
 <!-- Ende des Goblingespraeches -->		
 	<Region name="aisMaylonsGraveL1">
+		<Event trigger ="create_region" once = "true">
+			<Effect>
+				addArea("areaGathering",{"circle",{0,0},10000});
+			</Effect>
+		</Event>
+		
 		<Event trigger="create_template">
 			<Condition>
-				print("inserted a template");
-				return true;
+				return (maylons_grave.finished~=true);
 			</Condition>
 			<Effect>
-				print("counting templates");
-				if(maylons_grave_tmp.tmpl==nil)then
-					maylons_grave_tmp.tmpl=1;
-					print("insert position "..maylons_grave_tmp.tmpl);
-				else
-					maylons_grave_tmp.tmpl=maylons_grave_tmp.tmpl+1;
-					print("insert position "..maylons_grave_tmp.tmpl);
+				if(trigger.templname=="randomLocation")then
+					createMonsterGroup("zombies",trigger.locCenter,8);
+				end;
+			</Effect>
+		</Event>
+		
+		<Event trigger="enter_region" once="true">
+			<Condition>
+				return maylons_grave.finished==true;
+			</Condition>
+			<Effect>
+				local monsters = getMonstersInArea("areaGathering");
+				for i,monster in ipairs(monsters) do
+					set(monster, "health",0);
 				end;
 			</Effect>
 		</Event>
@@ -285,16 +313,29 @@
 	<Region name="aisMaylonsGraveL2">
 		<Event trigger ="create_region" once = "true">
 			<Effect>
-			--TODO: Maylon und Konsorten hier, wenn sie fertig sind
+				addArea("areaGathering",{"circle",{0,0},10000});
 				if (maylons_grave.freed ~= true) then
-					createMonsterGroup("lich_skeletons","graveChamber:locMaylon");
+					maylons_grave_tmp.maylon=createObject("maylonMummy","graveChamber:locMaylon");
+					createObject("skel_maylon","graveChamber:locMaylonGuard1");
+					createObject("skel_maylon","graveChamber:locMaylonGuard2");
+				end;
+			</Effect>
+		</Event>
+		
+		<Event trigger="create_template">
+			<Condition>
+				return (maylons_grave.finished~=true);
+			</Condition>
+			<Effect>
+				if(trigger.templname=="randomLocation")then
+					createMonsterGroup("zombies",trigger.locCenter,8);
 				end;
 			</Effect>
 		</Event>
 		
 		<Event trigger ="unit_hit">
 			<Condition>
-				return(get(trigger.defender,"subtype")=="lich")
+				return(trigger.defender==maylons_grave_tmp.maylon);
 			</Condition>
 			<Effect>
 				if(trigger.attacker~=nil)then
@@ -303,12 +344,16 @@
 			</Effect>
 		</Event>
 		
-		<Event trigger ="unit_dead">
+		<Event trigger ="unit_dead" once="true">
 			<Condition>
-				return(get(trigger.unit,"subtype")=="lich")
+				return(trigger.unit == maylons_grave_tmp.maylon);
 			</Condition>
 			<Effect>
 				maylons_grave.freed = true;
+				local monsters = getMonstersInArea("areaGathering");
+				for i,monster in ipairs(monsters) do
+					set(monster, "health",0);
+				end;
 				local position = get(trigger.unit,"position");
 				addUnitCommand(maylons_grave_tmp.lastAttacker,"walk",position,3);
 				maylons_grave_tmp.maylon=createObject("maylon",position);
@@ -324,7 +369,6 @@
 				end;
 			</Condition>
 			<Effect>
-				print("and they're talking")
 				lookAtObject(maylons_grave_tmp.lastAttacker,maylons_grave_tmp.maylon);
 				lookAtObject(maylons_grave_tmp.maylon,maylons_grave_tmp.lastAttacker);
 				createDialog();
@@ -336,10 +380,13 @@
 				speak("maylon",_("In meinem Sarkophag befinden sich viele Hinterlassenschaften aus meinem sterblichen Leben."),"normal");
 				speak("maylon",_("Ich habe schon lange keine Verwendung mehr dafuer. Sucht Euch eine Waffe aus, die euch gefaellt."),"normal");
 				speak("maylon",_("Das gilt auch fuer Eure Freunde."),"normal");
+				speak("maylon",_("Jetzt muss ich aber wieder zurueck in die Glueckseligkeit von Akerans Ewiger Oase."),"excited");
+				executeInDialog("set("..maylons_grave_tmp.maylon..",'health',0)");
+				speakPause(1000);
+				speak("player",_("Ob er das auch gesagt haette, wenn er wuesste, dass er erst mal einen Umweg ueber Harads Hoelle nehmen wird?"),"sad")
 				maylons_grave.finished=true;
-				--TODO: Alle Untoten toeten
 			</Effect>
-		</Event>
+		</Event>		
 	</Region>	
 </Quest>
 

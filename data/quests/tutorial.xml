@@ -18,7 +18,7 @@
 			elseif (tutorial.phase == "findSecretDoor") then
 				return _("Finde den geheimen Zugang zur Bibliothek.");
 			elseif (tutorial.phase == "killlouses") then
-				return _("Töte alle Abkömmlinge des Behemoth.");
+				return _("Toete alle Abkömmlinge des Behemoth.");
 			end
 			return _("Quest description")
 		end
@@ -196,7 +196,11 @@
 				speak("PL",_("Das war mindestens so schlimm wie die ersten Jahre in der Hölle! Wo bin ich hier?"),"injured");
 				
 				if (not solo()) then
-					speak("PL",_("Und wer sind die anderen müden Gestalten?"),"surprised");
+					if(duo())then
+						speak("PL",_("Und wer ist die andere müde Gestalt?"),"surprised");
+					else
+						speak("PL",_("Und wer sind die anderen müden Gestalten?"),"surprised");
+					end;
 				end;
 				
 				local warrior = getRolePlayerNonPref("warrior",nil,blockedspeaker);
@@ -963,7 +967,7 @@
 				addSpeaker(tutorial_tmp.tolec,"Tolec",true);
 				addSpeaker(tutorial_tmp.derred,"Derred",true);
 				
-				speak("Tolec",_("Dieses Verdammte Ding. Ich hoffe die Wände halten."),"fear")
+				speak("Tolec",_("Dieses verdammte Ding. Ich hoffe die Wände halten."),"fear")
 				speak("Derred",_("Verteilt schnell euren neuen Punkte und dann nichts wie weg von hier."),"fear");
 			</Effect>
 		</Event>
@@ -1240,15 +1244,15 @@
 	
 		<Topic name="secret_door"  start_option="Geheimtuer oeffnen">
 			<Condition>
-				return (tutorial.phase == "findSecretDoor")
+				return (tutorial_tmp.mutslugs_dead==true);
 			</Condition>
 			<Effect>
 				addAllPlayersToDialog();
 				addSpeaker(tutorial_tmp.tolec,"Tolec",true);
 				addSpeaker(tutorial_tmp.derred,"Derred",true);
 				
-				speak("Derred","Seht ihr das Regal da in dem Durchgang? Das ist die Tuer. Einfach bei Seite schieben, indem Ihr darauf klickt.","normal");
-				speak("Derred","Und Ihr solltet wohl darauf hoffen, dass keine Falle daran ist.","grin");
+				speak("Derred",_("Seht ihr das Regal da in dem Durchgang? Das ist die Tuer. Einfach bei Seite schieben, indem Ihr darauf klickt."),"normal");
+				speak("Derred",_("Und Ihr solltet wohl darauf hoffen, dass keine Falle daran ist."),"grin");
 			</Effect>
 		</Topic>
 	</NPC>
@@ -1256,16 +1260,15 @@
 	<NPC refname="Tolec">
 		<Topic name="secret_door" start_option="Geheimtuer oeffnen">
 			<Condition>
-				print(tutorial.phase);
-				return (tutorial.phase == "findSecretDoor")
+				return (tutorial_tmp.mutslugs_dead==true);
 			</Condition>
 			<Effect>
 				addAllPlayersToDialog();
 				addSpeaker(tutorial_tmp.tolec,"Tolec",true);
 				addSpeaker(tutorial_tmp.derred,"Derred",true);
 				
-				speak("Tolec","Seht ihr das Regal da in dem Durchgang? Das ist die Tuer. Schiebt sie einfach beiseite, indem Ihr darauf klickt.","normal");
-				speak("Derred","Hoffentlich explodiert nichts.","thoughtful");
+				speak("Tolec",_("Seht ihr das Regal da in dem Durchgang? Das ist die Tuer. Schiebt sie einfach beiseite, indem Ihr darauf klickt."),"normal");
+				speak("Derred",_("Hoffentlich explodiert nichts."),"thoughtful");
 			</Effect>
 		</Topic>
 	</NPC>

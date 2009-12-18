@@ -1,9 +1,5 @@
 <Quest name="Fortify Dwarfenwall" table_name="fortify_dwall">
-	
-	<Init>
-		local a = 2
-	</Init>
-	
+
 	<Description>
 		if (fortify_dwall.finished) then
 			return _("Quest finished")
@@ -108,11 +104,14 @@
 				fortify_dwall_tmp.mage = getRolePlayerNonPref("magopt", getPlayers(), nonPrefs);
 				nonPrefs[fortify_dwall_tmp.mage]=true;
 				fortify_dwall_tmp.warrior = getRolePlayerNonPref("waropt", getPlayers(), nonPrefs);
+				
 				print("started nagging")
 				print(fortify_dwall_tmp.leader)
 				print(fortify_dwall_tmp.warrior)
 				print(fortify_dwall_tmp.mage)
+				
 				unitSpeak(fortify_dwall_tmp.leader, _("Dieses Konzil ist auch nicht so besonders..."),"bored");
+				
 				if(fortify_dwall_tmp.mage ~= fortify_dwall_tmp.warrior)then
 					startTimer("continueNagging",1500);
 				end;
@@ -134,7 +133,7 @@
 		</Event>
 		<Event trigger="leaderIntervene" once="true">
 			<Effect>
-				unitSpeak(fortify_dwall_tmp.leader, _("Scht! Streiten könnt ihr euch später."),"unhappy");
+				unitSpeak(fortify_dwall_tmp.leader, _("Scht! Streiten koennt ihr euch spaeter."),"unhappy");
 			</Effect>
 		</Event>
 
@@ -322,7 +321,8 @@
 				speak("Derred",_("Jetzt komm schon, der weiß was er tut."),"fear");
 				
 				executeInDialog("insertTrigger('guards_out')");
-				
+				removeSpeaker("Tolec");
+				removeSpeaker("Derred");
 				speak("magopt",_("Nette Huette!"),"sneer");
 				speak("waropt",_("Naja, etwas unordentlich…"),"thoughtful");
 				speak("waropt",_("...um nicht zu sagen: schleimig."),"grin");
@@ -339,7 +339,7 @@
 					speak("waropt",_('Da gibst du dir solche Mühe und alles was dabei raus kommt ist "schwierig".'),"sneer");
 					speak("magopt",_("Pft. Ich hätte große Lust den Laden abzufackeln."),"unhappy");
 				else
-					speak("magopt",_("Ich hätte große Lust den Laden abzufackeln."),"unhappy");
+					speak("magopt",_("Ich haette große Lust den Laden abzufackeln."),"unhappy");
 				end;
 				local magopt = getSpeaker("magopt");
 				if (magopt ~= getSpeaker("any")) then
@@ -351,17 +351,22 @@
 					speak("arcopt",_("Und die Chance ist recht hoch... die Monster hier haben schließlich alle ihren eigenen Kopf."),"grin");
 					speak("priest",_("Ich kenn da einen netten kleinen Bannspruch..."));
 				end;
+				
+				executeInDialog('addCameraPosition(2000,"locSorenWindclaw",-90,30,10)');
+				setSpeakerAnimation("Soren","holdItem",4000);
 				if(solo())then
-					speak("Soren",_("Wuerdet Ihr bitte kurz auf diesen Kristall sehen. _solo"),"bored");
+					speak("Soren",_("Wuerdet Ihr bitte kurz auf diesen Stein sehen. _solo"),"bored");
 				else
-					speak("Soren",_("Wuerdet ihr bitte kurz auf diesen Kristall sehen."),"bored");
+					speak("Soren",_("Wuerdet ihr bitte kurz auf diesen Stein sehen."),"bored");
 				end;
 				-- Er haelt einen Kristall in die Luft. Die Gruppe verstummt sofort und
 				-- dreht sich in Richtung des Gegenstandes.
+	
+				executeInDialog('addCameraPosition(1000,"locCamera", -90,60, 30)');
 				
 				speak("any",_("Ist das etwa ein... ?"),"fear");
 				speak("Soren",_("Ganz recht."),"grin");
-				speak("Soren",_("Es handelt sich um einen Kristall aus dem Herzen von Harads Hoelle."));
+				speak("Soren",_("Es handelt sich um einen Stein aus dem Herzen von Harads Hoelle."));
 				speak("PL",_("Wie kann es sein, dass ihr noch am Leben seid?"),"surprised");
 				speak("Soren",_("In der Tat die richtige Frage."),"grin");
 				if(solo())then
@@ -786,7 +791,7 @@
 		</Event>
 	</Region>
 	<NPC refname="Soren Windclaw">
-	<Topic name="work_for_council">
+		<Topic name="work_for_council">
 			<Effect>
 				if(solo())then
 					speak("PL",_("Ich werde erst mal sehen, wie sich die Sache entwickelt."),"thoughtful");
@@ -796,6 +801,7 @@
 					speak("PL",_("Wehe die halten ihr Versprechen nicht."),"threaten");
 				end;
 				deleteObject(fortify_dwall_tmp.comCrystal)
+				fortify_dwall.crystal=true;
 			</Effect>
 		</Topic>
 		<Topic name="dont_work_for_council">

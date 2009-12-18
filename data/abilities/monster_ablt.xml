@@ -111,7 +111,7 @@
 		 timer_value="5000.000000"
 		 base_ability="noaction"
 		 critical_percent="0.660000"
-		 target_type="party_multi">
+		 target_type="party_all">
 	<Flag name="mute_affected" />
 	<Effect>
 		<LuaImplementation>
@@ -274,7 +274,7 @@
 			setBaseModValue("resist_ice",20);
 			setBaseModValue("resist_fire",20);
 			setBaseModValue("resist_air",20);
-			setBaseModValue("flag","bleed");
+			setBaseModValue("flag","goblin_magic_shield");
 		</LuaImplementation>
 	</BaseAttributesMod>
 </Ability>
