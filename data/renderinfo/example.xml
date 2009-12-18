@@ -28,14 +28,14 @@
 		<Subobject time="0.9" objectname="shield" bone="mainmesh:itemLeftHand" source="example_shield" />
 	</Action>
 	
-	<State name="statusname">
-		<Activation>
+	<State name="statusname" >
+		<Activation time="200">
 		</Activation>
 		
-		<Active >
+		<Active time="1000">
 		</Active>
 		
-		<Deactivation>
+		<Deactivation time="200">
 		</Deactivation>
 	</State>
 </RenderInfo>

@@ -3308,13 +3308,23 @@ bool Creature::takeDamage(Damage* d)
 		// Anwenden wenn nicht immun, nicht temporaer immun und Staerke der Modifikation groesser als die eigene Willenskraft
 		if (d->m_status_mod_power[i]>0 && !(m_base_attr_mod.m_immunity & (1 << i)) && m_dyn_attr.m_status_mod_immune_time[i]==0)
 		{
+			float rel;
+			if (m_base_attr_mod.m_willpower == 0)
+			{
+				rel = 1000000;
+			}
+			else
+			{
+				rel = d->m_status_mod_power[i]*1.0 / m_base_attr_mod.m_willpower;
+			}
+			float chance = atan(rel)/(3.1415/2);
 			DEBUG5("mod %i modpow %i wp %i",i,d->m_status_mod_power[i],m_base_attr_mod.m_willpower);
-			if (d->m_status_mod_power[i]>m_base_attr_mod.m_willpower)
+			if (Random::random()<chance)
 			{
 				// Modifikation anwenden
-				t = (d->m_status_mod_power[i]-m_base_attr_mod.m_willpower)*1.0 / m_base_attr_mod.m_willpower;
-				t *= 3000;
-				if (t>m_dyn_attr.m_status_mod_time[i])
+				float times[NR_STATUS_MODS] = {15000 /* BLIND*/,10000 /*POISONED*/ ,10000 /*BERSERK*/ ,8000 /*CONFUSED*/,15000 /*MUTE*/,4000 /*PARALYZED*/,2500 /*FROZEN*/,15000 /*BURNING*/};
+				t = rel * times[i];
+				if (t>m_dyn_attr.m_status_mod_time[i] && t>500)
 				{
 					m_dyn_attr.m_status_mod_time[i] =t;
 					addToNetEventMask(NetEvent::DATA_STATUS_MODS);
