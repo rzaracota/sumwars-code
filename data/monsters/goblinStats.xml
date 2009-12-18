@@ -1032,18 +1032,20 @@
 
 
 <!-- Gab'Resh, Maylons Grab -->
-<!-- L8 -->
+<!-- L7 -->
 <Monster type="MONSTER" subtype="goblin_gabresh" name="Gab'Resh" fraction="monster" race="goblin" layer="NORMAL">
 	<RenderInfo name="goblin_gabresh" />
 	<Dropslots >
-		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.05" pgold="0.05" min_gold="10" max_gold="80" min_level="4" max_level="10" magic_prob="0.1" magic_power="300" />
-		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.03" pgold="0.05" min_gold="5" max_gold="50" min_level="2" max_level="7" magic_prob="0.2" magic_power="250" />
+		<Dropslot pbig="0.2" pmedium="0.3" psmall="0.1" pgold="0.05" min_gold="30" max_gold="100" min_level="4" max_level="8" magic_prob="0.3" magic_power="350" />
+		<Dropslot pbig="0.2" pmedium="0.3" psmall="0.1" pgold="0.05" min_gold="20" max_gold="60" min_level="3" max_level="7" magic_prob="0.3" magic_power="300" />
+		<Dropslot pbig="0.00" pmedium="0.0" psmall="0.4" pgold="0.00" min_gold="20" max_gold="60" min_level="2" max_level="6" magic_prob="0.2" magic_power="300" />
+		<Dropslot pbig="0.00" pmedium="0.0" psmall="0.00" pgold="1.00" min_gold="30" max_gold="100" />
 	</Dropslots>
 	
 	<BasicAttributes
-					experience="40"
-					level="8"
-					max_health="180"
+					experience="100"
+					level="7"
+					max_health="200"
 					armor="15"
 					block="10"
 					attack="10"
@@ -1075,22 +1077,22 @@
 	
 	<Geometry radius="0.5" />
 	
-	<AI ai_sight_range="10" />
+	<AI ai_sight_range="12" />
 </Monster>
 
 <!-- Gab-Clan, Messerkaempfer, Maylons Grab -->
-<!-- L8 -->
+<!-- L5 -->
 <Monster type="MONSTER" subtype="goblin_gabclan_sword" name="Gab Clan Goblin" fraction="monster" race="goblin" layer="NORMAL">
 	<RenderInfo name="goblin_gabclan_sword" />
 	<Dropslots >
-		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.05" pgold="0.05" min_gold="10" max_gold="80" min_level="4" max_level="10" magic_prob="0.1" magic_power="300" />
-		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.03" pgold="0.05" min_gold="5" max_gold="50" min_level="2" max_level="7" magic_prob="0.2" magic_power="250" />
+		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.05" pgold="0.05" min_gold="10" max_gold="80" min_level="3" max_level="6" magic_prob="0.1" magic_power="250" />
+		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.03" pgold="0.05" min_gold="5" max_gold="50" min_level="2" max_level="7" magic_prob="0.2" magic_power="200" />
 	</Dropslots>
 	
 	<BasicAttributes
-					experience="40"
-					level="8"
-					max_health="160"
+					experience="30"
+					level="5"
+					max_health="110"
 					armor="40"
 					block="20"
 					attack="50"
@@ -1124,24 +1126,24 @@
 </Monster>
 
 <!-- Gab-Clan, Bogenschuetze, Maylons Grab -->
-<!-- L7 -->
+<!-- L5 -->
 <Monster type="MONSTER" subtype="goblin_gabclan_bow" name="Gab Clan Goblin" fraction="monster" race="goblin" layer="NORMAL">
 	<RenderInfo name="goblin_gabclan_bow" />
 	<Dropslots >
-		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.05" pgold="0.05" min_gold="5" max_gold="60" min_level="4" max_level="9" magic_prob="0.1" magic_power="250" />
-		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.04" pgold="0.05" min_gold="1" max_gold="40" min_level="2" max_level="6" magic_prob="0.2" magic_power="200" />
+		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.05" pgold="0.05" min_gold="10" max_gold="80" min_level="3" max_level="6" magic_prob="0.1" magic_power="250" />
+		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.03" pgold="0.05" min_gold="5" max_gold="50" min_level="2" max_level="7" magic_prob="0.2" magic_power="200" />
 	</Dropslots>
 	
 	<BasicAttributes
-					experience="26"
+					experience="30"
 					level="7"
-					max_health="80"
+					max_health="70"
 					armor="15"
 					block="15"
 					attack="80"
 					power="35"
 					strength="20"
-					dexterity="30"
+					dexterity="25"
 					magic_power="5"
 					willpower="20"
 					resistances_physical="0"
