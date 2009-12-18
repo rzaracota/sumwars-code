@@ -94,6 +94,163 @@ SlugSpit
 
 }
 
+//GoblinParticles
+GoblinBuffIce
+{
+    material        Flare
+    particle_width  15
+    particle_height 15
+    cull_each       false
+    quota           200
+    billboard_type  point
+
+    // Area emitter
+    emitter Point
+{
+        angle           15
+        emission_rate   80
+        time_to_live    0.05
+        position        -30 60 30
+        direction       0 -1 0
+        velocity_min  	15
+        velocity_max  	20
+        colour_range_start  0 0.4 0.8 0.0
+        colour_range_end    0.2 0.5 0.8 0.0
+        width           10
+        height          10
+        depth           10
+}
+
+    // Fader
+    affector ColourFader2
+{
+        red1 +0.4
+        green1 +0.4
+        blue1 +0.4
+        alpha1 +0.7
+
+        red2 -0.25
+        green2 -0.25
+        blue2 -0.25
+        alpha2 -0.3333
+
+        state_change 3.5
+}
+}
+
+GoblinBuffFire
+{
+    material        Flare
+    particle_width  15
+    particle_height 15
+    cull_each       false
+    quota           200
+    billboard_type  point
+
+    // Area emitter
+    emitter Point
+{
+        angle           15
+        emission_rate   80
+        time_to_live    0.05
+        position        -30 60 -30
+        direction       0 -1 0
+        velocity_min  	15
+        velocity_max  	20
+        colour_range_start	1 0 0
+        colour_range_end 	0.5 0.3 0
+        width           10
+        height          10
+        depth           10
+}
+
+    // Fader
+    affector ColourFader2
+{
+        red1 +0.4
+        green1 +0.4
+        blue1 +0.4
+        alpha1 +0.7
+
+        red2 -0.25
+        green2 -0.25
+        blue2 -0.25
+        alpha2 -0.3333
+
+        state_change 3.5
+}
+}
+
+GoblinBuffAir
+{
+    material        Flare
+    particle_width  15
+    particle_height 15
+    cull_each       false
+    quota           200
+    billboard_type  point
+
+    // Area emitter
+    emitter Point
+{
+        angle           15
+        emission_rate   80
+        time_to_live    0.05
+        position        30 60 0
+        direction       0 -1 0
+        velocity_min  	15
+        velocity_max  	20
+		colour_range_start	0.9 0.9 0.99 
+        colour_range_end	0.6 0.6 1
+        width           10
+        height          10
+        depth           10
+}
+
+    // Fader
+    affector ColourFader2
+{
+        red1 +0.4
+        green1 +0.4
+        blue1 +0.4
+        alpha1 +0.7
+
+        red2 -0.25
+        green2 -0.25
+        blue2 -0.25
+        alpha2 -0.3333
+
+        state_change 3.5
+}
+}
+
+GoblinFreeze
+{
+    material        Flare
+    particle_width  15
+    particle_height 15
+    cull_each       false
+    quota           10000
+    billboard_type  point
+
+    // Area emitter
+    emitter Point
+{
+        angle           15
+        emission_rate   20
+        time_to_live    0.2
+        position        0 0 50
+        direction       0 -1 0
+        velocity_min  	15
+        velocity_max  	20
+        colour_range_start	0.6 0.6 1
+        colour_range_end	0.2 0.2 0.6
+        width           10
+        height          10
+        depth           10
+}
+}
+
 //blockade of fire
 FirewallBlock
 {
