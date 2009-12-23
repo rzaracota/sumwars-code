@@ -1,4 +1,4 @@
-﻿<Quest name="The Trader" table_name="theTrader">
+<Quest name="The Trader" table_name="theTrader">
 	<Description>
 		if (fortify_dwall.finished) then
 			return _("Quest finished")
@@ -216,7 +216,7 @@
 					insertPlayerItem(player,false);
 				end;
 				theTrader_tmp.walkFromIntro = true;
-				theTrader.intro="true";
+				theTrader.intro=true;
 			</Effect>
 		</Topic>
 	</NPC>
