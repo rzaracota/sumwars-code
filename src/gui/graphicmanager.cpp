@@ -176,16 +176,22 @@ Ogre::MovableObject* GraphicManager::createMovableObject(MovableObjectInfo& info
 		}
 		catch (Ogre::Exception& e)
 		{
-			DEBUG("cant load mesh %s", info.m_source.c_str());
+			WARNING("can't create mesh %s", info.m_source.c_str());
 			obj_ent = m_scene_manager->createEntity(name, "dummy_r.mesh");
 		}
 		obj= static_cast<Ogre::MovableObject*>(obj_ent);
 	}
 	else if (info.m_type == MovableObjectInfo::PARTICLE_SYSTEM)
 	{
-		Ogre::ParticleSystem* part;
-		part = getParticleSystem(info.m_source);
-		
+		Ogre::ParticleSystem* part =0;
+		try
+		{
+			part = getParticleSystem(info.m_source);
+		}
+		catch (Ogre::Exception& e)
+		{	
+			WARNING("can't create particle system %s", info.m_source.c_str());
+		}
 		obj= static_cast<Ogre::MovableObject*>(part);
 	}
 	

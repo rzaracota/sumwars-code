@@ -319,7 +319,14 @@ bool Application::setupResources()
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../resources/materials/scripts", "FileSystem", "General");
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../resources/materials/programs", "FileSystem", "General");
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../resources/materials/textures", "FileSystem", "General");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../resources/particle", "FileSystem", "General");
+	if (OGRE_VERSION >= ((1 << 16) | (6 << 8)))
+	{
+		Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../resources/particle/ogre_1_6", "FileSystem", "General");
+	}
+	else
+	{
+		Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../resources/particle", "FileSystem", "General");
+	}
 
 	// CEGUI Resourcen laden
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../resources/gui/configs", "FileSystem", "GUI");
