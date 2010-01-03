@@ -153,7 +153,7 @@ bool TemplateMap::getTemplatePlace(Shape* shape, Vector & place)
 	int ey = int(ceil(ext.m_y/2));
 	
 	int size = std::max(ex,ey);
-	
+	DEBUG5("template size %i %i angle %f extent %f %f",ex,ey,shape->m_angle,shape->m_extent.m_x, shape->m_extent.m_y);
 	std::map< int, std::vector< std::pair<int, int> > >::iterator mt, mt2;
 	std::vector<int>::iterator st;
 	
@@ -634,7 +634,6 @@ bool MapGenerator::insertGroupTemplates(MapData* mdata, RegionData* rdata)
 
 		// Ort fuer das Template suchen
 		succ = tmap.getTemplatePlace(&s,pos);
-		//succ = getTemplatePlace(mdata,&s,pos);
 		s.m_center = pos;
 
 		if (succ == false)
@@ -679,7 +678,6 @@ bool MapGenerator::insertGroupTemplates(MapData* mdata, RegionData* rdata)
 		templ = ObjectFactory::getObjectGroup("waypoint_templ");
 		memcpy(&s , templ->getShape(), sizeof(Shape));
 		succ = tmap.getTemplatePlace(&s,pos);
-		//succ = getTemplatePlace(mdata,&s,pos);
 		s.m_center = pos;
 		
 		if (succ == false)
@@ -704,6 +702,7 @@ bool MapGenerator::insertGroupTemplates(MapData* mdata, RegionData* rdata)
 			continue;
 		}
 
+		DEBUG5("template %s size %f %f",jt->second.m_group_name.c_str(),s.m_extent.m_x, s.m_extent.m_y);
 		float angle =0;
 		for (int i=0; i< jt->second.m_number; i++)
 		{
@@ -721,16 +720,12 @@ bool MapGenerator::insertGroupTemplates(MapData* mdata, RegionData* rdata)
 			else
 			{
 				int n = Random::randi(4);
-				if (n%2 == 1)
-				{
-					std::swap(s.m_extent.m_x, s.m_extent.m_y);
-				}
 				angle = 3.14159*(n*90.0)/180.0;
 			}
-
+			s.m_angle = angle;
+			
 			// Ort fuer das Template suchen
 			succ = tmap.getTemplatePlace(&s,pos);
-			//succ = getTemplatePlace(mdata,&s,pos,jt->second.m_decoration );
 			s.m_center = pos;
 			
 			if (succ == false)
