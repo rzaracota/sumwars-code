@@ -353,9 +353,7 @@ AIR
 	<SubGroup subtype="axe2_skel" number="2" prob="0.7" />
 </MonsterGroup>
 
-<MonsterGroup name="zombies" >
-	<SubGroup subtype="zombie" number="7" prob="0.7" />
-</MonsterGroup>
+
 
 <MonsterGroup name="undead_weak" >
 	<SubGroup subtype="sword skel" number="3" prob="0.7" />

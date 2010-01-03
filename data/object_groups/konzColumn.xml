@@ -11,7 +11,7 @@
   <WayPoint pos_x="0" pos_y="0" />
 
   <ObjectContent>
-    <Object subtype="konz_column1" 
+    <Object subtype="tree1" 
             center_x="0" 
             center_y="0" 
             angle="-0" 

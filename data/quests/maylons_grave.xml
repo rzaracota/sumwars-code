@@ -191,7 +191,7 @@
 				else
 					speak("priopt",_("Ein solches Problem koennen wir nicht einfach so inmitten dieser unterbewachten Region lassen."),"normal");
 				end;
-				speak("priopt",_("Wer weiß, was alles passieren koennte?"),"normal");
+				speak("priopt",_("Wer weiï¿½, was alles passieren koennte?"),"normal");
 				if(solo())then
 					speak("arcopt", _("Wirklich, ich sollte diese armen gebundenen Seelen befreien und zu einem Kurzurlaub in Harads Hoelle schicken."),"sneer");
 				else
@@ -292,7 +292,7 @@
 			</Condition>
 			<Effect>
 				if(trigger.templname=="randomLocation")then
-					createMonsterGroup("zombies",trigger.locCenter,8);
+					--createMonsterGroup("zombies_maylon",trigger.locCenter,8);
 				end;
 			</Effect>
 		</Event>
@@ -328,7 +328,7 @@
 			</Condition>
 			<Effect>
 				if(trigger.templname=="randomLocation")then
-					createMonsterGroup("zombies",trigger.locCenter,8);
+					--createMonsterGroup("zombies_maylon",trigger.locCenter,8);
 				end;
 			</Effect>
 		</Event>
