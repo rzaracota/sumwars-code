@@ -292,7 +292,7 @@
 			</Condition>
 			<Effect>
 				if(trigger.templname=="randomLocation")then
-					--createMonsterGroup("zombies_maylon",trigger.locCenter,8);
+					--createMonsterGroup("zombies_maylon",trigger.locCenter,4);
 				end;
 			</Effect>
 		</Event>
@@ -328,7 +328,7 @@
 			</Condition>
 			<Effect>
 				if(trigger.templname=="randomLocation")then
-					--createMonsterGroup("zombies_maylon",trigger.locCenter,8);
+					--createMonsterGroup("zombies_maylon",trigger.locCenter,4);
 				end;
 			</Effect>
 		</Event>

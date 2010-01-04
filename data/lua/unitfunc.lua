@@ -116,7 +116,7 @@ function getEnemiesInArea(area)
 end;
 
 function getPartyleader()
-	return getRolePlayers("leader");
+	return getRolePlayers("leader")[1];
 end;
 
 function getPlayers()

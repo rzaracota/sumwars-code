@@ -10,15 +10,56 @@
 	<Region name="aisWolfstones">
 		
 		<Event trigger="create_region" once="true">
+			<Effect>
+				--area am Nordausgang erstellen
+				addArea('northernExit',{'rect','entry_north',{4,8}});
+			</Effect>
+		</Event>
+		
+		<Event trigger="player_moved">
 			<Condition>
-				return (ambush.finished ~= true);
+				return unitIsInArea(trigger.player,"northernExit")
 			</Condition>
 			<Effect>
+				unitSpeak(trigger.player,_("Da geht es Richtung Zwergentrutz. Ich sollte noch nicht dort entlang."),"thoughtful");
+				addUnitCommand(trigger.player,"walk","entry_south");
+				startTimer("cancelCommand","2000");
+				addTriggerVariable("player",trigger.player);
+			</Effect>
+		</Event>
+		
+		<Event trigger="cancelCommand">
+			<Effect>
+				print("you shoulda stopped walking by now "..trigger.player.."...");
+				clearUnitCommands(trigger.player);
+			</Effect>
+		</Event>
+		
+		<Event trigger="enter_region">
+			<Condition>
+				return((trigger.player == getPartyleader())and (ambush.started ~= true));
+			</Condition>
+			<Effect>
+				ambush.leaderInRegion = true;
+				print("call for help started");
 				startTimer("callForHelp",15000);
 			</Effect>
 		</Event>
 		
+		<Event trigger="leave_region">
+			<Condition>
+				return((trigger.player == getPartyleader())and (ambush.finished ~= true))
+			</Condition>
+			<Effect>
+				print("call for help canceled");
+				ambush.leaderInRegion = false;
+			</Effect>
+		</Event>
+		
 		<Event trigger="callForHelp" once="true">
+			<Condition>
+				return ambush.leaderInRegion;
+			</Condition>
 			<Effect>
 				setCutsceneMode(true);
 				ambush_tmp.party = get(getPlayers()[1],"position");
