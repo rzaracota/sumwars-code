@@ -1487,6 +1487,11 @@ void Creature::insertScriptCommand(Command &cmd, float time)
 
 void Creature::clearScriptCommands()
 {
+	if (hasScriptCommand())
+	{
+		clearCommand(false,true);
+	}
+	
 	m_script_commands.clear();
 	m_script_command_timer =0;
 }
