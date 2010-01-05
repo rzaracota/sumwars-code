@@ -24,7 +24,7 @@ rm sumwars_xml-new.pot
 
 
 echo "+++++++++++++ events +++++++++++++"
-xgettext --language=Python -d events -o sumwars_events-new.pot ../data/npc/*.xml ../data/quests/*.xml ../data/world/*.xml
+xgettext --from-code utf-8 --language=Python -d events -o sumwars_events-new.pot ../data/npc/*.xml ../data/quests/*.xml ../data/world/*.xml
 echo "UPDATE sumwars_events.pot"
 msgmerge -v -U sumwars_events.pot sumwars_events-new.pot
 echo "UPDATE sumwars_events_de.po"
