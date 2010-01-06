@@ -246,18 +246,6 @@ bool WorldLoader::loadRegion(TiXmlNode* node, RegionData* rdata)
 				
 				World::getWorld()->addEvent(rdata->m_name,type,ev);
 			}
-			else if (!strcmp(child->Value(), "Topic"))
-			{
-				TriggerType type;
-				Event* ev = new Event();
-				loadEvent(child, ev,type);
-				
-				attr.parseElement(child->ToElement());
-				std::string topic;
-				attr.getString("name",topic,"topic");
-				Dialogue::getTopicList("global").addTopic(topic,ev);
-				DEBUG5("global topic %s",topic.c_str());
-			}
 			else if (!strcmp(child->Value(), "NamedObjectGroups"))
 			{
 				for ( child2 = child->FirstChild(); child2 != 0; child2 = child2->NextSibling())
@@ -473,6 +461,7 @@ bool WorldLoader::loadQuestsData(const char* pFilename)
 	TiXmlDocument doc(pFilename);
 	bool loadOkay = doc.LoadFile();
 
+	DEBUG5("loading quest file %s",pFilename);
 	if (loadOkay)
 	{
 		loadQuests(&doc);
@@ -565,19 +554,6 @@ void WorldLoader::loadQuest(TiXmlNode* node, Quest* quest)
 						
 						World::getWorld()->addEvent(rname,type,ev);
 					}
-					else if (!strcmp(child2->Value(), "Topic"))
-					{
-						TriggerType type;
-						Event* ev = new Event();
-						loadEvent(child2, ev,type);
-				
-						attr.parseElement(child2->ToElement());
-						std::string topic;
-						attr.getString("name",topic,"topic");
-						Dialogue::getTopicList("global").addTopic(topic,ev);
-						DEBUG5("global topic %s",topic.c_str());
-					}
- 			
 					else if (child2->Type()!=TiXmlNode::COMMENT)
 					{
 						DEBUG("unexpected element of <Region>: %s",child2->Value());
