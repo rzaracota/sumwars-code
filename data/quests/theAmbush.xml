@@ -23,14 +23,13 @@
 			<Effect>
 				unitSpeak(trigger.player,_("Da geht es Richtung Zwergentrutz. Ich sollte noch nicht dort entlang."),"thoughtful");
 				addUnitCommand(trigger.player,"walk","entry_south");
-				startTimer("cancelCommand","2000");
+				startTimer("cancelCommand","1000");
 				addTriggerVariable("player",trigger.player);
 			</Effect>
 		</Event>
 		
 		<Event trigger="cancelCommand">
 			<Effect>
-				print("you shoulda stopped walking by now "..trigger.player.."...");
 				clearUnitCommands(trigger.player);
 			</Effect>
 		</Event>
@@ -41,7 +40,6 @@
 			</Condition>
 			<Effect>
 				ambush.leaderInRegion = true;
-				print("call for help started");
 				startTimer("callForHelp",15000);
 			</Effect>
 		</Event>
@@ -51,7 +49,6 @@
 				return((trigger.player == getPartyleader())and (ambush.finished ~= true))
 			</Condition>
 			<Effect>
-				print("call for help canceled");
 				ambush.leaderInRegion = false;
 			</Effect>
 		</Event>

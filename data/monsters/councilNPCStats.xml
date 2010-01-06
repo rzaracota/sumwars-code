@@ -334,3 +334,45 @@
 	<AI ai_sight_range="8" />
 </Monster>
 
+<!-- Ireana von Nordenburg -->
+<Monster type="NPC" subtype="ireana" name="Ireana von Nordenburg" fraction="human" race="human" layer="NORMAL">
+	<RenderInfo name="peasant_f" />
+	<EmotionSet name="ireana_emotion" />
+	<BasicAttributes
+					experience="0"
+					level="80"
+					max_health="8000"
+					armor="60"
+					block="0"
+					attack="40"
+					strength="50"
+					dexterity="35"
+					magic_power="15"
+					willpower="20"
+					resistances_physical="70"
+					resistances_air="75"
+					resistances_ice="70"
+					resistances_fire="80"
+					resistances_cap_physical="90"
+					resistances_cap_air="90"
+					resistances_cap_ice="90"
+					resistances_cap_fire="90"
+					walk_speed="3500"
+					attack_speed="2000"
+					step_length="1.2"
+					attack_range="0.5"
+					>
+		
+		<Ability type="noaction"/>
+		<Ability type="walk"/>
+		<Ability type="die"/>
+		
+		<Ability type="attack" rating="1"/>
+		
+		
+	</BasicAttributes>
+	
+	<Geometry radius="0.5" />
+	
+	<AI ai_sight_range="8" />
+</Monster>

@@ -53,7 +53,7 @@
 <RenderInfo name="peasant_f" parent="unarmedBase">
 	<Entity source="priest_f.mesh"/>
 	<Entity objectname="head" bone="crown" source="head_f1.mesh" />
-	<Entity objectname="hat" bone="crown" source="peasent_hatM.mesh" />
+	<Entity objectname="hat" bone="crown" source="peasent_hatF.mesh" />
 </RenderInfo>
 
 <!-- momentan nur General Greif, Zivil -->
