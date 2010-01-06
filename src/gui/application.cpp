@@ -530,7 +530,7 @@ bool Application::loadResources()
 
 		CEGUI::ImagesetManager::getSingleton().createImagesetFromImageFile (file,file,(CEGUI::utf8*)"itempictures");
 
-		updateStartScreen(0.8);
+		updateStartScreen(0.1);
 	}
 
 	// Imagesets laden
@@ -542,7 +542,7 @@ bool Application::loadResources()
 
 		CEGUI::ImagesetManager::getSingleton().createImageset(file);
 
-		updateStartScreen(0.9);
+		updateStartScreen(0.2);
 	}
 
 	files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("emotionsets","*.imageset");
@@ -553,14 +553,13 @@ bool Application::loadResources()
 
 		CEGUI::ImagesetManager::getSingleton().createImageset(file);
 
-		updateStartScreen(0.9);
+		updateStartScreen(0.3);
 	}
 
-	updateStartScreen(0.0);
 	Ogre::ResourceGroupManager::getSingleton().loadResourceGroup("General");
-	updateStartScreen(0.1);
+	updateStartScreen(0.4);
 	Ogre::ResourceGroupManager::getSingleton().loadResourceGroup("Savegame");
-	updateStartScreen(0.2);
+	updateStartScreen(0.5);
 	Ogre::ResourceGroupManager::getSingleton().loadResourceGroup("GUI");
 
 	// Spielerklassen initialisieren
@@ -573,7 +572,7 @@ bool Application::loadResources()
 
 		ObjectLoader::loadPlayerData(file.c_str());
 
-		updateStartScreen(0.25);
+		updateStartScreen(0.55);
 	}
 
 	// Items initialisieren
@@ -587,7 +586,7 @@ bool Application::loadResources()
 
 		ItemLoader::loadItemData(file.c_str());
 
-		updateStartScreen(0.3);
+		updateStartScreen(0.6);
 	}
 
 	// Monster initialisieren
@@ -602,7 +601,7 @@ bool Application::loadResources()
 
 		TemplateLoader::loadObjectTemplateData(file.c_str());
 
-		updateStartScreen(0.6);
+		updateStartScreen(0.65);
 	}
 
 	// Objekt Gruppen Templates
@@ -647,7 +646,9 @@ bool Application::loadResources()
 	mesh_mgr.createPlane("ground", Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME, plane, 200, 200, 5, 5, true, 1,1,1,Ogre::Vector3::UNIT_X);
 
 	updateStartScreen(1.0);
-
+	
+	m_main_window->setReadyToStart(true);
+	
 	return true;
 }
 
@@ -658,14 +659,14 @@ void  Application::update()
 
 void Application::updateStartScreen(float percent)
 {
-	if (m_timer.getTime() < 50)
+	if (m_timer.getTime() < 20)
 	{
 		return;
 	}
 
 	DEBUG5("update time %f  perc: %f",m_timer.getTime(), percent);
 	m_main_window->update(m_timer.getTime()/1000);
-
+	m_main_window->setRessourceLoadingBar(percent);
 	m_cegui_system->injectTimePulse(m_timer.getTime()/1000);
 
 	Ogre::WindowEventUtilities::messagePump();

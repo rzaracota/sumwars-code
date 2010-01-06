@@ -315,7 +315,18 @@ class MainWindow :
 	 */
 	bool onPartyMemberClicked(const CEGUI::EventArgs& evt);
 	
-
+	/**
+	 * \brief Stellt ein, ob das Spiel gestartet werden kann (notwendig um auf das Laden von Ressourcen zu warten)
+	 * \param ready true, sobald alle Daten geladen sind
+	 */
+	void setReadyToStart(bool ready);
+	
+	/**
+	 * \brief Setzt die Fortschrittsanzeige des Ressourcen ladens
+	 * \param percent Prozentsatz der Forschrittsanzeige
+	 */
+	void setRessourceLoadingBar(float percent);
+	
 	private:
 
 	/**
@@ -421,6 +432,11 @@ class MainWindow :
 	 * \brief ID des gerade per Highlight markierten Objektes
 	 */
 	int m_highlight_id;
+	
+	/**
+	 * \brief zeigt an, ob alle Ressourcen geladen wurden und somit das Spiel gestartet werden kann
+	 */
+	bool m_ready_to_start;
 
 };
 

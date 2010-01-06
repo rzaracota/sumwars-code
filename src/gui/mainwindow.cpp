@@ -41,12 +41,12 @@ MainWindow::MainWindow(Ogre::Root* ogreroot, CEGUI::System* ceguisystem,Ogre::Re
 	
 	m_key =0;
 	m_highlight_id =0;
+	m_ready_to_start = false;
 }
 
 bool MainWindow::init()
 {
 	bool result = true;
-
 
 	// Eingabegeraete initialisieren
 	result &= initInputs();
@@ -122,6 +122,13 @@ bool MainWindow::setupMainMenu()
 		img->setProperty("Image", "set:startscreen.png image:full_image");
 		img->moveToBack ();
 		img->setMousePassThroughEnabled(true);
+		
+		CEGUI::ProgressBar* bar = static_cast<CEGUI::ProgressBar*>(win_mgr.createWindow("TaharezLook/ProgressBar", "LoadRessourcesProgressBar"));
+		m_main_menu->addChildWindow(bar);
+		bar->setPosition(CEGUI::UVector2(cegui_reldim(0.3f), cegui_reldim( 0.9f)));
+		bar->setSize(CEGUI::UVector2(cegui_reldim(0.40f), cegui_reldim( 0.05f)));
+		bar->setWantsMultiClickEvents(false);
+		bar->setProgress(0.0);
 
 		SavegameList* sgl = new SavegameList(m_document);
 		m_sub_windows["SavegameList"] = sgl;
@@ -2210,7 +2217,7 @@ bool MainWindow::mousePressed(const OIS::MouseEvent &evt, OIS::MouseButtonID btn
 
 	bool ret = m_cegui_system->injectMouseButtonDown(button);
 	
-	if (m_document->getGUIState()->m_sheet ==  Document::MAIN_MENU)
+	if (m_document->getGUIState()->m_sheet ==  Document::MAIN_MENU && m_ready_to_start)
 	{
 		m_document->onStartScreenClicked();
 		return true;
@@ -2414,8 +2421,23 @@ bool MainWindow::onPartyMemberClicked(const CEGUI::EventArgs& evt)
 	return true;
 }
 
+void MainWindow::setReadyToStart(bool ready)
+{
+	m_ready_to_start = ready;
+	
+	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
+	
+	CEGUI::ProgressBar* bar = static_cast<CEGUI::ProgressBar*>(win_mgr.getWindow( "LoadRessourcesProgressBar"));
+	bar->setVisible(!ready);
+}
 
-
+void MainWindow::setRessourceLoadingBar(float percent)
+{
+	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
+	
+	CEGUI::ProgressBar* bar = static_cast<CEGUI::ProgressBar*>(win_mgr.getWindow( "LoadRessourcesProgressBar"));
+	bar->setProgress(percent);
+}
 
 
 
