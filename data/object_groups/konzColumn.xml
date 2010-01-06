@@ -2,16 +2,14 @@
 
 <ObjectGroup name="konzColumn" version="1.0">
   <Shape
-    type="RECT"
-    extent_x="0.7998883526"
-    extent_y="0.7998883526"
-    angle="0"
+    type="CIRCLE"
+    radius="1"
   />
 
   <WayPoint pos_x="0" pos_y="0" />
 
   <ObjectContent>
-    <Object subtype="tree1" 
+    <Object subtype="konz_column1" 
             center_x="0" 
             center_y="0" 
             angle="-0" 
