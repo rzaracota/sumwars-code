@@ -291,8 +291,8 @@
 				return (maylons_grave.finished~=true);
 			</Condition>
 			<Effect>
-				if(trigger.templname=="randomLocation")then
-					--createMonsterGroup("zombies_maylon",trigger.locCenter,4);
+				if(trigger.templname=="randomLoc4_4")then
+					createMonsterGroup("zombies_maylon",trigger.locCenter,4);
 				end;
 			</Effect>
 		</Event>
@@ -327,8 +327,8 @@
 				return (maylons_grave.finished~=true);
 			</Condition>
 			<Effect>
-				if(trigger.templname=="randomLocation")then
-					--createMonsterGroup("zombies_maylon",trigger.locCenter,4);
+				if(trigger.templname=="randomLoc4_4")then
+					createMonsterGroup("zombies_maylon",trigger.locCenter,4);
 				end;
 			</Effect>
 		</Event>

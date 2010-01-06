@@ -75,6 +75,29 @@
 	</Effect>
 </Ability>
 
+<Ability type="maylon_sommon_skel"
+		 name="Summon Skeleton"
+		 description="Creates a skeleton."
+		 time="2000.000000"
+		 timer_nr="2.000000"
+		 timer_value="40000.000000"
+		 base_ability="noaction"
+		 critical_percent="0.660000"
+		 target_type="ranged">
+	<Flag name="mute_affected" />
+	<Effect>
+		<LuaImplementation>
+			local frac = get(self,"fraction");
+			local obj = createObject("skel_maylon",goal);
+			set(obj,"fraction",frac);
+			addUnitCommand(obj,"guard",self,15,"secondary");
+			obj = createObject("skel_maylon",goal);
+			set(obj,"fraction",frac);
+			addUnitCommand(obj,"guard",self,15,"secondary");
+		</LuaImplementation>
+	</Effect>
+</Ability>
+
 <Ability type="testfireball"
 		 name="Fireball"
 		 description="Alternativer Feuerball."
@@ -325,6 +348,30 @@
 		</LuaImplementation>	
 	</Damage>
 </Ability>
+
+<Ability type="monster_icebolt"
+		 name="Icicle"
+		 description="The mage casts a shard of pure ice, that damages his foes."
+		 time="1500.000000"
+		 timer_nr="1.000000"
+		 timer_value="3000.000000"
+		 base_ability="magic_attack"
+		 critical_percent="0.800000"
+		 target_type="ranged">
+	<Flag name="mute_affected" />
+	<Effect>
+		<CppImplementation type="proj_fly_at_target" />
+	</Effect>
+	<Projectile type="ice_bolt" speed="12000" />
+	<Damage>
+		<LuaImplementation>
+			local magic = get(self,"magic_power");
+			local idmg = getDamageValue("ice_dmg");
+			setDamageValue("ice_dmg", {idmg[1] + magic*1, idmg[2] + magic*1.4});
+		</LuaImplementation>	
+	</Damage>
+</Ability>
+
 
 <Ability type="goblin_chain_lightning"
 		 name="Chainlightning"
