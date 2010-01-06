@@ -47,7 +47,6 @@
 	<Locations>
 		<Location name = "locCenter" pos_x="0" pos_y="0" />
 	</Locations>
-	<ObjectContent>
 </ObjectGroup>
 
 <ObjectGroup name = "randomLoc4_4" >
