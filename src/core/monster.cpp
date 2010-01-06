@@ -60,6 +60,10 @@ Monster::Monster( int id,MonsterBasicData& data)
 	m_ai.m_state = Ai::ACTIVE;
 	m_ai.m_vars = data.m_ai_vars;
 	m_ai.m_chase_player_id =0;
+	for (int i=0; i< NR_AI_MODS; i++)
+	{
+		m_ai.m_mod_time[i]=0;
+	}
 	
 	// HP Faktor bei mehreren Spielern
 	WorldObjectMap * pl = World::getWorld()->getPlayers();
@@ -446,7 +450,7 @@ void Monster::evalCommand(Action::ActionType act)
 	float value;
 
 	// true, wenn sich Monster bewegen muss um Fernangriff auszufuehren
-	bool ranged_move = false;;
+	bool ranged_move = false;
 
 	Action::ActionInfo* aci = Action::getActionInfo(act);
 	if (aci == 0)
