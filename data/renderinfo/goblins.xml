@@ -72,7 +72,7 @@
 	</Action>
 </RenderInfo>
 
-<RenderInfo name = "throwerBase" parent="creaturebase">
+<RenderInfo name = "goblinThrowerBase" parent="goblinbase">
 	<Action name="walk">
 		<Animation name="walkRock" />
 	</Action>
@@ -238,7 +238,7 @@
 	<Entity objectname="weapon" bone="itemRightHand" source="gobSpear_pol.mesh" />
 </RenderInfo>
 
-<RenderInfo name="goblin_youngling" parent="throwerBase">
+<RenderInfo name="goblin_youngling" parent="goblinThrowerBase">
 	<Entity source="goblinGreen.mesh" scale = "0.7"/>
 	<Entity objectname="weapon" bone="itemRightHand" source="berry.mesh" />
 	
@@ -247,6 +247,11 @@
 	</Action>
 	<Action name="noaction">
 		<Animation name="idleBerry" />
+	</Action>
+	<Action name="throw_berry">
+		<Animation name="throw" />
+		<Visibility objectname="weapon" time="0.4" visible="false"/>
+		<Visibility objectname="weapon" time="1.0" visible="true"/>
 	</Action>
 </RenderInfo>
 

@@ -31,3 +31,14 @@
 		<CppImplementation type="dmg_at_target" />
 	</Effect>
 </Projectile>
+
+<Projectile subtype="throwing_berry"
+			radius="0.2"
+			lifetime="2000"
+			implementation = "fly"
+			>
+	<RenderInfo name="throwing_berry" />
+	<Effect>
+		<CppImplementation type="dmg_at_target" />
+	</Effect>
+</Projectile>

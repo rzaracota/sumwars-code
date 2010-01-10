@@ -431,10 +431,22 @@
 		</NamedObjectGroups>
 		
 		<ObjectGroups>
-			<ObjectGroup object_group="berryBush" priority="4" number="11" probability="1.0" />
-			<ObjectGroup object_group="berryBush" priority="3" number="10" probability="0.7" />
+			<ObjectGroup object_group="berryBush" priority="4" number="11" probability="1.0" decoration="false"/>
+			<ObjectGroup object_group="berryBush" priority="3" number="10" probability="0.7" decoration="false"/>
 			<ObjectGroup object_group="treePatch_med" priority="1" number="4" probability="0.3"/>
 		</ObjectGroups>
+		
+		<Event trigger="create_template">
+			<Effect>
+				if(trigger.templname=="berryBush")then
+					createMonsterGroup("goblins_younglings",trigger.locCenter,4);
+				end;
+			</Effect>
+		</Event>
+		
+		<SpawnGroups>
+			<SpawnGroup group_name="goblins_l8_2" number="15"/>
+		</SpawnGroups>
 		
 		<Environments>
 			<Environment height="1.0" name="meadow" />

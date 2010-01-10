@@ -892,6 +892,50 @@
 	<AI ai_sight_range="12" ai_shoot_range="12" />
 </Monster>
 
+
+<Monster type="MONSTER" subtype="goblin_youngling" name="goblin youngling" fraction="monster" race="goblin" layer="NORMAL">
+	<RenderInfo name="goblin_youngling" />
+	<Dropslots >
+		<Dropslot pbig="0.01" pmedium="0.02" psmall="0.03" pgold="0.05" min_gold="5" max_gold="30" min_level="1" max_level="5" magic_prob="0.0" magic_power="200" />
+		<Dropslot pbig="0.01" pmedium="0.02" psmall="0.03" pgold="0.05" min_gold="1" max_gold="20" min_level="1" max_level="3" magic_prob="0.0" magic_power="200" />
+	</Dropslots>
+	
+	<BasicAttributes
+					experience="10"
+					level="7"
+					max_health="40"
+					armor="10"
+					block="0"
+					attack="120"
+					power="60"
+					strength="15"
+					dexterity="15"
+					magic_power="5"
+					willpower="10"
+					resistances_physical="0"
+					resistances_air="0"
+					resistances_ice="0"
+					resistances_fire="0"
+					resistances_cap_physical="50"
+					resistances_cap_air="50"
+					resistances_cap_ice="50"
+					resistances_cap_fire="50"
+					walk_speed="5000"
+					attack_speed="1500"
+					step_length="0.6"
+					attack_range="0.7"
+					>
+		<Ability type="walk" />
+		<Ability type="throw_berry" rating="1" timer_nr='1' timer_value="1500"/>
+		<Ability type="attack" rating="1.5"/>
+		<Ability type="die" />
+		<Ability type="noaction" time = "5000" />
+	</BasicAttributes>
+	
+	<Geometry radius="0.5" />
+	
+	<AI ai_sight_range="12" ai_shoot_range="10" />
+</Monster>
 <!-- Goblinkrieger -->
 <!-- L5 -->
 <Monster type="MONSTER" subtype="goblin_war" name="goblin warrior" fraction="monster" race="goblin" layer="NORMAL">
@@ -1285,6 +1329,14 @@
 	<SubGroup subtype="goblin_snow" number="1" prob="1.0" />
 </MonsterGroup>
 
+<MonsterGroup name="goblins_l8_2" >
+	<SubGroup subtype="goblin_rider" number="2" prob="0.7" />
+	<SubGroup subtype="goblin_fighter" number="1" prob="0.7" />
+	<SubGroup subtype="goblin_poacher" number="1" prob="1.0" />
+	<SubGroup subtype="goblin_snow" number="1" prob="1.0" />
+	<SubGroup subtype="goblin_youngling" number="3" prob="0.5" />
+</MonsterGroup>
+
 <MonsterGroup name="goblins_marblak" >
 	<SubGroup subtype="goblin_poacher" number="3" prob="1.0" />
 	<SubGroup subtype="goblin_marblak" number="1" prob="1.0" />
@@ -1304,6 +1356,11 @@
 <MonsterGroup name="goblins_lurdrak" >
 	<SubGroup subtype="goblin_lurdrak" number="1" prob="1.0" />
 	<SubGroup subtype="goblin_poacher" number="3" prob="1.0" />
+</MonsterGroup>
+
+<MonsterGroup name="goblins_younglings" >
+	<SubGroup subtype="goblin_youngling" number="8" prob="1.0" />
+	<SubGroup subtype="goblin_youngling" number="8" prob="0.5" />
 </MonsterGroup>
 
 <!-- Brons Farm -->

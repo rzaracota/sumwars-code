@@ -21,6 +21,7 @@
   </ObjectContent>
 
   <Locations>
+	<Location name="locCenter" pos_x="0" pos_y="0" />
   </Locations>
 
   <Areas>
