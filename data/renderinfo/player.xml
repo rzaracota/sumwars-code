@@ -109,10 +109,6 @@
 		<Animation name="die" />
 	</Action>
 	
-	<Action name="summoned">
-		<Animation name="raise" />
-	</Action>
-	
 	<Action name="walk">
 		<Animation name="walkOneHand" />
 	</Action>

@@ -2,6 +2,10 @@
 	<Action name="die">
 		<Animation name="dieOneHand" />
 	</Action>
+	
+	<Action name="summoned">
+		<Animation name="raise" />
+	</Action>
 </RenderInfo>
 
 <RenderInfo name="reaperbase" parent="skeletonbase">
@@ -51,6 +55,21 @@
 	
 	<Action name ="attack" >
 		<Animation  name = "attack1"/>
+	</Action>
+	
+	<Action name="summoned">
+		<Animation name="appear"/>
+		
+		<Visibility time="0" visible="false"/>
+		<Visibility time="0.4" visible="true"/>
+		
+		<Visibility objectname="scythe" time="0" visible="false"/>
+		<Visibility objectname="scythe" time="0.4" visible="true"/>
+		
+		<ParticleSystem objectname="blizzard1" source="Blizzard" position="0 3.5 0" />
+		<ParticleSystem objectname="blizzard2" source="Blizzard" position="-0.5 4.5 0" />
+		<Detach objectname="blizzard1" time="0.9"/>
+		<Detach objectname="blizzard2" time="0.9"/>
 	</Action>
 	
 	<Action name ="summon_skelSword" >
@@ -210,6 +229,87 @@
 <RenderInfo name="lich" parent="lichbase">
 	<Entity source="lich.mesh"/>
 	<Entity objectname = "scythe" bone="itemRightHand" source="blood_scy.mesh"/>
+	
+	<Action name="die">
+		<Animation name="die" />
+		<!--<Scale start="0.3" end="1.0" start_val="1.0" end_val="0.1" />-->
+		<ParticleSystem time = "0" objectname="headFire" bone="mainmesh:crown" source="Firesphere" position="0.0 0.0 0.0" />
+		<ParticleSystem time = "0.2" objectname="handIce1" bone="mainmesh:itemLeftHand" source="Icesphere" position="0.0 -0.20 -0.10" />
+		<ParticleSystem time = "0.2" objectname="handIce2" bone="mainmesh:itemLeftHand" source="Icesphere" position="0.0 0.0 0.0" />
+		<Detach time="0.4" objectname="handIce1" />
+		<Detach time="0.4" objectname="handIce2" />
+		<ParticleSystem time = "0.41" objectname="handIce3" bone="mainmesh:itemLeftHand" source="HandIce" position="0.0 -0.20 -0.10" />
+		<ParticleSystem time = "0.41" objectname="handIce4" bone="mainmesh:itemLeftHand" source="HandIce" position="0.0 0.0 0.0" />
+		<ParticleSystem time = "0.4" objectname="column" source="LichDeadColumn" position="-1.0 0.0 0.0" />
+		<Detach time="0.6" objectname="handIce3" />
+		<Detach time="0.6" objectname="handIce4" />
+		<ParticleSystem time = "0.61" objectname="handIce5" bone="mainmesh:itemLeftHand" source="HandFire" position="0.0 -0.20 -0.10" />
+		<ParticleSystem time = "0.61" objectname="handIce6" bone="mainmesh:itemLeftHand" source="HandFire" position="0.0 0.0 0.0" />
+		<Detach time="0.8" objectname="handIce5" />
+		<Detach time="0.8" objectname="handIce6" />
+		<ParticleSystem time = "0.81" objectname="handIce7" bone="mainmesh:itemLeftHand" source="Firesphere" position="0.0 -0.20 -0.10" />
+		<ParticleSystem time = "0.81" objectname="handIce8" bone="mainmesh:itemLeftHand" source="Firesphere" position="0.0 0.0 0.0" />
+	</Action>
+</RenderInfo>
+
+<RenderInfo name="maylonMummy" parent="lichbase">
+	<Entity source="lich.mesh"/>
+	<Entity objectname = "scythe" bone="itemRightHand" source="blood_scy.mesh"/>
+	
+	<Action name ="monster_icebolt" >
+		<Animation  name = "castMagicWeak"/>
+		<ParticleSystem time = "0.1" objectname="handIce1" bone="mainmesh:itemLeftHand" source="HandIce" position="0.0 0.0 0.0" />
+		<Detach time="0.4" objectname="handIce1" />
+		<ParticleSystem time = "0.4" objectname="handIce1" bone="mainmesh:itemLeftHand" source="Icesphere" position="0.0 0.0 0.0" />
+		<Detach time="0.7" objectname="handIce1" />
+	</Action>
+	
+	<Action name ="maylon_sommon_skel" >
+		<Animation  name = "summon"/>
+		
+		<ParticleSystem time = "0.2" objectname="magicEnergy1" source="BowBuff" position="0.0 0.0 0.0" />
+		<Movement objectname = "magicEnergy1" start="0.2" end="0.5" start_vec="0.0 0.0 0.0" end_vec="0.0 2.0 0.0" />
+		<Rotation objectname = "magicEnergy1" start="0.2" end="0.5" start_vec="0.0 0.0 0.0" end_vec="0.0 90.0 0.0" />
+		<Detach time="0.5" objectname="magicEnergy1" />
+		
+		<ParticleSystem time = "0.2" objectname="magicEnergy2" source="BowBuff" position="0.0 0.0 0.0" />
+		<Movement objectname = "magicEnergy2" start="0.2" end="0.5" start_vec="0.0 0.0 0.0" end_vec="0.0 2.0 0.0" />
+		<Rotation objectname = "magicEnergy2" start="0.2" end="0.5" start_vec="0.0 90.0 0.0" end_vec="0.0 180.0 0.0" />
+		<Detach time="0.5" objectname="magicEnergy2" />
+		
+		<ParticleSystem time = "0.2" objectname="magicEnergy3" source="BowBuff" position="0.0 0.0 0.0" />
+		<Movement objectname = "magicEnergy3" start="0.2" end="0.5" start_vec="0.0 0.0 0.0" end_vec="0.0 2.0 0.0" />
+		<Rotation objectname = "magicEnergy3" start="0.2" end="0.5" start_vec="0.0 180.0 0.0" end_vec="0.0 270.0 0.0" />
+		<Detach time="0.5" objectname="magicEnergy3" />
+		
+		<ParticleSystem time = "0.2" objectname="magicEnergy4" source="BowBuff" position="0.0 0.0 0.0" />
+		<Movement objectname = "magicEnergy4" start="0.2" end="0.5" start_vec="0.0 0.0 0.0" end_vec="0.0 2.0 0.0" />
+		<Rotation objectname = "magicEnergy4" start="0.2" end="0.5" start_vec="0.0 270.0 0.0" end_vec="0.0 380.0 0.0" />
+		<Detach time="0.5" objectname="magicEnergy4" />
+		
+		<ParticleSystem time = "0.5" objectname="earth" bone= "itemLeftHand" source="Earth" position="0.0 0.0 0.0" />
+		<Detach time="0.8" objectname="earth" />
+		
+		<ParticleSystem time = "0.5" objectname="magicEnergy1" source="SummonBuff" position="0.0 0.0 0.0" />
+		<Movement objectname = "magicEnergy1" start="0.5" end="0.9" start_vec="0.0 0.0 0.0" end_vec="0.0 2.50 0.0" />
+		<Rotation objectname = "magicEnergy1" start="0.5" end="0.9" start_vec="0.0 0.0 0.0" end_vec="0.0 90.0 0.0" />
+		<Detach time="0.9" objectname="magicEnergy1" />
+		
+		<ParticleSystem time = "0.5" objectname="magicEnergy2" source="SummonBuff" position="0.0 0.0 0.0" />
+		<Movement objectname = "magicEnergy2" start="0.5" end="0.9" start_vec="0.0 0.0 0.0" end_vec="0.0 2.50 0.0" />
+		<Rotation objectname = "magicEnergy2" start="0.5" end="0.9" start_vec="0.0 90.0 0.0" end_vec="0.0 180.0 0.0" />
+		<Detach time="0.9" objectname="magicEnergy2" />
+		
+		<ParticleSystem time = "0.5" objectname="magicEnergy3" source="SummonBuff" position="0.0 0.0 0.0" />
+		<Movement objectname = "magicEnergy3" start="0.5" end="0.9" start_vec="0.0 0.0 0.0" end_vec="0.0 2.50 0.0" />
+		<Rotation objectname = "magicEnergy3" start="0.5" end="0.9" start_vec="0.0 180.0 0.0" end_vec="0.0 270.0 0.0" />
+		<Detach time="0.9" objectname="magicEnergy3" />
+		
+		<ParticleSystem time = "0.5" objectname="magicEnergy4" source="SummonBuff" position="0.0 0.0 0.0" />
+		<Movement objectname = "magicEnergy4" start="0.5" end="0.9" start_vec="0.0 0.0 0.0" end_vec="0.0 2.50 0.0" />
+		<Rotation objectname = "magicEnergy4" start="0.5" end="0.9" start_vec="0.0 270.0 0.0" end_vec="0.0 380.0 0.0" />
+		<Detach time="0.9" objectname="magicEnergy4" />
+	</Action>
 	
 	<Action name="die">
 		<Animation name="die" />

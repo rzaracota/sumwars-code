@@ -1125,7 +1125,7 @@ Blizzard
     particle_width  40
     particle_height 40
 	cull_each       false
-    quota           10000
+    quota           5000
     billboard_type  point
     
     // Area emitter

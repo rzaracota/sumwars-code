@@ -1,7 +1,5 @@
 <!-- Untote -->
 
-
-
 <!-- Lich -->
 <Monster type="MONSTER" subtype="lich" name="lich" fraction="undead" race="undead" layer="NORMAL">
 	<RenderInfo name="lich" />
@@ -92,6 +90,8 @@
 		<Ability type="attack" rating="1"/>
 		<Ability type="die" />
 		<Ability type="noaction" />
+		<Ability type="summoned" time="2000" />
+		
 		
 		<Immunity type="blind"/>
 		<Immunity type="poisoned"/>
@@ -469,7 +469,7 @@
 
 <!-- Maylon -->
 <Monster type="MONSTER" subtype="maylonMummy" name="Maylon" fraction="undead" race="undead" layer="NORMAL">
-	<RenderInfo name="lich" />
+	<RenderInfo name="maylonMummy" />
 	
 	<BasicAttributes
 		experience="200"
@@ -502,6 +502,7 @@
 	<Ability type="die" time = "3000" />
 	<Ability type="monster_icebolt"  timer = "5000" rating="3"/>
 	<Ability type="noaction" />
+	<Ability type="summoned" time="4000"/>
 	<Ability type="maylon_sommon_skel" rating="4"/>
 
 	<Immunity type="berserk"/>
@@ -596,6 +597,7 @@
 		<Ability type="attack" rating="1"/>
 		<Ability type="die" />
 		<Ability type="noaction" />
+		<Ability type="summoned" time="2000" />
 		
 		<Immunity type="blind"/>
 		<Immunity type="poisoned"/>

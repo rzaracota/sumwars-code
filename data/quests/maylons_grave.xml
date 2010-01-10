@@ -315,13 +315,45 @@
 			<Effect>
 				addArea("areaGathering",{"circle",{0,0},10000});
 				if (maylons_grave.freed ~= true) then
-					maylons_grave_tmp.maylon=createObject("maylonMummy","graveChamber:locMaylon");
-					createObject("skel_maylon","graveChamber:locMaylonGuard1");
-					createObject("skel_maylon","graveChamber:locMaylonGuard2");
 				end;
 			</Effect>
 		</Event>
 		
+		<Event trigger="object_use" once="true">
+			<Condition>
+				return ((trigger.used_object == getObjectByNameRef("doorGrave"))and (maylons_grave.freed~=false));
+			</Condition>
+			<Effect>
+				-- when opening the door to maylons grave chamber, his mummy will appear
+				setCutsceneMode(true);
+				
+				local door = getObjectByNameRef("doorGrave");
+				scriptobjectvar[door]["locked"] = true;
+				local doorPos=get(door,"position");
+				
+				addCameraPosition(0,doorPos,-90,45,10);
+				addCameraPosition(2000,doorPos,-90,10,10);
+				addCameraPosition(2000,"graveChamber:locMaylon",-90,10,10);
+				
+				startTimer("camera_complete",4000);
+			</Effect>
+		</Event>
+		
+		<Event trigger="camera_complete">
+			<Effect>
+				maylons_grave_tmp.maylon=createObject("maylonMummy","graveChamber:locMaylon",90);
+				timedExecute('createObject("skel_maylon","graveChamber:locMaylonGuard1",90)',800);
+				timedExecute('createObject("skel_maylon","graveChamber:locMaylonGuard2",90)',200);
+				startTimer("maylon_fight",4000);
+			</Effect>
+		</Event>
+		
+		<Event trigger="maylon_fight">
+			<Effect>
+				timedExecute('setCutsceneMode(false)',1000);
+			</Effect>
+		</Event>
+	
 		<Event trigger="create_template">
 			<Condition>
 				return (maylons_grave.finished~=true);
@@ -355,23 +387,28 @@
 					set(monster, "health",0);
 				end;
 				local position = get(trigger.unit,"position");
+				setCutsceneMode(true);
+				addCameraPosition(0,position,-90,45,10);
 				addUnitCommand(maylons_grave_tmp.lastAttacker,"walk",position,3);
-				maylons_grave_tmp.maylon=createObject("maylon",position);
+				timedExecute('maylons_grave_tmp.maylon=createObject("maylon",{'..position[1]..','..position[2]..'})',1000);
 			</Effect>
 		</Event>
 		
-		<Event trigger="command_complete" once="true">
+		<Event trigger="create_unit">
 			<Condition>
-				if(maylons_grave.finished~=true)and(isPlayer(trigger.unit))and(maylons_grave.freed == true)then
-					return true;
-				else
-					return false;
-				end;
+				return(maylons_grave.freed == true);
 			</Condition>
+			<Effect>
+				startTimer("maylon_talk",1500)
+			</Effect>
+		</Event>
+		
+		<Event trigger="maylon_talk" once="true">
 			<Effect>
 				lookAtObject(maylons_grave_tmp.lastAttacker,maylons_grave_tmp.maylon);
 				lookAtObject(maylons_grave_tmp.maylon,maylons_grave_tmp.lastAttacker);
 				createDialog();
+				setTopicBase("global");
 				addSpeaker(maylons_grave_tmp.lastAttacker,"player");
 				addSpeaker(maylons_grave_tmp.maylon,"maylon");
 				speak("maylon",_("Ich danke Euch fuer die Befreiung meines Geistes."),"happy");
@@ -384,9 +421,16 @@
 				executeInDialog("set("..maylons_grave_tmp.maylon..",'health',0)");
 				speakPause(1000);
 				speak("player",_("Ob er das auch gesagt haette, wenn er wuesste, dass er erst mal einen Umweg ueber Harads Hoelle nehmen wird?"),"sad")
-				maylons_grave.finished=true;
+				changeTopic("maylon_rip");
 			</Effect>
-		</Event>		
+		</Event>
+		<Event trigger="maylon_rip" once="true">
+			<Effect>
+				maylons_grave.finished=true;
+				scriptobjectvar[getObjectByNameRef("doorGrave")]["locked"] = false;
+				setCutsceneMode(false);
+			</Effect>
+		</Event>
 	</Region>	
 </Quest>
 

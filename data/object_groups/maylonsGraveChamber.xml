@@ -43,7 +43,7 @@
             probability="1" 
             prob_angle="false" 
     />
-    <Object subtype="konz_door1" 
+    <Object subtype="konz_door1" name="doorGrave" 
             center_x="-1" 
             center_y="9" 
             angle="-90" 
@@ -221,7 +221,7 @@
     <Object subtype="sarkophagusMaylon" 
             center_x="-1" 
             center_y="-9" 
-           height="1.387778781e-017" 
+           height="2.775557562e-017" 
             angle="-90" 
             probability="1" 
             prob_angle="false" 
