@@ -35,8 +35,8 @@
 				end
 			</Condition>
 			<Effect>
-				herbalist.asked = true
 				createDialogue()
+				herbalist_tmp.startTalk = true;
 				addSpeaker(trigger.player,'player')
 				setTopicBase("Gertlinde Kampfer");
 				setDialogueActive(false);
@@ -54,7 +54,7 @@
 		<Event trigger="command_complete" once = "true">
 			<Condition>
 				if(herbalist.started ~= true)then
-					return ((trigger.unit == herbalist_tmp.gertlinde) and(herbalist.asked == true));
+					return ((trigger.unit == herbalist_tmp.gertlinde) and(herbalist_tmp.startTalk == true));
 				else
 					return false;
 				end;
@@ -96,6 +96,7 @@
 					addAnswer(_("Ja"),"start_herbalist_quest_again")
 					addAnswer(_("Nein"),"refuse_herbalist_quest_again")
 				else
+					herbalist.asked = true
 					speak('Gertlinde Kampfer',_("He da, Jungvolk!"))
 					speak('Gertlinde Kampfer',_("Ich sehe, dass ihr in die Noerdlichen Wiesen wollt."),"thoughtful");
 					speak('player',_("Das Stimmt."))
@@ -151,7 +152,7 @@
 		<Topic name="start_herbalist_quest_again" >
 			<Effect>
 				if(solo())then
-					speak('player', _("Na schoen, wenn ich welche finde, bringe ich es mit."),"normal");
+					speak('player', _("Na schoen, wenn ich welche finde, bringe ich sie mit."),"normal");
 				else
 					speak('player', _("Na schoen, wenn wir welche finden, bringen wir sie mit."),"normal");
 				end;
