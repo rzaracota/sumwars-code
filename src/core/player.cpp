@@ -986,7 +986,10 @@ void Player::increaseAttribute(CreatureBaseAttr::Attribute attr)
 			break;
 		case (CreatureBaseAttr::DEXTERITY):
 			getBaseAttr()->m_dexterity++;
-			getBaseAttr()->m_attack_speed +=20;
+			if (getBaseAttr()->m_dexterity < 80)
+			{
+				getBaseAttr()->m_attack_speed +=10;
+			}
 			addToNetEventMask(NetEvent::DATA_ATTACK_WALK_SPEED);
 			break;
 		case (CreatureBaseAttr::WILLPOWER):
