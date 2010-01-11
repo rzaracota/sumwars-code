@@ -239,7 +239,7 @@
 </RenderInfo>
 
 <RenderInfo name="goblin_youngling" parent="goblinThrowerBase">
-	<Entity source="goblinGreen.mesh" scale = "0.7"/>
+	<Entity source="goblinGreen.mesh" scale = "0.8"/>
 	<Entity objectname="weapon" bone="itemRightHand" source="berry.mesh" />
 	
 	<Action name="noaction">

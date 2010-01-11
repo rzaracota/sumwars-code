@@ -903,7 +903,7 @@
 	<BasicAttributes
 					experience="10"
 					level="7"
-					max_health="40"
+					max_health="35"
 					armor="10"
 					block="0"
 					attack="120"
@@ -922,11 +922,11 @@
 					resistances_cap_fire="50"
 					walk_speed="5000"
 					attack_speed="1500"
-					step_length="0.6"
-					attack_range="0.7"
+					step_length="0.7"
+					attack_range="0.8"
 					>
 		<Ability type="walk" />
-		<Ability type="throw_berry" rating="1" timer_nr='1' timer_value="1500"/>
+		<Ability type="throw_berry" rating="1" timer_nr='1' timer_value="1600"/>
 		<Ability type="attack" rating="1.5"/>
 		<Ability type="die" />
 		<Ability type="noaction" time = "5000" />

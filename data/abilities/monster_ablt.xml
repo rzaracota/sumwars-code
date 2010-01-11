@@ -522,6 +522,7 @@
 	<Projectile type="throwing_dagger" speed="10000" />
 	<Damage>
 		<CppImplementation type="range_attack" />
+		<CppImplementation type="small_numbers" />
 	</Damage>
 </Ability>
 
@@ -540,6 +541,7 @@
 	<Projectile type="throwing_berry" speed="10000" />
 	<Damage>
 		<CppImplementation type="range_attack" />
+		<CppImplementation type="small_numbers" />
 	</Damage>
 </Ability>
 
