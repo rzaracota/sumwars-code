@@ -1045,8 +1045,8 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 			for (int i=-2;i<=2;i++)
 			{
 				dir2 = dir;
-				dir2.m_x += i*0.2*dir.m_y;
-				dir2.m_y += i*0.2*dir.m_x;
+				dir2.m_x += i*0.15*dir.m_y;
+				dir2.m_y -= i*0.15*dir.m_x;
 				dir2.normalize();
 
 				sproj = pos+dir2* 1.05 * s.m_radius;
@@ -1068,8 +1068,8 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 			for (int i=-3;i<=3;i++)
 			{
 				dir2 = dir;
-				dir2.m_x += i*0.2*dir.m_y;
-				dir2.m_y += i*0.2*dir.m_x;
+				dir2.m_x += i*0.1*dir.m_y;
+				dir2.m_y -= i*0.1*dir.m_x;
 				dir2.normalize();
 
 				sproj = pos+dir2* 1.05 * s.m_radius;
