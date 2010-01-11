@@ -244,7 +244,7 @@
 		 description="The archer shoots five projectiles at a time, aimed at enemies in front of him. The damage dealt by each projectile suffers a little."
 		 time="1.000000"
 		 timer_nr="1.000000"
-		 timer_value="5000.000000"
+		 timer_value="2500.000000"
 		 base_ability="range_attack"
 		 critical_percent="0.700000"
 		 target_type="ranged" >
@@ -352,7 +352,10 @@
 		 description="The archer attacks with an arrow imbued with a weaker windspirit, that causes an enemy hit by it to be stunned."
 		 time="1.000000"
 		 timer_nr="1.000000"
-		 timer_value="6000.000000" base_ability="range_attack" critical_percent="0.660000" target_type="ranged">
+		 timer_value="5000.000000" 
+		 base_ability="range_attack" 
+		 critical_percent="0.660000" 
+		 target_type="ranged">
 	<Flag name="mute_affected" />
 	<Effect>
 		<CppImplementation type="proj_fly_at_target" />
@@ -376,7 +379,7 @@
 		 description="The archer handles his weapons with elflike precision, attacking up to seven enemys in front of him. The damage dealt by each projectile suffers a little."
 		 time="1.000000"
 		 timer_nr="1.000000"
-		 timer_value="5000.000000"
+		 timer_value="2500.000000"
 		 base_ability="range_attack"
 		 critical_percent="0.700000"
 		 target_type="ranged" >
