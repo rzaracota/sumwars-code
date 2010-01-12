@@ -67,12 +67,18 @@ void RegionCamera::update(float time)
 	if (rtime <= time)
 	{
 		// naechstes Etappenziel wurde erreicht
+		if (rtime != 0)
+		{
+			Trigger* tr = new Trigger("camera_move_complete");
+			m_region->insertTrigger(tr);
+		}
+		
 		m_position  = pos;
 		m_next_positions.pop_front();
 		
 		if (m_next_positions.empty())
 		{
-			Trigger* tr = new Trigger("camera_move_complete");
+			Trigger* tr = new Trigger("all_camera_moves_complete");
 			m_region->insertTrigger(tr);
 		}
 		else

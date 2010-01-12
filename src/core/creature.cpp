@@ -2131,6 +2131,15 @@ void Creature::clearCommand(bool success, bool norepeat)
 		{
 			m_script_commands.pop_front();
 		}
+		
+		if (m_script_commands.empty())
+		{
+			Trigger* tr = new Trigger("all_commands_complete");
+			tr->addVariable("unit",getId());
+			tr->addVariable("command",m_command.m_type);
+			tr->addVariable("success",success);
+			getRegion()->insertTrigger(tr);
+		}
 	}
 	m_command.m_type = "noaction";
 	m_command.m_damage_mult = 1;
