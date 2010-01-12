@@ -13,3 +13,8 @@ function camp()
 	player = getPlayers()[1];
 	teleportPlayer(player,"medMercCamp","entry_north");
 end;
+
+function gold(amount)
+	plpos()
+	set(pl,"gold",amount)
+end;
