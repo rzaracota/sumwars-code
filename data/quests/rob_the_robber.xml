@@ -145,7 +145,7 @@
 	</NPC>
 	
 	
-	<Region name="aisFairyforest">
+	<Region name="aisDarkFairyforest">
 		<Event trigger ="create_region" once = "true">
 			<Effect>
 				if (rob_the_robber.killed ~= true) then

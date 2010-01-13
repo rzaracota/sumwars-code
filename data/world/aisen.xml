@@ -481,7 +481,41 @@
 <!-- Aisen, Feenwald [Wald und Steine]; ungefaehr 60 Min, eher verwinkelt; Level 10 - 16 -->
 <!-- Robs Versteck(Template) -->
 <!-- Goblinschlaeger, Goblinraeuber, Goblinjaeger, Goblinhunde, Goblinkrieger, Goblinschamanen, Waldalraunen?, Feen? -->
-	<Region id="10" name="aisFairyforest">
+	<Region id="2100" name="aisFairyforest">
+		<AmbientLight red="0.4" green="0.4" blue="0.4" />
+		<HeroLight red="1.0" green="1.0" blue="1.0" /> 
+		<DirectionalLight red="0.3" green="0.3" blue="0.3" />
+		
+		<Settings dimx="32" dimy="32" area_percent="0.4" complexity="0.3" granularity="6"  ground="grass1"/>
+		<WorldPosition world_x="0.5" world_y ="0.50"/>
+		
+		<ExitDirections north="true" south="false" west="true" east="true" />
+		
+		<Exits>
+			<Exit name="exit_east" destination_region="aisJoringsforest" destination_location="entry_west" >
+				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
+			</Exit>
+			<Exit name="exit_west" destination_region="aisDarkFairyforest" destination_location="entry_east" >
+				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
+			</Exit>
+			<Exit name="exit_north" destination_region="aisWolfstones" destination_location="entry_south" >
+				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
+			</Exit>
+		</Exits>
+		
+		<Environments>
+			<Environment height="1.0" name="hills" />
+		</Environments>
+		
+		<ObjectGroups>
+			<ObjectGroup object_group="treePatch_med" priority="1" number="8" probability="0.3"/>
+		</ObjectGroups>
+		
+	</Region>
+
+<!-- Aisen, Dunkler Feenwald -->
+<!-- Raeuber, Rob der Raeuber -->
+	<Region id="2120" name="aisDarkFairyforest">
 		<AmbientLight red="0.4" green="0.4" blue="0.4" />
 		<HeroLight red="1.0" green="1.0" blue="1.0" /> 
 		<DirectionalLight red="0.3" green="0.3" blue="0.3" />
@@ -492,10 +526,7 @@
 		<ExitDirections north="true" south="false" west="false" east="true" />
 		
 		<Exits>
-			<Exit name="exit_east" destination_region="aisJoringsforest" destination_location="entry_west" >
-				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
-			</Exit>
-			<Exit name="exit_north" destination_region="aisWolfstones" destination_location="entry_south" >
+			<Exit name="exit_east" destination_region="aisFairyforest" destination_location="entry_west" >
 				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
 			</Exit>
 		</Exits>
@@ -512,10 +543,12 @@
 			<NameObjectGroup name="robsHideout" object_group="robsHideout" priority="4"/>
 		</NamedObjectGroups>
 	</Region>
+
+
 	
 <!-- Aisen, Wolfsfelsen [Wald und Gebirge]; ungefaehr 35 Min, eher verwinkelt; Level 14 - 17 -->
 <!-- Goblinschlaeger, Goblinraeuber, Goblinjaeger, Goblinhunde, Goblinkrieger, Goblinschamanen?, Blutschnaebel, wenige Untote, evtl. ein Lich oder Nekromant -->
-	<Region id="11" name="aisWolfstones">
+	<Region id="2130" name="aisWolfstones">
 		<AmbientLight red="0.4" green="0.4" blue="0.4" />
 		<HeroLight red="1.0" green="1.0" blue="1.0" /> 
 		<DirectionalLight red="0.3" green="0.3" blue="0.3" />
@@ -553,7 +586,7 @@
 
 <!-- Aisen, Westwaelder [Wald und Gebirge]; ungef�hr 30 Min, eher verwinkelt; Level 15 - 18 -->
 <!-- Goblins, Goblinhunde, Blutschnaebel-->	
-	<Region id="18" name="aisWestwoods">
+	<Region id="2140" name="aisWestwoods">
 		<AmbientLight red="0.4" green="0.4" blue="0.4" />
 		<HeroLight red="1.0" green="1.0" blue="1.0" /> 
 		<DirectionalLight red="0.3" green="0.3" blue="0.3" />
@@ -579,7 +612,7 @@
 
 <!-- Aisen, Gebirgspfad [Wald und Gebirge]; Template -->
 <!-- Ort von Szene 5 -->
-	<Region id="19" name="aisMounPath">
+	<Region id="2150" name="aisMounPath">
 		<AmbientLight red="0.4" green="0.4" blue="0.4" />
 		<HeroLight red="1.0" green="1.0" blue="1.0" /> 
 		<DirectionalLight red="0.3" green="0.3" blue="0.3" />
@@ -604,7 +637,7 @@
 	
 <!-- Aisen, Nebelhang [Wald und Gebirge]; ca. 20 Minuten; eher offen; Level 16 - 18 -->
 <!-- Goblins, einige Untote, Blutschnaebel -->
-	<Region id="20" name="aisMistslope">
+	<Region id="2160" name="aisMistslope">
 		<AmbientLight red="0.4" green="0.4" blue="0.4" />
 		<HeroLight red="1.0" green="1.0" blue="1.0" /> 
 		<DirectionalLight red="0.3" green="0.3" blue="0.3" />
@@ -629,7 +662,7 @@
 	
 <!-- Aisen, Osthang; [Wald, Gebirge]; ca. 20 Min; Level 18 - 21 -->
 <!-- Goblins, Goblinhunde, Blutschnaebel -->	
-	<Region id="28" name="aisEastslope">
+	<Region id="2170" name="aisEastslope">
 		<Settings dimx="12" dimy="12" area_percent="0.4" complexity="0.3" granularity="6"  ground="grass1"/>
 		
 		<ExitDirections north="false" south="false" west="true" east="true" />
