@@ -2649,8 +2649,15 @@ bool World::calcBlockmat(PathfindInfo * pathinfo)
 				s2.m_center.m_y += sqs;
 				js++;
 			}
+			
 			js--;
 			s2.m_center.m_y -= sqs;
+			
+			if (js == -1)
+			{
+				// Objekt bedeckt Suchraum nur mit winziger Ecke
+				continue;
+			}
 
 			// Wertigkeit des Hindernisses bestimmen
 			char val = 9;
