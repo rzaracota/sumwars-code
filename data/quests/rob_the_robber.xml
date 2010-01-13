@@ -25,7 +25,7 @@
 				else
 					speak("player",_("Verzeiht, Sergeant, aber mir ist dieser Steckbrief aufgefallen."))
 					speak("player",_("Ist ein Kopfgeld von 3000 Goldst�cken nicht ein wenig uebertrieben f�r einen Mann?"),"thoughtful")
-					setSpeakerEmption("player","normal")
+					setSpeakerEmotion("player","normal")
 					speak("Sergeant Lutterer",_("Ach, der."), "sad")
 					speak("Sergeant Lutterer",_("Von dem lassen alle Kopfgeldj�ger die Finger."),"thoughtful")
 					speak("Sergeant Lutterer",_("Immer, wenn einer ihn umgebracht haben will, ist er kurze Zeit sp�ter selber tot."),"unhappy")
