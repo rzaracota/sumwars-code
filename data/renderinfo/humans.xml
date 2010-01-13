@@ -1,3 +1,32 @@
+<RenderInfo name="human_2h_base" parent="playerbase">
+	<Action name="noaction">
+		<Animation name="idleTwoHands" />
+	</Action>
+	
+	<Action name = "warcry">
+		<Animation name = "warcry" />
+	</Action>
+	
+	<Action name="die">
+		<Animation name="die" />
+	</Action>
+	
+	<Action name="walk">
+		<Animation name="walkTwoHands" />
+	</Action>
+	
+	<Action name="attack">
+		<Animation name="attackTwoHands" />
+	</Action>
+	
+	<Action name="bash">
+		<Animation name="specialAttackTwoHands" />
+		<ParticleSystem time = "0.1" objectname="attackLine" bone="itemRightHand" source="SpecialAttackLineWhite" position="0.0 0.0 -1.7" />
+		<Detach time="0.5" objectname="attackLine" />
+	</Action>
+</RenderInfo>
+
+
 <RenderInfo name="human_bandit" parent="playerbase">
 	<Entity source="rogue.mesh"/>
 	<Subobject objectname="armor" source="rogueArmorEnemy" />
@@ -12,6 +41,16 @@
 	<Entity source="rogue.mesh"/>
 	<Subobject objectname="armor" source="rogueArmorEnemy" />
 	<Entity objectname="weapon" bone="itemRightHand" source="goblin_hmr.mesh"  />
+	<Entity objectname="head" bone="crown" source="head1.mesh" />
+	<Entity objectname="hair" bone="crown" source="hair_m2.mesh" />
+	<Entity objectname="chinBeard" bone="crown" source="beard_chin.mesh" />
+	<Entity objectname="mustache" bone="crown" source="mustache.mesh" />
+</RenderInfo>
+
+<RenderInfo name="human_deserter" parent="human_2h_base">
+	<Entity source="rogue.mesh"/>
+	<Subobject objectname="armor" source="rogueArmorEnemy" />
+	<Entity objectname="weapon" bone="itemRightHand" source="merc2h_sw.mesh"  />
 	<Entity objectname="head" bone="crown" source="head1.mesh" />
 	<Entity objectname="hair" bone="crown" source="hair_m2.mesh" />
 	<Entity objectname="chinBeard" bone="crown" source="beard_chin.mesh" />
