@@ -2671,6 +2671,23 @@ bool World::calcBlockmat(PathfindInfo * pathinfo)
 				else
 				{
 					// sich bewegendes Lebewesen
+					// wird ignoriert, wenn es nicht in naher Zukunft zu einer Kollision kommen kann
+					Vector vec_to_wo = wos->m_center - s.m_center;
+					Vector relspeed = wo->getSpeed();
+					relspeed.projectOn(vec_to_wo);
+					float dist = vec_to_wo.getLength() - wos->m_radius - hb;
+					float factor = 250;
+					if (vec_to_wo.angle(relspeed) > 3.14159/2)
+					{
+						factor = -1000;
+					}
+					dist += relspeed.getLength()*factor;
+					
+					if(dist > hb)
+					{
+						// ignorieren
+						continue;	
+					}
 					val = 4;
 				}
 			}
