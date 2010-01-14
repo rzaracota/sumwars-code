@@ -642,8 +642,8 @@
 		<HeroLight red="1.0" green="1.0" blue="1.0" /> 
 		<DirectionalLight red="0.3" green="0.3" blue="0.3" />
 		
-		<Settings dimx="12" dimy="12" area_percent="0.4" complexity="0.3" granularity="6"  ground="grass1"/>
-		
+		<Settings dimx="40" dimy="40" region_template="entryGrayCaves"  ground="grass1"/>
+
 		<ExitDirections north="true" south="true" west="false" east="false" />
 		
 		<Exits>
@@ -658,6 +658,22 @@
 		<Environments>
 			<Environment height="1.0" name="hills" />
 		</Environments>
+		
+		<Event trigger="create_region">
+			<Effect>
+				createMonsterGroup("goblins_l1","monster_group1",6);
+				createMonsterGroup("goblins_l1","monster_group2",6);
+				createMonsterGroup("goblins_l1","monster_group3",6);
+				createMonsterGroup("goblins_l1","monster_group4",6);
+				createMonsterGroup("goblins_l1","monster_group5",6);
+				createMonsterGroup("goblins_l1","monster_group6",6);
+				
+				createMonsterGroup("goblins_l1","monster_treasure",3);
+				
+				createObject("treasure_box_m1","locTreasureEast",45);
+				createObject("chestBox","locTreasureWest",-45);
+			</Effect>
+		</Event>
 	</Region>
 	
 <!-- Aisen, Osthang; [Wald, Gebirge]; ca. 20 Min; Level 18 - 21 -->
