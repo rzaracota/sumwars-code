@@ -2675,7 +2675,7 @@ bool World::calcBlockmat(PathfindInfo * pathinfo)
 					Vector vec_to_wo = wos->m_center - s.m_center;
 					Vector relspeed = wo->getSpeed();
 					relspeed.projectOn(vec_to_wo);
-					float dist = vec_to_wo.getLength() - wos->m_radius - hb;
+					float dist = vec_to_wo.getLength() - wos->getOuterRadius() - hb;
 					float factor = 250;
 					if (vec_to_wo.angle(relspeed) > 3.14159/2)
 					{
