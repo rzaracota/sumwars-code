@@ -77,3 +77,14 @@
 <RenderInfo name="rogueArmorEnemy" parent="playerbaseM" inherit="animation">
 	<Entity source = "rogue_arm.mesh"/>
 </RenderInfo>
+
+<RenderInfo name="robeSimple">
+	<Entity source="robe_simple.mesh"/> 
+</RenderInfo>
+<RenderInfo name="robeSimple#m" parent="playerbaseM" inherit="animation">
+	<Entity source="robe_simpleMT.mesh"/> 
+</RenderInfo>
+<RenderInfo name="robeSimple#f" parent="playerbase" inherit="animation">
+</RenderInfo>
+<RenderInfo name="robeSimple#fs" parent="playerbase" inherit="animation">
+</RenderInfo>
