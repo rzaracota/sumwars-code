@@ -2169,7 +2169,7 @@ bool Creature::update (float time)
 
 	
 	// Timer fuer Sprache anpassen
-	if (!m_speak_text.empty() && m_speak_text.m_answers.empty())
+	if (!m_speak_text.empty())
 	{
 		if (m_speak_text.m_time < time)
 		{
@@ -4098,15 +4098,6 @@ void Creature::writeNetEvent(NetEvent* event, CharConv* cv)
 		cv->toBuffer(getSpeakText().m_in_dialogue);
 		cv->toBuffer(getSpeakText().m_displayed_time);
 		cv->toBuffer(m_emotion_set);
-		
-		cv->toBuffer<short>(getSpeakText().m_answers.size());
-		
-		std::list< std::pair<std::string, std::string> >::iterator it;
-		for (it = getSpeakText().m_answers.begin(); it != getSpeakText().m_answers.end(); ++it)
-		{
-			cv->toBuffer(it->first);
-			cv->toBuffer(it->second);	
-		}
 	}
 	
 	if (event->m_data & NetEvent::DATA_TRADE_INFO)
@@ -4303,25 +4294,6 @@ void Creature::processNetEvent(NetEvent* event, CharConv* cv)
 		cv->fromBuffer(getSpeakText().m_in_dialogue);
 		cv->fromBuffer(getSpeakText().m_displayed_time);
 		cv->fromBuffer(m_emotion_set);
-		
-		short n;
-		cv->fromBuffer<short>(n);
-		
-		std::string text;
-		std::string topic;
-		for (int i=0; i<n; i++)
-		{
-			cv->fromBuffer(text);
-			cv->fromBuffer(topic);
-			getSpeakText().m_answers.push_back(std::make_pair(text,topic));
-		}
-		
-		DEBUG5("speak %s for %f ms",getSpeakText().m_text.c_str(), getSpeakText().m_time);
-		std::list< std::pair<std::string, std::string> >::iterator it;
-		for (it = getSpeakText().m_answers.begin(); it != getSpeakText().m_answers.end(); ++it)
-		{
-			DEBUG5("answer %s %s",it->first.c_str(), it->second.c_str());
-		}
 	}
 	
 	if (event->m_data & NetEvent::DATA_TRADE_INFO)
@@ -4571,11 +4543,6 @@ void Creature::speakText(CreatureSpeakText& text)
 	m_speak_text.m_displayed_time = 0;
 	
 	DEBUG5("speak %s for %f ms",text.m_text.c_str(), text.m_time);
-	std::list< std::pair<std::string, std::string> >::iterator it;
-	for (it = text.m_answers.begin(); it != text.m_answers.end(); ++it)
-	{
-		DEBUG5("answer %s %s",it->first.c_str(), it->second.c_str());
-	}
 }
 
 Creature* Creature::getTradePartner()

@@ -1053,7 +1053,6 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 	Party* 	p;
 	Player* pl;
 	Dialogue* dia;
-	int i;
 	std::list< std::pair<std::string, std::string> >::iterator it;
 
 	bool sell;
@@ -1241,34 +1240,17 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 				break;
 			}
 			
-			i = command->m_id;
-			
-			if (i==-1)
+			if (command->m_id==-1)
 			{
 				// Gespraech beenden
 				dia->changeTopic("abort");
 				break;
 			}
 			
-			it = getSpeakText().m_answers.begin();
-			while (it != getSpeakText().m_answers.end() && i >0)
-			{
-				i--;
-				it++;
-			}
-			
-			if (it == getSpeakText().m_answers.end())
-			{
-				ERRORMSG("invalid answer %i",command->m_id);
-				dia->changeTopic("end");
-				break;
-			}
-			
 			DEBUG5("changing topic to %s",it->second.c_str());
 			EventSystem::setDialogue(dia);
-			dia->changeTopic(it->second);
+			dia->chooseAnswer(getId(), command->m_id);
 			EventSystem::setDialogue(0);
-			clearSpeakText();
 			break;
 			
 		case BUTTON_TRADE_END:

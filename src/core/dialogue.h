@@ -171,7 +171,6 @@ class NPCTrade
 };
 
 
-
 /**
  * \class Dialogue
  * \brief Klasse fuer einen Gespraech zwischen mehreren Spielern / NPC's
@@ -179,6 +178,56 @@ class NPCTrade
 class Dialogue
 {
 	public:
+		
+		/**
+		 * \struct Question
+		 * \brief Klasse fuer eine an die Spieler gestellte Frage
+		 */
+		struct Question
+		{  
+			/**
+			 * \brief Konstruktor
+			 */
+			Question()
+			{
+				m_text="";
+				m_active=0;
+				m_asked_player = "main_player";
+			}
+			
+			/**
+			* \var std::string m_text
+			* \brief Der Text der Frage
+			*/
+			std::string m_text;
+			
+			/**
+			* \var std::list < std::pair<std::string, std::string> > m_answers
+			* \brief Liste von moeglichen Antworten und  dem zugehoerigen Thema
+			*/
+			std::list < std::pair<std::string, std::string> > m_answers;
+			
+			/**
+			 * \brief Gibt an, ob die Frage gerade gestellt wird
+			 */
+			bool m_active;
+			
+			/**
+			 * \brief Sprecher, der die Frage beantworten soll
+			 */
+			std::string m_asked_player;
+			
+			/**
+			 * \brief Menge aller Spieler, die geantwortet haben
+			 */
+			std::set<int> m_players_answered;
+			
+			/**
+			 * \brief Erhaltene Antworten mit Wichtung, Map von Nummer der Antwort auf Wichtung
+			 */
+			std::map<int, float> m_weighted_answers;
+		};
+
 		
 		/**
 		* \enum Position
@@ -287,11 +336,19 @@ class Dialogue
 		void speak(std::string refname, std::string text,std::string emotion="", float time = 500);
 		
 		/**
-		 * \fn void addQuestion(std::string text)
 		 * \brief Fuegt eine Frage ein. Die Frage wird bei dem Spieler mit der ID  m_main_player_id angezeigt
 		 * \param text Text der Frage
+		 * \param asked_player Spieler dem die Frage gestellt wird
 		 */
-		void addQuestion(std::string text);
+		void addQuestion(std::string text, std::string asked_player="main_player");
+		
+		/**
+		 * \fn void addAnswer(std::string text, std::string topic)
+		 * \brief Fuegt fuer die Frage eine Antwort ein
+		 * \param text Text der Antwort
+		 * \param topic Thema zu dem gesprungen wird, wenn der Spieler diese Antwort waehlt
+		 */
+		void addAnswer(std::string text, std::string topic);
 		
 		
 		/**
@@ -302,12 +359,17 @@ class Dialogue
 		void setTopicBase(std::string topic_base);
 		
 		/**
-		 * \fn void addAnswer(std::string text, std::string topic)
-		 * \brief Fuegt fuer die Frage eine Antwort ein
-		 * \param text Text der Antwort
-		 * \param topic Thema zu dem gesprungen wird, wenn der Spieler diese Antwort waehlt
+		 * \brief Waehlt eine Antwort aus
+		 * \param playerid ID des Spielers
+		 * \param answer_nr Nummer der ausgewaehlten Antwort
 		 */
-		void addAnswer(std::string text, std::string topic);
+		void chooseAnswer(int playerid, int answer_nr);
+		
+		/**
+		 * \brief Gibt aus, ob der angegebene Spieler auf die Frage antworten darf
+		 * \param playerid ID eines Spielers
+		 */
+		bool playerCanAnswer(int playerid);
 		
 		/**
 		 * \fn bool checkTopic(std::string topic)
@@ -455,6 +517,14 @@ class Dialogue
 			m_active = active;
 		}
 		
+		/**
+		 * \brief Gibt die Frage aus, die am Ende des aktuellen Dialogabschnittes gestellt wird
+		 */
+		Question* getQuestion()
+		{
+			return m_question;
+		}
+		
 	private:
 		
 		/**
@@ -548,6 +618,8 @@ class Dialogue
 		 */
 		static std::map<std::string, NPCTrade > m_npc_trades;
 		
+		
+		
 		/**
 		 * \var int m_nr_players
 		 * \brief Anzahl Spieler die an dem Dialog beteiligt sind
@@ -559,6 +631,11 @@ class Dialogue
 		 * \brief Die Spieler, die den aktuellen Text ueberspringen wollen
 		 */
 		std::set<int> m_player_skips;
+		
+		/**
+		 * \brief Frage, die an die Spieler gestellt wird
+		 */
+		Question* m_question;
 		
 		/**
 		 * \var bool m_active

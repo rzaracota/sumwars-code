@@ -165,6 +165,8 @@ void DialogueWindow::update()
 	
 	Player* player = m_document->getLocalPlayer();
 	Region* reg = player->getRegion();
+	Dialogue* dia =  reg->getDialogue( player->getDialogueId() );
+	
 	bool bar_vis = false;
 	if (reg->getCutsceneMode () == true || player->getDialogueId() != 0)
 	{
@@ -190,11 +192,10 @@ void DialogueWindow::update()
 		CEGUI::Window* wname;
 		CEGUI::Window* wtext;
 		
-		Dialogue* dia =  reg->getDialogue( player->getDialogueId() );
+		
 		if (dia != 0)
 		{
 			// Schleife fuer die 4 moeglichen Sprecher eines Dialogs
-		
 			
 			std::string image, name, text;
 			
@@ -243,11 +244,6 @@ void DialogueWindow::update()
 					}
 					
 					text = cr->getSpeakText().m_text;
-					// Fragen nicht angezeigen
-					if (! cr->getSpeakText().m_answers.empty())
-					{
-						text ="";
-					}
 					
 					if (text == "" || cr->getSpeakText().m_in_dialogue == false)
 					{
@@ -331,9 +327,12 @@ void DialogueWindow::updateSpeechBubbles()
 	static int acount =0;
 	
 	Player* player = m_document->getLocalPlayer();
+	Region* reg = player->getRegion();
 	
 	if (player ==0 || player->getRegion() ==0)
 		return;
+	
+	Dialogue* dia =  reg->getDialogue( player->getDialogueId() );
 	
 	CEGUI::Window* label;
 	CEGUI::Window* image;
@@ -364,9 +363,6 @@ void DialogueWindow::updateSpeechBubbles()
 	std::string text;
 	
 	std::stringstream stream;
-	
-	CreatureSpeakText* question=0;
-	
 	bool bar_vis = false;
 	if (alldia)
 	{
@@ -391,16 +387,7 @@ void DialogueWindow::updateSpeechBubbles()
 		
 		if (text == "")
 			continue;
-		
-		// Fragen werden gesondert behandelt
-		if (!cr->getSpeakText().m_answers.empty())
-		{
-			if (cr == player)
-			{
-				question = &(cr->getSpeakText());
-			}
-			continue;
-		}
+
 		
 		// Wenn der Spieler sich in einem Gespraech befindet, die dazugehoerigen Texte darstellen nicht hier darstellen
 		// diese werden in den Balken dargestellt
@@ -546,8 +533,15 @@ void DialogueWindow::updateSpeechBubbles()
 	}
 	
 	// Fenster fuer eine Frage
-	if (question !=0)
+	Dialogue::Question* question = 0;
+	if (dia != 0)
 	{
+		question = dia->getQuestion();
+	}
+	if (question !=0 && question->m_active)
+	{
+		bool can_answer = dia->playerCanAnswer(player->getId());
+		
 		int wflags = m_document->getGUIState()->m_shown_windows;
 		if (wflags != (Document::QUESTIONBOX | Document::CHAT ) || (wflags & Document::QUESTIONBOX) == 0)
 		{
@@ -581,11 +575,6 @@ void DialogueWindow::updateSpeechBubbles()
 			label->setProperty("HorzFormatting", "WordWrapLeftAligned");
 		}
 		
-		// Wenn das Frage Fenster schon sichtbar ist -> keine Aenderung
-		if (ques->isVisible())
-		{
-			return;
-		}
 		nr =0;
 		
 		// Groesse des Fensters ermitteln
@@ -668,6 +657,17 @@ void DialogueWindow::updateSpeechBubbles()
 			label->setPosition(CEGUI::UVector2(CEGUI::UDim(0,horzoffset), CEGUI::UDim(0,height)));
 			label->setSize(CEGUI::UVector2(cegui_reldim(1.0f), CEGUI::UDim(0,elemheight)));
 			label->setVisible(true);
+			
+			float alpha = 1.0;
+			if (!can_answer)
+			{
+				alpha = 0.5;
+			}
+			if (label->getAlpha() != alpha)
+			{
+				label->setAlpha(alpha);
+			}
+			
 			
 			height += elemheight + 5;
 			nr++;

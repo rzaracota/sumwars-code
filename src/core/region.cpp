@@ -1787,25 +1787,24 @@ void Region::update(float time)
 			
 			it5->second->update(time);
 			
-			if (it5->second->getEventMaskRef() != 0)
-			{
-				DEBUG5("update dialogue %i",it5->second->getId());
-				NetEvent event;
- 				event.m_type = NetEvent::DIALOGUE_STAT_CHANGED;
-				event.m_data = it5->second->getEventMaskRef();
-				event.m_id = it5->second->getId();
-				insertNetEvent(event);
-				it5->second->clearNetEventMask();
-			}
-			
 			if (it5->second->isFinished())
 			{
 				dia = it5->second;
 				++it5;
 				deleteDialogue(dia);
 			}
-			else
+			else 
 			{
+				if (it5->second->getEventMaskRef() != 0)
+				{
+					DEBUG5("update dialogue %i",it5->second->getId());
+					NetEvent event;
+					event.m_type = NetEvent::DIALOGUE_STAT_CHANGED;
+					event.m_data = it5->second->getEventMaskRef();
+					event.m_id = it5->second->getId();
+					insertNetEvent(event);
+					it5->second->clearNetEventMask();
+				}
 				++it5;
 			}
 		}

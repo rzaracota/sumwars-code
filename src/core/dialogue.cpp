@@ -153,6 +153,7 @@ Dialogue::Dialogue(Region* region, std::string topic_base,int id)
 		m_active_speaker[i] =0;
 	}
 	m_active = true;
+	m_question = 0;
 }
 
 Dialogue::~Dialogue()
@@ -170,6 +171,11 @@ Dialogue::~Dialogue()
 			cr ->clearSpeakText();
 			cr ->setDialogue(0);
 		}
+	}
+	
+	if (m_question != 0)
+	{
+		delete m_question;
 	}
 }
 
@@ -241,6 +247,8 @@ void Dialogue::addSpeaker(int id, std::string refname, bool force)
 	it = m_speaker_state.find(id);
 	if (it == m_speaker_state.end())
 	{
+		m_event_mask =1;
+		
 		SpeakerState& state = m_speaker_state[id];
 		state.m_id = id;
 		state.m_emotion = "";
@@ -307,27 +315,29 @@ void Dialogue::speak(std::string refname, std::string text, std::string emotion,
 	
 }
 
-void Dialogue::addQuestion(std::string text)
+void Dialogue::addQuestion(std::string text, std::string asked_player)
 {
-	speak("main_player",text,"");
-
+	if (m_question != 0)
+		delete m_question;
+	
+	m_question = new Question;
+	m_question->m_text = text;
+	m_question->m_asked_player = asked_player;
 }
 
 void Dialogue::addAnswer(std::string text, std::string topic)
 {
-	if (m_speech.empty() || m_speech.back().first != "main_player")
+	if (m_question == 0)
 	{
-		ERRORMSG("cannot add answer: last speech must be question");
+		ERRORMSG("cannot add answer: no question asked");
+		return;
 	}
 
 	if (checkTopic(topic))
 	{
-		DEBUG5("adding answer %s %s",text.c_str(), topic.c_str());
-		m_speech.back().second.m_answers.push_back(std::make_pair(dgettext("event",text.c_str()),topic));
-
+		
+		m_question->m_answers.push_back(std::make_pair(dgettext("event",text.c_str()),topic));
 	}
-
-
 }
 
 void Dialogue::setTopicBase(std::string topic_base)
@@ -510,6 +520,90 @@ void Dialogue::changeTopic(std::string topic)
 
 }
 
+void Dialogue::chooseAnswer(int playerid, int answer_nr)
+{
+	if (!playerCanAnswer(playerid))
+	{
+		return;
+	}
+	
+	m_question->m_players_answered.insert(playerid);
+	float weight = 1;
+	if (playerid == getSpeaker("main_player"))
+	{
+		weight = 1.1;
+	}
+	
+	if (m_question->m_weighted_answers.count(answer_nr) == 0)
+	{
+		m_question->m_weighted_answers[answer_nr] = weight;
+	}
+	else
+	{
+		m_question->m_weighted_answers[answer_nr] += weight;
+	}
+	
+	if (m_question->m_asked_player != "all" || (int) m_player_skips.size() == m_nr_players)
+	{
+		m_event_mask =1;
+		
+		// Antwort mit den meisten Stimmen ermitteln
+		float maxweight = -1;
+		int answernr=0;
+		std::map<int, float>::iterator it;
+		
+		for (it = m_question->m_weighted_answers.begin(); it != m_question->m_weighted_answers.end(); ++it)
+		{
+			if (it->second > maxweight)
+			{
+				maxweight = it->second;
+				answernr = it->first;
+			}
+		}
+		
+		std::list < std::pair<std::string, std::string> >::iterator jt;
+		jt = m_question->m_answers.begin();
+		while (jt !=m_question->m_answers.end() && answernr >0)
+		{
+			answernr--;
+			++jt;
+		}
+		
+		std::string newtopic = "end";
+		if (jt !=m_question->m_answers.end())
+		{
+			newtopic = jt->second;
+		}
+				
+		delete m_question;
+		m_question = 0;
+		
+		changeTopic(newtopic);
+	}
+}
+
+bool Dialogue::playerCanAnswer(int playerid)
+{
+	if (m_question == 0 || m_question->m_active == false)
+		return false;
+		
+	if (m_question->m_asked_player == "all")
+	{
+		if (m_question->m_players_answered.count(playerid) > 0)
+		{
+			return false;
+		}
+		return true;
+	}
+	else if (getSpeaker(m_question->m_asked_player) == playerid)
+	{
+		return true;
+	}
+	
+	return false;
+	
+}
+
 int Dialogue::getSpeaker(std::string refname)
 {
 	std::map<std::string, int>::iterator it;
@@ -626,7 +720,7 @@ void Dialogue::update(float time)
 
 		// Fragen bleiben generell stehen
 		// Handel ebenso
-		if (!m_started && ! cst->m_answers.empty() || m_trade)
+		if (!m_started && m_question != 0 && m_question->m_active || m_trade)
 		{
 			stime =0;
 			break;
@@ -770,11 +864,11 @@ void Dialogue::update(float time)
 				}
 				
 				// Springt ein Topic an, setzt danach aber mit dem alten fort
-				if (!cst->m_answers.empty() && cst->m_text == "#jump_topic#")
+				if (cst->m_text == "#jump_topic#")
 				{
 					Event* st;
 				
-					st = m_topics[m_topic_base].getSpeakTopic(cst->m_answers.front().second);
+					st = m_topics[m_topic_base].getSpeakTopic(cst->m_emotion);
 					if (st->checkCondition())
 					{
 						EventSystem::setRegion(m_region);
@@ -814,19 +908,25 @@ void Dialogue::update(float time)
 
 			if (cst ==0 || m_speech.empty())
 			{
-				m_finished = true;
+				if (m_question != 0)
+				{
+					if (m_question->m_active == false)
+					{
+						m_question->m_active = true;
+						m_event_mask =1;
+					}
+				}
+				else
+				{
+					m_finished = true;
+				}
 				return;
 			}
 
 			// geht direkt zum naechsten Topic
-			if (!cst->m_answers.empty() && cst->m_text == "#change_topic#")
+			if (cst->m_text == "#change_topic#")
 			{
-				changeTopic(cst->m_answers.front().second);
-				return;
-			}
-			else if (cst->m_text == "#change_topic#")
-			{
-				DEBUG("change topic with empty topic list");
+				changeTopic(cst->m_emotion);
 				return;
 			}
 
@@ -869,7 +969,18 @@ void Dialogue::update(float time)
 
 	if (m_speech.empty() && !m_trade)
 	{
-		m_finished = true;
+		if (m_question != 0)
+		{
+			if (m_question->m_active == false)
+			{
+				m_question->m_active = true;
+				m_event_mask =1;
+			}
+		}
+		else
+		{
+			m_finished = true;
+		}
 	}
 }
 
@@ -890,6 +1001,52 @@ void Dialogue::toString(CharConv* cv)
 			cv->toBuffer(state.m_text_visible);
 		}
 	}
+	
+	std::map<std::string, int>::iterator st;
+	cv->toBuffer<int>((int) m_speaker.size());
+	for (st = m_speaker.begin(); st != m_speaker.end(); ++st)
+	{
+		cv->toBuffer(st->first);
+		cv->toBuffer(st->second);
+	}
+	
+	if (m_question ==0 || !m_question->m_active)
+	{
+		cv->toBuffer<int>(0);
+	}
+	else
+	{
+		cv->toBuffer<int>(1);
+		
+		cv->toBuffer(m_question->m_text);
+		cv->toBuffer(m_question->m_active);
+		cv->toBuffer(m_question->m_asked_player);
+		
+		std::list < std::pair<std::string, std::string> >::iterator it;
+		cv->toBuffer<int>((int) m_question->m_answers.size());
+		for (it = m_question->m_answers.begin(); it != m_question->m_answers.end(); ++it)
+		{
+			cv->toBuffer(it->first);
+			cv->toBuffer(it->second);
+		}
+		
+		std::set<int>::iterator jt;
+		cv->toBuffer<int>((int) m_question->m_players_answered.size());
+		for (jt = m_question->m_players_answered.begin(); jt != m_question->m_players_answered.end(); ++jt)
+		{
+			cv->toBuffer(*jt);
+		}
+		
+		std::map<int, float>::iterator kt;
+		cv->toBuffer<int>((int) m_question->m_weighted_answers.size());
+		for (kt = m_question->m_weighted_answers.begin(); kt != m_question->m_weighted_answers.end(); ++kt)
+		{
+			cv->toBuffer(kt->first);
+			cv->toBuffer(kt->second);
+		}
+		
+	}
+	
 }
 
 void Dialogue::fromString(CharConv* cv)
@@ -909,6 +1066,66 @@ void Dialogue::fromString(CharConv* cv)
 			cv->fromBuffer(state.m_text_visible);
 		}
 	}
+	
+	int size;
+	cv->fromBuffer<int>(size);
+	std::string name;
+	int id;
+	m_speaker.clear();
+	for (int i=0; i<size; i++)
+	{
+		cv->fromBuffer(name);
+		cv->fromBuffer(id);
+		m_speaker[name] = id;
+	}
+	
+	int ques;
+	cv->fromBuffer<int>(ques);
+	if (m_question != 0)
+	{
+		delete m_question;
+		m_question = 0;
+	}
+	
+	if (ques == 1)
+	{	
+		m_question = new Question;
+		
+		cv->fromBuffer(m_question->m_text);
+		cv->fromBuffer(m_question->m_active);
+		cv->fromBuffer(m_question->m_asked_player);
+		
+		cv->fromBuffer<int>(size);
+		m_question->m_answers.clear();
+		std::string answr, topic;
+		for (int i=0; i<size; i++)
+		{
+			cv->fromBuffer(answr);
+			cv->fromBuffer(topic);
+			m_question->m_answers.push_back(std::make_pair(answr,topic));
+		}
+		
+		cv->fromBuffer<int>(size);
+		m_question->m_players_answered.clear();
+		int plid;
+		for (int i=0; i<size; i++)
+		{
+			cv->fromBuffer(plid);
+			m_question->m_players_answered.insert(plid);
+		}
+		
+		cv->fromBuffer<int>(size);
+		int answer;
+		float weight;
+		m_question->m_weighted_answers.clear();
+		for (int i=0; i<size; i++)
+		{
+			cv->fromBuffer(answer);
+			cv->fromBuffer(weight);
+			m_question->m_weighted_answers[answer] = weight;
+		}
+		
+	}
 }
 
 void Dialogue::skipText(int id)
@@ -923,7 +1140,7 @@ void Dialogue::skipText(int id)
 		{
 			cst = &(m_speech.front().second);
 			// Fragen und Handel kann nicht so uebersprungen werden
-			if (!cst->m_answers.empty() || m_trade)
+			if (m_question !=0 && m_question->m_active || m_trade)
 				return;
 			
 			cst->m_time =0;

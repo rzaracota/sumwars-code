@@ -2231,8 +2231,7 @@ int EventSystem::changeTopic(lua_State *L)
 	if (argc>=1 && lua_isstring(L,1))
 	{
 		std::string topic = lua_tostring(L, 1);
-		m_dialogue->addQuestion("#change_topic#");
-		m_dialogue->addAnswer("",topic);
+		m_dialogue->speak("","#change_topic#",topic);
 	}
 	else
 	{
@@ -2251,8 +2250,7 @@ int EventSystem::jumpTopic(lua_State *L)
 	if (argc>=1 && lua_isstring(L,1))
 	{
 		std::string topic = lua_tostring(L, 1);
-		m_dialogue->addQuestion("#jump_topic#");
-		m_dialogue->addAnswer("",topic);
+		m_dialogue->speak("","#jump_topic#",topic);
 	}
 	else
 	{

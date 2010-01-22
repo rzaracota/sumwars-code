@@ -852,21 +852,17 @@ void CreatureSpeakText::operator=( CreatureSpeakText& other)
 	m_time = other.m_time;
 	m_in_dialogue = other.m_in_dialogue;
 	m_emotion = other.m_emotion;
-	
-	m_answers = other.m_answers;
 }
 
 bool CreatureSpeakText::empty()
 {
-	return (m_text == "" && m_answers.empty());
+	return (m_text == "");
 }
 
 void CreatureSpeakText::clear()
 {
 	m_text = "";
 	m_in_dialogue = false;
-	
-	m_answers.clear();
 }
 
 std::string EmotionSet::getEmotionImage(std::string emotion)
