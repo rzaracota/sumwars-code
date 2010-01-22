@@ -91,6 +91,7 @@ class WorldObject : public GameObject
 	 */
 	enum Group
 	{
+		AUTO = 0,
 		CREATURE_ONLY = 1,
 		PLAYER=2,
 		CREATURE = 3,

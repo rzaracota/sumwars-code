@@ -6,8 +6,8 @@
 #include <map>
 #include "dropitem.h"
 #include "debug.h"
+#include <vector>
 
-#define MAX_GRIDUNIT_OBJ 20
 
 /**
  * \struct Gridunit
@@ -20,43 +20,22 @@ struct Gridunit
 	private:
 
 		/**
-		* \var m_dead[20]
 		* \brief Liste der toten Spieler auf dem Feld
 		*/
-		WorldObject* m_dead[MAX_GRIDUNIT_OBJ];
+		std::vector<WorldObject*> m_dead;
+	
 	
 		/**
-		* \var m_nr_dead
-		* \brief Anzahl der toten Spieler auf dem Feld
-		*/
-		short m_nr_dead;
-	
-		/**
-		* \var m_fixed[20]
 		* \brief Liste der festen Objekte auf dem Feld
 		*/
 	
-		WorldObject* m_fixed[MAX_GRIDUNIT_OBJ];
+		std::vector<WorldObject*> m_fixed;
 	
 		/**
-		* \var m_nr_fixed
-		* \brief Anzahl der festen Objekte auf dem Feld
-		*/
-		short m_nr_fixed;
-	
-		/**
-		* \var m_creature
 		* \brief Liste der Kreaturen auf dem Feld
 		*/
-		WorldObject* m_creature[MAX_GRIDUNIT_OBJ];
+		std::vector<WorldObject*> m_creatures;
 	
-		/**
-		* \var m_nr_creature
-		* \brief Anzahl der Kreaturen auf dem Feld
-		*/
-		short m_nr_creature;
-
-
 
 	public:
 
@@ -77,11 +56,10 @@ struct Gridunit
 
 
 		/**
-		 * \fn short&  getObjectsNr(WorldObject::Group group)
 		 * \brief Gibt die Anzahl der Objekte in einer der Gruppen aus.
 		 * \param group Gruppe deren Objekte ausgegeben werden
 		 */
-		short&  getObjectsNr(WorldObject::Group group);
+		int getObjectsNr(WorldObject::Group group);
 		
 
 		/**
@@ -90,12 +68,12 @@ struct Gridunit
 		 * \param group Gruppe deren Objekte ausgegeben werden
 		 * \return Array mit Zeigern auf die Objekte
 		 */
-		WorldObject** getObjects(WorldObject::Group group)
+		std::vector<WorldObject*>& getObjects(WorldObject::Group group)
 		{
-			if (group & WorldObject::CREATURE) return m_creature;
+			if (group & WorldObject::CREATURE) return m_creatures;
 			else if (group == WorldObject::FIXED) return m_fixed;
 			else if (group == WorldObject::DEAD) return m_dead;
-			return 0;
+			else return m_dead;
 		}
 
 		/**
@@ -104,7 +82,7 @@ struct Gridunit
 		 * \param object einzufuegendes Objekt
 		 * return gibt an, ob die Operation erfolgreich war
 		 */
-		bool insertObject(WorldObject* object);
+		bool insertObject(WorldObject* object,WorldObject::Group group = WorldObject::AUTO);
 
 		/**
 		 * \fn deleteObject(WorldObject* object, short index=-1)

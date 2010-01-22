@@ -476,11 +476,10 @@ bool Region::getFreePlace(Shape* shape, short layer, Vector & pos, WorldObject* 
 bool  Region::addObjectsInShapeFromGridunit(Shape* shape, Gridunit* gu, WorldObjectList* result, short layer, short group,WorldObject* omit, bool empty_test )
 {
 	WorldObject* wo=0;
-	WorldObject** arr=0;
 	Shape* s=0;
 
 
-	arr = gu->getObjects((WorldObject::Group) group);
+	std::vector<WorldObject*>& arr = gu->getObjects((WorldObject::Group) group);
 
 	int n = gu->getObjectsNr((WorldObject::Group) group);
 
@@ -520,10 +519,9 @@ bool  Region::addObjectsInShapeFromGridunit(Shape* shape, Gridunit* gu, WorldObj
 bool Region::addObjectsOnLineFromGridunit(Line& line, Gridunit* gu, WorldObjectList* result, short layer, short group ,WorldObject* omit, bool empty_test )
 {
 	WorldObject* wo=0;
-	WorldObject** arr=0;
 	Shape* s=0;
 
-	arr = gu->getObjects((WorldObject::Group) group);
+	std::vector<WorldObject*>& arr = gu->getObjects((WorldObject::Group) group);
 
 	int n = gu->getObjectsNr((WorldObject::Group) group);
 
@@ -1266,7 +1264,7 @@ bool  Region::deleteObject (WorldObject* object)
 		if (object->getLayer() & WorldObject::LAYER_COLLISION)
 		{
 			Gridunit *gu = (m_data_grid->ind(x,y));
-			result = gu->deleteObject(object);
+			result = gu->deleteObject(object, object->getGridLocation()->m_index);
 		}
 	}
 
@@ -1332,7 +1330,7 @@ bool Region::moveObject(WorldObject* object, Vector pos)
 	else
 	{
 		Gridunit *gu = &(*m_data_grid)[x_old][y_old];
-		result =gu->deleteObject(object);
+		result =gu->deleteObject(object, object->getGridLocation()->m_index);
 		if (result == false)
 		{
 			ERRORMSG("failed to remove object %i from gridunit %i %i",object->getId(),x_old, y_old);
@@ -1439,7 +1437,7 @@ bool Region::changeObjectLayer(WorldObject* object,WorldObject::Layer layer)
 			DEBUG5("deleting object in grid tile %i %i",x,y);
 			
 			Gridunit *gu = (m_data_grid->ind(x,y));
-			result = gu->deleteObject(object);
+			result = gu->deleteObject(object, object->getGridLocation()->m_index);
 			
 		}
 	}
@@ -2059,26 +2057,34 @@ void Region::setRegionData(CharConv* cv,WorldObjectMap* players)
 
 
 	// alle bisherigen statischen Objekte entfernen
-	WorldObjectMap::iterator it;
+	WorldObjectMap::iterator it, itnext;
 	for (it = m_static_objects->begin();it!=m_static_objects->end();it++)
 	{
+		itnext = it;
+		itnext ++;
+		
 		it->second->destroy();
 		deleteObject(it->second);
 		delete it->second;
+		
+		it = itnext;
 	}
 	m_static_objects->clear();
 
 	// alle bisherigen nichtstatischen Objekte entfernen
 	// die SpielerObjekte bleiben erhalten, alle anderen werden geloescht
-	WorldObjectMap::iterator jt;
-	for (jt = m_objects->begin();jt!=m_objects->end();jt++)
+	WorldObjectMap::iterator jt, jtnext;
+	for (jt = m_objects->begin();jt!=m_objects->end();)
 	{
+		jtnext = jt;
+		jtnext++;
 		if (jt->second->getType() != "PLAYER")
 		{
 			jt->second->destroy();
 			deleteObject(jt->second);
 			delete jt->second;
 		}
+		jt = jtnext;
 	}
 	m_objects->clear();
 	m_players->clear();

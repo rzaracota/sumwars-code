@@ -2,43 +2,27 @@
 
 Gridunit::Gridunit()
 {
-	DEBUG5("initialising Gridunit at %p",this);
-	// Anzahl Objekte aller Sorten auf 0 setzen
-	m_nr_dead=0;
-	m_nr_fixed=0;
-	m_nr_creature=0;
-
 }
 
-bool Gridunit::insertObject(WorldObject* object)
+bool Gridunit::insertObject(WorldObject* object, WorldObject::Group g)
 {
 	// Ebene in der das Objekt eingeordnet wird
-	WorldObject::Group g = object->getGroup();
+	if (g == WorldObject::AUTO)
+	{
+		g = object->getGroup();
+	}
 
 	// Zeiger auf Array in das eingefuegt wird
-	WorldObject ** arr = getObjects(g);
+	std::vector<WorldObject*>& arr = getObjects(g);
 
-	// Zeiger auf Anzahl der Objekte in der Ebene
-	short &  np = getObjectsNr(g);
-
-	if (np== MAX_GRIDUNIT_OBJ)
-	{
-		// Maximale Anzahl in der Ebene erreicht, Fehler anzeigen
-		DEBUG("max number of objects per Gridunit");
-		return false;
-	}
-	else
-	{
-		// Element einfuegen, Zahler erhoehen
-		arr[np] = object;
-		object->getGridLocation()->m_index = np;
+	// Element einfuegen, Zahler erhoehen
+	arr.push_back(object);
+	object->getGridLocation()->m_index = arr.size()-1;
 		
-		np++;
-		DEBUG5("inserted object %p, as number %i in group %i",object,np,g);
-	}
-
-    return true;
+	DEBUG5("inserted object %p, as number %i in group %i",object,arr.size()-1,g);
+	return true;
 }
+
 
 bool  Gridunit::moveObject(WorldObject* object,WorldObject::Group group )
 {
@@ -46,24 +30,8 @@ bool  Gridunit::moveObject(WorldObject* object,WorldObject::Group group )
 	if (ret==false)
 		return false;
 
-	// Zeiger auf Array in das eingefuegt wird
-	WorldObject ** arr = getObjects(group);
-
-	// Zeiger auf Anzahl der Objekte in der Ebene
-	short &  np = getObjectsNr(group);
-
-	if (np== MAX_GRIDUNIT_OBJ)
-	{
-		// Maximale Anzahl in der Ebene erreicht, Fehler anzeigen
-		return false;
-	}
-	else
-	{
-		// Element einfuegen, Zahler erhoehen
-		arr[np] = object;
-		np++;
-		DEBUG5("inserted object %p, as number %i in group %i",object,np,group);
-	}
+	insertObject(object,group);
+	
     return true;
 }
 
@@ -73,45 +41,36 @@ bool Gridunit::deleteObject(WorldObject* object, short index)
 	WorldObject::Group g = object->getGroup();
 
 	// Zeiger auf Array aus dem geloescht wird
-	WorldObject ** arr = getObjects(g);
+	std::vector<WorldObject*>& arr = getObjects(g);
 
-	// Zeiger auf Anzahl der Objekte in der Ebene
-	short &  np = getObjectsNr(g);
+	int size = arr.size();
 
 	DEBUG5("deleting obj %i from group %i",object->getId(),g);
-	if (index != -1)
+	if (index != -1 && arr[index]==object)
 	{
 		// Stelle an der geloescht werden soll ist explizit vorgegeben
-		if (arr[index]==object)
-		{
-			// Letztes Objekt an die Stelle des geloeschten kopieren
-			arr[index] = arr[m_nr_fixed-1];
-			// Anzahl Objekte in dem Array reduzieren
-			np--;
-			return true;
-		}
-		else
-		{
-			// Objekt befindet sich nicht an der Stelle, Fehler ausgeben
-			ERRORMSG("Object not found at index %i",index);
-
-			return false;
-		}
+		
+		// Letztes Objekt an die Stelle des geloeschten kopieren
+		arr[index] = arr[size-1];
+		arr[index]->getGridLocation()->m_index = index;
+			
+		arr.resize(size-1);
+		return true;
 	}
 	else
 	{
 		// Suchen an welcher Stelle sich das Objekt befindet
-		for (int i=0;i<np;i++)
+		for (int i=0;i<size;i++)
 		{
-		DEBUG5(" testing object %i",i);
+			DEBUG5(" testing object %i",i);
 			if (arr[i]==object)
 			{
 				// Objekt gefunden
-				// Anzahl Objekte in dem Array reduzieren
-				np--;
-
 				// Letztes Objekt an die Stelle des geloeschten kopieren
-				arr[i] = arr[np];
+				arr[i] = arr[size-1];
+				arr[i]->getGridLocation()->m_index = i;
+			
+				arr.resize(size-1);
 				return true;
 			}
 		}
@@ -124,25 +83,25 @@ bool Gridunit::deleteObject(WorldObject* object, short index)
 }
 
 
-short&  Gridunit::getObjectsNr(WorldObject::Group group)
+int  Gridunit::getObjectsNr(WorldObject::Group group)
 {
 	if (group & WorldObject::CREATURE)
 	{
-		return m_nr_creature;
+		return m_creatures.size();
 	}
 	else if (group == WorldObject::FIXED)
 	{
-		return m_nr_fixed;
+		return m_fixed.size();
 	}
 	else if (group == WorldObject::DEAD)
 	{
-		return m_nr_dead;
+		return m_dead.size();
 	}
 	else 
 	{
-		DEBUG("unknown group %i",group);
+		ERRORMSG("unknown group %i",group);
 	}
-	return m_nr_dead;
+	return 0;
 }
 
 
