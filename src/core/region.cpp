@@ -1910,6 +1910,7 @@ void Region::getRegionData(CharConv* cv)
 	
 	// Cutscene modus
 	cv->toBuffer(m_cutscene_mode);
+	getCamera().toString(cv);
 	
 	// Licht
 	for (int i=0; i<3; ++i)
@@ -2144,6 +2145,7 @@ void Region::setRegionData(CharConv* cv,WorldObjectMap* players)
 
 	// Cutscene modus
 	cv->fromBuffer(m_cutscene_mode);
+	getCamera().fromString(cv);
 	
 	// Licht
 	for (int i=0; i<3; ++i)
