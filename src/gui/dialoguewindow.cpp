@@ -613,6 +613,8 @@ void DialogueWindow::updateSpeechBubbles()
 		
 		height += elemheight + 20;
 		
+		
+		
 		// Antworten einfuegen
 		std::list < std::pair<std::string, std::string> >::iterator it;
 		for (it = question->m_answers.begin(); it != question->m_answers.end(); ++it)
@@ -637,7 +639,16 @@ void DialogueWindow::updateSpeechBubbles()
 				label = win_mgr.getWindow(stream.str());
 			}
 			
-			ctext = (CEGUI::utf8*) dgettext("sumwars_xml",it->first.c_str());
+			CEGUI::String cstring = (CEGUI::utf8*) dgettext("sumwars_xml",it->first.c_str());
+			
+			// Anzahl Antworten bei Voting eintragen
+			if (question->m_weighted_answers.count(nr) > 0)
+			{
+				stream.str("");
+				stream << " (" << (int) question->m_weighted_answers[nr] <<")";
+				cstring += (CEGUI::utf8*) stream.str().c_str();
+			}
+			
 			elemwidth =font->getTextExtent(ctext);
 			elemheight = lineheight+5;
 		
@@ -649,9 +660,9 @@ void DialogueWindow::updateSpeechBubbles()
 			}
 			width = std::max(width,elemwidth);
 			
-			if (label->getText() != ctext)
+			if (label->getText() != cstring)
 			{
-				label->setText(ctext);
+				label->setText(cstring);
 			}
 			
 			label->setPosition(CEGUI::UVector2(CEGUI::UDim(0,horzoffset), CEGUI::UDim(0,height)));

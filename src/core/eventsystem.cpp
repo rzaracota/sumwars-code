@@ -2116,12 +2116,21 @@ int EventSystem::addQuestion(lua_State *L)
 	int argc = lua_gettop(L);
 	if (argc>=1 && lua_isstring(L,1))
 	{
+		
 		std::string text = lua_tostring(L, 1);
-		m_dialogue->addQuestion(text);
+		if (argc>=2 && lua_isstring(L,2))
+		{
+			std::string player = lua_tostring(L,2);
+			m_dialogue->addQuestion(text,player);
+		}
+		else
+		{
+			m_dialogue->addQuestion(text);
+		}
 	}
 	else
 	{
-		ERRORMSG("Syntax: addQuestion(string text)");
+		ERRORMSG("Syntax: addQuestion(string text, string asked_player='main_player')");
 	}
 
 	return 0;

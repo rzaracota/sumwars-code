@@ -527,6 +527,8 @@ void Dialogue::chooseAnswer(int playerid, int answer_nr)
 		return;
 	}
 	
+	m_event_mask =1;
+	
 	m_question->m_players_answered.insert(playerid);
 	float weight = 1;
 	if (playerid == getSpeaker("main_player"))
@@ -543,10 +545,8 @@ void Dialogue::chooseAnswer(int playerid, int answer_nr)
 		m_question->m_weighted_answers[answer_nr] += weight;
 	}
 	
-	if (m_question->m_asked_player != "all" || (int) m_player_skips.size() == m_nr_players)
-	{
-		m_event_mask =1;
-		
+	if (m_question->m_asked_player != "all" || (int) m_question->m_players_answered.size() == m_nr_players)
+	{	
 		// Antwort mit den meisten Stimmen ermitteln
 		float maxweight = -1;
 		int answernr=0;
