@@ -198,7 +198,7 @@ void PartyInfo::update()
 	}
 	
 	bool leader2;
-	DEBUG5("party %i solo %i leader %i",party->getId(),solo,leader);
+	DEBUGX("party %i solo %i leader %i",party->getId(),solo,leader);
 	
 	Fraction::Relation rel,rel2;
 	

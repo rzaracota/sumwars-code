@@ -56,7 +56,7 @@ void SoundSystem::loadSoundFile(std::string file, SoundName sname)
 		filename += "/";
 		filename += it->filename;
 		
-		DEBUG5("loading file %s",filename.c_str());
+		DEBUGX("loading file %s",filename.c_str());
 		
 		int buffernr;
 		buffernr = alutCreateBufferFromFile(filename.c_str());
@@ -106,7 +106,7 @@ void SoundSystem::loadSoundInfos(TiXmlNode* node)
 				if (!strcmp(child->Value(), "Soundfile"))
 				{
 					attr.getString("source",file);
-					DEBUG5("loading sound file %s for sound %s",file.c_str(), name.c_str());
+					DEBUGX("loading sound file %s for sound %s",file.c_str(), name.c_str());
 					loadSoundFile(file, name);
 				}
 			}

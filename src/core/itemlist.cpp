@@ -166,7 +166,7 @@ int ItemList::getFreePlace(Item::Size size, bool useup_possible)
 
 void ItemList::swapItem(Item* &item,Item::Size size, int index)
 {
-	DEBUG5("swapping %p of size %i at %i",item,size,index);
+	DEBUGX("swapping %p of size %i at %i",item,size,index);
 	Item** arr = m_small_items;
 	short k = m_max_small;
 
@@ -219,9 +219,9 @@ void Equipement::clear()
 		}
 	}
 	
-	DEBUG5("clearing equipement");
+	DEBUGX("clearing equipement");
 	m_inventory.clear();
-	DEBUG5("done");
+	DEBUGX("done");
 }
 
 Item* Equipement::getItem(int pos)
@@ -279,7 +279,7 @@ bool Equipement::swapItem(Item* &item,int pos)
 
 		// Tausch mit Gegenstand im Inventar
 		m_inventory.swapItem(item,size,idx);
-		DEBUG5("cursor item %p %p",getItem(Equipement::CURSOR_ITEM), &(m_body_items[CURSOR_ITEM ]));
+		DEBUGX("cursor item %p %p",getItem(Equipement::CURSOR_ITEM), &(m_body_items[CURSOR_ITEM ]));
 		
 		return true;
 	}
@@ -363,7 +363,7 @@ short  Equipement::insertItem(Item* item, bool check_useup,bool use_equip, bool 
 	if (!check_useup)
 		useup = true;
 	pos = m_inventory.getFreePlace(item->m_size,useup);
-	DEBUG5("free pos: %i",pos);
+	DEBUGX("free pos: %i",pos);
 
 
 	if (pos ==-1)
@@ -627,7 +627,7 @@ void Equipement::fromString(CharConv* cv)
 		// Datenfelder des Items belegen
 		it->fromString(cv);
 
-		DEBUG5("creating item %p",it);
+		DEBUGX("creating item %p",it);
 
 		// Item ins Inventar tauschen
 		swapItem(it,pos);
@@ -717,14 +717,14 @@ void Equipement::fromStringComplete(CharConv* cv)
 		cv->fromBuffer(id);
 		if (World::getWorld() !=0 && World::getWorld()->isServer())
 			id =0;
-		DEBUG5("pos %i type %i subtype %s",pos,type, subtype.c_str());
+		DEBUGX("pos %i type %i subtype %s",pos,type, subtype.c_str());
 		
 		it = ItemFactory::createItem((Item::Type) type, std::string(subtype),id);
 		
 		// Datenfelder des Items belegen
 		it->fromStringComplete(cv);
 
-		DEBUG5("creating item %p",it);
+		DEBUGX("creating item %p",it);
 
 		// Item ins Inventar tauschen
 		swapItem(it,pos);

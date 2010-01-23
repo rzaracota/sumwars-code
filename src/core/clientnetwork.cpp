@@ -46,7 +46,7 @@ void ClientNetwork::update()
 	while (packet !=0)
 	{
 		nr ++;
-		DEBUG5("packets allocated: %i",nr);
+		DEBUGX("packets allocated: %i",nr);
 		id = getPacketIdentifier(packet);
 		
 		if (id <  ID_USER_PACKET_ENUM)
@@ -91,7 +91,7 @@ void ClientNetwork::update()
 		else
 		{
 			
-			DEBUG5("packet received");
+			DEBUGX("packet received");
 			m_received_packets.push(packet);
 
 		}

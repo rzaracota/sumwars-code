@@ -63,7 +63,7 @@ void Quest::init()
 	luainit += " = ";
 	luainit += m_table_name;
 	luainit += "\n end;";
-	DEBUG5("lua init %s",luainit.c_str());
+	DEBUGX("lua init %s",luainit.c_str());
 	EventSystem::doString(luainit.c_str());
 	
 	EventSystem::executeCodeReference(m_initialisation);

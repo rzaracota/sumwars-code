@@ -125,7 +125,7 @@ GameObject::Subtype ObjectFactory::getObjectType(ObjectTemplateType generictype,
 	// Namen die nicht mit $ anfangen sind normale Typen
 	if (generictype[0] != '$')
 	{
-		DEBUG5("simple subtype %s",generictype.c_str());
+		DEBUGX("simple subtype %s",generictype.c_str());
 		return generictype;
 	}
 	
@@ -147,7 +147,7 @@ ObjectGroupName ObjectFactory::getObjectGroupType(ObjectGroupTemplateName generi
 	// Namen die nicht mit $ anfangen sind normale Typen
 	if (generictype[0] != '$')
 	{
-		DEBUG5("simple subtype %s",generictype.c_str());
+		DEBUGX("simple subtype %s",generictype.c_str());
 		return generictype;
 	}
 	
@@ -206,7 +206,7 @@ WorldObject* ObjectFactory::createObject(GameObject::Type type, GameObject::Subt
 	}
 	else if (type =="MONSTER" || type =="NPC")
 	{
-		DEBUG5("requested subtype: %s",subtype.c_str());
+		DEBUGX("requested subtype: %s",subtype.c_str());
 		MonsterBasicData* mdata;
 		std::map<GameObject::Subtype, MonsterBasicData*>::iterator i;
 
@@ -218,7 +218,7 @@ WorldObject* ObjectFactory::createObject(GameObject::Type type, GameObject::Subt
 		}
 		mdata = i->second;
 		ret = new Monster( id,*mdata);
-		DEBUG5("Monster created");
+		DEBUGX("Monster created");
 	}
 	else if (type =="FIXED_OBJECT")
 	{
@@ -227,7 +227,7 @@ WorldObject* ObjectFactory::createObject(GameObject::Type type, GameObject::Subt
 			return new Waypoint(id);
 		}
 		
-		DEBUG5("requested subtype: %s",subtype.c_str());
+		DEBUGX("requested subtype: %s",subtype.c_str());
 		FixedObjectData* data;
 		std::map<GameObject::Subtype, FixedObjectData*>::iterator i;
 
@@ -240,7 +240,7 @@ WorldObject* ObjectFactory::createObject(GameObject::Type type, GameObject::Subt
 		data = i->second;
 		
 		Shape* sp;
-		DEBUG5("create fixed object: %s",subtype.c_str());
+		DEBUGX("create fixed object: %s",subtype.c_str());
 		ret = new FixedObject(id,subtype);
 		ret->setState(WorldObject::STATE_STATIC,false);
 		
@@ -398,7 +398,7 @@ void ObjectFactory::registerMonster(GameObject::Subtype subtype, MonsterBasicDat
 {
 	m_object_types.insert(std::make_pair(subtype, "MONSTER"));
 	
-	DEBUG5("registered monster for subtype %s",subtype.c_str());
+	DEBUGX("registered monster for subtype %s",subtype.c_str());
 	m_monster_data.insert(std::make_pair(subtype,data));
 }
 
@@ -430,7 +430,7 @@ void ObjectFactory::registerPlayer(GameObject::Subtype subtype, PlayerBasicData*
 {
 	m_object_types.insert(std::make_pair(subtype, "PLAYER"));
 	
-	DEBUG5("registered playerclass for subtype %s",subtype.c_str());
+	DEBUGX("registered playerclass for subtype %s",subtype.c_str());
 	m_player_data.insert(std::make_pair(subtype,data));
 }
 

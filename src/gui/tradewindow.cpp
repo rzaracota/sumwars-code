@@ -3,7 +3,7 @@
 TradeWindow::TradeWindow (Document* doc)
 	: ItemWindow(doc)
 {
-	DEBUG5("setup trade");
+	DEBUGX("setup trade");
 
 	m_big_sheet =0;
 	m_medium_sheet =0;

@@ -297,7 +297,7 @@ void EventSystem::setItem(Item* item)
 bool EventSystem::executeEvent(Event* event)
 {
 	// Lua Code zum Bedingung pruefen ausfuehren
-	DEBUG5("execute Event %p",event)
+	DEBUGX("execute Event %p",event)
 	bool ret = event->checkCondition();
 	if (ret ==false)
 	{
@@ -1254,7 +1254,7 @@ int EventSystem::setObjectAnimation(lua_State *L)
 				repeat = (repstr == "true");
 			}
 			wo->setAnimation(actstr,time,repeat);
-			DEBUG5("action %s perc %f",wo->getActionString().c_str(),wo->getActionPercent());
+			DEBUGX("action %s perc %f",wo->getActionString().c_str(),wo->getActionPercent());
 			
 		}
 	}
@@ -2769,7 +2769,7 @@ void EventSystem::readSavegame(CharConv* savegame, int playerid, bool local_play
 
 	std::string instr,instr_pr;
 	std::string tablename;
-	DEBUG5("prefix %s",prefix.c_str());
+	DEBUGX("prefix %s",prefix.c_str());
 
 	char c=1;
 	while (c==1)
@@ -2785,10 +2785,10 @@ void EventSystem::readSavegame(CharConv* savegame, int playerid, bool local_play
 			doString(instr.c_str());
 
 			tablename = instr.substr(0,instr.find_first_of ('='));
-			DEBUG5("table name %s",tablename.c_str());
+			DEBUGX("table name %s",tablename.c_str());
 			stream.str("");
 			stream << "quests."<<tablename <<" = "<<tablename;
-			DEBUG5("instr %s",stream.str().c_str());
+			DEBUGX("instr %s",stream.str().c_str());
 			doString(stream.str().c_str());
 		}
 
@@ -2845,7 +2845,7 @@ int EventSystem::luagettext(lua_State *L)
 		return 1;
 	}
 
-	DEBUG5("to translate: %s",lua_tostring(L,1));
+	DEBUGX("to translate: %s",lua_tostring(L,1));
 	std::string text="return ";
 	std::string transl = dgettext("event",lua_tostring(L,1));
 	
@@ -2865,7 +2865,7 @@ int EventSystem::luagettext(lua_State *L)
 	if (!complex)
 		text += "]];";
 
-	DEBUG5("return string %s",text.c_str());
+	DEBUGX("return string %s",text.c_str());
 	doString(text.c_str());
 	return 1;
 

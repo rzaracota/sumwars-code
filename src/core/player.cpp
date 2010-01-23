@@ -88,8 +88,8 @@ Player::~Player()
 
 bool Player::destroy()
 {
-	DEBUG5("leave Party");
-	DEBUG5("destroy");
+	DEBUGX("leave Party");
+	DEBUGX("destroy");
 	World::getWorld()->getParty(m_fraction)->removeMember(getId());
 	return Creature::destroy();
 }
@@ -319,7 +319,7 @@ bool Player::onGamefieldClick(ClientCommand* command)
 	if ( command->m_id!=0 && command->m_action != "take_item")
 	{
 
-		DEBUG5("Kommando erhalten, zielid: %i",command->m_id);
+		DEBUGX("Kommando erhalten, zielid: %i",command->m_id);
 		wo = getRegion()->getObject(command->m_id);
 
 		// Unterscheidung Zielobject vs kein Zielobject
@@ -343,7 +343,7 @@ bool Player::onGamefieldClick(ClientCommand* command)
 						com->m_goal_object_id = command->m_id;
 						com->m_goal = command->m_goal;
 						com->m_range = getBaseAttrMod()->m_attack_range;
-						DEBUG5("action range %f",getCommand()->m_range);
+						DEBUGX("action range %f",getCommand()->m_range);
 					}
 					else
 					{
@@ -385,7 +385,7 @@ bool Player::onGamefieldClick(ClientCommand* command)
 					com->m_type ="use";
 					com->m_goal_object_id = command->m_id;
 					com->m_range = 1.0;
-					DEBUG5("use Object %i",command->m_id);
+					DEBUGX("use Object %i",command->m_id);
 				}
 				
 			}
@@ -421,7 +421,7 @@ bool Player::onGamefieldClick(ClientCommand* command)
 	else
 	{
 		// Kein Zielobjekt gegeben
-		DEBUG5("Kommando erhalten, Ziel (%f,%f) button %i action %s dist %i",command->m_goal.m_x, command->m_goal.m_y,command->m_button,command->m_action.c_str(),dist);
+		DEBUGX("Kommando erhalten, Ziel (%f,%f) button %i action %s dist %i",command->m_goal.m_x, command->m_goal.m_y,command->m_button,command->m_action.c_str(),dist);
 
 		if (command->m_button == LEFT_MOUSE_BUTTON)
 		{
@@ -431,7 +431,7 @@ bool Player::onGamefieldClick(ClientCommand* command)
 			{
 				com->m_type = "take_item";
 				com->m_goal_object_id =command->m_id;
-				DEBUG5("take item");
+				DEBUGX("take item");
 			}
 			else
 			{
@@ -493,7 +493,7 @@ bool Player::onGamefieldClick(ClientCommand* command)
 
 	if (meleedir)
 	{
-		DEBUG5("meleedir");
+		DEBUGX("meleedir");
 		Vector dir;
 		dir = com->m_goal - getShape()->m_center;
 		float range = com->m_range + getShape()->m_radius;
@@ -506,7 +506,7 @@ bool Player::onGamefieldClick(ClientCommand* command)
 	}
 
 	addToNetEventMask(NetEvent::DATA_NEXT_COMMAND);
-	DEBUG5("resulting command %s goal %f %f id %i",com->m_type.c_str(),com->m_goal.m_x,com->m_goal.m_y, com->m_goal_object_id);
+	DEBUGX("resulting command %s goal %f %f id %i",com->m_type.c_str(),com->m_goal.m_x,com->m_goal.m_y, com->m_goal_object_id);
 
 	return true;
 }
@@ -529,7 +529,7 @@ bool Player::onItemClick(ClientCommand* command)
 	// das Item welches, des Spieler aktuell *in der Hand* hat
 	Item* it = m_equipement->getItem(Equipement::CURSOR_ITEM);
 
-	DEBUG5("got Item %p",it);
+	DEBUGX("got Item %p",it);
 
 	if (command->m_button== BUTTON_ITEM_LEFT)
 	{
@@ -604,7 +604,7 @@ bool Player::onItemClick(ClientCommand* command)
 			else
 			{
 			// Item soll im Inventar abgelegt werden
-			DEBUG5("swap in inventory");
+			DEBUGX("swap in inventory");
 
 			// Groesse die das Item haben muss
 				Item::Size size = Item::BIG;
@@ -671,7 +671,7 @@ bool Player::onItemClick(ClientCommand* command)
 			{
 				event.m_type = NetEvent::PLAYER_ITEM_INSERT;
 			}
-			DEBUG5("event: %i at %i",event.m_type,event.m_data);
+			DEBUGX("event: %i at %i",event.m_type,event.m_data);
 			World::getWorld()->insertNetEvent(event);
 		}
 
@@ -697,7 +697,7 @@ bool Player::onItemClick(ClientCommand* command)
 						event.m_data = shpos;
 						event.m_id = getId();
 
-						DEBUG5("event: no item at %i",shpos);
+						DEBUGX("event: no item at %i",shpos);
 
 						World::getWorld()->insertNetEvent(event);
 					}
@@ -749,7 +749,7 @@ bool Player::onItemClick(ClientCommand* command)
 					event.m_data = wpos;
 					event.m_id = getId();
 
-					DEBUG5("event: no item at %i",wpos);
+					DEBUGX("event: no item at %i",wpos);
 
 					World::getWorld()->insertNetEvent(event);
 				}
@@ -878,7 +878,7 @@ short Player::insertItem(Item* itm, bool use_equip, bool emit_event)
 				event.m_data = pos;
 				event.m_id = getId();
 	
-				DEBUG5("event: item picked up %i",pos);
+				DEBUGX("event: item picked up %i",pos);
 	
 				World::getWorld()->insertNetEvent(event);
 			}
@@ -906,7 +906,7 @@ bool Player::checkItemRequirements(Item* itm)
 	if (getBaseAttr()->m_level < itm->m_level_req)
 	{
 		// Level Vorraussetzung nicht erfuellt
-		DEBUG5("level too low: own level: %i item level: %i",getBaseAttr()->m_level,itm->m_level_req);
+		DEBUGX("level too low: own level: %i item level: %i",getBaseAttr()->m_level,itm->m_level_req);
 		return false;
 	}
 	
@@ -1048,7 +1048,7 @@ void Player::gainLevel()
 
 bool Player::onClientCommand( ClientCommand* command, float delay)
 {
-	DEBUG5("Kommando (%f %f) button: %i id: %i action: %s",command->m_goal.m_x,command->m_goal.m_y,command->m_button,command->m_id, command->m_action.c_str());
+	DEBUGX("Kommando (%f %f) button: %i id: %i action: %s",command->m_goal.m_x,command->m_goal.m_y,command->m_button,command->m_id, command->m_action.c_str());
 
 	Party* 	p;
 	Player* pl;
@@ -1167,7 +1167,7 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 				event.m_id = getId();
 				World::getWorld()->insertNetEvent(event);
 			}
-			DEBUG5("switching equip");
+			DEBUGX("switching equip");
 			break;
 
 
@@ -1195,7 +1195,7 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 					// Bit fuer die Faehigkeit setzen
 					getBaseAttr()->m_abilities[command->m_action].m_time=0;
 
-					DEBUG5("lerne Faehigkeit %s", command->m_action.c_str());
+					DEBUGX("lerne Faehigkeit %s", command->m_action.c_str());
 
 					calcBaseAttrMod();
 					
@@ -1247,7 +1247,7 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 				break;
 			}
 			
-			DEBUG5("changing topic to %s",it->second.c_str());
+			DEBUGX("changing topic to %s",it->second.c_str());
 			EventSystem::setDialogue(dia);
 			dia->chooseAnswer(getId(), command->m_id);
 			EventSystem::setDialogue(0);
@@ -1342,7 +1342,7 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 				setUsingWaypoint(false);
 				if (command->m_id>=0 && command->m_id!= getRegion()->getId())
 				{
-					DEBUG5("Player Teleport to Region %i",command->m_id);
+					DEBUGX("Player Teleport to Region %i",command->m_id);
 					std::map<short,WaypointInfo>& winfos  = World::getWorld()->getWaypointData();
 					RegionLocation regloc;
 					regloc.first = winfos[command->m_id].m_name;
@@ -1394,12 +1394,12 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 			initAction();
 			calcDamage(getAction()->m_type,*(getDamage()));
 
-			DEBUG5("new action %s time %f",getAction()->m_type.c_str(),getAction()->m_time);
+			DEBUGX("new action %s time %f",getAction()->m_type.c_str(),getAction()->m_time);
 
 			// Action entsprechend der Verzoegerung schneller ausfuehren
 			// aber maximal doppelt so schnell
 			float mult = std::max(getAction()->m_time-delay, getAction()->m_time/2)/getAction()->m_time;
-			DEBUG5("delay %f mult %f",delay,mult);
+			DEBUGX("delay %f mult %f",delay,mult);
 			if (getAction()->m_type == "walk")
 			{
 				// Laufgeschwindigkeit entsprechend erhoehen
@@ -1409,7 +1409,7 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 
 			}
 			getAction()->m_time *= mult;
-			DEBUG5("faster action time %f",getAction()->m_time);
+			DEBUGX("faster action time %f",getAction()->m_time);
 		}
 
 	}
@@ -1423,7 +1423,7 @@ void Player::abortAction()
 	float time = getAction()->m_elapsed_time;
 	Action::ActionInfo* aci = Action::getActionInfo(getAction()->m_type);
 
-	DEBUG5("abort Action %s (elapsed time %f)",getAction()->m_type.c_str(), time);
+	DEBUGX("abort Action %s (elapsed time %f)",getAction()->m_type.c_str(), time);
 
 
 	if (getAction()->m_type == "walk")
@@ -1457,7 +1457,7 @@ bool Player::update(float time)
 	m_camera.update(time);
 
 	// Player spezifische Updateroutine
-	DEBUG5("Update des Playerobjekts [%i] wird gestartet", getId());
+	DEBUGX("Update des Playerobjekts [%i] wird gestartet", getId());
 
 	// Debugging
 	//return true;
@@ -1469,7 +1469,7 @@ void Player::performActionCritPart(Vector goal, WorldObject* goalobj)
 {
 	if (getAction()->m_type == "take_item")
 	{
-		DEBUG5("take item");
+		DEBUGX("take item");
 		// Item suchen
 		Item* itm = getRegion()->getItem(getCommand()->m_goal_object_id);
 
@@ -1480,7 +1480,7 @@ void Player::performActionCritPart(Vector goal, WorldObject* goalobj)
 
 			// Item einfuegen
 			insertItem(itm,true);
-			DEBUG5("take item %p",itm);
+			DEBUGX("take item %p",itm);
 		}
 		else
 		{
@@ -1758,7 +1758,7 @@ void Player::addMessage(std::string msg)
 
 void Player::toString(CharConv* cv)
 {
-	DEBUG5("Player::tostring");
+	DEBUGX("Player::tostring");
 	Creature::toString(cv);
 	
 	cv->toBuffer(getBaseAttr()->m_level);
@@ -1772,7 +1772,7 @@ void Player::toString(CharConv* cv)
 		if (item !=0)
 			cnt++;
 	}
-	DEBUG5("number of items: %i",cnt);
+	DEBUGX("number of items: %i",cnt);
 	cv->toBuffer(cnt);
 	
 	for ( short i = Equipement::ARMOR; i<= Equipement::SHIELD2; i++)
@@ -1810,7 +1810,7 @@ void Player::fromString(CharConv* cv)
 	m_emotion_set = m_look.m_emotion_set;
 	char cnt;
 	cv->fromBuffer(cnt);
-	DEBUG5("number of items: %i",cnt);
+	DEBUGX("number of items: %i",cnt);
 	for ( short i = 0; i< cnt; i++)
 	{
 		readItem(cv);
@@ -1868,7 +1868,7 @@ void Player::readItemComplete(CharConv* cv)
 	cv->fromBuffer(subtype);
 	cv->fromBuffer(id);
 
-	DEBUG5("reading Item for pos %i type %i subtype %s",pos,type,subtype.c_str());
+	DEBUGX("reading Item for pos %i type %i subtype %s",pos,type,subtype.c_str());
 	item = ItemFactory::createItem((Item::Type) type, subtype,id);
 	item->fromStringComplete(cv);
 	getEquipement()->swapItem(item,pos);
@@ -1893,7 +1893,7 @@ void Player::addWaypoint(short id, bool check_party)
 	if (m_waypoints.count(id) ==0)
 	{
 		m_waypoints.insert(id);
-		DEBUG5("inserted Waypoint %i for player %i",id, getId());
+		DEBUGX("inserted Waypoint %i for player %i",id, getId());
 		
 		// Partymitglieder auch ueber den Wegpunkt informieren
 		if (check_party)
@@ -2053,7 +2053,7 @@ void Player::toSavegame(CharConv* cv)
 
 void Player::fromSavegame(CharConv* cv, bool local)
 {
-	DEBUG5("from Savegame");
+	DEBUGX("from Savegame");
 	
 	
 	int version;
@@ -2118,7 +2118,7 @@ void Player::fromSavegame(CharConv* cv, bool local)
 		getBaseAttr()->m_abilities[type].m_time = time;
 	}
 
-	DEBUG5("name %s class %s level %i",getName().c_str(), getSubtype().c_str(), getBaseAttr()->m_level);
+	DEBUGX("name %s class %s level %i",getName().c_str(), getSubtype().c_str(), getBaseAttr()->m_level);
 	
 	cv->fromBuffer( m_base_action);
 	cv->fromBuffer(m_left_action);
@@ -2151,7 +2151,7 @@ void Player::fromSavegame(CharConv* cv, bool local)
 			
 			cv->fromBuffer(instr);
 			m_lua_instructions.push_back(instr);
-			DEBUG5("instructions: %s",instr.c_str());
+			DEBUGX("instructions: %s",instr.c_str());
 		}
 	}
 	else
@@ -2259,7 +2259,7 @@ void Player::writeNetEvent(NetEvent* event, CharConv* cv)
 		cv->toBuffer(m_revive_position.second);
 		cv->toBuffer(m_portal_position.first);
 		cv->toBuffer(m_portal_position.second);
-		DEBUG5("writing revive position %s %s",m_revive_position.first.c_str(), m_revive_position.second.c_str())
+		DEBUGX("writing revive position %s %s",m_revive_position.first.c_str(), m_revive_position.second.c_str())
 	}
 	
 	if (event->m_data & NetEvent::DATA_SKILL_ATTR_POINTS)
@@ -2295,7 +2295,7 @@ void Player::processNetEvent(NetEvent* event, CharConv* cv)
 		cv->fromBuffer(m_revive_position.second);
 		cv->fromBuffer(m_portal_position.first);
 		cv->fromBuffer(m_portal_position.second);
-		DEBUG5("reading revive position %s %s",m_revive_position.first.c_str(), m_revive_position.second.c_str())
+		DEBUGX("reading revive position %s %s",m_revive_position.first.c_str(), m_revive_position.second.c_str())
 	}
 	
 	if (event->m_data & NetEvent::DATA_SKILL_ATTR_POINTS)
@@ -2336,7 +2336,7 @@ void Player::setPortalPosition(RegionLocation regloc)
 
 void Player::setUsingWaypoint(bool val)
 {
-	DEBUG5("player %i using waypoint ",getId());
+	DEBUGX("player %i using waypoint ",getId());
 	m_using_waypoint = val;
 	addToNetEventMask(NetEvent::DATA_WAYPOINT);
 }

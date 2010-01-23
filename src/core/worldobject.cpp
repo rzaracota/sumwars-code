@@ -114,7 +114,7 @@ bool  WorldObject::update ( float time)
 
 void WorldObject::toString(CharConv* cv)
 {
-	DEBUG5("worldobject::tostring");
+	DEBUGX("worldobject::tostring");
 	GameObject::toString(cv);
 	
 	cv->toBuffer(m_name);

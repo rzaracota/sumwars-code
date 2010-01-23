@@ -79,7 +79,7 @@ MainWindow::~MainWindow()
 
 bool MainWindow::initInputs()
 {
-	DEBUG4("init inputs");
+	DEBUGX("init inputs");
 	OIS::ParamList pl;
 	// Handle fuer das aktuelle Fenster
 	unsigned long hWnd;
@@ -259,7 +259,7 @@ void MainWindow::update(float time)
 		{
 			updateMainMenu();
 		}
-		DEBUG5("new shown windows %x",wflags);
+		DEBUGX("new shown windows %x",wflags);
 
 		// Auswahlliste Savegames  anzeigen wenn entsprechendes Flag gesetzt
 		CEGUI::FrameWindow* savelist = (CEGUI::FrameWindow*) win_mgr.getWindow("SavegameMenu");
@@ -590,7 +590,7 @@ void MainWindow::update(float time)
 
 bool MainWindow::setupGameScreen()
 {
-	DEBUG4("setup game screen");
+	DEBUGX("setup game screen");
 	try
 	{
 		// Szene erzeugen
@@ -804,7 +804,7 @@ void MainWindow::setupMinimap()
 
 bool MainWindow::setupObjectInfo()
 {
-	DEBUG4("setup object info");
+	DEBUGX("setup object info");
 
 	// Fenstermanager
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
@@ -838,7 +838,7 @@ bool MainWindow::setupObjectInfo()
 
 bool MainWindow::setupItemInfo()
 {
-	DEBUG4("setup object info");
+	DEBUGX("setup object info");
 
 	// Fenstermanager
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
@@ -1161,7 +1161,7 @@ void MainWindow::updateObjectInfo()
 				DEBUG("Object %s has no ID",it->movable->getName().c_str());
 				continue;
 			}
-			DEBUG5("ray scene query dist %f obj %s mask %x id %i",it->distance, it->movable->getName().c_str(),it->movable->getQueryFlags(), id);
+			DEBUGX("ray scene query dist %f obj %s mask %x id %i",it->distance, it->movable->getName().c_str(),it->movable->getQueryFlags(), id);
 			// nur aktive Objekte beruecksichtigen
 			go = reg->getGameObject(id);
 			if (go == 0)
@@ -1355,7 +1355,7 @@ void MainWindow::updateObjectInfo()
 				
 				if (fabs( itmlabel->getArea().getWidth().d_scale - len) > 0.001)
 				{
-					DEBUG5("old value %f new value %f",itmlabel->getArea().getWidth().d_scale, len);
+					DEBUGX("old value %f new value %f",itmlabel->getArea().getWidth().d_scale, len);
 					itmlabel->setSize(CEGUI::UVector2(cegui_reldim(len), cegui_reldim( 0.03f)));
 				}
 				
@@ -1473,7 +1473,7 @@ void MainWindow::updateItemInfo()
 		{
 			oldoy = oy;
 		}
-		DEBUG5("oy %f %f",oy.m_x, oy.m_y);
+		DEBUGX("oy %f %f",oy.m_x, oy.m_y);
 		
 		// Skalierung der Achsen
 		float oxl = ox.getLength();
@@ -1485,7 +1485,7 @@ void MainWindow::updateItemInfo()
 		ox.normalize();
 		oy.normalize();
 
-		DEBUG5("scal %f %f",xscal,yscal);
+		DEBUGX("scal %f %f",xscal,yscal);
 		
 		// Ursprung des neuen Koordinatensystems
 		Vector ypart = po;
@@ -1493,18 +1493,18 @@ void MainWindow::updateItemInfo()
 		ypart.projectOn(oy);
 		Vector xpart = po - ypart;
 		
-		DEBUG5("xpart %f %f",xpart.m_x, xpart.m_y);
-		DEBUG5("ypart %f %f",ypart.m_x, ypart.m_y);
+		DEBUGX("xpart %f %f",xpart.m_x, xpart.m_y);
+		DEBUGX("ypart %f %f",ypart.m_x, ypart.m_y);
 		float yoffs = ylen/yscal - roundf(ylen/yscal);
 		
 		
 		Vector o = xpart + oy*(yscal*( roundf(ylen/yscal)));
 		
-		DEBUG5("pll %f %f %f",pll.m_x, pll.m_y,ylen);
-		DEBUG5("o %f %f ", o.m_x, o.m_y);
+		DEBUGX("pll %f %f %f",pll.m_x, pll.m_y,ylen);
+		DEBUGX("o %f %f ", o.m_x, o.m_y);
 		
 		
-		DEBUG5("\nitems\n");
+		DEBUGX("\nitems\n");
 		
 		// Distanz zur wahren Position
 		float optdist,dist;
@@ -1525,8 +1525,8 @@ void MainWindow::updateItemInfo()
 			
 			
 			name = di->getItem()->getName();
-			DEBUG5(" ");
-			DEBUG5(" %s %i",name.c_str(), di->getId());
+			DEBUGX(" ");
+			DEBUGX(" %s %i",name.c_str(), di->getId());
 			
 			tpos = di->getPosition();
 			tpos -= o;
@@ -1534,14 +1534,14 @@ void MainWindow::updateItemInfo()
 			pos.m_x = tpos*ox;
  			pos.m_y = tpos*oy;
 			
-			DEBUG5("tpos %f %f  %f",(tpos+o).m_x, (tpos+o).m_y,yscal);
-			DEBUG5("test %f %f %f   oy %f %f",o*oy/yscal, (tpos+o)*oy/yscal, pos.m_y/yscal,oy.m_x, oy.m_y);
+			DEBUGX("tpos %f %f  %f",(tpos+o).m_x, (tpos+o).m_y,yscal);
+			DEBUGX("test %f %f %f   oy %f %f",o*oy/yscal, (tpos+o)*oy/yscal, pos.m_y/yscal,oy.m_x, oy.m_y);
 			
 			// Position auf dem Bildschirm ermitteln
-			DEBUG5("pos %f %f  -- %f",pos.m_x, pos.m_y,pos.m_y/yscal);
+			DEBUGX("pos %f %f  -- %f",pos.m_x, pos.m_y,pos.m_y/yscal);
 			rpos.first = pos.m_x / oxl;
 			rpos.second = 0.9-pos.m_y / oyl*0.9;
-			DEBUG5("rpos %f %f  - %f",rpos.first, rpos.second, rpos.second/height);
+			DEBUGX("rpos %f %f  - %f",rpos.first, rpos.second, rpos.second/height);
 			
 			// nur Items die wirklich sichtbar sind behandeln
 			if (rpos.first<0 || rpos.first>1 || rpos.second<0 || rpos.second>0.9)
@@ -1550,7 +1550,7 @@ void MainWindow::updateItemInfo()
 			}
 			
 			
-			DEBUG5("optpos %i %f",optrow,optcol);
+			DEBUGX("optpos %i %f",optrow,optcol);
 			
 			// Laenge des Schriftzugs
 			CEGUI::Font* font = label->getFont();
@@ -1563,7 +1563,7 @@ void MainWindow::updateItemInfo()
 			float margin = 0.004;
 			len +=2*margin;
 			
-			DEBUG5("length %f",len);
+			DEBUGX("length %f",len);
 			
 			std::list < std::pair<float,float> >::iterator jt, optjt;
 			// optimale Position ermitteln
@@ -1637,8 +1637,8 @@ void MainWindow::updateItemInfo()
 						optjt = jt;
 						app = 0;
 						
-						DEBUG5("optdist %f pos %i %f ",optdist, row, col);
-						DEBUG5("lbound %f rbound %f",lbound,rbound);
+						DEBUGX("optdist %f pos %i %f ",optdist, row, col);
+						DEBUGX("lbound %f rbound %f",lbound,rbound);
 					}
 					
 					lbound = jt->second;
@@ -1664,8 +1664,8 @@ void MainWindow::updateItemInfo()
 						optcol = col;
 						optrow = row;
 						
-						DEBUG5("optdist %f optrow %i pos %i %f  app %i",optdist, optrow, row, col,app);
-						DEBUG5("lbound %f rbound %f",lbound,rbound);
+						DEBUGX("optdist %f optrow %i pos %i %f  app %i",optdist, optrow, row, col,app);
+						DEBUGX("lbound %f rbound %f",lbound,rbound);
 					}
 					
 				}
@@ -1677,15 +1677,15 @@ void MainWindow::updateItemInfo()
 			if (optdist > 10000)
 				continue;
 			
-			DEBUG5("center %i rpos %f  %f",centerrow,rpos.second, rpos.second-centerrow*height);
+			DEBUGX("center %i rpos %f  %f",centerrow,rpos.second, rpos.second-centerrow*height);
 			
 			rpos.first=optcol;
 			rpos.second=(optrow + yoffs) *height;
 			
 			
 			
-			DEBUG5("optdist %f optrow %i pos ",optdist, optrow);
-			DEBUG5("final position %f %f",rpos.second, rpos.first);
+			DEBUGX("optdist %f optrow %i pos ",optdist, optrow);
+			DEBUGX("final position %f %f",rpos.second, rpos.first);
 			
 			if (app == 1)
 			{
@@ -1693,7 +1693,7 @@ void MainWindow::updateItemInfo()
 			}
 			else
 			{
-				DEBUG5("insert before %f %f",optjt->first, optjt->second);
+				DEBUGX("insert before %f %f",optjt->first, optjt->second);
 				itempos[optrow].insert(optjt,std::make_pair(rpos.first,rpos.first+len));
 			}
 			
@@ -1734,7 +1734,7 @@ void MainWindow::updateItemInfo()
 			
 			if (fabs( label->getArea().getWidth().d_scale - reallen) > 0.001)
 			{
-				DEBUG5("old value %f new value %f",label->getArea().getWidth().d_scale, len);
+				DEBUGX("old value %f new value %f",label->getArea().getWidth().d_scale, len);
 				label->setSize(CEGUI::UVector2(cegui_reldim(reallen), cegui_reldim( 0.03f)));
 			}
 			
@@ -2136,7 +2136,7 @@ Vector MainWindow::getIngamePos(float screenx, float screeny, bool relative)
 		relx = screenx*1.0/(viewport->getActualWidth());
 		rely = screeny*1.0/(viewport->getActualHeight());
 	}
-	DEBUG5("relative Koordinaten %f %f",relx,rely);
+	DEBUGX("relative Koordinaten %f %f",relx,rely);
 
 	// Strahl von der Kamera durch den angeklickten Punkt
 	Ogre::Camera* camera = m_scene->getCamera();
@@ -2144,9 +2144,9 @@ Vector MainWindow::getIngamePos(float screenx, float screeny, bool relative)
 
 	// Ursprung und Richtung des Strahles
 	const Ogre::Vector3& orig = ray.getOrigin();
-	DEBUG5("ray orig %f %f %f",orig.x,orig.y,orig.z);
+	DEBUGX("ray orig %f %f %f",orig.x,orig.y,orig.z);
 	const Ogre::Vector3& dir = ray.getDirection();
-	DEBUG5("ray dir %f %f %f",dir.x,dir.y,dir.z);
+	DEBUGX("ray dir %f %f %f",dir.x,dir.y,dir.z);
 
 	// Schnittpunkt mit der Ebene y=0 ausrechnen
 	
@@ -2160,12 +2160,12 @@ Vector MainWindow::getIngamePos(float screenx, float screeny, bool relative)
 	
 	// Durchstosspunkt durch die Ebene y=0
 	Ogre::Vector3 p = orig + dir*(orig.y/(-dy));
-	DEBUG5("schnittpunkt %f %f %f",p.x,p.y,p.z);
+	DEBUGX("schnittpunkt %f %f %f",p.x,p.y,p.z);
 
 	// Umrechnen in Spielkoordinaten
 	ret.m_x = p.x/50;
 	ret.m_y = p.z/50;
-	DEBUG5("Punkt in Spielkoordinaten %f %f",ret.m_x,ret.m_y);
+	DEBUGX("Punkt in Spielkoordinaten %f %f",ret.m_x,ret.m_y);
 	
 	return ret;
 
@@ -2226,7 +2226,7 @@ bool MainWindow::mousePressed(const OIS::MouseEvent &evt, OIS::MouseButtonID btn
 	// Koordinaten an denen der Mausklick stattfand
 	int x =evt.state.X.abs;
 	int y =evt.state.Y.abs;
-	DEBUG5("maus %i %i",x,y);
+	DEBUGX("maus %i %i",x,y);
 
 	Player* player = m_document->getLocalPlayer();
 	if (player!=0)
@@ -2276,14 +2276,14 @@ bool MainWindow::mouseReleased(const OIS::MouseEvent &evt, OIS::MouseButtonID bt
 
 	if (btn==OIS::MB_Left)
 	{
-		DEBUG5("Button release");
+		DEBUGX("Button release");
 		m_document->getGUIState()->m_left_mouse_pressed=false;
 		m_document->getGUIState()->m_clicked_object_id=0;
 	}
 
 	if (btn==OIS::MB_Right)
 	{
-		DEBUG5("Right Button release");
+		DEBUGX("Right Button release");
 		m_document->getGUIState()->m_right_mouse_pressed=false;
 		m_document->getGUIState()->m_clicked_object_id=0;
 	}
@@ -2309,7 +2309,7 @@ bool MainWindow::mouseReleased(const OIS::MouseEvent &evt, OIS::MouseButtonID bt
 bool MainWindow::keyPressed(const OIS::KeyEvent &evt) {
 	unsigned int ch = evt.text;
 	
-	DEBUG5("keycode %i %s %x",evt.key,m_keyboard->getAsString(evt.key).c_str(), ch);
+	DEBUGX("keycode %i %s %x",evt.key,m_keyboard->getAsString(evt.key).c_str(), ch);
 	if (m_document->getGUIState()->m_shown_windows & Document::OPTIONS)
 	{
 		if (static_cast<OptionsWindow*>(m_sub_windows["Options"])->requestsForKey())
@@ -2377,7 +2377,7 @@ bool MainWindow::onDropItemClicked(const CEGUI::EventArgs& evt)
 			static_cast<const CEGUI::MouseEventArgs&>(evt);
 	unsigned int id = we.window->getID();
 	
-	DEBUG5("pick up item %i",id);
+	DEBUGX("pick up item %i",id);
 	m_document->onDropItemClick(id);
 	return true;
 }

@@ -267,7 +267,7 @@ void Dialogue::addSpeaker(int id, std::string refname, bool force)
 
 void Dialogue::removeSpeaker(int id)
 {
-	DEBUG5("remove %i",id);
+	DEBUGX("remove %i",id);
 	WorldObject* wo =0;
 	wo = m_region->getObject(id);
 	Creature* cr = dynamic_cast<Creature*>(wo);
@@ -358,7 +358,7 @@ bool Dialogue::checkTopic(std::string topic)
 
 	if (st !=0)
 	{
-		DEBUG5("checking Topic %s",topic.c_str());
+		DEBUGX("checking Topic %s",topic.c_str());
 		return st->checkCondition();
 	}
 
@@ -433,7 +433,7 @@ void Dialogue::changeTopic(std::string topic)
 			}
 			if (checkTopic(jt->second))
 			{
-				DEBUG5("added answer %s %s",jt->first.c_str(),jt->second.c_str());
+				DEBUGX("added answer %s %s",jt->first.c_str(),jt->second.c_str());
 				addAnswer(jt->first, jt->second);
 				noanswer = false;
 			}
@@ -686,7 +686,7 @@ void Dialogue::setSpeakerPosition(int id, Position pos)
 		m_speaker_state[id].m_text_visible = false;
 	}
 	
-	DEBUG5("set speaker %i at position %i",id,pos);
+	DEBUGX("set speaker %i at position %i",id,pos);
 	
 }
 
@@ -767,7 +767,7 @@ void Dialogue::update(float time)
 			Position pos=UNKNOWN;
 			while (cst==0 && !m_speech.empty())
 			{
-				DEBUG5("speak %s",m_speech.front().second.m_text.c_str());
+				DEBUGX("speak %s",m_speech.front().second.m_text.c_str());
 				
 				// Change Topic braucht keinen Sprecher
 				if (m_speech.front().second.m_text == "#change_topic#")
@@ -807,7 +807,7 @@ void Dialogue::update(float time)
 
 				if (cr ==0 && m_speech.front().first!="nobody")
 				{
-					DEBUG5("cant speak text %s %s",m_speech.front().first.c_str(),m_speech.front().second.m_text.c_str());
+					DEBUGX("cant speak text %s %s",m_speech.front().first.c_str(),m_speech.front().second.m_text.c_str());
 					m_speech.pop_front();
 					continue;
 				}
@@ -931,7 +931,7 @@ void Dialogue::update(float time)
 			}
 
 			// naechsten Text sprechen
-			DEBUG5("spoken text %s",cst->m_text.c_str());
+			DEBUGX("spoken text %s",cst->m_text.c_str());
 
 			if (cr !=0)
 			{
@@ -1131,7 +1131,7 @@ void Dialogue::fromString(CharConv* cv)
 void Dialogue::skipText(int id)
 {
 	m_player_skips.insert(id);
-	DEBUG5("players %i skips %i",m_nr_players, m_player_skips.size());
+	DEBUGX("players %i skips %i",m_nr_players, m_player_skips.size());
 	if ((int) m_player_skips.size() == m_nr_players)
 	{
 		// aktuellen Text ueberspringen

@@ -158,7 +158,7 @@ Item::Item(ItemBasicData& data, int id)
 
 	if (data.m_useup_effect)
 	{
-		DEBUG5("copy useup effect");
+		DEBUGX("copy useup effect");
 		m_useup_effect = new CreatureDynAttrMod;
 		*m_useup_effect = *(data.m_useup_effect);
 	}
@@ -169,7 +169,7 @@ Item::Item(ItemBasicData& data, int id)
 
 	if (data.m_equip_effect)
 	{
-		DEBUG5("copy equip effect");
+		DEBUGX("copy equip effect");
 		m_equip_effect = new CreatureBaseAttrMod;
 		*m_equip_effect = *(data.m_equip_effect);
 	}
@@ -180,7 +180,7 @@ Item::Item(ItemBasicData& data, int id)
 
 	if (data.m_weapon_attr)
 	{
-		DEBUG5("copy weapon attr");
+		DEBUGX("copy weapon attr");
 
 		m_weapon_attr = new WeaponAttr;
 		*m_weapon_attr = *(data.m_weapon_attr);
@@ -473,7 +473,7 @@ void Item::toStringComplete(CharConv* cv)
 	int i;
 	if (m_useup_effect!=0)
 	{
-		DEBUG5("writing useup effect");
+		DEBUGX("writing useup effect");
 		cv->toBuffer(m_useup_effect->m_dhealth);
 		for (i=0;i<NR_STATUS_MODS;i++)
 		{
@@ -483,7 +483,7 @@ void Item::toStringComplete(CharConv* cv)
 
 	if (m_equip_effect!=0)
 	{
-		DEBUG5("writing equip effect");
+		DEBUGX("writing equip effect");
 		cv->toBuffer(m_equip_effect->m_darmor);
 		cv->toBuffer(m_equip_effect->m_dblock);
 		cv->toBuffer(m_equip_effect->m_dmax_health);
@@ -518,7 +518,7 @@ void Item::toStringComplete(CharConv* cv)
 
 	if (m_weapon_attr!=0)
 	{
-		DEBUG5("writing weapon attr");
+		DEBUGX("writing weapon attr");
 		cv->toBuffer(m_weapon_attr->m_weapon_type);
 		m_weapon_attr->m_damage.toString(cv);
 		cv->toBuffer(m_weapon_attr->m_attack_range);
@@ -575,7 +575,7 @@ void Item::fromStringComplete(CharConv* cv)
 	int i;
 	if (m_useup_effect!=0)
 	{
-		DEBUG5("loading useup effect");
+		DEBUGX("loading useup effect");
 		cv->fromBuffer<float>(m_useup_effect->m_dhealth );
 		for (i=0;i<NR_STATUS_MODS;i++)
 		{
@@ -585,7 +585,7 @@ void Item::fromStringComplete(CharConv* cv)
 
 	if (m_equip_effect!=0)
 	{
-		DEBUG5("loading equip effect");
+		DEBUGX("loading equip effect");
 		cv->fromBuffer<short>(m_equip_effect->m_darmor);
 		cv->fromBuffer<short>(m_equip_effect->m_dblock);
 		cv->fromBuffer<float>(m_equip_effect->m_dmax_health);
@@ -623,7 +623,7 @@ void Item::fromStringComplete(CharConv* cv)
 
 	if (m_weapon_attr!=0)
 	{
-		DEBUG5("loading weapon attr");
+		DEBUGX("loading weapon attr");
 		cv->fromBuffer(m_weapon_attr->m_weapon_type);
 		m_weapon_attr->m_damage.fromString(cv);
 		cv->fromBuffer<float>(m_weapon_attr->m_attack_range);

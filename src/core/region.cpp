@@ -177,7 +177,7 @@ void RegionCamera::fromString(CharConv* cv)
 
 Region::Region(short dimx, short dimy, short id, std::string name, RegionData* data)
 {
-	DEBUG5("creating region");
+	DEBUGX("creating region");
 	m_data_grid = new Matrix2d<Gridunit>(dimx,dimy);
 	m_dimx = dimx;
 	m_dimy = dimy;
@@ -386,7 +386,7 @@ bool Region::getFreePlace(Shape* shape, short layer, Vector & pos, WorldObject* 
 		sy = i %10000;
 		fields.pop();
 
-		DEBUG5("testing field %f %f",sx*c,sy*c);
+		DEBUGX("testing field %f %f",sx*c,sy*c);
 
 		// Testen ob dort keine festen Objekte sind
 		s.m_center = Vector(sx*c +fx,sy*c + fy);
@@ -408,12 +408,12 @@ bool Region::getFreePlace(Shape* shape, short layer, Vector & pos, WorldObject* 
 		    fixblock = false;
 		}
 
-		DEBUG5("no fixed obstacle");
+		DEBUGX("no fixed obstacle");
 		// Testen, ob dort nicht gerade eine Kreatur steht
 		getObjectsInShape(&s,&res,layer,WorldObject::CREATURE,omit,true);
 		if (res.empty() && !fixblock)
 		{
-			DEBUG5("field is free");
+			DEBUGX("field is free");
 			// Stelle ist frei
 			pos = s.m_center;
 
@@ -423,7 +423,7 @@ bool Region::getFreePlace(Shape* shape, short layer, Vector & pos, WorldObject* 
 		else
 		{
 			WorldObject* obs = *(res.begin());
-			DEBUG5("obstacle is %s at %f %f",obs->getNameId().c_str(), obs->getShape()->m_center.m_x,obs->getShape()->m_center.m_y);
+			DEBUGX("obstacle is %s at %f %f",obs->getNameId().c_str(), obs->getShape()->m_center.m_x,obs->getShape()->m_center.m_y);
 			// Stelle ist besetzt
 			tfields.insert(i);
 
@@ -483,7 +483,7 @@ bool  Region::addObjectsInShapeFromGridunit(Shape* shape, Gridunit* gu, WorldObj
 
 	int n = gu->getObjectsNr((WorldObject::Group) group);
 
-	DEBUG5("%i objects in layer %i, group %i",n,layer,group);
+	DEBUGX("%i objects in layer %i, group %i",n,layer,group);
 
 	// Schleife ueber alle Objekte
 	// geprueft wird: Ebene, Schnitt mit der Flaeche
@@ -491,13 +491,13 @@ bool  Region::addObjectsInShapeFromGridunit(Shape* shape, Gridunit* gu, WorldObj
 	{
 
 		wo = arr[k];
-		DEBUG5("testing obj %i layer %i",wo->getId(),wo->getLayer());
+		DEBUGX("testing obj %i layer %i",wo->getId(),wo->getLayer());
 
 		s = wo->getShape();
 
 		if ((wo->getLayer() & layer) && (wo->getGroup() & group))
 		{
-			DEBUG5("adding obj %i layer %i",wo->getId(), wo->getLayer());
+			DEBUGX("adding obj %i layer %i",wo->getId(), wo->getLayer());
 			if ((shape ==0) || shape->intersects(*s))
 			{
 
@@ -525,15 +525,15 @@ bool Region::addObjectsOnLineFromGridunit(Line& line, Gridunit* gu, WorldObjectL
 
 	int n = gu->getObjectsNr((WorldObject::Group) group);
 
-	DEBUG5("%i objects in layer %i, group %i",n,layer,group);
+	DEBUGX("%i objects in layer %i, group %i",n,layer,group);
 	// Schleife ueber alle Objekte
 	// geprueft wird: Ebene, Schnitt mit der Linie
 	for (int k=0;k< n;k++)
 	{
 
 		wo = arr[k];
-		DEBUG5("testing %s %p",wo->getNameId().c_str(),wo->getNameId().c_str())
-		DEBUG5("testing %p",wo);
+		DEBUGX("testing %s %p",wo->getNameId().c_str(),wo->getNameId().c_str())
+		DEBUGX("testing %p",wo);
 		s = wo->getShape();
 
 		if ((wo->getLayer() & layer) && (wo->getGroup() & group))
@@ -558,7 +558,7 @@ bool Region::addObjectsOnLineFromGridunit(Line& line, Gridunit* gu, WorldObjectL
 bool Region::getObjectsInShape( Shape* shape,  WorldObjectList* result,short layer, short group, WorldObject* omit, bool empty_test)
 {
 
-	DEBUG5("shape %f %f %f",shape->m_center.m_x,shape->m_center.m_y,shape->m_radius);
+	DEBUGX("shape %f %f %f",shape->m_center.m_x,shape->m_center.m_y,shape->m_radius);
 
 	 // Wenn der Resultat Zeiger 0 ist: Fehler ausgeben
 	if (result == 0)
@@ -574,7 +574,7 @@ bool Region::getObjectsInShape( Shape* shape,  WorldObjectList* result,short lay
 	}
 
 
-	DEBUG5("layer %i group %i",layer,group);
+	DEBUGX("layer %i group %i",layer,group);
 
 
 	if (group == WorldObject::PLAYER)
@@ -613,7 +613,7 @@ bool Region::getObjectsInShape( Shape* shape,  WorldObjectList* result,short lay
 		int js = std::max(ymin,0);
 		int je = std::min(ymax,m_dimy-1);
 
-		DEBUG5("searching square (%i %i) (%i %i)",is,ie,js,je);
+		DEBUGX("searching square (%i %i) (%i %i)",is,ie,js,je);
 
 		// Alle 4x4 Felder durchmustern
 		for (i = is;i<=ie;i++)
@@ -621,14 +621,14 @@ bool Region::getObjectsInShape( Shape* shape,  WorldObjectList* result,short lay
 			for (j=js;j<=je;j++)
 			{
 
-				DEBUG5("searching in Grid Tile %i %i",i,j);
+				DEBUGX("searching in Grid Tile %i %i",i,j);
 				// Durchmustern der Listen im 4x4-Feld
 				gu = &(*m_data_grid)[i][j];
 
 				// Totenebene
 				if (group & WorldObject::DEAD)
 				{
-					DEBUG5("searching dead layer");
+					DEBUGX("searching dead layer");
 
 					ret =  addObjectsInShapeFromGridunit(shape, gu, result, layer,group & WorldObject::DEAD, omit, empty_test);
 					if (!result->empty() && empty_test)
@@ -639,7 +639,7 @@ bool Region::getObjectsInShape( Shape* shape,  WorldObjectList* result,short lay
 				// feste Objekte
 				if (group & WorldObject::FIXED )
 				{
-					DEBUG5("searching fixed layer");
+					DEBUGX("searching fixed layer");
 
 					ret =  addObjectsInShapeFromGridunit(shape, gu, result, layer,group & WorldObject::FIXED, omit, empty_test);
 					if (!result->empty() && empty_test)
@@ -723,7 +723,7 @@ void Region::getObjectsOnLine(Line& line,  WorldObjectList* result,short layer, 
 	{
 		for (j=std::max(ymin,0);j<=std::min(ymax,m_dimy-1);j++)
 		{
-			DEBUG5("searching in Grid Tile %i %i",i,j);
+			DEBUGX("searching in Grid Tile %i %i",i,j);
 
 			// Herausfiltern jener Felder die zu weit von der Linie entfernt sind
 			p.m_x = i*4.0+2;
@@ -735,7 +735,7 @@ void Region::getObjectsOnLine(Line& line,  WorldObjectList* result,short layer, 
 			d = p.getLength();
 			if (d>32)
 			{
-				DEBUG5("aborted");
+				DEBUGX("aborted");
 				continue;
 			}
 
@@ -745,7 +745,7 @@ void Region::getObjectsOnLine(Line& line,  WorldObjectList* result,short layer, 
 			// Totenebene
 			if (group & WorldObject::DEAD)
 			{
-				DEBUG5("searching dead layer");
+				DEBUGX("searching dead layer");
 
 				addObjectsOnLineFromGridunit(line, gu, result, layer,group & WorldObject::DEAD, omit);
 			}
@@ -753,7 +753,7 @@ void Region::getObjectsOnLine(Line& line,  WorldObjectList* result,short layer, 
 				// feste Objekte
 			if (group & WorldObject::FIXED )
 			{
-				DEBUG5("searching fixed layer");
+				DEBUGX("searching fixed layer");
 
 
 				addObjectsOnLineFromGridunit(line, gu, result, layer,group & WorldObject::FIXED, omit);
@@ -788,7 +788,7 @@ void Region::getObjectsOnLine(Line& line,  WorldObjectList* result,short layer, 
 
 bool Region::insertObject(WorldObject* object, Vector pos, float angle )
 {
-	DEBUG5("try to insert %s at %f %f",object->getSubtype().c_str(), pos.m_x,pos.m_y);
+	DEBUGX("try to insert %s at %f %f",object->getSubtype().c_str(), pos.m_x,pos.m_y);
 	bool result = true;
 	
 	bool collision_test = object->checkInteractionFlag(WorldObject::COLLISION_DETECTION);
@@ -817,7 +817,7 @@ bool Region::insertObject(WorldObject* object, Vector pos, float angle )
 	if (object->getType() == "PLAYER")
 	{
 		Player* pl = dynamic_cast<Player*>(object);
-		DEBUG5("player entered Region");
+		DEBUGX("player entered Region");
 		result &= (m_players->insert(std::make_pair(object->getId(),object))).second;
 		
 		if (m_revive_location != "")
@@ -856,7 +856,7 @@ bool Region::insertObject(WorldObject* object, Vector pos, float angle )
 		event.m_type = NetEvent::OBJECT_CREATED;
 		event.m_id = object->getId();
 		insertNetEvent(event);
-		DEBUG5("insert object %i",event.m_id);
+		DEBUGX("insert object %i",event.m_id);
 		
 		if (object->getGroup() & WorldObject::CREATURE)
 		{
@@ -887,7 +887,7 @@ bool Region::insertObject(WorldObject* object, Vector pos, float angle )
 	 // Testen ob das Objekt in der Region liegt
 	if (x_g<0 || y_g<0 || x_g>=m_dimx || y_g>=m_dimy)
 	{
-		DEBUG5("create Object at %f %f",pos.m_x, pos.m_y);
+		DEBUGX("create Object at %f %f",pos.m_x, pos.m_y);
 		return false;
 	}
 	else
@@ -897,7 +897,7 @@ bool Region::insertObject(WorldObject* object, Vector pos, float angle )
 			// testen ob das Objekt zu den gesondert behandelten grossen Objekten gehoehrt
 			if (object->isLarge())
 			{
-				DEBUG5("object %s is large",object->getName().c_str());
+				DEBUGX("object %s is large",object->getName().c_str());
 				m_large_objects.insert(std::make_pair(object->getId(),object));
 				result = true;
 			}
@@ -911,7 +911,7 @@ bool Region::insertObject(WorldObject* object, Vector pos, float angle )
 
 	}
 
-	DEBUG5("object inserted %s %i at %f %f",object->getSubtype().c_str(), object->getId(), object->getShape()->m_center.m_x,object->getShape()->m_center.m_y);
+	DEBUGX("object inserted %s %i at %f %f",object->getSubtype().c_str(), object->getId(), object->getShape()->m_center.m_x,object->getShape()->m_center.m_y);
 	return result;
 }
 
@@ -1055,7 +1055,7 @@ void Region::createObjectGroup(ObjectGroupName templname, Vector position, float
 				}
 				
 				id = createObject(gt->m_type, pos, angle+oangle,gt->m_height,ostate);
-				DEBUG5("inserting object %s at %f %f with id %i",gt->m_type.c_str(),pos.m_x, pos.m_y,id);
+				DEBUGX("inserting object %s at %f %f with id %i",gt->m_type.c_str(),pos.m_x, pos.m_y,id);
 				
 				if (gt->m_name != "")
 				{
@@ -1088,7 +1088,7 @@ void Region::createObjectGroup(ObjectGroupName templname, Vector position, float
 			{
 				tr->addVariable(lt->first,pos);
 			}
-			DEBUG5("template location %s",locname.c_str());
+			DEBUGX("template location %s",locname.c_str());
 		}
 		
 		std::map<AreaName, Shape>::iterator at;
@@ -1158,7 +1158,7 @@ void Region::createMonsterGroup(MonsterGroupName mgname, Vector position, float 
 			{
 				count ++;
 				int id = createObject(mt->m_subtype, pos,2*3.14159*Random::random());
-				DEBUG5("inserting monster %s at %f %f with id %i",mt->m_subtype.c_str(),pos.m_x, pos.m_y,id);
+				DEBUGX("inserting monster %s at %f %f with id %i",mt->m_subtype.c_str(),pos.m_x, pos.m_y,id);
 				
 				if (monsters != 0)
 				{
@@ -1166,7 +1166,7 @@ void Region::createMonsterGroup(MonsterGroupName mgname, Vector position, float 
 				}
 			}
 		}
-		DEBUG5("monstergroup %s : %i x %s prob %f",mgname.c_str(), count, mt->m_subtype.c_str(), mt->m_prob);
+		DEBUGX("monstergroup %s : %i x %s prob %f",mgname.c_str(), count, mt->m_subtype.c_str(), mt->m_prob);
 		
 	}
 }
@@ -1174,7 +1174,7 @@ void Region::createMonsterGroup(MonsterGroupName mgname, Vector position, float 
 
 bool  Region::insertProjectile(Projectile* object, Vector pos)
 {
-	DEBUG5("projectile inserted: %s %i",object->getSubtype().c_str(), object->getId());
+	DEBUGX("projectile inserted: %s %i",object->getSubtype().c_str(), object->getId());
 	m_projectiles->insert(std::make_pair(object->getId(),object));
 	m_game_objects.insert(std::make_pair(object->getId(),object));
 	object->getShape()->m_center = pos;
@@ -1234,7 +1234,7 @@ bool  Region::deleteObject (WorldObject* object)
 
 	if (object->getType() == "PLAYER")
 	{
-		DEBUG5("Player deleted");
+		DEBUGX("Player deleted");
 		m_players->erase(object->getId());
 
 		
@@ -1259,7 +1259,7 @@ bool  Region::deleteObject (WorldObject* object)
 		// aus dem Grid loeschen
 		int x = object->getGridLocation()->m_grid_x;
 		int y = object->getGridLocation()->m_grid_y;
-		DEBUG5("deleting object in grid tile %i %i",x,y);
+		DEBUGX("deleting object in grid tile %i %i",x,y);
 	
 		if (object->getLayer() & WorldObject::LAYER_COLLISION)
 		{
@@ -1362,7 +1362,7 @@ bool Region::changeObjectGroup(WorldObject* object,WorldObject::Group group )
 	{
 		int x = object->getGridLocation()->m_grid_x;
 		int y = object->getGridLocation()->m_grid_y;
-		DEBUG5("changing object in grid tile %i %i",x,y);
+		DEBUGX("changing object in grid tile %i %i",x,y);
 	
 		Gridunit *gu = (m_data_grid->ind(x,y));
 		result = gu->moveObject(object,group);
@@ -1395,14 +1395,14 @@ bool Region::changeObjectLayer(WorldObject* object,WorldObject::Layer layer)
 	 	// Testen ob das Objekt in der Region liegt
 		if (x_g<0 || y_g<0 || x_g>=m_dimx || y_g>=m_dimy)
 		{
-			DEBUG5("create Object at %f %f",pos.m_x, pos.m_y);
+			DEBUGX("create Object at %f %f",pos.m_x, pos.m_y);
 			return false;
 		}
 		else
 		{
 			if (object->isLarge())
 			{
-				DEBUG5("object %s is large",object->getName().c_str());
+				DEBUGX("object %s is large",object->getName().c_str());
 				m_large_objects.insert(std::make_pair(object->getId(),object));
 				result = true;
 			}
@@ -1411,7 +1411,7 @@ bool Region::changeObjectLayer(WorldObject* object,WorldObject::Layer layer)
 				Gridunit *gu = (m_data_grid->ind(x_g,y_g));
 
 				result = gu->insertObject(object);
-				DEBUG5("insert into grid %i %i",x_g,y_g);
+				DEBUGX("insert into grid %i %i",x_g,y_g);
 			}
 		}
 	}
@@ -1434,7 +1434,7 @@ bool Region::changeObjectLayer(WorldObject* object,WorldObject::Layer layer)
 			// aus dem Grid loeschen
 			int x = object->getGridLocation()->m_grid_x;
 			int y = object->getGridLocation()->m_grid_y;
-			DEBUG5("deleting object in grid tile %i %i",x,y);
+			DEBUGX("deleting object in grid tile %i %i",x,y);
 			
 			Gridunit *gu = (m_data_grid->ind(x,y));
 			result = gu->deleteObject(object, object->getGridLocation()->m_index);
@@ -1456,16 +1456,16 @@ void Region::deleteProjectile(Projectile* proj)
 	if (m_projectiles->count(id)!=0)
 	{
 		m_projectiles->erase(m_projectiles->find(id));
-		DEBUG5("projectile deleted: %s %i",proj->getSubtype().c_str(), proj->getId());
+		DEBUGX("projectile deleted: %s %i",proj->getSubtype().c_str(), proj->getId());
 	}
 	m_game_objects.erase(id);
 }
 
 void Region::update(float time)
 {
-	DEBUG5("update region %i",getId());
+	DEBUGX("update region %i",getId());
 
-	DEBUG5("\nUpdate aller WeltObjekte starten\n");
+	DEBUGX("\nUpdate aller WeltObjekte starten\n");
 	//DEBUG("m_players %p",m_players);
 	// Iterator zum durchmustern einer solchen Liste
 	WorldObjectMap::iterator iter;
@@ -1485,7 +1485,7 @@ void Region::update(float time)
 				// nur Nichtspieler Objekte loeschen
 				if (object->getType() != "PLAYER")
 				{
-					DEBUG5("Objekt gelöscht: %i \n",object->getId());
+					DEBUGX("Objekt gelöscht: %i \n",object->getId());
 					
 					++iter;
 					object->destroy();
@@ -1520,7 +1520,7 @@ void Region::update(float time)
 			object->update(time);
 		}
 	}
-	DEBUG5("Update aller WeltObjekte abgeschlossen\n\n");
+	DEBUGX("Update aller WeltObjekte abgeschlossen\n\n");
 
 	// alle Projektile updaten
 	Projectile* pr =0;
@@ -1528,7 +1528,7 @@ void Region::update(float time)
 	for (it3 = m_projectiles->begin(); it3 !=m_projectiles->end();)
 	{
 		pr = (it3->second);
-		DEBUG5("projectile %i",pr->getId());
+		DEBUGX("projectile %i",pr->getId());
 		if (pr->getDestroyed()==true)
 		{
 			// Projektile selbststaendig loeschen darf nur der Server
@@ -1540,12 +1540,12 @@ void Region::update(float time)
 				event.m_id = pr->getId();
 				insertNetEvent(event);
 				
-				DEBUG5("deleting projectile %i",pr->getId());
+				DEBUGX("deleting projectile %i",pr->getId());
 				
 				++it3;
 				deleteProjectile(pr);
 				delete pr;
-				DEBUG5("loesche projektil");
+				DEBUGX("loesche projektil");
 			}
 			else
 			{
@@ -1559,7 +1559,7 @@ void Region::update(float time)
 			++it3;
 		}
 	}
-	DEBUG5("update projektile abgeschlossen");
+	DEBUGX("update projektile abgeschlossen");
 
 	// DropItems updaten
 	DropItemMap::iterator it4;
@@ -1583,7 +1583,7 @@ void Region::update(float time)
 
 			if (object->getNetEventMask() !=0)
 			{
-				DEBUG5("object %i has event mask %i",object->getId(), object->getNetEventMask());
+				DEBUGX("object %i has event mask %i",object->getId(), object->getNetEventMask());
 				NetEvent event;
 				event.m_type = NetEvent::OBJECT_STAT_CHANGED;
 				event.m_data = object->getNetEventMask();
@@ -1656,7 +1656,7 @@ void Region::update(float time)
 
 				if (id == getId())
 				{
-					DEBUG5("revive in current region");
+					DEBUGX("revive in current region");
 					// Spieler bleibt in der aktuellen Region
 					Vector pos = getLocation(regloc.second);
 					getFreePlace(pl->getShape(), pl->getLayer(), pos, pl);
@@ -1665,7 +1665,7 @@ void Region::update(float time)
 				}
 				else
 				{
-					DEBUG5("revive in other region %i ", id);
+					DEBUGX("revive in other region %i ", id);
 
 					// Spieler verlaesst die Region
 					WorldObjectMap::iterator iter2 = iter;
@@ -1726,7 +1726,7 @@ void Region::update(float time)
 		TriggerType type;
 		type = m_triggers.front()->getType();
 		
-		DEBUG5("trigger: %s",type.c_str());
+		DEBUGX("trigger: %s",type.c_str());
 		
 		// Schleife ueber die ausgeloesten Events
 		it = m_events.lower_bound(type);
@@ -1738,7 +1738,7 @@ void Region::update(float time)
 			
 			// vom Trigger definierte Variablen einfuegen
 			EventSystem::doString((char*) m_triggers.front()->getLuaVariables().c_str());
-			DEBUG5("lua code \n %s",m_triggers.front()->getLuaVariables().c_str());
+			DEBUGX("lua code \n %s",m_triggers.front()->getLuaVariables().c_str());
 			
 			// ggf Dialog setzen
 			if (m_triggers.front()->getDialogueId() != 0)
@@ -1750,7 +1750,7 @@ void Region::update(float time)
 			bool ret = EventSystem::executeEvent(jt->second);
 			
 			if (ret)
-				DEBUG5("event on trigger: %s",type.c_str());
+				DEBUGX("event on trigger: %s",type.c_str());
 			
 			// einmalige Ereignisse loeschen, wenn erfolgreich ausgefuehrt
 			if (jt->second->getOnce() &&  ret)
@@ -1797,7 +1797,7 @@ void Region::update(float time)
 			{
 				if (it5->second->getEventMaskRef() != 0)
 				{
-					DEBUG5("update dialogue %i",it5->second->getId());
+					DEBUGX("update dialogue %i",it5->second->getId());
 					NetEvent event;
 					event.m_type = NetEvent::DIALOGUE_STAT_CHANGED;
 					event.m_data = it5->second->getEventMaskRef();
@@ -1842,7 +1842,7 @@ void Region::getRegionData(CharConv* cv)
 	
 
 	// Anzahl der statischen Objekte eintragen
-	DEBUG5("static objects: %i",m_static_objects->size());
+	DEBUGX("static objects: %i",m_static_objects->size());
 	cv->toBuffer<short>((short) m_static_objects->size());
 
 	// statische Objekte in den Puffer eintragen
@@ -1850,7 +1850,7 @@ void Region::getRegionData(CharConv* cv)
 	for (it = m_static_objects->begin();it!=m_static_objects->end();++it)
 	{
 		(it->second)->toString(cv);
-		DEBUG5("static object: %s",(it->second)->getNameId().c_str());
+		DEBUGX("static object: %s",(it->second)->getNameId().c_str());
 	}
 
 
@@ -1862,7 +1862,7 @@ void Region::getRegionData(CharConv* cv)
 		if (jt->second->getLayer() & WorldObject::LAYER_ALL)
 			nr++;
 	}
-	DEBUG5("nonstatic objects: %i",nr);
+	DEBUGX("nonstatic objects: %i",nr);
 	cv->toBuffer<short>((short) nr);
 
 	// nicht statische Objekte in den Puffer eintragen
@@ -1871,16 +1871,16 @@ void Region::getRegionData(CharConv* cv)
 	{
 		if (jt->second->getLayer() & WorldObject::LAYER_ALL)
 		{
-			DEBUG5("write offset: %i",cv->getBitStream()->GetNumberOfBitsUsed());
+			DEBUGX("write offset: %i",cv->getBitStream()->GetNumberOfBitsUsed());
 			(jt->second)->toString(cv);
 
-			DEBUG5("object: %s",(jt->second)->getNameId().c_str());
+			DEBUGX("object: %s",(jt->second)->getNameId().c_str());
 		}
 	}
 
 	// Anzahl der Projektile eintragen
 	cv->toBuffer<short>((short) m_projectiles->size());
-	DEBUG5("projectiles: %i",m_projectiles->size());
+	DEBUGX("projectiles: %i",m_projectiles->size());
 
 	// Projektile in den Puffer eintragen
 	ProjectileMap::iterator kt;
@@ -1890,7 +1890,7 @@ void Region::getRegionData(CharConv* cv)
 	}
 
 	cv->toBuffer<short>((short) m_drop_items->size());
-	DEBUG5("dropped items: %i",m_drop_items->size());
+	DEBUGX("dropped items: %i",m_drop_items->size());
 
 	//  Items in den Puffer eintragen
 	DropItemMap::iterator lt;
@@ -1934,13 +1934,13 @@ void Region::createObjectFromString(CharConv* cv, WorldObjectMap* players)
 
 	WorldObject* obj;
 
-	DEBUG5("read offset: %i",cv->getBitStream()->GetReadOffset());
+	DEBUGX("read offset: %i",cv->getBitStream()->GetReadOffset());
 
 	cv->fromBuffer(type);
 	cv->fromBuffer(subt);
 	cv->fromBuffer(id);
 
-	DEBUG5("object %s id %i",subt.c_str(),id);
+	DEBUGX("object %s id %i",subt.c_str(),id);
 
 		// alle Objekte ausser den Spielern werden neu angelegt
 		// die Spieler existieren schon
@@ -1988,7 +1988,7 @@ void Region::createProjectileFromString(CharConv* cv)
 	cv->fromBuffer(subt);
 	cv->fromBuffer(id);
 
-	DEBUG5("new projectile %s  id %i",subt.c_str(),id);
+	DEBUGX("new projectile %s  id %i",subt.c_str(),id);
 
 	proj = ObjectFactory::createProjectile(subt,id);
 
@@ -2014,14 +2014,14 @@ void Region::createItemFromString(CharConv* cv)
 	cv->fromBuffer(subt);
 	cv->fromBuffer(id);
 	
-	DEBUG5("got Item %i %s %s",id,type.c_str(),subt.c_str());
+	DEBUGX("got Item %i %s %s",id,type.c_str(),subt.c_str());
 	
 	DropItem* di = new DropItem(id);
 	di->fromString(cv);
 
 	if (m_drop_items->count(id) >0)
 	{
-		DEBUG5("Item %i already exists",di->getId());
+		DEBUGX("Item %i already exists",di->getId());
 		deleteItem(id);
 	}
 	m_drop_items->insert(std::make_pair(id,di));
@@ -2092,7 +2092,7 @@ void Region::setRegionData(CharConv* cv,WorldObjectMap* players)
 	// statische Objekte einlesen
 	short nr_stat;
 	cv->fromBuffer<short>(nr_stat);
-	DEBUG5("static objects: %i",nr_stat);
+	DEBUGX("static objects: %i",nr_stat);
 
 	for (int i=0; i<nr_stat;i++)
 	{
@@ -2104,7 +2104,7 @@ void Region::setRegionData(CharConv* cv,WorldObjectMap* players)
 	// neue Objekte einlesen
 	short nr_nonstat;
 	cv->fromBuffer<short>(nr_nonstat);
-	DEBUG5("nonstatic objects: %i",nr_nonstat);
+	DEBUGX("nonstatic objects: %i",nr_nonstat);
 
 	for (int i=0; i<nr_nonstat;i++)
 	{
@@ -2115,7 +2115,7 @@ void Region::setRegionData(CharConv* cv,WorldObjectMap* players)
 	// Anzahl der Projektile einlesen
 	short nr_proj;
 	cv->fromBuffer<short>(nr_proj);
-	DEBUG5("projectiles: %i",nr_proj);
+	DEBUGX("projectiles: %i",nr_proj);
 	// Projektile einlesen
 	for (int i=0; i<nr_proj;i++)
 	{
@@ -2125,7 +2125,7 @@ void Region::setRegionData(CharConv* cv,WorldObjectMap* players)
 	// Anzahl Gegenstaende einlesen
 	short nr_items;
 	cv->fromBuffer<short>(nr_items);
-	DEBUG5("items: %i",nr_items);
+	DEBUGX("items: %i",nr_items);
 	// Gegenstaende einlesen
 	for (int i=0; i<nr_items;i++)
 	{
@@ -2171,7 +2171,7 @@ void Region::getRegionCheckData(CharConv* cv)
 		if (jt->second->getLayer() & WorldObject::LAYER_ALL)
 			nr++;
 	}
-	DEBUG5("nonstatic objects: %i",nr);
+	DEBUGX("nonstatic objects: %i",nr);
 	cv->toBuffer<short>((short) nr);
 
 	// nicht statische Objekte in den Puffer eintragen
@@ -2181,13 +2181,13 @@ void Region::getRegionCheckData(CharConv* cv)
 		if (jt->second->getLayer() & WorldObject::LAYER_ALL)
 		{
 			cv->toBuffer((jt->second)->getId());
-			DEBUG5("object: %s",(jt->second)->getNameId().c_str());
+			DEBUGX("object: %s",(jt->second)->getNameId().c_str());
 		}
 	}
 
 	// Anzahl der Projektile eintragen
 	cv->toBuffer<short>((short) m_projectiles->size());
-	DEBUG5("projectiles: %i",m_projectiles->size());
+	DEBUGX("projectiles: %i",m_projectiles->size());
 
 	// Projektile in den Puffer eintragen
 	ProjectileMap::iterator kt;
@@ -2197,7 +2197,7 @@ void Region::getRegionCheckData(CharConv* cv)
 	}
 
 	cv->toBuffer<short>((short) m_drop_items->size());
-	DEBUG5("dropped items: %i",m_drop_items->size());
+	DEBUGX("dropped items: %i",m_drop_items->size());
 
 	//  Items in den Puffer eintragen
 	DropItemMap::iterator lt;
@@ -2352,7 +2352,7 @@ void Region::checkRegionData(CharConv* cv)
 	
 	
 	cv->fromBuffer(nr);
-	DEBUG5("nonstatic Objects %i",nr);
+	DEBUGX("nonstatic Objects %i",nr);
 	for (int i=0; i<nr; i++)
 	{
 		cv->fromBuffer(id);
@@ -2380,7 +2380,7 @@ void Region::checkRegionData(CharConv* cv)
 	cv->fromBuffer(nr);
 	ProjectileMap::iterator kt;
 	
-	DEBUG5("projectiles %i",nr);
+	DEBUGX("projectiles %i",nr);
 	for (int i=0; i<nr; i++)
 	{
 		cv->fromBuffer(id);
@@ -2408,7 +2408,7 @@ void Region::checkRegionData(CharConv* cv)
 	cv->fromBuffer(nr);
 	DropItemMap::iterator lt;
 	
-	DEBUG5("dropitems %i",nr);
+	DEBUGX("dropitems %i",nr);
 	for (int i=0; i<nr; i++)
 	{
 		cv->fromBuffer(id);
@@ -2435,7 +2435,7 @@ void Region::checkRegionData(CharConv* cv)
 
 bool  Region::dropItem(Item* item, Vector pos)
 {
-	DEBUG5("drop %s %i",item->m_subtype.c_str(), item->m_id);
+	DEBUGX("drop %s %i",item->m_subtype.c_str(), item->m_id);
 	// Menge der bereits getesteten Felder
 	std::set<int> tfields;
 
@@ -2468,7 +2468,7 @@ bool  Region::dropItem(Item* item, Vector pos)
 		sy = i %10000;
 		fields.pop();
 
-		DEBUG5("testing field %i %i",sx,sy);
+		DEBUGX("testing field %i %i",sx,sy);
 
 		// Testen ob dort keine festen Objekte sind
 		s.m_center = Vector(sx*0.5, sy*0.5);
@@ -2494,18 +2494,18 @@ bool  Region::dropItem(Item* item, Vector pos)
 		// Testen, ob dort nicht schon ein Item liegt
 		if (!fixblock && m_drop_item_locations->find(i) == m_drop_item_locations->end())
 		{
-			DEBUG5("field is free");
+			DEBUGX("field is free");
 			// Stelle ist frei
 			// Item einfuegen
 			DropItem* di = new DropItem(item);
 			di->setPosition(Vector(sx/2.0f, sy/2.0f));
-			DEBUG5("dropped item %i", sx*10000+sy);
+			DEBUGX("dropped item %i", sx*10000+sy);
 			
 			m_drop_items->insert(std::make_pair(di->getId(),di));
 			m_drop_item_locations->insert(std::make_pair(i,di));
 			m_game_objects.insert(std::make_pair(di->getId(),di));
 
-			DEBUG5("items dropped at %f %f locID %i %p",sx/2.0f,sy/2.0f, di->getLocationId(),item);
+			DEBUGX("items dropped at %f %f locID %i %p",sx/2.0f,sy/2.0f, di->getLocationId(),item);
 
 			if (World::getWorld()->isServer())
 			{
@@ -2582,7 +2582,7 @@ bool Region::dropItem(Item::Subtype subtype, Vector pos, int magic_power)
 	}
 	
 	Item* item= ItemFactory::createItem(type,subtype,0,magic_power);
-	DEBUG5("drop item %s at %f %f %p",subtype.c_str(),pos.m_x,pos.m_y,item);
+	DEBUGX("drop item %s at %f %f %p",subtype.c_str(),pos.m_x,pos.m_y,item);
 	
 	if (item !=0)
 	{
@@ -2692,7 +2692,7 @@ EnvironmentName Region::getEnvironment(Vector pos)
 	{
 		if (height < it->first)
 		{
-			DEBUG5("environment %s", it->second.c_str());
+			DEBUGX("environment %s", it->second.c_str());
 			return it->second;
 		}
 	}
@@ -2782,12 +2782,12 @@ void Region::insertDialogue(Dialogue* dia)
 		event.m_id = dia->getId();
 		insertNetEvent(event);
 	}
-	DEBUG5("insert Dialogue %i",dia->getId());
+	DEBUGX("insert Dialogue %i",dia->getId());
 }
 
 void Region::deleteDialogue(Dialogue* dia)
 {
-	DEBUG5("delete Dialogue %i",dia->getId());
+	DEBUGX("delete Dialogue %i",dia->getId());
 	std::map<int, Dialogue*>::iterator it;
 	it = m_dialogues.find(dia->getId());
 	if (it != m_dialogues.end())

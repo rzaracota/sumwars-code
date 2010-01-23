@@ -36,7 +36,7 @@ void Action::cleanup()
 
 bool Action::loadAbilityData(const char* pFilename)
 {
-	DEBUG5("loading file: %s",pFilename);
+	DEBUGX("loading file: %s",pFilename);
 	TiXmlDocument doc(pFilename);
 	bool loadOkay = doc.LoadFile();
 
@@ -116,7 +116,7 @@ void Action::loadAbility(TiXmlNode* node)
 	{
 		ERRORMSG("invalid target type for ability %s",type.c_str());
 	}
-	DEBUG5("ability %s %s %f %i %f %f %s %s",type.c_str(), a->m_name.c_str(), a->m_standard_time, a->m_timer_nr, a->m_timer, a->m_critical_perc, target.c_str(), a->m_base_action.c_str());
+	DEBUGX("ability %s %s %f %i %f %f %s %s",type.c_str(), a->m_name.c_str(), a->m_standard_time, a->m_timer_nr, a->m_timer, a->m_critical_perc, target.c_str(), a->m_base_action.c_str());
 		
 	TiXmlNode* child;
 	TiXmlNode* child2;
@@ -136,7 +136,7 @@ void Action::loadAbility(TiXmlNode* node)
 				{
 					a->m_flags |= MUTE_AFFECTED;
 				}
-				DEBUG5("  flag: %s",flag.c_str());
+				DEBUGX("  flag: %s",flag.c_str());
 			}
 			else if (!strcmp(child->Value(), "Effect"))
 			{
@@ -192,7 +192,7 @@ void Action::loadAbility(TiXmlNode* node)
 							{
 								a->m_projectile_flags |= Projectile::PROB_BOUNCING;
 							}
-							DEBUG5(" %s flags %i",a->m_projectile_type.c_str(), a->m_projectile_flags);
+							DEBUGX(" %s flags %i",a->m_projectile_type.c_str(), a->m_projectile_flags);
 						}
 					}
 				}

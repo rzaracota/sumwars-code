@@ -43,7 +43,7 @@ class Matrix2d
 	{
 		m_dimx = dimx,m_dimy = dimy;
 		m_data = new Element[dimx*dimy];
-		DEBUG5("creating Matrix2d at %p",m_data);
+		DEBUGX("creating Matrix2d at %p",m_data);
 	}
 	
 	

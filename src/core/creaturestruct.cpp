@@ -5,7 +5,7 @@
 
 void CreatureBaseAttr::init()
 {
-	DEBUG5("init CreatureBaseAttrMod");
+	DEBUGX("init CreatureBaseAttrMod");
 		// alles nullen
 	m_level =1;
 	m_armor =0;
@@ -292,7 +292,7 @@ bool CreatureBaseAttr::setValue(std::string valname, int& event_mask)
 
 void CreatureBaseAttrMod::init()
 {
-	DEBUG5("init CreatureBaseAttrMod");
+	DEBUGX("init CreatureBaseAttrMod");
 		// alles nullen
 	m_darmor =0;
 	m_dblock =0;

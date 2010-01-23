@@ -21,7 +21,7 @@ Item* ItemFactory::createItem(Item::Type type, Item::Subtype subtype, int id, fl
 	if (type == Item::NOITEM)
 		return 0;
 	
-	DEBUG5("creating item %i / %s",type, subtype.c_str());
+	DEBUGX("creating item %i / %s",type, subtype.c_str());
 	
 	if (type == Item::GOLD_TYPE)
 	{
@@ -80,7 +80,7 @@ Item* ItemFactory::createGold(int value, int id)
 
 void ItemFactory::createMagicMods(Item* item, float* modchance, float magic_power, float min_enchant, float max_enchant)
 {
-	DEBUG5("magic power %f min_enchant %f",magic_power, min_enchant);
+	DEBUGX("magic power %f min_enchant %f",magic_power, min_enchant);
 	if (magic_power < min_enchant && magic_power != 0)
 	{
 		if (item->m_type == Item::RING || item->m_type == Item::AMULET)
@@ -94,7 +94,7 @@ void ItemFactory::createMagicMods(Item* item, float* modchance, float magic_powe
 	}
 	
 	// Modifikationen des Items auswuerfeln
-	DEBUG5("mods auswuerfeln");
+	DEBUGX("mods auswuerfeln");
 
 	magic_power = std::min(magic_power, max_enchant*4);
 	item->m_magic_power =0;
@@ -149,8 +149,8 @@ void ItemFactory::createMagicMods(Item* item, float* modchance, float magic_powe
 		
 			// Modifikation auswuerfeln
 		mod = Random::randDiscrete(modprob,31,sum);
-		DEBUG5("ausgewuerfelt: Starke der Verzauberung: %f",mp);
-		DEBUG5("Art der Verzauberung: %i",mod);
+		DEBUGX("ausgewuerfelt: Starke der Verzauberung: %f",mp);
+		DEBUGX("Art der Verzauberung: %i",mod);
 
 		num_mods++;
 
@@ -285,7 +285,7 @@ void ItemFactory::createMagicMods(Item* item, float* modchance, float magic_powe
 	}
 
 	item->m_level_req = std::max(item->m_level_req,(char) levelreq);
-	DEBUG5("level req %i",item->m_level_req);
+	DEBUGX("level req %i",item->m_level_req);
 }
 
 Item::Type  ItemFactory::getBaseType(Item::Subtype subtype)
@@ -320,7 +320,7 @@ void ItemFactory::registerItemDrop(Item::Subtype subtype, DropChance chance)
 
 void ItemFactory::registerItem(Item::Type type,Item::Subtype subtype, ItemBasicData* data)
 {
-	DEBUG5("registered item %s %p",subtype.c_str(), data->m_weapon_attr);
+	DEBUGX("registered item %s %p",subtype.c_str(), data->m_weapon_attr);
 	m_item_data.insert(make_pair(subtype, data));
 	m_item_types.insert(make_pair(subtype,type));
 }
@@ -337,19 +337,19 @@ void ItemFactory::cleanup()
 	std::map<Item::Subtype,ItemBasicData*>::iterator it;
 	for (it = m_item_data.begin(); it != m_item_data.end(); ++it)
 	{
-		DEBUG5("deleting item data %s",it->first.c_str());
+		DEBUGX("deleting item data %s",it->first.c_str());
 		delete it->second;
 	}
 }
 
 Item* ItemFactory::createItem(DropSlot &slot, float factor )
 {
-	DEBUG5("get item by dropslot");
+	DEBUGX("get item by dropslot");
 	// wenn maximales Level unter 0 liegt kein Item ausgeben
 	if (slot.m_max_level<0)
 		return 0;
 
-	DEBUG5("drop item %i %i",slot.m_min_level, slot.m_max_level);
+	DEBUGX("drop item %i %i",slot.m_min_level, slot.m_max_level);
 	
 	float probs[5];
 	probs[Item::SIZE_NONE] =1;
@@ -376,7 +376,7 @@ Item* ItemFactory::createItem(DropSlot &slot, float factor )
 
 	
 	
-	DEBUG5("item size: %i",size);
+	DEBUGX("item size: %i",size);
 	Item* item =0;
 	if (size  == Item::GOLD)
 	{
@@ -414,7 +414,7 @@ Item* ItemFactory::createItem(DropSlot &slot, float factor )
 
 			if (p>0)
 			{
-				DEBUG5("possible item subtype %s prob %f",i->first.c_str(),p);
+				DEBUGX("possible item subtype %s prob %f",i->first.c_str(),p);
 				types.push_back(i->first);
 				prob.push_back(p);
 
@@ -442,7 +442,7 @@ Item* ItemFactory::createItem(DropSlot &slot, float factor )
 		
 
 		item = createItem(type,subtype,0,magic);
-		DEBUG5("item type %i  subtype %s level %i magic %f",type,subtype.c_str(), item->m_level_req,magic);
+		DEBUGX("item type %i  subtype %s level %i magic %f",type,subtype.c_str(), item->m_level_req,magic);
 		return item;
 	}
 	return 0;

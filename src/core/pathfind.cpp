@@ -439,7 +439,7 @@ void SearchField::createGradient(Matrix2d<float[2]>* grad)
 			fa1 = pot[ia1][ja1];
 			
 			q = fabs(fa1);
-			DEBUG5("coord %i %i val %f",ia1,ja1,q);
+			DEBUGX("coord %i %i val %f",ia1,ja1,q);
 			if (q<qmax && q!=0)
 			{
 

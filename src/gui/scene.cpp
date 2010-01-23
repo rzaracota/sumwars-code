@@ -59,8 +59,8 @@ Scene::Scene(Document* doc,Ogre::RenderWindow* window)
 	v->setOverlaysEnabled (false);
 	v->setBackgroundColour(Ogre::ColourValue(0,0,0,0) );
 	float ratio = Ogre::Real(v->getActualWidth()) / Ogre::Real(v->getActualHeight());
-	DEBUG5("render target size %i %i",minimap_rt ->getWidth (), minimap_rt ->getHeight ());
-	DEBUG5("viewport size %i %i ratio %f",v->getActualWidth(),v->getActualHeight(), ratio);
+	DEBUGX("render target size %i %i",minimap_rt ->getWidth (), minimap_rt ->getHeight ());
+	DEBUGX("viewport size %i %i ratio %f",v->getActualWidth(),v->getActualHeight(), ratio);
 	minimap_camera->setAspectRatio(ratio);
 
 	CEGUI::OgreCEGUITexture* ceguiTex = (CEGUI::OgreCEGUITexture*)((CEGUI::OgreCEGUIRenderer*)CEGUI::System::getSingleton().getRenderer())->createTexture((CEGUI::utf8*)"minimap_tex");
@@ -191,7 +191,7 @@ GraphicObject* Scene::createGraphicObject(GameObject* gobj, std::string name)
 	}
 	else
 	{
-		DEBUG5("create graphic Object typ %s for %s",type.c_str(), otype.c_str());
+		DEBUGX("create graphic Object typ %s for %s",type.c_str(), otype.c_str());
 		return GraphicManager::createGraphicObject(type,name, gobj->getId());
 	}
 }
@@ -199,7 +199,7 @@ GraphicObject* Scene::createGraphicObject(GameObject* gobj, std::string name)
 
 void Scene::update(float ms)
 {
-	DEBUG5("update scene");
+	DEBUGX("update scene");
 
 	// Spielerobjekt
 	Player* player = m_document->getLocalPlayer();
@@ -257,7 +257,7 @@ void Scene::update(float ms)
 
 	m_camera->setPosition(Ogre::Vector3(pos.m_x*50 + r*cos(theta)*cos(phi), r*sin(theta), pos.m_y*50 - r*cos(theta)*sin(phi)));
 	m_camera->lookAt(Ogre::Vector3(pos.m_x*50,70,pos.m_y*50));
-	DEBUG5("cam position %f %f %f",pos.m_x*50 + r*cos(theta)*cos(phi), r*sin(theta), pos.m_y*50 - r*cos(theta)*sin(phi));
+	DEBUGX("cam position %f %f %f",pos.m_x*50 + r*cos(theta)*cos(phi), r*sin(theta), pos.m_y*50 - r*cos(theta)*sin(phi));
 
 	SoundSystem::setListenerPosition(pos);
 	
@@ -271,7 +271,7 @@ void Scene::update(float ms)
 	updateObjects();
 
 
-	DEBUG5("update items");
+	DEBUGX("update items");
 	// alle Items aktualisieren
 	updateItems();
 
@@ -284,7 +284,7 @@ void  Scene::insertObject(GameObject* gobj, bool is_static)
 {
 	GraphicObject* obj = createGraphicObject(gobj);
 
-	DEBUG5("insert graphic object for %s",gobj->getNameId().c_str());
+	DEBUGX("insert graphic object for %s",gobj->getNameId().c_str());
 	if (is_static)
 	{
 		m_static_objects.insert(std::make_pair(gobj->getId(), obj));
@@ -359,7 +359,7 @@ void Scene::updateGraphicObject(GraphicObject* obj, GameObject* gobj,float time)
 	}
 	
 	obj->updateAction(action,perc);
-	DEBUG5("object %s action %s perc %f",gobj->getNameId().c_str(), action.c_str(), perc);
+	DEBUGX("object %s action %s perc %f",gobj->getNameId().c_str(), action.c_str(), perc);
 	
 	// Zustaende aktualisieren
 	std::set<std::string> flags;
@@ -438,7 +438,7 @@ bool Scene::updatePlayerGraphicObject(GraphicObject* obj, Player* pl)
 	}
 	update |= obj->updateSubobject(minfo);
 	
-	DEBUG5("update %s : bone %s source %s", minfo.m_objectname.c_str(), minfo.m_bone.c_str(), minfo.m_source.c_str());
+	DEBUGX("update %s : bone %s source %s", minfo.m_objectname.c_str(), minfo.m_bone.c_str(), minfo.m_source.c_str());
 	
 	// Handschuhe
 	minfo.m_objectname="gloves";
@@ -538,7 +538,7 @@ void Scene::updateGraphicObjects(float time)
 		if (it == game_objs.end() || (jt != m_graphic_objects.end() && it->first > jt->first))
 		{
 			// Objekt jt existiert als Graphisch, aber nicht mehr im Spiel
-			DEBUG5("deleting graphic object %i",jt->first);
+			DEBUGX("deleting graphic object %i",jt->first);
 			jtold = jt;
 			++jt;
 			
@@ -547,7 +547,7 @@ void Scene::updateGraphicObjects(float time)
 		else if (jt == m_graphic_objects.end() || (it != game_objs.end() && it->first < jt->first))
 		{
 			// Objekt it existiert im Spiel, aber noch nicht graphisch
-			DEBUG5("inserting graphic object %i",it->first);	
+			DEBUGX("inserting graphic object %i",it->first);	
 			if (it->second->getLayer() != GameObject::LAYER_SPECIAL)
 			{
 				insertObject(it->second,false);
@@ -558,7 +558,7 @@ void Scene::updateGraphicObjects(float time)
 		else if (it->first == jt->first)
 		{
 			// GraphikObjekt aktualisieren
-			DEBUG5("update graphic objekt %i",it->first);
+			DEBUGX("update graphic objekt %i",it->first);
 			updateGraphicObject(jt->second, it->second,time);
 			++it;
 			++jt;
@@ -597,7 +597,7 @@ void Scene::updateCharacterView()
 		
 		if ((correctname != m_temp_player))
 		{
-			DEBUG5("updating inv player %s to %s",m_temp_player.c_str(), correctname.c_str());
+			DEBUGX("updating inv player %s to %s",m_temp_player.c_str(), correctname.c_str());
 			GraphicManager::destroyGraphicObject(m_temp_player_object);
 			m_temp_player_object =0;
 			update = true;
@@ -636,7 +636,7 @@ void Scene::updateCharacterView()
 	
 	
 		target->update();
-		DEBUG5("player image is now %s",m_temp_player.c_str());
+		DEBUGX("player image is now %s",m_temp_player.c_str());
 	}
 	
 	GraphicManager::setSceneManager(m_scene_manager);
@@ -662,7 +662,7 @@ void Scene::clearObjects()
 
 void Scene::createScene()
 {
-	DEBUG5("create Scene");
+	DEBUGX("create Scene");
 
 	// alle bisherigen Objekte aus der Szene loeschen
 	clearObjects();
@@ -695,7 +695,7 @@ void Scene::createScene()
 	light->setSpecularColour(0.0, 0.0, 0.0);
 	light->setAttenuation(1000,0.5,0.000,0.00001);
 	light->setCastShadows(false);
-	DEBUG5("hero light %f %f %f",colour[0], colour[1], colour[2]);
+	DEBUGX("hero light %f %f %f",colour[0], colour[1], colour[2]);
 
 	colour= region->getDirectionalLight();
 	light = m_scene_manager->createLight("RegionLight");
@@ -703,7 +703,7 @@ void Scene::createScene()
 	light->setDiffuseColour(colour[0], colour[1], colour[2]);
 	light->setSpecularColour(colour[0], colour[1], colour[2]);
 	light->setDirection(Ogre::Vector3(-1,-1,-1));
-	DEBUG5("directional light %f %f %f",colour[0], colour[1], colour[2]);
+	DEBUGX("directional light %f %f %f",colour[0], colour[1], colour[2]);
 
 	if (region !=0)
 	{
@@ -718,7 +718,7 @@ void Scene::createScene()
 		short dimx = region->getDimX();
 		short dimy = region->getDimY();
 		Ogre::Camera* minimap_camera=m_scene_manager->getCamera("minimap_camera");
-		DEBUG5("camera pos %i %i %i",dimx*100,std::max(dimx,dimy)*300,dimy*100);
+		DEBUGX("camera pos %i %i %i",dimx*100,std::max(dimx,dimy)*300,dimy*100);
 		minimap_camera->setPosition(Ogre::Vector3(dimx*100,std::max(dimx,dimy)*200,10+dimy*100));
 		minimap_camera->lookAt(Ogre::Vector3(dimx*100,0,dimy*100));
 #if (OGRE_VERSION >= ((1 << 16) | (6 << 8)))
@@ -744,7 +744,7 @@ void Scene::createScene()
 
 		colour= region->getAmbientLight();
 		m_scene_manager->setAmbientLight(Ogre::ColourValue(colour[0], colour[1], colour[2]));
-		DEBUG5("ambient light %f %f %f",colour[0], colour[1], colour[2]);
+		DEBUGX("ambient light %f %f %f",colour[0], colour[1], colour[2]);
 		//m_scene_manager->setAmbientLight(Ogre::ColourValue(0.0,0.0,0.0));
 
 		// Boden erstellen

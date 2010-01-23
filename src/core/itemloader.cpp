@@ -112,7 +112,7 @@ void ItemLoader::loadItem(TiXmlNode* node)
 				attr.getString("image", image);
 				if (item_data->m_subtype != "")
 				{
-					DEBUG5("registered Item image %s %s",item_data->m_subtype.c_str(),image.c_str());
+					DEBUGX("registered Item image %s %s",item_data->m_subtype.c_str(),image.c_str());
 					ItemWindow::registerItemImage(item_data->m_subtype, image);
 				}
 			}
@@ -122,7 +122,7 @@ void ItemLoader::loadItem(TiXmlNode* node)
 				attr.getString("file", file);
 				if (item_data->m_subtype != "")
 				{
-					DEBUG5("registered Item mesh %s %s",item_data->m_subtype.c_str(),file.c_str());
+					DEBUGX("registered Item mesh %s %s",item_data->m_subtype.c_str(),file.c_str());
 					GraphicManager::registerGraphicMapping(item_data->m_subtype,file);
 					
 				}
@@ -133,7 +133,7 @@ void ItemLoader::loadItem(TiXmlNode* node)
 				attr.getString("name", file);
 				if (item_data->m_subtype != "")
 				{
-					DEBUG5("registered Item mesh %s %s",item_data->m_subtype.c_str(),file.c_str());
+					DEBUGX("registered Item mesh %s %s",item_data->m_subtype.c_str(),file.c_str());
 					GraphicManager::registerGraphicMapping(item_data->m_subtype,file);
 					
 				}
@@ -350,7 +350,7 @@ void ItemLoader::loadItem(TiXmlNode* node)
 		}
 	}
 	
-	DEBUG5("registered Item %s",item_data->m_subtype.c_str());
+	DEBUGX("registered Item %s",item_data->m_subtype.c_str());
 	ItemFactory::registerItem(item_data->m_type, item_data->m_subtype, item_data);
 }
 

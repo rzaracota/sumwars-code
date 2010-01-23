@@ -136,7 +136,7 @@ bool Monster::init()
 
 bool Monster::update(float time)
 {
-	DEBUG5("Update des Monsters [%i]", getId());
+	DEBUGX("Update des Monsters [%i]", getId());
 
 	// AI abhandeln
 	for (int i=0; i< NR_AI_MODS; i++)
@@ -173,8 +173,8 @@ void Monster::updateCommand()
 	// eigene Koordinaten
 	Vector &pos = getShape()->m_center;
 	
-	DEBUG5("update monster command %i %s",getId(), getSubtype().c_str());
-	DEBUG5("randaction prob %f",m_ai.m_vars.m_randaction_prob);
+	DEBUGX("update monster command %i %s",getId(), getSubtype().c_str());
+	DEBUGX("randaction prob %f",m_ai.m_vars.m_randaction_prob);
 	if (Random::random() < m_ai.m_vars.m_randaction_prob)
 	{
 		m_ai.m_rand_command = true;
@@ -296,16 +296,16 @@ void Monster::updateCommand()
 					WorldObjectList::iterator it;
 					for (it = ret.begin(); it != ret.end();++it)
 					{
-						DEBUG5("blocking obj %i",(*it)->getId());
+						DEBUGX("blocking obj %i",(*it)->getId());
 					}
-					DEBUG5("dist %f max dist %f",dist, m_ai.m_vars.m_shoot_range);
+					DEBUGX("dist %f max dist %f",dist, m_ai.m_vars.m_shoot_range);
 				}
 			}
 		}
 	}
 	else
 	{
-		DEBUG5("taunt %f",m_ai.m_mod_time[TAUNT]);
+		DEBUGX("taunt %f",m_ai.m_mod_time[TAUNT]);
 	}
 	
 	// Angriff auf Spieler durch anlocken
@@ -325,7 +325,7 @@ void Monster::updateCommand()
 				if (dist < m_ai.m_vars.m_chase_distance)
 				{
 					m_ai.m_goals->push_back(std::make_pair(pl,dist));
-					DEBUG5("chase %i",m_ai.m_chase_player_id);
+					DEBUGX("chase %i",m_ai.m_chase_player_id);
 				}
 				else
 				{
@@ -381,7 +381,7 @@ void Monster::updateCommand()
 		cmd->m_goal_object_id = m_ai.m_command.m_goal_object_id;
 		cmd->m_range = m_ai.m_command.m_range;
 		
-		DEBUG5("calculated command %s for %s",m_ai.m_command.m_type.c_str(),getSubtype().c_str());
+		DEBUGX("calculated command %s for %s",m_ai.m_command.m_type.c_str(),getSubtype().c_str());
 		
 
 		addToNetEventMask(NetEvent::DATA_COMMAND);
@@ -400,7 +400,7 @@ void Monster::updateCommand()
 	}
 	else
 	{
-		DEBUG5("AI state %i ai value %f",m_ai.m_state,m_ai.m_command_value);
+		DEBUGX("AI state %i ai value %f",m_ai.m_state,m_ai.m_command_value);
 	}
 
 	// Kommando ausrechnen das evtl aus einem Statusmod resultiert
@@ -502,7 +502,7 @@ void Monster::evalCommand(Action::ActionType act)
 		// Aktion erfordert einen Timer, der nicht frei ist
 		return;
 	}
-	DEBUG5("action %s timer %i",act.c_str(), timernr);
+	DEBUGX("action %s timer %i",act.c_str(), timernr);
 
 	if (goal_list)
 	{
@@ -523,10 +523,10 @@ void Monster::evalCommand(Action::ActionType act)
 				value *= 3/(3+std::max(0.0f,dist - getBaseAttr()->m_attack_range));
 			}
 
-			DEBUG5("command %s at %i rating value %f",act.c_str(),cgoal->getId(),value);
+			DEBUGX("command %s at %i rating value %f",act.c_str(),cgoal->getId(),value);
 			if (value > m_ai.m_command_value)
 			{
-				DEBUG5("set new command %s value %f",act.c_str(),value);
+				DEBUGX("set new command %s value %f",act.c_str(),value);
 				
 				// aktuelle Aktion ist besser als alle vorher bewerteten
 				m_ai.m_command_value = value;
@@ -547,7 +547,7 @@ void Monster::evalCommand(Action::ActionType act)
 					m_ai.m_command.m_type = "walk";
 					m_ai.m_command.m_range = getShape()->m_radius;
 					
-					DEBUG5("%p: %i , %p: %i (%f)", m_ai.m_visible_goals, m_ai.m_visible_goals->size(), m_ai.m_goals, m_ai.m_goals->size(), m_ai.m_vars.m_shoot_range);
+					DEBUGX("%p: %i , %p: %i (%f)", m_ai.m_visible_goals, m_ai.m_visible_goals->size(), m_ai.m_goals, m_ai.m_goals->size(), m_ai.m_vars.m_shoot_range);
 				}
 			}
 		}
@@ -603,7 +603,7 @@ bool Monster::takeDamage(Damage* damage)
 		{
 			if (damage->m_ai_mod_power[i]>0)
 			{
-				DEBUG5("mod %i modpow %i wp %i",i,damage->m_ai_mod_power[i],getBaseAttrMod()->m_willpower);
+				DEBUGX("mod %i modpow %i wp %i",i,damage->m_ai_mod_power[i],getBaseAttrMod()->m_willpower);
 				if (damage->m_ai_mod_power[i]>getBaseAttrMod()->m_willpower)
 				{
 				// Modifikation anwenden
@@ -616,7 +616,7 @@ bool Monster::takeDamage(Damage* damage)
 						//m_event_mask |= NetEvent::DATA_STATUS_MODS;
 					}
 
-					DEBUG5("applying ai mod %i for %f ms",i,t);
+					DEBUGX("applying ai mod %i for %f ms",i,t);
 				}
 			}
 		}
@@ -628,7 +628,7 @@ bool Monster::takeDamage(Damage* damage)
 
 void Monster::die()
 {
-	DEBUG5("die");
+	DEBUGX("die");
 	if (World::getWorld()->isServer())
 	{
 		//Zeiger auf letzten Angreifer per ID  holen

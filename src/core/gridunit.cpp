@@ -19,7 +19,7 @@ bool Gridunit::insertObject(WorldObject* object, WorldObject::Group g)
 	arr.push_back(object);
 	object->getGridLocation()->m_index = arr.size()-1;
 		
-	DEBUG5("inserted object %p, as number %i in group %i",object,arr.size()-1,g);
+	DEBUGX("inserted object %p, as number %i in group %i",object,arr.size()-1,g);
 	return true;
 }
 
@@ -45,7 +45,7 @@ bool Gridunit::deleteObject(WorldObject* object, short index)
 
 	int size = arr.size();
 
-	DEBUG5("deleting obj %i from group %i",object->getId(),g);
+	DEBUGX("deleting obj %i from group %i",object->getId(),g);
 	if (index != -1 && arr[index]==object)
 	{
 		// Stelle an der geloescht werden soll ist explizit vorgegeben
@@ -62,7 +62,7 @@ bool Gridunit::deleteObject(WorldObject* object, short index)
 		// Suchen an welcher Stelle sich das Objekt befindet
 		for (int i=0;i<size;i++)
 		{
-			DEBUG5(" testing object %i",i);
+			DEBUGX(" testing object %i",i);
 			if (arr[i]==object)
 			{
 				// Objekt gefunden

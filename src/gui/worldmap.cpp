@@ -173,7 +173,7 @@ bool Worldmap::onWaypointClicked(const CEGUI::EventArgs& evt)
 			static_cast<const CEGUI::MouseEventArgs&>(evt);
 	unsigned int id = we.window->getID();
 	
-	DEBUG5("waypoint %i clicked",id);
+	DEBUGX("waypoint %i clicked",id);
 	m_document->onButtonWaypointClicked(id);
 	
 	return true;

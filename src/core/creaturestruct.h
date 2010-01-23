@@ -516,7 +516,7 @@ struct CreatureDynAttrMod
 	 */
 	void init()
 	{
-		DEBUG5("init CreatureDynAttrMod");
+		DEBUGX("init CreatureDynAttrMod");
 		// alles nullen
 		m_dhealth =0;
 		for (int i=0; i< NR_STATUS_MODS; i++)

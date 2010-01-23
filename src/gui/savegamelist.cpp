@@ -5,7 +5,7 @@
 SavegameList::SavegameList (Document* doc)
 	:Window(doc)
 {
-	DEBUG4("setup main menu");
+	DEBUGX("setup main menu");
 	// GUI Elemente erzeugen
 
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
@@ -103,7 +103,7 @@ void SavegameList::update()
 		filename = it->archive->getName();
 		filename += "/";
 		filename += it->filename;
-		DEBUG5("file found %s",filename.c_str());
+		DEBUGX("file found %s",filename.c_str());
 		//File oeffnen
 
 		file.open(filename.c_str(),std::ios::in| std::ios::binary);
@@ -193,7 +193,7 @@ bool SavegameList::onSavegameChosen(const CEGUI::EventArgs& evt)
 	{
 		StrListItem * sitm = (StrListItem *) itm;
 		m_document->setSaveFile(sitm->m_data);
-		DEBUG5("selected Savegame %s", sitm->m_data.c_str());
+		DEBUGX("selected Savegame %s", sitm->m_data.c_str());
 	}
 
 	return true;

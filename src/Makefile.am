@@ -39,6 +39,7 @@ sumwars_SOURCES = core/world.cpp \
 	core/projectile.cpp \
 	core/party.cpp \
 	core/debug.cpp \
+	core/logger.cpp \
 	core/item.cpp \
 	core/dropitem.cpp \
 	core/creaturestruct.cpp \

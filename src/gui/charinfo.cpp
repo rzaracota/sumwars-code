@@ -933,7 +933,7 @@ bool CharInfo::onIncreaseAttributeButtonClicked(const CEGUI::EventArgs& evt)
 	const CEGUI::MouseEventArgs& we =
 			static_cast<const CEGUI::MouseEventArgs&>(evt);
 	unsigned int id = we.window->getID();
-	DEBUG5("left button pressed on skill %i",id);
+	DEBUGX("left button pressed on skill %i",id);
 	m_document->increaseAttribute((CreatureBaseAttr::Attribute) id);
 	return true;
 }

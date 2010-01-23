@@ -27,6 +27,10 @@ Application::Application()
 
 bool Application::init()
 {
+	// Logger initialisieren
+	LogManager::instance().addLog("stdout",new StdOutLog(Log::LOGLEVEL_DEBUG));
+	LogManager::instance().addLog("logfile",new FileLog("sumwars.log",Log::LOGLEVEL_INFO));
+	
 	Timer tm;
 	m_timer.start();
 	bool ret = true;
@@ -132,6 +136,7 @@ Application::~Application()
 	ObjectFactory::cleanup();
 	ItemFactory::cleanup();
 	SoundSystem::cleanup();
+	LogManager::cleanup();
 }
 
 void Application::run()
@@ -194,7 +199,7 @@ void Application::run()
 		time[2] += t;
 		if (t>20)
 		{
-			DEBUG4("message pump time was %f",t);
+			DEBUGX("message pump time was %f",t);
 		}
 
 		timer2.reset();
@@ -206,7 +211,7 @@ void Application::run()
 		time[3] += t;
 		if (t> 20)
 		{
-			DEBUG4("document update time was %f",t);
+			DEBUGX("document update time was %f",t);
 		}
 
 		try
@@ -214,14 +219,14 @@ void Application::run()
 			timer2.reset();
 
 			// View aktualisieren
-			DEBUG5("main window update");
+			DEBUGX("main window update");
 			m_main_window->update(frametime);
 
 			t =timer2.getMicroseconds ()/1000.0;
 			time[4] += t;
 			if (t > 20)
 			{
-				DEBUG4("view update time was %f",t);
+				DEBUGX("view update time was %f",t);
 			}
 		}
 		catch (CEGUI::Exception e)
@@ -241,7 +246,7 @@ void Application::run()
 
 		if (t> 20)
 		{
-			DEBUG4("cegui update time was %f",t);
+			DEBUGX("cegui update time was %f",t);
 		}
 
 		// rendern
@@ -253,7 +258,7 @@ void Application::run()
 		time[6] += t;
 		if (t > 200)
 		{
-			DEBUG4("ogre frame time was %f",t);
+			DEBUGX("ogre frame time was %f",t);
 		}
 
 	}
@@ -664,7 +669,7 @@ void Application::updateStartScreen(float percent)
 		return;
 	}
 
-	DEBUG5("update time %f  perc: %f",m_timer.getTime(), percent);
+	DEBUGX("update time %f  perc: %f",m_timer.getTime(), percent);
 	m_main_window->update(m_timer.getTime()/1000);
 	m_main_window->setRessourceLoadingBar(percent);
 	m_cegui_system->injectTimePulse(m_timer.getTime()/1000);

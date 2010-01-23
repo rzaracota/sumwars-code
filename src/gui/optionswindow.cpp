@@ -7,7 +7,7 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard)
 {
 	m_keyboard = keyboard;
 	
-	DEBUG4("setup main menu");
+	DEBUGX("setup main menu");
 	// GUI Elemente erzeugen
 
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
@@ -264,7 +264,7 @@ bool OptionsWindow::onSoundVolumeChanged(const CEGUI::EventArgs& evt)
 	
 	CEGUI::Scrollbar* slider = static_cast<CEGUI::Scrollbar*>(we.window);
 	float vol = slider->getScrollPosition();
-	DEBUG5("sound volume change to %f",vol);
+	DEBUGX("sound volume change to %f",vol);
 	SoundSystem::setSoundVolume(vol);
 	return true;
 }
@@ -281,7 +281,7 @@ bool OptionsWindow::onLanguageSelected(const CEGUI::EventArgs& evt)
 	
 	if (item != 0)
 	{
-		DEBUG5("selected Language %s",item->getText().c_str());
+		DEBUGX("selected Language %s",item->getText().c_str());
 		StrListItem* sitem = static_cast<StrListItem*>(item);
 		Gettext::setLocale(sitem->m_data.c_str());
 	}

@@ -60,7 +60,7 @@ bool TemplateLoader::loadObjectTemplate(TiXmlNode* node)
 					if (defstr == "true")
 					{
 						templ->m_default_environment = env;
-						DEBUG5("default environment for %s is %s",name.c_str(), env.c_str());
+						DEBUGX("default environment for %s is %s",name.c_str(), env.c_str());
 					}
 					
 					for ( child2 = child->FirstChild(); child2 != 0; child2 = child2->NextSibling())
@@ -73,7 +73,7 @@ bool TemplateLoader::loadObjectTemplate(TiXmlNode* node)
 								attr.getString("name",objname);
 								
 								templ->addObject (env,objname);
-								DEBUG5("added object %s to generic object %s for environment %s",objname.c_str(), name.c_str(), env.c_str());
+								DEBUGX("added object %s to generic object %s for environment %s",objname.c_str(), name.c_str(), env.c_str());
 								
 							}
 							else if (child2->Type()!=TiXmlNode::COMMENT)
@@ -90,7 +90,7 @@ bool TemplateLoader::loadObjectTemplate(TiXmlNode* node)
 				
 			}
 		}
-		DEBUG5("found object template %s",name.c_str());
+		DEBUGX("found object template %s",name.c_str());
 		
 		ObjectFactory::registerObjectTemplate(name,templ);
 	}
@@ -119,7 +119,7 @@ bool TemplateLoader::loadObjectTemplate(TiXmlNode* node)
 					if (defstr == "true")
 					{
 						templ->m_default_environment = env;
-						DEBUG5("default environment for %s is %s",name.c_str(), env.c_str());
+						DEBUGX("default environment for %s is %s",name.c_str(), env.c_str());
 					}
 					
 					for ( child2 = child->FirstChild(); child2 != 0; child2 = child2->NextSibling())
@@ -132,7 +132,7 @@ bool TemplateLoader::loadObjectTemplate(TiXmlNode* node)
 								attr.getString("name",objname);
 								
 								templ->addObjectGroup (env,objname);
-								DEBUG5("added object group %s to generic object group %s for environment %s",objname.c_str(), name.c_str(), env.c_str());
+								DEBUGX("added object group %s to generic object group %s for environment %s",objname.c_str(), name.c_str(), env.c_str());
 								
 							}
 							else if (child2->Type()!=TiXmlNode::COMMENT)
@@ -163,12 +163,12 @@ bool TemplateLoader::loadObjectTemplate(TiXmlNode* node)
 				}
 				else if (child->Type()!=TiXmlNode::COMMENT)
 				{
-					DEBUG5("unexpected element of <ObjectTemplate>: %s",child->Value());
+					DEBUGX("unexpected element of <ObjectTemplate>: %s",child->Value());
 				}
 				
 			}
 		}
-		DEBUG5("found object group template %s",name.c_str());
+		DEBUGX("found object group template %s",name.c_str());
 		
 		ObjectFactory::registerObjectGroupTemplate(name,templ);
 	}
@@ -247,7 +247,7 @@ bool TemplateLoader::loadObjectGroup(TiXmlNode* node)
 					attr.getFloat("pos_x",pos.m_x);
 					attr.getFloat("pos_y",pos.m_y);
 					templ->addWaypoint (pos);
-					DEBUG5("waypoint in %s at %f %f",name.c_str(), pos.m_x,pos.m_y);
+					DEBUGX("waypoint in %s at %f %f",name.c_str(), pos.m_x,pos.m_y);
 				}
 				else if (!strcmp(child->Value(), "ObjectContent"))
 				{
@@ -275,10 +275,10 @@ bool TemplateLoader::loadObjectGroup(TiXmlNode* node)
 								obj.m_angle *= 3.14159 / 180.0;
 								if (obj.m_height!=0)
 								{
-									DEBUG5("object %s height %f",name.c_str(), obj.m_height);
+									DEBUGX("object %s height %f",name.c_str(), obj.m_height);
 								}
 								
-								DEBUG5("object for %s: %s at %f %f angle %f prob %f",name.c_str(),obj.m_type.c_str(), obj.m_center.m_x, obj.m_center.m_y, obj.m_angle, obj.m_probability);
+								DEBUGX("object for %s: %s at %f %f angle %f prob %f",name.c_str(),obj.m_type.c_str(), obj.m_center.m_x, obj.m_center.m_y, obj.m_angle, obj.m_probability);
 								
 								templ->addObject (obj);
 							}
@@ -308,7 +308,7 @@ bool TemplateLoader::loadObjectGroup(TiXmlNode* node)
 								attr.getString("name",lname);
 								
 								templ->addLocation(lname,pos);
-								DEBUG5("location for %s: %s at %f %f",name.c_str(),lname.c_str(), pos.m_x, pos.m_y);
+								DEBUGX("location for %s: %s at %f %f",name.c_str(),lname.c_str(), pos.m_x, pos.m_y);
 							}
 							else if (child2->Type()!=TiXmlNode::COMMENT)
 							{
@@ -351,7 +351,7 @@ bool TemplateLoader::loadObjectGroup(TiXmlNode* node)
 								
 								templ->addArea(lname,shape);
 								
-								DEBUG5("area for %s: %s",name.c_str(),lname.c_str());
+								DEBUGX("area for %s: %s",name.c_str(),lname.c_str());
 							}
 							else if (child2->Type()!=TiXmlNode::COMMENT)
 							{

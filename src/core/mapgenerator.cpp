@@ -153,7 +153,7 @@ bool TemplateMap::getTemplatePlace(Shape* shape, Vector & place)
 	int ey = int(ceil(ext.m_y/2));
 	
 	int size = std::max(ex,ey);
-	DEBUG5("template size %i %i angle %f extent %f %f",ex,ey,shape->m_angle,shape->m_extent.m_x, shape->m_extent.m_y);
+	DEBUGX("template size %i %i angle %f extent %f %f",ex,ey,shape->m_angle,shape->m_extent.m_x, shape->m_extent.m_y);
 	std::map< int, std::vector< std::pair<int, int> > >::iterator mt, mt2;
 	std::vector<int>::iterator st;
 	
@@ -208,7 +208,7 @@ bool TemplateMap::getTemplatePlace(Shape* shape, Vector & place)
 				{
 					obi = i;
 					obj = j;
-					DEBUG5("found obstacle at %i %i",i,j);
+					DEBUGX("found obstacle at %i %i",i,j);
 					break;
 				}
 			}
@@ -255,7 +255,7 @@ bool TemplateMap::getTemplatePlace(Shape* shape, Vector & place)
 			place.m_x = px*4+2*ex;
 			place.m_y = py*4+2*ey;
 
-			DEBUG5("found place %i %i",px,py);
+			DEBUGX("found place %i %i",px,py);
 
 			success = true;
 		}
@@ -325,7 +325,7 @@ Region* MapGenerator::createRegion(RegionData* rdata)
 		}
 		else
 		{
-			DEBUG5("region template %s",rdata->m_region_template.c_str());
+			DEBUGX("region template %s",rdata->m_region_template.c_str());
 			// Region besteht aus einer einzelnen Objektgruppe
 			// Objektgruppe anhand des Namens suchen
 			ObjectGroup* templ;
@@ -663,7 +663,7 @@ bool MapGenerator::insertGroupTemplates(MapData* mdata, RegionData* rdata)
 		}
 
 		// Objektgruppe einfuegen
-		DEBUG5("placing group %s at %f %f",it->second.m_group_name.c_str(), pos.m_x, pos.m_y);
+		DEBUGX("placing group %s at %f %f",it->second.m_group_name.c_str(), pos.m_x, pos.m_y);
 		mdata->m_region->createObjectGroup(it->second.m_group_name,pos,s.m_angle, it->second.m_name);
 		insertBlockedArea(mdata,s);
 
@@ -702,7 +702,7 @@ bool MapGenerator::insertGroupTemplates(MapData* mdata, RegionData* rdata)
 			continue;
 		}
 
-		DEBUG5("template %s size %f %f",jt->second.m_group_name.c_str(),s.m_extent.m_x, s.m_extent.m_y);
+		DEBUGX("template %s size %f %f",jt->second.m_group_name.c_str(),s.m_extent.m_x, s.m_extent.m_y);
 		float angle =0;
 		for (int i=0; i< jt->second.m_number; i++)
 		{
@@ -735,7 +735,7 @@ bool MapGenerator::insertGroupTemplates(MapData* mdata, RegionData* rdata)
 			}
 
 			// Objektgruppe einfuegen
-			DEBUG5("placing group %s at %f %f",jt->second.m_group_name.c_str(), pos.m_x, pos.m_y);
+			DEBUGX("placing group %s at %f %f",jt->second.m_group_name.c_str(), pos.m_x, pos.m_y);
 			
 			mdata->m_region->createObjectGroup(jt->second.m_group_name,pos,angle);
 			if (! jt->second.m_decoration)
@@ -988,7 +988,7 @@ void MapGenerator::createBorder(MapData* mdata, RegionData* rdata)
 				templ += diagtempl;
 			}
 			
-			DEBUG5("placing type (%i %i) %s",i,j,templ.c_str());
+			DEBUGX("placing type (%i %i) %s",i,j,templ.c_str());
 			
 			mdata->m_region->createObjectGroup(templ,Vector(i*8+4,j*8+4),angle);
 		}
@@ -1031,7 +1031,7 @@ void MapGenerator::insertSpawnpoints(MapData* mdata, RegionData* rdata)
 	{
 		// aufhoeren, wenn keine Orte mehr vorhanden
 		
-		DEBUG5("%s x %i",st->m_monsters.c_str(),st->m_number);
+		DEBUGX("%s x %i",st->m_monsters.c_str(),st->m_number);
 		for (int i=0; i< st->m_number; i++)
 		{
 			int r = Random::randi(points.size());
@@ -1039,7 +1039,7 @@ void MapGenerator::insertSpawnpoints(MapData* mdata, RegionData* rdata)
 
 			mdata->m_region->insertObject(wo,Vector(points[r].first*8+4, points[r].second*8+4));
 
-			DEBUG5("placing spawnpoint for %s at %i %i",st->m_monsters.c_str(), points[r].first*8+4, points[r].second*8+4);
+			DEBUGX("placing spawnpoint for %s at %i %i",st->m_monsters.c_str(), points[r].first*8+4, points[r].second*8+4);
 			
 			points[r] = points.back();
 			points.resize(points.size() -1);
@@ -1092,7 +1092,7 @@ void MapGenerator::createExits(MapData* mdata, RegionData* rdata)
 		mdata->m_region->getWaypointLocation() = pos;
 		
 		//mdata->m_region->insertObject(wo,pos);
-		DEBUG5("waypoint at %f %f %i",pos.m_x, pos.m_y,wo->getId());
+		DEBUGX("waypoint at %f %f %i",pos.m_x, pos.m_y,wo->getId());
 		
 		// Bei den Ausgaengen keine Monster
 		if (rdata->m_region_template =="")
@@ -1151,7 +1151,7 @@ void MapGenerator::createPerlinNoise(Matrix2d<float> *data, int dimx, int dimy,i
 		startfreq = std::min(dimx,dimy);
 	}
 	
-	DEBUG5("Perlin noise dimx %i dimy %i",dimx,dimy);
+	DEBUGX("Perlin noise dimx %i dimy %i",dimx,dimy);
 	
 	// Perlin Noise Algorithmus
 	// Aenderung hier: Schleife geht ueber den Abstand zwischen den Stuetzstellen
@@ -1161,7 +1161,7 @@ void MapGenerator::createPerlinNoise(Matrix2d<float> *data, int dimx, int dimy,i
 		dx = 2+(dimx-2)/dist;
 		dy = 2+(dimy-2)/dist;
 		
-		DEBUG5("distance %i  tmp array %i %i",dist,dx,dy);
+		DEBUGX("distance %i  tmp array %i %i",dist,dx,dy);
 		
 		// anlegen der Zufallszahlen fuer die aktuelle Frequenz
 		for (int i=0;i<=dx;i++)

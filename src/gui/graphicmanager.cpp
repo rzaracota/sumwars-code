@@ -108,7 +108,7 @@ GraphicRenderInfo* GraphicManager::getRenderInfo(std::string type)
 	else
 	{
 		
-		DEBUG5("no render Info for type %s",type.c_str());
+		DEBUGX("no render Info for type %s",type.c_str());
 		size_t pos = type.find_last_of('#');
 		if (pos != std::string::npos)
 		{
@@ -121,7 +121,7 @@ GraphicRenderInfo* GraphicManager::getRenderInfo(std::string type)
 
 GraphicObject* GraphicManager::createGraphicObject(GraphicObject::Type type, std::string name, int id)
 {
-	DEBUG5("creating object %s type %s id %i",name.c_str(), type.c_str(),id);
+	DEBUGX("creating object %s type %s id %i",name.c_str(), type.c_str(),id);
 	GraphicRenderInfo* rinfo =  getRenderInfo(type);
 	
 	GraphicObject* go = new GraphicObject(type, rinfo,name,id);
@@ -133,7 +133,7 @@ void GraphicManager::destroyGraphicObject(GraphicObject* obj)
 {
 	if (obj != 0)
 	{
-		DEBUG5("removing object %s",obj->getName().c_str());
+		DEBUGX("removing object %s",obj->getName().c_str());
 		delete obj;
 	}
 }
@@ -267,7 +267,7 @@ void GraphicManager::loadRenderInfos(TiXmlNode* node)
 			info->setInheritMask(mask);
 		}
 		
-		DEBUG5("registering renderinfo for %s",name.c_str());
+		DEBUGX("registering renderinfo for %s",name.c_str());
 		loadRenderInfo(node,info);
 		
 		registerRenderInfo(name,info);
@@ -296,7 +296,7 @@ void GraphicManager::loadRenderInfo(TiXmlNode* node, GraphicRenderInfo* info)
 			{
 				MovableObjectInfo minfo;
 				loadMovableObjectInfo(child,&minfo);
-				DEBUG5("registering object %s",minfo.m_objectname.c_str());
+				DEBUGX("registering object %s",minfo.m_objectname.c_str());
 				info->addObject(minfo);
 			}
 			else if (!strcmp(child->Value(), "Action"))
@@ -306,7 +306,7 @@ void GraphicManager::loadRenderInfo(TiXmlNode* node, GraphicRenderInfo* info)
 				attr.getString("reference",refact);
 				if (refact != "")
 				{
-					DEBUG4("found reference %s %s",actname.c_str(), refact.c_str());
+					DEBUGX("found reference %s %s",actname.c_str(), refact.c_str());
 					info->addActionReference(actname, refact);
 				}
 				else if (actname != "")
@@ -316,7 +316,7 @@ void GraphicManager::loadRenderInfo(TiXmlNode* node, GraphicRenderInfo* info)
 					loadActionRenderInfo(child,ainfo);
 				
 					
-					DEBUG5("registering action %s",actname.c_str());
+					DEBUGX("registering action %s",actname.c_str());
 					info->addActionRenderInfo(actname,ainfo);
 				}
 			}
@@ -363,7 +363,7 @@ void GraphicManager::loadRenderInfo(TiXmlNode* node, GraphicRenderInfo* info)
 							loadActionRenderInfo(child2,ainfo);
 							info->addActionRenderInfo(act,ainfo);
 							
-							DEBUG5("registering state action %s",act.c_str());
+							DEBUGX("registering state action %s",act.c_str());
 						}
 					}
 				}
@@ -390,7 +390,7 @@ void GraphicManager::loadActionRenderInfo(TiXmlNode* node, ActionRenderInfo* ain
 							
 			float time;
 			attr.getFloat("time",time,0.0);
-			DEBUG5("registering dynamic object %s",minfo.m_objectname.c_str());
+			DEBUGX("registering dynamic object %s",minfo.m_objectname.c_str());
 			ainfo->m_new_objects.push_back(std::make_pair(time,minfo));
 		}
 		else if (!strcmp(child->Value(), "Animation"))
@@ -441,7 +441,7 @@ void GraphicManager::loadActionRenderInfo(TiXmlNode* node, ActionRenderInfo* ain
 				std::stringstream stream;
 				stream.str(startvec);
 				stream >> arpart.m_start_vec[0] >> arpart.m_start_vec[1] >> arpart.m_start_vec[2];
-				DEBUG5("Startvector %f %f %f", arpart.m_start_vec[0],arpart.m_start_vec[1], arpart.m_start_vec[2]);
+				DEBUGX("Startvector %f %f %f", arpart.m_start_vec[0],arpart.m_start_vec[1], arpart.m_start_vec[2]);
 			}
 			if (endvec!= "")
 			{
@@ -449,7 +449,7 @@ void GraphicManager::loadActionRenderInfo(TiXmlNode* node, ActionRenderInfo* ain
 				std::stringstream stream;
 				stream.str(endvec);
 				stream >> arpart.m_end_vec[0] >> arpart.m_end_vec[1] >> arpart.m_end_vec[2];
-				DEBUG5("endvector %f %f %f ",arpart.m_end_vec[0], arpart.m_end_vec[1], arpart.m_end_vec[2]);
+				DEBUGX("endvector %f %f %f ",arpart.m_end_vec[0], arpart.m_end_vec[1], arpart.m_end_vec[2]);
 			}
 							
 		}
@@ -471,7 +471,7 @@ void GraphicManager::loadActionRenderInfo(TiXmlNode* node, ActionRenderInfo* ain
 				arpart.m_start_val = 1;
 		}
 						
-		DEBUG5("adding renderpart %s",arpart.m_animation.c_str());
+		DEBUGX("adding renderpart %s",arpart.m_animation.c_str());
 		ainfo->m_renderparts.push_back(arpart);
 	}
 }
@@ -543,7 +543,7 @@ void GraphicManager::loadMovableObjectInfo(TiXmlNode* node, MovableObjectInfo* i
 
 void GraphicManager::registerGraphicMapping(std::string objecttype, GraphicObject::Type graphic)
 {
-	DEBUG5("registered graphic %s for object type %s",graphic.c_str(), objecttype.c_str());
+	DEBUGX("registered graphic %s for object type %s",graphic.c_str(), objecttype.c_str());
 	m_graphic_mapping[objecttype] = graphic;
 }
 
@@ -580,14 +580,14 @@ Ogre::ParticleSystem* GraphicManager::getParticleSystem(std::string type)
 
 		part = m_scene_manager->createParticleSystem(name.str(), type);
 		part->setUserAny(Ogre::Any(type));
-		DEBUG5("created particlesystem %p %s for type %s",part, name.str().c_str(), type.c_str());
+		DEBUGX("created particlesystem %p %s for type %s",part, name.str().c_str(), type.c_str());
 	}
 	else
 	{
 		// Partikelsystem aus dem Pool nehmen
 		part = it->second;
 		m_particle_system_pool.erase(it);
-		DEBUG5("took particlesystem %s for type %s",part->getName().c_str(), type.c_str());
+		DEBUGX("took particlesystem %s for type %s",part->getName().c_str(), type.c_str());
 	}
 
 	part->clear();
@@ -600,7 +600,7 @@ void GraphicManager::putBackParticleSystem(Ogre::ParticleSystem* part)
 	std::string type;
 	type = Ogre::any_cast<std::string>(part->getUserAny());
 
-	DEBUG5("put back particlesystem %p %s for type %s",part, part->getName().c_str(), type.c_str());
+	DEBUGX("put back particlesystem %p %s for type %s",part, part->getName().c_str(), type.c_str());
 
 	m_particle_system_pool.insert(std::make_pair(type,part));
 }

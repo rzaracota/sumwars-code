@@ -113,7 +113,7 @@ void ScriptObject::activateTrigger(Trigger* trigger)
 	TriggerType type;
 	type = trigger->getType();
 		
-	DEBUG5("trigger: %s",type.c_str());
+	DEBUGX("trigger: %s",type.c_str());
 		
 	// Schleife ueber die ausgeloesten Events
 	it = m_events.lower_bound(type);
@@ -125,13 +125,13 @@ void ScriptObject::activateTrigger(Trigger* trigger)
 			
 		// vom Trigger definierte Variablen einfuegen
 		EventSystem::doString((char*) trigger->getLuaVariables().c_str());
-		DEBUG5("lua code \n %s",trigger->getLuaVariables().c_str());
+		DEBUGX("lua code \n %s",trigger->getLuaVariables().c_str());
 			
 			// Event ausfuehren
 		bool ret = EventSystem::executeEvent(jt->second);
 			
 		if (ret)
-			DEBUG5("event on trigger: %s",type.c_str());
+			DEBUGX("event on trigger: %s",type.c_str());
 			
 		// einmalige Ereignisse loeschen, wenn erfolgreich ausgefuehrt
 		if (jt->second->getOnce() &&  ret)

@@ -8,7 +8,7 @@
 CharCreate::CharCreate (Document* doc)
 	:Window(doc)
 {
-	DEBUG4("setup main menu");
+	DEBUGX("setup main menu");
 	// GUI Elemente erzeugen
 
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
@@ -160,7 +160,7 @@ bool CharCreate::onClassSelected(const CEGUI::EventArgs& evt)
 	if (itm !=0)
 	{
 		StrListItem * sitm = (StrListItem *) itm;
-		DEBUG5("selected class %s", sitm->m_data.c_str());
+		DEBUGX("selected class %s", sitm->m_data.c_str());
 	}
 	
 	update();
@@ -185,7 +185,7 @@ bool CharCreate::onLookSelected(const CEGUI::EventArgs& evt)
 	if (itm !=0)
 	{
 		StrListItem * sitm = (StrListItem *) itm;
-		DEBUG5("selected look %s", sitm->m_data.c_str());
+		DEBUGX("selected look %s", sitm->m_data.c_str());
 		
 		CEGUI::Listbox* classlist = (CEGUI::Listbox*) win_mgr.getWindow("ClassList");
 		CEGUI::ListboxItem * itm2 = classlist->getFirstSelectedItem();

@@ -5,7 +5,7 @@ QuestInfo::QuestInfo (Document* doc)
 {
 	m_questname = "";
 	
-	DEBUG4("setup main menu");
+	DEBUGX("setup main menu");
 	// GUI Elemente erzeugen
 
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
@@ -127,7 +127,7 @@ void QuestInfo::update()
 		{
 			newitem = new StrListItem(dgettext("sumwars_xml",it->second->getName().c_str()),it->first);
 			questlist->addItem(newitem);
-			DEBUG5("add quest %s %s",it->second->getName().c_str(),it->first.c_str());
+			DEBUGX("add quest %s %s",it->second->getName().c_str(),it->first.c_str());
 			
 			if (it->first == m_questname)
 			{
@@ -194,7 +194,7 @@ void QuestInfo::updateDescription()
 		std::map<std::string, Quest*>::iterator it;
 		
 		StrListItem * sitm = (StrListItem *) itm;
-		DEBUG5("selected quest %s", sitm->m_data.c_str());
+		DEBUGX("selected quest %s", sitm->m_data.c_str());
 		
 		m_questname = sitm->m_data;
 		

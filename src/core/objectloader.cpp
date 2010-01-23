@@ -48,7 +48,7 @@ bool  ObjectLoader::loadMonster(TiXmlNode* node)
 		attr.getString("name",data->m_name,subtype);
 		data->m_subtype = subtype;
 		
-		DEBUG5("monster: %s %s %s %s",type.c_str(), subtype.c_str(), race.c_str(), fraction.c_str());
+		DEBUGX("monster: %s %s %s %s",type.c_str(), subtype.c_str(), race.c_str(), fraction.c_str());
 		
 		data->m_fraction_name = fraction;
 	
@@ -78,7 +78,7 @@ bool  ObjectLoader::loadMonster(TiXmlNode* node)
 					std::string mesh;
 					attr.getString("file",mesh);
 					
-					DEBUG5("mesh %s %s",subtype.c_str(), mesh.c_str());
+					DEBUGX("mesh %s %s",subtype.c_str(), mesh.c_str());
 					GraphicManager::registerGraphicMapping(subtype, mesh);
 				}
 				else if (!strcmp(child->Value(), "RenderInfo"))
@@ -86,7 +86,7 @@ bool  ObjectLoader::loadMonster(TiXmlNode* node)
 					std::string mesh;
 					attr.getString("name",mesh);
 					
-					DEBUG5("mesh %s %s",subtype.c_str(), mesh.c_str());
+					DEBUGX("mesh %s %s",subtype.c_str(), mesh.c_str());
 					GraphicManager::registerGraphicMapping(subtype, mesh);
 				}
 				else if (!strcmp(child->Value(), "EmotionSet"))
@@ -114,7 +114,7 @@ bool  ObjectLoader::loadMonster(TiXmlNode* node)
 						attr.getFloat("magic_prob",data->m_drop_slots[nr].m_magic_probability,0);
 						attr.getFloat("magic_power",data->m_drop_slots[nr].m_magic_power,0);
 						
-						DEBUG5("Dropslot %i %i %f %f", data->m_drop_slots[nr].m_min_level,data->m_drop_slots[nr].m_max_level,  data->m_drop_slots[nr].m_magic_probability, data->m_drop_slots[nr].m_magic_power);
+						DEBUGX("Dropslot %i %i %f %f", data->m_drop_slots[nr].m_min_level,data->m_drop_slots[nr].m_max_level,  data->m_drop_slots[nr].m_magic_probability, data->m_drop_slots[nr].m_magic_power);
 						nr ++;
 					}
 					
@@ -592,14 +592,14 @@ bool ObjectLoader::loadObject(TiXmlNode* node)
 					attr.getFloat("magic_prob",tdata->m_drop_slots[nr].m_magic_probability,0);
 					attr.getFloat("magic_power",tdata->m_drop_slots[nr].m_magic_power,0);
 						
-					DEBUG5("Dropslot %i %i %f %f", tdata->m_drop_slots[nr].m_min_level,tdata->m_drop_slots[nr].m_max_level,  tdata->m_drop_slots[nr].m_magic_probability, tdata->m_drop_slots[nr].m_magic_power);
+					DEBUGX("Dropslot %i %i %f %f", tdata->m_drop_slots[nr].m_min_level,tdata->m_drop_slots[nr].m_max_level,  tdata->m_drop_slots[nr].m_magic_probability, tdata->m_drop_slots[nr].m_magic_power);
 					nr ++;
 				}
 					
 			}
 			else if (child->Type()!=TiXmlNode::COMMENT)
 			{
-				DEBUG5("unexpected element of <Object>: %s",child->Value());
+				DEBUGX("unexpected element of <Object>: %s",child->Value());
 			}
 			
 		}
@@ -666,7 +666,7 @@ bool ObjectLoader::loadProjectile(TiXmlNode* node)
 		attr.getString("new_projectile_type",data->m_new_projectile_type);
 		attr.getString("implementation",data->m_implementation);
 		
-		DEBUG5("type %s counter %i data %p",data->m_subtype.c_str(), data->m_counter,data);
+		DEBUGX("type %s counter %i data %p",data->m_subtype.c_str(), data->m_counter,data);
 		
 		// Schleife ueber die Elemente von Object
 		for ( child = node->FirstChild(); child != 0; child = child->NextSibling())
@@ -679,7 +679,7 @@ bool ObjectLoader::loadProjectile(TiXmlNode* node)
 					std::string mesh;
 					attr.getString("file",mesh);
 					
-					DEBUG5("mesh %s %s",data->m_subtype.c_str(), mesh.c_str());
+					DEBUGX("mesh %s %s",data->m_subtype.c_str(), mesh.c_str());
 					GraphicManager::registerGraphicMapping(data->m_subtype, mesh);
 				}
 				else if (!strcmp(child->Value(), "RenderInfo"))
@@ -687,7 +687,7 @@ bool ObjectLoader::loadProjectile(TiXmlNode* node)
 					std::string mesh;
 					attr.getString("name",mesh);
 					
-					DEBUG5("mesh %s %s",data->m_subtype.c_str(), mesh.c_str());
+					DEBUGX("mesh %s %s",data->m_subtype.c_str(), mesh.c_str());
 					GraphicManager::registerGraphicMapping(data->m_subtype, mesh);
 				}
 				else if (!strcmp(child->Value(), "Flag"))
@@ -762,7 +762,7 @@ bool ObjectLoader::loadEmotionSet(TiXmlNode* node)
 			attr.getString("image",image);
 			
 			es->m_emotion_images[emotion] = image;
-			DEBUG5("Emotion set %s emotion %s image %s",name.c_str(), emotion.c_str(), image.c_str());
+			DEBUGX("Emotion set %s emotion %s image %s",name.c_str(), emotion.c_str(), image.c_str());
 		}
 	}
 	

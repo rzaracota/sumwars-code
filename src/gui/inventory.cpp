@@ -3,7 +3,7 @@
 Inventory::Inventory (Document* doc)
 	: ItemWindow(doc)
 {
-	DEBUG5("setup inventory");
+	DEBUGX("setup inventory");
 
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 

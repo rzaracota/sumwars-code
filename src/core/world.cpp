@@ -193,7 +193,7 @@ bool World::init(int port)
 		
 		
 		
-		DEBUG5("server");
+		DEBUGX("server");
 		m_network = new ServerNetwork(m_max_nr_players);
 		
 		
@@ -201,7 +201,7 @@ bool World::init(int port)
 	}
 	else
 	{
-		DEBUG5("client");
+		DEBUGX("client");
 		m_network = new ClientNetwork();
 	}
 
@@ -226,7 +226,7 @@ bool World::createRegion(short region)
 {
 
 
-	DEBUG5("creating region %i",region);
+	DEBUGX("creating region %i",region);
 	int type = 1;
 	if (type==1)
 	{
@@ -242,7 +242,7 @@ bool World::createRegion(short region)
 		srand(1000);
 		//srand((unsigned int)time((time_t *)NULL));
 		Region* reg = MapGenerator::createRegion(rdata);
-		DEBUG5("region created %p for id %i",reg,region);
+		DEBUGX("region created %p for id %i",reg,region);
 
 		if (reg == 0)
 		{
@@ -308,19 +308,19 @@ void World::updateLogins()
 	std::list<int>::iterator i;
 	Packet* data;
 	PackageHeader header;
-	DEBUG5("update logins");
+	DEBUGX("update logins");
 	for (i=m_logins.begin();i!=m_logins.end();)
 	{
-		DEBUG5("testing slot %i",(*i));
+		DEBUGX("testing slot %i",(*i));
 		if (m_network->numberSlotMessages((*i) )>0)
 		{
-			DEBUG5("got Package");
+			DEBUGX("got Package");
 			m_network->popSlotMessage(data,(*i));
 			CharConv cv(data);
 			header.fromString(&cv);
 			if (header.m_content == PTYPE_C2S_SAVEGAME)
 			{
-				DEBUG5("got savegame from slot %i",(*i));
+				DEBUGX("got savegame from slot %i",(*i));
 				handleSavegame(&cv,*i);
 				i = m_logins.erase(i);
 
@@ -337,7 +337,7 @@ void World::updateLogins()
 		}
 
 	}
-	DEBUG5("done");
+	DEBUGX("done");
 
 }
 
@@ -410,7 +410,7 @@ int World::getRegionId(std::string name)
 
 void World::insertRegion(Region* region, int rnr)
 {
-	DEBUG5("inserting region %i %s %p",rnr, region->getName().c_str(),region);
+	DEBUGX("inserting region %i %s %p",rnr, region->getName().c_str(),region);
 	m_regions.insert(std::make_pair(rnr,region));
 
 }
@@ -597,7 +597,7 @@ bool World::insertPlayer(WorldObject* player, int slot)
 
 bool World::insertPlayerIntoRegion(WorldObject* player, short region, LocationName loc)
 {
-	DEBUG5("try to enter region %i",region); 
+	DEBUGX("try to enter region %i",region); 
 	Region* reg = getRegion(region);
 
 	// Testen ob alle Daten vorhanden sind
@@ -609,7 +609,7 @@ bool World::insertPlayerIntoRegion(WorldObject* player, short region, LocationNa
 
 	if (player->getRegionId() != region)
 	{
-		DEBUG5("changing region %i %i",player->getRegionId(),region);
+		DEBUGX("changing region %i %i",player->getRegionId(),region);
 		player->setRegionId(region);
 		player->setState(WorldObject::STATE_INACTIVE,false);
 	}
@@ -654,7 +654,7 @@ bool World::insertPlayerIntoRegion(WorldObject* player, short region, LocationNa
 			{
 				// Spieler in die Region einfuegen
 				player->setState(WorldObject::STATE_ENTER_REGION,false);
-				DEBUG5("player can enter region");
+				DEBUGX("player can enter region");
 			}
 			else
 			{
@@ -694,7 +694,7 @@ bool World::insertPlayerIntoRegion(WorldObject* player, short region, LocationNa
 			}
 			else
 			{
-				DEBUG5("player %i region %i data %i",player->getId(), region, data_missing);
+				DEBUGX("player %i region %i data %i",player->getId(), region, data_missing);
 				if (data_missing != 0)
 				{
 					// Region unbekannt, ignorieren
@@ -740,7 +740,7 @@ bool World::insertPlayerIntoRegion(WorldObject* player, short region, LocationNa
 		}
 		reg->getFreePlace(player->getShape(),player->getLayer() , pos, player);
 		reg->insertObject(player, pos,player->getShape()->m_angle);
-		DEBUG5("entry position %f %f",pos.m_x, pos.m_y);
+		DEBUGX("entry position %f %f",pos.m_x, pos.m_y);
 
 		player->setState(WorldObject::STATE_ACTIVE,false);
 
@@ -758,7 +758,7 @@ bool World::insertPlayerIntoRegion(WorldObject* player, short region, LocationNa
 			insertNetEvent(event);
 		}
 
-		DEBUG5("player %i %p entered region %i %p",player->getId(),player, region,getRegion(region));
+		DEBUGX("player %i %p entered region %i %p",player->getId(),player, region,getRegion(region));
 
 
 	}
@@ -767,7 +767,7 @@ bool World::insertPlayerIntoRegion(WorldObject* player, short region, LocationNa
 
 void World::handleSavegame(CharConv *cv, int slot)
 {
-	DEBUG5("got savegame from slot %i",slot);
+	DEBUGX("got savegame from slot %i",slot);
 	
 	Player* pl =0;
 	pl= new Player;
@@ -796,7 +796,7 @@ void World::handleSavegame(CharConv *cv, int slot)
 	// Spieler zur Welt hinzufuegen
 	if (pl!=0)
 	{
-		DEBUG5("insert player");
+		DEBUGX("insert player");
 		insertPlayer(pl,slot);
 		// Daten aus dem Savegame laden
 
@@ -831,7 +831,7 @@ void World::handleSavegame(CharConv *cv, int slot)
 
 			if (slot != LOCAL_SLOT)
 			{
-				DEBUG5("sending player data ");
+				DEBUGX("sending player data ");
 				// Daten zur Initialisierung
 				PackageHeader header3;
 				header3.m_content =PTYPE_S2C_INITIALISATION;
@@ -864,7 +864,7 @@ void World::handleSavegame(CharConv *cv, int slot)
 					// Nur senden, wenn es nicht der eigene Spieler ist
 					if (it->first != slot)
 					{
-						DEBUG5("writing player slot %i",slot);
+						DEBUGX("writing player slot %i",slot);
 						it->second->toString(&msg);
 					}
 				}
@@ -915,7 +915,7 @@ void World::handleSavegame(CharConv *cv, int slot)
 					msg3.toBuffer(lt->second.m_id);
 					msg3.toBuffer(lt->second.m_world_coord.m_x);
 					msg3.toBuffer(lt->second.m_world_coord.m_y);
-					DEBUG5("sending waypoint info %i %s %f %f",lt->first, lt->second.m_name.c_str(), lt->second.m_world_coord.m_x,lt->second.m_world_coord.m_y);
+					DEBUGX("sending waypoint info %i %s %f %f",lt->first, lt->second.m_name.c_str(), lt->second.m_world_coord.m_x,lt->second.m_world_coord.m_y);
 				}
 				
 				std::map<std::string, int>::iterator rnt;
@@ -957,7 +957,7 @@ void World::handleSavegame(CharConv *cv, int slot)
 				for (it = m_quests.begin(); it != m_quests.end(); ++it)
 				{
 					
-						DEBUG5("sending data for quest %s",it->second->getName().c_str());
+						DEBUGX("sending data for quest %s",it->second->getName().c_str());
 						
 						CharConv msg5;
 						header5.toString(&msg5);
@@ -976,7 +976,7 @@ void World::handleSavegame(CharConv *cv, int slot)
 				for (ft = m_fractions.begin(); ft != m_fractions.end(); ++ft)
 				{
 					
-					DEBUG5("sending data for Fraction %s",ft->second->getType().c_str());
+					DEBUGX("sending data for Fraction %s",ft->second->getType().c_str());
 						
 					CharConv msg6;
 					header6.toString(&msg6);
@@ -996,7 +996,7 @@ void World::handleSavegame(CharConv *cv, int slot)
 
 void World::handleCommand(ClientCommand* comm, int slot, float delay)
 {
-	DEBUG5("Kommando (%f %f) button: %i id: %i action: %s",comm->m_goal.m_x,comm->m_goal.m_y,comm->m_button, comm->m_id,comm->m_action.c_str());
+	DEBUGX("Kommando (%f %f) button: %i id: %i action: %s",comm->m_goal.m_x,comm->m_goal.m_y,comm->m_button, comm->m_id,comm->m_action.c_str());
 
 
 	// Wenn man sich nicht auf Serverseite befindet
@@ -1188,7 +1188,7 @@ void World::handleMessage(std::string msg, int slot)
 				ret = EventSystem::getReturnValue();
 				if (ret != "")
 				{
-					DEBUG5("return value %s",ret.c_str());
+					DEBUGX("return value %s",ret.c_str());
 					static_cast<Player*>(m_local_player)->addMessage(ret);
 				}
 			}
@@ -1228,7 +1228,7 @@ void World::update(float time)
 		}
 	}
 
-	DEBUG5("update %f",time);
+	DEBUGX("update %f",time);
 	std::map<int,Region*>::iterator rit;
 	for (rit = m_regions.begin(); rit != m_regions.end(); rit++)
 	{
@@ -1325,7 +1325,7 @@ void World::updatePlayers()
 			}
 
 
-			DEBUG5("player %i has quit",pl->getId());
+			DEBUGX("player %i has quit",pl->getId());
 
 			delete pl;
 			continue;
@@ -1434,7 +1434,7 @@ void World::updatePlayers()
 			// NetEvents fuer die Spieler generieren
 			if (pl->getNetEventMask() !=0)
 			{
-				DEBUG5(" send player event id %i data %i",pl->getId(), pl->getNetEventMask());
+				DEBUGX(" send player event id %i data %i",pl->getId(), pl->getNetEventMask());
 				NetEvent event;
 				event.m_type = NetEvent::OBJECT_STAT_CHANGED;
 				event.m_data = pl->getNetEventMask();
@@ -1562,7 +1562,7 @@ void World::updatePlayers()
 				}
 				else if (headerp.m_content == PTYPE_S2C_WAYPOINTS)
 				{
-					DEBUG5("got waypoints");
+					DEBUGX("got waypoints");
 					std::map<short,WaypointInfo>& winfos = World::getWorld()->getWaypointData();
 					winfos.clear();
 					
@@ -1577,7 +1577,7 @@ void World::updatePlayers()
 						cv->fromBuffer(wi.m_world_coord.m_y);	
 						
 						winfos[regid] = wi;
-						DEBUG5("got waypoint info %i %s %f %f",regid, wi.m_name.c_str(), wi.m_world_coord.m_x,wi.m_world_coord.m_y);
+						DEBUGX("got waypoint info %i %s %f %f",regid, wi.m_name.c_str(), wi.m_world_coord.m_x,wi.m_world_coord.m_y);
 					}
 					
 					int nrregions;
@@ -1604,7 +1604,7 @@ void World::updatePlayers()
 					std::string name,tabname;
 					cv->fromBuffer(name);
 					cv->fromBuffer(tabname);
-					DEBUG5("got data for quest %s %s",name.c_str(), tabname.c_str());
+					DEBUGX("got data for quest %s %s",name.c_str(), tabname.c_str());
 					
 					Quest* qu = new Quest(name,tabname);
 					qu->fromString(cv);
@@ -1626,7 +1626,7 @@ void World::updatePlayers()
 				}
 				else if (headerp.m_content == PTYPE_S2C_REGION_CHANGED)
 				{
-					DEBUG5("notified that region changed to %i",headerp.m_number);
+					DEBUGX("notified that region changed to %i",headerp.m_number);
 					// der lokale Spieler hat die Region gewechselt
 					// fehlende Daten anfordern
 					if (m_local_player->getRegion()!=0)
@@ -1635,7 +1635,7 @@ void World::updatePlayers()
 					}
 					m_local_player->setState(WorldObject::STATE_REGION_DATA_REQUEST,false);
 					m_local_player->setRegionId(headerp.m_number);
-					DEBUG5("state %i",m_local_player->getState());
+					DEBUGX("state %i",m_local_player->getState());
 	
 				}
 				else if (headerp.m_content == PTYPE_S2C_EVENT)
@@ -1669,7 +1669,7 @@ void World::updatePlayers()
 				{
 					std::string chunk;
 					cv->fromBuffer(chunk);
-					DEBUG5("got lua chunk %s",chunk.c_str());
+					DEBUGX("got lua chunk %s",chunk.c_str());
 					EventSystem::doString(chunk.c_str());
 				}
 				else if (headerp.m_content == PTYPE_S2C_DATA_CHECK)
@@ -1728,7 +1728,7 @@ void World::updatePlayers()
 				for (lt = m_events->begin(); lt != m_events->end(); ++lt)
 				{
 					msg = new CharConv;
-					DEBUG5(" send global event %i id %i data %i",lt->m_type,lt->m_id, lt->m_data);
+					DEBUGX(" send global event %i id %i data %i",lt->m_type,lt->m_id, lt->m_data);
 
 					header.toString(msg);
 					bool ret = writeNetEvent(reg,&(*lt),msg);
@@ -1746,7 +1746,7 @@ void World::updatePlayers()
 					for (lt = reg->getNetEvents()->begin(); lt != reg->getNetEvents()->end(); ++lt)
 					{
 						msg = new CharConv;
-						DEBUG5(" send local event %i id %i data %i",lt->m_type,lt->m_id, lt->m_data);
+						DEBUGX(" send local event %i id %i data %i",lt->m_type,lt->m_id, lt->m_data);
 
 						header.toString(msg);
 						ret = writeNetEvent(reg,&(*lt),msg);
@@ -1765,7 +1765,7 @@ void World::updatePlayers()
 				{
 					msg = new CharConv;
 					header.m_content = PTYPE_S2C_LUA_CHUNK;
-					DEBUG5("send lua chunk: %s",chunk.c_str());
+					DEBUGX("send lua chunk: %s",chunk.c_str());
 					
 					header.toString(msg);
 					msg->toBuffer(chunk);
@@ -1799,7 +1799,7 @@ bool World::writeNetEvent(Region* region,NetEvent* event, CharConv* cv)
 {
 	event->toString(cv);
 
-	DEBUG5("sending event %i  id %i  data %i",event->m_type, event->m_id, event->m_data);
+	DEBUGX("sending event %i  id %i  data %i",event->m_type, event->m_id, event->m_data);
 	
 
 	WorldObject* object;
@@ -1810,7 +1810,7 @@ bool World::writeNetEvent(Region* region,NetEvent* event, CharConv* cv)
 		{
 			
 			object =region->getObject(event->m_id);
-			DEBUG5("object created %s %i",object->getSubtype().c_str(), object->getId());
+			DEBUGX("object created %s %i",object->getSubtype().c_str(), object->getId());
 			object->toString(cv);
 		}
 		else if (event->m_type == NetEvent::OBJECT_STAT_CHANGED)
@@ -1880,7 +1880,7 @@ bool World::writeNetEvent(Region* region,NetEvent* event, CharConv* cv)
 			if (item ==0)
 				return false;
 			
-			DEBUG5("sending item %i of trader %i",event->m_data,npc->getId());
+			DEBUGX("sending item %i of trader %i",event->m_data,npc->getId());
 			
 			item->toStringComplete(cv);
 		}
@@ -1972,7 +1972,7 @@ bool World::writeNetEvent(Region* region,NetEvent* event, CharConv* cv)
 				}
 				cv->toBuffer<short>((short) event->m_data);
 				static_cast<Player*>(object)->getEquipement()->getItem(event->m_data)->toStringComplete(cv);
-				DEBUG5("player item insert");
+				DEBUGX("player item insert");
 			}
 			else
 			{
@@ -1986,7 +1986,7 @@ bool World::writeNetEvent(Region* region,NetEvent* event, CharConv* cv)
 
 	if (event->m_type ==  NetEvent::ITEM_REMOVED)
 	{
-		DEBUG5("removing item %i",event->m_id);
+		DEBUGX("removing item %i",event->m_id);
 	}
 
 	if (event->m_type == NetEvent::PLAYER_PARTY_CHANGED)
@@ -1995,7 +1995,7 @@ bool World::writeNetEvent(Region* region,NetEvent* event, CharConv* cv)
 		if (object != 0)
 		{
 			cv->toBuffer<char>(static_cast<Player*>(object)->getParty()->getId());
-			DEBUG5("player %i changed party to %i",event->m_id, static_cast<Player*>(object)->getParty()->getId());
+			DEBUGX("player %i changed party to %i",event->m_id, static_cast<Player*>(object)->getParty()->getId());
 		}
 		else
 			return false;
@@ -2014,7 +2014,7 @@ bool World::writeNetEvent(Region* region,NetEvent* event, CharConv* cv)
 		if (object != 0)
 		{
 			cv->toBuffer<char>(static_cast<Player*>(object)->getCandidateParty());
-			DEBUG5("player %i candidate for party %i",event->m_id, static_cast<Player*>(object)->getCandidateParty());
+			DEBUGX("player %i candidate for party %i",event->m_id, static_cast<Player*>(object)->getCandidateParty());
 		}
 		else
 			return false;
@@ -2038,7 +2038,7 @@ bool World::processNetEvent(Region* region,CharConv* cv)
 	event.fromString(cv);
 
 
-	DEBUG5("got event %i  id %i  data %i",event.m_type, event.m_id, event.m_data);
+	DEBUGX("got event %i  id %i  data %i",event.m_type, event.m_id, event.m_data);
 
 	WorldObject* object;
 	Creature* cr;
@@ -2231,7 +2231,7 @@ bool World::processNetEvent(Region* region,CharConv* cv)
 			break;
 
 		case NetEvent::PLAYER_CHANGED_REGION:
-			DEBUG5("received event player %i changed region %i",event.m_id, event.m_data);
+			DEBUGX("received event player %i changed region %i",event.m_id, event.m_data);
 
 			if (m_players->count (event.m_id)>0)
 			{
@@ -2292,7 +2292,7 @@ bool World::processNetEvent(Region* region,CharConv* cv)
 		case NetEvent::ITEM_REMOVED:
 			if (region !=0)
 			{
-				DEBUG5("remove item %i",event.m_id);
+				DEBUGX("remove item %i",event.m_id);
 				region->deleteItem(event.m_id,true);
 			}
 			else
@@ -2369,7 +2369,7 @@ bool World::processNetEvent(Region* region,CharConv* cv)
 				static_cast<Player*>(object)->getParty()->removeMember(object->getId());
 				char id;
 				cv->fromBuffer(id);
-				DEBUG5("player %i changed party to %i",object->getId(),id);
+				DEBUGX("player %i changed party to %i",object->getId(),id);
 				World::getWorld()->getParty( id )->addMember(object->getId());
 
 			}
@@ -2391,7 +2391,7 @@ bool World::processNetEvent(Region* region,CharConv* cv)
 				}
 				char id;
 				cv->fromBuffer(id);
-				DEBUG5("player %i candidate for party  %i",object->getId(),id);
+				DEBUGX("player %i candidate for party  %i",object->getId(),id);
 				World::getWorld()->getParty( id )->addCandidate(object->getId());
 
 			}
@@ -2413,7 +2413,7 @@ bool World::processNetEvent(Region* region,CharConv* cv)
 			char rel;
 			cv->fromBuffer(rel);
 			World::getWorld()->getParty( event.m_data )->setRelation(event.m_id, (Fraction::Relation) rel);
-			DEBUG5("party %i changed relation to %i to %i",event.m_data, event.m_id, rel);
+			DEBUGX("party %i changed relation to %i to %i",event.m_data, event.m_id, rel);
 			break;
 			
 			
@@ -2517,7 +2517,7 @@ void World::handleDataRequest(ClientDataRequest* request, int slot )
 	Region* region = getRegion(request->m_region_id);
 	if (request->m_data <= ClientDataRequest::REGION_ALL)
 	{
-		DEBUG5("Daten zur Region %i gefordert",request->m_id);
+		DEBUGX("Daten zur Region %i gefordert",request->m_id);
 		
 		if (region!=0)
 		{
@@ -2596,7 +2596,7 @@ bool World::calcBlockmat(PathfindInfo * pathinfo)
 
 	float hb = pathinfo->m_base_size * 0.5;
 
-	DEBUG5("Calc blockmat %f %f", pathinfo->m_center.m_x,pathinfo->m_center.m_y);
+	DEBUGX("Calc blockmat %f %f", pathinfo->m_center.m_x,pathinfo->m_center.m_y);
 
 	Shape s2;
 	s2.m_type = Shape::CIRCLE;
@@ -2618,10 +2618,10 @@ bool World::calcBlockmat(PathfindInfo * pathinfo)
 		{
 			if (wo->isCreature())
 			{
-				DEBUG5("found obstacle %i layer %i",wo->getId(),wo->getLayer());
+				DEBUGX("found obstacle %i layer %i",wo->getId(),wo->getLayer());
 			}
 			wos = wo->getShape();
-			DEBUG5("shape %i %f %f %f",wos->m_type,wos->m_radius,wos->m_extent.m_x,wos->m_extent.m_y);
+			DEBUGX("shape %i %f %f %f",wos->m_type,wos->m_radius,wos->m_extent.m_x,wos->m_extent.m_y);
 
 
 
@@ -2638,7 +2638,7 @@ bool World::calcBlockmat(PathfindInfo * pathinfo)
 			s2.m_center.m_x = (is+0.5)*sqs+c1.m_x;
 
 
-			DEBUG5("start %i %i %f %f",is,js,s2.m_center.m_x,s2.m_center.m_y);
+			DEBUGX("start %i %i %f %f",is,js,s2.m_center.m_x,s2.m_center.m_y);
 			float dir[12][2] = {{sqs,sqs},{sqs,0},{sqs,-sqs},{0,-sqs},{-sqs,-sqs},{-sqs,0},{-sqs,sqs},{0,sqs},{sqs,sqs},{sqs,0},{sqs,-sqs},{0,-sqs}};
 			int idir[12][2] = {{1,1},{1,0},{1,-1},{0,-1},{-1,-1},{-1,0},{-1,1},{0,1},{1,1},{1,0},{1,-1},{0,-1}};
 
@@ -2696,7 +2696,7 @@ bool World::calcBlockmat(PathfindInfo * pathinfo)
 				*(pathinfo->m_block->ind(is,js)) = val;
 
 
-			DEBUG5("start2 %i %i %f %f",is,js,s2.m_center.m_x,s2.m_center.m_y);
+			DEBUGX("start2 %i %i %f %f",is,js,s2.m_center.m_x,s2.m_center.m_y);
 
 			// Hindernis dem Rand entlang umrunden
 			// d ist ein Zaehler fuer die aktuelle Suchrichtung
@@ -2717,7 +2717,7 @@ bool World::calcBlockmat(PathfindInfo * pathinfo)
 					d++;
 					s2.m_center.m_x = x+dir[d][0];
 					s2.m_center.m_y = y+dir[d][1];
-					DEBUG5("trying %f %f",s2.m_center.m_x,s2.m_center.m_y);
+					DEBUGX("trying %f %f",s2.m_center.m_x,s2.m_center.m_y);
 				}
 
 				if (d==10)
@@ -2729,7 +2729,7 @@ bool World::calcBlockmat(PathfindInfo * pathinfo)
 					// wenn in der aktuellen Richtung man im Objekt bleibt
 					// Richtung testweise eins zurueck setzen
 					// damit werden auch nicht konvexe Objekte korrekt behandelt
-					DEBUG5("intersecting: %i %i %f %f",is+idir[d][0],js+idir[d][1],s2.m_center.m_x,s2.m_center.m_y);
+					DEBUGX("intersecting: %i %i %f %f",is+idir[d][0],js+idir[d][1],s2.m_center.m_x,s2.m_center.m_y);
 					d--;
 					s2.m_center.m_x = x+dir[d][0];
 					s2.m_center.m_y = y+dir[d][1];
@@ -2744,7 +2744,7 @@ bool World::calcBlockmat(PathfindInfo * pathinfo)
 				else
 				{
 					// Suchrichtung solange weiter drehen bis ein zulaessiger Punkt im Objekt gefunden wurde
-					DEBUG5("not intersecting: %i %i %f %f",is+idir[d][0],js+idir[d][1],s2.m_center.m_x,s2.m_center.m_y);
+					DEBUGX("not intersecting: %i %i %f %f",is+idir[d][0],js+idir[d][1],s2.m_center.m_x,s2.m_center.m_y);
 					do
 					{
 						d++;
@@ -2757,10 +2757,10 @@ bool World::calcBlockmat(PathfindInfo * pathinfo)
 				if (d<10)
 				{
 					// Hindernis eintragen
-					DEBUG5("d: %i",d);
+					DEBUGX("d: %i",d);
 					is += idir[d][0];
 					js += idir[d][1];
-					DEBUG5("intersecting: %i %i %f %f",is,js,s2.m_center.m_x,s2.m_center.m_y);
+					DEBUGX("intersecting: %i %i %f %f",is,js,s2.m_center.m_x,s2.m_center.m_y);
 					if (*(pathinfo->m_block->ind(is,js))<val)
 						*(pathinfo->m_block->ind(is,js)) = val;
 
@@ -2833,8 +2833,8 @@ bool World::calcPotential(PathfindInfo* pathinfo)
 	sf->init(pathinfo->m_pot, pathinfo->m_block);
 	int sx = (int) ((pathinfo->m_start.m_x - pathinfo->m_center.m_x + l) / sqs);
 	int sy = (int) ((pathinfo->m_start.m_y - pathinfo->m_center.m_y + l) / sqs);
-	DEBUG5("goal: %f %f",pathinfo->m_start.m_x,pathinfo->m_start.m_y);
-	DEBUG5("Calc potential %i %i", sx,sy);
+	DEBUGX("goal: %f %f",pathinfo->m_start.m_x,pathinfo->m_start.m_y);
+	DEBUGX("Calc potential %i %i", sx,sy);
 
 	sf->createPotential(sx,sy);
 	delete sf;
@@ -2851,7 +2851,7 @@ void World::calcPathDirection(PathfindInfo* pathinfo, Vector pos, Vector& dir)
 
 void World::insertNetEvent(NetEvent &event)
 {
-	DEBUG5("new world Netevent %i %i type %i",event.m_id, event.m_data,event.m_type);
+	DEBUGX("new world Netevent %i %i type %i",event.m_id, event.m_data,event.m_type);
 	m_events->push_back(event);
 
 }
@@ -2870,7 +2870,7 @@ void  World::addEvent(RegionName rname, TriggerType trigger, Event* event)
 		return;
 	}
 	
-	DEBUG5("adding Event for Region %s",rname.c_str());
+	DEBUGX("adding Event for Region %s",rname.c_str());
 	it->second->addEvent(trigger,event);
 }
 		

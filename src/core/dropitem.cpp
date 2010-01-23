@@ -95,7 +95,7 @@ bool DropItem::update(float time)
 			m_angle_x=0;
 		}
 		//DEBUG("angle_x %f",m_angle_x); 
-		DEBUG5("speed %f height %f angle %f time %f",m_drop_speed,getHeight(),m_angle_x,m_time); 
+		DEBUGX("speed %f height %f angle %f time %f",m_drop_speed,getHeight(),m_angle_x,m_time); 
 	}
 	return true;
 }

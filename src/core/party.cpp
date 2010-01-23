@@ -57,7 +57,7 @@ void Party::updateMinimaps()
 
 Minimap* Party::getMinimap(short rid)
 {
-	DEBUG5("get Minimap for %i",rid);
+	DEBUGX("get Minimap for %i",rid);
 	std::map<short,Minimap*>::iterator mt;
 	
 	mt = m_minimaps.find(rid);
@@ -76,7 +76,7 @@ void Party::addMember(int id)
 	if (player ==0)
 		return;
 	
-	DEBUG5("adding member %i to party %i",id, m_id);
+	DEBUGX("adding member %i to party %i",id, m_id);
 	if (m_members.empty())
 	{
 		m_leader_id = id;
@@ -123,7 +123,7 @@ void Party::addMember(int id)
 
 void Party::addCandidate(int id)
 {
-	DEBUG5("adding candidate %i to party %i",id, m_id);
+	DEBUGX("adding candidate %i to party %i",id, m_id);
 	Player* pl = static_cast<Player*>( World::getWorld()->getPlayer(id));
 	if (pl !=0)
 	{
@@ -144,10 +144,10 @@ void Party::addCandidate(int id)
 
 void Party::removeMember(int id)
 {
-	DEBUG5("removing member %i from party %i",id, m_id);
+	DEBUGX("removing member %i from party %i",id, m_id);
 
 	m_members.erase(id);
-	DEBUG5("number of members %i",m_members.size());
+	DEBUGX("number of members %i",m_members.size());
 	if (id == m_leader_id)
 	{
 		m_leader_id = *(m_members.begin());
@@ -156,7 +156,7 @@ void Party::removeMember(int id)
 
 void Party::removeCandidate(int id)
 {	
-	DEBUG5("removing candidate %i from party %i",id, m_id);
+	DEBUGX("removing candidate %i from party %i",id, m_id);
 	Player* pl = static_cast<Player*>( World::getWorld()->getPlayer(id));
 	if (pl !=0)
 	{

@@ -104,7 +104,7 @@ bool Shape::intersects(Shape& s2)
 	if (m_type == Shape::RECT && s2.m_type == Shape::RECT)
 	{
 		// Fall: zwei Rechtecke
-		DEBUG5("checking rect-rect");
+		DEBUGX("checking rect-rect");
 
 		// Test per Separation Axis Theorem,
 		// moegliche Achsen sind die Seiten der Rechtecke
@@ -155,7 +155,7 @@ bool Shape::intersects(Shape& s2)
 	else
 	{
 		// Pruefen Kreis gegen Rechteck
-		DEBUG5("checking circle-rect");
+		DEBUGX("checking circle-rect");
 
 		// Herstellen eines lokalen Koordinatensystems, in das Rechteck zentriert und an den Achsen ausgerichtet ist
 		
@@ -221,7 +221,7 @@ float Shape::getDistance(Shape& s2)
 	else if (m_type == Shape::RECT && s2.m_type == Shape::RECT)
 	{
 		// Fall: zwei Rechtecke
-		DEBUG5("checking rect-rect");
+		DEBUGX("checking rect-rect");
 	
 		
 		float dmin = 1e20;
@@ -315,7 +315,7 @@ float Shape::getDistance(Shape& s2)
 	else
 	{
 		// Pruefen Kreis gegen Rechteck
-		DEBUG5("distance circle-rect");
+		DEBUGX("distance circle-rect");
 
 		// Herstellen eines lokalen Koordinatensystems, in das Rechteck zentriert und an den Achsen ausgerichtet ist
 		

@@ -74,7 +74,7 @@ Creature::~Creature()
 //Methods
 bool Creature::init()
  {
-	 DEBUG5("Creature::init");
+	 DEBUGX("Creature::init");
 
 	bool tmp=true;
 	// eigene Initialisierung
@@ -154,7 +154,7 @@ bool Creature::init()
 
 bool Creature::destroy()
 {
-	DEBUG5("destroy");
+	DEBUGX("destroy");
 
 	WorldObject::destroy();
     return true;
@@ -170,7 +170,7 @@ void Creature::die()
 	getRegion()->changeObjectGroup(this,DEAD);
 	setState(STATE_DIEING);
 	m_action.m_type ="die";
-	DEBUG5("object died: %p",this);
+	DEBUGX("object died: %p",this);
 	m_action.m_time =getActionTime("die");
 	
 	m_action.m_elapsed_time =0;
@@ -264,7 +264,7 @@ void Creature::initAction()
 
 	}
 	
-	DEBUG5("init Action %s", m_action.m_type.c_str());
+	DEBUGX("init Action %s", m_action.m_type.c_str());
 
 	m_action.m_elapsed_time = 0;
 	Action::ActionInfo* aci = Action::getActionInfo(m_action.m_type);
@@ -287,13 +287,13 @@ void Creature::initAction()
 
 	if (timer != 0)
 	{
-		DEBUG5("timer nr %i time %f Action %s",timernr,timer,m_action.m_type.c_str());
+		DEBUGX("timer nr %i time %f Action %s",timernr,timer,m_action.m_type.c_str());
 	}
 	
 	// Faehigkeit Ausdauer
 	if (checkAbility("endurance") && timer ==1)
 	{
-		DEBUG5("ausdauer");
+		DEBUGX("ausdauer");
 		// Timerlaufzeit um 15% verringern
 		timer *= 0.85;
 	}
@@ -354,8 +354,8 @@ void Creature::initAction()
 			speed *= getBaseAttr()->m_step_length/m_action.m_time;
 			setSpeed(speed);
 			
-			DEBUG5("walk time %f walk speed %i",m_action.m_time,getBaseAttrMod()->m_walk_speed);
-			DEBUG5("pos %f %f speed %f %f",getShape()->m_center.m_x, getShape()->m_center.m_y, getSpeed().m_x,getSpeed().m_y);
+			DEBUGX("walk time %f walk speed %i",m_action.m_time,getBaseAttrMod()->m_walk_speed);
+			DEBUGX("pos %f %f speed %f %f",getShape()->m_center.m_x, getShape()->m_center.m_y, getSpeed().m_x,getSpeed().m_y);
 	}
 	else
 	{
@@ -374,7 +374,7 @@ void Creature::initAction()
 
 	}
 
-	DEBUG5("resulting time %f",m_action.m_time);
+	DEBUGX("resulting time %f",m_action.m_time);
 	// Drehwinkel setzen
 	if (aci->m_target_type != Action::SELF && m_action.m_type != "take_item" && m_action.m_type != "noaction")
 	{
@@ -403,7 +403,7 @@ void Creature::initAction()
 	{
 		clearCommand(false,true);
 	}
-	DEBUG5("action %s time %f angle %f",m_action.m_type.c_str(), m_action.m_time,getShape()->m_angle);
+	DEBUGX("action %s time %f angle %f",m_action.m_type.c_str(), m_action.m_time,getShape()->m_angle);
 }
 
 void Creature::performAction(float &time)
@@ -459,7 +459,7 @@ void Creature::performAction(float &time)
 
 	if (!World::getWorld()->isServer() && m_action.m_type != "noaction")
 	{
-		DEBUG5("perform Action %s for %f msec, %f / %f done", m_action.m_type.c_str(),dtime,m_action.m_elapsed_time,m_action.m_time);
+		DEBUGX("perform Action %s for %f msec, %f / %f done", m_action.m_type.c_str(),dtime,m_action.m_elapsed_time,m_action.m_time);
 	}
 
 
@@ -496,7 +496,7 @@ void Creature::performAction(float &time)
 	
 	if (m_action.m_type != "noaction")
 	{
-		DEBUG5("pos %f %f  speed %f %f  pct %f",getShape()->m_center.m_x, getShape()->m_center.m_y, getSpeed().m_x,getSpeed().m_y,p1);
+		DEBUGX("pos %f %f  speed %f %f  pct %f",getShape()->m_center.m_x, getShape()->m_center.m_y, getSpeed().m_x,getSpeed().m_y,p1);
 	}
 	
 	// Triple Shot
@@ -517,7 +517,7 @@ void Creature::performAction(float &time)
 	// Testen ob der kritische Prozentsatz durch das aktuelle Zeitquantum ueberschritten wurde
 	if (p1<pct && pct <=p2 && World::getWorld()->isServer())
 	{
-		DEBUG5("critical point %f %f %f",p1,pct,p2);
+		DEBUGX("critical point %f %f %f",p1,pct,p2);
 
 		// Statusmod blind behandeln
 		// TODO: aktuell wird die Richtung beim austeilen des Schadens ausgewuerfelt
@@ -552,13 +552,13 @@ void Creature::performAction(float &time)
 		else
 		{
 			// Kein Zielobjekt per ID gegeben
-			DEBUG5("no Goal ID!");
+			DEBUGX("no Goal ID!");
 			// Im Falle von Nahkampf Ziel anhand des Zielpunktes suchen
 			if (ainfo->m_target_type == Action::MELEE && m_action.m_type!= "take_item")
 			{
-				DEBUG5("Searching goal %f %f",goal.m_x,goal.m_y);
+				DEBUGX("Searching goal %f %f",goal.m_x,goal.m_y);
 				goalobj = getRegion()->getObjectAt(goal,LAYER_AIR);
-				DEBUG5("got object %p",goalobj);
+				DEBUGX("got object %p",goalobj);
 			}
 		}
 
@@ -586,7 +586,7 @@ void Creature::performAction(float &time)
 					{
 						goalobj = (*it);
 						dist = goal.distanceTo((*it)->getShape()->m_center);
-						DEBUG5("chose player %i with distance %f",(*it)->getId(),dist);
+						DEBUGX("chose player %i with distance %f",(*it)->getId(),dist);
 					}
 				}
 			}
@@ -618,7 +618,7 @@ void Creature::performAction(float &time)
 				// anpassen des Zielpunktes
 				goal = cgoal->getShape()->m_center;
 
-				DEBUG5("goal object %p",cgoal);
+				DEBUGX("goal object %p",cgoal);
 			}
 		}
 
@@ -643,7 +643,7 @@ void Creature::performAction(float &time)
 			
 		}
 		
-		DEBUG5("finished action");
+		DEBUGX("finished action");
 		
 		if (m_action.m_type == "walk")
 		{
@@ -673,11 +673,11 @@ void Creature::performAction(float &time)
 			{
 				recalc = true;
 			}
-			DEBUG5("finished command %s (base %s) with action %s",m_command.m_type.c_str(),baseact.c_str(),m_action.m_type.c_str() );
+			DEBUGX("finished command %s (base %s) with action %s",m_command.m_type.c_str(),baseact.c_str(),m_action.m_type.c_str() );
 			if (m_command.m_type != "noaction")
 			{
 				addToNetEventMask(NetEvent::DATA_COMMAND);
-				DEBUG5("goal %f %f goalobj %i",goal.m_x, goal.m_y, m_action.m_goal_object_id);
+				DEBUGX("goal %f %f goalobj %i",goal.m_x, goal.m_y, m_action.m_goal_object_id);
 				clearCommand(true,false);
 			}
 			m_command.m_type = "noaction";
@@ -955,7 +955,7 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 				{
 					pr->setCounter(ainfo->m_projectile_counter);
 				}
-				DEBUG5("proj radius %f",ainfo->m_projectile_radius);
+				DEBUGX("proj radius %f",ainfo->m_projectile_radius);
 				if (ainfo->m_projectile_radius != 0)
 				{
 					pr->setRadius(ainfo->m_projectile_radius);
@@ -1182,7 +1182,7 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 	// Wenn das Ziel nach der Aktion unter 0 Lebenspunkte hat Bonus austeilen
 	if ((checkAbility("monster_hunter") || (checkAbility("monster_slayer"))) && cgoal && cgoal->getDynAttr()->m_health<0)
 	{
-		DEBUG5("monster killed, apply mod");
+		DEBUGX("monster killed, apply mod");
 		CreatureBaseAttrMod cbam;
 
 		// Modifikation:
@@ -1222,14 +1222,14 @@ void Creature::collisionDetection(float time)
 	if (result.size()!=0)
 	{
 		// es gibt kollidierende Objekte
-		DEBUG5("aktuelle Koordinaten %f %f",getShape()->m_center.m_x, getShape()->m_center.m_y);
+		DEBUGX("aktuelle Koordinaten %f %f",getShape()->m_center.m_x, getShape()->m_center.m_y);
 		WorldObjectList::iterator i;
 
 		Shape* s2;
         // Liste der kollidierenden Objekte durchgehen
 		for (i= result.begin();i!=result.end();++i)
 		{
-			DEBUG5("Kollision %i",(*i)->getId());
+			DEBUGX("Kollision %i",(*i)->getId());
 			s2 =(*i)->getShape();
 			// wenn mit dem Zielobjekt kollidiert Bewegung beenden
 			if ((*i)->getId() == getCommand()->m_goal_object_id)
@@ -1241,7 +1241,7 @@ void Creature::collisionDetection(float time)
 			// Wenn die Faehigkeit Stuermen ist dann Bewegung beenden
 			if (m_command.m_type == "charge" || m_command.m_type == "storm_charge")
 			{
-				DEBUG5("charge goal object %i",(*i)->getId());
+				DEBUGX("charge goal object %i",(*i)->getId());
 				// Behandlung von *Charge*
 				m_command.m_goal_object_id = (*i)->getId();
 				setSpeed(Vector(0,0));
@@ -1263,7 +1263,7 @@ void Creature::collisionDetection(float time)
 	
 			// Kreis um den neuen Zielpunkt
 			scopy.m_center = newpos;
-			DEBUG5("neue Koordinaten %f %f",newpos.m_x, newpos.m_y);
+			DEBUGX("neue Koordinaten %f %f",newpos.m_x, newpos.m_y);
 			scopy.m_radius = getShape()->m_radius;
 			result.clear();
 	
@@ -1274,7 +1274,7 @@ void Creature::collisionDetection(float time)
 			bool change;
 			for (i= result.begin();i!=result.end();++i)
 			{
-				DEBUG5("Kollision %i",(*i)->getId());
+				DEBUGX("Kollision %i",(*i)->getId());
 				s2 =(*i)->getShape();
 				// Kollision behandeln
 				change = handleCollision(s2);
@@ -1283,7 +1283,7 @@ void Creature::collisionDetection(float time)
 				// Bewegung abbrechen
 				if (change)
 				{
-					DEBUG5("still colliding");
+					DEBUGX("still colliding");
 					setSpeed(Vector(0,0));
 					break;
 				}
@@ -1295,7 +1295,7 @@ void Creature::collisionDetection(float time)
 		if (getSpeed().getLength() <= 0.000001)
 		{
 			m_pathfind_counter +=15;
-			DEBUG5("counter %f",m_pathfind_counter);
+			DEBUGX("counter %f",m_pathfind_counter);
 			if (m_pathfind_counter>=50)
 			{
 				clearCommand(false,true);
@@ -1313,9 +1313,9 @@ bool Creature::handleCollision(Shape* s2)
 	// Koordinaten des kollidierenden Objektes
 	Vector cpos = s2->m_center;
 	
-	DEBUG5("collision %f %f",cpos.m_x, cpos.m_y);
-	DEBUG5("player pos %f %f",pos.m_x, pos.m_y);
-	DEBUG5("old speed %f %f", getSpeed().m_x, getSpeed().m_y);
+	DEBUGX("collision %f %f",cpos.m_x, cpos.m_y);
+	DEBUGX("player pos %f %f",pos.m_x, pos.m_y);
+	DEBUGX("old speed %f %f", getSpeed().m_x, getSpeed().m_y);
 	
 	// erlaubte Richtung berechnen
 	// Projektion des Punktes auf den Rand der Flaeche
@@ -1323,7 +1323,7 @@ bool Creature::handleCollision(Shape* s2)
 	if (proj.distanceTo(pos) < 0.0001)
 		proj = cpos;
 	
-	DEBUG5("projection %f %f",proj.m_x, proj.m_y);
+	DEBUGX("projection %f %f",proj.m_x, proj.m_y);
 	
 	// Vektor der erlaubten Richtung
 	// immer von der Flaeche weg
@@ -1331,7 +1331,7 @@ bool Creature::handleCollision(Shape* s2)
 	if (cpos.distanceTo(proj) > cpos.distanceTo(pos))
 		dir = proj - pos;
 	
-	DEBUG5("direction %f %f",dir.m_x, dir.m_y);
+	DEBUGX("direction %f %f",dir.m_x, dir.m_y);
 	
 	// Erlaubt sind alle Richtungen, die maximal einen rechten Winkel mit der erlaubten Richtung bilden
 	Vector sp = getSpeed();
@@ -1350,7 +1350,7 @@ bool Creature::handleCollision(Shape* s2)
 	// alte Kollisionsengine
 	bool circ = true;
 
-	DEBUG5("old speed %f %f", getSpeed().m_x, getSpeed().m_y);
+	DEBUGX("old speed %f %f", getSpeed().m_x, getSpeed().m_y);
 	if (s2->m_type==Shape::RECT)
 	{
 		// Kollision mit Rechteckt
@@ -1363,7 +1363,7 @@ bool Creature::handleCollision(Shape* s2)
 		locspeed.rotate(-s2->m_angle);
 		
 		circ = false;
-		DEBUG5("Rechteck");
+		DEBUGX("Rechteck");
 
 		// Ausdehnung des Rechtseckes
 		Vector ext = s2->m_extent;
@@ -1374,7 +1374,7 @@ bool Creature::handleCollision(Shape* s2)
 			// Kollision mit einer senkrechten Kante
 			// x-Anteil der Bewegung auf 0 setzen
 			locspeed.m_x =0;
-			DEBUG5("x-anteil genullt");
+			DEBUGX("x-anteil genullt");
 		}
 		else
 		{
@@ -1382,13 +1382,13 @@ bool Creature::handleCollision(Shape* s2)
 			{
 				// Kollision mit einer waagerechten Kante
 				// y-Anteil der Bewegung auf 0 setzen
-				DEBUG5("y-anteil genullt");
+				DEBUGX("y-anteil genullt");
 				locspeed.m_y =0;
 			}
 			else
 			{
 				// Kollision an der Ecke des Rechteckes
-				DEBUG5("kollision an einer Ecke");
+				DEBUGX("kollision an einer Ecke");
 
 				// ermitteln der Ecke an der die Kollision stattfand
 				if (locpos.m_x>0)
@@ -1421,7 +1421,7 @@ bool Creature::handleCollision(Shape* s2)
 		
 		if (!circ)
 		{
-			DEBUG5("locspeed %f %f",locspeed.m_x, locspeed.m_y);
+			DEBUGX("locspeed %f %f",locspeed.m_x, locspeed.m_y);
 			locspeed.rotate(s2->m_angle);
 			setSpeed(locspeed);
 			
@@ -1432,14 +1432,14 @@ bool Creature::handleCollision(Shape* s2)
 	if (circ)
 	{
 		// Behandlung Kollision mit Kreis
-		DEBUG5("obj pos %f %f", pos.m_x, pos.m_y);
-		DEBUG5("collision pos %f %f", cpos.m_x, cpos.m_y);
+		DEBUGX("obj pos %f %f", pos.m_x, pos.m_y);
+		DEBUGX("collision pos %f %f", cpos.m_x, cpos.m_y);
 		
 		
 		// Vektor vom eigenen Mittelpunkt zum Mittelpunkt des kollidierenden Objektes (normiert)
 		Vector dir = cpos - pos;
 		dir.normalize();
-		DEBUG5("normal dir %f %f", dir.m_x, dir.m_y);
+		DEBUGX("normal dir %f %f", dir.m_x, dir.m_y);
 		
 		
 		// vom Geschwindigkeitsvektor nur den zu dieser Richtung senkrechten Teil uebrig lassen
@@ -1450,7 +1450,7 @@ bool Creature::handleCollision(Shape* s2)
 */
 	// neue Geschwindigkeit normieren
 	Vector speed = getSpeed();
-	DEBUG5("new speed %f %f", getSpeed().m_x, getSpeed().m_y);
+	DEBUGX("new speed %f %f", getSpeed().m_x, getSpeed().m_y);
 	if (speed.getLength() < 0.000001)
 	{
 		setSpeed(Vector(0,0));
@@ -1458,7 +1458,7 @@ bool Creature::handleCollision(Shape* s2)
 	else
 	{
 		speed.normalize();
-		DEBUG5("new speed %f %f", getSpeed().m_x, getSpeed().m_y);
+		DEBUGX("new speed %f %f", getSpeed().m_x, getSpeed().m_y);
 		speed *= getBaseAttr()->m_step_length/m_action.m_time;
 		setSpeed(speed);
 	}
@@ -1482,7 +1482,7 @@ void Creature::insertScriptCommand(Command &cmd, float time)
 		clearCommand(false);
 	}
 	m_script_commands.push_back(std::make_pair(cmd,time));	
-	DEBUG5("insert script command %s at %i flag %i",cmd.m_type.c_str(),cmd.m_goal_object_id,cmd.m_flags);
+	DEBUGX("insert script command %s at %i flag %i",cmd.m_type.c_str(),cmd.m_goal_object_id,cmd.m_flags);
 }
 
 void Creature::clearScriptCommands()
@@ -1500,7 +1500,7 @@ void Creature::clearScriptCommands()
 void Creature::updateCommand()
 {
 	// Wenn aktuelles Kommando keine Aktion vorschreibt
-	DEBUG5("next command: %s ",m_next_command.m_type.c_str());
+	DEBUGX("next command: %s ",m_next_command.m_type.c_str());
 	if ((!hasScriptCommand() && m_next_command.m_type != "noaction" && !getRegion()->getCutsceneMode()) || 
 			 (!m_script_commands.empty() && m_command.m_type == "noaction"))
 	{
@@ -1515,7 +1515,7 @@ void Creature::updateCommand()
 				m_script_commands.pop_front();
 				
 			}
-			DEBUG5("script command %s at %i time %f",m_command.m_type.c_str(), m_command.m_goal_object_id, m_script_command_timer);
+			DEBUGX("script command %s at %i time %f",m_command.m_type.c_str(), m_command.m_goal_object_id, m_script_command_timer);
 		}
 		else
 		{
@@ -1563,7 +1563,7 @@ void Creature::calcAction()
 
 	
 
-	DEBUG5("calc action for command %s",m_command.m_type.c_str());
+	DEBUGX("calc action for command %s",m_command.m_type.c_str());
 	addToNetEventMask(NetEvent::DATA_ACTION);
 
 
@@ -1596,7 +1596,7 @@ void Creature::calcAction()
 	// Wenn Zielobjekt per ID gegeben
 	if ( m_command.m_goal_object_id !=0 && m_command.m_type != "take_item")
 	{
-		DEBUG5("goal ID: %i",m_command.m_goal_object_id);
+		DEBUGX("goal ID: %i",m_command.m_goal_object_id);
 		// Zielobjekt holen
 		goalobj = getRegion()->getObject(m_command.m_goal_object_id);
 
@@ -1612,7 +1612,7 @@ void Creature::calcAction()
 		// Ziel muss aktiv sein
 		if (goalobj->getState() != STATE_ACTIVE)
 		{
-			DEBUG5("refused to interact with inactive object %i",m_command.m_goal_object_id);
+			DEBUGX("refused to interact with inactive object %i",m_command.m_goal_object_id);
 			m_action.m_type = "noaction";
 			m_action.m_elapsed_time =0;
 			clearCommand(false,true);
@@ -1658,7 +1658,7 @@ void Creature::calcAction()
 	if (Action::getActionInfo(m_command.m_type)->m_target_type == Action::MELEE || Action::getActionInfo(m_command.m_type)->m_base_action == "walk")
 	{
 		// Aktion fuer die man an das Ziel hinreichend nahe herankommen muss
-		DEBUG5("range %f dist %f",range,dist);
+		DEBUGX("range %f dist %f",range,dist);
 
 		// Testen ob das Ziel in Reichweite ist
 		if (range > dist)
@@ -1685,7 +1685,7 @@ void Creature::calcAction()
 			if ((m_command.m_type == "charge" || m_command.m_type == "storm_charge")  )
 			{
 				// Sturmangriff
-				DEBUG5("Charge");
+				DEBUGX("Charge");
 				
 				// beim ersten Mal richtung neu ausrechnen, das ist der Fall wenn der Schadensmultiplikator gleich 1 ist
 				// sonst nur beschleunigen
@@ -1712,7 +1712,7 @@ void Creature::calcAction()
 				else
 				{
 					// Richtung: direct zum Ziel;
-					DEBUG5("calc charge dir");
+					DEBUGX("calc charge dir");
 					// Vektor von der eigenen Position zum Ziel, normieren
 					Vector dir = goal-pos;
 					dir.normalize();
@@ -1822,7 +1822,7 @@ void Creature::calcStatusModCommand()
 				npos = pos + v*range;
 			}
 		}
-		DEBUG5("entscheidung durch %p, %f",wo,r);
+		DEBUGX("entscheidung durch %p, %f",wo,r);
 		// Angriff ausfuehren, wenn Zielobjekt vorhanden, sonst mit 30% Wahrscheinlichkeit
 		if (wo!=0 || r > 0.7)
 		{
@@ -1851,7 +1851,7 @@ void Creature::calcStatusModCommand()
 			addToNetEventMask(NetEvent::DATA_COMMAND);
 			return;
 		}
-		DEBUG5("confused command %s",m_command.m_type.c_str());
+		DEBUGX("confused command %s",m_command.m_type.c_str());
 
 	}
 	else if (m_dyn_attr.m_status_mod_time[Damage::BERSERK]>0)
@@ -1890,12 +1890,12 @@ void Creature::calcStatusModCommand()
 				continue;
 			}
 
-			DEBUG5("checking obj %i",(*i)->getId());
+			DEBUGX("checking obj %i",(*i)->getId());
 			// Fuer feindliche Lebewesen
 			if (World::getWorld()->getRelation(m_fraction,*i) == Fraction::HOSTILE)
 			{
 				// Abstand zum eigenen Mittelpunkt berechnen
-				DEBUG5("hostile");
+				DEBUGX("hostile");
 				wpos = (*i)->getShape()->m_center;
 				
 				// Objekt mit dem kleinsten Abstand als Zielobjekt setzen
@@ -1913,7 +1913,7 @@ void Creature::calcStatusModCommand()
 		if (id !=0)
 		{
 			getDynAttr()->m_timer.start();
-			DEBUG5("attack id %i",id);
+			DEBUGX("attack id %i",id);
 			// Angriff
 			m_command.m_type = "attack";
 			m_command.m_goal_object_id = id;
@@ -1923,7 +1923,7 @@ void Creature::calcStatusModCommand()
 			// nur Nahkampf, daher Reichweite die von Fernwaffen kommt reduzieren
 			if (m_command.m_range >4)
 			{
-				DEBUG5("capped range for berserk");
+				DEBUGX("capped range for berserk");
 				m_command.m_range= 1;
 			}
 
@@ -1955,14 +1955,14 @@ void Creature::calcWalkDir(Vector goal,WorldObject* goalobj)
 	// wenn als Ziel ein Lebenwesen angegeben ist
 	if (goalobj !=0 && goalobj->isCreature() )
 	{
-		DEBUG5("using pot field of object %i",goalobj->getId());
+		DEBUGX("using pot field of object %i",goalobj->getId());
 		Creature* cr = (Creature*) goalobj;
 		// Potentialfeld des Ziellebewesens verwenden
 		cr->getPathDirection(pos,getRegionId(), 2*getShape()->m_radius, getLayer(),dir);
 	}
 	else
 	{
-		DEBUG5("using own pot field");
+		DEBUGX("using own pot field");
 		// Bewegung zu einem Punkt oder festen Objekt
 		// eigenes Potentialfeld verwenden
 
@@ -1981,7 +1981,7 @@ void Creature::calcWalkDir(Vector goal,WorldObject* goalobj)
 		if (m_path_info ==0)
 		{
 			// Potentialfeld existiertnoch nicht
-			DEBUG5("allocating new pot field");
+			DEBUGX("allocating new pot field");
 			m_path_info = new PathfindInfo;
 
 			// Qualitaet der Suche, geht quadratisch in die Laufzeit ein
@@ -2036,7 +2036,7 @@ void Creature::calcWalkDir(Vector goal,WorldObject* goalobj)
 			if (recalc)
 			{
 				// neu berechnen notwendig
-				DEBUG5("recalc walk field");
+				DEBUGX("recalc walk field");
 				
 				// Zentrum ist die eigene Position
 				m_path_info->m_center.m_x= goal.m_x +roundf(pos.m_x-goal.m_x);
@@ -2064,7 +2064,7 @@ void Creature::calcWalkDir(Vector goal,WorldObject* goalobj)
 		else
 		{
 			// direkte Verbindung als Richtung verwenden
-			DEBUG5("using direct way");
+			DEBUGX("using direct way");
 			dir = goal - pos;
 		}
 
@@ -2089,7 +2089,7 @@ void Creature::calcWalkDir(Vector goal,WorldObject* goalobj)
 		if (oldspeed * dir <0)
 		{
 			m_pathfind_counter +=10;
-			DEBUG5("counter %f",m_pathfind_counter);
+			DEBUGX("counter %f",m_pathfind_counter);
 			if (m_pathfind_counter >= 50)
 			{
 				clearCommand(false,true);
@@ -2113,11 +2113,11 @@ void Creature::calcWalkDir(Vector goal,WorldObject* goalobj)
 
 void Creature::clearCommand(bool success, bool norepeat)
 {
-	DEBUG5("%s clear command %s %f",getRefName().c_str(),m_command.m_type.c_str() , m_script_command_timer);
+	DEBUGX("%s clear command %s %f",getRefName().c_str(),m_command.m_type.c_str() , m_script_command_timer);
 	if (hasScriptCommand() && m_command.m_type!= "noaction")
 	{
 		m_script_command_timer =0;
-		DEBUG5("command %s by %s ended with success %i",m_command.m_type.c_str(), getRefName().c_str(), success);
+		DEBUGX("command %s by %s ended with success %i",m_command.m_type.c_str(), getRefName().c_str(), success);
 		Trigger* tr = new Trigger("command_complete");
 		tr->addVariable("unit",getId());
 		tr->addVariable("command",m_command.m_type);
@@ -2163,7 +2163,7 @@ bool Creature::update (float time)
 		DEBUG("elapsed time %f all time %f",m_action.m_elapsed_time,	m_action.m_time);
 	}
 
-	DEBUG5("Update des Creatureobjekts [%i] wird gestartet", getId());
+	DEBUGX("Update des Creatureobjekts [%i] wird gestartet", getId());
 	// interne Variable um Fehler zu speichern
 	bool result=true;
 
@@ -2197,7 +2197,7 @@ bool Creature::update (float time)
 		m_timer2=0;
 	}
 
-	DEBUG5("timer1 %f timer2 %f",m_timer1,m_timer2);
+	DEBUGX("timer1 %f timer2 %f",m_timer1,m_timer2);
 
 
 	// Timer fuer Wegsucheinfo inkrementieren
@@ -2267,7 +2267,7 @@ bool Creature::update (float time)
 		if (i->m_time <=0)
 		{
 			// Zeit abgelaufen, Modifikation deaktivieren
-			DEBUG5("removing base attr mod");
+			DEBUGX("removing base attr mod");
 			recalc |= removeBaseAttrMod((CreatureBaseAttrMod*) &(*i));
 			i=m_dyn_attr.m_temp_mods.erase(i);
 		}
@@ -2281,7 +2281,7 @@ bool Creature::update (float time)
 	if (recalc)
 	{
 		// modifizierte Attribute neu berechnen
-		DEBUG5("modifizierte Attribute neu berechnen");
+		DEBUGX("modifizierte Attribute neu berechnen");
 		calcBaseAttrMod();
 
 	}
@@ -2340,7 +2340,7 @@ bool Creature::update (float time)
 			if (m_dyn_attr.m_status_mod_time[Damage::POISONED]>0)
 			{
 				// Schaden pro Sekunde 1/60 der HP
-				DEBUG5("poisoned");
+				DEBUGX("poisoned");
 				m_dyn_attr.m_health -= 500*m_base_attr_mod.m_max_health / 60000;
 				addToNetEventMask(NetEvent::DATA_HP);
 			}
@@ -2349,7 +2349,7 @@ bool Creature::update (float time)
 			if (m_dyn_attr.m_status_mod_time[Damage::BURNING]>0)
 			{
 				// Schaden pro Sekunde 1/90 der HP (bei 0 Feuerresistenz)
-				DEBUG5("burning");
+				DEBUGX("burning");
 				m_dyn_attr.m_health -= (100-m_base_attr_mod.m_resistances[Damage::FIRE])*500*m_base_attr_mod.m_max_health / 9000000;
 				addToNetEventMask(NetEvent::DATA_HP);
 			}
@@ -2388,7 +2388,7 @@ bool Creature::update (float time)
 
 
 				// wenn die Lebenspunkte des Lebewesens kleiner gleich 0 sind stirbt das Lebewesen
-				DEBUG5("health %f",m_dyn_attr.m_health);
+				DEBUGX("health %f",m_dyn_attr.m_health);
 				if (m_dyn_attr.m_health <= 0)
 				{
 					die();
@@ -2396,7 +2396,7 @@ bool Creature::update (float time)
 				else
 				{
 					// Solange noch Zeit zur Verfügung steht
-					DEBUG5("Objekt aktiv");
+					DEBUGX("Objekt aktiv");
 
 					while (time>0)
 					{
@@ -2448,7 +2448,7 @@ bool Creature::update (float time)
 				}
 
 			default:
-				DEBUG5("unknown state: %i",getState());
+				DEBUGX("unknown state: %i",getState());
 				time=0 ;
 		}
 
@@ -2456,7 +2456,7 @@ bool Creature::update (float time)
 
 	if (timer.getTime()>10)
 	{
-		DEBUG5("object %i update time %f",getId(), timer.getTime());
+		DEBUGX("object %i update time %f",getId(), timer.getTime());
 	}
 	return result;
 }
@@ -2802,7 +2802,7 @@ void Creature::calcDamage(Action::ActionType act,Damage& dmg)
 	if (act == "noaction")
 		return;
 
-	DEBUG5("Calc Damage for action %s",act.c_str());
+	DEBUGX("Calc Damage for action %s",act.c_str());
 	
 	Action::ActionInfo* ainfo = Action::getActionInfo(act);
 	if (ainfo ==0 )
@@ -2959,7 +2959,7 @@ void Creature::calcBaseDamage(std::string impl ,Damage& dmg)
 	if (impl == "attack")
 	{
 		// Basisaktion ist normaler Angriff
-		DEBUG5("base str %i mod str %i",m_base_attr.m_strength,basm->m_strength);
+		DEBUGX("base str %i mod str %i",m_base_attr.m_strength,basm->m_strength);
 
 		dmg.m_min_damage[Damage::PHYSICAL] += basm->m_strength/4;
 		dmg.m_min_damage[Damage::PHYSICAL] += basm->m_dexterity/10;
@@ -3123,7 +3123,7 @@ void Creature::calcBaseAttrMod()
 	std::list<CreatureBaseAttrMod>::iterator j;
 	for (j=m_dyn_attr.m_temp_mods.begin(); j!= m_dyn_attr.m_temp_mods.end();++j)
 	{
-		DEBUG5("%f / %f",getDynAttr()->m_health, getBaseAttr()->m_max_health);
+		DEBUGX("%f / %f",getDynAttr()->m_health, getBaseAttr()->m_max_health);
 	
 		applyBaseAttrMod(&(*j),false);
 	}
@@ -3156,13 +3156,13 @@ bool Creature::takeDamage(Damage* d)
 	if (!canBeAttacked())
 		return false;
 
-	DEBUG5("take Damage %i",getId());
+	DEBUGX("take Damage %i",getId());
 	// Testen ob der Verursacher des Schadens feindlich gesinnt ist
 	if (World::getWorld()->getRelation(d->m_attacker_fraction,this) != Fraction::HOSTILE)
 	{
 		// Verursacher ist nicht feindlich, kein Schaden
-		DEBUG5("not hostile, no dmg");
-		DEBUG5("fractions %i %i",d->m_attacker_fraction, this->getFraction());
+		DEBUGX("not hostile, no dmg");
+		DEBUGX("fractions %i %i",d->m_attacker_fraction, this->getFraction());
 		return false;
 	}
 	
@@ -3192,7 +3192,7 @@ bool Creature::takeDamage(Damage* d)
 			blockchance = 1-atan(d->m_attack/block)/(3.1415/2);
 			
 			
-			DEBUG5("attack %f block %f -> blockchance %f",d->m_attack,block, blockchance);
+			DEBUGX("attack %f block %f -> blockchance %f",d->m_attack,block, blockchance);
 			if (Random::random()<blockchance)
 			{
 				// Schaden abgewehrt
@@ -3221,7 +3221,7 @@ bool Creature::takeDamage(Damage* d)
 	bool critical = false;
 	if (rand()*rez <d->m_crit_perc)
 	{
-		DEBUG5("critical");
+		DEBUGX("critical");
 		critical = true;
 		d->m_multiplier[Damage::PHYSICAL] *= 3;
 	}
@@ -3253,13 +3253,13 @@ bool Creature::takeDamage(Damage* d)
 	if (armor>0 && !(d->m_special_flags & Damage::IGNORE_ARMOR) && dmgt>0)
 	{
 		armorfak = atan(d->m_power/armor)/(3.1415/2);
-		DEBUG5("power %f armor %f -> damage perc. %f",d->m_power, armor, armorfak);
+		DEBUGX("power %f armor %f -> damage perc. %f",d->m_power, armor, armorfak);
 		dmgt = dmgt*armorfak;
 	}
 
 	dmg += dmgt;
 
-	DEBUG5("phys dmg %f",dmgt);
+	DEBUGX("phys dmg %f",dmgt);
 	
 	// Daten um Trefferwahrscheinlichkeiten / Schadensreduktion anzuzeigen
 	WorldObject* wo = getRegion()->getObject(d->m_attacker_id);
@@ -3283,7 +3283,7 @@ bool Creature::takeDamage(Damage* d)
 			fstat->m_damage_got_perc = armorfak;
 			addToNetEventMask(NetEvent::DATA_FIGHT_STAT);
 			
-			DEBUG5("blockchance %f damage perc %f attacker %s",blockchance, armorfak, fstat->m_last_attacker.c_str());
+			DEBUGX("blockchance %f damage perc %f attacker %s",blockchance, armorfak, fstat->m_last_attacker.c_str());
 		}
 	}
 	
@@ -3310,7 +3310,7 @@ bool Creature::takeDamage(Damage* d)
 		res = std::min(m_base_attr_mod.m_resistances_cap[i],m_base_attr_mod.m_resistances[i]);
 		dmgt *=0.01*(100-res);
 
-		DEBUG5("dmg %i min %f max %f real %f",i,d->m_min_damage[i],d->m_max_damage[i],dmgt);
+		DEBUGX("dmg %i min %f max %f real %f",i,d->m_min_damage[i],d->m_max_damage[i],dmgt);
 		dmg += dmgt;
 
 	}
@@ -3332,7 +3332,7 @@ bool Creature::takeDamage(Damage* d)
 				rel = d->m_status_mod_power[i]*1.0 / m_base_attr_mod.m_willpower;
 			}
 			float chance = atan(rel)/(3.1415/2);
-			DEBUG5("mod %i modpow %i wp %i",i,d->m_status_mod_power[i],m_base_attr_mod.m_willpower);
+			DEBUGX("mod %i modpow %i wp %i",i,d->m_status_mod_power[i],m_base_attr_mod.m_willpower);
 			if (Random::random()<chance)
 			{
 				// Modifikation anwenden
@@ -3344,17 +3344,17 @@ bool Creature::takeDamage(Damage* d)
 					addToNetEventMask(NetEvent::DATA_STATUS_MODS);
 				}
 
-				DEBUG5("applying status mod %i for %f ms",i,t);
+				DEBUGX("applying status mod %i for %f ms",i,t);
 			}
 		}
 	}
 
-	DEBUG5("sum dmg %f / %f",dmg,getDynAttr()->m_health );
+	DEBUGX("sum dmg %f / %f",dmg,getDynAttr()->m_health );
 
 	// Extraschaden berechnen
 	if (d->m_extra_dmg_race == getRace() && getRace() != "")
 	{
-		DEBUG5("triple damage");
+		DEBUGX("triple damage");
 		dmg *= 3;
 		critical = true;
 	}
@@ -3650,20 +3650,20 @@ void Creature::getPathDirection(Vector pos,short region, float base_size, short 
 	// ermitteln welche Wegfindeinformation genutzt werden soll
 	if (base_size>1)
 	{
-		DEBUG5("switching to medium size info");
+		DEBUGX("switching to medium size info");
 		pi = &m_medium_path_info;
 		bsize=2;
 	}
 	if (base_size>2)
 	{
-		DEBUG5("switching to big size info");
+		DEBUGX("switching to big size info");
 		pi = &m_big_path_info;
 		bsize=4;
 	}
 
 	if ((layer & LAYER_BASE) ==0)
 	{
-		DEBUG5("switching to flying info");
+		DEBUGX("switching to flying info");
 		pi = &m_small_flying_path_info;
 		bsize=1;
 		fly = true;
@@ -3705,7 +3705,7 @@ void Creature::getPathDirection(Vector pos,short region, float base_size, short 
 		(*pi)->m_quality=qual;
 		(*pi)->m_id = getId();
 		recalc = true;
-		DEBUG5("recalc: no pathinfo so far");
+		DEBUGX("recalc: no pathinfo so far");
 	}
 	else
 	{
@@ -3715,7 +3715,7 @@ void Creature::getPathDirection(Vector pos,short region, float base_size, short 
 			// Region neu setzen und neu berechnen
 			(*pi)->m_region=getRegionId();
 			recalc = true;
-			DEBUG5("recalc: new in Region");
+			DEBUGX("recalc: new in Region");
 		}
 
 		// Ziel befindet sich in einer anderen Region, keinen Weg angeben
@@ -3739,14 +3739,14 @@ void Creature::getPathDirection(Vector pos,short region, float base_size, short 
 		else if (d>(*pi)->m_base_size && d > 0.25*d2)
 		{
 			// Ziel hat sich deutlich bewegt, neuen Weg suchen
-			DEBUG5("recalc: goal has moved");
+			DEBUGX("recalc: goal has moved");
 			recalc = true;
 		}
 
 		// Wenn Informationen ueber 500ms alt neu berechnen
 		if ((*pi)->m_timer >500)
 		{
-			DEBUG5("recalc: info too old");
+			DEBUGX("recalc: info too old");
 			recalc = true;
 		}
 
@@ -3755,7 +3755,7 @@ void Creature::getPathDirection(Vector pos,short region, float base_size, short 
 	if (recalc && !direct)
 	{
 		// neu berechnen
-		DEBUG5("recalc");
+		DEBUGX("recalc");
 		// Zentrum und Senke sind die aktuelle Position
 		(*pi)->m_start= goal;
 		(*pi)->m_center= goal;
@@ -3777,7 +3777,7 @@ void Creature::getPathDirection(Vector pos,short region, float base_size, short 
 
 	if (direct)
 	{
-		DEBUG5("direct way");
+		DEBUGX("direct way");
 		// Direkte Richtung
 		// Vektor vom Start zum Ziel, normiert
 		dir = goal - pos;
@@ -3786,7 +3786,7 @@ void Creature::getPathDirection(Vector pos,short region, float base_size, short 
 	}
 	else
 	{
-		DEBUG5("use pot field");
+		DEBUGX("use pot field");
 		// Potentialfeld verwenden um die Richtung zu berechnen
 		World::getWorld()->calcPathDirection(*pi, pos, dir);
 	}
@@ -3794,7 +3794,7 @@ void Creature::getPathDirection(Vector pos,short region, float base_size, short 
 
 void Creature::toString(CharConv* cv)
 {
-	DEBUG5("Creature::tostring");
+	DEBUGX("Creature::tostring");
 	WorldObject::toString(cv);
 	cv->toBuffer(m_refname);
 	
@@ -3804,7 +3804,7 @@ void Creature::toString(CharConv* cv)
 
 	cv->toBuffer(m_dyn_attr.m_health);
 	cv->toBuffer(m_base_attr_mod.m_max_health);
-	DEBUG5("write offset: %i",cv->getBitStream()->GetNumberOfBitsUsed());
+	DEBUGX("write offset: %i",cv->getBitStream()->GetNumberOfBitsUsed());
 
 	
 	
@@ -3870,7 +3870,7 @@ void Creature::fromString(CharConv* cv)
 	cv->fromBuffer(m_dyn_attr.m_health);
 	cv->fromBuffer(m_base_attr_mod.m_max_health);
 	m_base_attr.m_max_health = m_base_attr_mod.m_max_health;
-	DEBUG5("read offset: %i",cv->getBitStream()->GetReadOffset());
+	DEBUGX("read offset: %i",cv->getBitStream()->GetReadOffset());
 	// Statusveraenderungen
 	char c=0;
 	cv->fromBuffer<char>(c);
@@ -3976,7 +3976,7 @@ void Creature::writeNetEvent(NetEvent* event, CharConv* cv)
 		cv->toBuffer(getShape()->m_center.m_y);
 		cv->toBuffer(getShape()->m_angle);
 
-		DEBUG5("sending action %s angle %f",m_action.m_type.c_str(), getShape()->m_angle);
+		DEBUGX("sending action %s angle %f",m_action.m_type.c_str(), getShape()->m_angle);
 		if (m_action.m_type!="noaction")
 		{
 			float acttime = m_action.m_time - m_action.m_elapsed_time;
@@ -4034,7 +4034,7 @@ void Creature::writeNetEvent(NetEvent* event, CharConv* cv)
 	if (event->m_data & NetEvent::DATA_STATE)
 	{
 		cv->toBuffer((char) getState());
-		DEBUG5("sending state %i %i",getId(),getState());
+		DEBUGX("sending state %i %i",getId(),getState());
 	}
 
 	if (event->m_data & NetEvent::DATA_ATTACK_WALK_SPEED)
@@ -4124,11 +4124,11 @@ void Creature::processNetEvent(NetEvent* event, CharConv* cv)
 		m_refname = name;
 	}
 	
-	DEBUG5("object %i processing NetEvent %i data %i",getId(),event->m_type, event->m_data);
+	DEBUGX("object %i processing NetEvent %i data %i",getId(),event->m_type, event->m_data);
 	if (event->m_data & NetEvent::DATA_COMMAND)
 	{
 		m_command.fromString(cv);
-		DEBUG5("got Command %s",m_command.m_type.c_str());
+		DEBUGX("got Command %s",m_command.m_type.c_str());
 	}
 
 	float  atime = m_action.m_time - m_action.m_elapsed_time;
@@ -4216,7 +4216,7 @@ void Creature::processNetEvent(NetEvent* event, CharConv* cv)
 				die();
 			}
 			setState((State) ctmp);
-			DEBUG5("object %i changed state from %i to %i",getId(),oldstate,ctmp);
+			DEBUGX("object %i changed state from %i to %i",getId(),oldstate,ctmp);
 		}
 
 	}
@@ -4329,10 +4329,10 @@ void Creature::processNetEvent(NetEvent* event, CharConv* cv)
 		if (goaltime < 100)
 		{
 
-			DEBUG5("time to reach goal %f (prev time %f) delay %f",goaltime,atime,cv->getDelay());
+			DEBUGX("time to reach goal %f (prev time %f) delay %f",goaltime,atime,cv->getDelay());
 
 		}
-		DEBUG5("previously planned time %f",atime);
+		DEBUGX("previously planned time %f",atime);
 
 		if (goaltime <0)
 		{
@@ -4341,7 +4341,7 @@ void Creature::processNetEvent(NetEvent* event, CharConv* cv)
 		}
 		else
 		{
-			DEBUG5("pos %f %f speed %f %f", getShape()->m_center.m_x, getShape()->m_center.m_y, getSpeed().m_x, getSpeed().m_y); 
+			DEBUGX("pos %f %f speed %f %f", getShape()->m_center.m_x, getShape()->m_center.m_y, getSpeed().m_x, getSpeed().m_y); 
 			// Bewegungsgeschwindigkeit so setzen, dass Ziel in der richtigen Zeit erreicht wird
 			Vector calcspeed = (goal - getShape()->m_center) * (1/goaltime);
 			setSpeed(calcspeed);
@@ -4351,7 +4351,7 @@ void Creature::processNetEvent(NetEvent* event, CharConv* cv)
 				moveTo(goal - newspeed * goaltime);
 				setSpeed(newspeed);
 			}
-			DEBUG5("goal %f %f newspeed %f %f", goal.m_x, goal.m_y, getSpeed().m_x, getSpeed().m_y); 
+			DEBUGX("goal %f %f newspeed %f %f", goal.m_x, goal.m_y, getSpeed().m_x, getSpeed().m_y); 
 		}
 
 	}
@@ -4542,7 +4542,7 @@ void Creature::speakText(CreatureSpeakText& text)
 	m_speak_text = text;
 	m_speak_text.m_displayed_time = 0;
 	
-	DEBUG5("speak %s for %f ms",text.m_text.c_str(), text.m_time);
+	DEBUGX("speak %s for %f ms",text.m_text.c_str(), text.m_time);
 }
 
 Creature* Creature::getTradePartner()
@@ -4590,7 +4590,7 @@ void Creature::sellItem(short position, Item* &item, int& gold)
 
 void Creature::buyItem(Item* &item, int& gold)
 {
-	DEBUG5("buy %p",item);
+	DEBUGX("buy %p",item);
 	if (item != 0 && getEquipement() !=0)
 	{
 		NPCTrade& tradeinfo = Dialogue::getNPCTrade(getRefName());
@@ -4632,7 +4632,7 @@ void Creature::setDialogue(int id)
 {
 	if (id != m_dialogue_id)
 	{
-		DEBUG5("Creature %s has now Dialogue %i",getRefName().c_str(),id);
+		DEBUGX("Creature %s has now Dialogue %i",getRefName().c_str(),id);
 		m_dialogue_id = id;
 		addToNetEventMask(NetEvent::DATA_DIALOGUE);
 		
@@ -4657,7 +4657,7 @@ void Creature::updateFightStat(float hitchance, float armorperc, std::string att
 		fstat->m_last_attacked = attacked;
 		addToNetEventMask(NetEvent::DATA_FIGHT_STAT);
 		
-		DEBUG5("hitchance %f damage perc %f attacked %s",hitchance, armorperc, attacked.c_str());
+		DEBUGX("hitchance %f damage perc %f attacked %s",hitchance, armorperc, attacked.c_str());
 	}
 }
 

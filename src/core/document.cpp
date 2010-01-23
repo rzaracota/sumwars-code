@@ -122,7 +122,7 @@ void Document::setSaveFile(std::string s)
 		file.get(bin);
 		
 		CharConv* save;
-		DEBUG5("binary %i",bin);
+		DEBUGX("binary %i",bin);
 		if (bin == '0')
 		{
 			save = new CharConv(&file);
@@ -131,7 +131,7 @@ void Document::setSaveFile(std::string s)
 		{
 			int len;
 			file.read((char*) &len,4);
-			DEBUG5("length %i",len);
+			DEBUGX("length %i",len);
 			data = new unsigned char[len];
 			file.read((char*) data,len);
 			
@@ -167,7 +167,7 @@ void Document::loadSavegame()
 {
 	// Savegame einlesen
 	std::string fname = m_save_file;
-	DEBUG5("savegame is %s",fname.c_str());
+	DEBUGX("savegame is %s",fname.c_str());
 
 	std::fstream file(fname.c_str(),std::ios::in| std::ios::binary);
 	if (file.is_open())
@@ -248,7 +248,7 @@ void Document::loadSavegame()
 		ERRORMSG("konnte Savegame nicht oeffnen: %s",fname.c_str());
 		m_state =SHUTDOWN;
 	}
-	DEBUG5("done");
+	DEBUGX("done");
 }
 
 Document::~Document()
@@ -293,7 +293,7 @@ void Document::createNewCharacter(std::string name)
 		
 		m_temp_player ->setName(name);
 		
-		DEBUG5("savefile %s",m_save_file.c_str());
+		DEBUGX("savefile %s",m_save_file.c_str());
 		
 		std::ifstream file(m_save_file.c_str());
 		if (file.is_open())
@@ -355,7 +355,7 @@ void Document::installShortkey(KeyCode key,ShortkeyDestination dest, bool check_
 
 void Document::onButtonSendMessageClicked ( )
 {
-	DEBUG5("onbuttonmessageclicked");
+	DEBUGX("onbuttonmessageclicked");
 }
 
 
@@ -430,7 +430,7 @@ void Document::onRightMouseButtonClick(Vector pos)
 	m_gui_state.m_left_mouse_pressed=false;
 	m_gui_state.m_right_mouse_pressed_time=0;
 
-	DEBUG5("angeklickte Koordinaten: %f %f",pos.m_x,pos.m_y);
+	DEBUGX("angeklickte Koordinaten: %f %f",pos.m_x,pos.m_y);
 
 	m_gui_state.m_clicked_object_id=0;
 	command.m_id=0;
@@ -447,7 +447,7 @@ void Document::onRightMouseButtonClick(Vector pos)
 	command.m_number=0;
 
 	if (command.m_id!=0)
-		DEBUG5("angeklicktes Objekt %i",command.m_id);
+		DEBUGX("angeklicktes Objekt %i",command.m_id);
 
 
 	// Paket an den Server senden
@@ -483,7 +483,7 @@ void Document::onLeftMouseButtonClick(Vector pos)
 	m_gui_state.m_left_mouse_pressed_time=0;
 
 
-	DEBUG4("angeklickte Koordinaten: %f %f",pos.m_x,pos.m_y);
+	DEBUGX("angeklickte Koordinaten: %f %f",pos.m_x,pos.m_y);
 
 	m_gui_state.m_clicked_object_id=0;
 	command.m_id=0;
@@ -507,7 +507,7 @@ void Document::onLeftMouseButtonClick(Vector pos)
 
 	if (command.m_id!=0)
 	{
-		DEBUG5("angeklicktes Objekt %i",command.m_id);
+		DEBUGX("angeklicktes Objekt %i",command.m_id);
 	}
 
 	if (command.m_id ==0 && m_gui_state.m_cursor_item_id!=0)
@@ -516,7 +516,7 @@ void Document::onLeftMouseButtonClick(Vector pos)
 		command.m_action = "take_item";
 		command.m_id = m_gui_state.m_cursor_item_id;
 
-		DEBUG5("clicked at item %i",m_gui_state.m_cursor_item_id);
+		DEBUGX("clicked at item %i",m_gui_state.m_cursor_item_id);
 	}
 
 	// Paket an den Server senden
@@ -677,7 +677,7 @@ void Document::increaseAttribute(CreatureBaseAttr::Attribute attr)
 	ClientCommand command;
 	command.m_button = BUTTON_INCREASE_ATTRIBUTE;
 	command.m_id = attr;
-	DEBUG5("increasing attribute %i",attr);
+	DEBUGX("increasing attribute %i",attr);
 	sendCommand(&command);
 }
 
@@ -1090,7 +1090,7 @@ void Document::setLeftAction(Action::ActionType act)
 	if (aci->m_base_action== "noaction")
 		return;
 
-	DEBUG5("Setting Action %s",act.c_str());
+	DEBUGX("Setting Action %s",act.c_str());
 	m_gui_state.m_left_mouse_pressed = false;
 
 
@@ -1123,7 +1123,7 @@ void Document::setRightAction(Action::ActionType act)
 		return;
 
 
-	DEBUG5("Setting Action %s",act.c_str());
+	DEBUGX("Setting Action %s",act.c_str());
 	m_gui_state.m_right_mouse_pressed = false;
 
 	ClientCommand command;
@@ -1251,12 +1251,12 @@ bool Document::onKeyPress(KeyCode key)
 				if (left)
 				{
 					installShortkey(key,(ShortkeyDestination) (USE_SKILL_LEFT+id));
-					DEBUG5("left short key for action %s %i",act.c_str(), USE_SKILL_LEFT+id);
+					DEBUGX("left short key for action %s %i",act.c_str(), USE_SKILL_LEFT+id);
 				}
 				else
 				{
 					installShortkey(key,(ShortkeyDestination) (USE_SKILL_RIGHT+id));
-					DEBUG5("right short key for action %s %i",act.c_str(),USE_SKILL_RIGHT+id );
+					DEBUGX("right short key for action %s %i",act.c_str(),USE_SKILL_RIGHT+id );
 				}
 				return true;
 			}
@@ -1438,8 +1438,8 @@ void Document::update(float time)
 
 	}
 
-	DEBUG5("modified is %i",m_modified);
-	DEBUG5("State is %i",m_state);
+	DEBUGX("modified is %i",m_modified);
+	DEBUGX("State is %i",m_state);
 	NetStatus status;
 	switch (m_state)
 	{
@@ -1471,7 +1471,7 @@ void Document::update(float time)
 				m_save_timer.start();
 				
 				writeSavegame();
-				DEBUG5("saving");
+				DEBUGX("saving");
 			}
 			
 			if (World::getWorld()->getNetwork()->getSlotStatus() == NET_TIMEOUT)
@@ -1518,17 +1518,17 @@ void Document::update(float time)
 		default:
 			break;
 	}
-	DEBUG5("done");
+	DEBUGX("done");
 }
 
 void Document::updateContent(float time)
 {
-	DEBUG5("update content");
+	DEBUGX("update content");
 
 	Player* player = static_cast<Player*>(World::getWorld()->getLocalPlayer());
 	if (player==0)
 	{
-		DEBUG5("no local player");
+		DEBUGX("no local player");
 		return;
 	}
 	
@@ -1582,7 +1582,7 @@ void Document::updateContent(float time)
 
 	if (m_gui_state.m_left_mouse_pressed)
 	{
-		DEBUG5("linke Maustaste festgehalten");
+		DEBUGX("linke Maustaste festgehalten");
 		m_gui_state.m_left_mouse_pressed_time += time;
 		if (m_gui_state.m_left_mouse_pressed_time>= 200)
 		{
@@ -1606,7 +1606,7 @@ void Document::updateContent(float time)
 
 	if (m_gui_state.m_right_mouse_pressed)
 	{
-		DEBUG5("rechte Maustaste festgehalten");
+		DEBUGX("rechte Maustaste festgehalten");
 		m_gui_state.m_right_mouse_pressed_time += time;
 
 		if (m_gui_state.m_right_mouse_pressed_time>= 200)
@@ -1722,7 +1722,7 @@ void* Document::writeSaveFile(void* doc_data_ptr)
 		else
 		{
 			file << stream->str();
-			DEBUG5("save: \n %s",stream->str().c_str());
+			DEBUGX("save: \n %s",stream->str().c_str());
 		}
 		
 		file.close();
@@ -1801,10 +1801,10 @@ void Document::loadSettings()
 		float soundvolume;
 		file >> soundvolume;
 		SoundSystem::setSoundVolume(soundvolume);
-		DEBUG5("Sound volume %f",soundvolume);
+		DEBUGX("Sound volume %f",soundvolume);
 		
 		file >> nr;
-		DEBUG5("short keys %i",nr);
+		DEBUGX("short keys %i",nr);
 		for (int i=0; i<nr; i++)
 		{
 			file >> key >> dest;
@@ -1812,19 +1812,19 @@ void Document::loadSettings()
 		}
 		
 		file >> nr;
-		DEBUG5("special keys %i",nr);
+		DEBUGX("special keys %i",nr);
 		for (int i=0; i<nr; i++)
 		{
 			file >> key;
 			m_special_keys.insert((KeyCode) key);
 		}
 		file >> m_server_host >> m_port >> m_max_players;
-		DEBUG5("server %s port %i player %i",m_server_host.c_str(), m_port, m_max_players);
+		DEBUGX("server %s port %i player %i",m_server_host.c_str(), m_port, m_max_players);
 		file.close();
 	}
 	else
 	{
-		DEBUG5(".sumwars not found");
+		DEBUGX(".sumwars not found");
 	}
 }
 

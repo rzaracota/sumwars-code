@@ -28,7 +28,7 @@ ActionRenderInfo* GraphicRenderInfo::getActionRenderInfo(std::string action,int 
 	while (info == 0 && pos != std::string::npos)
 	{
 		action.erase(pos);
-		DEBUG5("reduced action %s",action.c_str());
+		DEBUGX("reduced action %s",action.c_str());
 		
 		info = getInheritedActionRenderInfo(action,random_action_nr);
 		pos = action.find_last_of('#');
@@ -82,14 +82,14 @@ ActionRenderInfo* GraphicRenderInfo::getOwnActionRenderInfo(std::string action,i
 
 ActionRenderInfo* GraphicRenderInfo::getInheritedActionRenderInfo(std::string action,int  random_action_nr)
 {
-	DEBUG5("get info for %s (%p)",action.c_str(),this);
+	DEBUGX("get info for %s (%p)",action.c_str(),this);
 	ActionRenderInfo*  info = getOwnActionRenderInfo(action, random_action_nr);
 	if (info ==0 && m_parent !="")
 	{
 		if (m_parent_ptr == 0)
 		{
 			m_parent_ptr = GraphicManager::getRenderInfo(m_parent);
-			DEBUG5("parent render info %s %p",m_parent.c_str(), m_parent_ptr);
+			DEBUGX("parent render info %s %p",m_parent.c_str(), m_parent_ptr);
 		}
 		
 		if (m_parent_ptr != 0)
@@ -108,7 +108,7 @@ GraphicRenderInfo* GraphicRenderInfo::getParentInfo()
 	if (m_parent_ptr == 0)
 	{
 		m_parent_ptr = GraphicManager::getRenderInfo(m_parent);
-		DEBUG5("parent render info %s %p",m_parent.c_str(), m_parent_ptr);
+		DEBUGX("parent render info %s %p",m_parent.c_str(), m_parent_ptr);
 	}
 	return m_parent_ptr;
 	

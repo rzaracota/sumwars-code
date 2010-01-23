@@ -81,7 +81,7 @@ bool WorldLoader::loadRegions(TiXmlNode* node)
 		attr.getInt("id",id,-1);
 		rdata->m_id = id;
 		attr.getString("name",rdata->m_name);
-		DEBUG5("Region %s %i",rdata->m_name.c_str(), id);
+		DEBUGX("Region %s %i",rdata->m_name.c_str(), id);
 		World::getWorld()->registerRegionData(rdata, rdata->m_id);
 		loadRegion(node,rdata);
 		
@@ -267,7 +267,7 @@ bool WorldLoader::loadRegion(TiXmlNode* node, RegionData* rdata)
 						angle *= 3.14159/180;
 						attr.getInt("priority",prio);
 						
-						DEBUG5("named object group %s %s %i",group_name.c_str(), name.c_str(), prio);
+						DEBUGX("named object group %s %s %i",group_name.c_str(), name.c_str(), prio);
 						
 						rdata->addNamedObjectGroup(group_name,name,angle, prio);
 					}
@@ -294,7 +294,7 @@ bool WorldLoader::loadRegion(TiXmlNode* node, RegionData* rdata)
 						attr.getFloat("probability",prob,1.0f);	
 						attr.getString("decoration",deco,"true");	
 						
-						DEBUG5("object group %s  number %i prio %i",group_name.c_str(), number, prio);
+						DEBUGX("object group %s  number %i prio %i",group_name.c_str(), number, prio);
 						
 						rdata->addObjectGroup(group_name,prio, number, prob,(deco=="true"));
 					}
@@ -399,7 +399,7 @@ void  WorldLoader::loadNPC( TiXmlNode* node)
 				attr.getString("name",topic,"topic");
 				attr.getString("start_option",start_op);
 				
-				DEBUG5("found Topic %s for %s",topic.c_str(),refname.c_str());
+				DEBUGX("found Topic %s for %s",topic.c_str(),refname.c_str());
 				
 				ev = new Event;
 				// Topic kann mit der selben Funktion geladen werden wie Events
@@ -419,7 +419,7 @@ void  WorldLoader::loadNPC( TiXmlNode* node)
 				attr.getFloat("price_factor",price_factor,1.5f);
 				attr.getFloat("pay_factor",buy_factor,1.0f);
 				
-				DEBUG5("trade conditions %f %f",refreshtime, price_factor);
+				DEBUGX("trade conditions %f %f",refreshtime, price_factor);
 				NPCTrade& tradeinfo = Dialogue::getNPCTrade(refname);
 				
 				tradeinfo.m_cost_multiplier = price_factor;
@@ -438,7 +438,7 @@ void  WorldLoader::loadNPC( TiXmlNode* node)
 					attr.getFloat("max_enchant", tradeobj.m_max_enchant,0);
 					
 					tradeinfo.m_trade_objects.push_back(tradeobj);
-					DEBUG5("new trade Object for %s : %s %i %i %f %f",refname.c_str(),tradeobj.m_subtype.c_str(), tradeobj.m_number, tradeobj.m_number_magical, tradeobj.m_min_enchant, tradeobj.m_max_enchant);
+					DEBUGX("new trade Object for %s : %s %i %i %f %f",refname.c_str(),tradeobj.m_subtype.c_str(), tradeobj.m_number, tradeobj.m_number_magical, tradeobj.m_min_enchant, tradeobj.m_max_enchant);
 				}
 			}
 			else if (child->Type()!=TiXmlNode::COMMENT)
@@ -461,7 +461,7 @@ bool WorldLoader::loadQuestsData(const char* pFilename)
 	TiXmlDocument doc(pFilename);
 	bool loadOkay = doc.LoadFile();
 
-	DEBUG5("loading quest file %s",pFilename);
+	DEBUGX("loading quest file %s",pFilename);
 	if (loadOkay)
 	{
 		loadQuests(&doc);
@@ -539,7 +539,7 @@ void WorldLoader::loadQuest(TiXmlNode* node, Quest* quest)
 				ElementAttrib attr;
 				attr.parseElement(child->ToElement());
 				attr.getString("name",rname);
-				DEBUG5("event for region %s",rname.c_str());
+				DEBUGX("event for region %s",rname.c_str());
 				
 				for ( child2 = child->FirstChild(); child2 != 0; child2 = child2->NextSibling())
 				{

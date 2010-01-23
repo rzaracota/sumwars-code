@@ -233,7 +233,7 @@ void GameObject::processNetEvent(NetEvent* event, CharConv* cv)
 		char ctmp;
 		cv->fromBuffer(ctmp);
 		setState((State) ctmp);
-		DEBUG5("object %i changed state to %i",getId(),ctmp);
+		DEBUGX("object %i changed state to %i",getId(),ctmp);
 	}
 	
 	if (event->m_data & NetEvent::DATA_SPEED)

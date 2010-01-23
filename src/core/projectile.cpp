@@ -81,7 +81,7 @@ Projectile::Projectile(ProjectileBasicData &data,int id)
 		m_timer_limit /= m_counter;
 	}
 	clearNetEventMask();
-	DEBUG5("type %s flags %i",getSubtype().c_str(), m_flags);
+	DEBUGX("type %s flags %i",getSubtype().c_str(), m_flags);
 }
 
 
@@ -139,7 +139,7 @@ bool Projectile::update(float time)
 				break;
 
 			case STATE_DESTROYED:
-				DEBUG5("destroyed");
+				DEBUGX("destroyed");
 				setDestroyed(true);
 				time =0;
 				break;
@@ -152,7 +152,7 @@ bool Projectile::update(float time)
 		}
 	}
 
-	DEBUG5("update end");
+	DEBUGX("update end");
 	return true;
 
 }
@@ -269,12 +269,12 @@ void Projectile::handleFlying(float dtime)
 		float p =0.3*dtime / 50;
 		if (p>1)
 			p=1;
-		DEBUG5("p = %f",p);
-		DEBUG5("newdir %f %f",newdir.m_x,newdir.m_y);
+		DEBUGX("p = %f",p);
+		DEBUGX("newdir %f %f",newdir.m_x,newdir.m_y);
 		
 		// Neue Richtung ergibt sich aus Linearkombination von aktueller Richtung und Zielrichtung
 		speed = speed*(1-p) + newdir*p;
-		DEBUG5("new speed %f %f",speed.m_x,speed.m_y);
+		DEBUGX("new speed %f %f",speed.m_x,speed.m_y);
 
 		// neue Richtung normieren
 		speed.normalize();
@@ -293,11 +293,11 @@ void Projectile::handleFlying(float dtime)
 
 	if (m_timer >= m_timer_limit)
 	{
-		DEBUG5("destroyed after timeout");
+		DEBUGX("destroyed after timeout");
 		setState(STATE_DESTROYED);
 	}
 
-	DEBUG5("pos %f %f",pos.m_x, pos.m_y);
+	DEBUGX("pos %f %f",pos.m_x, pos.m_y);
 	
 	// neue Koordinaten nach Ablauf des Zeitquantums
 	newpos = pos + getSpeed()*dtime;
@@ -329,7 +329,7 @@ void Projectile::handleFlying(float dtime)
 
 	if (!hitobj.empty())
 	{
-		DEBUG5("hit object");
+		DEBUGX("hit object");
 		i = hitobj.begin();
 		hit = (*i);
 		
@@ -351,7 +351,7 @@ void Projectile::handleFlying(float dtime)
 		else
 		{
 			// Projektil wird zerstoert
-			DEBUG5("hit obj %i",hit->getId());
+			DEBUGX("hit obj %i",hit->getId());
 			destroy();
 			m_timer=0;
 		}
@@ -373,7 +373,7 @@ void Projectile::handleFlying(float dtime)
 
 		if (hit->isCreature() && bounce)
 		{
-			DEBUG5("bouncing");
+			DEBUGX("bouncing");
 			Vector speed = getSpeed();
 			// Projektil hat ein Lebewesen getroffen, springt weiter
 			setState(STATE_FLYING);
@@ -394,7 +394,7 @@ void Projectile::handleFlying(float dtime)
 			for (i=hitobj.begin();i!=hitobj.end();++i)
 			{
 				// Durchmustern der potentiellen Ziele
-				DEBUG5("testing obj %i, lid %i",(*i)->getId(),lid);
+				DEBUGX("testing obj %i, lid %i",(*i)->getId(),lid);
 
 				// bereits getroffene Objekte ausschliessen
 				if (m_hit_objects_ids.count((*i)->getId()) > 0)
@@ -408,7 +408,7 @@ void Projectile::handleFlying(float dtime)
 				hitpos = (*i)->getShape()->m_center - newpos;
 
 				rnew = sqr(hitpos.m_x)+sqr(hitpos.m_y);
-				DEBUG5("radius %f",rnew);
+				DEBUGX("radius %f",rnew);
 				// Das Objekt herraussuchen, welches den minimalen Abstand aufweist
 				if (rnew < rmin)
 				{
@@ -420,15 +420,15 @@ void Projectile::handleFlying(float dtime)
 			if (hit!=0)
 			{
 				// Es wurde ein Ziel gefunden
-				DEBUG5("next obj %i",hit->getId());
-				DEBUG5("counter %i",m_counter);
+				DEBUGX("next obj %i",hit->getId());
+				DEBUGX("counter %i",m_counter);
 
 				// Neue Richtung ist Vektor von aktueller Position zum neuen Ziel
 				dir = hit->getShape()->m_center - newpos;
 				dir.normalize();
 				setSpeed(dir *v);
 
-				DEBUG5("dir %f %f",dir.m_x,dir.m_y);
+				DEBUGX("dir %f %f",dir.m_x,dir.m_y);
 				m_timer =0;
 
 				// Schaden pro Sprung um 20% reduzieren
@@ -485,14 +485,14 @@ void Projectile::handleGrowing(float dtime)
 
 		// Alle Objekte suchen die sich in dem Kreis befinden
 		getRegion()->getObjectsInShape(getShape(),&hitobj,getLayer(),WorldObject::CREATURE,0);
-		DEBUG5("last hit id = %i",lid);
+		DEBUGX("last hit id = %i",lid);
 		rmin =0;
 
 		// Schaden austeilen
 		for (i=hitobj.begin();i!=hitobj.end();++i)
 		{
 			hit = (*i);
-			DEBUG5("covering obj %i",hit->getId());
+			DEBUGX("covering obj %i",hit->getId());
 
 			// Kein Schaden an nicht feindliche Objekte austeilen
 			if (World::getWorld()->getRelation(getFraction(),hit) != Fraction::HOSTILE)
@@ -659,7 +659,7 @@ void Projectile::doEffect(GameObject* target)
 				i = hitobj.begin();
 				hit = (*i);
 
-				DEBUG5("hit obj %i",hit->getId());
+				DEBUGX("hit obj %i",hit->getId());
 
 				// beim Ziel neues Projektil erzeugen
 				if (World::getWorld()->isServer())
@@ -709,7 +709,7 @@ void Projectile::destroy()
 	else if (m_flags & MULTI_EXPLODES)
 	{
 							// Flag mehrfach explodierend gesetzt
-		DEBUG5("multiexploding");
+		DEBUGX("multiexploding");
 		Vector dir = getSpeed();
 		dir.normalize();
 		dir *= getShape()->m_radius;

@@ -46,7 +46,7 @@ GraphicObject::~GraphicObject()
 		}
 	}
 	*/
-	DEBUG5("destroying %s",m_name.c_str());
+	DEBUGX("destroying %s",m_name.c_str());
 	while (! m_dependencies.empty())
 	{
 		removeMovableObject(m_dependencies.begin()->first);
@@ -135,7 +135,7 @@ Ogre::Node* GraphicObject::getParentNode(std::string name)
 
 void GraphicObject::setQueryMask(unsigned int mask)
 {
-	DEBUG5("setting mask %i to %s",mask,m_name.c_str());
+	DEBUGX("setting mask %i to %s",mask,m_name.c_str());
 	std::map<std::string, AttachedMovableObject>::iterator it;
 	Ogre::Entity* ent;
 	for (it = m_attached_objects.begin(); it != m_attached_objects.end(); ++it)
@@ -158,7 +158,7 @@ void GraphicObject::setQueryMask(unsigned int mask)
 
 void GraphicObject::addMovableObject(MovableObjectInfo& object)
 {
-	DEBUG5("adding object %s type %i",object.m_objectname.c_str(), object.m_type);
+	DEBUGX("adding object %s type %i",object.m_objectname.c_str(), object.m_type);
 	
 	// Meshname und Knochen an den angefuegt wird
 	std::string bone;
@@ -243,7 +243,7 @@ void GraphicObject::addMovableObject(MovableObjectInfo& object)
 		}
 		attchobj.m_tagpoint = tag;
 		m_subobjects[object.m_objectname] = attchobj;
-		DEBUG5("adding subobject %p with name %s", m_subobjects[object.m_objectname].m_object,  object.m_objectname.c_str());
+		DEBUGX("adding subobject %p with name %s", m_subobjects[object.m_objectname].m_object,  object.m_objectname.c_str());
 	}
 	else if (object.m_type == MovableObjectInfo::SOUNDOBJECT)
 	{
@@ -262,7 +262,7 @@ void GraphicObject::addMovableObject(MovableObjectInfo& object)
 		SoundObject* obj = SoundSystem::createSoundObject(name);
 		
 		m_soundobjects[object.m_objectname] = obj;
-		DEBUG5("adding soundobject with name %s (%s)",object.m_objectname.c_str(),name.c_str());
+		DEBUGX("adding soundobject with name %s (%s)",object.m_objectname.c_str(),name.c_str());
 	}
 	else 
 	{
@@ -306,7 +306,7 @@ void GraphicObject::addMovableObject(MovableObjectInfo& object)
 		{
 			// Anfuegen an TopKnoten
 			getTopNode()->addChild(node);
-			DEBUG5("node %p parent %p",node,m_top_node );
+			DEBUGX("node %p parent %p",node,m_top_node );
 			m_attached_objects[object.m_objectname].m_tag_trackpoint = 0;
 		}
 		else
@@ -350,7 +350,7 @@ void GraphicObject::addMovableObject(MovableObjectInfo& object)
 		m_attached_objects[object.m_objectname].m_entity = ent;
 		m_attached_objects[object.m_objectname].m_highlight_entity = 0;
 		
-		DEBUG5("adding movable object with name %s (%s)",object.m_objectname.c_str(),obj->getName().c_str());
+		DEBUGX("adding movable object with name %s (%s)",object.m_objectname.c_str(),obj->getName().c_str());
 	}
 	
 	// StartPosition und -Rotation setzen
@@ -363,7 +363,7 @@ void GraphicObject::addMovableObject(MovableObjectInfo& object)
 		node->roll(Ogre::Degree(object.m_rotation[2]));
 		node->setScale(Ogre::Vector3(object.m_scale, object.m_scale, object.m_scale));
 		
-		DEBUG5("object %s scale %f",object.m_objectname.c_str(), node->_getDerivedScale().x);
+		DEBUGX("object %s scale %f",object.m_objectname.c_str(), node->_getDerivedScale().x);
 	}
 	
 	// Abhaengigkeiten eintragen
@@ -378,10 +378,10 @@ void GraphicObject::addMovableObject(MovableObjectInfo& object)
 
 void GraphicObject::removeMovableObject(std::string name)
 {
-	DEBUG5("removing object %s",name.c_str());
+	DEBUGX("removing object %s",name.c_str());
 	while (! m_dependencies[name].m_children.empty())
 	{
-		DEBUG5("recursion");
+		DEBUGX("recursion");
 		removeMovableObject(*(m_dependencies[name].m_children.begin()));
 	}
 	
@@ -412,7 +412,7 @@ void GraphicObject::removeMovableObject(std::string name)
 		tag = it->second.m_tagpoint;	
 		if (tag !=0 && it->second.m_entity!=0)
 		{
-			DEBUG5("tag %p parent %p",tag, it->second.m_entity);
+			DEBUGX("tag %p parent %p",tag, it->second.m_entity);
 			it->second.m_entity->getSkeleton()->freeTagPoint(tag);
 		}
 		
@@ -430,7 +430,7 @@ void GraphicObject::removeMovableObject(std::string name)
 	{
 		SoundSystem::deleteSoundObject(m_soundobjects[name]);
 		m_soundobjects.erase(name);
-		DEBUG5("removing Soundobject %s",name.c_str());
+		DEBUGX("removing Soundobject %s",name.c_str());
 	}
 	else
 	{
@@ -447,7 +447,7 @@ void GraphicObject::removeMovableObject(std::string name)
 			
 			if (tag !=0 && jt->second.m_entity!=0)
 			{
-				DEBUG5("tag %p parent %p",tag, jt->second.m_entity);
+				DEBUGX("tag %p parent %p",tag, jt->second.m_entity);
 				jt->second.m_entity->getSkeleton()->freeTagPoint(tag);
 			}
 			GraphicManager::destroyGraphicObject(obj);
@@ -464,7 +464,7 @@ void GraphicObject::removeMovableObject(std::string name)
 	
 	if (m_dependencies[name].m_parent != "")
 	{
-		DEBUG5("removing dependency %s -> %s",m_dependencies[name].m_parent.c_str(), name.c_str());
+		DEBUGX("removing dependency %s -> %s",m_dependencies[name].m_parent.c_str(), name.c_str());
 		m_dependencies[m_dependencies[name].m_parent].m_children.erase(name);
 	}
 	m_dependencies.erase(name);
@@ -493,7 +493,7 @@ void GraphicObject::initAttachedAction(AttachedAction& attchaction, std::string 
 	if (attchaction.m_arinfo !=0)
 	{
 		attchaction.m_time = attchaction.m_arinfo->m_time;
-		DEBUG5("action %s  time %f",action.c_str(), attchaction.m_time);
+		DEBUGX("action %s  time %f",action.c_str(), attchaction.m_time);
 	}
 }
 
@@ -512,7 +512,7 @@ void GraphicObject::updateAction(std::string action, float percent, int random_a
 		m_own_random_number = true;
 	}
 	
-	DEBUG5("update %s action %s %f",m_name.c_str(),action.c_str(),percent);
+	DEBUGX("update %s action %s %f",m_name.c_str(),action.c_str(),percent);
 	updateAttachedAction(m_action,action,percent);
 	
 	// weitergeben der Animation
@@ -544,7 +544,7 @@ void GraphicObject::updateAttachedAction(AttachedAction& attchaction, std::strin
 		initAttachedAction(attchaction,action);
 	}
 	
-	DEBUG5("update action %s %f -> %f in %s", action.c_str(), attchaction.m_current_percent, percent,m_name.c_str());
+	DEBUGX("update action %s %f -> %f in %s", action.c_str(), attchaction.m_current_percent, percent,m_name.c_str());
 	
 	// Suche nach neu dazu gekommenen Aktionen
 	ActionRenderInfo* arinfo;
@@ -555,12 +555,12 @@ void GraphicObject::updateAttachedAction(AttachedAction& attchaction, std::strin
 		std::list< ActionRenderpart >::iterator it;
 		for (it = arinfo->m_renderparts.begin(); it != arinfo->m_renderparts.end(); ++it)
 		{
-			DEBUG5("render part %s",it->m_animation.c_str());
+			DEBUGX("render part %s",it->m_animation.c_str());
 			if (attchaction.m_current_percent < it->m_start_time && percent >= it->m_start_time)
 			{
 				if (attchaction.m_inherited == false || m_render_info->checkActionInheritMask(it->m_type))
 				{
-					DEBUG5("action %s: adding part %s",action.c_str(), it->m_animation.c_str());
+					DEBUGX("action %s: adding part %s",action.c_str(), it->m_animation.c_str());
 				
 					addActiveRenderPart(&(*it));
 					if (it ->m_type != ActionRenderpart::DETACH && it ->m_type != ActionRenderpart::VISIBILITY)
@@ -580,7 +580,7 @@ void GraphicObject::updateAttachedAction(AttachedAction& attchaction, std::strin
 			{
 				if (attchaction.m_current_percent < mt->first && percent >= mt->first)
 				{
-					DEBUG5("adding object %s",mt->second.m_objectname.c_str());
+					DEBUGX("adding object %s",mt->second.m_objectname.c_str());
 					addMovableObject(mt->second);
 				}
 			}
@@ -607,7 +607,7 @@ void GraphicObject::updateAttachedAction(AttachedAction& attchaction, std::strin
 	}
 	else if (action!= "")
 	{
-		DEBUG5("no action render information for %s",action.c_str());
+		DEBUGX("no action render information for %s",action.c_str());
 	}
 	
 	attchaction.m_current_percent = percent;
@@ -631,7 +631,7 @@ void GraphicObject::updateState(std::string state, bool active)
 		
 		if (it == m_attached_states.end() || it->second.m_type == AttachedState::DEACTIVATE)
 		{
-			DEBUG5("activated state %s",state.c_str());
+			DEBUGX("activated state %s",state.c_str());
 			// Status aktuell noch nicht gesetzt
 			AttachedState& astate  = m_attached_states[state];
 			astate.m_type = AttachedState::ACTIVATE;
@@ -647,7 +647,7 @@ void GraphicObject::updateState(std::string state, bool active)
 		if (it->second.m_type != AttachedState::DEACTIVATE)
 		{
 			
-			DEBUG5("deactivated state %s",state.c_str());
+			DEBUGX("deactivated state %s",state.c_str());
 			// Status ist intern noch aktiv
 			// aktuelle Aktion beenden
 			prefix = "deactivate:";
@@ -753,7 +753,7 @@ void GraphicObject::update(float time)
 			if (it->second.m_type == AttachedState::DEACTIVATE)
 			{
 				// Deaktivierung abgeschlossen
-				DEBUG5("deleting attached action %s",it->first.c_str());
+				DEBUGX("deleting attached action %s",it->first.c_str());
 				updateAttachedAction(*attch,act,1.0);
 				m_attached_states.erase(it++);
 				continue;
@@ -773,7 +773,7 @@ void GraphicObject::update(float time)
 				}
 			}
 		}
-		DEBUG5("time %f  abstime %f percent %f  type %i",time,abstime,abstime/attch->m_time,it->second.m_type) ;
+		DEBUGX("time %f  abstime %f percent %f  type %i",time,abstime,abstime/attch->m_time,it->second.m_type) ;
 		
 		updateAttachedAction(*attch,act,abstime/attch->m_time);
 		++it;
@@ -797,7 +797,7 @@ void GraphicObject::update(float time)
 			gt->second.m_tag_trackpoint->setOrientation(dir);
 			gt->second.m_tag_trackpoint->setScale(scal);
 			
-			DEBUG5("attch position %s   %f %f %f",obj->getName().c_str(), pos.x, pos.y,pos.z);
+			DEBUGX("attch position %s   %f %f %f",obj->getName().c_str(), pos.x, pos.y,pos.z);
 		}
 		
 		obj->update(time);
@@ -829,7 +829,7 @@ void GraphicObject::update(float time)
 	{
 		st->second->setPosition(pos);
 		st->second->update();
-		DEBUG5("setting sound %s position to %f %f",st->first.c_str(),pos.m_x, pos.m_y);
+		DEBUGX("setting sound %s position to %f %f",st->first.c_str(),pos.m_x, pos.m_y);
 	}
 }
 
@@ -882,14 +882,14 @@ void GraphicObject::addActiveRenderPart(ActionRenderpart* part)
 		if (it != m_soundobjects.end())
 		{
 			it->second->setSound(part->m_animation);
-			DEBUG5("setting sound object %s to sound %s",it->first.c_str(), part->m_animation.c_str());
+			DEBUGX("setting sound object %s to sound %s",it->first.c_str(), part->m_animation.c_str());
 		}
 	}
 }
 
 void GraphicObject::removeActiveRenderPart(ActionRenderpart* part)
 {
-	DEBUG5("removing part %s",part->m_animation.c_str());
+	DEBUGX("removing part %s",part->m_animation.c_str());
 	if (part->m_type == ActionRenderpart::ANIMATION)
 	{
 		// Animation deaktivieren
@@ -948,7 +948,7 @@ void GraphicObject::removeActiveRenderPart(ActionRenderpart* part)
 
 void GraphicObject::updateRenderPart(ActionRenderpart* part,float  relpercent)
 {
-	DEBUG5("updating part %s to %f",part->m_animation.c_str(),relpercent);
+	DEBUGX("updating part %s to %f",part->m_animation.c_str(),relpercent);
 	if (part->m_type == ActionRenderpart::ANIMATION)
 	{
 		Ogre::Entity* ent = getEntity(part->m_objectname);
@@ -956,7 +956,7 @@ void GraphicObject::updateRenderPart(ActionRenderpart* part,float  relpercent)
 		
 		if (ent != 0)
 		{
-			DEBUG5("anim %s perc %f",part->m_animation.c_str(), relpercent);
+			DEBUGX("anim %s perc %f",part->m_animation.c_str(), relpercent);
 			Ogre::AnimationState* anim;
 			Ogre::AnimationStateSet* anim_set;
 			
@@ -991,7 +991,7 @@ void GraphicObject::updateRenderPart(ActionRenderpart* part,float  relpercent)
 		{
 			float scal = part->m_start_val + relpercent*(part->m_end_val - part->m_start_val);
 			node->setScale(Ogre::Vector3(scal,scal,scal));
-			DEBUG5("Scale Node %p %f",node,scal);
+			DEBUGX("Scale Node %p %f",node,scal);
 		}
 	}
 	else if (part->m_type == ActionRenderpart::MOVEMENT || part->m_type == ActionRenderpart::ROTATION)
@@ -1000,8 +1000,8 @@ void GraphicObject::updateRenderPart(ActionRenderpart* part,float  relpercent)
 		if (node != 0)
 		{
 			Ogre::Vector3 pos = part->m_start_vec + relpercent*(part->m_end_vec - part->m_start_vec);
-			DEBUG5("start %f %f %f   end %f %f %f",part->m_start_vec[0],part->m_start_vec[1],part->m_start_vec[2],part->m_end_vec[0],part->m_end_vec[1],part->m_end_vec[2]);
-			DEBUG5("Movement %f %f %f relpercent %f",pos[0], pos[1],pos[2],relpercent);
+			DEBUGX("start %f %f %f   end %f %f %f",part->m_start_vec[0],part->m_start_vec[1],part->m_start_vec[2],part->m_end_vec[0],part->m_end_vec[1],part->m_end_vec[2]);
+			DEBUGX("Movement %f %f %f relpercent %f",pos[0], pos[1],pos[2],relpercent);
 			if (part->m_type == ActionRenderpart::MOVEMENT)
 			{
 				node->setPosition(pos*50);

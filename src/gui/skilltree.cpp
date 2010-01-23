@@ -5,7 +5,7 @@
 SkillTree::SkillTree(Document* doc, OIS::Keyboard *keyboard)
 	:Window(doc)
 {
-	DEBUG4("setup skilltree");
+	DEBUGX("setup skilltree");
 	m_keyboard = keyboard;
 	
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
@@ -50,7 +50,7 @@ void SkillTree::update()
 	if (player->getId() != m_player_id)
 	{
 		m_player_id = player->getId();
-		DEBUG5("new Player id %i",m_player_id);
+		DEBUGX("new Player id %i",m_player_id);
 		
 		// alle bisherigen Tabs und Skills entfernen
 		
@@ -98,14 +98,14 @@ void SkillTree::update()
 		std::string name,lname,bname;
 		Vector spos;
 		
-		DEBUG5("nr of abilities %i", player->getLearnableAbilities().size());
+		DEBUGX("nr of abilities %i", player->getLearnableAbilities().size());
 		
 		std::map<int,LearnableAbility>::iterator it;
 		int cnt =0;
 		for (it = player->getLearnableAbilities().begin(); it != player->getLearnableAbilities().end(); ++it)
 		{
 			// Label mit dem Bild
-			DEBUG5("ability %s nr %i",it->second.m_type.c_str(),cnt);
+			DEBUGX("ability %s nr %i",it->second.m_type.c_str(),cnt);
 			stream.str("");
 			stream << "SkillImage"<<cnt;
 			label = win_mgr.createWindow("TaharezLook/StaticImage", stream.str());
@@ -216,7 +216,7 @@ void SkillTree::update()
 		if (it->second < Document::USE_SKILL_LEFT || it->second >Document::USE_SKILL_RIGHT+200)
 			continue;
 		
-		DEBUG5("shortkey %i to %i",it->first,it->second);
+		DEBUGX("shortkey %i to %i",it->first,it->second);
 		key = it->first;
 		
 		right = false;
@@ -350,7 +350,7 @@ void SkillTree::updateAbilityTooltip(unsigned int pos)
 	std::map<int,LearnableAbility> &ablts = player->getLearnableAbilities();
 	
 	
-	DEBUG5("update tooltip for %i %s", pos, ablts[pos].m_type.c_str());
+	DEBUGX("update tooltip for %i %s", pos, ablts[pos].m_type.c_str());
 
 		CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 		CEGUI::Window* label;
@@ -384,7 +384,7 @@ bool SkillTree::onSkillMouseClicked(const CEGUI::EventArgs& evt)
 
 	if (we.button == CEGUI::RightButton)
 	{
-		DEBUG5("right button pressed on skill %i",id);
+		DEBUGX("right button pressed on skill %i",id);
 		m_document->setRightAction(ablts[id].m_type);
 	}
 	
@@ -416,7 +416,7 @@ bool SkillTree::onAbilityHover(const CEGUI::EventArgs& evt)
 	const CEGUI::MouseEventArgs& we =
 			static_cast<const CEGUI::MouseEventArgs&>(evt);
 	unsigned int id = we.window->getID();
-	DEBUG5("mouse entered Ability %i",id);
+	DEBUGX("mouse entered Ability %i",id);
 	updateAbilityTooltip(id);
 	m_document->getGUIState()->m_hover_ability = ablts[id].m_type;
 	

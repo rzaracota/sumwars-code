@@ -13,7 +13,7 @@ MinimapWindow::MinimapWindow (Document* doc)
 {
 	m_region_id = -1;
 		
-	DEBUG4("setup main menu");
+	DEBUGX("setup main menu");
 	// GUI Elemente erzeugen
 
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
@@ -155,7 +155,7 @@ void MinimapWindow::update()
 			rely =pl->getShape()->m_center.m_y/ region->getDimY()/4 - 0.015;
 		}
 		
-		DEBUG5("relx %f  rely %f",relx,rely);
+		DEBUGX("relx %f  rely %f",relx,rely);
 		
 		label->setPosition(CEGUI::UVector2(cegui_reldim(relx), cegui_reldim(rely)));
 		label->setVisible(true);
