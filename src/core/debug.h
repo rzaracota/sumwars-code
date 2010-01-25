@@ -35,7 +35,7 @@
  */
 #define LOGGER( loglevel,format, ... ) \
 	do { \
-		char _format_[500] = "%s:%i %s > "; char _message_[500]; int _position_; \
+		char _format_[500] = "%s:%i %s > "; char _message_[500];  \
 		strcat(_format_,format); \
 		sprintf( _message_, _format_,__FILE__,__LINE__,__FUNCTION__ ,##__VA_ARGS__); \
 		LogManager::instance().writeMessage(_message_,loglevel); \

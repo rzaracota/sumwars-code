@@ -178,6 +178,7 @@ void GameObject::writeNetEvent(NetEvent* event, CharConv* cv)
 		}
 		cv->toBuffer((char) m_layer);
 		cv->toBuffer(m_shape.m_angle);
+		cv->toBuffer<float>(m_height);
 	}
 	
 	/*
@@ -225,6 +226,7 @@ void GameObject::processNetEvent(NetEvent* event, CharConv* cv)
 		cv->fromBuffer<char>(ctmp);
 		m_layer  = (Layer) ctmp;
 		cv->fromBuffer<float>(m_shape.m_angle);
+		cv->fromBuffer<float>(m_height);
 	}
 	
 	/*
@@ -282,6 +284,11 @@ int GameObject::getValue(std::string valname)
 	else if (valname == "angle")
 	{
 		lua_pushnumber(EventSystem::getLuaState() , getShape()->m_angle *180/3.14159);
+		return 1;
+	}
+	else if (valname == "height")
+	{
+		lua_pushnumber(EventSystem::getLuaState() , m_height);
 		return 1;
 	}
 	else if (valname == "position")
@@ -342,6 +349,14 @@ bool GameObject::setValue(std::string valname)
 		addToNetEventMask(NetEvent::DATA_SHAPE);
 		
 		setAngle(angle);
+		
+		return true;
+	}
+	if (valname == "height")
+	{
+		m_height = lua_tonumber(EventSystem::getLuaState() ,-1);
+		lua_pop(EventSystem::getLuaState(), 1);
+		addToNetEventMask(NetEvent::DATA_SHAPE);
 		
 		return true;
 	}
