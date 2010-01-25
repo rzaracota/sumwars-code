@@ -121,6 +121,8 @@
 		<Unit filename="core\itemlist.h" />
 		<Unit filename="core\itemloader.cpp" />
 		<Unit filename="core\itemloader.h" />
+		<Unit filename="core\logger.cpp" />
+		<Unit filename="core\logger.h" />
 		<Unit filename="core\mapgenerator.cpp" />
 		<Unit filename="core\mapgenerator.h" />
 		<Unit filename="core\matrix2d.h" />

@@ -1,10 +1,10 @@
-<Quest name="Der Hinterhalt der Untoten" table_name="theFissure">
+<Quest name="Der Hinterhalt der Untoten" table_name="fissure">
 	
 	<Init>
 	</Init>
 	
 	<Description>
-		if (theFissure.finished) then
+		if (fissure.finished) then
 			return _("Die gute Nachricht: Durch diesen Tunnel kommt niemand mehr. Die schlechte: Den Rückweg hat es auch verschuettet. Hoffentlich gibt es noch einen anderen Ausgang.")
 		else
 			return _("Die Untoten haben einen Weg unter der Grauen Himmelsleiter gefunden, auf dem sie Zwergentrutz umgehen koennen. Da dies das Königreich Aisen direkt bedroht, muss der Zugang schnellstmoeglich verschlossen werden. Der Durchgang in den Verfluchten Hoelen muss gefunden und mit dem Sprengzauber ireana von Nordenburgs zerstoert werden.")
@@ -14,58 +14,58 @@
 	<Region name="aisMounPath">
 		<Event trigger="create_region" once="true">
 			<Condition>
-				if(theFissure.rescuedIreana~=true)then
+				if(fissure.rescuedIreana~=true)then
 					return true;
 				else
 					return false;
 				end;
 			</Condition>
 			<Effect>
-				theFissure_tmp.guard1 = createObject("guard", "locGuard1");
-				setRefName(theFissure_tmp.guard1, "Elementaristenwaechter1");
-				setObjectValue(theFissure_tmp.guard1,"max_health",1000);
-				setObjectValue(theFissure_tmp.guard1,"health",100);
+				fissure_tmp.guard1 = createObject("guard", "locGuard1");
+				setRefName(fissure_tmp.guard1, "Elementaristenwaechter1");
+				setObjectValue(fissure_tmp.guard1,"max_health",1000);
+				setObjectValue(fissure_tmp.guard1,"health",100);
 				
-				theFissure_tmp.guard2 = createObject("guard", "locGuard2");
-				setRefName(theFissure_tmp.guard2, "Elementaristenwaechter2");
-				
-				
-				theFissure_tmp.guard3 = createObject("guard", "locGuard3");
-				setRefName(theFissure_tmp.guard3, "Elementaristenwaechter3");
-				
-				theFissure_tmp.guard4 = createObject("guard", "locGuard4");
-				setRefName(theFissure_tmp.guard4, "Elementaristenwaechter4");
+				fissure_tmp.guard2 = createObject("guard", "locGuard2");
+				setRefName(fissure_tmp.guard2, "Elementaristenwaechter2");
 				
 				
-				theFissure_tmp.dead_guard1 = createObject("guard", "locDeadGuard1");
-				setRefName(theFissure_tmp.dead_guard1, "Guard");
-				setObjectValue(theFissure_tmp.dead_guard1,"health",0);
+				fissure_tmp.guard3 = createObject("guard", "locGuard3");
+				setRefName(fissure_tmp.guard3, "Elementaristenwaechter3");
 				
-				theFissure_tmp.dead_guard2 = createObject("guard", "locDeadGuard2");
-				setRefName(theFissure_tmp.dead_guard2, "Guard");
-				setObjectValue(theFissure_tmp.dead_guard2,"health",0);
+				fissure_tmp.guard4 = createObject("guard", "locGuard4");
+				setRefName(fissure_tmp.guard4, "Elementaristenwaechter4");
 				
 				
-				theFissure_tmp.ireana = createObject("ireana", "locIreana");
-				setRefName(theFissure_tmp.ireana, "Erzmaga Ireana von Nordenburg");
-				setObjectValue(theFissure_tmp.ireana,"max_health",10000);
-				setObjectValue(theFissure_tmp.ireana,"health",3000);
-				set(theFissure_tmp.ireana,"ai_state","inactive");
-				setObjectAnimation(theFissure_tmp.ireana,"lie",1000,true);
+				fissure_tmp.dead_guard1 = createObject("guard", "locDeadGuard1");
+				setRefName(fissure_tmp.dead_guard1, "Guard");
+				setObjectValue(fissure_tmp.dead_guard1,"health",0);
 				
-				theFissure_tmp.captain = createObject("guard", "locCaptain");
-				setRefName(theFissure_tmp.captain, "Guardcaptain");
-				setObjectValue(theFissure_tmp.captain,"max_health",10000);
-				setObjectValue(theFissure_tmp.captain,"health",9000);
-				addUnitCommand(theFissure_tmp.captain,"guard",theFissure_tmp.ireana,10,"secondary");
+				fissure_tmp.dead_guard2 = createObject("guard", "locDeadGuard2");
+				setRefName(fissure_tmp.dead_guard2, "Guard");
+				setObjectValue(fissure_tmp.dead_guard2,"health",0);
 				
-				theFissure_tmp.tolec = createObject("tolec", "locTolec");
-				setRefName(theFissure_tmp.tolec, "Tolec");
-				addUnitCommand(theFissure_tmp.tolec,"guard",theFissure_tmp.ireana,10,"secondary");
+				
+				fissure_tmp.ireana = createObject("ireana", "locIreana");
+				setRefName(fissure_tmp.ireana, "Erzmaga Ireana von Nordenburg");
+				setObjectValue(fissure_tmp.ireana,"max_health",10000);
+				setObjectValue(fissure_tmp.ireana,"health",3000);
+				set(fissure_tmp.ireana,"ai_state","inactive");
+				setObjectAnimation(fissure_tmp.ireana,"lie",1000,true);
+				
+				fissure_tmp.captain = createObject("guard", "locCaptain");
+				setRefName(fissure_tmp.captain, "Guardcaptain");
+				setObjectValue(fissure_tmp.captain,"max_health",10000);
+				setObjectValue(fissure_tmp.captain,"health",9000);
+				addUnitCommand(fissure_tmp.captain,"guard",fissure_tmp.ireana,10,"secondary");
+				
+				fissure_tmp.tolec = createObject("tolec", "locTolec");
+				setRefName(fissure_tmp.tolec, "Tolec");
+				addUnitCommand(fissure_tmp.tolec,"guard",fissure_tmp.ireana,10,"secondary");
 					
-				theFissure_tmp.derred = createObject("derred", "locDerred");
-				setRefName(theFissure_tmp.derred, "Derred");
-				addUnitCommand(theFissure_tmp.derred,"guard",theFissure_tmp.ireana,10,"secondary");
+				fissure_tmp.derred = createObject("derred", "locDerred");
+				setRefName(fissure_tmp.derred, "Derred");
+				addUnitCommand(fissure_tmp.derred,"guard",fissure_tmp.ireana,10,"secondary");
 			</Effect>
 		</Event>
 
@@ -80,61 +80,61 @@
 		
 		<Event trigger="player_moved" once="true">
 			<Condition>
-				if (ambush.started == true and theFissure.rescuedIreana ~= true) then
+				if (ambush.started == true and fissure.rescuedIreana ~= true) then
 					return (unitIsInArea(trigger.player,"areaHelpIreana"));
 				else
 					return false;
 				end;
 			</Condition>
 			<Effect>
-				theFissure_tmp.skeletons={};
+				fissure_tmp.skeletons={};
 				for nr=1,8 do
-					theFissure_tmp.skeletons[nr] = createObject("fire_skel","locSkeleton"..nr);
+					fissure_tmp.skeletons[nr] = createObject("fire_skel","locSkeleton"..nr);
 				end;
-				theFissure_tmp.skeletons_nr =9;
+				fissure_tmp.skeletons_nr =9;
 				
 				setCutsceneMode(true);
 				
-				timedExecute('addUnitCommand(theFissure_tmp.skeletons[1], "fire_shot", theFissure_tmp.guard2,0,"repeat")',400);
-				timedExecute('addUnitCommand(theFissure_tmp.skeletons[2], "fire_shot", theFissure_tmp.guard2,0,"repeat")',350);
-				timedExecute('addUnitCommand(theFissure_tmp.skeletons[3], "fire_shot", theFissure_tmp.guard4,0,"repeat")',100);
-				timedExecute('addUnitCommand(theFissure_tmp.skeletons[4], "fire_shot", theFissure_tmp.captain,0,"repeat")',75);
-				timedExecute('addUnitCommand(theFissure_tmp.skeletons[5], "fire_shot", theFissure_tmp.ireana,0,"repeat")', 800);
-				timedExecute('addUnitCommand(theFissure_tmp.skeletons[6], "fire_shot", theFissure_tmp.guard1,0,"repeat")', 650);
-				timedExecute('addUnitCommand(theFissure_tmp.skeletons[7], "fire_shot", theFissure_tmp.guard1,0,"repeat")',523);
-				timedExecute('addUnitCommand(theFissure_tmp.skeletons[8], "fire_shot", theFissure_tmp.guard3,0,"repeat")', 250);
+				timedExecute('addUnitCommand(fissure_tmp.skeletons[1], "fire_shot", fissure_tmp.guard2,0,"repeat")',400);
+				timedExecute('addUnitCommand(fissure_tmp.skeletons[2], "fire_shot", fissure_tmp.guard2,0,"repeat")',350);
+				timedExecute('addUnitCommand(fissure_tmp.skeletons[3], "fire_shot", fissure_tmp.guard4,0,"repeat")',100);
+				timedExecute('addUnitCommand(fissure_tmp.skeletons[4], "fire_shot", fissure_tmp.captain,0,"repeat")',75);
+				timedExecute('addUnitCommand(fissure_tmp.skeletons[5], "fire_shot", fissure_tmp.ireana,0,"repeat")', 800);
+				timedExecute('addUnitCommand(fissure_tmp.skeletons[6], "fire_shot", fissure_tmp.guard1,0,"repeat")', 650);
+				timedExecute('addUnitCommand(fissure_tmp.skeletons[7], "fire_shot", fissure_tmp.guard1,0,"repeat")',523);
+				timedExecute('addUnitCommand(fissure_tmp.skeletons[8], "fire_shot", fissure_tmp.guard3,0,"repeat")', 250);
 				
-				lookAtObject(theFissure_tmp.guard1, theFissure_tmp.skeletons[6]);
-				lookAtObject(theFissure_tmp.guard2, theFissure_tmp.skeletons[2]);
-				lookAtObject(theFissure_tmp.guard3, theFissure_tmp.skeletons[8]);
-				lookAtObject(theFissure_tmp.guard4, theFissure_tmp.skeletons[3]);
-				lookAtObject(theFissure_tmp.ireana, theFissure_tmp.captain);
-				lookAtObject(theFissure_tmp.captain, theFissure_tmp.ireana);
+				lookAtObject(fissure_tmp.guard1, fissure_tmp.skeletons[6]);
+				lookAtObject(fissure_tmp.guard2, fissure_tmp.skeletons[2]);
+				lookAtObject(fissure_tmp.guard3, fissure_tmp.skeletons[8]);
+				lookAtObject(fissure_tmp.guard4, fissure_tmp.skeletons[3]);
+				lookAtObject(fissure_tmp.ireana, fissure_tmp.captain);
+				lookAtObject(fissure_tmp.captain, fissure_tmp.ireana);
 				
 				addCameraPosition(0,get(getPartyleader(),"position"),-50,40,20);
-				addCameraPosition(5000,get(theFissure_tmp.ireana,"position"),-50,40,20);
+				addCameraPosition(5000,get(fissure_tmp.ireana,"position"),-50,40,20);
 				--TODO timer wieder auf 10000
-				startTimer('theFissure_dialogue1',1000);
+				startTimer('fissure_dialogue1',1000);
 			</Effect>
 		</Event>
 		
 		<Topic name="insertion_guard_dies">
 			<Effect>
 				unitSpeak("W1",_("*urgh*"));
-				setObjectValue(theFissure_tmp.guard1,"health",0);
+				setObjectValue(fissure_tmp.guard1,"health",0);
 			</Effect>
 		</Topic>
 		
-		<Event trigger="theFissure_dialogue1">
+		<Event trigger="fissure_dialogue1">
 			<Effect>
 				assembleParty("aisMounPath","locPartyEntry");
-				theFissure_tmp.beforeBattle = true;
+				fissure_tmp.beforeBattle = true;
 			</Effect>
 		</Event>
 		
 		<Event trigger="party_complete">
 			<Condition>
-				return(theFissure_tmp.beforeBattle == true);
+				return(fissure_tmp.beforeBattle == true);
 			</Condition>
 			<Effect>
 				addCameraPosition(1000,get(getPartyleader(),"position"),-50,40,20);
@@ -142,17 +142,17 @@
 				-- ist verunglueckt, mehrere Skelettbogenschuetzen beschießen sie mit
 				-- Feuerpfeilen und die Wachen sind allesamt verwundet.
 				
-				playersLookAt(getPosition(theFissure_tmp.ireana));
-				lookAtObject(theFissure_tmp.guard1, getPartyleader());
+				playersLookAt(getPosition(fissure_tmp.ireana));
+				lookAtObject(fissure_tmp.guard1, getPartyleader());
 
 				createDialogue();
 				addAllPlayersToDialog();
 				
-				addSpeaker(theFissure_tmp.guard1,"W1");
-				addSpeaker(theFissure_tmp.soren_windclaw_crystal,"SW");
-				addSpeaker(theFissure_tmp.ireana,"IvN");
-				addSpeaker(theFissure_tmp.captain,"HW");
-				addSpeaker(theFissure_tmp.guard2,"EW");
+				addSpeaker(fissure_tmp.guard1,"W1");
+				addSpeaker(fissure_tmp.soren_windclaw_crystal,"SW");
+				addSpeaker(fissure_tmp.ireana,"IvN");
+				addSpeaker(fissure_tmp.captain,"HW");
+				addSpeaker(fissure_tmp.guard2,"EW");
 				addStandardRoles();
 				
 				speakPause(2000);
@@ -173,19 +173,19 @@
 				-- Sie kaempfen. Die Untoten warten mit einer etwas unschoenen
 				-- ueberraschung auf (starkes Monster) werden aber sicherlich bald
 				-- besiegt ;-)
-				executeInDialog('insertTrigger("end_cuttheFissure_fight")');
+				executeInDialog('insertTrigger("end_cutfissure_fight")');
 			</Effect>
 		</Event> 
 		
-		<Event trigger="end_cuttheFissure_fight">
+		<Event trigger="end_cutfissure_fight">
 			<Effect>
 				setCutsceneMode(false);
 				
 				for nr=1,8 do
-					clearUnitCommands(theFissure_tmp.skeletons[nr]);
+					clearUnitCommands(fissure_tmp.skeletons[nr]);
 				end;
 				startTimer("undeadReinforcements",5000);
-				--set(theFissure_tmp.captain,"state","inactive");
+				--set(fissure_tmp.captain,"state","inactive");
 			</Effect>
 		</Event>
 		
@@ -194,18 +194,18 @@
 				local i,skel;
 				for i=1,2 do
 					skel = createObject("sword_skel","entry_north");
-					addUnitCommand(skel,"attack",theFissure_tmp.ireana,nil,"secondary");
-					theFissure_tmp.skeletons_nr = theFissure_tmp.skeletons_nr + 1;
+					addUnitCommand(skel,"attack",fissure_tmp.ireana,nil,"secondary");
+					fissure_tmp.skeletons_nr = fissure_tmp.skeletons_nr + 1;
 				end;
 				for i=1,2 do
 					skel = createObject("axe_skel","entry_north");
-					addUnitCommand(skel,"attack",theFissure_tmp.ireana,nil,"secondary");
-					theFissure_tmp.skeletons_nr = theFissure_tmp.skeletons_nr + 1;
+					addUnitCommand(skel,"attack",fissure_tmp.ireana,nil,"secondary");
+					fissure_tmp.skeletons_nr = fissure_tmp.skeletons_nr + 1;
 				end;
 				for i=1,2 do
 					skel = createObject("bow_skel","entry_north");
-					addUnitCommand(skel,"attack",theFissure_tmp.ireana,nil,"secondary");
-					theFissure_tmp.skeletons_nr = theFissure_tmp.skeletons_nr + 1;
+					addUnitCommand(skel,"attack",fissure_tmp.ireana,nil,"secondary");
+					fissure_tmp.skeletons_nr = fissure_tmp.skeletons_nr + 1;
 				end;
 				startTimer("undeadMonster", 4000);
 			</Effect>
@@ -214,7 +214,7 @@
 		<Event trigger="undeadMonster" once="true">
 			<Effect>
 				local skel = createObject("reaper_skel","entry_north");
-				addUnitCommand(skel,"attack",theFissure_tmp.ireana,nil,"secondary");
+				addUnitCommand(skel,"attack",fissure_tmp.ireana,nil,"secondary");
 			</Effect>
 		</Event>
 		
@@ -227,23 +227,23 @@
 				return false;
 			</Condition>
 			<Effect>
-				theFissure_tmp.skeletons_nr = theFissure_tmp.skeletons_nr -1;
-				if (theFissure_tmp.skeletons_nr == 0) then
+				fissure_tmp.skeletons_nr = fissure_tmp.skeletons_nr -1;
+				if (fissure_tmp.skeletons_nr == 0) then
 				
-					if (isCreature(theFissure_tmp.guard2)) then
-						addUnitCommand(theFissure_tmp.guard2, "walk", "locGuard2")
+					if (isCreature(fissure_tmp.guard2)) then
+						addUnitCommand(fissure_tmp.guard2, "walk", "locGuard2")
 					end;
-					if (isCreature(theFissure_tmp.guard3)) then
-						addUnitCommand(theFissure_tmp.guard3, "walk", "locGuard3")
+					if (isCreature(fissure_tmp.guard3)) then
+						addUnitCommand(fissure_tmp.guard3, "walk", "locGuard3")
 					end;
-					if (isCreature(theFissure_tmp.guard4)) then
-						addUnitCommand(theFissure_tmp.guard4, "walk", "locGuard4")
+					if (isCreature(fissure_tmp.guard4)) then
+						addUnitCommand(fissure_tmp.guard4, "walk", "locGuard4")
 					end;
 					
-					addUnitCommand(theFissure_tmp.tolec, "walk", "locTolec")
-					addUnitCommand(theFissure_tmp.derred, "walk", "locDerred")
+					addUnitCommand(fissure_tmp.tolec, "walk", "locTolec")
+					addUnitCommand(fissure_tmp.derred, "walk", "locDerred")
 					ambush.afterBattle = true;
-					startTimer("theFissure_dialogue2",3000);
+					startTimer("fissure_dialogue2",3000);
 				end;
 			</Effect>
 		</Event>
@@ -252,50 +252,50 @@
 		
 		<Event trigger = "commandComplete" once = "true">
 			<Condition>
-				return(trigger.unit == theFissure.tolec and ambush.afterBattle==true);
+				return(trigger.unit == fissure.tolec and ambush.afterBattle==true);
 			</Condition>
 			<Effect>
-				lookAt(theFissure.tolec,getPartyleader());
+				lookAt(fissure.tolec,getPartyleader());
 			</Effect>
 		</Event>
 		
 		<Event trigger = "commandComplete" once = "true">
 			<Condition>
-				return(trigger.unit == theFissure.derred and ambush.afterBattle==true);
+				return(trigger.unit == fissure.derred and ambush.afterBattle==true);
 			</Condition>
 			<Effect>
-				lookAt(theFissure.derred,getPartyleader());
+				lookAt(fissure.derred,getPartyleader());
 			</Effect>
 		</Event>
 		
-		<Event trigger = "theFissure_dialogue2">
+		<Event trigger = "fissure_dialogue2">
 			<Effect>
 				assembleParty("aisMounPath","locParty");
-				theFissure_tmp.afterBattle = true;
+				fissure_tmp.afterBattle = true;
 			</Effect>
 		</Event>
 		
 		<Event trigger="party_complete">
 			<Condition>
-				return (theFissure_tmp.afterBattle==true);
+				return (fissure_tmp.afterBattle==true);
 			</Condition>
 			<Effect>
 				--gespraech nach dem Kampf mit den Untoten
-				set(theFissure_tmp.captain,"state","active");
+				set(fissure_tmp.captain,"state","active");
 
-				theFissure_tmp.soren_windclaw_crystal = createObject("sorenCrystal", "locDeadSkeleton4");
-				setRefName(theFissure_tmp.soren_windclaw_crystal, "Soren Windclaw");
-				setObjectValue(theFissure_tmp.soren_windclaw_crystal,"max_health",10000);
-				setObjectValue(theFissure_tmp.soren_windclaw_crystal,"health",10000);
+				fissure_tmp.soren_windclaw_crystal = createObject("sorenCrystal", "locDeadSkeleton4");
+				setRefName(fissure_tmp.soren_windclaw_crystal, "Soren Windclaw");
+				setObjectValue(fissure_tmp.soren_windclaw_crystal,"max_health",10000);
+				setObjectValue(fissure_tmp.soren_windclaw_crystal,"health",10000);
 				
 				
 				
 				createDialogue();
-				addSpeaker(theFissure_tmp.soren_windclaw_crystal,"SW");
-				addSpeaker(theFissure_tmp.ireana,"IvN",true);
-				addSpeaker(theFissure_tmp.captain,"HW",true);
-				addSpeaker(theFissure_tmp.tolec,"TO",true);
-				addSpeaker(theFissure_tmp.derred,"DE",true);
+				addSpeaker(fissure_tmp.soren_windclaw_crystal,"SW");
+				addSpeaker(fissure_tmp.ireana,"IvN",true);
+				addSpeaker(fissure_tmp.captain,"HW",true);
+				addSpeaker(fissure_tmp.tolec,"TO",true);
+				addSpeaker(fissure_tmp.derred,"DE",true);
 				addAllPlayersToDialog();
 				addStandardRoles();
 				
@@ -303,9 +303,9 @@
 					
 				addCameraPosition(0,get(getSpeaker("PL"),"position"),-50,40,10);
 				
-				playersLookAt(getPosition(theFissure_tmp.ireana));
-				lookAtObject(theFissure_tmp.soren_windclaw_crystal, theFissure_tmp.ireana);
-				lookAtObject(theFissure_tmp.captain, getSpeaker("PL"));
+				playersLookAt(getPosition(fissure_tmp.ireana));
+				lookAtObject(fissure_tmp.soren_windclaw_crystal, fissure_tmp.ireana);
+				lookAtObject(fissure_tmp.captain, getSpeaker("PL"));
 				
 				speak("HW",_("I have never seen someone fight like you before."), "surprised");
 				speak("mage",_("You don't get out very often, do you."),"sneer");
@@ -325,40 +325,40 @@
 				
 				if(getSpeaker("priest") ~=0)then
 					speak("priest",_("Let me see. _priest"),"normal");
-					executeInDialog("addUnitCommand(getSpeaker('priest'),'heal',theFissure_tmp.ireana)");
-					setObjectValue(theFissure_tmp.ireana,"health",10000);
+					executeInDialog("addUnitCommand(getSpeaker('priest'),'heal',fissure_tmp.ireana)");
+					setObjectValue(fissure_tmp.ireana,"health",10000);
 				elseif((mage~=0) and (hasItem(mage,"heal_1") or hasItem(mage,"heal_2")))then
 					-- Magier geht zu ireana und heilt sie mit einem Trank
 					speak("mage",_("Let me see. _mage"),"normal");
-					theFissure_tmp.mPos = get(mage,"position");
-					executeInDialog("addUnitCommand("..mage..",'walk', theFissure_tmp.ireana,1)");
+					fissure_tmp.mPos = get(mage,"position");
+					executeInDialog("addUnitCommand("..mage..",'walk', fissure_tmp.ireana,1)");
 					speak("mage",(""),"normal","1000");
 					if(not findAndRemoveItem(mage,"heal_1"))then
 						findAndRemoveItem(mage,"heal_2");
 					end;
 					--TODO kosmetische Animation: hinknien und Trank verabreichen
-					setObjectValue(theFissure_tmp.ireana,"health",10000);
-					executeInDialog("addUnitCommand("..mage..",'walk', theFissure_tmp.mPos)");
+					setObjectValue(fissure_tmp.ireana,"health",10000);
+					executeInDialog("addUnitCommand("..mage..",'walk', fissure_tmp.mPos)");
 					speak("mage",(""),"normal","1500");
-					executeInDialog("lookAtObject("..mage..",theFissure_tmp.ireana)");
+					executeInDialog("lookAtObject("..mage..",fissure_tmp.ireana)");
 				else
 					--Partyleader heilt ireana mit einem Trank, auch wenn er keinen besitzt
 					speak("PL",_("Let me see."),"normal");
-					theFissure_tmp.mPos = get(leader,"position");
-					executeInDialog("addUnitCommand("..leader..",'walk', theFissure_tmp.ireana,1)");
+					fissure_tmp.mPos = get(leader,"position");
+					executeInDialog("addUnitCommand("..leader..",'walk', fissure_tmp.ireana,1)");
 					speak("PL",(""),"normal","1000");
 					if(not findAndRemoveItem(leader,"heal_1"))then
 						findAndRemoveItem(leader,"heal_2");
 					end;
 					--TODO kosmetische Animation: hinknien und Trank verabreichen
-					setObjectValue(theFissure_tmp.ireana,"health",10000);
-					executeInDialog("addUnitCommand("..leader..",'walk', theFissure_tmp.mPos)");
+					setObjectValue(fissure_tmp.ireana,"health",10000);
+					executeInDialog("addUnitCommand("..leader..",'walk', fissure_tmp.mPos)");
 					speak("PL",(""),"normal","1500");
-					executeInDialog("lookAtObject("..leader..",theFissure_tmp.ireana)");
+					executeInDialog("lookAtObject("..leader..",fissure_tmp.ireana)");
 				end;
 				setSpeakerAnimation("IvN","getUp",1000);
-				executeInDialog('lookAtObject('..theFissure_tmp.ireana..', getSpeaker("PL"))');
-				executeInDialog('set('..theFissure_tmp.ireana..',"ai_state","inactive")');
+				executeInDialog('lookAtObject('..fissure_tmp.ireana..', getSpeaker("PL"))');
+				executeInDialog('set('..fissure_tmp.ireana..',"ai_state","inactive")');
 				speak("IvN",_("Thank you. That was a close call for a rescue."),"inlove");
 				speak("PL",_("How could it even come to this?"),"unhappy");
 				speak("PL",_("It's very dangerous to travel so far from the roads."));
@@ -427,22 +427,46 @@
 				
 				-- Hauptquest: Findet den Weg, auf dem die Untoten die Stadt umgehen
 				
-				executeInDialog('insertTrigger("end_cuttheFissure")');
+				executeInDialog('insertTrigger("end_cutfissure")');
 			</Effect>
 		</Event>
 		
-		<Event trigger="end_cuttheFissure">
+		<Event trigger="end_cutfissure">
 			<Effect>
-				print("the ambush has ended")
 				ambush.finished=true;
-				theFissure.rescuedIreana = true;
-				theFissure.started = true;
+				fissure.rescuedIreana = true;
+				fissure.started = true;
 				timedExecute("setCutsceneMode(false);",1000);
-				deleteObject(theFissure_tmp.soren_windclaw_crystal);
+				deleteObject(fissure_tmp.soren_windclaw_crystal);
 			</Effect>
 		</Event>
 
 	</Region>
 	
+	<Region name="greyCurseCaveFis">
+		<Event trigger="create_region">
+			<Condition>
+				return (fissure.finished ~=true);
+			</Condition>
+			<Effect>
+				fissure_tmp.stone1=getObjectByNameRef("fissureBlock3");
+				--Blöcke ausblenden
+				fissure_tmp.necromancer = createObject("necromancer","locNecromancer",190);
+				fissure_tmp.worker1 = createObject("worker_skel","locSkeleton1",-90);
+				--arbeiterSkelette erschaffen
+			</Effect>
+		</Event>
+	
+		<Event trigger="enter_region" once="true">
+			<Condition>
+				return (fissure.finished ~=true);
+			</Condition>
+			<Effect>
+				assembleParty("greyCurseCaveFis","locParty");
+				setCutsceneMode(true);
+				addCameraPosition(0,"locNecromancer",-90,45,10);
+			</Effect>
+		</Event>
+	</Region>
 </Quest>
 

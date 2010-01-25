@@ -329,6 +329,7 @@
 				
 				local door = getObjectByNameRef("doorGrave");
 				scriptobjectvar[door]["locked"] = true;
+				door_toggle(door);
 				local doorPos=get(door,"position");
 				
 				addCameraPosition(0,doorPos,-90,45,10);
