@@ -214,9 +214,7 @@ void Scene::update(float ms)
 
 	// Nummer der region in der sich der Spieler befindet
 	short region_nr = player->getRegionId();
-
-
-
+	Region* region = player->getRegion();
 
 	if (region_nr != m_region_id)
 	{
@@ -261,23 +259,23 @@ void Scene::update(float ms)
 
 	SoundSystem::setListenerPosition(pos);
 	
-	Ogre::Light* light= m_scene_manager->getLight("HeroLight");
+	// Licht aktualisieren
+	float *colour;
+	Ogre::Light* light;
+	light= m_scene_manager->getLight("HeroLight");
 	light->setPosition(Ogre::Vector3(pos.m_x*50,300,pos.m_y*50));
-
-	updateGraphicObjects(ms);
+	colour= region->getLight().getHeroLight();
+	light->setDiffuseColour(colour[0], colour[1], colour[2]);
 	
-	/*
-	// alle Objekte aktualisieren
-	updateObjects();
-
-
-	DEBUGX("update items");
-	// alle Items aktualisieren
-	updateItems();
-
-
-	updateProjectiles();
-*/
+	colour= region->getLight().getDirectionalLight();
+	light = m_scene_manager->getLight("RegionLight");
+	light->setDiffuseColour(colour[0], colour[1], colour[2]);
+	light->setSpecularColour(colour[0], colour[1], colour[2]);
+	
+	colour= region->getLight().getAmbientLight();
+	m_scene_manager->setAmbientLight(Ogre::ColourValue(colour[0], colour[1], colour[2]));
+	
+	updateGraphicObjects(ms);
 }
 
 void  Scene::insertObject(GameObject* gobj, bool is_static)
@@ -688,7 +686,7 @@ void Scene::createScene()
 	float *colour;
 	m_scene_manager->setAmbientLight(Ogre::ColourValue(0.4,0.4,0.4));
 	
-	colour= region->getHeroLight();
+	colour= region->getLight().getHeroLight();
 	Ogre::Light *light = m_scene_manager->createLight("HeroLight");
 	light->setType(Ogre::Light::LT_POINT);
 	light->setDiffuseColour(colour[0], colour[1], colour[2]);
@@ -697,7 +695,7 @@ void Scene::createScene()
 	light->setCastShadows(false);
 	DEBUGX("hero light %f %f %f",colour[0], colour[1], colour[2]);
 
-	colour= region->getDirectionalLight();
+	colour= region->getLight().getDirectionalLight();
 	light = m_scene_manager->createLight("RegionLight");
 	light->setType(Ogre::Light::LT_DIRECTIONAL);
 	light->setDiffuseColour(colour[0], colour[1], colour[2]);
@@ -742,7 +740,7 @@ void Scene::createScene()
 		m_scene_manager->setAmbientLight(Ogre::ColourValue(1.0,1.0,1.0));
 		target->update();
 
-		colour= region->getAmbientLight();
+		colour= region->getLight().getAmbientLight();
 		m_scene_manager->setAmbientLight(Ogre::ColourValue(colour[0], colour[1], colour[2]));
 		DEBUGX("ambient light %f %f %f",colour[0], colour[1], colour[2]);
 		//m_scene_manager->setAmbientLight(Ogre::ColourValue(0.0,0.0,0.0));

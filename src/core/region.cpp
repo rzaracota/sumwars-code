@@ -175,7 +175,119 @@ void RegionCamera::fromString(CharConv* cv)
 }
 
 
+void RegionLight::Light::update(float time)
+{
+	if (m_timer != 0)
+	{
+		if (m_timer < time)
+		{
+			for (int i=0; i<3; i++)
+				m_value[i] = m_goal_value[i];
+			m_timer =0;
+		}
+		else
+		{
+			float rel = time / m_timer;
+			for (int i=0; i<3; i++)
+			{
+				m_value[i] = rel*m_goal_value[i] + (1-rel)*m_value[i];
+			}
+			m_timer -= time;
+		}
+	}
+}
+
+
+void RegionLight::Light::toString(CharConv* cv)
+{
+	for (int i=0; i<3; i++)
+	{
+		cv->toBuffer(m_value[i]);
+	}
+	for (int i=0; i<3; i++)
+	{
+		cv->toBuffer(m_goal_value[i]);
+	}
+	cv->toBuffer(m_timer);
+}
+
+void RegionLight::Light::fromString(CharConv* cv)
+{
+	for (int i=0; i<3; i++)
+	{
+		cv->fromBuffer(m_value[i]);
+	}
+	for (int i=0; i<3; i++)
+	{
+		cv->fromBuffer(m_goal_value[i]);
+	}
+	cv->fromBuffer(m_timer);	
+}
+
+
+void RegionLight::init(float* ambient, float* herolight, float* directional)
+{
+	for (int i=0; i<3; i++)
+	{
+		m_ambient_light.m_value[i] = ambient[i];
+		m_hero_light.m_value[i] = herolight[i];
+		m_directional_light.m_value[i] = directional[i];	
+	}
+}
+
+void RegionLight::setLight(std::string lighttype, float* value, float time)
+{
+	Light* light =0;
+	if (lighttype == "ambient")
+		light = &m_ambient_light;
+	if (lighttype == "hero")
+		light = &m_hero_light;
+	if (lighttype == "directional")
+		light = &m_directional_light;
+	
+	if (light != 0)
+	{
+		if (time > 0)
+		{
+			for (int i=0; i<3; i++)
+			{
+				light->m_goal_value[i] = value[i];
+			}
+			light->m_timer = time;
+		}
+		else
+		{
+			
+			for (int i=0; i<3; i++)
+			{
+				light->m_value[i] = value[i];
+			}
+			light->m_timer=0;
+		}
+		
+		NetEvent event;
+		event.m_type = NetEvent::REGION_LIGHT;
+		event.m_id = m_region->getId();
+		m_region->insertNetEvent(event);
+	}
+}
+
+void RegionLight::toString(CharConv* cv)
+{
+	m_ambient_light.toString(cv);
+	m_hero_light.toString(cv);
+	m_directional_light.toString(cv);	
+}
+
+void RegionLight::fromString(CharConv* cv)
+{
+	m_ambient_light.fromString(cv);
+	m_hero_light.fromString(cv);
+	m_directional_light.fromString(cv);	
+}
+
 Region::Region(short dimx, short dimy, short id, std::string name, RegionData* data)
+	: m_light(this)
 {
 	DEBUGX("creating region");
 	m_data_grid = new Matrix2d<Gridunit>(dimx,dimy);
@@ -212,13 +324,7 @@ Region::Region(short dimx, short dimy, short id, std::string name, RegionData* d
 	
 	if (data !=0)
 	{
-		for (int i=0; i<3; i++)
-		{
-			m_ambient_light[i] = data->m_ambient_light[i];
-			m_hero_light[i] = data->m_hero_light[i];
-			m_directional_light[i] = data->m_directional_light[i];
-				
-		}
+		m_light.init(data->m_ambient_light, data->m_hero_light, data->m_directional_light);
 	}
 	
 	m_camera.m_region = this;
@@ -422,7 +528,6 @@ bool Region::getFreePlace(Shape* shape, short layer, Vector & pos, WorldObject* 
 		}
 		else
 		{
-			WorldObject* obs = *(res.begin());
 			DEBUGX("obstacle is %s at %f %f",obs->getNameId().c_str(), obs->getShape()->m_center.m_x,obs->getShape()->m_center.m_y);
 			// Stelle ist besetzt
 			tfields.insert(i);
@@ -1812,6 +1917,7 @@ void Region::update(float time)
 	}
 	
 	m_camera.update(time);
+	m_light.update(time);
 	
 	// Schadensanzeigen aktualisieren
 	std::map<int,DamageVisualizer>::iterator dit;
@@ -1912,12 +2018,7 @@ void Region::getRegionData(CharConv* cv)
 	getCamera().toString(cv);
 	
 	// Licht
-	for (int i=0; i<3; ++i)
-		cv->toBuffer(m_ambient_light[i]);
-	for (int i=0; i<3; ++i)
-		cv->toBuffer(m_hero_light[i]);
-	for (int i=0; i<3; ++i)
-		cv->toBuffer(m_directional_light[i]);
+	m_light.toString(cv);
 	
 	// Untergrund
 	cv->toBuffer(m_ground_material);
@@ -2147,12 +2248,7 @@ void Region::setRegionData(CharConv* cv,WorldObjectMap* players)
 	getCamera().fromString(cv);
 	
 	// Licht
-	for (int i=0; i<3; ++i)
-		cv->fromBuffer(m_ambient_light[i]);
-	for (int i=0; i<3; ++i)
-		cv->fromBuffer(m_hero_light[i]);
-	for (int i=0; i<3; ++i)
-		cv->fromBuffer(m_directional_light[i]);
+	m_light.fromString(cv);
 	
 	// Untergrund
 	cv->fromBuffer(m_ground_material);

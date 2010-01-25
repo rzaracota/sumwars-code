@@ -490,6 +490,12 @@ class EventSystem
 		static int addCameraPosition(lua_State *L);
 		
 		/**
+		* \brief Setzt das Licht in der aktuellen Region
+		* \param L Lua Status
+		*/
+		static int setLight(lua_State *L);
+		
+		/**
 		 * \fn static int speak(lua_State *L)
 		 * \brief Fuegt dem aktuellen Dialog einen Text hinzu
 		 * \param L Lua Status

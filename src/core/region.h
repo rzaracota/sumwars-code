@@ -488,6 +488,161 @@ class RegionCamera
 		Region* m_region;
 };
 
+class RegionLight
+{
+	public:
+	
+		/**
+		 * \brief Konstruktor
+		 * \param region Zeiger auf die Region zu der das Licht gehoert
+		 */
+		RegionLight(Region* region)
+		{
+			m_region = region;
+		}
+		
+		/**
+		 * \brief Struktur fuer eine einzelne Lichtart
+		 */
+		struct Light
+		{
+			/**
+			 * \brief Konstruktor
+			 */
+			Light()
+			{
+				m_timer =0;
+			}
+			
+			/**
+			 * \brief aktualisiert das Objekt nachdem eine gewissen Zeit vergangen ist
+			 * \param time Zeit in Millisekunden
+			 */
+			void update(float time);
+			
+			/**
+			* \brief Farbe des Lichts in RGB
+			*/
+			float m_value[3];
+			
+			/**
+			* \brief Zielfarbe des Lichts in RGB
+			*/
+			float m_goal_value[3];
+			
+			/**
+			* \brief Millisekunden bis die Zielfarbe erreicht wird
+			*/
+			float m_timer;
+			
+			/**
+			 * \fn void toString(CharConv* cv)
+			 * \brief Konvertiert das Objekt in einen String und schreibt ihn in der Puffer
+			 * \param cv Ausgabepuffer
+			 */
+			void toString(CharConv* cv);
+			
+			
+			/**
+			 * \fn void fromString(CharConv* cv)
+			 * \brief Erzeugt das Objekt aus einem String
+			 * \param cv Eingabepuffer
+			 */
+			void fromString(CharConv* cv);
+		};
+		
+		/**
+		 * \brief aktualisiert das Objekt nachdem eine gewissen Zeit vergangen ist
+		 * \param time Zeit in Millisekunden
+		 */
+		void update(float time)
+		{
+			m_ambient_light.update(time);
+			m_hero_light.update(time);
+			m_directional_light.update(time);
+		}
+		
+		/**
+		* \fn float* getAmbientLight()
+		* \brief Gibt ambiente Lichtstaerke aus
+		*/
+		float* getAmbientLight()
+		{
+			return m_ambient_light.m_value;
+		}
+			
+		/**
+		* \fn float* getHeroLight()
+		* \brief Gibt Lichtstaerke des Heldeslichtes aus
+		*/
+		float* getHeroLight()
+		{
+			return m_hero_light.m_value;
+		}
+			
+		/**
+		* \fn float* getDirectionalLight()
+		* \brief Gibt Lichtstaerke des gerichteten Lichts aus
+		*/
+		float* getDirectionalLight()
+		{
+			return m_directional_light.m_value;
+		}
+		
+		/**
+		 * \brief initialisiert die Werte
+		 * \param ambient Werte fuer ambientes Licht
+		 * \param herolight Werte fuer Heldenlicht
+		 * \param directional Werte fuer gerichtetes Licht
+		 */
+		void init(float* ambient, float* herolight, float* directional);
+		
+		/**
+		 * \brief Setzt die Werte fuer Lichtart, an die sich die Lichtstaerke annaehern soll
+		 * \param lighttype Typ des Lichts, muss "ambient", "hero", oder "directional" sein
+		 * \param value Werte des Lichts als RGB
+		 * \param time Zeitdauer bis die angegebene Lichtstaerke erreicht wird
+		 */
+		void setLight(std::string lighttype, float* value, float time);
+		
+		/**
+		 * \fn void toString(CharConv* cv)
+		 * \brief Konvertiert das Objekt in einen String und schreibt ihn in der Puffer
+		 * \param cv Ausgabepuffer
+		 */
+		void toString(CharConv* cv);
+			
+			
+		/**
+		 * \fn void fromString(CharConv* cv)
+		 * \brief Erzeugt das Objekt aus einem String
+		 * \param cv Eingabepuffer
+		 */
+		void fromString(CharConv* cv);
+	
+	private:
+		/**
+		 * \brief Werte fuer ambientes Licht
+		 */
+		Light m_ambient_light;
+		
+		/**
+		 * \brief Werte fuer das Spotlicht des Helden
+		 */
+		Light m_hero_light;
+		
+		/**
+		 * \var float m_directional_light
+		 * \brief Werte fuer das Licht von Sonne/Mond
+		 */
+		Light m_directional_light;
+		
+		/**
+		 * \brief Zeiger auf die Region
+		 */
+		Region* m_region;
+};
+
 	
 /**
  * \class Region
@@ -1067,6 +1222,14 @@ class Region
 		}
 		
 		/**
+		 * \brief Gibt Beleuchtungsinformationen aus
+		 */
+		RegionLight& getLight()
+		{
+			return m_light;
+		}
+		
+		/**
 		 * \fn Dialogue* getDialogue(int id)
 		 * \brief Gibt zu der die ID den Dialog aus
 		 * \param id ID
@@ -1122,33 +1285,6 @@ class Region
 		std::string getGroundMaterial()
 		{
 			return m_ground_material;
-		}
-		
-		/**
-		 * \fn float* getAmbientLight()
-		 * \brief Gibt ambiente Lichtstaerke aus
-		 */
-		float* getAmbientLight()
-		{
-			return m_ambient_light;
-		}
-		
-		/**
-		 * \fn float* getHeroLight()
-		 * \brief Gibt Lichtstaerke des Heldeslichtes aus
-		 */
-		float* getHeroLight()
-		{
-			return m_hero_light;
-		}
-		
-		/**
-		 * \fn float* getDirectionalLight()
-		 * \brief Gibt Lichtstaerke des gerichteten Lichts aus
-		 */
-		float* getDirectionalLight()
-		{
-			return m_directional_light;
 		}
 		
 		/**
@@ -1390,28 +1526,15 @@ class Region
 		RegionCamera m_camera;
 		
 		/**
+		 * \brief Enthaelt alle Daten zur Beleuchtung der Szene
+		 */
+		RegionLight m_light;
+		
+		/**
 		 * \var std::string m_ground_material
 		 * \brief Material mit dem der Boden gerendert wird
 		 */
 		std::string m_ground_material;
-		
-		/**
-		 * \var float m_ambient_light[3]
-		 * \brief Werte fuer ambientes Licht
-		 */
-		float m_ambient_light[3];
-		
-		/**
-		 * \var float m_hero_light[3]
-		 * \brief Werte fuer das Spotlicht des Helden
-		 */
-		float m_hero_light[3];
-		
-		/**
-		 * \var float m_directional_light[3]
-		 * \brief Werte fuer das Licht von Sonne/Mond
-		 */
-		float m_directional_light[3];
 		
 		/**
 		 * \var Vector m_waypoint_location

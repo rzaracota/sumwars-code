@@ -1888,6 +1888,10 @@ bool World::writeNetEvent(Region* region,NetEvent* event, CharConv* cv)
 		{
 			region->getCamera().toString(cv);
 		}
+		else if (event->m_type == NetEvent::REGION_LIGHT)
+		{
+			region->getLight().toString(cv);
+		}
 		else if (event->m_type == NetEvent::DIALOGUE_CREATED)
 		{
 			Dialogue* dia = region->getDialogue(event->m_id);
@@ -2429,6 +2433,13 @@ bool World::processNetEvent(Region* region,CharConv* cv)
 			if (region !=0)
 			{
 				region->getCamera().fromString(cv);
+			}
+			break;
+			
+		case NetEvent::REGION_LIGHT:
+			if (region !=0)
+			{
+				region->getLight().fromString(cv);
 			}
 			break;
 			

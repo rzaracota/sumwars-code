@@ -105,6 +105,7 @@ void EventSystem::init()
 	lua_register(m_lua, "getObjectFlag",getScriptObjectFlag);		
 	lua_register(m_lua, "setCutsceneMode", setCutsceneMode);
 	lua_register(m_lua, "addCameraPosition", addCameraPosition);
+	lua_register(m_lua, "setLight", setLight);
 	
 	lua_register(m_lua, "speak", speak);
 	lua_register(m_lua, "unitSpeak", unitSpeak);
@@ -2002,6 +2003,37 @@ int EventSystem::addCameraPosition(lua_State *L)
 	return 0;
 }
 
+
+int EventSystem::setLight(lua_State *L)
+{
+	int argc = lua_gettop(L);
+	if (argc>=2 && lua_isstring(L,1) &&lua_istable(L,2))
+	{
+		std::string type = lua_tostring(L,1);
+		
+		float value[3];
+		for (int i=0; i<3; i++)
+		{
+			lua_pushinteger(L, i+1);
+			lua_gettable(L, 2);
+			value[i] = lua_tonumber(L, -1);
+			lua_pop(L, 1);
+		}
+		
+		float time =0;
+		if (argc>=3 && lua_isnumber(L,3))
+		{
+			time = lua_tonumber(L,3);
+		}
+		
+		m_region->getLight().setLight(type,value,time);
+	}
+	else
+	{
+		ERRORMSG("Syntax: setLight(string lighttype, {red, green,blue} [,time=0])");
+	}
+	return 0;
+}
 
 int EventSystem::speak(lua_State *L)
 {
