@@ -35,9 +35,9 @@
  */
 #define LOGGER( loglevel,format, ... ) \
 	do { \
-		char _message_[500]; int _position_; \
-		sprintf( _message_, "%s:%i %s > %n",__FILE__,__LINE__,__FUNCTION__ ,&_position_); \
-		sprintf( _message_ + _position_,format,##__VA_ARGS__ ); \
+		char _format_[500] = "%s:%i %s > "; char _message_[500]; int _position_; \
+		strcat(_format_,format); \
+		sprintf( _message_, _format_,__FILE__,__LINE__,__FUNCTION__ ,##__VA_ARGS__); \
 		LogManager::instance().writeMessage(_message_,loglevel); \
 	} while (false); \
 
@@ -70,7 +70,7 @@
 	LOGGER( Log::MSG_DEBUG,format, ##__VA_ARGS__ )
 
 
-#define DEBUGX( format, ... ) ; 
+#define DEBUGX( format, ... ) ;
 
 extern "C"
 {
