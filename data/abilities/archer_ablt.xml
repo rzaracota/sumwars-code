@@ -281,7 +281,7 @@
 		<CppImplementation type="range_attack" />
 		<CppImplementation type="weapon_damage" />
 		<LuaImplementation>
-			setDamageValue("phys_mult", getDamageValue("phys_mult")*1.5);
+			setDamageValue("phys_mult", getDamageValue("phys_mult")*1.8);
 			setDamageValue("blockable",false);
 		</LuaImplementation>	
 	</Damage>

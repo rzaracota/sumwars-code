@@ -56,7 +56,7 @@
 	</Dropslots>
 	
 	<BasicAttributes
-		experience="15"
+		experience="10"
 		level="1"
 		max_health="40"
 		armor="2"
@@ -104,7 +104,7 @@
 	</Dropslots>
 	
 	<BasicAttributes
-		experience="20"
+		experience="15"
 		level="1"
 		max_health="80"
 		armor="2"
@@ -148,7 +148,7 @@
 	<RenderInfo name="fireElemS" />
 	
 	<BasicAttributes
-		experience="200"
+		experience="30"
 		level="20"
 		max_health="300"
 		armor="10"
