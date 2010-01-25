@@ -10,6 +10,7 @@
 #include "graphicmanager.h"
 #include "projectile.h"
 
+std::string ObjectLoader::m_filename;
 
 bool ObjectLoader::loadMonsterData(const char* pFilename)
 {
@@ -23,7 +24,7 @@ bool ObjectLoader::loadMonsterData(const char* pFilename)
 	}
 	else
 	{
-		DEBUG("Failed to load file %s", pFilename);
+		ERRORMSG("Failed to load file %s", pFilename);
 		return false;
 	}
 }
@@ -141,7 +142,7 @@ bool  ObjectLoader::loadMonster(TiXmlNode* node)
 				}
 				else if (child->Type()!=TiXmlNode::COMMENT)
 				{
-					DEBUG("unexpected element of <Monster>: %s",child->Value());
+					WARNING("%s : unexpected element of <Monster>: %s",m_filename.c_str(),child->Value());
 				}
 				
 			}
@@ -175,7 +176,7 @@ bool  ObjectLoader::loadMonster(TiXmlNode* node)
 			}
 			else if (child->Type()!=TiXmlNode::COMMENT)
 			{
-				DEBUG("unexpected element of <MonsterGroup>: %s",child->Value());
+				WARNING("%s : unexpected element of <MonsterGroup>: %s",m_filename.c_str(),child->Value());
 			}
 		}
 		
@@ -308,7 +309,7 @@ bool  ObjectLoader::loadCreatureBaseAttr(TiXmlNode* node, CreatureBaseAttr& basa
 		}
 		else if (child2->Type()!=TiXmlNode::COMMENT)
 		{
-			DEBUG("unexpected element of <BasicAttributes>: %s",child2->Value());
+			WARNING("%s : unexpected element of <BasicAttributes>: %s",m_filename.c_str(),child2->Value());
 		}
 	}
 	
@@ -322,12 +323,13 @@ bool ObjectLoader::loadPlayerData(const char* pFilename)
 
 	if (loadOkay)
 	{
+		m_filename = pFilename;
 		loadPlayer(&doc);
 		return true;
 	}
 	else
 	{
-		DEBUG("Failed to load file %s", pFilename);
+		ERRORMSG("Failed to load file %s", pFilename);
 		return false;
 	}
 }
@@ -410,14 +412,14 @@ bool ObjectLoader::loadPlayer(TiXmlNode* node)
 					}
 					else if (child2->Type()!=TiXmlNode::COMMENT)
 					{
-						DEBUG("unexpected element of <LearnableAbility>: %s",child2->Value());
+						WARNING("%s : unexpected element of <LearnableAbility>: %s",m_filename.c_str(),child2->Value());
 					}
 					
 				}
 			}
 			else if (child->Type()!=TiXmlNode::COMMENT)
 			{
-				DEBUG("unexpected element of <PlayerClass>: %s",child->Value());
+				WARNING("%s : unexpected element of <PlayerClass>: %s",child->Value());
 			}
 		}
 		ObjectFactory::registerPlayer(data->m_subtype,data);
@@ -442,12 +444,14 @@ bool ObjectLoader::loadObjectData(const char* pFilename)
 
 	if (loadOkay)
 	{
+		m_filename = pFilename;
+
 		loadObject(&doc);
 		return true;
 	}
 	else
 	{
-		DEBUG("Failed to load file %s", pFilename);
+		ERRORMSG("Failed to load file %s", pFilename);
 		return false;
 	}
 }
@@ -599,7 +603,7 @@ bool ObjectLoader::loadObject(TiXmlNode* node)
 			}
 			else if (child->Type()!=TiXmlNode::COMMENT)
 			{
-				DEBUGX("unexpected element of <Object>: %s",child->Value());
+				WARNING("%s : unexpected element of <Object>: %s",m_filename.c_str(),child->Value());
 			}
 			
 		}
@@ -637,12 +641,13 @@ bool ObjectLoader::loadProjectileData(const char* pFilename)
 
 	if (loadOkay)
 	{
+		m_filename = pFilename;
 		loadProjectile(&doc);
 		return true;
 	}
 	else
 	{
-		DEBUG("Failed to load file %s", pFilename);
+		ERRORMSG("Failed to load file %s", pFilename);
 		return false;
 	}
 }

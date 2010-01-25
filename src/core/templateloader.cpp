@@ -13,6 +13,7 @@
 #include "objectfactory.h"
 #include "elementattrib.h"
 
+std::string TemplateLoader::m_filename;
 
 bool TemplateLoader::loadObjectTemplateData(const char* pFilename)
 {
@@ -21,12 +22,14 @@ bool TemplateLoader::loadObjectTemplateData(const char* pFilename)
 
 	if (loadOkay)
 	{
+		m_filename = pFilename;
+
 		loadObjectTemplate(&doc);
 		return true;
 	}
 	else
 	{
-		DEBUG("Failed to load file %s", pFilename);
+		ERRORMSG("Failed to load file %s", pFilename);
 		return false;
 	}
 }
@@ -78,14 +81,14 @@ bool TemplateLoader::loadObjectTemplate(TiXmlNode* node)
 							}
 							else if (child2->Type()!=TiXmlNode::COMMENT)
 							{
-								DEBUG("unexpected element of <Environment>: %s",child->Value());
+								WARNING("%s : unexpected element of <Environment>: %s",child->Value());
 							}
 						}
 					}
 				}
 				else if (child->Type()!=TiXmlNode::COMMENT)
 				{
-					DEBUG("unexpected element of <ObjectTemplate>: %s",child->Value());
+					WARNING("%s : unexpected element of <ObjectTemplate>: %s",m_filename.c_str(),child->Value());
 				}
 				
 			}
@@ -137,7 +140,7 @@ bool TemplateLoader::loadObjectTemplate(TiXmlNode* node)
 							}
 							else if (child2->Type()!=TiXmlNode::COMMENT)
 							{
-								DEBUG("unexpected element of <Environment>: %s",child->Value());
+								WARNING("%s : unexpected element of <Environment>: %s",m_filename.c_str(),child->Value());
 							}
 						}
 					}
@@ -163,7 +166,7 @@ bool TemplateLoader::loadObjectTemplate(TiXmlNode* node)
 				}
 				else if (child->Type()!=TiXmlNode::COMMENT)
 				{
-					DEBUGX("unexpected element of <ObjectTemplate>: %s",child->Value());
+					DEBUGX("unexpected element of <ObjectTemplate>: %s",m_filename.c_str(),child->Value());
 				}
 				
 			}
@@ -191,12 +194,14 @@ bool TemplateLoader::loadObjectGroupData(const char* pFilename)
 
 	if (loadOkay)
 	{
+		m_filename = pFilename;
+
 		loadObjectGroup(&doc);
 		return true;
 	}
 	else
 	{
-		DEBUG("Failed to load file %s", pFilename);
+		ERRORMSG("Failed to load file %s", pFilename);
 		return false;
 	}
 }
@@ -284,7 +289,7 @@ bool TemplateLoader::loadObjectGroup(TiXmlNode* node)
 							}
 							else if (child2->Type()!=TiXmlNode::COMMENT)
 							{
-								DEBUG("unexpected element of <ObjectContent>: %s",child->Value());
+								WARNING("%s : unexpected element of <ObjectContent>: %s",m_filename.c_str(),child->Value());
 							}
 							
 						}
@@ -312,7 +317,7 @@ bool TemplateLoader::loadObjectGroup(TiXmlNode* node)
 							}
 							else if (child2->Type()!=TiXmlNode::COMMENT)
 							{
-								DEBUG("unexpected element of <Locations>: %s",child->Value());
+								WARNING("%s : unexpected element of <Locations>: %s",m_filename.c_str(),child->Value());
 							}
 						}
 					}
@@ -355,14 +360,14 @@ bool TemplateLoader::loadObjectGroup(TiXmlNode* node)
 							}
 							else if (child2->Type()!=TiXmlNode::COMMENT)
 							{
-								DEBUG("unexpected element of <Areas>: %s",child->Value());
+								WARNING("%s : unexpected element of <Areas>: %s",m_filename.c_str(),child->Value());
 							}
 						}
 					}
 				}
 				else if (child->Type()!=TiXmlNode::COMMENT)
 				{
-					DEBUG("unexpected element of <ObjectGroup>: %s",child->Value());
+					WARNING("%s : unexpected element of <ObjectGroup>: %s",m_filename.c_str(),child->Value());
 				}
 			}
 		}

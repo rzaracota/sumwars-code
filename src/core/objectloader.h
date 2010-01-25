@@ -112,6 +112,10 @@ class ObjectLoader
 	 */
 	static bool loadPlayer(TiXmlNode* node);
 	private:
+		/**
+		 * \brief Name der Datei die gerade gelesen wird
+		 */
+		static std::string m_filename;
 	
 
 };

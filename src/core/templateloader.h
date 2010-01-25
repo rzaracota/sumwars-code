@@ -49,6 +49,12 @@ class TemplateLoader
 		 * \param node XML Knoten
 		 */
 		static bool loadObjectGroup(TiXmlNode* node);
+	
+	private:
+		/**
+		 * \brief Name der Datei die gerade gelesen wird
+		 */
+		static std::string m_filename;
 		
 
 };

@@ -4,7 +4,7 @@
 
 #include <iostream>
 
-
+std::string WorldLoader::m_filename;
 
 void WorldLoader::loadEvent( TiXmlNode* node, Event *ev, TriggerType &type)
 {
@@ -43,7 +43,7 @@ void WorldLoader::loadEvent( TiXmlNode* node, Event *ev, TriggerType &type)
 		}
 		else if (child->Type()!=TiXmlNode::COMMENT)
 		{
-			DEBUG("unexpected element of <Event>: %s",child->Value());
+			WARNING("%s : unexpected element of <Event>: %s",m_filename.c_str(),child->Value());
 		}
 	}
 }
@@ -56,6 +56,8 @@ bool WorldLoader::loadRegionData(const char* pFilename)
 
 	if (loadOkay)
 	{
+		m_filename = pFilename;
+
 		loadRegions(&doc);
 		return true;
 	}
@@ -185,14 +187,14 @@ bool WorldLoader::loadRegion(TiXmlNode* node, RegionData* rdata)
 							}
 							else if (child3->Type()!=TiXmlNode::COMMENT)
 							{
-								DEBUG("unexpected element of <Exit>: %s",child3->Value());
+								WARNING("%s : unexpected element of <Exit>: %s",m_filename.c_str(),child3->Value());
 							}
 						}
 						rdata->addExit(exit);
 					}
 					else if (child2->Type()!=TiXmlNode::COMMENT)
 					{
-						DEBUG("unexpected element of <Exits>: %s",child2->Value());
+						WARNING("%s : unexpected element of <Exits>: %s",m_filename.c_str(),child2->Value());
 					}
 				}
 			}
@@ -211,7 +213,7 @@ bool WorldLoader::loadRegion(TiXmlNode* node, RegionData* rdata)
 					}
 					else if (child2->Type()!=TiXmlNode::COMMENT)
 					{
-						DEBUG("unexpected element of <Environments>: %s",child2->Value());
+						WARNING("%s : unexpected element of <Environments>: %s",m_filename.c_str(),child2->Value());
 					}
 				}
 			}
@@ -241,7 +243,7 @@ bool WorldLoader::loadRegion(TiXmlNode* node, RegionData* rdata)
 				
 				if (type == "")
 				{
-					WARNING("Detected <Event> Tag without trigger");
+					WARNING("%s : Detected <Event> Tag without trigger",m_filename.c_str());
 				}
 				
 				World::getWorld()->addEvent(rdata->m_name,type,ev);
@@ -260,7 +262,7 @@ bool WorldLoader::loadRegion(TiXmlNode* node, RegionData* rdata)
 						attr.getString("object_group",group_name);
 						if (name == "")
 						{
-							WARNING("<NamedObjectGroup> tag without name found (type is %s)",group_name.c_str());
+							WARNING("%s : <NamedObjectGroup> tag without name found (type is %s)",m_filename.c_str(),group_name.c_str());
 						}
 						
 						attr.getFloat("angle",angle,0);
@@ -273,7 +275,7 @@ bool WorldLoader::loadRegion(TiXmlNode* node, RegionData* rdata)
 					}
 					else if (child2->Type()!=TiXmlNode::COMMENT)
 					{
-						DEBUG("unexpected element of <NamedObjectGroups>: %s",child2->Value());
+						WARNING("%s : unexpected element of <NamedObjectGroups>: %s",m_filename.c_str(),child2->Value());
 					}
 				}
 			}
@@ -300,7 +302,7 @@ bool WorldLoader::loadRegion(TiXmlNode* node, RegionData* rdata)
 					}
 					else if (child2->Type()!=TiXmlNode::COMMENT)
 					{
-						DEBUG("unexpected element of <ObjectGroups>: %s",child2->Value());
+						WARNING("%s : unexpected element of <ObjectGroups>: %s",m_filename.c_str(),child2->Value());
 					}
 				}
 			}
@@ -320,7 +322,7 @@ bool WorldLoader::loadRegion(TiXmlNode* node, RegionData* rdata)
 					}
 					else if (child2->Type()!=TiXmlNode::COMMENT)
 					{
-						DEBUG("unexpected element of <SpawnGroup>: %s",child2->Value());
+						WARNING("%s : unexpected element of <SpawnGroup>: %s",m_filename.c_str(),child2->Value());
 					}
 				}
 			}
@@ -344,7 +346,7 @@ bool WorldLoader::loadRegion(TiXmlNode* node, RegionData* rdata)
 			}
 			else if (child->Type()!=TiXmlNode::COMMENT)
 			{
-				DEBUG("unexpected element of <Region>: %s",child->Value());
+				WARNING("%s : unexpected element of <Region>: %s",m_filename.c_str(),child->Value());
 			}
 		}
 	}
@@ -358,6 +360,8 @@ bool  WorldLoader::loadNPCData(const char* pFilename)
 
 	if (loadOkay)
 	{
+		m_filename = pFilename;
+
 		loadNPC(&doc);
 		return true;
 	}
@@ -387,7 +391,7 @@ void  WorldLoader::loadNPC( TiXmlNode* node)
 		
 		if (refname == "")
 		{
-			WARNING("<NPC> tag without refname attribute found");
+			WARNING("%s: <NPC> tag without refname attribute found",m_filename.c_str());
 			return;
 		}
 		
@@ -443,7 +447,7 @@ void  WorldLoader::loadNPC( TiXmlNode* node)
 			}
 			else if (child->Type()!=TiXmlNode::COMMENT)
 			{
-				DEBUG("unexpected element of <NPC>: %s",child->Value());
+				WARNING("%s : unexpected element of <NPC>: %s",m_filename.c_str(),child->Value());
 			}
 		}
 	}
@@ -464,6 +468,8 @@ bool WorldLoader::loadQuestsData(const char* pFilename)
 	DEBUGX("loading quest file %s",pFilename);
 	if (loadOkay)
 	{
+		m_filename = pFilename;
+
 		loadQuests(&doc);
 		return true;
 	}
@@ -549,14 +555,14 @@ void WorldLoader::loadQuest(TiXmlNode* node, Quest* quest)
 						loadEvent(child2, ev,type);
 						if (type == "")
 						{
-							WARNING("Detected <Event> Tag without trigger");
+							WARNING("%s : Detected <Event> Tag without trigger",m_filename.c_str());
 						}
 						
 						World::getWorld()->addEvent(rname,type,ev);
 					}
 					else if (child2->Type()!=TiXmlNode::COMMENT)
 					{
-						DEBUG("unexpected element of <Region>: %s",child2->Value());
+						WARNING("%s : unexpected element of <Region>: %s",m_filename.c_str(),child2->Value());
 					}
 				}
 				
@@ -567,7 +573,7 @@ void WorldLoader::loadQuest(TiXmlNode* node, Quest* quest)
 			}
 			else if (child->Type()!=TiXmlNode::COMMENT)
 			{
-				DEBUG("unexpected element of <Quest>: %s",child->Value());
+				WARNING("%s : unexpected element of <Quest>: %s",m_filename.c_str(),child->Value());
 			}
 		}
 	}

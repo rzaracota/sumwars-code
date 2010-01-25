@@ -103,6 +103,12 @@ class WorldLoader
 	 */
 	static void loadQuest(TiXmlNode* node, Quest* quest);
 	
+	private:
+		/**
+		 * \brief Name der Datei die gerade gelesen wird
+		 */
+		static std::string m_filename;
+	
 
 };
 
