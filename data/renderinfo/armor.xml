@@ -74,7 +74,7 @@
 <RenderInfo name="necromancerRobe#fs" parent="playerbase" inherit="animation">
 </RenderInfo>
 
-<RenderInfo name="rogueArmorEnemy" parent="playerbaseM" inherit="animation">
+<RenderInfo name="rogueArmorEnemy" parent="bandit_base" inherit="animation">
 	<Entity source = "rogue_arm.mesh"/>
 </RenderInfo>
 

@@ -460,7 +460,7 @@
 		<HeroLight red="1.0" green="1.0" blue="1.0" /> 
 		<DirectionalLight red="0.3" green="0.3" blue="0.3" />
 		
-		<Settings dimx="32" dimy="32" area_percent="0.4" complexity="0.3" granularity="6"  ground="grass1"/>
+		<Settings dimx="48" dimy="48" area_percent="0.3" complexity="0.5" granularity="6"  ground="grass1"/>
 		<WorldPosition world_x="0.6" world_y ="0.50"/>
 		<ExitDirections north="false" south="true" west="true" east="false" />
 		
@@ -473,9 +473,19 @@
 			</Exit>
 		</Exits>
 		
+		<ObjectGroups>
+			<ObjectGroup object_group="trees1" priority="1" number="20" probability="0.8"/>
+			<ObjectGroup object_group="trees2" priority="1" number="20" probability="0.8"/>
+		</ObjectGroups>
+		
 		<Environments>
 			<Environment height="1.0" name="meadow" />
 		</Environments>
+		
+		<SpawnGroups>
+			<SpawnGroup group_name="bandits_l10_1" number="25"/>
+			<SpawnGroup group_name="bandits_l10_2" number="15"/>
+		</SpawnGroups>
 	</Region>
 	
 <!-- Aisen, Feenwald [Wald und Steine]; ungefaehr 60 Min, eher verwinkelt; Level 10 - 16 -->
@@ -523,7 +533,7 @@
 		<Settings dimx="32" dimy="32" area_percent="0.4" complexity="0.3" granularity="6"  ground="grass1"/>
 		<WorldPosition world_x="0.5" world_y ="0.50"/>
 		
-		<ExitDirections north="true" south="false" west="false" east="true" />
+		<ExitDirections north="false" south="false" west="false" east="true" />
 		
 		<Exits>
 			<Exit name="exit_east" destination_region="aisFairyforest" destination_location="entry_west" >

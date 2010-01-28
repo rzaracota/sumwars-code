@@ -1,3 +1,13 @@
+<RenderInfo name="bandit_base" parent="playerbase">
+	<Action name="monster_bash" >
+		<Animation name="specialAttackOneHand" />
+	</Action>
+	
+	<Action name="steal" >
+		<Animation name="attackRangedUnarmed" />
+	</Action>
+</RenderInfo>
+
 <RenderInfo name="human_2h_base" parent="playerbase">
 	<Action name="noaction">
 		<Animation name="idleTwoHands" />
@@ -57,11 +67,37 @@
 	<Entity objectname="mustache" bone="crown" source="mustache.mesh" />
 </RenderInfo>
 
-<RenderInfo name="rogue" parent="playerbase">
+<RenderInfo name="rogue" parent="bandit_base">
 	<Entity source="rogue.mesh"/>
 	<Subobject objectname="armor" source="rogueArmorEnemy" />
 	<Entity objectname="head" bone="crown" source="head1.mesh" />
 	<Entity objectname="hair" bone="crown" source="hair_m2.mesh" />
 	<Entity objectname="chinBeard" bone="crown" source="beard_chin.mesh" />
 	<Entity objectname="mustache" bone="crown" source="mustache.mesh" />
+</RenderInfo>
+
+<RenderInfo name="human_brigand" parent="bandit_base">
+	<Entity source="rogue.mesh"/>
+	<Subobject objectname="armor" source="rogueArmorEnemy" />
+	<Entity objectname="weapon" bone="itemRightHand" source="ironha_axe.mesh"  />
+	<Entity objectname="shield" bone="itemLeftHand" source="wood_shd.mesh"  />
+	<Entity objectname="head" bone="crown" source="head1.mesh" />
+	<Entity objectname="hair" bone="crown" source="hair_m1.mesh" />
+	<Entity objectname="chinBeard" bone="crown" source="beardChin_ms1.mesh" />
+</RenderInfo>
+
+<RenderInfo name="human_poacher" parent="bandit_base">
+	<Entity source="rogue.mesh"/>
+	<Subobject objectname="armor" source="rogueArmorEnemy" />
+	<Entity objectname="weapon" bone="itemLeftHand" source="bow.mesh"  />
+	<Entity objectname="head" bone="crown" source="head1.mesh" />
+	<Entity objectname="hair" bone="crown" source="hair_m1.mesh" />
+</RenderInfo>
+
+<RenderInfo name="human_thief" parent="bandit_base">
+	<Entity source="rogue.mesh"/>
+	<Subobject objectname="armor" source="rogueArmorEnemy" />
+	<Entity objectname="weapon" bone="itemRightHand" source="dagger_sw.mesh"  />
+	<Entity objectname="head" bone="crown" source="head1.mesh" />
+	<Entity objectname="hair" bone="crown" source="hair_m2.mesh" />
 </RenderInfo>

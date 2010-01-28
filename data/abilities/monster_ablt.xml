@@ -98,6 +98,24 @@
 	</Effect>
 </Ability>
 
+<Ability type="steal"
+		 name="steal"
+		 description="Steals gold"
+		 time="1000.000000"
+		 timer_nr="2.000000"
+		 timer_value="7000.000000"
+		 base_ability="noaction"
+		 critical_percent="0.660000"
+		 target_type="melee">
+	<Effect>
+		<LuaImplementation>
+			if (get(target,"gold") > 100) then
+			set(target,"gold", get(target,"gold") -(50-math.random(50)));
+			end;
+		</LuaImplementation>
+	</Effect>
+</Ability>
+
 <Ability type="testfireball"
 		 name="Fireball"
 		 description="Alternativer Feuerball."
