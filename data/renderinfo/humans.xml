@@ -6,6 +6,10 @@
 	<Action name="steal" >
 		<Animation name="attackRangedUnarmed" />
 	</Action>
+	
+	<Action name="fire_attack" >
+		<Animation name="attack" />
+	</Action>
 </RenderInfo>
 
 <RenderInfo name="human_2h_base" parent="playerbase">
@@ -100,4 +104,19 @@
 	<Entity objectname="weapon" bone="itemRightHand" source="dagger_sw.mesh"  />
 	<Entity objectname="head" bone="crown" source="head1.mesh" />
 	<Entity objectname="hair" bone="crown" source="hair_m2.mesh" />
+</RenderInfo>
+
+<RenderInfo name="torch" >
+	<Entity objectname="weapon" source="goblin_hmr.mesh"  />
+	<ParticleSystem objectname="firesword1" source="BurningBladeShort" position= "-0.1 0 -1.0" rotation="0.0 90.0 0.0"/>
+</RenderInfo>
+
+<RenderInfo name="human_raider" parent="bandit_base">
+	<Entity source="rogue.mesh"/>
+	<Subobject objectname="armor" source="rogueArmorEnemy" />
+	<Subobject objectname="weapon" source="torch" bone="itemRightHand" />
+	<Entity objectname="head" bone="crown" source="head1.mesh" />
+	<Entity objectname="hair" bone="crown" source="hair_m2.mesh" />
+	<Entity objectname="chinBeard" bone="crown" source="beard_chin.mesh" />
+	<Entity objectname="mustache" bone="crown" source="mustache.mesh" />
 </RenderInfo>

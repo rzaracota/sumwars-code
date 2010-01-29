@@ -563,4 +563,26 @@
 	</Damage>
 </Ability>
 
-
+<Ability type="fire_attack" 
+		 name="fire attack"
+		 description="attack with fire damage" 
+		 time="1.000000" 
+		 timer_nr="0.000000" 
+		 timer_value="0.000000" 
+		 base_ability="attack" 
+		 critical_percent="0.660000" 
+		 target_type="melee" >
+	<Effect>
+		<CppImplementation type="dmg_at_target" />
+	</Effect>
+	<Damage>
+		<CppImplementation type="attack" />
+		<CppImplementation type="small_numbers" />
+		<LuaImplementation>
+			local magic = get(self,"magic_power");
+			local pdmg = getDamageValue("phys_dmg");
+			setDamageValue("fire_dmg", pdmg);
+			setDamageValue("phys_dmg", {0,0});
+		</LuaImplementation>
+	</Damage>
+</Ability>

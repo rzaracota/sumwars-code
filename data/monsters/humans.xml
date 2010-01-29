@@ -263,28 +263,28 @@
 </Monster>
 
 <Monster type="MONSTER" subtype="human_raider" name="Raider" fraction="monster" race="human" layer="NORMAL">
-	<RenderInfo name="human_rogue" />
+	<RenderInfo name="human_raider" />
 	<Dropslots >
-		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.05" pgold="0.05" min_gold="5" max_gold="60" min_level="3" max_level="8" magic_prob="0.1" magic_power="250" />
-		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.04" pgold="0.05" min_gold="1" max_gold="40" min_level="1" max_level="6" magic_prob="0.2" magic_power="200" />
+		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.07" pgold="0.05" min_gold="30" max_gold="80" min_level="5" max_level="13" magic_prob="0.1" magic_power="450" />
+		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.04" pgold="0.05" min_gold="20" max_gold="50" min_level="4" max_level="8" magic_prob="0.2" magic_power="300" />
 	</Dropslots>
 	
 	<BasicAttributes
-					experience="23"
-					level="10"
-					max_health="120"
+					experience="65"
+					level="11"
+					max_health="320"
 					armor="25"
 					block="0"
-					attack="30"
-					power="60"
+					attack="100"
+					power="100"
 					strength="25"
-					dexterity="15"
+					dexterity="25"
 					magic_power="5"
 					willpower="20"
 					resistances_physical="0"
 					resistances_air="0"
 					resistances_ice="0"
-					resistances_fire="0"
+					resistances_fire="30"
 					resistances_cap_physical="50"
 					resistances_cap_air="50"
 					resistances_cap_ice="50"
@@ -295,8 +295,7 @@
 					attack_range="1.0"
 					>
 		<Ability type="walk" />
-		<Ability type="attack" rating="1"/>
-		<Ability type="monster_bash" rating="1" timer_value="10000"/>
+		<Ability type="fire_attack" rating="1"/>
 		<Ability type="die" />
 		<Ability type="noaction" />
 	</BasicAttributes>
