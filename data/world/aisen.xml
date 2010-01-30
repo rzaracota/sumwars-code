@@ -561,6 +561,12 @@
 		<NamedObjectGroups>
 			<NameObjectGroup name="robsHideout" object_group="robsHideout" priority="4"/>
 		</NamedObjectGroups>
+		
+		<SpawnGroups>
+			<SpawnGroup group_name="bandits_l11_1" number="10"/>
+			<SpawnGroup group_name="bandits_l11_2" number="10"/>
+			<SpawnGroup group_name="bandits_l11_3" number="10"/>
+		</SpawnGroups>
 	</Region>
 
 

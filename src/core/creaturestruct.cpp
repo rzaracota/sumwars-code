@@ -101,6 +101,11 @@ int CreatureBaseAttr::getValue(std::string valname)
 		lua_pushinteger(EventSystem::getLuaState() , m_attack );
 		return 1;
 	}
+	else if (valname =="power")
+	{
+		lua_pushinteger(EventSystem::getLuaState() , m_power );
+		return 1;
+	}
 	else if (valname =="armor")
 	{
 		lua_pushinteger(EventSystem::getLuaState() , m_armor );
@@ -382,6 +387,11 @@ int CreatureBaseAttrMod::getValue(std::string valname)
 	else if (valname =="attack")
 	{
 		lua_pushinteger(EventSystem::getLuaState() , m_dattack );
+		return 1;
+	}
+	else if (valname =="power")
+	{
+		lua_pushinteger(EventSystem::getLuaState() , m_dpower );
 		return 1;
 	}
 	else if (valname =="armor")

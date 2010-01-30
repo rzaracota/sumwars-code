@@ -150,10 +150,10 @@
 			<Effect>
 				if (rob_the_robber.killed ~= true) then
 					rob_the_robber_tmp.rob = createObject("human_rob_fairy", "robsHideout:locRob")
-					rob_the_robber_tmp.rogue1 = createObject("human_rogue", "robsHideout:locBandit1")
-					rob_the_robber_tmp.rogue2 = createObject("human_rogue", "robsHideout:locBandit2")
-					rob_the_robber_tmp.rogue3 = createObject("human_rogue", "robsHideout:locBandit3")
-					rob_the_robber_tmp.rogue4 = createObject("human_rogue", "robsHideout:locBandit4")
+					rob_the_robber_tmp.rogue1 = createObject("human_deserter", "robsHideout:locBandit1")
+					rob_the_robber_tmp.rogue2 = createObject("human_deserter", "robsHideout:locBandit2")
+					rob_the_robber_tmp.rogue3 = createObject("human_saboteur", "robsHideout:locBandit3")
+					rob_the_robber_tmp.rogue4 = createObject("human_raider", "robsHideout:locBandit4")
 				end
 			</Effect>
 		</Event>
@@ -258,8 +258,6 @@
 		<Event trigger ="answerRob" once = "true">
 			<Effect>
 				local speaker = rob_the_robber_tmp.attacker;
-				print("the last comment")
-				print(speaker)
 				unitSpeak(speaker,_("Viel Spass dabei. Wenn du aus der Hoelle entkommst."),"bored");
 			</Effect>
 		</Event>

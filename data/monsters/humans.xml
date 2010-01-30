@@ -220,12 +220,10 @@
 <Monster type="MONSTER" subtype="human_alwin" name="Alwin" fraction="monster" race="human" layer="NORMAL">
 	<RenderInfo name="human_alwin" />
 	<Dropslots >
-		<Dropslots >
 		<Dropslot pbig="0.2" pmedium="0.3" psmall="0.1" pgold="0.05" min_gold="50" max_gold="150" min_level="5" max_level="12" magic_prob="0.3" magic_power="500" />
 		<Dropslot pbig="0.2" pmedium="0.3" psmall="0.1" pgold="0.05" min_gold="30" max_gold="60" min_level="5" max_level="10" magic_prob="0.3" magic_power="350" />
 		<Dropslot pbig="0.00" pmedium="0.0" psmall="0.4" pgold="0.00" min_gold="30" max_gold="60" min_level="4" max_level="8" magic_prob="0.2" magic_power="300" />
 		<Dropslot pbig="0.00" pmedium="0.0" psmall="0.00" pgold="1.00" min_gold="50" max_gold="120" />
-	</Dropslots>
 	</Dropslots>
 	
 	<BasicAttributes
@@ -414,7 +412,7 @@
 					block="0"
 					attack="70"
 					power="120"
-					strength="55"
+					strength="50"
 					dexterity="35"
 					magic_power="5"
 					willpower="20"
@@ -428,7 +426,7 @@
 					resistances_cap_fire="50"
 					walk_speed="2500"
 					attack_speed="800"
-					step_length="0.8"
+					step_length="1.5"
 					attack_range="2.5"
 					>
 		<Ability type="walk" />
@@ -444,23 +442,23 @@
 </Monster>
 
 <Monster type="MONSTER" subtype="human_saboteur" name="Saboteur" fraction="monster" race="human" layer="NORMAL">
-	<RenderInfo name="rogue" />
+	<RenderInfo name="human_saboteur" />
 	<Dropslots >
 		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.07" pgold="0.05" min_gold="30" max_gold="80" min_level="5" max_level="13" magic_prob="0.1" magic_power="450" />
 		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.04" pgold="0.05" min_gold="20" max_gold="50" min_level="4" max_level="8" magic_prob="0.2" magic_power="300" />
 	</Dropslots>
 	
 	<BasicAttributes
-					experience="23"
+					experience="60"
 					level="11"
-					max_health="180"
+					max_health="160"
 					armor="25"
 					block="0"
 					attack="30"
-					power="60"
+					power="250"
 					strength="25"
 					dexterity="15"
-					magic_power="5"
+					magic_power="12"
 					willpower="20"
 					resistances_physical="0"
 					resistances_air="0"
@@ -476,34 +474,40 @@
 					attack_range="1.0"
 					>
 		<Ability type="walk" />
-		<Ability type="attack" rating="1"/>
-		<Ability type="monster_bash" rating="1" timer_value="10000"/>
+		<Ability type="saboteur_move" rating="0.5"/>
+		<Ability type="throw_bomb" rating="1" timer_nr='1'  timer_value="1100" />
 		<Ability type="die" />
 		<Ability type="noaction" />
 	</BasicAttributes>
 	
 	<Geometry radius="0.5" />
 	
-	<AI ai_sight_range="12" ai_chase_range="20"/>
+	<AI ai_sight_range="12"  ai_shoot_range="6" ai_chase_range="20"/>
 </Monster>
 
 
 
 <!-- Rob der Raeuber, Feenwald-->
 <Monster type="MONSTER" subtype="human_rob_fairy" name="Rob the Robber" fraction="monster" race="human" layer="NORMAL">
-	<RenderInfo name="rogue" />
+	<RenderInfo name="human_rob_fairy" />
+	<Dropslots >
+		<Dropslot pbig="0.5" pmedium="0.5" psmall="0.0" pgold="0.00" min_gold="50" max_gold="150" min_level="7" max_level="13" magic_prob="1.0" magic_power="500" />
+		<Dropslot pbig="0.2" pmedium="0.3" psmall="0.1" pgold="0.05" min_gold="80" max_gold="2000" min_level="7" max_level="12" magic_prob="0.8" magic_power="400" />
+		<Dropslot pbig="0.00" pmedium="0.0" psmall="0.4" pgold="0.00" min_gold="50" max_gold="150" min_level="7" max_level="12" magic_prob="0.2" magic_power="300" />
+		<Dropslot pbig="0.00" pmedium="0.0" psmall="0.00" pgold="1.00" min_gold="100" max_gold="400" />
+	</Dropslots>
 	<EmotionSet name="human_standard" />
 	
 	<BasicAttributes
-		experience="23"
-		level="6"
-		max_health="2500"
-		armor="25"
+		experience="1000"
+		level="12"
+		max_health="3000"
+		armor="30"
 		block="0"
-		attack="30"
-		power="60"
-		strength="25"
-		dexterity="15"
+		attack="100"
+		power="200"
+		strength="70"
+		dexterity="30"
 		magic_power="5"
 		willpower="20"
 		resistances_physical="0"
@@ -515,13 +519,14 @@
 		resistances_cap_ice="50"
 		resistances_cap_fire="50"
 		walk_speed="2500"
-		attack_speed="1000"
-		step_length="0.8"
-		attack_range="1.0"
+		attack_speed="1200"
+		step_length="1.7"
+		attack_range="2.5"
 	>
 		<Ability type="walk" />
 		<Ability type="attack" rating="1"/>
-		<Ability type="monster_bash" rating="1" timer_value="10000"/>
+		<Ability type="monster_bash" rating="1"  timer_nr='1' timer_value="5000"/>
+		<Ability type="monster_whirl" rating="1" timer_nr='2' timer_value="5000"/>
 		<Ability type="die" />
 		<Ability type="noaction" />
 	</BasicAttributes>
@@ -558,6 +563,18 @@
 	<SubGroup subtype="human_raider" number="1" prob="1.0" />
 	<SubGroup subtype="human_raider" number="1" prob="0.5" />
 	<SubGroup subtype="human_poacher" number="2" prob="0.5" />
+</MonsterGroup>
+
+<MonsterGroup name="bandits_l11_2" >
+	<SubGroup subtype="human_deserter" number="1" prob="1.0" />
+	<SubGroup subtype="human_saboteur" number="2" prob="0.5" />
+	<SubGroup subtype="human_brigand" number="1" prob="1" />
+</MonsterGroup>
+
+<MonsterGroup name="bandits_l11_3" >
+	<SubGroup subtype="human_deserter" number="1" prob="0.5" />
+	<SubGroup subtype="human_saboteur" number="2" prob="1.0" />
+	<SubGroup subtype="human_raider" number="1" prob="1" />
 </MonsterGroup>
 
 <MonsterGroup name="bandits_l11_alwin" >

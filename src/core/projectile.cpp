@@ -168,6 +168,8 @@ void Projectile::handleFlying(float dtime)
 	float rnew,rmin;
 	int lid;
 	
+	bool do_destroy = false;
+	
 	Vector speed = getSpeed();
 
 	if (m_implementation == "fly_guided")
@@ -294,7 +296,7 @@ void Projectile::handleFlying(float dtime)
 	if (m_timer >= m_timer_limit)
 	{
 		DEBUGX("destroyed after timeout");
-		setState(STATE_DESTROYED);
+		do_destroy = true;
 	}
 
 	DEBUGX("pos %f %f",pos.m_x, pos.m_y);
@@ -352,7 +354,7 @@ void Projectile::handleFlying(float dtime)
 		{
 			// Projektil wird zerstoert
 			DEBUGX("hit obj %i",hit->getId());
-			destroy();
+			do_destroy = true;
 			m_timer=0;
 		}
 
@@ -377,6 +379,8 @@ void Projectile::handleFlying(float dtime)
 			Vector speed = getSpeed();
 			// Projektil hat ein Lebewesen getroffen, springt weiter
 			setState(STATE_FLYING);
+			do_destroy = false;
+			
 			float v = speed.getLength();
 
 			// Kreis mit Radius 5 um aktuelle Position
@@ -442,17 +446,22 @@ void Projectile::handleFlying(float dtime)
 			else
 			{
 				// kein Ziel gefunden, Projektil zerstoeren
-				setState(STATE_DESTROYED);
+				do_destroy = true;
 			}
 
 			// Zaehler,nach hinreichend vielen Spruengen Projektil zerstoeren
 			m_counter --;
 			if (m_counter <= 0)
 			{
-				setState(STATE_DESTROYED);
+				do_destroy = true;
 			}
 		}
 
+	}
+	
+	if (do_destroy)
+	{
+		destroy();
 	}
 	
 	// neue Koordinaten setzen
@@ -674,9 +683,6 @@ void Projectile::doEffect(GameObject* target)
 			}
 		}
 	}
-	
-	
-	
 }
 
 void Projectile::destroy()

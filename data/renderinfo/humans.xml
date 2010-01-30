@@ -15,7 +15,11 @@
 		<Animation name="attackRangedBow" />
 	</Action>
 	
-	
+	<Action name="throw_bomb" >
+		<Animation name="attackRangedUnarmed" />
+		<Visibility objectname="weapon" time="0.4" visible="false"/>
+		<Visibility objectname="weapon" time="1.0" visible="true"/>
+	</Action>
 </RenderInfo>
 
 <RenderInfo name="human_2h_base" parent="bandit_base">
@@ -39,11 +43,19 @@
 		<Animation name="attackTwoHands" />
 	</Action>
 	
+	
+	
 	<Action name="bash">
 		<Animation name="specialAttackTwoHands" />
 		<ParticleSystem time = "0.1" objectname="attackLine" bone="itemRightHand" source="SpecialAttackLineWhite" position="0.0 0.0 -1.7" />
 		<Detach time="0.5" objectname="attackLine" />
 	</Action>
+	
+	<Action name="monster_bash" reference="bash"/>
+	<Action name="monster_whirl" >
+		<Animation name="sweepStrikeTwoHands" />
+	</Action>	
+	
 </RenderInfo>
 
 
@@ -135,4 +147,21 @@
 	<Entity objectname="hair" bone="crown" source="hair_m2.mesh" />
 	<Entity objectname="chinBeard" bone="crown" source="beard_chin.mesh" />
 	<Entity objectname="mustache" bone="crown" source="mustache.mesh" />
+</RenderInfo>
+
+<RenderInfo name="human_saboteur" parent="bandit_base">
+	<Entity source="rogue.mesh"/>
+	<Subobject objectname="armor" source="rogueArmorEnemy" />
+	<Entity objectname="weapon" source="berry.mesh" bone="itemRightHand" />
+	<Entity objectname="head" bone="crown" source="head1.mesh" />
+	<Entity objectname="hair" bone="crown" source="hair_m2.mesh" />
+</RenderInfo>
+
+<RenderInfo name="human_rob_fairy" parent="human_2h_base">
+	<Entity source="rogue.mesh" scale="1.2"/>
+	<Subobject objectname="armor" source="rogueArmorEnemy2h" />
+	<Entity objectname="weapon" bone="itemRightHand" source="great_axe.mesh"/>
+	<Entity objectname="head" bone="crown" source="head1.mesh" />
+	<Entity objectname="hair" bone="crown" source="hairShort_ms4.mesh" />
+	<Entity objectname="chinBeard" bone="crown" source="beardChin_ms4.mesh" />
 </RenderInfo>
