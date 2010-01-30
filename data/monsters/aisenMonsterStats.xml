@@ -8,13 +8,13 @@
 	
 	<BasicAttributes
 		experience="40"
-		level="12"
+		level="11"
 		max_health="180"
 		armor="5"
 		block="0"
 		attack="120"
 		power="150"
-		strength="20"
+		strength="25"
 		dexterity="30"
 		magic_power="0"
 		willpower="10"
@@ -43,3 +43,7 @@
 	
 	<AI ai_sight_range="12" />
 </Monster>
+
+<MonsterGroup name="bloodbeaks" >
+	<SubGroup subtype="bloodbeak" number="7" prob="0.7" />
+</MonsterGroup>

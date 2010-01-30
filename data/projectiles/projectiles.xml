@@ -269,6 +269,18 @@
 	</Effect>	
 </Projectile>
 
+<Projectile  subtype="poison_arrow"
+		   radius="0.1"
+		   lifetime="2000"
+		   implementation = "fly"
+		   new_projectile_type="explosion"
+		   >
+	<RenderInfo name="poison_arrow" />
+	<Effect>
+		<CppImplementation type="dmg_at_target" />
+	</Effect>	
+</Projectile>
+
 <Projectile   subtype="guided_arrow"
 		   radius="0.1"
 		   lifetime="2000"

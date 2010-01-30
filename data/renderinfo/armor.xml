@@ -78,6 +78,10 @@
 	<Entity source = "rogue_arm.mesh"/>
 </RenderInfo>
 
+<RenderInfo name="rogueArmorEnemy2h" parent="human_2h_base" inherit="animation">
+	<Entity source = "rogue_arm.mesh"/>
+</RenderInfo>
+
 <RenderInfo name="robeSimple">
 	<Entity source="robe_simple.mesh"/> 
 </RenderInfo>

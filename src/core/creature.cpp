@@ -2339,18 +2339,18 @@ bool Creature::update (float time)
 			// Vergiftet
 			if (m_dyn_attr.m_status_mod_time[Damage::POISONED]>0)
 			{
-				// Schaden pro Sekunde 1/60 der HP
+				// Schaden pro Sekunde 1/90 der HP
 				DEBUGX("poisoned");
-				m_dyn_attr.m_health -= 500*m_base_attr_mod.m_max_health / 60000;
+				m_dyn_attr.m_health -= 500*m_base_attr_mod.m_max_health / 90000;
 				addToNetEventMask(NetEvent::DATA_HP);
 			}
 
 			// brennend
 			if (m_dyn_attr.m_status_mod_time[Damage::BURNING]>0)
 			{
-				// Schaden pro Sekunde 1/90 der HP (bei 0 Feuerresistenz)
+				// Schaden pro Sekunde 1/60 der HP (bei 0 Feuerresistenz)
 				DEBUGX("burning");
-				m_dyn_attr.m_health -= (100-m_base_attr_mod.m_resistances[Damage::FIRE])*500*m_base_attr_mod.m_max_health / 9000000;
+				m_dyn_attr.m_health -= (100-m_base_attr_mod.m_resistances[Damage::FIRE])*500*m_base_attr_mod.m_max_health / 6000000;
 				addToNetEventMask(NetEvent::DATA_HP);
 			}
 		}
@@ -3336,7 +3336,7 @@ bool Creature::takeDamage(Damage* d)
 			if (Random::random()<chance)
 			{
 				// Modifikation anwenden
-				float times[NR_STATUS_MODS] = {15000 /* BLIND*/,10000 /*POISONED*/ ,10000 /*BERSERK*/ ,8000 /*CONFUSED*/,15000 /*MUTE*/,4000 /*PARALYZED*/,2500 /*FROZEN*/,15000 /*BURNING*/};
+				float times[NR_STATUS_MODS] = {15000 /* BLIND*/,10000 /*POISONED*/ ,10000 /*BERSERK*/ ,8000 /*CONFUSED*/,15000 /*MUTE*/,4000 /*PARALYZED*/,2500 /*FROZEN*/,10000 /*BURNING*/};
 				t = rel * times[i];
 				if (t>m_dyn_attr.m_status_mod_time[i] && t>500)
 				{
