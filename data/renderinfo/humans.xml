@@ -166,7 +166,6 @@
 	<Subobject objectname="armor" source="rogueArmorEnemy" />
 	<Entity objectname="weapon" source="iroclb_hmr.mesh" bone="itemRightHand" />
 	<Entity objectname="head" bone="crown" source="head1.mesh" />
-	<Entity objectname="hair" bone="crown" source="hair_m2.mesh" />
 	<Entity objectname="hair" bone="crown" source="hairShort_ms5.mesh" />
 	<Entity objectname="chinBeard" bone="crown" source="beardChin_ms5.mesh" />
 </RenderInfo>
