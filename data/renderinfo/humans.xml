@@ -20,6 +20,8 @@
 		<Visibility objectname="weapon" time="0.4" visible="false"/>
 		<Visibility objectname="weapon" time="1.0" visible="true"/>
 	</Action>
+	
+	<Action name="throw_ice_bomb" reference="throw_bomb" />
 </RenderInfo>
 
 <RenderInfo name="human_2h_base" parent="bandit_base">
@@ -149,12 +151,41 @@
 	<Entity objectname="mustache" bone="crown" source="mustache.mesh" />
 </RenderInfo>
 
+<RenderInfo name="human_highwayman" parent="bandit_base">
+	<Entity source="rogue.mesh"/>
+	<Subobject objectname="armor" source="rogueArmorEnemy" />
+	<Entity objectname="weapon" source="iroclb_hmr.mesh" bone="itemRightHand" />
+	<Entity objectname="head" bone="crown" source="head1.mesh" />
+	<Entity objectname="hair" bone="crown" source="hair_m2.mesh" />
+	<Entity objectname="chinBeard" bone="crown" source="beard_chin.mesh" />
+	<Entity objectname="mustache" bone="crown" source="mustache.mesh" />
+</RenderInfo>
+
+<RenderInfo name="human_buck" parent="bandit_base">
+	<Entity source="rogue.mesh" scale="1.2"/>
+	<Subobject objectname="armor" source="rogueArmorEnemy" />
+	<Entity objectname="weapon" source="iroclb_hmr.mesh" bone="itemRightHand" />
+	<Entity objectname="head" bone="crown" source="head1.mesh" />
+	<Entity objectname="hair" bone="crown" source="hair_m2.mesh" />
+	<Entity objectname="hair" bone="crown" source="hairShort_ms5.mesh" />
+	<Entity objectname="chinBeard" bone="crown" source="beardChin_ms5.mesh" />
+</RenderInfo>
+
 <RenderInfo name="human_saboteur" parent="bandit_base">
 	<Entity source="rogue.mesh"/>
 	<Subobject objectname="armor" source="rogueArmorEnemy" />
 	<Entity objectname="weapon" source="berry.mesh" bone="itemRightHand" />
 	<Entity objectname="head" bone="crown" source="head1.mesh" />
 	<Entity objectname="hair" bone="crown" source="hair_m2.mesh" />
+</RenderInfo>
+
+<RenderInfo name="human_todd" parent="bandit_base">
+	<Entity source="rogue.mesh"/>
+	<Subobject objectname="armor" source="rogueArmorEnemy" />
+	<Entity objectname="weapon" source="berry.mesh" bone="itemRightHand" />
+	<Entity objectname="head" bone="crown" source="head1.mesh" />
+	<Entity objectname="hair" bone="crown" source="hairShort_ms4.mesh" />
+	<Entity objectname="chinBeard" bone="crown" source="beardChin_ms4.mesh" />
 </RenderInfo>
 
 <RenderInfo name="human_rob_fairy" parent="human_2h_base">

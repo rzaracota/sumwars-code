@@ -53,3 +53,14 @@
 	<Effect>
 	</Effect>	
 </Projectile>
+
+<Projectile subtype="ice_bomb"
+		   radius="0.2"
+		   lifetime="600"
+		   implementation = "fly"
+		   new_projectile_type="ice_explosion"
+		   >
+	<RenderInfo name="throwing_berry" />
+	<Effect>
+	</Effect>	
+</Projectile>

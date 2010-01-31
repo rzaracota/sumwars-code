@@ -578,7 +578,7 @@
 		<HeroLight red="1.0" green="1.0" blue="1.0" /> 
 		<DirectionalLight red="0.3" green="0.3" blue="0.3" />
 		
-		<Settings dimx="24" dimy="24" area_percent="0.4" complexity="0.3" granularity="6"  ground="grass1"/>
+		<Settings dimx="44" dimy="44" area_percent="0.4" complexity="0.3" granularity="6"  ground="grass1"/>
 		<WorldPosition world_x="0.45" world_y ="0.50" waypoint="true"/>
 		
 		<ExitDirections north="true" south="true" west="true" east="false" />
@@ -596,12 +596,18 @@
 		</Exits>
 		
 		<ObjectGroups>
-			<ObjectGroup object_group="treePatch_med" priority="1" number="8" probability="0.3"/>
+			<ObjectGroup object_group="stones1" priority="1" number="20" probability="0.8"/>
+			<ObjectGroup object_group="stones2" priority="1" number="20" probability="0.8"/>
+			<ObjectGroup object_group="stonesLarge1" priority="1" number="5" probability="0.8"/>
+			<ObjectGroup object_group="trees1" priority="1" number="20" probability="0.8"/>
+			<ObjectGroup object_group="trees2" priority="1" number="20" probability="0.8"/>
 		</ObjectGroups>
 		
 		<SpawnGroups>
-			<SpawnGroup group_name="goblins_l1" number="27" />
-			<SpawnGroup group_name="goblins_bow_l1" number="18" />
+			<SpawnGroup group_name="bandits_l11_1" number="15"/>
+			<SpawnGroup group_name="bandits_l12_1" number="15"/>
+			<SpawnGroup group_name="bloodbeaks" number="10"/>
+			<SpawnGroup group_name="bandits_l12_buck" number="1"/>
 		</SpawnGroups>
 		
 		<Environments>
@@ -616,7 +622,7 @@
 		<HeroLight red="1.0" green="1.0" blue="1.0" /> 
 		<DirectionalLight red="0.3" green="0.3" blue="0.3" />
 		
-		<Settings dimx="12" dimy="12" area_percent="0.4" complexity="0.3" granularity="6"  ground="grass1"/>
+		<Settings dimx="48" dimy="48" area_percent="0.4" complexity="0.3" granularity="8"  ground="grass1"/>
 		<WorldPosition world_x="0.40" world_y ="0.50"/>
 		
 		<ExitDirections north="false" south="false" west="true" east="true" />
@@ -633,6 +639,19 @@
 		<Environments>
 			<Environment height="1.0" name="hills" />
 		</Environments>
+		
+		<ObjectGroups>
+			<ObjectGroup object_group="trees1" priority="1" number="50" probability="0.8"/>
+			<ObjectGroup object_group="trees2" priority="1" number="50" probability="0.8"/>
+		</ObjectGroups>
+		
+		<SpawnGroups>
+			<SpawnGroup group_name="bandits_l12_1" number="10"/>
+			<SpawnGroup group_name="bandits_l12_2" number="10"/>
+			<SpawnGroup group_name="bandits_l12_3" number="10"/>
+			<SpawnGroup group_name="bloodbeaks" number="10"/>
+			<SpawnGroup group_name="bandits_l12_todd" number="1"/>
+		</SpawnGroups>
 	</Region>
 
 <!-- Aisen, Gebirgspfad [Wald und Gebirge]; Template -->
