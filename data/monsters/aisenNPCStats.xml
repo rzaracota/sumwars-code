@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" ?>
+<?xml version="1.0" ?>
 <!-- Dorfwachen, Aisen -->
 <Monster type="NPC" subtype="guard" name="Guard" fraction="human" race="human" layer="NORMAL">
 	<Mesh file="guard_ais" />
@@ -6,7 +6,7 @@
 	<BasicAttributes
 					experience="0"
 					level="20"
-					max_health="260"
+					max_health="500"
 					armor="60"
 					block="0"
 					attack="40"
