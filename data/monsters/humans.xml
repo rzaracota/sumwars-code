@@ -584,7 +584,7 @@
 	<RenderInfo name="human_rob_fairy" />
 	<Dropslots >
 		<Dropslot pbig="0.5" pmedium="0.5" psmall="0.0" pgold="0.00" min_gold="50" max_gold="150" min_level="7" max_level="13" magic_prob="1.0" magic_power="500" />
-		<Dropslot pbig="0.2" pmedium="0.3" psmall="0.1" pgold="0.05" min_gold="80" max_gold="2000" min_level="7" max_level="12" magic_prob="0.8" magic_power="400" />
+		<Dropslot pbig="0.2" pmedium="0.3" psmall="0.1" pgold="0.05" min_gold="80" max_gold="2000" min_level="7" max_level="12" magic_prob="1.0" magic_power="400" />
 		<Dropslot pbig="0.00" pmedium="0.0" psmall="0.4" pgold="0.00" min_gold="50" max_gold="150" min_level="7" max_level="12" magic_prob="0.8" magic_power="300" />
 		<Dropslot pbig="0.00" pmedium="0.0" psmall="0.00" pgold="1.00" min_gold="100" max_gold="400" />
 	</Dropslots>

@@ -2,8 +2,8 @@
 <Monster type="MONSTER" subtype="bloodbeak" name="bloodbeak" fraction="monster" race="animal" layer="AIR">
 	<RenderInfo name="bloodbeak" />
 	<Dropslots >
-		<Dropslot pbig="0.06" pmedium="0.08" psmall="0.07" pgold="0.05" min_gold="30" max_gold="80" min_level="5" max_level="13" magic_prob="0.1" magic_power="450" />
-		<Dropslot pbig="0.06" pmedium="0.08" psmall="0.04" pgold="0.05" min_gold="20" max_gold="50" min_level="4" max_level="8" magic_prob="0.2" magic_power="300" />
+		<Dropslot pbig="0.06" pmedium="0.08" psmall="0.07" pgold="0.05" min_gold="30" max_gold="80" min_level="5" max_level="13" magic_prob="0.2" magic_power="450" />
+		<Dropslot pbig="0.06" pmedium="0.08" psmall="0.04" pgold="0.05" min_gold="20" max_gold="50" min_level="4" max_level="8" magic_prob="0.4" magic_power="300" />
 	</Dropslots>
 	
 	<BasicAttributes
