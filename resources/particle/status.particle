@@ -41,8 +41,6 @@ Blind
         green -0.25
         blue -0.25
 }
-
-
 }
 
 Poison
@@ -159,8 +157,6 @@ Confuse
         green -0.25
         blue -0.25
 }
-
-
 }
 
 Mute
@@ -206,8 +202,6 @@ Mute
         green -0.25
         blue -0.25
 }
-
-
 }
 
 Paralyze
@@ -338,6 +332,39 @@ Burning
         green -0.25
         blue -0.25
 }
+}
 
+BladeStorm
+{
+    material        FlarePointSprite
+	particle_width  15
+    particle_height 15
+    cull_each       false
+	cull_each       false
+    quota           500
+    billboard_type  point
+    
+    // Area emitter
+    emitter Box
+{
+        angle           30
+        emission_rate   50
+        time_to_live    0.01
+        position	0 0 0
+        direction       1 0 0
+        velocity    	70
+        colour_range_start  1 1 1
+        colour_range_end    0.9 0.9 0.9
+        width           10
+        height          10
+        depth           20
+}
 
+    // Fader
+    affector ColourFader
+{
+        red -0.25
+        green -0.25
+        blue -0.25
+}
 }
