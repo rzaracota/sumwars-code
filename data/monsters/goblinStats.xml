@@ -1117,6 +1117,7 @@
 		<Ability type="freeze"  rating="1" timer_nr="2" timer_value="16000"/>
 		<Ability type="die" />
 		<Ability type="noaction" />
+		<Ability type="talk" />
 	</BasicAttributes>
 	
 	<Geometry radius="0.5" />

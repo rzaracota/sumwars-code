@@ -83,7 +83,7 @@
 </RenderInfo>
 
 <RenderInfo name="robeSimple">
-	<Entity source="robe_simple.mesh"/> 
+	<Entity source="rag_rob.mesh"/> 
 </RenderInfo>
 <RenderInfo name="robeSimple#m" parent="playerbaseM" inherit="animation">
 	<Entity source="robe_simpleMT.mesh"/> 

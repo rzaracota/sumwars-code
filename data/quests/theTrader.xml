@@ -249,7 +249,8 @@
 	<NPC refname = "The Trader">
 		<Topic name="joringsbridge_theTrader" start_option="What are you doing here?">
 			<Condition>
-				return(theTrader.talkedInJB ~=true);
+				local region = get(getSpeaker("The Trader"), "region")
+				return((theTrader.talkedInJB ~=true)and(region == "joringsbridge"));
 			</Condition>
 			<Effect>
 				speak("The Trader",_("Oh, nun, mir fiel auf, dass Ihr nach Norden wolltet, und ich dachte mir, dass es Euch vielleicht gelegen kaeme, mich in der Naehe zu wissen."),"happy");

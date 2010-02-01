@@ -382,7 +382,7 @@
 				speak("Soren",_("Ihr solltet begreifen, dass es ganz an euch liegt, wie lange ihr unter der vollkommenen Knechtschaft des Totengottes stehen werdet."),"threaten");
 				speak("Soren",_("Erfuellt ihr meinen Auftrag zur Zufriedenheit Akerans und des Konzils, habe ich die Macht euch aus seine Klauen zu befreien."), "normal");
 				speak("Soren",_("Für immer."),"bored");
-				speak("Soren",_("If not, however..."),"threaten");
+				speak("Soren",_("Wenn nicht, jedoch..."),"threaten");
 				if(solo())then
 					speak("leader",_("Hab ich schon tausend Mal gehoert. Spar dir die Rede."),"bored");
 				else
@@ -597,6 +597,8 @@
 		
 		<Event trigger ="elemental_end" once="true" >
 			<Effect>
+				setCutsceneMode(true);
+				addCameraPosition(3000,"locCamera", -90,60, 30);
 				createDialogue();
 				addAllPlayersToDialog();
 				addStandardRoles();
@@ -631,6 +633,7 @@
 		
 		<Event trigger ="teleport_out" once="true" >
 			<Effect>
+				setCutsceneMode(false);
 				assembleParty("medBackalley","entry_south","entry_north");
 			</Effect>
 		</Event>
@@ -655,9 +658,11 @@
 				fortify_dwall_tmp.assemble = nil;
 				fortify_dwall_tmp.comCrystal = createObject("sorenCrystal","locCrystal");
 				groupObjectsArc(getPlayers(),"locScene","locCrystal",nil,360);
+				
 				createDialogue();
 				addAllPlayersToDialog();
 				addStandardRoles();
+				
 				addSpeaker(fortify_dwall_tmp.comCrystal,"Soren",true);
 				if(not solo())then
 					local leader = getSpeaker("PL");
@@ -759,6 +764,7 @@
 					local list = {};
 					list[getSpeaker("waropt")]=true;
 					local hopeful = getRolePlayer("any", listToSet(getPlayers()),list);
+					print("any_hopeful: "..hopeful);
 					addSpeaker(hopeful,"any_hope");
 					speak("any_hope", _("Habe ich das richtig verstanden?"),"surprised");
 					speak("any_hope", _("Hat er wirklich die Macht, uns von Harads Fluch zu befreien?"),"normal");

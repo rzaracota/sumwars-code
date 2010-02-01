@@ -36,7 +36,7 @@
 	<BasicAbility type="attack" />
 	<ItemRequirementTag name="warrior" />
 	
-	<Look name="warrior" render_info="warrior_m" gender="male" emotionset="human_standard" hair="hairShort_ms1.mesh" item_suffix="#m"/>
+	<Look name="warrior" render_info="warrior_m" gender="male" emotionset="warrior_emotion" hair="hairShort_ms1.mesh" item_suffix="#m"/>
 	<Look name="fencer" render_info="warrior_f" gender="female" emotionset="gertlinde_emotion" hair="hair_fs1.mesh" item_suffix="#fs"/>
 	
 	<SkilltreeTabs tab1="Fighting skills" tab2="Passive skills" tab3="Fighting spirit" />

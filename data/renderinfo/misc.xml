@@ -26,3 +26,39 @@
 	</State>
 </RenderInfo>
 
+<!-- smoke from above - meant for the fissure -->
+<RenderInfo name="smoke">
+	<ParticleSystem objectname="smoke" source="Smoke" position="0 4 0"/>
+</RenderInfo>
+
+<!-- an explosive device from the council -->
+<RenderInfo name="council_bomb">
+	<Entity source="council_bomb.mesh"/>
+	
+	<Action name="charge">
+		<ParticleSystem objectname="particle" source="Bomb" position="0.0 0.1 0.0"/>
+		<Scale  objectname="particle" start="0" end="0.8" start_val="10.0" end_val="0.3" />
+	</Action>
+	<Action name="detonate">
+		<ParticleSystem objectname="explosion1" source="Fire_Explosion" position="0 0.2 0" />
+		<Scale objectname="explosion1" start="0" end="0.5" start_val="0.1" end_val="1.2" />
+		<Detach time="0.6" objectname="explosion1" />
+		
+		<ParticleSystem objectname="explosion2" source="Fire_Explosion" position="3 0.2 0" time="0.2"/>
+		<Scale objectname="explosion2" start="0.2" end="0.7" start_val="0.1" end_val="1.2" />
+		<Detach time="0.8" objectname="explosion2" />
+		
+		<ParticleSystem objectname="explosion3" source="Fire_Explosion" position="3 0.2 0" time="0.1"/>
+		<Scale objectname="explosion3" start="0.1" end="0.6" start_val="0.1" end_val="1.2" />
+		<Detach time="0.7" objectname="explosion3" />
+		
+		<ParticleSystem objectname="explosion4" source="Fire_Explosion" position="1.5 0.2 0.9" time="0.2"/>
+		<Scale objectname="explosion4" start="0.2" end="0.7" start_val="0.1" end_val="1.2" />
+		<Detach time="0.8" objectname="explosion4" />
+		
+		<ParticleSystem objectname="explosion5" source="Fire_Explosion" position="-2.0 0.2 -1.0" time="0.5"/>
+		<Scale objectname="explosion5" start="0.5" end="1.0" start_val="0.1" end_val="1.2" />
+		<Detach time="1.0" objectname="explosion5" />
+	</Action>
+</RenderInfo>
+

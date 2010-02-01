@@ -446,6 +446,9 @@
 	<Action name="goblin_icebolt">
 		<Animation name="castMagicWeak" />
 	</Action>
+	<Action name="talk">
+		<Animation name="talk" />
+	</Action>
 </RenderInfo>
 <RenderInfo name="goblin_gabclan_sword" parent="goblinbase">
 	<Entity source="goblinBrown.mesh"/>

@@ -58,7 +58,7 @@
 			<Detach objectname="magic"/>
 		</Deactivation>
 	</State>
-	<State name="frost_arrows" reference = "ice_arrows">
+	<State name="frost_arrows">
 		<Activation>
 			<ParticleSystem objectname="magic" source="HandIce" bone="itemLeftHand" position="0 0 0"  />
 		</Activation>
@@ -68,14 +68,15 @@
 		</Deactivation>
 	</State>
 	
-	<State name="blade_storm" reference = "ice_arrows">
+	<State name="blade_storm">
 		<Activation>
-			<ParticleSystem objectname="magicEnergy1" source="BowBuff" position="0.0 2.0 0.0" />
-			<Rotation objectname = "magicEnergy1" start="0.2" end="0.9" start_vec="0.0 0.0 0.0" end_vec="0.0 360.0 0.0" />
+			<ParticleSystem objectname="bladeStormLeft" source="BladeStorm" bone="ellbowLeft" />
+			<ParticleSystem objectname="bladeStormRight" source="BladeStorm" bone="ellbowRight" />
 		</Activation>
 		
 		<Deactivation>
-			<Detach objectname="magicEnergy1" />
+			<Detach objectname="bladeStormLeft" />
+			<Detach objectname="bladeStormRight" />
 		</Deactivation>
 	</State>
 	

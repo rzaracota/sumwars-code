@@ -125,7 +125,5 @@
 	<Subobject objectname="soldier30" source="guard_ais" position="4 0 0"/>
 	<Subobject objectname="soldier31" source="guard_ais" position="4 0 1"/>
 	<Subobject objectname="soldier32" source="guard_ais" position="4 0 2"/>
-
-	
 </RenderInfo>
 

@@ -38,7 +38,8 @@
 	<BaseAttributesMod>
 		<LuaImplementation>
 			setBaseModValue("time",70000);
-			setBaseModValue("attack_speed",700)
+			setBaseModValue("attack_speed",700);
+			setBaseModValue("flag","blade_storm");
 		</LuaImplementation>
 	</BaseAttributesMod>
 </Ability>

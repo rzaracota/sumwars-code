@@ -2,7 +2,7 @@
 
 <!-- Flickenrobe -->
 <Item type="armor" subtype="rag_rob" name="ragged robe" size="medium">
-	<Image image="set:council_rob.png image:full_image" />
+	<Image image="set:rag_rob.png image:full_image" />
 	<RenderInfo name="robeSimple" />
 	<Attribute
 			level_requirement="1"
@@ -36,7 +36,7 @@
 
 <!-- Lehrlingsrobe -->
 <Item type="armor" subtype="prentc_rob" name="apprentice robe" size="medium">
-	<Image image="set:council_rob.png image:full_image" />
+	<Image image="set:rag_rob.png image:full_image" />
 	<RenderInfo name="robeSimple" />
 	<Attribute
 			level_requirement="3"

@@ -44,6 +44,10 @@
 	<Action name="walk">
 		<Animation name="walk" />
 	</Action>
+	
+	<Action name="talk">
+		<Animation name="talk" />
+	</Action>
 
 	<Action name="die">
 		<Animation name="die" />
@@ -151,6 +155,20 @@
 		<Animation name="walkOneHand" />
 	</Action>
 	
+	<Action name="talk">
+		<Animation name="talkPole" />
+	</Action>
+	
+	<Action name="kneelDown">
+		<Animation name="kneelDownPole"/>
+	</Action>
+	<Action name="kneel">
+		<Animation name="kneelPole"/>
+	</Action>
+	<Action name="kneelUp">
+		<Animation name="kneelUpPole"/>
+	</Action>
+	
 	<Action name="magic_attack">
 		<Animation name="attackMagicTwoHands" />
 		<ParticleSystem objectname="magicEnergy" bone="mainmesh:itemRightHand" source="Magic_Arrow" position="0.0 0.0 -1.4" />
@@ -220,10 +238,26 @@
 </RenderInfo>
 
 <RenderInfo name = "necromancer" parent="necromancerBase">
-	<Entity source="soren.mesh"/>
-	<Entity objectname="head" bone="crown" source="head_m1.mesh" />
+	<Entity source="necromancerM.mesh"/>
+	<Entity objectname="head" bone="crown" source="head_necro.mesh" />
+	<Entity objectname="hair" bone="crown" source="hair_punk_1.mesh" />
 	<Subobject objectname="robe" source="necromancerRobeEnemy" />
-	<Entity objectname="weapon" bone="itemRightHand" source="aprnt_stf.mesh" />
+	<Entity objectname="weapon" bone="itemRightHand" source="necro_stf.mesh" />
+</RenderInfo>
+
+<RenderInfo name="worker_skeleton" parent="skeletonbase">
+	<Entity source="skeleton.mesh"/>
+	<Entity objectname="weapon" bone="itemRightHand" source="pick_axe.mesh" />
+	
+	<Action name = "attack">
+		<Animation name = "attackTwoHandsBlunt"/>
+	</Action>
+	<Action name = "walk">
+		<Animation name = "walkTwoHandsHammer"/>
+	</Action>
+	<Action name = "noaction">
+		<Animation name = "attackTwoHands"/>
+	</Action>
 </RenderInfo>
 
 <RenderInfo name="lich" parent="lichbase">

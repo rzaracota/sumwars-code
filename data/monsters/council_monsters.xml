@@ -177,6 +177,7 @@
 		<Ability type="die" />
 
 		<Ability type="noaction" />
+		<Ability type="summoned" time="2000"/>
 		<Ability type="fire_ball"  rating="3"/>
 
 	</BasicAttributes>

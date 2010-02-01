@@ -2,7 +2,7 @@
 <!-- Dorfwachen, Aisen -->
 <Monster type="NPC" subtype="guard" name="Guard" fraction="human" race="human" layer="NORMAL">
 	<Mesh file="guard_ais" />
-	<EmotionSet name="derred_emotion" />
+	<EmotionSet name="tolec_emotion" />
 	<BasicAttributes
 					experience="0"
 					level="20"

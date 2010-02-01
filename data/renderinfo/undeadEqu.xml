@@ -1,5 +1,5 @@
 ﻿<RenderInfo name="necromancerRobeEnemy" parent="necromancerBase">
-	<Entity source="necromancer_robeM.mesh"/>
+	<Entity source="necro_robMT.mesh"/>
 </RenderInfo>
 
 <RenderInfo name="rustArmor" parent="reaperbase">

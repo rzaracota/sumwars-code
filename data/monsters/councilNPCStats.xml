@@ -2,7 +2,7 @@
 <!-- Tolec -->
 <Monster type="NPC" subtype="tolec" name="Tolec" fraction="human" race="human" layer="NORMAL">
 	<RenderInfo name="tolec" />
-	<EmotionSet name="human_standard" />
+	<EmotionSet name="tolec_emotion" />
 	<BasicAttributes
 					experience="0"
 					level="83"

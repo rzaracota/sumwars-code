@@ -49,10 +49,27 @@
 </NPC>
 
 <NPC refname="The Trader">
-	<Trade refresh_time="600000" price_factor="1.0" pay_factor="0.1">
+	<Trade refresh_time="20000" price_factor="1.0" pay_factor="0.1">
 		<TradeItem subtype="town_portal"  number="20" number_magical="0"/>
 	</Trade>
 	
 	<Topic name="trade" start_option="Leere Schriftrollen kaufen" />
+</NPC>
+
+<NPC refname="The Lost Trader">
+	<Trade refresh_time="10000" price_factor="1.0" pay_factor="0.1">
+		<TradeItem subtype="town_portal"  number="10" number_magical="0"/>
+		<TradeItem subtype="heal_1"  number="10" number_magical="0"/>
+		<TradeItem subtype="heal_2"  number="10" number_magical="0"/>
+	</Trade>
+	
+	<Topic name="trade" start_option="Leere Schriftrollen kaufen" />
+
+	<Topic name="start_dialogue" >
+		<Effect>
+			local pl = getSpeaker("main_player");
+			set(pl,"health",get(pl,"max_health"));
+		</Effect>
+	</Topic>
 </NPC>
 

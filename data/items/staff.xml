@@ -537,8 +537,8 @@
 
 <!-- Nekromantenstab -->
 <Item type="weapon" subtype="necro_stf" name="necromancer staff" size="big">
-	<Image image="set:spruce_stf.png image:full_image" />
-	<Mesh file="basicStaff.mesh" />
+	<Image image="set:necro_stf.png image:full_image" />
+	<Mesh file="necro_stf.mesh" />
 	<Attribute
 			  level_requirement="65"
 			  character_requirement="mage"

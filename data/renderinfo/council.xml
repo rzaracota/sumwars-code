@@ -18,6 +18,14 @@
 	<Action name="fire_ball">
 		<Animation name="attack1" />
 	</Action>
+	
+	<Action name="summoned">
+		<Animation name="summoned" />
+		<Scale  start="0" end="1.0" start_val="0.1" end_val="1.0" />
+		<ParticleSystem objectname="summonFire" source="Firewall" />
+		<Scale  objectname="summonFire" start="0" end="1.0" start_val="0.1" end_val="0.7" />
+		<Detach objectname="summonFire" time="1.0"/>
+	</Action>
 </RenderInfo>
 
 <RenderInfo name="slugbase" parent="creaturebase">
@@ -148,6 +156,8 @@
 
 <RenderInfo name="fireElemS" parent="elementalbase">
 	<Entity source="fireElemSmall.mesh"/>
+	<ParticleSystem objectname="rightHand" source="FireElemEyes" bone="fingerjointRight"/>
+	<ParticleSystem objectname="rightLeft" source="FireElemEyes" bone="fingerJointLeft"/>
 </RenderInfo>
 
 <RenderInfo name="fireSlug" parent="slugbase">

@@ -98,6 +98,25 @@
 	<Action name="getUp#bow">
 		<Animation name="getUpBow" />
 	</Action>
+
+	<Action name="kneelDown">
+		<Animation name="kneelDownPole"/>
+	</Action>
+	<Action name="kneelDown#TwoHands#staff">
+		<Animation name="kneelDownPole"/>
+	</Action>
+	<Action name="kneel">
+		<Animation name="kneelPole"/>
+	</Action>
+	<Action name="kneel#TwoHands#staff">
+		<Animation name="kneelPole"/>
+	</Action>
+	<Action name="kneelUp">
+		<Animation name="kneelUpPole"/>
+	</Action>
+	<Action name="kneelUp#TwoHands#staff">
+		<Animation name="kneelUpPole"/>
+	</Action>
 	
 	<Action name="die">
 		<Animation name="die" />
