@@ -125,6 +125,12 @@ void CharConv::toBuffer(std::string s)
 		}
 		else
 		{
+			int pos = s.find(' ');
+			while (pos != std::string::npos)
+			{
+				s.replace(pos,1,"#~#");
+				pos = s.find(' ',pos+1);
+			}
 			(*m_stream) << s << " ";
 		}
 	}
@@ -154,6 +160,13 @@ void CharConv::fromBuffer(std::string& s)
 		if (s == "#empty#")
 		{
 			s="";
+		}
+		
+		int pos = s.find("#~#");
+		while (pos != std::string::npos)
+		{
+			s.replace(pos,3," ");
+			pos = s.find("#~#",pos+1);
 		}
 	}
 }
