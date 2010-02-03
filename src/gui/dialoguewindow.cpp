@@ -7,6 +7,7 @@ DialogueWindow::DialogueWindow(Document* doc, Scene* scene)
 	CEGUI::Window* label;
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::Window* game_screen =  win_mgr.getWindow("GameScreen");
+	CEGUI::ScrollablePane* pane;
 	
 	// Oberer und Unterer Balken
 	CEGUI::FrameWindow* lower_bar = (CEGUI::FrameWindow*) win_mgr.createWindow("TaharezLook/FrameWindow", "DialogueLowerBar");
@@ -114,48 +115,72 @@ DialogueWindow::DialogueWindow(Document* doc, Scene* scene)
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.58f), cegui_reldim(0.05f)));
 	label->setSize(CEGUI::UVector2(cegui_reldim(0.3f), cegui_reldim( 0.22f)));
 	
+	pane = static_cast<CEGUI::ScrollablePane*> (win_mgr.createWindow("TaharezLook/ScrollablePaneNoBar", "SpeakerTextPane0"));
+	upper_bar->addChildWindow(pane);
+	pane->setPosition(CEGUI::UVector2(cegui_reldim(0.12f), cegui_reldim(0.27f)));
+	pane->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&DialogueWindow::onTextClicked, this));
+	pane->setSize(CEGUI::UVector2(cegui_reldim(0.38f), cegui_reldim( 0.66f)));
+	
 	label = win_mgr.createWindow("TaharezLook/StaticText", "SpeakerTextLabel0");
-	upper_bar->addChildWindow(label);
+	pane->addChildWindow(label);
 	label->setProperty("FrameEnabled", "false");
 	label->setProperty("BackgroundEnabled", "true");
 	label->setFont("DejaVuSerif-10");
 	label->setProperty("HorzFormatting", "WordWrapLeftAligned");
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.12f), cegui_reldim(0.29f)));
+	label->setPosition(CEGUI::UVector2(cegui_reldim(0.0f), cegui_reldim(0.0f)));
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&DialogueWindow::onTextClicked, this));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.38f), cegui_reldim( 0.66f)));
+	label->setSize(CEGUI::UVector2(cegui_reldim(0.99f), cegui_reldim( 0.99f)));
 	label->setWantsMultiClickEvents(false);
+	
+	pane = static_cast<CEGUI::ScrollablePane*> (win_mgr.createWindow("TaharezLook/ScrollablePaneNoBar", "SpeakerTextPane1"));
+	upper_bar->addChildWindow(pane);
+	pane->setPosition(CEGUI::UVector2(cegui_reldim(0.5f), cegui_reldim(0.27f)));
+	pane->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&DialogueWindow::onTextClicked, this));
+	pane->setSize(CEGUI::UVector2(cegui_reldim(0.38f), cegui_reldim( 0.66f)));
 	
 	label = win_mgr.createWindow("TaharezLook/StaticText", "SpeakerTextLabel1");
-	upper_bar->addChildWindow(label);
+	pane->addChildWindow(label);
 	label->setProperty("FrameEnabled", "false");
-	label->setProperty("BackgroundEnabled", "true");
+	label->setProperty("BackgroundEnabled", "false");
 	label->setFont("DejaVuSerif-10");
 	label->setProperty("HorzFormatting", "WordWrapLeftAligned");
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.5f), cegui_reldim(0.29f)));
+	label->setPosition(CEGUI::UVector2(cegui_reldim(0.0f), cegui_reldim(0.0f)));
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&DialogueWindow::onTextClicked, this));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.38f), cegui_reldim( 0.66f)));
+	label->setSize(CEGUI::UVector2(cegui_reldim(0.99f), cegui_reldim( 0.99f)));
 	label->setWantsMultiClickEvents(false);
+	
+	pane = static_cast<CEGUI::ScrollablePane*> (win_mgr.createWindow("TaharezLook/ScrollablePaneNoBar", "SpeakerTextPane2"));
+	lower_bar->addChildWindow(pane);
+	pane->setPosition(CEGUI::UVector2(cegui_reldim(0.12f), cegui_reldim(0.27f)));
+	pane->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&DialogueWindow::onTextClicked, this));
+	pane->setSize(CEGUI::UVector2(cegui_reldim(0.38f), cegui_reldim( 0.66f)));
 	
 	label = win_mgr.createWindow("TaharezLook/StaticText", "SpeakerTextLabel2");
-	lower_bar->addChildWindow(label);
+	pane->addChildWindow(label);
 	label->setProperty("FrameEnabled", "false");
 	label->setProperty("BackgroundEnabled", "true");
 	label->setFont("DejaVuSerif-10");
 	label->setProperty("HorzFormatting", "WordWrapLeftAligned");
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.12f), cegui_reldim(0.29f)));
+	label->setPosition(CEGUI::UVector2(cegui_reldim(0.0f), cegui_reldim(0.0f)));
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&DialogueWindow::onTextClicked, this));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.38f), cegui_reldim( 0.66f)));
+	label->setSize(CEGUI::UVector2(cegui_reldim(0.99f), cegui_reldim( 0.99f)));
 	label->setWantsMultiClickEvents(false);
 	
+	pane = static_cast<CEGUI::ScrollablePane*> (win_mgr.createWindow("TaharezLook/ScrollablePaneNoBar", "SpeakerTextPane3"));
+	lower_bar->addChildWindow(pane);
+	pane->setPosition(CEGUI::UVector2(cegui_reldim(0.5f), cegui_reldim(0.27f)));
+	pane->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&DialogueWindow::onTextClicked, this));
+	pane->setSize(CEGUI::UVector2(cegui_reldim(0.38f), cegui_reldim( 0.66f)));
+	
 	label = win_mgr.createWindow("TaharezLook/StaticText", "SpeakerTextLabel3");
-	lower_bar->addChildWindow(label);
+	pane->addChildWindow(label);
 	label->setProperty("FrameEnabled", "false");
 	label->setProperty("BackgroundEnabled", "true");
 	label->setFont("DejaVuSerif-10");
 	label->setProperty("HorzFormatting", "WordWrapLeftAligned");
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.5f), cegui_reldim(0.29f)));
+	label->setPosition(CEGUI::UVector2(cegui_reldim(0.0f), cegui_reldim(0.0f)));
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&DialogueWindow::onTextClicked, this));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.38f), cegui_reldim( 0.66f)));
+	label->setSize(CEGUI::UVector2(cegui_reldim(0.99f), cegui_reldim( 0.99f)));
 	label->setWantsMultiClickEvents(false);
 }
 
@@ -191,7 +216,7 @@ void DialogueWindow::update()
 		CEGUI::Window* wimage;
 		CEGUI::Window* wname;
 		CEGUI::Window* wtext;
-		
+		CEGUI::ScrollablePane* wpane;
 		
 		if (dia != 0)
 		{
@@ -221,6 +246,13 @@ void DialogueWindow::update()
 				stream << "SpeakerTextLabel";
 				stream << i;
 				wtext = win_mgr.getWindow(stream.str());
+				
+				
+				stream.str("");
+				stream << "SpeakerTextPane";
+				stream << i;
+				wpane = static_cast<CEGUI::ScrollablePane*> (win_mgr.getWindow(stream.str()));
+				
 				
 				spstate = dia->getSpeakerState((Dialogue::Position) i);
 				if (spstate != 0)
@@ -252,11 +284,47 @@ void DialogueWindow::update()
 					else
 					{
 						text = dgettext("sumwars_xml",text.c_str());
+						CEGUI::Font* fnt = wtext->getFont();
+						
 						if (wtext->getText() != (CEGUI::utf8*) text.c_str())
 						{
 							wtext->setText((CEGUI::utf8*) text.c_str());
+							
+							
+							CEGUI::UVector2 size = wtext->getSize();
+							CEGUI::Rect isize = wtext->getUnclippedInnerRect ();
+							float height = PixelAligned(fnt->getFormattedLineCount(text, isize, CEGUI::WordWrapCentred) * fnt->getLineSpacing());
+							size.d_y = CEGUI::UDim(0.0, height);
+							wtext->setSize(size);
+							
 						}
 						wtext->setVisible(true);
+						
+						// Scrolling des Texts
+						float height = wtext->getSize().d_y.d_offset;
+						if (height > 4*fnt->getLineSpacing())
+						{
+							int initiallines = 2;
+							int lines = (int) (height / fnt->getLineSpacing() + 0.5);
+							float timesplit = initiallines+lines;
+							float frac = cr->getSpeakText().m_displayed_time / cr->getSpeakText().m_time;
+							
+							float scrollpos = 0.0;
+							if (frac > (timesplit - initiallines)/timesplit)
+							{
+								scrollpos = 1.0;
+							}
+							else if (frac > initiallines/timesplit)
+							{
+								scrollpos =(frac * timesplit - initiallines) / (timesplit - initiallines*2);
+							}
+							
+							if (wpane->getVerticalScrollPosition() != scrollpos)
+							{
+								wpane->setVerticalScrollPosition(scrollpos);
+							}
+							
+						}
 					}
 					
 					std::string image = cr->getEmotionImage(cr->getSpeakText().m_emotion);
@@ -298,9 +366,9 @@ void DialogueWindow::update()
 				stream << i;
 				wtext = win_mgr.getWindow(stream.str());
 				
-				wimage->setVisible(false);
-				wname->setVisible(false);
-				wtext->setVisible(false);
+				stream.str("");
+				stream << "SpeakerTextPane";
+				stream << i;
 			}
 		}
 	}
