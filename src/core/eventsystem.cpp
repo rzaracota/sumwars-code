@@ -724,27 +724,34 @@ int EventSystem::setDynModValue(lua_State *L)
 int EventSystem::createProjectile(lua_State *L)
 {
 	int argc = lua_gettop(L);
-	if (argc >= 3 && lua_isstring(L,1)  && (lua_istable(L,2) || lua_isstring(L,2)))
+	if (argc >= 2 && lua_isstring(L,1)  && (lua_istable(L,2) || lua_isstring(L,2)))
 	{
-		if (m_region !=0 && m_damage != 0)
+		if (m_region !=0)
 		{
 			std::string tname = lua_tostring(L, 1);
 			Vector pos = getVector(L,2);
 
-			float speed = 10.0;
+			float speed = 0.0;
 			
 			// Schaden
 			// Projektil erzeugen
 			Projectile* pr = ObjectFactory::createProjectile(tname);
 			if (pr ==0)
+			{
+				ERRORMSG("could not create projectile with type %s",tname.c_str());
 				return 0;
+			}
 			
-			pr->setDamage(m_damage);
+			Damage* tmp = new Damage;
+			pr->setDamage(tmp);
+			delete tmp;
+			
+			m_damage = pr->getDamage();
 
 			// Richtung, Geschwindigkeit ermitteln
 			if (argc>=3 && (lua_istable(L,3) || lua_isstring(L,3)))
 			{
-
+				speed = 10000.0;
 				Vector goal = getVector(L,3);
 				Vector dir = goal - pos;
 				dir.normalize();
@@ -755,7 +762,7 @@ int EventSystem::createProjectile(lua_State *L)
 				}
 
 				// Geschwindigkeit wird in m/ms gemessen
-				pr->setSpeed(dir *speed/1000);
+				pr->setSpeed(dir *speed/1000000);
 
 				if (argc>=5 && lua_isnumber(L,5))
 				{
@@ -766,7 +773,6 @@ int EventSystem::createProjectile(lua_State *L)
 
 			m_region->insertProjectile(pr,pos);
 		}
-
 	}
 	else
 	{
