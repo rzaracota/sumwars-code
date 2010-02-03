@@ -38,6 +38,7 @@
 	<FalagardMapping WindowType="TaharezLook/Slider"      TargetType="CEGUI/Slider"      Renderer="Falagard/Slider"  LookNFeel="TaharezLook/Slider" />
 	<FalagardMapping WindowType="TaharezLook/SliderThumb" TargetType="CEGUI/Thumb" Renderer="Falagard/Button"  LookNFeel="TaharezLook/SliderThumb" />
 	<FalagardMapping WindowType="TaharezLook/ScrollablePane" TargetType="CEGUI/ScrollablePane" Renderer="Falagard/ScrollablePane" LookNFeel="TaharezLook/ScrollablePane" />
+	<FalagardMapping WindowType="TaharezLook/ScrollablePaneNoBar" TargetType="CEGUI/ScrollablePane" Renderer="Falagard/ScrollablePane" LookNFeel="TaharezLook/ScrollablePaneNoBar" />
 	<FalagardMapping WindowType="TaharezLook/Spinner" TargetType="CEGUI/Spinner" Renderer="Falagard/Default" LookNFeel="TaharezLook/Spinner" />
 	<FalagardMapping WindowType="TaharezLook/Tooltip" TargetType="CEGUI/Tooltip" Renderer="Falagard/Tooltip" LookNFeel="TaharezLook/Tooltip" />
 	<FalagardMapping WindowType="TaharezLook/StaticImage" TargetType="DefaultWindow" Renderer="Falagard/StaticImage" LookNFeel="TaharezLook/StaticImage" />
