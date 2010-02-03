@@ -717,13 +717,13 @@ void DialogueWindow::updateSpeechBubbles()
 				cstring += (CEGUI::utf8*) stream.str().c_str();
 			}
 			
-			elemwidth =font->getTextExtent(ctext);
+			elemwidth =font->getTextExtent(cstring);
 			elemheight = lineheight+5;
 		
 			if (elemwidth > maxwidth)
 			{
 				elemwidth = maxwidth;
-				lines = font->getFormattedLineCount(ctext,rect, CEGUI::WordWrapLeftAligned);
+				lines = font->getFormattedLineCount(cstring,rect, CEGUI::WordWrapLeftAligned);
 				elemheight = lines * lineheight;
 			}
 			width = std::max(width,elemwidth);
