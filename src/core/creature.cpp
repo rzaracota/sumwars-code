@@ -572,7 +572,7 @@ void Creature::performAction(float &time)
 			WorldObjectList res;
 			WorldObjectList::iterator it;
 			
-			getRegion()->getObjectsInShape(&s, &res, LAYER_ALL,PLAYER,0);
+			getRegion()->getObjectsInShape(&s, &res, LAYER_ALL,CREATURE,0);
 			
 			// naechstgelegenen verbuendeten Spieler suchen
 			float dist = 10000;
