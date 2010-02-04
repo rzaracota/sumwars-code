@@ -158,7 +158,7 @@ void EventSystem::init()
 	m_trigger =0;
 	m_dialogue =0;
 
-	doString("private_vars = {}; quests = {private_vars = private_vars} ; playervars = {}; scriptobjectvar = {}");
+	doString("private_vars = {}; quests = {private_vars = private_vars} ; playervars = {}; scriptobjectvar = {}; math.randomseed( os.time() );");
 }
 
 void  EventSystem::cleanup()
