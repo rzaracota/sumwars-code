@@ -936,144 +936,6 @@
 	
 	<AI ai_sight_range="12" ai_shoot_range="10" />
 </Monster>
-<!-- Goblinkrieger -->
-<!-- L5 -->
-<Monster type="MONSTER" subtype="goblin_war" name="goblin warrior" fraction="monster" race="goblin" layer="NORMAL">
-	<RenderInfo name="goblin_war" />
-	<Dropslots >
-		<Dropslot pbig="0.01" pmedium="0.02" psmall="0.04" pgold="0.02" max_gold="50" min_level="0" max_level="9" magic_prob="0.1" magic_power="350" />
-		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" max_gold="30" min_level="0" max_level="5" magic_prob="0.2" magic_power="300" />
-	</Dropslots>
-	
-	<BasicAttributes
-					experience="9"
-					level="5"
-					max_health="100"
-					armor="30"
-					block="0"
-					attack="40"
-					power="35"
-					strength="30"
-					dexterity="20"
-					magic_power="5"
-					willpower="20"
-					resistances_physical="0"
-					resistances_air="0"
-					resistances_ice="0"
-					resistances_fire="0"
-					resistances_cap_physical="50"
-					resistances_cap_air="50"
-					resistances_cap_ice="50"
-					resistances_cap_fire="50"
-					walk_speed="2500"
-					attack_speed="1500"
-					step_length="0.8"
-					attack_range="1"
-					>
-		<Ability type="walk" />
-		<Ability type="attack" rating="1"/>
-		<Ability type="die" />
-		<Ability type="noaction" />
-	</BasicAttributes>
-	
-	<Geometry radius="0.5" />
-	
-	<AI ai_sight_range="12" />
-</Monster>
-
-
-<!-- Goblinschamane -->
-<!-- L10 -->
-<Monster type="MONSTER" subtype="goblin_sh" name="goblin shaman" fraction="monster" race="goblin" layer="NORMAL">
-	<RenderInfo name="goblin.mesh" />
-	<Dropslots >
-		<Dropslot pbig="0.01" pmedium="0.02" psmall="0.04" pgold="0.02" max_gold="30" min_level="0" max_level="12" magic_prob="0.1" magic_power="500" />
-		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" max_gold="20" min_level="0" max_level="9" magic_prob="0.2" magic_power="400" />
-	</Dropslots>
-	
-	<BasicAttributes
-		experience="12"
-		level="10"
-		max_health="40"
-		armor="10"
-		block="0"
-		attack="25"
-		power="25"
-		strength="15"
-		dexterity="10"
-		magic_power="5"
-		willpower="10"
-		resistances_physical="0"
-		resistances_air="0"
-		resistances_ice="0"
-		resistances_fire="0"
-		resistances_cap_physical="50"
-		resistances_cap_air="50"
-		resistances_cap_ice="50"
-		resistances_cap_fire="50"
-		walk_speed="3000"
-		attack_speed="1500"
-		step_length="0.8"
-		attack_range="0.5"
-	>
-		<Ability type="walk" />
-		<Ability type="range_attack" rating="1"/>
-		<Ability type="die" />
-		<Ability type="noaction" />
-		
-	</BasicAttributes>
-	
-	<Geometry radius="0.5" />
-	
-	<AI ai_sight_range="10" ai_chase_range="20"/>
-</Monster>
-
-<!-- Goblinhaeuptling -->
-<!-- L11 -->
-<Monster type="MONSTER" subtype="goblin_wrc" name="goblin chieftain" fraction="monster" race="goblin" layer="NORMAL">
-	<RenderInfo name="goblin_wrc" />
-	<Dropslots >
-		<Dropslot pbig="0.01" pmedium="0.02" psmall="0.04" pgold="0.02" max_gold="50" min_level="0" max_level="13" magic_prob="0.1" magic_power="550" />
-		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" max_gold="30" min_level="0" max_level="10" magic_prob="0.2" magic_power="500" />
-	</Dropslots>
-	
-	<BasicAttributes
-					experience="15"
-					level="11"
-					max_health="150"
-					armor="50"
-					block="0"
-					attack="50"
-					power="50"
-					strength="40"
-					dexterity="20"
-					magic_power="5"
-					willpower="30"
-					resistances_physical="0"
-					resistances_air="0"
-					resistances_ice="0"
-					resistances_fire="0"
-					resistances_cap_physical="50"
-					resistances_cap_air="50"
-					resistances_cap_ice="50"
-					resistances_cap_fire="50"
-					walk_speed="2500"
-					attack_speed="1500"
-					step_length="0.8"
-					attack_range="1"
-					>
-	<Ability type="walk" />
-	<Ability type="range_attack" rating="1"/>
-	<Ability type="die" />
-	<Ability type="noaction" />
-		
-	</BasicAttributes>
-	
-	<Geometry radius="0.5" />
-	
-	<AI ai_sight_range="12" />
-</Monster>
-
 
 <!-- Gab'Resh, Maylons Grab -->
 <!-- L7 -->
@@ -1373,3 +1235,236 @@
 	<SubGroup subtype="goblin_snow" number="1" prob="1.0" />
 	<SubGroup subtype="goblin_fighter" number="3" prob="0.7" />
 </MonsterGroup>
+
+
+<!--------------------------->
+
+<!-- Goblinkrieger -->
+<!-- L13 -->
+<Monster type="MONSTER" subtype="goblin_warrior" name="goblin warrior" fraction="monster" race="goblin" layer="NORMAL">
+	<RenderInfo name="goblin_warrior" />
+	<Dropslots >
+		<Dropslot pbig="0.02" pmedium="0.06" psmall="0.05" pgold="0.05" min_gold="60" max_gold="80" min_level="6" max_level="14" magic_prob="0.2" magic_power="450" />
+		<Dropslot pbig="0.02" pmedium="0.06" psmall="0.03" pgold="0.05" min_gold="30" max_gold="50" min_level="6" max_level="12" magic_prob="0.4" magic_power="350" />
+	</Dropslots>
+	
+	<BasicAttributes
+					experience="45"
+					level="13"
+					max_health="250"
+					armor="30"
+					block="40"
+					attack="100"
+					power="130"
+					strength="35"
+					dexterity="20"
+					magic_power="5"
+					willpower="20"
+					resistances_physical="0"
+					resistances_air="0"
+					resistances_ice="0"
+					resistances_fire="0"
+					resistances_cap_physical="50"
+					resistances_cap_air="50"
+					resistances_cap_ice="50"
+					resistances_cap_fire="50"
+					walk_speed="2500"
+					attack_speed="1200"
+					step_length="0.8"
+					attack_range="1"
+					>
+		<Ability type="walk" />
+		<Ability type="attack" rating="1"/>
+		<Ability type="die" />
+		<Ability type="noaction" />
+	</BasicAttributes>
+	
+	<Geometry radius="0.5" />
+	
+	<AI ai_sight_range="12" />
+</Monster>
+
+<Monster type="MONSTER" subtype="goblin_rocklobber" name="goblin rocklobber" fraction="monster" race="goblin" layer="NORMAL">
+	<RenderInfo name="goblin_rocklobber" />
+	<Dropslots >
+		<Dropslot pbig="0.02" pmedium="0.06" psmall="0.05" pgold="0.05" min_gold="40" max_gold="90" min_level="6" max_level="14" magic_prob="0.2" magic_power="450" />
+		<Dropslot pbig="0.02" pmedium="0.06" psmall="0.03" pgold="0.05" min_gold="40" max_gold="60" min_level="6" max_level="12" magic_prob="0.4" magic_power="350" />
+	</Dropslots>
+	
+	<BasicAttributes
+					experience="40"
+					level="13"
+					max_health="150"
+					armor="20"
+					block="20"
+					attack="170"
+					power="120"
+					strength="35"
+					dexterity="50"
+					magic_power="5"
+					willpower="20"
+					resistances_physical="0"
+					resistances_air="0"
+					resistances_ice="0"
+					resistances_fire="0"
+					resistances_cap_physical="50"
+					resistances_cap_air="50"
+					resistances_cap_ice="50"
+					resistances_cap_fire="50"
+					walk_speed="2500"
+					attack_speed="800"
+					step_length="0.8"
+					attack_range="1"
+					>
+		<Ability type="walk" />
+		<Ability type="throw_rock" rating="1"/>
+		<Ability type="die" />
+		<Ability type="noaction" />
+	</BasicAttributes>
+	
+	<Geometry radius="0.5" />
+	
+	<AI ai_sight_range="12" ai_shoot_range="7" ai_chase_range="20" />
+</Monster>
+
+<!-- Goblinschamane -->
+<!-- L13 -->
+<Monster type="MONSTER" subtype="goblin_shaman" name="goblin shaman" fraction="monster" race="goblin" layer="NORMAL">
+	<RenderInfo name="goblin_shaman" />
+	<Dropslots >
+		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.07" pgold="0.05" min_gold="50" max_gold="130" min_level="6" max_level="14" magic_prob="0.2" magic_power="450" />
+		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.04" pgold="0.05" min_gold="30" max_gold="80" min_level="6" max_level="12" magic_prob="0.4" magic_power="350" />
+	</Dropslots>
+	
+	<BasicAttributes
+					experience="50"
+					level="13"
+					max_health="140"
+					armor="20"
+					block="0"
+					attack="25"
+					power="25"
+					strength="15"
+					dexterity="10"
+					magic_power="12"
+					willpower="10"
+					resistances_physical="0"
+					resistances_air="40"
+					resistances_ice="0"
+					resistances_fire="0"
+					resistances_cap_physical="50"
+					resistances_cap_air="50"
+					resistances_cap_ice="50"
+					resistances_cap_fire="50"
+					walk_speed="3000"
+					attack_speed="1500"
+					step_length="0.8"
+					attack_range="0.5"
+					>
+		<Ability type="walk" />
+		<Ability type="goblin_chain_lightning"  rating="1" timer_nr="0"/>
+		<Ability type="goblin_curse"  rating="1" timer_nr="1" timer_value="6000"/>
+		<Ability type="goblin_heal"  rating="1" timer_nr="2" timer_value="20000"/>
+		<Ability type="die" />
+		<Ability type="noaction" />
+		
+	</BasicAttributes>
+	
+	<Geometry radius="0.5" />
+	
+	<AI ai_sight_range="10" ai_chase_range="20"/>
+</Monster>
+
+
+<!-- L14 -->
+<Monster type="MONSTER" subtype="goblin_slayer" name="goblin slayer" fraction="monster" race="goblin" layer="NORMAL">
+	<RenderInfo name="goblin_slayer" />
+	<Dropslots >
+		<Dropslot pbig="0.03" pmedium="0.07" psmall="0.06" pgold="0.05" min_gold="40" max_gold="100" min_level="8" max_level="15" magic_prob="0.2" magic_power="450" />
+		<Dropslot pbig="0.03" pmedium="0.07" psmall="0.04" pgold="0.05" min_gold="20" max_gold="60" min_level="7" max_level="14" magic_prob="0.4" magic_power="350" />
+	</Dropslots>
+	
+	<BasicAttributes
+					experience="45"
+					level="14"
+					max_health="330"
+					armor="40"
+					block="0"
+					attack="120"
+					power="110"
+					strength="30"
+					dexterity="30"
+					magic_power="5"
+					willpower="30"
+					resistances_physical="0"
+					resistances_air="0"
+					resistances_ice="0"
+					resistances_fire="0"
+					resistances_cap_physical="50"
+					resistances_cap_air="50"
+					resistances_cap_ice="50"
+					resistances_cap_fire="50"
+					walk_speed="2500"
+					attack_speed="1100"
+					step_length="0.8"
+					attack_range="1"
+					>
+		<Ability type="walk" />
+		<Ability type="attack" rating="1"/>
+		<Ability type="monster_whirl" rating="2" timer_nr="1" timer_value="5000" />
+		<Ability type="die" />
+		<Ability type="noaction" />
+		
+	</BasicAttributes>
+	
+	<Geometry radius="0.5" />
+	
+	<AI ai_sight_range="12" />
+</Monster>
+
+<Monster type="MONSTER" subtype="goblin_assassin" name="goblin assassin" fraction="monster" race="goblin" layer="NORMAL">
+	<RenderInfo name="goblin_assassin" />
+	<Dropslots >
+		<Dropslot pbig="0.02" pmedium="0.06" psmall="0.05" pgold="0.05" min_gold="40" max_gold="100" min_level="8" max_level="15" magic_prob="0.2" magic_power="450" />
+		<Dropslot pbig="0.02" pmedium="0.06" psmall="0.04" pgold="0.05" min_gold="20" max_gold="60" min_level="7" max_level="14" magic_prob="0.4" magic_power="350" />
+	</Dropslots>
+	
+	<BasicAttributes
+					experience="45"
+					level="14"
+					max_health="170"
+					armor="10"
+					block="60"
+					attack="170"
+					power="90"
+					strength="20"
+					dexterity="30"
+					magic_power="20"
+					willpower="30"
+					resistances_physical="0"
+					resistances_air="0"
+					resistances_ice="0"
+					resistances_fire="0"
+					resistances_cap_physical="50"
+					resistances_cap_air="50"
+					resistances_cap_ice="50"
+					resistances_cap_fire="50"
+					walk_speed="3500"
+					attack_speed="1600"
+					step_length="0.8"
+					attack_range="0.7"
+					>
+		<Ability type="walk" />
+		<Ability type="attack" rating="1"/>
+		<Ability type="poison_attack" rating="2" timer_nr="1" timer_value="4000" />
+		<Ability type="die" />
+		<Ability type="noaction" />
+		
+	</BasicAttributes>
+	
+	<Geometry radius="0.5" />
+	
+	<AI ai_sight_range="12" />
+</Monster>
+
+

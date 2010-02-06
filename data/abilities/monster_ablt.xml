@@ -390,7 +390,6 @@
 	</Damage>
 </Ability>
 
-
 <Ability type="goblin_chain_lightning"
 		 name="Chainlightning"
 		 description="" 
@@ -413,6 +412,50 @@
 			setDamageValue("air_dmg", {admg[1] + magic*0.5, admg[2] + magic*1.5});
 		</LuaImplementation>	
 	</Damage>
+</Ability>
+
+<Ability type="goblin_curse"
+		 name="goblin curse"
+		 description="" 
+		 time="1200.000000" 
+		 timer_nr="1.000000" 
+		 timer_value="7000.000000" 
+		 base_ability="magic_attack" 
+		 critical_percent="0.800000" 
+		 target_type="ranged"
+		 >
+	<Flag name="mute_affected" />
+	<Effect>
+		<CppImplementation type="dmg_at_target" />
+	</Effect>
+	<Damage>
+		<LuaImplementation>
+			local magic = get(self,"magic_power");
+			setDamageValue("paralyzed", magic*1.5);
+			setDamageValue("blockable",false);
+			setDamageValue("ignore_armor",true);
+		</LuaImplementation>	
+	</Damage>
+</Ability>
+
+<Ability type="goblin_heal"
+		 name="Grand Cure"
+		 time="1501.000000"
+		 timer_nr="2.000000"
+		 timer_value="30000.000000" 
+		 base_ability="noaction"
+		 critical_percent="0.660000"
+		 target_type="party_all"
+		 radius="12">
+	<Flag name="mute_affected" />
+	<Effect>
+		<CppImplementation type="dynmod_at_allies_in_radius" />
+	</Effect>
+	<DynAttributesMod>
+		<LuaImplementation>
+			setDynModValue("health",10*get(self,"magic_power"));
+		</LuaImplementation>
+	</DynAttributesMod>
 </Ability>
 
 <Ability type="goblin_blizzard"
@@ -454,6 +497,25 @@
 		<CppImplementation type="attack" />
 		<LuaImplementation>
 			setDamageValue("phys_mult", getDamageValue("phys_mult")*2);
+		</LuaImplementation>	
+	</Damage>
+</Ability>
+
+<Ability type="poison_attack" 
+		 name="poison_attack" 
+		time="1.000000" 
+		 timer_nr="1.000000" 
+		 timer_value="2000.000000" 
+		 base_ability="attack" 
+		 critical_percent="0.660000" 
+		 target_type="melee" >
+	<Effect>
+		<CppImplementation type="dmg_at_target" />
+	</Effect>
+	<Damage>
+		<CppImplementation type="attack" />
+		<LuaImplementation>
+			setDamageValue("poisoned", get(self,"magic_power"));
 		</LuaImplementation>	
 	</Damage>
 </Ability>
@@ -580,6 +642,25 @@
 		<CppImplementation type="proj_fly_at_target" />
 	</Effect>
 	<Projectile type="throwing_berry" speed="10000" />
+	<Damage>
+		<CppImplementation type="range_attack" />
+		<CppImplementation type="small_numbers" />
+	</Damage>
+</Ability>
+
+<Ability type="throw_rock" 
+		 name="throw rock"
+		 description="Throw a berry" 
+		 time="2.000000" 
+		 timer_nr="0.000000" 
+		 timer_value="0.000000" 
+		 base_ability="range_attack" 
+		 critical_percent="0.40000" 
+		 target_type="ranged" >
+	<Effect>
+		<CppImplementation type="proj_fly_at_target" />
+	</Effect>
+	<Projectile type="throwing_rock" speed="8000" />
 	<Damage>
 		<CppImplementation type="range_attack" />
 		<CppImplementation type="small_numbers" />

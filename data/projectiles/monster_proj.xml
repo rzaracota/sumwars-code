@@ -43,6 +43,17 @@
 	</Effect>
 </Projectile>
 
+<Projectile subtype="throwing_rock"
+			radius="0.2"
+			lifetime="2000"
+			implementation = "fly"
+			>
+	<RenderInfo name="throwing_rock" />
+	<Effect>
+		<CppImplementation type="dmg_at_target" />
+	</Effect>
+</Projectile>
+
 <Projectile subtype="bomb"
 		   radius="0.2"
 		   lifetime="600"
