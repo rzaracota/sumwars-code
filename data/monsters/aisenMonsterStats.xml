@@ -17,7 +17,7 @@
 		strength="25"
 		dexterity="30"
 		magic_power="0"
-		willpower="10"
+		willpower="15"
 		resistances_physical="0"
 		resistances_air="40"
 		resistances_ice="0"
@@ -47,3 +47,45 @@
 <MonsterGroup name="bloodbeaks" >
 	<SubGroup subtype="bloodbeak" number="7" prob="0.7" />
 </MonsterGroup>
+
+<Monster type="MONSTER" subtype="wolf" name="wolf" fraction="monster" race="animal" layer="NORMAL">
+	<RenderInfo name="wolf" />
+	<Dropslots >
+		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.04" pgold="0.05" min_gold="10" max_gold="70" min_level="2" max_level="6" magic_prob="0.2" magic_power="250" />
+		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.04" pgold="0.05" min_gold="5" max_gold="50" min_level="1" max_level="4" magic_prob="0.4" magic_power="250" />
+	</Dropslots>
+	<BasicAttributes
+		experience="45"
+		level="14"
+		max_health="500"
+		armor="15"
+		block="0"
+		attack="100"
+		power="100"
+		strength="30"
+		dexterity="40"
+		magic_power="0"
+		willpower="20"
+		resistances_physical="0"
+		resistances_air="0"
+		resistances_ice="10"
+		resistances_fire="0"
+		resistances_cap_physical="50"
+		resistances_cap_air="50"
+		resistances_cap_ice="50"
+		resistances_cap_fire="50"
+		walk_speed="2500"
+		attack_speed="1000"
+		step_length="1"
+		attack_range="1.5"
+	>
+		<Ability type="walk" />
+		<Ability type="attack" rating="1"/>
+		<Ability type="die" />
+		<Ability type="noaction" />
+	</BasicAttributes>
+	
+	<Geometry radius="0.5" />
+	
+	<AI ai_sight_range="12" />
+</Monster>
