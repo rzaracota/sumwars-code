@@ -79,7 +79,7 @@
 	<RenderInfo name = "ironHatchet" />
 	<Image image="set:ironha_axe.png image:full_image" />
 	<Attribute
-		level_requirement="5"
+		level_requirement="6"
 		character_requirement="warrior,priest"
 		min_enchant="40"
 		max_enchant="130"
@@ -97,16 +97,16 @@
 	<EquipEffect />
 	<WeaponAttribute
 		weapon_type="axe"
-		damage_min_physical="10"
-		damage_max_physical="19"
+		damage_min_physical="11"
+		damage_max_physical="21"
 		damage_attack="30"
-		damage_power="50"
+		damage_power="60"
 		attack_range="1.0"
 		two_handed="no"
-		dattack_speed="-100"
+		dattack_speed="-200"
 	/>
 	<DropChance
-		level="5"
+		level="6"
 		probability="1.0"
 	/>
 </Item>
@@ -116,10 +116,10 @@
 	<RenderInfo name= "ironHatchet" />
 	<Image image="set:ironha_axe.png image:full_image" />
 	<Attribute
-		level_requirement="8"
+		level_requirement="9"
 		character_requirement="warrior,priest"
-		min_enchant="40"
-		max_enchant="160"
+		min_enchant="50"
+		max_enchant="180"
 		modchance_strength_mod="0.1"
 		modchance_dexterity_mod="0.1"
 		modchance_magic_power_mod="0.05"
@@ -134,16 +134,16 @@
 	<EquipEffect />
 	<WeaponAttribute
 		weapon_type="axe"
-		damage_min_physical="11"
-		damage_max_physical="29"
+		damage_min_physical="15"
+		damage_max_physical="33"
 		damage_attack="30"
 		damage_power="60"
 		attack_range="1.2"
 		two_handed="no"
-		dattack_speed="-100"
+		dattack_speed="-400"
 	/>
 	<DropChance
-		level="8"
+		level="9"
 		probability="1.0"
 	/>
 </Item>
@@ -171,10 +171,10 @@
 	<EquipEffect />
 	<WeaponAttribute
 		weapon_type="axe"
-		damage_min_physical="16"
-		damage_max_physical="29"
+		damage_min_physical="17"
+		damage_max_physical="36"
 		damage_attack="45"
-		damage_power="60"
+		damage_power="85"
 		attack_range="1.2"
 		two_handed="no"
 		dattack_speed="-300"
@@ -190,7 +190,7 @@
 	<Image image="set:axe.png image:full_image" />
 	<RenderInfo name= "ironHatchet" />
 	<Attribute
-		level_requirement="19"
+		level_requirement="17"
 		character_requirement="warrior,priest"
 		min_enchant="70"
 		max_enchant="250"
@@ -209,15 +209,15 @@
 	<WeaponAttribute
 		weapon_type="axe"
 		damage_min_physical="20"
-		damage_max_physical="35"
+		damage_max_physical="41"
 		damage_attack="64"
 		damage_power="76"
 		attack_range="1.2"
 		two_handed="no"
-		dattack_speed="-600"
+		dattack_speed="-400"
 	/>
 	<DropChance
-		level="19"
+		level="17"
 		probability="1.0"
 	/>
 </Item>

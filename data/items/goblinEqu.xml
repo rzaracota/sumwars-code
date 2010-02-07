@@ -174,14 +174,14 @@
 	<Image image="set:goblin_stf.png image:full_image" />
 	<Mesh file="goblin_stf.mesh" />
 	<Attribute
-			  level_requirement="13"
+			  level_requirement="12"
 			  character_requirement="mage"
 			  min_enchant="120"
 			  max_enchant="450"
 			  modchance_willpower_mod="0.1"
 			  modchance_magic_power_mod="0.2"
-			  modchance_damage_ice_mod="0.40"
-			  modchance_damage_air_mod="0.10"
+			  modchance_damage_ice_mod="0.10"
+			  modchance_damage_air_mod="0.40"
 			  modchance_damage_mult_ice_mod="0.2"
 			  />
 	<EquipEffect />
@@ -189,6 +189,7 @@
 					weapon_type="staff"
 					damage_min_air="15"
 					damage_max_air="21"
+					multiplier_air="1.10"
 					damage_attack="54"
 					damage_power="53"
 					attack_range="20"
@@ -196,7 +197,7 @@
 					dattack_speed="-400"
 					/>
 	<DropChance
-			   level="13"
+			   level="12"
 			   probability="1.0"
 			   />
 </Item>
@@ -230,7 +231,7 @@
 		damage_power="40"
 		attack_range="1.4"
 		two_handed="no"
-		dattack_speed="300"
+		dattack_speed="-100"
 	/>
 	<DropChance
 		level="1"

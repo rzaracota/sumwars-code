@@ -25,9 +25,9 @@
 	<WeaponAttribute
 		weapon_type="sword"
 		damage_min_physical="6"
-		damage_max_physical="9"
-		damage_attack="20"
-		damage_power="40"
+		damage_max_physical="11"
+		damage_attack="29"
+		damage_power="46"
 		attack_range="2.5"
 		two_handed="yes"
 		dattack_speed="-700"
@@ -46,7 +46,7 @@
 		level_requirement="3"
 		character_requirement="warrior"
 		min_enchant="55"
-		max_enchant="160"
+		max_enchant="130"
 		modchance_strength_mod="0.1"
 		modchance_dexterity_mod="0.1"
 		modchance_magic_power_mod="0.05"
@@ -61,13 +61,13 @@
 	<EquipEffect />
 	<WeaponAttribute
 		weapon_type="sword"
-		damage_min_physical="10"
-		damage_max_physical="18"
-		damage_attack="25"
-		damage_power="45"
+		damage_min_physical="15"
+		damage_max_physical="23"
+		damage_attack="48"
+		damage_power="51"
 		attack_range="2.6"
 		two_handed="yes"
-		dattack_speed="-800"
+		dattack_speed="-600"
 	/>
 	<DropChance
 		level="3"
@@ -98,13 +98,13 @@
 	<EquipEffect />
 	<WeaponAttribute
 		weapon_type="sword"
-		damage_min_physical="19"
-		damage_max_physical="25"
-		damage_attack="35"
-		damage_power="50"
+		damage_min_physical="20"
+		damage_max_physical="28"
+		damage_attack="55"
+		damage_power="60"
 		attack_range="2.6"
 		two_handed="yes"
-		dattack_speed="-800"
+		dattack_speed="-600"
 	/>
 	<DropChance
 		level="5"
@@ -135,13 +135,13 @@
 	<EquipEffect />
 	<WeaponAttribute
 		weapon_type="sword"
-		damage_min_physical="25"
-		damage_max_physical="36"
-		damage_attack="20"
-		damage_power="80"
+		damage_min_physical="27"
+		damage_max_physical="41"
+		damage_attack="80"
+		damage_power="84"
 		attack_range="2.6"
 		two_handed="yes"
-		dattack_speed="-1000"
+		dattack_speed="-700"
 	/>
 	<DropChance
 		level="8"
@@ -172,13 +172,13 @@
 	<EquipEffect />
 	<WeaponAttribute
 		weapon_type="sword"
-		damage_min_physical="24"
-		damage_max_physical="35"
-		damage_attack="50"
-		damage_power="68"
+		damage_min_physical="28"
+		damage_max_physical="43"
+		damage_attack="76"
+		damage_power="74"
 		attack_range="2.6"
 		two_handed="yes"
-		dattack_speed="-800"
+		dattack_speed="-500"
 	/>
 	<DropChance
 		level="13"
@@ -191,7 +191,7 @@
 	<Image image="set:sword.png image:full_image" />
 	<RenderInfo name= "mercenaryBlade" />
 	<Attribute
-		level_requirement="19"
+		level_requirement="18"
 		character_requirement="warrior"
 		min_enchant="130"
 		max_enchant="500"
@@ -209,16 +209,16 @@
 	<EquipEffect />
 	<WeaponAttribute
 		weapon_type="sword"
-		damage_min_physical="31"
-		damage_max_physical="42"
-		damage_attack="60"
+		damage_min_physical="43"
+		damage_max_physical="54"
+		damage_attack="85"
 		damage_power="78"
 		attack_range="2.6"
 		two_handed="yes"
-		dattack_speed="-800"
+		dattack_speed="-700"
 	/>
 	<DropChance
-		level="19"
+		level="18"
 		probability="1.0"
 	/>
 </Item>
