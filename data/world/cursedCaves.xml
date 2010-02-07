@@ -26,6 +26,12 @@
 		<Environments>
 			<Environment height="1.0" name="cave" />
 		</Environments>
+		
+		<SpawnGroups>
+			<SpawnGroup group_name="goblins_l13_1" number="20" />
+			<SpawnGroup group_name="goblins_l13_2" number="20" />
+			<SpawnGroup group_name="goblins_l13_3" number="10" />
+		</SpawnGroups>
 	</Region>
 	
 <!-- Graue Himmelsleiter, Verfluchte Grotte; [Hoehle]; ca. 25 Min; Level 17 - 19 -->
@@ -54,6 +60,13 @@
 		<Environments>
 			<Environment height="1.0" name="cave" />
 		</Environments>
+		
+		<SpawnGroups>
+			<SpawnGroup group_name="goblins_l14_1" number="20" />
+			<SpawnGroup group_name="goblins_l13_2" number="10" />
+			<SpawnGroup group_name="goblins_l13_3" number="10" />
+			<SpawnGroup group_name="wolves" number="5" />
+		</SpawnGroups>
 	</Region>
 	
 <!-- Graue Himmelsleiter, Wolfshoehle; [Hoehle]; ca. 20 Min; Level 17- 19 -->
@@ -76,6 +89,11 @@
 		<Environments>
 			<Environment height="1.0" name="cave" />
 		</Environments>
+		
+		<SpawnGroups>
+			<SpawnGroup group_name="wolves" number="20" />
+			<SpawnGroup group_name="wolves_giant" number="1" />
+		</SpawnGroups>
 	</Region>
 	
 <!-- Graue Himmelsleiter, Verfluchte Grotte, Tiefe; ca. 20 Min; Level 17 - 19 -->
@@ -98,6 +116,12 @@
 		<Environments>
 			<Environment height="1.0" name="cave" />
 		</Environments>
+		
+		<SpawnGroups>
+			<SpawnGroup group_name="goblins_l14_1" number="10" />
+			<SpawnGroup group_name="goblins_l14_2" number="15" />
+			<SpawnGroup group_name="goblins_l14_3" number="5" />
+		</SpawnGroups>
 	</Region>
 	
 	<Region id="1910" name="greyCursedCavern">

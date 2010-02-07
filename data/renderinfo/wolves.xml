@@ -19,3 +19,11 @@
 <RenderInfo name="gobDog" parent="wolfbase">
 	<Entity source="gobDog.mesh"/>
 </RenderInfo>
+
+<RenderInfo name="wolf" parent="wolfbase">
+	<Entity source="gobDog.mesh"/>
+</RenderInfo>
+
+<RenderInfo name="giant_wolf" parent="wolfbase">
+	<Entity source="gobDog.mesh" scale="2"/>
+</RenderInfo>

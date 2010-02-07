@@ -1244,19 +1244,19 @@
 <Monster type="MONSTER" subtype="goblin_warrior" name="goblin warrior" fraction="monster" race="goblin" layer="NORMAL">
 	<RenderInfo name="goblin_warrior" />
 	<Dropslots >
-		<Dropslot pbig="0.02" pmedium="0.06" psmall="0.05" pgold="0.05" min_gold="60" max_gold="80" min_level="6" max_level="14" magic_prob="0.2" magic_power="450" />
-		<Dropslot pbig="0.02" pmedium="0.06" psmall="0.03" pgold="0.05" min_gold="30" max_gold="50" min_level="6" max_level="12" magic_prob="0.4" magic_power="350" />
+		<Dropslot pbig="0.02" pmedium="0.06" psmall="0.06" pgold="0.05" min_gold="60" max_gold="80" min_level="6" max_level="14" magic_prob="0.2" magic_power="450" />
+		<Dropslot pbig="0.02" pmedium="0.06" psmall="0.04" pgold="0.05" min_gold="30" max_gold="50" min_level="6" max_level="12" magic_prob="0.4" magic_power="350" />
 	</Dropslots>
 	
 	<BasicAttributes
 					experience="45"
 					level="13"
-					max_health="250"
+					max_health="210"
 					armor="30"
-					block="40"
+					block="35"
 					attack="100"
 					power="130"
-					strength="35"
+					strength="30"
 					dexterity="20"
 					magic_power="5"
 					willpower="20"
@@ -1287,8 +1287,8 @@
 <Monster type="MONSTER" subtype="goblin_rocklobber" name="goblin rocklobber" fraction="monster" race="goblin" layer="NORMAL">
 	<RenderInfo name="goblin_rocklobber" />
 	<Dropslots >
-		<Dropslot pbig="0.02" pmedium="0.06" psmall="0.05" pgold="0.05" min_gold="40" max_gold="90" min_level="6" max_level="14" magic_prob="0.2" magic_power="450" />
-		<Dropslot pbig="0.02" pmedium="0.06" psmall="0.03" pgold="0.05" min_gold="40" max_gold="60" min_level="6" max_level="12" magic_prob="0.4" magic_power="350" />
+		<Dropslot pbig="0.02" pmedium="0.06" psmall="0.06" pgold="0.05" min_gold="40" max_gold="90" min_level="6" max_level="14" magic_prob="0.2" magic_power="450" />
+		<Dropslot pbig="0.02" pmedium="0.06" psmall="0.04" pgold="0.05" min_gold="40" max_gold="60" min_level="6" max_level="12" magic_prob="0.4" magic_power="350" />
 	</Dropslots>
 	
 	<BasicAttributes
@@ -1300,7 +1300,7 @@
 					attack="170"
 					power="120"
 					strength="35"
-					dexterity="50"
+					dexterity="40"
 					magic_power="5"
 					willpower="20"
 					resistances_physical="0"
@@ -1333,20 +1333,20 @@
 	<RenderInfo name="goblin_shaman" />
 	<Dropslots >
 		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.07" pgold="0.05" min_gold="50" max_gold="130" min_level="6" max_level="14" magic_prob="0.2" magic_power="450" />
-		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.04" pgold="0.05" min_gold="30" max_gold="80" min_level="6" max_level="12" magic_prob="0.4" magic_power="350" />
+		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.05" pgold="0.05" min_gold="30" max_gold="80" min_level="6" max_level="12" magic_prob="0.4" magic_power="350" />
 	</Dropslots>
 	
 	<BasicAttributes
 					experience="50"
 					level="13"
-					max_health="140"
+					max_health="110"
 					armor="20"
 					block="0"
 					attack="25"
 					power="25"
 					strength="15"
 					dexterity="10"
-					magic_power="12"
+					magic_power="10"
 					willpower="10"
 					resistances_physical="0"
 					resistances_air="40"
@@ -1380,14 +1380,14 @@
 <Monster type="MONSTER" subtype="goblin_slayer" name="goblin slayer" fraction="monster" race="goblin" layer="NORMAL">
 	<RenderInfo name="goblin_slayer" />
 	<Dropslots >
-		<Dropslot pbig="0.03" pmedium="0.07" psmall="0.06" pgold="0.05" min_gold="40" max_gold="100" min_level="8" max_level="15" magic_prob="0.2" magic_power="450" />
+		<Dropslot pbig="0.03" pmedium="0.07" psmall="0.07" pgold="0.05" min_gold="40" max_gold="100" min_level="8" max_level="15" magic_prob="0.2" magic_power="450" />
 		<Dropslot pbig="0.03" pmedium="0.07" psmall="0.04" pgold="0.05" min_gold="20" max_gold="60" min_level="7" max_level="14" magic_prob="0.4" magic_power="350" />
 	</Dropslots>
 	
 	<BasicAttributes
 					experience="45"
 					level="14"
-					max_health="330"
+					max_health="260"
 					armor="40"
 					block="0"
 					attack="120"
@@ -1425,7 +1425,7 @@
 <Monster type="MONSTER" subtype="goblin_assassin" name="goblin assassin" fraction="monster" race="goblin" layer="NORMAL">
 	<RenderInfo name="goblin_assassin" />
 	<Dropslots >
-		<Dropslot pbig="0.02" pmedium="0.06" psmall="0.05" pgold="0.05" min_gold="40" max_gold="100" min_level="8" max_level="15" magic_prob="0.2" magic_power="450" />
+		<Dropslot pbig="0.02" pmedium="0.06" psmall="0.06" pgold="0.05" min_gold="40" max_gold="100" min_level="8" max_level="15" magic_prob="0.2" magic_power="450" />
 		<Dropslot pbig="0.02" pmedium="0.06" psmall="0.04" pgold="0.05" min_gold="20" max_gold="60" min_level="7" max_level="14" magic_prob="0.4" magic_power="350" />
 	</Dropslots>
 	
@@ -1467,4 +1467,52 @@
 	<AI ai_sight_range="12" />
 </Monster>
 
+<MonsterGroup name="goblins_l13_1" >
+	<SubGroup subtype="goblin_shaman" number="1" prob="1.0" />
+	<SubGroup subtype="goblin_warrior" number="2" prob="1.0" />
+	<SubGroup subtype="goblin_rocklobber" number="2" prob="1.0" />
+	<SubGroup subtype="goblin_warrior" number="2" prob="0.4" />
+	<SubGroup subtype="goblin_rocklobber" number="2" prob="0.4" />
+</MonsterGroup>
+
+<MonsterGroup name="goblins_l13_2" >
+	<SubGroup subtype="goblin_warrior" number="3" prob="1.0" />
+	<SubGroup subtype="goblin_rocklobber" number="2" prob="1.0" />
+	<SubGroup subtype="goblin_warrior" number="2" prob="0.5" />
+	<SubGroup subtype="goblin_rocklobber" number="2" prob="0.5" />
+</MonsterGroup>
+
+<MonsterGroup name="goblins_l13_3" >
+	<SubGroup subtype="goblin_shaman" number="2" prob="1.0" />
+	<SubGroup subtype="goblin_warrior" number="2" prob="1.0" />
+	<SubGroup subtype="goblin_rocklobber" number="1" prob="1.0" />
+	<SubGroup subtype="goblin_shaman" number="1" prob="0.5" />
+	<SubGroup subtype="goblin_warrior" number="2" prob="0.5" />
+</MonsterGroup>
+
+<MonsterGroup name="goblins_l14_1" >
+	<SubGroup subtype="goblin_shaman" number="1" prob="1.0" />
+	<SubGroup subtype="goblin_assassin" number="3" prob="1.0" />
+	<SubGroup subtype="goblin_rocklobber" number="1" prob="1.0" />
+	<SubGroup subtype="goblin_warrior" number="2" prob="0.4" />
+	<SubGroup subtype="goblin_rocklobber" number="2" prob="0.4" />
+</MonsterGroup>
+
+<MonsterGroup name="goblins_l14_2" >
+	<SubGroup subtype="goblin_shaman" number="1" prob="1.0" />
+	<SubGroup subtype="goblin_slayer" number="2" prob="1.0" />
+	<SubGroup subtype="goblin_warrior" number="1" prob="1.0" />
+	<SubGroup subtype="goblin_assassin" number="2" prob="1.0" />
+	<SubGroup subtype="goblin_warrior" number="2" prob="0.4" />
+	<SubGroup subtype="goblin_rocklobber" number="2" prob="0.4" />
+</MonsterGroup>
+
+<MonsterGroup name="goblins_l14_3" >
+	<SubGroup subtype="goblin_shaman" number="2" prob="1.0" />
+	<SubGroup subtype="goblin_slayer" number="2" prob="1.0" />
+	<SubGroup subtype="goblin_warrior" number="1" prob="1.0" />
+	<SubGroup subtype="goblin_assassin" number="1" prob="1.0" />
+	<SubGroup subtype="goblin_warrior" number="1" prob="0.4" />
+	<SubGroup subtype="goblin_rocklobber" number="1" prob="0.4" />
+</MonsterGroup>
 
