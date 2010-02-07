@@ -185,7 +185,7 @@
 	</EquipEffect>
 
 	<DropChance
-		level="13"
+		level="16"
 		probability="1.0"
 	/>
 </Item>

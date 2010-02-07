@@ -1,4 +1,4 @@
-﻿<!-- LONG BOWS -->
+<!-- LONG BOWS -->
 
 <!-- Turnierbogen -->
 <Item type="weapon" subtype="turney_lbw" name="tourney bow" size="big">
@@ -25,7 +25,7 @@
 		damage_min_physical="5"
 		damage_max_physical="8"
 		damage_attack="45"
-		damage_power="20"
+		damage_power="40"
 		attack_range="8"
 		two_handed="yes"
 		dattack_speed="-400"
@@ -60,8 +60,8 @@
 		weapon_type="bow"
 		damage_min_physical="9"
 		damage_max_physical="17"
-		damage_attack="35"
-		damage_power="30"
+		damage_attack="42"
+		damage_power="45"
 		attack_range="1.0"
 		two_handed="yes"
 		dattack_speed="-300"
@@ -96,8 +96,8 @@
 		weapon_type="bow"
 		damage_min_physical="18"
 		damage_max_physical="24"
-		damage_attack="43"
-		damage_power="55"
+		damage_attack="53"
+		damage_power="69"
 		attack_range="8"
 		two_handed="yes"
 		dattack_speed="-400"
@@ -132,11 +132,11 @@
 		weapon_type="bow"
 		damage_min_physical="16"
 		damage_max_physical="21"
-		damage_attack="54"
-		damage_power="53"
+		damage_attack="64"
+		damage_power="83"
 		attack_range="8"
 		two_handed="yes"
-		dattack_speed="-700"
+		dattack_speed="-500"
 	/>
 	<DropChance
 		level="8"
@@ -168,8 +168,8 @@
 		weapon_type="bow"
 		damage_min_physical="22"
 		damage_max_physical="32"
-		damage_attack="65"
-		damage_power="72"
+		damage_attack="75"
+		damage_power="92"
 		attack_range="8"
 		two_handed="yes"
 		dattack_speed="-500"
@@ -204,8 +204,8 @@
 		weapon_type="bow"
 		damage_min_physical="29"
 		damage_max_physical="40"
-		damage_attack="76"
-		damage_power="80"
+		damage_attack="86"
+		damage_power="113"
 		attack_range="8"
 		two_handed="yes"
 		dattack_speed="-450"
