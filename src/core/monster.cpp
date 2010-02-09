@@ -205,28 +205,33 @@ void Monster::updateCommand()
 	// spezielle Sekundaeraktion beschuetzen
 	Vector guard_pos;
 	bool guard = false;
-	if (m_ai.m_secondary_command.m_type == "guard")
+	float guardrange = 0;
+	float guardmindist = 0;
+	if (!m_ai.m_secondary_commands.empty() && m_ai.m_secondary_commands.begin()->m_type == "guard")
 	{
-		
-		if (m_ai.m_secondary_command.m_goal_object_id != 0)
+		Command& cmd = *(m_ai.m_secondary_commands.begin());
+		guardrange = cmd.m_range;
+		if (cmd.m_goal_object_id != 0)
 		{
 			// Beschuetzen eines Objektes
-			WorldObject* obj = getRegion()->getObject(m_ai.m_secondary_command.m_goal_object_id);
+			WorldObject* obj = getRegion()->getObject(cmd.m_goal_object_id);
 			if (obj != 0)
 			{
 				guard_pos = obj->getShape()->m_center;
 				guard = true;
+				guardmindist = 2+getShape()->m_radius + obj->getShape()->getOuterRadius();
 			}
 			else
 			{
 				// Objekt existiert nicht mehr
-				m_ai.m_secondary_command.m_type = "noaction";	
+				m_ai.m_secondary_commands.pop_front();
 			}
 		}
 		else
 		{
-			guard_pos = m_ai.m_secondary_command.m_goal;
+			guard_pos = cmd.m_goal;
 			guard = true;
+			guardmindist = 2+getShape()->m_radius;
 		}
 	}
 
@@ -253,7 +258,7 @@ void Monster::updateCommand()
 				continue;
 			
 			// bei Befehl guard nur, wenn nicht zu weit vom zu beschuetzenden Ort
-			if (guard && guard_pos.distanceTo(pl->getShape()->m_center) > m_ai.m_secondary_command.m_range)
+			if (guard && guard_pos.distanceTo(pl->getShape()->m_center) > guardrange)
 				continue;
 				
 			dist = getShape()->getDistance(*(pl->getShape()));
@@ -315,7 +320,7 @@ void Monster::updateCommand()
 		
 		// Spieler nur als Ziel, wenn aktiv und nicht in Dialog
 		if (pl!=0 && pl->getState() == STATE_ACTIVE && pl->getDialogueId() == 0
-			&& (!guard || guard_pos.distanceTo(pl->getShape()->m_center) <= m_ai.m_secondary_command.m_range))
+			&& (!guard || guard_pos.distanceTo(pl->getShape()->m_center) <= guardrange))
 		{
 			
 		
@@ -387,15 +392,24 @@ void Monster::updateCommand()
 		addToNetEventMask(NetEvent::DATA_COMMAND);
 
 	}
-	else if ((m_ai.m_state & Ai::ACTIVE) && m_ai.m_command.m_type == "noaction" && m_ai.m_secondary_command.m_type != "noaction")
+	else if ((m_ai.m_state & Ai::ACTIVE) && m_ai.m_command.m_type == "noaction" && !m_ai.m_secondary_commands.empty())
 	{
-		*(getCommand()) = m_ai.m_secondary_command;
-		addToNetEventMask(NetEvent::DATA_COMMAND);
-		
-		if (getCommand()->m_type == "guard")
+		// Sekundaerbefehl setzen
+		Command & cmd = *(m_ai.m_secondary_commands.begin());
+		if (cmd.m_type == "guard")
 		{
-			getCommand()->m_type = "walk";
-			getCommand()->m_range = 2;
+			if (guard_pos.distanceTo(getShape()->m_center) > guardmindist)
+			{
+				*(getCommand()) = cmd;
+				getCommand()->m_type = "walk";
+				getCommand()->m_range = 2;
+				getCommand()->m_flags &= ~Command::SECONDARY;
+			}
+		}
+		else
+		{
+			*(getCommand()) = cmd;
+			addToNetEventMask(NetEvent::DATA_COMMAND);
 		}
 	}
 	else
@@ -715,7 +729,7 @@ void Monster::insertScriptCommand(Command &cmd, float time)
 {
 	if (cmd.m_flags & Command::SECONDARY)
 	{
-		m_ai.m_secondary_command = cmd;
+		m_ai.m_secondary_commands.push_back(cmd);
 	}
 	else
 	{
@@ -727,7 +741,20 @@ void Monster::clearScriptCommands()
 {
 	Creature::clearScriptCommands();
 	
-	m_ai.m_secondary_command.m_type = "noaction";
+	m_ai.m_secondary_commands.clear();
+}
+
+void Monster::clearCommand(bool success, bool norepeat)
+{
+	if (getCommand()->m_flags & Command::SECONDARY)
+	{
+		if ((norepeat || !(getCommand()->m_flags & Command::REPEAT)) && !m_ai.m_secondary_commands.empty())
+		{
+			m_ai.m_secondary_commands.pop_front();
+		}
+	}
+	
+	Creature::clearCommand(success,norepeat);
 }
 
 int Monster::getValue(std::string valname)

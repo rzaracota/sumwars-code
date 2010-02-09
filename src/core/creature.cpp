@@ -2146,6 +2146,7 @@ void Creature::clearCommand(bool success, bool norepeat)
 	m_command.m_goal = Vector(0,0);
 	m_command.m_goal_object_id =0;
 	m_command.m_range =1;
+	m_command.m_flags =0;
 	m_script_command_timer =0;	
 	addToNetEventMask(NetEvent::DATA_COMMAND);
 }

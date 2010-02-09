@@ -124,10 +124,10 @@ struct Ai
 	
 	
 	/**
-	 * \var Command m_secondary_command
-	 * \brief Sekundaerkommando
+	 * \var Command m_secondary_commands
+	 * \brief Liste von Sekundaerkommandos
 	 */
-	Command m_secondary_command;
+	std::list<Command > m_secondary_commands;
 };
 
 /**
@@ -250,6 +250,14 @@ class Monster : public Creature {
 		 * \brief Loescht alle per Script gesetzten Kommandos
 		 */
 		virtual void clearScriptCommands();
+		
+		/**
+		 * \fn void clearCommand(bool success, bool norepeat = true)
+		 * \brief Bricht das aktuelle Kommando ab
+		 * \param success Gibt an, ob die Ausfuehrung erfolgreich war
+		 * \param norepeat Wenn auf true gesetzt, so werden auch wird ein zu wiederholendes Kommando komplett abgebrochen (nicht nur der aktuelle Durchlauf)
+		 */
+		virtual void clearCommand(bool success, bool norepeat = true);
 		
 		/**
 		 * \fn virtual int getValue(std::string valname)
