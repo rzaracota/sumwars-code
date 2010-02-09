@@ -1057,6 +1057,12 @@ int EventSystem::deleteObject(lua_State *L)
 			WorldObject* wo = m_region->getObject(id);
 			if (wo !=0)
 			{
+				if (wo->getType() == "PLAYER")
+				{
+					ERRORMSG("deleteObject must not be called on a player");
+					return 0;
+				}
+				
 				bool success = m_region->deleteObject(wo);
 				if (success)
 				{
