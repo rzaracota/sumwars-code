@@ -279,6 +279,11 @@ void Dialogue::removeSpeaker(int id)
 	if (cr->getType() == "PLAYER")
 	{
 		m_nr_players --;
+		if (m_trade)
+		{
+			m_finished = true;
+			cr->setTradePartner(0);
+		}
 	}
 	
 	
