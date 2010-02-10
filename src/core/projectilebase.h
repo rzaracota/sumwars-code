@@ -40,6 +40,11 @@ struct ProjectileBasicData
 	int m_counter;
 	
 	/**
+	 * \brief Prozentsatz zu dem der Timer abgelaufen ist, wenn der Effekt ausgeloest wird
+	 */
+	float m_crit_percent;
+	
+	/**
 	 * \var GameObject::Subtype m_new_projectile_type
 	 * \brief Typ des neuen Geschosses, das vom aktuellen erzeugt wird
 	 */

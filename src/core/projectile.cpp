@@ -19,7 +19,7 @@ Projectile::Projectile(Subtype subtype,  int id)
 	m_timer_limit = 1500;
 	m_counter =0;
 	m_goal_object =0;
-
+	m_crit_percent = 0;
 
 	float r=0.1;
 	// Radius, Timerlaufzeit und Status je nach Typ setzen
@@ -49,6 +49,7 @@ Projectile::Projectile(ProjectileBasicData &data,int id)
 	m_timer_limit = data.m_lifetime;
 	m_implementation = data.m_implementation;
 	getShape()->m_radius = data.m_radius;
+	m_crit_percent = data.m_crit_percent;
 	setAngle(0);
 	
 	if (m_implementation == "fly")
@@ -532,11 +533,14 @@ void Projectile::handleGrowing(float dtime)
 void Projectile::handleStable(float dtime)
 {
 
+	if (m_timer / m_timer_limit >= m_crit_percent && (m_timer-dtime) / m_timer_limit < m_crit_percent)
+	{
+		doEffect();
+	}
+	
 	if (m_timer >= m_timer_limit && World::getWorld()->isServer())
 	{
 		// Timer Limit erreicht
-		
-		doEffect();
 		
 		// Schaden wird in Wellen austeilt
 		m_counter --;

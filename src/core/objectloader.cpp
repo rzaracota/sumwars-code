@@ -670,6 +670,7 @@ bool ObjectLoader::loadProjectile(TiXmlNode* node)
 		attr.getInt("counter",data->m_counter);
 		attr.getString("new_projectile_type",data->m_new_projectile_type);
 		attr.getString("implementation",data->m_implementation);
+		attr.getFloat("critical_percent",data->m_crit_percent,1.0);
 		
 		DEBUGX("type %s counter %i data %p",data->m_subtype.c_str(), data->m_counter,data);
 		

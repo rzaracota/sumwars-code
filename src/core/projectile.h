@@ -340,6 +340,11 @@ class Projectile : public GameObject
 		float m_timer_limit;
 		
 		/**
+		 * \brief Prozentsatz zu dem der Timer abgelaufen ist, wenn der Effekt ausgeloest wird
+		 */
+		float m_crit_percent;
+		
+		/**
 		* \var m_counter
 		* \brief Zaehler, Verwendung je Art des Projektils und aktuellem Zustand
 		*/
