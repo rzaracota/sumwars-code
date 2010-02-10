@@ -282,6 +282,7 @@ void Dialogue::removeSpeaker(int id)
 		if (m_trade)
 		{
 			m_finished = true;
+			m_trade = false;
 			cr->setTradePartner(0);
 		}
 	}
