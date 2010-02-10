@@ -212,3 +212,43 @@ Smoke
         blue -0.25
 }
 }
+
+Smoke_Explosion
+{
+    material        smoke
+    particle_width  50
+    particle_height 50
+	cull_each       false
+    quota           3000
+    billboard_type  point
+    
+    // Area emitter
+    emitter Ellipsoid
+{
+        angle           360
+        emission_rate   600
+        time_to_live    0.2
+        direction       0 1 0
+        velocity    	10
+        colour_range_start  1  1 1 0.2
+        width           200
+        height          200
+        depth           160
+
+}
+
+    // Make em float upwards
+    affector LinearForce
+{
+        force_vector      0 100 0
+        force_application add
+}
+
+    // Fader
+    affector ColourFader
+{
+        red -0.25
+        green -0.25
+        blue -0.25
+}
+}

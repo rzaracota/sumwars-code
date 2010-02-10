@@ -178,6 +178,7 @@
 		   lifetime="300"
 		   radius="4"
 		   implementation = "stationary"
+		   critical_percent="0.5"
 		   >
 	<RenderInfo name="freeze" />
 	<Effect>
@@ -189,6 +190,7 @@
 		   lifetime="200"
 		   radius="0.5"
 		   implementation = "stationary"
+		   critical_percent="0.1"
 		   >
 	<RenderInfo name="lightning" />
 	<Effect>
@@ -226,6 +228,7 @@
 		   lifetime="150"
 		   radius="1.5"
 		   implementation = "stationary"
+		   critical_percent="0.5"
 		   >
 	<RenderInfo name="static_field" />
 	<Effect>
@@ -318,6 +321,7 @@
 		   lifetime="200"
 		   radius="2"
 		   implementation = "stationary"
+		   critical_percent="0.4"
 		   >
 	<RenderInfo name="wind_explosion" />
 	<Effect>
@@ -329,6 +333,7 @@
 		   lifetime="200"
 		   radius="2"
 		   implementation = "stationary"
+		   critical_percent="0.4"
 		   >
 	<RenderInfo name="ice_explosion" />
 	<Effect>
@@ -340,6 +345,7 @@
 		   lifetime="200"
 		   radius="2"
 		   implementation = "stationary"
+		   critical_percent="0.4"
 		   >
 	<RenderInfo name="fire_explosion" />
 	<Effect>
@@ -351,6 +357,7 @@
 		   lifetime="200"
 		   radius="2"
 		   implementation = "stationary"
+		   critical_percent="0.4"
 		   >
 	<RenderInfo name="elem_explosion" />
 	<Effect>
@@ -362,6 +369,7 @@
 		   lifetime="200"
 		   radius="0.5"
 		   implementation = "stationary"
+		   critical_percent="0.1"
 		   >
 	<RenderInfo name="light_beam" />
 	<Effect>
@@ -373,6 +381,7 @@
 		   lifetime="200"
 		   radius="0.5"
 		   implementation = "stationary"
+		   critical_percent="0.1"
 		   >
 	<RenderInfo name="divine_beam" />
 	<Effect>
@@ -384,6 +393,7 @@
 		   lifetime="200"
 		   radius="0.5"
 		   implementation = "stationary"
+		   critical_percent="0.1"
 		   >
 	<RenderInfo name="hypnosis" />
 	<Effect>
@@ -395,6 +405,7 @@
 		   lifetime="200"
 		   radius="0.5"
 		   implementation = "stationary"
+		   critical_percent="0.4"
 		   >
 	<RenderInfo name="acid" />
 	<Effect>

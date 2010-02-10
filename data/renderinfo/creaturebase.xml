@@ -2,11 +2,78 @@
 	
 	<State name="mute">
 		<Activation>
-			<ParticleSystem objectname="mute" source="Mute" position="0 1 0"  />
+			<ParticleSystem objectname="mute" source="Mute" position="0 2.4 -0.3"  />
 		</Activation>
 		
 		<Deactivation>
 			<Detach objectname="mute"/>
+		</Deactivation>
+	</State>
+	
+	<State name="blind">
+		<Activation>
+			<ParticleSystem objectname="blind" source="Blind" bone="crown"/>
+		</Activation>
+		
+		<Deactivation>
+			<Detach objectname="blind"/>
+		</Deactivation>
+	</State>
+	
+	<State name="berserk">
+		<Activation>
+			<ParticleSystem objectname="berserk" source="Berserk" position="0 2.4 0" />
+		</Activation>
+		<!--
+		<Stable>
+			<Movement objectname="berserk" start="0.0" end="0.3" start_vec="0.0 0.0 0.0" end_vec="0.0 0.1 0.0" />
+			<Movement objectname="berserk" start="0.3" end="0.5" start_vec="0.0 0.1 0.0" end_vec="0.0 0.0 0.0" />
+			<Movement objectname="berserk" start="0.5" end="0.8" start_vec="0.0 0.0 0.0" end_vec="0.0 0.1 0.0" />
+			<Movement objectname="berserk" start="0.8" end="1.0" start_vec="0.0 0.1 0.0" end_vec="0.0 0.0 0.0" />
+		</Stable>
+		-->
+		<Deactivation>
+			<Detach objectname="berserk"/>
+		</Deactivation>
+	</State>
+	
+	<State name="confused">
+		<Activation>
+			<ParticleSystem objectname="confuse" source="Confuse" position="0 1.8 0"  />
+		</Activation>
+		
+		<Deactivation>
+			<Detach objectname="confuse"/>
+		</Deactivation>
+	</State>
+	
+	<State name="poisoned">
+		<Activation>
+			<ParticleSystem objectname="poisoned" source="Poison" />
+		</Activation>
+		
+		<Deactivation>
+			<Detach objectname="poisoned"/>
+		</Deactivation>
+	</State>
+	
+	<State name="burning">
+		<Activation>
+			<ParticleSystem objectname="burning" source="Burning" />
+		</Activation>
+		
+		<Deactivation>
+			<Detach objectname="burning"/>
+		</Deactivation>
+	</State>
+	
+	<State name="paralyzed">
+		<Activation>
+			<ParticleSystem objectname="paralyzed" source="Paralyze" />
+		</Activation>
+		
+		<Deactivation>
+			<Detach objectname="paralyzed"/>
 		</Deactivation>
 	</State>
 	

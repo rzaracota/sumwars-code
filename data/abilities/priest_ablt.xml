@@ -49,7 +49,7 @@
 		 description="The party is surrounded by holy energy. Everyones defense is increased. With increasing willpower the priest can hold this effect longer."
 		 time="1001.000000"
 		 timer_nr="2.000000"
-		 timer_value="160000.000000"
+		 timer_value="140000.000000"
 		 base_ability="noaction"
 		 critical_percent="0.660000"
 		 target_type="party_all"
@@ -62,6 +62,7 @@
 		<LuaImplementation>
 			setBaseModValue("time",60000);
 			setBaseModValue("block",get(self,"willpower")*0.25)
+			setBaseModValue("armor",get(self,"willpower")*0.5)
 		</LuaImplementation>
 	</BaseAttributesMod>
 </Ability>

@@ -1,74 +1,53 @@
 Blind
 {
-    material        FlarePointSprite
-	point_rendering	true
-	// point rendering means size is controlled by material
-	// provide fallback sizes for hardware that doesn't support point sprite
+    material        flareAlpha
     particle_width  30
     particle_height 30
     cull_each       false
 	cull_each       false
-    quota           10000
+    quota          2000
     billboard_type  point
     
     // Area emitter
     emitter Box
 {
-        angle           30
-        emission_rate   30
-        time_to_live    0.3
-        position	0 50 0
+        angle           360
+        emission_rate   300
+		position		0 -5 5
+        time_to_live    0.1
         direction       0 1 0
-        velocity    	0
-        colour_range_start  0.1 0.1 0.1
-        colour_range_end    0.1 0.1 0.1
-        width           60
-        height          60
-        depth           120
-}
-
-    // Make em float upwards
-    affector LinearForce
-{
-        force_vector      0 100 0
-        force_application add
-}
-
-    // Fader
-    affector ColourFader
-{
-        red -0.25
-        green -0.25
-        blue -0.25
+        velocity    	50
+        colour_range_start  0 0 0
+		colour_range_end  0 0 0 0.2
+		width           20
+        height          20
+        depth           20
 }
 }
 
 Poison
 {
     material        FlarePointSprite
-	point_rendering	true
-	// point rendering means size is controlled by material
-	// provide fallback sizes for hardware that doesn't support point sprite
     particle_width  30
     particle_height 30
     cull_each       false
 	cull_each       false
-    quota           10000
+    quota           1000
     billboard_type  point
     
     // Area emitter
     emitter Box
 {
         angle           30
-        emission_rate   30
+        emission_rate   100
         time_to_live    0.3
         position	0 50 0
         direction       0 1 0
         velocity    	0
-        colour_range_start  1 1 0
-        colour_range_end    0.3 1 0.3
-        width           60
-        height          60
+        colour_range_start  0 1 0
+        colour_range_end    0.4 1 0.3
+        width           40
+        height          40
         depth           120
 }
 
@@ -92,140 +71,103 @@ Poison
 
 Berserk
 {
-    material Flare
-    particle_width 20
-    particle_height 20
+    material berserk
+    particle_width 30
+    particle_height 30
     cull_each false
-    quota 10000
-    billboard_type oriented_self
+    quota 1
+    billboard_type point
  
 
    emitter Point
 {
-        angle 360
-        emission_rate 275
-        time_to_live 0.08
-        position	0 100 0
-        direction 1 0 0
-        velocity_min 250
-        velocity_max 300
-        colour_range_start 1 0 0
-        colour_range_end 1 0 0
+        angle 0
+        emission_rate 1000
+        time_to_live 0.001
+        position	0 0 0
+        direction 0 1 0
+        colour_range_start 1 1 1
 }
 }
 
 Confuse
 {
-    material        FlarePointSprite
-	point_rendering	true
-	// point rendering means size is controlled by material
-	// provide fallback sizes for hardware that doesn't support point sprite
+    material        confuse
     particle_width  30
     particle_height 30
     cull_each       false
-	cull_each       false
-    quota           10000
+    quota           1
     billboard_type  point
     
-    // Area emitter
-    emitter Box
+    emitter Point
 {
-        angle           30
-        emission_rate   30
-        time_to_live    0.3
+        angle           0
+        emission_rate   1000
+        time_to_live    0.001
         position	0 50 0
         direction       0 1 0
         velocity    	0
-        colour_range_start  1 1 0
-        colour_range_end    0.8 0.8 0.5
-        width           60
-        height          60
-        depth           120
-}
-
-    // Make em float upwards
-    affector LinearForce
-{
-        force_vector      0 100 0
-        force_application add
-}
-
-    // Fader
-    affector ColourFader
-{
-        red -0.25
-        green -0.25
-        blue -0.25
+        colour_range_start	1 1 1
+        colour_range_end	1 1 1
 }
 }
 
 Mute
 {
-    material        FlarePointSprite
-	point_rendering	true
-	// point rendering means size is controlled by material
-	// provide fallback sizes for hardware that doesn't support point sprite
+    material        mute
     particle_width  30
     particle_height 30
     cull_each       false
 	cull_each       false
-    quota           10000
+    quota           1
     billboard_type  point
     
-    // Area emitter
-    emitter Box
+    emitter Point
 {
-        angle           30
-        emission_rate   30
-        time_to_live    0.3
-        position	0 50 0
+        angle           0
+        emission_rate   1000
+        time_to_live    0.001
         direction       0 1 0
         velocity    	0
         colour_range_start  1 1 1
         colour_range_end    1 1 1
-        width           60
-        height          60
-        depth           120
-}
-
-    // Make em float upwards
-    affector LinearForce
-{
-        force_vector      0 100 0
-        force_application add
-}
-
-    // Fader
-    affector ColourFader
-{
-        red -0.25
-        green -0.25
-        blue -0.25
 }
 }
 
 Paralyze
 {
-    material Flare
+    material flareAlpha
     particle_width 20
     particle_height 20
     cull_each false
-    quota 10000
-    billboard_type oriented_self
+    quota 5000
+    billboard_type point
  
 
-   emitter Point
+   emitter Box
 {
-        angle 360
+        angle 30
         emission_rate 275
         time_to_live 0.2
-        position	0 100 0
-        direction 1 0 0
-        velocity_min 250
-        velocity_max 300
-        colour_range_start 1 1 0
-        colour_range_end 1 1 0
+        position	0 50 0
+        direction 0 -1 0
+        velocity_min 50
+        velocity_max 100
+        colour_range_start 1 0.7 0.4
+        colour_range_end 0.9 0.7 0.3
+		width           40
+        height          40
+        depth           120
 }
+
+
+    // Make em float downwards
+    affector LinearForce
+{
+        force_vector      0 -100 0
+        force_application add
+}
+
 }
 
 Frozen
@@ -292,29 +234,26 @@ Frozen
 Burning
 {
     material        FlarePointSprite
-	point_rendering	true
-	// point rendering means size is controlled by material
-	// provide fallback sizes for hardware that doesn't support point sprite
     particle_width  30
     particle_height 30
     cull_each       false
 	cull_each       false
-    quota           10000
+    quota           1000
     billboard_type  point
     
     // Area emitter
     emitter Box
 {
         angle           30
-        emission_rate   30
+        emission_rate   100
         time_to_live    0.3
         position	0 50 0
         direction       0 1 0
         velocity    	0
-        colour_range_start  1 0 0
-        colour_range_end    1 0 0
-        width           60
-        height          60
+        colour_range_start	1 0 0
+        colour_range_end	1 0.5 0
+        width           40
+        height          40
         depth           120
 }
 
