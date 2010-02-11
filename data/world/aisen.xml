@@ -705,14 +705,14 @@
 		
 		<Event trigger="create_region">
 			<Effect>
-				createMonsterGroup("goblins_l1","monster_group1",6);
-				createMonsterGroup("goblins_l1","monster_group2",6);
-				createMonsterGroup("goblins_l1","monster_group3",6);
-				createMonsterGroup("goblins_l1","monster_group4",6);
-				createMonsterGroup("goblins_l1","monster_group5",6);
-				createMonsterGroup("goblins_l1","monster_group6",6);
+				createMonsterGroup("goblins_l13_2","monster_group1",6);
+				createMonsterGroup("goblins_l13_2","monster_group2",6);
+				createMonsterGroup("goblins_l13_2","monster_group3",6);
+				createMonsterGroup("goblins_l13_2","monster_group4",6);
+				createMonsterGroup("goblins_l13_2","monster_group5",6);
+				createMonsterGroup("goblins_l13_2","monster_group6",6);
 				
-				createMonsterGroup("goblins_l1","monster_treasure",3);
+				createMonsterGroup("goblins_l13_2","monster_treasure",3);
 				
 				createObject("treasure_box_m1","locTreasureEast",45);
 				createObject("chestBox","locTreasureWest",-45);
