@@ -14,6 +14,7 @@
 		<LuaImplementation>
 			setBaseModValue("time",50000);
 			setBaseModValue("dexterity",0.5*get(self,"dexterity"));
+			setBaseModValue("flag","aimed_shot");
 		</LuaImplementation>
 	</BaseAttributesMod>
 </Ability>
@@ -58,6 +59,7 @@
 		<LuaImplementation>
 			setBaseModValue("time",50000);
 			setBaseModValue("dexterity",0.5*get(self,"dexterity"));
+			setBaseModValue("flag","bow_spirit");
 		</LuaImplementation>
 	</BaseAttributesMod>
 </Ability>

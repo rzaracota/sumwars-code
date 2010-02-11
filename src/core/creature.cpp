@@ -2873,8 +2873,8 @@ void Creature::calcDamage(Action::ActionType act,Damage& dmg)
 		dmg.m_min_damage[Damage::PHYSICAL]*=0.75;
 		dmg.m_max_damage[Damage::PHYSICAL]*=0.75;
 		// Feuerschaden hinzufuegen
-		dmg.m_min_damage[Damage::FIRE] += std::min(m_base_attr_mod.m_magic_power*2.0f,dmg.m_min_damage[Damage::PHYSICAL]);
-		dmg.m_max_damage[Damage::FIRE] += std::min(m_base_attr_mod.m_magic_power*3.0f,dmg.m_max_damage[Damage::PHYSICAL]);
+		dmg.m_min_damage[Damage::FIRE] += std::min(m_base_attr_mod.m_magic_power*4.0f,dmg.m_min_damage[Damage::PHYSICAL]);
+		dmg.m_max_damage[Damage::FIRE] += std::min(m_base_attr_mod.m_magic_power*6.0f,dmg.m_max_damage[Damage::PHYSICAL]);
 
 		// kein Eisschaden
 		dmg.m_min_damage[Damage::ICE]=0;
@@ -2900,8 +2900,8 @@ void Creature::calcDamage(Action::ActionType act,Damage& dmg)
 	// Eispfeile
 	if (m_base_attr_mod.m_special_flags & ICE_ARROWS)
 	{
-		dmg.m_min_damage[Damage::ICE] += std::min(m_base_attr_mod.m_magic_power*2.0f,dmg.m_min_damage[Damage::PHYSICAL]);
-		dmg.m_max_damage[Damage::ICE] += std::min(m_base_attr_mod.m_magic_power*3.0f,dmg.m_max_damage[Damage::PHYSICAL]);
+		dmg.m_min_damage[Damage::ICE] += std::min(m_base_attr_mod.m_magic_power*4.0f,dmg.m_min_damage[Damage::PHYSICAL]);
+		dmg.m_max_damage[Damage::ICE] += std::min(m_base_attr_mod.m_magic_power*6.0f,dmg.m_max_damage[Damage::PHYSICAL]);
 		dmg.m_min_damage[Damage::PHYSICAL]*=0.5;
 		dmg.m_max_damage[Damage::PHYSICAL]*=0.5;
 		dmg.m_min_damage[Damage::FIRE]=0;
@@ -2918,8 +2918,8 @@ void Creature::calcDamage(Action::ActionType act,Damage& dmg)
 	// Windpfeile
 	if (m_base_attr_mod.m_special_flags & WIND_ARROWS)
 	{
-		dmg.m_min_damage[Damage::AIR] += std::min(m_base_attr_mod.m_magic_power*2.0f,dmg.m_min_damage[Damage::PHYSICAL]);
-		dmg.m_max_damage[Damage::AIR] += std::min(m_base_attr_mod.m_magic_power*3.0f,dmg.m_max_damage[Damage::PHYSICAL]);
+		dmg.m_min_damage[Damage::AIR] += std::min(m_base_attr_mod.m_magic_power*4.0f,dmg.m_min_damage[Damage::PHYSICAL]);
+		dmg.m_max_damage[Damage::AIR] += std::min(m_base_attr_mod.m_magic_power*6.0f,dmg.m_max_damage[Damage::PHYSICAL]);
 		dmg.m_min_damage[Damage::PHYSICAL]*=0.5;
 		dmg.m_max_damage[Damage::PHYSICAL]*=0.5;
 
@@ -2934,9 +2934,9 @@ void Creature::calcDamage(Action::ActionType act,Damage& dmg)
 	// Blind
 	if (m_dyn_attr.m_status_mod_time[Damage::BLIND]>0)
 	{
-		// keine kritischen Treffer, Attackewert halbieren
+		// keine kritischen Treffer, Attackewert reduzieren
 		dmg.m_crit_perc=0;
-		dmg.m_attack *= 0.5;
+		dmg.m_attack *= 0.3;
 	}
 
 	// verwirrt
@@ -3185,7 +3185,10 @@ bool Creature::takeDamage(Damage* d)
 	if (!(d->m_special_flags & Damage::UNBLOCKABLE))
 	{
 		float block = m_base_attr_mod.m_block  ;
-
+		if (m_dyn_attr.m_status_mod_time[Damage::BLIND]>0)
+		{
+			block *= 0.5;
+		}
 
 		// Chance zu blocken
 		if (d->m_attack>0 && block>0)
@@ -3333,7 +3336,7 @@ bool Creature::takeDamage(Damage* d)
 				rel = d->m_status_mod_power[i]*1.0 / m_base_attr_mod.m_willpower;
 			}
 			float chance = atan(rel)/(3.1415/2);
-			DEBUGX("mod %i modpow %i wp %i",i,d->m_status_mod_power[i],m_base_attr_mod.m_willpower);
+			DEBUG("mod %i modpow %i wp %i chance %f",i,d->m_status_mod_power[i],m_base_attr_mod.m_willpower,chance);
 			if (Random::random()<chance)
 			{
 				// Modifikation anwenden
