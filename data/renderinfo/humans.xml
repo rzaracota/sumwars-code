@@ -24,7 +24,7 @@
 	<Action name="throw_ice_bomb" reference="throw_bomb" />
 </RenderInfo>
 
-<RenderInfo name="human_2h_base" parent="bandit_base">
+<RenderInfo name="bandit_2h_base" parent="bandit_base">
 	<Action name="noaction">
 		<Animation name="idleTwoHands" />
 	</Action>
@@ -81,7 +81,7 @@
 	<Entity objectname="mustache" bone="crown" source="mustache.mesh" />
 </RenderInfo>
 
-<RenderInfo name="human_deserter" parent="human_2h_base">
+<RenderInfo name="human_deserter" parent="bandit_2h_base">
 	<Entity source="rogue.mesh"/>
 	<Subobject objectname="armor" source="rogueArmorEnemy2h" />
 	<Entity objectname="weapon" bone="itemRightHand" source="merc2h_sw.mesh"  />
@@ -187,7 +187,7 @@
 	<Entity objectname="chinBeard" bone="crown" source="beardChin_ms4.mesh" />
 </RenderInfo>
 
-<RenderInfo name="human_rob_fairy" parent="human_2h_base">
+<RenderInfo name="human_rob_fairy" parent="bandit_2h_base">
 	<Entity source="rogue.mesh" scale="1.2"/>
 	<Subobject objectname="armor" source="rogueArmorEnemy2h" />
 	<Entity objectname="weapon" bone="itemRightHand" source="great_axe.mesh"/>

@@ -399,8 +399,8 @@
 				setRefName(joringsbridge.armor, 'Halgor');
 				set(joringsbridge.armor,"angle",230);
 				
-				trader = createObject('guard', 'locBlackmarket');
-				setRefName(trader, 'Marco');
+				joringsbridge.blackmarket = createObject('guard', 'locBlackmarket');
+				setRefName(joringsbridge.blackmarket, 'Marco');
 				set(trader,"angle",-90);
 			</Effect>
 		</Event>

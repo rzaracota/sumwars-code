@@ -21,28 +21,28 @@
 				end;
 			</Condition>
 			<Effect>
-				fissure_tmp.guard1 = createObject("guard", "locGuard1");
+				fissure_tmp.guard1 = createObject("ireana_guard", "locGuard1");
 				setRefName(fissure_tmp.guard1, "Elementaristenwaechter1");
 				setObjectValue(fissure_tmp.guard1,"max_health",1000);
 				setObjectValue(fissure_tmp.guard1,"health",100);
 				
-				fissure_tmp.guard2 = createObject("guard", "locGuard2");
+				fissure_tmp.guard2 = createObject("ireana_guard", "locGuard2");
 				setRefName(fissure_tmp.guard2, "Elementaristenwaechter2");
 				
 				
-				fissure_tmp.guard3 = createObject("guard", "locGuard3");
+				fissure_tmp.guard3 = createObject("ireana_guard", "locGuard3");
 				setRefName(fissure_tmp.guard3, "Elementaristenwaechter3");
 				
-				fissure_tmp.guard4 = createObject("guard", "locGuard4");
+				fissure_tmp.guard4 = createObject("ireana_guard", "locGuard4");
 				setRefName(fissure_tmp.guard4, "Elementaristenwaechter4");
 				
 				
-				fissure_tmp.dead_guard1 = createObject("guard", "locDeadGuard1");
-				setRefName(fissure_tmp.dead_guard1, "Guard");
+				fissure_tmp.dead_guard1 = createObject("ireana_guard", "locDeadGuard1");
+				setRefName(fissure_tmp.dead_guard1, "Council Guard");
 				setObjectValue(fissure_tmp.dead_guard1,"health",0);
 				
-				fissure_tmp.dead_guard2 = createObject("guard", "locDeadGuard2");
-				setRefName(fissure_tmp.dead_guard2, "Guard");
+				fissure_tmp.dead_guard2 = createObject("ireana_guard", "locDeadGuard2");
+				setRefName(fissure_tmp.dead_guard2, "Council Guard");
 				setObjectValue(fissure_tmp.dead_guard2,"health",0);
 				
 				
@@ -53,7 +53,7 @@
 				set(fissure_tmp.ireana,"ai_state","inactive");
 				setObjectAnimation(fissure_tmp.ireana,"lie",1000,true);
 				
-				fissure_tmp.captain = createObject("guard", "locCaptain");
+				fissure_tmp.captain = createObject("ireana_captain", "locCaptain");
 				setRefName(fissure_tmp.captain, "Guardcaptain");
 				setObjectValue(fissure_tmp.captain,"max_health",10000);
 				setObjectValue(fissure_tmp.captain,"health",9000);
@@ -433,6 +433,7 @@
 				ambush.finished=true;
 				fissure.rescuedIreana = true;
 				fissure.started = true;
+				addPlayersExperience(2000,"rescued_ireana");
 				timedExecute("setCutsceneMode(false);",1000);
 				deleteObject(fissure_tmp.soren_windclaw_crystal);
 			</Effect>
@@ -582,7 +583,7 @@
 				speak("Lich",_("Nein, die Stadt ist unwichtig."),"sneer");
 				setSpeakerEmotion("Necro","normal");
 				speak("Lich",_("Sollen die Aisener dort ihre Verstaerkungstruppen aufreiben."),"sneer");
-				speak("Lich",_("Durch diesen Tunnel werden wir eine gewaltige Armee direkt in ihr Kernland einschleusen."),"sneer");
+				speak("Lich",_("Die Armee, die durch diesen Tunnel ziehen wird, hat mit Zwergentrutz nichts zu tun."),"sneer");
 				speak("Lich",_("Nur der Kristall ist wichtig."),"thoughtful");
 				speak("Necro",_("Ich verstehe nicht."),"surprised");
 				speak("Lich",_("Und das ist gut so."),"normal");
@@ -910,6 +911,7 @@
 			<Effect>
 				fissure.finished=true;
 				setCutsceneMode(false);
+				addPlayersExperience(2000,"destroyed_fissure");
 				addUnitCommand(theTrader_tmp.traderCave,"walk","locNecromancer");
 				setRefName(theTrader_tmp.traderCave,"The Lost Trader");
 			</Effect>

@@ -15,7 +15,7 @@
 <!-- small potion -->
 <Item type="potion" subtype="heal_1" name="small potion" size="small">
 	<Image image="set:potion_health.png image:full_image" />
-	<Mesh file="potion" />
+	<RenderInfo name="potion" />
 	<Attribute
 		character_requirement="all"
 		price = "20"
@@ -35,7 +35,7 @@
 <!-- medium potion -->
 <Item type="potion" subtype="heal_2" name="medium potion" size="small">
 	<Image image="set:heal_2.png image:full_image" />
-	<Mesh file="mediumPotion" />
+	<RenderInfo name="mediumPotion" />
 	<Attribute
 		character_requirement="all"
 		price = "80"
@@ -54,8 +54,8 @@
 
 <!-- anti blind-->
 <Item type="potion" subtype="heal_bl" name="eyedrops" size="small">
-	<Image image="set:potion_health.png image:full_image" />
-	<Mesh file="potion" />
+	<Image image="set:heal_bl.png image:full_image" />
+	<RenderInfo name="antiBlind" />
 	<Attribute
 		character_requirement="all"
 		price = "100"
@@ -75,7 +75,7 @@
 <!-- anti poison-->
 <Item type="potion" subtype="heal_ps" name="antidot" size="small">
 	<Image image="set:heal_ps.png image:full_image" />
-	<Mesh file="antiPoison" />
+	<RenderInfo name="antiPoison" />
 	<Attribute
 		character_requirement="all"
 		price = "100"
@@ -94,8 +94,8 @@
 
 <!-- anti berserk -->
 <Item type="potion" subtype="heal_br" name="calming salve" size="small">
-	<Image image="set:potion_health.png image:full_image" />
-	<Mesh file="potion" />
+	<Image image="set:heal_br.png image:full_image" />
+	<RenderInfo name="antiBerserk" />
 	<Attribute
 		character_requirement="all"
 		price = "100"
@@ -114,8 +114,8 @@
 
 <!-- anti confuse -->
 <Item type="potion" subtype="heal_cf" name="potion of determination" size="small">
-	<Image image="set:potion_health.png image:full_image" />
-	<Mesh file="potion" />
+	<Image image="set:heal_cf.png image:full_image" />
+	<RenderInfo name="antiConfuse" />
 	<Attribute
 		character_requirement="all"
 		price = "100"
@@ -134,8 +134,8 @@
 
 <!-- anti mute -->
 <Item type="potion" subtype="heal_mt" name="echo potion" size="small">
-	<Image image="set:potion_health.png image:full_image" />
-	<Mesh file="potion" />
+	<Image image="set:heal_mt.png image:full_image" />
+	<RenderInfo name="antiMute" />
 	<Attribute
 		character_requirement="all"
 		price = "100"
@@ -154,8 +154,8 @@
 
 <!-- anti paralyse -->
 <Item type="potion" subtype="heal_py" name="muscle salve" size="small">
-	<Image image="set:potion_health.png image:full_image" />
-	<Mesh file="potion" />
+	<Image image="set:heal_py.png image:full_image" />
+	<RenderInfo name="antiParalyze" />
 	<Attribute
 		character_requirement="all"
 		price = "100"
@@ -175,7 +175,7 @@
 <!-- anti freeze -->
 <Item type="potion" subtype="heal_fr" name="potion of melting" size="small">
 	<Image image="set:heal_fr.png image:full_image" />
-	<Mesh file="antiFreeze" />
+	<RenderInfo name="antiFreeze" />
 	<Attribute
 		character_requirement="all"
 		price = "100"
@@ -194,8 +194,8 @@
 
 <!-- anti burn -->
 <Item type="potion" subtype="heal_bu" name="spike oil" size="small">
-	<Image image="set:potion_health.png image:full_image" />
-	<Mesh file="potion" />
+	<Image image="set:heal_bu.png image:full_image" />
+	<RenderInfo name="antiBurn" />
 	<Attribute
 		character_requirement="all"
 		price = "100"

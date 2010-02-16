@@ -95,4 +95,15 @@
 		<TradeItem subtype="coral_aml"  number="0" number_magical="5" min_enchant="200" max_enchant="650"/>
 	</Trade>
 	<Topic name="trade" start_option="Trade" />
+	
+	<Topic name="blackmarket" start_option="What is all this?">
+		<Effect>
+			speak("player",_("Ganz schoen viele Kisten..."),"thoughtful");
+			speak("Flynn",_("Das Chaos hat mir mein Vorgaenger ueberlassen."),"unhappy");
+			speak("Flynn",_("Sind alles alte Armeebestaende."),"unhappy");
+			speak("Flynn",_("Wenn Euch was davon gefaellt zeigt drauf und ich nenne Euch einen Preis."),"unhappy");
+		</Effect>
+	</Topic>
+	
+	
 </NPC>	

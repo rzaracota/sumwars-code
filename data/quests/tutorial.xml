@@ -235,7 +235,7 @@
 				end;
 				if(solo())then
 					speak("priest",_("Es scheint, als besäße hier jemand größeres Wissen über die Art und Weise, wie Harad mich am Leben hält und bewegt."), "thoughtful");
-				end;
+				else
 					speak("priest",_("Es scheint, als besäße hier jemand größeres Wissen über die Art und Weise, wie Harad uns am Leben hält und bewegt."), "thoughtful");
 				end;
 				speak("archer",_("Wer auch immer hier das Sagen hat: Er hat sich besser überlegt, worauf er sich einlässt."),"threaten");

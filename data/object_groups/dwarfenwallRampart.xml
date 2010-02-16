@@ -26,6 +26,27 @@
             prob_angle="false" 
     />
     <Object subtype="$barricade" 
+            center_x="14.5274511" 
+            center_y="16.26233552" 
+            angle="-244.7777245" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="$barricade" 
+            center_x="-14.60079084" 
+            center_y="16.16257652" 
+            angle="71.67658893" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="$barricade" 
+            center_x="0.09197466171" 
+            center_y="13.5327854" 
+            angle="89.74086738" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="$barricade" 
             center_x="9.296671027" 
             center_y="31.92558822" 
             angle="-217.5410299" 
@@ -924,7 +945,7 @@
     <Object subtype="fence_m1" 
             center_x="4.63374802" 
             center_y="38.60472306" 
-			height="1.065814104e-014" 
+           height="1.065814104e-014" 
             angle="0.4197979133" 
             probability="1" 
             prob_angle="false" 
@@ -932,7 +953,7 @@
     <Object subtype="fence_m1" 
             center_x="-7.389266821" 
             center_y="40.19514246" 
-			height="3.552713679e-015" 
+           height="3.552713679e-015" 
             angle="6.589595645" 
             probability="1" 
             prob_angle="false" 
@@ -961,7 +982,7 @@
     <Object subtype="houseAisen1" 
             center_x="15.27956735" 
             center_y="53.35780142" 
-			height="-1.471508092" 
+           height="-1.471508092" 
             angle="-51.62020894" 
             probability="1" 
             prob_angle="false" 
@@ -969,7 +990,7 @@
     <Object subtype="houseAisen1" 
             center_x="-10.19561292" 
             center_y="43.86969921" 
-			height="0.2334346296" 
+           height="0.2334346296" 
             angle="-76.59768948" 
             probability="1" 
             prob_angle="false" 
@@ -984,7 +1005,7 @@
     <Object subtype="houseAisen3" 
             center_x="-24.31729975" 
             center_y="45.43390414" 
-			height="-0.04825369212" 
+           height="-0.04825369212" 
             angle="-158.9115257" 
             probability="1" 
             prob_angle="false" 
@@ -992,15 +1013,15 @@
     <Object subtype="houseAisen4" 
             center_x="21.95273982" 
             center_y="43.81190689" 
-			height="0.01931569307" 
+           height="0.01931569307" 
             angle="-182.9310136" 
             probability="1" 
             prob_angle="false" 
     />
     <Object subtype="houseAisen4" 
-            center_x="-20.65109362" 
-            center_y="53.02500974" 
-			height="-2.878612937" 
+            center_x="-20" 
+            center_y="54.5" 
+           height="-8.396061624e-016" 
             angle="0" 
             probability="1" 
             prob_angle="false" 
@@ -1008,7 +1029,7 @@
     <Object subtype="houseAisen4" 
             center_x="14.85204013" 
             center_y="43.87213349" 
-			height="-0.09579552927" 
+           height="-0.09579552927" 
             angle="-136.1610607" 
             probability="1" 
             prob_angle="false" 
@@ -1023,7 +1044,7 @@
     <Object subtype="stone2" 
             center_x="4.541284234" 
             center_y="36.69576873" 
-			height="-1.804112415e-016" 
+           height="-1.804112415e-016" 
             angle="0" 
             probability="1" 
             prob_angle="false" 
@@ -1042,6 +1063,9 @@
     <Location name="locBowmen1" pos_x="-0.5525863042" pos_y="27.97759347" />
     <Location name="locBowmen2" pos_x="-10.75901236" pos_y="24.671909" />
     <Location name="locBowmen3" pos_x="9.573278001" pos_y="24.08901092" />
+    <Location name="locBowmen4" pos_x="-13.73676153" pos_y="17.86376754" />
+    <Location name="locBowmen6" pos_x="0.1088854536" pos_y="15.96227499" />
+    <Location name="locBowmen7" pos_x="13.70990567" pos_y="18.19585622" />
     <Location name="locCouncilMage" pos_x="1.139534416" pos_y="31.73526094" />
     <Location name="locDefender1" pos_x="-20.58530889" pos_y="37.64731007" />
     <Location name="locDefender2" pos_x="-10.56012342" pos_y="37.69338728" />
@@ -1068,10 +1092,18 @@
     <Location name="locGuard2" pos_x="6.611590053" pos_y="23.62480202" />
     <Location name="locGuard3" pos_x="12.11193215" pos_y="25.08659205" />
     <Location name="locGuard4" pos_x="-13.05689332" pos_y="25.65739053" />
+    <Location name="locGuard5" pos_x="-16.59968706" pos_y="18.8920871" />
+    <Location name="locGuard6" pos_x="-11.14231573" pos_y="16.94375008" />
+    <Location name="locGuard9" pos_x="-3.058151283" pos_y="15.89840085" />
+    <Location name="locGuard10" pos_x="3.240507514" pos_y="15.82771965" />
+    <Location name="locGuard11" pos_x="10.9384057" pos_y="16.85718858" />
+    <Location name="locGuard12" pos_x="16.12011028" pos_y="19.59045151" />
+    <Location name="locLeftFlank" pos_x="-18.93938399" pos_y="25.67622338" />
     <Location name="locLich" pos_x="-1.737272086" pos_y="-41.31298744" />
     <Location name="locNecromancer1" pos_x="-16.76554119" pos_y="-34.01189986" />
     <Location name="locNecromancer2" pos_x="-1.160268588" pos_y="-34.10189803" />
     <Location name="locNecromancer3" pos_x="14.1237916" pos_y="-34.12067911" />
+    <Location name="locRightFlank" pos_x="19.33628727" pos_y="26.29368017" />
     <Location name="locSpawn1" pos_x="-20.39498067" pos_y="-25.53915015" />
     <Location name="locSpawn2" pos_x="-11.62260528" pos_y="-25.39550007" />
     <Location name="locSpawn3" pos_x="-4.523819401" pos_y="-25.37587368" />

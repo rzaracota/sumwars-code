@@ -75,6 +75,11 @@ function lookAtObject(obj,obj2)
 	lookAt(obj,get(obj2,"position"));
 end;
 
+function lookAtEachOther(obj1,obj2)
+	lookAt(obj1,get(obj2,"position"));
+	lookAt(obj2,get(obj1,"position"));
+end;
+
 function isInRegion(obj)
 	local reg = getRegion()
 	return(get(obj,"region")==reg);

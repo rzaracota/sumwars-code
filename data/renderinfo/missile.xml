@@ -243,7 +243,6 @@
 	</Action>
 </RenderInfo>	
 
-
 <RenderInfo name="throwing_berry">
 	<Entity objectname="berry" source="berry.mesh" position="0 1.0 0" />
 	<Soundobject objectname="sound" />
@@ -254,7 +253,6 @@
 	</Action>
 </RenderInfo>
 
-
 <RenderInfo name="throwing_rock">
 	<Entity objectname="rock" source="stone_void.mesh" position="0 1.0 0" />
 	<Soundobject objectname="sound" />
@@ -264,4 +262,26 @@
 		<Sound objectname="sound" name="arrow"/>
 	</Action>
 </RenderInfo>
+
+<RenderInfo name="catapult_rock">
+	<Entity objectname="stone" source="boulder.mesh" position="0 0 0" rotation="0 -90 0"/>
+	
+	<Action name="stable">
+		<Animation objectname="stone" name="impact"/>
+	</Action>
+</RenderInfo>
+
+
+<RenderInfo name="smoke_wave">
+	<Entity objectname="stone" source="boulder.mesh" position="0 0 0"/>
+	
+	<Action name="stable">
+		<ParticleSystem objectname="impactCloud" source="Smoke_Explosion"/>
+		<Scale objectname="impactCloud" start="0" end="0.6" start_val="0.5" end_val="2.0"/>
+		<Scale objectname="impactCloud" start="0.6" end="1" start_val="1.5" end_val="0.5" />
+		<!--<Detach objectname="impactCloud" time="1.0"/>-->
+	</Action>
+</RenderInfo>
+
+
 

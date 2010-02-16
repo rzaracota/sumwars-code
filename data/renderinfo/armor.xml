@@ -56,11 +56,16 @@
 	<Entity source="councl_robMM.mesh"/> 
 </RenderInfo>
 <RenderInfo name="counclRob#f" parent="playerbase" inherit="animation">
+	<Entity source="councl_robFT.mesh"/>
 </RenderInfo>
 <RenderInfo name="counclRob#fs" parent="playerbase" inherit="animation">
+	<Entity source="councl_robFT.mesh"/> 
 </RenderInfo>
 <RenderInfo name="counclRobeSoren" parent="guardPoleBase" inherit="animation">
 	<Entity source="councl_robMM.mesh"/>
+</RenderInfo>
+<RenderInfo name="counclRobeIreana" parent="guardPoleBaseF" inherit="animation">
+	<Entity source="councl_robFT.mesh"/>
 </RenderInfo>
 
 <RenderInfo name="necromancerRobe">
@@ -70,14 +75,15 @@
 	<Entity source="necromancer_robeM.mesh"/> 
 </RenderInfo>
 <RenderInfo name="necromancerRobe#f" parent="playerbase" inherit="animation">
+	<Entity source="necromancer_robeFT.mesh"/> 
 </RenderInfo>
 <RenderInfo name="necromancerRobe#fs" parent="playerbase" inherit="animation">
+	<Entity source="necromancer_robeFT.mesh"/> 
 </RenderInfo>
 
 <RenderInfo name="rogueArmorEnemy" parent="bandit_base" inherit="animation">
 	<Entity source = "rogue_arm.mesh"/>
 </RenderInfo>
-
 <RenderInfo name="rogueArmorEnemy2h" parent="human_2h_base" inherit="animation">
 	<Entity source = "rogue_arm.mesh"/>
 </RenderInfo>
@@ -89,6 +95,21 @@
 	<Entity source="robe_simpleMT.mesh"/> 
 </RenderInfo>
 <RenderInfo name="robeSimple#f" parent="playerbase" inherit="animation">
+	<Entity source="robe_simpleFT.mesh"/> 
 </RenderInfo>
 <RenderInfo name="robeSimple#fs" parent="playerbase" inherit="animation">
+	<Entity source="robe_simpleFT.mesh"/> 
+</RenderInfo>
+
+<RenderInfo name="robeNovice">
+	<Entity source="novice_rob.mesh"/> 
+</RenderInfo>
+<RenderInfo name="robeNovice#m" parent="playerbaseM" inherit="animation">
+	<Entity source="novice_robMT.mesh"/> 
+</RenderInfo>
+<RenderInfo name="robeNovice#f" parent="playerbase" inherit="animation">
+	<Entity source="novice_robeFT.mesh"/> 
+</RenderInfo>
+<RenderInfo name="robeNovice#fs" parent="playerbase" inherit="animation">
+	<Entity source="novice_robeFT.mesh"/> 
 </RenderInfo>

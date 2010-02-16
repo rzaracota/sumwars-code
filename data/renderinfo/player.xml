@@ -173,6 +173,11 @@
 		<Animation name="attackTwoHandsBlunt" />
 	</Action>
 	
+	<Action name="magic_attack">
+		<Animation name="attackMagicOneHand" />
+		<ParticleSystem objectname="magicEnergy" bone="mainmesh:itemRightHand" source="Magic_Arrow" position="0.0 0.0 -1.0" />
+		<Detach time="0.4" objectname="magicEnergy" />
+	</Action>
 	<Action name="magic_attack#Unarmed">
 		<Animation name="attackMagicUnarmed" />
 		<ParticleSystem objectname="magicEnergy" bone="mainmesh:itemRightHand" source="Magic_Arrow" position="0.0 0.0 0.0" />

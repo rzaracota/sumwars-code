@@ -43,14 +43,19 @@
 			<Effect>
 				maylons_grave_tmp.phase="goblinsFlee";
 				maylons_grave_tmp.player = trigger.player;
+				
 				addArea("areaCryptQuest",{"circle","locParty",20});
 				maylons_grave_tmp.players = getPlayersInArea("areaCryptQuest");
 				groupObjectsArc(maylons_grave_tmp.players,"locParty","locGabResh",nil, 120);
+				
 				maylons_grave_tmp.zombie = createObject("zombie_crypt","locZombie");
+				lookAtObject(maylons_grave_tmp.GabResh,maylons_grave_tmp.zombie);
 				set(maylons_grave_tmp.zombie,"willpower",0);
 				setCutsceneMode(true);
 				--addCameraPosition(0,"cryptGoblins", -90,60, 25);
 				addCameraPosition(0,"cryptGoblins", -90,10, 15);
+				addCameraPosition(1000,"locZombie", -85,10, 14);
+				addCameraPosition(2000,"locZombie", -85,10, 14);
 				maylons_grave_tmp.door = getObjectByNameRef("entryDoor");
 				door_setopen(maylons_grave_tmp.door,true);
 				addUnitCommand(maylons_grave_tmp.zombie,"walk","cryptGoblins");
@@ -59,7 +64,7 @@
 				addUnitCommand(maylons_grave_tmp.Goblin2,"walk","locGoblin2");
 				addUnitCommand(maylons_grave_tmp.Goblin3,"walk","locGoblin3");
 				addUnitCommand(maylons_grave_tmp.Goblin4,"walk","locGoblin4");
-				timedExecute('addUnitCommand('..maylons_grave_tmp.GabResh..',"freeze",'..maylons_grave_tmp.zombie..');',1000);
+				timedExecute('addUnitCommand('..maylons_grave_tmp.GabResh..',"freeze",'..maylons_grave_tmp.zombie..');',1400);
 				timedExecute('addUnitCommand('..maylons_grave_tmp.GabResh..',"walk","locShutDoor");',1400);
 				--Gab'Resh zu einer Location neben der Tuer schicken und das abfangen
 				timedExecute('addCameraPosition(4000,"cryptGoblins",-90,10,25)',2000);
@@ -208,25 +213,27 @@
 				end;
 				executeInDialog('insertTrigger("goblinsWalkAway")');
 				maylons_grave.started=true;
-				--fuert zu weiterer Belohnung
-				maylons_grave.let_goblins_go=true;
+				
 				--fuert zu weiterem quest
+				maylons_grave.let_goblins_go=true;
 				maylons_grave.listened_to_goblins=true;
-				setCutsceneMode(false);
+				changeTopic("finishTalk")
 			</Effect>	
 		</Topic>
 		
 		<Topic name="kill_goblins_immediately" >
 			<Effect>
-				maylons_grave.goblins_killed = true;
-				maylons_grave.started=true;
 				if(solo())then
 					speak("PL",_("Elendes Gezuecht!Sterbt alle!"));
 				else
 					speak("PL",_("Elendes Gezuecht! Macht sie nieder!"));
 				end;
-				--fuert spaeter zu weiterem Kampf
-				maylons_grave.goblins_killed = true;
+				changeTopic("kill_goblins");
+			</Effect>	
+		</Topic>
+		
+		<Topic name="finishTalk" >
+			<Effect>
 				setCutsceneMode(false);
 			</Effect>	
 		</Topic>
@@ -249,7 +256,6 @@
 		<Topic name="kill_goblins" >
 			<Effect>
 				maylons_grave.started=true;
-				maylons_grave.goblins_killed = true;
 				setCutsceneMode(false);
 			</Effect>	
 		</Topic>
@@ -275,6 +281,15 @@
 			</Condition>
 			<Effect>
 				deleteObject(trigger.unit);
+			</Effect>
+		</Event>
+		
+		<Event trigger="unit_die" once="true">
+			<Condition>
+				return(get(trigger.unit,"subtype")=="goblin_gabresh")
+			</Condition>
+			<Effect>
+				maylons_grave.goblins_killed=true;
 			</Effect>
 		</Event>
 	</Region>
@@ -428,6 +443,7 @@
 		<Event trigger="maylon_rip" once="true">
 			<Effect>
 				maylons_grave.finished=true;
+				addPlayersExperience(500,"rescued_maylon");
 				scriptobjectvar[getObjectByNameRef("doorGrave")]["locked"] = false;
 				setCutsceneMode(false);
 			</Effect>

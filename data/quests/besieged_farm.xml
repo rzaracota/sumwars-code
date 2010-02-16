@@ -125,7 +125,7 @@
 					end;
 				end;
 				--exp verteilen
-				--addPlayersExperience(3000, "farm_siege_xp")
+				addPlayersExperience(1000, "farm_siege_xp")
 				farm_siege.rescued=true;
 			</Effect>
 		</Event>

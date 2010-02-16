@@ -75,3 +75,46 @@
 	<Effect>
 	</Effect>	
 </Projectile>
+
+<Projectile subtype="catapult_shot"
+			lifetime="1000"
+			radius="2.5"
+			implementation = "stationary"
+			new_projectile_type="smoke_wave"
+		   >
+	<Flag name="explodes"/>
+	<RenderInfo name="catapult_rock" />
+	<Effect>
+		<CppImplementation type="dmg_at_enemies_in_radius" />
+	</Effect>
+</Projectile>
+<Projectile subtype="smoke_wave"
+			lifetime="1000"
+			radius="1.5"
+			implementation = "stationary"
+		   >
+	<RenderInfo name="smoke_wave" />
+</Projectile>
+
+<Projectile subtype="catapult_skeleton"
+			lifetime="1000"
+			radius="1.0"
+			implementation = "stationary"
+			new_projectile_type="cata_skel_explosion"
+		   >
+	<Flag name="explodes"/>
+	<RenderInfo name="catapult_rock" />
+	<Effect>
+		<CppImplementation type="dmg_at_enemies_in_radius" />
+	</Effect>
+</Projectile>
+<Projectile  subtype="cata_skel_explosion"
+		   lifetime="200"
+		   radius="1.5"
+		   implementation = "stationary"
+		   >
+	<RenderInfo name="explosion" />
+	<Effect>
+		<CppImplementation type="dmg_at_enemies_in_radius" />
+	</Effect>	
+</Projectile>

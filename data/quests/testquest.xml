@@ -47,6 +47,10 @@
 				speak('Fenor Marken',_("injured"));
 				setSpeakerEmotion('Fenor Marken',"injured3");
 				speak('Fenor Marken',_("deadly injured"));
+				speak('Fenor Marken',_("afraid"),"fear");
+				speak('Fenor Marken',_("in panic"),"panic");
+				speak('Fenor Marken',_("putting up a distance"),"aloof");
+				speak('Fenor Marken',_("being disgusted"),"disgust");
 				speak('player',_("und noch ein Test"));
 				speak('Fenor Marken',_("wieder ein Test"));
 				--setSpeakerPosition('Fenor Marken',"upper_left");

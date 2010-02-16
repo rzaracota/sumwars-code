@@ -1,0 +1,483 @@
+<Quest name="Defend dwarfenwall" table_name="defend_dwall">
+	<Description>
+		if (defend_dwall.finished) then
+			return _("Quest finished")
+		else
+			return _("Quest description")
+		end
+	</Description>
+	
+	<Region name="dwarfenwallCommand">
+		<Event trigger="create_region" once="true">
+			<Condition>
+				return (defend_dwall.briefingFinished ~= true)
+			</Condition>
+			<Effect>
+				setCutsceneMode(true);
+				addCameraPosition(0,"locCamera",-90,55,14);
+				defend_dwall_tmp.position="command";
+				assembleParty("dwarfenwallCommand", entry_south);
+				lookAtEachOther(dwarfenwall.general,dwarfenwall.council);
+			</Effect>
+		</Event>
+		
+		<Event trigger="party_complete" once="true">
+			<Condition>
+				return (defend_dwall_tmp.position=="command")
+			</Condition>
+			<Effect>
+				initDialog();
+				
+				addSpeaker(dwarfenwall.general, "general");
+				addSpeaker(dwarfenwall.council, "council");
+				
+				setSpeakerPosition("council","upper_left");
+				speak("council",_("...haben meine Windelementare genau gesehen: Es ist nur dieser eine Lich, der sie fuehrt."),"thoughtful");
+				speak("council",_("Wenn er erst mal weg ist, sind die anderen kein Problem."),"unhappy");
+				speak("general",_("Wie großartig."),"amused");
+				speak("general",_("Und mit welcher Armee wollt ihr ihre Reihen durchbrechen?"),"unhappy");
+				speak("general",_("Wir muessen erst mal diesen Ansturm aufhalten, der sich da zusammenbraut."),"unhappy");
+				speak("council",_("Keine Sorge."),"normal")
+				speak("council",_("Mein Kollege hat mir versichert, dass das Konzil Unterstuetzung sendet."),"normal")
+				speak("council",_("Sie muesste bald hier sein."),"normal")
+				setSpeakerAnimation("general","angry",800);
+				speak("general",_("Erst beordern sie die Maga von Nordenburg ab und dann senden sie wieder Verstaerkung?"),"angry");
+				speak("general",_("Was ist das für ein Spiel?"),"unhappy");
+				speak("council",_("Die Maga wird an anderer Stelle dringender benoetigt als bei uns."),"aloof");
+				speak("general",_("Aber natuerlich!"),"sneer");
+				speak("general",_("Auch wenn ich das nur ungern sage, aber bis eine Armee den Weg hier her geschafft hat, kaempfen unsere Koerper laengst für die andere Seite, verehrte Dame!"),"unhappy");
+				changeTopic("entryParty");
+			</Effect>
+		</Event>
+		
+		<Event trigger="entryParty">
+			<Effect>
+				addUnitCommand(getPartyleader(),"walk","locLeader");
+				addCameraPosition(1500,"locCamera",-90,60,20);
+				speak("PL",_("Verzeiht wenn ich mich so einfach einmische, aber kleine Gruppen reisen erheblich schneller als ein Heerzug."),"normal");
+				executeInDialog('lookAtObject('..dwarfenwall.general..','..getSpeaker("PL")..')');
+				if(solo())then
+					speak("general",_("Und wer seid Ihr? _solo"),"threaten");
+				else
+					speak("general",_("Und wer seid ihr?"),"threaten");
+				end;
+				speak("PL",_("Die Verstaerkung"),"amused");
+				
+				setSpeakerEmotion("general","happy");
+				setSpeakerAnimation("general","laugh",800);
+				setSpeakerEmotion("PL","normal");
+				speakPause(800);
+				
+				speak("general",_("Guter Witz."),"unhappy");
+				speak("general",_("Aber wir sind hier im Krieg."),"unhappy");
+				if(solo() and maleOnly())then
+					speak("general",_("Macht, dass ihr davonkommt, ihr Narr."),"unhappy");
+				elseif(solo())then
+					speak("general",_("Macht, dass ihr davonkommt, ihr Naerrin."),"unhappy");
+				else
+					speak("general",_("Macht, dass ihr davonkommt, ihr Narren."),"unhappy");
+				end;
+				executeInDialog('lookAtObject('..dwarfenwall.general..','..dwarfenwall.council..')');
+				
+				if(isMale(getSpeaker("PL")))then
+					speak("council",_("Dieser Soeldner sagt die Wahrheit."),"aloof");
+				else
+					speak("council",_("Diese Soeldnerin sagt die Wahrheit."),"aloof");
+				end;
+				
+				speak("general",_("Was?!?"),"pain");
+				executeInDialog('lookAtObject('..dwarfenwall.general..','..getSpeaker("PL")..')');
+				setSpeakerAnimation("general","point",800);
+				speakPause(800);
+				setSpeakerAnimation("general","pointing",100,true);
+				speak("general",_("Das soll eure grandiose Unterstützung sein?"),"angry");
+				setSpeakerAnimation("general","angry",800);
+				if(not solo())then
+					speak("general",_("Eine Handvoll Soeldlinge?"),"offended");
+				end;
+				
+				speak("council",_("Ihr werdet den Wert unserer Unterstuetzung schon noch erkennen, wenn sie wieder und wieder fuer euch faellt."),"aloof");
+				speak("general",_("Was sagt ihr da?"),"unhappy");
+				setSpeakerAnimation("general","think",1000);
+				speakPause("1000");
+				if(solo() and femaleOnly())then
+					speak("general",_("... Ist das etwa eine Verfluchte?"),"pain");
+				elseif(solo())then
+					speak("general",_("... Ist das etwa ein Verfluchter?"),"pain");
+				else
+					speak("general",_("... Sind das etwa Verfluchte?"),"pain");
+				end;
+				setSpeakerAnimation("general","aloof");
+				speak("any",_("Mir persoenlich gefaellt der Begriff Gezeichnete irgendwie besser."),"unhappy");
+				
+				setSpeakerEmotion("any","aloof");
+				if(solo())then
+					speak("PL",_("Wenn der Preis stimmt, lasse ich mich so oft in Stuecke hacken, wie es noetig ist, um diese Stadt zu verteidigen."),"aloof");
+				else
+					speak("PL",_("Wenn der Preis stimmt, lassen wir uns so oft in Stuecke hacken, wie es noetig ist, um diese Stadt zu verteidigen."),"aloof");
+				end;
+				
+				executeInDialog('lookAtObject('..dwarfenwall.general..','..dwarfenwall.council..')');
+				speak("general",_("Ihr lasst euch mit dem Teufel ein, um einen Teufel auszutreiben?"),"disgust");
+				setSpeakerEmotion("general","aloof");
+				
+				speak("council",_("In Zeiten wie diesen kann man nicht besonders zimperlich benehmen."),"offended");
+				speak("council",_("Wollt ihr leben oder den Untoten als Verstaerkung dienen?"),"threaten");
+				
+				speak("general",_("Man kann diesen Monstern nicht trauen!"),"angry");
+				speak("general",_("Solange ich diese Armee fuehre, werde ich solche nicht dulden!"),"offended");
+				setSpeakerEmotion("general","aloof");
+				
+				if(solo())then
+					speak("PL",_("Ich habe gerade die Untoten daran gehindert, eure Stadt zu umgehen!"),"unhappy");
+				else
+					speak("PL",_("Wir haben gerade die Untoten daran gehindert, eure Stadt zu umgehen!"),"unhappy");
+				end;
+				speak("general",_("Das beweist gar nichts!"),"aloof");
+				speak("mage",_("Alle Krieger verbindet die Engstirnigkeit."),"thoughtful");
+				if(solo())then
+					speak("warrior",_("Ich toete nicht wahllos!"),"angry");
+				else
+					speak("warrior",_("Wir toeten nicht wahllos!"),"angry");
+				end;
+				
+				if(solo() and femaleOnly())then
+					speak("council",_("Sie steht unter dem Befehls des Konzils, es ist nicht eure Entscheidung."),"aloof");
+				elseif(solo())then
+					speak("council",_("Er steht unter dem Befehls des Konzils, es ist nicht eure Entscheidung."),"aloof");
+				else
+					speak("council",_("Sie stehen unter dem Befehls des Konzils, es ist nicht eure Entscheidung."),"aloof");
+				end;
+				changeTopic("theChargeBegins");
+			</Effect>
+		</Event>
+		
+		<Event trigger="theChargeBegins">
+			<Effect>
+				--TODO: Hornsignal
+				addCameraPosition(100,"locGeneral",-90,60,20);
+				addCameraPosition(100,"locCamera",-90,60,20);
+				addCameraPosition(100,"locGeneral",-90,60,20);
+				addCameraPosition(100,"locCamera",-90,60,20);
+				addCameraPosition(100,"locGeneral",-90,60,20);
+				addCameraPosition(100,"locCamera",-90,60,20);
+				addCameraPosition(100,"locGeneral",-90,60,20);
+				addCameraPosition(100,"locCamera",-90,60,20);
+				defend_dwall_tmp.messanger = createObject("guard","exit_south");
+				addSpeaker(defend_dwall_tmp.messanger,"guard");
+				speak("guard",_("Sie kommen! Der Angriff beginnt!"),"panic");
+				changeTopic("ordersForCharge");
+			</Effect>
+		</Event>
+		<Event trigger="ordersForCharge">
+			<Effect>
+				--TODO: Hornsignal
+				addCameraPosition(100,"locGeneral",-90,60,20);
+				addCameraPosition(100,"locCamera",-90,60,20);
+				addCameraPosition(100,"locGeneral",-90,60,20);
+				addCameraPosition(100,"locCamera",-90,60,20);
+				addCameraPosition(100,"locGeneral",-90,60,20);
+				addCameraPosition(100,"locCamera",-90,60,20);
+				addCameraPosition(100,"locGeneral",-90,60,20);
+				addCameraPosition(100,"locCamera",-90,60,20);
+				addCameraPosition(100,"locGeneral",-90,60,20);
+				addCameraPosition(100,"locCamera",-90,60,20);
+				addCameraPosition(100,"locGeneral",-90,60,20);
+				addCameraPosition(100,"locCamera",-90,60,20);
+				removeSpeaker("guard");
+				deleteObject(defend_dwall_tmp.messanger);
+				
+				speak("general",_("..."),"angry",2000);
+				speak("general",_("Seht zu, dass ihr zur Mauer kommt!"),"unhappy");
+				speak("archer",_("Wie schnell er seine Meinung doch aendert."),"sneer");
+				if(solo())then
+					speak("PL",_("Ich bin schon unterwegs"),"normal");
+				else
+					speak("PL",_("Los jetzt!"),"normal");
+				end;
+				changeTopic("partyLeavesForBattle")
+			</Effect>
+		</Event>
+		<Event trigger="partyLeavesForBattle">
+			<Effect>
+				addUnitCommand(getSpeaker("PL"),"walk","entry_south");
+				speakPause(1000);
+				speak("general",_("Ich hoffe, ihr habt genug Geld, um diese Brut bei der Stange zu halten."),"threaten");
+				speak("council",_("Macht euch keine Sorgen."),"unhappy");
+				speak("council",_("Daran wird es nicht scheitern."),"sneer");
+				--TODO: Schwert nehmen und gehen
+				speak("general",_("Ich bete, dass ihr Euch nicht irrt..."),"unhappy")
+				executeInDialog('')
+				changeTopic("briefingOver")
+			</Effect>
+		</Event>
+		<Event trigger="briefingOver">
+			<Effect>
+				addUnitCommand(dwarfenwall.general,"walk","exit_south");
+				fadeOut(2000);
+				defend_dwall.briefingFinished = true;
+				timedExecute('assembleParty("dwarfenwall","locPartyLeave")',2000);
+				timedExecute('fadeIn(0,{0.4,0.4,0.4},{1,1,1},{0.3,0.3,0.3})',2000);
+				timedExecute('setCutsceneMode(false)',2000);
+			</Effect>
+		</Event>
+	</Region>
+
+	<Region name="dwarfenwall">
+		<Event trigger="enter_region" >
+			<Condition>
+				return (defend_dwall.finished~=true);
+			</Condition>
+			<Effect>
+				insertTrigger("catapult");
+			</Effect>
+		</Event>
+		<Event trigger="player_moved" >
+			<Condition>
+				return (unitIsInArea(trigger.player,"areaNoEntry1"))
+			</Condition>
+			<Effect>
+				unitSpeak(dwarfenwall.guard3,_("Es tut mir Leid, aber hier ist nur Durchgang fuer Angehoerige der aisener Armee."));
+				addUnitCommand(trigger.player,"walk","locWeaponTrader");
+				startTimer("stopWalking",1000);
+				addTriggerVariable("unit",trigger.player);
+			</Effect>
+		</Event>
+		
+		<Event trigger="player_moved" >
+			<Condition>
+				return (unitIsInArea(trigger.player,"areaNoEntry2"))
+			</Condition>
+			<Effect>
+				unitSpeak(dwarfenwall.guard4,_("Es tut mir Leid, aber hier ist nur Durchgang fuer Angehoerige der aisener Armee."));
+				addUnitCommand(trigger.player,"walk","locWeaponTrader");
+				startTimer("stopWalking",1000);
+				addTriggerVariable("unit",trigger.player);
+			</Effect>
+		</Event>
+		<Event trigger="stopWalking" >
+			<Effect>
+				clearUnitCommands(trigger.unit);
+			</Effect>
+		</Event>
+		
+		<Event trigger="unit_moved" >
+			<Condition>
+				local sub = get(trigger.unit,"subtype");
+				return((unitIsInArea(trigger.unit,"areaHealer"))and (sub=="aisen_healer"));
+			</Condition>
+			<Effect>
+				timedExecute('deleteObject('..trigger.unit..')',100);
+			</Effect>
+		</Event>
+		
+		<Event trigger="unit_hit" >
+			<Condition>
+				--send healers to important units
+				local u = trigger.defender;
+
+				if(defend_dwall.finished ~=true)then
+					return((u == dwarfenwall.guard1)or(u == dwarfenwall.guard2)or(u == dwarfenwall.guard3)or(u == dwarfenwall.guard4)or(u == dwarfenwall.sergeant)or(u == dwarfenwall.weapons)or(u == dwarfenwall.armors)or(u == dwarfenwall.potions)or(u == dwarfenwall.blackmarket)or(u == theTrader.theTraderDW));
+				else
+					return false;
+				end;
+			</Condition>
+			<Effect>
+				sendOutHealer(trigger.defender);
+			</Effect>
+		</Event>
+		
+		<Event trigger="catapult">
+			<Condition>
+				return (defend_dwall.finished~=true);
+			</Condition>
+			<Effect>
+				--bombards dwarfenwall
+				local nextShot = math.random(800,4000);
+				startTimer("catapult",nextShot);
+				
+				local x = math.random(40,90);
+				local y = math.random(40,90);
+				--print("and the winner is: "..x.."/"..y);
+				catapult({x,y});
+			</Effect>
+		</Event>
+		
+		<Event trigger="unit_die" >
+			<Effect>
+				--print("someone is now six feet under")
+				--print(get(trigger.unit,"subtype"))
+				local i = dwarfenwall.people[trigger.unit];
+				--print(i);
+				
+				if(dwarfenwall.city[i]==nil)then
+					--print("now in the section for unregistered victims")
+				elseif(dwarfenwall.city[i]["important"]~=true)then
+					local unit;
+					
+					if(dwarfenwall.city[i]["moving"]~=true)then
+						--print("unit was a stationary peasant")
+						local chain = dwarfenwall.city[i]["respawn"];
+						
+						for key,loc in pairs(chain) do
+							if(key == 1)then
+								unit = createObject("peasant",loc);
+							else
+								--print("new peasant walking to "..loc);
+								addUnitCommand(unit,"walk",loc,2.5);
+							end;
+						end;
+						
+						addUnitCommand(unit,"walk",dwarfenwall.city[i]["location"],0.2);
+					else
+						--print("unit was a moving peasant")
+						unit = createObject("peasant",dwarfenwall.city[i]["location"]);
+						dwarfenwall.city[i]["phase"] = 1;
+						insertTrigger("peasantNextPhase");
+						addTriggerVariable("id",i);
+					end;
+					
+					setRefName(unit,dwarfenwall.city[i]["refname"])
+					dwarfenwall.people[unit]=dwarfenwall.people[trigger.unit];
+					dwarfenwall.people[trigger.unit]=nil;
+					dwarfenwall.city[i]["unit"]=unit;
+				else
+					print("the unit was important and was not replaced... the gods will punish you!")
+				end;
+			</Effect>
+		</Event>
+	
+		<Event trigger="party_complete" once="true">
+			<Condition>
+				return(defend_dwall.briefingFinished==true and defend_dwall.siegeStarted~=true);
+			</Condition>
+			<Effect>
+				dwarfenwall.combatGeneral = createObject("general_greif_battle","locGeneralSpwan");
+				addUnitCommand(dwarfenwall.combatGeneral,"walk","exit_rampart");
+			</Effect>
+		</Event>
+		<Event trigger="unit_moved" once="true">
+			<Condition>
+				if(trigger.unit==dwarfenwall.combatGeneral)then
+					return(unitIsInArea(trigger.unit,"areaRampart"));
+				else
+					return false;
+				end;
+			</Condition>
+			<Effect>
+				deleteObject(dwarfenwall.combatGeneral);
+			</Effect>
+		</Event>
+	</Region>
+	
+	<Region name="dwarfenwallRampart">
+		<Event trigger="create_region">
+			<Condition>
+				return (defend_dwall.siegeEnded ~= true);
+			</Condition>
+			<Effect>
+				--the number of penalty-points accumulated during battle
+				defend_dwall_tmp.penalty=0;
+			
+				-- a table containing information for every battle-position (aisen-side)| siege-index -> struct
+				defend_dwall_tmp.siege = {};
+				--a table containing every unit in battle| id -> siege-index
+				defend_dwall_tmp.units = {};
+				
+				--guards of the second defense-line
+				createUnitIndex(1, "locGuard1", 10, "guard_siege", 5, 4000, "locSpawnGuards")
+				local guard = setGuard(1,-90)
+				createUnitIndex(2, "locGuard2", 10, "guard_siege", 5, 4000, "locSpawnGuards")
+				local guard = setGuard(2,-90)
+				createUnitIndex(3, "locGuard3", 10, "guard_siege", 5, 4000, "locSpawnGuards")
+				local guard = setGuard(3,-90)
+				createUnitIndex(4, "locGuard4", 10, "guard_siege", 5, 4000, "locSpawnGuards")
+				local guard = setGuard(4,-90)
+				
+				--guards of the first defense-line
+				createUnitIndex(5, "locGuard5", 10, "guard_siege", 1, 4000, "locSpawnGuards")
+				local guard = setGuard(5,-90)
+				createUnitIndex(6, "locGuard6", 10, "guard_siege", 1, 4000, "locSpawnGuards")
+				local guard = setGuard(6,-90)
+				createUnitIndex(9, "locGuard9", 10, "guard_siege", 1, 4000, "locSpawnGuards")
+				local guard = setGuard(9,-90)
+				createUnitIndex(10, "locGuard10", 10, "guard_siege", 1, 4000, "locSpawnGuards")
+				local guard = setGuard(10,-90)
+				createUnitIndex(11, "locGuard11", 10, "guard_siege", 1, 4000, "locSpawnGuards")
+				local guard = setGuard(11,-90)
+				createUnitIndex(12, "locGuard12", 10, "guard_siege", 1, 4000, "locSpawnGuards")
+				local guard = setGuard(12,-90)
+				
+				--mages and bowman of the second defense-line
+				createUnitIndex(13, "locBowmen2", 2, "aisen_mage", 25, 6000, "locSpawnGuards")
+				local guard = setGuard(13,-90);
+				createUnitIndex(14, "locBowmen3", 2,"aisen_mage", 25, 6000, "locSpawnGuards")
+				local guard = setGuard(14,-90);
+				createUnitIndex(15, "locBowmen1", 5,"bowman_siege", 10, 4000, "locSpawnGuards")
+				local guard = setGuard(15,-90);
+				--bowmen of the first defense-line
+				createUnitIndex(14, "locBowmen4", 5, "bowman_siege", 3, 4000, "locSpawnGuards")
+				local guard = setGuard(14,-90);
+				--createUnitIndex(15, "locBowmen5", 5, "bowman_siege", 3, 4000, "locSpawnGuards")
+				--local guard = setGuard(15,-90);
+				createUnitIndex(16, "locBowmen6", 5, "bowman_siege", 3, 4000, "locSpawnGuards")
+				local guard = setGuard(16,-90);
+				createUnitIndex(17, "locBowmen7", 5, "bowman_siege", 3, 4000, "locSpawnGuards")
+				local guard = setGuard(17,-90);
+				
+				--Darna's fireelementals
+				createUnitIndex(18, "locElemental1", 15, "fire_guard", 30, 4000, "locElemental1")
+				--local guard = setGuard(18,-90);
+				createUnitIndex(19, "locElemental2", 15, "fire_guard", 30, 4000, "locElemental2")
+				--local guard = setGuard(19,-90);
+				
+				--elite-guards of Greif and Darna
+				createUnitIndex(7, "locGeneralGuard1", 10, "elite_siege", 50, 4000, "locSpawnGuards")
+				local guard = setGuard(7,-90)
+				createUnitIndex(8, "locGeneralGuard2", 10, "dwarfenwall_councilguard", 50, 4000, "locSpawnGuards")
+				local guard = setGuard(8,-90)
+				
+				--startTimer("killSoldier",2000);
+				--addTriggerVariable("unit",guard);
+			</Effect>
+		</Event>
+		<Event trigger="killSoldier">
+			<Effect>
+				set(trigger.unit,"health",0);
+			</Effect>
+		</Event>
+		
+		<Event trigger="unit_die">
+			<Condition>
+				return (defend_dwall_tmp.units[trigger.unit] ~= nil);
+			</Condition>
+			<Effect>
+				local i = defend_dwall_tmp.units[trigger.unit];
+				startTimer(defend_dwall_tmp.siege[i]["respawnTrigger"],defend_dwall_tmp.siege[i]["respawn"]);
+				--startTimer("newUnit",1000);
+				addTriggerVariable("index",i);
+				defend_dwall_tmp.penalty = defend_dwall_tmp.penalty + defend_dwall_tmp.siege[i]["penalty"];
+				print("penalty-points: "..defend_dwall_tmp.penalty);
+				
+				--print("index: "..i.." id: "..trigger.unit);
+				defend_dwall_tmp.units[trigger.unit]=nil;
+			</Effect>
+		</Event>
+		
+		<Event trigger="newUnit">
+			<Effect>
+				--print("lets get a new unit");
+				local i = trigger.index;
+				--print("The index is "..i);
+				--print("subtype: "..defend_dwall_tmp.siege[i]["subtype"]);
+				local unit = createObject(defend_dwall_tmp.siege[i]["subtype"],defend_dwall_tmp.siege[i]["respawnlocation"]);
+				defend_dwall_tmp.units[unit]=i;
+				
+				addUnitCommand(unit,"walk","locEntryGeneral",0.5,"secondary");
+				addUnitCommand(unit,"walk",defend_dwall_tmp.siege[i]["location"],0.5,"secondary");
+				addUnitCommand(unit,"guard",defend_dwall_tmp.siege[i]["location"],defend_dwall_tmp.siege[i]["guard_range"],"secondary");
+			</Effect>
+		</Event>
+	</Region>
+</Quest>
+

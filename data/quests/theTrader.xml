@@ -259,4 +259,29 @@
 			</Effect>
 		</Topic>
 	</NPC>
+
+	<Region name="dwarfenwall">
+		<Event trigger="create_region" once = "true">
+			<Effect>
+				theTrader_tmp.theTraderDW = createObject("theTrader", "locTheTrader");
+				setRefName(theTrader_tmp.theTraderDW, "The Trader");
+			</Effect>
+		</Event>
+	</Region>
+	
+	<NPC refname = "The Trader">
+		<Topic name="dwarfenwall_theTrader" start_option="I see you have reached dwarfenwall safely." once="true">
+			<Condition>
+				local region = get(getSpeaker("The Trader"), "region")
+				return((theTrader.talkedInDW ~=true)and(region == "dwarfenwall"));
+			</Condition>
+			<Effect>
+				speak("player",_("Wie schoen, dass Ihr auch aus den Hoelen entkommen seid."));
+				speak("The Trader",_("Das habe ich Euch zu verdanken. Darf ich Euch weiterhin meine Dienste anbieten?"),"happy");
+				speak("player",_("Aber sicher doch. Jetzt, wo ich endlich wieder einen vernünftigen Anker habe."),"amused");
+				theTrader.talkedInDW = true;
+			</Effect>
+		</Topic>
+	</NPC>
+	
 </Quest>

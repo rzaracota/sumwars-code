@@ -156,8 +156,8 @@
 
 <RenderInfo name="fireElemS" parent="elementalbase">
 	<Entity source="fireElemSmall.mesh"/>
-	<ParticleSystem objectname="rightHand" source="FireElemEyes" bone="fingerjointRight"/>
-	<ParticleSystem objectname="rightLeft" source="FireElemEyes" bone="fingerJointLeft"/>
+	<ParticleSystem objectname="rightHand" source="FireElemHand" bone="fingerjointRight"/>
+	<ParticleSystem objectname="rightLeft" source="FireElemHand" bone="fingerJointLeft"/>
 </RenderInfo>
 
 <RenderInfo name="fireSlug" parent="slugbase">

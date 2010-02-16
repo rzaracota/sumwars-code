@@ -201,9 +201,6 @@
 	<AI ai_sight_range="12" />
 </Monster>
 
-
-
-
 <!-- Lich -->
 <Monster type="MONSTER" subtype="lich" name="lich" fraction="undead" race="undead" layer="NORMAL">
 	<RenderInfo name="lich" />

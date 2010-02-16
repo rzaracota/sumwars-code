@@ -16,6 +16,60 @@
 	</Action>
 </RenderInfo>
 
+<RenderInfo name="antiBlind">
+	<Entity  source="heal_bl.mesh"/> 
+	<Soundobject objectname="sound" />
+	
+	<Action name="drop">
+		<Sound objectname="sound" name="drop_potion"/>
+	</Action>
+</RenderInfo>
+
+<RenderInfo name="antiBerserk">
+	<Entity  source="heal_br.mesh"/> 
+	<Soundobject objectname="sound" />
+	
+	<Action name="drop">
+		<Sound objectname="sound" name="drop_potion"/>
+	</Action>
+</RenderInfo>
+
+<RenderInfo name="antiConfuse">
+	<Entity  source="heal_cf.mesh"/> 
+	<Soundobject objectname="sound" />
+	
+	<Action name="drop">
+		<Sound objectname="sound" name="drop_potion"/>
+	</Action>
+</RenderInfo>
+
+<RenderInfo name="antiMute">
+	<Entity  source="heal_mt.mesh"/> 
+	<Soundobject objectname="sound" />
+	
+	<Action name="drop">
+		<Sound objectname="sound" name="drop_potion"/>
+	</Action>
+</RenderInfo>
+
+<RenderInfo name="antiBurn">
+	<Entity  source="heal_bu.mesh"/> 
+	<Soundobject objectname="sound" />
+	
+	<Action name="drop">
+		<Sound objectname="sound" name="drop_potion"/>
+	</Action>
+</RenderInfo>
+
+<RenderInfo name="antiParalyze">
+	<Entity  source="heal_py.mesh"/> 
+	<Soundobject objectname="sound" />
+	
+	<Action name="drop">
+		<Sound objectname="sound" name="drop_potion"/>
+	</Action>
+</RenderInfo>
+
 <RenderInfo name="antiFreeze">
 	<Entity  source="heal_fr.mesh"/> 
 	<Soundobject objectname="sound" />

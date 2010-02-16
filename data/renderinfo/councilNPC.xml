@@ -38,6 +38,14 @@
 	</Action>
 </RenderInfo>
 
+<RenderInfo name = "ireana" parent="guardPoleBaseF">
+	<Entity source="femaleT_robe.mesh"/>
+	<Entity objectname="head" bone="crown" source="head_f1.mesh" />
+	<Entity objectname="hat" bone="crown" source="turban_hat_redFT.mesh" />
+	<Subobject objectname="robe" source="counclRobeIreana" />
+	<Entity objectname="weapon" bone="itemRightHand" source="council_stf.mesh" />
+</RenderInfo>
+
 <RenderInfo name = "sorenCrystal" >
 	<Entity source="comCrystal.mesh"/>
 	

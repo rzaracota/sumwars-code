@@ -230,6 +230,7 @@
 						setObjectValue(player,"gold", getObjectValue(player,"gold") + 50);
 					end;
 				end;
+				addPlayersExperience(100,"rescued_willard");
 				changeTopic("willard_vanishes");
 			</Effect>
 		</Topic>

@@ -12,7 +12,7 @@
 		<Event trigger="create_region" once="true">
 			<Effect>
 				--area am Nordausgang erstellen
-				addArea('northernExit',{'rect','entry_north',{4,8}});
+				addArea('northernExit',{'rect','entry_north',{12,8}});
 			</Effect>
 		</Event>
 		

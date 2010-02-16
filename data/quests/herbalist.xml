@@ -188,6 +188,7 @@
 						setObjectValue(player,"gold", getObjectValue(player,"gold") + 50)
 					end
 				end
+				addPlayersExperience(700,"herbalist_finished");
 				dropItem("heal_1", "locHerbalist")
 				dropItem("heal_1", "locHerbalist")
 				dropItem("heal_2", "locHerbalist")

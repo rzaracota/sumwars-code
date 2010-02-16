@@ -336,7 +336,7 @@
 
 <!-- Ireana von Nordenburg -->
 <Monster type="NPC" subtype="ireana" name="Ireana von Nordenburg" fraction="human" race="human" layer="NORMAL">
-	<RenderInfo name="peasant_f" />
+	<RenderInfo name="ireana" />
 	<EmotionSet name="ireana_emotion" />
 	<BasicAttributes
 					experience="0"
@@ -376,3 +376,225 @@
 	
 	<AI ai_sight_range="8" />
 </Monster>
+
+<!-- Konzilswaechter, Ireana -->
+<Monster type="NPC" subtype="ireana_guard" name="Council Guard" fraction="human" race="human" layer="NORMAL">
+	<RenderInfo name="guardPole_cnl" />
+	<EmotionSet name="human_standard" />
+	<BasicAttributes
+					experience="0"
+					level="20"
+					max_health="260"
+					armor="60"
+					block="0"
+					attack="40"
+					strength="50"
+					dexterity="35"
+					magic_power="15"
+					willpower="20"
+					resistances_physical="30"
+					resistances_air="10"
+					resistances_ice="10"
+					resistances_fire="10"
+					resistances_cap_physical="50"
+					resistances_cap_air="50"
+					resistances_cap_ice="50"
+					resistances_cap_fire="50"
+					walk_speed="2500"
+					attack_speed="2000"
+					step_length="1.2"
+					attack_range="0.5"
+					>
+		
+		<Ability type="noaction"/>
+		<Ability type="walk"/>
+		<Ability type="die"/>
+		
+		<Ability type="attack" rating="1"/>
+		
+		
+	</BasicAttributes>
+	
+	<Geometry radius="0.5" />
+	
+	<AI ai_sight_range="8" />
+</Monster>
+
+<!-- Captain von Ireanas Wache -->
+<Monster type="NPC" subtype="ireana_captain" name="Council Guard Captain" fraction="human" race="human" layer="NORMAL">
+	<RenderInfo name="tolec" />
+	<EmotionSet name="tolec_emotion" />
+	<BasicAttributes
+					experience="0"
+					level="83"
+					max_health="1070"
+					armor="230"
+					block="60"
+					attack="120"
+					strength="120"
+					dexterity="55"
+					magic_power="15"
+					willpower="60"
+					resistances_physical="30"
+					resistances_air="17"
+					resistances_ice="23"
+					resistances_fire="40"
+					resistances_cap_physical="50"
+					resistances_cap_air="50"
+					resistances_cap_ice="50"
+					resistances_cap_fire="50"
+					walk_speed="3500"
+					attack_speed="2000"
+					step_length="1.2"
+					attack_range="0.5"
+					>
+		
+		<Ability type="noaction"/>
+		<Ability type="walk"/>
+		<Ability type="die"/>
+		
+		<Ability type="attack" rating="1"/>
+		
+		
+	</BasicAttributes>
+	
+	<Geometry radius="0.5" />
+	
+	<AI ai_sight_range="8" />
+</Monster>
+
+<!-- Konzilsmagierin in Zwergentrutz -->
+<Monster type="NPC" subtype="council_sorceress" name="Council Mage" fraction="human" race="human" layer="NORMAL">
+	<RenderInfo name="ireana" />
+	<EmotionSet name="ireana_emotion" />
+	<BasicAttributes
+					experience="0"
+					level="38"
+					max_health="2000"
+					armor="60"
+					block="0"
+					attack="40"
+					strength="50"
+					dexterity="35"
+					magic_power="15"
+					willpower="20"
+					resistances_physical="70"
+					resistances_air="75"
+					resistances_ice="70"
+					resistances_fire="80"
+					resistances_cap_physical="90"
+					resistances_cap_air="90"
+					resistances_cap_ice="90"
+					resistances_cap_fire="90"
+					walk_speed="3500"
+					attack_speed="2000"
+					step_length="1.2"
+					attack_range="0.5"
+					>
+		
+		<Ability type="noaction"/>
+		<Ability type="walk"/>
+		<Ability type="die"/>
+		
+		<Ability type="attack" rating="1"/>
+		
+		
+	</BasicAttributes>
+	
+	<Geometry radius="0.5" />
+	
+	<AI ai_sight_range="8" />
+</Monster>
+
+<!-- Konzilswaechter, Zwergentrutz -->
+<Monster type="NPC" subtype="dwarfenwall_councilguard" name="Council Guard" fraction="human" race="human" layer="NORMAL">
+	<RenderInfo name="guardPole_cnl" />
+	<EmotionSet name="derred_emotion" />
+	<BasicAttributes
+					experience="0"
+					level="20"
+					max_health="760"
+					armor="90"
+					block="0"
+					attack="180"
+					strength="70"
+					dexterity="45"
+					magic_power="25"
+					willpower="40"
+					resistances_physical="20"
+					resistances_air="15"
+					resistances_ice="15"
+					resistances_fire="15"
+					resistances_cap_physical="50"
+					resistances_cap_air="50"
+					resistances_cap_ice="50"
+					resistances_cap_fire="50"
+					walk_speed="2500"
+					attack_speed="1500"
+					step_length="1.2"
+					attack_range="0.5"
+					>
+		
+		<Ability type="noaction"/>
+		<Ability type="walk"/>
+		<Ability type="die"/>
+		
+		<Ability type="attack" rating="1"/>
+		<Ability type="council_pierce" rating="1.5"/>
+		<Ability type="legion_whirl" rating="0" all_target_rating="0.5"/>
+		<Ability type="council_flamearmor" rating="2"/>
+		
+		
+	</BasicAttributes>
+	
+	<Geometry radius="0.5" />
+	
+	<AI ai_sight_range="12" />
+</Monster>
+
+
+
+<!-- Feuerwachen -->
+<Monster type="MONSTER" subtype="fire_guard" name="Fireguardian" fraction="human" race="elemental" layer="NORMAL">
+	<RenderInfo name="fireElemS" />
+	
+	<BasicAttributes
+		experience="30"
+		level="20"
+		max_health="500"
+		armor="60"
+		block="0"
+		attack="120"
+		power="90"
+		strength="75"
+		dexterity="40"
+		magic_power="55"
+		willpower="30"
+		resistances_physical="25"
+		resistances_air="0"
+		resistances_ice="-80"
+		resistances_fire="100"
+		resistances_cap_physical="50"
+		resistances_cap_air="50"
+		resistances_cap_ice="50"
+		resistances_cap_fire="50"
+		walk_speed="3000"
+		attack_speed="1500"
+		step_length="1.0"
+		attack_range="0.5"
+	>
+		<Ability type="walk" />
+		<Ability type="attack"  rating="1"/>
+		<Ability type="die" />
+
+		<Ability type="noaction" />
+		<Ability type="summoned" time="2000"/>
+		<Ability type="fire_ball"  rating="3"/>
+
+	</BasicAttributes>
+	
+	<Geometry radius="2.0" />
+	
+	<AI ai_sight_range="10" ai_chase_range="20"/>
+</Monster>
+
