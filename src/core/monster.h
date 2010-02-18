@@ -128,6 +128,21 @@ struct Ai
 	 * \brief Liste von Sekundaerkommandos
 	 */
 	std::list<Command > m_secondary_commands;
+	
+	/**
+	 * \brief auf true gesetzt, wenn aktuell ein guard Kommando besteht
+	 */
+	bool m_guard;
+	
+	/**
+	 * \brief Umkreis um den zu beschuetzenden Punkt in dem sich das Monster bewegen darf
+	 */
+	float m_guard_range;
+	
+	/**
+	 * \brief Der zu schuetzende Punkt
+	 */
+	Vector m_guard_pos;
 };
 
 /**

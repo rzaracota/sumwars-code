@@ -203,22 +203,19 @@ void Monster::updateCommand()
 	Line gline(pos,Vector(0,0));
 	
 	// spezielle Sekundaeraktion beschuetzen
-	Vector guard_pos;
-	bool guard = false;
-	float guardrange = 0;
 	float guardmindist = 0;
 	if (!m_ai.m_secondary_commands.empty() && m_ai.m_secondary_commands.begin()->m_type == "guard")
 	{
 		Command& cmd = *(m_ai.m_secondary_commands.begin());
-		guardrange = cmd.m_range;
+		m_ai.m_guard_range = cmd.m_range;
 		if (cmd.m_goal_object_id != 0)
 		{
 			// Beschuetzen eines Objektes
 			WorldObject* obj = getRegion()->getObject(cmd.m_goal_object_id);
 			if (obj != 0)
 			{
-				guard_pos = obj->getShape()->m_center;
-				guard = true;
+				m_ai.m_guard_pos = obj->getShape()->m_center;
+				m_ai.m_guard = true;
 				guardmindist = 2+getShape()->m_radius + obj->getShape()->getOuterRadius();
 			}
 			else
@@ -229,8 +226,8 @@ void Monster::updateCommand()
 		}
 		else
 		{
-			guard_pos = cmd.m_goal;
-			guard = true;
+			m_ai.m_guard_pos = cmd.m_goal;
+			m_ai.m_guard = true;
 			guardmindist = 2+getShape()->m_radius;
 		}
 	}
@@ -255,10 +252,6 @@ void Monster::updateCommand()
 			
 			// nur Feinde
 			if (World::getWorld()->getRelation(getFraction(), pl ) != Fraction::HOSTILE)
-				continue;
-			
-			// bei Befehl guard nur, wenn nicht zu weit vom zu beschuetzenden Ort
-			if (guard && guard_pos.distanceTo(pl->getShape()->m_center) > guardrange)
 				continue;
 				
 			dist = getShape()->getDistance(*(pl->getShape()));
@@ -320,7 +313,7 @@ void Monster::updateCommand()
 		
 		// Spieler nur als Ziel, wenn aktiv und nicht in Dialog
 		if (pl!=0 && pl->getState() == STATE_ACTIVE && pl->getDialogueId() == 0
-			&& (!guard || guard_pos.distanceTo(pl->getShape()->m_center) <= guardrange))
+			&& (!m_ai.m_guard || m_ai.m_guard_pos.distanceTo(pl->getShape()->m_center) <= m_ai.m_guard_range))
 		{
 			
 		
@@ -398,7 +391,7 @@ void Monster::updateCommand()
 		Command & cmd = *(m_ai.m_secondary_commands.begin());
 		if (cmd.m_type == "guard")
 		{
-			if (guard_pos.distanceTo(getShape()->m_center) > guardmindist)
+			if (m_ai.m_guard_pos.distanceTo(getShape()->m_center) > guardmindist)
 			{
 				*(getCommand()) = cmd;
 				getCommand()->m_type = "walk";
@@ -527,6 +520,10 @@ void Monster::evalCommand(Action::ActionType act)
 			cgoal = (Creature*) it->first;
 			dist = it->second;
 
+			// bei Befehl guard nur, wenn nicht zu weit vom zu beschuetzenden Ort
+			if (m_ai.m_guard && (aci->m_target_type == Action::MELEE || ranged_move) && dist > m_ai.m_guard_range)
+				continue;
+			
 			// Bewertung:
 			value = abltinfo.m_rating;
 			value += Random::randf(abltinfo.m_random_rating);
