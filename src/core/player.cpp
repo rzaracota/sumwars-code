@@ -546,36 +546,6 @@ bool Player::onItemClick(ClientCommand* command)
 				// Item soll als Ausruestungsgegenstand benutzt werden
 				req = checkItemRequirements(it);
 				
-/*
-				// geforderter Typ um das Item anlegen zu koennen
-				Item::Type req_type = Item::NOITEM;
-
-				if (pos == Equipement::WEAPON || pos == Equipement::WEAPON2)
-					req_type = Item::WEAPON;
-				if (pos == Equipement::HELMET)
-					req_type = Item::HELMET;
-				if (pos == Equipement::SHIELD || pos == Equipement::SHIELD2)
-					req_type = Item::SHIELD;
-				if (pos == Equipement::GLOVES)
-					req_type = Item::GLOVES;
-				if (pos == Equipement::RING_LEFT)
-					req_type = Item::RING;
-				if (pos == Equipement::RING_RIGHT)
-					req_type = Item::RING;
-				if (pos == Equipement::AMULET)
-					req_type = Item::AMULET;
-				if (pos == Equipement::ARMOR)
-					req_type = Item::ARMOR;
-
-
-				if (it->m_type != req_type)
-				{
-					// Item passt nicht an den entsprechenden Ausruestungsslot
-					DEBUG("wrong itemtype");
-					req= false;
-				}
-
-*/
 				if (it->m_type == Item::WEAPON && !m_secondary_equip)
 					pos = Equipement::WEAPON;
 				else if (it->m_type == Item::WEAPON && m_secondary_equip)
@@ -594,9 +564,12 @@ bool Player::onItemClick(ClientCommand* command)
 					pos = Equipement::AMULET;
 				else if (it->m_type == Item::RING)
 				{
-					pos = Equipement::RING_LEFT;
-					if (m_equipement->getItem(pos) != 0)
-						pos = Equipement::RING_RIGHT;
+					if (pos != Equipement::RING_LEFT && pos != Equipement::RING_RIGHT)
+					{
+						pos = Equipement::RING_LEFT;
+						if (m_equipement->getItem(pos) != 0)
+							pos = Equipement::RING_RIGHT;
+					}
 				}
 				
 
