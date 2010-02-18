@@ -3105,6 +3105,7 @@ void Creature::calcBaseAttrMod()
 	m_base_attr_mod.m_attack_range =m_base_attr.m_attack_range;
 	m_base_attr_mod.m_level =m_base_attr.m_level;
 	m_base_attr_mod.m_max_health =m_base_attr.m_max_health;
+	m_base_attr_mod.m_immunity =m_base_attr.m_immunity;
 
 	m_dyn_attr.m_health = hppercent * m_base_attr.m_max_health;
 	
@@ -3336,7 +3337,7 @@ bool Creature::takeDamage(Damage* d)
 				rel = d->m_status_mod_power[i]*1.0 / m_base_attr_mod.m_willpower;
 			}
 			float chance = atan(rel)/(3.1415/2);
-			DEBUG("mod %i modpow %i wp %i chance %f",i,d->m_status_mod_power[i],m_base_attr_mod.m_willpower,chance);
+			DEBUGX("mod %i modpow %i wp %i chance %f",i,d->m_status_mod_power[i],m_base_attr_mod.m_willpower,chance);
 			if (Random::random()<chance)
 			{
 				// Modifikation anwenden

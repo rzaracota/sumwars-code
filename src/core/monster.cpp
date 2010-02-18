@@ -204,6 +204,7 @@ void Monster::updateCommand()
 	
 	// spezielle Sekundaeraktion beschuetzen
 	float guardmindist = 0;
+	m_ai.m_guard = false;
 	if (!m_ai.m_secondary_commands.empty() && m_ai.m_secondary_commands.begin()->m_type == "guard")
 	{
 		Command& cmd = *(m_ai.m_secondary_commands.begin());
