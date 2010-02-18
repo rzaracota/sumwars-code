@@ -123,6 +123,11 @@ class GraphicManager
 		 * \brief interner Pool von Partikelsystem
 		 */
 		static std::multimap<std::string, Ogre::ParticleSystem*> m_particle_system_pool;
+		
+		/**
+		 * Name der Datei, die gerade geladen wird
+		 */
+		static std::string m_filename;
 };
 
 #endif

@@ -19,6 +19,7 @@ bool ObjectLoader::loadMonsterData(const char* pFilename)
 
 	if (loadOkay)
 	{
+		m_filename = pFilename;
 		loadMonster(&doc);
 		return true;
 	}
@@ -229,6 +230,19 @@ bool  ObjectLoader::loadCreatureBaseAttr(TiXmlNode* node, CreatureBaseAttr& basa
 	attr.getShort("attack_speed",basattr.m_attack_speed,1500);	
 	attr.getFloat("step_length",basattr.m_step_length,1);
 	attr.getFloat("attack_range",basattr.m_attack_range,1);
+	
+	if (basattr.m_resistances[Damage::FIRE] > basattr.m_resistances_cap[Damage::FIRE] 
+		   || basattr.m_resistances[Damage::ICE] > basattr.m_resistances_cap[Damage::ICE]
+			|| basattr.m_resistances[Damage::AIR] > basattr.m_resistances_cap[Damage::AIR]
+			|| basattr.m_resistances[Damage::PHYSICAL] > basattr.m_resistances_cap[Damage::PHYSICAL])
+	{
+		WARNING("%s : resistance exceeds resistance cap", m_filename.c_str());
+		basattr.m_resistances_cap[Damage::FIRE] = std::max(basattr.m_resistances_cap[Damage::FIRE], basattr.m_resistances[Damage::FIRE]);
+		basattr.m_resistances_cap[Damage::ICE] = std::max(basattr.m_resistances_cap[Damage::ICE], basattr.m_resistances[Damage::ICE]);
+		basattr.m_resistances_cap[Damage::AIR] = std::max(basattr.m_resistances_cap[Damage::AIR], basattr.m_resistances[Damage::AIR]);
+		basattr.m_resistances_cap[Damage::PHYSICAL] = std::max(basattr.m_resistances_cap[Damage::PHYSICAL], basattr.m_resistances[Damage::PHYSICAL]);
+		
+	}
 
 					
 	// Schleife ueber die Elemente von BasicAttributes

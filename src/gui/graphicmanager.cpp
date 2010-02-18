@@ -10,6 +10,7 @@ Ogre::SceneManager* GraphicManager::m_scene_manager;
 std::map<std::string, GraphicObject::Type> GraphicManager::m_graphic_mapping;
 StencilOpQueueListener* GraphicManager::m_stencil_listener;
 std::multimap<std::string, Ogre::ParticleSystem*> GraphicManager::m_particle_system_pool;
+std::string GraphicManager::m_filename;
 
 void StencilOpQueueListener::renderQueueStarted(Ogre::uint8 queueGroupId, const Ogre::String& invocation, bool& skipThisInvocation) 
 { 
@@ -222,6 +223,7 @@ void GraphicManager::loadRenderInfoData(const char* pFilename)
 
 	if (loadOkay)
 	{
+		m_filename = pFilename;
 		loadRenderInfos(&doc);
 	}
 	else
@@ -367,6 +369,10 @@ void GraphicManager::loadRenderInfo(TiXmlNode* node, GraphicRenderInfo* info)
 						}
 					}
 				}
+			}
+			else if (child->Type()!=TiXmlNode::COMMENT)
+			{
+				WARNING("%s : unexpected element of <RenderInfo>: %s",m_filename.c_str(),child->Value());
 			}
 		}
 	}
