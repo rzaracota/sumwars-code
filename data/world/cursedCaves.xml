@@ -145,6 +145,12 @@
 		<Environments>
 			<Environment height="1.0" name="cave" />
 		</Environments>
+		
+		<SpawnGroups>
+			<SpawnGroup group_name="goblins_l14_2" number="5" />
+			<SpawnGroup group_name="goblins_l14_3" number="5" />
+			<SpawnGroup group_name="skeletons_15_1" number="10" />
+		</SpawnGroups>
 	</Region>
 	
 <!-- Graue Himmelsleiter, Verfluchte Hoehle, Tiefe; ca. 30 Min; Level 17 - 20 -->
@@ -155,7 +161,7 @@
 		<HeroLight red="1.0" green="1.0" blue="1.0" /> 
 		<DirectionalLight red="0.0" green="0.0" blue="0.0" />
 		
-		<Settings dimx="44" dimy="44" area_percent="0.4" complexity="0.3" granularity="6"  ground="cave_ground"/>
+		<Settings dimx="46" dimy="46" area_percent="0.4" complexity="0.3" granularity="6"  ground="cave_ground"/>
 		
 		<ExitDirections north="true" south="true" west="false" east="true" />
 		
@@ -174,6 +180,13 @@
 		<Environments>
 			<Environment height="1.0" name="cave" />
 		</Environments>
+		
+		<SpawnGroups>
+			<SpawnGroup group_name="skeletons_15_1" number="20" />
+			<SpawnGroup group_name="skeletons_15_2" number="15" />
+			<SpawnGroup group_name="skeletons_giant" number="1" />
+			<SpawnGroup group_name="skeletons_16_1" number="5" />
+		</SpawnGroups>
 	</Region>
 
 <!-- Graue Himmelsleiter, Verfluchte Hoehle, Spalt; Szene 6 -->
@@ -206,7 +219,7 @@
 		<HeroLight red="1.0" green="1.0" blue="1.0" /> 
 		<DirectionalLight red="0.0" green="0.0" blue="0.0" />
 		
-		<Settings dimx="48" dimy="48" area_percent="0.3" complexity="0.4" granularity="6"  ground="cave_ground"/>
+		<Settings dimx="52" dimy="52" area_percent="0.3" complexity="0.6" granularity="6"  ground="cave_ground"/>
 		
 		<ExitDirections north="false" south="false" west="true" east="true" />
 		
@@ -214,7 +227,12 @@
 			<Exit name="exit_west" destination_region="greyCurseCaveDep" destination_location="entry_east" >
 				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
 			</Exit>
+			<!--
 			<Exit name="exit_east" destination_region="greyCurseLake" destination_location="entry_west" >
+				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
+			</Exit>
+			-->
+			<Exit name="exit_east" destination_region="aisEastslope" destination_location="entry_west" >
 				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
 			</Exit>
 		</Exits>
@@ -222,6 +240,13 @@
 		<Environments>
 			<Environment height="1.0" name="cave" />
 		</Environments>
+		
+		<SpawnGroups>
+			<SpawnGroup group_name="skeletons_15_1" number="20" />
+			<SpawnGroup group_name="skeletons_15_2" number="15" />
+			<SpawnGroup group_name="skeletons_giant" number="1" />
+			<SpawnGroup group_name="skeletons_16_1" number="5" />
+		</SpawnGroups>
 	</Region>
 	
 <!-- Graue Himmelsleiter, Verfluchter See; Template-->
