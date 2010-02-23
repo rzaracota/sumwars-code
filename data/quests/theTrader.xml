@@ -260,9 +260,24 @@
 		</Topic>
 	</NPC>
 
+	<Region name="greyCurseCaveFis">
+		<Event trigger="create_region" once="true">
+			<Condition>
+				return((fissure.finished == true) and (theTrader.enteredDwarfenwall ~= true));
+			</Condition>
+			<Effect>
+				theTrader_tmp.traderCave=createObject("theTrader", "locNecromancer", 10);
+				setRefName(theTrader_tmp.traderCave,"The Lost Trader");
+			</Effect>
+		</Event>
+	</Region>
+	
 	<Region name="dwarfenwall">
 		<Event trigger="create_region" once = "true">
 			<Effect>
+				if(theTrader.enteredDwarfenwall~=true)then
+					theTrader.enteredDwarfenwall = true;
+				end;
 				theTrader_tmp.theTraderDW = createObject("theTrader", "locTheTrader");
 				setRefName(theTrader_tmp.theTraderDW, "The Trader");
 			</Effect>

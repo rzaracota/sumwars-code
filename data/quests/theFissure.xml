@@ -220,7 +220,8 @@
 		<Event trigger ="unit_die">
 			<Condition>
 				-- caught subtypes: bow_skel, sword_skel, axe_skel, fire_skel, reaper_skel
-				if((get(trigger.unit,'subtype') == 'bow_skel') or (get(trigger.unit,'subtype') == 'sword_skel') or (get(trigger.unit,'subtype') == 'axe_skel') or (get(trigger.unit,'subtype') == 'fire_skel') or (get(trigger.unit,'subtype') == 'reaper_skel'))then
+				local sub = get(trigger.unit,'subtype')
+				if(( sub == 'bow_skel') or (sub == 'sword_skel') or (sub == 'axe_skel') or (sub == 'fire_skel') or (sub == 'reaper_skel'))then
 					return true;
 				end;
 				return false;
@@ -467,8 +468,6 @@
 					fissure_tmp.worker4 = createObject("worker_skel","locSkeleton4",-90);
 					timedExecute('fissure_tmp.worker5 = createObject("worker_skel","locSkeleton5",-90)',200);
 					timedExecute('fissure_tmp.worker6 = createObject("worker_skel","locSkeleton6",-90)',700);
-				else
-					theTrader_tmp.traderCave=createObject("theTrader", "locNecromancer", 10);
 				end;
 			</Effect>
 		</Event>
