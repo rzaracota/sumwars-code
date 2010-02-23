@@ -94,6 +94,17 @@
 	</Effect>	
 </Projectile>
 
+<Projectile  subtype="magic_arrow_shadow"
+		   radius="0.1"
+		   lifetime="2000"
+		   implementation = "fly"
+		   >
+	<RenderInfo name="magic_arrow_shadow" />
+	<Effect>
+		<CppImplementation type="dmg_at_target" />
+	</Effect>	
+</Projectile>
+
 <Projectile subtype="fire_bolt"
 		   radius="0.2"
 		   lifetime="2000"
@@ -279,6 +290,17 @@
 		   new_projectile_type="explosion"
 		   >
 	<RenderInfo name="poison_arrow" />
+	<Effect>
+		<CppImplementation type="dmg_at_target" />
+	</Effect>	
+</Projectile>
+
+<Projectile subtype="blind_arrow"
+		   radius="0.1"
+		   lifetime="2000"
+		   implementation = "fly"
+		   >
+	<RenderInfo name="blind_arrow" />
 	<Effect>
 		<CppImplementation type="dmg_at_target" />
 	</Effect>	

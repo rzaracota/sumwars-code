@@ -65,6 +65,17 @@
 	</Effect>	
 </Projectile>
 
+<Projectile subtype="grenade"
+		   radius="0.2"
+		   lifetime="1000"
+		   implementation = "fly"
+		   new_projectile_type="explosion"
+		   >
+	<RenderInfo name="throwing_berry" />
+	<Effect>
+	</Effect>	
+</Projectile>
+
 <Projectile subtype="ice_bomb"
 		   radius="0.2"
 		   lifetime="600"
@@ -103,7 +114,7 @@
 			new_projectile_type="cata_skel_explosion"
 		   >
 	<Flag name="explodes"/>
-	<RenderInfo name="catapult_rock" />
+	<RenderInfo name="catapult_skeleton" />
 	<Effect>
 		<CppImplementation type="dmg_at_enemies_in_radius" />
 	</Effect>
@@ -114,6 +125,72 @@
 		   implementation = "stationary"
 		   >
 	<RenderInfo name="explosion" />
+	<Effect>
+		<CppImplementation type="dmg_at_enemies_in_radius" />
+	</Effect>	
+</Projectile>
+
+<Projectile  subtype="guided_icicle"
+		   radius="0.2"
+		   lifetime="2000"
+		   implementation = "fly_guided"
+		   >
+	<RenderInfo name="ice_bolt" />
+	<Effect>
+		<CppImplementation type="dmg_at_target" />
+	</Effect>	
+</Projectile>
+
+<Projectile subtype="ice_ball"
+			lifetime="1000"
+			radius="1.0"
+			implementation = "fly"
+			new_projectile_type="ice_ball_ring"
+		   >
+	<Flag name="explodes"/>
+	<RenderInfo name="ice_bolt" />
+</Projectile>
+<Projectile  subtype="ice_ball_ring"
+		   lifetime="800"
+		   radius="4"
+		   implementation = "grow_effect_at_each"
+		   >
+	<RenderInfo name="ice_ring" />
+	<Effect>
+		<CppImplementation type="dmg_at_target" />
+	</Effect>	
+</Projectile>
+
+<Projectile subtype="monster_freeze"
+		   lifetime="300"
+		   radius="0.5"
+		   implementation = "stationary"
+		   critical_percent="0.5"
+		   >
+	<RenderInfo name="freeze" />
+	<Effect>
+		<CppImplementation type="dmg_at_target" />
+	</Effect>	
+</Projectile>
+
+<Projectile  subtype="frost_wave"
+		   lifetime="1000"
+		   radius="7"
+		   implementation = "grow_effect_at_each"
+		   >
+	<RenderInfo name="frost_wave" />
+	<Effect>
+		<CppImplementation type="dmg_at_target" />
+	</Effect>	
+</Projectile>
+
+<Projectile subtype="black_cloud"
+		   radius="5"
+		   lifetime="2500"
+		   counter="3"
+		   implementation = "stationary_multi_effect"
+		   >
+	<RenderInfo name="black_cloud" />
 	<Effect>
 		<CppImplementation type="dmg_at_enemies_in_radius" />
 	</Effect>	
