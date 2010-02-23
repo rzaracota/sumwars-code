@@ -153,63 +153,6 @@
 	</Damage>
 </Ability>
 
-<Ability type="magic_attack_fire" 
-		 name="Magic attack" 
-		 description="Basic magic attack" 
-		 time="700.000000" 
-		 timer_nr="0.000000" 
-		 timer_value="0.000000" 
-		 base_ability="magic_attack_fire" 
-		 critical_percent="0.500000" 
-		 target_type="ranged" >
-	<Effect>
-		<CppImplementation type="proj_fly_at_target" />
-	</Effect>
-	<Projectile type="magic_arrow_fire" speed="12000" />
-	<Damage>
-		<CppImplementation type="magic_attack_fire" />
-		<CppImplementation type="small_numbers" />
-	</Damage>
-</Ability>
-
-<Ability type="magic_attack_air" 
-		 name="Magic attack" 
-		 description="Basic magic attack" 
-		 time="700.000000"
-		 timer_nr="0.000000" 
-		 timer_value="0.000000" 
-		 base_ability="magic_attack_air" 
-		 critical_percent="0.500000" 
-		 target_type="ranged" >
-	<Effect>
-		<CppImplementation type="proj_fly_at_target" />
-	</Effect>
-	<Projectile type="magic_arrow_air" speed="12000" />
-	<Damage>
-		<CppImplementation type="magic_attack_air" />
-		<CppImplementation type="small_numbers" />
-	</Damage>
-</Ability>
-
-<Ability type="magic_attack_ice" 
-		 name="Magic attack" 
-		 description="Basic magic attack" 
-		 time="700.000000"
-		 timer_nr="0.000000" 
-		 timer_value="0.000000" 
-		 base_ability="magic_attack_ice" 
-		 critical_percent="0.500000" 
-		 target_type="ranged" >
-	<Effect>
-		<CppImplementation type="proj_fly_at_target" />
-	</Effect>
-	<Projectile type="magic_arrow_ice" speed="12000" />
-	<Damage>
-		<CppImplementation type="magic_attack_ice" />
-		<CppImplementation type="small_numbers" />
-	</Damage>
-</Ability>
-
 <Ability type="range_attack" 
 		 name="Ranged attack"
 		 description="Basic ranged attack" 

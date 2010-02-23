@@ -1,103 +1,3 @@
-<Ability type="summon_skelBow"
-		 name="Summon Skeleton"
-		 description="Creates a skeleton."
-		 time="2000.000000"
-		 timer_nr="2.000000"
-		 timer_value="7000.000000"
-		 base_ability="noaction"
-		 critical_percent="0.660000"
-		 target_type="ranged">
-	<Flag name="mute_affected" />
-	<Effect>
-		<LuaImplementation>
-			local frac = get(self,"fraction");
-			local obj = createObject("bow_skel",goal);
-			set(obj,"fraction",frac);
-			addUnitCommand(obj,"guard",self,15,"secondary");
-		</LuaImplementation>
-	</Effect>
-</Ability>
-<Ability type="summon_skelSword"
-		 name="Summon Skeleton"
-		 description="Creates a skeleton."
-		 time="2000.000000"
-		 timer_nr="2.000000"
-		 timer_value="7000.000000"
-		 base_ability="noaction"
-		 critical_percent="0.660000"
-		 target_type="ranged">
-	<Flag name="mute_affected" />
-	<Effect>
-		<LuaImplementation>
-			local frac = get(self,"fraction");
-			local obj = createObject("sword_skel",goal);
-			set(obj,"fraction",frac);
-			addUnitCommand(obj,"guard",self,15,"secondary");
-		</LuaImplementation>
-	</Effect>
-</Ability>
-<Ability type="summon_skelAxe"
-		 name="Summon Skeleton"
-		 description="Creates a skeleton."
-		 time="2000.000000"
-		 timer_nr="2.000000"
-		 timer_value="7000.000000"
-		 base_ability="noaction"
-		 critical_percent="0.660000"
-		 target_type="ranged">
-	<Flag name="mute_affected" />
-	<Effect>
-		<LuaImplementation>
-			local frac = get(self,"fraction");
-			local obj = createObject("axe_skel",goal);
-			set(obj,"fraction",frac);
-			addUnitCommand(obj,"guard",self,15,"secondary");
-		</LuaImplementation>
-	</Effect>
-</Ability>
-<Ability type="summon_skelAxe2"
-		 name="Summon Skeleton"
-		 description="Creates a skeleton."
-		 time="2000.000000"
-		 timer_nr="2.000000"
-		 timer_value="7000.000000"
-		 base_ability="noaction"
-		 critical_percent="0.660000"
-		 target_type="ranged">
-	<Flag name="mute_affected" />
-	<Effect>
-		<LuaImplementation>
-			local frac = get(self,"fraction");
-			local obj = createObject("axe2_skel",goal);
-			set(obj,"fraction",frac);
-			addUnitCommand(obj,"guard",self,15,"secondary");
-		</LuaImplementation>
-	</Effect>
-</Ability>
-
-<Ability type="maylon_sommon_skel"
-		 name="Summon Skeleton"
-		 description="Creates a skeleton."
-		 time="2000.000000"
-		 timer_nr="2.000000"
-		 timer_value="40000.000000"
-		 base_ability="noaction"
-		 critical_percent="0.660000"
-		 target_type="ranged">
-	<Flag name="mute_affected" />
-	<Effect>
-		<LuaImplementation>
-			local frac = get(self,"fraction");
-			local obj = createObject("skel_maylon",goal);
-			set(obj,"fraction",frac);
-			addUnitCommand(obj,"guard",self,15,"secondary");
-			obj = createObject("skel_maylon",goal);
-			set(obj,"fraction",frac);
-			addUnitCommand(obj,"guard",self,15,"secondary");
-		</LuaImplementation>
-	</Effect>
-</Ability>
-
 <Ability type="steal"
 		 name="steal"
 		 description="Steals gold"
@@ -667,30 +567,6 @@
 	</Damage>
 </Ability>
 
-<Ability type="throw_bomb" 
-		 name="throw bomb"
-		 description="Throw a bomb" 
-		 time="1000" 
-		 timer_nr="0.000000" 
-		 timer_value="0.000000" 
-		 base_ability="throw_bomb" 
-		 critical_percent="0.40000" 
-		 target_type="ranged" >
-	<Effect>
-		<CppImplementation type="proj_fly_at_target" />
-	</Effect>
-	<Projectile type="bomb" speed="10000" >
-		<Flag name="explodes" />
-	</Projectile>
-	<Damage>
-		<LuaImplementation>
-			local magic = get(self,"magic_power");
-			setDamageValue("phys_dmg", {magic, magic*1.5});
-			setDamageValue("blockable",false);
-			setDamageValue("power",get(self,"power"));
-		</LuaImplementation>
-	</Damage>
-</Ability>
 
 <Ability type="throw_ice_bomb" 
 		 name="throw bomb"
@@ -746,27 +622,86 @@
 	</Effect>
 </Ability>
 
-<Ability type="fire_attack" 
-		 name="fire attack"
-		 description="attack with fire damage" 
+<Ability type="flame_shot" 
+		 name="Flame Throw"
+		 description="The basic attack of a flaming skeleton." 
 		 time="1.000000" 
 		 timer_nr="0.000000" 
 		 timer_value="0.000000" 
-		 base_ability="attack" 
-		 critical_percent="0.660000" 
-		 target_type="melee" >
+		 base_ability="range_attack" 
+		 critical_percent="0.40000" 
+		 target_type="ranged" >
 	<Effect>
-		<CppImplementation type="dmg_at_target" />
+		<CppImplementation type="proj_fly_at_target" />
 	</Effect>
+	<Projectile type="magic_arrow_fire" speed="12000" />
 	<Damage>
-		<CppImplementation type="attack" />
-		<CppImplementation type="small_numbers" />
+		<CppImplementation type="range_attack" />
 		<LuaImplementation>
 			local magic = get(self,"magic_power");
-			local pdmg = getDamageValue("phys_dmg");
-			setDamageValue("fire_dmg", pdmg);
-			setDamageValue("phys_dmg", {0,0});
+			local fdmg = getDamageValue("fire_dmg");
+			setDamageValue("fire_dmg", {fdmg[1] + magic*0.5, fdmg[2] + magic*1.0});
 		</LuaImplementation>
 	</Damage>
 </Ability>
 
+<Ability type="dark_shot" 
+		 name="dark arrow"
+		 description="Blind ranged attack" 
+		 time="1.000000" 
+		 timer_nr="0.000000" 
+		 timer_value="0.000000" 
+		 base_ability="range_attack" 
+		 critical_percent="0.660000" 
+		 target_type="ranged" >
+	<Effect>
+		<CppImplementation type="proj_fly_at_target" />
+	</Effect>
+	<Projectile type="blind_arrow" speed="12000" />
+	<Damage>
+		<CppImplementation type="range_attack" />
+		<LuaImplementation>
+			local magic = get(self,"magic_power");
+			setDamageValue("blind", magic);
+		</LuaImplementation>
+	</Damage>
+</Ability>
+
+<Ability type="ice_shot" 
+		 name="Ice arrow"
+		 description="Basic ranged attack" 
+		 time="1.000000" 
+		 timer_nr="0.000000" 
+		 timer_value="0.000000" 
+		 base_ability="range_attack" 
+		 critical_percent="0.660000" 
+		 target_type="ranged" >
+	<Effect>
+		<CppImplementation type="proj_fly_at_target" />
+	</Effect>
+	<Projectile type="ice_arrow" speed="12000" />
+	<Damage>
+		<CppImplementation type="range_attack" />
+		<LuaImplementation>
+			local magic = get(self,"magic_power");
+			local idmg = getDamageValue("ice_dmg");
+			setDamageValue("ice_dmg", {idmg[1] + magic*0.5, idmg[2] + magic*1.0});
+		</LuaImplementation>
+	</Damage>
+</Ability>
+
+<Ability type="block_down" 
+		 name="Stats Down"
+		 description="Decrease block-value" 
+		 time="1500" 
+		 timer_nr="1.000000" 
+		 timer_value="500000.000000" 
+		 base_ability="flee" 
+		 critical_percent="0.1000" 
+		 target_type="ranged" >
+	<Effect>
+		<LuaImplementation>
+			set(self,"block", 0);
+		</LuaImplementation>
+	</Effect>
+</Ability>
