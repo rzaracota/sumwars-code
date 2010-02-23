@@ -269,7 +269,7 @@
 				dwarfenwall.general = createObject("general_greif", "locGeneral");
 				setRefName(dwarfenwall.general, "General Greif");
 				
-				dwarfenwall.council = createObject("council_sorceress", "locDarna");
+				dwarfenwall.council = createObject("council_dwarfenwall", "locDarna");
 				setRefName(dwarfenwall.council, "Maga Convocatis Darna Eistaucher");
 				
 				addArea("GeneralGreifArea",{"circle","locGeneral",5});
