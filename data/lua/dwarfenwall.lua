@@ -28,7 +28,7 @@ end;
 
 function catapult(impactPos)
 	createProjectile("catapult_shot",impactPos);
-	setDamageValue("phys_dmg", {60,90});
+	setDamageValue("phys_dmg", {60,140});
 	setDamageValue("power",3000);
 	setDamageValue("attack",3000);
 end;
@@ -200,6 +200,7 @@ function deleteAndRespawn(unitId)
 end;
 
 --rampart
+--creates a guard at a specified position(defend_dwall_tmp.siege[index]) with a given rotation(rot)
 function setGuard(index,rot)
 	local guard = createObject(defend_dwall_tmp.siege[index]["subtype"], defend_dwall_tmp.siege[index]["location"],rot);
 	addUnitCommand(guard,"guard",defend_dwall_tmp.siege[index]["location"],10,"secondary");
@@ -233,10 +234,112 @@ function createUnitIndex(index, location, guard_range, subtype, penalty, respawn
 	end;
 end;
 
+--set up data for a spawnlocation in defend_dwall_tmp.siege
+--index[int]: the siege index of that spawngroup
+--location[string]: the location, were it will be spawned
+--route[liste {string,string...}]: the route a spawngroup will take. It will be walked from first to last and with secondary commands
+--group[string]: the name of the spawned monstergroup
+function createAttackIndex(index, location, route, group)
+	defend_dwall_tmp.siege[index] = {};
+	defend_dwall_tmp.siege[index]["location"] = location;
+	--defend_dwall_tmp.siege[index]["route"] = {};
+	defend_dwall_tmp.siege[index]["route"] = route;
+	defend_dwall_tmp.siege[index]["group"] = group;
+end;
+
+-- creates a spawngroup and sends it to attack
+function launchAttack(index)
+	--group data
+	local gd = defend_dwall_tmp.siege[index];
+	local group = createMonsterGroup(gd["group"],gd["location"]);
+	
+	for j, monster in ipairs(group)do
+		for i, location in ipairs(gd["route"])do
+			addUnitCommand(monster,"walk",location,1,"secondary");
+		end;
+	end;
+end;
+
+
 function skel_catapult(impactPos)
-	createProjectile("catapult_shot",impactPos);
+	createProjectile("catapult_skeleton",impactPos);
 	setDamageValue("phys_dmg", {20,35});
 	setDamageValue("fire_dmg", {30,55});
 	setDamageValue("power",3000);
 	setDamageValue("attack",3000);
+	
+	--print('createObject("catapult_skel,{'..impactPos[1]..','..impactPos[2]..'}")');
+	timedExecute('createObject("catapult_skel",{'..impactPos[1]..','..impactPos[2]..'})',1000);
+end;
+--sends down a rain of skeletons over a time of six seconds
+--number: the amount of skeletons send down
+--defense ring: 45/80 bis 86/105function catapult(impactPos)
+function skeletonBarrage(number)
+	for i = 1, number do
+		local delay = math.random(200,8000);
+		local x = math.random(45,80);
+		local y = math.random(86,105);
+		timedExecute('skel_catapult({'..x..','..y..'})',delay);
+	end;
+end;
+
+function barrage(number)
+	for i = 1, number do
+		local delay = math.random(200,8000);
+		local x = math.random(45,80);
+		local y = math.random(86,105);
+		timedExecute('catapult({'..x..','..y..'})',delay);
+	end;
+end;
+
+--eventfunctions
+function entryLich()
+	defend_dwall_tmp.lich = createObject("lich_siege","locEntryUndead");
+	setRefName(defend_dwall_tmp.lich,"Nar'Asoroth")
+	addUnitCommand(defend_dwall_tmp.lich,"walk","locLich",0.5);
+	addUnitCommand(defend_dwall_tmp.lich,"guard","locLich",20,"secondary");
+	
+	defend_dwall_tmp.attendend1=createObject("necromancer_siegeDefense","locEntryUndead");
+	setRefName(defend_dwall_tmp.attendend1,"Skinny Necromancer")
+	timedExecute('addUnitCommand('..defend_dwall_tmp.attendend1..',"walk","locAttendend1")',1500);
+	defend_dwall_tmp.attendend2=createObject("necromancer_siegeDefense","locEntryUndead");
+	setRefName(defend_dwall_tmp.attendend2,"Scarfaced Necromancer")
+	timedExecute('addUnitCommand('..defend_dwall_tmp.attendend2..',"walk","locAttendend2")',1500);
+end;
+
+function blockStone(stoneLoc,angle)
+	local stone = createObject("siege_block",stoneLoc,angle);
+	setObjectAnimation(stone,"rise",3000);
+end;
+function blockWall()
+	local nextPos;
+	local angle = 1;
+	for i=1,10 do
+		local delay = math.random(100,500);
+		nextPos="locFissure"..i;
+		local ang = 90*angle;
+		timedExecute('blockStone("'..nextPos..'",'..ang..')',delay);
+		angle=angle*(-1);
+	end;
+end;
+
+function addImportantSpeakers()
+	addSpeaker(defend_dwall_tmp.lich,"lich");
+	addSpeaker(defend_dwall_tmp.attendend1,"att1");
+	addSpeaker(defend_dwall_tmp.attendend2,"att2");
+	addSpeaker(defend_dwall_tmp.council, "darna");
+	addSpeaker(defend_dwall_tmp.general, "greif");
+end;
+
+function callElementals()
+	setGuard(18,-90);
+	setGuard(19,-90);
+end;
+
+
+function phase()
+	print(defend_dwall_tmp.phase);
+end;
+function stop()
+	defend_dwall_tmp.suspend = true;
 end;

@@ -27,7 +27,6 @@ function isEnemy(obj)
 		return (getRelation(obj) == "hostile");
 end;
 
-
 -- Getter
 function getPosition(obj)
 	return getObjectValue(obj,"position");
