@@ -34,11 +34,11 @@
 	<Image image="set:feath_aml.png image:full_image" />
 	<Mesh file="feath_aml.mesh" />
 	<Attribute
-		level_requirement="4"
+		level_requirement="5"
 		character_requirement="all"
-		price = "60"
+		price = "75"
 		min_enchant="50"
-		max_enchant="80"
+		max_enchant="100"
 		modchance_magic_power_mod="0.1"
 		modchance_willpower_mod="0.1"
 		modchance_resist_phys_mod="0.04"
@@ -63,11 +63,11 @@
 	<Image image="set:feath_aml.png image:full_image" />
 	<Mesh file="feath_aml.mesh" />
 	<Attribute
-		level_requirement="8"
+		level_requirement="9"
 		character_requirement="all"
 		price = "110"
 		min_enchant="90"
-		max_enchant="140"
+		max_enchant="160"
 		modchance_magic_power_mod="0.1"
 		modchance_willpower_mod="0.1"
 		modchance_resist_phys_mod="0.04"
@@ -96,7 +96,7 @@
 		price = "150"
 		character_requirement="all"
 		min_enchant="130"
-		max_enchant="200"
+		max_enchant="210"
 		modchance_magic_power_mod="0.1"
 		modchance_willpower_mod="0.1"
 		modchance_resist_phys_mod="0.04"
@@ -121,11 +121,11 @@
 	<Image image="set:feath_aml.png image:full_image" />
 	<Mesh file="feath_aml.mesh" />
 	<Attribute
-		level_requirement="21"
+		level_requirement="20"
 		character_requirement="all"
 		price = "220"
-		min_enchant="160"
-		max_enchant="250"
+		min_enchant="150"
+		max_enchant="240"
 		modchance_magic_power_mod="0.1"
 		modchance_willpower_mod="0.1"
 		modchance_resist_phys_mod="0.04"
@@ -140,7 +140,7 @@
 	/>
 	
 	<DropChance
-		level="21"
+		level="20"
 		probability="0.1"
 	/>
 </Item>

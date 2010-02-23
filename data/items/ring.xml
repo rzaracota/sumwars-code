@@ -63,10 +63,10 @@
 	<Image image="set:silver_rng.png image:full_image" />
 	<Mesh file="silver_rng.mesh" />
 	<Attribute
-		level_requirement="8"
+		level_requirement="7"
 		character_requirement="all"
 		price = "100"
-		min_enchant="90"
+		min_enchant="80"
 		max_enchant="140"
 		modchance_magic_power_mod="0.1"
 		modchance_willpower_mod="0.1"
@@ -82,7 +82,7 @@
 	/>
 	
 	<DropChance
-		level="8"
+		level="7"
 		probability="0.2"
 	/>
 </Item>
@@ -92,11 +92,11 @@
 	<Image image="set:bronze_rng.png image:full_image" />
 	<Mesh file="silver_rng.mesh" />
 	<Attribute
-		level_requirement="15"
+		level_requirement="13"
 		character_requirement="all"
 		price = "160"
-		min_enchant="130"
-		max_enchant="200"
+		min_enchant="110"
+		max_enchant="170"
 		modchance_magic_power_mod="0.1"
 		modchance_willpower_mod="0.1"
 		modchance_resist_phys_mod="0.04"
@@ -111,7 +111,7 @@
 	/>
 	
 	<DropChance
-		level="15"
+		level="13"
 		probability="0.2"
 	/>
 </Item>

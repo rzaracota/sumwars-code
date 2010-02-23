@@ -8,7 +8,7 @@
 		level_requirement="1"
 		character_requirement="archer"
 		min_enchant="30"
-		max_enchant="60"
+		max_enchant="50"
 		modchance_strength_mod="0.1"
 		modchance_dexterity_mod="0.15"
 		modchance_damage_phys_mod="0.15"
@@ -44,7 +44,7 @@
 		level_requirement="3"
 		character_requirement="archer"
 		min_enchant="45"
-		max_enchant="120"
+		max_enchant="80"
 		modchance_strength_mod="0.10"
 		modchance_dexterity_mod="0.15"
 		modchance_damage_phys_mod="0.15"
@@ -79,8 +79,8 @@
 	<Attribute
 		level_requirement="5"
 		character_requirement="archer"
-		min_enchant="60"
-		max_enchant="195"
+		min_enchant="55"
+		max_enchant="130"
 		modchance_strength_mod="0.1"
 		modchance_dexterity_mod="0.15"
 		modchance_damage_phys_mod="0.15"
@@ -115,8 +115,8 @@
 	<Attribute
 		level_requirement="8"
 		character_requirement="archer"
-		min_enchant="75"
-		max_enchant="255"
+		min_enchant="60"
+		max_enchant="160"
 		modchance_strength_mod="0.1"
 		modchance_dexterity_mod="0.15"
 		modchance_damage_phys_mod="0.15"
@@ -150,10 +150,10 @@
 	<Image image="set:bow.png image:full_image" />
 	<Mesh file="bow.mesh" />
 	<Attribute
-		level_requirement="13"
+		level_requirement="12"
 		character_requirement="archer"
-		min_enchant="90"
-		max_enchant="300"
+		min_enchant="70"
+		max_enchant="200"
 		modchance_strength_mod="0.1"
 		modchance_dexterity_mod="0.15"
 		modchance_damage_phys_mod="0.15"
@@ -167,7 +167,7 @@
 	<EquipEffect />
 		<WeaponAttribute
 		weapon_type="bow"
-		damage_min_physical="16"
+		damage_min_physical="15"
 		damage_max_physical="24"
 		damage_attack="87"
 		damage_power="54"
@@ -186,10 +186,10 @@
 	<Image image="set:bow.png image:full_image" />
 	<Mesh file="bow.mesh" />
 	<Attribute
-		level_requirement="19"
+		level_requirement="17"
 		character_requirement="archer"
 		min_enchant="70"
-		max_enchant="250"
+		max_enchant="220"
 		modchance_strength_mod="0.1"
 		modchance_dexterity_mod="0.15"
 		modchance_damage_phys_mod="0.15"
@@ -203,9 +203,9 @@
 	<EquipEffect />
 		<WeaponAttribute
 		weapon_type="bow"
-		damage_min_physical="19"
-		damage_max_physical="27"
-		damage_attack="109"
+		damage_min_physical="16"
+		damage_max_physical="26"
+		damage_attack="102"
 		damage_power="62"
 		attack_range="8"
 		two_handed="yes"
@@ -222,10 +222,10 @@
 	<Image image="set:bow.png image:full_image" />
 	<Mesh file="bow.mesh" />
 	<Attribute
-		level_requirement="25"
+		level_requirement="23"
 		character_requirement="archer"
-		min_enchant="120"
-		max_enchant="450"
+		min_enchant="90"
+		max_enchant="280"
 		modchance_strength_mod="0.1"
 		modchance_dexterity_mod="0.15"
 		modchance_damage_phys_mod="0.15"
