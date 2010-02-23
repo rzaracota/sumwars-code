@@ -25,6 +25,10 @@
 	<ParticleSystem objectname="particle" source="Magic_Arrow_Ice" position="0 1.6 0"/>
 </RenderInfo>
 
+<RenderInfo name="magic_arrow_shadow">
+	<ParticleSystem objectname="particle" source="Magic_Arrow_Shadow" position="0 1.6 0"/>
+</RenderInfo>
+
 <RenderInfo name="fire_bolt">
 	<ParticleSystem objectname="particle" source="Firebolt" position="0 1.6 0" />
 </RenderInfo>
@@ -50,7 +54,13 @@
 	<Action name="grow">
 		<Scale objectname="particle" start_val="0.5" end_val="7.0" />
 	</Action>
+</RenderInfo>
+<RenderInfo name="frost_wave">
+	<ParticleSystem objectname="particle" source="Frostwave" position="0 1.2 0" />
 	
+	<Action name="grow">
+		<Scale objectname="particle" start_val="0.5" end_val="7.0" />
+	</Action>
 </RenderInfo>
 
 <RenderInfo name="ice_bolt">
@@ -143,6 +153,16 @@
 		<Detach objectname="arrow" />
 		<ParticleSystem objectname="explosion" source="Explosion" position="0 1.6 0" />
 	</Action>
+	
+	<Action name="fly">
+		<Sound objectname="sound" name="arrow"/>
+	</Action>
+</RenderInfo>
+
+<RenderInfo name="blind_arrow">
+	<Entity objectname="arrow" source="arrow.mesh" position="0 1.6 0" />
+	<ParticleSystem objectname="particle" source="BlindShot" position="0.5 1.6 0" />
+	<Soundobject objectname="sound" />
 	
 	<Action name="fly">
 		<Sound objectname="sound" name="arrow"/>
@@ -271,7 +291,6 @@
 	</Action>
 </RenderInfo>
 
-
 <RenderInfo name="smoke_wave">
 	<Entity objectname="stone" source="boulder.mesh" position="0 0 0"/>
 	
@@ -283,5 +302,17 @@
 	</Action>
 </RenderInfo>
 
+<RenderInfo name="catapult_skeleton">
+	<Entity source="skeleton.mesh" position="0 0 0" rotation="0 -90 0"/>
+	<ParticleSystem objectname="flames" source="Firesphere" bone="pelvis"/>
+	
+	<Action name="stable">
+		<Animation name="impact"/>
+	</Action>
+</RenderInfo>
+
+<RenderInfo name="black_cloud">
+	<ParticleSystem objectname="cloud" source="Black_Smoke" position="0 2 0"/>
+</RenderInfo>
 
 

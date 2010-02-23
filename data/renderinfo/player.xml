@@ -654,6 +654,13 @@
 		<Animation name="throwDagger3" />
 	</Action>
 	
+	<!-- NPC related -->
+	<Action name="callEarth">
+		<Animation name="summonPole"/>
+		<ParticleSystem objectname="aura" source="EarthAura" />
+		<Detach objectname="aura" time="0.7"/>
+	</Action>
+	
 </RenderInfo>
 
 <RenderInfo name="playerbaseM" parent="playerbase">

@@ -62,3 +62,17 @@
 	</Action>
 </RenderInfo>
 
+<!-- a block from the wall made during the siege - a playeholder for a real crack -->
+<RenderInfo name="siege_block">
+	<Entity source="stone4.mesh"/>
+	
+	<Action name="rise">
+		<Visibility time="0" visible="false"/>
+		<ParticleSystem objectname="smoke" source="Smoke_Cube" position="0.0 0 0.0"/>
+		<ParticleSystem objectname="earth" source="EarthGeysir" position="0.0 0 0.0"/>
+		
+		<Visibility time="0.6" visible="true"/>
+		<Detach time="1.0" objectname="smoke"/>
+		<Detach time="1.0" objectname="earth"/>
+	</Action>
+</RenderInfo>

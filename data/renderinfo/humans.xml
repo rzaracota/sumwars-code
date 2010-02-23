@@ -61,7 +61,7 @@
 </RenderInfo>
 
 
-<RenderInfo name="human_bandit" parent="playerbase">
+<RenderInfo name="human_bandit" parent="bandit_base">
 	<Entity source="rogue.mesh"/>
 	<Subobject objectname="armor" source="rogueArmorEnemy" />
 	<Entity objectname="weapon" bone="itemRightHand" source="dagger_sw.mesh"  />
@@ -71,7 +71,7 @@
 	<Entity objectname="mustache" bone="crown" source="mustache.mesh" />
 </RenderInfo>
 
-<RenderInfo name="human_thug" parent="playerbase">
+<RenderInfo name="human_thug" parent="bandit_base">
 	<Entity source="rogue.mesh"/>
 	<Subobject objectname="armor" source="rogueArmorEnemy" />
 	<Entity objectname="weapon" bone="itemRightHand" source="goblin_hmr.mesh"  />
@@ -194,4 +194,12 @@
 	<Entity objectname="head" bone="crown" source="head1.mesh" />
 	<Entity objectname="hair" bone="crown" source="hairShort_ms4.mesh" />
 	<Entity objectname="chinBeard" bone="crown" source="beardChin_ms4.mesh" />
+</RenderInfo>
+
+<RenderInfo name="human_ronny" parent="bandit_base">
+	<Entity source="rogue.mesh" scale="0.7"/>
+	<Subobject objectname="armor" source="rogueArmorEnemy" scale="0.7"/>
+	<Entity objectname="weapon" bone="itemRightHand" source="sabre_sw.mesh" scale="1.2"/>
+	<Entity objectname="head" bone="crown" source="head1.mesh" />
+	<Entity objectname="hair" bone="crown" source="hairShort_ms3.mesh" />
 </RenderInfo>

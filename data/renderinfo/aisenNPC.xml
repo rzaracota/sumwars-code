@@ -29,6 +29,10 @@
 		<Detach time="0.4" objectname="magicEnergy" />
 	</Action>
 	
+	<Action name="attack">
+		<Animation name="attackPole" />
+	</Action>
+	
 	<Action name="avaera_firebolt">
 		<Animation name="castMagicWeak" />
 		<ParticleSystem time = "0" objectname="magicEnergy" bone="mainmesh:itemLeftHand" source="Magic_Arrow" position="0.0 0.0 0.0" />
@@ -72,6 +76,7 @@
 		<Detach time = "1.0" objectname="fire4"/>
 	</Action>	
 </RenderInfo>
+
 <RenderInfo name = "guardPoleBaseF" parent="playerbase">
 	<Action name="noaction">
 		<Animation name="idlePole" />
