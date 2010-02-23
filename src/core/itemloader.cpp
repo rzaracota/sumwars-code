@@ -149,6 +149,7 @@ void ItemLoader::loadItem(TiXmlNode* node)
 						
 				attr.getFloat("min_enchant",item_data->m_min_enchant,0);
 				attr.getFloat("max_enchant",item_data->m_max_enchant,0);
+				attr.getFloat("enchant_multiplier",item_data->m_enchant_multiplier,1.0);
 				attr.getInt("price",item_data->m_price);
 				
 				attr.getFloat("modchance_health_mod",item_data->m_modchance[ItemFactory::HEALTH_MOD],0);

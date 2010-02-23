@@ -442,6 +442,11 @@ struct ItemBasicData
 	 * \brief maximale Starke einer Verzauberung des Items
 	 */
 	float m_max_enchant;
+	
+	/**
+	 * \brief Faktor, der auf alle Verzauberungen multipliziert wird. Ermoeglich zum Beispiel Zweihandwaffen staerker zu verzaubern.
+	 */
+	float m_enchant_multiplier;
 
 	/**
 	 * \var  Name des Items

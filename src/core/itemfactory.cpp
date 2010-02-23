@@ -39,7 +39,7 @@ Item* ItemFactory::createItem(Item::Type type, Item::Subtype subtype, int id, fl
 		item->m_rarity = rarity;
 		
 
-		createMagicMods(item,idata->m_modchance,magic_power, idata->m_min_enchant, idata->m_max_enchant);
+		createMagicMods(item,idata->m_modchance,magic_power, idata->m_min_enchant, idata->m_max_enchant, idata->m_enchant_multiplier);
 
 		// Preis ausrechnen
 		item->calcPrice();
@@ -78,7 +78,7 @@ Item* ItemFactory::createGold(int value, int id)
 }
 
 
-void ItemFactory::createMagicMods(Item* item, float* modchance, float magic_power, float min_enchant, float max_enchant)
+void ItemFactory::createMagicMods(Item* item, float* modchance, float magic_power, float min_enchant, float max_enchant, float enchant_multiplier)
 {
 	DEBUGX("magic power %f min_enchant %f",magic_power, min_enchant);
 	if (magic_power < min_enchant && magic_power != 0)
@@ -118,7 +118,7 @@ void ItemFactory::createMagicMods(Item* item, float* modchance, float magic_powe
 		return;
 	
 	// Staerke der aktuellen Verzauberung
-	float mp;
+	float mp, mpbase;
 	float sqrtmp;
 	float logmp;
 
@@ -142,19 +142,23 @@ void ItemFactory::createMagicMods(Item* item, float* modchance, float magic_powe
 		mp = Random::randrangef(min_enchant,max_enchant);
 		mp = std::min(mp, magic_power);
 		item->m_magic_power += mp;
+		mpbase = mp;
 		
-		sqrtmp = sqrt(mp);
-		logmp = log(mp);
 		magic_power -= mp;
 		
-			// Modifikation auswuerfeln
+		mp *= enchant_multiplier;
+		sqrtmp = sqrt(mp);
+		logmp = log(mp);
+		
+		
+		// Modifikation auswuerfeln
 		mod = Random::randDiscrete(modprob,31,sum);
 		DEBUGX("ausgewuerfelt: Starke der Verzauberung: %f",mp);
 		DEBUGX("Art der Verzauberung: %i",mod);
 
 		num_mods++;
 
-		levelreq = std::max(levelreq,(int) (mp*0.06-1));
+		levelreq = std::max(levelreq,(int) (mpbase*0.09-5));
 		levelreq = std::min(80,levelreq);
 
 		dmgavg = mp*0.06;
@@ -269,11 +273,11 @@ void ItemFactory::createMagicMods(Item* item, float* modchance, float magic_powe
 				break;
 
 			case ATTACK_MOD:
-				item->m_weapon_attr->m_damage.m_attack += ceil(mp*0.3);
+				item->m_weapon_attr->m_damage.m_attack += ceil(mp*0.4);
 				break;
 
 			case POWER_MOD:
-				item->m_weapon_attr->m_damage.m_power += ceil(mp*0.3);
+				item->m_weapon_attr->m_damage.m_power += ceil(mp*0.4);
 				break;
 
 		}
