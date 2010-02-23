@@ -2803,6 +2803,7 @@ Vector Region::getLocation(LocationName name)
 
 	if (it == m_locations.end())
 	{
+		WARNING("Location %s does not exist",name.c_str());
 		return Vector(-1,-1);
 	}
 
