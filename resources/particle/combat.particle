@@ -167,7 +167,7 @@ BurningBlade
     particle_width 20
     particle_height 20
     cull_each false
-    quota 10000
+    quota 300
     billboard_type point
  
 
@@ -181,6 +181,43 @@ BurningBlade
         velocity_max 400
         colour_range_start 0.3 0 0
         colour_range_end 0.3 0.1 0
+}
+
+    affector LinearForce
+{
+        force_vector      0 30 100
+        force_application add
+}
+    // Fader
+    affector ColourFader
+{
+        red -0.25
+        green -0.25
+        blue -0.25
+}
+
+}
+
+FrostBlade
+{
+    material Flare
+    particle_width 20
+    particle_height 20
+    cull_each false
+    quota 300
+    billboard_type point
+ 
+
+   emitter Point
+{
+        angle 15
+        emission_rate 275
+        time_to_live 0.075
+        direction 0 0 1
+        velocity_min 250
+        velocity_max 400
+        colour_range_start  0.6 0.6 1
+        colour_range_end    0.2 0.2 0.6
 }
 
     affector LinearForce
@@ -291,4 +328,32 @@ BurningAxeRing
 }
 
 
+}
+
+//the blindness imbued into a projectile
+BlindShot
+{
+    material        flareAlpha
+    particle_width  30
+    particle_height 30
+    cull_each       false
+	cull_each       false
+    quota          2000
+    billboard_type  point
+    
+    // Area emitter
+    emitter Box
+{
+        angle           360
+        emission_rate   300
+		position		0 0 0
+        time_to_live    0.05
+        direction       0 1 0
+        velocity    	30
+        colour_range_start  0 0 0
+		colour_range_end  0 0 0 0.2
+		width           5
+        height          5
+        depth           5
+}
 }

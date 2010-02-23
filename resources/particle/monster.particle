@@ -35,7 +35,7 @@ SlugSpit
 }
 }
 
-//GoblinParticles
+//Goblin Particles
 GoblinBuffIce
 {
     material        Flare
@@ -192,6 +192,212 @@ GoblinFreeze
 }
 }
 
+//shadow-magic Particlesp
+Magic_Arrow_Shadow
+{
+	material 		flareAlpha
+	particle_width 	40
+	particle_height	40
+	cull_each		false
+	quota			300
+	billboard_type	point
+
+	emitter Ellipsoid
+{
+		angle 5
+		emission_rate 200
+        time_to_live    0.05
+        direction       0 1 0
+        velocity_min    10
+        velocity_max    30
+        colour_range_start  0 0 0
+		colour_range_end  0 0 0 0.2
+		width  20
+		height 20
+		depth 20
+}
+}
+
+Black_Smoke
+{
+    material        smoke
+    particle_width  80
+    particle_height 80
+	cull_each       false
+    quota           3000
+    billboard_type  point
+    
+    // Area emitter
+    emitter Ellipsoid
+{
+        angle           360
+        emission_rate   600
+        time_to_live    0.2
+        direction       0 1 0
+        velocity    	10
+        colour_range_start 0 0 0 
+        colour_range_end 0 0 0 0.2
+        width           450
+        height          450
+        depth           160
+
+}
+
+    // Make em float upwards
+    affector LinearForce
+{
+        force_vector      0 100 0
+        force_application add
+}
+
+    // Fader
+    affector ColourFader
+{
+        red -0.25
+        green -0.25
+        blue -0.25
+}
+}
+
+MonsterBuffShadowFront
+{
+    material        flareAlpha
+    particle_width  35
+    particle_height 35
+    cull_each       false
+    quota           200
+    billboard_type  point
+
+    //Front
+    emitter Point
+{
+        angle           360
+        emission_rate   4000
+        time_to_live    0.007
+        position        30 60 0
+        direction       0 -1 0
+        velocity_min  	30
+        velocity_max  	50
+		colour_range_start	0 0 0 
+        colour_range_end	0.2 0.2 0.2 0.2
+        width           10
+        height          10
+        depth           10
+}
+    //BackLeft
+	emitter Point
+{
+        angle           15
+        emission_rate   4000
+        time_to_live    0.007
+        position        -30 60 -30
+        direction       0 -1 0
+        velocity_min  	30
+        velocity_max  	50
+		colour_range_start	0 0 0 
+        colour_range_end	0.2 0.2 0.2 0.2
+        width           10
+        height          10
+        depth           10
+}
+    //BackRight
+	emitter Point
+{
+        angle           15
+        emission_rate   4000
+        time_to_live    0.007
+        position        -30 60 30
+        direction       0 -1 0
+        velocity_min  	30
+        velocity_max  	50
+		colour_range_start	0 0 0 
+        colour_range_end	0.2 0.2 0.2 0.2
+        width           10
+        height          10
+        depth           10
+}
+
+    // Fader
+    affector ColourFader2
+{
+        red1 +0.4
+        green1 +0.4
+        blue1 +0.4
+        alpha1 +0.7
+
+        red2 -0.25
+        green2 -0.25
+        blue2 -0.25
+        alpha2 -0.3333
+
+        state_change 3.5
+}
+}
+
+ShadowLine
+{
+    material smoke
+    particle_width 40
+    particle_height 40
+    cull_each false
+    quota 600
+    billboard_type point
+ 
+
+   emitter Point
+{
+        angle 360
+        emission_rate 15
+        time_to_live 2
+        direction 1 0 0
+        velocity_min 3
+        velocity_max 5
+        colour_range_start 0.2 0 0
+        colour_range_end 0.2 0.2 0
+}
+}
+
+//ice magic particles
+//the ring for the summoning of frostmages
+SummonRing
+{
+    material        Flare
+    particle_width  25
+    particle_height 25
+	cull_each       false
+    quota           10000
+    billboard_type  point
+    
+    // Area emitter
+    emitter Ring
+{
+        angle           30
+        emission_rate   2000
+        time_to_live    0.06
+        direction       0 1 0
+        velocity    	30
+        colour_range_start 0.6 0.6 1
+        colour_range_end 0.2 0.2 0.6
+        width           40
+        height          35
+        depth           2
+}
+
+    // Fader
+    affector ColourFader
+{
+        red -0.25
+        green -0.25
+        blue -0.25
+}
+
+
+}
+
+
+
+//undead particles
+
 //the burning head of a skeleton
 BurningHead
 {
@@ -236,6 +442,53 @@ BurningHand
         velocity_max 250
         colour_range_start 1 0 0
         colour_range_end 0.8 0.6 0
+}
+}
+
+//the icecold head of a skeleton
+FreezingHead
+{
+    material Flare
+    particle_width 20
+    particle_height 20
+    cull_each false
+    quota 500
+    billboard_type point
+ 
+
+   emitter Point
+{
+        angle 40
+        emission_rate 100
+        time_to_live 0.2
+        direction 0 1 0
+        velocity_min 250
+        velocity_max 300
+        colour_range_start 0.6 0.6 1
+        colour_range_end 0.2 0.2 0.6
+}
+}
+//the freezing hand of a skeleton
+FreezingHand
+{
+    material Flare
+    particle_width 10
+    particle_height 10
+    cull_each false
+    quota 500
+    billboard_type point
+ 
+
+   emitter Point
+{
+        angle 360
+        emission_rate 100
+        time_to_live 0.1
+        direction 1 0 0
+        velocity_min 150
+        velocity_max 250
+        colour_range_start 0.6 0.6 1
+        colour_range_end 0.2 0.2 0.6
 }
 }
 
