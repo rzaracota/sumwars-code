@@ -337,8 +337,9 @@ AIR
 	<AI ai_sight_range="12" />
 </Monster>
 
-<!--------------------------------------->
+<!-------------------MONSTER GROUPS-------------------->
 
+<!-- undead -->
 
 <MonsterGroup name="skeletons" >
 	<SubGroup subtype="sword_skel" number="3" prob="0.7" />
@@ -380,7 +381,3 @@ AIR
 
 <MonsterGroup name="nothing" >
 </MonsterGroup>
-
-
-
-

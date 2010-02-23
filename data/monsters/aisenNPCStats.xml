@@ -23,9 +23,9 @@
 					resistances_cap_ice="50"
 					resistances_cap_fire="50"
 					walk_speed="2500"
-					attack_speed="2000"
+					attack_speed="1000"
 					step_length="1.2"
-					attack_range="0.5"
+					attack_range="2"
 					>
 		
 		<Ability type="noaction"/>
@@ -345,6 +345,96 @@
 	<AI ai_sight_range="8" />
 </Monster>
 
+<!-- Belagerung Zwergentrutz -->
+
+<!-- Bogenschuetze, Zwergentrutz, Verteidigung-->
+<Monster type="NPC" subtype="bowman_siegeDefense" name="Bowman" fraction="human" race="human" layer="NORMAL">
+	<RenderInfo name="bowman_siege" />
+	<BasicAttributes
+					experience="45"
+					level="10"
+					max_health="160"
+					armor="25"
+					block="15"
+					attack="140"
+					power="80"
+					strength="20"
+					dexterity="45"
+					magic_power="5"
+					willpower="20"
+					resistances_physical="0"
+					resistances_air="20"
+					resistances_ice="20"
+					resistances_fire="0"
+					resistances_cap_physical="50"
+					resistances_cap_air="50"
+					resistances_cap_ice="50"
+					resistances_cap_fire="50"
+					walk_speed="2500"
+					attack_speed="1000"
+					step_length="1.5"
+					attack_range="0.8"
+					>
+		<Ability type="walk" />
+		<Ability type="range_attack" rating="1"/>
+		<Ability type="die" />
+		<Ability type="noaction" />
+	</BasicAttributes>
+	
+	<Geometry radius="0.5" />
+	
+	<AI ai_sight_range="12"  ai_shoot_range="10" ai_chase_range="20"/>
+</Monster>
+
+<!-- AisenerMagier, Zwergentrutz, Verteidigung -->
+<Monster type="NPC" subtype="aisen_mageDefense" name="Avaeras Order, Firemage" fraction="human" race="human" layer="NORMAL">
+	<RenderInfo name="aisen_mage" />
+	<EmotionSet name="human_standard" />
+	<BasicAttributes
+					experience="0"
+					level="19"
+					max_health="300"
+					armor="60"
+					block="0"
+					attack="50"
+					strength="32"
+					dexterity="38"
+					magic_power="70"
+					willpower="43"
+					resistances_physical="10"
+					resistances_air="17"
+					resistances_ice="23"
+					resistances_fire="40"
+					resistances_cap_physical="50"
+					resistances_cap_air="50"
+					resistances_cap_ice="50"
+					resistances_cap_fire="50"
+					walk_speed="3500"
+					attack_speed="1800"
+					step_length="1.2"
+					attack_range="0.5"
+					>
+		
+		<Ability type="noaction"/>
+		<Ability type="walk"/>
+		
+		<Ability type="avaera_firebolt" rating="2"/>
+		<Ability type="avaera_fireball" rating="1" all_target_rating="0.5"/>
+		<Ability type="avaera_firecolumn" rating="3"/>
+		
+		<Ability type="die"/>
+		
+		<Ability type="magic_attack" rating="1"/>
+		
+		
+	</BasicAttributes>
+	
+	<Geometry radius="0.5" />
+	
+	<AI ai_sight_range="12" />
+</Monster>
+
+
 <!-- AisenerMagier, Zwergentrutz -->
 <Monster type="NPC" subtype="aisen_mage" name="Avaeras Order, Firemage" fraction="human" race="human" layer="NORMAL">
 	<RenderInfo name="aisen_mage" />
@@ -417,9 +507,9 @@
 					resistances_cap_ice="50"
 					resistances_cap_fire="50"
 					walk_speed="2500"
-					attack_speed="2000"
+					attack_speed="1000"
 					step_length="1.2"
-					attack_range="0.5"
+					attack_range="2"
 					>
 		
 		<Ability type="noaction"/>
