@@ -1152,13 +1152,19 @@ void MainWindow::updateObjectInfo()
 		{
 			dist = it->distance;
 			
+			// unsichtbare Objekte nicht fokussierbar
+			if (it->movable->getVisible() == false)
+			{
+				continue;
+			}
+			
 			try
 			{
 				id = Ogre::any_cast<int>(it->movable->getUserAny());
 			}
 			catch (Ogre::Exception& e)
 			{
-				DEBUG("Object %s has no ID",it->movable->getName().c_str());
+				WARNING("Object %s has no ID",it->movable->getName().c_str());
 				continue;
 			}
 			DEBUGX("ray scene query dist %f obj %s mask %x id %i",it->distance, it->movable->getName().c_str(),it->movable->getQueryFlags(), id);

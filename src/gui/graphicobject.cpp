@@ -1048,6 +1048,8 @@ void GraphicObject::setHighlight(bool highlight, std::string material)
 				
 				Ogre::SceneNode* node = at->second.m_object->getParentSceneNode();
 				node->attachObject(at->second.m_highlight_entity);
+				
+				at->second.m_highlight_entity->setVisible(at->second.m_object->getVisible());
 			}
 		}
 	}
