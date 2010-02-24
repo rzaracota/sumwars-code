@@ -337,8 +337,8 @@
 	<ParticleSystem objectname="burningHead" source="BurningHead" bone="root" position="0 0 0" rotation="0 0 0"/>
 	<ParticleSystem objectname="burningHand" source="BurningHand" bone="handBoneLeft" position="0 0 0"/>
 	
-	<ParticleSystem objectname="firesword1" bone="itemRightHand" source="BurningAxeRing" position= "0 0 -1.3"/>
-	<Rotation objectname="firesword1" start_vec="0.0 0.0 0.0" end_vec="0.0 180.0 0.0" />
+	<ParticleSystem objectname="firesword1" bone="itemRightHand" source="BurningAxeRing" position= "0 0 -1.3" rotation="0 180 0"/>
+	<!--<Rotation objectname="firesword1" start_vec="0.0 0.0 0.0" end_vec="0.0 180.0 0.0" />-->
 		
 	<Action name = "attack">
 		<Animation name = "attackTwoHandsBlunt"/>
