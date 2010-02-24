@@ -1,5 +1,9 @@
 <Quest name="Fortify Dwarfenwall" table_name="fortify_dwall">
-
+	<Init>
+		-- a table for debug-booleans (for example: debug["fortify_dwall"] = true)
+		debug={};
+	</Init>
+	
 	<Description>
 		if (fortify_dwall.finished) then
 			return _("Quest finished")

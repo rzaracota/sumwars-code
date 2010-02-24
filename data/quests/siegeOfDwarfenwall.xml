@@ -374,6 +374,7 @@
 	<Region name="dwarfenwallRampart">
 		<Event trigger="create_region">
 			<Condition>
+				debug["defend_dwall"] = false;
 				return (defend_dwall.siegeEnded ~= true);
 			</Condition>
 			<Effect>
@@ -604,6 +605,9 @@
 		
 		<Event trigger="beforeBattle" once="true">
 			<Effect>
+				fadeOut(0);
+				fadeIn(2000, {0.4,0.4,0.4},{1,1,1},{0.3,0.3,0.3});
+				
 				assembleParty("dwarfenwallRampart","locParty");
 				setCutsceneMode(true);
 				addCameraPosition(0,"locEntryGeneral",-70,55,15);
@@ -617,13 +621,19 @@
 				defend_dwall_tmp.units[unit] = 8;
 				
 				defend_dwall_tmp.arrived=0;
-				startTimer("councilEnters",3000);
-				startTimer("generalEnters",3500);
+				if(debug["defend_dwall"] ~= true)then
+					startTimer("councilEnters",3000);
+					startTimer("generalEnters",3500);
+				else
+					insertTrigger("councilEnters");
+					insertTrigger("generalEnters");
+				end;
 			</Effect>
 		</Event>
 		<Event trigger="generalEnters" once="true">
 			<Effect>
 				defend_dwall_tmp.general = createObject("general_greif_battle","exit_south");
+				setRefName(defend_dwall_tmp.general,"General Greif");
 				addUnitCommand(defend_dwall_tmp.general,"walk","locEntryGeneral");
 				defend_dwall_tmp.phase="generalEnters";
 			</Effect>
@@ -631,6 +641,7 @@
 		<Event trigger="councilEnters" once="true">
 			<Effect>
 				defend_dwall_tmp.council = createObject("council_dwarfenwall","exit_south");
+				setRefName(defend_dwall_tmp.council,"Maga Convocatis Darna Eistaucher");
 				addUnitCommand(defend_dwall_tmp.council,"walk","locCouncilMage");
 				defend_dwall_tmp.phase="generalEnters";
 			</Effect>
@@ -688,26 +699,32 @@
 			<Effect>
 				--lookAtEachOther(defend_dwall_tmp.council,defend_dwall_tmp.general);
 				
-				
-				initDialog();
-				addSpeaker(defend_dwall_tmp.council, "darna");
-				addSpeaker(defend_dwall_tmp.general, "greif");
-				
-				setSpeakerAnimation("greif","point",700);
-				timedExecute('setObjectAnimation('..defend_dwall_tmp.general..',"pointing",1000,true)',695);
-				speak("greif", _("Da hinten kommen sie."),"unhappy");
-				setSpeakerAnimation("greif","warcry",1500);
-				speak("greif", _("Macht euch bereit Maenner!"),"warcry");
-				setSpeakerEmotion("greif","normal");
-				changeTopic("entryLich");
+				if(debug["defend_dwall"] ~= true)then
+					initDialog();
+					addSpeaker(defend_dwall_tmp.council, "darna");
+					addSpeaker(defend_dwall_tmp.general, "greif");
+					
+					setSpeakerAnimation("greif","point",700);
+					timedExecute('setObjectAnimation('..defend_dwall_tmp.general..',"pointing",1000,true)',695);
+					speak("greif", _("Da hinten kommen sie."),"unhappy");
+					setSpeakerAnimation("greif","warcry",1500);
+					speak("greif", _("Macht euch bereit Maenner!"),"warcry");
+					setSpeakerEmotion("greif","normal");
+					changeTopic("entryLich");
+				else
+					insertTrigger("entryLich");
+				end;
 			</Effect>
 		</Event>
 		<Event trigger="entryLich" once="true">
 			<Effect>
-				addCameraPosition(4000,"locLich",-80,55,35)
-				addCameraPosition(1000,"locLich",-80,55,35)
-				addCameraPosition(1000,"locLich",-80,55,17)
-				--addCameraPosition(500,"locLich",-80,55,17)
+				if(debug["defend_dwall"] ~= true)then
+					addCameraPosition(4000,"locLich",-80,55,35)
+					addCameraPosition(1000,"locLich",-80,55,35)
+					addCameraPosition(1000,"locLich",-80,55,17)
+				else
+					addCameraPosition(0,"locLich",-80,55,17)
+				end;
 				entryLich();
 			</Effect>
 		</Event>
@@ -718,7 +735,7 @@
 			</Condition>
 			<Effect>
 				setObjectAnimation(trigger.unit,"kneelDown",790);
-				timedExecute('setObjectAnimation('..trigger.unit..',"kneel",2000,true)',785);
+				timedExecute('setObjectAnimation('..trigger.unit..',"kneel",1900,true)',785);
 			</Effect>
 		</Event>
 		<Event trigger="command_complete" once="true">
@@ -727,7 +744,7 @@
 			</Condition>
 			<Effect>
 				setObjectAnimation(trigger.unit,"kneelDown",820);
-				timedExecute('setObjectAnimation('..trigger.unit..',"kneel",2000,true)',815);
+				timedExecute('setObjectAnimation('..trigger.unit..',"kneel",2100,true)',815);
 			</Effect>
 		</Event>
 		<Event trigger="command_complete" once="true">
@@ -742,47 +759,77 @@
 		
 		<Event trigger="undeadTalkBeforeBattle1" once="true">
 			<Effect>
-				initDialog();
-				addImportantSpeakers();
+				if(debug["defend_dwall"] ~= true)then
+					initDialog();
+					addImportantSpeakers();
 				
-				speakPause(800);
-				speak("lich",_("Eure Zeit ist gekommen, erbaermliche Menschen!"),"threaten");
-				speak("att1",_("Zwergentrutz wird endlich Euer sein, mein Gebieter."),"sneer");
-				speak("att2",_("Mit der Unterstuetzung aus der Hauptstadt wird es endlich gelingen."),"happy");
-				speak("lich",_("Beginnen wir also den letzten Sturm auf diese elende Festung."),"angry");
-				changeTopic("beingPrepared");
+					speakPause(800);
+					speak("lich",_("Eure Zeit ist gekommen, erbaermliche Menschen!"),"threaten");
+					speak("att1",_("Zwergentrutz wird endlich Euer sein, mein Gebieter."),"sneer");
+					speak("att2",_("Mit der Unterstuetzung aus der Hauptstadt wird es endlich gelingen."),"happy");
+					speak("lich",_("Beginnen wir also den letzten Sturm auf diese elende Festung."),"angry");
+					executeInDialog('insertTrigger("changeView");addTriggerVariable("nextTrigger","beingPrepared");');
+				else
+					insertTrigger("changeView");
+					addTriggerVariable("nextTrigger","beingPrepared");
+				end;
+			</Effect>
+		</Event>
+		
+		<Event trigger="changeView">
+			<Effect>
+				setCutsceneMode(true);
+				fadeOut(1000)
+				startTimer(trigger.nextTrigger,1500);
 			</Effect>
 		</Event>
 		
 		<Event trigger="beingPrepared" once="true">
 			<Effect>
-				groupObjectsArc(getPlayers(),"entry_south","locBowmen1",nil,90);
-				addCameraPosition(0,"locEntryGeneral",-70,55,15);
-				
-				speakPause(1000);
-				speak("greif",_("Da hinten sind wahrscheinlich so viele Untote, dass Eure ach so kampfkraeftige Unterstuetzung unseren Tod nicht wird abwenden koennen."),"unhappy");
-				speak("darna",_("Diese... Unterstuetzung ist nicht das einzige, was das Konzil fuer Zwergentrutz tun kann und wird."),"aloof");
-				speak("darna",_("Ich habe schon vor Wochen einen Erdelementar gebunden."),"sneer");
-				speak("darna",_("Er wartet nur noch auf meinen Befehl."),"normal");
-				speak("darna",_("Natuerlich konnte ich nicht wissen, wo die Untoten angreifen wuerden."),"thougtful");
-				speak("darna",_("Ich fuerchte, da kommt einiges an Aufraeumarbeiten auf die Ueberlebenden zu."),"sad");
-				speak("greif",_("Hoert auf zu spotten und tut es endlich, was auch immer ihr vorhabt."),"angry");
-				setSpeakerEmotion("greif","normal");
-				setSpeakerAnimation("darna","callEarth",3000);
-				speakPause(3000);
-				changeTopic("cuttingOfUndead");
+				if(debug["defend_dwall"] ~= true)then
+					fadeIn(2000, {0.4,0.4,0.4},{1,1,1},{0.3,0.3,0.3});
+					groupObjectsArc(getPlayers(),"entry_south","locBowmen1",nil,90);
+					addCameraPosition(0,"locEntryGeneral",-70,55,15);
+					
+					initDialog();
+					addImportantSpeakers();
+
+					speakPause(1000);
+					speak("greif",_("Da hinten sind wahrscheinlich so viele Untote, dass Eure ach so kampfkraeftige Unterstuetzung unseren Tod nicht wird abwenden koennen."),"unhappy");
+					speak("darna",_("Diese... Unterstuetzung ist nicht das einzige, was das Konzil fuer Zwergentrutz tun kann und wird."),"aloof");
+					speak("darna",_("Ich habe schon vor Wochen einen Erdelementar gebunden."),"sneer");
+					speak("darna",_("Er wartet nur noch auf meinen Befehl."),"normal");
+					speak("darna",_("Natuerlich konnte ich nicht wissen, wo die Untoten angreifen wuerden."),"thougtful");
+					speak("darna",_("Ich fuerchte, da kommt einiges an Aufraeumarbeiten auf die Ueberlebenden zu."),"sad");
+					speak("greif",_("Hoert auf zu spotten und tut es endlich, was auch immer ihr vorhabt."),"angry");
+					setSpeakerEmotion("greif","normal");
+					setSpeakerAnimation("darna","callEarth",3000);
+					speakPause(3000);
+					executeInDialog('insertTrigger("changeView");addTriggerVariable("nextTrigger","cuttingOfUndead");');
+				else
+					fadeIn(0, {0.4,0.4,0.4},{1,1,1},{0.3,0.3,0.3});
+					insertTrigger("changeView");
+					addTriggerVariable("nextTrigger","cuttingOfUndead");
+				end;
 			</Effect>
 		</Event>
 		
 		<Event trigger="cuttingOfUndead" once="true">
 			<Effect>
 				defend_dwall_tmp.phase="groundbreak";
-				addCameraPosition(0,"locFissure1",-60,55,20);
-				addCameraPosition(800,"locFissure1",-60,55,20);
-				addCameraPosition(3500,"locFissure7",-120,55,20);
-				addCameraPosition(1500,"locFissure7",-120,55,20);
-				addCameraPosition(1500,"locLich",-65,35,9);
-				timedExecute("blockWall()",1000);
+				if(debug["defend_dwall"] ~= true)then
+					fadeIn(1000, {0.4,0.4,0.4},{1,1,1},{0.3,0.3,0.3});
+					addCameraPosition(0,"locFissure1",-60,55,20);
+					addCameraPosition(800,"locFissure1",-60,55,20);
+					addCameraPosition(3500,"locFissure7",-120,55,20);
+					addCameraPosition(1500,"locFissure7",-120,55,20);
+					addCameraPosition(1500,"locLich",-65,35,9);
+					timedExecute("blockWall()",1000);
+				else
+					fadeIn(0, {0.4,0.4,0.4},{1,1,1},{0.3,0.3,0.3});
+					blockWall();
+					addCameraPosition(0,"locLich",-65,35,9);
+				end;
 			</Effect>
 		</Event>
 		
@@ -791,28 +838,34 @@
 				return(defend_dwall_tmp.phase=="groundbreak");
 			</Condition>
 			<Effect>
-				initDialog();
-				addImportantSpeakers();
-				
-				speak("lich", _("Verfluchte Elementaristen!"),"warcry");
-				speak("lich", _("Es wird mir eine Freude sein, den Körper dieser Hexe wiederzubeleben, nur um sie zu verbrennen!"),"angry");
-				speak("att1",_("Es wird geschehen, mein Gebieter."),"amused");
-				speak("att2",_("Aber wie greifen wir die Stadt jetzt an? Sie hat den Weg fuer unsere Armee blockiert"),"thoughtful");
-				speak("lich", _("Schweigt!"),"threaten");
-				setSpeakerEmotion("att1","panic");
-				setSpeakerEmotion("att2","panic");
-				speakPause(1000);
-				speak("lich", _("Die Katapulte?"),"normal");
-				speak("att1",_("Sind bereit, mein Gebieter"),"normal");
-				speak("lich", _("Unsere Nekromanten?"),"normal");
-				speak("att2",_("Warten nur auf euren Befehl."),"normal");
-				speak("lich", _("Nicht umsonst kaempfe ich schon seit Jahrhunderten mit Zwergentrutz."),"grin");
-				speak("lich", _("Schickt die Skelette durch die Kriechgaenge."),"threaten");
-				
-				setSpeakerAnimation("att1","kneelUp",800);
-				setSpeakerAnimation("att2","kneelUp",700);
-				speakPause(1000);
-				changeTopic("firstWaveAdvances")
+				if(debug["defend_dwall"] ~= true)then
+					initDialog();
+					addImportantSpeakers();
+					
+					speak("lich", _("Verfluchte Elementaristen!"),"warcry");
+					speak("lich", _("Es wird mir eine Freude sein, den Körper dieser Hexe wiederzubeleben, nur um sie zu verbrennen!"),"angry");
+					speak("att1",_("Es wird geschehen, mein Gebieter."),"amused");
+					speak("att2",_("Aber wie greifen wir die Stadt jetzt an? Sie hat den Weg fuer unsere Armee blockiert"),"thoughtful");
+					speak("lich", _("Schweigt!"),"threaten");
+					setSpeakerEmotion("att1","panic");
+					setSpeakerEmotion("att2","panic");
+					speakPause(1000);
+					speak("lich", _("Die Katapulte?"),"normal");
+					speak("att1",_("Sind bereit, mein Gebieter"),"normal");
+					speak("lich", _("Unsere Nekromanten?"),"normal");
+					speak("att2",_("Warten nur auf euren Befehl."),"normal");
+					speak("lich", _("Nicht umsonst kaempfe ich schon seit Jahrhunderten mit Zwergentrutz."),"grin");
+					speak("lich", _("Schickt die Skelette durch die Kriechgaenge."),"threaten");
+					
+					setSpeakerAnimation("att1","kneelUp",800);
+					setSpeakerAnimation("att2","kneelUp",700);
+					speakPause(1000);
+					changeTopic("firstWaveAdvances")
+				else
+					addUnitCommand(defend_dwall_tmp.attendend1,"walk","locEntryUndead",3);
+					addUnitCommand(defend_dwall_tmp.attendend2,"walk","locEntryUndead",3);
+					timedExecute('insertTrigger("changeView");addTriggerVariable("nextTrigger","prepareTheBrothers")',2000);
+				end;
 			</Effect>
 		</Event>
 		
@@ -1081,12 +1134,51 @@
 					launchAttack(94 +i);
 				end;
 				
-				startTimer("boss4",50000);
+				startTimer("changeView",50000);
+				addTriggerVariable("nextTrigger","prepareTheBrothers")
+			</Effect>
+		</Event>
+		
+		<Event trigger="prepareTheBrothers" once="true">
+			<Effect>
+				defend_dwall_tmp.phase="the4thBoss"
+				addCameraPosition(0,"locLich",-65,35,9);
+				fadeIn(2000, {0.4,0.4,0.4},{1,1,1},{0.3,0.3,0.3});
+				addUnitCommand(defend_dwall_tmp.attendend1,"walk","locAttendend1");
+			</Effect>
+		</Event>
+		
+		<Event trigger="all_commands_complete" once="true">
+			<Condition>
+				return((trigger.unit==defend_dwall_tmp.attendend1) and (defend_dwall_tmp.phase=="the4thBoss"));
+			</Condition>
+			<Effect>
+				initDialog()
+				addImportantSpeakers();
+			
+				lookAt(defend_dwall_tmp.attendend1,"locLich");
+				setSpeakerAnimation("att1","kneelDown",800);
+				timedExecute('setObjectAnimation('..defend_dwall_tmp.attendend1..',"kneel",2000,true)',795)
+			
+				
+				speak("att1", _("Ihr habt gerufen, mein Gebieter?"),"normal");
+				speak("lich", _("Ich will, dass ihr die Brueder einsetzt."), "sneer");
+				speak("att1", _("Aber die sind noch immer nicht stabil!"),"fear");
+				speak("att1", _("Im schlimmsten Fall werden sie dem Gegner ueberhaupt keinen Schaden zufuegen."), "fear");
+				speak("lich", _("Das spielt keine Rolle."),"normal");
+				speak("lich", _("Er muesste bald hier sein. Im Moment schinden wir nur Zeit."),"normal");
+				speak("att1", _("Wie ihr Befehlt, mein Gebieter."),"normal");
+				executeInDialog('insertTrigger("changeView");addTriggerVariable("nextTrigger","boss4");');
+				
 			</Effect>
 		</Event>
 
 		<Event trigger="boss4" once="true">
 			<Effect>
+				addUnitCommand(defend_dwall_tmp.attendend1,"walk","locEntryUndead");
+				setCutsceneMode(false);
+				fadeIn(2000, {0.4,0.4,0.4},{1,1,1},{0.3,0.3,0.3});
+			
 				defend_dwall_tmp.phase="boss4"
 				launchAttack(120); --boss
 			</Effect>
