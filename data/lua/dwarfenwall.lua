@@ -340,6 +340,27 @@ end;
 function phase()
 	print(defend_dwall_tmp.phase);
 end;
-function stop()
-	defend_dwall_tmp.suspend = true;
+function setDebugToFalse()
+	debug["dwall_siege"]["skipIntro"]=false;
+	debug["dwall_siege"]["skipWave1"]=false;
+	debug["dwall_siege"]["skipWave2"]=false;
+	debug["dwall_siege"]["skipWave3"]=false;
+	debug["dwall_siege"]["skipWave4"]=false;
+	debug["dwall_siege"]["skipFirePrep"]=false;
+	debug["dwall_siege"]["skipWave5"]=false;
+	debug["dwall_siege"]["skipWave6"]=false;
+	debug["dwall_siege"]["skip2ndBoss"]=false;
+	debug["dwall_siege"]["skipWave7"]=false;
+	debug["dwall_siege"]["skipWave8"]=false;
+	debug["dwall_siege"]["skip3rdBoss"]=false
+	debug["dwall_siege"]["skipWave9"]=false;
+	debug["dwall_siege"]["skipWave10"]=false;
+	debug["dwall_siege"]["skip4thBoss"]=false;
+	debug["dwall_siege"]["skipIntroNeivan"]=false;
+	debug["dwall_siege"]["skipWave11"]=false;
+	debug["dwall_siege"]["skipWave12"]=false;
+	debug["dwall_siege"]["skip5thBoss"]=false;
+	debug["dwall_siege"]["skipWave13"]=false;
+	debug["dwall_siege"]["skipWave14"]=false;
+	debug["dwall_siege"]["skip6thBoss"]=false;
 end;

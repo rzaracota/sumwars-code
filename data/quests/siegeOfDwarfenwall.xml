@@ -388,6 +388,20 @@
 				debug["dwall_siege"]["skip2ndBoss"]=true;
 				debug["dwall_siege"]["skipWave7"]=true;
 				debug["dwall_siege"]["skipWave8"]=true;
+				debug["dwall_siege"]["skip3rdBoss"]=true
+				debug["dwall_siege"]["skipWave9"]=true;
+				debug["dwall_siege"]["skipWave10"]=true;
+				debug["dwall_siege"]["skip4thBoss"]=true;
+				debug["dwall_siege"]["skipIntroNeivan"]=true;
+				debug["dwall_siege"]["skipWave11"]=true;
+				debug["dwall_siege"]["skipWave12"]=true;
+				debug["dwall_siege"]["skip5thBoss"]=true;
+				debug["dwall_siege"]["skipWave13"]=true;
+				debug["dwall_siege"]["skipWave14"]=true;
+				debug["dwall_siege"]["skip6thBoss"]=false;
+				
+				--this will set all debugvariables to false. Be sure to add new variables if you want it to keep functioning. Location: dwarfenwall.lua
+				setDebugToFalse();
 				
 				return (defend_dwall.siegeEnded ~= true);
 			</Condition>
@@ -629,9 +643,11 @@
 			--spawn the elite_guards
 				local unit=createObject("elite_siege","exit_south");
 				addUnitCommand(unit,"walk","locGeneralGuard1");
+				addUnitCommand(unit,"guard","locGeneralGuard1",10,"secondary");
 				defend_dwall_tmp.units[unit] = 7;
 				unit=createObject("dwarfenwall_councilguard","exit_south");
 				addUnitCommand(unit,"walk","locGeneralGuard2");
+				addUnitCommand(unit,"guard","locGeneralGuard2",10,"secondary");
 				defend_dwall_tmp.units[unit] = 8;
 				
 				defend_dwall_tmp.arrived=0;
@@ -939,24 +955,31 @@
 		</Event>
 		<Event trigger="siegeBegins" once="true">
 			<Effect>
-				addCameraPosition(2000,"locEntryGeneral",-90,55,25);
-				for i = 0,10 do
-					insertTrigger("newDefender");
-					addTriggerVariable("index",50+i);
+				addUnitCommand(defend_dwall_tmp.general,"guard","locEntryGeneral",10,"secondary");
+				addUnitCommand(defend_dwall_tmp.council,"guard","locCouncilMage",6,"secondary");
+			
+				if(debug["dwall_siege"]["skipIntro"] ~=true)then
+					addCameraPosition(2000,"locEntryGeneral",-90,55,25);
+					for i = 0,10 do
+						insertTrigger("newDefender");
+						addTriggerVariable("index",50+i);
+					end;
+					insertTrigger("barrage");
+					startTimer("wave1",1900);
+				else
+					insertTrigger("wave1");
 				end;
-				insertTrigger("barrage");
-				startTimer("wave1",1900);
 			</Effect>
 		</Event>
 		
 		<Event trigger="wave1" once="true">
 			<Effect>
-				addCameraPosition(1000,"locSpawn6",-90,55,30);
-				timedExecute('setCutsceneMode(false)',2000);
-				
 				defend_dwall_tmp.phase="wave1"
 				
 				if(debug["dwall_siege"]["skipWave1"] ~=true)then
+					addCameraPosition(1000,"locSpawn6",-90,55,30);
+					timedExecute('setCutsceneMode(false)',2000);
+				
 					launchAttack(80); --e
 					launchAttack(84); --e
 					launchAttack(86); --e
@@ -1136,26 +1159,10 @@
 				--print("chilling death is dead")
 				--print("incoming fireskeletons")
 				skeletonBarrage(8);
-				startTimer("overrunThem",30000);
-				startTimer("wave7",50000);
+				startTimer("wave7",30000);
 			</Effect>
 		</Event>
 
-		<Event trigger="overrunThem">
-			<Condition>
-				return(defend_dwall.siegeEnded ~=true);
-			</Condition>
-			<Effect>
-				if(defend_dwall_tmp.suspend ~=true)then
-					for i=0,6 do
-						launchAttack(80 +i);
-					end;
-				end;
-				
-				startTimer("overrunThem",75000);
-			</Effect>
-		</Event>
-		
 		<Event trigger="wave7" once="true">
 			<Effect>
 				defend_dwall_tmp.phase="wave7"
@@ -1189,13 +1196,17 @@
 		
 		<Event trigger="prepareTheSavage">
 			<Effect>
-				if(debug["dwall_siege"]["skipWave8"] ~=true)then
-					setCutsceneMode(true);
+				if(debug["dwall_siege"]["skip3rdBoss"]~=true)then
+					if(debug["dwall_siege"]["skipWave8"] ==true)then
+						setCutsceneMode(true);
+					end;
+					defend_dwall_tmp.phase="boss3prep"
+					addCameraPosition(0,"locLich",-65,35,9);
+					fadeIn(2000, {0.4,0.4,0.4},{1,1,1},{0.3,0.3,0.3});
+					addUnitCommand(defend_dwall_tmp.attendend2,"walk","locAttendend2");
+				else
+					insertTrigger("wave9");
 				end;
-				defend_dwall_tmp.phase="boss3prep"
-				addCameraPosition(0,"locLich",-65,35,9);
-				fadeIn(2000, {0.4,0.4,0.4},{1,1,1},{0.3,0.3,0.3});
-				addUnitCommand(defend_dwall_tmp.attendend2,"walk","locAttendend2");
 			</Effect>
 		</Event>
 		<Event trigger="all_commands_complete" once="true">
@@ -1227,7 +1238,7 @@
 		<Event trigger="eyesOnBoss" once="true">
 			<Effect>
 				defend_dwall_tmp.phase="boss3"
-				addCameraPosition(1500,"locSpawn4",-65,35,9);
+				addCameraPosition(1500,"locSpawn4",-65,35,11);
 			</Effect>
 		</Event>
 
@@ -1246,7 +1257,6 @@
 				return(get(trigger.unit,"subtype")=="boss3_siege");
 			</Condition>
 			<Effect>
-				print("siege on")
 				timedExecute('skeletonBarrage(15)',2000);
 				startTimer("wave9",20000);
 			</Effect>
@@ -1256,39 +1266,56 @@
 			<Effect>
 				defend_dwall_tmp.phase="wave9"
 				
-				launchAttack(87); --m
-				launchAttack(96); --h
-				launchAttack(97); --h
-				launchAttack(98); --h
-				launchAttack(93); --m
-				
-				startTimer("wave10",50000);
+				if(debug["dwall_siege"]["skipWave9"]~=true)then
+					launchAttack(87); --m
+					launchAttack(96); --h
+					launchAttack(97); --h
+					launchAttack(98); --h
+					launchAttack(93); --m
+					
+					startTimer("wave10",50000);
+				else
+					insertTrigger("wave10");
+				end;
 			</Effect>
 		</Event>
 
 		<Event trigger="wave10" once="true">
 			<Effect>
 				defend_dwall_tmp.phase="wave10"
-				defend_dwall_tmp.suspend = true;
 				
-				skeletonBarrage(10);
-				timedExecute('skeletonBarrage(10)',30000);
-				
-				for i=0,6 do
-					launchAttack(94 +i);
+				if(debug["dwall_siege"]["skipWave10"]~=true)then
+					skeletonBarrage(10);
+					timedExecute('skeletonBarrage(10)',30000);
+					
+					for i=0,6 do
+						launchAttack(94 +i);
+					end;
+					
+					startTimer("changeView",50000);
+					addTriggerVariable("nextTrigger","prepareTheBrothers")
+				else
+					insertTrigger("prepareTheBrothers");
 				end;
-				
-				startTimer("changeView",50000);
-				addTriggerVariable("nextTrigger","prepareTheBrothers")
 			</Effect>
 		</Event>
 		
 		<Event trigger="prepareTheBrothers" once="true">
 			<Effect>
 				defend_dwall_tmp.phase="the4thBoss"
-				addCameraPosition(0,"locLich",-65,35,9);
-				fadeIn(2000, {0.4,0.4,0.4},{1,1,1},{0.3,0.3,0.3});
-				addUnitCommand(defend_dwall_tmp.attendend1,"walk","locAttendend1");
+				
+				if(debug["dwall_siege"]["skip4thBoss"]~=true)then
+					if(debug["dwall_siege"]["skipWave10"]==true)then
+						setCutsceneMode(true);
+						print("now in cutscene mode")
+					end;
+					addCameraPosition(0,"locLich",-65,35,9);
+					fadeIn(2000, {0.4,0.4,0.4},{1,1,1},{0.3,0.3,0.3});
+					addUnitCommand(defend_dwall_tmp.attendend1,"walk","locAttendend1");
+					print("still in cutscene mode?")
+				else
+					insertTrigger("frostHasCome");
+				end;
 			</Effect>
 		</Event>
 		
@@ -1297,6 +1324,7 @@
 				return((trigger.unit==defend_dwall_tmp.attendend1) and (defend_dwall_tmp.phase=="the4thBoss"));
 			</Condition>
 			<Effect>
+				print("still in cutscene mode? commands complete")
 				initDialog()
 				addImportantSpeakers();
 			
@@ -1340,12 +1368,16 @@
 		<Event trigger="frostHasCome" once="true">
 			<Effect>
 				defend_dwall_tmp.phase="frost"
-				addCameraPosition(0,"locLich",-65,35,9);
-				fadeIn(2000, {0.4,0.4,0.4},{1,1,1},{0.3,0.3,0.3});
-				addUnitCommand(defend_dwall_tmp.attendend2,"walk","locAttendend2");
-				
-				defend_dwall_tmp.frost = createObject("boss5_siege","locEntryUndead");
-				addUnitCommand(defend_dwall_tmp.frost,"walk","locAttendend1");
+				if(debug["dwall_siege"]["skipIntroNeivan"]~=true)then	
+					addCameraPosition(0,"locLich",-65,35,9);
+					fadeIn(2000, {0.4,0.4,0.4},{1,1,1},{0.3,0.3,0.3});
+					addUnitCommand(defend_dwall_tmp.attendend2,"walk","locAttendend2");
+					
+					defend_dwall_tmp.frost = createObject("boss5_siege","locEntryUndead");
+					addUnitCommand(defend_dwall_tmp.frost,"walk","locAttendend1");
+				else
+					insertTrigger("wave11");
+				end;
 			</Effect>
 		</Event>
 		
@@ -1383,17 +1415,20 @@
 			<Effect>
 				setCutsceneMode(false);
 				defend_dwall_tmp.phase="wave11"
-				defend_dwall_tmp.suspend = false;
 				
-				--skeletonBarrage(10);
-				--timedExecute('skeletonBarrage(10)',30000);
-				
-				launchAttack(123); --fs
-				launchAttack(125); --fs
-				launchAttack(127); --fs
-				launchAttack(129); --fs
-								
-				startTimer("wave12",50000);
+				if(debug["dwall_siege"]["skipWave10"]~=true)then
+					--skeletonBarrage(10);
+					--timedExecute('skeletonBarrage(11)',30000);
+					
+					launchAttack(123); --fs
+					launchAttack(125); --fs
+					launchAttack(127); --fs
+					launchAttack(129); --fs
+									
+					startTimer("wave12",50000);
+				else
+					insertTrigger("wave12");
+				end;
 			</Effect>
 		</Event>
 		
@@ -1401,23 +1436,30 @@
 			<Effect>
 				defend_dwall_tmp.phase="wave12"
 				
-				skeletonBarrage(10);
-				--timedExecute('skeletonBarrage(10)',30000);
-				
-				for i=0,6 do
-					launchAttack(123 +i);
+				if(debug["dwall_siege"]["skipWave12"]~=true)then
+					skeletonBarrage(10);
+					--timedExecute('skeletonBarrage(10)',30000);
+					
+					for i=0,6 do
+						launchAttack(123 +i);
+					end;
+									
+					startTimer("boss5",50000);
+				else
+					insertTrigger("boss5");
 				end;
-								
-				startTimer("boss5",50000);
 			</Effect>
 		</Event>
 		
 		<Event trigger="boss5" once="true">
 			<Effect>
 				defend_dwall_tmp.phase="boss5"
-				defend_dwall_tmp.suspend = true;
-				
-				launchAttack(121); --boss
+
+				if(debug["dwall_siege"]["skip5thBoss"]~=true)then
+					launchAttack(121); --boss
+				else
+					insertTrigger("wave13");
+				end;
 			</Effect>
 		</Event>
 		<Event trigger="unit_die" once="true">
@@ -1426,6 +1468,8 @@
 			</Condition>
 			<Effect>
 				defend_dwall_tmp.suspend = false;
+				insertTrigger("changeView");
+				addTriggerVariable("nextTrigger","sendingBlackmages")
 			</Effect>
 		</Event>
 		
@@ -1474,40 +1518,46 @@
 				setCutsceneMode(false);
 				
 				defend_dwall_tmp.phase="wave11"
-				defend_dwall_tmp.suspend = false;
 				
-				--skeletonBarrage(10);
-				--timedExecute('skeletonBarrage(10)',30000);
-				
-				launchAttack(94); --h
-				launchAttack(116); --b
-				launchAttack(125); --fs
-				launchAttack(131); --bm
-				launchAttack(127); --fs
-				launchAttack(117); --b
-				launchAttack(100); --h
-								
-				startTimer("wave14",50000);
+				if(debug["dwall_siege"]["skipWave10"]~=true)then
+					--skeletonBarrage(10);
+					--timedExecute('skeletonBarrage(10)',30000);
+					
+					launchAttack(94); --h
+					launchAttack(116); --b
+					launchAttack(125); --fs
+					launchAttack(131); --bm
+					launchAttack(127); --fs
+					launchAttack(117); --b
+					launchAttack(100); --h
+									
+					startTimer("wave14",50000);
+				else
+					insertTrigger("wave14");
+				end;
 			</Effect>
 		</Event>
 		
 		<Event trigger="wave14" once="true">
 			<Effect>
 				defend_dwall_tmp.phase="wave11"
-				defend_dwall_tmp.suspend = false;
 				
-				--skeletonBarrage(10);
-				--timedExecute('skeletonBarrage(10)',30000);
-				
-				launchAttack(94); --h
-				launchAttack(130); --bm
-				launchAttack(125); --fs
-				launchAttack(131); --bm
-				launchAttack(127); --fs
-				launchAttack(132); --bm
-				launchAttack(100); --h
-								
-				startTimer("boss6",50000);
+				if(debug["dwall_siege"]["skipWave10"]~=true)then
+					--skeletonBarrage(10);
+					--timedExecute('skeletonBarrage(10)',30000);
+					
+					launchAttack(94); --h
+					launchAttack(130); --bm
+					launchAttack(125); --fs
+					launchAttack(131); --bm
+					launchAttack(127); --fs
+					launchAttack(132); --bm
+					launchAttack(100); --h
+									
+					startTimer("boss6",50000);
+				else
+					insertTrigger("boss6");
+				end;
 			</Effect>
 		</Event>
 		
@@ -1524,10 +1574,112 @@
 			<Effect>
 				print("the siege has ended");
 				defend_dwall.siegeEnded = true;
-				insertTrigger("theSiegeEnds");
+				insertTrigger("changeView");
+				addTriggerVariable("nextTrigger","theSiegeEnds");
 			</Effect>
 		</Event>
-	
+		
+		<Event trigger="theSiegeEnds">
+			<Effect>
+				fadeIn(2000, {0.4,0.4,0.4},{1,1,1},{0.3,0.3,0.3});
+				groupObjectsArc(getPlayers(),"entry_south","locEntryGeneral");
+				addCameraPosition(0,"locLich",-65,35,9);
+				setCutsceneMode(true);
+				
+				initDialog()
+				addImportantSpeakers();
+				
+				speak("lich", _("Verdammt sollen sie sein!"),"warcry");
+				speak("lich", _("Verdammte Konzilsmagier!"),"angry");
+				speak("lich", _("Verdammte Gezeichnete!"),"angry");
+				speak("lich", _(""),"angry",2000);
+				speak("lich",_("Was solls."),"unhappy");
+				speak("lich",_("Am Ende werde ich doch triumphieren."),"unhappy");
+				speak("lich",_("Der Tod gewinnt immer."),"threaten");
+				changeTopic("theLichLeaves");
+			</Effect>
+		</Event>
+		<Event trigger="theLichLeaves">
+			<Effect>
+				defend_dwall_tmp.phase="aftermath"
+				
+				addUnitCommand(defend_dwall_tmp.lich,"walk","locEntryUndead");
+				
+				addCameraPosition(1000,"locLich",-65,35,9);
+				addCameraPosition(4000,"locEntryGeneral",-70,55,15);
+				
+				lookAt(defend_dwall_tmp.general,"entry_south");
+				lookAt(defend_dwall_tmp.council,"entry_south");
+			</Effect>
+		</Event>
+		
+		<Event trigger="all_camera_moves_complete">
+			<Condition>
+				return(defend_dwall_tmp.phase=="aftermath");
+			</Condition>
+			<Effect>
+				initDialog()
+				addImportantSpeakers();
+				
+				speak("greif",_("Es ist vorbei."),"injured2");
+				speak("darna",_("Und Dank der Unterstuetzung des Konzils steht die Stadt noch."),"amused");
+				--TODO ernstzunehmende Werte eintragen
+				if(500 > defend_dwall_tmp.penalty)then
+					speak("greif",_("Ich muss gestehen, ich haette mir in meinen kuensten Traeumen nicht ausmalen koennen, dass jemand so kaempft."),"thoughtful");
+					if(solo() and maleOnly())then
+						speak("greif", _("Es ist gut, dass er momentan auf unserer Seite steht."),"happy");
+					elseif(solo() and femaleOnly())then
+						speak("greif", _("Es ist gut, dass sie momentan auf unserer Seite steht."),"happy");
+					else
+						speak("greif", _("Es ist gut, dass sie momentan auf unserer Seite stehen."),"happy");
+					end;
+					
+					speak("arcopt",_("Wenn beide Seiten Seelen anzubieten haben, nimmt man natuerlich die, die auch bezahlt."),"grin");
+					speak("greif","","unhappy");
+					speak("greif",_("Danke, dass Ihr mich daran erinnert, warum ich Eure Sorte nicht leiden kann."),"unhappy");
+					speak("arcopt",_("Es gibt da keinen grossen Unterschied zu normalen Soeldnern."),"amused");
+					speak("arcopt",_("Ausser vielleicht, dass Gezeichnete nicht einfach mitten drin die Seiten wechseln."),"sneer");
+					speak("darna",_("Genug davon. Reden wir im Kommandozentrum weiter."),"aloof");
+					speak("darna",_("Es waere wohl nicht klug, die Soldaten mit der Nase auf ihre Retter zu stossen."),"aloof");
+					
+					defend_dwall.outcome="godlike";
+				elseif(1500 > defend_dwall_tmp.penalty)then
+					speak("greif",_("Allerdings."),"unhappy");
+					if(solo() and maleOnly())then
+						speak("greif",_("Ohne Euren 'Freund' hier saehe das anders aus."),"unhappy");
+					elseif(solo() and femaleOnly())then
+						speak("greif",_("Ohne Eure 'Freundin' hier saehe das anders aus."),"unhappy");
+					else
+						speak("greif",_("Ohne Eure 'Freunde' hier saehe das anders aus."),"unhappy");
+					end;
+					
+					defend_dwall.outcome="average";
+				elseif(2500 > defend_dwall_tmp.penalty)then
+					speak("greif",_("Immerhin effektiver, als man das von einer Soeldnertruppe haette erwarten koennen."),"injured2");
+					speak("greif",_("Aber wir haben einiges an Verlusten eingefahren."),"unhappy");
+					speak("greif",_("Ich hoffe, die kommen nicht so schnell auf die Idee, einen zweiten Angriff zu starten."),"unhappy");
+					speak("greif",_("Bisher hat sich dieser Lich zwar immer Zeit gelassen, aber bisher hatte er auch keine Unterstuetzung."),"unhappy");
+					speak("darna",_("Genug davon. Reden wir im Kommandozentrum weiter."),"aloof");
+					
+					defend_dwall.outcome="bad";
+				else
+					speak("greif",_("Welche Unterstuetzung denn bitte?"),"angry");
+					speak("greif",_("Zwei Drittel meiner Leute sind tot."),"angry");
+					speak("greif",_("Einen zweiten Angriff werden wir niemals ueberleben."),"angry");
+					speak("darna",_("Genug davon. Reden wir im Kommandozentrum weiter."),"aloof");
+					speak("darna",_("Ich will endlich von dem ganzen Blut weg."),"sad");
+					
+					defend_dwall.outcome="worst";
+				end;
+				
+				changeTopic("cleanAfterSiege")
+			</Effect>
+		</Event>
+		<Event trigger="cleanAfterSiege">
+			<Effect>
+				setCutsceneMode(false);
+			</Effect>
+		</Event>
 	</Region>
 </Quest>
 
