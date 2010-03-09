@@ -20,6 +20,128 @@
 #include "player.h"
 #include "itemfactory.h"
 
+void Ai::toString(CharConv* cv)
+{
+	cv->toBuffer(m_vars.m_sight_range);
+	cv->toBuffer(m_vars.m_shoot_range);
+	cv->toBuffer(m_vars.m_action_range);
+	cv->toBuffer(m_vars.m_randaction_prob);
+	cv->toBuffer(m_vars.m_chase_distance);
+	cv->toBuffer(m_vars.m_warn_radius);
+	
+	cv->toBuffer(m_chase_player_id);
+	for (int i=0; i< NR_AI_MODS; i++)
+		cv->toBuffer(m_mod_time[i]);
+	
+	cv->toBuffer(m_state);
+};
+
+void Ai::fromString(CharConv* cv)
+{
+	cv->fromBuffer(m_vars.m_sight_range);
+	cv->fromBuffer(m_vars.m_shoot_range);
+	cv->fromBuffer(m_vars.m_action_range);
+	cv->fromBuffer(m_vars.m_randaction_prob);
+	cv->fromBuffer(m_vars.m_chase_distance);
+	cv->fromBuffer(m_vars.m_warn_radius);
+	
+	cv->fromBuffer(m_chase_player_id);
+	for (int i=0; i< NR_AI_MODS; i++)
+		cv->fromBuffer(m_mod_time[i]);
+	
+	cv->fromBuffer(m_state);
+}
+
+int Ai::getValue(std::string valname)
+{
+	int ret = 0;
+	if (valname == "ai_state")
+	{
+		if (m_state == Ai::ACTIVE)
+		{
+			lua_pushstring(EventSystem::getLuaState() ,"active");
+			ret =1;
+		}
+		else if (m_state == Ai::INACTIVE)
+		{
+			lua_pushstring(EventSystem::getLuaState() ,"inactive");
+			ret =1;
+		}
+	}
+	else if (valname == "ai_sight_range")
+	{
+		lua_pushnumber(EventSystem::getLuaState() ,m_vars.m_sight_range);
+		ret =1;
+	}
+	else if (valname == "ai_shoot_range")
+	{
+		lua_pushnumber(EventSystem::getLuaState() ,m_vars.m_shoot_range);
+		ret =1;
+	}
+	else if (valname == "ai_chase_distance")
+	{
+		lua_pushnumber(EventSystem::getLuaState() ,m_vars.m_chase_distance);
+		ret =1;
+	}
+	else if (valname == "ai_warn_radius")
+	{
+		lua_pushnumber(EventSystem::getLuaState() ,m_vars.m_warn_radius);
+		ret =1;
+	}
+	return ret;
+}
+
+bool Ai::setValue(std::string valname, int& event_mask)
+{
+	bool ret = false;
+	if (valname == "ai_state")
+	{
+		std::string state= lua_tostring(EventSystem::getLuaState() ,-1);
+		lua_pop(EventSystem::getLuaState(), 1);
+		if (state == "active")
+		{
+			m_state = Ai::ACTIVE;
+			event_mask |= NetEvent::DATA_AI;
+			return true;
+		}
+		else if (state =="inactive")
+		{
+			m_state = Ai::INACTIVE;
+			event_mask |= NetEvent::DATA_AI;
+			return true;
+		}
+	}
+	else if (valname == "ai_sight_range")
+	{
+		m_vars.m_sight_range = lua_tonumber(EventSystem::getLuaState(),-1);
+		lua_pop(EventSystem::getLuaState(), 1);
+		event_mask |= NetEvent::DATA_AI;
+		return true;
+	}
+	else if (valname == "ai_shoot_range")
+	{
+		m_vars.m_shoot_range = lua_tonumber(EventSystem::getLuaState(),-1);
+		lua_pop(EventSystem::getLuaState(), 1);
+		event_mask |= NetEvent::DATA_AI;
+		return true;
+	}
+	else if (valname == "ai_chase_distance")
+	{
+		m_vars.m_chase_distance = lua_tonumber(EventSystem::getLuaState(),-1);
+		lua_pop(EventSystem::getLuaState(), 1);
+		event_mask |= NetEvent::DATA_AI;
+		return true;
+	}
+	else if (valname == "ai_warn_radius")
+	{
+		m_vars.m_warn_radius = lua_tonumber(EventSystem::getLuaState(),-1);
+		lua_pop(EventSystem::getLuaState(), 1);
+		event_mask |= NetEvent::DATA_AI;
+		return true;
+	}
+	return ret;
+}
+
 Monster::Monster( int id) : Creature( id)
 {
 	bool tmp=Monster::init();
@@ -758,20 +880,27 @@ void Monster::clearCommand(bool success, bool norepeat)
 int Monster::getValue(std::string valname)
 {
 	int ret=0;
-	if (valname == "ai_state")
+	ret = m_ai.getValue(valname);
+	
+	if (ret == 0)
 	{
-		if (m_ai.m_state == Ai::ACTIVE)
+		if (valname.find("ai_ability_rating:") == 0)
 		{
-			lua_pushstring(EventSystem::getLuaState() ,"active");
-			ret =1;
-		}
-		else if (m_ai.m_state == Ai::INACTIVE)
-		{
-			lua_pushstring(EventSystem::getLuaState() ,"inactive");
-			ret =1;
+			std::string ablt = valname.substr(18); // ai_ability_rating: abschneiden
+			DEBUG("ability %s",ablt.c_str());
+			
+			std::map<std::string, AbilityInfo>::iterator at;
+			at = getBaseAttrMod()->m_abilities.find(ablt);
+			if (at != getBaseAttrMod()->m_abilities.end())
+			{
+				lua_pushnumber(EventSystem::getLuaState() ,at->second.m_rating);
+				
+				ret = 1;
+			}
 		}
 	}
-	else
+	
+	if (ret == 0)
 	{
 		ret = Creature::getValue(valname);
 	}
@@ -781,22 +910,28 @@ int Monster::getValue(std::string valname)
 bool Monster::setValue(std::string valname)
 {
 	bool ret = false;
-	if (valname == "ai_state")
+	ret = m_ai.setValue(valname, getEventMaskRef());
+	
+	if (ret == 0)
 	{
-		std::string state= lua_tostring(EventSystem::getLuaState() ,-1);
-		lua_pop(EventSystem::getLuaState(), 1);
-		if (state == "active")
+		if (valname.find("ai_ability_rating:") == 0)
 		{
-			m_ai.m_state = Ai::ACTIVE;
-			ret = true;
-		}
-		else if (state =="inactive")
-		{
-			m_ai.m_state = Ai::INACTIVE;
-			ret = true;
+			std::string ablt = valname.substr(18); // ai_ability_rating: abschneiden
+			DEBUG("ability %s",ablt.c_str());
+			
+			std::map<std::string, AbilityInfo>::iterator at;
+			at = getBaseAttrMod()->m_abilities.find(ablt);
+			if (at != getBaseAttrMod()->m_abilities.end())
+			{
+				at->second.m_rating = lua_tonumber(EventSystem::getLuaState(),-1);
+				lua_pop(EventSystem::getLuaState(), 1);
+				ret = true;
+				// TODO: An Clients uebertragen
+			}
 		}
 	}
-	else
+	
+	if (!ret)
 	{
 		ret = Creature::setValue(valname);
 	}
@@ -804,5 +939,34 @@ bool Monster::setValue(std::string valname)
 }
 
 
+void Monster::toString(CharConv* cv)
+{
+	Creature::toString(cv);
+	m_ai.toString(cv);
+};
 
+void Monster::fromString(CharConv* cv)
+{
+	Creature::fromString(cv);
+	m_ai.fromString(cv);
+}
 
+void Monster::writeNetEvent(NetEvent* event, CharConv* cv)
+{
+	Creature::writeNetEvent(event,cv);
+	
+	if (event->m_data & NetEvent::DATA_AI)
+	{
+		m_ai.toString(cv);
+	}
+}
+
+void Monster::processNetEvent(NetEvent* event, CharConv* cv)
+{
+	Creature::processNetEvent(event,cv);
+	
+	if (event->m_data & NetEvent::DATA_AI)
+	{
+		m_ai.fromString(cv);
+	}
+}

@@ -143,6 +143,34 @@ struct Ai
 	 * \brief Der zu schuetzende Punkt
 	 */
 	Vector m_guard_pos;
+	
+	/**
+	 * \fn virtual void toString(CharConv* cv)
+	 * \brief Konvertiert das Objekt in einen String und schreibt es in der Puffer
+	 * \param cv Ausgabepuffer
+	 */
+	void toString(CharConv* cv);
+	
+	/**
+	 * \fn virtual void fromString(CharConv* cv)
+	 * \brief Erzeugt das Objekt aus einem String
+	 * \param cv Eingabepuffer
+	 */
+	void fromString(CharConv* cv);
+	
+	/**
+	 * \fn virtual int getValue(std::string valname)
+	 * \brief Schiebt den gewuenschten Attributwert eines Objektes auf den Lua Stack
+	 * \param valname Name des Wertes
+	 */
+	int getValue(std::string valname);
+	
+		/**
+	 * \fn virtual bool setValue(std::string valname, int& event_mask)
+	 * \brief Setzt den gewuenschten Attributwert eines Objektes
+	 * \param valname Name des Wertes
+	*/
+	bool setValue(std::string valname, int& event_mask);
 };
 
 /**
@@ -297,6 +325,34 @@ class Monster : public Creature {
 		{
 			return m_ai;
 		}
+		
+		/**
+		 * \fn virtual void toString(CharConv* cv)
+		 * \brief Konvertiert das Objekt in einen String und schreibt es in der Puffer
+		 * \param cv Ausgabepuffer
+		 */
+		virtual void toString(CharConv* cv);
+	
+		/**
+		 * \fn virtual void fromString(CharConv* cv)
+		 * \brief Erzeugt das Objekt aus einem String
+		 * \param cv Eingabepuffer
+		 */
+		virtual void fromString(CharConv* cv);
+		
+		/**
+		 * \fn virtual void writeNetEvent(NetEvent* event, CharConv* cv)
+		 * \brief Schreibt die Daten zu einem NetEvent in den Bitstream
+		 * \param event NetEvent das beschrieben wird
+		 * \param cv Bitstream
+		 */
+		virtual void writeNetEvent(NetEvent* event, CharConv* cv);
+	
+		/**
+		 * \fn virtual void processNetEvent(NetEvent* event, CharConv* cv)
+		 * \brief Fuehrt die Wirkung eines NetEvents auf das Objekt aus. Weitere Daten werden aus dem Bitstream gelesen
+		 */
+		virtual void processNetEvent(NetEvent* event, CharConv* cv);
 	
 	protected:
 		
