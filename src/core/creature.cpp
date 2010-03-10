@@ -1944,9 +1944,24 @@ void Creature::calcStatusModCommand()
 }
 
 void Creature::calcWalkDir(Vector goal,WorldObject* goalobj)
-{
+{	
 	// maximale Entfernung bei der normale Wegfindung genommen wird
 	int pathmaxdist = 16;
+	
+	// Qualitaet der Suche, geht quadratisch in die Laufzeit ein
+	int qual=4;
+	
+	float recalctime = 500;
+	
+	bool highquality = true;
+	
+	if (getType() == "MONSTER")
+	{
+		highquality = false;
+		pathmaxdist = 12;
+		qual = 2;
+		recalctime = 1000;
+	}
 	
 	// eigene Position
 	Vector& pos = getShape()->m_center;
@@ -1984,8 +1999,7 @@ void Creature::calcWalkDir(Vector goal,WorldObject* goalobj)
 			DEBUGX("allocating new pot field");
 			m_path_info = new PathfindInfo;
 
-			// Qualitaet der Suche, geht quadratisch in die Laufzeit ein
-			int qual=4;
+			
 			int dim = 2*pathmaxdist*qual+1;
 
 			// Potentialfeld
@@ -2026,7 +2040,7 @@ void Creature::calcWalkDir(Vector goal,WorldObject* goalobj)
 				recalc = true;
 
 			// Potentialfeld ist aelter als 500 ms, neu berechnen
-			if (m_path_info->m_timer>500)
+			if (m_path_info->m_timer > recalctime)
 				recalc = true;
 
 		}
