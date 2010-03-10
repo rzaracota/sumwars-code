@@ -182,7 +182,7 @@
 
 	</BasicAttributes>
 	
-	<Geometry radius="2.0" />
+	<Geometry radius="1.0" />
 	
 	<AI ai_sight_range="10" ai_chase_range="20"/>
 </Monster>

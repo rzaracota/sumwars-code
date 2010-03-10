@@ -1,4 +1,4 @@
-﻿
+
 <!-- Tolec -->
 <Monster type="NPC" subtype="tolec" name="Tolec" fraction="human" race="human" layer="NORMAL">
 	<RenderInfo name="tolec" />
@@ -513,8 +513,8 @@
 	<BasicAttributes
 					experience="0"
 					level="20"
-					max_health="760"
-					armor="90"
+					max_health="1130"
+					armor="120"
 					block="0"
 					attack="180"
 					strength="70"
@@ -522,9 +522,9 @@
 					magic_power="25"
 					willpower="40"
 					resistances_physical="20"
-					resistances_air="15"
-					resistances_ice="15"
-					resistances_fire="15"
+					resistances_air="25"
+					resistances_ice="25"
+					resistances_fire="25"
 					resistances_cap_physical="50"
 					resistances_cap_air="50"
 					resistances_cap_ice="50"
@@ -559,14 +559,14 @@
 	<BasicAttributes
 		experience="30"
 		level="20"
-		max_health="500"
-		armor="60"
+		max_health="800"
+		armor="70"
 		block="0"
 		attack="120"
 		power="90"
-		strength="75"
+		strength="50"
 		dexterity="40"
-		magic_power="55"
+		magic_power="30"
 		willpower="30"
 		resistances_physical="25"
 		resistances_air="0"
@@ -582,12 +582,12 @@
 		attack_range="0.5"
 	>
 		<Ability type="walk" />
-		<Ability type="attack"  rating="1"/>
+		<Ability type="fire_attack"  rating="1"/>
 		<Ability type="die" />
 
 		<Ability type="noaction" />
 		<Ability type="summoned" time="2000"/>
-		<Ability type="fire_ball"  rating="3"/>
+		<Ability type="fire_ball"  rating="3" all_target_rating="0.5" all_target_rating_radius="1.5"/>
 
 	</BasicAttributes>
 	

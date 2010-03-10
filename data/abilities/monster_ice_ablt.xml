@@ -55,7 +55,6 @@
 	</Effect>
 	<Projectile type="guided_icicle" speed="12000" />
 	<Damage>
-		<CppImplementation type="range_attack" />
 		<LuaImplementation>
 			local magic = get(self,"magic_power");
 			local idmg = getDamageValue("ice_dmg");

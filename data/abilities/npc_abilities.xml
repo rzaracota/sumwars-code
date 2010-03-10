@@ -1,4 +1,4 @@
-﻿<Ability type="freezingDeath"
+<Ability type="freezingDeath"
 		 name="Freezing Death"
 		 description="The mage conjures a devastating ring of ice, that damages enemies in a circle around him."
 		 time="400.000000"
@@ -14,7 +14,6 @@
 	<Projectile type="freezingDeath" />
 	<Damage>
 		<CppImplementation type="magic_attack" />
-		<CppImplementation type="weapon_damage" />
 		<LuaImplementation>
 			local magic = get(self,"magic_power");
 			local fdmg = getDamageValue("ice_dmg");
@@ -39,7 +38,6 @@
 	<Projectile type="fire_bolt" speed="15000" />
 	<Damage>
 		<CppImplementation type="magic_attack" />
-		<CppImplementation type="weapon_damage" />
 		<LuaImplementation>
 			local magic = get(self,"magic_power");
 			local fdmg = getDamageValue("fire_dmg");
@@ -54,7 +52,7 @@
 		 description="The mage casts a bolt of fire, that explodes upon hitting an enemy. Other enemies nearby the victim are also caught in the explosion." 
 		 time="1001.000000" 
 		 timer_nr="1.000000"
-		 timer_value="6000.000000" 
+		 timer_value="4500.000000" 
 		 base_ability="magic_attack" 
 		 critical_percent="0.800000" 
 		 target_type="ranged">
@@ -65,7 +63,6 @@
 	<Projectile type="fire_ball" speed="15000" />
 	<Damage>
 		<CppImplementation type="magic_attack" />
-		<CppImplementation type="weapon_damage" />
 		<LuaImplementation>
 			local magic = get(self,"magic_power");
 			local fdmg = getDamageValue("fire_dmg");
@@ -91,11 +88,11 @@
 		<Projectile type="fire_wall" />
 		<Damage>
 			<CppImplementation type="magic_attack" />
-			<CppImplementation type="weapon_damage" />
+			<CppImplementation type="small_numbers" />
 			<LuaImplementation>
 				local magic = get(self,"magic_power");
 				local fdmg = getDamageValue("fire_dmg");
-				setDamageValue("fire_dmg", {fdmg[1] + magic*0.33, fdmg[2] + magic*0.5});
+				setDamageValue("fire_dmg", {fdmg[1] + magic*0.1, fdmg[2] + magic*0.2});
 				setDamageValue("ice_dmg",{0,0});
 			</LuaImplementation>	
 		</Damage>

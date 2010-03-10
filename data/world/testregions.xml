@@ -82,14 +82,21 @@
 			 <Event trigger ="create_region" once = "true">
 				 <Effect>
 					 local pos = getLocation("entry_south");
-					 pos[2] = pos[2]-12;
-					 pos[1] = pos[1]+12;
+					 pos[2] = pos[2]-6;
+					 pos[1] = pos[1]+6;
 					 addLocation('GuardLocation', pos);
 					 addArea('GuardArea',{'circle',pos,12});
-					 pos[2] = pos[2]-8;
-					 pos[1] = pos[1]+8;
+					 pos[2] = pos[2]-4;
+					 pos[1] = pos[1]+4;
 					 addLocation('SkelLocation', pos);
-					 guard = createObject('guard','GuardLocation');
+					 pos[2] = pos[2]+1;
+					 pos[1] = pos[1]+1;
+					 addLocation('SkelLocation2', pos);
+					 pos[2] = pos[2]+1;
+					 pos[1] = pos[1]+1;
+					 addLocation('SkelLocation3', pos);
+					 
+					 guard = createObject('aisen_mage','GuardLocation');
 				 </Effect>
 			 </Event>
 			 <Event trigger ="player_moved" once = "true">
@@ -97,14 +104,11 @@
 					 return (unitIsInArea(trigger.player,'GuardArea'))
 				 </Condition>
 				 <Effect>
-					 skel = createObject('sword_skel','SkelLocation');
-					 addUnitCommand(skel, "attack", guard)
+					 skel = createObject('axe_skel_siege','SkelLocation');
+					 skel = createObject('axe_skel_siege','SkelLocation2');
+					 skel = createObject('axe_skel_siege','SkelLocation3');
 				 </Effect>
 			</Event>
-			
-			<NamedObjectGroups>
-				<NameObjectGroup name="temple" object_group="goblinSanctuary" priority="4"/>
-			</NamedObjectGroups>
 		 </Region>
 		 
 		 <Region id="1002" name="spawnAbyss">

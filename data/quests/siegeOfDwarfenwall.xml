@@ -378,16 +378,16 @@
 				debug["defend_dwall"] = false;
 				debug["dwall_siege"]={};
 				debug["dwall_siege"]["skipIntro"]=true;
-				debug["dwall_siege"]["skipWave1"]=true;
-				debug["dwall_siege"]["skipWave2"]=true;
-				debug["dwall_siege"]["skipWave3"]=true;
-				debug["dwall_siege"]["skipWave4"]=true;
-				debug["dwall_siege"]["skipFirePrep"]=true;
-				debug["dwall_siege"]["skipWave5"]=true;
-				debug["dwall_siege"]["skipWave6"]=true;
-				debug["dwall_siege"]["skip2ndBoss"]=true;
-				debug["dwall_siege"]["skipWave7"]=true;
-				debug["dwall_siege"]["skipWave8"]=true;
+				debug["dwall_siege"]["skipWave1"]=false;
+				debug["dwall_siege"]["skipWave2"]=false;
+				debug["dwall_siege"]["skipWave3"]=false;
+				debug["dwall_siege"]["skipWave4"]=false;
+				debug["dwall_siege"]["skipFirePrep"]=false;
+				debug["dwall_siege"]["skipWave5"]=false;
+				debug["dwall_siege"]["skipWave6"]=false;
+				debug["dwall_siege"]["skip2ndBoss"]=false;
+				debug["dwall_siege"]["skipWave7"]=false;
+				debug["dwall_siege"]["skipWave8"]=false;
 				debug["dwall_siege"]["skip3rdBoss"]=true
 				debug["dwall_siege"]["skipWave9"]=true;
 				debug["dwall_siege"]["skipWave10"]=true;
@@ -401,7 +401,7 @@
 				debug["dwall_siege"]["skip6thBoss"]=false;
 				
 				--this will set all debugvariables to false. Be sure to add new variables if you want it to keep functioning. Location: dwarfenwall.lua
-				setDebugToFalse();
+				--setDebugToFalse();
 				
 				return (defend_dwall.siegeEnded ~= true);
 			</Condition>
@@ -417,68 +417,68 @@
 				defend_dwall_tmp.units = {};
 				
 				--guards of the second defense-line
-				createUnitIndex(1, "locGuard1", 10, "guard_siege", 5, 4000, "locSpawnGuards")
+				createUnitIndex(1, "locGuard1", 10, "guard_siege", 3, 30000, "locSpawnGuards")
 				setGuard(1,-90)
-				createUnitIndex(2, "locGuard2", 10, "guard_siege", 5, 4000, "locSpawnGuards")
+				createUnitIndex(2, "locGuard2", 10, "guard_siege", 3, 30000, "locSpawnGuards")
 				setGuard(2,-90)
-				createUnitIndex(3, "locGuard3", 10, "guard_siege", 5, 4000, "locSpawnGuards")
+				createUnitIndex(3, "locGuard3", 10, "guard_siege", 3, 30000, "locSpawnGuards")
 				setGuard(3,-90)
-				createUnitIndex(4, "locGuard4", 10, "guard_siege", 5, 4000, "locSpawnGuards")
+				createUnitIndex(4, "locGuard4", 10, "guard_siege", 3, 30000, "locSpawnGuards")
 				setGuard(4,-90)
 				
 				--guards of the first defense-line
-				createUnitIndex(5, "locGuard5", 10, "guard_siege", 1, 4000, "locSpawnGuards")
+				createUnitIndex(5, "locGuard5", 10, "guard_siege", 1, 30000, "locSpawnGuards")
 				setGuard(5,-90)
-				createUnitIndex(6, "locGuard6", 10, "guard_siege", 1, 4000, "locSpawnGuards")
+				createUnitIndex(6, "locGuard6", 10, "guard_siege", 1, 30000, "locSpawnGuards")
 				setGuard(6,-90)
-				createUnitIndex(9, "locGuard9", 10, "guard_siege", 1, 4000, "locSpawnGuards")
+				createUnitIndex(9, "locGuard9", 10, "guard_siege", 1, 30000, "locSpawnGuards")
 				setGuard(9,-90)
-				createUnitIndex(10, "locGuard10", 10, "guard_siege", 1, 4000, "locSpawnGuards")
+				createUnitIndex(10, "locGuard10", 10, "guard_siege", 1, 30000, "locSpawnGuards")
 				setGuard(10,-90)
-				createUnitIndex(11, "locGuard11", 10, "guard_siege", 1, 4000, "locSpawnGuards")
+				createUnitIndex(11, "locGuard11", 10, "guard_siege", 1, 30000, "locSpawnGuards")
 				setGuard(11,-90)
-				createUnitIndex(12, "locGuard12", 10, "guard_siege", 1, 4000, "locSpawnGuards")
+				createUnitIndex(12, "locGuard12", 10, "guard_siege", 1, 30000, "locSpawnGuards")
 				setGuard(12,-90)
 				
 				--mages and bowman of the second defense-line
-				createUnitIndex(13, "locBowmen2", 2, "aisen_mage", 25, 6000, "locSpawnGuards")
+				createUnitIndex(13, "locBowmen2", 2, "aisen_mage", 10, 60000, "locSpawnGuards")
 				setGuard(13,-90);
-				createUnitIndex(14, "locBowmen3", 2,"aisen_mage", 25, 6000, "locSpawnGuards")
+				createUnitIndex(14, "locBowmen3", 2,"aisen_mage", 10, 60000, "locSpawnGuards")
 				setGuard(14,-90);
-				createUnitIndex(15, "locBowmen1", 5,"bowman_siege", 10, 4000, "locSpawnGuards")
+				createUnitIndex(15, "locBowmen1", 5,"bowman_siege", 3, 40000, "locSpawnGuards")
 				setGuard(15,-90);
 				--bowmen of the first defense-line
-				createUnitIndex(14, "locBowmen4", 5, "bowman_siege", 3, 4000, "locSpawnGuards")
+				createUnitIndex(14, "locBowmen4", 5, "bowman_siege", 1, 40000, "locSpawnGuards")
 				setGuard(14,-90);
-				createUnitIndex(16, "locBowmen6", 5, "bowman_siege", 3, 4000, "locSpawnGuards")
+				createUnitIndex(16, "locBowmen6", 5, "bowman_siege", 1, 40000, "locSpawnGuards")
 				setGuard(16,-90);
-				createUnitIndex(17, "locBowmen7", 5, "bowman_siege", 3, 4000, "locSpawnGuards")
+				createUnitIndex(17, "locBowmen7", 5, "bowman_siege", 1, 40000, "locSpawnGuards")
 				setGuard(17,-90);
 				
 				--Darna's fireelementals
-				createUnitIndex(18, "locElemental1", 15, "fire_guard", 30, 4000, "locElemental1")
+				createUnitIndex(18, "locElemental1", 12, "fire_guard", 6, 40000, "locElemental1")
 				--local guard = setGuard(18,-90);
-				createUnitIndex(19, "locElemental2", 15, "fire_guard", 30, 4000, "locElemental2")
+				createUnitIndex(19, "locElemental2", 12, "fire_guard", 6, 40000, "locElemental2")
 				--local guard = setGuard(19,-90);
 				
 				--elite-guards of Greif and Darna
-				createUnitIndex(7, "locGeneralGuard1", 10, "elite_siege", 50, 4000, "locSpawnGuards")
+				createUnitIndex(7, "locGeneralGuard1", 10, "elite_siege", 30, 80000, "locSpawnGuards")
 				--local guard = setGuard(7,-90)
-				createUnitIndex(8, "locGeneralGuard2", 10, "dwarfenwall_councilguard", 50, 4000, "locSpawnGuards")
+				createUnitIndex(8, "locGeneralGuard2", 10, "dwarfenwall_councilguard", 30, 80000, "locSpawnGuards")
 				--local guard = setGuard(8,-90);
 			--aisen defenses
-				createUnitIndex(15, "locDefender1", 15, "bowman_siegeDefense", 3, 4000, "locSpawnBow1","newDefender");
+				createUnitIndex(15, "locDefender1", 15, "bowman_siegeDefense", 3, 40000, "locSpawnBow1","newDefender");
 				local guard = setGuard(15,-90);
-				createUnitIndex(20, "locDefender3", 15, "bowman_siegeDefense", 3, 4000, "locSpawnBow1","newDefender");
+				createUnitIndex(20, "locDefender3", 15, "bowman_siegeDefense", 3, 40000, "locSpawnBow1","newDefender");
 				local guard = setGuard(20,-90);
-				createUnitIndex(21, "locDefender4", 15, "bowman_siegeDefense", 3, 4000, "locSpawnBow2","newDefender");
+				createUnitIndex(21, "locDefender4", 15, "bowman_siegeDefense", 3, 40000, "locSpawnBow2","newDefender");
 				local guard = setGuard(21,-90);
-				createUnitIndex(22, "locDefender6", 15, "bowman_siegeDefense", 3, 4000, "locSpawnBow2","newDefender");
+				createUnitIndex(22, "locDefender6", 15, "bowman_siegeDefense", 3, 40000, "locSpawnBow2","newDefender");
 				local guard = setGuard(22,-90);
 				
-				createUnitIndex(23, "locDefender2", 15, "aisen_mageDefense", 3, 4000, "locSpawnBow1","newDefender");
+				createUnitIndex(23, "locDefender2", 15, "aisen_mageDefense", 3, 40000, "locSpawnBow1","newDefender");
 				local guard = setGuard(23,-90);
-				createUnitIndex(24, "locDefender5", 15, "aisen_mageDefense", 3, 4000, "locSpawnBow2","newDefender");
+				createUnitIndex(24, "locDefender5", 15, "aisen_mageDefense", 3, 40000, "locSpawnBow2","newDefender");
 				local guard = setGuard(24,-90);
 				
 				
@@ -577,6 +577,10 @@
 				createAttackIndex(130, "locSpawn2", defend_dwall_tmp.attackLeft, "blackMageDwall");
 				createAttackIndex(131, "locSpawn4", defend_dwall_tmp.attackMiddle, "blackMageDwall");
 				createAttackIndex(132, "locSpawn6", defend_dwall_tmp.attackRight, "blackMageDwall");
+				
+				createAttackIndex(1001, "locSpawn2", defend_dwall_tmp.attackLeft, "siegeWave_1a");
+				createAttackIndex(1002, "locSpawn4", defend_dwall_tmp.attackMiddle, "blackMageDwall");
+				createAttackIndex(1003, "locSpawn6", defend_dwall_tmp.attackRight, "blackMageDwall");
 			</Effect>
 		</Event>
 		
@@ -997,6 +1001,7 @@
 					
 					startTimer("wave2",45000);
 				else
+					setCutsceneMode(false);
 					insertTrigger("wave2");
 				end;
 			</Effect>
@@ -1070,7 +1075,7 @@
 			</Condition>
 			<Effect>
 				insertTrigger("changeView");
-				addTriggerVariable("nextTrigger","firePrep");			
+				addTriggerVariable("nextTrigger","firePrep");
 			</Effect>
 		</Event>
 		

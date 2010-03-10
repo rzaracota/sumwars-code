@@ -353,19 +353,19 @@
 	<BasicAttributes
 					experience="45"
 					level="10"
-					max_health="160"
-					armor="25"
-					block="15"
+					max_health="360"
+					armor="60"
+					block="60"
 					attack="140"
 					power="80"
 					strength="20"
-					dexterity="45"
+					dexterity="60"
 					magic_power="5"
 					willpower="20"
 					resistances_physical="0"
 					resistances_air="20"
 					resistances_ice="20"
-					resistances_fire="0"
+					resistances_fire="10"
 					resistances_cap_physical="50"
 					resistances_cap_air="50"
 					resistances_cap_ice="50"
@@ -393,7 +393,7 @@
 	<BasicAttributes
 					experience="0"
 					level="19"
-					max_health="300"
+					max_health="320"
 					armor="60"
 					block="0"
 					attack="50"
@@ -419,7 +419,7 @@
 		<Ability type="walk"/>
 		
 		<Ability type="avaera_firebolt" rating="2"/>
-		<Ability type="avaera_fireball" rating="1" all_target_rating="0.5"/>
+		<Ability type="avaera_fireball" rating="1.2" all_target_rating="0.5" all_target_rating_radius="1.5"/>
 		<Ability type="avaera_firecolumn" rating="3"/>
 		
 		<Ability type="die"/>
@@ -442,13 +442,13 @@
 	<BasicAttributes
 					experience="0"
 					level="19"
-					max_health="300"
+					max_health="320"
 					armor="60"
 					block="0"
 					attack="50"
 					strength="32"
 					dexterity="38"
-					magic_power="70"
+					magic_power="45"
 					willpower="43"
 					resistances_physical="10"
 					resistances_air="17"
@@ -468,8 +468,8 @@
 		<Ability type="walk"/>
 		
 		<Ability type="avaera_firebolt" rating="2"/>
-		<Ability type="avaera_fireball" rating="1" all_target_rating="0.5"/>
-		<Ability type="avaera_firecolumn" rating="3"/>
+		<Ability type="avaera_fireball" rating="1.2" all_target_rating="0.5" all_target_rating_radius="1.5"/>
+		<!-- <Ability type="avaera_firecolumn" rating="3"/> -->
 		
 		<Ability type="die"/>
 		
@@ -490,14 +490,14 @@
 	<BasicAttributes
 					experience="0"
 					level="20"
-					max_health="500"
-					armor="60"
+					max_health="720"
+					armor="90"
 					block="0"
 					attack="40"
-					strength="50"
-					dexterity="35"
+					strength="60"
+					dexterity="40"
 					magic_power="15"
-					willpower="20"
+					willpower="25"
 					resistances_physical="30"
 					resistances_air="10"
 					resistances_ice="10"
@@ -531,10 +531,10 @@
 	<RenderInfo name="bowman_siege" />
 	<BasicAttributes
 					experience="45"
-					level="10"
-					max_health="160"
-					armor="25"
-					block="15"
+					level="16"
+					max_health="360"
+					armor="60"
+					block="60"
 					attack="140"
 					power="80"
 					strength="20"
@@ -544,7 +544,7 @@
 					resistances_physical="0"
 					resistances_air="20"
 					resistances_ice="20"
-					resistances_fire="0"
+					resistances_fire="10"
 					resistances_cap_physical="50"
 					resistances_cap_air="50"
 					resistances_cap_ice="50"
@@ -572,9 +572,9 @@
 	<BasicAttributes
 					experience="0"
 					level="24"
-					max_health="650"
+					max_health="1250"
 					armor="130"
-					block="40"
+					block="50"
 					attack="120"
 					strength="100"
 					dexterity="45"

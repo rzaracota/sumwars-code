@@ -210,7 +210,7 @@ AIR
 		special_flags="moegliche Flags: siehe oben"
 		immunity="moegliche Flags: siehe oben"
 	>
-		<Ability type="" time="" timer_nr="" timer_value="" rating="" all_target_rating="" random_rating=""/>
+		<Ability type="" time="" timer_nr="" timer_value="" rating="" all_target_rating="" all_target_rating_radius="" random_rating=""/>
 		...
 		<SpecialFlag type=""/>
 		...

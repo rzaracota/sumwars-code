@@ -158,6 +158,10 @@
 	<Entity source="fireElemSmall.mesh"/>
 	<ParticleSystem objectname="rightHand" source="FireElemHand" bone="fingerjointRight"/>
 	<ParticleSystem objectname="rightLeft" source="FireElemHand" bone="fingerJointLeft"/>
+	
+	<Action name="fire_attack">
+		<Animation name="attack1" />
+	</Action>
 </RenderInfo>
 
 <RenderInfo name="fireSlug" parent="slugbase">

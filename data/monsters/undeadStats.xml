@@ -1092,9 +1092,9 @@
 		max_health="450"
 		armor="40"
 		block="0"
-		power="150"
+		power="120"
 		attack="80"
-		strength="50"
+		strength="40"
 		dexterity="30"
 		magic_power="0"
 		willpower="40"
@@ -1144,10 +1144,10 @@
 					max_health="250"
 					armor="25"
 					block="0"
-					power="100"
-					attack="150"
+					power="85"
+					attack="130"
 					strength="30"
-					dexterity="60"
+					dexterity="50"
 					magic_power="0"
 					willpower="40"
 					resistances_physical="20"
@@ -1195,9 +1195,9 @@
 		max_health="500"
 		armor="48"
 		block="0"
-		power="200"
+		power="150"
 		attack="90"
-		strength="60"
+		strength="50"
 		dexterity="30"
 		magic_power="0"
 		willpower="40"
@@ -1246,9 +1246,9 @@
 		max_health="700"
 		armor="40"
 		block="0"
-		power="250"
-		attack="80"
-		strength="70"
+		power="200"
+		attack="70"
+		strength="60"
 		dexterity="25"
 		magic_power="0"
 		willpower="40"
@@ -1858,7 +1858,8 @@
 	<Ability type="guided_icicle" rating="2"/>
 	<Ability type="monster_freeze" rating="3"/>
 	<Ability type="noaction"/>
-
+	<Ability type="summoned" time="2000" />
+	
 	</BasicAttributes>
 	
 	<Geometry radius="1.0" />
@@ -1902,6 +1903,7 @@
 	<Ability type="ice_ball" rating="2"/>
 	<Ability type="monster_freeze" rating="3"/>
 	<Ability type="noaction"/>
+	<Ability type="summoned" time="2000" />
 
 	</BasicAttributes>
 	
@@ -1943,9 +1945,9 @@
 	<Ability type="walk" />
 	<Ability type="magic_attack_ice" rating="1"/>
 	<Ability type="die" time = "3000" />
-	<Ability type="ice_ball" rating="1" all_target_rating="0.5"/>
+	<Ability type="ice_ball" rating="1" all_target_rating="0.6" all_target_rating_radius="1.5"/>
 	<Ability type="guided_icicle" rating="2"/>
-	<Ability type="monster_frost_wave" rating="3"/>
+	<Ability type="monster_frost_wave" rating="0" all_target_rating="2.5" all_target_rating_radius="7"/>
 	<Ability type="noaction"/>
 
 	</BasicAttributes>
@@ -2031,8 +2033,8 @@
 	<Ability type="walk" />
 	<Ability type="magic_attack_shadow" rating="1"/>
 	<Ability type="die" time = "3000" />
-	<Ability type="black_storm" rating="2" all_target_rating="0.3"/>
-	<Ability type="shadow_magic_shield" rating="0.5" all_target_rating="0.5"/>
+	<Ability type="black_storm" rating="2" all_target_rating="0.3" all_target_rating_radius="5"/>
+	<Ability type="shadow_magic_shield" rating="0.5" all_target_rating="0.5" all_target_rating_radius="12"/>
 	<Ability type="noaction"/>
 
 	</BasicAttributes>

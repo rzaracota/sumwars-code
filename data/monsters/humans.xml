@@ -716,7 +716,7 @@
 	<BasicAttributes
 		experience="1000"
 		level="12"
-		max_health="3000"
+		max_health="1200"
 		armor="30"
 		block="0"
 		attack="100"
