@@ -27,6 +27,7 @@ struct AbilityInfo
 		m_timer =0;
 		m_rating=0;
 		m_all_target_rating =0;
+		m_all_target_rating_range =0;
 		m_random_rating=0;
 	}
 	
@@ -60,6 +61,11 @@ struct AbilityInfo
 	 * \brief Bewertung, die mit der Anzahl Ziele Multipliziert wird
 	 */
 	float m_all_target_rating;
+	
+	/**
+	 * \brief Radius des Umkreises, der fuer all_target_rating verwendet wird. Bei Nahkampf und self Faehigkeiten wird der Umkreis um sich selbst genommen, bei Fernkampf der Umkreis um das Ziel
+	 */
+	float m_all_target_rating_range;
 		
 	/**
 	 * \var float m_random_rating

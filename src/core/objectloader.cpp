@@ -262,6 +262,7 @@ bool  ObjectLoader::loadCreatureBaseAttr(TiXmlNode* node, CreatureBaseAttr& basa
 			attr.getFloat("timer_value",basattr.m_abilities[act].m_timer);
  			attr.getFloat("rating",basattr.m_abilities[act].m_rating,-1);
 			attr.getFloat("all_target_rating",basattr.m_abilities[act].m_all_target_rating);
+			attr.getFloat("all_target_rating_radius",basattr.m_abilities[act].m_all_target_rating_range,-1);
 			attr.getFloat("random_rating",basattr.m_abilities[act].m_random_rating,0.01);
 		}
 		else if (!strcmp(child2->Value(), "Immunity"))

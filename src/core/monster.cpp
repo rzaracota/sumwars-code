@@ -650,8 +650,40 @@ void Monster::evalCommand(Action::ActionType act)
 			// Bewertung:
 			value = abltinfo.m_rating;
 			value += Random::randf(abltinfo.m_random_rating);
-			value += goal_list->size() * abltinfo.m_all_target_rating;
-
+			
+			// all_target_rating
+			if (abltinfo.m_all_target_rating > 0)
+			{
+				Shape search_shape;
+				search_shape.m_type = Shape::CIRCLE;
+				
+				// wenn kein Wert vorgegeben, Waffenreichweite verwenden
+				search_shape.m_radius =  abltinfo.m_all_target_rating_range;
+				if (search_shape.m_radius < 0)
+				{
+					search_shape.m_radius = getShape()->m_radius + getBaseAttr()->m_attack_range;
+				}
+				
+				// Zentrum ist bei ranged das Ziel, sonst immer das Monster selbst
+				search_shape.m_center = getShape()->m_center;
+				if (aci->m_target_type == Action::RANGED)
+				{
+					search_shape.m_center = cgoal->getShape()->m_center;
+				}
+				
+				// alle Gegner in Radius zaehlen
+				WorldObjectValueList::iterator jt;
+				for (jt = goal_list->begin(); jt !=goal_list->end(); ++jt)
+				{
+					DEBUG("distance %f",jt->first->getShape()->m_center.distanceTo(search_shape.m_center));
+					if (jt->first->getShape()->intersects(search_shape))
+					{
+						value += abltinfo.m_all_target_rating;
+					}
+				}
+				DEBUG("final rating for %i: %f",cgoal->getId(), value);
+			}
+			
 			if (aci->m_target_type == Action::MELEE || ranged_move)
 			{
 				value *= 3/(3+std::max(0.0f,dist - getBaseAttr()->m_attack_range));
