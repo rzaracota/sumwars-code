@@ -117,6 +117,8 @@ class GraphicObject
 		
 		void setVisibility(bool visible);
 		
+		void setExactAnimations(bool exact_animations);
+		
 	private:
 		
 		
@@ -217,6 +219,11 @@ class GraphicObject
 		 * \brief Gibt an, ob das Objekt gerade den highlight effekt aktiviert hat
 		 */
 		bool m_highlight;
+		
+		/**
+		 * \brief Wenn auf true gesetzt, dann befinden sich angehaengte Objekte am exakten Ort. Wenn nicht, dann besitzen sie eine Verzoegerung von einem Frame (spart erheblich Effizienz)
+		 */
+		bool m_exact_animations;
 		
 		/**
 		 * \var std::string m_hightlight_material

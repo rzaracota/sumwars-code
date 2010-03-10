@@ -28,6 +28,7 @@ GraphicObject::GraphicObject(Type type, GraphicRenderInfo* render_info, std::str
 	}
 	
 	m_highlight = false;
+	m_exact_animations = false; // wirklich als Default?
 }
 
 GraphicObject::~GraphicObject()
@@ -197,6 +198,8 @@ void GraphicObject::addMovableObject(MovableObjectInfo& object)
 		attchobj.m_object = obj;
 		attchobj.m_entity =0;
 	
+		obj->setExactAnimations(m_exact_animations);
+		
 		Ogre::TagPoint* tag =0;
 		if (object.m_bone == "")
 		{
@@ -970,7 +973,10 @@ void GraphicObject::updateRenderPart(ActionRenderpart* part,float  relpercent)
 				{
 					anim->setEnabled(true);
 					anim->setTimePosition(relpercent*anim->getLength());
-					ent->_updateAnimation();
+					if (m_exact_animations)
+					{
+						ent->_updateAnimation();
+					}
 				}
 			}
 			
@@ -1084,6 +1090,17 @@ void GraphicObject::setVisibility(bool visible)
 	for (it = m_subobjects.begin(); it != m_subobjects.end(); ++it)
 	{
 		it->second.m_object->setVisibility(visible);
+	}
+}
+
+void GraphicObject::setExactAnimations(bool exact_animations)
+{
+	m_exact_animations = exact_animations;
+	
+	std::map<std::string, AttachedGraphicObject >::iterator it;
+	for (it = m_subobjects.begin(); it != m_subobjects.end(); ++it)
+	{
+		it->second.m_object->setExactAnimations(exact_animations);
 	}
 }
 

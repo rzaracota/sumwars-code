@@ -607,6 +607,7 @@ void Scene::updateCharacterView()
 		{
 			update = true;
 			m_temp_player_object = createGraphicObject(pl,"tempplayer");
+			m_temp_player_object->setExactAnimations(true);
 		}
 		
 		update |= updatePlayerGraphicObject(m_temp_player_object,pl);
