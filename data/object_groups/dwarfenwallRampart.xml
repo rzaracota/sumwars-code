@@ -20,28 +20,28 @@
     />
     <Object subtype="$barricade" 
             center_x="-11.39139202" 
-            center_y="16.73010836" 
+            center_y="17.88581994" 
             angle="68.61923377" 
             probability="1" 
             prob_angle="false" 
     />
     <Object subtype="$barricade" 
             center_x="14.5274511" 
-            center_y="8.866961899" 
+            center_y="9.861298696" 
             angle="-244.7777245" 
             probability="1" 
             prob_angle="false" 
     />
     <Object subtype="$barricade" 
             center_x="-14.60079084" 
-            center_y="8.767202896" 
+            center_y="9.761539693" 
             angle="71.67658893" 
             probability="1" 
             prob_angle="false" 
     />
     <Object subtype="$barricade" 
             center_x="0.09197466171" 
-            center_y="6.137411781" 
+            center_y="7.131748578" 
             angle="89.74086738" 
             probability="1" 
             prob_angle="false" 
@@ -62,7 +62,7 @@
     />
     <Object subtype="$barricade" 
             center_x="10.02823016" 
-            center_y="16.40605133" 
+            center_y="17.56176291" 
             angle="-255.1404312" 
             probability="1" 
             prob_angle="false" 
@@ -1065,11 +1065,11 @@
     <Location name="locAttendend1" pos_x="-6.5" pos_y="-42.5" />
     <Location name="locAttendend2" pos_x="-3" pos_y="-44.5" />
     <Location name="locBowmen1" pos_x="-0.5525863042" pos_y="24.45511105" />
-    <Location name="locBowmen2" pos_x="-10.75901236" pos_y="18.39166544" />
-    <Location name="locBowmen3" pos_x="9.573278001" pos_y="17.80876736" />
-    <Location name="locBowmen4" pos_x="-13.73676153" pos_y="10.46839392" />
-    <Location name="locBowmen6" pos_x="0.1088854536" pos_y="8.566901369" />
-    <Location name="locBowmen7" pos_x="13.70990567" pos_y="10.8004826" />
+    <Location name="locBowmen2" pos_x="-10.75901236" pos_y="19.54737702" />
+    <Location name="locBowmen3" pos_x="9.573278001" pos_y="18.96447894" />
+    <Location name="locBowmen4" pos_x="-13.73676153" pos_y="11.46273072" />
+    <Location name="locBowmen6" pos_x="0.1088854536" pos_y="9.561238166" />
+    <Location name="locBowmen7" pos_x="13.70990567" pos_y="11.7948194" />
     <Location name="locCharge1" pos_x="-13" pos_y="-13" />
     <Location name="locCharge2" pos_x="-18" pos_y="5" />
     <Location name="locCharge3" pos_x="-7.230102672" pos_y="5" />
@@ -1084,8 +1084,8 @@
     <Location name="locDefender4" pos_x="9" pos_y="37.5" />
     <Location name="locDefender5" pos_x="13.5" pos_y="37.5" />
     <Location name="locDefender6" pos_x="17.5" pos_y="37.5" />
-    <Location name="locElemental1" pos_x="-4.525416254" pos_y="15.63032741" />
-    <Location name="locElemental2" pos_x="4.092848193" pos_y="15.86916823" />
+    <Location name="locElemental1" pos_x="-4.525416254" pos_y="13.79902615" />
+    <Location name="locElemental2" pos_x="4.092848193" pos_y="14.03786697" />
     <Location name="locEntryGeneral" pos_x="-2.347039715" pos_y="29.36790972" />
     <Location name="locEntryUndead" pos_x="-11" pos_y="-60" />
     <Location name="locFissure1" pos_x="-25" pos_y="-31.5" />
@@ -1100,16 +1100,16 @@
     <Location name="locFissure10" pos_x="-33" pos_y="-30" />
     <Location name="locGeneralGuard1" pos_x="-7.636855852" pos_y="28.48835177" />
     <Location name="locGeneralGuard2" pos_x="6.800690349" pos_y="29.53958796" />
-    <Location name="locGuard1" pos_x="-8.249995321" pos_y="17.63518072" />
-    <Location name="locGuard2" pos_x="6.611590053" pos_y="17.34455845" />
-    <Location name="locGuard3" pos_x="12.11193215" pos_y="18.80634849" />
-    <Location name="locGuard4" pos_x="-13.05689332" pos_y="19.37714696" />
-    <Location name="locGuard5" pos_x="-16.59968706" pos_y="11.49671348" />
-    <Location name="locGuard6" pos_x="-11.14231573" pos_y="9.548376453" />
-    <Location name="locGuard9" pos_x="-3.058151283" pos_y="8.503027223" />
-    <Location name="locGuard10" pos_x="3.240507514" pos_y="8.432346029" />
-    <Location name="locGuard11" pos_x="10.9384057" pos_y="9.461814956" />
-    <Location name="locGuard12" pos_x="16.12011028" pos_y="12.19507788" />
+    <Location name="locGuard1" pos_x="-8.249995321" pos_y="18.7908923" />
+    <Location name="locGuard2" pos_x="6.611590053" pos_y="18.50027003" />
+    <Location name="locGuard3" pos_x="12.11193215" pos_y="19.96206007" />
+    <Location name="locGuard4" pos_x="-13.05689332" pos_y="20.53285854" />
+    <Location name="locGuard5" pos_x="-16.59968706" pos_y="12.49105028" />
+    <Location name="locGuard6" pos_x="-11.14231573" pos_y="10.54271325" />
+    <Location name="locGuard9" pos_x="-3.058151283" pos_y="9.49736402" />
+    <Location name="locGuard10" pos_x="3.240507514" pos_y="9.426682825" />
+    <Location name="locGuard11" pos_x="10.9384057" pos_y="10.45615175" />
+    <Location name="locGuard12" pos_x="16.12011028" pos_y="13.18941468" />
     <Location name="locLeftFlank" pos_x="-18.93938399" pos_y="25.67622338" />
     <Location name="locLich" pos_x="-1.737272086" pos_y="-41.31298744" />
     <Location name="locNecromancer1" pos_x="-16.76554119" pos_y="-34.01189986" />
