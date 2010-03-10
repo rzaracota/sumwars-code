@@ -606,6 +606,17 @@
 			</Effect>
 		</Event>
 		
+		<Event trigger="unit_die">
+			<Condition>
+				return ((trigger.unit==defend_dwall_tmp.general) or (trigger.unit==defend_dwall_tmp.council));
+			</Condition>
+			<Effect>
+				set(trigger.unit,"health",get(trigger.unit,"max_health"));
+				print("a very important unit just died");
+				defend_dwall_tmp.penalty = defend_dwall_tmp.penalty + 200;
+			</Effect>
+		</Event>
+		
 		<Event trigger="newUnit">
 			<Effect>
 				--print("lets get a new unit");
