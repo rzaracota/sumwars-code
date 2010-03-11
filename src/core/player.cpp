@@ -332,7 +332,7 @@ bool Player::onGamefieldClick(ClientCommand* command)
 				// Linke Maustaste: Aktion nur ausfuehren, wenn tatsaechlich ein passendenes Objekt vorhanden ist
 
 				// Fuer Aktionen der Art Nah oder Fernkampf braucht man eine feindliche Kreatur
-				if (rel == Fraction::HOSTILE && (dist == Action::MELEE || dist == Action::RANGED))
+				if (rel == Fraction::HOSTILE && (dist == Action::MELEE || dist == Action::RANGED || dist == Action::CIRCLE))
 				{
 
 					if (wo->getState()==STATE_ACTIVE)
@@ -442,7 +442,7 @@ bool Player::onGamefieldClick(ClientCommand* command)
 			com->m_goal = command->m_goal;
 
 		}
-		else if (dist == Action::SELF)
+		else if (dist == Action::SELF || dist == Action::CIRCLE)
 		{
 			// Aktionen auf selbst auf left_shift und rechts ausfuehren
 			com->m_type = command->m_action;

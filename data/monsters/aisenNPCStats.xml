@@ -468,9 +468,8 @@
 		<Ability type="walk"/>
 		
 		<Ability type="avaera_firebolt" rating="2"/>
-		<Ability type="avaera_fireball" rating="1.2" all_target_rating="0.5" all_target_rating_radius="1.5"/>
-		<!-- <Ability type="avaera_firecolumn" rating="3"/> -->
-		
+		<Ability type="avaera_fireball" rating="1.2" all_target_rating="0.5" all_target_rating_radius="1.5"/> 
+		<Ability type="avaera_firecolumn" rating="0" all_target_rating="1.5" all_target_rating_radius="2"/> 
 		<Ability type="die"/>
 		
 		<Ability type="magic_attack" rating="1"/>

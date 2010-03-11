@@ -817,7 +817,7 @@ CharInfo::CharInfo (Document* doc)
 	// Label Schaden Attacke rechts
 	Action::TargetType dist = Action::getActionInfo(player->getRightAction())->m_target_type;
 	label =  win_mgr.getWindow( "Skill2DmgValueLabel");
-	if (dist == Action::MELEE || dist == Action::RANGED)
+	if (dist == Action::MELEE || dist == Action::RANGED || dist == Action::CIRCLE)
 	{	
 		out_stream.str("");
 		out_stream << (int) minr << "-" << (int) maxr;

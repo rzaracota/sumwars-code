@@ -1187,7 +1187,7 @@ std::string Document::getAbilityDescription(Action::ActionType ability)
 
 		// Schaden
 		// TODO: flexiblere Bedingung
-		if (aci->m_target_type == Action::MELEE || aci->m_target_type == Action::RANGED)
+		if (aci->m_target_type == Action::MELEE || aci->m_target_type == Action::RANGED || aci->m_target_type == Action::CIRCLE)
 		{
 			Damage dmg;
 			player->calcDamage(ability,dmg);

@@ -70,7 +70,8 @@ public:
 		PASSIVE = 4,
 		SELF = 8,
  		PARTY =16,
-		PARTY_MULTI = 32
+		PARTY_MULTI = 32,
+		CIRCLE = 64,
 	};
 
 	/**

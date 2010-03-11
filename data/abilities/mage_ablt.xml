@@ -147,7 +147,7 @@
 		 timer_value="15000.000000" 
 		 base_ability="magic_attack"
 		 critical_percent="0.800000"
-		 target_type="ranged">
+		 target_type="circle">
 	<Flag name="mute_affected" />
 	<Effect>
 		<CppImplementation type="proj_at_self" />
@@ -225,7 +225,7 @@
 		 timer_value="15000.000000"
 		 base_ability="magic_attack"
 		 critical_percent="0.800000"
-		 target_type="ranged">
+		 target_type="circle">
 	<Flag name="mute_affected" />
 	<Effect>
 		<CppImplementation type="proj_at_self" />
@@ -276,7 +276,7 @@
 		 timer_value="4000.000000"
 		 base_ability="magic_attack"
 		 critical_percent="0.800000"
-		 target_type="ranged">
+		 target_type="circle">
 	<Flag name="mute_affected" />
 	<Effect>
 		<CppImplementation type="proj_at_self" />
@@ -328,7 +328,7 @@
 		 timer_value="4000.000000"
 		 base_ability="magic_attack"
 		 critical_percent="0.800000"
-		 target_type="ranged">
+		 target_type="circle">
 	<Flag name="mute_affected" />
 	<Effect>
 		<CppImplementation type="proj_at_self" />

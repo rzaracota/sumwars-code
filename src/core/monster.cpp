@@ -590,7 +590,7 @@ void Monster::evalCommand(Action::ActionType act)
 	}
 	
 	// Liste der Ziele festlegen
-	if (aci->m_target_type == Action::MELEE)
+	if (aci->m_target_type == Action::MELEE || aci->m_target_type == Action::CIRCLE)
 	{
 		// Nahkampfaktionen, Ziele sind alle Objekte im Sichtradius
 		goal_list =m_ai.m_goals;
@@ -675,13 +675,11 @@ void Monster::evalCommand(Action::ActionType act)
 				WorldObjectValueList::iterator jt;
 				for (jt = goal_list->begin(); jt !=goal_list->end(); ++jt)
 				{
-					DEBUG("distance %f",jt->first->getShape()->m_center.distanceTo(search_shape.m_center));
 					if (jt->first->getShape()->intersects(search_shape))
 					{
 						value += abltinfo.m_all_target_rating;
 					}
 				}
-				DEBUG("final rating for %i: %f",cgoal->getId(), value);
 			}
 			
 			if (aci->m_target_type == Action::MELEE || ranged_move)

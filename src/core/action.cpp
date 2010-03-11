@@ -105,7 +105,9 @@ void Action::loadAbility(TiXmlNode* node)
 	else if (target =="ranged")
 		a->m_target_type = RANGED;	
 	else if (target =="self")
-		a->m_target_type = SELF;	
+		a->m_target_type = SELF;
+	else if (target =="circle")
+		a->m_target_type = CIRCLE;		
 	else if (target =="party")
 		a->m_target_type = PARTY;	
 	else if (target =="party_all")
@@ -317,6 +319,8 @@ void Action::toxml()
 			elem->SetAttribute("target_type","melee");
 		else if (it->second.m_target_type == RANGED)
 			elem->SetAttribute("target_type","ranged");
+		else if (it->second.m_target_type == CIRCLE)
+			elem->SetAttribute("target_type","circle");
 		else if (it->second.m_target_type == PARTY)
 			elem->SetAttribute("target_type","party");
 		else if (it->second.m_target_type == PASSIVE)

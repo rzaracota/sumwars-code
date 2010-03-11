@@ -136,7 +136,7 @@
 		   >
 	<RenderInfo name="fire_wall" />
 	<Effect>
-		<CppImplementation type="dmg_at_target" />
+		<CppImplementation type="dmg_at_enemies_in_radius" />
 	</Effect>	
 </Projectile>
 
