@@ -84,6 +84,7 @@
 		<CppImplementation type="dmg_at_target" />
 	</Effect>
 	<Damage>
+		<CppImplementation type="weapon_damage" />
 		<LuaImplementation>
 			local willpower = get(self,"willpower");
 			local magic = get(self,"magic_power");
@@ -291,6 +292,7 @@
 		<CppImplementation type="dmg_at_target" />
 	</Effect>
 	<Damage>
+		<CppImplementation type="weapon_damage" />
 		<LuaImplementation>
 			local willpower = get(self,"willpower");
 			local magic = get(self,"magic_power");
@@ -321,6 +323,7 @@
 	<Projectile type="divine_beam"/>
 	<Damage>
 		<CppImplementation type="holy_attack" />
+		<CppImplementation type="weapon_damage" />
 		<LuaImplementation>
 			local willpower = get(self,"willpower");
 			local magic = get(self,"magic_power");
@@ -349,6 +352,7 @@
 	<Projectile type="divine_beam" />
 	<Damage>
 		<CppImplementation type="holy_attack" />
+		<CppImplementation type="weapon_damage" />
 		<LuaImplementation>
 			local willpower = get(self,"willpower");
 			local magic = get(self,"magic_power");
@@ -407,7 +411,7 @@
 		 description="The priest attacks with godly power, easily sending undead creatures back to their graves."
 		 time="1.000000"
 		 timer_nr="1.000000" 
-		 timer_value="3000.000000"
+		 timer_value="2000.000000"
 		 base_ability="holy_attack"
 		 critical_percent="0.660000"
 		 target_type="melee">
@@ -418,12 +422,13 @@
 	<Projectile type="light_beam" />
 	<Damage>
 		<CppImplementation type="holy_attack" />
+		<CppImplementation type="weapon_damage" />
 		<LuaImplementation>
 			local willpower = get(self,"willpower");
 			local magic = get(self,"magic_power");
 			local edmg = math.min(willpower/3,magic*2);
 			local fdmg = getDamageValue("fire_dmg");
-			setDamageValue("fire_dmg", {fdmg[1] + willpower*0.33 + edmg, fdmg[2] + willpower*0.66 + edmg*2});
+			setDamageValue("fire_dmg", {fdmg[1] + willpower*0.4 + edmg, fdmg[2] + willpower*0.8 + edmg*2});
 			setDamageValue("ice_dmg",{0,0});
 			setDamageValue("blockable",false);
 			setDamageValue("extra_dmg_race","undead");
@@ -437,7 +442,7 @@
 		 description="The priest attacks an enemy with a blow imbued with holy power. Undead will be severely damaged by the sacred energies."
 		 time="1.000000"
 		 timer_nr="1.000000" 
-		 timer_value="3000.000000" 
+		 timer_value="2000.000000" 
 		 base_ability="holy_attack"
 		 critical_percent="0.660000"
 		 target_type="melee">
@@ -448,6 +453,7 @@
 	<Projectile type="light_beam" />
 	<Damage>
 		<CppImplementation type="holy_attack" />
+		<CppImplementation type="weapon_damage" />
 		<LuaImplementation>
 			local willpower = get(self,"willpower");
 			local magic = get(self,"magic_power");

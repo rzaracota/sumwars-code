@@ -124,7 +124,7 @@
 		 description="The projectile is imbued with the power of a weak firespirit. It will deal damage in a small area, if it hits."
 		 time="1.000000"
 		 timer_nr="1.000000"
-		 timer_value="7000.000000"
+		 timer_value="6000.000000"
 		 base_ability="range_attack"
 		 critical_percent="0.660000"
 		 target_type="ranged" >
@@ -139,6 +139,9 @@
 		<CppImplementation type="weapon_damage" />
 		<LuaImplementation>
 			setDamageValue("phys_mult", getDamageValue("phys_mult")*2);
+			local pdmg = getDamageValue("phys_dmg");
+			local fdmg = getDamageValue("fire_dmg");
+			setDamageValue("fire_dmg",{pdmg[1]+fdmg[1],pdmg[2]+fdmg[2]});
 			setDamageValue("blockable",false);
 		</LuaImplementation>	
 	</Damage>
@@ -149,7 +152,7 @@
 		 description="The projectile is imbued with the power of a firespirit. It will explode with areadamage on hitting. Additionally four more explosions will go of in every direction."
 		 time="1.000000"
 		 timer_nr="1.000000"
-		 timer_value="7000.000000"
+		 timer_value="6000.000000"
 		 base_ability="range_attack"
 		 critical_percent="0.660000"
 		 target_type="ranged" >
@@ -166,6 +169,9 @@
 		<LuaImplementation>
 			setDamageValue("phys_mult", getDamageValue("phys_mult")*2);
 			setDamageValue("blockable",false);
+			local pdmg = getDamageValue("phys_dmg");
+			local fdmg = getDamageValue("fire_dmg");
+			setDamageValue("fire_dmg",{pdmg[1]+fdmg[1],pdmg[2]+fdmg[2]});
 		</LuaImplementation>	
 	</Damage>
 </Ability>
