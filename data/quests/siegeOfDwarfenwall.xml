@@ -417,27 +417,27 @@
 				defend_dwall_tmp.units = {};
 				
 				--guards of the second defense-line
-				createUnitIndex(1, "locGuard1", 10, "guard_siege", 3, 30000, "locSpawnGuards")
+				createUnitIndex(1, "locGuard1", 10, "guard_siege", 3, 40000, "locSpawnGuards")
 				setGuard(1,-90)
-				createUnitIndex(2, "locGuard2", 10, "guard_siege", 3, 30000, "locSpawnGuards")
+				createUnitIndex(2, "locGuard2", 10, "guard_siege", 3, 40000, "locSpawnGuards")
 				setGuard(2,-90)
-				createUnitIndex(3, "locGuard3", 10, "guard_siege", 3, 30000, "locSpawnGuards")
+				createUnitIndex(3, "locGuard3", 10, "guard_siege", 3, 40000, "locSpawnGuards")
 				setGuard(3,-90)
-				createUnitIndex(4, "locGuard4", 10, "guard_siege", 3, 30000, "locSpawnGuards")
+				createUnitIndex(4, "locGuard4", 10, "guard_siege", 3, 40000, "locSpawnGuards")
 				setGuard(4,-90)
 				
 				--guards of the first defense-line
-				createUnitIndex(5, "locGuard5", 10, "guard_siege", 1, 30000, "locSpawnGuards")
+				createUnitIndex(5, "locGuard5", 10, "guard_siege", 1, 40000, "locSpawnGuards")
 				setGuard(5,-90)
-				createUnitIndex(6, "locGuard6", 10, "guard_siege", 1, 30000, "locSpawnGuards")
+				createUnitIndex(6, "locGuard6", 10, "guard_siege", 1, 40000, "locSpawnGuards")
 				setGuard(6,-90)
-				createUnitIndex(9, "locGuard9", 10, "guard_siege", 1, 30000, "locSpawnGuards")
+				createUnitIndex(9, "locGuard9", 10, "guard_siege", 1, 40000, "locSpawnGuards")
 				setGuard(9,-90)
-				createUnitIndex(10, "locGuard10", 10, "guard_siege", 1, 30000, "locSpawnGuards")
+				createUnitIndex(10, "locGuard10", 10, "guard_siege", 1, 40000, "locSpawnGuards")
 				setGuard(10,-90)
-				createUnitIndex(11, "locGuard11", 10, "guard_siege", 1, 30000, "locSpawnGuards")
+				createUnitIndex(11, "locGuard11", 10, "guard_siege", 1, 40000, "locSpawnGuards")
 				setGuard(11,-90)
-				createUnitIndex(12, "locGuard12", 10, "guard_siege", 1, 30000, "locSpawnGuards")
+				createUnitIndex(12, "locGuard12", 10, "guard_siege", 1, 40000, "locSpawnGuards")
 				setGuard(12,-90)
 				
 				--mages and bowman of the second defense-line
@@ -456,15 +456,15 @@
 				setGuard(17,-90);
 				
 				--Darna's fireelementals
-				createUnitIndex(18, "locElemental1", 12, "fire_guard", 6, 40000, "locElemental1")
+				createUnitIndex(18, "locElemental1", 12, "fire_guard", 6, 60000, "locElemental1")
 				--local guard = setGuard(18,-90);
-				createUnitIndex(19, "locElemental2", 12, "fire_guard", 6, 40000, "locElemental2")
+				createUnitIndex(19, "locElemental2", 12, "fire_guard", 6, 60000, "locElemental2")
 				--local guard = setGuard(19,-90);
 				
 				--elite-guards of Greif and Darna
-				createUnitIndex(7, "locGeneralGuard1", 10, "elite_siege", 30, 80000, "locSpawnGuards")
+				createUnitIndex(7, "locGeneralGuard1", 9, "elite_siege", 30, 100000, "locSpawnGuards")
 				--local guard = setGuard(7,-90)
-				createUnitIndex(8, "locGeneralGuard2", 10, "dwarfenwall_councilguard", 30, 80000, "locSpawnGuards")
+				createUnitIndex(8, "locGeneralGuard2", 9, "dwarfenwall_councilguard", 30, 100000, "locSpawnGuards")
 				--local guard = setGuard(8,-90);
 			--aisen defenses
 				createUnitIndex(15, "locDefender1", 15, "bowman_siegeDefense", 3, 40000, "locSpawnBow1","newDefender");
@@ -515,6 +515,82 @@
 				defend_dwall_tmp.attackMiddleRight = {"locCharge5","locEntryGeneral"};
 				defend_dwall_tmp.attackRight = {"locCharge6","locCharge7","locRightFlank","locEntryGeneral"};
 			
+			-- digit code:
+			-- first digit: Monster type: 1: normal, 2: fire, 3: ice, 4: special, 5: boss
+			-- second digit: difficulty 1: veryeasy, 2: easy, 3:medium, 4: hard
+			-- third digit:  Variation (1..3)
+			-- fourth digit: attack path 1: left ... 5: right
+				
+			-- normal skeletons
+				createAttackIndex(1112, "locSpawn3", defend_dwall_tmp.attackMiddleLeft, "weakSkeletonsDwall1");
+				createAttackIndex(1114, "locSpawn5", defend_dwall_tmp.attackMiddleRight, "weakSkeletonsDwall1");
+				createAttackIndex(1111, "locSpawn2", defend_dwall_tmp.attackLeft, "weakSkeletonsDwall1");
+				createAttackIndex(1113, "locSpawn4", defend_dwall_tmp.attackMiddle, "weakSkeletonsDwall1");
+				createAttackIndex(1115, "locSpawn6", defend_dwall_tmp.attackRight, "weakSkeletonsDwall1");
+			
+				
+				createAttackIndex(1121, "locSpawn2", defend_dwall_tmp.attackLeft, "weakSkeletonsDwall2");
+				createAttackIndex(1122, "locSpawn3", defend_dwall_tmp.attackMiddleLeft, "weakSkeletonsDwall2");
+				createAttackIndex(1123, "locSpawn4", defend_dwall_tmp.attackMiddle, "weakSkeletonsDwall2");
+				createAttackIndex(1124, "locSpawn5", defend_dwall_tmp.attackMiddleRight, "weakSkeletonsDwall2");
+				createAttackIndex(1125, "locSpawn6", defend_dwall_tmp.attackRight, "weakSkeletonsDwall2");
+				
+				createAttackIndex(1211, "locSpawn2", defend_dwall_tmp.attackLeft, "easySkeletonsDwall1");
+				createAttackIndex(1212, "locSpawn3", defend_dwall_tmp.attackMiddleLeft, "easySkeletonsDwall1");
+				createAttackIndex(1213, "locSpawn4", defend_dwall_tmp.attackMiddle, "easySkeletonsDwall1");
+				createAttackIndex(1214, "locSpawn5", defend_dwall_tmp.attackMiddleRight, "easySkeletonsDwall1");
+				createAttackIndex(1215, "locSpawn6", defend_dwall_tmp.attackRight, "easySkeletonsDwall1");
+			
+				createAttackIndex(1221, "locSpawn2", defend_dwall_tmp.attackLeft, "easySkeletonsDwall2");
+				createAttackIndex(1222, "locSpawn3", defend_dwall_tmp.attackMiddleLeft, "easySkeletonsDwall2");
+				createAttackIndex(1223, "locSpawn4", defend_dwall_tmp.attackMiddle, "easySkeletonsDwall2");
+				createAttackIndex(1224, "locSpawn5", defend_dwall_tmp.attackMiddleRight, "easySkeletonsDwall2");
+				createAttackIndex(1225, "locSpawn6", defend_dwall_tmp.attackRight, "easySkeletonsDwall2");
+				
+				createAttackIndex(1231, "locSpawn2", defend_dwall_tmp.attackLeft, "easySkeletonsDwall2");
+				createAttackIndex(1232, "locSpawn3", defend_dwall_tmp.attackMiddleLeft, "easySkeletonsDwall2");
+				createAttackIndex(1233, "locSpawn4", defend_dwall_tmp.attackMiddle, "easySkeletonsDwall2");
+				createAttackIndex(1234, "locSpawn5", defend_dwall_tmp.attackMiddleRight, "easySkeletonsDwall2");
+				createAttackIndex(1235, "locSpawn6", defend_dwall_tmp.attackRight, "easySkeletonsDwall2");
+				
+				createAttackIndex(1311, "locSpawn2", defend_dwall_tmp.attackLeft, "mediumSkeletonsDwall1");
+				createAttackIndex(1312, "locSpawn3", defend_dwall_tmp.attackMiddleLeft, "mediumSkeletonsDwall1");
+				createAttackIndex(1313, "locSpawn4", defend_dwall_tmp.attackMiddle, "mediumSkeletonsDwall1");
+				createAttackIndex(1314, "locSpawn5", defend_dwall_tmp.attackMiddleRight, "mediumSkeletonsDwall1");
+				createAttackIndex(1315, "locSpawn6", defend_dwall_tmp.attackRight, "mediumSkeletonsDwall1");
+				
+				createAttackIndex(1321, "locSpawn2", defend_dwall_tmp.attackLeft, "mediumSkeletonsDwall2");
+				createAttackIndex(1322, "locSpawn3", defend_dwall_tmp.attackMiddleLeft, "mediumSkeletonsDwall2");
+				createAttackIndex(1323, "locSpawn4", defend_dwall_tmp.attackMiddle, "mediumSkeletonsDwall2");
+				createAttackIndex(1324, "locSpawn5", defend_dwall_tmp.attackMiddleRight, "mediumSkeletonsDwall2");
+				createAttackIndex(1325, "locSpawn6", defend_dwall_tmp.attackRight, "mediumSkeletonsDwall2");
+				
+				createAttackIndex(1331, "locSpawn2", defend_dwall_tmp.attackLeft, "mediumSkeletonsDwall2");
+				createAttackIndex(1332, "locSpawn3", defend_dwall_tmp.attackMiddleLeft, "mediumSkeletonsDwall2");
+				createAttackIndex(1333, "locSpawn4", defend_dwall_tmp.attackMiddle, "mediumSkeletonsDwall2");
+				createAttackIndex(1334, "locSpawn5", defend_dwall_tmp.attackMiddleRight, "mediumSkeletonsDwall2");
+				createAttackIndex(1335, "locSpawn6", defend_dwall_tmp.attackRight, "mediumSkeletonsDwall2");
+				
+				createAttackIndex(1411, "locSpawn2", defend_dwall_tmp.attackLeft, "hardSkeletonsDwall1");
+				createAttackIndex(1412, "locSpawn3", defend_dwall_tmp.attackMiddleLeft, "hardSkeletonsDwall1");
+				createAttackIndex(1413, "locSpawn4", defend_dwall_tmp.attackMiddle, "hardSkeletonsDwall1");
+				createAttackIndex(1414, "locSpawn5", defend_dwall_tmp.attackMiddleRight, "hardSkeletonsDwall1");
+				createAttackIndex(1415, "locSpawn6", defend_dwall_tmp.attackRight, "hardSkeletonsDwall1");
+				
+				createAttackIndex(1421, "locSpawn2", defend_dwall_tmp.attackLeft, "hardSkeletonsDwall2");
+				createAttackIndex(1422, "locSpawn3", defend_dwall_tmp.attackMiddleLeft, "hardSkeletonsDwall2");
+				createAttackIndex(1423, "locSpawn4", defend_dwall_tmp.attackMiddle, "hardSkeletonsDwall2");
+				createAttackIndex(1424, "locSpawn5", defend_dwall_tmp.attackMiddleRight, "hardSkeletonsDwall2");
+				createAttackIndex(1425, "locSpawn6", defend_dwall_tmp.attackRight, "hardSkeletonsDwall2");
+				
+				createAttackIndex(1431, "locSpawn2", defend_dwall_tmp.attackLeft, "hardSkeletonsDwall3");
+				createAttackIndex(1432, "locSpawn3", defend_dwall_tmp.attackMiddleLeft, "hardSkeletonsDwall3");
+				createAttackIndex(1433, "locSpawn4", defend_dwall_tmp.attackMiddle, "hardSkeletonsDwall3");
+				createAttackIndex(1434, "locSpawn5", defend_dwall_tmp.attackMiddleRight, "hardSkeletonsDwall3");
+				createAttackIndex(1435, "locSpawn6", defend_dwall_tmp.attackRight, "hardSkeletonsDwall3");
+				-- normal skeletons end
+				
+				
 				createAttackIndex(80, "locSpawn1", defend_dwall_tmp.attackLeft, "easySkeletonsDwall");
 				createAttackIndex(81, "locSpawn2", defend_dwall_tmp.attackLeft, "easySkeletonsDwall");
 				createAttackIndex(82, "locSpawn3", defend_dwall_tmp.attackMiddleLeft, "easySkeletonsDwall");
@@ -523,64 +599,16 @@
 				createAttackIndex(85, "locSpawn6", defend_dwall_tmp.attackRight, "easySkeletonsDwall");
 				createAttackIndex(86, "locSpawn7", defend_dwall_tmp.attackRight, "easySkeletonsDwall");
 				
-				createAttackIndex(87, "locSpawn1", defend_dwall_tmp.attackLeft, "mediumSkeletonsDwall");
-				createAttackIndex(88, "locSpawn2", defend_dwall_tmp.attackLeft, "mediumSkeletonsDwall");
-				createAttackIndex(89, "locSpawn3", defend_dwall_tmp.attackMiddleLeft, "mediumSkeletonsDwall");
-				createAttackIndex(90, "locSpawn4", defend_dwall_tmp.attackMiddle, "mediumSkeletonsDwall");
-				createAttackIndex(91, "locSpawn5", defend_dwall_tmp.attackMiddleRight, "mediumSkeletonsDwall");
-				createAttackIndex(92, "locSpawn6", defend_dwall_tmp.attackRight, "mediumSkeletonsDwall");
-				createAttackIndex(93, "locSpawn7", defend_dwall_tmp.attackRight, "mediumSkeletonsDwall");
 				
-				createAttackIndex(94, "locSpawn1", defend_dwall_tmp.attackLeft, "hardSkeletonsDwall");
-				createAttackIndex(95, "locSpawn2", defend_dwall_tmp.attackLeft, "hardSkeletonsDwall");
-				createAttackIndex(96, "locSpawn3", defend_dwall_tmp.attackMiddleLeft, "hardSkeletonsDwall");
-				createAttackIndex(97, "locSpawn4", defend_dwall_tmp.attackMiddle, "hardSkeletonsDwall");
-				createAttackIndex(98, "locSpawn5", defend_dwall_tmp.attackMiddleRight, "hardSkeletonsDwall");
-				createAttackIndex(99, "locSpawn6", defend_dwall_tmp.attackRight, "hardSkeletonsDwall");
-				createAttackIndex(100, "locSpawn7", defend_dwall_tmp.attackRight, "hardSkeletonsDwall");
 				
-				createAttackIndex(101, "locSpawn4", {"locCharge4","locCharge3","locEntryGeneral"}, "boss1");
+				createAttackIndex(5013, "locSpawn4", defend_dwall_tmp.attackMiddle, "boss1");
+				createAttackIndex(5023, "locSpawn4", defend_dwall_tmp.attackMiddle, "boss2");
+				createAttackIndex(5033, "locSpawn4", defend_dwall_tmp.attackMiddle, "boss3");
+				createAttackIndex(5043, "locSpawn4", defend_dwall_tmp.attackMiddle, "boss4");
+				createAttackIndex(5053, "locSpawn4", defend_dwall_tmp.attackMiddle, "boss5");
+				createAttackIndex(5063, "locSpawn4", defend_dwall_tmp.attackMiddle, "boss6");
 				
-				createAttackIndex(102, "locSpawn1", defend_dwall_tmp.attackLeft, "burningMeleeSkeletonsDwall");
-				createAttackIndex(103, "locSpawn2", defend_dwall_tmp.attackLeft, "burningMeleeSkeletonsDwall");
-				createAttackIndex(104, "locSpawn3", defend_dwall_tmp.attackMiddleLeft, "burningMeleeSkeletonsDwall");
-				createAttackIndex(105, "locSpawn4", defend_dwall_tmp.attackMiddle, "burningMeleeSkeletonsDwall");
-				createAttackIndex(106, "locSpawn5", defend_dwall_tmp.attackMiddleRight, "burningMeleeSkeletonsDwall");
-				createAttackIndex(107, "locSpawn6", defend_dwall_tmp.attackRight, "burningMeleeSkeletonsDwall");
-				createAttackIndex(108, "locSpawn7", defend_dwall_tmp.attackRight, "burningMeleeSkeletonsDwall");
 				
-				createAttackIndex(109, "locSpawn1", defend_dwall_tmp.attackLeft, "burningRangeSkeletonsDwall");
-				createAttackIndex(110, "locSpawn2", defend_dwall_tmp.attackLeft, "burningRangeSkeletonsDwall");
-				createAttackIndex(111, "locSpawn3", defend_dwall_tmp.attackMiddleLeft, "burningRangeSkeletonsDwall");
-				createAttackIndex(112, "locSpawn4", defend_dwall_tmp.attackMiddle, "burningRangeSkeletonsDwall");
-				createAttackIndex(113, "locSpawn5", defend_dwall_tmp.attackMiddleRight, "burningRangeSkeletonsDwall");
-				createAttackIndex(114, "locSpawn6", defend_dwall_tmp.attackRight, "burningRangeSkeletonsDwall");
-				createAttackIndex(115, "locSpawn7", defend_dwall_tmp.attackRight, "burningRangeSkeletonsDwall");
-				
-				createAttackIndex(116, "locSpawn2", defend_dwall_tmp.attackLeft, "shadowSkeletonsDwall");
-				createAttackIndex(117, "locSpawn6", defend_dwall_tmp.attackRight, "shadowSkeletonsDwall");
-				
-				createAttackIndex(118, "locSpawn4", defend_dwall_tmp.attackMiddle, "boss2");
-				createAttackIndex(119, "locSpawn4", defend_dwall_tmp.attackMiddle, "boss3");
-				createAttackIndex(120, "locSpawn4", defend_dwall_tmp.attackMiddle, "boss4");
-				createAttackIndex(121, "locSpawn4", defend_dwall_tmp.attackMiddle, "boss5");
-				createAttackIndex(122, "locSpawn4", defend_dwall_tmp.attackMiddle, "boss6");
-				
-				createAttackIndex(123, "locSpawn1", defend_dwall_tmp.attackLeft, "frostSkeletonsDwall");
-				createAttackIndex(124, "locSpawn2", defend_dwall_tmp.attackLeft, "iceMageDwall");
-				createAttackIndex(125, "locSpawn3", defend_dwall_tmp.attackMiddleLeft, "frostSkeletonsDwall");
-				createAttackIndex(126, "locSpawn4", defend_dwall_tmp.attackMiddle, "frostMageDwall");
-				createAttackIndex(127, "locSpawn5", defend_dwall_tmp.attackMiddleRight, "frostSkeletonsDwall");
-				createAttackIndex(128, "locSpawn6", defend_dwall_tmp.attackRight, "iceMageDwall");
-				createAttackIndex(129, "locSpawn7", defend_dwall_tmp.attackRight, "frostSkeletonsDwall");
-				
-				createAttackIndex(130, "locSpawn2", defend_dwall_tmp.attackLeft, "blackMageDwall");
-				createAttackIndex(131, "locSpawn4", defend_dwall_tmp.attackMiddle, "blackMageDwall");
-				createAttackIndex(132, "locSpawn6", defend_dwall_tmp.attackRight, "blackMageDwall");
-				
-				createAttackIndex(1001, "locSpawn2", defend_dwall_tmp.attackLeft, "siegeWave_1a");
-				createAttackIndex(1002, "locSpawn4", defend_dwall_tmp.attackMiddle, "blackMageDwall");
-				createAttackIndex(1003, "locSpawn6", defend_dwall_tmp.attackRight, "blackMageDwall");
 			</Effect>
 		</Event>
 		
@@ -995,11 +1023,10 @@
 					addCameraPosition(1000,"locSpawn6",-90,55,30);
 					timedExecute('setCutsceneMode(false)',2000);
 				
-					launchAttack(80); --e
-					launchAttack(84); --e
-					launchAttack(86); --e
+					launchAttack(1112); --e1
+					launchAttack(1114); --e1
 					
-					startTimer("wave2",45000);
+					startTimer("wave1b",30000);
 				else
 					setCutsceneMode(false);
 					insertTrigger("wave2");
@@ -1007,54 +1034,109 @@
 			</Effect>
 		</Event>
 		
+		<Event trigger="wave1b" once="true">
+			<Effect>
+				launchAttack(1121); --w2
+				launchAttack(1213); --e1
+				launchAttack(1125); --w2
+				
+				startTimer("wave1c",30000);
+			</Effect>
+		</Event>
+		
+		<Event trigger="wave1c" once="true">
+			<Effect>
+				launchAttack(1121); --w2
+				launchAttack(1123); --w2
+				launchAttack(1125); --w2
+				
+				startTimer("wave2",30000);
+			</Effect>
+		</Event>
+		
 		<Event trigger="wave2" once="true">
 			<Effect>
+				print("wave2");
 				defend_dwall_tmp.phase="wave2"
 				if(debug["dwall_siege"]["skipWave2"] ~=true)then
-					launchAttack(80); --e
-					launchAttack(89); --m
-					launchAttack(91); --m
-					launchAttack(86); --e
+					launchAttack(1222); --e2
+					launchAttack(1224); --e2
 	
-					startTimer("wave3",50000);
+					startTimer("wave2b",30000);
 				else
 					insertTrigger("wave3");
 				end;
 			</Effect>
 		</Event>
 		
+		<Event trigger="wave2b" once="true">
+			<Effect>
+				launchAttack(1311); --m1
+				launchAttack(1123); --w2
+				launchAttack(1315); --m1
+				
+				startTimer("wave2c",30000);
+			</Effect>
+		</Event>
+		
+		<Event trigger="wave2c" once="true">
+			<Effect>
+				launchAttack(1211); --e1
+				launchAttack(1323); --m2
+				launchAttack(1215); --e1
+				
+				startTimer("wave3",30000);
+			</Effect>
+		</Event>
+		
 		<Event trigger="wave3" once="true">
 			<Effect>
+				print("wave3");
 				defend_dwall_tmp.phase="wave3"
 				if(debug["dwall_siege"]["skipWave3"] ~=true)then
-					launchAttack(80); --e
-					launchAttack(81); --e
-					launchAttack(89); --m
-					launchAttack(90); --m
-					launchAttack(91); --m
-					launchAttack(85); --e
-					launchAttack(86); --e
+					launchAttack(1121); -- w2
+					launchAttack(1223); -- e2
+					launchAttack(1325); -- m2
 					
-					startTimer("wave4",50000);
+					startTimer("wave3b",30000);
 				else
 					insertTrigger("wave4")
 				end;
 			</Effect>
 		</Event>
 		
+		<Event trigger="wave3b" once="true">
+			<Effect>
+			launchAttack(1121); --w2
+			launchAttack(1112); --w1
+			launchAttack(1123); --w2
+			launchAttack(1114); --w1
+			launchAttack(1125); --w2
+			
+			startTimer("wave3c",30000);
+			</Effect>
+		</Event>
+		
+		<Event trigger="wave3c" once="true">
+			<Effect>
+				launchAttack(1231); --e3
+				launchAttack(1313); --m1
+				launchAttack(1235); --e3
+				
+				startTimer("wave4",30000);
+			</Effect>
+		</Event>
+		
 		<Event trigger="wave4" once="true">
 			<Effect>
+				print("wave4");
 				defend_dwall_tmp.phase="wave4"
 				if(debug["dwall_siege"]["skipWave4"] ~=true)then
-					launchAttack(80); --e
-					launchAttack(88); --m
-					launchAttack(86); --m
-					launchAttack(97); --h
-					launchAttack(91); --m
-					launchAttack(92); --m
-					launchAttack(86); --e
+				launchAttack(1221); --e2
+				launchAttack(1413); --h1
+				launchAttack(1225); --e2
 					
-					startTimer("firstBoss",50000);
+					startTimer("wave4b",30000);
 				elseif(debug["dwall_siege"]["skipFirePrep"] ~=true)then
 					insertTrigger("firstBoss");
 				else
@@ -1063,10 +1145,21 @@
 			</Effect>
 		</Event>
 		
+		<Event trigger="wave4b" once="true">
+			<Effect>
+				launchAttack(1421); --h2
+				launchAttack(1123); --w2
+				launchAttack(1425); --h2
+				
+				startTimer("firstBoss",50000);
+			</Effect>
+		</Event>
+		
 		<Event trigger="firstBoss" once="true">
 			<Effect>
+				print("firstboss");
 				defend_dwall_tmp.phase="boss1"
-				launchAttack(101); --boss
+				launchAttack(5013); --boss
 			</Effect>
 		</Event>
 		<Event trigger="unit_die" once="true">

@@ -1083,7 +1083,7 @@
 <Monster type="MONSTER" subtype="sword_skel_siege" name="Skeleton" fraction="undead" race="undead" layer="NORMAL">
 	<RenderInfo name="sword_skeleton" />
 	<Dropslots >
-		<Dropslot pbig="0.0" pmedium="0.01" psmall="0.09" pgold="0.03" min_gold="30" max_gold="100" min_level="12" max_level="23" magic_prob="0.05" magic_power="550" />
+		<Dropslot pbig="0.0" pmedium="0.01" psmall="0.09" pgold="0.03" min_gold="30" max_gold="100" min_level="12" max_level="20" magic_prob="0.05" magic_power="550" />
 	</Dropslots>
 	
 	<BasicAttributes
@@ -1135,7 +1135,7 @@
 <Monster type="MONSTER" subtype="bow_skel_siege" name="Skeleton" fraction="undead" race="undead" layer="NORMAL">
 	<RenderInfo name="bow_skeleton" />
 	<Dropslots >
-		<Dropslot pbig="0.0" pmedium="0.01" psmall="0.09" pgold="0.03" min_gold="30" max_gold="100" min_level="12" max_level="23" magic_prob="0.05" magic_power="550" />
+		<Dropslot pbig="0.005" pmedium="0.01" psmall="0.08" pgold="0.03" min_gold="30" max_gold="100" min_level="14" max_level="20" magic_prob="0.05" magic_power="550" />
 	</Dropslots>
 	
 	<BasicAttributes
@@ -1186,7 +1186,7 @@
 <Monster type="MONSTER" subtype="axe_skel_siege" name="Skeleton" fraction="undead" race="undead" layer="NORMAL">
 	<RenderInfo name="axe_skeleton" />
 	<Dropslots >
-		<Dropslot pbig="0.0" pmedium="0.01" psmall="0.09" pgold="0.03" min_gold="30" max_gold="100" min_level="12" max_level="23" magic_prob="0.05" magic_power="550" />
+		<Dropslot pbig="0.005" pmedium="0.01" psmall="0.08" pgold="0.03" min_gold="30" max_gold="100" min_level="14" max_level="20" magic_prob="0.05" magic_power="550" />
 	</Dropslots>
 	
 	<BasicAttributes
@@ -1237,7 +1237,7 @@
 <Monster type="MONSTER" subtype="axe2_skel_siege" name="Skeleton" fraction="undead" race="undead" layer="NORMAL">
 	<RenderInfo name="axe2_skeleton" />
 	<Dropslots >
-		<Dropslot pbig="0.0" pmedium="0.01" psmall="0.09" pgold="0.03" min_gold="30" max_gold="100" min_level="12" max_level="23" magic_prob="0.05" magic_power="550" />
+		<Dropslot pbig="0.005" pmedium="0.01" psmall="0.08" pgold="0.03" min_gold="30" max_gold="100" min_level="14" max_level="20" magic_prob="0.05" magic_power="550" />
 	</Dropslots>
 	
 	<BasicAttributes
@@ -1286,19 +1286,19 @@
 </Monster>
 
 <!-- first mini-boss during the siege of dwarfenwall-->
-<Monster type="MONSTER" subtype="boss1_siege" name="Miniboss 1" fraction="undead" race="undead" layer="NORMAL">
+<Monster type="MONSTER" subtype="boss1_siege" name="Huge Skeleton" fraction="undead" race="undead" layer="NORMAL">
 	<RenderInfo name="giant_skeleton" />
 	<Dropslots >
-		<Dropslot pbig="0.2" pmedium="0.3" psmall="0.1" pgold="0.05" min_gold="90" max_gold="250" min_level="10" max_level="17" magic_prob="0.5" magic_power="550" />
-		<Dropslot pbig="0.2" pmedium="0.3" psmall="0.1" pgold="0.05" min_gold="80" max_gold="200" min_level="10" max_level="16" magic_prob="0.5" magic_power="500" />
-		<Dropslot pbig="0.00" pmedium="0.0" psmall="0.4" pgold="0.00" min_gold="80" max_gold="200" min_level="9" max_level="17" magic_prob="0.5" magic_power="500" />
-		<Dropslot pbig="0.00" pmedium="0.0" psmall="0.00" pgold="1.00" min_gold="80" max_gold="180" />
+		<Dropslot pbig="0.2" pmedium="0.3" psmall="0.1" pgold="0.05" min_gold="150" max_gold="300" min_level="15" max_level="20" magic_prob="0.5" magic_power="550" />
+		<Dropslot pbig="0.2" pmedium="0.3" psmall="0.1" pgold="0.05" min_gold="100" max_gold="250" min_level="15" max_level="19" magic_prob="0.5" magic_power="500" />
+		<Dropslot pbig="0.00" pmedium="0.0" psmall="0.4" pgold="0.00" min_gold="100" max_gold="250" min_level="13" max_level="18" magic_prob="0.5" magic_power="500" />
+		<Dropslot pbig="0.00" pmedium="0.0" psmall="0.00" pgold="1.00" min_gold="120" max_gold="250" />
 	</Dropslots>
 	
 	<BasicAttributes
-					experience="330"
-					level="17"
-					max_health="1200"
+					experience="410"
+					level="18"
+					max_health="1400"
 					armor="50"
 					block="0"
 					power="180"
@@ -1344,8 +1344,7 @@
 <Monster type="MONSTER" subtype="fire_skel_bow_siege" name="Burning Skeleton" fraction="undead" race="undead" layer="NORMAL">
 	<RenderInfo name="burningSkeletonBowman" />
 	<Dropslots >
-		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.07" pgold="0.05" min_gold="30" max_gold="100" min_level="9" max_level="18" magic_prob="0.2" magic_power="600" />
-		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.04" pgold="0.05" min_gold="20" max_gold="50" min_level="8" max_level="15" magic_prob="0.4" magic_power="450" />
+		<Dropslot pbig="0.005" pmedium="0.01" psmall="0.08" pgold="0.03" min_gold="30" max_gold="100" min_level="14" max_level="20" magic_prob="0.05" magic_power="550" />
 	</Dropslots>
 	
 	<BasicAttributes
@@ -1396,7 +1395,7 @@
 <Monster type="MONSTER" subtype="fire_skel_axe2_siege" name="Burning Skeleton" fraction="undead" race="undead" layer="NORMAL">
 	<RenderInfo name="burningSkeletonAxeman" />
 	<Dropslots >
-		<Dropslot pbig="0.0" pmedium="0.01" psmall="0.09" pgold="0.03" min_gold="30" max_gold="100" min_level="12" max_level="23" magic_prob="0.05" magic_power="550" />
+		<Dropslot pbig="0.005" pmedium="0.01" psmall="0.08" pgold="0.03" min_gold="30" max_gold="100" min_level="14" max_level="20" magic_prob="0.05" magic_power="550" />
 	</Dropslots>
 	
 	<BasicAttributes
@@ -1448,7 +1447,7 @@
 <Monster type="MONSTER" subtype="fire_skel_sword_siege" name="Burning Skeleton" fraction="undead" race="undead" layer="NORMAL">
 	<RenderInfo name="burningSkeletonSwordsman" />
 	<Dropslots >
-		<Dropslot pbig="0.0" pmedium="0.01" psmall="0.09" pgold="0.03" min_gold="30" max_gold="100" min_level="12" max_level="23" magic_prob="0.05" magic_power="550" />
+		<Dropslot pbig="0.005" pmedium="0.01" psmall="0.08" pgold="0.03" min_gold="30" max_gold="100" min_level="14" max_level="20" magic_prob="0.05" magic_power="550" />
 	</Dropslots>
 	
 	<BasicAttributes
@@ -1500,7 +1499,7 @@
 <Monster type="MONSTER" subtype="frost_skel_sword_siege" name="Frost Skeleton" fraction="undead" race="undead" layer="NORMAL">
 	<RenderInfo name="frostSkeletonSwordsman" />
 	<Dropslots >
-		<Dropslot pbig="0.0" pmedium="0.01" psmall="0.09" pgold="0.03" min_gold="30" max_gold="100" min_level="12" max_level="23" magic_prob="0.05" magic_power="550" />
+		<Dropslot pbig="0.005" pmedium="0.01" psmall="0.08" pgold="0.03" min_gold="30" max_gold="100" min_level="14" max_level="20" magic_prob="0.05" magic_power="550" />
 	</Dropslots>
 	
 	<BasicAttributes
@@ -1552,10 +1551,7 @@
 <Monster type="MONSTER" subtype="frost_skel_bow_siege" name="Frost Skeleton Archer" fraction="undead" race="undead" layer="NORMAL">
 	<RenderInfo name="iceSkeleton" />
 	<Dropslots >
-		<Dropslot pbig="0.2" pmedium="0.3" psmall="0.1" pgold="0.05" min_gold="90" max_gold="250" min_level="10" max_level="17" magic_prob="0.5" magic_power="550" />
-		<Dropslot pbig="0.2" pmedium="0.3" psmall="0.1" pgold="0.05" min_gold="80" max_gold="200" min_level="10" max_level="16" magic_prob="0.5" magic_power="500" />
-		<Dropslot pbig="0.00" pmedium="0.0" psmall="0.4" pgold="0.00" min_gold="80" max_gold="200" min_level="9" max_level="17" magic_prob="0.5" magic_power="500" />
-		<Dropslot pbig="0.00" pmedium="0.0" psmall="0.00" pgold="1.00" min_gold="80" max_gold="180" />
+		<Dropslot pbig="0.005" pmedium="0.01" psmall="0.08" pgold="0.03" min_gold="30" max_gold="100" min_level="14" max_level="20" magic_prob="0.05" magic_power="550" />
 	</Dropslots>
 	
 	<BasicAttributes
@@ -1607,8 +1603,7 @@
 <Monster type="MONSTER" subtype="shadow_bow_skel_siege" name="Skeleton Shadow Archer" fraction="undead" race="undead" layer="NORMAL">
 	<RenderInfo name="bow_skeleton" />
 	<Dropslots >
-		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.08" pgold="0.05" min_gold="30" max_gold="100" min_level="9" max_level="17" magic_prob="0.2" magic_power="550" />
-		<Dropslot pbig="0.03" pmedium="0.08" psmall="0.05" pgold="0.05" min_gold="20" max_gold="50" min_level="8" max_level="16" magic_prob="0.4" magic_power="450" />
+		<Dropslot pbig="0.005" pmedium="0.01" psmall="0.08" pgold="0.03" min_gold="30" max_gold="100" min_level="14" max_level="20" magic_prob="0.05" magic_power="550" />
 	</Dropslots>
 	
 	<BasicAttributes
@@ -1669,7 +1664,7 @@
 	<BasicAttributes
 					experience="350"
 					level="17"
-					max_health="500"
+					max_health="1500"
 					armor="35"
 					block="25"
 					power="130"
@@ -1712,7 +1707,7 @@
 </Monster>
 
 <!-- third mini-boss during the siege of dwarfenwall-->
-<Monster type="MONSTER" subtype="boss3_siege" name="Miniboss 3" fraction="undead" race="undead" layer="NORMAL">
+<Monster type="MONSTER" subtype="boss3_siege" name="Savage Skeleton" fraction="undead" race="undead" layer="NORMAL">
 	<RenderInfo name="savageSkeleton" />
 	<Dropslots >
 		<Dropslot pbig="0.2" pmedium="0.3" psmall="0.1" pgold="0.05" min_gold="90" max_gold="250" min_level="10" max_level="17" magic_prob="0.5" magic_power="550" />
@@ -1724,7 +1719,7 @@
 	<BasicAttributes
 					experience="330"
 					level="17"
-					max_health="1200"
+					max_health="1650"
 					armor="50"
 					block="0"
 					power="180"
@@ -2046,22 +2041,68 @@
 
 
 <!-- monstergroups for the siege -->
-<MonsterGroup name="easySkeletonsDwall" >
-	<SubGroup subtype="sword_skel_siege" number="3" prob="0.7" />
-	<SubGroup subtype="axe_skel_siege" number="3" prob="0.7" />
+
+<MonsterGroup name="weakSkeletonsDwall1" >
+	<SubGroup subtype="sword_skel_siege" number="3" prob="1.0" />
 </MonsterGroup>
 
-<MonsterGroup name="mediumSkeletonsDwall" >
-	<SubGroup subtype="sword_skel_siege" number="3" prob="0.7" />
-	<SubGroup subtype="axe_skel_siege" number="3" prob="0.7" />
-	<SubGroup subtype="bow_skel_siege" number="3" prob="0.7" />
+<MonsterGroup name="weakSkeletonsDwall2" >
+	<SubGroup subtype="sword_skel_siege" number="1" prob="1.0" />
+	<SubGroup subtype="bow_skel_siege" number="2" prob="1.0" />
 </MonsterGroup>
 
-<MonsterGroup name="hardSkeletonsDwall" >
-	<SubGroup subtype="sword_skel_siege" number="3" prob="0.7" />
-	<SubGroup subtype="axe_skel_siege" number="3" prob="0.5" />
-	<SubGroup subtype="axe2_skel_siege" number="3" prob="0.5" />
-	<SubGroup subtype="bow_skel_siege" number="3" prob="0.7" />
+<MonsterGroup name="easySkeletonsDwall1" >
+	<SubGroup subtype="sword_skel_siege" number="3" prob="1.0" />
+	<SubGroup subtype="bow_skel_siege" number="2" prob="1.0" />
+</MonsterGroup>
+
+<MonsterGroup name="easySkeletonsDwall2" >
+	<SubGroup subtype="axe_skel_siege" number="2" prob="1.0" />
+	<SubGroup subtype="bow_skel_siege" number="3" prob="1.0" />
+</MonsterGroup>
+
+<MonsterGroup name="easySkeletonsDwall3" >
+	<SubGroup subtype="sword_skel_siege" number="2" prob="1.0" />
+	<SubGroup subtype="axe_skel_siege" number="3" prob="1.0" />
+</MonsterGroup>
+
+
+<MonsterGroup name="mediumSkeletonsDwall1" >
+	<SubGroup subtype="sword_skel_siege" number="4" prob="1.0" />
+	<SubGroup subtype="axe_skel_siege" number="3" prob="1.0" />
+</MonsterGroup>
+
+<MonsterGroup name="mediumSkeletonsDwall2" >
+	<SubGroup subtype="sword_skel_siege" number="2" prob="1.0" />
+	<SubGroup subtype="axe_skel_siege" number="2" prob="1.0" />
+	<SubGroup subtype="bow_skel_siege" number="3" prob="1.0" />
+</MonsterGroup>
+
+<MonsterGroup name="mediumSkeletonsDwall3" >
+	<SubGroup subtype="sword_skel_siege" number="2" prob="1.0" />
+	<SubGroup subtype="axe_skel_siege" number="1" prob="1.0" />
+	<SubGroup subtype="axe2_skel_siege" number="2" prob="1.0" />
+	<SubGroup subtype="bow_skel_siege" number="2" prob="1.0" />
+</MonsterGroup>
+
+<MonsterGroup name="hardSkeletonsDwall1" >
+	<SubGroup subtype="sword_skel_siege" number="3" prob="1.0" />
+	<SubGroup subtype="axe_skel_siege" number="3" prob="1.0" />
+	<SubGroup subtype="bow_skel_siege" number="3" prob="1.0" />
+</MonsterGroup>
+
+<MonsterGroup name="hardSkeletonsDwall2" >
+	<SubGroup subtype="sword_skel_siege" number="3" prob="1.0" />
+	<SubGroup subtype="axe_skel_siege" number="2" prob="1.0" />
+	<SubGroup subtype="axe2_skel_siege" number="3" prob="1.0" />
+	<SubGroup subtype="bow_skel_siege" number="1" prob="1.0" />
+</MonsterGroup>
+
+<MonsterGroup name="hardSkeletonsDwall3" >
+	<SubGroup subtype="sword_skel_siege" number="1" prob="1.0" />
+	<SubGroup subtype="axe_skel_siege" number="2" prob="1.0" />
+	<SubGroup subtype="axe2_skel_siege" number="1" prob="1.0" />
+	<SubGroup subtype="bow_skel_siege" number="5" prob="1.0" />
 </MonsterGroup>
 
 <MonsterGroup name="burningMeleeSkeletonsDwall" >

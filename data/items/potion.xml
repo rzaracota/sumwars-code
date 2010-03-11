@@ -67,7 +67,7 @@
   
   
 	<DropChance
-		level="-10"
+		level="-12"
 		probability="0.02"
 	/>
 </Item>
@@ -87,7 +87,7 @@
   
   
 	<DropChance
-		level="-10"
+		level="-12"
 		probability="0.02"
 	/>
 </Item>
@@ -107,7 +107,7 @@
   
   
 	<DropChance
-		level="-10"
+		level="-30"
 		probability="0.02"
 	/>
 </Item>
@@ -127,7 +127,7 @@
   
   
 	<DropChance
-		level="-10"
+		level="-30"
 		probability="0.02"
 	/>
 </Item>
@@ -147,7 +147,7 @@
   
   
 	<DropChance
-		level="-10"
+		level="-30"
 		probability="0.02"
 	/>
 </Item>
@@ -167,7 +167,7 @@
   
   
 	<DropChance
-		level="-10"
+		level="-12"
 		probability="0.02"
 	/>
 </Item>
@@ -187,7 +187,7 @@
   
   
 	<DropChance
-		level="-10"
+		level="-15"
 		probability="0.02"
 	/>
 </Item>
@@ -207,7 +207,7 @@
   
   
 	<DropChance
-		level="-10"
+		level="-15"
 		probability="0.02"
 	/>
 </Item>

@@ -353,7 +353,7 @@
 	<BasicAttributes
 					experience="45"
 					level="10"
-					max_health="360"
+					max_health="300"
 					armor="60"
 					block="60"
 					attack="140"
@@ -393,13 +393,13 @@
 	<BasicAttributes
 					experience="0"
 					level="19"
-					max_health="320"
+					max_health="240"
 					armor="60"
 					block="0"
 					attack="50"
 					strength="32"
 					dexterity="38"
-					magic_power="70"
+					magic_power="60"
 					willpower="43"
 					resistances_physical="10"
 					resistances_air="17"
@@ -419,8 +419,8 @@
 		<Ability type="walk"/>
 		
 		<Ability type="avaera_firebolt" rating="2"/>
-		<Ability type="avaera_fireball" rating="1.2" all_target_rating="0.5" all_target_rating_radius="1.5"/>
-		<Ability type="avaera_firecolumn" rating="3"/>
+		<Ability type="avaera_fireball" rating="1.2" all_target_rating="0.5" all_target_rating_radius="1.5"/> 
+		<Ability type="avaera_firecolumn" rating="0" all_target_rating="1.5" all_target_rating_radius="2"/> 
 		
 		<Ability type="die"/>
 		
@@ -442,7 +442,7 @@
 	<BasicAttributes
 					experience="0"
 					level="19"
-					max_health="320"
+					max_health="240"
 					armor="60"
 					block="0"
 					attack="50"
@@ -489,7 +489,7 @@
 	<BasicAttributes
 					experience="0"
 					level="20"
-					max_health="720"
+					max_health="600"
 					armor="90"
 					block="0"
 					attack="40"
@@ -531,7 +531,7 @@
 	<BasicAttributes
 					experience="45"
 					level="16"
-					max_health="360"
+					max_health="300"
 					armor="60"
 					block="60"
 					attack="140"

@@ -1958,7 +1958,7 @@ void Creature::calcWalkDir(Vector goal,WorldObject* goalobj)
 	if (getType() == "MONSTER")
 	{
 		highquality = false;
-		pathmaxdist = 12;
+		pathmaxdist = 16;
 		qual = 2;
 		recalctime = 1000;
 	}
