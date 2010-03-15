@@ -456,9 +456,9 @@
 				setGuard(17,-90);
 				
 				--Darna's fireelementals
-				createUnitIndex(18, "locElemental1", 12, "fire_guard", 6, 60000, "locElemental1")
+				createUnitIndex(18, "locElemental1", 12, "fire_guard", 6, 60000, "locElemental1","newDefender")
 				--local guard = setGuard(18,-90);
-				createUnitIndex(19, "locElemental2", 12, "fire_guard", 6, 60000, "locElemental2")
+				createUnitIndex(19, "locElemental2", 12, "fire_guard", 6, 60000, "locElemental2","newDefender")
 				--local guard = setGuard(19,-90);
 				
 				--elite-guards of Greif and Darna

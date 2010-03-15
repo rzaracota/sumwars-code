@@ -263,6 +263,12 @@ FIXED_OBJECT
         
 </ObjectTemplate>
 
+<ObjectTemplate name="$wall_city" type="FIXED_OBJECT">
+        <Environment name="meadow" default = "true">
+                <Object name="wallCity1" />
+        </Environment>
+</ObjectTemplate>
+
 <ObjectTemplate name="$house" type="FIXED_OBJECT">
         <Environment name="meadow" default = "true">
                 <Object name="houseAisen1" />
