@@ -618,6 +618,7 @@
 			</Condition>
 			<Effect>
 				insertTrigger("beforeBattle");
+				defend_dwall.siegeStarted=true;
 			</Effect>
 		</Event>
 		
@@ -1682,7 +1683,6 @@
 			</Condition>
 			<Effect>
 				print("the siege has ended");
-				defend_dwall.siegeEnded = true;
 				insertTrigger("changeView");
 				addTriggerVariable("nextTrigger","theSiegeEnds");
 			</Effect>
@@ -1773,9 +1773,9 @@
 					defend_dwall.outcome="bad";
 				else
 					speak("greif",_("Welche Unterstuetzung denn bitte?"),"angry");
-					speak("greif",_("Zwei Drittel meiner Leute sind tot."),"angry");
+					speak("greif",_("Zwei Drittel meiner Leute sind tot!"),"angry");
 					speak("greif",_("Einen zweiten Angriff werden wir niemals ueberleben."),"angry");
-					speak("darna",_("Genug davon. Reden wir im Kommandozentrum weiter."),"aloof");
+					speak("darna",_("Genug davon. Reden wir im Kommandozentrum weiter."),"unhappy");
 					speak("darna",_("Ich will endlich von dem ganzen Blut weg."),"sad");
 					
 					defend_dwall.outcome="worst";
@@ -1786,9 +1786,130 @@
 		</Event>
 		<Event trigger="cleanAfterSiege">
 			<Effect>
+				defend_dwall.siegeEnded = true;
 				setCutsceneMode(false);
 			</Effect>
 		</Event>
 	</Region>
+	
+	<Region name="dwarfenwallCommand">
+		<Event trigger="enter_region" once="true">
+			<Condition>
+				--TODO: Weitere condition
+				return (defend_dwall.siegeEnded == true)
+			</Condition>
+			<Effect>
+				defend_dwall_tmp.aftermath = true;
+				assembleParty("dwarfenwallCommand","locParty");
+			</Effect>
+		</Event>
+		
+		<Event trigger="party_complete" once="true">
+			<Condition>
+				return (defend_dwall_tmp.aftermath == true)
+			</Condition>
+			<Effect>
+				defend_dwall_tmp.aftermath = false;
+				
+				setCutsceneMode(true);
+				addCameraPosition(0,"locCamera",-80,55,15);
+				
+				groupObjectsArc(getPlayers(),"locParty","locCamera");
+				addUnitCommand(getPartyleader(),"walk","locLeader");
+				
+				lookAt(dwarfenwall.general,"locCamera");
+				lookAt(dwarfenwall.council,"locCamera");
+				
+				initDialog();
+				
+				addSpeaker(dwarfenwall.general, "general");
+				addSpeaker(dwarfenwall.council, "council");
+				
+				if(defend_dwall.outcome=="godlike" or defend_dwall.outcome=="average")then
+					speak("general",_("hmpf"),"aloof");
+					speak("general",_("Gut geschlagen."),"normal");
+					if(solo())then
+						speak("general",_("Wenigstens seid Ihr den Aerger wert. _solo"),"normal");
+						speak("any",_("Als ob ich jemals welchen gemacht haette."),"unhappy");
+					else
+						speak("general",_("Wenigstens seid ihr den Aerger wert."),"normal");
+						speak("any",_("Als ob wir jemals welchen gemacht haetten."),"unhappy");
+					end;
+				end;
+				
+				
+				speak("leader",_("Die Stadt ist nur fuer den Augenblick sicher."),"normal");
+				speak("leader",_("Wir koennen uns jetzt nicht ausruhen."),"normal");
+				if(defend_dwall.outcome=="worst")then
+					speak("general",_("Als ob wir nicht schon genug mit dem Personalmangel zu kaempfen haetten."),"angry");
+				end;
+				speak("council",_("Die Quelle der Angriffe ist der Lich!"),"aloof");
+				speak("council",_("Er muss vernichtet werden!"),"aloof");
+				
+				speak("general",_("Und wer?!"),"angry");
+				speak("general",_("Ich habe nicht genug Maenner, um einen Ausfall mit Erfolg zu fuehren."),"unhappy");
+				speak("general",_("Das waere Selbstmord!"),"sad");
+				
+				speak("council",_("Das hat nichts mit Euch zu tun."),"unhappy");
+				if(solo() and maleOnly())then
+					speak("council",_("Dieser Mann steht unter meinem direkten Befehl."),"aloof");
+				elseif(solo())then
+					speak("council",_("Diese Frau steht unter meinem direkten Befehl."),"aloof");
+				else
+					speak("council",_("Diese Leute stehen unter meinem direkten Befehl."),"aloof");
+				end;
+				
+				speak("priopt",_("In ihrer unentspannten Art erinnert sie mich an einen gewissen anderen Konzilsmagier."),"thougful");
+				
+				speak("general",_("Ihr schickt sie in den sicheren Tod!"),"angry");
+				if(defend_dwall.outcome=="worst")then	
+					speak("general",_("Nicht, dass mich das stoeren wuerde, aber wir koennen momentan niemanden verschwenden!"),"unhappy");
+					speak("leader",_("Nur kein falsches Mitleid."),"unhappy");
+					speak("leader",_("Egal wie oft ich sterbe, der Lich wird am Ende vernichtet sein."),"threaten");
+					setSpeakerEmotion("leader","normal");
+					speak("general",_("Ausser um euch selbst kuemmert ihr euch doch um niemanden!"),"angry");
+				else
+					speak("leader",_("Das waere nicht das erste Mal..."),"amused")
+					speak("council",_("Wollt ihr mir vorschreiben, wie ich meine Leute einsetze?"),"unhappy");
+					speak("general",_("Niemand verdient eine solche Behandlung, nicht einmal die."),"unhappy");
+					if(solo())then
+						speak("leader",_("Lasst das meine Sorge sein."),"amused")
+					else
+						speak("leader",_("Lasst das unsere Sorge sein."),"amused")
+					end;
+					speak("general",_("Euch ist wirklich nicht zu helfen"),"unhappy");
+				end;
+				
+				speak("mage",_("Endlich hat er es auch kapiert."),"sneer");
+				speak("council",_("Wir haben keine Zeit für kleinliche Streitereien! Geht und erschlagt den Lich!"),"unhappy");
+				speak("leader",_("Wie ihr wuenscht..."),"unhappy");
+				if((getSpeaker("archer")~=nil) and (getSpeaker("priest")~=nil))then
+					speak("archer",_("So ein Pfeil koennte im Eifer des Gefechts doch von ueberall gekommen sein..."),"thoughtful");
+					speak("priest",_("Denk nicht mal drueber nach."),"unhappy");
+				end;
+				changeTopic("setOutForTheLich")
+			</Effect>
+		</Event>
+		<Event trigger="command_complete" once="true">
+			<Condition>
+				if(trigger.unit==getPartyleader())then
+					return (defend_dwall.siegeEnded == true);
+				else
+					return false;
+				end;
+			</Condition>
+			<Effect>
+				lookAt(trigger.unit,"locCamera");
+			</Effect>
+		</Event>
+		
+		<Event trigger="setOutForTheLich" once="true">
+			<Effect>
+				setCutsceneMode(false);
+				defend_dwall.theLich = true;
+			</Effect>
+		</Event>
+	</Region>
 </Quest>
+
 
