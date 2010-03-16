@@ -1910,6 +1910,19 @@
 			</Effect>
 		</Event>
 	</Region>
+	
+	<Region name="dwarfenwall">
+		<Event trigger="enter_region" once="true">
+			<Condition>
+				return (defend_dwall.theLich == true);
+			</Condition>
+			<Effect>
+				local stone = getObjectByNameRef("blocadeNorth");
+				getObjectOutOfWay(stone);
+			</Effect>
+		</Event>
+	</Region>
+	
 </Quest>
 
 
