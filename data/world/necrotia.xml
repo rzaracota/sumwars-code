@@ -7,7 +7,7 @@
 		<HeroLight red="1.0" green="1.0" blue="1.0" /> 
 		<DirectionalLight red="0.3" green="0.3" blue="0.3" />
 		
-		<Settings dimx="32" dimy="32" area_percent="0.4" complexity="0.3" granularity="6"  ground="grass1"/>
+		<Settings dimx="32" dimy="32" region_template="undeadCamp" ground="grass1"/>
 		
 		<ExitDirections north="false" south="true" west="false" east="false" />
 		
