@@ -364,3 +364,40 @@ function setDebugToFalse()
 	debug["dwall_siege"]["skipWave14"]=false;
 	debug["dwall_siege"]["skip6thBoss"]=false;
 end;
+
+function printDefenseHP()
+	local average = 0;
+	local hplist = {};
+	local str="{";
+	for unit,index in pairs(defend_dwall_tmp.units) do
+		if (index <= 24) then
+			average = average + get(unit,"health") / get(unit,"max_health");
+			hplist[index] = get(unit,"health") / get(unit,"max_health");
+		end;
+	end;
+	local hp;
+	local komma="";
+	for index,hp in pairs(hplist) do
+		str = str..komma..hp;
+		komma = ", ";
+	end;
+	str = str.."}";
+	print("average ",average/24);
+	print(str);
+end
+
+
+function setDefenseHP(nr)
+	local hplist;
+	if (nr == 1) then
+		hplist={1, 0.13031555175781, 0.573414014180501, 1, 1, 1, 1, 1, 0.97932861328125, 1, 0.20452972412109, 0.94270884195964, 0.87313632965088, 0.62301762898763, 1, 1, 0.75788075764974, 1, 0.59026256561279, 1, 1, 1, 1, 1}
+	elseif (nr==2) then
+		hplist = {1, 0.41813809712728, 1, 0.72315775553385, 0.69020868937174, 1, 1, 0.99698940040791, 1, 1, 1, 1, 0.83674716949463, 0.55867671966553, 1, 0.77079157511393, 1, 0.094928855895996, 1, 1, 1, 1, 1, 1}
+	end;
+	
+	for unit,index in pairs(defend_dwall_tmp.units) do
+		if (hplist[index] ~= nil) then
+			set(unit,"health",hplist[index] * get(unit,"max_health"));
+		end;
+	end;
+end;

@@ -378,11 +378,11 @@
 				debug["defend_dwall"] = false;
 				debug["dwall_siege"]={};
 				debug["dwall_siege"]["skipIntro"]=true;
-				debug["dwall_siege"]["skipWave1"]=false;
-				debug["dwall_siege"]["skipWave2"]=false;
-				debug["dwall_siege"]["skipWave3"]=false;
-				debug["dwall_siege"]["skipWave4"]=false;
-				debug["dwall_siege"]["skipFirePrep"]=false;
+				debug["dwall_siege"]["skipWave1"]=true;
+				debug["dwall_siege"]["skipWave2"]=true;
+				debug["dwall_siege"]["skipWave3"]=true;
+				debug["dwall_siege"]["skipWave4"]=true;
+				debug["dwall_siege"]["skipFirePrep"]=true;
 				debug["dwall_siege"]["skipWave5"]=false;
 				debug["dwall_siege"]["skipWave6"]=false;
 				debug["dwall_siege"]["skip2ndBoss"]=false;
@@ -399,6 +399,7 @@
 				debug["dwall_siege"]["skipWave13"]=true;
 				debug["dwall_siege"]["skipWave14"]=true;
 				debug["dwall_siege"]["skip6thBoss"]=false;
+				
 				
 				--this will set all debugvariables to false. Be sure to add new variables if you want it to keep functioning. Location: dwarfenwall.lua
 				--setDebugToFalse();
@@ -590,6 +591,43 @@
 				createAttackIndex(1435, "locSpawn6", defend_dwall_tmp.attackRight, "hardSkeletonsDwall3");
 				-- normal skeletons end
 				
+				-- fire skeletons
+				createAttackIndex(2211, "locSpawn2", defend_dwall_tmp.attackLeft, "easyFireSkeletonsDwall1");
+				createAttackIndex(2212, "locSpawn3", defend_dwall_tmp.attackMiddleLeft, "easyFireSkeletonsDwall1");
+				createAttackIndex(2213, "locSpawn4", defend_dwall_tmp.attackMiddle, "easyFireSkeletonsDwall1");
+				createAttackIndex(2214, "locSpawn5", defend_dwall_tmp.attackMiddleRight, "easyFireSkeletonsDwall1");
+				createAttackIndex(2215, "locSpawn6", defend_dwall_tmp.attackRight, "easyFireSkeletonsDwall1");
+			
+				createAttackIndex(2221, "locSpawn2", defend_dwall_tmp.attackLeft, "easyFireSkeletonsDwall2");
+				createAttackIndex(2222, "locSpawn3", defend_dwall_tmp.attackMiddleLeft, "easyFireSkeletonsDwall2");
+				createAttackIndex(2223, "locSpawn4", defend_dwall_tmp.attackMiddle, "easyFireSkeletonsDwall2");
+				createAttackIndex(2224, "locSpawn5", defend_dwall_tmp.attackMiddleRight, "easyFireSkeletonsDwall2");
+				createAttackIndex(2225, "locSpawn6", defend_dwall_tmp.attackRight, "easyFireSkeletonsDwall2");
+				
+				createAttackIndex(2311, "locSpawn2", defend_dwall_tmp.attackLeft, "mediumFireSkeletonsDwall1");
+				createAttackIndex(2312, "locSpawn3", defend_dwall_tmp.attackMiddleLeft, "mediumFireSkeletonsDwall1");
+				createAttackIndex(2313, "locSpawn4", defend_dwall_tmp.attackMiddle, "mediumFireSkeletonsDwall1");
+				createAttackIndex(2314, "locSpawn5", defend_dwall_tmp.attackMiddleRight, "mediumFireSkeletonsDwall1");
+				createAttackIndex(2315, "locSpawn6", defend_dwall_tmp.attackRight, "mediumFireSkeletonsDwall1");
+				
+				createAttackIndex(2321, "locSpawn2", defend_dwall_tmp.attackLeft, "mediumFireSkeletonsDwall2");
+				createAttackIndex(2322, "locSpawn3", defend_dwall_tmp.attackMiddleLeft, "mediumFireSkeletonsDwall2");
+				createAttackIndex(2323, "locSpawn4", defend_dwall_tmp.attackMiddle, "mediumFireSkeletonsDwall2");
+				createAttackIndex(2324, "locSpawn5", defend_dwall_tmp.attackMiddleRight, "mediumFireSkeletonsDwall2");
+				createAttackIndex(2325, "locSpawn6", defend_dwall_tmp.attackRight, "mediumFireSkeletonsDwall2");
+				
+				createAttackIndex(2411, "locSpawn2", defend_dwall_tmp.attackLeft, "hardFireSkeletonsDwall1");
+				createAttackIndex(2412, "locSpawn3", defend_dwall_tmp.attackMiddleLeft, "hardFireSkeletonsDwall1");
+				createAttackIndex(2413, "locSpawn4", defend_dwall_tmp.attackMiddle, "hardFireSkeletonsDwall1");
+				createAttackIndex(2414, "locSpawn5", defend_dwall_tmp.attackMiddleRight, "hardFireSkeletonsDwall1");
+				createAttackIndex(2415, "locSpawn6", defend_dwall_tmp.attackRight, "hardFireSkeletonsDwall1");
+				
+				createAttackIndex(2421, "locSpawn2", defend_dwall_tmp.attackLeft, "hardFireSkeletonsDwall2");
+				createAttackIndex(2422, "locSpawn3", defend_dwall_tmp.attackMiddleLeft, "hardFireSkeletonsDwall2");
+				createAttackIndex(2423, "locSpawn4", defend_dwall_tmp.attackMiddle, "hardFireSkeletonsDwall2");
+				createAttackIndex(2424, "locSpawn5", defend_dwall_tmp.attackMiddleRight, "hardFireSkeletonsDwall2");
+				createAttackIndex(2425, "locSpawn6", defend_dwall_tmp.attackRight, "hardFireSkeletonsDwall2");
+				-- fire skeletons end
 				
 				createAttackIndex(80, "locSpawn1", defend_dwall_tmp.attackLeft, "easySkeletonsDwall");
 				createAttackIndex(81, "locSpawn2", defend_dwall_tmp.attackLeft, "easySkeletonsDwall");
@@ -1141,6 +1179,7 @@
 				elseif(debug["dwall_siege"]["skipFirePrep"] ~=true)then
 					insertTrigger("firstBoss");
 				else
+					setDefenseHP(1);
 					insertTrigger("wave5");
 				end;
 			</Effect>
@@ -1216,34 +1255,88 @@
 			
 				defend_dwall_tmp.phase="wave5"
 				if(debug["dwall_siege"]["skipWave5"] ~=true)then
-					launchAttack(102); --fm
-					launchAttack(110); --fr
-					launchAttack(114); --fr
-					launchAttack(108); --fm
+					launchAttack(2212); --fe1
+					launchAttack(2214); --fe1
 					
-					startTimer("wave6",30000);
+					startTimer("wave5b",30000);
 				else
 					insertTrigger("wave6");
 				end;
 			</Effect>
 		</Event>
 		
+		<Event trigger="wave5b" once="true">
+			<Effect>
+				launchAttack(2311); --fm1
+				launchAttack(2223); --fe2
+				launchAttack(2315); --fm1
+				
+				startTimer("wave5c",30000);
+			</Effect>
+		</Event>
+		
+		<Event trigger="wave5c" once="true">
+			<Effect>
+				launchAttack(1311); --m2
+				launchAttack(2324); --fm2
+				launchAttack(2225); --fe2
+				
+				startTimer("wave5d",30000);
+			</Effect>
+		</Event>
+		
+		<Event trigger="wave5d" once="true">
+			<Effect>
+				launchAttack(2321); --fm2
+				launchAttack(2313); --fm1
+				launchAttack(1215); --fe2
+				
+				startTimer("wave6",40000);
+			</Effect>
+		</Event>
+		
 		<Event trigger="wave6" once="true">
 			<Effect>
+				print("wave6");
 				defend_dwall_tmp.phase="wave6"
 				if(debug["dwall_siege"]["skipWave6"] ~=true)then
-					launchAttack(102); --fm
-					launchAttack(110); --fr
-					launchAttack(104); --fm
-					launchAttack(112); --fm
-					launchAttack(106); --fm
-					launchAttack(114); --fr
-					launchAttack(108); --fm
-					
-					startTimer("secondBoss",50000);
+					launchAttack(2412); --fh1
+					launchAttack(2323); --fm2
+				
+					startTimer("wave6b",30000);
 				else
 					insertTrigger("secondBoss");
 				end;
+			</Effect>
+		</Event>
+		
+		<Event trigger="wave6b" once="true">
+			<Effect>
+				launchAttack(1322); --m2
+				launchAttack(1223); --e2
+				launchAttack(2425); --fh2
+				
+				startTimer("wave6c",30000);
+			</Effect>
+		</Event>
+		
+		<Event trigger="wave6c" once="true">
+			<Effect>
+				launchAttack(1221); --fe2
+				launchAttack(2423); --h2
+				launchAttack(1225); --fe2
+				
+				startTimer("wave6d",30000);
+			</Effect>
+		</Event>
+		
+		<Event trigger="wave6d" once="true">
+			<Effect>
+				launchAttack(2412); --fh1
+				launchAttack(2314); --fm1
+				launchAttack(1415); --h1
+				
+				startTimer("secondBoss",40000);
 			</Effect>
 		</Event>
 		
@@ -1251,11 +1344,11 @@
 			<Effect>
 				defend_dwall_tmp.phase="boss2"
 				if(debug["dwall_siege"]["skip2ndBoss"] ~=true)then
-					launchAttack(116); --b
-					launchAttack(118); --boss
-					launchAttack(117); --b
+					launchAttack(1312); --m1
+					launchAttack(5023); --boss 2
+					launchAttack(1314); --m1
 				else
-					insertTrigger("wave7");
+					insertTrigger("wave7pre");
 				end;
 			</Effect>
 		</Event>
@@ -1265,11 +1358,18 @@
 				return(get(trigger.unit,"subtype")=="boss2_siege");
 			</Condition>
 			<Effect>
-				defend_dwall_tmp.phase="endlessStream"
 				--print("chilling death is dead")
 				--print("incoming fireskeletons")
-				skeletonBarrage(8);
-				startTimer("wave7",30000);
+				startTimer("wave7pre",15000);
+			</Effect>
+		</Event>
+		
+		<Event trigger="wave7pre" once="true">
+			<Effect>
+				print("wave7pre");
+				defend_dwall_tmp.phase="endlessStream"
+				--skeletonBarrage(8);
+				--startTimer("wave7",30000);
 			</Effect>
 		</Event>
 

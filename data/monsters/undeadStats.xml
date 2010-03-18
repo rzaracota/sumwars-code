@@ -1362,7 +1362,7 @@
 					resistances_physical="20"
 					resistances_air="0"
 					resistances_ice="-50"
-					resistances_fire="50"
+					resistances_fire="40"
 					resistances_cap_physical="50"
 					resistances_cap_air="50"
 					resistances_cap_ice="50"
@@ -1412,12 +1412,12 @@
 		willpower="40"
 		resistances_physical="20"
 		resistances_air="0"
-		resistances_ice="40"
-		resistances_fire="-50"
+		resistances_ice="-50"
+		resistances_fire="40"
 		resistances_cap_physical="50"
 		resistances_cap_air="50"
 		resistances_cap_ice="50"
-		resistances_cap_fire="0"
+		resistances_cap_fire="80"
 		walk_speed="3000"
 		attack_speed="1000"
 		step_length="1.0"
@@ -1464,12 +1464,12 @@
 		willpower="40"
 		resistances_physical="20"
 		resistances_air="0"
-		resistances_ice="40"
-		resistances_fire="-50"
+		resistances_ice="-50"
+		resistances_fire="40"
 		resistances_cap_physical="50"
 		resistances_cap_air="50"
 		resistances_cap_ice="50"
-		resistances_cap_fire="0"
+		resistances_cap_fire="80"
 		walk_speed="3000"
 		attack_speed="1500"
 		step_length="1.0"
@@ -1520,7 +1520,7 @@
 		resistances_fire="-50"
 		resistances_cap_physical="50"
 		resistances_cap_air="50"
-		resistances_cap_ice="50"
+		resistances_cap_ice="80"
 		resistances_cap_fire="0"
 		walk_speed="3000"
 		attack_speed="1500"
@@ -1572,7 +1572,7 @@
 					resistances_fire="-50"
 					resistances_cap_physical="50"
 					resistances_cap_air="50"
-					resistances_cap_ice="50"
+					resistances_cap_ice="80"
 					resistances_cap_fire="0"
 					walk_speed="3000"
 					attack_speed="1000"
@@ -1655,18 +1655,18 @@
 <Monster type="MONSTER" subtype="boss2_siege" name="Chilling Death" fraction="undead" race="undead" layer="NORMAL">
 	<RenderInfo name="iceSkeleton" />
 	<Dropslots >
-		<Dropslot pbig="0.2" pmedium="0.3" psmall="0.1" pgold="0.05" min_gold="90" max_gold="250" min_level="10" max_level="17" magic_prob="0.5" magic_power="550" />
-		<Dropslot pbig="0.2" pmedium="0.3" psmall="0.1" pgold="0.05" min_gold="80" max_gold="200" min_level="10" max_level="16" magic_prob="0.5" magic_power="500" />
-		<Dropslot pbig="0.00" pmedium="0.0" psmall="0.4" pgold="0.00" min_gold="80" max_gold="200" min_level="9" max_level="17" magic_prob="0.5" magic_power="500" />
-		<Dropslot pbig="0.00" pmedium="0.0" psmall="0.00" pgold="1.00" min_gold="80" max_gold="180" />
+		<Dropslot pbig="0.3" pmedium="0.3" psmall="0.2" pgold="0.05" min_gold="150" max_gold="400" min_level="15" max_level="20" magic_prob="0.6" magic_power="550" />
+		<Dropslot pbig="0.3" pmedium="0.3" psmall="0.2" pgold="0.05" min_gold="120" max_gold="300" min_level="14" max_level="19" magic_prob="0.6" magic_power="500" />
+		<Dropslot pbig="0.00" pmedium="0.0" psmall="0.4" pgold="0.00" min_gold="100" max_gold="300" min_level="13" max_level="18" magic_prob="0.6" magic_power="500" />
+		<Dropslot pbig="0.00" pmedium="0.0" psmall="0.00" pgold="1.00" min_gold="80" max_gold="280" />
 	</Dropslots>
 	
 	<BasicAttributes
-					experience="350"
+					experience="450"
 					level="17"
-					max_health="1500"
+					max_health="1700"
 					armor="35"
-					block="25"
+					block="35"
 					power="130"
 					attack="250"
 					strength="30"
@@ -1675,7 +1675,7 @@
 					willpower="40"
 					resistances_physical="20"
 					resistances_air="0"
-					resistances_ice="40"
+					resistances_ice="50"
 					resistances_fire="-50"
 					resistances_cap_physical="50"
 					resistances_cap_air="50"
@@ -2104,6 +2104,73 @@
 	<SubGroup subtype="axe2_skel_siege" number="1" prob="1.0" />
 	<SubGroup subtype="bow_skel_siege" number="5" prob="1.0" />
 </MonsterGroup>
+
+<MonsterGroup name="easyFireSkeletonsDwall1" >
+	<SubGroup subtype="fire_skel_sword_siege" number="2" prob="1.0" />
+	<SubGroup subtype="fire_skel_axe2_siege" number="2" prob="1.0" />
+</MonsterGroup>
+
+<MonsterGroup name="easyFireSkeletonsDwall2" >
+	<SubGroup subtype="fire_skel_sword_siege" number="1" prob="1.0" />
+	<SubGroup subtype="fire_skel_axe2_siege" number="1" prob="1.0" />
+	<SubGroup subtype="fire_skel_bow_siege" number="2" prob="1.0" />
+</MonsterGroup>
+
+<MonsterGroup name="mediumFireSkeletonsDwall1" >
+	<SubGroup subtype="fire_skel_sword_siege" number="3" prob="1.0" />
+	<SubGroup subtype="fire_skel_axe2_siege" number="2" prob="1.0" />
+	<SubGroup subtype="fire_skel_bow_siege" number="1" prob="1.0" />
+</MonsterGroup>
+
+<MonsterGroup name="mediumFireSkeletonsDwall2" >
+	<SubGroup subtype="fire_skel_sword_siege" number="2" prob="1.0" />
+	<SubGroup subtype="fire_skel_axe2_siege" number="1" prob="1.0" />
+	<SubGroup subtype="fire_skel_bow_siege" number="3" prob="1.0" />
+</MonsterGroup>
+
+<MonsterGroup name="hardFireSkeletonsDwall1" >
+	<SubGroup subtype="fire_skel_sword_siege" number="3" prob="1.0" />
+	<SubGroup subtype="fire_skel_axe2_siege" number="3" prob="1.0" />
+	<SubGroup subtype="fire_skel_bow_siege" number="2" prob="1.0" />
+</MonsterGroup>
+
+<MonsterGroup name="hardFireSkeletonsDwall2" >
+	<SubGroup subtype="fire_skel_sword_siege" number="2" prob="1.0" />
+	<SubGroup subtype="fire_skel_axe2_siege" number="2" prob="1.0" />
+	<SubGroup subtype="fire_skel_bow_siege" number="4" prob="1.0" />
+</MonsterGroup>
+
+<MonsterGroup name="easyIceSkeletonsDwall1" >
+	<SubGroup subtype="frost_skel_sword_siege" number="3" prob="1.0" />
+	<SubGroup subtype="frost_skel_bow_siege" number="1" prob="1.0" />
+</MonsterGroup>
+
+<MonsterGroup name="easyIceSkeletonsDwall2" >
+	<SubGroup subtype="frost_skel_sword_siege" number="1" prob="1.0" />
+	<SubGroup subtype="frost_skel_bow_siege" number="3" prob="1.0" />
+</MonsterGroup>
+
+<MonsterGroup name="mediumIceSkeletonsDwall1" >
+	<SubGroup subtype="frost_skel_sword_siege" number="4" prob="1.0" />
+	<SubGroup subtype="frost_skel_bow_siege" number="2" prob="1.0" />
+</MonsterGroup>
+
+<MonsterGroup name="mediumIceSkeletonsDwall2" >
+	<SubGroup subtype="frost_skel_sword_siege" number="2" prob="1.0" />
+	<SubGroup subtype="frost_skel_bow_siege" number="4" prob="1.0" />
+</MonsterGroup>
+
+<MonsterGroup name="hardIceSkeletonsDwall1" >
+	<SubGroup subtype="frost_skel_sword_siege" number="5" prob="1.0" />
+	<SubGroup subtype="frost_skel_bow_siege" number="3" prob="1.0" />
+</MonsterGroup>
+
+<MonsterGroup name="hardIceSkeletonsDwall2" >
+	<SubGroup subtype="frost_skel_sword_siege" number="3" prob="1.0" />
+	<SubGroup subtype="frost_skel_bow_siege" number="5" prob="1.0" />
+</MonsterGroup>
+
+
 
 <MonsterGroup name="burningMeleeSkeletonsDwall" >
 	<SubGroup subtype="fire_skel_sword_siege" number="4" prob="0.7" />
