@@ -7,6 +7,10 @@
 		<Animation name="attack" />
 	</Action>
 	
+	<Action name="fire_attack">
+		<Animation name="attack" />
+	</Action>
+	
 	<Action name="summoned">
 		<Animation name="raise" />
 	</Action>
@@ -326,7 +330,7 @@
 	<Action name="walk">
 		<Animation name="walkBow" />
 	</Action>
-	<Action name="fire_shot">
+	<Action name="fire_range_attack">
 		<Animation name="attackRangedBow" />
 	</Action>
 </RenderInfo>
@@ -391,6 +395,9 @@
 	<Action name="ice_shot">
 		<Animation name="attackRangedBow" />
 	</Action>
+	<Action name="ice_range_attack">
+		<Animation name="attackRangedBow" />
+	</Action>
 	<Action name="dark_shot">
 		<Animation name="attackRangedBow" />
 	</Action>
@@ -445,7 +452,7 @@
 
 <!-- frost skeleton, sword-->
 <RenderInfo name="frostSkeletonSwordsman" parent="skeletonbase">
-	<Entity source="skeleton.mesh" scale="1.3"/>
+	<Entity source="skeleton.mesh"/>
 	<Entity objectname="weapon" bone="itemRightHand" source="old_sw.mesh" />
 	<ParticleSystem objectname="iceHead" source="FreezingHead" bone="root" position="0 0 0" rotation="0 0 0"/>
 	<ParticleSystem objectname="iceHand" source="FreezingHand" bone="handBoneRight" position="0 0 0"/>

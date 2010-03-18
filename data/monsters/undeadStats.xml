@@ -643,8 +643,8 @@
 					power="90"
 					attack="160"
 					strength="25"
-					dexterity="60"
-					magic_power="20"
+					dexterity="35"
+					magic_power="12"
 					willpower="40"
 					resistances_physical="20"
 					resistances_air="0"
@@ -1350,19 +1350,19 @@
 	<BasicAttributes
 					experience="120"
 					level="17"
-					max_health="300"
+					max_health="250"
 					armor="40"
 					block="0"
 					power="90"
 					attack="160"
 					strength="25"
-					dexterity="60"
-					magic_power="20"
+					dexterity="44"
+					magic_power="12"
 					willpower="40"
 					resistances_physical="20"
 					resistances_air="0"
 					resistances_ice="-50"
-					resistances_fire="40"
+					resistances_fire="50"
 					resistances_cap_physical="50"
 					resistances_cap_air="50"
 					resistances_cap_ice="50"
@@ -1373,7 +1373,7 @@
 					attack_range="1"
 					>
 		<Ability type="walk" />
-		<Ability type="fire_shot" rating="1"/>
+		<Ability type="fire_range_attack" rating="1"/>
 		<Ability type="summoned" time="2000" />
 		<Ability type="die" />
 		<Ability type="noaction" />
@@ -1400,13 +1400,13 @@
 	
 	<BasicAttributes
 		experience="140"
-		level="17"
-		max_health="700"
+		level="18"
+		max_health="600"
 		armor="40"
 		block="0"
 		power="250"
 		attack="80"
-		strength="70"
+		strength="55"
 		dexterity="25"
 		magic_power="0"
 		willpower="40"
@@ -1424,7 +1424,7 @@
 		attack_range="2.2"
 	>
 		<Ability type="walk" />
-		<Ability type="attack" rating="1"/>
+		<Ability type="fire_attack" rating="1"/>
 		<Ability type="die" />
 		<Ability type="noaction" />
 		<Ability type="summoned" time="2000" />
@@ -1451,14 +1451,14 @@
 	</Dropslots>
 	
 	<BasicAttributes
-		experience="100"
-		level="15"
+		experience="120"
+		level="18"
 		max_health="450"
 		armor="40"
 		block="0"
 		power="150"
 		attack="80"
-		strength="50"
+		strength="42"
 		dexterity="30"
 		magic_power="0"
 		willpower="40"
@@ -1476,7 +1476,7 @@
 		attack_range="1"
 	>
 		<Ability type="walk" />
-		<Ability type="attack" rating="1"/>
+		<Ability type="fire_attack" rating="1"/>
 		<Ability type="die" />
 		<Ability type="noaction" />
 		<Ability type="summoned" time="2000" />
@@ -1503,14 +1503,14 @@
 	</Dropslots>
 	
 	<BasicAttributes
-		experience="100"
-		level="15"
+		experience="140"
+		level="18"
 		max_health="450"
 		armor="40"
 		block="0"
 		power="150"
 		attack="80"
-		strength="50"
+		strength="45"
 		dexterity="30"
 		magic_power="0"
 		willpower="40"
@@ -1555,16 +1555,16 @@
 	</Dropslots>
 	
 	<BasicAttributes
-					experience="350"
+					experience="140"
 					level="17"
-					max_health="400"
+					max_health="250"
 					armor="35"
 					block="25"
 					power="130"
 					attack="250"
 					strength="30"
-					dexterity="75"
-					magic_power="20"
+					dexterity="50"
+					magic_power="14"
 					willpower="40"
 					resistances_physical="20"
 					resistances_air="0"
@@ -1580,7 +1580,7 @@
 					attack_range="1"
 					>
 		<Ability type="walk" />
-		<Ability type="ice_shot" rating="1" timer_nr="0"/>
+		<Ability type="ice_range_attack" rating="1" timer_nr="0"/>
 		<Ability type="summoned" time="2000" />
 		<Ability type="die" />
 		<Ability type="noaction" />
