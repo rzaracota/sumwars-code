@@ -1505,19 +1505,19 @@
 	<BasicAttributes
 		experience="140"
 		level="18"
-		max_health="450"
+		max_health="400"
 		armor="40"
 		block="0"
 		power="150"
 		attack="80"
-		strength="45"
+		strength="42"
 		dexterity="30"
 		magic_power="0"
 		willpower="40"
 		resistances_physical="20"
 		resistances_air="0"
 		resistances_ice="40"
-		resistances_fire="-50"
+		resistances_fire="-70"
 		resistances_cap_physical="50"
 		resistances_cap_air="50"
 		resistances_cap_ice="80"
@@ -1539,6 +1539,7 @@
 		<Immunity type="berserk"/>
 		<Immunity type="confused"/>
 		<Immunity type="mute"/>
+		<Immunity type="frozen"/>
 		
 	</BasicAttributes>
 	
@@ -1557,19 +1558,19 @@
 	<BasicAttributes
 					experience="140"
 					level="17"
-					max_health="250"
+					max_health="200"
 					armor="35"
 					block="25"
 					power="130"
 					attack="250"
 					strength="30"
-					dexterity="50"
+					dexterity="40"
 					magic_power="14"
 					willpower="40"
 					resistances_physical="20"
 					resistances_air="0"
 					resistances_ice="40"
-					resistances_fire="-50"
+					resistances_fire="-70"
 					resistances_cap_physical="50"
 					resistances_cap_air="50"
 					resistances_cap_ice="80"
@@ -1590,6 +1591,8 @@
 		<Immunity type="berserk"/>
 		<Immunity type="confused"/>
 		<Immunity type="mute"/>
+		<Immunity type="frozen"/>
+
 		
 	</BasicAttributes>
 	
@@ -1710,21 +1713,21 @@
 <Monster type="MONSTER" subtype="boss3_siege" name="Savage Skeleton" fraction="undead" race="undead" layer="NORMAL">
 	<RenderInfo name="savageSkeleton" />
 	<Dropslots >
-		<Dropslot pbig="0.2" pmedium="0.3" psmall="0.1" pgold="0.05" min_gold="90" max_gold="250" min_level="10" max_level="17" magic_prob="0.5" magic_power="550" />
-		<Dropslot pbig="0.2" pmedium="0.3" psmall="0.1" pgold="0.05" min_gold="80" max_gold="200" min_level="10" max_level="16" magic_prob="0.5" magic_power="500" />
-		<Dropslot pbig="0.00" pmedium="0.0" psmall="0.4" pgold="0.00" min_gold="80" max_gold="200" min_level="9" max_level="17" magic_prob="0.5" magic_power="500" />
-		<Dropslot pbig="0.00" pmedium="0.0" psmall="0.00" pgold="1.00" min_gold="80" max_gold="180" />
+		<Dropslot pbig="0.3" pmedium="0.3" psmall="0.2" pgold="0.05" min_gold="150" max_gold="400" min_level="15" max_level="20" magic_prob="0.6" magic_power="550" />
+		<Dropslot pbig="0.3" pmedium="0.3" psmall="0.2" pgold="0.05" min_gold="120" max_gold="300" min_level="14" max_level="19" magic_prob="0.6" magic_power="500" />
+		<Dropslot pbig="0.00" pmedium="0.0" psmall="0.4" pgold="0.00" min_gold="100" max_gold="300" min_level="13" max_level="18" magic_prob="0.6" magic_power="500" />
+		<Dropslot pbig="0.00" pmedium="0.0" psmall="0.00" pgold="1.00" min_gold="80" max_gold="280" />
 	</Dropslots>
 	
 	<BasicAttributes
-					experience="330"
+					experience="450"
 					level="17"
-					max_health="1650"
+					max_health="3250"
 					armor="50"
 					block="0"
 					power="180"
 					attack="100"
-					strength="80"
+					strength="100"
 					dexterity="30"
 					magic_power="0"
 					willpower="100"
