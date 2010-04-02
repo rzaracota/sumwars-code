@@ -118,7 +118,7 @@
 		<Ability type="die"/>
 		
 		<Ability type="attack" rating="1"/>
-		
+		<Ability type="resurrection_fire_storm"/>
 		
 	</BasicAttributes>
 	

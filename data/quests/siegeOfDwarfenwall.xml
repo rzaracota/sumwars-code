@@ -723,6 +723,7 @@
 				set(trigger.unit,"health",get(trigger.unit,"max_health"));
 				print("a very important unit just died");
 				defend_dwall_tmp.penalty = defend_dwall_tmp.penalty + 200;
+				addUnitCommand(trigger.unit,"resurrection_fire_storm");
 			</Effect>
 		</Event>
 		
