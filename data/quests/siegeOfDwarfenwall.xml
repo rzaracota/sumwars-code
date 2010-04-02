@@ -418,94 +418,94 @@
 				defend_dwall_tmp.units = {};
 				
 				--guards of the second defense-line
-				createUnitIndex(1, "locGuard1", 10, "guard_siege", 3, 40000, "locSpawnGuards")
+				createUnitIndex(1, "locGuard1", 10, "guard_siege", 3, 40000, "locSpawnGuards",{"entry_south"});
 				setGuard(1,-90)
-				createUnitIndex(2, "locGuard2", 10, "guard_siege", 3, 40000, "locSpawnGuards")
+				createUnitIndex(2, "locGuard2", 10, "guard_siege", 3, 40000, "locSpawnGuards",{"entry_south"});
 				setGuard(2,-90)
-				createUnitIndex(3, "locGuard3", 10, "guard_siege", 3, 40000, "locSpawnGuards")
+				createUnitIndex(3, "locGuard3", 10, "guard_siege", 3, 40000, "locSpawnGuards",{"entry_south","locRampart2"});
 				setGuard(3,-90)
-				createUnitIndex(4, "locGuard4", 10, "guard_siege", 3, 40000, "locSpawnGuards")
+				createUnitIndex(4, "locGuard4", 10, "guard_siege", 3, 40000, "locSpawnGuards",{"entry_south",locRampart1});
 				setGuard(4,-90)
 				
 				--guards of the first defense-line
-				createUnitIndex(5, "locGuard5", 10, "guard_siege", 1, 40000, "locSpawnGuards")
+				createUnitIndex(5, "locGuard5", 10, "guard_siege", 1, 40000, "locSpawnGuards",{"entry_south","locRampart1","locElemental1"})
 				setGuard(5,-90)
-				createUnitIndex(6, "locGuard6", 10, "guard_siege", 1, 40000, "locSpawnGuards")
+				createUnitIndex(6, "locGuard6", 10, "guard_siege", 1, 40000, "locSpawnGuards",{"entry_south","locRampart1","locElemental1"})
 				setGuard(6,-90)
-				createUnitIndex(9, "locGuard9", 10, "guard_siege", 1, 40000, "locSpawnGuards")
+				createUnitIndex(7, "locGuard9", 10, "guard_siege", 1, 40000, "locSpawnGuards",{"entry_south","locRampart1"})
+				setGuard(7,-90)
+				createUnitIndex(8, "locGuard10", 10, "guard_siege", 1, 40000, "locSpawnGuards",{"entry_south","locRampart2"})
+				setGuard(8,-90)
+				createUnitIndex(9, "locGuard11", 10, "guard_siege", 1, 40000, "locSpawnGuards",{"entry_south","locRampart2","locElemental2"})
 				setGuard(9,-90)
-				createUnitIndex(10, "locGuard10", 10, "guard_siege", 1, 40000, "locSpawnGuards")
+				createUnitIndex(10, "locGuard12", 10, "guard_siege", 1, 40000, "locSpawnGuards",{"entry_south","locRampart2","locElemental2"})
 				setGuard(10,-90)
-				createUnitIndex(11, "locGuard11", 10, "guard_siege", 1, 40000, "locSpawnGuards")
-				setGuard(11,-90)
-				createUnitIndex(12, "locGuard12", 10, "guard_siege", 1, 40000, "locSpawnGuards")
-				setGuard(12,-90)
 				
 				--mages and bowman of the second defense-line
-				createUnitIndex(13, "locBowmen2", 2, "aisen_mage", 10, 60000, "locSpawnGuards")
+				createUnitIndex(11, "locBowmen2", 2, "aisen_mage", 10, 60000, "locSpawnGuards",{"entry_south","locRampart1"})
+				setGuard(11,-90);
+				createUnitIndex(12, "locBowmen3", 2,"aisen_mage", 10, 60000, "locSpawnGuards",{"entry_south","locRampart2"})
+				setGuard(12,-90);
+				createUnitIndex(13, "locBowmen1", 5,"bowman_siege", 3, 40000, "locSpawnGuards",{"entry_south"})
 				setGuard(13,-90);
-				createUnitIndex(14, "locBowmen3", 2,"aisen_mage", 10, 60000, "locSpawnGuards")
-				setGuard(14,-90);
-				createUnitIndex(15, "locBowmen1", 5,"bowman_siege", 3, 40000, "locSpawnGuards")
-				setGuard(15,-90);
 				--bowmen of the first defense-line
-				createUnitIndex(14, "locBowmen4", 5, "bowman_siege", 1, 40000, "locSpawnGuards")
+				createUnitIndex(14, "locBowmen4", 5, "bowman_siege", 1, 40000, "locSpawnGuards",{"entry_south","locRampart1","locElemental1"})
 				setGuard(14,-90);
-				createUnitIndex(16, "locBowmen6", 5, "bowman_siege", 1, 40000, "locSpawnGuards")
+				createUnitIndex(15, "locBowmen6", 5, "bowman_siege", 1, 40000, "locSpawnGuards",{"entry_south","locRampart2"})
+				setGuard(15,-90);
+				createUnitIndex(16, "locBowmen7", 5, "bowman_siege", 1, 40000, "locSpawnGuards",{"entry_south","locRampart2","locElemental2"})
 				setGuard(16,-90);
-				createUnitIndex(17, "locBowmen7", 5, "bowman_siege", 1, 40000, "locSpawnGuards")
-				setGuard(17,-90);
 				
 				--Darna's fireelementals
-				createUnitIndex(18, "locElemental1", 12, "fire_guard", 6, 60000, "locElemental1","newDefender")
+				createUnitIndex(17, "locElemental1", 12, "fire_guard", 6, 60000, "locElemental1")
+				--local guard = setGuard(17,-90);
+				createUnitIndex(18, "locElemental2", 12, "fire_guard", 6, 60000, "locElemental2")
 				--local guard = setGuard(18,-90);
-				createUnitIndex(19, "locElemental2", 12, "fire_guard", 6, 60000, "locElemental2","newDefender")
-				--local guard = setGuard(19,-90);
 				
 				--elite-guards of Greif and Darna
-				createUnitIndex(7, "locGeneralGuard1", 9, "elite_siege", 30, 100000, "locSpawnGuards")
-				--local guard = setGuard(7,-90)
-				createUnitIndex(8, "locGeneralGuard2", 9, "dwarfenwall_councilguard", 30, 100000, "locSpawnGuards")
-				--local guard = setGuard(8,-90);
+				createUnitIndex(19, "locGeneralGuard1", 9, "elite_siege", 30, 1000, "locSpawnGuards",{"entry_south"})
+				--local guard = setGuard(19,-90)
+				createUnitIndex(20, "locGeneralGuard2", 9, "dwarfenwall_councilguard", 30, 100000, "locSpawnGuards",{"entry_south"})
+				--local guard = setGuard(20,-90);
 			--aisen defenses
-				createUnitIndex(15, "locDefender1", 15, "bowman_siegeDefense", 3, 40000, "locSpawnBow1","newDefender");
-				local guard = setGuard(15,-90);
-				createUnitIndex(20, "locDefender3", 15, "bowman_siegeDefense", 3, 40000, "locSpawnBow1","newDefender");
-				local guard = setGuard(20,-90);
-				createUnitIndex(21, "locDefender4", 15, "bowman_siegeDefense", 3, 40000, "locSpawnBow2","newDefender");
+				createUnitIndex(21, "locDefender1", 15, "bowman_siegeDefense", 3, 40000, "locSpawnBow1");
 				local guard = setGuard(21,-90);
-				createUnitIndex(22, "locDefender6", 15, "bowman_siegeDefense", 3, 40000, "locSpawnBow2","newDefender");
+				createUnitIndex(22, "locDefender3", 15, "bowman_siegeDefense", 3, 40000, "locSpawnBow1");
 				local guard = setGuard(22,-90);
-				
-				createUnitIndex(23, "locDefender2", 15, "aisen_mageDefense", 3, 40000, "locSpawnBow1","newDefender");
+				createUnitIndex(23, "locDefender4", 15, "bowman_siegeDefense", 3, 40000, "locSpawnBow2");
 				local guard = setGuard(23,-90);
-				createUnitIndex(24, "locDefender5", 15, "aisen_mageDefense", 3, 40000, "locSpawnBow2","newDefender");
+				createUnitIndex(24, "locDefender6", 15, "bowman_siegeDefense", 3, 40000, "locSpawnBow2");
 				local guard = setGuard(24,-90);
+				
+				createUnitIndex(25, "locDefender2", 15, "aisen_mageDefense", 3, 40000, "locSpawnBow1");
+				local guard = setGuard(25,-90);
+				createUnitIndex(26, "locDefender5", 15, "aisen_mageDefense", 3, 40000, "locSpawnBow2");
+				local guard = setGuard(26,-90);
 				
 				
 			--undead defenses
-				createUnitIndex(50, "locArmy1", 15, "bow_skel_siegeDefense", 0, 0, "locEntryUndead", "newDefender");
+				createUnitIndex(50, "locArmy1", 15, "bow_skel_siegeDefense", 0, 0, "locEntryUndead");
 				--local guard = setGuard(50,90);
-				createUnitIndex(51, "locArmy2", 15, "bow_skel_siegeDefense", 0, 0, "locEntryUndead", "newDefender");
+				createUnitIndex(51, "locArmy2", 15, "bow_skel_siegeDefense", 0, 0, "locEntryUndead");
 				--local guard = setGuard(51,90);
-				createUnitIndex(52, "locArmy3", 15, "bow_skel_siegeDefense", 0, 0, "locEntryUndead", "newDefender");
+				createUnitIndex(52, "locArmy3", 15, "bow_skel_siegeDefense", 0, 0, "locEntryUndead");
 				--local guard = setGuard(52,90);
-				createUnitIndex(53, "locArmy4", 15, "bow_skel_siegeDefense", 0, 0, "locEntryUndead", "newDefender");
+				createUnitIndex(53, "locArmy4", 15, "bow_skel_siegeDefense", 0, 0, "locEntryUndead");
 				--local guard = setGuard(53,90);
-				createUnitIndex(54, "locArmy5", 15, "bow_skel_siegeDefense", 0, 0, "locEntryUndead", "newDefender");
+				createUnitIndex(54, "locArmy5", 15, "bow_skel_siegeDefense", 0, 0, "locEntryUndead");
 				--local guard = setGuard(54,90);
-				createUnitIndex(55, "locArmy6", 15, "bow_skel_siegeDefense", 0, 0, "locEntryUndead", "newDefender");
+				createUnitIndex(55, "locArmy6", 15, "bow_skel_siegeDefense", 0, 0, "locEntryUndead");
 				--local guard = setGuard(55,90);
 				
-				createUnitIndex(56, "locNecromancer1", 15, "necromancer_siegeDefense", 0, 0, "locEntryUndead", "newDefender");
+				createUnitIndex(56, "locNecromancer1", 15, "necromancer_siegeDefense", 0, 0, "locEntryUndead");
 				--local guard = setGuard(56,90);
-				createUnitIndex(57, "locNecromancer2", 15, "necromancer_siegeDefense", 0, 0, "locEntryUndead", "newDefender");
+				createUnitIndex(57, "locNecromancer2", 15, "necromancer_siegeDefense", 0, 0, "locEntryUndead");
 				--local guard = setGuard(57,90);
-				createUnitIndex(58, "locNecromancer3", 15, "necromancer_siegeDefense", 0, 0, "locEntryUndead", "newDefender");
+				createUnitIndex(58, "locNecromancer3", 15, "necromancer_siegeDefense", 0, 0, "locEntryUndead");
 				--local guard = setGuard(58,90);
-				createUnitIndex(59, "locNecromancer4", 15, "necromancer_siegeDefense", 0, 0, "locEntryUndead", "newDefender");
+				createUnitIndex(59, "locNecromancer4", 15, "necromancer_siegeDefense", 0, 0, "locEntryUndead");
 				--local guard = setGuard(59,90);
-				createUnitIndex(60, "locNecromancer5", 15, "necromancer_siegeDefense", 0, 0, "locEntryUndead", "newDefender");
+				createUnitIndex(60, "locNecromancer5", 15, "necromancer_siegeDefense", 0, 0, "locEntryUndead");
 				--local guard = setGuard(60,90);
 				
 				
@@ -734,17 +734,9 @@
 				--print("subtype: "..defend_dwall_tmp.siege[i]["subtype"]);
 				local unit = createObject(defend_dwall_tmp.siege[i]["subtype"],defend_dwall_tmp.siege[i]["respawnlocation"]);
 				defend_dwall_tmp.units[unit]=i;
-				
-				addUnitCommand(unit,"walk","locEntryGeneral",1,"secondary");
-				addUnitCommand(unit,"walk",defend_dwall_tmp.siege[i]["location"],0.5,"secondary");
-				addUnitCommand(unit,"guard",defend_dwall_tmp.siege[i]["location"],defend_dwall_tmp.siege[i]["guard_range"],"secondary");
-			</Effect>
-		</Event>
-		<Event trigger="newDefender">
-			<Effect>
-				local i = trigger.index;
-				local unit = createObject(defend_dwall_tmp.siege[i]["subtype"],defend_dwall_tmp.siege[i]["respawnlocation"]);
-				defend_dwall_tmp.units[unit]=i;
+				for j, location in ipairs(defend_dwall_tmp.siege[i]["respawnroute"]) do
+					addUnitCommand(unit,"walk",location,1,"secondary");
+				end;
 				
 				addUnitCommand(unit,"walk",defend_dwall_tmp.siege[i]["location"],0.5,"secondary");
 				addUnitCommand(unit,"guard",defend_dwall_tmp.siege[i]["location"],defend_dwall_tmp.siege[i]["guard_range"],"secondary");

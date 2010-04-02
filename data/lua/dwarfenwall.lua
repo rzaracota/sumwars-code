@@ -217,8 +217,9 @@ end;
 --penalty[int]: the number of penalty-points the players will get if this unit dies
 --respawn[int]: the respawntime for that unit in milliseconds
 --respawnlocation[string]: the location, were the unit will respawn
+--respawnroute[list{string}]: the locations a unit will walk to before heading to it's final destination
 --respawntrigger[string]: the trigger that will be thrown after this unit died. the default is newUnit
-function createUnitIndex(index, location, guard_range, subtype, penalty, respawn, respawnlocation, respawntrigger)
+function createUnitIndex(index, location, guard_range, subtype, penalty, respawn, respawnlocation, respawnroute, respawntrigger)
 	defend_dwall_tmp.siege[index] = {};
 	defend_dwall_tmp.siege[index]["location"] = location;
 	defend_dwall_tmp.siege[index]["guard_range"] = guard_range;
@@ -227,6 +228,11 @@ function createUnitIndex(index, location, guard_range, subtype, penalty, respawn
 	
 	defend_dwall_tmp.siege[index]["respawn"] = respawn;
 	defend_dwall_tmp.siege[index]["respawnlocation"] = respawnlocation;
+	if(respawnroute == nil)then
+		defend_dwall_tmp.siege[index]["respawnroute"] = {};
+	else
+		defend_dwall_tmp.siege[index]["respawnroute"] = respawnroute;
+	end;
 	if(respawntrigger~=nil)then
 		defend_dwall_tmp.siege[index]["respawnTrigger"] = respawntrigger;
 	else
@@ -332,8 +338,8 @@ function addImportantSpeakers()
 end;
 
 function callElementals()
+	setGuard(17,-90);
 	setGuard(18,-90);
-	setGuard(19,-90);
 end;
 
 

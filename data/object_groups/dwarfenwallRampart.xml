@@ -1090,6 +1090,8 @@
     <Location name="locNecromancer4" pos_x="-8.5" pos_y="-34" />
     <Location name="locNecromancer5" pos_x="7.5" pos_y="-34" />
     <Location name="locParty" pos_x="31" pos_y="44" />
+    <Location name="locRampart1" pos_x="-5.964524095" pos_y="23.11919302" />
+    <Location name="locRampart2" pos_x="5.444185219" pos_y="23.43366193" />
     <Location name="locRightFlank" pos_x="19.33628727" pos_y="26.29368017" />
     <Location name="locSpawn1" pos_x="-20.39498067" pos_y="-25.53915015" />
     <Location name="locSpawn2" pos_x="-11.62260528" pos_y="-25.39550007" />
