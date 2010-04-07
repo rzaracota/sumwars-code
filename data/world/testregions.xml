@@ -104,9 +104,9 @@
 					 return (unitIsInArea(trigger.player,'GuardArea'))
 				 </Condition>
 				 <Effect>
-					 skel = createObject('axe_skel_siege','SkelLocation');
-					 skel = createObject('axe_skel_siege','SkelLocation2');
-					 skel = createObject('axe_skel_siege','SkelLocation3');
+					 skel = createObject('boss4_siege','SkelLocation');
+					 --skel = createObject('axe_skel_siege','SkelLocation2');
+					-- skel = createObject('axe_skel_siege','SkelLocation3');
 				 </Effect>
 			</Event>
 		 </Region>

@@ -75,7 +75,7 @@
 		 description="The priest attacks an enemy with energy that causes elementals to be blown back where they come from."
 		 time="1.000000"
 		 timer_nr="1.000000"
-		 timer_value="4000.000000"
+		 timer_value="3000.000000"
 		 base_ability="holy_attack"
 		 critical_percent="0.660000"
 		 target_type="melee">
@@ -283,7 +283,7 @@
 		 description="The priest strikes with all his might. While normal monsters have little to fear from this attack elementals will be easily destroyed by it."
 		 time="1.000000"
 		 timer_nr="1.000000"
-		 timer_value="4000.000000"
+		 timer_value="3000.000000"
 		 base_ability="holy_attack"
 		 critical_percent="0.660000"
 		 target_type="melee">
@@ -322,7 +322,6 @@
 	</Effect>
 	<Projectile type="divine_beam"/>
 	<Damage>
-		<CppImplementation type="holy_attack" />
 		<CppImplementation type="weapon_damage" />
 		<LuaImplementation>
 			local willpower = get(self,"willpower");
@@ -341,7 +340,7 @@
 		 description="The priest creates a vortex with his attack, that can suck a demonic creature right back to hell."
 		 time="1.000000"
 		 timer_nr="1.000000"
-		 timer_value="3000.000000"
+		 timer_value="2500.000000"
 		 base_ability="holy_attack"
 		 critical_percent="0.660000"
 		 target_type="melee">
@@ -351,7 +350,6 @@
 	</Effect>
 	<Projectile type="divine_beam" />
 	<Damage>
-		<CppImplementation type="holy_attack" />
 		<CppImplementation type="weapon_damage" />
 		<LuaImplementation>
 			local willpower = get(self,"willpower");
@@ -421,7 +419,6 @@
 	</Effect>
 	<Projectile type="light_beam" />
 	<Damage>
-		<CppImplementation type="holy_attack" />
 		<CppImplementation type="weapon_damage" />
 		<LuaImplementation>
 			local willpower = get(self,"willpower");
@@ -452,7 +449,6 @@
 	</Effect>
 	<Projectile type="light_beam" />
 	<Damage>
-		<CppImplementation type="holy_attack" />
 		<CppImplementation type="weapon_damage" />
 		<LuaImplementation>
 			local willpower = get(self,"willpower");

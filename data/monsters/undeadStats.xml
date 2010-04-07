@@ -1344,13 +1344,13 @@
 <Monster type="MONSTER" subtype="fire_skel_bow_siege" name="Burning Skeleton" fraction="undead" race="undead" layer="NORMAL">
 	<RenderInfo name="burningSkeletonBowman" />
 	<Dropslots >
-		<Dropslot pbig="0.005" pmedium="0.01" psmall="0.08" pgold="0.03" min_gold="30" max_gold="100" min_level="14" max_level="20" magic_prob="0.05" magic_power="550" />
+		<Dropslot pbig="0.005" pmedium="0.01" psmall="0.1" pgold="0.03" min_gold="30" max_gold="100" min_level="14" max_level="20" magic_prob="0.05" magic_power="550" />
 	</Dropslots>
 	
 	<BasicAttributes
 					experience="120"
 					level="17"
-					max_health="250"
+					max_health="200"
 					armor="40"
 					block="0"
 					power="90"
@@ -1395,13 +1395,13 @@
 <Monster type="MONSTER" subtype="fire_skel_axe2_siege" name="Burning Skeleton" fraction="undead" race="undead" layer="NORMAL">
 	<RenderInfo name="burningSkeletonAxeman" />
 	<Dropslots >
-		<Dropslot pbig="0.005" pmedium="0.01" psmall="0.08" pgold="0.03" min_gold="30" max_gold="100" min_level="14" max_level="20" magic_prob="0.05" magic_power="550" />
+		<Dropslot pbig="0.005" pmedium="0.01" psmall="0.1" pgold="0.03" min_gold="30" max_gold="100" min_level="14" max_level="20" magic_prob="0.05" magic_power="550" />
 	</Dropslots>
 	
 	<BasicAttributes
 		experience="140"
 		level="18"
-		max_health="600"
+		max_health="500"
 		armor="40"
 		block="0"
 		power="250"
@@ -1447,13 +1447,13 @@
 <Monster type="MONSTER" subtype="fire_skel_sword_siege" name="Burning Skeleton" fraction="undead" race="undead" layer="NORMAL">
 	<RenderInfo name="burningSkeletonSwordsman" />
 	<Dropslots >
-		<Dropslot pbig="0.005" pmedium="0.01" psmall="0.08" pgold="0.03" min_gold="30" max_gold="100" min_level="14" max_level="20" magic_prob="0.05" magic_power="550" />
+		<Dropslot pbig="0.005" pmedium="0.01" psmall="0.1" pgold="0.03" min_gold="30" max_gold="100" min_level="14" max_level="20" magic_prob="0.05" magic_power="550" />
 	</Dropslots>
 	
 	<BasicAttributes
 		experience="120"
 		level="18"
-		max_health="450"
+		max_health="380"
 		armor="40"
 		block="0"
 		power="150"
@@ -1499,13 +1499,13 @@
 <Monster type="MONSTER" subtype="frost_skel_sword_siege" name="Frost Skeleton" fraction="undead" race="undead" layer="NORMAL">
 	<RenderInfo name="frostSkeletonSwordsman" />
 	<Dropslots >
-		<Dropslot pbig="0.005" pmedium="0.01" psmall="0.08" pgold="0.03" min_gold="30" max_gold="100" min_level="14" max_level="20" magic_prob="0.05" magic_power="550" />
+		<Dropslot pbig="0.005" pmedium="0.01" psmall="0.1" pgold="0.03" min_gold="30" max_gold="100" min_level="14" max_level="20" magic_prob="0.05" magic_power="550" />
 	</Dropslots>
 	
 	<BasicAttributes
 		experience="140"
 		level="18"
-		max_health="400"
+		max_health="360"
 		armor="40"
 		block="0"
 		power="150"
@@ -1552,13 +1552,13 @@
 <Monster type="MONSTER" subtype="frost_skel_bow_siege" name="Frost Skeleton Archer" fraction="undead" race="undead" layer="NORMAL">
 	<RenderInfo name="iceSkeleton" />
 	<Dropslots >
-		<Dropslot pbig="0.005" pmedium="0.01" psmall="0.08" pgold="0.03" min_gold="30" max_gold="100" min_level="14" max_level="20" magic_prob="0.05" magic_power="550" />
+		<Dropslot pbig="0.005" pmedium="0.01" psmall="0.1" pgold="0.03" min_gold="30" max_gold="100" min_level="14" max_level="20" magic_prob="0.05" magic_power="550" />
 	</Dropslots>
 	
 	<BasicAttributes
 					experience="140"
 					level="17"
-					max_health="200"
+					max_health="180"
 					armor="35"
 					block="25"
 					power="130"
@@ -1606,13 +1606,13 @@
 <Monster type="MONSTER" subtype="shadow_bow_skel_siege" name="Skeleton Shadow Archer" fraction="undead" race="undead" layer="NORMAL">
 	<RenderInfo name="bow_skeleton" />
 	<Dropslots >
-		<Dropslot pbig="0.005" pmedium="0.01" psmall="0.08" pgold="0.03" min_gold="30" max_gold="100" min_level="14" max_level="20" magic_prob="0.05" magic_power="550" />
+		<Dropslot pbig="0.005" pmedium="0.01" psmall="0.1" pgold="0.03" min_gold="30" max_gold="100" min_level="14" max_level="20" magic_prob="0.05" magic_power="550" />
 	</Dropslots>
 	
 	<BasicAttributes
 					experience="120"
 					level="16"
-					max_health="190"
+					max_health="180"
 					armor="35"
 					block="25"
 					power="100"
@@ -1777,14 +1777,14 @@
 	<BasicAttributes
 					experience="330"
 					level="17"
-					max_health="1200"
+					max_health="2800"
 					armor="30"
 					block="100"
 					power="180"
 					attack="100"
-					strength="80"
-					dexterity="30"
-					magic_power="20"
+					strength="100"
+					dexterity="60"
+					magic_power="30"
 					willpower="100"
 					resistances_physical="-20"
 					resistances_air="0"
@@ -1794,8 +1794,8 @@
 					resistances_cap_air="50"
 					resistances_cap_ice="50"
 					resistances_cap_fire="0"
-					walk_speed="2000"
-					attack_speed="1200"
+					walk_speed="2500"
+					attack_speed="1400"
 					step_length="1.5"
 					attack_range="2"
 					>

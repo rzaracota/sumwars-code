@@ -386,9 +386,9 @@
 				debug["dwall_siege"]["skipWave5"]=true;
 				debug["dwall_siege"]["skipWave6"]=true;
 				debug["dwall_siege"]["skip2ndBoss"]=true;
-				debug["dwall_siege"]["skipWave7"]=false;
-				debug["dwall_siege"]["skipWave8"]=false;
-				debug["dwall_siege"]["skip3rdBoss"]=false;
+				debug["dwall_siege"]["skipWave7"]=true;
+				debug["dwall_siege"]["skipWave8"]=true;
+				debug["dwall_siege"]["skip3rdBoss"]=true;
 				debug["dwall_siege"]["skipWave9"]=false;
 				debug["dwall_siege"]["skipWave10"]=false;
 				debug["dwall_siege"]["skip4thBoss"]=false;
@@ -1080,6 +1080,7 @@
 					insertTrigger("barrage");
 					startTimer("wave1",1900);
 				else
+					insertTrigger("barrage");
 					insertTrigger("wave1");
 				end;
 			</Effect>
@@ -1400,8 +1401,12 @@
 			<Effect>
 				print("wave7pre");
 				defend_dwall_tmp.phase="endlessStream"
-				skeletonBarrage(8);
-				startTimer("wave7",15000);
+				if(debug["dwall_siege"]["skipWave7"] ~=true)then
+					skeletonBarrage(8);
+					startTimer("wave7",15000);
+				else
+					insertTrigger("wave7");
+				end;
 			</Effect>
 		</Event>
 
@@ -1570,8 +1575,13 @@
 		<Event trigger="wave9pre" once="true">
 			<Effect>
 				print("wave9pre");
-				--skeletonBarrage(15)
-				--startTimer("wave9",30000);
+				setDefenseHP(4);
+				if(debug["dwall_siege"]["skipWave9"]~=true)then
+					skeletonBarrage(12)
+					startTimer("wave9",30000);
+				else
+					insertTrigger("wave9");
+				end;
 			</Effect>
 		</Event>
 		
@@ -1580,36 +1590,91 @@
 				defend_dwall_tmp.phase="wave9"
 				
 				if(debug["dwall_siege"]["skipWave9"]~=true)then
-					launchAttack(87); --m
-					launchAttack(96); --h
-					launchAttack(97); --h
-					launchAttack(98); --h
-					launchAttack(93); --m
+					launchAttack(2211); -- fe1
+					launchAttack(1215); -- e1
 					
-					startTimer("wave10",50000);
+					startTimer("wave9b",30000);
 				else
 					insertTrigger("wave10");
 				end;
 			</Effect>
 		</Event>
+		
+		<Event trigger="wave9b" once="true">
+			<Effect>
+				launchAttack(1222); -- e2
+				launchAttack(3213); -- ee1
+				launchAttack(3224); -- ee2
+				
+				startTimer("wave9c",30000);
+			</Effect>
+		</Event>
+		
+		<Event trigger="wave9c" once="true">
+			<Effect>
+				launchAttack(1213); -- e1
+				launchAttack(3314); -- em1
+				launchAttack(3325); -- em2
+				
+				startTimer("wave9d",30000);
+			</Effect>
+		</Event>
+		
+		<Event trigger="wave9d" once="true">
+			<Effect>
+				launchAttack(1321); -- m2
+				launchAttack(1212); -- e1
+				launchAttack(2223); -- fe2
+				launchAttack(1324); -- m2
+				
+				startTimer("wave10",45000);
+			</Effect>
+		</Event>
 
 		<Event trigger="wave10" once="true">
 			<Effect>
+				print(wave10);
 				defend_dwall_tmp.phase="wave10"
 				
 				if(debug["dwall_siege"]["skipWave10"]~=true)then
-					skeletonBarrage(10);
-					timedExecute('skeletonBarrage(10)',30000);
-					
-					for i=0,6 do
-						launchAttack(94 +i);
-					end;
-					
-					startTimer("changeView",50000);
-					addTriggerVariable("nextTrigger","prepareTheBrothers")
+					launchAttack(3311); -- em1
+					launchAttack(1213); -- e1
+					launchAttack(2315); -- fm1
+				
+					startTimer("wave10b",35000);
 				else
 					insertTrigger("prepareTheBrothers");
 				end;
+			</Effect>
+		</Event>
+		
+		<Event trigger="wave10b" once="true">
+			<Effect>
+				launchAttack(1212); -- e1
+				launchAttack(1413); -- h1
+				launchAttack(1314); -- m1
+				
+				startTimer("wave10c",35000);
+			</Effect>
+		</Event>
+		
+		<Event trigger="wave10c" once="true">
+			<Effect>
+				launchAttack(2323); -- fm2
+				launchAttack(2424); -- fh2
+				launchAttack(2225); -- fe2
+				
+				startTimer("wave10d",35000);
+			</Effect>
+		</Event>
+		
+		<Event trigger="wave10d" once="true">
+			<Effect>
+				launchAttack(3311); -- em1
+				launchAttack(3412); -- eh1
+				launchAttack(3323); -- em2
+				
+				startTimer("prepareTheBrothers",30000);
 			</Effect>
 		</Event>
 		
@@ -1618,14 +1683,11 @@
 				defend_dwall_tmp.phase="the4thBoss"
 				
 				if(debug["dwall_siege"]["skip4thBoss"]~=true)then
-					if(debug["dwall_siege"]["skipWave10"]==true)then
-						setCutsceneMode(true);
-						print("now in cutscene mode")
-					end;
+					setCutsceneMode(true);
+					
 					addCameraPosition(0,"locLich",-65,35,9);
 					fadeIn(2000, {0.4,0.4,0.4},{1,1,1},{0.3,0.3,0.3});
 					addUnitCommand(defend_dwall_tmp.attendend1,"walk","locAttendend1");
-					print("still in cutscene mode?")
 				else
 					insertTrigger("frostHasCome");
 				end;
@@ -1637,7 +1699,6 @@
 				return((trigger.unit==defend_dwall_tmp.attendend1) and (defend_dwall_tmp.phase=="the4thBoss"));
 			</Condition>
 			<Effect>
-				print("still in cutscene mode? commands complete")
 				initDialog()
 				addImportantSpeakers();
 			
@@ -1665,7 +1726,8 @@
 				fadeIn(2000, {0.4,0.4,0.4},{1,1,1},{0.3,0.3,0.3});
 			
 				defend_dwall_tmp.phase="boss4"
-				launchAttack(120); --boss
+				launchAttack(1413); -- h1
+				launchAttack(5043); --boss
 			</Effect>
 		</Event>
 		<Event trigger="unit_die" once="true">
