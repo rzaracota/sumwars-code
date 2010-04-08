@@ -534,9 +534,16 @@
 		<CppImplementation type="magic_attack" />
 		<CppImplementation type="weapon_damage" />
 		<LuaImplementation>
+			local dmg = getDamageValue("ice_dmg");
+			setDamageValue("ice_dmg",{0.2*dmg[1], 0.2*dmg[2]});
+			dmg = getDamageValue("phys_dmg");
+			setDamageValue("phys_dmg",{0.2*dmg[1], 0.2*dmg[2]});
+			dmg = getDamageValue("fire_dmg");
+			setDamageValue("fire_dmg",{0.2*dmg[1], 0.2*dmg[2]});
+			
 			local magic = get(self,"magic_power");
 			local admg = getDamageValue("air_dmg");
-			setDamageValue("air_dmg", {admg[1] + magic*0.05, admg[2] + magic*0.2});
+			setDamageValue("air_dmg", {0.5*admg[1] + magic*0.15, 0.5*admg[2] + magic*0.6});
 		</LuaImplementation>	
 	</Damage>
 </Ability>
@@ -559,9 +566,16 @@
 		<CppImplementation type="magic_attack" />
 		<CppImplementation type="weapon_damage" />
 		<LuaImplementation>
+			local dmg = getDamageValue("ice_dmg");
+			setDamageValue("ice_dmg",{0.2*dmg[1], 0.2*dmg[2]});
+			dmg = getDamageValue("phys_dmg");
+			setDamageValue("phys_dmg",{0.2*dmg[1], 0.2*dmg[2]});
+			dmg = getDamageValue("fire_dmg");
+			setDamageValue("fire_dmg",{0.2*dmg[1], 0.2*dmg[2]});
+			
 			local magic = get(self,"magic_power");
 			local admg = getDamageValue("air_dmg");
-			setDamageValue("air_dmg", {admg[1] + magic*0.3, admg[2] + magic*1.5});
+			setDamageValue("air_dmg", {0.5*admg[1] + magic*0.25, 0.5*admg[2] + magic*1});
 		</LuaImplementation>	
 	</Damage>
 </Ability>
