@@ -369,6 +369,10 @@ void DialogueWindow::update()
 				stream.str("");
 				stream << "SpeakerTextPane";
 				stream << i;
+				
+				wimage->setVisible(false);
+				wname->setVisible(false);
+				wtext->setVisible(false);
 			}
 		}
 	}

@@ -644,8 +644,15 @@ void Monster::evalCommand(Action::ActionType act)
 			dist = it->second;
 
 			// bei Befehl guard nur, wenn nicht zu weit vom zu beschuetzenden Ort
-			if (m_ai.m_guard && (aci->m_target_type == Action::MELEE || ranged_move) && dist > m_ai.m_guard_range)
+			if (m_ai.m_guard && (aci->m_target_type == Action::MELEE || aci->m_target_type == Action::CIRCLE || ranged_move) &&  m_ai.m_guard_pos.distanceTo(cgoal->getShape()->m_center) > m_ai.m_guard_range)
 				continue;
+			
+			/*
+			if (getSubtype() == "general_greif_battle")
+			{
+				DEBUG("guard %i target type %i");
+			}
+			*/
 			
 			// Bewertung:
 			value = abltinfo.m_rating;
@@ -898,6 +905,7 @@ void Monster::clearCommand(bool success, bool norepeat)
 {
 	if (getCommand()->m_flags & Command::SECONDARY)
 	{
+		// sich wiederholende Kommandos werden nur geloescht, wenn repeat auf true gesetzt
 		if ((norepeat || !(getCommand()->m_flags & Command::REPEAT)) && !m_ai.m_secondary_commands.empty())
 		{
 			m_ai.m_secondary_commands.pop_front();

@@ -465,29 +465,29 @@
 
 <!-- Konzilsmagierin in Zwergentrutz -->
 <Monster type="NPC" subtype="council_dwarfenwall" name="Council Mage" fraction="human" race="human" layer="NORMAL">
-	<RenderInfo name="ireana" />
+	<RenderInfo name="councilMageF" />
 	<EmotionSet name="ireana_emotion" />
 	<BasicAttributes
 					experience="0"
 					level="38"
-					max_health="2000"
-					armor="60"
+					max_health="1200"
+					armor="80"
 					block="0"
 					attack="40"
 					strength="50"
 					dexterity="35"
-					magic_power="15"
-					willpower="20"
-					resistances_physical="70"
-					resistances_air="75"
-					resistances_ice="70"
-					resistances_fire="80"
+					magic_power="60"
+					willpower="200"
+					resistances_physical="30"
+					resistances_air="60"
+					resistances_ice="60"
+					resistances_fire="60"
 					resistances_cap_physical="90"
 					resistances_cap_air="90"
 					resistances_cap_ice="90"
 					resistances_cap_fire="90"
 					walk_speed="3500"
-					attack_speed="2000"
+					attack_speed="1400"
 					step_length="1.2"
 					attack_range="0.5"
 					>
@@ -496,7 +496,11 @@
 		<Ability type="walk"/>
 		<Ability type="die"/>
 		
-		<Ability type="attack" rating="1"/>
+		<Ability type="magic_attack" rating="1"/>
+		<Ability type="avaera_firebolt" rating="2"/>
+		<Ability type="avaera_lightning" rating="2"/>
+		<Ability type="avaera_firecolumn" rating="0" all_target_rating="1.5" all_target_rating_radius="2"/> 
+		<Ability type="avaera_chain_lightning" rating="0" all_target_rating="0.9" all_target_rating_radius="3"/> 
 		<Ability type="resurrection_fire_storm"/>
 		
 		
@@ -504,7 +508,7 @@
 	
 	<Geometry radius="0.5" />
 	
-	<AI ai_sight_range="8" />
+	<AI ai_sight_range="12"  ai_shoot_range="9" />
 </Monster>
 
 <!-- Konzilswaechter, Zwergentrutz -->
@@ -518,7 +522,7 @@
 					armor="120"
 					block="0"
 					attack="180"
-					strength="70"
+					strength="90"
 					dexterity="45"
 					magic_power="25"
 					willpower="40"

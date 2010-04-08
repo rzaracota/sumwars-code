@@ -97,7 +97,55 @@
 			</LuaImplementation>	
 		</Damage>
 </Ability>
+
+<Ability type="avaera_chain_lightning"
+		 name="Chainlightning"
+		 description="" 
+		 time="1200.000000" 
+		 timer_nr="1.000000" 
+		 timer_value="6000.000000" 
+		 base_ability="magic_attack" 
+		 critical_percent="0.800000" 
+		 target_type="ranged"
+		 >
+	<Flag name="mute_affected" />
+	<Effect>
+		<CppImplementation type="proj_fly_at_target" />
+	</Effect>
+	<Projectile type="chain_lightning" speed="12000" counter="5"/>
+	<Damage>
+		<LuaImplementation>
+			local magic = get(self,"magic_power");
+			local admg = getDamageValue("air_dmg");
+			setDamageValue("air_dmg", {admg[1] + magic*0.5, admg[2] + magic*1.5});
+		</LuaImplementation>	
+	</Damage>
+</Ability>
+
+<Ability type="avaera_lightning"
+		 name="Goblin Lightning"
+		 description=""
+		 time="1300.000000"
+		 timer_nr="1.000000"
+		 timer_value="2000.000000"
+		 base_ability="magic_attack"
+		 critical_percent="0.800000"
+		 target_type="ranged">
+	<Flag name="mute_affected" />
+	<Effect>
+		<CppImplementation type="proj_at_target" />
+	</Effect>
+	<Projectile type="lightning" />
 	
+	<Damage>
+		<LuaImplementation>
+			local magic = get(self,"magic_power");
+			local admg = getDamageValue("air_dmg");
+			setDamageValue("air_dmg", {admg[1] + magic*0.5, admg[2] + magic*1.5});
+		</LuaImplementation>	
+	</Damage>
+</Ability>
+
 <Ability type="legion_bash" 
 		 name="Hammer blow" 
 		 description="Attacks one enemy with a brutal blow and damages nearby enemies as well." 

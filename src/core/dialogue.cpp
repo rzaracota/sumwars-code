@@ -784,6 +784,7 @@ void Dialogue::update(float time)
 				
 				if (m_speech.front().second.m_text == "#execute#")
 				{
+					EventSystem::setRegion(m_region);
 					EventSystem::doString(m_speech.front().second.m_emotion.c_str());
 					m_speech.pop_front();
 					continue;

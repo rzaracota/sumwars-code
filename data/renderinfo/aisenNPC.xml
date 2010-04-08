@@ -108,6 +108,27 @@
 		<Detach time="0.4" objectname="magicEnergy" />
 	</Action>
 	
+	<Action name="avaera_firebolt">
+		<Animation name="castMagicWeak" />
+		<ParticleSystem time = "0" objectname="magicEnergy" bone="mainmesh:itemLeftHand" source="Magic_Arrow" position="0.0 0.0 0.0" />
+		<Detach time = "0.8" objectname = "magicEnergy"/>
+	</Action>
+	<Action name="avaera_fireball" reference="avaera_firebolt"/>
+	
+	<Action name="avaera_lightning">
+		<Animation name="castMagicWeak" />
+	</Action>
+	<Action name="avaera_chain_lightning" reference="avaera_lightning"/>
+	
+	<Action name="avaera_firecolumn">
+		<Animation name="castMagicStrong" />
+		<ParticleSystem time = "0" objectname="magicEnergy" bone="mainmesh:magicEffects" source="FireDown" position="0.0 0.0 0.0" />
+		<Detach time = "0.9" objectname = "magicEnergy"/>
+		<ParticleSystem time = "0.6" objectname="ring" bone="mainmesh:itemRightHand" source="Firering" position="0.0 0.0 2.0" />
+		<Scale objectname="ring" start = "0.6" end = "0.7" start_val="1.0" end_val="2.5" />
+		<Detach time = "0.7" objectname = "ring" />
+	</Action>
+	
 </RenderInfo>
 
 <RenderInfo name = "bowmanBase" parent="playerbaseM">

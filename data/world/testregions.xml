@@ -96,7 +96,7 @@
 					 pos[1] = pos[1]+1;
 					 addLocation('SkelLocation3', pos);
 					 
-					 guard = createObject('aisen_mage','GuardLocation');
+					 --guard = createObject('guard_siege','GuardLocation');
 				 </Effect>
 			 </Event>
 			 <Event trigger ="player_moved" once = "true">
@@ -104,7 +104,7 @@
 					 return (unitIsInArea(trigger.player,'GuardArea'))
 				 </Condition>
 				 <Effect>
-					 skel = createObject('boss4_siege','SkelLocation');
+					 skel = createObject('boss6_siege','SkelLocation');
 					 --skel = createObject('axe_skel_siege','SkelLocation2');
 					-- skel = createObject('axe_skel_siege','SkelLocation3');
 				 </Effect>

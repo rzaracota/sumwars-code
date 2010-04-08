@@ -259,7 +259,7 @@ bool  ObjectLoader::loadCreatureBaseAttr(TiXmlNode* node, CreatureBaseAttr& basa
 			basattr.m_abilities[act].m_timer = 0;
 			attr.getFloat("time",basattr.m_abilities[act].m_time);
 			attr.getInt("timer_nr",basattr.m_abilities[act].m_timer_nr,-1);
-			attr.getFloat("timer_value",basattr.m_abilities[act].m_timer);
+			attr.getFloat("timer_value",basattr.m_abilities[act].m_timer, -1);
  			attr.getFloat("rating",basattr.m_abilities[act].m_rating,-1);
 			attr.getFloat("all_target_rating",basattr.m_abilities[act].m_all_target_rating);
 			attr.getFloat("all_target_rating_radius",basattr.m_abilities[act].m_all_target_rating_range,-1);

@@ -246,6 +246,8 @@
 		<Detach time = "0.7" objectname = "ring" />
 	</Action>
 	
+	<Action name="monster_frost_wave" reference="frost_wave"/>
+	
 	<Action name="shadow_magic_shield">
 		<Animation name="priestMagicSmall" />
 		<ParticleSystem objectname="magicEnergy" bone="mainmesh:itemRightHand" source="Magic_Arrow_Shadow" position="0.0 0.0 -1.4" />

@@ -219,7 +219,7 @@ float Creature::getTimer(Action::ActionType action)
 	if (it != getBaseAttr()->m_abilities.end())
 	{
 		// wenn gleich -1, so wird der Standardtimer verwendet
-		if (it->second.m_timer_nr != -1)
+		if (it->second.m_timer_nr != -1 && it->second.m_timer != -1)
 			return it->second.m_timer;
 		
 		Action::ActionInfo* aci = Action::getActionInfo(action);
@@ -1110,7 +1110,7 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 		}
 		else if (*kt == "speak")
 		{
-			if (goalobj->isCreature() && getDialogueId() ==0)
+			if (goalobj != 0 && goalobj->isCreature() && getDialogueId() ==0)
 			{
 				cr = static_cast<Creature*>(goalobj);
 				if (cr->getDialogueId() ==0 && !(cr->hasScriptCommand()))
@@ -2950,7 +2950,7 @@ void Creature::calcDamage(Action::ActionType act,Damage& dmg)
 	{
 		// keine kritischen Treffer, Attackewert reduzieren
 		dmg.m_crit_perc=0;
-		dmg.m_attack *= 0.3;
+		dmg.m_attack *= 0.5;
 	}
 
 	// verwirrt
