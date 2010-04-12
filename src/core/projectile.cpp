@@ -563,6 +563,10 @@ void Projectile::doEffect(GameObject* target)
 	if (pdata ==0)
 		return;
 	
+	// nur auf dem Server Effect ausfuehren
+	if (World::getWorld()->isServer() == false)
+		return;
+	
 	std::list<std::string>::iterator kt;
 	for (kt = pdata->m_effect.m_cpp_impl.begin(); kt !=  pdata->m_effect.m_cpp_impl.end(); ++kt)
 	{
