@@ -62,6 +62,7 @@ end;
 -- objects - Liste der Objekte
 -- location - Mittelpunkt des Bogens
 -- lookatloc - Mittelpunks des Kreises
+-- beware: if called directly in a party_complete-event, this may not work as intended
 function groupObjectsArc(objects,location,lookatloc,radius, arcangle)
 	if (location ~= nil) then
 		location = locnameToLocation(location)

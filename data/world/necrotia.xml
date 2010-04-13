@@ -20,10 +20,5 @@
 		<Environments>
 			<Environment height="1.0" name="meadow" />
 		</Environments>
-		
-		<NamedObjectGroups>
-			<NameObjectGroup name="powerlich" object_group="powerlich" priority="4" />
-		</NamedObjectGroups>
-	
 	</Region>
 </World>

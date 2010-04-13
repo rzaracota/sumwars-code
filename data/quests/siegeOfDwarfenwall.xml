@@ -2383,6 +2383,82 @@
 		</Event>
 	</Region>
 	
+	<Region name="necFieldcamp">
+		<Event trigger="create_region">
+			<Condition>
+				return ((defend_dwall.theLich == true) and (defend_dwall.finished ~= true))
+			</Condition>
+			<Effect>
+				for i = 1, 7 do
+					--createMonsterGroup("campSkeletons", "locSpawn"..i, 4);
+				end;
+				-- guardian group of the treasury
+				--createMonsterGroup("campSkeletons", "locSpawn8", 4);
+				
+				local nec = createObject("necromancer_black_attendend","locAttendend");
+				lookAt(nec,"locParty");
+				defend_dwall_tmp.lich = createObject("asoroth","locLich");
+				lookAt(defend_dwall_tmp.lich,"locParty");
+			</Effect>
+		</Event>
+		
+		<Event trigger="player_moved" once = "true">
+			<Condition>
+				if(unitIsInArea(trigger.player,"areaLich"))then
+					return ((defend_dwall.theLich == true) and (defend_dwall.finished ~= true))
+				else
+					return false;
+				end;
+			</Condition>
+			<Effect>
+				defend_dwall_tmp.lichTalk = true;
+				setCutsceneMode(true);
+				fadeOut(500);
+				addCameraPosition(0,"locParty", -90, 55, 16);
+				assembleParty("necFieldcamp","locParty");
+				startTimer("lichFinalSpeachStart",900);
+			</Effect>
+		</Event>
+		<Event trigger="party_complete" once="true">
+			<Condition>
+				return(defend_dwall_tmp.lichTalk == true);
+			</Condition>
+			<Effect>
+				print("group objects")
+				startTimer("group",1000);
+				defend_dwall_tmp.lichTalk = false;
+			</Effect>
+		</Event>
+		<Event trigger="group">
+			<Effect>
+				groupObjectsArc(getPlayers(),"locParty","locLich", nil, 120)
+			</Effect>
+		</Event>
+		
+		<Event trigger="lichFinalSpeachStart" once="true">
+			<Effect>
+				fadeIn(1000,{0.4,0.4,0.4},{1,1,1},{0.3,0.3,0.3})
+				addCameraPosition(0,"locLich", -110, 30, 12)
+				
+				initDialog()
+				addSpeaker(defend_dwall_tmp.lich,"lich");
+				
+				speak("lich",_("welcome, twerps!"),"amused")
+				
+				changeTopic("lichFinalSpeachIntermediate")
+			</Effect>
+		</Event>
+		<Event trigger="lichFinalSpeachIntermediate" once="true">
+			<Effect>
+				addCameraPosition(1500,"locCamera", -110, 70, 24)
+
+				speak("leader",_("is that your catchphrase?!"),"disgust")
+				speak("lich", _("fight!!"),"warcry")
+			</Effect>
+		</Event>
+		
+		
+	</Region>
 </Quest>
 
 

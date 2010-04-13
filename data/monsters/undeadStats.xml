@@ -2301,3 +2301,108 @@
 	<SubGroup subtype="boss6_siege" number="1" prob="1" />
 </MonsterGroup>
 
+<!-- Nar'Asoroth -->
+<Monster type="MONSTER" subtype="asoroth" name="Nar'Asoroth" fraction="undead" race="undead" layer="NORMAL">
+	<RenderInfo name="lich" />
+	<Dropslots >
+		<Dropslot pbig="0.1" pmedium="0.2" psmall="0.2" pgold="0.2" max_gold="50" min_level="10" max_level="40" magic_prob="0.5" magic_power="1000" />
+		<Dropslot pbig="0.05" pmedium="0.08" psmall="0.04" pgold="0.3" min_gold="100" max_gold="500" min_level="0" max_level="20" magic_prob="0.2" magic_power="1000" />
+	</Dropslots>
+	
+	<BasicAttributes
+		experience="20"
+		level="23"
+		max_health="8000"
+		armor="70"
+		block="0"
+		attack="90"
+		power="105"
+		strength="45"
+		dexterity="30"
+		magic_power="35"
+		willpower="70"
+		resistances_physical="30"
+		resistances_air="10"
+		resistances_ice="50"
+		resistances_fire="-25"
+		resistances_cap_physical="70"
+		resistances_cap_air="80"
+		resistances_cap_ice="100"
+		resistances_cap_fire="40"
+		walk_speed="1500"
+		attack_speed="1000"
+		step_length="2.0"
+		attack_range="2"
+	>
+		
+	<Ability type="walk" />
+	<Ability type="attack" rating="1"/>
+	<Ability type="die" time = "3000" />
+	<Ability type="ice_bolt"  rating="3"/>
+	<Ability type="noaction" />
+	<Ability type="talk" />
+	<Ability type="summon_skelBow" rating="4"/>
+	<Ability type="summon_skelSword" rating="4"/>
+	<Ability type="summon_skelAxe" rating="4"/>
+	<Ability type="summon_skelAxe2" rating="4"/>
+
+	<Immunity type="berserk"/>
+	<Immunity type="confused"/>
+	</BasicAttributes>
+	
+	<Geometry radius="1.0" />
+	
+	<AI ai_sight_range="15" ai_shoot_range="9" ai_randaction_prob="0.0" />
+</Monster>
+
+<!-- Blackmage, personal attendend of Nar'Asortoth-->
+<Monster type="MONSTER" subtype="necromancer_black_attendend" name="Blackmage" fraction="undead" race="human" layer="NORMAL">
+	<RenderInfo name="necromancer" />
+	<Dropslots >
+		<Dropslot pbig="0.005" pmedium="0.01" psmall="0.2" pgold="0.03" min_gold="30" max_gold="100" min_level="14" max_level="20" magic_prob="0.05" magic_power="550" />
+	</Dropslots>
+	
+	<BasicAttributes
+		experience="160"
+		level="18"
+		max_health="300"
+		armor="20"
+		block="0"
+		attack="20"
+		power="25"
+		strength="25"
+		dexterity="10"
+		magic_power="40"
+		willpower="50"
+		resistances_physical="00"
+		resistances_air="0"
+		resistances_ice="00"
+		resistances_fire="00"
+		resistances_cap_physical="80"
+		resistances_cap_air="80"
+		resistances_cap_ice="80"
+		resistances_cap_fire="20"
+		walk_speed="2500"
+		attack_speed="1700"
+		step_length="1.5"
+		attack_range="2"
+	>
+		
+	<Ability type="walk" />
+	<Ability type="magic_attack_shadow" rating="1"/>
+	<Ability type="die" time = "3000" />
+	<Ability type="shadow_magic_shield" rating="2"/>
+	<Ability type="noaction"/>
+
+	</BasicAttributes>
+	
+	<Geometry radius="0.5" />
+	
+	<AI ai_sight_range="14" ai_shoot_range="9" ai_randaction_prob="0.0" />
+</Monster>
+
+<MonsterGroup name="campSkeletons" >
+	<SubGroup subtype="sword_skel_siege" number="2" prob="1.0" />
+	<SubGroup subtype="axe_skel_siege" number="2" prob="1.0" />
+	<SubGroup subtype="bow_skel_siege" number="3" prob="1.0" />
+</MonsterGroup>

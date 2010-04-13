@@ -38,7 +38,7 @@
     <Object subtype="$barrel" 
             center_x="-38.57700125" 
             center_y="-7.866387056" 
-           height="3.747002708e-016" 
+           height="5.967448757e-016" 
             angle="0" 
             probability="1" 
             prob_angle="false" 
@@ -46,7 +46,7 @@
     <Object subtype="$barrel" 
             center_x="-38.33383172" 
             center_y="-6.610211355" 
-           height="3.747002708e-016" 
+           height="5.967448757e-016" 
             angle="0" 
             probability="1" 
             prob_angle="false" 
@@ -54,7 +54,7 @@
     <Object subtype="$barrel" 
             center_x="-37.33367297" 
             center_y="-7.515816549" 
-           height="3.747002708e-016" 
+           height="5.967448757e-016" 
             angle="0" 
             probability="1" 
             prob_angle="false" 
@@ -62,7 +62,7 @@
     <Object subtype="$barrel" 
             center_x="-37.04324057" 
             center_y="-6.187614615" 
-           height="3.747002708e-016" 
+           height="5.967448757e-016" 
             angle="0" 
             probability="1" 
             prob_angle="false" 
@@ -70,7 +70,7 @@
     <Object subtype="$barrel" 
             center_x="-38.04925494" 
             center_y="-5.532316964" 
-           height="3.747002708e-016" 
+           height="5.967448757e-016" 
             angle="0" 
             probability="1" 
             prob_angle="false" 
@@ -187,7 +187,7 @@
     />
     <Object subtype="$barricade" 
             center_x="21.5" 
-            center_y="-9.238972498" 
+            center_y="-7.056731059" 
             angle="-90" 
             probability="1" 
             prob_angle="false" 
@@ -243,20 +243,20 @@
     />
     <Object subtype="$barricade" 
             center_x="29.5" 
-            center_y="-9.238972498" 
+            center_y="-7.056731059" 
             angle="-90" 
             probability="1" 
             prob_angle="false" 
     />
     <Object subtype="$barricade" 
-            center_x="10.2389725" 
+            center_x="6.603504348" 
             center_y="-21" 
             angle="0" 
             probability="1" 
             prob_angle="false" 
     />
     <Object subtype="$barricade" 
-            center_x="10.2389725" 
+            center_x="6.603504348" 
             center_y="-29" 
             angle="0" 
             probability="1" 
@@ -1009,11 +1009,13 @@
     <Location name="entry_south" pos_x="1.5" pos_y="28.5" />
     <Location name="exit_south" pos_x="1.5" pos_y="37.5" />
     <Location name="locAttendend" pos_x="28.5" pos_y="-22" />
+    <Location name="locCamera" pos_x="19.15012831" pos_y="-18.94815236" />
     <Location name="locGhost1" pos_x="18.5" pos_y="-29" />
     <Location name="locGhost2" pos_x="31" pos_y="-14" />
-    <Location name="locGhost3" pos_x="14.5" pos_y="-21" />
+    <Location name="locGhost3" pos_x="11.58669721" pos_y="-22.38246946" />
     <Location name="locGhost4" pos_x="22.94174879" pos_y="-12.65516755" />
     <Location name="locLich" pos_x="23.5" pos_y="-24.5" />
+    <Location name="locParty" pos_x="15.21664684" pos_y="-15.10808011" />
     <Location name="locSpawn1" pos_x="-22" pos_y="11" />
     <Location name="locSpawn2" pos_x="-5.5" pos_y="11.5" />
     <Location name="locSpawn3" pos_x="9" pos_y="12" />
@@ -1025,7 +1027,7 @@
   </Locations>
 
   <Areas>
-    <Area name="areaLich" angle="-0" center_x="14.07828473" center_y="-13.49256627" type="RECT" extent_x="3.173338953" extent_y="3.53550378" />
+    <Area name="areaLich" angle="-42.61546227" center_x="11.93428746" center_y="-11.80664815" type="RECT" extent_x="1.857" extent_y="7.3925" />
   </Areas>
 
 </ObjectGroup>
