@@ -2189,6 +2189,21 @@ void Region::setRegionData(CharConv* cv,WorldObjectMap* players)
 	}
 	m_objects->clear();
 	m_players->clear();
+	
+	// DropItems loeschen
+	DropItemMap::iterator k;
+	for (k =  m_drop_items->begin(); k != m_drop_items->end(); k++)
+	{
+		if (k->second->getItem() !=0)
+			delete k->second->getItem();
+		delete k->second;
+	}
+	
+	std::list<Trigger*>::iterator l;
+	for (l = m_triggers.begin(); l != m_triggers.end(); ++l)
+	{
+		delete *l;
+	}
 
 	// statische Objekte einlesen
 	short nr_stat;
@@ -2765,7 +2780,10 @@ bool Region::deleteItem(int id, bool delitem)
 		delete (it->second);
 
 		m_drop_items->erase(it);
-		m_drop_item_locations->erase(it2);
+		if (it2 != m_drop_item_locations->end())
+		{
+			m_drop_item_locations->erase(it2);
+		}
 		m_game_objects.erase(id);
 
 
