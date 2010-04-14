@@ -49,6 +49,12 @@ class MainMenu : public Window
 		bool onStartMultiPlayerHost(const CEGUI::EventArgs& evt);
 		
 		/**
+		 * \fn bool onShowCredits(const CEGUI::EventArgs& evt)
+		 * \brief Behandelt Klick auf Credits
+		 */
+		bool onShowCredits(const CEGUI::EventArgs& evt);
+		
+		/**
 		 * \fn bool onQuitGamePlayerHost(const CEGUI::EventArgs& evt)
 		 * \brief Behandelt Start eines Einzelspielerspieles
 		 */

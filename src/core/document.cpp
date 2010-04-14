@@ -409,6 +409,12 @@ void Document::onButtonSaveExitAbort()
 	m_modified |= WINDOWS_MODIFIED;
 }
 
+void Document::onButtonCredits()
+{
+	getGUIState()->m_shown_windows =CREDITS;
+	m_modified =WINDOWS_MODIFIED;
+}
+
 void Document::onRightMouseButtonClick(Vector pos)
 {
 	ClientCommand command;
@@ -543,6 +549,12 @@ void Document::onStartScreenClicked()
 	if (getGUIState()->m_shown_windows == NO_WINDOWS)
 	{
 		getGUIState()->m_shown_windows = SAVEGAME_LIST;
+		m_modified =WINDOWS_MODIFIED;
+	}
+	
+	if (getGUIState()->m_shown_windows == CREDITS)
+	{
+		getGUIState()->m_shown_windows = START_MENU;
 		m_modified =WINDOWS_MODIFIED;
 	}
 }

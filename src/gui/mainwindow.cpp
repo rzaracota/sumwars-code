@@ -129,6 +129,32 @@ bool MainWindow::setupMainMenu()
 		bar->setSize(CEGUI::UVector2(cegui_reldim(0.40f), cegui_reldim( 0.05f)));
 		bar->setWantsMultiClickEvents(false);
 		bar->setProgress(0.0);
+		
+		CEGUI::Window* credits;
+		credits = win_mgr.createWindow("TaharezLook/StaticText", "CreditWindow");
+		m_main_menu->addChildWindow(credits);
+		credits->setPosition(CEGUI::UVector2(cegui_reldim(0.25f), cegui_reldim( 0.20f)));
+		credits->setSize(CEGUI::UVector2(cegui_reldim(0.50f), cegui_reldim( 0.6f)));
+		credits->setProperty("FrameEnabled", "false");
+		credits->setProperty("BackgroundEnabled", "true");
+		credits->setProperty("HorzFormatting", "HorzCentred");
+		std::string content = "Programming: \
+				\n Hans Wulf (Lastmerlin) \
+				\n\nGraphics: \
+				\n Andreas Schönefeldt \
+				\n Steffen Schönefeldt (Nori) \
+				\n\n Scripting: \
+				\n Steffen Schönefeldt (Nori) \
+				\n Hans Wulf (Lastmerlin) \
+				\n\nStory: \
+				\n Steffen Schönefeldt (Nori) \
+				\n\nWebsite: \
+				\n Andreas Schönefeldt \
+				\n Michael Kempf (Hangman)";
+		credits->setText((CEGUI::utf8*) content.c_str());
+		credits->setProperty("BackgroundColours", "tl:99000000 tr:99000000 bl:99000000 br:99000000");
+		credits->setAlpha(0.9);
+		credits->setFont("DejaVuSerif-12");
 
 		SavegameList* sgl = new SavegameList(m_document);
 		m_sub_windows["SavegameList"] = sgl;
@@ -1000,6 +1026,8 @@ void  MainWindow::updateMainMenu()
 	CEGUI::Window* label2;
 	label2 = win_mgr.getWindow("CharacterPreviewBackground");
 	
+	
+	
 	int wflags = m_document->getGUIState()->m_shown_windows;
 	if (wflags & (Document::SAVEGAME_LIST | Document::CHAR_CREATE))
 	{
@@ -1012,6 +1040,18 @@ void  MainWindow::updateMainMenu()
 		img->setVisible(true);
 		label->setVisible(false);
 		label2->setVisible(false);
+	}
+	
+	CEGUI::Window* credits;
+	credits = win_mgr.getWindow("CreditWindow");
+	
+	if (wflags & Document::CREDITS)
+	{
+		credits->setVisible(true);
+	}
+	else
+	{
+		credits->setVisible(false);
 	}
 
 }

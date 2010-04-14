@@ -148,6 +148,7 @@ class Document
 		WORLDMAP = 0x10000,
  		MESSAGE = 0x20000,
 		SAVE_EXIT = 0x40000,
+		CREDITS = 0x80000,
 	};
 
 	/**
@@ -543,6 +544,12 @@ class Document
 	 * \brief The player has aborted save & exit
 	 */
 	void onButtonSaveExitAbort();
+	
+	/**
+	 * \fn void onButtonCredits( )
+	 * \brief The player has pressed credits button
+	 */
+	void onButtonCredits();
 
 	/**
 	 * \fn void onButtonMinimapClicked()
