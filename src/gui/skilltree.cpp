@@ -246,7 +246,7 @@ void SkillTree::update()
 			label->setProperty("FrameEnabled", "false");
 			label->setProperty("BackgroundEnabled", "false");
 			label->setProperty("HorzFormatting", "Centred");
-			label->setID(0);
+			label->setID(-1);
 			label->setText("");
 			label->setSize(CEGUI::UVector2(cegui_reldim(0.07f), cegui_reldim( 0.05f)));
 			label->setAlpha(1.0);
@@ -278,9 +278,9 @@ void SkillTree::update()
 			label->setText(keyname);
 		}
 		
-		if ((int) label->getID() != id)
+		if ((int) label->getID() != it->second)
 		{
-			label->setID(id);
+			label->setID(it->second);
 			pos = label2->getPosition();
 			if (right)
 			{
