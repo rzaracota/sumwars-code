@@ -40,6 +40,6 @@ AC_CHECK_TYPES([ptrdiff_t])
 # Checks for library functions.
 AC_CHECK_FUNCS([floor gettimeofday memmove memset pow setlocale sqrt strchr])
 
-AC_CONFIG_FILES([Makefile src/Makefile])
+AC_CONFIG_FILES([Makefile])
 AC_OUTPUT
 

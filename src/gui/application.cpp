@@ -320,48 +320,48 @@ bool Application::setupResources()
 #ifdef NOMIPMAPS
 	Ogre::TextureManager::getSingleton().setDefaultNumMipmaps(0);
 #endif
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../resources/models", "FileSystem", "General");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../resources/materials/scripts", "FileSystem", "General");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../resources/materials/programs", "FileSystem", "General");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../resources/materials/textures", "FileSystem", "General");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("./resources/models", "FileSystem", "General");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("./resources/materials/scripts", "FileSystem", "General");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("./resources/materials/programs", "FileSystem", "General");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("./resources/materials/textures", "FileSystem", "General");
 	if (OGRE_VERSION >= ((1 << 16) | (6 << 8)))
 	{
-		Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../resources/particle/ogre_1_6", "FileSystem", "General");
+		Ogre::ResourceGroupManager::getSingleton().addResourceLocation("./resources/particle/ogre_1_6", "FileSystem", "General");
 	}
 	else
 	{
-		Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../resources/particle", "FileSystem", "General");
+		Ogre::ResourceGroupManager::getSingleton().addResourceLocation("./resources/particle", "FileSystem", "General");
 	}
 
 	// CEGUI Resourcen laden
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../resources/gui/configs", "FileSystem", "GUI");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../resources/gui/fonts", "FileSystem", "GUI");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("./resources/gui/configs", "FileSystem", "GUI");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("./resources/gui/fonts", "FileSystem", "GUI");
 
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../resources/gui/imagesets", "FileSystem", "GUI");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../resources/emotionsets", "FileSystem", "emotionsets");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../resources/gui/layouts", "FileSystem", "GUI");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../resources/gui/looknfeel", "FileSystem", "GUI");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../resources/gui/schemes", "FileSystem", "GUI");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("./resources/gui/imagesets", "FileSystem", "GUI");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("./resources/emotionsets", "FileSystem", "emotionsets");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("./resources/gui/layouts", "FileSystem", "GUI");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("./resources/gui/looknfeel", "FileSystem", "GUI");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("./resources/gui/schemes", "FileSystem", "GUI");
 
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../resources/gui/schemes", "FileSystem", "GUI");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../resources/itempictures", "FileSystem", "itempictures");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../resources/sound", "FileSystem", "sound");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("./resources/gui/schemes", "FileSystem", "GUI");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("./resources/itempictures", "FileSystem", "itempictures");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("./resources/sound", "FileSystem", "sound");
 
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../data/world", "FileSystem", "world");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../data/npc", "FileSystem", "npc");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../data/quests", "FileSystem", "quests");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../save", "FileSystem", "Savegame");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../data/items", "FileSystem", "items");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../data/abilities", "FileSystem", "abilities");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../data/monsters", "FileSystem", "monsters");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../data/playerclasses", "FileSystem", "playerclasses");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../data/projectiles", "FileSystem", "projectiles");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../data/objects", "FileSystem", "objects");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../data/obj_templates", "FileSystem", "obj_templates");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../data/object_groups", "FileSystem", "object_groups");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../data/renderinfo", "FileSystem", "renderinfo");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../data/lua", "FileSystem", "lua");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../data/sound", "FileSystem", "sounddata");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("./data/world", "FileSystem", "world");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("./data/npc", "FileSystem", "npc");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("./data/quests", "FileSystem", "quests");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("./save", "FileSystem", "Savegame");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("./data/items", "FileSystem", "items");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("./data/abilities", "FileSystem", "abilities");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("./data/monsters", "FileSystem", "monsters");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("./data/playerclasses", "FileSystem", "playerclasses");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("./data/projectiles", "FileSystem", "projectiles");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("./data/objects", "FileSystem", "objects");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("./data/obj_templates", "FileSystem", "obj_templates");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("./data/object_groups", "FileSystem", "object_groups");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("./data/renderinfo", "FileSystem", "renderinfo");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("./data/lua", "FileSystem", "lua");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("./data/sound", "FileSystem", "sounddata");
 
 #if defined(WIN32)
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("c:\\windows\\fonts", "FileSystem", "GUI");

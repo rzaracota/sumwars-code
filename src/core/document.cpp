@@ -287,7 +287,7 @@ void Document::createNewCharacter(std::string name)
 {
 	if (m_temp_player)
 	{
-		m_save_file = "../save/";
+		m_save_file = "./save/";
 		m_save_file += name;
 		m_save_file += ".sav";
 		
