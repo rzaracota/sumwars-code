@@ -251,7 +251,7 @@
 <!-- Konzilswaechter -->
 <Monster type="NPC" subtype="council_guard" name="Council Guard" fraction="human" race="human" layer="NORMAL">
 	<RenderInfo name="guardPole_cnl" />
-	<EmotionSet name="human_standard" />
+	<EmotionSet name="derred_emotion" />
 	<BasicAttributes
 					experience="0"
 					level="20"
@@ -380,7 +380,7 @@
 <!-- Konzilswaechter, Ireana -->
 <Monster type="NPC" subtype="ireana_guard" name="Council Guard" fraction="human" race="human" layer="NORMAL">
 	<RenderInfo name="guardPole_cnl" />
-	<EmotionSet name="human_standard" />
+	<EmotionSet name="derred_emotion" />
 	<BasicAttributes
 					experience="0"
 					level="20"

@@ -21,11 +21,21 @@
 		<TradeItem subtype="turney_lbw"  number="1" number_magical="0"/>
 		<TradeItem subtype="orc_lbw"  number="1" number_magical="0"/>
 		<TradeItem subtype="yew_lbw"  number="1" number_magical="0"/>
-		<TradeItem subtype="prntc_wnd"  number="1" number_magical="0"/>
-		<TradeItem subtype="novice_wnd"  number="1" number_magical="0"/>
-		<TradeItem subtype="spruce_stf"  number="1" number_magical="0"/>
-		<TradeItem subtype="prntc_stf"  number="1" number_magical="0"/>
-		<TradeItem subtype="novice_stf"  number="1" number_magical="0"/>
+		<TradeItem subtype="prntc_wnd_fire"  number="1" number_magical="0"/>
+		<TradeItem subtype="novice_wnd_fire"  number="1" number_magical="0"/>
+		<TradeItem subtype="prntc_wnd_air"  number="1" number_magical="0"/>
+		<TradeItem subtype="novice_wnd_air"  number="1" number_magical="0"/>
+		<TradeItem subtype="prntc_wnd_ice"  number="1" number_magical="0"/>
+		<TradeItem subtype="novice_wnd_ice"  number="1" number_magical="0"/>
+		<TradeItem subtype="spruce_stf_fire"  number="1" number_magical="0"/>
+		<TradeItem subtype="prntc_stf_fire"  number="1" number_magical="0"/>
+		<TradeItem subtype="novice_stf_fire"  number="1" number_magical="0"/>
+		<TradeItem subtype="spruce_stf_air"  number="1" number_magical="0"/>
+		<TradeItem subtype="prntc_stf_air"  number="1" number_magical="0"/>
+		<TradeItem subtype="novice_stf_air"  number="1" number_magical="0"/>
+		<TradeItem subtype="spruce_stf_ice"  number="1" number_magical="0"/>
+		<TradeItem subtype="prntc_stf_ice"  number="1" number_magical="0"/>
+		<TradeItem subtype="novice_stf_ice"  number="1" number_magical="0"/>
 	</Trade>
 	
 	<Topic name="trade" start_option="Trade" />

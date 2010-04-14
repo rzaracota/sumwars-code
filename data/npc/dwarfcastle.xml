@@ -16,10 +16,18 @@
 		<TradeItem subtype="merc_axe"  number="1" number_magical="0"/>
 		<TradeItem subtype="smash_axe"  number="1" number_magical="0"/>
 		<TradeItem subtype="ogrhac_axe"  number="1" number_magical="0"/>
-		<TradeItem subtype="alder_wnd"  number="1" number_magical="0"/>
-		<TradeItem subtype="magus_wnd"  number="1" number_magical="0"/>
-		<TradeItem subtype="alder_stf"  number="1" number_magical="0"/>
-		<TradeItem subtype="magus_stf"  number="1" number_magical="0"/>
+		<TradeItem subtype="alder_wnd_fire"  number="1" number_magical="0"/>
+		<TradeItem subtype="magus_wnd_fire"  number="1" number_magical="0"/>
+		<TradeItem subtype="alder_wnd_air"  number="1" number_magical="0"/>
+		<TradeItem subtype="magus_wnd_air"  number="1" number_magical="0"/>
+		<TradeItem subtype="alder_wnd_ice"  number="1" number_magical="0"/>
+		<TradeItem subtype="magus_wnd_ice"  number="1" number_magical="0"/>
+		<TradeItem subtype="alder_stf_fire"  number="1" number_magical="0"/>
+		<TradeItem subtype="magus_stf_fire"  number="1" number_magical="0"/>
+		<TradeItem subtype="alder_stf_air"  number="1" number_magical="0"/>
+		<TradeItem subtype="magus_stf_air"  number="1" number_magical="0"/>
+		<TradeItem subtype="alder_stf_ice"  number="1" number_magical="0"/>
+		<TradeItem subtype="magus_stf_ice"  number="1" number_magical="0"/>
 	</Trade>
 
 	<Topic name="trade" start_option="Trade" />
@@ -75,9 +83,15 @@
 		<TradeItem subtype="soldr_lbw"  number="0" number_magical="1" min_enchant="200" max_enchant="650"/>
 		<TradeItem subtype="iron_axe"  number="0" number_magical="1" min_enchant="200" max_enchant="650"/>
 		<TradeItem subtype="smash_axe"  number="0" number_magical="1" min_enchant="200" max_enchant="650"/>
-		<TradeItem subtype="alder_wnd"  number="0" number_magical="1" min_enchant="200" max_enchant="650"/>
-		<TradeItem subtype="magus_wnd"  number="0" number_magical="1" min_enchant="200" max_enchant="650"/>
-		<TradeItem subtype="alder_stf"  number="0" number_magical="1" min_enchant="200" max_enchant="650"/>
+		<TradeItem subtype="alder_wnd_fire"  number="0" number_magical="1" min_enchant="200" max_enchant="650"/>
+		<TradeItem subtype="magus_wnd_fire"  number="0" number_magical="1" min_enchant="200" max_enchant="650"/>
+		<TradeItem subtype="alder_wnd_air"  number="0" number_magical="1" min_enchant="200" max_enchant="650"/>
+		<TradeItem subtype="magus_wnd_air"  number="0" number_magical="1" min_enchant="200" max_enchant="650"/>
+		<TradeItem subtype="alder_wnd_ice"  number="0" number_magical="1" min_enchant="200" max_enchant="650"/>
+		<TradeItem subtype="magus_wnd_ice"  number="0" number_magical="1" min_enchant="200" max_enchant="650"/>
+		<TradeItem subtype="alder_stf_fire"  number="0" number_magical="1" min_enchant="200" max_enchant="650"/>
+		<TradeItem subtype="alder_stf_air"  number="0" number_magical="1" min_enchant="200" max_enchant="650"/>
+		<TradeItem subtype="alder_stf_ice"  number="0" number_magical="1" min_enchant="200" max_enchant="650"/>
 		
 		<TradeItem subtype="merc_arm"  number="0" number_magical="1" min_enchant="200" max_enchant="650"/>
 		<TradeItem subtype="rngsh_arm"  number="0" number_magical="1" min_enchant="200" max_enchant="650"/>

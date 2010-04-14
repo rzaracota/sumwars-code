@@ -36,11 +36,17 @@
 		<TradeItem subtype="yew_lbw"  number="1" number_magical="0"/>
 		<TradeItem subtype="long_lbw"  number="1" number_magical="0"/>
 		<TradeItem subtype="soldr_lbw"  number="1" number_magical="0"/>
-		<TradeItem subtype="novice_wnd"  number="1" number_magical="0"/>
+		<TradeItem subtype="novice_wnd_fire"  number="1" number_magical="0"/>
+		<TradeItem subtype="alder_wnd_fire"  number="1" number_magical="0"/>
+		<TradeItem subtype="novice_wnd_air"  number="1" number_magical="0"/>
+		<TradeItem subtype="alder_wnd_air"  number="1" number_magical="0"/>
+		<TradeItem subtype="novice_wnd_ice"  number="1" number_magical="0"/>
+		<TradeItem subtype="alder_wnd_ice"  number="1" number_magical="0"/>
 		<TradeItem subtype="rock_wnd"  number="1" number_magical="0"/>
-		<TradeItem subtype="alder_wnd"  number="1" number_magical="0"/>
 		<TradeItem subtype="rock_stf"  number="1" number_magical="0"/>
-		<TradeItem subtype="alder_stf"  number="1" number_magical="0"/>
+		<TradeItem subtype="alder_stf_fire"  number="1" number_magical="0"/>
+		<TradeItem subtype="alder_stf_air"  number="1" number_magical="0"/>
+		<TradeItem subtype="alder_stf_ice"  number="1" number_magical="0"/>
 	</Trade>
 	
 	<Topic name="trade" start_option="Weapons" />
@@ -87,7 +93,9 @@
 		<TradeItem subtype="hunter_sbw"  number="0" number_magical="1" min_enchant="100" max_enchant="400"/>
 		<TradeItem subtype="rock_stf"  number="0" number_magical="1" min_enchant="100" max_enchant="400"/>
 		<TradeItem subtype="rock_wnd"  number="0" number_magical="1" min_enchant="100" max_enchant="400"/>
-		<TradeItem subtype="alder_wnd"  number="0" number_magical="1" min_enchant="100" max_enchant="400"/>
+		<TradeItem subtype="alder_wnd_fire"  number="0" number_magical="1" min_enchant="100" max_enchant="400"/>
+		<TradeItem subtype="alder_wnd_air"  number="0" number_magical="1" min_enchant="100" max_enchant="400"/>
+		<TradeItem subtype="alder_wnd_ice"  number="0" number_magical="1" min_enchant="100" max_enchant="400"/>
 		<TradeItem subtype="bandit_arm"  number="0" number_magical="1" min_enchant="100" max_enchant="400"/>
 		<TradeItem subtype="novice_arm"  number="0" number_magical="1" min_enchant="100" max_enchant="400"/>
 		<TradeItem subtype="alch_rob"  number="0" number_magical="1" min_enchant="100" max_enchant="400"/>
