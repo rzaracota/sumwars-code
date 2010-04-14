@@ -2442,23 +2442,57 @@
 				
 				initDialog()
 				addSpeaker(defend_dwall_tmp.lich,"lich");
+				speakPause(1000);
+				speak("lich",_("Sieh an."),"amused");
+				speak("lich",_("Da ist ja die Wurzel meines kleinen Problems."),"unhappy");
+				speak("lich",_("Kaum zu glauben, dass jemand so verrueckt ist, hier raus zu stuermen."),"amused");
 				
-				speak("lich",_("welcome, twerps!"),"amused")
-				
-				changeTopic("lichFinalSpeachIntermediate")
+				changeTopic("lichFinalSpeachIntermediate");
 			</Effect>
 		</Event>
 		<Event trigger="lichFinalSpeachIntermediate" once="true">
 			<Effect>
 				addCameraPosition(1500,"locCamera", -110, 70, 24)
 
-				speak("leader",_("is that your catchphrase?!"),"disgust")
-				speak("lich", _("fight!!"),"warcry")
+				speak("leader",_("Mach dich bereit, fuer immer zu vergehen!"),"grin");
+				speak("lich", _("Natuerlich, wenn ein paar Gezeichnete in der Naehe sind ist alles ein wenig anders."),"thoughtful");
+				speak("waropt", _("Erntezeit!!"),"warcry");
+				speak("lich",_("Nicht so hastig."),"threaten");
+				if(solo())then
+					speak("lich",_("Sicher, Ihr seid unsterblich, oder so sagt man zumindest, aber Schmerzen spürt Ihr doch trotzdem noch, nicht wahr? _solo"),"amused");
+					speak("lich",_("Wollt Ihr Euch wirklich immer und immer wieder von mir in Stuecke hacken lassen? _solo"),"grin");
+				else
+					speak("lich",_("Sicher, ihr seid unsterblich, oder so sagt man zumindest, aber Schmerzen spürt ihr doch trotzdem noch, nicht wahr?"),"amused");
+				end;
+				insertTrigger("lichTalkEnd")
+			</Effect>
+		</Event>
+		<Event trigger="lichTalkEnd" once="true">
+			<Effect>
+				setCutsceneMode(false)
 			</Effect>
 		</Event>
 		
-		
+		<Event trigger="unit_hit">
+			<Condition>
+				return (trigger.defender == defend_dwall_tmp.lich)
+			</Condition>
+			<Effect>
+				local lich = trigger.defender
+				--local hp = get(lich, "health")
+				--local mhp = get(lich, "max_health")
+				local percent = get(lich, "health")/ get(lich, "max_health")
+				--print(hp.."/"..mhp.." => "..percent.."%");
+				if((75 >= percent) and (defend_dwall_tmp.lich75 ~= true))then
+					defend_dwall_tmp.lich75 = true;
+					insertTrigger("under75");
+				end;
+			</Effect>
+		</Event>
+		<Event trigger="under75" once="true">
+			<Effect>
+				print("lich unlocked homing iceball")
+			</Effect>
+		</Event>
 	</Region>
 </Quest>
-
-
