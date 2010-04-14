@@ -18,15 +18,15 @@ int main (int argc, char *argv[]) {
 	#ifndef WIN32
 	if (argc>=2)
 	{
-		save = "../save/";
+		save = "./save/";
 		save += argv[1];
 	}
 	else
 	{
-		save = "../save/default.sav";
+		save = "./save/default.sav";
 	}
 	#else
-        save = "../save/default.sav";
+        save = "./save/default.sav";
     #endif
 
 	bool server = true;
