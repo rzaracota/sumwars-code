@@ -1,3 +1,4 @@
+<!-- Monsterbases -->
 <RenderInfo name="skeletonbase" parent="playerbase">
 	<Action name="die">
 		<Animation name="dieOneHand" />
@@ -49,6 +50,24 @@
 </RenderInfo>
 
 <RenderInfo name="lichbase" parent="creaturebase">
+	<State name = "frost">
+		<Activation>
+			<ParticleSystem objectname="frostscythe1" bone="itemRightHand" source="FrostBlade" position= "0 0 -3.3" rotation="0 -90 0"/>
+			<ParticleSystem objectname="frostscythe2" bone="itemRightHand" source="FrostBlade" position= "-0.5 0 -3.3" rotation="0 -90 0"/>
+			<ParticleSystem objectname="frostscythe3" bone="itemRightHand" source="FrostBlade" position= "-1.0 0 -3.3" rotation="0 -80 0"/>
+			<ParticleSystem objectname="frostscythe4" bone="itemRightHand" source="FrostBlade" position= "-1.5 0 -3.2" rotation="0 -70 0"/>
+			<ParticleSystem objectname="frostscythe5" bone="itemRightHand" source="FrostBlade" position= "-2.0 0 -3.0" rotation="0 -60 0"/>
+		</Activation>
+		
+		<Deactivation>
+			<Detach objectname="frostscythe1"/>
+			<Detach objectname="frostscythe2"/>
+			<Detach objectname="frostscythe3"/>
+			<Detach objectname="frostscythe4"/>
+			<Detach objectname="frostscythe5"/>
+		</Deactivation>
+	</State>
+	
 	<Action name="walk">
 		<Animation name="walk" />
 	</Action>
@@ -66,6 +85,9 @@
 	</Action>
 	
 	<Action name ="attack" >
+		<Animation  name = "attack1"/>
+	</Action>
+	<Action name ="asoroth_ice_attack" >
 		<Animation  name = "attack1"/>
 	</Action>
 	
@@ -279,6 +301,13 @@
 	
 </RenderInfo>
 
+<RenderInfo name="obeliskbase" parent="creaturebase">
+	
+</RenderInfo>
+
+
+<!-- Monster -->
+
 <RenderInfo name="sword_skeleton" parent="skeletonbase">
 	<Entity source="skeleton.mesh"/>
 	<Entity objectname="weapon" bone="itemRightHand" source="old_sw.mesh" />
@@ -404,7 +433,6 @@
 		<Animation name="attackRangedBow" />
 	</Action>
 </RenderInfo>
-
 
 <!-- der Spalt -->
 <RenderInfo name = "necromancer" parent="necromancerBase">
@@ -552,6 +580,10 @@
 	<Action name = "noaction">
 		<Animation name = "idleShield"/>
 	</Action>
+</RenderInfo>
+
+<RenderInfo name="iceObelisk" parent="obeliskbase">
+	<Entity source="barrel1.mesh"/>
 </RenderInfo>
 
 

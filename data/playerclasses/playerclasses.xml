@@ -154,7 +154,7 @@
 	
 	<SkilltreeTabs tab1="Fire magic" tab2="Ice magic" tab3="Air magic" />
 	
-	<Item type="spruce_wnd" />
+	<Item type="spruce_wnd_fire" />
 	<Item type="heal_1" />
 	<Item type="heal_1" />
 	

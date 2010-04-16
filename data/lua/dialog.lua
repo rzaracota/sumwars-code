@@ -32,5 +32,12 @@ function quake(loc1, loc2, cameraposition, iterations)
 		addCameraPosition(100, loc1, cameraposition[1],cameraposition[2],cameraposition[3]);
 	end;
 end;
-
+--every player speaks at the same time
+--talk[String]: What every player will say
+--emotion[String]: The emotion of the talk
+function groupTalk(talk, emotion)
+	for key,id in pairs(getPlayers()) do
+		unitSpeak(id,talk,emotion);
+	end;
+end;
 

@@ -14,7 +14,7 @@
 			  modchance_damage_fire_mod="0.20"
 			  modchance_damage_ice_mod="0.0"
 			  modchance_damage_air_mod="0.20"
-			  modchance_damage_mult_air_mod="0.2"
+			  modchance_damage_mult_fire_mod="0.2"
 			  />
 	<EquipEffect />
 	<WeaponAttribute
@@ -50,8 +50,8 @@
 	<EquipEffect />
 	<WeaponAttribute
 					weapon_type="staff"
-					damage_min_air="3"
-					damage_max_air="5"
+					damage_min_air="1"
+					damage_max_air="7"
 					damage_attack="54"
 					damage_power="53"
 					attack_range="20"
@@ -76,7 +76,7 @@
 			  modchance_damage_fire_mod="0.0"
 			  modchance_damage_ice_mod="0.30"
 			  modchance_damage_air_mod="0.20"
-			  modchance_damage_mult_air_mod="0.2"
+			  modchance_damage_mult_ice_mod="0.2"
 			  />
 	<EquipEffect />
 	<WeaponAttribute
@@ -109,13 +109,13 @@
 			  modchance_damage_fire_mod="0.30"
 			  modchance_damage_ice_mod="0.0"
 			  modchance_damage_air_mod="0.20"
-			  modchance_damage_mult_air_mod="0.2"
+			  modchance_damage_mult_fire_mod="0.2"
 			  />
 	<EquipEffect />
 	<WeaponAttribute
 					weapon_type="staff"
-					damage_min_fire="3"
-					damage_max_fire="12"
+					damage_min_fire="5"
+					damage_max_fire="11"
 					damage_attack="54"
 					damage_power="53"
 					attack_range="20"
@@ -146,7 +146,7 @@
 	<WeaponAttribute
 					weapon_type="staff"
 					damage_min_air="3"
-					damage_max_air="12"
+					damage_max_air="13"
 					damage_attack="54"
 					damage_power="53"
 					attack_range="20"
@@ -171,13 +171,13 @@
 			  modchance_damage_fire_mod="0.0"
 			  modchance_damage_ice_mod="0.30"
 			  modchance_damage_air_mod="0.20"
-			  modchance_damage_mult_air_mod="0.2"
+			  modchance_damage_mult_ice_mod="0.2"
 			  />
 	<EquipEffect />
 	<WeaponAttribute
 					weapon_type="staff"
-					damage_min_ice="3"
-					damage_max_ice="12"
+					damage_min_ice="7"
+					damage_max_ice="9"
 					damage_attack="54"
 					damage_power="53"
 					attack_range="20"
@@ -209,7 +209,7 @@
 	<WeaponAttribute
 					weapon_type="staff"
 					damage_min_fire="6"
-					damage_max_fire="11"
+					damage_max_fire="13"
 					damage_attack="54"
 					damage_power="53"
 					attack_range="20"
@@ -234,13 +234,13 @@
 			  modchance_damage_fire_mod="0.10"
 			  modchance_damage_air_mod="0.30"
 			  modchance_damage_ice_mod="0.10"
-			  modchance_damage_mult_fire_mod="0.2"
+			  modchance_damage_mult_air_mod="0.2"
 			  />
 	<EquipEffect />
 	<WeaponAttribute
 					weapon_type="staff"
-					damage_min_air="6"
-					damage_max_air="11"
+					damage_min_air="4"
+					damage_max_air="15"
 					damage_attack="54"
 					damage_power="53"
 					attack_range="20"
@@ -265,12 +265,12 @@
 			  modchance_damage_fire_mod="0.0"
 			  modchance_damage_air_mod="0.20"
 			  modchance_damage_ice_mod="0.30"
-			  modchance_damage_mult_fire_mod="0.2"
+			  modchance_damage_mult_ice_mod="0.2"
 			  />
 	<EquipEffect />
 	<WeaponAttribute
 					weapon_type="staff"
-					damage_min_ice="6"
+					damage_min_ice="8"
 					damage_max_ice="11"
 					damage_attack="54"
 					damage_power="53"
@@ -298,13 +298,13 @@
 			  modchance_damage_ice_mod="0.0"
 			  modchance_damage_air_mod="0.20"
 			  modchance_damage_fire_mod="0.30"
-			  modchance_damage_mult_ice_mod="0.2"
+			  modchance_damage_mult_fire_mod="0.2"
 			  />
 	<EquipEffect />
 	<WeaponAttribute
 					weapon_type="staff"
-					damage_min_fire="9"
-					damage_max_fire="12"
+					damage_min_fire="8"
+					damage_max_fire="15"
 					attack_range="20"
 					two_handed="no"
 					dattack_speed="0"
@@ -327,13 +327,13 @@
 			  modchance_damage_ice_mod="0.10"
 			  modchance_damage_air_mod="0.30"
 			  modchance_damage_fire_mod="0.10"
-			  modchance_damage_mult_ice_mod="0.2"
+			  modchance_damage_mult_air_mod="0.2"
 			  />
 	<EquipEffect />
 	<WeaponAttribute
 					weapon_type="staff"
-					damage_min_air="9"
-					damage_max_air="12"
+					damage_min_air="6"
+					damage_max_air="17"
 					attack_range="20"
 					two_handed="no"
 					dattack_speed="0"
@@ -360,8 +360,8 @@
 	<EquipEffect />
 	<WeaponAttribute
 					weapon_type="staff"
-					damage_min_ice="9"
-					damage_max_ice="12"
+					damage_min_ice="10"
+					damage_max_ice="13"
 					attack_range="20"
 					two_handed="no"
 					dattack_speed="0"
@@ -421,13 +421,13 @@
 			  modchance_damage_ice_mod="0.0"
 			  modchance_damage_air_mod="0.20"
 			  modchance_damage_fire_mod="0.30"
-			  modchance_damage_mult_ice_mod="0.2"
+			  modchance_damage_mult_fire_mod="0.2"
 			  />
 	<EquipEffect />
 	<WeaponAttribute
 					weapon_type="staff"
-					damage_min_fire="13"
-					damage_max_fire="16"
+					damage_min_fire="10"
+					damage_max_fire="18"
 					attack_range="20"
 					two_handed="no"
 					dattack_speed="0"
@@ -450,13 +450,13 @@
 			  modchance_damage_ice_mod="0.10"
 			  modchance_damage_air_mod="0.30"
 			  modchance_damage_fire_mod="0.10"
-			  modchance_damage_mult_ice_mod="0.2"
+			  modchance_damage_mult_air_mod="0.2"
 			  />
 	<EquipEffect />
 	<WeaponAttribute
 					weapon_type="staff"
-					damage_min_air="13"
-					damage_max_air="16"
+					damage_min_air="8"
+					damage_max_air="20"
 					attack_range="20"
 					two_handed="no"
 					dattack_speed="0"
@@ -483,7 +483,7 @@
 	<EquipEffect />
 	<WeaponAttribute
 					weapon_type="staff"
-					damage_min_ice="13"
+					damage_min_ice="12"
 					damage_max_ice="16"
 					attack_range="20"
 					two_handed="no"
@@ -509,13 +509,13 @@
 			  modchance_damage_ice_mod="0.0"
 			  modchance_damage_air_mod="0.20"
 			  modchance_damage_fire_mod="0.30"
-			  modchance_damage_mult_ice_mod="0.2"
+			  modchance_damage_mult_fire_mod="0.2"
 			  />
 	<EquipEffect />
 	<WeaponAttribute
 					weapon_type="staff"
-					damage_min_fire="5"
-					damage_max_fire="16"
+					damage_min_fire="12"
+					damage_max_fire="20"
 					damage_attack="54"
 					damage_power="53"
 					attack_range="20"
@@ -540,13 +540,13 @@
 			  modchance_damage_ice_mod="0.10"
 			  modchance_damage_air_mod="0.30"
 			  modchance_damage_fire_mod="0.10"
-			  modchance_damage_mult_ice_mod="0.2"
+			  modchance_damage_mult_air_mod="0.2"
 			  />
 	<EquipEffect />
 	<WeaponAttribute
 					weapon_type="staff"
-					damage_min_air="5"
-					damage_max_air="16"
+					damage_min_air="10"
+					damage_max_air="22"
 					damage_attack="54"
 					damage_power="53"
 					attack_range="20"
@@ -576,8 +576,8 @@
 	<EquipEffect />
 	<WeaponAttribute
 					weapon_type="staff"
-					damage_min_ice="5"
-					damage_max_ice="16"
+					damage_min_ice="14"
+					damage_max_ice="18"
 					damage_attack="54"
 					damage_power="53"
 					attack_range="20"
@@ -608,7 +608,7 @@
 	<EquipEffect />
 	<WeaponAttribute
 					weapon_type="staff"
-					damage_min_fire="12"
+					damage_min_fire="14"
 					damage_max_fire="21"
 					attack_range="20"
 					two_handed="no"
@@ -632,13 +632,13 @@
 			  modchance_damage_fire_mod="0.10"
 			  modchance_damage_air_mod="0.30"
 			  modchance_damage_ice_mod="0.10"
-			  modchance_damage_mult_fire_mod="0.2"
+			  modchance_damage_mult_air_mod="0.2"
 			  />
 	<EquipEffect />
 	<WeaponAttribute
 					weapon_type="staff"
 					damage_min_air="12"
-					damage_max_air="21"
+					damage_max_air="23"
 					attack_range="20"
 					two_handed="no"
 					dattack_speed="0"
@@ -660,13 +660,13 @@
 			  modchance_magic_power_mod="0.2"
 			  modchance_damage_ice_mod="0.30"
 			  modchance_damage_air_mod="0.20"
-			  modchance_damage_mult_fire_mod="0.2"
+			  modchance_damage_mult_ice_mod="0.2"
 			  />
 	<EquipEffect />
 	<WeaponAttribute
 					weapon_type="staff"
-					damage_min_ice="12"
-					damage_max_ice="21"
+					damage_min_ice="15"
+					damage_max_ice="20"
 					attack_range="20"
 					two_handed="no"
 					dattack_speed="0"
@@ -719,7 +719,7 @@
 			  modchance_damage_fire_mod="0.10"
 			  modchance_damage_air_mod="0.30"
 			  modchance_damage_ice_mod="0.10"
-			  modchance_damage_mult_ice_mod="0.2"
+			  modchance_damage_mult_air_mod="0.2"
 			  />
 	<EquipEffect />
 	<WeaponAttribute

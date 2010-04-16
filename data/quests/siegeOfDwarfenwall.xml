@@ -2401,7 +2401,7 @@
 				lookAt(defend_dwall_tmp.lich,"locParty");
 			</Effect>
 		</Event>
-		
+		<!--
 		<Event trigger="player_moved" once = "true">
 			<Condition>
 				if(unitIsInArea(trigger.player,"areaLich"))then
@@ -2418,7 +2418,7 @@
 				assembleParty("necFieldcamp","locParty");
 				startTimer("lichFinalSpeachStart",900);
 			</Effect>
-		</Event>
+		</Event>-->
 		<Event trigger="party_complete" once="true">
 			<Condition>
 				return(defend_dwall_tmp.lichTalk == true);
@@ -2453,23 +2453,64 @@
 		<Event trigger="lichFinalSpeachIntermediate" once="true">
 			<Effect>
 				addCameraPosition(1500,"locCamera", -110, 70, 24)
-
+				
 				speak("leader",_("Mach dich bereit, fuer immer zu vergehen!"),"grin");
-				speak("lich", _("Natuerlich, wenn ein paar Gezeichnete in der Naehe sind ist alles ein wenig anders."),"thoughtful");
+				
+				if(solo() and maleOnly())then
+					speak("lich",_("Kaum zu glauben, dass ein einziger Gezeichneter ausreicht, um so viel Chaos zu verursachen."),"surprised");
+				elseif(solo())then
+					speak("lich",_("Kaum zu glauben, dass eine einzige Gezeichnete ausreicht, um so viel Chaos zu verursachen."),"surprised");
+				else
+					speak("lich", _("Natuerlich, wenn ein paar Gezeichnete in der Naehe sind ist alles ein wenig anders."),"thoughtful");
+				end;
 				speak("waropt", _("Erntezeit!!"),"warcry");
 				speak("lich",_("Nicht so hastig."),"threaten");
+				setSpeakerEmotion("waropt","normal");
 				if(solo())then
 					speak("lich",_("Sicher, Ihr seid unsterblich, oder so sagt man zumindest, aber Schmerzen spürt Ihr doch trotzdem noch, nicht wahr? _solo"),"amused");
-					speak("lich",_("Wollt Ihr Euch wirklich immer und immer wieder von mir in Stuecke hacken lassen? _solo"),"grin");
+					speak("lich",_("Wollt Ihr Euch wirklich immer und immer wieder von mir in Stuecke hacken lassen? _solo"),"threaten");
 				else
 					speak("lich",_("Sicher, ihr seid unsterblich, oder so sagt man zumindest, aber Schmerzen spürt ihr doch trotzdem noch, nicht wahr?"),"amused");
+					speak("lich",_("Wollt ihr euch wirklich immer und immer wieder von mir in Stuecke hacken lassen?"),"threaten");
 				end;
-				insertTrigger("lichTalkEnd")
+				speak("waropt", _("Pah! Deine Skelette sind alle schon Staub und der eine Lakei wird dich nicht retten!"),"sneer");
+				speak("lich",_("Wo Ihr es so erwaehnt..."),"amused");
+				speak("lich",_("Ihr habt tatsaechlich die meisten in Stuecke geschlagen."),"unhappy");
+				speak("lich",_("Dennoch ein verkraftbarer Verlust."),"normal");
+				speak("lich",_("Die Menschen in Zwergentrutz werden mir sicherlich beim Aufstellen einer neuen Armee behilflich sein."),"grin");
+				if(fissure.listened == true)then
+					speak("leader", _("Was ist das eigentlich fuer ein Kristall, den deine verrotteten Herren wollen, Kettenhund?"),"normal");
+					--TODO: lich lachen
+					speak("lich", _("Du kannst mich nicht wuetend machen."),"sneer");
+					speak("lich", _("Und was den Kristall angeht, so fragt Ihr vielleicht lieber Eure Auftraggeber?"),"sneer");
+					speak("leader",_("..."),"unhappy",2000);
+					speak("lich",_("Das dachte ich mir."),"grin");
+					speak("lich",_("Die Elementaristen sind nicht besonders gespraechig, habe ich recht?"),"grin");
+				end;
+				speak("priopt",_("Deine Rede ist so faul wie der Rest deines Koerpers."),"angry");
+				
+				speak("waropt",_("Stirb!"),"angry");
+				changeTopic("lichTalkFinalThreats");
+				
+			</Effect>
+		</Event>
+		<Event trigger="lichTalkFinalThreats" once="true">
+			<Effect>
+				groupTalk(_("Erntezeit!"),"warcry")
+				speakPause(1000);
+				if(solo())then
+					speak("lich",_("Habt Ihr eigentlich gewusst, dass es hier eine Menge ungebundener Seelen in der Luft gibt? _solo"),"grin");
+				else
+					speak("lich",_("Habt ihr eigentlich gewusst, dass es hier eine Menge ungebundener Seelen in der Luft gibt?"),"grin");
+				end;
+				changeTopic("lichTalkEnd")
 			</Effect>
 		</Event>
 		<Event trigger="lichTalkEnd" once="true">
 			<Effect>
 				setCutsceneMode(false)
+				
+				unitSpeak("lich",_("Und jetzt werde ich der erste sein, der einen Weg findet, wie Gezeichnete zu toeten sind."), "angry")
 			</Effect>
 		</Event>
 		
@@ -2483,15 +2524,56 @@
 				--local mhp = get(lich, "max_health")
 				local percent = get(lich, "health")/ get(lich, "max_health")
 				--print(hp.."/"..mhp.." => "..percent.."%");
-				if((75 >= percent) and (defend_dwall_tmp.lich75 ~= true))then
+				if((0.75 >= percent) and (defend_dwall_tmp.lich75 ~= true))then
 					defend_dwall_tmp.lich75 = true;
 					insertTrigger("under75");
+				elseif((0.5 >= percent) and (defend_dwall_tmp.lich50 ~= true))then
+					defend_dwall_tmp.lich50 = true;
+					insertTrigger("under50");
+				elseif((0.25 >= percent) and (defend_dwall_tmp.lich25 ~= true))then
+					defend_dwall_tmp.lich25 = true;
+					insertTrigger("under25");
+				elseif((0.1 >= percent) and (defend_dwall_tmp.lich10 ~= true))then
+					defend_dwall_tmp.lich10 = true;
+					insertTrigger("under10");
 				end;
 			</Effect>
 		</Event>
 		<Event trigger="under75" once="true">
 			<Effect>
 				print("lich unlocked homing iceball")
+				set(defend_dwall_tmp.lich,"ai_ability_rating:asoroth_guided_iceball",2)
+			</Effect>
+		</Event>
+		<Event trigger="under50" once="true">
+			<Effect>
+				print("lich switched to icedamage and invoked icearmor")
+				set(defend_dwall_tmp.lich,"ai_ability_rating:attack",0)
+				set(defend_dwall_tmp.lich,"ai_ability_rating:asoroth_ice_attack",1)
+				setObjectFlag(defend_dwall_tmp.lich, "frost");
+			</Effect>
+		</Event>
+		<Event trigger="under25" once="true">
+			<Effect>
+				print("lich unlocked icewave and iceobelisk")
+				set(defend_dwall_tmp.lich,"ai_ability_rating:asoroth_frost_wave",3)
+				set(defend_dwall_tmp.lich,"ai_ability_rating:asoroth_ice_obelisk",2)
+			</Effect>
+		</Event>
+		<Event trigger="under10" once="true">
+			<Effect>
+				print("lich called an army of skeletons")
+				fadeIn(3000,{0.2,0.2,0.2},{0.9,0.9,0.9},{0.1,0.1,0.1})
+				addUnitCommand(defend_dwall_tmp.lich,"asoroth_call_army")
+			</Effect>
+		</Event>
+		
+		<Event trigger="unit_die">
+			<Condition>
+				return(trigger.unit == defend_dwall_tmp.lich)
+			</Condition>
+			<Effect>
+				fadeIn(1000,{0.4,0.4,0.4},{1,1,1},{0.3,0.3,0.3})
 			</Effect>
 		</Event>
 	</Region>

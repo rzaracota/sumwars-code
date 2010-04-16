@@ -150,6 +150,16 @@
 	<Flag name="explodes"/>
 	<RenderInfo name="ice_bolt" />
 </Projectile>
+<Projectile subtype="guided_ice_ball"
+			lifetime="3000"
+			radius="1.0"
+			implementation = "fly_guided"
+			new_projectile_type="ice_ball_ring"
+		   >
+	<Flag name="explodes"/>
+	<RenderInfo name="ice_bolt" />
+</Projectile>
+
 <Projectile  subtype="ice_ball_ring"
 		   lifetime="800"
 		   radius="4"

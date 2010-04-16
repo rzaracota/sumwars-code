@@ -1,7 +1,7 @@
 ﻿<Quest name="The Ambush" table_name="ambush">
 	<Description>
 		if (ambush.finished) then
-			return _("Ierana hat es ueberlebt und vor lauter Dankbarkeit gleich fuer den naechsten Auftrag gesorgt. Ich wusste ja schon immer, dass die Konziliker nur einen Kammerjaeger wollten.")
+			return _("Ireana hat es ueberlebt und vor lauter Dankbarkeit gleich fuer den naechsten Auftrag gesorgt. Ich wusste ja schon immer, dass die Konziliker nur einen Kammerjaeger wollten.")
 		else
 			return _("Eine Konzilsmagierin namens Ireana von Nordenburg steckt anscheinend westlich von Zwergentrutz in Schwierigkeiten. Nichts, was ein Gezeichneter nicht loesen koennte. Wenn sie lange genug ueberlebt...")
 		end

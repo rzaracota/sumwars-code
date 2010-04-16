@@ -1,0 +1,107 @@
+﻿<!-- Nar'Asoroth-->
+<Ability type="asoroth_ice_attack" 
+		 name="ice attack"
+		 description="melee attack with ice damage of Nar'Asoroth" 
+		 time="1.000000" 
+		 timer_nr="0.000000" 
+		 timer_value="0.000000" 
+		 base_ability="attack" 
+		 critical_percent="0.660000" 
+		 target_type="melee" >
+	<Effect>
+		<CppImplementation type="dmg_at_target" />
+	</Effect>
+	<Damage>
+		<CppImplementation type="attack" />
+		<CppImplementation type="small_numbers" />
+		<LuaImplementation>
+			local magic = get(self,"magic_power");
+			local pdmg = getDamageValue("phys_dmg");
+			setDamageValue("ice_dmg", {50,100});
+			--setDamageValue("ice_dmg", pdmg);
+			setDamageValue("phys_dmg", {pdmg[1]*0.1,pdmg[2]*0.1});
+		</LuaImplementation>
+	</Damage>
+</Ability>
+<Ability type="asoroth_guided_iceball" 
+		 name="Ice arrow"
+		 description="a ball of ice that will hunt it's victim and explode" 
+		 time="1.000000" 
+		 timer_nr="1.000000" 
+		 timer_value="2000.000000" 
+		 base_ability="range_attack" 
+		 critical_percent="0.660000" 
+		 target_type="ranged" >
+	<Effect>
+		<CppImplementation type="proj_fly_at_target" />
+	</Effect>
+	<Projectile type="guided_ice_ball" speed="15000" />
+	<Damage>
+		<LuaImplementation>
+			local magic = get(self,"magic_power");
+			local idmg = getDamageValue("ice_dmg");
+			setDamageValue("ice_dmg", {idmg[1] + magic*0.5, idmg[2] + magic*1.0});
+		</LuaImplementation>
+	</Damage>
+</Ability>
+<Ability type="asoroth_frost_wave"
+		 name="Frost Wave"
+		 description="Nar'Asoroth conjures a wave of ice, that damages enemies in a circle around him."
+		 time="1301.000000"
+		 timer_nr="2.000000"
+		 timer_value="15000.000000"
+		 base_ability="magic_attack"
+		 critical_percent="0.800000"
+		 target_type="circle">
+	<Flag name="mute_affected" />
+	<Effect>
+		<CppImplementation type="proj_at_self" />
+	</Effect>
+	<Projectile type="frost_wave" />
+	<Damage>
+		<CppImplementation type="magic_attack" />
+		<CppImplementation type="weapon_damage" />
+		<LuaImplementation>
+			local magic = get(self,"magic_power");
+			local idmg = getDamageValue("ice_dmg");
+			setDamageValue("ice_dmg", {idmg[1] + magic*1.5, idmg[2] + magic*2});
+			setDamageValue("fire_dmg",{0,0});
+		</LuaImplementation>	
+	</Damage>
+</Ability>
+<Ability type="asoroth_ice_obelisk"
+		 name="Summon Ice Obelisk"
+		 description="Creates a obelisk of ice."
+		 time="2000.000000"
+		 timer_nr="1.000000"
+		 timer_value="5000.000000"
+		 base_ability="noaction"
+		 critical_percent="0.660000"
+		 target_type="ranged">
+	<Flag name="mute_affected" />
+	<Effect>
+		<LuaImplementation>
+			local frac = get(self,"fraction");
+			local obj = createObject("oblisk_ice",goal);
+			set(obj,"fraction",frac);
+		</LuaImplementation>
+	</Effect>
+</Ability>
+<Ability type="asoroth_call_army"
+		 name="Army of Darkness"
+		 description="Nar'Asoroth raises a group of skeletons."
+		 time="2000.000000"
+		 timer_nr="2.000000"
+		 timer_value="7000.000000"
+		 base_ability="noaction"
+		 critical_percent="0.660000"
+		 target_type="ranged">
+	<Flag name="mute_affected" />
+	<Effect>
+		<LuaImplementation>
+			local lichPos = get(self,"position");
+			getNextTileCenter(lichPos);
+			createMonsterGroup("asorothLastResort", lichPos, 4);
+		</LuaImplementation>
+	</Effect>
+</Ability>

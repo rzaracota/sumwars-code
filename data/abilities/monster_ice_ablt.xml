@@ -1,6 +1,6 @@
 <Ability type="ice_attack" 
 		 name="ice attack"
-		 description="attack with ice damage" 
+		 description="melee attack with ice damage" 
 		 time="1.000000" 
 		 timer_nr="0.000000" 
 		 timer_value="0.000000" 
@@ -23,7 +23,7 @@
 </Ability>
 
 <Ability type="ice_range_attack" 
-		 description="Basic ranged attack" 
+		 description="basic ranged attack with ice damage" 
 		 time="1.000000" 
 		 timer_nr="0.000000" 
 		 timer_value="0.000000" 
@@ -80,6 +80,29 @@
 	<Projectile type="guided_icicle" speed="12000" />
 	<Damage>
 		<LuaImplementation>
+			local magic = get(self,"magic_power");
+			local idmg = getDamageValue("ice_dmg");
+			setDamageValue("ice_dmg", {idmg[1] + magic*0.5, idmg[2] + magic*1.0});
+		</LuaImplementation>
+	</Damage>
+</Ability>
+<Ability type="obelisk_guided_icicle" 
+		 name="Ice Arrow"
+		 description="an arrow of ice that will hunt it's prey" 
+		 time="1.000000" 
+		 timer_nr="1.000000" 
+		 timer_value="800.000000" 
+		 base_ability="range_attack" 
+		 critical_percent="0.660000" 
+		 target_type="ranged" >
+	<Effect>
+		<CppImplementation type="proj_fly_at_target" />
+	</Effect>
+	<Projectile type="guided_icicle" speed="12000" />
+	<Damage>
+		<LuaImplementation>
+			local hp = get(self, "health");
+			set(self,"health",hp-100);
 			local magic = get(self,"magic_power");
 			local idmg = getDamageValue("ice_dmg");
 			setDamageValue("ice_dmg", {idmg[1] + magic*0.5, idmg[2] + magic*1.0});
