@@ -11,7 +11,7 @@ using namespace std;
 
 
 
-#define BUFFER_SIZE (4096 * 4)
+#define BUFFER_SIZE (4096 * 16)
 
 
 

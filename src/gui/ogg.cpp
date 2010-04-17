@@ -116,12 +116,14 @@ bool ogg_stream::update()
     bool active = true;
 
     alGetSourcei(source, AL_BUFFERS_PROCESSED, &processed);
-
-    while(processed--)
+	check();
+	while(processed--)
     {
+		DEBUGX("processed %i",processed+1);
         ALuint buffer;
         
         alSourceUnqueueBuffers(source, 1, &buffer);
+		DEBUGX("unqueued buffer %i", buffer);
         check();
 
         active = stream(buffer);
@@ -129,11 +131,13 @@ bool ogg_stream::update()
         alSourceQueueBuffers(source, 1, &buffer);
         check();
 		
-		if (active && !playing())
-		{
-			alSourcePlay(source);
-		}
+		
     }
+
+	if (active && !playing())
+	{
+		alSourcePlay(source);
+	}
 
     return active;
 }
@@ -143,6 +147,7 @@ bool ogg_stream::update()
 
 bool ogg_stream::stream(ALuint buffer)
 {
+	DEBUGX("streaming buffer %i",buffer);
 	char pcm[BUFFER_SIZE];
     int  size = 0;
     int  section;
@@ -165,7 +170,11 @@ bool ogg_stream::stream(ALuint buffer)
 	{
 		return false;
 	}
-        
+    
+	if (!alIsBuffer(buffer))
+	{
+		DEBUG("specified number is not a buffer");
+	}
     alBufferData(buffer, format, pcm, size, vorbisInfo->rate);
     check();
     
