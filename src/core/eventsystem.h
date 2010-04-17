@@ -716,6 +716,16 @@ class EventSystem
 		static int printMessage(lua_State *L);
 		
 		/**
+		 * \brief Fuegt ein neues Musikstuecke der Auswahlliste hinzu
+		 */
+		static int addMusic(lua_State *L);
+		
+		/**
+		 * \brief Loescht die Auswahlliste der Musikstuecke
+		 */
+		static int clearMusicList(lua_State *L);
+		
+		/**
 		 * \fn static int writeString(lua_State *L)
 		 * \brief schreibt einen String in den Stream
 		 * \param L Lua Status

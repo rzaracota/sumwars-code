@@ -5,6 +5,8 @@
 #include "itemfactory.h"
 #include "scriptobject.h"
 
+#include "music.h"
+
 RegionData::RegionData()
 {
 	for (int i=0; i<3; i++)
@@ -2957,3 +2959,12 @@ void Region::visualizeDamage(int number, Vector position, short size)
 	}
 }
 
+void Region::clearMusicTracks()
+{
+	m_music_tracks.clear();
+	if (World::getWorld()->getLocalPlayer() !=0
+		&& World::getWorld()->getLocalPlayer()->getRegion() == this)
+	{
+		MusicManager::instance().stop();
+	}
+}

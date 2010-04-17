@@ -1330,6 +1330,21 @@ class Region
 		}
 		
 		/**
+		 * \brief Loescht alle aktuell gesetzten Musikstuecke der Region
+		 */
+		void clearMusicTracks();
+		
+		
+		/**
+		 * \brief Fuegt ein Musikstueck hinzu
+		 * \param track ogg-Datei
+		 */
+		void addMusicTrack(MusicTrack track)
+		{
+			m_music_tracks.push_back(track);
+		}
+		
+		/**
 		 * \fn void visualizeDamage(int number, Vector position, short size=1)
 		 * \brief Fuegt Schadenanzeige hinzu
 		 * \param number Dargestellte Zahl

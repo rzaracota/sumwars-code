@@ -147,6 +147,9 @@ void EventSystem::init()
 	lua_register(m_lua, "printQuestMessage",printMessage);
 	lua_register(m_lua, "printMessage",printMessage);
 	
+	lua_register(m_lua, "addMusic",addMusic);
+	lua_register(m_lua, "clearMusicList",clearMusicList);
+	
 	lua_register(m_lua, "writeString", writeString);
 	lua_register(m_lua, "writeNewline", writeNewline);
 	lua_register(m_lua, "writeUpdateString", writeUpdateString);
@@ -2419,7 +2422,7 @@ int EventSystem::removeSpeaker(lua_State *L)
 		return 0;
 
 	int argc = lua_gettop(L);
-	if (argc>=1 && lua_isnumber(L,1) || lua_isstring(L,1))
+	if ((argc>=1 && lua_isnumber(L,1)) || lua_isstring(L,1))
 	{
 		
 		std::string refname = lua_tostring(L, 1);
@@ -2772,6 +2775,34 @@ int EventSystem::printMessage(lua_State *L)
 	else
 	{
 		ERRORMSG("Syntax: printMessage(string message)");		
+	}
+	return 0;
+}
+
+int EventSystem::addMusic(lua_State *L)
+{
+	int argc = lua_gettop(L);
+	if (argc>=1 && lua_isstring(L,1))
+	{
+		if (m_region != 0)
+		{
+			std::string track = lua_tostring(L,1);
+			m_region->addMusicTrack(track);
+		}
+	}
+	else
+	{
+		ERRORMSG("Syntax: addMusic(string oggfile)");		
+	}
+	return 0;
+}
+
+
+int EventSystem::clearMusicList(lua_State *L)
+{
+	if (m_region != 0)
+	{
+			m_region->clearMusicTracks();
 	}
 	return 0;
 }
