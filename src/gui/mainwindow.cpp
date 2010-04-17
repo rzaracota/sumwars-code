@@ -23,6 +23,7 @@
 #include "worldmap.h"
 #include "messageboxes.h"
 #include "dialoguewindow.h"
+#include "music.h"
 
 MainWindow::MainWindow(Ogre::Root* ogreroot, CEGUI::System* ceguisystem,Ogre::RenderWindow* window,Document* doc)
 {
@@ -265,18 +266,20 @@ void MainWindow::update(float time)
 			updateMainMenu();
 			m_cegui_system->setGUISheet(m_main_menu);
 			m_main_menu->addChildWindow(m_sub_windows["Options"]->getCEGUIWindow());
+			MusicManager::instance().stop();
 		}
 
 		if (m_document->getGUIState()->m_sheet ==  Document::GAME_SCREEN)
 		{
 			m_cegui_system->setGUISheet(m_game_screen);
 			m_game_screen->addChildWindow(m_sub_windows["Options"]->getCEGUIWindow());
-			
+			MusicManager::instance().stop();
 		}
 		m_document->setModified(m_document->getModified() & (~Document::GUISHEET_MODIFIED));
 	}
 
-	
+	// Musik aktualisieren
+	updateMusic();
 	
 	// Testen ob Anzeige der Subfenster geaendert werden muss
 	if (m_document->getModified() & Document::WINDOWS_MODIFIED)
@@ -1237,7 +1240,7 @@ void MainWindow::updateObjectInfo()
 			
 			Ogre::Entity *pentity = dynamic_cast<Ogre::Entity*>(it->movable);
 			bool rayhit = true;
-			if ((wo!=0 && wo->checkInteractionFlag(WorldObject::EXACT_MOUSE_PICKING) || go->getType() == "DROPITEM")  && pentity != 0)
+			if (((wo!=0 && wo->checkInteractionFlag(WorldObject::EXACT_MOUSE_PICKING)) || go->getType() == "DROPITEM")  && pentity != 0)
 			{
 				rayhit = false;
 				
@@ -2165,6 +2168,50 @@ void MainWindow::updateChatContent()
 	}
 	
 	timer.start();
+}
+
+void MainWindow::updateMusic()
+{
+	// laufende Musik nicht unterbrechen
+	if (MusicManager::instance().isPlaying())
+		return;
+	
+	std::string source;
+	if (m_document->getGUIState()->m_sheet ==  Document::MAIN_MENU)
+	{
+		// Titlescreen
+		source ="main_theme.ogg";
+	}
+	else if (m_document->getGUIState()->m_sheet ==  Document::GAME_SCREEN)
+	{
+		source = "";
+	}
+	
+	if (source == "")
+		return;
+	
+	// Titelmusik laden
+	Ogre::FileInfoListPtr files;
+	Ogre::FileInfoList::iterator it;
+	files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("music",source);
+	
+	it = files->begin();
+	if (it != files->end())
+	{
+		std::string filename;
+		filename = it->archive->getName();
+		filename += "/";
+		filename += it->filename;
+		
+		DEBUG("play music file %s",filename.c_str());
+		
+		MusicManager::instance().play(filename);
+		MusicManager::instance().update();
+	}
+	else
+	{
+		DEBUG("no music");
+	}
 }
 
 Vector MainWindow::getIngamePos(float screenx, float screeny, bool relative)

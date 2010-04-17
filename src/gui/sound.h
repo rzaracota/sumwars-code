@@ -71,6 +71,16 @@ class SoundSystem
 		 * \brief Setzt die Position an der der Schall gehoehrt wird
 		 */
 		static void setListenerPosition(Vector pos);
+		
+		static void checkErrors()
+		{
+			int error = alGetError();
+
+			if(error != AL_NO_ERROR)
+			{
+				DEBUG("AL error %s",alGetString(error)) ;
+			}
+		}
 
 		/**
 		 * \fn static void cleanup()

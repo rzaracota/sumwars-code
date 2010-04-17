@@ -3,6 +3,7 @@
 #include "tooltip.h"
 #include "itemwindow.h"
 #include "templateloader.h"
+#include "music.h"
 
 Application::Application()
 {
@@ -104,8 +105,9 @@ bool Application::init()
 		return false;
 	}
 
-	DEBUG("time to start %f",tm.getTime());
+	initOpenAL();
 
+	DEBUG("time to start %f",tm.getTime());
 	// Ressourcen laden
 	ret = loadResources();
 	if (ret == false)
@@ -113,7 +115,6 @@ bool Application::init()
 		ERRORMSG("could not load ressources");
 	}
 
-	SoundSystem::init();
 	DEBUG("application initialized \n\n");
 	// debugging
 	//MyFrameListener* mfl = new MyFrameListener(m_main_window,m_document);
@@ -260,7 +261,9 @@ void Application::run()
 		{
 			DEBUGX("ogre frame time was %f",t);
 		}
-
+		
+		// Musik aktualisieren
+		MusicManager::instance().update();
 	}
 
 
@@ -346,6 +349,7 @@ bool Application::setupResources()
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("./resources/gui/schemes", "FileSystem", "GUI");
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("./resources/itempictures", "FileSystem", "itempictures");
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("./resources/sound", "FileSystem", "sound");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("./resources/music", "FileSystem", "music");
 
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("./data/world", "FileSystem", "world");
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("./data/npc", "FileSystem", "npc");
@@ -362,6 +366,7 @@ bool Application::setupResources()
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("./data/renderinfo", "FileSystem", "renderinfo");
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("./data/lua", "FileSystem", "lua");
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("./data/sound", "FileSystem", "sounddata");
+	
 
 #if defined(WIN32)
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("c:\\windows\\fonts", "FileSystem", "GUI");
@@ -371,8 +376,6 @@ bool Application::setupResources()
 	Ogre::ResourceGroupManager::getSingleton().initialiseResourceGroup("General");
 	Ogre::ResourceGroupManager::getSingleton().initialiseResourceGroup("Savegame");
 	Ogre::ResourceGroupManager::getSingleton().initialiseResourceGroup("GUI");
-
-
 
 
 	// Debugging: Meshes direkt anlegen
@@ -457,10 +460,15 @@ bool Application::initCEGUI()
 	return true;
 }
 
-bool Application::createDocument()
+bool Application::initOpenAL()
 {
 	SoundSystem::init();
+	
+	return true;
+}
 
+bool Application::createDocument()
+{
 	DEBUG("create document\n");
 	m_document = new Document();
 
@@ -515,7 +523,6 @@ bool Application::createView()
 	DEBUG("create view\n");
 	m_main_window = new MainWindow(m_ogre_root, m_cegui_system,m_window,m_document);
 
-	DEBUG("done");
 	return true;
 }
 
@@ -677,5 +684,6 @@ void Application::updateStartScreen(float percent)
 	Ogre::WindowEventUtilities::messagePump();
 
 	m_ogre_root->renderOneFrame();
+	//MusicManager::instance().update();
 	m_timer.start();
 }

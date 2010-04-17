@@ -123,16 +123,30 @@ void SoundSystem::loadSoundInfos(TiXmlNode* node)
 
 void SoundSystem::init()
 {
+	/*
+	// variante 1, geht unter ubuntu 9.10 nicht
     ALCdevice *pDevice = alcOpenDevice("Generic Software");
     ALCcontext *pContext = alcCreateContext(pDevice, NULL);
     alcMakeContextCurrent(pContext);
 
     alutInitWithoutContext(0,0);
+	*/
+	
+	// variante 2, geht unter win nicht
 	//alutInit(0,0);
+	
+	// variante 3: zu testen
+	const ALCchar *defaultDevice = alcGetString(NULL, ALC_DEFAULT_DEVICE_SPECIFIER);
+	ALCdevice *pDevice = alcOpenDevice(defaultDevice);
+	ALCcontext *pContext = alcCreateContext(pDevice, NULL);
+	alcMakeContextCurrent(pContext);
+	alutInitWithoutContext(0,0);
 
 	alDistanceModel(AL_LINEAR_DISTANCE_CLAMPED);
 
+	SoundSystem::checkErrors();
 
+	
 	// Soundfiles laden
 	/*
 	SoundSystem::loadSoundFile("../resources/sound/arrow.wav", "arrow");

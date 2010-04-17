@@ -13,7 +13,7 @@ bin_PROGRAMS = sumwars
 
 #LIBS = OGRE OIS CEGUI CEGUI-OGRE RakNet freealut openal
 #LDFLAGS = $(shell pkg-config --libs $(LIBS))
-LDFLAGS = $(shell pkg-config --libs OGRE OIS CEGUI CEGUI-OGRE RakNet freealut openal lua5.1)
+LDFLAGS = $(shell pkg-config --libs OGRE OIS CEGUI CEGUI-OGRE RakNet freealut openal lua5.1 vorbisfile)
 
 sumwars_LDFLAGS = $(LDFLAGS) -lm -lrt
 
@@ -102,6 +102,8 @@ sumwars_SOURCES = src/core/world.cpp \
 	src/gui/messageboxes.cpp \
 	src/gui/dialoguewindow.cpp \
 	src/gui/sound.cpp \
+	src/gui/ogg.cpp \
+	src/gui/music.cpp \
 	src/tinyxml/tinyxml.cpp \
 	src/tinyxml/tinyxmlparser.cpp \
 	src/tinyxml/tinyxmlerror.cpp \

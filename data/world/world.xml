@@ -9,7 +9,9 @@
 	<Region id="short" name="string">
 		<Settings dimx="short" dimy="short" area_percent="float" complexity="float" granularity="int" />
 		
-		
+		<Music>
+			<Track source="sample2.ogg" />
+		</Music>
 		<ExitDirections north="bool" south="bool" west="bool" east="bool" />
 		
 		<Exits>
@@ -73,6 +75,7 @@
 		<Relation fraction="undead" relation="hostile" />
 	</Fraction>
 
+	<TitleMusic source="" />
 </World>
 
 

@@ -328,6 +328,8 @@ Region::Region(short dimx, short dimy, short id, std::string name, RegionData* d
 	}
 	
 	m_camera.m_region = this;
+	
+	m_music_tracks = data->m_music_tracks;
 }
 
 Region::~Region()

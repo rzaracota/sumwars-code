@@ -79,7 +79,7 @@ void  World::createWorld(bool server, int port, bool cooperative, int max_player
 	m_local_player =0;
 
 	m_events = new NetEventList;
-
+	
 }
 
 

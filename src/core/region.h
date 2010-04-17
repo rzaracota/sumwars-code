@@ -26,6 +26,8 @@ class Region;
 
 typedef std::string RegionName;
 
+typedef std::string MusicTrack;
+
 typedef std::pair<RegionName, LocationName> RegionLocation;
 
 /**
@@ -397,6 +399,11 @@ class RegionData
 		 * \brief auf true gesetzt, wenn die Region einen Wegpunkt hat
 		 */
 		bool m_has_waypoint;
+		
+		/**
+		 * \brief Liste von moeglichen Musikstuecken fuer die Region
+		 */
+		std::list<MusicTrack> m_music_tracks;
 };
 
 /**
@@ -1315,6 +1322,14 @@ class Region
 		}
 		
 		/**
+		 * \brief Gibt die Liste der Musikstuecke aus
+		 */
+		const std::list<MusicTrack>& getMusicTracks()
+		{
+			return m_music_tracks;
+		}
+		
+		/**
 		 * \fn void visualizeDamage(int number, Vector position, short size=1)
 		 * \brief Fuegt Schadenanzeige hinzu
 		 * \param number Dargestellte Zahl
@@ -1541,6 +1556,11 @@ class Region
 		 * \brief Position des Wegpunktes
 		 */
 		Vector m_waypoint_location;
+		
+		/**
+		 * \brief Liste von moeglichen Musikstuecken fuer die Region
+		 */
+		std::list<MusicTrack> m_music_tracks;
 
 };
 

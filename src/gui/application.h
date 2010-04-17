@@ -101,6 +101,11 @@ class Application
 		 * \brief Initialisiert CEGUI
 		 */
 		bool initCEGUI();
+		
+		/**
+		 * \brief initialisiert OpenAL
+		 */
+		bool initOpenAL();
 
 		/**
 		 * \fn bool createView()

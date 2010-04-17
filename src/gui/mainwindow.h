@@ -245,6 +245,11 @@ class MainWindow :
 	 * \brief Aktualisiert Fenster fuer Chattext
 	 */
 	void updateChatContent();
+	
+	/**
+	 * \brief Aktualisiert die Musik
+	 */
+	void updateMusic();
 
 
 	/**

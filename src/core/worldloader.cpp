@@ -138,6 +138,26 @@ bool WorldLoader::loadRegion(TiXmlNode* node, RegionData* rdata)
 				attr.getFloat("complexity",rdata->m_complexity,0.5f);
 				attr.getInt("granularity",rdata->m_granularity,8);
 			}
+			else if (!strcmp(child->Value(), "Music"))
+			{
+				for ( child2 = child->FirstChild(); child2 != 0; child2 = child2->NextSibling())
+				{
+					
+					if (!strcmp(child2->Value(), "Track"))
+					{
+						std::string music;
+						attr.getString("source",music);
+						if (music != "")
+						{
+							rdata->m_music_tracks.push_back(music);
+						}
+					}
+					else if (child2->Type()!=TiXmlNode::COMMENT)
+					{
+						WARNING("%s : unexpected element of <Music>: %s",m_filename.c_str(),child2->Value());
+					}
+				}
+			}
 			else if (!strcmp(child->Value(), "ExitDirections"))
 			{
 				std::string boolstr;
