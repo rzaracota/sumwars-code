@@ -70,6 +70,9 @@
 			<Add library="C:\MinGW\lib\OpenAL32.lib" />
 			<Add library="C:\MinGW\lib\lua51.lib" />
 			<Add library="C:\mingw\lib\libintl.lib" />
+			<Add library="C:\mingw\lib\ogg.lib" />
+			<Add library="C:\mingw\lib\vorbis.lib" />
+			<Add library="C:\mingw\lib\vorbisfile.lib" />
 			<Add directory="$(OGRE_HOME)\lib" />
 			<Add directory="$(OGRE_HOME)\bin\Debug" />
 			<Add directory="$(OGRE_HOME)\bin\Release" />
@@ -215,8 +218,12 @@
 		<Unit filename="gui\messageboxes.h" />
 		<Unit filename="gui\minimapwindow.cpp" />
 		<Unit filename="gui\minimapwindow.h" />
+		<Unit filename="gui\music.cpp" />
+		<Unit filename="gui\music.h" />
 		<Unit filename="gui\networkwindows.cpp" />
 		<Unit filename="gui\networkwindows.h" />
+		<Unit filename="gui\ogg.cpp" />
+		<Unit filename="gui\ogg.h" />
 		<Unit filename="gui\optionswindow.cpp" />
 		<Unit filename="gui\optionswindow.h" />
 		<Unit filename="gui\partyinfo.cpp" />
