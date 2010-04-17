@@ -20,6 +20,7 @@
 #include "document.h"
 
 #include "sound.h"
+#include "music.h"
 
 #include "networkstruct.h"
 #include "projectile.h"
@@ -1585,7 +1586,7 @@ void Document::updateContent(float time)
 	
 	if (player->getRegion() !=0 && player->getRegion()->getCutsceneMode())
 	{
-		if (getGUIState()->m_shown_windows & ~SAVE_EXIT != 0)
+		if ((getGUIState()->m_shown_windows & ~SAVE_EXIT) != 0)
 		{
 			getGUIState()->m_shown_windows &= SAVE_EXIT;
 			m_modified |= WINDOWS_MODIFIED;
@@ -1764,6 +1765,7 @@ void Document::saveSettings()
 		file << World::getVersion() << "\n";
 		
 		file << SoundSystem::getSoundVolume() <<"\n";
+		file << MusicManager::instance().getMusicVolume() <<"\n";
 		
 		ShortkeyMap::iterator it;
 		std::set<KeyCode>::iterator jt;
@@ -1814,6 +1816,10 @@ void Document::loadSettings()
 		file >> soundvolume;
 		SoundSystem::setSoundVolume(soundvolume);
 		DEBUGX("Sound volume %f",soundvolume);
+		
+		float musicvolume;
+		file >> musicvolume;
+		MusicManager::instance().setMusicVolume(musicvolume);
 		
 		file >> nr;
 		DEBUGX("short keys %i",nr);

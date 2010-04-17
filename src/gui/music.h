@@ -14,6 +14,7 @@ class MusicManager
 		{
 			m_musicfile = "";
 			m_is_playing = false;
+			m_music_volume = 1;
 		}
 		
 		/**
@@ -62,6 +63,26 @@ class MusicManager
 			return m_is_playing;
 		}
 		
+		/**
+		 * \fn void setMusicVolume(float vol)
+		 * \brief Stellt die Lautstaerke ein
+		 * \param vol Lautstaerke (0-1)
+		 */
+		void setMusicVolume(float vol)
+		{
+			m_music_volume = vol;
+			m_ogg_stream.setVolume(vol);
+		}
+
+		/**
+		 * \fn float getMusicVolume()
+		 * \brief Gibt die Lautstaerke des Sounds aus
+		 */
+		float getMusicVolume()
+		{
+			return m_music_volume;
+		}
+		
 	private:
 		
 		/**
@@ -78,6 +99,11 @@ class MusicManager
 		 * \brief Hilfsklasse fuer das Abspielen von ogg Dateien
 		 */
 		ogg_stream m_ogg_stream;
+		
+		/**
+		 * \brief Lautstaerke
+		 */
+		float m_music_volume;
 	
 };
 

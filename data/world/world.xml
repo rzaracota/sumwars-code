@@ -10,7 +10,8 @@
 		<Settings dimx="short" dimy="short" area_percent="float" complexity="float" granularity="int" />
 		
 		<Music>
-			<Track source="sample2.ogg" />
+			<Track source="somefile.ogg" />
+			<Track source="anotherfile.ogg" />
 		</Music>
 		<ExitDirections north="bool" south="bool" west="bool" east="bool" />
 		

@@ -80,9 +80,14 @@ class OptionsWindow : public Window
 		
 		/**
 		 * \fn bool onSoundVolumeChanged(const CEGUI::EventArgs& evt);
-		 * \brief Behandelt Druecken der linken Maustaste ueber auf dem Fenster
+		 * \brief Behandelt Aendern der Soundlautstarke
 		 */
 		bool onSoundVolumeChanged(const CEGUI::EventArgs& evt);
+		
+		/**
+		 * \brief Behandelt Aendern der Musiklautstarke
+		 */
+		bool onMusicVolumeChanged(const CEGUI::EventArgs& evt);
 		
 		/**
 		 * \fn bool onLanguageSelected(const CEGUI::EventArgs& evt)

@@ -214,7 +214,22 @@ class SoundObject
 		 * \brief Setzt die Lautstaerke der Schallquelle
 		 * \param vol Lautstaerke (0-1)
 		 */
-		void setVolume(float vol);
+		void setVolume(float vol)
+		{
+			alSourcef(m_handle, AL_GAIN, vol*m_global_volume);
+			m_volume = vol;
+		}
+		
+		/**
+		 * \fn void setGlobalVolume(float vol)
+		 * \brief Setzt den globalen Faktor der Lautstaerke
+		 * \param vol Lautstaerke (0-1)
+		 */
+		void setGlobalVolume(float vol)
+		{
+			alSourcef(m_handle, AL_GAIN, m_volume*vol);
+			m_global_volume = vol;
+		}
 
 		/**
 		 * \fn void play()
@@ -285,6 +300,16 @@ class SoundObject
 		 * \brief Name des Objektes
 		 */
 		std::string m_name;
+		
+		/**
+		 * \brief Zusatzfaktor zum eigenen Lautstaerkewert
+		 */
+		float m_global_volume;
+		
+		/**
+		 * \brief Lautstarke
+		 */
+		float m_volume;
 };
 
 #endif

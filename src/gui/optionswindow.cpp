@@ -1,6 +1,7 @@
 #include "optionswindow.h"
 #include "sound.h"
 #include "listitem.h"
+#include "music.h"
 
 OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard)
 	:Window(doc)
@@ -71,6 +72,23 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard)
 		label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&OptionsWindow::onShortkeyLabelClicked,  this));
 	}
 	
+	label = win_mgr.createWindow("TaharezLook/StaticText", "MusicVolumeLabel");
+	sound->addChildWindow(label);
+	label->setProperty("FrameEnabled", "true");
+	label->setProperty("BackgroundEnabled", "true");
+	label->setPosition(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.5)));
+	label->setSize(CEGUI::UVector2(cegui_reldim(0.3f), cegui_reldim( 0.06f)));
+	
+	CEGUI::Scrollbar* slider = static_cast<CEGUI::Scrollbar*>(win_mgr.createWindow("TaharezLook/HorizontalScrollbar", "MusicVolumeSlider"));
+	sound->addChildWindow(slider);
+	slider->setPageSize (0.01f);
+	slider->setDocumentSize(1.0f);
+	slider->setStepSize(0.01f);
+	slider->setPosition(CEGUI::UVector2(cegui_reldim(0.40f), cegui_reldim( 0.52)));
+	slider->setSize(CEGUI::UVector2(cegui_reldim(0.5f), cegui_reldim( 0.02f)));
+	slider->setWantsMultiClickEvents(false);
+	slider->subscribeEvent(CEGUI::Scrollbar::EventScrollPositionChanged, CEGUI::Event::Subscriber(&OptionsWindow::onMusicVolumeChanged,  this));
+	
 	label = win_mgr.createWindow("TaharezLook/StaticText", "SoundVolumeLabel");
 	sound->addChildWindow(label);
 	label->setProperty("FrameEnabled", "true");
@@ -78,7 +96,7 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard)
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.7)));
 	label->setSize(CEGUI::UVector2(cegui_reldim(0.3f), cegui_reldim( 0.06f)));
 	
-	CEGUI::Scrollbar* slider = static_cast<CEGUI::Scrollbar*>(win_mgr.createWindow("TaharezLook/HorizontalScrollbar", "SoundVolumeSlider"));
+	slider = static_cast<CEGUI::Scrollbar*>(win_mgr.createWindow("TaharezLook/HorizontalScrollbar", "SoundVolumeSlider"));
 	sound->addChildWindow(slider);
 	slider->setPageSize (0.01f);
 	slider->setDocumentSize(1.0f);
@@ -87,6 +105,7 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard)
 	slider->setSize(CEGUI::UVector2(cegui_reldim(0.5f), cegui_reldim( 0.02f)));
 	slider->setWantsMultiClickEvents(false);
 	slider->subscribeEvent(CEGUI::Scrollbar::EventScrollPositionChanged, CEGUI::Event::Subscriber(&OptionsWindow::onSoundVolumeChanged,  this));
+	
 	
 	CEGUI::PushButton* btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", "OptionsCloseButton"));
 	options->addChildWindow(btn);
@@ -160,6 +179,12 @@ void OptionsWindow::update()
 		slider->setScrollPosition(SoundSystem::getSoundVolume());
 	}
 	
+	slider = static_cast<CEGUI::Scrollbar*>(win_mgr.getWindow( "MusicVolumeSlider"));
+	if ( fabs ( slider->getScrollPosition() - MusicManager::instance().getMusicVolume()) > 0.01f)
+	{
+		slider->setScrollPosition(MusicManager::instance().getMusicVolume());
+	}
+	
 }
 
 void OptionsWindow::updateTranslation()
@@ -170,7 +195,7 @@ void OptionsWindow::updateTranslation()
 	CEGUI::DefaultWindow* keys =  (CEGUI::DefaultWindow*) win_mgr.getWindow("OptionsShortkeys");
 	keys->setText((CEGUI::utf8*) gettext("Shortkeys"));
 	CEGUI::DefaultWindow* sound = (CEGUI::DefaultWindow*) win_mgr.getWindow("OptionsSound");
-	sound->setText((CEGUI::utf8*) gettext("Sound"));
+	sound->setText((CEGUI::utf8*) gettext("Audio"));
 	CEGUI::DefaultWindow* graphic = (CEGUI::DefaultWindow*) win_mgr.getWindow("OptionsGraphic");
 	graphic->setText((CEGUI::utf8*) gettext("Graphic"));
 	CEGUI::DefaultWindow* misc = (CEGUI::DefaultWindow*) win_mgr.getWindow("OptionsMisc");
@@ -205,6 +230,9 @@ void OptionsWindow::updateTranslation()
 	
 	label = win_mgr.getWindow("SoundVolumeLabel");
 	label->setText((CEGUI::utf8*) gettext("Sound"));
+	
+	label = win_mgr.getWindow("MusicVolumeLabel");
+	label->setText((CEGUI::utf8*) gettext("Music"));
 	
 	label = win_mgr.getWindow("LanguageLabel");
 	label->setText((CEGUI::utf8*) gettext("Language"));
@@ -266,6 +294,18 @@ bool OptionsWindow::onSoundVolumeChanged(const CEGUI::EventArgs& evt)
 	float vol = slider->getScrollPosition();
 	DEBUGX("sound volume change to %f",vol);
 	SoundSystem::setSoundVolume(vol);
+	return true;
+}
+
+bool OptionsWindow::onMusicVolumeChanged(const CEGUI::EventArgs& evt)
+{
+	const CEGUI::MouseEventArgs& we =
+			static_cast<const CEGUI::MouseEventArgs&>(evt);
+	
+	CEGUI::Scrollbar* slider = static_cast<CEGUI::Scrollbar*>(we.window);
+	float vol = slider->getScrollPosition();
+	DEBUGX("music volume change to %f",vol);
+	MusicManager::instance().setMusicVolume(vol);
 	return true;
 }
 

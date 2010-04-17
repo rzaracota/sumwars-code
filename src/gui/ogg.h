@@ -18,13 +18,26 @@ using namespace std;
 class ogg_stream
 {
     public:
-
+	ogg_stream()
+	{
+		m_volume = 1;
+	}
+	
         void open(string path);
         void release();
         void display();
         bool playback();
         bool playing();
         bool update();
+		
+		void setVolume(float volume)
+		{
+			if (playing())
+			{
+				alSourcef (source, AL_GAIN,volume);
+			}
+			m_volume = volume;
+		}
 
     protected:
 
@@ -43,6 +56,7 @@ class ogg_stream
         ALuint buffers[2];
         ALuint source;
         ALenum format;
+		float m_volume;
 };
 
 

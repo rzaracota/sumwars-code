@@ -35,6 +35,7 @@ void ogg_stream::open(string path)
     alSource3f(source, AL_DIRECTION,       0.0, 0.0, 0.0);
     alSourcef (source, AL_ROLLOFF_FACTOR,  0.0          );
     alSourcei (source, AL_SOURCE_RELATIVE, AL_TRUE      );
+	alSourcef (source, AL_GAIN,m_volume);
 	
 }
 

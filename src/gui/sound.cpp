@@ -281,8 +281,14 @@ void SoundSystem::clearObjects()
 
 void SoundSystem::setSoundVolume(float vol)
 {
-	alListenerf(AL_GAIN,vol);
 	m_sound_volume = vol;
+	
+	// neue Lautstarke fuer existierende Soundobjekte
+	std::map<std::string, SoundObject*>::iterator it;
+	for (it = m_sound_objects.begin(); it != m_sound_objects.end(); ++it)
+	{
+		it->second->setVolume(vol);
+	}
 }
 
 SoundObject* SoundSystem::createSoundObject(std::string name)
@@ -295,6 +301,7 @@ SoundObject* SoundSystem::createSoundObject(std::string name)
 
 	SoundObject* so;
 	so = new SoundObject(name);
+	so->setVolume(m_sound_volume);
 	m_sound_objects.insert(std::make_pair(name,so));
 	return so;
 
@@ -345,6 +352,8 @@ SoundObject::SoundObject(std::string name, Vector pos)
 
 	m_sound_name = "";
 	m_name = name;
+	m_global_volume = 1.0;
+	m_volume = 1.0;
 }
 
 SoundObject::~SoundObject()
