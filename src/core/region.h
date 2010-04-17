@@ -1334,15 +1334,24 @@ class Region
 		 */
 		void clearMusicTracks();
 		
-		
 		/**
 		 * \brief Fuegt ein Musikstueck hinzu
 		 * \param track ogg-Datei
 		 */
-		void addMusicTrack(MusicTrack track)
-		{
-			m_music_tracks.push_back(track);
-		}
+		void addMusicTrack(MusicTrack track);
+		
+		
+		/**
+		 * \brief Schreibt alle Musikstuecken in den Stream
+		 * \param cv Stream
+		 */
+		void writeMusicTracksToString(CharConv* cv);
+		
+		/**
+		 * \brief Liest alle Musicstuecken aus dem Stream
+		 * \param cv Stream
+		 */
+		void readMusicTracksFromString(CharConv* cv);
 		
 		/**
 		 * \fn void visualizeDamage(int number, Vector position, short size=1)

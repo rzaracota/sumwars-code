@@ -1892,6 +1892,10 @@ bool World::writeNetEvent(Region* region,NetEvent* event, CharConv* cv)
 		{
 			region->getLight().toString(cv);
 		}
+		else if (event->m_type == NetEvent::MUSIC_CHANGED)
+		{
+			region->writeMusicTracksToString(cv);
+		}
 		else if (event->m_type == NetEvent::DIALOGUE_CREATED)
 		{
 			Dialogue* dia = region->getDialogue(event->m_id);
@@ -2435,6 +2439,12 @@ bool World::processNetEvent(Region* region,CharConv* cv)
 				region->getCamera().fromString(cv);
 			}
 			break;
+			
+		case NetEvent::MUSIC_CHANGED:
+			if (region != 0)
+			{
+				region->readMusicTracksFromString(cv);
+			}
 			
 		case NetEvent::REGION_LIGHT:
 			if (region !=0)

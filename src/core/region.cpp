@@ -327,11 +327,10 @@ Region::Region(short dimx, short dimy, short id, std::string name, RegionData* d
 	if (data !=0)
 	{
 		m_light.init(data->m_ambient_light, data->m_hero_light, data->m_directional_light);
+		m_music_tracks = data->m_music_tracks;
 	}
 	
 	m_camera.m_region = this;
-	
-	m_music_tracks = data->m_music_tracks;
 }
 
 Region::~Region()
@@ -2017,6 +2016,9 @@ void Region::getRegionData(CharConv* cv)
 		dt->second->toString(cv);
 	}
 	
+	// Musik
+	writeMusicTracksToString(cv);
+	
 	// Cutscene modus
 	cv->toBuffer(m_cutscene_mode);
 	getCamera().toString(cv);
@@ -2261,6 +2263,8 @@ void Region::setRegionData(CharConv* cv,WorldObjectMap* players)
 		createDialogueFromString(cv);
 	}
 	
+	// Musik
+	readMusicTracksFromString(cv);
 
 	// Cutscene modus
 	cv->fromBuffer(m_cutscene_mode);
@@ -2544,6 +2548,30 @@ void Region::checkRegionData(CharConv* cv)
 			// Objekt ist beim Client zu viel
 			itemtodelete.insert(di->getId());
 		}
+	}
+}
+
+void Region::writeMusicTracksToString(CharConv* cv)
+{
+	cv->toBuffer<short>((short) m_music_tracks.size());
+	std::list<MusicTrack>::iterator mt;
+	for (mt = m_music_tracks.begin(); mt != m_music_tracks.end(); ++mt)
+	{
+		cv->toBuffer(*mt);
+	}
+}
+
+void Region::readMusicTracksFromString(CharConv* cv)
+{
+	clearMusicTracks();
+	
+	short nr;
+	cv->fromBuffer(nr);
+	std::string music;
+	for (int i=0; i<nr; i++)
+	{
+		cv->fromBuffer(music);
+		addMusicTrack(music);
 	}
 }
 
@@ -2959,6 +2987,16 @@ void Region::visualizeDamage(int number, Vector position, short size)
 	}
 }
 
+void Region::addMusicTrack(MusicTrack track)
+{
+	m_music_tracks.push_back(track);
+	
+	NetEvent event;
+	event.m_type = NetEvent::MUSIC_CHANGED;
+	event.m_id = getId();
+	insertNetEvent(event);
+}
+
 void Region::clearMusicTracks()
 {
 	m_music_tracks.clear();
@@ -2967,4 +3005,9 @@ void Region::clearMusicTracks()
 	{
 		MusicManager::instance().stop();
 	}
+	
+	NetEvent event;
+	event.m_type = NetEvent::MUSIC_CHANGED;
+	event.m_id = getId();
+	insertNetEvent(event);
 }
