@@ -145,6 +145,9 @@ bool WorldLoader::loadRegion(TiXmlNode* node, RegionData* rdata)
 					
 					if (!strcmp(child2->Value(), "Track"))
 					{
+						ElementAttrib attr;
+						attr.parseElement(child2->ToElement());
+						
 						std::string music;
 						attr.getString("source",music);
 						if (music != "")

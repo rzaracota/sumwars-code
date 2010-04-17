@@ -47,7 +47,7 @@ void ogg_stream::release()
     empty();
     alDeleteSources(1, &source);
     check();
-    alDeleteBuffers(1, buffers);
+    alDeleteBuffers(2, buffers);
     check();
 
     ov_clear(&oggStream);
@@ -128,6 +128,11 @@ bool ogg_stream::update()
 
         alSourceQueueBuffers(source, 1, &buffer);
         check();
+		
+		if (active && !playing())
+		{
+			alSourcePlay(source);
+		}
     }
 
     return active;
@@ -138,7 +143,7 @@ bool ogg_stream::update()
 
 bool ogg_stream::stream(ALuint buffer)
 {
-    char pcm[BUFFER_SIZE];
+	char pcm[BUFFER_SIZE];
     int  size = 0;
     int  section;
     int  result;
@@ -157,7 +162,9 @@ bool ogg_stream::stream(ALuint buffer)
     }
     
     if(size == 0)
-        return false;
+	{
+		return false;
+	}
         
     alBufferData(buffer, format, pcm, size, vorbisInfo->rate);
     check();

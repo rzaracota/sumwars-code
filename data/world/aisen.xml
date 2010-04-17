@@ -351,6 +351,7 @@
 	<Region id="7" name="joringsbridge">
 		<Music>
 			<Track source="sample2.ogg" />
+			<Track source="Example.ogg" />
 		</Music>
 	
 		<AmbientLight red="0.4" green="0.4" blue="0.4" />

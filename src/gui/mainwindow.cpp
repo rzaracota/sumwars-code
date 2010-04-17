@@ -277,9 +277,6 @@ void MainWindow::update(float time)
 		}
 		m_document->setModified(m_document->getModified() & (~Document::GUISHEET_MODIFIED));
 	}
-
-	// Musik aktualisieren
-	updateMusic();
 	
 	// Testen ob Anzeige der Subfenster geaendert werden muss
 	if (m_document->getModified() & Document::WINDOWS_MODIFIED)
@@ -614,6 +611,8 @@ void MainWindow::update(float time)
 		*/
 	}
 	
+	// Musik aktualisieren
+	updateMusic();
 }
 
 
@@ -1966,6 +1965,7 @@ void MainWindow::updateRegionInfo()
 		{
 			refresh = true;
 			region = pl->getRegion()->getId();
+			MusicManager::instance().stop();
 		}
 		
 		if (refresh)
@@ -2184,7 +2184,31 @@ void MainWindow::updateMusic()
 	}
 	else if (m_document->getGUIState()->m_sheet ==  Document::GAME_SCREEN)
 	{
+		if (m_document->getLocalPlayer() == 0)
+			return;
+		
+		// zufaellig einen Track der Region auswaehlen
+		Region* reg = m_document->getLocalPlayer()->getRegion();
 		source = "";
+		if (reg != 0)
+		{
+			std::list<MusicTrack> tracks = reg->getMusicTracks();
+			std::list<MusicTrack>::iterator it;
+			
+			if (!tracks.empty())
+			{
+				// Auslosung
+				int nr = Random::randi(tracks.size());
+				it = tracks.begin();
+				while (nr > 0 )
+				{
+					it++;
+					nr --;
+				}
+				
+				source = *it;
+			}
+		}
 	}
 	
 	if (source == "")
@@ -2203,14 +2227,8 @@ void MainWindow::updateMusic()
 		filename += "/";
 		filename += it->filename;
 		
-		DEBUG("play music file %s",filename.c_str());
-		
 		MusicManager::instance().play(filename);
 		MusicManager::instance().update();
-	}
-	else
-	{
-		DEBUG("no music");
 	}
 }
 
