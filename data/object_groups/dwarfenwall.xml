@@ -43,6 +43,13 @@
             probability="1" 
             prob_angle="false" 
     />
+    <Object subtype="$border_cOut" 
+            center_x="41" 
+            center_y="-36" 
+            angle="0" 
+            probability="1" 
+            prob_angle="false" 
+    />
     <Object subtype="$stuff_b" 
             center_x="-41" 
             center_y="41.5" 
@@ -122,6 +129,13 @@
             angle="-213.8340867" 
             probability="1" 
             prob_angle="true" 
+    />
+    <Object subtype="$border_cOut" 
+            center_x="32" 
+            center_y="-36" 
+            angle="-90" 
+            probability="1" 
+            prob_angle="false" 
     />
     <Object subtype="$misc_shieldsLeanL" 
             center_x="-1.823799393" 
@@ -284,7 +298,7 @@
     <Object subtype="$stuff_m" 
             center_x="-36.42265777" 
             center_y="41.35977075" 
-           height="-9.518767999e-005" 
+           height="-9.518767998e-005" 
             angle="-36.66896621" 
             probability="1" 
             prob_angle="false" 
@@ -668,13 +682,6 @@
             prob_angle="false" 
     />
     <Object subtype="$wall_cOut" 
-            center_x="41" 
-            center_y="-36" 
-            angle="0" 
-            probability="1" 
-            prob_angle="true" 
-    />
-    <Object subtype="$wall_cOut" 
             center_x="0" 
             center_y="45" 
             angle="90" 
@@ -687,13 +694,6 @@
             angle="-180" 
             probability="1" 
             prob_angle="false" 
-    />
-    <Object subtype="$wall_cOut" 
-            center_x="32" 
-            center_y="-36" 
-            angle="-90" 
-            probability="1" 
-            prob_angle="true" 
     />
     <Object subtype="$wall_cOut" 
             center_x="14" 
@@ -882,7 +882,7 @@
     <Object subtype="houseAisen1" 
             center_x="-1.109296313" 
             center_y="35.56458237" 
-           height="-7.299716387e-015" 
+           height="-7.313594175e-015" 
             angle="0" 
             probability="1" 
             prob_angle="false" 
@@ -1029,7 +1029,7 @@
     <Object subtype="houseAisen4" 
             center_x="18.60483791" 
             center_y="4.442792998" 
-           height="-7.223388554e-015" 
+           height="-7.237266342e-015" 
             angle="-193.4481909" 
             probability="1" 
             prob_angle="false" 
@@ -1052,7 +1052,7 @@
     <Object subtype="houseAisen4" 
             center_x="-3.21409012" 
             center_y="42.26589568" 
-           height="3.358424649e-015" 
+           height="3.337607968e-015" 
             angle="-180" 
             probability="1" 
             prob_angle="false" 
@@ -1068,7 +1068,7 @@
     <Object subtype="houseAisen4" 
             center_x="-19.79129143" 
             center_y="32.26810044" 
-           height="7.299716387e-015" 
+           height="7.313594175e-015" 
             angle="40.15037877" 
             probability="1" 
             prob_angle="false" 
@@ -1257,6 +1257,7 @@
     <Area name="areaHealer" angle="-20.80623709" center_x="-20.81429712" center_y="-4.638521301" type="RECT" extent_x="3.445" extent_y="1.7477" />
     <Area name="areaNoEntry1" angle="35.97500732" center_x="-3.488177459" center_y="-20.25369585" type="RECT" extent_x="3.4491" extent_y="1" />
     <Area name="areaNoEntry2" angle="-42.87928498" center_x="-27.68034983" center_y="-23.54747979" type="RECT" extent_x="4.1065" extent_y="1.0335" />
+    <Area name="areaNoEntry3" angle="-0" center_x="-13.50830014" center_y="-23.620807" type="RECT" extent_x="5.81580824" extent_y="3.334740083" />
     <Area name="areaRampart" angle="14.10833464" center_x="-13.14864899" center_y="-25.11621652" type="RECT" extent_x="8.0526" extent_y="2.136" />
     <Area name="areaTavern" angle="-0" center_x="11" center_y="-2" type="CIRCLE" radius="1.726564416" />
   </Areas>

@@ -6,6 +6,31 @@
 			return _("Quest description")
 		end
 	</Description>
+
+	<Region name="dwarfenwall">
+		<Event trigger="enter_region" once="true">
+			<Condition>
+				return (defend_dwall.visitedDWall ~= true);
+			</Condition>
+			<Effect>
+				assembleParty("dwarfenwall","entry_west");
+				setCutsceneMode(true);
+				addCameraPosition(0,"entry_west",-60, 65, 12);
+				addCameraPosition(2000,"entry_west",-60, 65, 18);
+				addCameraPosition(9000, "locWay1", -120, 65, 32);
+				addCameraPosition(8000, "exit_command", 180, 35, 8);
+				addCameraPosition(1500, "exit_command", 180, 35, 8);
+			</Effect>
+		</Event>
+		<Event trigger="all_camera_moves_complete" once="true">
+			<Effect>
+				defend_dwall.visitedDWall = true;
+				setCutsceneMode(false);
+			</Effect>
+		</Event>
+		
+		
+	</Region>
 	
 	<Region name="dwarfenwallCommand">
 		<Event trigger="create_region" once="true">
@@ -238,6 +263,23 @@
 			</Condition>
 			<Effect>
 				unitSpeak(dwarfenwall.guard3,_("Es tut mir Leid, aber hier ist nur Durchgang fuer Angehoerige der aisener Armee."));
+				addUnitCommand(trigger.player,"walk","locWeaponTrader");
+				startTimer("stopWalking",1000);
+				addTriggerVariable("unit",trigger.player);
+			</Effect>
+		</Event>
+		
+		<Event trigger="player_moved">
+			<Condition>
+				if(defend_dwall.briefingFinished ~= true)then
+					return (unitIsInArea(trigger.player,"areaNoEntry3"))
+				else
+					return false;
+				end;
+			</Condition>
+			<Effect>
+				unitSpeak(trigger.player,_("Da will ich jetzt nicht hin. Ich sehe nur eine langweilige Mauer."));
+				clearUnitCommands(trigger.player);
 				addUnitCommand(trigger.player,"walk","locWeaponTrader");
 				startTimer("stopWalking",1000);
 				addTriggerVariable("unit",trigger.player);
