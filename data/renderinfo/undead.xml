@@ -583,7 +583,7 @@
 </RenderInfo>
 
 <RenderInfo name="iceObelisk" parent="obeliskbase">
-	<Entity source="barrel1.mesh"/>
+	<Entity source="obelisk_ice.mesh"/>
 </RenderInfo>
 
 

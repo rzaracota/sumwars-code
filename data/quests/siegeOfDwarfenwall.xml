@@ -2389,11 +2389,12 @@
 				return ((defend_dwall.theLich == true) and (defend_dwall.finished ~= true))
 			</Condition>
 			<Effect>
+				addArea("areaGathering",{"circle",{0,0},10000});
 				for i = 1, 7 do
-					--createMonsterGroup("campSkeletons", "locSpawn"..i, 4);
+					createMonsterGroup("campSkeletons", "locSpawn"..i, 4);
 				end;
 				-- guardian group of the treasury
-				--createMonsterGroup("campSkeletons", "locSpawn8", 4);
+				createMonsterGroup("campSkeletons", "locSpawn8", 4);
 				
 				local nec = createObject("necromancer_black_attendend","locAttendend");
 				lookAt(nec,"locParty");
@@ -2401,7 +2402,7 @@
 				lookAt(defend_dwall_tmp.lich,"locParty");
 			</Effect>
 		</Event>
-		<!--
+
 		<Event trigger="player_moved" once = "true">
 			<Condition>
 				if(unitIsInArea(trigger.player,"areaLich"))then
@@ -2418,7 +2419,7 @@
 				assembleParty("necFieldcamp","locParty");
 				startTimer("lichFinalSpeachStart",900);
 			</Effect>
-		</Event>-->
+		</Event>
 		<Event trigger="party_complete" once="true">
 			<Condition>
 				return(defend_dwall_tmp.lichTalk == true);
@@ -2533,15 +2534,16 @@
 				elseif((0.25 >= percent) and (defend_dwall_tmp.lich25 ~= true))then
 					defend_dwall_tmp.lich25 = true;
 					insertTrigger("under25");
-				elseif((0.1 >= percent) and (defend_dwall_tmp.lich10 ~= true))then
-					defend_dwall_tmp.lich10 = true;
-					insertTrigger("under10");
+				elseif((0.15 >= percent) and (defend_dwall_tmp.lich15 ~= true))then
+					defend_dwall_tmp.lich15 = true;
+					insertTrigger("under15");
 				end;
 			</Effect>
 		</Event>
 		<Event trigger="under75" once="true">
 			<Effect>
 				print("lich unlocked homing iceball")
+				set(defend_dwall_tmp.lich,"ai_ability_rating:asoroth_guided_icicle",0)
 				set(defend_dwall_tmp.lich,"ai_ability_rating:asoroth_guided_iceball",2)
 			</Effect>
 		</Event>
@@ -2556,24 +2558,48 @@
 		<Event trigger="under25" once="true">
 			<Effect>
 				print("lich unlocked icewave and iceobelisk")
+				set(defend_dwall_tmp.lich,"ai_ability_rating:asoroth_summon_skel",0)
 				set(defend_dwall_tmp.lich,"ai_ability_rating:asoroth_frost_wave",3)
 				set(defend_dwall_tmp.lich,"ai_ability_rating:asoroth_ice_obelisk",2)
 			</Effect>
 		</Event>
-		<Event trigger="under10" once="true">
+		<Event trigger="under15" once="true">
 			<Effect>
 				print("lich called an army of skeletons")
-				fadeIn(3000,{0.2,0.2,0.2},{0.9,0.9,0.9},{0.1,0.1,0.1})
+				fadeIn(1500,{0.15,0.15,0.15},{0.7,0.7,0.7},{0.1,0.1,0.1})
 				addUnitCommand(defend_dwall_tmp.lich,"asoroth_call_army")
+				set(defend_dwall_tmp.lich,"ai_ability_rating:asoroth_ice_obelisk",0)
+				set(defend_dwall_tmp.lich,"ai_ability_rating:asoroth_frost_wave",2)
+				set(defend_dwall_tmp.lich,"ai_ability_rating:asoroth_black_storm",3)
 			</Effect>
 		</Event>
 		
-		<Event trigger="unit_die">
+		<Event trigger="unit_die" once="true">
 			<Condition>
 				return(trigger.unit == defend_dwall_tmp.lich)
 			</Condition>
 			<Effect>
-				fadeIn(1000,{0.4,0.4,0.4},{1,1,1},{0.3,0.3,0.3})
+				--defend_dwall.finished = true;
+			
+				fadeIn(12000,{0.4,0.4,0.4},{1,1,1},{0.3,0.3,0.3})
+				local monsters = getMonstersInArea("areaGathering");
+				for i,monster in ipairs(monsters) do
+					set(monster, "health",0);
+				end;
+				
+				setCutsceneMode(true)
+				local position1 = get(getPartyleader(),"position");
+				local position2 = get(defend_dwall_tmp.lich,"position");
+				
+				addCameraPosition(0, position1,-90, 65, 16);
+				addCameraPosition(1500,position2,-90, 45, 12);
+				unitSpeak(defend_dwall_tmp.lich,_("Nein! Das kann nicht sein! Ihr elenden..."),"panic")
+				startTimer("endScene", 7000);
+			</Effect>
+		</Event>
+		<Event trigger="endScene" once="true">
+			<Effect>
+				setCutsceneMode(false);
 			</Effect>
 		</Event>
 	</Region>

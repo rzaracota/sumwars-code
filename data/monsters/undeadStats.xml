@@ -2312,7 +2312,7 @@
 	<BasicAttributes
 		experience="20"
 		level="27"
-		max_health="8000"
+		max_health="10000"
 		armor="70"
 		block="0"
 		attack="90"
@@ -2338,14 +2338,17 @@
 	<Ability type="walk" />
 	<Ability type="noaction" />
 	<Ability type="talk" />
-	<Ability type="die" time="2500" />
+	<Ability type="die" time="6000" />
 	
-	<Ability type="attack" />
+	<Ability type="attack" rating="1"/>
+	<Ability type="asoroth_guided_icicle" rating="2"/>
+	<Ability type="asoroth_summon_skel" rating="3"/>
 	<Ability type="asoroth_ice_attack"/>
 	<Ability type="asoroth_guided_iceball"/>
 	<Ability type="asoroth_frost_wave"/>
 	<Ability type="asoroth_ice_obelisk"/>
 	<Ability type="asoroth_call_army"/>
+	<Ability type="asoroth_black_storm"/>
 	
 	
 	<Immunity type="berserk"/>
@@ -2442,9 +2445,9 @@
 
 	</BasicAttributes>
 	
-	<Geometry radius="0.5" />
+	<Geometry radius="1.0" />
 	
-	<AI ai_sight_range="14" ai_shoot_range="9" ai_randaction_prob="0.0" />
+	<AI ai_sight_range="12" ai_shoot_range="12" ai_randaction_prob="0.0" />
 </Monster>
 
 <MonsterGroup name="campSkeletons" >
@@ -2453,7 +2456,7 @@
 	<SubGroup subtype="bow_skel_siege" number="3" prob="1.0" />
 </MonsterGroup>
 <MonsterGroup name="asorothLastResort" >
-	<SubGroup subtype="sword_skel_siege" number="3" prob="1.0" />
-	<SubGroup subtype="axe_skel_siege" number="3" prob="1.0" />
-	<SubGroup subtype="bow_skel_siege" number="3" prob="1.0" />
+	<SubGroup subtype="fire_skel_sword_siege" number="2" prob="1.0" />
+	<SubGroup subtype="fire_skel_axe2_siege" number="2" prob="1.0" />
+	<SubGroup subtype="fire_skel_bow_siege" number="4" prob="1.0" />
 </MonsterGroup>

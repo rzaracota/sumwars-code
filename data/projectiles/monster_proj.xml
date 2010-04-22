@@ -152,7 +152,7 @@
 </Projectile>
 <Projectile subtype="guided_ice_ball"
 			lifetime="3000"
-			radius="1.0"
+			radius="0.5"
 			implementation = "fly_guided"
 			new_projectile_type="ice_ball_ring"
 		   >
