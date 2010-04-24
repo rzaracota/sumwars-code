@@ -51,7 +51,7 @@ ActionRenderInfo* GraphicRenderInfo::getOwnActionRenderInfo(std::string action,i
 		rt = m_action_references.find(action);
 		if (rt != m_action_references.end() && rt->second != action)
 		{
-			return getOwnActionRenderInfo(rt->second, random_action_nr);
+			return getInheritedActionRenderInfo(rt->second, random_action_nr);
 		}
 		else
 		{
