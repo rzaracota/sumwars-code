@@ -929,10 +929,10 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 		else if (*kt == "proj_fly_at_target")
 		{
 			pr = ObjectFactory::createProjectile(projtype);
-			pr->setGoalObject(cgoalid);
 				
 			if (pr !=0)
 			{
+				pr->setGoalObject(cgoalid);
 				pr->setDamage(&m_damage);
 				pr->addFlags(ainfo->m_projectile_flags);
 				if (ainfo->m_projectile_counter !=0)

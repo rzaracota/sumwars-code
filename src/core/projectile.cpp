@@ -691,6 +691,28 @@ void Projectile::doEffect(GameObject* target)
 			}
 		}
 	}
+	
+	if (pdata->m_effect.m_lua_impl != LUA_NOREF)
+	{
+		
+		EventSystem::setRegion(getRegion());
+		EventSystem::setDamage(m_damage);
+		
+		EventSystem::pushVector(EventSystem::getLuaState(), getShape()->m_center);
+		lua_setglobal(EventSystem::getLuaState(), "projectile_position");
+		
+		lua_pushnumber(EventSystem::getLuaState(),m_goal_object);
+		lua_setglobal(EventSystem::getLuaState(), "target");
+		
+		
+		EventSystem::pushVector(EventSystem::getLuaState(),getSpeed());
+		lua_setglobal(EventSystem::getLuaState(), "projectile_speed");
+		
+		EventSystem::executeCodeReference(pdata->m_effect.m_lua_impl);
+		
+		EventSystem::setDamage(0);
+		
+	}
 }
 
 void Projectile::destroy()
