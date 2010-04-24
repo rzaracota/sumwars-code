@@ -167,7 +167,6 @@ void Projectile::handleFlying(float dtime)
 	Vector sdir,hitpos,ndir;
 	Vector pos = getPosition(), newpos;
 	float rnew,rmin;
-	int lid;
 	
 	bool do_destroy = false;
 	
@@ -201,16 +200,14 @@ void Projectile::handleFlying(float dtime)
 			getRegion()->getObjectsInShape(&s,&hitobj,getLayer(), WorldObject::CREATURE,0);
 
 			// alle Objekte als potentielle Ziele loeschen, die dem Erschaffer des Projektils nicht feindlich gesinnt sind
-			if (!hitobj.empty())
+			for (i=hitobj.begin();i!=hitobj.end();)
 			{
-				i = hitobj.begin();
-				hit=(*i);
-				while (!hitobj.empty() && World::getWorld()->getRelation(getFraction(),hit) != Fraction::HOSTILE)
+				if (World::getWorld()->getRelation(getFraction(),*i) != Fraction::HOSTILE)
 				{
 					i=hitobj.erase(i);
-					if (i!=hitobj.end())
-						hit=(*i);
 				}
+				else
+					++i;
 			}
 
 			// Suchen jenes Zieles welches am besten zu erreichen ist
@@ -260,37 +257,41 @@ void Projectile::handleFlying(float dtime)
 			newdir = hit->getShape()->m_center - pos;
 
 		}
-
-		// aktuelle absolute Geschwindigkeit
-		float v = speed.getLength();
 		
-		
-		// normieren der Zielrichtung
-		newdir.normalize();
-		newdir *= v;
-
-		float p =0.3*dtime / 50;
-		if (p>1)
-			p=1;
-		DEBUGX("p = %f",p);
-		DEBUGX("newdir %f %f",newdir.m_x,newdir.m_y);
-		
-		// Neue Richtung ergibt sich aus Linearkombination von aktueller Richtung und Zielrichtung
-		speed = speed*(1-p) + newdir*p;
-		DEBUGX("new speed %f %f",speed.m_x,speed.m_y);
-
-		// neue Richtung normieren
-		speed.normalize();
-		speed *= v;
-
-		if (World::getWorld()->timerLimit(0))
+		// Richtung nur aendern, wenn ein Ziel gefunden wurde
+		if (hit != 0)
 		{
-			addToNetEventMask(NetEvent::DATA_SPEED);
-		}
-		
-		hitobj.clear();
+			DEBUGX("chasing %i %s",hit->getId(), hit->getSubtype().c_str());
+			// aktuelle absolute Geschwindigkeit
+			float v = speed.getLength();
+			
+			// normieren der Zielrichtung
+			newdir.normalize();
+			newdir *= v;
 
-		setSpeed(speed,false);
+			float p =0.3*dtime / 50;
+			if (p>1)
+				p=1;
+			DEBUGX("p = %f",p);
+			DEBUGX("newdir %f %f",newdir.m_x,newdir.m_y);
+			
+			// Neue Richtung ergibt sich aus Linearkombination von aktueller Richtung und Zielrichtung
+			speed = speed*(1-p) + newdir*p;
+			DEBUGX("new speed %f %f",speed.m_x,speed.m_y);
+
+			// neue Richtung normieren
+			speed.normalize();
+			speed *= v;
+
+			if (World::getWorld()->timerLimit(0))
+			{
+				addToNetEventMask(NetEvent::DATA_SPEED);
+			}
+			
+			hitobj.clear();
+
+			setSpeed(speed,false);
+		}
 		
 	}
 
@@ -477,7 +478,6 @@ void Projectile::handleGrowing(float dtime)
 	WorldObject* hit;
 	float rnew,rmin;
 	float rold;
-	int lid;
 
 	rold = getShape()->m_radius;
 	// Radius erhoehen
