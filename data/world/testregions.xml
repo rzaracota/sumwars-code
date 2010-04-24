@@ -104,11 +104,97 @@
 					 return (unitIsInArea(trigger.player,'GuardArea'))
 				 </Condition>
 				 <Effect>
-					 skel = createObject('boss6_siege','SkelLocation');
+					 lich = createObject('asoroth','SkelLocation');
 					 --skel = createObject('axe_skel_siege','SkelLocation2');
 					-- skel = createObject('axe_skel_siege','SkelLocation3');
 				 </Effect>
 			</Event>
+			<Event trigger="unit_hit">
+			<Condition>
+				return (trigger.defender == lich)
+			</Condition>
+			<Effect>
+				local lich = trigger.defender
+				--local hp = get(lich, "health")
+				--local mhp = get(lich, "max_health")
+				local percent = get(lich, "health")/ get(lich, "max_health")
+				--print(hp.."/"..mhp.." => "..percent.."%");
+				if((0.85 >= percent) and (defend_dwall_tmp.lich85 ~= true))then
+					defend_dwall_tmp.lich85 = true;
+					insertTrigger("under85");
+				elseif((0.75 >= percent) and (defend_dwall_tmp.lich75 ~= true))then
+					defend_dwall_tmp.lich75 = true;
+					insertTrigger("under75");
+				elseif((0.60 >= percent) and (defend_dwall_tmp.lich60 ~= true))then
+					defend_dwall_tmp.lich60 = true;
+					insertTrigger("under60");
+				elseif((0.5 >= percent) and (defend_dwall_tmp.lich50 ~= true))then
+					defend_dwall_tmp.lich50 = true;
+					insertTrigger("under50");
+				elseif((0.4 >= percent) and (defend_dwall_tmp.lich40 ~= true))then
+					defend_dwall_tmp.lich40 = true;
+					insertTrigger("under40");
+				elseif((0.25 >= percent) and (defend_dwall_tmp.lich25 ~= true))then
+					defend_dwall_tmp.lich25 = true;
+					insertTrigger("under25");
+				elseif((0.15 >= percent) and (defend_dwall_tmp.lich15 ~= true))then
+					defend_dwall_tmp.lich15 = true;
+					insertTrigger("under15");
+				end;
+			</Effect>
+		</Event>
+		<Event trigger="under85" once="true">
+			<Effect>
+				print("lich unlocked homing icicle")
+				set(lich,"ai_ability_rating:asoroth_guided_icicle",2)
+				set(lich,"ai_ability_rating:asoroth_icicle",0)
+			</Effect>
+		</Event>
+		<Event trigger="under75" once="true">
+			<Effect>
+				print("lich unlocked obelisk")
+				set(lich,"ai_ability_rating:asoroth_summon_skel",0)
+				set(lich,"ai_ability_rating:asoroth_ice_obelisk",3)
+			</Effect>
+		</Event>
+		<Event trigger="under60" once="true">
+			<Effect>
+				print("lich unlocked homing iceball")
+				set(lich,"ai_ability_rating:asoroth_guided_icicle",0)
+				set(lich,"ai_ability_rating:asoroth_guided_iceball",2)
+			</Effect>
+		</Event>
+		<Event trigger="under50" once="true">
+			<Effect>
+				print("lich switched to icedamage and invoked icearmor")
+				set(lich,"ai_ability_rating:attack",0)
+				set(lich,"ai_ability_rating:asoroth_ice_attack",1)
+				setObjectFlag(lich, "frost");
+			</Effect>
+		</Event>
+		<Event trigger="under40" once="true">
+			<Effect>
+				print("lich unlocked icewave")
+				set(lich,"ai_ability_rating:asoroth_ice_obelisk",0)
+				set(lich,"ai_ability_rating:asoroth_frost_wave",3)
+			</Effect>
+		</Event>
+		<Event trigger="under25" once="true">
+			<Effect>
+				print("lich unlocked meteor")
+				set(lich,"ai_ability_rating:asoroth_guided_iceball",0)
+				set(lich,"ai_ability_rating:asoroth_meteor",3)
+			</Effect>
+		</Event>
+		<Event trigger="under15" once="true">
+			<Effect>
+				fadeIn(1500,{0.15,0.15,0.15},{0.7,0.7,0.7},{0.1,0.1,0.1})
+				addUnitCommand(lich,"asoroth_call_army")
+				set(lich,"ai_ability_rating:asoroth_frost_wave",-100)
+				set(lich,"ai_ability_rating:asoroth_black_storm",3)
+			</Effect>
+		</Event>
+		
 		 </Region>
 		 
 		 <Region id="1002" name="spawnAbyss">

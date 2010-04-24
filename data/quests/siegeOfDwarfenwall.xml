@@ -2567,12 +2567,21 @@
 				--local mhp = get(lich, "max_health")
 				local percent = get(lich, "health")/ get(lich, "max_health")
 				--print(hp.."/"..mhp.." => "..percent.."%");
-				if((0.75 >= percent) and (defend_dwall_tmp.lich75 ~= true))then
+				if((0.85 >= percent) and (defend_dwall_tmp.lich85 ~= true))then
+					defend_dwall_tmp.lich85 = true;
+					insertTrigger("under85");
+				elseif((0.75 >= percent) and (defend_dwall_tmp.lich75 ~= true))then
 					defend_dwall_tmp.lich75 = true;
 					insertTrigger("under75");
+				elseif((0.60 >= percent) and (defend_dwall_tmp.lich60 ~= true))then
+					defend_dwall_tmp.lich60 = true;
+					insertTrigger("under60");
 				elseif((0.5 >= percent) and (defend_dwall_tmp.lich50 ~= true))then
 					defend_dwall_tmp.lich50 = true;
 					insertTrigger("under50");
+				elseif((0.4 >= percent) and (defend_dwall_tmp.lich40 ~= true))then
+					defend_dwall_tmp.lich40 = true;
+					insertTrigger("under40");
 				elseif((0.25 >= percent) and (defend_dwall_tmp.lich25 ~= true))then
 					defend_dwall_tmp.lich25 = true;
 					insertTrigger("under25");
@@ -2582,7 +2591,21 @@
 				end;
 			</Effect>
 		</Event>
+		<Event trigger="under85" once="true">
+			<Effect>
+				print("lich unlocked homing icicle")
+				set(defend_dwall_tmp.lich,"ai_ability_rating:asoroth_guided_icicle",2)
+				set(defend_dwall_tmp.lich,"ai_ability_rating:asoroth_icicle",0)
+			</Effect>
+		</Event>
 		<Event trigger="under75" once="true">
+			<Effect>
+				print("lich unlocked obelisk")
+				set(defend_dwall_tmp.lich,"ai_ability_rating:asoroth_summon_skel",0)
+				set(defend_dwall_tmp.lich,"ai_ability_rating:asoroth_ice_obelisk",3)
+			</Effect>
+		</Event>
+		<Event trigger="under60" once="true">
 			<Effect>
 				print("lich unlocked homing iceball")
 				set(defend_dwall_tmp.lich,"ai_ability_rating:asoroth_guided_icicle",0)
@@ -2597,21 +2620,25 @@
 				setObjectFlag(defend_dwall_tmp.lich, "frost");
 			</Effect>
 		</Event>
+		<Event trigger="under40" once="true">
+			<Effect>
+				print("lich unlocked icewave")
+				set(defend_dwall_tmp.lich,"ai_ability_rating:asoroth_ice_obelisk",0)
+				set(defend_dwall_tmp.lich,"ai_ability_rating:asoroth_frost_wave",3)
+			</Effect>
+		</Event>
 		<Event trigger="under25" once="true">
 			<Effect>
-				print("lich unlocked icewave and iceobelisk")
-				set(defend_dwall_tmp.lich,"ai_ability_rating:asoroth_summon_skel",0)
-				set(defend_dwall_tmp.lich,"ai_ability_rating:asoroth_frost_wave",3)
-				set(defend_dwall_tmp.lich,"ai_ability_rating:asoroth_ice_obelisk",2)
+				print("lich unlocked meteor")
+				set(defend_dwall_tmp.lich,"ai_ability_rating:asoroth_guided_iceball",0)
+				set(defend_dwall_tmp.lich,"ai_ability_rating:asoroth_meteor",3)
 			</Effect>
 		</Event>
 		<Event trigger="under15" once="true">
 			<Effect>
-				print("lich called an army of skeletons")
 				fadeIn(1500,{0.15,0.15,0.15},{0.7,0.7,0.7},{0.1,0.1,0.1})
 				addUnitCommand(defend_dwall_tmp.lich,"asoroth_call_army")
-				set(defend_dwall_tmp.lich,"ai_ability_rating:asoroth_ice_obelisk",0)
-				set(defend_dwall_tmp.lich,"ai_ability_rating:asoroth_frost_wave",2)
+				set(defend_dwall_tmp.lich,"ai_ability_rating:asoroth_frost_wave",-100)
 				set(defend_dwall_tmp.lich,"ai_ability_rating:asoroth_black_storm",3)
 			</Effect>
 		</Event>

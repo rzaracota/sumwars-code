@@ -586,6 +586,21 @@
 	<Entity source="obelisk_ice.mesh"/>
 </RenderInfo>
 
+<RenderInfo name="asoroth" parent="lich">
+
+	<Action name ="asoroth_summon_skel" reference = "summon_skelSword" />
+	<Action name ="asoroth_ice_obelisk" reference = "summon_skelSword" />
+	<Action name ="asoroth_meteor" reference = "summon_skelSword" />
+	<Action name ="asoroth_black_storm" reference = "summon_skelSword" />
+	<Action name ="asoroth_call_army" reference = "summon_skelSword" />
+	
+	<Action name ="asoroth_frost_wave" reference = "ice_bolt" />
+	
+	<Action name ="asoroth_guided_iceball" reference = "ice_bolt" />
+	<Action name ="asoroth_guided_icicle" reference = "ice_bolt" />
+	<Action name ="asoroth_icicle" reference = "ice_bolt" />
+
+</RenderInfo>
 
 <!-- Maylons Grab -->
 <RenderInfo name="maylonMummy" parent="lichbase">

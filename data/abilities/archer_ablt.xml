@@ -375,7 +375,7 @@
 		<LuaImplementation>
 			local dex = get(self,"dexterity")
 			local admg = getDamageValue("air_dmg");
-			setDamageValue("air_dmg", {admg[1] + dex, admg[2] + dex*2});
+			setDamageValue("air_dmg", {admg[1] + dex, admg[2] + dex*3});
 			setDamageValue("paralyzed",dex);
 			setDamageValue("blockable",false);
 		</LuaImplementation>	

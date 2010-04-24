@@ -57,7 +57,9 @@
 	<Trade refresh_time="300000" price_factor="1.5">
 		<TradeItem subtype="heal_2" number ="30" />
 		<TradeItem subtype="heal_fr" number ="5" />
-		<TradeItem subtype="heal_br" number ="5" />
+		<TradeItem subtype="heal_py" number ="5" />
+		<TradeItem subtype="heal_bl" number ="5" />
+		<TradeItem subtype="heal_ps" number ="5" />
 	</Trade>
 	
 	<Topic name="trade" start_option="Potions" />

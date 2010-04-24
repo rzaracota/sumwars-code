@@ -99,6 +99,7 @@
 		<CppImplementation type="dmg_at_enemies_in_radius" />
 	</Effect>
 </Projectile>
+
 <Projectile subtype="smoke_wave"
 			lifetime="1000"
 			radius="1.5"
@@ -204,4 +205,21 @@
 	<Effect>
 		<CppImplementation type="dmg_at_enemies_in_radius" />
 	</Effect>	
+</Projectile>
+
+<Projectile subtype="asoroth_ice_meteor"
+			lifetime="1000"
+			radius="1.0"
+			implementation = "stationary"
+			new_projectile_type="ice_ball_ring"
+		   >
+	<Flag name="explodes"/>
+	<RenderInfo name="catapult_rock" />
+	<Effect>
+		<CppImplementation type="dmg_at_enemies_in_radius" />
+		<LuaImplementation>
+			setDamageValue("phys_dmg", {0,0});
+			setDamageValue("phys_dmg", {20,30});
+		</LuaImplementation>
+	</Effect>
 </Projectile>
