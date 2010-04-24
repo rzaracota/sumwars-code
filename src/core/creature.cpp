@@ -664,8 +664,8 @@ void Creature::performAction(float &time)
 		// Kommando ist beendet wenn die gleichnamige Aktion beendet wurde
 		// Ausnahme: Bewegungskommando ist beendet wenn das Ziel erreicht ist
 		Action::ActionType baseact = ainfo->m_base_action;
-		if (((m_action.m_type == m_command.m_type) || m_action.m_type == baseact) && m_action.m_type != "walk" || m_command.m_type == "walk" && disttogoal < getBaseAttr()->m_step_length 
-				  && !(m_command.m_type == "charge" || m_command.m_type == "storm_charge"))
+		if ((((m_action.m_type == m_command.m_type) || m_action.m_type == baseact) && m_action.m_type != "walk") || (m_command.m_type == "walk" && disttogoal < getBaseAttr()->m_step_length 
+				  && !(m_command.m_type == "charge" || m_command.m_type == "storm_charge")))
 		{
 			bool recalc = false;
 			
@@ -712,6 +712,7 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 	// Zielobjekt als Creature* pointer
 	// null, wenn das Objekt kein Lebewesen ist
 	Creature* cgoal =0;
+	int cgoalid = 0;
 	if (goalobj !=0 && !goalobj->isCreature())
 	{
 		cgoal =0;
@@ -719,6 +720,7 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 	else
 	{
 		cgoal = (Creature*) goalobj;
+		cgoalid= goalobj->getId();
 	}
 
    Action::ActionInfo* ainfo = Action::getActionInfo(m_action.m_type);
@@ -912,6 +914,7 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 			{
 				pr->setDamage(&m_damage);
 				pr->addFlags(ainfo->m_projectile_flags);
+				pr->setGoalObject(cgoalid);
 				if (ainfo->m_projectile_counter !=0)
 				{
 					pr->setCounter(ainfo->m_projectile_counter);
@@ -926,6 +929,8 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 		else if (*kt == "proj_fly_at_target")
 		{
 			pr = ObjectFactory::createProjectile(projtype);
+			pr->setGoalObject(cgoalid);
+				
 			if (pr !=0)
 			{
 				pr->setDamage(&m_damage);
