@@ -720,7 +720,10 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 	else
 	{
 		cgoal = (Creature*) goalobj;
-		cgoalid= goalobj->getId();
+		if (cgoal != 0)
+		{
+			cgoalid= goalobj->getId();
+		}
 	}
 
    Action::ActionInfo* ainfo = Action::getActionInfo(m_action.m_type);
