@@ -105,7 +105,11 @@ bool Application::init()
 		return false;
 	}
 
-	initOpenAL();
+	ret = initOpenAL();
+	if (ret == false)
+	{
+		ERRORMSG("Sound initialisation failed");
+	}
 
 	DEBUG("time to start %f",tm.getTime());
 	// Ressourcen laden
@@ -463,8 +467,8 @@ bool Application::initCEGUI()
 bool Application::initOpenAL()
 {
 	SoundSystem::init();
-	
-	return true;
+	bool err = SoundSystem::checkErrors();
+	return !err;
 }
 
 bool Application::createDocument()

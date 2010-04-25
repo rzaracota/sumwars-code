@@ -72,14 +72,16 @@ class SoundSystem
 		 */
 		static void setListenerPosition(Vector pos);
 		
-		static void checkErrors()
+		static bool checkErrors()
 		{
 			int error = alGetError();
 
 			if(error != AL_NO_ERROR)
 			{
-				DEBUG("AL error %s",alGetString(error)) ;
+				ERRORMSG("AL error %i: %s",error, alGetString(error)) ;
+				return true;
 			}
+			return false;
 		}
 
 		/**
@@ -158,6 +160,16 @@ class SoundSystem
 		 * \brief Lautstaerke
 		 */
 		static float m_sound_volume;
+		
+		/**
+		 * \brief Sound Device
+		 */
+		static ALCdevice * m_device;
+		
+		/**
+		 * \brief AL Sound Kontext
+		 */
+		static ALCcontext* m_context;
 
 };
 

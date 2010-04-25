@@ -8,6 +8,8 @@ std::multimap<SoundName, Sound> SoundSystem::m_sounds;
 std::map<std::string, SoundObject*> SoundSystem::m_sound_objects;
 
 float SoundSystem::m_sound_volume = 0.0f;
+ALCdevice * SoundSystem::m_device;
+ALCcontext* SoundSystem::m_context;
 
 Sound SoundSystem::getSound(SoundName sname)
 {
@@ -123,127 +125,37 @@ void SoundSystem::loadSoundInfos(TiXmlNode* node)
 
 void SoundSystem::init()
 {
-	/*
+	m_device = 0;
+	m_context = 0;
 	// variante 1, geht unter ubuntu 9.10 nicht
-    ALCdevice *pDevice = alcOpenDevice("Generic Software");
-    ALCcontext *pContext = alcCreateContext(pDevice, NULL);
-    alcMakeContextCurrent(pContext);
-
-    alutInitWithoutContext(0,0);
+	/*
+    m_device = alcOpenDevice("Generic Software");
+    m_context = alcCreateContext(m_device, NULL);
+    alcMakeContextCurrent(m_context);
+	alutInitWithoutContext(0,0);
 	*/
 	
 	// variante 2, geht unter win nicht
 	//alutInit(0,0);
 	
 	// variante 3: zu testen
-	const ALCchar *defaultDevice = alcGetString(NULL, ALC_DEFAULT_DEVICE_SPECIFIER);
-	ALCdevice *pDevice = alcOpenDevice(defaultDevice);
-	ALCcontext *pContext = alcCreateContext(pDevice, NULL);
-	alcMakeContextCurrent(pContext);
-	alutInitWithoutContext(0,0);
-
-	alDistanceModel(AL_LINEAR_DISTANCE_CLAMPED);
-
-	SoundSystem::checkErrors();
-
-	
-	// Soundfiles laden
 	/*
-	SoundSystem::loadSoundFile("../resources/sound/arrow.wav", "arrow");
-	SoundSystem::loadSoundFile("../resources/sound/cast_ice.wav", "cast_ice");
-	SoundSystem::loadSoundFile("../resources/sound/fire_cast.wav", "cast_fire");
-	SoundSystem::loadSoundFile("../resources/sound/thunder_cast1.wav", "cast_thunder");
-	SoundSystem::loadSoundFile("../resources/sound/thunder_cast2.wav", "cast_thunder");
-	SoundSystem::loadSoundFile("../resources/sound/thunder.wav", "thunder");
-
-	SoundSystem::loadSoundFile("../resources/sound/dog_atk.wav", "dog_attack");
-	SoundSystem::loadSoundFile("../resources/sound/dog_die.wav", "dog_die");
-
-	SoundSystem::loadSoundFile("../resources/sound/lich_atk.wav", "lich_attack");
-	SoundSystem::loadSoundFile("../resources/sound/lich_die.wav", "lich_die");
-	SoundSystem::loadSoundFile("../resources/sound/lich_hit.wav", "lich_hit");
-
-	SoundSystem::loadSoundFile("../resources/sound/monster_atk.wav", "monster_attack");
-	SoundSystem::loadSoundFile("../resources/sound/monster_die.wav", "monster_die");
-	SoundSystem::loadSoundFile("../resources/sound/monster_hit.wav", "monster_hit");
-
-	SoundSystem::loadSoundFile("../resources/sound/hero_hit.wav", "hero_hit");
-	SoundSystem::loadSoundFile("../resources/sound/hero_die.wav", "hero_die");
-
-	SoundSystem::loadSoundFile("../resources/sound/sword_atk.wav", "sword");
-
-	SoundSystem::loadSoundFile("../resources/sound/drob_wood.wav", "drop_wood");
-	SoundSystem::loadSoundFile("../resources/sound/drop_metall.wav", "drop_metal");
-	SoundSystem::loadSoundFile("../resources/sound/drop_potion.wav", "drop_potion");
-
-	// Ereignisse auf Soundfiles mappen
-	SoundSystem::registerSound("short_sw:attack", "sword");
-	SoundSystem::registerSound("short_sw:drop", "drop_metal");
-	SoundSystem::registerSound("battle_axe:attack", "sword");
-	SoundSystem::registerSound("battle_axe:drop", "drop_metal");
-	SoundSystem::registerSound("heal_1:drop", "drop_potion");
-	SoundSystem::registerSound("heal_2:drop", "drop_potion");
-	SoundSystem::registerSound("wood_sh:drop", "drop_wood");
-
-
-	SoundSystem::registerSound("goblin:hit", "monster_hit");
-	SoundSystem::registerSound("goblin:die", "monster_die");
-	SoundSystem::registerSound("goblin:attack", "monster_attack");
-
-	SoundSystem::registerSound("lich:hit", "lich_hit");
-	SoundSystem::registerSound("lich:die", "lich_die");
-	SoundSystem::registerSound("lich:attack", "lich_attack");
-
-	SoundSystem::registerSound("gob_dog:hit", "monster_hit");
-	SoundSystem::registerSound("gob_dog:die", "dog_die");
-	SoundSystem::registerSound("gob_dog:attack", "dog_attack");
-
-	SoundSystem::registerSound("hero:die", "hero_die");
-	SoundSystem::registerSound("hero:hit", "hero_hit");
-
-	SoundSystem::registerSound("arrow", "arrow");
-	SoundSystem::registerSound("cast_fire", "cast_fire");
-	SoundSystem::registerSound("cast_ice", "cast_ice");
-	SoundSystem::registerSound("cast_thunder", "cast_thunder");
-	SoundSystem::registerSound("thunder", "thunder");
-
-
-	m_projectile_sounds["ARROW"] = "arrow";
-	m_projectile_sounds["GUIDED_ARROW"] = "arrow";
-	m_projectile_sounds["FIRE_ARROW"] = "arrow";
-	m_projectile_sounds["ICE_ARROW"] = "arrow";
-	m_projectile_sounds["WIND_ARROW"] = "arrow";
-
-	m_projectile_sounds["MAGIC_ARROW"] = "cast_fire";
-	m_projectile_sounds["FIRE_BOLT"] = "cast_fire";
-	m_projectile_sounds["FIRE_BALL"] = "cast_fire";
-	m_projectile_sounds["FIRE_WALL"] = "cast_fire";
-	m_projectile_sounds["FIRE_WAVE"] = "cast_fire";
-	m_projectile_sounds["FIRE_WAVE"] = "cast_fire";
-	m_projectile_sounds["EXPLOSION"] = "cast_fire";
-	m_projectile_sounds["FIRE_EXPLOSION"] = "cast_fire";
-
-	m_projectile_sounds["ICE_BOLT"] = "cast_ice";
-	m_projectile_sounds["BLIZZARD"] = "cast_ice";
-	m_projectile_sounds["ICE_RING"] = "cast_ice";
-	m_projectile_sounds["FREEZE"] = "cast_ice";
-	m_projectile_sounds["ICE_EXPLOSION"] = "cast_ice";
-
-
-	m_projectile_sounds["LIGHTNING"] = "cast_thunder";
-	m_projectile_sounds["THUNDERSTORM"] = "thunder";
-	m_projectile_sounds["CHAIN_LIGHTNING"] = "cast_thunder";
-	m_projectile_sounds["STATIC_SHIELD"] = "cast_thunder";
-	m_projectile_sounds["WIND_EXPLOSION"] = "cast_thunder";
-
-
-	m_projectile_sounds["LIGHT_BEAM"] = "cast_fire";
-	m_projectile_sounds["ELEM_EXPLOSION"] = "cast_fire";
-	m_projectile_sounds["ACID"] = "cast_fire";
-	m_projectile_sounds["DIVINE_BEAM"] = "cast_fire";
-	m_projectile_sounds["HYPNOSIS"] = "cast_fire";
-
-*/
+	const ALCchar *defaultDevice = alcGetString(NULL, ALC_DEFAULT_DEVICE_SPECIFIER);
+	m_device = alcOpenDevice(defaultDevice);
+	m_context = alcCreateContext(m_device, NULL);
+	alcMakeContextCurrent(m_context);
+	alutInitWithoutContext(0,0);
+	*/
+	
+	// variante 4: zu testen
+	
+	m_device = alcOpenDevice(NULL);
+    m_context = alcCreateContext(m_device, NULL);
+    alcMakeContextCurrent(m_context);
+	alutInitWithoutContext(0,0);
+	
+	alDistanceModel(AL_LINEAR_DISTANCE_CLAMPED);
+	
 }
 
 void SoundSystem::setListenerPosition(Vector pos)
