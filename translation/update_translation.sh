@@ -5,29 +5,23 @@
 #msgmerge -v -s -U test.pot test-new.pot
 #msgmerge -v -s -U test_de.po test-new.pot
 
-echo "+++++++++++++ sumwars +++++++++++++"
-xgettext -d sumwars -o sumwars_sumwars-new.pot ../src/core/*.cpp ../src/core/*.h ../src/gui/*.cpp ../src/gui/*.h
-echo "UPDATE sumwars_sumwars.pot"
-msgmerge -v -U sumwars_sumwars.pot sumwars_sumwars-new.pot
-echo "UPDATE sumwars_sumwars_de.po"
-msgmerge -v -U sumwars_sumwars_de.po sumwars_sumwars-new.pot
-rm sumwars_sumwars-new.pot
-
-
-echo "+++++++++++++ xml +++++++++++++"
+echo "CREATE new potfiles"
+xgettext -d sumwars -o potfiles/sumwars-sumwars-new.pot ../src/core/*.cpp ../src/core/*.h ../src/gui/*.cpp ../src/gui/*.h
 ../../tests/xmlgettext/xmlgettext ../data/
-echo "UPDATE sumwars_xml.pot"
-msgmerge -v -U sumwars_xml.pot sumwars_xml-new.pot
-echo "UPDATE sumwars_xml_de.po"
-msgmerge -v -U sumwars_xml_de.po sumwars_xml-new.pot
-rm sumwars_xml-new.pot
+xgettext --from-code utf-8 --language=Python -d events -o potfiles/sumwars-events-new.pot ../data/npc/*.xml ../data/quests/*.xml ../data/world/*.xml
 
+echo "MERGE new pots with pots"
+msgmerge -v -U potfiles/sumwars-sumwars.pot potfiles/sumwars-sumwars-new.pot
+msgmerge -v -U potfiles/sumwars-xml.pot potfiles/sumwars-xml-new.pot
+msgmerge -v -U potfiles/sumwars-events.pot potfiles/sumwars-events-new.pot
 
-echo "+++++++++++++ events +++++++++++++"
-xgettext --from-code utf-8 --language=Python -d events -o sumwars_events-new.pot ../data/npc/*.xml ../data/quests/*.xml ../data/world/*.xml
-echo "UPDATE sumwars_events.pot"
-msgmerge -v -U sumwars_events.pot sumwars_events-new.pot
-echo "UPDATE sumwars_events_de.po"
-msgmerge -v -U sumwars_events_de.po sumwars_events-new.pot
-rm sumwars_events-new.pot
+echo "MERGE new pots with pos"
+msgmerge -v -U de/sumwars-sumwars.po potfiles/sumwars-sumwars-new.pot
+msgmerge -v -U de/sumwars-xml.po potfiles/sumwars-xml-new.pot
+msgmerge -v -U de/sumwars-events.po potfiles/sumwars-events-new.pot
+
+echo "REMOVE temporary new pots"
+rm potfiles/sumwars-sumwars-new.pot
+rm potfiles/sumwars-xml-new.pot
+rm potfiles/sumwars-events-new.pot
 

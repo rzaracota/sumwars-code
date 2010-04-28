@@ -13,16 +13,16 @@ void Gettext::init(const char* locale)
 		m_locale = setlocale( LC_MESSAGES, "");
 	}
 		
-	bindtextdomain ("sumwars_sumwars","./translation/");
-	bind_textdomain_codeset ("sumwars_sumwars","UTF-8");
+	bindtextdomain ("sumwars-sumwars","./translation/");
+	bind_textdomain_codeset ("sumwars-sumwars","UTF-8");
 	
-	bindtextdomain ("sumwars_events","./translation/");
-	bind_textdomain_codeset ("sumwars_events","UTF-8");
+	bindtextdomain ("sumwars-events","./translation/");
+	bind_textdomain_codeset ("sumwars-events","UTF-8");
 	
-	bindtextdomain ("sumwars_xml","./translation/");
-	bind_textdomain_codeset ("sumwars_xml","UTF-8");
+	bindtextdomain ("sumwars-xml","./translation/");
+	bind_textdomain_codeset ("sumwars-xml","UTF-8");
 	
-	textdomain ("sumwars_sumwars");
+	textdomain ("sumwars-sumwars");
 }
 
 const char* Gettext::getLocale()

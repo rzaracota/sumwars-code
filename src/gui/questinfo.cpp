@@ -125,7 +125,7 @@ void QuestInfo::update()
 		state = it->second->getState();
 		if (state == Quest::STARTED && open || state == Quest::FINISHED && done || state == Quest::FAILED && failed)
 		{
-			newitem = new StrListItem(dgettext("sumwars_xml",it->second->getName().c_str()),it->first);
+			newitem = new StrListItem(dgettext("sumwars-xml",it->second->getName().c_str()),it->first);
 			questlist->addItem(newitem);
 			DEBUGX("add quest %s %s",it->second->getName().c_str(),it->first.c_str());
 			

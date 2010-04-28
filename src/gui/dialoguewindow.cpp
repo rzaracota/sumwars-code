@@ -264,7 +264,7 @@ void DialogueWindow::update()
 						continue;
 					
 					
-					name = dgettext("sumwars_xml",cr->getName().c_str());
+					name = dgettext("sumwars-xml",cr->getName().c_str());
 					if (wname->getText() != (CEGUI::utf8*) name.c_str())
 					{
 						wname->setText((CEGUI::utf8*) name.c_str());
@@ -283,7 +283,7 @@ void DialogueWindow::update()
 					}
 					else
 					{
-						text = dgettext("sumwars_xml",text.c_str());
+						text = dgettext("sumwars-xml",text.c_str());
 						CEGUI::Font* fnt = wtext->getFont();
 						
 						if (wtext->getText() != (CEGUI::utf8*) text.c_str())
@@ -711,7 +711,7 @@ void DialogueWindow::updateSpeechBubbles()
 				label = win_mgr.getWindow(stream.str());
 			}
 			
-			CEGUI::String cstring = (CEGUI::utf8*) dgettext("sumwars_xml",it->first.c_str());
+			CEGUI::String cstring = (CEGUI::utf8*) dgettext("sumwars-xml",it->first.c_str());
 			
 			// Anzahl Antworten bei Voting eintragen
 			if (question->m_weighted_answers.count(nr) > 0)
