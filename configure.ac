@@ -8,7 +8,7 @@ AC_CONFIG_SRCDIR([src/core/pathfind.h])
 AC_CONFIG_HEADERS([config.h])
 
 # Check packages (DEPS_CFLAGS and DEPS_LIBS for Makefile.am)
-PKG_CHECK_MODULES([DEPS], [OGRE >= 1.5.0 OIS CEGUI CEGUI-OGRE RakNet freealut openal lua5.1 vorbisfile])
+PKG_CHECK_MODULES([DEPS], [OGRE >= 1.4.0 OIS CEGUI CEGUI-OGRE RakNet freealut openal lua5.1 vorbisfile])
 AC_SUBST(DEPS_CFLAGS)
 AC_SUBST(DEPS_LIBS)
 
