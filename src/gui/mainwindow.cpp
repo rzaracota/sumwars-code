@@ -149,6 +149,7 @@ bool MainWindow::setupMainMenu()
 				\n Hans Wulf (Lastmerlin) \
 				\n\nStory: \
 				\n Steffen Schönefeldt (Nori) \
+				\n Andreas Schönefeldt \
 				\n\nWebsite: \
 				\n Andreas Schönefeldt \
 				\n Michael Kempf (Hangman)";
