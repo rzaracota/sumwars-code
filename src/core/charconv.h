@@ -1,9 +1,18 @@
 #ifndef CHARCONV_H
 #define CHARCONV_H
-#include "raknet/RakNetTypes.h"
+/*
+#include "RakNetTypes.h"
 #include "raknet/BitStream.h"
 #include "raknet/GetTime.h"
 #include "raknet/MessageIdentifiers.h"
+*/
+#include "PacketEnumerations.h"
+#include "RakNetworkFactory.h"
+#include "RakPeerInterface.h"
+#include "NetworkTypes.h"
+#include "BitStream.h"
+#include "GetTime.h"
+
 #include <algorithm>
 #include <string>
 #include <cstring>
@@ -208,10 +217,9 @@ class CharConv
 	}
 	
 	/**
-	 * \fn unsigned long getTimestamp()
 	 * \brief Gibt den Zeitstempel des Paketes aus
 	 */
-	unsigned long getTimestamp()
+	unsigned int getTimestamp()
 	{
 		return m_timestamp;
 	}
@@ -276,7 +284,7 @@ class CharConv
 		 * \var unsigned long m_timestamp
 		 * \brief Zeit zur das Paket erstellt bzw erhalten wurde
 		 */
-		unsigned long m_timestamp;
+		unsigned int m_timestamp;
 		
 		/**
 		 * \var std::iostream* m_stream

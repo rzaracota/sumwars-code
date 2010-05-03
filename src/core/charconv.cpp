@@ -20,7 +20,7 @@ CharConv::CharConv(int dummy)
 }
 
 CharConv::CharConv(unsigned char* data, unsigned int size)
-	: m_bitstream(data, size, false)
+	: m_bitstream((const char*) data, size, false)
 {
 	m_timestamp = RakNet::GetTime();
 	m_stream=0;
@@ -28,7 +28,7 @@ CharConv::CharConv(unsigned char* data, unsigned int size)
 }
 
 CharConv::CharConv(Packet* packet)
-	: m_bitstream(packet->data, packet->length, false)
+	: m_bitstream((const char*) packet->data, packet->length, false)
 {
 	if (packet->data[0] == ID_TIMESTAMP)
 	{

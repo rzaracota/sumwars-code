@@ -2,13 +2,26 @@
 #else
 #define NETWORK_H
 
+/*
 #include "raknet/MessageIdentifiers.h"
 #include "raknet/RakNetworkFactory.h"
 #include "raknet/RakPeerInterface.h"
 #include "raknet/RakNetTypes.h"
 #include "raknet/BitStream.h"
+*/
+#include "PacketEnumerations.h"
+#include "RakNetworkFactory.h"
+#include "RakPeerInterface.h"
+#include "NetworkTypes.h"
+#include "BitStream.h"
+#include "RakClientInterface.h"
+#include "RakServerInterface.h"
+
+#define ID_USER_PACKET_ENUM  80
+
 #include "debug.h"
 #include <queue>
+
 
 
 /**
@@ -48,13 +61,19 @@ class Network
 		 * \fn Network()
 		 * \brief Konstruktor
 		 */
-		Network();
+		Network()
+		{
+			
+		}
 		
 		/**
 		 * \fn virtual ~Network()
 		 * \brief Destruktor
 		 */
-		virtual ~Network();
+		virtual ~Network()
+		{
+			
+		}
 		
 		
 		/**
@@ -73,7 +92,7 @@ class Network
 		 * \fn void kill()
 		 * \brief Schliesst das die Netzwerkverbindung
 		 */
-		virtual void kill();
+		virtual void kill() =0;
 		
 		/**
 		 * \fn  void update()
@@ -123,11 +142,8 @@ class Network
 		 * \param packet zu loeschendes Paket
 		 * \brief Loescht ein nicht mehr benoetigtes Paket. Um Speicherlecks zu vermeiden sollten alle Paket auf mit dieser Funktion entfernt werden
 		 */
-		void deallocatePacket(Packet* packet)
-		{
-			m_peer->DeallocatePacket(packet);
-		}
-		
+		virtual void deallocatePacket(Packet* packet) =0;
+	
 		/**
 		 * \fn NetStatus getSlotStatus( int slot=0 )
 		 * \brief Liefert den Status eines Server-Slots
@@ -138,12 +154,6 @@ class Network
 		virtual NetStatus getSlotStatus( int slot=0 ) =0;
 		
 		
-	protected:
-		/**
-		 * \var RakPeerInterface* m_peer
-		 * \brief Netzwerkschnittstelle von RakNet
-		 */
-		RakPeerInterface* m_peer;
 		
 };
 

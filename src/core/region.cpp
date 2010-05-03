@@ -2204,12 +2204,14 @@ void Region::setRegionData(CharConv* cv,WorldObjectMap* players)
 			delete k->second->getItem();
 		delete k->second;
 	}
+	m_drop_items->clear();
 	
 	std::list<Trigger*>::iterator l;
 	for (l = m_triggers.begin(); l != m_triggers.end(); ++l)
 	{
 		delete *l;
 	}
+	m_triggers.clear();
 
 	// statische Objekte einlesen
 	short nr_stat;

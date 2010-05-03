@@ -4,28 +4,29 @@
 ClientNetwork::ClientNetwork()
 	: Network()
 {
-	SocketDescriptor sock;
-	
-	m_peer->Startup(1,10,&sock, 1);
-	
-	m_server_address = UNASSIGNED_SYSTEM_ADDRESS;
+	m_peer = RakNetworkFactory::GetRakClientInterface();
+	m_server_address = UNASSIGNED_PLAYER_ID;
 	m_status = NET_CLOSE;
 }
 
 ClientNetwork::~ClientNetwork()
 {
+	RakNetworkFactory::DestroyRakClientInterface(m_peer);
 }
 
 void ClientNetwork::serverConnect( char* hostname, int req_port )
 {
-	m_peer ->Connect(hostname, req_port, 0, 0);
-	
+	bool success = m_peer ->Connect(hostname, req_port, req_port+1, 0,0);
+	if (!success)
+	{
+		m_status = NET_ERROR;
+	}
 }
 
 void ClientNetwork::serverDisconnect()
 {
 	DEBUG("closing connection");
-	m_peer->CloseConnection(m_server_address,true);
+	m_peer->Disconnect(0);
 	// warten, damit die disconnect meldung ankommt
 #ifdef WIN32
 	Sleep( 30 );
@@ -35,7 +36,12 @@ void ClientNetwork::serverDisconnect()
 	m_status = NET_CLOSE;
 }
 
-
+void ClientNetwork::kill()
+{
+	m_peer->Disconnect(0);
+	RakNetworkFactory::DestroyRakClientInterface(m_peer);
+	m_peer =0;
+}
 
 
 void ClientNetwork::update()
@@ -53,32 +59,35 @@ void ClientNetwork::update()
 		{
 			switch(id)
 			{
-				case ID_ALREADY_CONNECTED:
+// bei altem Raknet nicht definiert
+//				case ID_ALREADY_CONNECTED:
 				case ID_CONNECTION_REQUEST_ACCEPTED:
 					m_status = NET_CONNECTED;
 					while (!m_received_packets.empty())
 						m_received_packets.pop();
-					m_server_address = packet->systemAddress;
+					m_server_address = packet->playerId;
 					DEBUG("connection accepted");
 					break;
-					
+// bei altem Raknet nicht definiert
+					/*
 				case ID_CONNECTION_ATTEMPT_FAILED:
 					DEBUG("connection refused");
 					m_status =NET_REJECTED;
-					m_server_address = UNASSIGNED_SYSTEM_ADDRESS;
+					m_server_address = UNASSIGNED_PLAYER_ID;
 					break;
+					*/
 					
 				case ID_NO_FREE_INCOMING_CONNECTIONS:
 					DEBUG("no free slots on server");
 					m_status =NET_SLOTS_FULL;
-					m_server_address = UNASSIGNED_SYSTEM_ADDRESS;
+					m_server_address = UNASSIGNED_PLAYER_ID;
 					break;
 				
 				case ID_CONNECTION_LOST:
 				case ID_DISCONNECTION_NOTIFICATION:
 					DEBUG("connection timed out");
 					m_status =NET_TIMEOUT;
-					m_server_address = UNASSIGNED_SYSTEM_ADDRESS;
+					m_server_address = UNASSIGNED_PLAYER_ID;
 					break;
 					
 				default:
@@ -114,7 +123,7 @@ void ClientNetwork::popSlotMessage( Packet* &data,int slot)
 
 void ClientNetwork::pushSlotMessage( RakNet::BitStream * data,int slot,PacketPriority prio,PacketReliability reliability)
 {
-	m_peer->Send(data,prio,reliability , 0,m_server_address, false);
+	m_peer->Send(data,prio,reliability , true);
 }
 
 NetStatus ClientNetwork::getSlotStatus(int slot)
