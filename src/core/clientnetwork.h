@@ -52,6 +52,12 @@ class ClientNetwork : public Network
 	 * \brief Schliesst die eventuelle Verbindungen zum Server
 	 */
 	void serverDisconnect();
+	
+	/**
+	 * \fn void kill()
+	 * \brief Schliesst das die Netzwerkverbindung
+	 */
+	virtual void kill();
 
 
 	/**
@@ -100,6 +106,16 @@ class ClientNetwork : public Network
 	 *
 	 */
 	virtual NetStatus getSlotStatus( int slot=0 );
+	
+	/**
+	 * \fn void deallocatePacket(Packet* packet)
+	 * \param packet zu loeschendes Paket
+	 * \brief Loescht ein nicht mehr benoetigtes Paket. Um Speicherlecks zu vermeiden sollten alle Paket auf mit dieser Funktion entfernt werden
+	 */
+	virtual void deallocatePacket(Packet* packet)
+	{
+		m_peer->DeallocatePacket(packet);
+	}
 
 
 
@@ -118,12 +134,13 @@ class ClientNetwork : public Network
 	 */
 	NetStatus m_status;
 
+	RakClientInterface* m_peer;
 
 	/**
-	 * \var SystemAddress m_server_address
+	 * \var PlayerID m_server_address
 	 * \brief Adresse des Servers
 	 */
-	SystemAddress m_server_address;
+	PlayerID m_server_address;
 };
 
 #endif

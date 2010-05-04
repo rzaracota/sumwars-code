@@ -19,12 +19,12 @@ class NetworkSlot
 {
 	public:
 		/**
-		 * \fn NetworkSlot(SystemAddress client_address,RakPeerInterface* peer);
+		 * \fn NetworkSlot(PlayerID client_address,RakServerInterface* peer);
 		 * \brief Initialisiert den Slot
 		 * \param client_address Netzwerkadresse des angeschlossenen Client
 		 * \param peer Interface von RakNet
 		 */
-		NetworkSlot(SystemAddress client_address,RakPeerInterface* peer);
+		NetworkSlot(PlayerID client_address,RakServerInterface* peer);
 
 		/**
 		 * \fn ~NetworkSlot()
@@ -50,12 +50,12 @@ class NetworkSlot
 		 * \brief Gibt die Anzahl der empfangenen, noch nicht abgeholten Pakete aus
 		 */
 		int numberMessages();
-
+		
 		/**
-		 * \fn SystemAddress getSystemAddress()
+		 * \fn PlayerID getPlayerID()
 		 * \brief Gibt die Adresse des mit diesem Slot verbundenen Client aus
 		 */
-		SystemAddress getSystemAddress()
+		PlayerID getPlayerID()
 		{
 			return m_system_address;
 		}
@@ -87,16 +87,16 @@ class NetworkSlot
 		PacketQueue m_received_packets;
 
 		/**
-		 * \var SystemAddress m_system_address
+		 * \var PlayerID m_system_address
 		 * \brief Adresse des Clients der zu diesem Slot gehoert
 		 */
-		SystemAddress m_system_address;
+		PlayerID m_system_address;
 
 		/**
-		 * \var RakPeerInterface* m_peer
+		 * \var RakServerInterface* m_peer
 		 * \brief Netzwerkschnittstelle von RakNet
 		 */
-		RakPeerInterface* m_peer;
+		RakServerInterface* m_peer;
 
 		/**
 		 * \var NetStatus m_status
@@ -134,7 +134,13 @@ class ServerNetwork: public Network
 		*/
 		virtual NetStatus init( int auth_port );
 
+		/**
+		 * \fn void kill()
+		 * \brief Schliesst das die Netzwerkverbindung
+		 */
+		virtual void kill();
 
+		
 
 		/**
 		 * \fn NetStatus getSlotStatus( int slot=0 )
@@ -194,7 +200,15 @@ class ServerNetwork: public Network
 		*/
 		int popNewLoginSlot();
 
-
+		/**
+		 * \fn void deallocatePacket(Packet* packet)
+		 * \param packet zu loeschendes Paket
+		 * \brief Loescht ein nicht mehr benoetigtes Paket. Um Speicherlecks zu vermeiden sollten alle Paket auf mit dieser Funktion entfernt werden
+ 		*/
+		virtual void deallocatePacket(Packet* packet)
+		{
+			m_peer->DeallocatePacket(packet);
+		}
 
 
 	private:
@@ -212,18 +226,18 @@ class ServerNetwork: public Network
 		unsigned char getPacketIdentifier(Packet *p);
 
 		/**
-		 * \fn int insertNewSlot(SystemAddress addr)
+		 * \fn int insertNewSlot(PlayerID addr)
 		 * \brief Fuegt einen neuen Client hinzu
 		 * \param addr Netzwerkadresse des Client
 		 */
-		int insertNewSlot(SystemAddress addr);
+		int insertNewSlot(PlayerID addr);
 
 		/**
-		 * \fn int getSlotByAddress(SystemAddress address)
+		 * \fn int getSlotByAddress(PlayerID address)
 		 * \brief ermittelt auf der Netzwerkadresse einen Client den Slot auf dem er angemeldet ist
 		 * \param address Netzwerkadresse des Client
 		 */
-		int getSlotByAddress(SystemAddress address);
+		int getSlotByAddress(PlayerID address);
 
 		/**
 		* \var m_active
@@ -253,7 +267,7 @@ class ServerNetwork: public Network
 		std::queue<int> m_new_login_slots;
 
 
-
+		RakServerInterface* m_peer;
 };
 
 

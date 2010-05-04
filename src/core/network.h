@@ -2,13 +2,26 @@
 #else
 #define NETWORK_H
 
+/*
 #include "raknet/MessageIdentifiers.h"
 #include "raknet/RakNetworkFactory.h"
 #include "raknet/RakPeerInterface.h"
 #include "raknet/RakNetTypes.h"
 #include "raknet/BitStream.h"
+*/
+#include "raknet/PacketEnumerations.h"
+#include "raknet/RakNetworkFactory.h"
+#include "raknet/RakPeerInterface.h"
+#include "raknet/NetworkTypes.h"
+#include "raknet/BitStream.h"
+#include "raknet/RakClientInterface.h"
+#include "raknet/RakServerInterface.h"
+
+#define ID_USER_PACKET_ENUM  80
+
 #include "debug.h"
 #include <queue>
+
 
 
 /**
@@ -48,15 +61,21 @@ class Network
 		 * \fn Network()
 		 * \brief Konstruktor
 		 */
-		Network();
-		
+		Network()
+		{
+
+		}
+
 		/**
 		 * \fn virtual ~Network()
 		 * \brief Destruktor
 		 */
-		virtual ~Network();
-		
-		
+		virtual ~Network()
+		{
+
+		}
+
+
 		/**
 		 * \fn NetStatus init( int auth_port )
 		 * \brief Initialisiert den Server, oeffnet die Netzwerkschnittstelle
@@ -68,45 +87,45 @@ class Network
 		{
 			return NET_OK;
 		};
-		
+
 		/**
 		 * \fn void kill()
 		 * \brief Schliesst das die Netzwerkverbindung
 		 */
-		virtual void kill();
-		
+		virtual void kill() =0;
+
 		/**
 		 * \fn  void update()
 		 * \brief Sendet / Empfaengt die Daten
 		 */
 		virtual void update()=0;
-		
+
 		/**
 		 * \fn unsigned char getPacketIdentifier(Packet *p)
 		 * \param p Paket
 		 * \brief Extrahier aus einem Packet die Identifikationsnummer
 		 */
 		unsigned char getPacketIdentifier(Packet *p);
-		
+
 		/**
 		 * \fn virtual int numberSlotMessages(int slot=0) =0;
-		 * \param slot Nummer des Slots dessen Paketanzahl abgefragt wird 
+		 * \param slot Nummer des Slots dessen Paketanzahl abgefragt wird
 		 * \brief Anzahl der Packete im Empfangspuffer
 		 * \return Anzahl der Packete
 		 *
 		 * Ist der Slot ungeultig wird Null geliefert, sonst die Anzahl der Packete im Empfangspuffers
 		 */
 		virtual int numberSlotMessages(int slot=0) =0;
-		
-		
+
+
 		/**
 		 * \fn void popSlotMessage(Packet* &data, int slot=0)
 		 * \brief Fuehrt net_pop_slot_message auf den Client-Slots
 		 * \param data Puffer fuer die zu kopierenden Daten
-		 * \param slot Nummer des Slots aus dem ein Paket entnommen wird 
+		 * \param slot Nummer des Slots aus dem ein Paket entnommen wird
 		 */
 		virtual void popSlotMessage( Packet* &data, int slot=0) =0;
-		
+
 		/**
 		 * \fn void pushSlotMessage( RakNet::BitStream * data,int slot=0, PacketPriority prio= HIGH_PRIORITY,PacketReliability reliability = RELIABLE )
 		 * \brief Fuehrt net_push_slot_message auf einen Server-Slots aus
@@ -117,17 +136,14 @@ class Network
 		 *
 		 */
 		virtual void pushSlotMessage( RakNet::BitStream * data, int slot=0, PacketPriority prio= HIGH_PRIORITY,PacketReliability reliability = RELIABLE) =0;
-		
+
 		/**
 		 * \fn void deallocatePacket(Packet* packet)
 		 * \param packet zu loeschendes Paket
 		 * \brief Loescht ein nicht mehr benoetigtes Paket. Um Speicherlecks zu vermeiden sollten alle Paket auf mit dieser Funktion entfernt werden
 		 */
-		void deallocatePacket(Packet* packet)
-		{
-			m_peer->DeallocatePacket(packet);
-		}
-		
+		virtual void deallocatePacket(Packet* packet) =0;
+
 		/**
 		 * \fn NetStatus getSlotStatus( int slot=0 )
 		 * \brief Liefert den Status eines Server-Slots
@@ -136,15 +152,9 @@ class Network
 		 *
 		 */
 		virtual NetStatus getSlotStatus( int slot=0 ) =0;
-		
-		
-	protected:
-		/**
-		 * \var RakPeerInterface* m_peer
-		 * \brief Netzwerkschnittstelle von RakNet
-		 */
-		RakPeerInterface* m_peer;
-		
+
+
+
 };
 
 /**

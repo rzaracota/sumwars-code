@@ -1,7 +1,7 @@
 #                                               -*- Autoconf -*-
 # Process this file with autoconf to produce a configure script.
 
-AC_PREREQ([2.6])
+AC_PREREQ([2.61])
 AC_INIT([FULL-PACKAGE-NAME], [VERSION], [BUG-REPORT-ADDRESS])
 AM_INIT_AUTOMAKE(sumwars, 0.1)
 AC_CONFIG_SRCDIR([src/core/pathfind.h])

@@ -1,6 +1,6 @@
 #include "servernetwork.h"
 
-NetworkSlot::NetworkSlot(SystemAddress client_address,RakPeerInterface* peer)
+NetworkSlot::NetworkSlot(PlayerID client_address,RakServerInterface* peer)
 {
 	m_peer = peer;
 	m_system_address = client_address;
@@ -45,10 +45,10 @@ ServerNetwork::ServerNetwork(int max_slots)
 
 NetStatus ServerNetwork::init( int auth_port )
 {
-	SocketDescriptor sock(auth_port,0);
-
-	m_peer->Startup(m_max_slots /* max. Anzahl Verbindungen*/, 10/*sleep time*/, &sock, 1);
-	m_peer->SetMaximumIncomingConnections(m_max_slots);
+	m_peer = RakNetworkFactory::RakNetworkFactory::GetRakServerInterface();
+	m_peer->StartOccasionalPing ();
+	m_peer->Start(m_max_slots /* max. Anzahl Verbindungen*/,0, 10/*sleep time*/, auth_port);
+	DEBUG("listening on port %i",auth_port);
 
 	m_slots = new NetworkSlot*[m_max_slots];
 	for (int i=0;i< m_max_slots;i++)
@@ -67,7 +67,15 @@ ServerNetwork::~ServerNetwork()
 			delete m_slots[i];
 	}
 	delete[] m_slots;
-	m_peer->Shutdown(100);
+	m_peer->Disconnect(0);
+	RakNetworkFactory::DestroyRakServerInterface(m_peer);
+}
+
+void ServerNetwork::kill()
+{
+	m_peer->Disconnect(0);
+	RakNetworkFactory::DestroyRakServerInterface(m_peer);
+	m_peer =0;
 }
 
 
@@ -93,14 +101,14 @@ void ServerNetwork::update()
 	while (packet !=0)
 	{
 		id = getPacketIdentifier(packet);
-		slot = getSlotByAddress(packet->systemAddress);
+		slot = getSlotByAddress(packet->playerId);
 
 		if (id <  ID_USER_PACKET_ENUM)
 		{
 			switch(id)
 			{
 				case ID_NEW_INCOMING_CONNECTION:
-					slot = insertNewSlot(packet->systemAddress);
+					slot = insertNewSlot(packet->playerId);
 					pushNewLoginSlot(slot);
 					DEBUG("connection accepted");
 					break;
@@ -142,7 +150,7 @@ void ServerNetwork::update()
 	}
 }
 
-int  ServerNetwork::insertNewSlot(SystemAddress address)
+int  ServerNetwork::insertNewSlot(PlayerID address)
 {
 	for (int i=0;i< m_max_slots;i++)
 	{
@@ -155,11 +163,11 @@ int  ServerNetwork::insertNewSlot(SystemAddress address)
 	return -1;
 }
 
-int ServerNetwork::getSlotByAddress(SystemAddress adress)
+int ServerNetwork::getSlotByAddress(PlayerID adress)
 {
 	for (int i=0;i< m_max_slots;i++)
 	{
-		if (m_slots[i] != 0  && m_slots[i]->getSystemAddress() == adress)
+		if (m_slots[i] != 0  && m_slots[i]->getPlayerID() == adress)
 		{
 			return i;
 		}
@@ -204,7 +212,7 @@ void ServerNetwork::pushSlotMessage( RakNet::BitStream * bitStream,int slot, Pac
 	if (m_slots[slot] ==0)
 		return;
 
-	m_peer->Send(bitStream,prio,reliability , 0,m_slots[slot]->getSystemAddress(), false);
+	m_peer->Send(bitStream,prio,reliability , 0,m_slots[slot]->getPlayerID(), false);
 }
 
 int ServerNetwork::popNewLoginSlot()
