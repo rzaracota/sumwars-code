@@ -2648,7 +2648,7 @@
 				return(trigger.unit == defend_dwall_tmp.lich)
 			</Condition>
 			<Effect>
-				--defend_dwall.finished = true;
+				defend_dwall.finished = true;
 			
 				fadeIn(12000,{0.4,0.4,0.4},{1,1,1},{0.3,0.3,0.3})
 				local monsters = getMonstersInArea("areaGathering");
@@ -2663,11 +2663,58 @@
 				addCameraPosition(0, position1,-90, 65, 16);
 				addCameraPosition(1500,position2,-90, 45, 12);
 				unitSpeak(defend_dwall_tmp.lich,_("Nein! Das kann nicht sein! Ihr elenden..."),"panic")
-				startTimer("endScene", 7000);
+				
+				groupObjectsArc(getPlayers(),"locParty","locParty",3, 360);
+				
+				initDialog();
+				speakPause(7000);
+				changeTopic("demoFinished");
 			</Effect>
 		</Event>
+		<Event trigger="demoFinished" once="true">
+			<Effect>
+				addCameraPosition(1500,"locParty",-90, 55, 14);
+				--speaker1 => erklaerbaer
+				local speaker1 = getPlayers()[1]
+				local speaker2 = getSpeaker("arcopt");
+				local speaker3 = getSpeaker("priopt");
+				local speaker4 = getSpeaker("magopt");
+				if(solo())then
+					defend_dwall_tmp.soren = createObject("sorenCrystal","locParty");
+					speaker2 = defend_dwall_tmp.soren;
+				elseif(speaker2==speaker1)then
+					speaker2 = getPlayers()[2];
+				end;
+				if(speaker3==speaker2)then
+					speaker3=speaker1;
+				end;
+				if(speaker4==speaker3)then
+					speaker4=speaker2;
+				end;
+				print("speakers distributed")
+				addSpeaker(speaker1,"s1");
+				addSpeaker(speaker2,"s2");
+				addSpeaker(speaker3,"s3");
+				addSpeaker(speaker4,"s4");
+				
+				speak("s1",_("Das waere geschafft."),"wounded2")
+				speak("s4",_("Wie bitte? Das soll wohl ein Witz sein!"),"unhappy")
+				speak("s4",_("Die Verteidigung von Zwergentrutz war nur zum aufwaermen, schon vergessen?"),"unhappy")
+				speak("s1",_("Wenn du willst, dass es schneller geht, dann hilf doch einfach mit."),"grin")
+				speak("s3",_("Oder besuch mal www.sumwars.org und sieh im Forum vorbei. Kritik, Hinweise und Kommentare sind immer gern gesehen."),"thoughtful")
+				speak("s2",_("Gibt's dafuer auch Geld??"),"surprised")
+				speak("s1",_("Natuerlich nicht. Oder hast du was hierfuer bezahlt?"),"unhappy")
+				speak("s3",_("Aber die Goetter werden sich ewig deiner erinnern."),"excited")
+				speak("s1",_("Damit ist die Demo offiziell vorbei."),"amused")
+				changeTopic("endScene")
+			</Effect>
+		</Event>
+
 		<Event trigger="endScene" once="true">
 			<Effect>
+				if(defend_dwall_tmp.soren ~=nil)then
+					deleteObject(defend_dwall_tmp.soren)
+				end;
 				setCutsceneMode(false);
 			</Effect>
 		</Event>

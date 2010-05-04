@@ -36,220 +36,220 @@ msgstr ""
 
 #: ../data/npc/joringsbridge_npc.xml:121
 msgid "Ah, euch ist mein Fundbuero aufgefallen?"
-msgstr ""
+msgstr "Ah, you noticed my lost and found?"
 
 #: ../data/npc/joringsbridge_npc.xml:122
 msgid ""
 "Ich lagere hier alles, was ich so an verlorenen Gegenstaenden in und um "
 "Joringsbrueck finde."
-msgstr ""
+msgstr "Everything I find in and around Joringsbridge is stored here."
 
 #: ../data/npc/joringsbridge_npc.xml:123
 msgid ""
 "Wenn Euch etwas davon gehoert, sagt einfach Bescheid. Fuer einen geringen "
 "Finderlohn koennt Ihr es wiederhaben."
-msgstr ""
+msgstr "If something's your's just say the word. For a small reward you can have it back."
 
 #: ../data/npc/joringsbridge_npc.xml:133
 msgid ""
 "Die Verantwortung fuer Joringsbrueck zu haben ist nicht immer leicht, "
 "selbst, wenn ich genug Soldaten habe."
-msgstr ""
+msgstr "Having the responsibility for Joringsbridge is never easy, not even when I had enough soldiers."
 
 #: ../data/npc/joringsbridge_npc.xml:134
 msgid ""
 "Seit Monaten schafft irgend einer meiner Leute die beschlagnamten magischen "
 "Gegenstaende bei Seite."
-msgstr ""
+msgstr "One of my people has been diverting confiscated magical items."
 
 #: ../data/npc/joringsbridge_npc.xml:135
 msgid "Und ich bin ihm noch keinen Schritt naeher als am Anfang!"
-msgstr ""
+msgstr "And I'm not even one step closer then when I first noticed!"
 
 #: ../data/npc/joringsbridge_npc.xml:136
 msgid ""
 "(Ein Gardist schafft Gegenstaende bei Seite? Sicher nicht fuer schlechte "
 "Zeiten. Ich sollte mich mal umsehen.)"
-msgstr ""
+msgstr "(A guard is diverting items? Surely not for hard times. I should take a look around.)"
 
 #: ../data/npc/joringsbridge_npc.xml:143
 msgid "Ihr seid besser vorsichtig, wenn Ihr das Dorf verlasst."
-msgstr ""
+msgstr "You had better been careful when leaving the village."
 
 #: ../data/npc/joringsbridge_npc.xml:144
 msgid ""
 "Jetzt, wo fast alle Truppen an den Grenzen stehen, haben wir es mit einer "
 "unueberschaubaren Flut von Goblins zu tun."
-msgstr ""
+msgstr "Now, with almost all troops standing at the borders, we have to deal with an unmanageable flood of goblins."
 
 #: ../data/npc/joringsbridge_npc.xml:145
 msgid ""
 "Und alle, die nicht in die Armee eingezogen wurden, scheinen das "
 "Banditendasein fuer sich entdeckt zu haben."
-msgstr ""
+msgstr "And everyone not drafted for the army seems to have discovered the happy bandit life for themselves."
 
 #: ../data/npc/joringsbridge_npc.xml:146
 msgid "Danke fuer die Warnung, Sergeant"
-msgstr ""
+msgstr "Thanks for the warning, sergeant."
 
 #: ../data/npc/joringsbridge_npc.xml:158
 msgid ""
 "Ihr seid die Unterstuetzung, die Lord Magister Windklaue geschickt hat, wie?"
-msgstr ""
+msgstr "You are the backup sent by Lord Master Windclaw, arn't you?"
 
 #: ../data/npc/joringsbridge_npc.xml:159
 msgid ""
 "Ich empfehle Euch eine schnelle Weiterreise. In diesem Dorf sind schon "
 "Menschen an Langeweile gestorben."
-msgstr ""
+msgstr "I suggest you quickly journey on. There have been people dieing by boredom in this village. "
 
 #: ../data/npc/joringsbridge_npc.xml:160
 msgid "Wer weiss, ob Eure Konstitution Euch dagegen auch hilft?"
-msgstr ""
+msgstr "Who knows if your physique will help you against that, too?"
 
 #: ../data/quests/besieged_farm.xml:5
 msgid ""
 "Die Bauern sind gerettet, die Goblins erschlagen und die Dienstleistung "
 "bezahlt. Was will man mehr?"
-msgstr ""
+msgstr "The peasants are rescued, the goblins slayn and the service paid. What more can you ask for?"
 
 #: ../data/quests/besieged_farm.xml:7
 msgid ""
 "Die Bauern sind gerettet und die Goblins erschlagen. Zeit, den Lohn fuer all "
 "die Muehen in Joringsbrueck abzuholen."
-msgstr ""
+msgstr "The peasants are rescued and the goblins slayn. Time to collect the reward for the trouble in Joringsbridge."
 
 #: ../data/quests/besieged_farm.xml:9
 msgid ""
 "Die Goblins rund um Brons Farm weilen nicht mehr unter den Lebenden. Ich "
 "sollte mal an die Tuer klopfen und sehen, dass alles in Ordnung ist. Keine "
 "Bauern, kein Geld."
-msgstr ""
+msgstr "The goblins around Bron's farn are not amoung the living anymore. I should knock at the door and make sure, everything is all right. No peasants, no money."
 
 #: ../data/quests/besieged_farm.xml:11
 msgid ""
 "Der Hof eines Bauern namens Michel Bron wird von Goblins belagert. Seine "
 "Familie braucht Hilfe - schnell."
-msgstr ""
+msgstr "The farm of a peasant named Michel Bron is besieged by goblins. His family needs help - fast."
 
 #: ../data/quests/besieged_farm.xml:23
 msgid "Ah! Habt ihr doch noch Lust bekommen, Euch das Gold zu verdienen?"
-msgstr ""
+msgstr "Ah! Are you feeling like earning the money after all?"
 
 #: ../data/quests/besieged_farm.xml:25
 msgid "Glaubt ja nicht, ich habe Euch nicht dort herumlungern sehen."
-msgstr ""
+msgstr "Don't think, I haven't seen you hanging around back there."
 
 #: ../data/quests/besieged_farm.xml:27
 msgid ""
 "Glaubt ja nicht, ich habe Euch und Euren Freund nicht dort herumlungern "
 "sehen."
-msgstr ""
+msgstr "Don't think, I haven't seen you and your friend hanging around back there."
 
 #: ../data/quests/besieged_farm.xml:29
 msgid ""
 "Glaubt ja nicht, ich habe Euch und Eure Freunde nicht dort herumlungern "
 "sehen."
-msgstr ""
+msgstr "Don't think, I haven't seen you and your friends hanging around back there."
 
 #: ../data/quests/besieged_farm.xml:31
 msgid "Aber ich will mich nicht beschweren."
-msgstr ""
+msgstr "But I don't want to complain."
 
 #: ../data/quests/besieged_farm.xml:32
 msgid ""
 "Ihr wisst, wie es laeuft: Geht in die noerdliche Wiese und vertreibt die "
 "Goblins, die sich um Brons Hof herum aufhalten."
-msgstr ""
+msgstr "You know the drill: Get to the Northern Meadow and drive away the goblins around Bron's farm."
 
 #: ../data/quests/besieged_farm.xml:33
 msgid ""
 "Wie Ihr das anstellt, ist mir egal, und wenn Ihr sie alle roh verschlingt."
-msgstr ""
+msgstr "I don't care, how you do it, and if you gobble them raw."
 
 #: ../data/quests/besieged_farm.xml:34
 msgid "Nur ein Scherz."
-msgstr ""
+msgstr "Just kidding."
 
 #: ../data/quests/besieged_farm.xml:35
 msgid "Wenn Ihr es geschafft habt, kommt Ihr zu mir zurueck."
-msgstr ""
+msgstr "When you're done come back to me."
 
 #: ../data/quests/besieged_farm.xml:36
 msgid "Schon unterwegs."
-msgstr ""
+msgstr "On my way."
 
 #: ../data/quests/besieged_farm.xml:88
 msgid ""
 "Das sollten genug Goblins gewesen sein. Ich sehe besser mal nach Brons "
 "Familie."
-msgstr ""
+msgstr "That should have been enough goblins. I better look after Bron's family."
 
 #: ../data/quests/besieged_farm.xml:111
 msgid "Die Goblins sind weg. Geht es euch gut?"
-msgstr ""
+msgstr "The goblins are away. Are you allright?"
 
 #: ../data/quests/besieged_farm.xml:112 ../data/quests/rescue_willard.xml:224
 msgid "Ich danke euch."
-msgstr ""
+msgstr "Thank you very much."
 
 #: ../data/quests/besieged_farm.xml:113
 msgid "Leider koennen wir euch nicht hereinbitten."
-msgstr ""
+msgstr "Sadly I cannot ask you in."
 
 #: ../data/quests/besieged_farm.xml:114
 msgid "Unsere Barrikaden sind recht schwer."
-msgstr ""
+msgstr "Our barricade is quite heavy."
 
 #: ../data/quests/besieged_farm.xml:115
 msgid "Aber ich werde meinem Mann Bescheid geben, dass es uns gut geht."
-msgstr ""
+msgstr "But I will give word to my husband that we are alive and well."
 
 #: ../data/quests/besieged_farm.xml:116
 msgid "Wie denn das?"
-msgstr ""
+msgstr "How so?"
 
 #: ../data/quests/besieged_farm.xml:117
 msgid ""
 "Mit einem Avaeras-Kristall natuerlich. Er wird schon seit Generationen in "
 "meiner Familie vererbt."
-msgstr ""
+msgstr "With a crytal of Avearea, of course. It's been handed down in my family for generations."
 
 #: ../data/quests/besieged_farm.xml:118
 msgid "Natuerlich. Dumm von mir."
-msgstr ""
+msgstr "Of course. Silly of me."
 
 #: ../data/quests/besieged_farm.xml:120
 msgid "Also ehrlich, "
-msgstr ""
+msgstr "Realy now. Did you think she'd use carrier pigeons in this day and age?"
 
 #: ../data/quests/besieged_farm.xml:122
 msgid "Lass uns einfach das Geld abholen gehen."
-msgstr ""
+msgstr "Let's just go collect the money."
 
 #: ../data/quests/besieged_farm.xml:124
 msgid "Lasst uns einfach das Geld abholen gehen."
-msgstr ""
+msgstr "Let's just go collect the money."
 
 #: ../data/quests/besieged_farm.xml:141
 msgid "Es ist vollbracht."
-msgstr ""
+msgstr "It's done."
 
 #: ../data/quests/besieged_farm.xml:142
 msgid "Hab ich schon gehoert."
-msgstr ""
+msgstr "I've already heard of it."
 
 #: ../data/quests/besieged_farm.xml:143
 msgid "Michel ist gerade in der Schenke und besaeuft sich auf Euer Wohl."
-msgstr ""
+msgstr "Michel is in the tavern and getting plastered. All in honor of you'r bravery, of course."
 
 #: ../data/quests/besieged_farm.xml:144
 msgid "Aber das soll nicht mehr Eure Sorge sein."
-msgstr ""
+msgstr "But that shall be of no concern to you."
 
 #: ../data/quests/besieged_farm.xml:145
 msgid "Hier habt ihr das Geld."
-msgstr ""
+msgstr "Here's the money."
 
 #: ../data/quests/fortify_dwarfenwall.xml:9 ../data/quests/goblins.xml:9
 #: ../data/quests/scene6.xml:9 ../data/quests/scene7.xml:9
