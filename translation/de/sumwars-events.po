@@ -3,11 +3,12 @@
 # This file is distributed under the same license as the sumwars package.
 # Michael <michael@localhost.localdomain>, 2009.
 #
+#: ../data/quests/siegeOfDwarfenwall.xml:2206
 msgid ""
 msgstr ""
 "Project-Id-Version: sumwars 0.01\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-05 21:04+0100\n"
+"POT-Creation-Date: 2010-05-04 17:08+0200\n"
 "PO-Revision-Date: 2009-03-10 17:28+0100\n"
 "Last-Translator: Michael <michael@localhost.localdomain>\n"
 "Language-Team: German <translation-team-de@lists.sourceforge.net>\n"
@@ -16,76 +17,93 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../data/npc/joringsbridge_npc.xml:113
+#: ../data/npc/dwarfcastle.xml:117
+msgid "Ganz schoen viele Kisten..."
+msgstr ""
+
+#: ../data/npc/dwarfcastle.xml:118
+msgid "Das Chaos hat mir mein Vorgaenger ueberlassen."
+msgstr ""
+
+#: ../data/npc/dwarfcastle.xml:119
+msgid "Sind alles alte Armeebestaende."
+msgstr ""
+
+#: ../data/npc/dwarfcastle.xml:120
+msgid ""
+"Wenn Euch was davon gefaellt zeigt drauf und ich nenne Euch einen Preis."
+msgstr ""
+
+#: ../data/npc/joringsbridge_npc.xml:121
 msgid "Ah, euch ist mein Fundbuero aufgefallen?"
 msgstr ""
 
-#: ../data/npc/joringsbridge_npc.xml:114
+#: ../data/npc/joringsbridge_npc.xml:122
 msgid ""
 "Ich lagere hier alles, was ich so an verlorenen Gegenstaenden in und um "
 "Joringsbrueck finde."
 msgstr ""
 
-#: ../data/npc/joringsbridge_npc.xml:115
+#: ../data/npc/joringsbridge_npc.xml:123
 msgid ""
 "Wenn Euch etwas davon gehoert, sagt einfach Bescheid. Fuer einen geringen "
 "Finderlohn koennt Ihr es wiederhaben."
 msgstr ""
 
-#: ../data/npc/joringsbridge_npc.xml:125
+#: ../data/npc/joringsbridge_npc.xml:133
 msgid ""
 "Die Verantwortung fuer Joringsbrueck zu haben ist nicht immer leicht, "
 "selbst, wenn ich genug Soldaten habe."
 msgstr ""
 
-#: ../data/npc/joringsbridge_npc.xml:126
+#: ../data/npc/joringsbridge_npc.xml:134
 msgid ""
 "Seit Monaten schafft irgend einer meiner Leute die beschlagnamten magischen "
 "Gegenstaende bei Seite."
 msgstr ""
 
-#: ../data/npc/joringsbridge_npc.xml:127
+#: ../data/npc/joringsbridge_npc.xml:135
 msgid "Und ich bin ihm noch keinen Schritt naeher als am Anfang!"
 msgstr ""
 
-#: ../data/npc/joringsbridge_npc.xml:128
+#: ../data/npc/joringsbridge_npc.xml:136
 msgid ""
 "(Ein Gardist schafft Gegenstaende bei Seite? Sicher nicht fuer schlechte "
 "Zeiten. Ich sollte mich mal umsehen.)"
 msgstr ""
 
-#: ../data/npc/joringsbridge_npc.xml:135
+#: ../data/npc/joringsbridge_npc.xml:143
 msgid "Ihr seid besser vorsichtig, wenn Ihr das Dorf verlasst."
 msgstr ""
 
-#: ../data/npc/joringsbridge_npc.xml:136
+#: ../data/npc/joringsbridge_npc.xml:144
 msgid ""
 "Jetzt, wo fast alle Truppen an den Grenzen stehen, haben wir es mit einer "
 "unueberschaubaren Flut von Goblins zu tun."
 msgstr ""
 
-#: ../data/npc/joringsbridge_npc.xml:137
+#: ../data/npc/joringsbridge_npc.xml:145
 msgid ""
 "Und alle, die nicht in die Armee eingezogen wurden, scheinen das "
 "Banditendasein fuer sich entdeckt zu haben."
 msgstr ""
 
-#: ../data/npc/joringsbridge_npc.xml:138
+#: ../data/npc/joringsbridge_npc.xml:146
 msgid "Danke fuer die Warnung, Sergeant"
 msgstr ""
 
-#: ../data/npc/joringsbridge_npc.xml:150
+#: ../data/npc/joringsbridge_npc.xml:158
 msgid ""
 "Ihr seid die Unterstuetzung, die Lord Magister Windklaue geschickt hat, wie?"
 msgstr ""
 
-#: ../data/npc/joringsbridge_npc.xml:151
+#: ../data/npc/joringsbridge_npc.xml:159
 msgid ""
 "Ich empfehle Euch eine schnelle Weiterreise. In diesem Dorf sind schon "
 "Menschen an Langeweile gestorben."
 msgstr ""
 
-#: ../data/npc/joringsbridge_npc.xml:152
+#: ../data/npc/joringsbridge_npc.xml:160
 msgid "Wer weiss, ob Eure Konstitution Euch dagegen auch hilft?"
 msgstr ""
 
@@ -233,951 +251,886 @@ msgstr ""
 msgid "Hier habt ihr das Geld."
 msgstr ""
 
-#: ../data/quests/defend_dwarfenfroward.xml:9
-#: ../data/quests/fortify_dwarfenwall.xml:5 ../data/quests/goblins.xml:9
+#: ../data/quests/fortify_dwarfenwall.xml:9 ../data/quests/goblins.xml:9
 #: ../data/quests/scene6.xml:9 ../data/quests/scene7.xml:9
-#: ../data/quests/slay_the_lich.xml:10 ../data/quests/theTrader.xml:4
+#: ../data/quests/siegeOfDwarfenwall.xml:4 ../data/quests/slay_the_lich.xml:10
+#: ../data/quests/theTrader.xml:4
 msgid "Quest finished"
 msgstr "Quest abgeschlossen"
 
-#: ../data/quests/defend_dwarfenfroward.xml:11
-#: ../data/quests/fortify_dwarfenwall.xml:7 ../data/quests/scene6.xml:11
-#: ../data/quests/scene7.xml:11 ../data/quests/slay_the_lich.xml:12
-#: ../data/quests/tutorial.xml:23
+#: ../data/quests/fortify_dwarfenwall.xml:11 ../data/quests/scene6.xml:11
+#: ../data/quests/scene7.xml:11 ../data/quests/siegeOfDwarfenwall.xml:6
+#: ../data/quests/slay_the_lich.xml:12 ../data/quests/tutorial.xml:23
 msgid "Quest description"
 msgstr ""
 
-#: ../data/quests/defend_dwarfenfroward.xml:38
-msgid "...haben meine Windelementare"
-msgstr ""
-
-#: ../data/quests/defend_dwarfenfroward.xml:39
-msgid "Na großartig. Und mit"
-msgstr ""
-
-#: ../data/quests/defend_dwarfenfroward.xml:40
-msgid "Keine Sorge. Mein Kollege"
-msgstr ""
-
-#: ../data/quests/defend_dwarfenfroward.xml:41
-msgid "Ja sicher. Auch wenn ich"
-msgstr ""
-
-#: ../data/quests/defend_dwarfenfroward.xml:42
-msgid "Verzeiht wenn ich mich so"
-msgstr ""
-
-#: ../data/quests/defend_dwarfenfroward.xml:43
-msgid "Und wer seid ihr?"
-msgstr ""
-
-#: ../data/quests/defend_dwarfenfroward.xml:44
-msgid "Die Verstärkung."
-msgstr ""
-
-#: ../data/quests/defend_dwarfenfroward.xml:45
-msgid "Sicher seid ihr das."
-msgstr ""
-
-#: ../data/quests/defend_dwarfenfroward.xml:46
-msgid "Ich glaube, dieser"
-msgstr ""
-
-#: ../data/quests/defend_dwarfenfroward.xml:47
-msgid "Das soll eure grandiose"
-msgstr ""
-
-#: ../data/quests/defend_dwarfenfroward.xml:48
-msgid "Ihr werdet den Wert unserer"
-msgstr ""
-
-#: ../data/quests/defend_dwarfenfroward.xml:49
-msgid "Was sagt ihr da?"
-msgstr ""
-
-#: ../data/quests/defend_dwarfenfroward.xml:50
-msgid "Mir persönlich gefaellt"
-msgstr ""
-
-#: ../data/quests/defend_dwarfenfroward.xml:51
-msgid "Wenn der Preis stimmt,"
-msgstr ""
-
-#: ../data/quests/defend_dwarfenfroward.xml:52
-msgid "Großartig. Einfach großartig."
-msgstr ""
-
-#: ../data/quests/defend_dwarfenfroward.xml:56
-msgid "Ich hoffe, ihr habt"
-msgstr ""
-
-#: ../data/quests/defend_dwarfenfroward.xml:57
-msgid "Macht euch keine Sorgen."
-msgstr ""
-
-#: ../data/quests/fortify_dwarfenwall.xml:42
-#: ../data/quests/fortify_dwarfenwall.xml:54
+#: ../data/quests/fortify_dwarfenwall.xml:46
+#: ../data/quests/fortify_dwarfenwall.xml:58
 msgid "Folgt uns bitte."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:113
+#: ../data/quests/fortify_dwarfenwall.xml:117
 msgid "Dieses Konzil ist auch nicht so besonders..."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:122
+#: ../data/quests/fortify_dwarfenwall.xml:126
 msgid "Na klar! Jetzt hast du wieder eine große Klappe."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:128
+#: ../data/quests/fortify_dwarfenwall.xml:132
 msgid "Warum gebe ich mich doch gleich mit deiner Gesellschaft ab?"
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:136
+#: ../data/quests/fortify_dwarfenwall.xml:140
 msgid "Scht! Streiten koennt ihr euch spaeter."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:169
+#: ../data/quests/fortify_dwarfenwall.xml:173
 msgid "Endlich sind wir da!"
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:172
+#: ../data/quests/fortify_dwarfenwall.xml:176
 msgid "(Der Raum da fuehlt sich gar nicht gut an.)"
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:174
+#: ../data/quests/fortify_dwarfenwall.xml:178
 msgid "Spürt ihr das?!! Das fühlt sich an wie-"
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:176
+#: ../data/quests/fortify_dwarfenwall.xml:180
 msgid "Scht!"
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:221
+#: ../data/quests/fortify_dwarfenwall.xml:225
 msgid "Mein Lord! Die... Gezeichneten sind jetzt da."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:222
-#: ../data/quests/fortify_dwarfenwall.xml:753
+#: ../data/quests/fortify_dwarfenwall.xml:226
+#: ../data/quests/fortify_dwarfenwall.xml:762
 msgid "Sehr gut."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:226
+#: ../data/quests/fortify_dwarfenwall.xml:230
 msgid "Er erwartet dich jetzt"
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:228
+#: ../data/quests/fortify_dwarfenwall.xml:232
 msgid "Er erwartet euch jetzt"
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:316
+#: ../data/quests/fortify_dwarfenwall.xml:320
 msgid "Eure Anwesenheit ist nicht laenger von Noeten."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:317
+#: ../data/quests/fortify_dwarfenwall.xml:321
 msgid "Aber mein Lord, das sind-"
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:319 ../data/quests/scene7.xml:29
-#: ../data/quests/theFissure.xml:395
+#: ../data/quests/fortify_dwarfenwall.xml:323 ../data/quests/scene7.xml:29
+#: ../data/quests/siegeOfDwarfenwall.xml:215
+#: ../data/quests/siegeOfDwarfenwall.xml:2529
+#: ../data/quests/theFissure.xml:420
 msgid "..."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:320
+#: ../data/quests/fortify_dwarfenwall.xml:324
 msgid "Wie ihr es wuenscht, verzeiht bitte."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:321
+#: ../data/quests/fortify_dwarfenwall.xml:325
 msgid "Jetzt komm schon, der weiß was er tut."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:326
+#: ../data/quests/fortify_dwarfenwall.xml:330
 msgid "Nette Huette!"
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:327
+#: ../data/quests/fortify_dwarfenwall.xml:331
 msgid "Naja, etwas unordentlich…"
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:328
+#: ../data/quests/fortify_dwarfenwall.xml:332
 msgid "...um nicht zu sagen: schleimig."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:329
+#: ../data/quests/fortify_dwarfenwall.xml:333
 msgid "Diese Ritualgegenstände haben auch schon bessere Zeiten gesehen."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:331
+#: ../data/quests/fortify_dwarfenwall.xml:335
 msgid "Ja, sie haben mich gewarnt, dass Ihr schwierig seid. _solo"
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:333
+#: ../data/quests/fortify_dwarfenwall.xml:337
 msgid "Ja, sie haben mich gewarnt, dass ihr schwierig seid."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:335
+#: ../data/quests/fortify_dwarfenwall.xml:339
 msgid "Schwierig?"
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:337
+#: ../data/quests/fortify_dwarfenwall.xml:341
 msgid ""
 "Da gebe ich mir solche Mühe und alles was dabei raus kommt ist \"schwierig\"."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:339
+#: ../data/quests/fortify_dwarfenwall.xml:343
 msgid ""
 "Da gibst du dir solche Mühe und alles was dabei raus kommt ist \"schwierig\"."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:340
+#: ../data/quests/fortify_dwarfenwall.xml:344
 msgid "Pft. Ich hätte große Lust den Laden abzufackeln."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:342
+#: ../data/quests/fortify_dwarfenwall.xml:346
 msgid "Ich haette große Lust den Laden abzufackeln."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:346
+#: ../data/quests/fortify_dwarfenwall.xml:350
 msgid "Bei den ganzen Waschlappen hier ist das doch kaum der Mühe wert."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:348
+#: ../data/quests/fortify_dwarfenwall.xml:352
 msgid "Andererseits..."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:350
+#: ../data/quests/fortify_dwarfenwall.xml:354
 msgid ""
 "Wenn noch mehr von Riesendinger frei kommen könnte das ein paar "
 "Schwierigkeiten machen..."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:351
+#: ../data/quests/fortify_dwarfenwall.xml:355
 msgid ""
 "Und die Chance ist recht hoch... die Monster hier haben schließlich alle "
 "ihren eigenen Kopf."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:352
+#: ../data/quests/fortify_dwarfenwall.xml:356
 msgid "Ich kenn da einen netten kleinen Bannspruch..."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:358
+#: ../data/quests/fortify_dwarfenwall.xml:362
 msgid "Wuerdet Ihr bitte kurz auf diesen Stein sehen. _solo"
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:360
+#: ../data/quests/fortify_dwarfenwall.xml:364
 msgid "Wuerdet ihr bitte kurz auf diesen Stein sehen."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:367
+#: ../data/quests/fortify_dwarfenwall.xml:371
 msgid "Ist das etwa ein... ?"
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:368
+#: ../data/quests/fortify_dwarfenwall.xml:372
 msgid "Ganz recht."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:369
+#: ../data/quests/fortify_dwarfenwall.xml:373
 msgid "Es handelt sich um einen Stein aus dem Herzen von Harads Hoelle."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:370
+#: ../data/quests/fortify_dwarfenwall.xml:374
 msgid "Wie kann es sein, dass ihr noch am Leben seid?"
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:371
+#: ../data/quests/fortify_dwarfenwall.xml:375
 msgid "In der Tat die richtige Frage."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:373
+#: ../data/quests/fortify_dwarfenwall.xml:377
 msgid "Mit einer Antwort, die Euch von euren Leiden befreien wird."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:375
+#: ../data/quests/fortify_dwarfenwall.xml:379
 msgid "Mit einer Antwort, die euch alle von euren Leiden befreien wird."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:377
+#: ../data/quests/fortify_dwarfenwall.xml:381
 msgid ""
 "Aber bevor ich sie euch gebe, muesst ihr jedoch zuerst etwas für mich tun."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:378
+#: ../data/quests/fortify_dwarfenwall.xml:382
 msgid "Moege Harad dich verfluchen!"
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:379
+#: ../data/quests/fortify_dwarfenwall.xml:383
 msgid ""
 "Ts Ts. Wie unhoeflich den Namen des Verfluchten in Akerans Hallen zu "
 "verwenden."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:380
+#: ../data/quests/fortify_dwarfenwall.xml:384
 msgid "Das ist eine verdammte Raeuberhoehle."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:381
+#: ../data/quests/fortify_dwarfenwall.xml:385
 msgid "Euch entgeht der eigentliche Punkt."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:382
+#: ../data/quests/fortify_dwarfenwall.xml:386
 msgid ""
 "Ihr solltet begreifen, dass es ganz an euch liegt, wie lange ihr unter der "
 "vollkommenen Knechtschaft des Totengottes stehen werdet."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:383
+#: ../data/quests/fortify_dwarfenwall.xml:387
 msgid ""
 "Erfuellt ihr meinen Auftrag zur Zufriedenheit Akerans und des Konzils, habe "
 "ich die Macht euch aus seine Klauen zu befreien."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:384
+#: ../data/quests/fortify_dwarfenwall.xml:388
 msgid "Für immer."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:385
-msgid "If not, however..."
+#: ../data/quests/fortify_dwarfenwall.xml:389
+msgid "Wenn nicht, jedoch..."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:387
+#: ../data/quests/fortify_dwarfenwall.xml:391
 msgid "Hab ich schon tausend Mal gehoert. Spar dir die Rede."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:389
+#: ../data/quests/fortify_dwarfenwall.xml:393
 msgid "Das kennen wir schon, also spart dir die langen Reden."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:394
+#: ../data/quests/fortify_dwarfenwall.xml:398
 msgid "Wie ihr es wuenscht."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:395
+#: ../data/quests/fortify_dwarfenwall.xml:399
 msgid ""
 "Doch ich sollte euch warnen, der Auftrag ist recht gefaehrlich und ihr "
 "werdet wahrscheinlich mehr als einmal sterben."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:396
+#: ../data/quests/fortify_dwarfenwall.xml:400
 msgid "Der Fluch von Harad muss ja irgend einen Vorteil haben."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:397
+#: ../data/quests/fortify_dwarfenwall.xml:401
 msgid "Bis auf die Schmerzen..."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:399
+#: ../data/quests/fortify_dwarfenwall.xml:403
 msgid "Selbst hier musst du noch jammern."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:402
+#: ../data/quests/fortify_dwarfenwall.xml:406
 msgid "Ihr seid in der Tat ein Haufen schwieriger Gestalten."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:404
+#: ../data/quests/fortify_dwarfenwall.xml:408
 msgid "Ihr seid in der Tat eine schwierige Gestalt"
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:406
+#: ../data/quests/fortify_dwarfenwall.xml:410
 msgid "Langsam macht er mich wuetend"
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:408
+#: ../data/quests/fortify_dwarfenwall.xml:412
 msgid "Friede!"
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:411
+#: ../data/quests/fortify_dwarfenwall.xml:415
 msgid "Armselige Gestalt!"
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:412
+#: ../data/quests/fortify_dwarfenwall.xml:416
 msgid "Zuerst muesst Ihr ganz offensichtlich Manieren lernen. _solo"
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:414
+#: ../data/quests/fortify_dwarfenwall.xml:418
 msgid "Armselige Gestalten!"
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:415
+#: ../data/quests/fortify_dwarfenwall.xml:419
 msgid "Zuerst muesst ihr ganz offensichtlich Manieren lernen."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:417
+#: ../data/quests/fortify_dwarfenwall.xml:421
 msgid "Betrachtet es einfach als kleine Gefaelligkeit:"
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:418
+#: ../data/quests/fortify_dwarfenwall.xml:422
 msgid ""
 "Vor eurem eigentlichen Auftrag geht ihr als Verstaerkung nach Zwergentrutz."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:419
+#: ../data/quests/fortify_dwarfenwall.xml:423
 msgid ""
 "Zeigt den Untoten dort, wer tatsaechlich der Liebling des Totengottes ist."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:420
+#: ../data/quests/fortify_dwarfenwall.xml:424
 msgid "Das schmeckt wie Ausbeutung."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:421
+#: ../data/quests/fortify_dwarfenwall.xml:425
 msgid "Außerdem folgen Nekromanten nicht Harad."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:423
+#: ../data/quests/fortify_dwarfenwall.xml:427
 msgid ""
 "Unter allen miesen Ratten, für die ich schon die Kastanien aus dem Feuer "
 "geholt habe"
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:424
+#: ../data/quests/fortify_dwarfenwall.xml:428
 msgid "rangiert dieser Robenwicht ziemlich weit an der Spitze."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:426
+#: ../data/quests/fortify_dwarfenwall.xml:430
 msgid ""
 "Ich verstehe auch nicht, warum wir hier nach seiner Pfeife tanzen. Er ist "
 "doch schließlich-"
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:427
+#: ../data/quests/fortify_dwarfenwall.xml:431
 msgid "Nur ein Mensch!!"
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:431
+#: ../data/quests/fortify_dwarfenwall.xml:435
 msgid "Ihr verkennt ganz offensichtlich eure Position."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:432
+#: ../data/quests/fortify_dwarfenwall.xml:436
 msgid ""
 "Was denkt ihr wohl, was geschieht, wenn ihr in dieser Stadt erkannt werdet?"
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:433
+#: ../data/quests/fortify_dwarfenwall.xml:437
 msgid ""
 "Wir wissen alles ueber eure akeranverfluchte Art und niemand waere dumm "
 "genug, euch zu toeten, dass koennt ihr mir glauben."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:436
+#: ../data/quests/fortify_dwarfenwall.xml:440
 msgid "Weiterhin patzig sein?"
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:437 ../data/quests/goblins.xml:37
+#: ../data/quests/fortify_dwarfenwall.xml:441 ../data/quests/goblins.xml:37
 #: ../data/quests/rob_the_robber.xml:36 ../data/quests/rob_the_robber.xml:88
 msgid "Yes"
 msgstr "Ja"
 
-#: ../data/quests/fortify_dwarfenwall.xml:438 ../data/quests/goblins.xml:38
+#: ../data/quests/fortify_dwarfenwall.xml:442 ../data/quests/goblins.xml:38
 #: ../data/quests/rob_the_robber.xml:37 ../data/quests/rob_the_robber.xml:89
 msgid "No"
 msgstr "Nein"
 
-#: ../data/quests/fortify_dwarfenwall.xml:449
+#: ../data/quests/fortify_dwarfenwall.xml:453
 msgid "Ihr haltet euch wohl für besonders mächtig und gerissen?"
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:451
+#: ../data/quests/fortify_dwarfenwall.xml:455
 msgid "Sicherlich hat er sein Wissen hier irgendwo aufgeschrieben."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:452
+#: ../data/quests/fortify_dwarfenwall.xml:456
 msgid "Wir koennen danach suchen, sobald er tot ist."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:454
+#: ../data/quests/fortify_dwarfenwall.xml:458
 msgid "Eine guenstige Gelegenheit. In der Tat."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:457
+#: ../data/quests/fortify_dwarfenwall.xml:461
 msgid "Sicherlich hast du dein Wissen hier irgendwo aufgeschrieben."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:458
+#: ../data/quests/fortify_dwarfenwall.xml:462
 msgid "Ich kann auch nach deinem vorzeitigen Tod danach suchen."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:460
+#: ../data/quests/fortify_dwarfenwall.xml:464
 msgid "Ja, sie haben mich auch davor gewarnt, dass so etwas geschehen koennte."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:465
+#: ../data/quests/fortify_dwarfenwall.xml:469
 msgid ""
 "Mit diesem Kristall werde ich euch im Auge behalten und Anweisungen erteilen."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:466
+#: ../data/quests/fortify_dwarfenwall.xml:470
 msgid ""
 "Dieser einfache Elementar wird euch jetzt daran erinnern, dass "
 "Unsterblichkeit an diesem Ort wenig bedeutet."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:473
-#: ../data/quests/fortify_dwarfenwall.xml:620
+#: ../data/quests/fortify_dwarfenwall.xml:477
+#: ../data/quests/fortify_dwarfenwall.xml:626
 msgid "Natuerlich."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:474
+#: ../data/quests/fortify_dwarfenwall.xml:478
 msgid ""
 "Wenn unsere Freiheit die Belohnung ist, werden wir alles in unserer Macht "
 "stehende tun, um erfolgreich zu sein."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:475
+#: ../data/quests/fortify_dwarfenwall.xml:479
 msgid "Das gefaellt mir nicht."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:476
+#: ../data/quests/fortify_dwarfenwall.xml:480
 msgid "Nun gut."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:477
+#: ../data/quests/fortify_dwarfenwall.xml:481
 msgid ""
 "Ich muss mich jetzt um die Vorbereitungen für die bevorstehende Heirat des "
 "Prinzen kuemmern."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:478
+#: ../data/quests/fortify_dwarfenwall.xml:482
 msgid "Es ist keine Zeit für weitere Erklaerungen."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:479
+#: ../data/quests/fortify_dwarfenwall.xml:483
 msgid "Nehmt etwas Gold und diesen Kristall."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:480
+#: ../data/quests/fortify_dwarfenwall.xml:484
 msgid "Darueber werde ich euch zur rechten Zeit weitere Instruktionen senden. "
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:607
+#: ../data/quests/fortify_dwarfenwall.xml:613
 msgid "Na bitte, das war doch eher zahm."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:610
+#: ../data/quests/fortify_dwarfenwall.xml:616
 msgid "Das war der schwaechste Elementar, den ich beschwoeren konnte."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:611
-#: ../data/quests/fortify_dwarfenwall.xml:612
+#: ../data/quests/fortify_dwarfenwall.xml:617
+#: ../data/quests/fortify_dwarfenwall.xml:618
 msgid "Denkt immer daran."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:613
+#: ../data/quests/fortify_dwarfenwall.xml:619
 msgid "Nehmt etwas Gold und ruestet euch im Soeldnerlager noerdlich der Stadt."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:614
+#: ../data/quests/fortify_dwarfenwall.xml:620
 msgid "Dort findet ihr alles, was ihr braucht."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:615
+#: ../data/quests/fortify_dwarfenwall.xml:621
 msgid "Alles?"
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:617
+#: ../data/quests/fortify_dwarfenwall.xml:623
 msgid "Ich kann nicht länger meine Zeit verschwenden."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:618
+#: ../data/quests/fortify_dwarfenwall.xml:624
 msgid ""
 "Der Prinz wird bald heiraten und es gibt noch einige Vorbereitungen zu "
 "treffen."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:619
+#: ../data/quests/fortify_dwarfenwall.xml:625
 msgid "Ueber diesen Kristall werde ich mit euch in Verbindung bleiben."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:622
+#: ../data/quests/fortify_dwarfenwall.xml:628
 msgid ""
 "Ist sicherlich nicht wirklich vom goettlichsten Akeran erlaubt meine "
 "Kampfkraft zu erpressen."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:624
+#: ../data/quests/fortify_dwarfenwall.xml:630
 msgid ""
 "Ist sicherlich nicht wirklich vom goettlichsten Akeran erlaubt, unsere "
 "Kampfkraft zu erpressen."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:626
+#: ../data/quests/fortify_dwarfenwall.xml:632
 msgid "Verschwindet endlich!"
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:679
+#: ../data/quests/fortify_dwarfenwall.xml:688
 msgid "(Dieser Windklaue ist irgendwie seltsam.)"
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:680
+#: ../data/quests/fortify_dwarfenwall.xml:689
 msgid "(Er weiß zuviel. Und er hat einen echten Stein aus Harads Hoelle.)"
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:681
+#: ../data/quests/fortify_dwarfenwall.xml:690
 msgid "(Und dieser Kristall, den er mir untergejubelt hat...)"
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:682
+#: ../data/quests/fortify_dwarfenwall.xml:691
 msgid "(Sieht aus wie ein Spionagekristall. Na, das werden wir gleich wissen.)"
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:683
+#: ../data/quests/fortify_dwarfenwall.xml:692
 msgid "Hm... ich werde einfach mal nach Feinden des Konzils Ausschau halten."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:684
+#: ../data/quests/fortify_dwarfenwall.xml:693
 msgid "Und danach mit ihnen diese Beschwoerer-Wichtel auseinander nehmen."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:685
+#: ../data/quests/fortify_dwarfenwall.xml:694
 msgid "Das sollte nicht so schwer sein."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:687
+#: ../data/quests/fortify_dwarfenwall.xml:696
 msgid "Das glaubst auch nur du, Gezeichnete!"
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:689
+#: ../data/quests/fortify_dwarfenwall.xml:698
 msgid "Das glaubst auch nur du, Gezeichneter!"
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:691
+#: ../data/quests/fortify_dwarfenwall.xml:700
 msgid "...sprach der spionierende Lord Magister."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:692
+#: ../data/quests/fortify_dwarfenwall.xml:701
 msgid "Keine schoenen Angewohnheiten, die du da hast, Luftpfote..."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:693
+#: ../data/quests/fortify_dwarfenwall.xml:702
 msgid "Windklaue!"
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:694
+#: ../data/quests/fortify_dwarfenwall.xml:703
 msgid "Und gewoehn dich besser daran, ueberwacht zu werden."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:695
+#: ../data/quests/fortify_dwarfenwall.xml:704
 msgid "Ich bin kein Idiot"
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:697
+#: ../data/quests/fortify_dwarfenwall.xml:706
 msgid "Aber allwissend bist du auch nicht."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:698
+#: ../data/quests/fortify_dwarfenwall.xml:707
 msgid "Und was willst du damit sagen?"
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:699
+#: ../data/quests/fortify_dwarfenwall.xml:708
 msgid ""
 "Na ja... das Ding da ist von der Aisener Magiergilde hergestellt worden, "
 "oder etwa nicht?"
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:700
+#: ../data/quests/fortify_dwarfenwall.xml:709
 msgid "Und?"
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:701
+#: ../data/quests/fortify_dwarfenwall.xml:710
 msgid "Bist ein Fachidiot, was?"
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:702
+#: ../data/quests/fortify_dwarfenwall.xml:711
 msgid ""
 "Avaera, die Göttin der Magie? Klingelts? Die Leute da sind alle recht fromm."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:703
+#: ../data/quests/fortify_dwarfenwall.xml:712
 msgid ""
 "Die haben bestimmt Avaeras Segen auf den Kristall gesprochen, damit er viel "
 "besser funktioniert."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:704
+#: ../data/quests/fortify_dwarfenwall.xml:713
 msgid "Huete deine Zunge, Abschaum! Was bitte soll das aendern?"
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:705
+#: ../data/quests/fortify_dwarfenwall.xml:714
 msgid "Alles"
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:706
+#: ../data/quests/fortify_dwarfenwall.xml:715
 msgid ""
 "Weißt du, was passiert, wenn das mit dem Blut von Gezeichneten in Beruehrung "
 "kommt?"
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:707
+#: ../data/quests/fortify_dwarfenwall.xml:716
 msgid ""
 "Es ist nicht so, als hätte ich besondes viele von euch Verfluchten zu "
 "experimentellen Zwecken hier."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:716
+#: ../data/quests/fortify_dwarfenwall.xml:725
 msgid "Sicher, sicher."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:717
+#: ../data/quests/fortify_dwarfenwall.xml:726
 msgid "Die werden auch sehr interessiert sein, wo ich hergekommen bin."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:719
+#: ../data/quests/fortify_dwarfenwall.xml:728
 msgid "Und das heißt Gezeichnete."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:721
+#: ../data/quests/fortify_dwarfenwall.xml:730
 msgid "Und das heißt Gezeichneter."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:724
+#: ../data/quests/fortify_dwarfenwall.xml:733
 msgid "Blind und Taub, aber nicht stumm, wie?"
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:725
+#: ../data/quests/fortify_dwarfenwall.xml:734
 msgid "Das wird eine echt anstrengende Reise, wenn das so weitergeht..."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:726
+#: ../data/quests/fortify_dwarfenwall.xml:735
 msgid "Beruhige dich, Herr der unangenehemen Luefte!"
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:727
+#: ../data/quests/fortify_dwarfenwall.xml:736
 msgid "Ich kann dich hoeren und wir koennen reden, wenn es sein muss"
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:728
+#: ../data/quests/fortify_dwarfenwall.xml:737
 msgid "Das reicht doch, oder?"
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:729
+#: ../data/quests/fortify_dwarfenwall.xml:738
 msgid ""
 "So viel Geld, als das ich mich von dir die ganze Zeit anstarren lasse, "
 "kannst du gar nicht haben."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:730
+#: ../data/quests/fortify_dwarfenwall.xml:739
 msgid ""
 "Bete lieber zu deinem Akeran, dass ich nie einen Weg finde, einen Feuerball "
 "durch das Ding zu schicken."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:731
+#: ../data/quests/fortify_dwarfenwall.xml:740
 msgid ""
 "Tja ja... Wissen über die Götter ist Macht, wenn man ihren Launen ausgesetzt "
 "ist."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:732
+#: ../data/quests/fortify_dwarfenwall.xml:741
 msgid ""
 "Sei lieber froh, dass ich nicht gleich den ganzen Kristall zerschmettert "
 "habe."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:734
+#: ../data/quests/fortify_dwarfenwall.xml:743
 msgid ""
 "Erlaube dir noch eine solche Unverschaemtheit und ich werde dich in den "
 "Hungerturm sperren lassen!"
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:735
+#: ../data/quests/fortify_dwarfenwall.xml:744
 msgid "Was soll ich nur mit diesen Konzilikern machen?"
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:739
+#: ../data/quests/fortify_dwarfenwall.xml:748
 msgid "Koennen wir diesen Kristall irgendwie blind machen?"
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:740
+#: ../data/quests/fortify_dwarfenwall.xml:749
 msgid ""
 "Bestimmt sitzt der Kerl gerade in einem gemuetlichen Sessel und passt auf, "
 "dass wir nicht aus der Reihe tanzen."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:741
+#: ../data/quests/fortify_dwarfenwall.xml:750
 msgid "Ich hab so was schon mal in der Armee gesehen..."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:742
+#: ../data/quests/fortify_dwarfenwall.xml:751
 msgid "Aber ja. Ich kenne da einen netten kleinen Trick."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:743
+#: ../data/quests/fortify_dwarfenwall.xml:752
 msgid "Wagt es ja nicht, oder-"
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:747
+#: ../data/quests/fortify_dwarfenwall.xml:756
 msgid "So, das wars."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:748
+#: ../data/quests/fortify_dwarfenwall.xml:757
 msgid "Und jetzt kann er uns nicht mehr hoeren?"
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:749
+#: ../data/quests/fortify_dwarfenwall.xml:758
 msgid ""
 "Nur, wenn wir es wollen. Unser Blut wirkt bei gesegneten Gegenstaenden "
 "einfach Wunder."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:750
+#: ../data/quests/fortify_dwarfenwall.xml:759
 msgid ""
 "Gut, dass das da von frommen aisener Magiern Avaera gesegnet wurde. Auch "
 "wenn die Götting der Magie nicht erfreut ueber meinen Zusatz sein duerfte."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:751
+#: ../data/quests/fortify_dwarfenwall.xml:760
 msgid "Nerven kann der gute Soren aber immer noch."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:752
+#: ../data/quests/fortify_dwarfenwall.xml:761
 msgid "Wir bekommen es auf jeden Fall mit, wenn er uns etwas sagen will."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:755
+#: ../data/quests/fortify_dwarfenwall.xml:764
 msgid "Also, was haeltst du von dieser Sache?"
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:757
+#: ../data/quests/fortify_dwarfenwall.xml:766
 msgid "Also, was haltet ihr von dieser Sache?"
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:763
+#: ../data/quests/fortify_dwarfenwall.xml:773
 msgid "Habe ich das richtig verstanden?"
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:764
+#: ../data/quests/fortify_dwarfenwall.xml:774
 msgid "Hat er wirklich die Macht, uns von Harads Fluch zu befreien?"
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:765
+#: ../data/quests/fortify_dwarfenwall.xml:775
 msgid "Gesagt hat er es."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:766
+#: ../data/quests/fortify_dwarfenwall.xml:776
 msgid ""
 "Ich habe jedenfalls noch nie gehoert, dass jemand außer uns irgend etwas aus "
 "der Hoelle mitnehmen konnte."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:767
+#: ../data/quests/fortify_dwarfenwall.xml:777
 msgid "Aber das Ding war ohne Zweifel echt."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:768
+#: ../data/quests/fortify_dwarfenwall.xml:778
 msgid "Allein durch den Anblick standen mir alle Haare zu Berge."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:771
+#: ../data/quests/fortify_dwarfenwall.xml:781
 msgid "Fast in Ohnmacht gefallen bist du!"
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:773
+#: ../data/quests/fortify_dwarfenwall.xml:783
 msgid "Er hat uns die Freiheit versprochen."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:775
+#: ../data/quests/fortify_dwarfenwall.xml:785
 msgid "Ich habe nicht mal mehr Erinnerungen daran..."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:776
+#: ../data/quests/fortify_dwarfenwall.xml:786
 msgid "Trotzdem ist es unwahrscheinlich, dass er sein Wort halten wird."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:777
+#: ../data/quests/fortify_dwarfenwall.xml:787
 msgid ""
 "Selbst wenn er tatsaechlich diese Macht besitzen sollte, sind wir fuer seine "
 "Zwecke viel zu wertvoll."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:778
+#: ../data/quests/fortify_dwarfenwall.xml:788
 msgid "Wir sind wahrlich gezeichnet."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:779
+#: ../data/quests/fortify_dwarfenwall.xml:789
 msgid ""
 "Aber auch wenn es nur eine kleine Moeglichkeit gibt, ich bin bereit, es zu "
 "versuchen."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:781
+#: ../data/quests/fortify_dwarfenwall.xml:791
 msgid ""
 "Wenn Dummheit ein Gewicht haette, koenntest du dich nicht einen Millimeter "
 "von der Stelle bewegen."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:782
+#: ../data/quests/fortify_dwarfenwall.xml:792
 msgid ""
 "Wenn Arroganz einen Geruch haette, wuerdest du augenblicklich ersticken."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:784
+#: ../data/quests/fortify_dwarfenwall.xml:794
 msgid "Also gut, wir stimmen ab, wie wir weiter vorgehen."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:787
+#: ../data/quests/fortify_dwarfenwall.xml:797
 msgid "Den Anweisungen des Konzils folgen?"
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:788 ../data/quests/herbalist.xml:96
-#: ../data/quests/herbalist.xml:121 ../data/quests/maylons_grave.xml:155
+#: ../data/quests/fortify_dwarfenwall.xml:798 ../data/quests/herbalist.xml:96
+#: ../data/quests/herbalist.xml:122 ../data/quests/maylons_grave.xml:160
 #: ../data/quests/rescue_willard.xml:75 ../data/quests/rescue_willard.xml:131
-#: ../data/quests/theTrader.xml:113 ../data/quests/theTrader.xml:167
+#: ../data/quests/theFissure.xml:557 ../data/quests/theTrader.xml:113
+#: ../data/quests/theTrader.xml:167
 msgid "Ja"
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:789 ../data/quests/herbalist.xml:97
-#: ../data/quests/herbalist.xml:122 ../data/quests/maylons_grave.xml:156
+#: ../data/quests/fortify_dwarfenwall.xml:799 ../data/quests/herbalist.xml:97
+#: ../data/quests/herbalist.xml:123 ../data/quests/maylons_grave.xml:161
 #: ../data/quests/rescue_willard.xml:76 ../data/quests/rescue_willard.xml:132
-#: ../data/quests/theTrader.xml:114 ../data/quests/theTrader.xml:168
+#: ../data/quests/theFissure.xml:558 ../data/quests/theTrader.xml:114
+#: ../data/quests/theTrader.xml:168
 msgid "Nein"
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:797
+#: ../data/quests/fortify_dwarfenwall.xml:807
 msgid "Ich werde erst mal sehen, wie sich die Sache entwickelt."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:798
+#: ../data/quests/fortify_dwarfenwall.xml:808
 msgid ""
 "Bis die Karten alle auf dem Tisch liegen bin ich wieder maechtig genug, um "
 "mir notfalls auch mit Gewalt zu holen, was mir zusteht."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:800
+#: ../data/quests/fortify_dwarfenwall.xml:810
 msgid "Dann ist es entschieden."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:801
+#: ../data/quests/fortify_dwarfenwall.xml:811
 msgid "Wehe die halten ihr Versprechen nicht."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:810
+#: ../data/quests/fortify_dwarfenwall.xml:820
 msgid "Der Kerl wird sein Versprechen nie im Leben halten."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:811
+#: ../data/quests/fortify_dwarfenwall.xml:821
 msgid ""
 "Aber in meinem jetzigen Zustand kann ich mich schlecht mit einem ganzen "
 "Koenigreich anlegen."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:812
+#: ../data/quests/fortify_dwarfenwall.xml:822
 msgid "Mache ich also gute Miene zum boesen Spiel und gewinne sein Vertrauen."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:813
+#: ../data/quests/fortify_dwarfenwall.xml:823
 msgid "Mal sehen, was sich so an Gelegenheiten ergibt."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:815
+#: ../data/quests/fortify_dwarfenwall.xml:825
 msgid "Die ganze Sache ist wirklich zu unsicher."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:816
+#: ../data/quests/fortify_dwarfenwall.xml:826
 msgid ""
 "Offenen Widerstand koennen wir uns aber noch nicht leisten, also muessen wir "
 "gute Miene zum boesen Spiel machen."
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:817
+#: ../data/quests/fortify_dwarfenwall.xml:827
 msgid "Gewinnen wir ihr Vertrauen."
 msgstr ""
 
@@ -1269,131 +1222,135 @@ msgstr ""
 msgid "Wollt ihr doch noch Beeren sammeln?"
 msgstr ""
 
-#: ../data/quests/herbalist.xml:95 ../data/quests/herbalist.xml:120
+#: ../data/quests/herbalist.xml:95 ../data/quests/herbalist.xml:121
 msgid "Quest annehmen?"
 msgstr "Quest abgeschlossen"
 
-#: ../data/quests/herbalist.xml:99
+#: ../data/quests/herbalist.xml:100
 msgid "He da, Jungvolk!"
 msgstr ""
 
-#: ../data/quests/herbalist.xml:100
+#: ../data/quests/herbalist.xml:101
 msgid "Ich sehe, dass ihr in die Noerdlichen Wiesen wollt."
 msgstr ""
 
-#: ../data/quests/herbalist.xml:101
+#: ../data/quests/herbalist.xml:102
 msgid "Das Stimmt."
 msgstr ""
 
-#: ../data/quests/herbalist.xml:103
+#: ../data/quests/herbalist.xml:104
 msgid "Kunststueck."
 msgstr ""
 
-#: ../data/quests/herbalist.xml:104
+#: ../data/quests/herbalist.xml:105
 msgid "Immerhin wollten wir nur gerade durch das Tor."
 msgstr ""
 
-#: ../data/quests/herbalist.xml:105
+#: ../data/quests/herbalist.xml:106
 msgid "Frieden."
 msgstr ""
 
-#: ../data/quests/herbalist.xml:107
+#: ../data/quests/herbalist.xml:108
 msgid ""
 "Wenn ihr sowieso da umher stiefelt und tut was ihr so eben tut, koenntet ihr "
 "mir nicht gleich noch ein paar Beeren sammeln?"
 msgstr ""
 
-#: ../data/quests/herbalist.xml:108
+#: ../data/quests/herbalist.xml:109
 msgid ""
 "Mit den ganzen Goblins kann sich eine alte Frau wie ich ja nicht mal mehr "
 "vor die Tuer wagen."
 msgstr ""
 
-#: ../data/quests/herbalist.xml:110
+#: ../data/quests/herbalist.xml:111
 msgid "Pflanzen sind nicht unbedingt meine Spezialitaet..."
 msgstr ""
 
-#: ../data/quests/herbalist.xml:111
+#: ../data/quests/herbalist.xml:112
 msgid "Ach papperlapapp!"
 msgstr ""
 
-#: ../data/quests/herbalist.xml:113
+#: ../data/quests/herbalist.xml:114
 msgid "Ich will ja nicht, dass ihr was exotisches sammelt."
 msgstr ""
 
-#: ../data/quests/herbalist.xml:114
+#: ../data/quests/herbalist.xml:115
 msgid "Nur Rilfbeeren."
 msgstr ""
 
-#: ../data/quests/herbalist.xml:115
+#: ../data/quests/herbalist.xml:116
 msgid "Das sind große Buesche mit auffaelligen roten Fruechten."
 msgstr ""
 
-#: ../data/quests/herbalist.xml:116
+#: ../data/quests/herbalist.xml:117
 msgid "Die findet ihr bestimmt."
 msgstr ""
 
-#: ../data/quests/herbalist.xml:117
+#: ../data/quests/herbalist.xml:118
 msgid ""
 "Damit es sich lohnt muesstet ihr mir die Beeren von wenigstens zehn Bueschen "
 "bringen."
 msgstr ""
 
-#: ../data/quests/herbalist.xml:118
+#: ../data/quests/herbalist.xml:119
 msgid "Aber nur die roten Beeren."
 msgstr ""
 
-#: ../data/quests/herbalist.xml:119
+#: ../data/quests/herbalist.xml:120
 msgid "Der Rest ist voellig uninteressant."
 msgstr ""
 
-#: ../data/quests/herbalist.xml:130 ../data/quests/herbalist.xml:154
+#: ../data/quests/herbalist.xml:131
 msgid "Na schoen, wenn ich welche finde, bringe ich es mit."
 msgstr ""
 
-#: ../data/quests/herbalist.xml:132 ../data/quests/herbalist.xml:156
+#: ../data/quests/herbalist.xml:133 ../data/quests/herbalist.xml:157
 msgid "Na schoen, wenn wir welche finden, bringen wir sie mit."
 msgstr ""
 
-#: ../data/quests/herbalist.xml:134 ../data/quests/herbalist.xml:158
+#: ../data/quests/herbalist.xml:135 ../data/quests/herbalist.xml:159
 msgid "Danke  Herzchen."
 msgstr ""
 
-#: ../data/quests/herbalist.xml:143
+#: ../data/quests/herbalist.xml:144
 msgid "Vergiss es, Kraeuterhexe."
 msgstr ""
 
-#: ../data/quests/herbalist.xml:144
+#: ../data/quests/herbalist.xml:145
 msgid ""
 "Ich werde bestimmt nicht durch die Wiesen kriechen und nach irgendwelchen "
 "Bueschen suchen."
 msgstr ""
 
-#: ../data/quests/herbalist.xml:145
+#: ../data/quests/herbalist.xml:146
 msgid "Wie du meinst."
 msgstr ""
 
-#: ../data/quests/herbalist.xml:146
+#: ../data/quests/herbalist.xml:147
 msgid ""
 "Aber wenn du es dir noch mal anders ueberlegst, ich werde hier nicht "
 "weglaufen."
 msgstr ""
 
-#: ../data/quests/herbalist.xml:166
-msgid "Nein, immer noch nicht."
+#: ../data/quests/herbalist.xml:155
+msgid "Na schoen, wenn ich welche finde, bringe ich sie mit."
 msgstr ""
 
 #: ../data/quests/herbalist.xml:167
+msgid "Nein, immer noch nicht."
+msgstr ""
+
+#: ../data/quests/herbalist.xml:168
 msgid ""
 "Sag Bescheid, wenn du nicht mehr zu maechtig fuer einfache Arbeiten bist, "
 "Herzchen."
 msgstr ""
 
-#: ../data/quests/herbalist.xml:168
+#: ../data/quests/herbalist.xml:169
 msgid "Huetet Eure Zunge, Weib!"
 msgstr ""
 
-#: ../data/quests/herbalist.xml:223
+#: ../data/quests/herbalist.xml:225
 msgid "Collect "
 msgstr ""
 
@@ -1412,6 +1369,7 @@ msgid ""
 msgstr ""
 
 #: ../data/quests/joringsbridge.xml:110
+#: ../data/quests/siegeOfDwarfenwall.xml:1102
 msgid "Schweigt!"
 msgstr ""
 
@@ -1832,166 +1790,166 @@ msgid ""
 "ich mal einen Blick drauf werfen."
 msgstr ""
 
-#: ../data/quests/maylons_grave.xml:154
+#: ../data/quests/maylons_grave.xml:159
 msgid "Mit den Goblins reden?"
 msgstr ""
 
-#: ../data/quests/maylons_grave.xml:165
+#: ../data/quests/maylons_grave.xml:170
 msgid "Ein Goblin, der reden will?"
 msgstr ""
 
-#: ../data/quests/maylons_grave.xml:166
+#: ../data/quests/maylons_grave.xml:171
 msgid "Ja. Nich schlagen, nich toeten."
 msgstr ""
 
-#: ../data/quests/maylons_grave.xml:167
+#: ../data/quests/maylons_grave.xml:172
 msgid "Gab'Resh und seine nur harmlose Viehdiebe. Keine Banditen."
 msgstr ""
 
-#: ../data/quests/maylons_grave.xml:168
+#: ../data/quests/maylons_grave.xml:173
 msgid "Ihr zuhoeren, ja?"
 msgstr ""
 
-#: ../data/quests/maylons_grave.xml:169
+#: ../data/quests/maylons_grave.xml:174
 msgid "Was tun?"
 msgstr ""
 
-#: ../data/quests/maylons_grave.xml:170
+#: ../data/quests/maylons_grave.xml:175
 msgid "Den Goblins zuhoeren"
 msgstr ""
 
-#: ../data/quests/maylons_grave.xml:171
+#: ../data/quests/maylons_grave.xml:176
 msgid "Die Goblins verjagen"
 msgstr ""
 
-#: ../data/quests/maylons_grave.xml:172
+#: ../data/quests/maylons_grave.xml:177
 msgid "Die Goblins erschlagen"
 msgstr ""
 
-#: ../data/quests/maylons_grave.xml:183
+#: ../data/quests/maylons_grave.xml:188
 msgid "Was koennte ein Goblin schon zu sagen haben"
 msgstr ""
 
-#: ../data/quests/maylons_grave.xml:184
+#: ../data/quests/maylons_grave.xml:189
 msgid "Wir uns hier oft verstecken."
 msgstr ""
 
-#: ../data/quests/maylons_grave.xml:185
+#: ../data/quests/maylons_grave.xml:190
 msgid ""
 "Kaum Menschens vorbei kommen, und wenn doch, dann nie wieder zurueck kehren "
 "aus Tiefen von Hoehle."
 msgstr ""
 
-#: ../data/quests/maylons_grave.xml:186
+#: ../data/quests/maylons_grave.xml:191
 msgid "Aber letzten Mond schwarzer Mensch vorbei gekommen."
 msgstr ""
 
-#: ../data/quests/maylons_grave.xml:187
+#: ../data/quests/maylons_grave.xml:192
 msgid ""
 "Jetzt das Grausen aus den Tiefen auch nach oben wandern und hinter uns armen "
 "Goblins her sein, wo nie was stehlen nich wollten."
 msgstr ""
 
-#: ../data/quests/maylons_grave.xml:188
+#: ../data/quests/maylons_grave.xml:193
 msgid "Das klingt beinahe, als sei ein Nekromant hier vorbei gekommen."
 msgstr ""
 
-#: ../data/quests/maylons_grave.xml:190
+#: ../data/quests/maylons_grave.xml:195
 msgid ""
 "Ein solches Problem kann ich nicht einfach so inmitten dieser unterbewachten "
 "Region lassen."
 msgstr ""
 
-#: ../data/quests/maylons_grave.xml:192
+#: ../data/quests/maylons_grave.xml:197
 msgid ""
 "Ein solches Problem koennen wir nicht einfach so inmitten dieser "
 "unterbewachten Region lassen."
 msgstr ""
 
-#: ../data/quests/maylons_grave.xml:194
+#: ../data/quests/maylons_grave.xml:199
 msgid "Wer wei�, was alles passieren koennte?"
 msgstr ""
 
-#: ../data/quests/maylons_grave.xml:196
+#: ../data/quests/maylons_grave.xml:201
 msgid ""
 "Wirklich, ich sollte diese armen gebundenen Seelen befreien und zu einem "
 "Kurzurlaub in Harads Hoelle schicken."
 msgstr ""
 
-#: ../data/quests/maylons_grave.xml:198
+#: ../data/quests/maylons_grave.xml:203
 msgid ""
 "Wirklich, wir sollten diese armen gebundenen Seelen befreien und zu einem "
 "Kurzurlaub in Harads Hoelle schicken."
 msgstr ""
 
-#: ../data/quests/maylons_grave.xml:200
+#: ../data/quests/maylons_grave.xml:205
 msgid "Besser sie als wir."
 msgstr ""
 
-#: ../data/quests/maylons_grave.xml:203
+#: ../data/quests/maylons_grave.xml:208
 msgid ""
 "Gute Warnung, nein? Maechtige Menschenkriegers uns am leben lassen, nein?"
 msgstr ""
 
-#: ../data/quests/maylons_grave.xml:205
+#: ../data/quests/maylons_grave.xml:210
 msgid ""
 "Verschwindet schon. Ich habe jetzt besseres zu tun, als eine Bande "
 "armseliger Goblins zu toeten."
 msgstr ""
 
-#: ../data/quests/maylons_grave.xml:207
+#: ../data/quests/maylons_grave.xml:212
 msgid ""
 "Verschwindet schon. Wir haben jetzt besseres zu tun, als eine Bande "
 "armseliger Goblins zu toeten."
 msgstr ""
 
-#: ../data/quests/maylons_grave.xml:224
+#: ../data/quests/maylons_grave.xml:227
 msgid "Elendes Gezuecht!Sterbt alle!"
 msgstr ""
 
-#: ../data/quests/maylons_grave.xml:226
+#: ../data/quests/maylons_grave.xml:229
 msgid "Elendes Gezuecht! Macht sie nieder!"
 msgstr ""
 
-#: ../data/quests/maylons_grave.xml:243
+#: ../data/quests/maylons_grave.xml:250
 msgid "Macht, dass ihr davonkommt, bevor ich es mir anders ueberlege!"
 msgstr ""
 
-#: ../data/quests/maylons_grave.xml:377
+#: ../data/quests/maylons_grave.xml:430
 msgid "Ich danke Euch fuer die Befreiung meines Geistes."
 msgstr ""
 
-#: ../data/quests/maylons_grave.xml:378
+#: ../data/quests/maylons_grave.xml:431
 msgid "Moeget Ihr noch viele grosse Taten vollbringen."
 msgstr ""
 
-#: ../data/quests/maylons_grave.xml:379
+#: ../data/quests/maylons_grave.xml:432
 msgid "Akerans Segen mit Euch."
 msgstr ""
 
-#: ../data/quests/maylons_grave.xml:380
+#: ../data/quests/maylons_grave.xml:433
 msgid ""
 "In meinem Sarkophag befinden sich viele Hinterlassenschaften aus meinem "
 "sterblichen Leben."
 msgstr ""
 
-#: ../data/quests/maylons_grave.xml:381
+#: ../data/quests/maylons_grave.xml:434
 msgid ""
 "Ich habe schon lange keine Verwendung mehr dafuer. Sucht Euch eine Waffe "
 "aus, die euch gefaellt."
 msgstr ""
 
-#: ../data/quests/maylons_grave.xml:382
+#: ../data/quests/maylons_grave.xml:435
 msgid "Das gilt auch fuer Eure Freunde."
 msgstr ""
 
-#: ../data/quests/maylons_grave.xml:383
+#: ../data/quests/maylons_grave.xml:436
 msgid ""
 "Jetzt muss ich aber wieder zurueck in die Glueckseligkeit von Akerans Ewiger "
 "Oase."
 msgstr ""
 
-#: ../data/quests/maylons_grave.xml:386
+#: ../data/quests/maylons_grave.xml:439
 msgid ""
 "Ob er das auch gesagt haette, wenn er wuesste, dass er erst mal einen Umweg "
 "ueber Harads Hoelle nehmen wird?"
@@ -2301,7 +2259,7 @@ msgstr ""
 msgid "Sicher kann jemand mit eurem Handwerk immer Geld gebrauchen?"
 msgstr ""
 
-#: ../data/quests/rescue_willard.xml:268
+#: ../data/quests/rescue_willard.xml:269
 msgid "Hier steckt also dieser Willard."
 msgstr ""
 
@@ -2327,7 +2285,7 @@ msgstr ""
 
 #: ../data/quests/rob_the_robber.xml:23
 msgid ""
-"Ich sollte diesen Kerl wirklich mal besuchen. 3000 Goldstuecke sind kein "
+"Ich sollte diesen Kerl wirklich mal besuchen. 10000 Goldstuecke sind kein "
 "Pappenstiel."
 msgstr ""
 
@@ -2339,10 +2297,10 @@ msgstr ""
 msgid "Verzeiht, Sergeant, aber mir ist dieser Steckbrief aufgefallen."
 msgstr ""
 
-#: ../data/quests/rob_the_robber.xml:27 ../data/quests/rob_the_robber.xml:79
+#: ../data/quests/rob_the_robber.xml:27
 msgid ""
-"Ist ein Kopfgeld von 3000 Goldst�cken nicht ein wenig uebertrieben f�r einen "
-"Mann?"
+"Ist ein Kopfgeld von 10000 Goldst�cken nicht ein wenig uebertrieben f�r "
+"einen Mann?"
 msgstr ""
 
 #: ../data/quests/rob_the_robber.xml:29 ../data/quests/rob_the_robber.xml:81
@@ -2350,7 +2308,7 @@ msgid "Ach, der."
 msgstr ""
 
 #: ../data/quests/rob_the_robber.xml:30 ../data/quests/rob_the_robber.xml:82
-msgid "Von dem lassen alle Kopfgeldj�ger die Finger."
+msgid "Von dem lassen alle Kopfgeldjaeger die Finger."
 msgstr ""
 
 #: ../data/quests/rob_the_robber.xml:31 ../data/quests/rob_the_robber.xml:83
@@ -2372,12 +2330,12 @@ msgid "Seid ihr interessiert?"
 msgstr ""
 
 #: ../data/quests/rob_the_robber.xml:44 ../data/quests/rob_the_robber.xml:96
-#: ../data/quests/theTrader.xml:182
+#: ../data/quests/siegeOfDwarfenwall.xml:2258 ../data/quests/theTrader.xml:182
 msgid "Allerdings."
 msgstr ""
 
 #: ../data/quests/rob_the_robber.xml:45 ../data/quests/rob_the_robber.xml:97
-msgid "3000 Goldst�cke f�r die Reisekasse sind durchaus interessant."
+msgid "10000 Goldstuecke fuer die Reisekasse sind durchaus interessant."
 msgstr ""
 
 #: ../data/quests/rob_the_robber.xml:46 ../data/quests/rob_the_robber.xml:98
@@ -2407,11 +2365,17 @@ msgid "Nur neugierig."
 msgstr ""
 
 #: ../data/quests/rob_the_robber.xml:75
-msgid "Bringt mir sein Halsband und ich gebe Euch die 3000 Goldstuecke."
+msgid "Bringt mir sein Halsband und ich gebe Euch die 10000 Goldstuecke."
 msgstr ""
 
 #: ../data/quests/rob_the_robber.xml:76
 msgid "Keine Sekunde frueher!"
+msgstr ""
+
+#: ../data/quests/rob_the_robber.xml:79
+msgid ""
+"Ist ein Kopfgeld von 10000 Goldst�cken nicht ein wenig uebertrieben fuer "
+"einen Mann?"
 msgstr ""
 
 #: ../data/quests/rob_the_robber.xml:102
@@ -2449,50 +2413,50 @@ msgid "Aber das soll nicht mein Problem sein."
 msgstr ""
 
 #: ../data/quests/rob_the_robber.xml:130
-msgid "Hier sind die 3000 Goldstuecke."
+msgid "Hier sind die 10000 Goldstuecke."
 msgstr ""
 
-#: ../data/quests/rob_the_robber.xml:201
+#: ../data/quests/rob_the_robber.xml:202
 msgid ""
 "Ich werde dich vierteilen und Haeuten, ehe ich dich den Woelfen zum fra� "
 "ueberlasse!"
 msgstr ""
 
-#: ../data/quests/rob_the_robber.xml:203 ../data/quests/rob_the_robber.xml:208
+#: ../data/quests/rob_the_robber.xml:204 ../data/quests/rob_the_robber.xml:209
 msgid "Du redest zu viel!"
 msgstr ""
 
-#: ../data/quests/rob_the_robber.xml:206
+#: ../data/quests/rob_the_robber.xml:207
 msgid ""
 "Ich werde euch alle vierteilen und Haeuten, ehe ich euch den Woelfen zum "
 "fra� ueberlasse!"
 msgstr ""
 
-#: ../data/quests/rob_the_robber.xml:228
+#: ../data/quests/rob_the_robber.xml:229
 msgid "Du wirst sterben! Ich werde dich vernichten!!"
 msgstr ""
 
-#: ../data/quests/rob_the_robber.xml:230
+#: ../data/quests/rob_the_robber.xml:231
 msgid "Ihr werdet sterben! Ihr werdet alle sterben!"
 msgstr ""
 
-#: ../data/quests/rob_the_robber.xml:250
+#: ../data/quests/rob_the_robber.xml:251
 msgid ""
 "Meine Seele wird aus dem Grab kriechen und dich bis ans Ende der Welt "
 "verfolgen!"
 msgstr ""
 
-#: ../data/quests/rob_the_robber.xml:253
+#: ../data/quests/rob_the_robber.xml:254
 msgid ""
 "Meine Seele wird aus dem Grab kriechen und euch bis ans Ende der Welt "
 "verfolgen!"
 msgstr ""
 
-#: ../data/quests/rob_the_robber.xml:263
+#: ../data/quests/rob_the_robber.xml:262
 msgid "Viel Spass dabei. Wenn du aus der Hoelle entkommst."
 msgstr ""
 
-#: ../data/quests/scene6.xml:21
+#: ../data/quests/scene6.xml:21 ../data/quests/theFissure.xml:525
 msgid "Wie gehen die Arbeiten voran?"
 msgstr ""
 
@@ -2500,7 +2464,8 @@ msgstr ""
 msgid "Der Stein ist hart, aber wenn ich die Skelette"
 msgstr ""
 
-#: ../data/quests/scene6.xml:26
+#: ../data/quests/scene6.xml:26 ../data/quests/theFissure.xml:547
+#: ../data/quests/theFissure.xml:551 ../data/quests/theFissure.xml:553
 msgid "Los, das ist unsere Chance!"
 msgstr ""
 
@@ -2532,11 +2497,11 @@ msgstr ""
 msgid "Soll der Tunnel nicht zum"
 msgstr ""
 
-#: ../data/quests/scene6.xml:51
+#: ../data/quests/scene6.xml:51 ../data/quests/theFissure.xml:582
 msgid "Nein, die Stadt ist unwichtig."
 msgstr ""
 
-#: ../data/quests/scene6.xml:52
+#: ../data/quests/scene6.xml:52 ../data/quests/theFissure.xml:587
 msgid "Ich verstehe nicht."
 msgstr ""
 
@@ -2622,6 +2587,1039 @@ msgstr ""
 
 #: ../data/quests/scene7.xml:53
 msgid "*Roar!*"
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:60
+msgid ""
+"...haben meine Windelementare genau gesehen: Es ist nur dieser eine Lich, "
+"der sie fuehrt."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:61
+msgid "Wenn er erst mal weg ist, sind die anderen kein Problem."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:62
+msgid "Wie großartig."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:63
+msgid "Und mit welcher Armee wollt ihr ihre Reihen durchbrechen?"
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:64
+msgid ""
+"Wir muessen erst mal diesen Ansturm aufhalten, der sich da zusammenbraut."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:65
+msgid "Keine Sorge."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:66
+msgid "Mein Kollege hat mir versichert, dass das Konzil Unterstuetzung sendet."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:67
+msgid "Sie muesste bald hier sein."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:69
+msgid ""
+"Erst beordern sie die Maga von Nordenburg ab und dann senden sie wieder "
+"Verstaerkung?"
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:70
+msgid "Was ist das für ein Spiel?"
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:71
+msgid "Die Maga wird an anderer Stelle dringender benoetigt als bei uns."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:72
+msgid "Aber natuerlich!"
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:73
+msgid ""
+"Auch wenn ich das nur ungern sage, aber bis eine Armee den Weg hier her "
+"geschafft hat, kaempfen unsere Koerper laengst für die andere Seite, "
+"verehrte Dame!"
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:82
+msgid ""
+"Verzeiht wenn ich mich so einfach einmische, aber kleine Gruppen reisen "
+"erheblich schneller als ein Heerzug."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:85
+msgid "Und wer seid Ihr? _solo"
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:87
+msgid "Und wer seid ihr?"
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:89
+msgid "Die Verstaerkung"
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:96
+msgid "Guter Witz."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:97
+msgid "Aber wir sind hier im Krieg."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:99
+msgid "Macht, dass ihr davonkommt, ihr Narr."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:101
+msgid "Macht, dass ihr davonkommt, ihr Naerrin."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:103
+msgid "Macht, dass ihr davonkommt, ihr Narren."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:108
+msgid "Dieser Soeldner sagt die Wahrheit."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:110
+msgid "Diese Soeldnerin sagt die Wahrheit."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:113
+msgid "Was?!?"
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:118
+msgid "Das soll eure grandiose Unterstützung sein?"
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:121
+msgid "Eine Handvoll Soeldlinge?"
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:124
+msgid ""
+"Ihr werdet den Wert unserer Unterstuetzung schon noch erkennen, wenn sie "
+"wieder und wieder fuer euch faellt."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:125
+msgid "Was sagt ihr da?"
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:129
+msgid "... Ist das etwa eine Verfluchte?"
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:131
+msgid "... Ist das etwa ein Verfluchter?"
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:133
+msgid "... Sind das etwa Verfluchte?"
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:136
+msgid "Mir persoenlich gefaellt der Begriff Gezeichnete irgendwie besser."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:140
+msgid ""
+"Wenn der Preis stimmt, lasse ich mich so oft in Stuecke hacken, wie es "
+"noetig ist, um diese Stadt zu verteidigen."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:142
+msgid ""
+"Wenn der Preis stimmt, lassen wir uns so oft in Stuecke hacken, wie es "
+"noetig ist, um diese Stadt zu verteidigen."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:146
+msgid "Ihr lasst euch mit dem Teufel ein, um einen Teufel auszutreiben?"
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:149
+msgid "In Zeiten wie diesen kann man nicht besonders zimperlich benehmen."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:150
+msgid "Wollt ihr leben oder den Untoten als Verstaerkung dienen?"
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:152
+msgid "Man kann diesen Monstern nicht trauen!"
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:153
+msgid "Solange ich diese Armee fuehre, werde ich solche nicht dulden!"
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:157
+msgid "Ich habe gerade die Untoten daran gehindert, eure Stadt zu umgehen!"
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:159
+msgid "Wir haben gerade die Untoten daran gehindert, eure Stadt zu umgehen!"
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:161
+msgid "Das beweist gar nichts!"
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:162
+msgid "Alle Krieger verbindet die Engstirnigkeit."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:164
+msgid "Ich toete nicht wahllos!"
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:166
+msgid "Wir toeten nicht wahllos!"
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:170
+msgid ""
+"Sie steht unter dem Befehls des Konzils, es ist nicht eure Entscheidung."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:172
+msgid "Er steht unter dem Befehls des Konzils, es ist nicht eure Entscheidung."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:174
+msgid ""
+"Sie stehen unter dem Befehls des Konzils, es ist nicht eure Entscheidung."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:193
+msgid "Sie kommen! Der Angriff beginnt!"
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:216
+msgid "Seht zu, dass ihr zur Mauer kommt!"
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:217
+msgid "Wie schnell er seine Meinung doch aendert."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:219
+msgid "Ich bin schon unterwegs"
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:221
+msgid "Los jetzt!"
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:230
+msgid "Ich hoffe, ihr habt genug Geld, um diese Brut bei der Stange zu halten."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:231
+msgid "Macht euch keine Sorgen."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:232
+msgid "Daran wird es nicht scheitern."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:234
+msgid "Ich bete, dass ihr Euch nicht irrt..."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:265
+#: ../data/quests/siegeOfDwarfenwall.xml:294
+msgid ""
+"Es tut mir Leid, aber hier ist nur Durchgang fuer Angehoerige der aisener "
+"Armee."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:281
+msgid "Da will ich jetzt nicht hin. Ich sehe nur eine langweilige Mauer."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:965
+msgid "Da hinten kommen sie."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:967
+msgid "Macht euch bereit Maenner!"
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:1023
+msgid "Eure Zeit ist gekommen, erbaermliche Menschen!"
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:1024
+msgid "Zwergentrutz wird endlich Euer sein, mein Gebieter."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:1025
+msgid "Mit der Unterstuetzung aus der Hauptstadt wird es endlich gelingen."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:1026
+msgid "Beginnen wir also den letzten Sturm auf diese elende Festung."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:1053
+msgid ""
+"Da hinten sind wahrscheinlich so viele Untote, dass Eure ach so "
+"kampfkraeftige Unterstuetzung unseren Tod nicht wird abwenden koennen."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:1054
+msgid ""
+"Diese... Unterstuetzung ist nicht das einzige, was das Konzil fuer "
+"Zwergentrutz tun kann und wird."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:1055
+msgid "Ich habe schon vor Wochen einen Erdelementar gebunden."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:1056
+msgid "Er wartet nur noch auf meinen Befehl."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:1057
+msgid "Natuerlich konnte ich nicht wissen, wo die Untoten angreifen wuerden."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:1058
+msgid ""
+"Ich fuerchte, da kommt einiges an Aufraeumarbeiten auf die Ueberlebenden zu."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:1059
+msgid "Hoert auf zu spotten und tut es endlich, was auch immer ihr vorhabt."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:1098
+msgid "Verfluchte Elementaristen!"
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:1099
+msgid ""
+"Es wird mir eine Freude sein, den Körper dieser Hexe wiederzubeleben, nur um "
+"sie zu verbrennen!"
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:1100
+msgid "Es wird geschehen, mein Gebieter."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:1101
+msgid ""
+"Aber wie greifen wir die Stadt jetzt an? Sie hat den Weg fuer unsere Armee "
+"blockiert"
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:1106
+msgid "Die Katapulte?"
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:1107
+msgid "Sind bereit, mein Gebieter"
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:1108
+msgid "Unsere Nekromanten?"
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:1109
+msgid "Warten nur auf euren Befehl."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:1110
+msgid "Nicht umsonst kaempfe ich schon seit Jahrhunderten mit Zwergentrutz."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:1111
+msgid "Schickt die Skelette durch die Kriechgaenge."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:1132
+msgid "Da tut sich was."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:1133
+msgid "Sie kommen!"
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:1135
+msgid "Es wird wohl nicht schaden, wenn ich auch noch ein paar Helfer rufe."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:1138
+msgid "An die Front mit euch, Schlaechter. _solo"
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:1140
+msgid "An die Front mit euch, Schlaechter."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:1142
+msgid "Sag 'Bitte'."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:1143
+msgid "Macht schon!"
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:1166
+msgid "Gebt Acht!"
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:1167
+msgid "Katapulte!"
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:1383
+msgid "Sie wehren sich weiterhin."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:1384
+msgid "Keine Sorge, mein Gebieter, wir werden sie bald ueberrannt haben!"
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:1385
+msgid "Nur keine Hast."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:1386
+msgid "Wir haben Zeit, das ist unser Vorteil."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:1387
+msgid "Zeigen wir ihnen, dass wir auch mit Feuer spielen koennen."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:1388
+msgid "Diese Magier gehen mir langsam auf den Geist."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:1389
+msgid "Bereite alles vor."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:1390
+msgid "Ich habe verstanden, mein Gebieter."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:1653
+msgid "Ihre Verteidigung haelt noch immer stand, mein Gebieter"
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:1654
+msgid "Niemand hat verlangt, dass es einfach sein muss."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:1655
+msgid "Wusstest du, dass es hier vor zweihundert Jahren einen Wilden gab?"
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:1656
+msgid ""
+"Die Menschen nannten ihn den Riesentoeter und wollten nichts mit ihm zu tun "
+"haben."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:1657
+msgid ""
+"Ich verstehe nicht, was das mit der Belagerung zu tun hat, mein Gebieter"
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:1658
+msgid "Sieh zu und lerne."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:1824
+msgid "Ihr habt gerufen, mein Gebieter?"
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:1825
+msgid "Ich will, dass ihr die Brueder einsetzt."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:1826
+msgid "Aber die sind noch immer nicht stabil!"
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:1827
+msgid ""
+"Im schlimmsten Fall werden sie dem Gegner ueberhaupt keinen Schaden zufuegen."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:1828
+msgid "Das spielt keine Rolle."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:1829
+msgid "Er muesste bald hier sein. Im Moment schinden wir nur Zeit."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:1830
+msgid "Wie ihr Befehlt, mein Gebieter."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:1888
+msgid "Mein Gebieter."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:1889
+msgid "Was ist?"
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:1890
+msgid "Neivan der Frostbringer ist jetzt hier."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:1891
+msgid "Endlich."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:1892
+msgid ""
+"Der Weg aus der Grauen Himmelsleiter in diese Trostlos verdorrte Ebene war "
+"eben lang."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:1893
+msgid "Und deine Bergspitzen sind lebendiger?"
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:1894
+msgid ""
+"Sind wir hier um die letzten Krabbelkaefer in unseren Laendereien zu zaehlen?"
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:1895
+msgid ""
+"Du hast Recht. Koenntest du mir diese wirklich enervierenden Leute da vorn "
+"aus dem Weg raeumen?"
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:1896
+msgid "Deswegen bin ich hier."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:1897
+msgid "Und vergiss nicht, dass du mir danach Land schuldest."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:1898
+msgid ""
+"Glaubst du wirklich, ich wuerde zwei Doerfer vermissen, nachdem ich "
+"Zwergentrutz endlich habe?"
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:1899
+msgid "Ich und meine Frostmagier werden schon dafuer sorgen."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2053
+msgid "Der Frostbringer ist tot, mein Gebieter."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2054
+msgid "Ich habe es auch gespuert."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2055
+msgid ""
+"Wir haben endlich etwas ueber die Verstaerkung erfahren, die das Konzil hier "
+"her geschickt hat."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2056
+msgid "Ausgerechnet jetzt?"
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2057
+msgid "Und was ist damit? Ich dachte, es gaebe gar keine."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2058
+msgid ""
+"Doch, mein Gebieter. Aber es handelt sich dabei anscheinend um Gezeichnete."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2059
+msgid "Gezeichnete!"
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2060
+msgid "Das erklaert einiges."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2061
+msgid ""
+"Aber auch sie werden die Stadt nicht halten koennen, wenn die elenden "
+"Menschen erst mal alle tot sind."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2062
+msgid "Ueberrennt sie. Und schick deinen Orden aus."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2063
+msgid "Sehr wohl, mein Gebieter."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2064
+msgid ""
+"Notfalls werde auch ich, der Schwarze Rabe selbst, in die Schlacht ziehen."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2065
+msgid "Ich zaehle auf dich."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2066
+msgid "Reisst ihre Verteidigung in Stuecke."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2203
+msgid "Verdammt sollen sie sein!"
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2204
+msgid "Verdammte Konzilsmagier!"
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2205
+msgid "Verdammte Gezeichnete!"
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2207
+msgid "Was solls."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2208
+msgid "Am Ende werde ich doch triumphieren."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2209
+msgid "Der Tod gewinnt immer."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2235
+msgid "Es ist vorbei."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2236
+msgid "Und Dank der Unterstuetzung des Konzils steht die Stadt noch."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2239
+msgid ""
+"Ich muss gestehen, ich haette mir in meinen kuensten Traeumen nicht ausmalen "
+"koennen, dass jemand so kaempft."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2241
+msgid "Es ist gut, dass er momentan auf unserer Seite steht."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2243
+msgid "Es ist gut, dass sie momentan auf unserer Seite steht."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2245
+msgid "Es ist gut, dass sie momentan auf unserer Seite stehen."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2248
+msgid ""
+"Wenn beide Seiten Seelen anzubieten haben, nimmt man natuerlich die, die "
+"auch bezahlt."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2250
+msgid ""
+"Danke, dass Ihr mich daran erinnert, warum ich Eure Sorte nicht leiden kann."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2251
+msgid "Es gibt da keinen grossen Unterschied zu normalen Soeldnern."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2252
+msgid ""
+"Ausser vielleicht, dass Gezeichnete nicht einfach mitten drin die Seiten "
+"wechseln."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2253
+#: ../data/quests/siegeOfDwarfenwall.xml:2273
+#: ../data/quests/siegeOfDwarfenwall.xml:2280
+msgid "Genug davon. Reden wir im Kommandozentrum weiter."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2254
+msgid ""
+"Es waere wohl nicht klug, die Soldaten mit der Nase auf ihre Retter zu "
+"stossen."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2260
+msgid "Ohne Euren 'Freund' hier saehe das anders aus."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2262
+msgid "Ohne Eure 'Freundin' hier saehe das anders aus."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2264
+msgid "Ohne Eure 'Freunde' hier saehe das anders aus."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2269
+msgid ""
+"Immerhin effektiver, als man das von einer Soeldnertruppe haette erwarten "
+"koennen."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2270
+msgid "Aber wir haben einiges an Verlusten eingefahren."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2271
+msgid ""
+"Ich hoffe, die kommen nicht so schnell auf die Idee, einen zweiten Angriff "
+"zu starten."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2272
+msgid ""
+"Bisher hat sich dieser Lich zwar immer Zeit gelassen, aber bisher hatte er "
+"auch keine Unterstuetzung."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2277
+msgid "Welche Unterstuetzung denn bitte?"
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2278
+msgid "Zwei Drittel meiner Leute sind tot!"
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2279
+msgid "Einen zweiten Angriff werden wir niemals ueberleben."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2281
+msgid "Ich will endlich von dem ganzen Blut weg."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2331
+msgid "hmpf"
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2332
+msgid "Gut geschlagen."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2334
+msgid "Wenigstens seid Ihr den Aerger wert. _solo"
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2335
+msgid "Als ob ich jemals welchen gemacht haette."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2337
+msgid "Wenigstens seid ihr den Aerger wert."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2338
+msgid "Als ob wir jemals welchen gemacht haetten."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2343
+msgid "Die Stadt ist nur fuer den Augenblick sicher."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2344
+msgid "Wir koennen uns jetzt nicht ausruhen."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2346
+msgid ""
+"Als ob wir nicht schon genug mit dem Personalmangel zu kaempfen haetten."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2348
+msgid "Die Quelle der Angriffe ist der Lich!"
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2349
+msgid "Er muss vernichtet werden!"
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2351
+msgid "Und wer?!"
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2352
+msgid "Ich habe nicht genug Maenner, um einen Ausfall mit Erfolg zu fuehren."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2353
+msgid "Das waere Selbstmord!"
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2355
+msgid "Das hat nichts mit Euch zu tun."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2357
+msgid "Dieser Mann steht unter meinem direkten Befehl."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2359
+msgid "Diese Frau steht unter meinem direkten Befehl."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2361
+msgid "Diese Leute stehen unter meinem direkten Befehl."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2364
+msgid ""
+"In ihrer unentspannten Art erinnert sie mich an einen gewissen anderen "
+"Konzilsmagier."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2366
+msgid "Ihr schickt sie in den sicheren Tod!"
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2368
+msgid ""
+"Nicht, dass mich das stoeren wuerde, aber wir koennen momentan niemanden "
+"verschwenden!"
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2369
+msgid "Nur kein falsches Mitleid."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2370
+msgid "Egal wie oft ich sterbe, der Lich wird am Ende vernichtet sein."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2372
+msgid "Ausser um euch selbst kuemmert ihr euch doch um niemanden!"
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2374
+msgid "Das waere nicht das erste Mal..."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2375
+msgid "Wollt ihr mir vorschreiben, wie ich meine Leute einsetze?"
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2376
+msgid "Niemand verdient eine solche Behandlung, nicht einmal die."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2378
+msgid "Lasst das meine Sorge sein."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2380
+msgid "Lasst das unsere Sorge sein."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2382
+msgid "Euch ist wirklich nicht zu helfen"
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2385
+msgid "Endlich hat er es auch kapiert."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2386
+msgid ""
+"Wir haben keine Zeit für kleinliche Streitereien! Geht und erschlagt den "
+"Lich!"
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2387
+msgid "Wie ihr wuenscht..."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2389
+msgid ""
+"So ein Pfeil koennte im Eifer des Gefechts doch von ueberall gekommen sein..."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2390
+msgid "Denk nicht mal drueber nach."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2489
+msgid "Sieh an."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2490
+msgid "Da ist ja die Wurzel meines kleinen Problems."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2491
+msgid "Kaum zu glauben, dass jemand so verrueckt ist, hier raus zu stuermen."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2500
+msgid "Mach dich bereit, fuer immer zu vergehen!"
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2503
+msgid ""
+"Kaum zu glauben, dass ein einziger Gezeichneter ausreicht, um so viel Chaos "
+"zu verursachen."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2505
+msgid ""
+"Kaum zu glauben, dass eine einzige Gezeichnete ausreicht, um so viel Chaos "
+"zu verursachen."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2507
+msgid ""
+"Natuerlich, wenn ein paar Gezeichnete in der Naehe sind ist alles ein wenig "
+"anders."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2509
+msgid "Erntezeit!!"
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2510
+msgid "Nicht so hastig."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2513
+msgid ""
+"Sicher, Ihr seid unsterblich, oder so sagt man zumindest, aber Schmerzen "
+"spürt Ihr doch trotzdem noch, nicht wahr? _solo"
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2514
+msgid ""
+"Wollt Ihr Euch wirklich immer und immer wieder von mir in Stuecke hacken "
+"lassen? _solo"
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2516
+msgid ""
+"Sicher, ihr seid unsterblich, oder so sagt man zumindest, aber Schmerzen "
+"spürt ihr doch trotzdem noch, nicht wahr?"
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2517
+msgid ""
+"Wollt ihr euch wirklich immer und immer wieder von mir in Stuecke hacken "
+"lassen?"
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2519
+msgid ""
+"Pah! Deine Skelette sind alle schon Staub und der eine Lakei wird dich nicht "
+"retten!"
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2520
+msgid "Wo Ihr es so erwaehnt..."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2521
+msgid "Ihr habt tatsaechlich die meisten in Stuecke geschlagen."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2522
+msgid "Dennoch ein verkraftbarer Verlust."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2523
+msgid ""
+"Die Menschen in Zwergentrutz werden mir sicherlich beim Aufstellen einer "
+"neuen Armee behilflich sein."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2525
+msgid ""
+"Was ist das eigentlich fuer ein Kristall, den deine verrotteten Herren "
+"wollen, Kettenhund?"
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2527
+msgid "Du kannst mich nicht wuetend machen."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2528
+msgid ""
+"Und was den Kristall angeht, so fragt Ihr vielleicht lieber Eure "
+"Auftraggeber?"
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2530 ../data/quests/theTrader.xml:176
+msgid "Das dachte ich mir."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2531
+msgid "Die Elementaristen sind nicht besonders gespraechig, habe ich recht?"
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2533
+msgid "Deine Rede ist so faul wie der Rest deines Koerpers."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2535
+msgid "Stirb!"
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2542
+#: ../data/quests/theFissure.xml:630
+msgid "Erntezeit!"
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2545
+msgid ""
+"Habt Ihr eigentlich gewusst, dass es hier eine Menge ungebundener Seelen in "
+"der Luft gibt? _solo"
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2547
+msgid ""
+"Habt ihr eigentlich gewusst, dass es hier eine Menge ungebundener Seelen in "
+"der Luft gibt?"
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2556
+msgid ""
+"Und jetzt werde ich der erste sein, der einen Weg findet, wie Gezeichnete zu "
+"toeten sind."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2665
+msgid "Nein! Das kann nicht sein! Ihr elenden..."
 msgstr ""
 
 #: ../data/quests/slay_the_lich.xml:24
@@ -2777,16 +3775,32 @@ msgid "deadly injured"
 msgstr ""
 
 #: ../data/quests/testquest.xml:50
-msgid "und noch ein Test"
+msgid "afraid"
 msgstr ""
 
 #: ../data/quests/testquest.xml:51
+msgid "in panic"
+msgstr ""
+
+#: ../data/quests/testquest.xml:52
+msgid "putting up a distance"
+msgstr ""
+
+#: ../data/quests/testquest.xml:53
+msgid "being disgusted"
+msgstr ""
+
+#: ../data/quests/testquest.xml:54
+msgid "und noch ein Test"
+msgstr ""
+
+#: ../data/quests/testquest.xml:55
 msgid "wieder ein Test"
 msgstr ""
 
 #: ../data/quests/theAmbush.xml:4
 msgid ""
-"Ierana hat es ueberlebt und vor lauter Dankbarkeit gleich fuer den naechsten "
+"Ireana hat es ueberlebt und vor lauter Dankbarkeit gleich fuer den naechsten "
 "Auftrag gesorgt. Ich wusste ja schon immer, dass die Konziliker nur einen "
 "Kammerjaeger wollten."
 msgstr ""
@@ -2802,93 +3816,93 @@ msgstr ""
 msgid "Da geht es Richtung Zwergentrutz. Ich sollte noch nicht dort entlang."
 msgstr ""
 
-#: ../data/quests/theAmbush.xml:102
+#: ../data/quests/theAmbush.xml:99
 msgid "Warte!"
 msgstr ""
 
-#: ../data/quests/theAmbush.xml:103
+#: ../data/quests/theAmbush.xml:100
 msgid "Ich beeile mich ja schon!"
 msgstr ""
 
-#: ../data/quests/theAmbush.xml:104
+#: ../data/quests/theAmbush.xml:101
 msgid "Du musst jetzt sofort durch die westlichen Wälder."
 msgstr ""
 
-#: ../data/quests/theAmbush.xml:106
+#: ../data/quests/theAmbush.xml:103
 msgid "Wir beeilen uns ja schon!"
 msgstr ""
 
-#: ../data/quests/theAmbush.xml:107
+#: ../data/quests/theAmbush.xml:104
 msgid "Ihr muesst jetzt sofort durch die westlichen Wälder."
 msgstr ""
 
-#: ../data/quests/theAmbush.xml:109
+#: ../data/quests/theAmbush.xml:106
 msgid "Die Verlobte des Prinzen ist in Gefahr."
 msgstr ""
 
-#: ../data/quests/theAmbush.xml:110
+#: ../data/quests/theAmbush.xml:107
 msgid "Wer?"
 msgstr ""
 
-#: ../data/quests/theAmbush.xml:111
+#: ../data/quests/theAmbush.xml:108
 msgid "Die Erzmaga Ireana von Nordenburg."
 msgstr ""
 
-#: ../data/quests/theAmbush.xml:112 ../data/quests/theFissure.xml:376
+#: ../data/quests/theAmbush.xml:109 ../data/quests/theFissure.xml:401
 msgid "Wird das extra bezahlt?"
 msgstr ""
 
-#: ../data/quests/theAmbush.xml:114
+#: ../data/quests/theAmbush.xml:111
 msgid "Wie bitte?"
 msgstr ""
 
-#: ../data/quests/theAmbush.xml:115
+#: ../data/quests/theAmbush.xml:112
 msgid ""
 "Ich dachte das wäre eine von euren tollen Elementaristenamazonen, kann die "
 "nicht auf sich selbst aufpassen?"
 msgstr ""
 
-#: ../data/quests/theAmbush.xml:118
+#: ../data/quests/theAmbush.xml:115
 msgid ""
 "Jetzt fang nicht an zu diskutieren, sondern hilf ihr! Sie braucht deine "
 "Hilfe!"
 msgstr ""
 
-#: ../data/quests/theAmbush.xml:121
+#: ../data/quests/theAmbush.xml:118
 msgid ""
 "Jetzt fangt nicht an zu diskutieren, sondern helft ihr! Sie braucht eure "
 "Hilfe!"
 msgstr ""
 
-#: ../data/quests/theAmbush.xml:124
+#: ../data/quests/theAmbush.xml:121
 msgid "Was meinst du, wollen wir da jemandem aus der Patsche helfen?"
 msgstr ""
 
-#: ../data/quests/theAmbush.xml:126 ../data/quests/theAmbush.xml:138
+#: ../data/quests/theAmbush.xml:123 ../data/quests/theAmbush.xml:135
 msgid "Weiß nicht so genau..."
 msgstr ""
 
-#: ../data/quests/theAmbush.xml:128 ../data/quests/theAmbush.xml:141
+#: ../data/quests/theAmbush.xml:125 ../data/quests/theAmbush.xml:138
 msgid "Naja, schaden kann das ja eigentlich nicht..."
 msgstr ""
 
-#: ../data/quests/theAmbush.xml:131 ../data/quests/theAmbush.xml:143
+#: ../data/quests/theAmbush.xml:128 ../data/quests/theAmbush.xml:140
 msgid "Wird das extra bezahlt??"
 msgstr ""
 
-#: ../data/quests/theAmbush.xml:133 ../data/quests/theAmbush.xml:144
+#: ../data/quests/theAmbush.xml:130 ../data/quests/theAmbush.xml:141
 msgid "Argh! Muss ich euch erst-"
 msgstr ""
 
-#: ../data/quests/theAmbush.xml:134 ../data/quests/theAmbush.xml:145
+#: ../data/quests/theAmbush.xml:131 ../data/quests/theAmbush.xml:142
 msgid "Schon gut, spare deinen Atem,!"
 msgstr ""
 
-#: ../data/quests/theAmbush.xml:136
+#: ../data/quests/theAmbush.xml:133
 msgid "Was meint ihr Freunde, wollen wir da jemandem aus der Patsche helfen?"
 msgstr ""
 
-#: ../data/quests/theAmbush.xml:147
+#: ../data/quests/theAmbush.xml:144
 msgid "Die Feuerwehr ist ja schon unterwegs."
 msgstr ""
 
@@ -2905,248 +3919,541 @@ msgid ""
 "sie Zwergentrutz umgehen koennen. Da dies das Königreich Aisen direkt "
 "bedroht, muss der Zugang schnellstmoeglich verschlossen werden. Der "
 "Durchgang in den Verfluchten Hoelen muss gefunden und mit dem Sprengzauber "
-"Ierana von Nordenburgs zerstoert werden."
+"ireana von Nordenburgs zerstoert werden."
 msgstr ""
 
-#: ../data/quests/theFissure.xml:120
+#: ../data/quests/theFissure.xml:122
 msgid "*urgh*"
 msgstr ""
 
-#: ../data/quests/theFissure.xml:156
+#: ../data/quests/theFissure.xml:158
 msgid "Wow, she's gorgeous"
 msgstr ""
 
-#: ../data/quests/theFissure.xml:160
+#: ../data/quests/theFissure.xml:162
 msgid "You can stare at her later, we have to erase some undead."
 msgstr ""
 
-#: ../data/quests/theFissure.xml:162
+#: ../data/quests/theFissure.xml:164
 msgid "Please help us, the maga is badly injured!"
 msgstr ""
 
-#: ../data/quests/theFissure.xml:167
+#: ../data/quests/theFissure.xml:170
 msgid "He he. Harvest!"
 msgstr ""
 
-#: ../data/quests/theFissure.xml:285
+#: ../data/quests/theFissure.xml:308
 msgid "I have never seen someone fight like you before."
 msgstr ""
 
-#: ../data/quests/theFissure.xml:286
+#: ../data/quests/theFissure.xml:309
 msgid "You don't get out very often, do you."
 msgstr ""
 
-#: ../data/quests/theFissure.xml:288
+#: ../data/quests/theFissure.xml:311
 msgid ""
 "Ihr habt euch praechtig entwickelt, seit wir uns das letzte Mal gesehen "
 "haben, oder? _solo"
 msgstr ""
 
-#: ../data/quests/theFissure.xml:290
+#: ../data/quests/theFissure.xml:313
 msgid ""
 "Ihr habt euch praechtig entwickelt, seit wir uns das letzte Mal gesehen "
 "haben, oder?"
 msgstr ""
 
-#: ../data/quests/theFissure.xml:293
+#: ../data/quests/theFissure.xml:316
 msgid "How is the archmaga?"
 msgstr ""
 
-#: ../data/quests/theFissure.xml:295
+#: ../data/quests/theFissure.xml:318
 msgid "Very bad, I'm afraid."
 msgstr ""
 
-#: ../data/quests/theFissure.xml:302
+#: ../data/quests/theFissure.xml:325
 msgid "Let me see. _priest"
 msgstr ""
 
-#: ../data/quests/theFissure.xml:307
+#: ../data/quests/theFissure.xml:330
 msgid "Let me see. _mage"
 msgstr ""
 
-#: ../data/quests/theFissure.xml:321
+#: ../data/quests/theFissure.xml:344
 msgid "Let me see."
 msgstr ""
 
-#: ../data/quests/theFissure.xml:335
+#: ../data/quests/theFissure.xml:360
 msgid "Thank you. That was a close call for a rescue."
 msgstr ""
 
-#: ../data/quests/theFissure.xml:336
+#: ../data/quests/theFissure.xml:361
 msgid "How could it even come to this?"
 msgstr ""
 
-#: ../data/quests/theFissure.xml:337
+#: ../data/quests/theFissure.xml:362
 msgid "It's very dangerous to travel so far from the roads."
 msgstr ""
 
-#: ../data/quests/theFissure.xml:340
+#: ../data/quests/theFissure.xml:365
 msgid "Come off it!"
 msgstr ""
 
-#: ../data/quests/theFissure.xml:341
+#: ../data/quests/theFissure.xml:366
 msgid "No, no, it's the truth."
 msgstr ""
 
-#: ../data/quests/theFissure.xml:344
+#: ../data/quests/theFissure.xml:369
 msgid ""
 "It was not the best idea, but the streets are not safe these days and thus "
 "we wanted to travel concealed."
 msgstr ""
 
-#: ../data/quests/theFissure.xml:345
+#: ../data/quests/theFissure.xml:370
 msgid "These undead layed an ambush for us here."
 msgstr ""
 
-#: ../data/quests/theFissure.xml:346
+#: ../data/quests/theFissure.xml:371
 msgid "Surprise!"
 msgstr ""
 
-#: ../data/quests/theFissure.xml:347
+#: ../data/quests/theFissure.xml:372
 msgid "No wonder, this is combat area."
 msgstr ""
 
-#: ../data/quests/theFissure.xml:349
+#: ../data/quests/theFissure.xml:374
 msgid "No, Dwarfenwall hasn't fallen yet."
 msgstr ""
 
-#: ../data/quests/theFissure.xml:350
+#: ../data/quests/theFissure.xml:375
 msgid ""
 "As long as that city stands, the entry to the lands of the undead is blocked."
 msgstr ""
 
-#: ../data/quests/theFissure.xml:351
+#: ../data/quests/theFissure.xml:376
 msgid "But I fear they must have found a way around the citywalls."
 msgstr ""
 
-#: ../data/quests/theFissure.xml:352
+#: ../data/quests/theFissure.xml:377
 msgid "We mustn't allow this."
 msgstr ""
 
-#: ../data/quests/theFissure.xml:353
+#: ../data/quests/theFissure.xml:378
 msgid ""
 "If those monsters could avoid Dwarfenwall they would advance into Aisen "
 "before one week is gone."
 msgstr ""
 
-#: ../data/quests/theFissure.xml:354
+#: ../data/quests/theFissure.xml:379
 msgid "It was exeedingly careless of you to leave with so few men."
 msgstr ""
 
-#: ../data/quests/theFissure.xml:355
+#: ../data/quests/theFissure.xml:380
 msgid "The city needs every man it can get!"
 msgstr ""
 
-#: ../data/quests/theFissure.xml:356
+#: ../data/quests/theFissure.xml:381
 msgid "I have a feeling what's going to come in a moment..."
 msgstr ""
 
-#: ../data/quests/theFissure.xml:358
+#: ../data/quests/theFissure.xml:383
 msgid "Listen, Branded One!"
 msgstr ""
 
-#: ../data/quests/theFissure.xml:359 ../data/quests/theFissure.xml:369
+#: ../data/quests/theFissure.xml:384 ../data/quests/theFissure.xml:394
 msgid "What?!?"
 msgstr ""
 
-#: ../data/quests/theFissure.xml:360
+#: ../data/quests/theFissure.xml:385
 msgid "That's a Branded One?"
 msgstr ""
 
-#: ../data/quests/theFissure.xml:361 ../data/quests/theFissure.xml:371
+#: ../data/quests/theFissure.xml:386 ../data/quests/theFissure.xml:396
 msgid "Let it go."
 msgstr ""
 
-#: ../data/quests/theFissure.xml:363
+#: ../data/quests/theFissure.xml:388
 msgid "She is on our side."
 msgstr ""
 
-#: ../data/quests/theFissure.xml:365
+#: ../data/quests/theFissure.xml:390
 msgid "He is on our side."
 msgstr ""
 
-#: ../data/quests/theFissure.xml:368
+#: ../data/quests/theFissure.xml:393
 msgid "Listen, Branded Ones!"
 msgstr ""
 
-#: ../data/quests/theFissure.xml:370
+#: ../data/quests/theFissure.xml:395
 msgid "Those are Branded Ones?"
 msgstr ""
 
-#: ../data/quests/theFissure.xml:372
+#: ../data/quests/theFissure.xml:397
 msgid "They are on our side."
 msgstr ""
 
-#: ../data/quests/theFissure.xml:375
+#: ../data/quests/theFissure.xml:400
 msgid "Find the way the undead came here and render it useless."
 msgstr ""
 
-#: ../data/quests/theFissure.xml:377
+#: ../data/quests/theFissure.xml:402
 msgid "Don't you want to give them some backup?"
 msgstr ""
 
-#: ../data/quests/theFissure.xml:378
+#: ../data/quests/theFissure.xml:403
 msgid "I can do what I want!"
 msgstr ""
 
-#: ../data/quests/theFissure.xml:379
+#: ../data/quests/theFissure.xml:404
 msgid "Of course..."
 msgstr ""
 
-#: ../data/quests/theFissure.xml:380
+#: ../data/quests/theFissure.xml:405
 msgid "Slowly he's getting to me..."
 msgstr ""
 
-#: ../data/quests/theFissure.xml:382
+#: ../data/quests/theFissure.xml:407
 msgid "Only now?"
 msgstr ""
 
-#: ../data/quests/theFissure.xml:383
+#: ../data/quests/theFissure.xml:408
 msgid "Mages have to be naturally patient."
 msgstr ""
 
-#: ../data/quests/theFissure.xml:385
+#: ../data/quests/theFissure.xml:410
 msgid "I'm sure the undead found a hidden cave."
 msgstr ""
 
-#: ../data/quests/theFissure.xml:386
+#: ../data/quests/theFissure.xml:411
 msgid "Please take this explosion spell."
 msgstr ""
 
-#: ../data/quests/theFissure.xml:387
+#: ../data/quests/theFissure.xml:412
 msgid "It surely will be useful."
 msgstr ""
 
-#: ../data/quests/theFissure.xml:388
+#: ../data/quests/theFissure.xml:413
 msgid "I know of a cave system north of here."
 msgstr ""
 
-#: ../data/quests/theFissure.xml:389
+#: ../data/quests/theFissure.xml:414
 msgid "They say it's cursed."
 msgstr ""
 
-#: ../data/quests/theFissure.xml:391
+#: ../data/quests/theFissure.xml:416
 msgid "Should that frighten me?"
 msgstr ""
 
-#: ../data/quests/theFissure.xml:393
+#: ../data/quests/theFissure.xml:418
 msgid "Should that frighten us?"
 msgstr ""
 
-#: ../data/quests/theFissure.xml:396
+#: ../data/quests/theFissure.xml:421
 msgid "probably not."
 msgstr ""
 
-#: ../data/quests/theFissure.xml:397
+#: ../data/quests/theFissure.xml:422
 msgid "Thanks for your help."
 msgstr ""
 
-#: ../data/quests/theFissure.xml:398
+#: ../data/quests/theFissure.xml:423
 msgid "Good luck!"
 msgstr ""
 
-#: ../data/quests/theFissure.xml:399
+#: ../data/quests/theFissure.xml:424
 msgid "I hope we meet again soon."
+msgstr ""
+
+#: ../data/quests/theFissure.xml:502
+msgid "Unbekannter Lich"
+msgstr ""
+
+#: ../data/quests/theFissure.xml:526
+msgid "Nar'Asoroth, mein Gebieter."
+msgstr ""
+
+#: ../data/quests/theFissure.xml:534
+msgid ""
+"Der Stein ist hart, aber wenn ich die Skelette noch schneller arbeiten "
+"lasse, brechen sie auseinander!"
+msgstr ""
+
+#: ../data/quests/theFissure.xml:543
+msgid "(So eine Gelegenheit ergibt sich vielleicht nicht wieder.)"
+msgstr ""
+
+#: ../data/quests/theFissure.xml:556
+msgid "Den Lich sofort angreifen?"
+msgstr ""
+
+#: ../data/quests/theFissure.xml:563 ../data/quests/theFissure.xml:609
+msgid "Na dann, los!"
+msgstr ""
+
+#: ../data/quests/theFissure.xml:573
+msgid "Warte, vielleicht erfahren wir noch etwas nuetzliches."
+msgstr ""
+
+#: ../data/quests/theFissure.xml:575
+msgid "Wartet, vielleicht erfahren wir noch etwas nuetzliches."
+msgstr ""
+
+#: ../data/quests/theFissure.xml:578
+msgid "Lass sie ab und zu ausruhen."
+msgstr ""
+
+#: ../data/quests/theFissure.xml:579
+msgid "Sie sollen auch noch kaempfen koennen."
+msgstr ""
+
+#: ../data/quests/theFissure.xml:580
+msgid "Soll der Tunnel nicht zum Angriff fertig sein?"
+msgstr ""
+
+#: ../data/quests/theFissure.xml:584
+msgid "Sollen die Aisener dort ihre Verstaerkungstruppen aufreiben."
+msgstr ""
+
+#: ../data/quests/theFissure.xml:585
+msgid ""
+"Die Armee, die durch diesen Tunnel ziehen wird, hat mit Zwergentrutz nichts "
+"zu tun."
+msgstr ""
+
+#: ../data/quests/theFissure.xml:586
+msgid "Nur der Kristall ist wichtig."
+msgstr ""
+
+#: ../data/quests/theFissure.xml:588
+msgid "Und das ist gut so."
+msgstr ""
+
+#: ../data/quests/theFissure.xml:589
+msgid "Jetzt zurueck an die Arbeit."
+msgstr ""
+
+#: ../data/quests/theFissure.xml:592
+msgid "Euer Wunsch ist mein Handeln."
+msgstr ""
+
+#: ../data/quests/theFissure.xml:595
+msgid "Das muss der Lich sein, der Zwergentrutz angreift."
+msgstr ""
+
+#: ../data/quests/theFissure.xml:596
+msgid "Wenn ich den jetzt fertig mache, wird seine Armee zu Staub zerfallen."
+msgstr ""
+
+#: ../data/quests/theFissure.xml:599 ../data/quests/theFissure.xml:602
+#: ../data/quests/theFissure.xml:605
+msgid "Das ist ein Lich."
+msgstr ""
+
+#: ../data/quests/theFissure.xml:600 ../data/quests/theFissure.xml:603
+#: ../data/quests/theFissure.xml:606
+msgid "Wenn wir den jetzt vernichten, wird seine Armee mit ihm zerfallen!"
+msgstr ""
+
+#: ../data/quests/theFissure.xml:632
+msgid ""
+"So was. Ueberall gibt es Ratten. Toetet sie und bringt mir ihre Knochen!"
+msgstr ""
+
+#: ../data/quests/theFissure.xml:708
+msgid "Dann sorge ich mal dafuer, dass dieser Spalt nur noch Geschichte ist."
+msgstr ""
+
+#: ../data/quests/theFissure.xml:712 ../data/quests/theFissure.xml:714
+msgid "Okay, los!"
+msgstr ""
+
+#: ../data/quests/theFissure.xml:716
+msgid "Sprengen wir diesen Durchgang in tausend Stuecke!"
+msgstr ""
+
+#: ../data/quests/theFissure.xml:741
+msgid "Schnell raus hier!"
+msgstr ""
+
+#: ../data/quests/theFissure.xml:827
+msgid "Alles klar, Windklaue. Ich bin hier fertig"
+msgstr ""
+
+#: ../data/quests/theFissure.xml:829
+msgid "Alles klar, Windklaue. Wir sind hier fertig"
+msgstr ""
+
+#: ../data/quests/theFissure.xml:832
+msgid "Was jetzt?"
+msgstr ""
+
+#: ../data/quests/theFissure.xml:835
+msgid "Du Trottel! Sieh zu, dass du aus dem Berg raus kommst!"
+msgstr ""
+
+#: ../data/quests/theFissure.xml:836
+msgid "Du wirst in Zwergentrutz gebraucht!"
+msgstr ""
+
+#: ../data/quests/theFissure.xml:838
+msgid "Ihr Trottel! Seht zu, dass ihr aus dem Berg raus kommt!"
+msgstr ""
+
+#: ../data/quests/theFissure.xml:839
+msgid "Ihr werdet in Zwergentrutz gebraucht!"
+msgstr ""
+
+#: ../data/quests/theFissure.xml:840
+msgid ""
+"Gehen wir. Wenn wir Glueck haben, hat es den Ausgang auch verschuettet und "
+"wir koennen uns alles andere sparen."
+msgstr ""
+
+#: ../data/quests/theFissure.xml:841
+msgid ""
+"In dem Fall koennt ihr euch immer noch in Stuecke hacken. Das wird wohl "
+"funktionieren."
+msgstr ""
+
+#: ../data/quests/theFissure.xml:842
+msgid "Hat der eigentlich eine Ahnung, wie weh das jedes Mal tut?"
+msgstr ""
+
+#: ../data/quests/theFissure.xml:843
+msgid ""
+"Kann nicht sein, dann wuerde er einen so bescheuerten Vorschlag gar nicht "
+"erst machen."
+msgstr ""
+
+#: ../data/quests/theFissure.xml:844
+msgid "Es gibt wirklich bessere Arbeitgeber."
+msgstr ""
+
+#: ../data/quests/theFissure.xml:845
+msgid "Hoert auf zu mosern und bewegt euch endlich!"
+msgstr ""
+
+#: ../data/quests/theFissure.xml:864
+msgid "Hoffentlich gibt es da hinten einen Ausgang."
+msgstr ""
+
+#: ../data/quests/theFissure.xml:865
+msgid "Wer ist da?"
+msgstr ""
+
+#: ../data/quests/theFissure.xml:866
+msgid ""
+"Oh, bei den Goettern, so denn gerade welche ihre Augen auf dieses "
+"unangenehme Stueck Land haben."
+msgstr ""
+
+#: ../data/quests/theFissure.xml:868
+msgid "Wie schoen, ein bekanntes Gesicht zu sehen."
+msgstr ""
+
+#: ../data/quests/theFissure.xml:870
+msgid "Wie schoen, bekannte Gesichter zu sehen."
+msgstr ""
+
+#: ../data/quests/theFissure.xml:873
+msgid "Nicht so schnell, Kraemer!"
+msgstr ""
+
+#: ../data/quests/theFissure.xml:874
+msgid "Wie bei Harads Augen kommt Ihr hier her?"
+msgstr ""
+
+#: ../data/quests/theFissure.xml:876
+msgid "Ah! Ja nun..."
+msgstr ""
+
+#: ../data/quests/theFissure.xml:877
+msgid ""
+"Ich wollte eine Abkuerzung durch die Berge finden, als ploetzlich der Boden "
+"unter mir nachgab."
+msgstr ""
+
+#: ../data/quests/theFissure.xml:878
+msgid ""
+"Und nachdem ich mich vorsichtig umgesehen hatte musste ich leider "
+"feststellen, dass der Weg nach Sueden verschuettet war."
+msgstr ""
+
+#: ../data/quests/theFissure.xml:879
+msgid "Darum bin ich hier."
+msgstr ""
+
+#: ../data/quests/theFissure.xml:880
+msgid "Im Osten gibt es auch eine Hoehle, aber die war mir nicht geheuer."
+msgstr ""
+
+#: ../data/quests/theFissure.xml:882
+msgid "Aber da Ihr ja hier seid, gibt es noch Hoffnung."
+msgstr ""
+
+#: ../data/quests/theFissure.xml:883 ../data/quests/theFissure.xml:887
+msgid "Ich werde einfach warten, bis der Weg frei ist."
+msgstr ""
+
+#: ../data/quests/theFissure.xml:884
+msgid ""
+"Eure Notlage mal ausser acht gelassen, was macht euch so sicher, dass ich "
+"nicht einfach mit einem Stadtportal verschwinde?"
+msgstr ""
+
+#: ../data/quests/theFissure.xml:886
+msgid "Aber da Ihr ja hier seid, geschaetzte Freunde, gibt es noch Hoffnung."
+msgstr ""
+
+#: ../data/quests/theFissure.xml:888
+msgid ""
+"Eure Notlage mal ausser acht gelassen, was macht euch so sicher, dass wir "
+"nicht einfach mit einem Stadtportal verschwinden?"
+msgstr ""
+
+#: ../data/quests/theFissure.xml:891
+msgid ""
+"Nun, normalerweise ginge das wohl, und ich wuerde euch mit Freuden eine "
+"praechtige Belohnung fuer die Hilfe anbieten."
+msgstr ""
+
+#: ../data/quests/theFissure.xml:892
+msgid ""
+"Jedoch hat an diesem Ort vor gar nicht langer Zeit eine beachtliche magische "
+"Explosion statt gefunden."
+msgstr ""
+
+#: ../data/quests/theFissure.xml:894
+msgid ""
+"Ihr werdet feststellen, dass die Schriftrollen Euch wieder genau hier her "
+"bringen werden. _solo"
+msgstr ""
+
+#: ../data/quests/theFissure.xml:896
+msgid ""
+"Ihr werdet feststellen, dass die Schriftrollen Euch wieder genau hier her "
+"bringen werden."
+msgstr ""
+
+#: ../data/quests/theFissure.xml:899
+msgid "Verflucht sei Windklaue!"
+msgstr ""
+
+#: ../data/quests/theFissure.xml:900
+msgid "Na schoen. Dann eben auf die harte Tour."
+msgstr ""
+
+#: ../data/quests/theFissure.xml:901
+msgid ""
+"Wenn ihr etwas braucht, lasst es mich wissen. Ich habe da hinten ein paar "
+"Traenke entdeckt,von denen ich mich fuer ein geringes Entgeld trennen werde."
+msgstr ""
+
+#: ../data/quests/theFissure.xml:902
+msgid "Ihr verlangt tatsaechlich Geld dafuer."
+msgstr ""
+
+#: ../data/quests/theFissure.xml:903
+msgid "Aber Geschaeft ist Geschaeft."
 msgstr ""
 
 #: ../data/quests/theTrader.xml:6
@@ -3410,10 +4717,6 @@ msgstr ""
 msgid "Nun, ueber Euer Inventar wisst Ihr ja Bescheid, richtig?"
 msgstr ""
 
-#: ../data/quests/theTrader.xml:176
-msgid "Das dachte ich mir."
-msgstr ""
-
 #: ../data/quests/theTrader.xml:177
 msgid ""
 "Ganz unten habt Ihr die kleinen Gegenstaende, die in drei Reihen vorhanden "
@@ -3484,20 +4787,34 @@ msgstr ""
 msgid "Komischer Kauz."
 msgstr ""
 
-#: ../data/quests/theTrader.xml:255
+#: ../data/quests/theTrader.xml:256
 msgid ""
 "Oh, nun, mir fiel auf, dass Ihr nach Norden wolltet, und ich dachte mir, "
 "dass es Euch vielleicht gelegen kaeme, mich in der Naehe zu wissen."
 msgstr ""
 
-#: ../data/quests/theTrader.xml:256
+#: ../data/quests/theTrader.xml:257
 msgid "Hm, da habt Ihr auch wieder recht."
 msgstr ""
 
+#: ../data/quests/theTrader.xml:294
+msgid "Wie schoen, dass Ihr auch aus den Hoelen entkommen seid."
+msgstr ""
+
+#: ../data/quests/theTrader.xml:295
+msgid ""
+"Das habe ich Euch zu verdanken. Darf ich Euch weiterhin meine Dienste "
+"anbieten?"
+msgstr ""
+
+#: ../data/quests/theTrader.xml:296
+msgid ""
+"Aber sicher doch. Jetzt, wo ich endlich wieder einen vernünftigen Anker habe."
+msgstr ""
+
 #: ../data/quests/tutorial.xml:10
-#, fuzzy
 msgid "Tutorial finished"
-msgstr "Quest abgeschlossen"
+msgstr "Tutorial abgeschlossen"
 
 #: ../data/quests/tutorial.xml:13
 msgid "Gib deine Waffen bei Derred ab."
@@ -3576,927 +4893,1006 @@ msgstr ""
 #: ../data/quests/tutorial.xml:237
 msgid ""
 "Es scheint, als besäße hier jemand größeres Wissen über die Art und Weise, "
+"wie Harad mich am Leben hält und bewegt."
+msgstr ""
+
+#: ../data/quests/tutorial.xml:239
+msgid ""
+"Es scheint, als besäße hier jemand größeres Wissen über die Art und Weise, "
 "wie Harad uns am Leben hält und bewegt."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:238
+#: ../data/quests/tutorial.xml:241
 msgid ""
 "Wer auch immer hier das Sagen hat: Er hat sich besser überlegt, worauf er "
 "sich einlässt."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:239
+#: ../data/quests/tutorial.xml:242
 msgid "Viel Geld könnte mich wieder gnädig stimmen."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:241
+#: ../data/quests/tutorial.xml:245
+msgid ""
+"Bitte entschuldigt die etwas raue Ankunft. Lord Magister Soren Windklaue "
+"erbittet eure Audienz. _solo"
+msgstr ""
+
+#: ../data/quests/tutorial.xml:247
 msgid ""
 "Bitte entschuldigt die etwas raue Ankunft. Lord Magister Soren Windklaue "
 "erbittet eure Audienz."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:250
+#: ../data/quests/tutorial.xml:257
 msgid "Ach so!"
 msgstr ""
 
-#: ../data/quests/tutorial.xml:251
+#: ../data/quests/tutorial.xml:258
 msgid "Lord"
 msgstr ""
 
-#: ../data/quests/tutorial.xml:252
+#: ../data/quests/tutorial.xml:259
 msgid "Magister"
 msgstr ""
 
-#: ../data/quests/tutorial.xml:253
+#: ../data/quests/tutorial.xml:260
 msgid "Windklaue."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:254
+#: ../data/quests/tutorial.xml:261
 msgid "Warum habt ihr das nicht gleich gesagt?"
 msgstr ""
 
-#: ../data/quests/tutorial.xml:255
+#: ../data/quests/tutorial.xml:262
 msgid "Nun, wenn Ihr uns bitte folgen würdet?"
 msgstr ""
 
-#: ../data/quests/tutorial.xml:257
+#: ../data/quests/tutorial.xml:264
 msgid "Wollt ihr uns verarschen? Wer bitte schön ist denn dieser Windwichtel?"
 msgstr ""
 
-#: ../data/quests/tutorial.xml:259
+#: ../data/quests/tutorial.xml:266
 msgid "Wollt ihr mich verarschen? Wer bitte schön ist denn dieser Windwichtel?"
 msgstr ""
 
-#: ../data/quests/tutorial.xml:263
+#: ../data/quests/tutorial.xml:270
+msgid ""
+"Eine brillante Frage. Kurz und Präzise. Vielleicht kann man doch mit ihr "
+"arbeiten."
+msgstr ""
+
+#: ../data/quests/tutorial.xml:272
 msgid ""
 "Eine brillante Frage. Kurz und Präzise. Vielleicht kann man doch mit ihm "
 "arbeiten."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:266
+#: ../data/quests/tutorial.xml:275
 msgid "Ähm..."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:268
+#: ../data/quests/tutorial.xml:277
 msgid "Nur die Ruhe, mein Sohn. Nimm dir Zeit, über die Antwort nachzudenken."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:275
+#: ../data/quests/tutorial.xml:284
 msgid "Es könnte deine Letzte sein."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:280
+#: ../data/quests/tutorial.xml:289
 msgid ""
 "Raus damit. Wo sind wir und wer hat den Nerv, Gezeichnete gegen sich auf zu "
 "bringen?!"
 msgstr ""
 
-#: ../data/quests/tutorial.xml:281
+#: ../data/quests/tutorial.xml:291
+msgid ""
+"Nun, der Lord Magister hat versichert, dass er Euch das alles genau erklären "
+"wird. _solo"
+msgstr ""
+
+#: ../data/quests/tutorial.xml:292
+msgid "Außerdem war Eure Ankunft... etwas beschwerlich. _solo"
+msgstr ""
+
+#: ../data/quests/tutorial.xml:293
+msgid ""
+"Ihr dürftet im Moment nicht einmal in der Lage sein, uns gefährlich zu "
+"werden. _solo"
+msgstr ""
+
+#: ../data/quests/tutorial.xml:295
 msgid ""
 "Nun, der Lord Magister hat versichert, dass er Euch das alles genau erklären "
 "wird."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:282
+#: ../data/quests/tutorial.xml:296
 msgid "Außerdem war Eure Ankunft... etwas beschwerlich."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:283
+#: ../data/quests/tutorial.xml:297
 msgid ""
 "Ihr dürftet im Moment nicht einmal in der Lage sein, uns gefährlich zu "
 "werden."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:284
+#: ../data/quests/tutorial.xml:299
 msgid "Was habt ihr getan ihr Bastarde?!"
 msgstr ""
 
-#: ../data/quests/tutorial.xml:285
+#: ../data/quests/tutorial.xml:301
+msgid "Keine Angst, wir haben strikten Befehl, euch nicht zu töten. _solo"
+msgstr ""
+
+#: ../data/quests/tutorial.xml:303
 msgid "Keine Angst, wir haben strikten Befehl, euch nicht zu töten."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:287
+#: ../data/quests/tutorial.xml:306
 msgid "Der Kerl scheint zu wissen, was er tut."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:289
+#: ../data/quests/tutorial.xml:308
 msgid "Das ist nicht der richtige Zeitpunkt, um beeindruckt zu sein."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:292
+#: ../data/quests/tutorial.xml:312
+msgid ""
+"Schön. Da das geklärt ist, möchte ich Euch bitten, mir eure Ausrüstung zu "
+"überlassen. _solo"
+msgstr ""
+
+#: ../data/quests/tutorial.xml:314
 msgid ""
 "Schön. Da das geklärt ist, möchte ich Euch bitten, mir eure Ausrüstung zu "
 "überlassen."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:293
+#: ../data/quests/tutorial.xml:316
 msgid "Freundlich bitten."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:294
+#: ../data/quests/tutorial.xml:318
+msgid ""
+"Wir können kein Risiko eingehen und innerhalb der Konzils seid Ihr sicher. "
+"_solo"
+msgstr ""
+
+#: ../data/quests/tutorial.xml:320
 msgid ""
 "Wir können kein Risiko eingehen und innerhalb der Konzils seid Ihr sicher."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:295
+#: ../data/quests/tutorial.xml:323
 msgid "Konzil? Das Konzil der Elementarbeschwörer?! Ist das hier Aisen?"
 msgstr ""
 
-#: ../data/quests/tutorial.xml:296
+#: ../data/quests/tutorial.xml:324
 msgid "Ja, aber das tut jetzt nichts zur Sache!"
 msgstr ""
 
-#: ../data/quests/tutorial.xml:298
+#: ../data/quests/tutorial.xml:326
 msgid "Was wenn wir gar keine Lust haben unsere Waffen ab zu geben?"
 msgstr ""
 
-#: ../data/quests/tutorial.xml:300
-msgid "Was wenn ich gar keine Lust habe meine Waffen ab zu geben?"
-msgstr ""
-
-#: ../data/quests/tutorial.xml:303
+#: ../data/quests/tutorial.xml:327
 msgid ""
 "Es tut uns leid, wir können euch nicht vorher aus dem Sicherheitsbereich "
 "lassen."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:304
+#: ../data/quests/tutorial.xml:329
+msgid "Was wenn ich gar keine Lust habe meine Waffen ab zu geben?"
+msgstr ""
+
+#: ../data/quests/tutorial.xml:330
+msgid ""
+"Es tut uns leid, wir können euch nicht vorher aus dem Sicherheitsbereich "
+"lassen. _solo"
+msgstr ""
+
+#: ../data/quests/tutorial.xml:334
 msgid "Sicherheitsbereich?! Das ist ein verdammtes Gefängnis!"
 msgstr ""
 
-#: ../data/quests/tutorial.xml:305
+#: ../data/quests/tutorial.xml:335
 msgid "Es ist eure Entscheidung"
 msgstr ""
 
-#: ../data/quests/tutorial.xml:335
+#: ../data/quests/tutorial.xml:365
 msgid "Wie es aussieht haben wir keine Wahl..."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:337
+#: ../data/quests/tutorial.xml:367
 msgid "Wie es aussieht habe ich keine Wahl..."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:341
+#: ../data/quests/tutorial.xml:371
 msgid "Sehr Gut. Folgt mir bitte."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:348
+#: ../data/quests/tutorial.xml:378
 msgid "Vergesst es!"
 msgstr ""
 
-#: ../data/quests/tutorial.xml:349
+#: ../data/quests/tutorial.xml:379
 msgid "Wir ihr es wünscht, aber dieser Raum ist sicher."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:350
+#: ../data/quests/tutorial.xml:381
+msgid ""
+"Ihr werdet ihn nicht verlassen, wenn ihr nicht eure Waffen abgebt. _solo"
+msgstr ""
+
+#: ../data/quests/tutorial.xml:382
+msgid ""
+"Sagt einfach bescheid, indem ihr einen von uns anklickt, wenn ihr es euch "
+"anders überlegt habt. _solo"
+msgstr ""
+
+#: ../data/quests/tutorial.xml:384
 msgid "Ihr werdet ihn nicht verlassen, wenn ihr nicht eure Waffen abgebt."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:351
+#: ../data/quests/tutorial.xml:385
 msgid ""
 "Sagt einfach bescheid, indem ihr einen von uns anklickt, wenn ihr es euch "
 "anders überlegt habt."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:402
+#: ../data/quests/tutorial.xml:438
 msgid "Folgt mir bitte."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:444
+#: ../data/quests/tutorial.xml:480
 msgid ""
 "Wo bleibt Ihr denn? Hat Euch der Transport so sehr zugesetzt, dass ihr nicht "
 "mal mehr wisst, wie man sich bewegt? Klickt einfach mit der linken Maustaste "
 "auf eine Stelle auf dem Boden, dann kommt das alles von ganz allein wieder."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:524
+#: ../data/quests/tutorial.xml:560
 msgid "*Argh!!!*"
 msgstr ""
 
-#: ../data/quests/tutorial.xml:567
+#: ../data/quests/tutorial.xml:603
 msgid "Bei Akeran! Verschließt die Tore!!!"
 msgstr ""
 
-#: ../data/quests/tutorial.xml:586
+#: ../data/quests/tutorial.xml:622
 msgid "Akerans Schild! Das DING ist frei! Alle zurück! Los, los, los!"
 msgstr ""
 
-#: ../data/quests/tutorial.xml:624
+#: ../data/quests/tutorial.xml:660
 msgid "Da kommen wir nicht vorbei. Was machen wir jetzt?"
 msgstr ""
 
-#: ../data/quests/tutorial.xml:625
+#: ../data/quests/tutorial.xml:661
 msgid "Ist das Ding da echt so schlimm?"
 msgstr ""
 
-#: ../data/quests/tutorial.xml:626
+#: ../data/quests/tutorial.xml:662
 msgid "Habt ihr keine Augen im Kopf? Das Teil ist riesig!"
 msgstr ""
 
-#: ../data/quests/tutorial.xml:627
+#: ../data/quests/tutorial.xml:663
 msgid "Größe ist nicht alles."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:628
+#: ../data/quests/tutorial.xml:664
 msgid ""
 "Sieht für mich aus wie die Fahrkarte nach draußen. Kann nicht schmerzhafter "
 "sein als die Ankunft."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:629
+#: ../data/quests/tutorial.xml:665
 msgid "Äh ja... deswegen..."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:630
+#: ../data/quests/tutorial.xml:666
 msgid "Was?"
 msgstr ""
 
-#: ../data/quests/tutorial.xml:631
+#: ../data/quests/tutorial.xml:667
 msgid ""
 "Der Lord Magister Windklaue befürchtete, Ihr könntet Euch nach eurem "
 "Eintreffen selbst entleiben, um wieder zu verschwinden, deswegen hat er... "
 "Maßnahmen getroffen"
 msgstr ""
 
-#: ../data/quests/tutorial.xml:634
+#: ../data/quests/tutorial.xml:670
 msgid "Maßnahmen?"
 msgstr ""
 
-#: ../data/quests/tutorial.xml:635
+#: ../data/quests/tutorial.xml:671
 msgid ""
 "Nun, wir verstehen nicht viel davon, aber anscheinend sterbt Ihr nicht wie "
 "wir."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:636
+#: ../data/quests/tutorial.xml:672
 msgid ""
 "Statt dessen könnt einfach, wo Ihr wollt wiederauferstehen, nachdem euer "
 "Körper zerstört wurde."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:637
+#: ../data/quests/tutorial.xml:673
 msgid "Akeran muss euch wirklich hassen..."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:639
+#: ../data/quests/tutorial.xml:675
 msgid "Und? Niemand von uns hat um diese Fähigkeit gebeten."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:641
+#: ../data/quests/tutorial.xml:677
 msgid "Und? Ich habe nicht um diese Fähigkeit gebeten."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:644
+#: ../data/quests/tutorial.xml:680
 msgid ""
 "Nun, in eurem jetzigen Zustand könnt ihr das nur an Orten großer magischer "
 "Konzentration, die ihr bereits besucht habt. Mit anderen Worten..."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:645
+#: ../data/quests/tutorial.xml:681
 msgid "...nur dahinten bei dem ganzen Krempel."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:647
+#: ../data/quests/tutorial.xml:683
 msgid "Krempel würde ich das nicht unbedingt nennen."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:650
+#: ../data/quests/tutorial.xml:686
 msgid "Genau, nur an dieser Stelle."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:652
+#: ../data/quests/tutorial.xml:688
 msgid ""
 "Es wird Zeit, dass wir mit diesem Windklaue reden. Scheint ja ein gewitztes "
 "Kerlchen zu sein."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:654
+#: ../data/quests/tutorial.xml:690
 msgid ""
 "Es wird Zeit, dass ich mit diesem Windklaue rede. Scheint ja ein gewitztes "
 "Kerlchen zu sein."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:656
+#: ../data/quests/tutorial.xml:692
 msgid "Ist sicher nicht allzu gesund so gewitzt zu sein."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:657
+#: ../data/quests/tutorial.xml:693
 msgid ""
 "Äh, ja, gut. Da der Weg nach vorne momentan versperrt ist, müssen wir wohl "
 "versuchen, durch das Gehege mit den neuen Experimenten zu kommen."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:658
+#: ../data/quests/tutorial.xml:694
 msgid "Es gibt da eine Hintertür für die Fütterung und angeblich..."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:659
+#: ../data/quests/tutorial.xml:695
 msgid ""
 "...hat sich der alte Feuerwirbel eine Geheimtür als Direktverbindung zur "
 "Küche eingebaut. Das könnte klappen! Aber die Viecher sind nicht "
 "ungefährlich."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:660
+#: ../data/quests/tutorial.xml:696
 msgid "Das sind doch nur diese Schnecklinge."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:661
+#: ../data/quests/tutorial.xml:697
 msgid ""
 "Na, ich weiß ja nicht... ich hab keine Lust, nur wegen so einem schleimigen "
 "Feueratem drei Wochen das Bett zu hüten."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:664
+#: ../data/quests/tutorial.xml:700
 msgid ""
 "Bei Harad! Das kann man sich ja unmöglich antun. Gebt uns unsere Waffen und "
 "wir kümmern uns darum."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:666
+#: ../data/quests/tutorial.xml:702
 msgid ""
 "Bei Harad! Das kann man sich ja unmöglich antun. Gib mir meine  Waffe und "
 "ich kümmere mich darum."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:668
+#: ../data/quests/tutorial.xml:704
 msgid "Nun, da habt Ihr nicht unrecht..."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:669
+#: ../data/quests/tutorial.xml:705
 msgid ""
 "Ja, in Anbetracht der schwierigen Umstände können wir das wohl machen. Hier "
 "bittesehr."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:673
+#: ../data/quests/tutorial.xml:709
 msgid "Was soll das denn sein?"
 msgstr ""
 
-#: ../data/quests/tutorial.xml:674
+#: ../data/quests/tutorial.xml:710
 msgid "Wo ist meine Waffe?"
 msgstr ""
 
-#: ../data/quests/tutorial.xml:676
+#: ../data/quests/tutorial.xml:712
 msgid ""
 "Ähm... Lord Magister Windklaue befürchtete, dass es zu einer Situation "
 "kommen könnte, in der ihr auf, äh, Waffengewalt zurückgreifen müsst."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:677
+#: ../data/quests/tutorial.xml:713
 msgid "Deswegen hat er uns diese hier mitgegeben."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:678
+#: ../data/quests/tutorial.xml:714
 msgid ""
 "Ihr versteht sicherlich, dass ihr hier nicht mit ungeprüften Waffen "
 "umherlaufen könnt."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:680
+#: ../data/quests/tutorial.xml:716
 msgid "Langsam fangt ihr an zu nerven."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:681
+#: ../data/quests/tutorial.xml:717
 msgid ""
 "Woran hat der eigentlich nicht gedacht? Der ist doch eindeutig paranoid."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:683
+#: ../data/quests/tutorial.xml:719
 msgid "Ihr... könnt euch noch erinnern, wie man eine Waffe benutzt richtig?"
 msgstr ""
 
-#: ../data/quests/tutorial.xml:684
+#: ../data/quests/tutorial.xml:720
 msgid ""
 "Uns wurde gesagt, dass die ersten Minuten sind, als träte man zum ersten Mal "
 "in die Welt."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:690
+#: ../data/quests/tutorial.xml:726
 msgid "Inventar erklären?"
 msgstr ""
 
-#: ../data/quests/tutorial.xml:719
+#: ../data/quests/tutorial.xml:755
 msgid ""
 "Zuerst müsst Ihr euer Inventar öffnen. Dies tut ihr standardmäßig mit der "
 "'i'-Taste."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:720
+#: ../data/quests/tutorial.xml:756
 msgid ""
 "Alternativ könnt ihr auch auf den Inventarknopf unten in der Statusleiste "
 "drücken."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:721
+#: ../data/quests/tutorial.xml:757
 msgid ""
 "Im Inventar seht ihr dann Eure Gegenstände. Sie sind unterteilt nach ihrer "
 "Größe."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:722
+#: ../data/quests/tutorial.xml:758
 msgid ""
 "Die Waffe, die Ihr gerade \terhalten habt ist ein mittelgroßer Gegenstand "
 "und befindet sich deshalb im mittleren Feld"
 msgstr ""
 
-#: ../data/quests/tutorial.xml:723
+#: ../data/quests/tutorial.xml:759
 msgid ""
 "Klickt die Waffe mit der linken Maustaste an und klickt danach auf das "
 "Waffenfeld in Eurer Ausrüstung über dem Inventar. Und schon habt ihr sie "
 "angelegt."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:729
+#: ../data/quests/tutorial.xml:765
 msgid "Sagt Bescheid, sobald ihr bereit seid"
 msgstr ""
 
-#: ../data/quests/tutorial.xml:780
+#: ../data/quests/tutorial.xml:816
 msgid "Ihr solltet zunächst eure Waffe anlegen."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:782
+#: ../data/quests/tutorial.xml:818
 msgid "Ihr solltet alle zunächst eure Waffen anlegen."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:788
+#: ../data/quests/tutorial.xml:824
 msgid "Aber wir man kaempft wisst Ihr doch noch, oder? _solo"
 msgstr ""
 
-#: ../data/quests/tutorial.xml:790
+#: ../data/quests/tutorial.xml:826
 msgid "Aber wir man kaempft wisst ihr doch noch, oder?"
 msgstr ""
 
-#: ../data/quests/tutorial.xml:792
+#: ../data/quests/tutorial.xml:828
 msgid "Reingehen, anklicken, töten. Das vergisst man niemals als Gezeichneter."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:793
-msgid "Anklicken?"
+#: ../data/quests/tutorial.xml:829
+msgid "Was soll eigentlich dieses anklicken?"
 msgstr ""
 
-#: ../data/quests/tutorial.xml:796
+#: ../data/quests/tutorial.xml:832
 msgid "Keine Ahnung, der Lord Magister hat gesagt, die versteht das schon."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:798
+#: ../data/quests/tutorial.xml:834
 msgid "Keine Ahnung, der Lord Magister hat gesagt, der versteht das schon."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:801
+#: ../data/quests/tutorial.xml:837
 msgid "Keine Ahnung, der Lord Magister hat gesagt, die verstehen das schon."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:804
+#: ../data/quests/tutorial.xml:840
 msgid "Dann werde ich diese Experimente mal das Fürchten lehren!"
 msgstr ""
 
-#: ../data/quests/tutorial.xml:806
+#: ../data/quests/tutorial.xml:842
 msgid "Lass uns diese Experimente das Fürchten lehren!"
 msgstr ""
 
-#: ../data/quests/tutorial.xml:808
+#: ../data/quests/tutorial.xml:844
 msgid "Lasst uns diese Experimente das Fürchten lehren!"
 msgstr ""
 
-#: ../data/quests/tutorial.xml:809
+#: ../data/quests/tutorial.xml:845
 msgid "Ich hoffe, die haben auch eine Seele."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:811
+#: ../data/quests/tutorial.xml:847
 msgid ""
 "Keine Sorge. Selbst ein Golem hat eine. Da werden die Dinger keine Ausnahme "
 "sein."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:813
+#: ../data/quests/tutorial.xml:849
 msgid ""
-"Sehr gut, haltet uns einfach diese Dinger vom Hals, während wir versuchen "
+"Sehr gut, haltet uns einfach diese Viecher vom Hals, während wir versuchen "
 "die Luke zu  öffnen."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:814
+#: ../data/quests/tutorial.xml:850
 msgid ""
 "Vergiss es! Ich geh da nicht rein, wenn die Viecher noch auf freiem Fuss "
 "sind!"
 msgstr ""
 
-#: ../data/quests/tutorial.xml:879
+#: ../data/quests/tutorial.xml:915
 msgid "Ihh, die Dinger sind echt widerlich"
 msgstr ""
 
-#: ../data/quests/tutorial.xml:880
+#: ../data/quests/tutorial.xml:916
 msgid "Was seid ihr denn für Mimosen?"
 msgstr ""
 
-#: ../data/quests/tutorial.xml:881
+#: ../data/quests/tutorial.xml:917
 msgid "Suchst du streit, du Schwächling?!"
 msgstr ""
 
-#: ../data/quests/tutorial.xml:882
+#: ../data/quests/tutorial.xml:918
 msgid "Warte mal, irgendwie sind sie stärker geworden."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:884
+#: ../data/quests/tutorial.xml:920
 msgid ""
 "Euer Hexenkram mag mich ja geschwaecht haben, aber mit jedem getoeteten "
 "Wesen nehme ich einen Teil seiner Kraft auf und werde staerker."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:886
+#: ../data/quests/tutorial.xml:922
 msgid ""
 "Euer Hexenkram mag uns ja geschwaecht haben, aber mit jedem getoeteten Wesen "
 "nehmen wir einen Teil seiner Kraft auf und werden staerker."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:888
-msgid "Überleg dir also lieber, wen du hier Schwächling nennst!"
+#: ../data/quests/tutorial.xml:924
+msgid "Ueberleg dir also lieber, wen du hier Schwaechling nennst!"
 msgstr ""
 
-#: ../data/quests/tutorial.xml:889
+#: ../data/quests/tutorial.xml:925
 msgid ""
 "Hm, stimmt der Lord Magister hat gesagt, das so etwas passieren kann. Wisst "
 "ihr auch, wie ihr diese Kraft in vernünftige Fähigkeiten umwandelt?"
 msgstr ""
 
-#: ../data/quests/tutorial.xml:915
+#: ../data/quests/tutorial.xml:951
 msgid ""
 "Ihr könnt jedes Mal eure Attribute verbessern und von Zeit zu Zeit habt ihr "
 "sogar genug Energie für eine neue Fähigkeit. _solo"
 msgstr ""
 
-#: ../data/quests/tutorial.xml:916
+#: ../data/quests/tutorial.xml:952
 msgid ""
 "Ja genau, das war doch das, mit dem großen Plus in der linken unteren Ecke. "
 "Klickt einfach darauf und verteilt dann im Attributfenster oben eure "
 "Attribut Punkte. _solo"
 msgstr ""
 
-#: ../data/quests/tutorial.xml:917
+#: ../data/quests/tutorial.xml:953
 msgid ""
 "Genau, und den Fähigkeitenpunkt könnt ihr im Fähigkeitenfenster verteilen. "
 "Der Lord Magister hat gesagt, dass ihr die aus drei verschiedenen Kategorien "
 "wählen könnt. _solo"
 msgstr ""
 
-#: ../data/quests/tutorial.xml:918
+#: ../data/quests/tutorial.xml:954
 msgid "In Abhängigkeit von eurer... Charaktermasse. _solo"
 msgstr ""
 
-#: ../data/quests/tutorial.xml:920
+#: ../data/quests/tutorial.xml:956
 msgid ""
 "Ihr könnt jedes Mal eure Attribute verbessern und von Zeit zu Zeit habt ihr "
 "sogar genug Energie für eine neue Fähigkeit."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:921
+#: ../data/quests/tutorial.xml:957
 msgid ""
 "Ja genau, das war doch das, mit dem großen Plus in der linken unteren Ecke. "
 "Klickt einfach darauf und verteilt dann im Attributfenster oben eure "
 "Attribut Punkte."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:922
+#: ../data/quests/tutorial.xml:958
 msgid ""
 "Genau, und den Fähigkeitenpunkt könnt ihr im Fähigkeitenfenster verteilen. "
 "Der Lord Magister hat gesagt, dass ihr die aus drei verschiedenen Kategorien "
 "wählen könnt."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:923
+#: ../data/quests/tutorial.xml:959
 msgid "In Abhängigkeit von eurer... Charaktermasse"
 msgstr ""
 
-#: ../data/quests/tutorial.xml:926
+#: ../data/quests/tutorial.xml:962
 msgid "Charakterklasse."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:927
+#: ../data/quests/tutorial.xml:963
 msgid "Oh, genau!"
 msgstr ""
 
-#: ../data/quests/tutorial.xml:929
+#: ../data/quests/tutorial.xml:964
+msgid "Gezeichnete verwenden schon seltsame Ausdruecke..."
+msgstr ""
+
+#: ../data/quests/tutorial.xml:966
 msgid "Ich frage mich, woher dieser Soren so viel über die Gefallenen weiß..."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:930
+#: ../data/quests/tutorial.xml:967
 msgid "Magier sind aeusserst merkwuerdig. Alle."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:932
+#: ../data/quests/tutorial.xml:969
 msgid "Besser merkwürdig als..."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:970
+#: ../data/quests/tutorial.xml:1007
 msgid "Dieses verdammte Ding. Ich hoffe die Wände halten."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:971
+#: ../data/quests/tutorial.xml:1008
 msgid "Verteilt schnell euren neuen Punkte und dann nichts wie weg von hier."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:995
+#: ../data/quests/tutorial.xml:1032
 msgid "Bitte verteilt zuerst eure Attributpunkte."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:1101
+#: ../data/quests/tutorial.xml:1140
 msgid "Noch mehr von den Viechern?"
 msgstr ""
 
-#: ../data/quests/tutorial.xml:1102
+#: ../data/quests/tutorial.xml:1141
 msgid ""
 "Uäks! Die scheinen irgendwie ausgebrochen zu sein. Hoffentlich vermehren die "
 "sich nicht in den Felsspalten."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:1103
+#: ../data/quests/tutorial.xml:1142
 msgid "Habt ihr schon mal was von Sicherheitsvorkehrungen gehört?"
 msgstr ""
 
-#: ../data/quests/tutorial.xml:1104
+#: ../data/quests/tutorial.xml:1143
 msgid "Da hinten muss irgendwo die Geheimtür sein."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:1105
+#: ../data/quests/tutorial.xml:1144
 msgid "Ihr wisst gar nicht sicher, ob sie da ist?"
 msgstr ""
 
-#: ../data/quests/tutorial.xml:1107
+#: ../data/quests/tutorial.xml:1146
 msgid ""
 "Ich verbringe meine Zeit nicht damit, durch Küchengänge zu kriechen, "
 "Verfluchter!"
 msgstr ""
 
-#: ../data/quests/tutorial.xml:1108
+#: ../data/quests/tutorial.xml:1147
 msgid ""
 "Das heißt korrekt Gezeichneter. Du willst ja auch nicht Ernte genannt "
 "werden, oder?"
 msgstr ""
 
-#: ../data/quests/tutorial.xml:1110
+#: ../data/quests/tutorial.xml:1149
 msgid "Schon gut, schon gut!"
 msgstr ""
 
-#: ../data/quests/tutorial.xml:1179
+#: ../data/quests/tutorial.xml:1219
 msgid "Das sollte die letzte gewesen sein."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:1180
+#: ../data/quests/tutorial.xml:1220
 msgid "Was für ein Gemetzel"
 msgstr ""
 
-#: ../data/quests/tutorial.xml:1181
+#: ../data/quests/tutorial.xml:1221
 msgid "Wirklich etwas stillos"
 msgstr ""
 
-#: ../data/quests/tutorial.xml:1182
+#: ../data/quests/tutorial.xml:1222
 msgid "Suchst du Streit?!"
 msgstr ""
 
-#: ../data/quests/tutorial.xml:1183
+#: ../data/quests/tutorial.xml:1223
 msgid ""
 "Habt ihr eigentlich daran gedacht, eure mächtigen Fähigkeiten einzusetzen?"
 msgstr ""
 
-#: ../data/quests/tutorial.xml:1184
+#: ../data/quests/tutorial.xml:1224
 msgid ""
 "Der Lord Magister meinte, ihr könnt wesentlich mehr als nur stumpfsinnig auf "
 "die Gegner einzuschlagen."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:1185
+#: ../data/quests/tutorial.xml:1225
 msgid "Tatsächlich?"
 msgstr ""
 
-#: ../data/quests/tutorial.xml:1190
+#: ../data/quests/tutorial.xml:1230
 msgid "Fähigkeiten erklären?"
 msgstr ""
 
-#: ../data/quests/tutorial.xml:1203
+#: ../data/quests/tutorial.xml:1243
 msgid ""
 "Mit der Taste 't' öffnet Ihr das Fähigkeitenfenster. Hier könnt Ihr eine "
 "Fähigkeit auswählen."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:1204
+#: ../data/quests/tutorial.xml:1244
 msgid ""
 "Klickt einfach mit der Maustaste, mit der Ihr die Fähigkeit später einsetzen "
 "wollt, auf das Fähigkeitenbild."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:1205
+#: ../data/quests/tutorial.xml:1245
 msgid "Die Fähigkeiten sind in zwei Gruppen unterteilt."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:1206
+#: ../data/quests/tutorial.xml:1246
 msgid ""
 "Nachdem Ihr eine Fähigkeit eingesetzt habt, könnt Ihr alle Fähigkeiten "
 "dieser Gruppe für eine Weile nicht verwenden."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:1207
+#: ../data/quests/tutorial.xml:1247
 msgid ""
 "Schaut auf das Bild in der unteren Leiste um zu erfahren, ob eine Fähigkeit "
 "einsatzbereit ist."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:1220
+#: ../data/quests/tutorial.xml:1260
 msgid "Keine Sorge, ich bin schon fast wieder auf der vollen Höhe."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:1222
+#: ../data/quests/tutorial.xml:1262
 msgid "Keine Sorge, wir sind schon fast wieder auf der vollen Höhe."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:1226
+#: ../data/quests/tutorial.xml:1266
 msgid "Sehr gut. Die Geheimtür ist hier hinten."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:1227
+#: ../data/quests/tutorial.xml:1267
 msgid "Warte mal. Am Ende hat der alte Knacker noch eine Falle angebaut."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:1229
+#: ../data/quests/tutorial.xml:1269
 msgid ""
 "Stimmt auch wieder. Am besten, du machst das, Gezeichnete. Da kann "
 "wenigstens nichts schlimmes passieren."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:1231
+#: ../data/quests/tutorial.xml:1271
 msgid ""
 "Stimmt auch wieder. Am besten, du machst das, Gezeichneter. Da kann "
 "wenigstens nichts schlimmes passieren."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:1233
+#: ../data/quests/tutorial.xml:1273
 msgid ""
 "Das koennte sein... Am besten einer von euch klickt auf die Tür und wir "
 "sehen, was passiert."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:1236
+#: ../data/quests/tutorial.xml:1276
 msgid "Klar, schick die Gezeichnete vor."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:1238
+#: ../data/quests/tutorial.xml:1278
 msgid "Klar, schick den Gezeichneten vor."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:1254
+#: ../data/quests/tutorial.xml:1294
 msgid ""
 "Seht ihr das Regal da in dem Durchgang? Das ist die Tuer. Einfach bei Seite "
 "schieben, indem Ihr darauf klickt."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:1255
+#: ../data/quests/tutorial.xml:1295
 msgid "Und Ihr solltet wohl darauf hoffen, dass keine Falle daran ist."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:1270
+#: ../data/quests/tutorial.xml:1310
 msgid ""
 "Seht ihr das Regal da in dem Durchgang? Das ist die Tuer. Schiebt sie "
 "einfach beiseite, indem Ihr darauf klickt."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:1271
+#: ../data/quests/tutorial.xml:1311
 msgid "Hoffentlich explodiert nichts."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:1317
+#: ../data/quests/tutorial.xml:1357
 msgid "Gut,  Feuerwirbel ist nicht da."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:1318
+#: ../data/quests/tutorial.xml:1358
 msgid ""
 "Woran forscht der hier eigentlich die ganze Zeit? Die Blumen da können doch "
 "nicht im Sinne des Konzils und Akerans sein."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:1319
+#: ../data/quests/tutorial.xml:1359
 msgid ""
 "Ich bin sicher, dahinter steckt mehr, als das Auge sieht. Ein Apfelelementar "
 "zum Beispiel."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:1320
+#: ../data/quests/tutorial.xml:1360
 msgid "Zuzutrauen wäre es ihm jedenfalls."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:1321
+#: ../data/quests/tutorial.xml:1361
 msgid "Spaß bei Seite! Wir müssen weiter. "
 msgstr ""
 
-#: ../data/quests/tutorial.xml:1324
+#: ../data/quests/tutorial.xml:1364
 msgid ""
 "Bei den ganzen Mistviechern, die hier frei in der Gegend rumspringen glaube "
 "ich fast, die wollen mich nur als Kammerjäger..."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:1326
+#: ../data/quests/tutorial.xml:1366
 msgid ""
 "Bei den ganzen Mistviechern, die hier frei in der Gegend rumspringen glaube "
 "ich fast, die wollen uns nur als Kammerjäger..."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:1377 ../data/quests/tutorial.xml:1402
+#: ../data/quests/tutorial.xml:1417 ../data/quests/tutorial.xml:1442
 msgid "Hilfe!"
 msgstr ""
 
-#: ../data/quests/tutorial.xml:1436
+#: ../data/quests/tutorial.xml:1476
 msgid "Ups"
 msgstr ""
 
-#: ../data/quests/tutorial.xml:1469
+#: ../data/quests/tutorial.xml:1509
 msgid ""
 "Was für ein Tag. Wusstest du, dass das Ding auch noch kleine Monster spucken "
 "kann?"
 msgstr ""
 
-#: ../data/quests/tutorial.xml:1470
+#: ../data/quests/tutorial.xml:1510
 msgid "Darüber hat der Lord Magister nichts gesagt..."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:1471
+#: ../data/quests/tutorial.xml:1511
 msgid "Etwas, das nicht im Buch des allwissenden Luftpfote geschrieben steht?"
 msgstr ""
 
-#: ../data/quests/tutorial.xml:1472
+#: ../data/quests/tutorial.xml:1512
 msgid "Windklaue, du Häretiker!"
 msgstr ""
 
-#: ../data/quests/tutorial.xml:1474
+#: ../data/quests/tutorial.xml:1514
 msgid ""
 "Einen Verfluchten freut das sicher noch, wenn er alle Nase lang was zum "
 "Toeten hat."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:1475
+#: ../data/quests/tutorial.xml:1515
 msgid "Ich bin ein Gezeichneter! Das ist viel schlimmer als ein Fluch."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:1476
+#: ../data/quests/tutorial.xml:1516
 msgid "Der maechtige Akeran hat dich wahrlich schlimm gestraft."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:1477
+#: ../data/quests/tutorial.xml:1517
 msgid "Verschone mich mit deinem Elementaristengelaber und gib den Weg frei!"
 msgstr ""
 
-#: ../data/quests/tutorial.xml:1478
+#: ../data/quests/tutorial.xml:1518
 msgid "Ich bin wohl wirklich der Kammerjaeger."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:1480
+#: ../data/quests/tutorial.xml:1520
 msgid ""
 "Die Verfluchten freut das sicher noch, wenn sie alle Nase lang was zum Töten "
 "haben."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:1481
+#: ../data/quests/tutorial.xml:1521
 msgid "Wir sind Gezeichnete! Das ist viel schlimmer als ein Fluch."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:1482
+#: ../data/quests/tutorial.xml:1522
 msgid "Der mächtige Akeran hat sie wahrlich schlimm gestraft."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:1483
+#: ../data/quests/tutorial.xml:1523
 msgid "Verschone uns mit deinem Elementaristengelaber und gib den Weg frei!"
 msgstr ""
 
-#: ../data/quests/tutorial.xml:1484
+#: ../data/quests/tutorial.xml:1524
 msgid "Wir sind wohl wirklich die Kammerjäger."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:1549
+#: ../data/quests/tutorial.xml:1589
 msgid ""
 "Wow. Die halten hier aber echt was von Ordnung und gründlicher Forschung."
 msgstr ""
 
-#: ../data/quests/tutorial.xml:1550
+#: ../data/quests/tutorial.xml:1590
 msgid ""
 "Wie viele Schnecken muss man aufschneiden um zu glauben, dass sie schleimig "
 "sind?"
 msgstr ""
 
-#: ../data/quests/tutorial.xml:1552
+#: ../data/quests/tutorial.xml:1592
 msgid "Schaut euch doch mal um, das Zeug muss ein Vermögen wert sein!"
 msgstr ""
 
-#: ../data/quests/tutorial.xml:1554
+#: ../data/quests/tutorial.xml:1594
 msgid "Das Zeug muss ein Vermögen wert sein!"
 msgstr ""
 
-#: ../data/quests/tutorial.xml:1557
+#: ../data/quests/tutorial.xml:1597
 msgid "Der Plunder?"
 msgstr ""
 
-#: ../data/quests/tutorial.xml:1560
+#: ../data/quests/tutorial.xml:1600
 msgid "Banause"
 msgstr ""
 
-#: ../data/quests/tutorial.xml:1571
+#: ../data/quests/tutorial.xml:1611
 msgid ""
 "Wenn die nicht ueberall diese überflüssigen Ballustraden ins Nichts haetten, "
 "muessten sie jetzt auch keine entflohenen Schnecklinge vom Boden wischen."
+msgstr ""
+
+#: ../data/world/aisen.xml:754
+msgid "Achtung! Monster aus der Mine! Helft mir!"
+msgstr ""
+
+#: ../data/world/aisen.xml:770
+msgid "Ich bin kein Monster, lasst euch das gesagt sein. Ich bin schlimmer."
 msgstr ""

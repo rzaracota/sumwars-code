@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-05 20:57+0100\n"
+"POT-Creation-Date: 2010-05-04 17:08+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -104,19 +104,19 @@ msgstr ""
 msgid "Chance for critical hit"
 msgstr ""
 
-#: ../src/core/dialogue.cpp:401
+#: ../src/core/dialogue.cpp:417
 msgid "which Topic"
 msgstr ""
 
-#: ../src/core/document.cpp:1174 ../src/core/item.cpp:654
+#: ../src/core/document.cpp:1187 ../src/core/item.cpp:654
 msgid "Required level"
 msgstr ""
 
-#: ../src/core/document.cpp:1184
+#: ../src/core/document.cpp:1197
 msgid "Timer"
 msgstr ""
 
-#: ../src/core/document.cpp:1185
+#: ../src/core/document.cpp:1198
 msgid "Cast delay"
 msgstr ""
 
@@ -200,11 +200,11 @@ msgstr ""
 
 #: ../src/gui/charcreate.cpp:126
 msgid "Cancel"
-msgstr "Abbrechen"
+msgstr ""
 
 #: ../src/gui/charcreate.cpp:129
 msgid "Create"
-msgstr "Erstellen"
+msgstr ""
 
 #: ../src/gui/charinfo.cpp:323
 msgid "Base damage"
@@ -287,9 +287,8 @@ msgid ""
 msgstr ""
 
 #: ../src/gui/controlpanel.cpp:73
-#, fuzzy
 msgid "Chat"
-msgstr "Erstellen"
+msgstr ""
 
 #: ../src/gui/controlpanel.cpp:339
 msgid "Options"
@@ -299,16 +298,15 @@ msgstr ""
 msgid "Save & Exit"
 msgstr ""
 
-#: ../src/gui/controlpanel.cpp:345 ../src/gui/optionswindow.cpp:180
+#: ../src/gui/controlpanel.cpp:345 ../src/gui/optionswindow.cpp:206
 msgid "Inventory"
 msgstr ""
 
 #: ../src/gui/controlpanel.cpp:348
-#, fuzzy
 msgid "Character"
-msgstr "Erstellen"
+msgstr ""
 
-#: ../src/gui/controlpanel.cpp:351 ../src/gui/optionswindow.cpp:186
+#: ../src/gui/controlpanel.cpp:351 ../src/gui/optionswindow.cpp:212
 msgid "Skilltree"
 msgstr ""
 
@@ -316,7 +314,7 @@ msgstr ""
 msgid "Party"
 msgstr ""
 
-#: ../src/gui/controlpanel.cpp:357 ../src/gui/optionswindow.cpp:195
+#: ../src/gui/controlpanel.cpp:357 ../src/gui/optionswindow.cpp:221
 msgid "Quests"
 msgstr ""
 
@@ -328,24 +326,28 @@ msgstr ""
 msgid "Drop:"
 msgstr ""
 
-#: ../src/gui/mainmenu.cpp:68
+#: ../src/gui/mainmenu.cpp:76
 msgid "Single player"
 msgstr ""
 
-#: ../src/gui/mainmenu.cpp:71
+#: ../src/gui/mainmenu.cpp:79
 msgid "Join game"
 msgstr ""
 
-#: ../src/gui/mainmenu.cpp:74
+#: ../src/gui/mainmenu.cpp:82
 msgid "Host game"
 msgstr ""
 
-#: ../src/gui/mainmenu.cpp:77
+#: ../src/gui/mainmenu.cpp:85
+msgid "Credits"
+msgstr ""
+
+#: ../src/gui/mainmenu.cpp:88
 msgid "Quit"
 msgstr ""
 
 #: ../src/gui/messageboxes.cpp:53 ../src/gui/networkwindows.cpp:93
-#: ../src/gui/networkwindows.cpp:218 ../src/gui/optionswindow.cpp:213
+#: ../src/gui/networkwindows.cpp:218 ../src/gui/optionswindow.cpp:242
 #: ../src/gui/savegamelist.cpp:168 ../src/gui/tradewindow.cpp:256
 msgid "Ok"
 msgstr ""
@@ -370,47 +372,55 @@ msgstr ""
 msgid "Host"
 msgstr ""
 
-#: ../src/gui/optionswindow.cpp:171
+#: ../src/gui/optionswindow.cpp:197
 msgid "Shortkeys"
 msgstr ""
 
-#: ../src/gui/optionswindow.cpp:173 ../src/gui/optionswindow.cpp:207
-msgid "Sound"
-msgstr ""
-
-#: ../src/gui/optionswindow.cpp:175
-msgid "Graphic"
-msgstr ""
-
-#: ../src/gui/optionswindow.cpp:177
-msgid "Misc"
-msgstr ""
-
-#: ../src/gui/optionswindow.cpp:183
-msgid "Character screen"
-msgstr ""
-
-#: ../src/gui/optionswindow.cpp:189
-msgid "Party screen"
-msgstr ""
-
-#: ../src/gui/optionswindow.cpp:192
-msgid "Chatbox"
-msgstr ""
-
-#: ../src/gui/optionswindow.cpp:198
-msgid "Minimap"
+#: ../src/gui/optionswindow.cpp:199
+msgid "Audio"
 msgstr ""
 
 #: ../src/gui/optionswindow.cpp:201
+msgid "Graphic"
+msgstr ""
+
+#: ../src/gui/optionswindow.cpp:203
+msgid "Misc"
+msgstr ""
+
+#: ../src/gui/optionswindow.cpp:209
+msgid "Character screen"
+msgstr ""
+
+#: ../src/gui/optionswindow.cpp:215
+msgid "Party screen"
+msgstr ""
+
+#: ../src/gui/optionswindow.cpp:218
+msgid "Chatbox"
+msgstr ""
+
+#: ../src/gui/optionswindow.cpp:224
+msgid "Minimap"
+msgstr ""
+
+#: ../src/gui/optionswindow.cpp:227
 msgid "Swap equipement"
 msgstr ""
 
-#: ../src/gui/optionswindow.cpp:204
+#: ../src/gui/optionswindow.cpp:230
 msgid "Item Labels"
 msgstr ""
 
-#: ../src/gui/optionswindow.cpp:210
+#: ../src/gui/optionswindow.cpp:233
+msgid "Sound"
+msgstr ""
+
+#: ../src/gui/optionswindow.cpp:236
+msgid "Music"
+msgstr ""
+
+#: ../src/gui/optionswindow.cpp:239
 msgid "Language"
 msgstr ""
 
@@ -446,6 +456,3 @@ msgstr ""
 msgid "Town Portal"
 msgstr ""
 
-#, fuzzy
-#~ msgid "Cure"
-#~ msgstr "Erstellen"

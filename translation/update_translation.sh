@@ -10,6 +10,7 @@ xgettext -d sumwars -o potfiles/sumwars-sumwars-new.pot ../src/core/*.cpp ../src
 ../../tests/xmlgettext/xmlgettext ../data/
 xgettext --from-code utf-8 --language=Python -d events -o potfiles/sumwars-events-new.pot ../data/npc/*.xml ../data/quests/*.xml ../data/world/*.xml
 
+# Ist ein mergen hier ueberhaupt sinnvoll? Oder sollte direkt die neu erstellte pot mit der alten po gemergt werden.
 echo "MERGE new pots with pots"
 msgmerge -v -U potfiles/sumwars-sumwars.pot potfiles/sumwars-sumwars-new.pot
 msgmerge -v -U potfiles/sumwars-xml.pot potfiles/sumwars-xml-new.pot

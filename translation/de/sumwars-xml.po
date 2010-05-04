@@ -21,10 +21,6 @@ msgid "practice bow"
 msgstr "übungsbogen"
 
 #: shortbow.xml
-msgid "goblin bow"
-msgstr "Goblinbogen"
-
-#: shortbow.xml
 msgid "yew shortbow"
 msgstr "Eibenkurzbogen"
 
@@ -91,6 +87,14 @@ msgstr "Chaosbogen"
 #: shortbow.xml
 msgid "fairy bow"
 msgstr "Feenbogen"
+
+#: polearms.xml
+msgid "pike"
+msgstr ""
+
+#: potion.xml
+msgid "scroll of town portal"
+msgstr ""
 
 #: potion.xml
 msgid "small potion"
@@ -312,21 +316,17 @@ msgstr "Assassinenkapuze"
 msgid "biretta"
 msgstr "Birett"
 
+#: helmet.xml
+msgid "chain turban"
+msgstr ""
+
 #: hammer1h.xml
 msgid "hammer"
 msgstr "Hammer"
 
 #: hammer1h.xml
-msgid "goblin club"
-msgstr "Goblinkeule"
-
-#: hammer1h.xml
 msgid "cermeonial hammer"
 msgstr "Zeremonienhammer"
-
-#: hammer1h.xml
-msgid "nail club"
-msgstr "Nagelkeule"
 
 #: hammer1h.xml
 msgid "iron hammer"
@@ -417,10 +417,6 @@ msgid "steel shield"
 msgstr "Stahlschild"
 
 #: wands.xml
-msgid "ice wand"
-msgstr ""
-
-#: wands.xml
 msgid "spruce wand"
 msgstr "Fichtenzauberstab"
 
@@ -433,12 +429,20 @@ msgid "novice wand"
 msgstr "Novizenzauberstab"
 
 #: wands.xml
+msgid "hermit wand"
+msgstr ""
+
+#: wands.xml
 msgid "rock wand"
 msgstr "Felsenzauberstab"
 
 #: wands.xml
 msgid "alder wand"
 msgstr "Erlenzauberstab"
+
+#: wands.xml
+msgid "bard's wand"
+msgstr ""
 
 #: wands.xml
 msgid "magus wand"
@@ -569,20 +573,12 @@ msgid "dagger"
 msgstr "Dolch"
 
 #: swords1h.xml
-msgid "rusty dagger"
-msgstr "Rostiger Dolch"
-
-#: swords1h.xml
 msgid "shortsword"
 msgstr "Kurzschwert"
 
 #: swords1h.xml
 msgid "bronzesword"
 msgstr "Bronzeschwert"
-
-#: swords1h.xml
-msgid "old sword"
-msgstr "Altes Schwert"
 
 #: swords1h.xml
 msgid "sabre"
@@ -599,6 +595,10 @@ msgstr "Langschwert"
 #: swords1h.xml
 msgid "sword of the coast"
 msgstr "Küstenschwert"
+
+#: swords1h.xml
+msgid "council sabre"
+msgstr ""
 
 #: swords1h.xml
 msgid "scimitar"
@@ -657,6 +657,10 @@ msgid "novice staff"
 msgstr "Novizenstab"
 
 #: staff.xml
+msgid "hermit staff"
+msgstr ""
+
+#: staff.xml
 msgid "rock staff"
 msgstr "Felsenstab"
 
@@ -665,12 +669,20 @@ msgid "alder staff"
 msgstr "Erlenstab"
 
 #: staff.xml
+msgid "bard's staff"
+msgstr ""
+
+#: staff.xml
 msgid "magus staff"
 msgstr "Magierstab"
 
 #: staff.xml
 msgid "silver staff"
 msgstr "Silberstab"
+
+#: staff.xml
+msgid "inferno staff"
+msgstr ""
 
 #: staff.xml
 msgid "oak staff"
@@ -711,6 +723,18 @@ msgstr "Dämonenstab"
 #: staff.xml
 msgid "fairy staff"
 msgstr "Feenstab"
+
+#: staff.xml
+msgid "ifreet staff"
+msgstr ""
+
+#: staff.xml
+msgid "icewitch staff"
+msgstr ""
+
+#: staff.xml
+msgid "sylph staff"
+msgstr ""
 
 #: staff.xml
 msgid "archmage staff"
@@ -808,6 +832,14 @@ msgstr "Grossschwert"
 msgid "angel sword"
 msgstr "Engelsschwert"
 
+#: undeadEqu.xml
+msgid "broken shield"
+msgstr ""
+
+#: undeadEqu.xml
+msgid "old sword"
+msgstr "Altes Schwert"
+
 #: longbow.xml
 msgid "tourney bow"
 msgstr "Turnierbogen"
@@ -900,6 +932,10 @@ msgstr "Barett"
 msgid "magus hat"
 msgstr "Magierhut"
 
+#: hat.xml
+msgid "turban"
+msgstr ""
+
 #: armor.xml
 msgid "cloth armor"
 msgstr "Tuchrüstung"
@@ -936,6 +972,10 @@ msgstr "Assassinenrüstung"
 msgid "temple armor"
 msgstr "Tempelrüstung"
 
+#: armor.xml
+msgid "council armor"
+msgstr ""
+
 #: robes.xml
 msgid "ragged robe"
 msgstr "Flickenrobe"
@@ -960,6 +1000,10 @@ msgstr "Gelehrtenrobe"
 msgid "magus robe"
 msgstr "Magierrobe"
 
+#: robes.xml
+msgid "council robe"
+msgstr ""
+
 #: glove.xml
 msgid "leather gloves"
 msgstr "Lederhandschuhe"
@@ -969,12 +1013,12 @@ msgid "snakehide gloves"
 msgstr "Schlangenlederhandschuhe"
 
 #: glove.xml
-msgid "buckskin gloves"
-msgstr "Wildlederhandschuhe"
-
-#: glove.xml
 msgid "chain gloves"
 msgstr "Kettenhandschuhe"
+
+#: glove.xml
+msgid "buckskin gloves"
+msgstr "Wildlederhandschuhe"
 
 #: glove.xml
 msgid "spidersilk gloves"
@@ -987,6 +1031,46 @@ msgstr "Schützenhandschuhe"
 #: glove.xml
 msgid "assassin gloves"
 msgstr "Assassinenhandschuhe"
+
+#: glove.xml
+msgid "shark gloves"
+msgstr ""
+
+#: goblinEqu.xml
+msgid "goblin armor"
+msgstr ""
+
+#: goblinEqu.xml
+msgid "goblin bracer"
+msgstr ""
+
+#: goblinEqu.xml
+msgid "shaman mask"
+msgstr ""
+
+#: goblinEqu.xml
+msgid "goblin club"
+msgstr "Goblinkeule"
+
+#: goblinEqu.xml
+msgid "rusty dagger"
+msgstr "Rostiger Dolch"
+
+#: goblinEqu.xml
+msgid "shaman staff"
+msgstr ""
+
+#: goblinEqu.xml
+msgid "nail club"
+msgstr "Nagelkeule"
+
+#: goblinEqu.xml
+msgid "goblin bow"
+msgstr "Goblinbogen"
+
+#: goblinEqu.xml
+msgid "goblin spear"
+msgstr ""
 
 #: amulet.xml
 msgid "feather amulet"
@@ -1008,6 +1092,38 @@ msgstr "Korallenamulett"
 msgid "gold amulet"
 msgstr "Goldamulett"
 
+#: theTrader.xml
+msgid "The Trader"
+msgstr ""
+
+#: theTrader.xml
+msgid "elCnlLobby"
+msgstr "Lobby des Konzils"
+
+#: theTrader.xml
+msgid "medMercCamp"
+msgstr "Söldnerlager von Medair"
+
+#: theTrader.xml
+msgid "joringsbridge"
+msgstr "Joringsbrück"
+
+#: theTrader.xml
+msgid "What are you doing here?"
+msgstr ""
+
+#: theTrader.xml
+msgid "greyCurseCaveFis"
+msgstr ""
+
+#: theTrader.xml
+msgid "dwarfenwall"
+msgstr ""
+
+#: theTrader.xml
+msgid "I see you have reached dwarfenwall safely."
+msgstr ""
+
 #: goblins.xml
 msgid "Der Goblinvernichter"
 msgstr ""
@@ -1028,20 +1144,94 @@ msgstr ""
 msgid "region1"
 msgstr ""
 
-#: defend_dwarfenfroward.xml
-#, fuzzy
-msgid "Defend Dwarfenfroward"
-msgstr "Zwergentrutz"
+#: tutorial.xml
+msgid "Tutorial"
+msgstr ""
 
-#: defend_dwarfenfroward.xml
+#: tutorial.xml
+msgid "Derred"
+msgstr ""
+
+#: tutorial.xml
+msgid "Waffen abgeben"
+msgstr ""
+
+#: tutorial.xml
+msgid "Tolec"
+msgstr ""
+
+#: tutorial.xml
+msgid "Inventar erklären"
+msgstr ""
+
+#: tutorial.xml
+msgid "Schnecken angreifen"
+msgstr ""
+
+#: tutorial.xml
+msgid "Levelup erklären"
+msgstr ""
+
+#: tutorial.xml
+msgid "Futterklappe öffnen"
+msgstr ""
+
+#: tutorial.xml
+msgid "Fähigkeiten erklären"
+msgstr ""
+
+#: tutorial.xml
+msgid "Geheimtuer oeffnen"
+msgstr ""
+
+#: scene7.xml
+msgid "Das Teichmonster"
+msgstr ""
+
+#: scene7.xml
 msgid "Soren Windclaw"
 msgstr "Soren Windklaue"
 
-#: defend_dwarfenfroward.xml
-msgid "elCnlLobby"
-msgstr "Lobby des Konzils"
+#: scene7.xml
+msgid "greyCurseLake"
+msgstr ""
 
-# TODO Besieged Farm
+#: theFissure.xml
+msgid "Der Hinterhalt der Untoten"
+msgstr ""
+
+#: theFissure.xml
+msgid "aisMounPath"
+msgstr ""
+
+#: theFissure.xml
+msgid "greyCurseCaveDep"
+msgstr ""
+
+#: siegeOfDwarfenwall.xml
+msgid "Defend dwarfenwall"
+msgstr ""
+
+#: siegeOfDwarfenwall.xml
+msgid "dwarfenwallCommand"
+msgstr ""
+
+#: siegeOfDwarfenwall.xml
+msgid "dwarfenwallRampart"
+msgstr ""
+
+#: siegeOfDwarfenwall.xml
+msgid "necFieldcamp"
+msgstr "Feldlager der Untoten"
+
+#: theAmbush.xml
+msgid "The Ambush"
+msgstr ""
+
+#: theAmbush.xml
+msgid "aisWolfstones"
+msgstr "Wolfssteine"
+
 #: besieged_farm.xml
 msgid "Der belagerte Bauernhof"
 msgstr "Der belagerte Bauernhof"
@@ -1051,41 +1241,32 @@ msgid "Sergeant Lutterer"
 msgstr "Sergeant Lutterer"
 
 #: besieged_farm.xml
-msgid "Besieged Farm"
-msgstr "Der bleagerte Bauernhof"
-
-#: besieged_farm.xml
-msgid "Besieged Farm (Reward)"
-msgstr "Der belagerte Bauernhof(Belohnung)"
-
-# Bron's door
-#: besieged_farm.xml
-#, fuzzy
-msgid "Brons Tuer"
-msgstr "Tür zu Brons Farm"
-
-#: besieged_farm.xml
-msgid "Brons Safety"
-msgstr "Brons Familie ist sicher"
+msgid "Der Bauernhof"
+msgstr ""
 
 #: besieged_farm.xml
 msgid "aisNorthMeadow"
 msgstr "Nürdliche Wiese"
 
+#: besieged_farm.xml
+msgid "Brons Farm"
+msgstr ""
+
+#: scene6.xml
+msgid "Hauptquest: melde dich bei General G"
+msgstr ""
+
 #: maylons_grave.xml
-#, fuzzy
-msgid "Maylons Grave"
+msgid "Maylons Grab"
 msgstr "Maylons Grab"
+
+#: maylons_grave.xml
+msgid "aisMaylonsGraveEntry"
+msgstr ""
 
 #: maylons_grave.xml
 msgid "Gab Resh"
 msgstr ""
-
-# TODO Maylons Ghost
-#: maylons_grave.xml
-#, fuzzy
-msgid "Maylons Ghost"
-msgstr "Maylons Geist"
 
 #: maylons_grave.xml
 msgid "aisMaylonsGraveL1"
@@ -1095,9 +1276,7 @@ msgstr "Maylons Grab"
 msgid "aisMaylonsGraveL2"
 msgstr "Maylons Grab, Krypta"
 
-# TODO Herb gathering
 #: herbalist.xml
-#, fuzzy
 msgid "Kraeutersammler"
 msgstr "Kräutersammler"
 
@@ -1106,12 +1285,38 @@ msgid "Gertlinde Kampfer"
 msgstr "Gertlinde Kampfer"
 
 #: herbalist.xml
-msgid "joringsbridge"
+msgid "Herb gathering"
+msgstr ""
+
+#: testquest.xml
+msgid "testquest"
+msgstr ""
+
+#: testquest.xml
+msgid "Fenor Marken"
+msgstr "Fenor Marken"
+
+#: testquest.xml
+msgid "Test"
+msgstr ""
+
+#: joringsbridge.xml
+msgid "Joringsbridge"
 msgstr "Joringsbrück"
 
-# TODO Rob the robber
+#: fortify_dwarfenwall.xml
+msgid "Fortify Dwarfenwall"
+msgstr ""
+
+#: fortify_dwarfenwall.xml
+msgid "Windklaue sprechen"
+msgstr ""
+
+#: fortify_dwarfenwall.xml
+msgid "medBackalley"
+msgstr ""
+
 #: rob_the_robber.xml
-#, fuzzy
 msgid "Rob der Raeuber"
 msgstr "Rob der Räuber"
 
@@ -1128,17 +1333,12 @@ msgid "Rob the Robber (Reward)"
 msgstr "Rob der Räuber (Belohnung)"
 
 #: rob_the_robber.xml
-msgid "aisFairyforest"
-msgstr "Feenwald"
+msgid "aisDarkFairyforest"
+msgstr ""
 
-# TODO A friend in need
 #: rescue_willard.xml
 msgid "Ein Freund in Not"
 msgstr "Ein Freund in Not"
-
-#: rescue_willard.xml
-msgid "Fenor Marken"
-msgstr "Fenor Marken"
 
 #: rescue_willard.xml
 msgid "Willard"
@@ -1149,64 +1349,220 @@ msgid "Willard (Reward)"
 msgstr "Willard den Stein geben (Belohnung)"
 
 #: rescue_willard.xml
-msgid "medMercCamp"
-msgstr "Söldnerlager von Medair"
-
-#: rescue_willard.xml
 msgid "aisMeadow"
 msgstr "Aisener Wiese"
 
-# TODO Trade
-#: npc.xml
-msgid "Handel"
-msgstr "Handel"
-
-#: npc.xml
-msgid "das erste Thema"
+#: joringsbridge_npc.xml
+msgid "Potions"
 msgstr ""
 
-#: npc.xml
-msgid "dumme Fragen stellen"
+#: joringsbridge_npc.xml
+msgid "Sybill"
 msgstr ""
 
-#: npc.xml
-msgid "Trader"
+#: joringsbridge_npc.xml
+msgid "Weapons"
 msgstr ""
 
-#: npc.xml
+#: joringsbridge_npc.xml
+msgid "Halgor"
+msgstr ""
+
+#: joringsbridge_npc.xml
+msgid "Armors"
+msgstr ""
+
+#: joringsbridge_npc.xml
+msgid "Marco"
+msgstr ""
+
+#: joringsbridge_npc.xml
+msgid "Fundgegenstaende"
+msgstr ""
+
+#: joringsbridge_npc.xml
+msgid "What are these Items?"
+msgstr ""
+
+#: joringsbridge_npc.xml
+msgid "The surroundings of Joringsbridge"
+msgstr ""
+
+#: joringsbridge_npc.xml
 msgid "Michel Bron"
 msgstr "Michel Bron"
 
-#: world.xml
+#: joringsbridge_npc.xml
+msgid "Magus Convocatis Relau Fireweaver"
+msgstr ""
+
+#: dwarfcastle.xml
+msgid "Haffgar"
+msgstr ""
+
+#: dwarfcastle.xml
+msgid "Trade"
+msgstr ""
+
+#: dwarfcastle.xml
+msgid "Amelia"
+msgstr ""
+
+#: dwarfcastle.xml
+msgid "Drago"
+msgstr ""
+
+#: dwarfcastle.xml
+msgid "Flynn"
+msgstr ""
+
+#: dwarfcastle.xml
+msgid "What is all this?"
+msgstr ""
+
+#: medairnpc.xml
+msgid "Robert"
+msgstr ""
+
+#: medairnpc.xml
+msgid "Elgor"
+msgstr ""
+
+#: medairnpc.xml
+msgid "Cain"
+msgstr ""
+
+# Bron's door
+#: npc.xml
+msgid "Brons Tuer"
+msgstr "Tür zu Brons Farm"
+
+#: npc.xml
+msgid "Guard"
+msgstr ""
+
+#: npc.xml
+msgid "Maylons Ghost"
+msgstr "Maylons Geist"
+
+#: npc.xml
+msgid "Leonard von Robenforst"
+msgstr ""
+
+#: npc.xml
+msgid "General Greif"
+msgstr ""
+
+#: npc.xml
+msgid "Maga Convocatis Darna Eistaucher"
+msgstr ""
+
+#: npc.xml
+msgid "Prince Karlen"
+msgstr ""
+
+#: npc.xml
+msgid "Erzmaga Ireana von Nordenburg"
+msgstr ""
+
+#: npc.xml
+msgid "Hauptmann der Wache"
+msgstr ""
+
+#: npc.xml
+msgid "Elementaristenwaechter"
+msgstr ""
+
+#: npc.xml
+msgid "Vorarbeiter Nekromant"
+msgstr ""
+
+#: npc.xml
+msgid "Nar'Asoroth"
+msgstr ""
+
+#: npc.xml
+msgid "Leere Schriftrollen kaufen"
+msgstr ""
+
+#: npc.xml
+msgid "The Lost Trader"
+msgstr ""
+
+#: cursedCaves.xml
+msgid "greyCurseCave"
+msgstr ""
+
+#: cursedCaves.xml
+msgid "greyCurseGrotto"
+msgstr ""
+
+#: cursedCaves.xml
+msgid "greyWolfcave"
+msgstr ""
+
+#: cursedCaves.xml
+msgid "greyCurseGrotDep"
+msgstr ""
+
+#: cursedCaves.xml
+msgid "greyCursedCavern"
+msgstr ""
+
+#: cursedCaves.xml
+msgid "greyCurseCaveEast"
+msgstr ""
+
+#: aisen.xml
 msgid "aisPlains"
 msgstr "Offene Ebene"
 
-#: world.xml
+#: aisen.xml
 msgid "aisHeath"
 msgstr "Aisener Heide"
 
-#: world.xml
+#: aisen.xml
+msgid "aisStonePlains"
+msgstr ""
+
+#: aisen.xml
+msgid "aisDarkClearing"
+msgstr ""
+
+#: aisen.xml
+msgid "aisWideHeath"
+msgstr ""
+
+#: aisen.xml
 msgid "aisJoringsforest"
 msgstr "Joringsforst"
 
-#: world.xml
-msgid "aisWolfstones"
-msgstr "Wolfssteine"
+#: aisen.xml
+msgid "aisFairyforest"
+msgstr "Feenwald"
 
-#: world.xml
-msgid "dwarfenfroward"
-msgstr "Zwergentrutz"
+#: aisen.xml
+msgid "aisWestwoods"
+msgstr ""
 
-#: world.xml
-msgid "dwarfenfrowardRampart"
-msgstr "Die Mauern von Zwergentrutz"
+#: aisen.xml
+msgid "aisMistslope"
+msgstr ""
 
-#: world.xml
-msgid "necFieldcamp"
-msgstr "Feldlager der Untoten"
+#: aisen.xml
+msgid "aisEastslope"
+msgstr ""
+
+#: testregions.xml
+msgid "maptest"
+msgstr ""
 
 #: testregions.xml
 msgid "sandbox"
+msgstr ""
+
+#: testregions.xml
+msgid "spawnAbyss"
 msgstr ""
 
 #: testregions.xml
@@ -1217,61 +1573,353 @@ msgstr ""
 msgid "testregion"
 msgstr ""
 
-#: monsters.xml
+#: humans.xml
+msgid "Bandit"
+msgstr ""
+
+#: humans.xml
+msgid "Thug"
+msgstr ""
+
+#: humans.xml
+msgid "Rogue"
+msgstr ""
+
+#: humans.xml
+msgid "Brigand"
+msgstr ""
+
+#: humans.xml
+msgid "Poacher"
+msgstr ""
+
+#: humans.xml
+msgid "Alwin"
+msgstr ""
+
+#: humans.xml
+msgid "Thief"
+msgstr ""
+
+#: humans.xml
+msgid "Raider"
+msgstr ""
+
+#: humans.xml
+msgid "Highwayman"
+msgstr ""
+
+#: humans.xml
+msgid "Buck"
+msgstr ""
+
+#: humans.xml
+msgid "Deserter"
+msgstr ""
+
+#: humans.xml
+msgid "Saboteur"
+msgstr ""
+
+#: humans.xml
+msgid "Todd"
+msgstr ""
+
+#: humans.xml
+msgid "Rob the Robber"
+msgstr ""
+
+#: humans.xml
+msgid "Ronny the Rat"
+msgstr ""
+
+#: goblinStats.xml
 msgid "goblin brawler"
 msgstr "Goblinschläger"
 
-#: monsters.xml
-msgid "goblin robber"
-msgstr "Goblinräuber"
-
-#: monsters.xml
+#: goblinStats.xml
 msgid "goblin hunter"
 msgstr "Goblinjäger"
 
-#: monsters.xml
+#: goblinStats.xml
+msgid "goblin robber"
+msgstr "Goblinräuber"
+
+#: goblinStats.xml
+msgid "Drakrazz"
+msgstr ""
+
+#: goblinStats.xml
+msgid "Roruz"
+msgstr ""
+
+#: goblinStats.xml
+msgid "Nubreck"
+msgstr ""
+
+#: goblinStats.xml
 msgid "goblin dog"
 msgstr "Goblinhund"
 
-#: monsters.xml
+#: goblinStats.xml
+msgid "boneshaker"
+msgstr ""
+
+#: goblinStats.xml
+msgid "Gobrusch"
+msgstr ""
+
+#: goblinStats.xml
+msgid "Dobrusch"
+msgstr ""
+
+#: goblinStats.xml
+msgid "Lurdrak with the Hammer"
+msgstr ""
+
+#: goblinStats.xml
 msgid "goblin fighter"
 msgstr "Goblinkämpfer"
 
-#: monsters.xml
-msgid "goblin warrior"
-msgstr "Goblinkrieger"
-
-#: monsters.xml
+#: goblinStats.xml
 msgid "goblin poacher"
 msgstr "Goblinwilderer"
 
-#: monsters.xml
+#: goblinStats.xml
+msgid "goblin rider"
+msgstr ""
+
+#: goblinStats.xml
+msgid "snowcaller"
+msgstr ""
+
+#: goblinStats.xml
+msgid "reg'resh"
+msgstr ""
+
+#: goblinStats.xml
+msgid "goblin temple guard"
+msgstr ""
+
+#: goblinStats.xml
+msgid "goblin apprentice"
+msgstr ""
+
+#: goblinStats.xml
+msgid "Marblak"
+msgstr ""
+
+#: goblinStats.xml
+msgid "goblin youngling"
+msgstr ""
+
+#: goblinStats.xml
+msgid "Gab'Resh"
+msgstr ""
+
+#: goblinStats.xml
+msgid "Gab Clan Goblin"
+msgstr ""
+
+#: goblinStats.xml
+msgid "goblin warrior"
+msgstr "Goblinkrieger"
+
+#: goblinStats.xml
+msgid "goblin rocklobber"
+msgstr ""
+
+#: goblinStats.xml
 msgid "goblin shaman"
 msgstr "Goblinschamane"
 
-#: monsters.xml
-msgid "goblin chieftain"
-msgstr "Goblinhäuptling"
+#: goblinStats.xml
+msgid "goblin slayer"
+msgstr ""
 
-#: monsters.xml
+#: goblinStats.xml
+msgid "goblin assassin"
+msgstr ""
+
+#: aisenMonsterStats.xml
+msgid "Bloodbeak"
+msgstr ""
+
+#: aisenMonsterStats.xml
+msgid "Giant wolf"
+msgstr ""
+
+#: aisenMonsterStats.xml
+msgid "wolf"
+msgstr ""
+
+#: councilNPCStats.xml
+msgid "Worker"
+msgstr ""
+
+#: councilNPCStats.xml
+msgid "Council Guard"
+msgstr ""
+
+#: councilNPCStats.xml
+msgid "Council Mage"
+msgstr ""
+
+#: councilNPCStats.xml
+msgid "Ireana von Nordenburg"
+msgstr ""
+
+#: councilNPCStats.xml
+msgid "Council Guard Captain"
+msgstr ""
+
+#: councilNPCStats.xml
+msgid "Fireguardian"
+msgstr ""
+
+#: council_monsters.xml
+msgid "Fire Slug"
+msgstr ""
+
+#: council_monsters.xml
+msgid "Mutant Slug"
+msgstr ""
+
+#: council_monsters.xml
+msgid "Fire Louse"
+msgstr ""
+
+#: council_monsters.xml
+msgid "Firefletchling"
+msgstr ""
+
+#: council_monsters.xml
+msgid "Inferno Behemoth"
+msgstr ""
+
+#: aisenNPCStats.xml
+msgid "Healer"
+msgstr ""
+
+#: aisenNPCStats.xml
+msgid "Trader"
+msgstr ""
+
+#: aisenNPCStats.xml
+msgid "Bowman"
+msgstr ""
+
+#: aisenNPCStats.xml
+msgid "Avaeras Order, Firemage"
+msgstr ""
+
+#: aisenNPCStats.xml
+msgid "Elite Swordsman"
+msgstr ""
+
+#: undeadStats.xml
+msgid "Guardian Skeleton"
+msgstr ""
+
+#: undeadStats.xml
+msgid "Zombie"
+msgstr "Zombie"
+
+#: undeadStats.xml
+msgid "Maylon"
+msgstr ""
+
+#: undeadStats.xml
 msgid "lich"
 msgstr "Lich"
 
-#: monsters.xml
-msgid "skeleton"
+#: undeadStats.xml
+msgid "Skeleton"
 msgstr "Skelett"
 
-#: monsters.xml
-msgid "phantom"
-msgstr "Phantom"
+#: undeadStats.xml
+msgid "Giant Skeleton"
+msgstr ""
 
-#: monsters.xml
-msgid "zombie"
-msgstr "Zombie"
+#: undeadStats.xml
+msgid "Skeleton Archer"
+msgstr ""
 
-#: monsters.xml
-msgid "harpy"
-msgstr "Harpie"
+#: undeadStats.xml
+msgid "Skeleton Shadow Archer"
+msgstr ""
+
+#: undeadStats.xml
+msgid "Frostbone"
+msgstr ""
+
+#: undeadStats.xml
+msgid "Burning Skeleton"
+msgstr ""
+
+#: undeadStats.xml
+msgid "Undead Scythe"
+msgstr ""
+
+#: undeadStats.xml
+msgid "Necromancer"
+msgstr ""
+
+#: undeadStats.xml
+msgid "Worker Skeleton"
+msgstr ""
+
+#: undeadStats.xml
+msgid "Lich"
+msgstr "Lich"
+
+#: undeadStats.xml
+msgid "Huge Skeleton"
+msgstr ""
+
+#: undeadStats.xml
+msgid "Frost Skeleton"
+msgstr ""
+
+#: undeadStats.xml
+msgid "Frost Skeleton Archer"
+msgstr ""
+
+#: undeadStats.xml
+msgid "Chilling Death"
+msgstr ""
+
+#: undeadStats.xml
+msgid "Savage Skeleton"
+msgstr ""
+
+#: undeadStats.xml
+msgid "Boney Brothers"
+msgstr ""
+
+#: undeadStats.xml
+msgid "Icemage"
+msgstr ""
+
+#: undeadStats.xml
+msgid "Frostmage"
+msgstr ""
+
+#: undeadStats.xml
+msgid "Neivan the Frostbringer"
+msgstr ""
+
+#: undeadStats.xml
+msgid "Blackmage"
+msgstr ""
+
+#: undeadStats.xml
+msgid "Black Raven"
+msgstr ""
+
+#: undeadStats.xml
+msgid "Ice Obelisk"
+msgstr ""
 
 #: monsters.xml
 msgid "small mandragora"
@@ -1280,6 +1928,32 @@ msgstr "Kleine Alraune"
 #: monsters.xml
 msgid "mandragora"
 msgstr "Alraune"
+
+#: npcStats.xml
+msgid "Peasant"
+msgstr "Bauer"
+
+#~ msgid "Besieged Farm"
+#~ msgstr "Der bleagerte Bauernhof"
+
+#~ msgid "Besieged Farm (Reward)"
+#~ msgstr "Der belagerte Bauernhof(Belohnung)"
+
+#~ msgid "Brons Safety"
+#~ msgstr "Brons Familie ist sicher"
+
+# TODO Trade
+#~ msgid "Handel"
+#~ msgstr "Handel"
+
+#~ msgid "goblin chieftain"
+#~ msgstr "Goblinhäuptling"
+
+#~ msgid "phantom"
+#~ msgstr "Phantom"
+
+#~ msgid "harpy"
+#~ msgstr "Harpie"
 
 #~ msgid "Scene1"
 #~ msgstr "Hilfe für Zwergentrutz"

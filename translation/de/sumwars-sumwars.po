@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sumwars 0.01\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-05 20:57+0100\n"
+"POT-Creation-Date: 2010-05-04 17:08+0200\n"
 "PO-Revision-Date: 2009-03-09 15:17+0100\n"
 "Last-Translator: Michael <michael@localhost.localdomain>\n"
 "Language-Team: German <translation-team-de@lists.sourceforge.net>\n"
@@ -104,19 +104,19 @@ msgstr "Kraft"
 msgid "Chance for critical hit"
 msgstr "Chance für kritischen Treffer"
 
-#: ../src/core/dialogue.cpp:401
+#: ../src/core/dialogue.cpp:417
 msgid "which Topic"
 msgstr "welches Thema"
 
-#: ../src/core/document.cpp:1174 ../src/core/item.cpp:654
+#: ../src/core/document.cpp:1187 ../src/core/item.cpp:654
 msgid "Required level"
 msgstr "Benötigtes Level"
 
-#: ../src/core/document.cpp:1184
+#: ../src/core/document.cpp:1197
 msgid "Timer"
 msgstr "Timer"
 
-#: ../src/core/document.cpp:1185
+#: ../src/core/document.cpp:1198
 msgid "Cast delay"
 msgstr "Verzögerung"
 
@@ -129,9 +129,8 @@ msgid "Selling Value"
 msgstr ""
 
 #: ../src/core/item.cpp:660
-#, fuzzy
 msgid "Required class"
-msgstr "Benötigtes Level"
+msgstr "Benötigte Klasse"
 
 #: ../src/core/item.cpp:718 ../src/core/item.cpp:726
 msgid "Heals "
@@ -296,7 +295,6 @@ msgstr ""
 "vermeiden"
 
 #: ../src/gui/controlpanel.cpp:73
-#, fuzzy
 msgid "Chat"
 msgstr "Chat Fenster"
 
@@ -308,25 +306,23 @@ msgstr "Optionen"
 msgid "Save & Exit"
 msgstr "Speichern & Ende"
 
-#: ../src/gui/controlpanel.cpp:345 ../src/gui/optionswindow.cpp:180
+#: ../src/gui/controlpanel.cpp:345 ../src/gui/optionswindow.cpp:206
 msgid "Inventory"
 msgstr "Inventar"
 
 #: ../src/gui/controlpanel.cpp:348
-#, fuzzy
 msgid "Character"
 msgstr "Charakter Bildschirm"
 
-#: ../src/gui/controlpanel.cpp:351 ../src/gui/optionswindow.cpp:186
+#: ../src/gui/controlpanel.cpp:351 ../src/gui/optionswindow.cpp:212
 msgid "Skilltree"
 msgstr "Fähigkeiten"
 
 #: ../src/gui/controlpanel.cpp:354
-#, fuzzy
 msgid "Party"
-msgstr "Port"
+msgstr "Partei"
 
-#: ../src/gui/controlpanel.cpp:357 ../src/gui/optionswindow.cpp:195
+#: ../src/gui/controlpanel.cpp:357 ../src/gui/optionswindow.cpp:221
 msgid "Quests"
 msgstr "Quests"
 
@@ -338,36 +334,37 @@ msgstr "Gold"
 msgid "Drop:"
 msgstr ""
 
-#: ../src/gui/mainmenu.cpp:68
+#: ../src/gui/mainmenu.cpp:76
 msgid "Single player"
 msgstr "Einzelspieler"
 
-#: ../src/gui/mainmenu.cpp:71
+#: ../src/gui/mainmenu.cpp:79
 msgid "Join game"
 msgstr "Spiel beitreten"
 
-#: ../src/gui/mainmenu.cpp:74
+#: ../src/gui/mainmenu.cpp:82
 msgid "Host game"
 msgstr "Spiel erstellen"
 
-#: ../src/gui/mainmenu.cpp:77
-#, fuzzy
+#: ../src/gui/mainmenu.cpp:85
+msgid "Credits"
+msgstr "Credits"
+
+#: ../src/gui/mainmenu.cpp:88
 msgid "Quit"
-msgstr "Quests"
+msgstr "Beenden"
 
 #: ../src/gui/messageboxes.cpp:53 ../src/gui/networkwindows.cpp:93
-#: ../src/gui/networkwindows.cpp:218 ../src/gui/optionswindow.cpp:213
+#: ../src/gui/networkwindows.cpp:218 ../src/gui/optionswindow.cpp:242
 #: ../src/gui/savegamelist.cpp:168 ../src/gui/tradewindow.cpp:256
 msgid "Ok"
 msgstr "Ok"
 
 #: ../src/gui/messageboxes.cpp:56
-#, fuzzy
 msgid "Abort"
-msgstr "Port"
+msgstr "Abbrechen"
 
 #: ../src/gui/messageboxes.cpp:59
-#, fuzzy
 msgid "Save and Exit?"
 msgstr "Speichern & Ende"
 
@@ -383,50 +380,57 @@ msgstr "Port"
 msgid "Host"
 msgstr "Host"
 
-#: ../src/gui/optionswindow.cpp:171
+#: ../src/gui/optionswindow.cpp:197
 msgid "Shortkeys"
 msgstr ""
 
-#: ../src/gui/optionswindow.cpp:173 ../src/gui/optionswindow.cpp:207
-msgid "Sound"
+#: ../src/gui/optionswindow.cpp:199
+msgid "Audio"
 msgstr ""
 
-#: ../src/gui/optionswindow.cpp:175
+#: ../src/gui/optionswindow.cpp:201
 msgid "Graphic"
 msgstr ""
 
-#: ../src/gui/optionswindow.cpp:177
+#: ../src/gui/optionswindow.cpp:203
 msgid "Misc"
 msgstr ""
 
-#: ../src/gui/optionswindow.cpp:183
+#: ../src/gui/optionswindow.cpp:209
 msgid "Character screen"
 msgstr "Charakter Bildschirm"
 
-#: ../src/gui/optionswindow.cpp:189
+#: ../src/gui/optionswindow.cpp:215
 msgid "Party screen"
 msgstr "Partei Bildschirm"
 
-#: ../src/gui/optionswindow.cpp:192
+#: ../src/gui/optionswindow.cpp:218
 msgid "Chatbox"
 msgstr "Chat Fenster"
 
-#: ../src/gui/optionswindow.cpp:198
+#: ../src/gui/optionswindow.cpp:224
 msgid "Minimap"
 msgstr "Minikarte"
 
-#: ../src/gui/optionswindow.cpp:201
+#: ../src/gui/optionswindow.cpp:227
 msgid "Swap equipement"
 msgstr "Ausrüstung wechseln"
 
-#: ../src/gui/optionswindow.cpp:204
+#: ../src/gui/optionswindow.cpp:230
 msgid "Item Labels"
 msgstr ""
 
-#: ../src/gui/optionswindow.cpp:210
-#, fuzzy
+#: ../src/gui/optionswindow.cpp:233
+msgid "Sound"
+msgstr ""
+
+#: ../src/gui/optionswindow.cpp:236
+msgid "Music"
+msgstr ""
+
+#: ../src/gui/optionswindow.cpp:239
 msgid "Language"
-msgstr "Reichweite"
+msgstr "Sprache"
 
 #: ../src/gui/questinfo.cpp:158
 msgid "open"
@@ -449,9 +453,8 @@ msgid "Create Character"
 msgstr "Charakter erstellen"
 
 #: ../src/gui/savegamelist.cpp:174
-#, fuzzy
 msgid "Delete Character"
-msgstr "Charakter erstellen"
+msgstr "Charakter löschen"
 
 #: ../src/gui/savegamelist.cpp:179
 msgid "Level"
