@@ -127,9 +127,9 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard)
 	cbo->setSize(CEGUI::UVector2(cegui_reldim(0.4f), cegui_reldim( 0.3f)));
 	
 	cbo->addItem(new StrListItem("System default","",0));
-	cbo->addItem(new StrListItem("German","de_DE",0));
-	cbo->addItem(new StrListItem("English GB","en_GB",0));
-	cbo->addItem(new StrListItem("English US","en_US",0));
+	cbo->addItem(new StrListItem("German","de_DE.utf8",0));
+	cbo->addItem(new StrListItem("English GB","en_GB.utf8",0));
+	cbo->addItem(new StrListItem("English US","en_US.utf8",0));
 	
 	cbo->setReadOnly(true);
 	
