@@ -45,11 +45,11 @@
 Document::Document()
 	:  m_shortkey_map(), m_special_keys()
 {
-   
+
 	m_server_host = "127.0.0.1";
 	m_port = 5331;
 	m_max_players = 8;
-	
+
 	// Informationen zu Aktionen initialisieren
 	Action::init();
 
@@ -71,10 +71,10 @@ Document::Document()
 	getGUIState()->m_left_mouse_pressed_time=0;
 	getGUIState()->m_hover_ability = "noaction";
 	getGUIState()->m_prefer_right_skill = false;
-	
+
 	// Pointer/Inhalte mit 0 initialisieren
 	m_gui_state.m_chat_window_content = "";
-	
+
 
 	// aktuell eingestellte Aktionen setzen
 
@@ -85,7 +85,7 @@ Document::Document()
 
 	// Shortkeys einstellen
 	m_shortkey_map.clear();
-	
+
 	m_temp_player = 0;
 }
 
@@ -98,9 +98,9 @@ void Document::startGame(bool server)
 
 	if (server)
 	{
-		
-		
-		
+
+
+
 	}
 	else
 	{
@@ -119,9 +119,9 @@ void Document::setSaveFile(std::string s)
 		char bin;
 		unsigned char* data=0;
 		m_save_file =s;
-		
+
 		file.get(bin);
-		
+
 		CharConv* save;
 		DEBUGX("binary %i",bin);
 		if (bin == '0')
@@ -135,21 +135,21 @@ void Document::setSaveFile(std::string s)
 			DEBUGX("length %i",len);
 			data = new unsigned char[len];
 			file.read((char*) data,len);
-			
+
 			save = new CharConv(data,len);
 		}
-		
+
 		if (m_temp_player)
 			delete m_temp_player;
-		
+
 		m_temp_player = new Player(0,"");
 		m_temp_player->fromSavegame(save);
-		
+
 		delete save;
 		if (data)
 			delete[] data;
-		
-		
+
+
 	}
 	else
 	{
@@ -175,9 +175,9 @@ void Document::loadSavegame()
 	{
 		char bin;
 		unsigned char* data=0;
-		
+
 		file.get(bin);
-		
+
 		CharConv* save;
 		if (bin == '0')
 		{
@@ -189,19 +189,19 @@ void Document::loadSavegame()
 			file.read((char*) &len,4);
 			data = new unsigned char[len];
 			file.read((char*) data,len);
-			
+
 			save = new CharConv(data,len);
 		}
-		
+
 		if (m_temp_player)
 			delete m_temp_player;
-		
+
 		m_temp_player = new Player(0,"");
 		m_temp_player->fromSavegame(save);
-		
+
 		CharConv cv2(0);
 		m_temp_player->toSavegame(&cv2);
-		
+
 		World::getWorld()->handleSavegame(&cv2);
 
 		// Kurztasten einlesen
@@ -218,7 +218,7 @@ void Document::loadSavegame()
 				++it;
 			}
 		}
-		
+
 		short key,dest;
 		int nr =0;
 		save->fromBuffer(nr);
@@ -231,7 +231,7 @@ void Document::loadSavegame()
 				installShortkey((KeyCode) key, (ShortkeyDestination) dest);
 			}
 		}
-		
+
 		// aktuelle Aktion setzen
 		m_state =RUNNING;
 		m_gui_state.m_shown_windows = NO_WINDOWS;
@@ -265,22 +265,22 @@ void Document::onCreateNewCharButton()
 		delete m_temp_player;
 		m_temp_player =0;
 	}
-	
+
 	m_modified |= SAVEGAME_MODIFIED;
-	
+
 	getGUIState()->m_shown_windows =CHAR_CREATE;
 	m_modified |= WINDOWS_MODIFIED;
-	
+
 }
 
 void Document::setNewCharacter(WorldObject::Subtype subtype, PlayerLook look)
-{	
+{
 	if (m_temp_player)
 		delete m_temp_player;
-	
+
 	m_temp_player = new Player(0,subtype);
 	m_temp_player->getPlayerLook() = look;
-	
+
 	m_modified |= SAVEGAME_MODIFIED;
 }
 
@@ -291,20 +291,20 @@ void Document::createNewCharacter(std::string name)
 		m_save_file = "./save/";
 		m_save_file += name;
 		m_save_file += ".sav";
-		
+
 		m_temp_player ->setName(name);
-		
+
 		DEBUGX("savefile %s",m_save_file.c_str());
-		
+
 		std::ifstream file(m_save_file.c_str());
 		if (file.is_open())
 		{
 			ERRORMSG("file exists: %s",m_save_file.c_str());
 			return;
 		}
-		
+
 		writeSavegame();
-		
+
 		getGUIState()->m_shown_windows = Document::START_MENU;
 		setModified(Document::WINDOWS_MODIFIED);
 	}
@@ -335,7 +335,7 @@ void Document::installShortkey(KeyCode key,ShortkeyDestination dest, bool check_
 {
 	if (check_special && m_special_keys.count(key)>0)
 		return;
-	
+
 	// Taste auf die das Ereignis bisher gemappt war
 	KeyCode oldkey = getMappedKey(dest);
 	// entfernen
@@ -346,12 +346,12 @@ void Document::installShortkey(KeyCode key,ShortkeyDestination dest, bool check_
 
 	// Mapping anlegen
 	m_shortkey_map[key]=dest;
-	
+
 	if (!check_special)
 	{
 		m_special_keys.insert(key);
 	}
-	
+
 }
 
 void Document::onButtonSendMessageClicked ( )
@@ -364,7 +364,7 @@ void Document::onButtonSaveExitClicked ( )
 {
 	getGUIState()->m_shown_windows = SAVE_EXIT;
 	m_modified |= WINDOWS_MODIFIED;
-	
+
 	if (m_state == INACTIVE)
 	{
 		saveSettings();
@@ -375,8 +375,8 @@ void Document::onButtonSaveExitClicked ( )
 
 void Document::onButtonSaveExitConfirm()
 {
-	
-	
+
+
 	if (m_state!=SHUTDOWN_REQUEST)
 	{
 		setState(SHUTDOWN_REQUEST);
@@ -399,7 +399,7 @@ void Document::onButtonSaveExitConfirm()
 
 	// Paket an den Server senden
 	sendCommand(&command);
-	
+
 	getGUIState()->m_shown_windows = NO_WINDOWS;
 	m_modified |= WINDOWS_MODIFIED;
 }
@@ -552,7 +552,7 @@ void Document::onStartScreenClicked()
 		getGUIState()->m_shown_windows = SAVEGAME_LIST;
 		m_modified =WINDOWS_MODIFIED;
 	}
-	
+
 	if (getGUIState()->m_shown_windows == CREDITS)
 	{
 		getGUIState()->m_shown_windows = START_MENU;
@@ -595,7 +595,7 @@ void Document::onButtonPartyAccept(int id)
 	command.m_button = BUTTON_MEMBER_ACCEPT;
 	command.m_id = id;
 	sendCommand(&command);
-	
+
 }
 
 void Document::onButtonPartyReject(int id)
@@ -604,7 +604,7 @@ void Document::onButtonPartyReject(int id)
 	command.m_button = BUTTON_MEMBER_REJECT;
 	command.m_id = id;
 	sendCommand(&command);
-	
+
 }
 
 void Document::onButtonPartyWar(int id)
@@ -613,7 +613,7 @@ void Document::onButtonPartyWar(int id)
 	command.m_button = BUTTON_WAR;
 	command.m_id = id;
 	sendCommand(&command);
-	
+
 }
 
 void Document::onButtonPartyPeace(int id)
@@ -622,7 +622,7 @@ void Document::onButtonPartyPeace(int id)
 	command.m_button = BUTTON_PEACE;
 	command.m_id = id;
 	sendCommand(&command);
-	
+
 }
 
 
@@ -726,7 +726,7 @@ void Document::onDropItemClick(int id)
 	command.m_button=LEFT_MOUSE_BUTTON;
 	command.m_action = "take_item";
 	command.m_id = id;
-	
+
 	// Paket an den Server senden
 	sendCommand(&command);
 }
@@ -737,7 +737,7 @@ void Document::onAnswerClick(int id)
 	command.m_button=BUTTON_ANSWER;
 	command.m_action = "speak_answer";
 	command.m_id = id;
-	
+
 	// Paket an den Server senden
 	sendCommand(&command);
 }
@@ -777,7 +777,7 @@ void Document::onButtonHostGame()
 	DEBUG("Host Game");
 	getGUIState()->m_shown_windows |= HOST_GAME;
 	getGUIState()->m_shown_windows &= ~START_MENU;
-	
+
 	m_modified |= WINDOWS_MODIFIED;
 }
 
@@ -803,14 +803,14 @@ void Document::onButtonStartJoinGame()
 	setServer(false);
 
 	// starten
-	setState(Document::START_GAME);	
+	setState(Document::START_GAME);
 }
 
 void Document::onButtonInventoryClicked()
 {
 	if (!checkSubwindowsAllowed())
 		return;
-	
+
 	// Inventar oeffnen wenn es gerade geschlossen ist und schliessen, wenn es geoeffnet ist
 	if (getGUIState()->m_shown_windows & INVENTORY)
 	{
@@ -849,7 +849,7 @@ void Document::onButtonCharInfoClicked()
 {
 	if (!checkSubwindowsAllowed())
 		return;
-	
+
 	// Charakterinfo oeffnen wenn es gerade geschlossen ist und schliessen, wenn es geoeffnet ist
 	if (getGUIState()->m_shown_windows & CHARINFO)
 	{
@@ -858,7 +858,7 @@ void Document::onButtonCharInfoClicked()
 	else
 	{
 		getGUIState()->m_shown_windows &= ~(PARTY | QUEST_INFO);
-		
+
 		getGUIState()->m_shown_windows |= CHARINFO;
 	}
 
@@ -870,7 +870,7 @@ void Document::onButtonPartyInfoClicked()
 {
 	if (!checkSubwindowsAllowed())
 		return;
-	
+
 	// PartyInfo oeffnen wenn es gerade geschlossen ist und schliessen, wenn er geoeffnet ist
 	if (getGUIState()->m_shown_windows & PARTY)
 	{
@@ -894,7 +894,7 @@ void Document::onButtonSkilltreeClicked(bool skill_right)
 {
 	if (!checkSubwindowsAllowed())
 		return;
-	
+
 	// Skilltree oeffnen wenn er gerade geschlossen ist und schliessen, wenn er geoeffnet ist
 	if (getGUIState()->m_shown_windows & SKILLTREE)
 	{
@@ -921,7 +921,7 @@ void Document::onButtonOpenChatClicked()
 	// fuer Debugging sehr nuetzlich, das zuzulassen
 	//if (!checkSubwindowsAllowed())
 	//		return;
-	
+
 	// Cchatfenster oeffnen wenn es gerade geschlossen ist und schliessen, wenn es geoeffnet ist
 	if (getGUIState()->m_shown_windows & CHAT)
 	{
@@ -940,7 +940,7 @@ void Document::onButtonQuestInfoClicked()
 {
 	if (!checkSubwindowsAllowed())
 		return;
-	
+
 	// Charakterinfo oeffnen wenn es gerade geschlossen ist und schliessen, wenn es geoeffnet ist
 	if (getGUIState()->m_shown_windows & QUEST_INFO)
 	{
@@ -949,7 +949,7 @@ void Document::onButtonQuestInfoClicked()
 	else
 	{
 		getGUIState()->m_shown_windows &= ~(PARTY | CHARINFO);
-		
+
 		getGUIState()->m_shown_windows |= QUEST_INFO;
 	}
 
@@ -961,7 +961,7 @@ void Document::onButtonMinimapClicked()
 {
 	if (!checkSubwindowsAllowed())
 		return;
-	
+
 	if (getGUIState()->m_shown_windows & MINIMAP)
 	{
 		getGUIState()->m_shown_windows &= ~MINIMAP;
@@ -969,10 +969,10 @@ void Document::onButtonMinimapClicked()
 	else
 	{
 		//getGUIState()->m_shown_windows &= ~(PARTY | CHARINFO);
-		
+
 		getGUIState()->m_shown_windows |= MINIMAP;
 	}
-	
+
 	// Geoeffnete Fenster haben sich geaendert
 	m_modified |= WINDOWS_MODIFIED;
 }
@@ -981,17 +981,17 @@ void Document::onButtonOptionsClicked()
 {
 	if (!checkSubwindowsAllowed() && getGUIState()->m_sheet ==  Document::GAME_SCREEN)
 		return;
-	
+
 	if (getGUIState()->m_shown_windows & OPTIONS)
 	{
 		getGUIState()->m_shown_windows &= ~OPTIONS;
 	}
 	else
-	{	
-		
+	{
+
 		getGUIState()->m_shown_windows |= OPTIONS;
 	}
-	
+
 	// Geoeffnete Fenster haben sich geaendert
 	m_modified |= WINDOWS_MODIFIED;
 }
@@ -1008,7 +1008,7 @@ void Document::onButtonWorldmap()
 {
 	if (!checkSubwindowsAllowed() && getGUIState()->m_sheet ==  Document::GAME_SCREEN)
 		return;
-	
+
 	if (getGUIState()->m_shown_windows & WORLDMAP)
 	{
 		if (getLocalPlayer()->isUsingWaypoint())
@@ -1025,13 +1025,13 @@ void Document::onButtonWorldmap()
 		}
 	}
 	else
-	{	
-		
+	{
+
 		getGUIState()->m_shown_windows |= WORLDMAP;
 		m_modified |= WINDOWS_MODIFIED;
 	}
-	
-	
+
+
 }
 
 void Document::onSkipDialogueTextClicked()
@@ -1054,7 +1054,7 @@ void Document::onButtonWaypointClicked(int id)
 
 void Document::sendChatMessage(std::string msg)
 {
-	
+
 	if (msg =="")
 	{
 		getGUIState()->m_shown_windows &= ~CHAT;
@@ -1078,7 +1078,7 @@ void Document::onSwapEquip()
 
 void Document::setLeftAction(Action::ActionType act)
 {
-	
+
 	// wenn kein Spieler gesetzt ist, dann keine Faehigkeit setzen
 	// der lokale Spieler
 	Player* player = static_cast<Player*>(World::getWorld()->getLocalPlayer());
@@ -1115,7 +1115,7 @@ void Document::setLeftAction(Action::ActionType act)
 
 void Document::setRightAction(Action::ActionType act)
 {
-	
+
 	// wenn kein Spieler gesetzt ist, dann keine Faehigkeit setzen
 	// der lokale Spieler
 	Player* player = static_cast<Player*>(World::getWorld()->getLocalPlayer());
@@ -1164,7 +1164,7 @@ std::string Document::getAbilityDescription(Action::ActionType ability)
 		}
 		// Name der Faehigkeit
 		out_stream << Action::getName(ability);
-		
+
 
 		// Beschreibung
 		out_stream << "\n" << Action::getDescription(ability);
@@ -1175,7 +1175,7 @@ std::string Document::getAbilityDescription(Action::ActionType ability)
 		{
 			// Spieler besitzt Faehigkeit nicht
 			avlb = false;
-			
+
 			PlayerBasicData* pdata = ObjectFactory::getPlayerData(player->getSubtype());
 			if (pdata !=0)
 			{
@@ -1188,7 +1188,7 @@ std::string Document::getAbilityDescription(Action::ActionType ability)
 					}
 				}
 			}
-			
+
 		}
 
 		// Timerinfo
@@ -1238,13 +1238,13 @@ bool Document::onKeyPress(KeyCode key)
 			if (act != "noaction" && getLocalPlayer()->checkAbility(act))
 			{
 				Action::ActionInfo* aci = Action::getActionInfo(act);
-			
+
 				bool left = true;
 				if (getGUIState()->m_prefer_right_skill || aci->m_target_type == Action::PASSIVE || aci->m_base_action== "noaction")
 				{
 					left = false;
 				}
-				
+
 				int id =-1;
 				Player* player = getLocalPlayer();
 				std::map<int,LearnableAbility> &ablts = player->getLearnableAbilities();
@@ -1257,10 +1257,10 @@ bool Document::onKeyPress(KeyCode key)
 						break;
 					}
 				}
-				
+
 				if (id ==-1)
 					return false;
-				
+
 				if (left)
 				{
 					installShortkey(key,(ShortkeyDestination) (USE_SKILL_LEFT+id));
@@ -1273,7 +1273,7 @@ bool Document::onKeyPress(KeyCode key)
 				}
 				return true;
 			}
-			
+
 		}
 
 	}
@@ -1289,7 +1289,7 @@ bool Document::onKeyPress(KeyCode key)
 	{
 		// Aktion welche mit der Taste verbunden ist
 		ShortkeyDestination dest = it->second;
-	
+
 		if (dest == SHOW_INVENTORY)
 		{
 			onButtonInventoryClicked();
@@ -1330,7 +1330,7 @@ bool Document::onKeyPress(KeyCode key)
 		{
 			Player* player = getLocalPlayer();
 			std::map<int,LearnableAbility> &ablts = player->getLearnableAbilities();
-			
+
 			if (ablts.count(dest-USE_SKILL_LEFT) >0)
 			{
 				setLeftAction(ablts[dest-USE_SKILL_LEFT].m_type);
@@ -1352,7 +1352,7 @@ bool Document::onKeyPress(KeyCode key)
 		else if(dest == SHOW_CHATBOX)
 		{
 			onButtonOpenChatClicked();
-	
+
 		}
 		else if (dest == SHOW_MINIMAP)
 		{
@@ -1363,7 +1363,7 @@ bool Document::onKeyPress(KeyCode key)
 			else
 			{
 				//getGUIState()->m_shown_windows &= ~(PARTY | QUEST_INFO);
-		
+
 				getGUIState()->m_shown_windows |= MINIMAP;
 			}
 			m_modified |= WINDOWS_MODIFIED;
@@ -1374,7 +1374,7 @@ bool Document::onKeyPress(KeyCode key)
 			if (!(getGUIState()->m_shown_windows & CHAT))
 			{
 				getGUIState()->m_shown_windows |= CHAT;
-				
+
 				// Geoeffnete Fenster haben sich geaendert
 				m_modified |= WINDOWS_MODIFIED;
 
@@ -1427,11 +1427,11 @@ bool  Document::onKeyRelease(KeyCode key)
 	{
 		m_gui_state.m_pressed_key = 0;
 	}
-	
+
 	std::map<KeyCode, ShortkeyDestination>::iterator it = m_shortkey_map.find(key);
 	if (it != m_shortkey_map.end())
 	{
-	
+
 		// Aktion welche mit der Taste verbunden ist
 		ShortkeyDestination dest = it->second;
 		if (dest == SHOW_ITEMLABELS)
@@ -1478,28 +1478,28 @@ void Document::update(float time)
 
 		case RUNNING:
 			updateContent(time);
-			
+
 			if (m_save_timer.getTime() > 60000)
 			{
 				m_save_timer.start();
-				
+
 				writeSavegame();
 				DEBUGX("saving");
 			}
-			
+
 			if (World::getWorld()->getNetwork()->getSlotStatus() == NET_TIMEOUT)
 			{
 				setState(SHUTDOWN_REQUEST);
 			}
-			
+
 			break;
 
 		case SHUTDOWN_REQUEST:
 			updateContent(time);
 			m_shutdown_timer += time;
-			
+
 			setState(SHUTDOWN_WRITE_SAVEGAME);
-			
+
 			if (m_shutdown_timer>400)
 			{
 				setState(SHUTDOWN);
@@ -1512,22 +1512,22 @@ void Document::update(float time)
 
 			m_state = SHUTDOWN;
 			break;
-			
+
 		case SHUTDOWN:
 			// Spielwelt abschalten
-			
+
 			World::deleteWorld();
-			
+
 			getGUIState()->m_sheet= MAIN_MENU;
 			getGUIState()->m_shown_windows = NO_WINDOWS;
-			
+
 			m_state = INACTIVE;
 
 			m_modified =GUISHEET_MODIFIED | WINDOWS_MODIFIED;
-			
+
 			saveSettings();
 			break;
-			
+
 		default:
 			break;
 	}
@@ -1544,7 +1544,7 @@ void Document::updateContent(float time)
 		DEBUGX("no local player");
 		return;
 	}
-	
+
 	// Fenster einstellen, die automatisch geoeffnet werden
 	int wmask = getGUIState()->m_shown_windows;
 	if (player->getTradeInfo().m_trade_partner != 0 && getGUIState()->m_shown_windows != SAVE_EXIT)
@@ -1555,7 +1555,7 @@ void Document::updateContent(float time)
 			m_modified |= WINDOWS_MODIFIED;
 		}
 	}
-	else if (player->getDialogueId() != 0 
+	else if (player->getDialogueId() != 0
 				|| (player->getRegion() !=0 && player->getRegion()->getCutsceneMode () == true))
 	{
 		// Chat ist fuer Debugging zugeschaltet
@@ -1565,25 +1565,26 @@ void Document::updateContent(float time)
 			m_modified |= WINDOWS_MODIFIED;
 		}
 	}
-	
+
 	if (player->getTradeInfo().m_trade_partner == 0 && (wmask & TRADE))
 	{
 		getGUIState()->m_shown_windows &= ~(TRADE | INVENTORY);
 		m_modified |= WINDOWS_MODIFIED;
 	}
-	
+
 	if (player->isUsingWaypoint() && getGUIState()->m_shown_windows !=	WORLDMAP)
 	{
 		getGUIState()->m_shown_windows = WORLDMAP;
 		m_modified |= WINDOWS_MODIFIED;
 	}
-	
+
 	if (!player->isUsingWaypoint() && (wmask & WORLDMAP))
 	{
 		getGUIState()->m_shown_windows &= ~WORLDMAP;
 		m_modified |= WINDOWS_MODIFIED;
 	}
-	
+
+	/*
 	if (player->getRegion() !=0 && player->getRegion()->getCutsceneMode())
 	{
 		if ((getGUIState()->m_shown_windows & ~SAVE_EXIT) != 0)
@@ -1592,7 +1593,7 @@ void Document::updateContent(float time)
 			m_modified |= WINDOWS_MODIFIED;
 		}
 	}
-
+*/
 	if (m_gui_state.m_left_mouse_pressed)
 	{
 		DEBUGX("linke Maustaste festgehalten");
@@ -1648,10 +1649,10 @@ void Document::writeSavegame()
 {
 	if (getLocalPlayer()==0)
 		return;
-	
+
 	CharConv* save;
-	
-	
+
+
 	bool binary = false;
 	if (!binary)
 	{
@@ -1662,9 +1663,9 @@ void Document::writeSavegame()
 	{
 		save = new CharConv(0);
 	}
-	
+
 	getLocalPlayer()->toSavegame(save);
-	
+
 	// Shortkeys hinzufuegen
 	ShortkeyMap::iterator it;
 	int nr =0;
@@ -1685,12 +1686,12 @@ void Document::writeSavegame()
 			save->printNewline();
 		}
 	}
-	
+
 	// Savegame schreiben (ansynchron)
 	std::pair<Document*, CharConv*>* param = new std::pair<Document*, CharConv*>(this,save);
 	pthread_t thread;
 	pthread_create(&thread,0,&Document::writeSaveFile,param);
-	
+
 }
 
 void* Document::writeSaveFile(void* doc_data_ptr)
@@ -1699,7 +1700,7 @@ void* Document::writeSaveFile(void* doc_data_ptr)
 	std::pair<Document*, CharConv*>* param = static_cast< std::pair<Document*, CharConv*>* >(doc_data_ptr);
 	CharConv* save = param->second;
 	Document* doc = param->first;
-	
+
 	// Savegame schreiben
 	std::stringstream* stream = dynamic_cast<std::stringstream*> (save->getStream());
 	char* bp=0;
@@ -1713,7 +1714,7 @@ void* Document::writeSaveFile(void* doc_data_ptr)
 		DEBUG("binary");
 	}
 	// Laenge der Datei
-	
+
 	// Daten byteweise in Datei schreiben
 	std::ofstream file;
 	if (bin ==1)
@@ -1737,7 +1738,7 @@ void* Document::writeSaveFile(void* doc_data_ptr)
 			file << stream->str();
 			DEBUGX("save: \n %s",stream->str().c_str());
 		}
-		
+
 		file.close();
 	}
 	else
@@ -1750,7 +1751,7 @@ void* Document::writeSaveFile(void* doc_data_ptr)
 	}
 	delete save;
 	delete param;
-	
+
 	return 0;
 }
 
@@ -1759,14 +1760,14 @@ void Document::saveSettings()
 {
 	std::ofstream file;
 	file.open(".sumwars");
-	
+
 	if (file.is_open())
 	{
 		file << World::getVersion() << "\n";
-		
+
 		file << SoundSystem::getSoundVolume() <<"\n";
 		file << MusicManager::instance().getMusicVolume() <<"\n";
-		
+
 		ShortkeyMap::iterator it;
 		std::set<KeyCode>::iterator jt;
 
@@ -1784,7 +1785,7 @@ void Document::saveSettings()
 				file << (int) it->first << " " << (int) it->second << "\n";
 			}
 		}
-		
+
 		file << m_special_keys.size()<<"\n";
 		for (jt = m_special_keys.begin(); jt != m_special_keys.end(); ++jt)
 		{
@@ -1792,7 +1793,7 @@ void Document::saveSettings()
 		}
 		file << "\n";
 		file << m_server_host << " " << m_port << " " << m_max_players << "\n";
-		
+
 		file.close();
 	}
 }
@@ -1801,26 +1802,26 @@ void Document::loadSettings()
 {
 	std::fstream file;
 	file.open(".sumwars", std::ios::in);
-	
+
 	int key, dest,nr;
 	if (file.is_open())
 	{
 		ShortkeyMap::iterator it;
 		std::set<KeyCode>::iterator jt;
-		
+
 		m_shortkey_map.clear();
 		int version;
 		file >> version;
-		
+
 		float soundvolume;
 		file >> soundvolume;
 		SoundSystem::setSoundVolume(soundvolume);
 		DEBUGX("Sound volume %f",soundvolume);
-		
+
 		float musicvolume;
 		file >> musicvolume;
 		MusicManager::instance().setMusicVolume(musicvolume);
-		
+
 		file >> nr;
 		DEBUGX("short keys %i",nr);
 		for (int i=0; i<nr; i++)
@@ -1828,7 +1829,7 @@ void Document::loadSettings()
 			file >> key >> dest;
 			m_shortkey_map[(KeyCode) key] = (ShortkeyDestination) dest;
 		}
-		
+
 		file >> nr;
 		DEBUGX("special keys %i",nr);
 		for (int i=0; i<nr; i++)
