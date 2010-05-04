@@ -350,7 +350,7 @@
 				addSpeaker(tutorial_tmp.tolec,"Tolec",true);
 				addSpeaker(tutorial_tmp.derred,"Derred",true);
 				
-				addQuestion("Wollt ihr die Waffen abgeben?","all");
+				addQuestion(_("Wollt ihr die Waffen abgeben?"),"all");
 				addAnswer("Ja","give_weapons_yes");
 				addAnswer("Nein","give_weapons_no");
 			</Effect>

@@ -126,7 +126,7 @@ msgstr "Wert"
 
 #: ../src/core/item.cpp:650
 msgid "Selling Value"
-msgstr ""
+msgstr "Verkaufswert"
 
 #: ../src/core/item.cpp:660
 msgid "Required class"
@@ -390,7 +390,7 @@ msgstr ""
 
 #: ../src/gui/optionswindow.cpp:201
 msgid "Graphic"
-msgstr ""
+msgstr "Grafik"
 
 #: ../src/gui/optionswindow.cpp:203
 msgid "Misc"
@@ -426,7 +426,7 @@ msgstr ""
 
 #: ../src/gui/optionswindow.cpp:236
 msgid "Music"
-msgstr ""
+msgstr "Musik"
 
 #: ../src/gui/optionswindow.cpp:239
 msgid "Language"
@@ -462,7 +462,7 @@ msgstr "Level"
 
 #: ../src/gui/worldmap.cpp:140
 msgid "Town Portal"
-msgstr ""
+msgstr "Stadtportal"
 
 #~ msgid "speak with someone"
 #~ msgstr "mit jemandem sprechen"
