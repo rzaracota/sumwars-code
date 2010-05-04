@@ -327,7 +327,7 @@ void Dialogue::addQuestion(std::string text, std::string asked_player)
 		delete m_question;
 	
 	m_question = new Question;
-	m_question->m_text = text;
+	m_question->m_text = dgettext("sumwars-events",text.c_str());
 	m_question->m_asked_player = asked_player;
 }
 
@@ -342,7 +342,7 @@ void Dialogue::addAnswer(std::string text, std::string topic)
 	if (checkTopic(topic))
 	{
 		
-		m_question->m_answers.push_back(std::make_pair(dgettext("event",text.c_str()),topic));
+		m_question->m_answers.push_back(std::make_pair(dgettext("sumwars-events",text.c_str()),topic));
 	}
 }
 

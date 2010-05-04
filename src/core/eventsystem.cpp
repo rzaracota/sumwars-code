@@ -2922,7 +2922,7 @@ int EventSystem::luagettext(lua_State *L)
 
 	DEBUGX("to translate: %s",lua_tostring(L,1));
 	std::string text="return ";
-	std::string transl = dgettext("event",lua_tostring(L,1));
+	std::string transl = dgettext("sumwars-events",lua_tostring(L,1));
 	
 	// testen, ob es zusammengesetzter String ist
 	bool complex = false;
