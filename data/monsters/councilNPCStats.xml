@@ -17,11 +17,11 @@
 					resistances_physical="30"
 					resistances_air="17"
 					resistances_ice="23"
-					resistances_fire="40"
+					resistances_fire="100"
 					resistances_cap_physical="50"
 					resistances_cap_air="80"
 					resistances_cap_ice="80"
-					resistances_cap_fire="80"
+					resistances_cap_fire="100"
 					walk_speed="3500"
 					attack_speed="2000"
 					step_length="1.2"
@@ -34,7 +34,7 @@
 		
 		<Ability type="attack" rating="1"/>
 		
-		
+		<Immunity type="burning"/>
 	</BasicAttributes>
 	
 	<Geometry radius="0.5" />
@@ -60,11 +60,11 @@
 					resistances_physical="20"
 					resistances_air="28"
 					resistances_ice="32"
-					resistances_fire="60"
+					resistances_fire="100"
 					resistances_cap_physical="50"
 					resistances_cap_air="80"
 					resistances_cap_ice="80"
-					resistances_cap_fire="80"
+					resistances_cap_fire="100"
 					walk_speed="3500"
 					attack_speed="1300"
 					step_length="1.2"
@@ -77,7 +77,7 @@
 		
 		<Ability type="attack" rating="1"/>
 		
-		
+		<Immunity type="burning"/>
 	</BasicAttributes>
 	
 	<Geometry radius="0.5" />
@@ -549,7 +549,6 @@
 		<Ability type="legion_whirl" rating="0" all_target_rating="0.5"/>
 		<Ability type="council_flamearmor" rating="2"/>
 		
-		
 	</BasicAttributes>
 	
 	<Geometry radius="0.5" />
@@ -594,10 +593,15 @@
 		<Ability type="summoned" time="2000"/>
 		<Ability type="fire_ball"  rating="3" all_target_rating="0.5" all_target_rating_radius="1.5"/>
 
+		<Immunity type="burning"/>
 	</BasicAttributes>
 	
 	<Geometry radius="1.0" />
 	
+	
+	
 	<AI ai_sight_range="10" ai_chase_range="20"/>
 </Monster>
+
+
 

@@ -1383,7 +1383,7 @@
 		<Immunity type="berserk"/>
 		<Immunity type="confused"/>
 		<Immunity type="mute"/>
-		
+		<Immunity type="burning"/>
 	</BasicAttributes>
 	
 	<Geometry radius="0.5" />
@@ -1435,7 +1435,7 @@
 		<Immunity type="berserk"/>
 		<Immunity type="confused"/>
 		<Immunity type="mute"/>
-		
+		<Immunity type="burning"/>
 	</BasicAttributes>
 	
 	<Geometry radius="0.5" />
@@ -1487,7 +1487,7 @@
 		<Immunity type="berserk"/>
 		<Immunity type="confused"/>
 		<Immunity type="mute"/>
-		
+		<Immunity type="burning"/>
 	</BasicAttributes>
 	
 	<Geometry radius="0.5" />
@@ -2452,9 +2452,18 @@
 	<Ability type="obelisk_icicle" rating = "1"/>
 	<Ability type="noaction"/>
 
+	<Immunity type="blind"/>
+	<Immunity type="poisoned"/>
+	<Immunity type="berserk"/>
+	<Immunity type="confused"/>
+	<Immunity type="mute"/>
+	<Immunity type="frozen"/>
+	
 	</BasicAttributes>
 	
 	<Geometry radius="1.0" />
+	
+	
 	
 	<AI ai_sight_range="12" ai_shoot_range="12" ai_randaction_prob="0.0" />
 </Monster>
