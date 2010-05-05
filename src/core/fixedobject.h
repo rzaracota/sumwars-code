@@ -1,7 +1,4 @@
 /*
-	Ein kleines Rollenspiel
-	Copyright (C) 2007 Daniel Erler
-
 	This program is free software; you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
 	the Free Software Foundation; either version 2 of the License, or
@@ -16,16 +13,7 @@
 	with this program; if not, write to the Free Software Foundation, Inc.,
 	51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
-/**
- * \file fixedobject.h
- * \defgroup Fixedobject \ Fixes Objekt
- * \ingroup worldobject
- * \brief Stellt ein unbewegliches Objekt dar
- * \author Hans Wulf
- * \version 1.0
- * \date 2007/05/28
- * \note Beinhaltet die Klasse FixedObject
- */
+
 
 #ifndef FIXEDOBJECT_H
 #define FIXEDOBJECT_H
@@ -44,27 +32,27 @@ class FixedObject : public WorldObject {
  * Public stuff
  */
 public:
-	
+
 	/**
 	 * \fn FixedObject( int id)
 	 * \param id ID des Objekts
 	 * \brief Konstruktor
 	 */
 	FixedObject( int id);
-	
+
 	/**
 	 * \fn FixedObject( int id, Subtype object_subtype)
 	 * \brief Konstruktor
 	 */
 	FixedObject( int id, Subtype object_subtype);
-	
+
 	/**
 	* \fn virtual bool init()
 	* \brief Initialisierung von unbewegten Gegenständen
 	* \return bool Gibt an, ob die Initialisierung erfolgreich war
 	*/
 	virtual bool init ();
-	
+
 	/**
 	 * \fn virtual bool  update (float time)
 	 * \brief aktualisiert das Objekt nach dem eine bestimmte Zeit vergangen ist

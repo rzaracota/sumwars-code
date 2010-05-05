@@ -1,7 +1,4 @@
 /*
-	Summoning Wars - document.h
-	Copyright (C) 2007  Hans Wulf
-
 	This program is free software: you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
 	the Free Software Foundation, either version 3 of the License, or
@@ -16,16 +13,6 @@
 	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-
-/**
- * \file document.h
- * \defgroup Document \ Dokument
- * \brief Stellt das Dokumentkonzept dar
- * \author Hans Wulf
- * \version 1.0
- * \date 2007/05/28
- * \note Beinhaltet die Klasse Document
- */
 
 #ifndef DOCUMENT_H
 #define DOCUMENT_H
@@ -82,16 +69,16 @@ class Document
 
 		SHUTDOWN_REQUEST =4,
 
-		
+
 		SHUTDOWN =5,
 
 		DISCONNECTED =6,
 
  		START_SERVER =7,
-   
+
    		SHUTDOWN_WRITE_SAVEGAME=8,
 
-   
+
    		END_GAME =9,
 	};
 
@@ -213,7 +200,7 @@ class Document
 		 * \brief Gibt an, ob die rechte Maustaste festgehalten wird
 	 	 */
 		bool m_right_mouse_pressed;
-		
+
 		 /**
 		 * \var m_middle_mouse_pressed
 		 * \brief Gibt an, ob die mittlere Maustaste festgehalten wird
@@ -225,7 +212,7 @@ class Document
 		 * \brief Gibt an, ob die Shift-Taste festgehalten wird
 		 */
 		bool m_shift_hold;
-		
+
 		/**
 		 * \var bool m_item_labels
 		 * \brief Gibt an, ob die Alt-Taste festgehalten wird
@@ -243,7 +230,7 @@ class Document
 		 * \brief zuletzt angeclickter Punkt
 		 */
 		Vector m_clicked;
-		
+
 		/**
 		 * \var float m_left_mouse_pressed_time
 		 * \brief Zaehler der die Anzahl Frames zaehlt die die linke Maustaste festgehalten wurde
@@ -274,13 +261,13 @@ class Document
 		 * \brief aktuell festgehaltene Taste
 		 */
 		KeyCode m_pressed_key;
-		
+
 		/**
 		 * \var Action::ActionType m_hover_ability
 		 * \brief Aktion auf die gerade mit der Maus gezeigt wird
 		 */
 		Action::ActionType m_hover_ability;
-		
+
 		/**
 		 * \var bool m_prefer_right_skill
 		 * \brief wenn true, werden Kurztasten auf die rechte Maustaste gelegt, auch wenn sie fuer die linke geeignet waeren
@@ -334,7 +321,7 @@ class Document
 	 * \param s Name des Savefiles
 	 */
 	void setSaveFile(std::string s);
-	
+
 
 	/**
 	 * \fn std::string getSaveFile()
@@ -350,7 +337,7 @@ class Document
 	 * \brief Schreibt ein Savegame des aktuellen Spielers
 	 */
 	void writeSavegame();
-	
+
 	/**
 	 * \fn static void* writeSaveFile(void* doc_data_ptr)
 	 * \param doc_ptr Zeiger auf ein std::pair(Dokument, Daten)
@@ -418,7 +405,7 @@ class Document
 	{
 		return 0;
 	}
-	
+
 	/**
 	 * \fn ShortkeyMap& getShortkeys()
 	 * \brief Gibt alle Shortkeys aus
@@ -442,7 +429,7 @@ class Document
 	 */
 	void setRightAction(Action::ActionType a);
 
-	
+
 
 	/**
 	 * \fn void setServer(bool server)
@@ -502,37 +489,37 @@ class Document
 	 * \brief Behandelt Klick auf Button Einzelspieler Spiel starten
 	 */
 	void onButtonStartSinglePlayer();
-	
+
 	/**
 	 * \fn void onButtonHostGame()
 	 * \brief Behandelt Klick auf Button Spiel hosten
 	 */
 	void onButtonHostGame();
-	
+
 	/**
 	 * \fn void onButtonStartHostGame()
 	 * \brief Behandelt Klick auf Button Spiel starten (Host)
 	 */
 	void onButtonStartHostGame();
-	
+
 	 /**
 	  * \fn void onButtonJoinGame()
 	  * \brief Behandelt Klick auf Button Spiel joinen
 	  */
 	void onButtonJoinGame();
-	
+
 	/**
 	 * \fn void onButtonStartJoinGame()
 	 * \brief Behandelt Klick auf Button Spiel starten (Client)
 	 */
 	void onButtonStartJoinGame();
-	
+
 	/**
 	 * \fn void onButtonSaveExitClicked ( )
 	 * \brief Button zum Speichern und Beenden des Spiels wurde angeklickt
 	 */
 	void onButtonSaveExitClicked ( );
-	
+
 	/**
 	 * \fn void onButtonSaveExitConfirm( )
 	 * \brief The player has confirmed to save & exit
@@ -544,7 +531,7 @@ class Document
 	 * \brief The player has aborted save & exit
 	 */
 	void onButtonSaveExitAbort();
-	
+
 	/**
 	 * \fn void onButtonCredits( )
 	 * \brief The player has pressed credits button
@@ -568,7 +555,7 @@ class Document
 	 * \brief Behandelt Klick auf CharakterInfo Button
 	 */
 	void onButtonCharInfoClicked();
-	
+
 	/**
 	 * \fn void onButtonPartyInfoClicked()
 	 * \brief Behandelt Klick auf CharakterInfo Button
@@ -588,13 +575,13 @@ class Document
 	 * \brief Behandelt Klick auf Chat oeffnen Button
 	 */
 	void onButtonOpenChatClicked();
-	
+
 	/**
 	 * \fn void onButtonQuestInfoClicked()
 	 * \brief Behandelt Klick auf Chat oeffnen Button
 	 */
 	void onButtonQuestInfoClicked();
-	
+
 	/**
 	 * \fn void onButtonOptionsClicked()
 	 * \brief Behandelt Klick auf Button Optionen
@@ -606,7 +593,7 @@ class Document
 	 * \brief Wechselt die Ausruestung
 	 */
 	void onSwapEquip();
-	
+
 	/**
 	 * \fn void onSkipDialogueTextClicked()
 	 * \brief Behandelt Click auf Dialogtext
@@ -627,7 +614,7 @@ class Document
 	 * \param pos Position des Mausklicks
 	 */
 	void onRightMouseButtonClick(Vector pos);
-	
+
 	/**
 	 * \fn void onMouseMove(float xrel, float yrel, float wheelrel)
 	 * \brief Behandelt die Bewegung der Maus
@@ -642,8 +629,8 @@ class Document
 	 * \brief Behandelt die Reaktion auf einen Klick im Startbildschirm
 	 */
 	void onStartScreenClicked();
-	
-	
+
+
 	/**
 	 * \fn void onItemLeftClick(short pos)
 	 * \brief Behandelt Linksklick auf ein Item
@@ -655,7 +642,7 @@ class Document
 	 * \brief Behandelt Rechtsklick auf ein Item
 	 */
 	void onItemRightClick(short pos);
-	
+
 	/**
 	 * \fn void onAnswerClick(int id)
 	 * \brief Behandelt Klick auf eine Antwort bei einem Gespraech
@@ -680,7 +667,7 @@ class Document
 	 * \brief Laesst das Item fallen, das aktuell am Cursor haengt
 	 */
 	void dropCursorItem();
-	
+
 	/**
 	 * \fn void dropGold(int value)
 	 * \brief laesst Gold fallen
@@ -692,7 +679,7 @@ class Document
 	 * \brief Behandelt Linksklick auf ein Item
 	 */
 	void onDropItemClick(int id);
-	
+
 	/**
 	 * \fn bool onKeyPress(KeyCode key)
 	 * \brief Behandelt einen Tastendruck
@@ -712,7 +699,7 @@ class Document
 	 * \param id ID des Spielers
 	 */
 	void onButtonKick(int id);
-	
+
 	/**
 	 * \fn void onButtonPartyApply(int id)
 	 * \brief Behandelt Druck auf Button Bei einer Party bewerben
@@ -726,40 +713,40 @@ class Document
 	 * \param id ID des Bewerbers
 	 */
 	void onButtonPartyAccept(int id);
-	
+
 	/**
 	 * \fn void onButtonPartyReject(int id)
 	 * \brief Behandelt Druck auf Button Partymitglied ablehnen
 	 * \param id ID des Bewerbers
 	 */
 	void onButtonPartyReject(int id);
-	
+
 	/**
 	 * \fn void onButtonPartyWar(int id)
 	 * \brief Behandelt Druck auf Button Krieg erklaeren
 	 * \param id ID des Partyleiters
 	 */
 	void onButtonPartyWar(int id);
-	
+
 	/**
 	 * \fn void onButtonPartyPeace(int id)
 	 * \brief Behandelt Druck auf Button Frieden schliessen
 	 * \param id ID des Partyleiters
 	 */
 	void onButtonPartyPeace(int id);
-	
+
 	/**
 	 * \fn void onButtonPartyLeave()
 	 * \brief Behandelt Druck auf Button Partymitglied ablehnen
 	 */
 	void onButtonPartyLeave();
-	
+
 	/**
 	 * \fn void onButtonCloseTrade()
 	 * \brief Behandelt Druck auf Button Handel beenden
 	 */
 	void onButtonCloseTrade();
-	
+
 	/**
 	 * \fn void onTradeItemLeftClick(short pos)
 	 * \brief Behandelt Linksklick auf ein Item beim Handel
@@ -771,31 +758,31 @@ class Document
 	 * \brief Behandelt Rechtsklick auf ein Item beim Handel
 	 */
 	void onTradeItemRightClick(short pos);
-	
+
 	/**
 	 * \fn void onTradeSellClicked();
 	 * \brief Behandelt Klick auf die Flaeche des Handelsfensters (verkauft Item)
 	 */
 	void onTradeSellClicked();
-	
+
 	/**
 	 * \fn void onButtonWorldmap()
 	 * \brief Behandelt Klick auf Button Weltkarte
 	 */
 	void onButtonWorldmap();
-	
+
 	/**
 	 * \fn void onButtonWaypointClicked(int id)
 	 * \brief Behandelt Klick auf Wegpunkt Button
 	 */
 	void onButtonWaypointClicked(int id);
-	
+
 	/**
 	 * \fn void sendChatMessage(std::string msg)
 	 * \brief sendet eine Chatnachricht an alle Spieler
 	 */
 	void sendChatMessage(std::string msg);
-	
+
 	/**
 	 * \fn void setNewCharacter(GameObject::Subtype subtype, PlayerLook look)
 	 * \brief setzt die Daten fuer neuen Spieler
@@ -803,14 +790,14 @@ class Document
 	 * \param look Aussehen des Spielers
 	 */
 	void setNewCharacter(GameObject::Subtype subtype, PlayerLook look);
-	
+
 	/**
 	 * \fn void createNewCharacter()
 	 * \brief erzeugt einen neuen Spieler
 	 * \param name Name des Spielers
 	 */
 	void createNewCharacter(std::string name);
-	
+
 	/**
 	 * \fn void onCreateNewCharButton()
 	 * \brief Oeffnet das Fenster zur Charaktererstellung
@@ -835,13 +822,13 @@ class Document
 	 * \brief Baut Verbindung zum Server auf
 	 */
 	void startGame(bool server);
-	
+
 	/**
 	 * \fn void saveSettings()
 	 * \brief Speichert die Einstellungen
 	 */
 	void saveSettings();
-	
+
 	/**
 	 * \fn void loadSettings()
 	 * \brief Laedt die Einstellungen
@@ -863,7 +850,7 @@ class Document
 	{
 		return m_server_host;
 	}
-	
+
 	/**
 	 * \fn int getMaxPlayers()
 	 * \brief Gibt maximale Spieleranzahl aus
@@ -872,7 +859,7 @@ class Document
 	{
 		return m_max_players;
 	}
-	
+
 	/**
 	 * \fn void setMaxPlayers(int max_players)
 	 * \brief Setzt die maximale Spieleranzahl
@@ -882,7 +869,7 @@ class Document
 	{
 		m_max_players = max_players;
 	}
-	
+
 	/**
 	 * \fn int getPort()
 	 * \brief Gibt den Port aus
@@ -891,7 +878,7 @@ class Document
 	{
 		return m_port;
 	}
-	
+
 	/**
 	 * \fn void setPort(int port)
 	 * \brief Setzt den Port
@@ -934,84 +921,84 @@ class Document
 		* \return ID
 		*/
 		int getObjectAt(float x,float y);
-	
-	
-	
-	
+
+
+
+
 		/**
 		* \var GUIState m_gui_state
 		* \brief Enthaelt alle Informationen zum Zustand der GUI
 		*/
 		GUIState m_gui_state;
-	
-	
+
+
 		/**
 		* \var int m_modified
 		* \brief Bitmaske welche angibt welche Teile des Dokuments veraendert wurden
 		*/
 		int m_modified;
-	
+
 		/**
 		 * \var std::string m_save_file
 		* \brief Dateiname des Savefiles
 		*/
 		std::string m_save_file;
-	
+
 		/**
 		* \var State m_state
 		* \brief Status des Dokuments
 		*/
 		State m_state;
-	
+
 		/**
 		* \var ShortkeyMap m_shortkey_map
 		* \brief Bildet Taste auf Ereignis, das per Shortkey ausgeloest werden kann ab
 		*/
 		ShortkeyMap m_shortkey_map;
-	
+
 		/**
 		* \var std::set<KeyCode> m_special_keys
 		* \brief Menge der Tasten, die eine besondere Bedeutung haben und die deswegen nicht frei zugewiesen werden koennen
 		*/
 		std::set<KeyCode> m_special_keys;
-	
-	
+
+
 		/**
 		* \var std::string m_server_host
 		* \brief IP des Servers
 		*/
 		std::string m_server_host;
-	
+
 		/**
 		 * \var int m_port
 		 * \brief Port ueber den der Netzverkehr laeuft
 		 */
 		int m_port;
-		
+
 		/**
 		 * \var int m_max_players
 		 * \brief maximale Anzahl Spieler
 		 */
 		int m_max_players;
-		
+
 		/**
 		* \var bool m_server
 		* \brief true, wenn der aktuelle Rechner der Server ist
 		*/
 		bool m_server;
-		
+
 		/**
 		 * \var Player* m_temp_player
 		 * \brief temporaer angelegtes Spielerobjekt zum rendern des ausgewaehlten Spielers
 		 */
 		Player* m_temp_player;
-	
+
 		/**
 		* \var Timer m_save_timer
 		* \brief Timer fuer das automatische speichern
 		*/
 		Timer m_save_timer;
-	
+
 		/**
 		* \var m_shutdown_timer
 		* \brief Timer fuer Shutdown

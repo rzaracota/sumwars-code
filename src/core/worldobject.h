@@ -1,7 +1,4 @@
 /*
-	Ein kleines Rollenspiel
-	Copyright (C) 2007 Hans Wulf
-
 	This program is free software; you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
 	the Free Software Foundation; either version 2 of the License, or
@@ -53,19 +50,19 @@ struct Damage;
  */
 struct GridLocation
 {
-	
+
 	/**
 	 * \var m_grid_x
 	 * \brief Index des Objektes im Grid in x-Richtung
 	 */
 	int m_grid_x;
-	
+
 	/**
 	 * \var m_grid_y
 	 * \brief Index des Objektes im Grid in y-Richtung
 	 */
 	int m_grid_y;
-	
+
 	/**
 	 * \var int m_index
 	 * \brief Index Stelle an der das Objekt zu finden ist
@@ -84,7 +81,7 @@ class WorldObject : public GameObject
 
 	public:
 
-	
+
 	/**
 	 * \enum Group
 	 * \brief Listet verschiedene Grundtypen von Objekten auf
@@ -99,15 +96,15 @@ class WorldObject : public GameObject
   		DEAD = 8,
   		GROUP_ALL = 15
 	};
-	
+
 
 	typedef std::string Race;
-	
+
 	/**
 	 * \enum State
 	 * \brief zaehlt Zustaende von Objekten auf
 	 */
-	
+
 
 	/**
 	 * \enum SpecialFlags
@@ -126,7 +123,7 @@ class WorldObject : public GameObject
 		WIND_WALK = 0x400,
 		BURNING_RAGE = 0x800,
 		STATIC_SHIELD = 0x1000,
-  
+
 		IGNORED_BY_AI = 0x4000000
 	};
 
@@ -160,8 +157,8 @@ class WorldObject : public GameObject
 	virtual ~WorldObject()
 	{
 	}
-	
-	
+
+
 	/**
 	 * \fn GridLocation* getGridLocation()
 	 * \brief Gibt den Ort des Objektes im Grid aus
@@ -171,8 +168,8 @@ class WorldObject : public GameObject
 	{
 		return &m_grid_location;
 	}
-	
-	
+
+
 	//Operations
 	/**
 	 * \fn virtual bool init ()
@@ -183,15 +180,15 @@ class WorldObject : public GameObject
 	{
 		return true;
 	}
-	
-	
+
+
 	/**
 	 * \fn virtual bool destroy()
 	 * \brief Zerstoert das WorldObject.  Die Funktion ist virtuell und wird von den abgeleiteten Klassen &uuml;berschrieben
 	 * \return bool der angibt, ob die Zerstoerung erfolgreich war
 	 */
 	virtual  bool  destroy ();
-	
+
 	/**
 	 * \fn virtual bool update ( float time)
 	 * \brief Aktualisiert das GameObject, nachdem eine bestimmte Zeit vergangen ist. Alle Aktionen des Objekts werden auf diesem Weg ausgeloest. Die Funktion ist virtuell und wird von den abgeleiteten Klassen ueberschrieben
@@ -199,23 +196,23 @@ class WorldObject : public GameObject
 	 * \return bool, der angibt, ob die Aktualisierung fehlerfrei verlaufen ist
 	 */
 	virtual  bool  update ( float time);
-	
+
 	/**
 	 * \fn bool moveTo(Vector newpos, bool emit_event= true )
 	 * \brief Verschiebt das Objekt an einen neuen Ort
 	 * \param newpos neue Position
 	 * \param emit_event Position wird anderen Clients nur mitgeteilt, wenn emit_event auf true gesetzt ist
-	 * 
+	 *
 	 */
 	bool moveTo(Vector newpos, bool emit_event = true);
-	
+
 	/**
 	 * \fn bool takeDamage(Damage* damage)
 	 * \brief Das Objekt nimmt Schaden in der in damage angegebenen Art und Hoehe.
 	 * \param damage Schadensart und -hoehe
 	 */
 	virtual bool takeDamage(Damage* damage);
-	
+
 	/**
 	 * \fn virtual void writeNetEvent(NetEvent* event, CharConv* cv)
 	 * \brief Schreibt die Daten zu einem NetEvent in den Bitstream
@@ -223,15 +220,15 @@ class WorldObject : public GameObject
 	 * \param cv Bitstream
 	 */
 	virtual void writeNetEvent(NetEvent* event, CharConv* cv);
-	
-	
+
+
 	/**
 	 * \fn virtual void processNetEvent(NetEvent* event, CharConv* cv)
 	 * \brief Fuehrt die Wirkung eines NetEvents auf das Objekt aus. Weitere Daten werden aus dem Bitstream gelesen
 	 */
 	virtual void processNetEvent(NetEvent* event, CharConv* cv);
-	
-	
+
+
 	/**
 	 * \fn virtual bool reactOnUse (int id)
 	 * \brief Diese Funktion behandelt die Reaktion eines Worldobject, wenn auf es eine Aktion ausgefuehrt wird.
@@ -239,19 +236,19 @@ class WorldObject : public GameObject
 	 * \return bool, der angibt, ob die Behandlung der Aktion erfolgreich war
 	 */
 	virtual  bool  reactOnUse (int id);
-	
+
 	/**
 	 * \fn virtual bool isLarge()
 	 * \brief Gibt an, ob es sich um ein grosses Objekt handelt. Diese werden gesondert behandelt
 	 */
 	virtual bool isLarge();
-	
-	
+
+
 
 	//Accessor Methods
 
 
-	
+
 	/**
 	 * \fn Fraction::Id getFraction()
 	 * \brief Gibt die Fraktion aus
@@ -260,14 +257,14 @@ class WorldObject : public GameObject
 	{
 		return m_fraction;
 	}
-	
+
 	/**
 	 * \fn void setFraction(Fraction::Id fr)
 	 * \brief setzt die Fraktion
 	 * \param fr Fraktion
 	 */
 	void setFraction(Fraction::Id fr);
-	
+
 	/**
 	 * \fn Race getRace()
 	 * \brief Gibt die Rasse aus
@@ -276,14 +273,14 @@ class WorldObject : public GameObject
 	{
 		return m_race;
 	}
-	
+
 	/**
 	 * \fn void setRace(Race race)
 	 * \brief Setzt die Kategorie
 	 * \param cat neue Kategorie
 	 */
 	void setRace(Race race);
-	
+
 	/**
 	 * \fn void setInteractionFlags(char flags)
 	 * \brief Setzt die Flags fuer die Interaktion
@@ -293,7 +290,7 @@ class WorldObject : public GameObject
 	{
 		m_interaction_flags = flags;
 	}
-	
+
 	/**
 	 * \fn bool checkInteractionFlag(InteractionFlags flag)
 	 * \brief Prueft ob ein Flag gesetzt ist
@@ -303,9 +300,9 @@ class WorldObject : public GameObject
 	{
 		return (m_interaction_flags & flag);
 	}
-	
-	
-	
+
+
+
 	/**
 	 * \fn WorldObject::Group getGroup()
 	 * \brief Gibt aus zu welcher Gruppierung ein Objekt gehoert
@@ -327,28 +324,28 @@ class WorldObject : public GameObject
 	 */
 	virtual void fromString(CharConv* cv);
 
-	
-	
+
+
 	/**
 	 * \fn virtual int getValue(std::string valname)
 	 * \brief Schiebt den gewuenschten Attributwert eines Objektes auf den Lua Stack
 	 * \param valname Name des Wertes
 	 */
 	virtual int getValue(std::string valname);
-	
+
 	/**
 	 * \fn virtual bool setValue(std::string valname)
 	 * \brief Setzt den gewuenschten Attributwert eines Objektes
 	 * \param valname Name des Wertes
 	 */
 	virtual bool setValue(std::string valname);
-	
+
 	/**
 	 * \fn virtual bool isCreature()
 	 * \brief Gibt aus, ob es sich um eine Kreatur handelt
 	 */
 	virtual bool isCreature();
-	
+
 		/**
 		 * \fn std::string getActionString()
 		 * \brief Gibt die aktuelle Aktion als String aus
@@ -357,7 +354,7 @@ class WorldObject : public GameObject
 		{
 			return m_animation;
 		}
-		
+
 		/**
 		 * \fn virtual float getActionPercent()
 		 * \brief Gibt den Prozentsatz, zu dem die aktuelle Aktion fortgeschritten ist aus
@@ -366,7 +363,7 @@ class WorldObject : public GameObject
 		{
 			return m_animation_elapsed_time / m_animation_time;
 		}
-		
+
 		/**
 		 * \fn void setAnimation(std::string anim, float time, bool repeat = false)
 		 * \brief Setzt die Animation eines Objekts
@@ -375,7 +372,7 @@ class WorldObject : public GameObject
 		 * \param wenn auf true gesetzt, wird die Animation wiederholt, bis eine andere gesetzt wird
 		 */
 		void setAnimation(std::string anim, float time, bool repeat = false);
-		
+
 		/**
 		 * \fn virtual void getFlags(std::set<std::string>& flags)
 		 * \brief Gibt den Status der bekannten Flags aus
@@ -385,7 +382,7 @@ class WorldObject : public GameObject
 		{
 			flags = m_flags;
 		}
-		
+
 		/**
 		 * \fn void setFlag(std::string flag, bool set= true)
 		 * \brief Setzt oder entfernt ein Flag
@@ -393,7 +390,7 @@ class WorldObject : public GameObject
 		 * \param set wenn set gleich true, so wird das Flag gesetzt, ansonsten wird es entfernt
 		 */
 		void setFlag(std::string flag, bool set= true);
-		
+
 		/**
 		 * \fn std::string getName()
 		 * \brief Gibt den Name des Objektes aus
@@ -402,15 +399,15 @@ class WorldObject : public GameObject
 		{
 			if (m_name != "")
 				return m_name;
-			
+
 			return GameObject::getName();
 		}
-		
+
 		/**
 		 * Entfernt alle Flags
 		 */
 		virtual void clearFlags();
-		
+
 		/**
 		 * \fn void setName(std::string name)
 		 * \brief Setzt den Name des Spielers
@@ -419,7 +416,7 @@ class WorldObject : public GameObject
 		void setName(std::string name);
 
 	protected:
-		
+
 
 	/**
 	 * \var Race m_race
@@ -432,19 +429,19 @@ class WorldObject : public GameObject
 	 * \brief Fraktion des Objektes
 	 */
 	Fraction::Id m_fraction;
-	
+
 	/**
 	 * \var char m_interaction_flags
 	 * \brief einige Flags fuer die Interaktion
 	 */
 	char m_interaction_flags;
-	
+
 	/**
 	 * \var std::string m_name
 	 * \brief Name des Objektes, wenn kein Name gesetzt ist, sowird er  aus dem Typ abgeleitet
 	 */
 	std::string m_name;
-		
+
 //Private stuff
 private:
 
@@ -453,28 +450,28 @@ private:
 	 * \var GridLocation m_grid_location
 	 * \brief Ort des Objektes in der internen Struktur
 	 */
-	
+
 	GridLocation m_grid_location;
-	
-	
+
+
 	/**
 	 * \var std::string m_animation
 	 * \brief aktuell gesetzte Animationen
 	 */
 	std::string m_animation;
-		
+
 		/**
 	 * \var float m_animation_time
 	 * \brief Gesamtdauer der aktuellen Animation
 		 */
 	float m_animation_time;
-		
+
 		/**
 	 * \var float m_animation_elapsed_time
 	 * \brief bisher verstrichene Zeit der Animation
 		 */
 	float m_animation_elapsed_time;
-		
+
 		/**
 	 * \var bool m_animation_repeat
 	 * \brief wenn auf true gesetzt, so wird die Animation wiederholt
@@ -486,7 +483,7 @@ private:
 	 * \brief Gesetzte Flags des Scriptobject
 	 */
 	std::set<std::string> m_flags;
-	
+
 };
 
 #include "damage.h"
@@ -496,10 +493,10 @@ private:
  * Liste von WorldObject Zeigern sortiert nach ihrer ID
  */
 typedef std::map<int,WorldObject*> WorldObjectMap;
-	
+
 /**
  * Liste von WorldObject Zeigern
  */
 typedef std::list<WorldObject*> WorldObjectList;
-				 
+
 #endif //WORLDOBJECT_H

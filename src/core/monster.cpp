@@ -1,7 +1,4 @@
 /*
-	Ein kleines Rollenspiel
-	Copyright (C) 2007 Hans Wulf
-
 	This program is free software; you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
 	the Free Software Foundation; either version 2 of the License, or
@@ -28,11 +25,11 @@ void Ai::toString(CharConv* cv)
 	cv->toBuffer(m_vars.m_randaction_prob);
 	cv->toBuffer(m_vars.m_chase_distance);
 	cv->toBuffer(m_vars.m_warn_radius);
-	
+
 	cv->toBuffer(m_chase_player_id);
 	for (int i=0; i< NR_AI_MODS; i++)
 		cv->toBuffer(m_mod_time[i]);
-	
+
 	cv->toBuffer(m_state);
 };
 
@@ -44,11 +41,11 @@ void Ai::fromString(CharConv* cv)
 	cv->fromBuffer(m_vars.m_randaction_prob);
 	cv->fromBuffer(m_vars.m_chase_distance);
 	cv->fromBuffer(m_vars.m_warn_radius);
-	
+
 	cv->fromBuffer(m_chase_player_id);
 	for (int i=0; i< NR_AI_MODS; i++)
 		cv->fromBuffer(m_mod_time[i]);
-	
+
 	cv->fromBuffer(m_state);
 }
 
@@ -155,7 +152,7 @@ Monster::Monster( int id) : Creature( id)
 Monster::Monster( int id,MonsterBasicData& data)
 	: Creature(   id)
 {
-	
+
 	*(getBaseAttr()) = data.m_base_attr;
 
 	setType(data.m_type);
@@ -186,24 +183,24 @@ Monster::Monster( int id,MonsterBasicData& data)
 	{
 		m_ai.m_mod_time[i]=0;
 	}
-	
+
 	// HP Faktor bei mehreren Spielern
 	WorldObjectMap * pl = World::getWorld()->getPlayers();
 	float fak = (0.5 + 0.5*pl->size());
-	
+
 	getBaseAttr()->m_max_health *= fak;
 	getBaseAttrMod()->m_max_health *= fak;
 	getDynAttr()->m_health *= fak;
 	calcBaseAttrMod();
-	
+
 	m_base_action = "noaction";
-	
+
 	if (checkAbility("summoned"))
 	{
 		float time = getBaseAttr()->m_abilities["summoned"].m_time;
 		getAction()->m_type = "summoned";
 		getAction()->m_time = time;
-		
+
 		getCommand()->m_type = "summoned";
 	}
 	m_emotion_set = data.m_emotion_set;
@@ -243,14 +240,14 @@ bool Monster::init()
 	m_ai.m_chase_player_id =0;
 
 	m_ai.m_state = Ai::ACTIVE;
-	
+
 	for (int i=0; i< NR_AI_MODS; i++)
 	{
 		m_ai.m_mod_time[i]=0;
 	}
-	
+
 	m_base_action = "noaction";
-	
+
 	clearNetEventMask();
 
 	return true;
@@ -283,18 +280,18 @@ void Monster::updateCommand()
 		Creature::updateCommand();
 		return;
 	}
-	
+
 	// bei Cutscenes und Dialogen keine AI verwenden
 	if (getRegion()->getCutsceneMode() || getDialogueId() != 0)
 		return;
-	
+
 	m_ai.m_goals->clear();
 	m_ai.m_visible_goals->clear();
 	m_ai.m_allies->clear();
 
 	// eigene Koordinaten
 	Vector &pos = getShape()->m_center;
-	
+
 	DEBUGX("update monster command %i %s",getId(), getSubtype().c_str());
 	DEBUGX("randaction prob %f",m_ai.m_vars.m_randaction_prob);
 	if (Random::random() < m_ai.m_vars.m_randaction_prob)
@@ -306,7 +303,7 @@ void Monster::updateCommand()
 		m_ai.m_rand_command = false;
 	}
 	m_ai.m_command_count=0;
-	
+
 	// moegliche Ziele ermitteln
 
 	// Liste der moeglichen Ziele
@@ -315,15 +312,15 @@ void Monster::updateCommand()
 	s.m_center = pos;
 	s.m_type = Shape::CIRCLE;
 	s.m_radius = m_ai.m_vars.m_sight_range;
-	
+
 	getRegion()->getObjectsInShape(&s,&potgoals,LAYER_BASE | LAYER_AIR,WorldObject::CREATURE,0);
 
 	Creature* pl;
 	WorldObjectList ret;
-	
+
 	// Linie vom Monster zum Ziel
 	Line gline(pos,Vector(0,0));
-	
+
 	// spezielle Sekundaeraktion beschuetzen
 	float guardmindist = 0;
 	m_ai.m_guard = false;
@@ -364,33 +361,33 @@ void Monster::updateCommand()
 		{
 			if (!(*it)->isCreature())
 				continue;
-			
+
 			pl = static_cast<Creature*>(*it);
 			if (pl->getBaseAttrMod()->m_special_flags & IGNORED_BY_AI)
 				continue;
-			
+
 			// Spieler nur als Ziel, wenn aktiv und nicht in Dialog
 			if (! pl->canBeAttacked())
 				continue;
-			
+
 			// nur Feinde
 			if (World::getWorld()->getRelation(getFraction(), pl ) != Fraction::HOSTILE)
 				continue;
-				
+
 			dist = getShape()->getDistance(*(pl->getShape()));
 			if ( dist< m_ai.m_vars.m_sight_range)
 			{
-				
-			
+
+
 				// Spieler ist in Sichtweite
 				m_ai.m_goals->push_back(std::make_pair(pl,dist));
-	
+
 				gline.m_end = pl->getShape()->m_center;
-	
+
 				// Testen, ob der Weg zum Spieler frei ist
 				ret.clear();
 				getRegion()->getObjectsOnLine(gline,&ret,LAYER_AIR, CREATURE | FIXED,pl);
-				
+
 				// alle verbuendeten Objekte loeschen, weil durch diese *durchgeschossen* werden kann
 				WorldObjectList::iterator it;
 				for (it = ret.begin(); it != ret.end();)
@@ -404,16 +401,16 @@ void Monster::updateCommand()
 						++it;
 					}
 				}
-	
+
 				if (ret.empty() && dist< m_ai.m_vars.m_shoot_range)
 				{
 					// Keine Objekte auf der Linie vom Monster zum Ziel
 					m_ai.m_visible_goals->push_back(std::make_pair(pl,dist));
-	
+
 				}
 				else
 				{
-					
+
 					WorldObjectList::iterator it;
 					for (it = ret.begin(); it != ret.end();++it)
 					{
@@ -428,18 +425,18 @@ void Monster::updateCommand()
 	{
 		DEBUGX("taunt %f",m_ai.m_mod_time[TAUNT]);
 	}
-	
+
 	// Angriff auf Spieler durch anlocken
 	if (m_ai.m_goals->empty() && m_ai.m_chase_player_id !=0)
 	{
 		pl = dynamic_cast<Creature*>(getRegion()->getObject(m_ai.m_chase_player_id));
-		
+
 		// Spieler nur als Ziel, wenn aktiv und nicht in Dialog
 		if (pl!=0 && pl->getState() == STATE_ACTIVE && pl->getDialogueId() == 0
 			&& (!m_ai.m_guard || m_ai.m_guard_pos.distanceTo(pl->getShape()->m_center) <= m_ai.m_guard_range))
 		{
-			
-		
+
+
 			if (World::getWorld()->getRelation(getFraction(), pl ) == Fraction::HOSTILE)
 			{
 				dist = getShape()->getDistance(*(pl->getShape()));
@@ -468,14 +465,14 @@ void Monster::updateCommand()
 	}
 
 	// Verbuendete ermitteln
-	
+
 	s.m_center = pos;
 	s.m_radius = 12;
 	ret.clear();
 	getRegion()->getObjectsInShape(&s, &ret, LAYER_AIR,CREATURE,0);
 	WorldObjectList::iterator it;
-	
-	
+
+
 	for (it=ret.begin();it!=ret.end();++it)
 	{
 		if (World::getWorld()->getRelation(m_fraction,(*it)) == Fraction::ALLIED)
@@ -484,8 +481,8 @@ void Monster::updateCommand()
 			m_ai.m_allies->push_back(std::make_pair(*it,dist) );
 		}
 	}
-	
-	
+
+
 	// Kommando ermitteln
 	m_ai.m_command.m_type = "noaction";
 	m_ai.m_command_value =0;
@@ -501,9 +498,9 @@ void Monster::updateCommand()
 		cmd->m_goal = m_ai.m_command.m_goal;
 		cmd->m_goal_object_id = m_ai.m_command.m_goal_object_id;
 		cmd->m_range = m_ai.m_command.m_range;
-		
+
 		DEBUGX("calculated command %s for %s",m_ai.m_command.m_type.c_str(),getSubtype().c_str());
-		
+
 
 		addToNetEventMask(NetEvent::DATA_COMMAND);
 
@@ -562,16 +559,16 @@ void Monster::evalCommand(Action::ActionType act)
 	WorldObjectValueList::iterator it;
 	WorldObjectValueList* goal_list=0;
 	Creature* cgoal=0;
-	
+
 	std::map<std::string, AbilityInfo>::iterator at;
 	at = getBaseAttrMod()->m_abilities.find(act);
 	if (at == getBaseAttrMod()->m_abilities.end())
 		return;
-	
+
 	AbilityInfo& abltinfo = at->second;
 	if (abltinfo.m_rating <0)
 		return;
-	
+
 	// Liste, die nur das Objekt selber enthaelt
 	WorldObjectValueList self;
 	self.push_back(std::make_pair(this,0) );
@@ -588,7 +585,7 @@ void Monster::evalCommand(Action::ActionType act)
 		DEBUG("unknown action %s",act.c_str());
 		return;
 	}
-	
+
 	// Liste der Ziele festlegen
 	if (aci->m_target_type == Action::MELEE || aci->m_target_type == Action::CIRCLE)
 	{
@@ -646,38 +643,38 @@ void Monster::evalCommand(Action::ActionType act)
 			// bei Befehl guard nur, wenn nicht zu weit vom zu beschuetzenden Ort
 			if (m_ai.m_guard && (aci->m_target_type == Action::MELEE || aci->m_target_type == Action::CIRCLE || ranged_move) &&  m_ai.m_guard_pos.distanceTo(cgoal->getShape()->m_center) > m_ai.m_guard_range)
 				continue;
-			
+
 			/*
 			if (getSubtype() == "general_greif_battle")
 			{
 				DEBUG("guard %i target type %i");
 			}
 			*/
-			
+
 			// Bewertung:
 			value = abltinfo.m_rating;
 			value += Random::randf(abltinfo.m_random_rating);
-			
+
 			// all_target_rating
 			if (abltinfo.m_all_target_rating > 0)
 			{
 				Shape search_shape;
 				search_shape.m_type = Shape::CIRCLE;
-				
+
 				// wenn kein Wert vorgegeben, Waffenreichweite verwenden
 				search_shape.m_radius =  abltinfo.m_all_target_rating_range;
 				if (search_shape.m_radius < 0)
 				{
 					search_shape.m_radius = getShape()->m_radius + getBaseAttr()->m_attack_range;
 				}
-				
+
 				// Zentrum ist bei ranged das Ziel, sonst immer das Monster selbst
 				search_shape.m_center = getShape()->m_center;
 				if (aci->m_target_type == Action::RANGED)
 				{
 					search_shape.m_center = cgoal->getShape()->m_center;
 				}
-				
+
 				// alle Gegner in Radius zaehlen
 				WorldObjectValueList::iterator jt;
 				for (jt = goal_list->begin(); jt !=goal_list->end(); ++jt)
@@ -688,7 +685,7 @@ void Monster::evalCommand(Action::ActionType act)
 					}
 				}
 			}
-			
+
 			if (aci->m_target_type == Action::MELEE || ranged_move)
 			{
 				value *= 3/(3+std::max(0.0f,dist - getBaseAttr()->m_attack_range));
@@ -698,7 +695,7 @@ void Monster::evalCommand(Action::ActionType act)
 			if (value > m_ai.m_command_value)
 			{
 				DEBUGX("set new command %s value %f",act.c_str(),value);
-				
+
 				// aktuelle Aktion ist besser als alle vorher bewerteten
 				m_ai.m_command_value = value;
 				m_ai.m_command.m_type = act;
@@ -712,12 +709,12 @@ void Monster::evalCommand(Action::ActionType act)
 				{
 					m_ai.m_command.m_range = 20;
 				}
-								
+
 				if (ranged_move)
 				{
 					m_ai.m_command.m_type = "walk";
 					m_ai.m_command.m_range = getShape()->m_radius;
-					
+
 					DEBUGX("%p: %i , %p: %i (%f)", m_ai.m_visible_goals, m_ai.m_visible_goals->size(), m_ai.m_goals, m_ai.m_goals->size(), m_ai.m_vars.m_shoot_range);
 				}
 			}
@@ -732,7 +729,7 @@ void Monster::evalCommand(Action::ActionType act)
 bool Monster::takeDamage(Damage* damage)
 {
 	bool atk = Creature::takeDamage(damage);
-	
+
 	if (atk)
 	{
 		if (m_ai.m_mod_time[TAUNT]<=0 || m_ai.m_chase_player_id==0)
@@ -744,14 +741,14 @@ bool Monster::takeDamage(Damage* damage)
 				shape.m_radius = m_ai.m_vars.m_warn_radius;
 				WorldObjectList res;
 				WorldObjectList::iterator it;
-				
+
 				getRegion()->getObjectsInShape(&shape, &res, LAYER_BASE | LAYER_AIR, CREATURE_ONLY,this);
 				Monster * mon;
 				Ai* ai;
 				for (it = res.begin(); it!= res.end(); ++it)
 				{
 					mon = dynamic_cast<Monster*>(*it);
-					
+
 					if (mon != 0)
 					{
 						if (World::getWorld()->getRelation(getFraction(),mon) == Fraction::ALLIED)
@@ -765,10 +762,10 @@ bool Monster::takeDamage(Damage* damage)
 					}
 				}
 			}
-			
+
 			m_ai.m_chase_player_id =damage->m_attacker_id;
 		}
-		
+
 		// Anwenden der AI Veraenderungen
 		for (int i=0;i<NR_AI_MODS;i++)
 		{
@@ -791,7 +788,7 @@ bool Monster::takeDamage(Damage* damage)
 				}
 			}
 		}
-		
+
 	}
 	return atk;
 }
@@ -814,13 +811,13 @@ void Monster::die()
 		Player* pl = dynamic_cast<Player*>(object);
 		Player* pl2;
 		short diff;
-		
+
 		Shape* sh = getShape();
 		if (cr!=0)
 		{
 			if (cr->getState() == STATE_ACTIVE)
 			{
-				
+
 
 				float exp = getBaseAttr()->m_max_experience;
 				if (pl != 0)
@@ -834,19 +831,19 @@ void Monster::die()
 				{
 					std::set<int>& members = party->getMembers();
 					std::set<int>::iterator i;
-	
+
 					for (i=members.begin();i!=members.end();i++)
 					{
 						pl2 = dynamic_cast<Player*>(getRegion()->getObject(*i));
-						
+
 						// An den Spieler der das Monster getoetet hat nicht doppelt verteilen...
 						if (pl2 == pl)
 							continue;
-						
+
 						// Spieler ist nicht in der Region
 						if (pl2 ==0)
 							continue;
-						
+
 						if (pl2->getShape()->getDistance(*sh) <20)
 						{
 							// volle xp nur wenn das Monster nicht zu stark war
@@ -862,7 +859,7 @@ void Monster::die()
 						}
 					}
 				}
-				
+
 
 			}
 		}
@@ -897,7 +894,7 @@ void Monster::insertScriptCommand(Command &cmd, float time)
 void Monster::clearScriptCommands()
 {
 	Creature::clearScriptCommands();
-	
+
 	m_ai.m_secondary_commands.clear();
 }
 
@@ -911,7 +908,7 @@ void Monster::clearCommand(bool success, bool norepeat)
 			m_ai.m_secondary_commands.pop_front();
 		}
 	}
-	
+
 	Creature::clearCommand(success,norepeat);
 }
 
@@ -919,25 +916,25 @@ int Monster::getValue(std::string valname)
 {
 	int ret=0;
 	ret = m_ai.getValue(valname);
-	
+
 	if (ret == 0)
 	{
 		if (valname.find("ai_ability_rating:") == 0)
 		{
 			std::string ablt = valname.substr(18); // ai_ability_rating: abschneiden
 			DEBUG("ability %s",ablt.c_str());
-			
+
 			std::map<std::string, AbilityInfo>::iterator at;
 			at = getBaseAttrMod()->m_abilities.find(ablt);
 			if (at != getBaseAttrMod()->m_abilities.end())
 			{
 				lua_pushnumber(EventSystem::getLuaState() ,at->second.m_rating);
-				
+
 				ret = 1;
 			}
 		}
 	}
-	
+
 	if (ret == 0)
 	{
 		ret = Creature::getValue(valname);
@@ -949,14 +946,14 @@ bool Monster::setValue(std::string valname)
 {
 	bool ret = false;
 	ret = m_ai.setValue(valname, getEventMaskRef());
-	
+
 	if (ret == 0)
 	{
 		if (valname.find("ai_ability_rating:") == 0)
 		{
 			std::string ablt = valname.substr(18); // ai_ability_rating: abschneiden
 			DEBUG("ability %s",ablt.c_str());
-			
+
 			std::map<std::string, AbilityInfo>::iterator at;
 			at = getBaseAttrMod()->m_abilities.find(ablt);
 			if (at != getBaseAttrMod()->m_abilities.end())
@@ -968,7 +965,7 @@ bool Monster::setValue(std::string valname)
 			}
 		}
 	}
-	
+
 	if (!ret)
 	{
 		ret = Creature::setValue(valname);
@@ -992,7 +989,7 @@ void Monster::fromString(CharConv* cv)
 void Monster::writeNetEvent(NetEvent* event, CharConv* cv)
 {
 	Creature::writeNetEvent(event,cv);
-	
+
 	if (event->m_data & NetEvent::DATA_AI)
 	{
 		m_ai.toString(cv);
@@ -1002,7 +999,7 @@ void Monster::writeNetEvent(NetEvent* event, CharConv* cv)
 void Monster::processNetEvent(NetEvent* event, CharConv* cv)
 {
 	Creature::processNetEvent(event,cv);
-	
+
 	if (event->m_data & NetEvent::DATA_AI)
 	{
 		m_ai.fromString(cv);

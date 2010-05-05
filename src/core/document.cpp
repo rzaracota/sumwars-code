@@ -1,7 +1,4 @@
 /*
-	Summoning Wars - document.cpp
-	Copyright (C) 2007  Hans Wulf, Michael Kempf
-
 	This program is free software: you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
 	the Free Software Foundation, either version 3 of the License, or
@@ -1794,7 +1791,7 @@ void Document::saveSettings()
 		file << "\n";
 		file << m_server_host << " " << m_port << " " << m_max_players << "\n";
 		const char* locale = Gettext::getLocale();
-		
+
 		std::string locstr = "";
 		if (locale != 0)
 		{
@@ -1802,7 +1799,7 @@ void Document::saveSettings()
 		}
 		if (locstr == "")
 			locstr = "#default#";
-		
+
 		file << locstr << "\n";
 		file.close();
 	}
@@ -1849,14 +1846,14 @@ void Document::loadSettings()
 		}
 		file >> m_server_host >> m_port >> m_max_players;
 		DEBUGX("server %s port %i player %i",m_server_host.c_str(), m_port, m_max_players);
-		
+
 		std::string locstr = "";
 		file >> locstr;
 		if (locstr != "#default#" && locstr != "")
 		{
 			Gettext::setLocale(locstr.c_str());
 		}
-		
+
 		file << locstr << "\n";
 		file.close();
 	}

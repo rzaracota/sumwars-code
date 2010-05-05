@@ -1,7 +1,4 @@
 /*
-	Ein kleines Rollenspiel
-	Copyright (C) 2007 Daniel Erler, Michael Kempf
-
 	This program is free software; you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
 	the Free Software Foundation; either version 2 of the License, or
@@ -17,15 +14,6 @@
 	51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
 
-/**
- * \file networkstruct.h
- * \defgroup networkstruct \ Strukturen zur Netzwerk&uuml;bertragung
- * \author Hans Wulf
- * \version 1.0
- * \date 2007-05-31
- * \brief Pakete bei Netzwerk&uuml;bertragung
- * \note Definiert mittels den Strukturen Chatmessage, ClientCommand, ClientItem und ClientWorldObject den Aufbau der Datenpakete, die zwischen Server und Client &uuml;bertragen werden
- */
 #ifndef NETWORKSTRUCT_H
 #define NETWORKSTRUCT_H
 
@@ -117,22 +105,22 @@ enum PackageType
   	* \brief Lua Code vom Server an den Client
   	*/
  	PTYPE_S2C_LUA_CHUNK,
-  
+
   	/**
    	* \brief Position der Wegpunkte
    	*/
   	PTYPE_S2C_WAYPOINTS,
-   
+
    /**
     * \brief Daten zum Pruefung der Synchronisation
     */
    PTYPE_S2C_DATA_CHECK,
-   
+
    /**
     * \brief Daten der Quests
     */
    PTYPE_S2C_QUEST,
-   
+
     /**
 	* \brief Daten der Fraktionen
 	 */
@@ -171,7 +159,7 @@ struct ClientDataRequest
 	 * \brief ID des geforderten Objektes
 	 */
 	int m_id;
-	
+
 	/**
 	 * \var short m_region_id
 	 * \brief Id der Region
@@ -277,9 +265,9 @@ enum Button
 	BUTTON_TRADE_SELL=40,
 
 	BUTTON_TRADE_END = 39,
- 
+
  	BUTTON_WAYPOINT_CHOSE = 45,
-  
+
 	BUTTON_SKIP_DIALOGUE_TEXT = 50,
 
 	DEBUG_SIGNAL=100,
@@ -402,7 +390,7 @@ struct PackageHeader
  */
 struct NetEvent
 {
-	
+
 	/**
 	 * \enum EventType
 	 * \brief verschiedene Eventarten
@@ -413,53 +401,53 @@ struct NetEvent
 		OBJECT_CREATED =1,
 		OBJECT_DESTROYED = 2,
 		OBJECT_STAT_CHANGED =3,
-				
+
 		PROJECTILE_CREATED = 5,
 		PROJECTILE_DESTROYED = 6,
 		PROJECTILE_STAT_CHANGED = 7,
-		
+
 		PLAYER_JOINED = 10,
 		PLAYER_QUIT = 11,
 		PLAYER_CHANGED_REGION = 12,
-		
+
 		PLAYER_WAYPOINT_DISCOVERED = 15,
-		
+
 		PLAYER_ITEM_INSERT = 20,
 		PLAYER_ITEM_REMOVE = 21,
 		PLAYER_ITEM_SWAP = 22,
-		
+
 		PLAYER_PARTY_CHANGED = 24,
 		PLAYER_PARTY_CANDIDATE = 25,
-		
+
 		PARTY_RELATION_CHANGED = 28,
 		FRACTION_RELATION_CHANGED = 29,
-				
+
 		ITEM_DROPPED = 30,
 		ITEM_REMOVED = 31,
-		
+
 		TRADER_INVENTORY_REFRESH = 50,
 		TRADER_ITEM_BUY = 51,
 		TRADER_ITEM_SELL = 52,
-		
+
 		REGION_CUTSCENE = 40,
 		REGION_CAMERA = 41,
 		REGION_LIGHT = 42,
-  
+
 		DIALOGUE_CREATED =60,
-		DIALOGUE_DESTROYED =61,	
+		DIALOGUE_DESTROYED =61,
   		DIALOGUE_STAT_CHANGED =62,
-	
+
 		MUSIC_CHANGED = 70,
-	
+
 		DAMAGE_VISUALIZER_CREATED = 80,
 	};
-	
+
 	/**
 	 * \var EventType m_type
 	 * \brief Gibt die Art des Events an
 	 */
 	EventType m_type;
-	
+
 	enum GameObjectData
 	{
 		DATA_TYPE = 0x1,
@@ -468,7 +456,7 @@ struct NetEvent
 		DATA_SPEED = 0x8,
 		DATA_TIMER = 0x10,
 	};
-	
+
 	/**
 	 * \enum ObjectData
 	 * \brief Objektdaten die mit dem Event versendet werden
@@ -480,7 +468,7 @@ struct NetEvent
 		DATA_HP = 0x400,
 		DATA_EFFECTS = 0x800,
 		DATA_STATUS_MODS = 0x1000,
-		
+
 		DATA_ATTACK_WALK_SPEED = 0x4000,
 		DATA_NEXT_COMMAND = 0x8000,
 		DATA_ABILITIES = 0x10000,
@@ -497,7 +485,7 @@ struct NetEvent
 		DATA_NAME = 0x8000000,
 		DATA_AI = 0x10000000,
 	};
-	
+
 	/**
 	 * \enum ProjectileData
 	 * \brief Projektildaten, die mit dem Event versendet werden
@@ -507,21 +495,21 @@ struct NetEvent
 		DATA_GOAL_OBJECT = 0x100,
 		DATA_MAX_RADIUS = 0x200,
 	};
-	
+
 	/**
 	 * \var int m_data
 	 * \brief Bitmaske die angibt welche Daten gesendet werden
 	 */
 	int m_data;
-	
+
 	/**
 	 * \var int m_id
 	 * \brief ID des Objektes, das das Ereignis erzeugt hat
 	 */
 	int m_id;
-	
 
-		
+
+
 	/**
 	 * \fn void toString(CharConv* cv)
 	 * \brief Konvertiert das Objekt in einen String und schreibt ihn in der Puffer
@@ -533,7 +521,7 @@ struct NetEvent
 		cv->toBuffer(m_data);
 		cv->toBuffer(m_id);
 	}
-	
+
 	/**
 	 * \fn void fromString(CharConv* cv)
 	 * \brief Erzeugt das Objekt aus einem String
@@ -547,7 +535,7 @@ struct NetEvent
 		cv->fromBuffer(m_data);
 		cv->fromBuffer(m_id);
 	}
-	
+
 	/**
 	 * \fn NetEvent()
 	 * \brief Konstruktor
@@ -558,7 +546,7 @@ struct NetEvent
 		m_data =0;
 		m_type = NOEVENT;
 	}
-	
+
 };
 
 typedef std::list<NetEvent> NetEventList;

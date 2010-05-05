@@ -35,8 +35,16 @@ PlayerCamera::PlayerCamera()
 
 void PlayerCamera::moveTo(float distance, float theta, float phi, float time)
 {
-	m_goal_distance = std::max(std::min(distance,50.0f),5.0f);
-	m_goal_theta = std::max(std::min(theta,90.0f),5.0f);
+    float max_distance;
+    float min_theta;
+    max_distance = 20;
+    min_theta = 45;
+//    max_distance = 50;
+//    min_theta = 5;
+
+
+	m_goal_distance = std::max(std::min(distance,max_distance),5.0f);
+	m_goal_theta = std::max(std::min(theta,90.0f),min_theta);
 	m_goal_phi = fmod(phi+360,360);
 
 	// Phi so anpassen, dass jeweils der kuerzere Teilkreis genutzt wird
@@ -83,7 +91,7 @@ Player::Player( int id, Subtype subtype) : Creature( id)
 
 Player::~Player()
 {
-	
+
 }
 
 bool Player::destroy()
@@ -106,14 +114,14 @@ bool Player::init()
 	{
 		m_revive_position.first = "none";
 		m_revive_position.second = "none";
-			
+
 	}
-	
+
 	//eigene Initialisierung
 	CreatureBaseAttr* bas = getBaseAttr();
 	CreatureDynAttr* dyn = getDynAttr();
 	FightStatistic& fstat= getFightStatistic();
-	
+
 	setType("PLAYER");
 	m_race = "human";
 
@@ -122,7 +130,7 @@ bool Player::init()
 	setLayer(LAYER_BASE | LAYER_AIR);
 	getShape()->m_angle =0;
 
-	
+
 	m_attribute_points=0;
 	m_skill_points=0;
 
@@ -132,34 +140,34 @@ bool Player::init()
 
 	m_equipement = new Equipement(5,14,30);
 	m_equipement->setGold(50);
-	
+
 	m_candidate_party = -1;
 	m_message_clear_timer =0;
 
 	dyn->m_experience=0;
-	
+
 	fstat.m_last_attacker="";
 	fstat.m_last_attacked="";
 	fstat.m_hit_chance =0;
 	fstat.m_damage_dealt_perc =0;
 	fstat.m_damage_got_perc =0;
 	fstat.m_block_chance =0;
-	
+
 	m_using_waypoint = false;
-	
-	
+
+
 	PlayerBasicData* pdata = ObjectFactory::getPlayerData(getSubtype());
-	
+
 	if (pdata == 0)
 		return true;
-	
+
 	(*bas) = pdata->m_base_attr;
 	m_base_action = pdata->m_base_ability;
 	m_left_action = pdata->m_base_ability;
 	m_right_action = pdata->m_base_ability;
 	bas->m_abilities[pdata->m_base_ability].m_timer_nr = -1;
 	m_learnable_abilities = pdata->m_learnable_abilities;
-	
+
 	std::list<GameObject::Subtype>::iterator it;
 	Item* item;
 	for( it = pdata->m_start_items.begin(); it != pdata->m_start_items.end(); ++it)
@@ -167,24 +175,24 @@ bool Player::init()
 		item = ItemFactory::createItem(ItemFactory::getBaseType(*it),*it);
 		insertItem(item,true,false);
 	}
-	
+
 	bas->m_level=1;
 	bas->m_max_experience = 100;
 	getBaseAttrMod()->m_max_health = getBaseAttr()->m_max_health;
-	
+
 	// Modifizierte Basisattribute erzeugen
 	calcBaseAttrMod();
-	
+
 	clearNetEventMask();
-	
+
 	/*
 	TiXmlDocument doc;
 	TiXmlElement * elem;
 	TiXmlElement * elem2;
 	LearnableAbilityMap::iterator it;
-	Action::ActionInfo* aci; 
+	Action::ActionInfo* aci;
 	std::list<Action::ActionType>::iterator jt;
-	
+
 	for (it = getLearnableAbilities().begin(); it != getLearnableAbilities().end(); ++it)
 	{
 		aci = Action::getActionInfo(it->second.m_type);
@@ -283,15 +291,15 @@ bool Player::onGamefieldClick(ClientCommand* command)
 	{
 		return true;
 	}
-	
+
 	if (getRegion()==0)
 		return true;
-	
+
 	if (getRegion()->getCutsceneMode())
 	{
 		return true;
 	}
-	
+
 
 	Command* com = getNextCommand();
 	int dist;
@@ -302,7 +310,7 @@ bool Player::onGamefieldClick(ClientCommand* command)
 	// Actionen auf self brauchen kein Zielobjekt
 	Action::ActionInfo* ainfo = Action::getActionInfo(command->m_action);
 	if (ainfo == 0)
-	{	
+	{
 		ERRORMSG("action information missing for action %s",command->m_action.c_str());
 		dist = Action::SELF;
 	}
@@ -310,7 +318,7 @@ bool Player::onGamefieldClick(ClientCommand* command)
 	{
 		dist = ainfo->m_target_type;
 	}
-	
+
 	if ( dist == Action::SELF || dist == Action::PARTY_MULTI || dist == Action::PARTY)
 		command->m_id=0;
 
@@ -347,7 +355,7 @@ bool Player::onGamefieldClick(ClientCommand* command)
 					}
 					else
 					{
-						
+
 					}
 				}
 
@@ -358,7 +366,7 @@ bool Player::onGamefieldClick(ClientCommand* command)
 						if (getPosition().distanceTo(command->m_goal) < 16)
 						{
 							com->m_type =command->m_action;
-	
+
 							com->m_goal_object_id = command->m_id;
 							com->m_goal = command->m_goal;
 							com->m_range = getBaseAttrMod()->m_attack_range;
@@ -377,8 +385,8 @@ bool Player::onGamefieldClick(ClientCommand* command)
 					com->m_goal = command->m_goal;
 					com->m_range = 3;
 				}
-				
-				
+
+
 				if (!wo->isCreature())
 				{
 					// festes Objekt benutzen
@@ -387,7 +395,7 @@ bool Player::onGamefieldClick(ClientCommand* command)
 					com->m_range = 1.0;
 					DEBUGX("use Object %i",command->m_id);
 				}
-				
+
 			}
 			else if (command->m_button == RIGHT_MOUSE_BUTTON)
 			{
@@ -545,7 +553,7 @@ bool Player::onItemClick(ClientCommand* command)
 
 				// Item soll als Ausruestungsgegenstand benutzt werden
 				req = checkItemRequirements(it);
-				
+
 				if (it->m_type == Item::WEAPON && !m_secondary_equip)
 					pos = Equipement::WEAPON;
 				else if (it->m_type == Item::WEAPON && m_secondary_equip)
@@ -571,7 +579,7 @@ bool Player::onItemClick(ClientCommand* command)
 							pos = Equipement::RING_RIGHT;
 					}
 				}
-				
+
 
 			}
 			else
@@ -625,7 +633,7 @@ bool Player::onItemClick(ClientCommand* command)
 
 		if (pos == Equipement::NONE)
 			return true;
-		
+
 		// Vertauschen von Cursoritem und angeklicktem Item
 		m_equipement->swapCursorItem(pos);
 
@@ -751,13 +759,13 @@ bool Player::onItemClick(ClientCommand* command)
 				int gold = getEquipement()->getGold();
 				getEquipement()->swapItem(it,pos);
 				getTradePartner()->buyItem(it,gold);
-				
+
 				// wieder hinein getauscht, wenn Handel nicht erfolgreich
 				getEquipement()->swapItem(it,pos);
 				getEquipement()->setGold(gold);
 				return true;
 			}
-			
+
 			if (it->m_useup_effect==0)
 			{
 				// Item kann nicht verbraucht werden
@@ -766,12 +774,12 @@ bool Player::onItemClick(ClientCommand* command)
 					std::stringstream stream;
 					stream << "#townportal" << getId();
 					getRegion()->addLocation(stream.str(), getShape()->m_center);
-					
+
 					RegionLocation regloc;
 					regloc.first = getRegion()->getIdString();
 					regloc.second = stream.str();
 					setPortalPosition(regloc);
-					
+
 					getRegion()->insertPlayerTeleport(getId(), m_revive_position);
 					clearCommand(true,true);
 				}
@@ -835,7 +843,7 @@ short Player::insertItem(Item* itm, bool use_equip, bool emit_event)
 		return 0;
 	}
 	bool may_equip = use_equip && checkItemRequirements(itm);
-	
+
 	short pos = getEquipement()->insertItem(itm,true,may_equip, m_secondary_equip);
 
 	if (World::getWorld() != 0)
@@ -845,17 +853,17 @@ short Player::insertItem(Item* itm, bool use_equip, bool emit_event)
 			// Gegenstand ins Inventar aufgenommen
 			if (World::getWorld()->isServer() && getId() !=0 && emit_event)
 			{
-	
+
 				NetEvent event;
 				event.m_type =  NetEvent::PLAYER_ITEM_INSERT ;
 				event.m_data = pos;
 				event.m_id = getId();
-	
+
 				DEBUGX("event: item picked up %i",pos);
-	
+
 				World::getWorld()->insertNetEvent(event);
 			}
-			
+
 			// Wenn an der Ausruestung etwas geaendert wurde
 			if (pos <Equipement::CURSOR_ITEM)
 			{
@@ -882,13 +890,13 @@ bool Player::checkItemRequirements(Item* itm)
 		DEBUGX("level too low: own level: %i item level: %i",getBaseAttr()->m_level,itm->m_level_req);
 		return false;
 	}
-	
+
 	// testen ob Item fuer die Charakterklasse zugelassen ist
 	if (itm->m_char_req != "all" && itm->m_char_req != "15")
 	{
 		// alle Item Requirement Tags der Klasse durchmustern
 		// wenn eines gefunden wird, dass in der Item Beschreibung enthalten wird, kann das Item verwendet werden
-		
+
 		PlayerBasicData* pdata = ObjectFactory::getPlayerData(getSubtype());
 		if (pdata != 0)
 		{
@@ -903,7 +911,7 @@ bool Player::checkItemRequirements(Item* itm)
 		}
 		return false;
 	}
-	
+
 	return true;
 }
 
@@ -973,10 +981,10 @@ void Player::increaseAttribute(CreatureBaseAttr::Attribute attr)
 			break;
 
 	}
-	
+
 	calcBaseAttrMod();
 	addToNetEventMask(NetEvent::DATA_SKILL_ATTR_POINTS | NetEvent::DATA_ATTRIBUTES_LEVEL );
-	
+
 }
 
 void Player::gainLevel()
@@ -1096,7 +1104,7 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 		case BUTTON_LEAVE:
 			if (World::getWorld()->isCooperative())
 				break;
-			
+
 			if (getParty()->getNrMembers() ==1)
 			{
 				if (m_candidate_party >=0)
@@ -1130,9 +1138,9 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 
 		case BUTTON_SWAP_EQUIP:
 			m_secondary_equip = !m_secondary_equip;
-			
+
 			calcBaseAttrMod();
-			
+
 			if (World::getWorld()->isServer())
 			{
 				NetEvent event;
@@ -1171,7 +1179,7 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 					DEBUGX("lerne Faehigkeit %s", command->m_action.c_str());
 
 					calcBaseAttrMod();
-					
+
 					addToNetEventMask( NetEvent::DATA_SKILL_ATTR_POINTS | NetEvent::DATA_ABILITIES);
 				}
 			}
@@ -1196,40 +1204,40 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 				{
 					si = ItemFactory::createGold(command->m_number);
 					getRegion()->dropItem(si,getShape()->m_center);
-					
+
 					getEquipement()->setGold( getEquipement()->getGold() - command->m_number);
 				}
 			}
 			break;
-			
+
 		case BUTTON_ANSWER:
 			if (!World::getWorld()->isServer())
 				break;
-			
+
 			dia = getDialogue();
 			if (dia ==0)
 			{
 				ERRORMSG("answer without dialogue");
 				break;
 			}
-			
+
 			if (command->m_id==-1)
 			{
 				// Gespraech beenden
 				dia->changeTopic("abort");
 				break;
 			}
-			
+
 			DEBUGX("changing topic to %s",it->second.c_str());
 			EventSystem::setDialogue(dia);
 			dia->chooseAnswer(getId(), command->m_id);
 			EventSystem::setDialogue(0);
 			break;
-			
+
 		case BUTTON_TRADE_END:
 			if (!World::getWorld()->isServer())
 				break;
-			
+
 			dia = getDialogue();
 			if (dia ==0)
 			{
@@ -1238,7 +1246,7 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 			}
 			dia->changeTopic("end");
 			break;
-			
+
 		case BUTTON_TRADE_ITEM_LEFT:
 		case BUTTON_TRADE_ITEM_RIGHT:
 		case BUTTON_TRADE_SELL:
@@ -1246,31 +1254,31 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 			{
 				break;
 			}
-			
+
 			si = getEquipement()->getItem(Equipement::CURSOR_ITEM);
 			sell = true;
 			gold = getEquipement()->getGold();
-			
+
 			// Rechtklick kauft immer ein, Linksklick nur, wenn kein Item in der Hand
 			if (command->m_button == BUTTON_TRADE_ITEM_RIGHT || command->m_button == BUTTON_TRADE_ITEM_LEFT && si ==0)
 				sell = false;
-			
+
 			if (sell)
 			{
 				// Item wird aus dem Inventar herraus genommen
 				si =0;
 				getEquipement()->swapItem(si,Equipement::CURSOR_ITEM);
 				getTradePartner()->buyItem(si,gold);
-				
+
 				// wieder hinein getauscht, wenn Handel nicht erfolgreich
 				getEquipement()->swapItem(si,Equipement::CURSOR_ITEM);
-				
+
 			}
 			else
 			{
 				si =0;
 				getTradePartner()->sellItem(command->m_id,si, gold);
-				
+
 				if (si !=0)
 				{
 					if (command->m_button == BUTTON_TRADE_ITEM_RIGHT)
@@ -1283,7 +1291,7 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 					}
 				}
 			}
-			
+
 			getEquipement()->setGold(gold);
 			break;
 
@@ -1307,9 +1315,9 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 
 			}
 			break;
-		
+
 		case BUTTON_WAYPOINT_CHOSE:
-			
+
 			if (World::getWorld()->isServer())
 			{
 				setUsingWaypoint(false);
@@ -1334,7 +1342,7 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 				}
 			}
 			break;
-			
+
 		case BUTTON_SKIP_DIALOGUE_TEXT:
 			if (World::getWorld()->isServer())
 			{
@@ -1345,7 +1353,7 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 				}
 			}
 			break;
-		
+
 
 		default:
 			DEBUG("unknown command: %i",command->m_button);
@@ -1423,7 +1431,7 @@ void Player::abortAction()
 
 bool Player::update(float time)
 {
-	
+
 	// Aufruf des updates für von Creature
 	Creature::update(time);
 
@@ -1434,7 +1442,7 @@ bool Player::update(float time)
 
 	// Debugging
 	//return true;
-	
+
 	return true;
 }
 
@@ -1473,34 +1481,34 @@ bool Player::checkRole(std::string role)
 	{
 		return true;
 	}
-	
+
 	if (role == "male" && getGender()==MALE)
 	{
 		return true;
 	}
-	
+
 	if (role == "female" && getGender()==FEMALE)
 	{
 		return true;
 	}
-	
+
 	if (role == getSubtype())
 	{
 		return true;
 	}
-	
+
 	bool leader = getParty()->getLeader() == getId();
-	
+
 	if (leader && role =="leader")
 	{
 		return true;
 	}
-	
+
 	if (!leader && role == "non-leader")
 	{
 		return true;
 	}
-	
+
 	return false;
 }
 
@@ -1514,7 +1522,7 @@ void Player::calcBaseDamage(std::string impl,Damage& dmg)
 	{
 		Damage::DamageType dmgtype = Damage::FIRE;
 		float maxdmg =0;
-		
+
 		Item* item;
 		for (int j=1; j<=8; j++)
 		{
@@ -1525,23 +1533,23 @@ void Player::calcBaseDamage(std::string impl,Damage& dmg)
 			}
 			if (j == Equipement::SHIELD)
 				item = getShield();
-			
+
 			if (item!=0 && item->m_weapon_attr !=0)
 			{
 				// Schaden der Waffe
 				Damage& wdmg=item->m_weapon_attr->m_damage;
-	
+
 				int i;
-				
-			
-			
+
+
+
 				// Schaden uebernehmen
 				for (i=0;i<4;i++)
 				{
 					dmg.m_min_damage[i] += wdmg.m_min_damage[i];
 					dmg.m_max_damage[i] += wdmg.m_max_damage[i];
 					dmg.m_multiplier[i] *= wdmg.m_multiplier[i];
-				
+
 					if (j == Equipement::WEAPON)
 					{
 						if ((wdmg.m_min_damage[i]+ wdmg.m_max_damage[i]) * wdmg.m_multiplier[i]>maxdmg)
@@ -1551,25 +1559,25 @@ void Player::calcBaseDamage(std::string impl,Damage& dmg)
 						}
 					}
 				}
-			
-				
-	
+
+
+
 				// Statusmods uebernehmen
 				for (i=0;i<NR_STATUS_MODS;i++)
 				{
 					dmg.m_status_mod_power[i] += wdmg.m_status_mod_power[i];
 				}
-	
+
 				// weitere Attribute
 				dmg.m_power += wdmg.m_power;
 				dmg.m_attack += wdmg.m_attack;
 				dmg.m_crit_perc += wdmg.m_crit_perc;
 				dmg.m_special_flags |= wdmg.m_special_flags;
-	
+
 			}
-			
+
 		}
-		
+
 		if (getSubtype() == "mage")
 		{
 			CreatureBaseAttr* basm = getBaseAttrMod();
@@ -1577,7 +1585,7 @@ void Player::calcBaseDamage(std::string impl,Damage& dmg)
 			dmg.m_min_damage[Damage::FIRE] -= basm->m_willpower/20;
 			dmg.m_max_damage[Damage::FIRE] -= basm->m_magic_power/6;
 			dmg.m_max_damage[Damage::FIRE] -= basm->m_willpower/15;
-				
+
 			dmg.m_min_damage[dmgtype] += basm->m_magic_power/10;
 			dmg.m_min_damage[dmgtype] += basm->m_willpower/20;
 			dmg.m_max_damage[dmgtype] += basm->m_magic_power/6;
@@ -1709,7 +1717,7 @@ void Player::addMessage(std::string msg)
 		m_message_clear_timer = msg.size()*500;
 	}
 	m_messages += msg;
-	
+
 	// Anzahl Newlines zaehlen
 	int cnt =0;
 	int pos = 0;
@@ -1733,7 +1741,7 @@ void Player::toString(CharConv* cv)
 {
 	DEBUGX("Player::tostring");
 	Creature::toString(cv);
-	
+
 	cv->toBuffer(getBaseAttr()->m_level);
 	m_look.toString(cv);
 	// Items
@@ -1747,7 +1755,7 @@ void Player::toString(CharConv* cv)
 	}
 	DEBUGX("number of items: %i",cnt);
 	cv->toBuffer(cnt);
-	
+
 	for ( short i = Equipement::ARMOR; i<= Equipement::SHIELD2; i++)
 	{
 		item = getEquipement()->getItem(i);
@@ -1758,11 +1766,11 @@ void Player::toString(CharConv* cv)
 
 		}
 	}
-	
+
 	// IDs der Wegpunkte
 	cv->toBuffer(m_waypoints.size());
 	cv->printNewline();
-	
+
 	std::set<short>::iterator it;
 	short regid;
 	for (it = m_waypoints.begin(); it != m_waypoints.end(); ++it)
@@ -1792,7 +1800,7 @@ void Player::fromString(CharConv* cv)
 	// IDs der Wegpunkte
 	int nr=0;
 	cv->fromBuffer(nr);
-	
+
 	short regid;
 	m_waypoints.clear();
 	for (int i=0; i<nr; i++)
@@ -1814,7 +1822,7 @@ void Player::readItem(CharConv* cv)
 	cv->fromBuffer<char>(type);
 	cv->fromBuffer(subtype);
 	cv->fromBuffer(id);
-	
+
 	item = ItemFactory::createItem((Item::Type) type, subtype,id);
 	if (item != 0)
 	{
@@ -1867,12 +1875,12 @@ void Player::addWaypoint(short id, bool check_party)
 	{
 		m_waypoints.insert(id);
 		DEBUGX("inserted Waypoint %i for player %i",id, getId());
-		
+
 		// Partymitglieder auch ueber den Wegpunkt informieren
 		if (check_party)
 		{
 			std::set<int>& members = getParty()->getMembers();
-			
+
 			Player* pl;
 			std::set<int>::iterator it;
 			for (it =members.begin(); it != members.end(); ++it)
@@ -1886,7 +1894,7 @@ void Player::addWaypoint(short id, bool check_party)
 				}
 			}
 		}
-		
+
 		// Event das die Entdenkung des Wegpunktes beinhaltet
 		if (World::getWorld()->isServer())
 		{
@@ -1894,7 +1902,7 @@ void Player::addWaypoint(short id, bool check_party)
 			event.m_type = NetEvent::PLAYER_WAYPOINT_DISCOVERED;
 			event.m_id = getId();
 			event.m_data = id;
-			
+
 			World::getWorld()->insertNetEvent(event);
 		}
 	}
@@ -1905,7 +1913,7 @@ bool Player::checkWaypoint(short id)
 	// Spieler hat den Wegpunkt direkt
 	if (m_waypoints.count(id) >0)
 		return true;
-	
+
 	// Partyleader hat den Wegpunkt
 	if (getParty()->getLeader()!= getId())
 	{
@@ -1915,7 +1923,7 @@ bool Player::checkWaypoint(short id)
 			return leader->checkWaypoint(id);
 		}
 	}
-	
+
 	return false;
 }
 
@@ -1924,12 +1932,12 @@ void Player::toSavegame(CharConv* cv)
 	// Version richtig setzen
 	cv->toBuffer(World::getVersion());
 	cv->setVersion(World::getVersion());
-	
+
 	cv->toBuffer(getSubtype());
 	cv->toBuffer(getName());
 	m_look.toString(cv);
 	cv->printNewline();
-	
+
 	cv->toBuffer(getBaseAttr()->m_level);
 	cv->toBuffer(getBaseAttr()->m_max_health);
 	cv->printNewline();
@@ -1943,26 +1951,26 @@ void Player::toSavegame(CharConv* cv)
 	cv->toBuffer(getBaseAttr()->m_magic_power);
 	cv->toBuffer(getBaseAttr()->m_willpower);
 	cv->printNewline();
-	
+
 	cv->toBuffer(m_attribute_points);
 	cv->toBuffer(m_skill_points);
 	cv->printNewline();
-	
+
 	cv->toBuffer(getBaseAttr()->m_walk_speed);
 	cv->toBuffer(getBaseAttr()->m_attack_speed);
 	cv->toBuffer(getBaseAttr()->m_attack_range);
 	cv->printNewline();
-	
+
 	cv->toBuffer(getBaseAttr()->m_resistances[0]);
 	cv->toBuffer(getBaseAttr()->m_resistances[1]);
 	cv->toBuffer(getBaseAttr()->m_resistances[2]);
 	cv->toBuffer(getBaseAttr()->m_resistances[3]);
 	cv->printNewline();
-	
+
 	cv->toBuffer(getBaseAttr()->m_max_experience);
 	cv->toBuffer(getDynAttr()->m_experience);
 	cv->printNewline();
-	
+
 	cv->toBuffer<short>(getBaseAttr()->m_abilities.size());
 	cv->printNewline();
 	std::map<std::string, AbilityInfo>::iterator jt;
@@ -1971,16 +1979,16 @@ void Player::toSavegame(CharConv* cv)
 		cv->toBuffer(jt->first);
 		cv->toBuffer(jt->second.m_timer_nr);
 		cv->toBuffer(jt->second.m_time);
-		cv->toBuffer(jt->second.m_timer);		
+		cv->toBuffer(jt->second.m_timer);
 		cv->printNewline();
 	}
-	
-	
+
+
 	cv->toBuffer( m_base_action);
 	cv->toBuffer(m_left_action);
 	cv->toBuffer( m_right_action);
 	cv->printNewline();
-	
+
 	cv->toBuffer(m_revive_position.first);
 	cv->toBuffer(m_revive_position.second);
 	cv->printNewline();
@@ -2002,18 +2010,18 @@ void Player::toSavegame(CharConv* cv)
 			cv->printNewline();
 		}
 		cv->toBuffer<char>(0);
-		
+
 	}
 	else
 	{
 		EventSystem::writeSavegame(cv);
 		cv->printNewline();
 	}
-	
+
 	// IDs der Wegpunkte
 	cv->toBuffer(m_waypoints.size());
 	cv->printNewline();
-	
+
 	std::set<short>::iterator it;
 	short regid;
 	for (it = m_waypoints.begin(); it != m_waypoints.end(); ++it)
@@ -2027,22 +2035,22 @@ void Player::toSavegame(CharConv* cv)
 void Player::fromSavegame(CharConv* cv, bool local)
 {
 	DEBUGX("from Savegame");
-	
-	
+
+
 	int version;
 	cv->fromBuffer(version);
 	cv->setVersion(version);
 
 	cv->fromBuffer(getSubtype());
 	init();
-	
+
 	std::string name;
 	cv->fromBuffer(name);
 	setName(name);
-	
-	m_look.fromString(cv);	
+
+	m_look.fromString(cv);
 	m_emotion_set = m_look.m_emotion_set;
-	
+
 	cv->fromBuffer(getBaseAttr()->m_level);
 	cv->fromBuffer<float>(getBaseAttr()->m_max_health);
 	getDynAttr()->m_health = getBaseAttr()->m_max_health;
@@ -2053,7 +2061,7 @@ void Player::fromSavegame(CharConv* cv, bool local)
 		cv->fromBuffer(getBaseAttr()->m_power);
 	else
 		getBaseAttr()->m_power = 20;
-	
+
 	cv->fromBuffer<short>(getBaseAttr()->m_strength);
 	cv->fromBuffer<short>(getBaseAttr()->m_dexterity);
 	cv->fromBuffer<short>(getBaseAttr()->m_magic_power);
@@ -2065,7 +2073,7 @@ void Player::fromSavegame(CharConv* cv, bool local)
 	cv->fromBuffer(getBaseAttr()->m_walk_speed);
 	cv->fromBuffer(getBaseAttr()->m_attack_speed);
 	cv->fromBuffer(getBaseAttr()->m_attack_range);
-	
+
 	cv->fromBuffer<short>(getBaseAttr()->m_resistances[0]);
 	cv->fromBuffer<short>(getBaseAttr()->m_resistances[1]);
 	cv->fromBuffer<short>(getBaseAttr()->m_resistances[2]);
@@ -2085,18 +2093,18 @@ void Player::fromSavegame(CharConv* cv, bool local)
 		cv->fromBuffer(type);
 		cv->fromBuffer(timer_nr);
 		cv->fromBuffer(time);
-		cv->fromBuffer(timer);		
+		cv->fromBuffer(timer);
 		getBaseAttr()->m_abilities[type].m_timer_nr = timer_nr;
 		getBaseAttr()->m_abilities[type].m_timer =timer;
 		getBaseAttr()->m_abilities[type].m_time = time;
 	}
 
 	DEBUGX("name %s class %s level %i",getName().c_str(), getSubtype().c_str(), getBaseAttr()->m_level);
-	
+
 	cv->fromBuffer( m_base_action);
 	cv->fromBuffer(m_left_action);
 	cv->fromBuffer( m_right_action);
-	
+
 	cv->fromBuffer(m_revive_position.first);
 	cv->fromBuffer(m_revive_position.second);
 	// Items
@@ -2104,9 +2112,9 @@ void Player::fromSavegame(CharConv* cv, bool local)
 
 	getBaseAttrMod()->m_max_health = getBaseAttr()->m_max_health;
 	calcBaseAttrMod();
-	
-	
-	
+
+
+
 	// Questinformationen
 	// Daten werden aus der lua Umgebung genommen, wenn die Welt schon laeuft
 	// sonst werden sie im Spieler zwischengespeichert
@@ -2121,7 +2129,7 @@ void Player::fromSavegame(CharConv* cv, bool local)
 			cv->fromBuffer(c);
 			if (c==0)
 				break;
-			
+
 			cv->fromBuffer(instr);
 			m_lua_instructions.push_back(instr);
 			DEBUGX("instructions: %s",instr.c_str());
@@ -2131,11 +2139,11 @@ void Player::fromSavegame(CharConv* cv, bool local)
 	{
 		EventSystem::readSavegame(cv,getId(), local);
 	}
-	
+
 	// IDs der Wegpunkte
 	int nr=0;
 	cv->fromBuffer(nr);
-	
+
 	short regid;
 	m_waypoints.clear();
 	for (int i=0; i<nr; i++)
@@ -2203,14 +2211,14 @@ bool Player::setValue(std::string valname)
 		int gold = lua_tointeger(EventSystem::getLuaState() ,-1);
 		getEquipement()->setGold(gold);
 		lua_pop(EventSystem::getLuaState(), 1);
-		
+
 		NetEvent event;
 		event.m_type =  NetEvent::PLAYER_ITEM_INSERT ;
 		event.m_data = Equipement::GOLD;
 		event.m_id = getId();
-		
+
 		World::getWorld()->insertNetEvent(event);
-		
+
 		lua_pushinteger(EventSystem::getLuaState() , getEquipement()->getGold() );
 		return true;
 	}
@@ -2225,7 +2233,7 @@ bool Player::setValue(std::string valname)
 void Player::writeNetEvent(NetEvent* event, CharConv* cv)
 {
 	Creature::writeNetEvent(event,cv);
-	
+
 	if (event->m_data & NetEvent::DATA_REVIVE_LOCATION)
 	{
 		cv->toBuffer(m_revive_position.first);
@@ -2234,18 +2242,18 @@ void Player::writeNetEvent(NetEvent* event, CharConv* cv)
 		cv->toBuffer(m_portal_position.second);
 		DEBUGX("writing revive position %s %s",m_revive_position.first.c_str(), m_revive_position.second.c_str())
 	}
-	
+
 	if (event->m_data & NetEvent::DATA_SKILL_ATTR_POINTS)
 	{
 		cv->toBuffer(m_attribute_points);
 		cv->toBuffer(m_skill_points);
 	}
-	
+
 	if (event->m_data & NetEvent::DATA_WAYPOINT)
 	{
 		cv->toBuffer(m_using_waypoint);
 	}
-	
+
 	if (event->m_data & NetEvent::DATA_FIGHT_STAT)
 	{
 		FightStatistic* fstat = &(getFightStatistic());
@@ -2261,7 +2269,7 @@ void Player::writeNetEvent(NetEvent* event, CharConv* cv)
 void Player::processNetEvent(NetEvent* event, CharConv* cv)
 {
 	Creature::processNetEvent(event,cv);
-	
+
 	if (event->m_data & NetEvent::DATA_REVIVE_LOCATION)
 	{
 		cv->fromBuffer(m_revive_position.first);
@@ -2270,18 +2278,18 @@ void Player::processNetEvent(NetEvent* event, CharConv* cv)
 		cv->fromBuffer(m_portal_position.second);
 		DEBUGX("reading revive position %s %s",m_revive_position.first.c_str(), m_revive_position.second.c_str())
 	}
-	
+
 	if (event->m_data & NetEvent::DATA_SKILL_ATTR_POINTS)
 	{
 		cv->fromBuffer(m_attribute_points);
 		cv->fromBuffer(m_skill_points);
 	}
-	
+
 	if (event->m_data & NetEvent::DATA_WAYPOINT)
 	{
 		cv->fromBuffer(m_using_waypoint);
 	}
-	
+
 	if (event->m_data & NetEvent::DATA_FIGHT_STAT)
 	{
 		FightStatistic* fstat = &(getFightStatistic());
@@ -2318,9 +2326,9 @@ void Player::updateMessageTimer(float time)
 {
 	if (m_messages == "")
 		return;
-	
+
 	m_message_clear_timer -= time;
-	
+
 	if (m_message_clear_timer <0)
 	{
 		int pos=m_messages.find_first_of('\n');
@@ -2334,7 +2342,7 @@ void Player::updateMessageTimer(float time)
 			pos=m_messages.find_first_of('\n');
 			if (pos == -1)
 				pos = m_messages.size();
-			
+
 			m_message_clear_timer = pos * 500;
 		}
 	}
@@ -2350,7 +2358,7 @@ std::string Player::getActionWeaponSuffix()
 		ret += "#OneHand";
 	else if (weapon->m_weapon_attr->m_two_handed == true)
 		ret += "#TwoHands";
-	
+
 	if (weapon != 0)
 	{
 		ret += "#";
@@ -2363,7 +2371,7 @@ std::string Player::getActionString()
 {
 	std::string ret = Creature::getActionString();
 	ret += getActionWeaponSuffix();
-	
+
 	return ret;
 }
 
@@ -2374,7 +2382,7 @@ void Player::insertLearnableAbility(Action::ActionType type, Vector position, in
 	m_learnable_abilities[id].m_skilltree_position = position;
 	m_learnable_abilities[id].m_id = id;
 	m_learnable_abilities[id].m_skilltree_tab = tab;
-	
+
 }
 
 void Player::insertLearnableAbility(LearnableAbility& ability)
@@ -2393,7 +2401,7 @@ bool Player::checkAbilityLearnable(Action::ActionType at)
 	}
 
 	LearnableAbilityMap::iterator it;
-	
+
 	for (it = m_learnable_abilities.begin(); it != m_learnable_abilities.end(); ++it)
 	{
 		if (it->second.m_type == at)
@@ -2401,7 +2409,7 @@ bool Player::checkAbilityLearnable(Action::ActionType at)
 			// Levelvorraussetzungen
 			if (getBaseAttr()->m_level < it->second.m_req_level)
 				return false;
-			
+
 			// Faehigkeitenvorraussetzungen
 			std::list<Action::ActionType>::iterator jt;
 			for (jt = it->second.m_req_abilities.begin(); jt != it->second.m_req_abilities.end(); ++jt)

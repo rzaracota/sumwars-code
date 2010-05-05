@@ -1,7 +1,4 @@
 /*
-	Ein kleines Rollenspiel
-	Copyright (C) 2007 Hans Wulf
-
 	This program is free software; you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
 	the Free Software Foundation; either version 2 of the License, or
@@ -155,7 +152,7 @@ int ItemList::getFreePlace(Item::Size size, bool useup_possible)
 	{
 		i = k/3;
 	}
-	
+
 	for (;i<k;i++)
 	{
 		if (arr[i]==0)
@@ -199,7 +196,7 @@ Equipement::Equipement(short max_small, short max_medium, short max_big)
 	{
 		m_body_items[i] =0;
 	}
-	
+
 	m_gold = 0;
 };
 
@@ -218,7 +215,7 @@ void Equipement::clear()
 			m_body_items[i] =0;
 		}
 	}
-	
+
 	DEBUGX("clearing equipement");
 	m_inventory.clear();
 	DEBUGX("done");
@@ -280,7 +277,7 @@ bool Equipement::swapItem(Item* &item,int pos)
 		// Tausch mit Gegenstand im Inventar
 		m_inventory.swapItem(item,size,idx);
 		DEBUGX("cursor item %p %p",getItem(Equipement::CURSOR_ITEM), &(m_body_items[CURSOR_ITEM ]));
-		
+
 		return true;
 	}
 }
@@ -302,7 +299,7 @@ short  Equipement::insertItem(Item* item, bool check_useup,bool use_equip, bool 
 		delete item;
 		return GOLD;
 	}
-	
+
 	if (use_equip)
 	{
 		if (item->m_type == Item::WEAPON && !use_secondary && m_body_items[WEAPON] == 0 && (item->m_weapon_attr->m_two_handed == false || m_body_items[SHIELD] == 0))
@@ -356,7 +353,7 @@ short  Equipement::insertItem(Item* item, bool check_useup,bool use_equip, bool 
 			return AMULET;
 		}
 	}
-	
+
 	Item* itm = item;
 	int pos;
 	bool useup = (item->m_useup_effect != 0);
@@ -400,7 +397,7 @@ short Equipement::findItem(Item::Subtype subtype,short startpos)
 		if (m_body_items[i] !=0 && m_body_items[i]->m_subtype == subtype)
 			return i;
 	}
-	
+
 	Item* item;
 	for (int i= std::max(int(BIG_ITEMS),start); i< BIG_ITEMS+m_inventory.getMaxBig(); i++)
 	{
@@ -408,28 +405,28 @@ short Equipement::findItem(Item::Subtype subtype,short startpos)
 		if (item != 0 && item->m_subtype == subtype)
 			return i;
 	}
-	
+
 	for (int i= std::max(int(BIG_ITEMS),start); i< BIG_ITEMS+m_inventory.getMaxBig(); i++)
 	{
 		item = m_inventory.getItem(Item::BIG, i - BIG_ITEMS);
 		if (item != 0 && item->m_subtype == subtype)
 			return i;
 	}
-	
+
 	for (int i= std::max(int(MEDIUM_ITEMS),start); i< MEDIUM_ITEMS+m_inventory.getMaxMedium(); i++)
 	{
 		item = m_inventory.getItem(Item::MEDIUM, i - MEDIUM_ITEMS);
 		if (item != 0 && item->m_subtype == subtype)
 			return i;
 	}
-	
+
 	for (int i= std::max(int(SMALL_ITEMS),start); i< SMALL_ITEMS+m_inventory.getMaxSmall(); i++)
 	{
 		item = m_inventory.getItem(Item::SMALL, i - SMALL_ITEMS);
 		if (item != 0 && item->m_subtype == subtype)
 			return i;
 	}
-	
+
 	return NONE;
 }
 
@@ -474,7 +471,7 @@ short Equipement::stringToPosition(std::string posstr, bool secondary)
 int Equipement::getNumberItems()
 {
 	int nr =0;
-	
+
 	for (int i=0; i<NR_BODY_ITEMS; i++)
 	{
 		if (m_body_items[i] !=0)
@@ -482,7 +479,7 @@ int Equipement::getNumberItems()
 			nr ++;
 		}
 	}
-	
+
 	int i;
 	for (i=0;i<m_inventory.getMaxBig();i++)
 	{
@@ -545,7 +542,7 @@ void Equipement::toString(CharConv* cv)
 
 	short nr = getNumberItems();
 	cv->toBuffer<short>(nr);
-	
+
 	for (int i=0; i<NR_BODY_ITEMS; i++)
 	{
 		if (m_body_items[i] !=0)
@@ -606,24 +603,24 @@ void Equipement::fromString(CharConv* cv)
 	clear();
 	short nr;
 	cv->fromBuffer<short>(nr);
-	
+
 	int i;
 	short pos;
 	Item* it;
-	
+
 	std::string subtype;
 	char type;
 	int id;
-	
+
 	for (i=0;i<nr;i++)
 	{
 		cv->fromBuffer(pos);
 		cv->fromBuffer(type);
 		cv->fromBuffer(subtype);
 		cv->fromBuffer(id);
-		
+
 		it = ItemFactory::createItem((Item::Type) type, std::string(subtype),id);
-		
+
 		// Datenfelder des Items belegen
 		it->fromString(cv);
 
@@ -640,7 +637,7 @@ void Equipement::toStringComplete(CharConv* cv)
 
 	short nr = getNumberItems();
 	cv->toBuffer<short>(nr);
-	
+
 	for (int i=0; i<NR_BODY_ITEMS; i++)
 	{
 		if (m_body_items[i] !=0)
@@ -701,14 +698,14 @@ void Equipement::fromStringComplete(CharConv* cv)
 	clear();
 	short nr;
 	cv->fromBuffer<short>(nr);
-	
+
 	int i;
 	short pos;
 	Item* it;
 	std::string subtype;
 	char type;
 	int id;
-	
+
 	for (i=0;i<nr;i++)
 	{
 		cv->fromBuffer(pos);
@@ -718,9 +715,9 @@ void Equipement::fromStringComplete(CharConv* cv)
 		if (World::getWorld() !=0 && World::getWorld()->isServer())
 			id =0;
 		DEBUGX("pos %i type %i subtype %s",pos,type, subtype.c_str());
-		
+
 		it = ItemFactory::createItem((Item::Type) type, std::string(subtype),id);
-		
+
 		// Datenfelder des Items belegen
 		it->fromStringComplete(cv);
 
@@ -729,7 +726,7 @@ void Equipement::fromStringComplete(CharConv* cv)
 		// Item ins Inventar tauschen
 		swapItem(it,pos);
 	}
-	
+
 	cv->fromBuffer(m_gold);
 
 }

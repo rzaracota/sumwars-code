@@ -1,7 +1,4 @@
 /*
-	Ein kleines Rollenspiel
-	Copyright (C) 2007 Hans Wulf, Daniel Erler
-
 	This program is free software; you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
 	the Free Software Foundation; either version 2 of the License, or
@@ -16,15 +13,7 @@
 	with this program; if not, write to the Free Software Foundation, Inc.,
 	51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
-/**
- * \file item.h
- * \defgroup Item \ Gegenstand
- * \brief Beschreibt den Aufbau von Gegenst&auml;nden, die ein Spieler haben kann.
- * \author Hans Wulf
- * \version 1.0
- * \date 2007/05/28
- * \note Beinhaltet die Klasse Item
- */
+
 #ifndef ITEM_H
 #define ITEM_H
 
@@ -101,20 +90,20 @@ struct WeaponAttr
 	{
 		init();
 	}
-	
+
 	/**
 	 * \fn void operator=(WeaponAttr& other)
 	 * \brief Zuweisungsoperator
 	 */
 	void operator=(WeaponAttr& other);
-	
+
 	/**
 	 * \fn int getValue(std::string valname)
 	 * \brief Schiebt den gewuenschten Attributwert eines Objektes auf den Lua Stack
 	 * \param valname Name des Wertes
 	 */
 	int getValue(std::string valname);
-	
+
 	/**
 	 * \fn bool setValue(std::string valname)
 	 * \brief Setzt den gewuenschten Attributwert eines Objektes
@@ -181,7 +170,7 @@ struct Item {
 	 */
 	typedef std::string Subtype;
 
-	
+
 	/**
 	 * \fn enum InfoFlags
 	 * \brief Zaehlt auf, welche Informationen zu einem Item vorliegen koennen
@@ -241,14 +230,14 @@ struct Item {
 	 * \param cv Eingabepuffer
 	 */
 	virtual void fromString(CharConv* cv);
-	
+
 	/**
 	 * \fn virtual int getValue(std::string valname)
 	 * \brief Schiebt den gewuenschten Attributwert eines Objektes auf den Lua Stack
 	 * \param valname Name des Wertes
 	 */
 	virtual int getValue(std::string valname);
-	
+
 	/**
 	 * \fn virtual bool setValue(std::string valname)
 	 * \brief Setzt den gewuenschten Attributwert eines Objektes
@@ -442,7 +431,7 @@ struct ItemBasicData
 	 * \brief maximale Starke einer Verzauberung des Items
 	 */
 	float m_max_enchant;
-	
+
 	/**
 	 * \brief Faktor, der auf alle Verzauberungen multipliziert wird. Ermoeglich zum Beispiel Zweihandwaffen staerker zu verzaubern.
 	 */

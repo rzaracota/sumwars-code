@@ -1,7 +1,4 @@
 /*
-	Ein kleines Rollenspiel
-	Copyright (C) 2007 Hans Wulf
-
 	This program is free software; you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
 	the Free Software Foundation; either version 2 of the License, or
@@ -40,7 +37,7 @@ void  World::createWorld(bool server, int port, bool cooperative, int max_player
 {
 	if (m_world != 0)
 		delete m_world;
-	
+
 	m_world = new World(server, cooperative, max_players);
 	m_world->init(port);
 }
@@ -75,11 +72,11 @@ void  World::createWorld(bool server, int port, bool cooperative, int max_player
 	{
 		m_parties[i].init(i);
 	}
-	
+
 	m_local_player =0;
 
 	m_events = new NetEventList;
-	
+
 }
 
 
@@ -88,10 +85,10 @@ bool World::init(int port)
 	Ogre::FileInfoListPtr files;
 	Ogre::FileInfoList::iterator it;
 	std::string file;
-	
+
 	EventSystem::init();
 	Dialogue::init();
-	
+
 	files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("lua","*.lua");
 	for (it = files->begin(); it != files->end(); ++it)
 	{
@@ -100,10 +97,10 @@ bool World::init(int port)
 		file += it->filename;
 		EventSystem::doFile(file.c_str());
 	}
-	
+
 	// Aktionen initialisieren
 	Action::init();
-	
+
 	files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("abilities","*.xml");
 	for (it = files->begin(); it != files->end(); ++it)
 	{
@@ -114,7 +111,7 @@ bool World::init(int port)
 		Action::loadAbilityData(file.c_str());
 
 	}
-	
+
 	ObjectFactory::init();
 	files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("monsters","*.xml");
 	for (it = files->begin(); it != files->end(); ++it)
@@ -126,7 +123,7 @@ bool World::init(int port)
 		ObjectLoader::loadMonsterData(file.c_str());
 
 	}
-	
+
 	// TODO: funktioniert nur, solange kein LUA Code enthalten
 	files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("projectiles","*.xml");
 	for (it = files->begin(); it != files->end(); ++it)
@@ -155,7 +152,7 @@ bool World::init(int port)
 		WorldLoader worldloader;
 		std::list<RegionData*> region_list;
 		files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("world","*.xml");
-		
+
 		for (it = files->begin(); it != files->end(); ++it)
 		{
 			file = it->archive->getName();
@@ -172,7 +169,7 @@ bool World::init(int port)
 			registerRegionData(*rt, (*rt)->m_id);
 		}
 		*/
-		
+
 		files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("npc","*.xml");
 		for (it = files->begin(); it != files->end(); ++it)
 		{
@@ -181,7 +178,7 @@ bool World::init(int port)
 			file += it->filename;
 			worldloader.loadNPCData(file.c_str());
 		}
-		
+
 		files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("quests","*.xml");
 		for (it = files->begin(); it != files->end(); ++it)
 		{
@@ -190,13 +187,13 @@ bool World::init(int port)
 			file += it->filename;
 			worldloader.loadQuestsData(file.c_str());
 		}
-		
-		
-		
+
+
+
 		DEBUGX("server");
 		m_network = new ServerNetwork(m_max_nr_players);
-		
-		
+
+
 
 	}
 	else
@@ -214,9 +211,9 @@ bool World::init(int port)
 	m_timer[0] =0;
 	m_timer[1] =0;
 	m_timer[2] =0;
-	
+
 	// Regionen aus XML Laden
-	
+
 
 	return true;
 }
@@ -248,7 +245,7 @@ bool World::createRegion(short region)
 		{
 			return false;
 		}
-		
+
 		insertRegion(reg,region);
 		return true;
 	}
@@ -349,23 +346,23 @@ void World::deleteWorld()
 
 World::~World()
 {
-	
+
 	delete m_network;
 
-	
+
 	std::map<int, RegionData*>::iterator it;
- 	
+
 	for (it = m_region_data.begin(); it != m_region_data.end(); ++it)
 	{
 		delete it->second;
 	}
-	
+
 	std::map<int,Region*>::iterator rit;
 	for (rit = m_regions.begin(); rit != m_regions.end(); rit++)
 	{
 		delete rit->second;
 	}
-	
+
 	std::map<std::string, Quest*>::iterator qit;
 	for (qit = m_quests.begin(); qit != m_quests.end(); ++qit)
 	{
@@ -377,7 +374,7 @@ World::~World()
 	delete m_player_slots;
 	delete m_players;
 	delete m_events;
-	
+
 	ObjectFactory::cleanupObjectData();
 	Action::cleanup();
 	Dialogue::cleanup();
@@ -419,20 +416,20 @@ Fraction::Relation World::getRelation(Fraction::Id frac, Fraction::Id frac2)
 {
 	if (frac > frac2)
 		return getRelation(frac2,frac);
-	
+
 	// Sonderfaelle
 	if (frac == Fraction::HOSTILE_TO_ALL || frac2 == Fraction::HOSTILE_TO_ALL)
 		return Fraction::HOSTILE;
-	
+
 	if (frac == Fraction::NEUTRAL_TO_ALL || frac2 == Fraction::NEUTRAL_TO_ALL)
 		return Fraction::NEUTRAL;
-	
+
 	if (frac == frac2)
 		return Fraction::ALLIED;
-	
+
 	if (frac == Fraction::NOFRACTION)
 		return Fraction::NEUTRAL;
-	
+
 	if (frac>=  Fraction::MONSTER && frac2>=  Fraction::MONSTER)
 	{
 		// Beziehung Nicht-Spieler - Nicht-Spieler
@@ -441,12 +438,12 @@ Fraction::Relation World::getRelation(Fraction::Id frac, Fraction::Id frac2)
 	}
 	else if (frac<  Fraction::MONSTER)
 	{
-	
+
 		// Beziehung zwischen Spieler und Nicht-Spieler Partei
 		Fraction* fraction = getFraction(frac2);
 		if (fraction ==0)
 			return Fraction::NEUTRAL;
-		
+
 		return fraction->getRelation(Fraction::PLAYER);
 	}
 	else
@@ -454,8 +451,8 @@ Fraction::Relation World::getRelation(Fraction::Id frac, Fraction::Id frac2)
 		// Beziehung zwischen Spielern
 		return std::min(m_parties[frac].getRelations()[frac2], m_parties[frac2].getRelations()[frac]);
 	}
-	
-	
+
+
 }
 
 Fraction::Relation World::getRelation(Fraction::Id frac, WorldObject* wo)
@@ -468,30 +465,30 @@ Fraction::Relation World::getRelation(Fraction::Type fractionname1, Fraction::Ty
 {
 	Fraction::Id id1 = getFractionId(fractionname1);
 	Fraction::Id id2 = getFractionId(fractionname2);
-	
+
 	if (id1 == Fraction::NOFRACTION)
 	{
 		ERRORMSG("Fraction %s does not exist",fractionname1.c_str());
 		return Fraction::NEUTRAL;
 	}
-	
+
 	if (id2 == Fraction::NOFRACTION)
 	{
 		ERRORMSG("Fraction %s does not exist",fractionname2.c_str());
 		return Fraction::NEUTRAL;
 	}
-	
+
 	return getRelation(id1,id2);
 }
 
 void World::setRelation(Fraction::Id frac, Fraction::Id frac2, Fraction::Relation relation)
 {
 	Fraction::Id id1 = frac, id2 = frac2;
-	
+
 	// id1 muss die kleinere ID sind, aber keine der PseudoIds fuer Player, Hostile, Neutral
 	if (id1 > id2)
 		std::swap(id1,id2);
-	
+
 	if (id1 < Fraction::MONSTER)
 	{
 		if (id2 >= Fraction::MONSTER)
@@ -504,17 +501,17 @@ void World::setRelation(Fraction::Id frac, Fraction::Id frac2, Fraction::Relatio
 			return;
 		}
 	}
-	
+
 	Fraction * fraction = getFraction(id1);
 	if (fraction !=0 )
 	{
 		fraction->setRelation(id2,relation);
-		
+
 		NetEvent event;
 		event.m_id = id1;
 		event.m_data = id2;
 		event.m_type = NetEvent::FRACTION_RELATION_CHANGED;
-		
+
 		insertNetEvent(event);
 	}
 	else
@@ -527,22 +524,22 @@ void World::setRelation(Fraction::Type fractionname1, Fraction::Type fractionnam
 {
 	Fraction::Id id1 = getFractionId(fractionname1);
 	Fraction::Id id2 = getFractionId(fractionname2);
-	
+
 	if (id1 == Fraction::NOFRACTION)
 	{
 		ERRORMSG("Fraction %s does not exist",fractionname1.c_str());
 		return;
 	}
-	
+
 	if (id2 == Fraction::NOFRACTION)
 	{
 		ERRORMSG("Fraction %s does not exist",fractionname2.c_str());
 		return;
 	}
-	
-	
+
+
 	setRelation(id1,id2,relation);
-	
+
 }
 
 
@@ -597,7 +594,7 @@ bool World::insertPlayer(WorldObject* player, int slot)
 
 bool World::insertPlayerIntoRegion(WorldObject* player, short region, LocationName loc)
 {
-	DEBUGX("try to enter region %i",region); 
+	DEBUGX("try to enter region %i",region);
 	Region* reg = getRegion(region);
 
 	// Testen ob alle Daten vorhanden sind
@@ -613,7 +610,7 @@ bool World::insertPlayerIntoRegion(WorldObject* player, short region, LocationNa
 		player->setRegionId(region);
 		player->setState(WorldObject::STATE_INACTIVE,false);
 	}
-	
+
 	if (player->getState() != WorldObject::STATE_ENTER_REGION)
 	{
 		// Spieler kann noch nicht in die Region eingefuegt werden
@@ -626,17 +623,17 @@ bool World::insertPlayerIntoRegion(WorldObject* player, short region, LocationNa
 			// Wenn die Region noch nicht existiert: erzeugen
 			if (data_missing !=0)
 			{
-				
+
 				if (m_region_data.count(region) == 0)
 				{
 					// fuer die Region gibt es keine Daten
 					// zurueck zum allerersten Startpunkt
 					if (region == getRegionId(m_player_start_location.first) && loc ==m_player_start_location.second)
 						return false;
-					
+
 					static_cast<Player*>(player)->setRevivePosition(m_player_start_location);
 					bool succ = insertPlayerIntoRegion(player, getRegionId(m_player_start_location.first), m_player_start_location.second);
-					
+
 					return succ;
 				}
 				bool succ = createRegion(region);
@@ -727,14 +724,14 @@ bool World::insertPlayerIntoRegion(WorldObject* player, short region, LocationNa
 			{
 				DEBUG("location %s does not exist",m_region_enter_loc[player->getId()].c_str());
 				m_region_enter_loc[player->getId()] = m_player_start_location.second;
-				
+
 				static_cast<Player*>(player)->setRevivePosition(m_player_start_location);
 				short id = getRegionId(m_player_start_location.first);
 				insertPlayerIntoRegion(player, id, m_player_start_location.second);
 				return true;
 			}
-			
-			
+
+
 			pos = reg->getLocation(m_region_enter_loc[player->getId()] );
 			m_region_enter_loc.erase(player->getId());
 		}
@@ -768,11 +765,11 @@ bool World::insertPlayerIntoRegion(WorldObject* player, short region, LocationNa
 void World::handleSavegame(CharConv *cv, int slot)
 {
 	DEBUGX("got savegame from slot %i",slot);
-	
+
 	Player* pl =0;
 	pl= new Player;
 	pl->fromSavegame(cv, (slot == LOCAL_SLOT) );
-	
+
 	// Spieler ist lokal
 	if (slot == LOCAL_SLOT)
 	{
@@ -802,12 +799,12 @@ void World::handleSavegame(CharConv *cv, int slot)
 
 		pl->setState(WorldObject::STATE_ACTIVE,false);
 		pl->recalcDamage();
-		
+
 		// Auf Serverseite Spieler gleich in Region einfuegen, auf Clientseite auf Informationen warten
 		if (isServer())
 		{
 			RegionLocation regloc = pl->getRevivePosition();
-		
+
 			short id = getRegionId(regloc.first);
 			if (id != -1)
 			{
@@ -821,7 +818,7 @@ void World::handleSavegame(CharConv *cv, int slot)
 		}
 		else
 		{
-			
+
 		}
 
 
@@ -893,21 +890,21 @@ void World::handleSavegame(CharConv *cv, int slot)
 					m_network->pushSlotMessage(msg2.getBitStream(),it->first);
 				}
 			}
-			
+
 			// Nachricht ueber die Wegpunkte
 			if (slot != LOCAL_SLOT)
 			{
 				std::map<short,WaypointInfo>& winfos =getWaypointData();
 				std::map<short,WaypointInfo>::iterator lt;
-				
+
 				PackageHeader header3;
 				header3.m_content = PTYPE_S2C_WAYPOINTS;	// Spielerdaten vom Server zum Client
 				header3.m_number = winfos.size();					// der neue Spieler
-	
+
 				CharConv msg3;
 				header3.toString(&msg3);
-				
-				
+
+
 				for (lt = winfos.begin(); lt != winfos.end(); ++lt)
 				{
 					msg3.toBuffer(lt->first);
@@ -917,7 +914,7 @@ void World::handleSavegame(CharConv *cv, int slot)
 					msg3.toBuffer(lt->second.m_world_coord.m_y);
 					DEBUGX("sending waypoint info %i %s %f %f",lt->first, lt->second.m_name.c_str(), lt->second.m_world_coord.m_x,lt->second.m_world_coord.m_y);
 				}
-				
+
 				std::map<std::string, int>::iterator rnt;
 				msg3.toBuffer<int>(m_region_name_id.size());
 				for (rnt = m_region_name_id.begin(); rnt != m_region_name_id.end(); ++rnt)
@@ -925,9 +922,9 @@ void World::handleSavegame(CharConv *cv, int slot)
 					msg3.toBuffer(rnt->first);
 					msg3.toBuffer(rnt->second);
 				}
-				
+
 				m_network->pushSlotMessage(msg3.getBitStream(),slot);
-			
+
 				// Informationen ueber Parties senden
 				PackageHeader header4;
 				header4.m_content =PTYPE_S2C_PARTY;
@@ -946,47 +943,47 @@ void World::handleSavegame(CharConv *cv, int slot)
 						m_network->pushSlotMessage(msg3.getBitStream(),slot);
 					}
 				}
-			
+
 				// Informationen ueber Parties senden
 				PackageHeader header5;
 				header5.m_number =1;
 				header5.m_content =PTYPE_S2C_QUEST;
 
 				std::map< std::string, Quest * >::iterator it;
-				
+
 				for (it = m_quests.begin(); it != m_quests.end(); ++it)
 				{
-					
+
 						DEBUGX("sending data for quest %s",it->second->getName().c_str());
-						
+
 						CharConv msg5;
 						header5.toString(&msg5);
 
 						it->second->toString(&msg5);
 						m_network->pushSlotMessage(msg5.getBitStream(),slot);
-					
+
 				}
-				
+
 				PackageHeader header6;
 				header6.m_number =1;
 				header6.m_content =PTYPE_S2C_FRACTION;
 
 				std::map< Fraction::Id, Fraction* >::iterator ft;
-				
+
 				for (ft = m_fractions.begin(); ft != m_fractions.end(); ++ft)
 				{
-					
+
 					DEBUGX("sending data for Fraction %s",ft->second->getType().c_str());
-						
+
 					CharConv msg6;
 					header6.toString(&msg6);
 
 					ft->second->toString(&msg6);
 					m_network->pushSlotMessage(msg6.getBitStream(),slot);
-					
+
 				}
 			}
-			
+
 		}
 	}
 
@@ -1048,7 +1045,7 @@ void World::handleMessage(std::string msg, int slot)
 	// als Client: Nachricht an den Server senden
 	if (m_server && msg[0]!='$')
 	{
-		
+
 		// Name des Senders an die Nachricht haengen
 		smsg = "";
 		if (m_player_slots->count(slot)>0)
@@ -1058,7 +1055,7 @@ void World::handleMessage(std::string msg, int slot)
 			{
 				smsg += "[";
 				smsg += pl->getName();
-				
+
 				if (pl->getSpeakText().m_text == "" && pl->getDialogue() == 0)
 				{
 					CreatureSpeakText text;
@@ -1181,7 +1178,7 @@ void World::handleMessage(std::string msg, int slot)
 			std::string instr = "";
 			instr += msg.substr(1);
 			std::string ret;
-			
+
 			EventSystem::doString((char*) instr.c_str());
 			do
 			{
@@ -1234,13 +1231,13 @@ void World::update(float time)
 	{
 		rit->second->update(time);
 	}
-	
+
 	if (m_timer_limit[1])
 	{
 		// Parties aktualisieren
 		for (unsigned int i=0; i<m_parties.size(); ++i)
 		{
-			m_parties[i].updateMinimaps();	
+			m_parties[i].updateMinimaps();
 		}
 	}
 
@@ -1252,14 +1249,14 @@ void World::update(float time)
 	{
 		updateLogins();
 		acceptLogins();
-		
+
 		// Lua update
 		if (getLocalPlayer() !=0)
 		{
 			std::string chunk = EventSystem::getPlayerVarString(getLocalPlayer()->getId());
 			EventSystem::doString(chunk.c_str());
 			EventSystem::clearPlayerVarString(getLocalPlayer()->getId());
-			
+
 			std::stringstream stream;
 			stream << "updatePlayerVars("<<getLocalPlayer()->getId()<<");";
 			EventSystem::doString(stream.str().c_str());
@@ -1330,7 +1327,7 @@ void World::updatePlayers()
 			delete pl;
 			continue;
 		}
-		
+
 		// Spielern die auf Daten zur aktuellen Region warten, Daten senden
 		if (pl->getState() == WorldObject::STATE_REGION_DATA_REQUEST)
 		{
@@ -1358,7 +1355,7 @@ void World::updatePlayers()
 		// Spieler, deren Regionen komplett geladen wurden aktivieren
 		if (m_server)
 		{
-			
+
 			if (pl->getState() == WorldObject::STATE_ENTER_REGION && pl->getRegion() !=0 )
 			{
 				// TODO: Ort angeben
@@ -1371,8 +1368,8 @@ void World::updatePlayers()
 		// Daten von allen verbundenen Client annehmen und verarbeiten
 		if (m_server && slot != LOCAL_SLOT)
 		{
-			
-			
+
+
 			// Nachrichten fuer die Spieler abholen und Verteilen
 			PackageHeader headerp;
 			Packet* data;
@@ -1440,10 +1437,10 @@ void World::updatePlayers()
 				event.m_data = pl->getNetEventMask();
 				event.m_id = pl->getId();
 				insertNetEvent(event);
-				
+
 				pl->clearNetEventMask();
-				
-				
+
+
 			}
 		}
 
@@ -1565,7 +1562,7 @@ void World::updatePlayers()
 					DEBUGX("got waypoints");
 					std::map<short,WaypointInfo>& winfos = World::getWorld()->getWaypointData();
 					winfos.clear();
-					
+
 					WaypointInfo wi;
 					short regid;
 					for (int i=0; i<headerp.m_number; i++)
@@ -1574,16 +1571,16 @@ void World::updatePlayers()
 						cv->fromBuffer(wi.m_name);
 						cv->fromBuffer(wi.m_id);
 						cv->fromBuffer(wi.m_world_coord.m_x);
-						cv->fromBuffer(wi.m_world_coord.m_y);	
-						
+						cv->fromBuffer(wi.m_world_coord.m_y);
+
 						winfos[regid] = wi;
 						DEBUGX("got waypoint info %i %s %f %f",regid, wi.m_name.c_str(), wi.m_world_coord.m_x,wi.m_world_coord.m_y);
 					}
-					
+
 					int nrregions;
 					cv->fromBuffer(nrregions);
 					m_region_name_id.clear();
-					
+
 					std::string regname;
 					int id;
 					for (int i = 0; i < nrregions; i++)
@@ -1592,20 +1589,20 @@ void World::updatePlayers()
 						cv->fromBuffer(id);
 						m_region_name_id.insert(std::make_pair(regname,id));
 					}
-					
+
 				}
 				else if (headerp.m_content == PTYPE_S2C_PARTY)
 				{
 					int id = headerp.m_number;
 					getParty(id)->fromString(cv);
-				}				
+				}
 				else if (headerp.m_content == PTYPE_S2C_QUEST)
 				{
 					std::string name,tabname;
 					cv->fromBuffer(name);
 					cv->fromBuffer(tabname);
 					DEBUGX("got data for quest %s %s",name.c_str(), tabname.c_str());
-					
+
 					Quest* qu = new Quest(name,tabname);
 					qu->fromString(cv);
 					qu->init();
@@ -1617,12 +1614,12 @@ void World::updatePlayers()
 					Fraction::Type type;
 					cv->fromBuffer(id);
 					cv->fromBuffer(type);
-					
+
 					Fraction* frac = new Fraction(id, type);
 					frac->fromString(cv);
 					m_fractions[id] = frac;
-					
-					
+
+
 				}
 				else if (headerp.m_content == PTYPE_S2C_REGION_CHANGED)
 				{
@@ -1636,7 +1633,7 @@ void World::updatePlayers()
 					m_local_player->setState(WorldObject::STATE_REGION_DATA_REQUEST,false);
 					m_local_player->setRegionId(headerp.m_number);
 					DEBUGX("state %i",m_local_player->getState());
-	
+
 				}
 				else if (headerp.m_content == PTYPE_S2C_EVENT)
 				{
@@ -1681,13 +1678,13 @@ void World::updatePlayers()
 				}
 				else if (headerp.m_content == PTYPE_C2S_MESSAGE)
 				{
-					
+
 				}
 				else
 				{
 					DEBUG("got package with unknown type %i", headerp.m_content);
 				}
-				
+
 				delete cv;
 			}
 
@@ -1766,33 +1763,33 @@ void World::updatePlayers()
 					msg = new CharConv;
 					header.m_content = PTYPE_S2C_LUA_CHUNK;
 					DEBUGX("send lua chunk: %s",chunk.c_str());
-					
+
 					header.toString(msg);
 					msg->toBuffer(chunk);
 					m_network->pushSlotMessage(msg->getBitStream(),slot);
-					
+
 					EventSystem::clearPlayerVarString(pl->getId());
 					delete msg;
 				}
-				
+
 				// Daten abgleichen
 				if (pl->getState() == WorldObject::STATE_ACTIVE && pl->getRegion() !=0 && m_timer_limit[3])
 				{
 					CharConv cv;
 					PackageHeader header;
 					header.m_content = PTYPE_S2C_DATA_CHECK;
-				
+
 					header.toString(&cv);
-				
+
 					pl->getRegion()->getRegionCheckData(&cv);
-				
+
 					m_network->pushSlotMessage(cv.getBitStream(),slot);
 				}
 			}
-			
-			
+
+
 		}
-	}	
+	}
 }
 
 bool World::writeNetEvent(Region* region,NetEvent* event, CharConv* cv)
@@ -1800,7 +1797,7 @@ bool World::writeNetEvent(Region* region,NetEvent* event, CharConv* cv)
 	event->toString(cv);
 
 	DEBUGX("sending event %i  id %i  data %i",event->m_type, event->m_id, event->m_data);
-	
+
 
 	WorldObject* object;
 	Projectile* proj;
@@ -1808,7 +1805,7 @@ bool World::writeNetEvent(Region* region,NetEvent* event, CharConv* cv)
 	{
 		if (event->m_type == NetEvent::OBJECT_CREATED)
 		{
-			
+
 			object =region->getObject(event->m_id);
 			DEBUGX("object created %s %i",object->getSubtype().c_str(), object->getId());
 			object->toString(cv);
@@ -1826,7 +1823,7 @@ bool World::writeNetEvent(Region* region,NetEvent* event, CharConv* cv)
 
 			if (object !=0)
 			{
-				
+
 				object->writeNetEvent(event,cv);
 			}
 			else
@@ -1855,7 +1852,7 @@ bool World::writeNetEvent(Region* region,NetEvent* event, CharConv* cv)
 			di = region->getDropItem(event->m_id);
 			if (di !=0)
 			{
-				
+
 				di->toString(cv);
 				di->clearNetEventMask();
 			}
@@ -1867,7 +1864,7 @@ bool World::writeNetEvent(Region* region,NetEvent* event, CharConv* cv)
 			Creature* npc = dynamic_cast<Creature*>(region->getObject(event->m_id));
 			if (npc ==0 || npc->getEquipement() ==0)
 				return false;
-			
+
 			npc->getEquipement()->toStringComplete(cv);
 		}
 		else if (event->m_type == NetEvent::TRADER_ITEM_BUY)
@@ -1875,13 +1872,13 @@ bool World::writeNetEvent(Region* region,NetEvent* event, CharConv* cv)
 			Creature* npc = dynamic_cast<Creature*>(region->getObject(event->m_id));
 			if (npc ==0 || npc->getEquipement() ==0)
 				return false;
-			
+
 			Item* item = npc->getEquipement()->getItem(event->m_data);
 			if (item ==0)
 				return false;
-			
+
 			DEBUGX("sending item %i of trader %i",event->m_data,npc->getId());
-			
+
 			item->toStringComplete(cv);
 		}
 		else if (event->m_type == NetEvent::REGION_CAMERA)
@@ -1922,7 +1919,7 @@ bool World::writeNetEvent(Region* region,NetEvent* event, CharConv* cv)
 				cv->toBuffer(it->second.m_time);
 				cv->toBuffer(it->second.m_size);
 				cv->toBuffer(it->second.m_position.m_x);
-				cv->toBuffer(it->second.m_position.m_y);	
+				cv->toBuffer(it->second.m_position.m_y);
 			}
 		}
 	}
@@ -1931,7 +1928,7 @@ bool World::writeNetEvent(Region* region,NetEvent* event, CharConv* cv)
 		// Spieler kann man auch ohne Region aktualisieren
 		if (event->m_type == NetEvent::OBJECT_STAT_CHANGED && m_players->count(event->m_id) ==1)
 		{
-			
+
 			object = (*m_players)[event->m_id];
 			object->writeNetEvent(event,cv);
 		}
@@ -1965,7 +1962,7 @@ bool World::writeNetEvent(Region* region,NetEvent* event, CharConv* cv)
 			return false;
 		}
 	}
-	
+
 	if (event->m_type == NetEvent::PLAYER_ITEM_INSERT)
 	{
 		object = (*m_players)[event->m_id];
@@ -2009,13 +2006,13 @@ bool World::writeNetEvent(Region* region,NetEvent* event, CharConv* cv)
 			return false;
 	}
 
-	
+
 	if (event->m_type == NetEvent::FRACTION_RELATION_CHANGED)
 	{
 		Fraction::Relation rel = getRelation(event->m_id, event->m_data);
 		cv->toBuffer<char>(rel);
 	}
-	
+
 	if (event->m_type == NetEvent::PLAYER_PARTY_CANDIDATE)
 	{
 		object = (*m_players)[event->m_id];
@@ -2033,7 +2030,7 @@ bool World::writeNetEvent(Region* region,NetEvent* event, CharConv* cv)
 		DEBUG("party %i changed relation to %i to %i",event->m_data, event->m_id, getParty(event->m_data)->getRelations()[event->m_id]);
 		cv->toBuffer<char>(getParty(event->m_data)->getRelations()[event->m_id]);
 	}
-	
+
 
 
 	return true;
@@ -2192,46 +2189,46 @@ bool World::processNetEvent(Region* region,CharConv* cv)
 				return false;
 			}
 			break;
-			
+
 		case NetEvent::TRADER_INVENTORY_REFRESH:
-			
+
 			cr = dynamic_cast<Creature*>(region->getObject(event.m_id));
 			if (cr ==0)
 				return false;
-			
+
 			if (cr->getEquipement() ==0)
 			{
 				cr->setEquipement(new Equipement(100,100,100));
 			}
 			cr->getEquipement()->clear();
-			
+
 			cr->getEquipement()->fromStringComplete(cv);
 			break;
-			
+
 		case NetEvent::TRADER_ITEM_BUY:
 
 			cr = dynamic_cast<Creature*>(region->getObject(event.m_id));
 			if (cr ==0 || cr->getEquipement() ==0)
 				return false;
-			
+
 			// Item erstellen
 			cv->fromBuffer(type);
 			cv->fromBuffer(subtype);
 			cv->fromBuffer(id);
 			item = ItemFactory::createItem((Item::Type) type,subtype,id);
 			item->fromStringComplete(cv);
-			
+
 			cr->getEquipement()->swapItem(item, event.m_data);
 			if (item !=0)
 				delete item;
-			
+
 			break;
-			
+
 		case NetEvent::TRADER_ITEM_SELL:
 			cr = dynamic_cast<Creature*>(region->getObject(event.m_id));
 			if (cr ==0 || cr->getEquipement() ==0)
 				return false;
-			
+
 			item =0;
 			cr->getEquipement()->swapItem(item, event.m_data);
 			if (item !=0)
@@ -2313,27 +2310,27 @@ bool World::processNetEvent(Region* region,CharConv* cv)
 			if (m_players->count(event.m_id)>0)
 			{
 				object = (*m_players)[event.m_id];
-				
+
 				Item* item =0;
 				static_cast<Player*>(object)->getEquipement()->swapItem(item,event.m_data);
 
 				if (item !=0)
 					delete item;
-			
+
 			}
 			else
 			{
 				return false;
 			}
 			break;
-			
+
 		case NetEvent::PLAYER_ITEM_SWAP:
 			if (m_players->count(event.m_id)>0)
 			{
 				object = (*m_players)[event.m_id];
 				bool sec;
 				cv->fromBuffer(sec);
-				
+
 				static_cast<Player*>(object)->setUsingSecondaryEquip(sec);
 			}
 			break;
@@ -2342,7 +2339,7 @@ bool World::processNetEvent(Region* region,CharConv* cv)
 			if (m_players->count(event.m_id)>0)
 			{
 				object = (*m_players)[event.m_id];
-				
+
 				if (event.m_data != Equipement::GOLD)
 				{
 					static_cast<Player*>(object)->readItemComplete(cv);
@@ -2353,14 +2350,14 @@ bool World::processNetEvent(Region* region,CharConv* cv)
 					cv->fromBuffer(gold);
 					static_cast<Player*>(object)->getEquipement()->setGold(gold);
 				}
-				
+
 			}
 			else
 			{
 				return false;
 			}
 			break;
-			
+
 		case NetEvent::PLAYER_WAYPOINT_DISCOVERED:
 			if (m_players->count(event.m_id)>0)
 			{
@@ -2408,23 +2405,23 @@ bool World::processNetEvent(Region* region,CharConv* cv)
 				return false;
 			}
 			break;
-			
+
 		case NetEvent::FRACTION_RELATION_CHANGED:
 			char tmp;
 			cv->fromBuffer(tmp);
 			setRelation(event.m_id, event.m_data, (Fraction::Relation) tmp);
 			DEBUG("set relation %i %i to %i",event.m_id, event.m_data, (int) tmp);
-			
+
 			break;
-			
+
 		case NetEvent::PARTY_RELATION_CHANGED:
 			char rel;
 			cv->fromBuffer(rel);
 			World::getWorld()->getParty( event.m_data )->setRelation(event.m_id, (Fraction::Relation) rel);
 			DEBUGX("party %i changed relation to %i to %i",event.m_data, event.m_id, rel);
 			break;
-			
-			
+
+
 		case NetEvent::REGION_CUTSCENE:
 			mode = (bool) event.m_data;
 			if (region !=0)
@@ -2432,27 +2429,27 @@ bool World::processNetEvent(Region* region,CharConv* cv)
 				region ->setCutsceneMode(mode);
 			}
 			break;
-			
+
 		case NetEvent::REGION_CAMERA:
 			if (region !=0)
 			{
 				region->getCamera().fromString(cv);
 			}
 			break;
-			
+
 		case NetEvent::MUSIC_CHANGED:
 			if (region != 0)
 			{
 				region->readMusicTracksFromString(cv);
 			}
-			
+
 		case NetEvent::REGION_LIGHT:
 			if (region !=0)
 			{
 				region->getLight().fromString(cv);
 			}
 			break;
-			
+
 		case NetEvent::DIALOGUE_CREATED:
 			if (region !=0)
 			{
@@ -2463,7 +2460,7 @@ bool World::processNetEvent(Region* region,CharConv* cv)
 				return false;
 			}
 			break;
-			
+
 		case NetEvent::DIALOGUE_DESTROYED:
 			if (region !=0)
 			{
@@ -2478,7 +2475,7 @@ bool World::processNetEvent(Region* region,CharConv* cv)
 				return false;
 			}
 			break;
-			
+
 		case NetEvent::DIALOGUE_STAT_CHANGED:
 			if (region !=0)
 			{
@@ -2495,7 +2492,7 @@ bool World::processNetEvent(Region* region,CharConv* cv)
 				return false;
 			}
 			break;
-			
+
 		case NetEvent::DAMAGE_VISUALIZER_CREATED:
 			if (region != 0)
 			{
@@ -2505,11 +2502,11 @@ bool World::processNetEvent(Region* region,CharConv* cv)
 				dmgvis.m_time -= cv->getDelay();
 				cv->fromBuffer(dmgvis.m_size);
 				cv->fromBuffer(dmgvis.m_position.m_x);
-				cv->fromBuffer(dmgvis.m_position.m_y);	
-				
+				cv->fromBuffer(dmgvis.m_position.m_y);
+
 			}
 			break;
-			
+
 		default:
 			ERRORMSG("unknown event type %i",event.m_type);
 
@@ -2534,12 +2531,12 @@ void World::handleDataRequest(ClientDataRequest* request, int slot )
 	{
 		player = (*m_player_slots)[slot];
 	}
-	
+
 	Region* region = getRegion(request->m_region_id);
 	if (request->m_data <= ClientDataRequest::REGION_ALL)
 	{
 		DEBUGX("Daten zur Region %i gefordert",request->m_id);
-		
+
 		if (region!=0)
 		{
 			// Daten der Region senden
@@ -2596,7 +2593,7 @@ void World::handleDataRequest(ClientDataRequest* request, int slot )
 			region->insertNetEvent(event);
 		}
 	}
-	
+
 }
 
 bool World::calcBlockmat(PathfindInfo * pathinfo)
@@ -2670,10 +2667,10 @@ bool World::calcBlockmat(PathfindInfo * pathinfo)
 				s2.m_center.m_y += sqs;
 				js++;
 			}
-			
+
 			js--;
 			s2.m_center.m_y -= sqs;
-			
+
 			if (js == -1)
 			{
 				// Objekt bedeckt Suchraum nur mit winziger Ecke
@@ -2703,11 +2700,11 @@ bool World::calcBlockmat(PathfindInfo * pathinfo)
 						factor = -1000;
 					}
 					dist += relspeed.getLength()*factor;
-					
+
 					if(dist > hb)
 					{
 						// ignorieren
-						continue;	
+						continue;
 					}
 					val = 4;
 				}
@@ -2881,7 +2878,7 @@ void World::insertNetEvent(NetEvent &event)
 void  World::addEvent(RegionName rname, TriggerType trigger, Event* event)
 {
 	int id = getRegionId(rname);
-	
+
 	std::map<int, RegionData*>::iterator it;
 	it =  m_region_data.find(id);
 
@@ -2890,11 +2887,11 @@ void  World::addEvent(RegionName rname, TriggerType trigger, Event* event)
 		ERRORMSG("no data for region %s",rname.c_str());
 		return;
 	}
-	
+
 	DEBUGX("adding Event for Region %s",rname.c_str());
 	it->second->addEvent(trigger,event);
 }
-		
+
 WorldObject* World::getPlayer(int id)
 {
 	WorldObjectMap::iterator it;
@@ -2910,13 +2907,13 @@ Party* World::getParty(int id)
 {
 	if (id >= Fraction::NEUTRAL_TO_ALL)
 		return 0;
-	
+
 	if (id <0)
 		return 0;
-	
+
 	if (id >= (int) m_parties.size())
 		m_parties.resize(id+1);
-		
+
 	return &(m_parties[id]);
 }
 
@@ -2926,47 +2923,47 @@ Fraction* World::getFraction(Fraction::Id id)
 	std::map<Fraction::Id, Fraction*>::iterator it =  m_fractions.find(id);
 	if (it == m_fractions.end())
 		return 0;
-	
+
 	return it->second;
 }
 
 Fraction::Id World::getFractionId(Fraction::Type fractionname)
 {
-	
+
 	if (fractionname == "player")
 		return Fraction::PLAYER;
-	
+
 	if (fractionname.find("player_") != std::string::npos)
 	{
 		// Id aus dem String extrahieren
 		int pos = fractionname.find("player_") + 7;
-		
+
 		std::stringstream stream;
 		stream.str( fractionname.substr(pos));
 		int nr;
 		stream >> nr;
 		return Fraction::PLAYER + nr;
 	}
-	
+
 	if (fractionname == "DEFAULT" || fractionname=="default")
 		return Fraction::DEFAULT;
-	
+
 	if (fractionname == "NEUTRAL_TO_ALL" || fractionname=="neutral_to_all")
 		return Fraction::NEUTRAL_TO_ALL;
-	
+
 	if (fractionname == "HOSTILE_TO_ALL" || fractionname=="hostile_to_all")
 		return Fraction::HOSTILE_TO_ALL;
-	
+
 	std::map<Fraction::Id, Fraction*>::iterator it;
 	for (it = m_fractions.begin(); it != m_fractions.end(); ++it)
 	{
 		if (it->second->getType() == fractionname)
 			return it->first;
 	}
-	
+
 	return Fraction::NOFRACTION;
 }
-		
+
 void World::createFraction(Fraction::Type name)
 {
 	// Fraktion mit dem gleichen Name oder gleicher Id zuerst loeschen
@@ -2978,10 +2975,10 @@ void World::createFraction(Fraction::Type name)
 		m_fractions.erase(oldid);
 		ERRORMSG("duplicate fraction with name %s",name.c_str());
 	}
-	
+
 
 	Fraction::Id id = m_fractions.size() +1+ Fraction::MONSTER;
-	
+
 	frac = new Fraction(id, name);
 	m_fractions[id] = frac;
 }

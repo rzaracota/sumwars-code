@@ -1,7 +1,4 @@
 /*
-	Ein kleines Rollenspiel
-	Copyright (C) 2007 Hans Wulf
-
 	This program is free software; you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
 	the Free Software Foundation; either version 2 of the License, or
@@ -89,16 +86,16 @@ public:
 	 * Legt ein neues World Objekt an
 	 */
 	World(bool server ,  bool cooperative, int max_players);
-	
-	
+
+
 	/**
 	* \fn ~World()
 	 * \brief Destruktor
 	 */
 	~World();
-	
-	
-	
+
+
+
 	/**
 	 * \fn bool init(int port)
 	 * \brief initialisiert die Welt
@@ -106,27 +103,27 @@ public:
 	 * \return true, wenn kein Fehler aufgetreten ist, sonst false
 	 */
 	bool init(int port );
-	
+
 	/**
 	 * \fn bool createRegion(short region)
 	 * \brief Erzeugt die Region mit der angegebenen Nummer
 	 * \param region Nummer der Region, die erzeugt werden soll
 	 */
 	bool createRegion(short region);
-	
-	
+
+
 	/**
 	 * \fn void acceptLogins()
 	 * \brief Fuegt Spieler die sich neu eingeloggt haben ins Spiel ein
 	 */
 	void acceptLogins();
-	
+
 	/**
 	 * \fn void updateLogins()
 	 * \brief Aktualisiert die Liste der eingehenden Logins
 	 */
 	void updateLogins();
-	
+
 	//Accessor Methods
 	/**
 	 * \fn short insertRegion(Region* region, int rnr)
@@ -135,7 +132,7 @@ public:
 	 * \param rnr ID der Region
 	 */
 	void insertRegion(Region* region, int rnr);
-	
+
 	/**
 	 * \fn bool insertPlayerIntoRegion(WorldObject* player, short region, LocationName loc="")
 	 * \param player der Spieler
@@ -146,14 +143,14 @@ public:
 	bool insertPlayerIntoRegion(WorldObject* player, short region, LocationName loc ="");
 
 
-	
+
 	/**
 	 * \fn bool insertPlayer(WorldObject* player, int slot = NOSLOT)
 	 * \brief Fuegt einen neuen Spieler hinzu
 	 */
 	bool insertPlayer(WorldObject* player, int slot= NOSLOT);
 
-	
+
 	/**
 	 * \fn bool calcBlockmat(PathfindInfo * pathinfo)
 	 * \brief Berechnet die Matrix der blockierten Felder
@@ -199,13 +196,13 @@ public:
 	 * \param time Zeit um die in der Welt vergeht in Millisekunden
 	 */
 	void update(float time);
-	
+
 	/**
 	 * \fn void updatePlayers()
 	 * \brief Aktualisiert die Spielerobjekte
 	 */
 	void updatePlayers();
-	
+
 	/**
 	 * \fn bool writeNetEvent(Region* region, NetEvent* event, CharConv* cv)
 	 * \brief Schreib die Daten zu dem NetEvent in den Bitstream
@@ -214,7 +211,7 @@ public:
 	 * \param cv Bitstream zum Schreiben
 	 */
 	bool writeNetEvent(Region* region, NetEvent* event, CharConv* cv);
-	
+
 	/**
 	 * \fn bool processNetEvent(Region* region,CharConv* cv)
 	 * \brief Liest ein NetEvent aus dem Bitstream und fuehrt es aus
@@ -248,14 +245,14 @@ public:
 	 * \param rid ID der Region
 	 */
 	Region* getRegion(int rid);
-	
+
 	/**
 	 * \fn int getRegion(std::string name)
 	 * \brief Gibt die ID Region mit dem angegebenen Name aus
 	 * \param name Name der Region
 	 */
 	int getRegionId(std::string name);
-	
+
 	/**
 	 * \fn 	Region* getRegion(std::string name)
 	 * \brief Gibt die Region aus
@@ -306,7 +303,7 @@ public:
 	 * \param wo Objekt
 	 */
 	Fraction::Relation getRelation(Fraction::Id frac, WorldObject* wo);
-	
+
 	/**
 	 * \fn Fraction::Relation getRelation(Fraction::Id frac, Fraction::Id frac2)
 	 * \brief Gibt die Beziehung zwischen zwei Fraktionen aus
@@ -314,7 +311,7 @@ public:
 	 * \param frac2 zweite Fraktion
 	 */
 	Fraction::Relation getRelation(Fraction::Id frac, Fraction::Id frac2);
-	
+
 	/**
 	 * \fn Fraction::Relation getRelation(Fraction::Type fractionname1, Fraction::Type fractionname2)
 	 * \brief Gibt die Beziehung zwischen zwei Fraktionen aus
@@ -322,7 +319,7 @@ public:
 	 * \param fractionname2 Name von Fraktion 2
 	 */
 	Fraction::Relation getRelation(Fraction::Type fractionname1, Fraction::Type fractionname2);
-	
+
 	/**
 	 * \fn void setRelation(Fraction::Id frac, Fraction::Id frac2, Fraction::Relation relation)
 	 * \brief Setzt das Verhaeltnis zwischen zwei Fraktionen
@@ -331,7 +328,7 @@ public:
 	 * \param relation Verhaeltnis zwischen den zwei Fraktionen
 	 */
 	void setRelation(Fraction::Id frac, Fraction::Id frac2, Fraction::Relation relation);
-	
+
 	/**
 	 * \fn void setRelation(Fraction::Type fractionname1, Fraction::Type fractionname2, Fraction::Relation relation)
 	 * \brief Setzt das Verhaeltnis zwischen zwei Fraktionen
@@ -349,7 +346,7 @@ public:
 	 * \param slot Slot ueber den das Savegame empfangen wurde. Wenn das Savegame nicht ueber das Netzwerk uebertragen wurde -1
 	 */
 	void handleSavegame(CharConv *cv , int slot=LOCAL_SLOT);
-	
+
 	/**
 	 * \fn void handleCommand(ClientCommand* cmd, int slot=LOCAL_SLOT, float delay=0)
 	 * \brief Behandelt ein erhaltenes Kommmando
@@ -358,7 +355,7 @@ public:
 	 * \param delay Millisekunden die das Kommando verspaetet erhalten wurde
 	 */
 	void handleCommand(ClientCommand* cmd, int slot=LOCAL_SLOT, float delay=0);
-	
+
 	/**
 	 * \fn void handleMessage(std::string msg, int slot=LOCAL_SLOT)
 	 * \brief Behandelt eine empfangene Nachricht
@@ -366,7 +363,7 @@ public:
 	 * \param slot uebern den die Nachricht empfangen wurde
 	 */
 	void handleMessage(std::string msg, int slot=LOCAL_SLOT);
-	
+
 	/**
 	 * \fn void handleDataRequest(ClientDataRequest* request, int slot  = LOCAL_SLOT)
 	 * \brief Behandelt eine Anfrage nach Daten vom Client
@@ -380,14 +377,14 @@ public:
 	 * \brief Fuegt ein neues NetEvent in die NetEventliste ein
 	 */
 	void insertNetEvent(NetEvent &event);
-	
+
 	/**
 	 * \fn WorldObject* getPlayer(int id)
 	 * \brief Gibt Spieler mit der angegebenen ID aus
 	 * \param id ID
 	 */
 	WorldObject* getPlayer(int id);
-	
+
 	/**
 	 * \fn WorldObjectMap* getPlayers()
 	 * \brief Gibt die Liste aller Spieler aus
@@ -396,14 +393,14 @@ public:
 	{
 		return m_players;
 	}
-	
+
 	/**
 	 * \fn Fraction* getFraction(Fraction::Id id)
 	 * \brief Gibt die Fraktion mit der angegebenen ID aus
 	 * \param id ID
 	 */
 	Fraction* getFraction(Fraction::Id id);
-	
+
 	/**
 	 * \fn Fraction* getFraction(Fraction::Type fractionname)
 	 * \brief Gibt Fraktion mit dem angegebenen Name aus
@@ -413,14 +410,14 @@ public:
 	{
 		return getFraction(getFractionId(fractionname));
 	}
-	
+
 	/**
 	 * \fn Fraction::Id getFractionId(Fraction::Type fractionname)
 	 * \brief Gibt die ID der Fraktion mit dem angegebenen Name aus
 	 * \param fractionname Name einer Fraktion
 	 */
 	Fraction::Id getFractionId(Fraction::Type fractionname);
-	
+
 	/**
 	 * \fn void createFraction(Fraction::Type name)
 	 * \brief Erzeugt eine neue Fraktion
@@ -429,7 +426,7 @@ public:
 	 * \param id Id der Fraktion. Falls -1 angegeben wird, wird automatisch eine ID berechnet
 	 */
 	void createFraction(Fraction::Type name);
-	
+
 	/**
 	 * \fn bool isServer()
 	 * \brief gibt true aus, wenn die Welt der Server ist
@@ -438,7 +435,7 @@ public:
 	{
 		return m_server;
 	}
-	
+
 	/**
 	 * \fn bool isCooperative()
 	 * \brief Gibt aus ob die Welt im Modus kooperativ (alle Spieler sind verbuendet) ist
@@ -447,7 +444,7 @@ public:
 	{
 		return m_cooperative;
 	}
-	
+
 	/**
 	 * \fn bool timerLimit(int i)
 	 * \param i Nummer des Timers
@@ -457,7 +454,7 @@ public:
 	{
 		return m_timer_limit[i];
 	}
-	
+
 	/**
 	 * \fn void registerRegionData(RegionData* data, int id)
 	 * \brief Registriert Daten fuer den Aufbau einer Region
@@ -469,7 +466,7 @@ public:
 		m_region_data.insert(std::make_pair(id,data));
 		m_region_name_id.insert(std::make_pair(data->m_name,id));
 	}
-	
+
 	/**
 	 * \fn void addEvent(RegionName rname, TriggerType type, Event* event)
 	 * \brief Fuegt ein neues Event hinzu
@@ -478,7 +475,7 @@ public:
 	 * \param event Event
 	 */
 	void addEvent(RegionName rname, TriggerType trigger, Event* event);
-	
+
 	/**
 	 * \fn void addQuest(std::string questname, Quest* quest)
 	 * \brief Fuegt Quest hinzu
@@ -489,7 +486,7 @@ public:
 	{
 		m_quests.insert(std::make_pair(questname,quest));
 	}
-	
+
 	/**
 	 * \fn void addWaypoint(short id, WaypointInfo& data)
 	 * \brief Fuegt einen weiteren Wegpunkt hinzu
@@ -498,7 +495,7 @@ public:
 	{
 		m_waypoint_data.insert(std::make_pair(id,data));
 	}
-	
+
 	/**
 	 * \fn std::map<std::string, Quest*>& getQuests()
 	 * \brief Gibt die Liste der Quests aus
@@ -507,7 +504,7 @@ public:
 	{
 		return m_quests;
 	}
-	
+
 	/**
 	 * \fn RegionLocation& getPlayerStartLocation()
 	 * \brief Gibt Ort aus, an dem neu erzeugte Charaktere platziert werden
@@ -516,7 +513,7 @@ public:
 	{
 		return m_player_start_location;
 	}
-	
+
 	/**
 	 * \fn std::map<short,WaypointInfo>& getWaypointData()
 	 * \brief Gibt die Liste aller Wegpunkte aus
@@ -525,7 +522,7 @@ public:
 	{
 		return m_waypoint_data;
 	}
-	
+
 	/**
 	 * \fn static World* getWorld()
 	 * \brief Gibt den Zeiger auf das World Singleton Objekt zurueck
@@ -534,7 +531,7 @@ public:
 	{
 		return m_world;
 	}
-	
+
 	/**
 	 * \fn static int getVersion()
 	 * \brief Gibt die Version aus
@@ -543,7 +540,7 @@ public:
 	{
 		return m_version;
 	}
-	
+
 	/**
 	 * \fn static void createWorld(bool server, int port,  bool cooperative, int max_players)
 	 * \brief Erzeugt die Spielwelt
@@ -553,14 +550,14 @@ public:
 	 *  \param max_players Maximale Spieleranzahl
 	 */
 	static void createWorld(bool server, int port, bool cooperative, int max_players);
-	
-	
+
+
 	/**
 	 * \fn static void deleteWorld()
 	 * \brief entfernt die Spielwelt
 	 */
 	static void deleteWorld();
-			
+
 
 //Private stuff
 private:
@@ -571,31 +568,31 @@ private:
 	 * \brief true, wenn der Rechner der Server ist
 	 */
 	bool m_server;
-	
+
 	/**
 	 * \var bool m_cooperative
 	 * \brief wenn auf true gesetzt, sind alle Spieler automatisch verbuendet. Nur im kooperative Modus koennen Aufgaben erledigt werden.
 	 */
 	bool m_cooperative;
-	
+
 	/**
 	 * \var std::map<int, Region*> m_regions
 	 * \brief Speichert die Spielwelt in Form von Regionen. Eine Region ist ein rechteckiger Ausschnitt der Spielwelt
 	 */
 	std::map<int, Region*> m_regions;
-	
+
 	/**
 	 * \var std::map<std::string, int> m_region_name_id
 	 * \brief Bildet den Name einer Region auf die ID ab
 	 */
 	std::map<std::string, int> m_region_name_id;
-	
+
 	/**
 	 * \var std::map<int, RegionData*> m_region_data
 	 * \brief Daten fuer die Erzeugung der Regionen sortiert nach ID
 	 */
 	std::map<int, RegionData*> m_region_data;
-	
+
 
 	/**
 	 * \var std::vector<Party> m_parties
@@ -608,31 +605,31 @@ private:
 	 * \brief Liste aller Fraktionen im Spiel
 	 */
 	std::map<Fraction::Id, Fraction*> m_fractions;
-	
+
 	/**
 	 * \var m_player_slots
 	 * \brief Liste der Spieler in der Welt mit ihren Slots
 	 */
 	WorldObjectMap* m_player_slots;
-	
+
 	/**
 	 * \var WorldObjectMap* m_players
 	 * \brief Liste der Spieler in der Welt sortiert nach ID
 	 */
 	WorldObjectMap* m_players;
-	
+
 	/**
 	 * \var std::map<std::string, Quest*> m_quests
 	 * \brief Liste der Quests
 	 */
 	std::map<std::string, Quest*> m_quests;
-	
+
 	/**
 	 * \var std::map<short,WaypointInfo> m_waypoint_data
 	 * \brief Daten zu Wegpunkten
 	 */
 	std::map<short,WaypointInfo> m_waypoint_data;
-	
+
 
 	/**
 	 * \var int m_max_nr_players
@@ -645,55 +642,55 @@ private:
 	 * \brief Netzwerkanbindung
 	 */
 	Network* m_network;
-	
+
 	/**
 	 * \var WorldObject* m_local_player
 	 * \brief lokaler Spieler
 	 */
 	WorldObject* m_local_player;
-	
+
 	/**
 	 * \var LoginList m_logins
 	 * \brief Liste der Spieler die sich gerade einloggen wollen
 	 */
 	LoginList m_logins;
-	
+
 	/**
 	 * \var NetEventList m_events
 	 * \brief Liste der globalen NetEvents beim aktuellen update
 	 */
 	NetEventList* m_events;
-	
+
 	/**
 	 * \var float m_timer[6]
 	 * \brief Timer a 250, 500 und 1000 ms
 	 */
 	float m_timer[6];
-	
+
 	/**
 	 * \var  bool m_timer_limit[6]
 	 * \brief ist true, wenn der betreffende Timer gerade in dem Tick abgelaufen ist
 	 */
 	bool m_timer_limit[6];
-	
+
 	/**
 	 * \fn std::map<int,LocationName> m_region_enter_loc
 	 * \brief Wenn ein Spieler nicht sofort in eine Region eingefuegt werden kann, wird hier der Ort zu einfuegen zwischengespeichert
 	 */
 	std::map<int,LocationName> m_region_enter_loc;
-	
+
 	/**
 	 * \var RegionLocation m_player_start_location
 	 * \brief Gibt den Ort an, an dem neu erzeugte Charaktere starten
 	 */
 	RegionLocation m_player_start_location;
-	
+
 	/**
 	 * \var  static World* m_world
 	 * \brief Objekt fuer die Spielwelt
 	 */
 	static World* m_world;
-	
+
 	/**
 	 * \var static int m_version
 	 * \brief Versionsnummer

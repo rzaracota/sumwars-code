@@ -1,7 +1,4 @@
 /*
-	Ein kleines Rollenspiel
-	Copyright (C) 2007 Hans Wulf
-
 	This program is free software; you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
 	the Free Software Foundation; either version 2 of the License, or
@@ -17,16 +14,6 @@
 	51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
 
-/**
- * \file action.h
- * \defgroup action \ Aktionen
- * \ingroup command
- * \brief Stellt einzelne Aktionen zur Realisierung eines Kommandos zur Verf&uuml;gung
- * \author Hans Wulf
- * \version 1.0
- * \date 2007/05/28
- * \note Beinhaltet die Klasse Action
- */
 #ifndef ACTION_H
 #define ACTION_H
 
@@ -55,9 +42,9 @@ public:
 	 * \enum ActionType
 	 * \brief Aufzaehlung verschiedener Aktionen
 	 */
-	
+
 	typedef  std::string ActionType;
-	
+
 	/**
 	 * \enum TargetType
 	 * \brief Aufzaehlung verschiedener Zieltypen fuer Aktionen
@@ -148,32 +135,32 @@ public:
 		 * \brief Wirkungsradius der Aktion. Genaue Verwendung des Wertes haengt von der Implementation der Aktion ab
 		 */
 		float m_radius;
-		
-		
+
+
 		/**
 		 * \var std::string m_projectile_type
 		 * \brief Typ eines erzeugten Geschosses
 		 */
 		std::string m_projectile_type;
-		
+
 		/**
 		 * \var float m_projectile_speed
 		 * \brief Geschwindigkeit des Geschosses
 		 */
 		float m_projectile_speed;
-		
+
 		/**
 		 * \var char m_projectile_flags
 		 * \brief Flags des Geschosses
 		 */
 		char m_projectile_flags;
-		
+
 		/**
 		 * \var int m_projectile_counter
 		 * \brief Zaehler fuer das Geschoss. Genaue Verwendung haengt vom Geschosstyp ab
 		 */
 		int m_projectile_counter;
-		
+
 		/**
 		 * \var float m_projectile_radius
 		 * \brief Radius eines Geschosses
@@ -185,19 +172,19 @@ public:
 		 * \brief Effekt der Aktion
 		 */
 		HybridImplementation m_effect;
-		
+
 		/**
 		 * \var HybridImplementation m_damage
 		 * \brief Schaden der Aktion
 		 */
 		HybridImplementation m_damage;
-		
+
 		/**
 		 * \var HybridImplementation m_base_mod
 		 * \brief BasisModifikation der Aktion
 		 */
 		HybridImplementation m_base_mod;
-		
+
 		/**
 		 * \var HybridImplementation m_dyn_mod
 		 * \brief Modifikation dynamischer Attribute durch die Aktion
@@ -247,7 +234,7 @@ public:
 	 * \brief initialisiert die statischen Variablen
 	 */
 	static void init();
-	
+
 	/**
 	 * \fn static void cleanup()
 	 * \brief loescht alle Daten
@@ -266,7 +253,7 @@ public:
 		it = m_action_info.find(type);
 		if (it != m_action_info.end())
 			return &(it->second);
-		
+
 		return 0;
 	}
 
@@ -277,7 +264,7 @@ public:
 	 * \return Name der Aktion
 	 */
 	static std::string getName(ActionType type);
-	
+
 	/**
 	 * \fn static std::string getDescription(ActionType type)
 	 * \brief Gibt zu einer Aktion die Beschreibung aus
@@ -285,21 +272,21 @@ public:
 	 * \return Beschreibung der Aktion
 	 */
 	static std::string getDescription(ActionType type);
-	
+
 	/**
 	 * \fn static ActionType getType(std::string name)
 	 * \brief Gibt zu einem Name einer Aktion den enum Wert aus
 	 * \param name Name der Aktion
 	 */
 	static ActionType getActionType(std::string name);
-	
+
 	/**
 	 * \fn void toString(CharConv* cv)
 	 * \brief Konvertiert das Objekt in einen String und schreibt ihn in der Puffer
 	 * \param cvAusgabepuffer
 	 */
 	void toString(CharConv* cv);
-	
+
 
 	/**
 	 * \fn void fromString(CharConv* cv)
@@ -307,28 +294,28 @@ public:
 	 * \param cv Eingabepuffer
 	 */
 	void fromString(CharConv* cv);
-	
+
 	/**
 	 * \fn static void loadAbilities(TiXmlNode* node)
 	 * \brief Laedt die Faehigkeiten aus dem angegebenen XML Dokument
 	 * \param node XML Dokument
 	 */
 	static void loadAbilities(TiXmlNode* node);
-	
+
 	/**
 	 * \fn 	static void loadAbility(TiXmlNode* node)
 	 * \brief Laedt eine Faehigkeit aus dem angegebenen XML Knoten
 	 * \param node XML Knoten
 	 */
 	static void loadAbility(TiXmlNode* node);
-	
+
 	/**
 	 * \fn loadAbilityData(const char* pFilename);
 	 * \brief Liest die Daten zu einer Faehigkeit aus einer XML Datei
 	 * \param pFilename Name der XML Datei
 	 */
 	static bool loadAbilityData(const char* pFilename);
-	
+
 	/**
 	 * \fn static bool loadHybridImplementation(TiXmlNode* node, HybridImplementation& impl)
 	 * \brief laedt Daten fuer eine hybride Implementation
@@ -336,7 +323,7 @@ public:
 	 * \param impl Struktur in die die Daten geladen werden
 	 */
 	static bool loadHybridImplementation(TiXmlNode* node, HybridImplementation& impl);
-	
+
 	static void toxml();
 
 	//Fields
@@ -357,20 +344,20 @@ public:
 	 * \brief Gesamtdauer der Aktion
 	 */
 	float m_time;
-	
+
 	/**
 	 * \var ActionEquip m_action_equip
 	 * \brief Ausruestung mit der die Aktion ausgefuehrt wird
 	 */
 	ActionEquip m_action_equip;
 
-	
+
 	/**
 	 * \var Vector m_goal
 	 * \brief Ziel der Aktion
 	 */
 	Vector m_goal;
-	
+
 	/**
 	 * \var m_goal_object_id;
 	 * \brief ID des Zielobjekts

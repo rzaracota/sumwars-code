@@ -1,7 +1,4 @@
 /*
-	Summoning Wars
-	Copyright (C) 2007 Hans Wulf
-
 	This program is free software; you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
 	the Free Software Foundation; either version 2 of the License, or
@@ -16,15 +13,6 @@
 	with this program; if not, write to the Free Software Foundation, Inc.,
 	51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
-/**
- * \file itemlist.h
- * \defgroup itemlist \ Gegenstandsliste
- * \brief Verwaltet listenartig Gegenst&auml;nde
- * \author Hans Wulf
- * \version 1.0
- * \date 2007/05/28
- * \note Beinhaltet die Klasse ItemList
- */
 
 #ifndef ITEMLIST_H
 #define ITEMLIST_H
@@ -243,7 +231,7 @@ class Equipement
 	 * \brief Konstruktor
 	 * \param max_small maximale Anzahl kleiner Items
 	 * \param max_medium maximale Anzahl mittlegrosser Items
-	 * \param max_big maximale Anzahl grosser Items	
+	 * \param max_big maximale Anzahl grosser Items
 	 */
 	Equipement(short max_small, short max_medium, short max_big);
 
@@ -270,7 +258,7 @@ class Equipement
 	 * \return Gibt an, wo das item eingefuegt wurde
 	 */
 	short insertItem(Item* item, bool check_useup=true, bool use_equip= false, bool use_secondary=false);
-	
+
 	/**
 	 * \fn short findItem(Item::Subtype subtype, short startpos = 0)
 	 * \param subtype Itemtyp
@@ -278,7 +266,7 @@ class Equipement
 	 * \brief Gibt die erste Position aus, auf der sich ein Item mit dem angegebenen Typ befindet. Gibt 0 aus, wenn keine Position gefunden wurde
 	 */
 	short findItem(Item::Subtype subtype, short startpos = 0);
-	
+
 	/**
 	 * \fn short stringToPosition(std::string posstr, bool secondary = false)
 	 * \brief Konvertiert Positionsstring in eine position
@@ -286,7 +274,7 @@ class Equipement
 	 * \param secondary Wenn auf true gesetzt, wird die sekundaere Ausruestung ausgegeben
 	 */
 	static short stringToPosition(std::string posstr, bool secondary = false);
-	
+
 	/**
 	 * \fn bool swapCursorItem(int pos)
 	 * \param pos Position des Items
@@ -302,19 +290,19 @@ class Equipement
 	 */
 	bool swapItem(Item* &item, int pos);
 
-	
+
 	/**
 	 * \fn int getNumberItems()
 	 * \brief Gibt aus die Anzahl der Gegenstaende in der Ausruestung zurueck
 	 */
 	int getNumberItems();
-	
+
 	/**
 	 * \fn int getNumberItems(Item::Size size)
 	 * \brief Gibt die Nummer des letzten belegten Platzes einer bestimmten Groesse aus
 	 */
 	int getMaxItemNumber(Item::Size size);
-	
+
 	/**
 	 * \fn virtual void toString(CharConv* cv)
 	 * \brief Konvertiert das Objekt in einen String und schreibt ihn in der Puffer
@@ -329,7 +317,7 @@ class Equipement
 	 * \param cv Eingabepuffer
 	 */
 	virtual void fromString(CharConv* cv);
-	
+
 	/**
 	 * \fn virtual void toStringComplete(CharConv* cv)
 	 * \brief Konvertiert das Objekt in einen String und schreibt ihn in der Puffer
@@ -350,7 +338,7 @@ class Equipement
 	 * \brief Loescht alle enthaltenen Item
 	 */
 	void clear();
-	
+
 	/**
 	 * \fn int getGold()
 	 * \brief Gibt die Menge Gold aus
@@ -359,7 +347,7 @@ class Equipement
 	{
 		return m_gold;
 	}
-	
+
 	/**
 	 * \fn void setGold(int gold)
 	 * \brief Setzt die Menge Gold
@@ -371,7 +359,7 @@ class Equipement
 	}
 
 	private:
-	
+
 	/**
 	 * \var Item* m_body_items[12]
 	 * \brief am Koeper getragene Gegenstaende
