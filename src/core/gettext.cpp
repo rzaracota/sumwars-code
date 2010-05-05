@@ -44,7 +44,7 @@ void Gettext::setLocale(const char* loc)
         locale = "";
     }
 
-    DEBUG("set new language %s",locale.c_str());
+    DEBUGX("set new language %s",locale.c_str());
 
 	if (locale != m_locale)
 	{
@@ -59,8 +59,8 @@ void Gettext::setLocale(const char* loc)
 
                 char lang[50];
                 GetEnvironmentVariable("LANGUAGE",lang,50);
-                DEBUG("current language (GetEnvironmentVariable) %s",lang);
-                DEBUG("current language (getenv) %s",getenv("LANGUAGE"));
+                DEBUGX("current language (GetEnvironmentVariable) %s",lang);
+                DEBUGX("current language (getenv) %s",getenv("LANGUAGE"));
 
                m_locale = locale;
                m_changed = true;
