@@ -101,7 +101,7 @@ class Application
 		 * \brief Initialisiert CEGUI
 		 */
 		bool initCEGUI();
-		
+
 		/**
 		 * \brief initialisiert OpenAL
 		 */
@@ -118,7 +118,7 @@ class Application
 		 * \brief Erzeugt das Document
 		 */
 		bool createDocument();
-		
+
 		/**
 		 * \fn bool loadResources()
 		 * \brief liest die Ressourcen
@@ -130,7 +130,7 @@ class Application
 		 * \brief Aktualisierungen
 		 */
 		virtual void update();
-		
+
 		/**
 		 * \fn void updateStartScreen(float percent)
 		 * \brief aktualisiert den Startbildschirm
@@ -169,7 +169,7 @@ class Application
 		 */
  		Ogre::SceneManager *m_scene_manager;
 
-		
+
 		/**
 		 * \var bool m_shutdown
 		 * \brief true, wenn die Anwendung beendet werden soll
@@ -189,7 +189,7 @@ class Application
 		 * \brief Hauptfenster der Applikation
 		 */
 		MainWindow* m_main_window;
-		
+
 		/**
 		 * \var Timer m_timer
 		 * \brief Timer fuer verschiedene Verwendungszwecke

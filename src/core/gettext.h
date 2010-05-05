@@ -9,6 +9,7 @@
 
 
 #include <locale.h>
+#include <string>
 
 /**
  * \class Gettext
@@ -23,33 +24,33 @@ class Gettext
 		 * \param locale Sprache
 		 */
 		static void init(const char* locale);
-		
+
 		/**
 		 * \fn static const char* getLocale()
 		 * \brief Gibt die aktuelle Sprache aus
 		 */
 		static const char* getLocale();
-		
+
 		/**
 		 * \fn static void setLocale(const char* locale)
 		 * \brief Setzt die aktuelle Sprache
 		 * \param locale Sprache
 		 */
 		static void setLocale(const char* locale);
-		
+
 		/**
 		 * \fn static bool getLocaleChanged()
 		 * \brief Gibt aus, ob die Sprache geaendert wurde. Das Bit wird dabei automatisch auf false zurueckgesetzt
 		 */
 		static bool getLocaleChanged();
-		
+
 	private:
 		/**
-		 * \var static char* m_locale
+		 * \var std::string m_locale
 		 * \brief aktuelle Sprache
 		 */
-		static char* m_locale;
-		
+		static std::string m_locale;
+
 		/**
 		 * \var static bool m_changed
 		 * \brief Auf true gesetzt, wenn die Sprache gerade geaendert wurde (bis zum ersten Aufruf von getLocalChanged)

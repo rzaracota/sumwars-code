@@ -175,8 +175,6 @@
 		<Unit filename="core\treasurebase.h" />
 		<Unit filename="core\unionfindtree.cpp" />
 		<Unit filename="core\unionfindtree.h" />
-		<Unit filename="core\variable.cpp" />
-		<Unit filename="core\variable.h" />
 		<Unit filename="core\waypoint.cpp" />
 		<Unit filename="core\waypoint.h" />
 		<Unit filename="core\world.cpp" />
