@@ -1,0 +1,24 @@
+Following libraries are required to build Summoning Wars:
+OGRE >= 1.4
+OIS
+CEGUI >= 0.5
+RakNet 2.x
+freealut, openal
+lua5.1
+ogg, vorbis, vorbisfile
+
+If you are lucky, all libs except Raknet may be installed via package manager (apt-get, yum, emerge, pacman, ...).
+Raknet is offered here:
+http://www.sumwars.org/data/Raknet2_0.tar.gz
+
+Do not use the current Raknet version (3.x) as it is not available under GPL.
+
+After installing the dependencies run these commands and cross your fingers:
+./configure
+make
+
+If you are using OGRE >= 1.6 particle scripts need to be changed slightly. To do this run the script placed in resources/particle/ :
+./resources/particle/create_ogre_1_6_particles
+
+Currently, there is no make install, so you have to start the game in the directory where you compiled it.
+Please visit our Website www.sumwars.org to give some feedback or report bugs.
