@@ -19,20 +19,20 @@ msgstr ""
 
 #: ../data/npc/dwarfcastle.xml:117
 msgid "Ganz schoen viele Kisten..."
-msgstr ""
+msgstr "Quite a lot of boxes..."
 
 #: ../data/npc/dwarfcastle.xml:118
 msgid "Das Chaos hat mir mein Vorgaenger ueberlassen."
-msgstr ""
+msgstr "My  predecessor left me with that chaos."
 
 #: ../data/npc/dwarfcastle.xml:119
 msgid "Sind alles alte Armeebestaende."
-msgstr ""
+msgstr "These are all old army supplies."
 
 #: ../data/npc/dwarfcastle.xml:120
 msgid ""
 "Wenn Euch was davon gefaellt zeigt drauf und ich nenne Euch einen Preis."
-msgstr ""
+msgstr "If you like something just point it out and I tell you a price."
 
 #: ../data/npc/joringsbridge_npc.xml:121
 msgid "Ah, euch ist mein Fundbuero aufgefallen?"
@@ -496,7 +496,7 @@ msgstr "Forever. "
 
 #: ../data/quests/fortify_dwarfenwall.xml:389
 msgid "Wenn nicht, jedoch..."
-msgstr ""
+msgstr "If not, however"
 
 #: ../data/quests/fortify_dwarfenwall.xml:391
 msgid "Hab ich schon tausend Mal gehoert. Spar dir die Rede."
@@ -1242,162 +1242,162 @@ msgstr ""
 
 #: ../data/quests/herbalist.xml:9
 msgid "Und wieder eine gute Tat mehr. Ich koennte mich fast daran gewoehnen."
-msgstr ""
+msgstr "And another good deed done. I could get used to this."
 
 #: ../data/quests/herbalist.xml:11
 msgid ""
 "Die Kraeuterfrau aus Joringsbrueck will die Beeren von 10 Bueschen haben. Es "
 "muessen noch "
-msgstr ""
+msgstr "The herbalist of Joringsbridge wants to have the berries of 10 bushes."
 
 #: ../data/quests/herbalist.xml:86
 msgid "Hier, alte Frau. Eure Kraeuter."
-msgstr ""
+msgstr "Here, old women. Your berries."
 
 #: ../data/quests/herbalist.xml:87
 msgid "Ah, gut gemacht, Jungvolk."
-msgstr ""
+msgstr "Ah, well done, joung one."
 
 #: ../data/quests/herbalist.xml:88
 msgid "Hier, lass dir als Gegenleistung etwas geben."
-msgstr ""
+msgstr "Here, let me give you something in return."
 
 #: ../data/quests/herbalist.xml:91
 msgid ""
 "Ich brauche mehr Beeren, damit ich damit etwas sinnvolles anfangen kann."
-msgstr ""
+msgstr "I need more berries, if I am to do something useful with them."
 
 #: ../data/quests/herbalist.xml:94
 msgid "Wollt ihr doch noch Beeren sammeln?"
-msgstr ""
+msgstr "Do you want to collect some berries after all?"
 
 #: ../data/quests/herbalist.xml:95 ../data/quests/herbalist.xml:121
 msgid "Quest annehmen?"
-msgstr ""
+msgstr "Accept Quest?"
 
 #: ../data/quests/herbalist.xml:100
 msgid "He da, Jungvolk!"
-msgstr ""
+msgstr "Hey there, joung one!"
 
 #: ../data/quests/herbalist.xml:101
 msgid "Ich sehe, dass ihr in die Noerdlichen Wiesen wollt."
-msgstr ""
+msgstr "I see you are going into the Northern Meadow."
 
 #: ../data/quests/herbalist.xml:102
 msgid "Das Stimmt."
-msgstr ""
+msgstr "That's right."
 
 #: ../data/quests/herbalist.xml:104
 msgid "Kunststueck."
-msgstr ""
+msgstr "Quit a trick."
 
 #: ../data/quests/herbalist.xml:105
 msgid "Immerhin wollten wir nur gerade durch das Tor."
-msgstr ""
+msgstr "We were only walking through the gate."
 
 #: ../data/quests/herbalist.xml:106
 msgid "Frieden."
-msgstr ""
+msgstr "Peace."
 
 #: ../data/quests/herbalist.xml:108
 msgid ""
 "Wenn ihr sowieso da umher stiefelt und tut was ihr so eben tut, koenntet ihr "
 "mir nicht gleich noch ein paar Beeren sammeln?"
-msgstr ""
+msgstr "If you are roaming around there anyway, why don't you collect some berries for me?"
 
 #: ../data/quests/herbalist.xml:109
 msgid ""
 "Mit den ganzen Goblins kann sich eine alte Frau wie ich ja nicht mal mehr "
 "vor die Tuer wagen."
-msgstr ""
+msgstr "With all those goblins about an old woman can't even set a foot out of the village."
 
 #: ../data/quests/herbalist.xml:111
 msgid "Pflanzen sind nicht unbedingt meine Spezialitaet..."
-msgstr ""
+msgstr "Plants are not really my forte..."
 
 #: ../data/quests/herbalist.xml:112
 msgid "Ach papperlapapp!"
-msgstr ""
+msgstr "Fiddlesticks!"
 
 #: ../data/quests/herbalist.xml:114
 msgid "Ich will ja nicht, dass ihr was exotisches sammelt."
-msgstr ""
+msgstr "It's not like I want you to collect something exotic, you know."
 
 #: ../data/quests/herbalist.xml:115
 msgid "Nur Rilfbeeren."
-msgstr ""
+msgstr "Just rilfberries."
 
 #: ../data/quests/herbalist.xml:116
 msgid "Das sind große Buesche mit auffaelligen roten Fruechten."
-msgstr ""
+msgstr "Look for big bushes with fancy red fruits."
 
 #: ../data/quests/herbalist.xml:117
 msgid "Die findet ihr bestimmt."
-msgstr ""
+msgstr "You will find them for sure."
 
 #: ../data/quests/herbalist.xml:118
 msgid ""
 "Damit es sich lohnt muesstet ihr mir die Beeren von wenigstens zehn Bueschen "
 "bringen."
-msgstr ""
+msgstr "I need the berries of at least ten bushes."
 
 #: ../data/quests/herbalist.xml:119
 msgid "Aber nur die roten Beeren."
-msgstr ""
+msgstr "But only the red berries."
 
 #: ../data/quests/herbalist.xml:120
 msgid "Der Rest ist voellig uninteressant."
-msgstr ""
+msgstr "The rest is of no use at all."
 
 #: ../data/quests/herbalist.xml:131
 msgid "Na schoen, wenn ich welche finde, bringe ich es mit."
-msgstr ""
+msgstr "Very well, if I find some, I'll bring them."
 
 #: ../data/quests/herbalist.xml:133 ../data/quests/herbalist.xml:157
 msgid "Na schoen, wenn wir welche finden, bringen wir sie mit."
-msgstr ""
+msgstr "Very well, if we find some, we'll bring them."
 
 #: ../data/quests/herbalist.xml:135 ../data/quests/herbalist.xml:159
 msgid "Danke  Herzchen."
-msgstr ""
+msgstr "Thanks, sweety."
 
 #: ../data/quests/herbalist.xml:144
 msgid "Vergiss es, Kraeuterhexe."
-msgstr ""
+msgstr "Forget it, herb woman."
 
 #: ../data/quests/herbalist.xml:145
 msgid ""
 "Ich werde bestimmt nicht durch die Wiesen kriechen und nach irgendwelchen "
 "Bueschen suchen."
-msgstr ""
+msgstr "I'm not going to crawl through the meadows just to search for some stupid bushes."
 
 #: ../data/quests/herbalist.xml:146
 msgid "Wie du meinst."
-msgstr ""
+msgstr "Have it your way."
 
 #: ../data/quests/herbalist.xml:147
 msgid ""
 "Aber wenn du es dir noch mal anders ueberlegst, ich werde hier nicht "
 "weglaufen."
-msgstr ""
+msgstr "But if you change your mind, I'm not running away from here."
 
 #: ../data/quests/herbalist.xml:155
 msgid "Na schoen, wenn ich welche finde, bringe ich sie mit."
-msgstr ""
+msgstr "Very well, if I find some, I'll bring them along."
 
 #: ../data/quests/herbalist.xml:167
 msgid "Nein, immer noch nicht."
-msgstr ""
+msgstr "Still no."
 
 #: ../data/quests/herbalist.xml:168
 msgid ""
 "Sag Bescheid, wenn du nicht mehr zu maechtig fuer einfache Arbeiten bist, "
 "Herzchen."
-msgstr ""
+msgstr "Tell me when you're not too mighty for simple work anymore, sweety."
 
 #: ../data/quests/herbalist.xml:169
 msgid "Huetet Eure Zunge, Weib!"
-msgstr ""
+msgstr "Watch your tongue, hag!"
 
 #: ../data/quests/herbalist.xml:225
 msgid "Collect "
@@ -1405,101 +1405,101 @@ msgstr ""
 
 #: ../data/quests/joringsbridge.xml:104
 msgid "Ich flehe Euch an, mein Prinz!"
-msgstr ""
+msgstr "I'm begging you, my prince!"
 
 #: ../data/quests/joringsbridge.xml:105
 msgid "Lasst wenigstens eine Hand voll Soldaten hier."
-msgstr ""
+msgstr "Leave at least a handful of soldiers here."
 
 #: ../data/quests/joringsbridge.xml:107
 msgid ""
 "Ich kann jetzt kaum das Dorf selbst beschützen, geschweige denn die "
 "umliegenden Gehöfte!"
-msgstr ""
+msgstr "I can barly guard the village, not to say the surrounding farms!"
 
 #: ../data/quests/joringsbridge.xml:110
 #: ../data/quests/siegeOfDwarfenwall.xml:1102
 msgid "Schweigt!"
-msgstr ""
+msgstr "Silence!"
 
 #: ../data/quests/joringsbridge.xml:112
 msgid "Die Sicherheit des Landes hat absoluten Vorrang."
-msgstr ""
+msgstr "The safety of the country has absolute priority."
 
 #: ../data/quests/joringsbridge.xml:113
 msgid ""
 "Ihr werdet doch wohl mit einer Hand voll niederer Goblins fertig werden."
-msgstr ""
+msgstr "Surely you can handle a hand full of lousy goblins."
 
 #: ../data/quests/joringsbridge.xml:114
 msgid "Außerdem habt Ihr sogar einen maechtigen Beschwoerer an Eurer Seite."
-msgstr ""
+msgstr "Not to mention you have a mighty summoner at your side."
 
 #: ../data/quests/joringsbridge.xml:115
 msgid "Das ist mehr als genug."
-msgstr ""
+msgstr "That's more than enough."
 
 #: ../data/quests/joringsbridge.xml:116
 msgid "Aber der werte Magus hat doch andere Aufgaben!"
-msgstr ""
+msgstr "But the honourable mage has other duties!"
 
 #: ../data/quests/joringsbridge.xml:117
 msgid "Sehr wohl!"
-msgstr ""
+msgstr "Quite so!"
 
 #: ../data/quests/joringsbridge.xml:118
 msgid ""
 "Das Verfolgen erbaermlicher Goblins ist weder meine Aufgabe, noch sehe ich "
 "grossen Sinn in solch absurdem Zeitvertreib!"
-msgstr ""
+msgstr "The pursuit of pathetic goblins is neither my duty nor do I see the point of such absurde amusement."
 
 #: ../data/quests/joringsbridge.xml:120
 msgid ""
 "Was tätet ihr wohl, wenn jemand das Dorf angriffe, waehrend ich auf einer "
 "fruchtlosen Jagd nach Goblins wäre?"
-msgstr ""
+msgstr "What would you do were the village to be attacked while I was on a fruitless hunt for goblins?"
 
 #: ../data/quests/joringsbridge.xml:121
 msgid "Und ihr habt wirklich keine Zeit, hier etwas auszuhelfen?"
-msgstr ""
+msgstr "And you really have no time to help out a bit?"
 
 #: ../data/quests/joringsbridge.xml:122
 msgid ""
 "Es tut mir aufrichtig Leid, aber das Konzil hat mir sehr wichtige Aufgaben "
 "uebertragen."
-msgstr ""
+msgstr "My humble apologies, but the council has given me very important tasks."
 
 #: ../data/quests/joringsbridge.xml:123
 msgid "So gerne ich auch helfen würde, ich habe keinen Spielraum."
-msgstr ""
+msgstr "As much as I'd like to help, I don't have any room for such a thing."
 
 #: ../data/quests/joringsbridge.xml:124
 msgid ""
 "Darf ich dennoch diese einmalige Gelegenheit nutzen, Euch zu eurer "
 "bevorstehenden Hochzeit mit der Erzmaga Ireana von"
-msgstr ""
+msgstr "But may I use this unique opportunity to congratulate you on your upcoming wedding with the archmaga Ireana of"
 
 #: ../data/quests/joringsbridge.xml:125
 msgid "Danke, das reicht."
-msgstr ""
+msgstr "Thanks, that is enough."
 
 #: ../data/quests/joringsbridge.xml:136
 msgid "Selbstzufriedener Schmarotzer, dieser Magus!"
-msgstr ""
+msgstr "Self-satisfied parasite, that mage!"
 
 #: ../data/quests/joringsbridge.xml:138
 msgid ""
 "Ich hoffe nur, das Koenigreich hat große Kornspeicher, wenn die Gruenhaeute "
 "hier alle Felder abfackeln."
-msgstr ""
+msgstr "I just hope the kingdom has big granaries, if the greenskins torch the fields."
 
 #: ../data/quests/joringsbridge.xml:139
 msgid "Allein die Anwesenheit des Magus wird jeden Goblin vertreiben!"
-msgstr ""
+msgstr "The presence of the mage alone will drive out every goblin!"
 
 #: ../data/quests/joringsbridge.xml:140
 msgid "Hoert endlich auf, den Prinzen mit eurer Inkompetenz zu belaestigen!"
-msgstr ""
+msgstr "Stop troubling the prince with your incompetence."
 
 #: ../data/quests/joringsbridge.xml:141
 msgid "!"
@@ -1507,308 +1507,308 @@ msgstr ""
 
 #: ../data/quests/joringsbridge.xml:142
 msgid "Habt ihr nichts besseres zu tun?"
-msgstr ""
+msgstr "Don't you have something better to do?"
 
 #: ../data/quests/joringsbridge.xml:144
 msgid "Und da sagt man, meine Art waere kaltherzig..."
-msgstr ""
+msgstr "And they say, my kind is cold-hearted..."
 
 #: ../data/quests/joringsbridge.xml:146
 msgid "Und da sagt man, unsereins waere kaltherzig..."
-msgstr ""
+msgstr "And they say, our kind is cold-hearted..."
 
 #: ../data/quests/joringsbridge.xml:169
 msgid "Wachen! Wachen!"
-msgstr ""
+msgstr "Guards! Guards!"
 
 #: ../data/quests/joringsbridge.xml:175
 msgid "Hilfe! Mein Hof wird von Goblins überfallen!"
-msgstr ""
+msgstr "Help! My farm is being raided by goblins!"
 
 #: ../data/quests/joringsbridge.xml:176
 msgid "Meine Familie..."
-msgstr ""
+msgstr "My family..."
 
 #: ../data/quests/joringsbridge.xml:185
 msgid "Schafft den Toelpel hier weg!"
-msgstr ""
+msgstr "Take the fool away!"
 
 #: ../data/quests/joringsbridge.xml:186
 msgid "Der Prinz hat wichtigeres zu tun."
-msgstr ""
+msgstr "The prince has more important matters to tend to."
 
 #: ../data/quests/joringsbridge.xml:189
 msgid "Wartet!"
-msgstr ""
+msgstr "Wait!"
 
 #: ../data/quests/joringsbridge.xml:190
 msgid "Was ist passiert?"
-msgstr ""
+msgstr "What happened?"
 
 #: ../data/quests/joringsbridge.xml:192
 msgid ""
 "Vergebt mir, mein Prinz, aber meine Frau und meine Kinder sind noch dort."
-msgstr ""
+msgstr "Forgive me, my prince, but my wife and my children are still there."
 
 #: ../data/quests/joringsbridge.xml:193
 msgid "Ich weiß nicht, wie lange das Haus noch standhalten wird."
-msgstr ""
+msgstr "I don't know, how long the house will withstand them."
 
 #: ../data/quests/joringsbridge.xml:194
 msgid "Ich flehe Euch an: Helft mir!"
-msgstr ""
+msgstr "I beg of you: help me!"
 
 #: ../data/quests/joringsbridge.xml:196
 msgid "Wir..."
-msgstr ""
+msgstr "We..."
 
 #: ../data/quests/joringsbridge.xml:197
 msgid "Mein Prinz!"
-msgstr ""
+msgstr "My prince!"
 
 #: ../data/quests/joringsbridge.xml:198
 msgid "Wir haben keine Zeit!"
-msgstr ""
+msgstr "We don't have time!"
 
 #: ../data/quests/joringsbridge.xml:199
 msgid "Die Daemonen stehen an der Nordgrenze!"
-msgstr ""
+msgstr "The demons are at the northern border!"
 
 #: ../data/quests/joringsbridge.xml:201
 msgid "Ich weiss!"
-msgstr ""
+msgstr "I know!"
 
 #: ../data/quests/joringsbridge.xml:204
 msgid "2000 Goldstuecke jedem, der diesem treuen Mann hilft!"
-msgstr ""
+msgstr "2000 gold pieces for everyone who is willing to help this humble man!"
 
 #: ../data/quests/joringsbridge.xml:208
 msgid "2000 Goldstuecke."
-msgstr ""
+msgstr "2000 gold pieces."
 
 #: ../data/quests/joringsbridge.xml:210
 msgid "2000 fuer jeden."
-msgstr ""
+msgstr "2000 for every one."
 
 #: ../data/quests/joringsbridge.xml:212
 msgid "Das koennte sich doch beinahe lohnen."
-msgstr ""
+msgstr "That could almost be worth the trouble."
 
 #: ../data/quests/joringsbridge.xml:240
 msgid "Denk nicht mal dran!"
-msgstr ""
+msgstr "Don't even think about it!"
 
 #: ../data/quests/joringsbridge.xml:241
 msgid "Du hast dich sofort nach Zwergentrutz zu begeben!"
-msgstr ""
+msgstr "You are to go to Dwarfenwall immediately!"
 
 #: ../data/quests/joringsbridge.xml:242
 msgid "Wo kommst du denn her? Hatte ich dich nicht ausgeschlossen?"
-msgstr ""
+msgstr "Where do you come from? Didn't I exclude you?"
 
 #: ../data/quests/joringsbridge.xml:243
 msgid "Dein Kinderkram kann mich nicht aufhalten."
-msgstr ""
+msgstr "Your trifles cannot stop me."
 
 #: ../data/quests/joringsbridge.xml:244
 msgid "Das Blut funktioniert immer..."
-msgstr ""
+msgstr "The blood always works..."
 
 #: ../data/quests/joringsbridge.xml:245
 msgid "Ah!"
-msgstr ""
+msgstr "Ah!"
 
 #: ../data/quests/joringsbridge.xml:246
 msgid "Der Magier da drueben hat auch so einen Kristall auf seinem Stab, oder?"
-msgstr ""
+msgstr "The mage over there has another of those crystals on his staff, hasn't he?"
 
 #: ../data/quests/joringsbridge.xml:247
 msgid "Ihr Leute nervt echt irgendwie."
-msgstr ""
+msgstr "You people are really unnerving somehow."
 
 #: ../data/quests/joringsbridge.xml:248
 msgid ""
 "Wen kuemmer denn, was du denkst? Lass den Bauer Bauer sein und geh weiter!"
-msgstr ""
+msgstr "Who cares what you think? Let the peasant be a peasant and get moving!"
 
 #: ../data/quests/joringsbridge.xml:249 ../data/quests/joringsbridge.xml:258
 msgid "Hmm..."
-msgstr ""
+msgstr "Well..."
 
 #: ../data/quests/joringsbridge.xml:251
 msgid "Denkt nicht mal dran!"
-msgstr ""
+msgstr "Don't even think about it!"
 
 #: ../data/quests/joringsbridge.xml:252
 msgid "Ihr habt euch sofort nach Zwergentrutz zu begeben!"
-msgstr ""
+msgstr "You have to go to Dwarfenwall immediately!"
 
 #: ../data/quests/joringsbridge.xml:253
 msgid "Wo kommst du denn her? Hatten wir dich nicht ausgeschlossen?"
-msgstr ""
+msgstr "Where did you pop out from? Didn't we exclude you?"
 
 #: ../data/quests/joringsbridge.xml:254
 msgid "Euer Kinderkram kann mich nicht aufhalten."
-msgstr ""
+msgstr "Your trifles cannot stop me."
 
 #: ../data/quests/joringsbridge.xml:255
 msgid "Quatsch! Sieh dir mal den Kristall auf dem Stab von dem Magier an."
-msgstr ""
+msgstr "Rubbish! Take a look at the crystal on the mege's staff."
 
 #: ../data/quests/joringsbridge.xml:256
 msgid "Sieht aus wie unser Modell, oder?"
-msgstr ""
+msgstr "Looks like our model, doesn't it?"
 
 #: ../data/quests/joringsbridge.xml:257
 msgid "Wie auch immer. Setzt euch in Bewegung!"
-msgstr ""
+msgstr "Whatever. Get moving!"
 
 #: ../data/quests/joringsbridge.xml:261
 msgid "Dem Bauern helfen?"
-msgstr ""
+msgstr "Help the peasant?"
 
 #: ../data/quests/joringsbridge.xml:277
 msgid "Nur ein Stein wuerde tatenlos zusehen."
-msgstr ""
+msgstr "Only a stone would watch deedless."
 
 #: ../data/quests/joringsbridge.xml:278
 msgid "Wer weiß, wie viele Se... Goblins da umher laufen!"
-msgstr ""
+msgstr "Who knows how many so... goblins are walking around there!"
 
 #: ../data/quests/joringsbridge.xml:279
 msgid "Und es gibt Geld dafuer. Zwei Fliegen mit einer Klappe"
-msgstr ""
+msgstr "And we get mones. Two birds with one stone."
 
 #: ../data/quests/joringsbridge.xml:282
 msgid "Was glaubst du, was du da tust? Du sollst nach Zwergentrutz!"
-msgstr ""
+msgstr "What do you think you're doing? You are to go to Dwarfenwall!"
 
 #: ../data/quests/joringsbridge.xml:283
 msgid "Wann ich dort ankomme war nie Teil der Abmachung!"
-msgstr ""
+msgstr "When I get there was never part of the deal!"
 
 #: ../data/quests/joringsbridge.xml:284
 msgid "Wenn die Stadt gefallen ist, erobere ich sie eben zurueck!"
-msgstr ""
+msgstr "If the city is lost, I'll just conquer it back!"
 
 #: ../data/quests/joringsbridge.xml:286
 msgid "Dann ist es beschlossen"
-msgstr ""
+msgstr "So it's decided."
 
 #: ../data/quests/joringsbridge.xml:287
 msgid "Was glaubt ihr, was ihr da tut? Ihr sollt nach Zwergentrutz!"
-msgstr ""
+msgstr "What do you think you're doing? You are to go to Dwarfenwall!"
 
 #: ../data/quests/joringsbridge.xml:288
 msgid "Wann wir dort ankommen war nie Teil der Abmachung!"
-msgstr ""
+msgstr "When we get there was never part of the deal!"
 
 #: ../data/quests/joringsbridge.xml:289
 msgid "Wenn die Stadt gefallen ist, erobern wir sie eben zurueck!"
-msgstr ""
+msgstr "If the city is lost, we'll just conquer it back!"
 
 #: ../data/quests/joringsbridge.xml:290
 msgid "Ja, zeig ihm, wo der Hammer haengt!"
-msgstr ""
+msgstr "Yes, show him who's in charge!"
 
 #: ../data/quests/joringsbridge.xml:319
 msgid "Prinz, ich uebernehme den Auftrag!"
-msgstr ""
+msgstr "Prince, I take the job!"
 
 #: ../data/quests/joringsbridge.xml:321
 msgid "Prinz, wir uebernehmen den Auftrag!"
-msgstr ""
+msgstr "Prince, we take the job!"
 
 #: ../data/quests/joringsbridge.xml:334
 msgid "Seid Ihr nicht die... Hilfstruppe des Konzils? _solo"
-msgstr ""
+msgstr "Aren't you the... auxiliary  forces of the council?"
 
 #: ../data/quests/joringsbridge.xml:336
 msgid "Seid Ihr nicht die... Hilfstruppe des Konzils?"
-msgstr ""
+msgstr "Aren't you the... auxiliary  forces of the council?"
 
 #: ../data/quests/joringsbridge.xml:337
 msgid "...unter der Knute eines gewissen Soren Luftpfote, zu Diensten."
-msgstr ""
+msgstr "... under the heel of a certain Soren Airpaw, at your service."
 
 #: ../data/quests/joringsbridge.xml:338
 msgid "Windklaue, du Toelpel!"
-msgstr ""
+msgstr "Windclaw, you fool!"
 
 #: ../data/quests/joringsbridge.xml:339
 msgid "Ups..."
-msgstr ""
+msgstr "Oops..."
 
 #: ../data/quests/joringsbridge.xml:343
 msgid "Ist das ein Problem fuer Euch?"
-msgstr ""
+msgstr "Is that a problem for you?"
 
 #: ../data/quests/joringsbridge.xml:345
 msgid "...wahrscheinlich nicht. Also gut, auch wenn es mir nicht gefaellt."
-msgstr ""
+msgstr "... probably not. Alright, even if I don't like it."
 
 #: ../data/quests/joringsbridge.xml:347
 msgid "Seid Ihr sicher?"
-msgstr ""
+msgstr "Are you sure?"
 
 #: ../data/quests/joringsbridge.xml:348
 msgid "Was, wenn sie die Bauern gleich mit toeten?"
-msgstr ""
+msgstr "What if they kill the peasants along?"
 
 #: ../data/quests/joringsbridge.xml:351
 msgid "Segeant!"
-msgstr ""
+msgstr "Sergeant!"
 
 #: ../data/quests/joringsbridge.xml:352
 msgid ""
 "Haendigt das Gold nur aus, wenn die Goblins vertrieben und die Bauern am "
 "Ende noch lebendig sind."
-msgstr ""
+msgstr "Only hand over the gold if the goblins are driven off and the peasants are alive in the end."
 
 #: ../data/quests/joringsbridge.xml:353
 msgid "Ansonsten, geht Eurer Arbeit gewissenhaft nach."
-msgstr ""
+msgstr "Otherwise, do your work diligent."
 
 #: ../data/quests/joringsbridge.xml:356
 msgid "Sehr wohl, mein Prinz."
-msgstr ""
+msgstr "As you wish, my Prinz."
 
 #: ../data/quests/joringsbridge.xml:358
 msgid "So viel Misstrauen ist waehrend eines Krieges wirklich nicht noetig."
-msgstr ""
+msgstr "That much distrust is really unnecessary during a war. "
 
 #: ../data/quests/joringsbridge.xml:368
 msgid "Niemand?"
-msgstr ""
+msgstr "Nobody?"
 
 #: ../data/quests/joringsbridge.xml:371
 msgid "Sergeant!"
-msgstr ""
+msgstr "Sergeant!"
 
 #: ../data/quests/joringsbridge.xml:375
 msgid "Mein Prinz?"
-msgstr ""
+msgstr "My prince?"
 
 #: ../data/quests/joringsbridge.xml:377
 msgid "Mein Wort steht."
-msgstr ""
+msgstr "I am true to my word."
 
 #: ../data/quests/joringsbridge.xml:378
 msgid ""
 "Haendigt das Gold aus, falls sich doch noch jemand findet und Euch hilft."
-msgstr ""
+msgstr "Hand over the gold, if you find someone who helps you after all."
 
 #: ../data/quests/joringsbridge.xml:380
 msgid "Wie Ihr wuenscht, mein Prinz."
-msgstr ""
+msgstr "As you wish, my prince."
 
 #: ../data/quests/joringsbridge.xml:383
 msgid "Es tut mir Leid, guter Mann."
-msgstr ""
+msgstr "I'm sorry, good man."
 
 #: ../data/quests/joringsbridge.xml:384
 msgid "Ich werde dafuer beten, dass eure Familie lange genug aushaelt."
-msgstr ""
+msgstr "I will pray that your family holds out long enough."
 
 #: ../data/quests/maylons_grave.xml:5
 msgid ""
