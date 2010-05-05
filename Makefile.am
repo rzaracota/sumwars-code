@@ -45,7 +45,6 @@ sumwars_SOURCES = src/core/world.cpp \
 	src/core/geometry.cpp \
 	src/core/mapgenerator.cpp \
 	src/core/unionfindtree.cpp \
-	src/core/variable.cpp \
 	src/core/event.cpp \
 	src/core/eventsystem.cpp \
 	src/core/worldloader.cpp \

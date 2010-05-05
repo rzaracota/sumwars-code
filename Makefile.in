@@ -87,7 +87,6 @@ am_sumwars_OBJECTS = src/core/sumwars-world.$(OBJEXT) \
 	src/core/sumwars-geometry.$(OBJEXT) \
 	src/core/sumwars-mapgenerator.$(OBJEXT) \
 	src/core/sumwars-unionfindtree.$(OBJEXT) \
-	src/core/sumwars-variable.$(OBJEXT) \
 	src/core/sumwars-event.$(OBJEXT) \
 	src/core/sumwars-eventsystem.$(OBJEXT) \
 	src/core/sumwars-worldloader.$(OBJEXT) \
@@ -294,7 +293,6 @@ sumwars_SOURCES = src/core/world.cpp \
 	src/core/geometry.cpp \
 	src/core/mapgenerator.cpp \
 	src/core/unionfindtree.cpp \
-	src/core/variable.cpp \
 	src/core/event.cpp \
 	src/core/eventsystem.cpp \
 	src/core/worldloader.cpp \
@@ -501,8 +499,6 @@ src/core/sumwars-mapgenerator.$(OBJEXT): src/core/$(am__dirstamp) \
 	src/core/$(DEPDIR)/$(am__dirstamp)
 src/core/sumwars-unionfindtree.$(OBJEXT): src/core/$(am__dirstamp) \
 	src/core/$(DEPDIR)/$(am__dirstamp)
-src/core/sumwars-variable.$(OBJEXT): src/core/$(am__dirstamp) \
-	src/core/$(DEPDIR)/$(am__dirstamp)
 src/core/sumwars-event.$(OBJEXT): src/core/$(am__dirstamp) \
 	src/core/$(DEPDIR)/$(am__dirstamp)
 src/core/sumwars-eventsystem.$(OBJEXT): src/core/$(am__dirstamp) \
@@ -659,7 +655,6 @@ mostlyclean-compile:
 	-rm -f src/core/sumwars-templateloader.$(OBJEXT)
 	-rm -f src/core/sumwars-treasure.$(OBJEXT)
 	-rm -f src/core/sumwars-unionfindtree.$(OBJEXT)
-	-rm -f src/core/sumwars-variable.$(OBJEXT)
 	-rm -f src/core/sumwars-waypoint.$(OBJEXT)
 	-rm -f src/core/sumwars-world.$(OBJEXT)
 	-rm -f src/core/sumwars-worldloader.$(OBJEXT)
@@ -747,7 +742,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@src/core/$(DEPDIR)/sumwars-templateloader.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/core/$(DEPDIR)/sumwars-treasure.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/core/$(DEPDIR)/sumwars-unionfindtree.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@src/core/$(DEPDIR)/sumwars-variable.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/core/$(DEPDIR)/sumwars-waypoint.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/core/$(DEPDIR)/sumwars-world.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/core/$(DEPDIR)/sumwars-worldloader.Po@am__quote@
@@ -1333,20 +1327,6 @@ src/core/sumwars-unionfindtree.obj: src/core/unionfindtree.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='src/core/unionfindtree.cpp' object='src/core/sumwars-unionfindtree.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(sumwars_CPPFLAGS) $(CPPFLAGS) $(sumwars_CXXFLAGS) $(CXXFLAGS) -c -o src/core/sumwars-unionfindtree.obj `if test -f 'src/core/unionfindtree.cpp'; then $(CYGPATH_W) 'src/core/unionfindtree.cpp'; else $(CYGPATH_W) '$(srcdir)/src/core/unionfindtree.cpp'; fi`
-
-src/core/sumwars-variable.o: src/core/variable.cpp
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(sumwars_CPPFLAGS) $(CPPFLAGS) $(sumwars_CXXFLAGS) $(CXXFLAGS) -MT src/core/sumwars-variable.o -MD -MP -MF src/core/$(DEPDIR)/sumwars-variable.Tpo -c -o src/core/sumwars-variable.o `test -f 'src/core/variable.cpp' || echo '$(srcdir)/'`src/core/variable.cpp
-@am__fastdepCXX_TRUE@	mv -f src/core/$(DEPDIR)/sumwars-variable.Tpo src/core/$(DEPDIR)/sumwars-variable.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='src/core/variable.cpp' object='src/core/sumwars-variable.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(sumwars_CPPFLAGS) $(CPPFLAGS) $(sumwars_CXXFLAGS) $(CXXFLAGS) -c -o src/core/sumwars-variable.o `test -f 'src/core/variable.cpp' || echo '$(srcdir)/'`src/core/variable.cpp
-
-src/core/sumwars-variable.obj: src/core/variable.cpp
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(sumwars_CPPFLAGS) $(CPPFLAGS) $(sumwars_CXXFLAGS) $(CXXFLAGS) -MT src/core/sumwars-variable.obj -MD -MP -MF src/core/$(DEPDIR)/sumwars-variable.Tpo -c -o src/core/sumwars-variable.obj `if test -f 'src/core/variable.cpp'; then $(CYGPATH_W) 'src/core/variable.cpp'; else $(CYGPATH_W) '$(srcdir)/src/core/variable.cpp'; fi`
-@am__fastdepCXX_TRUE@	mv -f src/core/$(DEPDIR)/sumwars-variable.Tpo src/core/$(DEPDIR)/sumwars-variable.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='src/core/variable.cpp' object='src/core/sumwars-variable.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(sumwars_CPPFLAGS) $(CPPFLAGS) $(sumwars_CXXFLAGS) $(CXXFLAGS) -c -o src/core/sumwars-variable.obj `if test -f 'src/core/variable.cpp'; then $(CYGPATH_W) 'src/core/variable.cpp'; else $(CYGPATH_W) '$(srcdir)/src/core/variable.cpp'; fi`
 
 src/core/sumwars-event.o: src/core/event.cpp
 @am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(sumwars_CPPFLAGS) $(CPPFLAGS) $(sumwars_CXXFLAGS) $(CXXFLAGS) -MT src/core/sumwars-event.o -MD -MP -MF src/core/$(DEPDIR)/sumwars-event.Tpo -c -o src/core/sumwars-event.o `test -f 'src/core/event.cpp' || echo '$(srcdir)/'`src/core/event.cpp
