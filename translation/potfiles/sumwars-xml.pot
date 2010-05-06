@@ -6,8 +6,7 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
+"Project-Id-Version: PACKAGE VERSION\n""Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-03-09 15:15+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
@@ -1252,10 +1251,6 @@ msgstr ""
 msgid "Brons Farm"
 msgstr ""
 
-#: scene6.xml
-msgid "Hauptquest: melde dich bei General G"
-msgstr ""
-
 #: maylons_grave.xml
 msgid "Maylons Grab"
 msgstr ""
@@ -1931,3 +1926,4 @@ msgstr ""
 #: npcStats.xml
 msgid "Peasant"
 msgstr ""
+

@@ -3,13 +3,12 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#: ../data/quests/siegeOfDwarfenwall.xml:2206
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-04 17:08+0200\n"
+"POT-Creation-Date: 2010-05-06 23:35+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -252,15 +251,14 @@ msgid "Hier habt ihr das Geld."
 msgstr ""
 
 #: ../data/quests/fortify_dwarfenwall.xml:9 ../data/quests/goblins.xml:9
-#: ../data/quests/scene6.xml:9 ../data/quests/scene7.xml:9
-#: ../data/quests/siegeOfDwarfenwall.xml:4 ../data/quests/slay_the_lich.xml:10
-#: ../data/quests/theTrader.xml:4
+#: ../data/quests/scene7.xml:9 ../data/quests/siegeOfDwarfenwall.xml:4
+#: ../data/quests/slay_the_lich.xml:10 ../data/quests/theTrader.xml:4
 msgid "Quest finished"
 msgstr ""
 
-#: ../data/quests/fortify_dwarfenwall.xml:11 ../data/quests/scene6.xml:11
-#: ../data/quests/scene7.xml:11 ../data/quests/siegeOfDwarfenwall.xml:6
-#: ../data/quests/slay_the_lich.xml:12 ../data/quests/tutorial.xml:23
+#: ../data/quests/fortify_dwarfenwall.xml:11 ../data/quests/scene7.xml:11
+#: ../data/quests/siegeOfDwarfenwall.xml:6 ../data/quests/slay_the_lich.xml:12
+#: ../data/quests/tutorial.xml:23
 msgid "Quest description"
 msgstr ""
 
@@ -328,6 +326,7 @@ msgstr ""
 
 #: ../data/quests/fortify_dwarfenwall.xml:323 ../data/quests/scene7.xml:29
 #: ../data/quests/siegeOfDwarfenwall.xml:215
+#: ../data/quests/siegeOfDwarfenwall.xml:2206
 #: ../data/quests/siegeOfDwarfenwall.xml:2529
 #: ../data/quests/theFissure.xml:420
 msgid "..."
@@ -2456,71 +2455,6 @@ msgstr ""
 msgid "Viel Spass dabei. Wenn du aus der Hoelle entkommst."
 msgstr ""
 
-#: ../data/quests/scene6.xml:21 ../data/quests/theFissure.xml:525
-msgid "Wie gehen die Arbeiten voran?"
-msgstr ""
-
-#: ../data/quests/scene6.xml:22
-msgid "Der Stein ist hart, aber wenn ich die Skelette"
-msgstr ""
-
-#: ../data/quests/scene6.xml:26 ../data/quests/theFissure.xml:547
-#: ../data/quests/theFissure.xml:551 ../data/quests/theFissure.xml:553
-msgid "Los, das ist unsere Chance!"
-msgstr ""
-
-#: ../data/quests/scene6.xml:28
-msgid "Angreifen oder erst noch zuhoeren?"
-msgstr ""
-
-#: ../data/quests/scene6.xml:29
-msgid "Attack"
-msgstr ""
-
-#: ../data/quests/scene6.xml:30
-msgid "Listen"
-msgstr ""
-
-#: ../data/quests/scene6.xml:38
-msgid "Ok, Los!"
-msgstr ""
-
-#: ../data/quests/scene6.xml:48
-msgid "Wartet, vielleicht erfahren"
-msgstr ""
-
-#: ../data/quests/scene6.xml:49
-msgid "Lass sie ab und zu ausruhen,"
-msgstr ""
-
-#: ../data/quests/scene6.xml:50
-msgid "Soll der Tunnel nicht zum"
-msgstr ""
-
-#: ../data/quests/scene6.xml:51 ../data/quests/theFissure.xml:582
-msgid "Nein, die Stadt ist unwichtig."
-msgstr ""
-
-#: ../data/quests/scene6.xml:52 ../data/quests/theFissure.xml:587
-msgid "Ich verstehe nicht."
-msgstr ""
-
-#: ../data/quests/scene6.xml:53
-msgid "Und das ist gut so,"
-msgstr ""
-
-#: ../data/quests/scene6.xml:54
-msgid "Euer Wunsch ist meine Handlung!"
-msgstr ""
-
-#: ../data/quests/scene6.xml:58
-msgid "Das ist ein Lich,"
-msgstr ""
-
-#: ../data/quests/scene6.xml:59
-msgid "Also gut!"
-msgstr ""
-
 #: ../data/quests/scene7.xml:21
 msgid "Wow, ist das schoen."
 msgstr ""
@@ -3622,6 +3556,45 @@ msgstr ""
 msgid "Nein! Das kann nicht sein! Ihr elenden..."
 msgstr ""
 
+#: ../data/quests/siegeOfDwarfenwall.xml:2700
+msgid "Das waere geschafft."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2701
+msgid "Wie bitte? Das soll wohl ein Witz sein!"
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2702
+msgid ""
+"Die Verteidigung von Zwergentrutz war nur zum aufwaermen, schon vergessen?"
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2703
+msgid "Wenn du willst, dass es schneller geht, dann hilf doch einfach mit."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2704
+msgid ""
+"Oder besuch mal www.sumwars.org und sieh im Forum vorbei. Kritik, Hinweise "
+"und Kommentare sind immer gern gesehen."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2705
+msgid "Gibt's dafuer auch Geld??"
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2706
+msgid "Natuerlich nicht. Oder hast du was hierfuer bezahlt?"
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2707
+msgid "Aber die Goetter werden sich ewig deiner erinnern."
+msgstr ""
+
+#: ../data/quests/siegeOfDwarfenwall.xml:2708
+msgid "Damit ist die Demo offiziell vorbei."
+msgstr ""
+
 #: ../data/quests/slay_the_lich.xml:24
 msgid "Die Stadt ist"
 msgstr ""
@@ -4167,6 +4140,10 @@ msgstr ""
 msgid "Unbekannter Lich"
 msgstr ""
 
+#: ../data/quests/theFissure.xml:525
+msgid "Wie gehen die Arbeiten voran?"
+msgstr ""
+
 #: ../data/quests/theFissure.xml:526
 msgid "Nar'Asoroth, mein Gebieter."
 msgstr ""
@@ -4179,6 +4156,11 @@ msgstr ""
 
 #: ../data/quests/theFissure.xml:543
 msgid "(So eine Gelegenheit ergibt sich vielleicht nicht wieder.)"
+msgstr ""
+
+#: ../data/quests/theFissure.xml:547 ../data/quests/theFissure.xml:551
+#: ../data/quests/theFissure.xml:553
+msgid "Los, das ist unsere Chance!"
 msgstr ""
 
 #: ../data/quests/theFissure.xml:556
@@ -4209,6 +4191,10 @@ msgstr ""
 msgid "Soll der Tunnel nicht zum Angriff fertig sein?"
 msgstr ""
 
+#: ../data/quests/theFissure.xml:582
+msgid "Nein, die Stadt ist unwichtig."
+msgstr ""
+
 #: ../data/quests/theFissure.xml:584
 msgid "Sollen die Aisener dort ihre Verstaerkungstruppen aufreiben."
 msgstr ""
@@ -4221,6 +4207,10 @@ msgstr ""
 
 #: ../data/quests/theFissure.xml:586
 msgid "Nur der Kristall ist wichtig."
+msgstr ""
+
+#: ../data/quests/theFissure.xml:587
+msgid "Ich verstehe nicht."
 msgstr ""
 
 #: ../data/quests/theFissure.xml:588
@@ -5099,6 +5089,10 @@ msgstr ""
 
 #: ../data/quests/tutorial.xml:335
 msgid "Es ist eure Entscheidung"
+msgstr ""
+
+#: ../data/quests/tutorial.xml:353
+msgid "Wollt ihr die Waffen abgeben?"
 msgstr ""
 
 #: ../data/quests/tutorial.xml:365
