@@ -2203,7 +2203,7 @@
 				speak("lich", _("Verdammt sollen sie sein!"),"warcry");
 				speak("lich", _("Verdammte Konzilsmagier!"),"angry");
 				speak("lich", _("Verdammte Gezeichnete!"),"angry");
-				speak("lich", _(""),"angry",2000);
+				speak("lich", _("..."),"angry",2000);
 				speak("lich",_("Was solls."),"unhappy");
 				speak("lich",_("Am Ende werde ich doch triumphieren."),"unhappy");
 				speak("lich",_("Der Tod gewinnt immer."),"threaten");
