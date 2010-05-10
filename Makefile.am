@@ -2,9 +2,9 @@ AUTOMAKE_OPTIONS = subdir-objects
 
 bin_PROGRAMS = sumwars
 sumwars_CPPFLAGS = -DDEBUG_LEVEL=5 -Wall -g -I./src/core -I./src/gui -I./src/tinyxml -I./src/raknet/Include
-sumwars_CXXFLAGS = $(DEPS_CFLAGS)
+sumwars_CXXFLAGS = $(DEPS_CFLAGS) $(LUA_CFLAGS)
 sumwars_LDFLAGS = -lm -lrt
-sumwars_LDADD = $(DEPS_LIBS)
+sumwars_LDADD = $(DEPS_LIBS) $(LUA_LIBS)
 
 
 sumwars_SOURCES = src/core/world.cpp \
