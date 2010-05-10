@@ -2,19 +2,19 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# 
 # kalimgard <kalimgard@users.sourceforge.net>, 2010.
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: 0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-06 23:35+0200\n"
+"POT-Creation-Date: 2010-05-10 17:03+0200\n"
 "PO-Revision-Date: 2010-05-10 \n"
 "Last-Translator: kalimgard <kalimgard@users.sourceforge.net>\n"
 "Language-Team: english <en@sumwars>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: ../data/npc/dwarfcastle.xml:117
@@ -284,13 +284,12 @@ msgstr "Here's the money."
 
 #: ../data/quests/fortify_dwarfenwall.xml:9 ../data/quests/goblins.xml:9
 #: ../data/quests/scene7.xml:9 ../data/quests/siegeOfDwarfenwall.xml:4
-#: ../data/quests/slay_the_lich.xml:10 ../data/quests/theTrader.xml:4
+#: ../data/quests/theTrader.xml:4
 msgid "Quest finished"
 msgstr "Quest finished"
 
 #: ../data/quests/fortify_dwarfenwall.xml:11 ../data/quests/scene7.xml:11
-#: ../data/quests/siegeOfDwarfenwall.xml:6 ../data/quests/slay_the_lich.xml:12
-#: ../data/quests/tutorial.xml:23
+#: ../data/quests/siegeOfDwarfenwall.xml:6 ../data/quests/tutorial.xml:23
 msgid "Quest description"
 msgstr "Quest description"
 
@@ -3807,78 +3806,6 @@ msgstr "But the gods will remember you for all eternity."
 #: ../data/quests/siegeOfDwarfenwall.xml:2708
 msgid "Damit ist die Demo offiziell vorbei."
 msgstr "With this, the demo is over officially."
-
-#: ../data/quests/slay_the_lich.xml:24
-msgid "Die Stadt ist"
-msgstr ""
-
-#: ../data/quests/slay_the_lich.xml:25
-msgid "Sehr gut. Wenigstens"
-msgstr ""
-
-#: ../data/quests/slay_the_lich.xml:26
-msgid "Als ob wir welchen"
-msgstr ""
-
-#: ../data/quests/slay_the_lich.xml:27
-msgid "Warum verlangt ihr eigentlich"
-msgstr ""
-
-#: ../data/quests/slay_the_lich.xml:28
-msgid "Es macht keinen"
-msgstr ""
-
-#: ../data/quests/slay_the_lich.xml:29
-msgid "Genug davon. Es ist"
-msgstr ""
-
-#: ../data/quests/slay_the_lich.xml:30
-msgid "Kleinigkeiten sagt sie."
-msgstr ""
-
-#: ../data/quests/slay_the_lich.xml:31
-msgid "Viel wichtiger ist"
-msgstr ""
-
-#: ../data/quests/slay_the_lich.xml:32
-msgid "Und ich sage euch,"
-msgstr ""
-
-#: ../data/quests/slay_the_lich.xml:33
-msgid "Dann ist es ja gut,"
-msgstr ""
-
-#: ../data/quests/slay_the_lich.xml:34
-msgid "Seid ihr noch bei Trost?"
-msgstr ""
-
-#: ../data/quests/slay_the_lich.xml:35
-msgid "Nicht soo oft."
-msgstr ""
-
-#: ../data/quests/slay_the_lich.xml:36
-msgid "Es spielt keine Rolle."
-msgstr ""
-
-#: ../data/quests/slay_the_lich.xml:37
-msgid "Besonders entspannt ist"
-msgstr ""
-
-#: ../data/quests/slay_the_lich.xml:38
-msgid "Also dann. Hauptmann,"
-msgstr ""
-
-#: ../data/quests/slay_the_lich.xml:39
-msgid "Aber sicher doch."
-msgstr ""
-
-#: ../data/quests/slay_the_lich.xml:40
-msgid "So ein Pfeil kann"
-msgstr ""
-
-#: ../data/quests/slay_the_lich.xml:42
-msgid "Denk nicht mal"
-msgstr ""
 
 #: ../data/quests/testquest.xml:9
 msgid "Das ist ein Test"
