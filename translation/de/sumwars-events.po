@@ -3,121 +3,144 @@
 # This file is distributed under the same license as the sumwars package.
 # Michael <michael@localhost.localdomain>, 2009.
 #
+# kalimgard <kalimgard@users.sourceforge.net>, 2010.
 #: ../data/quests/siegeOfDwarfenwall.xml:2206
 msgid ""
 msgstr ""
-"Project-Id-Version: sumwars 0.01\n"
+"Project-Id-Version: sumwars 0.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-05-04 17:08+0200\n"
-"PO-Revision-Date: 2009-03-10 17:28+0100\n"
-"Last-Translator: Michael <michael@localhost.localdomain>\n"
-"Language-Team: German <translation-team-de@lists.sourceforge.net>\n"
+"PO-Revision-Date: 2010-05-10 \n"
+"Last-Translator: kalimgard <kalimgard@users.sourceforge.net>\n"
+"Language-Team: german <translation-team-de@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../data/npc/dwarfcastle.xml:117
 msgid "Ganz schoen viele Kisten..."
-msgstr ""
+msgstr "Ganz schoen viele Kisten..."
 
 #: ../data/npc/dwarfcastle.xml:118
 msgid "Das Chaos hat mir mein Vorgaenger ueberlassen."
-msgstr ""
+msgstr "Das Chaos hat mir mein Vorgänger ueberlassen."
 
 #: ../data/npc/dwarfcastle.xml:119
 msgid "Sind alles alte Armeebestaende."
-msgstr ""
+msgstr "Sind alles alte Armeebestaende."
 
 #: ../data/npc/dwarfcastle.xml:120
 msgid ""
 "Wenn Euch was davon gefaellt zeigt drauf und ich nenne Euch einen Preis."
 msgstr ""
+"Wenn Euch was davon gefällt zeigt drauf und ich nenne Euch einen Preis."
 
 #: ../data/npc/joringsbridge_npc.xml:121
 msgid "Ah, euch ist mein Fundbuero aufgefallen?"
-msgstr ""
+msgstr "Ah, euch ist mein Fundbüro aufgefallen?"
 
 #: ../data/npc/joringsbridge_npc.xml:122
 msgid ""
 "Ich lagere hier alles, was ich so an verlorenen Gegenstaenden in und um "
 "Joringsbrueck finde."
 msgstr ""
+"Ich lagere hier alles, was ich so an verlorenen Gegenständen in und um "
+"Joringsbrück finde."
 
 #: ../data/npc/joringsbridge_npc.xml:123
 msgid ""
 "Wenn Euch etwas davon gehoert, sagt einfach Bescheid. Fuer einen geringen "
 "Finderlohn koennt Ihr es wiederhaben."
 msgstr ""
+"Wenn Euch etwas davon gehört, sagt einfach Bescheid. Für einen geringen "
+"Finderlohn könnt Ihr es wiederhaben."
 
 #: ../data/npc/joringsbridge_npc.xml:133
 msgid ""
 "Die Verantwortung fuer Joringsbrueck zu haben ist nicht immer leicht, "
 "selbst, wenn ich genug Soldaten habe."
 msgstr ""
+"Die Verantwortung für Joringsbrück zu haben ist nicht immer leicht, selbst, "
+"wenn ich genug Soldaten habe."
 
 #: ../data/npc/joringsbridge_npc.xml:134
 msgid ""
 "Seit Monaten schafft irgend einer meiner Leute die beschlagnamten magischen "
 "Gegenstaende bei Seite."
 msgstr ""
+"Seit Monaten schafft irgend einer meiner Leute die beschlagnamten magischen "
+"Gegenstände bei Seite."
 
 #: ../data/npc/joringsbridge_npc.xml:135
 msgid "Und ich bin ihm noch keinen Schritt naeher als am Anfang!"
-msgstr ""
+msgstr "Und ich bin ihm noch keinen Schritt näher als am Anfang!"
 
 #: ../data/npc/joringsbridge_npc.xml:136
 msgid ""
 "(Ein Gardist schafft Gegenstaende bei Seite? Sicher nicht fuer schlechte "
 "Zeiten. Ich sollte mich mal umsehen.)"
 msgstr ""
+"(Ein Gardist schafft Gegenstände bei Seite? Sicher nicht für schlechte "
+"Zeiten. Ich sollte mich mal umsehen.)"
 
 #: ../data/npc/joringsbridge_npc.xml:143
 msgid "Ihr seid besser vorsichtig, wenn Ihr das Dorf verlasst."
-msgstr ""
+msgstr "Ihr seid besser vorsichtig, wenn Ihr das Dorf verlasst."
 
 #: ../data/npc/joringsbridge_npc.xml:144
 msgid ""
 "Jetzt, wo fast alle Truppen an den Grenzen stehen, haben wir es mit einer "
 "unueberschaubaren Flut von Goblins zu tun."
 msgstr ""
+"Jetzt, wo fast alle Truppen an den Grenzen stehen, haben wir es mit einer "
+"unüberschaubaren Flut von Goblins zu tun."
 
 #: ../data/npc/joringsbridge_npc.xml:145
 msgid ""
 "Und alle, die nicht in die Armee eingezogen wurden, scheinen das "
 "Banditendasein fuer sich entdeckt zu haben."
 msgstr ""
+"Und alle, die nicht in die Armee eingezogen wurden, scheinen das "
+"Banditendasein fuer sich entdeckt zu haben."
 
 #: ../data/npc/joringsbridge_npc.xml:146
 msgid "Danke fuer die Warnung, Sergeant"
-msgstr ""
+msgstr "Danke für die Warnung, Sergeant"
 
 #: ../data/npc/joringsbridge_npc.xml:158
 msgid ""
 "Ihr seid die Unterstuetzung, die Lord Magister Windklaue geschickt hat, wie?"
 msgstr ""
+"Ihr seid die Unterstützung, die Lord Magister Windklaue geschickt hat, wie?"
 
 #: ../data/npc/joringsbridge_npc.xml:159
 msgid ""
 "Ich empfehle Euch eine schnelle Weiterreise. In diesem Dorf sind schon "
 "Menschen an Langeweile gestorben."
 msgstr ""
+"Ich empfehle Euch eine schnelle Weiterreise. In diesem Dorf sind schon "
+"Menschen an Langeweile gestorben."
 
 #: ../data/npc/joringsbridge_npc.xml:160
 msgid "Wer weiss, ob Eure Konstitution Euch dagegen auch hilft?"
-msgstr ""
+msgstr "Wer weiss, ob Eure Konstitution Euch dagegen auch hilft?"
 
 #: ../data/quests/besieged_farm.xml:5
 msgid ""
 "Die Bauern sind gerettet, die Goblins erschlagen und die Dienstleistung "
 "bezahlt. Was will man mehr?"
 msgstr ""
+"Die Bauern sind gerettet, die Goblins erschlagen und die Dienstleistung "
+"bezahlt. Was will man mehr?"
 
 #: ../data/quests/besieged_farm.xml:7
 msgid ""
 "Die Bauern sind gerettet und die Goblins erschlagen. Zeit, den Lohn fuer all "
 "die Muehen in Joringsbrueck abzuholen."
 msgstr ""
+"Die Bauern sind gerettet und die Goblins erschlagen. Zeit, den Lohn für all "
+"die Mühen in Joringsbrueck abzuholen."
 
 #: ../data/quests/besieged_farm.xml:9
 msgid ""
@@ -125,131 +148,149 @@ msgid ""
 "sollte mal an die Tuer klopfen und sehen, dass alles in Ordnung ist. Keine "
 "Bauern, kein Geld."
 msgstr ""
+"Die Goblins rund um Brons Farm weilen nicht mehr unter den Lebenden. Ich "
+"sollte mal an die Tür klopfen und sehen, dass alles in Ordnung ist. Keine "
+"Bauern, kein Geld."
 
 #: ../data/quests/besieged_farm.xml:11
 msgid ""
 "Der Hof eines Bauern namens Michel Bron wird von Goblins belagert. Seine "
 "Familie braucht Hilfe - schnell."
 msgstr ""
+"Der Hof eines Bauern namens Michel Bron wird von Goblins belagert. Seine "
+"Familie braucht Hilfe - schnell."
 
 #: ../data/quests/besieged_farm.xml:23
 msgid "Ah! Habt ihr doch noch Lust bekommen, Euch das Gold zu verdienen?"
-msgstr ""
+msgstr "Ah! Habt ihr doch noch Lust bekommen, Euch das Gold zu verdienen?"
 
 #: ../data/quests/besieged_farm.xml:25
 msgid "Glaubt ja nicht, ich habe Euch nicht dort herumlungern sehen."
-msgstr ""
+msgstr "Glaubt ja nicht, ich habe Euch nicht dort herumlungern sehen."
 
 #: ../data/quests/besieged_farm.xml:27
 msgid ""
 "Glaubt ja nicht, ich habe Euch und Euren Freund nicht dort herumlungern "
 "sehen."
 msgstr ""
+"Glaubt ja nicht, ich habe Euch und Euren Freund nicht dort herumlungern "
+"sehen."
 
 #: ../data/quests/besieged_farm.xml:29
 msgid ""
 "Glaubt ja nicht, ich habe Euch und Eure Freunde nicht dort herumlungern "
 "sehen."
 msgstr ""
+"Glaubt ja nicht, ich habe Euch und Eure Freunde nicht dort herumlungern "
+"sehen."
 
 #: ../data/quests/besieged_farm.xml:31
 msgid "Aber ich will mich nicht beschweren."
-msgstr ""
+msgstr "Aber ich will mich nicht beschweren."
 
 #: ../data/quests/besieged_farm.xml:32
 msgid ""
 "Ihr wisst, wie es laeuft: Geht in die noerdliche Wiese und vertreibt die "
 "Goblins, die sich um Brons Hof herum aufhalten."
 msgstr ""
+"Ihr wisst, wie es läuft: Geht in die nördliche Wiese und vertreibt die "
+"Goblins, die sich um Brons Hof herum aufhalten."
 
 #: ../data/quests/besieged_farm.xml:33
 msgid ""
 "Wie Ihr das anstellt, ist mir egal, und wenn Ihr sie alle roh verschlingt."
 msgstr ""
+"Wie Ihr das anstellt, ist mir egal, und wenn Ihr sie alle roh verschlingt."
 
 #: ../data/quests/besieged_farm.xml:34
 msgid "Nur ein Scherz."
-msgstr ""
+msgstr "Nur ein Scherz."
 
 #: ../data/quests/besieged_farm.xml:35
 msgid "Wenn Ihr es geschafft habt, kommt Ihr zu mir zurueck."
-msgstr ""
+msgstr "Wenn Ihr es geschafft habt, kommt Ihr zu mir zurück."
 
 #: ../data/quests/besieged_farm.xml:36
 msgid "Schon unterwegs."
-msgstr ""
+msgstr "Schon unterwegs."
 
 #: ../data/quests/besieged_farm.xml:88
 msgid ""
 "Das sollten genug Goblins gewesen sein. Ich sehe besser mal nach Brons "
 "Familie."
 msgstr ""
+"Das sollten genug Goblins gewesen sein. Ich sehe besser mal nach Brons "
+"Familie."
 
 #: ../data/quests/besieged_farm.xml:111
 msgid "Die Goblins sind weg. Geht es euch gut?"
-msgstr ""
+msgstr "Die Goblins sind weg. Geht es euch gut?"
 
 #: ../data/quests/besieged_farm.xml:112 ../data/quests/rescue_willard.xml:224
 msgid "Ich danke euch."
-msgstr ""
+msgstr "Ich danke euch."
 
 #: ../data/quests/besieged_farm.xml:113
 msgid "Leider koennen wir euch nicht hereinbitten."
-msgstr ""
+msgstr "Leider können wir euch nicht hereinbitten."
 
 #: ../data/quests/besieged_farm.xml:114
 msgid "Unsere Barrikaden sind recht schwer."
-msgstr ""
+msgstr "Unsere Barrikaden sind recht schwer."
 
 #: ../data/quests/besieged_farm.xml:115
 msgid "Aber ich werde meinem Mann Bescheid geben, dass es uns gut geht."
-msgstr ""
+msgstr "Aber ich werde meinem Mann Bescheid geben, dass es uns gut geht."
 
 #: ../data/quests/besieged_farm.xml:116
 msgid "Wie denn das?"
-msgstr ""
+msgstr "Wie denn das?"
 
 #: ../data/quests/besieged_farm.xml:117
 msgid ""
 "Mit einem Avaeras-Kristall natuerlich. Er wird schon seit Generationen in "
 "meiner Familie vererbt."
 msgstr ""
+"Mit einem Avaeras-Kristall natürlich. Er wird schon seit Generationen in "
+"meiner Familie vererbt."
 
 #: ../data/quests/besieged_farm.xml:118
 msgid "Natuerlich. Dumm von mir."
-msgstr ""
+msgstr "Natürlich. Dumm von mir."
 
 #: ../data/quests/besieged_farm.xml:120
 msgid "Also ehrlich, "
 msgstr ""
+"Also ehrlich, dachtest du, sie würde heutzutage eine Brieftaube benutzen "
+"oder so was?"
 
 #: ../data/quests/besieged_farm.xml:122
 msgid "Lass uns einfach das Geld abholen gehen."
-msgstr ""
+msgstr "Lass uns einfach das Geld abholen gehen."
 
 #: ../data/quests/besieged_farm.xml:124
 msgid "Lasst uns einfach das Geld abholen gehen."
-msgstr ""
+msgstr "Lasst uns einfach das Geld abholen gehen."
 
 #: ../data/quests/besieged_farm.xml:141
 msgid "Es ist vollbracht."
-msgstr ""
+msgstr "Es ist vollbracht."
 
 #: ../data/quests/besieged_farm.xml:142
 msgid "Hab ich schon gehoert."
-msgstr ""
+msgstr "Hab ich schon gehört."
 
 #: ../data/quests/besieged_farm.xml:143
 msgid "Michel ist gerade in der Schenke und besaeuft sich auf Euer Wohl."
-msgstr ""
+msgstr "Michel ist gerade in der Schenke und besäuft sich auf Euer Wohl."
 
 #: ../data/quests/besieged_farm.xml:144
 msgid "Aber das soll nicht mehr Eure Sorge sein."
-msgstr ""
+msgstr "Aber das soll nicht mehr Eure Sorge sein."
 
 #: ../data/quests/besieged_farm.xml:145
 msgid "Hier habt ihr das Geld."
-msgstr ""
+msgstr "Hier habt ihr das Geld."
 
 #: ../data/quests/fortify_dwarfenwall.xml:9 ../data/quests/goblins.xml:9
 #: ../data/quests/scene6.xml:9 ../data/quests/scene7.xml:9
@@ -267,351 +308,375 @@ msgstr ""
 #: ../data/quests/fortify_dwarfenwall.xml:46
 #: ../data/quests/fortify_dwarfenwall.xml:58
 msgid "Folgt uns bitte."
-msgstr ""
+msgstr "Folgt uns bitte."
 
 #: ../data/quests/fortify_dwarfenwall.xml:117
 msgid "Dieses Konzil ist auch nicht so besonders..."
-msgstr ""
+msgstr "Dieses Konzil ist auch nicht so besonders..."
 
 #: ../data/quests/fortify_dwarfenwall.xml:126
 msgid "Na klar! Jetzt hast du wieder eine große Klappe."
-msgstr ""
+msgstr "Na klar! Jetzt hast du wieder eine große Klappe."
 
 #: ../data/quests/fortify_dwarfenwall.xml:132
 msgid "Warum gebe ich mich doch gleich mit deiner Gesellschaft ab?"
-msgstr ""
+msgstr "Warum gebe ich mich doch gleich mit deiner Gesellschaft ab?"
 
 #: ../data/quests/fortify_dwarfenwall.xml:140
 msgid "Scht! Streiten koennt ihr euch spaeter."
-msgstr ""
+msgstr "Scht! Streiten könnt ihr euch später."
 
 #: ../data/quests/fortify_dwarfenwall.xml:173
 msgid "Endlich sind wir da!"
-msgstr ""
+msgstr "Endlich sind wir da!"
 
 #: ../data/quests/fortify_dwarfenwall.xml:176
 msgid "(Der Raum da fuehlt sich gar nicht gut an.)"
-msgstr ""
+msgstr "(Der Raum da fühlt sich gar nicht gut an.)"
 
 #: ../data/quests/fortify_dwarfenwall.xml:178
 msgid "Spürt ihr das?!! Das fühlt sich an wie-"
-msgstr ""
+msgstr "Spürt ihr das?!! Das fühlt sich an wie-"
 
 #: ../data/quests/fortify_dwarfenwall.xml:180
 msgid "Scht!"
-msgstr ""
+msgstr "Scht!"
 
 #: ../data/quests/fortify_dwarfenwall.xml:225
 msgid "Mein Lord! Die... Gezeichneten sind jetzt da."
-msgstr ""
+msgstr "Mein Lord! Die... Gezeichneten sind jetzt da."
 
 #: ../data/quests/fortify_dwarfenwall.xml:226
 #: ../data/quests/fortify_dwarfenwall.xml:762
 msgid "Sehr gut."
-msgstr ""
+msgstr "Sehr gut."
 
 #: ../data/quests/fortify_dwarfenwall.xml:230
 msgid "Er erwartet dich jetzt"
-msgstr ""
+msgstr "Er erwartet dich jetzt"
 
 #: ../data/quests/fortify_dwarfenwall.xml:232
 msgid "Er erwartet euch jetzt"
-msgstr ""
+msgstr "Er erwartet euch jetzt"
 
 #: ../data/quests/fortify_dwarfenwall.xml:320
 msgid "Eure Anwesenheit ist nicht laenger von Noeten."
-msgstr ""
+msgstr "Eure Anwesenheit ist nicht länger von Nöten."
 
 #: ../data/quests/fortify_dwarfenwall.xml:321
 msgid "Aber mein Lord, das sind-"
-msgstr ""
+msgstr "Aber mein Lord, das sind-"
 
 #: ../data/quests/fortify_dwarfenwall.xml:323 ../data/quests/scene7.xml:29
 #: ../data/quests/siegeOfDwarfenwall.xml:215
 #: ../data/quests/siegeOfDwarfenwall.xml:2529
 #: ../data/quests/theFissure.xml:420
 msgid "..."
-msgstr ""
+msgstr "..."
 
 #: ../data/quests/fortify_dwarfenwall.xml:324
 msgid "Wie ihr es wuenscht, verzeiht bitte."
-msgstr ""
+msgstr "Wie ihr es wünscht, verzeiht bitte."
 
 #: ../data/quests/fortify_dwarfenwall.xml:325
 msgid "Jetzt komm schon, der weiß was er tut."
-msgstr ""
+msgstr "Jetzt komm schon, der weiß was er tut."
 
 #: ../data/quests/fortify_dwarfenwall.xml:330
 msgid "Nette Huette!"
-msgstr ""
+msgstr "Nette Hütte!"
 
 #: ../data/quests/fortify_dwarfenwall.xml:331
 msgid "Naja, etwas unordentlich…"
-msgstr ""
+msgstr "Naja, etwas unordentlich…"
 
 #: ../data/quests/fortify_dwarfenwall.xml:332
 msgid "...um nicht zu sagen: schleimig."
-msgstr ""
+msgstr "...um nicht zu sagen: schleimig."
 
 #: ../data/quests/fortify_dwarfenwall.xml:333
 msgid "Diese Ritualgegenstände haben auch schon bessere Zeiten gesehen."
-msgstr ""
+msgstr "Diese Ritualgegenstände haben auch schon bessere Zeiten gesehen."
 
 #: ../data/quests/fortify_dwarfenwall.xml:335
 msgid "Ja, sie haben mich gewarnt, dass Ihr schwierig seid. _solo"
-msgstr ""
+msgstr "Ja, sie haben mich gewarnt, dass Ihr schwierig seid."
 
 #: ../data/quests/fortify_dwarfenwall.xml:337
 msgid "Ja, sie haben mich gewarnt, dass ihr schwierig seid."
-msgstr ""
+msgstr "Ja, sie haben mich gewarnt, dass ihr schwierig seid."
 
 #: ../data/quests/fortify_dwarfenwall.xml:339
 msgid "Schwierig?"
-msgstr ""
+msgstr "Schwierig?"
 
 #: ../data/quests/fortify_dwarfenwall.xml:341
 msgid ""
 "Da gebe ich mir solche Mühe und alles was dabei raus kommt ist \"schwierig\"."
 msgstr ""
+"Da gebe ich mir solche Mühe und alles was dabei raus kommt ist \"schwierig\"."
 
 #: ../data/quests/fortify_dwarfenwall.xml:343
 msgid ""
 "Da gibst du dir solche Mühe und alles was dabei raus kommt ist \"schwierig\"."
 msgstr ""
+"Da gibst du dir solche Mühe und alles was dabei raus kommt ist \"schwierig\"."
 
 #: ../data/quests/fortify_dwarfenwall.xml:344
 msgid "Pft. Ich hätte große Lust den Laden abzufackeln."
-msgstr ""
+msgstr "Pft. Ich hätte große Lust den Laden abzufackeln."
 
 #: ../data/quests/fortify_dwarfenwall.xml:346
 msgid "Ich haette große Lust den Laden abzufackeln."
-msgstr ""
+msgstr "Ich hätte große Lust den Laden abzufackeln."
 
 #: ../data/quests/fortify_dwarfenwall.xml:350
 msgid "Bei den ganzen Waschlappen hier ist das doch kaum der Mühe wert."
-msgstr ""
+msgstr "Bei den ganzen Waschlappen hier ist das doch kaum der Mühe wert."
 
 #: ../data/quests/fortify_dwarfenwall.xml:352
 msgid "Andererseits..."
-msgstr ""
+msgstr "Andererseits..."
 
 #: ../data/quests/fortify_dwarfenwall.xml:354
 msgid ""
 "Wenn noch mehr von Riesendinger frei kommen könnte das ein paar "
 "Schwierigkeiten machen..."
 msgstr ""
+"Wenn noch mehr von Riesendinger frei kommen könnte das ein paar "
+"Schwierigkeiten machen..."
 
 #: ../data/quests/fortify_dwarfenwall.xml:355
 msgid ""
 "Und die Chance ist recht hoch... die Monster hier haben schließlich alle "
 "ihren eigenen Kopf."
 msgstr ""
+"Und die Chance ist recht hoch... die Monster hier haben schließlich alle "
+"ihren eigenen Kopf."
 
 #: ../data/quests/fortify_dwarfenwall.xml:356
 msgid "Ich kenn da einen netten kleinen Bannspruch..."
-msgstr ""
+msgstr "Ich kenn da einen netten kleinen Bannspruch..."
 
 #: ../data/quests/fortify_dwarfenwall.xml:362
 msgid "Wuerdet Ihr bitte kurz auf diesen Stein sehen. _solo"
-msgstr ""
+msgstr "Würdet Ihr bitte kurz auf diesen Stein sehen."
 
 #: ../data/quests/fortify_dwarfenwall.xml:364
 msgid "Wuerdet ihr bitte kurz auf diesen Stein sehen."
-msgstr ""
+msgstr "Wuerdet ihr bitte kurz auf diesen Stein sehen."
 
 #: ../data/quests/fortify_dwarfenwall.xml:371
 msgid "Ist das etwa ein... ?"
-msgstr ""
+msgstr "Ist das etwa ein... ?"
 
 #: ../data/quests/fortify_dwarfenwall.xml:372
 msgid "Ganz recht."
-msgstr ""
+msgstr "Ganz recht."
 
 #: ../data/quests/fortify_dwarfenwall.xml:373
 msgid "Es handelt sich um einen Stein aus dem Herzen von Harads Hoelle."
-msgstr ""
+msgstr "Es handelt sich um einen Stein aus dem Herzen von Harads Hölle."
 
 #: ../data/quests/fortify_dwarfenwall.xml:374
 msgid "Wie kann es sein, dass ihr noch am Leben seid?"
-msgstr ""
+msgstr "Wie kann es sein, dass ihr noch am Leben seid?"
 
 #: ../data/quests/fortify_dwarfenwall.xml:375
 msgid "In der Tat die richtige Frage."
-msgstr ""
+msgstr "In der Tat die richtige Frage."
 
 #: ../data/quests/fortify_dwarfenwall.xml:377
 msgid "Mit einer Antwort, die Euch von euren Leiden befreien wird."
-msgstr ""
+msgstr "Mit einer Antwort, die Euch von euren Leiden befreien wird."
 
 #: ../data/quests/fortify_dwarfenwall.xml:379
 msgid "Mit einer Antwort, die euch alle von euren Leiden befreien wird."
-msgstr ""
+msgstr "Mit einer Antwort, die euch alle von euren Leiden befreien wird."
 
 #: ../data/quests/fortify_dwarfenwall.xml:381
 msgid ""
 "Aber bevor ich sie euch gebe, muesst ihr jedoch zuerst etwas für mich tun."
 msgstr ""
+"Aber bevor ich sie euch gebe, muesst ihr jedoch zuerst etwas für mich tun."
 
 #: ../data/quests/fortify_dwarfenwall.xml:382
 msgid "Moege Harad dich verfluchen!"
-msgstr ""
+msgstr "Möge Harad dich verfluchen!"
 
 #: ../data/quests/fortify_dwarfenwall.xml:383
 msgid ""
 "Ts Ts. Wie unhoeflich den Namen des Verfluchten in Akerans Hallen zu "
 "verwenden."
 msgstr ""
+"Ts Ts. Wie unhöflich den Namen des Verfluchten in Akerans Hallen zu "
+"verwenden."
 
 #: ../data/quests/fortify_dwarfenwall.xml:384
 msgid "Das ist eine verdammte Raeuberhoehle."
-msgstr ""
+msgstr "Das ist eine verdammte Räuberhoehle."
 
 #: ../data/quests/fortify_dwarfenwall.xml:385
 msgid "Euch entgeht der eigentliche Punkt."
-msgstr ""
+msgstr "Euch entgeht der eigentliche Punkt."
 
 #: ../data/quests/fortify_dwarfenwall.xml:386
 msgid ""
 "Ihr solltet begreifen, dass es ganz an euch liegt, wie lange ihr unter der "
 "vollkommenen Knechtschaft des Totengottes stehen werdet."
 msgstr ""
+"Ihr solltet begreifen, dass es ganz an euch liegt, wie lange ihr unter der "
+"vollkommenen Knechtschaft des Totengottes stehen werdet."
 
 #: ../data/quests/fortify_dwarfenwall.xml:387
 msgid ""
 "Erfuellt ihr meinen Auftrag zur Zufriedenheit Akerans und des Konzils, habe "
 "ich die Macht euch aus seine Klauen zu befreien."
 msgstr ""
+"Erfüllt ihr meinen Auftrag zur Zufriedenheit Akerans und des Konzils, habe "
+"ich die Macht euch aus seine Klauen zu befreien."
 
 #: ../data/quests/fortify_dwarfenwall.xml:388
 msgid "Für immer."
-msgstr ""
+msgstr "Für immer."
 
 #: ../data/quests/fortify_dwarfenwall.xml:389
 msgid "Wenn nicht, jedoch..."
-msgstr ""
+msgstr "Wenn nicht, jedoch..."
 
 #: ../data/quests/fortify_dwarfenwall.xml:391
 msgid "Hab ich schon tausend Mal gehoert. Spar dir die Rede."
-msgstr ""
+msgstr "Hab ich schon tausend Mal gehört. Spar dir die Rede."
 
 #: ../data/quests/fortify_dwarfenwall.xml:393
 msgid "Das kennen wir schon, also spart dir die langen Reden."
-msgstr ""
+msgstr "Das kennen wir schon, also spar dir die langen Reden."
 
 #: ../data/quests/fortify_dwarfenwall.xml:398
 msgid "Wie ihr es wuenscht."
-msgstr ""
+msgstr "Wie ihr es wünscht."
 
 #: ../data/quests/fortify_dwarfenwall.xml:399
 msgid ""
 "Doch ich sollte euch warnen, der Auftrag ist recht gefaehrlich und ihr "
 "werdet wahrscheinlich mehr als einmal sterben."
 msgstr ""
+"Doch ich sollte euch warnen, der Auftrag ist recht gefährlich und ihr werdet "
+"wahrscheinlich mehr als einmal sterben."
 
 #: ../data/quests/fortify_dwarfenwall.xml:400
 msgid "Der Fluch von Harad muss ja irgend einen Vorteil haben."
-msgstr ""
+msgstr "Der Fluch von Harad muss ja irgend einen Vorteil haben."
 
 #: ../data/quests/fortify_dwarfenwall.xml:401
 msgid "Bis auf die Schmerzen..."
-msgstr ""
+msgstr "Bis auf die Schmerzen..."
 
 #: ../data/quests/fortify_dwarfenwall.xml:403
 msgid "Selbst hier musst du noch jammern."
-msgstr ""
+msgstr "Selbst hier musst du noch jammern."
 
 #: ../data/quests/fortify_dwarfenwall.xml:406
 msgid "Ihr seid in der Tat ein Haufen schwieriger Gestalten."
-msgstr ""
+msgstr "Ihr seid in der Tat ein Haufen schwieriger Gestalten."
 
 #: ../data/quests/fortify_dwarfenwall.xml:408
 msgid "Ihr seid in der Tat eine schwierige Gestalt"
-msgstr ""
+msgstr "Ihr seid in der Tat eine schwierige Gestalt"
 
 #: ../data/quests/fortify_dwarfenwall.xml:410
 msgid "Langsam macht er mich wuetend"
-msgstr ""
+msgstr "Langsam macht er mich wütend."
 
 #: ../data/quests/fortify_dwarfenwall.xml:412
 msgid "Friede!"
-msgstr ""
+msgstr "Friede!"
 
 #: ../data/quests/fortify_dwarfenwall.xml:415
 msgid "Armselige Gestalt!"
-msgstr ""
+msgstr "Armselige Gestalt!"
 
 #: ../data/quests/fortify_dwarfenwall.xml:416
 msgid "Zuerst muesst Ihr ganz offensichtlich Manieren lernen. _solo"
-msgstr ""
+msgstr "Zuerst müsst Ihr ganz offensichtlich Manieren lernen."
 
 #: ../data/quests/fortify_dwarfenwall.xml:418
 msgid "Armselige Gestalten!"
-msgstr ""
+msgstr "Armselige Gestalten!"
 
 #: ../data/quests/fortify_dwarfenwall.xml:419
 msgid "Zuerst muesst ihr ganz offensichtlich Manieren lernen."
-msgstr ""
+msgstr "Zuerst müsst ihr ganz offensichtlich Manieren lernen."
 
 #: ../data/quests/fortify_dwarfenwall.xml:421
 msgid "Betrachtet es einfach als kleine Gefaelligkeit:"
-msgstr ""
+msgstr "Betrachtet es einfach als kleine Gefälligkeit:"
 
 #: ../data/quests/fortify_dwarfenwall.xml:422
 msgid ""
 "Vor eurem eigentlichen Auftrag geht ihr als Verstaerkung nach Zwergentrutz."
 msgstr ""
+"Vor eurem eigentlichen Auftrag geht ihr als Verstärkung nach Zwergentrutz."
 
 #: ../data/quests/fortify_dwarfenwall.xml:423
 msgid ""
 "Zeigt den Untoten dort, wer tatsaechlich der Liebling des Totengottes ist."
 msgstr ""
+"Zeigt den Untoten dort, wer tatsächlich der Liebling des Totengottes ist."
 
 #: ../data/quests/fortify_dwarfenwall.xml:424
 msgid "Das schmeckt wie Ausbeutung."
-msgstr ""
+msgstr "Das schmeckt wie Ausbeutung."
 
 #: ../data/quests/fortify_dwarfenwall.xml:425
 msgid "Außerdem folgen Nekromanten nicht Harad."
-msgstr ""
+msgstr "Außerdem folgen Nekromanten nicht Harad."
 
 #: ../data/quests/fortify_dwarfenwall.xml:427
 msgid ""
 "Unter allen miesen Ratten, für die ich schon die Kastanien aus dem Feuer "
 "geholt habe"
 msgstr ""
+"Unter allen miesen Ratten, für die ich schon die Kastanien aus dem Feuer "
+"geholt habe"
 
 #: ../data/quests/fortify_dwarfenwall.xml:428
 msgid "rangiert dieser Robenwicht ziemlich weit an der Spitze."
-msgstr ""
+msgstr "rangiert dieser Robenwicht ziemlich weit an der Spitze."
 
 #: ../data/quests/fortify_dwarfenwall.xml:430
 msgid ""
 "Ich verstehe auch nicht, warum wir hier nach seiner Pfeife tanzen. Er ist "
 "doch schließlich-"
 msgstr ""
+"Ich verstehe auch nicht, warum wir hier nach seiner Pfeife tanzen. Er ist "
+"doch schließlich-"
 
 #: ../data/quests/fortify_dwarfenwall.xml:431
 msgid "Nur ein Mensch!!"
-msgstr ""
+msgstr "Nur ein Mensch!!"
 
 #: ../data/quests/fortify_dwarfenwall.xml:435
 msgid "Ihr verkennt ganz offensichtlich eure Position."
-msgstr ""
+msgstr "Ihr verkennt ganz offensichtlich eure Position."
 
 #: ../data/quests/fortify_dwarfenwall.xml:436
 msgid ""
 "Was denkt ihr wohl, was geschieht, wenn ihr in dieser Stadt erkannt werdet?"
 msgstr ""
+"Was denkt ihr wohl, was geschieht, wenn ihr in dieser Stadt erkannt werdet?"
 
 #: ../data/quests/fortify_dwarfenwall.xml:437
 msgid ""
 "Wir wissen alles ueber eure akeranverfluchte Art und niemand waere dumm "
 "genug, euch zu toeten, dass koennt ihr mir glauben."
 msgstr ""
+"Wir wissen alles über eure akeranverfluchte Art und niemand wäre dumm genug, "
+"euch zu töten, dass könnt ihr mir glauben."
 
 #: ../data/quests/fortify_dwarfenwall.xml:440
 msgid "Weiterhin patzig sein?"
-msgstr ""
+msgstr "Weiterhin patzig sein?"
 
 #: ../data/quests/fortify_dwarfenwall.xml:441 ../data/quests/goblins.xml:37
 #: ../data/quests/rob_the_robber.xml:36 ../data/quests/rob_the_robber.xml:88
@@ -625,313 +690,348 @@ msgstr "Nein"
 
 #: ../data/quests/fortify_dwarfenwall.xml:453
 msgid "Ihr haltet euch wohl für besonders mächtig und gerissen?"
-msgstr ""
+msgstr "Ihr haltet euch wohl für besonders mächtig und gerissen?"
 
 #: ../data/quests/fortify_dwarfenwall.xml:455
 msgid "Sicherlich hat er sein Wissen hier irgendwo aufgeschrieben."
-msgstr ""
+msgstr "Sicherlich hat er sein Wissen hier irgendwo aufgeschrieben."
 
 #: ../data/quests/fortify_dwarfenwall.xml:456
 msgid "Wir koennen danach suchen, sobald er tot ist."
-msgstr ""
+msgstr "Wir können danach suchen, sobald er tot ist."
 
 #: ../data/quests/fortify_dwarfenwall.xml:458
 msgid "Eine guenstige Gelegenheit. In der Tat."
-msgstr ""
+msgstr "Eine günstige Gelegenheit. In der Tat."
 
 #: ../data/quests/fortify_dwarfenwall.xml:461
 msgid "Sicherlich hast du dein Wissen hier irgendwo aufgeschrieben."
-msgstr ""
+msgstr "Sicherlich hast du dein Wissen hier irgendwo aufgeschrieben."
 
 #: ../data/quests/fortify_dwarfenwall.xml:462
 msgid "Ich kann auch nach deinem vorzeitigen Tod danach suchen."
-msgstr ""
+msgstr "Ich kann auch nach deinem vorzeitigen Tod danach suchen."
 
 #: ../data/quests/fortify_dwarfenwall.xml:464
 msgid "Ja, sie haben mich auch davor gewarnt, dass so etwas geschehen koennte."
-msgstr ""
+msgstr "Ja, sie haben mich auch davor gewarnt, dass so etwas geschehen könnte."
 
 #: ../data/quests/fortify_dwarfenwall.xml:469
 msgid ""
 "Mit diesem Kristall werde ich euch im Auge behalten und Anweisungen erteilen."
 msgstr ""
+"Mit diesem Kristall werde ich euch im Auge behalten und Anweisungen erteilen."
 
 #: ../data/quests/fortify_dwarfenwall.xml:470
 msgid ""
 "Dieser einfache Elementar wird euch jetzt daran erinnern, dass "
 "Unsterblichkeit an diesem Ort wenig bedeutet."
 msgstr ""
+"Dieser einfache Elementar wird euch jetzt daran erinnern, dass "
+"Unsterblichkeit an diesem Ort wenig bedeutet."
 
 #: ../data/quests/fortify_dwarfenwall.xml:477
 #: ../data/quests/fortify_dwarfenwall.xml:626
 msgid "Natuerlich."
-msgstr ""
+msgstr "Natürlich."
 
 #: ../data/quests/fortify_dwarfenwall.xml:478
 msgid ""
 "Wenn unsere Freiheit die Belohnung ist, werden wir alles in unserer Macht "
 "stehende tun, um erfolgreich zu sein."
 msgstr ""
+"Wenn unsere Freiheit die Belohnung ist, werden wir alles in unserer Macht "
+"stehende tun, um erfolgreich zu sein."
 
 #: ../data/quests/fortify_dwarfenwall.xml:479
 msgid "Das gefaellt mir nicht."
-msgstr ""
+msgstr "Das gefällt mir nicht."
 
 #: ../data/quests/fortify_dwarfenwall.xml:480
 msgid "Nun gut."
-msgstr ""
+msgstr "Nun gut."
 
 #: ../data/quests/fortify_dwarfenwall.xml:481
 msgid ""
 "Ich muss mich jetzt um die Vorbereitungen für die bevorstehende Heirat des "
 "Prinzen kuemmern."
 msgstr ""
+"Ich muss mich jetzt um die Vorbereitungen für die bevorstehende Heirat des "
+"Prinzen kümmern."
 
 #: ../data/quests/fortify_dwarfenwall.xml:482
 msgid "Es ist keine Zeit für weitere Erklaerungen."
-msgstr ""
+msgstr "Es ist keine Zeit für weitere Erklärungen."
 
 #: ../data/quests/fortify_dwarfenwall.xml:483
 msgid "Nehmt etwas Gold und diesen Kristall."
-msgstr ""
+msgstr "Nehmt etwas Gold und diesen Kristall."
 
 #: ../data/quests/fortify_dwarfenwall.xml:484
 msgid "Darueber werde ich euch zur rechten Zeit weitere Instruktionen senden. "
-msgstr ""
+msgstr "Darüber werde ich euch zur rechten Zeit weitere Instruktionen senden."
 
 #: ../data/quests/fortify_dwarfenwall.xml:613
 msgid "Na bitte, das war doch eher zahm."
-msgstr ""
+msgstr "Na bitte, das war doch eher zahm."
 
 #: ../data/quests/fortify_dwarfenwall.xml:616
 msgid "Das war der schwaechste Elementar, den ich beschwoeren konnte."
-msgstr ""
+msgstr "Das war der schwächste Elementar, den ich beschwören konnte."
 
 #: ../data/quests/fortify_dwarfenwall.xml:617
 #: ../data/quests/fortify_dwarfenwall.xml:618
 msgid "Denkt immer daran."
-msgstr ""
+msgstr "Denkt immer daran."
 
 #: ../data/quests/fortify_dwarfenwall.xml:619
 msgid "Nehmt etwas Gold und ruestet euch im Soeldnerlager noerdlich der Stadt."
 msgstr ""
+"Nehmt etwas Gold und rüstet euch im Söldnerlager nördlich der Stadt aus."
 
 #: ../data/quests/fortify_dwarfenwall.xml:620
 msgid "Dort findet ihr alles, was ihr braucht."
-msgstr ""
+msgstr "Dort findet ihr alles, was ihr braucht."
 
 #: ../data/quests/fortify_dwarfenwall.xml:621
 msgid "Alles?"
-msgstr ""
+msgstr "Alles?"
 
 #: ../data/quests/fortify_dwarfenwall.xml:623
 msgid "Ich kann nicht länger meine Zeit verschwenden."
-msgstr ""
+msgstr "Ich kann nicht länger meine Zeit verschwenden."
 
 #: ../data/quests/fortify_dwarfenwall.xml:624
 msgid ""
 "Der Prinz wird bald heiraten und es gibt noch einige Vorbereitungen zu "
 "treffen."
 msgstr ""
+"Der Prinz wird bald heiraten und es gibt noch einige Vorbereitungen zu "
+"treffen."
 
 #: ../data/quests/fortify_dwarfenwall.xml:625
 msgid "Ueber diesen Kristall werde ich mit euch in Verbindung bleiben."
-msgstr ""
+msgstr "Über diesen Kristall werde ich mit euch in Verbindung bleiben."
 
 #: ../data/quests/fortify_dwarfenwall.xml:628
 msgid ""
 "Ist sicherlich nicht wirklich vom goettlichsten Akeran erlaubt meine "
 "Kampfkraft zu erpressen."
 msgstr ""
+"Ist sicherlich nicht wirklich vom göttlichsten Akeran erlaubt meine "
+"Kampfkraft zu erpressen."
 
 #: ../data/quests/fortify_dwarfenwall.xml:630
 msgid ""
 "Ist sicherlich nicht wirklich vom goettlichsten Akeran erlaubt, unsere "
 "Kampfkraft zu erpressen."
 msgstr ""
+"Ist sicherlich nicht wirklich vom göttlichsten Akeran erlaubt, unsere "
+"Kampfkraft zu erpressen."
 
 #: ../data/quests/fortify_dwarfenwall.xml:632
 msgid "Verschwindet endlich!"
-msgstr ""
+msgstr "Verschwindet endlich!"
 
 #: ../data/quests/fortify_dwarfenwall.xml:688
 msgid "(Dieser Windklaue ist irgendwie seltsam.)"
-msgstr ""
+msgstr "(Dieser Windklaue ist irgendwie seltsam.)"
 
 #: ../data/quests/fortify_dwarfenwall.xml:689
 msgid "(Er weiß zuviel. Und er hat einen echten Stein aus Harads Hoelle.)"
-msgstr ""
+msgstr "(Er weiß zuviel. Und er hat einen echten Stein aus Harads Hoelle.)"
 
 #: ../data/quests/fortify_dwarfenwall.xml:690
 msgid "(Und dieser Kristall, den er mir untergejubelt hat...)"
-msgstr ""
+msgstr "(Und dieser Kristall, den er mir untergejubelt hat...)"
 
 #: ../data/quests/fortify_dwarfenwall.xml:691
 msgid "(Sieht aus wie ein Spionagekristall. Na, das werden wir gleich wissen.)"
 msgstr ""
+"(Sieht aus wie ein Spionagekristall. Na, das werden wir gleich wissen.)"
 
 #: ../data/quests/fortify_dwarfenwall.xml:692
 msgid "Hm... ich werde einfach mal nach Feinden des Konzils Ausschau halten."
-msgstr ""
+msgstr "Hm... ich werde einfach mal nach Feinden des Konzils Ausschau halten."
 
 #: ../data/quests/fortify_dwarfenwall.xml:693
 msgid "Und danach mit ihnen diese Beschwoerer-Wichtel auseinander nehmen."
-msgstr ""
+msgstr "Und danach mit ihnen diese Beschwörer-Wichtel auseinander nehmen."
 
 #: ../data/quests/fortify_dwarfenwall.xml:694
 msgid "Das sollte nicht so schwer sein."
-msgstr ""
+msgstr "Das sollte nicht so schwer sein."
 
 #: ../data/quests/fortify_dwarfenwall.xml:696
 msgid "Das glaubst auch nur du, Gezeichnete!"
-msgstr ""
+msgstr "Das glaubst auch nur du, Gezeichnete!"
 
 #: ../data/quests/fortify_dwarfenwall.xml:698
 msgid "Das glaubst auch nur du, Gezeichneter!"
-msgstr ""
+msgstr "Das glaubst auch nur du, Gezeichneter!"
 
 #: ../data/quests/fortify_dwarfenwall.xml:700
 msgid "...sprach der spionierende Lord Magister."
-msgstr ""
+msgstr "...sprach der spionierende Lord Magister."
 
 #: ../data/quests/fortify_dwarfenwall.xml:701
 msgid "Keine schoenen Angewohnheiten, die du da hast, Luftpfote..."
-msgstr ""
+msgstr "Keine schönen Angewohnheiten, die du da hast, Luftpfote..."
 
 #: ../data/quests/fortify_dwarfenwall.xml:702
 msgid "Windklaue!"
-msgstr ""
+msgstr "Windklaue!"
 
 #: ../data/quests/fortify_dwarfenwall.xml:703
 msgid "Und gewoehn dich besser daran, ueberwacht zu werden."
-msgstr ""
+msgstr "Und gewöhn dich besser daran, überwacht zu werden."
 
 #: ../data/quests/fortify_dwarfenwall.xml:704
 msgid "Ich bin kein Idiot"
-msgstr ""
+msgstr "Ich bin kein Idiot."
 
 #: ../data/quests/fortify_dwarfenwall.xml:706
 msgid "Aber allwissend bist du auch nicht."
-msgstr ""
+msgstr "Aber allwissend bist du auch nicht."
 
 #: ../data/quests/fortify_dwarfenwall.xml:707
 msgid "Und was willst du damit sagen?"
-msgstr ""
+msgstr "Und was willst du damit sagen?"
 
 #: ../data/quests/fortify_dwarfenwall.xml:708
 msgid ""
 "Na ja... das Ding da ist von der Aisener Magiergilde hergestellt worden, "
 "oder etwa nicht?"
 msgstr ""
+"Na ja... das Ding da ist von der Aisener Magiergilde hergestellt worden, "
+"oder etwa nicht?"
 
 #: ../data/quests/fortify_dwarfenwall.xml:709
 msgid "Und?"
-msgstr ""
+msgstr "Und?"
 
 #: ../data/quests/fortify_dwarfenwall.xml:710
 msgid "Bist ein Fachidiot, was?"
-msgstr ""
+msgstr "Bist ein Fachidiot, was?"
 
 #: ../data/quests/fortify_dwarfenwall.xml:711
 msgid ""
 "Avaera, die Göttin der Magie? Klingelts? Die Leute da sind alle recht fromm."
 msgstr ""
+"Avaera, die Göttin der Magie? Klingelts? Die Leute da sind alle recht fromm."
 
 #: ../data/quests/fortify_dwarfenwall.xml:712
 msgid ""
 "Die haben bestimmt Avaeras Segen auf den Kristall gesprochen, damit er viel "
 "besser funktioniert."
 msgstr ""
+"Die haben bestimmt Avaeras Segen auf den Kristall gesprochen, damit er viel "
+"besser funktioniert."
 
 #: ../data/quests/fortify_dwarfenwall.xml:713
 msgid "Huete deine Zunge, Abschaum! Was bitte soll das aendern?"
-msgstr ""
+msgstr "Hüte deine Zunge, Abschaum! Was bitte soll das ändern?"
 
 #: ../data/quests/fortify_dwarfenwall.xml:714
 msgid "Alles"
-msgstr ""
+msgstr "Alles."
 
 #: ../data/quests/fortify_dwarfenwall.xml:715
 msgid ""
 "Weißt du, was passiert, wenn das mit dem Blut von Gezeichneten in Beruehrung "
 "kommt?"
 msgstr ""
+"Weißt du, was passiert, wenn das mit dem Blut von Gezeichneten in Berührung "
+"kommt?"
 
 #: ../data/quests/fortify_dwarfenwall.xml:716
 msgid ""
 "Es ist nicht so, als hätte ich besondes viele von euch Verfluchten zu "
 "experimentellen Zwecken hier."
 msgstr ""
+"Es ist nicht so, als hätte ich besondes viele von euch Verfluchten zu "
+"experimentellen Zwecken hier."
 
 #: ../data/quests/fortify_dwarfenwall.xml:725
 msgid "Sicher, sicher."
-msgstr ""
+msgstr "Sicher, sicher."
 
 #: ../data/quests/fortify_dwarfenwall.xml:726
 msgid "Die werden auch sehr interessiert sein, wo ich hergekommen bin."
 msgstr ""
+"Deine Leute werden auch sehr interessiert sein, wo ich hergekommen bin."
 
 #: ../data/quests/fortify_dwarfenwall.xml:728
 msgid "Und das heißt Gezeichnete."
-msgstr ""
+msgstr "Und das heißt Gezeichnete."
 
 #: ../data/quests/fortify_dwarfenwall.xml:730
 msgid "Und das heißt Gezeichneter."
-msgstr ""
+msgstr "Und das heißt Gezeichneter."
 
 #: ../data/quests/fortify_dwarfenwall.xml:733
 msgid "Blind und Taub, aber nicht stumm, wie?"
-msgstr ""
+msgstr "Blind und Taub, aber nicht stumm, wie?"
 
 #: ../data/quests/fortify_dwarfenwall.xml:734
 msgid "Das wird eine echt anstrengende Reise, wenn das so weitergeht..."
-msgstr ""
+msgstr "Das wird eine echt anstrengende Reise, wenn das so weitergeht..."
 
 #: ../data/quests/fortify_dwarfenwall.xml:735
 msgid "Beruhige dich, Herr der unangenehemen Luefte!"
-msgstr ""
+msgstr "Beruhige dich, Herr der unangenehemen Luefte!"
 
 #: ../data/quests/fortify_dwarfenwall.xml:736
 msgid "Ich kann dich hoeren und wir koennen reden, wenn es sein muss"
-msgstr ""
+msgstr "Ich kann dich hören und wir können reden, wenn es sein muss."
 
 #: ../data/quests/fortify_dwarfenwall.xml:737
 msgid "Das reicht doch, oder?"
-msgstr ""
+msgstr "Das reicht doch, oder?"
 
 #: ../data/quests/fortify_dwarfenwall.xml:738
 msgid ""
 "So viel Geld, als das ich mich von dir die ganze Zeit anstarren lasse, "
 "kannst du gar nicht haben."
 msgstr ""
+"So viel Geld, als das ich mich von dir die ganze Zeit anstarren lasse, "
+"kannst du gar nicht haben."
 
 #: ../data/quests/fortify_dwarfenwall.xml:739
 msgid ""
 "Bete lieber zu deinem Akeran, dass ich nie einen Weg finde, einen Feuerball "
 "durch das Ding zu schicken."
 msgstr ""
+"Bete lieber zu deinem Akeran, dass ich nie einen Weg finde, einen Feuerball "
+"durch das Ding zu schicken."
 
 #: ../data/quests/fortify_dwarfenwall.xml:740
 msgid ""
 "Tja ja... Wissen über die Götter ist Macht, wenn man ihren Launen ausgesetzt "
 "ist."
 msgstr ""
+"Tja ja... Wissen über die Götter ist Macht, wenn man ihren Launen ausgesetzt "
+"ist."
 
 #: ../data/quests/fortify_dwarfenwall.xml:741
 msgid ""
 "Sei lieber froh, dass ich nicht gleich den ganzen Kristall zerschmettert "
 "habe."
 msgstr ""
+"Sei lieber froh, dass ich nicht gleich den ganzen Kristall zerschmettert "
+"habe."
 
 #: ../data/quests/fortify_dwarfenwall.xml:743
 msgid ""
 "Erlaube dir noch eine solche Unverschaemtheit und ich werde dich in den "
 "Hungerturm sperren lassen!"
 msgstr ""
+"Erlaube dir noch eine solche Unverschämtheit und ich werde dich in den "
+"Hungerturm sperren lassen!"
 
 #: ../data/quests/fortify_dwarfenwall.xml:744
 msgid "Was soll ich nur mit diesen Konzilikern machen?"
-msgstr ""
+msgstr "Was soll ich nur mit diesen Konzilikern machen?"
 
 #: ../data/quests/fortify_dwarfenwall.xml:748
 msgid "Koennen wir diesen Kristall irgendwie blind machen?"
