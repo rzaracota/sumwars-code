@@ -382,9 +382,6 @@
 	<LearnableAbility type="holy_fire" skilltree_tab="1" skilltree_posx="0.200000" skilltree_posy="0.650000" required_level="35">
 		<RequiredAbility type="holy_light" />
 	</LearnableAbility>
-	<LearnableAbility type="burning_rage" skilltree_tab="1" skilltree_posx="0.700000" skilltree_posy="0.250000" required_level="5">
-		<RequiredAbility type="blazing_shield" />
-	</LearnableAbility>
 	<LearnableAbility type="cure_blind_mute" skilltree_tab="1" skilltree_posx="0.700000" skilltree_posy="0.450000" required_level="15" />
 	<LearnableAbility type="cure_blind_mute_party" skilltree_tab="1" skilltree_posx="0.700000" skilltree_posy="0.650000" required_level="35">
 		<RequiredAbility type="cure_blind_mute" />
