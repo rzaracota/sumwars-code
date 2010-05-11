@@ -7,6 +7,7 @@ folgendes ausgeführt werden:
 
 Konkretes Beispiel anhand der deutschen Übersetzung:
    msginit -l de -o sumwars_sumwars_de.po -i sumwars_sumwars.pot
+   msginit -l en -o sumwars_sumwars.po -i sumwars_sumwars.pot
 
 Nachfolgend muss in der .po-Datei noch der korrekte Zeichensatz eingetragen
 werden und es müssen die Skripte  update_translation.sh  und  generate_mo.sh
