@@ -295,8 +295,10 @@ void Document::createNewCharacter(std::string name)
 
 void Document::sendCommand(ClientCommand* comm)
 {
-	World::getWorld()->handleCommand(comm);
-
+	if (World::getWorld() != 0)
+	{
+		World::getWorld()->handleCommand(comm);
+	}
 }
 
 
@@ -1303,20 +1305,26 @@ bool Document::onKeyPress(KeyCode key)
 		else if (dest>=USE_SKILL_LEFT && dest <USE_SKILL_RIGHT)
 		{
 			Player* player = getLocalPlayer();
-			std::map<int,LearnableAbility> &ablts = player->getLearnableAbilities();
-
-			if (ablts.count(dest-USE_SKILL_LEFT) >0)
+			if (player != 0)
 			{
-				setLeftAction(ablts[dest-USE_SKILL_LEFT].m_type);
+				std::map<int,LearnableAbility> &ablts = player->getLearnableAbilities();
+	
+				if (ablts.count(dest-USE_SKILL_LEFT) >0)
+				{
+					setLeftAction(ablts[dest-USE_SKILL_LEFT].m_type);
+				}
 			}
 		}
 		else if (dest>=USE_SKILL_RIGHT && dest <USE_SKILL_RIGHT+200)
 		{
 			Player* player = getLocalPlayer();
-			std::map<int,LearnableAbility> &ablts = player->getLearnableAbilities();
-			if (ablts.count(dest-USE_SKILL_RIGHT) >0)
+			if (player != 0)
 			{
-				setRightAction(ablts[dest-USE_SKILL_RIGHT].m_type);
+				std::map<int,LearnableAbility> &ablts = player->getLearnableAbilities();
+				if (ablts.count(dest-USE_SKILL_RIGHT) >0)
+				{
+					setRightAction(ablts[dest-USE_SKILL_RIGHT].m_type);
+				}
 			}
 		}
 		else if(dest == SHOW_PARTYMENU)
