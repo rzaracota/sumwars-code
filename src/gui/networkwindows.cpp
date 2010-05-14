@@ -60,8 +60,10 @@ void HostGameWindow::update()
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::Editbox* box;
 	
-	int port = m_document->getPort();
-	int max_nr = m_document->getMaxPlayers();
+	Options* options = Options::getInstance();
+	
+	int port = options->getPort();
+	int max_nr = options->getMaxNumberPlayers();
 	
 	std::ostringstream stream;
 	stream.str("");
@@ -105,8 +107,11 @@ bool HostGameWindow::onStartHostGame(const CEGUI::EventArgs& evt)
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::Editbox* box;
 	
-	int port = m_document->getPort();
-	int max_nr = m_document->getMaxPlayers();
+	Options* options = Options::getInstance();
+	
+	int port = options->getPort();
+	int max_nr = options->getMaxNumberPlayers();
+	
 	std::stringstream stream,stream2;
 	
 	box = static_cast<CEGUI::Editbox*>(win_mgr.getWindow("HostPortBox"));
@@ -117,8 +122,8 @@ bool HostGameWindow::onStartHostGame(const CEGUI::EventArgs& evt)
 	stream2.str(box->getText().c_str());
 	stream2 >> max_nr;
 	
-	m_document->setPort(port);
-	m_document->setMaxPlayers(max_nr);
+	options->setPort(port);
+	options->setMaxNumberPlayers(max_nr);
 	
 	m_document->onButtonStartHostGame();
 	return true;
@@ -186,11 +191,11 @@ void JoinGameWindow::update()
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::Editbox* box;
 	
-	int port = m_document->getPort();
+	Options* options = Options::getInstance();
 	
-	
+	int port = options->getPort();
 	std::ostringstream stream;
-	std::string& hostname = m_document->getServerHost();
+	std::string hostname = options->getServerHost();
 	
 	box = static_cast<CEGUI::Editbox*>(win_mgr.getWindow("HostnameBox"));
 	if (box->getText() != hostname)
@@ -230,9 +235,11 @@ bool JoinGameWindow::onStartJoinGame(const CEGUI::EventArgs& evt)
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::Editbox* box;
 	
-	int port = m_document->getPort();
+	Options* options = Options::getInstance();
+	
+	int port = options->getPort();
 	std::stringstream stream;
-	std::string hostname = m_document->getServerHost();
+	std::string hostname = options->getServerHost();
 	
 	box = static_cast<CEGUI::Editbox*>(win_mgr.getWindow("HostnameBox"));
 	hostname = box->getText().c_str();
@@ -242,8 +249,8 @@ bool JoinGameWindow::onStartJoinGame(const CEGUI::EventArgs& evt)
 	stream >> port;
 	
 	DEBUG("join game %i %s",port,hostname.c_str());
-	m_document->setPort(port);
-	m_document->getServerHost() = hostname;
+	options->setPort(port);
+	options->setServerHost(hostname);
 	
 	m_document->onButtonStartJoinGame();
 	return true;

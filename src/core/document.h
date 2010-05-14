@@ -27,6 +27,7 @@
 #include "action.h"
 #include "creaturestruct.h"
 #include "player.h"
+#include "options.h"
 
 // forward Deklarationen um include von player.h zu vermeiden
 
@@ -39,10 +40,7 @@ class Party;
  *
  */
 
-/**
- * Code fuer eine Taste
- */
-typedef int KeyCode;
+
 
 class Document
 {
@@ -138,35 +136,7 @@ class Document
 		CREDITS = 0x80000,
 	};
 
-	/**
-	 * \enum ShortkeyDestination
-	 * \brief Listet Aktion auf, die ueber Kurztasten verfuegbar sind
-	 */
-	enum ShortkeyDestination
-	{
-		NO_KEY=0,
-		SHOW_INVENTORY =1,
-		SHOW_CHARINFO =2,
-		SHOW_SKILLTREE =3,
-		SHOW_PARTYMENU=4,
-		SHOW_CHATBOX =5,
-		SHOW_CHATBOX_NO_TOGGLE =6,
-		SHOW_QUESTINFO =7,
-		SHOW_MINIMAP =8,
-		SHOW_ITEMLABELS=9,
-		CLOSE_ALL=19,
-		SWAP_EQUIP=20,
-		SHOW_OPTIONS = 21,
-		USE_POTION = 30,
-		USE_SKILL_LEFT=100,
-		USE_SKILL_RIGHT=300,
-		CHEAT = 1000,
-	};
-
-	/**
-	 * Bildet von Tastencodes auf eine Wirkung ab
-	 */
-	typedef std::map<KeyCode,ShortkeyDestination> ShortkeyMap;
+	
 
 
 	/**
@@ -407,12 +377,12 @@ class Document
 	}
 
 	/**
-	 * \fn ShortkeyMap& getShortkeys()
+	 * \fn ShortkeyMap& getAbilityShortkeys()
 	 * \brief Gibt alle Shortkeys aus
 	 */
-	ShortkeyMap& getShortkeys()
+	ShortkeyMap& getAbilityShortkeys()
 	{
-		return m_shortkey_map;
+		return m_ability_shortkey_map;
 	}
 
 	/**
@@ -447,30 +417,12 @@ class Document
 	std::string getAbilityDescription(Action::ActionType ability);
 
 	/**
-	 * \fn KeyCode getMappedKey(ShortkeyDestination sd)
-	 * \brief Gibt die Taste zurueck, die das angegebene Ereignis ausloest
-	 */
-	KeyCode getMappedKey(ShortkeyDestination sd);
-
-	/**
-	 * \fn void installShortkey(KeyCode key,ShortkeyDestination dest, bool check_special=true)
+	 * \fn void installShortkey(KeyCode key,ShortkeyDestination dest)
 	 * \brief Bindet eine Taste an ein Ereignis
 	 * \param key Taste
 	 * \param dest Ereignis, das auf die Taste hin ausgeloest werden soll
-	 * \param check_special wenn true, wird sichergestellt, dass die Taste keine Sondertaste ist;
 	 */
-	void installShortkey(KeyCode key,ShortkeyDestination dest, bool check_special=true);
-
-
-	/**
-	 * \fn void installSpecialKey(KeyCode key)
-	 * \brief Markiert eine Taste, sodass sie nicht als Kurztaste verwendet werden kann
-	 * \param key Keycode
-	 */
-	void installSpecialKey(KeyCode key)
-	{
-		m_special_keys.insert(key);
-	}
+	void installShortkey(KeyCode key,ShortkeyDestination dest);
 
 	/**
 	 * \fn void onButtonSendMessageClicked ( )
@@ -841,54 +793,6 @@ class Document
 	 */
 	Player* getLocalPlayer();
 
-
-	/**
-	 * \fn std::string& getServerHost()
-	 * \brief Gibt den Server Host aus
-	 */
-	std::string& getServerHost()
-	{
-		return m_server_host;
-	}
-
-	/**
-	 * \fn int getMaxPlayers()
-	 * \brief Gibt maximale Spieleranzahl aus
-	 */
-	int getMaxPlayers()
-	{
-		return m_max_players;
-	}
-
-	/**
-	 * \fn void setMaxPlayers(int max_players)
-	 * \brief Setzt die maximale Spieleranzahl
-	 * \param max_players maximale Spieleranzahl
-	 */
-	void setMaxPlayers(int max_players)
-	{
-		m_max_players = max_players;
-	}
-
-	/**
-	 * \fn int getPort()
-	 * \brief Gibt den Port aus
-	 */
-	int getPort()
-	{
-		return m_port;
-	}
-
-	/**
-	 * \fn void setPort(int port)
-	 * \brief Setzt den Port
-	 * \param port Port
-	 */
-	void setPort(int port)
-	{
-		m_port = port;
-	}
-
 	// Private stuff
 	private:
 	//Fields
@@ -923,7 +827,10 @@ class Document
 		int getObjectAt(float x,float y);
 
 
-
+		/**
+		 * \brief Stores the mappings for ability shortkeys
+		 */
+		ShortkeyMap m_ability_shortkey_map;
 
 		/**
 		* \var GUIState m_gui_state
@@ -950,36 +857,7 @@ class Document
 		*/
 		State m_state;
 
-		/**
-		* \var ShortkeyMap m_shortkey_map
-		* \brief Bildet Taste auf Ereignis, das per Shortkey ausgeloest werden kann ab
-		*/
-		ShortkeyMap m_shortkey_map;
-
-		/**
-		* \var std::set<KeyCode> m_special_keys
-		* \brief Menge der Tasten, die eine besondere Bedeutung haben und die deswegen nicht frei zugewiesen werden koennen
-		*/
-		std::set<KeyCode> m_special_keys;
-
-
-		/**
-		* \var std::string m_server_host
-		* \brief IP des Servers
-		*/
-		std::string m_server_host;
-
-		/**
-		 * \var int m_port
-		 * \brief Port ueber den der Netzverkehr laeuft
-		 */
-		int m_port;
-
-		/**
-		 * \var int m_max_players
-		 * \brief maximale Anzahl Spieler
-		 */
-		int m_max_players;
+		
 
 		/**
 		* \var bool m_server

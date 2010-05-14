@@ -41,7 +41,7 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard)
 
 	CEGUI::Window* label;
 
-	int targets[9] = {Document::SHOW_INVENTORY, Document::SHOW_CHARINFO, Document::SHOW_SKILLTREE, Document::SHOW_PARTYMENU, Document::SHOW_CHATBOX, Document::SHOW_QUESTINFO, Document::SHOW_MINIMAP, Document::SWAP_EQUIP, Document::SHOW_ITEMLABELS};
+	int targets[9] = {SHOW_INVENTORY, SHOW_CHARINFO, SHOW_SKILLTREE, SHOW_PARTYMENU, SHOW_CHATBOX, SHOW_QUESTINFO, SHOW_MINIMAP, SWAP_EQUIP, SHOW_ITEMLABELS};
 
 	std::ostringstream stream;
 	for (int i=0; i<9; ++i)
@@ -145,6 +145,7 @@ void OptionsWindow::update()
 {
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::Window* label;
+	Options* options = Options::getInstance();
 
 	std::ostringstream stream;
 	KeyCode key;
@@ -163,7 +164,7 @@ void OptionsWindow::update()
 		}
 		else
 		{
-			key = m_document->getMappedKey( (Document::ShortkeyDestination) label->getID());
+			key = options->getMappedKey( (ShortkeyDestination) label->getID());
 			keyname = m_keyboard->getAsString ( (OIS::KeyCode) key);
 		}
 
@@ -244,7 +245,7 @@ void OptionsWindow::updateTranslation()
 
 void OptionsWindow::reset()
 {
-	m_key_destination = Document::NO_KEY;
+	m_key_destination = NO_KEY;
 }
 
 bool OptionsWindow::onShortkeyLabelClicked(const CEGUI::EventArgs& evt)
@@ -255,11 +256,11 @@ bool OptionsWindow::onShortkeyLabelClicked(const CEGUI::EventArgs& evt)
 
 	if (m_key_destination == id)
 	{
-		m_key_destination = Document::NO_KEY;
+		m_key_destination = NO_KEY;
 	}
 	else
 	{
-		m_key_destination =(Document::ShortkeyDestination) id;
+		m_key_destination =(ShortkeyDestination) id;
 	}
 	return true;
 }
@@ -268,14 +269,17 @@ void OptionsWindow::setKeyCode(KeyCode kc)
 {
 	if (requestsForKey())
 	{
-		m_document->installShortkey(kc,m_key_destination);
-		m_key_destination = Document::NO_KEY;
+		ShortkeyMap& ablt_map = m_document->getAbilityShortkeys();
+		ablt_map.erase(kc);
+		
+		Options::getInstance()->setShortkey(kc,m_key_destination);
+		m_key_destination = NO_KEY;
 	}
 }
 
 bool OptionsWindow::onAreaMouseButtonPressed(const CEGUI::EventArgs& evt)
 {
-	m_key_destination = Document::NO_KEY;
+	m_key_destination = NO_KEY;
 	return true;
 }
 

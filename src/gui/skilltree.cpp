@@ -201,8 +201,8 @@ void SkillTree::update()
 	// Zaehler fuer die Fenster
 	static int acount =0;
 	
-	Document::ShortkeyMap& shortkeys = m_document->getShortkeys();
-	Document::ShortkeyMap::iterator it;
+	ShortkeyMap& shortkeys = m_document->getAbilityShortkeys();
+	ShortkeyMap::iterator it;
 	int nr =0;
 	
 	CEGUI::Window *label2;
@@ -213,7 +213,7 @@ void SkillTree::update()
 	
 	for (it = shortkeys.begin(); it != shortkeys.end(); ++it)
 	{
-		if (it->second < Document::USE_SKILL_LEFT || it->second >Document::USE_SKILL_RIGHT+200)
+		if (it->second < USE_SKILL_LEFT || it->second >USE_SKILL_RIGHT+200)
 			continue;
 		
 		DEBUGX("shortkey %i to %i",it->first,it->second);
@@ -221,14 +221,14 @@ void SkillTree::update()
 		
 		right = false;
 		int id =0;
-		if (it->second >= Document::USE_SKILL_RIGHT)
+		if (it->second >= USE_SKILL_RIGHT)
 		{
-			id = it->second - Document::USE_SKILL_RIGHT;
+			id = it->second - USE_SKILL_RIGHT;
 			right = true;
 		}
 		else
 		{
-			id = it->second - Document::USE_SKILL_LEFT;
+			id = it->second - USE_SKILL_LEFT;
 		}
 		
 		if (ablts.count(id) ==0)

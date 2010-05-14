@@ -40,12 +40,7 @@
 // Constructors/Destructors
 // Initialisiert Document zu Testzwecken
 Document::Document()
-	:  m_shortkey_map(), m_special_keys()
 {
-
-	m_server_host = "127.0.0.1";
-	m_port = 5331;
-	m_max_players = 8;
 
 	// Informationen zu Aktionen initialisieren
 	Action::init();
@@ -80,9 +75,6 @@ Document::Document()
 
 	m_modified =GUISHEET_MODIFIED | WINDOWS_MODIFIED;
 
-	// Shortkeys einstellen
-	m_shortkey_map.clear();
-
 	m_temp_player = 0;
 }
 
@@ -91,7 +83,10 @@ void Document::startGame(bool server)
 	m_server = server;
 
 	// momentan: alle Spiele sind kooperativ
-	World::createWorld(server,m_port, true,m_max_players);
+	int port = Options::getInstance()->getPort();
+	int max_players = Options::getInstance()->getMaxNumberPlayers();
+	std::string host = Options::getInstance()->getServerHost();
+	World::createWorld(server,port, true,max_players);
 
 	if (server)
 	{
@@ -102,7 +97,7 @@ void Document::startGame(bool server)
 	else
 	{
 		ClientNetwork* net = static_cast<ClientNetwork*>(World::getWorld()->getNetwork());
-		net->serverConnect((char*) m_server_host.c_str(),m_port);
+		net->serverConnect((char*) host.c_str(),port);
 
 	}
 	m_state = LOAD_SAVEGAME;
@@ -163,7 +158,7 @@ void Document::setSaveFile(std::string s)
 
 void Document::loadSavegame()
 {
-	// Savegame einlesen
+	// read savegame
 	std::string fname = m_save_file;
 	DEBUGX("savegame is %s",fname.c_str());
 
@@ -176,12 +171,14 @@ void Document::loadSavegame()
 		file.get(bin);
 
 		CharConv* save;
+		// determine binary vs nonbinary savegile
 		if (bin == '0')
 		{
 			save = new CharConv(&file);
 		}
 		else
 		{
+			// for binary savefile, read length of data and data
 			int len;
 			file.read((char*) &len,4);
 			data = new unsigned char[len];
@@ -190,32 +187,20 @@ void Document::loadSavegame()
 			save = new CharConv(data,len);
 		}
 
+		// update the player object, that is displayed in character preview and inventory
 		if (m_temp_player)
 			delete m_temp_player;
 
 		m_temp_player = new Player(0,"");
 		m_temp_player->fromSavegame(save);
 
+		// notify the world of the new player
 		CharConv cv2(0);
 		m_temp_player->toSavegame(&cv2);
-
 		World::getWorld()->handleSavegame(&cv2);
 
-		// Kurztasten einlesen
-		ShortkeyMap::iterator it;
-		// alte Kurztasten entfernen
-		for (it = m_shortkey_map.begin(); it != m_shortkey_map.end();)
-		{
-			if (it->second >= USE_SKILL_LEFT && it->second < USE_SKILL_RIGHT + 200)
-			{
-				m_shortkey_map.erase(it++);
-			}
-			else
-			{
-				++it;
-			}
-		}
-
+		// read shortkeys from the savegame
+		m_ability_shortkey_map.clear();
 		short key,dest;
 		int nr =0;
 		save->fromBuffer(nr);
@@ -229,7 +214,8 @@ void Document::loadSavegame()
 			}
 		}
 
-		// aktuelle Aktion setzen
+		// update state to running
+		// show main game screen
 		m_state =RUNNING;
 		m_gui_state.m_shown_windows = NO_WINDOWS;
 		m_gui_state.m_sheet = GAME_SCREEN;
@@ -314,41 +300,34 @@ void Document::sendCommand(ClientCommand* comm)
 }
 
 
-KeyCode Document::getMappedKey(ShortkeyDestination sd)
-{
-	std::map<KeyCode, ShortkeyDestination>::iterator it;
-	for (it=m_shortkey_map.begin(); it!= m_shortkey_map.end();++it)
-	{
-		if (it->second == sd)
-		{
-			return it->first;
-		}
-	}
 
-	return 0;
-}
 
-void Document::installShortkey(KeyCode key,ShortkeyDestination dest, bool check_special)
+void Document::installShortkey(KeyCode key,ShortkeyDestination dest)
 {
-	if (check_special && m_special_keys.count(key)>0)
+	Options* opt = Options::getInstance();
+	// do not use special keys nor overwrite global shortkeys
+	if (opt->isSpecialKey(key) || opt->getMappedKey(dest) != 0)
 		return;
 
-	// Taste auf die das Ereignis bisher gemappt war
-	KeyCode oldkey = getMappedKey(dest);
-	// entfernen
+	// key that was mapped to the action dest so far
+	KeyCode oldkey = 0;
+	std::map<KeyCode, ShortkeyDestination>::iterator it;
+	for (it=m_ability_shortkey_map.begin(); it!= m_ability_shortkey_map.end();++it)
+	{
+		if (it->second == dest)
+		{
+			oldkey = it->first;
+			break;
+		}
+	}
+	// delete mapping
 	if (oldkey != 0)
 	{
-		m_shortkey_map.erase(oldkey);
+		m_ability_shortkey_map.erase(oldkey);
 	}
 
-	// Mapping anlegen
-	m_shortkey_map[key]=dest;
-
-	if (!check_special)
-	{
-		m_special_keys.insert(key);
-	}
-
+	// create new mapping
+	m_ability_shortkey_map[key]=dest;
 }
 
 void Document::onButtonSendMessageClicked ( )
@@ -1216,77 +1195,75 @@ std::string Document::getAbilityDescription(Action::ActionType ability)
 bool Document::onKeyPress(KeyCode key)
 {
 
-	if (m_gui_state.m_shown_windows & SKILLTREE)
+	// determine action mapped to the key
+	ShortkeyDestination dest;
+	dest = Options::getInstance()->getMappedDestination(key);
+	
+	if (m_gui_state.m_shown_windows & SKILLTREE && dest==0)
 	{
-		// Skilltree wird angezeigt
-		// Tastendruecke werden anders interpretiert
+		// Skilltree is displayed
+		// keys are interpreted as attempt to create an ability shortkey
 
-		// Wirkung die bisher auf der Taste liegt
-		ShortkeyDestination dest = NO_KEY;
-		if (m_shortkey_map.find(key) != m_shortkey_map.end())
+		Action::ActionType act = getGUIState()->m_hover_ability;
+		if (act != "noaction" && getLocalPlayer()->checkAbility(act))
 		{
-			dest = m_shortkey_map.find(key)->second;
-		}
+			// Action exists and is available 
+			Action::ActionInfo* aci = Action::getActionInfo(act);
 
-		if (m_special_keys.find(key)==m_special_keys.end() && (dest == NO_KEY || dest >= USE_SKILL_LEFT))
-		{
-			// Kurztaste einrichten
-			Action::ActionType act = getGUIState()->m_hover_ability;
-			if (act != "noaction" && getLocalPlayer()->checkAbility(act))
+			// determine if the shortkey should map the ability for left or right mouse button
+			bool left = true;
+			if (getGUIState()->m_prefer_right_skill || aci->m_target_type == Action::PASSIVE || aci->m_base_action== "noaction")
 			{
-				Action::ActionInfo* aci = Action::getActionInfo(act);
-
-				bool left = true;
-				if (getGUIState()->m_prefer_right_skill || aci->m_target_type == Action::PASSIVE || aci->m_base_action== "noaction")
-				{
-					left = false;
-				}
-
-				int id =-1;
-				Player* player = getLocalPlayer();
-				std::map<int,LearnableAbility> &ablts = player->getLearnableAbilities();
-				LearnableAbilityMap::iterator it;
-				for (it = ablts.begin(); it != ablts.end(); ++it)
-				{
-					if (it->second.m_type == act)
-					{
-						id = it->first;
-						break;
-					}
-				}
-
-				if (id ==-1)
-					return false;
-
-				if (left)
-				{
-					installShortkey(key,(ShortkeyDestination) (USE_SKILL_LEFT+id));
-					DEBUGX("left short key for action %s %i",act.c_str(), USE_SKILL_LEFT+id);
-				}
-				else
-				{
-					installShortkey(key,(ShortkeyDestination) (USE_SKILL_RIGHT+id));
-					DEBUGX("right short key for action %s %i",act.c_str(),USE_SKILL_RIGHT+id );
-				}
-				return true;
+				left = false;
 			}
 
+			// determine the internal number of the ability
+			int id =-1;
+			Player* player = getLocalPlayer();
+			std::map<int,LearnableAbility> &ablts = player->getLearnableAbilities();
+			LearnableAbilityMap::iterator it;
+			for (it = ablts.begin(); it != ablts.end(); ++it)
+			{
+				if (it->second.m_type == act)
+				{
+					id = it->first;
+					break;
+				}
+			}
+
+			if (id ==-1)
+				return false;
+
+			// create shortkey
+			if (left)
+			{
+				installShortkey(key,(ShortkeyDestination) (USE_SKILL_LEFT+id));
+				DEBUGX("left short key for action %s %i",act.c_str(), USE_SKILL_LEFT+id);
+			}
+			else
+			{
+				installShortkey(key,(ShortkeyDestination) (USE_SKILL_RIGHT+id));
+				DEBUGX("right short key for action %s %i",act.c_str(),USE_SKILL_RIGHT+id );
+			}
+			return true;
 		}
 
 	}
 
-	std::map<KeyCode, ShortkeyDestination>::iterator it = m_shortkey_map.find(key);
-
-	if (it == m_shortkey_map.end())
+	
+	// if key was not mapped to a shortkey
+	// check ability shortkeys
+	if (dest == 0)
 	{
-		// Kein Aktion fuer die Taste vorhanden
-		return false;
+		std::map<KeyCode, ShortkeyDestination>::iterator it = m_ability_shortkey_map.find(key);
+		if (it != m_ability_shortkey_map.end())
+			dest = it->second;
 	}
-	else
-	{
-		// Aktion welche mit der Taste verbunden ist
-		ShortkeyDestination dest = it->second;
+	
 
+	// execute the action, if any mapping was found
+	if (dest != 0)
+	{
 		if (dest == SHOW_INVENTORY)
 		{
 			onButtonInventoryClicked();
@@ -1425,12 +1402,9 @@ bool  Document::onKeyRelease(KeyCode key)
 		m_gui_state.m_pressed_key = 0;
 	}
 
-	std::map<KeyCode, ShortkeyDestination>::iterator it = m_shortkey_map.find(key);
-	if (it != m_shortkey_map.end())
+	ShortkeyDestination dest = Options::getInstance()->getMappedDestination(key);
+	if (dest != 0)
 	{
-
-		// Aktion welche mit der Taste verbunden ist
-		ShortkeyDestination dest = it->second;
 		if (dest == SHOW_ITEMLABELS)
 		{
 			getGUIState()->m_item_labels = false;
@@ -1666,7 +1640,7 @@ void Document::writeSavegame()
 	// Shortkeys hinzufuegen
 	ShortkeyMap::iterator it;
 	int nr =0;
-	for (it = m_shortkey_map.begin(); it != m_shortkey_map.end(); ++it)
+	for (it = m_ability_shortkey_map.begin(); it != m_ability_shortkey_map.end(); ++it)
 	{
 		if (it->second >= USE_SKILL_LEFT && it->second < USE_SKILL_RIGHT + 200)
 			nr ++;
@@ -1674,7 +1648,7 @@ void Document::writeSavegame()
 	save->printNewline();
 	save->toBuffer(nr);
 	save->printNewline();
-	for (it = m_shortkey_map.begin(); it != m_shortkey_map.end(); ++it)
+	for (it = m_ability_shortkey_map.begin(); it != m_ability_shortkey_map.end(); ++it)
 	{
 		if (it->second >= USE_SKILL_LEFT && it->second < USE_SKILL_RIGHT + 200)
 		{
@@ -1754,113 +1728,13 @@ void* Document::writeSaveFile(void* doc_data_ptr)
 
 
 void Document::saveSettings()
-{
-	std::ofstream file;
-	file.open(".sumwars");
-
-	if (file.is_open())
-	{
-		file << World::getVersion() << "\n";
-
-		file << SoundSystem::getSoundVolume() <<"\n";
-		file << MusicManager::instance().getMusicVolume() <<"\n";
-
-		ShortkeyMap::iterator it;
-		std::set<KeyCode>::iterator jt;
-
-		int nr =0;
-		for (it = m_shortkey_map.begin(); it != m_shortkey_map.end(); ++it)
-		{
-			if (it->second < USE_SKILL_LEFT || it->second > USE_SKILL_RIGHT + 200)
-				nr ++;
-		}
-		file << nr<<"\n";
-		for (it = m_shortkey_map.begin(); it != m_shortkey_map.end(); ++it)
-		{
-			if (it->second < USE_SKILL_LEFT || it->second > USE_SKILL_RIGHT + 200)
-			{
-				file << (int) it->first << " " << (int) it->second << "\n";
-			}
-		}
-
-		file << m_special_keys.size()<<"\n";
-		for (jt = m_special_keys.begin(); jt != m_special_keys.end(); ++jt)
-		{
-			file << (int) *jt<< " ";
-		}
-		file << "\n";
-		file << m_server_host << " " << m_port << " " << m_max_players << "\n";
-		const char* locale = Gettext::getLocale();
-
-		std::string locstr = "";
-		if (locale != 0)
-		{
-			locstr = locale;
-		}
-		if (locstr == "")
-			locstr = "#default#";
-
-		file << locstr << "\n";
-		file.close();
-	}
+{	
+	Options::getInstance()->writeToFile("options.xml");
 }
 
 void Document::loadSettings()
 {
-	std::fstream file;
-	file.open(".sumwars", std::ios::in);
-
-	int key, dest,nr;
-	if (file.is_open())
-	{
-		ShortkeyMap::iterator it;
-		std::set<KeyCode>::iterator jt;
-
-		m_shortkey_map.clear();
-		int version;
-		file >> version;
-
-		float soundvolume;
-		file >> soundvolume;
-		SoundSystem::setSoundVolume(soundvolume);
-		DEBUGX("Sound volume %f",soundvolume);
-
-		float musicvolume;
-		file >> musicvolume;
-		MusicManager::instance().setMusicVolume(musicvolume);
-
-		file >> nr;
-		DEBUGX("short keys %i",nr);
-		for (int i=0; i<nr; i++)
-		{
-			file >> key >> dest;
-			m_shortkey_map[(KeyCode) key] = (ShortkeyDestination) dest;
-		}
-
-		file >> nr;
-		DEBUGX("special keys %i",nr);
-		for (int i=0; i<nr; i++)
-		{
-			file >> key;
-			m_special_keys.insert((KeyCode) key);
-		}
-		file >> m_server_host >> m_port >> m_max_players;
-		DEBUGX("server %s port %i player %i",m_server_host.c_str(), m_port, m_max_players);
-
-		std::string locstr = "";
-		file >> locstr;
-		if (locstr != "#default#" && locstr != "")
-		{
-			Gettext::setLocale(locstr.c_str());
-		}
-
-		file << locstr << "\n";
-		file.close();
-	}
-	else
-	{
-		DEBUGX(".sumwars not found");
-	}
+	Options::getInstance()->readFromFile("options.xml");
 }
 
 Player*  Document::getLocalPlayer()

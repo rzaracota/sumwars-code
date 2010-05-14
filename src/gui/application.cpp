@@ -476,29 +476,30 @@ bool Application::createDocument()
 	DEBUG("create document\n");
 	m_document = new Document();
 
-	m_document->installShortkey(OIS::KC_ESCAPE,Document::CLOSE_ALL);
-	m_document->installShortkey(OIS::KC_I,Document::SHOW_INVENTORY);
-	m_document->installShortkey(OIS::KC_C,Document::SHOW_CHARINFO);
-	m_document->installShortkey(OIS::KC_T,Document::SHOW_SKILLTREE);
-	m_document->installShortkey(OIS::KC_P,Document::SHOW_PARTYMENU);
-	m_document->installShortkey(OIS::KC_M,Document::SHOW_CHATBOX);
-	m_document->installShortkey(OIS::KC_Q,Document::SHOW_QUESTINFO);
-	m_document->installShortkey(OIS::KC_TAB,Document::SHOW_MINIMAP);
-	m_document->installShortkey(OIS::KC_F10,Document::SHOW_OPTIONS);
-	m_document->installShortkey(OIS::KC_W,Document::SWAP_EQUIP);
-	m_document->installShortkey(OIS::KC_LMENU,Document::SHOW_ITEMLABELS);
+	/*
+	m_document->installShortkey(OIS::KC_ESCAPE,CLOSE_ALL);
+	m_document->installShortkey(OIS::KC_I,SHOW_INVENTORY);
+	m_document->installShortkey(OIS::KC_C,SHOW_CHARINFO);
+	m_document->installShortkey(OIS::KC_T,SHOW_SKILLTREE);
+	m_document->installShortkey(OIS::KC_P,SHOW_PARTYMENU);
+	m_document->installShortkey(OIS::KC_M,SHOW_CHATBOX);
+	m_document->installShortkey(OIS::KC_Q,SHOW_QUESTINFO);
+	m_document->installShortkey(OIS::KC_TAB,SHOW_MINIMAP);
+	m_document->installShortkey(OIS::KC_F10,SHOW_OPTIONS);
+	m_document->installShortkey(OIS::KC_W,SWAP_EQUIP);
+	m_document->installShortkey(OIS::KC_LMENU,SHOW_ITEMLABELS);
 
-	m_document->installShortkey(OIS::KC_RETURN,Document::SHOW_CHATBOX_NO_TOGGLE,false);
-	m_document->installShortkey(OIS::KC_1,Document::USE_POTION,false);
-	m_document->installShortkey(OIS::KC_2,(Document::ShortkeyDestination) (Document::USE_POTION+1),false);
-	m_document->installShortkey(OIS::KC_3,(Document::ShortkeyDestination) (Document::USE_POTION+2),false);
-	m_document->installShortkey(OIS::KC_4,(Document::ShortkeyDestination) (Document::USE_POTION+3),false);
-	m_document->installShortkey(OIS::KC_5,(Document::ShortkeyDestination) (Document::USE_POTION+4),false);
-	m_document->installShortkey(OIS::KC_6,(Document::ShortkeyDestination) (Document::USE_POTION+5),false);
-	m_document->installShortkey(OIS::KC_7,(Document::ShortkeyDestination) (Document::USE_POTION+6),false);
-	m_document->installShortkey(OIS::KC_8,(Document::ShortkeyDestination) (Document::USE_POTION+7),false);
-	m_document->installShortkey(OIS::KC_9,(Document::ShortkeyDestination) (Document::USE_POTION+8),false);
-	m_document->installShortkey(OIS::KC_0,(Document::ShortkeyDestination) (Document::USE_POTION+9),false);
+	m_document->installShortkey(OIS::KC_RETURN,SHOW_CHATBOX_NO_TOGGLE,false);
+	m_document->installShortkey(OIS::KC_1,USE_POTION,false);
+	m_document->installShortkey(OIS::KC_2,(ShortkeyDestination) (USE_POTION+1),false);
+	m_document->installShortkey(OIS::KC_3,(ShortkeyDestination) (USE_POTION+2),false);
+	m_document->installShortkey(OIS::KC_4,(ShortkeyDestination) (USE_POTION+3),false);
+	m_document->installShortkey(OIS::KC_5,(ShortkeyDestination) (USE_POTION+4),false);
+	m_document->installShortkey(OIS::KC_6,(ShortkeyDestination) (USE_POTION+5),false);
+	m_document->installShortkey(OIS::KC_7,(ShortkeyDestination) (USE_POTION+6),false);
+	m_document->installShortkey(OIS::KC_8,(ShortkeyDestination) (USE_POTION+7),false);
+	m_document->installShortkey(OIS::KC_9,(ShortkeyDestination) (USE_POTION+8),false);
+	m_document->installShortkey(OIS::KC_0,(ShortkeyDestination) (USE_POTION+9),false);
 
 	m_document->installSpecialKey(OIS::KC_ESCAPE);
 	m_document->installSpecialKey(OIS::KC_LSHIFT);
@@ -515,9 +516,10 @@ bool Application::createDocument()
 	m_document->installSpecialKey(OIS::KC_RIGHT);
 	m_document->installSpecialKey(OIS::KC_CAPITAL);
 	// CHEATS
-	m_document->installShortkey(OIS::KC_L,(Document::ShortkeyDestination) (Document::CHEAT+0));
-
+	m_document->installShortkey(OIS::KC_L,(ShortkeyDestination) (CHEAT+0));
+*/
 	m_document->loadSettings();
+	
 
 	return true;
 }

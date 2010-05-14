@@ -37,7 +37,7 @@ class OptionsWindow : public Window
 		 */
 		bool requestsForKey()
 		{
-			return m_key_destination != Document::NO_KEY;
+			return m_key_destination != NO_KEY;
 		}
 		
 		/**
@@ -55,10 +55,9 @@ class OptionsWindow : public Window
 	private:
 		
 		/**
-		 * \fn Document::ShortkeyDestination m_key_destination
-		 * \brief Aktion fuer die aktuell ein Shortkey erwartet wird
+		* \brief Aktion fuer die aktuell ein Shortkey erwartet wird
 		 */
-		Document::ShortkeyDestination m_key_destination;
+		ShortkeyDestination m_key_destination;
 		
 		/**
 		 * \fn bool onShortkeyLabelClicked(const CEGUI::EventArgs& evt)

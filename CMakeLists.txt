@@ -82,6 +82,7 @@ SET(SRCS
   ./src/core/fraction.cpp
   ./src/core/command.cpp
   ./src/core/mapgenerator.cpp
+  ./src/core/options.cpp
   ./src/gui/minimapwindow.cpp
   ./src/gui/worldmap.cpp
   ./src/gui/mainmenu.cpp
