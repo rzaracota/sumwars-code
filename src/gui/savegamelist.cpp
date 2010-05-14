@@ -40,6 +40,7 @@ SavegameList::SavegameList (Document* doc)
 
 	savelist->setSelectionMode(CEGUI::MultiColumnList::RowSingle);
 	savelist->subscribeEvent(CEGUI::MultiColumnList::EventSelectionChanged, CEGUI::Event::Subscriber(&SavegameList::onSavegameChosen, this));
+	savelist->subscribeEvent(CEGUI::MultiColumnList::EventMouseDoubleClick, CEGUI::Event::Subscriber(&SavegameList::onSavegameDoubleClick, this));
 
 	savelist->addColumn("Name",0,CEGUI::UDim(0.5,0));
 	savelist->addColumn("Klasse",1,CEGUI::UDim(0.3,0));
@@ -139,9 +140,13 @@ void SavegameList::update()
 			
 			stream.str("");
 			stream << (int) lev;
-			savelist->setItem(new ListItem(stream.str()),2,n);
-			savelist->setItem(new ListItem(classname),1,n);
-			savelist->setItem(new StrListItem(name,filename),0,n);
+			StrListItem* li1 = new StrListItem(stream.str(),filename);
+			StrListItem* li2 = new StrListItem(classname,filename);
+			StrListItem* li3 = new StrListItem(name,filename);
+			
+			savelist->setItem(li1,2,n);
+			savelist->setItem(li2,1,n);
+			savelist->setItem(li3,0,n);
 			n++;
 
 			file.close();
@@ -266,3 +271,7 @@ bool SavegameList::onDeleteCharAbortClicked(const CEGUI::EventArgs& evt)
 	return true;
 }
 
+bool SavegameList::onSavegameDoubleClick(const CEGUI::EventArgs& evt)
+{
+	onSavegameSelected(evt);
+}

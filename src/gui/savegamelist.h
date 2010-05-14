@@ -56,6 +56,12 @@ class SavegameList : public Window
 		bool onSavegameChosen(const CEGUI::EventArgs& evt);
 		
 		/**
+		 * \fn bool onSavegameDoubleClick(const CEGUI::EventArgs& evt)
+		 * \brief Behandelt Auswahl eines Savegames in der Liste
+		 */
+		bool onSavegameDoubleClick(const CEGUI::EventArgs& evt);
+		
+		/**
 		 * \fn bool onNewCharClicked(const CEGUI::EventArgs& evt)
 		 * \brief Behandelt Klick auf Button neuer Charakter
 		 */
