@@ -108,8 +108,8 @@ GraphicRenderInfo* GraphicManager::getRenderInfo(std::string type)
 	}
 	else
 	{
-		
-		DEBUGX("no render Info for type %s",type.c_str());
+		// If the name contains some # symbols, the last # and all subsequent characters are removed
+		// abc#def#ghi -> abc#def -> abc -> fail if nothing was found
 		size_t pos = type.find_last_of('#');
 		if (pos != std::string::npos)
 		{
@@ -158,6 +158,7 @@ void GraphicManager::detachMovableObject(Ogre::MovableObject* obj)
 
 Ogre::MovableObject* GraphicManager::createMovableObject(MovableObjectInfo& info, std::string name)
 {
+	// this additional ID ensures that name given to OGRE are unique
 	static int id =0;
 	std::ostringstream stream;
 	stream << id;
@@ -172,7 +173,7 @@ Ogre::MovableObject* GraphicManager::createMovableObject(MovableObjectInfo& info
 		try
 		{
 			obj_ent = m_scene_manager->createEntity(name, info.m_source);
-			// TODO: genauer einstellen
+			// TODO: really always shadow caster ?
 			obj_ent->setCastShadows(true);
 		}
 		catch (Ogre::Exception& e)
@@ -547,10 +548,10 @@ void GraphicManager::loadMovableObjectInfo(TiXmlNode* node, MovableObjectInfo* i
 	
 }
 
-void GraphicManager::registerGraphicMapping(std::string objecttype, GraphicObject::Type graphic)
+void GraphicManager::registerGraphicMapping(std::string objecttype, GraphicObject::Type renderinfo)
 {
 	DEBUGX("registered graphic %s for object type %s",graphic.c_str(), objecttype.c_str());
-	m_graphic_mapping[objecttype] = graphic;
+	m_graphic_mapping[objecttype] = renderinfo;
 }
 
 GraphicObject::Type GraphicManager::getGraphicType(std::string objecttype)
@@ -569,7 +570,7 @@ GraphicObject::Type GraphicManager::getGraphicType(std::string objecttype)
 
 Ogre::ParticleSystem* GraphicManager::getParticleSystem(std::string type)
 {
-	// Im Pool nach einem passenden Partikelsystem suchen
+	// search the pool for a fitting particle system
 	std::multimap<std::string, Ogre::ParticleSystem*>::iterator it;
 	it = m_particle_system_pool.find(type);
 
@@ -578,19 +579,19 @@ Ogre::ParticleSystem* GraphicManager::getParticleSystem(std::string type)
 
 	if (it == m_particle_system_pool.end())
 	{
-		// Kein Partikelsystem gefunden
-		// neues erzeugen
+		// no particle system found -> create new one
 		std::ostringstream name;
 		name << "ParticleSystem"<<count;
 		count ++;
 
 		part = m_scene_manager->createParticleSystem(name.str(), type);
+		// type is stored in the OGRE any Attribute
 		part->setUserAny(Ogre::Any(type));
 		DEBUGX("created particlesystem %p %s for type %s",part, name.str().c_str(), type.c_str());
 	}
 	else
 	{
-		// Partikelsystem aus dem Pool nehmen
+		// take particle system from pool
 		part = it->second;
 		m_particle_system_pool.erase(it);
 		DEBUGX("took particlesystem %s for type %s",part->getName().c_str(), type.c_str());
@@ -602,7 +603,7 @@ Ogre::ParticleSystem* GraphicManager::getParticleSystem(std::string type)
 
 void GraphicManager::putBackParticleSystem(Ogre::ParticleSystem* part)
 {
-	// Typ des Partikelsystems ermitteln
+	// store type of the particle system in OGRE any
 	std::string type;
 	type = Ogre::any_cast<std::string>(part->getUserAny());
 
