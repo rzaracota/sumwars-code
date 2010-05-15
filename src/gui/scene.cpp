@@ -1,8 +1,8 @@
 #include "scene.h"
 
-#include "OgreCEGUIRenderer.h"
-#include "OgreCEGUITexture.h"
-#include "OgreCEGUIResourceProvider.h"
+#include "RendererModules/Ogre/CEGUIOgreRenderer.h"
+#include "RendererModules/Ogre/CEGUIOgreTexture.h"
+#include "RendererModules/Ogre/CEGUIOgreResourceProvider.h"
 #include <OgrePanelOverlayElement.h>
 
 #include "CEGUI.h"
@@ -47,9 +47,8 @@ Scene::Scene(Document* doc,Ogre::RenderWindow* window)
 	minimap_camera->setProjectionType(Ogre::PT_ORTHOGRAPHIC);
 	minimap_camera->setFOVy(Ogre::Degree(90.0));
 
-	Ogre::TexturePtr minimap_texture = Ogre::TextureManager::getSingleton().createManual( "minimap_tex",
-			Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME, Ogre::TEX_TYPE_2D,
-   512, 512, 0, Ogre::PF_R8G8B8A8, Ogre::TU_RENDERTARGET );
+	Ogre::TexturePtr minimap_texture = Ogre::TextureManager::getSingleton().createManual( "minimap_tex","General", Ogre::TEX_TYPE_2D,
+                                                                                          512, 512, 0, Ogre::PF_R8G8B8A8, Ogre::TU_RENDERTARGET );
 
 	Ogre::RenderTarget* minimap_rt = minimap_texture->getBuffer()->getRenderTarget();
 	minimap_rt ->setAutoUpdated(false);
@@ -62,14 +61,14 @@ Scene::Scene(Document* doc,Ogre::RenderWindow* window)
 	DEBUGX("render target size %i %i",minimap_rt ->getWidth (), minimap_rt ->getHeight ());
 	DEBUGX("viewport size %i %i ratio %f",v->getActualWidth(),v->getActualHeight(), ratio);
 	minimap_camera->setAspectRatio(ratio);
+    
+    CEGUI::Texture& ceguiTex = CEGUI::System::getSingleton().getRenderer()->createTexture("minimap_tex", "General");
+    
+	CEGUI::Imageset& textureImageSet = CEGUI::ImagesetManager::getSingleton().create("minimap", ceguiTex);
 
-	CEGUI::OgreCEGUITexture* ceguiTex = (CEGUI::OgreCEGUITexture*)((CEGUI::OgreCEGUIRenderer*)CEGUI::System::getSingleton().getRenderer())->createTexture((CEGUI::utf8*)"minimap_tex");
-
-	CEGUI::Imageset* textureImageSet = CEGUI::ImagesetManager::getSingleton().createImageset("minimap", ceguiTex);
-
-	textureImageSet->defineImage( "minimap_img",
+	textureImageSet.defineImage( "minimap_img",
 				CEGUI::Point( 0.0f, 0.0f ),
-				CEGUI::Size( ceguiTex->getWidth(), ceguiTex->getHeight() ),
+				CEGUI::Size( ceguiTex.getSize().d_width, ceguiTex.getSize().d_height ),
 				CEGUI::Point( 0.0f, 0.0f ) );
 
 	// Setup fuer die Spieleransicht
@@ -100,14 +99,14 @@ Scene::Scene(Document* doc,Ogre::RenderWindow* window)
 	char_view->setOverlaysEnabled (false);
 	char_view->setBackgroundColour(Ogre::ColourValue(0,0,0,1.0) );
 	char_rt->update();
-	
-	CEGUI::OgreCEGUITexture* char_ceguiTex = (CEGUI::OgreCEGUITexture*)((CEGUI::OgreCEGUIRenderer*) CEGUI::System::getSingleton().getRenderer())->createTexture((CEGUI::utf8*)"character_tex");
 
-	CEGUI::Imageset* char_textureImageSet = CEGUI::ImagesetManager::getSingleton().createImageset("character", char_ceguiTex);
+	CEGUI::Texture& char_ceguiTex = CEGUI::System::getSingleton().getRenderer()->createTexture("character_tex", "General");
 
-	char_textureImageSet->defineImage( "character_img",
+	CEGUI::Imageset& char_textureImageSet = CEGUI::ImagesetManager::getSingleton().create("character", char_ceguiTex);
+
+	char_textureImageSet.defineImage( "character_img",
 			CEGUI::Point( 0.0f, 0.0f ),
-			CEGUI::Size( char_ceguiTex->getWidth(), char_ceguiTex->getHeight() ),
+			CEGUI::Size( char_ceguiTex.getSize().d_width, char_ceguiTex.getSize().d_height ),
 			CEGUI::Point( 0.0f, 0.0f ) );
 	
 	/*

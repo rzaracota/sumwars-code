@@ -10,8 +10,7 @@
 #include "OgreMeshManager.h"
 
 // needed to be able to create the CEGUI renderer interface
-#include "OgreCEGUIRenderer.h"
-
+#include "RendererModules/Ogre/CEGUIOgreRenderer.h"
 
 // CEGUI includes
 #include "CEGUISystem.h"
@@ -149,13 +148,13 @@ class Application
 		 * \var CEGUI::System* m_cegui_system
 		 * \brief Basisobjekt von CEGUI
 		 */
-		CEGUI::System* m_cegui_system;
+		CEGUI::System *m_cegui_system;
 
 		/**
-		 * \var CEGUI::OgreCEGUIRenderer* m_ogre_cegui_renderer
+		 * \var CEGUI::OgreRenderer* m_ogre_cegui_renderer
 		 * \brief Objekt zum Rendern von CEGUI mittels Ogre
 		 */
-		CEGUI::OgreCEGUIRenderer* m_ogre_cegui_renderer;
+		//CEGUI::OgreRenderer *m_ogre_cegui_renderer;
 
 		/**
 		 * \var Ogre::RenderWindow *m_window

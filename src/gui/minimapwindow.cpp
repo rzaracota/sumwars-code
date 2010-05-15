@@ -1,7 +1,7 @@
 
-#include "OgreCEGUIRenderer.h"
-#include "OgreCEGUITexture.h"
-#include "OgreCEGUIResourceProvider.h"
+#include "RendererModules/Ogre/CEGUIOgreRenderer.h"
+#include "RendererModules/Ogre/CEGUIOgreTexture.h"
+#include "RendererModules/Ogre/CEGUIOgreResourceProvider.h"
 #include "scene.h"
 
 #include "minimapwindow.h"

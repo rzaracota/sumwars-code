@@ -1396,7 +1396,7 @@ void MainWindow::updateObjectInfo()
 				{
 					CEGUI::Font* font = itmlabel->getFont();
 					float width = font->getTextExtent((CEGUI::utf8*) name.c_str());
-					CEGUI::Rect rect = m_game_screen->getInnerRect();
+					CEGUI::Rect rect = m_game_screen->getInnerRectClipper();
 					len = width / rect.getWidth();
 					
 					itmlabel->setText((CEGUI::utf8*) name.c_str());
@@ -1604,7 +1604,7 @@ void MainWindow::updateItemInfo()
 			// Laenge des Schriftzugs
 			CEGUI::Font* font = label->getFont();
 			float width = font->getTextExtent((CEGUI::utf8*) name.c_str());
-			CEGUI::Rect rect = m_game_screen->getInnerRect();
+			CEGUI::Rect rect = m_game_screen->getInnerRectClipper();
 			len = width / rect.getWidth();
 			
 			// eine Laenge fuer die Darstellung (mit Rand), eine ohne
@@ -2133,24 +2133,25 @@ void MainWindow::updateChatContent()
 	{
 		// Fenster auf die richtige Groesse bringen
 		CEGUI::Font* fnt = label->getFont();
-		CEGUI::Rect area(CEGUI::System::getSingleton().getRenderer()->getRect());
-		
+		CEGUI::Size area(CEGUI::System::getSingleton().getRenderer()->getDisplaySize());
+
+        //TODO
 		CEGUI::String text = label->getText();
-		float width = PixelAligned(fnt->getFormattedTextExtent(text, area, CEGUI::LeftAligned));
+		float width =  50; //PixelAligned(fnt->getFormattedTextExtent(text, area, CEGUI::LeftAligned));
 		
-		float maxwidth = area.getSize().d_width * 0.43;
+		float maxwidth = area.d_width * 0.43;
 		width += 3;
 		if (width > maxwidth)
 		{
 			width = maxwidth;
 		}
 		
-		CEGUI::Rect larea = area;
-		larea.setWidth(width);
-		float height = PixelAligned(fnt->getFormattedLineCount(text, larea, CEGUI::WordWrapLeftAligned) * fnt->getLineSpacing());
-		
-		float relwidth = width / area.getSize().d_width;
-		float relheight = (height+6) / area.getSize().d_height;
+		CEGUI::Size larea = area;
+		larea.d_width = width;
+		float height =  50; //PixelAligned(fnt->getFormattedLineCount(text, larea, CEGUI::WordWrapLeftAligned) * fnt->getLineSpacing());
+        
+		float relwidth = width / area.d_width;
+		float relheight = (height+6) / area.d_height;
 		
 		if ( fabs(label->getArea().getWidth().d_scale - relwidth) > 0.0001
 				   || fabs(label->getArea().getHeight().d_scale - relheight) > 0.0001)

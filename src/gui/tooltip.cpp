@@ -7,7 +7,7 @@ TextWrapTooltip::TextWrapTooltip(const CEGUI::String &type, const CEGUI::String 
 
 CEGUI::Size TextWrapTooltip::getTextSize_impl() const
 {
-	CEGUI::Font* fnt = getFont();
+	/*CEGUI::Font* fnt = getFont();
 
 	if (fnt)
 	{
@@ -33,7 +33,7 @@ CEGUI::Size TextWrapTooltip::getTextSize_impl() const
 	{
 		return CEGUI::Size(0,0);
 	}
-	return CEGUI::Tooltip::getTextSize_impl();
+	return CEGUI::Tooltip::getTextSize_impl();*/
 }
 
 TextWrapTooltipFactory::TextWrapTooltipFactory()

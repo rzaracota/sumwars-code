@@ -135,7 +135,8 @@ Application::~Application()
 	printf("deleting application\n");
 	delete m_main_window;
 	delete m_document;
-	delete m_ogre_cegui_renderer;
+    CEGUI::OgreRenderer::destroySystem(); // deletes everything
+//	delete m_ogre_cegui_renderer;
 	delete m_ogre_root;
 
 	ObjectFactory::cleanup();
@@ -295,28 +296,13 @@ bool Application::configureOgre()
 	Ogre::LogManager::getSingleton().setLogDetail(Ogre::LL_LOW );
 	// Rendering System waehlen
 	// Liste aller verfuegbaren Systeme ausgeben lassen und das erste davon nehmen
-	Ogre::RenderSystemList *renderSystems = NULL;
-	Ogre::RenderSystemList::iterator r_it;
-	renderSystems = m_ogre_root->getAvailableRenderers();
-	if (renderSystems->empty())
-	{
-		ERRORMSG("no rendering system available");
-		return false;
-	}
-	r_it = renderSystems->begin();
-	m_ogre_root->setRenderSystem(*r_it);
 
-	// config Dialog anzeigen
-	// TODO: Einstellungen direkt setzen oder aus einem File einlesen
-	bool result = true;
-	//result = m_ogre_root->showConfigDialog();
-	m_ogre_root->restoreConfig();
-	if (result == false)
-	{
-		// DEBUG("User pressed Cancel on config Dialog");
-		return false;
-	}
-
+    if(!m_ogre_root->showConfigDialog())
+    {
+        //Ogre
+        delete m_ogre_root;
+        return false; // Exit the application on cancel
+    }
 
 	return true;
 }
@@ -331,6 +317,7 @@ bool Application::setupResources()
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("./resources/materials/scripts", "FileSystem", "General");
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("./resources/materials/programs", "FileSystem", "General");
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("./resources/materials/textures", "FileSystem", "General");
+	
 	if (OGRE_VERSION >= ((1 << 16) | (6 << 8)))
 	{
 		Ogre::ResourceGroupManager::getSingleton().addResourceLocation("./resources/particle/ogre_1_6", "FileSystem", "General");
@@ -339,7 +326,7 @@ bool Application::setupResources()
 	{
 		Ogre::ResourceGroupManager::getSingleton().addResourceLocation("./resources/particle", "FileSystem", "General");
 	}
-
+	
 	// CEGUI Resourcen laden
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("./resources/gui/configs", "FileSystem", "GUI");
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("./resources/gui/fonts", "FileSystem", "GUI");
@@ -407,52 +394,43 @@ bool Application::initGettext()
 bool Application::initCEGUI()
 {
 	DEBUG("init CEGUI\n");
-	m_ogre_cegui_renderer = new CEGUI::OgreCEGUIRenderer(
-			m_window,							// Fenster in das CEGUi rendert
-   Ogre::RENDER_QUEUE_OVERLAY,	// Render Queue von CEGUI
-   false,								// CEGUI in der Render Queue zuerst bearbeitet
-   3000,									// max quads for the UI
-   m_scene_manager						// verwendeter Szenemanager
-														);
 
-	// Groesse festlegen
-	m_ogre_cegui_renderer->setDisplaySize(CEGUI::Size((int) m_window->getWidth(),(int) m_window->getHeight()));
-
-	// Basisklasse von CEGUI erzeugen
-	m_cegui_system = new CEGUI::System(m_ogre_cegui_renderer);
-
+    CEGUI::OgreRenderer::bootstrapSystem();
 
 	// Log level
 	CEGUI::Logger::getSingleton().setLoggingLevel(CEGUI::Informative);
 
 	// Scheme laden
-	CEGUI::SchemeManager::getSingleton().loadScheme((CEGUI::utf8*)"TaharezLook.scheme", (CEGUI::utf8*)"GUI");
+	CEGUI::SchemeManager::getSingleton().create((CEGUI::utf8*)"TaharezLook.scheme", (CEGUI::utf8*)"GUI");
 
 	// Imagesets laden
-	CEGUI::ImagesetManager::getSingleton().createImageset("skills.imageset");
+	CEGUI::ImagesetManager::getSingleton().create("skills.imageset");
 
+    CEGUI::Texture &startScreenTex = CEGUI::System::getSingleton().getRenderer()->createTexture("startscreen.png", (CEGUI::utf8*)"GUI");
+    
 	try
 	{
-		CEGUI::ImagesetManager::getSingleton().createImagesetFromImageFile ("startscreen.png","startscreen.png",(CEGUI::utf8*)"GUI");
+		CEGUI::ImagesetManager::getSingleton().create("startscreen.png", startScreenTex);
 	}
 	catch (CEGUI::Exception& e)
 	{
 		DEBUG("CEGUI exception %s",e.getMessage().c_str());
 	}
-
+    m_cegui_system = CEGUI::System::getSingletonPtr();
 
 	// Mauscursor setzen (evtl eher in View auslagern ? )
 	m_cegui_system->setDefaultMouseCursor((CEGUI::utf8*)"TaharezLook", (CEGUI::utf8*)"MouseArrow");
-
+    m_cegui_system->setDefaultTooltip((CEGUI::utf8*)"TaharezLook/Tooltip");
+    
 	// Font setzen
-	CEGUI::FontManager::getSingleton().createFont("DejaVuSerif-8.font", (CEGUI::utf8*)"GUI");
-	CEGUI::FontManager::getSingleton().createFont("DejaVuSerif-10.font", (CEGUI::utf8*)"GUI");
-	CEGUI::FontManager::getSingleton().createFont("DejaVuSerif-12.font", (CEGUI::utf8*)"GUI");
-	CEGUI::FontManager::getSingleton().createFont("DejaVuSerif-16.font", (CEGUI::utf8*)"GUI");
-	CEGUI::FontManager::getSingleton().createFont("DejaVuSans-10.font", (CEGUI::utf8*)"GUI");
+	CEGUI::FontManager::getSingleton().create("DejaVuSerif-8.font", (CEGUI::utf8*)"GUI");
+	CEGUI::FontManager::getSingleton().create("DejaVuSerif-10.font", (CEGUI::utf8*)"GUI");
+	CEGUI::FontManager::getSingleton().create("DejaVuSerif-12.font", (CEGUI::utf8*)"GUI");
+	CEGUI::FontManager::getSingleton().create("DejaVuSerif-16.font", (CEGUI::utf8*)"GUI");
+	CEGUI::FontManager::getSingleton().create("DejaVuSans-10.font", (CEGUI::utf8*)"GUI");
 	m_cegui_system->setDefaultFont((CEGUI::utf8*)"DejaVuSerif-8");
 
-	// eigene Factorys einfuegen
+	/*// eigene Factorys einfuegen
 	CEGUI::WindowFactoryManager::getSingleton().addFactory( new TextWrapTooltipFactory );
 	CEGUI::WindowFactoryManager::getSingleton().addFalagardWindowMapping ("TextWrapTooltip", "CEGUI/Tooltip", "TaharezLook/Tooltip","Falagard/Tooltip");
 
@@ -460,7 +438,7 @@ bool Application::initCEGUI()
 	CEGUI::System::getSingleton().setDefaultTooltip( (CEGUI::utf8*)"TextWrapTooltip" );
 	CEGUI::Tooltip* ttip = CEGUI::System::getSingleton().getDefaultTooltip();
 	ttip->setDisplayTime(0);
-	ttip->setMaxSize(CEGUI::UVector2(cegui_reldim(0.4), cegui_reldim(1.0)));
+	ttip->setMaxSize(CEGUI::UVector2(cegui_reldim(0.4), cegui_reldim(1.0)));*/
 	return true;
 }
 
@@ -546,7 +524,7 @@ bool Application::loadResources()
 
 		file = it->filename;
 
-		CEGUI::ImagesetManager::getSingleton().createImagesetFromImageFile (file,file,(CEGUI::utf8*)"itempictures");
+		CEGUI::ImagesetManager::getSingleton().createFromImageFile(file,file,(CEGUI::utf8*)"itempictures");
 
 		updateStartScreen(0.1);
 	}
@@ -558,7 +536,7 @@ bool Application::loadResources()
 
 		file = it->filename;
 
-		CEGUI::ImagesetManager::getSingleton().createImageset(file);
+		CEGUI::ImagesetManager::getSingleton().create(file);
 
 		updateStartScreen(0.2);
 	}
@@ -569,7 +547,7 @@ bool Application::loadResources()
 
 		file = it->filename;
 
-		CEGUI::ImagesetManager::getSingleton().createImageset(file);
+		CEGUI::ImagesetManager::getSingleton().create(file);
 
 		updateStartScreen(0.3);
 	}

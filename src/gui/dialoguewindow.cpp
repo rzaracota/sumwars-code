@@ -1,5 +1,5 @@
 #include "dialoguewindow.h"
-
+#include "WindowRendererSets/Falagard/FalStaticText.h"
 DialogueWindow::DialogueWindow(Document* doc, Scene* scene)
 	: Window(doc)
 {
@@ -220,7 +220,7 @@ void DialogueWindow::update()
 		
 		if (dia != 0)
 		{
-			// Schleife fuer die 4 moeglichen Sprecher eines Dialogs
+			// Loop for the four possible speaker in the dialogue
 			
 			std::string image, name, text;
 			
@@ -293,9 +293,14 @@ void DialogueWindow::update()
 							
 							CEGUI::UVector2 size = wtext->getSize();
 							CEGUI::Rect isize = wtext->getUnclippedInnerRect ();
-							float height = PixelAligned(fnt->getFormattedLineCount(text, isize, CEGUI::WordWrapCentred) * fnt->getLineSpacing());
-							size.d_y = CEGUI::UDim(0.0, height);
-							wtext->setSize(size);
+                            CEGUI::TextComponent tcomp;
+                            tcomp.setText((CEGUI::utf8*) text.c_str());
+                            
+                            //CEGUI::String text = CEGUI::StaticText(text);
+							//float height = PixelAligned(fnt->getFormattedLineCount(text, isize, CEGUI::WordWrapCentred) * fnt->getLineSpacing());
+							//size.d_y = CEGUI::UDim(0.0, 50);
+							wtext->setText(tcomp.getText());;
+                            // TODO
 							
 						}
 						wtext->setVisible(true);
@@ -542,7 +547,7 @@ void DialogueWindow::updateSpeechBubbles()
 			
 			float width = font->getTextExtent((CEGUI::utf8*) text.c_str())+15;
 			float height = font->getFontHeight() +15;
-			CEGUI::Rect rect = game_screen->getInnerRect();
+			CEGUI::Rect rect = game_screen->getInnerRectClipper();
 			
 			// Testen ob der Text auf eine Zeile passt
 			float maxwidth = rect.getWidth()/4;
@@ -557,9 +562,9 @@ void DialogueWindow::updateSpeechBubbles()
 			{
 				// mehrere Zeilen
 				rect.setWidth(maxwidth-15);
-				
-				int lines = font->getFormattedLineCount((CEGUI::utf8*) text.c_str(),rect, CEGUI::WordWrapLeftAligned);
-				height = lines * font->getFontHeight() +15;
+                
+                //TODO
+				height = 5 * font->getFontHeight() +15;
 				
 				if (height < picsize)
 				{
@@ -655,7 +660,7 @@ void DialogueWindow::updateSpeechBubbles()
 		int lines;
 		float horzoffset = 10;
 		
-		CEGUI::Rect rect = game_screen->getInnerRect();
+		CEGUI::Rect rect = game_screen->getInnerRectClipper();
 		float maxwidth = rect.getWidth()/4;
 		rect.setWidth(maxwidth-15);
 		
@@ -670,8 +675,9 @@ void DialogueWindow::updateSpeechBubbles()
 		if (elemwidth > maxwidth)
 		{
 			elemwidth = maxwidth;
-			lines = font->getFormattedLineCount(ctext,rect, CEGUI::WordWrapLeftAligned);
-			elemheight = lines * lineheight;
+            //TODO
+			//lines = font->getFormattedLineCount(ctext,rect, CEGUI::WordWrapLeftAligned);
+			elemheight = 5 * lineheight;
 		}
 		width = std::max(width,elemwidth);
 		
@@ -727,8 +733,9 @@ void DialogueWindow::updateSpeechBubbles()
 			if (elemwidth > maxwidth)
 			{
 				elemwidth = maxwidth;
-				lines = font->getFormattedLineCount(cstring,rect, CEGUI::WordWrapLeftAligned);
-				elemheight = lines * lineheight;
+                // TODO
+				//lines = font->getFormattedLineCount(cstring,rect, CEGUI::WordWrapLeftAligned);
+				elemheight = 5 * lineheight;
 			}
 			width = std::max(width,elemwidth);
 			
