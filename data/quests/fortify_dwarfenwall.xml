@@ -744,7 +744,6 @@
 					speak("PL", _("Was soll ich nur mit diesen Konzilikern machen?"),"unhappy");
 				else
 					lookAtObject(leader,countermage);
-					setSpeakerPosition("PL","upper_right");
 					speak("PL",_("Koennen wir diesen Kristall irgendwie blind machen?"));
 					speak("PL",_("Bestimmt sitzt der Kerl gerade in einem gemuetlichen Sessel und passt auf, dass wir nicht aus der Reihe tanzen."),"unhappy");
 					speak("PL",_("Ich hab so was schon mal in der Armee gesehen..."), "thoughtful");

@@ -629,28 +629,15 @@ Dialogue::Position Dialogue::calcSpeakerPosition(int id)
 		ERRORMSG("Speaker %i is not a creature", id);
 		return Dialogue::UNKNOWN;
 	}
-	
-	Position base = UPPER_RIGHT;
-	Position alt = UPPER_LEFT;
-	
+		
 	if (wo->getType() == "PLAYER")
 	{
-		base = LOWER_LEFT;
-		alt = LOWER_RIGHT;
+		return LEFT;
 	}
 	
-	// zuerst Basisposition bevorzugen
-	// zuerst unbelegte Positionen Bevorzugen
-	if (m_active_speaker[base] == 0)
-		return base;
+	return RIGHT;
 	
-	if (m_active_speaker[alt] == 0)
-		return alt;
 	
-	if (m_speaker_state[m_active_speaker[base]].m_text_visible == false)
-		return base;
-	
-	return alt;
 }
 
 void Dialogue::setSpeakerPosition(int id, Position pos)
@@ -698,7 +685,7 @@ void Dialogue::setSpeakerPosition(int id, Position pos)
 
 Dialogue::SpeakerState* Dialogue::getSpeakerState(Position pos)
 {
-	if (pos<0 || pos >=4)
+	if (pos<0 || pos >=NR_POSITIONS)
 		return 0;
 	
 	if (m_active_speaker[pos] == 0)
@@ -846,14 +833,10 @@ void Dialogue::update(float time)
 					Position pos = UNKNOWN;
 					if (posstr == "none")
 						pos = NONE;
-					else if (posstr == "upper_left")
-						pos = UPPER_LEFT;
-					else if (posstr == "upper_right")
-						pos = UPPER_RIGHT;
-					else if (posstr == "lower_left")
-						pos = LOWER_LEFT;
-					else if (posstr == "lower_right")
-						pos = LOWER_RIGHT;
+					else if (posstr == "left")
+						pos = LEFT;
+					else if (posstr == "right")
+						pos = RIGHT;
 					else
 					{
 						WARNING("Invalid value %s as argument to setSpeakerPosition",posstr.c_str());

@@ -53,7 +53,6 @@
 				speak('Fenor Marken',_("being disgusted"),"disgust");
 				speak('player',_("und noch ein Test"));
 				speak('Fenor Marken',_("wieder ein Test"));
-				--setSpeakerPosition('Fenor Marken',"upper_left");
 				speak('guard1',"ich bin die erste Wache")
 				speak('guard2',"ich bin die zweite Wache")
 				speak('Fenor Marken',"ich bin Fenor Marken")

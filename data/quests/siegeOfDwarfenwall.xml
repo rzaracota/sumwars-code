@@ -56,7 +56,7 @@
 				addSpeaker(dwarfenwall.general, "general");
 				addSpeaker(dwarfenwall.council, "council");
 				
-				setSpeakerPosition("council","upper_left");
+				setSpeakerPosition("council","left");
 				speak("council",_("...haben meine Windelementare genau gesehen: Es ist nur dieser eine Lich, der sie fuehrt."),"thoughtful");
 				speak("council",_("Wenn er erst mal weg ist, sind die anderen kein Problem."),"unhappy");
 				speak("general",_("Wie großartig."),"amused");
@@ -79,6 +79,8 @@
 			<Effect>
 				addUnitCommand(getPartyleader(),"walk","locLeader");
 				addCameraPosition(1500,"locCamera",-90,60,20);
+				setSpeakerPosition("council","right");
+				
 				speak("PL",_("Verzeiht wenn ich mich so einfach einmische, aber kleine Gruppen reisen erheblich schneller als ein Heerzug."),"normal");
 				executeInDialog('lookAtObject('..dwarfenwall.general..','..getSpeaker("PL")..')');
 				if(solo())then

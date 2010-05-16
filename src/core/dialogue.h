@@ -237,10 +237,10 @@ class Dialogue
 		{
 			NONE = -2,
 			UNKNOWN =-1,
-			UPPER_LEFT =0,
-			UPPER_RIGHT = 1,
-			LOWER_LEFT = 2,
-			LOWER_RIGHT = 3,
+			
+			LEFT = 0,
+			RIGHT = 1,
+			NR_POSITIONS = 2,
 			AUTOMATIC = 4
 		};
 		

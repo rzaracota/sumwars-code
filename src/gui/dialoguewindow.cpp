@@ -55,37 +55,23 @@ DialogueWindow::DialogueWindow(Document* doc, Scene* scene)
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.00f), cegui_reldim( 0.05f)));
 	label->setSize(CEGUI::UVector2(cegui_reldim(1.0f), cegui_reldim( 0.95f)));
 	
+	
 	label = win_mgr.createWindow("TaharezLook/StaticImage", "SpeakerEmotionImage0");
-	upper_bar->addChildWindow(label);
+	lower_bar->addChildWindow(label);
 	label->setProperty("FrameEnabled", "true");
 	label->setProperty("BackgroundEnabled", "true");
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.01f), cegui_reldim( 0.05f)));
 	label->setSize(CEGUI::UVector2(cegui_reldim(0.10f), cegui_reldim( 0.9f)));
 	
 	label = win_mgr.createWindow("TaharezLook/StaticImage", "SpeakerEmotionImage1");
-	upper_bar->addChildWindow(label);
-	label->setProperty("FrameEnabled", "true");
-	label->setProperty("BackgroundEnabled", "true");
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.89f), cegui_reldim( 0.05f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.10f), cegui_reldim( 0.9f)));
-	
-	label = win_mgr.createWindow("TaharezLook/StaticImage", "SpeakerEmotionImage2");
-	lower_bar->addChildWindow(label);
-	label->setProperty("FrameEnabled", "true");
-	label->setProperty("BackgroundEnabled", "true");
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.01f), cegui_reldim( 0.05f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.10f), cegui_reldim( 0.9f)));
-	
-	label = win_mgr.createWindow("TaharezLook/StaticImage", "SpeakerEmotionImage3");
 	lower_bar->addChildWindow(label);
 	label->setProperty("FrameEnabled", "true");
 	label->setProperty("BackgroundEnabled", "true");
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.89f), cegui_reldim( 0.05f)));
 	label->setSize(CEGUI::UVector2(cegui_reldim(0.10f), cegui_reldim( 0.9f)));
-	
 	
 	label = win_mgr.createWindow("TaharezLook/StaticText", "SpeakerNameLabel0");
-	upper_bar->addChildWindow(label);
+	lower_bar->addChildWindow(label);
 	label->setProperty("FrameEnabled", "false");
 	label->setProperty("BackgroundEnabled", "true");
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.12f), cegui_reldim(0.05f)));
@@ -93,30 +79,15 @@ DialogueWindow::DialogueWindow(Document* doc, Scene* scene)
 	
 	
 	label = win_mgr.createWindow("TaharezLook/StaticText", "SpeakerNameLabel1");
-	upper_bar->addChildWindow(label);
-	label->setProperty("FrameEnabled", "false");
-	label->setProperty("HorzFormatting", "RightAligned");
-	label->setProperty("BackgroundEnabled", "true");
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.58f), cegui_reldim(0.05f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.3f), cegui_reldim( 0.22f)));
-	
-	label = win_mgr.createWindow("TaharezLook/StaticText", "SpeakerNameLabel2");
-	lower_bar->addChildWindow(label);
-	label->setProperty("FrameEnabled", "false");
-	label->setProperty("BackgroundEnabled", "true");
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.12f), cegui_reldim(0.05f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.3f), cegui_reldim( 0.22f)));
-	
-	
-	label = win_mgr.createWindow("TaharezLook/StaticText", "SpeakerNameLabel3");
 	lower_bar->addChildWindow(label);
 	label->setProperty("FrameEnabled", "false");
 	label->setProperty("BackgroundEnabled", "true");
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.58f), cegui_reldim(0.05f)));
 	label->setSize(CEGUI::UVector2(cegui_reldim(0.3f), cegui_reldim( 0.22f)));
+	
 	
 	pane = static_cast<CEGUI::ScrollablePane*> (win_mgr.createWindow("TaharezLook/ScrollablePaneNoBar", "SpeakerTextPane0"));
-	upper_bar->addChildWindow(pane);
+	lower_bar->addChildWindow(pane);
 	pane->setPosition(CEGUI::UVector2(cegui_reldim(0.12f), cegui_reldim(0.27f)));
 	pane->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&DialogueWindow::onTextClicked, this));
 	pane->setSize(CEGUI::UVector2(cegui_reldim(0.38f), cegui_reldim( 0.66f)));
@@ -133,46 +104,12 @@ DialogueWindow::DialogueWindow(Document* doc, Scene* scene)
 	label->setWantsMultiClickEvents(false);
 	
 	pane = static_cast<CEGUI::ScrollablePane*> (win_mgr.createWindow("TaharezLook/ScrollablePaneNoBar", "SpeakerTextPane1"));
-	upper_bar->addChildWindow(pane);
+	lower_bar->addChildWindow(pane);
 	pane->setPosition(CEGUI::UVector2(cegui_reldim(0.5f), cegui_reldim(0.27f)));
 	pane->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&DialogueWindow::onTextClicked, this));
 	pane->setSize(CEGUI::UVector2(cegui_reldim(0.38f), cegui_reldim( 0.66f)));
 	
 	label = win_mgr.createWindow("TaharezLook/StaticText", "SpeakerTextLabel1");
-	pane->addChildWindow(label);
-	label->setProperty("FrameEnabled", "false");
-	label->setProperty("BackgroundEnabled", "false");
-	label->setFont("DejaVuSerif-10");
-	label->setProperty("HorzFormatting", "WordWrapLeftAligned");
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.0f), cegui_reldim(0.0f)));
-	label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&DialogueWindow::onTextClicked, this));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.99f), cegui_reldim( 0.99f)));
-	label->setWantsMultiClickEvents(false);
-	
-	pane = static_cast<CEGUI::ScrollablePane*> (win_mgr.createWindow("TaharezLook/ScrollablePaneNoBar", "SpeakerTextPane2"));
-	lower_bar->addChildWindow(pane);
-	pane->setPosition(CEGUI::UVector2(cegui_reldim(0.12f), cegui_reldim(0.27f)));
-	pane->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&DialogueWindow::onTextClicked, this));
-	pane->setSize(CEGUI::UVector2(cegui_reldim(0.38f), cegui_reldim( 0.66f)));
-	
-	label = win_mgr.createWindow("TaharezLook/StaticText", "SpeakerTextLabel2");
-	pane->addChildWindow(label);
-	label->setProperty("FrameEnabled", "false");
-	label->setProperty("BackgroundEnabled", "true");
-	label->setFont("DejaVuSerif-10");
-	label->setProperty("HorzFormatting", "WordWrapLeftAligned");
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.0f), cegui_reldim(0.0f)));
-	label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&DialogueWindow::onTextClicked, this));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.99f), cegui_reldim( 0.99f)));
-	label->setWantsMultiClickEvents(false);
-	
-	pane = static_cast<CEGUI::ScrollablePane*> (win_mgr.createWindow("TaharezLook/ScrollablePaneNoBar", "SpeakerTextPane3"));
-	lower_bar->addChildWindow(pane);
-	pane->setPosition(CEGUI::UVector2(cegui_reldim(0.5f), cegui_reldim(0.27f)));
-	pane->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&DialogueWindow::onTextClicked, this));
-	pane->setSize(CEGUI::UVector2(cegui_reldim(0.38f), cegui_reldim( 0.66f)));
-	
-	label = win_mgr.createWindow("TaharezLook/StaticText", "SpeakerTextLabel3");
 	pane->addChildWindow(label);
 	label->setProperty("FrameEnabled", "false");
 	label->setProperty("BackgroundEnabled", "true");
@@ -220,7 +157,7 @@ void DialogueWindow::update()
 		
 		if (dia != 0)
 		{
-			// Schleife fuer die 4 moeglichen Sprecher eines Dialogs
+			// Schleife fuer die moeglichen Sprecher eines Dialogs
 			
 			std::string image, name, text;
 			
@@ -230,7 +167,7 @@ void DialogueWindow::update()
 			std::stringstream stream;
 			
 			Dialogue::SpeakerState* spstate;
-			for (int i=0; i<4; i++)
+			for (int i=0; i<Dialogue::NR_POSITIONS; i++)
 			{
 				stream.str("");
 				stream << "SpeakerEmotionImage";
@@ -348,7 +285,7 @@ void DialogueWindow::update()
 		}
 		else
 		{
-			for (int i=0; i<4; i++)
+			for (int i=0; i<Dialogue::NR_POSITIONS; i++)
 			{
 				std::stringstream stream;
 				stream.str("");

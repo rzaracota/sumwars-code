@@ -1,4 +1,4 @@
-﻿<Quest name="Joringsbridge" table_name="prince">
+<Quest name="Joringsbridge" table_name="prince">
 	<Region name="joringsbridge">
 		<Event trigger="create_region">
 			<Condition>
@@ -96,10 +96,10 @@
 				addSpeaker(joringsbridge.sergeant,"sergeant",true);
 				addSpeaker(joringsbridge.council,"council",true);
 				
-				setSpeakerPosition("prince","lower_right");
-				setSpeakerPosition("mentor","lower_left");
-				setSpeakerPosition("sergeant","upper_right");
-				setSpeakerPosition("council","upper_left");
+				setSpeakerPosition("prince","right");
+				setSpeakerPosition("mentor","left");
+				setSpeakerPosition("sergeant","right");
+				setSpeakerPosition("council","left");
 				
 				speak("sergeant",_("Ich flehe Euch an, mein Prinz!"),"pain");
 				speak("sergeant",_("Lasst wenigstens eine Hand voll Soldaten hier."),"normal");
@@ -164,7 +164,6 @@
 				setRefName(prince_tmp.peasent,"Michel Bron");
 				addUnitCommand(prince_tmp.peasent,"walk","locPeasentMichel");
 				addSpeaker(prince_tmp.peasent,"michel");
-				setSpeakerPosition("michel","upper_left");
 				
 				speak("michel",_("Wachen! Wachen!"),"panic",3000);
 				
@@ -199,7 +198,7 @@
 				speak("mentor", _("Die Daemonen stehen an der Nordgrenze!"),"normal");
 				
 				speak("prince", _("Ich weiss!"),"angry");
-				setSpeakerPosition("prince","upper_right");
+				setSpeakerPosition("prince","right");
 				
 				speak("prince", _("2000 Goldstuecke jedem, der diesem treuen Mann hilft!"),"aloof");
 				executeInDialog('unitSpeak('..prince_tmp.leonard..',_("ts"),"unhappy",3000)');
@@ -343,7 +342,7 @@
 				speak("PL",_("Ist das ein Problem fuer Euch?"),"aloof");
 				speakPause("2000");
 				speak("prince",_("...wahrscheinlich nicht. Also gut, auch wenn es mir nicht gefaellt."),"normal");
-				setSpeakerPosition("mentor","upper_left");
+				setSpeakerPosition("mentor","right");
 				speak("mentor",_("Seid Ihr sicher?"),"thoughtful");
 				speak("mentor",_("Was, wenn sie die Bauern gleich mit toeten?"),"grin");
 				setSpeakerEmotion("mentor","normal");
@@ -352,7 +351,7 @@
 				speak("prince",_("Haendigt das Gold nur aus, wenn die Goblins vertrieben und die Bauern am Ende noch lebendig sind."),"normal");
 				speak("prince",_("Ansonsten, geht Eurer Arbeit gewissenhaft nach."),"normal")
 				
-				setSpeakerPosition("sergeant","upper_left");
+				setSpeakerPosition("sergeant","right");
 				speak("sergeant",_("Sehr wohl, mein Prinz."),"normal");
 				
 				speak("any",_("So viel Misstrauen ist waehrend eines Krieges wirklich nicht noetig."),"sad");
@@ -371,7 +370,7 @@
 				speak("prince",_("Sergeant!"),"normal");
 
 				executeInDialog('lookAtObject('..joringsbridge.sergeant..','..prince_tmp.karlen..')');
-				setSpeakerPosition("sergeant","upper_left");
+				setSpeakerPosition("sergeant","right");
 				speak("sergeant",_("Mein Prinz?"),"normal");
 				
 				speak("prince",_("Mein Wort steht."),"normal");
