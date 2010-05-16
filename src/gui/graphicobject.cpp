@@ -21,6 +21,7 @@ GraphicObject::GraphicObject(Type type, GraphicRenderInfo* render_info, std::str
 	}
 	else
 	{
+		// special case: No Renderinfo, GraphicObject is a single mesh
 		MovableObjectInfo mainmesh;
 		mainmesh.m_source = type;
 		mainmesh.m_type = MovableObjectInfo::ENTITY;
@@ -28,7 +29,7 @@ GraphicObject::GraphicObject(Type type, GraphicRenderInfo* render_info, std::str
 	}
 	
 	m_highlight = false;
-	m_exact_animations = false; // wirklich als Default?
+	m_exact_animations = false; // as default ?
 }
 
 GraphicObject::~GraphicObject()
@@ -57,6 +58,7 @@ GraphicObject::~GraphicObject()
 
 void GraphicObject::addObjectsFromRenderInfo(GraphicRenderInfo* info)
 {
+	// add objects from Renderinfo
 	std::list<MovableObjectInfo>& objs = info->getObjects();
 	std::list<MovableObjectInfo>::iterator it;
 		
@@ -65,6 +67,7 @@ void GraphicObject::addObjectsFromRenderInfo(GraphicRenderInfo* info)
 		addMovableObject(*it);
 	}
 	
+	// If inherited Objects are active, add objects from parent Renderinfo recursive
 	if (info->checkInheritMask(GraphicRenderInfo::INHERIT_OBJECTS))
 	{
 		GraphicRenderInfo* pinfo = info->getParentInfo();
@@ -137,6 +140,7 @@ Ogre::Node* GraphicObject::getParentNode(std::string name)
 void GraphicObject::setQueryMask(unsigned int mask)
 {
 	DEBUGX("setting mask %i to %s",mask,m_name.c_str());
+	// Set mask for all entities
 	std::map<std::string, AttachedMovableObject>::iterator it;
 	Ogre::Entity* ent;
 	for (it = m_attached_objects.begin(); it != m_attached_objects.end(); ++it)
@@ -148,6 +152,7 @@ void GraphicObject::setQueryMask(unsigned int mask)
 		}
 	}
 	
+	// Set mask for all Sub-GraphicObjects
 	std::map<std::string, AttachedGraphicObject  >::iterator gt;
 	GraphicObject* obj;
 	for (gt = m_subobjects.begin(); gt != m_subobjects.end(); ++gt)
@@ -161,7 +166,7 @@ void GraphicObject::addMovableObject(MovableObjectInfo& object)
 {
 	DEBUGX("adding object %s type %i",object.m_objectname.c_str(), object.m_type);
 	
-	// Meshname und Knochen an den angefuegt wird
+	// Determine meshname and bone 
 	std::string bone;
 	std::string mesh ="";
 	int pos = object.m_bone.find(':');
@@ -183,7 +188,7 @@ void GraphicObject::addMovableObject(MovableObjectInfo& object)
 	
 	if (object.m_type == MovableObjectInfo::SUBOBJECT)
 	{
-		// Unterobjekt einfuegen
+		// insert Sub-Graphicobject
 		if (m_subobjects.count(object.m_objectname) >0)
 		{
 			WARNING("graphicobject %s: subobject %s already exists",m_name.c_str(), object.m_objectname.c_str());
@@ -191,6 +196,7 @@ void GraphicObject::addMovableObject(MovableObjectInfo& object)
 		}
 		
 		GraphicObject* obj = GraphicManager::createGraphicObject(object.m_source, object.m_objectname, m_id);
+		// Detach the SceneTree of the new object from the global Scenetree
 		node = obj->getTopNode();
 		node->getParent()->removeChild(node);
 		
@@ -203,7 +209,7 @@ void GraphicObject::addMovableObject(MovableObjectInfo& object)
 		Ogre::TagPoint* tag =0;
 		if (object.m_bone == "")
 		{
-			// Anfuegen an TopKnoten
+			// attach to Topnode
 			getTopNode()->addChild(node);
 			
 			node->setInheritScale(true);
@@ -211,12 +217,10 @@ void GraphicObject::addMovableObject(MovableObjectInfo& object)
 		}
 		else
 		{
-			// Anfuegen an einen Knochen
+			// attach to a Bone
 			Ogre::Entity* ent = getEntity(mesh);
 			if (ent !=0)
 			{
-				// Anfuegen an den Knoten an dem die Entity haengt
-				// und verfolgen des neu angelegten TagPoint
 				Ogre::SkeletonInstance* skel= ent->getSkeleton();
 				if (skel == 0)
 				{
@@ -269,7 +273,7 @@ void GraphicObject::addMovableObject(MovableObjectInfo& object)
 	}
 	else 
 	{
-		// normales Ogre::MovableObject anfuegen
+		// create Ogre::MovableObject 
 		if (m_attached_objects.count(object.m_objectname) >0)
 		{
 			WARNING("graphicobject %s: subobject %s already exists",m_name.c_str(), object.m_objectname.c_str());
@@ -288,8 +292,8 @@ void GraphicObject::addMovableObject(MovableObjectInfo& object)
 			return;
 		}
 		
-		// Objekt mit ID versehen
-		// nur bei Entity, da nur diese von Query gefunden werden
+		// attach ID to an Entity
+		// This is used to determine the Object if the Entity is found by a OGRE query
 		// 
 		if (obj->getMovableType() == "Entity")
 		{
@@ -298,7 +302,7 @@ void GraphicObject::addMovableObject(MovableObjectInfo& object)
 		Ogre::TagPoint* tag =0;
 		Ogre::Entity* ent =0;
 		
-		
+		// attach object to new Node
 		Ogre::SceneNode* snode = GraphicManager::getSceneManager()->getRootSceneNode()->createChildSceneNode();
 		snode->getParent()->removeChild(snode);
 		snode->setInheritScale(true);
@@ -307,19 +311,18 @@ void GraphicObject::addMovableObject(MovableObjectInfo& object)
 		
 		if (object.m_bone == "")
 		{
-			// Anfuegen an TopKnoten
+			// attach to Topnode
 			getTopNode()->addChild(node);
 			DEBUGX("node %p parent %p",node,m_top_node );
 			m_attached_objects[object.m_objectname].m_tag_trackpoint = 0;
 		}
 		else
 		{
-			// Anfuegen an einen Knochen
+			// attach to Bone
 			ent = getEntity(mesh);
 			if (ent !=0)
 			{
-				// Anfuegen an den Knoten an dem die Entity haengt
-				// und verfolgen des neu angelegten TagPoint
+				// chase Tagpoint
 				Ogre::SkeletonInstance* skel= ent->getSkeleton();
 				if (skel == 0)
 				{
@@ -347,6 +350,7 @@ void GraphicObject::addMovableObject(MovableObjectInfo& object)
 			}
 		}
 		
+		// Insert into list of attached Objects
 		m_attached_objects[object.m_objectname].m_object_info = object;
 		m_attached_objects[object.m_objectname].m_object = obj;
 		m_attached_objects[object.m_objectname].m_tagpoint = tag;
@@ -356,7 +360,7 @@ void GraphicObject::addMovableObject(MovableObjectInfo& object)
 		DEBUGX("adding movable object with name %s (%s)",object.m_objectname.c_str(),obj->getName().c_str());
 	}
 	
-	// StartPosition und -Rotation setzen
+	// set initial position and Rotation
 	if (node != 0)
 	{
 		node->setPosition(object.m_position*50);
@@ -369,7 +373,7 @@ void GraphicObject::addMovableObject(MovableObjectInfo& object)
 		DEBUGX("object %s scale %f",object.m_objectname.c_str(), node->_getDerivedScale().x);
 	}
 	
-	// Abhaengigkeiten eintragen
+	// set dependencies
 	ObjectDependency& dep = m_dependencies[object.m_objectname];
 	dep.m_parent = mesh;
 	if (mesh != "")
@@ -382,6 +386,7 @@ void GraphicObject::addMovableObject(MovableObjectInfo& object)
 void GraphicObject::removeMovableObject(std::string name)
 {
 	DEBUGX("removing object %s",name.c_str());
+	// Remove all dependant subobjects
 	while (! m_dependencies[name].m_children.empty())
 	{
 		DEBUGX("recursion");
@@ -391,7 +396,7 @@ void GraphicObject::removeMovableObject(std::string name)
 	Ogre::MovableObject* obj = getMovableObject(name);
 	if (obj != 0)
 	{
-		// normales MovableObject entfernen
+		// remove Movable Object
 		Ogre::Node* node = obj->getParentNode();
 		Ogre::SceneNode* snode = dynamic_cast<Ogre::SceneNode*>(node);
 		Ogre::TagPoint* tag = dynamic_cast<Ogre::TagPoint*>(node);
@@ -399,7 +404,7 @@ void GraphicObject::removeMovableObject(std::string name)
 		
 		GraphicManager::destroyMovableObject(obj);
 		
-		// Entfernen der Highlight Entity;
+		// remove Highlight Entity
 		obj = getHighlightObject(name);
 		if (obj != 0)
 		{
@@ -437,7 +442,7 @@ void GraphicObject::removeMovableObject(std::string name)
 	}
 	else
 	{
-		// SubObject entfernen
+		// remove Graphicobject
 		std::map<std::string, AttachedGraphicObject >::iterator jt;
 		jt = m_subobjects.find(name);
 		if (jt != m_subobjects.end())
@@ -464,7 +469,7 @@ void GraphicObject::removeMovableObject(std::string name)
 		}
 	}
 	
-	
+	// inform parent to remove dependency to this object
 	if (m_dependencies[name].m_parent != "")
 	{
 		DEBUGX("removing dependency %s -> %s",m_dependencies[name].m_parent.c_str(), name.c_str());
@@ -482,8 +487,9 @@ void GraphicObject::initAttachedAction(AttachedAction& attchaction, std::string 
 	}
 	
 	attchaction.m_current_action = action;
-	attchaction.m_current_percent = -0.00001;
+	attchaction.m_current_percent = -0.00001; // this ensures that 0.0 is already a *step forward*
 	
+	// Find info how to render this action
 	attchaction.m_arinfo = m_render_info->getOwnActionRenderInfo(action,m_random_action_number);
 	attchaction.m_inherited = false;
 	
@@ -502,7 +508,7 @@ void GraphicObject::initAttachedAction(AttachedAction& attchaction, std::string 
 
 void GraphicObject::updateAction(std::string action, float percent, int random_action_nr)
 {
-	if (m_render_info ==0)
+	if (m_render_info ==0)	// static mesh
 		return;
 	
 	if (random_action_nr != 0)
@@ -515,10 +521,11 @@ void GraphicObject::updateAction(std::string action, float percent, int random_a
 		m_own_random_number = true;
 	}
 	
+	// update own Action
 	DEBUGX("update %s action %s %f",m_name.c_str(),action.c_str(),percent);
 	updateAttachedAction(m_action,action,percent);
 	
-	// weitergeben der Animation
+	// update Sub-Graphicobjects recursively
 	std::map<std::string, AttachedGraphicObject  >::iterator gt;
 	GraphicObject* obj;
 	for (gt = m_subobjects.begin(); gt != m_subobjects.end(); ++gt)
@@ -530,35 +537,43 @@ void GraphicObject::updateAction(std::string action, float percent, int random_a
 
 void GraphicObject::updateAttachedAction(AttachedAction& attchaction, std::string action, float percent)
 {
-	// vorhergehende Aktion beenden
 	if (action != attchaction.m_current_action || percent < attchaction.m_current_percent)
 	{
+		// Name of action changed or action percent *jumped backwards*
+		// so precious action was apparently completed
+		
+		// complete previous action
 		if (attchaction.m_current_percent<1.0)
 		{
 			updateAttachedAction(attchaction, attchaction.m_current_action, 1.0);
 		}
 		
+		// remove Renderparts of this action
 		while (!attchaction.m_active_parts.empty())
 		{
 			removeActiveRenderPart(attchaction.m_active_parts.front());
 			attchaction.m_active_parts.pop_front();
 		}
 		
+		// init new action
 		initAttachedAction(attchaction,action);
 	}
 	
 	DEBUGX("update action %s %f -> %f in %s", action.c_str(), attchaction.m_current_percent, percent,m_name.c_str());
 	
-	// Suche nach neu dazu gekommenen Aktionen
+	
 	ActionRenderInfo* arinfo;
 	arinfo = attchaction.m_arinfo;
 	
 	if (arinfo !=0)
 	{
+		// search for newly activated renderparts and new Objects
+		// loop over all renderparts
 		std::list< ActionRenderpart >::iterator it;
 		for (it = arinfo->m_renderparts.begin(); it != arinfo->m_renderparts.end(); ++it)
 		{
 			DEBUGX("render part %s",it->m_animation.c_str());
+			// check if part was inactive on last update and is active now
 			if (attchaction.m_current_percent < it->m_start_time && percent >= it->m_start_time)
 			{
 				if (attchaction.m_inherited == false || m_render_info->checkActionInheritMask(it->m_type))
@@ -566,6 +581,7 @@ void GraphicObject::updateAttachedAction(AttachedAction& attchaction, std::strin
 					DEBUGX("action %s: adding part %s",action.c_str(), it->m_animation.c_str());
 				
 					addActiveRenderPart(&(*it));
+					// Detach and Visibility have only an instant effect
 					if (it ->m_type != ActionRenderpart::DETACH && it ->m_type != ActionRenderpart::VISIBILITY)
 					{
 						attchaction.m_active_parts.push_back(&(*it));
@@ -575,7 +591,7 @@ void GraphicObject::updateAttachedAction(AttachedAction& attchaction, std::strin
 		}
 		
 		
-		// Suche nach neuen grafischen Objekten
+		// search for new graphic objects
 		if (attchaction.m_inherited == false || m_render_info->checkInheritMask(GraphicRenderInfo::INHERIT_OBJECTS))
 		{
 			std::list< std::pair<float,MovableObjectInfo> >:: iterator mt;
@@ -589,7 +605,7 @@ void GraphicObject::updateAttachedAction(AttachedAction& attchaction, std::strin
 			}
 		}
 		
-		// aktive Renderparts aktualisieren
+		// update active renderparts
 		std::list<ActionRenderpart*>::iterator jt;
 		float relpercent;
 		for (jt = attchaction.m_active_parts.begin(); jt !=attchaction.m_active_parts.end(); )
@@ -618,7 +634,7 @@ void GraphicObject::updateAttachedAction(AttachedAction& attchaction, std::strin
 
 void GraphicObject::updateState(std::string state, bool active)
 {
-	if (m_render_info ==0)
+	if (m_render_info ==0)	// static mesh
 		return;
 
 	std::string actionname = state;
@@ -635,7 +651,7 @@ void GraphicObject::updateState(std::string state, bool active)
 		if (it == m_attached_states.end() || it->second.m_type == AttachedState::DEACTIVATE)
 		{
 			DEBUGX("activated state %s",state.c_str());
-			// Status aktuell noch nicht gesetzt
+			// state is not set so far
 			AttachedState& astate  = m_attached_states[state];
 			astate.m_type = AttachedState::ACTIVATE;
 			updateAttachedAction(astate.m_attached_action, actionname, 0.0);
@@ -643,16 +659,16 @@ void GraphicObject::updateState(std::string state, bool active)
 	}
 	else
 	{
-		// Status ist nicht bekannt und soll auch nicht gesetzt werden
-		if (it == m_attached_states.end())
+		// Status is inactive
+		if (it == m_attached_states.end())	// status is already inactive -> do nothing
 			return;
 		
 		if (it->second.m_type != AttachedState::DEACTIVATE)
 		{
 			
 			DEBUGX("deactivated state %s",state.c_str());
-			// Status ist intern noch aktiv
-			// aktuelle Aktion beenden
+			// state should be deactivated
+			// but before deleting it internally, deactivate animation is shown
 			prefix = "deactivate:";
 			prefix += actionname;
 			actionname = prefix;
@@ -662,7 +678,7 @@ void GraphicObject::updateState(std::string state, bool active)
 		}
 	}
 	
-	// weitergeben der Animation
+	// set state for Subobjects recursively
 	std::map<std::string, AttachedGraphicObject  >::iterator gt;
 	GraphicObject* obj;
 	for (gt = m_subobjects.begin(); gt != m_subobjects.end(); ++gt)
@@ -681,14 +697,14 @@ void GraphicObject::updateAllStates(std::set<std::string>& states)
 	{
 		if (it == states.end() || (jt != m_attached_states.end() && *it > jt->first))
 		{
-			// Status deaktivieren
+			// deactivate state
 			updateState(jt->first,false);
 			++jt;
 			
 		}
 		else if (jt == m_attached_states.end() || (it != states.end() && *it < jt->first))
 		{
-			// Status auf true setzen
+			// activate state
 			updateState(*it,true);
 			++it;
 		}
@@ -698,7 +714,7 @@ void GraphicObject::updateAllStates(std::set<std::string>& states)
 			{
 				updateState(*it,true);
 			}
-			// Status ist korrekt gesetzt
+			// state is correct, do nothing
 			++it;
 			++jt;
 		}
@@ -713,19 +729,19 @@ bool GraphicObject::updateSubobject(MovableObjectInfo& object)
 	bool ret = false;
 	if (it == m_subobjects.end() && object.m_source != "")
 	{
-		// Objekt existiert bisher nicht, soll aber angehaengt sein
+		// object does not exist -> create
 		addMovableObject(object);
 		ret = true;
 	}
 	else if (it != m_subobjects.end() && object.m_source=="")
 	{
-		// Objekt ist angehaengt, soll aber nicht angehaengt sein
+		// objects exists, but should not exist -> delete
 		removeMovableObject(it->first);
 		ret = true;
 	}
 	else if (it != m_subobjects.end () && it->second.m_object->getType() != object.m_source)
 	{
-		// angehaengtes Objekt hat nicht den korrekten Typ;
+		// Objects exists, but type is incorrect -> delete and recreate
 		removeMovableObject(it->first);
 		addMovableObject(object);
 		ret = true;
@@ -739,12 +755,14 @@ void GraphicObject::update(float time)
 	if (m_render_info ==0)
 		return;
 	
+	// loop over all States
 	std::map<std::string,  AttachedState>::iterator it;
 	float abstime;
 	std::string act;
 	AttachedAction* attch;
 	for (it = m_attached_states.begin();it != m_attached_states.end();)
 	{
+		// calculate local percent for action generated from state
 		attch = &(it->second.m_attached_action);
 		abstime =attch->m_time * attch->m_current_percent;
 		abstime += time;
@@ -753,9 +771,10 @@ void GraphicObject::update(float time)
 		
 		if (abstime > attch->m_time)
 		{
+			// state action complete
 			if (it->second.m_type == AttachedState::DEACTIVATE)
 			{
-				// Deaktivierung abgeschlossen
+				// deactivate complete -> delete
 				DEBUGX("deleting attached action %s",it->first.c_str());
 				updateAttachedAction(*attch,act,1.0);
 				m_attached_states.erase(it++);
@@ -766,7 +785,7 @@ void GraphicObject::update(float time)
 				abstime = 0;
 				if (it->second.m_type == AttachedState::ACTIVATE)
 				{
-					// Aktivierung abgeschlossen
+					// activate complete
 					it->second.m_type = AttachedState::ACTIVE;
 					act = it->first;
 					
@@ -782,7 +801,7 @@ void GraphicObject::update(float time)
 		++it;
 	}
 	
-	// an Knochen angehaengte Subobjekte aktualisieren
+	// update positions of Graphicobjects attached to Bones
 	std::map<std::string, AttachedGraphicObject  >::iterator gt;
 	Ogre::TagPoint* tag;
 	GraphicObject* obj;
@@ -803,10 +822,11 @@ void GraphicObject::update(float time)
 			DEBUGX("attch position %s   %f %f %f",obj->getName().c_str(), pos.x, pos.y,pos.z);
 		}
 		
+		// recursive update
 		obj->update(time);
 	}
 
-	// an Knochen gehaengte MovableObjects aktualisieren
+	// update positions of Graphicobjects attached to Bones
 	std::map<std::string, AttachedMovableObject>::iterator mt;
 	Ogre::MovableObject* mobj;
 	for (mt = m_attached_objects.begin(); mt != m_attached_objects.end(); ++mt)
@@ -824,7 +844,7 @@ void GraphicObject::update(float time)
 		}
 	}
 	
-	// SoundObjekte aktualisieren
+	// update Soundobjects
 	Ogre::Vector3 opos = getTopNode()->_getDerivedPosition();
 	Vector pos(opos.x/50, opos.z / 50);
 	std::map<std::string, SoundObject* >::iterator st;
@@ -849,7 +869,7 @@ void GraphicObject::addActiveRenderPart(ActionRenderpart* part)
 	{
 		bool visible = (part->m_start_val > 0);
 		
-		// Entities ausblenden
+		// set entites (normale and highlight) to  required visibility
 		Ogre::MovableObject* mobj;
 		mobj = GraphicObject::getMovableObject(part->m_objectname);
 		if (mobj != 0)
@@ -863,13 +883,13 @@ void GraphicObject::addActiveRenderPart(ActionRenderpart* part)
 			mobj->setVisible (visible);
 		}
 		
-		// all blendet alles aus
+		// change visibility for all
 		if (part->m_objectname == "all")
 		{
 			setVisibility(visible);
 		}
 		
-		// Subobjekt ausblenden
+		// change visibility for subobjects recursively
 		std::map<std::string, AttachedGraphicObject >::iterator it;
 		it = m_subobjects.find(part->m_objectname);
 			
@@ -895,7 +915,7 @@ void GraphicObject::removeActiveRenderPart(ActionRenderpart* part)
 	DEBUGX("removing part %s",part->m_animation.c_str());
 	if (part->m_type == ActionRenderpart::ANIMATION)
 	{
-		// Animation deaktivieren
+		// deactivate animation
 		Ogre::Entity* ent = getEntity(part->m_objectname);
 		if (ent != 0)
 		{
@@ -916,6 +936,7 @@ void GraphicObject::removeActiveRenderPart(ActionRenderpart* part)
 	}
 	else if (part->m_type == ActionRenderpart::SCALE)
 	{
+		// apply the final scale
 		Ogre::MovableObject* obj = getMovableObject(part->m_objectname);
 		if (obj != 0)
 		{
@@ -929,6 +950,7 @@ void GraphicObject::removeActiveRenderPart(ActionRenderpart* part)
 	}
 	else if (part->m_type == ActionRenderpart::MOVEMENT || part->m_type == ActionRenderpart::ROTATION)
 	{
+		// move to final position
 		Ogre::Node* node = getParentNode(part->m_objectname);
 		if (node != 0)
 		{
@@ -954,6 +976,7 @@ void GraphicObject::updateRenderPart(ActionRenderpart* part,float  relpercent)
 	DEBUGX("updating part %s to %f",part->m_animation.c_str(),relpercent);
 	if (part->m_type == ActionRenderpart::ANIMATION)
 	{
+		// update animation state
 		Ogre::Entity* ent = getEntity(part->m_objectname);
 		Ogre::Entity* highlight_ent = static_cast<Ogre::Entity*>(getHighlightObject(part->m_objectname));
 		
@@ -980,6 +1003,7 @@ void GraphicObject::updateRenderPart(ActionRenderpart* part,float  relpercent)
 				}
 			}
 			
+			// update highlight entity as well
 			if (highlight_ent != 0)
 			{
 				Ogre::AnimationStateSet* h_anim_set;
@@ -991,6 +1015,7 @@ void GraphicObject::updateRenderPart(ActionRenderpart* part,float  relpercent)
 	}
 	else if (part->m_type == ActionRenderpart::SCALE)
 	{
+		// update scale value
 		Ogre::Node* node = getParentNode(part->m_objectname);
 		
 		if (node != 0)
@@ -1002,6 +1027,7 @@ void GraphicObject::updateRenderPart(ActionRenderpart* part,float  relpercent)
 	}
 	else if (part->m_type == ActionRenderpart::MOVEMENT || part->m_type == ActionRenderpart::ROTATION)
 	{
+		// update position
 		Ogre::Node* node = getParentNode(part->m_objectname);
 		if (node != 0)
 		{
@@ -1025,7 +1051,7 @@ void GraphicObject::updateRenderPart(ActionRenderpart* part,float  relpercent)
 
 void GraphicObject::setHighlight(bool highlight, std::string material)
 {
-	// nach *unten* durchreichen
+	// update subobjects recursively
 	std::map<std::string, AttachedGraphicObject >::iterator it;
 	for (it = m_subobjects.begin(); it != m_subobjects.end(); ++it)
 	{
@@ -1037,13 +1063,13 @@ void GraphicObject::setHighlight(bool highlight, std::string material)
 	
 	if (highlight && !m_highlight)
 	{
-		// Highlight einschalten
+		// activate highlight
 		std::map<std::string, AttachedMovableObject>::iterator at;
 		for (at = m_attached_objects.begin(); at != m_attached_objects.end(); ++at)
 		{
 			if (at->second.m_object->getMovableType() == "Entity" && at->second.m_object_info.m_highlightable)
 			{
-				// Kopie der Entity erschaffen, die fuer das Highlighting da ist
+				// create a copy of the entity that is rendered for highlighting
 				std::string name = at->first;
 				name += "_highlight";
 				
@@ -1061,13 +1087,13 @@ void GraphicObject::setHighlight(bool highlight, std::string material)
 	}
 	else if (!highlight && m_highlight)
 	{
-		// Highlight ausschalten
+		// deactivate highlighting
 		std::map<std::string, AttachedMovableObject>::iterator at;
 		for (at = m_attached_objects.begin(); at != m_attached_objects.end(); ++at)
 		{
 			if (at->second.m_highlight_entity != 0)
 			{
-				// Kopie der Entity erschaffen, die fuer das Highlighting da ist
+				// delete the highlighting entity
 				GraphicManager::detachMovableObject(at->second.m_highlight_entity);
 		
 				GraphicManager::destroyMovableObject(at->second.m_highlight_entity);
