@@ -47,7 +47,7 @@ Scene::Scene(Document* doc,Ogre::RenderWindow* window)
 	minimap_camera->setProjectionType(Ogre::PT_ORTHOGRAPHIC);
 	minimap_camera->setFOVy(Ogre::Degree(90.0));
 
-	Ogre::TexturePtr minimap_texture = Ogre::TextureManager::getSingleton().createManual( "minimap_tex","General", Ogre::TEX_TYPE_2D,
+	Ogre::TexturePtr minimap_texture = Ogre::TextureManager::getSingleton().createManual( "minimap_tex", "General", Ogre::TEX_TYPE_2D,
                                                                                           512, 512, 0, Ogre::PF_R8G8B8A8, Ogre::TU_RENDERTARGET );
 
 	Ogre::RenderTarget* minimap_rt = minimap_texture->getBuffer()->getRenderTarget();
@@ -61,9 +61,10 @@ Scene::Scene(Document* doc,Ogre::RenderWindow* window)
 	DEBUGX("render target size %i %i",minimap_rt ->getWidth (), minimap_rt ->getHeight ());
 	DEBUGX("viewport size %i %i ratio %f",v->getActualWidth(),v->getActualHeight(), ratio);
 	minimap_camera->setAspectRatio(ratio);
-    
-    CEGUI::Texture& ceguiTex = CEGUI::System::getSingleton().getRenderer()->createTexture("minimap_tex", "General");
-    
+
+    // get the OgreRenderer from CEGUI and create a CEGUI texture from the Ogre texture
+    CEGUI::Texture &ceguiTex = static_cast<CEGUI::OgreRenderer*>(CEGUI::System::getSingleton().getRenderer())->createTexture(minimap_texture);
+  
 	CEGUI::Imageset& textureImageSet = CEGUI::ImagesetManager::getSingleton().create("minimap", ceguiTex);
 
 	textureImageSet.defineImage( "minimap_img",
@@ -100,8 +101,8 @@ Scene::Scene(Document* doc,Ogre::RenderWindow* window)
 	char_view->setBackgroundColour(Ogre::ColourValue(0,0,0,1.0) );
 	char_rt->update();
 
-	CEGUI::Texture& char_ceguiTex = CEGUI::System::getSingleton().getRenderer()->createTexture("character_tex", "General");
-
+    CEGUI::Texture& char_ceguiTex = static_cast<CEGUI::OgreRenderer*>(CEGUI::System::getSingleton().getRenderer())->createTexture(char_texture);
+    
 	CEGUI::Imageset& char_textureImageSet = CEGUI::ImagesetManager::getSingleton().create("character", char_ceguiTex);
 
 	char_textureImageSet.defineImage( "character_img",
@@ -266,13 +267,14 @@ void Scene::update(float ms)
 	colour= region->getLight().getHeroLight();
 	light->setDiffuseColour(colour[0], colour[1], colour[2]);
 	
-	colour= region->getLight().getDirectionalLight();
+    
+    colour= region->getLight().getDirectionalLight();
 	light = m_scene_manager->getLight("RegionLight");
 	light->setDiffuseColour(colour[0], colour[1], colour[2]);
 	light->setSpecularColour(colour[0], colour[1], colour[2]);
 	
 	colour= region->getLight().getAmbientLight();
-	m_scene_manager->setAmbientLight(Ogre::ColourValue(colour[0], colour[1], colour[2]));
+	//m_scene_manager->setAmbientLight(Ogre::ColourValue(colour[0], colour[1], colour[2]));
 	
 	updateGraphicObjects(ms);
 }
@@ -673,7 +675,12 @@ void Scene::createScene()
 	GraphicManager::clearParticlePool();
 	
 	m_scene_manager->clearScene();
-	
+	//m_scene_manager->setShadowTextureSelfShadow(true);
+    m_scene_manager->setShadowTextureConfig(0,4096,4096,Ogre::PF_X8R8G8B8);
+    m_scene_manager->setShadowColour( Ogre::ColourValue(0.4, 0.4, 0.4) );
+    m_scene_manager->setShadowTechnique(Ogre::SHADOWTYPE_TEXTURE_MODULATIVE);
+    m_scene_manager->setShadowFarDistance(2000);
+    
 	updateCharacterView();
 
 	// Liste der statischen Objekte
@@ -684,23 +691,23 @@ void Scene::createScene()
 	Region* region = m_document->getLocalPlayer()->getRegion();
 
 	float *colour;
-	m_scene_manager->setAmbientLight(Ogre::ColourValue(0.4,0.4,0.4));
-	
+
 	colour= region->getLight().getHeroLight();
 	Ogre::Light *light = m_scene_manager->createLight("HeroLight");
 	light->setType(Ogre::Light::LT_POINT);
 	light->setDiffuseColour(colour[0], colour[1], colour[2]);
 	light->setSpecularColour(0.0, 0.0, 0.0);
 	light->setAttenuation(1000,0.5,0.000,0.00001);
-	light->setCastShadows(false);
+	light->setCastShadows(true);
 	DEBUGX("hero light %f %f %f",colour[0], colour[1], colour[2]);
 
 	colour= region->getLight().getDirectionalLight();
-	light = m_scene_manager->createLight("RegionLight");
+    light = m_scene_manager->createLight("RegionLight");
 	light->setType(Ogre::Light::LT_DIRECTIONAL);
 	light->setDiffuseColour(colour[0], colour[1], colour[2]);
 	light->setSpecularColour(colour[0], colour[1], colour[2]);
 	light->setDirection(Ogre::Vector3(-1,-1,-1));
+    light->setCastShadows(true);
 	DEBUGX("directional light %f %f %f",colour[0], colour[1], colour[2]);
 
 	if (region !=0)
@@ -735,15 +742,14 @@ void Scene::createScene()
 		//m_minimap_camera->setFrustumExtents (0,dimx*200,0,dimy*200);
 		//DEBUG("camera up %f %f %f",up.x, up.y, up.z);
 
-
-
-		m_scene_manager->setAmbientLight(Ogre::ColourValue(1.0,1.0,1.0));
 		target->update();
 
 		colour= region->getLight().getAmbientLight();
-		m_scene_manager->setAmbientLight(Ogre::ColourValue(colour[0], colour[1], colour[2]));
+        //m_scene_manager->setAmbientLight(Ogre::ColourValue(colour[0], colour[1], colour[2]));
+        m_scene_manager->setAmbientLight(Ogre::ColourValue(1.0f,1.0f,1.0f));
+        
+        std::cout << colour[0] << " + " << colour[1] << " + " << colour[2] << std::endl;
 		DEBUGX("ambient light %f %f %f",colour[0], colour[1], colour[2]);
-		//m_scene_manager->setAmbientLight(Ogre::ColourValue(0.0,0.0,0.0));
 
 		// Boden erstellen
 		if (region->getGroundMaterial() != "")
@@ -766,7 +772,7 @@ void Scene::createScene()
 					stream << "GroundEntity"<<i<<"_"<<j;
 					ground = m_scene_manager->createEntity(stream.str(), "ground");
 					ground->setMaterialName(region->getGroundMaterial());
-					ground->setCastShadows(true);
+					ground->setCastShadows(false);
 					ground->setQueryFlags(0);
 					node->attachObject(ground);
 
@@ -774,20 +780,7 @@ void Scene::createScene()
 				}
 			}
 		}
-
-		// Schatten
-		//m_scene_manager->setAmbientLight(Ogre::ColourValue(0.0,0.0,0.0));
-		/*
-		light = m_scene_manager->getLight("RegionLight");
-		light->setCastShadows(true);
-		m_scene_manager->setShadowTextureConfig(0,2048,2048,Ogre::PF_X8R8G8B8);
-		m_scene_manager->setShadowColour( Ogre::ColourValue(0.5, 0.5, 0.5) );
-		m_scene_manager->setShadowTechnique(Ogre::SHADOWTYPE_TEXTURE_ADDITIVE);
-		*/
-		//m_scene_manager->setAmbientLight(Ogre::ColourValue(0.0,0.0,0.0));
-		//m_scene_manager->setShadowFarDistance (10);
 	}
-
 }
 
 void Scene::getMeshInformation(const Ogre::MeshPtr mesh, size_t &vertex_count, Ogre::Vector3* &vertices,  size_t &index_count,
