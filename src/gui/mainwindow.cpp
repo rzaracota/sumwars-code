@@ -2320,12 +2320,12 @@ bool MainWindow::mousePressed(const OIS::MouseEvent &evt, OIS::MouseButtonID btn
 
 	if (btn == OIS::MB_Left)
 		button = CEGUI::LeftButton;
-
-	if (btn == OIS::MB_Middle)
+	else if (btn == OIS::MB_Middle)
 		button = CEGUI::MiddleButton;
-
-	if (btn == OIS::MB_Right)
+	else if (btn == OIS::MB_Right)
 		button = CEGUI::RightButton;
+	else
+		return true;
 
 	bool ret = m_cegui_system->injectMouseButtonDown(button);
 	

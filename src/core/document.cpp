@@ -449,6 +449,13 @@ void Document::onLeftMouseButtonClick(Vector pos)
 	Player* pl = static_cast<Player*> (World::getWorld()->getLocalPlayer());
 	if (pl==0)
 		return;
+	
+	// Dialog is open, each klick is interpreted as *skip this text*
+	if (pl->getDialogueId() != 0)
+	{
+		onSkipDialogueTextClicked();
+		return;
+	}
 
 	// herstellen der Koordinaten im Koordinatensystem des Spiels
 
