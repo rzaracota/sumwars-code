@@ -133,7 +133,6 @@
 					speak('player', _("Na schoen, wenn wir welche finden, bringen wir sie mit."),"normal");
 				end;
 				speak('Gertlinde Kampfer',_("Danke  Herzchen."),"happy");
-				herbalist.bushes = 0
 				herbalist.started = true
 				startTimer("talk_done",4000);
 			</Effect>	
@@ -157,7 +156,6 @@
 					speak('player', _("Na schoen, wenn wir welche finden, bringen wir sie mit."),"normal");
 				end;
 				speak('Gertlinde Kampfer',_("Danke  Herzchen."),"happy");
-				herbalist.bushes = 0
 				herbalist.started = true
 			</Effect>	
 		</Topic>
