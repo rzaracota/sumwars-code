@@ -1,0 +1,159 @@
+<HTML>
+<HEAD>
+
+<TITLE>Tutorial code sample 4</TITLE>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"></HEAD>
+<meta name="title" content="RakNet - Advanced multiplayer game networking API">
+</HEAD>
+<BODY BGCOLOR="#ffffff" LINK="#003399" vlink="#003399" alink="#003399" LEFTMARGIN="0" TOPMARGIN="0" MARGINWIDTH="0" MARGINHEIGHT="0"">
+<img src="rakkarsoftllc.gif" alt="Rakkarsoft LLC" width="215" height="60"><BR><BR>
+
+<table width="100%" border="0"><tr><td bgcolor="#6699CC"><font color="#FFFFFF" size="3" face="Arial, Helvetica, sans-serif"><strong> 
+<img src="spacer.gif" width="8" height="1">Tutorial code sample 4</strong></font></td></tr></table>
+<TABLE BORDER="0" CELLPADDING="10" CELLSPACING="0" WIDTH="100%"><TR><TD>
+<FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="2" CLASS="G10" COLOR="#3366CC"><strong>Remote procedure call implementation.
+</strong></FONT>
+<FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="2" CLASS="G10" COLOR="#666666">
+<BR><BR>
+The target of this exercise was to add the following features to sample 3:
+<OL>
+<LI>Read an array from the client on connection.
+<LI>Pass that array to the RPC call.
+<LI>Print that array in the RPC function.
+</OL>
+New code over sample 3 is in bold.
+</FONT>
+<PRE><FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="1" CLASS="G10" COLOR="#111122">
+#include &lt stdio.h &gt // Printf and gets
+#include &lt string.h &gt // strcpy
+#include "RakClientInterface.h"
+#include "RakNetworkFactory.h"
+#include "RakServerInterface.h"
+#include "PacketEnumerations.h"
+
+void PrintMessage(char *input, int numberOfBitsOfData, PlayerID sender)
+{
+	<B>printf("%s\n",input);</B>
+}
+
+int main(void)
+{
+	char str[512];
+	RakClientInterface *rakClientInterface;
+	RakServerInterface *rakServerInterface;
+	Packet *packet;
+
+	printf("(C)lient or (S)erver?\n");
+	gets(str);
+	if (str[0]=='c' || str[0]=='C')
+	{
+		rakClientInterface=RakNetworkFactory::GetRakClientInterface();
+		rakServerInterface=0;
+	}
+	else
+	{
+		rakClientInterface=0;
+		rakServerInterface=RakNetworkFactory::GetRakServerInterface();
+	}
+
+	if (rakServerInterface)
+	{
+		// Running in server mode on port 60000
+		if (rakServerInterface->Start(32, 0, 0, 60000))
+			printf("Starting the server.\n");
+		else
+			printf("Failed to start the server.\n");
+
+		REGISTER_AS_REMOTE_PROCEDURE_CALL(rakServerInterface, PrintMessage);
+	}
+	else
+	{
+		// Running in client mode
+		printf("Enter server IP or hit enter for 127.0.0.1\n");
+		gets(str);
+		// 127.0.0.1 designates the feedback loop so we can test on one computer
+		if (str[0]==0)
+			strcpy(str, "127.0.0.1");
+		if (rakClientInterface->Connect(str, 60000, 0, 0, 0))
+			printf("Starting the client.\n");
+		else
+			printf("Failed to start the client.\n");
+
+		REGISTER_AS_REMOTE_PROCEDURE_CALL(rakClientInterface, PrintMessage);
+	}
+
+	while (1)
+	{
+		if (rakServerInterface)
+			packet=rakServerInterface->Receive();
+		else
+			packet=rakClientInterface->Receive();
+
+		if (packet)
+		{
+			switch (packet->data[0])
+			{
+			case ID_REMOTE_DISCONNECTION_NOTIFICATION:
+				printf("Another client has disconnected.\n");
+				break;
+			case ID_REMOTE_CONNECTION_LOST:
+				printf("Another client has lost the connection.\n");
+				break;
+			case ID_REMOTE_NEW_INCOMING_CONNECTION:
+				printf("Another client has connected.\n");
+				break;
+			case ID_CONNECTION_REQUEST_ACCEPTED:
+				printf("Our connection request has been accepted.\n");
+				<B>printf("Enter a string to show on the server: ");
+				gets(str);
+				// Two tricky things here.  First, you have to remember to send the NULL terminator so you need strlen(str)+1
+				// Second, if you didn't read the docs you might not realize RPC takes the number of bits rather than the number of bytes.
+				// You have to multiply the number of bytes by 8
+				rakClientInterface->RPC("PrintMessage", str, (strlen(str)+1)*8, HIGH_PRIORITY, RELIABLE_ORDERED, 0, false);</B>
+				break;
+<!--			case ID_CONNECTION_RESUMPTION:
+				printf("A connection has been resumed.\n");
+				break;-->
+			case ID_NEW_INCOMING_CONNECTION:
+				printf("A connection is incoming.\n");
+				break;
+			case ID_NO_FREE_INCOMING_CONNECTIONS:
+				printf("The server is full.\n");
+				break;
+			case ID_DISCONNECTION_NOTIFICATION:
+				if (rakServerInterface)
+					printf("A client has disconnected.\n");
+				else
+					printf("We have been disconnected.\n");
+				break;
+			case ID_CONNECTION_LOST:
+				if (rakServerInterface)
+					printf("A client lost the connection.\n");
+				else
+					printf("Connection lost.\n");
+				break;
+			case ID_RECEIVED_STATIC_DATA:
+				printf("Got static data.\n");
+				break;
+			default:
+				printf("Message with identifier %i has arrived.\n", packet->data[0]);
+				break;
+			}
+
+			if (rakServerInterface)
+				rakServerInterface->DeallocatePacket(packet);
+			else
+				rakClientInterface->DeallocatePacket(packet);
+		}
+	}
+
+	if (rakClientInterface)
+		RakNetworkFactory::DestroyRakClientInterface(rakClientInterface);
+	else if (rakServerInterface)
+		RakNetworkFactory::DestroyRakServerInterface(rakServerInterface);
+	return 0;
+}
+</FONT></PRE>
+</TD></TR></TABLE>
+</BODY>
+</HTML>

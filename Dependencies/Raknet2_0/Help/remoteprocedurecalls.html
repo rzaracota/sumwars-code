@@ -1,0 +1,103 @@
+<HTML>
+<HEAD>
+
+<TITLE>Remote Procedure Calls</TITLE>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"></HEAD>
+<meta name="title" content="RakNet - Advanced multiplayer game networking API">
+</HEAD>
+<BODY BGCOLOR="#ffffff" LINK="#003399" vlink="#003399" alink="#003399" LEFTMARGIN="0" TOPMARGIN="0" MARGINWIDTH="0" MARGINHEIGHT="0"">
+<img src="rakkarsoftllc.gif" alt="Rakkarsoft LLC" width="215" height="60"><BR><BR>
+
+<table width="100%" border="0"><tr><td bgcolor="#6699CC"><font color="#FFFFFF" size="3" face="Arial, Helvetica, sans-serif"><strong> 
+<img src="spacer.gif" width="8" height="1">RPC Overview</strong></font></td></tr></table>
+<TABLE BORDER="0" CELLPADDING="10" CELLSPACING="0" WIDTH="100%"><TR><TD>
+<FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="2" CLASS="G10" COLOR="#3366CC"><strong>Overview
+</strong></FONT><BR><BR>
+<FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="2" CLASS="G10" COLOR="#666666">
+
+Normally, when you send a network message you perform four steps:<BR>
+
+<OL>
+<LI>Create a packet to hold your data
+<LI>Write a function to encode and send that data
+<LI>Create a packet identifier so the recipient knows which function to call
+<LI>Write a function to decode and handle that data.
+</OL>
+
+These four steps can be quite cumbersome and force you to focus on the process of networking rather than writing your game.<BR>
+<BR>
+Since the focus of RakNet is to allow you, the end-user, to quickly develop applications, <I>Remote Procedure Calls</I> were built into RakNet to streamline this process down to what you actually need in your code:<BR>
+
+<OL>
+<LI>Encode your data
+<LI>Call a function on the remote system with that data
+</OL>
+
+Here is the complete process of how to implement RPC in your game.<BR>
+<BR>
+<FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="2" CLASS="G10" COLOR="#3366CC"><strong>Step 1: Tell the network system to allow a function to be called using RPC:
+</strong></FONT><BR><BR>
+<FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="2" CLASS="G10" COLOR="#666666">
+
+You can't just call any function on the remote system with RPC, or else this would open up your servers to hacks.  You must first tell the network system to allow a function, defined with a particular prototype, to be called.  This is done as follows:<BR><BR>
+</FONT><FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="1" CLASS="G10" COLOR="#111122">
+// Define a C function to be called<BR>
+void MyFunction(char *input, int numberOfBitsOfData, PlayerID sender) {}<BR>
+// A pointer to the client<BR>
+RakClient *rakClient;<BR>
+// A macro to assign the function to the client<BR>
+REGISTER_AS_REMOTE_PROCEDURE_CALL(rakClient, MyFunction);<BR>
+</FONT><FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="2" CLASS="G10" COLOR="#666666">
+<BR>
+You use a similar process for the server.<BR><BR>
+Note that function names must be composed of a string with only characters from a-z and is not case sensitive.  This is done for encryption and compression reasons.<BR>
+<BR>
+<FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="2" CLASS="G10" COLOR="#3366CC"><strong>Step 2: (Optional) Encode your data
+</strong></FONT><BR><BR>
+<FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="2" CLASS="G10" COLOR="#666666">
+The RPC method of your server or client can take either a (char*) with a length or a Bitstream.  This is equivalent to creating your packet.<BR>
+<BR>
+<FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="2" CLASS="G10" COLOR="#3366CC"><strong>Step 3: Call the RPC method
+</strong></FONT><BR><BR>
+<FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="2" CLASS="G10" COLOR="#666666">
+The RPC method of your server or client can take either a (char*) with a length or a Bitstream.  Note that the parameters for the server are the same as with Send and will handle timestamping for you the same way.<BR>
+<BR>
+<FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="2" CLASS="G10" COLOR="#3366CC"><strong>Step 4: Handle the call on the remote system
+</strong></FONT><BR><BR>
+<FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="2" CLASS="G10" COLOR="#666666">
+Assuming all went well, you will get a packet with the identifier ID_RPC.  Pass this directly to your server or client method "HandleRPC."  The function you specified on the remote system will now be called.  If it wasn't called it could be several things:<BR>
+<UL>
+<LI>You didn't register the function as callable
+<LI>You called a different function, or mistyped the name
+<LI>One of the normal reasons a packet wouldn't arrive
+</UL>
+
+See <I>Samples/CodeSamples/RemoteProcedureCalls/RPC.cpp</I> for a complete example.<BR>
+
+</FONT>
+</TD></TR></TABLE>
+
+<table width="100%" border="0"><tr><td bgcolor="#6699CC"><font color="#FFFFFF" size="3" face="Arial, Helvetica, sans-serif"><strong> 
+<img src="spacer.gif" width="8" height="1">RPC Function prototype</strong></font></td></tr></table>
+<TABLE BORDER="0" CELLPADDING="10" CELLSPACING="0" WIDTH="100%"><TR><TD>
+<FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="2" CLASS="G10" COLOR="#3366CC"><strong>void functionName(char *input, int numberOfBitsOfData, PlayerID sender)
+</strong></FONT><BR><BR>
+<FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="2" CLASS="G10" COLOR="#666666">
+All RPC functions should be C functions that use the specified prototype.  input will point to a stream of bytes that is whatever data you passed when you made the call.  numberOfBitsOfData is just that - how many bits you sent.  Note that if you parse this to a BitStream constructor, the BitStream constructor wants bytes of data.  To convert bits of bytes, assuming you have at least one bit, use (numberOfBits-1)/8+1.  The last parameter, sender, is UNASSIGNED_PLAYER_ID for the server or the PlayerID of a particular client.<BR><BR>
+
+As stated above, function names must be composed of a string with only characters from a-z and is not case sensitive.
+</FONT>
+</TD></TR></TABLE>
+<table width="100%" border="0"><tr><td bgcolor="#6699CC"><font color="#FFFFFF" size="3" face="Arial, Helvetica, sans-serif"><strong> 
+<img src="spacer.gif" width="8" height="1">See Also</strong></font></td></tr></table>
+<TABLE BORDER="0" CELLPADDING="10" CELLSPACING="0" WIDTH="100%"><TR><TD>
+<FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="1" CLASS="G10" COLOR="#666666">
+<A HREF="index.html">Index</A><BR>
+<A HREF="creatingpackets.html">Creating Packets</A><BR>
+<A HREF="sendingpackets.html">Sending Packets</A><BR>
+<A HREF="receivingpackets.html">Receiving Packets</A><BR>
+<A HREF="bitstreams.html">Bitstreams</A><BR>
+</FONT>
+</TD></TR></TABLE>
+</BODY>
+</HTML>

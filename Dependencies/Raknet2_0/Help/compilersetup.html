@@ -1,0 +1,141 @@
+<HTML>
+<HEAD>
+<TITLE>Compiler Setup</TITLE>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"></HEAD>
+<meta name="title" content="RakNet - Advanced multiplayer game networking API">
+</HEAD>
+<BODY BGCOLOR="#ffffff" LINK="#003399" vlink="#003399" alink="#003399" LEFTMARGIN="0" TOPMARGIN="0" MARGINWIDTH="0" MARGINHEIGHT="0"">
+<img src="rakkarsoftllc.gif" alt="Rakkarsoft LLC" width="215" height="60"><BR><BR>
+
+<table width="100%" border="0"><tr><td bgcolor="#6699CC"><font color="#FFFFFF" size="3" face="Arial, Helvetica, sans-serif"><strong> 
+<img src="spacer.gif" width="8" height="1">Before you begin</strong></font></td></tr></table>
+<TABLE BORDER="0" CELLPADDING="10" CELLSPACING="0" WIDTH="100%"><TR><TD>
+<FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="2" CLASS="G10" COLOR="#3366CC"><strong>Use the source or a DLL?
+</strong></FONT><BR><BR>
+<FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="2" CLASS="G10" COLOR="#666666">
+RakNet includes the source and a pre-made DLL, along with sample projects to make a DLL, use a DLL, and use the source.  You may use either in your game.  During development, you will probably want to use the source so you can trace into the code for better control.  During release, you will probably want to use a DLL so you don't have to make your game multithreaded, and for easier patching.<P>
+
+Project files are included for .net and vc6 in the root directory:<BR>
+
+The DLL and the sample projects were created using Microsoft Visual Studio .net 2003.  Users of other compilers will have to make their own DLL.<BR>
+
+</FONT>
+
+</TD></TR></TABLE>
+
+<table width="100%" border="0"><tr><td bgcolor="#6699CC"><font color="#FFFFFF" size="3" face="Arial, Helvetica, sans-serif"><strong> 
+<img src="spacer.gif" width="8" height="1">DLL Users</strong></font></td></tr></table>
+
+<TABLE BORDER="0" CELLPADDING="10" CELLSPACING="0" WIDTH="100%"><TR><TD>
+<FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="2" CLASS="G10" COLOR="#3366CC"><strong>Creating a DLL
+</strong></FONT><BR><BR>
+<FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="2" CLASS="G10" COLOR="#666666">
+<OL>
+<LI>Create a DLL project.  I'll assume you know how to do this.  In MSVC 7 you would create an empty project, then under Application Settings you check DLL and empty project.
+<LI>Add the source files under the /Source directory to the project.  If you don't plan to use voice capabilities, leave out everything with "RakVoice" in the filename.
+<LI>If you want to use voice capabilities, add the source files under the speex-1.1.4\libspeex directory except the four that start with test, speex_preprocess.h, and preprocess.c.
+<LI>Add to "Additional Include Directories" your directory with the source files.
+<LI>Import ws2_32.lib, or wsock32.lib if you don't have Winsock 2 installed.  In MSVC 7 you can right click on the project, select configuration properties / linker / input / additional dependencies and type "ws2_32.lib" in there.
+<LI>Set your project to use multi-threaded runtime libraries.  In MSVC 7 you can right click on the project, select configuration properties / C/C++ / Code Generation / Runtime Library and change it to Multi-threaded (/MT).
+<LI>Optionally set your <A HREF="preprocessordirectives.html">preprocessor directives.</A>
+<LI>Then hit F7 or the equivalent to build your DLL and Lib.
+</OL>
+</FONT>
+
+<TABLE><TR><TD>
+<A HREF="makedll.jpg"><IMG SRC="makedllsmall.jpg"></A><BR>
+</TD>
+<TR ALIGN="CENTER"><TD>
+<FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="1" CLASS="G10" COLOR="#666666"><B>Creating an empty DLL project in .net 2003</B></FONT></TD></TR></TABLE>
+<TABLE><TR><TD>
+<A HREF="multithreadeddebug.jpg"><IMG SRC="multithreadeddebugsmall.jpg"></A><BR>
+</TD>
+<TR ALIGN="CENTER"><TD>
+<FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="1" CLASS="G10" COLOR="#666666"><B>Setting Multithreaded debug in .net 2003</B></FONT></TD></TR></TABLE>
+<TABLE><TR><TD>
+<A HREF="ws2_32include.jpg"><IMG SRC="ws2_32includesmall.jpg"></A><BR>
+<TR ALIGN="CENTER"><TD>
+<FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="1" CLASS="G10" COLOR="#666666"><B>Including ws2_32.lib in .net 2003</B></FONT>
+</TD></TR></TABLE>
+
+
+<FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="2" CLASS="G10" COLOR="#3366CC"><strong>Game Setup
+</strong></FONT><BR><BR>
+<FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="2" CLASS="G10" COLOR="#666666">
+<OL>
+<LI>Copy the DLL you just created to your game in the same directory as the exe.  The lib can be in any directory you want.
+<LI>Add the .lib to your project
+<LI>Add the required source files to your project:
+</FONT>
+<FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="1" CLASS="G10" COLOR="#666666">
+<UL>
+<LI>NetworkStructures.h (Optional - if you want to define packet structures)
+<LI>Source/Optional/* (Optional - to use distributed objects and/or the multiplayer class)
+<LI>SHA1.cpp (Optional - if you do file verification as in the sample)
+<LI>GetTime.h/.cpp (Helper class, also required if you include Source/Optional/*)
+<LI>BitStream.h/.cpp (Helper class, also required if you include Source/Optional/*)
+<LI>RakNetworkFactory.h
+<LI>RakClientInterface.h
+<LI>RakServerInterface.h
+<LI>RakPeerInterface.h
+<LI>NetworkTypes.h
+</UL>
+</FONT>
+
+</OL>
+<FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="2" CLASS="G10" COLOR="#666666">
+If you get any linking errors related to a bitstream, you should also include Bitstream.cpp and Bitstream.h
+</FONT>
+<BR><BR>
+<FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="2" CLASS="G10" COLOR="#666666">
+If you want to jump right in, refer to the <A HREF="tutorial.html">Basic code tutorial</A><BR>
+For more detail, refer to <A HREF="detailedimplementation.html">Detailed Implementation</A></FONT>
+
+</TD></TR></TABLE>
+<table width="100%" border="0"><tr><td bgcolor="#6699CC"><font color="#FFFFFF" size="3" face="Arial, Helvetica, sans-serif"><strong> 
+<img src="spacer.gif" width="8" height="1">Source users</strong></font></td></tr></table>
+
+<TABLE BORDER="0" CELLPADDING="10" CELLSPACING="0" WIDTH="100%"><TR><TD>
+<FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="2" CLASS="G10" COLOR="#3366CC"><strong>Game Setup
+</strong></FONT><BR><BR>
+<FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="2" CLASS="G10" COLOR="#666666">
+<OL>
+<LI>Add the source files under the /Source directory to the project.  While not all of these are strictly necessary, the ones you don't use won't hurt you.  However, if you don't plan to use RakVoice, you should not include anything with RakVoice in the filename or otherwise you will have to include all the speex files.
+<LI>If you plan to use RakVoice, add the source files under the speex-1.1.4\libspeex directory <I>except</I> those that start with test, speex_preprocess.h, and preprocess.c.
+<LI>If you plan to use RakVoice, add to "Additional Include Directories" ..\..\..\Source;..\..\..\speex-1.1.4\libspeex
+<LI>Import ws2_32.lib, or wsock32.lib if you don't have Winsock 2 installed.  In MSVC 7 you can right click on the project, select configuration properties / linker / input / additional dependencies and type "ws2_32.lib" in there.
+<LI>Set your project to use multi-threaded runtime libraries.  In MSVC 7 you can right click on the project, select configuration properties / C/C++ / Code Generation / Runtime Library and change it to Multi-threaded (/MT).
+<LI>Set an additional include path to include the RakNet source (if you copied the source files to a different directory).
+<LI>Optionally set your <A HREF="preprocessordirectives.html">preprocessor directives.</A>
+</OL>
+</FONT>
+
+<TABLE><TR><TD>
+<A HREF="multithreadeddebug.jpg"><IMG SRC="multithreadeddebugsmall.jpg"></A><BR>
+</TD>
+<TR ALIGN="CENTER"><TD>
+<FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="1" CLASS="G10" COLOR="#666666"><B>Setting Multithreaded debug in .net 2003</B></FONT></TD></TR></TABLE>
+<TABLE><TR><TD>
+<A HREF="ws2_32include.jpg"><IMG SRC="ws2_32includesmall.jpg"></A><BR>
+<TR ALIGN="CENTER"><TD>
+<FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="1" CLASS="G10" COLOR="#666666"><B>Including ws2_32.lib in .net 2003</B></FONT>
+</TD></TR></TABLE>
+<BR>
+
+</TD></TR></TABLE>
+
+<table width="100%" border="0"><tr><td bgcolor="#6699CC"><font color="#FFFFFF" size="3" face="Arial, Helvetica, sans-serif"><strong> 
+<img src="spacer.gif" width="8" height="1">See Also</strong></font></td></tr></table>
+<TABLE BORDER="0" CELLPADDING="10" CELLSPACING="0" WIDTH="100%"><TR><TD>
+<FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="1" CLASS="G10" COLOR="#666666">
+<A HREF="index.html">Index</A><BR>
+<A HREF="introduction.html">Introduction</A><BR>
+<A HREF="systemoverview.html">System Overview</A><BR>
+<A HREF="detailedimplementation.html">Detailed Implementation</A><BR>
+<A HREF="tutorial.html">Tutorial</A><BR>
+<A HREF="preprocessordirectives.html"><BR>
+</FONT>
+</TD></TR></TABLE>
+
+</BODY>
+</HTML>

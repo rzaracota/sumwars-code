@@ -1,0 +1,114 @@
+<HTML>
+<HEAD>
+
+<TITLE>Client Function List</TITLE>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"></HEAD>
+<meta name="title" content="RakNet - Advanced multiplayer game networking API">
+</HEAD>
+<BODY BGCOLOR="#ffffff" LINK="#003399" vlink="#003399" alink="#003399" LEFTMARGIN="0" TOPMARGIN="0" MARGINWIDTH="0" MARGINHEIGHT="0"">
+<img src="rakkarsoftllc.gif" alt="Rakkarsoft LLC" width="215" height="60"><BR><BR>
+
+<table width="100%" border="0"><tr><td bgcolor="#6699CC"><font color="#FFFFFF" size="3" face="Arial, Helvetica, sans-serif"><strong> 
+<img src="spacer.gif" width="8" height="1">Client Function List</strong></font></td></tr></table>
+<TABLE BORDER="0" CELLPADDING="10" CELLSPACING="0" WIDTH="100%"><TR><TD>
+<FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="2" CLASS="G10" COLOR="#666666"><B>Refer to RakClientInterface.h in /LibrarySource for a detailed explanation of each function.</B></FONT><BR><BR>
+
+<FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="2" CLASS="G10" COLOR="#3366CC"><strong>Core Functions</strong> - <I>Functions needed by all users</I></FONT><BR>
+<FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="2" CLASS="G10" COLOR="#666666">
+bool Connect(char* host, unsigned short serverPort, unsigned short clientPort, unsigned long connectionValidationInteger, bool highPriorityThreads, int maxAvePPS, int timeoutTimeMS);<BR>
+void Disconnect(void);<BR>
+void InitializeSecurity(char *privKeyP, char *privKeyQ);<BR>
+void SetPassword(char *_password);<BR>
+bool Send(char *data, const long length, PacketPriority priority, PacketReliability reliability, char orderingStream);<BR>
+bool Send(BitStream* bitStream, PacketPriority priority, PacketReliability reliability, char orderingStream);<BR>
+Packet* Receive(void);<BR>
+void DeallocatePacket(Packet *packet);<BR>
+bool IsConnected(void) const;<BR>
+void PushBackPacket(Packet *packet);<BR>
+</FONT>
+<BR>
+<FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="2" CLASS="G10" COLOR="#3366CC"><strong>Player Management Functions</strong> - <I>Tells you your playerId</I></FONT><BR>
+<FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="2" CLASS="G10" COLOR="#666666">
+PlayerID GetPlayerID(void) const;<BR>
+</FONT>
+<BR>
+<FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="2" CLASS="G10" COLOR="#3366CC"><strong>Ping Functions</strong> - <I>Functions dealing with the automatic ping mechanism</I></FONT><BR>
+<FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="2" CLASS="G10" COLOR="#666666">
+void PingServer(void);<BR>
+void PingServer(char* host, unsigned short serverPort, unsigned short clientPort);<BR>
+int GetAveragePing(void);<BR>
+int GetLastPing(void) const;<BR>
+int GetLowestPing(void) const;<BR>
+int GetPlayerPing(PlayerID playerId);<BR>
+void StartOccasionalPing(void);<BR>
+void StopOccasionalPing(void);<BR>
+</FONT>
+
+<BR>
+<FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="2" CLASS="G10" COLOR="#3366CC"><strong>Compression Functions</strong> - <I>Functions to generate a compression layer</I></FONT><BR>
+<FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="2" CLASS="G10" COLOR="#666666">
+bool GenerateCompressionLayer(unsigned long inputFrequencyTable[256], bool inputLayer);<BR>
+bool DeleteCompressionLayer(bool inputLayer);<BR>
+bool GetSendFrequencyTable(unsigned long outputFrequencyTable[256]);<BR>
+float GetCompressionRatio(void) const;<BR>
+float GetDecompressionRatio(void) const;<BR>
+</FONT>
+<BR>
+<FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="2" CLASS="G10" COLOR="#3366CC"><strong>Remote Procedure Call Functions</strong> - <I>Functions to initial and perform RPC</I></FONT><BR>
+<FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="2" CLASS="G10" COLOR="#666666">
+void RegisterAsRemoteProcedureCall(char* uniqueID, void (*functionName)(char *input, int numberOfBitsOfData, PlayerID sender));<BR>
+void UnregisterAsRemoteProcedureCall(char* uniqueID);<BR>
+bool RPC(char* uniqueID, char *data, long bitLength, PacketPriority priority, PacketReliability reliability, char orderingStream);<BR>
+bool RPC(char* uniqueID, BitStream *parameters, PacketPriority priority, PacketReliability reliability, char orderingStream);<BR>
+bool HandleRPCPacket(Packet* packet);<BR>
+</FONT>
+<BR>
+<FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="2" CLASS="G10" COLOR="#3366CC"><strong>Static Data Functions</strong> - <I>Functions dealing with API defined synchronized memory</I></FONT><BR>
+<FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="2" CLASS="G10" COLOR="#666666">
+BitStream* GetStaticServerData(void);<BR>
+void SetStaticServerData(char *data, const long length);<BR>
+BitStream* GetStaticClientData(PlayerID playerId);<BR>
+void SetStaticClientData(PlayerID playerId, char *data, const long length);<BR>
+void SendStaticClientDataToServer(void);<BR>
+</FONT>
+<BR>
+<FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="2" CLASS="G10" COLOR="#3366CC"><strong>Network Functions</strong> - <I>Functions dealing with the network in general</I></FONT></FONT><BR>
+<FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="2" CLASS="G10" COLOR="#666666">
+bool SetMTUSize(int size);<BR>
+void AdvertiseSystem(char *host, unsigned short remotePort);
+void AllowConnectionResponseIPMigration(bool allow);<BR>
+</FONT>
+<BR>
+<FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="2" CLASS="G10" COLOR="#3366CC"><strong>Statistical Functions</strong> - <I>Functions dealing with API performance</I></FONT></FONT><BR>
+<FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="2" CLASS="G10" COLOR="#666666">
+double GetPacketlossPercentile(void);<BR>
+unsigned long GetTransmittedPacketCount(void);<BR>
+unsigned long GetTransmittedFrameCount(void);<BR>
+unsigned long GetLostPacketCount(void);<BR>
+unsigned long GetReceivedPacketCount(void);<BR>
+unsigned long GetBytesSent(void);<BR>
+unsigned long GetBytesReceived(void);<BR>
+unsigned long GetUnacknowledgedSentPacketListSize(void);<BR>
+unsigned long GetBytesSentPerSecond(void) const;<BR>
+unsigned long GetBytesReceivedPerSecond(void) const;<BR>
+unsigned long GetMaximumWindowSize(void);<BR>
+unsigned long GetPacketOutputBufferSize(void);<BR>
+unsigned long GetConnectionTime(void);<BR>
+
+</FONT>
+
+</TD></TR></TABLE>
+
+<table width="100%" border="0"><tr><td bgcolor="#6699CC"><font color="#FFFFFF" size="3" face="Arial, Helvetica, sans-serif"><strong> 
+<img src="spacer.gif" width="8" height="1">See Also</strong></font></td></tr></table>
+<TABLE BORDER="0" CELLPADDING="10" CELLSPACING="0" WIDTH="100%"><TR><TD>
+<FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="1" CLASS="G10" COLOR="#666666">
+<A HREF="index.html">Index</A><BR>
+<A HREF="serverfunctionlist.html">Server Function List</A><BR>
+<A HREF="peerfunctionlist.html">Peer Function List</A><BR>
+</FONT>
+</TD></TR></TABLE>
+
+</TD></TR></TABLE>
+</BODY>
+</HTML>

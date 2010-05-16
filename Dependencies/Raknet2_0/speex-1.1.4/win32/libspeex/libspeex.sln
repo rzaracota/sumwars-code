@@ -1,0 +1,29 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libspeex", "libspeex.vcproj", "{19165D93-6BA6-4D24-A61E-1A04646259C4}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SourceCodeControl) = preSolution
+		SccNumberOfProjects = 1
+		SccProjectUniqueName0 = libspeex.vcproj
+		SccProjectName0 = Perforce\u0020Project
+		SccLocalPath0 = ..\\..
+		SccProvider0 = MSSCCI:SourceGear\u0020Vault\u0020Client
+		SccProjectFilePathRelativizedFromConnection0 = win32\\libspeex\\
+	EndGlobalSection
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{19165D93-6BA6-4D24-A61E-1A04646259C4}.Debug.ActiveCfg = Debug|Win32
+		{19165D93-6BA6-4D24-A61E-1A04646259C4}.Debug.Build.0 = Debug|Win32
+		{19165D93-6BA6-4D24-A61E-1A04646259C4}.Release.ActiveCfg = Release|Win32
+		{19165D93-6BA6-4D24-A61E-1A04646259C4}.Release.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

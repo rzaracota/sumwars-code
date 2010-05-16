@@ -1,0 +1,129 @@
+<HTML>
+<HEAD>
+
+<TITLE>Revision Log</TITLE>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"></HEAD>
+<meta name="title" content="RakNet - Advanced multiplayer game networking API">
+</HEAD>
+<BODY BGCOLOR="#ffffff" LINK="#003399" vlink="#003399" alink="#003399" LEFTMARGIN="0" TOPMARGIN="0" MARGINWIDTH="0" MARGINHEIGHT="0"">
+<img src="rakkarsoftllc.gif" alt="Rakkarsoft LLC" width="215" height="60"><BR><BR>
+
+<table width="100%" border="0"><tr><td bgcolor="#6699CC"><font color="#FFFFFF" size="3" face="Arial, Helvetica, sans-serif"><strong> 
+<img src="spacer.gif" width="8" height="1">Revision Log</strong></font></td></tr></table>
+<TABLE BORDER="0" CELLPADDING="10" CELLSPACING="0" WIDTH="100%"><TR><TD>
+<FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="2" CLASS="G10" COLOR="#666666">
+1.00 Initial release<BR>
+1.01 Updated documentation<BR>
+1.02 Fixed a rare thread related crash with large numbers of players.  Improved reliable packet performance by %30<BR>
+1.03 Increased demo player support to 31.  Improved performance under high server loads.  Added security parameter to server and improved packet encryption.  Allowed specification of domain name for client connections.  Fixed rare crash with sending multiple large packets at the same time.  Decreased overhead for all packets.<BR>
+1.031 Fixed a bug with sending more than 255 ordered packets<BR>
+1.032 Added master server and master client support.  Added GetConnectionTime method to both the server and the client.  Added port to GetPlayerIPFromID<BR>
+1.04 Modified source code to build under Unix / Linux.  Requires a source code license to make builds.<BR>
+1.041 IO completion port implemented for outgoing packets to avoid delays caused by sendto blocking under high loads.  Fixed two minor bugs related to high load processing.<BR>
+1.042 Fixed a bug where timestamps were not updated quickly enough after connecting<BR>
+1.043 Updated documentation, source code release for all versions.  Removed demo player limit.  Added DemonBattle game to examples<BR>
+1.044 Added a couple of simple access functions and made the templates compile on newer versions.<BR>
+1.1 First beta leading to version 2.0.  Partial support for bitstreams and support for automatic variable synchronization.<BR>
+1.2 Second beta leading to version 2.0.  Full support for bitstreams, rewritten reliability layer, and the compression layer added.<BR>
+1.3 Third beta leading to version 2.0.  Remote procedure calls implemented<BR>
+1.4 Improved Linux compatibility.  Fixed a problem on Windows where threads didn't terminate even with an explict call.  Removed signaled events.  Thanks to Michael Long for helping me test this.<BR>
+1.401 Fixed declaring variables inside for loops by moving them to the top of the scope.<BR>
+1.402 Fixed two bugs concerning "orderingList" in the reliability layer.  Thanks to Jeremy Stieglitz for providing the excellent bug report.<BR>
+1.403 Added _INTERNET_SIMULATOR define.  Various bug and memory leak fixes.  I now close the SocketLayer thread upon server and/or client disconnection.<BR>
+1.404 Fixed a bug with reused data stream corruption (such as with the compression layer) and large packets never being sent in a frame under extreme high stress conditions.  Added the automatic memory synchronization sample.  Added sample projects files (sorry, visual studio.net only).<BR>
+1.405 Players connecting from the same IP/Port when that IP/Port is already considered a connected player will reconnect rather than have the connection request ignored.<BR>
+1.406 Rerelease of 1.405 with a bug fix<BR>
+1.407 Ping time relaying fixed, compression and timestamps fixed with broadcasting, RPC has full parameter set, other small fixes.<BR>
+1.408 Compressed / encrypted the header portion of RPC calls.  SetStaticClientData, SetStaticServerData, GetStaticClientData, GetStaticServerData now deal with raw data (BitStreams) and no longer internally deal with the actual structure the end user users to hold the data.  Enumeration data code sample and Hangman game sample added.<BR>
+1.409 Fixed a bug where ordered packets would be long delayed during data overruns.  Added the BitStream sample.<BR>
+1.41 Added a parameter for the bitstream class to point to a copy of the data passed to its constructor rather than always making a copy.<BR>
+1.411 Fixed a bug with the last partial byte being pre-shifted when sending bitstream data with RPC<BR>
+1.42 SetPassword method added to both the client and the server. Updated documentation. Improved performance.<BR>
+1.43 Implemented IO completion ports.  Numerous bug fixes.<BR>
+1.431 Fixed a bug with the server rejecting clients without a password when the server didn't use one itself.  Reintegrated Unix compatibility.<BR>
+1.432 Increased maximum split packet size from about 1.2 megs to about 32 megs.  Improved flow control.  Fixed several Unix problems.<BR>
+1.44 Huge performance increase and further Unix fixes.  Thanks to Ed Williams for pointing out the Unix problems and the bottleneck.  Added the SetMTUSize method.<BR>
+1.441 Better mutex use resulting in a slight performance increase.  Several potential deadlocks fixed.<BR>
+1.442 Huge recieve bottleneck fixed, resulting in an 80X increase in the rate of receipt of user packets!<BR>
+1.443 Numerous optimizations, especially in regards to packet rate and reliable packet types.  This is roughly a further 5X to 10X speed improvement. Also fixed an unreported bug in the compression layer.<BR>
+1.444 Implemented a new windowing algorithm. Further speed improvements.  Added the function GetTransmittedFrameCount to the client and server.<BR>
+1.445 Minor bug fixes.  Reduced memory allocations and deallocations via pools, improving speed consistency.  Removed unnecessary memory allocations and copies in the user interface thread, decreasing processing time.  Improved windowing algorithm.  #ifdef'ed most of the asserts so Unix would not run them in release.  Changed all examples to use regular priority threads.<BR>
+1.446 Minor efficiency improvements. Fixed bug with sending packets over 3 megabytes and large files using SHA-1 security headers.<BR>
+1.45 Fixed a problem with pings.  Improved timestamp accuracy.<BR>
+1.5 Put data structures inside namespace BasicDataStructures.  Added VC6 projects.  Updated DemonBattle to use the newest RakNet version.<BR>
+1.501 Changed the Queue and List templates to work for VC6 users.<BR>
+1.51 Added RakVoice and a sample that uses RakVoice.  Added GetMTUSize method.  Improved automatic memory synchronization.  Improved timestamp accuracy (thanks to Chris Taylor). linuxBuild.tgz included in the base directory (thanks to NathanH).  Fixed bug with reconnecting clients that the server thinks is still active.<BR>
+1.52 The high priority thread boolean was replaced with an int.  0 for regular priority, 1 for high priority, 2 for ultra high priority.<BR>
+2.0 Implemented RakPeer and changed RakServer and RakClient to use it.  Numerous interface changes.  See 2.0UpgradeInstructions.txt for conversion instructions.<BR>
+2.001 Removed the const qualifier when you read bitstreams.<BR>
+2.002 Fixed using domain names with clients<BR>
+2.003 Removed feedback loop test code with RakVoice<BR>
+2.01 Added ID_REMOTE_EXISTING_CONNECTION (client only).  This is sent to clients that have just connected to a server, one message per existing client on the network.  Also fixed a bug where static data was not sent to new clients from existing clients.<BR>
+2.011 Specifying UNASSIGNED_PLAYER_ID for SendStaticData wasn't broadcasting when it should have been.<BR>
+2.012 Fixed a case where ID_REMOTE_CONNECTION_LOST was reported incorrectly.  THe connection was not actually lost, just the report was wrong.<BR>
+2.013 Fixed ID_REMOTE_EXISTING_CONNECTION.<BR>
+2.1 Added distributed objects.  General update to and improved the structure of the documentation.  Adjusted Sleep times in RakPeer.<BR>
+2.11 Added the ability to ping systems we are not connected to from the client and peer.<BR>
+2.12 Repackaged everything to be much more sensible and fixed DemonBattle so it would compile with the newest version of DirectX.<BR>
+2.121 Fixed a bug with timestamps.  Added timestamping sample.<BR>
+2.122 Fixed a client bug with broadcasted remote pings.  Fixed a client bug where it wouldn't send when using IO completion ports.<BR>
+2.13 The RPC function can now handle timestamps.  Fixed several bugs with static data relaying between the client and server.  Dropped automatic memory synchronization.<BR>
+2.131 Moved the global REGISTER_DISTRIBUTED_NETWORK_OBJECT code to main()<BR>
+2.132 Added MasterServerAndClient sample project to clarify how the Master Server works.  Also made a few changes to the interface for it.<BR>
+2.133 Made more compatible with Dev-CPP.<BR>
+2.2 Added autopatcher.  Added tutorial. Fixed bug where ID_NO_FREE_INCOMING_CONNECTIONS wasn't coming up.  Removed file size restriction for a single packet.<BR>
+2.201 Changed the data structure classes to compile on Borland.  Fixed a copy/paste bug with the DistributedNetworkObjectHeader when using 6 elements.<BR>
+2.21 Fixed a bug with the autopatcher sending the full file even when compressed.  Added the concept of client update ownership to the Distributed Network Object system.  Changed chat example to use separate client and servers.  Added the string compressor class, so you can write compressed strings to bitstreams. Rewrite of the master server.<BR>
+2.22 Increased default list and queue allocation sizes to avoid reallocations. Corrected oversight where the master client was not pinging servers. Added ability to add runtime synchronized variables to the DNO.<BR>
+2.221 Fixed memory leaks with the DNO system. Implemented automatic ban lists.<BR>
+2.23 Security updated.  Added ID_RSA_PUBLIC_KEY_MISMATCH. Added InitializeSecurity.  Added DisableSecurity.  Removed secured parameter from Send.<BR>
+2.231 Improved Linux compatibility.<BR>
+2.232 Added DNO functions ReadCreationData, WriteCreationData.  Replaced the RSA code with faster stuff.<BR>
+2.233 Improved VC6 compatibility with the RSA code.  Updated the system overview documentation.  Put the BitStream class in the RakNet namespace.<BR>
+2.234 Improved VC6 compatibility with the RSA code again.<BR>
+2.24 Eliminated one of two threads greatly improving performance.  Fixed a bug with packetloss reporting and reduced by 10X the mandatory delay with reliable packet resends.<BR>
+2.241 Improved flow control algorithm<BR>
+2.25 Massive performance increase by rearranging threaded calls and eliminating related mutexes - Roughly 25X faster.  Added DroppedConnectionTest.  Renamed FlowControl to FlowControlTest.<BR>
+2.26 Order of magnitude throughput and performance increase.  Added loopback performance test project.  Added RakNetStatistics.  Added system priority level.  Added wait timer to disconnect and close connections.<BR>
+2.261 Renamed getTime RakNetGetTime.  Changed the high priority bool for the client and server to a sleep timer.  Added stats, samples, and secure connections section to help.  Fixed linux builds.<BR>
+2.262 Fixed a bug when sending partial bytes with the BitStream class when using RPC.  Fixed a bug where the huffman tree pointer was not set to 0 in the string compressor constructor.<BR>
+2.263 Fixed secure connections. Put in a playerIndex member to the Packet struct (backwards compatiblity).  Fixed disconnection messages not showing up.  Fixed rapidly changing who you connect to.  Moved RPC calls into the user thread space where they belong(oops!).<BR>
+2.27 Using DNO, clients now know the ClientOwnerID so you can tell who made an object. Split packets can be sent unreliably.  Added server query function for LAN broadcast discovery.<BR>
+2.271 Minor Linux fixes.<BR>
+2.272 Fixed a stupid mistake with the LAN discovery.<BR>
+2.273 Added the reliable ordered test project.<BR>
+2.274 Fixed a cut and paste error with timestamps.  Thanks to Jarno for catching it.<BR>
+2.28 Added the ability to run RakNet single threaded.  Use -1 for the sleep timer to do this.<BR>
+2.29 Changed to an adaptive thread utilization model which works in conjunction with the user thread to ensure consistent responsiveness with fewer context switches and less overhead.<BR>
+2.291 Call OnDistributedObjectCreation when an object is created locally by the server<BR>
+2.292 Improved adapative thread takeover timers.  Improved responsiveness of ID_DISCONNECTION_NOTIFICATION packets.<BR>
+2.293 Temporary disabled adapative threading due to problems under high loads.<BR>
+2.3 Improved client file verification sample.  Renamed streams to channels.<BR>
+2.301 Can pass 0 for the data for RPC.  Minor Linux stuff.<BR>
+2.302 New data structures from Giblet.  Fixed a bug with the reliable ordered test.<BR>
+2.303 Fixed BigTypes.h for the latest version of gcc.<BR>
+2.304 Added AllowConnectionResponseIPMigration.  Fixed switched naming of p,q,e,n for RSA keys.  Fixed chat example client to show port unreachable message properly.<BR>
+2.305 Implemented NAT punch-through support via the master server. Added functions SetOfflinePingResponse and AdvertiseSystem.  Fixed incorrect naming of public key encryption variables.<BR>
+2.306 Added an assert against passing a memory size of 0 to SynchronizeMemory.  Fixed a crash when calling RPC with an empty data string.<BR>
+2.31 Fixed bug in SynchronizeMemory for distributed network objects.<BR>
+2.311 Servers will no longer send back to the sending client for distributed network object updates. Fixed a bug with ID_RECEIVED_STATIC_DATA on the server.  Thanks whitlark!<BR>
+2.32 Replaced Sleep with WaitForSingleObject on a timer (Windows only) if you define _WIN32_WINNT=0x0400 or higher.  Also fixed a problem with passwords.<BR>
+2.33 Now includes DOxygen commenting.  Thanks for Dalfy for doing this.<BR>
+2.331 Fix not detecting socket errors.  Thanks to Dong-Yeon Hwang<BR>
+2.332 Reverted the simple mutex class to actually use a mutex rather than a critical section, since the critical section gives much worse performance<BR>
+2.333 AMD 64 fixes.  Changed back to Critical Section. ALthough the responsiveness is worse, it threads better.<BR>
+2.4 Make duplicate packet tracking memory dynamic, reducing average memory use by 25X. Fixed bug with secure connections not responding to out of order replies. Cirilo Bernardo made the BitStream class and most tests endian complaint. Fixed handling ordered packets that arrived more than 2 out of order. Fixed formatting broken by a contributor. Fixed resend queue counting "Holes" towards the overall size, blocking sends if a single packet was lost with subsequent packets not lost.<BR>
+2.401 Fixed contributor bug causing the first PlayerIndex to use an invalid value on the client.<BR>
+2.402 Fixed a rare case where if a player disconnected and another player connected right away you could still read leftover packets from the disconnected player.<BR>
+<!-- TODO Path MTU discovery - The server should send packets with the no-fragment bit set.  If an ICMP message arrives with the error message, then lower the MTU.  Check for black hole routers -->
+</FONT>
+</TD></TR></TABLE>
+<table width="100%" border="0"><tr><td bgcolor="#6699CC"><font color="#FFFFFF" size="3" face="Arial, Helvetica, sans-serif"><strong> 
+<img src="spacer.gif" width="8" height="1">See Also</strong></font></td></tr></table>
+<TABLE BORDER="0" CELLPADDING="10" CELLSPACING="0" WIDTH="100%"><TR><TD>
+<FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="1" CLASS="G10" COLOR="#666666">
+<A HREF="index.html">Index</A><BR>
+</FONT>
+</TD></TR></TABLE>
+</BODY>
+</HTML>

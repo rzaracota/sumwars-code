@@ -1,0 +1,62 @@
+<HTML>
+<HEAD>
+
+<TITLE>Network Messages</TITLE>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"></HEAD>
+<meta name="title" content="RakNet - Advanced multiplayer game networking API">
+</HEAD>
+<BODY BGCOLOR="#ffffff" LINK="#003399" vlink="#003399" alink="#003399" LEFTMARGIN="0" TOPMARGIN="0" MARGINWIDTH="0" MARGINHEIGHT="0"">
+<img src="rakkarsoftllc.gif" alt="Rakkarsoft LLC" width="215" height="60"><BR><BR>
+
+<table width="100%" border="0"><tr><td bgcolor="#6699CC"><font color="#FFFFFF" size="3" face="Arial, Helvetica, sans-serif"><strong> 
+<img src="spacer.gif" width="8" height="1">Network Messages</strong></font></td></tr></table>
+<TABLE BORDER="0" CELLPADDING="10" CELLSPACING="0" WIDTH="100%"><TR><TD>
+<FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="2" CLASS="G10" COLOR="#3366CC"><strong>Messages from the network engine
+</strong></FONT><BR><BR>
+<FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="2" CLASS="G10" COLOR="#666666">
+Certain packets that you get will not be from your code, using your defined types, but are instead from the network engine.  These are all parsed for you in Multiplayer.h/cpp.  However, you have to know what they are to handle them properly.  The first byte of each packet that originated from the API will map to one of the following enumerations.  Possible recipient systems are in brackets.<BR><BR>
+<I>ID_PONG</I><BR>[CLIENT|PEER] Pong.  Returned if we ping a system we are not connected so.  First byte is ID_PONG, second 4 bytes is the ping, following bytes is system specific enumeration data.<BR><BR>
+<I>ID_RSA_PUBLIC_KEY_MISMATCH</I><BR>[CLIENT|PEER] We preset an RSA public key which does not match what the system we connected to is using.<BR><BR>
+<I>ID_REMOTE_DISCONNECTION_NOTIFICATION</I><BR>[CLIENT] In a client/server enviroment, a client other than ourselves has disconnected gracefully.  Packet::playerID is modified to reflect the playerID of this client.<BR><BR>
+<I>ID_REMOTE_CONNECTION_LOST</I><BR>[CLIENT] In a client/server enviroment, a client other than ourselves has been forcefully dropped.  Packet::playerID is modified to reflect the playerID of this client.<BR><BR>
+<I>ID_REMOTE_NEW_INCOMING_CONNECTION</I><BR>[CLIENT] In a client/server enviroment, a client other than ourselves has connected.  Packet::playerID is modified to reflect the playerID of this client.<BR><BR>
+<I>ID_RECEIVED_RELAYED_STATIC_DATA</I><BR>[CLIENT] Got the data for another client<BR><BR>
+<I>ID_REMOTE_EXISTING_CONNECTION</I><BR>[CLIENT] On our initial connection to the server, we are told of every other client in the game.  Packet::playerID is modified to reflect the playerID of this client.<BR><BR>
+<I>ID_CONNECTION_BANNED</I><BR>[PEER|CLIENT] We are banned from the system we attempted to connect to.<BR><BR>
+<I>ID_CONNECTION_REQUEST_ACCEPTED</I><BR>[CLIENT] In a client/server enviroment, our connection request to the server has been accepted.<BR><BR>
+<!--<I>ID_CONNECTION_RESUMPTION</I><BR>[PEER|SERVER] A system that is currently connected has reconnected.  This occurs when the connecting system crashed but reconnected before we dropped them ourselves.<BR><BR>-->
+<I>ID_NEW_INCOMING_CONNECTION</I><BR>[PEER|SERVER] A remote system has successfully connected.<BR><BR>
+<I>ID_NO_FREE_INCOMING_CONNECTIONS</I><BR>[PEER|CLIENT] The system we attempted to connect to is not accepting new connections.<BR><BR>
+<I>ID_DISCONNECTION_NOTIFICATION</I><BR>[PEER|SERVER|CLIENT] The system specified in Packet::playerID has disconnected from us.  For the client, this would mean the server has shutdown.<BR><BR>
+<I>ID_CONNECTION_LOST</I><BR>[PEER|SERVER|CLIENT] Reliable packets cannot be delivered to the system specifed in Packet::playerID.  The connection to that system has been closed.<BR><BR>
+<I>ID_TIMESTAMP</I><BR>[PEER|SERVER|CLIENT] The four bytes following this byte represent an unsigned long which is automatically modified by the difference in system times between the sender and the recipient.  Requires that you call StartOccasionalPing.<BR><BR>
+<I>ID_REMOTE_STATIC_DATA</I><BR>[PEER|SERVER|CLIENT] We got a bitstream containing static data.  You can now read this data.  This packet is transmitted automatically on connections, and can also be manually sent.<BR><BR>
+<I>ID_INVALID_PASSWORD</I><BR>[PEER|CLIENT] The remote system is using a password and has refused our connection because we did not set the correct password.<BR><BR>
+<I>ID_MODIFIED_PACKET</I><BR>[PEER|SERVER|CLIENT] A packet has been tampered with in transit.  The sender is contained in Packet::playerID.<BR><BR>
+<I>ID_REMOTE_PORT_REFUSED</I><BR>[PEER|SERVER|CLIENT] The remote host is not accepting data on this port.  This only comes up when connecting to yourself on the same computer and there is no bound socket on that port.<BR><BR>
+<I>ID_VOICE_PACKET</I><BR>[PEER] This packet contains voice data.  You should pass it to the RakVoice system.<BR><BR>
+<I>ID_UPDATE_DISTRIBUTED_NETWORK_OBJECT</I><BR>[CLIENT|SERVER] Indicates creation or update of a distributed network object.  Pass to DistributedNetworkObjectManager::Instance()->HandleDistributedNetworkObjectPacket<BR><BR>
+<I>ID_DISTRIBUTED_NETWORK_OBJECT_CREATION_ACCEPTED</I><BR>[CLIENT] Client creation of a distributed network object was accepted.  Pass to DistributedNetworkObjectManager::Instance()->HandleDistributedNetworkObjectPacketCreationAccepted<BR><BR>
+<I>ID_DISTRIBUTED_NETWORK_OBJECT_CREATION_REJECTED</I><BR>[CLIENT] Client creation of a distributed network object was rejected.  Pass to DistributedNetworkObjectManager::Instance()->HandleDistributedNetworkObjectPacketCreationRejected<BR><BR>
+<I>ID_AUTOPATCHER_REQUEST_FILE_LIST</I><BR>[PEER|SERVER|CLIENT] Request for a list of downloadable files. Pass to Autopatcher::SendDownloadableFileList<BR><BR>
+<I>ID_AUTOPATCHER_FILE_LIST</I><BR>[PEER|SERVER|CLIENT] Got a list of downloadable files. Pass to Autopatcher::OnAutopatcherFileList<BR><BR>
+<I>ID_AUTOPATCHER_REQUEST_FILES</I><BR>[PEER|SERVER|CLIENT] Request for a particular set of downloadable files. Pass to Autopatcher::OnAutopatcherRequestFiles<BR><BR>
+<I>ID_AUTOPATCHER_SET_DOWNLOAD_LIST</I><BR>[PEER|SERVER|CLIENT] Set the list of files that were approved for download and are incoming. Pass to Autopatcher::OnAutopatcherSetDownloadList<BR><BR>
+<I>ID_AUTOPATCHER_WRITE_FILE</I><BR>[PEER|SERVER|CLIENT] Got a file that we requested for download.  Pass to Autopatcher::OnAutopatcherWriteFile<BR><BR>
+<I>ID_QUERY_MASTER_SERVER</I><BR>[MASTERSERVER] Request to the master server for the list of servers that contain at least one of the specified keys<BR><BR>
+<I>ID_MASTER_SERVER_DELIST_SERVER</I><BR>[MASTERSERVER] Remove a game server from the master server.<BR><BR>
+<I>ID_MASTER_SERVER_UPDATE_SERVER</I><BR>[MASTERSERVER|MASTERCLIENT] Add or update the information for a server.<BR><BR>
+<I>ID_MASTER_SERVER_SET_SERVER</I><BR>[MASTERSERVER|MASTERCLIENT] Add or set the information for a server.<BR><BR>
+<I>ID_RELAYED_CONNECTION_NOTIFICATION</I><BR>[MASTERSERVER|MASTERCLIENT] This message indicates a game client is connecting to a game server, and is relayed through the master server.<BR><BR>
+<I>ID_ADVERTISE_SYSTEM</I><BR>[PEER|SERVER|CLIENT] Inform a remote system of our IP/Port.<BR><BR>
+</FONT>
+</TD></TR></TABLE>
+<table width="100%" border="0"><tr><td bgcolor="#6699CC"><font color="#FFFFFF" size="3" face="Arial, Helvetica, sans-serif"><strong> 
+<img src="spacer.gif" width="8" height="1">See Also</strong></font></td></tr></table>
+<TABLE BORDER="0" CELLPADDING="10" CELLSPACING="0" WIDTH="100%"><TR><TD>
+<FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="1" CLASS="G10" COLOR="#666666">
+<A HREF="index.html">Index</A><BR>
+</FONT>
+</TD></TR></TABLE>
+</BODY>
+</HTML>

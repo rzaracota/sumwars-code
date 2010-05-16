@@ -1,0 +1,86 @@
+<HTML>
+<HEAD>
+
+<TITLE>RakVoice</TITLE>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"></HEAD>
+<meta name="title" content="RakNet - Advanced multiplayer game networking API">
+</HEAD>
+<BODY BGCOLOR="#ffffff" LINK="#003399" vlink="#003399" alink="#003399" LEFTMARGIN="0" TOPMARGIN="0" MARGINWIDTH="0" MARGINHEIGHT="0"">
+<img src="rakkarsoftllc.gif" alt="Rakkarsoft LLC" width="215" height="60"><BR><BR>
+
+<table width="100%" border="0"><tr><td bgcolor="#6699CC"><font color="#FFFFFF" size="3" face="Arial, Helvetica, sans-serif"><strong> 
+<img src="spacer.gif" width="8" height="1">RakVoice</strong></font></td></tr></table>
+<TABLE BORDER="0" CELLPADDING="10" CELLSPACING="0" WIDTH="100%"><TR><TD>
+<FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="2" CLASS="G10" COLOR="#3366CC"><strong>Real time voice communication
+</strong></FONT><BR><BR>
+<FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="2" CLASS="G10" COLOR="#666666">
+RakVoice is a new feature of RakNet that allows real time voice communication at a cost of only 2200 bytes per second at 8000 8 bit samples per second.  It uses Speex (<A HREF="http://www.speex.org/">http://www.speex.org/</A>) to do the encoding.  RakVoice is class that runs alongside the server and client (and in fact uses them) that makes it easier to encode, send, decode, and relay raw sound data.<BR>
+<BR>
+To get an instance of RakVoice, use the ClientServerFactory class and call GetRakVoiceInterface.<BR>
+</FONT><FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="1" CLASS="G10" COLOR="#111122"><BR>
+rakVoice = ClientServerFactory::GetRakVoiceInterface();<BR>
+</FONT><FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="2" CLASS="G10" COLOR="#666666"><BR>
+Then you need to initialize the class with the sample rate, the number of bits per sample, and an instance of peer.  You should only call this once, and either with the client or the server, not both.  For example, to initialize the class with a sample rate of 8000 and 8 bits per second for the server, you would do:<BR>
+</FONT><FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="1" CLASS="G10" COLOR="#111122"><BR>
+rakVoice->Init(8000, 8, rakServer);<BR>
+</FONT><FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="2" CLASS="G10" COLOR="#666666"><BR>
+You then need to set the block size.  The block size is the number of bytes to encode at a time, and the number of bytes returned by the decoder.  This is normally the same size you want to lock the sound buffer by.  However, the block size must be a multiple of the frame size used by Speex.  To get the frame size used by Speex, call GetFrameSize.  To set the block size, call SetBlockSize.  You should set a blocksize, so that after encoding, your data roughly fills one MTU, or something smaller if you need more sound resolution.  Encoding will reduce the packet size by about 75%, so good values to use are 1500-2000 bytes for an MTU of 576 (the default).  For example:<BR>
+</FONT><FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="1" CLASS="G10" COLOR="#111122"><BR>
+int frameSize = rakVoice->GetFrameSize();<BR>
+rakVoice->SetBlockSize(frameSize*10);<BR>
+</FONT><FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="2" CLASS="G10" COLOR="#666666"><BR>
+Note that GetFrameSize requires that you have already called Init.<BR>
+<BR>
+When data comes in on the sound buffer from the microphone, you should call EncodeSoundPacket with a pointer to the buffer and the PlayerID of the recipient.  Unlike normal API send calls, you cannot broadcast voice packets because each encoder and decoder is a matched pair.  Therefore, you must always specify the PlayerID so the sender knows which encoder to use.  To broadcast, send it to everyone individually.  Note that the size of the input buffer must match the block size we set earlier.  For example:<BR>
+</FONT><FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="1" CLASS="G10" COLOR="#111122"><BR>
+rakVoice->EncodeSoundPacket((char*)inputBuffer,recipientPlayerID);<BR>
+</FONT><FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="2" CLASS="G10" COLOR="#666666"><BR>
+When data arrives from the microphone that we want to play, it will have the packet ID ID_VOICE_PACKET.  If you are using the Multiplayer class, this will call ReceiveVoicePacket.  You should send this packet to DecodeAndQueueSoundPacket with the data and the length of the packet.  For example:<BR>
+</FONT><FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="1" CLASS="G10" COLOR="#111122"><BR>
+rakVoice->DecodeAndQueueSoundPacket(packet->data, packet->length);<BR>
+</FONT><FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="2" CLASS="G10" COLOR="#666666"><BR>
+You may note that packet->length is far less then the buffer size we specified earlier.  This is because Speex does quite a good job of compressing the data.  If this packet arrives on the server and the sending client specified a recipient other than the server, the server will automatically relay the packet for you at this point.  Otherwise, the data will be decoded and queued on the sound output buffer within RakVoice.  To prevent speech starting and stopping due to normal ping time variations, RakVoice attempts to always maintain a buffer in RakVoice.<BR>
+<BR>
+Every time your sound engine needs data to play, you should call GetSoundPacket.  This will write one block (the size we specified earlier) of sound data to the buffer specified in the first parameter.  It will also tell you the PlayerID of the original sender of the sound packet, in case you want to show the player a message such as "Joe is talking.".  GetSoundPacket will return false if no data is waiting to play.  Here is an example call:<BR>
+</FONT><FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="1" CLASS="G10" COLOR="#111122"><BR>
+if (rakVoice->GetSoundPacket((char*)soundOutputBuffer, &senderPlayerID)==false)<BR>
+{<BR>
+	// If we didn't fill in anything, fill in silence<BR>
+	memset(soundOutputBuffer, SILENCE_BYTE, BLOCK_SIZE);<BR>
+}<BR>
+</FONT><FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="2" CLASS="G10" COLOR="#666666"><BR>
+To shutdown, do something similar to the following code:<BR>
+</FONT><FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="1" CLASS="G10" COLOR="#111122"><BR>
+rakVoice->Deinit();<BR>
+ClientServerFactory::DestroyRakVoiceInterface(rakVoice);<BR>
+</FONT><FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="2" CLASS="G10" COLOR="#666666"><BR>
+The last point of note is that RakVoice, unlike RakClient, requires all clients in a chat session to be aware of all other clients' connection states.  The reasons for this are 1.  You need to call EncodeSoundPacket with a specific recipient for broadcasting and 2. You need to call Disconnect with the PlayerID of the disconnected player every time another client in the chat session is disconnected.  If you fail to disconnect a player who has left a chat session there is no problem until another player with the same PlayerID connects.  Then RakVoice will reuse the old encoder state rather than create a new one and you will probably get garbled data.  In most games the clients are aware of which other clients are connected anyway, so this may not be a concern to you.<BR>
+<BR>
+<B>The source to PortAudio (<A HREF="http://www.portaudio.com/">http://www.portaudio.com/</A>) and Speex (<A HREF="http://www.speex.org/">http://www.speex.org/</A>) are included in RakNet and can be found in the root directory for rebuilding on other platforms.  These are independent open-source APIs and are not owned by me nor do I provide support for them.  Please refer to the respective webpages for more information on these APIs and the included license agreements for them.</B>
+</FONT>
+</TD></TR></TABLE>
+<table width="100%" border="0"><tr><td bgcolor="#6699CC"><font color="#FFFFFF" size="3" face="Arial, Helvetica, sans-serif"><strong> 
+<img src="spacer.gif" width="8" height="1">RakVoice Sample</strong></font></td></tr></table>
+<TABLE BORDER="0" CELLPADDING="10" CELLSPACING="0" WIDTH="100%"><TR><TD>
+</FONT><FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="2" CLASS="G10" COLOR="#3366CC"><strong>Sample implementation of client/server chat session.
+</strong></FONT><BR><BR>
+<FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="2" CLASS="G10" COLOR="#666666">
+RakVoice only provides a means to encode and decode raw sound data, and means to communicate with the network.  It does not include a mechanism to play or record sound.  However, using PortAudio (http://www.portaudio.com/), a complete sample has been written and can be found in Samples\Code Samples\RakVoice.<BR>
+<BR>
+The RakVoice example uses automatic memory synchronization to keep track of remote clients.  The array connectedPlayerList[MAX_PLAYERS] is what holds this data.  The ConnectedPlayerListChanged function pointer is passed SynchronizeMemory and when it indicates that the new value vs. the old value of the connectedPlayerList is different we know that a player has connected or disconnected.<BR>
+<BR>
+The RakVoice example has a companion class RakVoiceMultiplayer that derives from Multiplayer.h to handle network communication packets.  Packet identifiers of note are the various disconnection notifications, which update the connectedPlayerList array, and the ReceiveVoicePacket, which calls DecodeAndQueueSoundPacket.<BR>
+<BR>
+The PACallback function is internal to PortAudio.  It is called every time the sound buffers need to be updated and is used for both recording and playback.  Note the way sound data is broadcast to all players in that function.  The client, when sending, will scan the connected player list and call EncodeSoundPacket once per remote client.  It also calls it once for the server so the server hears what is spoken.
+</FONT>
+</TD></TR></TABLE>
+
+<table width="100%" border="0"><tr><td bgcolor="#6699CC"><font color="#FFFFFF" size="3" face="Arial, Helvetica, sans-serif"><strong> 
+<img src="spacer.gif" width="8" height="1">See Also</strong></font></td></tr></table>
+<TABLE BORDER="0" CELLPADDING="10" CELLSPACING="0" WIDTH="100%"><TR><TD>
+<FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="1" CLASS="G10" COLOR="#666666">
+<A HREF="index.html">Index</A><BR>
+</FONT>
+</TD></TR></TABLE>
+</BODY>
+</HTML>

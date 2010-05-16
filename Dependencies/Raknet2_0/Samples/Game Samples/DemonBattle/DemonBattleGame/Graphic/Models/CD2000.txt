@@ -1,0 +1,63 @@
+31 December 1998
+================================================================
+Model Name              : CyberDemon 2000
+
+installation directory  : quake2/baseq2/players/CD2000
+
+Author                  : Jonn Gorden
+Email Address           : Jonny@pobox.com
+
+Model description       : Made for both Q2PPM and Q2Mods CyberDemon 2000 is Horny, 
+			Hungry, and after Blood. It's been 5 years since he was last 
+			let out to play and he's mad as hell.
+
+Additional Credits to   : id Software for Doom and Quake2
+
+Thanks to               : My apologies to "Deimos" who released his CyberDemon out 
+			before i did. I thought about abandoning the model, but I was 
+			too close to finishing.
+
+================================================================
+* Play Information *
+
+New Sounds              : Some
+CTF Skins               : YES
+VWEP Support            : NO
+
+* Construction *
+
+Tris.md2
+
+Poly Count              : 634
+Vert Count              : 352
+Mapping Vert Count	: 600
+Skin Size		: 256x256
+Skin Count              : 3
+Base                    : New model
+Model Scale		: 10% taller than Q2 male
+
+Weapon.md2
+
+Poly Count              : 16
+Vert Count              : 12
+Mapping Vert Count	: 26
+Skin Size		: 128x128
+Skin Count              : 1
+Base                    : New model
+
+Editor used             : Lightwave, Paintshop Pro and Q2Modeller
+
+Known Bugs              : None that I know of
+
+Build/Animation time    : Didn't keep track
+
+* How to use this model *
+
+Unzip all files into your Quake2\baseq2\players directory using folder names.
+
+* Copyright / Permissions *
+QUAKE(R) and QUAKE II(R) are registered trademarks of id Software, Inc.
+
+CD2000 can be used for whatever free stuff your twisted minds can think 
+of as long as I am given full credit. Permission must be asked for if you 
+want to use this model or any derivative of it for anything involving money.

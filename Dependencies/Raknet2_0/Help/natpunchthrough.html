@@ -1,0 +1,47 @@
+<HTML>
+<HEAD>
+
+<TITLE>NAT Punch-through</TITLE>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"></HEAD>
+<meta name="title" content="RakNet - Advanced multiplayer game networking API">
+</HEAD>
+<BODY BGCOLOR="#ffffff" LINK="#003399" vlink="#003399" alink="#003399" LEFTMARGIN="0" TOPMARGIN="0" MARGINWIDTH="0" MARGINHEIGHT="0"">
+<img src="rakkarsoftllc.gif" alt="Rakkarsoft LLC" width="215" height="60"><BR><BR>
+
+<table width="100%" border="0"><tr><td bgcolor="#6699CC"><font color="#FFFFFF" size="3" face="Arial, Helvetica, sans-serif"><strong> 
+<img src="spacer.gif" width="8" height="1">NAT Punch-through overview</strong></font></td></tr></table>
+<TABLE BORDER="0" CELLPADDING="10" CELLSPACING="0" WIDTH="100%"><TR><TD>
+<FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="2" CLASS="G10" COLOR="#3366CC"><strong>NAT overview
+</strong></FONT>
+<FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="2" CLASS="G10" COLOR="#666666">
+<BR><BR>
+NAT, or network address translation is a technique used to map one IP, known publicly, to one or more IPs, known privately.  This is used to provide more IP addresses when they are scarce behind a LAN, for security, and/or to share internet connections.  With a NAT, all packets go to the NAT server.  The NAT server has a routing table which will then relay that packet to the correct machine.  When a system behind the NAT sends a packet to a system outside the NAT, the NAT will record the sending machine outgoing destination in the table.  When a return packet is sent it will do a reverse lookup on this table.<P>
+
+The problem with this for games is that it requires the machine behind the NAT to first send a packet to all machines it wants to get a packet from.  This makes it impossible to accept unknown incoming connections, which is a problem for a public game server.<P>
+
+This can be avoided if one computer is behind a NAT and another is not.  The player behind the NAT must initiate the connection (the client) while the player not behind the NAT acts as the server.
+<P><FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="2" CLASS="G10" COLOR="#3366CC"><strong>NAT Punch-through
+</strong></FONT><BR><BR>
+If both machines are behind a NAT, it is impossible for them to connect to each other unless they know each others public IPs and ports in advance and they happen to try to communicate at the same time.  This technique is called NAT punch through.  One way to know each other's public IPs and ports in advance and how they know to connect at the same time is through a third non-NAT intermediary such as the Master Server.<BR>
+<P><FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="2" CLASS="G10" COLOR="#3366CC"><strong>Using Advertise System for NAT Punch-through
+</strong></FONT><BR><BR>
+Every game client, what you actually play on, should have an instance of the master client, a class used to connect with the master server.  When you want your game client to connect to the game server you should have the master client call ConnectionAttemptNotification with the game server IP / port you want to connect to.  This starts a complex order of events:
+<OL>
+<LI>The master client on the same computer as the game client will send ID_RELAYED_CONNECTION_NOTIFICATION to the master server with the game server IP / port you want to connect to and your own game client port.
+<LI>The master server, on receipt, will scan through its list of game servers in the function HandleRelayedConnectionNotification.  If a match is found, it automatically sends ID_RELAYED_CONNECTION_NOTIFICATION to the master client that game server is using.  This packet will include the public IP of the caller, and the game port written in step one.
+<LI>The master client of the target game server, on receipt, will get HandleRelayedConnectionNotification.  This function will parse out the public IP and the game port written in step one.
+<LI>The master client will then call OnConnectionRequest with the master client IP and the game client port of the client in step one.  The trick is that the master client is supposed to be on the same computer as the game client.  If this is true you now have the game client IP and port of the client trying to connect to your server.
+</OL>
+It's up to the programmer (you) to either override or modify the function OnConnectionRequest such that the game server calls AdvertiseSystem with the IP and port of the game client trying to connect.  All Advertise System does is sends one byte to an IP / Port.  This causes the NAT table to contain the public IP and port of the client trying to connect.  That client's packets will now be allowed through to the correct game server.
+<BR>
+<BR>
+<table width="100%" border="0"><tr><td bgcolor="#6699CC"><font color="#FFFFFF" size="3" face="Arial, Helvetica, sans-serif"><strong> 
+<img src="spacer.gif" width="8" height="1">See Also</strong></font></td></tr></table>
+<TABLE BORDER="0" CELLPADDING="10" CELLSPACING="0" WIDTH="100%"><TR><TD>
+<FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="1" CLASS="G10" COLOR="#666666">
+<A HREF="index.html">Index</A><BR>
+<A HREF="masterserver.html">Master Server</A><BR>
+</FONT>
+</TD></TR></TABLE>
+</BODY>
+</HTML>
