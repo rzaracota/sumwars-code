@@ -675,7 +675,7 @@ void Scene::createScene()
 	GraphicManager::clearParticlePool();
 	
 	m_scene_manager->clearScene();
-	//m_scene_manager->setShadowTextureSelfShadow(true);
+	m_scene_manager->setShadowTextureSelfShadow(true);
     m_scene_manager->setShadowTextureConfig(0,4096,4096,Ogre::PF_X8R8G8B8);
     m_scene_manager->setShadowColour( Ogre::ColourValue(0.4, 0.4, 0.4) );
     m_scene_manager->setShadowTechnique(Ogre::SHADOWTYPE_TEXTURE_MODULATIVE);

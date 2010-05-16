@@ -410,7 +410,7 @@ bool Application::initCEGUI()
     
 	try
 	{
-		CEGUI::ImagesetManager::getSingleton().create("startscreen.png", startScreenTex);
+		CEGUI::ImagesetManager::getSingleton().createFromImageFile("startscreen.png", "startscreen.png");
 	}
 	catch (CEGUI::Exception& e)
 	{
@@ -430,7 +430,7 @@ bool Application::initCEGUI()
 	CEGUI::FontManager::getSingleton().create("DejaVuSans-10.font", (CEGUI::utf8*)"GUI");
 	m_cegui_system->setDefaultFont((CEGUI::utf8*)"DejaVuSerif-8");
 
-	/*// eigene Factorys einfuegen
+	// eigene Factorys einfuegen
 	CEGUI::WindowFactoryManager::getSingleton().addFactory( new TextWrapTooltipFactory );
 	CEGUI::WindowFactoryManager::getSingleton().addFalagardWindowMapping ("TextWrapTooltip", "CEGUI/Tooltip", "TaharezLook/Tooltip","Falagard/Tooltip");
 
@@ -438,7 +438,7 @@ bool Application::initCEGUI()
 	CEGUI::System::getSingleton().setDefaultTooltip( (CEGUI::utf8*)"TextWrapTooltip" );
 	CEGUI::Tooltip* ttip = CEGUI::System::getSingleton().getDefaultTooltip();
 	ttip->setDisplayTime(0);
-	ttip->setMaxSize(CEGUI::UVector2(cegui_reldim(0.4), cegui_reldim(1.0)));*/
+	ttip->setMaxSize(CEGUI::UVector2(cegui_reldim(0.4), cegui_reldim(1.0)));
 	return true;
 }
 

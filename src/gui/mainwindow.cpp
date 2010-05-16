@@ -120,7 +120,7 @@ bool MainWindow::setupMainMenu()
 		CEGUI::Window* img;
 		img  = win_mgr.createWindow("TaharezLook/StaticImage", "StartScreenImage");
 		m_main_menu->addChildWindow(img);
-		img->setProperty("Image", "set:startscreen.png image:full_image");
+        img->setProperty("Image", "set:startscreen.png image:full_image");
 		img->moveToBack ();
 		img->setMousePassThroughEnabled(true);
 		
