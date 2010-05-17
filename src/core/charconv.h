@@ -6,12 +6,12 @@
 #include "raknet/GetTime.h"
 #include "raknet/MessageIdentifiers.h"
 */
-#include "raknet/PacketEnumerations.h"
-#include "raknet/RakNetworkFactory.h"
-#include "raknet/RakPeerInterface.h"
-#include "raknet/NetworkTypes.h"
-#include "raknet/BitStream.h"
-#include "raknet/GetTime.h"
+#include "PacketEnumerations.h"
+#include "RakNetworkFactory.h"
+#include "RakPeerInterface.h"
+#include "NetworkTypes.h"
+#include "BitStream.h"
+#include "GetTime.h"
 
 #include <algorithm>
 #include <string>

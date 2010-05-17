@@ -9,13 +9,13 @@
 #include "raknet/RakNetTypes.h"
 #include "raknet/BitStream.h"
 */
-#include "raknet/PacketEnumerations.h"
-#include "raknet/RakNetworkFactory.h"
-#include "raknet/RakPeerInterface.h"
-#include "raknet/NetworkTypes.h"
-#include "raknet/BitStream.h"
-#include "raknet/RakClientInterface.h"
-#include "raknet/RakServerInterface.h"
+#include "PacketEnumerations.h"
+#include "RakNetworkFactory.h"
+#include "RakPeerInterface.h"
+#include "NetworkTypes.h"
+#include "BitStream.h"
+#include "RakClientInterface.h"
+#include "RakServerInterface.h"
 
 #define ID_USER_PACKET_ENUM  80
 
