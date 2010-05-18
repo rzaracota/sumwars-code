@@ -1,6 +1,8 @@
 CMAKE_MINIMUM_REQUIRED( VERSION 2.8.0)
 
-#cmake_policy(SET CMP0011 NEW)
+set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/CMakeModules/;${CMAKE_MODULE_PATH}")
+include(FindPkgMacros)
+include(PreprocessorUtils)
 
 PROJECT(SUMWARS)
 
@@ -9,18 +11,28 @@ SET(VERSION_MINOR "6")
 SET(VERSION_PATCH "0")
 SET(VERSION "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}")
 
-set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/CMakeModules/;${CMAKE_MODULE_PATH}")
-
 add_subdirectory(${PROJECT_SOURCE_DIR}/Dependencies/Raknet2_0)
 
-FIND_PACKAGE(Lua51 REQUIRED)
-FIND_PACKAGE(OGRE REQUIRED)
+FIND_PACKAGE(OGRE REQUIRED) # Environment variable OGRE_BYATIS
 FIND_PACKAGE(OIS REQUIRED)
-FIND_PACKAGE(CEGUI REQUIRED)
-FIND_PACKAGE(CEGUIOGRE REQUIRED)
-FIND_PACKAGE(OpenAL REQUIRED)
-FIND_PACKAGE(ALUT REQUIRED)
-FIND_PACKAGE(OggVorbis REQUIRED)
+FIND_PACKAGE(OpenAL REQUIRED) # Windows users: Create an environment variable named "OPENALDIR" and set the value to you OpenAL SDK Folder (e.g. "C:\Program Files\OpenAL 1.1 SDK")
+FIND_PACKAGE(ALUT REQUIRED) # Windows users: should work when you use the dependency package from our website or when you install the ALUT SDK into the OpenAL folder (put the libs and includes in the same folder)
+FIND_PACKAGE(CEGUI REQUIRED) # Dependencie Package
+FIND_PACKAGE(CEGUIOGRE REQUIRED) #Dependencie Package 
+FIND_PACKAGE(Lua51 REQUIRED) # Env variable "LUA_DIR"
+
+IF (UNIX)
+  FIND_PACKAGE(OggVorbis REQUIRED)
+ELSE(WIN32)
+  INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/Dependencies/libvorbis-1.3.1/include)
+  INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/Dependencies/gettext/share/gettext)
+  INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/Dependencies/gettext/include)
+
+  find_library(OGG_LIBRARY ${PROJECT_SOURCE_DIR}Dependencies/libvorbis-1.3.1/win32/VS2008/Win32/Release ogg)
+  find_library(VORBIS_LIBRARY ${PROJECT_SOURCE_DIR}Dependencies/libvorbis-1.3.1/win32/VS2008/Win32/Release vorbis)
+  find_library(VORBISFILE_LIBRARY ${PROJECT_SOURCE_DIR}Dependencies/libvorbis-1.3.1/win32/VS2008/Win32/Release vorbisfile)
+  find_library(VORBISENC_LIBRARY ${PROJECT_SOURCE_DIR}Dependencies/libvorbis-1.3.1/win32/VS2008/Win32/Release vorbisenc)
+ENDIF(UNIX)
 
 INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/tinyxml ${PROJECT_SOURCE_DIR}/src/core ${PROJECT_SOURCE_DIR}/src/gui)
 INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/Dependencies/Raknet2_0/Include)
@@ -30,7 +42,7 @@ INCLUDE_DIRECTORIES(${LUA_INCLUDE_DIR})
 INCLUDE_DIRECTORIES(${CEGUI_INCLUDE_DIRS})
 INCLUDE_DIRECTORIES(${CEGUIOGRE_INCLUDE_DIRS})
 INCLUDE_DIRECTORIES(${OPENAL_INCLUDE_DIR})
-INCLUDE_DIRECTORIES(${ALUT_INCLUDES})
+INCLUDE_DIRECTORIES(${ALUT_INCLUDE_DIR})
 
 SET(SRCS
   ./src/core/worldobject.cpp

@@ -21,6 +21,7 @@ FILE(TO_CMAKE_PATH "$ENV{OGRE_HOME}" OGRESDK)
 SET(CEGUI_INCLUDE_SEARCH_DIRS
 	${INCLUDE_SEARCH_DIRS}
 	${CMAKE_LIBRARY_PATH}
+	${PROJECT_SOURCE_DIR}/Dependencies/CEGUI-0.7.1/cegui/include
 	/usr/include
 	/usr/local/include
 	/usr/include/CEGUI
@@ -36,6 +37,7 @@ SET(CEGUI_INCLUDE_SEARCH_DIRS
 SET(CEGUI_LIBRARY_SEARCH_DIRS
 	${LIBRARY_SEARCH_DIRS}
 	${CMAKE_LIBRARY_PATH}
+	${PROJECT_SOURCE_DIR}/Dependencies/CEGUI-0.7.1/lib
 	/usr/lib
 	/usr/lib64
 	/usr/local/lib

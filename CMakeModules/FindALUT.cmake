@@ -12,6 +12,7 @@
  
 FIND_PATH(ALUT_INCLUDE_DIR alut.h
   $ENV{OPENALDIR}/include
+  ${PROJECT_SOURCE_DIR}/Dependencies/freealut-1.1.0-bin/include/AL
   ~/Library/Frameworks/OpenAL.framework/Headers
   /Library/Frameworks/OpenAL.framework/Headers
   /System/Library/Frameworks/OpenAL.framework/Headers # Tiger
@@ -60,7 +61,7 @@ ELSE(${ALUT_INCLUDE_DIR} MATCHES ".framework")
   FIND_LIBRARY(ALUT_LIBRARY
     NAMES alut
     PATHS
-    $ENV{OPENALDIR}/lib
+    ${PROJECT_SOURCE_DIR}/Dependencies/freealut-1.1.0-bin/lib
     $ENV{OPENALDIR}/libs
     /usr/local/lib
     /usr/lib

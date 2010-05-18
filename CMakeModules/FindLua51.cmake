@@ -29,6 +29,7 @@ FIND_PATH(LUA_INCLUDE_DIR lua.h
   $ENV{LUA_DIR}
   PATH_SUFFIXES include/lua51 include/lua5.1 include/lua include
   PATHS
+  ${PROJECT_SOURCE_DIR}/Dependencies/lua5.1/include
   ~/Library/Frameworks
   /Library/Frameworks
   /usr/local
@@ -45,6 +46,7 @@ FIND_LIBRARY(LUA_LIBRARY
   $ENV{LUA_DIR}
   PATH_SUFFIXES lib64 lib
   PATHS
+  ${PROJECT_SOURCE_DIR}/Dependencies/lua5.1/lib/static
   ~/Library/Frameworks
   /Library/Frameworks
   /usr/local
