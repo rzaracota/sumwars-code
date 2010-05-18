@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-10 17:03+0200\n"
+"POT-Creation-Date: 2010-05-18 22:17+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -108,15 +108,15 @@ msgstr ""
 msgid "which Topic"
 msgstr ""
 
-#: ../src/core/document.cpp:1184 ../src/core/item.cpp:654
+#: ../src/core/document.cpp:1172 ../src/core/item.cpp:654
 msgid "Required level"
 msgstr ""
 
-#: ../src/core/document.cpp:1194
+#: ../src/core/document.cpp:1182
 msgid "Timer"
 msgstr ""
 
-#: ../src/core/document.cpp:1195
+#: ../src/core/document.cpp:1183
 msgid "Cast delay"
 msgstr ""
 
@@ -189,12 +189,12 @@ msgid " max. "
 msgstr ""
 
 #: ../src/gui/charcreate.cpp:120 ../src/gui/charinfo.cpp:849
-#: ../src/gui/partyinfo.cpp:450 ../src/gui/savegamelist.cpp:177
+#: ../src/gui/partyinfo.cpp:450 ../src/gui/savegamelist.cpp:182
 msgid "Name"
 msgstr ""
 
 #: ../src/gui/charcreate.cpp:123 ../src/gui/charinfo.cpp:852
-#: ../src/gui/savegamelist.cpp:178
+#: ../src/gui/savegamelist.cpp:183
 msgid "Class"
 msgstr ""
 
@@ -298,7 +298,7 @@ msgstr ""
 msgid "Save & Exit"
 msgstr ""
 
-#: ../src/gui/controlpanel.cpp:345 ../src/gui/optionswindow.cpp:205
+#: ../src/gui/controlpanel.cpp:345 ../src/gui/optionswindow.cpp:206
 msgid "Inventory"
 msgstr ""
 
@@ -306,7 +306,7 @@ msgstr ""
 msgid "Character"
 msgstr ""
 
-#: ../src/gui/controlpanel.cpp:351 ../src/gui/optionswindow.cpp:211
+#: ../src/gui/controlpanel.cpp:351 ../src/gui/optionswindow.cpp:212
 msgid "Skilltree"
 msgstr ""
 
@@ -314,7 +314,7 @@ msgstr ""
 msgid "Party"
 msgstr ""
 
-#: ../src/gui/controlpanel.cpp:357 ../src/gui/optionswindow.cpp:220
+#: ../src/gui/controlpanel.cpp:357 ../src/gui/optionswindow.cpp:221
 msgid "Quests"
 msgstr ""
 
@@ -346,9 +346,9 @@ msgstr ""
 msgid "Quit"
 msgstr ""
 
-#: ../src/gui/messageboxes.cpp:53 ../src/gui/networkwindows.cpp:93
-#: ../src/gui/networkwindows.cpp:218 ../src/gui/optionswindow.cpp:241
-#: ../src/gui/savegamelist.cpp:168 ../src/gui/tradewindow.cpp:256
+#: ../src/gui/messageboxes.cpp:53 ../src/gui/networkwindows.cpp:95
+#: ../src/gui/networkwindows.cpp:223 ../src/gui/optionswindow.cpp:242
+#: ../src/gui/savegamelist.cpp:173 ../src/gui/tradewindow.cpp:256
 msgid "Ok"
 msgstr ""
 
@@ -360,67 +360,67 @@ msgstr ""
 msgid "Save and Exit?"
 msgstr ""
 
-#: ../src/gui/networkwindows.cpp:96
+#: ../src/gui/networkwindows.cpp:98
 msgid "Max. number of players"
 msgstr ""
 
-#: ../src/gui/networkwindows.cpp:99 ../src/gui/networkwindows.cpp:224
+#: ../src/gui/networkwindows.cpp:101 ../src/gui/networkwindows.cpp:229
 msgid "Port"
 msgstr ""
 
-#: ../src/gui/networkwindows.cpp:221
+#: ../src/gui/networkwindows.cpp:226
 msgid "Host"
 msgstr ""
 
-#: ../src/gui/optionswindow.cpp:196
+#: ../src/gui/optionswindow.cpp:197
 msgid "Shortkeys"
 msgstr ""
 
-#: ../src/gui/optionswindow.cpp:198
+#: ../src/gui/optionswindow.cpp:199
 msgid "Audio"
 msgstr ""
 
-#: ../src/gui/optionswindow.cpp:200
+#: ../src/gui/optionswindow.cpp:201
 msgid "Graphic"
 msgstr ""
 
-#: ../src/gui/optionswindow.cpp:202
+#: ../src/gui/optionswindow.cpp:203
 msgid "Misc"
 msgstr ""
 
-#: ../src/gui/optionswindow.cpp:208
+#: ../src/gui/optionswindow.cpp:209
 msgid "Character screen"
 msgstr ""
 
-#: ../src/gui/optionswindow.cpp:214
+#: ../src/gui/optionswindow.cpp:215
 msgid "Party screen"
 msgstr ""
 
-#: ../src/gui/optionswindow.cpp:217
+#: ../src/gui/optionswindow.cpp:218
 msgid "Chatbox"
 msgstr ""
 
-#: ../src/gui/optionswindow.cpp:223
+#: ../src/gui/optionswindow.cpp:224
 msgid "Minimap"
 msgstr ""
 
-#: ../src/gui/optionswindow.cpp:226
+#: ../src/gui/optionswindow.cpp:227
 msgid "Swap equipement"
 msgstr ""
 
-#: ../src/gui/optionswindow.cpp:229
+#: ../src/gui/optionswindow.cpp:230
 msgid "Item Labels"
 msgstr ""
 
-#: ../src/gui/optionswindow.cpp:232
+#: ../src/gui/optionswindow.cpp:233
 msgid "Sound"
 msgstr ""
 
-#: ../src/gui/optionswindow.cpp:235
+#: ../src/gui/optionswindow.cpp:236
 msgid "Music"
 msgstr ""
 
-#: ../src/gui/optionswindow.cpp:238
+#: ../src/gui/optionswindow.cpp:239
 msgid "Language"
 msgstr ""
 
@@ -436,19 +436,19 @@ msgstr ""
 msgid "failed"
 msgstr ""
 
-#: ../src/gui/savegamelist.cpp:165
+#: ../src/gui/savegamelist.cpp:170
 msgid "Savegame"
 msgstr ""
 
-#: ../src/gui/savegamelist.cpp:171
+#: ../src/gui/savegamelist.cpp:176
 msgid "Create Character"
 msgstr ""
 
-#: ../src/gui/savegamelist.cpp:174
+#: ../src/gui/savegamelist.cpp:179
 msgid "Delete Character"
 msgstr ""
 
-#: ../src/gui/savegamelist.cpp:179
+#: ../src/gui/savegamelist.cpp:184
 msgid "Level"
 msgstr ""
 
