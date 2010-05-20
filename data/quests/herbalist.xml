@@ -6,9 +6,9 @@
 	
 	<Description>
 		if (herbalist.finished) then
-			return _("Und wieder eine gute Tat mehr. Ich koennte mich fast daran gewoehnen.")
+			return _("And another good deed done. I could get used to this.")
 		else
-			return _("Die Kraeuterfrau aus Joringsbrueck will die Beeren von 10 Bueschen haben. Es muessen noch "..(10 - herbalist.bushes).." Stueck gesammelt werden.")
+			return _("The herbalist of Joringsbridge wants to have the berries of 10 bushes."..(10 - herbalist.bushes).." Stueck gesammelt werden.")
 		end
 	</Description>
 	
@@ -83,44 +83,44 @@
 			<Effect>
 				if (herbalist.started == true) then
 					if (herbalist.bushes >= 10) then
-						speak('player',_("Hier, alte Frau. Eure Kraeuter."))
-						speak('Gertlinde Kampfer',_("Ah, gut gemacht, Jungvolk."))
-						speak('Gertlinde Kampfer',_("Hier, lass dir als Gegenleistung etwas geben."))
+						speak('player',_("Here, old women. Your berries."))
+						speak('Gertlinde Kampfer',_("Ah, well done, young one."))
+						speak('Gertlinde Kampfer',_("Here, let me give you something in return."))
 						changeTopic("herbalist_reward")
 					else
-						speak('Gertlinde Kampfer',_("Ich brauche mehr Beeren, damit ich damit etwas sinnvolles anfangen kann."))
+						speak('Gertlinde Kampfer',_("I need more berries, if I am to do something useful with them."))
 					end
 				elseif(herbalist.asked==true)then
-					speak('Gertlinde Kampfer',_("Wollt ihr doch noch Beeren sammeln?"))
-					addQuestion(_("Quest annehmen?"))
-					addAnswer(_("Ja"),"start_herbalist_quest_again")
-					addAnswer(_("Nein"),"refuse_herbalist_quest_again")
+					speak('Gertlinde Kampfer',_("Do you want to collect some berries after all?"))
+					addQuestion(_("Accept Quest?"))
+					addAnswer(_("Yes"),"start_herbalist_quest_again")
+					addAnswer(_("No"),"refuse_herbalist_quest_again")
 				else
 					herbalist.asked = true
-					speak('Gertlinde Kampfer',_("He da, Jungvolk!"))
-					speak('Gertlinde Kampfer',_("Ich sehe, dass ihr in die Noerdlichen Wiesen wollt."),"thoughtful");
-					speak('player',_("Das Stimmt."))
+					speak('Gertlinde Kampfer',_("Hey there, young one!"))
+					speak('Gertlinde Kampfer',_("I see you are going to the Northern Meadow."),"thoughtful");
+					speak('player',_("That's right."))
 					if(getSpeaker("mage")~=getSpeaker('player'))then
-						speak("mage",_("Kunststueck."))
-						speak("mage",_("Immerhin wollten wir nur gerade durch das Tor."))
-						speak("priest",_("Frieden."))
+						speak("mage",_("Quite a trick."))
+						speak("mage",_("We were only walking through the gate."))
+						speak("priest",_("Peace."))
 					end;
-					speak('Gertlinde Kampfer',_("Wenn ihr sowieso da umher stiefelt und tut was ihr so eben tut, koenntet ihr mir nicht gleich noch ein paar Beeren sammeln?"),"happy");
-					speak('Gertlinde Kampfer',_("Mit den ganzen Goblins kann sich eine alte Frau wie ich ja nicht mal mehr vor die Tuer wagen."),"sad");
+					speak('Gertlinde Kampfer',_("If you are roaming around there anyway, why don't you collect some berries for me?"),"happy");
+					speak('Gertlinde Kampfer',_("With all those goblins about an old woman can't even set a foot out of the village."),"sad");
 					setSpeakerEmotion('Gertlinde Kampfer',"normal");
-					speak('player',_("Pflanzen sind nicht unbedingt meine Spezialitaet..."),"unhappy")
-					speak('Gertlinde Kampfer',_("Ach papperlapapp!"),"unhappy");
+					speak('player',_("Plants are not really my forte..."),"unhappy")
+					speak('Gertlinde Kampfer',_("Fiddlesticks!"),"unhappy");
 					setSpeakerEmotion('player',"normal");
-					speak('Gertlinde Kampfer',_("Ich will ja nicht, dass ihr was exotisches sammelt."))
-					speak('Gertlinde Kampfer',_("Nur Rilfbeeren."),"grin")
-					speak('Gertlinde Kampfer',_("Das sind große Buesche mit auffaelligen roten Fruechten."),"normal");
-					speak('Gertlinde Kampfer',_("Die findet ihr bestimmt."))
-					speak('Gertlinde Kampfer',_("Damit es sich lohnt muesstet ihr mir die Beeren von wenigstens zehn Bueschen bringen."))
-					speak('Gertlinde Kampfer',_("Aber nur die roten Beeren."),"thoughtful")
-					speak('Gertlinde Kampfer',_("Der Rest ist voellig uninteressant."),"grin")
-					addQuestion(_("Quest annehmen?"))
-					addAnswer(_("Ja"),"start_herbalist_quest")
-					addAnswer(_("Nein"),"refuse_herbalist_quest")
+					speak('Gertlinde Kampfer',_("It's not like I want you to collect something exotic, you know."))
+					speak('Gertlinde Kampfer',_("Just rilfberries."),"grin")
+					speak('Gertlinde Kampfer',_("Look for big bushes with fancy red fruits."),"normal");
+					speak('Gertlinde Kampfer',_("You will find them for sure."))
+					speak('Gertlinde Kampfer',_("I need the berries of at least ten bushes."))
+					speak('Gertlinde Kampfer',_("But only the red berries."),"thoughtful")
+					speak('Gertlinde Kampfer',_("The rest is of no use at all."),"grin")
+					addQuestion(_("Accept Quest?"))
+					addAnswer(_("Yes"),"start_herbalist_quest")
+					addAnswer(_("No"),"refuse_herbalist_quest")
 				end
 			</Effect>
 		</Topic>
@@ -128,11 +128,11 @@
 		<Topic name="start_herbalist_quest" >
 			<Effect>
 				if(solo())then
-					speak('player', _("Na schoen, wenn ich welche finde, bringe ich es mit."),"normal");
+					speak('player', _("Very well, if I find some, I'll bring them."),"normal");
 				else
-					speak('player', _("Na schoen, wenn wir welche finden, bringen wir sie mit."),"normal");
+					speak('player', _("Very well, if we find some, we'll bring them."),"normal");
 				end;
-				speak('Gertlinde Kampfer',_("Danke  Herzchen."),"happy");
+				speak('Gertlinde Kampfer',_("Thanks, sweety."),"happy");
 				herbalist.started = true
 				startTimer("talk_done",4000);
 			</Effect>	
@@ -140,10 +140,10 @@
 		
 		<Topic name="refuse_herbalist_quest" >
 			<Effect>
-				speak('player', _("Vergiss es, Kraeuterhexe."),"unhappy")
-				speak('player', _("Ich werde bestimmt nicht durch die Wiesen kriechen und nach irgendwelchen Bueschen suchen."))
-				speak('Gertlinde Kampfer',_("Wie du meinst."),"sad")
-				speak('Gertlinde Kampfer',_("Aber wenn du es dir noch mal anders ueberlegst, ich werde hier nicht weglaufen."),"normal");
+				speak('player', _("Forget it, herb woman."),"unhappy")
+				speak('player', _("I'm not going to crawl through the meadows just to search for some stupid bushes."))
+				speak('Gertlinde Kampfer',_("Have it your way."),"sad")
+				speak('Gertlinde Kampfer',_("But if you change your mind, I'm not running away from here."),"normal");
 				startTimer("talk_done",4000);
 			</Effect>	
 		</Topic>
@@ -151,20 +151,20 @@
 		<Topic name="start_herbalist_quest_again" >
 			<Effect>
 				if(solo())then
-					speak('player', _("Na schoen, wenn ich welche finde, bringe ich sie mit."),"normal");
+					speak('player', _("Very well, if I find some, I'll bring them along."),"normal");
 				else
-					speak('player', _("Na schoen, wenn wir welche finden, bringen wir sie mit."),"normal");
+					speak('player', _("Very well, if we find some, we'll bring them."),"normal");
 				end;
-				speak('Gertlinde Kampfer',_("Danke  Herzchen."),"happy");
+				speak('Gertlinde Kampfer',_("Thanks, sweety."),"happy");
 				herbalist.started = true
 			</Effect>	
 		</Topic>
 		
 		<Topic name="refuse_herbalist_quest_again" >
 			<Effect>
-				speak('player', _("Nein, immer noch nicht."),"unhappy");
-				speak('Gertlinde Kampfer',_("Sag Bescheid, wenn du nicht mehr zu maechtig fuer einfache Arbeiten bist, Herzchen."),"sneer");
-				speak('player',_("Huetet Eure Zunge, Weib!"),"angry");
+				speak('player', _("Still no."),"unhappy");
+				speak('Gertlinde Kampfer',_("Tell me when you're not too mighty for simple work anymore, sweety."),"sneer");
+				speak('player',_("Watch your tongue, hag!"),"angry");
 			</Effect>	
 		</Topic>
 		
@@ -220,7 +220,7 @@
 				if (not (bushes_left>0)) then
 					bushes_left = 0
 				end
-				print (_("Collect "..bushes_left.." more herbs."));
+				print (_("Collect"..bushes_left.." more herbs."));
 			</Effect>
 		</Event>
 	</Region>

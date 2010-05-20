@@ -118,9 +118,9 @@
 			return(joringsbridge.talkedToMarco ~= true);
 		</Condition>
 		<Effect>
-			speak("Marco",_("Ah, euch ist mein Fundbuero aufgefallen?"),"amused");
-			speak("Marco",_("Ich lagere hier alles, was ich so an verlorenen Gegenstaenden in und um Joringsbrueck finde."));
-			speak("Marco",_("Wenn Euch etwas davon gehoert, sagt einfach Bescheid. Fuer einen geringen Finderlohn koennt Ihr es wiederhaben."))
+			speak("Marco",_("Ah, you noticed my lost and found?"),"amused");
+			speak("Marco",_("Everything I find in and around Joringsbridge is stored here."));
+			speak("Marco",_("If something is your's just say the word. For a small finder's fee you can have it back."))
 			joringsbridge.talkedToMarco = true;
 		</Effect>
 	</Topic>
@@ -130,20 +130,20 @@
 	<Topic name="Joringsbridge_sergeant" start_option="Joringsbridge">
 		<Effect>
 			addSpeaker(joringsbridge.sergeant,"sergeant");
-			speak("sergeant",_("Die Verantwortung fuer Joringsbrueck zu haben ist nicht immer leicht, selbst, wenn ich genug Soldaten habe."),"thoughtful");
-			speak("sergeant",_("Seit Monaten schafft irgend einer meiner Leute die beschlagnamten magischen Gegenstaende bei Seite."),"sad");
-			speak("sergeant",_("Und ich bin ihm noch keinen Schritt naeher als am Anfang!"),"angry");
-			speak("player",_("(Ein Gardist schafft Gegenstaende bei Seite? Sicher nicht fuer schlechte Zeiten. Ich sollte mich mal umsehen.)"))
+			speak("sergeant",_("Having the responsibility for Joringsbridge is never easy, not even when I had enough soldiers."),"thoughtful");
+			speak("sergeant",_("Lately, someone in the guard has been appropriating confiscated magical items."),"sad");
+			speak("sergeant",_("And I'm not even one step closer to find out who, than when I first noticed!"),"angry");
+			speak("player",_("((A guard is diverting items? Surely not for hard times. I should take a look around.))"))
 		</Effect>
 	</Topic>
 	
 	<Topic name="surroundings_sergeant" start_option="The surroundings of Joringsbridge">
 		<Effect>
 			addSpeaker(joringsbridge.sergeant,"sergeant");
-			speak("sergeant",_("Ihr seid besser vorsichtig, wenn Ihr das Dorf verlasst."),"thoughtful");
-			speak("sergeant",_("Jetzt, wo fast alle Truppen an den Grenzen stehen, haben wir es mit einer unueberschaubaren Flut von Goblins zu tun."),"normal");
-			speak("sergeant",_("Und alle, die nicht in die Armee eingezogen wurden, scheinen das Banditendasein fuer sich entdeckt zu haben."),"angry");
-			speak("player",_("Danke fuer die Warnung, Sergeant"),"amused");
+			speak("sergeant",_("You better be careful when leaving the village."),"thoughtful");
+			speak("sergeant",_("Now, with almost all troops standing at the borders, we have to deal with an unmanageable flood of goblins."),"normal");
+			speak("sergeant",_("And everyone not drafted for the army seems to have discovered the happy bandit life for themselves."),"angry");
+			speak("player",_("Thanks for the warning, sergeant."),"amused");
 		</Effect>
 	</Topic>
 </NPC>
@@ -155,9 +155,9 @@
 	<Topic name="Joringsbridge_mage" start_option="Joringsbridge">
 		<Effect>
 			addSpeaker(joringsbridge.council,"council");
-			speak("council",_("Ihr seid die Unterstuetzung, die Lord Magister Windklaue geschickt hat, wie?"),"sneer");
-			speak("council",_("Ich empfehle Euch eine schnelle Weiterreise. In diesem Dorf sind schon Menschen an Langeweile gestorben."),"bored");
-			speak("council",_("Wer weiss, ob Eure Konstitution Euch dagegen auch hilft?"),"grin");
+			speak("council",_("You are the backup sent by Lord Master Windclaw, arn't you?"),"sneer");
+			speak("council",_("I suggest you quickly journey on. There have been people dying by boredom in this village. "),"bored");
+			speak("council",_("Who knows if your physique will help you against that, too?"),"grin");
 		</Effect>
 	</Topic>
 </NPC>

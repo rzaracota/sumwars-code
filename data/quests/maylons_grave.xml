@@ -2,13 +2,13 @@
 	
 	<Description>
 		if (maylons_grave.finished) then
-			return _("Irgendein Nekromant hat tatsaechlich im Hinterland von Aisen einen alten Konzilsmagier wiederbelebt, wahrscheinlich, um fuer Verwirrung und Stoeraktionen zu sorgen. Zumindest das Problem hat sich erledigt.")
+			return _("Some necromancer really resurrected an old council mage. Probably to cause confusion behind the lines. At least one problem that is solved.")
 		elseif(maylons_grave.goblins_killed==true)then
-			return _("Ich bin in Maylons Grab auf ein paar Goblins gestossen, die irgendwelchen Unsinn gebrabbelt haben und von einem Zombie verfolgt wurden. Irgendetwas geht in diesem Grab vor sich. Vielleicht sollte ich mal einen Blick drauf werfen.");
+			return _("I came across some goblins in Maylon's Grave who babbled some nonsense and were chased by a zombie. Something is going on in this grave. Maybe I should have a look at it.");
 		elseif(maylons_grave.listened_to_goblins==true)then
-			return _("Ich bin in Maylons Grab auf ein paar Goblins gestossen. Laut ihrem Schamanen hat ein Nekromant unten in der Krypta einige Untote erweckt. Ich sollte mal einen Blick drauf werfen.");
+			return _("I came across some goblins in Maylon's Grave. According to their shaman a necromancer animated some undead down in the crypt. I should take a look at it.");
 		else
-			return _("Ich bin in Maylons Grab auf ein paar Goblins gestossen, die von einem Zombie verfolgt wurden. Irgendetwas geht in diesem Grab vor sich. Vielleicht sollte ich mal einen Blick drauf werfen.");
+			return _("I came across some goblins in Maylon's Grave who were chased by a zombie. Something is going on in this grave. Maybe I should take a look at it.");
 		end
 	</Description>
 
@@ -156,9 +156,9 @@
 				setTopicBase("Gab Resh");
 				lookAt(maylons_grave_tmp.GabResh,"locParty");
 				speak("GabResh","Wartet, grosse Kriegermenschens. Nich toeten!","fear", 3000);
-				addQuestion(_("Mit den Goblins reden?"));
-				addAnswer(_("Ja"),'talk_with_goblins');
-				addAnswer(_("Nein"),'kill_goblins_immediately');
+				addQuestion(_("Talk with the goblins?"));
+				addAnswer(_("Yes"),'talk_with_goblins');
+				addAnswer(_("No"),'kill_goblins_immediately');
 				
 			</Effect>
 		</Event>
@@ -167,14 +167,14 @@
 	<NPC refname="Gab Resh">
 		<Topic name="talk_with_goblins">
 			<Effect>
-				speak("player",_("Ein Goblin, der reden will?"),"surprised");
-				speak("GabResh",_("Ja. Nich schlagen, nich toeten."),"panic");
-				speak("GabResh",_("Gab'Resh und seine nur harmlose Viehdiebe. Keine Banditen."),"fear");
-				speak("GabResh",_("Ihr zuhoeren, ja?"),"fear");
-				addQuestion(_("Was tun?"));
-				addAnswer(_("Den Goblins zuhoeren"),"keep_on_talking");
-				addAnswer(_("Die Goblins verjagen"),"let_goblins_go");
-				addAnswer(_("Die Goblins erschlagen"),"kill_goblins");
+				speak("player",_("A goblin who wants to talk?"),"surprised");
+				speak("GabResh",_("Yes. No hurt, no kill."),"panic");
+				speak("GabResh",_("Gab'Resh and his only harmless rustlers. No bandits."),"fear");
+				speak("GabResh",_("You listen, yes?"),"fear");
+				addQuestion(_("What will you do?"));
+				addAnswer(_("Listen to the goblins"),"keep_on_talking");
+				addAnswer(_("Chase the goblins away"),"let_goblins_go");
+				addAnswer(_("Slay the goblins"),"kill_goblins");
 			</Effect>
 		</Topic>
 		
@@ -185,31 +185,31 @@
 				set(maylons_grave_tmp.Goblin3,"fraction","human");
 				set(maylons_grave_tmp.Goblin4,"fraction","human");
 				set(maylons_grave_tmp.GabResh,"fraction","human");
-				speak("magopt",_("Was koennte ein Goblin schon zu sagen haben"),"sneer");
-				speak("GabResh",_("Wir uns hier oft verstecken."),"normal");
-				speak("GabResh",_("Kaum Menschens vorbei kommen, und wenn doch, dann nie wieder zurueck kehren aus Tiefen von Hoehle."),"amused");
-				speak("GabResh",_("Aber letzten Mond schwarzer Mensch vorbei gekommen."),"unhappy");
-				speak("GabResh",_("Jetzt das Grausen aus den Tiefen auch nach oben wandern und hinter uns armen Goblins her sein, wo nie was stehlen nich wollten."),"fear");
-				speak("priopt",_("Das klingt beinahe, als sei ein Nekromant hier vorbei gekommen."),"thoughtful");
+				speak("magopt",_("What could a goblin possibly have to say?"),"sneer");
+				speak("GabResh",_("We often hide here."),"normal");
+				speak("GabResh",_("No humans coming, and if do, they never return from depth of cave."),"amused");
+				speak("GabResh",_("But last moon black human came."),"unhappy");
+				speak("GabResh",_("Now horror of the depth wandering to surface, too and being after poor goblins who never not wants to steal anything."),"fear");
+				speak("priopt",_("That almost sounds as if a necromancer came by."),"thoughtful");
 				if(solo())then
-					speak("player",_("Ein solches Problem kann ich nicht einfach so inmitten dieser unterbewachten Region lassen."),"normal");
+					speak("player",_("I cannot leave such a problem amidst this under-guarded region."),"normal");
 				else
-					speak("priopt",_("Ein solches Problem koennen wir nicht einfach so inmitten dieser unterbewachten Region lassen."),"normal");
+					speak("priopt",_("We cannot leave such a problem amidst this under-guarded region."),"normal");
 				end;
-				speak("priopt",_("Wer wei�, was alles passieren koennte?"),"normal");
+				speak("priopt",_("Who knows what could happen?"),"normal");
 				if(solo())then
-					speak("arcopt", _("Wirklich, ich sollte diese armen gebundenen Seelen befreien und zu einem Kurzurlaub in Harads Hoelle schicken."),"sneer");
+					speak("arcopt", _("Really, I should free those poor bound souls and send them off to a short brake in Harad's Hell."),"sneer");
 				else
-					speak("arcopt", _("Wirklich, wir sollten diese armen gebundenen Seelen befreien und zu einem Kurzurlaub in Harads Hoelle schicken."),"sneer");
+					speak("arcopt", _("Really, we should free those poor bound souls and send them off to a short brake in Harad's Hell."),"sneer");
 					if(getSpeaker("waropt")~=getSpeaker(arcopt))then
-						speak("waropt",_("Besser sie als wir."),"unhappy");
+						speak("waropt",_("Better them than us."),"unhappy");
 					end;
 				end;
-				speak("GabResh",_("Gute Warnung, nein? Maechtige Menschenkriegers uns am leben lassen, nein?"),"happy");
+				speak("GabResh",_("Good warning, yes? Mighty warrior-humans let us live, no?"),"happy");
 				if(solo())then
-					speak("player",_("Verschwindet schon. Ich habe jetzt besseres zu tun, als eine Bande armseliger Goblins zu toeten."),"unhappy");
+					speak("player",_("Get lost. I have better things to do than killing a band of pathetic goblins."),"unhappy");
 				else
-					speak("player",_("Verschwindet schon. Wir haben jetzt besseres zu tun, als eine Bande armseliger Goblins zu toeten."),"unhappy");
+					speak("player",_("Get lost. we have better things to do than killing a band of pathetic goblins."),"unhappy");
 				end;
 				executeInDialog('insertTrigger("goblinsWalkAway")');
 				maylons_grave.started=true;
@@ -224,9 +224,9 @@
 		<Topic name="kill_goblins_immediately" >
 			<Effect>
 				if(solo())then
-					speak("PL",_("Elendes Gezuecht!Sterbt alle!"));
+					speak("PL",_("Miserable brood! Die!"));
 				else
-					speak("PL",_("Elendes Gezuecht! Macht sie nieder!"));
+					speak("PL",_("Miserable brood! Slay them all!"));
 				end;
 				changeTopic("kill_goblins");
 			</Effect>	
@@ -247,7 +247,7 @@
 				set(maylons_grave_tmp.GabResh,"fraction","human");
 				maylons_grave.started=true;
 				maylons_grave.let_goblins_go = true;
-				speak("player",_("Macht, dass ihr davonkommt, bevor ich es mir anders ueberlege!"));
+				speak("player",_("Get lost, before I change my mind!"));
 				executeInDialog('insertTrigger("goblinsWalkAway")');
 				setCutsceneMode(false);
 			</Effect>	
@@ -427,16 +427,16 @@
 				setTopicBase("global");
 				addSpeaker(maylons_grave_tmp.lastAttacker,"player");
 				addSpeaker(maylons_grave_tmp.maylon,"maylon");
-				speak("maylon",_("Ich danke Euch fuer die Befreiung meines Geistes."),"happy");
-				speak("maylon",_("Moeget Ihr noch viele grosse Taten vollbringen."),"happy");
-				speak("maylon",_("Akerans Segen mit Euch."),"happy");
-				speak("maylon",_("In meinem Sarkophag befinden sich viele Hinterlassenschaften aus meinem sterblichen Leben."),"normal");
-				speak("maylon",_("Ich habe schon lange keine Verwendung mehr dafuer. Sucht Euch eine Waffe aus, die euch gefaellt."),"normal");
-				speak("maylon",_("Das gilt auch fuer Eure Freunde."),"normal");
-				speak("maylon",_("Jetzt muss ich aber wieder zurueck in die Glueckseligkeit von Akerans Ewiger Oase."),"excited");
+				speak("maylon",_("Thank you very much for liberating my soul."),"happy");
+				speak("maylon",_("May you do many other great deeds."),"happy");
+				speak("maylon",_("Akerans blessing to you."),"happy");
+				speak("maylon",_("My sarcophagus contains many remains of my mortal life."),"normal");
+				speak("maylon",_("For a long time now I have no use for it anymore. Choose yourself a weapon you like."),"normal");
+				speak("maylon",_("The same holds true for your friends."),"normal");
+				speak("maylon",_("But now I have to return into the bliss of Akerans eternal oasis."),"excited");
 				executeInDialog("set("..maylons_grave_tmp.maylon..",'health',0)");
 				speakPause(1000);
-				speak("player",_("Ob er das auch gesagt haette, wenn er wuesste, dass er erst mal einen Umweg ueber Harads Hoelle nehmen wird?"),"sad")
+				speak("player",_("I wander if he would have said that if he had known that he will make a detour to Harad's Hell first?"),"sad")
 				changeTopic("maylon_rip");
 			</Effect>
 		</Event>

@@ -13,9 +13,9 @@ xgettext --from-code utf-8 --language=Python -d events -o potfiles/sumwars-event
 echo "MERGE new pots with pos"
 #msgmerge -v -U de/sumwars-sumwars.po potfiles/sumwars-sumwars.pot
 #msgmerge -v -U de/sumwars-xml.po potfiles/sumwars-xml.pot
-#msgmerge -v -U de/sumwars-events.po potfiles/sumwars-events.pot
+msgmerge -v -U de/sumwars-events.po potfiles/sumwars-events.pot
 
 msgmerge -v -U en/sumwars-sumwars.po potfiles/sumwars-sumwars.pot
 msgmerge -v -U en/sumwars-xml.po potfiles/sumwars-xml.pot
-msgmerge -v -U en/sumwars-events.po potfiles/sumwars-events.pot
+#msgmerge -v -U en/sumwars-events.po potfiles/sumwars-events.pot
 

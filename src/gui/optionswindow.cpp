@@ -129,6 +129,7 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard)
 	cbo->addItem(new StrListItem("System default","",0));
 	cbo->addItem(new StrListItem("German","de_DE",0));
 	cbo->addItem(new StrListItem("English GB","en_GB",0));
+	cbo->addItem(new StrListItem("English US","en_US",0));
 
 	cbo->setReadOnly(true);
 

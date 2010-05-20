@@ -5,9 +5,9 @@
 	
 	<Description>
 		if (fissure.finished) then
-			return _("Die gute Nachricht: Durch diesen Tunnel kommt niemand mehr. Die schlechte: Den Rückweg hat es auch verschuettet. Hoffentlich gibt es noch einen anderen Ausgang.")
+			return _("The good news: No one will come through that tunnel anymore. The bad news: The way back has caved in, too. Hopefully there is another exit.")
 		else
-			return _("Die Untoten haben einen Weg unter der Grauen Himmelsleiter gefunden, auf dem sie Zwergentrutz umgehen koennen. Da dies das Königreich Aisen direkt bedroht, muss der Zugang schnellstmoeglich verschlossen werden. Der Durchgang in den Verfluchten Hoelen muss gefunden und mit dem Sprengzauber ireana von Nordenburgs zerstoert werden.")
+			return _("The undead found a way under the Grey Skyladder enabling them to bypass Dwarfenwall. Because this threatens the kingdom of Aisen directly it has to be shut as fast as possible. The passage in the Cursed Caves has to be found and the destroyed with the explosion spell of Ireana of Northborough.")
 		end;
 	</Description>
 	
@@ -155,13 +155,13 @@
 				addStandardRoles();
 				
 				speakPause(2000);
-				speak("male",_("Wow, she's gorgeous"),"inlove");
+				speak("male",_("Wow, she's gorgeous."),"inlove");
 				--print(getSpeaker("male"));
 				--print(getSpeaker("PL"));
 				if((getSpeaker("male")~=0) and (getSpeaker("male")~=getSpeaker("PL")))then
 					speak("PL",_("You can stare at her later, we have to erase some undead."), "unhappy");
 				end;
-				speak("HW",_("Please help us, the maga is badly injured!"), "panic");
+				speak("HW",_("Please help us, the mage is badly injured!"), "panic");
 				
 				-- W1 (Wird toedlich getroffen)
 				executeInDialog('insertTrigger("insertion_guard_dies")');
@@ -308,12 +308,12 @@
 				speak("HW",_("I have never seen someone fight like you before."), "surprised");
 				speak("mage",_("You don't get out very often, do you."),"sneer");
 				if(solo())then
-					speak("TO",_("Ihr habt euch praechtig entwickelt, seit wir uns das letzte Mal gesehen haben, oder? _solo"),"grin");
+					speak("TO",_("You developed splendid since the last time we met, didn't you. ##solo"),"grin");
 				else
-					speak("TO",_("Ihr habt euch praechtig entwickelt, seit wir uns das letzte Mal gesehen haben, oder?"),"grin");
+					speak("TO",_("You developed splendid since the last time we met, didn't you."),"grin");
 				end;
 				setSpeakerEmotion("TO", "normal");
-				speak("PL",_("How is the archmaga?"),"thoughtful");
+				speak("PL",_("How is the archmage?"),"thoughtful");
 				
 				speak("HW",_("Very bad, I'm afraid."),"sad");
 				
@@ -322,12 +322,12 @@
 				local leader = getSpeaker("PL");
 				
 				if(getSpeaker("priest") ~=0)then
-					speak("priest",_("Let me see. _priest"),"normal");
+					speak("priest",_("Let me see."),"normal");
 					executeInDialog("addUnitCommand(getSpeaker('priest'),'heal',fissure_tmp.ireana)");
 					setObjectValue(fissure_tmp.ireana,"health",10000);
 				elseif((mage~=0) and (hasItem(mage,"heal_1") or hasItem(mage,"heal_2")))then
 					-- Magier geht zu ireana und heilt sie mit einem Trank
-					speak("mage",_("Let me see. _mage"),"normal");
+					speak("mage",_("Let me see."),"normal");
 					fissure_tmp.mPos = get(mage,"position");
 					executeInDialog("addUnitCommand("..mage..",'walk', fissure_tmp.ireana,1)");
 					speak("mage",(""),"normal","1000");
@@ -369,14 +369,14 @@
 				speak("IvN",_("It was not the best idea, but the streets are not safe these days and thus we wanted to travel concealed."),"normal");
 				speak("HW",_("These undead layed an ambush for us here."),"angry");
 				speak("arcopt",_("Surprise!"),"sneer");
-				speak("arcopt",_("No wonder, this is combat area."));
+				speak("arcopt",_("No wonder, this is a combat area."));
 				setSpeakerEmotion("arcopt","normal");
 				speak("HW",_("No, Dwarfenwall hasn't fallen yet."),"thoughtful");
 				speak("HW",_("As long as that city stands, the entry to the lands of the undead is blocked."));
 				speak("HW",_("But I fear they must have found a way around the citywalls."), "sad");
 				speak("IvN",_("We mustn't allow this."), "unhappy");
 				speak("IvN",_("If those monsters could avoid Dwarfenwall they would advance into Aisen before one week is gone."));
-				speak("SW",_("It was exeedingly careless of you to leave with so few men."), "grin");
+				speak("SW",_("It was exceedingly careless of you to leave with so few men."), "grin");
 				speak("IvN",_("The city needs every man it can get!"),"angry");
 				speak("PL",_("I have a feeling what's going to come in a moment..."), "bored");
 				if(solo())then
@@ -398,7 +398,7 @@
 				end;
 				
 				speak("SW",_("Find the way the undead came here and render it useless."));
-				speak("archer", _("Wird das extra bezahlt?"),"amused")
+				speak("archer", _("Will that be payed extra?"),"amused")
 				speak("IvN",_("Don't you want to give them some backup?"),"surprise");
 				speak("SW",_("I can do what I want!"),"unhappy");
 				speak("PL",_("Of course..."),"bored");
@@ -499,7 +499,7 @@
 		<Event trigger="entryLich" once="true">
 			<Effect>
 				fissure_tmp.lich = createObject("lich","entry_fissure");
-				setRefName(fissure_tmp.lich, _("Unbekannter Lich"));
+				setRefName(fissure_tmp.lich, _("Unknown Lich"));
 				addUnitCommand(fissure_tmp.lich,"walk","locLich")
 			</Effect>
 		</Event>
@@ -522,8 +522,8 @@
 				addSpeaker(fissure_tmp.necromancer,"Necro",true);
 				addSpeaker(fissure_tmp.lich,"Lich",true);
 				
-				speak("Lich",_("Wie gehen die Arbeiten voran?"),"normal");
-				speak("Necro",_("Nar'Asoroth, mein Gebieter."),"fear");
+				speak("Lich",_("How is the work proceeding?"),"normal");
+				speak("Necro",_("Nar'Asoroth, my lord."),"fear");
 				setSpeakerAnimation("Necro","kneelUp",1000);
 				changeTopic("lichTalk2");
 			</Effect>
@@ -531,7 +531,7 @@
 		<Event trigger="lichTalk2">
 			<Effect>
 				setRefName(fissure_tmp.lich,"Nar'Asoroth");
-				speak("Necro",_("Der Stein ist hart, aber wenn ich die Skelette noch schneller arbeiten lasse, brechen sie auseinander!"),"fear");
+				speak("Necro",_("The stone is solid,but if I let the skeletons work any faster they will break apart!"),"fear");
 				changeTopic("attackChoice");
 			</Effect>
 		</Event>
@@ -540,27 +540,27 @@
 				addCameraPosition(1000,"locParty",-90,25,10)
 				
 				if(solo())then
-					speak("PL",_("(So eine Gelegenheit ergibt sich vielleicht nicht wieder.)"),"thoughtful");
+					speak("PL",_("((Such an opportunity may never occur again.))"),"thoughtful");
 				elseif(duo())then
 					fissure_tmp.otherPlayer = getPlayers()[2];
 					addSpeaker(fissure_tmp.otherPlayer,"second");
-					speak("second",_("Los, das ist unsere Chance!"),"sneer");
+					speak("second",_("Come on, this is our chance!"),"sneer");
 				else
 					if(getSpeaker("magopt")==getSpeaker("PL"))then
 						addSpeaker(fissure_tmp.otherPlayer,"second");
-						speak("second",_("Los, das ist unsere Chance!"),"sneer")
+						speak("second",_("Come on, this is our chance!"),"sneer")
 					else
-						speak("magopt",_("Los, das ist unsere Chance!"),"sneer");
+						speak("magopt",_("Come on, this is our chance!"),"sneer");
 					end;
 				end;
-				addQuestion(_("Den Lich sofort angreifen?"),"all");
-				addAnswer(_("Ja"),"chargeLich");
-				addAnswer(_("Nein"),"keepListening");
+				addQuestion(_("Attack the lich immediately?"),"all");
+				addAnswer(_("Yes"),"chargeLich");
+				addAnswer(_("No"),"keepListening");
 			</Effect>
 		</Event>
 		<Event trigger="chargeLich" once="true">
 			<Effect>
-				speak("PL",_("Na dann, los!"),"warcry");
+				speak("PL",_("Let's go then!"),"warcry");
 				changeTopic("attackLich");
 			</Effect>
 		</Event>
@@ -570,43 +570,43 @@
 				addCameraPosition(1000,"locNecromancer",-90,45,10)
 				if(solo())then
 				elseif(duo())then
-					speak("PL",_("Warte, vielleicht erfahren wir noch etwas nuetzliches."),"normal");
+					speak("PL",_("Wait, we may learn something useful."),"normal");
 				else
-					speak("PL",_("Wartet, vielleicht erfahren wir noch etwas nuetzliches."),"normal");
+					speak("PL",_("Wait, we may learn something useful."),"normal");
 				end;
 				
-				speak("Lich",_("Lass sie ab und zu ausruhen."),"normal");
-				speak("Lich",_("Sie sollen auch noch kaempfen koennen."),"normal");
-				speak("Necro",_("Soll der Tunnel nicht zum Angriff fertig sein?"),"surprised");
+				speak("Lich",_("Let them rest from time to time."),"normal");
+				speak("Lich",_("They should be able to fight, too."),"normal");
+				speak("Necro",_("Isn't the tunnel supposed to be ready for the attack?"),"surprised");
 				--Lich lachen
-				speak("Lich",_("Nein, die Stadt ist unwichtig."),"sneer");
+				speak("Lich",_("No, the city is unimportant in the big picture."),"sneer");
 				setSpeakerEmotion("Necro","normal");
-				speak("Lich",_("Sollen die Aisener dort ihre Verstaerkungstruppen aufreiben."),"sneer");
-				speak("Lich",_("Die Armee, die durch diesen Tunnel ziehen wird, hat mit Zwergentrutz nichts zu tun."),"sneer");
-				speak("Lich",_("Nur der Kristall ist wichtig."),"thoughtful");
-				speak("Necro",_("Ich verstehe nicht."),"surprised");
-				speak("Lich",_("Und das ist gut so."),"normal");
-				speak("Lich",_("Jetzt zurueck an die Arbeit."),"threaten");
+				speak("Lich",_("Let those aisen dogs burn their backup troops there."),"sneer");
+				speak("Lich",_("The army passing through this tunnel has nothing to do with Dwarfenwall."),"sneer");
+				speak("Lich",_("Only the crystal counts."),"thoughtful");
+				speak("Necro",_("I don't understand."),"surprised");
+				speak("Lich",_("And that is for your own good."),"normal");
+				speak("Lich",_("Now back to work."),"threaten");
 				setSpeakerAnimation("Necro","kneelDown",1000);
 				executeInDialog('startTimer("necroGetUp",790)');
-				speak("Necro",_("Euer Wunsch ist mein Handeln."),"normal");
+				speak("Necro",_("Your wish is my action."),"normal");
 				
 				if(solo())then
-					speak("PL",_("Das muss der Lich sein, der Zwergentrutz angreift."),"thoughtful");
-					speak("PL",_("Wenn ich den jetzt fertig mache, wird seine Armee zu Staub zerfallen."),"grin");
+					speak("PL",_("That has to be the lich attacking Dwarfenwall."),"thoughtful");
+					speak("PL",_("If I kill him now his army will fall to dust."),"grin");
 				else
 					if(getSpeaker("priopt")==getSpeaker("PL"))then
-						speak("priopt",_("Das ist ein Lich."),"thoughtful");
-						speak("priopt",_("Wenn wir den jetzt vernichten, wird seine Armee mit ihm zerfallen!"),"normal");
+						speak("priopt",_("That's a lich."),"thoughtful");
+						speak("priopt",_("If we destroy him now his army will fall apart with him!"),"normal");
 					elseif(getSpeaker("magopt")==getSpeaker("PL"))then
-						speak("magopt",_("Das ist ein Lich."),"thoughtful");
-						speak("magopt",_("Wenn wir den jetzt vernichten, wird seine Armee mit ihm zerfallen!"),"normal");
+						speak("magopt",_("That's a lich."),"thoughtful");
+						speak("magopt",_("If we destroy him now his army will fall apart with him!"),"normal");
 					else
-						speak("second",_("Das ist ein Lich."),"thoughtful");
-						speak("second",_("Wenn wir den jetzt vernichten, wird seine Armee mit ihm zerfallen!"),"normal");
+						speak("second",_("That's a lich."),"thoughtful");
+						speak("second",_("If we destroy him now his army will fall apart with him!"),"normal");
 					end;
 				end;
-				speak("PL",_("Na dann, los!"),"angry");
+				speak("PL",_("Let's go then!"),"angry");
 				changeTopic("attackLich");
 			</Effect>
 		</Event>
@@ -627,9 +627,9 @@
 			<Effect>
 				setCutsceneMode(false);
 				for i,player in ipairs(getPlayers()) do
-					unitSpeak(player,_("Erntezeit!"),"warcry",2000);
+					unitSpeak(player,_("Harvest!"),"warcry",2000);
 				end;
-				unitSpeak(fissure_tmp.lich,_("So was. Ueberall gibt es Ratten. Toetet sie und bringt mir ihre Knochen!"),"unhappy",6000);
+				unitSpeak(fissure_tmp.lich,_("What do you know. There are rats everywhere. Kill them and bring me their bones!"),"unhappy",6000);
 				
 			</Effect>
 		</Event>
@@ -705,15 +705,15 @@
 				
 				speak("magopt","Hier ist eine gute Stelle fuer den Zauber!","normal");
 				if (solo())then
-					speak("PL",_("Dann sorge ich mal dafuer, dass dieser Spalt nur noch Geschichte ist."),"grin");
+					speak("PL",_("Then I shall blow this crevice to smithereens."),"grin");
 				else
 					speak("magopt","Hier ist eine gute Stelle fuer den Zauber!","normal");
 					if(getSpeaker("magopt")==getSpeaker("PL"))then
-						speak("second",_("Okay, los!"),"normal");
+						speak("second",_("Alright, go!"),"normal");
 					else
-						speak("PL",_("Okay, los!"),"normal");
+						speak("PL",_("Alright, go!"),"normal");
 					end;
-					speak("waropt", _("Sprengen wir diesen Durchgang in tausend Stuecke!"));
+					speak("waropt", _("Blow this passage to smithereens!"));
 				end;
 				
 				changeTopic("setExplosives")
@@ -738,7 +738,7 @@
 		<Event trigger="takeCover" once="true">
 			<Effect>
 				timedExecute('addUnitCommand('..fissure_tmp.mage..',"walk","locParty", 4)',500);
-				unitSpeak(fissure_tmp.mage,_("Schnell raus hier!"),"warcry");
+				unitSpeak(fissure_tmp.mage,_("Get out, quick!"),"warcry");
 				startTimer("theExplosion",2200);
 			</Effect>
 		</Event>
@@ -824,25 +824,25 @@
 				addSpeaker(fissure_tmp.soren, "Soren");
 				
 				if (solo()) then
-					speak("PL",_("Alles klar, Windklaue. Ich bin hier fertig"),"grin",3000);
+					speak("PL",_("Alright, Windclaw, I'm done here."),"grin",3000);
 				else
-					speak("PL",_("Alles klar, Windklaue. Wir sind hier fertig"),"grin",3000);
+					speak("PL",_("Alright, Windclaw, We are done here."),"grin",3000);
 				end;
 				
-				speak("PL",_("Was jetzt?"),"normal");
+				speak("PL",_("What now?"),"normal");
 				
 				if(solo())then
-					speak("Soren",_("Du Trottel! Sieh zu, dass du aus dem Berg raus kommst!"),"angry");
-					speak("Soren",_("Du wirst in Zwergentrutz gebraucht!"),"angry");
+					speak("Soren",_("You fool! Get yourself out of this mountain!"),"angry");
+					speak("Soren",_("You are needed in Dwarfenwall!"),"angry");
 				else
-					speak("Soren",_("Ihr Trottel! Seht zu, dass ihr aus dem Berg raus kommt!"),"angry");
-					speak("Soren",_("Ihr werdet in Zwergentrutz gebraucht!"),"angry");
-					speak("arcopt",_("Gehen wir. Wenn wir Glueck haben, hat es den Ausgang auch verschuettet und wir koennen uns alles andere sparen."),"grin");
-					speak("Soren", _("In dem Fall koennt ihr euch immer noch in Stuecke hacken. Das wird wohl funktionieren."),"sneer");
-					speak("magopt", _("Hat der eigentlich eine Ahnung, wie weh das jedes Mal tut?"), "disgust");
-					speak("waropt", _("Kann nicht sein, dann wuerde er einen so bescheuerten Vorschlag gar nicht erst machen."),"thoughtful");
-					speak("arcopt", _("Es gibt wirklich bessere Arbeitgeber."),"unhappy");
-					speak("Soren",_("Hoert auf zu mosern und bewegt euch endlich!"),"threaten");
+					speak("Soren",_("You fools! Get yourselves out of this mountain!"),"angry");
+					speak("Soren",_("You are needed in Dwarfenwall!"),"angry");
+					speak("arcopt",_("Let's go. If we are lucky the passage is blocked too and we can all take a break."),"grin");
+					speak("Soren", _("In that case you can always tear yourselves apart. That would work."),"sneer");
+					speak("magopt", _("Does he have any idea how painful this always is?"), "disgust");
+					speak("waropt", _("That's impossible. Otherwise he wouldn't give such a stupid suggestion."),"thoughtful");
+					speak("arcopt", _("There really are better employers."),"unhappy");
+					speak("Soren",_("Stop bickering and get moving!"),"threaten");
 				end;
 			
 				changeTopic("theTraderEmerges");
@@ -861,46 +861,46 @@
 				addCameraPosition(1500,"locParty", 90,45,15);
 				
 				addSpeaker(theTrader_tmp.traderCave,"Trader");
-				speak("Trader",_("Hoffentlich gibt es da hinten einen Ausgang."),"sad");
-				speak("PL",_("Wer ist da?"),"threaten");
-				speak("Trader",_("Oh, bei den Goettern, so denn gerade welche ihre Augen auf dieses unangenehme Stueck Land haben."),"happy");
+				speak("Trader",_("Hopefully there is an exit in this direction."),"sad");
+				speak("PL",_("Who goes there?"),"threaten");
+				speak("Trader",_("Oh by the gods, if some of them have their eyes on this unpleasent piece of land right now."),"happy");
 				if (solo())then
-					speak("Trader",_("Wie schoen, ein bekanntes Gesicht zu sehen."),"excited");
+					speak("Trader",_("How nice to see a familiar face."),"excited");
 				else
-					speak("Trader",_("Wie schoen, bekannte Gesichter zu sehen."),"excited");
+					speak("Trader",_("How nice to see familiar faces."),"excited");
 				end;
 				
-				speak("arcopt",_("Nicht so schnell, Kraemer!"),"unhappy");
-				speak("arcopt",_("Wie bei Harads Augen kommt Ihr hier her?"),"unhappy");
+				speak("arcopt",_("Not so fast, peddler!"),"unhappy");
+				speak("arcopt",_("How by Harad's eyes did you get here?"),"unhappy");
 				
-				speak("Trader", _("Ah! Ja nun..."),"sad");
-				speak("Trader", _("Ich wollte eine Abkuerzung durch die Berge finden, als ploetzlich der Boden unter mir nachgab."),"sad");
-				speak("Trader", _("Und nachdem ich mich vorsichtig umgesehen hatte musste ich leider feststellen, dass der Weg nach Sueden verschuettet war."),"unhappy");
-				speak("Trader", _("Darum bin ich hier."),"sad");
-				speak("Trader", _("Im Osten gibt es auch eine Hoehle, aber die war mir nicht geheuer."),"normal");
+				speak("Trader", _("Oh! Well, you see..."),"sad");
+				speak("Trader", _("I wanted to take a short cut through the mountains when suddenly the ground was caving in."),"sad");
+				speak("Trader", _("And after I took a careful look around I sadly had to notice the way south was blocked."),"unhappy");
+				speak("Trader", _("That's why I'm here."),"sad");
+				speak("Trader", _("There is a cave in the east, too, but that was a bit fishy."),"normal");
 				if (solo())then
-					speak("Trader", _("Aber da Ihr ja hier seid, gibt es noch Hoffnung."),"happy");
-					speak("Trader", _("Ich werde einfach warten, bis der Weg frei ist."),"happy");
-					speak("PL",_("Eure Notlage mal ausser acht gelassen, was macht euch so sicher, dass ich nicht einfach mit einem Stadtportal verschwinde?"),"surprised")
+					speak("Trader", _("But since you are here there is still hope."),"happy");
+					speak("Trader", _("I will just wait until the road is clear."),"happy");
+					speak("PL",_("Your distress aside, what makes you so sure I'll not simply vanish with a town portal?"),"surprised")
 				else
-					speak("Trader", _("Aber da Ihr ja hier seid, geschaetzte Freunde, gibt es noch Hoffnung."),"happy");
-					speak("Trader", _("Ich werde einfach warten, bis der Weg frei ist."),"happy");
-					speak("PL",_("Eure Notlage mal ausser acht gelassen, was macht euch so sicher, dass wir nicht einfach mit einem Stadtportal verschwinden?"))
+					speak("Trader", _("But since you are here, appreciated friends, there is still hope."),"happy");
+					speak("Trader", _("I will just wait until the road is clear."),"happy");
+					speak("PL",_("Your distress aside, what makes you so sure we'll not simply vanish with a town portal?"))
 				end;
 				
-				speak("Trader", _("Nun, normalerweise ginge das wohl, und ich wuerde euch mit Freuden eine praechtige Belohnung fuer die Hilfe anbieten."),"thoughtful");
-				speak("Trader", _("Jedoch hat an diesem Ort vor gar nicht langer Zeit eine beachtliche magische Explosion statt gefunden."),"normal");
+				speak("Trader", _("Well, that would work normally and I would gladly offer you a grand price for the help."),"thoughtful");
+				speak("Trader", _("But short ago, there was a notable magical explosion in this place."),"normal");
 				if (solo())then
-					speak("Trader", _("Ihr werdet feststellen, dass die Schriftrollen Euch wieder genau hier her bringen werden. _solo"),"normal");
+					speak("Trader", _("You will discover that the scrolls take you right here again. ##solo"),"normal");
 				else
-					speak("Trader", _("Ihr werdet feststellen, dass die Schriftrollen Euch wieder genau hier her bringen werden."),"normal");
+					speak("Trader", _("You will discover that the scrolls take you right here again."),"normal");
 				end;
 				
-				speak("magopt", _("Verflucht sei Windklaue!"), "angry");
-				speak("PL", _("Na schoen. Dann eben auf die harte Tour."), "unhappy");
-				speak("Trader", _("Wenn ihr etwas braucht, lasst es mich wissen. Ich habe da hinten ein paar Traenke entdeckt,von denen ich mich fuer ein geringes Entgeld trennen werde."),"amused");
-				speak("PL", _("Ihr verlangt tatsaechlich Geld dafuer."), "surprised");
-				speak("archer", _("Aber Geschaeft ist Geschaeft."),"thoughtful");
+				speak("magopt", _("Verflucht sei Windclaw!"), "angry");
+				speak("PL", _("Fine. Then we do it the hard way."), "unhappy");
+				speak("Trader", _("If you need something let me know. I discovered some potions back there, and I would part with them for a small amount of gold."),"amused");
+				speak("PL", _("You really ask money for it."), "surprised");
+				speak("archer", _("But business is business."),"thoughtful");
 				
 				executeInDialog('insertTrigger("cleanUpFissure")');
 			</Effect>

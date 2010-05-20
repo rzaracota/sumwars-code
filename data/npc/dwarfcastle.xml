@@ -114,10 +114,10 @@
 	
 	<Topic name="blackmarket" start_option="What is all this?">
 		<Effect>
-			speak("player",_("Ganz schoen viele Kisten..."),"thoughtful");
-			speak("Flynn",_("Das Chaos hat mir mein Vorgaenger ueberlassen."),"unhappy");
-			speak("Flynn",_("Sind alles alte Armeebestaende."),"unhappy");
-			speak("Flynn",_("Wenn Euch was davon gefaellt zeigt drauf und ich nenne Euch einen Preis."),"unhappy");
+			speak("player",_("Quite a lot of boxes..."),"thoughtful");
+			speak("Flynn",_("My predecessor left me with that chaos."),"unhappy");
+			speak("Flynn",_("These are all old army supplies."),"unhappy");
+			speak("Flynn",_("If you like something just point it out and I'll tell you a price."),"unhappy");
 		</Effect>
 	</Topic>
 	

@@ -2,12 +2,12 @@
 	
 	<Description>
 		if (rescue_willard.finished) then
-			return _("Willard ist wieder in Medair und er hat sogar ein bisschen Geld springen lassen. Wer sagt denn, dass es sich nicht auszahlt, die Leute am Leben zu lassen? Zumindest so lange es reichlich Goblins gibt.")
+			return _("Willard is back in Medair and he even forked out some money. Who said it wouldn't pay to let people live? At least as long there are enough goblins around.")
 		elseif(rescue_willard.started==true)then
 			if(rescue_willard_tmp.freed ~= true)then
-				return _("Willard versteckt sich irgendwo in der Aisener Wiese. Er wird sich wegen seiner Verletzung sicher nur zeigen, wenn keine Goblins in der Naehe sind.")
+				return _("Willard is in hiding somewhere around the Aisen Meadow. Due to his injury he will show himself only if there are no goblins around.")
 			else
-				return _("Langes suchen und etliche tote Goblins spaeter ist Willard endlich aufgetaucht. Ich sollte ihm den Stein geben und es hinter mich bringen.")
+				return _("A long search and quite a lot of dead goblins later Willard has finally shown himself. I should give him the stone and be done with it.")
 			end;
 		end
 	</Description>
@@ -22,7 +22,7 @@
 				end
 			</Condition>
 			<Effect>
-				unitSpeak(fenor,_("Heda!"),"normal");
+				unitSpeak(fenor,_("Hey there!"),"normal");
 				addUnitCommand(fenor,'walk',trigger.player,1.5);
 				rescue_willard_tmp.proposal = true;
 				createDialogue()
@@ -64,86 +64,86 @@
 			<Effect>
 				if (rescue_willard.started == true) then
 					if(solo())then
-						speak('Fenor Marken',_("Ich hoffe, Ihr kommt mit Eurer Suche nach Willard voran. _solo"),"sad");
+						speak('Fenor Marken',_("I hope you are making a good time searching for Willard. ##solo"),"sad");
 					else
-						speak('Fenor Marken',_("Ich hoffe, Ihr kommt mit Eurer Suche nach Willard voran."),"sad");
+						speak('Fenor Marken',_("I hope you are making a good time searching for Willard."),"sad");
 					end;
 				elseif(rescue_willard.denied == true)then
 					addStandardRoles();
-					speak('Fenor Marken',_("Habt Ihr es euch etwa anders ueberlegt?"),"sad");
-					addQuestion(_("Nach Willard suchen?"));
-					addAnswer(_("Ja"),'start_rescue_willard_quest');
-					addAnswer(_("Nein"),'refuse_rescue_willard_quest_again');
+					speak('Fenor Marken',_("Have you changed your mind?"),"sad");
+					addQuestion(_("Search for Willard?"));
+					addAnswer(_("Yes"),'start_rescue_willard_quest');
+					addAnswer(_("No"),'refuse_rescue_willard_quest_again');
 				else
 					addStandardRoles();
 					if(solo() and maleOnly())then
-						speak('Fenor Marken',_("Wenn mich nicht alles taeuscht seid ihr ein Gezeichneter."), "normal");
+						speak('Fenor Marken',_("If I'm not mistaken you are a Branded One."), "normal");
 					elseif(solo() and femaleOnly())then
-						speak('Fenor Marken',_("Wenn mich nicht alles taeuscht seid ihr eine Gezeichnete."), "normal");
+						speak('Fenor Marken',_("If I'm not mistaken you are a Branded One."), "normal");
 					else
-						speak('Fenor Marken',_("Wenn mich nicht alles taeuscht seid ihr Gezeichnete."), "normal");
+						speak('Fenor Marken',_("If I'm not mistaken you are Branded Ones."), "normal");
 					end;
-					speak('player',_("Was zum..."),"angry");
-					speak('player',_("Habe ich irgendwo ein Schild auf dem steht: Achtung, gefaehrliches Monster??"),"angry");
-					speak('player',_("Das ist schon das zweite Mal heute!"),"unhappy");
-					speak('Fenor Marken',_("Ich konnte schon immer spueren, wenn jemand ein Gezeichneter war."),"thoughtful");
-					speak('Fenor Marken',_("Aber keine Sorge, ich werde niemanden verraten, solange er sich korrekt verhaelt."),"normal");
+					speak('player',_("What the..."),"angry");
+					speak('player',_("Do I have a sign somewere saying: Caution, dangerous monster??"),"angry");
+					speak('player',_("That is the second time today!"),"unhappy");
+					speak('Fenor Marken',_("I could always feel if someone was a Branded One."),"thoughtful");
+					speak('Fenor Marken',_("But don't worry, I will give noone away, as long as they are behaving correctly."),"normal");
 					if(solo())then
-						speak('Fenor Marken',_("Es gibt da etwas, um das ich Euch bitten moechte. _solo"));
-						speak('Fenor Marken',_("Nur jemand wie Ihr koennte das zuverlaessig erledigen. _solo"));
+						speak('Fenor Marken',_("There is something I'd like to ask of you. ##solo"));
+						speak('Fenor Marken',_("Only someone like you could do it reliably. ##solo"));
 					else
-						speak('Fenor Marken',_("Es gibt da etwas, um das ich Euch bitten moechte."));
-						speak('Fenor Marken',_("Nur jemand wie Ihr koennte das zuverlaessig erledigen."));
+						speak('Fenor Marken',_("There is something I'd like to ask of you."));
+						speak('Fenor Marken',_("Only someone like you could do it reliable."));
 					end;
 					
-					speak("any",_("Wer haette das gedacht?"),"sneer");
-					speak("any",_("Will ein ehrbares Mitglied der Stadtwache etwa jemandes Kehle durchgeschnitten sehen?"),"unhappy");
-					speak('Fenor Marken',_("Haeh? Dafuer haette ich einen professionellen Attentaeter anheuern koennen."),"aloof");
-					speak('Fenor Marken',_("Ich dachte, Ihr waert die Sorte Gezeichnete, die nicht wahllos alle Menschen umbringen, die ihren Weg kreuzen."));
-					speak("any",_("Verzeiht. Vielleicht war mein Mund schneller als mein Kopf."),"sad");
-					speak('player',_("Wie auch immer. Was wollt Ihr wirklich?"),"normal");
-					speak('Fenor Marken',_("Danke. Mein Name ist Fenor Marken."),"normal");
-					speak('Fenor Marken',_("Es ist so: Ich habe einen Freund bei den Wildhuetern."));
-					speak('Fenor Marken',_("Er war mit zwei Kollegen in den Wiesen, als sie von Goblins ueberfallen wurden."),"sad");
-					speak('Fenor Marken',_("Und diese Feiglinge haben ihn verletzt zurueck gelassen!"),"angry");
+					speak("any",_("Who would have thought that?"),"sneer");
+					speak("any",_("Does an honorable member of the city guard wants someone's throat cut?"),"unhappy");
+					speak('Fenor Marken',_("What? I could have hired a professional assassin for that."),"aloof");
+					speak('Fenor Marken',_("I thought you were the kind of Branded Ones that doesn't kill every human crossing their way."));
+					speak("any",_("I'm sorry. Maybe my mouth slipped."),"sad");
+					speak('player',_("Whatever. What is it you really want?"),"normal");
+					speak('Fenor Marken',_("Thanks. My name is Fenor Marken."),"normal");
+					speak('Fenor Marken',_("I have a friend with the gamekeepers."));
+					speak('Fenor Marken',_("He was in the meadows with two collegues, when they were attacked by goblins."),"sad");
+					speak('Fenor Marken',_("And those cowards left him behind injured!"),"angry");
 					if(solo())then
-						speak('player',_("Sicher wollt Ihr nicht, dass ich seine Leiche zurueck bringe."));
+						speak('player',_("Surely you don't want me to bring back his corpse, do you?"));
 					else
-						speak('player',_("Sicher wollt Ihr nicht, dass wir seine Leiche zurueck bringe."));
+						speak('player',_("Surely you don't want us to bring back his corpse, do you?"));
 					end;
-					speak('Fenor Marken',_("Nein. Willard ist niemand, der sich von ein paar lausigen Goblins umbringen laesst."),"aloof");
-					speak('Fenor Marken',_("Ich bin sicher, er wartet irgendwo darauf, dass ihm jemand zu Hilfe eilt."),"normal");
-					speak('Fenor Marken',_("Nun seid Ihr sicher sehr beschaeftigt."));
+					speak('Fenor Marken',_("No, Willard isn't someone who would be killed by some lousy goblins."),"aloof");
+					speak('Fenor Marken',_("I'm sure he waits somewhere for help."),"normal");
+					speak('Fenor Marken',_("I'm sure you are very busy."));
 					if(solo())then
-						speak('Fenor Marken',_("Deswegen bitte ich Euch, ihm diesen Phasenstein zu bringen. _solo"));
+						speak('Fenor Marken',_("That is why I only ask you to bring him this phasestone. ##solo"));
 					else
-						speak('Fenor Marken',_("Deswegen bitte ich Euch, ihm diesen Phasenstein zu bringen."));
+						speak('Fenor Marken',_("That is why I only ask you to bring him this phasestone."));
 					end;
-					speak('Fenor Marken',_("Normalerweise wuerde ich das niemandem anvertrauen."),"thoughtful");
-					speak('Fenor Marken',_("Schon gar keinen wildfremden Leuten."),"thoughtful");
-					speak('Fenor Marken',_("Wer wuerde nicht einfach damit verschwinden?"),"grin");
-					speak('Fenor Marken',_("Aber ihr Gezeichneten habt andere Mittel und Wege, um zu reisen."),"normal");
-					speak('Fenor Marken',_("Und einen Phasenstein koennt ihr nicht benutzen, weil er Avaera geweiht ist, stimmt's?"));
-					speak('Fenor Marken',_("Deswegen habe ich mich an Euch gewandt, als Ihr hier vorbei gekommen seid."));
-					speak('player',_("Ihr wisst recht viel."),"normal");
+					speak('Fenor Marken',_("I wouldn't entrust this to anyone normaly."),"thoughtful");
+					speak('Fenor Marken',_("Much less someone totally unknown."),"thoughtful");
+					speak('Fenor Marken',_("Who wouldn't take off with it?"),"grin");
+					speak('Fenor Marken',_("But you Branded Ones have other ways and means to travel, haven't you."),"normal");
+					speak('Fenor Marken',_("And you cannot use a phasestone since it is dedicated to Avaera, right?"));
+					speak('Fenor Marken',_("That is why I called you when you were passing."));
+					speak('player',_("You know quite a lot."),"normal");
 					executeInDialog("rescue_willard.asked = true");
-					addQuestion(_("Nach Willard suchen?"));
-					addAnswer(_("Ja"),'start_rescue_willard_quest');
-					addAnswer(_("Nein"),'refuse_rescue_willard_quest');
+					addQuestion(_("Search for Willard?"));
+					addAnswer(_("Yes"),'start_rescue_willard_quest');
+					addAnswer(_("No"),'refuse_rescue_willard_quest');
 				end
 			</Effect>
 		</Topic>
 		
 		<Topic name="start_rescue_willard_quest" >
 			<Effect>
-				speak("waropt",_("Euer Freund ist so gut wie gerettet"));
+				speak("waropt",_("Your friend is as good as safe."));
 				if(getSpeaker("waropt") ~= getSpeaker("any")) then
-					speak("any",_("Und fragt nicht mal, was der Rest von uns denkt."));
+					speak("any",_("And doesn't even ask what the rest of us is thinking."));
 				end;
 				if(solo())then
-					speak('Fenor Marken',_("Ich danke Euch _solo"),"happy");
+					speak('Fenor Marken',_("Thank you. ##solo"),"happy");
 				else
-					speak('Fenor Marken',_("Ich danke Euch"),"happy");
+					speak('Fenor Marken',_("Thank you."),"happy");
 				end;
 				rescue_willard.started = true;
 				startTimer("talk_done",4000);
@@ -154,25 +154,25 @@
 			<Effect>
 				rescue_willard.denied = true;
 				if(solo())then
-					speak("player",_("Es tut mir Leid, aber ich will meine Zeit nicht damit verschwenden, nach irgendwelchen Wildhuetern zu suchen."));
-					speak('Fenor Marken',_("Ihr seid genauso kaltherzig, wie man es euch nachsagt. _solo"),"sad");
+					speak("player",_("I'm sorry, but I don't want to waste my time searching for any gamekeepers."));
+					speak('Fenor Marken',_("You are as cold-hearted as they say. ##solo"),"sad");
 				else
-					speak("player",_("Es tut mir Leid, aber wir koennen unsere Zeit nicht damit verschwenden, nach irgendwelchen Wildhuetern zu suchen."));
-					speak('Fenor Marken',_("Ihr seid genauso kaltherzig, wie man es euch nachsagt."),"sad");
+					speak("player",_("I'm sorry, but we cannot waste our time searching for any gamekeepers."));
+					speak('Fenor Marken',_("You are as cold-hearted as they say."),"sad");
 				end;
-				speak('Fenor Marken',_("Wenn ich doch nur hier weg koennte."),"angry");
-				speak('Fenor Marken',_("Dann  wuerde ich ihn selbst suchen gehen."),"threaten");
+				speak('Fenor Marken',_("If only I could leave here."),"angry");
+				speak('Fenor Marken',_("I would search for him myself."),"threaten");
 				startTimer("talk_done",4000);
 			</Effect>	
 		</Topic>
 		<Topic name="refuse_rescue_willard_quest_again" >
 			<Effect>
 				if(solo())then
-					speak('Fenor Marken',_("Was wollt Ihr dann von mir? _solo"),"angry");
-					speak('Fenor Marken',_("Verschwindet, bevor ich jemandem von Euch erzaehle! _solo"),"angry");
+					speak('Fenor Marken',_("Then what do you want of me? ##solo"),"angry");
+					speak('Fenor Marken',_("Leave, before I tell someone about you! ##solo"),"angry");
 				else
-					speak('Fenor Marken',_("Was wollt Ihr dann von mir?"),"angry");
-					speak('Fenor Marken',_("Verschwindet, bevor ich jemandem von Euch erzaehle!"),"angry");
+					speak('Fenor Marken',_("Then what do you want from me?"),"angry");
+					speak('Fenor Marken',_("Leave, before I tell someone about you!"),"angry");
 				end;
 			</Effect>	
 		</Topic>
@@ -209,19 +209,19 @@
 			</Condition>
 			<Effect>
 				rescue_willard.finished = true;
-				speak("Willard",_("Danke f�r eure Hilfe."),"excited");
-				speak("Willard",_("Kann ich euch um noch einen Gefallen bitten?"),"normal");
-				speak("Willard",_("Ich bin am Bein verwundet und schaffe es allein nicht bis nach Medair."),"sad");
-				speak("player", _("Ich nehme an, ihr seid Willard."),"thoughtful");
+				speak("Willard",_("Thank's for your help."),"excited");
+				speak("Willard",_("Can I ask you for another favor?"),"normal");
+				speak("Willard",_("My leg is hurt and I won't make it to Medair alone."),"sad");
+				speak("player", _("You are Willard, I suppose."),"thoughtful");
 				setSpeakerEmotion("player","amused");
-				speak("Willard",_("Der bin ich. Woher kennt ihr meinen Namen?"),"surprised");
-				speak("player", _("Euer Freund Fenor Marken schickt uns, um euch einen Phasenstein zu geben."),"normal");
-				speak("Willard",_("Bei den Goettern! Er hat das Ding immer noch?"),"amused");
-				speak("Willard",_("Das ist eine unserer Jugendsuenden gewesen."));
-				speak("Willard",_("Meiner ist laengst verbraucht."),"thoughtful");
-				speak("Willard",_("Der gute Fenor. Hier, lasst mich meine Dankbarkeit zeigen."),"happy");
-				speak("Willard",_("Sicher kann jemand mit eurem Handwerk immer Geld gebrauchen?"));
-				speak("player", _("Ich danke euch."),"amused");
+				speak("Willard",_("That's me. Why do you know my name?"),"surprised");
+				speak("player", _("Your friend Fenor Marken sent us to give you this phasestone."),"normal");
+				speak("Willard",_("Holy gods! He still has that thing?"),"amused");
+				speak("Willard",_("That was one of our youthful follys."));
+				speak("Willard",_("Mine is long used up."),"thoughtful");
+				speak("Willard",_("Good old Fenor. Here, a token of my appreciation."),"happy");
+				speak("Willard",_("Surely someone of your trade can always use a little money?"));
+				speak("player", _("Thank you very much."),"amused");
 				local players = getPlayers();
 				local i,player;
 				for i,player in ipairs(players) do
@@ -266,7 +266,7 @@
 				end
 			</Condition>
 			<Effect>
-				unitSpeak(trigger.player,_("Hier steckt also dieser Willard."));
+				unitSpeak(trigger.player,_("So here is this Willard."));
 			</Effect>
 		</Event>
 		

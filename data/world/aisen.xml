@@ -751,7 +751,7 @@
 				return(theTrader.enteredDwarfenwall~=true);
 			</Condition>
 			<Effect>
-				unitSpeak(eastslope.guard, _("Achtung! Monster aus der Mine! Helft mir!"),"panic");
+				unitSpeak(eastslope.guard, _("Watch out! Monsters from the mine! Help me!"),"panic");
 			</Effect>
 		</Event>
 		
@@ -767,7 +767,7 @@
 			<Effect>
 				local speaker = getPartyleader();
 				if(get(speaker,"region")=="aisEastslope")then
-					unitSpeak(speaker,_("Ich bin kein Monster, lasst euch das gesagt sein. Ich bin schlimmer."),"threaten");
+					unitSpeak(speaker,_("Let me tell you I'm no monster. I'm worse."),"threaten");
 				end;
 			</Effect>
 		</Event>

@@ -2,13 +2,13 @@
 	
 	<Description>
 		if (farm_siege.finished==true) then
-			return _("Die Bauern sind gerettet, die Goblins erschlagen und die Dienstleistung bezahlt. Was will man mehr?")
+			return _("The peasants are rescued, the goblins slain, and the service paid. What more can you ask for?")
 		elseif(farm_siege.rescued==true)then
-			return(_("Die Bauern sind gerettet und die Goblins erschlagen. Zeit, den Lohn fuer all die Muehen in Joringsbrueck abzuholen."))
+			return(_("The peasants are rescued and the goblins slain. Time to collect the reward for the trouble in Joringsbridge."))
 		elseif(farm_siege.goblins_cleared==true)then
-			return(_("Die Goblins rund um Brons Farm weilen nicht mehr unter den Lebenden. Ich sollte mal an die Tuer klopfen und sehen, dass alles in Ordnung ist. Keine Bauern, kein Geld."))
+			return(_("The goblins around Bron's farm are not among the living anymore. I should knock at the door and make sure, everything is all right. No peasants, no money."))
 		else
-			return _("Der Hof eines Bauern namens Michel Bron wird von Goblins belagert. Seine Familie braucht Hilfe - schnell.")
+			return _("The farm of a peasant named Michel Bron is besieged by goblins. His family needs help - fast.")
 		end
 	</Description>
 	
@@ -20,20 +20,20 @@
 			<Effect>
 				addStandardRoles();
 				addSpeaker(joringsbridge.sergeant,"sergeant");
-					speak("sergeant",_("Ah! Habt ihr doch noch Lust bekommen, Euch das Gold zu verdienen?"),"aloof");
+					speak("sergeant",_("Ah! Are you feeling like earning the money after all?"),"aloof");
 					if(solo())then
-						speak("sergeant",_("Glaubt ja nicht, ich habe Euch nicht dort herumlungern sehen."));
+						speak("sergeant",_("Don't think, I haven't seen you hanging around back there."));
 					elseif(duo())then
-						speak("sergeant",_("Glaubt ja nicht, ich habe Euch und Euren Freund nicht dort herumlungern sehen."));
+						speak("sergeant",_("Don't think, I haven't seen you and your friend hanging around back there."));
 					else
-						speak("sergeant",_("Glaubt ja nicht, ich habe Euch und Eure Freunde nicht dort herumlungern sehen."));
+						speak("sergeant",_("Don't think, I haven't seen you and your friends hanging around back there."));
 					end;
-					speak("sergeant",_("Aber ich will mich nicht beschweren."),"thoughtful");
-					speak("sergeant",_("Ihr wisst, wie es laeuft: Geht in die noerdliche Wiese und vertreibt die Goblins, die sich um Brons Hof herum aufhalten."),"normal");
-					speak("sergeant",_("Wie Ihr das anstellt, ist mir egal, und wenn Ihr sie alle roh verschlingt."));
-					speak("sergeant",_("Nur ein Scherz."),"amused");
-					speak("sergeant",_("Wenn Ihr es geschafft habt, kommt Ihr zu mir zurueck."),"normal");
-					speak("PL",_("Schon unterwegs."));
+					speak("sergeant",_("But I don't want to complain."),"thoughtful");
+					speak("sergeant",_("You know the drill: Get to the Northern Meadow and drive away the goblins around Bron's farm."),"normal");
+					speak("sergeant",_("I don't care, how you do it, even if you gobble them raw."));
+					speak("sergeant",_("Just kidding."),"amused");
+					speak("sergeant",_("When you're done come back to me."),"normal");
+					speak("PL",_("On my way."));
 					farm_siege.started=true;
 			</Effect>
 		</Topic>
@@ -85,7 +85,7 @@
 			<Effect>
 				farm_siege.goblins_cleared=true;
 				local heroes = filter(getPlayers(),isInRegion);
-				unitSpeak(heroes[1],_("Das sollten genug Goblins gewesen sein. Ich sehe besser mal nach Brons Familie."),"thoughtful");
+				unitSpeak(heroes[1],_("That should have been enough goblins. I better look after Bron's family."),"thoughtful");
 			</Effect>
 		</Event>
 		
@@ -108,20 +108,20 @@
 				local name = get(leader,"name");
 				print(name);
 				
-				speak("PL",_("Die Goblins sind weg. Geht es euch gut?"),"normal");
-				speak("wife",_("Ich danke euch."));
-				speak("wife",_("Leider koennen wir euch nicht hereinbitten."));
-				speak("wife",_("Unsere Barrikaden sind recht schwer."));
-				speak("wife",_("Aber ich werde meinem Mann Bescheid geben, dass es uns gut geht."));
-				speak("PL",_("Wie denn das?"),"surprised");
-				speak("wife",_("Mit einem Avaeras-Kristall natuerlich. Er wird schon seit Generationen in meiner Familie vererbt."));
-				speak("PL",_("Natuerlich. Dumm von mir."),"normal");
+				speak("PL",_("The goblins are gone. Are you alright?"),"normal");
+				speak("wife",_("Thank you very much."));
+				speak("wife",_("Sadly I cannot ask you in."));
+				speak("wife",_("Our barricade is quite heavy."));
+				speak("wife",_("But I will give word to my husband that we are alive and well."));
+				speak("PL",_("How so?"),"surprised");
+				speak("wife",_("With a crytal of Avearea, of course. It's been handed down in my family for generations."));
+				speak("PL",_("Of course. Silly of me."),"normal");
 				if((getSpeaker("mage")~=nil)and(getSpeaker("PL")~=getSpeaker("mage")))then
-					speak("mage",_("Also ehrlich, "..name..". Dachtest du, irgendwer benutzt heutzutage noch Brieftauben?"));
+					speak("mage",_("Really now. Did you think she'd use carrier pigeons in this day and age?"..name..". Dachtest du, irgendwer benutzt heutzutage noch Brieftauben?"));
 					if(duo())then
-						speak("PL",_("Lass uns einfach das Geld abholen gehen."),"offended");
+						speak("PL",_("Let's just go collect the money."),"offended");
 					else
-						speak("PL",_("Lasst uns einfach das Geld abholen gehen."),"offended");
+						speak("PL",_("Let's just go collect the money."),"offended");
 					end;
 				end;
 				--exp verteilen
@@ -138,11 +138,11 @@
 			</Condition>
 			<Effect>
 				addSpeaker(joringsbridge.sergeant,"sergeant")
-				speak("player",_("Es ist vollbracht."));
-				speak("sergeant",_("Hab ich schon gehoert."),"amused");
-				speak("sergeant",_("Michel ist gerade in der Schenke und besaeuft sich auf Euer Wohl."),"amused");
-				speak("sergeant",_("Aber das soll nicht mehr Eure Sorge sein."),"normal");
-				speak("sergeant",_("Hier habt ihr das Geld."),"normal")
+				speak("player",_("It's done."));
+				speak("sergeant",_("I've already heard of it."),"amused");
+				speak("sergeant",_("Michel is in the tavern and getting plastered. All in honor of your bravery, of course."),"amused");
+				speak("sergeant",_("But that shall be of no concern to you."),"normal");
+				speak("sergeant",_("Here's the money."),"normal")
 				addPlayersGold(2000, getPlayers());
 				farm_siege.finished=true;
 			</Effect>
