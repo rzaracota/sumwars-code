@@ -49,8 +49,8 @@
 			<Add directory="C:\OgreSDK\include" />
 			<Add directory="C:\OgreSDK\samples\include" />
 			<Add directory="C:\OgreSDK\samples\refapp\include" />
-			<Add directory="..\..\trunk\src\gui" />
-			<Add directory="..\..\trunk\src\core" />
+			<Add directory="..\..\src\gui" />
+			<Add directory="..\..\src\core" />
 		</Compiler>
 		<Linker>
 			<Add option="-Wl,--enable-runtime-pseudo-reloc" />
@@ -63,6 +63,20 @@
 			<Add directory="C:\OgreSDK\bin\Debug" />
 			<Add directory="C:\OgreSDK\bin\Release" />
 		</Linker>
+		<Unit filename="..\..\src\core\elementattrib.cpp" />
+		<Unit filename="..\..\src\core\elementattrib.h" />
+		<Unit filename="..\..\src\core\geometry.cpp" />
+		<Unit filename="..\..\src\core\geometry.h" />
+		<Unit filename="..\..\src\core\logger.cpp" />
+		<Unit filename="..\..\src\core\logger.h" />
+		<Unit filename="..\..\src\gui\graphicmanager.cpp" />
+		<Unit filename="..\..\src\gui\graphicmanager.h" />
+		<Unit filename="..\..\src\gui\graphicobject.cpp" />
+		<Unit filename="..\..\src\gui\graphicobject.h" />
+		<Unit filename="..\..\src\gui\graphicobjectrenderinfo.cpp" />
+		<Unit filename="..\..\src\gui\graphicobjectrenderinfo.h" />
+		<Unit filename="..\..\src\gui\sound.cpp" />
+		<Unit filename="..\..\src\gui\sound.h" />
 		<Unit filename="ExampleApplication.h" />
 		<Unit filename="ExampleFrameListener.h" />
 		<Unit filename="debug.h" />
@@ -78,16 +92,6 @@
 		<Unit filename="tinyxml.h" />
 		<Unit filename="tinyxmlerror.cpp" />
 		<Unit filename="tinyxmlparser.cpp" />
-		<Unit filename="..\..\trunk\src\core\elementattrib.cpp" />
-		<Unit filename="..\..\trunk\src\core\elementattrib.h" />
-		<Unit filename="..\..\trunk\src\gui\graphicmanager.cpp" />
-		<Unit filename="..\..\trunk\src\gui\graphicmanager.h" />
-		<Unit filename="..\..\trunk\src\gui\graphicobject.cpp" />
-		<Unit filename="..\..\trunk\src\gui\graphicobject.h" />
-		<Unit filename="..\..\trunk\src\gui\graphicobjectrenderinfo.cpp" />
-		<Unit filename="..\..\trunk\src\gui\graphicobjectrenderinfo.h" />
-		<Unit filename="..\..\trunk\src\gui\sound.cpp" />
-		<Unit filename="..\..\trunk\src\gui\sound.h" />
 		<Extensions>
 			<code_completion />
 			<debugger />
