@@ -52,6 +52,7 @@ void  World::createWorld(bool server, int port, bool cooperative, int max_player
 {
 	m_server = server;
 	m_cooperative = cooperative;
+	m_network = 0;
 
 	// diverse Initialisierungen
 
@@ -189,23 +190,25 @@ bool World::init(int port)
 		}
 
 
-
-		DEBUGX("server");
-		m_network = new ServerNetwork(m_max_nr_players);
-
-
-
-	}
-	else
-	{
-		DEBUGX("client");
-		m_network = new ClientNetwork();
 	}
 
-	if( m_network->init( port )!=NET_OK )
+	
+	if (m_max_nr_players > 1)
 	{
-		ERRORMSG( "Error occured in network" );
-		return false;
+		if (m_server)
+		{
+			m_network = new ServerNetwork(m_max_nr_players);
+
+		}
+		else
+		{
+			m_network = new ClientNetwork();
+		}
+		if( m_network->init( port )!=NET_OK )
+		{
+			ERRORMSG( "Error occured in network" );
+			return false;
+		}
 	}
 
 	m_timer[0] =0;
@@ -347,7 +350,10 @@ void World::deleteWorld()
 World::~World()
 {
 
-	delete m_network;
+	if (m_network != 0)
+	{
+		delete m_network;
+	}
 
 
 	std::map<int, RegionData*>::iterator it;
@@ -822,7 +828,8 @@ void World::handleSavegame(CharConv *cv, int slot)
 		}
 
 
-		if (m_server)
+		// send masses of init data to the new player
+		if (m_server && m_network != 0)
 		{
 			WorldObjectMap::iterator it;
 
@@ -1211,7 +1218,16 @@ int World::getValidProjectileId()
 
 void World::update(float time)
 {
-
+	// on server side, time is restricted to 100 ms
+	// to reduce impact of lags
+	// on client side no reduction, as client is only predicting and does not change game state persistantly
+	if (m_server)
+	{
+		if (time > 100)
+			time = 100;
+	}
+	
+	
 	// Timer weiterzaehlen und Limits feststellen
 	static float timer_max[6] = {200,500,1000,2000,5000,10000};
 	for (int i=0; i<6; i++)
@@ -1241,14 +1257,20 @@ void World::update(float time)
 		}
 	}
 
-
-	m_network->update();
+	if (m_network != 0)
+	{
+		m_network->update();
+	}
 
 
 	if (m_server)
 	{
-		updateLogins();
-		acceptLogins();
+		// update network, if not singleplayer
+		if (m_network != 0)
+		{
+			updateLogins();
+			acceptLogins();
+		}
 
 		// Lua update
 		if (getLocalPlayer() !=0)
@@ -1273,10 +1295,10 @@ void World::update(float time)
 		rrit->second->getNetEvents()->clear();
 	}
 
-	m_network->update();
-
-
-
+	if (m_network != 0)
+	{
+		m_network->update();
+	}
 }
 
 void World::updatePlayers()
