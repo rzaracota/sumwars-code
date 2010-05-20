@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-18 22:16+0200\n"
+"POT-Creation-Date: 2010-05-20 20:14+0200\n"
 "PO-Revision-Date: 2010-05-10 \n"
 "Last-Translator: kalimgard <kalimgard@users.sourceforge.net>\n"
 "Language-Team: german <translation-team-de@lists.sourceforge.net>\n"
@@ -303,7 +303,7 @@ msgstr "Options"
 msgid "Save & Exit"
 msgstr "Save & Exit"
 
-#: ../src/gui/controlpanel.cpp:345 ../src/gui/optionswindow.cpp:206
+#: ../src/gui/controlpanel.cpp:345 ../src/gui/optionswindow.cpp:207
 msgid "Inventory"
 msgstr "Inventory"
 
@@ -311,7 +311,7 @@ msgstr "Inventory"
 msgid "Character"
 msgstr "Character"
 
-#: ../src/gui/controlpanel.cpp:351 ../src/gui/optionswindow.cpp:212
+#: ../src/gui/controlpanel.cpp:351 ../src/gui/optionswindow.cpp:213
 msgid "Skilltree"
 msgstr "Skilltree"
 
@@ -319,7 +319,7 @@ msgstr "Skilltree"
 msgid "Party"
 msgstr "Party"
 
-#: ../src/gui/controlpanel.cpp:357 ../src/gui/optionswindow.cpp:221
+#: ../src/gui/controlpanel.cpp:357 ../src/gui/optionswindow.cpp:222
 msgid "Quests"
 msgstr "Quests"
 
@@ -352,7 +352,7 @@ msgid "Quit"
 msgstr "Quit"
 
 #: ../src/gui/messageboxes.cpp:53 ../src/gui/networkwindows.cpp:95
-#: ../src/gui/networkwindows.cpp:223 ../src/gui/optionswindow.cpp:242
+#: ../src/gui/networkwindows.cpp:223 ../src/gui/optionswindow.cpp:243
 #: ../src/gui/savegamelist.cpp:173 ../src/gui/tradewindow.cpp:256
 msgid "Ok"
 msgstr "Ok"
@@ -377,55 +377,55 @@ msgstr "Port"
 msgid "Host"
 msgstr "Host"
 
-#: ../src/gui/optionswindow.cpp:197
+#: ../src/gui/optionswindow.cpp:198
 msgid "Shortkeys"
 msgstr "Shortkeys"
 
-#: ../src/gui/optionswindow.cpp:199
+#: ../src/gui/optionswindow.cpp:200
 msgid "Audio"
 msgstr "Audio"
 
-#: ../src/gui/optionswindow.cpp:201
+#: ../src/gui/optionswindow.cpp:202
 msgid "Graphic"
 msgstr "Graphic"
 
-#: ../src/gui/optionswindow.cpp:203
+#: ../src/gui/optionswindow.cpp:204
 msgid "Misc"
 msgstr "Misc"
 
-#: ../src/gui/optionswindow.cpp:209
+#: ../src/gui/optionswindow.cpp:210
 msgid "Character screen"
 msgstr "Character screen"
 
-#: ../src/gui/optionswindow.cpp:215
+#: ../src/gui/optionswindow.cpp:216
 msgid "Party screen"
 msgstr "Party screen"
 
-#: ../src/gui/optionswindow.cpp:218
+#: ../src/gui/optionswindow.cpp:219
 msgid "Chatbox"
 msgstr "Chatbox"
 
-#: ../src/gui/optionswindow.cpp:224
+#: ../src/gui/optionswindow.cpp:225
 msgid "Minimap"
 msgstr "Minimap"
 
-#: ../src/gui/optionswindow.cpp:227
+#: ../src/gui/optionswindow.cpp:228
 msgid "Swap equipement"
 msgstr "Swap equipement"
 
-#: ../src/gui/optionswindow.cpp:230
+#: ../src/gui/optionswindow.cpp:231
 msgid "Item Labels"
 msgstr "Item Labels"
 
-#: ../src/gui/optionswindow.cpp:233
+#: ../src/gui/optionswindow.cpp:234
 msgid "Sound"
 msgstr "Sound"
 
-#: ../src/gui/optionswindow.cpp:236
+#: ../src/gui/optionswindow.cpp:237
 msgid "Music"
 msgstr "Music"
 
-#: ../src/gui/optionswindow.cpp:239
+#: ../src/gui/optionswindow.cpp:240
 msgid "Language"
 msgstr "Language"
 
