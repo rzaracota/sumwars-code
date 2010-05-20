@@ -341,7 +341,7 @@
 	</Region>
 
 	<NPC refname="Derred">
-		<Topic name="give_weapons" start_option="Waffen abgeben">
+		<Topic name="give_weapons" start_option="Surrender weapons">
 			<Condition>
 				return (tutorial.phase == "intro")
 			</Condition>
@@ -393,7 +393,7 @@
 	</NPC>
 	
 	<NPC refname="Tolec">
-		<Topic name="give_weapons_t" start_option="Waffen abgeben">
+		<Topic name="give_weapons_t" start_option="Surrender weapons">
 			<Condition>
 				return (tutorial.phase == "intro")
 			</Condition>
@@ -747,7 +747,7 @@
 	</Region>
 	
 	<NPC refname="Derred">
-		<Topic name="explain_inventory" start_option="Inventar erklären">
+		<Topic name="explain_inventory" start_option="Explain inventory">
 			<Condition>
 				return (tutorial.phase == "fightslugs" and tutorial_tmp.slugdoor_open ~= true)
 			</Condition>
@@ -766,7 +766,7 @@
 			</Effect>
 		</Topic>
 		
-		<Topic name="attack_slugs" start_option="Schnecken angreifen">
+		<Topic name="attack_slugs" start_option="Attack slugs">
 			<Condition>
 				return (tutorial.phase == "fightslugs" and tutorial_tmp.slugdoor_open ~= true)
 			</Condition>
@@ -779,7 +779,7 @@
 	</NPC>
 	
 	<NPC refname="Tolec">
-		<Topic name="explain_inventory" start_option="Inventar erklären">
+		<Topic name="explain_inventory" start_option="Explain inventory">
 			<Condition>
 				return (tutorial.phase == "fightslugs" and tutorial_tmp.slugdoor_open ~= true)
 			</Condition>
@@ -790,7 +790,7 @@
 			</Effect>
 		</Topic>
 		
-		<Topic name="attack_slugs" start_option="Schnecken angreifen">
+		<Topic name="attack_slugs" start_option="Attack slugs">
 			<Condition>
 				return (tutorial.phase == "fightslugs" and tutorial_tmp.slugdoor_open ~= true)
 			</Condition>
@@ -938,7 +938,7 @@
 	</Region>
 	
 	<NPC refname="Tolec">
-		<Topic name="explain_levelup" start_option="Levelup erklären">
+		<Topic name="explain_levelup" start_option="Explain level up">
 			<Condition>
 				return (tutorial.phase == "findSecretDoor" and tutorial_tmp.fooddoor_open ~= true)
 			</Condition>
@@ -1012,7 +1012,7 @@
 	</Region>
 	
 	<NPC refname="Derred">
-		<Topic name="open_fooddoor" start_option="Futterklappe öffnen">
+		<Topic name="open_fooddoor" start_option="Open hatch">
 			<Condition>
 				return (tutorial.phase == "findSecretDoor" and tutorial_tmp.fooddoor_open ~= true)
 			</Condition>
@@ -1041,7 +1041,7 @@
 	</NPC>
 	
 	<NPC refname="Tolec">
-		<Topic name="open_fooddoor" start_option="Futterklappe öffnen">
+		<Topic name="open_fooddoor" start_option="Open hatch">
 			<Condition>
 				return (tutorial.phase == "findSecretDoor" and tutorial_tmp.fooddoor_open ~= true)
 			</Condition>
@@ -1235,7 +1235,7 @@
 	</Region>
 	
 	<NPC refname="Derred">
-		<Topic name="explain_skills" start_option="Fähigkeiten erklären">
+		<Topic name="explain_skills" start_option="Explain skills">
 			<Condition>
 				return (tutorial.phase == "killlouses" or (tutorial.phase == "findSecretDoor" and tutorial_tmp.mutslugs_dead))
 			</Condition>
@@ -1282,7 +1282,7 @@
 			   </Effect>
 		</Topic>
 	
-		<Topic name="secret_door"  start_option="Geheimtuer oeffnen">
+		<Topic name="secret_door"  start_option="Open secret door">
 			<Condition>
 				return (tutorial_tmp.mutslugs_dead==true);
 			</Condition>
@@ -1298,7 +1298,7 @@
 	</NPC>
 	
 	<NPC refname="Tolec">
-		<Topic name="secret_door" start_option="Geheimtuer oeffnen">
+		<Topic name="secret_door" start_option="Open secret door">
 			<Condition>
 				return (tutorial_tmp.mutslugs_dead==true);
 			</Condition>

@@ -1,4 +1,4 @@
-<Quest name="Der Goblinvernichter" table_name="goblins">
+<Quest name="The goblinslayer" table_name="goblins">
 	
 	<Init>
 		goblins.nr =0;
@@ -40,7 +40,7 @@
 			</Effect>
 		</Topic>
 		
-		<Topic name="goblins_reward" start_option="Goblins (Belohnung)">
+		<Topic name="goblins_reward" start_option="Goblins (reward)">
 			<Condition>
 				if (goblins.finished == false) then return false end;
 				return (getPlayerPrivateVar(getSpeaker('player'),"goblinsreward2") ~= true)

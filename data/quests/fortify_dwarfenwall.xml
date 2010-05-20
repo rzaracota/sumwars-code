@@ -37,7 +37,7 @@
 	</Region>
 	
 	<NPC refname="Derred">
-		<Topic name="start_scene1" start_option="Windklaue sprechen">
+		<Topic name="start_scene1" start_option="Speak with Windclaw">
 			<Condition>
 				return (tutorial.finished == true and fortify_dwall.scene1 ~= true)
 			</Condition>
@@ -49,7 +49,7 @@
 	</NPC>
 	
 	<NPC refname="Tolec">
-		<Topic name="start_scene1" start_option="Windklaue sprechen">
+		<Topic name="start_scene1" start_option="Speak with Windclaw">
 			<Condition>
 				return (tutorial.finished == true and fortify_dwall.scene1 ~= true)
 			</Condition>

@@ -1,4 +1,4 @@
-<Quest name="Defend dwarfenwall" table_name="defend_dwall">
+<Quest name="Defend Dwarfenwall" table_name="defend_dwall">
 	<Description>
 		if (defend_dwall.finished) then
 			return _("Quest finished")

@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: sumwars 0.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-03-09 15:15+0100\n"
-"PO-Revision-Date: 2010-05-10 \n"
+"PO-Revision-Date: 2010-05-20 21:49+0200\n"
 "Last-Translator: kalimgard <kalimgard@users.sourceforge.net>\n"
 "Language-Team: german <translation-team-de@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -1126,7 +1126,7 @@ msgid "I see you have reached dwarfenwall safely."
 msgstr "I see you have reached dwarfenwall safely."
 
 #: goblins.xml
-msgid "Der Goblinvernichter"
+msgid "The goblinslayer"
 msgstr "The goblinslayer"
 
 #: goblins.xml
@@ -1138,8 +1138,8 @@ msgid "Goblins"
 msgstr "Goblins"
 
 #: goblins.xml
-msgid "Goblins (Belohnung)"
-msgstr "Goblins(reward)"
+msgid "Goblins (reward)"
+msgstr "Goblins (reward)"
 
 #: goblins.xml
 msgid "region1"
@@ -1154,39 +1154,39 @@ msgid "Derred"
 msgstr "Derred"
 
 #: tutorial.xml
-msgid "Waffen abgeben"
-msgstr "Surrender weaons"
+msgid "Surrender weapons"
+msgstr "Surrender weapons"
 
 #: tutorial.xml
 msgid "Tolec"
 msgstr "Tolec"
 
 #: tutorial.xml
-msgid "Inventar erklären"
+msgid "Explain inventory"
 msgstr "Explain inventory"
 
 #: tutorial.xml
-msgid "Schnecken angreifen"
+msgid "Attack slugs"
 msgstr "Attack slugs"
 
 #: tutorial.xml
-msgid "Levelup erklären"
+msgid "Explain level up"
 msgstr "Explain level up"
 
 #: tutorial.xml
-msgid "Futterklappe öffnen"
+msgid "Open hatch"
 msgstr "Open hatch"
 
 #: tutorial.xml
-msgid "Fähigkeiten erklären"
+msgid "Explain skills"
 msgstr "Explain skills"
 
 #: tutorial.xml
-msgid "Geheimtuer oeffnen"
+msgid "Open secret door"
 msgstr "Open secret door"
 
 #: scene7.xml
-msgid "Das Teichmonster"
+msgid "The Poolmonster"
 msgstr "The Poolmonster"
 
 #: scene7.xml
@@ -1198,7 +1198,7 @@ msgid "greyCurseLake"
 msgstr "Hidden Lake"
 
 #: theFissure.xml
-msgid "Der Hinterhalt der Untoten"
+msgid "The ambush of the undead"
 msgstr "The ambush of the undead"
 
 #: theFissure.xml
@@ -1210,7 +1210,7 @@ msgid "greyCurseCaveDep"
 msgstr "Cursed Caves, Depth"
 
 #: siegeOfDwarfenwall.xml
-msgid "Defend dwarfenwall"
+msgid "Defend Dwarfenwall"
 msgstr "Defend Dwarfenwall"
 
 #: siegeOfDwarfenwall.xml
@@ -1234,7 +1234,7 @@ msgid "aisWolfstones"
 msgstr "Wolfstones"
 
 #: besieged_farm.xml
-msgid "Der belagerte Bauernhof"
+msgid "The besieged farm"
 msgstr "The besieged farm"
 
 #: besieged_farm.xml
@@ -1242,7 +1242,7 @@ msgid "Sergeant Lutterer"
 msgstr "Sergeant Lutterer"
 
 #: besieged_farm.xml
-msgid "Der Bauernhof"
+msgid "The farm"
 msgstr "The farm"
 
 #: besieged_farm.xml
@@ -1254,7 +1254,7 @@ msgid "Brons Farm"
 msgstr "Bron's Farm"
 
 #: maylons_grave.xml
-msgid "Maylons Grab"
+msgid "Maylons Grave"
 msgstr "Maylons Grave"
 
 #: maylons_grave.xml
@@ -1274,7 +1274,7 @@ msgid "aisMaylonsGraveL2"
 msgstr "Maylons Grave, Crypt"
 
 #: herbalist.xml
-msgid "Kraeutersammler"
+msgid "Herb collector"
 msgstr "Herb collector"
 
 #: herbalist.xml
@@ -1306,7 +1306,7 @@ msgid "Fortify Dwarfenwall"
 msgstr "Fortify Dwarfenwall"
 
 #: fortify_dwarfenwall.xml
-msgid "Windklaue sprechen"
+msgid "Speak with Windclaw"
 msgstr "Speak with Windclaw"
 
 #: fortify_dwarfenwall.xml
@@ -1314,11 +1314,11 @@ msgid "medBackalley"
 msgstr "Backalleys"
 
 #: rob_the_robber.xml
-msgid "Rob der Raeuber"
+msgid "Rob the robber"
 msgstr "Rob the robber"
 
 #: rob_the_robber.xml
-msgid "Steckbrief"
+msgid "Wanted poster"
 msgstr "Wanted poster"
 
 #: rob_the_robber.xml
@@ -1327,14 +1327,14 @@ msgstr "Sergeant Wober"
 
 #: rob_the_robber.xml
 msgid "Rob the Robber (Reward)"
-msgstr "Rob the robber (reward)"
+msgstr "Rob the Robber (reward)"
 
 #: rob_the_robber.xml
 msgid "aisDarkFairyforest"
 msgstr "Dark Fairyforest"
 
 #: rescue_willard.xml
-msgid "Ein Freund in Not"
+msgid "A friend in need"
 msgstr "A friend in need"
 
 #: rescue_willard.xml
@@ -1342,8 +1342,8 @@ msgid "Willard"
 msgstr "Willard"
 
 #: rescue_willard.xml
-msgid "Willard (Reward)"
-msgstr "Give Willard the stone(Reward)"
+msgid "Give Willard the stone (Reward)"
+msgstr "Give Willard the stone (Reward)"
 
 #: rescue_willard.xml
 msgid "aisMeadow"
@@ -1431,7 +1431,7 @@ msgstr "Cain"
 
 #: npc.xml
 msgid "Brons Tuer"
-msgstr "Brons Tuer"
+msgstr "Brons Door"
 
 #: npc.xml
 msgid "Guard"

@@ -1,4 +1,4 @@
-<Quest name="Rob der Raeuber" table_name="rob_the_robber">
+<Quest name="Rob the robber" table_name="rob_the_robber">
 	<Description>
 		if (rob_the_robber.finished) then
 			return _("Rob the robber breathed his last and provided a downright windfall while he was on it.");
@@ -10,7 +10,7 @@
 	</Description>
 	
 	<NPC refname="Sergeant Lutterer">
-		<Topic name="rob_the_robber" start_option="Steckbrief">
+		<Topic name="rob_the_robber" start_option="Wanted poster">
 			<Condition>
 				if (rob_the_robber.finished ~= true and rob_the_robber.killed ~= true) then
 					return true
@@ -62,7 +62,7 @@
 	
 	
 	<NPC refname="Sergeant Wober">
-		<Topic name="rob_the_robber" start_option="Steckbrief">
+		<Topic name="rob_the_robber" start_option="Wanted poster">
 			<Condition>
 				if (rob_the_robber.finished ~= true and rob_the_robber.killed ~= true) then
 					return true

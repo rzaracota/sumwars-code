@@ -1124,7 +1124,7 @@ msgid "I see you have reached dwarfenwall safely."
 msgstr ""
 
 #: goblins.xml
-msgid "Der Goblinvernichter"
+msgid "The goblinslayer"
 msgstr ""
 
 #: goblins.xml
@@ -1136,7 +1136,7 @@ msgid "Goblins"
 msgstr ""
 
 #: goblins.xml
-msgid "Goblins (Belohnung)"
+msgid "Goblins (reward)"
 msgstr ""
 
 #: goblins.xml
@@ -1152,7 +1152,7 @@ msgid "Derred"
 msgstr ""
 
 #: tutorial.xml
-msgid "Waffen abgeben"
+msgid "Surrender weapons"
 msgstr ""
 
 #: tutorial.xml
@@ -1160,31 +1160,31 @@ msgid "Tolec"
 msgstr ""
 
 #: tutorial.xml
-msgid "Inventar erklären"
+msgid "Explain inventory"
 msgstr ""
 
 #: tutorial.xml
-msgid "Schnecken angreifen"
+msgid "Attack slugs"
 msgstr ""
 
 #: tutorial.xml
-msgid "Levelup erklären"
+msgid "Explain level up"
 msgstr ""
 
 #: tutorial.xml
-msgid "Futterklappe öffnen"
+msgid "Open hatch"
 msgstr ""
 
 #: tutorial.xml
-msgid "Fähigkeiten erklären"
+msgid "Explain skills"
 msgstr ""
 
 #: tutorial.xml
-msgid "Geheimtuer oeffnen"
+msgid "Open secret door"
 msgstr ""
 
 #: scene7.xml
-msgid "Das Teichmonster"
+msgid "The Poolmonster"
 msgstr ""
 
 #: scene7.xml
@@ -1196,7 +1196,7 @@ msgid "greyCurseLake"
 msgstr ""
 
 #: theFissure.xml
-msgid "Der Hinterhalt der Untoten"
+msgid "The ambush of the undead"
 msgstr ""
 
 #: theFissure.xml
@@ -1208,7 +1208,7 @@ msgid "greyCurseCaveDep"
 msgstr ""
 
 #: siegeOfDwarfenwall.xml
-msgid "Defend dwarfenwall"
+msgid "Defend Dwarfenwall"
 msgstr ""
 
 #: siegeOfDwarfenwall.xml
@@ -1232,7 +1232,7 @@ msgid "aisWolfstones"
 msgstr ""
 
 #: besieged_farm.xml
-msgid "Der belagerte Bauernhof"
+msgid "The besieged farm"
 msgstr ""
 
 #: besieged_farm.xml
@@ -1240,7 +1240,7 @@ msgid "Sergeant Lutterer"
 msgstr ""
 
 #: besieged_farm.xml
-msgid "Der Bauernhof"
+msgid "The farm"
 msgstr ""
 
 #: besieged_farm.xml
@@ -1252,7 +1252,7 @@ msgid "Brons Farm"
 msgstr ""
 
 #: maylons_grave.xml
-msgid "Maylons Grab"
+msgid "Maylons Grave"
 msgstr ""
 
 #: maylons_grave.xml
@@ -1272,7 +1272,7 @@ msgid "aisMaylonsGraveL2"
 msgstr ""
 
 #: herbalist.xml
-msgid "Kraeutersammler"
+msgid "Herb collector"
 msgstr ""
 
 #: herbalist.xml
@@ -1304,7 +1304,7 @@ msgid "Fortify Dwarfenwall"
 msgstr ""
 
 #: fortify_dwarfenwall.xml
-msgid "Windklaue sprechen"
+msgid "Speak with Windclaw"
 msgstr ""
 
 #: fortify_dwarfenwall.xml
@@ -1312,11 +1312,11 @@ msgid "medBackalley"
 msgstr ""
 
 #: rob_the_robber.xml
-msgid "Rob der Raeuber"
+msgid "Rob the robber"
 msgstr ""
 
 #: rob_the_robber.xml
-msgid "Steckbrief"
+msgid "Wanted poster"
 msgstr ""
 
 #: rob_the_robber.xml
@@ -1332,7 +1332,7 @@ msgid "aisDarkFairyforest"
 msgstr ""
 
 #: rescue_willard.xml
-msgid "Ein Freund in Not"
+msgid "A friend in need"
 msgstr ""
 
 #: rescue_willard.xml
@@ -1340,7 +1340,7 @@ msgid "Willard"
 msgstr ""
 
 #: rescue_willard.xml
-msgid "Willard (Reward)"
+msgid "Give Willard the stone (Reward)"
 msgstr ""
 
 #: rescue_willard.xml

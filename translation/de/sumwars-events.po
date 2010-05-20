@@ -6066,5 +6066,3 @@ msgstr "Achtung! Monster aus der Mine! Helft mir!"
 msgid "Let me tell you I'm no monster. I'm worse."
 msgstr "Ich bin kein Monster, lasst euch das gesagt sein. Ich bin schlimmer."
 
-#~ msgid "Will it be payed extra??"
-#~ msgstr "Wird das extra bezahlt??"

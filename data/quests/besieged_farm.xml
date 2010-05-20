@@ -1,4 +1,4 @@
-<Quest name="Der belagerte Bauernhof" table_name="farm_siege">
+<Quest name="The besieged farm" table_name="farm_siege">
 	
 	<Description>
 		if (farm_siege.finished==true) then
@@ -13,7 +13,7 @@
 	</Description>
 	
 	<NPC refname="Sergeant Lutterer">
-		<Topic name= "get_quest_farm_siege" start_option="Der Bauernhof">
+		<Topic name= "get_quest_farm_siege" start_option="The farm">
 			<Condition>
 				return(farm_siege.started~=true);
 			</Condition>
