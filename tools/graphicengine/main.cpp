@@ -60,14 +60,19 @@ class SumWarsApplication : public ExampleApplication
 			
 			std::ifstream fin("mesh");
 			
+			if (!fin.is_open())
+			{
+				std::cout <<"No file named mesh found. Copy it from mesh.sample. \n\n\n";
+			}
+			
 			double maxtime = 5000;
 			fin >>m_doc -> m_mesh;
 			fin >>m_doc ->m_animation;
 			fin >>maxtime;
 			
 			
-			Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../../trunk/data/renderinfo", "FileSystem", "renderinfo");
-			Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../../trunk/resources/sound", "FileSystem", "sound");
+			Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../../data/renderinfo", "FileSystem", "renderinfo");
+			Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../../resources/sound", "FileSystem", "sound");
 			
 			
 			Ogre::FileInfoListPtr files;
@@ -85,7 +90,16 @@ class SumWarsApplication : public ExampleApplication
 			}
 			mSceneMgr->setAmbientLight(ColourValue(1,1,1));
 
-			SoundSystem::loadSoundData("../../trunk/data/sound/test.xml");
+			files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("sound","*.xml");
+			for (it = files->begin(); it != files->end(); ++it)
+			{
+				file = it->archive->getName();
+				file += "/";
+				file += it->filename;
+
+				SoundSystem::loadSoundData(file.c_str());
+			}
+			
 			Plane plane(Vector3::UNIT_Y, 0);
 			MeshManager::getSingleton().createPlane("ground", ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME, plane, 1000, 1500, 20, 20, true, 1,5,5,Vector3::UNIT_X);
 
