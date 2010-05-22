@@ -262,11 +262,11 @@ void Scene::update(float ms)
 	// Licht aktualisieren
 	float *colour;
 	Ogre::Light* light;
-	light= m_scene_manager->getLight("HeroLight");
+	/*light= m_scene_manager->getLight("HeroLight");
 	light->setPosition(Ogre::Vector3(pos.m_x*50,300,pos.m_y*50));
 	colour= region->getLight().getHeroLight();
 	light->setDiffuseColour(colour[0], colour[1], colour[2]);
-	
+	*/
     
     colour= region->getLight().getDirectionalLight();
 	light = m_scene_manager->getLight("RegionLight");
@@ -678,7 +678,9 @@ void Scene::createScene()
 	m_scene_manager->setShadowTextureSelfShadow(true);
     m_scene_manager->setShadowTextureConfig(0,4096,4096,Ogre::PF_X8R8G8B8);
     m_scene_manager->setShadowColour( Ogre::ColourValue(0.4, 0.4, 0.4) );
-    m_scene_manager->setShadowTechnique(Ogre::SHADOWTYPE_TEXTURE_MODULATIVE);
+    m_scene_manager->setShadowTechnique(Ogre::SHADOWTYPE_TEXTURE_ADDITIVE);
+    
+    
     m_scene_manager->setShadowFarDistance(2000);
     
 	updateCharacterView();
@@ -700,7 +702,7 @@ void Scene::createScene()
 	light->setAttenuation(1000,0.5,0.000,0.00001);
 	light->setCastShadows(true);
 	DEBUGX("hero light %f %f %f",colour[0], colour[1], colour[2]);
-
+    
 	colour= region->getLight().getDirectionalLight();
     light = m_scene_manager->createLight("RegionLight");
 	light->setType(Ogre::Light::LT_DIRECTIONAL);

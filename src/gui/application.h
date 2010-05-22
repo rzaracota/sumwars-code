@@ -167,8 +167,11 @@ class Application
 		 * \brief Objekt fuer das Management der Szene
 		 */
  		Ogre::SceneManager *m_scene_manager;
+        
 
-
+        /**
+         * \var Ogre::RTS
+        
 		/**
 		 * \var bool m_shutdown
 		 * \brief true, wenn die Anwendung beendet werden soll

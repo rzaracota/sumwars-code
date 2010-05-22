@@ -2293,8 +2293,6 @@ bool MainWindow::mouseMoved(const OIS::MouseEvent &evt) {
 	//DEBUG("injection position %i %i",evt.state.X.abs,evt.state.Y.abs);
 	m_document->onMouseMove(evt.state.X.rel, evt.state.Y.rel,evt.state.Z.rel);
 	
-	
-	
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::Window* label = win_mgr.getWindow("CursorItemImage");
 	
@@ -2328,8 +2326,15 @@ bool MainWindow::mousePressed(const OIS::MouseEvent &evt, OIS::MouseButtonID btn
 	if (btn == OIS::MB_Right)
 		button = CEGUI::RightButton;
 
-	bool ret = m_cegui_system->injectMouseButtonDown(button);
-	
+    bool ret = false; // CEGUI 0.7 changed its default behaviour a little bit and creates a invisible root window that always processes events
+
+    // if the returned window is anything else than "GameScreen" then CEGUI needs to process the input
+    if (!(m_cegui_system->getWindowContainingMouse()->getName() == "GameScreen")) 
+    {
+        ret = true; // set ret to false if the events where processed by the invisible window
+        m_cegui_system->injectMouseButtonDown(button);
+    }
+    
 	if (m_document->getGUIState()->m_sheet ==  Document::MAIN_MENU && m_ready_to_start)
 	{
 		m_document->onStartScreenClicked();
@@ -2351,7 +2356,7 @@ bool MainWindow::mousePressed(const OIS::MouseEvent &evt, OIS::MouseButtonID btn
 		}
 
 		// Testet, dass man nicht auf die untere Steuerleiste geklickt hat
-		if (not ret)
+		if (!ret)
 		{
 			if (player->getEquipement()->getItem(Equipement::CURSOR_ITEM)!=0)
 			{
