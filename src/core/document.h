@@ -864,6 +864,11 @@ class Document
 		* \brief true, wenn der aktuelle Rechner der Server ist
 		*/
 		bool m_server;
+		
+		/**
+		 * \brief true, if a single player game should be started
+		 */
+		bool m_single_player;
 
 		/**
 		 * \var Player* m_temp_player

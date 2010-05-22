@@ -6,7 +6,7 @@
 				addSpeaker(guard2,"guard2");
 				
 				setSpeakerEmotion('Fenor Marken',"normal");
-				speak('Fenor Marken',_("Das ist ein Test"));
+				speak('Fenor Marken',_("This is a Test"));
 				setSpeakerEmotion('Fenor Marken',"surprised");
 				speak('Fenor Marken',_("surprised"));
 				setSpeakerEmotion('Fenor Marken',"thoughtful");
@@ -42,7 +42,7 @@
 				setSpeakerEmotion('Fenor Marken',"warcry");
 				speak('Fenor Marken',_("shouting a warcry"));
 				setSpeakerEmotion('Fenor Marken',"injured");
-				speak('Fenor Marken',_("exausted"));
+				speak('Fenor Marken',_("exhausted"));
 				setSpeakerEmotion('Fenor Marken',"injured2");
 				speak('Fenor Marken',_("injured"));
 				setSpeakerEmotion('Fenor Marken',"injured3");
@@ -51,9 +51,8 @@
 				speak('Fenor Marken',_("in panic"),"panic");
 				speak('Fenor Marken',_("putting up a distance"),"aloof");
 				speak('Fenor Marken',_("being disgusted"),"disgust");
-				speak('player',_("und noch ein Test"));
-				speak('Fenor Marken',_("wieder ein Test"));
-				--setSpeakerPosition('Fenor Marken',"upper_left");
+				speak('player',_("and yet another Test"));
+				speak('Fenor Marken',_("again a test"));
 				speak('guard1',"ich bin die erste Wache")
 				speak('guard2',"ich bin die zweite Wache")
 				speak('Fenor Marken',"ich bin Fenor Marken")

@@ -57,6 +57,7 @@ sumwars_SOURCES = src/core/world.cpp \
 	src/core/scriptobject.cpp \
 	src/core/fraction.cpp \
 	src/core/treasure.cpp \
+	src/core/options.cpp \
 	src/gui/main_gui.cpp \
 	src/gui/mainwindow.cpp \
 	src/gui/scene.cpp \

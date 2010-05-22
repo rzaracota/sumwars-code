@@ -1,9 +1,9 @@
 ﻿<Quest name="The Ambush" table_name="ambush">
 	<Description>
 		if (ambush.finished) then
-			return _("Ireana hat es ueberlebt und vor lauter Dankbarkeit gleich fuer den naechsten Auftrag gesorgt. Ich wusste ja schon immer, dass die Konziliker nur einen Kammerjaeger wollten.")
+			return _("Ireana survived and, as a token of her gratitude, provided our next job. I always knew the councilmen only wanted an exterminator.")
 		else
-			return _("Eine Konzilsmagierin namens Ireana von Nordenburg steckt anscheinend westlich von Zwergentrutz in Schwierigkeiten. Nichts, was ein Gezeichneter nicht loesen koennte. Wenn sie lange genug ueberlebt...")
+			return _("A female council-mage by the name of Ireana of Northborough seems to be in trouble west of Dwarfenwall. Nothing a Branded One couldn't solve. If she survives long enough...")
 		end
 	</Description>
 	
@@ -21,7 +21,7 @@
 				return unitIsInArea(trigger.player,"northernExit")
 			</Condition>
 			<Effect>
-				unitSpeak(trigger.player,_("Da geht es Richtung Zwergentrutz. Ich sollte noch nicht dort entlang."),"thoughtful");
+				unitSpeak(trigger.player,_("Dwarfenwall is in that direction. I shouldn't go this way yet."),"thoughtful");
 				addUnitCommand(trigger.player,"walk","entry_south");
 				startTimer("cancelCommand","1000");
 				addTriggerVariable("player",trigger.player);
@@ -96,52 +96,52 @@
 				addSpeaker(ambush_tmp.soren,"Soren Windclaw");
 				
 				if (solo())then
-					speak("Soren Windclaw",_("Warte!"),"sad",2500);
-					speak("PL",_("Ich beeile mich ja schon!"),"unhappy");
-					speak("Soren Windclaw",_("Du musst jetzt sofort durch die westlichen Wälder."),"unhappy");
+					speak("Soren Windclaw",_("Wait!"),"sad",2500);
+					speak("PL",_("I am making haste, alright?"),"unhappy");
+					speak("Soren Windclaw",_("You have to go into the western woods right now."),"unhappy");
 				else
-					speak("PL",_("Wir beeilen uns ja schon!"),"unhappy");
-					speak("Soren Windclaw",_("Ihr muesst jetzt sofort durch die westlichen Wälder."),"unhappy");
+					speak("PL",_("We are making haste, alright?"),"unhappy");
+					speak("Soren Windclaw",_("You have to go into the western woods right now."),"unhappy");
 				end;
-					speak("Soren Windclaw",_("Die Verlobte des Prinzen ist in Gefahr."));
-					speak("any",_("Wer?"),"surprised");
-					speak("Soren Windclaw",_("Die Erzmaga Ireana von Nordenburg."),"sad");
-					speak("archer",_("Wird das extra bezahlt?"),"surprised");
+					speak("Soren Windclaw",_("The prince's fiancé is in danger."));
+					speak("any",_("Who?"),"surprised");
+					speak("Soren Windclaw",_("The archmage Ireana of Northborough"),"sad");
+					speak("archer",_("Will that be payed extra?"),"surprised");
 				if(getSpeaker("archer")~=getSpeaker("magopt"))then
-					speak("magopt",_("Wie bitte?"),"thoughtful");
-					speak("magopt",_("Ich dachte das wäre eine von euren tollen Elementaristenamazonen, kann die nicht auf sich selbst aufpassen?"),"bored");
+					speak("magopt",_("What?"),"thoughtful");
+					speak("magopt",_("I thought she was one of your fancy elementalist amazones. Can't she look after herself?"),"bored");
 				end;
 				if(solo())then
-					speak("Soren Windclaw",_("Jetzt fang nicht an zu diskutieren, sondern hilf ihr! Sie braucht deine Hilfe!"),"pain");
+					speak("Soren Windclaw",_("Don't start to argue and help her! She needs your help!"),"pain");
 					setSpeakerEmotion("Soren Windclaw","unhappy");
 				else
-					speak("Soren Windclaw",_("Jetzt fangt nicht an zu diskutieren, sondern helft ihr! Sie braucht eure Hilfe!"),"pain");
+					speak("Soren Windclaw",_("Don't start to argue and help her! She needs your help!"),"pain");
 					setSpeakerEmotion("Soren Windclaw","unhappy");
 					if(duo())then
-						speak("PL",_("Was meinst du, wollen wir da jemandem aus der Patsche helfen?"),"amused");
+						speak("PL",_("What do you think? Shall we bail someone out?"),"amused");
 						if(getSpeaker("magopt")~=getSpeaker("PL"))then
-							speak("magopt", _("Weiß nicht so genau..."),"bored");
+							speak("magopt", _("I'm not sure..."),"bored");
 						elseif(getSpeaker("PL")~=getSpeaker("waropt"))then
-							speak("waropt", _("Naja, schaden kann das ja eigentlich nicht..."),"thoughtful");
+							speak("waropt", _("Well, it couldn't really hurt..."),"thoughtful");
 						end;
 						if(getSpeaker("PL")~=getSpeaker("archer"))then
-							speak("archer",_("Wird das extra bezahlt??"),"thoughtful");
+							speak("archer",_("Will that be payed extra??"),"thoughtful");
 						end;
-						speak("Soren Windclaw",_("Argh! Muss ich euch erst-"),"angry");
-						speak("PL",_("Schon gut, spare deinen Atem,!"),"aloof");
+						speak("Soren Windclaw",_("Argh! Do I have to-"),"angry");
+						speak("PL",_("Alright already, safe your breath!"),"aloof");
 					end;
-					speak("PL",_("Was meint ihr Freunde, wollen wir da jemandem aus der Patsche helfen?"),"amused");
+					speak("PL",_("What do you think, friends, do we want to bail someone out?"),"amused");
 					if(getSpeaker("magopt")~=getSpeaker("PL"))then
-						speak("magopt", _("Weiß nicht so genau..."),"bored");
+						speak("magopt", _("I'm not sure..."),"bored");
 					end;
 					if(getSpeaker("magopt")~=getSpeaker("waropt"))then
-						speak("waropt", _("Naja, schaden kann das ja eigentlich nicht..."),"thoughtful");
+						speak("waropt", _("Well, it couldn't really hurt..."),"thoughtful");
 					end;
-					speak("archer",_("Wird das extra bezahlt??"),"thoughtful");
-					speak("Soren Windclaw",_("Argh! Muss ich euch erst-"),"angry");
-					speak("PL",_("Schon gut, spare deinen Atem,!"),"aloof");
+					speak("archer",_("Will that be payed extra??"),"thoughtful");
+					speak("Soren Windclaw",_("Argh! Do I have to-"),"angry");
+					speak("PL",_("Alright already, safe your breath!"),"aloof");
 				end;
-					speak("PL",_("Die Feuerwehr ist ja schon unterwegs."),"sneer");
+					speak("PL",_("The firefighters are on the way."),"sneer");
 					executeInDialog("insertTrigger('speechFinished')");
 			</Effect>
 		</Event>

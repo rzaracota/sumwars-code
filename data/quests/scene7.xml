@@ -1,4 +1,4 @@
-<Quest name="Das Teichmonster" table_name="scene7">
+<Quest name="The Poolmonster" table_name="scene7">
 	
 	<Init>
 		local a = 2
@@ -18,29 +18,29 @@
 				addCameraPosition(0,get(getRole("PL"),"position"),20,40,20);
 				addCameraPosition(20000,get(getRole("PL"),"position"),220,60,30);
 
-				speak("MAGast",_("Wow, ist das schoen."));
-				speak("WARast",_("Wirst du jetzt sentimental?"));
+				speak("MAGast",_("Wow, thats beautiful."));
+				speak("WARast",_("Are you getting sentimental now?"));
 				speak("MAGast",_("... Der Anblick hat mich nur an mein Leben"));
 				speak("ANY",_("Du kannst dich an dein Leben vor der"));
-				speak("MAGast",_("... Nur schemenhaft."));
-				speak("PL",_("Manchmal wuenschte ich,"));
-				speak("WARast",_("Ich kenne genug Menschen,"));
-				speak("PL",_("... nur aeußerlich."));
+				speak("MAGast",_("... only dimly"));
+				speak("PL",_("Sometimes I wish,"));
+				speak("WARast",_("I know enough people,"));
+				speak("PL",_("... only externally."));
 				speak("MAGast",_("..."));
 
 				-- (sie schweigen einen Moment.)
 
-				speak("ANY",_("Meint ihr wirklich, dass es"));
-				speak("PRIast",_("Selbst die grossen"));
-				speak("ANY",_("Ich hoffe du hast"));
-				speak("MAGast",_("Warum hat es eigentlich"));
+				speak("ANY",_("Do you really think that it"));
+				speak("PRIast",_("Even the great"));
+				speak("ANY",_("I hope you have"));
+				speak("MAGast",_("Why has it really"));
 
 				-- Alle zucken mit den Schultern, keiner weiss es
 
-				speak("PL",_("Wir muessen jetzt weiter."));
-				speak("MAGast",_("Nur noch einen Moment bitte."));
-				speak("ARCast",_("Was ist das eigentlich dort auf dem Wasser?"));
-				speak("ANYast",_("Sieht aus wie ein..."));
+				speak("PL",_("We have to go now."));
+				speak("MAGast",_("Just a moment please."));
+				speak("ARCast",_("Whats that on the water over there?"));
+				speak("ANYast",_("Looks like a..."));
 
 				changeTopic("end_cutscene7_fight");
 			</Effect>

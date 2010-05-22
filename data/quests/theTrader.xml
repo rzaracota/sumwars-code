@@ -3,7 +3,7 @@
 		if (fortify_dwall.finished) then
 			return _("Quest finished")
 		else
-			return _("Ein seltsamer Haendler hat angeboten, Leere Schriftrollen zu verkaufen.")
+			return _("A strange trader offered me to sell Empty Scrolls.")
 		end
 	</Description>
 	
@@ -63,55 +63,55 @@
 				setTopicBase("The Trader");
 				--greeting by composure of the group
 				if (solo() and femaleOnly()) then
-					speak("theTrader",_("Einen Augenblick, ehrenwerte Dame."));
+					speak("theTrader",_("A moment, dear madam."));
 					executeInDialog("addUnitCommand(theTrader_tmp.theTrader,'talk')");
 				elseif(solo() and maleOnly()) then
-					speak("theTrader",_("Einen Augenblick, ehrenwerter Herr."));
+					speak("theTrader",_("A moment, dear mister."));
 				elseif(femaleOnly()) then
-					speak("theTrader",_("Einen Augenblick, ehrenwerte Damen."));
+					speak("theTrader",_("A moment, dear ladies."));
 				elseif(maleOnly()) then
-					speak("theTrader",_("Einen Augenblick, ehrenwerte Herren."));
+					speak("theTrader",_("A moment, dear sirs."));
 				else
-					speak("theTrader",_("Einen Augenblick, ehrenwerte Herrschaften."));
+					speak("theTrader",_("A moment, ladies and gentleman."));
 				end;
 
-				speak("PL", _("Was ist denn jetzt schon wieder?"),"unhappy");
+				speak("PL", _("What is it now?"),"unhappy");
 				
 				if(solo()) then
-					speak("theTrader", _("Mir scheint, Ihr steckt in Harads schwarzen Klauen."),"happy");
+					speak("theTrader", _("It seems, you are stuck in Harad's black claws."),"happy");
 				else
-					speak("theTrader", _("Mir will scheinen, Ihr steckt in Harads schwarzen Klauen."),"happy");
+					speak("theTrader", _("It seems, you are stuck in Harad's black claws."),"happy");
 				end;
 
-				speak("PL", _("Was willst du damit sagen?"),"threaten");
-				speak("theTrader", _("Nun, ich will damit sagen, dass ich meine Dienste anbieten möchte."));
+				speak("PL", _("What are you trying to say?"),"threaten");
+				speak("theTrader", _("Well, I want to say I'd like to lend you my services."));
 				
-				speak("arcopt", _("Ihr seid Händler?"),"thoughtful.");
-				speak("theTrader", _("In der Tat."),"amused");
-				speak("theTrader", _("Doch leider setzte ich auf den falschen Zweig und stehe nun mit einem größeren Kontingent Leerer Schriftrollen da."),"sad");
+				speak("arcopt", _("You are a trader?"),"thoughtful.");
+				speak("theTrader", _("Indeed."),"amused");
+				speak("theTrader", _("Unfortunatly I bet on the wrong branch and now I'm stuck with a large contingent of Empty Scrolls."),"sad");
 				if(not solo()) then
-					speak("waropt", _("Was wollen wir denn mit leeren Schriftrollen?"),"unhappy");
+					speak("waropt", _("What do we want with empty scrolls?"),"unhappy");
 					if(getSpeaker("waropt") ~= getSpeaker("magopt")) then
-						speak("magopt", _("Hast du die Großbuchstaben nicht gehört?"),"sneer");
+						speak("magopt", _("Didn't you hear the capital letters?"),"sneer");
 					end;
 				end;
-				speak("magopt", _("Was sind das für Rollen?"),"normal");
+				speak("magopt", _("What kind of scrolls are they?"),"normal");
 				
 				if(isMale(getSpeaker("magopt")))then
-					speak("theTrader", _("Ihr seid ein Mann von Verstand!"),"excited");
+					speak("theTrader", _("I see you are a man of reason!"),"excited");
 				else
-					speak("theTrader", _("Ihr seid eine Frau von Verstand!"),"excited");
+					speak("theTrader", _("I see you are a woman of reason!"),"excited");
 				end;
 				
-				speak("theTrader", _("Eine Leere Schriftrolle ist zu meinem großen Bedauern nur zu einem in der Lage:"),"thoughtful");
-				speak("theTrader", _("Einen Weg durch Harads Schwarzen Abgrund schaffen."),"excited");
-				speak("theTrader", _("Und dann auch noch nur zu einer Stelle großer magischer Konzentration wie dem dicken Wegeschrein da hinten."),"sad");
+				speak("theTrader", _("An Empty Scroll is much to my regret only capable of one thing:"),"thoughtful");
+				speak("theTrader", _("Establish a way through Harads Black Abyss."),"excited");
+				speak("theTrader", _("And to make it worse only to spots of great magical concentration like the big road shrine over there."),"sad");
 				executeInDialog("addCameraPosition(1000,'WaypointLoc', -90,50, 20)");
 				--Kamera bewegen
-				speak("theTrader", _("Die Macht erschöpft sich außerdem recht schnell und ist auf eine Person beschränkt."),"thougtful");
-				addQuestion(_("Das Wegpunktesystem erklären?"))
-				addAnswer(_("Ja"),"explain_waypoints")
-				addAnswer(_("Nein"),"talk_on")
+				speak("theTrader", _("It's power is furthermore depleted quickly and limited to one person."),"thougtful");
+				addQuestion(_("Explain the waypoint system?"))
+				addAnswer(_("Yes"),"explain_waypoints")
+				addAnswer(_("No"),"talk_on")
 			</Effect>
 		</Event>
 	</Region>
@@ -119,14 +119,14 @@
 	<NPC refname = "The Trader">
 		<Topic name="explain_waypoints">
 			<Effect>
-				speak("theTrader",_("Wenn Ihr Euch einem Wegeschrein naehert, wird Eure Aura die Schutzgeister dieses Ortes dazu veranlassen, warnende Flammen zu entzuenden."),"normal");
-				speak("theTrader",_("Aber keine Angst, sie haben nicht die Macht, Euch wirklich gefaehrlich zu werden."),"amused");
-				speak("theTrader",_("Dafuer koennt Ihr sicher sein, dass Ihr den Wegeschrein benutzen koennt, wenn Ihr die Flammen seht."),"normal");
-				speak("theTrader",_("Wenn Ihr auf einen Wegeschrein klickt, wird Euer Koerper sich in Harads Schwarzen Abgrund verfluechtigen."),"normal");
-				speak("theTrader",_("Vor Eurem Auge wird dann eine Karte mit allen Orten erscheinen, die Ihr bereits besucht habt."),"normal");
-				speak("theTrader",_("Sie werden als ein Kreis dargestellt."),"normal");
-				speak("theTrader",_("Wenn Ihr ein Portal in der Welt offen habt, wird auch dieses angezeigt, allerdings durch einen roten Punkt."),"normal");
-				speak("theTrader",_("Klickt auf eines dieser Symbole, und Euer Koerper setzt sich in Windeseile am Zielort wieder zusammen."),"normal");
+				speak("theTrader",_("If you are getting close to a waypoint, your aura will bring the familiar spirits of this place to ignite warning flames."),"normal");
+				speak("theTrader",_("But do not fear, they don't have the power to harm you in any way, really."),"amused");
+				speak("theTrader",_("Counterwise you can be sure that you are able to use the road shrine if you see the flames."),"normal");
+				speak("theTrader",_("If you click on a road shrine, your body will volatilize into Harad's Black Abyss."),"normal");
+				speak("theTrader",_("Before your inner eye there will be a map with all the places, you have already visited."),"normal");
+				speak("theTrader",_("They are shown as a circle."),"normal");
+				speak("theTrader",_("If you have an open portal in the world, it will be shown too, but by a red dot."),"normal");
+				speak("theTrader",_("Click on one of these symbols, and your body will reassemble itself fast as the wind at your destination."),"normal");
 				changeTopic("talk_on");
 			</Effect>
 		</Topic>
@@ -134,64 +134,64 @@
 		<Topic name="talk_on">
 			<Effect>
 				addCameraPosition(1000,'entry_south', -90,50, 20);
-				speak("theTrader", _("Goblins und aehnliches Gekreuch haben in letzter Zeit allerhand gestohlen."),"normal");
-				speak("theTrader", _("Es mag Euch gelegen kommen, einen kurzen Abstecher zu einem gut sortierten Haendler zu unternehmen."),"grin");
-				speak("PL", _("Naemlich Euch?"),"sneer");
-				speak("theTrader", _("Zu meinem Bedauern nein."),"sad");
-				speak("theTrader", _("Wie bereits berichtet habe ich mich mit den Leeren Schriftrollen uebernommen und derzeit kein freies Kapital."));
-				speak("theTrader", _("Ich fuerchte, ich kann euch nur unzureichende Mengen an Gold für eure Waren bieten."));
-				speak("theTrader", _("Aber ich kann euch noch sehr lange  versorgen, das verspreche ich Euch."),"happy");
-				speak("theTrader", _("Schon deswegen, weil Kundschaft in diesen Breiten rar gesaet ist."),"normal");
-				speak("priopt", _("Das ist sie ueberall."), "normal");
-				speak("theTrader", _("Und ohne Euch zu nahe zu treten: Das ist auch gut so."),"thoughtful");
-				speak("theTrader", _("Nicht viele Gezeichnete haetten mir so zugehoert wie Ihr."),"normal");
-				speak("theTrader", _("Lasst mich Euch eine Leere Schriftrolle als Werbegeschenk überreichen."),"happy");
-				speak("theTrader", _("Beehrt mich bald wieder."));
-				speak("waropt",_('Moment! Muss das Ding denn unbedingt "Leere Schriftrolle heißen?"'),"unhappy");
+				speak("theTrader", _("Goblins and other beasts have stolen quite a lot recently."),"normal");
+				speak("theTrader", _("It may be convenient to make a short detour to a well-assorted trader."),"grin");
+				speak("PL", _("Speaking of you?"),"sneer");
+				speak("theTrader", _("Actually not, regrettably."),"sad");
+				speak("theTrader", _("As reported, I misinvested in the Empty Scrolls and have no available capital."));
+				speak("theTrader", _("I'm afraid all I can give you for your wares in gold would be insufficient."));
+				speak("theTrader", _("But I can supply you for a really long time. It's a promise."),"happy");
+				speak("theTrader", _("One reason being customers are really rare in these parts."),"normal");
+				speak("priopt", _("They are everywhere."), "normal");
+				speak("theTrader", _("with all due respect: That is a blessing."),"thoughtful");
+				speak("theTrader", _("Not many Branded Ones would have listened to me as you did."),"normal");
+				speak("theTrader", _("Allow me to give you an Empty Scroll as a freebie."),"happy");
+				speak("theTrader", _("Grace me with your presence again, if you please."));
+				speak("waropt",_('Wait! Does this thing have to be called "Empty Scroll"?'),"unhappy");
 				if(getSpeaker("magopt")==getSpeaker("waropt"))then
-					speak("waropt",_("Warum nicht Stadtportal oder so was?"),"thoughtful");
-					speak("theTrader",_("Nun, sie wurden mir als Leere Schriftrollen verkauft, aber wie Ihr sie nennt, ist gaenzlich Euch ueberlassen."),"amused");
+					speak("waropt",_("Why not town portal or something like that?"),"thoughtful");
+					speak("theTrader",_("Well, they were sold to me as Empty Scrolls, but how you call them is entirely up to you."),"amused");
 				else
-					speak("waropt",_('Warum nicht einfach "Weg zur Stadt" oder so?'),"thoughtful");
+					speak("waropt",_('Why not "Way to the town" or something like that?'),"thoughtful");
 					setSpeakerEmotion("waropt","offended");
-					speak("magopt",_("Was soll das denn fuer ein Name sein??"),"pain");
+					speak("magopt",_("What kind of name is this supposed to be??"),"pain");
 					setSpeakerEmotion("waropt","normal");
-					speak("magopt",_("Wohl eher Stadtportal."),"aloof");
-					speak("theTrader",_("Aber aber, ehrenwerte Kunden!"),"sad");
-					speak("theTrader",_("Sie wurden mir nur als Leere Schriftrollen verkauft, aber wie ihr sie nennt ist voellig Euch ueberlassen!"),"normal");
+					speak("magopt",_("More like town portal."),"aloof");
+					speak("theTrader",_("Now, now, honorable customers!"),"sad");
+					speak("theTrader",_("They were sold to me as Empty Scrolls, but how you call them is entirely up to you!"),"normal");
 				end;
 
-				speak("waropt",_("Und wie benutzt man sie nun?"),"thoughtful");
-				speak("theTrader",_("Wie einen ganz normalen Trank."));
-				addQuestion(_("Den Guertel erklaeren?"))
-				addAnswer(_("Ja"),"explain_belt")
-				addAnswer(_("Nein"),"know_belt")
+				speak("waropt",_("And how do we use them?"),"thoughtful");
+				speak("theTrader",_("Like a common potion."));
+				addQuestion(_("Explain the belt?"))
+				addAnswer(_("Yes"),"explain_belt")
+				addAnswer(_("No"),"know_belt")
 			</Effect>
 		</Topic>
 		
 		<Topic name="explain_belt">
 			<Effect>
-				speak("theTrader",_("Nun, ueber Euer Inventar wisst Ihr ja Bescheid, richtig?"),"amused");
+				speak("theTrader",_("Well, you now about your inventory, right?"),"amused");
 				setSpeakerEmotion("waropt","offended");
-				speak("theTrader",_("Das dachte ich mir."),"amused");
-				speak("theTrader",_("Ganz unten habt Ihr die kleinen Gegenstaende, die in drei Reihen vorhanden sind."),"normal");
+				speak("theTrader",_("I thought so."),"amused");
+				speak("theTrader",_("At the bottom you have the small items, which take three rows of space."),"normal");
 				setSpeakerEmotion("waropt","normal")
-				speak("theTrader",_("Die oberste Reihe repraesentiert Euren Guertel."),"normal");
-				speak("theTrader",_("Wenn Ihr dort zum Beispiel einen Trank platziert, taucht er auch in der Guertelleiste unten auf."),"amused");
-				speak("theTrader",_("Das ist euch sicherlich schon aufgefallen?"),"thougtful");
-				speak("waropt",_("Allerdings."),"amused");
-				speak("waropt",_("Und lange Jahre auf dem Schlachtfeld haben dafuer gesorgt, dass ich benutzte Traenke sofort gegen einen gleichartigen Trank austausche, wenn ich einen benutze"),"grin");
-				speak("theTrader",_("Eine nützliche Faehigkeit."),"excited");
+				speak("theTrader",_("The top row represents your belt."),"normal");
+				speak("theTrader",_("If you place a potion there, it appears in the belt row."),"amused");
+				speak("theTrader",_("I'm sure you noticed, right?"),"thougtful");
+				speak("waropt",_("Indeed."),"amused");
+				speak("waropt",_("And long years on the battlefield caused me to change potions for similar potions immediately once I used one."),"grin");
+				speak("theTrader",_("A useful skill."),"excited");
 				if(getSpeaker("magopt")~=getSpeaker("waropt"))then
-					speak("magopt",_("Lernt die nicht jeder, der den Tod vermeiden will?"),"sneer");
+					speak("magopt",_("Doesn't everyone learn it who wants to avoid death?"),"sneer");
 					setSpeakerEmotion("waropt","angry");
-					speak("theTrader",_("Nun, wie de auch sei."),"normal");
+					speak("theTrader",_("Well, whatever."),"normal");
 				end;
 				setSpeakerEmotion("waropt","normal");
-				speak("theTrader",_("Wenn Ihr einen Trank verwenden wollt, koennt Ihr das tun, indem Ihr ihn im Inventar oder im Guertel mit rechts anklickt."));
-				speak("theTrader",_("Alternativ koennt ihr auch die Ziffer des Guertelfachs waehlen, in dem er liegt."),"normal");
-				speak("theTrader",_("Also 1 fuer den Trank ganz links, 2 fuer den zweiten von Links und so weiter."))
-				speak("theTrader",_("Das funktioniert fuer alle benutzbaren Gegenstaende gleich, also auch fuer die Schriftrollen."))
+				speak("theTrader",_("If you want to use a potion you can do so by clicking on it with the right mouse button in the inventory or the belt."));
+				speak("theTrader",_("Alternativly you can choose the number of the belt slot it is in."),"normal");
+				speak("theTrader",_("That is, 1 for the potion on the left, 2 for the second from the left and so on."))
+				speak("theTrader",_("This works for all usable items alike, so naturally for the scrolls, too."))
 				
 				changeTopic("finish_intro");
 			</Effect>
@@ -199,7 +199,7 @@
 		
 		<Topic name="know_belt">
 			<Effect>
-				speak("waropt",_("Oh! So einfach?"));
+				speak("waropt",_("Oh! It's that simple?"));
 				changeTopic("finish_intro");
 			</Effect>
 		</Topic>
@@ -207,7 +207,7 @@
 		<Topic name="finish_intro">
 			<Effect>
 				addUnitCommand(theTrader_tmp.theTrader,'walk','locTheTrader');			
-				speak("arcopt", _("Komischer Kauz."));
+				speak("arcopt", _("Oddball."));
 				executeInDialog("setCutsceneMode(false)");
 				local players = getPlayers();
 				local i,player;
@@ -253,8 +253,8 @@
 				return((theTrader.talkedInJB ~=true)and(region == "joringsbridge"));
 			</Condition>
 			<Effect>
-				speak("The Trader",_("Oh, nun, mir fiel auf, dass Ihr nach Norden wolltet, und ich dachte mir, dass es Euch vielleicht gelegen kaeme, mich in der Naehe zu wissen."),"happy");
-				speak("player",_("Hm, da habt Ihr auch wieder recht."),"thoughtful");
+				speak("The Trader",_("Well, I noticed you were headed north, and I thought it would be convenient for you to know I'm nearby."),"happy");
+				speak("player",_("Well, you are right, I guess."),"thoughtful");
 				theTrader.talkedInJB = true;
 			</Effect>
 		</Topic>
@@ -291,9 +291,9 @@
 				return((theTrader.talkedInDW ~=true)and(region == "dwarfenwall"));
 			</Condition>
 			<Effect>
-				speak("player",_("Wie schoen, dass Ihr auch aus den Hoelen entkommen seid."));
-				speak("The Trader",_("Das habe ich Euch zu verdanken. Darf ich Euch weiterhin meine Dienste anbieten?"),"happy");
-				speak("player",_("Aber sicher doch. Jetzt, wo ich endlich wieder einen vernünftigen Anker habe."),"amused");
+				speak("player",_("How nice to see you have escaped from the caves."));
+				speak("The Trader",_("No thanks to you. May I continue to offer you my services?"),"happy");
+				speak("player",_("Surely. Now that I finally have a sound anchor again."),"amused");
 				theTrader.talkedInDW = true;
 			</Effect>
 		</Topic>

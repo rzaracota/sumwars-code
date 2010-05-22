@@ -665,13 +665,6 @@ protected:
 	 */
 	virtual void gainLevel();
 
-//Private stuff
-private:
-
-
-
-protected:
-
 
 	/**
 	 * \fn virtual void performActionCritPart(Vector goal, WorldObject* goalobj)
@@ -680,6 +673,14 @@ protected:
 	 * \param goalobj Zeiger auf der Zielobjekt, ist NULL wenn kein Zielobjekt existiert
 	 */
 	virtual void performActionCritPart(Vector goal, WorldObject* goalobj);
+	
+	/**
+	 * \brief Swaps the content of the two inventory positions, equiping the second Item. 
+	 * \param pos1 Position of Item1. Must not be an equiped item
+	 * \param pos2 Position of Item2
+	 * This function requires, that Position1 is a not equiped item and pos2 is an equipment item slot
+	 */
+	void swapEquipItems(Equipement::Position pos1, Equipement::Position pos2);
 
 
 	/**

@@ -1,4 +1,4 @@
-<Quest name="Der Goblinvernichter" table_name="goblins">
+<Quest name="The goblinslayer" table_name="goblins">
 	
 	<Init>
 		goblins.nr =0;
@@ -9,10 +9,10 @@
 			return _("Quest finished");
 		end
 		if (goblins.nr >=10) then
-			return _("killed enough goblins");
+			return _("you killed enough goblins");
 		end
 		nr = (10-goblins.nr)
-		return gettext("'Kill '..nr..' more Goblins'");
+		return gettext("'kill '..nr..' more goblins'");
 	</Description>
 	
 	<NPC refname="peasant">
@@ -23,32 +23,32 @@
 			<Effect>
 				if (goblins.started) then
 					if (goblins.nr >=10) then
-						speak('player', _("I have killed them"))
-						speak('peasant',_("you are soo great"));
+						speak('player', _("I have killed them all."))
+						speak('peasant',_("Wow... you're a real hero, aren't ya?"));
 						changeTopic('finish_gob_quest');
 					else
-						speak('peasant',_("Go and kill some more..."));
+						speak('peasant',_("Leave me alone and kill some more goblins."));
 					end
 				else
-					speak('peasant',_("There are some stupid goblins around"));
-					speak('peasant',_("If you kill 10 of them you get a reward"));
+					speak('peasant',_("There are some stupid goblins pissing me off."));
+					speak('peasant',_("If you kill 10 of 'em, I'll give you a precious reward."));
 					speak('peasant',_("Interested?"));
-					addQuestion(_("Accept Quest?"));
+					addQuestion(_("Accept the quest?"));
 					addAnswer(_("Yes"),'start_gob_quest'); 
 					addAnswer(_("No"),'end');
 				end
 			</Effect>
 		</Topic>
 		
-		<Topic name="goblins_reward" start_option="Goblins (Belohnung)">
+		<Topic name="goblins_reward" start_option="Goblins (reward)">
 			<Condition>
 				if (goblins.finished == false) then return false end;
 				return (getPlayerPrivateVar(getSpeaker('player'),"goblinsreward2") ~= true)
 			</Condition>
 			<Effect>
-				speak('peasant',_("A second reward ?"));
-				speak('player', _("Yeah"),1000)
-				speak('peasant',_("I give you a goblin club"));
+				speak('peasant',_("You want a second reward?"));
+				speak('player', _("Of course!"),1000)
+				speak('peasant',_("Then I'll give you this goblin club. Be happy."));
 				setPlayerPrivateVar(getSpeaker('player'),"goblins.reward2",true);
 				changeTopic('goblins_reward2');
 			</Effect>
@@ -57,8 +57,8 @@
 		
 		<Topic name="start_gob_quest" >
 			<Effect>
-				speak('player', _("Nearly done"),1000)
-				speak('peasant',_("Have fun"));
+				speak('player', _("Nearly done."),1000)
+				speak('peasant',_("Have fun then."));
 				goblins.started = true;
 				goblins.nr =0;
 			</Effect>	

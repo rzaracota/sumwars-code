@@ -76,6 +76,7 @@ Document::Document()
 	m_modified =GUISHEET_MODIFIED | WINDOWS_MODIFIED;
 
 	m_temp_player = 0;
+	m_single_player = true;
 }
 
 void Document::startGame(bool server)
@@ -86,6 +87,12 @@ void Document::startGame(bool server)
 	int port = Options::getInstance()->getPort();
 	int max_players = Options::getInstance()->getMaxNumberPlayers();
 	std::string host = Options::getInstance()->getServerHost();
+	
+	if (m_single_player)
+	{
+		max_players = 1;
+	}
+	
 	World::createWorld(server,port, true,max_players);
 
 	if (server)
@@ -449,6 +456,13 @@ void Document::onLeftMouseButtonClick(Vector pos)
 	Player* pl = static_cast<Player*> (World::getWorld()->getLocalPlayer());
 	if (pl==0)
 		return;
+	
+	// Dialog is open, each klick is interpreted as *skip this text*
+	if (pl->getDialogueId() != 0)
+	{
+		onSkipDialogueTextClicked();
+		return;
+	}
 
 	// herstellen der Koordinaten im Koordinatensystem des Spiels
 
@@ -733,6 +747,7 @@ bool Document::checkSubwindowsAllowed()
 {
 	bool ok = true;
 	ok &= (getState() == RUNNING || getState() == SHUTDOWN_REQUEST);
+	ok &= (getGUIState()->m_shown_windows & SAVE_EXIT) == 0;
 	ok &= (getGUIState()->m_shown_windows & (QUESTIONBOX | TRADE)) == 0;
 	if (getLocalPlayer() != 0 && getLocalPlayer()->getRegion() !=0)
 	{
@@ -745,6 +760,7 @@ void Document::onButtonStartSinglePlayer()
 {
 	// Spieler ist selbst der Host
 	setServer(true);
+	m_single_player = true;
 
 	// Verbindung aufbauen
 	setState(Document::START_GAME);
@@ -771,6 +787,7 @@ void Document::onButtonStartHostGame()
 	DEBUG("start single player game");
 	// Spieler ist selbst der Host
 	setServer(true);
+	m_single_player = false;
 
 	// Verbindung aufbauen
 	setState(Document::START_GAME);
@@ -1401,6 +1418,7 @@ bool Document::onKeyPress(KeyCode key)
 		return true;
 
 	}
+	return false;
 }
 
 bool  Document::onKeyRelease(KeyCode key)
@@ -1426,7 +1444,11 @@ void Document::update(float time)
 	// Welt eine Zeitscheibe weiter laufen lassen
 	if (World::getWorld() != 0)
 	{
-		World::getWorld()->update(time);
+		// game is paused for single player if save and exit window is shown
+		if (!((getGUIState()->m_shown_windows & SAVE_EXIT) && m_single_player))
+		{
+			World::getWorld()->update(time);
+		}
 
 	}
 
@@ -1443,8 +1465,12 @@ void Document::update(float time)
 			break;
 
 		case LOAD_SAVEGAME:
-			status = World::getWorld()->getNetwork()->getSlotStatus();
-			if (m_server || World::getWorld()->getNetwork()->getSlotStatus() == NET_CONNECTED)
+			status = NET_OK;
+			if (!m_server)
+			{
+				status = World::getWorld()->getNetwork()->getSlotStatus();
+			}
+			if (m_server || status == NET_CONNECTED)
 			{
 				loadSavegame();
 			}
@@ -1466,9 +1492,12 @@ void Document::update(float time)
 				DEBUGX("saving");
 			}
 
-			if (World::getWorld()->getNetwork()->getSlotStatus() == NET_TIMEOUT)
+			if (!m_server)
 			{
-				setState(SHUTDOWN_REQUEST);
+				if (World::getWorld()->getNetwork()->getSlotStatus() == NET_TIMEOUT)
+				{
+					setState(SHUTDOWN_REQUEST);
+				}
 			}
 
 			break;

@@ -2,13 +2,13 @@
 # Copyright (C) 2009 THE sumwars'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the sumwars package.
 # Michael <michael@localhost.localdomain>, 2009.
-#
+# 
 # kalimgard <kalimgard@users.sourceforge.net>, 2010.
 msgid ""
 msgstr ""
 "Project-Id-Version: sumwars 0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-04 17:08+0200\n"
+"POT-Creation-Date: 2010-05-20 22:05+0200\n"
 "PO-Revision-Date: 2010-05-10 \n"
 "Last-Translator: kalimgard <kalimgard@users.sourceforge.net>\n"
 "Language-Team: german <de@sumwars>\n"
@@ -109,15 +109,15 @@ msgstr "Chance für kritischen Treffer"
 msgid "which Topic"
 msgstr "welches Thema"
 
-#: ../src/core/document.cpp:1187 ../src/core/item.cpp:654
+#: ../src/core/document.cpp:1172 ../src/core/item.cpp:654
 msgid "Required level"
 msgstr "Benötigtes Level"
 
-#: ../src/core/document.cpp:1197
+#: ../src/core/document.cpp:1182
 msgid "Timer"
 msgstr "Timer"
 
-#: ../src/core/document.cpp:1198
+#: ../src/core/document.cpp:1183
 msgid "Cast delay"
 msgstr "Verzögerung"
 
@@ -190,12 +190,12 @@ msgid " max. "
 msgstr "max. "
 
 #: ../src/gui/charcreate.cpp:120 ../src/gui/charinfo.cpp:849
-#: ../src/gui/partyinfo.cpp:450 ../src/gui/savegamelist.cpp:177
+#: ../src/gui/partyinfo.cpp:450 ../src/gui/savegamelist.cpp:182
 msgid "Name"
 msgstr "Name"
 
 #: ../src/gui/charcreate.cpp:123 ../src/gui/charinfo.cpp:852
-#: ../src/gui/savegamelist.cpp:178
+#: ../src/gui/savegamelist.cpp:183
 msgid "Class"
 msgstr "Klasse"
 
@@ -307,7 +307,7 @@ msgstr "Optionen"
 msgid "Save & Exit"
 msgstr "Speichern & Ende"
 
-#: ../src/gui/controlpanel.cpp:345 ../src/gui/optionswindow.cpp:206
+#: ../src/gui/controlpanel.cpp:345 ../src/gui/optionswindow.cpp:207
 msgid "Inventory"
 msgstr "Inventar"
 
@@ -315,7 +315,7 @@ msgstr "Inventar"
 msgid "Character"
 msgstr "Charakter Bildschirm"
 
-#: ../src/gui/controlpanel.cpp:351 ../src/gui/optionswindow.cpp:212
+#: ../src/gui/controlpanel.cpp:351 ../src/gui/optionswindow.cpp:213
 msgid "Skilltree"
 msgstr "Fähigkeiten"
 
@@ -323,7 +323,7 @@ msgstr "Fähigkeiten"
 msgid "Party"
 msgstr "Partei"
 
-#: ../src/gui/controlpanel.cpp:357 ../src/gui/optionswindow.cpp:221
+#: ../src/gui/controlpanel.cpp:357 ../src/gui/optionswindow.cpp:222
 msgid "Quests"
 msgstr "Quests"
 
@@ -355,9 +355,9 @@ msgstr "Credits"
 msgid "Quit"
 msgstr "Beenden"
 
-#: ../src/gui/messageboxes.cpp:53 ../src/gui/networkwindows.cpp:93
-#: ../src/gui/networkwindows.cpp:218 ../src/gui/optionswindow.cpp:242
-#: ../src/gui/savegamelist.cpp:168 ../src/gui/tradewindow.cpp:256
+#: ../src/gui/messageboxes.cpp:53 ../src/gui/networkwindows.cpp:95
+#: ../src/gui/networkwindows.cpp:223 ../src/gui/optionswindow.cpp:243
+#: ../src/gui/savegamelist.cpp:173 ../src/gui/tradewindow.cpp:256
 msgid "Ok"
 msgstr "Ok"
 
@@ -369,67 +369,67 @@ msgstr "Abbrechen"
 msgid "Save and Exit?"
 msgstr "Speichern & Ende"
 
-#: ../src/gui/networkwindows.cpp:96
+#: ../src/gui/networkwindows.cpp:98
 msgid "Max. number of players"
 msgstr "Max. Anzahl an Spielern"
 
-#: ../src/gui/networkwindows.cpp:99 ../src/gui/networkwindows.cpp:224
+#: ../src/gui/networkwindows.cpp:101 ../src/gui/networkwindows.cpp:229
 msgid "Port"
 msgstr "Port"
 
-#: ../src/gui/networkwindows.cpp:221
+#: ../src/gui/networkwindows.cpp:226
 msgid "Host"
 msgstr "Host"
 
-#: ../src/gui/optionswindow.cpp:197
+#: ../src/gui/optionswindow.cpp:198
 msgid "Shortkeys"
 msgstr "Shortkeys"
 
-#: ../src/gui/optionswindow.cpp:199
+#: ../src/gui/optionswindow.cpp:200
 msgid "Audio"
 msgstr "Audio"
 
-#: ../src/gui/optionswindow.cpp:201
+#: ../src/gui/optionswindow.cpp:202
 msgid "Graphic"
 msgstr "Grafik"
 
-#: ../src/gui/optionswindow.cpp:203
+#: ../src/gui/optionswindow.cpp:204
 msgid "Misc"
 msgstr "Misc"
 
-#: ../src/gui/optionswindow.cpp:209
+#: ../src/gui/optionswindow.cpp:210
 msgid "Character screen"
 msgstr "Charakter Bildschirm"
 
-#: ../src/gui/optionswindow.cpp:215
+#: ../src/gui/optionswindow.cpp:216
 msgid "Party screen"
 msgstr "Partei Bildschirm"
 
-#: ../src/gui/optionswindow.cpp:218
+#: ../src/gui/optionswindow.cpp:219
 msgid "Chatbox"
 msgstr "Chat Fenster"
 
-#: ../src/gui/optionswindow.cpp:224
+#: ../src/gui/optionswindow.cpp:225
 msgid "Minimap"
 msgstr "Minikarte"
 
-#: ../src/gui/optionswindow.cpp:227
+#: ../src/gui/optionswindow.cpp:228
 msgid "Swap equipement"
 msgstr "Ausrüstung wechseln"
 
-#: ../src/gui/optionswindow.cpp:230
+#: ../src/gui/optionswindow.cpp:231
 msgid "Item Labels"
 msgstr "Gegenstands Beschreibungen"
 
-#: ../src/gui/optionswindow.cpp:233
+#: ../src/gui/optionswindow.cpp:234
 msgid "Sound"
 msgstr "Sound"
 
-#: ../src/gui/optionswindow.cpp:236
+#: ../src/gui/optionswindow.cpp:237
 msgid "Music"
 msgstr "Musik"
 
-#: ../src/gui/optionswindow.cpp:239
+#: ../src/gui/optionswindow.cpp:240
 msgid "Language"
 msgstr "Sprache"
 
@@ -445,1030 +445,22 @@ msgstr "abgeschlossen"
 msgid "failed"
 msgstr "gescheitert"
 
-#: ../src/gui/savegamelist.cpp:165
+#: ../src/gui/savegamelist.cpp:170
 msgid "Savegame"
 msgstr "Gespeichertes Spiel"
 
-#: ../src/gui/savegamelist.cpp:171
+#: ../src/gui/savegamelist.cpp:176
 msgid "Create Character"
 msgstr "Charakter erstellen"
 
-#: ../src/gui/savegamelist.cpp:174
+#: ../src/gui/savegamelist.cpp:179
 msgid "Delete Character"
 msgstr "Charakter löschen"
 
-#: ../src/gui/savegamelist.cpp:179
+#: ../src/gui/savegamelist.cpp:184
 msgid "Level"
 msgstr "Level"
 
 #: ../src/gui/worldmap.cpp:140
 msgid "Town Portal"
 msgstr "Stadtportal"
-
-#~ msgid "speak with someone"
-#~ msgstr "mit jemandem sprechen"
-
-#~ msgid "Basic melee attack"
-#~ msgstr "Grundlegender Nahkampfangriff"
-
-#~ msgid "Ranged attack"
-#~ msgstr "Fernangriff"
-
-#~ msgid "Basic ranged attack"
-#~ msgstr "Grundlegender Fernkampfangriff"
-
-#~ msgid "Magic attack"
-#~ msgstr "Magischer Angriff"
-
-#~ msgid "Basic magic attack"
-#~ msgstr "Grundlegender magischer Angriff"
-
-#~ msgid "Holy attack"
-#~ msgstr "Heiliger Angriff"
-
-#~ msgid "Basic holy melee attack"
-#~ msgstr "Grundlegender heiliger Nahkampfangriff"
-
-#~ msgid "Bash"
-#~ msgstr "Harter Schlag"
-
-#~ msgid "Attacks one enemy for serious damage."
-#~ msgstr "Verursacht schweren Schaden bei einem Gegner."
-
-#~ msgid "Hammer blow"
-#~ msgstr "Hammerschlag"
-
-#~ msgid ""
-#~ "Attacks one enemy with a brutal blow and damages nearby enemies as well."
-#~ msgstr ""
-#~ "Greift einen Gegner mit einem brutalen Hieb an und schädigt auch alle um "
-#~ "das Ziel stehenden Gegner."
-
-#~ msgid "Sweeping blow"
-#~ msgstr "Rundumschlag"
-
-#~ msgid "Attacks every enemy in weapon range with slightly reduced damage."
-#~ msgstr ""
-#~ "Greift jeden Gegner in Waffenreichweite mit leicht reduziertem Schaden an."
-
-#~ msgid "Whirl blow"
-#~ msgstr "Wirbelschlag"
-
-#~ msgid "Attacks every enemy in weapon range."
-#~ msgstr "Greift alle Gegner in Waffenreichweite an."
-
-#~ msgid "Smash blow"
-#~ msgstr "Schmetterschlag"
-
-#~ msgid "Attacks an enemy with an unblockable, armor piercing blow."
-#~ msgstr ""
-#~ "Greift einen Gegner mit einem unblockbaren, jede Rüstung durchdringenden "
-#~ "Schlag an."
-
-#~ msgid "Silencer"
-#~ msgstr "Grabesstille"
-
-#~ msgid "Attacks an enemy with a chance to inflict silence."
-#~ msgstr "Greift einen Gegner an und verursacht eventuell Stumm."
-
-#~ msgid "Charge"
-#~ msgstr "Sturmangriff"
-
-#~ msgid ""
-#~ "Launches an assault at an enemy with increasing speed. The faster the "
-#~ "warrior is, the more damage a charge inflicts."
-#~ msgstr ""
-#~ "Startet einen Angriff mit zunehmender Geschwindigkeit auf einen Gegner. "
-#~ "Je schneller der Krieger ist, desto mehr Schaden verursacht ein "
-#~ "Sturmangriff."
-
-#~ msgid "Charge scythe"
-#~ msgstr "Sturmsense"
-
-#~ msgid "Launches an even stronger charge attack, that may inflict stun."
-#~ msgstr ""
-#~ "Startet einen noch stärkeren Sturmangriff, der das Opfer lähmen kann."
-
-#~ msgid "Taunt"
-#~ msgstr "Provozieren"
-
-#~ msgid "Causes surrounding monsters to attack the warrior more likely."
-#~ msgstr ""
-#~ "Verleitet umstehende Monster dazu, den Krieger mit höherer "
-#~ "Wahrscheinlichkeit anzugreifen."
-
-#~ msgid "Defiances"
-#~ msgstr "Trotz"
-
-#~ msgid ""
-#~ "Nearby monsters will attack the warrior, if they are able to. The "
-#~ "warriors defence is increased."
-#~ msgstr ""
-#~ "Umstehende Monster werden den Krieger angreifen, wenn sie können. Die "
-#~ "Verteidigung des Kriegers steigt."
-
-#~ msgid "Fire and sword"
-#~ msgstr "Feuer und Schwert"
-
-#~ msgid ""
-#~ "The warrior calls the spirits of fire upon his weapon, causing it to deal "
-#~ "firedamage. The damage depends on the warriors spellpower."
-#~ msgstr ""
-#~ "Der Krieger ruft einen Feuergeist in seine Waffe, so dass sie "
-#~ "Feuerschaden verursacht. Der Schaden hängt von der Zauberkraft des "
-#~ "Kriegers ab."
-
-#~ msgid "Pact of flames"
-#~ msgstr "Flammenpakt"
-
-#~ msgid ""
-#~ "The warrior calls upon the fires of hell, causing his weapon to deal "
-#~ "firedamage for a significant time. His enemies might catch fire when hit."
-#~ msgstr ""
-#~ "Der Krieger ruft das Höllenfeuer an, was dazu führt, dass seine Waffe für "
-#~ "längere Zeit Feuerschaden verursacht. Seine Gegner können Feuer fangen, "
-#~ "wenn sie getroffen werden."
-
-#~ msgid "Flame armor"
-#~ msgstr "Flammenrüstung"
-
-#~ msgid ""
-#~ "The warrior surrounds himself with angry spirits of fire, who will burn "
-#~ "his enemies to ashes, if they dare to come to close."
-#~ msgstr ""
-#~ "Der Krieger umgibt sich mit zornigen Feuergeistern, die seine Gegner zu "
-#~ "Asche verbrennen werden, sollten sie zu nahe kommen."
-
-#~ msgid "Battlecry"
-#~ msgstr "Kampfschrei"
-
-#~ msgid ""
-#~ "The warrior releases a mighty cry that causes his enemies to lose "
-#~ "concentration, ultimatly reducing their defence."
-#~ msgstr ""
-#~ "Der Krieger stößt einen mächtigen Schrei aus, der seine Gegner ihre "
-#~ "Konzentration verlieren lässt, wodurch ihre Verteidigung reduziert wird."
-
-#~ msgid "Warcry"
-#~ msgstr "Kriegsschrei"
-
-#~ msgid ""
-#~ "The battle hardened warriors scream leaves his enemies defence wide open, "
-#~ "sometimes confusing them as well."
-#~ msgstr ""
-#~ "Der Schrei des kampfgestählte Kriegers lässt die Verteidigung seiner "
-#~ "Gegner weit offen und verwirrt sie manchmal."
-
-#~ msgid "Regeneration"
-#~ msgstr "Regeneration"
-
-#~ msgid ""
-#~ "The warrior regains up to 50 percent hitpoints of his total hitpoints "
-#~ "through the sheer power of his will."
-#~ msgstr ""
-#~ "Der Krieger erlangt durch schiere Willenskraft bis zu 50 Prozent seiner "
-#~ "Lebenspunkte wieder."
-
-#~ msgid "Barbarian anger"
-#~ msgstr "Barbarische Wut"
-
-#~ msgid ""
-#~ "The warrior sets himself in the state of berserk, attacking his enemies "
-#~ "with vicious blows, while completely neglecting his defence."
-#~ msgstr ""
-#~ "Der Krieger versetzt sich selbst in einen Berserkerzustand und greift "
-#~ "seine Feinde mit bösartigen Hieben an, während er seine Verteidigung "
-#~ "völlig ignoriert."
-
-#~ msgid "barbarian power"
-#~ msgstr "Barbarische Kraft"
-
-#~ msgid ""
-#~ "The warrior becomes even more bloodthirsty, launching at his enemies with "
-#~ "increased attackspeed and damage in a berserk state. Even while "
-#~ "neglecting his defence, the impact is not as big as with the barbarian "
-#~ "anger."
-#~ msgstr ""
-#~ "Der Krieger wird noch blutdurstiger und wirft sich seinen Gegnern mit "
-#~ "erhöhtem Schaden und gesteigerter Angriffsgeschwindigkeit entgegen. "
-#~ "Selbst während er seine Verteidigung vernachlässigt ist er nicht so "
-#~ "anfällig wie bei der Barbarischen Wut."
-
-#~ msgid "Perseverance"
-#~ msgstr "Beharrlichkeit"
-
-#~ msgid ""
-#~ "The warriors defence increases proportional to the cuts and bruises he "
-#~ "receives in combat. The more serious the wounds, the more difficult he is "
-#~ "to kill."
-#~ msgstr ""
-#~ "Die Verteidigung des Kriegers steigt abhängig von den Schnitten und "
-#~ "Quetschungen, die er im Kampf erhält. Je ernsthafter die Wunden, desto "
-#~ "schwerer ist er zu töten."
-
-#~ msgid ""
-#~ "The warriors mastery of shields and weapons allows him to block damage at "
-#~ "an increased rate."
-#~ msgstr ""
-#~ "Die Meisterschaft des Kriegers mit Schilden und Waffen erlaubt es ihm, "
-#~ "Schaden mit erhöhter Wahrscheinlichkeit zu blocken."
-
-#~ msgid "Weaponmaster"
-#~ msgstr "Waffenmeister"
-
-#~ msgid ""
-#~ "The warriors mastery of weapons increases the damage of his basic attacks "
-#~ "by 20%."
-#~ msgstr ""
-#~ "Die Meisterschaft des Kriegers mit Waffen aller Art steigert den Schaden "
-#~ "seines Grundangriffs um 20 Prozent."
-
-#~ msgid "Monster hunter"
-#~ msgstr "Monsterjäger"
-
-#~ msgid ""
-#~ "For each monster the warrior kills, his strength increases for a short "
-#~ "amount of time."
-#~ msgstr ""
-#~ "Für jedes Monster, dass der Krieger tötet, steigt seine Stärke für eine "
-#~ "Zeit"
-
-#~ msgid "Monster slayer"
-#~ msgstr "Monsterschlächter"
-
-#~ msgid ""
-#~ "The warrior has become the worst nightmare of monsters, with every one of "
-#~ "them falling at his feet increasing his strength and attackspeed for a "
-#~ "short amount of time."
-#~ msgstr ""
-#~ "Der Krieger ist der schlimmste Alptraum der Monster geworden. Jedes von "
-#~ "ihnen, das durch ihn fällt, steigert seine Stärke und "
-#~ "Angriffsgeschwindigkeit für kurze Zeit."
-
-#~ msgid "Warmaster"
-#~ msgstr "Kriegsmeister"
-
-#~ msgid ""
-#~ "The warrior has become used to the ways of the battlefield to a point, "
-#~ "where he can regenerate his abilities faster than normal."
-#~ msgstr ""
-#~ "Der Krieger hat sich so an das Schlachtfeld gewöhnt, dass er seine "
-#~ "Fähigkeiten schneller als normal regenerieren kann."
-
-#~ msgid "Firebolt"
-#~ msgstr "Feuerblitz"
-
-#~ msgid ""
-#~ "The mage unleashes a small bolt of fire, that damages a single enemy."
-#~ msgstr ""
-#~ "Der Magier entfesselt einen kleinen Feuerblitz, der einen Feind schädigt."
-
-#~ msgid "Fireblow"
-#~ msgstr "Feuerschlag"
-
-#~ msgid "The mage casts a strong bolt of fire, that damages one enemy."
-#~ msgstr ""
-#~ "Der Magier zaubert eine starken Feuerblitz, der einen Gegner schädigt."
-
-#~ msgid "Flame wave"
-#~ msgstr "Feuerwelle"
-
-#~ msgid ""
-#~ "The mage conjures a wave of flames, that damages enemies in a circle "
-#~ "around him."
-#~ msgstr ""
-#~ "Der Magier beschwört eine Welle aus Feuer, die Gegner im Umkreis schädigt."
-
-#~ msgid "Firestorm"
-#~ msgstr "Feuersturm"
-
-#~ msgid ""
-#~ "The mage conjures a deadly wave of fire, that burns every enemy in a "
-#~ "circle around him."
-#~ msgstr ""
-#~ "Der Magier beschwört eine tödliche Welle aus Feuer, die jeden Gegner im "
-#~ "Umkreis verbrennt."
-
-#~ msgid "Fireball"
-#~ msgstr "Feuerball"
-
-#~ msgid ""
-#~ "The mage casts a bolt of fire, that explodes upon hitting an enemy. Other "
-#~ "enemies nearby the victim are also caught in the explosion."
-#~ msgstr ""
-#~ "Der Magier zaubert einen Feuerblitz, der beim Treffen eines Gegners "
-#~ "explodiert. Andere Gegner nahe am Opfer werden ebenfalls in dieser "
-#~ "Explosion gefangen."
-
-#~ msgid "Infernoball"
-#~ msgstr "Infernoball"
-
-#~ msgid "The mage casts an even more powerful fireball."
-#~ msgstr "Der Magier zaubert einen noch mächtigeren Feuerball."
-
-#~ msgid "Firecolumn"
-#~ msgstr "Feuersäule"
-
-#~ msgid ""
-#~ "The mage conjurs a column made of hellfire, that will stay for 5 seconds "
-#~ "and turn every enemy stupid enough to stay in there to ashes."
-#~ msgstr ""
-#~ "Der Magier ruft eine Säule aus Höllenfeuer herbei, die 5 Sekunden besteht "
-#~ "und jeden Gegner des Magiers, der dumm genug ist, hineinzulaufen, zu "
-#~ "Asche werden lässt."
-
-#~ msgid "Ignite"
-#~ msgstr "Entzünden"
-
-#~ msgid ""
-#~ "The mage embraces the heat of fire, so that victims of his firespells "
-#~ "will likely suffer burn."
-#~ msgstr ""
-#~ "Der Magier gibt sich der Hitze des Feuers hin, so dass Opfer seiner "
-#~ "Feuerzauber oft verbrennungen erleiden."
-
-#~ msgid "Icicle"
-#~ msgstr "Eiszapfen"
-
-#~ msgid "The mage casts a shard of pure ice, that damages his foes."
-#~ msgstr ""
-#~ "Der Magier zaubert eine Scherbe aus purem Eis, die seine Feinde schädigt."
-
-#~ msgid "Spear of ice"
-#~ msgstr "Eisspeer"
-
-#~ msgid "The mage attacks one enemy with a powerful spear of magical ice."
-#~ msgstr ""
-#~ "Der Magier greift seine Gegner mit einem mächtigen Speer aus magischem "
-#~ "Eis an."
-
-#~ msgid "Snow storm"
-#~ msgstr "Schneesturm"
-
-#~ msgid "The mage calls upon a snow storm to kill every enemy in a circle."
-#~ msgstr ""
-#~ "Der Magier ruft einen Schneesturm, um alle Gegner in einem Kreis zu töten."
-
-#~ msgid "Blizzard"
-#~ msgstr "Blizzard"
-
-#~ msgid ""
-#~ "The mage summons a leathal cold blizzard that freezes every enemy caught "
-#~ "in it to death."
-#~ msgstr ""
-#~ "Der Magier ruft einen tödlich kalten Blizzard herbei, der jeden Gegner, "
-#~ "der in ihm gefangen ist, zu tode friert."
-
-#~ msgid "Ice ring"
-#~ msgstr "Eisring"
-
-#~ msgid ""
-#~ "The mage casts a ring of ice around himself that will damage enemies in "
-#~ "range."
-#~ msgstr ""
-#~ "Der Mager zaubert eine Ring aus Eis um sich, der Gegner in Reichweite "
-#~ "schädigt."
-
-#~ msgid "Frost ring"
-#~ msgstr "Frostring"
-
-#~ msgid "The mage calls upon a deadlier version of the icering."
-#~ msgstr "Der Magier ruft eine tödlichere Version des Eisrings herbei."
-
-#~ msgid "Freeze"
-#~ msgstr "Einfrieren"
-
-#~ msgid ""
-#~ "The mage catches an enemy in a block of pure ice, instantly sealing his "
-#~ "movements."
-#~ msgstr ""
-#~ "Der Magier fängt einen Gegner in einem Block aus purem Eis, was sofort "
-#~ "dessen Bewegungnen blockiert."
-
-#~ msgid "Chilling cold"
-#~ msgstr "Klirrende Kälte"
-
-#~ msgid ""
-#~ "The mage has understood everything about ice and snow, allowing him to "
-#~ "increase the effectiveness of his icespells by 20%."
-#~ msgstr ""
-#~ "Der Magier hat alles über Eis und Schnee verstanden, was die Effektivität "
-#~ "seiner Eissprüche um 20 Prozent steigert."
-
-#~ msgid "Lightning"
-#~ msgstr "Blitz"
-
-#~ msgid "The mage summons a lightning to attack one foe."
-#~ msgstr "Der Magier ruft einen Blitz, um einen Feind anzugreifen."
-
-#~ msgid "Lightning strike"
-#~ msgstr "Blitzschlag"
-
-#~ msgid "The mage calls upon a mighty lightning to kill an enemy."
-#~ msgstr "Der Magier ruft einen mächtigen Blitz, um seine Gegner zu töten."
-
-#~ msgid "Thunderstorm"
-#~ msgstr "Gewitter"
-
-#~ msgid ""
-#~ "The mage summons a thunderstorm that will assault enemies in its range "
-#~ "with lightnings."
-#~ msgstr ""
-#~ "Der Magier beschwört ein Gewitter, das Gegner in seiner Reichweite mit "
-#~ "Blitzen angreift."
-
-#~ msgid "Tempest"
-#~ msgstr "Blitzgewitter"
-
-#~ msgid ""
-#~ "The mage summons a ferocious tempest that bombards enemies in its wake "
-#~ "with lightnings."
-#~ msgstr ""
-#~ "Der Magier ruft ein grausames Gewitter, dass alle Gegner in seinem Weg "
-#~ "mit Blitzen bombardiert."
-
-#~ msgid "Chainlightning"
-#~ msgstr "Kettenblitz"
-
-#~ msgid ""
-#~ "The mage unleashes a ball of lightning, that may jump from one enemy to "
-#~ "another. It hits a maximum of five enemies and the damage is reduced "
-#~ "everytime it jumps."
-#~ msgstr ""
-#~ "Der Magier entfesselt eine Kugel aus Blitzen, die von Gegner zu Gegner "
-#~ "springt. Sie trifft maximal fünf Gegner und verliert mit jedem Sprung an "
-#~ "Schaden."
-
-#~ msgid "Ball lightning"
-#~ msgstr "Kugelblitz"
-
-#~ msgid ""
-#~ "The mage unleashes a mighty ball lightning, that can jump over to nearby "
-#~ "enemies. A maximum of nine enemies is hit and the damage is reduced with "
-#~ "every jump."
-#~ msgstr ""
-#~ "Der Magier entfesselt einen mächtigen Kugelblitz, der auf nahestehende "
-#~ "Gegner überspringt. Maximal neun Gegner werden getroffen und der "
-#~ "Kugelblitz verliert mit jedem Sprung an Schaden."
-
-#~ msgid "Static shield"
-#~ msgstr "Statikschild"
-
-#~ msgid ""
-#~ "The mage surrounds himself with an armor of lightning, that will stun and "
-#~ "damage enemies who are bolt enough to attack in close combat."
-#~ msgstr ""
-#~ "Der Magier umgibt sich mit einer Rüstung aus Blitzen, die Gegner lähmt, "
-#~ "welche so mutig sind, ihn anzugreifen."
-
-#~ msgid "Ionisation"
-#~ msgstr "Ionisation"
-
-#~ msgid ""
-#~ "The mage has become one with the storm, leading to 20 percent extra "
-#~ "damage from his lightning spells."
-#~ msgstr ""
-#~ "Der Magier ist eins mit dem Sturm geworden, wodurch seine Blitzzauber 20 "
-#~ "Prozent mehr Schaden verursachen."
-
-#~ msgid "Tripple Shot"
-#~ msgstr "Dreifachschuss"
-
-#~ msgid ""
-#~ "The archers mastery of ranged weapons allows him to shoot three "
-#~ "projectiles in a short amount of time."
-#~ msgstr ""
-#~ "Die Meisterschaft des Bogenschützen mit Fernwaffen erlaubt es ihm, drei "
-#~ "Geschosse auf einmal abzufeuern."
-
-#~ msgid "Deadly Swarm"
-#~ msgstr "Todesschwarm"
-
-#~ msgid ""
-#~ "The archer shoots four consecutive projectiles that are imbued with "
-#~ "vengeful spirits. They will pursue the enemy, even if he tries to run."
-#~ msgstr ""
-#~ "Der Bogenschütze feuert drei aufeinander folgende Geschosse ab, die von "
-#~ "Rachegeistern besessen sind. Sie werden den Gegner verfolgen, selbst wenn "
-#~ "er davon zu laufen versucht."
-
-#~ msgid "Fanshot"
-#~ msgstr "Fächerschuss"
-
-#~ msgid ""
-#~ "The archer shoots five projectiles at a time, aimed at enemies in front "
-#~ "of him. The damage dealt by each projectile suffers a little."
-#~ msgstr ""
-#~ "Der Bogenschütze feuert fünf Projektile gleichzeitig ab, die auf Gegner "
-#~ "vor ihm gerichtet sind. Der Schaden der einzelnen Geschosse leidet ein "
-#~ "wenig unter diesem Angriff."
-
-#~ msgid "Iron Hail"
-#~ msgstr "Eisenhagel"
-
-#~ msgid ""
-#~ "The archer handles his weapons with elflike precision, attacking up to "
-#~ "seven enemys in front of him. The damage dealt by each projectile suffers "
-#~ "a little."
-#~ msgstr ""
-#~ "Der Bogenschütze handhabt seine Waffe mit elfengleicher Präzision und "
-#~ "greift bis zu sieben Ziele vor sich an. Der Schaden jedes einzelnen "
-#~ "Geschosses leidet ein wenig unter diesem Angriff."
-
-#~ msgid "Elfwanderer"
-#~ msgstr "Elfenwanderer"
-
-#~ msgid ""
-#~ "The archer unleashes a mighty shot that pierces right through an enemy "
-#~ "and might hit another enemy behind him."
-#~ msgstr ""
-#~ "Der Bogenschütze feuert einen mächtigen Schuss, der einen Gegner "
-#~ "durchschlägt und weitere Gegner hinter ihm treffen kann."
-
-#~ msgid "Weak Spot"
-#~ msgstr "Schwachpunkt"
-
-#~ msgid ""
-#~ "The archer attacks a weak point of his enemy, causing the victim to go "
-#~ "berserk."
-#~ msgstr ""
-#~ "Der Bogenschütze attackiert einen Schwachpunkt seines Gegners und treibt "
-#~ "sein Opfer so in einen Berserkerrausch."
-
-#~ msgid "Blind Rage"
-#~ msgstr "Blinde Wut"
-
-#~ msgid ""
-#~ "The archer attacks the enemies eyes, causing him to go berserk, but be "
-#~ "blinded at the same time."
-#~ msgstr ""
-#~ "Der Bogenschütze greift die Augen seines Gegners an, wodurch er zwar zum "
-#~ "Berserker wird, aber gleichzeitig geblendet ist."
-
-#~ msgid "Vacuum"
-#~ msgstr "Vakuum"
-
-#~ msgid ""
-#~ "The archer attacks with an arrow imbued with a weaker windspirit, that "
-#~ "causes an enemy hit by it to be stunned."
-#~ msgstr ""
-#~ "Der Bogenschütze greift mit einem von einem schwachen Windgeist "
-#~ "besessenen Pfeil an, der getroffene Gegner lähmt."
-
-#~ msgid "Deadly Roulette"
-#~ msgstr "Todesroulette"
-
-#~ msgid ""
-#~ "The projectile has a fifty percent probability to attack another target, "
-#~ "if it hits someone. Be careful not to stand in its way, for it "
-#~ "distinguishes not between friend and foe."
-#~ msgstr ""
-#~ "Dieses Geschoss hat eine 50-prozentige Chance, ein weiteres Ziel "
-#~ "anzugreifen, wenn es jemanden trifft. Man sollte Vorsicht walten lassen, "
-#~ "da es nicht zwischen Freund und Feind unterscheidet."
-
-#~ msgid "Explosion Arrow"
-#~ msgstr "Sprengpfeil"
-
-#~ msgid ""
-#~ "The projectile is imbued with the power of a weak firespirit. It will "
-#~ "deal damage in a small area, if it hits."
-#~ msgstr ""
-#~ "Dieses Geschoss ist durchtränkt von der Macht eines schwächeren "
-#~ "Feuergeistes. Es wird beim auftreffen Schaden in einem kleinen Gebiet "
-#~ "verursachen."
-
-#~ msgid "Blast Cascade"
-#~ msgstr "Sprengkaskade"
-
-#~ msgid ""
-#~ "The projectile is imbued with the power of a firespirit. It will explode "
-#~ "with areadamage on hitting. Additionally four more explosions will go of "
-#~ "in every direction."
-#~ msgstr ""
-#~ "Dieses Geschoss ist durchtränkt von der Macht eines Feuergeistes. Es wird "
-#~ "beim auftreffen Flächenschaden verursachen. Zusätzlich werden in allen "
-#~ "vier Himmelsrichtungen weitere Explosionen ausgelöst."
-
-#~ msgid "Snipe"
-#~ msgstr "Zielschuss"
-
-#~ msgid ""
-#~ "The archers deadly precision causes his shots to deal more damage than "
-#~ "normal."
-#~ msgstr ""
-#~ "Die tödliche Präzision des Bogenschützen lässt ihn mehr Schaden "
-#~ "verursachen."
-
-#~ msgid "Bow Spirit"
-#~ msgstr "Bogenseele"
-
-#~ msgid ""
-#~ "The archer becomes one with his weapon, dealing more damage over a longer "
-#~ "time. Additionally his critical strike chance is increased. This effect "
-#~ "stacks with Elfeyes."
-#~ msgstr ""
-#~ "Der Bogenschütze wird ein mit seiner Waffe und verursacht mehr Schaden "
-#~ "für einen längeren Zeitraum. Zusätzlich steigt seine Chance auf einen "
-#~ "kritischen Treffer. Dieser Effekt ist kummulativ mit Elfenaugen."
-
-#~ msgid "Ice Arrows"
-#~ msgstr "Eispfeile"
-
-#~ msgid ""
-#~ "The archer calls upon the spirits of ice to imbue his projectiles with "
-#~ "icedamage."
-#~ msgstr ""
-#~ "Der Bogenschütze ruft die Geister des Eises an, um seine Geschosse mit "
-#~ "Eisschaden auszustatten."
-
-#~ msgid "Frost Arrows"
-#~ msgstr "Frostpfeile"
-
-#~ msgid ""
-#~ "The archer summons a spirit of ice into his weapon, causing his shots to "
-#~ "deal icedamage over a greater amount of time. There is a chance that his "
-#~ "enemies will be frozen solid if they are hit."
-#~ msgstr ""
-#~ "Der Bogenschütze ruft einen Eisgeist in seine Waffe, was seinen Schüssen "
-#~ "über einen längeren Zeitraum Eisschaden verleiht. Getroffene Gegner "
-#~ "werden eventuell gefroren."
-
-#~ msgid "Wind Arrows"
-#~ msgstr "Windpfeile"
-
-#~ msgid ""
-#~ "The archer has been grantet the power to imbue his projectiles with "
-#~ "winddamage by the spirits of wind."
-#~ msgstr ""
-#~ "Dem Bogenschützen wurde von den Windgeistern die gabe verliehen, seine "
-#~ "Geschosse mit Windschaden auszustatten."
-
-#~ msgid "Storm Arrows"
-#~ msgstr "Sturmpfeile"
-
-#~ msgid ""
-#~ "The mighty spirits of wind themselfes help the archer by imbuing his "
-#~ "projectiles with their power, causing them to deal more winddamage for a "
-#~ "longer time."
-#~ msgstr ""
-#~ "Die mächtigen Geister des Windes selbst helfen dem Bogenschützen, indem "
-#~ "sie seine Geschosse mit ihrer Kraft durchtränken, so dass sie für einen "
-#~ "längeren Zeitraum Windschaden verursachen."
-
-#~ msgid "Windwalk"
-#~ msgstr "Windwandern"
-
-#~ msgid ""
-#~ "The spirits of wind help the archer to move faster than normal and avoid "
-#~ "damage."
-#~ msgstr ""
-#~ "Die Geister des Windes helfen dem Bogenschützen, sich schneller als "
-#~ "normal zu bewegen und Schaden zu vermeiden."
-
-#~ msgid "Catlike Reflexes"
-#~ msgstr "Katzenhafte Reflexe"
-
-#~ msgid "The archers nimble mind allows him to avoid damage better."
-#~ msgstr ""
-#~ "Die rasche Auffassungsgabe des Bogenschützen erlaubt es ihm, Schaden "
-#~ "besser auszuweichen."
-
-#~ msgid "Elfeyes"
-#~ msgstr "Elfenaugen"
-
-#~ msgid ""
-#~ "The archer shoots with deadly precision, leading to an increased critical "
-#~ "hit rate."
-#~ msgstr ""
-#~ "Der Bogenschütze feuert mit tödlicher Präzision, was zu einer erhöhten "
-#~ "kritischen Treffer Rate führt."
-
-#~ msgid "Concentration"
-#~ msgstr "Konzentration"
-
-#~ msgid "The archers steady mind can no longer be confused."
-#~ msgstr "Der feste Geist des Bogenschützen kann nicht mehr verwirrt werden."
-
-#~ msgid "Mind Wall"
-#~ msgstr "Geistige Wand"
-
-#~ msgid ""
-#~ "The archer has become immune to anger. He will never go berserk again."
-#~ msgstr ""
-#~ "Der Bogenschütze ist immun gegen Zorn geworden. Er wird nie wieder zum "
-#~ "Berserker werden."
-
-#~ msgid "North Roamer"
-#~ msgstr "Nordwanderer"
-
-#~ msgid ""
-#~ "The archer has made a pact with the spirits of wind and ice. His "
-#~ "resistance against wind- and icedamage is increased by 20 percent."
-#~ msgstr ""
-#~ "Der bogenschütze ist einen Pakt mit den Geistern von Wind und Eis "
-#~ "eingegangen. Seine Resistenzen gegen diese Elemente steigen um 20 Prozent."
-
-#~ msgid "North Hunter"
-#~ msgstr "Nordjäger"
-
-#~ msgid ""
-#~ "The archers good longterm relations with the spirits of wind and ice has "
-#~ "caused his resistence and his maximum resistance of these elements to "
-#~ "rise by 10 percent."
-#~ msgstr ""
-#~ "Die guten Langzeitbeziehung des Bogenschützen mit den Geistern von Wind "
-#~ "und Eis führen dazu, dass sowohl seine Resistenz als auch seine maximale "
-#~ "Resistenz gegen diese Elemente um 10 Prozent steigt."
-
-#~ msgid "Bright Blow"
-#~ msgstr "Glühender Schlag"
-
-#~ msgid ""
-#~ "The priest attacks an enemy with a blow imbued with holy power. Undead "
-#~ "will be severely damaged by the sacred energies."
-#~ msgstr ""
-#~ "Der Priester greift mit einem von heiliger Kraft getränkten Hieb an. "
-#~ "Untote werden von den heiligen Energien schwer geschädigt."
-
-#~ msgid "Sanctified Strike"
-#~ msgstr "Geheiligter Schlag"
-
-#~ msgid ""
-#~ "The priest attacks with godly power, easily sending undead creatures back "
-#~ "to their graves."
-#~ msgstr ""
-#~ "Der Priester greift mit göttlicher Kraft an und sendet Untote Kreaturen "
-#~ "schnell zurück in ihre Gräber."
-
-#~ msgid "Burning Rage"
-#~ msgstr "Brennende Wut"
-
-#~ msgid ""
-#~ "The priest inflicts holy anger in his partymembers. They will attack with "
-#~ "greater power. With increasing willpower the priest can hold this effect "
-#~ "longer."
-#~ msgstr ""
-#~ "der Priester entfacht heiligen Zorn bei seinen Partymitgliedern. Sie "
-#~ "werden mit größerer Kraft angreifen. Mit steigender Willenskraft kann der "
-#~ "Priester diesen Effekt länger aufrecht erhalten."
-
-#~ msgid "Gentle Glow"
-#~ msgstr "Sanftes Leuchten"
-
-#~ msgid ""
-#~ "The priest bathes a partymember in a mild light, releaving him of "
-#~ "blindness and silence."
-#~ msgstr ""
-#~ "Der Priester badet ein Partymitglied in mildem Licht und nimmt Blindheit "
-#~ "und Stumm von ihm."
-
-#~ msgid "Omniscent Eye"
-#~ msgstr "Allessehendes Auge"
-
-#~ msgid ""
-#~ "The party will be immune to blind and berserk for some time. With "
-#~ "increasing willpower the priest can hold this effect longer."
-#~ msgstr ""
-#~ "Die Party wird für einige Zeit immun gegen Blind und Berserker. Mit "
-#~ "steigender Willenskraft kann der Priester diesen Effekt länger aufrecht "
-#~ "erhalten. Sollte ein Mitglied der Gruppe unter diesen Statusveränderungen "
-#~ "leiden, so werden sie geheilt."
-
-#~ msgid "Blazing Shield"
-#~ msgstr "Lodernder Schild"
-
-#~ msgid ""
-#~ "The party is surrounded by holy energy. Everyones defense is increased. "
-#~ "With increasing willpower the priest can hold this effect longer."
-#~ msgstr ""
-#~ "Die Party wird von heiliger Energie umgeben. Die Verteidigung von allen "
-#~ "wird erhöht. Mit steigender Willenskraft kann der Priester diesen Effekt "
-#~ "länger aufrecht erhalten."
-
-#~ msgid "Glistening Glare"
-#~ msgstr "Gleißendes Licht"
-
-#~ msgid ""
-#~ "The priest casts a dazzling light, that can cause an enemy to be affected "
-#~ "by blind."
-#~ msgstr ""
-#~ "Der Priester zaubert ein blendendes Licht herbei, dass eine Gegner "
-#~ "blenden kann."
-
-#~ msgid "Glaring Sun"
-#~ msgstr "Blendende Sonne"
-
-#~ msgid ""
-#~ "The priest calls forth a mighty explosion of light that can make every "
-#~ "enemy in an area to be affected by blind."
-#~ msgstr ""
-#~ "Der Priester ruft eine mächtige Explosion aus Licht herbei, die jeden "
-#~ "Gegner in einem Bereich blenden kann."
-
-#~ msgid "Breaking Blow"
-#~ msgstr "Zerbrechender Schlag"
-
-#~ msgid ""
-#~ "The priest attacks an enemy with energy that causes elementals to be "
-#~ "blown back where they come from."
-#~ msgstr ""
-#~ "Der Priester greift einen Gegner mit Energien an, der Elementare dahin "
-#~ "zurück befördert, wo sie herkamen."
-
-#~ msgid "Dismissing Strike"
-#~ msgstr "Entlassender Schlag"
-
-# TODO
-#~ msgid ""
-#~ "The priest strikes with all his might. While normal monsters have little "
-#~ "to fear from this attack elementals will be easily destroyed by it."
-#~ msgstr ""
-#~ "Der Priester schlägt mit all seiner Macht zu. Während normale Monster "
-#~ "kaum etwas von diesem Angriff zu befürchten haben, werden Elementare "
-#~ "schnell davon zerstört."
-
-#~ msgid "Magic Shield"
-#~ msgstr "Magischer Schild"
-
-#~ msgid ""
-#~ "The priests protecting influence raises the willpower of all partymembers "
-#~ "temporarily. With increasing willpower the priest can hold this effect "
-#~ "longer."
-#~ msgstr ""
-#~ "Der schützende Einfluss des Priesters erhöht zeitweilig die Willenskraft "
-#~ "jedes Partymitglieds. Mit steigender Willenskraft kann der Priester "
-#~ "diesen Effekt länger aufrecht erhalten."
-
-#~ msgid "Ease Pain"
-#~ msgstr "Schmerzen Lindern"
-
-#~ msgid ""
-#~ "The priest treats a partymemener with healing water that washes away "
-#~ "every poison and stops burns."
-#~ msgstr ""
-#~ "Der Priester behandelt ein Partymitglied mit heilendem Wasser, das alles "
-#~ "Gift aus ihm herauswäscht und Verbrennungen stoppt."
-
-#~ msgid "Remedial Water"
-#~ msgstr "Heilendes Wasser"
-
-#~ msgid ""
-#~ "The priests grants every partymember immunity to poison and burn for a "
-#~ "small amount of time while healing these effects. With increasing "
-#~ "willpower the priest can hold this effect longer."
-#~ msgstr ""
-#~ "Der Priester gewährt jedem Partymitglied für kurze Zeit Immunität gegen "
-#~ "Gifte und Verbrennungen, während er diese Effekte gleichzeitig heilt. Mit "
-#~ "steigender Willenskraft kann der Priester diesen Effekt länger aufrecht "
-#~ "erhalten."
-
-#~ msgid "Acid"
-#~ msgstr "Säure"
-
-#~ msgid "The priest turns normal water into deadly acid, poisoning one enemy."
-#~ msgstr ""
-#~ "Der Priester verwandelt normales Wasser in tödiche Säure, die einen "
-#~ "Gegner vergiftet."
-
-#~ msgid "Cure"
-#~ msgstr "Heilen"
-
-#~ msgid "The priest restores the hitpoints of one partymemeber."
-#~ msgstr "Der Priester stellt Lebenspunkte eines Partymitglieds wieder her."
-
-#~ msgid "Grand Cure"
-#~ msgstr "Große Heilung"
-
-#~ msgid "The priest restores hitpoints for every partymember."
-#~ msgstr ""
-#~ "Der Priester stellt Lebenspunkte eines jeden Partymitglieds wieder her."
-
-#~ msgid "Windstrike"
-#~ msgstr "Windschlag"
-
-#~ msgid ""
-#~ "The priest creates a vortex with his attack, that can suck a demonic "
-#~ "creature right back to hell."
-#~ msgstr ""
-#~ "Der Priester erschafft einen Wirbel mit seinem Angriff, der eine "
-#~ "dämonische Kreatur direkt zurück in die Hölle befördern kann."
-
-#~ msgid "God Strike"
-#~ msgstr "Götterschlag"
-
-#~ msgid ""
-#~ "Only strong and durable demons will be able to resist the priests sacred "
-#~ "strike."
-#~ msgstr ""
-#~ "nur starke und ausdauernde Dämonen werden in der Lage sein, dem heiligen "
-#~ "Schlag des Priesters zu wiederstehen."
-
-#~ msgid "Bladestorm"
-#~ msgstr "Klingensturm"
-
-#~ msgid ""
-#~ "The priest strengthens the weaponarms of his comrades, leading to "
-#~ "increased attackspeed for everyone. With increasing willpower the priest "
-#~ "can hold this effect longer."
-#~ msgstr ""
-#~ "Der Priester stärkt die Waffenarme seiner Gefährten, was zu erhöhter "
-#~ "Angriffsgeschwindigkeit führt."
-
-#~ msgid "Restore Concentration"
-#~ msgstr "Konzentration wiederherstellen"
-
-#~ msgid "The priest heals one friend from confusion and berserk."
-#~ msgstr "Der Priester heilt einen Freund von Verwirrung und Berserker."
-
-#~ msgid "Spirit Shield"
-#~ msgstr "Seelenschild"
-
-#~ msgid ""
-#~ "The priest grants immunity to berserk and confuse to all his partymembers "
-#~ "for a small amount of time. With increasing willpower the priest can hold "
-#~ "this effect longer."
-#~ msgstr ""
-#~ "Der Priester gewährt seinen Partymitgliedern für kurze Zeit Immunität "
-#~ "gegen Berserker und Verwirrung. Mit steigender Willenskraft kann der "
-#~ "Priester diesen Effekt länger aufrecht erhalten. Sollten Mitglieder an "
-#~ "einer dieser Statusveränderungen leiden, so werden sie geheilt."
-
-#~ msgid "Hypnosis"
-#~ msgstr "Hypnose"
-
-#~ msgid "The priest confuses a monster, causing it to attack at random."
-#~ msgstr ""
-#~ "Der Priester verwirrt ein Monster, dass daraufhin wild um sich schlagen "
-#~ "wird."
-
-#~ msgid "Hypnotic Vortex"
-#~ msgstr "Hypnotischer Wirbel"
-
-#~ msgid ""
-#~ "The priest creates a distracting vortex with the ability to confuse every "
-#~ "enemy caught in it."
-#~ msgstr ""
-#~ "Der Priester erschafft einen ablenkenden Wirbel mit der Fähigkeit, jeden "
-#~ "Gegner zu verwirren, der in ihm gefangen ist."
-
-#~ msgid "Keen Mind"
-#~ msgstr "Messerscharfer Geist"
-
-#~ msgid ""
-#~ "The priest increases everyones spellpower for a short time. Everyones "
-#~ "spells will surely be more effective. With increasing willpower the "
-#~ "priest can hold this effect longer."
-#~ msgstr ""
-#~ "Der Priester erhöht die Zauberkraft jedes Partymitglieds. Zauber, die "
-#~ "gesprochen werden, werden mit Sicherheit effektiver werden. Mit "
-#~ "steigender Willenskraft kann der Priester diesen Effekt länger aufrecht "
-#~ "erhalten."
-
-#~ msgid "Warrior"
-#~ msgstr "Krieger"
-
-#~ msgid "Archer"
-#~ msgstr "Bogenschütze"
-
-#~ msgid "Mage"
-#~ msgstr "Magier"
-
-#~ msgid "Priest"
-#~ msgstr "Priester"
-
-#~ msgid "Magician"
-#~ msgstr "Magier"
-
-#~ msgid "Fire magic"
-#~ msgstr "Feuermagie"
-
-#~ msgid "Ice magic"
-#~ msgstr "Eismagie"
-
-#~ msgid "Air magic"
-#~ msgstr "Luftmagie"
-
-#~ msgid "Fighting skills"
-#~ msgstr "Kampffähigkeiten"
-
-#~ msgid "Passive skills"
-#~ msgstr "Passive Fähigkeiten"
-
-#~ msgid "Fighting spirit"
-#~ msgstr "Kampfgeist"
-
-#~ msgid "Marksmanship"
-#~ msgstr "Schießkunst"
-
-#~ msgid "Hunter magic"
-#~ msgstr "Jagdmagie"
-
-#~ msgid "Light Magic"
-#~ msgstr "Lichtmagie"
-
-#~ msgid "Water Magic"
-#~ msgstr "Wassermagie"
-
-#~ msgid "Wind Magic"
-#~ msgstr "Windmagie"

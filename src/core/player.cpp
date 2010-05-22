@@ -553,34 +553,7 @@ bool Player::onItemClick(ClientCommand* command)
 
 				// Item soll als Ausruestungsgegenstand benutzt werden
 				req = checkItemRequirements(it);
-
-				if (it->m_type == Item::WEAPON && !m_secondary_equip)
-					pos = Equipement::WEAPON;
-				else if (it->m_type == Item::WEAPON && m_secondary_equip)
-					pos = Equipement::WEAPON2;
-				else if (it->m_type == Item::SHIELD && !m_secondary_equip)
-					pos = Equipement::SHIELD;
-				else if (it->m_type == Item::SHIELD && m_secondary_equip)
-					pos = Equipement::SHIELD2;
-				else if (it->m_type == Item::HELMET)
-					pos = Equipement::HELMET;
-				else if (it->m_type == Item::GLOVES)
-					pos = Equipement::GLOVES;
-				else if (it->m_type == Item::ARMOR)
-					pos = Equipement::ARMOR;
-				else if (it->m_type == Item::AMULET)
-					pos = Equipement::AMULET;
-				else if (it->m_type == Item::RING)
-				{
-					if (pos != Equipement::RING_LEFT && pos != Equipement::RING_RIGHT)
-					{
-						pos = Equipement::RING_LEFT;
-						if (m_equipement->getItem(pos) != 0)
-							pos = Equipement::RING_RIGHT;
-					}
-				}
-
-
+				pos = m_equipement-> getItemEquipPosition(it, m_secondary_equip, (Equipement::Position) pos);
 			}
 			else
 			{
@@ -634,116 +607,14 @@ bool Player::onItemClick(ClientCommand* command)
 		if (pos == Equipement::NONE)
 			return true;
 
-		// Vertauschen von Cursoritem und angeklicktem Item
-		m_equipement->swapCursorItem(pos);
-
-		if (World::getWorld()->isServer() && pos <Equipement::CURSOR_ITEM)
+		// swap Item into equipement
+		if (pos < Equipement::CURSOR_ITEM)
 		{
-			// Ausruestungsgegenstand wurde getauscht
-			NetEvent event;
-			event.m_id = getId();
-			event.m_data = pos;
-
-			if (m_equipement->getItem(pos) == 0)
-			{
-				event.m_type = NetEvent::PLAYER_ITEM_REMOVE;
-			}
-			else
-			{
-				event.m_type = NetEvent::PLAYER_ITEM_INSERT;
-			}
-			DEBUGX("event: %i at %i",event.m_type,event.m_data);
-			World::getWorld()->insertNetEvent(event);
+			swapEquipItems(Equipement::CURSOR_ITEM, (Equipement::Position) pos);
 		}
-
-		Item* itm;
-		if (pos==Equipement::WEAPON || pos == Equipement::WEAPON2)
+		else
 		{
-			// Waffe wurde angelegt, bei zweihaendig testen ob der Schild Slot frei ist
-			Item* weapon = getWeapon();
-			if (weapon!=0 && weapon->m_weapon_attr->m_two_handed)
-			{
-				if (getShield()!=0)
-				{
-					// Schild Slot ist nicht frei
-					// Schild muss entfernt werden
-					short shpos= Equipement::SHIELD;
-					if (pos == Equipement::WEAPON2)
-						shpos = Equipement::SHIELD2;
-
-					if (World::getWorld()->isServer())
-					{
-						NetEvent event;
-						event.m_type =  NetEvent::PLAYER_ITEM_REMOVE;
-						event.m_data = shpos;
-						event.m_id = getId();
-
-						DEBUGX("event: no item at %i",shpos);
-
-						World::getWorld()->insertNetEvent(event);
-					}
-
-					// Wenn aktuell kein Item am Cursor gehalten wird
-					if (m_equipement->getItem(Equipement::CURSOR_ITEM)==0)
-					{
-						// Schild aufnehmen
-						m_equipement->swapCursorItem(shpos);
-					}
-					else
-					{
-						// Schild ins Inventar verschieben
-						itm =0;
-						// Schild aus dem Schildslot holen
-						m_equipement->swapItem( itm,shpos);
-
-						// wenn man sich auf Serverseite befindet: NetEvent generieren
-
-
-						if (!getEquipement()->insertItem(itm))
-						{
-							// Einfuegen ins Inventar fehlgeschlagen
-							// Item fallen lassen
-							getRegion()->dropItem(itm,getShape()->m_center);
-						}
-					}
-				}
-			}
-		}
-
-
-		if (pos==Equipement::SHIELD || pos == Equipement::SHIELD2)
-		{
-			// Schild soll verwendet werden, testen dass keine zweihaendige Waffe benutzt wird
-			Item* weapon = getWeapon();
-			if (weapon!=0 && weapon->m_weapon_attr->m_two_handed)
-			{
-
-				// zweihaendige Waffe wird verwendet, muss entfernt werden
-				short wpos= Equipement::WEAPON;
-				if (pos == Equipement::SHIELD2)
-					wpos = Equipement::WEAPON2;
-
-				if (World::getWorld()->isServer())
-				{
-					NetEvent event;
-					event.m_type =  NetEvent::PLAYER_ITEM_REMOVE;
-					event.m_data = wpos;
-					event.m_id = getId();
-
-					DEBUGX("event: no item at %i",wpos);
-
-					World::getWorld()->insertNetEvent(event);
-				}
-
-				m_equipement->swapCursorItem(wpos);
-			}
-		}
-
-		// Wenn an der Ausruestung etwas geaendert wurde
-		if (pos <Equipement::CURSOR_ITEM)
-		{
-			// modifizierte Basisattribute neu berechnen
-			calcBaseAttrMod();
+			m_equipement->swapCursorItem(pos);
 		}
 	}
 	else
@@ -785,8 +656,20 @@ bool Player::onItemClick(ClientCommand* command)
 				}
 				else
 				{
-					return true;
+					// equip Item to Autoposition
+					if (pos >= Equipement::CURSOR_ITEM)
+					{
+						bool req = checkItemRequirements(it);
+						Equipement::Position pos2 = m_equipement-> getItemEquipPosition(it, m_secondary_equip);
+						
+						if (req && pos2 <= Equipement::CURSOR_ITEM && pos2 != Equipement::NONE)
+						{
+							swapEquipItems((Equipement::Position) pos,pos2);
+						}
+						
+					}
 				}
+				return true;
 			}
 			else
 			{
@@ -833,6 +716,126 @@ bool Player::onItemClick(ClientCommand* command)
 		}
 	}
 	return true;
+}
+
+void Player::swapEquipItems(Equipement::Position pos1, Equipement::Position pos2)
+{
+	if (pos1 < Equipement::CURSOR_ITEM || pos2 >=  Equipement::CURSOR_ITEM)
+	{
+		WARNING("function swapEquipItems requires a non equiped Items as argument 1 and an equipement slot as argument 2");
+		return;
+	}
+	
+	// do the swapping
+	Item* itm=0;
+	m_equipement->swapItem(itm,pos1);	// 0 in pos1, itm1 in itm
+	m_equipement->swapItem(itm,pos2);	// itm1 in pos2, itm2, in itm
+	m_equipement->swapItem(itm,pos1);	// itm2 in pos, 0 in itm
+	
+	if (World::getWorld()->isServer() && pos2 <Equipement::CURSOR_ITEM)
+	{
+		NetEvent event;
+		event.m_id = getId();
+		event.m_data = pos2;
+
+		if (m_equipement->getItem(pos2) == 0)
+		{
+			event.m_type = NetEvent::PLAYER_ITEM_REMOVE;
+		}
+		else
+		{
+			event.m_type = NetEvent::PLAYER_ITEM_INSERT;
+		}
+		DEBUGX("event: %i at %i",event.m_type,event.m_data);
+		World::getWorld()->insertNetEvent(event);
+	}
+
+	if (pos2==Equipement::WEAPON || pos2 == Equipement::WEAPON2)
+	{
+			// Waffe wurde angelegt, bei zweihaendig testen ob der Schild Slot frei ist
+		Item* weapon = getWeapon();
+		if (weapon!=0 && weapon->m_weapon_attr->m_two_handed)
+		{
+			if (getShield()!=0)
+			{
+					// Schild Slot ist nicht frei
+					// Schild muss entfernt werden
+				short shpos= Equipement::SHIELD;
+				if (pos2 == Equipement::WEAPON2)
+					shpos = Equipement::SHIELD2;
+
+				if (World::getWorld()->isServer())
+				{
+					NetEvent event;
+					event.m_type =  NetEvent::PLAYER_ITEM_REMOVE;
+					event.m_data = shpos;
+					event.m_id = getId();
+
+					DEBUGX("event: no item at %i",shpos);
+
+					World::getWorld()->insertNetEvent(event);
+				}
+
+					// Wenn aktuell kein Item am Cursor gehalten wird
+				if (m_equipement->getItem(Equipement::CURSOR_ITEM)==0)
+				{
+						// Schild aufnehmen
+					m_equipement->swapCursorItem(shpos);
+				}
+				else
+				{
+						// Schild ins Inventar verschieben
+					itm =0;
+						// Schild aus dem Schildslot holen
+					m_equipement->swapItem( itm,shpos);
+
+					// wenn man sich auf Serverseite befindet: NetEvent generieren
+					if (!getEquipement()->insertItem(itm))
+					{
+						// Einfuegen ins Inventar fehlgeschlagen
+						// Item fallen lassen
+						getRegion()->dropItem(itm,getShape()->m_center);
+					}
+				}
+			}
+		}
+	}
+
+
+	if (pos2==Equipement::SHIELD || pos2 == Equipement::SHIELD2)
+	{
+		// Schild soll verwendet werden, testen dass keine zweihaendige Waffe benutzt wird
+		Item* weapon = getWeapon();
+		if (weapon!=0 && weapon->m_weapon_attr->m_two_handed)
+		{
+
+			// zweihaendige Waffe wird verwendet, muss entfernt werden
+			short wpos= Equipement::WEAPON;
+			if (pos2 == Equipement::SHIELD2)
+				wpos = Equipement::WEAPON2;
+
+			if (World::getWorld()->isServer())
+			{
+				NetEvent event;
+				event.m_type =  NetEvent::PLAYER_ITEM_REMOVE;
+				event.m_data = wpos;
+				event.m_id = getId();
+
+				DEBUGX("event: no item at %i",wpos);
+
+				World::getWorld()->insertNetEvent(event);
+			}
+
+			m_equipement->swapCursorItem(wpos);
+		}
+	}
+
+		// Wenn an der Ausruestung etwas geaendert wurde
+	if (pos2 <Equipement::CURSOR_ITEM)
+	{
+		// modifizierte Basisattribute neu berechnen
+		calcBaseAttrMod();
+	}
 }
 
 short Player::insertItem(Item* itm, bool use_equip, bool emit_event)

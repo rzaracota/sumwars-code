@@ -1,4 +1,4 @@
-<Quest name="Defend dwarfenwall" table_name="defend_dwall">
+<Quest name="Defend Dwarfenwall" table_name="defend_dwall">
 	<Description>
 		if (defend_dwall.finished) then
 			return _("Quest finished")
@@ -56,21 +56,21 @@
 				addSpeaker(dwarfenwall.general, "general");
 				addSpeaker(dwarfenwall.council, "council");
 				
-				setSpeakerPosition("council","upper_left");
-				speak("council",_("...haben meine Windelementare genau gesehen: Es ist nur dieser eine Lich, der sie fuehrt."),"thoughtful");
-				speak("council",_("Wenn er erst mal weg ist, sind die anderen kein Problem."),"unhappy");
-				speak("general",_("Wie großartig."),"amused");
-				speak("general",_("Und mit welcher Armee wollt ihr ihre Reihen durchbrechen?"),"unhappy");
-				speak("general",_("Wir muessen erst mal diesen Ansturm aufhalten, der sich da zusammenbraut."),"unhappy");
-				speak("council",_("Keine Sorge."),"normal")
-				speak("council",_("Mein Kollege hat mir versichert, dass das Konzil Unterstuetzung sendet."),"normal")
-				speak("council",_("Sie muesste bald hier sein."),"normal")
+				setSpeakerPosition("council","left");
+				speak("council",_("... wind-elementals did see it clearly: It's only this one lich leading them."),"thoughtful");
+				speak("council",_("When he's gone the others are no problem."),"unhappy");
+				speak("general",_("Just great."),"amused");
+				speak("general",_("And with what army are you planning to do this break-through?"),"unhappy");
+				speak("general",_("We have to stop the rush, that is assembling out there."),"unhappy");
+				speak("council",_("Don't worry."),"normal")
+				speak("council",_("My colleague assured me that the council is sending backup."),"normal")
+				speak("council",_("It should be here shortly."),"normal")
 				setSpeakerAnimation("general","angry",800);
-				speak("general",_("Erst beordern sie die Maga von Nordenburg ab und dann senden sie wieder Verstaerkung?"),"angry");
-				speak("general",_("Was ist das für ein Spiel?"),"unhappy");
-				speak("council",_("Die Maga wird an anderer Stelle dringender benoetigt als bei uns."),"aloof");
-				speak("general",_("Aber natuerlich!"),"sneer");
-				speak("general",_("Auch wenn ich das nur ungern sage, aber bis eine Armee den Weg hier her geschafft hat, kaempfen unsere Koerper laengst für die andere Seite, verehrte Dame!"),"unhappy");
+				speak("general",_("First they send away the mage of Northborough and than they send in backup again?"),"angry");
+				speak("general",_("What kind of game is this?"),"unhappy");
+				speak("council",_("The mage is much needed elsewhere."),"aloof");
+				speak("general",_("Of course."),"sneer");
+				speak("general",_("I don't like saying this, but until an army makes it's way here, our bodies are long fighting for the other side, venerated lady."),"unhappy");
 				changeTopic("entryParty");
 			</Effect>
 		</Event>
@@ -79,99 +79,101 @@
 			<Effect>
 				addUnitCommand(getPartyleader(),"walk","locLeader");
 				addCameraPosition(1500,"locCamera",-90,60,20);
-				speak("PL",_("Verzeiht wenn ich mich so einfach einmische, aber kleine Gruppen reisen erheblich schneller als ein Heerzug."),"normal");
+				setSpeakerPosition("council","right");
+				
+				speak("PL",_("Excuse me for interrupting like that, but small groups travel considerably faster then armies."),"normal");
 				executeInDialog('lookAtObject('..dwarfenwall.general..','..getSpeaker("PL")..')');
 				if(solo())then
-					speak("general",_("Und wer seid Ihr? _solo"),"threaten");
+					speak("general",_("And who are you? ##solo"),"threaten");
 				else
-					speak("general",_("Und wer seid ihr?"),"threaten");
+					speak("general",_("And who are you?"),"threaten");
 				end;
-				speak("PL",_("Die Verstaerkung"),"amused");
+				speak("PL",_("The backup."),"amused");
 				
 				setSpeakerEmotion("general","happy");
 				setSpeakerAnimation("general","laugh",800);
 				setSpeakerEmotion("PL","normal");
 				speakPause(800);
 				
-				speak("general",_("Guter Witz."),"unhappy");
-				speak("general",_("Aber wir sind hier im Krieg."),"unhappy");
+				speak("general",_("Good joke."),"unhappy");
+				speak("general",_("But we have a war here."),"unhappy");
 				if(solo() and maleOnly())then
-					speak("general",_("Macht, dass ihr davonkommt, ihr Narr."),"unhappy");
+					speak("general",_("Get lost, you fool."),"unhappy");
 				elseif(solo())then
-					speak("general",_("Macht, dass ihr davonkommt, ihr Naerrin."),"unhappy");
+					speak("general",_("Get lost, you fool."),"unhappy");
 				else
-					speak("general",_("Macht, dass ihr davonkommt, ihr Narren."),"unhappy");
+					speak("general",_("Get lost, you fools."),"unhappy");
 				end;
 				executeInDialog('lookAtObject('..dwarfenwall.general..','..dwarfenwall.council..')');
 				
 				if(isMale(getSpeaker("PL")))then
-					speak("council",_("Dieser Soeldner sagt die Wahrheit."),"aloof");
+					speak("council",_("This mercenary is telling the truth."),"aloof");
 				else
-					speak("council",_("Diese Soeldnerin sagt die Wahrheit."),"aloof");
+					speak("council",_("This mercenary is telling the truth."),"aloof");
 				end;
 				
-				speak("general",_("Was?!?"),"pain");
+				speak("general",_("What?"),"pain");
 				executeInDialog('lookAtObject('..dwarfenwall.general..','..getSpeaker("PL")..')');
 				setSpeakerAnimation("general","point",800);
 				speakPause(800);
 				setSpeakerAnimation("general","pointing",100,true);
-				speak("general",_("Das soll eure grandiose Unterstützung sein?"),"angry");
+				speak("general",_("This is your great backup?"),"angry");
 				setSpeakerAnimation("general","angry",800);
 				if(not solo())then
-					speak("general",_("Eine Handvoll Soeldlinge?"),"offended");
+					speak("general",_("A handful of mercenaries?"),"offended");
 				end;
 				
-				speak("council",_("Ihr werdet den Wert unserer Unterstuetzung schon noch erkennen, wenn sie wieder und wieder fuer euch faellt."),"aloof");
-				speak("general",_("Was sagt ihr da?"),"unhappy");
+				speak("council",_("You will realize the worth of our assistance, when they fall for you again and again."),"aloof");
+				speak("general",_("What do you say?"),"unhappy");
 				setSpeakerAnimation("general","think",1000);
 				speakPause("1000");
 				if(solo() and femaleOnly())then
-					speak("general",_("... Ist das etwa eine Verfluchte?"),"pain");
+					speak("general",_("... is this a Cursed One?"),"pain");
 				elseif(solo())then
-					speak("general",_("... Ist das etwa ein Verfluchter?"),"pain");
+					speak("general",_("... is this a Cursed One?"),"pain");
 				else
-					speak("general",_("... Sind das etwa Verfluchte?"),"pain");
+					speak("general",_("... are they Cursed Ones?"),"pain");
 				end;
 				setSpeakerAnimation("general","aloof");
-				speak("any",_("Mir persoenlich gefaellt der Begriff Gezeichnete irgendwie besser."),"unhappy");
+				speak("any",_("Personally I like the term Branded One somehow better."),"unhappy");
 				
 				setSpeakerEmotion("any","aloof");
 				if(solo())then
-					speak("PL",_("Wenn der Preis stimmt, lasse ich mich so oft in Stuecke hacken, wie es noetig ist, um diese Stadt zu verteidigen."),"aloof");
+					speak("PL",_("If the price is right I let myself be torn apart as often as need be to protect the town."),"aloof");
 				else
-					speak("PL",_("Wenn der Preis stimmt, lassen wir uns so oft in Stuecke hacken, wie es noetig ist, um diese Stadt zu verteidigen."),"aloof");
+					speak("PL",_("If the price is right we let ourselves be torn apart as often as need be to protect the town."),"aloof");
 				end;
 				
 				executeInDialog('lookAtObject('..dwarfenwall.general..','..dwarfenwall.council..')');
-				speak("general",_("Ihr lasst euch mit dem Teufel ein, um einen Teufel auszutreiben?"),"disgust");
+				speak("general",_("You make a deal with the devil to drive out the devil?"),"disgust");
 				setSpeakerEmotion("general","aloof");
 				
-				speak("council",_("In Zeiten wie diesen kann man nicht besonders zimperlich benehmen."),"offended");
-				speak("council",_("Wollt ihr leben oder den Untoten als Verstaerkung dienen?"),"threaten");
+				speak("council",_("You cannot be prim in times like these."),"offended");
+				speak("council",_("Do you want to live or be backup for the undead?"),"threaten");
 				
-				speak("general",_("Man kann diesen Monstern nicht trauen!"),"angry");
-				speak("general",_("Solange ich diese Armee fuehre, werde ich solche nicht dulden!"),"offended");
+				speak("general",_("You cannot trust these monsters!"),"angry");
+				speak("general",_("As long as I lead this army I will not tolerate such people."),"offended");
 				setSpeakerEmotion("general","aloof");
 				
 				if(solo())then
-					speak("PL",_("Ich habe gerade die Untoten daran gehindert, eure Stadt zu umgehen!"),"unhappy");
+					speak("PL",_("I just prevented the undead from passing by your city!"),"unhappy");
 				else
-					speak("PL",_("Wir haben gerade die Untoten daran gehindert, eure Stadt zu umgehen!"),"unhappy");
+					speak("PL",_("We just prevented the undead from passing by your city!"),"unhappy");
 				end;
-				speak("general",_("Das beweist gar nichts!"),"aloof");
-				speak("mage",_("Alle Krieger verbindet die Engstirnigkeit."),"thoughtful");
+				speak("general",_("That proves nothing!"),"aloof");
+				speak("mage",_("All warriors are connected by narrow-mindedness."),"thoughtful");
 				if(solo())then
-					speak("warrior",_("Ich toete nicht wahllos!"),"angry");
+					speak("warrior",_("I don't kill indiscriminately!"),"angry");
 				else
-					speak("warrior",_("Wir toeten nicht wahllos!"),"angry");
+					speak("warrior",_("We don't kill indiscriminately!"),"angry");
 				end;
 				
 				if(solo() and femaleOnly())then
-					speak("council",_("Sie steht unter dem Befehls des Konzils, es ist nicht eure Entscheidung."),"aloof");
+					speak("council",_("She is under orders of the council, it is not your decision."),"aloof");
 				elseif(solo())then
-					speak("council",_("Er steht unter dem Befehls des Konzils, es ist nicht eure Entscheidung."),"aloof");
+					speak("council",_("He is under orders of the council, it is not your decision."),"aloof");
 				else
-					speak("council",_("Sie stehen unter dem Befehls des Konzils, es ist nicht eure Entscheidung."),"aloof");
+					speak("council",_("They are under orders of the council, it is not your decision."),"aloof");
 				end;
 				changeTopic("theChargeBegins");
 			</Effect>
@@ -190,7 +192,7 @@
 				addCameraPosition(100,"locCamera",-90,60,20);
 				defend_dwall_tmp.messanger = createObject("guard","exit_south");
 				addSpeaker(defend_dwall_tmp.messanger,"guard");
-				speak("guard",_("Sie kommen! Der Angriff beginnt!"),"panic");
+				speak("guard",_("They are coming! The attack begins!"),"panic");
 				changeTopic("ordersForCharge");
 			</Effect>
 		</Event>
@@ -213,12 +215,12 @@
 				deleteObject(defend_dwall_tmp.messanger);
 				
 				speak("general",_("..."),"angry",2000);
-				speak("general",_("Seht zu, dass ihr zur Mauer kommt!"),"unhappy");
-				speak("archer",_("Wie schnell er seine Meinung doch aendert."),"sneer");
+				speak("general",_("Get to the walls!"),"unhappy");
+				speak("archer",_("How fast he changes his mind."),"sneer");
 				if(solo())then
-					speak("PL",_("Ich bin schon unterwegs"),"normal");
+					speak("PL",_("I'm already on my way."),"normal");
 				else
-					speak("PL",_("Los jetzt!"),"normal");
+					speak("PL",_("Get going!"),"normal");
 				end;
 				changeTopic("partyLeavesForBattle")
 			</Effect>
@@ -227,11 +229,11 @@
 			<Effect>
 				addUnitCommand(getSpeaker("PL"),"walk","entry_south");
 				speakPause(1000);
-				speak("general",_("Ich hoffe, ihr habt genug Geld, um diese Brut bei der Stange zu halten."),"threaten");
-				speak("council",_("Macht euch keine Sorgen."),"unhappy");
-				speak("council",_("Daran wird es nicht scheitern."),"sneer");
+				speak("general",_("I just hope you have enough money to keep them at it."),"threaten");
+				speak("council",_("Don't trouble yourself."),"unhappy");
+				speak("council",_("It will not fail due to this."),"sneer");
 				--TODO: Schwert nehmen und gehen
-				speak("general",_("Ich bete, dass ihr Euch nicht irrt..."),"unhappy")
+				speak("general",_("I pray that you're right..."),"unhappy")
 				executeInDialog('')
 				changeTopic("briefingOver")
 			</Effect>
@@ -262,7 +264,7 @@
 				return (unitIsInArea(trigger.player,"areaNoEntry1"))
 			</Condition>
 			<Effect>
-				unitSpeak(dwarfenwall.guard3,_("Es tut mir Leid, aber hier ist nur Durchgang fuer Angehoerige der aisener Armee."));
+				unitSpeak(dwarfenwall.guard3,_("I'm sorry, but only members of the aisen army are allowed beyond here."));
 				addUnitCommand(trigger.player,"walk","locWeaponTrader");
 				startTimer("stopWalking",1000);
 				addTriggerVariable("unit",trigger.player);
@@ -278,7 +280,7 @@
 				end;
 			</Condition>
 			<Effect>
-				unitSpeak(trigger.player,_("Da will ich jetzt nicht hin. Ich sehe nur eine langweilige Mauer."));
+				unitSpeak(trigger.player,_("I don't want to go there. I only see boring walls."));
 				clearUnitCommands(trigger.player);
 				addUnitCommand(trigger.player,"walk","locWeaponTrader");
 				startTimer("stopWalking",1000);
@@ -291,7 +293,7 @@
 				return (unitIsInArea(trigger.player,"areaNoEntry2"))
 			</Condition>
 			<Effect>
-				unitSpeak(dwarfenwall.guard4,_("Es tut mir Leid, aber hier ist nur Durchgang fuer Angehoerige der aisener Armee."));
+				unitSpeak(dwarfenwall.guard4,_("I'm sorry, but only members of the aisen army are allowed beyond here."));
 				addUnitCommand(trigger.player,"walk","locWeaponTrader");
 				startTimer("stopWalking",1000);
 				addTriggerVariable("unit",trigger.player);
@@ -962,9 +964,9 @@
 					
 					setSpeakerAnimation("greif","point",700);
 					timedExecute('setObjectAnimation('..defend_dwall_tmp.general..',"pointing",1000,true)',695);
-					speak("greif", _("Da hinten kommen sie."),"unhappy");
+					speak("greif", _("Here they come."),"unhappy");
 					setSpeakerAnimation("greif","warcry",1500);
-					speak("greif", _("Macht euch bereit Maenner!"),"warcry");
+					speak("greif", _("Get ready, soldiers!"),"warcry");
 					setSpeakerEmotion("greif","normal");
 					changeTopic("entryLich");
 				else
@@ -1020,10 +1022,10 @@
 					addImportantSpeakers();
 				
 					speakPause(800);
-					speak("lich",_("Eure Zeit ist gekommen, erbaermliche Menschen!"),"threaten");
-					speak("att1",_("Zwergentrutz wird endlich Euer sein, mein Gebieter."),"sneer");
-					speak("att2",_("Mit der Unterstuetzung aus der Hauptstadt wird es endlich gelingen."),"happy");
-					speak("lich",_("Beginnen wir also den letzten Sturm auf diese elende Festung."),"angry");
+					speak("lich",_("Your time has come, pathetic humans!"),"threaten");
+					speak("att1",_("Dwarfenwall will finally be yours, my lord."),"sneer");
+					speak("att2",_("With the help from the capital it will succeed at last."),"happy");
+					speak("lich",_("Let us begin with the last rush on this wretched stronghold."),"angry");
 					executeInDialog('insertTrigger("changeView");addTriggerVariable("nextTrigger","beingPrepared");');
 				else
 					insertTrigger("beingPrepared");
@@ -1050,13 +1052,13 @@
 					addImportantSpeakers();
 
 					speakPause(1000);
-					speak("greif",_("Da hinten sind wahrscheinlich so viele Untote, dass Eure ach so kampfkraeftige Unterstuetzung unseren Tod nicht wird abwenden koennen."),"unhappy");
-					speak("darna",_("Diese... Unterstuetzung ist nicht das einzige, was das Konzil fuer Zwergentrutz tun kann und wird."),"aloof");
-					speak("darna",_("Ich habe schon vor Wochen einen Erdelementar gebunden."),"sneer");
-					speak("darna",_("Er wartet nur noch auf meinen Befehl."),"normal");
-					speak("darna",_("Natuerlich konnte ich nicht wissen, wo die Untoten angreifen wuerden."),"thougtful");
-					speak("darna",_("Ich fuerchte, da kommt einiges an Aufraeumarbeiten auf die Ueberlebenden zu."),"sad");
-					speak("greif",_("Hoert auf zu spotten und tut es endlich, was auch immer ihr vorhabt."),"angry");
+					speak("greif",_("I reckon there is so many undead back there that your oh-so mighty backup will not be able to avert our death."),"unhappy");
+					speak("darna",_("This... backup is not the only thing the council can and will do for Dwarfenwall."),"aloof");
+					speak("darna",_("I bound an earth-elemental weeks ago."),"sneer");
+					speak("darna",_("He is waiting for my orders right now."),"normal");
+					speak("darna",_("Of course I couldn't know, where the undead would attack."),"thougtful");
+					speak("darna",_("I'm afraid, there will be quite some cleaning up to do by the survivors."),"sad");
+					speak("greif",_("Stop scoffing and do whatever it is you're planing."),"angry");
 					setSpeakerEmotion("greif","normal");
 					setSpeakerAnimation("darna","callEarth",3000);
 					speakPause(3000);
@@ -1095,20 +1097,20 @@
 					initDialog();
 					addImportantSpeakers();
 					
-					speak("lich", _("Verfluchte Elementaristen!"),"warcry");
-					speak("lich", _("Es wird mir eine Freude sein, den Körper dieser Hexe wiederzubeleben, nur um sie zu verbrennen!"),"angry");
-					speak("att1",_("Es wird geschehen, mein Gebieter."),"amused");
-					speak("att2",_("Aber wie greifen wir die Stadt jetzt an? Sie hat den Weg fuer unsere Armee blockiert"),"thoughtful");
-					speak("lich", _("Schweigt!"),"threaten");
+					speak("lich", _("Acursed elementalists!"),"warcry");
+					speak("lich", _("It will be a great pleasure to reanimate the body of that witch only to burn her!"),"angry");
+					speak("att1",_("It will be done, my lord."),"amused");
+					speak("att2",_("But how will we attack the city now? She blocked the path for our army."),"thoughtful");
+					speak("lich", _("Silence!"),"threaten");
 					setSpeakerEmotion("att1","panic");
 					setSpeakerEmotion("att2","panic");
 					speakPause(1000);
-					speak("lich", _("Die Katapulte?"),"normal");
-					speak("att1",_("Sind bereit, mein Gebieter"),"normal");
-					speak("lich", _("Unsere Nekromanten?"),"normal");
-					speak("att2",_("Warten nur auf euren Befehl."),"normal");
-					speak("lich", _("Nicht umsonst kaempfe ich schon seit Jahrhunderten mit Zwergentrutz."),"grin");
-					speak("lich", _("Schickt die Skelette durch die Kriechgaenge."),"threaten");
+					speak("lich", _("The catapults?"),"normal");
+					speak("att1",_("Ready, my lord."),"normal");
+					speak("lich", _("Our necromancers?"),"normal");
+					speak("att2",_("Await your order."),"normal");
+					speak("lich", _("I'm not fighting with Dwarfenwall for centuries for nothing."),"grin");
+					speak("lich", _("Send the skeletons through the underdrives."),"threaten");
 					
 					setSpeakerAnimation("att1","kneelUp",800);
 					setSpeakerAnimation("att2","kneelUp",700);
@@ -1129,18 +1131,18 @@
 				
 				addCameraPosition(4000,"locEntryGeneral",-70,55,15);
 				
-				speak("greif", _("Da tut sich was."),"normal");
-				speak("greif", _("Sie kommen!"),"warcry");
+				speak("greif", _("Something is going on over there."),"normal");
+				speak("greif", _("They are coming!"),"warcry");
 				setSpeakerEmotion("greif","normal")
-				speak("darna",_("Es wird wohl nicht schaden, wenn ich auch noch ein paar Helfer rufe."),"aloof");
+				speak("darna",_("It won't hurt if I call some more helpers, too."),"aloof");
 				
 				if(solo())then
-					speak("greif", _("An die Front mit euch, Schlaechter. _solo"),"angry");
+					speak("greif", _("To the front with you, butcher. ##solo"),"angry");
 				else
-					speak("greif", _("An die Front mit euch, Schlaechter."),"angry");
+					speak("greif", _("To the front with you, butcher."),"angry");
 				end;
-				speak("leader",_("Sag 'Bitte'."),"grin")
-				speak("darna",_("Macht schon!"),"unhappy");
+				speak("leader",_("Say 'please'."),"grin")
+				speak("darna",_("Just do it!"),"unhappy");
 				setSpeakerEmotion("darna","normal");
 				changeTopic("summoningElementals");
 			</Effect>
@@ -1163,8 +1165,8 @@
 		</Event>
 		<Event trigger="itBegins" once="true">
 			<Effect>
-				speak("greif",_("Gebt Acht!"),"warcry")
-				speak("greif",_("Katapulte!"),"warcry")
+				speak("greif",_("Watch out!"),"warcry")
+				speak("greif",_("Catapults!"),"warcry")
 				changeTopic("siegeBegins");
 			</Effect>
 		</Event>
@@ -1380,14 +1382,14 @@
 				timedExecute('setObjectAnimation('..defend_dwall_tmp.attendend1..',"kneel",2000,true)',795)
 			
 				
-				speak("lich", _("Sie wehren sich weiterhin."), "sneer");
-				speak("att1", _("Keine Sorge, mein Gebieter, wir werden sie bald ueberrannt haben!"),"fear");
-				speak("lich", _("Nur keine Hast."),"normal");
-				speak("lich", _("Wir haben Zeit, das ist unser Vorteil."),"grin");
-				speak("lich", _("Zeigen wir ihnen, dass wir auch mit Feuer spielen koennen."),"normal");
-				speak("lich", _("Diese Magier gehen mir langsam auf den Geist."),"unhappy");
-				speak("lich", _("Bereite alles vor."),"normal");
-				speak("att1", _("Ich habe verstanden, mein Gebieter."),"normal");
+				speak("lich", _("They are struggling on."), "sneer");
+				speak("att1", _("Don't worry, my lord, we will have overrun them soon."),"fear");
+				speak("lich", _("There's no hurry."),"normal");
+				speak("lich", _("We have time, that is our advantage."),"grin");
+				speak("lich", _("Show them that we can play with fire, too."),"normal");
+				speak("lich", _("Those mages are beginning to get on my nerves."),"unhappy");
+				speak("lich", _("Prepare everything."),"normal");
+				speak("att1", _("I understand, my lord."),"normal");
 				executeInDialog('insertTrigger("wave5")');
 				
 			</Effect>
@@ -1650,12 +1652,12 @@
 				timedExecute('setObjectAnimation('..defend_dwall_tmp.attendend2..',"kneel",2000,true)',795)
 			
 				
-				speak("att2", _("Ihre Verteidigung haelt noch immer stand, mein Gebieter"),"normal");
-				speak("lich", _("Niemand hat verlangt, dass es einfach sein muss."), "normal");
-				speak("lich", _("Wusstest du, dass es hier vor zweihundert Jahren einen Wilden gab?"), "normal");
-				speak("lich", _("Die Menschen nannten ihn den Riesentoeter und wollten nichts mit ihm zu tun haben."), "normal");
-				speak("att2", _("Ich verstehe nicht, was das mit der Belagerung zu tun hat, mein Gebieter"),"surprised");
-				speak("lich", _("Sieh zu und lerne."),"grin");
+				speak("att2", _("Their defense still holds, my lord."),"normal");
+				speak("lich", _("No one said it had to be easy."), "normal");
+				speak("lich", _("Did you now there was a wild man here two-hundred years ago?"), "normal");
+				speak("lich", _("The humans called him the giant killer and didn't want to have anything to do with him."), "normal");
+				speak("att2", _("I don't see how that has anything to do with the siege, my lord."),"surprised");
+				speak("lich", _("Watch and learn."),"grin");
 				setSpeakerAnimation("lich","summon_skelBow",2000);
 				executeInDialog('insertTrigger("eyesOnBoss")');
 			</Effect>
@@ -1821,13 +1823,13 @@
 				timedExecute('setObjectAnimation('..defend_dwall_tmp.attendend1..',"kneel",2000,true)',795)
 			
 				
-				speak("att1", _("Ihr habt gerufen, mein Gebieter?"),"normal");
-				speak("lich", _("Ich will, dass ihr die Brueder einsetzt."), "sneer");
-				speak("att1", _("Aber die sind noch immer nicht stabil!"),"fear");
-				speak("att1", _("Im schlimmsten Fall werden sie dem Gegner ueberhaupt keinen Schaden zufuegen."), "fear");
-				speak("lich", _("Das spielt keine Rolle."),"normal");
-				speak("lich", _("Er muesste bald hier sein. Im Moment schinden wir nur Zeit."),"normal");
-				speak("att1", _("Wie ihr Befehlt, mein Gebieter."),"normal");
+				speak("att1", _("You called, my lord?"),"normal");
+				speak("lich", _("I want you to use the brothers."), "sneer");
+				speak("att1", _("But they are still not stable!"),"fear");
+				speak("att1", _("In the worst case they will do no damage at all."), "fear");
+				speak("lich", _("That doesn't matter."),"normal");
+				speak("lich", _("He should be here any moment. We are playing for time right now."),"normal");
+				speak("att1", _("As you wish, my lord."),"normal");
 				executeInDialog('insertTrigger("changeView");addTriggerVariable("nextTrigger","boss4");');
 				
 			</Effect>
@@ -1885,18 +1887,18 @@
 				timedExecute('setObjectAnimation('..defend_dwall_tmp.attendend2..',"kneel",2000,true)',795)
 			
 				
-				speak("att2", _("Mein Gebieter."),"normal");
-				speak("lich", _("Was ist?"), "normal");
-				speak("att2", _("Neivan der Frostbringer ist jetzt hier."),"normal");
-				speak("lich", _("Endlich."), "normal");
-				speak("frost", _("Der Weg aus der Grauen Himmelsleiter in diese Trostlos verdorrte Ebene war eben lang."), "bored");
-				speak("lich", _("Und deine Bergspitzen sind lebendiger?"),"sneer");
-				speak("frost", _("Sind wir hier um die letzten Krabbelkaefer in unseren Laendereien zu zaehlen?"), "grin");
-				speak("lich", _("Du hast Recht. Koenntest du mir diese wirklich enervierenden Leute da vorn aus dem Weg raeumen?"),"sneer");
-				speak("frost", _("Deswegen bin ich hier."), "normal");
-				speak("frost", _("Und vergiss nicht, dass du mir danach Land schuldest."), "normal");
-				speak("lich", _("Glaubst du wirklich, ich wuerde zwei Doerfer vermissen, nachdem ich Zwergentrutz endlich habe?"),"unhappy");
-				speak("frost", _("Ich und meine Frostmagier werden schon dafuer sorgen."), "normal");
+				speak("att2", _("My lord."),"normal");
+				speak("lich", _("What is it?"), "normal");
+				speak("att2", _("Neivan the Frostbringer is now here."),"normal");
+				speak("lich", _("Finally."), "normal");
+				speak("frost", _("The road from the Grey Skyladder into this desolate and sear plain was long, you know."), "bored");
+				speak("lich", _("And your mountain tops are more lively?"),"sneer");
+				speak("frost", _("Are we here to count the bugs on our estates?"), "grin");
+				speak("lich", _("You are right. Could you move those really unnerving people over there out of the way?"),"sneer");
+				speak("frost", _("That's what I'm here for."), "normal");
+				speak("frost", _("And don't forget that you owe me land after this."), "normal");
+				speak("lich", _("Do you think I'm going to miss two villages after I got Dwarfenwall?"),"unhappy");
+				speak("frost", _("Me and my frostmages will arrange for that."), "normal");
 				executeInDialog('insertTrigger("wave11")');
 			</Effect>
 		</Event>
@@ -2050,20 +2052,20 @@
 				setSpeakerAnimation("att1","kneelDown",800);
 				timedExecute('setObjectAnimation('..defend_dwall_tmp.attendend1..',"kneel",2000,true)',795)
 			
-				speak("att1", _("Der Frostbringer ist tot, mein Gebieter."),"fear");
-				speak("lich", _("Ich habe es auch gespuert."), "unhappy");
-				speak("att1", _("Wir haben endlich etwas ueber die Verstaerkung erfahren, die das Konzil hier her geschickt hat."),"fear");
-				speak("lich", _("Ausgerechnet jetzt?"), "surprised");
-				speak("lich", _("Und was ist damit? Ich dachte, es gaebe gar keine."),"normal");
-				speak("att1", _("Doch, mein Gebieter. Aber es handelt sich dabei anscheinend um Gezeichnete."),"normal");
-				speak("lich", _("Gezeichnete!"), "angry");
-				speak("lich", _("Das erklaert einiges."), "angry");
-				speak("lich", _("Aber auch sie werden die Stadt nicht halten koennen, wenn die elenden Menschen erst mal alle tot sind."), "angry");
-				speak("lich", _("Ueberrennt sie. Und schick deinen Orden aus."), "angry");
-				speak("att1", _("Sehr wohl, mein Gebieter."),"normal");
-				speak("att1", _("Notfalls werde auch ich, der Schwarze Rabe selbst, in die Schlacht ziehen."),"normal");
-				speak("lich", _("Ich zaehle auf dich."), "normal");
-				speak("lich", _("Reisst ihre Verteidigung in Stuecke."), "normal");
+				speak("att1", _("The Frostbringer is dead, my lord."),"fear");
+				speak("lich", _("I felt it, too."), "unhappy");
+				speak("att1", _("We finally learned something about the backup the council sent here."),"fear");
+				speak("lich", _("Now, of all times?"), "surprised");
+				speak("lich", _("And what of it? I thought, there was none."),"normal");
+				speak("att1", _("There was, my lord. But it seems they are Branded Ones."),"normal");
+				speak("lich", _("Branded Ones!"), "angry");
+				speak("lich", _("That explaines a lot."), "angry");
+				speak("lich", _("But even they will not be able to hold the city once the wretched humans are gone."), "angry");
+				speak("lich", _("Overrun them. Send out your order."), "angry");
+				speak("att1", _("As you command, my lord."),"normal");
+				speak("att1", _("If need be, I, the Black Raven himself, will go to battle."),"normal");
+				speak("lich", _("I count on you."), "normal");
+				speak("lich", _("Tear their defense into pieces."), "normal");
 				executeInDialog('insertTrigger("wave13");');
 			</Effect>
 		</Event>
@@ -2200,13 +2202,13 @@
 				initDialog()
 				addImportantSpeakers();
 				
-				speak("lich", _("Verdammt sollen sie sein!"),"warcry");
-				speak("lich", _("Verdammte Konzilsmagier!"),"angry");
-				speak("lich", _("Verdammte Gezeichnete!"),"angry");
+				speak("lich", _("Curse on them!"),"warcry");
+				speak("lich", _("Cursed council-mages!"),"angry");
+				speak("lich", _("Verdammte Branded Ones!"),"angry");
 				speak("lich", _("..."),"angry",2000);
-				speak("lich",_("Was solls."),"unhappy");
-				speak("lich",_("Am Ende werde ich doch triumphieren."),"unhappy");
-				speak("lich",_("Der Tod gewinnt immer."),"threaten");
+				speak("lich",_("So what."),"unhappy");
+				speak("lich",_("I will triumph in the end."),"unhappy");
+				speak("lich",_("Death always wins."),"threaten");
 				changeTopic("theLichLeaves");
 			</Effect>
 		</Event>
@@ -2232,53 +2234,53 @@
 				initDialog()
 				addImportantSpeakers();
 				
-				speak("greif",_("Es ist vorbei."),"injured2");
-				speak("darna",_("Und Dank der Unterstuetzung des Konzils steht die Stadt noch."),"amused");
+				speak("greif",_("It is over."),"injured2");
+				speak("darna",_("And thanks to the councils backing the city is still standing."),"amused");
 				--TODO ernstzunehmende Werte eintragen
 				if(500 > defend_dwall_tmp.penalty)then
-					speak("greif",_("Ich muss gestehen, ich haette mir in meinen kuensten Traeumen nicht ausmalen koennen, dass jemand so kaempft."),"thoughtful");
+					speak("greif",_("I have to admit, I wouldn't have thought in my wildest dreams that someone could fight like that."),"thoughtful");
 					if(solo() and maleOnly())then
-						speak("greif", _("Es ist gut, dass er momentan auf unserer Seite steht."),"happy");
+						speak("greif", _("It is good that he is on our side at the moment."),"happy");
 					elseif(solo() and femaleOnly())then
-						speak("greif", _("Es ist gut, dass sie momentan auf unserer Seite steht."),"happy");
+						speak("greif", _("It is good that she is on our side at the moment."),"happy");
 					else
-						speak("greif", _("Es ist gut, dass sie momentan auf unserer Seite stehen."),"happy");
+						speak("greif", _("It is good that they are on our side at the moment."),"happy");
 					end;
 					
-					speak("arcopt",_("Wenn beide Seiten Seelen anzubieten haben, nimmt man natuerlich die, die auch bezahlt."),"grin");
+					speak("arcopt",_("If both sides have souls to offer, you take the one paying, of course."),"grin");
 					speak("greif","","unhappy");
-					speak("greif",_("Danke, dass Ihr mich daran erinnert, warum ich Eure Sorte nicht leiden kann."),"unhappy");
-					speak("arcopt",_("Es gibt da keinen grossen Unterschied zu normalen Soeldnern."),"amused");
-					speak("arcopt",_("Ausser vielleicht, dass Gezeichnete nicht einfach mitten drin die Seiten wechseln."),"sneer");
-					speak("darna",_("Genug davon. Reden wir im Kommandozentrum weiter."),"aloof");
-					speak("darna",_("Es waere wohl nicht klug, die Soldaten mit der Nase auf ihre Retter zu stossen."),"aloof");
+					speak("greif",_("Thank you for reminding me, why I cannot stand your kind."),"unhappy");
+					speak("arcopt",_("There is no big difference to normal mercenaries."),"amused");
+					speak("arcopt",_("Maybe aside from the fact, that Branded Ones don't change sides in the middle."),"sneer");
+					speak("darna",_("Enough of that. Let's talk in the command center."),"aloof");
+					speak("darna",_("It wouldn't be wise to hit the soldiers over the head who their saviours were."),"aloof");
 					
 					defend_dwall.outcome="godlike";
 				elseif(1500 > defend_dwall_tmp.penalty)then
-					speak("greif",_("Allerdings."),"unhappy");
+					speak("greif",_("Indeed."),"unhappy");
 					if(solo() and maleOnly())then
-						speak("greif",_("Ohne Euren 'Freund' hier saehe das anders aus."),"unhappy");
+						speak("greif",_("Without your 'friend' this would look different."),"unhappy");
 					elseif(solo() and femaleOnly())then
-						speak("greif",_("Ohne Eure 'Freundin' hier saehe das anders aus."),"unhappy");
+						speak("greif",_("Without your 'friend' this would look different."),"unhappy");
 					else
-						speak("greif",_("Ohne Eure 'Freunde' hier saehe das anders aus."),"unhappy");
+						speak("greif",_("Without your 'friends' this would look different."),"unhappy");
 					end;
 					
 					defend_dwall.outcome="average";
 				elseif(2500 > defend_dwall_tmp.penalty)then
-					speak("greif",_("Immerhin effektiver, als man das von einer Soeldnertruppe haette erwarten koennen."),"injured2");
-					speak("greif",_("Aber wir haben einiges an Verlusten eingefahren."),"unhappy");
-					speak("greif",_("Ich hoffe, die kommen nicht so schnell auf die Idee, einen zweiten Angriff zu starten."),"unhappy");
-					speak("greif",_("Bisher hat sich dieser Lich zwar immer Zeit gelassen, aber bisher hatte er auch keine Unterstuetzung."),"unhappy");
-					speak("darna",_("Genug davon. Reden wir im Kommandozentrum weiter."),"aloof");
+					speak("greif",_("At least more effective than one could have expected from a band of mercenaries."),"injured2");
+					speak("greif",_("But we have quite some losses."),"unhappy");
+					speak("greif",_("I hope they will not plan a new raid soon."),"unhappy");
+					speak("greif",_("The lich took his time, but until now he also had no backup."),"unhappy");
+					speak("darna",_("Enough of that. Let's talk in the command center."),"aloof");
 					
 					defend_dwall.outcome="bad";
 				else
-					speak("greif",_("Welche Unterstuetzung denn bitte?"),"angry");
-					speak("greif",_("Zwei Drittel meiner Leute sind tot!"),"angry");
-					speak("greif",_("Einen zweiten Angriff werden wir niemals ueberleben."),"angry");
-					speak("darna",_("Genug davon. Reden wir im Kommandozentrum weiter."),"unhappy");
-					speak("darna",_("Ich will endlich von dem ganzen Blut weg."),"sad");
+					speak("greif",_("What kind of backing?"),"angry");
+					speak("greif",_("Two third of my men are dead!"),"angry");
+					speak("greif",_("We will never survive a second attack."),"angry");
+					speak("darna",_("Enough of that. Let's talk in the command center."),"unhappy");
+					speak("darna",_("I want to get away from all the blood."),"sad");
 					
 					defend_dwall.outcome="worst";
 				end;
@@ -2329,65 +2331,65 @@
 				
 				if(defend_dwall.outcome=="godlike" or defend_dwall.outcome=="average")then
 					speak("general",_("hmpf"),"aloof");
-					speak("general",_("Gut geschlagen."),"normal");
+					speak("general",_("Well fought"),"normal");
 					if(solo())then
-						speak("general",_("Wenigstens seid Ihr den Aerger wert. _solo"),"normal");
-						speak("any",_("Als ob ich jemals welchen gemacht haette."),"unhappy");
+						speak("general",_("At least you are worth the trouble. ##solo"),"normal");
+						speak("any",_("As if I ever made one."),"unhappy");
 					else
-						speak("general",_("Wenigstens seid ihr den Aerger wert."),"normal");
-						speak("any",_("Als ob wir jemals welchen gemacht haetten."),"unhappy");
+						speak("general",_("At least you are worth the trouble."),"normal");
+						speak("any",_("As if we ever made one."),"unhappy");
 					end;
 				end;
 				
 				
-				speak("leader",_("Die Stadt ist nur fuer den Augenblick sicher."),"normal");
-				speak("leader",_("Wir koennen uns jetzt nicht ausruhen."),"normal");
+				speak("leader",_("The city is safe for the moment."),"normal");
+				speak("leader",_("We cannot rest now."),"normal");
 				if(defend_dwall.outcome=="worst")then
-					speak("general",_("Als ob wir nicht schon genug mit dem Personalmangel zu kaempfen haetten."),"angry");
+					speak("general",_("As if we hadn't enough problems with shortage of soldiers."),"angry");
 				end;
-				speak("council",_("Die Quelle der Angriffe ist der Lich!"),"aloof");
-				speak("council",_("Er muss vernichtet werden!"),"aloof");
+				speak("council",_("The source of the attacks is the lich!"),"aloof");
+				speak("council",_("He has to be destroyed!"),"aloof");
 				
-				speak("general",_("Und wer?!"),"angry");
-				speak("general",_("Ich habe nicht genug Maenner, um einen Ausfall mit Erfolg zu fuehren."),"unhappy");
-				speak("general",_("Das waere Selbstmord!"),"sad");
+				speak("general",_("And who?!"),"angry");
+				speak("general",_("I don't have enough men to lead a successful excursion."),"unhappy");
+				speak("general",_("That would be suicide."),"sad");
 				
-				speak("council",_("Das hat nichts mit Euch zu tun."),"unhappy");
+				speak("council",_("It has nothing to do with you."),"unhappy");
 				if(solo() and maleOnly())then
-					speak("council",_("Dieser Mann steht unter meinem direkten Befehl."),"aloof");
+					speak("council",_("This man is under my direct orders."),"aloof");
 				elseif(solo())then
-					speak("council",_("Diese Frau steht unter meinem direkten Befehl."),"aloof");
+					speak("council",_("This woman is under my direct order."),"aloof");
 				else
-					speak("council",_("Diese Leute stehen unter meinem direkten Befehl."),"aloof");
+					speak("council",_("These people are under my direct order."),"aloof");
 				end;
 				
-				speak("priopt",_("In ihrer unentspannten Art erinnert sie mich an einen gewissen anderen Konzilsmagier."),"thougful");
+				speak("priopt",_("In her tense manner she reminds of a certain other council mage."),"thougful");
 				
-				speak("general",_("Ihr schickt sie in den sicheren Tod!"),"angry");
+				speak("general",_("You are sending them into their sure death!"),"angry");
 				if(defend_dwall.outcome=="worst")then	
-					speak("general",_("Nicht, dass mich das stoeren wuerde, aber wir koennen momentan niemanden verschwenden!"),"unhappy");
-					speak("leader",_("Nur kein falsches Mitleid."),"unhappy");
-					speak("leader",_("Egal wie oft ich sterbe, der Lich wird am Ende vernichtet sein."),"threaten");
+					speak("general",_("Not that I would cry a tear over them, but we cannot waste a single soul right now!"),"unhappy");
+					speak("leader",_("No false sympathy."),"unhappy");
+					speak("leader",_("No matter how often I die, the lich will be destroyed in the end."),"threaten");
 					setSpeakerEmotion("leader","normal");
-					speak("general",_("Ausser um euch selbst kuemmert ihr euch doch um niemanden!"),"angry");
+					speak("general",_("Apart from yourself you are not taking care of anyone!"),"angry");
 				else
-					speak("leader",_("Das waere nicht das erste Mal..."),"amused")
-					speak("council",_("Wollt ihr mir vorschreiben, wie ich meine Leute einsetze?"),"unhappy");
-					speak("general",_("Niemand verdient eine solche Behandlung, nicht einmal die."),"unhappy");
+					speak("leader",_("It wouldn't be the first time..."),"amused")
+					speak("council",_("Do you want to tell me how to use my people?"),"unhappy");
+					speak("general",_("Nobody deserves such a treatment, not even them."),"unhappy");
 					if(solo())then
-						speak("leader",_("Lasst das meine Sorge sein."),"amused")
+						speak("leader",_("Let that be my concern."),"amused")
 					else
-						speak("leader",_("Lasst das unsere Sorge sein."),"amused")
+						speak("leader",_("Let that be our concern."),"amused")
 					end;
-					speak("general",_("Euch ist wirklich nicht zu helfen"),"unhappy");
+					speak("general",_("You realy are beyond help."),"unhappy");
 				end;
 				
-				speak("mage",_("Endlich hat er es auch kapiert."),"sneer");
-				speak("council",_("Wir haben keine Zeit für kleinliche Streitereien! Geht und erschlagt den Lich!"),"unhappy");
-				speak("leader",_("Wie ihr wuenscht..."),"unhappy");
+				speak("mage",_("Finally he cought on to it."),"sneer");
+				speak("council",_("We don't have time for petty arguments! Go and slay the lich!"),"unhappy");
+				speak("leader",_("As you wish..."),"unhappy");
 				if((getSpeaker("archer")~=nil) and (getSpeaker("priest")~=nil))then
-					speak("archer",_("So ein Pfeil koennte im Eifer des Gefechts doch von ueberall gekommen sein..."),"thoughtful");
-					speak("priest",_("Denk nicht mal drueber nach."),"unhappy");
+					speak("archer",_("One of these arrows could have come from anywhere in the heat of battle..."),"thoughtful");
+					speak("priest",_("Don't even think about it."),"unhappy");
 				end;
 				changeTopic("setOutForTheLich")
 			</Effect>
@@ -2486,9 +2488,9 @@
 				initDialog()
 				addSpeaker(defend_dwall_tmp.lich,"lich");
 				speakPause(1000);
-				speak("lich",_("Sieh an."),"amused");
-				speak("lich",_("Da ist ja die Wurzel meines kleinen Problems."),"unhappy");
-				speak("lich",_("Kaum zu glauben, dass jemand so verrueckt ist, hier raus zu stuermen."),"amused");
+				speak("lich",_("Well well."),"amused");
+				speak("lich",_("Here comes the root of my little problem."),"unhappy");
+				speak("lich",_("It's hard to believe someone was crazy enough to storm out here."),"amused");
 				
 				changeTopic("lichFinalSpeachIntermediate");
 			</Effect>
@@ -2497,54 +2499,54 @@
 			<Effect>
 				addCameraPosition(1500,"locCamera", -110, 70, 24)
 				
-				speak("leader",_("Mach dich bereit, fuer immer zu vergehen!"),"grin");
+				speak("leader",_("Prepare to pass off forever!"),"grin");
 				
 				if(solo() and maleOnly())then
-					speak("lich",_("Kaum zu glauben, dass ein einziger Gezeichneter ausreicht, um so viel Chaos zu verursachen."),"surprised");
+					speak("lich",_("I can't believe that a single Branded One would be sufficient to cause so much chaos."),"surprised");
 				elseif(solo())then
-					speak("lich",_("Kaum zu glauben, dass eine einzige Gezeichnete ausreicht, um so viel Chaos zu verursachen."),"surprised");
+					speak("lich",_("I can't believe that a single Branded One would be sufficient to cause so much chaos."),"surprised");
 				else
-					speak("lich", _("Natuerlich, wenn ein paar Gezeichnete in der Naehe sind ist alles ein wenig anders."),"thoughtful");
+					speak("lich", _("Of course, if some Branded Ones are in the vicinity everything is a bit different."),"thoughtful");
 				end;
-				speak("waropt", _("Erntezeit!!"),"warcry");
-				speak("lich",_("Nicht so hastig."),"threaten");
+				speak("waropt", _("Harvest!"),"warcry");
+				speak("lich",_("Not so fast."),"threaten");
 				setSpeakerEmotion("waropt","normal");
 				if(solo())then
-					speak("lich",_("Sicher, Ihr seid unsterblich, oder so sagt man zumindest, aber Schmerzen spürt Ihr doch trotzdem noch, nicht wahr? _solo"),"amused");
-					speak("lich",_("Wollt Ihr Euch wirklich immer und immer wieder von mir in Stuecke hacken lassen? _solo"),"threaten");
+					speak("lich",_("Sure, you are immortal, or at least they say so, but you do feel pain, don't you? ##solo"),"amused");
+					speak("lich",_("Do you really want to be hacked into pieces by me over and over again? ##solo"),"threaten");
 				else
-					speak("lich",_("Sicher, ihr seid unsterblich, oder so sagt man zumindest, aber Schmerzen spürt ihr doch trotzdem noch, nicht wahr?"),"amused");
-					speak("lich",_("Wollt ihr euch wirklich immer und immer wieder von mir in Stuecke hacken lassen?"),"threaten");
+					speak("lich",_("Sure, you are immortal, or at least they say so, but you do feel pain, don't you?"),"amused");
+					speak("lich",_("Do you really want to be hacked into pieces by me over and over again?"),"threaten");
 				end;
-				speak("waropt", _("Pah! Deine Skelette sind alle schon Staub und der eine Lakei wird dich nicht retten!"),"sneer");
-				speak("lich",_("Wo Ihr es so erwaehnt..."),"amused");
-				speak("lich",_("Ihr habt tatsaechlich die meisten in Stuecke geschlagen."),"unhappy");
-				speak("lich",_("Dennoch ein verkraftbarer Verlust."),"normal");
-				speak("lich",_("Die Menschen in Zwergentrutz werden mir sicherlich beim Aufstellen einer neuen Armee behilflich sein."),"grin");
+				speak("waropt", _("Bah! Your skeletons are dust and the one lackey will not save you!"),"sneer");
+				speak("lich",_("Now that you mention it..."),"amused");
+				speak("lich",_("You really smashed most of them."),"unhappy");
+				speak("lich",_("Still, I can handle such a loss."),"normal");
+				speak("lich",_("The people of Dwarfenwall will surely help me raise a new army."),"grin");
 				if(fissure.listened == true)then
-					speak("leader", _("Was ist das eigentlich fuer ein Kristall, den deine verrotteten Herren wollen, Kettenhund?"),"normal");
+					speak("leader", _("What is this crystal your rotting masters want, banddog?"),"normal");
 					--TODO: lich lachen
-					speak("lich", _("Du kannst mich nicht wuetend machen."),"sneer");
-					speak("lich", _("Und was den Kristall angeht, so fragt Ihr vielleicht lieber Eure Auftraggeber?"),"sneer");
+					speak("lich", _("You cannot make me angry."),"sneer");
+					speak("lich", _("And about the crystal: Why don't you ask your employers?"),"sneer");
 					speak("leader",_("..."),"unhappy",2000);
-					speak("lich",_("Das dachte ich mir."),"grin");
-					speak("lich",_("Die Elementaristen sind nicht besonders gespraechig, habe ich recht?"),"grin");
+					speak("lich",_("I thought so."),"grin");
+					speak("lich",_("The elementalists are not exactly talkative, am I right?"),"grin");
 				end;
-				speak("priopt",_("Deine Rede ist so faul wie der Rest deines Koerpers."),"angry");
+				speak("priopt",_("Your talking is as foul as the rest of your body."),"angry");
 				
-				speak("waropt",_("Stirb!"),"angry");
+				speak("waropt",_("Die!"),"angry");
 				changeTopic("lichTalkFinalThreats");
 				
 			</Effect>
 		</Event>
 		<Event trigger="lichTalkFinalThreats" once="true">
 			<Effect>
-				groupTalk(_("Erntezeit!"),"warcry")
+				groupTalk(_("Harvest!"),"warcry")
 				speakPause(1000);
 				if(solo())then
-					speak("lich",_("Habt Ihr eigentlich gewusst, dass es hier eine Menge ungebundener Seelen in der Luft gibt? _solo"),"grin");
+					speak("lich",_("Did you know there is quite a lot of unbound souls in the air? ##solo"),"grin");
 				else
-					speak("lich",_("Habt ihr eigentlich gewusst, dass es hier eine Menge ungebundener Seelen in der Luft gibt?"),"grin");
+					speak("lich",_("Did you know there is quite a lot of unbound souls in the air?"),"grin");
 				end;
 				changeTopic("lichTalkEnd")
 			</Effect>
@@ -2553,7 +2555,7 @@
 			<Effect>
 				setCutsceneMode(false)
 				
-				unitSpeak("lich",_("Und jetzt werde ich der erste sein, der einen Weg findet, wie Gezeichnete zu toeten sind."), "angry")
+				unitSpeak("lich",_("And now I will find a way to kill Branded Ones."), "angry")
 			</Effect>
 		</Event>
 		
@@ -2662,7 +2664,7 @@
 				
 				addCameraPosition(0, position1,-90, 65, 16);
 				addCameraPosition(1500,position2,-90, 45, 12);
-				unitSpeak(defend_dwall_tmp.lich,_("Nein! Das kann nicht sein! Ihr elenden..."),"panic")
+				unitSpeak(defend_dwall_tmp.lich,_("No! It cannot be! You baleful..."),"panic")
 				
 				groupObjectsArc(getPlayers(),"locParty","locParty",3, 360);
 				
@@ -2697,15 +2699,15 @@
 				addSpeaker(speaker3,"s3");
 				addSpeaker(speaker4,"s4");
 				
-				speak("s1",_("Das waere geschafft."),"wounded2")
-				speak("s4",_("Wie bitte? Das soll wohl ein Witz sein!"),"unhappy")
-				speak("s4",_("Die Verteidigung von Zwergentrutz war nur zum aufwaermen, schon vergessen?"),"unhappy")
-				speak("s1",_("Wenn du willst, dass es schneller geht, dann hilf doch einfach mit."),"grin")
-				speak("s3",_("Oder besuch mal www.sumwars.org und sieh im Forum vorbei. Kritik, Hinweise und Kommentare sind immer gern gesehen."),"thoughtful")
-				speak("s2",_("Gibt's dafuer auch Geld??"),"surprised")
-				speak("s1",_("Natuerlich nicht. Oder hast du was hierfuer bezahlt?"),"unhappy")
-				speak("s3",_("Aber die Goetter werden sich ewig deiner erinnern."),"excited")
-				speak("s1",_("Damit ist die Demo offiziell vorbei."),"amused")
+				speak("s1",_("It's a wrap."),"wounded2")
+				speak("s4",_("What? Are you kidding?"),"unhappy")
+				speak("s4",_("Did you forget the defense of Dwarfenwall was only a warm-up?"),"unhappy")
+				speak("s1",_("If you want the process to be faster, just help out a bit."),"grin")
+				speak("s3",_("Or visit www.sumwars.org and take a look at the forum. Criticism, hints and comments are always welcome."),"thoughtful")
+				speak("s2",_("Do I get money for it?"),"surprised")
+				speak("s1",_("Of course not. Did you pay anything for this?"),"unhappy")
+				speak("s3",_("But the gods will remember you for all eternity."),"excited")
+				speak("s1",_("With this, the demo is officially over."),"amused")
 				changeTopic("endScene")
 			</Effect>
 		</Event>

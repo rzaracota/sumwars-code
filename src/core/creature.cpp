@@ -1128,8 +1128,8 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 					dia->addSpeaker(getId(),"player");
 					dia->addSpeaker(goalobj->getId(),cr->getRefName());
 					dia->addSpeaker(goalobj->getId(),"npc");
-					dia->setSpeakerPosition(getId(), Dialogue::LOWER_LEFT);
-					dia->setSpeakerPosition(goalobj->getId(), Dialogue::UPPER_RIGHT);
+					dia->setSpeakerPosition(getId(), Dialogue::LEFT);
+					dia->setSpeakerPosition(goalobj->getId(), Dialogue::RIGHT);
 					dia->changeTopic("start");
 
 					if (dia->isFinished())

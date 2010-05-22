@@ -537,6 +537,39 @@ int Equipement::getMaxItemNumber(Item::Size size)
 	return pos;
 }
 
+Equipement::Position Equipement::getItemEquipPosition(Item* item, bool secondary_equip, Equipement::Position proposed)
+{
+	Position pos = proposed;
+	
+	if (item->m_type == Item::WEAPON && !secondary_equip)
+		pos = Equipement::WEAPON;
+	else if (item->m_type == Item::WEAPON && secondary_equip)
+		pos = Equipement::WEAPON2;
+	else if (item->m_type == Item::SHIELD && !secondary_equip)
+		pos = Equipement::SHIELD;
+	else if (item->m_type == Item::SHIELD && secondary_equip)
+		pos = Equipement::SHIELD2;
+	else if (item->m_type == Item::HELMET)
+		pos = Equipement::HELMET;
+	else if (item->m_type == Item::GLOVES)
+		pos = Equipement::GLOVES;
+	else if (item->m_type == Item::ARMOR)
+		pos = Equipement::ARMOR;
+	else if (item->m_type == Item::AMULET)
+		pos = Equipement::AMULET;
+	else if (item->m_type == Item::RING)
+	{
+		if (pos != Equipement::RING_LEFT && pos != Equipement::RING_RIGHT)
+		{
+			pos = Equipement::RING_LEFT;
+			if (getItem(pos) != 0)
+				pos = Equipement::RING_RIGHT;
+		}
+	}
+	
+	return pos;
+}
+
 void Equipement::toString(CharConv* cv)
 {
 

@@ -357,6 +357,15 @@ class Equipement
 	{
 		m_gold = gold;
 	}
+	
+	/**
+	 * \brief Returns the position where the Item shold be placed as equip position. The proposed position is prefered, if more than one position is possible (for rings)
+	 * \param item The item for that the position should be determined
+	 * \param proposed Position, that should be used if more than one position is possible
+	 * \param secondary_equip If set to true, secondary equip slots will be returned for weapon and shield
+	 * \return position where this items could be equiped
+	 */
+	Position getItemEquipPosition(Item* item, bool secondary_equip, Position proposed = NONE);
 
 	private:
 
