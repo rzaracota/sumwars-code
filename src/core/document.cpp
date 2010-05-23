@@ -830,9 +830,6 @@ void Document::onButtonInventoryClicked()
 		m_gui_state.m_pressed_key = 0;
 
 		getGUIState()->m_shown_windows |= INVENTORY;
-
-
-
 	}
 
 	// Geoeffnete Fenster haben sich geaendert

@@ -435,10 +435,10 @@ bool Application::initCEGUI()
 	CEGUI::WindowFactoryManager::getSingleton().addFalagardWindowMapping ("TextWrapTooltip", "CEGUI/Tooltip", "TaharezLook/Tooltip","Falagard/Tooltip");
 
 	// default ToolTip erzeugen
-	CEGUI::System::getSingleton().setDefaultTooltip( (CEGUI::utf8*)"TextWrapTooltip" );
+	/*CEGUI::System::getSingleton().setDefaultTooltip( (CEGUI::utf8*)"TextWrapTooltip" );
 	CEGUI::Tooltip* ttip = CEGUI::System::getSingleton().getDefaultTooltip();
 	ttip->setDisplayTime(0);
-	ttip->setMaxSize(CEGUI::UVector2(cegui_reldim(0.4), cegui_reldim(1.0)));
+	ttip->setMaxSize(CEGUI::UVector2(cegui_reldim(0.4), cegui_reldim(1.0)));*/
 	return true;
 }
 

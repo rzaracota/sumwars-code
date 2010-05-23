@@ -30,7 +30,21 @@
 
 #include <math.h>
 
+struct ItemRequirementsMet
+{
+    bool m_overall;
+    bool m_level;
+    bool m_class;
+    bool m_strength;
 
+    ItemRequirementsMet()
+    {
+        m_overall = true;
+        m_level = true;
+        m_class = true;
+        m_strength = true;
+    }
+};
 
 /**
  * \struct WeaponAttr
@@ -265,8 +279,9 @@ struct Item {
 	 * \fn std::string getDescription()
 	 * \brief Gibt eine Beschreibung in Textform aus
 	 * \param price_factor Wenn ein Faktor ungleich 1 angegeben wird, so wird zusaetzlich der mit Faktor multiplizierte Wert angezeigt
+     * \param irm Colors the item properties not met by the player red in the description
 	 */
-	std::string getDescription(float price_factor=1);
+	std::string getDescription(float price_factor=1, ItemRequirementsMet irm = ItemRequirementsMet());
 
 	/**
 	 * \fn calcPrice()

@@ -110,7 +110,7 @@ void ItemWindow::updateItemWindow(CEGUI::Window* img, Item* item, Player* player
 	{
 		// rot wenn Spieler Item nicht verwenden kann
 		// oder es bezahlen muss und nicht genug Geld hat
-		if (!player->checkItemRequirements(item))
+		if (!player->checkItemRequirements(item).m_overall)
 		{
 			propnew = "tl:FFAA5555 tr:FFAA5555 bl:FFAA5555 br:FFAA5555";
 		}
@@ -141,8 +141,11 @@ void ItemWindow::updateItemWindowTooltip(CEGUI::Window* img, Item* item, Player*
 	}
 	else
 	{
-		msg =item->getDescription(price_factor);
+        ItemRequirementsMet irm = player->checkItemRequirements(item);
+        msg = item->getDescription(price_factor, irm);
 	}
+
+
 	img->setTooltipText((CEGUI::utf8*) msg.c_str());
 }
 

@@ -552,7 +552,7 @@ bool Player::onItemClick(ClientCommand* command)
 			{
 
 				// Item soll als Ausruestungsgegenstand benutzt werden
-				req = checkItemRequirements(it);
+				req = checkItemRequirements(it).m_overall;
 				pos = m_equipement-> getItemEquipPosition(it, m_secondary_equip, (Equipement::Position) pos);
 			}
 			else
@@ -659,7 +659,7 @@ bool Player::onItemClick(ClientCommand* command)
 					// equip Item to Autoposition
 					if (pos >= Equipement::CURSOR_ITEM)
 					{
-						bool req = checkItemRequirements(it);
+						bool req = checkItemRequirements(it).m_overall;
 						Equipement::Position pos2 = m_equipement-> getItemEquipPosition(it, m_secondary_equip);
 						
 						if (req && pos2 <= Equipement::CURSOR_ITEM && pos2 != Equipement::NONE)
@@ -845,7 +845,7 @@ short Player::insertItem(Item* itm, bool use_equip, bool emit_event)
 		ERRORMSG("tried to insert null item");
 		return 0;
 	}
-	bool may_equip = use_equip && checkItemRequirements(itm);
+	bool may_equip = use_equip && checkItemRequirements(itm).m_overall;
 
 	short pos = getEquipement()->insertItem(itm,true,may_equip, m_secondary_equip);
 
@@ -884,14 +884,17 @@ short Player::insertItem(Item* itm, bool use_equip, bool emit_event)
 	return pos;
 }
 
-bool Player::checkItemRequirements(Item* itm)
+ItemRequirementsMet Player::checkItemRequirements(Item* itm)
 {
+    ItemRequirementsMet irm;
+    
 	// testen ob Level ausreicht
 	if (getBaseAttr()->m_level < itm->m_level_req)
 	{
 		// Level Vorraussetzung nicht erfuellt
 		DEBUGX("level too low: own level: %i item level: %i",getBaseAttr()->m_level,itm->m_level_req);
-		return false;
+        irm.m_overall = false;
+        irm.m_level = false;
 	}
 
 	// testen ob Item fuer die Charakterklasse zugelassen ist
@@ -908,14 +911,15 @@ bool Player::checkItemRequirements(Item* itm)
 			{
 				if (itm->m_char_req.find(*it) != std::string::npos)
 				{
-					return true;
+					return irm;
 				}
 			}
 		}
-		return false;
+		irm.m_overall = false;
+        irm.m_class = false;
 	}
 
-	return true;
+	return irm;
 }
 
 Item* Player::getWeapon()

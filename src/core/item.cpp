@@ -635,13 +635,33 @@ void Item::fromStringComplete(CharConv* cv)
 
 }
 
-std::string Item::getDescription(float price_factor)
+
+std::string Item::getDescription(float price_factor, ItemRequirementsMet irm)
 {
+    std::string defaultColor = "[colour='FF2F2F2F']";
+    std::string rarityColor;
+    switch (m_rarity)
+    {
+        case MAGICAL:
+            rarityColor = "[colour='FF00C000']";
+            break;
+        case RARE:
+            rarityColor = "[colour='FF2573D9']";
+            break;
+        case UNIQUE:
+            rarityColor = "[colour='FFFF0000']";
+            break;
+        case QUEST:
+            rarityColor = "[colour='FFC05600']";
+            break;
+        default:
+            rarityColor = defaultColor;
+    }
 
 	// String fuer die Beschreibung
 	std::ostringstream out_stream;
 	out_stream.str("");
-	out_stream<<getName()<<"\n";
+    out_stream<<rarityColor<<getName()<<"\n" << defaultColor;
 	int i;
 	// Levelbeschraenkung
 	out_stream <<gettext("Value")<<": "<<m_price;
@@ -651,11 +671,17 @@ std::string Item::getDescription(float price_factor)
 	}
 	if (m_level_req>0)
 	{
-		out_stream<<"\n" << gettext("Required level")<<": "<<(int) m_level_req;
+        if (irm.m_level)
+            out_stream<<"\n" << gettext("Required level")<<": "<<(int) m_level_req;
+        else
+            out_stream<<"\n" << "[colour='FFFF0000']" << gettext("Required level")<<": "<<(int) m_level_req << "[colour='FF2F2F2F']";
 	}
 	
 	if (m_char_req != "15" && m_char_req != "all")
 	{
+        if (!irm.m_class)
+            out_stream<< "[colour='FFFF0000']";
+        
 		size_t pos=0,pos2;
 		out_stream<<"\n" << gettext("Required class")<<": ";
 		
@@ -706,7 +732,7 @@ std::string Item::getDescription(float price_factor)
 			
 			first = false;
 		}
-		
+		out_stream<< defaultColor; 
 	}
 
 	// Effekt beim Verbrauchen
