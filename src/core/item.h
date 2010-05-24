@@ -20,6 +20,7 @@
 
 #include <string>
 #include <cstring>
+#include <list>
 
 #include <locale.h>
 #include "charconv.h"
@@ -30,11 +31,34 @@
 
 #include <math.h>
 
+/**
+* \struct ItemRequirementsMet
+* \brief Holds information about whether the players attributes meet the rquirements by this item
+*/
 struct ItemRequirementsMet
 {
+    /**
+    * \var bool m_overall
+    * \brief All requirements are met
+    */
     bool m_overall;
+
+    /**
+    * \var bool m_level
+    * \brief Level requirement is met
+    */
     bool m_level;
+    
+    /**
+    * \var bool m_class
+    * \brief Class requirement is met
+    */
     bool m_class;
+
+    /**
+    * \var bool m_strength
+    * \brief Strength requirement is met
+    */
     bool m_strength;
 
     ItemRequirementsMet()
@@ -283,6 +307,14 @@ struct Item {
 	 */
 	std::string getDescription(float price_factor=1, ItemRequirementsMet irm = ItemRequirementsMet());
 
+    /**
+    * \fn std::string getDescription()
+    * \brief Gibt eine Beschreibung in Form einer Stringliste aus
+    * \param price_factor Wenn ein Faktor ungleich 1 angegeben wird, so wird zusaetzlich der mit Faktor multiplizierte Wert angezeigt
+    * \param irm Colors the item properties not met by the player red in the description
+    */
+    std::list<std::string> getDescriptionAsStringList(float price_factor, ItemRequirementsMet irm = ItemRequirementsMet());
+    
 	/**
 	 * \fn calcPrice()
 	 * \brief Berechnet den Wert des Items

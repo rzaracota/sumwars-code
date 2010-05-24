@@ -433,8 +433,9 @@ bool Application::initCEGUI()
 	// eigene Factorys einfuegen
 	CEGUI::WindowFactoryManager::getSingleton().addFactory( new TextWrapTooltipFactory );
 	CEGUI::WindowFactoryManager::getSingleton().addFalagardWindowMapping ("TextWrapTooltip", "CEGUI/Tooltip", "TaharezLook/Tooltip","Falagard/Tooltip");
+    CEGUI::WindowFactoryManager::getSingleton().addFalagardWindowMapping ("SumwarsTooltip", "DefaultWindow", "TaharezLook/Tooltip", "Falagard/Default");
 
-	// default ToolTip erzeugen
+    // default ToolTip erzeugen
 	/*CEGUI::System::getSingleton().setDefaultTooltip( (CEGUI::utf8*)"TextWrapTooltip" );
 	CEGUI::Tooltip* ttip = CEGUI::System::getSingleton().getDefaultTooltip();
 	ttip->setDisplayTime(0);
