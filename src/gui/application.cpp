@@ -278,7 +278,7 @@ bool Application::initOgre()
 {
 	DEBUG("init ogre");
 	// Fenster anlegen, Ogre initialisieren
-	m_window = m_ogre_root->initialise(true);
+	m_window = m_ogre_root->initialise(true,"Summoning Wars");
 
 	// Szenemanager anlegen
 	m_scene_manager = m_ogre_root->createSceneManager(Ogre::ST_GENERIC,"DefaultSceneManager");
