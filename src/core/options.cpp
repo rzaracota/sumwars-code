@@ -22,6 +22,17 @@ void Options::init()
 	m_shortkey_map[OIS::KC_TAB] =  SHOW_MINIMAP;
 	m_shortkey_map[OIS::KC_F10] =  SHOW_OPTIONS;
 	
+	m_shortkey_map[OIS::KC_1] =  USE_POTION;
+	m_shortkey_map[OIS::KC_2] =  (ShortkeyDestination) (USE_POTION+1);
+	m_shortkey_map[OIS::KC_3] =  (ShortkeyDestination) (USE_POTION+2);
+	m_shortkey_map[OIS::KC_4] =  (ShortkeyDestination) (USE_POTION+3);
+	m_shortkey_map[OIS::KC_5] =  (ShortkeyDestination) (USE_POTION+4);
+	m_shortkey_map[OIS::KC_6] =  (ShortkeyDestination) (USE_POTION+5);
+	m_shortkey_map[OIS::KC_7] =  (ShortkeyDestination) (USE_POTION+6);
+	m_shortkey_map[OIS::KC_8] =  (ShortkeyDestination) (USE_POTION+7);
+	m_shortkey_map[OIS::KC_9] =  (ShortkeyDestination) (USE_POTION+8);
+	m_shortkey_map[OIS::KC_0] =  (ShortkeyDestination) (USE_POTION+9);
+	
 	// special keys that may not be used as shortkeys
 	m_special_keys.insert(OIS::KC_ESCAPE);
 	m_special_keys.insert(OIS::KC_LSHIFT);
@@ -64,16 +75,7 @@ void Options::setToDefaultOptions()
 	m_shortkey_map[OIS::KC_Q] =  SHOW_QUESTINFO;
 	m_shortkey_map[OIS::KC_W] =  SWAP_EQUIP;
 	m_shortkey_map[OIS::KC_LMENU] =  SHOW_ITEMLABELS;
-	m_shortkey_map[OIS::KC_1] =  USE_POTION;
-	m_shortkey_map[OIS::KC_2] =  (ShortkeyDestination) (USE_POTION+1);
-	m_shortkey_map[OIS::KC_3] =  (ShortkeyDestination) (USE_POTION+2);
-	m_shortkey_map[OIS::KC_4] =  (ShortkeyDestination) (USE_POTION+3);
-	m_shortkey_map[OIS::KC_5] =  (ShortkeyDestination) (USE_POTION+4);
-	m_shortkey_map[OIS::KC_6] =  (ShortkeyDestination) (USE_POTION+5);
-	m_shortkey_map[OIS::KC_7] =  (ShortkeyDestination) (USE_POTION+6);
-	m_shortkey_map[OIS::KC_8] =  (ShortkeyDestination) (USE_POTION+7);
-	m_shortkey_map[OIS::KC_9] =  (ShortkeyDestination) (USE_POTION+8);
-	m_shortkey_map[OIS::KC_0] =  (ShortkeyDestination) (USE_POTION+9);
+	
 	
 	setSoundVolume(1.0);
 	setMusicVolume(1.0);
