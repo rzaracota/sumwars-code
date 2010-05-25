@@ -825,6 +825,11 @@ class Document
 		* \return ID
 		*/
 		int getObjectAt(float x,float y);
+		
+		/**
+		 * \brief Updates the number of the clicked object. This is set to a new object hovered by the player, if the old target is gone
+		 */
+		void updateClickedObjectId();
 
 
 		/**

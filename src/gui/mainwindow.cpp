@@ -1176,16 +1176,29 @@ void MainWindow::updateObjectInfo()
 	
 	int id=0;
 	int objid =0;
+	bool search_for_object = true;
+	
 	if (reg->getCutsceneMode () == true || player->getDialogue () != 0)
 	{
 		objid = 0;
+		search_for_object = false;
 	}
 	else if (m_mouse->getMouseState().buttons !=0)
 	{
 		// fokussiertes Objekt nicht wechseln, wenn Maustaste gedrueckt
 		objid = m_document->getGUIState()->m_cursor_object_id;
+		GameObject* go = reg->getObject(objid);
+		if (go != 0)
+		{
+			search_for_object = false;
+		}
+		else if (go->getState() != WorldObject::STATE_ACTIVE)
+		{
+			search_for_object = false;
+		}
 	}
-	else
+	
+	if (search_for_object);
 	{
 
 		WorldObject* wo;
@@ -1315,6 +1328,15 @@ void MainWindow::updateObjectInfo()
 			
 	}
 	
+	if (objid==player->getId())
+	{
+		m_document->getGUIState()->m_cursor_object_id =player->getId();
+		
+		label->setVisible(false);
+		bar->setVisible(false);
+		itmlabel->setVisible(false);
+	}
+	
 	std::string highlightmat ="white_highlight_alpha_nodepth";
 	
 	std::string name;
@@ -1326,6 +1348,7 @@ void MainWindow::updateObjectInfo()
 		GameObject* go = reg->getGameObject(objid);
 		if (go != 0)
 		{
+			DEBUGX("highlight object %i,",objid);
 			WorldObject* cwo = dynamic_cast<WorldObject*>(go);
 			Creature* cr;
 				

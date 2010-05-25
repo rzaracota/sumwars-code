@@ -1604,9 +1604,8 @@ void Document::updateContent(float time)
 */
 	if (m_gui_state.m_left_mouse_pressed)
 	{
-		DEBUGX("linke Maustaste festgehalten");
 		m_gui_state.m_left_mouse_pressed_time += time;
-		if (m_gui_state.m_left_mouse_pressed_time>= 200)
+		if (m_gui_state.m_left_mouse_pressed_time >= 200)
 		{
 			ClientCommand command;
 
@@ -1615,6 +1614,8 @@ void Document::updateContent(float time)
 			{
 				command.m_button=LEFT_SHIFT_MOUSE_BUTTON;
 			}
+			updateClickedObjectId();
+			
 			command.m_goal = m_gui_state.m_clicked;
 			command.m_id = m_gui_state.m_clicked_object_id;
 			command.m_action = player->getLeftAction();
@@ -1634,6 +1635,7 @@ void Document::updateContent(float time)
 		if (m_gui_state.m_right_mouse_pressed_time>= 200)
 		{
 			ClientCommand command;
+			updateClickedObjectId();
 
 			command.m_button=RIGHT_MOUSE_BUTTON;
 			command.m_goal = m_gui_state.m_clicked;
@@ -1651,6 +1653,31 @@ void Document::updateContent(float time)
 
 
 
+}
+
+void Document::updateClickedObjectId()
+{
+	Player* player = static_cast<Player*>(World::getWorld()->getLocalPlayer());
+	Region* reg = player->getRegion();
+	if (reg == 0)
+		return;
+	
+	// select new target if the old one is gone or inactive
+	if (m_gui_state.m_clicked_object_id != 0 && m_gui_state.m_cursor_object_id != 0)
+	{
+		GameObject* go = reg->getObject(m_gui_state.m_clicked_object_id);
+		if (go == 0 || go->getState() != WorldObject::STATE_ACTIVE)
+		{
+			// TODO: better check if the target is appropriate for the action
+			go = reg->getObject(m_gui_state.m_cursor_object_id);
+			Creature* cr = dynamic_cast<Creature*>(go);
+			if ( cr != 0 && World::getWorld()->getRelation(player->getFraction(),cr) == Fraction::HOSTILE)
+			{
+				m_gui_state.m_clicked_object_id = m_gui_state.m_cursor_object_id;
+				DEBUGX("new target %i %i",m_gui_state.m_clicked_object_id, player->getId());
+			}
+		}
+	}
 }
 
 void Document::writeSavegame()
