@@ -24,6 +24,7 @@
 #include "messageboxes.h"
 #include "dialoguewindow.h"
 #include "music.h"
+#include "tooltipmanager.h"
 
 MainWindow::MainWindow(Ogre::Root* ogreroot, CEGUI::System* ceguisystem,Ogre::RenderWindow* window,Document* doc)
 {
@@ -273,6 +274,7 @@ void MainWindow::update(float time)
 		if (m_document->getGUIState()->m_sheet ==  Document::GAME_SCREEN)
 		{
 			m_cegui_system->setGUISheet(m_game_screen);
+			TooltipManager::getSingleton().setParent(m_game_screen);
 			m_game_screen->addChildWindow(m_sub_windows["Options"]->getCEGUIWindow());
 			MusicManager::instance().stop();
 		}
@@ -2443,6 +2445,11 @@ bool MainWindow::keyPressed(const OIS::KeyEvent &evt) {
 		m_cegui_system->injectChar((CEGUI::utf32) ch);
 		return true;
 	}
+	
+    if (evt.key == OIS::KC_S)
+    {
+        m_scene_manager->setShadowTextureSelfShadow(!m_scene_manager->getShadowTextureSelfShadow());
+    }
 	
 	bool ret =m_cegui_system->injectKeyDown(evt.key);
 	

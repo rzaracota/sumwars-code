@@ -88,19 +88,6 @@ class ItemWindow : public Window
 		 * \brief Enthaelt fuer jeden Itemtyp das passende Bild
 		 */
 		static std::map<Item::Subtype, std::string> m_item_images;
-		
-    private:
-        /**
-         * \fn std::string stripColors(const std::string input)
-         * \brief Strips the color tags from a given text string
-         */
-        std::string stripColors(const std::string &input);
-
-        /**
-        * \fn CEGUI::UVector2 getSizeForTooltip(std::list<std::string> list)
-        * \brief Strips the color tags from a given text string
-        */
-        CEGUI::UVector2 getWindowSizeForText(std::list<std::string> list, CEGUI::Font *font, std::string &added);
 };
 
 #endif

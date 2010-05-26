@@ -1,6 +1,6 @@
 #include "application.h"
 
-#include "tooltip.h"
+#include "tooltipmanager.h"
 #include "itemwindow.h"
 #include "templateloader.h"
 #include "music.h"
@@ -136,9 +136,9 @@ Application::~Application()
 	delete m_main_window;
 	delete m_document;
     CEGUI::OgreRenderer::destroySystem(); // deletes everything
-//	delete m_ogre_cegui_renderer;
 	delete m_ogre_root;
-
+	
+	
 	ObjectFactory::cleanup();
 	ItemFactory::cleanup();
 	SoundSystem::cleanup();
@@ -284,6 +284,13 @@ bool Application::initOgre()
 	// Szenemanager anlegen
 	m_scene_manager = m_ogre_root->createSceneManager(Ogre::ST_GENERIC,"DefaultSceneManager");
 
+    // set Shadows enabled before any mesh is loaded
+    m_scene_manager->setShadowTextureSelfShadow(true);
+    m_scene_manager->setShadowTextureConfig(0,4096,4096,Ogre::PF_X8R8G8B8);
+    m_scene_manager->setShadowColour( Ogre::ColourValue(0.4, 0.4, 0.4) );
+    m_scene_manager->setShadowTechnique(Ogre::SHADOWTYPE_TEXTURE_ADDITIVE);
+    m_scene_manager->setShadowFarDistance(2000);
+    
 	Ogre::LogManager::getSingleton().setLogDetail(Ogre::LL_LOW);
 	return true;
 
@@ -431,15 +438,15 @@ bool Application::initCEGUI()
 	m_cegui_system->setDefaultFont((CEGUI::utf8*)"DejaVuSerif-8");
 
 	// eigene Factorys einfuegen
-	CEGUI::WindowFactoryManager::getSingleton().addFactory( new TextWrapTooltipFactory );
-	CEGUI::WindowFactoryManager::getSingleton().addFalagardWindowMapping ("TextWrapTooltip", "CEGUI/Tooltip", "TaharezLook/Tooltip","Falagard/Tooltip");
     CEGUI::WindowFactoryManager::getSingleton().addFalagardWindowMapping ("SumwarsTooltip", "DefaultWindow", "TaharezLook/Tooltip", "Falagard/Default");
 
-    // default ToolTip erzeugen
-	/*CEGUI::System::getSingleton().setDefaultTooltip( (CEGUI::utf8*)"TextWrapTooltip" );
-	CEGUI::Tooltip* ttip = CEGUI::System::getSingleton().getDefaultTooltip();
-	ttip->setDisplayTime(0);
-	ttip->setMaxSize(CEGUI::UVector2(cegui_reldim(0.4), cegui_reldim(1.0)));*/
+	new TooltipManager();
+	TooltipManager *mgr = TooltipManager::getSingletonPtr();
+	mgr->setFadeInTime(0.1f);
+	mgr->setFadeOutTime(0.1f);
+	mgr->setVisibleTime(0);
+	
+	
 	return true;
 }
 

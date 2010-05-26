@@ -101,7 +101,8 @@ SET(SRCS
   ./src/gui/mainmenu.cpp
   ./src/gui/ogg.cpp
   ./src/gui/charcreate.cpp
-  ./src/gui/tooltip.cpp
+  ./src/gui/ceguiutility.cpp
+  ./src/gui/tooltipmanager.cpp
   ./src/gui/music.cpp
   ./src/gui/controlpanel.cpp
   ./src/gui/inventory.cpp
