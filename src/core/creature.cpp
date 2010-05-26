@@ -555,6 +555,25 @@ void Creature::performAction(float &time)
 			{
 				DEBUGX("Searching goal %f %f",goal.m_x,goal.m_y);
 				goalobj = getRegion()->getObjectAt(goal,LAYER_AIR);
+				
+				// second try: search Object on line between attacker and target point
+				if (goalobj == 0)
+				{
+					WorldObjectList hitobj;
+					Line line(getShape()->m_center, goal);
+					getRegion()->getObjectsOnLine( line, &hitobj, LAYER_AIR);
+					
+					// get the first object, that is really hostile
+					WorldObjectList::iterator it;
+					for (it = hitobj.begin(); it != hitobj.end(); ++it)
+					{
+						if (World::getWorld()->getRelation(this->getFraction(), *it) == Fraction::HOSTILE)
+						{
+							goalobj = *it;
+							break;
+						}
+					}
+				}
 				DEBUGX("got object %p",goalobj);
 			}
 		}
