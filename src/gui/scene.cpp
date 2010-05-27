@@ -673,9 +673,11 @@ void Scene::createScene()
 	SoundSystem::clearObjects();
 	
 	GraphicManager::clearParticlePool();
+
+	m_scene_manager->clearScene();
 	
 	updateCharacterView();
-
+	
 	// Liste der statischen Objekte
 	Ogre::StaticGeometry* static_geom = m_scene_manager->createStaticGeometry ("StaticGeometry");
 

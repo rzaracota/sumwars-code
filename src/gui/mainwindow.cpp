@@ -201,7 +201,9 @@ void MainWindow::update(float time)
 	// Eingaben abfangen
 	m_mouse->capture();
 	m_keyboard->capture();
-	
+
+	TooltipManager::getSingleton().update(time);
+
 	if (m_document->getGUIState()->m_left_mouse_pressed || m_document->getGUIState()->m_right_mouse_pressed)
 	{
 		Vector pos = getIngamePos(m_mouse->getMouseState().X.abs,m_mouse->getMouseState().Y.abs);
@@ -1188,19 +1190,27 @@ void MainWindow::updateObjectInfo()
 	else if (m_mouse->getMouseState().buttons !=0)
 	{
 		// fokussiertes Objekt nicht wechseln, wenn Maustaste gedrueckt
-		objid = m_document->getGUIState()->m_cursor_object_id;
-		GameObject* go = reg->getObject(objid);
-		if (go != 0)
+		if (m_document->getGUIState()->m_clicked_object_id != 0)
 		{
+			objid = m_document->getGUIState()->m_clicked_object_id;
+			GameObject* go = reg->getObject(objid);
 			search_for_object = false;
+			if (go == 0)
+			{
+				search_for_object = true;
+			}
+			else if (go->getState() != WorldObject::STATE_ACTIVE)
+			{
+				search_for_object = true;
+			}
 		}
-		else if (go->getState() != WorldObject::STATE_ACTIVE)
+		else
 		{
 			search_for_object = false;
 		}
 	}
 	
-	if (search_for_object);
+	if (search_for_object)
 	{
 
 		WorldObject* wo;
@@ -1317,7 +1327,6 @@ void MainWindow::updateObjectInfo()
 
 	}
 	
-	
 	if (objid==0)
 	{
 		// aktuell kein Objekt unterm Mauszeiger
@@ -1332,11 +1341,11 @@ void MainWindow::updateObjectInfo()
 	
 	if (objid==player->getId())
 	{
-		m_document->getGUIState()->m_cursor_object_id =player->getId();
-		
 		label->setVisible(false);
 		bar->setVisible(false);
 		itmlabel->setVisible(false);
+		m_document->getGUIState()->m_cursor_object_id = objid;
+		objid=0;
 	}
 	
 	std::string highlightmat ="white_highlight_alpha_nodepth";
@@ -1354,7 +1363,7 @@ void MainWindow::updateObjectInfo()
 			WorldObject* cwo = dynamic_cast<WorldObject*>(go);
 			Creature* cr;
 				
-			if (cwo !=0)
+			if (cwo !=0 && cwo->getState() == WorldObject::STATE_ACTIVE)
 			{
 				// Objekt existiert
 				m_document->getGUIState()->m_cursor_object_id = objid;
@@ -1455,8 +1464,10 @@ void MainWindow::updateObjectInfo()
 		}
 		else
 		{
-			DEBUG("no object with id %i",objid);
 			m_document->getGUIState()->m_cursor_object_id =0;
+			label->setVisible(false);
+			bar->setVisible(false);
+			objid = 0;
 		}
 	}
 

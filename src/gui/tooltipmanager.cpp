@@ -5,18 +5,59 @@ template<> TooltipManager* Ogre::Singleton<TooltipManager>::ms_Singleton = 0;
 
 Tooltip::Tooltip ( CEGUI::Window* parent, std::string name, float fadeInTime, float fadeOutTime, float visibilityTime, float targetAlpha )
 {
+	std::cout << "creating tooltip " << name << std::endl;
 	m_FadeInTime = fadeInTime;
 	m_FadeOutTime = fadeOutTime;
 	m_VisibilityTime = visibilityTime;
 	m_Parent = parent;
 	m_Name = name;
-	m_Visible = m_FadingOut = false;
 	m_FadingIn = true;
+	m_FadingOut = false;
+	m_Visible = false;
 
+	m_CurrentFadeInTime = 0;
+	m_CurrentVisibleTime = 0;
+	m_CurrentFadeOutTime = 0;
+	m_IsDead = false;
+	
 	if(targetAlpha == 0)
 		m_Alpha = parent->getAlpha();
 	else
 		m_Alpha = targetAlpha;
+
+	if(m_FadeInTime > 0.0f)
+		m_FadeInStepPerMS = m_Alpha / m_FadeInTime;
+	else
+		m_FadeInStepPerMS = 0.0f;
+
+	if(m_FadeOutTime > 0.0f)
+		m_FadeOutStepPerMS = m_Alpha / m_FadeOutTime;
+	else
+		m_FadeOutStepPerMS = 0.0f;
+	
+}
+
+void Tooltip::create(std::string msg, CEGUI::UVector2 position, CEGUI::UVector2 size, CEGUI::Font *font)
+{
+	using namespace CEGUI;
+	FrameWindow* tt = static_cast<FrameWindow*>(WindowManager::getSingletonPtr()->createWindow( (CEGUI::utf8*)"SumwarsTooltip", (CEGUI::utf8*)m_Name.c_str() ));
+	m_CEGUIWindow = tt;
+	
+	tt->setText(msg);
+	
+	tt->setPosition( position );
+	
+	tt->setSize( size );
+	tt->setAlpha(0.0f);
+	assert(m_Parent);
+	m_Parent->addChildWindow(tt);
+}
+
+
+void Tooltip::fadeOut()
+{
+	m_Visible = false;
+	m_FadingOut = true;
 }
 
 
@@ -25,7 +66,11 @@ void Tooltip::update ( float timeSinceLastUpdate )
 	if(m_FadingIn)
 	{
 		m_CurrentFadeInTime += timeSinceLastUpdate;
-
+		
+		float steps = timeSinceLastUpdate * m_FadeInStepPerMS;
+		float newAlpha = m_CEGUIWindow->getAlpha() + steps;
+		m_CEGUIWindow->setAlpha(newAlpha);
+		
 		if(m_CurrentFadeInTime > m_FadeInTime)
 		{
 			m_FadingIn = false;
@@ -43,13 +88,18 @@ void Tooltip::update ( float timeSinceLastUpdate )
 			m_FadingOut = true;
 		}
 	}
-	else
+	else if(m_FadingOut)
 	{
 		m_CurrentFadeOutTime += timeSinceLastUpdate;
 
-		if(m_FadeOutTime > m_CurrentFadeOutTime)
+		float steps = timeSinceLastUpdate * m_FadeOutStepPerMS;
+		float newAlpha = m_CEGUIWindow->getAlpha() - steps;
+		m_CEGUIWindow->setAlpha(newAlpha);
+		
+		if(m_FadeOutTime < m_CurrentFadeOutTime)
 		{
 			m_Parent->removeChildWindow(m_Name);
+			m_IsDead = true;
 			CEGUI::WindowManager::getSingleton().destroyWindow(m_Name);
 		}
 	}
@@ -57,6 +107,7 @@ void Tooltip::update ( float timeSinceLastUpdate )
 
 TooltipManager::TooltipManager ()
 {
+	m_toolTipsCreatedCount = 0;
 	m_Parent = 0;
     m_Position = CEGUI::UVector2();
     m_CEGUIWinMgr = CEGUI::WindowManager::getSingletonPtr();
@@ -70,30 +121,26 @@ void TooltipManager::setParent(CEGUI::Window* parent)
 }
 
 
-void TooltipManager::createTooltip ( std::string windowName, std::list<std::string> list, float timeVisible, CEGUI::UVector2 position, CEGUI::Font *font)
+void TooltipManager::createTooltip ( std::list<std::string> list, float timeVisible, CEGUI::UVector2 position, CEGUI::Font *font)
 {
-    CEGUI::FrameWindow* tt = static_cast<CEGUI::FrameWindow*>(m_CEGUIWinMgr->createWindow( (CEGUI::utf8*)"SumwarsTooltip", (CEGUI::utf8*)windowName.c_str() ));
 	std::string msg;
-    CEGUI::UVector2 size;
+	CEGUI::UVector2 size;
+	std::ostringstream windowName;
+	windowName << "Tooltip__" << m_toolTipsCreatedCount;
+	CEGUI::Font *tempFont = m_DefaultFont;
 	
 	if(font)
+	{
 		size = CEGUIUtility::getWindowSizeForText(list, font, msg);
+		tempFont = font;
+	}
 	else
 		size = CEGUIUtility::getWindowSizeForText(list, m_DefaultFont, msg);
-	
-    tt->setText(msg);
 
-    if (position == CEGUI::UVector2())
-        tt->setPosition( m_Position );
-    else
-        tt->setPosition( position );
-
-    tt->setSize( size );
-    tt->setAlpha(0.9f);
-	assert(m_Parent);
-    m_Parent->addChildWindow(tt);
-
-	m_Tooltips[windowName] = tt;
+	Tooltip *tt = new Tooltip(m_Parent, windowName.str(), m_fadeInTime, m_fadeOutTime, m_timeVisible, 0.9f);
+	tt->create(msg, position, size, tempFont);
+	m_Tooltips[windowName.str()] = tt;
+	m_toolTipsCreatedCount++;
 }
 
 void TooltipManager::setPosition(const CEGUI::UVector2& position)
@@ -139,7 +186,20 @@ float TooltipManager::getFadeOutTime()
 
 void TooltipManager::update(float timeSinceLastUpdate)
 {
+	std::map<std::string, Tooltip*>::iterator iter;
+	for(iter = m_Tooltips.begin(); iter != m_Tooltips.end(); iter++)
+	{
+		Tooltip *tt = iter->second;
 
+		if(tt->isDead())
+		{
+			CEGUI::WindowManager::getSingleton().destroyWindow(tt->getName());
+			m_Tooltips.erase(iter);
+			delete tt;
+		}
+		else
+			tt->update(timeSinceLastUpdate);
+	}
 }
 
 TooltipManager* TooltipManager::getSingletonPtr(void)

@@ -830,6 +830,9 @@ void Document::onButtonInventoryClicked()
 		m_gui_state.m_pressed_key = 0;
 
 		getGUIState()->m_shown_windows |= INVENTORY;
+
+
+
 	}
 
 	// Geoeffnete Fenster haben sich geaendert
@@ -1602,7 +1605,8 @@ void Document::updateContent(float time)
 	if (m_gui_state.m_left_mouse_pressed)
 	{
 		m_gui_state.m_left_mouse_pressed_time += time;
-		if (m_gui_state.m_left_mouse_pressed_time >= 200)
+		if (m_gui_state.m_left_mouse_pressed_time >= 200 ||
+				  (m_gui_state.m_left_mouse_pressed_time >=40 && player->getAction()->m_type == "noaction") )
 		{
 			ClientCommand command;
 
@@ -1629,7 +1633,8 @@ void Document::updateContent(float time)
 		DEBUGX("rechte Maustaste festgehalten");
 		m_gui_state.m_right_mouse_pressed_time += time;
 
-		if (m_gui_state.m_right_mouse_pressed_time>= 200)
+		if (m_gui_state.m_right_mouse_pressed_time>= 200 ||
+				  (m_gui_state.m_left_mouse_pressed_time >=40 && player->getAction()->m_type == "noaction"))
 		{
 			ClientCommand command;
 			updateClickedObjectId();
