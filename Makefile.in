@@ -126,6 +126,7 @@ am_sumwars_OBJECTS = src/core/sumwars-world.$(OBJEXT) \
 	src/gui/sumwars-tooltip.$(OBJEXT) \
 	src/gui/sumwars-messageboxes.$(OBJEXT) \
 	src/gui/sumwars-dialoguewindow.$(OBJEXT) \
+	src/gui/sumwars-creditswindow.$(OBJEXT) \
 	src/gui/sumwars-sound.$(OBJEXT) src/gui/sumwars-ogg.$(OBJEXT) \
 	src/gui/sumwars-music.$(OBJEXT) \
 	src/tinyxml/sumwars-tinyxml.$(OBJEXT) \
@@ -335,6 +336,7 @@ sumwars_SOURCES = src/core/world.cpp \
 	src/gui/tooltip.cpp \
 	src/gui/messageboxes.cpp \
 	src/gui/dialoguewindow.cpp \
+	src/gui/creditswindow.cpp \
 	src/gui/sound.cpp \
 	src/gui/ogg.cpp \
 	src/gui/music.cpp \
@@ -587,6 +589,8 @@ src/gui/sumwars-messageboxes.$(OBJEXT): src/gui/$(am__dirstamp) \
 	src/gui/$(DEPDIR)/$(am__dirstamp)
 src/gui/sumwars-dialoguewindow.$(OBJEXT): src/gui/$(am__dirstamp) \
 	src/gui/$(DEPDIR)/$(am__dirstamp)
+src/gui/sumwars-creditswindow.$(OBJEXT): src/gui/$(am__dirstamp) \
+	src/gui/$(DEPDIR)/$(am__dirstamp)
 src/gui/sumwars-sound.$(OBJEXT): src/gui/$(am__dirstamp) \
 	src/gui/$(DEPDIR)/$(am__dirstamp)
 src/gui/sumwars-ogg.$(OBJEXT): src/gui/$(am__dirstamp) \
@@ -671,6 +675,7 @@ mostlyclean-compile:
 	-rm -f src/gui/sumwars-charinfo.$(OBJEXT)
 	-rm -f src/gui/sumwars-chatline.$(OBJEXT)
 	-rm -f src/gui/sumwars-controlpanel.$(OBJEXT)
+	-rm -f src/gui/sumwars-creditswindow.$(OBJEXT)
 	-rm -f src/gui/sumwars-dialoguewindow.$(OBJEXT)
 	-rm -f src/gui/sumwars-graphicmanager.$(OBJEXT)
 	-rm -f src/gui/sumwars-graphicobject.$(OBJEXT)
@@ -759,6 +764,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@src/gui/$(DEPDIR)/sumwars-charinfo.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/gui/$(DEPDIR)/sumwars-chatline.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/gui/$(DEPDIR)/sumwars-controlpanel.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@src/gui/$(DEPDIR)/sumwars-creditswindow.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/gui/$(DEPDIR)/sumwars-dialoguewindow.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/gui/$(DEPDIR)/sumwars-graphicmanager.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/gui/$(DEPDIR)/sumwars-graphicobject.Po@am__quote@
@@ -1881,6 +1887,20 @@ src/gui/sumwars-dialoguewindow.obj: src/gui/dialoguewindow.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='src/gui/dialoguewindow.cpp' object='src/gui/sumwars-dialoguewindow.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(sumwars_CPPFLAGS) $(CPPFLAGS) $(sumwars_CXXFLAGS) $(CXXFLAGS) -c -o src/gui/sumwars-dialoguewindow.obj `if test -f 'src/gui/dialoguewindow.cpp'; then $(CYGPATH_W) 'src/gui/dialoguewindow.cpp'; else $(CYGPATH_W) '$(srcdir)/src/gui/dialoguewindow.cpp'; fi`
+
+src/gui/sumwars-creditswindow.o: src/gui/creditswindow.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(sumwars_CPPFLAGS) $(CPPFLAGS) $(sumwars_CXXFLAGS) $(CXXFLAGS) -MT src/gui/sumwars-creditswindow.o -MD -MP -MF src/gui/$(DEPDIR)/sumwars-creditswindow.Tpo -c -o src/gui/sumwars-creditswindow.o `test -f 'src/gui/creditswindow.cpp' || echo '$(srcdir)/'`src/gui/creditswindow.cpp
+@am__fastdepCXX_TRUE@	mv -f src/gui/$(DEPDIR)/sumwars-creditswindow.Tpo src/gui/$(DEPDIR)/sumwars-creditswindow.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='src/gui/creditswindow.cpp' object='src/gui/sumwars-creditswindow.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(sumwars_CPPFLAGS) $(CPPFLAGS) $(sumwars_CXXFLAGS) $(CXXFLAGS) -c -o src/gui/sumwars-creditswindow.o `test -f 'src/gui/creditswindow.cpp' || echo '$(srcdir)/'`src/gui/creditswindow.cpp
+
+src/gui/sumwars-creditswindow.obj: src/gui/creditswindow.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(sumwars_CPPFLAGS) $(CPPFLAGS) $(sumwars_CXXFLAGS) $(CXXFLAGS) -MT src/gui/sumwars-creditswindow.obj -MD -MP -MF src/gui/$(DEPDIR)/sumwars-creditswindow.Tpo -c -o src/gui/sumwars-creditswindow.obj `if test -f 'src/gui/creditswindow.cpp'; then $(CYGPATH_W) 'src/gui/creditswindow.cpp'; else $(CYGPATH_W) '$(srcdir)/src/gui/creditswindow.cpp'; fi`
+@am__fastdepCXX_TRUE@	mv -f src/gui/$(DEPDIR)/sumwars-creditswindow.Tpo src/gui/$(DEPDIR)/sumwars-creditswindow.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='src/gui/creditswindow.cpp' object='src/gui/sumwars-creditswindow.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(sumwars_CPPFLAGS) $(CPPFLAGS) $(sumwars_CXXFLAGS) $(CXXFLAGS) -c -o src/gui/sumwars-creditswindow.obj `if test -f 'src/gui/creditswindow.cpp'; then $(CYGPATH_W) 'src/gui/creditswindow.cpp'; else $(CYGPATH_W) '$(srcdir)/src/gui/creditswindow.cpp'; fi`
 
 src/gui/sumwars-sound.o: src/gui/sound.cpp
 @am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(sumwars_CPPFLAGS) $(CPPFLAGS) $(sumwars_CXXFLAGS) $(CXXFLAGS) -MT src/gui/sumwars-sound.o -MD -MP -MF src/gui/$(DEPDIR)/sumwars-sound.Tpo -c -o src/gui/sumwars-sound.o `test -f 'src/gui/sound.cpp' || echo '$(srcdir)/'`src/gui/sound.cpp
