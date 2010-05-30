@@ -23,6 +23,7 @@
 #include "worldmap.h"
 #include "messageboxes.h"
 #include "dialoguewindow.h"
+#include "creditswindow.h"
 #include "music.h"
 #include "tooltipmanager.h"
 
@@ -132,6 +133,7 @@ bool MainWindow::setupMainMenu()
 		bar->setWantsMultiClickEvents(false);
 		bar->setProgress(0.0);
 		
+		/*
 		CEGUI::Window* credits;
 		credits = win_mgr.createWindow("TaharezLook/StaticText", "CreditWindow");
 		m_main_menu->addChildWindow(credits);
@@ -158,6 +160,10 @@ bool MainWindow::setupMainMenu()
 		credits->setProperty("BackgroundColours", "tl:99000000 tr:99000000 bl:99000000 br:99000000");
 		credits->setAlpha(0.9);
 		credits->setFont("DejaVuSerif-12");
+		*/
+		CreditsWindow* crd = new CreditsWindow(m_document);
+		m_sub_windows["CreditsWindow"] = crd;
+		m_main_menu->addChildWindow(crd->getCEGUIWindow());
 
 		SavegameList* sgl = new SavegameList(m_document);
 		m_sub_windows["SavegameList"] = sgl;
@@ -314,6 +320,16 @@ void MainWindow::update(float time)
 		else
 		{
 			start_menu->setVisible(false);
+		}
+		
+		CEGUI::FrameWindow* credits = (CEGUI::FrameWindow*) win_mgr.getWindow("CreditsWindow");
+		if (wflags & Document::CREDITS)
+		{
+			credits->setVisible(true);
+		}
+		else
+		{
+			credits->setVisible(false);
 		}
 		
 		CEGUI::FrameWindow* host_game = (CEGUI::FrameWindow*) win_mgr.getWindow("HostGameWindow");
@@ -496,6 +512,8 @@ void MainWindow::update(float time)
 		
 		m_document->setModified(m_document->getModified() & ~Document::WINDOWS_MODIFIED);
 	}
+	
+	m_sub_windows["CreditsWindow"]->update();
 	
 	if (wflags & Document::OPTIONS)
 	{
@@ -1048,19 +1066,6 @@ void  MainWindow::updateMainMenu()
 		label->setVisible(false);
 		label2->setVisible(false);
 	}
-	
-	CEGUI::Window* credits;
-	credits = win_mgr.getWindow("CreditWindow");
-	
-	if (wflags & Document::CREDITS)
-	{
-		credits->setVisible(true);
-	}
-	else
-	{
-		credits->setVisible(false);
-	}
-
 }
 
 void  MainWindow::updateCharCreate()

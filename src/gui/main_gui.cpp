@@ -9,6 +9,8 @@
 //INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) {
 int main (int argc, char *argv[]) {
 
+	try
+	{
 
 	// Applikation anlegen
 	Application* app = new Application();
@@ -61,11 +63,22 @@ int main (int argc, char *argv[]) {
 		ERRORMSG("Error message: %s",e.what());
 	}
 */
-	app->run();
-
+	
+		app->run();
+	
+	
 	// Applikation loeschen
 	delete app;
 
+	}
+	catch (std::exception& e)
+	{
+		DEBUG("Programm died with exception %s",e.what());
+	}
+	catch (CEGUI::Exception& e)
+	{
+		DEBUG("Programm died with exception %s",e.getMessage().c_str());
+	}
 	// Ende
 	return 0;
 }

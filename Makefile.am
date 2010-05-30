@@ -84,6 +84,7 @@ sumwars_SOURCES = src/core/world.cpp \
 	src/gui/tooltip.cpp \
 	src/gui/messageboxes.cpp \
 	src/gui/dialoguewindow.cpp \
+	src/gui/creditswindow.cpp \
 	src/gui/sound.cpp \
 	src/gui/ogg.cpp \
 	src/gui/music.cpp \

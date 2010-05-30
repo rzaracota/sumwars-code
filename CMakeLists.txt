@@ -110,6 +110,7 @@ SET(SRCS
   ./src/gui/dialoguewindow.cpp
   ./src/gui/partyinfo.cpp
   ./src/gui/networkwindows.cpp
+  ./src/gui/creditswindow.cpp
   ./src/gui/mainwindow.cpp
   ./src/gui/application.cpp
   ./src/gui/skilltree.cpp
