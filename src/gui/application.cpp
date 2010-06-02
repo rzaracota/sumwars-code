@@ -434,6 +434,7 @@ bool Application::initCEGUI()
 	try
 	{
 		CEGUI::ImagesetManager::getSingleton().createImagesetFromImageFile ("startscreen.png","startscreen.png",(CEGUI::utf8*)"GUI");
+		CEGUI::ImagesetManager::getSingleton().createImagesetFromImageFile ("worldMap.png","worldMap.png",(CEGUI::utf8*)"GUI");
 	}
 	catch (CEGUI::Exception& e)
 	{

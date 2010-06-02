@@ -31,6 +31,7 @@ Worldmap::Worldmap(Document* doc)
 	label->setMousePassThroughEnabled(true);
 	label->setInheritsAlpha (false);
 	label->setAlpha(1.0);
+	label->setProperty("Image", "set:worldMap.png image:full_image");
 	
 }
 
