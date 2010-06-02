@@ -68,10 +68,10 @@ void Worldmap::update()
 			label = win_mgr.createWindow("TaharezLook/StaticImage", stream.str());
 			worldmap->addChildWindow(label);
 			label->setProperty("FrameEnabled", "false");
-			label->setProperty("BackgroundEnabled", "true");
-			label->setProperty("BackgroundColours", "tl:00000000 tr:00000000 bl:00000000 br:00000000"); 
+			label->setProperty("BackgroundEnabled", "false");
+			//label->setProperty("BackgroundColours", "tl:00000000 tr:00000000 bl:00000000 br:00000000"); 
 			label->setSize(CEGUI::UVector2(cegui_reldim(0.02f), cegui_reldim( 0.02f)));
-			label->setProperty("Image", "set:TaharezLook image:RadioButtonNormal"); 
+			label->setProperty("Image", "set:TaharezLook image:WaypointMark"); 
 			label->setInheritsAlpha (false);
 			label->setAlwaysOnTop(true);
 			label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&Worldmap::onWaypointClicked, this));
