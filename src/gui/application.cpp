@@ -31,7 +31,7 @@ bool Application::init()
 	// Logger initialisieren
 	LogManager::instance().addLog("stdout",new StdOutLog(Log::LOGLEVEL_DEBUG));
 	LogManager::instance().addLog("logfile",new FileLog("sumwars.log",Log::LOGLEVEL_INFO));
-	
+
 	Timer tm;
 	m_timer.start();
 	bool ret = true;
@@ -265,7 +265,7 @@ void Application::run()
 		{
 			DEBUGX("ogre frame time was %f",t);
 		}
-		
+
 		// Musik aktualisieren
 		MusicManager::instance().update();
 	}
@@ -370,7 +370,7 @@ bool Application::setupResources()
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("./data/renderinfo", "FileSystem", "renderinfo");
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("./data/lua", "FileSystem", "lua");
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("./data/sound", "FileSystem", "sounddata");
-	
+
 
 #if defined(WIN32)
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("c:\\windows\\fonts", "FileSystem", "GUI");
@@ -665,9 +665,9 @@ bool Application::loadResources()
 	mesh_mgr.createPlane("ground", Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME, plane, 200, 200, 5, 5, true, 1,1,1,Ogre::Vector3::UNIT_X);
 
 	updateStartScreen(1.0);
-	
+
 	m_main_window->setReadyToStart(true);
-	
+
 	return true;
 }
 
