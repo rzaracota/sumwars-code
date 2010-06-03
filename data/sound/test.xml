@@ -1,20 +1,46 @@
+<!-- FIXME -->
 <Sound name="sword_attack">
-	<Soundfile source="sword_atk.wav"/>
+	<Soundfile source="inventory_sound_effects/metal_clash.wav"/>
 </Sound>
 
+<!-- FIXME -->
 <Sound name="club_attack">
-	<Soundfile source="drob_wood.wav"/>
+	<Soundfile source="inventory_sound_effects/wood_inventory.wav"/>
 </Sound>
 
 <Sound name="arrow">
-	<Soundfile source="arrow.wav"/>
+	<Soundfile source="battle_sound_effects/swish_2.wav"/>
+	<Soundfile source="battle_sound_effects/swish_3.wav"/>
+	<Soundfile source="battle_sound_effects/swish_4.wav"/>
 </Sound>
 
+<!-- FIXME out of date -->
 <Sound name="hero_hit">
 	<Soundfile source="hero_hit.wav"/>
 </Sound>
 
 
 <Sound name="drop_potion">
-	<Soundfile source="drop_potion.wav"/>
+	<Soundfile source="inventory_sound_effects/potion_inventory.wav"/>
 </Sound>
+
+<Sound name="drop_cloth">
+	<Soundfile source="inventory_sound_effects/cloth_inventory.wav"/>
+</Sound>
+
+<Sound name="drop_leather">
+	<Soundfile source="inventory_sound_effects/leather_inventory.wav"/>
+</Sound>
+
+<Sound name="drop_metal">
+	<Soundfile source="inventory_sound_effects/metal_clash.wav"/>
+</Sound>
+
+<Sound name="drop_ring">
+	<Soundfile source="inventory_sound_effects/ring_inventory.wav"/>
+</Sound>
+
+<Sound name="drop_wood">
+	<Soundfile source="inventory_sound_effects/wood_inventory.wav"/>
+</Sound>
+
