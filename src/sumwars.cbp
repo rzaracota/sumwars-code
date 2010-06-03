@@ -144,6 +144,8 @@
 		<Unit filename="core\objectfactory.h" />
 		<Unit filename="core\objectloader.cpp" />
 		<Unit filename="core\objectloader.h" />
+		<Unit filename="core\options.cpp" />
+		<Unit filename="core\options.h" />
 		<Unit filename="core\party.cpp" />
 		<Unit filename="core\party.h" />
 		<Unit filename="core\pathfind.cpp" />
@@ -193,6 +195,8 @@
 		<Unit filename="gui\chatline.h" />
 		<Unit filename="gui\controlpanel.cpp" />
 		<Unit filename="gui\controlpanel.h" />
+		<Unit filename="gui\creditswindow.cpp" />
+		<Unit filename="gui\creditswindow.h" />
 		<Unit filename="gui\dialoguewindow.cpp" />
 		<Unit filename="gui\dialoguewindow.h" />
 		<Unit filename="gui\graphicmanager.cpp" />

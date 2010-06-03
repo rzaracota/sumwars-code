@@ -192,7 +192,7 @@ bool World::init(int port)
 
 	}
 
-	
+
 	if (m_max_nr_players > 1)
 	{
 		if (m_server)
@@ -1098,22 +1098,25 @@ void World::handleMessage(std::string msg, int slot)
 	}
 	else
 	{
-		CharConv cv;
+	    if(!m_server)
+	    {
+            CharConv cv;
 
-		// Header anlegen
-		PackageHeader header;
-		header.m_content = PTYPE_C2S_MESSAGE; 	// Daten von Client zu Server
-		header.m_number = msg.size();
+            // Header anlegen
+            PackageHeader header;
+            header.m_content = PTYPE_C2S_MESSAGE; 	// Daten von Client zu Server
+            header.m_number = msg.size();
 
-		header.toString(&cv);
-		cv.toBuffer((char*) msg.c_str(),msg.size());
+            header.toString(&cv);
+            cv.toBuffer((char*) msg.c_str(),msg.size());
 
-		getNetwork()->pushSlotMessage(cv.getBitStream());
+            getNetwork()->pushSlotMessage(cv.getBitStream());
 
-		smsg = "[";
-		smsg += m_local_player->getName();
-		smsg += "] ";
-		smsg += msg;
+            smsg = "[";
+            smsg += m_local_player->getName();
+            smsg += "] ";
+            smsg += msg;
+	    }
 	}
 
 	// Nachricht einfuegen
@@ -1226,8 +1229,8 @@ void World::update(float time)
 		if (time > 100)
 			time = 100;
 	}
-	
-	
+
+
 	// Timer weiterzaehlen und Limits feststellen
 	static float timer_max[6] = {200,500,1000,2000,5000,10000};
 	for (int i=0; i<6; i++)
