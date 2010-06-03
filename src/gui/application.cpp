@@ -442,8 +442,8 @@ bool Application::initCEGUI()
 
 	new TooltipManager();
 	TooltipManager *mgr = TooltipManager::getSingletonPtr();
-	mgr->setFadeInTime(500.0f);
-	mgr->setFadeOutTime(500.0f);
+	mgr->setFadeInTime(200.0f);
+	mgr->setFadeOutTime(200.0f);
 	mgr->setVisibleTime(5000.0f);
 	
 	
