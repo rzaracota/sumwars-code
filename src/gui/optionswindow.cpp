@@ -201,7 +201,7 @@ void OptionsWindow::updateTranslation()
 	CEGUI::DefaultWindow* graphic = (CEGUI::DefaultWindow*) win_mgr.getWindow("OptionsGraphic");
 	graphic->setText((CEGUI::utf8*) gettext("Graphic"));
 	CEGUI::DefaultWindow* misc = (CEGUI::DefaultWindow*) win_mgr.getWindow("OptionsMisc");
-	misc->setText((CEGUI::utf8*) gettext("Misc"));
+	misc->setText((CEGUI::utf8*) gettext("Language"));
 
 	label = win_mgr.getWindow("ShortkeyLabel0");
 	label->setText((CEGUI::utf8*) gettext("Inventory"));
