@@ -1,6 +1,7 @@
 #include "ceguiutility.h"
 #include "CEGUI.h"
 #include <iostream>
+#include <algorithm>
 
 std::string CEGUIUtility::stripColours(const std::string &input)
 {
@@ -103,5 +104,72 @@ std::string CEGUIUtility::getColourizedString(int colour, std::string text, int 
 	else
 		return getStdColourAsString(colour) + text + getStdColourAsString(afterColour);
 }
+
+const size_t CEGUIUtility::getNextWord(const CEGUI::String& in_string, size_t start_idx, CEGUI::String& out_string) 
+{
+	out_string = CEGUI::TextUtils::getNextWord(in_string, start_idx, CEGUI::TextUtils::DefaultWrapDelimiters);
+	
+	return out_string.length();
+}
+
+size_t CEGUIUtility::getFormattedLineCount(const CEGUI::String& text, const CEGUI::Rect& format_area,TextFormatting fmt, CEGUI::Font *font, float x_scale)
+{
+	if ((fmt == LeftAligned) || (fmt == Centred) || (fmt == RightAligned) || (fmt == Justified))
+	{
+		return std::count(text.begin(), text.end(), static_cast<CEGUI::utf8>('\n')) + 1;
+	}
+	
+	// handle wraping cases
+	size_t lineStart = 0, lineEnd = 0;
+	CEGUI::String	sourceLine;
+	
+	float	wrap_width = format_area.getWidth();
+	CEGUI::String  whitespace = CEGUI::TextUtils::DefaultWhitespace;
+	CEGUI::String	thisLine, thisWord;
+	size_t	line_count = 0, currpos = 0;
+	
+	while (lineEnd < text.length())
+	{
+		if ((lineEnd = text.find_first_of('\n', lineStart)) == CEGUI::String::npos)
+		{
+			lineEnd = text.length();
+		}
+		
+		sourceLine = text.substr(lineStart, lineEnd - lineStart);
+		lineStart = lineEnd + 1;
+		
+		// get first word.
+		currpos = getNextWord(sourceLine, 0, thisLine);
+		
+		// while there are words left in the string...
+		while (CEGUI::String::npos != sourceLine.find_first_not_of(whitespace, currpos))
+		{
+			// get next word of the string...
+			currpos += getNextWord(sourceLine, currpos, thisWord);
+			
+			// if the new word would make the string too long
+			if ((font->getTextExtent(thisLine, x_scale) + font->getTextExtent(thisWord, x_scale)) > wrap_width)
+			{
+				// too long, so that's another line of text
+				line_count++;
+				
+				// remove whitespace from next word - it will form start of next line
+				thisWord = thisWord.substr(thisWord.find_first_not_of(whitespace));
+				
+				// reset for a new line.
+				thisLine.clear();
+			}
+			
+			// add the next word to the line
+			thisLine += thisWord;
+		}
+		
+		// plus one for final line
+		line_count++;
+	}
+	
+	return line_count;
+}
+
 
 

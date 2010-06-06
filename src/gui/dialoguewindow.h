@@ -58,7 +58,6 @@ class DialogueWindow : public Window
 		 * \brief regiert auf einen Click auf einen Dialogtext
 		 */
 		bool onTextClicked(const CEGUI::EventArgs& evt);
-    void StaticText(CEGUI::String arg1);
 		
 	private:
 		/**

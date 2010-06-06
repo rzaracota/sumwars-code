@@ -1,5 +1,6 @@
 #include "dialoguewindow.h"
-#include "WindowRendererSets/Falagard/FalStaticText.h"
+#include "ceguiutility.h"
+
 DialogueWindow::DialogueWindow(Document* doc, Scene* scene)
 	: Window(doc)
 {
@@ -157,9 +158,8 @@ void DialogueWindow::update()
 		
 		if (dia != 0)
 		{
-
-			// Loop for the four possible speaker in the dialogue
-
+			// Schleife fuer die moeglichen Sprecher eines Dialogs
+			
 			std::string image, name, text;
 			
 			WorldObject* wo;
@@ -231,14 +231,9 @@ void DialogueWindow::update()
 							
 							CEGUI::UVector2 size = wtext->getSize();
 							CEGUI::Rect isize = wtext->getUnclippedInnerRect ();
-                            CEGUI::TextComponent tcomp;
-                            tcomp.setText((CEGUI::utf8*) text.c_str());
-                            
-                            //CEGUI::String text = CEGUI::StaticText(text);
-							//float height = PixelAligned(fnt->getFormattedLineCount(text, isize, CEGUI::WordWrapCentred) * fnt->getLineSpacing());
-							//size.d_y = CEGUI::UDim(0.0, 50);
-							wtext->setText(tcomp.getText());;
-                            // TODO
+							float height = PixelAligned(CEGUIUtility::getFormattedLineCount(text, isize, CEGUIUtility::WordWrapCentred, fnt) * fnt->getLineSpacing());
+							size.d_y = CEGUI::UDim(0.0, height);
+							wtext->setSize(size);
 							
 						}
 						wtext->setVisible(true);
@@ -500,9 +495,9 @@ void DialogueWindow::updateSpeechBubbles()
 			{
 				// mehrere Zeilen
 				rect.setWidth(maxwidth-15);
-                
-                //TODO
-				height = 5 * font->getFontHeight() +15;
+				
+				int lines = CEGUIUtility::getFormattedLineCount((CEGUI::utf8*) text.c_str(),rect, CEGUIUtility::WordWrapLeftAligned, font);
+				height = lines * font->getFontHeight() +15;
 				
 				if (height < picsize)
 				{
@@ -613,9 +608,8 @@ void DialogueWindow::updateSpeechBubbles()
 		if (elemwidth > maxwidth)
 		{
 			elemwidth = maxwidth;
-            //TODO
-			//lines = font->getFormattedLineCount(ctext,rect, CEGUI::WordWrapLeftAligned);
-			elemheight = 5 * lineheight;
+			lines = CEGUIUtility::getFormattedLineCount(ctext,rect, CEGUIUtility::WordWrapLeftAligned, font);
+			elemheight = lines * lineheight;
 		}
 		width = std::max(width,elemwidth);
 		
@@ -671,9 +665,8 @@ void DialogueWindow::updateSpeechBubbles()
 			if (elemwidth > maxwidth)
 			{
 				elemwidth = maxwidth;
-                // TODO
-				//lines = font->getFormattedLineCount(cstring,rect, CEGUI::WordWrapLeftAligned);
-				elemheight = 5 * lineheight;
+				lines = CEGUIUtility::getFormattedLineCount(cstring,rect, CEGUIUtility::WordWrapLeftAligned, font);
+				elemheight = lines * lineheight;
 			}
 			width = std::max(width,elemwidth);
 			

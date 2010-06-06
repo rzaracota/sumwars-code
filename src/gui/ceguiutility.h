@@ -12,6 +12,30 @@ class CEGUIUtility
 	
 	public:
 
+		/*!
+		\brief
+		Enumerated type that contains valid formatting types that can be specified when rendering text into a Rect area (the formatting Rect).
+		*/
+		enum TextFormatting
+		{
+			/// All text is printed on a single line.  The left-most character is aligned with the left edge of the formatting Rect.
+			LeftAligned,
+			/// All text is printed on a single line.  The right-most character is aligned with the right edge of the formatting Rect.
+			RightAligned,
+			/// All text is printed on a single line.  The text is centred horizontally in the formatting Rect.
+			Centred,
+			/// All text is printed on a single line.  The left-most and right-most characters are aligned with the edges of the formatting Rect.
+			Justified,
+			/// Text is broken into multiple lines no wider than the formatting Rect.  The left-most character of each line is aligned with the left edge of the formatting Rect.
+			WordWrapLeftAligned,
+			/// Text is broken into multiple lines no wider than the formatting Rect.  The right-most character of each line is aligned with the right edge of the formatting Rect.
+			WordWrapRightAligned,
+			/// Text is broken into multiple lines no wider than the formatting Rect.  Each line is centred horizontally in the formatting Rect.
+			WordWrapCentred,
+			/// Text is broken into multiple lines no wider than the formatting Rect.  The left-most and right-most characters of each line are aligned with the edges of the formatting Rect.
+			WordWrapJustified
+		};
+
 		enum Colours
 		{
 			Red = 1,
@@ -73,6 +97,10 @@ class CEGUIUtility
 		* \returns the input string formated with the colour for use with CEGUI
 		*/
 		static std::string getColourizedString(int colour, std::string text, int colourAfter);
+
+		static size_t getFormattedLineCount (const CEGUI::String& text, const CEGUI::Rect& format_area,TextFormatting fmt, CEGUI::Font *font, float x_scale = 1.0f);
+		static const size_t getNextWord(const CEGUI::String& in_string, size_t start_idx, CEGUI::String& out_string);
+		
 };
 
 #endif // CEGUIUTILITY_H
