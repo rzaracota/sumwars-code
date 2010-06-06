@@ -98,7 +98,7 @@ DialogueWindow::DialogueWindow(Document* doc, Scene* scene)
 	label->setProperty("FrameEnabled", "false");
 	label->setProperty("BackgroundEnabled", "true");
 	label->setFont("DejaVuSerif-10");
-	label->setProperty("HorzFormatting", "WordWrapLeftAligned");
+	//label->setProperty("HorzFormatting", "WordWrapLeftAligned");
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.0f), cegui_reldim(0.0f)));
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&DialogueWindow::onTextClicked, this));
 	label->setSize(CEGUI::UVector2(cegui_reldim(0.99f), cegui_reldim( 0.99f)));
@@ -115,7 +115,7 @@ DialogueWindow::DialogueWindow(Document* doc, Scene* scene)
 	label->setProperty("FrameEnabled", "false");
 	label->setProperty("BackgroundEnabled", "true");
 	label->setFont("DejaVuSerif-10");
-	label->setProperty("HorzFormatting", "WordWrapLeftAligned");
+	//label->setProperty("HorzFormatting", "WordWrapLeftAligned");
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.0f), cegui_reldim(0.0f)));
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&DialogueWindow::onTextClicked, this));
 	label->setSize(CEGUI::UVector2(cegui_reldim(0.99f), cegui_reldim( 0.99f)));
@@ -159,7 +159,6 @@ void DialogueWindow::update()
 		if (dia != 0)
 		{
 			// Schleife fuer die moeglichen Sprecher eines Dialogs
-			
 			std::string image, name, text;
 			
 			WorldObject* wo;
@@ -322,7 +321,7 @@ void DialogueWindow::update()
 			}
 		}
 	}
-	
+
 	updateSpeechBubbles();
 }
 
@@ -438,7 +437,7 @@ void DialogueWindow::updateSpeechBubbles()
 			speakframe->addChildWindow(label);
 			label->setProperty("FrameEnabled", "true");
 			label->setProperty("BackgroundEnabled", "true");
-			label->setProperty("HorzFormatting", "WordWrapLeftAligned");
+			//label->setProperty("HorzFormatting", "WordWrapLeftAligned");
 			label->setSize(CEGUI::UVector2(CEGUI::UDim(0,80), CEGUI::UDim(0,picsize)));
 			label->setPosition(CEGUI::UVector2(CEGUI::UDim(0,picsize+10), CEGUI::UDim(0,5)));
 			
@@ -454,8 +453,6 @@ void DialogueWindow::updateSpeechBubbles()
 			image->setProperty("BackgroundEnabled", "true");
 			image->setSize(CEGUI::UVector2(CEGUI::UDim(0,picsize), CEGUI::UDim(0,picsize)));
 			image->setPosition(CEGUI::UVector2(CEGUI::UDim(0,5), CEGUI::UDim(0,5)));
-		
-			
 		}
 		else
 		{
@@ -538,7 +535,7 @@ void DialogueWindow::updateSpeechBubbles()
 		nr++;
 		
 	}
-	
+
 	// restliche Label verstecken
 	for (; nr<lcount; nr++)
 	{
@@ -559,7 +556,7 @@ void DialogueWindow::updateSpeechBubbles()
 	if (question !=0 && question->m_active)
 	{
 		bool can_answer = dia->playerCanAnswer(player->getId());
-		
+
 		int wflags = m_document->getGUIState()->m_shown_windows;
 		if (wflags != (Document::QUESTIONBOX | Document::CHAT ) || (wflags & Document::QUESTIONBOX) == 0)
 		{
@@ -584,13 +581,12 @@ void DialogueWindow::updateSpeechBubbles()
 			ques->addChildWindow(label);
 			label->setProperty("FrameEnabled", "false");
 			label->setProperty("BackgroundEnabled", "false");
-
 		}
 		else
 		{
 			ques = (CEGUI::FrameWindow*)win_mgr.getWindow("QuestionWindow");
 			label = (CEGUI::Window*) win_mgr.getWindow("QuestionLabel");
-			label->setProperty("HorzFormatting", "WordWrapLeftAligned");
+			//label->setProperty("HorzFormatting", "WordWrapLeftAligned");
 		}
 		
 		nr =0;
@@ -631,8 +627,6 @@ void DialogueWindow::updateSpeechBubbles()
 		
 		height += elemheight + 20;
 		
-		
-		
 		// Antworten einfuegen
 		std::list < std::pair<std::string, std::string> >::iterator it;
 		for (it = question->m_answers.begin(); it != question->m_answers.end(); ++it)
@@ -648,7 +642,7 @@ void DialogueWindow::updateSpeechBubbles()
 				ques->addChildWindow(label);
 				label->setProperty("FrameEnabled", "false");
 				label->setProperty("BackgroundEnabled", "false");
-				label->setProperty("HorzFormatting", "WordWrapLeftAligned");
+				//label->setProperty("HorzFormatting", "WordWrapLeftAligned");
 				label->setID(nr);
 				label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&DialogueWindow::onAnswerClicked, this));
 			}
@@ -658,6 +652,7 @@ void DialogueWindow::updateSpeechBubbles()
 			}
 			
 			CEGUI::String cstring = (CEGUI::utf8*) dgettext("sumwars-xml",it->first.c_str());
+			std::cout << cstring.c_str()<< std::endl;
 			
 			// Anzahl Antworten bei Voting eintragen
 			if (question->m_weighted_answers.count(nr) > 0)
@@ -669,7 +664,7 @@ void DialogueWindow::updateSpeechBubbles()
 			
 			elemwidth =font->getTextExtent(cstring);
 			elemheight = lineheight+5;
-		
+
 			if (elemwidth > maxwidth)
 			{
 				elemwidth = maxwidth;
@@ -677,7 +672,8 @@ void DialogueWindow::updateSpeechBubbles()
 				elemheight = lines * lineheight;
 			}
 			width = std::max(width,elemwidth);
-			
+
+
 			if (label->getText() != cstring)
 			{
 				label->setText(cstring);
@@ -686,7 +682,7 @@ void DialogueWindow::updateSpeechBubbles()
 			label->setPosition(CEGUI::UVector2(CEGUI::UDim(0,horzoffset), CEGUI::UDim(0,height)));
 			label->setSize(CEGUI::UVector2(cegui_reldim(1.0f), CEGUI::UDim(0,elemheight)));
 			label->setVisible(true);
-			
+
 			float alpha = 1.0;
 			if (!can_answer)
 			{
@@ -696,8 +692,7 @@ void DialogueWindow::updateSpeechBubbles()
 			{
 				label->setAlpha(alpha);
 			}
-			
-			
+
 			height += elemheight + 5;
 			nr++;
 		}
@@ -706,7 +701,7 @@ void DialogueWindow::updateSpeechBubbles()
 		ques->setPosition(CEGUI::UVector2(CEGUI::UDim(0.5f,-width/2), cegui_reldim(0.2)));
 		ques->setSize(CEGUI::UVector2(CEGUI::UDim(0,width), CEGUI::UDim(0,height)));
 		ques->setVisible(true);
-		
+
 		// restliche Antwortlabels ausblenden
 		for (; nr<acount; nr++)
 		{

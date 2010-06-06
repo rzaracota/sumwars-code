@@ -4,6 +4,7 @@
 #include "itemwindow.h"
 #include "templateloader.h"
 #include "music.h"
+#include "debugpanel.h"
 
 Application::Application()
 {
@@ -441,13 +442,6 @@ bool Application::initCEGUI()
 	// eigene Factorys einfuegen
     CEGUI::WindowFactoryManager::getSingleton().addFalagardWindowMapping ("SumwarsTooltip", "DefaultWindow", "TaharezLook/Tooltip", "Falagard/Default");
 
-	new TooltipManager();
-	TooltipManager *mgr = TooltipManager::getSingletonPtr();
-	mgr->setFadeInTime(200.0f);
-	mgr->setFadeOutTime(200.0f);
-	mgr->setVisibleTime(5000.0f);
-	
-	
 	return true;
 }
 
@@ -516,6 +510,15 @@ bool Application::createView()
 	DEBUG("create view\n");
 	m_main_window = new MainWindow(m_ogre_root, m_cegui_system,m_window,m_document);
 
+	
+	new DebugPanel();
+	DebugPanel::getSingleton().init(true);
+	
+	TooltipManager *mgr = new TooltipManager();
+	mgr->setFadeInTime(200.0f);
+	mgr->setFadeOutTime(200.0f);
+	mgr->setVisibleTime(5000.0f);
+	
 	return true;
 }
 

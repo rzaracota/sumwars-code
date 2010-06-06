@@ -5,7 +5,6 @@ template<> TooltipManager* Ogre::Singleton<TooltipManager>::ms_Singleton = 0;
 
 Tooltip::Tooltip ( CEGUI::Window* parent, std::string name, float fadeInTime, float fadeOutTime, float visibilityTime, float targetAlpha, TooltipType type)
 {
-    std::cout << "creating tooltip " << name << std::endl;
     m_FadeInTime = fadeInTime;
     m_FadeOutTime = fadeOutTime;
     m_VisibilityTime = visibilityTime;

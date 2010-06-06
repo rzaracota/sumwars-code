@@ -26,6 +26,7 @@
 #include "creditswindow.h"
 #include "music.h"
 #include "tooltipmanager.h"
+#include "debugpanel.h"
 
 MainWindow::MainWindow(Ogre::Root* ogreroot, CEGUI::System* ceguisystem,Ogre::RenderWindow* window,Document* doc)
 {
@@ -209,7 +210,8 @@ void MainWindow::update(float time)
 	m_keyboard->capture();
 
 	TooltipManager::getSingleton().update(time);
-
+	DebugPanel::getSingleton().update();
+	
 	if (m_document->getGUIState()->m_left_mouse_pressed || m_document->getGUIState()->m_right_mouse_pressed)
 	{
 		Vector pos = getIngamePos(m_mouse->getMouseState().X.abs,m_mouse->getMouseState().Y.abs);

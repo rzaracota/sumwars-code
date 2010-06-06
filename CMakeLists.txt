@@ -34,7 +34,9 @@ ELSE(WIN32)
   find_library(VORBISENC_LIBRARY ${PROJECT_SOURCE_DIR}Dependencies/libvorbis-1.3.1/win32/VS2008/Win32/Release vorbisenc)
 ENDIF(UNIX)
 
-INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/tinyxml ${PROJECT_SOURCE_DIR}/src/core ${PROJECT_SOURCE_DIR}/src/gui)
+INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/tinyxml)
+INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/core)
+INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/gui ${PROJECT_SOURCE_DIR}/src/gui/debugpanel)
 INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/Dependencies/Raknet2_0/Include)
 INCLUDE_DIRECTORIES(${OGRE_INCLUDE_DIRS})
 INCLUDE_DIRECTORIES(${OIS_INCLUDE_DIRS})
@@ -127,6 +129,9 @@ SET(SRCS
   ./src/gui/questinfo.cpp
   ./src/gui/sound.cpp
   ./src/gui/optionswindow.cpp
+  ./src/gui/debugpanel/debugpanel.cpp
+  ./src/gui/debugpanel/debugtab.cpp
+  ./src/gui/debugpanel/guidebugtab.cpp
   ./src/tinyxml/tinystr.cpp
   ./src/tinyxml/tinyxmlerror.cpp
   ./src/tinyxml/tinyxml.cpp
