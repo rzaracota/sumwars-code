@@ -15,7 +15,10 @@
 			<Detach objectname="firesword3"/>
 		</Deactivation>
 	</State>
-	
+	<Soundobject objectname="sound" />
+	<Action name="drop">
+		<Sound objectname="sound" name="drop_metal"/>
+	</Action>
 </RenderInfo>
 <RenderInfo name="oneHandSwordBase">
 	<State name="firesword">
@@ -36,34 +39,64 @@
 			<Detach objectname="firesword3"/>
 			<Detach objectname="firesword4"/>
 		</Deactivation>
-	</State>	
+	</State>
+	<Soundobject objectname="sound" />
+	<Action name="drop">
+		<Sound objectname="sound" name="drop_metal"/>
+	</Action>
 </RenderInfo>
 
 <RenderInfo name="dagger" parent= "shortSwordBase">
 	<Entity source="dagger_sw.mesh"/>
+	<Soundobject objectname="sound" />
+	<Action name="drop">
+		<Sound objectname="sound" name="drop_metal"/>
+	</Action>
 </RenderInfo>
 
 <RenderInfo name="shortSword" parent= "shortSwordBase">
 	<Entity source="short_sw.mesh"/>
+	<Soundobject objectname="sound" />
+	<Action name="drop">
+		<Sound objectname="sound" name="drop_metal"/>
+	</Action>
 </RenderInfo>
 
 <RenderInfo name="bronzeSword" parent= "oneHandSwordBase">
 	<Entity source="bronze_sw.mesh"/>
-	
-
+	<Soundobject objectname="sound" />
+	<Action name="drop">
+		<Sound objectname="sound" name="drop_metal"/>
+	</Action>
 </RenderInfo>
 
 <RenderInfo name="sabre" parent= "oneHandSwordBase">
 	<Entity source="sabre_sw.mesh"/>
+	<Soundobject objectname="sound" />
+	<Action name="drop">
+		<Sound objectname="sound" name="drop_metal"/>
+	</Action>
 </RenderInfo>
 
 <RenderInfo name="legionBlade" parent= "oneHandSwordBase">
 	<Entity source="long_sw.mesh"/>
+	<Soundobject objectname="sound" />
+	<Action name="drop">
+		<Sound objectname="sound" name="drop_metal"/>
+	</Action>
 </RenderInfo>
 
 <RenderInfo name="longSword" parent= "oneHandSwordBase">
 	<Entity source="long_sw.mesh"/>
+	<Soundobject objectname="sound" />
+	<Action name="drop">
+		<Sound objectname="sound" name="drop_metal"/>
+	</Action>
 </RenderInfo>
 <RenderInfo name="councilSabre" parent= "oneHandSwordBase">
 	<Entity source="council_sw.mesh"/>
+	<Soundobject objectname="sound" />
+	<Action name="drop">
+		<Sound objectname="sound" name="drop_metal"/>
+	</Action>
 </RenderInfo>

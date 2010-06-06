@@ -22,8 +22,8 @@ CreditsWindow::CreditsWindow(Document* doc)
 	pane->setPosition(CEGUI::UVector2(cegui_reldim(0.0f), cegui_reldim(0.0f)));
 	pane->setSize(CEGUI::UVector2(cegui_reldim(1.0f), cegui_reldim( 1.0f)));
 	pane->setInheritsAlpha(false);
-
-
+	pane->setContentPaneAutoSized(true);
+	
 	CEGUI::Window* credits;
 	credits = win_mgr.createWindow("TaharezLook/StaticText", "CreditWindow");
 	pane->addChildWindow(credits);
@@ -39,13 +39,17 @@ CreditsWindow::CreditsWindow(Document* doc)
 	content += CEGUIUtility::getColourizedString(CEGUIUtility::Red, "\n\nGraphics:", CEGUIUtility::White);
 	content +="\n Andreas Schönefeldt \
 			\n Steffen Schönefeldt (Nori) \
-			\n Christian Wittmann (psycho)";
+			\n Christian Wittmann (psycho)\
+			\n Francesco Miglietta (hal9000)";
 	content += CEGUIUtility::getColourizedString(CEGUIUtility::Red, "\n\n Scripting:", CEGUIUtility::White);
 	content += "\n Steffen Schönefeldt (Nori) \
 			\n Hans Wulf (Lastmerlin)";
 	content += CEGUIUtility::getColourizedString(CEGUIUtility::Red, "\n\nStory:", CEGUIUtility::White);
 	content += "\n Steffen Schönefeldt (Nori) \
 			\n Andreas Schönefeldt";
+	content += CEGUIUtility::getColourizedString(CEGUIUtility::Red, "\n\nSounds:", CEGUIUtility::White);
+	content += "\n Michael Kempf (Hangman) \
+				\n artisticdude";
 	content += CEGUIUtility::getColourizedString(CEGUIUtility::Red, "\n\n Translation:", CEGUIUtility::White);
 	content +="\n Steffen Schönefeldt (Nori) \
 			\n Michael Kempf (Hangman) \
@@ -72,15 +76,16 @@ void CreditsWindow::updateTranslation()
 {
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::Window* wtext = win_mgr.getWindow("CreditWindow");
-	CEGUI::Window* cwin = win_mgr.getWindow("CreditsWindow");
+	
+	
 	CEGUI::Font* fnt = wtext->getFont();
 	
 	// Set Size of the Window automatically
-	std::string text = wtext->getText().c_str();
-	CEGUI::UVector2 size = CEGUIUtility::getWindowSizeForText(text, fnt);
-	std::cout << size.d_x.d_scale << " - " << size.d_y.d_scale << std::endl;
-
-	cwin->setSize(size);
+	CEGUI::UVector2 size = wtext->getSize();
+	CEGUI::Rect isize = wtext->getUnclippedInnerRect ();
+	float height = PixelAligned(CEGUIUtility::getFormattedLineCount(wtext->getText(), isize, CEGUIUtility::WordWrapCentred, fnt) * fnt->getLineSpacing());
+	size.d_y = CEGUI::UDim(0.0, height);
+	wtext->setSize(size);
 }
 
 void CreditsWindow::update()

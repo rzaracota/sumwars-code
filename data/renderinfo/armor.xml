@@ -1,14 +1,30 @@
 <RenderInfo name="leathArm">
-	<Entity source="leathArm.mesh"/> 
+	<Entity source="leathArm.mesh"/>
+	<Soundobject objectname="sound" />
+	<Action name="drop">
+		<Sound objectname="sound" name="drop_leather"/>
+	</Action>
 </RenderInfo>
 <RenderInfo name="leathArm#m" parent="playerbaseM" inherit="animation">
-	<Entity source="leathArmMW.mesh"/> 
+	<Entity source="leathArmMW.mesh"/>
+	<Soundobject objectname="sound" />
+	<Action name="drop">
+		<Sound objectname="sound" name="drop_leather"/>
+	</Action>
 </RenderInfo>
 <RenderInfo name="leathArm#f" parent="playerbase" inherit="animation">
-	<Entity source="leathArmFA.mesh"/> 
+	<Entity source="leathArmFA.mesh"/>
+	<Soundobject objectname="sound" />
+	<Action name="drop">
+		<Sound objectname="sound" name="drop_leather"/>
+	</Action>
 </RenderInfo>
 <RenderInfo name="leathArm#fs" parent="playerbase" inherit="animation">
-	<Entity source="leathArm_fs.mesh"/> 
+	<Entity source="leathArm_fs.mesh"/>
+	<Soundobject objectname="sound" />
+	<Action name="drop">
+		<Sound objectname="sound" name="drop_leather"/>
+	</Action>
 </RenderInfo>
 
 <RenderInfo name="mercArm">
@@ -50,35 +66,75 @@
 </RenderInfo>
 
 <RenderInfo name="counclRob">
-	<Entity source="councl_rob.mesh"/> 
+	<Entity source="councl_rob.mesh"/>
+	<Soundobject objectname="sound" />
+	<Action name="drop">
+		<Sound objectname="sound" name="drop_cloth"/>
+	</Action>
 </RenderInfo>
 <RenderInfo name="counclRob#m" parent="playerbaseM" inherit="animation">
-	<Entity source="councl_robMM.mesh"/> 
+	<Entity source="councl_robMM.mesh"/>
+	<Soundobject objectname="sound" />
+	<Action name="drop">
+		<Sound objectname="sound" name="drop_cloth"/>
+	</Action>
 </RenderInfo>
 <RenderInfo name="counclRob#f" parent="playerbase" inherit="animation">
 	<Entity source="councl_robFT.mesh"/>
+	<Soundobject objectname="sound" />
+	<Action name="drop">
+		<Sound objectname="sound" name="drop_cloth"/>
+	</Action>
 </RenderInfo>
 <RenderInfo name="counclRob#fs" parent="playerbase" inherit="animation">
-	<Entity source="councl_robFT.mesh"/> 
+	<Entity source="councl_robFT.mesh"/>
+	<Soundobject objectname="sound" />
+	<Action name="drop">
+		<Sound objectname="sound" name="drop_cloth"/>
+	</Action>
 </RenderInfo>
 <RenderInfo name="counclRobeSoren" parent="guardPoleBase" inherit="animation">
 	<Entity source="councl_robMM.mesh"/>
+	<Soundobject objectname="sound" />
+	<Action name="drop">
+		<Sound objectname="sound" name="drop_cloth"/>
+	</Action>
 </RenderInfo>
 <RenderInfo name="counclRobeIreana" parent="guardPoleBaseF" inherit="animation">
 	<Entity source="councl_robFT.mesh"/>
+	<Soundobject objectname="sound" />
+	<Action name="drop">
+		<Sound objectname="sound" name="drop_cloth"/>
+	</Action>
 </RenderInfo>
 
 <RenderInfo name="necromancerRobe">
-	<Entity source="necromancer_robe.mesh"/> 
+	<Entity source="necromancer_robe.mesh"/>
+	<Soundobject objectname="sound" />
+	<Action name="drop">
+		<Sound objectname="sound" name="drop_cloth"/>
+	</Action>
 </RenderInfo>
 <RenderInfo name="necromancerRobe#m" parent="playerbaseM" inherit="animation">
-	<Entity source="necromancer_robeM.mesh"/> 
+	<Entity source="necromancer_robeM.mesh"/>
+	<Soundobject objectname="sound" />
+	<Action name="drop">
+		<Sound objectname="sound" name="drop_cloth"/>
+	</Action>
 </RenderInfo>
 <RenderInfo name="necromancerRobe#f" parent="playerbase" inherit="animation">
-	<Entity source="necromancer_robeFT.mesh"/> 
+	<Entity source="necromancer_robeFT.mesh"/>
+	<Soundobject objectname="sound" />
+	<Action name="drop">
+		<Sound objectname="sound" name="drop_cloth"/>
+	</Action>
 </RenderInfo>
 <RenderInfo name="necromancerRobe#fs" parent="playerbase" inherit="animation">
-	<Entity source="necromancer_robeFT.mesh"/> 
+	<Entity source="necromancer_robeFT.mesh"/>
+	<Soundobject objectname="sound" />
+	<Action name="drop">
+		<Sound objectname="sound" name="drop_cloth"/>
+	</Action>
 </RenderInfo>
 
 <RenderInfo name="rogueArmorEnemy" parent="bandit_base" inherit="animation">
@@ -89,27 +145,59 @@
 </RenderInfo>
 
 <RenderInfo name="robeSimple">
-	<Entity source="rag_rob.mesh"/> 
+	<Entity source="rag_rob.mesh"/>
+	<Soundobject objectname="sound" />
+	<Action name="drop">
+		<Sound objectname="sound" name="drop_cloth"/>
+	</Action>
 </RenderInfo>
 <RenderInfo name="robeSimple#m" parent="playerbaseM" inherit="animation">
-	<Entity source="robe_simpleMT.mesh"/> 
+	<Entity source="robe_simpleMT.mesh"/>
+	<Soundobject objectname="sound" />
+	<Action name="drop">
+		<Sound objectname="sound" name="drop_cloth"/>
+	</Action>
 </RenderInfo>
 <RenderInfo name="robeSimple#f" parent="playerbase" inherit="animation">
-	<Entity source="robe_simpleFT.mesh"/> 
+	<Entity source="robe_simpleFT.mesh"/>
+	<Soundobject objectname="sound" />
+	<Action name="drop">
+		<Sound objectname="sound" name="drop_cloth"/>
+	</Action>
 </RenderInfo>
 <RenderInfo name="robeSimple#fs" parent="playerbase" inherit="animation">
-	<Entity source="robe_simpleFT.mesh"/> 
+	<Entity source="robe_simpleFT.mesh"/>
+	<Soundobject objectname="sound" />
+	<Action name="drop">
+		<Sound objectname="sound" name="drop_cloth"/>
+	</Action>
 </RenderInfo>
 
 <RenderInfo name="robeNovice">
-	<Entity source="novice_rob.mesh"/> 
+	<Entity source="novice_rob.mesh"/>
+	<Soundobject objectname="sound" />
+	<Action name="drop">
+		<Sound objectname="sound" name="drop_cloth"/>
+	</Action>
 </RenderInfo>
 <RenderInfo name="robeNovice#m" parent="playerbaseM" inherit="animation">
-	<Entity source="novice_robMT.mesh"/> 
+	<Entity source="novice_robMT.mesh"/>
+	<Soundobject objectname="sound" />
+	<Action name="drop">
+		<Sound objectname="sound" name="drop_cloth"/>
+	</Action>
 </RenderInfo>
 <RenderInfo name="robeNovice#f" parent="playerbase" inherit="animation">
-	<Entity source="novice_robeFT.mesh"/> 
+	<Entity source="novice_robeFT.mesh"/>
+	<Soundobject objectname="sound" />
+	<Action name="drop">
+		<Sound objectname="sound" name="drop_cloth"/>
+	</Action>
 </RenderInfo>
 <RenderInfo name="robeNovice#fs" parent="playerbase" inherit="animation">
-	<Entity source="novice_robeFT.mesh"/> 
+	<Entity source="novice_robeFT.mesh"/>
+	<Soundobject objectname="sound" />
+	<Action name="drop">
+		<Sound objectname="sound" name="drop_cloth"/>
+	</Action>
 </RenderInfo>

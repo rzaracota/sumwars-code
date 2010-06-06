@@ -203,6 +203,8 @@ void DialogueWindow::update()
 					
 					
 					name = dgettext("sumwars-xml",cr->getName().c_str());
+					
+					
 					if (wname->getText() != (CEGUI::utf8*) name.c_str())
 					{
 						wname->setText((CEGUI::utf8*) name.c_str());
@@ -222,6 +224,12 @@ void DialogueWindow::update()
 					else
 					{
 						text = dgettext("sumwars-xml",text.c_str());
+						// remove everything after ##
+						size_t pos = text.find("##");
+						if (pos != std::string::npos)
+						{
+							text.erase(pos);
+						}
 						CEGUI::Font* fnt = wtext->getFont();
 						
 						if (wtext->getText() != (CEGUI::utf8*) text.c_str())
