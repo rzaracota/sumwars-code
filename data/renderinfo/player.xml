@@ -161,7 +161,7 @@
 	</Action>
 	<Action name="attack#OneHand">
 		<Animation name="attack" />
-		<Sound objectname="actionsound" name="sword_attack" start="0.5"/>
+<!--		<Sound objectname="actionsound" name="sword_attack" start="0.5"/> -->
 	</Action>
 	<Action name="attack#TwoHands">
 		<Animation name="attackTwoHands" />
