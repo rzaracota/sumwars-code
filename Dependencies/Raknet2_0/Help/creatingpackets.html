@@ -1,0 +1,246 @@
+<HTML>
+<HEAD>
+
+<TITLE>Creating Packets</TITLE>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"></HEAD>
+<meta name="title" content="RakNet - Advanced multiplayer game networking API">
+</HEAD>
+<BODY BGCOLOR="#ffffff" LINK="#003399" vlink="#003399" alink="#003399" LEFTMARGIN="0" TOPMARGIN="0" MARGINWIDTH="0" MARGINHEIGHT="0"">
+<img src="rakkarsoftllc.gif" alt="Rakkarsoft LLC" width="215" height="60"><BR><BR>
+
+<table width="100%" border="0"><tr><td bgcolor="#6699CC"><font color="#FFFFFF" size="3" face="Arial, Helvetica, sans-serif"><strong> 
+<img src="spacer.gif" width="8" height="1">Creating Packets</strong></font></td></tr></table>
+
+<TABLE BORDER="0" CELLPADDING="10" CELLSPACING="0" WIDTH="100%"><TR><TD>
+<FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="2" CLASS="G10" COLOR="#3366CC"><strong>Choose your data
+</strong></FONT><BR><BR>
+<FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="2" CLASS="G10" COLOR="#666666">
+Creating your own packet types is just a matter of knowing what data you want and deciding on the best way to send it.<BR>
+Here's how to do it.<BR>
+<BR>
+Decide on what data you want to send over the network.  For an example, lets set the position of a timed mine in the gameworld.  We'll need the following data:<BR>
+<UL>
+<LI>The position of the mine, which is 3 floats.  float x, float y, float z.  You may have your own vector type which you can use intead.
+<LI>Some way to refer to the mine that all systems agree on.  The <A HREF="networkobject.html">NetworkObject</A> class is perfect for that.  Lets assume class Mine inherits from NetworkObject.  Then all we have to store is get the ObjectID of the mine (for more information see <A HREF="receivingpackets.html">Receiving Packets</A>, <A HREF="sendingpackets.html">Sending Packets</A>, and <A HREF="networkobject.html">Network Object</A>)
+<LI>Who owns the mine.  That way if someone steps on it we know who to give credit to.  The built in reference to players, PlayerID, is perfect.  If we are playing as a server we can use some dummy value for playerID, such as 255.  As a client we can fill it in ourselves using GetPlayerID.
+<LI>When the mine was placed.  Lets say after 10 seconds the mine is automatically disintegrated, so it's important that we get the time correct so the mine doesn't disintegrate at different times on different computers.  Fortunately the RakNet has the built-in ability to handle this using <A HREF="timestamping.html">Timestamping</A>.
+</UL>
+
+<FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="2" CLASS="G10" COLOR="#3366CC"><strong>Use a structure or a bitstream?
+</strong></FONT><BR><BR>
+Ultimately, anytime you send data you will send a stream of characters.  There are two easy ways to encode your data into this.  One is to create a structure and cast it to a (char*) the other is to use the built-in bitstream class.<BR>
+<BR>
+The advantage of creating a structure and casting is that it is very easy to change the structure and to see what data you are actually sending.  Since both the sender and the recipient can share the same source file defining the structure, you avoid casting mistakes.  There is also no risk of getting the data out of order, or using the wrong types.  The disadvantage of creating a structure is that you often have to change and recompile many files to do so.  You also lose the compression you can automatically perform with the bitstream class.<BR>
+<BR>
+The advantage of using a bitstream is that you don't have to change any external files to use it.  Simply create the bitstream, write the data you want in whatever order you want, and send it.  You can use the 'compressed' version of the read and write methods to write using fewer bits and it will write bools using only one bit.  You can also write data out dynamically, writing certain values if certain conditions are true and not if others are true.  The disadvantage of a bitstream is you are now susceptible to make mistakes.  You can read data in a way that does not complement how you wrote it - the wrong order, a wrong data type, or other mistakes.<BR>
+<BR>
+We will cover both ways of creating packets here.<BR>
+</TD></TR></TABLE>
+<table width="100%" border="0"><tr><td bgcolor="#6699CC"><font color="#FFFFFF" size="3" face="Arial, Helvetica, sans-serif"><strong> 
+<img src="spacer.gif" width="8" height="1">Creating Packets with structs</strong></font></td></tr></table>
+<TABLE BORDER="0" CELLPADDING="10" CELLSPACING="0" WIDTH="100%"><TR><TD>
+<FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="2" CLASS="G10" COLOR="#666666">
+Go to NetworkStructures.h <BR>
+<BR>
+There should be a big section in the middle like this:<BR>
+</FONT><FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="1" CLASS="G10" COLOR="#111122"><BR>
+// --------------------------<BR>
+// YOUR STRUCTURES BELOW HERE!<BR>
+// --------------------------<BR>
+<BR>
+<BR>
+// --------------------------<BR>
+// YOUR STRUCTURES HERE!<BR>
+// --------------------------<BR>
+<BR>
+<BR>
+// --------------------------<BR>
+// YOUR STRUCTURES ABOVE HERE!<BR>
+// --------------------------<BR>
+<BR>
+<BR></FONT><FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="2" CLASS="G10" COLOR="#666666">
+It should be pretty obvious where to put your structures.  There's two general forms to use for structures, one with timestamping and one without.<BR>
+</FONT><BR>
+
+<FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="2" CLASS="G10" COLOR="#3366CC"><strong>Without Timestamping
+</strong></FONT><BR>
+</FONT><FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="1" CLASS="G10" COLOR="#111122"><BR>
+#pragma pack(1)<BR>
+struct structName<BR>
+{<BR>
+	unsigned char typeId; // Your type here<BR>
+	// Your data here<BR>
+};<BR>
+</FONT><BR>
+<BR>
+<FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="2" CLASS="G10" COLOR="#3366CC"><strong>With Timestamping
+</strong></FONT><BR>
+</FONT><FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="1" CLASS="G10" COLOR="#111122"><BR>
+#pragma pack(1)<BR>
+struct structName<BR>
+{<BR>
+	unsigned char useTimeStamp; // Assign this to ID_TIMESTAMP<BR>
+	unsigned long timeStamp; // Put the system time in here returned by timeGetTime() or some other method that returns a similar value<BR>
+	unsigned char typeId; // Your type here<BR>
+// Your data here<BR>
+};<BR>
+</FONT><BR>
+<FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="2" CLASS="G10" COLOR="#666666">
+Fill out your packet.  For our timed mine, we want the form that uses timestamping.  So the end result is as follows<BR><BR>
+</FONT><FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="1" CLASS="G10" COLOR="#111122">
+#pragma pack(1)<BR>
+struct structName<BR>
+{<BR>
+	unsigned char useTimeStamp; // Assign this to ID_TIMESTAMP<BR>
+	unsigned long timeStamp; // Put the system time in here returned by getTime()<BR>
+	unsigned char typeId; // This will be assigned to a type I add to PacketEnumerations.h , lets say ID_SET_TIMED_MINE<BR>
+	float x,y,z; // Mine position<BR>
+	ObjectID objectId; // ObjectID of the mine, used as a common method to refer to the mine on different computers<BR>
+	PlayerID playerId; // The PlayerID of the player that owns the mine<BR>
+};<BR><BR>
+</FONT><FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="2" CLASS="G10" COLOR="#666666">
+As I wrote in the comment above, we have to add the typeID to the list of enums so when the data stream arrives in a Receive call we know what we are looking at.  So the last step is to go to PacketEnumerations.h and add ID_SET_TIMED_MINE (or whatever we feel like calling the enum) to the list.<BR>
+<BR><B>NOTE THAT YOU CANNOT INCLUDE POINTERS DIRECTLY OR INDIRECTLY IN THE STRUCTS.</B><BR><BR>
+It seems to be a fairly common mistake that people include a pointer or a class with a pointer in the struct and think that the data pointed to by the pointer will be sent over the network.  This is not the case - all it would send is the pointer address<BR>
+
+<BR><I>Usability comment:</I><BR><BR>
+You'll notice that I called the ObjectID objectId, and the PlayerID playerId.  Why not use more descriptive names, like mineId and mineOwnerId?  I can tell you from experience that using descriptive names in this particular situation doesn't benefit you in any way because by the time you determine the packet type you know what those variables mean from the context; they can't mean anything else.  The benefit of using generic names is that you can cut and paste code to quickly handle your packet without tediously going through and renaming stuff.  When you have a lot of packets, as you will in a big game, this saves a lot of hassle.<BR>
+<BR><B>Nested Structures</B><BR><BR>
+There is no problem with nesting structures.  Just keep in mind that the first byte is always what determines the packet type.<BR><BR>
+</FONT><FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="1" CLASS="G10" COLOR="#111122">
+#pragma pack(1)<BR>
+struct A<BR>
+{<BR>
+	unsigned char typeId; // ID_A<BR>
+};<BR>
+<BR>
+#pragma pack(1)<BR>
+struct B<BR>
+{<BR>
+	unsigned char typeId; // ID_A<BR>
+};<BR>
+<BR>
+#pragma pack(1)<BR>
+struct C // Struct C is of type ID_A<BR>
+{<BR>
+	A a;<BR>
+	B b;<BR>
+}<BR>
+<BR>
+#pragma pack(1)<BR>
+struct D // Struct D is of type ID_B<BR>
+{<BR>
+	B b;<BR>
+	A a;<BR>
+}<BR>
+</FONT>
+
+</TD></TR></TABLE>
+
+<table width="100%" border="0"><tr><td bgcolor="#6699CC"><font color="#FFFFFF" size="3" face="Arial, Helvetica, sans-serif"><strong> 
+<img src="spacer.gif" width="8" height="1">Creating Packets with Bitstreams</strong></font></td></tr></table>
+<TABLE BORDER="0" CELLPADDING="10" CELLSPACING="0" WIDTH="100%"><TR><TD>
+
+<FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="2" CLASS="G10" COLOR="#3366CC"><strong>Write less data with bitstreams
+</strong></FONT><BR>
+<BR>
+<FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="2" CLASS="G10" COLOR="#666666">
+Lets take our mine example above and use a bitstream to write it out instead.  We have all the same data as before.<BR><BR>
+</FONT><FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="1" CLASS="G10" COLOR="#111122">
+unsigned char useTimeStamp; // Assign this to ID_TIMESTAMP<BR>
+unsigned long timeStamp; // Put the system time in here returned by getTime()<BR>
+unsigned char typeId; // This will be assigned to a type I add to PacketEnumerations.h , lets say ID_SET_TIMED_MINE<BR>
+<BR>
+useTimeStamp = ID_TIMESTAMP;<BR>
+timeStamp = getTime();<BR>
+typeId=ID_SET_TIMED_MINE;<BR>
+<BR>
+Bitstream myBitStream;<BR>
+myBitStream.Write(useTimeStamp);<BR>
+myBitStream.Write(timeStamp);<BR>
+myBitStream.Write(typeId);<BR>
+// Assume we have a Mine* mine object<BR>
+myBitStream.Write(mine->GetPosition().x);<BR>
+myBitStream.Write(mine->GetPosition().y);<BR>
+myBitStream.Write(mine->GetPosition().z);<BR>
+myBitStream.Write(mine->GetID()); // In the struct this is ObjectID objectId<BR>
+myBitStream.Write(mine->GetOwner()); // In the struct this is PlayerID playerId<BR>
+</FONT><FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="2" CLASS="G10" COLOR="#666666"><BR>
+If we were to send myBitStream to RakClient::Send or RakServer::Send it would be idential internally to a casted struct at this point.  Now lets try some improvements.  Lets assume that a good deal of the time mines are at 0,0,0 for some reason.  We can then do this instead:<BR><BR>
+</FONT><FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="1" CLASS="G10" COLOR="#111122">
+unsigned char useTimeStamp; // Assign this to ID_TIMESTAMP<BR>
+unsigned long timeStamp; // Put the system time in here returned by getTime()<BR>
+unsigned char typeId; // This will be assigned to a type I add to PacketEnumerations.h , lets say ID_SET_TIMED_MINE<BR>
+<BR>
+useTimeStamp = ID_TIMESTAMP;<BR>
+timeStamp = getTime();<BR>
+typeId=ID_SET_TIMED_MINE;<BR>
+<BR>
+Bitstream myBitStream;<BR>
+myBitStream.Write(useTimeStamp);<BR>
+myBitStream.Write(timeStamp);<BR>
+myBitStream.Write(typeId);<BR>
+// Assume we have a Mine* mine object<BR>
+// If the mine is at 0,0,0, use 1 bit to represent this<BR>
+if (mine->GetPosition().x==0.0f && mine->GetPosition().y==0.0f && mine->GetPosition().z==0.0f)<BR>
+{<BR>
+	myBitStream.Write(true);<BR>
+}<BR>
+else<BR>
+{<BR>
+	myBitStream.Write(false);<BR>
+	myBitStream.Write(mine->GetPosition().x);<BR>
+	myBitStream.Write(mine->GetPosition().y);<BR>
+	myBitStream.Write(mine->GetPosition().z);<BR>
+}<BR>
+myBitStream.Write(mine->GetID()); // In the struct this is ObjectID objectId<BR>
+myBitStream.Write(mine->GetOwner()); // In the struct this is PlayerID playerId<BR>
+</FONT><FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="2" CLASS="G10" COLOR="#666666"><BR>
+This can potentially save us sending 3 floats over the network, at the cost of 1 bit.<BR>
+<BR>
+</FONT><FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="2" CLASS="G10" COLOR="#3366CC"><strong>Writing strings</strong>
+<BR>
+</FONT><FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="2" CLASS="G10" COLOR="#666666"><BR>
+It is possible to write strings using the array overload of the BitStream.  One way to do it would be to write the length, then the data such as:
+</FONT>
+<PRE><FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="1" CLASS="G10" COLOR="#111122">
+void WriteStringToBitStream(char *myString, BitStream *output)
+{
+	output->Write((unsigned short) strlen(myString));
+	output->Write(myString, strlen(myString);
+}</FONT></PRE>
+<FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="2" CLASS="G10" COLOR="#666666">
+Decoding is similar.  However, that is not very efficient.  RakNet comes with a built in stringCompressor called... StringCompressor.  It is a global instance.  With it, WriteStringToBitStream becomes:
+<PRE><FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="1" CLASS="G10" COLOR="#111122">
+void WriteStringToBitStream(char *myString, BitStream *output)
+{
+	stringCompressor->EncodeString(myString, 256, output);
+}</FONT></PRE>
+<FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="2" CLASS="G10" COLOR="#666666">
+Not only does it encode the string, so the string can not easily be read by packet sniffers, but it compresses it as well.  To decode the string you would use:
+<PRE><FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="1" CLASS="G10" COLOR="#111122">
+void WriteBitStreamToString(char *myString, BitStream *input)
+{
+	stringCompressor->DecodeString(myString, 256, input);
+}
+</FONT></PRE>
+<FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="2" CLASS="G10" COLOR="#666666">
+The 256 in this case is the maximum number of bytes to write and read.  In EncodeString, if your string is less than 256 it will write the entire string.  If it is greater than 256 characters it will truncate it such that it would decode to an array with 256 characters, including the null terminator.
+<BR>
+<BR><I>Programmer's note:</I><BR><BR>
+You can also write structs directly into a Bitstream simply by casting it to a (char*).  It will copy your structs using memcpy.  As with structs, it will not dereference pointers so you should not write pointers into the bitstream.<BR>
+</TD></TR></TABLE>
+
+
+<table width="100%" border="0"><tr><td bgcolor="#6699CC"><font color="#FFFFFF" size="3" face="Arial, Helvetica, sans-serif"><strong> 
+<img src="spacer.gif" width="8" height="1">See Also</strong></font></td></tr></table>
+<TABLE BORDER="0" CELLPADDING="10" CELLSPACING="0" WIDTH="100%"><TR><TD>
+<FONT FACE="Geneva, Verdana, Arial, Helvetica, sans-serif" size="1" CLASS="G10" COLOR="#111122">
+<A HREF="index.html">Index</A><BR>
+<A HREF="sendingpackets.html">Sending Packets</A><BR>
+<A HREF="receivingpackets.html">Receiving Packets</A><BR>
+<A HREF="timestamping.html">Timestamping</A><BR>
+</FONT>
+</TD></TR></TABLE>
+</BODY>
+</HTML>

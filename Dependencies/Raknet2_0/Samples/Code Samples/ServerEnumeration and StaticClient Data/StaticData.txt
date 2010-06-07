@@ -1,0 +1,2 @@
+This example illustrates how to set and relay the static data stored on the server and on the client, and when the data is and is not transmitted.
+Static data provides an easy automatic way to pass initial connection data between them.
