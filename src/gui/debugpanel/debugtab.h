@@ -1,13 +1,11 @@
 #ifndef DEBUGTAB_H
 #define DEBUGTAB_H
 
-#include <CEGUIWindow.h>
+#include <CEGUIString.h>
 
-
-class DebugTab : public CEGUI::Window
+class DebugTab
 {
 public:
-	DebugTab(const CEGUI::String& type, const CEGUI::String& name);
 	virtual void update() = 0;
 };
 

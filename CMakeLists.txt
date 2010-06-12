@@ -130,7 +130,6 @@ SET(SRCS
   ./src/gui/sound.cpp
   ./src/gui/optionswindow.cpp
   ./src/gui/debugpanel/debugpanel.cpp
-  ./src/gui/debugpanel/debugtab.cpp
   ./src/gui/debugpanel/guidebugtab.cpp
   ./src/tinyxml/tinystr.cpp
   ./src/tinyxml/tinyxmlerror.cpp

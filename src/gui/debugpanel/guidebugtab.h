@@ -2,20 +2,19 @@
 #define GUIDEBUGTAB_H
 
 #include "debugtab.h"
+#include "CEGUIWindow.h"
 
-class GuiDebugTab : public DebugTab
+class GuiDebugTab : public CEGUI::Window, public DebugTab
 {
 
 public:
     GuiDebugTab(const CEGUI::String& type, const CEGUI::String& name);
-    virtual void initialiseComponents(void );
 	virtual void update();
 	
 protected:
-    virtual void onSized(CEGUI::WindowEventArgs& e);
-    virtual void onShown(CEGUI::WindowEventArgs& e);
-    virtual void onEnabled(CEGUI::WindowEventArgs& e);
-    virtual void onDisabled(CEGUI::WindowEventArgs& e);
+
+private:
+	CEGUI::Window *m_windowUnderMouse;
 };
 
 #endif // GUIDEBUGTAB_H

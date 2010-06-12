@@ -17,17 +17,17 @@ void DebugPanel::init(bool visible)
 void DebugPanel::createPanel(bool visible)
 {
 	m_rootWindow = m_winManager->createWindow("TaharezLook/FrameWindow", "DebugPanel");
-	m_rootWindow->setVisible(visible);
+	m_rootWindow->setPosition(UVector2(UDim(0.1f, 0.0f), UDim(0.1f, 0.0f)));
+	m_rootWindow->setSize(UVector2(UDim(0.6f, 0.0f), UDim(0.6f, 0.0f)));
 	m_gameScreen->addChildWindow(m_rootWindow);
-	m_rootWindow->setSize(UVector2(UDim(0.1f, 0.1f), UDim(0.5f, 0.5f)));
 
 	m_tabControl = static_cast<TabControl*>(m_winManager->createWindow("TaharezLook/TabControl", "DebugPanelTabControl"));
+	m_tabControl->setPosition(UVector2(UDim(0.03f, 0.0f), UDim(0.06f, 0.0f)));
+	m_tabControl->setSize(UVector2(UDim(0.95f, 0.0f), UDim(0.9f, 0.0f)));
 	m_rootWindow->addChildWindow(m_tabControl);
-	//m_tabControl->setSize(UVector2(UDim(0.0f, 0.0f), UDim(1.0f, 1.0f)));
-	
-	GuiDebugTab *guiTab = new GuiDebugTab("TaharezLook/FrameWindow", "GuiDebugTab");
+
+	GuiDebugTab *guiTab = new GuiDebugTab("TaharezLook/Button", "GuiDebugTab");
 	addTabWindow("GuiDebugTab", guiTab);
-	
 }
 
 void DebugPanel::addTabWindow(std::string name, DebugTab* tab)
@@ -35,7 +35,7 @@ void DebugPanel::addTabWindow(std::string name, DebugTab* tab)
 	if(!tabExists(name))
 	{
 		m_tabs[name] = tab;
-		m_tabControl->addTab(tab);
+		m_tabControl->addTab(dynamic_cast<CEGUI::Window*>(tab));
 	}
 }
 
@@ -59,6 +59,7 @@ void DebugPanel::update()
 		DebugTab *dt = iter->second;
 		dt->update();
 	}
+
 }
 
 
