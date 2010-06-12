@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<GUILayout >
+    <Window Type="TaharezLook/FrameWindow" Name="GuiDebugTab" >
+        <Property Name="Text" Value="Gui" />
+        <Property Name="Alpha" Value="0.1" />
+        <Property Name="FrameEnabled" Value="False" />
+        <Property Name="TitlebarFont" Value="DejaVuSans-10" />
+        <Property Name="SizingEnabled" Value="False" />
+        <Property Name="TitlebarEnabled" Value="False" />
+        <Property Name="UnifiedAreaRect" Value="{{0.194141,0},{0.244264,0},{0.655079,0},{0.782136,0}}" />
+        <Property Name="DragMovingEnabled" Value="False" />
+        <Property Name="CloseButtonEnabled" Value="False" />
+        <Window Type="TaharezLook/StaticText" Name="windowUnderMouseStaticText" >
+            <Property Name="InheritsAlpha" Value="False" />
+            <Property Name="UnifiedAreaRect" Value="{{0.0135734,0},{0.0152437,0},{0.9946,0},{0.0965521,0}}" />
+        </Window>
+    </Window>
+</GUILayout>

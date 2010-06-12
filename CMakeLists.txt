@@ -46,7 +46,7 @@ INCLUDE_DIRECTORIES(${CEGUIOGRE_INCLUDE_DIRS})
 INCLUDE_DIRECTORIES(${OPENAL_INCLUDE_DIR})
 INCLUDE_DIRECTORIES(${ALUT_INCLUDE_DIR})
 
-SET(SRCS
+SET(SRCS  
   ./src/core/worldobject.cpp
   ./src/core/itemloader.cpp
   ./src/core/itemlist.cpp
@@ -131,6 +131,8 @@ SET(SRCS
   ./src/gui/optionswindow.cpp
   ./src/gui/debugpanel/debugpanel.cpp
   ./src/gui/debugpanel/guidebugtab.cpp
+  ./src/gui/debugpanel/luascripttab.cpp
+  ./src/gui/debugpanel/textfileeditwindow.cpp
   ./src/tinyxml/tinystr.cpp
   ./src/tinyxml/tinyxmlerror.cpp
   ./src/tinyxml/tinyxml.cpp

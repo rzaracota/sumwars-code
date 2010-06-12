@@ -5,31 +5,32 @@
 
 using namespace CEGUI;
 
+CEGUI::String GuiDebugTab::WidgetTypeName = "GuiDebugTab";
+
 GuiDebugTab::GuiDebugTab(const CEGUI::String& type, const CEGUI::String& name): CEGUI::Window(type, name), DebugTab()
 {
-	setText("Guiuiui");
-
-	/*//m_windowUnderMouse = WindowManager::getSingleton().loadWindowLayout("GuiDebugTab.layout");
-	m_windowUnderMouse = WindowManager::getSingleton().createWindow("TaharezLook/Button", "GuiDebugTabWinUnderMouse");
-	m_windowUnderMouse->setPosition(UVector2(UDim(0.1f, 0.0f), UDim(0.1f, 0.0f)));
-	m_windowUnderMouse->setSize(UVector2(UDim(0.6f, 0.0f), UDim(0.6f, 0.0f)));*/
-
-	CEGUI::Window *testWindow1 = WindowManager::getSingleton().createWindow("TaharezLook/FrameWindow", "Test124");
-	testWindow1->setPosition(UVector2(UDim(0.1f, 0.0f), UDim(0.1f, 0.0f)));
-	testWindow1->setSize(UVector2(UDim(0.6f, 0.0f), UDim(0.6f, 0.0f)));
-	testWindow1->setText("Muh!");
+	setText("Gui");
 	
-	CEGUI::Window *Testwindow2 = WindowManager::getSingleton().createWindow("TaharezLook/Button", "Test45668");
-	Testwindow2->setPosition(UVector2(UDim(0.1f, 0.0f), UDim(0.1f, 0.0f)));
-	Testwindow2->setSize(UVector2(UDim(0.6f, 0.0f), UDim(0.6f, 0.0f)));
-	testWindow1->addChildWindow(Testwindow2);
+	m_tabLayout = WindowManager::getSingleton().loadWindowLayout("GuiDebugTab.layout");
+	m_tabLayout->setPosition(UVector2(UDim(0.0f, 0.0f), UDim(0.0f, 0.0f)));
+	m_tabLayout->setSize(UVector2(UDim(1.0f, 0.0f), UDim(1.0f, 0.0f)));
 
-	this->addChildWindow(testWindow1);
-	
+	this->addChildWindow(m_tabLayout);
+}
+
+void GuiDebugTab::initialiseComponents(void )
+{
+	CEGUI::Window::initialiseComponents();
 }
 
 void GuiDebugTab::update()
 {
-	
+	m_tabLayout->getChild("windowUnderMouseStaticText")->setText(CEGUI::System::getSingleton().getWindowContainingMouse()->getName());
+}
+
+
+void GuiDebugTab::onSized(CEGUI::WindowEventArgs& e)
+{
+	CEGUI::Window::onSized(e);
 }
 

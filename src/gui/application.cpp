@@ -5,6 +5,9 @@
 #include "templateloader.h"
 #include "music.h"
 #include "debugpanel.h"
+#include "guidebugtab.h"
+#include "luascripttab.h"
+#include "textfileeditwindow.h"
 
 Application::Application()
 {
@@ -441,7 +444,10 @@ bool Application::initCEGUI()
 
 	// eigene Factorys einfuegen
     CEGUI::WindowFactoryManager::getSingleton().addFalagardWindowMapping ("SumwarsTooltip", "DefaultWindow", "TaharezLook/Tooltip", "Falagard/Default");
-
+	CEGUI::WindowFactoryManager::getSingleton().addFactory< CEGUI::TplWindowFactory<GuiDebugTab> >();
+	CEGUI::WindowFactoryManager::getSingleton().addFactory< CEGUI::TplWindowFactory<LuaScriptTab> >();
+	CEGUI::WindowFactoryManager::getSingleton().addFactory< CEGUI::TplWindowFactory<TextFileEditWindow> >();
+	
 	return true;
 }
 
