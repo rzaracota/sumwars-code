@@ -28,11 +28,13 @@ protected:
 	virtual bool handleOpen(const CEGUI::EventArgs& e);
 	virtual bool handleSave(const CEGUI::EventArgs& e);
 	virtual bool handleClose(const CEGUI::EventArgs& e);
+	virtual bool handleTabChanged(const CEGUI::EventArgs& e);
 	
 	void createMenu();
 protected:
 	int m_newFileCtr;
 	CEGUI::Window *m_tabLayout;
+	CEGUI::Editbox *m_filePathEditBox;
 	CEGUI::Menubar *m_menubar;
 	CEGUI::TabControl *m_fileTabControl;
 public:

@@ -19,10 +19,15 @@ LuaScriptTab::LuaScriptTab(const CEGUI::String& type, const CEGUI::String& name)
 	m_tabLayout->setSize(UVector2(UDim(1.0f, 0.0f), UDim(1.0f, 0.0f)));
 
 	m_fileTabControl = static_cast<TabControl*>(m_tabLayout->getChild("luaScriptTab/FileTabControl"));
+	m_filePathEditBox = static_cast<Editbox*>(m_tabLayout->getChild("luaScriptTab/fileDirectoryEditBox"));
+	m_filePathEditBox->setText("./data/lua/");
 	
 	createMenu();
 	
 	this->addChildWindow(m_tabLayout);
+
+	m_fileTabControl->subscribeEvent(TabControl::EventSelectionChanged, CEGUI::Event::Subscriber(&LuaScriptTab::handleTabChanged, this));
+	
 }
 
 void LuaScriptTab::update()
@@ -93,36 +98,62 @@ void LuaScriptTab::onCharacter(CEGUI::KeyEventArgs& e)
 bool LuaScriptTab::handleNew(const CEGUI::EventArgs& e)
 {
 	std::stringstream s;
-	s << "unnamed" << m_newFileCtr;
-	
+	std::ifstream myfile (m_filePathEditBox->getText().c_str());
+	if (myfile.is_open())
+	{
+			m_filePathEditBox->setText("File exists");
+			myfile.close();
+			return false;
+	}
+	s << m_filePathEditBox->getText() << m_newFileCtr;
 	TextFileEditWindow *win = static_cast<TextFileEditWindow*>(WindowManager::getSingleton().createWindow("TextFileEditWindow", s.str()));
-	win->setText(s.str());
+	win->setFilepath(m_filePathEditBox->getText());
 	m_fileTabControl->addTab(win);
 	win->setPosition(UVector2(UDim(0.0f, 0.0f), UDim(0.0f, 0.0f)));
 	win->setSize(UVector2(UDim(1.0f, 0.0f), UDim(1.0f, 0.0f)));
+	win->handleTextChanged(CEGUI::EventArgs());
 	m_newFileCtr++;
+	return true;
 }
 
 bool LuaScriptTab::handleOpen(const CEGUI::EventArgs& e)
 {
 	TextFileEditWindow *win = static_cast<TextFileEditWindow*>(WindowManager::getSingleton().createWindow("TextFileEditWindow", "Tesdsg"));
-	win->load("/home/stefan/src/sumwars/cegui07transition/build/data/lua/debug.lua");
-	win->setText("adfsedgf333");
-	m_fileTabControl->addTab(win);
-	win->setPosition(UVector2(UDim(0.0f, 0.0f), UDim(0.0f, 0.0f)));
-	win->setSize(UVector2(UDim(1.0f, 0.0f), UDim(1.0f, 0.0f)));
+	CEGUI::String s = m_filePathEditBox->getText();
+	
+	if(win->load(s))
+	{
+		m_fileTabControl->addTab(win);
+		win->setPosition(UVector2(UDim(0.0f, 0.0f), UDim(0.0f, 0.0f)));
+		win->setSize(UVector2(UDim(1.0f, 0.0f), UDim(1.0f, 0.0f)));
+	}
+	else
+	{
+		m_filePathEditBox->setText("File failed to load");
+		WindowManager::getSingleton().destroyWindow(win);
+	}
+
 }
 
 bool LuaScriptTab::handleSave(const CEGUI::EventArgs& e)
 {
-	std::cout << "save" << std::endl;
+	TextFileEditWindow* win = static_cast<TextFileEditWindow*>(m_fileTabControl->getTabContentsAtIndex(m_fileTabControl->getSelectedTabIndex()));
+	win->save();
 }
 
 bool LuaScriptTab::handleClose(const CEGUI::EventArgs& e)
 {
-	std::cout << "close" << std::endl;
+	TextFileEditWindow* win = static_cast<TextFileEditWindow*>(m_fileTabControl->getTabContentsAtIndex(m_fileTabControl->getSelectedTabIndex()));
+	win->close();
+	m_fileTabControl->removeTab(m_fileTabControl->getSelectedTabIndex());
+	WindowManager::getSingleton().destroyWindow(win);
 }
 
+bool LuaScriptTab::handleTabChanged(const CEGUI::EventArgs& e)
+{
+	TextFileEditWindow* win = static_cast<TextFileEditWindow*>(m_fileTabControl->getTabContentsAtIndex(m_fileTabControl->getSelectedTabIndex()));
+	m_filePathEditBox->setText(win->getFilepath());
+}
 
 
 void LuaScriptTab::createMenu()
