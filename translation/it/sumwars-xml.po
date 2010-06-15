@@ -1,1929 +1,1928 @@
-# German translations for sumwars package
-# Copyright (C) 2009
+# Italian translations for sumwars package
+# Copyright (C) 2010
 # This file is distributed under the same license as the sumwars package.
-# kalimgard <kalimgard@users.sourceforge.net>, 2010.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 msgid ""
 msgstr ""
 "Project-Id-Version: 0.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-03-09 15:15+0100\n"
-"PO-Revision-Date: 2010-05-20 22:01+0200\n"
-"Last-Translator: kalimgard <kalimgard@users.sourceforge.net>\n"
-"Language-Team: german <translation-team-de@lists.sourceforge.net>\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: shortbow.xml
 msgid "practice bow"
-msgstr "Übungsbogen"
+msgstr ""
 
 #: shortbow.xml
 msgid "yew shortbow"
-msgstr "Eibenkurzbogen"
+msgstr ""
 
 #: shortbow.xml
 msgid "shortbow"
-msgstr "Kurzbogen"
+msgstr ""
 
 #: shortbow.xml
 msgid "hunting bow"
-msgstr "Jagdbogen"
+msgstr ""
 
 #: shortbow.xml
 msgid "rattan bow"
-msgstr "Rattanbogen"
+msgstr ""
 
 #: shortbow.xml
 msgid "bandit bow"
-msgstr "Banditenbogen"
+msgstr ""
 
 #: shortbow.xml
 msgid "northeye"
-msgstr "Nordauge"
+msgstr ""
 
 #: shortbow.xml
 msgid "battle shortbow"
-msgstr "Kriegskurzbogen"
+msgstr ""
 
 #: shortbow.xml
 msgid "composite shortbow"
-msgstr "Kompositbogen"
+msgstr ""
 
 #: shortbow.xml
 msgid "rider bow"
-msgstr "Reiterbogen"
+msgstr ""
 
 #: shortbow.xml
 msgid "coal bow"
-msgstr "Kohlebogen"
+msgstr ""
 
 #: shortbow.xml
 msgid "ash bow"
-msgstr "Eschenbogen"
+msgstr ""
 
 #: shortbow.xml
 msgid "bane bow"
-msgstr "Fluchbogen"
+msgstr ""
 
 #: shortbow.xml
 msgid "oak shortbow"
-msgstr "Eichenkurzbogen"
+msgstr ""
 
 #: shortbow.xml
 msgid "soul bow"
-msgstr "Seelenbogen"
+msgstr ""
 
 #: shortbow.xml
 msgid "seeker"
-msgstr "Sucher"
+msgstr ""
 
 #: shortbow.xml
 msgid "chaos shortbow"
-msgstr "Chaosbogen"
+msgstr ""
 
 #: shortbow.xml
 msgid "fairy bow"
-msgstr "Feenbogen"
+msgstr ""
 
 #: polearms.xml
 msgid "pike"
-msgstr "Pike"
+msgstr ""
 
 #: potion.xml
 msgid "scroll of town portal"
-msgstr "Stadtportal"
+msgstr ""
 
 #: potion.xml
 msgid "small potion"
-msgstr "Kleiner Heiltrank"
+msgstr ""
 
 #: potion.xml
 msgid "medium potion"
-msgstr "Mittlerer Heiltrank"
+msgstr ""
 
 #: potion.xml
 msgid "eyedrops"
-msgstr "Augentropfen"
+msgstr ""
 
 #: potion.xml
 msgid "antidot"
-msgstr "Gegengift"
+msgstr ""
 
 #: potion.xml
 msgid "calming salve"
-msgstr "Beruhigende Salbe"
+msgstr ""
 
 #: potion.xml
 msgid "potion of determination"
-msgstr "Trank der Entscheidungsstärke"
+msgstr ""
 
 #: potion.xml
 msgid "echo potion"
-msgstr "Echotrank"
+msgstr ""
 
 #: potion.xml
 msgid "muscle salve"
-msgstr "Muskelsalbe"
+msgstr ""
 
 #: potion.xml
 msgid "potion of melting"
-msgstr "Auftautrank"
+msgstr ""
 
 #: potion.xml
 msgid "spike oil"
-msgstr "Lavendelöl"
+msgstr ""
 
 #: axes2h.xml
 msgid "lumberjack axe"
-msgstr "Holzfälleraxt"
+msgstr ""
 
 #: axes2h.xml
 msgid "great axe"
-msgstr "Grossaxt"
+msgstr ""
 
 #: axes2h.xml
 msgid "ripping axe"
-msgstr "Reisseraxt"
+msgstr ""
 
 #: axes2h.xml
 msgid "executioner axe"
-msgstr "Henkersaxt"
+msgstr ""
 
 #: axes2h.xml
 msgid "smashing axe"
-msgstr "Schmetteraxt"
+msgstr ""
 
 #: axes2h.xml
 msgid "ogre hatchet"
-msgstr "Ogerbeil"
+msgstr ""
 
 #: axes2h.xml
 msgid "scythe axe"
-msgstr "Sensenaxt"
+msgstr ""
 
 #: axes2h.xml
 msgid "barbarian axe"
-msgstr "Barbarenstreitaxt"
+msgstr ""
 
 #: axes2h.xml
 msgid "bonebreaker axe"
-msgstr "Knochenbrecheraxt"
+msgstr ""
 
 #: axes2h.xml
 msgid "giant axe"
-msgstr "Riesenaxt"
+msgstr ""
 
 #: axes2h.xml
 msgid "slaughter axe"
-msgstr "Schlachtaxt"
+msgstr ""
 
 #: axes2h.xml
 msgid "ogretearer"
-msgstr "Ogerreisser"
+msgstr ""
 
 #: axes2h.xml
 msgid "dwarfensteel axe"
-msgstr "Zwergenstahlaxt"
+msgstr ""
 
 #: axes2h.xml
 msgid "star axe"
-msgstr "Sternenaxt"
+msgstr ""
 
 #: axes2h.xml
 msgid "kings axe"
-msgstr "Königsaxt"
+msgstr ""
 
 #: axes2h.xml
 msgid "torture axe"
-msgstr "Folteraxt"
+msgstr ""
 
 #: axes2h.xml
 msgid "iceland axe"
-msgstr "Eislandaxt"
+msgstr ""
 
 #: axes2h.xml
 msgid "death axe"
-msgstr "Todesaxt"
+msgstr ""
 
 #: hammer2h.xml
 msgid "sledgehammer"
-msgstr "Vorschlaghammer"
+msgstr ""
 
 #: hammer2h.xml
 msgid "bronze hammer"
-msgstr "Bronzehammer"
+msgstr ""
 
 #: hammer2h.xml
 msgid "longshaft"
-msgstr "Langstiel"
+msgstr ""
 
 #: hammer2h.xml
 msgid "guard hammer"
-msgstr "Gardistenhammer"
+msgstr ""
 
 #: hammer2h.xml
 msgid "silverterror"
-msgstr "Silberschrecken"
+msgstr ""
 
 #: hammer2h.xml
 msgid "glow hammer"
-msgstr "Glimmhammer"
+msgstr ""
 
 #: hammer2h.xml
 msgid "bonebreaker"
-msgstr "Knochenbrecher"
+msgstr ""
 
 #: hammer2h.xml
 msgid "smashhead"
-msgstr "Schmetterkopf"
+msgstr ""
 
 #: hammer2h.xml
 msgid "aisener warhammer"
-msgstr "Aisener Kriegshammer"
+msgstr ""
 
 #: hammer2h.xml
 msgid "judgement hammer"
-msgstr "Urteilshammer"
+msgstr ""
 
 #: hammer2h.xml
 msgid "priest hammer"
-msgstr "Priesterhammer"
+msgstr ""
 
 #: hammer2h.xml
 msgid "obsidian hammer"
-msgstr "Obsidianhammer"
+msgstr ""
 
 #: hammer2h.xml
 msgid "judge hammer"
-msgstr "Richthammer"
+msgstr ""
 
 #: hammer2h.xml
 msgid "cyclops hammer"
-msgstr "Zyklopenhammer"
+msgstr ""
 
 #: hammer2h.xml
 msgid "dwarfensteel hammer"
-msgstr "Zwergenstahlhammer"
+msgstr ""
 
 #: hammer2h.xml
 msgid "elementhunter"
-msgstr "Elementenjäger"
+msgstr ""
 
 #: hammer2h.xml
 msgid "exorcists hammer"
-msgstr "Exorzistenhammer"
+msgstr ""
 
 #: hammer2h.xml
 msgid "worldshaker"
-msgstr "Welterschütterer"
+msgstr ""
 
 #: helmet.xml
 msgid "cap"
-msgstr "Kappe"
+msgstr ""
 
 #: helmet.xml
 msgid "leather cap"
-msgstr "Lederkappe"
+msgstr ""
 
 #: helmet.xml
 msgid "leather helmet"
-msgstr "Lederhelm"
+msgstr ""
 
 #: helmet.xml
 msgid "mercenary head"
-msgstr "Söldnerkopf"
+msgstr ""
 
 #: helmet.xml
 msgid "novice headgear"
-msgstr "Novizenhelm"
+msgstr ""
 
 #: helmet.xml
 msgid "mercenary helmet"
-msgstr "Söldnerhelm"
+msgstr ""
 
 #: helmet.xml
 msgid "ranger bandana"
-msgstr "Waldläuferstirnband"
+msgstr ""
 
 #: helmet.xml
 msgid "assassin hood"
-msgstr "Assassinenkapuze"
+msgstr ""
 
 #: helmet.xml
 msgid "biretta"
-msgstr "Birett"
+msgstr ""
 
 #: helmet.xml
 msgid "chain turban"
-msgstr "Kettenturban"
+msgstr ""
 
 #: hammer1h.xml
 msgid "hammer"
-msgstr "Hammer"
+msgstr ""
 
 #: hammer1h.xml
 msgid "cermeonial hammer"
-msgstr "Zeremonienhammer"
+msgstr ""
 
 #: hammer1h.xml
 msgid "iron hammer"
-msgstr "Eisenhammer"
+msgstr ""
 
 #: hammer1h.xml
 msgid "iron club"
-msgstr "Eisenkeule"
+msgstr ""
 
 #: hammer1h.xml
 msgid "maul"
-msgstr "Schlägel"
+msgstr ""
 
 #: hammer1h.xml
 msgid "morning star"
-msgstr "Morgenstern"
+msgstr ""
 
 #: hammer1h.xml
 msgid "crowhead"
-msgstr "Krähenkopf"
+msgstr ""
 
 #: hammer1h.xml
 msgid "rider hammer"
-msgstr "Reiterhammer"
+msgstr ""
 
 #: hammer1h.xml
 msgid "mace"
-msgstr "Streitkolben"
+msgstr ""
 
 #: hammer1h.xml
 msgid "steel hammer"
-msgstr "Stahlhammer"
+msgstr ""
 
 #: hammer1h.xml
 msgid "battle hammer"
-msgstr "Kriegshammer"
+msgstr ""
 
 #: hammer1h.xml
 msgid "steel mace"
-msgstr "Stahlstreitkolben"
+msgstr ""
 
 #: hammer1h.xml
 msgid "steel maul"
-msgstr "Stahlschlägel"
+msgstr ""
 
 #: hammer1h.xml
 msgid "sixedged mace"
-msgstr "Sechskantstreitkolben"
+msgstr ""
 
 #: hammer1h.xml
 msgid "silver hammer"
-msgstr "Silberhammer"
+msgstr ""
 
 #: hammer1h.xml
 msgid "diamont hammer"
-msgstr "Diamanthammer"
+msgstr ""
 
 #: hammer1h.xml
 msgid "priest mace"
-msgstr "Priesterstreitkolben"
+msgstr ""
 
 #: hammer1h.xml
 msgid "holy hammer"
-msgstr "Heiliger Hammer"
+msgstr ""
 
 #: shields.xml
 msgid "targe"
-msgstr "Tartsche"
+msgstr ""
 
 #: shields.xml
 msgid "buckler"
-msgstr "Buckler"
+msgstr ""
 
 #: shields.xml
 msgid "wood shield"
-msgstr "Holzschild"
+msgstr ""
 
 #: shields.xml
 msgid "bronze shield"
-msgstr "Bronzeschild"
+msgstr ""
 
 #: shields.xml
 msgid "iron shield"
-msgstr "Eisenschild"
+msgstr ""
 
 #: shields.xml
 msgid "steel shield"
-msgstr "Stahlschild"
+msgstr ""
 
 #: wands.xml
 msgid "spruce wand"
-msgstr "Fichtenzauberstab"
+msgstr ""
 
 #: wands.xml
 msgid "apprentice wand"
-msgstr "Lehrlingszauberstab"
+msgstr ""
 
 #: wands.xml
 msgid "novice wand"
-msgstr "Novizenzauberstab"
+msgstr ""
 
 #: wands.xml
 msgid "hermit wand"
-msgstr "Einsiedlerzauberstab"
+msgstr ""
 
 #: wands.xml
 msgid "rock wand"
-msgstr "Felsenzauberstab"
+msgstr ""
 
 #: wands.xml
 msgid "alder wand"
-msgstr "Erlenzauberstab"
+msgstr ""
 
 #: wands.xml
 msgid "bard's wand"
-msgstr "Bardenzauberstab"
+msgstr ""
 
 #: wands.xml
 msgid "magus wand"
-msgstr "Magierzauberstab"
+msgstr ""
 
 #: wands.xml
 msgid "silver wand"
-msgstr "Silberzauberstab"
+msgstr ""
 
 #: wands.xml
 msgid "oak wand"
-msgstr "Eichenzauberstab"
+msgstr ""
 
 #: wands.xml
 msgid "phenix wand"
-msgstr "Phönixzauberstab"
+msgstr ""
 
 #: wands.xml
 msgid "frost wand"
-msgstr "Frostzauberstab"
+msgstr ""
 
 #: wands.xml
 msgid "thunder wand"
-msgstr "Gewitterzauberstab"
+msgstr ""
 
 #: wands.xml
 msgid "ash wand"
-msgstr "Eschenzauberstab"
+msgstr ""
 
 #: wands.xml
 msgid "summoner wand"
-msgstr "Beschwörerzauberstab"
+msgstr ""
 
 #: wands.xml
 msgid "master wand"
-msgstr "Magisterzauberstab"
+msgstr ""
 
 #: wands.xml
 msgid "necromancer wand"
-msgstr "Nekromantenzauberstab"
+msgstr ""
 
 #: wands.xml
 msgid "demon wand"
-msgstr "Dämonenzauberstab"
+msgstr ""
 
 #: wands.xml
 msgid "fairy wand"
-msgstr "Feenzauberstab"
+msgstr ""
 
 #: wands.xml
 msgid "archmage wand"
-msgstr "Erzmagierzauberstab"
+msgstr ""
 
 #: axes1h.xml
 msgid "hatchet"
-msgstr "Beil"
+msgstr ""
 
 #: axes1h.xml
 msgid "bronze axe"
-msgstr "Bronzeaxt"
+msgstr ""
 
 #: axes1h.xml
 msgid "iron hatchet"
-msgstr "Eisenbeil"
+msgstr ""
 
 #: axes1h.xml
 msgid "cleaver"
-msgstr "Schlachtbeil"
+msgstr ""
 
 #: axes1h.xml
 msgid "iron axe"
-msgstr "Eisenaxt"
+msgstr ""
 
 #: axes1h.xml
 msgid "mercenary axe"
-msgstr "Söldneraxt"
+msgstr ""
 
 #: axes1h.xml
 msgid "steel axe"
-msgstr "Stahlaxt"
+msgstr ""
 
 #: axes1h.xml
 msgid "battle axe"
-msgstr "Kampfaxt"
+msgstr ""
 
 #: axes1h.xml
 msgid "guard axe"
-msgstr "Gardistenaxt"
+msgstr ""
 
 #: axes1h.xml
 msgid "minotaur axe"
-msgstr "Minotaurenaxt"
+msgstr ""
 
 #: axes1h.xml
 msgid "thunder axe"
-msgstr "Donneraxt"
+msgstr ""
 
 #: axes1h.xml
 msgid "demon axe"
-msgstr "Dämonenaxt"
+msgstr ""
 
 #: axes1h.xml
 msgid "obsidian axe"
-msgstr "Obsidianaxt"
+msgstr ""
 
 #: axes1h.xml
 msgid "vulcano axe"
-msgstr "Vulkanaxt"
+msgstr ""
 
 #: axes1h.xml
 msgid "berserker axe"
-msgstr "Berserkeraxt"
+msgstr ""
 
 #: axes1h.xml
 msgid "diamont axe"
-msgstr "Diamantaxt"
+msgstr ""
 
 #: axes1h.xml
 msgid "dwarfen axe"
-msgstr "Zwergenaxt"
+msgstr ""
 
 #: axes1h.xml
 msgid "hell axe"
-msgstr "Höllenaxt"
+msgstr ""
 
 #: swords1h.xml
 msgid "dagger"
-msgstr "Dolch"
+msgstr ""
 
 #: swords1h.xml
 msgid "shortsword"
-msgstr "Kurzschwert"
+msgstr ""
 
 #: swords1h.xml
 msgid "bronzesword"
-msgstr "Bronzeschwert"
+msgstr ""
 
 #: swords1h.xml
 msgid "sabre"
-msgstr "Säbel"
+msgstr ""
 
 #: swords1h.xml
 msgid "legion blade"
-msgstr "Legionärsklinge"
+msgstr ""
 
 #: swords1h.xml
 msgid "long sword"
-msgstr "Langschwert"
+msgstr ""
 
 #: swords1h.xml
 msgid "sword of the coast"
-msgstr "Küstenschwert"
+msgstr ""
 
 #: swords1h.xml
 msgid "council sabre"
-msgstr "Konzilssäbel"
+msgstr ""
 
 #: swords1h.xml
 msgid "scimitar"
-msgstr "Krummsäbel"
+msgstr ""
 
 #: swords1h.xml
 msgid "barbarian sword"
-msgstr "Barbarenschwert"
+msgstr ""
 
 #: swords1h.xml
 msgid "northlings blade"
-msgstr "Nordlingsklinge"
+msgstr ""
 
 #: swords1h.xml
 msgid "steel sword"
-msgstr "Stahlschwert"
+msgstr ""
 
 #: swords1h.xml
 msgid "assassins blade"
-msgstr "Assassinenklinge"
+msgstr ""
 
 #: swords1h.xml
 msgid "diamont sword"
-msgstr "Diamantschwert"
+msgstr ""
 
 #: swords1h.xml
 msgid "dwarfsteel sword"
-msgstr "Zwergenstahlschwert"
+msgstr ""
 
 #: swords1h.xml
 msgid "demon blade"
-msgstr "Dämonenschwert"
+msgstr ""
 
 #: swords1h.xml
 msgid "hero blade"
-msgstr "Heldenklinge"
+msgstr ""
 
 #: swords1h.xml
 msgid "angel blade"
-msgstr "Engelsklinge"
+msgstr ""
 
 #: swords1h.xml
 msgid "gods blade"
-msgstr "Götterklinge"
+msgstr ""
 
 #: staff.xml
 msgid "spruce staff"
-msgstr "Fichtenstab"
+msgstr ""
 
 #: staff.xml
 msgid "apprentice staff"
-msgstr "Lehrlingsstab"
+msgstr ""
 
 #: staff.xml
 msgid "novice staff"
-msgstr "Novizenstab"
+msgstr ""
 
 #: staff.xml
 msgid "hermit staff"
-msgstr "Einsiedlerstab"
+msgstr ""
 
 #: staff.xml
 msgid "rock staff"
-msgstr "Felsenstab"
+msgstr ""
 
 #: staff.xml
 msgid "alder staff"
-msgstr "Erlenstab"
+msgstr ""
 
 #: staff.xml
 msgid "bard's staff"
-msgstr "Bardenstab"
+msgstr ""
 
 #: staff.xml
 msgid "magus staff"
-msgstr "Magierstab"
+msgstr ""
 
 #: staff.xml
 msgid "silver staff"
-msgstr "Silberstab"
+msgstr ""
 
 #: staff.xml
 msgid "inferno staff"
-msgstr "Infernostab"
+msgstr ""
 
 #: staff.xml
 msgid "oak staff"
-msgstr "Eichenstab"
+msgstr ""
 
 #: staff.xml
 msgid "phenix staff"
-msgstr "Phönixstab"
+msgstr ""
 
 #: staff.xml
 msgid "frost staff"
-msgstr "Froststab"
+msgstr ""
 
 #: staff.xml
 msgid "thunder staff"
-msgstr "Gewitterstab"
+msgstr ""
 
 #: staff.xml
 msgid "ash staff"
-msgstr "Eschenstab"
+msgstr ""
 
 #: staff.xml
 msgid "summoner staff"
-msgstr "Beschwörerstab"
+msgstr ""
 
 #: staff.xml
 msgid "master staff"
-msgstr "Magisterstab"
+msgstr ""
 
 #: staff.xml
 msgid "necromancer staff"
-msgstr "Nekromantenstab"
+msgstr ""
 
 #: staff.xml
 msgid "demon staff"
-msgstr "Dämonenstab"
+msgstr ""
 
 #: staff.xml
 msgid "fairy staff"
-msgstr "Feenstab"
+msgstr ""
 
 #: staff.xml
 msgid "ifreet staff"
-msgstr "Efreetstab"
+msgstr ""
 
 #: staff.xml
 msgid "icewitch staff"
-msgstr "Eishexenstab"
+msgstr ""
 
 #: staff.xml
 msgid "sylph staff"
-msgstr "Sylphenstab"
+msgstr ""
 
 #: staff.xml
 msgid "archmage staff"
-msgstr "Erzmagierstab"
+msgstr ""
 
 #: ring.xml
 msgid "bronze ring"
-msgstr "Bronzering"
+msgstr ""
 
 #: ring.xml
 msgid "amber ring"
-msgstr "Bernsteinring"
+msgstr ""
 
 #: ring.xml
 msgid "silver ring"
-msgstr "Silberring"
+msgstr ""
 
 #: ring.xml
 msgid "jet ring"
-msgstr "Jettring"
+msgstr ""
 
 #: ring.xml
 msgid "gold ring"
-msgstr "Goldring"
+msgstr ""
 
 #: swords2h.xml
 msgid "farmer sword"
-msgstr "Bauernzweihänder"
+msgstr ""
 
 #: swords2h.xml
 msgid "mercenary blade"
-msgstr "Söldnerklinge"
+msgstr ""
 
 #: swords2h.xml
 msgid "two handed steel sword"
-msgstr "Stahlzweihänder"
+msgstr ""
 
 #: swords2h.xml
 msgid "smash sword"
-msgstr "Schmetterschwert"
+msgstr ""
 
 #: swords2h.xml
 msgid "horse killer"
-msgstr "Pferdeschlächter"
+msgstr ""
 
 #: swords2h.xml
 msgid "bastard sword"
-msgstr "Bastardschwert"
+msgstr ""
 
 #: swords2h.xml
 msgid "ogre dagger"
-msgstr "Ogerdolch"
+msgstr ""
 
 #: swords2h.xml
 msgid "goblinkiller"
-msgstr "Goblintöter"
+msgstr ""
 
 #: swords2h.xml
 msgid "executioner's sword"
-msgstr "Richtschwert"
+msgstr ""
 
 #: swords2h.xml
 msgid "two handed guardsman sword"
-msgstr "Gardistenzweihänder"
+msgstr ""
 
 #: swords2h.xml
 msgid "flamberg"
-msgstr "Flamberg"
+msgstr ""
 
 #: swords2h.xml
 msgid "aisener battle sword"
-msgstr "Aisener Kriegsschert"
+msgstr ""
 
 #: swords2h.xml
 msgid "monster sword"
-msgstr "Monsterschwert"
+msgstr ""
 
 #: swords2h.xml
 msgid "tear sword"
-msgstr "Tränenschwert"
+msgstr ""
 
 #: swords2h.xml
 msgid "deathwind"
-msgstr "Todeswind"
+msgstr ""
 
 #: swords2h.xml
 msgid "dread sword"
-msgstr "Schreckensschwert"
+msgstr ""
 
 #: swords2h.xml
 msgid "great sword"
-msgstr "Grossschwert"
+msgstr ""
 
 #: swords2h.xml
 msgid "angel sword"
-msgstr "Engelsschwert"
+msgstr ""
 
 #: undeadEqu.xml
 msgid "broken shield"
-msgstr "Zerbrochener Schild"
+msgstr ""
 
 #: undeadEqu.xml
 msgid "old sword"
-msgstr "Altes Schwert"
+msgstr ""
 
 #: longbow.xml
 msgid "tourney bow"
-msgstr "Turnierbogen"
+msgstr ""
 
 #: longbow.xml
 msgid "orc bow"
-msgstr "Orkbogen"
+msgstr ""
 
 #: longbow.xml
 msgid "yew bow"
-msgstr "Eibenbogen"
+msgstr ""
 
 #: longbow.xml
 msgid "longbow"
-msgstr "Langbogen"
+msgstr ""
 
 #: longbow.xml
 msgid "soldier bow"
-msgstr "Soldatenbogen"
+msgstr ""
 
 #: longbow.xml
 msgid "horn bow"
-msgstr "Hornbogen"
+msgstr ""
 
 #: longbow.xml
 msgid "maple bow"
-msgstr "Ahornbogen"
+msgstr ""
 
 #: longbow.xml
 msgid "battle bow"
-msgstr "Kriegsbogen"
+msgstr ""
 
 #: longbow.xml
 msgid "composite longbow"
-msgstr "Kompositlangbogen"
+msgstr ""
 
 #: longbow.xml
 msgid "stormsinger"
-msgstr "Sturmsänger"
+msgstr ""
 
 #: longbow.xml
 msgid "oak bow"
-msgstr "Eichenbogen"
+msgstr ""
 
 #: longbow.xml
 msgid "demonhorn bow"
-msgstr "Dämonenhornbogen"
+msgstr ""
 
 #: longbow.xml
 msgid "ranger bow"
-msgstr "Waldläuferbogen"
+msgstr ""
 
 #: longbow.xml
 msgid "ash longbow"
-msgstr "Eschenlangbogen"
+msgstr ""
 
 #: longbow.xml
 msgid "demon compositebow"
-msgstr "Dämonenkompositbogen"
+msgstr ""
 
 #: longbow.xml
 msgid "hero bow"
-msgstr "Heldenbogen"
+msgstr ""
 
 #: longbow.xml
 msgid "elf bow"
-msgstr "Elfenbogen"
+msgstr ""
 
 #: hat.xml
 msgid "vagabond hat"
-msgstr "Vagabundenhut"
+msgstr ""
 
 #: hat.xml
 msgid "apprentice cap"
-msgstr "Lehrlingskappe"
+msgstr ""
 
 #: hat.xml
 msgid "novice hat"
-msgstr "Novizenhut"
+msgstr ""
 
 #: hat.xml
 msgid "alchemist cap"
-msgstr "Alchemistenkappe"
+msgstr ""
 
 #: hat.xml
 msgid "beret"
-msgstr "Barett"
+msgstr ""
 
 #: hat.xml
 msgid "magus hat"
-msgstr "Magierhut"
+msgstr ""
 
 #: hat.xml
 msgid "turban"
-msgstr "Turban"
+msgstr ""
 
 #: armor.xml
 msgid "cloth armor"
-msgstr "Tuchrüstung"
+msgstr ""
 
 #: armor.xml
 msgid "leather armor"
-msgstr "Lederrüstung"
+msgstr ""
 
 #: armor.xml
 msgid "rivet armor"
-msgstr "Nietenrüstung"
+msgstr ""
 
 #: armor.xml
 msgid "bandit armor"
-msgstr "Banditenrüstung"
+msgstr ""
 
 #: armor.xml
 msgid "novice armor"
-msgstr "Novizenrüstung"
+msgstr ""
 
 #: armor.xml
 msgid "mercenary armor"
-msgstr "Söldnerrüstung"
+msgstr ""
 
 #: armor.xml
 msgid "ranger shirt"
-msgstr "Waldläuferhemd"
+msgstr ""
 
 #: armor.xml
 msgid "assassin armor"
-msgstr "Assassinenrüstung"
+msgstr ""
 
 #: armor.xml
 msgid "temple armor"
-msgstr "Tempelrüstung"
+msgstr ""
 
 #: armor.xml
 msgid "council armor"
-msgstr "Konzilsrüstung"
+msgstr ""
 
 #: robes.xml
 msgid "ragged robe"
-msgstr "Flickenrobe"
+msgstr ""
 
 #: robes.xml
 msgid "apprentice robe"
-msgstr "Lehrlingsrobe"
+msgstr ""
 
 #: robes.xml
 msgid "novice robe"
-msgstr "Novizenrobe"
+msgstr ""
 
 #: robes.xml
 msgid "alchemist robe"
-msgstr "Alchemistenrobe"
+msgstr ""
 
 #: robes.xml
 msgid "scholar robe"
-msgstr "Gelehrtenrobe"
+msgstr ""
 
 #: robes.xml
 msgid "magus robe"
-msgstr "Magierrobe"
+msgstr ""
 
 #: robes.xml
 msgid "council robe"
-msgstr "Konzilsrobe"
+msgstr ""
 
 #: glove.xml
 msgid "leather gloves"
-msgstr "Lederhandschuhe"
+msgstr ""
 
 #: glove.xml
 msgid "snakehide gloves"
-msgstr "Schlangenlederhandschuhe"
+msgstr ""
 
 #: glove.xml
 msgid "chain gloves"
-msgstr "Kettenhandschuhe"
+msgstr ""
 
 #: glove.xml
 msgid "buckskin gloves"
-msgstr "Wildlederhandschuhe"
+msgstr ""
 
 #: glove.xml
 msgid "spidersilk gloves"
-msgstr "Spinnenseidehandschuhe"
+msgstr ""
 
 #: glove.xml
 msgid "marksman gloves"
-msgstr "Schützenhandschuhe"
+msgstr ""
 
 #: glove.xml
 msgid "assassin gloves"
-msgstr "Assassinenhandschuhe"
+msgstr ""
 
 #: glove.xml
 msgid "shark gloves"
-msgstr "Haifischhandshuhe"
+msgstr ""
 
 #: goblinEqu.xml
 msgid "goblin armor"
-msgstr "Goblinbeinschiene"
+msgstr ""
 
 #: goblinEqu.xml
 msgid "goblin bracer"
-msgstr "Goblinarmschiene"
+msgstr ""
 
 #: goblinEqu.xml
 msgid "shaman mask"
-msgstr "Schamanenmaske"
+msgstr ""
 
 #: goblinEqu.xml
 msgid "goblin club"
-msgstr "Goblinkeule"
+msgstr ""
 
 #: goblinEqu.xml
 msgid "rusty dagger"
-msgstr "Rostiger Dolch"
+msgstr ""
 
 #: goblinEqu.xml
 msgid "shaman staff"
-msgstr "Schamanenstab"
+msgstr ""
 
 #: goblinEqu.xml
 msgid "nail club"
-msgstr "Nagelkeule"
+msgstr ""
 
 #: goblinEqu.xml
 msgid "goblin bow"
-msgstr "Goblinbogen"
+msgstr ""
 
 #: goblinEqu.xml
 msgid "goblin spear"
-msgstr "Goblinspeer"
+msgstr ""
 
 #: amulet.xml
 msgid "feather amulet"
-msgstr "Federnamulett"
+msgstr ""
 
 #: amulet.xml
 msgid "amber amulet"
-msgstr "Bernsteinamulett"
+msgstr ""
 
 #: amulet.xml
 msgid "silver amulet"
-msgstr "Silberamulett"
+msgstr ""
 
 #: amulet.xml
 msgid "coral amulet"
-msgstr "Korallenamulett"
+msgstr ""
 
 #: amulet.xml
 msgid "gold amulet"
-msgstr "Goldamulett"
+msgstr ""
 
 #: theTrader.xml
 msgid "The Trader"
-msgstr "Der Händler"
+msgstr ""
 
 #: theTrader.xml
 msgid "elCnlLobby"
-msgstr "Konzil der Elemente, Untergrundverließ"
+msgstr ""
 
 #: theTrader.xml
 msgid "medMercCamp"
-msgstr "Söldnerlager von Medair"
+msgstr ""
 
 #: theTrader.xml
 msgid "joringsbridge"
-msgstr "Joringsbrück"
+msgstr ""
 
 #: theTrader.xml
 msgid "What are you doing here?"
-msgstr "Was tut ihr hier?"
+msgstr ""
 
 #: theTrader.xml
 msgid "greyCurseCaveFis"
-msgstr "Der Spalt"
+msgstr ""
 
 #: theTrader.xml
 msgid "dwarfenwall"
-msgstr "Zwergentrutz"
+msgstr ""
 
 #: theTrader.xml
 msgid "I see you have reached dwarfenwall safely."
-msgstr "Ich sehe dass ihr Zwergentrutz sicher erreicht habt."
+msgstr ""
 
 #: goblins.xml
 msgid "The goblinslayer"
-msgstr "Der Goblinvernichter"
+msgstr ""
 
 #: goblins.xml
 msgid "peasant"
-msgstr "Bauer"
+msgstr ""
 
 #: goblins.xml
 msgid "Goblins"
-msgstr "Goblins"
+msgstr ""
 
 #: goblins.xml
 msgid "Goblins (reward)"
-msgstr "Goblins (Belohnung)"
+msgstr ""
 
 #: goblins.xml
 msgid "region1"
-msgstr "region1"
+msgstr ""
 
 #: tutorial.xml
 msgid "Tutorial"
-msgstr "Tutorial"
+msgstr ""
 
 #: tutorial.xml
 msgid "Derred"
-msgstr "Derred"
+msgstr ""
 
 #: tutorial.xml
 msgid "Surrender weapons"
-msgstr "Waffen abgeben"
+msgstr ""
 
 #: tutorial.xml
 msgid "Tolec"
-msgstr "Tolec"
+msgstr ""
 
 #: tutorial.xml
 msgid "Explain inventory"
-msgstr "Inventar erklären"
+msgstr ""
 
 #: tutorial.xml
 msgid "Attack slugs"
-msgstr "Schnecken angreifen"
+msgstr ""
 
 #: tutorial.xml
 msgid "Explain level up"
-msgstr "Levelup erklären"
+msgstr ""
 
 #: tutorial.xml
 msgid "Open hatch"
-msgstr "Futterklappe öffnen"
+msgstr ""
 
 #: tutorial.xml
 msgid "Explain skills"
-msgstr "Fähigkeiten erklären"
+msgstr ""
 
 #: tutorial.xml
 msgid "Open secret door"
-msgstr "Geheimtuer oeffnen"
+msgstr ""
 
 #: scene7.xml
 msgid "The Poolmonster"
-msgstr "Das Teichmonster"
+msgstr ""
 
 #: scene7.xml
 msgid "Soren Windclaw"
-msgstr "Soren Windklaue"
+msgstr ""
 
 #: scene7.xml
 msgid "greyCurseLake"
-msgstr "Versteckter See"
+msgstr ""
 
 #: theFissure.xml
 msgid "The ambush of the undead"
-msgstr "Der Hinterhalt der Untoten"
+msgstr ""
 
 #: theFissure.xml
 msgid "aisMounPath"
-msgstr "Gebirgspfad"
+msgstr ""
 
 #: theFissure.xml
 msgid "greyCurseCaveDep"
-msgstr "Verfluchte Höhlen, Tiefe"
+msgstr ""
 
 #: siegeOfDwarfenwall.xml
 msgid "Defend Dwarfenwall"
-msgstr "Verteidigt Zwergentrutz"
+msgstr ""
 
 #: siegeOfDwarfenwall.xml
 msgid "dwarfenwallCommand"
-msgstr "Kommandozentrum"
+msgstr ""
 
 #: siegeOfDwarfenwall.xml
 msgid "dwarfenwallRampart"
-msgstr "Burgwall"
+msgstr ""
 
 #: siegeOfDwarfenwall.xml
 msgid "necFieldcamp"
-msgstr "Feldlager der Untoten"
+msgstr ""
 
 #: theAmbush.xml
 msgid "The Ambush"
-msgstr "Der Hinterhalt"
+msgstr ""
 
 #: theAmbush.xml
 msgid "aisWolfstones"
-msgstr "Wolfssteine"
+msgstr ""
 
 #: besieged_farm.xml
 msgid "The besieged farm"
-msgstr "Der belagerte Bauernhof"
+msgstr ""
 
 #: besieged_farm.xml
 msgid "Sergeant Lutterer"
-msgstr "Sergeant Lutterer"
+msgstr ""
 
 #: besieged_farm.xml
 msgid "The farm"
-msgstr "Die Farm"
+msgstr ""
 
 #: besieged_farm.xml
 msgid "aisNorthMeadow"
-msgstr "Nördliche Wiese"
+msgstr ""
 
 #: besieged_farm.xml
 msgid "Brons Farm"
-msgstr "Brons Farm"
+msgstr ""
 
 #: maylons_grave.xml
 msgid "Maylons Grave"
-msgstr "Maylons Grab"
+msgstr ""
 
 #: maylons_grave.xml
 msgid "aisMaylonsGraveEntry"
-msgstr "Maylons Grab"
+msgstr ""
 
 #: maylons_grave.xml
 msgid "Gab Resh"
-msgstr "Gab'Resh"
+msgstr ""
 
 #: maylons_grave.xml
 msgid "aisMaylonsGraveL1"
-msgstr "Maylons Grab, Ebene 1"
+msgstr ""
 
 #: maylons_grave.xml
 msgid "aisMaylonsGraveL2"
-msgstr "Maylons Grab, Krypta"
+msgstr ""
 
 #: herbalist.xml
 msgid "Herb collector"
-msgstr "Kräutersammler"
+msgstr ""
 
 #: herbalist.xml
 msgid "Gertlinde Kampfer"
-msgstr "Gertlinde Kampfer"
+msgstr ""
 
 #: herbalist.xml
 msgid "Herb gathering"
-msgstr "Kräutersammeln"
+msgstr ""
 
 #: testquest.xml
 msgid "testquest"
-msgstr "Testquest"
+msgstr ""
 
 #: testquest.xml
 msgid "Fenor Marken"
-msgstr "Fenor Marken"
+msgstr ""
 
 #: testquest.xml
 msgid "Test"
-msgstr "Test"
+msgstr ""
 
 #: joringsbridge.xml
 msgid "Joringsbridge"
-msgstr "Joringsbrück"
+msgstr ""
 
 #: fortify_dwarfenwall.xml
 msgid "Fortify Dwarfenwall"
-msgstr "Vesrtärke Zwergentrutz"
+msgstr ""
 
 #: fortify_dwarfenwall.xml
 msgid "Speak with Windclaw"
-msgstr "Windklaue sprechen"
+msgstr ""
 
 #: fortify_dwarfenwall.xml
 msgid "medBackalley"
-msgstr "Hintergassen"
+msgstr ""
 
 #: rob_the_robber.xml
 msgid "Rob the robber"
-msgstr "Rob der Räuber"
+msgstr ""
 
 #: rob_the_robber.xml
 msgid "Wanted poster"
-msgstr "Steckbrief"
+msgstr ""
 
 #: rob_the_robber.xml
 msgid "Sergeant Wober"
-msgstr "Sergeant Wober"
+msgstr ""
 
 #: rob_the_robber.xml
 msgid "Rob the Robber (Reward)"
-msgstr "Rob der Räuber (Belohnung)"
+msgstr ""
 
 #: rob_the_robber.xml
 msgid "aisDarkFairyforest"
-msgstr "Dunkler Feenwald"
+msgstr ""
 
 #: rescue_willard.xml
 msgid "A friend in need"
-msgstr "Ein Freund in Not"
+msgstr ""
 
 #: rescue_willard.xml
 msgid "Willard"
-msgstr "Willard"
+msgstr ""
 
 #: rescue_willard.xml
 msgid "Give Willard the stone (Reward)"
-msgstr "Willard den Stein geben (Belohnung)"
+msgstr ""
 
 #: rescue_willard.xml
 msgid "aisMeadow"
-msgstr "Aisener Wiese"
+msgstr ""
 
 #: joringsbridge_npc.xml
 msgid "Potions"
-msgstr "Tränke"
+msgstr ""
 
 #: joringsbridge_npc.xml
 msgid "Sybill"
-msgstr "Sybill"
+msgstr ""
 
 #: joringsbridge_npc.xml
 msgid "Weapons"
-msgstr "Waffen"
+msgstr ""
 
 #: joringsbridge_npc.xml
 msgid "Halgor"
-msgstr "Halgor"
+msgstr ""
 
 #: joringsbridge_npc.xml
 msgid "Armors"
-msgstr "Rüstungen"
+msgstr ""
 
 #: joringsbridge_npc.xml
 msgid "Marco"
-msgstr "Marco"
+msgstr ""
 
 #: joringsbridge_npc.xml
 msgid "Fundgegenstaende"
-msgstr "Fundgegenstaende"
+msgstr ""
 
 #: joringsbridge_npc.xml
 msgid "What are these Items?"
-msgstr "Was sind das für Gegenstände?"
+msgstr ""
 
 #: joringsbridge_npc.xml
 msgid "The surroundings of Joringsbridge"
-msgstr "Die Umgebung von Joringsbrück"
+msgstr ""
 
 #: joringsbridge_npc.xml
 msgid "Michel Bron"
-msgstr "Michel Bron"
+msgstr ""
 
 #: joringsbridge_npc.xml
 msgid "Magus Convocatis Relau Fireweaver"
-msgstr "Magus Convocatis Relau Feuerweber"
+msgstr ""
 
 #: dwarfcastle.xml
 msgid "Haffgar"
-msgstr "Haffgar"
+msgstr ""
 
 #: dwarfcastle.xml
 msgid "Trade"
-msgstr "Trade"
+msgstr ""
 
 #: dwarfcastle.xml
 msgid "Amelia"
-msgstr "Amelia"
+msgstr ""
 
 #: dwarfcastle.xml
 msgid "Drago"
-msgstr "Drago"
+msgstr ""
 
 #: dwarfcastle.xml
 msgid "Flynn"
-msgstr "Flynn"
+msgstr ""
 
 #: dwarfcastle.xml
 msgid "What is all this?"
-msgstr "Was ist das alles?"
+msgstr ""
 
 #: medairnpc.xml
 msgid "Robert"
-msgstr "Robert"
+msgstr ""
 
 #: medairnpc.xml
 msgid "Elgor"
-msgstr "Elgor"
+msgstr ""
 
 #: medairnpc.xml
 msgid "Cain"
-msgstr "Cain"
+msgstr ""
 
-# Bron's door
 #: npc.xml
 msgid "Brons Tuer"
-msgstr "Brons Tür"
+msgstr ""
 
 #: npc.xml
 msgid "Guard"
-msgstr "Wache"
+msgstr ""
 
 #: npc.xml
 msgid "Maylons Ghost"
-msgstr "Maylons Geist"
+msgstr ""
 
 #: npc.xml
 msgid "Leonard von Robenforst"
-msgstr "Leonard von Robenforst"
+msgstr ""
 
 #: npc.xml
 msgid "General Greif"
-msgstr "General Greif"
+msgstr ""
 
 #: npc.xml
 msgid "Maga Convocatis Darna Eistaucher"
-msgstr "Maga Convocatis Darna Eistaucher"
+msgstr ""
 
 #: npc.xml
 msgid "Prince Karlen"
-msgstr "Prince Karlen"
+msgstr ""
 
 #: npc.xml
 msgid "Erzmaga Ireana von Nordenburg"
-msgstr "Erzmaga Ireana von Nordenburg"
+msgstr ""
 
 #: npc.xml
 msgid "Hauptmann der Wache"
-msgstr "Hauptmann der Wache"
+msgstr ""
 
 #: npc.xml
 msgid "Elementaristenwaechter"
-msgstr "Elementaristenwaechter"
+msgstr ""
 
 #: npc.xml
 msgid "Vorarbeiter Nekromant"
-msgstr "Vorarbeiter Nekromant"
+msgstr ""
 
 #: npc.xml
 msgid "Nar'Asoroth"
-msgstr "Nar'Asoroth"
+msgstr ""
 
 #: npc.xml
 msgid "Leere Schriftrollen kaufen"
-msgstr "Leere Schriftrollen kaufen"
+msgstr ""
 
 #: npc.xml
 msgid "The Lost Trader"
-msgstr "Der verirrte Händler"
+msgstr ""
 
 #: cursedCaves.xml
 msgid "greyCurseCave"
-msgstr "Verfluchte Höhle"
+msgstr ""
 
 #: cursedCaves.xml
 msgid "greyCurseGrotto"
-msgstr "Verfluchte Grotte"
+msgstr ""
 
 #: cursedCaves.xml
 msgid "greyWolfcave"
-msgstr "Wolfshöhle"
+msgstr ""
 
 #: cursedCaves.xml
 msgid "greyCurseGrotDep"
-msgstr "Verfluchte Grotte, Tiefe"
+msgstr ""
 
 #: cursedCaves.xml
 msgid "greyCursedCavern"
-msgstr "Verfluchte Kaverne"
+msgstr ""
 
 #: cursedCaves.xml
 msgid "greyCurseCaveEast"
-msgstr "Verfluchte Osthöhle"
+msgstr ""
 
 #: aisen.xml
 msgid "aisPlains"
-msgstr "Offene Ebene"
+msgstr ""
 
 #: aisen.xml
 msgid "aisHeath"
-msgstr "Aisener Heide"
+msgstr ""
 
 #: aisen.xml
 msgid "aisStonePlains"
-msgstr "Steinige Ebene"
+msgstr ""
 
 #: aisen.xml
 msgid "aisDarkClearing"
-msgstr "Dunkle Lichtung"
+msgstr ""
 
 #: aisen.xml
 msgid "aisWideHeath"
-msgstr "Weite Heide"
+msgstr ""
 
 #: aisen.xml
 msgid "aisJoringsforest"
-msgstr "Joringsforst"
+msgstr ""
 
 #: aisen.xml
 msgid "aisFairyforest"
-msgstr "Feenwald"
+msgstr ""
 
 #: aisen.xml
 msgid "aisWestwoods"
-msgstr "Westwald"
+msgstr ""
 
 #: aisen.xml
 msgid "aisMistslope"
-msgstr "Nebelhänge"
+msgstr ""
 
 #: aisen.xml
 msgid "aisEastslope"
-msgstr "Osthänge"
+msgstr ""
 
 #: testregions.xml
 msgid "maptest"
-msgstr "maptest"
+msgstr ""
 
 #: testregions.xml
 msgid "sandbox"
-msgstr "sandbox"
+msgstr ""
 
 #: testregions.xml
 msgid "spawnAbyss"
-msgstr "spawnAbyss"
+msgstr ""
 
 #: testregions.xml
 msgid "region0"
-msgstr "region0"
+msgstr ""
 
 #: testregions.xml
 msgid "testregion"
-msgstr "testregion"
+msgstr ""
 
 #: humans.xml
 msgid "Bandit"
-msgstr "Bandit"
+msgstr ""
 
 #: humans.xml
 msgid "Thug"
-msgstr "Schläger"
+msgstr ""
 
 #: humans.xml
 msgid "Rogue"
-msgstr "Schurke"
+msgstr ""
 
 #: humans.xml
 msgid "Brigand"
-msgstr "Brigant"
+msgstr ""
 
 #: humans.xml
 msgid "Poacher"
-msgstr "Wilderer"
+msgstr ""
 
 #: humans.xml
 msgid "Alwin"
-msgstr "Alwin"
+msgstr ""
 
 #: humans.xml
 msgid "Thief"
-msgstr "Dieb"
+msgstr ""
 
 #: humans.xml
 msgid "Raider"
-msgstr "Plünderer"
+msgstr ""
 
 #: humans.xml
 msgid "Highwayman"
-msgstr "Wegelagerer"
+msgstr ""
 
 #: humans.xml
 msgid "Buck"
-msgstr "Buck"
+msgstr ""
 
 #: humans.xml
 msgid "Deserter"
-msgstr "Deserteur"
+msgstr ""
 
 #: humans.xml
 msgid "Saboteur"
-msgstr "Saboteur"
+msgstr ""
 
 #: humans.xml
 msgid "Todd"
-msgstr "Todd"
+msgstr ""
 
 #: humans.xml
 msgid "Rob the Robber"
-msgstr "Rob der Räuber"
+msgstr ""
 
 #: humans.xml
 msgid "Ronny the Rat"
-msgstr "Ronny die Ratte"
+msgstr ""
 
 #: goblinStats.xml
 msgid "goblin brawler"
-msgstr "Goblinschläger"
+msgstr ""
 
 #: goblinStats.xml
 msgid "goblin hunter"
-msgstr "Goblinjäger"
+msgstr ""
 
 #: goblinStats.xml
 msgid "goblin robber"
-msgstr "Goblinräuber"
+msgstr ""
 
 #: goblinStats.xml
 msgid "Drakrazz"
-msgstr "Drakrazz"
+msgstr ""
 
 #: goblinStats.xml
 msgid "Roruz"
-msgstr "Roruz"
+msgstr ""
 
 #: goblinStats.xml
 msgid "Nubreck"
-msgstr "Nubreck"
+msgstr ""
 
 #: goblinStats.xml
 msgid "goblin dog"
-msgstr "Goblinhund"
+msgstr ""
 
 #: goblinStats.xml
 msgid "boneshaker"
-msgstr "Knochenschüttler"
+msgstr ""
 
 #: goblinStats.xml
 msgid "Gobrusch"
-msgstr "Gobrusch"
+msgstr ""
 
 #: goblinStats.xml
 msgid "Dobrusch"
-msgstr "Dobrusch"
+msgstr ""
 
 #: goblinStats.xml
 msgid "Lurdrak with the Hammer"
-msgstr "Lurdrak mit dem Hammer"
+msgstr ""
 
 #: goblinStats.xml
 msgid "goblin fighter"
-msgstr "Goblinkämpfer"
+msgstr ""
 
 #: goblinStats.xml
 msgid "goblin poacher"
-msgstr "Goblinwilderer"
+msgstr ""
 
 #: goblinStats.xml
 msgid "goblin rider"
-msgstr "Goblinreiter"
+msgstr ""
 
 #: goblinStats.xml
 msgid "snowcaller"
-msgstr "Schneerufer"
+msgstr ""
 
 #: goblinStats.xml
 msgid "reg'resh"
-msgstr "Reg'Resh"
+msgstr ""
 
 #: goblinStats.xml
 msgid "goblin temple guard"
-msgstr "Goblintempelwache"
+msgstr ""
 
 #: goblinStats.xml
 msgid "goblin apprentice"
-msgstr "Goblinlehrling"
+msgstr ""
 
 #: goblinStats.xml
 msgid "Marblak"
-msgstr "Marblak"
+msgstr ""
 
 #: goblinStats.xml
 msgid "goblin youngling"
-msgstr "Goblinjungling"
+msgstr ""
 
 #: goblinStats.xml
 msgid "Gab'Resh"
-msgstr "Gab'Resh"
+msgstr ""
 
 #: goblinStats.xml
 msgid "Gab Clan Goblin"
-msgstr "Gab Klan Goblin"
+msgstr ""
 
 #: goblinStats.xml
 msgid "goblin warrior"
-msgstr "Goblinkrieger"
+msgstr ""
 
 #: goblinStats.xml
 msgid "goblin rocklobber"
-msgstr "Goblinsteinschleuderer"
+msgstr ""
 
 #: goblinStats.xml
 msgid "goblin shaman"
-msgstr "Goblinschamane"
+msgstr ""
 
 #: goblinStats.xml
 msgid "goblin slayer"
-msgstr "Goblinschlächter"
+msgstr ""
 
 #: goblinStats.xml
 msgid "goblin assassin"
-msgstr "Goblinassassine"
+msgstr ""
 
 #: aisenMonsterStats.xml
 msgid "Bloodbeak"
-msgstr "Blutschnabel"
+msgstr ""
 
 #: aisenMonsterStats.xml
 msgid "Giant wolf"
-msgstr "Riesenwolf"
+msgstr ""
 
 #: aisenMonsterStats.xml
 msgid "wolf"
-msgstr "Wolf"
+msgstr ""
 
 #: councilNPCStats.xml
 msgid "Worker"
-msgstr "Arbeiter"
+msgstr ""
 
 #: councilNPCStats.xml
 msgid "Council Guard"
-msgstr "Konzilswächter"
+msgstr ""
 
 #: councilNPCStats.xml
 msgid "Council Mage"
-msgstr "Konzilsmagier"
+msgstr ""
 
 #: councilNPCStats.xml
 msgid "Ireana von Nordenburg"
-msgstr "Ireana von Nordenburg"
+msgstr ""
 
 #: councilNPCStats.xml
 msgid "Council Guard Captain"
-msgstr "Konzilshauptmann"
+msgstr ""
 
 #: councilNPCStats.xml
 msgid "Fireguardian"
-msgstr "Feuerwächter"
+msgstr ""
 
 #: council_monsters.xml
 msgid "Fire Slug"
-msgstr "Feuerschnecke"
+msgstr ""
 
 #: council_monsters.xml
 msgid "Mutant Slug"
-msgstr "Mutierte Schnecke"
+msgstr ""
 
 #: council_monsters.xml
 msgid "Fire Louse"
-msgstr "Feuerassel"
+msgstr ""
 
 #: council_monsters.xml
 msgid "Firefletchling"
-msgstr "Feuerküken"
+msgstr ""
 
 #: council_monsters.xml
 msgid "Inferno Behemoth"
-msgstr "Inferno Behemoth"
+msgstr ""
 
 #: aisenNPCStats.xml
 msgid "Healer"
-msgstr "Heiler"
+msgstr ""
 
 #: aisenNPCStats.xml
 msgid "Trader"
-msgstr "Händler"
+msgstr ""
 
 #: aisenNPCStats.xml
 msgid "Bowman"
-msgstr "Bogenschütze"
+msgstr ""
 
 #: aisenNPCStats.xml
 msgid "Avaeras Order, Firemage"
-msgstr "Avaeras Orden, Feuermagier"
+msgstr ""
 
 #: aisenNPCStats.xml
 msgid "Elite Swordsman"
-msgstr "Eliteschwertkämpfer"
+msgstr ""
 
 #: undeadStats.xml
 msgid "Guardian Skeleton"
-msgstr "Wächterskelett"
+msgstr ""
 
 #: undeadStats.xml
 msgid "Zombie"
-msgstr "Zombie"
+msgstr ""
 
 #: undeadStats.xml
 msgid "Maylon"
-msgstr "Maylon"
+msgstr ""
 
 #: undeadStats.xml
 msgid "lich"
-msgstr "Lich"
+msgstr ""
 
 #: undeadStats.xml
 msgid "Skeleton"
-msgstr "Skelett"
+msgstr ""
 
 #: undeadStats.xml
 msgid "Giant Skeleton"
-msgstr "Riesenskelett"
+msgstr ""
 
 #: undeadStats.xml
 msgid "Skeleton Archer"
-msgstr "Skelettbogenschütze"
+msgstr ""
 
 #: undeadStats.xml
 msgid "Skeleton Shadow Archer"
-msgstr "Skelettschattenbogenschütze"
+msgstr ""
 
 #: undeadStats.xml
 msgid "Frostbone"
-msgstr "Frostknochen"
+msgstr ""
 
 #: undeadStats.xml
 msgid "Burning Skeleton"
-msgstr "Brennendes Skelett"
+msgstr ""
 
 #: undeadStats.xml
 msgid "Undead Scythe"
-msgstr "Untote Sense"
+msgstr ""
 
 #: undeadStats.xml
 msgid "Necromancer"
-msgstr "Nekromant"
+msgstr ""
 
 #: undeadStats.xml
 msgid "Worker Skeleton"
-msgstr "Skelettarbeiter"
+msgstr ""
 
 #: undeadStats.xml
 msgid "Lich"
-msgstr "Lich"
+msgstr ""
 
 #: undeadStats.xml
 msgid "Huge Skeleton"
-msgstr "Gewaltiges Skelett"
+msgstr ""
 
 #: undeadStats.xml
 msgid "Frost Skeleton"
-msgstr "Frostskelett"
+msgstr ""
 
 #: undeadStats.xml
 msgid "Frost Skeleton Archer"
-msgstr "Frostskelettbogenschütze"
+msgstr ""
 
 #: undeadStats.xml
 msgid "Chilling Death"
-msgstr "Weißer Tod"
+msgstr ""
 
 #: undeadStats.xml
 msgid "Savage Skeleton"
-msgstr "Wildes Skelett"
+msgstr ""
 
 #: undeadStats.xml
 msgid "Boney Brothers"
-msgstr "Knochige Brüder"
+msgstr ""
 
 #: undeadStats.xml
 msgid "Icemage"
-msgstr "Eismagier"
+msgstr ""
 
 #: undeadStats.xml
 msgid "Frostmage"
-msgstr "Frostmagier"
+msgstr ""
 
 #: undeadStats.xml
 msgid "Neivan the Frostbringer"
-msgstr "Neivan der Frostbringer"
+msgstr ""
 
 #: undeadStats.xml
 msgid "Blackmage"
-msgstr "Schwarzmagier"
+msgstr ""
 
 #: undeadStats.xml
 msgid "Black Raven"
-msgstr "Schwarzer Rabe"
+msgstr ""
 
 #: undeadStats.xml
 msgid "Ice Obelisk"
-msgstr "Eisobelisk"
+msgstr ""
 
 #: monsters.xml
 msgid "small mandragora"
-msgstr "Kleine Alraune"
+msgstr ""
 
 #: monsters.xml
 msgid "mandragora"
-msgstr "Alraune"
+msgstr ""
 
 #: npcStats.xml
 msgid "Peasant"
-msgstr "Bauer"
+msgstr ""
+

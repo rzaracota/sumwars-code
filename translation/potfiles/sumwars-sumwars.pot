@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-20 22:06+0200\n"
+"POT-Creation-Date: 2010-06-15 16:25+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -108,15 +108,15 @@ msgstr ""
 msgid "which Topic"
 msgstr ""
 
-#: ../src/core/document.cpp:1172 ../src/core/item.cpp:654
+#: ../src/core/document.cpp:1182 ../src/core/item.cpp:654
 msgid "Required level"
 msgstr ""
 
-#: ../src/core/document.cpp:1182
+#: ../src/core/document.cpp:1192
 msgid "Timer"
 msgstr ""
 
-#: ../src/core/document.cpp:1183
+#: ../src/core/document.cpp:1193
 msgid "Cast delay"
 msgstr ""
 
@@ -384,8 +384,8 @@ msgstr ""
 msgid "Graphic"
 msgstr ""
 
-#: ../src/gui/optionswindow.cpp:204
-msgid "Misc"
+#: ../src/gui/optionswindow.cpp:204 ../src/gui/optionswindow.cpp:240
+msgid "Language"
 msgstr ""
 
 #: ../src/gui/optionswindow.cpp:210
@@ -420,10 +420,6 @@ msgstr ""
 msgid "Music"
 msgstr ""
 
-#: ../src/gui/optionswindow.cpp:240
-msgid "Language"
-msgstr ""
-
 #: ../src/gui/questinfo.cpp:158
 msgid "open"
 msgstr ""
@@ -452,6 +448,6 @@ msgstr ""
 msgid "Level"
 msgstr ""
 
-#: ../src/gui/worldmap.cpp:140
+#: ../src/gui/worldmap.cpp:141
 msgid "Town Portal"
 msgstr ""

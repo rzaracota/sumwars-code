@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-20 22:06+0200\n"
+"POT-Creation-Date: 2010-06-15 16:25+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -5425,10 +5425,10 @@ msgid ""
 "have to mop escaped sluglings from the floor."
 msgstr ""
 
-#: ../data/world/aisen.xml:754
+#: ../data/world/aisen.xml:758
 msgid "Watch out! Monsters from the mine! Help me!"
 msgstr ""
 
-#: ../data/world/aisen.xml:770
+#: ../data/world/aisen.xml:774
 msgid "Let me tell you I'm no monster. I'm worse."
 msgstr ""
