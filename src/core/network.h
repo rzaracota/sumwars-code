@@ -2,6 +2,9 @@
 #else
 #define NETWORK_H
 
+#include "debug.h"
+
+
 /*
 #include "raknet/MessageIdentifiers.h"
 #include "raknet/RakNetworkFactory.h"
@@ -9,6 +12,7 @@
 #include "raknet/RakNetTypes.h"
 #include "raknet/BitStream.h"
 */
+#ifndef NO_RAKNET
 #include "raknet/PacketEnumerations.h"
 #include "raknet/RakNetworkFactory.h"
 #include "raknet/RakPeerInterface.h"
@@ -17,9 +21,58 @@
 #include "raknet/RakClientInterface.h"
 #include "raknet/RakServerInterface.h"
 
+#else // #ifndef NO_RAKNET
+	// dummy classes to preserve the interface of Network classes
+	class Packet
+	{
+	};
+	
+	namespace RakNet
+	{
+		class BitStream
+		{
+			public:
+			char* GetData()
+			{
+				ERRORMSG("Called RakNet lib in NO_RAKNET build");
+				return 0;
+			}
+		};
+	}
+	
+	class RakServerInterface {};
+	class RakClientInterface {};
+	class PlayerID {};
+	
+	enum PacketPriority
+	{
+		SYSTEM_PRIORITY,   //!< System priority is for system related messaging.  Don't use it.
+  HIGH_PRIORITY,   //!< Those message are handle first
+  MEDIUM_PRIORITY,   //!< Message relativly important
+  LOW_PRIORITY,   //!< Not critical information
+  NUMBER_OF_PRIORITIES
+	};
+/**
+	 * This define the reliability behaviour to apply to a packet
+	 * 
+	 * @note  Note to self: I write this with 3 bits in the stream!
+	 *
+ */
+
+	enum PacketReliability
+	{
+		UNRELIABLE,   //!< Send packet not reliable and not sequenced
+  UNRELIABLE_SEQUENCED,  //!< Send packet not reliable but sequenced
+  RELIABLE,   //!< Send packet reliable
+  RELIABLE_ORDERED,   //!< Send packet reliable respecting ordering
+  RELIABLE_SEQUENCED //!< Send packet reliable respecting sequenced
+	};
+
+#endif
+
 #define ID_USER_PACKET_ENUM  80
 
-#include "debug.h"
+
 #include <queue>
 
 

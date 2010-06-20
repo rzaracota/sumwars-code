@@ -4,33 +4,47 @@
 #include <algorithm>
 
 CharConv::CharConv()
+#ifndef NO_RAKNET
 	: m_bitstream()
+#endif
 {
+#ifndef NO_RAKNET
 	m_timestamp = RakNet::GetTime();
 	m_bitstream.Write((char) ID_TIMESTAMP);
 	m_bitstream.Write(m_timestamp);
+#endif
 	m_stream =0;
 	m_version =World::getWorld()->getVersion();
 }
 
 CharConv::CharConv(int dummy)
+#ifndef NO_RAKNET	
 	: m_bitstream()
+#endif	
 {
 	m_stream =0;
 	m_version =World::getWorld()->getVersion();
 }
 
 CharConv::CharConv(unsigned char* data, unsigned int size)
+#ifndef NO_RAKNET
 	: m_bitstream((const char*) data, size, false)
+#endif
 {
+#ifndef NO_RAKNET
 	m_timestamp = RakNet::GetTime();
 	m_stream=0;
 	m_version =World::getWorld()->getVersion();
+#endif
 }
 
+
 CharConv::CharConv(Packet* packet)
+#ifndef NO_RAKNET
 	: m_bitstream((const char*) packet->data, packet->length, false)
+#endif
 {
+#ifndef NO_RAKNET
 	if (packet->data[0] == ID_TIMESTAMP)
 	{
 		char tmp;
@@ -43,7 +57,11 @@ CharConv::CharConv(Packet* packet)
 	}
 	m_stream=0;
 	m_version =World::getWorld()->getVersion();
+#else
+	ERRORMSG("Called RakNet lib in NO_RAKNET build");
+#endif
 }
+
 
 CharConv::CharConv(std::iostream* stream)
 {
@@ -56,7 +74,11 @@ void CharConv::toBuffer(const char* data, unsigned int size)
 {
 	if (m_stream ==0)
 	{
+#ifndef NO_RAKNET
 		m_bitstream.Write(data,size);
+#else
+		ERRORMSG("Called RakNet lib in NO_RAKNET build");
+#endif
 	}
 	else
 	{
@@ -68,7 +90,11 @@ void CharConv::fromBuffer(char* data, unsigned int size)
 {
 	if (m_stream ==0)
 	{
+#ifndef NO_RAKNET
 		m_bitstream.Read(data,size);
+#else
+		ERRORMSG("Called RakNet lib in NO_RAKNET build");
+#endif
 	}
 	else
 	{
@@ -177,7 +203,11 @@ void CharConv::toBuffer<char>(char c)
 {
 	if (m_stream ==0)
 	{
+#ifndef NO_RAKNET
 		m_bitstream.Write(c);
+#else
+		ERRORMSG("Called RakNet lib in NO_RAKNET build");
+#endif
 	}
 	else
 	{
@@ -190,7 +220,11 @@ void CharConv::fromBuffer<char>(char &c)
 {
 	if (m_stream ==0)
 	{
+#ifndef NO_RAKNET
 		m_bitstream.Read(c);
+#else
+		ERRORMSG("Called RakNet lib in NO_RAKNET build");
+#endif
 	}
 	else
 	{

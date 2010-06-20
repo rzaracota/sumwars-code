@@ -6,12 +6,24 @@
 #include "raknet/GetTime.h"
 #include "raknet/MessageIdentifiers.h"
 */
+#ifndef NO_RAKNET
+
 #include "raknet/PacketEnumerations.h"
 #include "raknet/RakNetworkFactory.h"
 #include "raknet/RakPeerInterface.h"
 #include "raknet/NetworkTypes.h"
 #include "raknet/BitStream.h"
 #include "raknet/GetTime.h"
+
+#else
+	// Raknet pseudo definitions
+	class Packet;
+	namespace RakNet
+	{
+		class BitStream;	
+	}
+	#include "debug.h"
+#endif
 
 #include <algorithm>
 #include <string>
@@ -53,6 +65,7 @@ class CharConv
 	 */
 	CharConv(unsigned char* data, unsigned int size);
 
+
 	/**
 	 * \fn CharConv(Packet* packet)
 	 * \brief erstellt ein neues Objekt aus einem ueber das Netzwerk erhaltenen Datenpaket
@@ -67,7 +80,11 @@ class CharConv
 	 */
 	void backToStart()
 	{
+#ifndef NO_RAKNET
 		m_bitstream.SetWriteOffset(0);
+#else
+		ERRORMSG("Called RakNet lib in NO_RAKNET build");
+#endif
 	}
 
 	/**
@@ -76,8 +93,13 @@ class CharConv
 	 */
 	void reset()
 	{
+#ifndef NO_RAKNET
 		m_bitstream.Reset();
+#else
+		ERRORMSG("Called RakNet lib in NO_RAKNET build");
+#endif
 	}
+
 
 	/**
 	 * \fn void toBuffer(const char* data, unsigned int size)
@@ -124,7 +146,11 @@ class CharConv
 	{
 		if (m_stream ==0)
 		{
+#ifndef NO_RAKNET
 			m_bitstream.Write(data);
+#else
+			ERRORMSG("Called RakNet lib in NO_RAKNET build");
+#endif
 		}
 		else
 		{
@@ -142,7 +168,11 @@ class CharConv
 	{
 		if (m_stream ==0)
 		{
+#ifndef NO_RAKNET
 			m_bitstream.Read(data);
+#else
+			ERRORMSG("Called RakNet lib in NO_RAKNET build");
+#endif
 		}
 		else
 		{
@@ -177,8 +207,14 @@ class CharConv
 	 */
 	RakNet::BitStream* getBitStream()
 	{
+#ifndef NO_RAKNET
 		return &m_bitstream;
+#else
+		ERRORMSG("Called RakNet lib in NO_RAKNET build");
+		return 0;
+#endif
 	}
+
 
 	/**
 	 * \fn std::iostream* getStream()
@@ -195,7 +231,12 @@ class CharConv
 	 */
 	int readBits()
 	{
+#ifndef NO_RAKNET
 		return m_bitstream.GetReadOffset();
+#else
+		ERRORMSG("Called RakNet lib in NO_RAKNET build");
+		return 0;
+#endif
 	}
 
 	/**
@@ -204,7 +245,12 @@ class CharConv
 	 */
 	int writeBits()
 	{
+#ifndef NO_RAKNET
 		return m_bitstream.GetNumberOfBitsUsed();
+#else
+		ERRORMSG("Called RakNet lib in NO_RAKNET build");
+		return 0;
+#endif
 	}
 
 	/**
@@ -213,7 +259,12 @@ class CharConv
 	 */
 	float getDelay()
 	{
+#ifndef NO_RAKNET
 		return std::max(0.0f,static_cast<float>(RakNet::GetTime())-static_cast<float>(m_timestamp));
+#else
+		ERRORMSG("Called RakNet lib in NO_RAKNET build");
+		return 0;
+#endif
 	}
 
 	/**
@@ -274,11 +325,13 @@ class CharConv
 
 
 	private:
+#ifndef NO_RAKNET
 		/**
 		 * \var RakNet::BitStream m_bitstream
 		 * \brief enthaelt die Daten als Zeichenkette
 		 */
 		RakNet::BitStream m_bitstream;
+#endif
 
 		/**
 		 * \var unsigned long m_timestamp

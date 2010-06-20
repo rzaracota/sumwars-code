@@ -202,7 +202,12 @@ void Document::loadSavegame()
 		m_temp_player->fromSavegame(save);
 
 		// notify the world of the new player
+#ifndef NO_RAKNET
 		CharConv cv2(0);
+#else
+		std::stringstream sstream;
+		CharConv cv2(&sstream);
+#endif
 		m_temp_player->toSavegame(&cv2);
 		World::getWorld()->handleSavegame(&cv2);
 

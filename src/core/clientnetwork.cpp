@@ -1,6 +1,6 @@
 #include "clientnetwork.h"
 
-
+#ifndef NO_RAKNET
 ClientNetwork::ClientNetwork()
 	: Network()
 {
@@ -131,5 +131,61 @@ NetStatus ClientNetwork::getSlotStatus(int slot)
 	return m_status;
 }
 
+#else // ifndef NO_RAKNET
+ClientNetwork::ClientNetwork()
+	: Network()
+{
+	ERRORMSG("Called RakNet lib in NO_RAKNET build");
+}
 
+ClientNetwork::~ClientNetwork()
+{
+	ERRORMSG("Called RakNet lib in NO_RAKNET build");
+}
+
+void ClientNetwork::serverConnect( char* hostname, int req_port )
+{
+	ERRORMSG("Called RakNet lib in NO_RAKNET build");
+}
+
+void ClientNetwork::serverDisconnect()
+{
+	ERRORMSG("Called RakNet lib in NO_RAKNET build");
+}
+
+void ClientNetwork::kill()
+{
+	ERRORMSG("Called RakNet lib in NO_RAKNET build");
+}
+
+
+void ClientNetwork::update()
+{
+	ERRORMSG("Called RakNet lib in NO_RAKNET build");
+}
+
+
+int ClientNetwork::numberSlotMessages(int slot)
+{
+	ERRORMSG("Called RakNet lib in NO_RAKNET build");
+}
+
+
+void ClientNetwork::popSlotMessage( Packet* &data,int slot)
+{
+	ERRORMSG("Called RakNet lib in NO_RAKNET build");
+}
+
+void ClientNetwork::pushSlotMessage( RakNet::BitStream * data,int slot,PacketPriority prio,PacketReliability reliability)
+{
+	ERRORMSG("Called RakNet lib in NO_RAKNET build");
+}
+
+NetStatus ClientNetwork::getSlotStatus(int slot)
+{
+	return m_status;
+}
+
+
+#endif
 

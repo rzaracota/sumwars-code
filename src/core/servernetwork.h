@@ -207,7 +207,11 @@ class ServerNetwork: public Network
  		*/
 		virtual void deallocatePacket(Packet* packet)
 		{
+#ifndef NO_RAKNET
 			m_peer->DeallocatePacket(packet);
+#else
+			ERRORMSG("Called RakNet lib in NO_RAKNET build");
+#endif
 		}
 
 

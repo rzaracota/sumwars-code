@@ -1,5 +1,6 @@
 #include "servernetwork.h"
 
+#ifndef NO_RAKNET
 NetworkSlot::NetworkSlot(PlayerID client_address,RakServerInterface* peer)
 {
 	m_peer = peer;
@@ -243,4 +244,115 @@ NetStatus ServerNetwork::getSlotStatus( int slot )
 	return m_slots[slot]->getStatus();
 }
 
+#else //ifndef NO_RAKNET
+
+// dummy functionality
+NetworkSlot::NetworkSlot(PlayerID client_address,RakServerInterface* peer)
+{
+	ERRORMSG("Called RakNet lib in NO_RAKNET build");
+}
+
+NetworkSlot::~NetworkSlot()
+{
+	ERRORMSG("Called RakNet lib in NO_RAKNET build");
+}
+
+void NetworkSlot::pushReceivedPacket(Packet* packet)
+{
+	ERRORMSG("Called RakNet lib in NO_RAKNET build");
+
+}
+
+Packet* NetworkSlot::popReceivedPacket()
+{
+	ERRORMSG("Called RakNet lib in NO_RAKNET build");
+}
+
+int NetworkSlot::numberMessages()
+{
+	ERRORMSG("Called RakNet lib in NO_RAKNET build");
+}
+
+
+
+
+ServerNetwork::ServerNetwork(int max_slots)
+	: Network()
+{
+	ERRORMSG("Called RakNet lib in NO_RAKNET build");
+
+}
+
+NetStatus ServerNetwork::init( int auth_port )
+{
+	ERRORMSG("Called RakNet lib in NO_RAKNET build");
+}
+
+ServerNetwork::~ServerNetwork()
+{
+	ERRORMSG("Called RakNet lib in NO_RAKNET build");
+}
+
+void ServerNetwork::kill()
+{
+	ERRORMSG("Called RakNet lib in NO_RAKNET build");
+}
+
+
+unsigned char ServerNetwork::getPacketIdentifier(Packet *p)
+{
+	ERRORMSG("Called RakNet lib in NO_RAKNET build");
+}
+
+
+
+void ServerNetwork::update()
+{
+	ERRORMSG("Called RakNet lib in NO_RAKNET build");
+}
+
+int  ServerNetwork::insertNewSlot(PlayerID address)
+{
+	ERRORMSG("Called RakNet lib in NO_RAKNET build");
+}
+
+int ServerNetwork::getSlotByAddress(PlayerID adress)
+{
+	ERRORMSG("Called RakNet lib in NO_RAKNET build");
+}
+
+int ServerNetwork::numberSlotMessages( int slot )
+{
+	ERRORMSG("Called RakNet lib in NO_RAKNET build");
+}
+
+
+void ServerNetwork::popSlotMessage( Packet* &data, int slot)
+{
+
+	ERRORMSG("Called RakNet lib in NO_RAKNET build");
+}
+
+void ServerNetwork::pushSlotMessage( RakNet::BitStream * bitStream,int slot, PacketPriority prio,PacketReliability reliability )
+{
+	ERRORMSG("Called RakNet lib in NO_RAKNET build");
+}
+
+int ServerNetwork::popNewLoginSlot()
+{
+	ERRORMSG("Called RakNet lib in NO_RAKNET build");
+}
+
+void ServerNetwork::pushNewLoginSlot(int slot)
+{
+	ERRORMSG("Called RakNet lib in NO_RAKNET build");
+}
+
+NetStatus ServerNetwork::getSlotStatus( int slot )
+{
+	ERRORMSG("Called RakNet lib in NO_RAKNET build");
+}
+
+
+#endif
 
