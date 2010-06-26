@@ -4,6 +4,8 @@
 #include <fstream>
 #include <string>
 
+#define TAB "\267\267\267"
+
 using namespace CEGUI;
 
 CEGUI::String TextFileEditWindow::WidgetTypeName = "TextFileEditWindow";
@@ -15,12 +17,15 @@ TextFileEditWindow::TextFileEditWindow(const CEGUI::String& type, const CEGUI::S
 	m_textEditBox->setSize(UVector2(UDim(1.0f, 0.0f), UDim(1.0f, 0.0f)));
 	addChildWindow(m_textEditBox);
 	m_isDirty = false;
-
+	m_spaceCounter = "";
+	
+	m_textEditBox->subscribeEvent(MultiLineEditbox::EventCharacterKey, Event::Subscriber(&TextFileEditWindow::handleCharacterKey, this));
 }
 
 void TextFileEditWindow::close()
 {
-	save();
+	
+	//save();
 	
 }
 
@@ -33,6 +38,7 @@ bool TextFileEditWindow::load(const String &fileName)
 	std::ifstream myfile (fileName.c_str());
 	if (myfile.is_open())
 	{
+		s += '\t';
 		while (! myfile.eof() )
 		{
 			std::getline (myfile,line);
@@ -41,7 +47,7 @@ bool TextFileEditWindow::load(const String &fileName)
 			while(pos != line.npos)
 			{
 				line.erase(pos, 1);
-				line.insert(pos, "    ");
+				line.insert(pos, TAB);
 				pos =  line.find_last_of('\t');
 			}
 			
@@ -67,7 +73,7 @@ bool TextFileEditWindow::load(const String &fileName)
 	m_textEditBox->setText(s.c_str());
 
 	// Not in constructor to avoid the first event when initialy seting the Tab text
-	m_textEditBox->subscribeEvent(MultiLineEditbox::EventTextChanged, CEGUI::Event::Subscriber(&TextFileEditWindow::handleTextChanged, this));
+	m_handleTextChangedConnection = m_textEditBox->subscribeEvent(MultiLineEditbox::EventTextChanged, CEGUI::Event::Subscriber(&TextFileEditWindow::handleTextChanged, this));
 
 	return true;
 }
@@ -78,7 +84,27 @@ void TextFileEditWindow::save()
 		return;
 	else
 	{
-		String s = getText();
+		CEGUI::String s = m_textEditBox->getText();
+		std::ofstream myfile (m_filePath.c_str());
+		if (myfile.is_open())
+		{
+			int pos =  s.find(TAB);
+			while(pos != s.npos)
+			{
+				s.erase(pos, 3);
+				s.insert(pos, "\t");
+				pos =  s.find(TAB);
+			}
+			myfile << s.c_str();
+			myfile.close();
+		}
+		else
+		{
+			myfile.close();
+			return;
+		}
+
+		s = getText().c_str();
 		size_t length = s.length();
 		s.erase(length-2, 2);
 		setText(s);
@@ -94,6 +120,25 @@ bool TextFileEditWindow::handleTextChanged(const CEGUI::EventArgs& e)
 		setText(s + " *");
 }
 
+bool TextFileEditWindow::handleCharacterKey(const CEGUI::EventArgs& ee)
+{
+	KeyEventArgs e = static_cast<const KeyEventArgs&>(ee);
+	
+	if(m_spaceCounter.length() == 3)
+	{
+		// replace spaces here
+		replaceSpacesWithMidpoints();
+		
+		m_spaceCounter = "";
+	}
+	
+	if(e.codepoint == 32)
+		m_spaceCounter += " ";
+	else
+		m_spaceCounter = "";
+}
+
+
 void TextFileEditWindow::setFilepath(String path)
 {
 	m_filePath = path;
@@ -106,4 +151,14 @@ void TextFileEditWindow::setFilepath(String path)
 	
 	String name = m_filePath.substr(pos+1);
 	setText(name);
+}
+
+void TextFileEditWindow::replaceSpacesWithMidpoints()
+{
+	CEGUI::String s = m_textEditBox->getText();
+	
+	size_t pos = s.find("   ");
+	s = s.erase(pos, 3);
+	s = s.insert(pos, TAB);
+	m_textEditBox->setText(s);
 }

@@ -22,6 +22,8 @@ void DebugPanel::createPanel(bool visible)
 	m_rootWindow->setText("Debug Panel");
 	m_gameScreen->addChildWindow(m_rootWindow);
 
+	m_rootWindow->subscribeEvent(CEGUI::FrameWindow::EventCloseClicked, Event::Subscriber(&DebugPanel::handleCloseWindow, this));
+	
 	m_tabControl = static_cast<TabControl*>(m_winManager->createWindow("TaharezLook/TabControl", "DebugPanelTabControl"));
 	m_tabControl->setPosition(UVector2(UDim(0.03f, 0.0f), UDim(0.06f, 0.0f)));
 	m_tabControl->setSize(UVector2(UDim(0.95f, 0.0f), UDim(0.9f, 0.0f)));
@@ -68,6 +70,12 @@ void DebugPanel::update()
 		dt->update();
 	}
 
+}
+
+
+bool DebugPanel::handleCloseWindow(const CEGUI::EventArgs& e)
+{
+	m_rootWindow->hide();
 }
 
 

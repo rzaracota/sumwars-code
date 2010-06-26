@@ -2,7 +2,7 @@
 #define TEXTFILEEDITWINDOW_H
 
 #include <CEGUI/CEGUIWindow.h>
-
+#include <CEGUI/CEGUIEvent.h>
 
 class TextFileEditWindow : public CEGUI::Window
 {
@@ -15,12 +15,17 @@ public:
 	void setFilepath(CEGUI::String path);
 	
 	virtual bool handleTextChanged(const CEGUI::EventArgs& e);
+	virtual bool handleCharacterKey(const CEGUI::EventArgs& e);
 protected:
+	CEGUI::Event::Connection m_handleTextChangedConnection;
+	CEGUI::String m_spaceCounter;
 	CEGUI::String m_filePath;
 	CEGUI::MultiLineEditbox *m_textEditBox;
 	bool m_isDirty;
 public:
 	static CEGUI::String WidgetTypeName;
+private:
+    void replaceSpacesWithMidpoints();
 };
 
 #endif // TEXTFILEEDITWINDOW_H

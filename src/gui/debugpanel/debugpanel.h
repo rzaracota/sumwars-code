@@ -49,6 +49,13 @@ protected:
 	*/
 	void createPanel(bool visible);
 	
+	/**
+	* \fn handleCloseWindow(const CEGUI::EventArgs& e);
+	* \brief Handles clicks on the "Close Window" button
+	* \param e Event Args from CEGUI
+	*/
+	virtual bool handleCloseWindow(const CEGUI::EventArgs& e);
+	
 private:
 	/**
 	* \var 	CEGUI::System *m_guiSystem;

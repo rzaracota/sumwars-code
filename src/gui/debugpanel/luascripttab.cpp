@@ -20,7 +20,7 @@ LuaScriptTab::LuaScriptTab(const CEGUI::String& type, const CEGUI::String& name)
 
 	m_fileTabControl = static_cast<TabControl*>(m_tabLayout->getChild("luaScriptTab/FileTabControl"));
 	m_filePathEditBox = static_cast<Editbox*>(m_tabLayout->getChild("luaScriptTab/fileDirectoryEditBox"));
-	m_filePathEditBox->setText("./data/lua/");
+	m_filePathEditBox->setText("./data/lua/debug.lua");
 	
 	createMenu();
 	
@@ -118,8 +118,9 @@ bool LuaScriptTab::handleNew(const CEGUI::EventArgs& e)
 
 bool LuaScriptTab::handleOpen(const CEGUI::EventArgs& e)
 {
-	TextFileEditWindow *win = static_cast<TextFileEditWindow*>(WindowManager::getSingleton().createWindow("TextFileEditWindow", "Tesdsg"));
 	CEGUI::String s = m_filePathEditBox->getText();
+	TextFileEditWindow *win = static_cast<TextFileEditWindow*>(WindowManager::getSingleton().createWindow("TextFileEditWindow", s));
+
 	
 	if(win->load(s))
 	{
