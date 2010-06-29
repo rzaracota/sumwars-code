@@ -27,7 +27,7 @@ class SumWarsApplication : public ExampleApplication
 			m_doc->z = 0;
 			m_doc->max_z=0;
 			m_doc->min_z=100000;
-			
+
 			createLog();
 		}
 
@@ -53,34 +53,35 @@ class SumWarsApplication : public ExampleApplication
 			mCamera->setAspectRatio(Real(vp->getActualWidth())/Real(vp->getActualHeight()));
 		}
 
-		void createScene(void)
+		bool createScene(void)
 		{
-			
+
 			SoundSystem::init();
-			
+
 			std::ifstream fin("mesh");
-			
+
 			if (!fin.is_open())
 			{
 				std::cout <<"No file named mesh found. Copy it from mesh.sample. \n\n\n";
+				return false;
 			}
-			
+
 			double maxtime = 5000;
 			fin >>m_doc -> m_mesh;
 			fin >>m_doc ->m_animation;
 			fin >>maxtime;
-			
-			
+
+
 			Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../../data/renderinfo", "FileSystem", "renderinfo");
 			Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../../resources/sound", "FileSystem", "sound");
-			
-			
+
+
 			Ogre::FileInfoListPtr files;
 			Ogre::FileInfoList::iterator it;
 			std::string file;
-			
+
 			files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("renderinfo","*.xml");
-			
+
 			for (it = files->begin(); it != files->end(); ++it)
 			{
 				file = it->archive->getName();
@@ -99,7 +100,7 @@ class SumWarsApplication : public ExampleApplication
 
 				SoundSystem::loadSoundData(file.c_str());
 			}
-			
+
 			Plane plane(Vector3::UNIT_Y, 0);
 			MeshManager::getSingleton().createPlane("ground", ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME, plane, 1000, 1500, 20, 20, true, 1,5,5,Vector3::UNIT_X);
 
@@ -110,16 +111,16 @@ class SumWarsApplication : public ExampleApplication
 			playerNode->attachObject(part);
 			part->setKeepParticlesInLocalSpace(true);
 			*/
-			
+
 			Entity *ground = mSceneMgr->createEntity("GroundEntity", "ground");
 			ground->setMaterialName("grass1");
 			ground->setCastShadows(false);
 			playerNode->attachObject(ground);
-			
+
 
 			SceneNode *camNode = playerNode->createChildSceneNode("PlayerCamNode");
 			camNode->attachObject(mCamera);
-			
+
 			GraphicManager::setSceneManager(mSceneMgr);
 			GraphicObject* gobj = GraphicManager::createGraphicObject(m_doc -> m_mesh,"obj",1);
 			gobj->getTopNode()->setPosition(50,0,0);
@@ -127,15 +128,18 @@ class SumWarsApplication : public ExampleApplication
 			m_doc->m_object = gobj;
 			m_doc->m_time=0;
 			m_doc->m_max_time=maxtime/1000;
+
+			return true;
 		}
 
 		void createFrameListener(void)
 		{
 
+ //           mFrameListener = new ExampleFrameListener(mWindow, mCamera);
 			mFrameListener = new SumWarsFrameListener(mWindow, mCamera, mSceneMgr, m_doc);
 			mRoot->addFrameListener(mFrameListener);
 
-			mFrameListener->showDebugOverlay(true);
+			mFrameListener->showDebugOverlay(false);
 		}
 };
 

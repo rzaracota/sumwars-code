@@ -4,7 +4,8 @@
 #include <fstream>
 #include <algorithm>
 
-SumWarsFrameListener::SumWarsFrameListener(Ogre::RenderWindow* win, Ogre::Camera* cam, Ogre::SceneManager *sceneMgr, Document* doc): ExampleFrameListener(win, cam, true, true)
+SumWarsFrameListener::SumWarsFrameListener(Ogre::RenderWindow* win, Ogre::Camera* cam, Ogre::SceneManager *sceneMgr, Document* doc)
+: ExampleFrameListener(win, cam, true, true)
 {
 	m_camera = cam;
 	m_doc = doc;
@@ -41,13 +42,13 @@ bool SumWarsFrameListener::frameStarted(const Ogre::FrameEvent &evt)
 	{
 		m_doc->m_time -= m_doc->m_max_time;
 	}
-	
+
 	m_doc->m_object->updateAction(m_doc->m_animation, m_doc->m_time/m_doc->m_max_time);
 	m_doc->m_object->update(evt.timeSinceLastFrame*1000);
-	
+
 	static float time=0;
 	time += evt.timeSinceLastFrame;
-	
+
 	return mContinue;
 }
 
@@ -124,13 +125,13 @@ bool SumWarsFrameListener::keyPressed(const OIS::KeyEvent &e)
 			break;
 
         case OIS::KC_2:
-			
+
             break;
         case OIS::KC_0:
-			
+
             break;
         case OIS::KC_1:
-			
+
 
             break;
         default:

@@ -117,8 +117,8 @@ protected:
 			pluginsPath = mResourcePath + "plugins_lin.cfg";
 	#endif
 #endif
-		
-        mRoot = new Root(pluginsPath, 
+
+        mRoot = new Root(pluginsPath,
             mResourcePath + "ogre.cfg", mResourcePath + "Ogre.log");
 
 		Ogre::LogManager::getSingleton().setLogDetail(Ogre::LL_LOW );
@@ -140,7 +140,9 @@ protected:
 		loadResources();
 
 		// Create the scene
-        createScene();
+        bool cont = true;
+        cont = createScene();
+        if (!cont) return false;
 
         createFrameListener();
 
@@ -193,7 +195,7 @@ protected:
         mRoot->addFrameListener(mFrameListener);
     }
 
-    virtual void createScene(void) = 0;    // pure virtual - this has to be overridden
+    virtual bool createScene(void) = 0;    // pure virtual - this has to be overridden
 
     virtual void destroyScene(void){}    // Optional to override this
 
@@ -240,7 +242,7 @@ protected:
 #endif
             }
         }
-		
+
 		if (OGRE_VERSION >= ((1 << 16) | (6 << 8)))
 		{
 			Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../../trunk/resources/particle/ogre_1_6", "FileSystem", "particle");

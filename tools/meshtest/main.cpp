@@ -44,33 +44,33 @@ class SumWarsApplication : public ExampleApplication
 
 		void createScene(void)
 		{
-			
+
 			std::cout << "\n\n\n0: activate / deactive automatic animation \
 					      \n1: 10\% step \
 						  \n2: 1% step \
 						  \n4: slow down automatic animation \
 						  \n5: speed up automatic animation	\
 					      \n9: reset animation \n\n\n";
-			
+
 			std::ifstream fin("mesh");
-			
+
 			if (!fin.is_open())
 			{
 				std::cout << "You must create a file named mesh. Copy it from mesh.sample.\n";
 				return;
 			}
-			
-			
+
+
 			fin >>m_doc -> m_mesh;
 			fin >>m_doc ->m_animation;
-			
-			
+
+
 			m_doc ->m_anim = false;
 			m_doc->speed_factor = 1.0;
-			
+
 			mSceneMgr->setAmbientLight(ColourValue(1,1,1));
 
-			
+
 			Plane plane(Vector3::UNIT_Y, 0);
 			MeshManager::getSingleton().createPlane("ground", ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME, plane, 1000, 1500, 20, 20, true, 1,5,5,Vector3::UNIT_X);
 
@@ -83,7 +83,7 @@ class SumWarsApplication : public ExampleApplication
 			{
 				std::cout << "Mesh "<< m_doc->m_mesh << " not found.\n";
 			}
-			
+
 			if (m_doc -> m_animation != "#")
 			{
 				try
@@ -98,9 +98,9 @@ class SumWarsApplication : public ExampleApplication
 					std::cout << "no animation " <<m_doc -> m_animation << "defined \n";
 					return;
 				}
-				
-				
-				
+
+
+
 				std::string node;
 				std::string smesh;
 				Entity *submesh;
@@ -112,28 +112,28 @@ class SumWarsApplication : public ExampleApplication
 					{
 						if (node.c_str()[0] == '#')
 							break;
-						
+
 						submesh = mSceneMgr->createEntity(smesh,smesh );
 						player->attachObjectToBone(node, submesh);
 						submesh->getParentNode()->setInheritScale(false);
 					}
 				}
 			}
-			
+
 			SceneNode *playerNode = mSceneMgr->getRootSceneNode()->createChildSceneNode("PlayerNode");
 			playerNode->attachObject(player);
-			
+
 			Entity *ground = mSceneMgr->createEntity("GroundEntity", "ground");
 			ground->setMaterialName("grass1");
 			ground->setCastShadows(false);
 			playerNode->attachObject(ground);
-			
+
 
 			SceneNode *camNode = playerNode->createChildSceneNode("PlayerCamNode");
 			camNode->attachObject(mCamera);
-			
-			
-			
+
+
+
 		}
 
 		void createFrameListener(void)
@@ -142,7 +142,7 @@ class SumWarsApplication : public ExampleApplication
 			mFrameListener = new SumWarsFrameListener(mWindow, mCamera, mSceneMgr, m_doc);
 			mRoot->addFrameListener(mFrameListener);
 
-			mFrameListener->showDebugOverlay(true);
+			mFrameListener->showDebugOverlay(false);
 		}
 };
 

@@ -110,17 +110,19 @@ public:
 		//Create all devices (We only catch joystick exceptions here, as, most people have Key/Mouse)
 		mKeyboard = static_cast<Keyboard*>(mInputManager->createInputObject( OISKeyboard, bufferedKeys ));
 		mMouse = static_cast<Mouse*>(mInputManager->createInputObject( OISMouse, bufferedMouse ));
+		/*
 		try {
 			mJoy = static_cast<JoyStick*>(mInputManager->createInputObject( OISJoyStick, bufferedJoy ));
 		}
 		catch(...) {
 			mJoy = 0;
 		}
-
+*/
+        mJoy = 0;
 		//Set initial mouse clipping size
 		windowResized(mWindow);
 
-		showDebugOverlay(true);
+		showDebugOverlay(false);
 
 		//Register as a Window listener
 		Ogre::WindowEventUtilities::addWindowEventListener(mWindow, this);

@@ -112,13 +112,15 @@ public:
 		//Create all devices (We only catch joystick exceptions here, as, most people have Key/Mouse)
 		mKeyboard = static_cast<Keyboard*>(mInputManager->createInputObject( OISKeyboard, bufferedKeys ));
 		mMouse = static_cast<Mouse*>(mInputManager->createInputObject( OISMouse, bufferedMouse ));
+		/*
 		try {
 			mJoy = static_cast<JoyStick*>(mInputManager->createInputObject( OISJoyStick, bufferedJoy ));
 		}
 		catch(...) {
 			mJoy = 0;
 		}
-
+        */
+        mJoy = 0;
 		//Set initial mouse clipping size
 		windowResized(mWindow);
 
@@ -362,8 +364,8 @@ public:
 		return true;
 	}
 
-	
-	
+
+
 	bool frameEnded(const FrameEvent& evt)
 	{
 		updateStats();
@@ -398,13 +400,13 @@ protected:
 	OIS::Mouse*    mMouse;
 	OIS::Keyboard* mKeyboard;
 	OIS::JoyStick* mJoy;
-	
+
 	bool m_middle;
-		
+
 	float m_dist;
 	float m_theta;
 	float m_phi;
-	
+
 };
 
 #endif
