@@ -13,7 +13,7 @@ int main (int argc, char *argv[]) {
 	{
 
 	// Applikation anlegen
-	Application* app = new Application();
+	Application* app = new Application(argv[0]);
 
 	// Debugging: Kommandozeilen Parameter auslesen und Savefile setzen
 	std::string save;

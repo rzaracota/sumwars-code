@@ -5,13 +5,24 @@
 #include "templateloader.h"
 #include "music.h"
 
-Application::Application()
+#ifdef __APPLE__
+#include <physfs.h>
+// Return the path to where files should be stored on mac
+Ogre::String userPath()
+{
+    Ogre::String path = PHYSFS_getUserDir();
+    path.append("Library/Application\ Support/Sumwars");
+    return path;
+}
+#endif
+
+Application::Application(char *argv)
 {
 	// Anwendung initialisieren
 	bool ret = false;
 	try
 	{
-		ret = init();
+		ret = init(argv);
 	}
 	catch (std::exception &e)
 	{
@@ -26,11 +37,38 @@ Application::Application()
 
 }
 
-bool Application::init()
+bool Application::init(char *argv)
 {
+#ifdef __APPLE__
+    // Initialise PHYSFS for later on
+    if (PHYSFS_init(argv) == 0)
+    {
+        printf("init failed: %s\n", PHYSFS_getLastError());
+        return false;
+    }
+    Ogre::String path = userPath();
+    if (PHYSFS_setWriteDir(PHYSFS_getUserDir()) == 0)
+    {
+        printf("setWriteDir failed: %s\n", PHYSFS_getLastError());
+        return false;
+    }
+    if (!PHYSFS_exists("Library/Application\ Support/Sumwars"))
+    {
+        if (PHYSFS_mkdir("Library/Application\ Support/Sumwars") == 0)
+        {
+            printf("mkdir failed: %s\n", PHYSFS_getLastError());
+            return false;
+        }
+    }    
+#endif
+    
 	// Logger initialisieren
 	LogManager::instance().addLog("stdout",new StdOutLog(Log::LOGLEVEL_DEBUG));
+#ifndef __APPLE__
 	LogManager::instance().addLog("logfile",new FileLog("sumwars.log",Log::LOGLEVEL_INFO));
+#else
+    LogManager::instance().addLog("logfile",new FileLog(path + "/sumwars.log",Log::LOGLEVEL_INFO));
+#endif
 
 	Timer tm;
 	m_timer.start();
@@ -42,6 +80,9 @@ bool Application::init()
 #ifdef WIN32
 
 	m_ogre_root = new Ogre::Root("plugins_win.cfg", "ogre.cfg");
+#elif defined __APPLE__
+    Ogre::String plugins = macPath();
+    m_ogre_root = new Ogre::Root(plugins + "/plugins_mac.cfg", plugins + "/ogre.cfg", path + "/ogre.log");
 #else
 	m_ogre_root = new Ogre::Root("plugins.cfg", "ogre.cfg");
 #endif
@@ -142,6 +183,10 @@ Application::~Application()
 	ItemFactory::cleanup();
 	SoundSystem::cleanup();
 	LogManager::cleanup();
+    
+#ifdef __APPLE__
+    PHYSFS_deinit();
+#endif
 }
 
 void Application::run()
@@ -327,49 +372,60 @@ bool Application::setupResources()
 #ifdef NOMIPMAPS
 	Ogre::TextureManager::getSingleton().setDefaultNumMipmaps(0);
 #endif
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("./resources/models", "FileSystem", "General");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("./resources/materials/scripts", "FileSystem", "General");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("./resources/materials/programs", "FileSystem", "General");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("./resources/materials/textures", "FileSystem", "General");
+    Ogre::String path = "";
+#ifdef __APPLE__
+    path = macPath();
+#else
+    path + ".";
+#endif
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/resources/models", "FileSystem", "General");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/resources/materials/scripts", "FileSystem", "General");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/resources/materials/programs", "FileSystem", "General");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/resources/materials/textures", "FileSystem", "General");
 	if (OGRE_VERSION >= ((1 << 16) | (6 << 8)))
 	{
-		Ogre::ResourceGroupManager::getSingleton().addResourceLocation("./resources/particle/ogre_1_6", "FileSystem", "General");
+		Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/resources/particle/ogre_1_6", "FileSystem", "General");
 	}
 	else
 	{
-		Ogre::ResourceGroupManager::getSingleton().addResourceLocation("./resources/particle", "FileSystem", "General");
+		Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/resources/particle", "FileSystem", "General");
 	}
 
 	// CEGUI Resourcen laden
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("./resources/gui/configs", "FileSystem", "GUI");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("./resources/gui/fonts", "FileSystem", "GUI");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/resources/gui/configs", "FileSystem", "GUI");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/resources/gui/fonts", "FileSystem", "GUI");
 
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("./resources/gui/imagesets", "FileSystem", "GUI");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("./resources/emotionsets", "FileSystem", "emotionsets");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("./resources/gui/layouts", "FileSystem", "GUI");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("./resources/gui/looknfeel", "FileSystem", "GUI");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("./resources/gui/schemes", "FileSystem", "GUI");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/resources/gui/imagesets", "FileSystem", "GUI");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/resources/emotionsets", "FileSystem", "emotionsets");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/resources/gui/layouts", "FileSystem", "GUI");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/resources/gui/looknfeel", "FileSystem", "GUI");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/resources/gui/schemes", "FileSystem", "GUI");
 
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("./resources/gui/schemes", "FileSystem", "GUI");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("./resources/itempictures", "FileSystem", "itempictures");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("./resources/sound", "FileSystem", "sound");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("./resources/music", "FileSystem", "music");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/resources/gui/schemes", "FileSystem", "GUI");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/resources/itempictures", "FileSystem", "itempictures");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/resources/sound", "FileSystem", "sound");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/resources/music", "FileSystem", "music");
 
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("./data/world", "FileSystem", "world");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("./data/npc", "FileSystem", "npc");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("./data/quests", "FileSystem", "quests");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/data/world", "FileSystem", "world");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/data/npc", "FileSystem", "npc");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/data/quests", "FileSystem", "quests");
+#ifndef __APPLE__
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("./save", "FileSystem", "Savegame");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("./data/items", "FileSystem", "items");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("./data/abilities", "FileSystem", "abilities");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("./data/monsters", "FileSystem", "monsters");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("./data/playerclasses", "FileSystem", "playerclasses");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("./data/projectiles", "FileSystem", "projectiles");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("./data/objects", "FileSystem", "objects");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("./data/obj_templates", "FileSystem", "obj_templates");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("./data/object_groups", "FileSystem", "object_groups");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("./data/renderinfo", "FileSystem", "renderinfo");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("./data/lua", "FileSystem", "lua");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("./data/sound", "FileSystem", "sounddata");
+#else
+    Ogre::String homePath = userPath();
+    Ogre::ResourceGroupManager::getSingleton().addResourceLocation(homePath, "FileSystem", "Savegame");
+#endif
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/data/items", "FileSystem", "items");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/data/abilities", "FileSystem", "abilities");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/data/monsters", "FileSystem", "monsters");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/data/playerclasses", "FileSystem", "playerclasses");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/data/projectiles", "FileSystem", "projectiles");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/data/objects", "FileSystem", "objects");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/data/obj_templates", "FileSystem", "obj_templates");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/data/object_groups", "FileSystem", "object_groups");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/data/renderinfo", "FileSystem", "renderinfo");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/data/lua", "FileSystem", "lua");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/data/sound", "FileSystem", "sounddata");
 
 
 #if defined(WIN32)
@@ -414,17 +470,22 @@ bool Application::initCEGUI()
    3000,									// max quads for the UI
    m_scene_manager						// verwendeter Szenemanager
 														);
-
+    
 	// Groesse festlegen
 	m_ogre_cegui_renderer->setDisplaySize(CEGUI::Size((int) m_window->getWidth(),(int) m_window->getHeight()));
 
+#ifndef __APPLE__
 	// Basisklasse von CEGUI erzeugen
 	m_cegui_system = new CEGUI::System(m_ogre_cegui_renderer);
-
+#else
+    // set the cegui log file on mac
+    std::string path = userPath() + "/cegui.log";
+    m_cegui_system = new CEGUI::System(m_ogre_cegui_renderer, NULL, NULL, NULL, "", path.c_str());
+#endif
 
 	// Log level
 	CEGUI::Logger::getSingleton().setLoggingLevel(CEGUI::Informative);
-
+    
 	// Scheme laden
 	CEGUI::SchemeManager::getSingleton().loadScheme((CEGUI::utf8*)"TaharezLook.scheme", (CEGUI::utf8*)"GUI");
 
@@ -693,4 +754,4 @@ void Application::updateStartScreen(float percent)
 	m_ogre_root->renderOneFrame();
 	//MusicManager::instance().update();
 	m_timer.start();
-}
+}                                                

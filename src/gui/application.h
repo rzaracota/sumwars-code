@@ -28,6 +28,10 @@
 #include "timer.h"
 #include "graphicmanager.h"
 
+#ifdef __APPLE__
+#include <CoreFoundation/CFBundle.h>
+#endif
+
 /**
  * \class Application
  * \brief Basisklasse der Anwendung
@@ -41,7 +45,7 @@ class Application
 		 * \fn Application()
 		 * \brief Konstruktor
 		 */
-		Application();
+		Application(char *argv);
 
 		/**
 		 * \fn ~Application()
@@ -70,7 +74,7 @@ class Application
 		* \fn init()
 		* \brief Initialisiert die Anwendung
 		 */
-		bool init();
+		bool init(char *argv);
 
 		/**
 		 * \fn initOgre()
@@ -137,6 +141,24 @@ class Application
 		 * \param percent Prozentsatz, zu dem das Laden der Daten fortgeschritten ist
 		 */
 		void updateStartScreen(float percent);
+        
+#ifdef __APPLE__
+        /**
+         * \fn Ogre::String macPath()
+         * \brief Returns the path to the Resources directory on mac
+         */
+        Ogre::String macPath()
+        {
+            Ogre::String path;
+            CFBundleRef mainBundle = CFBundleGetMainBundle();
+            CFURLRef resourcesURL = CFBundleCopyResourcesDirectoryURL(mainBundle);
+            char resPath[PATH_MAX];
+            CFURLGetFileSystemRepresentation(resourcesURL, TRUE, (UInt8 *)resPath, PATH_MAX);
+            CFRelease(resourcesURL);
+            path = resPath;
+            return path;
+        }
+#endif
 
 		// Member
 		/**

@@ -37,6 +37,9 @@ CreditsWindow::CreditsWindow(Document* doc)
 			\n Hans Wulf (Lastmerlin) \
 			\n fusion44 \
 			\n Nicholas Cosens (gnemo) \
+            \n\nConversion to Mac: \
+            \n David Athay (trapdoor) \
+            \n Ben Anderman (crimson_penguin) \
 			\n\nGraphics: \
 			\n Andreas Schönefeldt \
 			\n Steffen Schönefeldt (Nori) \

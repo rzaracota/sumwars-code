@@ -36,6 +36,9 @@
 
 #include "gettext.h"
 
+#ifdef __APPLE__
+#include <physfs.h>
+#endif
 
 // Constructors/Destructors
 // Initialisiert Document zu Testzwecken
@@ -283,7 +286,13 @@ void Document::createNewCharacter(std::string name)
 {
 	if (m_temp_player)
 	{
+#ifndef __APPLE__
 		m_save_file = "./save/";
+#else
+        std::string path = PHYSFS_getUserDir();
+        path.append("Library/Application\ Support/Sumwars/");
+        m_save_file = path;
+#endif
 		m_save_file += name;
 		m_save_file += ".sav";
 
@@ -1799,13 +1808,25 @@ void* Document::writeSaveFile(void* doc_data_ptr)
 
 
 void Document::saveSettings()
-{	
+{
+#ifdef __APPLE__
+    std::string path = PHYSFS_getUserDir();
+    path.append("/Library/Application\ Support/Sumwars/");
+    Options::getInstance()->writeToFile(path + "options.xml");
+#else
 	Options::getInstance()->writeToFile("options.xml");
+#endif
 }
 
 void Document::loadSettings()
 {
+#ifdef __APPLE__
+    std::string path = PHYSFS_getUserDir();
+    path.append("/Library/Application Support/Sumwars/");
+    Options::getInstance()->readFromFile(path + "options.xml");
+#else    
 	Options::getInstance()->readFromFile("options.xml");
+#endif
 }
 
 Player*  Document::getLocalPlayer()
