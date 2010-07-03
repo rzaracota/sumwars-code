@@ -376,7 +376,7 @@ bool Application::setupResources()
 #ifdef __APPLE__
     path = macPath();
 #else
-    path + ".";
+    path = ".";
 #endif
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/resources/models", "FileSystem", "General");
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/resources/materials/scripts", "FileSystem", "General");
