@@ -24,9 +24,9 @@ Scene::Scene(Document* doc,Ogre::RenderWindow* window)
 	
 	// Kamera anlegen
 	m_camera = m_scene_manager->createCamera("camera");
-	m_camera->setPosition(Ogre::Vector3(0, 1500, 1500));
+	m_camera->setPosition(Ogre::Vector3(0, 30 * GraphicManager::g_global_scale, 30 * GraphicManager::g_global_scale));
 	m_camera->lookAt(Ogre::Vector3(0,0,0));
-	m_camera->setNearClipDistance(5);
+	m_camera->setNearClipDistance(0.1*GraphicManager::g_global_scale);
 
 
 	// Viewport anlegen, Hintergrundfarbe schwarz
@@ -43,7 +43,7 @@ Scene::Scene(Document* doc,Ogre::RenderWindow* window)
 
 	// Setup fuer die Minimap
 	Ogre::Camera* minimap_camera=m_scene_manager->createCamera("minimap_camera");
-	minimap_camera->setNearClipDistance(500);
+	minimap_camera->setNearClipDistance(GraphicManager::g_global_scale*10);
 	minimap_camera->setProjectionType(Ogre::PT_ORTHOGRAPHIC);
 	minimap_camera->setFOVy(Ogre::Degree(90.0));
 
@@ -78,9 +78,9 @@ Scene::Scene(Document* doc,Ogre::RenderWindow* window)
 	char_scene_mng->setAmbientLight(Ogre::ColourValue(1,1,1));
 			
 	Ogre::Camera* char_camera = char_scene_mng->createCamera("char_camera");
-	char_camera->setPosition(Ogre::Vector3(180, 60,0));
-	char_camera->lookAt(Ogre::Vector3(0,60,0));
-	char_camera->setNearClipDistance(5);
+	char_camera->setPosition(Ogre::Vector3(3*GraphicManager::g_global_scale, 1.2*GraphicManager::g_global_scale,0));
+	char_camera->lookAt(Ogre::Vector3(0,1.2*GraphicManager::g_global_scale,0));
+	char_camera->setNearClipDistance(0.1*GraphicManager::g_global_scale);
 			
 	char_camera->setAspectRatio(1.0);
 	
@@ -150,7 +150,9 @@ GraphicObject* Scene::getGraphicObject(int id)
 
 std::pair<float,float> Scene::getProjection(Vector pos, float height)
 {
-	Ogre::Vector4 ipos(pos.m_x*50,height*50,pos.m_y*50,1);
+	Ogre::Vector4 ipos(pos.m_x*GraphicManager::g_global_scale,
+					   height*GraphicManager::g_global_scale,
+					   pos.m_y*GraphicManager::g_global_scale,1);
 	Ogre::Vector4 projpos;
 	projpos = m_camera->getProjectionMatrix()*m_camera->getViewMatrix()*ipos;
 
@@ -240,7 +242,7 @@ void Scene::update(float ms)
 	Vector pos = player->getShape()->m_center;
 
 	// Kamera auf Spieler ausrichten
-	float r= player->getCamera().m_distance*50;
+	float r= player->getCamera().m_distance*GraphicManager::g_global_scale;
 	float theta = player->getCamera().m_theta * 3.14159 / 180;
 	float phi = player->getCamera().m_phi * 3.14159 / 180;
 
@@ -248,14 +250,16 @@ void Scene::update(float ms)
 	{
 		RegionCamera::Position& cam =player->getRegion()->getCamera().m_position;
 		pos = cam.m_focus;
-		r = cam.m_distance*50;
+		r = cam.m_distance*GraphicManager::g_global_scale;
 		phi = cam.m_phi* 3.14159 / 180;
 		theta = cam.m_theta* 3.14159 / 180;
 	}
 
-	m_camera->setPosition(Ogre::Vector3(pos.m_x*50 + r*cos(theta)*cos(phi), r*sin(theta), pos.m_y*50 - r*cos(theta)*sin(phi)));
-	m_camera->lookAt(Ogre::Vector3(pos.m_x*50,70,pos.m_y*50));
-	DEBUGX("cam position %f %f %f",pos.m_x*50 + r*cos(theta)*cos(phi), r*sin(theta), pos.m_y*50 - r*cos(theta)*sin(phi));
+	m_camera->setPosition(Ogre::Vector3(pos.m_x*GraphicManager::g_global_scale + r*cos(theta)*cos(phi), r*sin(theta), pos.m_y*GraphicManager::g_global_scale - r*cos(theta)*sin(phi)));
+	m_camera->lookAt(Ogre::Vector3(pos.m_x*GraphicManager::g_global_scale,
+								   1.4*GraphicManager::g_global_scale,
+								   pos.m_y*GraphicManager::g_global_scale));
+	DEBUGX("cam position %f %f %f",pos.m_x*GraphicManager::g_global_scale + r*cos(theta)*cos(phi), r*sin(theta), pos.m_y*GraphicManager::g_global_scale - r*cos(theta)*sin(phi));
 
 	SoundSystem::setListenerPosition(pos);
 	
@@ -263,7 +267,9 @@ void Scene::update(float ms)
 	float *colour;
 	Ogre::Light* light;
 	light= m_scene_manager->getLight("HeroLight");
-	light->setPosition(Ogre::Vector3(pos.m_x*50,300,pos.m_y*50));
+	light->setPosition(Ogre::Vector3(pos.m_x*GraphicManager::g_global_scale,
+									 6*GraphicManager::g_global_scale,
+									 pos.m_y*GraphicManager::g_global_scale));
 	colour= region->getLight().getHeroLight();
 	light->setDiffuseColour(colour[0], colour[1], colour[2]);
 	
@@ -330,7 +336,7 @@ void Scene::updateGraphicObject(GraphicObject* obj, GameObject* gobj,float time)
 	float x=gobj->getShape()->m_center.m_x;
 	float z=gobj->getShape()->m_center.m_y;
 	float y = gobj->getHeight();
-	Ogre::Vector3 vec(x*50,y*50,z*50);
+	Ogre::Vector3 vec(x*GraphicManager::g_global_scale,y*GraphicManager::g_global_scale,z*GraphicManager::g_global_scale);
 	node->setPosition(vec);
 		
 	// Objekt drehen
@@ -692,7 +698,8 @@ void Scene::createScene()
 	light->setType(Ogre::Light::LT_POINT);
 	light->setDiffuseColour(colour[0], colour[1], colour[2]);
 	light->setSpecularColour(0.0, 0.0, 0.0);
-	light->setAttenuation(1000,0.5,0.000,0.00001);
+	light->setAttenuation(20*GraphicManager::g_global_scale,0.5,0.000,
+						  0.025/(GraphicManager::g_global_scale*GraphicManager::g_global_scale));
 	light->setCastShadows(false);
 	DEBUGX("hero light %f %f %f",colour[0], colour[1], colour[2]);
 
@@ -717,14 +724,18 @@ void Scene::createScene()
 		short dimx = region->getDimX();
 		short dimy = region->getDimY();
 		Ogre::Camera* minimap_camera=m_scene_manager->getCamera("minimap_camera");
-		DEBUGX("camera pos %i %i %i",dimx*100,std::max(dimx,dimy)*300,dimy*100);
-		minimap_camera->setPosition(Ogre::Vector3(dimx*100,std::max(dimx,dimy)*200,10+dimy*100));
-		minimap_camera->lookAt(Ogre::Vector3(dimx*100,0,dimy*100));
+		DEBUGX("camera pos %i %i %i",dimx*GraphicManager::g_global_scale*2,
+			   std::max(dimx,dimy)*GraphicManager::g_global_scale*6,
+			   dimy*GraphicManager::g_global_scale*2);
+		minimap_camera->setPosition(Ogre::Vector3(dimx*GraphicManager::g_global_scale*2,
+												  std::max(dimx,dimy)*GraphicManager::g_global_scale*4,
+												  dimy*GraphicManager::g_global_scale*2+1));
+		minimap_camera->lookAt(Ogre::Vector3(dimx*GraphicManager::g_global_scale*2,0,dimy*GraphicManager::g_global_scale*2));
 #if (OGRE_VERSION >= ((1 << 16) | (6 << 8)))
 			// >= Ogre 1.6
-			minimap_camera->setOrthoWindow(std::max(dimx,dimy)*200, std::max(dimx,dimy)*200);
+			minimap_camera->setOrthoWindow(std::max(dimx,dimy)*GraphicManager::g_global_scale*4, std::max(dimx,dimy)*GraphicManager::g_global_scale*4);
 #else
-			minimap_camera->setNearClipDistance(std::max(dimx,dimy)*100);
+			minimap_camera->setNearClipDistance(std::max(dimx,dimy)*GraphicManager::g_global_scale*2);
 #endif
 		Ogre::Resource* res= Ogre::TextureManager::getSingleton().createOrRetrieve ("minimap_tex",Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME).first.getPointer();
 		Ogre::Texture* texture = dynamic_cast<Ogre::Texture*>(res);
@@ -761,8 +772,12 @@ void Scene::createScene()
 					stream.str("");
 					stream << "GroundNode"<<i<<"_"<<j;
 					node = m_scene_manager->getRootSceneNode()->createChildSceneNode(stream.str());
-					node->setPosition(Ogre::Vector3(i*200+100,0,j*200+100));
+					node->setPosition(Ogre::Vector3(i*GraphicManager::g_global_scale*4+GraphicManager::g_global_scale*2,0,j*GraphicManager::g_global_scale*4+GraphicManager::g_global_scale*2));
 
+					
+					// This scales entity to the right size unit meshes are scaled
+					node->setScale(GraphicManager::g_global_scale/50, GraphicManager::g_global_scale/50, GraphicManager::g_global_scale/50);
+					
 					stream.str("");
 					stream << "GroundEntity"<<i<<"_"<<j;
 					ground = m_scene_manager->createEntity(stream.str(), "ground");

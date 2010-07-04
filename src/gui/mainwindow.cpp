@@ -5,6 +5,7 @@
 
 #include "gettext.h"
 #include "player.h"
+#include "graphicmanager.h"
 
 #include "charinfo.h"
 #include "controlpanel.h"
@@ -2312,8 +2313,8 @@ Vector MainWindow::getIngamePos(float screenx, float screeny, bool relative)
 	DEBUGX("schnittpunkt %f %f %f",p.x,p.y,p.z);
 
 	// Umrechnen in Spielkoordinaten
-	ret.m_x = p.x/50;
-	ret.m_y = p.z/50;
+	ret.m_x = p.x/GraphicManager::g_global_scale;
+	ret.m_y = p.z/GraphicManager::g_global_scale;
 	DEBUGX("Punkt in Spielkoordinaten %f %f",ret.m_x,ret.m_y);
 	
 	return ret;

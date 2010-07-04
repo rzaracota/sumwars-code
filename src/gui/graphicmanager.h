@@ -239,6 +239,9 @@ class GraphicManager
 		 * \brief Name of XML file being read at the moment
 		 */
 		static std::string m_filename;
+		
+	public:
+		static const double g_global_scale = 50;
 };
 
 #endif

@@ -41,9 +41,9 @@ class SumWarsApplication : public ExampleApplication
 		virtual void createCamera(void)
 		{
 			mCamera = mSceneMgr->createCamera("PlayerCam");
-			mCamera->setPosition(Vector3(0, 500,500));
-			mCamera->lookAt(Vector3(0,50,0));
-			mCamera->setNearClipDistance(5);
+			mCamera->setPosition(Vector3(0, GraphicManager::g_global_scale*10,GraphicManager::g_global_scale*10));
+			mCamera->lookAt(Vector3(0,GraphicManager::g_global_scale,0));
+			mCamera->setNearClipDistance(GraphicManager::g_global_scale*0.1);
 		}
 
 		virtual void createViewport(void)
@@ -102,7 +102,7 @@ class SumWarsApplication : public ExampleApplication
 			}
 
 			Plane plane(Vector3::UNIT_Y, 0);
-			MeshManager::getSingleton().createPlane("ground", ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME, plane, 1000, 1500, 20, 20, true, 1,5,5,Vector3::UNIT_X);
+			MeshManager::getSingleton().createPlane("ground", ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME, plane, 20*GraphicManager::g_global_scale, 30*GraphicManager::g_global_scale, 20, 20, true, 1,5,5,Vector3::UNIT_X);
 
 			SceneNode *playerNode = mSceneMgr->getRootSceneNode()->createChildSceneNode("PlayerNode");
 			/*
@@ -123,8 +123,7 @@ class SumWarsApplication : public ExampleApplication
 
 			GraphicManager::setSceneManager(mSceneMgr);
 			GraphicObject* gobj = GraphicManager::createGraphicObject(m_doc -> m_mesh,"obj",1);
-			gobj->getTopNode()->setPosition(50,0,0);
-			//gobj->getTopNode()->setScale(Ogre::Vector3(8,8,8));
+			gobj->getTopNode()->setPosition(GraphicManager::g_global_scale*1,0,0);
 			m_doc->m_object = gobj;
 			m_doc->m_time=0;
 			m_doc->m_max_time=maxtime/1000;
