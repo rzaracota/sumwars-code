@@ -3,22 +3,33 @@
 #include "ExampleApplication.h"
 #include "document.h"
 #include <fstream>
-
+#include <sstream>
 using namespace Ogre;
 
 class SumWarsApplication : public ExampleApplication
 {
 	protected:
 		Document* m_doc;
+		std::istringstream m_arguments;
+		int m_nr_arguments;
+		
 	public:
-		SumWarsApplication()
+		SumWarsApplication(int argc=0, char **argv=0)
 		{
 			m_doc = new Document();
 			m_doc->x = 0;
 			m_doc->z = 0;
 			m_doc->max_z=0;
 			m_doc->min_z=100000;
-
+			
+			
+			m_nr_arguments = argc-1;
+			std::stringstream stream;
+			for (int i=1; i<argc; i++)
+			{
+				stream << argv[i] << " ";
+			}
+			m_arguments.str(stream.str());
 		}
 
 		~SumWarsApplication()
@@ -51,18 +62,39 @@ class SumWarsApplication : public ExampleApplication
 						  \n4: slow down automatic animation \
 						  \n5: speed up automatic animation	\
 					      \n9: reset animation \n\n\n";
-
-			std::ifstream fin("mesh");
-
-			if (!fin.is_open())
+			
+			
+			std::istream* input=0; 
+			std::ifstream fin;
+			if (m_nr_arguments > 0)
 			{
-				std::cout << "You must create a file named mesh. Copy it from mesh.sample.\n";
-				return;
+				input = &m_arguments;
+			}
+			else
+			{
+				fin.open("mesh");
+
+				if (!fin.is_open())
+				{
+					std::cout << "You must create a file named mesh. Copy it from mesh.sample.\n";
+					return;
+				}
+				else
+				{
+					input = &fin;
+				}
 			}
 
-
-			fin >>m_doc -> m_mesh;
-			fin >>m_doc ->m_animation;
+			m_doc-> m_scaling_factor = 1.0;
+			
+			(*input) >>m_doc -> m_mesh;
+			
+			if (m_doc -> m_mesh == "-s")
+			{
+				(*input) >> m_doc-> m_scaling_factor;
+				(*input) >>m_doc -> m_mesh;
+			}
+			(*input) >>m_doc ->m_animation;
 
 
 			m_doc ->m_anim = false;
@@ -104,10 +136,13 @@ class SumWarsApplication : public ExampleApplication
 				std::string node;
 				std::string smesh;
 				Entity *submesh;
-				while (!fin.eof())
+				while (!(*input).eof())
 				{
-					fin >> node;
-					fin >> smesh;
+					node = "";
+					smesh = "";
+					(*input) >> node;
+					(*input) >> smesh;
+					std::cout << node << " " << smesh << "\n";
 					if (node != "" && smesh != "")
 					{
 						if (node.c_str()[0] == '#')
@@ -116,12 +151,14 @@ class SumWarsApplication : public ExampleApplication
 						submesh = mSceneMgr->createEntity(smesh,smesh );
 						player->attachObjectToBone(node, submesh);
 						submesh->getParentNode()->setInheritScale(false);
+						//submesh->getParentNode()->setScale(m_doc-> m_scaling_factor, m_doc-> m_scaling_factor, m_doc-> m_scaling_factor);
 					}
 				}
 			}
 
 			SceneNode *playerNode = mSceneMgr->getRootSceneNode()->createChildSceneNode("PlayerNode");
 			playerNode->attachObject(player);
+			playerNode->setScale(m_doc-> m_scaling_factor, m_doc-> m_scaling_factor, m_doc-> m_scaling_factor);
 
 			Entity *ground = mSceneMgr->createEntity("GroundEntity", "ground");
 			ground->setMaterialName("grass1");
@@ -131,9 +168,6 @@ class SumWarsApplication : public ExampleApplication
 
 			SceneNode *camNode = playerNode->createChildSceneNode("PlayerCamNode");
 			camNode->attachObject(mCamera);
-
-
-
 		}
 
 		void createFrameListener(void)
@@ -155,8 +189,12 @@ class SumWarsApplication : public ExampleApplication
 			 int main(int argc, char **argv)
 #endif
 {
+#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
     // Create application object
 	SumWarsApplication app;
+#else
+	SumWarsApplication app(argc,argv);
+#endif
 
 	try {
 		app.go();
