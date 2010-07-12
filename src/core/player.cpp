@@ -2022,7 +2022,7 @@ void Player::toSavegame(CharConv* cv)
 	}
 
 	// IDs der Wegpunkte
-	cv->toBuffer(m_waypoints.size());
+	cv->toBuffer((int) m_waypoints.size());
 	cv->printNewline();
 
 	std::set<short>::iterator it;
