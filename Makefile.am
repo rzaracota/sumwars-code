@@ -10,13 +10,16 @@ sumwars_LDADD = $(DEPS_LIBS) $(LUA_LIBS)
 sumwars_SOURCES = src/core/world.cpp \
 	src/core/gameobject.cpp \
 	src/core/charconv.cpp \
+	src/core/stdstreamconv.cpp \
 	src/core/objectfactory.cpp \
 	src/core/objectloader.cpp \
 	src/core/templateloader.cpp \
 	src/core/itemlist.cpp \
 	src/core/gridunit.cpp \
 	src/core/servernetwork.cpp \
-	src/core/clientnetwork.cpp \
+	src/core/rakservernetwork.cpp \
+	src/core/rakclientnetwork.cpp \
+	src/core/raknetworkpacket.cpp \
 	src/core/worldobject.cpp \
 	src/core/networkstruct.cpp \
 	src/core/projectile.cpp \
@@ -39,7 +42,6 @@ sumwars_SOURCES = src/core/world.cpp \
 	src/core/region.cpp \
 	src/core/spawnpoint.cpp \
 	src/core/document.cpp \
-	src/core/network.cpp \
 	src/core/action.cpp \
 	src/core/command.cpp \
 	src/core/geometry.cpp \
