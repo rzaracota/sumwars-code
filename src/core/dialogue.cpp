@@ -986,14 +986,14 @@ void Dialogue::toString(CharConv* cv)
 			SpeakerState& state = m_speaker_state[m_active_speaker[i]];
 			cv->toBuffer(state.m_id);
 			cv->toBuffer(state.m_emotion);
-			cv->toBuffer<short>(state.m_position);
+			cv->toBuffer(static_cast<short>(state.m_position));
 			cv->toBuffer(state.m_visible);
 			cv->toBuffer(state.m_text_visible);
 		}
 	}
 	
 	std::map<std::string, int>::iterator st;
-	cv->toBuffer<int>((int) m_speaker.size());
+	cv->toBuffer((int) m_speaker.size());
 	for (st = m_speaker.begin(); st != m_speaker.end(); ++st)
 	{
 		cv->toBuffer(st->first);
@@ -1002,18 +1002,18 @@ void Dialogue::toString(CharConv* cv)
 	
 	if (m_question ==0 || !m_question->m_active)
 	{
-		cv->toBuffer<int>(0);
+		cv->toBuffer(static_cast<int>(0));
 	}
 	else
 	{
-		cv->toBuffer<int>(1);
+		cv->toBuffer(static_cast<int>(1));
 		
 		cv->toBuffer(m_question->m_text);
 		cv->toBuffer(m_question->m_active);
 		cv->toBuffer(m_question->m_asked_player);
 		
 		std::list < std::pair<std::string, std::string> >::iterator it;
-		cv->toBuffer<int>((int) m_question->m_answers.size());
+		cv->toBuffer((int) m_question->m_answers.size());
 		for (it = m_question->m_answers.begin(); it != m_question->m_answers.end(); ++it)
 		{
 			cv->toBuffer(it->first);
@@ -1021,14 +1021,14 @@ void Dialogue::toString(CharConv* cv)
 		}
 		
 		std::set<int>::iterator jt;
-		cv->toBuffer<int>((int) m_question->m_players_answered.size());
+		cv->toBuffer((int) m_question->m_players_answered.size());
 		for (jt = m_question->m_players_answered.begin(); jt != m_question->m_players_answered.end(); ++jt)
 		{
 			cv->toBuffer(*jt);
 		}
 		
 		std::map<int, float>::iterator kt;
-		cv->toBuffer<int>((int) m_question->m_weighted_answers.size());
+		cv->toBuffer((int) m_question->m_weighted_answers.size());
 		for (kt = m_question->m_weighted_answers.begin(); kt != m_question->m_weighted_answers.end(); ++kt)
 		{
 			cv->toBuffer(kt->first);
@@ -1050,7 +1050,7 @@ void Dialogue::fromString(CharConv* cv)
 			SpeakerState& state = m_speaker_state[m_active_speaker[i]];
 			cv->fromBuffer(state.m_id);
 			cv->fromBuffer(state.m_emotion);
-			cv->fromBuffer<short>(tmp);
+			cv->fromBuffer(tmp);
 			state.m_position = (Position) tmp;
 			cv->fromBuffer(state.m_visible);
 			cv->fromBuffer(state.m_text_visible);
@@ -1058,7 +1058,7 @@ void Dialogue::fromString(CharConv* cv)
 	}
 	
 	int size;
-	cv->fromBuffer<int>(size);
+	cv->fromBuffer(size);
 	std::string name;
 	int id;
 	m_speaker.clear();
@@ -1070,7 +1070,7 @@ void Dialogue::fromString(CharConv* cv)
 	}
 	
 	int ques;
-	cv->fromBuffer<int>(ques);
+	cv->fromBuffer(ques);
 	if (m_question != 0)
 	{
 		delete m_question;
@@ -1085,7 +1085,7 @@ void Dialogue::fromString(CharConv* cv)
 		cv->fromBuffer(m_question->m_active);
 		cv->fromBuffer(m_question->m_asked_player);
 		
-		cv->fromBuffer<int>(size);
+		cv->fromBuffer(size);
 		m_question->m_answers.clear();
 		std::string answr, topic;
 		for (int i=0; i<size; i++)
@@ -1095,7 +1095,7 @@ void Dialogue::fromString(CharConv* cv)
 			m_question->m_answers.push_back(std::make_pair(answr,topic));
 		}
 		
-		cv->fromBuffer<int>(size);
+		cv->fromBuffer(size);
 		m_question->m_players_answered.clear();
 		int plid;
 		for (int i=0; i<size; i++)
@@ -1104,7 +1104,7 @@ void Dialogue::fromString(CharConv* cv)
 			m_question->m_players_answered.insert(plid);
 		}
 		
-		cv->fromBuffer<int>(size);
+		cv->fromBuffer(size);
 		int answer;
 		float weight;
 		m_question->m_weighted_answers.clear();

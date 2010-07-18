@@ -191,8 +191,8 @@ void Party::setRelation(int id, Fraction::Relation rel)
 void Party::toString(CharConv* cv)
 {
 	
-	cv->toBuffer<char>(m_id);
-	cv->toBuffer<char>(getNrMembers());
+	cv->toBuffer(m_id);
+	cv->toBuffer(static_cast<char>(getNrMembers()));
 	
 	std::set<int>::iterator it;
 	for (it = m_members.begin(); it != m_members.end(); ++it)
@@ -200,32 +200,30 @@ void Party::toString(CharConv* cv)
 		cv->toBuffer(*it);
 	}
 	
-	cv->toBuffer<char>(getNrCandidates());
+	cv->toBuffer(static_cast<char>(getNrCandidates()));
 	for (it = m_candidates.begin(); it != m_candidates.end(); ++it)
 	{
 		cv->toBuffer(*it);
 	}
 	
-	cv->toBuffer<char>(m_relations.size());
+	cv->toBuffer(static_cast<char>(m_relations.size()));
 	std::map<int, Fraction::Relation>::iterator jt;
 	for (jt = m_relations.begin(); jt != m_relations.end(); ++jt)
 	{
-		cv->toBuffer<char>(jt->first);
-		cv->toBuffer<char>(jt->second);
+		cv->toBuffer(jt->first);
+		cv->toBuffer(static_cast<char>(jt->second));
 	}
 
 }
 
 void Party::fromString(CharConv* cv)
 {
-	char mid;
-	cv->fromBuffer<char>(mid);
-	m_id = mid;
+	cv->fromBuffer(m_id);
 	char nr_member, nr_cand, nr_rel;
 	int id;
 	
 	
-	cv->fromBuffer<char>(nr_member);
+	cv->fromBuffer(nr_member);
 	std::set<int>::iterator it;
 	for (int i=0; i<nr_member; i++)
 	{
@@ -233,20 +231,21 @@ void Party::fromString(CharConv* cv)
 		addMember(id);
 	}
 	
-	cv->fromBuffer<char>(nr_cand);
+	cv->fromBuffer(nr_cand);
 	for (int i=0; i<nr_cand; i++)
 	{
 		cv->fromBuffer(id);
 		addCandidate(id);
 	}
 	
-	cv->fromBuffer<char>(nr_rel);
+	cv->fromBuffer(nr_rel);
 	std::map<int, Fraction::Relation>::iterator jt;
-	char rel, pid;
+	char rel;
+	int pid;
 	for (int i=0; i<nr_rel; i++)
 	{
-		cv->fromBuffer<char>(pid);
-		cv->fromBuffer<char>(rel);
+		cv->fromBuffer(pid);
+		cv->fromBuffer(rel);
 		m_relations[pid] = (Fraction::Relation) rel;
 		
 	}

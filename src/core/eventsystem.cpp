@@ -2811,7 +2811,7 @@ int EventSystem::writeString(lua_State *L)
 {
 	std::string s;
 	s = lua_tostring (L,1);
-	m_charconv->toBuffer<char>(1);
+	m_charconv->toBuffer(static_cast<char>(1));
 	m_charconv->toBuffer(s);
 	return 0;
 }
@@ -2828,7 +2828,7 @@ void EventSystem::writeSavegame(CharConv* savegame)
 	if (m_lua != 0)
 	{
 		EventSystem::doString("writeSavegame();");
-		m_charconv->toBuffer<char>(0);
+		m_charconv->toBuffer(static_cast<char>(0));
 	}
 }
 

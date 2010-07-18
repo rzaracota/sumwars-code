@@ -9,60 +9,53 @@
 // Debuggin
 #include "debug.h"
 
-
+class ServerNetwork;
 
 /**
  * \class NetworkSlot
- * \brief Slot-Struktur mit Information fuer eine Verbindung
+ * \brief Abstract class for a single server - client connection
  */
 class NetworkSlot
 {
 	public:
 		/**
-		 * \fn NetworkSlot(PlayerID client_address,RakServerInterface* peer);
-		 * \brief Initialisiert den Slot
-		 * \param client_address Netzwerkadresse des angeschlossenen Client
-		 * \param peer Interface von RakNet
+		 * \brief Constructor
+		 * \param server_network pointer to the parent ServerNetwork object
 		 */
-		NetworkSlot(PlayerID client_address,RakServerInterface* peer);
-
-		/**
-		 * \fn ~NetworkSlot()
-		 * \brief Destruktor
-		 */
-		~NetworkSlot();
-
-		/**
-		 * \fn void pushReceivedPacket(Packet* packet)
-		 * \brief Fuegt ein empfangenes Paket in die Warteschlange fuer empfangene Pakete ein
-		 * \param packet empfangenes Paket
-		 */
-		void pushReceivedPacket(Packet* packet);
-
-		/**
-		 * \fn Packet* popReceivedPacket()
-		 * \brief Entnimmt das erste noch nicht abgeholte Paket aus der Warteschlange. Gibt Null zurueck, wenn die Warteschlange leer ist
-		 */
-		Packet* popReceivedPacket();
-
-		/**
-		 * \fn int numberMessages()
-		 * \brief Gibt die Anzahl der empfangenen, noch nicht abgeholten Pakete aus
-		 */
-		int numberMessages();
-		
-		/**
-		 * \fn PlayerID getPlayerID()
-		 * \brief Gibt die Adresse des mit diesem Slot verbundenen Client aus
-		 */
-		PlayerID getPlayerID()
+		NetworkSlot(ServerNetwork* server_network)
 		{
-			return m_system_address;
+			m_server_network = server_network;
 		}
 
 		/**
-		 * \fn NetStatus getStatus()
-		 * \brief Gibt die Status des Slots aus
+		 * \brief Destructor
+		 */
+		virtual ~NetworkSlot();
+
+		/**
+		 * \brief Adds the packet to the queue of received packets
+		 * \param packet received packet
+		 */
+		void pushReceivedPacket(NetworkPacket* packet)
+		{
+			m_received_packets.push(packet);
+		}
+
+		/**
+		 * \brief Removes the first packet from the receive queue and returns it. Returns NULL if the the receive queue is empty
+		 */
+		NetworkPacket* popReceivedPacket();
+
+		/**
+		 * \brief Returns the number of packets in the receive queue
+		 */
+		int numberMessages()
+		{
+			return m_received_packets.size();
+		}
+		
+		/**
+		 * \brief Returns the status of the slot
 		 */
 		NetStatus getStatus()
 		{
@@ -70,208 +63,167 @@ class NetworkSlot
 		}
 
 		/**
-		 * \fn void setStatus(NetStatus s)
-		 * \brief Setzt den Status des Slots.
+		 * \brief Sets the status of the slot
 		 * \param s neuer Zustand
 		 */
 		void setStatus(NetStatus s)
 		{
 			m_status = s;
 		}
+		
 
 	private:
 		/**
-		 * \var PacketQueue m_received_packets
-		 * \brief Liste der empfangenen Packete
+		 * \brief Queue of received Packets
 		 */
 		PacketQueue m_received_packets;
 
 		/**
-		 * \var PlayerID m_system_address
-		 * \brief Adresse des Clients der zu diesem Slot gehoert
-		 */
-		PlayerID m_system_address;
-
-		/**
-		 * \var RakServerInterface* m_peer
-		 * \brief Netzwerkschnittstelle von RakNet
-		 */
-		RakServerInterface* m_peer;
-
-		/**
-		 * \var NetStatus m_status
-		 * \brief Status des Slots
+		 * \brief Status of the slot
 		 */
 		NetStatus m_status;
+		
+		/**
+		 * \brief pointer to the parent ServerNetwork object
+		 */
+		ServerNetwork* m_server_network;
 };
 
 /**
  * \class ServerNetwork
- * \brief Netzwerkschnittstelle auf Serverseite
+ * \brief Abstract class for Network representation on server side
  */
 class ServerNetwork: public Network
 {
 	public:
 		/**
-		 * \fn ServerNetwork(int max_slots)
-		 * \brief Konstruktor
-		 * \param max_slots maximale Anzahl Clients die der Server akzeptiert
+		 * \brief Constructor
+		 * \param max_slots maximal number of client connections that are accepted by the server
 		 */
 		ServerNetwork(int max_slots);
 
 		/**
-		 * \fn ~ServerNetwork()
-		 * \brief Destruktor
+		 * \brief Destructor
 		 */
 		virtual ~ServerNetwork();
 
 		/**
-		* \fn NetStatus init( int auth_port )
-		* \brief Initialisiert den Server, oeffnet die Netzwerkschnittstelle
-		* \param auth_port gibt den Port an, auf dem sich Clients anmelden koennen
-		* \return Status der Methode
+		* \brief Initializes network interface, starts listening on the port
+		* \param auth_port port for listening
+		* \return network status
 		*
 		*/
-		virtual NetStatus init( int auth_port );
+		virtual NetStatus init( int auth_port ) =0;
 
 		/**
-		 * \fn void kill()
-		 * \brief Schliesst das die Netzwerkverbindung
+		 * \brief Shuts down Network library and does all cleanup work
 		 */
 		virtual void kill();
-
 		
-
 		/**
-		 * \fn NetStatus getSlotStatus( int slot=0 )
-		* \brief Liefert den Status eines Server-Slots
-		* \param slot Slotnummer
-		* \return Status des Slots
-		*
-		*/
-		NetStatus getSlotStatus( int slot=0 );
-
-		/**
-		* \fn NetStatus update()
-		* \brief Fuehrt fuer alle Server-Slots die Abarbeitung derer durch
-		* \return liefert immer NET_OK
-		*/
-		void update();
-
-
-		/**
-		 * \fn virtual int numberSlotMessages(int slot=0)
-		 * \param slot Nummer des Slots dessen Paketanzahl abgefragt wird
-		 * \brief  Gibt Anzahl der Packete im Empfangspuffer aus
-		 * \return Anzahl der Packete
-		 *
-		 * Ist der Slot ungeultig wird Null geliefert, sonst die Anzahl der Packete im Empfangspuffers
-	 	 */
-		virtual int numberSlotMessages(int slot=0);
-
-
-
-		/**
-		 * \fn void popSlotMessage(Packet* &data, int slot=0)
-		 * \brief Fuehrt net_pop_slot_message auf den Client-Slots
-		 * \param data Puffer fuer die zu kopierenden Daten
-		 * \param slot Nummer des Slots aus dem ein Paket entnommen wird 
-		 * \return Status der Methode
-		 *
+		 * \brief Closes a connection to a client
+		 * \param slot slot number
 		 */
-		void popSlotMessage( Packet* &data, int slot=0) ;
-
+		virtual void clientDisconnect(int slot)=0;
+		
 		/**
-		 * \fn void pushSlotMessage( RakNet::BitStream * data,int slot=0, PacketPriority prio= HIGH_PRIORITY,PacketReliability reliability = RELIABLE )
-		 * \brief Fuehrt net_push_slot_message auf einen Server-Slots aus
-		 * \param data Puffer fuer die zu kopierenden Daten
-		 * \param slot Slot des Empfaengers
-		 * \param prio Prioritaet mit der das Paket gesendet wird
-		 * \param reliability Verlaesslichkeit mit der das Paket gesendet wird
-		 * \return Status der Methode
-		 *
+		 * \brief returns if the slotnumber refers to a valid, connected slot
+		 * \param slot slot number
 		 */
-		void pushSlotMessage( RakNet::BitStream * data, int slot=0, PacketPriority prio= HIGH_PRIORITY,PacketReliability reliability = RELIABLE) ;
-
-		/**
-		 * \fn int popNewLoginSlot();
-		* \brief Prueft ob in login Logindaten vorliegen, sonst gibt die Funktion false zurueck
-		* \return Slot auf dem sich ein Spieler eingeloggt hat.
-		*/
-		int popNewLoginSlot();
-
-		/**
-		 * \fn void deallocatePacket(Packet* packet)
-		 * \param packet zu loeschendes Paket
-		 * \brief Loescht ein nicht mehr benoetigtes Paket. Um Speicherlecks zu vermeiden sollten alle Paket auf mit dieser Funktion entfernt werden
- 		*/
-		virtual void deallocatePacket(Packet* packet)
+		bool isConnectedSlot( int slot)
 		{
-#ifndef NO_RAKNET
-			m_peer->DeallocatePacket(packet);
-#else
-			ERRORMSG("Called RakNet lib in NO_RAKNET build");
-#endif
+			return (slot >=0 && slot < m_max_slots && m_slots[slot] != 0 && m_slots[slot]->getStatus() == NET_CONNECTED);
+		}
+		
+		/**
+		 * \brief Returns the Number of packets that are in the receive queue for the specified slot
+		 * \return number of packets in the specified slot
+		 * \param slot ID of a Slot
+		 *
+		 * Returns the Number of packets that are in the receive queue for the specified slot. 
+		 */
+		virtual int numberSlotMessages(int slot=0)
+		{
+			if (isConnectedSlot(slot))
+			{
+				return m_slots[slot]->numberMessages();
+			}
+			return 0;
+		}
+		
+		
+		/**
+		 * \brief Returns the next received packet from the specified slot and removes it from the queue.
+		 * \param data Received NetworkPacket, returns a NULL pointer, if packet queue is empty
+		 * \param slot ID of a Slot
+		 * 
+		 * Returns the next received packet from the specified slot and removes it from the queue. If no packet was received from the specified slot, a NULL pointer is returned. Delete the Packet with \ref deallocatePacket at the end. 
+		 */
+		virtual void popSlotMessage( NetworkPacket* &data, int slot=0)
+		{
+			if (isConnectedSlot(slot) && m_slots[slot]->numberMessages()>0 )
+			{
+				data = m_slots[slot]->popReceivedPacket();
+			}
+			else
+			{
+				data = 0;
+			}
+		}
+	
+		/**
+		 * \brief Return the status of a NetworkSlot
+		 * \param slot ID of a slot
+		 * \return status of a slot
+		 *
+		 */
+		virtual NetStatus getSlotStatus( int slot=0 )
+		{
+			if (isConnectedSlot(slot))
+			{
+				return m_slots[slot]->getStatus();
+			}
+			return NET_ERROR;
+		}
+		
+		/**
+		 * \brief Returns the first element from the new login slot queue
+		 */
+		int popNewLoginSlot();
+		
+	protected:
+
+		/**
+		 * \brief Adds a new slot to the new login slot queue
+		 * \param slot slot number
+		 */
+		void pushNewLoginSlot(int slot)
+		{
+			m_new_login_slots.push(slot);
 		}
 
-
-	private:
-
 		/**
-		 * \fn void pushNewLoginSlot(int slot)
-		 * \brief Fuegt einen Slot der Liste der Slots in denen neu angemeldete Clienten warten hinzu
-		 */
-		void pushNewLoginSlot(int slot);
-
-		/**
-		 * \fn unsigned char getPacketIdentifier(Packet *p)
-		 * \brief Extrahiert aus einem Paket die Identifikationsnummer
-		 */
-		unsigned char getPacketIdentifier(Packet *p);
-
-		/**
-		 * \fn int insertNewSlot(PlayerID addr)
-		 * \brief Fuegt einen neuen Client hinzu
-		 * \param addr Netzwerkadresse des Client
-		 */
-		int insertNewSlot(PlayerID addr);
-
-		/**
-		 * \fn int getSlotByAddress(PlayerID address)
-		 * \brief ermittelt auf der Netzwerkadresse einen Client den Slot auf dem er angemeldet ist
-		 * \param address Netzwerkadresse des Client
-		 */
-		int getSlotByAddress(PlayerID address);
-
-		/**
-		* \var m_active
-		* \brief Ist der Server gerade in Betrieb
+		* \brief Tells if the server is open
 		*/
 		bool m_active;
 
 		/**
-		* \var m_slots
-		* \brief Die verfuegbaren Slots des Servers
+		* \brief Array of Connection slots
 		*/
-		NetworkSlot** m_slots;
+		std::vector<NetworkSlot*> m_slots;
 
 		/**
-		 * \var int m_max_slots
-		 * \brief maximale Anzahl Clients die sich anmelden koennen
+		 * \brief maximal number of allowed connections
 		 */
         int m_max_slots;
 
-
-
-
 		/**
-		 * \var std::queue<int> m_new_login_slots
-		 * \brief Warteliste der Clienten die sich schon angemeldet haben, aber noch nicht in die Welt eingefuegt worden sind
+		 * \brief List of new clients, that have connected to the server, but have not been noticed by the world yet
 		 */
 		std::queue<int> m_new_login_slots;
 
 
-		RakServerInterface* m_peer;
+		
 };
 
 

@@ -35,6 +35,7 @@
 #include <pthread.h>
 
 #include "gettext.h"
+#include "stdstreamconv.h"
 
 #ifdef __APPLE__
 #include <physfs.h>
@@ -128,17 +129,13 @@ void Document::setSaveFile(std::string s)
 		DEBUGX("binary %i",bin);
 		if (bin == '0')
 		{
-			save = new CharConv(&file);
+			save = new StdStreamConv(&file);
 		}
 		else
 		{
-			int len;
-			file.read((char*) &len,4);
-			DEBUGX("length %i",len);
-			data = new unsigned char[len];
-			file.read((char*) data,len);
-
-			save = new CharConv(data,len);
+			// binary savefile is not supported anymore
+			ERRORMSG("binary Savegame is not supported anymore");
+			return;
 		}
 
 		if (m_temp_player)
@@ -184,17 +181,13 @@ void Document::loadSavegame()
 		// determine binary vs nonbinary savegile
 		if (bin == '0')
 		{
-			save = new CharConv(&file);
+			save = new StdStreamConv(&file);
 		}
 		else
 		{
-			// for binary savefile, read length of data and data
-			int len;
-			file.read((char*) &len,4);
-			data = new unsigned char[len];
-			file.read((char*) data,len);
-
-			save = new CharConv(data,len);
+			// binary savefile is not supported anymore
+			ERRORMSG("binary Savegame is not supported anymore");
+			return;
 		}
 
 		// update the player object, that is displayed in character preview and inventory
@@ -205,12 +198,10 @@ void Document::loadSavegame()
 		m_temp_player->fromSavegame(save);
 
 		// notify the world of the new player
-#ifndef NO_RAKNET
-		CharConv cv2(0);
-#else
+
 		std::stringstream sstream;
-		CharConv cv2(&sstream);
-#endif
+		StdStreamConv cv2(&sstream);
+
 		m_temp_player->toSavegame(&cv2);
 		World::getWorld()->handleSavegame(&cv2);
 
@@ -221,8 +212,8 @@ void Document::loadSavegame()
 		save->fromBuffer(nr);
 		for (int i=0; i<nr; ++i)
 		{
-			save->fromBuffer<short>(key);
-			save->fromBuffer<short>(dest);
+			save->fromBuffer(key);
+			save->fromBuffer(dest);
 			if (dest >= USE_SKILL_LEFT && dest < USE_SKILL_RIGHT + 200)
 			{
 				installShortkey((KeyCode) key, (ShortkeyDestination) dest);
@@ -1704,17 +1695,10 @@ void Document::writeSavegame()
 	CharConv* save;
 
 
-	bool binary = false;
-	if (!binary)
-	{
-		std::stringstream* pstr = new std::stringstream;
-		save = new CharConv(pstr);
-	}
-	else
-	{
-		save = new CharConv(0);
-	}
-
+	
+	std::stringstream* pstr = new std::stringstream;
+	save = new StdStreamConv(pstr);
+	
 	getLocalPlayer()->toSavegame(save);
 
 	// Shortkeys hinzufuegen
@@ -1732,8 +1716,8 @@ void Document::writeSavegame()
 	{
 		if (it->second >= USE_SKILL_LEFT && it->second < USE_SKILL_RIGHT + 200)
 		{
-			save->toBuffer<short>(it->first);
-			save->toBuffer<short>(it->second);
+			save->toBuffer(static_cast<short>(it->first));
+			save->toBuffer(static_cast<short>(it->second));
 			save->printNewline();
 		}
 	}
@@ -1753,22 +1737,17 @@ void* Document::writeSaveFile(void* doc_data_ptr)
 	Document* doc = param->first;
 
 	// Savegame schreiben
-	std::stringstream* stream = dynamic_cast<std::stringstream*> (save->getStream());
+	std::stringstream* stream = dynamic_cast<std::stringstream*> (static_cast<StdStreamConv*>(save)->getStream());
 	char* bp=0;
 	int len=0;
 	char bin ='0';
-	if (stream ==0)
-	{
-		bp = (char*) save->getBitStream()->GetData();
-		len = (save->writeBits()+7)/8;
-		bin ='1';
-		DEBUG("binary");
-	}
-	// Laenge der Datei
-
+	
+	// binary savegames are not used anymore
+	
+	
 	// Daten byteweise in Datei schreiben
 	std::ofstream file;
-	if (bin ==1)
+	if (bin =='1')
 	{
 		file.open(doc->m_save_file.c_str(),std::ios::out | std::ios::binary);
 	}
@@ -1796,9 +1775,9 @@ void* Document::writeSaveFile(void* doc_data_ptr)
 	{
 		ERRORMSG("cannot open save file: %s",doc->m_save_file.c_str());
 	}
-	if (save->getStream() != 0)
+	if (stream != 0)
 	{
-		delete save->getStream();
+		delete stream;
 	}
 	delete save;
 	delete param;

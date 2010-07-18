@@ -574,7 +574,7 @@ void Equipement::toString(CharConv* cv)
 {
 
 	short nr = getNumberItems();
-	cv->toBuffer<short>(nr);
+	cv->toBuffer(nr);
 
 	for (int i=0; i<NR_BODY_ITEMS; i++)
 	{
@@ -595,7 +595,7 @@ void Equipement::toString(CharConv* cv)
 		if (it!=0)
 		{
 			cv->printNewline();
-			cv->toBuffer<short>(BIG_ITEMS+i);
+			cv->toBuffer(static_cast<short>(BIG_ITEMS+i));
 			it->toString(cv);
 			nr++;
 		}
@@ -608,7 +608,7 @@ void Equipement::toString(CharConv* cv)
 		if (it!=0)
 		{
 			cv->printNewline();
-			cv->toBuffer<short>(MEDIUM_ITEMS+i);
+			cv->toBuffer(static_cast<short>(MEDIUM_ITEMS+i));
 			it->toString(cv);
 			nr++;
 		}
@@ -621,7 +621,7 @@ void Equipement::toString(CharConv* cv)
 		if (it!=0)
 		{
 			cv->printNewline();
-			cv->toBuffer<short>(SMALL_ITEMS+i);
+			cv->toBuffer(static_cast<short>(SMALL_ITEMS+i));
 			it->toString(cv);
 			nr++;
 		}
@@ -635,7 +635,7 @@ void Equipement::fromString(CharConv* cv)
 {
 	clear();
 	short nr;
-	cv->fromBuffer<short>(nr);
+	cv->fromBuffer(nr);
 
 	int i;
 	short pos;
@@ -669,14 +669,14 @@ void Equipement::toStringComplete(CharConv* cv)
 {
 
 	short nr = getNumberItems();
-	cv->toBuffer<short>(nr);
+	cv->toBuffer(nr);
 
 	for (int i=0; i<NR_BODY_ITEMS; i++)
 	{
 		if (m_body_items[i] !=0)
 		{
 			cv->printNewline();
-			cv->toBuffer<short>(i);
+			cv->toBuffer(static_cast<short>(i));
 			m_body_items[i]->toStringComplete(cv);
 		}
 	}
@@ -690,7 +690,7 @@ void Equipement::toStringComplete(CharConv* cv)
 		if (it!=0)
 		{
 			cv->printNewline();
-			cv->toBuffer<short>(BIG_ITEMS+i);
+			cv->toBuffer(static_cast<short>(BIG_ITEMS+i));
 			it->toStringComplete(cv);
 			nr++;
 		}
@@ -703,7 +703,7 @@ void Equipement::toStringComplete(CharConv* cv)
 		if (it!=0)
 		{
 			cv->printNewline();
-			cv->toBuffer<short>(MEDIUM_ITEMS+i);
+			cv->toBuffer(static_cast<short>(MEDIUM_ITEMS+i));
 			it->toStringComplete(cv);
 			nr++;
 		}
@@ -716,7 +716,7 @@ void Equipement::toStringComplete(CharConv* cv)
 		if (it!=0)
 		{
 			cv->printNewline();
-			cv->toBuffer<short>(SMALL_ITEMS+i);
+			cv->toBuffer(static_cast<short>(SMALL_ITEMS+i));
 			it->toStringComplete(cv);
 			nr++;
 		}
@@ -730,7 +730,7 @@ void Equipement::fromStringComplete(CharConv* cv)
 {
 	clear();
 	short nr;
-	cv->fromBuffer<short>(nr);
+	cv->fromBuffer(nr);
 
 	int i;
 	short pos;

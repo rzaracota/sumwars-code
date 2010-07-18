@@ -18,22 +18,20 @@ void Fraction::toString(CharConv* cv)
 	cv->toBuffer(m_type);
 	cv->toBuffer(m_name);
 	
-	cv->toBuffer<int>(m_relations.size());
+	cv->toBuffer(static_cast<int>(m_relations.size()));
 	
 	
 	std::map<Id, Relation>::iterator it;
 	for (it = m_relations.begin(); it != m_relations.end(); ++it)
 	{
 		cv->toBuffer(it->first);
-		cv->toBuffer<char>(it->second);
+		cv->toBuffer(static_cast<char>(it->second));
 	}
 }
 
 void Fraction::fromString(CharConv* cv)
 {
 	cv->fromBuffer(m_name);
-	
-	cv->toBuffer(m_relations.size());
 	
 	int nr;
 	cv->fromBuffer(nr);

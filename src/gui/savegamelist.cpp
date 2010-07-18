@@ -1,6 +1,6 @@
 #include "OgreResourceGroupManager.h"
 #include "savegamelist.h"
-
+#include "stdstreamconv.h"
 
 SavegameList::SavegameList (Document* doc)
 	:Window(doc)
@@ -118,16 +118,13 @@ void SavegameList::update()
 			data =0;
 			if (bin == '0')
 			{
-				save = new CharConv(&file);
+				save = new StdStreamConv(&file);
 			}
 			else
 			{
-				int len;
-				file.read((char*) &len,4);
-				data = new unsigned char[len];
-				file.read((char*) data,len);
-			
-				save = new CharConv(data,len);
+				// binary Savegames are not supported anymore
+				file.close();
+				continue;
 			}
 			
 			save->fromBuffer(version);
@@ -274,4 +271,5 @@ bool SavegameList::onDeleteCharAbortClicked(const CEGUI::EventArgs& evt)
 bool SavegameList::onSavegameDoubleClick(const CEGUI::EventArgs& evt)
 {
 	onSavegameSelected(evt);
+	return true;
 }

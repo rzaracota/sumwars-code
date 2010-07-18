@@ -231,7 +231,7 @@ void Item::toString(CharConv* cv)
 	cv->toBuffer((char) m_type);
 	cv->toBuffer(m_subtype);
 	cv->toBuffer(m_id);
-	cv->toBuffer<char>(m_rarity);
+	cv->toBuffer(static_cast<char>(m_rarity));
 	if (m_type == GOLD_TYPE)
 	{
 		cv->toBuffer(m_price);
@@ -244,7 +244,7 @@ void Item::fromString(CharConv* cv)
 	// Daten werden extern eingelesen
 
 	char tmp;
-	cv->fromBuffer<char>(tmp);
+	cv->fromBuffer(tmp);
 	m_rarity = (Rarity) tmp;
 	if (m_type == GOLD_TYPE)
 	{
@@ -506,7 +506,7 @@ void Item::toStringComplete(CharConv* cv)
 		cv->toBuffer(m_equip_effect->m_dattack_speed);
 		cv->toBuffer(m_equip_effect->m_xspecial_flags);
 
-		cv->toBuffer<short>(m_equip_effect->m_xabilities.size());
+		cv->toBuffer(static_cast<short>(m_equip_effect->m_xabilities.size()));
 		std::set<std::string>::iterator it;
 		for (it = m_equip_effect->m_xabilities.begin(); it != m_equip_effect->m_xabilities.end(); ++it)
 		{
@@ -539,13 +539,13 @@ void Item::fromStringComplete(CharConv* cv)
 	if (m_type == GOLD_TYPE)
 		return;
 
-	cv->fromBuffer<int>(m_price);
-	cv->fromBuffer<char>(m_level_req);
+	cv->fromBuffer(m_price);
+	cv->fromBuffer(m_level_req);
 	cv->fromBuffer(m_char_req);
-	cv->fromBuffer<float>(m_magic_power);
+	cv->fromBuffer(m_magic_power);
 
 	char mask = NOINFO;
-	cv->fromBuffer<char>(mask);
+	cv->fromBuffer(mask);
 
 	if (mask & USEUP_INFO)
 	{
@@ -576,40 +576,40 @@ void Item::fromStringComplete(CharConv* cv)
 	if (m_useup_effect!=0)
 	{
 		DEBUGX("loading useup effect");
-		cv->fromBuffer<float>(m_useup_effect->m_dhealth );
+		cv->fromBuffer(m_useup_effect->m_dhealth );
 		for (i=0;i<NR_STATUS_MODS;i++)
 		{
-			cv->fromBuffer<float>(m_useup_effect->m_dstatus_mod_immune_time[i]);
+			cv->fromBuffer(m_useup_effect->m_dstatus_mod_immune_time[i]);
 		}
 	}
 
 	if (m_equip_effect!=0)
 	{
 		DEBUGX("loading equip effect");
-		cv->fromBuffer<short>(m_equip_effect->m_darmor);
-		cv->fromBuffer<short>(m_equip_effect->m_dblock);
-		cv->fromBuffer<float>(m_equip_effect->m_dmax_health);
-		cv->fromBuffer<short>(m_equip_effect->m_dattack);
-		cv->fromBuffer<short>(m_equip_effect->m_dstrength);
-		cv->fromBuffer<short>(m_equip_effect->m_ddexterity);
-		cv->fromBuffer<short>(m_equip_effect->m_dmagic_power);
-		cv->fromBuffer<short>(m_equip_effect->m_dwillpower);
+		cv->fromBuffer(m_equip_effect->m_darmor);
+		cv->fromBuffer(m_equip_effect->m_dblock);
+		cv->fromBuffer(m_equip_effect->m_dmax_health);
+		cv->fromBuffer(m_equip_effect->m_dattack);
+		cv->fromBuffer(m_equip_effect->m_dstrength);
+		cv->fromBuffer(m_equip_effect->m_ddexterity);
+		cv->fromBuffer(m_equip_effect->m_dmagic_power);
+		cv->fromBuffer(m_equip_effect->m_dwillpower);
 		for (i=0;i<4;i++)
 		{
-			cv->fromBuffer<short>(m_equip_effect->m_dresistances[i]);
+			cv->fromBuffer(m_equip_effect->m_dresistances[i]);
 		}
 
 		for (i=0;i<4;i++)
 		{
-			cv->fromBuffer<short>(m_equip_effect->m_dresistances_cap[i]);
+			cv->fromBuffer(m_equip_effect->m_dresistances_cap[i]);
 		}
 
-		cv->fromBuffer<short>(m_equip_effect->m_dwalk_speed);
-		cv->fromBuffer<short>(m_equip_effect->m_dattack_speed);
-		cv->fromBuffer<int>(m_equip_effect->m_xspecial_flags );
+		cv->fromBuffer(m_equip_effect->m_dwalk_speed);
+		cv->fromBuffer(m_equip_effect->m_dattack_speed);
+		cv->fromBuffer(m_equip_effect->m_xspecial_flags );
 
 		short nr;
-		cv->fromBuffer<short>(nr);
+		cv->fromBuffer(nr);
 		Action::ActionType type;
 		for (int i=0; i<nr; i++)
 		{
@@ -617,7 +617,7 @@ void Item::fromStringComplete(CharConv* cv)
 			m_equip_effect->m_xabilities.insert(type);
 		}
 		
-		cv->fromBuffer<char>(m_equip_effect->m_ximmunity);
+		cv->fromBuffer(m_equip_effect->m_ximmunity);
 
 	}
 
@@ -626,9 +626,9 @@ void Item::fromStringComplete(CharConv* cv)
 		DEBUGX("loading weapon attr");
 		cv->fromBuffer(m_weapon_attr->m_weapon_type);
 		m_weapon_attr->m_damage.fromString(cv);
-		cv->fromBuffer<float>(m_weapon_attr->m_attack_range);
-		cv->fromBuffer<bool>(m_weapon_attr->m_two_handed);
-		cv->fromBuffer<short>(m_weapon_attr->m_dattack_speed);
+		cv->fromBuffer(m_weapon_attr->m_attack_range);
+		cv->fromBuffer(m_weapon_attr->m_two_handed);
+		cv->fromBuffer(m_weapon_attr->m_dattack_speed);
 
 	}
 

@@ -13,7 +13,7 @@ void PlayerLook::operator=(PlayerLook other)
 
 void PlayerLook::toString(CharConv* cv)
 {
-	cv->toBuffer<char>(m_gender);
+	cv->toBuffer(static_cast<char>(m_gender));
 	cv->toBuffer(m_render_info);
 	cv->toBuffer(m_emotion_set);
 	if (World::getWorld()->getVersion() >= 13)
