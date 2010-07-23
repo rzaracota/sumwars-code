@@ -59,19 +59,16 @@
 			<Add directory=".\gui" />
 		</Compiler>
 		<Linker>
-			<Add option="-Wl,--enable-runtime-pseudo-reloc" />
-			<Add option="-Wl,--enable-auto-image-base" />
-			<Add option="-Wl,--add-stdcall-alias" />
-			<Add library="C:\MinGW\lib\libRakNet.a" />
+			<Add library="libRakNet.a" />
 			<Add library="libwsock32.a" />
-			<Add library="C:\MinGW\lib\alut.lib" />
-			<Add library="C:\MinGW\lib\OpenAL32.lib" />
-			<Add library="C:\MinGW\lib\lua51.lib" />
-			<Add library="C:\mingw\lib\libintl.lib" />
-			<Add library="C:\mingw\lib\ogg.lib" />
-			<Add library="C:\mingw\lib\vorbis.lib" />
-			<Add library="C:\mingw\lib\vorbisfile.lib" />
-			<Add library="C:\MinGW\lib\libpthreadGC2.a" />
+			<Add library="alut" />
+			<Add library="OpenAL32" />
+			<Add library="lua51" />
+			<Add library="libintl" />
+			<Add library="ogg" />
+			<Add library="vorbis" />
+			<Add library="vorbisfile" />
+			<Add library="libpthreadGC2.a" />
 			<Add directory="$(OGRE_HOME)\lib" />
 			<Add directory="$(OGRE_HOME)\bin\Debug" />
 			<Add directory="$(OGRE_HOME)\bin\Release" />
