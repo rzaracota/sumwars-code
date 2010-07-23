@@ -8,7 +8,7 @@
 #include <math.h>
 #include <algorithm>
 #include "debug.h"
-
+#include "mathhelper.h"
 /**
  * \struct Vector
  * \brief zweidimensionaler Vektor
@@ -395,7 +395,7 @@ struct Shape
 	float getInnerRadius()
 	{
 		if (m_type == RECT)
-			return (std::min(fabs(m_extent.m_x),fabs(m_extent.m_y)));
+			return (MathHelper::Min(fabs(m_extent.m_x),fabs(m_extent.m_y)));
 		else
 			return m_radius;
 	}

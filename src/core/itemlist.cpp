@@ -392,35 +392,35 @@ short  Equipement::insertItem(Item* item, bool check_useup,bool use_equip, bool 
 short Equipement::findItem(Item::Subtype subtype,short startpos)
 {
 	int start = startpos;
-	for (int i=std::max(0,start); i<CURSOR_ITEM; i++)
+	for (int i=MathHelper::Max(0,start); i<CURSOR_ITEM; i++)
 	{
 		if (m_body_items[i] !=0 && m_body_items[i]->m_subtype == subtype)
 			return i;
 	}
 
 	Item* item;
-	for (int i= std::max(int(BIG_ITEMS),start); i< BIG_ITEMS+m_inventory.getMaxBig(); i++)
+	for (int i= MathHelper::Max(int(BIG_ITEMS),start); i< BIG_ITEMS+m_inventory.getMaxBig(); i++)
 	{
 		item = m_inventory.getItem(Item::BIG, i - BIG_ITEMS);
 		if (item != 0 && item->m_subtype == subtype)
 			return i;
 	}
 
-	for (int i= std::max(int(BIG_ITEMS),start); i< BIG_ITEMS+m_inventory.getMaxBig(); i++)
+	for (int i= MathHelper::Max(int(BIG_ITEMS),start); i< BIG_ITEMS+m_inventory.getMaxBig(); i++)
 	{
 		item = m_inventory.getItem(Item::BIG, i - BIG_ITEMS);
 		if (item != 0 && item->m_subtype == subtype)
 			return i;
 	}
 
-	for (int i= std::max(int(MEDIUM_ITEMS),start); i< MEDIUM_ITEMS+m_inventory.getMaxMedium(); i++)
+	for (int i= MathHelper::Max(int(MEDIUM_ITEMS),start); i< MEDIUM_ITEMS+m_inventory.getMaxMedium(); i++)
 	{
 		item = m_inventory.getItem(Item::MEDIUM, i - MEDIUM_ITEMS);
 		if (item != 0 && item->m_subtype == subtype)
 			return i;
 	}
 
-	for (int i= std::max(int(SMALL_ITEMS),start); i< SMALL_ITEMS+m_inventory.getMaxSmall(); i++)
+	for (int i= MathHelper::Max(int(SMALL_ITEMS),start); i< SMALL_ITEMS+m_inventory.getMaxSmall(); i++)
 	{
 		item = m_inventory.getItem(Item::SMALL, i - SMALL_ITEMS);
 		if (item != 0 && item->m_subtype == subtype)

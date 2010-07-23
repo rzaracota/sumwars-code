@@ -12,7 +12,7 @@
 
 #define NR_EFFECTS 1
 
-class Item;
+struct Item;
 
 /**
  * \struct AbilityInfo

@@ -312,7 +312,7 @@ int Item::getValue(std::string valname)
 	}
 	else if (valname == "level_requirement")
 	{
-		lua_pushnumber(EventSystem::getLuaState() , fabs(m_level_req) );
+		lua_pushnumber(EventSystem::getLuaState() , fabs((float)m_level_req) );
 		return 1;
 	}
 	else if (valname == "rarity")
@@ -666,7 +666,7 @@ std::string Item::getDescription(float price_factor, ItemRequirementsMet irm)
 	out_stream <<gettext("Value")<<": "<<m_price;
 	if (price_factor != 0 && price_factor != 1)
 	{
-		out_stream <<"\n" << gettext("Selling Value")<<": "<<std::max(1,int(m_price*price_factor));
+		out_stream <<"\n" << gettext("Selling Value")<<": "<<MathHelper::Max(1,int(m_price*price_factor));
 	}
 	if (m_level_req>0)
 	{
@@ -890,7 +890,7 @@ std::list<std::string> Item::getDescriptionAsStringList(float price_factor, Item
     
     if (price_factor != 0 && price_factor != 1)
     {
-        out_stream <<"\n" << gettext("Selling Value")<<": "<<std::max(1,int(m_price*price_factor));
+        out_stream <<"\n" << gettext("Selling Value")<<": "<<MathHelper::Max(1,int(m_price*price_factor));
         itemDescList.push_back(out_stream.str());
         out_stream.str("");
     }
@@ -1177,7 +1177,7 @@ void Item::calcPrice()
 			dvalue += dmg.m_status_mod_power[i]*0.2;
 		}
 		// TODO: Flags einberechnen
-		value += dvalue * std::max(1.0,std::min(1.5,sqrt(m_weapon_attr->m_attack_range)));
+		value += dvalue * MathHelper::Max(1.0f,MathHelper::Min(1.5f,sqrt(m_weapon_attr->m_attack_range)));
 		
 	}
 
@@ -1217,7 +1217,7 @@ void Item::calcPrice()
 	
 	value = (2+0.5*(1+0.1*value)*value)* mult;
 
-	value = std::min (value,100000.0f);
+	value = MathHelper::Min (value,100000.0f);
 	m_price += (int) value;
 }
 

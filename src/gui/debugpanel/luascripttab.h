@@ -1,7 +1,7 @@
 #ifndef LUASCRIPTTAB_H
 #define LUASCRIPTTAB_H
 
-#include <CEGUI/CEGUIWindow.h>
+#include <CEGUIWindow.h>
 #include "debugtab.h"
 
 class LuaScriptTab : public CEGUI::Window, public DebugTab

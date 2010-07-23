@@ -718,14 +718,14 @@ void Scene::createScene()
 		short dimx = region->getDimX();
 		short dimy = region->getDimY();
 		Ogre::Camera* minimap_camera=m_scene_manager->getCamera("minimap_camera");
-		DEBUGX("camera pos %i %i %i",dimx*100,std::max(dimx,dimy)*300,dimy*100);
-		minimap_camera->setPosition(Ogre::Vector3(dimx*100,std::max(dimx,dimy)*200,10+dimy*100));
+		DEBUGX("camera pos %i %i %i",dimx*100,MathHelper::Max(dimx,dimy)*300,dimy*100);
+		minimap_camera->setPosition(Ogre::Vector3(dimx*100,MathHelper::Max(dimx,dimy)*200,10+dimy*100));
 		minimap_camera->lookAt(Ogre::Vector3(dimx*100,0,dimy*100));
 #if (OGRE_VERSION >= ((1 << 16) | (6 << 8)))
 			// >= Ogre 1.6
-			minimap_camera->setOrthoWindow(std::max(dimx,dimy)*200, std::max(dimx,dimy)*200);
+			minimap_camera->setOrthoWindow(MathHelper::Max(dimx,dimy)*200, MathHelper::Max(dimx,dimy)*200);
 #else
-			minimap_camera->setNearClipDistance(std::max(dimx,dimy)*100);
+			minimap_camera->setNearClipDistance(MathHelper::Max(dimx,dimy)*100);
 #endif
 		Ogre::Resource* res= Ogre::TextureManager::getSingleton().createOrRetrieve ("minimap_tex",Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME).first.getPointer();
 		Ogre::Texture* texture = dynamic_cast<Ogre::Texture*>(res);

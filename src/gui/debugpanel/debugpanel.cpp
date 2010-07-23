@@ -76,6 +76,7 @@ void DebugPanel::update()
 bool DebugPanel::handleCloseWindow(const CEGUI::EventArgs& e)
 {
 	m_rootWindow->hide();
+	return true;
 }
 
 

@@ -1462,7 +1462,7 @@ void MainWindow::updateObjectInfo()
 				
 				
 				std::pair<float,float> rpos = m_scene->getProjection(di->getPosition());
-				itmlabel->setPosition(CEGUI::UVector2(CEGUI::UDim(std::max(0.0,rpos.first-0.03),0), CEGUI::UDim(std::max(0.0,rpos.second-0.05),0)));
+				itmlabel->setPosition(CEGUI::UVector2(CEGUI::UDim(MathHelper::Max(0.0,rpos.first-0.03),0), CEGUI::UDim(MathHelper::Max(0.0,rpos.second-0.05),0)));
 			}
 			else
 			{
@@ -1833,7 +1833,7 @@ void MainWindow::updateItemInfo()
 			label->setID(it->first);
 			
 			
-			label->setPosition(CEGUI::UVector2(CEGUI::UDim(std::max(0.0f,rpos.first+margin),0), CEGUI::UDim(std::max(0.0f,rpos.second),0)));
+			label->setPosition(CEGUI::UVector2(CEGUI::UDim(MathHelper::Max(0.0f,rpos.first+margin),0), CEGUI::UDim(MathHelper::Max(0.0f,rpos.second),0)));
 			
 			propold = label->getProperty("TextColours").c_str();
 			propnew = "tl:FFFFFFFF tr:FFFFFFFF bl:FFFFFFFF br:FFFFFFFF";
@@ -2348,7 +2348,7 @@ bool MainWindow::mouseMoved(const OIS::MouseEvent &evt) {
 		off = 12;
 	
 	
-	label->setPosition(CEGUI::UVector2(CEGUI::UDim(0,std::max(0,evt.state.X.abs-off)),CEGUI::UDim(0,std::max(0,evt.state.Y.abs- off))));
+	label->setPosition(CEGUI::UVector2(CEGUI::UDim(0,MathHelper::Max(0,evt.state.X.abs-off)),CEGUI::UDim(0,MathHelper::Max(0,evt.state.Y.abs- off))));
 	
 	
 	return m_cegui_system->injectMousePosition(evt.state.X.abs,evt.state.Y.abs);
@@ -2509,7 +2509,7 @@ bool MainWindow::keyPressed(const OIS::KeyEvent &evt) {
 		m_document->getGUIState()->m_shift_hold = true;
 	}
 	
-	if (not ret)
+	if (!ret)
 	{
 		ret = m_document->onKeyPress(evt.key);
 	}
@@ -2529,7 +2529,7 @@ bool MainWindow::keyReleased(const OIS::KeyEvent &evt)
 		m_document->getGUIState()->m_shift_hold = false;
 	}
 
-	if (not ret)
+	if (!ret)
 	{
 		ret = m_document->onKeyRelease(evt.key);
 	}

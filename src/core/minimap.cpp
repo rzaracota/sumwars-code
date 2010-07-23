@@ -17,10 +17,10 @@ void Minimap::update(Vector playerpos)
 	short sx = (short) (playerpos.m_x/4);
 	short sy = (short) (playerpos.m_y/4);
 	
-	short xmin = std::max(sx-4,0);
-	short ymin = std::max(sy-4,0);	
-	short xmax = std::min(sx+4,m_dimx-1);
-	short ymax = std::min(sy+4,m_dimy-1);
+	short xmin = MathHelper::Max(sx-4,0);
+	short ymin = MathHelper::Max(sy-4,0);	
+	short xmax = MathHelper::Min(sx+4,m_dimx-1);
+	short ymax = MathHelper::Min(sy+4,m_dimy-1);
 	
 	for (short x = xmin; x <= xmax; ++x)
 	{

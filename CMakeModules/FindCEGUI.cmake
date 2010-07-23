@@ -1,126 +1,103 @@
-# - Find CEGUI includes and library
+# Find CEGUI includes and library
 #
 # This module defines
-#  CEGUI_INCLUDE_DIRS
-#  CEGUI_LIBRARIES, the libraries to link against to use CEGUI.
-#  CEGUI_LIBRARY_DIRS, the location of the libraries
+#  CEGUI_INCLUDE_DIR
+#  CEGUI_LIBRARY, the library to link against to use CEGUI.
 #  CEGUI_FOUND, If false, do not try to use CEGUI
+#  CEGUI_VERSION, the version as string "x.y.z"
+#  CEGUILUA_LIBRARY, Script module library
+#  CEGUILUA_USE_INTERNAL_LIBRARY, True if CEGUILUA_LIBRARY was not defined here
 #
-# Copyright Â© 2007-2008, Matt Williams
+# Input:
+#  ENV{CEGUIDIR}, CEGUI path, optional
+#  FIND CEGUILUA_INTERNAL_SUPPORT, List of all CEGUILua version supported
+#                                  in the source repository
+#  CEGUILUA_USE_EXTERNAL_LIBRARY, Force finding of CEGUILua
+#
+# Created by Matt Williams to find OGRE libraries
+# Copyright © 2007, Matt Williams
+#
+# Modified by Nicolas Schlumberger to find CEGUI libraries
+# and make it run on the Tardis-Infrastucture of the ETH Zurich
+# Copyright 2007, Nicolas Schlumberger
 #
 # Redistribution and use is allowed according to the terms of the BSD license.
-# For details see the accompanying COPYING-CMAKE-SCRIPTS file.
+#
+# Several changes and additions by Fabian 'x3n' Landau
+# Lots of simplifications by Adrian Friedli and Reto Grieder
+# Version checking and CEGUILua finding by Reto Grieder
+#                 > www.orxonox.net <
 
-IF (CEGUI_LIBRARIES AND CEGUI_INCLUDE_DIRS)
-	SET(CEGUI_FIND_QUIETLY TRUE)
-ENDIF (CEGUI_LIBRARIES AND CEGUI_INCLUDE_DIRS)
+INCLUDE(DetermineVersion)
+INCLUDE(FindPackageHandleAdvancedArgs)
+INCLUDE(HandleLibraryTypes)
 
-#SET(OGRESDK $ENV{OGRE_HOME})
-#STRING(REGEX REPLACE "[\\]" "/" OGRESDK "${OGRESDK}")
-FILE(TO_CMAKE_PATH "$ENV{OGRE_HOME}" OGRESDK)
-SET(CEGUI_INCLUDE_SEARCH_DIRS
-	${INCLUDE_SEARCH_DIRS}
-	${CMAKE_LIBRARY_PATH}
-	${PROJECT_SOURCE_DIR}/Dependencies/CEGUI-0.7.1/cegui/include
-	/usr/include
-	/usr/local/include
-	/usr/include/CEGUI
-	/usr/local/include/CEGUI
-	/opt/include/CEGUI
-	/opt/CEGUI/include
-	$ENV{OGRE_HOME}/samples/CEGUI
-	$ENV{OGRE_HOME}/Dependencies/include
-	$ENV{OGRE_HOME}/Dependencies/include/CEGUI
-	CACHE STRING ""
+FIND_PATH(CEGUI_INCLUDE_DIR CEGUI.h
+  PATHS $ENV{CEGUIDIR}
+  PATH_SUFFIXES include cegui/include include/CEGUI CEGUI.framework/Headers
+)
+FIND_LIBRARY(CEGUI_LIBRARY_OPTIMIZED
+  NAMES CEGUIBase CEGUI
+  PATHS $ENV{CEGUIDIR}
+  PATH_SUFFIXES lib bin
+)
+FIND_LIBRARY(CEGUI_LIBRARY_DEBUG
+  NAMES
+    CEGUIBased CEGUIBase_d CEGUIBaseD CEGUIBase_D
+    CEGUId CEGUI_d CEGUID CEGUI_D
+  PATHS $ENV{CEGUIDIR}
+  PATH_SUFFIXES lib bin
 )
 
-SET(CEGUI_LIBRARY_SEARCH_DIRS
-	${LIBRARY_SEARCH_DIRS}
-	${CMAKE_LIBRARY_PATH}
-	${PROJECT_SOURCE_DIR}/Dependencies/CEGUI-0.7.1/lib
-	/usr/lib
-	/usr/lib64
-	/usr/local/lib
-	/usr/local/lib64
-	/opt/lib
-	/opt/lib64
-	/opt/CEGUI/lib
-	/opt/CEGUI/lib64
-	$ENV{OGRE_HOME}/lib
-	$ENV{OGRE_HOME}/lib64
-	CACHE STRING ""
+# Inspect CEGUIVersion.h for the version number
+DETERMINE_VERSION(CEGUI ${CEGUI_INCLUDE_DIR}/CEGUIVersion.h)
+
+# Handle the REQUIRED argument and set CEGUI_FOUND
+# Also checks the version requirements if given
+FIND_PACKAGE_HANDLE_ADVANCED_ARGS(CEGUI DEFAULT_MSG "${CEGUI_VERSION}"
+  CEGUI_LIBRARY_OPTIMIZED
+  CEGUI_INCLUDE_DIR
 )
 
-IF (WIN32) #Windows
-	MESSAGE(STATUS "Looking for CEGUI")
-	FIND_PATH(CEGUI_INCLUDE_DIRS CEGUI.h ${CEGUI_INCLUDE_SEARCH_DIRS})
-	FIND_LIBRARY(CEGUI_LIBRARIES debug CEGUIBase_d optimized CEGUIBase PATHS ${CEGUI_LIBRARY_SEARCH_DIRS})
-	
-# 	SET(OGRESOURCE $ENV{OGRE_NEW})
-# 	IF (OGRESDK)
-# 		MESSAGE(STATUS "Using CEGUI in OGRE SDK")
-# 		SET(OGRESDK $ENV{OGRE_HOME})
-# 		STRING(REGEX REPLACE "[\\]" "/" OGRESDK "${OGRESDK}" )
-# 		SET(CEGUI_INCLUDE_DIRS ${OGRESDK}/include/CEGUI)
-# 		SET(CEGUI_LIBRARY_DIRS ${OGRESDK}/lib)
-# 		SET(CEGUI_LIBRARIES debug CEGUIBase_d optimized CEGUIBase)
-# 	ELSEIF (OGRESOURCE)
-# 		MESSAGE(STATUS "Using CEGUI in OGRE dependencies")
-# 		SET(CEGUI_INCLUDE_DIRS C:/ogrenew/Dependencies/include C:/ogrenew/Dependencies/include/CEGUI)
-# 		SET(CEGUI_LIBRARY_DIRS C:/ogrenew/Dependencies/lib/Release C:/ogrenew/Dependencies/lib/Debug)
-# 		SET(CEGUI_LIBRARIES debug CEGUIBase_d optimized CEGUIBase)
-# 	ELSE (OGRESDK)
-# 		IF (NOT DEPENDENCIES_PATH)
-# 			MESSAGE(STATUS "Please set DEPENDENCIES_PATH (the directory containing 'common' and 'dependencies')")
-# 		ELSE (NOT DEPENDENCIES_PATH)
-# 			SET(CEGUI_INCLUDE_DIRS ${DEPENDENCIES_PATH}/dependencies/Ogre/CEGUI)
-# 			SET(CEGUI_LIBRARIES optimized CEGUIBase debug CEGUIBase_d)
-# 			SET(CEGUI_LIBRARY_DIRS optimized ${DEPENDENCIES_PATH}/dependencies/lib/release debug ${DEPENDENCIES_PATH}/dependencies/lib/debug)
-# 		ENDIF (NOT DEPENDENCIES_PATH)
-# 	ENDIF (OGRESDK)
-ELSE (WIN32) #Unix
-	SET(CEGUI_INCLUDE_DIRS ${CEGUI_INCLUDE_DIRSS})
-	SET(CEGUI_LIBRARY_DIRS ${CEGUI_LIBDIR})
-	SET(CEGUI_LIBRARIES ${CEGUI_LIBRARIES})
+# Collect optimized and debug libraries
+HANDLE_LIBRARY_TYPES(CEGUI)
 
-	CMAKE_MINIMUM_REQUIRED(VERSION 2.4.7 FATAL_ERROR)
-	FIND_PACKAGE(PkgConfig)
-	IF(PKG_CONFIG_FOUND)
-		PKG_SEARCH_MODULE(CEGUI CEGUI)
-		SET(CEGUI_INCLUDE_DIRS ${CEGUI_INCLUDE_DIRS})
-		SET(CEGUI_LIBRARY_DIRS ${CEGUI_LIBDIR})
-		SET(CEGUI_LIBRARIES ${CEGUI_LIBRARIES} CACHE STRING "")
-	ENDIF(PKG_CONFIG_FOUND)
-	IF(NOT CEGUI_FOUND) #If PkgConfig couldn't find OGRE...
-		IF (NOT CEGUI_FIND_QUIETLY)
-			MESSAGE(STATUS " Manually searching for CEGUI")
-		ENDIF (NOT CEGUI_FIND_QUIETLY)
-		FIND_PATH(CEGUI_INCLUDE_DIRS Ogre.h ${CEGUI_INCLUDE_SEARCH_DIRS})
-		FIND_LIBRARY(CEGUI_LIBRARIES CEGUIBase PATHS ${CEGUI_LIBRARY_SEARCH_DIRS})
-	ENDIF(NOT CEGUI_FOUND)
-ENDIF (WIN32)
+MARK_AS_ADVANCED(
+  CEGUI_INCLUDE_DIR
+  CEGUI_LIBRARY_OPTIMIZED
+  CEGUI_LIBRARY_DEBUG
+)
 
-#Do some preparation
-SEPARATE_ARGUMENTS(CEGUI_INCLUDE_DIRS)
-SEPARATE_ARGUMENTS(CEGUI_LIBRARIES)
+LIST(FIND CEGUILUA_INTERNAL_SUPPORT "${CEGUI_VERSION}" _find_result)
+IF(CEGUILUA_USE_EXTERNAL_LIBRARY OR _find_result EQUAL -1)
+  # Also try to find the CEGUILua libraries.
+  # There would already be libraries in src/ for versions 0.5 and 0.6
+  FIND_LIBRARY(CEGUILUA_LIBRARY_OPTIMIZED
+    NAMES CEGUILuaScriptModule
+    PATHS $ENV{CEGUIDIR}
+    PATH_SUFFIXES lib bin
+  )
+  FIND_LIBRARY(CEGUILUA_LIBRARY_DEBUG
+    NAMES CEGUILuaScriptModuled CEGUILuaScriptModule_d
+    PATHS $ENV{CEGUIDIR}
+    PATH_SUFFIXES lib bin
+  )
 
-SET(CEGUI_INCLUDE_DIRS ${CEGUI_INCLUDE_DIRS})
-SET(CEGUI_LIBRARIES ${CEGUI_LIBRARIES})
-SET(CEGUI_LIBRARY_DIRS ${CEGUI_LIBRARY_DIRS})
+  SET(CEGUILua_FIND_REQUIRED ${CEGUI_FIND_REQUIRED})
+  # Handle the REQUIRED argument and set CEGUILUA_FOUND
+  FIND_PACKAGE_HANDLE_STANDARD_ARGS(CEGUILua DEFAULT_MSG
+    CEGUILUA_LIBRARY_OPTIMIZED
+  )
 
-MARK_AS_ADVANCED(CEGUI_INCLUDE_DIRS CEGUI_LIBRARIES CEGUI_LIBRARY_DIRS)
+  # Collect optimized and debug libraries
+  HANDLE_LIBRARY_TYPES(CEGUILUA)
 
-IF (CEGUI_INCLUDE_DIRS AND CEGUI_LIBRARIES)
-	SET(CEGUI_FOUND TRUE)
-ENDIF (CEGUI_INCLUDE_DIRS AND CEGUI_LIBRARIES)
+  MARK_AS_ADVANCED(
+    CEGUILUA_LIBRARY_OPTIMIZED
+    CEGUILUA_LIBRARY_DEBUG
+  )
 
-IF (CEGUI_FOUND)
-	IF (NOT CEGUI_FIND_QUIETLY)
-		MESSAGE(STATUS "  libraries : ${CEGUI_LIBRARIES} from ${CEGUI_LIBRARY_DIRS}")
-		MESSAGE(STATUS "  includes  : ${CEGUI_INCLUDE_DIRS}")
-	ENDIF (NOT CEGUI_FIND_QUIETLY)
-ELSE (CEGUI_FOUND)
-	IF (CEGUI_FIND_REQUIRED)
-		MESSAGE(FATAL_ERROR "Could not find CEGUI. Make sure you have the CEGUI development headers are installed. Otherwise, try setting LIBRARY_SEARCH_DIRS and INCLUDE_SEARCH_DIRS to the place CEGUI was installed with -DLIBRARY_SEARCH_DIRS=<path/to/lib> -DINCLUDE_SEARCH_DIRS=<path/to/include>")
-	ENDIF (CEGUI_FIND_REQUIRED)
-ENDIF (CEGUI_FOUND)
+ELSE(CEGUILUA_USE_EXTERNAL_LIBRARY OR _find_result EQUAL -1)
+  SET(CEGUILUA_USE_INTERNAL_LIBRARY TRUE)
+ENDIF(CEGUILUA_USE_EXTERNAL_LIBRARY OR _find_result EQUAL -1)
+

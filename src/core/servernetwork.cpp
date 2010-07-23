@@ -45,7 +45,7 @@ ServerNetwork::ServerNetwork(int max_slots)
 
 NetStatus ServerNetwork::init( int auth_port )
 {
-	m_peer = RakNetworkFactory::RakNetworkFactory::GetRakServerInterface();
+	m_peer = RakNetworkFactory::GetRakServerInterface();
 	m_peer->StartOccasionalPing ();
 	m_peer->Start(m_max_slots /* max. Anzahl Verbindungen*/,0, 10/*sleep time*/, auth_port);
 	DEBUG("listening on port %i",auth_port);

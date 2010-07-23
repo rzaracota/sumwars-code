@@ -133,6 +133,7 @@ typedef std::string MonsterGroupName;
  */
 class MonsterGroup
 {
+public:
 	/**
 	 * \struct SubGroup
 	 * \brief Untergruppe der Monster bei denen alle Monster den selben Typ haben
@@ -158,10 +159,6 @@ class MonsterGroup
 		int m_number;
 	};
 	
-	
-	
-	public:
-		
 		/**
 		 * \fn void addMonsterGroup(GameObject::Subtype subtype, int number =1, float prob = 1.0)
 		 * \brief Fuegt der Monstergruppe eine Subgruppe hinzu

@@ -43,8 +43,8 @@ void PlayerCamera::moveTo(float distance, float theta, float phi, float time)
 //    min_theta = 5;
 
 
-	m_goal_distance = std::max(std::min(distance,max_distance),5.0f);
-	m_goal_theta = std::max(std::min(theta,90.0f),min_theta);
+	m_goal_distance = MathHelper::Max(MathHelper::Min(distance,max_distance),5.0f);
+	m_goal_theta = MathHelper::Max(MathHelper::Min(theta,90.0f),min_theta);
 	m_goal_phi = fmod(phi+360,360);
 
 	// Phi so anpassen, dass jeweils der kuerzere Teilkreis genutzt wird
@@ -1386,7 +1386,7 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 
 			// Action entsprechend der Verzoegerung schneller ausfuehren
 			// aber maximal doppelt so schnell
-			float mult = std::max(getAction()->m_time-delay, getAction()->m_time/2)/getAction()->m_time;
+			float mult = MathHelper::Max(getAction()->m_time-delay, getAction()->m_time/2)/getAction()->m_time;
 			DEBUGX("delay %f mult %f",delay,mult);
 			if (getAction()->m_type == "walk")
 			{

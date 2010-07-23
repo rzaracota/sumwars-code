@@ -236,7 +236,7 @@ bool WorldObject::setValue(std::string valname)
 			}
 			else  if (layer =="dead")
 			{
-				newlayer = WorldObject::WorldObject::LAYER_DEAD;
+				newlayer = WorldObject::LAYER_DEAD;
 			}
 			else  if (layer == "normal")
 			{

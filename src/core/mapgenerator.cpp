@@ -84,8 +84,8 @@ void TemplateMap::recalcMapElement(int i,int j)
 	{
 		// Minimum aus den Felden darunter, daneben, diagonal darunter; plus 1
 		val = m_template_map[i+1][j];
-		val = std::min(val, m_template_map[i][j+1]);
-		val = std::min(val, m_template_map[i+1][j+1]);
+		val = MathHelper::Min(val, m_template_map[i][j+1]);
+		val = MathHelper::Min(val, m_template_map[i+1][j+1]);
 		val ++;
 		
 		if (val == 0)
@@ -152,7 +152,7 @@ bool TemplateMap::getTemplatePlace(Shape* shape, Vector & place)
 	int ex = int(ceil(ext.m_x/2));
 	int ey = int(ceil(ext.m_y/2));
 	
-	int size = std::max(ex,ey);
+	int size = MathHelper::Max(ex,ey);
 	DEBUGX("template size %i %i angle %f extent %f %f",ex,ey,shape->m_angle,shape->m_extent.m_x, shape->m_extent.m_y);
 	std::map< int, std::vector< std::pair<int, int> > >::iterator mt, mt2;
 	std::vector<int>::iterator st;
@@ -224,8 +224,8 @@ bool TemplateMap::getTemplatePlace(Shape* shape, Vector & place)
 
 			// dieses Hindernis verhindert das platzieren der Templates in seiner Umgebung
 			// in dieser Umgebung werden die Zahlen fuer den minimalen Abstand zum naechsten Hindernis aktualisiert
-			imin = std::max(0,obi - size+1);
-			jmin = std::max(0,obj - size+1);
+			imin = MathHelper::Max(0,obi - size+1);
+			jmin = MathHelper::Max(0,obj - size+1);
 			imax = obi;
 			jmax = obj;
 
@@ -316,7 +316,7 @@ Region* MapGenerator::createRegion(RegionData* rdata)
 		}
 		
 		// Umgebungskarte generieren
-		createPerlinNoise(mdata.m_region->getHeight(), rdata->m_dimx, rdata->m_dimy,std::min(rdata->m_dimx,rdata->m_dimy)/4 , 0.4,false);
+		createPerlinNoise(mdata.m_region->getHeight(), rdata->m_dimx, rdata->m_dimy,MathHelper::Min(rdata->m_dimx,rdata->m_dimy)/4 , 0.4,false);
 
 		if (rdata->m_region_template =="")
 		{
@@ -1070,9 +1070,9 @@ void MapGenerator::createExits(MapData* mdata, RegionData* rdata)
 			pos = mdata->m_region->getLocation(it->m_exit_name);
 			int cx = int(pos.m_x/8);
 			int cy = int(pos.m_y/8);
-			for (int i=std::max(0,cx-2); i<std::min(dimx,cx+2); i++)
+			for (int i=MathHelper::Max(0,cx-2); i<MathHelper::Min(dimx,cx+2); i++)
 			{
-				for (int j=std::max(0,cy-2); j<std::min(dimy,cy+2); j++)
+				for (int j=MathHelper::Max(0,cy-2); j<MathHelper::Min(dimy,cy+2); j++)
 				{
 					if (*(mdata->m_base_map->ind(i,j))==1)
 					{
@@ -1099,9 +1099,9 @@ void MapGenerator::createExits(MapData* mdata, RegionData* rdata)
 		{
 			int cx = int(pos.m_x/8);
 			int cy = int(pos.m_y/8);
-			for (int i=std::max(0,cx-2); i<std::min(dimx,cx+2); i++)
+			for (int i=MathHelper::Max(0,cx-2); i<MathHelper::Min(dimx,cx+2); i++)
 			{
-				for (int j=std::max(0,cy-2); j<std::min(dimy,cy+2); j++)
+				for (int j=MathHelper::Max(0,cy-2); j<MathHelper::Min(dimy,cy+2); j++)
 				{
 					if (*(mdata->m_base_map->ind(i,j))==1)
 					{
@@ -1141,14 +1141,14 @@ void MapGenerator::createPerlinNoise(Matrix2d<float> *data, int dimx, int dimy,i
 {
 	Matrix2d<float>* tmp= new Matrix2d<float>(dimx+1, dimy+1);
 	tmp->clear();
-	float* weight = new float[std::min(dimx,dimy)];
+	float* weight = new float[MathHelper::Min(dimx,dimy)];
 	float ampl =1;
 	int dx,dy;
 	float invdist;
 	
 	if (startfreq > dimx || startfreq > dimy)
 	{
-		startfreq = std::min(dimx,dimy);
+		startfreq = MathHelper::Min(dimx,dimy);
 	}
 	
 	DEBUGX("Perlin noise dimx %i dimy %i",dimx,dimy);
@@ -1287,13 +1287,13 @@ void MapGenerator::createPerlinNoise(Matrix2d<float> *data, int dimx, int dimy,i
 	// Raender anlegen
 	if (bounds)
 	{
-		float bnd = std::min(5.0f, std::min(dimx/3.0f,dimy/3.0f));
+		float bnd = MathHelper::Min(5.0f, MathHelper::Min(dimx/3.0f,dimy/3.0f));
 		float dist;
 		for (int i=0;i<dimx;i++)
 		{
 			for (int j=0;j<dimy;j++)
 			{
-				dist = std::min(std::min(i,dimx-i-1),std::min(j,dimy-j-1));
+				dist = MathHelper::Min(MathHelper::Min(i,dimx-i-1),MathHelper::Min(j,dimy-j-1));
 				if (dist<bnd)
 				{
 					*(data->ind(i,j)) = *(data->ind(i,j))*(dist)/bnd + (bnd-dist)/bnd;

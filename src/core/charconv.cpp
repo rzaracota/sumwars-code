@@ -82,7 +82,7 @@ void CharConv::toBuffer(std::string s, unsigned int size)
 	{
 		char * data = new char[size];
 		memset(data,0,size);
-		memcpy(data,s.data(), std::min(size,(unsigned int) s.size()));
+		memcpy(data,s.data(), MathHelper::Min(size,(unsigned int) s.size()));
 		toBuffer(data, size);
 		delete data;
 	}

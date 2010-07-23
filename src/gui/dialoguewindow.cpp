@@ -615,7 +615,7 @@ void DialogueWindow::updateSpeechBubbles()
 			lines = CEGUIUtility::getFormattedLineCount(ctext,rect, CEGUIUtility::WordWrapLeftAligned, font);
 			elemheight = lines * lineheight;
 		}
-		width = std::max(width,elemwidth);
+		width = MathHelper::Max(width,elemwidth);
 		
 		if (label->getText() != ctext)
 		{
@@ -671,7 +671,7 @@ void DialogueWindow::updateSpeechBubbles()
 				lines = CEGUIUtility::getFormattedLineCount(cstring,rect, CEGUIUtility::WordWrapLeftAligned, font);
 				elemheight = lines * lineheight;
 			}
-			width = std::max(width,elemwidth);
+			width = MathHelper::Max(width,elemwidth);
 
 
 			if (label->getText() != cstring)

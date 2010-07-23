@@ -274,4 +274,5 @@ bool SavegameList::onDeleteCharAbortClicked(const CEGUI::EventArgs& evt)
 bool SavegameList::onSavegameDoubleClick(const CEGUI::EventArgs& evt)
 {
 	onSavegameSelected(evt);
+	return true;
 }

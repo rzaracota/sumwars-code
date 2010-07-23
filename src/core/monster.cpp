@@ -688,7 +688,7 @@ void Monster::evalCommand(Action::ActionType act)
 
 			if (aci->m_target_type == Action::MELEE || ranged_move)
 			{
-				value *= 3/(3+std::max(0.0f,dist - getBaseAttr()->m_attack_range));
+				value *= 3/(3+MathHelper::Max(0.0f,dist - getBaseAttr()->m_attack_range));
 			}
 
 			DEBUGX("command %s at %i rating value %f",act.c_str(),cgoal->getId(),value);

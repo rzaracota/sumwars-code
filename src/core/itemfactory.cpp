@@ -96,7 +96,7 @@ void ItemFactory::createMagicMods(Item* item, float* modchance, float magic_powe
 	// Modifikationen des Items auswuerfeln
 	DEBUGX("mods auswuerfeln");
 
-	magic_power = std::min(magic_power, max_enchant*4);
+	magic_power = MathHelper::Min(magic_power, max_enchant*4);
 	item->m_magic_power =0;
 	
 	// bisher zugeteilte Staerke der Modifikation
@@ -140,7 +140,7 @@ void ItemFactory::createMagicMods(Item* item, float* modchance, float magic_powe
 		}
 		// Staerke auswuerfeln
 		mp = Random::randrangef(min_enchant,max_enchant);
-		mp = std::min(mp, magic_power);
+		mp = MathHelper::Min(mp, magic_power);
 		item->m_magic_power += mp;
 		mpbase = mp;
 		
@@ -158,8 +158,8 @@ void ItemFactory::createMagicMods(Item* item, float* modchance, float magic_powe
 
 		num_mods++;
 
-		levelreq = std::max(levelreq,(int) (mpbase*0.09-5));
-		levelreq = std::min(80,levelreq);
+		levelreq = MathHelper::Max(levelreq,(int) (mpbase*0.09-5));
+		levelreq = MathHelper::Min(80,levelreq);
 
 		dmgavg = mp*0.06;
 		
@@ -288,7 +288,7 @@ void ItemFactory::createMagicMods(Item* item, float* modchance, float magic_powe
 		modprob[mod]=0;
 	}
 
-	item->m_level_req = std::max(item->m_level_req,(char) levelreq);
+	item->m_level_req = MathHelper::Max(item->m_level_req,(char) levelreq);
 	DEBUGX("level req %i",item->m_level_req);
 }
 
@@ -410,7 +410,7 @@ Item* ItemFactory::createItem(DropSlot &slot, float factor )
 				continue;
 
 			// Testen ob Level ausreicht
-			if (fabs(i->second.m_level) > slot.m_max_level || (i->second.m_level>0 && i->second.m_level <slot.m_min_level))
+			if (fabs(float(i->second.m_level)) > slot.m_max_level || (i->second.m_level>0 && i->second.m_level <slot.m_min_level))
 				continue;
 
 			// Wahrscheinlichkeit fuer Drop berechnen

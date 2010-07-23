@@ -1,11 +1,6 @@
 #ifndef CHARCONV_H
 #define CHARCONV_H
-/*
-#include "RakNetTypes.h"
-#include "raknet/BitStream.h"
-#include "raknet/GetTime.h"
-#include "raknet/MessageIdentifiers.h"
-*/
+
 #include "PacketEnumerations.h"
 #include "RakNetworkFactory.h"
 #include "RakPeerInterface.h"
@@ -17,6 +12,7 @@
 #include <string>
 #include <cstring>
 #include <iostream>
+#include "mathhelper.h"
 
 /**
  * \class CharConv
@@ -213,7 +209,7 @@ class CharConv
 	 */
 	float getDelay()
 	{
-		return std::max(0.0f,static_cast<float>(RakNet::GetTime())-static_cast<float>(m_timestamp));
+		return MathHelper::Max(0.0f,static_cast<float>(RakNet::GetTime())-static_cast<float>(m_timestamp));
 	}
 
 	/**

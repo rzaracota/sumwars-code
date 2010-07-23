@@ -386,7 +386,7 @@ bool GameObject::setValue(std::string valname)
 		}
 		else  if (layer =="dead")
 		{
-			setLayer(WorldObject::WorldObject::LAYER_DEAD);
+			setLayer(WorldObject::LAYER_DEAD);
 		}
 		else  if (layer == "normal")
 		{

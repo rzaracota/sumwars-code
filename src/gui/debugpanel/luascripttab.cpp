@@ -133,13 +133,14 @@ bool LuaScriptTab::handleOpen(const CEGUI::EventArgs& e)
 		m_filePathEditBox->setText("File failed to load");
 		WindowManager::getSingleton().destroyWindow(win);
 	}
-
+	return true;
 }
 
 bool LuaScriptTab::handleSave(const CEGUI::EventArgs& e)
 {
 	TextFileEditWindow* win = static_cast<TextFileEditWindow*>(m_fileTabControl->getTabContentsAtIndex(m_fileTabControl->getSelectedTabIndex()));
 	win->save();
+	return true;
 }
 
 bool LuaScriptTab::handleClose(const CEGUI::EventArgs& e)
@@ -148,12 +149,14 @@ bool LuaScriptTab::handleClose(const CEGUI::EventArgs& e)
 	win->close();
 	m_fileTabControl->removeTab(m_fileTabControl->getSelectedTabIndex());
 	WindowManager::getSingleton().destroyWindow(win);
+	return true;
 }
 
 bool LuaScriptTab::handleTabChanged(const CEGUI::EventArgs& e)
 {
 	TextFileEditWindow* win = static_cast<TextFileEditWindow*>(m_fileTabControl->getTabContentsAtIndex(m_fileTabControl->getSelectedTabIndex()));
 	m_filePathEditBox->setText(win->getFilepath());
+	return true;
 }
 
 

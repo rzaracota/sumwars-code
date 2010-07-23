@@ -1,7 +1,12 @@
 #ifndef SOUND_H
 #define SOUND_H
 
-#include <AL/al.h>
+#ifdef WIN32
+	#include <al.h>
+#else
+	#include <AL/al.h>
+#endif
+
 #include <AL/alut.h>
 
 #include <stdlib.h>

@@ -163,6 +163,8 @@ bool Options::readFromFile(const std::string& filename)
 		setToDefaultOptions();
 		return false;
 	}
+
+	return true;
 }
 
 bool Options::writeToFile(const std::string& filename)

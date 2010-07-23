@@ -6,7 +6,7 @@
 #include <queue>
 #include "debug.h"
 #include "charconv.h"
-#include <unistd.h>
+
 #ifdef WIN32
 #include <windows.h>
 #endif

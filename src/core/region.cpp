@@ -716,10 +716,10 @@ bool Region::getObjectsInShape( Shape* shape,  WorldObjectList* result,short lay
 		int ymax = (int) floor(0.25*(d1.m_y+4));
 		// Pruefen ob die Suchanfrage nicht aus der Region herauslaeuft
 		bool ret = false;
-		int is = std::max (xmin,0);
-		int ie = std::min(xmax,m_dimx-1);
-		int js = std::max(ymin,0);
-		int je = std::min(ymax,m_dimy-1);
+		int is = MathHelper::Max (xmin,0);
+		int ie = MathHelper::Min(xmax,m_dimx-1);
+		int js = MathHelper::Max(ymin,0);
+		int je = MathHelper::Min(ymax,m_dimy-1);
 
 		DEBUGX("searching square (%i %i) (%i %i)",is,ie,js,je);
 
@@ -815,10 +815,10 @@ void Region::getObjectsOnLine(Line& line,  WorldObjectList* result,short layer, 
 {
 	Gridunit* gu=0;
 
-	int xmin = (short) floor(0.25*(std::min(line.m_start.m_x,line.m_end.m_x)-4));
-	int ymin = (short) floor(0.25*(std::min(line.m_start.m_y,line.m_end.m_y)-4));
-	int xmax = (short) floor(0.25*(std::max(line.m_start.m_x,line.m_end.m_x)+4));
-	int ymax = (short) floor(0.25*(std::max(line.m_start.m_y,line.m_end.m_y)+4));
+	int xmin = (short) floor(0.25*(MathHelper::Min(line.m_start.m_x,line.m_end.m_x)-4));
+	int ymin = (short) floor(0.25*(MathHelper::Min(line.m_start.m_y,line.m_end.m_y)-4));
+	int xmax = (short) floor(0.25*(MathHelper::Max(line.m_start.m_x,line.m_end.m_x)+4));
+	int ymax = (short) floor(0.25*(MathHelper::Max(line.m_start.m_y,line.m_end.m_y)+4));
 	int i,j;
 	float d;
 
@@ -827,9 +827,9 @@ void Region::getObjectsOnLine(Line& line,  WorldObjectList* result,short layer, 
 	dir.normalize();
 	Vector p;
 
-	for (i = std::max (xmin,0);i<=std::min(xmax,m_dimx-1);i++)
+	for (i = MathHelper::Max (xmin,0);i<=MathHelper::Min(xmax,m_dimx-1);i++)
 	{
-		for (j=std::max(ymin,0);j<=std::min(ymax,m_dimy-1);j++)
+		for (j=MathHelper::Max(ymin,0);j<=MathHelper::Min(ymax,m_dimy-1);j++)
 		{
 			DEBUGX("searching in Grid Tile %i %i",i,j);
 

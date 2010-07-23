@@ -19,7 +19,7 @@ extern "C"
 
 class Region;
 class Dialogue;
-class Damage;
+struct Damage;
 struct CreatureBaseAttrMod;
 struct CreatureDynAttrMod;
 struct Item;

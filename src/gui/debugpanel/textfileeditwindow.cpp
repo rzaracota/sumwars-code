@@ -118,6 +118,8 @@ bool TextFileEditWindow::handleTextChanged(const CEGUI::EventArgs& e)
 	
 	if(s.find(" *") == s.npos)
 		setText(s + " *");
+
+	return true;
 }
 
 bool TextFileEditWindow::handleCharacterKey(const CEGUI::EventArgs& ee)
@@ -136,6 +138,8 @@ bool TextFileEditWindow::handleCharacterKey(const CEGUI::EventArgs& ee)
 		m_spaceCounter += " ";
 	else
 		m_spaceCounter = "";
+
+	return true;
 }
 
 
