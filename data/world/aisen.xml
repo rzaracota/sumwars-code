@@ -123,6 +123,10 @@
 		
 		<Settings dimx="48" dimy="48" area_percent="0.3" complexity="0.3" granularity="4"  ground="cave_ground"/>
 		
+		<Music>
+			<Track source="Dark_Exploration.ogg" />
+		</Music>
+		
 		<ExitDirections north="true" south="true" west="false" east="false" />
 		<WorldPosition world_x="0.62" world_y ="0.61" waypoint="true"/>
 		
@@ -158,6 +162,10 @@
 		
 		<Settings dimx="56" dimy="56" area_percent="0.3" complexity="0.3" granularity="4"  ground="cave_ground"/>
 		<WorldPosition world_x="0.62" world_y ="0.61" waypoint="true"/>
+		
+		<Music>
+			<Track source="Dark_Exploration.ogg" />
+		</Music>
 		
 		<ExitDirections north="true" south="false" west="false" east="false" />
 		
@@ -270,6 +278,10 @@
 		
 		<Settings dimx="42" dimy="42" area_percent="0.36" complexity="0.4" granularity="6"  ground="grass1"/>
 		<WorldPosition world_x="0.64" world_y ="0.59"/>
+		
+		<Music>
+			<Track source="Dark_Exploration.ogg" />
+		</Music>
 		
 		<ExitDirections north="false" south="false" west="true" east="false" />
 		
@@ -540,6 +552,10 @@
 		
 		<Settings dimx="36" dimy="36" area_percent="0.4" complexity="0.4" granularity="6"  ground="grass1"/>
 		<WorldPosition world_x="0.67" world_y ="0.51"/>
+		
+		<Music>
+			<Track source="Dark_Exploration.ogg" />
+		</Music>
 		
 		<ExitDirections north="false" south="false" west="false" east="true" />
 		
