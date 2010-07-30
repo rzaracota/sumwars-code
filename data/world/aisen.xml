@@ -9,7 +9,7 @@
 		
 		<Settings dimx="46" dimy="46" area_percent="0.3" complexity="0.4" granularity="6"  ground="grass1"/>
 		
-		<WorldPosition world_x="0.62" world_y ="0.63"/>
+		<WorldPosition world_x="0.61" world_y ="0.63"/>
 		
 		<ExitDirections north="true" south="true" west="false" east="false" />
 		
@@ -50,7 +50,7 @@
 		<DirectionalLight red="0.3" green="0.3" blue="0.3" />
 		
 		<Settings dimx="48" dimy="48" area_percent="0.3" complexity="0.4" granularity="6"  ground="grass1" />
-		<WorldPosition world_x="0.61" world_y ="0.61" waypoint="true"/>
+		<WorldPosition world_x="0.60" world_y ="0.61" waypoint="true"/>
 		<ExitDirections north="false" south="true" west="false" east="true" />
 		
 		<Exits>
@@ -94,7 +94,7 @@
 		
 		<Settings dimx="16" dimy="32" region_template="maylonsGraveEntry"  ground="council_ground"/>
 		
-		<WorldPosition world_x="0.62" world_y ="0.61" waypoint="true"/>
+		<WorldPosition world_x="0.61" world_y ="0.61" waypoint="true"/>
 		<ExitDirections north="true" south="true" west="false" east="false" />
 		
 		<SpawnGroups>
@@ -128,7 +128,7 @@
 		</Music>
 		
 		<ExitDirections north="true" south="true" west="false" east="false" />
-		<WorldPosition world_x="0.62" world_y ="0.61" waypoint="true"/>
+		<WorldPosition world_x="0.61" world_y ="0.61" waypoint="true"/>
 		
 		<ObjectGroups>
 			<ObjectGroup object_group="cryptShrine" priority="2" number="5" probability="1"/>
@@ -161,7 +161,7 @@
 		<DirectionalLight red="0.0" green="0.0" blue="0.0" />
 		
 		<Settings dimx="56" dimy="56" area_percent="0.3" complexity="0.3" granularity="4"  ground="cave_ground"/>
-		<WorldPosition world_x="0.62" world_y ="0.61" waypoint="true"/>
+		<WorldPosition world_x="0.61" world_y ="0.61" waypoint="true"/>
 		
 		<Music>
 			<Track source="Dark_Exploration.ogg" />
@@ -200,7 +200,7 @@
 		<DirectionalLight red="0.3" green="0.3" blue="0.3" />
 		
 		<Settings dimx="48" dimy="48" area_percent="0.4" complexity="0.3" granularity="6"  ground="grass1"/>
-		<WorldPosition world_x="0.62" world_y ="0.6"/>
+		<WorldPosition world_x="0.61" world_y ="0.6"/>
 
 		<ExitDirections north="true" south="false" west="true" east="false" />
 		
@@ -236,7 +236,7 @@
 		<DirectionalLight red="0.3" green="0.3" blue="0.3" />
 		
 		<Settings dimx="48" dimy="48" area_percent="0.5" complexity="0.3" granularity="8"  ground="grass1"/>
-		<WorldPosition world_x="0.62" world_y ="0.59" waypoint="true"/>
+		<WorldPosition world_x="0.61" world_y ="0.59" waypoint="true"/>
 		
 		<ExitDirections north="true" south="true" west="false" east="true" />
 		
@@ -277,7 +277,7 @@
 		<DirectionalLight red="0.3" green="0.3" blue="0.3" />
 		
 		<Settings dimx="42" dimy="42" area_percent="0.36" complexity="0.4" granularity="6"  ground="grass1"/>
-		<WorldPosition world_x="0.64" world_y ="0.59"/>
+		<WorldPosition world_x="0.63" world_y ="0.59"/>
 		
 		<Music>
 			<Track source="Dark_Exploration.ogg" />
@@ -326,7 +326,7 @@
 		<DirectionalLight red="0.3" green="0.3" blue="0.3" />
 		
 		<Settings dimx="48" dimy="48" area_percent="0.4" complexity="0.2" granularity="8"  ground="grass1"/>
-		<WorldPosition world_x="0.62" world_y ="0.58"/>
+		<WorldPosition world_x="0.61" world_y ="0.58"/>
 		
 		<ExitDirections north="true" south="true" west="false" east="false" />
 		
@@ -369,7 +369,7 @@
 		
 		<Settings dimx="23" dimy="23" region_template="joringsbridge"  ground="grass1"/>
 		
-		<WorldPosition world_x="0.62" world_y ="0.57" waypoint="true" />
+		<WorldPosition world_x="0.61" world_y ="0.55" waypoint="true" />
 		
 		<ReviveLocation  location="WaypointLoc" />
 		
@@ -430,7 +430,7 @@
 		<DirectionalLight red="0.3" green="0.3" blue="0.3" />
 		
 		<Settings dimx="48" dimy="48" area_percent="0.4" complexity="0.3" granularity="6"  ground="grass1"/>
-		<WorldPosition world_x="0.59" world_y ="0.53"/>
+		<WorldPosition world_x="0.58" world_y ="0.53"/>
 
 		<ExitDirections north="false" south="false" west="false" east="true" />
 		
@@ -475,7 +475,7 @@
 		<DirectionalLight red="0.3" green="0.3" blue="0.3" />
 		
 		<Settings dimx="48" dimy="48" area_percent="0.3" complexity="0.5" granularity="6"  ground="grass1"/>
-		<WorldPosition world_x="0.66" world_y ="0.53"/>
+		<WorldPosition world_x="0.65" world_y ="0.53"/>
 		<ExitDirections north="false" south="true" west="true" east="false" />
 		
 		<Exits>
@@ -509,7 +509,7 @@
 		<DirectionalLight red="0.3" green="0.3" blue="0.3" />
 		
 		<Settings dimx="60" dimy="60" area_percent="0.3" complexity="0.5" granularity="6"  ground="grass1"/>
-		<WorldPosition world_x="0.7" world_y ="0.5"/>
+		<WorldPosition world_x="0.69" world_y ="0.5"/>
 		
 		<ExitDirections north="true" south="false" west="true" east="true" />
 		
@@ -551,7 +551,7 @@
 		<DirectionalLight red="0.1" green="0.1" blue="0.1" />
 		
 		<Settings dimx="36" dimy="36" area_percent="0.4" complexity="0.4" granularity="6"  ground="grass1"/>
-		<WorldPosition world_x="0.67" world_y ="0.51"/>
+		<WorldPosition world_x="0.66" world_y ="0.51"/>
 		
 		<Music>
 			<Track source="Dark_Exploration.ogg" />
@@ -593,7 +593,7 @@
 		<DirectionalLight red="0.3" green="0.3" blue="0.3" />
 		
 		<Settings dimx="44" dimy="44" area_percent="0.4" complexity="0.3" granularity="6"  ground="grass1"/>
-		<WorldPosition world_x="0.71" world_y ="0.5" waypoint="true"/>
+		<WorldPosition world_x="0.70" world_y ="0.5" waypoint="true"/>
 		
 		<ExitDirections north="true" south="true" west="true" east="false" />
 		
@@ -637,7 +637,7 @@
 		<DirectionalLight red="0.3" green="0.3" blue="0.3" />
 		
 		<Settings dimx="48" dimy="48" area_percent="0.4" complexity="0.3" granularity="8"  ground="grass1"/>
-		<WorldPosition world_x="0.67" world_y ="0.49"/>
+		<WorldPosition world_x="0.66" world_y ="0.49"/>
 		
 		<ExitDirections north="false" south="false" west="true" east="true" />
 		
@@ -676,7 +676,7 @@
 		<DirectionalLight red="0.3" green="0.3" blue="0.3" />
 		
 		<Settings dimx="20" dimy="20" region_template="meetIreana"  ground="grass1"/>
-		<WorldPosition world_x="0.66" world_y ="0.48"/>
+		<WorldPosition world_x="0.65" world_y ="0.48"/>
 		
 		<ExitDirections north="true" south="false" west="false" east="true" />
 		
@@ -702,7 +702,7 @@
 		<DirectionalLight red="0.3" green="0.3" blue="0.3" />
 		
 		<Settings dimx="40" dimy="40" region_template="entryGrayCaves"  ground="grass1"/>
-		<WorldPosition world_x="0.66" world_y ="0.45"/>
+		<WorldPosition world_x="0.65" world_y ="0.45"/>
 		
 		<ExitDirections north="true" south="true" west="false" east="false" />
 		
@@ -740,7 +740,7 @@
 <!-- Banditen -->	
 	<Region id="2170" name="aisEastslope">
 		<Settings dimx="25" dimy="25" region_template="aisEastslope"  ground="grass1"/>
-		<WorldPosition world_x="0.73" world_y ="0.45"/>
+		<WorldPosition world_x="0.72" world_y ="0.45"/>
 		
 		<ExitDirections north="false" south="false" west="true" east="true" />
 		

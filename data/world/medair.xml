@@ -6,7 +6,7 @@
 		<DirectionalLight red="0.3" green="0.3" blue="0.3" />
 		
 		<Settings dimx="60" dimy="65" region_template="councilhall" ground="council_ground"/>
-		<WorldPosition world_x="0.63" world_y ="0.69" />
+		<WorldPosition world_x="0.62" world_y ="0.69" />
 		
 		<Music>
 			<Track source="Dark_Exploration.ogg" />
@@ -35,7 +35,7 @@
 		<DirectionalLight red="0.3" green="0.3" blue="0.3" />
 		
 		<Settings dimx="17" dimy="17" region_template="medBackalley"  ground="grass1"/>
-		<WorldPosition world_x="0.635" world_y ="0.67" />
+		<WorldPosition world_x="0.625" world_y ="0.67" />
 		<ExitDirections north="true" south="true" west="false" east="false" />
 		
 		<Exits>
@@ -62,7 +62,7 @@
 		
 		<Settings dimx="20" dimy="20" region_template="medairMercenaryCamp"  ground="grass1"/>
 		
-		<WorldPosition world_x="0.62" world_y ="0.65" waypoint="true"/>
+		<WorldPosition world_x="0.61" world_y ="0.65" waypoint="true"/>
 		
 		<ExitDirections north="true" south="true" west="false" east="false" />
 		
