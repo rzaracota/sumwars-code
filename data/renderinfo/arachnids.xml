@@ -1,0 +1,27 @@
+<RenderInfo name="spiderbase" parent="creaturebase">
+	<Action name="walk">
+		<Animation name="walk" />
+	</Action>
+	
+	<Action name="attack">
+		<Animation name="attack1" />
+	</Action>
+	<Action name="attack">
+		<Animation name="attack2" />
+	</Action>
+
+	<Action name="die">
+		<Animation name="die" />
+	</Action>
+	
+	<Action name="noaction">
+		<Animation name="idle1" />
+	</Action>
+	<Action name="noaction">
+		<Animation name="idle2" />
+	</Action>
+</RenderInfo>
+
+<RenderInfo name="caveSpider" parent="spiderbase">
+	<Entity source="spider.mesh"/>
+</RenderInfo>
