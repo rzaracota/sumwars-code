@@ -32,6 +32,8 @@
 #include "rakclientnetwork.h"
 #include "raknetworkpacket.h"
 
+#include "options.h"
+
 #include "OgreResourceGroupManager.h"
 
 World* World::m_world=0;
@@ -1068,7 +1070,7 @@ void World::handleMessage(std::string msg, int slot)
 				{
 					CreatureSpeakText text;
 					text.m_text = msg;
-					text.m_time = msg.size()*100 + 1000;
+					text.m_time = (msg.size()*100 + 1000) * Options::getInstance()->getTextSpeed();
 					text.m_in_dialogue = false;
 					pl->speakText(text);
 				}

@@ -42,6 +42,7 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard)
 	optionstab->addTab(misc);
 
 	CEGUI::Window* label;
+	CEGUI::Scrollbar* slider;
 
 	int targets[9] = {SHOW_INVENTORY, SHOW_CHARINFO, SHOW_SKILLTREE, SHOW_PARTYMENU, SHOW_CHATBOX, SHOW_QUESTINFO, SHOW_MINIMAP, SWAP_EQUIP, SHOW_ITEMLABELS};
 
@@ -83,7 +84,7 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard)
 	
 	CEGUI::Combobox* diffcbo = static_cast<CEGUI::Combobox*>(win_mgr.createWindow("TaharezLook/Combobox","DifficultyBox"));
 	gameplay->addChildWindow(diffcbo);
-	diffcbo->setPosition(CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim( 0.2f)));
+	diffcbo->setPosition(CEGUI::UVector2(cegui_reldim(0.40f), cegui_reldim( 0.2f)));
 	diffcbo->setSize(CEGUI::UVector2(cegui_reldim(0.4f), cegui_reldim( 0.3f)));
 	diffcbo->addItem(new ListItem("Easy",Options::EASY));
 	diffcbo->addItem(new ListItem("Normal",Options::NORMAL));
@@ -102,6 +103,16 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard)
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.4)));
 	label->setSize(CEGUI::UVector2(cegui_reldim(0.3f), cegui_reldim( 0.06f)));
 	
+	slider = static_cast<CEGUI::Scrollbar*>(win_mgr.createWindow("TaharezLook/HorizontalScrollbar", "TextSpeedSlider"));
+	gameplay->addChildWindow(slider);
+	slider->setPageSize (0.01f);
+	slider->setDocumentSize(1.0f);
+	slider->setStepSize(0.01f);
+	slider->setPosition(CEGUI::UVector2(cegui_reldim(0.42f), cegui_reldim( 0.4)));
+	slider->setSize(CEGUI::UVector2(cegui_reldim(0.5f), cegui_reldim( 0.02f)));
+	slider->setWantsMultiClickEvents(false);
+	slider->subscribeEvent(CEGUI::Scrollbar::EventScrollPositionChanged, CEGUI::Event::Subscriber(&OptionsWindow::onTextSpeedChanged,  this));
+	
 	label = win_mgr.createWindow("TaharezLook/StaticText", "MusicVolumeLabel");
 	sound->addChildWindow(label);
 	label->setProperty("FrameEnabled", "true");
@@ -109,7 +120,7 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard)
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.5)));
 	label->setSize(CEGUI::UVector2(cegui_reldim(0.3f), cegui_reldim( 0.06f)));
 
-	CEGUI::Scrollbar* slider = static_cast<CEGUI::Scrollbar*>(win_mgr.createWindow("TaharezLook/HorizontalScrollbar", "MusicVolumeSlider"));
+	slider = static_cast<CEGUI::Scrollbar*>(win_mgr.createWindow("TaharezLook/HorizontalScrollbar", "MusicVolumeSlider"));
 	sound->addChildWindow(slider);
 	slider->setPageSize (0.01f);
 	slider->setDocumentSize(1.0f);
@@ -217,6 +228,13 @@ void OptionsWindow::update()
 	{
 		slider->setScrollPosition(MusicManager::instance().getMusicVolume());
 	}
+	
+	slider = static_cast<CEGUI::Scrollbar*>(win_mgr.getWindow( "TextSpeedSlider"));
+	float slidpos = (2.0 -Options::getInstance()->getTextSpeed()) / 1.4;
+	if ( fabs ( slider->getScrollPosition() - slidpos) > 0.01f)
+	{
+		slider->setScrollPosition(slidpos);
+	}
 
 }
 
@@ -265,6 +283,9 @@ void OptionsWindow::updateTranslation()
 
 	label = win_mgr.getWindow("GameplayDifficultyLabel");
 	label->setText((CEGUI::utf8*) gettext("Difficulty"));
+	
+	label = win_mgr.getWindow("TextSpeedLabel");
+	label->setText((CEGUI::utf8*) gettext("Text Speed"));
 	
 	label = win_mgr.getWindow("SoundVolumeLabel");
 	label->setText((CEGUI::utf8*) gettext("Sound"));
@@ -354,6 +375,18 @@ bool OptionsWindow::onDifficultyChanged(const CEGUI::EventArgs& evt)
 	return true;
 }
 
+bool OptionsWindow::onTextSpeedChanged(const CEGUI::EventArgs& evt)
+{
+	const CEGUI::MouseEventArgs& we =
+	static_cast<const CEGUI::MouseEventArgs&>(evt);
+	
+	CEGUI::Scrollbar* slider = static_cast<CEGUI::Scrollbar*>(we.window);
+	float speed = 2.0 - slider->getScrollPosition()*1.4;
+	DEBUGX("text speed changed to %f",speed);
+	Options::getInstance()->setTextSpeed(speed);
+	return true;
+}
+
 bool OptionsWindow::onMusicVolumeChanged(const CEGUI::EventArgs& evt)
 {
 	const CEGUI::MouseEventArgs& we =
@@ -361,7 +394,7 @@ bool OptionsWindow::onMusicVolumeChanged(const CEGUI::EventArgs& evt)
 
 	CEGUI::Scrollbar* slider = static_cast<CEGUI::Scrollbar*>(we.window);
 	float vol = slider->getScrollPosition();
-	DEBUGX("music volume change to %f",vol);
+	DEBUGX("music volume changed to %f",vol);
 	MusicManager::instance().setMusicVolume(vol);
 	return true;
 }
