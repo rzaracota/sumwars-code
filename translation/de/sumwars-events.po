@@ -6,57 +6,56 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-08-03 16:30+0200\n"
-"PO-Revision-Date: 2010-05-19 18:09-0400\n"
+"POT-Creation-Date: 2010-06-15 15:45+0200\n"
+"PO-Revision-Date: 2010-08-03 \n"
 "Last-Translator: kalimgard <kalimgard@users.sourceforge.net>\n"
-"Language-Team: german <de@sumwars>\n"
-"Language: \n"
+"Language-Team: german <translation-team-de@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: ../data/npc/dwarfcastle.xml:117
 msgid "Quite a lot of boxes..."
-msgstr "Ganz schoen viele Kisten..."
+msgstr "Ganz schön viele Kisten..."
 
 #: ../data/npc/dwarfcastle.xml:118
 msgid "My predecessor left me with that chaos."
-msgstr "Das Chaos hat mir mein Vorgaenger ueberlassen."
+msgstr "Das Chaos hat mir mein Vorgänger überlassen."
 
 #: ../data/npc/dwarfcastle.xml:119
 msgid "These are all old army supplies."
-msgstr "Sind alles alte Armeebestaende."
+msgstr "Sind alles alte Armeebestände."
 
 #: ../data/npc/dwarfcastle.xml:120
 msgid "If you like something just point it out and I'll tell you a price."
 msgstr ""
-"Wenn Euch was davon gefaellt zeigt drauf und ich nenne Euch einen Preis."
+"Wenn Euch was davon gefällt zeigt drauf und ich nenne Euch einen Preis."
 
 #: ../data/npc/joringsbridge_npc.xml:121
 msgid "Ah, you noticed my lost and found?"
-msgstr "Ah, euch ist mein Fundbuero aufgefallen?"
+msgstr "Ah, euch ist mein Fundbüro aufgefallen?"
 
 #: ../data/npc/joringsbridge_npc.xml:122
 msgid "Everything I find in and around Joringsbridge is stored here."
 msgstr ""
-"Ich lagere hier alles, was ich so an verlorenen Gegenstaenden in und um "
-"Joringsbrueck finde."
+"Ich lagere hier alles, was ich so an verlorenen Gegenständen in und um "
+"Joringsbrück finde."
 
 #: ../data/npc/joringsbridge_npc.xml:123
 msgid ""
 "If something is your's just say the word. For a small finder's fee you can "
 "have it back."
 msgstr ""
-"Wenn Euch etwas davon gehoert, sagt einfach Bescheid. Fuer einen geringen "
-"Finderlohn koennt Ihr es wiederhaben."
+"Wenn Euch etwas davon gehört, sagt einfach Bescheid. Für einen geringen "
+"Finderlohn könnt Ihr es wiederhaben."
 
 #: ../data/npc/joringsbridge_npc.xml:133
 msgid ""
 "Having the responsibility for Joringsbridge is never easy, not even when I "
 "had enough soldiers."
 msgstr ""
-"Die Verantwortung fuer Joringsbrueck zu haben ist nicht immer leicht, "
-"selbst, wenn ich genug Soldaten habe."
+"Die Verantwortung für Joringsbrück zu haben ist nicht immer leicht, selbst, "
+"wenn ich genug Soldaten habe."
 
 #: ../data/npc/joringsbridge_npc.xml:134
 msgid ""
@@ -64,12 +63,12 @@ msgid ""
 "items."
 msgstr ""
 "Seit Monaten schafft irgend einer meiner Leute die beschlagnamten magischen "
-"Gegenstaende bei Seite."
+"Gegenstände bei Seite."
 
 #: ../data/npc/joringsbridge_npc.xml:135
 msgid ""
 "And I'm not even one step closer to find out who, than when I first noticed!"
-msgstr "Und ich bin ihm noch keinen Schritt naeher als am Anfang!"
+msgstr "Und ich bin ihm noch keinen Schritt näher als am Anfang!"
 
 #: ../data/npc/joringsbridge_npc.xml:136
 #, fuzzy
@@ -90,7 +89,7 @@ msgid ""
 "unmanageable flood of goblins."
 msgstr ""
 "Jetzt, wo fast alle Truppen an den Grenzen stehen, haben wir es mit einer "
-"unueberschaubaren Flut von Goblins zu tun."
+"unüberschaubaren Flut von Goblins zu tun."
 
 #: ../data/npc/joringsbridge_npc.xml:145
 msgid ""
@@ -98,16 +97,16 @@ msgid ""
 "bandit life for themselves."
 msgstr ""
 "Und alle, die nicht in die Armee eingezogen wurden, scheinen das "
-"Banditendasein fuer sich entdeckt zu haben."
+"Banditendasein für sich entdeckt zu haben."
 
 #: ../data/npc/joringsbridge_npc.xml:146
 msgid "Thanks for the warning, sergeant."
-msgstr "Danke fuer die Warnung, Sergeant"
+msgstr "Danke für die Warnung, Sergeant"
 
 #: ../data/npc/joringsbridge_npc.xml:158
 msgid "You are the backup sent by Lord Master Windclaw, arn't you?"
 msgstr ""
-"Ihr seid die Unterstuetzung, die Lord Magister Windklaue geschickt hat, wie?"
+"Ihr seid die Unterstützung, die Lord Magister Windklaue geschickt hat, wie?"
 
 #: ../data/npc/joringsbridge_npc.xml:159
 msgid ""
@@ -144,7 +143,7 @@ msgid ""
 "money."
 msgstr ""
 "Die Goblins rund um Brons Farm weilen nicht mehr unter den Lebenden. Ich "
-"sollte mal an die Tuer klopfen und sehen, dass alles in Ordnung ist. Keine "
+"sollte mal an die Tür klopfen und sehen, dass alles in Ordnung ist. Keine "
 "Bauern, kein Geld."
 
 #: ../data/quests/besieged_farm.xml:11
@@ -186,7 +185,7 @@ msgid ""
 "You know the drill: Get to the Northern Meadow and drive away the goblins "
 "around Bron's farm."
 msgstr ""
-"Ihr wisst, wie es laeuft: Geht in die noerdliche Wiese und vertreibt die "
+"Ihr wisst, wie es läuft: Geht in die nördliche Wiese und vertreibt die "
 "Goblins, die sich um Brons Hof herum aufhalten."
 
 #: ../data/quests/besieged_farm.xml:33
@@ -223,7 +222,7 @@ msgstr "Ich danke euch."
 
 #: ../data/quests/besieged_farm.xml:113
 msgid "Sadly I cannot ask you in."
-msgstr "Leider koennen wir euch nicht hereinbitten."
+msgstr "Leider können wir euch nicht hereinbitten."
 
 #: ../data/quests/besieged_farm.xml:114
 msgid "Our barricade is quite heavy."
@@ -242,17 +241,19 @@ msgid ""
 "With a crytal of Avearea, of course. It's been handed down in my family for "
 "generations."
 msgstr ""
-"Mit einem Avaeras-Kristall natuerlich. Er wird schon seit Generationen in "
+"Mit einem Avaeras-Kristall natürlich. Er wird schon seit Generationen in "
 "meiner Familie vererbt."
 
 #: ../data/quests/besieged_farm.xml:118
 msgid "Of course. Silly of me."
-msgstr "Natuerlich. Dumm von mir."
+msgstr "Natürlich. Dumm von mir."
 
 #: ../data/quests/besieged_farm.xml:120
 msgid ""
 "Really now. Did you think she'd use carrier pigeons in this day and age?"
-msgstr "Also ehrlich, "
+msgstr ""
+"Also ehrlich, dachtest du, sie würde in der heutigen Zeit eine Brieftaube "
+"benutzen?"
 
 #: ../data/quests/besieged_farm.xml:122 ../data/quests/besieged_farm.xml:124
 msgid "Let's just go collect the money."
@@ -264,13 +265,13 @@ msgstr "Es ist vollbracht."
 
 #: ../data/quests/besieged_farm.xml:142
 msgid "I've already heard of it."
-msgstr "Hab ich schon gehoert."
+msgstr "Hab ich schon gehört."
 
 #: ../data/quests/besieged_farm.xml:143
 msgid ""
 "Michel is in the tavern and getting plastered. All in honor of your bravery, "
 "of course."
-msgstr "Michel ist gerade in der Schenke und besaeuft sich auf Euer Wohl."
+msgstr "Michel ist gerade in der Schenke und besäuft sich auf Euer Wohl."
 
 #: ../data/quests/besieged_farm.xml:144
 msgid "But that shall be of no concern to you."
@@ -284,7 +285,7 @@ msgstr "Hier habt ihr das Geld."
 #: ../data/quests/scene7.xml:9 ../data/quests/siegeOfDwarfenwall.xml:4
 #: ../data/quests/theTrader.xml:4
 msgid "Quest finished"
-msgstr "Quest finished"
+msgstr "Quest beendet"
 
 #: ../data/quests/fortify_dwarfenwall.xml:11 ../data/quests/scene7.xml:11
 #: ../data/quests/siegeOfDwarfenwall.xml:6 ../data/quests/tutorial.xml:23
@@ -310,7 +311,7 @@ msgstr "Warum gebe ich mich doch gleich mit deiner Gesellschaft ab?"
 
 #: ../data/quests/fortify_dwarfenwall.xml:140
 msgid "Hush! You can argue later."
-msgstr "Scht! Streiten koennt ihr euch spaeter."
+msgstr "Scht! Streiten könnt ihr euch später."
 
 #: ../data/quests/fortify_dwarfenwall.xml:173
 msgid "Finally we're here!"
@@ -346,7 +347,7 @@ msgstr "Er erwartet dich jetzt"
 
 #: ../data/quests/fortify_dwarfenwall.xml:320
 msgid "You're presence is no longer needed."
-msgstr "Eure Anwesenheit ist nicht laenger von Noeten."
+msgstr "Eure Anwesenheit ist nicht länger von Nöten."
 
 #: ../data/quests/fortify_dwarfenwall.xml:321
 msgid "My Lord, those are-"
@@ -362,7 +363,7 @@ msgstr "..."
 
 #: ../data/quests/fortify_dwarfenwall.xml:324
 msgid "As you wish. My apologies."
-msgstr "Wie ihr es wuenscht, verzeiht bitte."
+msgstr "Wie ihr es wünscht, verzeiht bitte."
 
 #: ../data/quests/fortify_dwarfenwall.xml:325
 msgid "Come on, he knows what he's doing."
@@ -370,7 +371,7 @@ msgstr "Jetzt komm schon, der weiß was er tut."
 
 #: ../data/quests/fortify_dwarfenwall.xml:330
 msgid "Nice shack!"
-msgstr "Nette Huette!"
+msgstr "Nette Hütte!"
 
 #: ../data/quests/fortify_dwarfenwall.xml:331
 msgid "Well, the corners are a bit dirty though."
@@ -413,7 +414,7 @@ msgstr "Pft. Ich hätte große Lust den Laden abzufackeln."
 
 #: ../data/quests/fortify_dwarfenwall.xml:346
 msgid "I feel like burning off the whole place."
-msgstr "Ich haette große Lust den Laden abzufackeln."
+msgstr "Ich hätte große Lust den Laden abzufackeln."
 
 #: ../data/quests/fortify_dwarfenwall.xml:350
 msgid "With all those wimps here it's hardly worth the effort, isn't it?"
@@ -444,11 +445,11 @@ msgstr "Ich kenn da einen netten kleinen Bannspruch..."
 
 #: ../data/quests/fortify_dwarfenwall.xml:362
 msgid "Would you please take a quick look at this crystal. ##solo"
-msgstr "Wuerdet Ihr bitte kurz auf diesen Stein sehen. ##solo"
+msgstr "Würdet Ihr bitte kurz auf diesen Stein sehen. ##solo"
 
 #: ../data/quests/fortify_dwarfenwall.xml:364
 msgid "Would you please take a quick look at this crystal."
-msgstr "Wuerdet ihr bitte kurz auf diesen Stein sehen."
+msgstr "Würdet ihr bitte kurz auf diesen Stein sehen."
 
 #: ../data/quests/fortify_dwarfenwall.xml:371
 msgid "Is that a...?"
@@ -460,7 +461,7 @@ msgstr "Ganz recht."
 
 #: ../data/quests/fortify_dwarfenwall.xml:373
 msgid "It is a crystal straight from the heart of Harad's hell."
-msgstr "Es handelt sich um einen Stein aus dem Herzen von Harads Hoelle."
+msgstr "Es handelt sich um einen Stein aus dem Herzen von Harads Hölle."
 
 #: ../data/quests/fortify_dwarfenwall.xml:374
 msgid "How is it possible that you're still alive?"
@@ -482,21 +483,21 @@ msgstr "Mit einer Antwort, die euch alle von euren Leiden befreien wird."
 #: ../data/quests/fortify_dwarfenwall.xml:381
 msgid "But before I give it to you, you have to do something for me."
 msgstr ""
-"Aber bevor ich sie euch gebe, muesst ihr jedoch zuerst etwas für mich tun."
+"Aber bevor ich sie euch gebe, müsst ihr jedoch zuerst etwas für mich tun."
 
 #: ../data/quests/fortify_dwarfenwall.xml:382
 msgid "May Harad curse you!"
-msgstr "Moege Harad dich verfluchen!"
+msgstr "Möge Harad dich verfluchen!"
 
 #: ../data/quests/fortify_dwarfenwall.xml:383
 msgid "Tsk tsk. How rude to use the name of the Cursed One in Akeran's halls."
 msgstr ""
-"Ts Ts. Wie unhoeflich den Namen des Verfluchten in Akerans Hallen zu "
+"Ts Ts. Wie unhöflich den Namen des Verfluchten in Akerans Hallen zu "
 "verwenden."
 
 #: ../data/quests/fortify_dwarfenwall.xml:384
 msgid "This is a goddamn den of thieves."
-msgstr "Das ist eine verdammte Raeuberhoehle."
+msgstr "Das ist eine verdammte Räuberhöhle."
 
 #: ../data/quests/fortify_dwarfenwall.xml:385
 msgid "You're missing the main point."
@@ -515,7 +516,7 @@ msgid ""
 "Fulfill my orders to Akeran's and the council's satisfaction and I have the "
 "power to release you of his claws."
 msgstr ""
-"Erfuellt ihr meinen Auftrag zur Zufriedenheit Akerans und des Konzils, habe "
+"Erfüllt ihr meinen Auftrag zur Zufriedenheit Akerans und des Konzils, habe "
 "ich die Macht euch aus seine Klauen zu befreien."
 
 #: ../data/quests/fortify_dwarfenwall.xml:388
@@ -528,7 +529,7 @@ msgstr "Wenn nicht, jedoch..."
 
 #: ../data/quests/fortify_dwarfenwall.xml:391
 msgid "Heard that one a thousend times already. Cut the speach."
-msgstr "Hab ich schon tausend Mal gehoert. Spar dir die Rede."
+msgstr "Hab ich schon tausend Mal gehört. Spar dir die Rede."
 
 #: ../data/quests/fortify_dwarfenwall.xml:393
 msgid "We know that one already. Cut the speach."
@@ -536,15 +537,15 @@ msgstr "Das kennen wir schon, also spart dir die langen Reden."
 
 #: ../data/quests/fortify_dwarfenwall.xml:398
 msgid "As you wish."
-msgstr "Wie ihr es wuenscht."
+msgstr "Wie ihr es wünscht."
 
 #: ../data/quests/fortify_dwarfenwall.xml:399
 msgid ""
 "But I should warn you. The task is pretty dangerous and you are likely to "
 "die more than once."
 msgstr ""
-"Doch ich sollte euch warnen, der Auftrag ist recht gefaehrlich und ihr "
-"werdet wahrscheinlich mehr als einmal sterben."
+"Doch ich sollte euch warnen, der Auftrag ist recht gefährlich und ihr werdet "
+"wahrscheinlich mehr als einmal sterben."
 
 #: ../data/quests/fortify_dwarfenwall.xml:400
 msgid "Harad's curse has to have some advantage."
@@ -568,7 +569,7 @@ msgstr "Ihr seid in der Tat eine schwierige Gestalt"
 
 #: ../data/quests/fortify_dwarfenwall.xml:410
 msgid "He's beginning to make me angry."
-msgstr "Langsam macht er mich wuetend"
+msgstr "Langsam macht er mich wütend"
 
 #: ../data/quests/fortify_dwarfenwall.xml:412
 msgid "Peace!"
@@ -580,7 +581,7 @@ msgstr "Armselige Gestalt!"
 
 #: ../data/quests/fortify_dwarfenwall.xml:416
 msgid "The first thing you have to learn are obviously manners. ##solo"
-msgstr "Zuerst muesst Ihr ganz offensichtlich Manieren lernen. ##solo"
+msgstr "Zuerst müsst Ihr ganz offensichtlich Manieren lernen. ##solo"
 
 #: ../data/quests/fortify_dwarfenwall.xml:418
 msgid "Pathetic fools!"
@@ -588,21 +589,21 @@ msgstr "Armselige Gestalten!"
 
 #: ../data/quests/fortify_dwarfenwall.xml:419
 msgid "The first thing you have to learn are obviously manners."
-msgstr "Zuerst muesst Ihr ganz offensichtlich Manieren lernen."
+msgstr "Zuerst müsst Ihr ganz offensichtlich Manieren lernen."
 
 #: ../data/quests/fortify_dwarfenwall.xml:421
 msgid "Consider it as a small bonus:"
-msgstr "Betrachtet es einfach als kleine Gefaelligkeit:"
+msgstr "Betrachtet es einfach als kleine Gefälligkeit:"
 
 #: ../data/quests/fortify_dwarfenwall.xml:422
 msgid "Before your real assignment you will go to Dwarfenwall as backup."
 msgstr ""
-"Vor eurem eigentlichen Auftrag geht ihr als Verstaerkung nach Zwergentrutz."
+"Vor eurem eigentlichen Auftrag geht ihr als Verstärkung nach Zwergentrutz."
 
 #: ../data/quests/fortify_dwarfenwall.xml:423
 msgid "Show the undead there who the real favourite of the deathgod is."
 msgstr ""
-"Zeigt den Untoten dort, wer tatsaechlich der Liebling des Totengottes ist."
+"Zeigt den Untoten dort, wer tatsächlich der Liebling des Totengottes ist."
 
 #: ../data/quests/fortify_dwarfenwall.xml:424
 msgid "Smells like exploitation."
@@ -647,8 +648,8 @@ msgid ""
 "We know everything about your accursed kind, and believe me, no one will be "
 "stupid enough to kill you."
 msgstr ""
-"Wir wissen alles ueber eure akeranverfluchte Art und niemand waere dumm "
-"genug, euch zu toeten, dass koennt ihr mir glauben."
+"Wir wissen alles über eure akeranverfluchte Art und niemand wäre dumm genug, "
+"euch zu töten, dass könnt ihr mir glauben."
 
 #: ../data/quests/fortify_dwarfenwall.xml:440
 msgid "Continue to be snotty?"
@@ -662,7 +663,7 @@ msgstr "Weiterhin patzig sein?"
 #: ../data/quests/rob_the_robber.xml:88 ../data/quests/theFissure.xml:557
 #: ../data/quests/theTrader.xml:113 ../data/quests/theTrader.xml:167
 msgid "Yes"
-msgstr "Yes"
+msgstr "Ja"
 
 #: ../data/quests/fortify_dwarfenwall.xml:442
 #: ../data/quests/fortify_dwarfenwall.xml:798 ../data/quests/goblins.xml:38
@@ -672,7 +673,7 @@ msgstr "Yes"
 #: ../data/quests/rob_the_robber.xml:89 ../data/quests/theFissure.xml:558
 #: ../data/quests/theTrader.xml:114 ../data/quests/theTrader.xml:168
 msgid "No"
-msgstr "No"
+msgstr "Nein"
 
 #: ../data/quests/fortify_dwarfenwall.xml:453
 msgid "You consider yourself very mighty and clever, don't you?"
@@ -684,11 +685,11 @@ msgstr "Sicherlich hat er sein Wissen hier irgendwo aufgeschrieben."
 
 #: ../data/quests/fortify_dwarfenwall.xml:456
 msgid "We can search for it after he's dead."
-msgstr "Wir koennen danach suchen, sobald er tot ist."
+msgstr "Wir können danach suchen, sobald er tot ist."
 
 #: ../data/quests/fortify_dwarfenwall.xml:458
 msgid "A good opportunity, indeed."
-msgstr "Eine guenstige Gelegenheit. In der Tat."
+msgstr "Eine günstige Gelegenheit. In der Tat."
 
 #: ../data/quests/fortify_dwarfenwall.xml:461
 msgid "Surely you have written down that knowledge of your's somewhere."
@@ -700,8 +701,7 @@ msgstr "Ich kann auch nach deinem vorzeitigen Tod danach suchen."
 
 #: ../data/quests/fortify_dwarfenwall.xml:464
 msgid "Yes, they warned me about that, too."
-msgstr ""
-"Ja, sie haben mich auch davor gewarnt, dass so etwas geschehen koennte."
+msgstr "Ja, sie haben mich auch davor gewarnt, dass so etwas geschehen könnte."
 
 #: ../data/quests/fortify_dwarfenwall.xml:469
 msgid "I will keep an eye on you and give you orders with this crystal."
@@ -720,7 +720,7 @@ msgstr ""
 #: ../data/quests/fortify_dwarfenwall.xml:626
 #: ../data/quests/siegeOfDwarfenwall.xml:72
 msgid "Of course."
-msgstr "Natuerlich."
+msgstr "Natürlich."
 
 #: ../data/quests/fortify_dwarfenwall.xml:478
 msgid ""
@@ -732,7 +732,7 @@ msgstr ""
 
 #: ../data/quests/fortify_dwarfenwall.xml:479
 msgid "I don't like it."
-msgstr "Das gefaellt mir nicht."
+msgstr "Das gefällt mir nicht."
 
 #: ../data/quests/fortify_dwarfenwall.xml:481
 msgid ""
@@ -740,11 +740,11 @@ msgid ""
 "now."
 msgstr ""
 "Ich muss mich jetzt um die Vorbereitungen für die bevorstehende Heirat des "
-"Prinzen kuemmern."
+"Prinzen kümmern."
 
 #: ../data/quests/fortify_dwarfenwall.xml:482
 msgid "There is no time for further explanations."
-msgstr "Es ist keine Zeit für weitere Erklaerungen."
+msgstr "Es ist keine Zeit für weitere Erklärungen."
 
 #: ../data/quests/fortify_dwarfenwall.xml:483
 msgid "Take this crystal and some gold."
@@ -752,8 +752,7 @@ msgstr "Nehmt etwas Gold und diesen Kristall."
 
 #: ../data/quests/fortify_dwarfenwall.xml:484
 msgid "I will send you orders with it when the time comes."
-msgstr ""
-"Darueber werde ich euch zur rechten Zeit weitere Instruktionen senden. "
+msgstr "Darüber werde ich euch zur rechten Zeit weitere Instruktionen senden. "
 
 #: ../data/quests/fortify_dwarfenwall.xml:613
 msgid "There you go! That was rather tame."
@@ -761,7 +760,7 @@ msgstr "Na bitte, das war doch eher zahm."
 
 #: ../data/quests/fortify_dwarfenwall.xml:616
 msgid "That was the weakest elemental I could possibly summon."
-msgstr "Das war der schwaechste Elementar, den ich beschwoeren konnte."
+msgstr "Das war der schwächste Elementar, den ich beschwören konnte."
 
 #: ../data/quests/fortify_dwarfenwall.xml:617
 #: ../data/quests/fortify_dwarfenwall.xml:618
@@ -772,7 +771,7 @@ msgstr "Denkt immer daran."
 msgid ""
 "Take some gold and equip yourselves in the mercenary camp north of town."
 msgstr ""
-"Nehmt etwas Gold und ruestet euch im Soeldnerlager noerdlich der Stadt."
+"Nehmt etwas Gold und rüstet euch im Söldnerlager nördlich der Stadt aus."
 
 #: ../data/quests/fortify_dwarfenwall.xml:620
 msgid "There you'll find everything you need."
@@ -794,14 +793,14 @@ msgstr ""
 
 #: ../data/quests/fortify_dwarfenwall.xml:625
 msgid "With this crystal I will keep in touch with you."
-msgstr "Ueber diesen Kristall werde ich mit euch in Verbindung bleiben."
+msgstr "Über diesen Kristall werde ich mit euch in Verbindung bleiben."
 
 #: ../data/quests/fortify_dwarfenwall.xml:628
 msgid ""
 "Surely it's not really allowed by the most divine Akeran to blackmail my "
 "combat strength."
 msgstr ""
-"Ist sicherlich nicht wirklich vom goettlichsten Akeran erlaubt meine "
+"Ist sicherlich nicht wirklich vom göttlichsten Akeran erlaubt meine "
 "Kampfkraft zu erpressen."
 
 #: ../data/quests/fortify_dwarfenwall.xml:630
@@ -809,7 +808,7 @@ msgid ""
 "Surely it's not really allowed by the most divine Akeran to blackmail our "
 "combat strength."
 msgstr ""
-"Ist sicherlich nicht wirklich vom goettlichsten Akeran erlaubt, unsere "
+"Ist sicherlich nicht wirklich vom göttlichsten Akeran erlaubt, unsere "
 "Kampfkraft zu erpressen."
 
 #: ../data/quests/fortify_dwarfenwall.xml:632
@@ -843,7 +842,7 @@ msgstr "Hm... ich werde einfach mal nach Feinden des Konzils Ausschau halten."
 
 #: ../data/quests/fortify_dwarfenwall.xml:693
 msgid "And then I'll take apart those summoner-imps with them."
-msgstr "Und danach mit ihnen diese Beschwoerer-Wichtel auseinander nehmen."
+msgstr "Und danach mit ihnen diese Beschwörer-Wichtel auseinander nehmen."
 
 #: ../data/quests/fortify_dwarfenwall.xml:694
 msgid "Shouldn't be too hard."
@@ -860,7 +859,7 @@ msgstr "...sprach der spionierende Lord Magister."
 
 #: ../data/quests/fortify_dwarfenwall.xml:701
 msgid "Not a pretty habit you have there, Airpaw..."
-msgstr "Keine schoenen Angewohnheiten, die du da hast, Luftpfote..."
+msgstr "Keine schönen Angewohnheiten, die du da hast, Luftpfote..."
 
 #: ../data/quests/fortify_dwarfenwall.xml:702
 msgid "Windclaw!"
@@ -868,7 +867,7 @@ msgstr "Windklaue!"
 
 #: ../data/quests/fortify_dwarfenwall.xml:703
 msgid "And you better accustom yourself to be monitored."
-msgstr "Und gewoehn dich besser daran, ueberwacht zu werden."
+msgstr "Und gewöhn dich besser daran, überwacht zu werden."
 
 #: ../data/quests/fortify_dwarfenwall.xml:704
 msgid "I'm no idiot."
@@ -913,7 +912,7 @@ msgstr ""
 
 #: ../data/quests/fortify_dwarfenwall.xml:713
 msgid "Guard your tongue, scum! What is that supposed to change?"
-msgstr "Huete deine Zunge, Abschaum! Was bitte soll das aendern?"
+msgstr "Hüte deine Zunge, Abschaum! Was bitte soll das ändern?"
 
 #: ../data/quests/fortify_dwarfenwall.xml:714
 msgid "Everything."
@@ -924,7 +923,7 @@ msgid ""
 "Do you know what happens, if that comes into contact with the blood of "
 "Branded Ones?"
 msgstr ""
-"Weißt du, was passiert, wenn das mit dem Blut von Gezeichneten in Beruehrung "
+"Weißt du, was passiert, wenn das mit dem Blut von Gezeichneten in Berührung "
 "kommt?"
 
 #: ../data/quests/fortify_dwarfenwall.xml:716
@@ -958,11 +957,11 @@ msgstr "Das wird eine echt anstrengende Reise, wenn das so weitergeht..."
 
 #: ../data/quests/fortify_dwarfenwall.xml:735
 msgid "Calm yourself, Lord of the unpleasent airs!"
-msgstr "Beruhige dich, Herr der unangenehemen Luefte!"
+msgstr "Beruhige dich, Herr der unangenehemen Lüfte!"
 
 #: ../data/quests/fortify_dwarfenwall.xml:736
 msgid "I can hear you and we can talk, if it has to be."
-msgstr "Ich kann dich hoeren und wir koennen reden, wenn es sein muss"
+msgstr "Ich kann dich hören und wir können reden, wenn es sein muss"
 
 #: ../data/quests/fortify_dwarfenwall.xml:737
 msgid "That's enough, don't you think?"
@@ -1003,7 +1002,7 @@ msgid ""
 "Allow yourself more of such impertinences and I'll have you thrown into the "
 "dungeon tower!"
 msgstr ""
-"Erlaube dir noch eine solche Unverschaemtheit und ich werde dich in den "
+"Erlaube dir noch eine solche Unverschämtheit und ich werde dich in den "
 "Hungerturm sperren lassen!"
 
 #: ../data/quests/fortify_dwarfenwall.xml:744
@@ -1012,14 +1011,14 @@ msgstr "Was soll ich nur mit diesen Konzilikern machen?"
 
 #: ../data/quests/fortify_dwarfenwall.xml:747
 msgid "Can we blind that crystal somehow?"
-msgstr "Koennen wir diesen Kristall irgendwie blind machen?"
+msgstr "Können wir diesen Kristall irgendwie blind machen?"
 
 #: ../data/quests/fortify_dwarfenwall.xml:748
 msgid ""
 "I bet the guy is sitting in a cozy armchair right now and watching that we "
 "don't break ranks."
 msgstr ""
-"Bestimmt sitzt der Kerl gerade in einem gemuetlichen Sessel und passt auf, "
+"Bestimmt sitzt der Kerl gerade in einem gemütlichen Sessel und passt auf, "
 "dass wir nicht aus der Reihe tanzen."
 
 #: ../data/quests/fortify_dwarfenwall.xml:749
@@ -1040,12 +1039,12 @@ msgstr "So, das wars."
 
 #: ../data/quests/fortify_dwarfenwall.xml:756
 msgid "And now he can't hear us anymore?"
-msgstr "Und jetzt kann er uns nicht mehr hoeren?"
+msgstr "Und jetzt kann er uns nicht mehr hören?"
 
 #: ../data/quests/fortify_dwarfenwall.xml:757
 msgid "Only if we want to. Our blood works wonders on blessed items."
 msgstr ""
-"Nur, wenn wir es wollen. Unser Blut wirkt bei gesegneten Gegenstaenden "
+"Nur, wenn wir es wollen. Unser Blut wirkt bei gesegneten Gegenständen "
 "einfach Wunder."
 
 #: ../data/quests/fortify_dwarfenwall.xml:758
@@ -1054,7 +1053,7 @@ msgid ""
 "Even if the goddess of magic is unlikely to be amused about my attachment."
 msgstr ""
 "Gut, dass das da von frommen aisener Magiern Avaera gesegnet wurde. Auch "
-"wenn die Götting der Magie nicht erfreut ueber meinen Zusatz sein duerfte."
+"wenn die Göttin der Magie nicht erfreut über meinen Zusatz sein dürfte."
 
 #: ../data/quests/fortify_dwarfenwall.xml:759
 msgid "But he can still annoy us."
@@ -1067,7 +1066,7 @@ msgstr "Wir bekommen es auf jeden Fall mit, wenn er uns etwas sagen will."
 #: ../data/quests/fortify_dwarfenwall.xml:763
 #: ../data/quests/fortify_dwarfenwall.xml:765
 msgid "So, what are you thinking about this matter?"
-msgstr "Also, was haeltst du von dieser Sache?"
+msgstr "Also, was hältst du von dieser Sache?"
 
 #: ../data/quests/fortify_dwarfenwall.xml:772
 msgid "Did I get that right?"
@@ -1086,8 +1085,8 @@ msgid ""
 "I for one have never heard, that someone besides us could take anything from "
 "hell."
 msgstr ""
-"Ich habe jedenfalls noch nie gehoert, dass jemand außer uns irgend etwas aus "
-"der Hoelle mitnehmen konnte."
+"Ich habe jedenfalls noch nie gehört, dass jemand außer uns irgend etwas aus "
+"der Hölle mitnehmen konnte."
 
 #: ../data/quests/fortify_dwarfenwall.xml:776
 msgid "But that thing was the real deal without a doubt."
@@ -1116,7 +1115,7 @@ msgstr "Trotzdem ist es unwahrscheinlich, dass er sein Wort halten wird."
 #: ../data/quests/fortify_dwarfenwall.xml:786
 msgid "Even if he has this power, we're too valuable for his ends."
 msgstr ""
-"Selbst wenn er tatsaechlich diese Macht besitzen sollte, sind wir fuer seine "
+"Selbst wenn er tatsächlich diese Macht besitzen sollte, sind wir für seine "
 "Zwecke viel zu wertvoll."
 
 #: ../data/quests/fortify_dwarfenwall.xml:787
@@ -1126,19 +1125,18 @@ msgstr "Wir sind wahrlich gezeichnet."
 #: ../data/quests/fortify_dwarfenwall.xml:788
 msgid "But if there's only a small possibility I'm willing to try it."
 msgstr ""
-"Aber auch wenn es nur eine kleine Moeglichkeit gibt, ich bin bereit, es zu "
+"Aber auch wenn es nur eine kleine Möglichkeit gibt, ich bin bereit, es zu "
 "versuchen."
 
 #: ../data/quests/fortify_dwarfenwall.xml:790
 msgid "If stupidity had a weight, you couldn't move a millimeter."
 msgstr ""
-"Wenn Dummheit ein Gewicht haette, koenntest du dich nicht einen Millimeter "
-"von der Stelle bewegen."
+"Wenn Dummheit ein Gewicht hätte, könntest du dich nicht einen Millimeter von "
+"der Stelle bewegen."
 
 #: ../data/quests/fortify_dwarfenwall.xml:791
 msgid "If arrogance had a smell, you'd suffocate instantly."
-msgstr ""
-"Wenn Arroganz einen Geruch haette, wuerdest du augenblicklich ersticken."
+msgstr "Wenn Arroganz einen Geruch hätte, würdest du augenblicklich ersticken."
 
 #: ../data/quests/fortify_dwarfenwall.xml:793
 msgid "Alright, we vote on our course of action."
@@ -1157,7 +1155,7 @@ msgid ""
 "Until the cards are on the table I'll be powerful enough to take what's mine "
 "by force, if needed."
 msgstr ""
-"Bis die Karten alle auf dem Tisch liegen bin ich wieder maechtig genug, um "
+"Bis die Karten alle auf dem Tisch liegen bin ich wieder mächtig genug, um "
 "mir notfalls auch mit Gewalt zu holen, was mir zusteht."
 
 #: ../data/quests/fortify_dwarfenwall.xml:809
@@ -1176,11 +1174,11 @@ msgstr "Der Kerl wird sein Versprechen nie im Leben halten."
 msgid "But right now I cannot go to war with a whole kingdom."
 msgstr ""
 "Aber in meinem jetzigen Zustand kann ich mich schlecht mit einem ganzen "
-"Koenigreich anlegen."
+"Königreich anlegen."
 
 #: ../data/quests/fortify_dwarfenwall.xml:821
 msgid "So I'll just grin and bear it and gain his trust."
-msgstr "Mache ich also gute Miene zum boesen Spiel und gewinne sein Vertrauen."
+msgstr "Mache ich also gute Miene zum bösen Spiel und gewinne sein Vertrauen."
 
 #: ../data/quests/fortify_dwarfenwall.xml:822
 msgid "I'll see, what opportunities occur."
@@ -1195,8 +1193,8 @@ msgid ""
 "But we can't afford open resistance right now, so we have to grin and bear "
 "it."
 msgstr ""
-"Offenen Widerstand koennen wir uns aber noch nicht leisten, also muessen wir "
-"gute Miene zum boesen Spiel machen."
+"Offenen Widerstand können wir uns aber noch nicht leisten, also müssen wir "
+"gute Miene zum bösen Spiel machen."
 
 #: ../data/quests/fortify_dwarfenwall.xml:826
 msgid "Let's gain their trust."
@@ -1237,7 +1235,7 @@ msgstr "Interested?"
 #: ../data/quests/goblins.xml:36 ../data/quests/rob_the_robber.xml:35
 #: ../data/quests/rob_the_robber.xml:87
 msgid "Accept the quest?"
-msgstr "Accept Quest?"
+msgstr "Den Quest annehmen?"
 
 #: ../data/quests/goblins.xml:49
 msgid "You want a second reward?"
@@ -1261,17 +1259,15 @@ msgstr "Have fun"
 
 #: ../data/quests/herbalist.xml:9
 msgid "And another good deed done. I could get used to this."
-msgstr "Und wieder eine gute Tat mehr. Ich koennte mich fast daran gewoehnen."
+msgstr "Und wieder eine gute Tat mehr. Ich könnte mich fast daran gewöhnen."
 
 #: ../data/quests/herbalist.xml:11
 msgid "The herbalist of Joringsbridge wants to have the berries of 10 bushes."
-msgstr ""
-"Die Kraeuterfrau aus Joringsbrueck will die Beeren von 10 Bueschen haben. Es "
-"muessen noch "
+msgstr "Die Kräuterfrau aus Joringsbück will die Beeren von 10 Büschen haben."
 
 #: ../data/quests/herbalist.xml:86
 msgid "Here, old women. Your berries."
-msgstr "Hier, alte Frau. Eure Kraeuter."
+msgstr "Hier, alte Frau. Eure Kräuter."
 
 #: ../data/quests/herbalist.xml:87
 msgid "Ah, well done, young one."
@@ -1300,7 +1296,7 @@ msgstr "He da, Jungvolk!"
 
 #: ../data/quests/herbalist.xml:101
 msgid "I see you are going to the Northern Meadow."
-msgstr "Ich sehe, dass ihr in die Noerdlichen Wiesen wollt."
+msgstr "Ich sehe, dass ihr in die Nördlichen Wiesen wollt."
 
 #: ../data/quests/herbalist.xml:102
 msgid "That's right."
@@ -1308,7 +1304,7 @@ msgstr "Das Stimmt."
 
 #: ../data/quests/herbalist.xml:104
 msgid "Quite a trick."
-msgstr "Kunststueck."
+msgstr "Kunststück."
 
 #: ../data/quests/herbalist.xml:105
 msgid "We were only walking through the gate."
@@ -1323,7 +1319,7 @@ msgid ""
 "If you are roaming around there anyway, why don't you collect some berries "
 "for me?"
 msgstr ""
-"Wenn ihr sowieso da umher stiefelt und tut was ihr so eben tut, koenntet ihr "
+"Wenn ihr sowieso da umher stiefelt und tut was ihr so eben tut, könntet ihr "
 "mir nicht gleich noch ein paar Beeren sammeln?"
 
 #: ../data/quests/herbalist.xml:109
@@ -1332,11 +1328,11 @@ msgid ""
 "village."
 msgstr ""
 "Mit den ganzen Goblins kann sich eine alte Frau wie ich ja nicht mal mehr "
-"vor die Tuer wagen."
+"vor die Tür wagen."
 
 #: ../data/quests/herbalist.xml:111
 msgid "Plants are not really my forte..."
-msgstr "Pflanzen sind nicht unbedingt meine Spezialitaet..."
+msgstr "Pflanzen sind nicht unbedingt meine Spezialität..."
 
 #: ../data/quests/herbalist.xml:112
 msgid "Fiddlesticks!"
@@ -1352,7 +1348,7 @@ msgstr "Nur Rilfbeeren."
 
 #: ../data/quests/herbalist.xml:116
 msgid "Look for big bushes with fancy red fruits."
-msgstr "Das sind große Buesche mit auffaelligen roten Fruechten."
+msgstr "Das sind große Büsche mit auffälligen roten Früchten."
 
 #: ../data/quests/herbalist.xml:117
 msgid "You will find them for sure."
@@ -1361,7 +1357,7 @@ msgstr "Die findet ihr bestimmt."
 #: ../data/quests/herbalist.xml:118
 msgid "I need the berries of at least ten bushes."
 msgstr ""
-"Damit es sich lohnt muesstet ihr mir die Beeren von wenigstens zehn Bueschen "
+"Damit es sich lohnt müsstet ihr mir die Beeren von wenigstens zehn Büschen "
 "bringen."
 
 #: ../data/quests/herbalist.xml:119
@@ -1370,15 +1366,15 @@ msgstr "Aber nur die roten Beeren."
 
 #: ../data/quests/herbalist.xml:120
 msgid "The rest is of no use at all."
-msgstr "Der Rest ist voellig uninteressant."
+msgstr "Der Rest ist völlig uninteressant."
 
 #: ../data/quests/herbalist.xml:131
 msgid "Very well, if I find some, I'll bring them."
-msgstr "Na schoen, wenn ich welche finde, bringe ich es mit."
+msgstr "Na schön, wenn ich welche finde, bringe ich sie mit."
 
 #: ../data/quests/herbalist.xml:133 ../data/quests/herbalist.xml:156
 msgid "Very well, if we find some, we'll bring them."
-msgstr "Na schoen, wenn wir welche finden, bringen wir sie mit."
+msgstr "Na schön, wenn wir welche finden, bringen wir sie mit."
 
 #: ../data/quests/herbalist.xml:135 ../data/quests/herbalist.xml:158
 msgid "Thanks, sweety."
@@ -1386,7 +1382,7 @@ msgstr "Danke  Herzchen."
 
 #: ../data/quests/herbalist.xml:143
 msgid "Forget it, herb woman."
-msgstr "Vergiss es, Kraeuterhexe."
+msgstr "Vergiss es, Kräuterhexe."
 
 #: ../data/quests/herbalist.xml:144
 msgid ""
@@ -1394,7 +1390,7 @@ msgid ""
 "bushes."
 msgstr ""
 "Ich werde bestimmt nicht durch die Wiesen kriechen und nach irgendwelchen "
-"Bueschen suchen."
+"Büschen suchen."
 
 #: ../data/quests/herbalist.xml:145
 msgid "Have it your way."
@@ -1403,12 +1399,12 @@ msgstr "Wie du meinst."
 #: ../data/quests/herbalist.xml:146
 msgid "But if you change your mind, I'm not running away from here."
 msgstr ""
-"Aber wenn du es dir noch mal anders ueberlegst, ich werde hier nicht "
+"Aber wenn du es dir noch mal anders überlegst, ich werde hier nicht "
 "weglaufen."
 
 #: ../data/quests/herbalist.xml:154
 msgid "Very well, if I find some, I'll bring them along."
-msgstr "Na schoen, wenn ich welche finde, bringe ich sie mit."
+msgstr "Na schön, wenn ich welche finde, bringe ich sie mit."
 
 #: ../data/quests/herbalist.xml:165
 msgid "Still no."
@@ -1417,12 +1413,12 @@ msgstr "Nein, immer noch nicht."
 #: ../data/quests/herbalist.xml:166
 msgid "Tell me when you're not too mighty for simple work anymore, sweety."
 msgstr ""
-"Sag Bescheid, wenn du nicht mehr zu maechtig fuer einfache Arbeiten bist, "
+"Sag Bescheid, wenn du nicht mehr zu mächtig für einfache Arbeiten bist, "
 "Herzchen."
 
 #: ../data/quests/herbalist.xml:167
 msgid "Watch your tongue, hag!"
-msgstr "Huetet Eure Zunge, Weib!"
+msgstr "Hütet Eure Zunge, Weib!"
 
 #: ../data/quests/herbalist.xml:223
 msgid "Collect"
@@ -1458,7 +1454,7 @@ msgstr ""
 
 #: ../data/quests/joringsbridge.xml:114
 msgid "Not to mention you have a mighty summoner at your side."
-msgstr "Außerdem habt Ihr sogar einen maechtigen Beschwoerer an Eurer Seite."
+msgstr "Außerdem habt Ihr sogar einen mächtigen Beschwörer an Eurer Seite."
 
 #: ../data/quests/joringsbridge.xml:115
 msgid "That's more than enough."
@@ -1477,7 +1473,7 @@ msgid ""
 "The pursuit of pathetic goblins is neither my duty nor do I see the point of "
 "such absurd amusement."
 msgstr ""
-"Das Verfolgen erbaermlicher Goblins ist weder meine Aufgabe, noch sehe ich "
+"Das Verfolgen erbärmlicher Goblins ist weder meine Aufgabe, noch sehe ich "
 "grossen Sinn in solch absurdem Zeitvertreib!"
 
 #: ../data/quests/joringsbridge.xml:120
@@ -1485,7 +1481,7 @@ msgid ""
 "What would you do were the village to be attacked while I was on a fruitless "
 "hunt for goblins?"
 msgstr ""
-"Was tätet ihr wohl, wenn jemand das Dorf angriffe, waehrend ich auf einer "
+"Was tätet ihr wohl, wenn jemand das Dorf angriffe, während ich auf einer "
 "fruchtlosen Jagd nach Goblins wäre?"
 
 #: ../data/quests/joringsbridge.xml:121
@@ -1496,7 +1492,7 @@ msgstr "Und ihr habt wirklich keine Zeit, hier etwas auszuhelfen?"
 msgid "My humble apologies, but the council has given me very important tasks."
 msgstr ""
 "Es tut mir aufrichtig Leid, aber das Konzil hat mir sehr wichtige Aufgaben "
-"uebertragen."
+"übertragen."
 
 #: ../data/quests/joringsbridge.xml:123
 msgid "As much as I'd like to help, I don't have any room for such a thing."
@@ -1523,8 +1519,8 @@ msgid ""
 "I just hope the kingdom has big granaries, if the greenskins torch the "
 "fields."
 msgstr ""
-"Ich hoffe nur, das Koenigreich hat große Kornspeicher, wenn die Gruenhaeute "
-"hier alle Felder abfackeln."
+"Ich hoffe nur, das Königreich hat große Kornspeicher, wenn die Günhäute hier "
+"alle Felder abfackeln."
 
 #: ../data/quests/joringsbridge.xml:139
 msgid "The presence of the mage alone will drive out every goblin!"
@@ -1532,7 +1528,7 @@ msgstr "Allein die Anwesenheit des Magus wird jeden Goblin vertreiben!"
 
 #: ../data/quests/joringsbridge.xml:140
 msgid "Stop bugging the prince with your incompetence."
-msgstr "Hoert endlich auf, den Prinzen mit eurer Inkompetenz zu belaestigen!"
+msgstr "Hört endlich auf, den Prinzen mit eurer Inkompetenz zu belästigen!"
 
 #: ../data/quests/joringsbridge.xml:141
 msgid "!"
@@ -1544,11 +1540,11 @@ msgstr "Habt ihr nichts besseres zu tun?"
 
 #: ../data/quests/joringsbridge.xml:144
 msgid "And they say, my kind is cold-hearted..."
-msgstr "Und da sagt man, meine Art waere kaltherzig..."
+msgstr "Und da sagt man, meine Art wäre kaltherzig..."
 
 #: ../data/quests/joringsbridge.xml:146
 msgid "And they say, our kind is cold-hearted..."
-msgstr "Und da sagt man, unsereins waere kaltherzig..."
+msgstr "Und da sagt man, unsereins wäre kaltherzig..."
 
 #: ../data/quests/joringsbridge.xml:168
 msgid "Guards! Guards!"
@@ -1564,7 +1560,7 @@ msgstr "Meine Familie..."
 
 #: ../data/quests/joringsbridge.xml:184
 msgid "Take the fool away!"
-msgstr "Schafft den Toelpel hier weg!"
+msgstr "Schafft den Tölpel hier weg!"
 
 #: ../data/quests/joringsbridge.xml:185
 msgid "The prince has more important matters to tend to."
@@ -1605,7 +1601,7 @@ msgstr "Wir haben keine Zeit!"
 
 #: ../data/quests/joringsbridge.xml:198
 msgid "The demons are at the northern border!"
-msgstr "Die Daemonen stehen an der Nordgrenze!"
+msgstr "Die Dämonen stehen an der Nordgrenze!"
 
 #: ../data/quests/joringsbridge.xml:200
 msgid "I know!"
@@ -1613,19 +1609,19 @@ msgstr "Ich weiss!"
 
 #: ../data/quests/joringsbridge.xml:203
 msgid "2000 gold pieces for everyone who is willing to help this humble man!"
-msgstr "2000 Goldstuecke jedem, der diesem treuen Mann hilft!"
+msgstr "2000 Goldstücke jedem, der diesem treuen Mann hilft!"
 
 #: ../data/quests/joringsbridge.xml:207
 msgid "2000 gold pieces."
-msgstr "2000 Goldstuecke."
+msgstr "2000 Goldstücke."
 
 #: ../data/quests/joringsbridge.xml:209
 msgid "2000 for every one."
-msgstr "2000 fuer jeden."
+msgstr "2000 für jeden."
 
 #: ../data/quests/joringsbridge.xml:211
 msgid "That could almost be worth the trouble."
-msgstr "Das koennte sich doch beinahe lohnen."
+msgstr "Das könnte sich doch beinahe lohnen."
 
 #: ../data/quests/joringsbridge.xml:239 ../data/quests/joringsbridge.xml:250
 msgid "Don't even think about it!"
@@ -1654,8 +1650,7 @@ msgstr "Ah!"
 #: ../data/quests/joringsbridge.xml:245
 msgid ""
 "The mage over there has another of those crystals on his staff, hasn't he?"
-msgstr ""
-"Der Magier da drueben hat auch so einen Kristall auf seinem Stab, oder?"
+msgstr "Der Magier da drüben hat auch so einen Kristall auf seinem Stab, oder?"
 
 #: ../data/quests/joringsbridge.xml:246
 msgid "You people are really unnerving somehow."
@@ -1664,7 +1659,7 @@ msgstr "Ihr Leute nervt echt irgendwie."
 #: ../data/quests/joringsbridge.xml:247
 msgid "Who cares what you think? Let the peasant be a peasant and get moving!"
 msgstr ""
-"Wen kuemmer denn, was du denkst? Lass den Bauer Bauer sein und geh weiter!"
+"Wen kümmer denn, was du denkst? Lass den Bauer Bauer sein und geh weiter!"
 
 #: ../data/quests/joringsbridge.xml:248 ../data/quests/joringsbridge.xml:257
 msgid "Well..."
@@ -1696,7 +1691,7 @@ msgstr "Dem Bauern helfen?"
 
 #: ../data/quests/joringsbridge.xml:276
 msgid "Only a stone would watch deedless."
-msgstr "Nur ein Stein wuerde tatenlos zusehen."
+msgstr "Nur ein Stein würde tatenlos zusehen."
 
 #: ../data/quests/joringsbridge.xml:277
 msgid "Who knows how many sou... goblins are walking around there!"
@@ -1704,7 +1699,7 @@ msgstr "Wer weiß, wie viele Se... Goblins da umher laufen!"
 
 #: ../data/quests/joringsbridge.xml:278
 msgid "And we get money. Two birds with one stone."
-msgstr "Und es gibt Geld dafuer. Zwei Fliegen mit einer Klappe"
+msgstr "Und es gibt Geld dafür. Zwei Fliegen mit einer Klappe"
 
 #: ../data/quests/joringsbridge.xml:281 ../data/quests/joringsbridge.xml:286
 msgid "What do you think you're doing? You are to go to Dwarfenwall!"
@@ -1716,7 +1711,7 @@ msgstr "Wann ich dort ankomme war nie Teil der Abmachung!"
 
 #: ../data/quests/joringsbridge.xml:283
 msgid "If the city is lost, I'll just conquer it back!"
-msgstr "Wenn die Stadt gefallen ist, erobere ich sie eben zurueck!"
+msgstr "Wenn die Stadt gefallen ist, erobere ich sie eben zurück!"
 
 #: ../data/quests/joringsbridge.xml:285
 msgid "So it's decided."
@@ -1728,19 +1723,19 @@ msgstr "Wann wir dort ankommen war nie Teil der Abmachung!"
 
 #: ../data/quests/joringsbridge.xml:288
 msgid "If the city is lost, we'll just conquer it back!"
-msgstr "Wenn die Stadt gefallen ist, erobern wir sie eben zurueck!"
+msgstr "Wenn die Stadt gefallen ist, erobern wir sie eben zurück!"
 
 #: ../data/quests/joringsbridge.xml:289
 msgid "Yes, show him who's in charge!"
-msgstr "Ja, zeig ihm, wo der Hammer haengt!"
+msgstr "Ja, zeig ihm, wo der Hammer hängt!"
 
 #: ../data/quests/joringsbridge.xml:318
 msgid "Prince, I take the job!"
-msgstr "Prinz, ich uebernehme den Auftrag!"
+msgstr "Prinz, ich übernehme den Auftrag!"
 
 #: ../data/quests/joringsbridge.xml:320
 msgid "Prince, we take the job!"
-msgstr "Prinz, wir uebernehmen den Auftrag!"
+msgstr "Prinz, wir übernehmen den Auftrag!"
 
 #: ../data/quests/joringsbridge.xml:333
 msgid "Aren't you the... auxiliary  forces of the council? ##solo"
@@ -1756,7 +1751,7 @@ msgstr "...unter der Knute eines gewissen Soren Luftpfote, zu Diensten."
 
 #: ../data/quests/joringsbridge.xml:337
 msgid "Windclaw, you fool!"
-msgstr "Windklaue, du Toelpel!"
+msgstr "Windklaue, du Tölpel!"
 
 #: ../data/quests/joringsbridge.xml:338
 msgid "Oops..."
@@ -1764,11 +1759,11 @@ msgstr "Ups..."
 
 #: ../data/quests/joringsbridge.xml:342
 msgid "Is that a problem for you?"
-msgstr "Ist das ein Problem fuer Euch?"
+msgstr "Ist das ein Problem für Euch?"
 
 #: ../data/quests/joringsbridge.xml:344
 msgid "... probably not. Alright, even if I don't like it."
-msgstr "...wahrscheinlich nicht. Also gut, auch wenn es mir nicht gefaellt."
+msgstr "...wahrscheinlich nicht. Also gut, auch wenn es mir nicht gefällt."
 
 #: ../data/quests/joringsbridge.xml:346
 msgid "Are you sure?"
@@ -1776,7 +1771,7 @@ msgstr "Seid Ihr sicher?"
 
 #: ../data/quests/joringsbridge.xml:347
 msgid "What if they kill the peasants along?"
-msgstr "Was, wenn sie die Bauern gleich mit toeten?"
+msgstr "Was, wenn sie die Bauern gleich mit töten?"
 
 #: ../data/quests/joringsbridge.xml:350 ../data/quests/joringsbridge.xml:370
 msgid "Sergeant!"
@@ -1787,8 +1782,8 @@ msgid ""
 "Only hand over the gold if the goblins are driven off and the peasants are "
 "alive in the end."
 msgstr ""
-"Haendigt das Gold nur aus, wenn die Goblins vertrieben und die Bauern am "
-"Ende noch lebendig sind."
+"Händigt das Gold nur aus, wenn die Goblins vertrieben und die Bauern am Ende "
+"noch lebendig sind."
 
 #: ../data/quests/joringsbridge.xml:352
 msgid "Otherwise, do your work diligent."
@@ -1800,7 +1795,7 @@ msgstr "Sehr wohl, mein Prinz."
 
 #: ../data/quests/joringsbridge.xml:357
 msgid "That much distrust is really unnecessary during a war. "
-msgstr "So viel Misstrauen ist waehrend eines Krieges wirklich nicht noetig."
+msgstr "So viel Misstrauen ist während eines Krieges wirklich nicht nötig."
 
 #: ../data/quests/joringsbridge.xml:367
 msgid "Nobody?"
@@ -1817,11 +1812,11 @@ msgstr "Mein Wort steht."
 #: ../data/quests/joringsbridge.xml:377
 msgid "Hand over the gold, if you find someone who helps you after all."
 msgstr ""
-"Haendigt das Gold aus, falls sich doch noch jemand findet und Euch hilft."
+"Händigt das Gold aus, falls sich doch noch jemand findet und Euch hilft."
 
 #: ../data/quests/joringsbridge.xml:379
 msgid "As you wish, my prince."
-msgstr "Wie Ihr wuenscht, mein Prinz."
+msgstr "Wie Ihr wünscht, mein Prinz."
 
 #: ../data/quests/joringsbridge.xml:382
 msgid "I'm sorry, good man."
@@ -1829,16 +1824,16 @@ msgstr "Es tut mir Leid, guter Mann."
 
 #: ../data/quests/joringsbridge.xml:383
 msgid "I will pray that your family is safe long enough."
-msgstr "Ich werde dafuer beten, dass eure Familie lange genug aushaelt."
+msgstr "Ich werde dafür beten, dass eure Familie lange genug aushält."
 
 #: ../data/quests/maylons_grave.xml:5
 msgid ""
 "Some necromancer really resurrected an old council mage. Probably to cause "
 "confusion behind the lines. At least one problem that is solved."
 msgstr ""
-"Irgendein Nekromant hat tatsaechlich im Hinterland von Aisen einen alten "
-"Konzilsmagier wiederbelebt, wahrscheinlich, um fuer Verwirrung und "
-"Stoeraktionen zu sorgen. Zumindest das Problem hat sich erledigt."
+"Irgendein Nekromant hat tatsächlich im Hinterland von Aisen einen alten "
+"Konzilsmagier wiederbelebt, wahrscheinlich, um für Verwirrung und "
+"Störaktionen zu sorgen. Zumindest das Problem hat sich erledigt."
 
 #: ../data/quests/maylons_grave.xml:7
 msgid ""
@@ -1880,7 +1875,7 @@ msgstr "Ein Goblin, der reden will?"
 
 #: ../data/quests/maylons_grave.xml:171
 msgid "Yes. No hurt, no kill."
-msgstr "Ja. Nich schlagen, nich toeten."
+msgstr "Ja. Nich schlagen, nich töten."
 
 #: ../data/quests/maylons_grave.xml:172
 msgid "Gab'Resh and his only harmless rustlers. No bandits."
@@ -1888,7 +1883,7 @@ msgstr "Gab'Resh und seine nur harmlose Viehdiebe. Keine Banditen."
 
 #: ../data/quests/maylons_grave.xml:173
 msgid "You listen, yes?"
-msgstr "Ihr zuhoeren, ja?"
+msgstr "Ihr zuhören, ja?"
 
 #: ../data/quests/maylons_grave.xml:174
 msgid "What will you do?"
@@ -1896,7 +1891,7 @@ msgstr "Was tun?"
 
 #: ../data/quests/maylons_grave.xml:175
 msgid "Listen to the goblins"
-msgstr "Den Goblins zuhoeren"
+msgstr "Den Goblins zuhören"
 
 #: ../data/quests/maylons_grave.xml:176
 msgid "Chase the goblins away"
@@ -1908,7 +1903,7 @@ msgstr "Die Goblins erschlagen"
 
 #: ../data/quests/maylons_grave.xml:188
 msgid "What could a goblin possibly have to say?"
-msgstr "Was koennte ein Goblin schon zu sagen haben"
+msgstr "Was könnte ein Goblin schon zu sagen haben"
 
 #: ../data/quests/maylons_grave.xml:189
 msgid "We often hide here."
@@ -1917,8 +1912,8 @@ msgstr "Wir uns hier oft verstecken."
 #: ../data/quests/maylons_grave.xml:190
 msgid "No humans coming, and if do, they never return from depth of cave."
 msgstr ""
-"Kaum Menschens vorbei kommen, und wenn doch, dann nie wieder zurueck kehren "
-"aus Tiefen von Hoehle."
+"Kaum Menschens vorbei kommen, und wenn doch, dann nie wieder zurück kehren "
+"aus Tiefen von Höhle."
 
 #: ../data/quests/maylons_grave.xml:191
 msgid "But last moon black human came."
@@ -1945,12 +1940,12 @@ msgstr ""
 #: ../data/quests/maylons_grave.xml:197
 msgid "We cannot leave such a problem amidst this under-guarded region."
 msgstr ""
-"Ein solches Problem koennen wir nicht einfach so inmitten dieser "
+"Ein solches Problem können wir nicht einfach so inmitten dieser "
 "unterbewachten Region lassen."
 
 #: ../data/quests/maylons_grave.xml:199
 msgid "Who knows what could happen?"
-msgstr "Wer wei�, was alles passieren koennte?"
+msgstr "Wer weiß, was alles passieren könnte?"
 
 #: ../data/quests/maylons_grave.xml:201
 msgid ""
@@ -1958,7 +1953,7 @@ msgid ""
 "brake in Harad's Hell."
 msgstr ""
 "Wirklich, ich sollte diese armen gebundenen Seelen befreien und zu einem "
-"Kurzurlaub in Harads Hoelle schicken."
+"Kurzurlaub in Harads Hölle schicken."
 
 #: ../data/quests/maylons_grave.xml:203
 msgid ""
@@ -1966,7 +1961,7 @@ msgid ""
 "brake in Harad's Hell."
 msgstr ""
 "Wirklich, wir sollten diese armen gebundenen Seelen befreien und zu einem "
-"Kurzurlaub in Harads Hoelle schicken."
+"Kurzurlaub in Harads Hölle schicken."
 
 #: ../data/quests/maylons_grave.xml:205
 msgid "Better them than us."
@@ -1975,14 +1970,14 @@ msgstr "Besser sie als wir."
 #: ../data/quests/maylons_grave.xml:208
 msgid "Good warning, yes? Mighty warrior-humans let us live, no?"
 msgstr ""
-"Gute Warnung, nein? Maechtige Menschenkriegers uns am leben lassen, nein?"
+"Gute Warnung, nein? Mächtige Menschenkriegers uns am leben lassen, nein?"
 
 #: ../data/quests/maylons_grave.xml:210
 msgid ""
 "Get lost. I have better things to do than killing a band of pathetic goblins."
 msgstr ""
 "Verschwindet schon. Ich habe jetzt besseres zu tun, als eine Bande "
-"armseliger Goblins zu toeten."
+"armseliger Goblins zu töten."
 
 #: ../data/quests/maylons_grave.xml:212
 msgid ""
@@ -1990,27 +1985,27 @@ msgid ""
 "goblins."
 msgstr ""
 "Verschwindet schon. Wir haben jetzt besseres zu tun, als eine Bande "
-"armseliger Goblins zu toeten."
+"armseliger Goblins zu töten."
 
 #: ../data/quests/maylons_grave.xml:227
 msgid "Miserable brood! Die!"
-msgstr "Elendes Gezuecht!Sterbt alle!"
+msgstr "Elendes Gezücht!Sterbt alle!"
 
 #: ../data/quests/maylons_grave.xml:229
 msgid "Miserable brood! Slay them all!"
-msgstr "Elendes Gezuecht! Macht sie nieder!"
+msgstr "Elendes Gezücht! Macht sie nieder!"
 
 #: ../data/quests/maylons_grave.xml:250
 msgid "Get lost, before I change my mind!"
-msgstr "Macht, dass ihr davonkommt, bevor ich es mir anders ueberlege!"
+msgstr "Macht, dass ihr davonkommt, bevor ich es mir anders überlege!"
 
 #: ../data/quests/maylons_grave.xml:430
 msgid "Thank you very much for liberating my soul."
-msgstr "Ich danke Euch fuer die Befreiung meines Geistes."
+msgstr "Ich danke Euch für die Befreiung meines Geistes."
 
 #: ../data/quests/maylons_grave.xml:431
 msgid "May you do many other great deeds."
-msgstr "Moeget Ihr noch viele grosse Taten vollbringen."
+msgstr "Möget Ihr noch viele große Taten vollbringen."
 
 #: ../data/quests/maylons_grave.xml:432
 msgid "Akerans blessing to you."
@@ -2027,17 +2022,17 @@ msgid ""
 "For a long time now I have no use for it anymore. Choose yourself a weapon "
 "you like."
 msgstr ""
-"Ich habe schon lange keine Verwendung mehr dafuer. Sucht Euch eine Waffe "
-"aus, die euch gefaellt."
+"Ich habe schon lange keine Verwendung mehr dafür. Sucht Euch eine Waffe aus, "
+"die euch gefällt."
 
 #: ../data/quests/maylons_grave.xml:435
 msgid "The same holds true for your friends."
-msgstr "Das gilt auch fuer Eure Freunde."
+msgstr "Das gilt auch für Eure Freunde."
 
 #: ../data/quests/maylons_grave.xml:436
 msgid "But now I have to return into the bliss of Akerans eternal oasis."
 msgstr ""
-"Jetzt muss ich aber wieder zurueck in die Glueckseligkeit von Akerans Ewiger "
+"Jetzt muss ich aber wieder zurück in die Glückseligkeit von Akerans Ewiger "
 "Oase."
 
 #: ../data/quests/maylons_grave.xml:439
@@ -2045,8 +2040,8 @@ msgid ""
 "I wander if he would have said that if he had known that he will make a "
 "detour to Harad's Hell first?"
 msgstr ""
-"Ob er das auch gesagt haette, wenn er wuesste, dass er erst mal einen Umweg "
-"ueber Harads Hoelle nehmen wird?"
+"Ob er das auch gesagt hätte, wenn er wüsste, dass er erst mal einen Umweg "
+"über Harads Hölle nehmen wird?"
 
 #: ../data/quests/rescue_willard.xml:5
 msgid ""
@@ -2064,14 +2059,14 @@ msgid ""
 "will show himself only if there are no goblins around."
 msgstr ""
 "Willard versteckt sich irgendwo in der Aisener Wiese. Er wird sich wegen "
-"seiner Verletzung sicher nur zeigen, wenn keine Goblins in der Naehe sind."
+"seiner Verletzung sicher nur zeigen, wenn keine Goblins in der Nähe sind."
 
 #: ../data/quests/rescue_willard.xml:10
 msgid ""
 "A long search and quite a lot of dead goblins later Willard has finally "
 "shown himself. I should give him the stone and be done with it."
 msgstr ""
-"Langes suchen und etliche tote Goblins spaeter ist Willard endlich "
+"Langes suchen und etliche tote Goblins später ist Willard endlich "
 "aufgetaucht. Ich sollte ihm den Stein geben und es hinter mich bringen."
 
 #: ../data/quests/rescue_willard.xml:25
@@ -2088,7 +2083,7 @@ msgstr "Ich hoffe, Ihr kommt mit Eurer Suche nach Willard voran."
 
 #: ../data/quests/rescue_willard.xml:73
 msgid "Have you changed your mind?"
-msgstr "Habt Ihr es euch etwa anders ueberlegt?"
+msgstr "Habt Ihr es euch etwa anders überlegt?"
 
 #: ../data/quests/rescue_willard.xml:74 ../data/quests/rescue_willard.xml:130
 msgid "Search for Willard?"
@@ -2096,11 +2091,11 @@ msgstr "Nach Willard suchen?"
 
 #: ../data/quests/rescue_willard.xml:80 ../data/quests/rescue_willard.xml:82
 msgid "If I'm not mistaken you are a Branded One."
-msgstr "Wenn mich nicht alles taeuscht seid ihr eine Gezeichnete."
+msgstr "Wenn mich nicht alles täuscht seid ihr ein Gezeichneter."
 
 #: ../data/quests/rescue_willard.xml:84
 msgid "If I'm not mistaken you are Branded Ones."
-msgstr "Wenn mich nicht alles taeuscht seid ihr Gezeichnete."
+msgstr "Wenn mich nicht alles täuscht seid ihr Gezeichnete."
 
 #: ../data/quests/rescue_willard.xml:86
 msgid "What the..."
@@ -2109,7 +2104,7 @@ msgstr "Was zum..."
 #: ../data/quests/rescue_willard.xml:87
 msgid "Do I have a sign somewere saying: Caution, dangerous monster??"
 msgstr ""
-"Habe ich irgendwo ein Schild auf dem steht: Achtung, gefaehrliches Monster??"
+"Habe ich irgendwo ein Schild auf dem steht: Achtung, gefährliches Monster??"
 
 #: ../data/quests/rescue_willard.xml:88
 msgid "That is the second time today!"
@@ -2117,7 +2112,7 @@ msgstr "Das ist schon das zweite Mal heute!"
 
 #: ../data/quests/rescue_willard.xml:89
 msgid "I could always feel if someone was a Branded One."
-msgstr "Ich konnte schon immer spueren, wenn jemand ein Gezeichneter war."
+msgstr "Ich konnte schon immer spüren, wenn jemand ein Gezeichneter war."
 
 #: ../data/quests/rescue_willard.xml:90
 msgid ""
@@ -2125,27 +2120,27 @@ msgid ""
 "correctly."
 msgstr ""
 "Aber keine Sorge, ich werde niemanden verraten, solange er sich korrekt "
-"verhaelt."
+"verhält."
 
 #: ../data/quests/rescue_willard.xml:92
 msgid "There is something I'd like to ask of you. ##solo"
-msgstr "Es gibt da etwas, um das ich Euch bitten moechte. ##solo"
+msgstr "Es gibt da etwas, um das ich Euch bitten möchte. ##solo"
 
 #: ../data/quests/rescue_willard.xml:93
 msgid "Only someone like you could do it reliably. ##solo"
-msgstr "Nur jemand wie Ihr koennte das zuverlaessig erledigen. ##solo"
+msgstr "Nur jemand wie Ihr könnte das zuverlässig erledigen. ##solo"
 
 #: ../data/quests/rescue_willard.xml:95
 msgid "There is something I'd like to ask of you."
-msgstr "Es gibt da etwas, um das ich Euch bitten moechte."
+msgstr "Es gibt da etwas, um das ich euch bitten möchte."
 
 #: ../data/quests/rescue_willard.xml:96
 msgid "Only someone like you could do it reliable."
-msgstr "Nur jemand wie Ihr koennte das zuverlaessig erledigen."
+msgstr "Nur jemand wie Ihr könnte das zuverlässig erledigen."
 
 #: ../data/quests/rescue_willard.xml:99
 msgid "Who would have thought that?"
-msgstr "Wer haette das gedacht?"
+msgstr "Wer hätte das gedacht?"
 
 #: ../data/quests/rescue_willard.xml:100
 msgid "Does an honorable member of the city guard wants someone's throat cut?"
@@ -2155,15 +2150,14 @@ msgstr ""
 
 #: ../data/quests/rescue_willard.xml:101
 msgid "What? I could have hired a professional assassin for that."
-msgstr ""
-"Haeh? Dafuer haette ich einen professionellen Attentaeter anheuern koennen."
+msgstr "Häh? Dafür hätte ich einen professionellen Attentäter anheuern können."
 
 #: ../data/quests/rescue_willard.xml:102
 msgid ""
 "I thought you were the kind of Branded Ones that doesn't kill every human "
 "crossing their way."
 msgstr ""
-"Ich dachte, Ihr waert die Sorte Gezeichnete, die nicht wahllos alle Menschen "
+"Ich dachte, Ihr wärt die Sorte Gezeichnete, die nicht wahllos alle Menschen "
 "umbringen, die ihren Weg kreuzen."
 
 #: ../data/quests/rescue_willard.xml:103
@@ -2180,32 +2174,32 @@ msgstr "Danke. Mein Name ist Fenor Marken."
 
 #: ../data/quests/rescue_willard.xml:106
 msgid "I have a friend with the gamekeepers."
-msgstr "Es ist so: Ich habe einen Freund bei den Wildhuetern."
+msgstr "Es ist so: Ich habe einen Freund bei den Wildhütern."
 
 #: ../data/quests/rescue_willard.xml:107
 msgid ""
 "He was in the meadows with two collegues, when they were attacked by goblins."
 msgstr ""
-"Er war mit zwei Kollegen in den Wiesen, als sie von Goblins ueberfallen "
+"Er war mit zwei Kollegen in den Wiesen, als sie von Goblins überfallen "
 "wurden."
 
 #: ../data/quests/rescue_willard.xml:108
 msgid "And those cowards left him behind injured!"
-msgstr "Und diese Feiglinge haben ihn verletzt zurueck gelassen!"
+msgstr "Und diese Feiglinge haben ihn verletzt zurück gelassen!"
 
 #: ../data/quests/rescue_willard.xml:110
 msgid "Surely you don't want me to bring back his corpse, do you?"
-msgstr "Sicher wollt Ihr nicht, dass ich seine Leiche zurueck bringe."
+msgstr "Sicher wollt Ihr nicht, dass ich seine Leiche zurück bringe."
 
 #: ../data/quests/rescue_willard.xml:112
 msgid "Surely you don't want us to bring back his corpse, do you?"
-msgstr "Sicher wollt Ihr nicht, dass wir seine Leiche zurueck bringe."
+msgstr "Sicher wollt Ihr nicht, dass wir seine Leiche zurück bringe."
 
 #: ../data/quests/rescue_willard.xml:114
 msgid "No, Willard isn't someone who would be killed by some lousy goblins."
 msgstr ""
 "Nein. Willard ist niemand, der sich von ein paar lausigen Goblins umbringen "
-"laesst."
+"lässt."
 
 #: ../data/quests/rescue_willard.xml:115
 msgid "I'm sure he waits somewhere for help."
@@ -2214,7 +2208,7 @@ msgstr ""
 
 #: ../data/quests/rescue_willard.xml:116
 msgid "I'm sure you are very busy."
-msgstr "Nun seid Ihr sicher sehr beschaeftigt."
+msgstr "Nun seid Ihr sicher sehr beschäftigt."
 
 #: ../data/quests/rescue_willard.xml:118
 msgid "That is why I only ask you to bring him this phasestone. ##solo"
@@ -2226,7 +2220,7 @@ msgstr "Deswegen bitte ich Euch, ihm diesen Phasenstein zu bringen."
 
 #: ../data/quests/rescue_willard.xml:122
 msgid "I wouldn't entrust this to anyone normaly."
-msgstr "Normalerweise wuerde ich das niemandem anvertrauen."
+msgstr "Normalerweise würde ich das niemandem anvertrauen."
 
 #: ../data/quests/rescue_willard.xml:123
 msgid "Much less someone totally unknown."
@@ -2234,7 +2228,7 @@ msgstr "Schon gar keinen wildfremden Leuten."
 
 #: ../data/quests/rescue_willard.xml:124
 msgid "Who wouldn't take off with it?"
-msgstr "Wer wuerde nicht einfach damit verschwinden?"
+msgstr "Wer würde nicht einfach damit verschwinden?"
 
 #: ../data/quests/rescue_willard.xml:125
 msgid "But you Branded Ones have other ways and means to travel, haven't you."
@@ -2243,7 +2237,7 @@ msgstr "Aber ihr Gezeichneten habt andere Mittel und Wege, um zu reisen."
 #: ../data/quests/rescue_willard.xml:126
 msgid "And you cannot use a phasestone since it is dedicated to Avaera, right?"
 msgstr ""
-"Und einen Phasenstein koennt ihr nicht benutzen, weil er Avaera geweiht ist, "
+"Und einen Phasenstein könnt ihr nicht benutzen, weil er Avaera geweiht ist, "
 "stimmt's?"
 
 #: ../data/quests/rescue_willard.xml:127
@@ -2276,7 +2270,7 @@ msgid ""
 "I'm sorry, but I don't want to waste my time searching for any gamekeepers."
 msgstr ""
 "Es tut mir Leid, aber ich will meine Zeit nicht damit verschwenden, nach "
-"irgendwelchen Wildhuetern zu suchen."
+"irgendwelchen Wildhütern zu suchen."
 
 #: ../data/quests/rescue_willard.xml:158
 msgid "You are as cold-hearted as they say. ##solo"
@@ -2285,8 +2279,8 @@ msgstr "Ihr seid genauso kaltherzig, wie man es euch nachsagt. ##solo"
 #: ../data/quests/rescue_willard.xml:160
 msgid "I'm sorry, but we cannot waste our time searching for any gamekeepers."
 msgstr ""
-"Es tut mir Leid, aber wir koennen unsere Zeit nicht damit verschwenden, nach "
-"irgendwelchen Wildhuetern zu suchen."
+"Es tut mir Leid, aber wir können unsere Zeit nicht damit verschwenden, nach "
+"irgendwelchen Wildhütern zu suchen."
 
 #: ../data/quests/rescue_willard.xml:161
 msgid "You are as cold-hearted as they say."
@@ -2294,11 +2288,11 @@ msgstr "Ihr seid genauso kaltherzig, wie man es euch nachsagt."
 
 #: ../data/quests/rescue_willard.xml:163
 msgid "If only I could leave here."
-msgstr "Wenn ich doch nur hier weg koennte."
+msgstr "Wenn ich doch nur hier weg könnte."
 
 #: ../data/quests/rescue_willard.xml:164
 msgid "I would search for him myself."
-msgstr "Dann  wuerde ich ihn selbst suchen gehen."
+msgstr "Dann würde ich ihn selbst suchen gehen."
 
 #: ../data/quests/rescue_willard.xml:171
 msgid "Then what do you want of me? ##solo"
@@ -2306,7 +2300,7 @@ msgstr "Was wollt Ihr dann von mir? ##solo"
 
 #: ../data/quests/rescue_willard.xml:172
 msgid "Leave, before I tell someone about you! ##solo"
-msgstr "Verschwindet, bevor ich jemandem von Euch erzaehle! ##solo"
+msgstr "Verschwindet, bevor ich jemandem von Euch erzähle! ##solo"
 
 #: ../data/quests/rescue_willard.xml:174
 msgid "Then what do you want from me?"
@@ -2314,7 +2308,7 @@ msgstr "Was wollt Ihr dann von mir?"
 
 #: ../data/quests/rescue_willard.xml:175
 msgid "Leave, before I tell someone about you!"
-msgstr "Verschwindet, bevor ich jemandem von Euch erzaehle!"
+msgstr "Verschwindet, bevor ich jemandem von Euch erzähle!"
 
 #: ../data/quests/rescue_willard.xml:212
 msgid "Thank's for your help."
@@ -2343,15 +2337,15 @@ msgstr ""
 
 #: ../data/quests/rescue_willard.xml:219
 msgid "Holy gods! He still has that thing?"
-msgstr "Bei den Goettern! Er hat das Ding immer noch?"
+msgstr "Bei den Göttern! Er hat das Ding immer noch?"
 
 #: ../data/quests/rescue_willard.xml:220
 msgid "That was one of our youthful follys."
-msgstr "Das ist eine unserer Jugendsuenden gewesen."
+msgstr "Das ist eine unserer Jugendsünden gewesen."
 
 #: ../data/quests/rescue_willard.xml:221
 msgid "Mine is long used up."
-msgstr "Meiner ist laengst verbraucht."
+msgstr "Meiner ist längst verbraucht."
 
 #: ../data/quests/rescue_willard.xml:222
 msgid "Good old Fenor. Here, a token of my appreciation."
@@ -2370,7 +2364,7 @@ msgid ""
 "Rob the robber breathed his last and provided a downright windfall while he "
 "was on it."
 msgstr ""
-"Rob der Raeuber hat seinen letzten Atemzug getan und dabei noch fuer einen "
+"Rob der Räuber hat seinen letzten Atemzug getan und dabei noch für einen "
 "regelrechten Geldsegen gesorgt."
 
 #: ../data/quests/rob_the_robber.xml:6
@@ -2379,8 +2373,8 @@ msgid ""
 "I'm on my way to Dwarfenwall to show it to this sergeant Wober. I have no "
 "idea why everyone was so afraid of this guy."
 msgstr ""
-"Rob der Raeuber ist tot und wird bald vergessen sein. Ich habe sein Halsband "
-"und bin schon auf dem Weg nach Zwergentrutz, um es diesem Seargent Wober zu "
+"Rob der Räuber ist tot und wird bald vergessen sein. Ich habe sein Halsband "
+"und bin schon auf dem Weg nach Zwergentrutz, um es diesem Sergeant Wober zu "
 "zeigen. Keine Ahnung, warum die alle solche Angst vor dem Kerl hatten."
 
 #: ../data/quests/rob_the_robber.xml:8
@@ -2389,20 +2383,20 @@ msgid ""
 "dispose of him and take his neckband. At least it spares me the unsavory "
 "task of carrying a head around."
 msgstr ""
-"Rob der Raeuber versteckt sich angeblich in den Tiefen des Feenwaldes. Finde "
-"ihn, mach ihn unschaedlich und nimm sein Halsband mit. Wenigstens erspart "
-"mir das die unappetitliche Aufgabe, einen Kopf mit mir rumzuschleppen."
+"Rob der Räuber versteckt sich angeblich in den Tiefen des Feenwaldes. Finde "
+"ihn, mach ihn unschädlich und nimm sein Halsband mit. Wenigstens erspart mir "
+"das die unappetitliche Aufgabe, einen Kopf mit mir rumzuschleppen."
 
 #: ../data/quests/rob_the_robber.xml:23
 msgid ""
 "I really should pay this guy a visit. 10000 gold pieces are not chickenfeed."
 msgstr ""
-"Ich sollte diesen Kerl wirklich mal besuchen. 10000 Goldstuecke sind kein "
+"Ich sollte diesen Kerl wirklich mal besuchen. 10000 Goldstücke sind kein "
 "Pappenstiel."
 
 #: ../data/quests/rob_the_robber.xml:24
 msgid "Watch your back."
-msgstr "Passt auf Euren Ruecken auf."
+msgstr "Passt auf Euren Rücken auf."
 
 #: ../data/quests/rob_the_robber.xml:26 ../data/quests/rob_the_robber.xml:78
 msgid "Excuse me, sergeant, but I noticed this wanted poster."
@@ -2412,8 +2406,8 @@ msgstr "Verzeiht, Sergeant, aber mir ist dieser Steckbrief aufgefallen."
 msgid ""
 "Isn't a bounty of 10000 gold pieces a little bit over the top for one man?"
 msgstr ""
-"Ist ein Kopfgeld von 10000 Goldst�cken nicht ein wenig uebertrieben fuer "
-"einen Mann?"
+"Ist ein Kopfgeld von 10000 Goldstücken nicht ein wenig übertrieben für einen "
+"Mann?"
 
 #: ../data/quests/rob_the_robber.xml:29 ../data/quests/rob_the_robber.xml:81
 msgid "Oh, him."
@@ -2421,7 +2415,7 @@ msgstr "Ach, der."
 
 #: ../data/quests/rob_the_robber.xml:30 ../data/quests/rob_the_robber.xml:82
 msgid "The bounty hunters keep their fingers off him."
-msgstr "Von dem lassen alle Kopfgeldjaeger die Finger."
+msgstr "Von dem lassen alle Kopfgeldjäger die Finger."
 
 #: ../data/quests/rob_the_robber.xml:31 ../data/quests/rob_the_robber.xml:83
 msgid ""
@@ -2433,11 +2427,11 @@ msgstr ""
 
 #: ../data/quests/rob_the_robber.xml:32 ../data/quests/rob_the_robber.xml:84
 msgid "And Rob is plundering and murdering on."
-msgstr "Und Rob pluendert und mordet weiter."
+msgstr "Und Rob plündert und mordet weiter."
 
 #: ../data/quests/rob_the_robber.xml:33 ../data/quests/rob_the_robber.xml:85
 msgid "It seems he has oodles of luck, that villain."
-msgstr "Hat anscheinend Unmengen Glueck, der Kerl"
+msgstr "Hat anscheinend Unmengen Glück, der Kerl"
 
 #: ../data/quests/rob_the_robber.xml:34 ../data/quests/rob_the_robber.xml:86
 msgid "Are you interested?"
@@ -2451,11 +2445,11 @@ msgstr "Allerdings."
 
 #: ../data/quests/rob_the_robber.xml:45 ../data/quests/rob_the_robber.xml:97
 msgid "10000 gold pieces are quite interesting for the traveling fund."
-msgstr "10000 Goldstuecke fuer die Reisekasse sind durchaus interessant."
+msgstr "10000 Goldstücke für die Reisekasse sind durchaus interessant."
 
 #: ../data/quests/rob_the_robber.xml:46 ../data/quests/rob_the_robber.xml:98
 msgid "And I'm pretty lucky myself."
-msgstr "Und ich habe selbst auch recht viel Glueck."
+msgstr "Und ich habe selbst auch recht viel Glück."
 
 #: ../data/quests/rob_the_robber.xml:48 ../data/quests/rob_the_robber.xml:100
 msgid "Then take his necklace."
@@ -2463,14 +2457,14 @@ msgstr "Dann nehmt ihm sein Halsband ab."
 
 #: ../data/quests/rob_the_robber.xml:49 ../data/quests/rob_the_robber.xml:101
 msgid "Word is, he treasures it quite a lot."
-msgstr "Daran haengt er angeblich sehr."
+msgstr "Daran hängt er angeblich sehr."
 
 #: ../data/quests/rob_the_robber.xml:50
 msgid ""
 "If you can take it to sergeant Wober in Dwarfenwall he will believe you that "
 "Rob is dead."
 msgstr ""
-"Wenn ihr es bis zu Sergeant Wober in Zwergentrutz bringen koennt, wird man "
+"Wenn ihr es bis zu Sergeant Wober in Zwergentrutz bringen könnt, wird man "
 "euch glauben, dass Rob tot ist."
 
 #: ../data/quests/rob_the_robber.xml:51
@@ -2485,27 +2479,26 @@ msgstr "Nur neugierig."
 
 #: ../data/quests/rob_the_robber.xml:75
 msgid "Bring me his necklace and I give you the 10000 gold pieces."
-msgstr "Bringt mir sein Halsband und ich gebe Euch die 10000 Goldstuecke."
+msgstr "Bringt mir sein Halsband und ich gebe Euch die 10000 Goldstücke."
 
 #: ../data/quests/rob_the_robber.xml:76
 msgid "Not a second earlier!"
-msgstr "Keine Sekunde frueher!"
+msgstr "Keine Sekunde früher!"
 
 #: ../data/quests/rob_the_robber.xml:102
 msgid "If you can bring it to me I will believe you that Rob is dead."
 msgstr ""
-"Wenn ihr es zu mir bringen koennt, werde ich Euch glauben, dass Rob tot ist."
+"Wenn ihr es zu mir bringen könnt, werde ich Euch glauben, dass Rob tot ist."
 
 #: ../data/quests/rob_the_robber.xml:103
 msgid ""
 "Right now we suspect him to be in the Fairywoods between here and "
 "Joringsbridge."
-msgstr ""
-"Momentan vermuten wir ihn ihm Feenwald zwischen hier und Joringsbrueck."
+msgstr "Momentan vermuten wir ihn ihm Feenwald zwischen hier und Joringsbrück."
 
 #: ../data/quests/rob_the_robber.xml:124
 msgid "Here is the necklace of Rob the robber."
-msgstr "Hier ist das Halsband von Rob, dem Raeuber."
+msgstr "Hier ist das Halsband von Rob, dem Räuber."
 
 #: ../data/quests/rob_the_robber.xml:125
 msgid "By all devils!"
@@ -2513,16 +2506,16 @@ msgstr "Bei allen Teufeln!"
 
 #: ../data/quests/rob_the_robber.xml:126
 msgid "Someone really got him?"
-msgstr "Hat ihn tatsaechlich jemand erwischt?"
+msgstr "Hat ihn tatsächlich jemand erwischt?"
 
 #: ../data/quests/rob_the_robber.xml:127
 msgid "Well, I wish you luck."
-msgstr "Na, ich wuensch euch Glueck."
+msgstr "Na, ich wünsch euch Glück."
 
 #: ../data/quests/rob_the_robber.xml:128
 msgid "His vengeful spirit will supposedly hunt all those who hurt him."
 msgstr ""
-"Angeblich wird sein rachsuechtiger Geist alle verfolgen, die ihn verletzen."
+"Angeblich wird sein rachsüchtiger Geist alle verfolgen, die ihn verletzen."
 
 #: ../data/quests/rob_the_robber.xml:129
 msgid "But that shall not be my problem."
@@ -2530,13 +2523,13 @@ msgstr "Aber das soll nicht mein Problem sein."
 
 #: ../data/quests/rob_the_robber.xml:130
 msgid "Here are the 10000 gold pieces."
-msgstr "Hier sind die 10000 Goldstuecke."
+msgstr "Hier sind die 10000 Goldstücke."
 
 #: ../data/quests/rob_the_robber.xml:202
 msgid "I will quarter and skin you, before I throw you to the wolves!"
 msgstr ""
-"Ich werde dich vierteilen und Haeuten, ehe ich dich den Woelfen zum fra� "
-"ueberlasse!"
+"Ich werde dich vierteilen und Häuten, ehe ich dich den Wölfen zum Fraß "
+"vorwerfe!"
 
 #: ../data/quests/rob_the_robber.xml:204 ../data/quests/rob_the_robber.xml:209
 msgid "You talk too much!"
@@ -2546,8 +2539,8 @@ msgstr "Du redest zu viel!"
 msgid ""
 "I will quarter and skin everyone of you, before I throw you to the wolves!"
 msgstr ""
-"Ich werde euch alle vierteilen und Haeuten, ehe ich euch den Woelfen zum "
-"fra� ueberlasse!"
+"Ich werde euch alle vierteilen und Häuten, ehe ich euch den Wölfen zum Fraß "
+"vorwerfe!"
 
 #: ../data/quests/rob_the_robber.xml:229 ../data/quests/rob_the_robber.xml:231
 msgid "You will die! I will destroy you!!"
@@ -2562,11 +2555,11 @@ msgstr ""
 
 #: ../data/quests/rob_the_robber.xml:262
 msgid "Have fun with that. If you escape hell, that is."
-msgstr "Viel Spass dabei. Wenn du aus der Hoelle entkommst."
+msgstr "Viel Spass dabei. Wenn du aus der Hölle entkommst."
 
 #: ../data/quests/scene7.xml:21
 msgid "Wow, thats beautiful."
-msgstr "Wow, ist das schoen."
+msgstr "Wow, ist das schön."
 
 #: ../data/quests/scene7.xml:22
 msgid "Are you getting sentimental now?"
@@ -2586,7 +2579,7 @@ msgstr "... Nur schemenhaft."
 
 #: ../data/quests/scene7.xml:26
 msgid "Sometimes I wish,"
-msgstr "Manchmal wuenschte ich,"
+msgstr "Manchmal wünschte ich,"
 
 #: ../data/quests/scene7.xml:27
 msgid "I know enough people,"
@@ -2594,7 +2587,7 @@ msgstr "Ich kenne genug Menschen,"
 
 #: ../data/quests/scene7.xml:28
 msgid "... only externally."
-msgstr "... nur aeußerlich."
+msgstr "... nur äußerlich."
 
 #: ../data/quests/scene7.xml:33
 msgid "Do you really think that it"
@@ -2614,7 +2607,7 @@ msgstr "Warum hat es eigentlich"
 
 #: ../data/quests/scene7.xml:40
 msgid "We have to go now."
-msgstr "Wir muessen jetzt weiter."
+msgstr "Wir müssen jetzt weiter."
 
 #: ../data/quests/scene7.xml:41
 msgid "Just a moment please."
@@ -2637,7 +2630,7 @@ msgid ""
 "... wind-elementals did see it clearly: It's only this one lich leading them."
 msgstr ""
 "...haben meine Windelementare genau gesehen: Es ist nur dieser eine Lich, "
-"der sie fuehrt."
+"der sie führt."
 
 #: ../data/quests/siegeOfDwarfenwall.xml:61
 msgid "When he's gone the others are no problem."
@@ -2654,7 +2647,7 @@ msgstr "Und mit welcher Armee wollt ihr ihre Reihen durchbrechen?"
 #: ../data/quests/siegeOfDwarfenwall.xml:64
 msgid "We have to stop the rush, that is assembling out there."
 msgstr ""
-"Wir muessen erst mal diesen Ansturm aufhalten, der sich da zusammenbraut."
+"Wir müssen erst mal diesen Ansturm aufhalten, der sich da zusammenbraut."
 
 #: ../data/quests/siegeOfDwarfenwall.xml:65
 msgid "Don't worry."
@@ -2662,12 +2655,11 @@ msgstr "Keine Sorge."
 
 #: ../data/quests/siegeOfDwarfenwall.xml:66
 msgid "My colleague assured me that the council is sending backup."
-msgstr ""
-"Mein Kollege hat mir versichert, dass das Konzil Unterstuetzung sendet."
+msgstr "Mein Kollege hat mir versichert, dass das Konzil Unterstützung sendet."
 
 #: ../data/quests/siegeOfDwarfenwall.xml:67
 msgid "It should be here shortly."
-msgstr "Sie muesste bald hier sein."
+msgstr "Sie müsste bald hier sein."
 
 #: ../data/quests/siegeOfDwarfenwall.xml:69
 msgid ""
@@ -2675,7 +2667,7 @@ msgid ""
 "again?"
 msgstr ""
 "Erst beordern sie die Maga von Nordenburg ab und dann senden sie wieder "
-"Verstaerkung?"
+"Verstärkung?"
 
 #: ../data/quests/siegeOfDwarfenwall.xml:70
 msgid "What kind of game is this?"
@@ -2683,7 +2675,7 @@ msgstr "Was ist das für ein Spiel?"
 
 #: ../data/quests/siegeOfDwarfenwall.xml:71
 msgid "The mage is much needed elsewhere."
-msgstr "Die Maga wird an anderer Stelle dringender benoetigt als bei uns."
+msgstr "Die Maga wird an anderer Stelle dringender benötigt als bei uns."
 
 #: ../data/quests/siegeOfDwarfenwall.xml:73
 msgid ""
@@ -2691,8 +2683,8 @@ msgid ""
 "are long fighting for the other side, venerated lady."
 msgstr ""
 "Auch wenn ich das nur ungern sage, aber bis eine Armee den Weg hier her "
-"geschafft hat, kaempfen unsere Koerper laengst für die andere Seite, "
-"verehrte Dame!"
+"geschafft hat, kämpfen unsere Körper längst für die andere Seite, verehrte "
+"Dame!"
 
 #: ../data/quests/siegeOfDwarfenwall.xml:84
 msgid ""
@@ -2712,7 +2704,7 @@ msgstr "Und wer seid ihr?"
 
 #: ../data/quests/siegeOfDwarfenwall.xml:91
 msgid "The backup."
-msgstr "Die Verstaerkung"
+msgstr "Die Verstärkung."
 
 #: ../data/quests/siegeOfDwarfenwall.xml:98
 msgid "Good joke."
@@ -2734,7 +2726,7 @@ msgstr "Macht, dass ihr davonkommt, ihr Narren."
 #: ../data/quests/siegeOfDwarfenwall.xml:110
 #: ../data/quests/siegeOfDwarfenwall.xml:112
 msgid "This mercenary is telling the truth."
-msgstr "Dieser Soeldner sagt die Wahrheit."
+msgstr "Dieser Söldner sagt die Wahrheit."
 
 #: ../data/quests/siegeOfDwarfenwall.xml:115 ../data/quests/theAmbush.xml:111
 #: ../data/quests/tutorial.xml:666
@@ -2747,15 +2739,15 @@ msgstr "Das soll eure grandiose Unterstützung sein?"
 
 #: ../data/quests/siegeOfDwarfenwall.xml:123
 msgid "A handful of mercenaries?"
-msgstr "Eine Handvoll Soeldlinge?"
+msgstr "Eine Handvoll Söldlinge?"
 
 #: ../data/quests/siegeOfDwarfenwall.xml:126
 msgid ""
 "You will realize the worth of our assistance, when they fall for you again "
 "and again."
 msgstr ""
-"Ihr werdet den Wert unserer Unterstuetzung schon noch erkennen, wenn sie "
-"wieder und wieder fuer euch faellt."
+"Ihr werdet den Wert unserer Unterstützung schon noch erkennen, wenn sie "
+"wieder und wieder für euch fällt."
 
 #: ../data/quests/siegeOfDwarfenwall.xml:127
 msgid "What do you say?"
@@ -2764,7 +2756,7 @@ msgstr "Was sagt ihr da?"
 #: ../data/quests/siegeOfDwarfenwall.xml:131
 #: ../data/quests/siegeOfDwarfenwall.xml:133
 msgid "... is this a Cursed One?"
-msgstr "... Ist das etwa eine Verfluchte?"
+msgstr "... Ist das etwa ein Verfluchter?"
 
 #: ../data/quests/siegeOfDwarfenwall.xml:135
 msgid "... are they Cursed Ones?"
@@ -2772,23 +2764,23 @@ msgstr "... Sind das etwa Verfluchte?"
 
 #: ../data/quests/siegeOfDwarfenwall.xml:138
 msgid "Personally I like the term Branded One somehow better."
-msgstr "Mir persoenlich gefaellt der Begriff Gezeichnete irgendwie besser."
+msgstr "Mir persönlich gefällt der Begriff Gezeichnete irgendwie besser."
 
 #: ../data/quests/siegeOfDwarfenwall.xml:142
 msgid ""
 "If the price is right I let myself be torn apart as often as need be to "
 "protect the town."
 msgstr ""
-"Wenn der Preis stimmt, lasse ich mich so oft in Stuecke hacken, wie es "
-"noetig ist, um diese Stadt zu verteidigen."
+"Wenn der Preis stimmt, lasse ich mich so oft in Stücke hacken, wie es nötig "
+"ist, um diese Stadt zu verteidigen."
 
 #: ../data/quests/siegeOfDwarfenwall.xml:144
 msgid ""
 "If the price is right we let ourselves be torn apart as often as need be to "
 "protect the town."
 msgstr ""
-"Wenn der Preis stimmt, lassen wir uns so oft in Stuecke hacken, wie es "
-"noetig ist, um diese Stadt zu verteidigen."
+"Wenn der Preis stimmt, lassen wir uns so oft in Stücke hacken, wie es nötig "
+"ist, um diese Stadt zu verteidigen."
 
 #: ../data/quests/siegeOfDwarfenwall.xml:148
 msgid "You make a deal with the devil to drive out the devil?"
@@ -2800,7 +2792,7 @@ msgstr "In Zeiten wie diesen kann man nicht besonders zimperlich benehmen."
 
 #: ../data/quests/siegeOfDwarfenwall.xml:152
 msgid "Do you want to live or be backup for the undead?"
-msgstr "Wollt ihr leben oder den Untoten als Verstaerkung dienen?"
+msgstr "Wollt ihr leben oder den Untoten als Verstärkung dienen?"
 
 #: ../data/quests/siegeOfDwarfenwall.xml:154
 msgid "You cannot trust these monsters!"
@@ -2808,7 +2800,7 @@ msgstr "Man kann diesen Monstern nicht trauen!"
 
 #: ../data/quests/siegeOfDwarfenwall.xml:155
 msgid "As long as I lead this army I will not tolerate such people."
-msgstr "Solange ich diese Armee fuehre, werde ich solche nicht dulden!"
+msgstr "Solange ich diese Armee führe, werde ich solche nicht dulden!"
 
 #: ../data/quests/siegeOfDwarfenwall.xml:159
 msgid "I just prevented the undead from passing by your city!"
@@ -2828,11 +2820,11 @@ msgstr "Alle Krieger verbindet die Engstirnigkeit."
 
 #: ../data/quests/siegeOfDwarfenwall.xml:166
 msgid "I don't kill indiscriminately!"
-msgstr "Ich toete nicht wahllos!"
+msgstr "Ich töte nicht wahllos!"
 
 #: ../data/quests/siegeOfDwarfenwall.xml:168
 msgid "We don't kill indiscriminately!"
-msgstr "Wir toeten nicht wahllos!"
+msgstr "Wir töten nicht wahllos!"
 
 #: ../data/quests/siegeOfDwarfenwall.xml:172
 msgid "She is under orders of the council, it is not your decision."
@@ -2859,7 +2851,7 @@ msgstr "Seht zu, dass ihr zur Mauer kommt!"
 
 #: ../data/quests/siegeOfDwarfenwall.xml:219
 msgid "How fast he changes his mind."
-msgstr "Wie schnell er seine Meinung doch aendert."
+msgstr "Wie schnell er seine Meinung doch ändert."
 
 #: ../data/quests/siegeOfDwarfenwall.xml:221
 msgid "I'm already on my way."
@@ -2890,7 +2882,7 @@ msgstr "Ich bete, dass ihr Euch nicht irrt..."
 #: ../data/quests/siegeOfDwarfenwall.xml:296
 msgid "I'm sorry, but only members of the aisen army are allowed beyond here."
 msgstr ""
-"Es tut mir Leid, aber hier ist nur Durchgang fuer Angehoerige der aisener "
+"Es tut mir Leid, aber hier ist nur Durchgang für Angehörige der aisener "
 "Armee."
 
 #: ../data/quests/siegeOfDwarfenwall.xml:283
@@ -2903,11 +2895,11 @@ msgstr "Da hinten kommen sie."
 
 #: ../data/quests/siegeOfDwarfenwall.xml:969
 msgid "Get ready, soldiers!"
-msgstr "Macht euch bereit Maenner!"
+msgstr "Macht euch bereit Männer!"
 
 #: ../data/quests/siegeOfDwarfenwall.xml:1025
 msgid "Your time has come, pathetic humans!"
-msgstr "Eure Zeit ist gekommen, erbaermliche Menschen!"
+msgstr "Eure Zeit ist gekommen, erbärmliche Menschen!"
 
 #: ../data/quests/siegeOfDwarfenwall.xml:1026
 msgid "Dwarfenwall will finally be yours, my lord."
@@ -2915,7 +2907,7 @@ msgstr "Zwergentrutz wird endlich Euer sein, mein Gebieter."
 
 #: ../data/quests/siegeOfDwarfenwall.xml:1027
 msgid "With the help from the capital it will succeed at last."
-msgstr "Mit der Unterstuetzung aus der Hauptstadt wird es endlich gelingen."
+msgstr "Mit der Unterstützung aus der Hauptstadt wird es endlich gelingen."
 
 #: ../data/quests/siegeOfDwarfenwall.xml:1028
 msgid "Let us begin with the last rush on this wretched stronghold."
@@ -2927,14 +2919,14 @@ msgid ""
 "will not be able to avert our death."
 msgstr ""
 "Da hinten sind wahrscheinlich so viele Untote, dass Eure ach so "
-"kampfkraeftige Unterstuetzung unseren Tod nicht wird abwenden koennen."
+"kampfkräftige Unterstützung unseren Tod nicht wird abwenden können."
 
 #: ../data/quests/siegeOfDwarfenwall.xml:1056
 msgid ""
 "This... backup is not the only thing the council can and will do for "
 "Dwarfenwall."
 msgstr ""
-"Diese... Unterstuetzung ist nicht das einzige, was das Konzil fuer "
+"Diese... Unterstützung ist nicht das einzige, was das Konzil für "
 "Zwergentrutz tun kann und wird."
 
 #: ../data/quests/siegeOfDwarfenwall.xml:1057
@@ -2947,17 +2939,17 @@ msgstr "Er wartet nur noch auf meinen Befehl."
 
 #: ../data/quests/siegeOfDwarfenwall.xml:1059
 msgid "Of course I couldn't know, where the undead would attack."
-msgstr "Natuerlich konnte ich nicht wissen, wo die Untoten angreifen wuerden."
+msgstr "Natürlich konnte ich nicht wissen, wo die Untoten angreifen würden."
 
 #: ../data/quests/siegeOfDwarfenwall.xml:1060
 msgid ""
 "I'm afraid, there will be quite some cleaning up to do by the survivors."
 msgstr ""
-"Ich fuerchte, da kommt einiges an Aufraeumarbeiten auf die Ueberlebenden zu."
+"Ich fürchte, da kommt einiges an Aufräumarbeiten auf die Überlebenden zu."
 
 #: ../data/quests/siegeOfDwarfenwall.xml:1061
 msgid "Stop scoffing and do whatever it is you're planing."
-msgstr "Hoert auf zu spotten und tut es endlich, was auch immer ihr vorhabt."
+msgstr "Hört auf zu spotten und tut es endlich, was auch immer ihr vorhabt."
 
 #: ../data/quests/siegeOfDwarfenwall.xml:1100
 msgid "Acursed elementalists!"
@@ -2978,7 +2970,7 @@ msgstr "Es wird geschehen, mein Gebieter."
 #: ../data/quests/siegeOfDwarfenwall.xml:1103
 msgid "But how will we attack the city now? She blocked the path for our army."
 msgstr ""
-"Aber wie greifen wir die Stadt jetzt an? Sie hat den Weg fuer unsere Armee "
+"Aber wie greifen wir die Stadt jetzt an? Sie hat den Weg für unsere Armee "
 "blockiert"
 
 #: ../data/quests/siegeOfDwarfenwall.xml:1108
@@ -2999,11 +2991,11 @@ msgstr "Warten nur auf euren Befehl."
 
 #: ../data/quests/siegeOfDwarfenwall.xml:1112
 msgid "I'm not fighting with Dwarfenwall for centuries for nothing."
-msgstr "Nicht umsonst kaempfe ich schon seit Jahrhunderten mit Zwergentrutz."
+msgstr "Nicht umsonst kämpfe ich schon seit Jahrhunderten mit Zwergentrutz."
 
 #: ../data/quests/siegeOfDwarfenwall.xml:1113
 msgid "Send the skeletons through the underdrives."
-msgstr "Schickt die Skelette durch die Kriechgaenge."
+msgstr "Schickt die Skelette durch die Kriechgänge."
 
 #: ../data/quests/siegeOfDwarfenwall.xml:1134
 msgid "Something is going on over there."
@@ -3019,11 +3011,11 @@ msgstr "Es wird wohl nicht schaden, wenn ich auch noch ein paar Helfer rufe."
 
 #: ../data/quests/siegeOfDwarfenwall.xml:1140
 msgid "To the front with you, butcher. ##solo"
-msgstr "An die Front mit euch, Schlaechter. ##solo"
+msgstr "An die Front mit euch, Schlächter. ##solo"
 
 #: ../data/quests/siegeOfDwarfenwall.xml:1142
 msgid "To the front with you, butcher."
-msgstr "An die Front mit euch, Schlaechter."
+msgstr "An die Front mit euch, Schlächter."
 
 #: ../data/quests/siegeOfDwarfenwall.xml:1144
 msgid "Say 'please'."
@@ -3047,7 +3039,7 @@ msgstr "Sie wehren sich weiterhin."
 
 #: ../data/quests/siegeOfDwarfenwall.xml:1386
 msgid "Don't worry, my lord, we will have overrun them soon."
-msgstr "Keine Sorge, mein Gebieter, wir werden sie bald ueberrannt haben!"
+msgstr "Keine Sorge, mein Gebieter, wir werden sie bald überrannt haben!"
 
 #: ../data/quests/siegeOfDwarfenwall.xml:1387
 msgid "There's no hurry."
@@ -3059,7 +3051,7 @@ msgstr "Wir haben Zeit, das ist unser Vorteil."
 
 #: ../data/quests/siegeOfDwarfenwall.xml:1389
 msgid "Show them that we can play with fire, too."
-msgstr "Zeigen wir ihnen, dass wir auch mit Feuer spielen koennen."
+msgstr "Zeigen wir ihnen, dass wir auch mit Feuer spielen können."
 
 #: ../data/quests/siegeOfDwarfenwall.xml:1390
 msgid "Those mages are beginning to get on my nerves."
@@ -3075,7 +3067,7 @@ msgstr "Ich habe verstanden, mein Gebieter."
 
 #: ../data/quests/siegeOfDwarfenwall.xml:1655
 msgid "Their defense still holds, my lord."
-msgstr "Ihre Verteidigung haelt noch immer stand, mein Gebieter"
+msgstr "Ihre Verteidigung hält noch immer stand, mein Gebieter"
 
 #: ../data/quests/siegeOfDwarfenwall.xml:1656
 msgid "No one said it had to be easy."
@@ -3090,7 +3082,7 @@ msgid ""
 "The humans called him the giant killer and didn't want to have anything to "
 "do with him."
 msgstr ""
-"Die Menschen nannten ihn den Riesentoeter und wollten nichts mit ihm zu tun "
+"Die Menschen nannten ihn den Riesentöter und wollten nichts mit ihm zu tun "
 "haben."
 
 #: ../data/quests/siegeOfDwarfenwall.xml:1659
@@ -3108,7 +3100,7 @@ msgstr "Ihr habt gerufen, mein Gebieter?"
 
 #: ../data/quests/siegeOfDwarfenwall.xml:1827
 msgid "I want you to use the brothers."
-msgstr "Ich will, dass ihr die Brueder einsetzt."
+msgstr "Ich will, dass ihr die Brüder einsetzt."
 
 #: ../data/quests/siegeOfDwarfenwall.xml:1828
 msgid "But they are still not stable!"
@@ -3117,7 +3109,7 @@ msgstr "Aber die sind noch immer nicht stabil!"
 #: ../data/quests/siegeOfDwarfenwall.xml:1829
 msgid "In the worst case they will do no damage at all."
 msgstr ""
-"Im schlimmsten Fall werden sie dem Gegner ueberhaupt keinen Schaden zufuegen."
+"Im schlimmsten Fall werden sie dem Gegner überhaupt keinen Schaden zufügen."
 
 #: ../data/quests/siegeOfDwarfenwall.xml:1830
 msgid "That doesn't matter."
@@ -3125,7 +3117,7 @@ msgstr "Das spielt keine Rolle."
 
 #: ../data/quests/siegeOfDwarfenwall.xml:1831
 msgid "He should be here any moment. We are playing for time right now."
-msgstr "Er muesste bald hier sein. Im Moment schinden wir nur Zeit."
+msgstr "Er müsste bald hier sein. Im Moment schinden wir nur Zeit."
 
 #: ../data/quests/siegeOfDwarfenwall.xml:1832
 msgid "As you wish, my lord."
@@ -3152,7 +3144,7 @@ msgid ""
 "The road from the Grey Skyladder into this desolate and sear plain was long, "
 "you know."
 msgstr ""
-"Der Weg aus der Grauen Himmelsleiter in diese Trostlos verdorrte Ebene war "
+"Der Weg aus der Grauen Himmelsleiter in diese trostlos verdorrte Ebene war "
 "eben lang."
 
 #: ../data/quests/siegeOfDwarfenwall.xml:1895
@@ -3162,15 +3154,15 @@ msgstr "Und deine Bergspitzen sind lebendiger?"
 #: ../data/quests/siegeOfDwarfenwall.xml:1896
 msgid "Are we here to count the bugs on our estates?"
 msgstr ""
-"Sind wir hier um die letzten Krabbelkaefer in unseren Laendereien zu zaehlen?"
+"Sind wir hier um die letzten Krabbelkäfer in unseren Ländereien zu zählen?"
 
 #: ../data/quests/siegeOfDwarfenwall.xml:1897
 msgid ""
 "You are right. Could you move those really unnerving people over there out "
 "of the way?"
 msgstr ""
-"Du hast Recht. Koenntest du mir diese wirklich enervierenden Leute da vorn "
-"aus dem Weg raeumen?"
+"Du hast Recht. Könntest du mir diese wirklich enervierenden Leute da vorn "
+"aus dem Weg räumen?"
 
 #: ../data/quests/siegeOfDwarfenwall.xml:1898
 msgid "That's what I'm here for."
@@ -3183,12 +3175,12 @@ msgstr "Und vergiss nicht, dass du mir danach Land schuldest."
 #: ../data/quests/siegeOfDwarfenwall.xml:1900
 msgid "Do you think I'm going to miss two villages after I got Dwarfenwall?"
 msgstr ""
-"Glaubst du wirklich, ich wuerde zwei Doerfer vermissen, nachdem ich "
+"Glaubst du wirklich, ich würde zwei Dörfer vermissen, nachdem ich "
 "Zwergentrutz endlich habe?"
 
 #: ../data/quests/siegeOfDwarfenwall.xml:1901
 msgid "Me and my frostmages will arrange for that."
-msgstr "Ich und meine Frostmagier werden schon dafuer sorgen."
+msgstr "Ich und meine Frostmagier werden schon dafür sorgen."
 
 #: ../data/quests/siegeOfDwarfenwall.xml:2055
 msgid "The Frostbringer is dead, my lord."
@@ -3196,12 +3188,12 @@ msgstr "Der Frostbringer ist tot, mein Gebieter."
 
 #: ../data/quests/siegeOfDwarfenwall.xml:2056
 msgid "I felt it, too."
-msgstr "Ich habe es auch gespuert."
+msgstr "Ich habe es auch gespürt."
 
 #: ../data/quests/siegeOfDwarfenwall.xml:2057
 msgid "We finally learned something about the backup the council sent here."
 msgstr ""
-"Wir haben endlich etwas ueber die Verstaerkung erfahren, die das Konzil hier "
+"Wir haben endlich etwas über die Verstärkung erfahren, die das Konzil hier "
 "her geschickt hat."
 
 #: ../data/quests/siegeOfDwarfenwall.xml:2058
@@ -3210,7 +3202,7 @@ msgstr "Ausgerechnet jetzt?"
 
 #: ../data/quests/siegeOfDwarfenwall.xml:2059
 msgid "And what of it? I thought, there was none."
-msgstr "Und was ist damit? Ich dachte, es gaebe gar keine."
+msgstr "Und was ist damit? Ich dachte, es gäbe gar keine."
 
 #: ../data/quests/siegeOfDwarfenwall.xml:2060
 msgid "There was, my lord. But it seems they are Branded Ones."
@@ -3223,19 +3215,19 @@ msgstr "Gezeichnete!"
 
 #: ../data/quests/siegeOfDwarfenwall.xml:2062
 msgid "That explaines a lot."
-msgstr "Das erklaert einiges."
+msgstr "Das erklärt einiges."
 
 #: ../data/quests/siegeOfDwarfenwall.xml:2063
 msgid ""
 "But even they will not be able to hold the city once the wretched humans are "
 "gone."
 msgstr ""
-"Aber auch sie werden die Stadt nicht halten koennen, wenn die elenden "
+"Aber auch sie werden die Stadt nicht halten können, wenn die elenden "
 "Menschen erst mal alle tot sind."
 
 #: ../data/quests/siegeOfDwarfenwall.xml:2064
 msgid "Overrun them. Send out your order."
-msgstr "Ueberrennt sie. Und schick deinen Orden aus."
+msgstr "Überrennt sie. Und schick deinen Orden aus."
 
 #: ../data/quests/siegeOfDwarfenwall.xml:2065
 msgid "As you command, my lord."
@@ -3248,11 +3240,11 @@ msgstr ""
 
 #: ../data/quests/siegeOfDwarfenwall.xml:2067
 msgid "I count on you."
-msgstr "Ich zaehle auf dich."
+msgstr "Ich zähle auf dich."
 
 #: ../data/quests/siegeOfDwarfenwall.xml:2068
 msgid "Tear their defense into pieces."
-msgstr "Reisst ihre Verteidigung in Stuecke."
+msgstr "Reisst ihre Verteidigung in Stücke."
 
 #: ../data/quests/siegeOfDwarfenwall.xml:2205
 msgid "Curse on them!"
@@ -3263,7 +3255,6 @@ msgid "Cursed council-mages!"
 msgstr "Verdammte Konzilsmagier!"
 
 #: ../data/quests/siegeOfDwarfenwall.xml:2207
-#, fuzzy
 msgid "Verdammte Branded Ones!"
 msgstr "Verdammte Gezeichnete!"
 
@@ -3285,15 +3276,15 @@ msgstr "Es ist vorbei."
 
 #: ../data/quests/siegeOfDwarfenwall.xml:2238
 msgid "And thanks to the councils backing the city is still standing."
-msgstr "Und Dank der Unterstuetzung des Konzils steht die Stadt noch."
+msgstr "Und Dank der Unterstützung des Konzils steht die Stadt noch."
 
 #: ../data/quests/siegeOfDwarfenwall.xml:2241
 msgid ""
 "I have to admit, I wouldn't have thought in my wildest dreams that someone "
 "could fight like that."
 msgstr ""
-"Ich muss gestehen, ich haette mir in meinen kuensten Traeumen nicht ausmalen "
-"koennen, dass jemand so kaempft."
+"Ich muss gestehen, ich hätte mir in meinen künsten Träumen nicht ausmalen "
+"können, dass jemand so kämpft."
 
 #: ../data/quests/siegeOfDwarfenwall.xml:2243
 msgid "It is good that he is on our side at the moment."
@@ -3310,8 +3301,8 @@ msgstr "Es ist gut, dass sie momentan auf unserer Seite stehen."
 #: ../data/quests/siegeOfDwarfenwall.xml:2250
 msgid "If both sides have souls to offer, you take the one paying, of course."
 msgstr ""
-"Wenn beide Seiten Seelen anzubieten haben, nimmt man natuerlich die, die "
-"auch bezahlt."
+"Wenn beide Seiten Seelen anzubieten haben, nimmt man natürlich die, die auch "
+"bezahlt."
 
 #: ../data/quests/siegeOfDwarfenwall.xml:2252
 msgid "Thank you for reminding me, why I cannot stand your kind."
@@ -3320,7 +3311,7 @@ msgstr ""
 
 #: ../data/quests/siegeOfDwarfenwall.xml:2253
 msgid "There is no big difference to normal mercenaries."
-msgstr "Es gibt da keinen grossen Unterschied zu normalen Soeldnern."
+msgstr "Es gibt da keinen großen Unterschied zu normalen Söldnern."
 
 #: ../data/quests/siegeOfDwarfenwall.xml:2254
 msgid ""
@@ -3341,25 +3332,24 @@ msgid ""
 "It wouldn't be wise to hit the soldiers over the head who their saviours "
 "were."
 msgstr ""
-"Es waere wohl nicht klug, die Soldaten mit der Nase auf ihre Retter zu "
-"stossen."
+"Es wäre wohl nicht klug, die Soldaten mit der Nase auf ihre Retter zu stoßen."
 
 #: ../data/quests/siegeOfDwarfenwall.xml:2262
 #: ../data/quests/siegeOfDwarfenwall.xml:2264
 msgid "Without your 'friend' this would look different."
-msgstr "Ohne Euren 'Freund' hier saehe das anders aus."
+msgstr "Ohne Euren 'Freund' hier sähe das anders aus."
 
 #: ../data/quests/siegeOfDwarfenwall.xml:2266
 msgid "Without your 'friends' this would look different."
-msgstr "Ohne Eure 'Freunde' hier saehe das anders aus."
+msgstr "Ohne Eure 'Freunde' hier sähe das anders aus."
 
 #: ../data/quests/siegeOfDwarfenwall.xml:2271
 msgid ""
 "At least more effective than one could have expected from a band of "
 "mercenaries."
 msgstr ""
-"Immerhin effektiver, als man das von einer Soeldnertruppe haette erwarten "
-"koennen."
+"Immerhin effektiver, als man das von einer Söldnertruppe hätte erwarten "
+"können."
 
 #: ../data/quests/siegeOfDwarfenwall.xml:2272
 msgid "But we have quite some losses."
@@ -3375,11 +3365,11 @@ msgstr ""
 msgid "The lich took his time, but until now he also had no backup."
 msgstr ""
 "Bisher hat sich dieser Lich zwar immer Zeit gelassen, aber bisher hatte er "
-"auch keine Unterstuetzung."
+"auch keine Unterstützung."
 
 #: ../data/quests/siegeOfDwarfenwall.xml:2279
 msgid "What kind of backing?"
-msgstr "Welche Unterstuetzung denn bitte?"
+msgstr "Welche Unterstützung denn bitte?"
 
 #: ../data/quests/siegeOfDwarfenwall.xml:2280
 msgid "Two third of my men are dead!"
@@ -3387,7 +3377,7 @@ msgstr "Zwei Drittel meiner Leute sind tot!"
 
 #: ../data/quests/siegeOfDwarfenwall.xml:2281
 msgid "We will never survive a second attack."
-msgstr "Einen zweiten Angriff werden wir niemals ueberleben."
+msgstr "Einen zweiten Angriff werden wir niemals überleben."
 
 #: ../data/quests/siegeOfDwarfenwall.xml:2283
 msgid "I want to get away from all the blood."
@@ -3403,32 +3393,31 @@ msgstr "Gut geschlagen."
 
 #: ../data/quests/siegeOfDwarfenwall.xml:2336
 msgid "At least you are worth the trouble. ##solo"
-msgstr "Wenigstens seid Ihr den Aerger wert. ##solo"
+msgstr "Wenigstens seid Ihr den Ärger wert. ##solo"
 
 #: ../data/quests/siegeOfDwarfenwall.xml:2337
 msgid "As if I ever made one."
-msgstr "Als ob ich jemals welchen gemacht haette."
+msgstr "Als ob ich jemals welchen gemacht hätte."
 
 #: ../data/quests/siegeOfDwarfenwall.xml:2339
 msgid "At least you are worth the trouble."
-msgstr "Wenigstens seid ihr den Aerger wert."
+msgstr "Wenigstens seid ihr den Ärger wert."
 
 #: ../data/quests/siegeOfDwarfenwall.xml:2340
 msgid "As if we ever made one."
-msgstr "Als ob wir jemals welchen gemacht haetten."
+msgstr "Als ob wir jemals welchen gemacht hätten."
 
 #: ../data/quests/siegeOfDwarfenwall.xml:2345
 msgid "The city is safe for the moment."
-msgstr "Die Stadt ist nur fuer den Augenblick sicher."
+msgstr "Die Stadt ist nur für den Augenblick sicher."
 
 #: ../data/quests/siegeOfDwarfenwall.xml:2346
 msgid "We cannot rest now."
-msgstr "Wir koennen uns jetzt nicht ausruhen."
+msgstr "Wir können uns jetzt nicht ausruhen."
 
 #: ../data/quests/siegeOfDwarfenwall.xml:2348
 msgid "As if we hadn't enough problems with shortage of soldiers."
-msgstr ""
-"Als ob wir nicht schon genug mit dem Personalmangel zu kaempfen haetten."
+msgstr "Als ob wir nicht schon genug mit dem Personalmangel zu kämpfen hätten."
 
 #: ../data/quests/siegeOfDwarfenwall.xml:2350
 msgid "The source of the attacks is the lich!"
@@ -3444,11 +3433,11 @@ msgstr "Und wer?!"
 
 #: ../data/quests/siegeOfDwarfenwall.xml:2354
 msgid "I don't have enough men to lead a successful excursion."
-msgstr "Ich habe nicht genug Maenner, um einen Ausfall mit Erfolg zu fuehren."
+msgstr "Ich habe nicht genug Männer, um einen Ausfall mit Erfolg zu führen."
 
 #: ../data/quests/siegeOfDwarfenwall.xml:2355
 msgid "That would be suicide."
-msgstr "Das waere Selbstmord!"
+msgstr "Das wäre Selbstmord!"
 
 #: ../data/quests/siegeOfDwarfenwall.xml:2357
 msgid "It has nothing to do with you."
@@ -3481,7 +3470,7 @@ msgid ""
 "Not that I would cry a tear over them, but we cannot waste a single soul "
 "right now!"
 msgstr ""
-"Nicht, dass mich das stoeren wuerde, aber wir koennen momentan niemanden "
+"Nicht, dass mich das stören würde, aber wir können momentan niemanden "
 "verschwenden!"
 
 #: ../data/quests/siegeOfDwarfenwall.xml:2371
@@ -3494,11 +3483,11 @@ msgstr "Egal wie oft ich sterbe, der Lich wird am Ende vernichtet sein."
 
 #: ../data/quests/siegeOfDwarfenwall.xml:2374
 msgid "Apart from yourself you are not taking care of anyone!"
-msgstr "Ausser um euch selbst kuemmert ihr euch doch um niemanden!"
+msgstr "Außer um euch selbst kümmert ihr euch doch um niemanden!"
 
 #: ../data/quests/siegeOfDwarfenwall.xml:2376
 msgid "It wouldn't be the first time..."
-msgstr "Das waere nicht das erste Mal..."
+msgstr "Das wäre nicht das erste Mal..."
 
 #: ../data/quests/siegeOfDwarfenwall.xml:2377
 msgid "Do you want to tell me how to use my people?"
@@ -3532,17 +3521,17 @@ msgstr ""
 
 #: ../data/quests/siegeOfDwarfenwall.xml:2389
 msgid "As you wish..."
-msgstr "Wie ihr wuenscht..."
+msgstr "Wie ihr wünscht..."
 
 #: ../data/quests/siegeOfDwarfenwall.xml:2391
 msgid ""
 "One of these arrows could have come from anywhere in the heat of battle..."
 msgstr ""
-"So ein Pfeil koennte im Eifer des Gefechts doch von ueberall gekommen sein..."
+"So ein Pfeil könnte im Eifer des Gefechts doch von überall gekommen sein..."
 
 #: ../data/quests/siegeOfDwarfenwall.xml:2392
 msgid "Don't even think about it."
-msgstr "Denk nicht mal drueber nach."
+msgstr "Denk nicht mal drüber nach."
 
 #: ../data/quests/siegeOfDwarfenwall.xml:2491
 msgid "Well well."
@@ -3554,11 +3543,11 @@ msgstr "Da ist ja die Wurzel meines kleinen Problems."
 
 #: ../data/quests/siegeOfDwarfenwall.xml:2493
 msgid "It's hard to believe someone was crazy enough to storm out here."
-msgstr "Kaum zu glauben, dass jemand so verrueckt ist, hier raus zu stuermen."
+msgstr "Kaum zu glauben, dass jemand so verrückt ist, hier raus zu stürmen."
 
 #: ../data/quests/siegeOfDwarfenwall.xml:2502
 msgid "Prepare to pass off forever!"
-msgstr "Mach dich bereit, fuer immer zu vergehen!"
+msgstr "Mach dich bereit, für immer zu vergehen!"
 
 #: ../data/quests/siegeOfDwarfenwall.xml:2505
 #: ../data/quests/siegeOfDwarfenwall.xml:2507
@@ -3574,7 +3563,7 @@ msgid ""
 "Of course, if some Branded Ones are in the vicinity everything is a bit "
 "different."
 msgstr ""
-"Natuerlich, wenn ein paar Gezeichnete in der Naehe sind ist alles ein wenig "
+"Natürlich, wenn ein paar Gezeichnete in der Nähe sind ist alles ein wenig "
 "anders."
 
 #: ../data/quests/siegeOfDwarfenwall.xml:2511
@@ -3599,7 +3588,7 @@ msgstr ""
 msgid ""
 "Do you really want to be hacked into pieces by me over and over again? ##solo"
 msgstr ""
-"Wollt Ihr Euch wirklich immer und immer wieder von mir in Stuecke hacken "
+"Wollt Ihr Euch wirklich immer und immer wieder von mir in Stücke hacken "
 "lassen? ##solo"
 
 #: ../data/quests/siegeOfDwarfenwall.xml:2518
@@ -3613,7 +3602,7 @@ msgstr ""
 #: ../data/quests/siegeOfDwarfenwall.xml:2519
 msgid "Do you really want to be hacked into pieces by me over and over again?"
 msgstr ""
-"Wollt ihr euch wirklich immer und immer wieder von mir in Stuecke hacken "
+"Wollt ihr euch wirklich immer und immer wieder von mir in Stücke hacken "
 "lassen?"
 
 #: ../data/quests/siegeOfDwarfenwall.xml:2521
@@ -3624,11 +3613,11 @@ msgstr ""
 
 #: ../data/quests/siegeOfDwarfenwall.xml:2522
 msgid "Now that you mention it..."
-msgstr "Wo Ihr es so erwaehnt..."
+msgstr "Wo Ihr es so erwähnt..."
 
 #: ../data/quests/siegeOfDwarfenwall.xml:2523
 msgid "You really smashed most of them."
-msgstr "Ihr habt tatsaechlich die meisten in Stuecke geschlagen."
+msgstr "Ihr habt tatsächlich die meisten in Stücke geschlagen."
 
 #: ../data/quests/siegeOfDwarfenwall.xml:2524
 msgid "Still, I can handle such a loss."
@@ -3643,12 +3632,12 @@ msgstr ""
 #: ../data/quests/siegeOfDwarfenwall.xml:2527
 msgid "What is this crystal your rotting masters want, banddog?"
 msgstr ""
-"Was ist das eigentlich fuer ein Kristall, den deine verrotteten Herren "
+"Was ist das eigentlich für ein Kristall, den deine verrotteten Herren "
 "wollen, Kettenhund?"
 
 #: ../data/quests/siegeOfDwarfenwall.xml:2529
 msgid "You cannot make me angry."
-msgstr "Du kannst mich nicht wuetend machen."
+msgstr "Du kannst mich nicht wütend machen."
 
 #: ../data/quests/siegeOfDwarfenwall.xml:2530
 msgid "And about the crystal: Why don't you ask your employers?"
@@ -3662,11 +3651,11 @@ msgstr "Das dachte ich mir."
 
 #: ../data/quests/siegeOfDwarfenwall.xml:2533
 msgid "The elementalists are not exactly talkative, am I right?"
-msgstr "Die Elementaristen sind nicht besonders gespraechig, habe ich recht?"
+msgstr "Die Elementaristen sind nicht besonders gesprächig, habe ich recht?"
 
 #: ../data/quests/siegeOfDwarfenwall.xml:2535
 msgid "Your talking is as foul as the rest of your body."
-msgstr "Deine Rede ist so faul wie der Rest deines Koerpers."
+msgstr "Deine Rede ist so faul wie der Rest deines Körpers."
 
 #: ../data/quests/siegeOfDwarfenwall.xml:2537
 msgid "Die!"
@@ -3688,7 +3677,7 @@ msgstr ""
 msgid "And now I will find a way to kill Branded Ones."
 msgstr ""
 "Und jetzt werde ich der erste sein, der einen Weg findet, wie Gezeichnete zu "
-"toeten sind."
+"töten sind."
 
 #: ../data/quests/siegeOfDwarfenwall.xml:2667
 msgid "No! It cannot be! You baleful..."
@@ -3696,7 +3685,7 @@ msgstr "Nein! Das kann nicht sein! Ihr elenden..."
 
 #: ../data/quests/siegeOfDwarfenwall.xml:2702
 msgid "It's a wrap."
-msgstr "Das waere geschafft."
+msgstr "Das wäre geschafft."
 
 #: ../data/quests/siegeOfDwarfenwall.xml:2703
 msgid "What? Are you kidding?"
@@ -3705,7 +3694,7 @@ msgstr "Wie bitte? Das soll wohl ein Witz sein!"
 #: ../data/quests/siegeOfDwarfenwall.xml:2704
 msgid "Did you forget the defense of Dwarfenwall was only a warm-up?"
 msgstr ""
-"Die Verteidigung von Zwergentrutz war nur zum aufwaermen, schon vergessen?"
+"Die Verteidigung von Zwergentrutz war nur zum aufwärmen, schon vergessen?"
 
 #: ../data/quests/siegeOfDwarfenwall.xml:2705
 msgid "If you want the process to be faster, just help out a bit."
@@ -3721,15 +3710,15 @@ msgstr ""
 
 #: ../data/quests/siegeOfDwarfenwall.xml:2707
 msgid "Do I get money for it?"
-msgstr "Gibt's dafuer auch Geld??"
+msgstr "Gibt's dafür auch Geld??"
 
 #: ../data/quests/siegeOfDwarfenwall.xml:2708
 msgid "Of course not. Did you pay anything for this?"
-msgstr "Natuerlich nicht. Oder hast du was hierfuer bezahlt?"
+msgstr "Natürlich nicht. Oder hast du was hierfür bezahlt?"
 
 #: ../data/quests/siegeOfDwarfenwall.xml:2709
 msgid "But the gods will remember you for all eternity."
-msgstr "Aber die Goetter werden sich ewig deiner erinnern."
+msgstr "Aber die Götter werden sich ewig deiner erinnern."
 
 #: ../data/quests/siegeOfDwarfenwall.xml:2710
 msgid "With this, the demo is officially over."
@@ -3844,9 +3833,9 @@ msgid ""
 "Ireana survived and, as a token of her gratitude, provided our next job. I "
 "always knew the councilmen only wanted an exterminator."
 msgstr ""
-"Ireana hat es ueberlebt und vor lauter Dankbarkeit gleich fuer den naechsten "
+"Ireana hat es überlebt und vor lauter Dankbarkeit gleich für den nächsten "
 "Auftrag gesorgt. Ich wusste ja schon immer, dass die Konziliker nur einen "
-"Kammerjaeger wollten."
+"Kammerjäger wollten."
 
 #: ../data/quests/theAmbush.xml:6
 msgid ""
@@ -3856,7 +3845,7 @@ msgid ""
 msgstr ""
 "Eine Konzilsmagierin namens Ireana von Nordenburg steckt anscheinend "
 "westlich von Zwergentrutz in Schwierigkeiten. Nichts, was ein Gezeichneter "
-"nicht loesen koennte. Wenn sie lange genug ueberlebt..."
+"nicht lösen könnte. Wenn sie lange genug überlebt..."
 
 #: ../data/quests/theAmbush.xml:24
 msgid "Dwarfenwall is in that direction. I shouldn't go this way yet."
@@ -3943,7 +3932,7 @@ msgid ""
 "The way back has caved in, too. Hopefully there is another exit."
 msgstr ""
 "Die gute Nachricht: Durch diesen Tunnel kommt niemand mehr. Die schlechte: "
-"Den Rückweg hat es auch verschuettet. Hoffentlich gibt es noch einen anderen "
+"Den Rückweg hat es auch verschüttet. Hoffentlich gibt es noch einen anderen "
 "Ausgang."
 
 #: ../data/quests/theFissure.xml:10
@@ -3954,10 +3943,10 @@ msgid ""
 "and the destroyed with the explosion spell of Ireana of Northborough."
 msgstr ""
 "Die Untoten haben einen Weg unter der Grauen Himmelsleiter gefunden, auf dem "
-"sie Zwergentrutz umgehen koennen. Da dies das Königreich Aisen direkt "
-"bedroht, muss der Zugang schnellstmoeglich verschlossen werden. Der "
-"Durchgang in den Verfluchten Hoelen muss gefunden und mit dem Sprengzauber "
-"ireana von Nordenburgs zerstoert werden."
+"sie Zwergentrutz umgehen können. Da dies das Königreich Aisen direkt "
+"bedroht, muss der Zugang schnellstmöglich verschlossen werden. Der Durchgang "
+"in den Verfluchten Höhlen muss gefunden und mit dem Sprengzauber Ireana von "
+"Nordenburgs zerstört werden."
 
 #: ../data/quests/theFissure.xml:122 ../data/quests/tutorial.xml:193
 msgid "*urgh*"
@@ -3990,13 +3979,13 @@ msgstr "You don't get out very often, do you."
 #: ../data/quests/theFissure.xml:311
 msgid "You developed splendid since the last time we met, didn't you. ##solo"
 msgstr ""
-"Ihr habt euch praechtig entwickelt, seit wir uns das letzte Mal gesehen "
+"Ihr habt euch prächtig entwickelt, seit wir uns das letzte Mal gesehen "
 "haben, oder? ##solo"
 
 #: ../data/quests/theFissure.xml:313
 msgid "You developed splendid since the last time we met, didn't you."
 msgstr ""
-"Ihr habt euch praechtig entwickelt, seit wir uns das letzte Mal gesehen "
+"Ihr habt euch prächtig entwickelt, seit wir uns das letzte Mal gesehen "
 "haben, oder?"
 
 #: ../data/quests/theFissure.xml:316
@@ -4014,7 +4003,7 @@ msgstr "Let me see. _priest"
 
 #: ../data/quests/theFissure.xml:360
 msgid "Thank you. That was a close call for a rescue."
-msgstr "Thank you. That was a close call for a rescue."
+msgstr "Vielen Dank. Das war ziemlich knapp."
 
 #: ../data/quests/theFissure.xml:361
 msgid "How could it even come to this?"
@@ -4239,7 +4228,7 @@ msgstr "Na dann, los!"
 
 #: ../data/quests/theFissure.xml:573 ../data/quests/theFissure.xml:575
 msgid "Wait, we may learn something useful."
-msgstr "Warte, vielleicht erfahren wir noch etwas nuetzliches."
+msgstr "Warte, vielleicht erfahren wir noch etwas nützliches."
 
 #: ../data/quests/theFissure.xml:578
 msgid "Let them rest from time to time."
@@ -4247,7 +4236,7 @@ msgstr "Lass sie ab und zu ausruhen."
 
 #: ../data/quests/theFissure.xml:579
 msgid "They should be able to fight, too."
-msgstr "Sie sollen auch noch kaempfen koennen."
+msgstr "Sie sollen auch noch kämpfen können."
 
 #: ../data/quests/theFissure.xml:580
 msgid "Isn't the tunnel supposed to be ready for the attack?"
@@ -4259,7 +4248,7 @@ msgstr "Nein, die Stadt ist unwichtig."
 
 #: ../data/quests/theFissure.xml:584
 msgid "Let those aisen dogs burn their backup troops there."
-msgstr "Sollen die Aisener dort ihre Verstaerkungstruppen aufreiben."
+msgstr "Sollen die Aisener dort ihre Verstärkungstruppen aufreiben."
 
 #: ../data/quests/theFissure.xml:585
 msgid ""
@@ -4282,7 +4271,7 @@ msgstr "Und das ist gut so."
 
 #: ../data/quests/theFissure.xml:589
 msgid "Now back to work."
-msgstr "Jetzt zurueck an die Arbeit."
+msgstr "Jetzt zurück an die Arbeit."
 
 #: ../data/quests/theFissure.xml:592
 msgid "Your wish is my action."
@@ -4310,12 +4299,11 @@ msgstr "Wenn wir den jetzt vernichten, wird seine Armee mit ihm zerfallen!"
 msgid ""
 "What do you know. There are rats everywhere. Kill them and bring me their "
 "bones!"
-msgstr ""
-"So was. Ueberall gibt es Ratten. Toetet sie und bringt mir ihre Knochen!"
+msgstr "So was. Überall gibt es Ratten. Tötet sie und bringt mir ihre Knochen!"
 
 #: ../data/quests/theFissure.xml:708
 msgid "Then I shall blow this crevice to smithereens."
-msgstr "Dann sorge ich mal dafuer, dass dieser Spalt nur noch Geschichte ist."
+msgstr "Dann sorge ich mal dafür, dass dieser Spalt nur noch Geschichte ist."
 
 #: ../data/quests/theFissure.xml:712 ../data/quests/theFissure.xml:714
 msgid "Alright, go!"
@@ -4323,7 +4311,7 @@ msgstr "Okay, los!"
 
 #: ../data/quests/theFissure.xml:716
 msgid "Blow this passage to smithereens!"
-msgstr "Sprengen wir diesen Durchgang in tausend Stuecke!"
+msgstr "Sprengen wir diesen Durchgang in tausend Stücke!"
 
 #: ../data/quests/theFissure.xml:741
 msgid "Get out, quick!"
@@ -4358,13 +4346,13 @@ msgid ""
 "Let's go. If we are lucky the passage is blocked too and we can all take a "
 "break."
 msgstr ""
-"Gehen wir. Wenn wir Glueck haben, hat es den Ausgang auch verschuettet und "
-"wir koennen uns alles andere sparen."
+"Gehen wir. Wenn wir Glück haben, hat es den Ausgang auch verschüttet und wir "
+"können uns alles andere sparen."
 
 #: ../data/quests/theFissure.xml:841
 msgid "In that case you can always tear yourselves apart. That would work."
 msgstr ""
-"In dem Fall koennt ihr euch immer noch in Stuecke hacken. Das wird wohl "
+"In dem Fall könnt ihr euch immer noch in Stücke hacken. Das wird wohl "
 "funktionieren."
 
 #: ../data/quests/theFissure.xml:842
@@ -4374,7 +4362,7 @@ msgstr "Hat der eigentlich eine Ahnung, wie weh das jedes Mal tut?"
 #: ../data/quests/theFissure.xml:843
 msgid "That's impossible. Otherwise he wouldn't give such a stupid suggestion."
 msgstr ""
-"Kann nicht sein, dann wuerde er einen so bescheuerten Vorschlag gar nicht "
+"Kann nicht sein, dann würde er einen so bescheuerten Vorschlag gar nicht "
 "erst machen."
 
 #: ../data/quests/theFissure.xml:844
@@ -4383,7 +4371,7 @@ msgstr "Es gibt wirklich bessere Arbeitgeber."
 
 #: ../data/quests/theFissure.xml:845
 msgid "Stop bickering and get moving!"
-msgstr "Hoert auf zu mosern und bewegt euch endlich!"
+msgstr "Hört auf zu mosern und bewegt euch endlich!"
 
 #: ../data/quests/theFissure.xml:864
 msgid "Hopefully there is an exit in this direction."
@@ -4398,20 +4386,20 @@ msgid ""
 "Oh by the gods, if some of them have their eyes on this unpleasent piece of "
 "land right now."
 msgstr ""
-"Oh, bei den Goettern, so denn gerade welche ihre Augen auf dieses "
-"unangenehme Stueck Land haben."
+"Oh, bei den Göttern, so denn gerade welche ihre Augen auf dieses unangenehme "
+"Stück Land haben."
 
 #: ../data/quests/theFissure.xml:868
 msgid "How nice to see a familiar face."
-msgstr "Wie schoen, ein bekanntes Gesicht zu sehen."
+msgstr "Wie schön, ein bekanntes Gesicht zu sehen."
 
 #: ../data/quests/theFissure.xml:870
 msgid "How nice to see familiar faces."
-msgstr "Wie schoen, bekannte Gesichter zu sehen."
+msgstr "Wie schön, bekannte Gesichter zu sehen."
 
 #: ../data/quests/theFissure.xml:873
 msgid "Not so fast, peddler!"
-msgstr "Nicht so schnell, Kraemer!"
+msgstr "Nicht so schnell, Krämer!"
 
 #: ../data/quests/theFissure.xml:874
 msgid "How by Harad's eyes did you get here?"
@@ -4426,7 +4414,7 @@ msgid ""
 "I wanted to take a short cut through the mountains when suddenly the ground "
 "was caving in."
 msgstr ""
-"Ich wollte eine Abkuerzung durch die Berge finden, als ploetzlich der Boden "
+"Ich wollte eine Abkürzung durch die Berge finden, als plötzlich der Boden "
 "unter mir nachgab."
 
 #: ../data/quests/theFissure.xml:878
@@ -4435,7 +4423,7 @@ msgid ""
 "was blocked."
 msgstr ""
 "Und nachdem ich mich vorsichtig umgesehen hatte musste ich leider "
-"feststellen, dass der Weg nach Sueden verschuettet war."
+"feststellen, dass der Weg nach Süden verschüttet war."
 
 #: ../data/quests/theFissure.xml:879
 msgid "That's why I'm here."
@@ -4443,7 +4431,7 @@ msgstr "Darum bin ich hier."
 
 #: ../data/quests/theFissure.xml:880
 msgid "There is a cave in the east, too, but that was a bit fishy."
-msgstr "Im Osten gibt es auch eine Hoehle, aber die war mir nicht geheuer."
+msgstr "Im Osten gibt es auch eine Höhle, aber die war mir nicht geheuer."
 
 #: ../data/quests/theFissure.xml:882
 msgid "But since you are here there is still hope."
@@ -4463,7 +4451,7 @@ msgstr ""
 
 #: ../data/quests/theFissure.xml:886
 msgid "But since you are here, appreciated friends, there is still hope."
-msgstr "Aber da Ihr ja hier seid, geschaetzte Freunde, gibt es noch Hoffnung."
+msgstr "Aber da Ihr ja hier seid, geschätzte Freunde, gibt es noch Hoffnung."
 
 #: ../data/quests/theFissure.xml:888
 msgid ""
@@ -4478,8 +4466,8 @@ msgid ""
 "Well, that would work normally and I would gladly offer you a grand price "
 "for the help."
 msgstr ""
-"Nun, normalerweise ginge das wohl, und ich wuerde euch mit Freuden eine "
-"praechtige Belohnung fuer die Hilfe anbieten."
+"Nun, normalerweise ginge das wohl, und ich würde euch mit Freuden eine "
+"prächtige Belohnung für die Hilfe anbieten."
 
 #: ../data/quests/theFissure.xml:892
 msgid "But short ago, there was a notable magical explosion in this place."
@@ -4500,13 +4488,12 @@ msgstr ""
 "bringen werden."
 
 #: ../data/quests/theFissure.xml:899
-#, fuzzy
 msgid "Verflucht sei Windclaw!"
 msgstr "Verflucht sei Windklaue!"
 
 #: ../data/quests/theFissure.xml:900
 msgid "Fine. Then we do it the hard way."
-msgstr "Na schoen. Dann eben auf die harte Tour."
+msgstr "Na schön. Dann eben auf die harte Tour."
 
 #: ../data/quests/theFissure.xml:901
 msgid ""
@@ -4514,20 +4501,19 @@ msgid ""
 "I would part with them for a small amount of gold."
 msgstr ""
 "Wenn ihr etwas braucht, lasst es mich wissen. Ich habe da hinten ein paar "
-"Traenke entdeckt,von denen ich mich fuer ein geringes Entgeld trennen werde."
+"Tränke entdeckt,von denen ich mich für ein geringes Entgeld trennen werde."
 
 #: ../data/quests/theFissure.xml:902
 msgid "You really ask money for it."
-msgstr "Ihr verlangt tatsaechlich Geld dafuer."
+msgstr "Ihr verlangt tatsächlich Geld dafür."
 
 #: ../data/quests/theFissure.xml:903
 msgid "But business is business."
-msgstr "Aber Geschaeft ist Geschaeft."
+msgstr "Aber Geschäft ist Geschäft."
 
 #: ../data/quests/theTrader.xml:6
 msgid "A strange trader offered me to sell Empty Scrolls."
-msgstr ""
-"Ein seltsamer Haendler hat angeboten, Leere Schriftrollen zu verkaufen."
+msgstr "Ein seltsamer Händler hat angeboten, Leere Schriftrollen zu verkaufen."
 
 #: ../data/quests/theTrader.xml:66
 msgid "A moment, dear madam."
@@ -4626,14 +4612,14 @@ msgid ""
 "If you are getting close to a waypoint, your aura will bring the familiar "
 "spirits of this place to ignite warning flames."
 msgstr ""
-"Wenn Ihr Euch einem Wegeschrein naehert, wird Eure Aura die Schutzgeister "
-"dieses Ortes dazu veranlassen, warnende Flammen zu entzuenden."
+"Wenn Ihr Euch einem Wegeschrein nähert, wird Eure Aura die Schutzgeister "
+"dieses Ortes dazu veranlassen, warnende Flammen zu entzünden."
 
 #: ../data/quests/theTrader.xml:123
 msgid ""
 "But do not fear, they don't have the power to harm you in any way, really."
 msgstr ""
-"Aber keine Angst, sie haben nicht die Macht, Euch wirklich gefaehrlich zu "
+"Aber keine Angst, sie haben nicht die Macht, Euch wirklich gefährlich zu "
 "werden."
 
 #: ../data/quests/theTrader.xml:124
@@ -4641,16 +4627,16 @@ msgid ""
 "Counterwise you can be sure that you are able to use the road shrine if you "
 "see the flames."
 msgstr ""
-"Dafuer koennt Ihr sicher sein, dass Ihr den Wegeschrein benutzen koennt, "
-"wenn Ihr die Flammen seht."
+"Dafür könnt Ihr sicher sein, dass Ihr den Wegeschrein benutzen könnt, wenn "
+"Ihr die Flammen seht."
 
 #: ../data/quests/theTrader.xml:125
 msgid ""
 "If you click on a road shrine, your body will volatilize into Harad's Black "
 "Abyss."
 msgstr ""
-"Wenn Ihr auf einen Wegeschrein klickt, wird Euer Koerper sich in Harads "
-"Schwarzen Abgrund verfluechtigen."
+"Wenn Ihr auf einen Wegeschrein klickt, wird Euer Körper sich in Harads "
+"Schwarzen Abgrund verflüchtigen."
 
 #: ../data/quests/theTrader.xml:126
 msgid ""
@@ -4677,23 +4663,23 @@ msgid ""
 "Click on one of these symbols, and your body will reassemble itself fast as "
 "the wind at your destination."
 msgstr ""
-"Klickt auf eines dieser Symbole, und Euer Koerper setzt sich in Windeseile "
-"am Zielort wieder zusammen."
+"Klickt auf eines dieser Symbole, und Euer Körper setzt sich in Windeseile am "
+"Zielort wieder zusammen."
 
 #: ../data/quests/theTrader.xml:137
 msgid "Goblins and other beasts have stolen quite a lot recently."
 msgstr ""
-"Goblins und aehnliches Gekreuch haben in letzter Zeit allerhand gestohlen."
+"Goblins und ähnliches Gekreuch haben in letzter Zeit allerhand gestohlen."
 
 #: ../data/quests/theTrader.xml:138
 msgid "It may be convenient to make a short detour to a well-assorted trader."
 msgstr ""
 "Es mag Euch gelegen kommen, einen kurzen Abstecher zu einem gut sortierten "
-"Haendler zu unternehmen."
+"Händler zu unternehmen."
 
 #: ../data/quests/theTrader.xml:139
 msgid "Speaking of you?"
-msgstr "Naemlich Euch?"
+msgstr "Nämlich Euch?"
 
 #: ../data/quests/theTrader.xml:140
 msgid "Actually not, regrettably."
@@ -4704,14 +4690,14 @@ msgid ""
 "As reported, I misinvested in the Empty Scrolls and have no available "
 "capital."
 msgstr ""
-"Wie bereits berichtet habe ich mich mit den Leeren Schriftrollen uebernommen "
+"Wie bereits berichtet habe ich mich mit den Leeren Schriftrollen übernommen "
 "und derzeit kein freies Kapital."
 
 #: ../data/quests/theTrader.xml:142
 msgid ""
 "I'm afraid all I can give you for your wares in gold would be insufficient."
 msgstr ""
-"Ich fuerchte, ich kann euch nur unzureichende Mengen an Gold für eure Waren "
+"Ich fürchte, ich kann euch nur unzureichende Mengen an Gold für eure Waren "
 "bieten."
 
 #: ../data/quests/theTrader.xml:143
@@ -4721,11 +4707,11 @@ msgstr ""
 
 #: ../data/quests/theTrader.xml:144
 msgid "One reason being customers are really rare in these parts."
-msgstr "Schon deswegen, weil Kundschaft in diesen Breiten rar gesaet ist."
+msgstr "Schon deswegen, weil Kundschaft in diesen Breiten rar gesät ist."
 
 #: ../data/quests/theTrader.xml:145
 msgid "They are everywhere."
-msgstr "Das ist sie ueberall."
+msgstr "Das ist sie überall."
 
 #: ../data/quests/theTrader.xml:146
 msgid "with all due respect: That is a blessing."
@@ -4733,7 +4719,7 @@ msgstr "Und ohne Euch zu nahe zu treten: Das ist auch gut so."
 
 #: ../data/quests/theTrader.xml:147
 msgid "Not many Branded Ones would have listened to me as you did."
-msgstr "Nicht viele Gezeichnete haetten mir so zugehoert wie Ihr."
+msgstr "Nicht viele Gezeichnete hätten mir so zugehört wie Ihr."
 
 #: ../data/quests/theTrader.xml:148
 msgid "Allow me to give you an Empty Scroll as a freebie."
@@ -4757,7 +4743,7 @@ msgid ""
 "entirely up to you."
 msgstr ""
 "Nun, sie wurden mir als Leere Schriftrollen verkauft, aber wie Ihr sie "
-"nennt, ist gaenzlich Euch ueberlassen."
+"nennt, ist gänzlich Euch überlassen."
 
 #: ../data/quests/theTrader.xml:155
 msgid "Why not \"Way to the town\" or something like that?"
@@ -4765,7 +4751,7 @@ msgstr "Warum nicht einfach \"Weg zur Stadt\" oder so?"
 
 #: ../data/quests/theTrader.xml:157
 msgid "What kind of name is this supposed to be??"
-msgstr "Was soll das denn fuer ein Name sein??"
+msgstr "Was soll das denn für ein Name sein??"
 
 #: ../data/quests/theTrader.xml:159
 msgid "More like town portal."
@@ -4781,7 +4767,7 @@ msgid ""
 "to you!"
 msgstr ""
 "Sie wurden mir nur als Leere Schriftrollen verkauft, aber wie ihr sie nennt "
-"ist voellig Euch ueberlassen!"
+"ist völlig Euch überlassen!"
 
 #: ../data/quests/theTrader.xml:164
 msgid "And how do we use them?"
@@ -4793,27 +4779,27 @@ msgstr "Wie einen ganz normalen Trank."
 
 #: ../data/quests/theTrader.xml:166
 msgid "Explain the belt?"
-msgstr "Den Guertel erklaeren?"
+msgstr "Den Gürtel erklären?"
 
 #: ../data/quests/theTrader.xml:174
 msgid "Well, you now about your inventory, right?"
-msgstr "Nun, ueber Euer Inventar wisst Ihr ja Bescheid, richtig?"
+msgstr "Nun, über Euer Inventar wisst Ihr ja Bescheid, richtig?"
 
 #: ../data/quests/theTrader.xml:177
 msgid "At the bottom you have the small items, which take three rows of space."
 msgstr ""
-"Ganz unten habt Ihr die kleinen Gegenstaende, die in drei Reihen vorhanden "
+"Ganz unten habt Ihr die kleinen Gegenstände, die in drei Reihen vorhanden "
 "sind."
 
 #: ../data/quests/theTrader.xml:179
 msgid "The top row represents your belt."
-msgstr "Die oberste Reihe repraesentiert Euren Guertel."
+msgstr "Die oberste Reihe repräsentiert Euren Gürtel."
 
 #: ../data/quests/theTrader.xml:180
 msgid "If you place a potion there, it appears in the belt row."
 msgstr ""
 "Wenn Ihr dort zum Beispiel einen Trank platziert, taucht er auch in der "
-"Guertelleiste unten auf."
+"Gürtelleiste unten auf."
 
 #: ../data/quests/theTrader.xml:181
 msgid "I'm sure you noticed, right?"
@@ -4824,13 +4810,13 @@ msgid ""
 "And long years on the battlefield caused me to change potions for similar "
 "potions immediately once I used one."
 msgstr ""
-"Und lange Jahre auf dem Schlachtfeld haben dafuer gesorgt, dass ich benutzte "
-"Traenke sofort gegen einen gleichartigen Trank austausche, wenn ich einen "
-"benutze"
+"Und lange Jahre auf dem Schlachtfeld haben dafür gesorgt, dass ich benutzte "
+"Tränke sofort gegen einen gleichartigen Trank austausche, wenn ich einen "
+"benutze."
 
 #: ../data/quests/theTrader.xml:184
 msgid "A useful skill."
-msgstr "Eine nützliche Faehigkeit."
+msgstr "Eine nützliche Fähigkeit."
 
 #: ../data/quests/theTrader.xml:186
 msgid "Doesn't everyone learn it who wants to avoid death?"
@@ -4845,28 +4831,27 @@ msgid ""
 "If you want to use a potion you can do so by clicking on it with the right "
 "mouse button in the inventory or the belt."
 msgstr ""
-"Wenn Ihr einen Trank verwenden wollt, koennt Ihr das tun, indem Ihr ihn im "
-"Inventar oder im Guertel mit rechts anklickt."
+"Wenn Ihr einen Trank verwenden wollt, könnt Ihr das tun, indem Ihr ihn im "
+"Inventar oder im Gürtel mit rechts anklickt."
 
 #: ../data/quests/theTrader.xml:192
 msgid "Alternativly you can choose the number of the belt slot it is in."
 msgstr ""
-"Alternativ koennt ihr auch die Ziffer des Guertelfachs waehlen, in dem er "
-"liegt."
+"Alternativ könnt ihr auch die Ziffer des Gürtelfachs wählen, in dem er liegt."
 
 #: ../data/quests/theTrader.xml:193
 msgid ""
 "That is, 1 for the potion on the left, 2 for the second from the left and so "
 "on."
 msgstr ""
-"Also 1 fuer den Trank ganz links, 2 fuer den zweiten von Links und so weiter."
+"Also 1 für den Trank ganz links, 2 für den zweiten von Links und so weiter."
 
 #: ../data/quests/theTrader.xml:194
 msgid ""
 "This works for all usable items alike, so naturally for the scrolls, too."
 msgstr ""
-"Das funktioniert fuer alle benutzbaren Gegenstaende gleich, also auch fuer "
-"die Schriftrollen."
+"Das funktioniert für alle benutzbaren Gegenstände gleich, also auch für die "
+"Schriftrollen."
 
 #: ../data/quests/theTrader.xml:202
 msgid "Oh! It's that simple?"
@@ -4882,7 +4867,7 @@ msgid ""
 "for you to know I'm nearby."
 msgstr ""
 "Oh, nun, mir fiel auf, dass Ihr nach Norden wolltet, und ich dachte mir, "
-"dass es Euch vielleicht gelegen kaeme, mich in der Naehe zu wissen."
+"dass es Euch vielleicht gelegen käme, mich in der Nähe zu wissen."
 
 #: ../data/quests/theTrader.xml:257
 msgid "Well, you are right, I guess."
@@ -4890,7 +4875,7 @@ msgstr "Hm, da habt Ihr auch wieder recht."
 
 #: ../data/quests/theTrader.xml:294
 msgid "How nice to see you have escaped from the caves."
-msgstr "Wie schoen, dass Ihr auch aus den Hoelen entkommen seid."
+msgstr "Wie schön, dass Ihr auch aus den Höhlen entkommen seid."
 
 #: ../data/quests/theTrader.xml:295
 msgid "No thanks to you. May I continue to offer you my services?"
@@ -4925,7 +4910,7 @@ msgstr "Finde den geheimen Zugang zur Bibliothek."
 
 #: ../data/quests/tutorial.xml:21
 msgid "Kill every spawn of the behemoth."
-msgstr "Toete alle Abkömmlinge des Behemoth."
+msgstr "Töte alle Abkömmlinge des Behemoth."
 
 #: ../data/quests/tutorial.xml:195
 msgid "Harad's bones!"
@@ -5522,8 +5507,8 @@ msgid ""
 "The weapon you just got is a mid-sized item and thus is found in the middle "
 "field."
 msgstr ""
-"Die Waffe, die Ihr gerade \terhalten habt ist ein mittelgroßer Gegenstand "
-"und befindet sich deshalb im mittleren Feld"
+"Die Waffe, die Ihr gerade erhalten habt ist ein mittelgroßer Gegenstand und "
+"befindet sich deshalb im mittleren Feld"
 
 #: ../data/quests/tutorial.xml:759
 msgid ""
@@ -5548,11 +5533,11 @@ msgstr "Ihr solltet alle zunächst eure Waffen anlegen."
 
 #: ../data/quests/tutorial.xml:824
 msgid "But you still know how to fight, right? ##solo"
-msgstr "Aber wir man kaempft wisst Ihr doch noch, oder? ##solo"
+msgstr "Aber wie man kämpft wisst Ihr doch noch, oder? ##solo"
 
 #: ../data/quests/tutorial.xml:826
 msgid "But you still know how to fight, right?"
-msgstr "Aber wir man kaempft wisst ihr doch noch, oder?"
+msgstr "Aber wie man kämpft wisst ihr doch noch, oder?"
 
 #: ../data/quests/tutorial.xml:828
 msgid "Go in, click on it, kill it. A Branded One wouldn't forget about that."
@@ -5603,8 +5588,7 @@ msgstr ""
 #: ../data/quests/tutorial.xml:850
 msgid "Forget it! I'm not going in while those beasts are on the loose."
 msgstr ""
-"Vergiss es! Ich geh da nicht rein, wenn die Viecher noch auf freiem Fuss "
-"sind!"
+"Vergiss es! Ich geh da nicht rein, wenn die Viecher noch auf freiem Fuß sind!"
 
 #: ../data/quests/tutorial.xml:915
 msgid "Yuck, those things are really disgusting."
@@ -5627,20 +5611,20 @@ msgid ""
 "Your witch stuff may have weakened me, but I take a bit of the power of "
 "every being I kill and become stronger."
 msgstr ""
-"Euer Hexenkram mag mich ja geschwaecht haben, aber mit jedem getoeteten "
-"Wesen nehme ich einen Teil seiner Kraft auf und werde staerker."
+"Euer Hexenkram mag mich ja geschwächt haben, aber mit jedem getöteten Wesen "
+"nehme ich einen Teil seiner Kraft auf und werde stärker."
 
 #: ../data/quests/tutorial.xml:922
 msgid ""
 "Your witch stuff may have weakened us, but we take a bit of the power of "
 "every being we kill and become stronger."
 msgstr ""
-"Euer Hexenkram mag uns ja geschwaecht haben, aber mit jedem getoeteten Wesen "
-"nehmen wir einen Teil seiner Kraft auf und werden staerker."
+"Euer Hexenkram mag uns ja geschwächt haben, aber mit jedem getöteten Wesen "
+"nehmen wir einen Teil seiner Kraft auf und werden stärker."
 
 #: ../data/quests/tutorial.xml:924
 msgid "Better think about who you're calling weakling here!"
-msgstr "Ueberleg dir also lieber, wen du hier Schwaechling nennst!"
+msgstr "Überleg dir also lieber, wen du hier Schwächling nennst!"
 
 #: ../data/quests/tutorial.xml:925
 msgid ""
@@ -5728,7 +5712,7 @@ msgstr "Ich frage mich, woher dieser Soren so viel über die Gefallenen weiß...
 
 #: ../data/quests/tutorial.xml:967
 msgid "Mages are exceedingly strange. Every single one of them."
-msgstr "Magier sind aeusserst merkwuerdig. Alle."
+msgstr "Magier sind äußerst merkwürdig. Alle."
 
 #: ../data/quests/tutorial.xml:969
 msgid "Better strange then..."
@@ -5894,7 +5878,7 @@ msgid ""
 "Do you see the shelf in that passage? That is the door. Just move it by "
 "clicking on it."
 msgstr ""
-"Seht ihr das Regal da in dem Durchgang? Das ist die Tuer. Einfach bei Seite "
+"Seht ihr das Regal da in dem Durchgang? Das ist die Tür. Einfach bei Seite "
 "schieben, indem Ihr darauf klickt."
 
 #: ../data/quests/tutorial.xml:1295
@@ -5980,7 +5964,7 @@ msgid ""
 "A Cursed One has to be happy, if he's got something to kill all along, right?"
 msgstr ""
 "Einen Verfluchten freut das sicher noch, wenn er alle Nase lang was zum "
-"Toeten hat."
+"töten hat."
 
 #: ../data/quests/tutorial.xml:1515
 msgid "I'm a Branded One! That is far worse than a curse."
@@ -5988,7 +5972,7 @@ msgstr "Ich bin ein Gezeichneter! Das ist viel schlimmer als ein Fluch."
 
 #: ../data/quests/tutorial.xml:1516
 msgid "The mighty Akeran truly punished you dearly."
-msgstr "Der maechtige Akeran hat dich wahrlich schlimm gestraft."
+msgstr "Der mächtige Akeran hat dich wahrlich schlimm gestraft."
 
 #: ../data/quests/tutorial.xml:1517
 msgid "Spare me your elementalist drivel and make way!"
@@ -5996,7 +5980,7 @@ msgstr "Verschone mich mit deinem Elementaristengelaber und gib den Weg frei!"
 
 #: ../data/quests/tutorial.xml:1518
 msgid "I truly am the exterminator here."
-msgstr "Ich bin wohl wirklich der Kammerjaeger."
+msgstr "Ich bin wohl wirklich der Kammerjäger."
 
 #: ../data/quests/tutorial.xml:1520
 msgid ""
@@ -6053,13 +6037,13 @@ msgid ""
 "If they hadn't all those needless balustrades into the void, they wouldn't "
 "have to mop escaped sluglings from the floor."
 msgstr ""
-"Wenn die nicht ueberall diese überflüssigen Ballustraden ins Nichts haetten, "
-"muessten sie jetzt auch keine entflohenen Schnecklinge vom Boden wischen."
+"Wenn die nicht überall diese überflüssigen Ballustraden ins Nichts hätten, "
+"müssten sie jetzt auch keine entflohenen Schnecklinge vom Boden wischen."
 
-#: ../data/world/aisen.xml:774
+#: ../data/world/aisen.xml:758
 msgid "Watch out! Monsters from the mine! Help me!"
 msgstr "Achtung! Monster aus der Mine! Helft mir!"
 
-#: ../data/world/aisen.xml:790
+#: ../data/world/aisen.xml:774
 msgid "Let me tell you I'm no monster. I'm worse."
 msgstr "Ich bin kein Monster, lasst euch das gesagt sein. Ich bin schlimmer."
