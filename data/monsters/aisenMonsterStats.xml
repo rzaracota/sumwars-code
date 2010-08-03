@@ -162,16 +162,16 @@
 		resistances_cap_fire="50"
 		walk_speed="3000"
 		attack_speed="1000"
-		step_length="1"
+		step_length="2"
 		attack_range="1.5"
 	>
 		<Ability type="walk" />
 		<Ability type="attack" rating="1"/>
-		<Ability type="die" />
+		<Ability type="die" time="800"/>
 		<Ability type="noaction" />
 	</BasicAttributes>
 	
-	<Geometry radius="0.5" />
+	<Geometry radius="1.0" />
 	
 	<AI ai_sight_range="12" />
 </Monster>
