@@ -1077,26 +1077,29 @@ void World::handleMessage(std::string msg, int slot)
 		}
 		smsg += msg;
 
-		NetworkPacket* cv = m_network->createPacket();
-
-		// Header anlegen
-		PackageHeader header;
-		header.m_content = PTYPE_S2C_MESSAGE; 	// Daten von Server zum Client
-		header.m_number = smsg.size();
-
-		header.toString(cv);
-		cv->toBuffer(smsg);
-
-		// Nachricht an alle Spieler mit ausser dem Sender
-		WorldObjectMap::iterator it;
-		for (it = m_player_slots->begin(); it != m_player_slots->end(); ++it)
+		if (m_network != 0)
 		{
-			if (it->first != slot && it->first!=LOCAL_SLOT)
+			NetworkPacket* cv = m_network->createPacket();
+
+			// Header anlegen
+			PackageHeader header;
+			header.m_content = PTYPE_S2C_MESSAGE; 	// Daten von Server zum Client
+			header.m_number = smsg.size();
+
+			header.toString(cv);
+			cv->toBuffer(smsg);
+
+			// Nachricht an alle Spieler mit ausser dem Sender
+			WorldObjectMap::iterator it;
+			for (it = m_player_slots->begin(); it != m_player_slots->end(); ++it)
 			{
-				getNetwork()->pushSlotMessage(cv,it->first);
+				if (it->first != slot && it->first!=LOCAL_SLOT)
+				{
+					getNetwork()->pushSlotMessage(cv,it->first);
+				}
 			}
+			m_network->deallocatePacket(cv);
 		}
-		m_network->deallocatePacket(cv);
 	}
 	else
 	{
