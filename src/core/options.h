@@ -46,6 +46,16 @@ typedef std::map<KeyCode,ShortkeyDestination> ShortkeyMap;
 class Options
 {
 	public:
+		/**
+		 * \brief Enumeration of Difficulty settings
+		 */
+		enum Difficulty
+		{
+			EASY = 1,
+			NORMAL = 2,
+			HARD = 3,
+			INSANE = 4,
+		};
 		
 		/**
 		 * \brief Returns the Instance of the Object (Singleton pattern)
@@ -204,6 +214,40 @@ class Options
 			return m_max_players;
 		}
 		
+		/**
+		 * \brief Sets the new difficulty
+		 * \param difficulty new difficulty setting
+		 */
+		void setDifficulty(Difficulty difficulty)
+		{
+			m_difficulty = difficulty;
+		}
+		
+		/**
+		 * \brief returns the current difficulty
+		 */
+		Difficulty getDifficulty()
+		{
+			return m_difficulty;
+		}
+		
+		/**
+		 * \brief Returns the text speed factor
+		 */
+		float getTextSpeed()
+		{
+			return m_text_speed;
+		}
+		
+		/**
+		 * \brief Sets the text speed factor (factor of 1 is standard speed)
+		 * \param text_speed text speed
+		 */
+		void setTextSpeed(float text_speed)
+		{
+			m_text_speed = text_speed;
+		}
+		
 	private:
 		/**
 		 * Konstructor
@@ -238,4 +282,16 @@ class Options
 		 * \brief maximale Anzahl Spieler
 		 */
 		int m_max_players;
+		
+		
+		/**
+		 * \brief difficulty setting
+		 */
+		Difficulty m_difficulty;
+		
+		/**
+		 * \brief Factor the influences text display times
+		 */
+		float m_text_speed;
+		
 };

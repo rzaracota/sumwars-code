@@ -16,6 +16,7 @@
 #include "monster.h"
 #include "player.h"
 #include "itemfactory.h"
+#include "options.h"
 
 void Ai::toString(CharConv* cv)
 {
@@ -184,15 +185,26 @@ Monster::Monster( int id,MonsterBasicData& data)
 		m_ai.m_mod_time[i]=0;
 	}
 
-	// HP Faktor bei mehreren Spielern
+	// Difficulty factor
+	// HP and strenght factors for difficulty (enums start with 1);
 	WorldObjectMap * pl = World::getWorld()->getPlayers();
-	float fak = (0.5 + 0.5*pl->size());
+	
+	float hp_difffac[6] = {0,0.6 , 1.0, 1.5, 2.5};	
+	float str_difffac[6] = {0, 0.8, 1.0, 1.2, 1.5};
+	float hpfactor = (0.5 + 0.5*pl->size()) * hp_difffac[Options::getInstance()->getDifficulty()];
+	float strfactor = (0.9 + 0.1*pl->size()) * str_difffac[Options::getInstance()->getDifficulty()];
 
-	getBaseAttr()->m_max_health *= fak;
-	getBaseAttrMod()->m_max_health *= fak;
-	getDynAttr()->m_health *= fak;
+	getBaseAttr()->m_max_health *= hpfactor;
+	getBaseAttrMod()->m_max_health *= hpfactor;
+	getDynAttr()->m_health *= hpfactor;
+	
+	getBaseAttr()->m_strength = int(getBaseAttr()->m_strength * strfactor);
+	getBaseAttr()->m_dexterity = int(getBaseAttr()->m_dexterity * strfactor);
+	getBaseAttr()->m_willpower = int(getBaseAttr()->m_willpower * strfactor);
+	getBaseAttr()->m_magic_power = int (getBaseAttr()->m_magic_power * strfactor);
+	
 	calcBaseAttrMod();
-
+	
 	m_base_action = "noaction";
 
 	if (checkAbility("summoned"))

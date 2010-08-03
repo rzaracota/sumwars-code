@@ -78,6 +78,16 @@ class OptionsWindow : public Window
 		bool onAreaMouseButtonPressed(const CEGUI::EventArgs& evt);
 		
 		/**
+		 * \brief Handles change of difficulty
+		 */
+		bool onDifficultyChanged(const CEGUI::EventArgs& evt);
+		
+		/**
+		 * \brief Handles change of text speed setting
+		 */
+		bool onTextSpeedChanged(const CEGUI::EventArgs& evt);
+		
+		/**
 		 * \fn bool onSoundVolumeChanged(const CEGUI::EventArgs& evt);
 		 * \brief Behandelt Aendern der Soundlautstarke
 		 */
