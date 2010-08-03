@@ -1,4 +1,5 @@
 <RenderInfo name="spiderbase" parent="creaturebase">
+	<Soundobject objectname="sound" />
 	<Action name="walk">
 		<Animation name="walk" />
 	</Action>
@@ -12,6 +13,7 @@
 
 	<Action name="die">
 		<Animation name="die" />
+		<Sound objectname="sound" name="worm_die"/>
 	</Action>
 	
 	<Action name="noaction">

@@ -84,7 +84,18 @@
 </RenderInfo>
 
 <RenderInfo name="lightning">
+	<Soundobject objecname="sound"/>
 	<ParticleSystem objectname="particle" source="Lightning" position="0 3 0" />
+	
+	<Action name="stationary">
+		<Sound objectname="sound" name="lightning"/>
+	</Action>
+	<Action name="fly">
+		<Sound objectname="sound" name="lightning"/>
+	</Action>
+	<Action name="explode">
+		<Sound objectname="sound" name="lightning"/>
+	</Action>
 </RenderInfo>
 
 <RenderInfo name="thunderstorm">
