@@ -628,6 +628,14 @@ public:
 	{
 		return m_portal_position;
 	}
+	
+	/**
+	 * \brief returns the Stash of the player
+	 */
+	Equipement* getStash()
+	{
+		return m_stash;
+	}
 
 	/**
 	 * \fn void setPortalPosition(RegionLocation regloc)
@@ -797,6 +805,12 @@ protected:
 	 * \brief Faehigkeiten, die der Spieler lernen kann
 	 */
 	LearnableAbilityMap m_learnable_abilities;
+	
+	/**
+	 * \var m_stash
+	 * \brief The content of the stash of the player
+	 */
+	Equipement* m_stash;
 
 	//Constructors
 	//Accessor Methods

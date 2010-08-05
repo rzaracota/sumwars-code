@@ -497,6 +497,18 @@ void Dialogue::changeTopic(std::string topic)
 		npc->getTradeInfo().m_price_factor = tradeinfo.m_cost_multiplier;
 		player->setTradePartner(npc->getId());
 	}
+	
+	if (topic == "stash")
+	{
+		Creature* player = dynamic_cast<Creature*>( m_region->getObject(m_main_player_id));
+		
+		if (player != 0)
+		{
+			// Spieler handelt *mit sich selbst*
+			player->setTradePartner(player->getId());
+			m_finished = true;
+		}
+	}
 
 	// globale Dialoge loesen Events aus
 	// lokale Topics

@@ -91,7 +91,7 @@ Player::Player( int id, Subtype subtype) : Creature( id)
 
 Player::~Player()
 {
-
+	delete m_stash;
 }
 
 bool Player::destroy()
@@ -139,6 +139,7 @@ bool Player::init()
 	m_secondary_equip = false;
 
 	m_equipement = new Equipement(5,14,30);
+	m_stash = new Equipement(15,21,30);
 	m_equipement->setGold(50);
 
 	m_candidate_party = -1;
@@ -626,14 +627,32 @@ bool Player::onItemClick(ClientCommand* command)
 		{
 			if (getTradePartner() != 0)
 			{
+				bool stashtrade = false;
+				if (getTradePartner() == this)
+				{
+					stashtrade = true;
+				}
+				
 				it =0;
 				int gold = getEquipement()->getGold();
 				getEquipement()->swapItem(it,pos);
-				getTradePartner()->buyItem(it,gold);
-
+				if (!stashtrade)
+				{
+					getTradePartner()->buyItem(it,gold);
+					getEquipement()->setGold(gold);
+				}
+				else
+				{
+					int pos = getStash()->insertItem(it,false);
+					if (pos != Equipement::NONE)
+					{
+						it = 0;
+					}
+				}
+				
 				// wieder hinein getauscht, wenn Handel nicht erfolgreich
 				getEquipement()->swapItem(it,pos);
-				getEquipement()->setGold(gold);
+				
 				return true;
 			}
 
@@ -1039,6 +1058,7 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 	Dialogue* dia;
 	std::list< std::pair<std::string, std::string> >::iterator it;
 
+	bool stashtrade;
 	bool sell;
 	Item* si;
 	DropSlot ds;
@@ -1244,7 +1264,16 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 			dia = getDialogue();
 			if (dia ==0)
 			{
-				ERRORMSG("answer without dialogue");
+				// This can only happen, when trading with you stash
+				if (getTradePartner() == this)
+				{
+					setTradePartner(0);
+					break;
+				}
+				else
+				{
+					ERRORMSG("answer without dialogue");
+				}
 				break;
 			}
 			dia->changeTopic("end");
@@ -1257,6 +1286,13 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 			{
 				break;
 			}
+			
+			// you may *trade* with your stash, in this case the traderpartner is the object itself
+			stashtrade == false;
+			if (getTradePartner() == this)
+			{
+				stashtrade = true;
+			}
 
 			si = getEquipement()->getItem(Equipement::CURSOR_ITEM);
 			sell = true;
@@ -1264,14 +1300,23 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 
 			// Rechtklick kauft immer ein, Linksklick nur, wenn kein Item in der Hand
 			if (command->m_button == BUTTON_TRADE_ITEM_RIGHT || (command->m_button == BUTTON_TRADE_ITEM_LEFT && si ==0))
+			{
 				sell = false;
+			}
 
 			if (sell)
 			{
 				// Item wird aus dem Inventar herraus genommen
 				si =0;
 				getEquipement()->swapItem(si,Equipement::CURSOR_ITEM);
-				getTradePartner()->buyItem(si,gold);
+				if (!stashtrade)
+				{
+					getTradePartner()->buyItem(si,gold);
+				}
+				else
+				{
+					getStash()->swapItem(si,command->m_id);
+				}
 
 				// wieder hinein getauscht, wenn Handel nicht erfolgreich
 				getEquipement()->swapItem(si,Equipement::CURSOR_ITEM);
@@ -1280,7 +1325,14 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 			else
 			{
 				si =0;
-				getTradePartner()->sellItem(command->m_id,si, gold);
+				if (!stashtrade)
+				{
+					getTradePartner()->sellItem(command->m_id,si, gold);
+				}
+				else
+				{
+					getStash()->swapItem(si,command->m_id);
+				}
 
 				if (si !=0)
 				{
@@ -1294,8 +1346,11 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 					}
 				}
 			}
-
-			getEquipement()->setGold(gold);
+			
+			if (!stashtrade)
+			{
+				getEquipement()->setGold(gold);
+			}
 			break;
 
 		case DEBUG_SIGNAL:
@@ -1999,6 +2054,13 @@ void Player::toSavegame(CharConv* cv)
 	// Items
 	writeEquipement(cv);
 	cv->printNewline();
+	
+	if (cv->getVersion() >=15)
+	{
+		getStash()->toStringComplete(cv);
+	}
+	cv->printNewline();
+	
 
 	// Questinformationen
 	// Daten werden aus der lua Umgebung genommen, wenn die Welt schon laeuft
@@ -2112,6 +2174,10 @@ void Player::fromSavegame(CharConv* cv, bool local)
 	cv->fromBuffer(m_revive_position.second);
 	// Items
 	loadEquipement(cv);
+	if (cv->getVersion() >=15)
+	{
+		getStash()->fromStringComplete(cv);
+	}
 
 	getBaseAttrMod()->m_max_health = getBaseAttr()->m_max_health;
 	calcBaseAttrMod();

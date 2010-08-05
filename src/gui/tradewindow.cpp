@@ -173,6 +173,15 @@ void TradeWindow::update()
 		return;
 	}
 	
+	int gold = player->getEquipement()->getGold();
+	bool stashtrade = false;
+	if (player->getId() == npc->getId())
+	{
+		equ = player->getStash();
+		stashtrade = true;
+		gold = -1;
+	}
+	
 	std::ostringstream out_stream;
 	
 	int nbig = equ->getMaxItemNumber(Item::BIG);
@@ -290,13 +299,21 @@ bool TradeWindow::onTradeItemHover(const CEGUI::EventArgs& evt)
 	}
 		
 	Equipement* equ = npc->getEquipement();
-	
 	if (equ ==0)
 	{
 		return true;
 	}
 	
-	updateItemWindowTooltip(we.window,equ->getItem(id) ,player,player->getEquipement()->getGold());
+	int gold = player->getEquipement()->getGold();
+	bool stashtrade = false;
+	if (player->getId() == npc->getId())
+	{
+		equ = player->getStash();
+		stashtrade = true;
+		gold = -1;
+	}
+	
+	updateItemWindowTooltip(we.window,equ->getItem(id) ,player,gold);
 	
 	return true;
 }
