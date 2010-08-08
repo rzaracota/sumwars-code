@@ -54,6 +54,9 @@ void Options::init()
 	m_special_keys.insert(OIS::KC_7);
 	m_special_keys.insert(OIS::KC_8);
 	m_special_keys.insert(OIS::KC_9);
+	
+	m_difficulty = NORMAL;
+	m_text_speed = 1.0;
 }
 
 Options* Options::getInstance()
@@ -138,6 +141,15 @@ bool Options::readFromFile(const std::string& filename)
 					attr.getString("locale",locale);
 					setLocale(locale);
 				}
+				else if (!strcmp(child->Value(), "Gameplay"))
+				{
+					int diff;
+					attr.getInt("difficulty",diff);
+					setDifficulty( static_cast<Difficulty>(diff));
+					float text_speed;
+					attr.getFloat("text_speed",text_speed);
+					setTextSpeed( text_speed);
+				}
 				else if (!strcmp(child->Value(), "Network"))
 				{
 					std::string host;
@@ -163,7 +175,6 @@ bool Options::readFromFile(const std::string& filename)
 		setToDefaultOptions();
 		return false;
 	}
-
 	return true;
 }
 
@@ -186,6 +197,11 @@ bool Options::writeToFile(const std::string& filename)
 		subele->SetAttribute("target",it->second);
 		element->LinkEndChild(subele);
 	}
+	
+	element = new TiXmlElement( "Gameplay" );
+	doc.LinkEndChild(element);
+	element->SetAttribute("difficulty",getDifficulty());
+	element->SetDoubleAttribute("text_speed",getTextSpeed());
 	
 	element = new TiXmlElement( "Music" );
 	doc.LinkEndChild(element);

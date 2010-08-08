@@ -59,19 +59,16 @@
 			<Add directory=".\gui" />
 		</Compiler>
 		<Linker>
-			<Add option="-Wl,--enable-runtime-pseudo-reloc" />
-			<Add option="-Wl,--enable-auto-image-base" />
-			<Add option="-Wl,--add-stdcall-alias" />
-			<Add library="C:\MinGW\lib\libRakNet.a" />
+			<Add library="libRakNet.a" />
 			<Add library="libwsock32.a" />
-			<Add library="C:\MinGW\lib\alut.lib" />
-			<Add library="C:\MinGW\lib\OpenAL32.lib" />
-			<Add library="C:\MinGW\lib\lua51.lib" />
-			<Add library="C:\mingw\lib\libintl.lib" />
-			<Add library="C:\mingw\lib\ogg.lib" />
-			<Add library="C:\mingw\lib\vorbis.lib" />
-			<Add library="C:\mingw\lib\vorbisfile.lib" />
-			<Add library="C:\MinGW\lib\libpthreadGC2.a" />
+			<Add library="alut" />
+			<Add library="OpenAL32" />
+			<Add library="lua51" />
+			<Add library="libintl" />
+			<Add library="ogg" />
+			<Add library="vorbis" />
+			<Add library="vorbisfile" />
+			<Add library="libpthreadGC2.a" />
 			<Add directory="$(OGRE_HOME)\lib" />
 			<Add directory="$(OGRE_HOME)\bin\Debug" />
 			<Add directory="$(OGRE_HOME)\bin\Release" />
@@ -80,7 +77,6 @@
 		<Unit filename="core\action.h" />
 		<Unit filename="core\charconv.cpp" />
 		<Unit filename="core\charconv.h" />
-		<Unit filename="core\clientnetwork.cpp" />
 		<Unit filename="core\clientnetwork.h" />
 		<Unit filename="core\command.cpp" />
 		<Unit filename="core\command.h" />
@@ -136,7 +132,6 @@
 		<Unit filename="core\monster.h" />
 		<Unit filename="core\monsterbase.h" />
 		<Unit filename="core\netevent.h" />
-		<Unit filename="core\network.cpp" />
 		<Unit filename="core\network.h" />
 		<Unit filename="core\networkstruct.cpp" />
 		<Unit filename="core\networkstruct.h" />
@@ -158,6 +153,12 @@
 		<Unit filename="core\projectile.h" />
 		<Unit filename="core\quest.cpp" />
 		<Unit filename="core\quest.h" />
+		<Unit filename="core\rakclientnetwork.cpp" />
+		<Unit filename="core\rakclientnetwork.h" />
+		<Unit filename="core\raknetworkpacket.cpp" />
+		<Unit filename="core\raknetworkpacket.h" />
+		<Unit filename="core\rakservernetwork.cpp" />
+		<Unit filename="core\rakservernetwork.h" />
 		<Unit filename="core\random.cpp" />
 		<Unit filename="core\random.h" />
 		<Unit filename="core\region.cpp" />
@@ -168,6 +169,8 @@
 		<Unit filename="core\servernetwork.h" />
 		<Unit filename="core\spawnpoint.cpp" />
 		<Unit filename="core\spawnpoint.h" />
+		<Unit filename="core\stdstreamconv.cpp" />
+		<Unit filename="core\stdstreamconv.h" />
 		<Unit filename="core\templateloader.cpp" />
 		<Unit filename="core\templateloader.h" />
 		<Unit filename="core\tiles.h" />

@@ -47,29 +47,29 @@ void Damage::fromString(CharConv* cv)
 	int i;
 	for (i=0;i<4;i++)
 	{
-		cv->fromBuffer<float>(m_min_damage[i]);
+		cv->fromBuffer(m_min_damage[i]);
 	}
 
 	for (i=0;i<4;i++)
 	{
-		cv->fromBuffer<float>(m_max_damage[i]);
+		cv->fromBuffer(m_max_damage[i]);
 	}
 
 	for (i=0;i<4;i++)
 	{
-		cv->fromBuffer<float>(m_multiplier[i]);
+		cv->fromBuffer(m_multiplier[i]);
 	}
 
-	cv->fromBuffer<float>(m_attack);
-	cv->fromBuffer<float>(m_power);
-	cv->fromBuffer<float>(m_crit_perc);
+	cv->fromBuffer(m_attack);
+	cv->fromBuffer(m_power);
+	cv->fromBuffer(m_crit_perc);
 
 	for (i=0;i<NR_STATUS_MODS;i++)
 	{
-		cv->fromBuffer<short>(m_status_mod_power[i]);
+		cv->fromBuffer(m_status_mod_power[i]);
 	}
 
-	cv->fromBuffer<short>(m_special_flags );
+	cv->fromBuffer(m_special_flags );
 	cv->fromBuffer(m_extra_dmg_race);
 }
 

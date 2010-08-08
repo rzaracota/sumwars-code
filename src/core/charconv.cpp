@@ -1,33 +1,7 @@
 #include "charconv.h"
 #include "debug.h"
-#include "world.h"
-#include <algorithm>
 
-CharConv::CharConv()
-	: m_bitstream()
-{
-	m_timestamp = RakNet::GetTime();
-	m_bitstream.Write((char) ID_TIMESTAMP);
-	m_bitstream.Write(m_timestamp);
-	m_stream =0;
-	m_version =World::getWorld()->getVersion();
-}
-
-CharConv::CharConv(int dummy)
-	: m_bitstream()
-{
-	m_stream =0;
-	m_version =World::getWorld()->getVersion();
-}
-
-CharConv::CharConv(unsigned char* data, unsigned int size)
-	: m_bitstream((const char*) data, size, false)
-{
-	m_timestamp = RakNet::GetTime();
-	m_stream=0;
-	m_version =World::getWorld()->getVersion();
-}
-
+/*
 CharConv::CharConv(Packet* packet)
 	: m_bitstream((const char*) packet->data, packet->length, false)
 {
@@ -199,4 +173,4 @@ void CharConv::fromBuffer<char>(char &c)
 		c = (char) i;
 	}
 }
-
+*/

@@ -114,26 +114,26 @@ void GameObject::fromString(CharConv* cv)
 	char ctmp;
 
 	// Typ, Subtyp und ID werden extern gelesen
-	cv->fromBuffer<float>(m_shape.m_center.m_x) ;
-	cv->fromBuffer<float>(m_shape.m_center.m_y);
+	cv->fromBuffer(m_shape.m_center.m_x) ;
+	cv->fromBuffer(m_shape.m_center.m_y);
 	cv->fromBuffer(m_height);
-	cv->fromBuffer<char>(ctmp);
+	cv->fromBuffer(ctmp);
 	m_shape.m_type = (Shape::ShapeType) ctmp;
 	if (m_shape.m_type==Shape::RECT)
 	{
-		cv->fromBuffer<float>(m_shape.m_extent.m_x);
-		cv->fromBuffer<float>(m_shape.m_extent.m_y);
+		cv->fromBuffer(m_shape.m_extent.m_x);
+		cv->fromBuffer(m_shape.m_extent.m_y);
 	}
 	else
 	{
-		cv->fromBuffer<float>(m_shape.m_radius);
-		cv->fromBuffer<float>(m_shape.m_radius);
+		cv->fromBuffer(m_shape.m_radius);
+		cv->fromBuffer(m_shape.m_radius);
 	}
-	cv->fromBuffer<char>(ctmp);
+	cv->fromBuffer(ctmp);
 	m_layer  = (Layer) ctmp;
-	cv->fromBuffer<float>(m_shape.m_angle);
+	cv->fromBuffer(m_shape.m_angle);
 
-	cv->fromBuffer<char>(ctmp);
+	cv->fromBuffer(ctmp);
 	m_state = (State) ctmp;
 }
 
@@ -178,7 +178,7 @@ void GameObject::writeNetEvent(NetEvent* event, CharConv* cv)
 		}
 		cv->toBuffer((char) m_layer);
 		cv->toBuffer(m_shape.m_angle);
-		cv->toBuffer<float>(m_height);
+		cv->toBuffer(m_height);
 	}
 	
 	/*
@@ -209,24 +209,24 @@ void GameObject::processNetEvent(NetEvent* event, CharConv* cv)
 		
 		char ctmp;
 
-		cv->fromBuffer<float>(m_shape.m_center.m_x) ;
-		cv->fromBuffer<float>(m_shape.m_center.m_y);
-		cv->fromBuffer<char>(ctmp);
+		cv->fromBuffer(m_shape.m_center.m_x) ;
+		cv->fromBuffer(m_shape.m_center.m_y);
+		cv->fromBuffer(ctmp);
 		m_shape.m_type = (Shape::ShapeType) ctmp;
 		if (m_shape.m_type==Shape::RECT)
 		{
-			cv->fromBuffer<float>(m_shape.m_extent.m_x);
-			cv->fromBuffer<float>(m_shape.m_extent.m_y);
+			cv->fromBuffer(m_shape.m_extent.m_x);
+			cv->fromBuffer(m_shape.m_extent.m_y);
 		}
 		else
 		{
-			cv->fromBuffer<float>(m_shape.m_radius);
-			cv->fromBuffer<float>(m_shape.m_radius);
+			cv->fromBuffer(m_shape.m_radius);
+			cv->fromBuffer(m_shape.m_radius);
 		}
-		cv->fromBuffer<char>(ctmp);
+		cv->fromBuffer(ctmp);
 		m_layer  = (Layer) ctmp;
-		cv->fromBuffer<float>(m_shape.m_angle);
-		cv->fromBuffer<float>(m_height);
+		cv->fromBuffer(m_shape.m_angle);
+		cv->fromBuffer(m_height);
 	}
 	
 	/*

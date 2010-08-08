@@ -10,6 +10,10 @@
 		<Settings dimx="32" dimy="32" region_template="undeadCamp" ground="grass1"/>
 		<WorldPosition world_x="0.76" world_y ="0.43"/>
 		
+		<Music>
+			<Track source="Dark_Exploration.ogg" />
+		</Music>
+		
 		<ExitDirections north="false" south="true" west="false" east="false" />
 		
 		<Exits>

@@ -240,5 +240,5 @@
 	<Image Name="PopupMenuArrowRight" XPos="179" YPos="204" Width="5" Height="5" />
 	<Image Name="PopupMenuArrowLeft" XPos="179" YPos="210" Width="5" Height="5" />
 	
-	<Image Name="WaypointMark" XPos="110" YPos="46" Width="12" Height="12" />
+	<Image Name="WaypointMark" XPos="110" YPos="42" Width="12" Height="12" />
 </Imageset>

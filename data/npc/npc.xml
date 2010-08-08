@@ -53,7 +53,8 @@
 		<TradeItem subtype="town_portal"  number="20" number_magical="0"/>
 	</Trade>
 	
-	<Topic name="trade" start_option="Leere Schriftrollen kaufen" />
+	<Topic name="trade" start_option="Buy empty scrolls" />
+	<Topic name="stash" start_option="Access stash" />
 </NPC>
 
 <NPC refname="The Lost Trader">

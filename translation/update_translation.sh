@@ -11,11 +11,22 @@ xgettext -d sumwars -o potfiles/sumwars-sumwars.pot ../src/core/*.cpp ../src/cor
 xgettext --from-code utf-8 --language=Python -d events -o potfiles/sumwars-events.pot ../data/npc/*.xml ../data/quests/*.xml ../data/world/*.xml
 
 echo "MERGE new pots with pos"
+echo "German sumwars xml events"
 msgmerge -v -U de/sumwars-sumwars.po potfiles/sumwars-sumwars.pot
 msgmerge -v -U de/sumwars-xml.po potfiles/sumwars-xml.pot
 msgmerge -v -U de/sumwars-events.po potfiles/sumwars-events.pot
 
-msgmerge -v -U en/sumwars-sumwars.po potfiles/sumwars-sumwars.pot
-msgmerge -v -U en/sumwars-xml.po potfiles/sumwars-xml.pot
+echo "Italian sumwars xml events"
+msgmerge -v -U it/sumwars-sumwars.po potfiles/sumwars-sumwars.pot
+msgmerge -v -U it/sumwars-xml.po potfiles/sumwars-xml.pot
+msgmerge -v -U it/sumwars-events.po potfiles/sumwars-events.pot
+
+echo "Polish sumwars xml events"
+msgmerge -v -U pl/sumwars-sumwars.po potfiles/sumwars-sumwars.pot
+msgmerge -v -U pl/sumwars-xml.po potfiles/sumwars-xml.pot
+msgmerge -v -U pl/sumwars-events.po potfiles/sumwars-events.pot
+
+#msgmerge -v -U en/sumwars-sumwars.po potfiles/sumwars-sumwars.pot
+#msgmerge -v -U en/sumwars-xml.po potfiles/sumwars-xml.pot
 #msgmerge -v -U en/sumwars-events.po potfiles/sumwars-events.pot
 

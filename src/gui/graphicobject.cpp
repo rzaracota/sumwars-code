@@ -14,6 +14,7 @@ GraphicObject::GraphicObject(Type type, GraphicRenderInfo* render_info, std::str
 	m_action.m_current_percent=1.0;
 	
 	m_top_node = GraphicManager::getSceneManager()->getRootSceneNode()->createChildSceneNode();
+	// this scales Object to the right size until meshes have been scaled
 	
 	if (m_render_info != 0)
 	{
@@ -363,14 +364,22 @@ void GraphicObject::addMovableObject(MovableObjectInfo& object)
 	// set initial position and Rotation
 	if (node != 0)
 	{
-		node->setPosition(object.m_position*50);
+		// FIXME: This factor is used to temporarily scale down meshes until they are exported with reduced size
+		double factor = 1;
+		if (object.m_bone == "" && object.m_type != MovableObjectInfo::SUBOBJECT)
+		{
+			factor = GraphicManager::g_global_scale/50;
+		}
+		
+		node->setPosition(object.m_position*GraphicManager::g_global_scale);
 		node->setOrientation(1,0,0,0);
 		node->pitch(Ogre::Degree(object.m_rotation[0]));
 		node->yaw(Ogre::Degree(object.m_rotation[1]));
 		node->roll(Ogre::Degree(object.m_rotation[2]));
-		node->setScale(Ogre::Vector3(object.m_scale, object.m_scale, object.m_scale));
+		node->setScale(Ogre::Vector3(object.m_scale*factor, object.m_scale*factor, object.m_scale*factor));
 		
 		DEBUGX("object %s scale %f",object.m_objectname.c_str(), node->_getDerivedScale().x);
+		DEBUGX("Object position %f %f %f",node->getPosition()[0], node->getPosition()[1], node->getPosition()[2]);
 	}
 	
 	// set dependencies
@@ -846,7 +855,7 @@ void GraphicObject::update(float time)
 	
 	// update Soundobjects
 	Ogre::Vector3 opos = getTopNode()->_getDerivedPosition();
-	Vector pos(opos.x/50, opos.z / 50);
+	Vector pos(opos.x/GraphicManager::g_global_scale, opos.z / GraphicManager::g_global_scale);
 	std::map<std::string, SoundObject* >::iterator st;
 	for (st = m_soundobjects.begin(); st != m_soundobjects.end(); ++st)
 	{
@@ -958,7 +967,7 @@ void GraphicObject::removeActiveRenderPart(ActionRenderpart* part)
 		
 			if (part->m_type == ActionRenderpart::MOVEMENT)
 			{
-				node->setPosition(pos*50);
+				node->setPosition(pos*GraphicManager::g_global_scale);
 			}
 			if (part->m_type == ActionRenderpart::ROTATION)
 			{
@@ -1036,7 +1045,7 @@ void GraphicObject::updateRenderPart(ActionRenderpart* part,float  relpercent)
 			DEBUGX("Movement %f %f %f relpercent %f",pos[0], pos[1],pos[2],relpercent);
 			if (part->m_type == ActionRenderpart::MOVEMENT)
 			{
-				node->setPosition(pos*50);
+				node->setPosition(pos*GraphicManager::g_global_scale);
 			}
 			if (part->m_type == ActionRenderpart::ROTATION)
 			{

@@ -32,6 +32,8 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard)
 
 	CEGUI::DefaultWindow* keys = (CEGUI::DefaultWindow*) win_mgr.createWindow("TaharezLook/TabContentPane", "OptionsShortkeys");
 	optionstab->addTab(keys);
+	CEGUI::DefaultWindow* gameplay = (CEGUI::DefaultWindow*) win_mgr.createWindow("TaharezLook/TabContentPane", "OptionsGameplay");
+	optionstab->addTab(gameplay);
 	CEGUI::DefaultWindow* sound = (CEGUI::DefaultWindow*) win_mgr.createWindow("TaharezLook/TabContentPane", "OptionsSound");
 	optionstab->addTab(sound);
 	CEGUI::DefaultWindow* graphic = (CEGUI::DefaultWindow*) win_mgr.createWindow("TaharezLook/TabContentPane", "OptionsGraphic");
@@ -40,6 +42,7 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard)
 	optionstab->addTab(misc);
 
 	CEGUI::Window* label;
+	CEGUI::Scrollbar* slider;
 
 	int targets[9] = {SHOW_INVENTORY, SHOW_CHARINFO, SHOW_SKILLTREE, SHOW_PARTYMENU, SHOW_CHATBOX, SHOW_QUESTINFO, SHOW_MINIMAP, SWAP_EQUIP, SHOW_ITEMLABELS};
 
@@ -71,7 +74,45 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard)
 		label->setWantsMultiClickEvents(false);
 		label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&OptionsWindow::onShortkeyLabelClicked,  this));
 	}
-
+	
+	label = win_mgr.createWindow("TaharezLook/StaticText", "GameplayDifficultyLabel");
+	gameplay->addChildWindow(label);
+	label->setProperty("FrameEnabled", "true");
+	label->setProperty("BackgroundEnabled", "true");
+	label->setPosition(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.2)));
+	label->setSize(CEGUI::UVector2(cegui_reldim(0.3f), cegui_reldim( 0.06f)));
+	
+	CEGUI::Combobox* diffcbo = static_cast<CEGUI::Combobox*>(win_mgr.createWindow("TaharezLook/Combobox","DifficultyBox"));
+	gameplay->addChildWindow(diffcbo);
+	diffcbo->setPosition(CEGUI::UVector2(cegui_reldim(0.40f), cegui_reldim( 0.2f)));
+	diffcbo->setSize(CEGUI::UVector2(cegui_reldim(0.4f), cegui_reldim( 0.3f)));
+	diffcbo->addItem(new ListItem("Easy",Options::EASY));
+	diffcbo->addItem(new ListItem("Normal",Options::NORMAL));
+	diffcbo->addItem(new ListItem("Hard",Options::HARD));
+	diffcbo->addItem(new ListItem("Insane",Options::INSANE));
+	diffcbo->setReadOnly(true);
+	diffcbo->setItemSelectState((size_t) 0,true);
+	diffcbo->handleUpdatedListItemData();
+	diffcbo->subscribeEvent(CEGUI::Combobox::EventListSelectionAccepted, CEGUI::Event::Subscriber(&OptionsWindow::onDifficultyChanged, this));
+	diffcbo->setItemSelectState( (size_t) (Options::getInstance()->getDifficulty()-1),true);
+	
+	label = win_mgr.createWindow("TaharezLook/StaticText", "TextSpeedLabel");
+	gameplay->addChildWindow(label);
+	label->setProperty("FrameEnabled", "true");
+	label->setProperty("BackgroundEnabled", "true");
+	label->setPosition(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.4)));
+	label->setSize(CEGUI::UVector2(cegui_reldim(0.3f), cegui_reldim( 0.06f)));
+	
+	slider = static_cast<CEGUI::Scrollbar*>(win_mgr.createWindow("TaharezLook/HorizontalScrollbar", "TextSpeedSlider"));
+	gameplay->addChildWindow(slider);
+	slider->setPageSize (0.01f);
+	slider->setDocumentSize(1.0f);
+	slider->setStepSize(0.01f);
+	slider->setPosition(CEGUI::UVector2(cegui_reldim(0.42f), cegui_reldim( 0.4)));
+	slider->setSize(CEGUI::UVector2(cegui_reldim(0.5f), cegui_reldim( 0.02f)));
+	slider->setWantsMultiClickEvents(false);
+	slider->subscribeEvent(CEGUI::Scrollbar::EventScrollPositionChanged, CEGUI::Event::Subscriber(&OptionsWindow::onTextSpeedChanged,  this));
+	
 	label = win_mgr.createWindow("TaharezLook/StaticText", "MusicVolumeLabel");
 	sound->addChildWindow(label);
 	label->setProperty("FrameEnabled", "true");
@@ -79,7 +120,7 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard)
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.5)));
 	label->setSize(CEGUI::UVector2(cegui_reldim(0.3f), cegui_reldim( 0.06f)));
 
-	CEGUI::Scrollbar* slider = static_cast<CEGUI::Scrollbar*>(win_mgr.createWindow("TaharezLook/HorizontalScrollbar", "MusicVolumeSlider"));
+	slider = static_cast<CEGUI::Scrollbar*>(win_mgr.createWindow("TaharezLook/HorizontalScrollbar", "MusicVolumeSlider"));
 	sound->addChildWindow(slider);
 	slider->setPageSize (0.01f);
 	slider->setDocumentSize(1.0f);
@@ -130,6 +171,7 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard)
 	cbo->addItem(new StrListItem("German","de_DE",0));
 	cbo->addItem(new StrListItem("English GB","en_GB",0));
 	cbo->addItem(new StrListItem("English US","en_US",0));
+	cbo->addItem(new StrListItem("Italian IT","it_IT",0));
 
 	cbo->setReadOnly(true);
 
@@ -186,6 +228,13 @@ void OptionsWindow::update()
 	{
 		slider->setScrollPosition(MusicManager::instance().getMusicVolume());
 	}
+	
+	slider = static_cast<CEGUI::Scrollbar*>(win_mgr.getWindow( "TextSpeedSlider"));
+	float slidpos = (2.0 -Options::getInstance()->getTextSpeed()) / 1.4;
+	if ( fabs ( slider->getScrollPosition() - slidpos) > 0.01f)
+	{
+		slider->setScrollPosition(slidpos);
+	}
 
 }
 
@@ -196,12 +245,14 @@ void OptionsWindow::updateTranslation()
 
 	CEGUI::DefaultWindow* keys =  (CEGUI::DefaultWindow*) win_mgr.getWindow("OptionsShortkeys");
 	keys->setText((CEGUI::utf8*) gettext("Shortkeys"));
+	CEGUI::DefaultWindow* gameplay =  (CEGUI::DefaultWindow*) win_mgr.getWindow("OptionsGameplay");
+	gameplay->setText((CEGUI::utf8*) gettext("Gameplay"));
 	CEGUI::DefaultWindow* sound = (CEGUI::DefaultWindow*) win_mgr.getWindow("OptionsSound");
 	sound->setText((CEGUI::utf8*) gettext("Audio"));
 	CEGUI::DefaultWindow* graphic = (CEGUI::DefaultWindow*) win_mgr.getWindow("OptionsGraphic");
 	graphic->setText((CEGUI::utf8*) gettext("Graphic"));
 	CEGUI::DefaultWindow* misc = (CEGUI::DefaultWindow*) win_mgr.getWindow("OptionsMisc");
-	misc->setText((CEGUI::utf8*) gettext("Misc"));
+	misc->setText((CEGUI::utf8*) gettext("Language"));
 
 	label = win_mgr.getWindow("ShortkeyLabel0");
 	label->setText((CEGUI::utf8*) gettext("Inventory"));
@@ -230,6 +281,12 @@ void OptionsWindow::updateTranslation()
 	label = win_mgr.getWindow("ShortkeyLabel8");
 	label->setText((CEGUI::utf8*) gettext("Item Labels"));
 
+	label = win_mgr.getWindow("GameplayDifficultyLabel");
+	label->setText((CEGUI::utf8*) gettext("Difficulty"));
+	
+	label = win_mgr.getWindow("TextSpeedLabel");
+	label->setText((CEGUI::utf8*) gettext("Text Speed"));
+	
 	label = win_mgr.getWindow("SoundVolumeLabel");
 	label->setText((CEGUI::utf8*) gettext("Sound"));
 
@@ -302,6 +359,34 @@ bool OptionsWindow::onSoundVolumeChanged(const CEGUI::EventArgs& evt)
 	return true;
 }
 
+bool OptionsWindow::onDifficultyChanged(const CEGUI::EventArgs& evt)
+{
+	const CEGUI::MouseEventArgs& we =
+	static_cast<const CEGUI::MouseEventArgs&>(evt);
+	
+	CEGUI::Combobox* cbo = static_cast<CEGUI::Combobox*>(we.window);
+	
+	CEGUI::ListboxItem* item = cbo->getSelectedItem();
+	if (item != 0)
+	{
+		Options::getInstance()->setDifficulty(static_cast<Options::Difficulty>(item->getID()));
+	}
+	
+	return true;
+}
+
+bool OptionsWindow::onTextSpeedChanged(const CEGUI::EventArgs& evt)
+{
+	const CEGUI::MouseEventArgs& we =
+	static_cast<const CEGUI::MouseEventArgs&>(evt);
+	
+	CEGUI::Scrollbar* slider = static_cast<CEGUI::Scrollbar*>(we.window);
+	float speed = 2.0 - slider->getScrollPosition()*1.4;
+	DEBUGX("text speed changed to %f",speed);
+	Options::getInstance()->setTextSpeed(speed);
+	return true;
+}
+
 bool OptionsWindow::onMusicVolumeChanged(const CEGUI::EventArgs& evt)
 {
 	const CEGUI::MouseEventArgs& we =
@@ -309,7 +394,7 @@ bool OptionsWindow::onMusicVolumeChanged(const CEGUI::EventArgs& evt)
 
 	CEGUI::Scrollbar* slider = static_cast<CEGUI::Scrollbar*>(we.window);
 	float vol = slider->getScrollPosition();
-	DEBUGX("music volume change to %f",vol);
+	DEBUGX("music volume changed to %f",vol);
 	MusicManager::instance().setMusicVolume(vol);
 	return true;
 }

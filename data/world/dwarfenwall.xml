@@ -13,7 +13,7 @@
 		
 		<ExitDirections north="true" south="true" west="true" east="false" />
 		
-		<WorldPosition world_x="0.74" world_y ="0.47" waypoint="true"/>
+		<WorldPosition world_x="0.715" world_y ="0.46" waypoint="true"/>
 		<ReviveLocation  location="WaypointLoc" />
 		
 		<Exits>
@@ -248,7 +248,7 @@
 		<DirectionalLight red="0.3" green="0.3" blue="0.3" />
 		
 		<Settings dimx="4" dimy="6" region_template="commandHouse"  ground="council_ground"/>
-		<WorldPosition world_x="0.74" world_y ="0.47"/>
+		<WorldPosition world_x="0.73" world_y ="0.47"/>
 		
 		<ExitDirections north="false" south="true" west="false" east="false" />
 		
@@ -288,7 +288,7 @@
 		<DirectionalLight red="0.3" green="0.3" blue="0.3" />
 		
 		<Settings dimx="32" dimy="36" region_template = "dwarfenwallRampart"  ground="grass1"/>
-		<WorldPosition world_x="0.75" world_y ="0.46"/>
+		<WorldPosition world_x="0.74" world_y ="0.46"/>
 		
 		<ExitDirections north="false" south="true" west="false" east="false" />
 		

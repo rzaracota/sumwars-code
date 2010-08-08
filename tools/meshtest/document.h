@@ -22,6 +22,7 @@ struct Document
 	AnimationState *mAnimationState;
 	std::string m_mesh;
 	std::string m_animation;
+	float m_scaling_factor;
 	
 	bool m_anim;
 	

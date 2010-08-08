@@ -171,11 +171,11 @@ SET(SRCS
   ./src/core/region.cpp
   ./src/core/objectloader.cpp
   ./src/core/player.cpp
-  ./src/core/network.cpp
   ./src/core/monster.cpp
   ./src/core/itemfactory.cpp
   ./src/core/event.cpp
   ./src/core/charconv.cpp
+  ./src/core/stdstreamconv.cpp
   ./src/core/gameobject.cpp
   ./src/core/projectile.cpp
   ./src/core/treasure.cpp
@@ -197,6 +197,9 @@ SET(SRCS
   ./src/core/action.cpp
   ./src/core/creaturestruct.cpp
   ./src/core/servernetwork.cpp
+  ./src/core/rakservernetwork.cpp
+  ./src/core/rakclientnetwork.cpp
+  ./src/core/raknetworkpacket.cpp
   ./src/core/pathfind.cpp
   ./src/core/damage.cpp
   ./src/core/waypoint.cpp
@@ -204,7 +207,6 @@ SET(SRCS
   ./src/core/debug.cpp
   ./src/core/unionfindtree.cpp
   ./src/core/world.cpp
-  ./src/core/clientnetwork.cpp
   ./src/core/fixedobject.cpp
   ./src/core/templateloader.cpp
   ./src/core/elementattrib.cpp

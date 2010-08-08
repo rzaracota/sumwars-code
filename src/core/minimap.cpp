@@ -63,7 +63,7 @@ void Minimap::toString(CharConv* cv)
 {
 	cv->toBuffer(m_dimx);
 	cv->toBuffer(m_dimy);
-	cv->toBuffer<unsigned int>(m_data.size());
+	cv->toBuffer(static_cast<int>(m_data.size()));
 	for (unsigned int i=0; i< m_data.size(); ++i)
 	{
 		cv->toBuffer(m_data[i]);
@@ -74,7 +74,7 @@ void Minimap::fromString(CharConv* cv)
 {
 	cv->fromBuffer(m_dimx);
 	cv->fromBuffer(m_dimy);
-	unsigned int size;
+	int size;
 	cv->fromBuffer(size);
 	m_data.resize(size);
 	char tmp;

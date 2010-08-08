@@ -91,7 +91,7 @@ Player::Player( int id, Subtype subtype) : Creature( id)
 
 Player::~Player()
 {
-
+	delete m_stash;
 }
 
 bool Player::destroy()
@@ -139,6 +139,7 @@ bool Player::init()
 	m_secondary_equip = false;
 
 	m_equipement = new Equipement(5,14,30);
+	m_stash = new Equipement(15,21,30);
 	m_equipement->setGold(50);
 
 	m_candidate_party = -1;
@@ -626,14 +627,32 @@ bool Player::onItemClick(ClientCommand* command)
 		{
 			if (getTradePartner() != 0)
 			{
+				bool stashtrade = false;
+				if (getTradePartner() == this)
+				{
+					stashtrade = true;
+				}
+				
 				it =0;
 				int gold = getEquipement()->getGold();
 				getEquipement()->swapItem(it,pos);
-				getTradePartner()->buyItem(it,gold);
-
+				if (!stashtrade)
+				{
+					getTradePartner()->buyItem(it,gold);
+					getEquipement()->setGold(gold);
+				}
+				else
+				{
+					int pos = getStash()->insertItem(it,false);
+					if (pos != Equipement::NONE)
+					{
+						it = 0;
+					}
+				}
+				
 				// wieder hinein getauscht, wenn Handel nicht erfolgreich
 				getEquipement()->swapItem(it,pos);
-				getEquipement()->setGold(gold);
+				
 				return true;
 			}
 
@@ -1043,6 +1062,7 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 	Dialogue* dia;
 	std::list< std::pair<std::string, std::string> >::iterator it;
 
+	bool stashtrade;
 	bool sell;
 	Item* si;
 	DropSlot ds;
@@ -1248,7 +1268,16 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 			dia = getDialogue();
 			if (dia ==0)
 			{
-				ERRORMSG("answer without dialogue");
+				// This can only happen, when trading with you stash
+				if (getTradePartner() == this)
+				{
+					setTradePartner(0);
+					break;
+				}
+				else
+				{
+					ERRORMSG("answer without dialogue");
+				}
 				break;
 			}
 			dia->changeTopic("end");
@@ -1261,21 +1290,37 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 			{
 				break;
 			}
+			
+			// you may *trade* with your stash, in this case the traderpartner is the object itself
+			stashtrade == false;
+			if (getTradePartner() == this)
+			{
+				stashtrade = true;
+			}
 
 			si = getEquipement()->getItem(Equipement::CURSOR_ITEM);
 			sell = true;
 			gold = getEquipement()->getGold();
 
 			// Rechtklick kauft immer ein, Linksklick nur, wenn kein Item in der Hand
-			if (command->m_button == BUTTON_TRADE_ITEM_RIGHT || command->m_button == BUTTON_TRADE_ITEM_LEFT && si ==0)
+			if (command->m_button == BUTTON_TRADE_ITEM_RIGHT || (command->m_button == BUTTON_TRADE_ITEM_LEFT && si ==0))
+			{
 				sell = false;
+			}
 
 			if (sell)
 			{
 				// Item wird aus dem Inventar herraus genommen
 				si =0;
 				getEquipement()->swapItem(si,Equipement::CURSOR_ITEM);
-				getTradePartner()->buyItem(si,gold);
+				if (!stashtrade)
+				{
+					getTradePartner()->buyItem(si,gold);
+				}
+				else
+				{
+					getStash()->swapItem(si,command->m_id);
+				}
 
 				// wieder hinein getauscht, wenn Handel nicht erfolgreich
 				getEquipement()->swapItem(si,Equipement::CURSOR_ITEM);
@@ -1284,7 +1329,14 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 			else
 			{
 				si =0;
-				getTradePartner()->sellItem(command->m_id,si, gold);
+				if (!stashtrade)
+				{
+					getTradePartner()->sellItem(command->m_id,si, gold);
+				}
+				else
+				{
+					getStash()->swapItem(si,command->m_id);
+				}
 
 				if (si !=0)
 				{
@@ -1298,8 +1350,11 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 					}
 				}
 			}
-
-			getEquipement()->setGold(gold);
+			
+			if (!stashtrade)
+			{
+				getEquipement()->setGold(gold);
+			}
 			break;
 
 		case DEBUG_SIGNAL:
@@ -1775,7 +1830,7 @@ void Player::toString(CharConv* cv)
 	}
 
 	// IDs der Wegpunkte
-	cv->toBuffer(m_waypoints.size());
+	cv->toBuffer(static_cast<int>(m_waypoints.size()));
 	cv->printNewline();
 
 	std::set<short>::iterator it;
@@ -1825,8 +1880,8 @@ void Player::readItem(CharConv* cv)
 	int id;
 	Item* item;
 
-	cv->fromBuffer<short>(pos);
-	cv->fromBuffer<char>(type);
+	cv->fromBuffer(pos);
+	cv->fromBuffer(type);
 	cv->fromBuffer(subtype);
 	cv->fromBuffer(id);
 
@@ -1851,8 +1906,8 @@ void Player::readItemComplete(CharConv* cv)
 	int id;
 	Item* item;
 
-	cv->fromBuffer<short>(pos);
-	cv->fromBuffer<char>(type);
+	cv->fromBuffer(pos);
+	cv->fromBuffer(type);
 	cv->fromBuffer(subtype);
 	cv->fromBuffer(id);
 
@@ -1978,7 +2033,7 @@ void Player::toSavegame(CharConv* cv)
 	cv->toBuffer(getDynAttr()->m_experience);
 	cv->printNewline();
 
-	cv->toBuffer<short>(getBaseAttr()->m_abilities.size());
+	cv->toBuffer(static_cast<short>(getBaseAttr()->m_abilities.size()));
 	cv->printNewline();
 	std::map<std::string, AbilityInfo>::iterator jt;
 	for (jt= getBaseAttr()->m_abilities.begin(); jt != getBaseAttr()->m_abilities.end(); ++jt)
@@ -2003,6 +2058,13 @@ void Player::toSavegame(CharConv* cv)
 	// Items
 	writeEquipement(cv);
 	cv->printNewline();
+	
+	if (cv->getVersion() >=15)
+	{
+		getStash()->toStringComplete(cv);
+	}
+	cv->printNewline();
+	
 
 	// Questinformationen
 	// Daten werden aus der lua Umgebung genommen, wenn die Welt schon laeuft
@@ -2012,11 +2074,11 @@ void Player::toSavegame(CharConv* cv)
 		std::list<std::string>::iterator it;
 		for (it =m_lua_instructions.begin(); it !=m_lua_instructions.end(); ++it)
 		{
-			cv->toBuffer<char>(1);
+			cv->toBuffer(static_cast<char>(1));
 			cv->toBuffer(*it);
 			cv->printNewline();
 		}
-		cv->toBuffer<char>(0);
+		cv->toBuffer(static_cast<char>(0));
 
 	}
 	else
@@ -2026,7 +2088,7 @@ void Player::toSavegame(CharConv* cv)
 	}
 
 	// IDs der Wegpunkte
-	cv->toBuffer(m_waypoints.size());
+	cv->toBuffer((int) m_waypoints.size());
 	cv->printNewline();
 
 	std::set<short>::iterator it;
@@ -2059,7 +2121,7 @@ void Player::fromSavegame(CharConv* cv, bool local)
 	m_emotion_set = m_look.m_emotion_set;
 
 	cv->fromBuffer(getBaseAttr()->m_level);
-	cv->fromBuffer<float>(getBaseAttr()->m_max_health);
+	cv->fromBuffer(getBaseAttr()->m_max_health);
 	getDynAttr()->m_health = getBaseAttr()->m_max_health;
 
 	cv->fromBuffer(getBaseAttr()->m_armor);
@@ -2069,25 +2131,25 @@ void Player::fromSavegame(CharConv* cv, bool local)
 	else
 		getBaseAttr()->m_power = 20;
 
-	cv->fromBuffer<short>(getBaseAttr()->m_strength);
-	cv->fromBuffer<short>(getBaseAttr()->m_dexterity);
-	cv->fromBuffer<short>(getBaseAttr()->m_magic_power);
-	cv->fromBuffer<short>(getBaseAttr()->m_willpower);
+	cv->fromBuffer(getBaseAttr()->m_strength);
+	cv->fromBuffer(getBaseAttr()->m_dexterity);
+	cv->fromBuffer(getBaseAttr()->m_magic_power);
+	cv->fromBuffer(getBaseAttr()->m_willpower);
 
-	cv->fromBuffer<short>(m_attribute_points);
-	cv->fromBuffer<short>(m_skill_points );
+	cv->fromBuffer(m_attribute_points);
+	cv->fromBuffer(m_skill_points );
 
 	cv->fromBuffer(getBaseAttr()->m_walk_speed);
 	cv->fromBuffer(getBaseAttr()->m_attack_speed);
 	cv->fromBuffer(getBaseAttr()->m_attack_range);
 
-	cv->fromBuffer<short>(getBaseAttr()->m_resistances[0]);
-	cv->fromBuffer<short>(getBaseAttr()->m_resistances[1]);
-	cv->fromBuffer<short>(getBaseAttr()->m_resistances[2]);
-	cv->fromBuffer<short>(getBaseAttr()->m_resistances[3]);
+	cv->fromBuffer(getBaseAttr()->m_resistances[0]);
+	cv->fromBuffer(getBaseAttr()->m_resistances[1]);
+	cv->fromBuffer(getBaseAttr()->m_resistances[2]);
+	cv->fromBuffer(getBaseAttr()->m_resistances[3]);
 
-	cv->fromBuffer<float>(getBaseAttr()->m_max_experience);
-	cv->fromBuffer<float>(getDynAttr()->m_experience);
+	cv->fromBuffer(getBaseAttr()->m_max_experience);
+	cv->fromBuffer (getDynAttr()->m_experience);
 
 	short anr;
 	cv->fromBuffer(anr);
@@ -2116,6 +2178,10 @@ void Player::fromSavegame(CharConv* cv, bool local)
 	cv->fromBuffer(m_revive_position.second);
 	// Items
 	loadEquipement(cv);
+	if (cv->getVersion() >=15)
+	{
+		getStash()->fromStringComplete(cv);
+	}
 
 	getBaseAttrMod()->m_max_health = getBaseAttr()->m_max_health;
 	calcBaseAttrMod();

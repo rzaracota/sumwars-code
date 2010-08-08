@@ -859,7 +859,7 @@ void Projectile::writeNetEvent(NetEvent* event, CharConv* cv)
 	if (event->m_data & NetEvent::DATA_MAX_RADIUS)
 	{
 		cv->toBuffer(m_max_radius);
-		cv->toBuffer<float>(getShape()->m_radius);
+		cv->toBuffer(getShape()->m_radius);
 	}
 }
 
@@ -893,7 +893,7 @@ void Projectile::processNetEvent(NetEvent* event, CharConv* cv)
 	if (event->m_data & NetEvent::DATA_MAX_RADIUS)
 	{
 		cv->fromBuffer(m_max_radius);
-		cv->fromBuffer<float>(getShape()->m_radius);
+		cv->fromBuffer(getShape()->m_radius);
 	}
 }
 

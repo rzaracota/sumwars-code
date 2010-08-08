@@ -123,11 +123,11 @@ void RegionCamera::toString(CharConv* cv)
 	cv->toBuffer(m_position.m_focus.m_y);
 	if (m_next_positions.empty())
 	{
-		cv->toBuffer<char>('0');
+		cv->toBuffer(static_cast<char>('0'));
 	}
 	else
 	{
-		cv->toBuffer<char>('1');
+		cv->toBuffer(static_cast<char>('1'));
 		Position& pos = m_next_positions.front().first;
 		
 		cv->toBuffer(pos.m_distance);
@@ -149,7 +149,7 @@ void RegionCamera::fromString(CharConv* cv)
 	cv->fromBuffer(m_position.m_focus.m_y);
 	
 	char c='0';
-	cv->fromBuffer<char>(c);
+	cv->fromBuffer(c);
 	if (c =='1')
 	{
 		Position pos;
@@ -1952,7 +1952,7 @@ void Region::getRegionData(CharConv* cv)
 
 	// Anzahl der statischen Objekte eintragen
 	DEBUGX("static objects: %i",m_static_objects->size());
-	cv->toBuffer<short>((short) m_static_objects->size());
+	cv->toBuffer((short) m_static_objects->size());
 
 	// statische Objekte in den Puffer eintragen
 	WorldObjectMap::iterator it;
@@ -1972,7 +1972,7 @@ void Region::getRegionData(CharConv* cv)
 			nr++;
 	}
 	DEBUGX("nonstatic objects: %i",nr);
-	cv->toBuffer<short>((short) nr);
+	cv->toBuffer((short) nr);
 
 	// nicht statische Objekte in den Puffer eintragen
 
@@ -1988,7 +1988,7 @@ void Region::getRegionData(CharConv* cv)
 	}
 
 	// Anzahl der Projektile eintragen
-	cv->toBuffer<short>((short) m_projectiles->size());
+	cv->toBuffer((short) m_projectiles->size());
 	DEBUGX("projectiles: %i",m_projectiles->size());
 
 	// Projektile in den Puffer eintragen
@@ -1998,7 +1998,7 @@ void Region::getRegionData(CharConv* cv)
 		kt->second->toString(cv);
 	}
 
-	cv->toBuffer<short>((short) m_drop_items->size());
+	cv->toBuffer((short) m_drop_items->size());
 	DEBUGX("dropped items: %i",m_drop_items->size());
 
 	//  Items in den Puffer eintragen
@@ -2010,7 +2010,7 @@ void Region::getRegionData(CharConv* cv)
 	
 	// Dialoge eintragen
 	std::map<int, Dialogue*>::iterator dt;
-	cv->toBuffer<short> ((short) m_dialogues.size());
+	cv->toBuffer((short) m_dialogues.size());
 	for (dt = m_dialogues.begin(); dt != m_dialogues.end(); ++dt)
 	{
 		dt->second->toString(cv);
@@ -2215,7 +2215,7 @@ void Region::setRegionData(CharConv* cv,WorldObjectMap* players)
 
 	// statische Objekte einlesen
 	short nr_stat;
-	cv->fromBuffer<short>(nr_stat);
+	cv->fromBuffer(nr_stat);
 	DEBUGX("static objects: %i",nr_stat);
 
 	for (int i=0; i<nr_stat;i++)
@@ -2227,7 +2227,7 @@ void Region::setRegionData(CharConv* cv,WorldObjectMap* players)
 
 	// neue Objekte einlesen
 	short nr_nonstat;
-	cv->fromBuffer<short>(nr_nonstat);
+	cv->fromBuffer(nr_nonstat);
 	DEBUGX("nonstatic objects: %i",nr_nonstat);
 
 	for (int i=0; i<nr_nonstat;i++)
@@ -2238,7 +2238,7 @@ void Region::setRegionData(CharConv* cv,WorldObjectMap* players)
 
 	// Anzahl der Projektile einlesen
 	short nr_proj;
-	cv->fromBuffer<short>(nr_proj);
+	cv->fromBuffer(nr_proj);
 	DEBUGX("projectiles: %i",nr_proj);
 	// Projektile einlesen
 	for (int i=0; i<nr_proj;i++)
@@ -2248,7 +2248,7 @@ void Region::setRegionData(CharConv* cv,WorldObjectMap* players)
 
 	// Anzahl Gegenstaende einlesen
 	short nr_items;
-	cv->fromBuffer<short>(nr_items);
+	cv->fromBuffer(nr_items);
 	DEBUGX("items: %i",nr_items);
 	// Gegenstaende einlesen
 	for (int i=0; i<nr_items;i++)
@@ -2259,7 +2259,7 @@ void Region::setRegionData(CharConv* cv,WorldObjectMap* players)
 	
 	// Dialoge einlesen
 	short nr_dia;
-	cv->fromBuffer<short>(nr_dia);
+	cv->fromBuffer(nr_dia);
 	for (int i=0; i< nr_dia; i++)
 	{
 		createDialogueFromString(cv);
@@ -2293,7 +2293,7 @@ void Region::getRegionCheckData(CharConv* cv)
 			nr++;
 	}
 	DEBUGX("nonstatic objects: %i",nr);
-	cv->toBuffer<short>((short) nr);
+	cv->toBuffer((short) nr);
 
 	// nicht statische Objekte in den Puffer eintragen
 
@@ -2307,7 +2307,7 @@ void Region::getRegionCheckData(CharConv* cv)
 	}
 
 	// Anzahl der Projektile eintragen
-	cv->toBuffer<short>((short) m_projectiles->size());
+	cv->toBuffer((short) m_projectiles->size());
 	DEBUGX("projectiles: %i",m_projectiles->size());
 
 	// Projektile in den Puffer eintragen
@@ -2317,7 +2317,7 @@ void Region::getRegionCheckData(CharConv* cv)
 		cv->toBuffer((kt->second)->getId());
 	}
 
-	cv->toBuffer<short>((short) m_drop_items->size());
+	cv->toBuffer((short) m_drop_items->size());
 	DEBUGX("dropped items: %i",m_drop_items->size());
 
 	//  Items in den Puffer eintragen
@@ -2385,11 +2385,12 @@ void Region::checkRegionData(CharConv* cv)
 			datareq.m_id = *setit;
 			datareq.m_region_id = getId();
 
-			CharConv msg;
-			header.toString(&msg);
-			datareq.toString(&msg);
+			NetworkPacket* msg = World::getWorld()->getNetwork()->createPacket();
+			header.toString(msg);
+			datareq.toString(msg);
 
-			World::getWorld()->getNetwork()->pushSlotMessage(msg.getBitStream());
+			World::getWorld()->getNetwork()->pushSlotMessage(msg);
+			World::getWorld()->getNetwork()->deallocatePacket(msg);
 		}
 	}
 	
@@ -2420,11 +2421,13 @@ void Region::checkRegionData(CharConv* cv)
 			datareq.m_id = *setit;
 			datareq.m_region_id = getId();
 
-			CharConv msg;
-			header.toString(&msg);
-			datareq.toString(&msg);
+			NetworkPacket* msg = World::getWorld()->getNetwork()->createPacket();
+			
+			header.toString(msg);
+			datareq.toString(msg);
 
-			World::getWorld()->getNetwork()->pushSlotMessage(msg.getBitStream());	
+			World::getWorld()->getNetwork()->pushSlotMessage(msg);
+			World::getWorld()->getNetwork()->deallocatePacket(msg);
 		}
 	}
 	
@@ -2454,11 +2457,13 @@ void Region::checkRegionData(CharConv* cv)
 			datareq.m_id = *setit;
 			datareq.m_region_id = getId();
 
-			CharConv msg;
-			header.toString(&msg);
-			datareq.toString(&msg);
+			NetworkPacket* msg = World::getWorld()->getNetwork()->createPacket();
+			
+			header.toString(msg);
+			datareq.toString(msg);
 
-			World::getWorld()->getNetwork()->pushSlotMessage(msg.getBitStream());	
+			World::getWorld()->getNetwork()->pushSlotMessage(msg);	
+			World::getWorld()->getNetwork()->deallocatePacket(msg);
 		}
 	}
 	
@@ -2555,7 +2560,7 @@ void Region::checkRegionData(CharConv* cv)
 
 void Region::writeMusicTracksToString(CharConv* cv)
 {
-	cv->toBuffer<short>((short) m_music_tracks.size());
+	cv->toBuffer((short) m_music_tracks.size());
 	std::list<MusicTrack>::iterator mt;
 	for (mt = m_music_tracks.begin(); mt != m_music_tracks.end(); ++mt)
 	{

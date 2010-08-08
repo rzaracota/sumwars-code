@@ -30,6 +30,10 @@
 					setRefName(theTrader_tmp.theTrader, "The Trader");
 					set(theTrader_tmp.theTrader,"angle",180);
 				end;
+				
+				local pos = getLocation("locTheTrader");
+				pos = {pos[1]-1,pos[2] +1}
+				local stash = createObject('stash',  {pos[1]+1,pos[2] +1});
 			</Effect>
 		</Event>
 		

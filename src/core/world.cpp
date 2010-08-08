@@ -28,10 +28,16 @@
 #include "templateloader.h"
 #include "objectloader.h"
 
+#include "rakservernetwork.h"
+#include "rakclientnetwork.h"
+#include "raknetworkpacket.h"
+
+#include "options.h"
+
 #include "OgreResourceGroupManager.h"
 
 World* World::m_world=0;
-int World::m_version = 13;
+int World::m_version = 15;
 
 void  World::createWorld(bool server, int port, bool cooperative, int max_players)
 {
@@ -197,17 +203,17 @@ bool World::init(int port)
 	{
 		if (m_server)
 		{
-			m_network = new ServerNetwork(m_max_nr_players);
-
+			ServerNetwork* snet;
+			m_network = snet = new RakServerNetwork(m_max_nr_players);
+			if (snet->init(port) !=NET_OK )
+			{
+				ERRORMSG( "Error occured in network" );
+				return false;
+			}
 		}
 		else
 		{
-			m_network = new ClientNetwork();
-		}
-		if( m_network->init( port )!=NET_OK )
-		{
-			ERRORMSG( "Error occured in network" );
-			return false;
+			m_network = new RakClientNetwork();
 		}
 	}
 
@@ -293,7 +299,7 @@ void World::acceptLogins()
 {
 	int login_slot;
 
-	while((login_slot=static_cast<ServerNetwork*>(m_network)->popNewLoginSlot()) != -1 )
+	while((login_slot=static_cast<ServerNetwork*>(m_network)->popNewLoginSlot()) >= 0 )
 	{
 		INFO( "user login detected: %i",  login_slot  );
 		m_logins.push_back(login_slot);
@@ -306,7 +312,7 @@ void World::acceptLogins()
 void World::updateLogins()
 {
 	std::list<int>::iterator i;
-	Packet* data;
+	NetworkPacket* data;
 	PackageHeader header;
 	DEBUGX("update logins");
 	for (i=m_logins.begin();i!=m_logins.end();)
@@ -316,12 +322,11 @@ void World::updateLogins()
 		{
 			DEBUGX("got Package");
 			m_network->popSlotMessage(data,(*i));
-			CharConv cv(data);
-			header.fromString(&cv);
+			header.fromString(data);
 			if (header.m_content == PTYPE_C2S_SAVEGAME)
 			{
 				DEBUGX("got savegame from slot %i",(*i));
-				handleSavegame(&cv,*i);
+				handleSavegame(data,*i);
 				i = m_logins.erase(i);
 
 			}
@@ -455,7 +460,7 @@ Fraction::Relation World::getRelation(Fraction::Id frac, Fraction::Id frac2)
 	else
 	{
 		// Beziehung zwischen Spielern
-		return Fraction::Relation(MathHelper::Min(m_parties[frac].getRelations()[frac2], m_parties[frac2].getRelations()[frac]));
+		return std::min(m_parties[frac].getRelations()[frac2], m_parties[frac2].getRelations()[frac]);
 	}
 
 
@@ -664,18 +669,18 @@ bool World::insertPlayerIntoRegion(WorldObject* player, short region, LocationNa
 				if (player->getState() !=WorldObject::STATE_REGION_DATA_WAITING)
 				{
 					// den Client benachrichtigen, dass sein Spieler die Region gewechselt hat
-					CharConv msg;
+					NetworkPacket* msg = m_network->createPacket();
 					PackageHeader header;
 					header.m_content = PTYPE_S2C_REGION_CHANGED;
 					header.m_number =region;
-					header.toString(&msg);
+					header.toString(msg);
 
 					WorldObjectMap::iterator it;
 					for (it = m_player_slots->begin(); it != m_player_slots->end(); it++)
 					{
 						if (it->second == player)
 						{
-							m_network->pushSlotMessage(msg.getBitStream(), it->first);
+							m_network->pushSlotMessage(msg, it->first);
 						}
 					}
 
@@ -788,11 +793,12 @@ void World::handleSavegame(CharConv *cv, int slot)
 			PackageHeader header;
 			header.m_content = PTYPE_C2S_SAVEGAME; 	// Savegame von Client zu Server
 			header.m_number =1;
-			CharConv save;
-			header.toString(&save);
-
-			save.toBuffer((char*) cv->getBitStream()->GetData(),(cv->writeBits()+7)/8);
-			m_network->pushSlotMessage(save.getBitStream());
+			NetworkPacket* save = m_network->createPacket();
+			header.toString(save);
+			pl->toSavegame(save);
+			
+			m_network->pushSlotMessage(save);
+			m_network->deallocatePacket(save);
 		}
 	}
 
@@ -841,17 +847,17 @@ void World::handleSavegame(CharConv *cv, int slot)
 				header3.m_content =PTYPE_S2C_INITIALISATION;
 				header3.m_number =1;
 
-				CharConv msg2;
-				header3.toString(&msg2);
+				NetworkPacket* msg2 = m_network->createPacket();
+				header3.toString(msg2);
 
 				// die eigene ID auf Serverseite
-				msg2.toBuffer(pl->getId());
+				msg2->toBuffer(pl->getId());
 
 				// die Fraktion auf Serverseite
-				msg2.toBuffer<char>(pl->getFraction());
+				msg2->toBuffer(static_cast<int>(pl->getFraction()));
 
-
-				m_network->pushSlotMessage(msg2.getBitStream(),slot);
+				m_network->pushSlotMessage(msg2,slot);
+				m_network->deallocatePacket(msg2);
 
 
 				// Dem Spieler Informationen ueber alle anderen Spieler in der Welt senden
@@ -859,8 +865,8 @@ void World::handleSavegame(CharConv *cv, int slot)
 				header.m_content = PTYPE_S2C_PLAYER;		// Spielerdaten vom Server zum Client
 				header.m_number = m_player_slots->size()-1;	// alle Spieler bis auf den eigenen
 
-				CharConv msg;
-				header.toString(&msg);
+				NetworkPacket* msg = m_network->createPacket();
+				header.toString(msg);
 
 				// Informationen ueber die Spieler
 				for (it = m_player_slots->begin(); it != m_player_slots->end(); ++it)
@@ -869,15 +875,16 @@ void World::handleSavegame(CharConv *cv, int slot)
 					if (it->first != slot)
 					{
 						DEBUGX("writing player slot %i",slot);
-						it->second->toString(&msg);
+						it->second->toString(msg);
 					}
 				}
 
 				// Nachricht an den Client senden
 				if (header.m_number>0)
 				{
-					m_network->pushSlotMessage(msg.getBitStream(),slot);
+					m_network->pushSlotMessage(msg,slot);
 				}
+				m_network->deallocatePacket(msg);
 			}
 
 			// Nachricht von dem neuen Spieler an alle anderen Spieler senden
@@ -886,18 +893,19 @@ void World::handleSavegame(CharConv *cv, int slot)
 			header2.m_content = PTYPE_S2C_PLAYER;	// Spielerdaten vom Server zum Client
 			header2.m_number = 1;					// der neue Spieler
 
-			CharConv msg2;
-			header2.toString(&msg2);
-			pl->toString(&msg2);
+			NetworkPacket* msg2 = m_network->createPacket();
+			header2.toString(msg2);
+			pl->toString(msg2);
 
 			for (it = m_player_slots->begin(); it != m_player_slots->end(); ++it)
 			{
 				if (it->first != slot && it->first != LOCAL_SLOT)
 				{
-					m_network->pushSlotMessage(msg2.getBitStream(),it->first);
+					m_network->pushSlotMessage(msg2,it->first);
 				}
 			}
-
+			m_network->deallocatePacket(msg2);
+			
 			// Nachricht ueber die Wegpunkte
 			if (slot != LOCAL_SLOT)
 			{
@@ -908,29 +916,30 @@ void World::handleSavegame(CharConv *cv, int slot)
 				header3.m_content = PTYPE_S2C_WAYPOINTS;	// Spielerdaten vom Server zum Client
 				header3.m_number = winfos.size();					// der neue Spieler
 
-				CharConv msg3;
-				header3.toString(&msg3);
+				NetworkPacket* msg3 = m_network->createPacket();
+				header3.toString(msg3);
 
 
 				for (lt = winfos.begin(); lt != winfos.end(); ++lt)
 				{
-					msg3.toBuffer(lt->first);
-					msg3.toBuffer(lt->second.m_name);
-					msg3.toBuffer(lt->second.m_id);
-					msg3.toBuffer(lt->second.m_world_coord.m_x);
-					msg3.toBuffer(lt->second.m_world_coord.m_y);
+					msg3->toBuffer(lt->first);
+					msg3->toBuffer(lt->second.m_name);
+					msg3->toBuffer(lt->second.m_id);
+					msg3->toBuffer(lt->second.m_world_coord.m_x);
+					msg3->toBuffer(lt->second.m_world_coord.m_y);
 					DEBUGX("sending waypoint info %i %s %f %f",lt->first, lt->second.m_name.c_str(), lt->second.m_world_coord.m_x,lt->second.m_world_coord.m_y);
 				}
 
 				std::map<std::string, int>::iterator rnt;
-				msg3.toBuffer<int>(m_region_name_id.size());
+				msg3->toBuffer(static_cast<int>(m_region_name_id.size()));
 				for (rnt = m_region_name_id.begin(); rnt != m_region_name_id.end(); ++rnt)
 				{
-					msg3.toBuffer(rnt->first);
-					msg3.toBuffer(rnt->second);
+					msg3->toBuffer(rnt->first);
+					msg3->toBuffer(rnt->second);
 				}
 
-				m_network->pushSlotMessage(msg3.getBitStream(),slot);
+				m_network->pushSlotMessage(msg3,slot);
+				m_network->deallocatePacket(msg3);
 
 				// Informationen ueber Parties senden
 				PackageHeader header4;
@@ -942,16 +951,17 @@ void World::handleSavegame(CharConv *cv, int slot)
 					{
 						DEBUG("sending data for party %i",i);
 						header4.m_number =i;
-						CharConv msg3;
-						header4.toString(&msg3);
+						NetworkPacket* msg4 = m_network->createPacket();
+						header4.toString(msg4);
 
-						m_parties[i].toString(&msg3);
+						m_parties[i].toString(msg4);
 
-						m_network->pushSlotMessage(msg3.getBitStream(),slot);
+						m_network->pushSlotMessage(msg4,slot);
+						m_network->deallocatePacket(msg4);
 					}
 				}
 
-				// Informationen ueber Parties senden
+				// Informationen ueber Quests senden
 				PackageHeader header5;
 				header5.m_number =1;
 				header5.m_content =PTYPE_S2C_QUEST;
@@ -963,11 +973,12 @@ void World::handleSavegame(CharConv *cv, int slot)
 
 						DEBUGX("sending data for quest %s",it->second->getName().c_str());
 
-						CharConv msg5;
-						header5.toString(&msg5);
+						NetworkPacket* msg5 = m_network->createPacket();
+						header5.toString(msg5);
 
-						it->second->toString(&msg5);
-						m_network->pushSlotMessage(msg5.getBitStream(),slot);
+						it->second->toString(msg5);
+						m_network->pushSlotMessage(msg5,slot);
+						m_network->deallocatePacket(msg5);
 
 				}
 
@@ -982,19 +993,17 @@ void World::handleSavegame(CharConv *cv, int slot)
 
 					DEBUGX("sending data for Fraction %s",ft->second->getType().c_str());
 
-					CharConv msg6;
-					header6.toString(&msg6);
+					NetworkPacket* msg6 = m_network->createPacket();
+					header6.toString(msg6);
 
-					ft->second->toString(&msg6);
-					m_network->pushSlotMessage(msg6.getBitStream(),slot);
-
+					ft->second->toString(msg6);
+					m_network->pushSlotMessage(msg6,slot);
+					m_network->deallocatePacket(msg6);
 				}
 			}
 
 		}
 	}
-
-
 }
 
 
@@ -1007,27 +1016,21 @@ void World::handleCommand(ClientCommand* comm, int slot, float delay)
 	if (!m_server)
 	{
 		// Kommando an den Server senden
-		CharConv cv;
+		NetworkPacket* cv = m_network->createPacket();
 
 		// Header anlegen
 		PackageHeader header;
 		header.m_content = PTYPE_C2S_COMMAND; 	// Daten von Client zu Server
 		header.m_number = 1;
 
-
 		// Header in den Puffer schreiben
-		header.toString(&cv);
+		header.toString(cv);
 		// Kommando in den Puffer schreiben
-		comm->toString(&cv);
+		comm->toString(cv);
 
-		/*
-		timeval tv;
-		gettimeofday(&tv, NULL);
-		DEBUG("timestamp %i system time %i",cv.getTimestamp(),tv.tv_usec/1000);
-
-		*/
 	 	// Datenpaket zum Server senden
-		getNetwork()->pushSlotMessage(cv.getBitStream());
+		getNetwork()->pushSlotMessage(cv);
+		m_network->deallocatePacket(cv);
 	}
 
 	Player* pl = static_cast<Player*> ((*m_player_slots)[slot]);
@@ -1067,7 +1070,7 @@ void World::handleMessage(std::string msg, int slot)
 				{
 					CreatureSpeakText text;
 					text.m_text = msg;
-					text.m_time = msg.size()*100 + 1000;
+					text.m_time = (msg.size()*100 + 1000) * Options::getInstance()->getTextSpeed();
 					text.m_in_dialogue = false;
 					pl->speakText(text);
 				}
@@ -1076,41 +1079,46 @@ void World::handleMessage(std::string msg, int slot)
 		}
 		smsg += msg;
 
-		CharConv cv;
-
-		// Header anlegen
-		PackageHeader header;
-		header.m_content = PTYPE_S2C_MESSAGE; 	// Daten von Server zum Client
-		header.m_number = smsg.size();
-
-		header.toString(&cv);
-		cv.toBuffer((char*) smsg.c_str(),smsg.size());
-
-		// Nachricht an alle Spieler mit ausser dem Sender
-		WorldObjectMap::iterator it;
-		for (it = m_player_slots->begin(); it != m_player_slots->end(); ++it)
+		if (m_network != 0)
 		{
-			if (it->first != slot && it->first!=LOCAL_SLOT)
+			NetworkPacket* cv = m_network->createPacket();
+
+			// Header anlegen
+			PackageHeader header;
+			header.m_content = PTYPE_S2C_MESSAGE; 	// Daten von Server zum Client
+			header.m_number = smsg.size();
+
+			header.toString(cv);
+			cv->toBuffer(smsg);
+
+			// Nachricht an alle Spieler mit ausser dem Sender
+			WorldObjectMap::iterator it;
+			for (it = m_player_slots->begin(); it != m_player_slots->end(); ++it)
 			{
-				getNetwork()->pushSlotMessage(cv.getBitStream(),it->first);
+				if (it->first != slot && it->first!=LOCAL_SLOT)
+				{
+					getNetwork()->pushSlotMessage(cv,it->first);
+				}
 			}
+			m_network->deallocatePacket(cv);
 		}
 	}
 	else
 	{
 	    if(!m_server)
 	    {
-            CharConv cv;
+            NetworkPacket* cv = m_network->createPacket();
 
             // Header anlegen
             PackageHeader header;
             header.m_content = PTYPE_C2S_MESSAGE; 	// Daten von Client zu Server
             header.m_number = msg.size();
 
-            header.toString(&cv);
-            cv.toBuffer((char*) msg.c_str(),msg.size());
+            header.toString(cv);
+            cv->toBuffer(msg);
 
-            getNetwork()->pushSlotMessage(cv.getBitStream());
+            getNetwork()->pushSlotMessage(cv);
+			m_network->deallocatePacket(cv);
 
             smsg = "[";
             smsg += m_local_player->getName();
@@ -1134,7 +1142,7 @@ void World::handleMessage(std::string msg, int slot)
 		std::stringstream stream;
 		stream << msg;
 
-			// $ lesen
+		// $ lesen
 		char dummy;
 		stream >> dummy;
 
@@ -1370,11 +1378,12 @@ void World::updatePlayers()
 			datareq.m_id = pl->getRegionId();
 			datareq.m_region_id = pl->getRegionId();
 
-			CharConv msg;
-			header.toString(&msg);
-			datareq.toString(&msg);
+			NetworkPacket* msg = m_network->createPacket();
+			header.toString(msg);
+			datareq.toString(msg);
 
-			m_network->pushSlotMessage(msg.getBitStream());
+			m_network->pushSlotMessage(msg);
+			m_network->deallocatePacket(msg);
 		}
 
 		// Spieler, deren Regionen komplett geladen wurden aktivieren
@@ -1397,15 +1406,13 @@ void World::updatePlayers()
 
 			// Nachrichten fuer die Spieler abholen und Verteilen
 			PackageHeader headerp;
-			Packet* data;
-			CharConv* cv;
+			NetworkPacket* cv;
 
 			// Schleife ueber die Nachrichten
 			while (m_network->numberSlotMessages( slot )>0)
 			{
-				m_network->popSlotMessage( data ,slot);
+				m_network->popSlotMessage( cv ,slot);
 
-				cv = new CharConv(data);
 				if (cv->getDelay()>1000)
 				{
 					DEBUG("got packet with delay %f",cv->getDelay());
@@ -1446,7 +1453,7 @@ void World::updatePlayers()
 					delete buf;
 				}
 
-				delete cv;
+				m_network->deallocatePacket(cv);
 			}
 
 		}
@@ -1486,15 +1493,12 @@ void World::updatePlayers()
 		else
 		{
 			PackageHeader headerp;
-			Packet* data;
-			CharConv* cv;
+			NetworkPacket* cv;
 
 			// Nachrichten vom Server empfangen
 			while (m_network->numberSlotMessages()>0)
 			{
-				m_network->popSlotMessage( data ,slot);
-
-				cv = new CharConv(data);
+				m_network->popSlotMessage( cv ,slot);
 
 				headerp.fromString(cv);
 
@@ -1575,7 +1579,7 @@ void World::updatePlayers()
 					m_players->clear();
 					m_local_player->setId(id);
 
-					char frac;
+					int frac;
 					cv->fromBuffer(frac);
 					m_local_player->setFraction((Fraction::Id) frac);
 					DEBUG("fraction %i",frac);
@@ -1710,7 +1714,7 @@ void World::updatePlayers()
 					DEBUG("got package with unknown type %i", headerp.m_content);
 				}
 
-				delete cv;
+				m_network->deallocatePacket(cv);
 			}
 
 		}
@@ -1739,7 +1743,7 @@ void World::updatePlayers()
 					reg =0;
 				}
 
-				CharConv* msg;
+				NetworkPacket* msg;
 				PackageHeader header;
 				header.m_content = PTYPE_S2C_EVENT;
 				header.m_number =1;
@@ -1749,16 +1753,16 @@ void World::updatePlayers()
 				// globale NetEvents
 				for (lt = m_events->begin(); lt != m_events->end(); ++lt)
 				{
-					msg = new CharConv;
+					msg = m_network->createPacket();
 					DEBUGX(" send global event %i id %i data %i",lt->m_type,lt->m_id, lt->m_data);
 
 					header.toString(msg);
 					bool ret = writeNetEvent(reg,&(*lt),msg);
 					if (ret)
 					{
-						m_network->pushSlotMessage(msg->getBitStream(),slot);
+						m_network->pushSlotMessage(msg,slot);
 					}
-					delete msg;
+					m_network->deallocatePacket(msg);
 				}
 
 				// NetEvents der Region in der der Spieler ist
@@ -1767,7 +1771,7 @@ void World::updatePlayers()
 				{
 					for (lt = reg->getNetEvents()->begin(); lt != reg->getNetEvents()->end(); ++lt)
 					{
-						msg = new CharConv;
+						msg = m_network->createPacket();
 						DEBUGX(" send local event %i id %i data %i",lt->m_type,lt->m_id, lt->m_data);
 
 						header.toString(msg);
@@ -1775,9 +1779,9 @@ void World::updatePlayers()
 
 						if (ret)
 						{
-							m_network->pushSlotMessage(msg->getBitStream(),slot);
+							m_network->pushSlotMessage(msg,slot);
 						}
-						delete msg;
+						m_network->deallocatePacket(msg);
 					}
 				}
 
@@ -1785,30 +1789,31 @@ void World::updatePlayers()
 				std::string chunk = EventSystem::getPlayerVarString(pl->getId());
 				if (chunk != "")
 				{
-					msg = new CharConv;
+					msg = m_network->createPacket();
 					header.m_content = PTYPE_S2C_LUA_CHUNK;
 					DEBUGX("send lua chunk: %s",chunk.c_str());
 
 					header.toString(msg);
 					msg->toBuffer(chunk);
-					m_network->pushSlotMessage(msg->getBitStream(),slot);
+					m_network->pushSlotMessage(msg,slot);
 
 					EventSystem::clearPlayerVarString(pl->getId());
-					delete msg;
+					m_network->deallocatePacket(msg);
 				}
 
 				// Daten abgleichen
 				if (pl->getState() == WorldObject::STATE_ACTIVE && pl->getRegion() !=0 && m_timer_limit[3])
 				{
-					CharConv cv;
+					msg = m_network->createPacket();
 					PackageHeader header;
 					header.m_content = PTYPE_S2C_DATA_CHECK;
 
-					header.toString(&cv);
+					header.toString(msg);
 
-					pl->getRegion()->getRegionCheckData(&cv);
+					pl->getRegion()->getRegionCheckData(msg);
 
-					m_network->pushSlotMessage(cv.getBitStream(),slot);
+					m_network->pushSlotMessage(msg,slot);
+					m_network->deallocatePacket(msg);
 				}
 			}
 
@@ -2000,13 +2005,13 @@ bool World::writeNetEvent(Region* region,NetEvent* event, CharConv* cv)
 					ERRORMSG("no item at pos %i (player %i)",event->m_data,object->getId());
 					return false;
 				}
-				cv->toBuffer<short>((short) event->m_data);
+				cv->toBuffer((short) event->m_data);
 				static_cast<Player*>(object)->getEquipement()->getItem(event->m_data)->toStringComplete(cv);
 				DEBUGX("player item insert");
 			}
 			else
 			{
-				cv->toBuffer<int>(static_cast<Player*>(object)->getEquipement()->getGold());
+				cv->toBuffer(static_cast<Player*>(object)->getEquipement()->getGold());
 			}
 		}
 		else
@@ -2024,7 +2029,7 @@ bool World::writeNetEvent(Region* region,NetEvent* event, CharConv* cv)
 		object = (*m_players)[event->m_id];
 		if (object != 0)
 		{
-			cv->toBuffer<char>(static_cast<Player*>(object)->getParty()->getId());
+			cv->toBuffer(static_cast<char>(static_cast<Player*>(object)->getParty()->getId()));
 			DEBUGX("player %i changed party to %i",event->m_id, static_cast<Player*>(object)->getParty()->getId());
 		}
 		else
@@ -2035,7 +2040,7 @@ bool World::writeNetEvent(Region* region,NetEvent* event, CharConv* cv)
 	if (event->m_type == NetEvent::FRACTION_RELATION_CHANGED)
 	{
 		Fraction::Relation rel = getRelation(event->m_id, event->m_data);
-		cv->toBuffer<char>(rel);
+		cv->toBuffer(static_cast<char>(rel));
 	}
 
 	if (event->m_type == NetEvent::PLAYER_PARTY_CANDIDATE)
@@ -2043,7 +2048,7 @@ bool World::writeNetEvent(Region* region,NetEvent* event, CharConv* cv)
 		object = (*m_players)[event->m_id];
 		if (object != 0)
 		{
-			cv->toBuffer<char>(static_cast<Player*>(object)->getCandidateParty());
+			cv->toBuffer(static_cast<char>(static_cast<Player*>(object)->getCandidateParty()));
 			DEBUGX("player %i candidate for party %i",event->m_id, static_cast<Player*>(object)->getCandidateParty());
 		}
 		else
@@ -2053,7 +2058,7 @@ bool World::writeNetEvent(Region* region,NetEvent* event, CharConv* cv)
 	if (event->m_type == NetEvent::PARTY_RELATION_CHANGED)
 	{
 		DEBUG("party %i changed relation to %i to %i",event->m_data, event->m_id, getParty(event->m_data)->getRelations()[event->m_id]);
-		cv->toBuffer<char>(getParty(event->m_data)->getRelations()[event->m_id]);
+		cv->toBuffer(static_cast<char>(getParty(event->m_data)->getRelations()[event->m_id]));
 	}
 
 
@@ -2569,12 +2574,13 @@ void World::handleDataRequest(ClientDataRequest* request, int slot )
 			header.m_content = PTYPE_S2C_REGION;
 			header.m_number =request->m_id;
 
-			CharConv msg;
-			header.toString(&msg);
+			NetworkPacket* msg = m_network->createPacket();
+			header.toString(msg);
 
-			region->getRegionData(&msg);
+			region->getRegionData(msg);
 
-			m_network->pushSlotMessage(msg.getBitStream(),slot);
+			m_network->pushSlotMessage(msg,slot);
+			m_network->deallocatePacket(msg);
 
 			player->setState(WorldObject::STATE_ENTER_REGION,false);
 
@@ -2673,8 +2679,8 @@ bool World::calcBlockmat(PathfindInfo * pathinfo)
 			// Mittelpunkt des Objektes im Grid
 			js = (int) floor((wos->m_center.m_y - c1.m_y)/sqs);
 			is = (int) floor((wos->m_center.m_x - c1.m_x)/sqs);
-			is = MathHelper::Max(MathHelper::Min(is,pathinfo->m_dim-1),0);
-			js = MathHelper::Max(MathHelper::Min(js,pathinfo->m_dim-1),0);
+			is = std::max(std::min(is,pathinfo->m_dim-1),0);
+			js = std::max(std::min(js,pathinfo->m_dim-1),0);
 
 			// Form zum Testen auf Kollisionen
 			s2.m_center.m_y = (js+0.5)*sqs+c1.m_y;

@@ -14,133 +14,124 @@
 
 /**
  * \class ClientNetwork
- * \brief Klasse fuer die Repraesentation der Netzwerkschnittstelle auf der Clientseite
+ * \brief Abstract class for Network representation on client side
  */
 class ClientNetwork : public Network
 {
 	public:
-	/**
-	 * \fn ClientNetwork()
-	 * \brief Konstruktor
-	 */
-	ClientNetwork();
-
-	/**
-	 * \fn virtual  ~ClientNetwork()
-	 * \brief Destruktor
-	 */
-	virtual ~ClientNetwork();
-
-
-	/**
-	 * \fn  serverConnect( char* hostname, int req_port );
-	 * \brief Versucht einen Login am Server und handelt alle Verbindungen aus
-	 * \param hostname Serveradresse
-	 * \param req_port Authentifikationsport des Servers
-	 * \return Status der Methode
-	 *
-	 * Verbindet sich zum auth_port des Servers hostname und Versuch eine Anmeldung mit username
-	 * und password. Schlägt die Anmeldung fehl, weil der Nutzername und/oder das Passwort
-	 * falsch ist wird NET_AUTH_FAILD zurueckgegeben, wenn alle Server-Slots voll sind wird
-	 * NET_SLOTS_FULL zurueckgegeben oder wenn sonst ein Fehler auftritt NET_ERROR.
-	 * Bei ein geglueckten Anmeldungen wird NET_CONNECTED geliefert.
-	 */
-	void  serverConnect( char* hostname, int req_port );
-
-	/**
-	 * \fn NetStatus serverDisconnect()
-	 * \brief Schliesst die eventuelle Verbindungen zum Server
-	 */
-	void serverDisconnect();
+		/**
+		* \brief Constructor
+		*/
+		ClientNetwork()
+			: Network()
+		{
+		}
 	
-	/**
-	 * \fn void kill()
-	 * \brief Schliesst das die Netzwerkverbindung
-	 */
-	virtual void kill();
-
-
-	/**
-	 * \fn  virtual void update()
-	 * \brief Fuehrt fuer den Client-Slot die Abarbeitung durch
-	*/
-	virtual void update();
-
-	/**
-	 * \fn virtual int numberSlotMessages(int slot=0)
-	 * \brief Anzahl der Packete im Empfangspuffer
-	 * \param slot Nummer des Slots dessen Paketanzahl abgefragt wird -  beim Client immer 0
-	 * \return Anzahl der Packete
-	 *
-	 * Ist der Slot ungeultig wird Null geliefert, sonst die Anzahl der Packete im Empfangspuffers
-	 */
-	virtual int numberSlotMessages(int slot=0);
-
-
-	/**
-	 * \fn virtual void popSlotMessage(Packet* &data, int slot=0)
-	 * \brief Fuehrt net_pop_slot_message auf den Client-Slots
-	 * \param data Puffer fuer die zu kopierenden Daten
-	 * \param slot Nummer des Slots aus dem ein Paket entnommen wird -  beim Client immer 0
-	 * \return Status der Methode
-	 *
-	 */
-	virtual void popSlotMessage( Packet* &data, int slot=0);
-
-
-	/**
-	 * \fn virtual  void pushSlotMessage( RakNet::BitStream * data,int slot=0, PacketPriority prio= HIGH_PRIORITY,PacketReliability reliability = RELIABLE )
-	 * \brief Fuehrt net_push_slot_message auf einen Server-Slots aus
-	 * \param data Puffer fuer die zu kopierenden Daten
-	 * \param slot Slot des Empfaengers
-	 * \param prio Prioritaet mit der das Paket gesendet wird
-	 * \param reliability Verlaesslichkeit mit der das Paket gesendet wird
-	 */
-	virtual void pushSlotMessage( RakNet::BitStream * data, int slot=0, PacketPriority prio= HIGH_PRIORITY,PacketReliability reliability = RELIABLE) ;
-
-	/**
-	 * \fn virtual NetStatus getSlotStatus( int slot=0 )
-	 * \brief Liefert den Status eines Server-Slots
-	 * \param slot Slotnummer des Servers (immer 0)
-	 * \return Status des Slots
-	 *
-	 */
-	virtual NetStatus getSlotStatus( int slot=0 );
+		/**
+		* \brief Destructor
+		*/
+		virtual ~ClientNetwork()
+		{
+			clearMessageQueue();
+		}
 	
-	/**
-	 * \fn void deallocatePacket(Packet* packet)
-	 * \param packet zu loeschendes Paket
-	 * \brief Loescht ein nicht mehr benoetigtes Paket. Um Speicherlecks zu vermeiden sollten alle Paket auf mit dieser Funktion entfernt werden
-	 */
-	virtual void deallocatePacket(Packet* packet)
-	{
-		m_peer->DeallocatePacket(packet);
-	}
+	
+		/**
+		* \brief Establishes the connection to the server
+		* \param hostname hostname or IP
+		* \param req_port port to connect to
+		*
+		* The succes of the operation can be queried by getSlotStatus()
+		*/
+		virtual void  serverConnect(const char* hostname, int req_port )=0;
+	
+		/**
+		* \brief Closes the connection to the server
+		*/
+		virtual void serverDisconnect() =0;
+		
+	
+	
+		/**
+		* \brief Shuts down Network library and does all cleanup work
+		*/
+		virtual void kill() =0;
+			
+		/**
+		* \fn  void update()
+		* \brief Updates internal state of the wrapper. This function is called once per frame.
+		*/
+		virtual void update()=0;
+			
+		/**
+		 * \brief Returns the Number of packets that are in the receive queue for the specified slot
+		 * \return number of packets in the specified slot
+		 * \param slot always pass 0 on client side (value is ignored)
+		 *
+		 * Returns the Number of packets that are in the receive queue. The slot number is ignored.
+		 */
+		virtual int numberSlotMessages(int slot=0)
+		{
+			return m_received_packets.size();
+		}
+		
+		
+		/**
+		 * \brief Returns the next received packet from the specified slot and removes it from the queue.
+		 * \param data Received NetworkPacket, returns a NULL pointer, if packet queue is empty
+		 * \param slot always pass 0 on client side (value is ignored)
+		 * 
+		 * Returns the next received packet removes it from the queue. If no packet was received, a NULL pointer is returned. Delete the Packet with \ref deallocatePacket at the end. 
+		 */
+		virtual void popSlotMessage( NetworkPacket* &data, int slot=0)
+		{
+			if (!m_received_packets.empty())
+			{
+				data = m_received_packets.front();
+				m_received_packets.pop();
+			}
+			else
+			{
+				data = 0;
+			}
+		}
+		
+		/**
+		 * \brief Return the status of the connection
+		 * \param slot always pass 0 on client side (value is ignored)
+		 * \return status of a slot
+		 *
+		 */
+		virtual NetStatus getSlotStatus( int slot=0 )
+		{
+			return m_status;
+		}
+		
+		/**
+		 * \brief deallocates all message in the receive queue and clears the queue
+		 */
+		void clearMessageQueue()
+		{
+			while (!m_received_packets.empty())
+			{
+				deallocatePacket(m_received_packets.front());
+				m_received_packets.pop();
+			}
+		}
+
+
+	protected:
+		/**
+		* \brief Liste der empfangenen Packete
+		*/
+		PacketQueue m_received_packets;
 
 
 
-	private:
-	/**
-	 * \var PacketQueue m_received_packets
-	 * \brief Liste der empfangenen Packete
-	 */
-	PacketQueue m_received_packets;
-
-
-
-	/**
-	 * \var NetStatus m_status
-	 * \brief Status der Netzwerkschnittstelle
-	 */
-	NetStatus m_status;
-
-	RakClientInterface* m_peer;
-
-	/**
-	 * \var PlayerID m_server_address
-	 * \brief Adresse des Servers
-	 */
-	PlayerID m_server_address;
+		/**
+		* \brief Status der Netzwerkschnittstelle
+		*/
+		NetStatus m_status;
 };
 
 #endif

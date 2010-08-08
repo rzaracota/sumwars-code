@@ -122,7 +122,7 @@ void WorldObject::toString(CharConv* cv)
 	cv->toBuffer(m_race);
 	cv->toBuffer(m_interaction_flags);
 	
-	cv->toBuffer<short>(m_flags.size());
+	cv->toBuffer(static_cast<short>(m_flags.size()));
 	std::set<std::string>::iterator it;
 	for (it = m_flags.begin(); it != m_flags.end(); ++it)
 	{
@@ -314,7 +314,7 @@ void WorldObject::writeNetEvent(NetEvent* event, CharConv* cv)
 	
 	if (event->m_data & NetEvent::DATA_FLAGS)
 	{
-		cv->toBuffer<short>(m_flags.size());
+		cv->toBuffer(static_cast<short>(m_flags.size()));
 		std::set<std::string>::iterator it;
 		for (it = m_flags.begin(); it != m_flags.end(); ++it)
 		{

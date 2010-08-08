@@ -32,12 +32,19 @@ CreditsWindow::CreditsWindow(Document* doc)
 	credits->setProperty("FrameEnabled", "false");
 	credits->setProperty("BackgroundEnabled", "true");
 	credits->setProperty("HorzFormatting", "HorzCentred");
+
 	std::string content = CEGUIUtility::getColourizedString(CEGUIUtility::Red, "Programming:", CEGUIUtility::White);
 	content += "\n Hans Wulf (Lastmerlin) \
 			\n Stefan Stammberger (fusion44) \
 			\n Nicholas Cosens (gnemo)";
+	content += CEGUIUtility::getColourizedString(CEGUIUtility::Red, "Conversion to Mac:", CEGUIUtility::White);
+	content += "\n David Athay (trapdoor) \
+		    \n Ben Anderman (crimson_penguin)";
+	
 	content += CEGUIUtility::getColourizedString(CEGUIUtility::Red, "\n\nGraphics:", CEGUIUtility::White);
 	content +="\n Andreas Schönefeldt \
+			\n\nGraphics: \
+			\n Andreas Schönefeldt \
 			\n Steffen Schönefeldt (Nori) \
 			\n Christian Wittmann (psycho)\
 			\n Francesco Miglietta (hal9000)";

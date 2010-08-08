@@ -231,9 +231,9 @@ float Creature::getTimer(Action::ActionType action)
 float Creature::getActionTime(Action::ActionType action)
 {
 	std::map<std::string, AbilityInfo>::iterator it;
-	it = getBaseAttr()->m_abilities.find(action);
+	it = getBaseAttrMod()->m_abilities.find(action);
 
-	if (it != getBaseAttr()->m_abilities.end())
+	if (it != getBaseAttrMod()->m_abilities.end())
 	{
 		// wenn gleich 0, so wird der Standardtimer verwendet
 		if (it->second.m_time != 0)
@@ -3885,7 +3885,7 @@ void Creature::toString(CharConv* cv)
 	cv->toBuffer(m_timer2);
 	cv->toBuffer(m_timer2_max);
 
-	cv->toBuffer<short>(getBaseAttrMod()->m_abilities.size());
+	cv->toBuffer(static_cast<short>(getBaseAttrMod()->m_abilities.size()));
 	std::map<std::string, AbilityInfo>::iterator it;
 	for (it= getBaseAttrMod()->m_abilities.begin(); it != getBaseAttrMod()->m_abilities.end(); ++it)
 	{
@@ -3916,20 +3916,20 @@ void Creature::fromString(CharConv* cv)
 	DEBUGX("read offset: %i",cv->getBitStream()->GetReadOffset());
 	// Statusveraenderungen
 	char c=0;
-	cv->fromBuffer<char>(c);
+	cv->fromBuffer(c);
 
 	for (int i=0;i<NR_STATUS_MODS;i++)
 	{
 		if (c & (1 <<i ))
 		{
-			cv->fromBuffer<float>(m_dyn_attr.m_status_mod_time[i]);
+			cv->fromBuffer(m_dyn_attr.m_status_mod_time[i]);
 		}
 	}
 
 
 	for (int i=0;i<NR_EFFECTS;i++)
 	{
-		cv->fromBuffer<float>(m_dyn_attr.m_effect_time[i]);
+		cv->fromBuffer(m_dyn_attr.m_effect_time[i]);
 	}
 
 	cv->fromBuffer(getBaseAttrMod()->m_special_flags);
@@ -4094,7 +4094,7 @@ void Creature::writeNetEvent(NetEvent* event, CharConv* cv)
 
 	if (event->m_data & NetEvent::DATA_ABILITIES)
 	{
-		cv->toBuffer<short>(getBaseAttrMod()->m_abilities.size());
+		cv->toBuffer(static_cast<short>(getBaseAttrMod()->m_abilities.size()));
 		std::map<std::string, AbilityInfo>::iterator it;
 		for (it= getBaseAttrMod()->m_abilities.begin(); it != getBaseAttrMod()->m_abilities.end(); ++it)
 		{
@@ -4227,12 +4227,12 @@ void Creature::processNetEvent(NetEvent* event, CharConv* cv)
 	if (event->m_data & NetEvent::DATA_STATUS_MODS)
 	{
 		char ctmp;
-		cv->fromBuffer<char>(ctmp);
+		cv->fromBuffer(ctmp);
 		for (int i=0;i<NR_STATUS_MODS;i++)
 		{
 			if (ctmp & (1 <<i ))
 			{
-				cv->fromBuffer<float>(m_dyn_attr.m_status_mod_time[i]);
+				cv->fromBuffer(m_dyn_attr.m_status_mod_time[i]);
 			}
 		}
 	}

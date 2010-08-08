@@ -10,6 +10,10 @@
 		
 		<WorldPosition world_x="0.68" world_y ="0.43"/>
 		
+		<Music>
+			<Track source="Dark_Exploration.ogg" />
+		</Music>
+		
 		<ExitDirections north="true" south="true" west="true" east="false" />
 		
 		<Exits>
@@ -45,6 +49,10 @@
 		
 		<Settings dimx="44" dimy="44" area_percent="0.4" complexity="0.4" granularity="6"  ground="cave_ground"/>
 		<WorldPosition world_x="0.65" world_y ="0.41"/>
+		
+		<Music>
+			<Track source="Dark_Exploration.ogg" />
+		</Music>
 		
 		<ExitDirections north="true" south="false" west="true" east="true" />
 		
@@ -82,6 +90,10 @@
 		<Settings dimx="30" dimy="30" area_percent="0.4" complexity="0.3" granularity="4"  ground="cave_ground"/>
 		<WorldPosition world_x="0.63" world_y ="0.42"/>
 		
+		<Music>
+			<Track source="Dark_Exploration.ogg" />
+		</Music>
+		
 		<ExitDirections north="false" south="false" west="false" east="true" />
 		
 		<Exits>
@@ -110,6 +122,10 @@
 		<Settings dimx="40" dimy="40" area_percent="0.4" complexity="0.3" granularity="6"  ground="cave_ground"/>
 		<WorldPosition world_x="0.65" world_y ="0.41"/>
 		
+		<Music>
+			<Track source="Dark_Exploration.ogg" />
+		</Music>
+		
 		<ExitDirections north="false" south="true" west="false" east="false" />
 		
 		<Exits>
@@ -136,6 +152,10 @@
 		
 		<Settings dimx="34" dimy="34" area_percent="0.4" complexity="0.2" granularity="8"  ground="cave_ground"/>
 		<WorldPosition world_x="0.7" world_y ="0.42"/>
+		
+		<Music>
+			<Track source="Dark_Exploration.ogg" />
+		</Music>
 		
 		<ExitDirections north="true" south="true" west="false" east="false" />
 		
@@ -169,6 +189,10 @@
 		
 		<Settings dimx="46" dimy="46" area_percent="0.4" complexity="0.3" granularity="6"  ground="cave_ground"/>
 		<WorldPosition world_x="0.72" world_y ="0.42"/>
+		
+		<Music>
+			<Track source="Dark_Exploration.ogg" />
+		</Music>
 		
 		<ExitDirections north="true" south="true" west="false" east="true" />
 		
@@ -205,6 +229,10 @@
 		<Settings dimx="16" dimy="20" region_template="cursedFissure"  ground="cave_ground"/>
 		<WorldPosition world_x="0.72" world_y ="0.42"/>
 		
+		<Music>
+			<Track source="Dark_Exploration.ogg" />
+		</Music>
+		
 		<ExitDirections north="false" south="true" west="false" east="false" />
 		
 		<ReviveLocation  location="locParty" />
@@ -229,6 +257,10 @@
 		
 		<Settings dimx="52" dimy="52" area_percent="0.3" complexity="0.6" granularity="6"  ground="cave_ground"/>
 		<WorldPosition world_x="0.72" world_y ="0.43"/>
+		
+		<Music>
+			<Track source="Dark_Exploration.ogg" />
+		</Music>
 		
 		<ExitDirections north="false" south="false" west="true" east="true" />
 		
@@ -267,6 +299,10 @@
 		
 		<Settings dimx="12" dimy="12" area_percent="0.4" complexity="0.3" granularity="6"  ground="cave_ground"/>
 		<WorldPosition world_x="0.72" world_y ="0.43"/>
+		
+		<Music>
+			<Track source="Dark_Exploration.ogg" />
+		</Music>
 		
 		<ExitDirections north="false" south="false" west="true" east="true" />
 		

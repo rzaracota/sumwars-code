@@ -5,6 +5,7 @@
 #include "itemfactory.h"
 #include "dialogue.h"
 #include "scriptobject.h"
+#include "options.h"
 
 #ifdef DEBUG_DATABASE
 		std::map<int, std::string> EventSystem::m_code_fragments;
@@ -2074,7 +2075,7 @@ int EventSystem::speak(lua_State *L)
 		}
 		if (time ==0)
 		{
-			time = text.size()*50+800;
+			time = (text.size()*50+800) * Options::getInstance()->getTextSpeed();
 		}
 
 		m_dialogue->speak(refname,text,emotion,time);
@@ -2134,7 +2135,7 @@ int EventSystem::unitSpeak(lua_State *L)
 		}
 		if (text.m_time ==0)
 		{
-			text.m_time = text.m_text.size()*50+800;
+			text.m_time = (text.m_text.size()*50+800) * Options::getInstance()->getTextSpeed();
 		}
 
 		if (cr!=0)
@@ -2811,7 +2812,7 @@ int EventSystem::writeString(lua_State *L)
 {
 	std::string s;
 	s = lua_tostring (L,1);
-	m_charconv->toBuffer<char>(1);
+	m_charconv->toBuffer(static_cast<char>(1));
 	m_charconv->toBuffer(s);
 	return 0;
 }
@@ -2828,7 +2829,7 @@ void EventSystem::writeSavegame(CharConv* savegame)
 	if (m_lua != 0)
 	{
 		EventSystem::doString("writeSavegame();");
-		m_charconv->toBuffer<char>(0);
+		m_charconv->toBuffer(static_cast<char>(0));
 	}
 }
 

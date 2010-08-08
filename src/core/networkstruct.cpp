@@ -6,7 +6,7 @@
 	
 void PackageHeader::toString(CharConv* cv)
 {
-	cv->toBuffer<unsigned char>((unsigned char) m_content);
+	cv->toBuffer((unsigned char) m_content);
 	cv->toBuffer(m_number);
 	
 }
@@ -19,18 +19,17 @@ void PackageHeader::fromString(CharConv* cv)
 	m_content = (PackageType) tmp;
 	
 	cv->fromBuffer(m_number);
-	
 }
 
 void ClientCommand::toString(CharConv* cv)
 {
-	cv->toBuffer<char>((char) m_button);
+	cv->toBuffer((char) m_button);
 	cv->toBuffer(m_action);
 	cv->toBuffer(m_goal.m_x);
 	cv->toBuffer(m_goal.m_y);
 	cv->toBuffer(m_id);
 	cv->toBuffer(m_number);
-	cv->toBuffer<short>(m_direction);
+	cv->toBuffer(m_direction);
 	
 }
 
@@ -38,14 +37,14 @@ void ClientCommand::toString(CharConv* cv)
 void ClientCommand::fromString(CharConv* cv)
 {
 	char ctmp;
-	cv->fromBuffer<char>(ctmp);
+	cv->fromBuffer(ctmp);
 	m_button = (Button) ctmp;
 	cv->fromBuffer(m_action);
-	cv->fromBuffer<float>(m_goal.m_x);
-	cv->fromBuffer<float>(m_goal.m_y);
-	cv->fromBuffer<int>(m_id);
-	cv->fromBuffer<int>(m_number);
-	cv->fromBuffer<short>(m_direction );
+	cv->fromBuffer(m_goal.m_x);
+	cv->fromBuffer(m_goal.m_y);
+	cv->fromBuffer(m_id);
+	cv->fromBuffer(m_number);
+	cv->fromBuffer(m_direction );
 	
 }
 
