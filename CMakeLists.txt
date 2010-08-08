@@ -306,13 +306,10 @@ IF(WIN32)
 		${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/boost_1_42/lib/libboost_thread-vc90-mt-1_42.lib
 		${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/boost_1_42/lib/libboost_date_time-vc90-mt-1_42.lib
 		${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/Raknet2_0/Lib/RakNetLibStatic.lib
-		ws2_32.lib
-)
-
-Message("${CEGUIOGRE_LIBRARY}")
-
+		ws2_32.lib )
 ENDIF()
-TARGET_LINK_LIBRARIES(sumwars ${LINK_LIBS})
+
+TARGET_LINK_LIBRARIES(sumwars ${LINK_LIBS} /home/stefan/Dev/s07c/cegui07transition/build/Dependencies/Raknet2_0/libRakNet.a)
 
 
 
