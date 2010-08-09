@@ -98,7 +98,7 @@ DialogueWindow::DialogueWindow(Document* doc, Scene* scene)
 	label->setProperty("FrameEnabled", "false");
 	label->setProperty("BackgroundEnabled", "true");
 	label->setFont("DejaVuSerif-10");
-	label->setProperty("HorzFormatting", "WordWrapLeftAligned");
+	//label->setProperty("HorzFormatting", "WordWrapLeftAligned");
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.0f), cegui_reldim(0.0f)));
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&DialogueWindow::onTextClicked, this));
 	label->setSize(CEGUI::UVector2(cegui_reldim(0.99f), cegui_reldim( 0.99f)));
@@ -115,7 +115,7 @@ DialogueWindow::DialogueWindow(Document* doc, Scene* scene)
 	label->setProperty("FrameEnabled", "false");
 	label->setProperty("BackgroundEnabled", "true");
 	label->setFont("DejaVuSerif-10");
-	label->setProperty("HorzFormatting", "WordWrapLeftAligned");
+	//label->setProperty("HorzFormatting", "WordWrapLeftAligned");
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.0f), cegui_reldim(0.0f)));
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&DialogueWindow::onTextClicked, this));
 	label->setSize(CEGUI::UVector2(cegui_reldim(0.99f), cegui_reldim( 0.99f)));
@@ -332,6 +332,8 @@ void DialogueWindow::updateTranslation()
 
 void DialogueWindow::updateSpeechBubbles()
 {
+
+	
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::Window* game_screen =  win_mgr.getWindow("GameScreen");
 	
@@ -437,7 +439,7 @@ void DialogueWindow::updateSpeechBubbles()
 			speakframe->addChildWindow(label);
 			label->setProperty("FrameEnabled", "true");
 			label->setProperty("BackgroundEnabled", "true");
-			label->setProperty("HorzFormatting", "WordWrapLeftAligned");
+			//label->setProperty("HorzFormatting", "WordWrapLeftAligned");
 			label->setSize(CEGUI::UVector2(CEGUI::UDim(0,80), CEGUI::UDim(0,picsize)));
 			label->setPosition(CEGUI::UVector2(CEGUI::UDim(0,picsize+10), CEGUI::UDim(0,5)));
 			
@@ -586,7 +588,7 @@ void DialogueWindow::updateSpeechBubbles()
 		{
 			ques = (CEGUI::FrameWindow*)win_mgr.getWindow("QuestionWindow");
 			label = (CEGUI::Window*) win_mgr.getWindow("QuestionLabel");
-			label->setProperty("HorzFormatting", "WordWrapLeftAligned");
+			//label->setProperty("HorzFormatting", "WordWrapLeftAligned");
 		}
 		
 		nr =0;
@@ -631,6 +633,7 @@ void DialogueWindow::updateSpeechBubbles()
 		std::list < std::pair<std::string, std::string> >::iterator it;
 		for (it = question->m_answers.begin(); it != question->m_answers.end(); ++it)
 		{
+			std::cout << "this" << std::endl;
 			stream.str("");
 			stream << "AnswerLabel";
 			stream << nr;
@@ -642,7 +645,7 @@ void DialogueWindow::updateSpeechBubbles()
 				ques->addChildWindow(label);
 				label->setProperty("FrameEnabled", "false");
 				label->setProperty("BackgroundEnabled", "false");
-				label->setProperty("HorzFormatting", "WordWrapLeftAligned");
+				//label->setProperty("HorzFormatting", "WordWrapLeftAligned");
 				label->setID(nr);
 				label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&DialogueWindow::onAnswerClicked, this));
 			}
