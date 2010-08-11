@@ -6,6 +6,13 @@
 #include <list>
 #include <string>
 
+struct FormatedText
+{
+public:
+	CEGUI::String text;
+	size_t lines;
+};
+
 class CEGUIUtility
 {
 
@@ -98,7 +105,17 @@ class CEGUIUtility
 		*/
 		static std::string getColourizedString(int colour, std::string text, int colourAfter);
 
-		static size_t getFormattedLineCount (const CEGUI::String& text, const CEGUI::Rect& format_area,TextFormatting fmt, CEGUI::Font *font, float x_scale = 1.0f);
+		/**
+		* \fn static size_t fitTextToWindow (const CEGUI::String& text, const CEGUI::Rect& format_area,TextFormatting fmt, CEGUI::Font *font, float x_scale = 1.0f, CEGUI::String& out_string = "")
+		* \brief Returns the number of lines the text will have within a given CEGUI window
+		* \param text Fits the text to a window
+		* \param format_area The CEGUI Rect from the window
+		* \param fmt The text format
+		* \param font The CEGUI::Font
+		* \param x_scale Optional text scale
+		* \returns the formated text and the line count
+		*/
+		static FormatedText fitTextToWindow (const CEGUI::String& text, const CEGUI::Rect& format_area,TextFormatting fmt, CEGUI::Font *font, float x_scale = 1.0f);
 		static const size_t getNextWord(const CEGUI::String& in_string, size_t start_idx, CEGUI::String& out_string);
 		
 };

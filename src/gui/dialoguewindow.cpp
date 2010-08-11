@@ -233,15 +233,13 @@ void DialogueWindow::update()
 						
 						if (wtext->getText() != (CEGUI::utf8*) text.c_str())
 						{
-							wtext->setText((CEGUI::utf8*) text.c_str());
-							
-							
 							CEGUI::UVector2 size = wtext->getSize();
 							CEGUI::Rect isize = wtext->getUnclippedInnerRect ();
-							float height = PixelAligned(CEGUIUtility::getFormattedLineCount(text, isize, CEGUIUtility::WordWrapCentred, fnt) * fnt->getLineSpacing());
+							FormatedText txt = CEGUIUtility::fitTextToWindow(text, isize, CEGUIUtility::WordWrapCentred, fnt);
+							float height = PixelAligned(txt.lines * fnt->getLineSpacing());
 							size.d_y = CEGUI::UDim(0.0, height);
 							wtext->setSize(size);
-							
+							wtext->setText((CEGUI::utf8*)txt.text.c_str());
 						}
 						wtext->setVisible(true);
 						
@@ -439,7 +437,6 @@ void DialogueWindow::updateSpeechBubbles()
 			speakframe->addChildWindow(label);
 			label->setProperty("FrameEnabled", "true");
 			label->setProperty("BackgroundEnabled", "true");
-			//label->setProperty("HorzFormatting", "WordWrapLeftAligned");
 			label->setSize(CEGUI::UVector2(CEGUI::UDim(0,80), CEGUI::UDim(0,picsize)));
 			label->setPosition(CEGUI::UVector2(CEGUI::UDim(0,picsize+10), CEGUI::UDim(0,5)));
 			
@@ -480,18 +477,25 @@ void DialogueWindow::updateSpeechBubbles()
 			
 		if (label->getText() != (CEGUI::utf8*) text.c_str())
 		{
+
 			CEGUI::Font* font = label->getFont();
-			
-			label->setText((CEGUI::utf8*) text.c_str());
+
 			
 			
 			float width = font->getTextExtent((CEGUI::utf8*) text.c_str())+15;
 			float height = font->getFontHeight() +15;
 			CEGUI::Rect rect = game_screen->getInnerRectClipper();
+
+			float maxwidth = rect.getWidth()/4;
+			CEGUI::Rect maxWidthRect;
+			maxWidthRect.setWidth(maxwidth);
+			
+			FormatedText txt = CEGUIUtility::fitTextToWindow((CEGUI::utf8*) text.c_str(), maxWidthRect, CEGUIUtility::WordWrapLeftAligned, font);
+			size_t lines = txt.lines;
+			label->setText((CEGUI::utf8*) txt.text.c_str());
 			
 			// Testen ob der Text auf eine Zeile passt
-			float maxwidth = rect.getWidth()/4;
-			if (width < maxwidth)
+			if (!txt.lines > 1)
 			{
 				// einzelne Zeile
 				label->setSize(CEGUI::UVector2(CEGUI::UDim(0,width),  CEGUI::UDim(0,picsize)));
@@ -503,7 +507,6 @@ void DialogueWindow::updateSpeechBubbles()
 				// mehrere Zeilen
 				rect.setWidth(maxwidth-15);
 				
-				int lines = CEGUIUtility::getFormattedLineCount((CEGUI::utf8*) text.c_str(),rect, CEGUIUtility::WordWrapLeftAligned, font);
 				height = lines * font->getFontHeight() +15;
 				
 				if (height < picsize)
@@ -614,7 +617,7 @@ void DialogueWindow::updateSpeechBubbles()
 		if (elemwidth > maxwidth)
 		{
 			elemwidth = maxwidth;
-			lines = CEGUIUtility::getFormattedLineCount(ctext,rect, CEGUIUtility::WordWrapLeftAligned, font);
+			lines = CEGUIUtility::fitTextToWindow(ctext,rect, CEGUIUtility::WordWrapLeftAligned, font).lines;
 			elemheight = lines * lineheight;
 		}
 		width = MathHelper::Max(width,elemwidth);
@@ -655,7 +658,6 @@ void DialogueWindow::updateSpeechBubbles()
 			}
 			
 			CEGUI::String cstring = (CEGUI::utf8*) dgettext("sumwars-xml",it->first.c_str());
-			std::cout << cstring.c_str()<< std::endl;
 			
 			// Anzahl Antworten bei Voting eintragen
 			if (question->m_weighted_answers.count(nr) > 0)
@@ -671,7 +673,7 @@ void DialogueWindow::updateSpeechBubbles()
 			if (elemwidth > maxwidth)
 			{
 				elemwidth = maxwidth;
-				lines = CEGUIUtility::getFormattedLineCount(cstring,rect, CEGUIUtility::WordWrapLeftAligned, font);
+				lines = CEGUIUtility::fitTextToWindow(cstring,rect, CEGUIUtility::WordWrapLeftAligned, font).lines;
 				elemheight = lines * lineheight;
 			}
 			width = MathHelper::Max(width,elemwidth);

@@ -112,12 +112,15 @@ const size_t CEGUIUtility::getNextWord(const CEGUI::String& in_string, size_t st
 	return out_string.length();
 }
 
-size_t CEGUIUtility::getFormattedLineCount(const CEGUI::String& text, const CEGUI::Rect& format_area,TextFormatting fmt, CEGUI::Font *font, float x_scale)
+FormatedText CEGUIUtility::fitTextToWindow(const CEGUI::String& text, const CEGUI::Rect& format_area,TextFormatting fmt, CEGUI::Font *font, float x_scale)
 {
-	if ((fmt == LeftAligned) || (fmt == Centred) || (fmt == RightAligned) || (fmt == Justified))
+/*	if ((fmt == LeftAligned) || (fmt == Centred) || (fmt == RightAligned) || (fmt == Justified))
 	{
 		return std::count(text.begin(), text.end(), static_cast<CEGUI::utf8>('\n')) + 1;
 	}
+	*/
+
+	CEGUI::String newText(text.c_str());
 	
 	// handle wraping cases
 	size_t lineStart = 0, lineEnd = 0;
@@ -156,6 +159,7 @@ size_t CEGUIUtility::getFormattedLineCount(const CEGUI::String& text, const CEGU
 				// remove whitespace from next word - it will form start of next line
 				thisWord = thisWord.substr(thisWord.find_first_not_of(whitespace));
 				
+				newText.insert(currpos - thisWord.size(), "\n");
 				// reset for a new line.
 				thisLine.clear();
 			}
@@ -167,8 +171,10 @@ size_t CEGUIUtility::getFormattedLineCount(const CEGUI::String& text, const CEGU
 		// plus one for final line
 		line_count++;
 	}
-	
-	return line_count;
+	FormatedText formt;
+	formt.text = newText;
+	formt.lines = line_count;
+	return formt;
 }
 
 
