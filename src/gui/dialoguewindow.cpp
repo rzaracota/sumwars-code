@@ -214,7 +214,7 @@ void DialogueWindow::update()
 						wname->setVisible(true);
 					}
 					
-					text = cr->getSpeakText().m_text;
+					text = cr->getSpeakText().m_text.getTranslation();
 					
 					if (text == "" || cr->getSpeakText().m_in_dialogue == false)
 					{
@@ -222,7 +222,6 @@ void DialogueWindow::update()
 					}
 					else
 					{
-						text = dgettext("sumwars-xml",text.c_str());
 						// remove everything after ##
 						size_t pos = text.find("##");
 						if (pos != std::string::npos)
@@ -400,7 +399,7 @@ void DialogueWindow::updateSpeechBubbles()
 		if (!alldia && ( pos.first <0 || pos.first >1 || pos.second <0 || pos.second >1))
 			continue;
 				
-		text = cr->getSpeakText().m_text;
+		text = cr->getSpeakText().m_text.getTranslation();
 		
 		if (text == "")
 			continue;

@@ -58,6 +58,7 @@ am_sumwars_OBJECTS = src/core/sumwars-world.$(OBJEXT) \
 	src/core/sumwars-objectfactory.$(OBJEXT) \
 	src/core/sumwars-objectloader.$(OBJEXT) \
 	src/core/sumwars-templateloader.$(OBJEXT) \
+	src/core/sumwars-translatablestring.$(OBJEXT) \
 	src/core/sumwars-itemlist.$(OBJEXT) \
 	src/core/sumwars-gridunit.$(OBJEXT) \
 	src/core/sumwars-servernetwork.$(OBJEXT) \
@@ -273,6 +274,7 @@ sumwars_SOURCES = src/core/world.cpp \
 	src/core/objectfactory.cpp \
 	src/core/objectloader.cpp \
 	src/core/templateloader.cpp \
+	src/core/translatablestring.cpp \
 	src/core/itemlist.cpp \
 	src/core/gridunit.cpp \
 	src/core/servernetwork.cpp \
@@ -467,6 +469,8 @@ src/core/sumwars-objectloader.$(OBJEXT): src/core/$(am__dirstamp) \
 	src/core/$(DEPDIR)/$(am__dirstamp)
 src/core/sumwars-templateloader.$(OBJEXT): src/core/$(am__dirstamp) \
 	src/core/$(DEPDIR)/$(am__dirstamp)
+src/core/sumwars-translatablestring.$(OBJEXT):  \
+	src/core/$(am__dirstamp) src/core/$(DEPDIR)/$(am__dirstamp)
 src/core/sumwars-itemlist.$(OBJEXT): src/core/$(am__dirstamp) \
 	src/core/$(DEPDIR)/$(am__dirstamp)
 src/core/sumwars-gridunit.$(OBJEXT): src/core/$(am__dirstamp) \
@@ -694,6 +698,7 @@ mostlyclean-compile:
 	-rm -f src/core/sumwars-spawnpoint.$(OBJEXT)
 	-rm -f src/core/sumwars-stdstreamconv.$(OBJEXT)
 	-rm -f src/core/sumwars-templateloader.$(OBJEXT)
+	-rm -f src/core/sumwars-translatablestring.$(OBJEXT)
 	-rm -f src/core/sumwars-treasure.$(OBJEXT)
 	-rm -f src/core/sumwars-unionfindtree.$(OBJEXT)
 	-rm -f src/core/sumwars-waypoint.$(OBJEXT)
@@ -785,6 +790,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@src/core/$(DEPDIR)/sumwars-spawnpoint.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/core/$(DEPDIR)/sumwars-stdstreamconv.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/core/$(DEPDIR)/sumwars-templateloader.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@src/core/$(DEPDIR)/sumwars-translatablestring.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/core/$(DEPDIR)/sumwars-treasure.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/core/$(DEPDIR)/sumwars-unionfindtree.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/core/$(DEPDIR)/sumwars-waypoint.Po@am__quote@
@@ -939,6 +945,20 @@ src/core/sumwars-templateloader.obj: src/core/templateloader.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='src/core/templateloader.cpp' object='src/core/sumwars-templateloader.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(sumwars_CPPFLAGS) $(CPPFLAGS) $(sumwars_CXXFLAGS) $(CXXFLAGS) -c -o src/core/sumwars-templateloader.obj `if test -f 'src/core/templateloader.cpp'; then $(CYGPATH_W) 'src/core/templateloader.cpp'; else $(CYGPATH_W) '$(srcdir)/src/core/templateloader.cpp'; fi`
+
+src/core/sumwars-translatablestring.o: src/core/translatablestring.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(sumwars_CPPFLAGS) $(CPPFLAGS) $(sumwars_CXXFLAGS) $(CXXFLAGS) -MT src/core/sumwars-translatablestring.o -MD -MP -MF src/core/$(DEPDIR)/sumwars-translatablestring.Tpo -c -o src/core/sumwars-translatablestring.o `test -f 'src/core/translatablestring.cpp' || echo '$(srcdir)/'`src/core/translatablestring.cpp
+@am__fastdepCXX_TRUE@	$(am__mv) src/core/$(DEPDIR)/sumwars-translatablestring.Tpo src/core/$(DEPDIR)/sumwars-translatablestring.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='src/core/translatablestring.cpp' object='src/core/sumwars-translatablestring.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(sumwars_CPPFLAGS) $(CPPFLAGS) $(sumwars_CXXFLAGS) $(CXXFLAGS) -c -o src/core/sumwars-translatablestring.o `test -f 'src/core/translatablestring.cpp' || echo '$(srcdir)/'`src/core/translatablestring.cpp
+
+src/core/sumwars-translatablestring.obj: src/core/translatablestring.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(sumwars_CPPFLAGS) $(CPPFLAGS) $(sumwars_CXXFLAGS) $(CXXFLAGS) -MT src/core/sumwars-translatablestring.obj -MD -MP -MF src/core/$(DEPDIR)/sumwars-translatablestring.Tpo -c -o src/core/sumwars-translatablestring.obj `if test -f 'src/core/translatablestring.cpp'; then $(CYGPATH_W) 'src/core/translatablestring.cpp'; else $(CYGPATH_W) '$(srcdir)/src/core/translatablestring.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(am__mv) src/core/$(DEPDIR)/sumwars-translatablestring.Tpo src/core/$(DEPDIR)/sumwars-translatablestring.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='src/core/translatablestring.cpp' object='src/core/sumwars-translatablestring.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(sumwars_CPPFLAGS) $(CPPFLAGS) $(sumwars_CXXFLAGS) $(CXXFLAGS) -c -o src/core/sumwars-translatablestring.obj `if test -f 'src/core/translatablestring.cpp'; then $(CYGPATH_W) 'src/core/translatablestring.cpp'; else $(CYGPATH_W) '$(srcdir)/src/core/translatablestring.cpp'; fi`
 
 src/core/sumwars-itemlist.o: src/core/itemlist.cpp
 @am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(sumwars_CPPFLAGS) $(CPPFLAGS) $(sumwars_CXXFLAGS) $(CXXFLAGS) -MT src/core/sumwars-itemlist.o -MD -MP -MF src/core/$(DEPDIR)/sumwars-itemlist.Tpo -c -o src/core/sumwars-itemlist.o `test -f 'src/core/itemlist.cpp' || echo '$(srcdir)/'`src/core/itemlist.cpp

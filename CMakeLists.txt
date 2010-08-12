@@ -51,6 +51,7 @@ SET(SRCS
   ./src/core/player.cpp
   ./src/core/monster.cpp
   ./src/core/itemfactory.cpp
+  ./src/core/translatablestring.cpp
   ./src/core/event.cpp
   ./src/core/charconv.cpp
   ./src/core/stdstreamconv.cpp

@@ -309,7 +309,7 @@ void Dialogue::removeSpeaker(int id)
 	cr->clearSpeakText();
 }
 
-void Dialogue::speak(std::string refname, std::string text, std::string emotion,float time)
+void Dialogue::speak(std::string refname, TranslatableString text, std::string emotion,float time)
 {
 	CreatureSpeakText txt;
 	txt.m_text = text;

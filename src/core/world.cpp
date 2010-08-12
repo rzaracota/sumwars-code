@@ -325,7 +325,7 @@ void World::updateLogins()
 			header.fromString(data);
 			if (header.m_content == PTYPE_C2S_SAVEGAME)
 			{
-				DEBUGX("got savegame from slot %i",(*i));
+				DEBUG("got savegame from slot %i",(*i));
 				handleSavegame(data,*i);
 				i = m_logins.erase(i);
 

@@ -34,6 +34,8 @@ Event* EventSystem::m_event =0;
 
 std::map<int, std::string> EventSystem::m_player_varupdates;
 
+std::stack<std::string> EventSystem::m_gettext_domains;
+
 void EventSystem::init()
 {
 	if (m_lua !=0)
@@ -154,13 +156,12 @@ void EventSystem::init()
 	lua_register(m_lua, "writeString", writeString);
 	lua_register(m_lua, "writeNewline", writeNewline);
 	lua_register(m_lua, "writeUpdateString", writeUpdateString);
-	lua_register(m_lua, "gettext", luagettext);
-	lua_register(m_lua, "_", luagettext);
-
 
 	m_region =0;
 	m_trigger =0;
 	m_dialogue =0;
+	
+	pushGettextDomain("sumwars-events");
 
 	doString("private_vars = {}; quests = {private_vars = private_vars} ; playervars = {}; scriptobjectvar = {}; math.randomseed( os.time() );");
 }
@@ -455,6 +456,52 @@ void EventSystem::pushVector(lua_State *L, Vector v)
 	lua_pushinteger(L, 2);
 	lua_pushnumber(L,v.m_y);
 	lua_settable(L, -3);
+}
+
+void EventSystem::getTranslatableString(lua_State *L, TranslatableString& t, int index)
+{
+	t.setTextDomain(m_gettext_domains.top());
+	
+	if (lua_isstring(L,index))
+	{
+		std::string text = lua_tostring(L, index);
+		t = text;
+	}
+	else if (lua_istable(L,index))
+	{
+		// Layout of the table:
+		// 0-> text
+		// 1-> substring1
+		// 2-> substring2...
+		int idx = index;
+		if (index <0)
+			idx --;
+		
+		lua_pushinteger(L, 0);
+		lua_gettable(L, idx);
+		std::string text = lua_tostring(L, -1);
+		lua_pop(L, 1);
+		
+		int id = 1;
+		std::vector<std::string> substrings;
+		while (1)
+		{
+			lua_pushinteger(L, 0);
+			lua_gettable(L, idx);
+			if (!lua_isstring(L,-1))
+				break;
+			std::string subtext = lua_tostring(L, -1);
+			lua_pop(L, 1);
+			
+			substrings.push_back(subtext);
+		}
+		
+		t.setText(text,substrings);
+	}
+	else
+	{
+		ERRORMSG("ungueltige Eingabe fuer TranslatableString");
+	}
 }
 
 int EventSystem::getRegion(lua_State *L)
@@ -2060,7 +2107,8 @@ int EventSystem::speak(lua_State *L)
 	if (argc>=2 && lua_isstring(L,1) && lua_isstring(L,2))
 	{
 		std::string refname = lua_tostring(L, 1);
-		std::string text = lua_tostring(L, 2);
+		TranslatableString text;
+		getTranslatableString(L,text,2);
 
 		std::string emotion = "";
 		if (argc>=3 && lua_isstring(L,3))
@@ -2092,7 +2140,7 @@ int EventSystem::speak(lua_State *L)
 int EventSystem::unitSpeak(lua_State *L)
 {
 	int argc = lua_gettop(L);
-	if (argc>=2 && (lua_isnumber(L,1) || lua_isstring(L,1)) && lua_isstring(L,2))
+	if (argc>=2 && (lua_isnumber(L,1) || lua_isstring(L,1)) && (lua_isstring(L,2) ||lua_istable(L,1)))
 	{
 		int id =0;
 		if (lua_isnumber(L,1))
@@ -2112,8 +2160,8 @@ int EventSystem::unitSpeak(lua_State *L)
 		
 		CreatureSpeakText text;
 		text.m_in_dialogue = false;
-		text.m_text = lua_tostring(L, 2);
-
+		getTranslatableString(L,text.m_text,2);
+		
 		WorldObject* wo =0;
 		if (m_region !=0)
 		{
@@ -2216,7 +2264,7 @@ int EventSystem::setSpeakerEmotion(lua_State *L)
 	{
 		std::string refname = lua_tostring(L, 1);
 		std::string emotion = lua_tostring(L, 2);
-		m_dialogue->speak(refname,"#emotion#",emotion,0);
+		m_dialogue->speak(refname,TranslatableString("#emotion#"),emotion,0);
 	}
 	else
 	{
@@ -2249,7 +2297,7 @@ int EventSystem::setSpeakerAnimation(lua_State *L)
 			}
 		}
 		
-		m_dialogue->speak(refname,txt,anim,time);
+		m_dialogue->speak(refname,TranslatableString(txt),anim,time);
 	}
 	else
 	{
@@ -2269,7 +2317,7 @@ int EventSystem::setSpeakerPosition(lua_State *L)
 	{
 		std::string refname = lua_tostring(L, 1);
 		std::string position = lua_tostring(L, 2);
-		m_dialogue->speak(refname,"#position#",position,0);
+		m_dialogue->speak(refname,TranslatableString("#position#"),position,0);
 	}
 	else
 	{
@@ -2288,7 +2336,7 @@ int EventSystem::changeTopic(lua_State *L)
 	if (argc>=1 && lua_isstring(L,1))
 	{
 		std::string topic = lua_tostring(L, 1);
-		m_dialogue->speak("","#change_topic#",topic);
+		m_dialogue->speak("",TranslatableString("#change_topic#"),topic);
 	}
 	else
 	{
@@ -2307,7 +2355,7 @@ int EventSystem::jumpTopic(lua_State *L)
 	if (argc>=1 && lua_isstring(L,1))
 	{
 		std::string topic = lua_tostring(L, 1);
-		m_dialogue->speak("","#jump_topic#",topic);
+		m_dialogue->speak("",TranslatableString("#jump_topic#"),topic);
 	}
 	else
 	{
@@ -2326,7 +2374,7 @@ int EventSystem::executeInDialog(lua_State *L)
 	if (argc>=1 && lua_isstring(L,1))
 	{
 		std::string code = lua_tostring(L, 1);
-		m_dialogue->speak("","#execute#",code);
+		m_dialogue->speak("",TranslatableString("#execute#"),code);
 	}
 	else
 	{
@@ -2358,7 +2406,7 @@ int EventSystem::addSpeakerInDialog(lua_State *L)
 			refname = lua_tostring(L,2);
 		}
 		
-		m_dialogue->speak(speaker,"#add_speaker#",refname);
+		m_dialogue->speak(speaker,TranslatableString("#add_speaker#"),refname);
 	}
 	else
 	{
@@ -2428,7 +2476,7 @@ int EventSystem::removeSpeaker(lua_State *L)
 		
 		std::string refname = lua_tostring(L, 1);
 		std::string txt = "#remove_speaker#";
-		m_dialogue->speak(refname,txt);
+		m_dialogue->speak(refname,TranslatableString(txt));
 	}
 	else
 	{
@@ -2911,40 +2959,5 @@ int EventSystem::writeUpdateString(lua_State *L)
 	return 0;
 }
 
-int EventSystem::luagettext(lua_State *L)
-{
-	int argc = lua_gettop(L);
-
-	if (argc<1)
-	{
-		lua_pushstring(L,"");
-		return 1;
-	}
-
-	DEBUGX("to translate: %s",lua_tostring(L,1));
-	std::string text="return ";
-	std::string transl = dgettext("sumwars-events",lua_tostring(L,1));
-	
-	// testen, ob es zusammengesetzter String ist
-	bool complex = false;
-	
-	if (transl.find("\'..") != std::string::npos || transl.find("\"..") != std::string::npos || transl.find("]]..") != std::string::npos)
-	{
-		complex = true;
-	}
-	
-	if (!complex)
-		text += "[[";
-
-	text += transl;
-
-	if (!complex)
-		text += "]];";
-
-	DEBUGX("return string %s",text.c_str());
-	doString(text.c_str());
-	return 1;
-
-}
 
 

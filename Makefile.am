@@ -14,6 +14,7 @@ sumwars_SOURCES = src/core/world.cpp \
 	src/core/objectfactory.cpp \
 	src/core/objectloader.cpp \
 	src/core/templateloader.cpp \
+	src/core/translatablestring.cpp \
 	src/core/itemlist.cpp \
 	src/core/gridunit.cpp \
 	src/core/servernetwork.cpp \
