@@ -2,6 +2,8 @@
 #define EVENTSYSTEM_H
 
 #include <string>
+#include "translatablestring.h"
+#include <stack>
 #include "debug.h"
 #include "event.h"
 #include "geometry.h"
@@ -89,6 +91,23 @@ class EventSystem
 		 * \return Referenz, bei einem Fehler 0
 		 */
 		static int createCodeReference(const char* code);
+		
+		/**
+		 * \brief Pushes a new element to the gettext domain stack
+		 * \param domain new topmost element of the stack
+		 */
+		static void pushGettextDomain(std::string domain)
+		{
+			m_gettext_domains.push(domain);
+		}
+		
+		/**
+		 * \brief Pops the topmoest element from the gettext domain stack
+		 */
+		static void popGettextDomain()
+		{
+			m_gettext_domains.pop();
+		}
 		
 		/**
 		 * \fn static void setRegion(Region* region)
@@ -676,6 +695,15 @@ class EventSystem
 		static void pushVector(lua_State *L, Vector v);
 		
 		/**
+		 * \brief Retrieves a translatable string from the top of the stack
+		 * \param t translatable string
+		 * \param L Lua Status
+		 * \param index index of the string on the stack
+		 * The current top element of the gettext domain stack is used for the string
+		 **/
+		static void getTranslatableString(lua_State *L, TranslatableString& t, int index);
+		
+		/**
 		 * \fn static int getRolePlayers(lua_State *L)
 		 * \brief Gibt eine Liste von Spielerd aus, die eine bestimmte Rolle erfuellen
 		 * \param L Lua Status
@@ -775,18 +803,18 @@ class EventSystem
 		 */
 		static int writeUpdateString(lua_State *L);
 		
-		
-		/**
-		 * \fn static int luagettext(lua_State *L)
-		 * \brief gettext fuer lua
-		 */
-		static int luagettext(lua_State *L);
 	private:
 		/**
 		 * \var static lua_State * m_lua
 		 * \brief Zustandsobjekt von Lua
 		 */
 		static lua_State * m_lua;
+		
+		/**
+		 * \brief This stack is used to store the text domains used for translatable strings generated from lua.
+		 * Each translatable string generated from lua gets the topmost element of the stack as domain
+		 */
+		static std::stack<std::string> m_gettext_domains;
 		
 		/**
 		 * \var static  Region m_region

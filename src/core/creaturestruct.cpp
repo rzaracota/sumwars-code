@@ -856,7 +856,7 @@ bool CreatureDynAttrMod::setValue(std::string valname)
 	return false;
 }
 
-void CreatureSpeakText::operator=( CreatureSpeakText& other)
+void CreatureSpeakText::operator=(const CreatureSpeakText& other)
 {
 	m_text = other.m_text;
 	m_time = other.m_time;

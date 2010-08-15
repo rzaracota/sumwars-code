@@ -6,6 +6,7 @@
 #include <string>
 #include <memory.h>
 #include "debug.h"
+#include "translatablestring.h"
 #include <map>
 #include <set>
 #define NR_STATUS_MODS 8
@@ -569,10 +570,26 @@ struct CreatureDynAttrMod
 struct CreatureSpeakText
 {
 	/**
+	 * \brief Default constructor
+	 */
+	CreatureSpeakText()
+	{
+		
+	}
+	
+	/**
+	 * \brief Copy constructor
+	 */
+	CreatureSpeakText(const CreatureSpeakText& other)
+	{
+		*this = other;
+	}
+	
+	/**
 	 * \var std::string m_text
 	 * \brief Der Text
 	 */
-	std::string m_text;
+	TranslatableString m_text;
 	
 	
 	/**
@@ -606,11 +623,11 @@ struct CreatureSpeakText
 	bool m_in_dialogue;
 		
 	/**
-	 * \fn void operator=( CreatureSpeakText& other)
+	 * \fn void operator=(const CreatureSpeakText& other)
 	 * \brief Zuweisungsoperator
 	 * \param other zugewiesene Struktur
 	 */
-	void operator=( CreatureSpeakText& other);
+	void operator=(const CreatureSpeakText& other);
 	
 	/**
 	 * \fn bool empty()

@@ -333,7 +333,7 @@ class Dialogue
 		 * \param emotion angezeigte Emotion
 		 * \param time Zeit, die der Text angezeigt wird
 		 */
-		void speak(std::string refname, std::string text,std::string emotion="", float time = 500);
+		void speak(std::string refname, TranslatableString text ,std::string emotion="", float time = 500);
 		
 		/**
 		 * \brief Fuegt eine Frage ein. Die Frage wird bei dem Spieler mit der ID  m_main_player_id angezeigt

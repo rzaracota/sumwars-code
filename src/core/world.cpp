@@ -3013,4 +3013,3 @@ void World::createFraction(Fraction::Type name)
 	frac = new Fraction(id, name);
 	m_fractions[id] = frac;
 }
-

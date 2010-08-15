@@ -2,9 +2,9 @@
 TestRing
 {
     material        flareAlpha
-    particle_width  10
-    particle_height 10
-	cull_each       false
+    particle_width  0.2
+    particle_height 0.2
+    cull_each       false
     quota           5000
     billboard_type  point
     
@@ -15,13 +15,13 @@ TestRing
         emission_rate   600
         time_to_live    0.3
         direction       0 1 0
-        velocity_min    50
-        velocity_max    50
+        velocity_min    1.0
+        velocity_max    1.0
         colour_range_start  1 0 0 
         colour_range_end    1 0 0 
-        width           100
-        height          100
-        depth           30
+        width           2.0
+        height          2.0
+        depth           0.6
 }
 
     // Make em float upwards
@@ -37,122 +37,122 @@ TestRing
 
 Magic_Arrow
 {
-	material 		Flare
-	particle_width 	25
-	particle_height	25
-	cull_each		false
-	quota			200
-	billboard_type	point
+    material         Flare
+    particle_width     0.5
+    particle_height    0.5
+    cull_each        false
+    quota            200
+    billboard_type    point
 
-	emitter Point
+    emitter Point
 {
-		angle 5
-		emission_rate 100
+        angle 5
+        emission_rate 100
         time_to_live    0.05
         direction       0 0 0
-        velocity_min    250
-        velocity_max    300
+        velocity_min    5.0
+        velocity_max    6.0
         colour_range_start  1 0 1
         colour_range_end    0 0 1
-		
+        
 }
-	affector ColourFader
+    affector ColourFader
 {
-		red -0.25
-		green -1
-		blue -1
+        red -0.25
+        green -1
+        blue -1
 }
-	
+    
 }
 
 Magic_Arrow_Fire
 {
-	material 		Flare
-	particle_width 	25
-	particle_height	25
-	cull_each		false
-	quota			200
-	billboard_type	point
+    material         Flare
+    particle_width     0.5
+    particle_height    0.5
+    cull_each        false
+    quota            200
+    billboard_type    point
 
-	emitter Point
+    emitter Point
 {
-		angle 5
-		emission_rate 100
+        angle 5
+        emission_rate 100
         time_to_live    0.05
         direction       0 0 0
-        velocity_min    250
-        velocity_max    300
+        velocity_min    5.0
+        velocity_max    6.0
         colour_range_start  1 0 0
         colour_range_end    0.5 0.5 0
-		
+        
 }
-	affector ColourFader
+    affector ColourFader
 {
-		red -0.25
-		green -1
-		blue -1
+        red -0.25
+        green -1
+        blue -1
 }
-	
+    
 }
 
 Magic_Arrow_Lightning
 {
-	material 		Flare
-	particle_width 	25
-	particle_height	25
-	cull_each		false
-	quota			200
-	billboard_type	point
+    material         Flare
+    particle_width     0.5
+    particle_height    0.5
+    cull_each        false
+    quota            200
+    billboard_type    point
 
-	emitter Point
+    emitter Point
 {
-		angle 5
-		emission_rate 100
+        angle 5
+        emission_rate 100
         time_to_live    0.05
         direction       0 0 0
-        velocity_min    250
-        velocity_max    300
+        velocity_min    5.0
+        velocity_max    6.0
         colour_range_start 0.9 0.9 0.99 
         colour_range_end 0.6 0.6 1
-		
+        
 }
-	affector ColourFader
+    affector ColourFader
 {
-		red -0.25
-		green -1
-		blue -1
+        red -0.25
+        green -1
+        blue -1
 }
-	
+    
 }
 
 Magic_Arrow_Ice
 {
-	material 		Flare
-	particle_width 	25
-	particle_height	25
-	cull_each		false
-	quota			200
-	billboard_type	point
+    material         Flare
+    particle_width     0.5
+    particle_height    0.5
+    cull_each        false
+    quota            200
+    billboard_type    point
 
-	emitter Point
+    emitter Point
 {
-		angle 5
-		emission_rate 100
+        angle 5
+        emission_rate 100
         time_to_live    0.05
         direction       0 0 0
-        velocity_min    250
-        velocity_max    300
+        velocity_min    5.0
+        velocity_max    6.0
         colour_range_start  0.6 0.6 1
         colour_range_end    0.2 0.2 0.6
-		
+        
 }
-	affector ColourFader
+    affector ColourFader
 {
-		red -0.25
-		green -1
-		blue -1
+        red -0.25
+        green -1
+        blue -1
 }
-	
+    
 }
 
 //FIRE
@@ -160,8 +160,8 @@ Magic_Arrow_Ice
 Fireball
 {
     material Flare
-    particle_width 20
-    particle_height 20
+    particle_width 0.4
+    particle_height 0.4
     cull_each false
     quota 10000
     billboard_type point
@@ -173,8 +173,8 @@ Fireball
         emission_rate 275
         time_to_live 0.2
         direction 1 0 0
-        velocity_min 250
-        velocity_max 300
+        velocity_min 5.0
+        velocity_max 6.0
         colour_range_start 1 0 0
         colour_range_end 0.5 0.3 0
 }
@@ -191,8 +191,8 @@ Fireball
 HandFire
 {
     material Flare
-    particle_width 10
-    particle_height 10
+    particle_width 0.2
+    particle_height 0.2
     cull_each false
     quota 10000
     billboard_type point
@@ -204,8 +204,8 @@ HandFire
         emission_rate 275
         time_to_live 0.1
         direction 1 0 0
-        velocity_min 150
-        velocity_max 250
+        velocity_min 3.0
+        velocity_max 5.0
         colour_range_start 1 0 0
         colour_range_end 0.8 0.6 0
 }
@@ -215,8 +215,8 @@ HandFire
 FireLine
 {
     material Flare
-    particle_width 30
-    particle_height 30
+    particle_width 0.6
+    particle_height 0.6
     cull_each false
     quota 10000
     billboard_type point
@@ -227,8 +227,8 @@ FireLine
         emission_rate 450
         time_to_live 3.0
         direction 0 1 0
-        velocity_min 1
-        velocity_max 2
+        velocity_min 0.02
+        velocity_max 0.04
         colour_range_start 1 0 0
         colour_range_end 0.8 0.6 0
 }
@@ -237,8 +237,8 @@ FireLine
 Firebolt
 {
     material Flare
-    particle_width 20
-    particle_height 20
+    particle_width 0.4
+    particle_height 0.4
     cull_each false
     quota 10000
     billboard_type point
@@ -250,8 +250,8 @@ Firebolt
         emission_rate 275
         time_to_live 0.1
         direction 1 0 0
-        velocity_min 250
-        velocity_max 300
+        velocity_min 5.0
+        velocity_max 6.0
         colour_range_start 1 0 0
         colour_range_end 1 0.5 0
 }
@@ -260,8 +260,8 @@ Firebolt
 FireDown
 {
     material Flare
-    particle_width 20
-    particle_height 20
+    particle_width 0.4
+    particle_height 0.4
     cull_each false
     quota 10000
     billboard_type point
@@ -273,8 +273,8 @@ FireDown
         emission_rate 275
         time_to_live 0.2
         direction 0 -1 0
-        velocity_min 250
-        velocity_max 300
+        velocity_min 5.0
+        velocity_max 6.0
         colour_range_start 1 0 0
         colour_range_end 1 0.5 0
 }
@@ -284,9 +284,9 @@ FireDown
 Firering
 {
     material        Flare
-    particle_width  20
-    particle_height 20
-	cull_each       false
+    particle_width  0.4
+    particle_height 0.4
+    cull_each       false
     quota           10000
     billboard_type  point
     
@@ -297,12 +297,12 @@ Firering
         emission_rate   6000
         time_to_live    0.2
         direction       0 0 1
-        velocity    	0
+        velocity        0
         colour_range_start  1 0 0
         colour_range_end    0.5 0.5 0
-        width           50
-        height          50
-        depth           20
+        width           1.0
+        height          1.0
+        depth           0.4
 }
 
     // Make em float upwards
@@ -324,9 +324,9 @@ Firering
 Firewall
 {
     material        Flare
-    particle_width  30
-    particle_height 30
-	cull_each       false
+    particle_width  0.6
+    particle_height 0.6
+    cull_each       false
     quota           10000
     billboard_type  point
     
@@ -337,12 +337,12 @@ Firewall
         emission_rate   400
         time_to_live    5
         direction       0 1 0
-        velocity    	0
+        velocity        0
         colour_range_start  1 0 0
         colour_range_end    0.5 0.5 0
-        width           200
-        height          200
-        depth           60
+        width           4.0
+        height          4.0
+        depth           1.2
 }
 
     // Make em float upwards
@@ -366,9 +366,9 @@ Firewall
 Firewave
 {
     material        Flare
-    particle_width  70
-    particle_height 70
-	cull_each       false
+    particle_width  1.4
+    particle_height 1.4
+    cull_each       false
     quota           10000
     billboard_type  point
     
@@ -379,12 +379,12 @@ Firewave
         emission_rate   6000
         time_to_live    0.2
         direction       0 1 0
-        velocity    	0
+        velocity        0
         colour_range_start  1 0 0
         colour_range_end    0.5 0.5 0
-        width           100
-        height          100
-        depth           30
+        width           2.0
+        height          2.0
+        depth           0.6
 }
 
     // Make em float upwards
@@ -406,8 +406,8 @@ Firewave
 FireAura
 {
     material        Aureola
-    particle_width  300
-    particle_height 300
+    particle_width  6.0
+    particle_height 6.0
     cull_each       false
     quota           1
     billboard_type  perpendicular_common
@@ -420,15 +420,15 @@ FireAura
         angle           30
         emission_rate   1
         time_to_live    10
-        position        0 10 0
+        position        0.0 0.2 0.0
         direction       0 1 0
-        velocity_min  	30
-        velocity_max  	80
+        velocity_min      0.6
+        velocity_max      1.6
         colour_range_start  0.8 0.1 0.1 1
         colour_range_end    0.6 0.5 0.1 1
-        width           1
-        height          1
-        depth           1
+        width           0.02
+        height          0.02
+        depth           0.02
 }
 
     // Make em float upwards
@@ -466,8 +466,8 @@ FireAura
 Firetail
 {
     material Flare
-    particle_width 20
-    particle_height 20
+    particle_width 0.4
+    particle_height 0.4
     cull_each false
     quota 10000
     billboard_type point
@@ -479,8 +479,8 @@ Firetail
         emission_rate 2075
         time_to_live 0.2
         direction 1 0 0
-        velocity_min 250
-        velocity_max 300
+        velocity_min 5.0
+        velocity_max 6.0
         colour_range_start 1 0.3 0
         colour_range_end 0.5 0.3 0
 }
@@ -498,8 +498,8 @@ Firetail
 Firesphere
 {
     material Flare
-    particle_width 20
-    particle_height 20
+    particle_width 0.4
+    particle_height 0.4
     cull_each false
     quota 10000
     billboard_type point
@@ -511,8 +511,8 @@ Firesphere
         emission_rate 2075
         time_to_live 0.1
         direction 1 0 0
-        velocity_min 150
-        velocity_max 200
+        velocity_min 3.0
+        velocity_max 4.0
         colour_range_start 1 0.3 0
         colour_range_end 0.5 0.3 0
 }
@@ -529,9 +529,9 @@ Firesphere
 LichDeadColumn
 {
     material        Flare
-    particle_width  30
-    particle_height 30
-	cull_each       false
+    particle_width  0.6
+    particle_height 0.6
+    cull_each       false
     quota           10000
     billboard_type  point
     
@@ -542,12 +542,12 @@ LichDeadColumn
         emission_rate   400
         time_to_live    5
         direction       0 1 0
-        velocity    	0
+        velocity        0
         colour_range_start  1 0 0
         colour_range_end    0.5 0.5 0
-        width           100
-        height          100
-        depth           60
+        width           2.0
+        height          2.0
+        depth           1.2
 }
 
     // Make em float upwards
@@ -571,8 +571,8 @@ LichDeadColumn
 HandIce
 {
     material Flare
-    particle_width 10
-    particle_height 10
+    particle_width 0.2
+    particle_height 0.2
     cull_each false
     quota 10000
     billboard_type point
@@ -584,8 +584,8 @@ HandIce
         emission_rate 275
         time_to_live 0.1
         direction 1 0 0
-        velocity_min 150
-        velocity_max 250
+        velocity_min 3.0
+        velocity_max 5.0
         colour_range_start 0.6 0.6 1
         colour_range_end 0.2 0.2 0.6
 }
@@ -594,8 +594,8 @@ HandIce
 IceDown
 {
     material Flare
-    particle_width 20
-    particle_height 20
+    particle_width 0.4
+    particle_height 0.4
     cull_each false
     quota 10000
     billboard_type point
@@ -607,8 +607,8 @@ IceDown
         emission_rate 275
         time_to_live 0.2
         direction 0 -1 0
-        velocity_min 250
-        velocity_max 300
+        velocity_min 5.0
+        velocity_max 6.0
         colour_range_start 0.6 0.6 1
         colour_range_end 0.2 0.2 0.6
 }
@@ -617,8 +617,8 @@ IceDown
 IceLine
 {
     material Flare
-    particle_width 30
-    particle_height 30
+    particle_width 0.6
+    particle_height 0.6
     cull_each false
     quota 10000
     billboard_type point
@@ -630,8 +630,8 @@ IceLine
         emission_rate 450
         time_to_live 3.0
         direction 1 1 1
-        velocity_min 1
-        velocity_max 2
+        velocity_min 0.02
+        velocity_max 0.04
         colour_range_start 0.6 0.6 1
         colour_range_end 0.2 0.2 0.6
 }
@@ -640,8 +640,8 @@ IceLine
 Icebolt
 {
     material Flare
-    particle_width 20
-    particle_height 20
+    particle_width 0.4
+    particle_height 0.4
     cull_each false
     quota 10000
     billboard_type point
@@ -653,8 +653,8 @@ Icebolt
         emission_rate 275
         time_to_live 0.1
         direction 1 0 0
-        velocity_min 250
-        velocity_max 300
+        velocity_min 5.0
+        velocity_max 6.0
         colour_range_start 0.6 0.6 1
         colour_range_end 0.2 0.2 0.6
 }
@@ -663,9 +663,9 @@ Icebolt
 Blizzard
 {
     material        Flare
-    particle_width  40
-    particle_height 40
-	cull_each       false
+    particle_width  0.8
+    particle_height 0.8
+    cull_each       false
     quota           5000
     billboard_type  point
     
@@ -676,12 +676,12 @@ Blizzard
         emission_rate   600
         time_to_live    1.5
         direction       0 -1 0
-        velocity    	50
+        velocity        50
         colour_range_start  0.6 0.6 1
         colour_range_end    0.2 0.2 0.6
-        width           300
-        height          300
-        depth           30
+        width           6.0
+        height          6.0
+        depth           0.6
 }
 
     // Make em float upwards
@@ -703,9 +703,9 @@ Blizzard
 Icering
 {
     material        Flare
-    particle_width  40
-    particle_height 40
-	cull_each       false
+    particle_width  0.8
+    particle_height 0.8
+    cull_each       false
     quota           10000
     billboard_type  point
     
@@ -716,12 +716,12 @@ Icering
         emission_rate   6000
         time_to_live    0.2
         direction       0 1 0
-        velocity    	0
+        velocity        0
         colour_range_start  0.6 0.6 1
         colour_range_end    0.2 0.2 0.6
-        width           100
-        height          100
-        depth           30
+        width           2.0
+        height          2.0
+        depth           0.6
 }
 
     // Make em float upwards
@@ -743,8 +743,8 @@ Icering
 Freeze
 {
     material        Aureola
-    particle_width  200
-    particle_height 200
+    particle_width  4.0
+    particle_height 4.0
     cull_each       false
     quota           100
     billboard_type  perpendicular_common
@@ -757,24 +757,24 @@ Freeze
         angle           30
         emission_rate   4
         time_to_live    5
-        position        0 -100 0
+        position        0.0 -2.0 0.0
         direction       0 1 0
-        velocity_min  	0
-        velocity_max  	30
+        velocity_min      0.0
+        velocity_max      0.6
         colour_range_start  0.3 0.3 0.3 0.0
         colour_range_end    0.8 0.8 0.8 0.0
-        width           10
-        height          10
-        depth           30
+        width           0.2
+        height          0.2
+        depth           0.6
 }
 }
 
 Frostwave
 {
     material        Flare
-    particle_width  70
-    particle_height 70
-	cull_each       false
+    particle_width  1.4
+    particle_height 1.4
+    cull_each       false
     quota           10000
     billboard_type  point
     
@@ -785,12 +785,12 @@ Frostwave
         emission_rate   6000
         time_to_live    0.2
         direction       0 1 0
-        velocity    	0
+        velocity        0
         colour_range_start  0.6 0.6 1
         colour_range_end    0.2 0.2 0.6
-        width           100
-        height          100
-        depth           30
+        width           2.0
+        height          2.0
+        depth           0.6
 }
 
     // Make em float upwards
@@ -815,11 +815,11 @@ Frostwave
 Lightning
 {
     material Lightning
-    particle_width 50
-    particle_height 300
+    particle_width 1.0
+    particle_height 6.0
     cull_each false
     quota 4000
-	billboard_type  oriented_common
+    billboard_type  oriented_common
     common_direction 0 1 0
  
 
@@ -829,8 +829,8 @@ Lightning
         emission_rate 10
         time_to_live 4
         direction 1 0 0
-        velocity_min 0
-        velocity_max 0
+        velocity_min 0.0
+        velocity_max 0.0
         colour_range_start 0.9 0.9 0.99 
         colour_range_end 0.6 0.6 1
 }
@@ -839,8 +839,8 @@ Lightning
 HandLightning
 {
     material Flare
-    particle_width 10
-    particle_height 10
+    particle_width 0.2
+    particle_height 0.2
     cull_each false
     quota 10000
     billboard_type point
@@ -852,9 +852,9 @@ HandLightning
         emission_rate 275
         time_to_live 0.1
         direction 1 0 0
-        velocity_min 150
-        velocity_max 250       
-		colour_range_start 0.9 0.9 0.99 
+        velocity_min 3.0
+        velocity_max 5.0       
+        colour_range_start 0.9 0.9 0.99 
         colour_range_end 0.5 0.5 0
 }
 }
@@ -863,8 +863,8 @@ HandLightning
 LightningLine
 {
     material Flare
-    particle_width 30
-    particle_height 30
+    particle_width 0.6
+    particle_height 0.6
     cull_each false
     quota 10000
     billboard_type point
@@ -876,8 +876,8 @@ LightningLine
         emission_rate 450
         time_to_live 3.0
         direction 1 1 1
-        velocity_min 1
-        velocity_max 2
+        velocity_min 0.02
+        velocity_max 0.04
         colour_range_start 0.9 0.9 0.99
         colour_range_end 0.5 0.5 0
 }
@@ -886,8 +886,8 @@ LightningLine
 Thunderstorm
 {
     material        Droplet
-    particle_width  20
-    particle_height 100
+    particle_width  0.4
+    particle_height 2.0
     cull_each       true
     quota           10000
     // Make common direction straight down (faster than self oriented)
@@ -901,12 +901,12 @@ Thunderstorm
         emission_rate   100
         time_to_live    5
         direction       0 -10 0
-        velocity    	100
+        velocity        100
         colour_range_start  0.3 1 0.3
         colour_range_end    0.7 1 0.7
-        width           1000
-        height          1000
-        depth           0
+        width           20.0
+        height          20.0
+        depth           0.0
 }
 
     // Gravity
@@ -920,8 +920,8 @@ Thunderstorm
 Chainlightning
 {
     material Flare
-    particle_width 20
-    particle_height 20
+    particle_width 0.4
+    particle_height 0.4
     cull_each false
     quota 10000
     billboard_type point
@@ -933,21 +933,21 @@ Chainlightning
         emission_rate 600
         time_to_live 0.01
         direction 0 1 0
-        velocity_min 250
-        velocity_max 300
+        velocity_min 5.0
+        velocity_max 6.0
         colour_range_start 0.9 0.9 0.99 
         colour_range_end 0.5 0.5 0
-		height 30
-		width 30
-		depth 30
+        height 0.6
+        width 0.6
+        depth 0.6
 }
 }
 
 Static_Shield
 {
     material Flare
-    particle_width 20
-    particle_height 20
+    particle_width 0.4
+    particle_height 0.4
     cull_each false
     quota 10000
     billboard_type point
@@ -959,13 +959,13 @@ Static_Shield
         emission_rate 275
         time_to_live 0.2
         direction 1 0 0
-        velocity_min 250
-        velocity_max 300
+        velocity_min 5.0
+        velocity_max 6.0
         colour_range_start 0.9 0.9 0.99 
         colour_range_end 0.6 0.6 1
-        width           120
-        height          120
-        depth           0
+        width           2.4
+        height          2.4
+        depth           0.0
 }
 }
 
@@ -973,9 +973,9 @@ Static_Shield
 EarthAura
 {
     material        flareAlpha
-    particle_width  30
-    particle_height 30
-	cull_each       false
+    particle_width  0.6
+    particle_height 0.6
+    cull_each       false
     quota           10000
     billboard_type  point
     
@@ -986,12 +986,12 @@ EarthAura
         emission_rate   400
         time_to_live    3
         direction       0 1 0
-        velocity    	0
-		colour_range_start 1 0.7 0.4
+        velocity        0
+        colour_range_start 1 0.7 0.4
         colour_range_end 0.9 0.7 0.3
-        width           90
-        height          90
-        depth           60
+        width           1.8
+        height          1.8
+        depth           1.2
 }
 
     // Make em float upwards
@@ -1017,8 +1017,8 @@ EarthAura
 Fire_Arrow
 {
     material Flare
-    particle_width 20
-    particle_height 20
+    particle_width 0.4
+    particle_height 0.4
     cull_each false
     quota 10000
     billboard_type point
@@ -1030,8 +1030,8 @@ Fire_Arrow
         emission_rate 275
         time_to_live 0.1
         direction 1 0 0
-        velocity_min 250
-        velocity_max 300
+        velocity_min 5.0
+        velocity_max 6.0
         colour_range_start 1 0 0
         colour_range_end 1 0.5 0
 }
@@ -1040,8 +1040,8 @@ Fire_Arrow
 Ice_Arrow
 {
     material Flare
-    particle_width 20
-    particle_height 20
+    particle_width 0.4
+    particle_height 0.4
     cull_each false
     quota 10000
     billboard_type point
@@ -1053,8 +1053,8 @@ Ice_Arrow
         emission_rate 275
         time_to_live 0.2
         direction 1 0 0
-        velocity_min 250
-        velocity_max 300
+        velocity_min 5.0
+        velocity_max 6.0
         colour_range_start 0.6 0.6 1
         colour_range_end 0.2 0.2 0.6
 }
@@ -1063,8 +1063,8 @@ Ice_Arrow
 Wind_Arrow
 {
     material Flare
-    particle_width 20
-    particle_height 20
+    particle_width 0.4
+    particle_height 0.4
     cull_each false
     quota 10000
     billboard_type point
@@ -1076,8 +1076,8 @@ Wind_Arrow
         emission_rate 275
         time_to_live 0.2
         direction 1 0 0
-        velocity_min 250
-        velocity_max 300
+        velocity_min 5.0
+        velocity_max 6.0
         colour_range_start 1 1 0.1 
         colour_range_end 0.5 0.5 0
 }
@@ -1086,8 +1086,8 @@ Wind_Arrow
 Guided_Arrow
 {
     material Flare
-    particle_width 20
-    particle_height 20
+    particle_width 0.4
+    particle_height 0.4
     cull_each false
     quota 10000
     billboard_type point
@@ -1099,8 +1099,8 @@ Guided_Arrow
         emission_rate 275
         time_to_live 0.02
         direction 1 0 0
-        velocity_min 250
-        velocity_max 300
+        velocity_min 5.0
+        velocity_max 6.0
         colour_range_start 1 0 1
         colour_range_end 1 0 1
 }
@@ -1109,9 +1109,9 @@ Guided_Arrow
 Explosion
 {
     material        Flare
-    particle_width  70
-    particle_height 70
-	cull_each       false
+    particle_width  1.4
+    particle_height 1.4
+    cull_each       false
     quota           3000
     billboard_type  point
     
@@ -1122,12 +1122,12 @@ Explosion
         emission_rate   600
         time_to_live    0.2
         direction       0 1 0
-        velocity    	10
+        velocity        10
         colour_range_start  1 0 0
         colour_range_end    0.5 0.5 0
-        width           200
-        height          200
-        depth           160
+        width           4.0
+        height          4.0
+        depth           3.2
 
 }
 
@@ -1150,9 +1150,9 @@ Explosion
 Fire_Explosion
 {
     material        Flare
-    particle_width  70
-    particle_height 70
-	cull_each       false
+    particle_width  1.4
+    particle_height 1.4
+    cull_each       false
     quota           3000
     billboard_type  point
     
@@ -1163,12 +1163,12 @@ Fire_Explosion
         emission_rate   600
         time_to_live    0.2
         direction       0 1 0
-        velocity    	10
+        velocity        10
         colour_range_start  1 0 0
         colour_range_end    0.5 0.5 0
-        width           200
-        height          200
-        depth           160
+        width           4.0
+        height          4.0
+        depth           3.2
 
 }
 
@@ -1191,8 +1191,8 @@ Fire_Explosion
 Ice_Explosion
 {
     material Flare
-    particle_width 70
-    particle_height 70
+    particle_width 1.4
+    particle_height 1.4
     cull_each false
     quota 3000
     billboard_type point
@@ -1203,20 +1203,20 @@ Ice_Explosion
         emission_rate   600
         time_to_live    0.2
         direction       0 1 0
-        velocity    	10
+        velocity        10
         colour_range_start 0.6 0.6 1
         colour_range_end 0.2 0.2 0.6
-        width           200
-        height          200
-        depth           160
+        width           4.0
+        height          4.0
+        depth           3.2
 }
 }
 
 Wind_Explosion
 {
     material Flare
-    particle_width 70
-    particle_height 70
+    particle_width 1.4
+    particle_height 1.4
     cull_each false
     quota 3000
     billboard_type point
@@ -1227,20 +1227,20 @@ Wind_Explosion
         emission_rate   600
         time_to_live    0.2
         direction       0 1 0
-        velocity    	10
+        velocity        10
         colour_range_start 1 1 0.1 
         colour_range_end 0.5 0.5 0
-        width           200
-        height          200
-        depth           160
+        width           4.0
+        height          4.0
+        depth           3.2
 }
 }
 
 BowBuff
 {
     material        Flare
-    particle_width  15
-    particle_height 15
+    particle_width  0.3
+    particle_height 0.3
     cull_each       false
     quota           10000
     billboard_type  point
@@ -1251,15 +1251,15 @@ BowBuff
         angle           15
         emission_rate   20
         time_to_live    2
-        position        0 0 40
+        position        0.0 0.0 0.8
         direction       0 -1 0
-        velocity_min  	15
-        velocity_max  	20
+        velocity_min      0.3
+        velocity_max      0.4
         colour_range_start  0.3 0.3 0.3 0.0
         colour_range_end    0.8 0.8 0.8 0.0
-        width           10
-        height          10
-        depth           10
+        width           0.2
+        height          0.2
+        depth           0.2
 }
 
     // Fader
@@ -1284,8 +1284,8 @@ BowBuff
 Lightbeam
 {
     material Flare
-    particle_width 20
-    particle_height 20
+    particle_width 0.4
+    particle_height 0.4
     cull_each false
     quota 10000
     billboard_type point
@@ -1297,8 +1297,8 @@ Lightbeam
         emission_rate 275
         time_to_live 0.2
         direction 1 0 0
-        velocity_min 250
-        velocity_max 300
+        velocity_min 5.0
+        velocity_max 6.0
         colour_range_start 1 1 1
         colour_range_end 1 1 1
 }
@@ -1307,8 +1307,8 @@ Lightbeam
 ElemExplosion
 {
     material Flare
-    particle_width 20
-    particle_height 20
+    particle_width 0.4
+    particle_height 0.4
     cull_each false
     quota 10000
     billboard_type point
@@ -1320,8 +1320,8 @@ ElemExplosion
         emission_rate 275
         time_to_live 0.2
         direction 1 0 0
-        velocity_min 250
-        velocity_max 300
+        velocity_min 5.0
+        velocity_max 6.0
         colour_range_start 1 0 0
         colour_range_end 1 0 0
 }
@@ -1330,8 +1330,8 @@ ElemExplosion
 Acid
 {
     material Flare
-    particle_width 20
-    particle_height 20
+    particle_width 0.4
+    particle_height 0.4
     cull_each false
     quota 10000
     billboard_type point
@@ -1343,8 +1343,8 @@ Acid
         emission_rate 275
         time_to_live 0.2
         direction 1 0 0
-        velocity_min 250
-        velocity_max 300
+        velocity_min 5.0
+        velocity_max 6.0
         colour_range_start 0 1 0
         colour_range_end 0.7 0.9 0
 }
@@ -1353,8 +1353,8 @@ Acid
 Divine_Beam
 {
     material Flare
-    particle_width 20
-    particle_height 20
+    particle_width 0.4
+    particle_height 0.4
     cull_each false
     quota 10000
     billboard_type point
@@ -1366,8 +1366,8 @@ Divine_Beam
         emission_rate 275
         time_to_live 0.2
         direction 1 0 0
-        velocity_min 250
-        velocity_max 300
+        velocity_min 5.0
+        velocity_max 6.0
         colour_range_start 1 1 1
         colour_range_end 1 1 1
 }
@@ -1376,8 +1376,8 @@ Divine_Beam
 Hypnosis
 {
     material Flare
-    particle_width 20
-    particle_height 20
+    particle_width 0.4
+    particle_height 0.4
     cull_each false
     quota 10000
     billboard_type point
@@ -1389,8 +1389,8 @@ Hypnosis
         emission_rate 275
         time_to_live 0.2
         direction 1 0 0
-        velocity_min 250
-        velocity_max 300
+        velocity_min 5.0
+        velocity_max 6.0
         colour_range_start 1 0 1
         colour_range_end 0.9 0 0.6
 }
@@ -1399,8 +1399,8 @@ Hypnosis
 CastCureBurn
 {
     material Flare
-    particle_width 20
-    particle_height 20
+    particle_width 0.4
+    particle_height 0.4
     cull_each false
     quota 10000
     billboard_type point
@@ -1412,8 +1412,8 @@ CastCureBurn
         emission_rate 275
         time_to_live 2
         direction 1 0 0
-        velocity_min 15
-        velocity_max 20
+        velocity_min 0.3
+        velocity_max 0.4
         colour_range_start 0.2 0 0
         colour_range_end 0.2 0.2 0
 }
@@ -1422,8 +1422,8 @@ CastCureBurn
 CastCureBurnParty
 {
     material Flare
-    particle_width 20
-    particle_height 20
+    particle_width 0.4
+    particle_height 0.4
     cull_each false
     quota 10000
     billboard_type point
@@ -1435,8 +1435,8 @@ CastCureBurnParty
         emission_rate 2000
         time_to_live 4
         direction 0 1 0
-        velocity_min 40
-        velocity_max 60
+        velocity_min 0.8
+        velocity_max 1.2
         colour_range_start 0.2 0 0
         colour_range_end 0.2 0.2 0
 }
@@ -1451,8 +1451,8 @@ CastCureBurnParty
 AntiBurnLine
 {
     material Flare
-    particle_width 20
-    particle_height 20
+    particle_width 0.4
+    particle_height 0.4
     cull_each false
     quota 10000
     billboard_type point
@@ -1464,8 +1464,8 @@ AntiBurnLine
         emission_rate 275
         time_to_live 2
         direction 1 0 0
-        velocity_min 3
-        velocity_max 5
+        velocity_min 0.06
+        velocity_max 0.1
         colour_range_start 0.2 0 0
         colour_range_end 0.2 0.2 0
 }
@@ -1474,8 +1474,8 @@ AntiBurnLine
 CastHeal
 {
     material Flare
-    particle_width 20
-    particle_height 20
+    particle_width 0.4
+    particle_height 0.4
     cull_each false
     quota 10000
     billboard_type point
@@ -1487,8 +1487,8 @@ CastHeal
         emission_rate 275
         time_to_live 2
         direction 1 0 0
-        velocity_min 15
-        velocity_max 20
+        velocity_min 0.3
+        velocity_max 0.4
         colour_range_start 0 0.3 0
         colour_range_end 0.1 0.2 0
 }
@@ -1497,8 +1497,8 @@ CastHeal
 CastHealParty
 {
     material Flare
-    particle_width 20
-    particle_height 20
+    particle_width 0.4
+    particle_height 0.4
     cull_each false
     quota 10000
     billboard_type point
@@ -1510,8 +1510,8 @@ CastHealParty
         emission_rate 2000
         time_to_live 4
         direction 0 1 0
-        velocity_min 40
-        velocity_max 60
+        velocity_min 0.8
+        velocity_max 1.2
         colour_range_start 0 0.3 0
         colour_range_end 0.1 0.2 0
 }
@@ -1526,8 +1526,8 @@ CastHealParty
 HealingLine
 {
     material Flare
-    particle_width 20
-    particle_height 20
+    particle_width 0.4
+    particle_height 0.4
     cull_each false
     quota 10000
     billboard_type point
@@ -1539,8 +1539,8 @@ HealingLine
         emission_rate 275
         time_to_live 2
         direction 1 0 0
-        velocity_min 3
-        velocity_max 5
+        velocity_min 0.06
+        velocity_max 0.1
         colour_range_start 0 0.3 0
         colour_range_end 0.1 0.2 0
 }
@@ -1549,8 +1549,8 @@ HealingLine
 CastAcid
 {
     material Flare
-    particle_width 20
-    particle_height 20
+    particle_width 0.4
+    particle_height 0.4
     cull_each false
     quota 10000
     billboard_type point
@@ -1562,8 +1562,8 @@ CastAcid
         emission_rate 275
         time_to_live 2
         direction 1 0 0
-        velocity_min 15
-        velocity_max 20
+        velocity_min 0.3
+        velocity_max 0.4
         colour_range_start 0 0.3 0
         colour_range_end 0 0.2 0.1
 }
@@ -1572,8 +1572,8 @@ CastAcid
 CastBlind
 {
     material Flare
-    particle_width 20
-    particle_height 20
+    particle_width 0.4
+    particle_height 0.4
     cull_each false
     quota 10000
     billboard_type point
@@ -1585,8 +1585,8 @@ CastBlind
         emission_rate 275
         time_to_live 2
         direction 1 0 0
-        velocity_min 15
-        velocity_max 20
+        velocity_min 0.3
+        velocity_max 0.4
         colour_range_start 0.2 0.2 0.2
         colour_range_end 0.2 0.2 0.2
 }

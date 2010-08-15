@@ -241,7 +241,7 @@ class GraphicManager
 		static std::string m_filename;
 		
 	public:
-		static const double g_global_scale = 50;
+		static const double g_global_scale =1;
 };
 
 #endif

@@ -366,11 +366,12 @@ void GraphicObject::addMovableObject(MovableObjectInfo& object)
 	{
 		// FIXME: This factor is used to temporarily scale down meshes until they are exported with reduced size
 		double factor = 1;
+		/*
 		if (object.m_bone == "" && object.m_type != MovableObjectInfo::SUBOBJECT)
 		{
 			factor = GraphicManager::g_global_scale/50;
 		}
-		
+		*/
 		node->setPosition(object.m_position*GraphicManager::g_global_scale);
 		node->setOrientation(1,0,0,0);
 		node->pitch(Ogre::Degree(object.m_rotation[0]));

@@ -2,9 +2,9 @@
 FirewallBlock
 {
     material        Flare
-    particle_width  30
-    particle_height 30
-	cull_each       false
+    particle_width  0.6
+    particle_height 0.6
+    cull_each       false
     quota           10000
     billboard_type  point
     
@@ -15,12 +15,12 @@ FirewallBlock
         emission_rate   400
         time_to_live    5
         direction       0 1 0
-        velocity    	0
+        velocity        0
         colour_range_start  1 0 0
         colour_range_end    0.5 0.5 0
-        width           50
-        height          200
-        depth           60
+        width           1.0
+        height          4.0
+        depth           1.2
 }
 
     // Make em float upwards
@@ -42,10 +42,10 @@ FirewallBlock
 FireCage
 {
     material        Flare
-    particle_width  20
-    particle_height 20
-	cull_each       false
-    quota          	3000
+    particle_width  0.4
+    particle_height 0.4
+    cull_each       false
+    quota              3000
     billboard_type  point
     
     // Area emitter
@@ -55,12 +55,12 @@ FireCage
         emission_rate   1500
         time_to_live    1.5
         direction       0 1 0
-        velocity    	0
+        velocity        0
         colour_range_start  1 0 0
         colour_range_end    0.5 0.5 0
-        width           150
-        height          150
-        depth           20
+        width           3.0
+        height          3.0
+        depth           0.4
 }
 
     // Make em float upwards
@@ -83,9 +83,9 @@ FireCage
 Bomb
 {
     material        Flare
-    particle_width  30
-    particle_height 30
-	cull_each       false
+    particle_width  0.6
+    particle_height 0.6
+    cull_each       false
     quota           3000
     billboard_type  point
     
@@ -96,12 +96,12 @@ Bomb
         emission_rate   400
         time_to_live    0.5
         direction       0 1 0
-        velocity    	0
+        velocity        0
         colour_range_start  1 0 0
         colour_range_end    0.5 0.5 0
-        width           200
-        height          200
-        depth           60
+        width           4.0
+        height          4.0
+        depth           1.2
 }
 
     // Make em float upwards
@@ -127,8 +127,8 @@ Bomb
 CampFire
 {
     material Flare
-    particle_width 20
-    particle_height 20
+    particle_width 0.4
+    particle_height 0.4
     cull_each false
     quota 500
     billboard_type point
@@ -140,8 +140,8 @@ CampFire
         emission_rate 150
         time_to_live 0.2
         direction 0 1 0
-        velocity_min 75
-        velocity_max 150
+        velocity_min 1.5
+        velocity_max 3.0
         colour_range_start 0.6 0 0
         colour_range_end 0.6 0.3 0
 }
@@ -150,9 +150,9 @@ CampFire
 CampFireBase
 {
     material        Flare
-    particle_width  15
-    particle_height 15
-	cull_each       false
+    particle_width  0.3
+    particle_height 0.3
+    cull_each       false
     quota           1000
     billboard_type  point
     
@@ -163,12 +163,12 @@ CampFireBase
         emission_rate   200
         time_to_live    0.1
         direction       0 1 0
-        velocity    	30
+        velocity        30
         colour_range_start  0.9 0 0
         colour_range_end    0.6 0.3 0
-        width           50
-        height          50
-        depth           15
+        width           1.0
+        height          1.0
+        depth           0.3
 }
 
     // Fader
@@ -185,9 +185,9 @@ CampFireBase
 Smoke
 {
     material        smoke
-    particle_width  50
-    particle_height 50
-	cull_each       false
+    particle_width  1.0
+    particle_height 1.0
+    cull_each       false
     quota           10000
     billboard_type  point
     
@@ -198,11 +198,11 @@ Smoke
         emission_rate   300
         time_to_live    2
         direction       0 -1 0
-        velocity    	100
+        velocity        100
         colour_range_start  1 1 1 0.2
-        width           200
-        height          200
-        depth           20
+        width           4.0
+        height          4.0
+        depth           0.4
 }
 
     // Fader
@@ -217,9 +217,9 @@ Smoke
 Smoke_Explosion
 {
     material        smoke
-    particle_width  50
-    particle_height 50
-	cull_each       false
+    particle_width  1.0
+    particle_height 1.0
+    cull_each       false
     quota           3000
     billboard_type  point
     
@@ -230,11 +230,11 @@ Smoke_Explosion
         emission_rate   600
         time_to_live    0.2
         direction       0 1 0
-        velocity    	10
+        velocity        10
         colour_range_start  1  1 1 0.2
-        width           200
-        height          200
-        depth           160
+        width           4.0
+        height          4.0
+        depth           3.2
 
 }
 
@@ -258,9 +258,9 @@ Smoke_Explosion
 Smoke_Cube
 {
     material        smoke
-    particle_width  50
-    particle_height 50
-	cull_each       false
+    particle_width  1.0
+    particle_height 1.0
+    cull_each       false
     quota           3000
     billboard_type  point
     
@@ -271,11 +271,11 @@ Smoke_Cube
         emission_rate   600
         time_to_live    0.4
         direction       0 1 0
-        velocity    	10
+        velocity        10
         colour_range_start  1  1 1 0.2
-        width           200
-        height          400
-        depth           100
+        width           4.0
+        height          8.0
+        depth           2.0
 
 }
 
@@ -298,8 +298,8 @@ Smoke_Cube
 EarthGeysir
 {
     material flareAlpha
-    particle_width 20
-    particle_height 20
+    particle_width 0.4
+    particle_height 0.4
     cull_each false
     quota 5000
     billboard_type point
@@ -310,15 +310,15 @@ EarthGeysir
         angle 45
         emission_rate 1000
         time_to_live 40
-        position	0 50 0
+        position    0.0 1.0 0.0
         direction 0 1 0
-        velocity_min 150
-        velocity_max 200
+        velocity_min 3.0
+        velocity_max 4.0
         colour_range_start 1 0.7 0.4
         colour_range_end 0.9 0.7 0.3
-		width           200
-        height          200
-        depth           40
+        width           4.0
+        height          4.0
+        depth           0.8
 }
 
 
@@ -335,8 +335,8 @@ EarthGeysir
 EarthGush
 {
     material flareAlpha
-    particle_width 20
-    particle_height 20
+    particle_width 0.4
+    particle_height 0.4
     cull_each false
     quota 500
     billboard_type point
@@ -347,15 +347,15 @@ EarthGush
         angle 45
         emission_rate 300
         time_to_live 40
-        position	0 10 0
+        position    0.0 0.2 0.0
         direction 0 1 0
-        velocity_min 50
-        velocity_max 120
+        velocity_min 1.0
+        velocity_max 2.4
         colour_range_start 1 0.7 0.4
         colour_range_end 0.9 0.7 0.3
-		width           50
-        height          50
-        depth           40
+        width           1.0
+        height          1.0
+        depth           0.8
 }
 
 

@@ -94,7 +94,7 @@ void RakServerNetwork::update()
 		}
 		else
 		{
-
+			DEBUGX("received packet %i",id);
 			if (slot != NOSLOT)
 			{
 				// create a new NetPacket from the Raknet packet

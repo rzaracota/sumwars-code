@@ -2,8 +2,8 @@
 SlugSpit
 {
     material Flare
-    particle_width 20
-    particle_height 20
+    particle_width 0.4
+    particle_height 0.4
     cull_each false
     quota 10000
     billboard_type point
@@ -15,8 +15,8 @@ SlugSpit
         emission_rate 275
         time_to_live 0.3
         direction 0 0 -1
-        velocity_min 250
-        velocity_max 300
+        velocity_min 5.0
+        velocity_max 6.0
         colour_range_start 0.3 0 0
         colour_range_end 0.3 0.1 0
 }
@@ -39,8 +39,8 @@ SlugSpit
 GoblinBuffIce
 {
     material        Flare
-    particle_width  15
-    particle_height 15
+    particle_width  0.3
+    particle_height 0.3
     cull_each       false
     quota           200
     billboard_type  point
@@ -51,15 +51,15 @@ GoblinBuffIce
         angle           15
         emission_rate   80
         time_to_live    0.05
-        position        -30 60 30
+        position        -0.6 1.2 0.6
         direction       0 -1 0
-        velocity_min  	15
-        velocity_max  	20
+        velocity_min      0.3
+        velocity_max      0.4
         colour_range_start  0 0.4 0.8 0.0
         colour_range_end    0.2 0.5 0.8 0.0
-        width           10
-        height          10
-        depth           10
+        width           0.2
+        height          0.2
+        depth           0.2
 }
 
     // Fader
@@ -82,8 +82,8 @@ GoblinBuffIce
 GoblinBuffFire
 {
     material        Flare
-    particle_width  15
-    particle_height 15
+    particle_width  0.3
+    particle_height 0.3
     cull_each       false
     quota           200
     billboard_type  point
@@ -94,15 +94,15 @@ GoblinBuffFire
         angle           15
         emission_rate   80
         time_to_live    0.05
-        position        -30 60 -30
+        position        -0.6 1.2 -0.6
         direction       0 -1 0
-        velocity_min  	15
-        velocity_max  	20
-        colour_range_start	1 0 0
-        colour_range_end 	0.5 0.3 0
-        width           10
-        height          10
-        depth           10
+        velocity_min      0.3
+        velocity_max      0.4
+        colour_range_start    1 0 0
+        colour_range_end     0.5 0.3 0
+        width           0.2
+        height          0.2
+        depth           0.2
 }
 
     // Fader
@@ -125,8 +125,8 @@ GoblinBuffFire
 GoblinBuffAir
 {
     material        Flare
-    particle_width  15
-    particle_height 15
+    particle_width  0.3
+    particle_height 0.3
     cull_each       false
     quota           200
     billboard_type  point
@@ -137,15 +137,15 @@ GoblinBuffAir
         angle           15
         emission_rate   80
         time_to_live    0.05
-        position        30 60 0
+        position        0.6 1.2 0.0
         direction       0 -1 0
-        velocity_min  	15
-        velocity_max  	20
-		colour_range_start	0.9 0.9 0.99 
-        colour_range_end	0.6 0.6 1
-        width           10
-        height          10
-        depth           10
+        velocity_min      0.3
+        velocity_max      0.4
+        colour_range_start    0.9 0.9 0.99 
+        colour_range_end    0.6 0.6 1
+        width           0.2
+        height          0.2
+        depth           0.2
 }
 
     // Fader
@@ -168,8 +168,8 @@ GoblinBuffAir
 GoblinFreeze
 {
     material        Flare
-    particle_width  15
-    particle_height 15
+    particle_width  0.3
+    particle_height 0.3
     cull_each       false
     quota           10000
     billboard_type  point
@@ -180,50 +180,50 @@ GoblinFreeze
         angle           15
         emission_rate   20
         time_to_live    0.2
-        position        0 0 50
+        position        0.0 0.0 1.0
         direction       0 -1 0
-        velocity_min  	15
-        velocity_max  	20
-        colour_range_start	0.6 0.6 1
-        colour_range_end	0.2 0.2 0.6
-        width           10
-        height          10
-        depth           10
+        velocity_min      0.3
+        velocity_max      0.4
+        colour_range_start    0.6 0.6 1
+        colour_range_end    0.2 0.2 0.6
+        width           0.2
+        height          0.2
+        depth           0.2
 }
 }
 
 //shadow-magic Particlesp
 Magic_Arrow_Shadow
 {
-	material 		flareAlpha
-	particle_width 	40
-	particle_height	40
-	cull_each		false
-	quota			300
-	billboard_type	point
+    material         flareAlpha
+    particle_width     0.8
+    particle_height    0.8
+    cull_each        false
+    quota            300
+    billboard_type    point
 
-	emitter Ellipsoid
+    emitter Ellipsoid
 {
-		angle 5
-		emission_rate 200
+        angle 5
+        emission_rate 200
         time_to_live    0.05
         direction       0 1 0
-        velocity_min    10
-        velocity_max    30
+        velocity_min    0.2
+        velocity_max    0.6
         colour_range_start  0 0 0
-		colour_range_end  0 0 0 0.2
-		width  20
-		height 20
-		depth 20
+        colour_range_end  0 0 0 0.2
+        width  0.4
+        height 0.4
+        depth 0.4
 }
 }
 
 Black_Smoke
 {
     material        smoke
-    particle_width  80
-    particle_height 80
-	cull_each       false
+    particle_width  1.6
+    particle_height 1.6
+    cull_each       false
     quota           3000
     billboard_type  point
     
@@ -234,12 +234,12 @@ Black_Smoke
         emission_rate   600
         time_to_live    0.2
         direction       0 1 0
-        velocity    	10
+        velocity        10
         colour_range_start 0 0 0 
         colour_range_end 0 0 0 0.2
-        width           450
-        height          450
-        depth           160
+        width           9.0
+        height          9.0
+        depth           3.2
 
 }
 
@@ -262,8 +262,8 @@ Black_Smoke
 MonsterBuffShadowFront
 {
     material        flareAlpha
-    particle_width  35
-    particle_height 35
+    particle_width  0.7
+    particle_height 0.7
     cull_each       false
     quota           200
     billboard_type  point
@@ -274,47 +274,47 @@ MonsterBuffShadowFront
         angle           360
         emission_rate   4000
         time_to_live    0.007
-        position        30 60 0
+        position        0.6 1.2 0.0
         direction       0 -1 0
-        velocity_min  	30
-        velocity_max  	50
-		colour_range_start	0 0 0 
-        colour_range_end	0.2 0.2 0.2 0.2
-        width           10
-        height          10
-        depth           10
+        velocity_min      0.6
+        velocity_max      1.0
+        colour_range_start    0 0 0 
+        colour_range_end    0.2 0.2 0.2 0.2
+        width           0.2
+        height          0.2
+        depth           0.2
 }
     //BackLeft
-	emitter Point
+    emitter Point
 {
         angle           15
         emission_rate   4000
         time_to_live    0.007
-        position        -30 60 -30
+        position        -0.6 1.2 -0.6
         direction       0 -1 0
-        velocity_min  	30
-        velocity_max  	50
-		colour_range_start	0 0 0 
-        colour_range_end	0.2 0.2 0.2 0.2
-        width           10
-        height          10
-        depth           10
+        velocity_min      0.6
+        velocity_max      1.0
+        colour_range_start    0 0 0 
+        colour_range_end    0.2 0.2 0.2 0.2
+        width           0.2
+        height          0.2
+        depth           0.2
 }
     //BackRight
-	emitter Point
+    emitter Point
 {
         angle           15
         emission_rate   4000
         time_to_live    0.007
-        position        -30 60 30
+        position        -0.6 1.2 0.6
         direction       0 -1 0
-        velocity_min  	30
-        velocity_max  	50
-		colour_range_start	0 0 0 
-        colour_range_end	0.2 0.2 0.2 0.2
-        width           10
-        height          10
-        depth           10
+        velocity_min      0.6
+        velocity_max      1.0
+        colour_range_start    0 0 0 
+        colour_range_end    0.2 0.2 0.2 0.2
+        width           0.2
+        height          0.2
+        depth           0.2
 }
 
     // Fader
@@ -337,8 +337,8 @@ MonsterBuffShadowFront
 ShadowLine
 {
     material smoke
-    particle_width 40
-    particle_height 40
+    particle_width 0.8
+    particle_height 0.8
     cull_each false
     quota 600
     billboard_type point
@@ -350,8 +350,8 @@ ShadowLine
         emission_rate 15
         time_to_live 2
         direction 1 0 0
-        velocity_min 3
-        velocity_max 5
+        velocity_min 0.06
+        velocity_max 0.1
         colour_range_start 0.2 0 0
         colour_range_end 0.2 0.2 0
 }
@@ -362,9 +362,9 @@ ShadowLine
 SummonRing
 {
     material        Flare
-    particle_width  25
-    particle_height 25
-	cull_each       false
+    particle_width  0.5
+    particle_height 0.5
+    cull_each       false
     quota           10000
     billboard_type  point
     
@@ -375,12 +375,12 @@ SummonRing
         emission_rate   2000
         time_to_live    0.06
         direction       0 1 0
-        velocity    	30
+        velocity        30
         colour_range_start 0.6 0.6 1
         colour_range_end 0.2 0.2 0.6
-        width           40
-        height          35
-        depth           2
+        width           0.8
+        height          0.7
+        depth           0.04
 }
 
     // Fader
@@ -402,8 +402,8 @@ SummonRing
 BurningHead
 {
     material Flare
-    particle_width 20
-    particle_height 20
+    particle_width 0.4
+    particle_height 0.4
     cull_each false
     quota 500
     billboard_type point
@@ -415,8 +415,8 @@ BurningHead
         emission_rate 100
         time_to_live 0.2
         direction 0 1 0
-        velocity_min 250
-        velocity_max 300
+        velocity_min 5.0
+        velocity_max 6.0
         colour_range_start 1 0 0
         colour_range_end 1 0.5 0
 }
@@ -425,8 +425,8 @@ BurningHead
 BurningHand
 {
     material Flare
-    particle_width 10
-    particle_height 10
+    particle_width 0.2
+    particle_height 0.2
     cull_each false
     quota 500
     billboard_type point
@@ -438,8 +438,8 @@ BurningHand
         emission_rate 100
         time_to_live 0.1
         direction 1 0 0
-        velocity_min 150
-        velocity_max 250
+        velocity_min 3.0
+        velocity_max 5.0
         colour_range_start 1 0 0
         colour_range_end 0.8 0.6 0
 }
@@ -449,8 +449,8 @@ BurningHand
 FreezingHead
 {
     material Flare
-    particle_width 20
-    particle_height 20
+    particle_width 0.4
+    particle_height 0.4
     cull_each false
     quota 500
     billboard_type point
@@ -462,8 +462,8 @@ FreezingHead
         emission_rate 100
         time_to_live 0.2
         direction 0 1 0
-        velocity_min 250
-        velocity_max 300
+        velocity_min 5.0
+        velocity_max 6.0
         colour_range_start 0.6 0.6 1
         colour_range_end 0.2 0.2 0.6
 }
@@ -472,8 +472,8 @@ FreezingHead
 FreezingHand
 {
     material Flare
-    particle_width 10
-    particle_height 10
+    particle_width 0.2
+    particle_height 0.2
     cull_each false
     quota 500
     billboard_type point
@@ -485,8 +485,8 @@ FreezingHand
         emission_rate 100
         time_to_live 0.1
         direction 1 0 0
-        velocity_min 150
-        velocity_max 250
+        velocity_min 3.0
+        velocity_max 5.0
         colour_range_start 0.6 0.6 1
         colour_range_end 0.2 0.2 0.6
 }
@@ -497,8 +497,8 @@ FreezingHand
 Earth
 {
     material Flare
-    particle_width 20
-    particle_height 20
+    particle_width 0.4
+    particle_height 0.4
     cull_each false
     quota 10000
     billboard_type point
@@ -510,8 +510,8 @@ Earth
         emission_rate 20
         time_to_live 0.2
         direction 0 -1 0
-        velocity_min 250
-        velocity_max 300
+        velocity_min 5.0
+        velocity_max 6.0
         colour_range_start 0 0 1 
         colour_range_end 0 0.4 0.9
 }
@@ -520,8 +520,8 @@ Earth
 SummonBuff
 {
     material        Flare
-    particle_width  15
-    particle_height 15
+    particle_width  0.3
+    particle_height 0.3
     cull_each       false
     quota           10000
     billboard_type  point
@@ -532,15 +532,15 @@ SummonBuff
         angle           15
         emission_rate   20
         time_to_live    2
-        position        0 0 50
+        position        0.0 0.0 1.0
         direction       0 -1 0
-        velocity_min  	15
-        velocity_max  	20
+        velocity_min      0.3
+        velocity_max      0.4
         colour_range_start  0 0.4 0.8 0.0
         colour_range_end    0.2 0.5 0.8 0.0
-        width           10
-        height          10
-        depth           10
+        width           0.2
+        height          0.2
+        depth           0.2
 }
 
     // Fader
@@ -564,8 +564,8 @@ SummonBuff
 Icesphere
 {
     material Flare
-    particle_width 20
-    particle_height 20
+    particle_width 0.4
+    particle_height 0.4
     cull_each false
     quota 10000
     billboard_type point
@@ -577,8 +577,8 @@ Icesphere
         emission_rate 2075
         time_to_live 0.1
         direction 1 0 0
-        velocity_min 150
-        velocity_max 200
+        velocity_min 3.0
+        velocity_max 4.0
         colour_range_start  0.3 0.3 0.3 0.0
         colour_range_end    0.8 0.8 0.8 0.0
 }
@@ -596,8 +596,8 @@ Icesphere
 FireElemHand
 {
     material Flare
-    particle_width 20
-    particle_height 20
+    particle_width 0.4
+    particle_height 0.4
     cull_each false
     quota 300
     billboard_type point
@@ -609,13 +609,13 @@ FireElemHand
         emission_rate 50
         time_to_live 0.2
         direction 0 1 0
-        velocity_min 50
-        velocity_max 100
+        velocity_min 1.0
+        velocity_max 2.0
         colour_range_start 1 0 0
         colour_range_end 0.5 0.3 0
-		width           40
-        height          40
-        depth           40
+        width           0.8
+        height          0.8
+        depth           0.8
 }
 
     affector ColourFader

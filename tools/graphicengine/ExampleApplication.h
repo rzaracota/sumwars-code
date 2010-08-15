@@ -245,11 +245,11 @@ protected:
 
 		if (OGRE_VERSION >= ((1 << 16) | (6 << 8)))
 		{
-			Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../../trunk/resources/particle/ogre_1_6", "FileSystem", "particle");
+			Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../../resources/particle/ogre_1_6", "FileSystem", "particle");
 		}
 		else
 		{
-			Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../../trunk/resources/particle", "FileSystem", "particle");
+			Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../../resources/particle", "FileSystem", "particle");
 		}
     }
 

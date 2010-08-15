@@ -4135,7 +4135,7 @@ void Creature::writeNetEvent(NetEvent* event, CharConv* cv)
 
 	if (event->m_data & NetEvent::DATA_SPEAK_TEXT)
 	{
-		cv->toBuffer(getSpeakText().m_text);
+		getSpeakText().m_text.toString(cv);
 		cv->toBuffer(getSpeakText().m_emotion);
 		cv->toBuffer(getSpeakText().m_time);
 		cv->toBuffer(getSpeakText().m_in_dialogue);
@@ -4331,7 +4331,7 @@ void Creature::processNetEvent(NetEvent* event, CharConv* cv)
 	if (event->m_data & NetEvent::DATA_SPEAK_TEXT)
 	{
 		getSpeakText().clear();
-		cv->fromBuffer(getSpeakText().m_text);
+		getSpeakText().m_text.fromString(cv);
 		cv->fromBuffer(getSpeakText().m_emotion);
 		cv->fromBuffer(getSpeakText().m_time);
 		cv->fromBuffer(getSpeakText().m_in_dialogue);
@@ -4585,7 +4585,7 @@ void Creature::speakText(CreatureSpeakText& text)
 	m_speak_text = text;
 	m_speak_text.m_displayed_time = 0;
 
-	DEBUGX("speak %s for %f ms",text.m_text.c_str(), text.m_time);
+	DEBUGX("speak %s for %f ms",text.m_text.getTranslation().c_str(), text.m_time);
 }
 
 Creature* Creature::getTradePartner()
