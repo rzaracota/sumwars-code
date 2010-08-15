@@ -56,9 +56,10 @@ void Tooltip::create(std::string msg, CEGUI::UVector2 position, CEGUI::UVector2 
 
 
 void Tooltip::fadeOut()
-{
+{	
     m_Visible = false;
-    m_FadingOut = true;
+	m_FadingIn = false;
+	m_FadingOut = true;
 }
 
 
@@ -92,14 +93,15 @@ void Tooltip::update ( float timeSinceLastUpdate )
     else if (m_FadingOut)
     {
         m_CurrentFadeOutTime += timeSinceLastUpdate;
-        m_IsDead = true;
+        
 
         float steps = timeSinceLastUpdate * m_FadeOutStepPerMS;
         float newAlpha = m_CEGUIWindow->getAlpha() - steps;
         m_CEGUIWindow->setAlpha(newAlpha);
-
+		std::cout << newAlpha << std::endl;
         if (m_FadeOutTime < m_CurrentFadeOutTime)
         {
+			m_IsDead = true;
             m_Parent->removeChildWindow(m_Name);
             CEGUI::WindowManager::getSingleton().destroyWindow(m_Name);
         }
@@ -125,7 +127,6 @@ void TooltipManager::setParent(CEGUI::Window* parent)
 
 void TooltipManager::createTooltip ( std::list<std::string> list, float timeVisible, CEGUI::UVector2 position, CEGUI::Font *font, Tooltip::TooltipType type)
 {
-
     std::string msg;
     CEGUI::UVector2 size;
     std::ostringstream windowName;
@@ -241,6 +242,7 @@ float TooltipManager::getFadeOutTime()
 
 void TooltipManager::update(float timeSinceLastUpdate)
 {
+
     std::map<std::string, Tooltip*>::iterator iter;
     for (iter = m_Tooltips.begin(); iter != m_Tooltips.end(); iter++)
     {

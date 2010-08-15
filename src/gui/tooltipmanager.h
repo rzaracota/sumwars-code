@@ -97,6 +97,7 @@ private:
 	float m_fadeOutTime;
 	int m_toolTipsCreatedCount;
     CEGUI::Font* m_DefaultFont;
+	CEGUI::String m_ToolTipWindowName;
 };
 
 #endif
