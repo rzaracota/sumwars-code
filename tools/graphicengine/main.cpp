@@ -44,6 +44,9 @@ class SumWarsApplication : public ExampleApplication
 			mCamera->setPosition(Vector3(0, GraphicManager::g_global_scale*10,GraphicManager::g_global_scale*10));
 			mCamera->lookAt(Vector3(0,GraphicManager::g_global_scale,0));
 			mCamera->setNearClipDistance(GraphicManager::g_global_scale*0.1);
+			
+			
+			std::cout <<"camera position "<< GraphicManager::g_global_scale*10  <<"\n";
 		}
 
 		virtual void createViewport(void)
@@ -127,7 +130,7 @@ class SumWarsApplication : public ExampleApplication
 			m_doc->m_object = gobj;
 			m_doc->m_time=0;
 			m_doc->m_max_time=maxtime/1000;
-
+			
 			return true;
 		}
 

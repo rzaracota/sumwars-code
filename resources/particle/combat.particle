@@ -1,8 +1,8 @@
 Hit
 {
     material        flareAlpha
-    particle_width  10
-    particle_height 10
+    particle_width  0.2
+    particle_height 0.2
 	cull_each       false
     quota           5000
     billboard_type  point
@@ -14,13 +14,13 @@ Hit
         emission_rate   600
         time_to_live    0.3
         direction       0 1 0
-        velocity_min    50
-        velocity_max    50
+        velocity_min    1.0
+        velocity_max    1.0
         colour_range_start  1 0 0 
         colour_range_end    1 0 0 
-        width           100
-        height          100
-        depth           30
+        width           2.0
+        height          2.0
+        depth           0.6
 }
 
     // Make em float upwards
@@ -35,8 +35,8 @@ Hit
 SpecialAttackLineWhite
 {
     material Flare
-    particle_width 20
-    particle_height 20
+    particle_width 0.4
+    particle_height 0.4
     cull_each false
     quota 10000
     billboard_type point
@@ -48,8 +48,8 @@ SpecialAttackLineWhite
         emission_rate 350
         time_to_live 1.0
         direction 1 1 1
-        velocity_min 1
-        velocity_max 2
+        velocity_min 0.02
+        velocity_max 0.04
         colour_range_start 0.3 0.3 0.3
 		colour_range_end 0.3 0.3 0.3
 }
@@ -58,8 +58,8 @@ SpecialAttackLineWhite
 SpecialAttackLineSweepStrike
 {
     material Flare
-    particle_width 30
-    particle_height 30
+    particle_width 0.6
+    particle_height 0.6
     cull_each false
     quota 10000
     billboard_type point
@@ -71,8 +71,8 @@ SpecialAttackLineSweepStrike
         emission_rate 350
         time_to_live 1.0
         direction 1 1 1
-        velocity_min 1
-        velocity_max 2
+        velocity_min 0.02
+        velocity_max 0.04
         colour_range_start 0.1 0.1 0.1
         colour_range_end 0.1 0.1 0.1
 }
@@ -81,8 +81,8 @@ SpecialAttackLineSweepStrike
 Warcry
 {
     material Flare
-    particle_width 30
-    particle_height 10
+    particle_width 0.6
+    particle_height 0.2
     cull_each false
     quota 10000
     billboard_type point
@@ -94,8 +94,8 @@ Warcry
         emission_rate 350
         time_to_live 1.0
         direction 1 1 1
-        velocity_min 1
-        velocity_max 2
+        velocity_min 0.02
+        velocity_max 0.04
         colour_range_start 0.1 0.1 0
 		colour_range_end 0.1 0 0
 }
@@ -104,8 +104,8 @@ Warcry
 Heal
 {
     material Flare
-    particle_width 30
-    particle_height 10
+    particle_width 0.6
+    particle_height 0.2
     cull_each false
     quota 10000
     billboard_type point
@@ -117,8 +117,8 @@ Heal
         emission_rate 350
         time_to_live 1.0
         direction 1 1 1
-        velocity_min 1
-        velocity_max 2
+        velocity_min 0.02
+        velocity_max 0.04
         colour_range_start 0 0.1 0
 		colour_range_end 0.1 0.1 0
 }
@@ -127,8 +127,8 @@ Heal
 FireSword
 {
     material Flare
-    particle_width 20
-    particle_height 20
+    particle_width 0.4
+    particle_height 0.4
     cull_each false
     quota 10000
     billboard_type point
@@ -140,8 +140,8 @@ FireSword
         emission_rate 275
         time_to_live 0.4
         direction 0 0 1
-        velocity_min 250
-        velocity_max 300
+        velocity_min 5.0
+        velocity_max 6.0
         colour_range_start 0.3 0 0
         colour_range_end 0.3 0.1 0
 }
@@ -164,8 +164,8 @@ FireSword
 BurningBlade
 {
     material Flare
-    particle_width 20
-    particle_height 20
+    particle_width 0.4
+    particle_height 0.4
     cull_each false
     quota 300
     billboard_type point
@@ -177,8 +177,8 @@ BurningBlade
         emission_rate 275
         time_to_live 0.075
         direction 0 0 1
-        velocity_min 250
-        velocity_max 400
+        velocity_min 5.0
+        velocity_max 8.0
         colour_range_start 0.3 0 0
         colour_range_end 0.3 0.1 0
 }
@@ -201,8 +201,8 @@ BurningBlade
 FrostBlade
 {
     material Flare
-    particle_width 20
-    particle_height 20
+    particle_width 0.4
+    particle_height 0.4
     cull_each false
     quota 300
     billboard_type point
@@ -214,8 +214,8 @@ FrostBlade
         emission_rate 275
         time_to_live 0.075
         direction 0 0 1
-        velocity_min 250
-        velocity_max 400
+        velocity_min 5.0
+        velocity_max 8.0
         colour_range_start  0.6 0.6 1
         colour_range_end    0.2 0.2 0.6
 }
@@ -238,8 +238,8 @@ FrostBlade
 BurningBladeShort
 {
     material Flare
-    particle_width 20
-    particle_height 20
+    particle_width 0.4
+    particle_height 0.4
     cull_each false
     quota 10000
     billboard_type point
@@ -251,8 +251,8 @@ BurningBladeShort
         emission_rate 275
         time_to_live 0.075
         direction 0 0 1
-        velocity_min 150
-        velocity_max 200
+        velocity_min 3.0
+        velocity_max 4.0
         colour_range_start 0.3 0 0
         colour_range_end 0.3 0.1 0
 }
@@ -275,8 +275,8 @@ BurningBladeShort
 BurningAxe
 {
     material Flare
-    particle_width 20
-    particle_height 20
+    particle_width 0.4
+    particle_height 0.4
     cull_each false
     quota 10000
     billboard_type point
@@ -288,8 +288,8 @@ BurningAxe
         emission_rate 150
         time_to_live 0.08
         direction 1 0 0
-        velocity_min 75
-        velocity_max 150
+        velocity_min 1.5
+        velocity_max 3.0
         colour_range_start 0.6 0 0
         colour_range_end 0.6 0.3 0
 }
@@ -298,8 +298,8 @@ BurningAxe
 BurningAxeRing
 {
     material        Flare
-    particle_width  15
-    particle_height 15
+    particle_width  0.3
+    particle_height 0.3
 	cull_each       false
     quota           10000
     billboard_type  point
@@ -314,9 +314,9 @@ BurningAxeRing
         velocity    	30
         colour_range_start  0.9 0 0
         colour_range_end    0.6 0.3 0
-        width           40
-        height          35
-        depth           15
+        width           0.8
+        height          0.7
+        depth           0.3
 }
 
     // Fader
@@ -334,8 +334,8 @@ BurningAxeRing
 BlindShot
 {
     material        flareAlpha
-    particle_width  30
-    particle_height 30
+    particle_width  0.6
+    particle_height 0.6
     cull_each       false
 	cull_each       false
     quota          2000
@@ -346,14 +346,14 @@ BlindShot
 {
         angle           360
         emission_rate   300
-		position		0 0 0
+		position		0 0.0 0.0
         time_to_live    0.05
         direction       0 1 0
         velocity    	30
         colour_range_start  0 0 0
 		colour_range_end  0 0 0 0.2
-		width           5
-        height          5
-        depth           5
+		width           0.1
+        height          0.1
+        depth           0.1
 }
 }
