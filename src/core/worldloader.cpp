@@ -435,7 +435,7 @@ void  WorldLoader::loadNPC( TiXmlNode* node)
 				Dialogue::getTopicList(refname).addTopic(topic,ev);
 				if (start_op != "" || topic == "start_dialogue")
 				{
-					Dialogue::getTopicList(refname).addStartTopic(start_op, topic);
+					Dialogue::getTopicList(refname).addStartTopic(TranslatableString(start_op,"sumwars-xml"), topic);
 				}
 			}
 			else if (child->Type()==TiXmlNode::ELEMENT && !strcmp(child->Value(), "Trade"))

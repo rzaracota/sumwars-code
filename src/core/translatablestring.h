@@ -28,12 +28,14 @@ class TranslatableString
 		
 		/**
 		 * \brief Construktor that creates the text from a string
+		 * \param text The raw text (untranslated)
+		 * \param domain gettext domain for translation
 		 * Marked as explicit to avoid unexpected type construction
 		 */
-		explicit TranslatableString(std::string text)
+		explicit TranslatableString(std::string text, std::string domain = "")
 		{
 			m_text = text;
-			m_domain = "";
+			m_domain = domain;
 		}
 		
 		/**
@@ -50,6 +52,15 @@ class TranslatableString
 		 * \param text The text to be translated
 		 */
 		void operator=(std::string text);
+		
+		/**
+		 * \brief Comparison operator
+		 * \param other other translatable string
+		 */
+		bool operator<(const TranslatableString& other) const
+		{
+			return m_text < other.m_text;
+		}
 		
 		
 		/**

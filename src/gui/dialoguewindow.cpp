@@ -607,7 +607,7 @@ void DialogueWindow::updateSpeechBubbles()
 		float lineheight = font->getFontHeight();
 		
 		CEGUI::utf8* ctext;
-		ctext = (CEGUI::utf8*) question->m_text.c_str();
+		ctext = (CEGUI::utf8*) question->m_text.getTranslation().c_str();
 		elemwidth =font->getTextExtent(ctext);
 		elemheight = lineheight;
 		
@@ -632,7 +632,7 @@ void DialogueWindow::updateSpeechBubbles()
 		
 		
 		// Antworten einfuegen
-		std::list < std::pair<std::string, std::string> >::iterator it;
+		std::list < std::pair<TranslatableString, std::string> >::iterator it;
 		for (it = question->m_answers.begin(); it != question->m_answers.end(); ++it)
 		{
 			stream.str("");
@@ -655,7 +655,7 @@ void DialogueWindow::updateSpeechBubbles()
 				label = win_mgr.getWindow(stream.str());
 			}
 			
-			CEGUI::String cstring = (CEGUI::utf8*) dgettext("sumwars-xml",it->first.c_str());
+			CEGUI::String cstring = (CEGUI::utf8*) it->first.getTranslation().c_str();
 			
 			// Anzahl Antworten bei Voting eintragen
 			if (question->m_weighted_answers.count(nr) > 0)

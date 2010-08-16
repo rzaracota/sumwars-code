@@ -203,8 +203,10 @@ void Document::loadSavegame()
 		StdStreamConv cv2(&sstream);
 
 		m_temp_player->toSavegame(&cv2);
+		DEBUGX("sending savegame");
 		World::getWorld()->handleSavegame(&cv2);
-
+		DEBUGX("sent savegame");
+		
 		// read shortkeys from the savegame
 		m_ability_shortkey_map.clear();
 		short key,dest;
@@ -1062,7 +1064,7 @@ void Document::sendChatMessage(std::string msg)
 	}
 	else
 	{
-		World::getWorld()->handleMessage(msg);
+		World::getWorld()->handleMessage(TranslatableString(msg));
 	}
 }
 

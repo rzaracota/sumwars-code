@@ -1046,25 +1046,26 @@ void World::handleCommand(ClientCommand* comm, int slot, float delay)
 
 }
 
-void World::handleMessage(std::string msg, int slot)
+void World::handleMessage(TranslatableString msg, int slot)
 {
 
-	std::string smsg = msg;
+	std::string smsg = msg.getTranslation();
 
 	// als Server: Nachricht an alle Spieler versenden
 	// als Client: Nachricht an den Server senden
-	if (m_server && msg[0]!='$')
+	TranslatableString trsmsg = msg;
+	if (m_server && smsg[0]!='$')
 	{
-
 		// Name des Senders an die Nachricht haengen
-		smsg = "";
+		std::string plmsg = "";
+		
 		if (m_player_slots->count(slot)>0)
 		{
 			Player* pl = static_cast<Player*>((*m_player_slots)[slot]);
 			if (pl != 0)
 			{
-				smsg += "[";
-				smsg += pl->getName();
+				plmsg += "[";
+				plmsg += pl->getName();
 
 				if (pl->getSpeakText().m_text == "" && pl->getDialogue() == 0)
 				{
@@ -1074,10 +1075,11 @@ void World::handleMessage(std::string msg, int slot)
 					text.m_in_dialogue = false;
 					pl->speakText(text);
 				}
-				smsg += "] ";
+				plmsg += "] ";
+				
+				trsmsg = plmsg + smsg;
 			}
 		}
-		smsg += msg;
 
 		if (m_network != 0)
 		{
@@ -1089,7 +1091,7 @@ void World::handleMessage(std::string msg, int slot)
 			header.m_number = smsg.size();
 
 			header.toString(cv);
-			cv->toBuffer(smsg);
+			trsmsg.toString(cv);
 
 			// Nachricht an alle Spieler mit ausser dem Sender
 			WorldObjectMap::iterator it;
@@ -1115,7 +1117,7 @@ void World::handleMessage(std::string msg, int slot)
             header.m_number = msg.size();
 
             header.toString(cv);
-            cv->toBuffer(msg);
+            msg.toString(cv);
 
             getNetwork()->pushSlotMessage(cv);
 			m_network->deallocatePacket(cv);
@@ -1123,14 +1125,17 @@ void World::handleMessage(std::string msg, int slot)
             smsg = "[";
             smsg += m_local_player->getName();
             smsg += "] ";
-            smsg += msg;
+            smsg += msg.getTranslation();
+			
+			trsmsg = TranslatableString(smsg);
 	    }
 	}
 
 	// Nachricht einfuegen
-	static_cast<Player*>(m_local_player)->addMessage(smsg);
+	static_cast<Player*>(m_local_player)->addMessage(trsmsg.getTranslation());
 
-	if (msg[0] == '$')
+	std::string code = msg.getTranslation();
+	if (code[0] == '$')
 	{
 		// Cheatcode eingegeben
 		Player* pl = 0;
@@ -1140,7 +1145,7 @@ void World::handleMessage(std::string msg, int slot)
 		}
 
 		std::stringstream stream;
-		stream << msg;
+		stream << code;
 
 		// $ lesen
 		char dummy;
@@ -1194,7 +1199,7 @@ void World::handleMessage(std::string msg, int slot)
 		{
 			EventSystem::setRegion(m_local_player->getRegion());
 			std::string instr = "";
-			instr += msg.substr(1);
+			instr += code.substr(1);
 			std::string ret;
 
 			EventSystem::doString((char*) instr.c_str());
@@ -1444,13 +1449,10 @@ void World::updatePlayers()
 
 				if (headerp.m_content == PTYPE_C2S_MESSAGE)
 				{
-					char* buf = new char[headerp.m_number+1];
-					buf[headerp.m_number] = 0;
-					cv->fromBuffer(buf, headerp.m_number);
+					TranslatableString tr;
+					tr.fromString(cv);
 
-					handleMessage(buf,slot);
-
-					delete buf;
+					handleMessage(tr,slot);
 				}
 
 				m_network->deallocatePacket(cv);
@@ -1683,13 +1685,11 @@ void World::updatePlayers()
 				}
 				else if (headerp.m_content == PTYPE_S2C_MESSAGE)
 				{
-					char* buf = new char[headerp.m_number+1];
-					buf[headerp.m_number] = 0;
-					cv->fromBuffer(buf, headerp.m_number);
+					TranslatableString tr;
+					tr.fromString(cv);
 
-					static_cast<Player*>(m_local_player)->addMessage(buf);
+					static_cast<Player*>(m_local_player)->addMessage(tr.getTranslation());
 
-					delete buf;
 				}
 				else if (headerp.m_content == PTYPE_S2C_LUA_CHUNK)
 				{
