@@ -1,0 +1,10 @@
+*** Music license file ***
+This file contains all license information for artwork located in the music directory
+
+
+If not declared otherwise, all artwork is released under the authors default license.
+
+Artwork provided by: Cheeselord
+Default license:
+Files:
+	Dark_Exploration.ogg

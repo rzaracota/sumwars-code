@@ -1,0 +1,15 @@
+*** Particle license file ***
+This file contains all license information for artwork located in the particle directory
+
+
+If not declared otherwise, all artwork is released under the authors default license.
+
+
+Artwork provided by: Steffen Schönfeld (Kalimgard)
+Default license:
+Files:
+	combat.particle
+	environment.particle
+	monster.particle
+	spells.particle
+	status.particle
