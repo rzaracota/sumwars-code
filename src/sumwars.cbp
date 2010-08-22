@@ -175,6 +175,8 @@
 		<Unit filename="core\templateloader.h" />
 		<Unit filename="core\tiles.h" />
 		<Unit filename="core\timer.h" />
+		<Unit filename="core\translatablestring.cpp" />
+		<Unit filename="core\translatablestring.h" />
 		<Unit filename="core\treasure.cpp" />
 		<Unit filename="core\treasure.h" />
 		<Unit filename="core\treasurebase.h" />
