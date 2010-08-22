@@ -364,6 +364,9 @@
 	<Action name="fire_range_attack">
 		<Animation name="attackRangedBow" />
 	</Action>
+	<Action name="fire_shot">
+		<Animation name="attackRangedBow" />
+	</Action>
 </RenderInfo>
 
 <RenderInfo name="burningSkeletonAxeman" parent="skeletonbase">
