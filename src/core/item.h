@@ -29,7 +29,7 @@
 #include "creaturestruct.h"
 
 #include <math.h>
-
+#include <bitset>
 
 
 /**
@@ -347,6 +347,11 @@ struct Item {
 	 * \brief Seltenheit des Gegenstandes
 	 */
 	Item::Rarity m_rarity;
+	
+	/**
+	 * \brief Bitset that stores if a certain magic mod has been applied or not
+	 */
+	std::bitset<32> m_magic_mods;
 
 };
 
