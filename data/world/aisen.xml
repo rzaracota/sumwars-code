@@ -94,7 +94,7 @@
 		
 		<Settings dimx="16" dimy="32" region_template="maylonsGraveEntry"  ground="council_ground"/>
 		
-		<WorldPosition world_x="0.61" world_y ="0.61" waypoint="true"/>
+		<WorldPosition world_x="0.61" world_y ="0.61"/>
 		<ExitDirections north="true" south="true" west="false" east="false" />
 		
 		<SpawnGroups>
@@ -128,7 +128,7 @@
 		</Music>
 		
 		<ExitDirections north="true" south="true" west="false" east="false" />
-		<WorldPosition world_x="0.61" world_y ="0.61" waypoint="true"/>
+		<WorldPosition world_x="0.61" world_y ="0.61"/>
 		
 		<ObjectGroups>
 			<ObjectGroup object_group="cryptShrine" priority="2" number="5" probability="1"/>
@@ -161,7 +161,7 @@
 		<DirectionalLight red="0.0" green="0.0" blue="0.0" />
 		
 		<Settings dimx="56" dimy="56" area_percent="0.3" complexity="0.3" granularity="4"  ground="cave_ground"/>
-		<WorldPosition world_x="0.61" world_y ="0.61" waypoint="true"/>
+		<WorldPosition world_x="0.61" world_y ="0.61"/>
 		
 		<Music>
 			<Track source="Dark_Exploration.ogg" />

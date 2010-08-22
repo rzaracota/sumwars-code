@@ -8,7 +8,7 @@
 		<HeroLight red="1.0" green="1.0" blue="1.0" /> 
 		<DirectionalLight red="0.0" green="0.0" blue="0.0" />
 		
-		<WorldPosition world_x="0.68" world_y ="0.43"/>
+		<WorldPosition world_x="0.68" world_y ="0.43" waypoint="true"/>
 		
 		<Music>
 			<Track source="Dark_Exploration.ogg" />
