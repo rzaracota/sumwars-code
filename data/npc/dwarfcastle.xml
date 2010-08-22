@@ -74,41 +74,65 @@
 
 <NPC refname="Flynn">
 	<Trade refresh_time="600000" price_factor="10">
-		<TradeItem subtype="legion_sw"  number="0" number_magical="1" min_enchant="200" max_enchant="650"/>
-		<TradeItem subtype="long_sw"  number="0" number_magical="1" min_enchant="200" max_enchant="650"/>
-		<TradeItem subtype="horse_sw"  number="0" number_magical="1" min_enchant="200" max_enchant="650"/>
-		<TradeItem subtype="mrnstr_hmr"  number="0" number_magical="1" min_enchant="200" max_enchant="650"/>
-		<TradeItem subtype="crow_hmr"  number="0" number_magical="1" min_enchant="200" max_enchant="650"/>
-		<TradeItem subtype="silver_hmr"  number="0" number_magical="1" min_enchant="200" max_enchant="650"/>
-		<TradeItem subtype="rattan_sbw"  number="0" number_magical="1" min_enchant="200" max_enchant="650"/>
-		<TradeItem subtype="bandit_sbw"  number="0" number_magical="1" min_enchant="200" max_enchant="650"/>
-		<TradeItem subtype="soldr_lbw"  number="0" number_magical="1" min_enchant="200" max_enchant="650"/>
-		<TradeItem subtype="iron_axe"  number="0" number_magical="1" min_enchant="200" max_enchant="650"/>
-		<TradeItem subtype="smash_axe"  number="0" number_magical="1" min_enchant="200" max_enchant="650"/>
-		<TradeItem subtype="alder_wnd_fire"  number="0" number_magical="1" min_enchant="200" max_enchant="650"/>
-		<TradeItem subtype="magus_wnd_fire"  number="0" number_magical="1" min_enchant="200" max_enchant="650"/>
-		<TradeItem subtype="alder_wnd_air"  number="0" number_magical="1" min_enchant="200" max_enchant="650"/>
-		<TradeItem subtype="magus_wnd_air"  number="0" number_magical="1" min_enchant="200" max_enchant="650"/>
-		<TradeItem subtype="alder_wnd_ice"  number="0" number_magical="1" min_enchant="200" max_enchant="650"/>
-		<TradeItem subtype="magus_wnd_ice"  number="0" number_magical="1" min_enchant="200" max_enchant="650"/>
-		<TradeItem subtype="alder_stf_fire"  number="0" number_magical="1" min_enchant="200" max_enchant="650"/>
-		<TradeItem subtype="alder_stf_air"  number="0" number_magical="1" min_enchant="200" max_enchant="650"/>
-		<TradeItem subtype="alder_stf_ice"  number="0" number_magical="1" min_enchant="200" max_enchant="650"/>
+		<TradeItem subtype="legion_sw"  number="0" number_magical="1" min_enchant="200" max_enchant="400" probability="0.6"/>
+		<TradeItem subtype="long_sw"  number="0" number_magical="2" min_enchant="200" max_enchant="500" probability="0.5"/>
+		<TradeItem subtype="bast_sw"  number="0" number_magical="2" min_enchant="200" max_enchant="400" probability="0.5"/>
 		
-		<TradeItem subtype="merc_arm"  number="0" number_magical="1" min_enchant="200" max_enchant="650"/>
-		<TradeItem subtype="rngsh_arm"  number="0" number_magical="1" min_enchant="200" max_enchant="650"/>
-		<TradeItem subtype="sholar_rob"  number="0" number_magical="1" min_enchant="200" max_enchant="650"/>
-		<TradeItem subtype="iron_shd"  number="0" number_magical="1" min_enchant="200" max_enchant="650"/>
-		<TradeItem subtype="merc_hlm"  number="0" number_magical="1" min_enchant="200" max_enchant="650"/>
-		<TradeItem subtype="rngbnd_hlm"  number="0" number_magical="1" min_enchant="200" max_enchant="650"/>
-		<TradeItem subtype="spider_glv"  number="0" number_magical="1" min_enchant="200" max_enchant="650"/>
-		<TradeItem subtype="marksm_glv"  number="0" number_magical="1" min_enchant="200" max_enchant="650"/>
-		<TradeItem subtype="assass_glv"  number="0" number_magical="1" min_enchant="200" max_enchant="650"/>
+		<TradeItem subtype="mrnstr_hmr"  number="0" number_magical="2" min_enchant="200" max_enchant="400" probability="0.5"/>
+		<TradeItem subtype="crow_hmr"  number="0" number_magical="2" min_enchant="200" max_enchant="500" probability="0.5"/>
+		<TradeItem subtype="silver_hmr"  number="0" number_magical="1" min_enchant="200" max_enchant="400" probability="0.6"/>
+		<TradeItem subtype="glow_hmr"  number="0" number_magical="2" min_enchant="200" max_enchant="500" probability="0.5"/>
 		
-		<TradeItem subtype="silver_rng"  number="0" number_magical="5" min_enchant="100" max_enchant="400"/>
-		<TradeItem subtype="jet_rng"  number="0" number_magical="5" min_enchant="200" max_enchant="650"/>
-		<TradeItem subtype="silver_aml"  number="0" number_magical="5" min_enchant="100" max_enchant="400"/>
-		<TradeItem subtype="coral_aml"  number="0" number_magical="5" min_enchant="200" max_enchant="650"/>
+		<TradeItem subtype="iron_axe"  number="0" number_magical="1" min_enchant="200" max_enchant="400" probability="0.6"/>
+		<TradeItem subtype="merc_axe"  number="0" number_magical="2" min_enchant="200" max_enchant="500" probability="0.5"/>
+		<TradeItem subtype="smash_axe"  number="0" number_magical="1" min_enchant="200" max_enchant="400" probability="0.6"/>
+		<TradeItem subtype="ogrhac_axe"  number="0" number_magical="2" min_enchant="200" max_enchant="500" probability="0.5"/>
+		
+		<TradeItem subtype="rattan_sbw"  number="0" number_magical="1" min_enchant="200" max_enchant="400" probability="0.4"/>
+		<TradeItem subtype="bandit_sbw"  number="0" number_magical="3" min_enchant="200" max_enchant="500" probability="0.5"/>
+		<TradeItem subtype="soldr_lbw"  number="0" number_magical="2" min_enchant="200" max_enchant="400" probability="0.6"/>
+		<TradeItem subtype="horn_lbw"  number="0" number_magical="2" min_enchant="200" max_enchant="500" probability="0.6"/>
+		
+		<TradeItem subtype="alder_wnd_fire"  number="0" number_magical="1" min_enchant="200" max_enchant="400" probability="0.4"/>
+		<TradeItem subtype="magus_wnd_fire"  number="0" number_magical="1" min_enchant="200" max_enchant="500" probability="0.4"/>
+		<TradeItem subtype="alder_wnd_air"  number="0" number_magical="1" min_enchant="200" max_enchant="400" probability="0.4"/>
+		<TradeItem subtype="magus_wnd_air"  number="0" number_magical="1" min_enchant="200" max_enchant="500" probability="0.4"/>
+		<TradeItem subtype="alder_wnd_ice"  number="0" number_magical="1" min_enchant="200" max_enchant="400" probability="0.4"/>
+		<TradeItem subtype="magus_wnd_ice"  number="0" number_magical="1" min_enchant="200" max_enchant="500" probability="0.4"/>
+		<TradeItem subtype="alder_stf_fire"  number="0" number_magical="1" min_enchant="200" max_enchant="400" probability="0.4"/>
+		<TradeItem subtype="alder_stf_air"  number="0" number_magical="1" min_enchant="200" max_enchant="400" probability="0.4"/>
+		<TradeItem subtype="alder_stf_ice"  number="0" number_magical="1" min_enchant="200" max_enchant="400" probability="0.4"/>
+		<TradeItem subtype="magus_stf_fire"  number="0" number_magical="1" min_enchant="200" max_enchant="500" probability="0.4"/>
+		<TradeItem subtype="magus_stf_air"  number="0" number_magical="1" min_enchant="200" max_enchant="500" probability="0.4"/>
+		<TradeItem subtype="magus_stf_ice"  number="0" number_magical="1" min_enchant="200" max_enchant="500" probability="0.4"/>
+		
+		<TradeItem subtype="merc_arm"  number="0" number_magical="1" min_enchant="200" max_enchant="400" probability="0.6"/>
+		<TradeItem subtype="rngsh_arm"  number="0" number_magical="1" min_enchant="200" max_enchant="400" probability="0.6"/>
+		<TradeItem subtype="assass_arm"  number="0" number_magical="2" min_enchant="200" max_enchant="500" probability="0.5"/>
+		<TradeItem subtype="temple_arm"  number="0" number_magical="2" min_enchant="200" max_enchant="500" probability="0.5"/>
+		<TradeItem subtype="sholar_rob"  number="0" number_magical="1" min_enchant="200" max_enchant="400" probability="0.6"/>
+		<TradeItem subtype="mage_rob"  number="0" number_magical="1" min_enchant="200" max_enchant="500" probability="0.5"/>
+		
+		<TradeItem subtype="iron_shd"  number="0" number_magical="1" min_enchant="200" max_enchant="400" probability="0.6"/>
+		<TradeItem subtype="steel_shd"  number="0" number_magical="1" min_enchant="200" max_enchant="500" probability="0.6"/>
+		
+		<TradeItem subtype="merc_hlm"  number="0" number_magical="1" min_enchant="200" max_enchant="400" probability="0.6"/>
+		<TradeItem subtype="rngbnd_hlm"  number="0" number_magical="1" min_enchant="200" max_enchant="400" probability="0.6"/>
+		<TradeItem subtype="assass_hlm"  number="0" number_magical="2" min_enchant="200" max_enchant="500" probability="0.5"/>
+		<TradeItem subtype="birett_hlm"  number="0" number_magical="2" min_enchant="200" max_enchant="500" probability="0.5"/>
+		<TradeItem subtype="beret_hat"  number="0" number_magical="1" min_enchant="200" max_enchant="400" probability="0.6"/>
+		<TradeItem subtype="mage_hat"  number="0" number_magical="1" min_enchant="200" max_enchant="500" probability="0.6"/>
+		
+		<TradeItem subtype="spider_glv"  number="0" number_magical="1" min_enchant="200" max_enchant="500" probability="0.6"/>
+		<TradeItem subtype="marksm_glv"  number="0" number_magical="1" min_enchant="200" max_enchant="500" probability="0.6"/>
+		<TradeItem subtype="assass_glv"  number="0" number_magical="1" min_enchant="200" max_enchant="500" probability="0.6"/>
+		
+		<TradeItem subtype="silver_rng"  number="0" number_magical="5" min_enchant="100" max_enchant="400" probability="0.5"/>
+		<TradeItem subtype="jet_rng"  number="0" number_magical="9" min_enchant="200" max_enchant="500" probability="0.5"/>
+		<TradeItem subtype="gold_rng"  number="0" number_magical="2" min_enchant="200" max_enchant="600" probability="0.5"/>
+		<TradeItem subtype="silver_aml"  number="0" number_magical="6" min_enchant="100" max_enchant="400" probability="0.5"/>
+		<TradeItem subtype="coral_aml"  number="0" number_magical="8" min_enchant="200" max_enchant="500" probability="0.5"/>
+		<TradeItem subtype="gold_aml"  number="0" number_magical="3" min_enchant="200" max_enchant="600" probability="0.5"/>
 	</Trade>
 	<Topic name="trade" start_option="Trade" />
 	

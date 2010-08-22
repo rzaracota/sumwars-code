@@ -118,6 +118,11 @@ class NPCTrade
 			 */
 			float m_max_enchant;
 			
+			/**
+			 * \brief probability that an item will be generated
+			 */
+			float m_probability;
+			
 		};
 		
 		

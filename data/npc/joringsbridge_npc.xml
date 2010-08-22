@@ -83,32 +83,59 @@
 <NPC refname="Marco">
 		
 	<Trade refresh_time="600000" price_factor="10">
-		<TradeItem subtype="sabre_sw"  number="0" number_magical="1" min_enchant="100" max_enchant="400"/>
-		<TradeItem subtype="legion_sw"  number="0" number_magical="1" min_enchant="100" max_enchant="400"/>
-		<TradeItem subtype="smash_sw"  number="0" number_magical="1" min_enchant="100" max_enchant="400"/>
-		<TradeItem subtype="maul_hmr"  number="0" number_magical="1" min_enchant="100" max_enchant="400"/>
-		<TradeItem subtype="mrnstr_hmr"  number="0" number_magical="1" min_enchant="100" max_enchant="400"/>
-		<TradeItem subtype="guard_hmr"  number="0" number_magical="1" min_enchant="100" max_enchant="400"/>
-		<TradeItem subtype="long_lbw"  number="0" number_magical="1" min_enchant="100" max_enchant="400"/>
-		<TradeItem subtype="hunter_sbw"  number="0" number_magical="1" min_enchant="100" max_enchant="400"/>
-		<TradeItem subtype="rock_stf"  number="0" number_magical="1" min_enchant="100" max_enchant="400"/>
-		<TradeItem subtype="rock_wnd"  number="0" number_magical="1" min_enchant="100" max_enchant="400"/>
-		<TradeItem subtype="alder_wnd_fire"  number="0" number_magical="1" min_enchant="100" max_enchant="400"/>
-		<TradeItem subtype="alder_wnd_air"  number="0" number_magical="1" min_enchant="100" max_enchant="400"/>
-		<TradeItem subtype="alder_wnd_ice"  number="0" number_magical="1" min_enchant="100" max_enchant="400"/>
-		<TradeItem subtype="bandit_arm"  number="0" number_magical="1" min_enchant="100" max_enchant="400"/>
-		<TradeItem subtype="novice_arm"  number="0" number_magical="1" min_enchant="100" max_enchant="400"/>
-		<TradeItem subtype="alch_rob"  number="0" number_magical="1" min_enchant="100" max_enchant="400"/>
-		<TradeItem subtype="chain_glv"  number="0" number_magical="1" min_enchant="100" max_enchant="400"/>
-		<TradeItem subtype="snake_glv"  number="0" number_magical="1" min_enchant="100" max_enchant="400"/>
-		<TradeItem subtype="alch_hat"  number="0" number_magical="1" min_enchant="100" max_enchant="400"/>
-		<TradeItem subtype="novice_hlm"  number="0" number_magical="1" min_enchant="100" max_enchant="400"/>
-		<TradeItem subtype="merchd_hlm"  number="0" number_magical="1" min_enchant="100" max_enchant="400"/>
-		<TradeItem subtype="bronze_shd"  number="0" number_magical="1" min_enchant="100" max_enchant="400"/>
-		<TradeItem subtype="amber_rng"  number="0" number_magical="5" min_enchant="100" max_enchant="250"/>
-		<TradeItem subtype="silver_rng"  number="0" number_magical="5" min_enchant="100" max_enchant="400"/>
-		<TradeItem subtype="amber_aml"  number="0" number_magical="5" min_enchant="100" max_enchant="250"/>
-		<TradeItem subtype="silver_aml"  number="0" number_magical="5" min_enchant="100" max_enchant="400"/>
+		<TradeItem subtype="sabre_sw"  number="0" number_magical="2" min_enchant="100" max_enchant="300" probability="0.6"/>
+		<TradeItem subtype="legion_sw"  number="0" number_magical="1" min_enchant="100" max_enchant="360" probability="0.5"/>
+		<TradeItem subtype="smash_sw"  number="0" number_magical="2" min_enchant="100" max_enchant="300" probability="0.5"/>
+		<TradeItem subtype="horse_sw"  number="0" number_magical="1" min_enchant="100" max_enchant="360" probability="0.5"/>
+		
+		<TradeItem subtype="iroclb_hmr"  number="0" number_magical="1" min_enchant="100" max_enchant="300" probability="0.5"/>
+		<TradeItem subtype="maul_hmr"  number="0" number_magical="2" min_enchant="100" max_enchant="300" probability="0.6"/>
+		<TradeItem subtype="mrnstr_hmr"  number="0" number_magical="1" min_enchant="100" max_enchant="360" probability="0.5"/>
+		<TradeItem subtype="guard_hmr"  number="0" number_magical="2" min_enchant="100" max_enchant="300" probability="0.6"/>
+		<TradeItem subtype="silver_hmr"  number="0" number_magical="1" min_enchant="100" max_enchant="360" probability="0.5"/>
+		
+		<TradeItem subtype="cleave_axe"  number="0" number_magical="2" min_enchant="100" max_enchant="300" probability="0.6"/>
+		<TradeItem subtype="iron_axe"  number="0" number_magical="1" min_enchant="100" max_enchant="360" probability="0.5"/>
+		<TradeItem subtype="execut_axe"  number="0" number_magical="2" min_enchant="100" max_enchant="300" probability="0.6"/>
+		
+		<TradeItem subtype="long_lbw"  number="0" number_magical="3" min_enchant="100" max_enchant="300" probability="0.6"/>
+		<TradeItem subtype="hunter_sbw"  number="0" number_magical="2" min_enchant="100" max_enchant="300" probability="0.6"/>
+		<TradeItem subtype="hunter_sbw"  number="0" number_magical="2" min_enchant="100" max_enchant="300" probability="0.6"/>
+		
+		<TradeItem subtype="rock_stf"  number="0" number_magical="2" min_enchant="100" max_enchant="300" probability="0.6"/>
+		<TradeItem subtype="rock_wnd"  number="0" number_magical="2" min_enchant="100" max_enchant="300" probability="0.6"/>
+		<TradeItem subtype="alder_wnd_fire"  number="0" number_magical="1" min_enchant="100" max_enchant="360" probability="0.3"/>
+		<TradeItem subtype="alder_wnd_air"  number="0" number_magical="1" min_enchant="100" max_enchant="360" probability="0.3"/>
+		<TradeItem subtype="alder_wnd_ice"  number="0" number_magical="1" min_enchant="100" max_enchant="360" probability="0.3"/>
+		<TradeItem subtype="alder_stf_fire"  number="0" number_magical="1" min_enchant="100" max_enchant="360" probability="0.3"/>
+		<TradeItem subtype="alder_stf_air"  number="0" number_magical="1" min_enchant="100" max_enchant="360" probability="0.3"/>
+		<TradeItem subtype="alder_stf_ice"  number="0" number_magical="1" min_enchant="100" max_enchant="360" probability="0.3"/>
+		
+		<TradeItem subtype="bandit_arm"  number="0" number_magical="2" min_enchant="100" max_enchant="300" probability="0.6"/>
+		<TradeItem subtype="merc_arm"  number="0" number_magical="2" min_enchant="100" max_enchant="300" probability="0.6"/>
+		<TradeItem subtype="rngsh_arm"  number="0" number_magical="1" min_enchant="100" max_enchant="300" probability="0.5"/>
+		<TradeItem subtype="novice_arm"  number="0" number_magical="1" min_enchant="100" max_enchant="360" probability="0.5"/>
+		<TradeItem subtype="alch_rob"  number="0" number_magical="2" min_enchant="100" max_enchant="300" probability="0.6"/>
+		<TradeItem subtype="sholar_rob"  number="0" number_magical="1" min_enchant="100" max_enchant="360" probability="0.5"/>
+		
+		<TradeItem subtype="chain_glv"  number="0" number_magical="2" min_enchant="100" max_enchant="300" probability="0.5"/>
+		<TradeItem subtype="snake_glv"  number="0" number_magical="2" min_enchant="100" max_enchant="300" probability="0.5"/>
+		<TradeItem subtype="bucskn_glv"  number="0" number_magical="1" min_enchant="100" max_enchant="360" probability="0.5"/>
+		
+		<TradeItem subtype="alch_hat"  number="0" number_magical="2" min_enchant="100" max_enchant="300" probability="0.5"/>
+		<TradeItem subtype="beret_hat"  number="0" number_magical="1" min_enchant="100" max_enchant="300" probability="0.4"/>
+		<TradeItem subtype="merchd_hlm"  number="0" number_magical="1" min_enchant="100" max_enchant="300" probability="0.6"/>
+		<TradeItem subtype="novice_hlm"  number="0" number_magical="2" min_enchant="100" max_enchant="300" probability="0.5"/>
+		<TradeItem subtype="merchd_hlm"  number="0" number_magical="1" min_enchant="100" max_enchant="360" probability="0.5"/>
+		
+		<TradeItem subtype="bronze_shd"  number="0" number_magical="2" min_enchant="100" max_enchant="300" probability="0.6"/>
+		<TradeItem subtype="iron_shd"  number="0" number_magical="1" min_enchant="100" max_enchant="300" probability="0.4"/>
+		
+		<TradeItem subtype="amber_rng"  number="0" number_magical="5" min_enchant="100" max_enchant="250" probability="0.6"/>
+		<TradeItem subtype="silver_rng"  number="0" number_magical="8" min_enchant="100" max_enchant="300" probability="0.6"/>
+		<TradeItem subtype="jet_rng"  number="0" number_magical="3" min_enchant="100" max_enchant="300" probability="0.5"/>
+		<TradeItem subtype="amber_aml"  number="0" number_magical="7" min_enchant="100" max_enchant="250" probability="0.6"/>
+		<TradeItem subtype="silver_aml"  number="0" number_magical="7" min_enchant="100" max_enchant="300" probability="0.6"/>
 	</Trade>	
 	
 	<Topic name="trade" start_option="Fundgegenstaende" />

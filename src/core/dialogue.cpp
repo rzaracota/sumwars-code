@@ -56,7 +56,7 @@ void NPCTrade::TradeObject::operator=(TradeObject& other)
 	m_number_magical = other.m_number_magical;
 	m_min_enchant = other.m_min_enchant;
 	m_max_enchant = other.m_max_enchant;
-
+	m_probability = other.m_probability;
 }
 
 NPCTrade::NPCTrade()
@@ -87,6 +87,9 @@ bool NPCTrade::checkRefresh(Equipement* &equ)
 			// nicht magische Objekte erzeugen
 			for (int i=0; i< it->m_number; ++i)
 			{
+				if (Random::random() > it->m_probability)
+					continue;
+				
 				type = ItemFactory::getBaseType(it->m_subtype);
 				itm = ItemFactory::createItem(type,it->m_subtype);
 				if (itm != 0)
@@ -109,6 +112,9 @@ bool NPCTrade::checkRefresh(Equipement* &equ)
 			float magic;
 			for (int i=0; i< it->m_number_magical; ++i)
 			{
+				if (Random::random() > it->m_probability)
+					continue;
+				
 				type = ItemFactory::getBaseType(it->m_subtype);
 				magic = Random::randrangef(it->m_min_enchant, it->m_max_enchant);
 				itm = ItemFactory::createItem(type,it->m_subtype,0,magic,Item::MAGICAL);
