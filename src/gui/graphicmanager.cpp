@@ -2,8 +2,7 @@
 #include "debug.h"
 #include "elementattrib.h"
 
-
-
+double GraphicManager::g_global_scale = 1;
 
 std::map<std::string, GraphicRenderInfo*> GraphicManager::m_render_infos;
 Ogre::SceneManager* GraphicManager::m_scene_manager;

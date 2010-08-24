@@ -28,9 +28,14 @@
 #include "templateloader.h"
 #include "objectloader.h"
 
+#if NO_RAKNET
+#include "nlfgclientnetwork.h"
+#include "nlfgservernetwork.h"
+#else
 #include "rakservernetwork.h"
 #include "rakclientnetwork.h"
 #include "raknetworkpacket.h"
+#endif
 
 #include "options.h"
 
@@ -204,7 +209,11 @@ bool World::init(int port)
 		if (m_server)
 		{
 			ServerNetwork* snet;
+#ifdef NO_RAKNET
+            m_network = snet = new NLFGServerNetwork(m_max_nr_players);
+#else
 			m_network = snet = new RakServerNetwork(m_max_nr_players);
+#endif
 			if (snet->init(port) !=NET_OK )
 			{
 				ERRORMSG( "Error occured in network" );
@@ -213,7 +222,11 @@ bool World::init(int port)
 		}
 		else
 		{
+#ifdef NO_RAKNET
+            m_network = new NLFGClientNetwork();
+#else
 			m_network = new RakClientNetwork();
+#endif
 		}
 	}
 

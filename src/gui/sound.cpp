@@ -152,7 +152,7 @@ void SoundSystem::init()
 	m_device = alcOpenDevice(NULL);
     m_context = alcCreateContext(m_device, NULL);
     alcMakeContextCurrent(m_context);
-	alutInitWithoutContext(0,0);
+	alutInitWithoutContext(NULL,NULL);
 	
 	alDistanceModel(AL_LINEAR_DISTANCE_CLAMPED);
 	
