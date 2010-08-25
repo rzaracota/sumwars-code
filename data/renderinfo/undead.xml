@@ -1,7 +1,10 @@
 <!-- Monsterbases -->
 <RenderInfo name="skeletonbase" parent="playerbase">
+	<Soundobject objectname="sound" />
+
 	<Action name="die">
 		<Animation name="dieOneHand" />
+		<Sound objectname="sound" name="skel_die"/>
 	</Action>
 	
 	<Action name="ice_attack">
@@ -337,6 +340,7 @@
 	<Entity objectname="weapon" bone="itemLeftHand" source="bow.mesh" />
 	<Action name="die">
 		<Animation name="dieBowUndead" />
+		<Sound objectname="sound" name="skel_die"/>
 	</Action>
 	<Action name="dark_shot">
 		<Animation name="attackRangedBow" />
@@ -357,6 +361,7 @@
 	
 	<Action name="die">
 		<Animation name="dieBowUndead" />
+		<Sound objectname="sound" name="skel_die"/>
 	</Action>
 	<Action name="walk">
 		<Animation name="walkBow" />
@@ -422,6 +427,7 @@
 	
 	<Action name="die">
 		<Animation name="dieBowUndead" />
+		<Sound objectname="sound" name="skel_die"/>
 	</Action>
 	<Action name="walk">
 		<Animation name="walkBow" />
@@ -471,6 +477,7 @@
 		<Detach objectname="burningHead" time="0.5"/>
 		<Detach objectname="burningHandLeft" time="0.7"/>
 		<Detach objectname="burningHandRight" time="0.8"/>
+		<Sound objectname="sound" name="skel_die"/>
 	</Action>
 	<Action name="summoned">
 		<Animation name="getUpImpact" />

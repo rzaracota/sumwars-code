@@ -1,0 +1,10 @@
+
+<Sound name="worm_die">
+	<Soundfile source="monster_sound_effects/hiss.wav"/>
+</Sound>
+
+<Sound name="skel_die">
+	<Soundfile source="monster_sound_effects/bone1.wav"/>
+	<Soundfile source="monster_sound_effects/bone2.wav"/>
+	<Soundfile source="monster_sound_effects/bone3.wav"/>
+</Sound>
