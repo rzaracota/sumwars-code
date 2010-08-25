@@ -2210,10 +2210,11 @@ int EventSystem::addQuestion(lua_State *L)
 		return 0;
 
 	int argc = lua_gettop(L);
-	if (argc>=1 && lua_isstring(L,1))
+	if (argc>=1 && (lua_isstring(L,1) || lua_istable(L,1)))
 	{
 		
-		std::string text = lua_tostring(L, 1);
+		TranslatableString text;
+		getTranslatableString(L, text,1);
 		if (argc>=2 && lua_isstring(L,2))
 		{
 			std::string player = lua_tostring(L,2);
@@ -2239,9 +2240,10 @@ int EventSystem::addAnswer(lua_State *L)
 		return 0;
 
 	int argc = lua_gettop(L);
-	if (argc>=2 && lua_isstring(L,1) && lua_isstring(L,2))
+	if (argc>=2 && (lua_isstring(L,1) || lua_istable(L,1)) && lua_isstring(L,2))
 	{
-		std::string text = lua_tostring(L, 1);
+		TranslatableString text;
+		getTranslatableString(L, text,1);
 		std::string topic = lua_tostring(L, 2);
 
 		m_dialogue->addAnswer(text,topic);
@@ -2816,9 +2818,10 @@ int EventSystem::setRelation(lua_State *L)
 int EventSystem::printMessage(lua_State *L)
 {
 	int argc = lua_gettop(L);
-	if (argc>=1 && lua_isstring(L,1))
+	if (argc>=1 && (lua_isstring(L,1) || lua_istable(L,1)))
 	{
-		std::string msg = lua_tostring(L,1);
+		TranslatableString msg;
+		getTranslatableString(L,msg,1);
 		World::getWorld()->handleMessage(msg,NOSLOT);
 	}
 	else

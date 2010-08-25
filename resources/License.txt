@@ -1,0 +1,6 @@
+*** Toplevel License File ***
+
+This file contains default licenses used by the different content authors.
+If not declared otherwise, all artwork is released under the authors default license.
+
+Each subdirectory contains another license file thats lists the author and (if explicitely specified) the license for each file

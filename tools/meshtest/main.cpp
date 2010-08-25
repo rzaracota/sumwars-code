@@ -41,9 +41,9 @@ class SumWarsApplication : public ExampleApplication
 		virtual void createCamera(void)
 		{
 			mCamera = mSceneMgr->createCamera("PlayerCam");
-			mCamera->setPosition(Vector3(0, 500,500));
-			mCamera->lookAt(Vector3(0,50,0));
-			mCamera->setNearClipDistance(5);
+			mCamera->setPosition(Vector3(0, 10,10));
+			mCamera->lookAt(Vector3(0,1,0));
+			mCamera->setNearClipDistance(0.1);
 		}
 
 		virtual void createViewport(void)
@@ -104,7 +104,7 @@ class SumWarsApplication : public ExampleApplication
 
 
 			Plane plane(Vector3::UNIT_Y, 0);
-			MeshManager::getSingleton().createPlane("ground", ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME, plane, 1000, 1500, 20, 20, true, 1,5,5,Vector3::UNIT_X);
+			MeshManager::getSingleton().createPlane("ground", ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME, plane, 20, 30, 20, 20, true, 1,5,5,Vector3::UNIT_X);
 
 			Entity *player;
 			try

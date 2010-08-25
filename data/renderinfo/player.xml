@@ -86,10 +86,10 @@
 	</Action>
 	
 	<Action name="lie">
-		<Animation name="unconscious" />
+		<Animation name="lieOneHand" />
 	</Action>
 	<Action name="lie#bow">
-		<Animation name="unconscious" />
+		<Animation name="lieBow" />
 	</Action>
 	
 	<Action name="getUp">
@@ -664,6 +664,13 @@
 </RenderInfo>
 
 <RenderInfo name="playerbaseM" parent="playerbase">
+	
+	<Action name="lie">
+		<Animation name="unconscious" />
+	</Action>
+	<Action name="lie#bow">
+		<Animation name="unconscious" />
+	</Action>
 	
 	<Action name="magic_attack#Unarmed">
 		<Animation name="attackMagicUnarmed" />

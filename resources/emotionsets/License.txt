@@ -1,0 +1,21 @@
+*** Emotionset license file ***
+This file contains all license information for artwork located in the emotionset directory
+
+
+If not declared otherwise, all artwork is released under the authors default license.
+
+
+Artwork provided by: Andreas Schönfeld and Steffen Schönefeld (Kalimgard)
+Default license:
+Files:
+	emo_councilMageCrystal.png  
+	emo_derred.png  
+	emo_gertlinde.png  
+	emo_ireana.png  
+	emo_rogue.png  
+	emo_warrior.png
+	emo_councilMage.png         
+	emo_farmer.png  
+	emo_greif.png      
+	emo_legend.png  
+	emo_tolec.png

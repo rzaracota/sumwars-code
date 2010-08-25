@@ -142,7 +142,7 @@
 <Monster type="MONSTER" subtype="goblin_drakrazz" name="Drakrazz" fraction="monster" race="goblin" layer="NORMAL">
 	<RenderInfo name="goblin_drakrazz" />
 	<Dropslots >
-		<Dropslot pbig="0.2" pmedium="0.3" psmall="0.1" pgold="0.05" min_gold="30" max_gold="100" min_level="0" max_level="7" magic_prob="0.5" magic_power="350" />
+		<Dropslot pbig="0.4" pmedium="0.5" psmall="0.1" pgold="0.00" min_gold="30" max_gold="100" min_level="0" max_level="6" magic_prob="0.8" magic_power="350" />
 		<Dropslot pbig="0.2" pmedium="0.3" psmall="0.1" pgold="0.05" min_gold="20" max_gold="60" min_level="0" max_level="5" magic_prob="0.5" magic_power="300" />
 		<Dropslot pbig="0.00" pmedium="0.0" psmall="0.4" pgold="0.00" min_gold="20" max_gold="60" min_level="0" max_level="5" magic_prob="0.5" magic_power="300" />
 		<Dropslot pbig="0.00" pmedium="0.0" psmall="0.00" pgold="1.00" min_gold="20" max_gold="50" />
@@ -150,7 +150,7 @@
 	
 	<BasicAttributes
 					experience="50"
-					level="6"
+					level="5"
 					max_health="200"
 					armor="20"
 					block="0"
@@ -191,7 +191,7 @@
 <Monster type="MONSTER" subtype="goblin_roruz" name="Roruz" fraction="monster" race="goblin" layer="NORMAL">
 	<RenderInfo name="goblin_roruz" />
 	<Dropslots >
-		<Dropslot pbig="0.2" pmedium="0.3" psmall="0.1" pgold="0.05" min_gold="30" max_gold="100" min_level="2" max_level="8" magic_prob="0.5" magic_power="350" />
+		<Dropslot pbig="0.4" pmedium="0.5" psmall="0.1" pgold="0.00" min_gold="30" max_gold="100" min_level="2" max_level="8" magic_prob="0.8" magic_power="350" />
 		<Dropslot pbig="0.2" pmedium="0.3" psmall="0.1" pgold="0.05" min_gold="20" max_gold="60" min_level="2" max_level="6" magic_prob="0.5" magic_power="300" />
 		<Dropslot pbig="0.00" pmedium="0.0" psmall="0.4" pgold="0.00" min_gold="20" max_gold="60" min_level="1" max_level="6" magic_prob="0.5" magic_power="300" />
 		<Dropslot pbig="0.00" pmedium="0.0" psmall="0.00" pgold="1.00" min_gold="20" max_gold="50" />
@@ -238,9 +238,9 @@
 <Monster type="MONSTER" subtype="goblin_nubreck" name="Nubreck" fraction="monster" race="goblin" layer="NORMAL">
 	<RenderInfo name="goblin_nubreck" />
 	<Dropslots >
-		<Dropslot pbig="0.2" pmedium="0.3" psmall="0.1" pgold="0.05" min_gold="30" max_gold="100" min_level="3" max_level="9" magic_prob="0.5" magic_power="400" />
-		<Dropslot pbig="0.2" pmedium="0.3" psmall="0.1" pgold="0.05" min_gold="20" max_gold="60" min_level="3" max_level="6" magic_prob="0.5" magic_power="300" />
-		<Dropslot pbig="0.00" pmedium="0.0" psmall="0.4" pgold="0.00" min_gold="20" max_gold="60" min_level="2" max_level="6" magic_prob="0.5" magic_power="300" />
+		<Dropslot pbig="0.4" pmedium="0.5" psmall="0.0" pgold="0.05" min_gold="30" max_gold="100" min_level="3" max_level="9" magic_prob="0.8" magic_power="400" />
+		<Dropslot pbig="0.2" pmedium="0.3" psmall="0.1" pgold="0.05" min_gold="20" max_gold="60" min_level="3" max_level="6" magic_prob="0.5" magic_power="350" />
+		<Dropslot pbig="0.00" pmedium="0.0" psmall="0.4" pgold="0.00" min_gold="20" max_gold="60" min_level="2" max_level="6" magic_prob="0.5" magic_power="350" />
 		<Dropslot pbig="0.00" pmedium="0.0" psmall="0.00" pgold="1.00" min_gold="20" max_gold="50" />
 	</Dropslots>
 	
@@ -379,9 +379,9 @@
 <Monster type="MONSTER" subtype="goblin_gobrusch" name="Gobrusch" fraction="monster" race="goblin" layer="NORMAL">
 	<RenderInfo name="goblin_gobrusch" />
 	<Dropslots >
-		<Dropslot pbig="0.2" pmedium="0.3" psmall="0.1" pgold="0.05" min_gold="50" max_gold="150" min_level="5" max_level="10" magic_prob="0.5" magic_power="450" />
-		<Dropslot pbig="0.2" pmedium="0.3" psmall="0.1" pgold="0.05" min_gold="30" max_gold="60" min_level="4" max_level="5" magic_prob="0.5" magic_power="300" />
-		<Dropslot pbig="0.00" pmedium="0.0" psmall="0.4" pgold="0.00" min_gold="30" max_gold="60" min_level="4" max_level="7" magic_prob="0.5" magic_power="300" />
+		<Dropslot pbig="0.4" pmedium="0.5" psmall="0.1" pgold="0.00" min_gold="50" max_gold="150" min_level="5" max_level="10" magic_prob="0.8" magic_power="450" />
+		<Dropslot pbig="0.2" pmedium="0.3" psmall="0.1" pgold="0.05" min_gold="30" max_gold="60" min_level="4" max_level="5" magic_prob="0.5" magic_power="400" />
+		<Dropslot pbig="0.00" pmedium="0.0" psmall="0.4" pgold="0.00" min_gold="30" max_gold="60" min_level="4" max_level="7" magic_prob="0.5" magic_power="400" />
 		<Dropslot pbig="0.00" pmedium="0.0" psmall="0.00" pgold="1.00" min_gold="40" max_gold="70" />
 	</Dropslots>
 	
@@ -427,9 +427,9 @@
 <Monster type="MONSTER" subtype="goblin_dobrusch" name="Dobrusch" fraction="monster" race="goblin" layer="NORMAL">
 	<RenderInfo name="goblin_dobrusch" />
 	<Dropslots >
-		<Dropslot pbig="0.2" pmedium="0.3" psmall="0.1" pgold="0.05" min_gold="50" max_gold="150" min_level="5" max_level="10" magic_prob="0.5" magic_power="450" />
-		<Dropslot pbig="0.2" pmedium="0.3" psmall="0.1" pgold="0.05" min_gold="30" max_gold="60" min_level="4" max_level="5" magic_prob="0.5" magic_power="300" />
-		<Dropslot pbig="0.00" pmedium="0.0" psmall="0.4" pgold="0.00" min_gold="30" max_gold="60" min_level="4" max_level="7" magic_prob="0.5" magic_power="300" />
+		<Dropslot pbig="0.4" pmedium="0.5" psmall="0.1" pgold="0.00" min_gold="50" max_gold="150" min_level="5" max_level="10" magic_prob="0.8" magic_power="450" />
+		<Dropslot pbig="0.2" pmedium="0.3" psmall="0.1" pgold="0.05" min_gold="30" max_gold="60" min_level="4" max_level="5" magic_prob="0.5" magic_power="400" />
+		<Dropslot pbig="0.00" pmedium="0.0" psmall="0.4" pgold="0.00" min_gold="30" max_gold="60" min_level="4" max_level="7" magic_prob="0.5" magic_power="400" />
 		<Dropslot pbig="0.00" pmedium="0.0" psmall="0.00" pgold="1.00" min_gold="40" max_gold="70" />
 	</Dropslots>
 	
@@ -475,9 +475,9 @@
 <Monster type="MONSTER" subtype="goblin_lurdrak" name="Lurdrak with the Hammer" fraction="monster" race="goblin" layer="NORMAL">
 	<RenderInfo name="goblin_lurdrak" />
 	<Dropslots >
-		<Dropslot pbig="0.2" pmedium="0.3" psmall="0.1" pgold="0.05" min_gold="50" max_gold="150" min_level="5" max_level="10" magic_prob="0.5" magic_power="450" />
-		<Dropslot pbig="0.2" pmedium="0.3" psmall="0.1" pgold="0.05" min_gold="30" max_gold="60" min_level="4" max_level="5" magic_prob="0.5" magic_power="300" />
-		<Dropslot pbig="0.00" pmedium="0.0" psmall="0.4" pgold="0.00" min_gold="30" max_gold="60" min_level="4" max_level="7" magic_prob="0.5" magic_power="300" />
+		<Dropslot pbig="0.4" pmedium="0.5" psmall="0.1" pgold="0.00" min_gold="50" max_gold="150" min_level="5" max_level="10" magic_prob="0.8" magic_power="450" />
+		<Dropslot pbig="0.2" pmedium="0.3" psmall="0.1" pgold="0.05" min_gold="30" max_gold="60" min_level="4" max_level="5" magic_prob="0.5" magic_power="400" />
+		<Dropslot pbig="0.00" pmedium="0.0" psmall="0.4" pgold="0.00" min_gold="30" max_gold="60" min_level="4" max_level="7" magic_prob="0.5" magic_power="400" />
 		<Dropslot pbig="0.00" pmedium="0.0" psmall="0.00" pgold="1.00" min_gold="50" max_gold="100" />
 	</Dropslots>
 	
@@ -706,9 +706,9 @@
 <Monster type="MONSTER" subtype="goblin_regresh" name="reg'resh" fraction="monster" race="goblin" layer="NORMAL">
 	<RenderInfo name="goblin_regresh" />
 	<Dropslots >
-		<Dropslot pbig="0.4" pmedium="0.5" psmall="0.1" pgold="0.00" min_gold="100" max_gold="450" min_level="6" max_level="13" magic_prob="1.0" magic_power="450" />
-		<Dropslot pbig="0.4" pmedium="0.5" psmall="0.1" pgold="0.00" min_gold="90" max_gold="200" min_level="4" max_level="10" magic_prob="1.0" magic_power="300" />
-		<Dropslot pbig="0.00" pmedium="0.0" psmall="0.4" pgold="0.00" min_gold="80" max_gold="160" min_level="4" max_level="10" magic_prob="0.2" magic_power="300" />
+		<Dropslot pbig="0.4" pmedium="0.5" psmall="0.1" pgold="0.00" min_gold="100" max_gold="450" min_level="6" max_level="13" magic_prob="1.0" magic_power="550" />
+		<Dropslot pbig="0.4" pmedium="0.5" psmall="0.1" pgold="0.00" min_gold="90" max_gold="200" min_level="4" max_level="10" magic_prob="1.0" magic_power="450" />
+		<Dropslot pbig="0.00" pmedium="0.0" psmall="0.4" pgold="0.00" min_gold="80" max_gold="160" min_level="4" max_level="10" magic_prob="0.5" magic_power="450" />
 		<Dropslot pbig="0.00" pmedium="0.0" psmall="0.00" pgold="1.00" min_gold="100" max_gold="400" />
 	</Dropslots>
 	
@@ -754,9 +754,9 @@
 <Monster type="MONSTER" subtype="goblin_tguard" name="goblin temple guard" fraction="monster" race="goblin" layer="NORMAL">
 	<RenderInfo name="goblin_tguard" />
 	<Dropslots >
-		<Dropslot pbig="0.2" pmedium="0.3" psmall="0.1" pgold="0.05" min_gold="50" max_gold="150" min_level="5" max_level="10" magic_prob="0.5" magic_power="450" />
-		<Dropslot pbig="0.2" pmedium="0.3" psmall="0.1" pgold="0.05" min_gold="30" max_gold="60" min_level="4" max_level="5" magic_prob="0.5" magic_power="300" />
-		<Dropslot pbig="0.00" pmedium="0.0" psmall="0.4" pgold="0.00" min_gold="30" max_gold="60" min_level="4" max_level="7" magic_prob="0.5" magic_power="300" />
+		<Dropslot pbig="0.3" pmedium="0.4" psmall="0.1" pgold="0.05" min_gold="50" max_gold="150" min_level="5" max_level="10" magic_prob="0.5" magic_power="450" />
+		<Dropslot pbig="0.2" pmedium="0.3" psmall="0.1" pgold="0.05" min_gold="30" max_gold="60" min_level="4" max_level="5" magic_prob="0.5" magic_power="400" />
+		<Dropslot pbig="0.00" pmedium="0.0" psmall="0.4" pgold="0.00" min_gold="30" max_gold="60" min_level="4" max_level="7" magic_prob="0.5" magic_power="400" />
 		<Dropslot pbig="0.00" pmedium="0.0" psmall="0.00" pgold="1.00" min_gold="40" max_gold="70" />
 	</Dropslots>
 	
@@ -800,9 +800,9 @@
 <Monster type="MONSTER" subtype="goblin_apprtc" name="goblin apprentice" fraction="monster" race="goblin" layer="NORMAL">
 	<RenderInfo name="goblin_apprtc" />
 	<Dropslots >
-		<Dropslot pbig="0.2" pmedium="0.3" psmall="0.1" pgold="0.05" min_gold="50" max_gold="150" min_level="5" max_level="10" magic_prob="0.5" magic_power="450" />
-		<Dropslot pbig="0.2" pmedium="0.3" psmall="0.1" pgold="0.05" min_gold="30" max_gold="60" min_level="4" max_level="5" magic_prob="0.5" magic_power="300" />
-		<Dropslot pbig="0.00" pmedium="0.0" psmall="0.4" pgold="0.00" min_gold="30" max_gold="60" min_level="4" max_level="7" magic_prob="0.5" magic_power="300" />
+		<Dropslot pbig="0.4" pmedium="0.5" psmall="0.1" pgold="0.00" min_gold="50" max_gold="150" min_level="5" max_level="10" magic_prob="0.8" magic_power="450" />
+		<Dropslot pbig="0.2" pmedium="0.3" psmall="0.1" pgold="0.05" min_gold="30" max_gold="60" min_level="4" max_level="5" magic_prob="0.5" magic_power="400" />
+		<Dropslot pbig="0.00" pmedium="0.0" psmall="0.4" pgold="0.00" min_gold="30" max_gold="60" min_level="4" max_level="7" magic_prob="0.5" magic_power="400" />
 		<Dropslot pbig="0.00" pmedium="0.0" psmall="0.00" pgold="1.00" min_gold="40" max_gold="70" />
 	</Dropslots>
 	
@@ -849,9 +849,9 @@
 <Monster type="MONSTER" subtype="goblin_marblak" name="Marblak" fraction="monster" race="goblin" layer="NORMAL">
 	<RenderInfo name="goblin_marblak" />
 	<Dropslots >
-		<Dropslot pbig="0.2" pmedium="0.3" psmall="0.1" pgold="0.05" min_gold="50" max_gold="150" min_level="5" max_level="10" magic_prob="0.5" magic_power="450" />
-		<Dropslot pbig="0.2" pmedium="0.3" psmall="0.1" pgold="0.05" min_gold="30" max_gold="60" min_level="4" max_level="5" magic_prob="0.5" magic_power="300" />
-		<Dropslot pbig="0.00" pmedium="0.0" psmall="0.4" pgold="0.00" min_gold="30" max_gold="60" min_level="4" max_level="7" magic_prob="0.5" magic_power="300" />
+		<Dropslot pbig="0.4" pmedium="0.5" psmall="0.1" pgold="0.00" min_gold="50" max_gold="150" min_level="5" max_level="10" magic_prob="0.8" magic_power="450" />
+		<Dropslot pbig="0.2" pmedium="0.3" psmall="0.1" pgold="0.05" min_gold="30" max_gold="60" min_level="4" max_level="5" magic_prob="0.5" magic_power="400" />
+		<Dropslot pbig="0.00" pmedium="0.0" psmall="0.4" pgold="0.00" min_gold="30" max_gold="60" min_level="4" max_level="7" magic_prob="0.5" magic_power="400" />
 		<Dropslot pbig="0.00" pmedium="0.0" psmall="0.00" pgold="1.00" min_gold="50" max_gold="100" />
 	</Dropslots>
 	
@@ -942,9 +942,9 @@
 <Monster type="MONSTER" subtype="goblin_gabresh" name="Gab'Resh" fraction="monster" race="goblin" layer="NORMAL">
 	<RenderInfo name="goblin_gabresh" />
 	<Dropslots >
-		<Dropslot pbig="0.2" pmedium="0.3" psmall="0.1" pgold="0.05" min_gold="30" max_gold="100" min_level="4" max_level="8" magic_prob="0.3" magic_power="350" />
-		<Dropslot pbig="0.2" pmedium="0.3" psmall="0.1" pgold="0.05" min_gold="20" max_gold="60" min_level="3" max_level="7" magic_prob="0.3" magic_power="300" />
-		<Dropslot pbig="0.00" pmedium="0.0" psmall="0.4" pgold="0.00" min_gold="20" max_gold="60" min_level="2" max_level="6" magic_prob="0.2" magic_power="300" />
+		<Dropslot pbig="0.4" pmedium="0.5" psmall="0.1" pgold="0.00" min_gold="30" max_gold="100" min_level="4" max_level="8" magic_prob="0.8" magic_power="350" />
+		<Dropslot pbig="0.2" pmedium="0.3" psmall="0.1" pgold="0.05" min_gold="20" max_gold="60" min_level="3" max_level="7" magic_prob="0.5" magic_power="300" />
+		<Dropslot pbig="0.00" pmedium="0.0" psmall="0.4" pgold="0.00" min_gold="20" max_gold="60" min_level="2" max_level="6" magic_prob="0.5" magic_power="300" />
 		<Dropslot pbig="0.00" pmedium="0.0" psmall="0.00" pgold="1.00" min_gold="30" max_gold="100" />
 	</Dropslots>
 	

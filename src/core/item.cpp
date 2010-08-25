@@ -128,6 +128,8 @@ Item::Item(int id)
 	m_rarity = NORMAL;
 	m_char_req = "all";
 	m_size = SMALL;
+	
+	m_magic_mods.reset();
 }
 
 Item::Item(ItemBasicData& data, int id)
@@ -194,6 +196,8 @@ Item::Item(ItemBasicData& data, int id)
 
 	m_level_req = data.m_level_req;
 	m_char_req = data.m_char_req;
+	
+	m_magic_mods.reset();
 }
 
 Item::~Item()
@@ -527,9 +531,10 @@ void Item::toStringComplete(CharConv* cv)
 
 	}
 
-
-
-
+	if (cv->getVersion() >= 16)
+	{
+		cv->toBuffer( m_magic_mods.to_string());
+	}
 }
 
 void Item::fromStringComplete(CharConv* cv)
@@ -632,6 +637,12 @@ void Item::fromStringComplete(CharConv* cv)
 
 	}
 
+	if (cv->getVersion() >= 16)
+	{
+		std::string magicmods;
+		cv->fromBuffer(magicmods);
+		m_magic_mods = std::bitset<32>(magicmods);
+	}
 
 }
 

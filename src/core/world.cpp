@@ -28,16 +28,21 @@
 #include "templateloader.h"
 #include "objectloader.h"
 
+#if NO_RAKNET
+#include "nlfgclientnetwork.h"
+#include "nlfgservernetwork.h"
+#else
 #include "rakservernetwork.h"
 #include "rakclientnetwork.h"
 #include "raknetworkpacket.h"
+#endif
 
 #include "options.h"
 
 #include "OgreResourceGroupManager.h"
 
 World* World::m_world=0;
-int World::m_version = 15;
+int World::m_version = 16;
 
 void  World::createWorld(bool server, int port, bool cooperative, int max_players)
 {
@@ -204,7 +209,11 @@ bool World::init(int port)
 		if (m_server)
 		{
 			ServerNetwork* snet;
+#ifdef NO_RAKNET
+            m_network = snet = new NLFGServerNetwork(m_max_nr_players);
+#else
 			m_network = snet = new RakServerNetwork(m_max_nr_players);
+#endif
 			if (snet->init(port) !=NET_OK )
 			{
 				ERRORMSG( "Error occured in network" );
@@ -213,7 +222,11 @@ bool World::init(int port)
 		}
 		else
 		{
+#ifdef NO_RAKNET
+            m_network = new NLFGClientNetwork();
+#else
 			m_network = new RakClientNetwork();
+#endif
 		}
 	}
 
@@ -325,7 +338,7 @@ void World::updateLogins()
 			header.fromString(data);
 			if (header.m_content == PTYPE_C2S_SAVEGAME)
 			{
-				DEBUGX("got savegame from slot %i",(*i));
+				DEBUG("got savegame from slot %i",(*i));
 				handleSavegame(data,*i);
 				i = m_logins.erase(i);
 
@@ -460,7 +473,7 @@ Fraction::Relation World::getRelation(Fraction::Id frac, Fraction::Id frac2)
 	else
 	{
 		// Beziehung zwischen Spielern
-		return std::min(m_parties[frac].getRelations()[frac2], m_parties[frac2].getRelations()[frac]);
+		return Fraction::Relation(MathHelper::Min(m_parties[frac].getRelations()[frac2], m_parties[frac2].getRelations()[frac]));
 	}
 
 
@@ -1046,25 +1059,26 @@ void World::handleCommand(ClientCommand* comm, int slot, float delay)
 
 }
 
-void World::handleMessage(std::string msg, int slot)
+void World::handleMessage(TranslatableString msg, int slot)
 {
 
-	std::string smsg = msg;
+	std::string smsg = msg.getTranslation();
 
 	// als Server: Nachricht an alle Spieler versenden
 	// als Client: Nachricht an den Server senden
-	if (m_server && msg[0]!='$')
+	TranslatableString trsmsg = msg;
+	if (m_server && smsg[0]!='$')
 	{
-
 		// Name des Senders an die Nachricht haengen
-		smsg = "";
+		std::string plmsg = "";
+		
 		if (m_player_slots->count(slot)>0)
 		{
 			Player* pl = static_cast<Player*>((*m_player_slots)[slot]);
 			if (pl != 0)
 			{
-				smsg += "[";
-				smsg += pl->getName();
+				plmsg += "[";
+				plmsg += pl->getName();
 
 				if (pl->getSpeakText().m_text == "" && pl->getDialogue() == 0)
 				{
@@ -1074,10 +1088,11 @@ void World::handleMessage(std::string msg, int slot)
 					text.m_in_dialogue = false;
 					pl->speakText(text);
 				}
-				smsg += "] ";
+				plmsg += "] ";
+				
+				trsmsg = plmsg + smsg;
 			}
 		}
-		smsg += msg;
 
 		if (m_network != 0)
 		{
@@ -1089,7 +1104,7 @@ void World::handleMessage(std::string msg, int slot)
 			header.m_number = smsg.size();
 
 			header.toString(cv);
-			cv->toBuffer(smsg);
+			trsmsg.toString(cv);
 
 			// Nachricht an alle Spieler mit ausser dem Sender
 			WorldObjectMap::iterator it;
@@ -1115,7 +1130,7 @@ void World::handleMessage(std::string msg, int slot)
             header.m_number = msg.size();
 
             header.toString(cv);
-            cv->toBuffer(msg);
+            msg.toString(cv);
 
             getNetwork()->pushSlotMessage(cv);
 			m_network->deallocatePacket(cv);
@@ -1123,14 +1138,17 @@ void World::handleMessage(std::string msg, int slot)
             smsg = "[";
             smsg += m_local_player->getName();
             smsg += "] ";
-            smsg += msg;
+            smsg += msg.getTranslation();
+			
+			trsmsg = TranslatableString(smsg);
 	    }
 	}
 
 	// Nachricht einfuegen
-	static_cast<Player*>(m_local_player)->addMessage(smsg);
+	static_cast<Player*>(m_local_player)->addMessage(trsmsg.getTranslation());
 
-	if (msg[0] == '$')
+	std::string code = msg.getTranslation();
+	if (code[0] == '$')
 	{
 		// Cheatcode eingegeben
 		Player* pl = 0;
@@ -1140,7 +1158,7 @@ void World::handleMessage(std::string msg, int slot)
 		}
 
 		std::stringstream stream;
-		stream << msg;
+		stream << code;
 
 		// $ lesen
 		char dummy;
@@ -1194,7 +1212,7 @@ void World::handleMessage(std::string msg, int slot)
 		{
 			EventSystem::setRegion(m_local_player->getRegion());
 			std::string instr = "";
-			instr += msg.substr(1);
+			instr += code.substr(1);
 			std::string ret;
 
 			EventSystem::doString((char*) instr.c_str());
@@ -1444,13 +1462,10 @@ void World::updatePlayers()
 
 				if (headerp.m_content == PTYPE_C2S_MESSAGE)
 				{
-					char* buf = new char[headerp.m_number+1];
-					buf[headerp.m_number] = 0;
-					cv->fromBuffer(buf, headerp.m_number);
+					TranslatableString tr;
+					tr.fromString(cv);
 
-					handleMessage(buf,slot);
-
-					delete buf;
+					handleMessage(tr,slot);
 				}
 
 				m_network->deallocatePacket(cv);
@@ -1683,13 +1698,11 @@ void World::updatePlayers()
 				}
 				else if (headerp.m_content == PTYPE_S2C_MESSAGE)
 				{
-					char* buf = new char[headerp.m_number+1];
-					buf[headerp.m_number] = 0;
-					cv->fromBuffer(buf, headerp.m_number);
+					TranslatableString tr;
+					tr.fromString(cv);
 
-					static_cast<Player*>(m_local_player)->addMessage(buf);
+					static_cast<Player*>(m_local_player)->addMessage(tr.getTranslation());
 
-					delete buf;
 				}
 				else if (headerp.m_content == PTYPE_S2C_LUA_CHUNK)
 				{
@@ -2679,8 +2692,9 @@ bool World::calcBlockmat(PathfindInfo * pathinfo)
 			// Mittelpunkt des Objektes im Grid
 			js = (int) floor((wos->m_center.m_y - c1.m_y)/sqs);
 			is = (int) floor((wos->m_center.m_x - c1.m_x)/sqs);
-			is = std::max(std::min(is,pathinfo->m_dim-1),0);
-			js = std::max(std::min(js,pathinfo->m_dim-1),0);
+			
+			is = MathHelper::Max(MathHelper::Min(is,pathinfo->m_dim-1),0);
+			js = MathHelper::Max(MathHelper::Min(js,pathinfo->m_dim-1),0);
 
 			// Form zum Testen auf Kollisionen
 			s2.m_center.m_y = (js+0.5)*sqs+c1.m_y;
@@ -3013,3 +3027,4 @@ void World::createFraction(Fraction::Type name)
 	frac = new Fraction(id, name);
 	m_fractions[id] = frac;
 }
+

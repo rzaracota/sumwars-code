@@ -78,7 +78,7 @@ Item* ItemFactory::createGold(int value, int id)
 }
 
 
-void ItemFactory::createMagicMods(Item* item, float* modchance, float magic_power, float min_enchant, float max_enchant, float enchant_multiplier)
+void ItemFactory::createMagicMods(Item* item, float* modchance, float magic_power, float min_enchant, float max_enchant, float enchant_multiplier, bool duplicate_enchant)
 {
 	DEBUGX("magic power %f min_enchant %f",magic_power, min_enchant);
 	if (magic_power < min_enchant && magic_power != 0)
@@ -103,7 +103,16 @@ void ItemFactory::createMagicMods(Item* item, float* modchance, float magic_powe
 	float mod_power[31];
 	float modprob[31];
 	for (int i=0; i<31; i++)
-		modprob[i] = modchance[i];
+	{
+		if (duplicate_enchant || !item->m_magic_mods.test(i))
+		{
+			modprob[i] = modchance[i];
+		}
+		else
+		{
+			modprob[i] = 0;
+		}
+	}
 	
 	memset(mod_power,0,31*sizeof(float));
 
@@ -113,9 +122,6 @@ void ItemFactory::createMagicMods(Item* item, float* modchance, float magic_powe
 	{
 		sum += modprob[i];
 	}
-	
-	if (sum < 0.001)
-		return;
 	
 	// Staerke der aktuellen Verzauberung
 	float mp, mpbase;
@@ -134,10 +140,10 @@ void ItemFactory::createMagicMods(Item* item, float* modchance, float magic_powe
 	int num_mods=0;
 	while (magic_power>=min_enchant && num_mods<4)
 	{
-		if (item->m_rarity == Item::NORMAL)
-		{
-			item->m_rarity = Item::MAGICAL;
-		}
+		
+		if (sum < 0.001)
+			break;
+		
 		// Staerke auswuerfeln
 		mp = Random::randrangef(min_enchant,max_enchant);
 		mp = MathHelper::Min(mp, magic_power);
@@ -281,9 +287,14 @@ void ItemFactory::createMagicMods(Item* item, float* modchance, float magic_powe
 				break;
 
 		}
+		
+		if (item->m_rarity == Item::NORMAL)
+		{
+			item->m_rarity = Item::MAGICAL;
+		}
 
-			// jede Modifikation darf nur einmal vorkommen, entfernen
-
+		// jede Modifikation darf nur einmal vorkommen, entfernen
+		item->m_magic_mods.set(mod,true);
 		sum -= modprob[mod];
 		modprob[mod]=0;
 	}

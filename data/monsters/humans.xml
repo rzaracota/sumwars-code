@@ -221,9 +221,9 @@
 <Monster type="MONSTER" subtype="human_alwin" name="Alwin" fraction="monster" race="human" layer="NORMAL">
 	<RenderInfo name="human_alwin" />
 	<Dropslots >
-		<Dropslot pbig="0.2" pmedium="0.3" psmall="0.1" pgold="0.05" min_gold="50" max_gold="150" min_level="5" max_level="12" magic_prob="0.5" magic_power="450" />
-		<Dropslot pbig="0.2" pmedium="0.3" psmall="0.1" pgold="0.05" min_gold="30" max_gold="60" min_level="5" max_level="10" magic_prob="0.5" magic_power="350" />
-		<Dropslot pbig="0.00" pmedium="0.0" psmall="0.4" pgold="0.00" min_gold="30" max_gold="60" min_level="4" max_level="8" magic_prob="0.5" magic_power="300" />
+		<Dropslot pbig="0.4" pmedium="0.5" psmall="0.1" pgold="0.00" min_gold="50" max_gold="150" min_level="5" max_level="12" magic_prob="0.8" magic_power="450" />
+		<Dropslot pbig="0.2" pmedium="0.3" psmall="0.1" pgold="0.05" min_gold="30" max_gold="60" min_level="5" max_level="10" magic_prob="0.5" magic_power="400" />
+		<Dropslot pbig="0.00" pmedium="0.0" psmall="0.4" pgold="0.00" min_gold="30" max_gold="60" min_level="4" max_level="8" magic_prob="0.5" magic_power="400" />
 		<Dropslot pbig="0.00" pmedium="0.0" psmall="0.00" pgold="1.00" min_gold="50" max_gold="120" />
 	</Dropslots>
 	
@@ -399,9 +399,9 @@
 <Monster type="MONSTER" subtype="human_buck" name="Buck" fraction="monster" race="human" layer="NORMAL">
 	<RenderInfo name="human_buck" />
 	<Dropslots >
-		<Dropslot pbig="0.2" pmedium="0.3" psmall="0.1" pgold="0.05" min_gold="50" max_gold="150" min_level="5" max_level="12" magic_prob="0.5" magic_power="450" />
-		<Dropslot pbig="0.2" pmedium="0.3" psmall="0.1" pgold="0.05" min_gold="30" max_gold="60" min_level="5" max_level="10" magic_prob="0.5" magic_power="350" />
-		<Dropslot pbig="0.00" pmedium="0.0" psmall="0.4" pgold="0.00" min_gold="30" max_gold="60" min_level="4" max_level="8" magic_prob="0.5" magic_power="300" />
+		<Dropslot pbig="0.4" pmedium="0.5" psmall="0.1" pgold="0.00" min_gold="50" max_gold="150" min_level="5" max_level="12" magic_prob="0.8" magic_power="450" />
+		<Dropslot pbig="0.2" pmedium="0.3" psmall="0.1" pgold="0.05" min_gold="30" max_gold="60" min_level="5" max_level="10" magic_prob="0.5" magic_power="400" />
+		<Dropslot pbig="0.00" pmedium="0.0" psmall="0.4" pgold="0.00" min_gold="30" max_gold="60" min_level="4" max_level="8" magic_prob="0.5" magic_power="400" />
 		<Dropslot pbig="0.00" pmedium="0.0" psmall="0.00" pgold="1.00" min_gold="50" max_gold="120" />
 	</Dropslots>
 	
@@ -533,9 +533,9 @@
 <Monster type="MONSTER" subtype="human_todd" name="Todd" fraction="monster" race="human" layer="NORMAL">
 	<RenderInfo name="human_todd" />
 	<Dropslots >
-		<Dropslot pbig="0.2" pmedium="0.3" psmall="0.1" pgold="0.05" min_gold="50" max_gold="150" min_level="7" max_level="13" magic_prob="0.5" magic_power="450" />
-		<Dropslot pbig="0.2" pmedium="0.3" psmall="0.1" pgold="0.05" min_gold="30" max_gold="60" min_level="7" max_level="11" magic_prob="0.5" magic_power="350" />
-		<Dropslot pbig="0.00" pmedium="0.0" psmall="0.4" pgold="0.00" min_gold="30" max_gold="60" min_level="5" max_level="9" magic_prob="0.5" magic_power="300" />
+		<Dropslot pbig="0.4" pmedium="0.5" psmall="0.1" pgold="0.00" min_gold="50" max_gold="150" min_level="7" max_level="13" magic_prob="0.8" magic_power="450" />
+		<Dropslot pbig="0.2" pmedium="0.3" psmall="0.1" pgold="0.05" min_gold="30" max_gold="60" min_level="7" max_level="11" magic_prob="0.5" magic_power="400" />
+		<Dropslot pbig="0.00" pmedium="0.0" psmall="0.4" pgold="0.00" min_gold="30" max_gold="60" min_level="5" max_level="9" magic_prob="0.5" magic_power="400" />
 		<Dropslot pbig="0.00" pmedium="0.0" psmall="0.00" pgold="1.00" min_gold="50" max_gold="120" />
 	</Dropslots>
 	
@@ -581,9 +581,9 @@
 <Monster type="MONSTER" subtype="human_rob_fairy" name="Rob the Robber" fraction="monster" race="human" layer="NORMAL">
 	<RenderInfo name="human_rob_fairy" />
 	<Dropslots >
-		<Dropslot pbig="0.5" pmedium="0.5" psmall="0.0" pgold="0.00" min_gold="50" max_gold="150" min_level="7" max_level="13" magic_prob="1.0" magic_power="500" />
-		<Dropslot pbig="0.2" pmedium="0.3" psmall="0.1" pgold="0.05" min_gold="80" max_gold="2000" min_level="7" max_level="12" magic_prob="1.0" magic_power="400" />
-		<Dropslot pbig="0.00" pmedium="0.0" psmall="0.4" pgold="0.00" min_gold="50" max_gold="150" min_level="7" max_level="12" magic_prob="0.8" magic_power="300" />
+		<Dropslot pbig="0.5" pmedium="0.5" psmall="0.0" pgold="0.00" min_gold="50" max_gold="150" min_level="7" max_level="13" magic_prob="1.0" magic_power="550" />
+		<Dropslot pbig="0.2" pmedium="0.3" psmall="0.1" pgold="0.05" min_gold="80" max_gold="2000" min_level="7" max_level="12" magic_prob="1.0" magic_power="500" />
+		<Dropslot pbig="0.00" pmedium="0.0" psmall="0.4" pgold="0.00" min_gold="50" max_gold="150" min_level="7" max_level="12" magic_prob="0.8" magic_power="500" />
 		<Dropslot pbig="0.00" pmedium="0.0" psmall="0.00" pgold="1.00" min_gold="100" max_gold="400" />
 	</Dropslots>
 	<EmotionSet name="human_standard" />
@@ -707,8 +707,8 @@
 	<RenderInfo name="human_ronny" />
 	<Dropslots >
 		<Dropslot pbig="0.5" pmedium="0.5" psmall="0.0" pgold="0.00" min_gold="50" max_gold="150" min_level="7" max_level="13" magic_prob="1.0" magic_power="500" />
-		<Dropslot pbig="0.2" pmedium="0.3" psmall="0.1" pgold="0.05" min_gold="80" max_gold="2000" min_level="7" max_level="12" magic_prob="1.0" magic_power="400" />
-		<Dropslot pbig="0.00" pmedium="0.0" psmall="0.4" pgold="0.00" min_gold="50" max_gold="150" min_level="7" max_level="12" magic_prob="0.8" magic_power="300" />
+		<Dropslot pbig="0.2" pmedium="0.3" psmall="0.1" pgold="0.05" min_gold="80" max_gold="2000" min_level="7" max_level="12" magic_prob="1.0" magic_power="450" />
+		<Dropslot pbig="0.00" pmedium="0.0" psmall="0.4" pgold="0.00" min_gold="50" max_gold="150" min_level="7" max_level="12" magic_prob="0.8" magic_power="450" />
 		<Dropslot pbig="0.00" pmedium="0.0" psmall="0.00" pgold="1.00" min_gold="100" max_gold="400" />
 	</Dropslots>
 	<EmotionSet name="human_standard" />

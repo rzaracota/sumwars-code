@@ -33,25 +33,22 @@ class TopicList
 		void addTopic(std::string topic, Event* speech);
 		
 		/**
-		 * \fn void addStartTopic(std::string text, std::string topic)
 		 * \brief Fuegt ein Thema als Startthema hinzu
 		 * \param topic Thema
 		 * \param text Text mit dem das Thema angesprochen wird
 		 */
-		void addStartTopic(std::string text, std::string topic);
+		void addStartTopic(TranslatableString text, std::string topic);
 		
 		/**
-		 * \fn Event* getSpeakTopic(std::string topic)
-		 * \brief Gibt Gespraech zu einem Thema aus#
+		 * \brief Gibt Gespraech zu einem Thema aus
 		 * \param topic Thema
 		 */
 		Event* getSpeakTopic(std::string topic);
 		
 		/**
-		 * \fn std::list< std::pair<std::string, std::string> >& getStartTopics()
 		 * \brief Gibt die Liste der Startthemen aus
 		 */
-		std::list< std::pair<std::string, std::string> >& getStartTopics()
+		std::list< std::pair<TranslatableString, std::string> >& getStartTopics()
 		{
 			return m_start_topics;
 		}
@@ -67,7 +64,7 @@ class TopicList
 		 * \var std::list< std::pair<std::string, std::string> > m_start_topics
 		 * \brief Liste der Themen, mit denen ein Gespraech beginnen kann (Text,Thema)
 		 */
-		std::list< std::pair<std::string, std::string> > m_start_topics;
+		std::list< std::pair<TranslatableString, std::string> > m_start_topics;
 };
 
 /**
@@ -120,6 +117,11 @@ class NPCTrade
 			 * \brief maximale Verzauberungsstarke
 			 */
 			float m_max_enchant;
+			
+			/**
+			 * \brief probability that an item will be generated
+			 */
+			float m_probability;
 			
 		};
 		
@@ -199,13 +201,13 @@ class Dialogue
 			* \var std::string m_text
 			* \brief Der Text der Frage
 			*/
-			std::string m_text;
+			TranslatableString m_text;
 			
 			/**
 			* \var std::list < std::pair<std::string, std::string> > m_answers
 			* \brief Liste von moeglichen Antworten und  dem zugehoerigen Thema
 			*/
-			std::list < std::pair<std::string, std::string> > m_answers;
+			std::list < std::pair<TranslatableString, std::string> > m_answers;
 			
 			/**
 			 * \brief Gibt an, ob die Frage gerade gestellt wird
@@ -340,7 +342,7 @@ class Dialogue
 		 * \param text Text der Frage
 		 * \param asked_player Spieler dem die Frage gestellt wird
 		 */
-		void addQuestion(std::string text, std::string asked_player="main_player");
+		void addQuestion(TranslatableString text, std::string asked_player="main_player");
 		
 		/**
 		 * \fn void addAnswer(std::string text, std::string topic)
@@ -348,7 +350,7 @@ class Dialogue
 		 * \param text Text der Antwort
 		 * \param topic Thema zu dem gesprungen wird, wenn der Spieler diese Antwort waehlt
 		 */
-		void addAnswer(std::string text, std::string topic);
+		void addAnswer(TranslatableString text, std::string topic);
 		
 		
 		/**

@@ -35,7 +35,7 @@ void RakClientNetwork::serverConnect(const char* hostname, int req_port )
 	}
 	else
 	{
-		m_status = NET_CONNECTED;
+		m_status = NET_OK;
 	}
 }
 
@@ -133,6 +133,7 @@ void RakClientNetwork::pushSlotMessage(const NetworkPacket* data, int slot, NetR
 {
 	// check correct type
 	const RakNetworkPacket* rnpacket = dynamic_cast<const RakNetworkPacket*>(data);
+	DEBUGX("sent packet");
 	if (rnpacket == 0)
 	{
 		ERRORMSG("Tried to send a NetworkPacket that is not a RakClientNetwork");

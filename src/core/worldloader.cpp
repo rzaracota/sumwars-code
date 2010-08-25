@@ -435,7 +435,7 @@ void  WorldLoader::loadNPC( TiXmlNode* node)
 				Dialogue::getTopicList(refname).addTopic(topic,ev);
 				if (start_op != "" || topic == "start_dialogue")
 				{
-					Dialogue::getTopicList(refname).addStartTopic(start_op, topic);
+					Dialogue::getTopicList(refname).addStartTopic(TranslatableString(start_op,"sumwars-xml"), topic);
 				}
 			}
 			else if (child->Type()==TiXmlNode::ELEMENT && !strcmp(child->Value(), "Trade"))
@@ -463,6 +463,7 @@ void  WorldLoader::loadNPC( TiXmlNode* node)
 					attr.getInt("number_magical",tradeobj.m_number_magical,0);
 					attr.getFloat("min_enchant", tradeobj.m_min_enchant,0);
 					attr.getFloat("max_enchant", tradeobj.m_max_enchant,0);
+					attr.getFloat("probability", tradeobj.m_probability,1);
 					
 					tradeinfo.m_trade_objects.push_back(tradeobj);
 					DEBUGX("new trade Object for %s : %s %i %i %f %f",refname.c_str(),tradeobj.m_subtype.c_str(), tradeobj.m_number, tradeobj.m_number_magical, tradeobj.m_min_enchant, tradeobj.m_max_enchant);

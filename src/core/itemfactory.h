@@ -88,8 +88,9 @@ public:
 	 * \param min_enchant minimale Starke einer einzelnen Verzauberung
 	 * \param max_enchant maximale Starke einer einzelnen Verzauberung
 	 * \param enchant_multiplier Faktor mit den die effektive Staerke jeder Verzauberung multipliziert wird
+	 * \param duplicate_enchant if set to true, the item might get an enchantment of a type, it already has
 	 */
-	static void createMagicMods(Item* item, float* modchance, float magic_power, float min_enchant, float max_enchant, float enchant_multiplier=1.0);
+	static void createMagicMods(Item* item, float* modchance, float magic_power, float min_enchant, float max_enchant, float enchant_multiplier=1.0, bool duplicate_enchant = false);
 
 	/**
 	 * \fn static void registerItem(Item::Type type, Item::Subtype subtype, ItemBasicData* data)

@@ -18,8 +18,8 @@ SumWarsFrameListener::SumWarsFrameListener(Ogre::RenderWindow* win, Ogre::Camera
 	mMouse->setEventCallback(this);
 	mKeyboard->setEventCallback(this);
 
-	m_dist = 700;
-	m_phi = 0;
+	m_dist = 14;
+	m_phi = -90;
 	m_theta = 45;
 
 	m_middle = false;
@@ -75,7 +75,7 @@ bool SumWarsFrameListener::mouseMoved(const OIS::MouseEvent &e)
 {
 	if (m_middle || e.state.Z.rel!=0)
 	{
-		m_dist += e.state.Z.rel*0.5;
+		m_dist += e.state.Z.rel*0.01;
 		m_dist = std::max(m_dist,0.0f);
 
 		m_theta += e.state.Y.rel*0.5;
@@ -93,7 +93,7 @@ bool SumWarsFrameListener::mouseMoved(const OIS::MouseEvent &e)
 		float ph = m_phi *3.14159 / 180;
 
 		m_camera->setPosition(Ogre::Vector3(m_dist*cos(th)*cos(ph), m_dist*sin(th),  - m_dist*cos(th)*sin(ph)));
-		m_camera->lookAt(Ogre::Vector3(0,50,0));
+		m_camera->lookAt(Ogre::Vector3(0,1,0));
 
 
 	}
@@ -130,8 +130,8 @@ bool SumWarsFrameListener::keyPressed(const OIS::KeyEvent &e)
 		case OIS::KC_ESCAPE:
 			mContinue = false;
 			file.open("range");
-			file << "range "<< (m_doc->max_z-25)/50 << "\n";
-			file << "extent "<< (m_doc->ext_x)/50<<" "<<(m_doc->ext_z)/50 << "\n";
+			file << "range "<< (m_doc->max_z-25) << "\n";
+			file << "extent "<< (m_doc->ext_x)<<" "<<(m_doc->ext_z) << "\n";
 			file.close();
 			break;
 

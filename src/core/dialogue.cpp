@@ -31,7 +31,7 @@ void TopicList::addTopic(std::string topic, Event* speech)
 
 }
 
-void TopicList::addStartTopic(std::string text, std::string topic)
+void TopicList::addStartTopic(TranslatableString text, std::string topic)
 {
 	m_start_topics.push_back(std::make_pair(text,topic));
 }
@@ -56,7 +56,7 @@ void NPCTrade::TradeObject::operator=(TradeObject& other)
 	m_number_magical = other.m_number_magical;
 	m_min_enchant = other.m_min_enchant;
 	m_max_enchant = other.m_max_enchant;
-
+	m_probability = other.m_probability;
 }
 
 NPCTrade::NPCTrade()
@@ -87,6 +87,9 @@ bool NPCTrade::checkRefresh(Equipement* &equ)
 			// nicht magische Objekte erzeugen
 			for (int i=0; i< it->m_number; ++i)
 			{
+				if (Random::random() > it->m_probability)
+					continue;
+				
 				type = ItemFactory::getBaseType(it->m_subtype);
 				itm = ItemFactory::createItem(type,it->m_subtype);
 				if (itm != 0)
@@ -109,6 +112,9 @@ bool NPCTrade::checkRefresh(Equipement* &equ)
 			float magic;
 			for (int i=0; i< it->m_number_magical; ++i)
 			{
+				if (Random::random() > it->m_probability)
+					continue;
+				
 				type = ItemFactory::getBaseType(it->m_subtype);
 				magic = Random::randrangef(it->m_min_enchant, it->m_max_enchant);
 				itm = ItemFactory::createItem(type,it->m_subtype,0,magic,Item::MAGICAL);
@@ -321,17 +327,17 @@ void Dialogue::speak(std::string refname, TranslatableString text, std::string e
 	
 }
 
-void Dialogue::addQuestion(std::string text, std::string asked_player)
+void Dialogue::addQuestion(TranslatableString text, std::string asked_player)
 {
 	if (m_question != 0)
 		delete m_question;
 	
 	m_question = new Question;
-	m_question->m_text = dgettext("sumwars-events",text.c_str());
+	m_question->m_text = text;
 	m_question->m_asked_player = asked_player;
 }
 
-void Dialogue::addAnswer(std::string text, std::string topic)
+void Dialogue::addAnswer(TranslatableString text, std::string topic)
 {
 	if (m_question == 0)
 	{
@@ -342,7 +348,7 @@ void Dialogue::addAnswer(std::string text, std::string topic)
 	if (checkTopic(topic))
 	{
 		
-		m_question->m_answers.push_back(std::make_pair(dgettext("sumwars-events",text.c_str()),topic));
+		m_question->m_answers.push_back(std::make_pair(text,topic));
 	}
 }
 
@@ -414,17 +420,19 @@ void Dialogue::changeTopic(std::string topic)
 		Creature* npc = dynamic_cast<Creature*>( m_region->getObject( getSpeaker(m_topic_base) ) );
 		if (npc ==0)
 		{
-			addQuestion(gettext("which Topic"));
+			addQuestion(TranslatableString("Which Topic"));
 		}
 		else
 		{
-			addQuestion(npc->getRefName());
+			TranslatableString tr(npc->getRefName());
+			tr.setTextDomain("sumwars-xml");
+			addQuestion(tr);
 		}
 
 		// Alle Antworten hinzufuegen, deren Themen freigeschaltet sind
 		bool noanswer = true;
-		std::list< std::pair<std::string, std::string> >& lst = m_topics[m_topic_base].getStartTopics();
-		std::list< std::pair<std::string, std::string> >::iterator jt;
+		std::list< std::pair<TranslatableString, std::string> >& lst = m_topics[m_topic_base].getStartTopics();
+		std::list< std::pair<TranslatableString, std::string> >::iterator jt;
 		for (jt = lst.begin(); jt != lst.end(); ++jt)
 		{
 			if (jt->second == "start_dialogue")
@@ -579,7 +587,7 @@ void Dialogue::chooseAnswer(int playerid, int answer_nr)
 			}
 		}
 		
-		std::list < std::pair<std::string, std::string> >::iterator jt;
+		std::list < std::pair<TranslatableString, std::string> >::iterator jt;
 		jt = m_question->m_answers.begin();
 		while (jt !=m_question->m_answers.end() && answernr >0)
 		{
@@ -1020,15 +1028,15 @@ void Dialogue::toString(CharConv* cv)
 	{
 		cv->toBuffer(static_cast<int>(1));
 		
-		cv->toBuffer(m_question->m_text);
+		m_question->m_text.toString(cv);
 		cv->toBuffer(m_question->m_active);
 		cv->toBuffer(m_question->m_asked_player);
 		
-		std::list < std::pair<std::string, std::string> >::iterator it;
+		std::list < std::pair<TranslatableString, std::string> >::iterator it;
 		cv->toBuffer((int) m_question->m_answers.size());
 		for (it = m_question->m_answers.begin(); it != m_question->m_answers.end(); ++it)
 		{
-			cv->toBuffer(it->first);
+			it->first.toString(cv);
 			cv->toBuffer(it->second);
 		}
 		
@@ -1093,16 +1101,17 @@ void Dialogue::fromString(CharConv* cv)
 	{	
 		m_question = new Question;
 		
-		cv->fromBuffer(m_question->m_text);
+		m_question->m_text.fromString(cv);
 		cv->fromBuffer(m_question->m_active);
 		cv->fromBuffer(m_question->m_asked_player);
 		
 		cv->fromBuffer(size);
 		m_question->m_answers.clear();
-		std::string answr, topic;
+		std::string topic;
+		TranslatableString answr;
 		for (int i=0; i<size; i++)
 		{
-			cv->fromBuffer(answr);
+			answr.fromString(cv);
 			cv->fromBuffer(topic);
 			m_question->m_answers.push_back(std::make_pair(answr,topic));
 		}

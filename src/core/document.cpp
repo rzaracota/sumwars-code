@@ -203,8 +203,10 @@ void Document::loadSavegame()
 		StdStreamConv cv2(&sstream);
 
 		m_temp_player->toSavegame(&cv2);
+		DEBUGX("sending savegame");
 		World::getWorld()->handleSavegame(&cv2);
-
+		DEBUGX("sent savegame");
+		
 		// read shortkeys from the savegame
 		m_ability_shortkey_map.clear();
 		short key,dest;
@@ -281,7 +283,7 @@ void Document::createNewCharacter(std::string name)
 		m_save_file = "./save/";
 #else
         std::string path = PHYSFS_getUserDir();
-        path.append("Library/Application\ Support/Sumwars/");
+        path.append("Library/Application\\ Support/Sumwars/");
         m_save_file = path;
 #endif
 		m_save_file += name;
@@ -1062,7 +1064,7 @@ void Document::sendChatMessage(std::string msg)
 	}
 	else
 	{
-		World::getWorld()->handleMessage(msg);
+		World::getWorld()->handleMessage(TranslatableString(msg));
 	}
 }
 
@@ -1790,7 +1792,7 @@ void Document::saveSettings()
 {
 #ifdef __APPLE__
     std::string path = PHYSFS_getUserDir();
-    path.append("/Library/Application\ Support/Sumwars/");
+    path.append("/Library/Application\\ Support/Sumwars/");
     Options::getInstance()->writeToFile(path + "options.xml");
 #else
 	Options::getInstance()->writeToFile("options.xml");
