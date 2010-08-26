@@ -1,4 +1,4 @@
-﻿<RenderInfo name="twoHandHammerBase">
+﻿<RenderInfo name="twoHandHammerBase" parent="hammerBase">
 
 	<State name="firesword">
 		<Activation>
