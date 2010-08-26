@@ -201,7 +201,7 @@ void DialogueWindow::update()
 						continue;
 					
 					
-					name = dgettext("sumwars-xml",cr->getName().c_str());
+					name = cr->getName().getTranslation().c_str();
 					
 					
 					if (wname->getText() != (CEGUI::utf8*) name.c_str())

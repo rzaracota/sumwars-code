@@ -1083,7 +1083,7 @@ int Region::createObject(ObjectTemplateType generictype, Vector pos, float angle
 	bool ret = insertObject(object,pos,angle);
 	if (!ret)
 	{
-		DEBUG("insertion of object %s failed",object->getName().c_str());
+		DEBUG("insertion of object %s failed",object->getNameId().c_str());
 	}
 
 	return object->getId();
@@ -1402,7 +1402,7 @@ bool Region::moveObject(WorldObject* object, Vector pos)
 	
 	if (object->getState() == WorldObject::STATE_STATIC)
 	{
-		ERRORMSG("Cant move static object %s",object->getName().c_str());
+		ERRORMSG("Cant move static object %s",object->getNameId().c_str());
 		return false;
 	}
 	

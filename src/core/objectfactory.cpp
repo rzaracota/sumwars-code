@@ -320,14 +320,14 @@ Projectile* ObjectFactory::createProjectile(GameObject::Subtype subtype, int id)
 	return pr;
 }
 
-std::string ObjectFactory::getObjectName(GameObject::Subtype subtype)
+TranslatableString ObjectFactory::getObjectName(GameObject::Subtype subtype)
 {
 	std::map<GameObject::Subtype, MonsterBasicData*>::iterator i;
 
 	i = m_monster_data.find(subtype);
 	if (i== m_monster_data.end())
 	{
-		return subtype;
+		return TranslatableString(subtype);
 	}
 	return i->second->m_name;
 }

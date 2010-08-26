@@ -43,7 +43,11 @@ class NLFGNetworkPacket : public NetworkPacket
 		*/
 		virtual void fromBuffer(char* data, unsigned int size)
 		{
-			data = nlfg_readStringWithSize(m_packet, size);
+			// FIXME: the pointer that is returned is created inside the function with malloc
+			// but never freed lets free it here as a temporary fix
+			char* tmpdata = nlfg_readStringWithSize(m_packet, size);
+			memcpy(data,tmpdata,size);
+			free(tmpdata);
 		}
 			
 		/**

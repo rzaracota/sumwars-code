@@ -117,7 +117,7 @@ void WorldObject::toString(CharConv* cv)
 	DEBUGX("worldobject::tostring");
 	GameObject::toString(cv);
 	
-	cv->toBuffer(m_name);
+	m_name.toString(cv);;
 	cv->toBuffer(m_fraction);
 	cv->toBuffer(m_race);
 	cv->toBuffer(m_interaction_flags);
@@ -134,7 +134,7 @@ void WorldObject::fromString(CharConv* cv)
 {
 	GameObject::fromString(cv);
 	
-	cv->fromBuffer(m_name);
+	m_name.fromString(cv);
 	cv->fromBuffer(m_fraction);	
 	cv->fromBuffer(m_race);
 	cv->fromBuffer(m_interaction_flags);
@@ -156,7 +156,8 @@ int WorldObject::getValue(std::string valname)
 {
 	if (valname == "name")
 	{
-		lua_pushstring(EventSystem::getLuaState() , m_name.c_str() );
+		std::string name = m_name.getTranslation();
+		lua_pushstring(EventSystem::getLuaState() , name.c_str() );
 		return 1;
 	}
 	else if (valname == "fraction")
@@ -193,7 +194,8 @@ bool WorldObject::setValue(std::string valname)
 	
 	if (valname == "name")
 	{
-		std::string name = lua_tostring(EventSystem::getLuaState() ,-1);
+		TranslatableString name;
+		EventSystem::getTranslatableString(EventSystem::getLuaState(),name ,-1);
 		lua_pop(EventSystem::getLuaState(), 1);
 		setName(name);
 		return true;
@@ -267,7 +269,7 @@ void WorldObject::setRace(Race race)
 	m_race = race;
 }
 
-void WorldObject::setName(std::string name)
+void WorldObject::setName(TranslatableString name)
 {
 	m_name = name;
 	addToNetEventMask(NetEvent::DATA_NAME);
@@ -309,7 +311,7 @@ void WorldObject::writeNetEvent(NetEvent* event, CharConv* cv)
 	
 	if (event->m_data & NetEvent::DATA_NAME)
 	{
-		cv->toBuffer(m_name);
+		m_name.toString(cv);
 	}
 	
 	if (event->m_data & NetEvent::DATA_FLAGS)
@@ -348,9 +350,7 @@ void WorldObject::processNetEvent(NetEvent* event, CharConv* cv)
 	
 	if (event->m_data & NetEvent::DATA_NAME)
 	{
-		std::string name;
-		cv->fromBuffer(name);
-		m_name = name;
+		m_name.fromString(cv);
 	}
 	
 	if (event->m_data & NetEvent::DATA_FLAGS)

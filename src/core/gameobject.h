@@ -10,6 +10,7 @@ class Region;
 #include <string>
 #include <set>
 #include "fraction.h"
+#include "translatablestring.h"
 
 /**
  * \class GameObject
@@ -336,10 +337,9 @@ class GameObject
 		virtual void fromString(CharConv* cv);
 		
 		/**
-		 * \fn std::string getName()
 		 * \brief Gibt den Name des Objektes aus
 		 */
-		virtual std::string getName();
+		virtual TranslatableString getName();
 
 
 		/**

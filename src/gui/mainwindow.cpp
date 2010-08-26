@@ -1378,7 +1378,7 @@ void MainWindow::updateObjectInfo()
 					
 					// Objekt ist ein Lebewesen
 					// Lebenspunkte anfuegen
-					string_stream<< dgettext("sumwars-xml",cr->getName().c_str());
+					string_stream<< cr->getName().getTranslation();
 					float perc = cr->getDynAttr()->m_health / cr->getBaseAttrMod()->m_max_health;
 					if (bar->getProgress() != perc)
 					{
@@ -1387,7 +1387,6 @@ void MainWindow::updateObjectInfo()
 				}
 				else
 				{
-					string_stream<< dgettext("sumwars-xml",cwo->getName().c_str());
 					bar->setVisible(false);
 				}
 				
@@ -1924,9 +1923,9 @@ void MainWindow::updatePartyInfo()
 				img->setProperty("Image",imagestr);
 			}
 			
-			if (img->getTooltipText() != (CEGUI::utf8*) pl->getName().c_str())
+			if (img->getTooltipText() != (CEGUI::utf8*) pl->getName().getRawText().c_str())
 			{
-				img->setTooltipText((CEGUI::utf8*) pl->getName().c_str());
+				img->setTooltipText((CEGUI::utf8*) pl->getName().getRawText().c_str());
 			}
 			
 			stream.str("");

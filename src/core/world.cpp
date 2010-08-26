@@ -1078,7 +1078,7 @@ void World::handleMessage(TranslatableString msg, int slot)
 			if (pl != 0)
 			{
 				plmsg += "[";
-				plmsg += pl->getName();
+				plmsg += pl->getName().getRawText();
 
 				if (pl->getSpeakText().m_text == "" && pl->getDialogue() == 0)
 				{
@@ -1136,7 +1136,7 @@ void World::handleMessage(TranslatableString msg, int slot)
 			m_network->deallocatePacket(cv);
 
             smsg = "[";
-            smsg += m_local_player->getName();
+			smsg += m_local_player->getName().getRawText();
             smsg += "] ";
             smsg += msg.getTranslation();
 			

@@ -1992,7 +1992,7 @@ void Player::toSavegame(CharConv* cv)
 	cv->setVersion(World::getVersion());
 
 	cv->toBuffer(getSubtype());
-	cv->toBuffer(getName());
+	cv->toBuffer(getName().getRawText());
 	m_look.toString(cv);
 	cv->printNewline();
 
@@ -2111,7 +2111,7 @@ void Player::fromSavegame(CharConv* cv, bool local)
 
 	std::string name;
 	cv->fromBuffer(name);
-	setName(name);
+	setName(TranslatableString(name));
 
 	m_look.fromString(cv);
 	m_emotion_set = m_look.m_emotion_set;
@@ -2326,8 +2326,8 @@ void Player::writeNetEvent(NetEvent* event, CharConv* cv)
 	if (event->m_data & NetEvent::DATA_FIGHT_STAT)
 	{
 		FightStatistic* fstat = &(getFightStatistic());
-		cv->toBuffer(fstat->m_last_attacker);
-		cv->toBuffer(fstat->m_last_attacked);
+		fstat->m_last_attacker.toString(cv);
+		fstat->m_last_attacked.toString(cv);
 		cv->toBuffer(fstat->m_hit_chance);
 		cv->toBuffer(fstat->m_damage_dealt_perc);
 		cv->toBuffer(fstat->m_damage_got_perc);
@@ -2362,8 +2362,8 @@ void Player::processNetEvent(NetEvent* event, CharConv* cv)
 	if (event->m_data & NetEvent::DATA_FIGHT_STAT)
 	{
 		FightStatistic* fstat = &(getFightStatistic());
-		cv->fromBuffer(fstat->m_last_attacker);
-		cv->fromBuffer(fstat->m_last_attacked);
+		fstat->m_last_attacker.fromString(cv);
+		fstat->m_last_attacked.fromString(cv);
 		cv->fromBuffer(fstat->m_hit_chance);
 		cv->fromBuffer(fstat->m_damage_dealt_perc);
 		cv->fromBuffer(fstat->m_damage_got_perc);

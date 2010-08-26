@@ -4688,7 +4688,7 @@ void Creature::setDialogue(int id)
 	}
 }
 
-void Creature::updateFightStat(float hitchance, float armorperc, std::string attacked)
+void Creature::updateFightStat(float hitchance, float armorperc, TranslatableString attacked)
 {
 	FightStatistic* fstat = &(getFightStatistic());
 	if (fabs(hitchance - fstat->m_hit_chance) > 0.01

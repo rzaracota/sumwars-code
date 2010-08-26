@@ -27,6 +27,7 @@
 
 #include "geometry.h"
 #include "gameobject.h"
+#include "translatablestring.h"
 
 class World;
 class Region;
@@ -392,12 +393,11 @@ class WorldObject : public GameObject
 		void setFlag(std::string flag, bool set= true);
 
 		/**
-		 * \fn std::string getName()
 		 * \brief Gibt den Name des Objektes aus
 		 */
-		virtual std::string getName()
+		virtual TranslatableString getName()
 		{
-			if (m_name != "")
+			if (m_name.getRawText() != "")
 				return m_name;
 
 			return GameObject::getName();
@@ -409,11 +409,10 @@ class WorldObject : public GameObject
 		virtual void clearFlags();
 
 		/**
-		 * \fn void setName(std::string name)
 		 * \brief Setzt den Name des Spielers
 		 * \param name Name
 		 */
-		void setName(std::string name);
+		void setName(TranslatableString name);
 
 	protected:
 
@@ -440,7 +439,7 @@ class WorldObject : public GameObject
 	 * \var std::string m_name
 	 * \brief Name des Objektes, wenn kein Name gesetzt ist, sowird er  aus dem Typ abgeleitet
 	 */
-	std::string m_name;
+	TranslatableString m_name;
 
 //Private stuff
 private:

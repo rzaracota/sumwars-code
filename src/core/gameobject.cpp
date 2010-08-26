@@ -137,9 +137,9 @@ void GameObject::fromString(CharConv* cv)
 	m_state = (State) ctmp;
 }
 
-std::string GameObject::getName()
+TranslatableString GameObject::getName()
 {
-	return ObjectFactory::getObjectName(m_subtype);
+	return TranslatableString(ObjectFactory::getObjectName(m_subtype));
 }
 
 
