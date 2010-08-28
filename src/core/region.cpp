@@ -1980,7 +1980,7 @@ void Region::getRegionData(CharConv* cv)
 	{
 		if (jt->second->getLayer() & WorldObject::LAYER_ALL)
 		{
-			DEBUGX("write offset: %i",cv->getBitStream()->GetNumberOfBitsUsed());
+			DEBUGX("write offset: %i",cv->writeBits());
 			(jt->second)->toString(cv);
 
 			DEBUGX("object: %s",(jt->second)->getNameId().c_str());
@@ -2041,16 +2041,18 @@ void Region::createObjectFromString(CharConv* cv, WorldObjectMap* players)
 
 	WorldObject* obj;
 
-	DEBUGX("read offset: %i",cv->getBitStream()->GetReadOffset());
+	DEBUGX("read offset: %i",cv->readBits());
 
 	cv->fromBuffer(type);
 	cv->fromBuffer(subt);
 	cv->fromBuffer(id);
+	
+	DEBUGX("read offset: %i",cv->readBits());
 
 	DEBUGX("object %s id %i",subt.c_str(),id);
 
-		// alle Objekte ausser den Spielern werden neu angelegt
-		// die Spieler existieren schon
+	// alle Objekte ausser den Spielern werden neu angelegt
+	// die Spieler existieren schon
 	if (type != "PLAYER")
 	{
 		obj = ObjectFactory::createObject(type, subt,id);
@@ -2154,7 +2156,7 @@ void Region::createDialogueFromString(CharConv* cv)
 }
 
 void Region::setRegionData(CharConv* cv,WorldObjectMap* players)
-{
+{	
 	// Groesse der Region wird schon vorher eingelesen
 
 	// Name der Region

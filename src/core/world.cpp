@@ -28,14 +28,8 @@
 #include "templateloader.h"
 #include "objectloader.h"
 
-#if NO_RAKNET
 #include "nlfgclientnetwork.h"
 #include "nlfgservernetwork.h"
-#else
-#include "rakservernetwork.h"
-#include "rakclientnetwork.h"
-#include "raknetworkpacket.h"
-#endif
 
 #include "options.h"
 
@@ -209,11 +203,7 @@ bool World::init(int port)
 		if (m_server)
 		{
 			ServerNetwork* snet;
-#ifdef NO_RAKNET
             m_network = snet = new NLFGServerNetwork(m_max_nr_players);
-#else
-			m_network = snet = new RakServerNetwork(m_max_nr_players);
-#endif
 			if (snet->init(port) !=NET_OK )
 			{
 				ERRORMSG( "Error occured in network" );
@@ -222,11 +212,7 @@ bool World::init(int port)
 		}
 		else
 		{
-#ifdef NO_RAKNET
             m_network = new NLFGClientNetwork();
-#else
-			m_network = new RakClientNetwork();
-#endif
 		}
 	}
 
@@ -854,7 +840,7 @@ void World::handleSavegame(CharConv *cv, int slot)
 
 			if (slot != LOCAL_SLOT)
 			{
-				DEBUGX("sending player data ");
+				DEBUG("sending player data ");
 				// Daten zur Initialisierung
 				PackageHeader header3;
 				header3.m_content =PTYPE_S2C_INITIALISATION;
@@ -932,7 +918,7 @@ void World::handleSavegame(CharConv *cv, int slot)
 				NetworkPacket* msg3 = m_network->createPacket();
 				header3.toString(msg3);
 
-
+				DEBUG("sending waypoint info");
 				for (lt = winfos.begin(); lt != winfos.end(); ++lt)
 				{
 					msg3->toBuffer(lt->first);
@@ -984,7 +970,7 @@ void World::handleSavegame(CharConv *cv, int slot)
 				for (it = m_quests.begin(); it != m_quests.end(); ++it)
 				{
 
-						DEBUGX("sending data for quest %s",it->second->getName().c_str());
+						DEBUG("sending data for quest %s",it->second->getName().c_str());
 
 						NetworkPacket* msg5 = m_network->createPacket();
 						header5.toString(msg5);
@@ -1373,7 +1359,7 @@ void World::updatePlayers()
 			}
 
 
-			DEBUGX("player %i has quit",pl->getId());
+			DEBUG("player %i has quit",pl->getId());
 
 			delete pl;
 			continue;
@@ -1550,7 +1536,6 @@ void World::updatePlayers()
 
 						// Daten aktualisieren
 						player->fromString(cv);
-
 					}
 
 				}
@@ -1590,8 +1575,8 @@ void World::updatePlayers()
 				{
 					int id;
 					cv->fromBuffer(id);
-					DEBUG("ID at server %i",id);
-					m_players->clear();
+					DEBUG("ID at server %i (old ID %i)",id, m_local_player->getId());
+					m_players->erase(m_local_player->getId());
 					m_local_player->setId(id);
 
 					int frac;
@@ -1603,7 +1588,7 @@ void World::updatePlayers()
 				}
 				else if (headerp.m_content == PTYPE_S2C_WAYPOINTS)
 				{
-					DEBUGX("got waypoints");
+					DEBUG("got waypoints");
 					std::map<short,WaypointInfo>& winfos = World::getWorld()->getWaypointData();
 					winfos.clear();
 
@@ -1645,7 +1630,7 @@ void World::updatePlayers()
 					std::string name,tabname;
 					cv->fromBuffer(name);
 					cv->fromBuffer(tabname);
-					DEBUGX("got data for quest %s %s",name.c_str(), tabname.c_str());
+					DEBUG("got data for quest %s %s",name.c_str(), tabname.c_str());
 
 					Quest* qu = new Quest(name,tabname);
 					qu->fromString(cv);

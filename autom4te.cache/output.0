@@ -2855,12 +2855,12 @@ if test -n "$PKG_CONFIG"; then
         pkg_cv_DEPS_CFLAGS="$DEPS_CFLAGS"
     else
         if test -n "$PKG_CONFIG" && \
-    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"OGRE >= 1.4.0 OIS CEGUI CEGUI-OGRE RakNet freealut openal vorbisfile\""; } >&5
-  ($PKG_CONFIG --exists --print-errors "OGRE >= 1.4.0 OIS CEGUI CEGUI-OGRE RakNet freealut openal vorbisfile") 2>&5
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"OGRE >= 1.4.0 OIS CEGUI CEGUI-OGRE enet freealut openal vorbisfile\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "OGRE >= 1.4.0 OIS CEGUI CEGUI-OGRE enet freealut openal vorbisfile") 2>&5
   ac_status=$?
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
-  pkg_cv_DEPS_CFLAGS=`$PKG_CONFIG --cflags "OGRE >= 1.4.0 OIS CEGUI CEGUI-OGRE RakNet freealut openal vorbisfile" 2>/dev/null`
+  pkg_cv_DEPS_CFLAGS=`$PKG_CONFIG --cflags "OGRE >= 1.4.0 OIS CEGUI CEGUI-OGRE enet freealut openal vorbisfile" 2>/dev/null`
 else
   pkg_failed=yes
 fi
@@ -2873,12 +2873,12 @@ if test -n "$PKG_CONFIG"; then
         pkg_cv_DEPS_LIBS="$DEPS_LIBS"
     else
         if test -n "$PKG_CONFIG" && \
-    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"OGRE >= 1.4.0 OIS CEGUI CEGUI-OGRE RakNet freealut openal vorbisfile\""; } >&5
-  ($PKG_CONFIG --exists --print-errors "OGRE >= 1.4.0 OIS CEGUI CEGUI-OGRE RakNet freealut openal vorbisfile") 2>&5
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"OGRE >= 1.4.0 OIS CEGUI CEGUI-OGRE enet freealut openal vorbisfile\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "OGRE >= 1.4.0 OIS CEGUI CEGUI-OGRE enet freealut openal vorbisfile") 2>&5
   ac_status=$?
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
-  pkg_cv_DEPS_LIBS=`$PKG_CONFIG --libs "OGRE >= 1.4.0 OIS CEGUI CEGUI-OGRE RakNet freealut openal vorbisfile" 2>/dev/null`
+  pkg_cv_DEPS_LIBS=`$PKG_CONFIG --libs "OGRE >= 1.4.0 OIS CEGUI CEGUI-OGRE enet freealut openal vorbisfile" 2>/dev/null`
 else
   pkg_failed=yes
 fi
@@ -2897,14 +2897,14 @@ else
         _pkg_short_errors_supported=no
 fi
         if test $_pkg_short_errors_supported = yes; then
-	        DEPS_PKG_ERRORS=`$PKG_CONFIG --short-errors --errors-to-stdout --print-errors "OGRE >= 1.4.0 OIS CEGUI CEGUI-OGRE RakNet freealut openal vorbisfile"`
+	        DEPS_PKG_ERRORS=`$PKG_CONFIG --short-errors --errors-to-stdout --print-errors "OGRE >= 1.4.0 OIS CEGUI CEGUI-OGRE enet freealut openal vorbisfile"`
         else 
-	        DEPS_PKG_ERRORS=`$PKG_CONFIG --errors-to-stdout --print-errors "OGRE >= 1.4.0 OIS CEGUI CEGUI-OGRE RakNet freealut openal vorbisfile"`
+	        DEPS_PKG_ERRORS=`$PKG_CONFIG --errors-to-stdout --print-errors "OGRE >= 1.4.0 OIS CEGUI CEGUI-OGRE enet freealut openal vorbisfile"`
         fi
 	# Put the nasty error message in config.log where it belongs
 	echo "$DEPS_PKG_ERRORS" >&5
 
-	as_fn_error "Package requirements (OGRE >= 1.4.0 OIS CEGUI CEGUI-OGRE RakNet freealut openal vorbisfile) were not met:
+	as_fn_error "Package requirements (OGRE >= 1.4.0 OIS CEGUI CEGUI-OGRE enet freealut openal vorbisfile) were not met:
 
 $DEPS_PKG_ERRORS
 

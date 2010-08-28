@@ -32,7 +32,7 @@ void NLFGClientNetwork::serverConnect(const char* hostname, int req_port )
 	}
 	else
 	{
-		m_status = NET_CONNECTED;
+		m_status = NET_OK;
 	}
 }
 
@@ -74,6 +74,7 @@ void NLFGClientNetwork::update()
             {
                 case NLFG_CONNECTED:
                     DEBUG("connected to server");
+					m_status = NET_CONNECTED;
                     break;
                 case NLFG_DISCONNECTED:
                     DEBUG("connection timed out");

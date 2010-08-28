@@ -202,8 +202,10 @@ void Document::loadSavegame()
 		std::stringstream sstream;
 		StdStreamConv cv2(&sstream);
 
+		sleep(10);
+		
 		m_temp_player->toSavegame(&cv2);
-		DEBUGX("sending savegame");
+		DEBUG("sending savegame");
 		World::getWorld()->handleSavegame(&cv2);
 		DEBUGX("sent savegame");
 		

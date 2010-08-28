@@ -29,6 +29,7 @@ const int MAX_QUEUE_SIZE = 32;
 
 struct NLFG_Queue
 {
+	NLFG_Message *head;
     NLFG_Message *tail;
 } nlfgQueue;
 
@@ -43,7 +44,12 @@ void nlfg_expand(NLFG_Message *msg, int size)
         char *tempData;
         int oldSize = msg->size;
 
+		// Increase size, but at least double the length
         msg->size = msg->size << 1;
+		if (msg->size < size)
+		{
+			msg->size = size;
+		}
         tempData = (char*)malloc(oldSize);
         memcpy(tempData, msg->data, oldSize);
         free(msg->data);
@@ -63,11 +69,13 @@ int nlfg_addMessage(NLFG_Message *msg)
     if (nlfgQueue.tail == 0)
     {
         nlfgQueue.tail = msg;
+		nlfgQueue.head = msg;
         msg->parent = 0;
     }
     else
     {
-        msg->parent = nlfgQueue.tail;
+		nlfgQueue.tail->parent = msg;
+        msg->parent = 0;
         nlfgQueue.tail = msg;
     }
     return 0;
@@ -84,6 +92,7 @@ int nlfg_init_client()
                     57600 / 8 /* 56K modem with 56 Kbps downstream bandwidth */,
                     14400 / 8 /* 56K modem with 14 Kbps upstream bandwidth */);
     nlfgQueue.tail = 0;
+	nlfgQueue.head = 0;
     return 1;
 }
 
@@ -100,7 +109,8 @@ int nlfg_init_server(unsigned int port)
                     32 /* only allow 32 incoming connections */,
                     0, 0);
     nlfgQueue.tail = 0;
-    return 1;
+	nlfgQueue.head = 0;
+	return 1;
 }
 
 void nlfg_init_packet(NLFG_Message *msg)
@@ -195,10 +205,14 @@ int nlfg_process()
 
 NLFG_Message* nlfg_getMessage()
 {
-    if (nlfgQueue.tail == 0)
+    if (nlfgQueue.head == 0)
         return NULL;
-    NLFG_Message *msg = nlfgQueue.tail;
-    nlfgQueue.tail = msg->parent;
+    NLFG_Message *msg = nlfgQueue.head;
+    nlfgQueue.head = msg->parent;
+	if (nlfgQueue.head == 0)
+	{
+		nlfgQueue.tail = 0;
+	}
     return msg;
 }
 

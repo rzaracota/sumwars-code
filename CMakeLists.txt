@@ -26,15 +26,17 @@ FIND_PACKAGE(OIS REQUIRED)
 FIND_PACKAGE(CEGUI REQUIRED)
 FIND_PACKAGE(CEGUIOGRE REQUIRED)
 FIND_PACKAGE(OpenAL REQUIRED)
-if(NOT NO_RAKNET)
-	FIND_PACKAGE(RakNet REQUIRED)
-else()
-	set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} -DNO_RAKNET)
-endif()
+FIND_PACKAGE(Enet REQUIRED)
+#if(NOT NO_RAKNET)
+#	FIND_PACKAGE(RakNet REQUIRED)
+#else()
+#	set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} -DNO_RAKNET)
+#endif()
 FIND_PACKAGE(ALUT REQUIRED)
 FIND_PACKAGE(OggVorbis REQUIRED)
 
 INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/tinyxml ${PROJECT_SOURCE_DIR}/src/core ${PROJECT_SOURCE_DIR}/src/gui)
+INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/./Dependencies/nlfg )
 INCLUDE_DIRECTORIES(${OGRE_INCLUDE_DIRS})
 INCLUDE_DIRECTORIES(${OIS_INCLUDE_DIRS})
 INCLUDE_DIRECTORIES(${LUA_INCLUDE_DIR})
@@ -42,11 +44,12 @@ INCLUDE_DIRECTORIES(${CEGUI_INCLUDE_DIRS})
 INCLUDE_DIRECTORIES(${CEGUIOGRE_INCLUDE_DIRS})
 INCLUDE_DIRECTORIES(${OPENAL_INCLUDE_DIR})
 INCLUDE_DIRECTORIES(${ALUT_INCLUDES})
-if(NOT NO_RAKNET)
-	INCLUDE_DIRECTORIES(${RakNet_INCLUDES})
-endif()
+#if(NOT NO_RAKNET)
+#	INCLUDE_DIRECTORIES(${RakNet_INCLUDES})
+#endif()
 
 SET(SRCS
+  ./Dependencies/nlfg/nlfg.c
   ./src/core/worldobject.cpp
   ./src/core/itemloader.cpp
   ./src/core/itemlist.cpp
@@ -80,9 +83,9 @@ SET(SRCS
   ./src/core/action.cpp
   ./src/core/creaturestruct.cpp
   ./src/core/servernetwork.cpp
-  ./src/core/rakservernetwork.cpp
-  ./src/core/rakclientnetwork.cpp
-  ./src/core/raknetworkpacket.cpp
+  ./src/core/nlfgservernetwork.cpp
+  ./src/core/nlfgclientnetwork.cpp
+  ./src/core/nlfgnetworkpacket.cpp
   ./src/core/pathfind.cpp
   ./src/core/damage.cpp
   ./src/core/waypoint.cpp
@@ -138,4 +141,4 @@ SET(SRCS
 )
 
 ADD_EXECUTABLE(sumwars ${SRCS})
-TARGET_LINK_LIBRARIES(sumwars ${OGRE_LIBRARIES} ${OIS_LIBRARY_DBG} ${CEGUI_LIBRARIES} ${CEGUIOGRE_LIBRARIES} ${LUA_LIBRARIES} ${OPENAL_LIBRARY} ${ALUT_LIBRARY} ${RakNet_LIBRARY} ${OGGVORBIS_LIBRARIES})
+TARGET_LINK_LIBRARIES(sumwars ${OGRE_LIBRARIES} ${OIS_LIBRARY_DBG} ${CEGUI_LIBRARIES} ${CEGUIOGRE_LIBRARIES} ${LUA_LIBRARIES} ${OPENAL_LIBRARY} ${ALUT_LIBRARY} ${Enet_LIBRARY} ${OGGVORBIS_LIBRARIES})

@@ -23,14 +23,14 @@ if test -n "$PKG_CONFIG" && \
 m4_ifvaln([$3], [else
   $3])dnl
 fi])
-m4trace:/usr/share/aclocal/pkg.m4:82: -1- AC_DEFUN([_PKG_SHORT_ERRORS_SUPPORTED], [AC_REQUIRE([PKG_PROG_PKG_CONFIG])
+m4trace:/usr/share/aclocal/pkg.m4:84: -1- AC_DEFUN([_PKG_SHORT_ERRORS_SUPPORTED], [AC_REQUIRE([PKG_PROG_PKG_CONFIG])
 if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
         _pkg_short_errors_supported=yes
 else
         _pkg_short_errors_supported=no
 fi[]dnl
 ])
-m4trace:/usr/share/aclocal/pkg.m4:102: -1- AC_DEFUN([PKG_CHECK_MODULES], [AC_REQUIRE([PKG_PROG_PKG_CONFIG])dnl
+m4trace:/usr/share/aclocal/pkg.m4:104: -1- AC_DEFUN([PKG_CHECK_MODULES], [AC_REQUIRE([PKG_PROG_PKG_CONFIG])dnl
 AC_ARG_VAR([$1][_CFLAGS], [C compiler flags for $1, overriding pkg-config])dnl
 AC_ARG_VAR([$1][_LIBS], [linker flags for $1, overriding pkg-config])dnl
 
@@ -47,9 +47,9 @@ See the pkg-config man page for more details.])
 if test $pkg_failed = yes; then
         _PKG_SHORT_ERRORS_SUPPORTED
         if test $_pkg_short_errors_supported = yes; then
-	        $1[]_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors "$2" 2>&1`
+	        $1[]_PKG_ERRORS=`$PKG_CONFIG --short-errors --errors-to-stdout --print-errors "$2"`
         else 
-	        $1[]_PKG_ERRORS=`$PKG_CONFIG --print-errors "$2" 2>&1`
+	        $1[]_PKG_ERRORS=`$PKG_CONFIG --errors-to-stdout --print-errors "$2"`
         fi
 	# Put the nasty error message in config.log where it belongs
 	echo "$$1[]_PKG_ERRORS" >&AS_MESSAGE_LOG_FD
@@ -467,6 +467,27 @@ AC_SUBST([am__quote])
 AC_MSG_RESULT([$_am_result])
 rm -f confinc confmf
 ])
+m4trace:/usr/share/aclocal-1.11/minuso.m4:14: -1- AC_DEFUN([AM_PROG_CC_C_O], [AC_REQUIRE([AC_PROG_CC_C_O])dnl
+AC_REQUIRE([AM_AUX_DIR_EXPAND])dnl
+AC_REQUIRE_AUX_FILE([compile])dnl
+# FIXME: we rely on the cache variable name because
+# there is no other way.
+set dummy $CC
+am_cc=`echo $[2] | sed ['s/[^a-zA-Z0-9_]/_/g;s/^[0-9]/_/']`
+eval am_t=\$ac_cv_prog_cc_${am_cc}_c_o
+if test "$am_t" != yes; then
+   # Losing compiler, so override with the script.
+   # FIXME: It is wrong to rewrite CC.
+   # But if we don't then we get into trouble of one sort or another.
+   # A longer-term fix would be to have automake use am__CC in this case,
+   # and then we could set am__CC="\$(top_srcdir)/compile \$(CC)"
+   CC="$am_aux_dir/compile $CC"
+fi
+dnl Make sure AC_PROG_CC is never called again, or it will override our
+dnl setting of CC.
+m4_define([AC_PROG_CC],
+          [m4_fatal([AC_PROG_CC cannot be called after AM_PROG_CC_C_O])])
+])
 m4trace:/usr/share/aclocal-1.11/missing.m4:14: -1- AC_DEFUN([AM_MISSING_PROG], [AC_REQUIRE([AM_MISSING_HAS_RUN])
 $1=${$1-"${am_missing_run}$2"}
 AC_SUBST($1)])
@@ -779,7 +800,7 @@ AC_PROVIDE_IFELSE([AC_PROG_OBJC],
 m4trace:configure.ac:6: -2- _AM_MANGLE_OPTION([no-dependencies])
 m4trace:configure.ac:6: -1- _AM_IF_OPTION([silent-rules], [AC_REQUIRE([AM_SILENT_RULES])])
 m4trace:configure.ac:6: -2- _AM_MANGLE_OPTION([silent-rules])
-m4trace:configure.ac:11: -1- PKG_CHECK_MODULES([DEPS], [OGRE >= 1.4.0 OIS CEGUI CEGUI-OGRE RakNet freealut openal vorbisfile])
+m4trace:configure.ac:11: -1- PKG_CHECK_MODULES([DEPS], [OGRE >= 1.4.0 OIS CEGUI CEGUI-OGRE enet freealut openal vorbisfile])
 m4trace:configure.ac:11: -1- PKG_PROG_PKG_CONFIG
 m4trace:configure.ac:11: -1- m4_pattern_forbid([^_?PKG_[A-Z_]+$])
 m4trace:configure.ac:11: -1- m4_pattern_allow([^PKG_CONFIG(_PATH)?$])
@@ -787,13 +808,13 @@ m4trace:configure.ac:11: -1- m4_pattern_allow([^PKG_CONFIG$])
 m4trace:configure.ac:11: -1- m4_pattern_allow([^PKG_CONFIG$])
 m4trace:configure.ac:11: -1- m4_pattern_allow([^DEPS_CFLAGS$])
 m4trace:configure.ac:11: -1- m4_pattern_allow([^DEPS_LIBS$])
-m4trace:configure.ac:11: -1- PKG_CHECK_EXISTS([OGRE >= 1.4.0 OIS CEGUI CEGUI-OGRE RakNet freealut openal vorbisfile], [pkg_cv_[]DEPS_CFLAGS=`$PKG_CONFIG --[]cflags "OGRE >= 1.4.0 OIS CEGUI CEGUI-OGRE RakNet freealut openal vorbisfile" 2>/dev/null`], [pkg_failed=yes])
-m4trace:configure.ac:11: -1- PKG_CHECK_EXISTS([OGRE >= 1.4.0 OIS CEGUI CEGUI-OGRE RakNet freealut openal vorbisfile], [pkg_cv_[]DEPS_LIBS=`$PKG_CONFIG --[]libs "OGRE >= 1.4.0 OIS CEGUI CEGUI-OGRE RakNet freealut openal vorbisfile" 2>/dev/null`], [pkg_failed=yes])
+m4trace:configure.ac:11: -1- PKG_CHECK_EXISTS([OGRE >= 1.4.0 OIS CEGUI CEGUI-OGRE enet freealut openal vorbisfile], [pkg_cv_[]DEPS_CFLAGS=`$PKG_CONFIG --[]cflags "OGRE >= 1.4.0 OIS CEGUI CEGUI-OGRE enet freealut openal vorbisfile" 2>/dev/null`], [pkg_failed=yes])
+m4trace:configure.ac:11: -1- PKG_CHECK_EXISTS([OGRE >= 1.4.0 OIS CEGUI CEGUI-OGRE enet freealut openal vorbisfile], [pkg_cv_[]DEPS_LIBS=`$PKG_CONFIG --[]libs "OGRE >= 1.4.0 OIS CEGUI CEGUI-OGRE enet freealut openal vorbisfile" 2>/dev/null`], [pkg_failed=yes])
 m4trace:configure.ac:11: -1- _PKG_SHORT_ERRORS_SUPPORTED
 m4trace:configure.ac:12: -1- m4_pattern_allow([^DEPS_CFLAGS$])
 m4trace:configure.ac:13: -1- m4_pattern_allow([^DEPS_LIBS$])
-m4trace:configure.ac:15: -1- PKG_CHECK_MODULES([LUA], [lua], [PKG_CHECK_MODULES([LUA], [lua5.1],
-		[PKG_CHECK_MODULES([LUA], [lua-5.1],
+m4trace:configure.ac:15: -1- PKG_CHECK_MODULES([LUA], [lua], [], [PKG_CHECK_MODULES([LUA], [lua5.1],,
+		[PKG_CHECK_MODULES([LUA], [lua-5.1],,
 			[PKG_CHECK_MODULES([LUA], [lua51],
 			)
 		])
@@ -804,7 +825,7 @@ m4trace:configure.ac:15: -1- m4_pattern_allow([^LUA_LIBS$])
 m4trace:configure.ac:15: -1- PKG_CHECK_EXISTS([lua], [pkg_cv_[]LUA_CFLAGS=`$PKG_CONFIG --[]cflags "lua" 2>/dev/null`], [pkg_failed=yes])
 m4trace:configure.ac:15: -1- PKG_CHECK_EXISTS([lua], [pkg_cv_[]LUA_LIBS=`$PKG_CONFIG --[]libs "lua" 2>/dev/null`], [pkg_failed=yes])
 m4trace:configure.ac:15: -1- _PKG_SHORT_ERRORS_SUPPORTED
-m4trace:configure.ac:15: -1- PKG_CHECK_MODULES([LUA], [lua5.1], [PKG_CHECK_MODULES([LUA], [lua-5.1],
+m4trace:configure.ac:15: -1- PKG_CHECK_MODULES([LUA], [lua5.1], [], [PKG_CHECK_MODULES([LUA], [lua-5.1],,
 			[PKG_CHECK_MODULES([LUA], [lua51],
 			)
 		])
@@ -814,7 +835,7 @@ m4trace:configure.ac:15: -1- m4_pattern_allow([^LUA_LIBS$])
 m4trace:configure.ac:15: -1- PKG_CHECK_EXISTS([lua5.1], [pkg_cv_[]LUA_CFLAGS=`$PKG_CONFIG --[]cflags "lua5.1" 2>/dev/null`], [pkg_failed=yes])
 m4trace:configure.ac:15: -1- PKG_CHECK_EXISTS([lua5.1], [pkg_cv_[]LUA_LIBS=`$PKG_CONFIG --[]libs "lua5.1" 2>/dev/null`], [pkg_failed=yes])
 m4trace:configure.ac:15: -1- _PKG_SHORT_ERRORS_SUPPORTED
-m4trace:configure.ac:15: -1- PKG_CHECK_MODULES([LUA], [lua-5.1], [PKG_CHECK_MODULES([LUA], [lua51],
+m4trace:configure.ac:15: -1- PKG_CHECK_MODULES([LUA], [lua-5.1], [], [PKG_CHECK_MODULES([LUA], [lua51],
 			)
 		])
 m4trace:configure.ac:15: -1- m4_pattern_allow([^LUA_CFLAGS$])
@@ -828,62 +849,140 @@ m4trace:configure.ac:15: -1- m4_pattern_allow([^LUA_LIBS$])
 m4trace:configure.ac:15: -1- PKG_CHECK_EXISTS([lua51], [pkg_cv_[]LUA_CFLAGS=`$PKG_CONFIG --[]cflags "lua51" 2>/dev/null`], [pkg_failed=yes])
 m4trace:configure.ac:15: -1- PKG_CHECK_EXISTS([lua51], [pkg_cv_[]LUA_LIBS=`$PKG_CONFIG --[]libs "lua51" 2>/dev/null`], [pkg_failed=yes])
 m4trace:configure.ac:15: -1- _PKG_SHORT_ERRORS_SUPPORTED
+m4trace:configure.ac:15: -1- PKG_CHECK_MODULES([LUA], [lua51], [])
+m4trace:configure.ac:15: -1- m4_pattern_allow([^LUA_CFLAGS$])
+m4trace:configure.ac:15: -1- m4_pattern_allow([^LUA_LIBS$])
+m4trace:configure.ac:15: -1- PKG_CHECK_EXISTS([lua51], [pkg_cv_[]LUA_CFLAGS=`$PKG_CONFIG --[]cflags "lua51" 2>/dev/null`], [pkg_failed=yes])
+m4trace:configure.ac:15: -1- PKG_CHECK_EXISTS([lua51], [pkg_cv_[]LUA_LIBS=`$PKG_CONFIG --[]libs "lua51" 2>/dev/null`], [pkg_failed=yes])
+m4trace:configure.ac:15: -1- _PKG_SHORT_ERRORS_SUPPORTED
+m4trace:configure.ac:15: -1- PKG_CHECK_MODULES([LUA], [lua-5.1], [], [PKG_CHECK_MODULES([LUA], [lua51],
+			)
+		])
+m4trace:configure.ac:15: -1- m4_pattern_allow([^LUA_CFLAGS$])
+m4trace:configure.ac:15: -1- m4_pattern_allow([^LUA_LIBS$])
+m4trace:configure.ac:15: -1- PKG_CHECK_EXISTS([lua-5.1], [pkg_cv_[]LUA_CFLAGS=`$PKG_CONFIG --[]cflags "lua-5.1" 2>/dev/null`], [pkg_failed=yes])
+m4trace:configure.ac:15: -1- PKG_CHECK_EXISTS([lua-5.1], [pkg_cv_[]LUA_LIBS=`$PKG_CONFIG --[]libs "lua-5.1" 2>/dev/null`], [pkg_failed=yes])
+m4trace:configure.ac:15: -1- _PKG_SHORT_ERRORS_SUPPORTED
+m4trace:configure.ac:15: -1- PKG_CHECK_MODULES([LUA], [lua51], [])
+m4trace:configure.ac:15: -1- m4_pattern_allow([^LUA_CFLAGS$])
+m4trace:configure.ac:15: -1- m4_pattern_allow([^LUA_LIBS$])
+m4trace:configure.ac:15: -1- PKG_CHECK_EXISTS([lua51], [pkg_cv_[]LUA_CFLAGS=`$PKG_CONFIG --[]cflags "lua51" 2>/dev/null`], [pkg_failed=yes])
+m4trace:configure.ac:15: -1- PKG_CHECK_EXISTS([lua51], [pkg_cv_[]LUA_LIBS=`$PKG_CONFIG --[]libs "lua51" 2>/dev/null`], [pkg_failed=yes])
+m4trace:configure.ac:15: -1- _PKG_SHORT_ERRORS_SUPPORTED
+m4trace:configure.ac:15: -1- PKG_CHECK_MODULES([LUA], [lua51], [])
+m4trace:configure.ac:15: -1- m4_pattern_allow([^LUA_CFLAGS$])
+m4trace:configure.ac:15: -1- m4_pattern_allow([^LUA_LIBS$])
+m4trace:configure.ac:15: -1- PKG_CHECK_EXISTS([lua51], [pkg_cv_[]LUA_CFLAGS=`$PKG_CONFIG --[]cflags "lua51" 2>/dev/null`], [pkg_failed=yes])
+m4trace:configure.ac:15: -1- PKG_CHECK_EXISTS([lua51], [pkg_cv_[]LUA_LIBS=`$PKG_CONFIG --[]libs "lua51" 2>/dev/null`], [pkg_failed=yes])
+m4trace:configure.ac:15: -1- _PKG_SHORT_ERRORS_SUPPORTED
+m4trace:configure.ac:15: -1- PKG_CHECK_MODULES([LUA], [lua5.1], [], [PKG_CHECK_MODULES([LUA], [lua-5.1],,
+			[PKG_CHECK_MODULES([LUA], [lua51],
+			)
+		])
+	])
+m4trace:configure.ac:15: -1- m4_pattern_allow([^LUA_CFLAGS$])
+m4trace:configure.ac:15: -1- m4_pattern_allow([^LUA_LIBS$])
+m4trace:configure.ac:15: -1- PKG_CHECK_EXISTS([lua5.1], [pkg_cv_[]LUA_CFLAGS=`$PKG_CONFIG --[]cflags "lua5.1" 2>/dev/null`], [pkg_failed=yes])
+m4trace:configure.ac:15: -1- PKG_CHECK_EXISTS([lua5.1], [pkg_cv_[]LUA_LIBS=`$PKG_CONFIG --[]libs "lua5.1" 2>/dev/null`], [pkg_failed=yes])
+m4trace:configure.ac:15: -1- _PKG_SHORT_ERRORS_SUPPORTED
+m4trace:configure.ac:15: -1- PKG_CHECK_MODULES([LUA], [lua-5.1], [], [PKG_CHECK_MODULES([LUA], [lua51],
+			)
+		])
+m4trace:configure.ac:15: -1- m4_pattern_allow([^LUA_CFLAGS$])
+m4trace:configure.ac:15: -1- m4_pattern_allow([^LUA_LIBS$])
+m4trace:configure.ac:15: -1- PKG_CHECK_EXISTS([lua-5.1], [pkg_cv_[]LUA_CFLAGS=`$PKG_CONFIG --[]cflags "lua-5.1" 2>/dev/null`], [pkg_failed=yes])
+m4trace:configure.ac:15: -1- PKG_CHECK_EXISTS([lua-5.1], [pkg_cv_[]LUA_LIBS=`$PKG_CONFIG --[]libs "lua-5.1" 2>/dev/null`], [pkg_failed=yes])
+m4trace:configure.ac:15: -1- _PKG_SHORT_ERRORS_SUPPORTED
+m4trace:configure.ac:15: -1- PKG_CHECK_MODULES([LUA], [lua51], [])
+m4trace:configure.ac:15: -1- m4_pattern_allow([^LUA_CFLAGS$])
+m4trace:configure.ac:15: -1- m4_pattern_allow([^LUA_LIBS$])
+m4trace:configure.ac:15: -1- PKG_CHECK_EXISTS([lua51], [pkg_cv_[]LUA_CFLAGS=`$PKG_CONFIG --[]cflags "lua51" 2>/dev/null`], [pkg_failed=yes])
+m4trace:configure.ac:15: -1- PKG_CHECK_EXISTS([lua51], [pkg_cv_[]LUA_LIBS=`$PKG_CONFIG --[]libs "lua51" 2>/dev/null`], [pkg_failed=yes])
+m4trace:configure.ac:15: -1- _PKG_SHORT_ERRORS_SUPPORTED
+m4trace:configure.ac:15: -1- PKG_CHECK_MODULES([LUA], [lua51], [])
+m4trace:configure.ac:15: -1- m4_pattern_allow([^LUA_CFLAGS$])
+m4trace:configure.ac:15: -1- m4_pattern_allow([^LUA_LIBS$])
+m4trace:configure.ac:15: -1- PKG_CHECK_EXISTS([lua51], [pkg_cv_[]LUA_CFLAGS=`$PKG_CONFIG --[]cflags "lua51" 2>/dev/null`], [pkg_failed=yes])
+m4trace:configure.ac:15: -1- PKG_CHECK_EXISTS([lua51], [pkg_cv_[]LUA_LIBS=`$PKG_CONFIG --[]libs "lua51" 2>/dev/null`], [pkg_failed=yes])
+m4trace:configure.ac:15: -1- _PKG_SHORT_ERRORS_SUPPORTED
+m4trace:configure.ac:15: -1- PKG_CHECK_MODULES([LUA], [lua-5.1], [], [PKG_CHECK_MODULES([LUA], [lua51],
+			)
+		])
+m4trace:configure.ac:15: -1- m4_pattern_allow([^LUA_CFLAGS$])
+m4trace:configure.ac:15: -1- m4_pattern_allow([^LUA_LIBS$])
+m4trace:configure.ac:15: -1- PKG_CHECK_EXISTS([lua-5.1], [pkg_cv_[]LUA_CFLAGS=`$PKG_CONFIG --[]cflags "lua-5.1" 2>/dev/null`], [pkg_failed=yes])
+m4trace:configure.ac:15: -1- PKG_CHECK_EXISTS([lua-5.1], [pkg_cv_[]LUA_LIBS=`$PKG_CONFIG --[]libs "lua-5.1" 2>/dev/null`], [pkg_failed=yes])
+m4trace:configure.ac:15: -1- _PKG_SHORT_ERRORS_SUPPORTED
+m4trace:configure.ac:15: -1- PKG_CHECK_MODULES([LUA], [lua51], [])
+m4trace:configure.ac:15: -1- m4_pattern_allow([^LUA_CFLAGS$])
+m4trace:configure.ac:15: -1- m4_pattern_allow([^LUA_LIBS$])
+m4trace:configure.ac:15: -1- PKG_CHECK_EXISTS([lua51], [pkg_cv_[]LUA_CFLAGS=`$PKG_CONFIG --[]cflags "lua51" 2>/dev/null`], [pkg_failed=yes])
+m4trace:configure.ac:15: -1- PKG_CHECK_EXISTS([lua51], [pkg_cv_[]LUA_LIBS=`$PKG_CONFIG --[]libs "lua51" 2>/dev/null`], [pkg_failed=yes])
+m4trace:configure.ac:15: -1- _PKG_SHORT_ERRORS_SUPPORTED
+m4trace:configure.ac:15: -1- PKG_CHECK_MODULES([LUA], [lua51], [])
+m4trace:configure.ac:15: -1- m4_pattern_allow([^LUA_CFLAGS$])
+m4trace:configure.ac:15: -1- m4_pattern_allow([^LUA_LIBS$])
+m4trace:configure.ac:15: -1- PKG_CHECK_EXISTS([lua51], [pkg_cv_[]LUA_CFLAGS=`$PKG_CONFIG --[]cflags "lua51" 2>/dev/null`], [pkg_failed=yes])
+m4trace:configure.ac:15: -1- PKG_CHECK_EXISTS([lua51], [pkg_cv_[]LUA_LIBS=`$PKG_CONFIG --[]libs "lua51" 2>/dev/null`], [pkg_failed=yes])
+m4trace:configure.ac:15: -1- _PKG_SHORT_ERRORS_SUPPORTED
 m4trace:configure.ac:23: -1- m4_pattern_allow([^LUA_CFLAGS$])
 m4trace:configure.ac:24: -1- m4_pattern_allow([^LUA_LIBS$])
-m4trace:configure.ac:28: -1- m4_pattern_allow([^CXX$])
-m4trace:configure.ac:28: -1- m4_pattern_allow([^CXXFLAGS$])
+m4trace:configure.ac:27: -1- m4_pattern_allow([^CXX$])
+m4trace:configure.ac:27: -1- m4_pattern_allow([^CXXFLAGS$])
+m4trace:configure.ac:27: -1- m4_pattern_allow([^LDFLAGS$])
+m4trace:configure.ac:27: -1- m4_pattern_allow([^LIBS$])
+m4trace:configure.ac:27: -1- m4_pattern_allow([^CPPFLAGS$])
+m4trace:configure.ac:27: -1- m4_pattern_allow([^CXX$])
+m4trace:configure.ac:27: -1- m4_pattern_allow([^ac_ct_CXX$])
+m4trace:configure.ac:27: -1- m4_pattern_allow([^EXEEXT$])
+m4trace:configure.ac:27: -1- m4_pattern_allow([^OBJEXT$])
+m4trace:configure.ac:27: -1- _AM_DEPENDENCIES([CXX])
+m4trace:configure.ac:27: -1- AM_SET_DEPDIR
+m4trace:configure.ac:27: -1- m4_pattern_allow([^DEPDIR$])
+m4trace:configure.ac:27: -1- AM_OUTPUT_DEPENDENCY_COMMANDS
+m4trace:configure.ac:27: -1- AM_MAKE_INCLUDE
+m4trace:configure.ac:27: -1- m4_pattern_allow([^am__include$])
+m4trace:configure.ac:27: -1- m4_pattern_allow([^am__quote$])
+m4trace:configure.ac:27: -1- AM_DEP_TRACK
+m4trace:configure.ac:27: -1- AM_CONDITIONAL([AMDEP], [test "x$enable_dependency_tracking" != xno])
+m4trace:configure.ac:27: -1- m4_pattern_allow([^AMDEP_TRUE$])
+m4trace:configure.ac:27: -1- m4_pattern_allow([^AMDEP_FALSE$])
+m4trace:configure.ac:27: -1- _AM_SUBST_NOTMAKE([AMDEP_TRUE])
+m4trace:configure.ac:27: -1- _AM_SUBST_NOTMAKE([AMDEP_FALSE])
+m4trace:configure.ac:27: -1- m4_pattern_allow([^AMDEPBACKSLASH$])
+m4trace:configure.ac:27: -1- _AM_SUBST_NOTMAKE([AMDEPBACKSLASH])
+m4trace:configure.ac:27: -1- m4_pattern_allow([^CXXDEPMODE$])
+m4trace:configure.ac:27: -1- AM_CONDITIONAL([am__fastdepCXX], [
+  test "x$enable_dependency_tracking" != xno \
+  && test "$am_cv_CXX_dependencies_compiler_type" = gcc3])
+m4trace:configure.ac:27: -1- m4_pattern_allow([^am__fastdepCXX_TRUE$])
+m4trace:configure.ac:27: -1- m4_pattern_allow([^am__fastdepCXX_FALSE$])
+m4trace:configure.ac:27: -1- _AM_SUBST_NOTMAKE([am__fastdepCXX_TRUE])
+m4trace:configure.ac:27: -1- _AM_SUBST_NOTMAKE([am__fastdepCXX_FALSE])
+m4trace:configure.ac:28: -1- m4_pattern_allow([^CC$])
+m4trace:configure.ac:28: -1- m4_pattern_allow([^CFLAGS$])
 m4trace:configure.ac:28: -1- m4_pattern_allow([^LDFLAGS$])
 m4trace:configure.ac:28: -1- m4_pattern_allow([^LIBS$])
 m4trace:configure.ac:28: -1- m4_pattern_allow([^CPPFLAGS$])
-m4trace:configure.ac:28: -1- m4_pattern_allow([^CXX$])
-m4trace:configure.ac:28: -1- m4_pattern_allow([^ac_ct_CXX$])
-m4trace:configure.ac:28: -1- m4_pattern_allow([^EXEEXT$])
-m4trace:configure.ac:28: -1- m4_pattern_allow([^OBJEXT$])
-m4trace:configure.ac:28: -1- _AM_DEPENDENCIES([CXX])
-m4trace:configure.ac:28: -1- AM_SET_DEPDIR
-m4trace:configure.ac:28: -1- m4_pattern_allow([^DEPDIR$])
-m4trace:configure.ac:28: -1- AM_OUTPUT_DEPENDENCY_COMMANDS
-m4trace:configure.ac:28: -1- AM_MAKE_INCLUDE
-m4trace:configure.ac:28: -1- m4_pattern_allow([^am__include$])
-m4trace:configure.ac:28: -1- m4_pattern_allow([^am__quote$])
-m4trace:configure.ac:28: -1- AM_DEP_TRACK
-m4trace:configure.ac:28: -1- AM_CONDITIONAL([AMDEP], [test "x$enable_dependency_tracking" != xno])
-m4trace:configure.ac:28: -1- m4_pattern_allow([^AMDEP_TRUE$])
-m4trace:configure.ac:28: -1- m4_pattern_allow([^AMDEP_FALSE$])
-m4trace:configure.ac:28: -1- _AM_SUBST_NOTMAKE([AMDEP_TRUE])
-m4trace:configure.ac:28: -1- _AM_SUBST_NOTMAKE([AMDEP_FALSE])
-m4trace:configure.ac:28: -1- m4_pattern_allow([^AMDEPBACKSLASH$])
-m4trace:configure.ac:28: -1- _AM_SUBST_NOTMAKE([AMDEPBACKSLASH])
-m4trace:configure.ac:28: -1- m4_pattern_allow([^CXXDEPMODE$])
-m4trace:configure.ac:28: -1- AM_CONDITIONAL([am__fastdepCXX], [
-  test "x$enable_dependency_tracking" != xno \
-  && test "$am_cv_CXX_dependencies_compiler_type" = gcc3])
-m4trace:configure.ac:28: -1- m4_pattern_allow([^am__fastdepCXX_TRUE$])
-m4trace:configure.ac:28: -1- m4_pattern_allow([^am__fastdepCXX_FALSE$])
-m4trace:configure.ac:28: -1- _AM_SUBST_NOTMAKE([am__fastdepCXX_TRUE])
-m4trace:configure.ac:28: -1- _AM_SUBST_NOTMAKE([am__fastdepCXX_FALSE])
-m4trace:configure.ac:29: -1- m4_pattern_allow([^CC$])
-m4trace:configure.ac:29: -1- m4_pattern_allow([^CFLAGS$])
-m4trace:configure.ac:29: -1- m4_pattern_allow([^LDFLAGS$])
-m4trace:configure.ac:29: -1- m4_pattern_allow([^LIBS$])
-m4trace:configure.ac:29: -1- m4_pattern_allow([^CPPFLAGS$])
-m4trace:configure.ac:29: -1- m4_pattern_allow([^CC$])
-m4trace:configure.ac:29: -1- m4_pattern_allow([^CC$])
-m4trace:configure.ac:29: -1- m4_pattern_allow([^CC$])
-m4trace:configure.ac:29: -1- m4_pattern_allow([^CC$])
-m4trace:configure.ac:29: -1- m4_pattern_allow([^ac_ct_CC$])
-m4trace:configure.ac:29: -1- _AM_DEPENDENCIES([CC])
-m4trace:configure.ac:29: -1- m4_pattern_allow([^CCDEPMODE$])
-m4trace:configure.ac:29: -1- AM_CONDITIONAL([am__fastdepCC], [
+m4trace:configure.ac:28: -1- m4_pattern_allow([^CC$])
+m4trace:configure.ac:28: -1- m4_pattern_allow([^CC$])
+m4trace:configure.ac:28: -1- m4_pattern_allow([^CC$])
+m4trace:configure.ac:28: -1- m4_pattern_allow([^CC$])
+m4trace:configure.ac:28: -1- m4_pattern_allow([^ac_ct_CC$])
+m4trace:configure.ac:28: -1- _AM_DEPENDENCIES([CC])
+m4trace:configure.ac:28: -1- m4_pattern_allow([^CCDEPMODE$])
+m4trace:configure.ac:28: -1- AM_CONDITIONAL([am__fastdepCC], [
   test "x$enable_dependency_tracking" != xno \
   && test "$am_cv_CC_dependencies_compiler_type" = gcc3])
-m4trace:configure.ac:29: -1- m4_pattern_allow([^am__fastdepCC_TRUE$])
-m4trace:configure.ac:29: -1- m4_pattern_allow([^am__fastdepCC_FALSE$])
-m4trace:configure.ac:29: -1- _AM_SUBST_NOTMAKE([am__fastdepCC_TRUE])
-m4trace:configure.ac:29: -1- _AM_SUBST_NOTMAKE([am__fastdepCC_FALSE])
-m4trace:configure.ac:30: -1- m4_pattern_allow([^CPP$])
-m4trace:configure.ac:30: -1- m4_pattern_allow([^CPPFLAGS$])
-m4trace:configure.ac:30: -1- m4_pattern_allow([^CPP$])
+m4trace:configure.ac:28: -1- m4_pattern_allow([^am__fastdepCC_TRUE$])
+m4trace:configure.ac:28: -1- m4_pattern_allow([^am__fastdepCC_FALSE$])
+m4trace:configure.ac:28: -1- _AM_SUBST_NOTMAKE([am__fastdepCC_TRUE])
+m4trace:configure.ac:28: -1- _AM_SUBST_NOTMAKE([am__fastdepCC_FALSE])
+m4trace:configure.ac:29: -1- m4_pattern_allow([^CPP$])
+m4trace:configure.ac:29: -1- m4_pattern_allow([^CPPFLAGS$])
+m4trace:configure.ac:29: -1- m4_pattern_allow([^CPP$])
+m4trace:configure.ac:30: -1- AM_PROG_CC_C_O
+m4trace:configure.ac:30: -1- m4_pattern_allow([^NO_MINUS_C_MINUS_O$])
 m4trace:configure.ac:34: -1- m4_pattern_allow([^HAVE_LIBM$])
 m4trace:configure.ac:36: -1- m4_pattern_allow([^HAVE_LIBRT$])
 m4trace:configure.ac:39: -1- m4_pattern_allow([^GREP$])

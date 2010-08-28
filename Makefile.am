@@ -1,13 +1,14 @@
 AUTOMAKE_OPTIONS = subdir-objects
 
 bin_PROGRAMS = sumwars
-sumwars_CPPFLAGS = -DDEBUG_LEVEL=5 -Wall -g -I./src/core -I./src/gui -I./src/tinyxml -I./src/raknet/Include
+sumwars_CPPFLAGS = -DDEBUG_LEVEL=5 -Wall -g -I./src/core -I./src/gui -I./src/tinyxml -I./Dependencies/nlfg
 sumwars_CXXFLAGS = $(DEPS_CFLAGS) $(LUA_CFLAGS)
 sumwars_LDFLAGS = -lm -lrt
 sumwars_LDADD = $(DEPS_LIBS) $(LUA_LIBS)
 
 
-sumwars_SOURCES = src/core/world.cpp \
+sumwars_SOURCES = ./Dependencies/nlfg/nlfg.c \
+	src/core/world.cpp \
 	src/core/gameobject.cpp \
 	src/core/charconv.cpp \
 	src/core/stdstreamconv.cpp \
@@ -18,9 +19,9 @@ sumwars_SOURCES = src/core/world.cpp \
 	src/core/itemlist.cpp \
 	src/core/gridunit.cpp \
 	src/core/servernetwork.cpp \
-	src/core/rakservernetwork.cpp \
-	src/core/rakclientnetwork.cpp \
-	src/core/raknetworkpacket.cpp \
+	src/core/nlfgservernetwork.cpp \
+	src/core/nlfgclientnetwork.cpp \
+	src/core/nlfgnetworkpacket.cpp \
 	src/core/worldobject.cpp \
 	src/core/networkstruct.cpp \
 	src/core/projectile.cpp \
