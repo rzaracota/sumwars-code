@@ -25,12 +25,12 @@ THE SOFTWARE.
 #include <enet/enet.h>
 #include <string.h>
 
-struct NLFG_MessageMaster
+const int MAX_QUEUE_SIZE = 32;
+
+struct NLFG_Queue
 {
-    NLFG_Message **messages;
-    int count;
-    int size;
-} messageMaster;
+    NLFG_Message *tail;
+} nlfgQueue;
 
 ENetHost *host;
 ENetPeer *peer;
@@ -53,25 +53,24 @@ void nlfg_expand(NLFG_Message *msg, int size)
     }
 }
 
-void nlfg_addMessage(NLFG_Message *msg)
+int nlfg_addMessage(NLFG_Message *msg)
 {
-    int loop;
+    /* Add a packet to the message queue.
+       Returns -1 if unable (due to full queue)
+       TODO: Have dynamic sized queue
+    */
 
-    ++(messageMaster.count);
-    if (messageMaster.count > messageMaster.size)
+    if (nlfgQueue.tail == 0)
     {
-        messageMaster.size = messageMaster.size << 1;
-        NLFG_Message **msgs = (NLFG_Message**)malloc(sizeof(NLFG_Message*) * messageMaster.size);
-
-        for (loop = 0; loop < messageMaster.size; ++loop)
-        {
-            msgs[loop] = messageMaster.messages[loop];
-            free(messageMaster.messages[loop]);
-        }
-        messageMaster.messages = msgs;
+        nlfgQueue.tail = msg;
+        msg->parent = 0;
     }
-
-    messageMaster.messages[messageMaster.count-1] = msg;
+    else
+    {
+        msg->parent = nlfgQueue.tail;
+        nlfgQueue.tail = msg;
+    }
+    return 0;
 }
 
 int nlfg_init_client()
@@ -84,10 +83,7 @@ int nlfg_init_client()
                     1 /* only allow 1 outgoing connection */,
                     57600 / 8 /* 56K modem with 56 Kbps downstream bandwidth */,
                     14400 / 8 /* 56K modem with 14 Kbps upstream bandwidth */);
-    messageMaster.count = 0;
-    messageMaster.size = 1;
-    messageMaster.messages = (NLFG_Message**)malloc(sizeof(NLFG_Message*));
-    messageMaster.messages[0] = 0;
+    nlfgQueue.tail = 0;
     return 1;
 }
 
@@ -103,7 +99,7 @@ int nlfg_init_server(unsigned int port)
     host = enet_host_create (&addr,
                     32 /* only allow 32 incoming connections */,
                     0, 0);
-    messageMaster.count = 0;
+    nlfgQueue.tail = 0;
     return 1;
 }
 
@@ -199,7 +195,11 @@ int nlfg_process()
 
 NLFG_Message* nlfg_getMessage()
 {
-    return messageMaster.messages[--messageMaster.count];
+    if (nlfgQueue.tail == 0)
+        return NULL;
+    NLFG_Message *msg = nlfgQueue.tail;
+    nlfgQueue.tail = msg->parent;
+    return msg;
 }
 
 unsigned int nlfg_getPosition(NLFG_Message *msg)
@@ -300,20 +300,17 @@ char* nlfg_readString(NLFG_Message *msg)
     return s;
 }
 
-char* nlfg_readStringWithSize(NLFG_Message *msg, int size)
+void nlfg_readStringWithSize(NLFG_Message *msg, char *data, int size)
 {
-    char *s = (char*)malloc(size);
-
     if (msg->position + size > msg->size)
     {
-        return NULL;
+        data = NULL;
+        return;
     }
 
-    memcpy(s, &msg->data[msg->position], size);
+    memcpy(data, &msg->data[msg->position], size);
 
     msg->position += size;
-
-    return s;
 }
 
 void nlfg_writeByte(NLFG_Message *msg, char c)
