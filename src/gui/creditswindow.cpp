@@ -37,7 +37,9 @@ CreditsWindow::CreditsWindow(Document* doc)
 			\n Hans Wulf (Lastmerlin) \
 			\n fusion44 \
 			\n Nicholas Cosens (gnemo) \
-            \n\nConversion to Mac: \
+            \n\nNetwork Library For Games (NLFG): \
+            \n David Athay (trapdoor) \
+            \n\nMac conversion: \
             \n David Athay (trapdoor) \
             \n Ben Anderman (crimson_penguin) \
 			\n\nGraphics: \

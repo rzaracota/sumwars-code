@@ -285,7 +285,7 @@ void Document::createNewCharacter(std::string name)
 		m_save_file = "./save/";
 #else
         std::string path = PHYSFS_getUserDir();
-        path.append("Library/Application\\ Support/Sumwars/");
+        path.append("Library/Application Support/Sumwars/");
         m_save_file = path;
 #endif
 		m_save_file += name;
@@ -1794,7 +1794,7 @@ void Document::saveSettings()
 {
 #ifdef __APPLE__
     std::string path = PHYSFS_getUserDir();
-    path.append("/Library/Application\\ Support/Sumwars/");
+    path.append("/Library/Application Support/Sumwars/");
     Options::getInstance()->writeToFile(path + "options.xml");
 #else
 	Options::getInstance()->writeToFile("options.xml");
