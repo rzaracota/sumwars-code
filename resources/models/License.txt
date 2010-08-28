@@ -5,7 +5,7 @@ This file contains all license information for artwork located in the models dir
 If not declared otherwise, all artwork is released under the authors default license.
 
 Artwork provided by: Andreas Schönfeld
-Default license:
+Default license: CC-BY-SA
 Files:
 	aprnt_stf.mesh
 	aprnt_wnd.mesh
@@ -449,7 +449,7 @@ Files:
 	
 
 Artwork provided by: Steffen Schönefeldt (Kalimgard)
-Default license:
+Default license: CC-BY-SA
 Files:
 	behemoth.skeleton
 	bloodbeak.skeleton
@@ -465,13 +465,14 @@ Files:
 	mage.skeleton
 	mojo.skeleton
 	skeleton.skeleton
+	spider.skeleton
 	wolf.skeleton
 
 
 
 Artwork provided by: Psycho
-Default license:
+Default license: CC-BY-SA
 Files:
 	spider.mesh
-	spider.skeleton
+	
 	

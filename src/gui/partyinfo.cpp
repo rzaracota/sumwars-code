@@ -266,7 +266,7 @@ void PartyInfo::update()
 		
 		label = win_mgr.getWindow(stream.str());
 		stream.str("");
-		stream << pl->getName();
+		stream << pl->getName().getRawText();
 		if (label->isVisible()!=true)
 		{
 			label->setVisible(true);

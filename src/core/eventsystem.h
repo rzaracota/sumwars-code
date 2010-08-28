@@ -110,6 +110,16 @@ class EventSystem
 		}
 		
 		/**
+		 * \brief Returns the current Gettext Domain
+		 */
+		static std::string GetGettextDomain()
+		{
+			if (m_gettext_domains.empty())
+				return "";
+			return m_gettext_domains.top();
+		}
+		
+		/**
 		 * \fn static void setRegion(Region* region)
 		 * \brief Setzt die Region in der aktuell alle Events ablaufen
 		 * \param region Region

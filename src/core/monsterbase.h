@@ -110,10 +110,9 @@ struct MonsterBasicData
 	short m_layer;
 	
 	/**
-	 * \var std::string m_name
 	 * \brief Name des Monsters
 	 */
-	std::string m_name;
+	TranslatableString m_name;
 	
 	/**
 	 * \var  std::string m_emotion_set

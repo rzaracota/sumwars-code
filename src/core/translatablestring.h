@@ -79,14 +79,48 @@ class TranslatableString
 		}
 		
 		/**
+		 * \brief equivalence operator for two translatable strings
+		 * \param other other translatable string
+		 */
+		bool operator==(const TranslatableString& other) const
+		{
+			return (m_text == other.m_text && m_domain == other.m_domain);
+		}
+		
+		/**
+		 * \brief inequivalence operator for two translatable strings
+		 * \param other other translatable string
+		 */
+		bool operator!=(const TranslatableString& other) const
+		{
+			return !operator==(other);
+		}
+		
+		
+		
+		
+		/**
 		 * \brief Sets the domain of the text
 		 */
 		void setTextDomain(std::string domain);
+		
+		const std::string& getTextDomain()
+		{
+			return m_domain;
+		}
 		
 		/**
 		 * \brief Returns the translated string
 		 */
 		const std::string& getTranslation();
+		
+		/**
+		 * \brief Returns the untranslated text
+		 */
+		const std::string& getRawText()
+		{
+			return m_text;
+		}
 		
 		/**
 		 * \brief Copy operator

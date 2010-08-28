@@ -473,7 +473,7 @@ Fraction::Relation World::getRelation(Fraction::Id frac, Fraction::Id frac2)
 	else
 	{
 		// Beziehung zwischen Spielern
-		return Fraction::Relation(MathHelper::Min(m_parties[frac].getRelations()[frac2], m_parties[frac2].getRelations()[frac]));
+		 return Fraction::Relation(MathHelper::Min(m_parties[frac].getRelations()[frac2], m_parties[frac2].getRelations()[frac]));
 	}
 
 
@@ -1078,7 +1078,7 @@ void World::handleMessage(TranslatableString msg, int slot)
 			if (pl != 0)
 			{
 				plmsg += "[";
-				plmsg += pl->getName();
+				plmsg += pl->getName().getRawText();
 
 				if (pl->getSpeakText().m_text == "" && pl->getDialogue() == 0)
 				{
@@ -1136,7 +1136,7 @@ void World::handleMessage(TranslatableString msg, int slot)
 			m_network->deallocatePacket(cv);
 
             smsg = "[";
-            smsg += m_local_player->getName();
+			smsg += m_local_player->getName().getRawText();
             smsg += "] ";
             smsg += msg.getTranslation();
 			
@@ -2692,7 +2692,6 @@ bool World::calcBlockmat(PathfindInfo * pathinfo)
 			// Mittelpunkt des Objektes im Grid
 			js = (int) floor((wos->m_center.m_y - c1.m_y)/sqs);
 			is = (int) floor((wos->m_center.m_x - c1.m_x)/sqs);
-			
 			is = MathHelper::Max(MathHelper::Min(is,pathinfo->m_dim-1),0);
 			js = MathHelper::Max(MathHelper::Min(js,pathinfo->m_dim-1),0);
 

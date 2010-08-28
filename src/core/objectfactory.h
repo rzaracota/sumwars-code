@@ -465,10 +465,9 @@ class ObjectFactory
 	static GameObject::Type getObjectBaseType(GameObject::Subtype subtype);
 	
 	/**
-	 * \fn static std::string getObjectName(GameObject::Subtype subtype)
 	 * \brief Gibt den Name eines Objektes aus
 	 */
-	static std::string getObjectName(GameObject::Subtype subtype);
+	static TranslatableString getObjectName(GameObject::Subtype subtype);
 	
 	/**
 	 * \fn static PlayerBasicData* getPlayerData(GameObject::Subtype subtype)

@@ -17,6 +17,12 @@
 cmake_minimum_required(VERSION 2.6)
 
 
+IF( NOT CMAKE_BUILD_TYPE )
+SET( CMAKE_BUILD_TYPE "RelWithDebInfo" )
+ENDIF()
+
+OPTION(NO_RAKNET "Avoid use of Raknet Lib" OFF)
+PROJECT(SUMWARS)
 
 project(sumwars)
 

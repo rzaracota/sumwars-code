@@ -9,7 +9,7 @@
 		<WorldPosition world_x="0.62" world_y ="0.69" />
 		
 		<Music>
-			<Track source="Dark_Exploration.ogg" />
+			<Track source="treacherous_paths.ogg" />
 		</Music>
 		
 		<ExitDirections north="true" south="false" west="false" east="false" />
@@ -33,6 +33,10 @@
 		<AmbientLight red="0.4" green="0.4" blue="0.4" />
 		<HeroLight red="1.0" green="1.0" blue="1.0" /> 
 		<DirectionalLight red="0.3" green="0.3" blue="0.3" />
+		
+		<Music>
+			<Track source="the_prophecy.ogg" />
+		</Music>
 		
 		<Settings dimx="17" dimy="17" region_template="medBackalley"  ground="grass1"/>
 		<WorldPosition world_x="0.625" world_y ="0.67" />
@@ -59,6 +63,10 @@
 		<AmbientLight red="0.4" green="0.4" blue="0.4" />
 		<HeroLight red="1.0" green="1.0" blue="1.0" /> 
 		<DirectionalLight red="0.3" green="0.3" blue="0.3" />
+		
+		<Music>
+			<Track source="the_prophecy.ogg" />
+		</Music>
 		
 		<Settings dimx="20" dimy="20" region_template="medairMercenaryCamp"  ground="grass1"/>
 		

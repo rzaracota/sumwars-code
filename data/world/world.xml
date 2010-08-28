@@ -76,7 +76,7 @@
 		<Relation fraction="undead" relation="hostile" />
 	</Fraction>
 
-	<TitleMusic source="" />
+	<TitleMusic source="main_title.ogg" />
 </World>
 
 

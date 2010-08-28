@@ -113,6 +113,9 @@ int NLFGServerNetwork::getSlotByAddress(NLFG_Address address)
 {
 	for (int i=0;i< m_max_slots;i++)
 	{
+		if (m_slots[i] == 0)
+			continue;
+		
         NLFG_Address addr = static_cast<NLFGNetworkSlot*>(m_slots[i])->getPlayerID();
 		if (m_slots[i] != 0  && nlfg_matchAddress(&addr, &address))
 		{

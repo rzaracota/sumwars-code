@@ -5,6 +5,15 @@ This file contains all license information for artwork located in the music dire
 If not declared otherwise, all artwork is released under the authors default license.
 
 Artwork provided by: Cheeselord
-Default license:
+Default license: CC-BY-SA
 Files:
 	Dark_Exploration.ogg
+	
+Artwork provided by: West
+Default license: CC-BY
+Files:
+	dark_descent.ogg
+	main_title.ogg
+	the_prophecy.ogg
+	treacherous_paths.ogg
+	tread_lightly.ogg

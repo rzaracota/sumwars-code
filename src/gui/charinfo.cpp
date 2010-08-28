@@ -458,7 +458,7 @@ CharInfo::CharInfo (Document* doc)
 	// Label Name
 	label =  win_mgr.getWindow("NameLabel");
 	out_stream.str("");
-	out_stream.str(player->getName());
+	out_stream.str(player->getName().getRawText());
 	if (label->getText()!= (CEGUI::utf8*) out_stream.str().c_str())
 	{
 		label->setText((CEGUI::utf8*) out_stream.str().c_str());
@@ -564,9 +564,9 @@ CharInfo::CharInfo (Document* doc)
 	}
 	
 	out_stream.str("");
-	if (fstat->m_last_attacker != "")
+	if (fstat->m_last_attacker.getTranslation() != "")
 	{
-		out_stream << "Damage dealt by "<<gettext(fstat->m_last_attacker.c_str())<<": "<<(int) (fstat->m_damage_got_perc*100) << "%";
+		out_stream << gettext("Damage dealt by ")<<fstat->m_last_attacker.getTranslation()<<": "<<(int) (fstat->m_damage_got_perc*100) << "%";
 	}
 	if (label->getTooltipText() != (CEGUI::utf8*) out_stream.str().c_str())
 	{
@@ -583,9 +583,9 @@ CharInfo::CharInfo (Document* doc)
 	}
 	
 	out_stream.str("");
-	if (fstat->m_last_attacked != "")
+	if (fstat->m_last_attacked.getTranslation()  != "")
 	{
-		out_stream << "Chance to hit  "<<gettext(fstat->m_last_attacked.c_str())<<": "<<(int) (fstat->m_hit_chance*100) << "%";
+		out_stream << gettext("Chance to hit ")<< fstat->m_last_attacked.getTranslation() <<": "<<(int) (fstat->m_hit_chance*100) << "%";
 	}
 	if (label->getTooltipText() != (CEGUI::utf8*) out_stream.str().c_str())
 	{
@@ -602,9 +602,9 @@ CharInfo::CharInfo (Document* doc)
 	}
 	
 	out_stream.str("");
-	if (fstat->m_last_attacker != "")
+	if (fstat->m_last_attacker.getTranslation() != "")
 	{
-		out_stream << "Chance to get hit by "<<gettext(fstat->m_last_attacker.c_str())<<": "<<(int) (100-fstat->m_block_chance*100) << "%";
+		out_stream << gettext("Chance to get hit by ")<<fstat->m_last_attacker.getTranslation()<<": "<<(int) (100-fstat->m_block_chance*100) << "%";
 	}
 	if (label->getTooltipText() != (CEGUI::utf8*) out_stream.str().c_str())
 	{
@@ -693,9 +693,9 @@ CharInfo::CharInfo (Document* doc)
 	}
 	
 	out_stream.str("");
-	if (fstat->m_last_attacked != "")
+	if (fstat->m_last_attacked.getTranslation() != "")
 	{
-		out_stream << "Damage dealt to  "<<gettext(fstat->m_last_attacked.c_str())<<": "<<(int) (fstat->m_damage_dealt_perc*100) << "%";
+		out_stream << gettext("Damage dealt to  ")<< fstat->m_last_attacked.getTranslation()<<": "<<(int) (fstat->m_damage_dealt_perc*100) << "%";
 	}
 	if (label->getTooltipText() != (CEGUI::utf8*) out_stream.str().c_str())
 	{

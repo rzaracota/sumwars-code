@@ -47,6 +47,7 @@ typedef struct _NLFG_Message
     unsigned int reliability;
     struct NLFG_Address addr;
     char *data;
+    struct _NLFG_Message *parent;
 } NLFG_Message;
 
 /* NLFG Initialisation
@@ -111,7 +112,8 @@ double nlfg_readDouble(NLFG_Message *msg);
 
 /* NLFG Read String */
 char* nlfg_readString(NLFG_Message *msg);
-char* nlfg_readStringWithSize(NLFG_Message *msg, int size);
+/* Assume data is already allocated memory, pass in the size of data to read */
+void nlfg_readStringWithSize(NLFG_Message *msg, char *data, int size);
 
 /* NLFG Write byte */
 void nlfg_writeByte(NLFG_Message *msg, char c);

@@ -47,7 +47,9 @@ bool  ObjectLoader::loadMonster(TiXmlNode* node)
 		attr.getString("race",race);
 		attr.getString("fraction",fraction,"MONSTER");
 		attr.getString("layer",layer,"NORMAL");
-		attr.getString("name",data->m_name,subtype);
+		std::string name;
+		attr.getString("name",name,subtype);
+		data->m_name = TranslatableString(name, EventSystem::GetGettextDomain());
 		data->m_subtype = subtype;
 		
 		DEBUGX("monster: %s %s %s %s",type.c_str(), subtype.c_str(), race.c_str(), fraction.c_str());

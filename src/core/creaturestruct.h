@@ -678,13 +678,13 @@ struct FightStatistic
 	 * \var std::string m_last_attacker
 	 * \brief Typ des letzten Angreifers
 	 */
-	std::string m_last_attacker;
+	TranslatableString m_last_attacker;
 	
 	/**
 	 * \var std::string m_last_attacked
 	 * \brief Typ des zuletzt angegriffenen
 	 */
-	std::string m_last_attacked;
+	TranslatableString m_last_attacked;
 	
 	/**
 	 * \var float m_hit_chance

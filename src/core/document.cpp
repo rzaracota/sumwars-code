@@ -289,7 +289,7 @@ void Document::createNewCharacter(std::string name)
 		m_save_file += name;
 		m_save_file += ".sav";
 
-		m_temp_player ->setName(name);
+		m_temp_player ->setName(TranslatableString(name,""));
 
 		DEBUGX("savefile %s",m_save_file.c_str());
 

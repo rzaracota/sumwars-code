@@ -43,7 +43,7 @@ class NLFGNetworkPacket : public NetworkPacket
 		*/
 		virtual void fromBuffer(char* data, unsigned int size)
 		{
-			data = nlfg_readStringWithSize(m_packet, size);
+			nlfg_readStringWithSize(m_packet, data, size);
 		}
 			
 		/**

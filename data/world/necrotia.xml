@@ -12,6 +12,8 @@
 		
 		<Music>
 			<Track source="Dark_Exploration.ogg" />
+			<Track source="dark_descent.ogg" />
+			<Track source="tread_lightly.ogg" />
 		</Music>
 		
 		<ExitDirections north="false" south="true" west="false" east="false" />

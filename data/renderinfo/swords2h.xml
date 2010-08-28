@@ -1,4 +1,4 @@
-﻿<RenderInfo name="twoHandSwordBase">
+﻿<RenderInfo name="twoHandSwordBase" parent="swordBase">
 	<State name="firesword">
 		<Activation>
 			<ParticleSystem objectname="firesword1" source="BurningBlade" position= "0 0 -0.2"/>

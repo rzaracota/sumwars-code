@@ -379,13 +379,12 @@ public:
 	void speakText(CreatureSpeakText& text);
 
 	/**
-	 * \fn void updateFightStat(float blockchance, float armorperc, std::string attacked)
 	 * \brief aktualisiert Kampfinformationen
 	 * \param blockchance Chance zu treffen
 	 * \param armorperc Prozentsatz, zu dem der Schaden durch die Ruestung geht
 	 * \param attacker Name des Angegriffenen
 	 */
-	void updateFightStat(float hitchance, float armorperc, std::string attacked);
+	void updateFightStat(float hitchance, float armorperc, TranslatableString attacked);
 
 
 	/**
@@ -435,13 +434,12 @@ public:
 
 
 	/**
-	 * \fn std::string getRefName()
 	 * \brief Gibt den Referenzname aus, mit dem bei Gespraechen auf die Person verwiesen wird
 	 */
 	virtual std::string getRefName()
 	{
 		if (m_refname =="")
-			return getName();
+			return getName().getRawText();
 
 		return m_refname;
 	}
@@ -458,13 +456,12 @@ public:
 	}
 
 	/**
-	 * \fn std::string getName()
 	 * \brief Gibt den Name des Objektes aus
 	 */
-	virtual std::string getName()
+	virtual TranslatableString  getName()
 	{
-		if (m_name == "" && m_refname != "")
-			return m_refname;
+		if (m_name.getRawText() == "" && m_refname != "")
+			return TranslatableString(m_refname,m_name.getTextDomain());
 
 		return WorldObject::getName();
 	}

@@ -12,6 +12,7 @@
 		
 		<Music>
 			<Track source="Dark_Exploration.ogg" />
+			<Track source="dark_descent.ogg" />
 		</Music>
 		
 		<ExitDirections north="true" south="true" west="true" east="false" />
@@ -52,6 +53,7 @@
 		
 		<Music>
 			<Track source="Dark_Exploration.ogg" />
+			<Track source="dark_descent.ogg" />
 		</Music>
 		
 		<ExitDirections north="true" south="false" west="true" east="true" />
@@ -92,6 +94,7 @@
 		
 		<Music>
 			<Track source="Dark_Exploration.ogg" />
+			<Track source="dark_descent.ogg" />
 		</Music>
 		
 		<ExitDirections north="false" south="false" west="false" east="true" />
@@ -124,6 +127,7 @@
 		
 		<Music>
 			<Track source="Dark_Exploration.ogg" />
+			<Track source="dark_descent.ogg" />
 		</Music>
 		
 		<ExitDirections north="false" south="true" west="false" east="false" />
@@ -155,6 +159,7 @@
 		
 		<Music>
 			<Track source="Dark_Exploration.ogg" />
+			<Track source="dark_descent.ogg" />
 		</Music>
 		
 		<ExitDirections north="true" south="true" west="false" east="false" />
@@ -192,6 +197,7 @@
 		
 		<Music>
 			<Track source="Dark_Exploration.ogg" />
+			<Track source="dark_descent.ogg" />
 		</Music>
 		
 		<ExitDirections north="true" south="true" west="false" east="true" />
@@ -230,7 +236,7 @@
 		<WorldPosition world_x="0.72" world_y ="0.42"/>
 		
 		<Music>
-			<Track source="Dark_Exploration.ogg" />
+			<Track source="treacherous_paths.ogg" />
 		</Music>
 		
 		<ExitDirections north="false" south="true" west="false" east="false" />
@@ -260,6 +266,7 @@
 		
 		<Music>
 			<Track source="Dark_Exploration.ogg" />
+			<Track source="dark_descent.ogg" />
 		</Music>
 		
 		<ExitDirections north="false" south="false" west="true" east="true" />
@@ -302,6 +309,7 @@
 		
 		<Music>
 			<Track source="Dark_Exploration.ogg" />
+			<Track source="dark_descent.ogg" />
 		</Music>
 		
 		<ExitDirections north="false" south="false" west="true" east="true" />

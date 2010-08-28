@@ -29,3 +29,11 @@ Files:
 	thunder_2.wav
 	thunder_3.wav
 	wind_effect.wav
+	
+Artwork provided by: qubodup
+Default license: CC0
+Files:
+	swish_5.wav
+	swish_6.wav
+	swish_7.wav
+	swish_8.wav
