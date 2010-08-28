@@ -334,12 +334,12 @@ bool Application::initOgre()
 	m_scene_manager = m_ogre_root->createSceneManager(Ogre::ST_GENERIC,"DefaultSceneManager");
 
     // set Shadows enabled before any mesh is loaded
-    m_scene_manager->setShadowTextureSelfShadow(true);
-    m_scene_manager->setShadowTextureConfig(0,4096,4096,Ogre::PF_X8R8G8B8);
-    m_scene_manager->setShadowColour( Ogre::ColourValue(0.4, 0.4, 0.4) );
-    m_scene_manager->setShadowTechnique(Ogre::SHADOWTYPE_TEXTURE_ADDITIVE);
-    m_scene_manager->setShadowFarDistance(2000);
-    
+	m_scene_manager->setShadowTechnique(Ogre::SHADOWTYPE_TEXTURE_ADDITIVE);
+	m_scene_manager->setShadowTextureSelfShadow(false);
+	m_scene_manager->setShadowTextureConfig(0,2048,2048,Ogre::PF_X8R8G8B8);
+	m_scene_manager->setShadowColour( Ogre::ColourValue(0.4, 0.4, 0.4) );
+	m_scene_manager->setShadowFarDistance(2000);
+
 	Ogre::LogManager::getSingleton().setLogDetail(Ogre::LL_LOW);
 	return true;
 

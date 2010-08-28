@@ -97,8 +97,7 @@ void Tooltip::update ( float timeSinceLastUpdate )
 
         float steps = timeSinceLastUpdate * m_FadeOutStepPerMS;
         float newAlpha = m_CEGUIWindow->getAlpha() - steps;
-        m_CEGUIWindow->setAlpha(newAlpha);
-		std::cout << newAlpha << std::endl;
+		m_CEGUIWindow->setAlpha(newAlpha);
         if (m_FadeOutTime < m_CurrentFadeOutTime)
         {
 			m_IsDead = true;
@@ -125,13 +124,16 @@ void TooltipManager::setParent(CEGUI::Window* parent)
 }
 
 
-void TooltipManager::createTooltip ( std::list<std::string> list, float timeVisible, CEGUI::UVector2 position, CEGUI::Font *font, Tooltip::TooltipType type)
+void TooltipManager::createTooltip ( std::list<std::string> list, float timeVisible, CEGUI::Font *font, Tooltip::TooltipType type)
 {
     std::string msg;
     CEGUI::UVector2 size;
     std::ostringstream windowName;
     windowName << "Tooltip__" << m_toolTipsCreatedCount;
     CEGUI::Font *tempFont = m_DefaultFont;
+
+
+
 
     if (font)
     {
@@ -141,12 +143,19 @@ void TooltipManager::createTooltip ( std::list<std::string> list, float timeVisi
     else
         size = CEGUIUtility::getWindowSizeForText(list, m_DefaultFont, msg);
 
+	CEGUI::Vector2 mousePos = CEGUI::MouseCursor::getSingleton().getPosition();
+	CEGUI::Renderer *rend = m_CEGUISystem->getRenderer();
+	CEGUI::UVector2 position = CEGUI::UVector2(CEGUI::UDim(0, 20), CEGUI::UDim(0, 20));
+
+	if(mousePos.d_y < (rend->getDisplaySize().d_height / 2))
+		position = CEGUI::UVector2(CEGUI::UDim(0, 20), CEGUI::UDim(0, rend->getDisplaySize().d_height-110-size.d_y.d_scale*rend->getDisplaySize().d_height));
+
     if (type == Tooltip::Main)
     {
         Tooltip *tt = new Tooltip(m_Parent, windowName.str(), m_fadeInTime, m_fadeOutTime, m_timeVisible, 0.9f);
         fadeAllOut();
         m_CurrentMain = tt;
-        tt->create(msg, position, size, tempFont);
+        tt->create(msg, position, size, tempFont);		
         m_Tooltips[windowName.str()] = tt;
         m_toolTipsCreatedCount++;
     }
@@ -176,7 +185,7 @@ void TooltipManager::createTooltip ( std::list<std::string> list, float timeVisi
             Tooltip *tt = new Tooltip(m_Parent, windowName.str(), m_fadeInTime, m_fadeOutTime, m_timeVisible, 0.9f);
             CEGUI::UVector2 pos = m_CurrentMain->getCEGUIWindow()->getPosition();
             pos.d_x += m_CurrentMain->getCEGUIWindow()->getWidth();
-            tt->create(msg, pos, size, tempFont);
+			tt->create(msg, pos, size, tempFont);
             m_CurrentMain->setChild(tt);
             m_Tooltips[windowName.str()] = tt;
             m_toolTipsCreatedCount++;

@@ -63,7 +63,7 @@ class TooltipManager : public Ogre::Singleton<TooltipManager>
 {
 public:
 	TooltipManager ( );
-	void createTooltip ( std::list<std::string> list, float timeVisible = 0.0f, CEGUI::UVector2 position = CEGUI::UVector2(), CEGUI::Font *font = 0, Tooltip::TooltipType type = Tooltip::Main);
+	void createTooltip ( std::list<std::string> list, float timeVisible = 0.0f, CEGUI::Font *font = 0, Tooltip::TooltipType type = Tooltip::Main);
 	void fadeAllOut();
 	
 	void setParent(CEGUI::Window *parent);

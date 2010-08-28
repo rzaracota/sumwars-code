@@ -141,13 +141,12 @@ void ItemWindow::updateItemWindowTooltip(CEGUI::Window* img, Item* item, Player*
 
 	CEGUI::Font *font = img->getTooltip()->getFont();
 	std::string msg;
-	CEGUI::UVector2 ttPosition = CEGUI::UVector2 ( CEGUI::UDim ( 0.01f, 0 ), CEGUI::UDim ( 0.01f, 0 ) );
 	ItemRequirementsMet irm = player->checkItemRequirements ( item );
 	std::list<std::string> l = item->getDescriptionAsStringList ( price_factor, irm );
 	l.push_front ( "Hovered:\n" );
 	std::ostringstream out_stream;
 
-	tMgr->createTooltip ( l, 0, ttPosition, font, Tooltip::Main );
+	tMgr->createTooltip ( l, 0, font, Tooltip::Main );
 
 	Item *currentEqItem = 0;
 	Item *currentEqItemOffhand = 0;
@@ -201,12 +200,12 @@ void ItemWindow::updateItemWindowTooltip(CEGUI::Window* img, Item* item, Player*
 	if ( currentEqItem )
 	{
 		l = currentEqItem->getDescriptionAsStringList ( price_factor );
-		tMgr->createTooltip ( l, 0, ttPosition, font, Tooltip::Comparision );
+		tMgr->createTooltip ( l, 0, font, Tooltip::Comparision );
 
 		if ( currentEqItemOffhand )
 		{
 			l = currentEqItemOffhand->getDescriptionAsStringList ( price_factor );
-			tMgr->createTooltip ( l, 0, ttPosition, font, Tooltip::Comparision );
+			tMgr->createTooltip ( l, 0, font, Tooltip::Comparision );
 		}
 	}
 }
