@@ -523,6 +523,12 @@ bool Player::onGamefieldClick(ClientCommand* command)
 
 bool Player::onItemClick(ClientCommand* command)
 {
+	// no actions for dead players
+	if (getState() != STATE_ACTIVE)
+	{
+		return false;
+	}
+	
 	short pos = command->m_id;
 
 	if (m_secondary_equip)
