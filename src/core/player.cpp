@@ -1810,7 +1810,7 @@ void Player::toString(CharConv* cv)
 		if (item !=0)
 			cnt++;
 	}
-	DEBUG("number of items: %i",cnt);
+	DEBUGX("number of items: %i",cnt);
 	cv->toBuffer(cnt);
 	
 	for ( short i = Equipement::ARMOR; i<= Equipement::SHIELD2; i++)

@@ -71,6 +71,7 @@ int nlfg_addMessage(NLFG_Message *msg)
             next = next->child;
         }
         next->child = msg;
+		msg->child = 0;
     }
     return 0;
 }
@@ -128,7 +129,7 @@ unsigned int nlfg_connect(const char *hostname, unsigned int port)
 
 void nlfg_disconnect()
 {
-    if (!peer)
+    if (peer)
         enet_peer_disconnect(peer, 0);
 }
 

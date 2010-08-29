@@ -191,7 +191,8 @@ class NLFGNetworkPacket : public NetworkPacket
 		*/
 		virtual int readBits()
 		{
-			return nlfg_getPosition(m_packet);
+			// the offset is for counteracting prepended internal data
+			return nlfg_getPosition(m_packet) - 13;
 		}
 		
 		
@@ -200,7 +201,8 @@ class NLFGNetworkPacket : public NetworkPacket
 		*/
 		virtual int writeBits()
 		{
-			return nlfg_getPosition(m_packet);
+			// the offset is for counteracting prepended internal data
+			return nlfg_getPosition(m_packet) - 9;
 		}
 		
 		/**

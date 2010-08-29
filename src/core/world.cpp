@@ -214,6 +214,7 @@ bool World::init(int port)
 		{
             m_network = new NLFGClientNetwork();
 		}
+		m_network->setPacketVersion(m_version);
 	}
 
 	m_timer[0] =0;
@@ -840,7 +841,7 @@ void World::handleSavegame(CharConv *cv, int slot)
 
 			if (slot != LOCAL_SLOT)
 			{
-				DEBUG("sending player data ");
+				DEBUGX("sending player data ");
 				// Daten zur Initialisierung
 				PackageHeader header3;
 				header3.m_content =PTYPE_S2C_INITIALISATION;
@@ -918,7 +919,7 @@ void World::handleSavegame(CharConv *cv, int slot)
 				NetworkPacket* msg3 = m_network->createPacket();
 				header3.toString(msg3);
 
-				DEBUG("sending waypoint info");
+				DEBUGX("sending waypoint info");
 				for (lt = winfos.begin(); lt != winfos.end(); ++lt)
 				{
 					msg3->toBuffer(lt->first);
@@ -948,7 +949,7 @@ void World::handleSavegame(CharConv *cv, int slot)
 				{
 					if (m_parties[i].getNrMembers() > 0)
 					{
-						DEBUG("sending data for party %i",i);
+						DEBUGX("sending data for party %i",i);
 						header4.m_number =i;
 						NetworkPacket* msg4 = m_network->createPacket();
 						header4.toString(msg4);
@@ -970,7 +971,7 @@ void World::handleSavegame(CharConv *cv, int slot)
 				for (it = m_quests.begin(); it != m_quests.end(); ++it)
 				{
 
-						DEBUG("sending data for quest %s",it->second->getName().c_str());
+						DEBUGX("sending data for quest %s",it->second->getName().c_str());
 
 						NetworkPacket* msg5 = m_network->createPacket();
 						header5.toString(msg5);
@@ -1588,7 +1589,7 @@ void World::updatePlayers()
 				}
 				else if (headerp.m_content == PTYPE_S2C_WAYPOINTS)
 				{
-					DEBUG("got waypoints");
+					DEBUGX("got waypoints");
 					std::map<short,WaypointInfo>& winfos = World::getWorld()->getWaypointData();
 					winfos.clear();
 
@@ -1630,7 +1631,7 @@ void World::updatePlayers()
 					std::string name,tabname;
 					cv->fromBuffer(name);
 					cv->fromBuffer(tabname);
-					DEBUG("got data for quest %s %s",name.c_str(), tabname.c_str());
+					DEBUGX("got data for quest %s %s",name.c_str(), tabname.c_str());
 
 					Quest* qu = new Quest(name,tabname);
 					qu->fromString(cv);
@@ -1927,6 +1928,10 @@ bool World::writeNetEvent(Region* region,NetEvent* event, CharConv* cv)
 			if (dia != 0)
 			{
 				dia->toString(cv);
+			}
+			else
+			{
+				return false;
 			}
 		}
 		else if (event->m_type == NetEvent::DIALOGUE_STAT_CHANGED)
