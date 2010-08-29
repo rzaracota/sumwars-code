@@ -6,7 +6,7 @@ If not declared otherwise, all artwork is released under the authors default lic
 
 
 Artwork provided by: Andreas Schönfeld and Steffen Schönefeld (Kalimgard)
-Default license:
+Default license: CC-BY-SA
 Files:
 	emo_councilMageCrystal.png  
 	emo_derred.png  

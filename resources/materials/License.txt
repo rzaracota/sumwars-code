@@ -5,7 +5,7 @@ This file contains all license information for artwork located in the materials/
 If not declared otherwise, all artwork is released under the authors default license.
 
 Artwork provided by: Andreas Schönfeld
-Default license:
+Default license: CC-BY-SA
 Files:
 	aureola.png
 	basic_droplet.png
@@ -38,7 +38,7 @@ Files:
 	wolke.png
 
 Artwork provided by: Steffen Schönfeld (Kalimgard)
-Default license:
+Default license: CC-BY-SA
 Files:
 	aisenAmbient.material
 	aisenVegetation.material

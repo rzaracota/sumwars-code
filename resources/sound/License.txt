@@ -5,7 +5,7 @@ This file contains all license information for artwork located in the sounds dir
 If not declared otherwise, all artwork is released under the authors default license.
 
 Artwork provided by: artisticdude
-Default license:
+Default license: CC-BY-SA
 Files:
 	cloth_inventory.wav
 	leather_inventory.wav
