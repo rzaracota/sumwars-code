@@ -41,7 +41,7 @@
 		
 		<Topic name="start_rob_the_robber_quest" >
 			<Effect>
-				speak("player", _("Indeed.","grin"),1000)
+				speak("player", _("Indeed."),"grin",1000)
 				speak("player", _("10000 gold pieces are quite interesting for the traveling fund."),"normal")
 				speak("player", _("And I'm pretty lucky myself."),"sneer")
 				setSpeakerEmotion("player","normal")
