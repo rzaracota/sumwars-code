@@ -4,3 +4,16 @@
 	<Soundfile source="battle_sound_effects/swish_7.wav"/>
 	<Soundfile source="battle_sound_effects/swish_8.wav"/>
 </Sound>
+
+<Sound name="arrow">
+	<Soundfile source="battle_sound_effects/swish_2.wav"/>
+</Sound>
+
+<Sound name="throw_knife">
+	<Soundfile source="battle_sound_effects/swish_3.wav"/>
+</Sound>
+
+<Sound name="throw_blunt">
+	<Soundfile source="battle_sound_effects/swish_4.wav"/>
+</Sound>
+
