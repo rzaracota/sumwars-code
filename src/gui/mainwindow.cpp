@@ -2218,7 +2218,7 @@ void MainWindow::updateMusic()
 	if (m_document->getGUIState()->m_sheet ==  Document::MAIN_MENU)
 	{
 		// Titlescreen
-		source ="main_theme.ogg";
+		source ="main_title.ogg";
 	}
 	else if (m_document->getGUIState()->m_sheet ==  Document::GAME_SCREEN)
 	{
