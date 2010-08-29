@@ -1288,7 +1288,7 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 			}
 			
 			// you may *trade* with your stash, in this case the traderpartner is the object itself
-			stashtrade == false;
+			stashtrade = false;
 			if (getTradePartner() == this)
 			{
 				stashtrade = true;
@@ -1797,13 +1797,12 @@ void Player::addMessage(std::string msg)
 
 void Player::toString(CharConv* cv)
 {
-	DEBUGX("Player::tostring");
 	Creature::toString(cv);
-
 	cv->toBuffer(getBaseAttr()->m_level);
 	m_look.toString(cv);
+	
 	// Items
-	char cnt =0;
+	int cnt =0;
 	Item* item;
 	for ( short i = Equipement::ARMOR; i<= Equipement::SHIELD2; i++)
 	{
@@ -1811,9 +1810,9 @@ void Player::toString(CharConv* cv)
 		if (item !=0)
 			cnt++;
 	}
-	DEBUGX("number of items: %i",cnt);
+	DEBUG("number of items: %i",cnt);
 	cv->toBuffer(cnt);
-
+	
 	for ( short i = Equipement::ARMOR; i<= Equipement::SHIELD2; i++)
 	{
 		item = getEquipement()->getItem(i);
@@ -1824,7 +1823,6 @@ void Player::toString(CharConv* cv)
 
 		}
 	}
-
 	// IDs der Wegpunkte
 	cv->toBuffer(static_cast<int>(m_waypoints.size()));
 	cv->printNewline();
@@ -1836,25 +1834,23 @@ void Player::toString(CharConv* cv)
 		regid = (short) (*it);
 		cv->toBuffer(regid);
 	}
-
 }
 
 
 void Player::fromString(CharConv* cv)
 {
 	Creature::fromString(cv);
-
+	
 	cv->fromBuffer(getBaseAttr()->m_level);
 	m_look.fromString(cv);
 	m_emotion_set = m_look.m_emotion_set;
-	char cnt;
+	int cnt;
 	cv->fromBuffer(cnt);
-	DEBUGX("number of items: %i",cnt);
+	DEBUG("number of items: %i",cnt);
 	for ( short i = 0; i< cnt; i++)
 	{
 		readItem(cv);
 	}
-
 	// IDs der Wegpunkte
 	int nr=0;
 	cv->fromBuffer(nr);
