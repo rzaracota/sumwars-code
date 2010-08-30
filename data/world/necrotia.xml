@@ -11,7 +11,7 @@
 		<WorldPosition world_x="0.76" world_y ="0.43"/>
 		
 		<Music>
-			<Track source="battle_at_dwarfenwall.ogg" />
+			<Track source="battle_intro.ogg" />
 <!--			<Track source="dark_descent.ogg" />
 			<Track source="tread_lightly.ogg" />-->
 		</Music>
