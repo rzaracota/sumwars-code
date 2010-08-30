@@ -93,6 +93,7 @@ bool World::init(int port)
 	std::string file;
 
 	EventSystem::init();
+	EventSystem::pushGettextDomain("sumwars-xml");
 	Dialogue::init();
 
 	files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("lua","*.lua");
@@ -152,9 +153,11 @@ bool World::init(int port)
 		ObjectLoader::loadObjectData(file.c_str());
 
 	}
-
+	EventSystem::popGettextDomain();
+	
 	if (m_server)
 	{
+		EventSystem::pushGettextDomain("sumwars-xml");
 		WorldLoader worldloader;
 		std::list<RegionData*> region_list;
 		files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("world","*.xml");
@@ -184,6 +187,7 @@ bool World::init(int port)
 			file += it->filename;
 			worldloader.loadNPCData(file.c_str());
 		}
+		EventSystem::popGettextDomain();
 
 		files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("quests","*.xml");
 		for (it = files->begin(); it != files->end(); ++it)

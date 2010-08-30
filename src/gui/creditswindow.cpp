@@ -44,25 +44,30 @@ CreditsWindow::CreditsWindow(Document* doc)
             \n Ben Anderman (crimson_penguin) \
 			\n\nGraphics: \
 			\n Andreas Schönefeldt \
-			\n Steffen Schönefeldt (Nori) \
+			\n Steffen Schönefeldt (Kalimgard) \
 			\n psycho \
 			\n Francesco Miglietta (hal9000 ) \
 			\n\n Scripting: \
-			\n Steffen Schönefeldt (Nori) \
+			\n Steffen Schönefeldt (Kalimgard) \
 			\n Hans Wulf (Lastmerlin) \
 			\n\nStory: \
-			\n Steffen Schönefeldt (Nori) \
+			\n Steffen Schönefeldt (Kalimgard) \
 			\n Andreas Schönefeldt \
 			\n\nSounds: \
 			\n Michael Kempf (Hangman) \
 			\n artisticdude \
-			\n\n Translation: \
-			\n Steffen Schönefeldt (Nori) \
+			\n quobodup \
+			\n\nMusic: \
+			\n Mattias Westlund (West) \
+			\n Cheeselord \
+			\n\nTranslation: \
+			\n Steffen Schönefeldt (Kalimgard) \
 			\n Michael Kempf (Hangman) \
 			\n kroni \
 			\n Brian Jeffears (getter77) \
 			\n Nicholas Cosens (gnemo) \
-			\n\n Build system: \
+			\n axander\
+			\n\nBuild system: \
 			\n Michael Kempf (Hangman) \
 			\n fusion44 \
 			\n\nWebsite: \

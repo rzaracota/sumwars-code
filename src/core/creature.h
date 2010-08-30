@@ -461,7 +461,7 @@ public:
 	virtual TranslatableString  getName()
 	{
 		if (m_name.getRawText() == "" && m_refname != "")
-			return TranslatableString(m_refname,m_name.getTextDomain());
+			return TranslatableString(m_refname,"sumwars-xml");
 
 		return WorldObject::getName();
 	}

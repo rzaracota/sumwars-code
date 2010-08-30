@@ -110,6 +110,15 @@ class Trigger
 			return m_dialogue_id;
 		}
 		
+		/**
+		 * \brief Sets the gettext domain that is used to translate all strings generated during this event
+		 * \param domain new domain
+		 */
+		void setTextDomain(std::string domain)
+		{
+			m_text_domain = domain;
+		}
+		
 	private:
 		/**
 		 * \var TriggerType m_type
@@ -128,6 +137,11 @@ class Trigger
 		 * \brief Id des Dialogs der in dem Event als Umgebungsvariable gesetzt wird
 		 */
 		int m_dialogue_id;
+		
+		/**
+		 * \brief Gettext domain that is used to translate all strings generated during this event
+		 */
+		std::string m_text_domain;
 		
 		/**
 		 * \var std::string m_lua_variables
@@ -154,6 +168,7 @@ class Event
 			m_condition = LUA_NOREF;
 			m_effect = LUA_NOREF;
 			m_copy = false;
+			m_gettext_domain = "sumwars-events";
 		}
 		
 		/**
@@ -167,6 +182,7 @@ class Event
 			m_once = other.m_once;
 			m_condition = other.m_condition;
 			m_effect = other.m_effect;
+			m_gettext_domain = other.m_gettext_domain;
 		}
 		
 		/**

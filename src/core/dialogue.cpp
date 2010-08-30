@@ -424,8 +424,7 @@ void Dialogue::changeTopic(std::string topic)
 		}
 		else
 		{
-			TranslatableString tr(npc->getRefName());
-			tr.setTextDomain("sumwars-xml");
+			TranslatableString tr = npc->getName();
 			addQuestion(tr);
 		}
 
