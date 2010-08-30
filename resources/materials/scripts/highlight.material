@@ -230,7 +230,7 @@ material cornflower_blue_highlight_alpha_nodepth
 			
 			texture_unit
 			{
-				colour_op_ex source1 src_manual src_current 0 0.5 1
+				colour_op_ex source1 src_manual src_current 0.39216 0.58431 0.92941
 				alpha_op_ex source1 src_manual src_current 0.2
 			}
 		}

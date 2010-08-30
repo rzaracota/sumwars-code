@@ -147,6 +147,36 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard)
 	slider->setWantsMultiClickEvents(false);
 	slider->subscribeEvent(CEGUI::Scrollbar::EventScrollPositionChanged, CEGUI::Event::Subscriber(&OptionsWindow::onSoundVolumeChanged,  this));
 
+	label = win_mgr.createWindow("TaharezLook/StaticText", "EnemyHighlightLabel");
+	graphic->addChildWindow(label);
+	label->setProperty("FrameEnabled", "true");
+	label->setProperty("BackgroundEnabled", "true");
+	label->setPosition(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.2f)));
+	label->setSize(CEGUI::UVector2(cegui_reldim(0.3f), cegui_reldim( 0.06f)));
+
+	CEGUI::Combobox* ehlcbo = static_cast<CEGUI::Combobox*>(win_mgr.createWindow("TaharezLook/Combobox","EHColorBox"));
+	graphic->addChildWindow(ehlcbo);
+	ehlcbo->setPosition(CEGUI::UVector2(cegui_reldim(0.40f), cegui_reldim( 0.2f)));
+	ehlcbo->setSize(CEGUI::UVector2(cegui_reldim(0.4f), cegui_reldim( 0.3f)));
+
+	ehlcbo->addItem(new StrListItem("White", "white", 0));
+	ehlcbo->addItem(new StrListItem("Black", "black", 0));
+	ehlcbo->addItem(new StrListItem("Red", "red", 0));
+	ehlcbo->addItem(new StrListItem("Green", "green", 0));
+	ehlcbo->addItem(new StrListItem("Blue", "blue", 0));
+	ehlcbo->addItem(new StrListItem("Yellow", "yellow", 0));
+	ehlcbo->addItem(new StrListItem("Magenta", "magenta", 0));
+	ehlcbo->addItem(new StrListItem("Cyan", "cyan", 0));
+	ehlcbo->addItem(new StrListItem("Orange", "orange", 0));
+	ehlcbo->addItem(new StrListItem("Pink", "pink", 0));
+	ehlcbo->addItem(new StrListItem("Purple", "purple", 0));
+	ehlcbo->addItem(new StrListItem("Cornflower Blue", "cornflower_blue", 0));
+
+	ehlcbo->setReadOnly(true);
+	ehlcbo->setItemSelectState((size_t) getColorSelectionIndex("red"), true);
+	ehlcbo->handleUpdatedListItemData();
+	ehlcbo->subscribeEvent(CEGUI::Combobox::EventListSelectionAccepted, CEGUI::Event::Subscriber(&OptionsWindow::onEnemyHighlightChanged, this));
+	ehlcbo->setItemSelectState((size_t) (getColorSelectionIndex(Options::getInstance()->getEnemyHighlightColor())), true);
 
 	CEGUI::PushButton* btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", "OptionsCloseButton"));
 	options->addChildWindow(btn);
@@ -293,6 +323,9 @@ void OptionsWindow::updateTranslation()
 	label = win_mgr.getWindow("MusicVolumeLabel");
 	label->setText((CEGUI::utf8*) gettext("Music"));
 
+	label = win_mgr.getWindow("EnemyHighlightLabel");
+	label->setText((CEGUI::utf8*) gettext("Enemy Highlight Color"));
+
 	label = win_mgr.getWindow("LanguageLabel");
 	label->setText((CEGUI::utf8*) gettext("Language"));
 
@@ -399,6 +432,24 @@ bool OptionsWindow::onMusicVolumeChanged(const CEGUI::EventArgs& evt)
 	return true;
 }
 
+bool OptionsWindow::onEnemyHighlightChanged(const CEGUI::EventArgs& evt)
+{
+	const CEGUI::MouseEventArgs& we =
+			static_cast<const CEGUI::MouseEventArgs&>(evt);
+
+	CEGUI::Combobox* cbo = static_cast<CEGUI::Combobox*>(we.window);
+	CEGUI::ListboxItem* item = cbo->getSelectedItem();
+
+	if (item != 0)
+	{
+		DEBUGX("enemy highlight color changed to %s", item->getText().c_str());
+		StrListItem* sitem = static_cast<StrListItem*>(item);
+		Options::getInstance()->setEnemyHighlightColor(sitem->m_data.c_str());
+	}
+
+	return true;
+}
+
 bool OptionsWindow::onLanguageSelected(const CEGUI::EventArgs& evt)
 {
 
@@ -417,5 +468,33 @@ bool OptionsWindow::onLanguageSelected(const CEGUI::EventArgs& evt)
 	}
 
 	return true;
+}
+
+unsigned int OptionsWindow::getColorSelectionIndex(std::string name)
+{
+	std::string list[] = {
+			"white",
+			"black",
+			"red",
+			"blue",
+			"green",
+			"yellow",
+			"magenta",
+			"cyan",
+			"orange",
+			"pink",
+			"purple",
+			"cornflower_blue"
+	};
+
+	for (unsigned int i = 0; i < 12; i++)
+	{
+		if (name == list[i])
+		{
+			return i;
+		}
+	}
+
+	return 0;
 }
 

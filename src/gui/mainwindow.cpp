@@ -1350,7 +1350,8 @@ void MainWindow::updateObjectInfo()
 		objid=0;
 	}
 	
-	std::string highlightmat ="white_highlight_alpha_nodepth";
+	std::string highlightcol = "white";
+	std::string highlightmat = "_highlight_alpha_nodepth";
 	
 	std::string name;
 	std::ostringstream string_stream;
@@ -1402,7 +1403,7 @@ void MainWindow::updateObjectInfo()
 				
 				if (World::getWorld()->getRelation(cwo->getFraction(),player) == Fraction::HOSTILE)
 				{
-					highlightmat ="red_highlight_alpha_nodepth";
+					highlightcol = Options::getInstance()->getEnemyHighlightColor();
 				}
 			}
 			else
@@ -1481,7 +1482,7 @@ void MainWindow::updateObjectInfo()
 		GraphicObject* grobj = m_scene->getGraphicObject(m_highlight_id);
 		if (grobj != 0)
 		{
-			grobj->setHighlight(false,"red_highlight_alpha_nodepth");
+			grobj->setHighlight(false, highlightcol + highlightmat);
 		}
 		
 		if (objid != 0)
@@ -1489,7 +1490,7 @@ void MainWindow::updateObjectInfo()
 			grobj = m_scene->getGraphicObject(hlid);
 			if (grobj != 0)
 			{
-				grobj->setHighlight(true,highlightmat);
+				grobj->setHighlight(true, highlightcol + highlightmat);
 			}
 		}
 		m_highlight_id = hlid;

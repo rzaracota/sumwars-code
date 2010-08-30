@@ -57,6 +57,7 @@ void Options::init()
 	
 	m_difficulty = NORMAL;
 	m_text_speed = 1.0;
+	m_enemy_highlight_color = "red";
 }
 
 Options* Options::getInstance()
