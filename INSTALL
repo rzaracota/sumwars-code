@@ -18,9 +18,6 @@ Alternatively you can use the cmake build system by typing:
 cmake .
 make
 
-If you are using OGRE >= 1.6 particle scripts need to be changed slightly. To do this run the script placed in resources/particle/ :
-./resources/particle/create_ogre_1_6_particles
-
 Currently, there is no make install, so you have to start the game in the directory where you compiled it.
 Please visit our Website www.sumwars.org to give some feedback or report bugs.
 
@@ -30,9 +27,6 @@ To install all dependencies apart from Raknet try this line:
 sudo apt-get install libogremain-1.6.1 libogre-dev libois-1.2.0 libois-dev libalut0 libalut-dev liblua5.1-0 liblua5.1-0-dev libopenal1 libopenal-dev libogg0 libvorbis0a libvorbis-dev libvorbisfile3 libenet-dev
 
 *********** Troubleshooting ****************************
-
-Problem: All particle effects are missing.
-Solution: Run resources/particle/create_ogre_1_6_particles script. This will generate Ogre 1.6 compatible particle files. 
 
 Problem: Rendering does not work under Windows:
 Solution: Try replacing ogre.cfg by this (omit the last and the first line of course):
