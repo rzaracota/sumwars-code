@@ -2,18 +2,13 @@ Following libraries are required to build Summoning Wars:
 OGRE >= 1.4
 OIS
 CEGUI >= 0.5
-RakNet 2.x
+enet 1.2
 freealut, openal
 lua5.1
 ogg, vorbis, vorbisfile
 
-If you are lucky, all libs except Raknet may be installed via package manager (apt-get, yum, emerge, pacman, ...).
+If you are lucky, all libs may be installed via package manager (apt-get, yum, emerge, pacman, ...).
 Have a look at the  OS dependant install section
-
-Raknet is offered here:
-http://www.sumwars.org/data/Raknet2_0.tar.gz
-
-Do not use the current Raknet version (3.x) as it is not available under GPL.
 
 After installing the dependencies run these commands and cross your fingers:
 ./configure
@@ -32,7 +27,7 @@ Please visit our Website www.sumwars.org to give some feedback or report bugs.
 ************ OS dependant install tips ******************
 Ubuntu:
 To install all dependencies apart from Raknet try this line:
-sudo apt-get install libogremain-1.6.1 libogre-dev libois-1.2.0 libois-dev libalut0 libalut-dev liblua5.1-0 liblua5.1-0-dev libopenal1 libopenal-dev libogg0 libvorbis0a libvorbis-dev libvorbisfile3
+sudo apt-get install libogremain-1.6.1 libogre-dev libois-1.2.0 libois-dev libalut0 libalut-dev liblua5.1-0 liblua5.1-0-dev libopenal1 libopenal-dev libogg0 libvorbis0a libvorbis-dev libvorbisfile3 libenet-dev
 
 *********** Troubleshooting ****************************
 

@@ -1,4 +1,0 @@
-zLib is included with RakNet but is not developed or maintained by Rakkarsoft LLC.
-This project is only here to create a static library for use with the autopatcher.
-
-The webpage for zLib is at http://www.gzip.org/zlib/
