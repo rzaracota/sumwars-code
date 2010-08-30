@@ -99,8 +99,10 @@ bool Options::readFromFile(const std::string& filename)
 	
 	if (loadOkay)
 	{
-		TiXmlNode* child, *child2;
-		for ( child = doc.FirstChild(); child != 0; child = child->NextSibling())
+		TiXmlNode* child, *child2, *root;
+
+		root = doc.FirstChild();
+		for ( child = root->FirstChild(); child != 0; child = child->NextSibling())
 		{
 			if (child->Type()==TiXmlNode::ELEMENT)
 			{
@@ -164,6 +166,12 @@ bool Options::readFromFile(const std::string& filename)
 					setServerHost(host);
 					setMaxNumberPlayers(max_players);
 				}
+				else if (!strcmp(child->Value(), "Graphic"))
+				{
+					std::string color = getEnemyHighlightColor();
+					attr.getString("ehl_color", color);
+					setEnemyHighlightColor(color);
+				}
 				else if (child->Type()!=TiXmlNode::COMMENT)
 				{
 					WARNING("unexpected element in options.xml: %s",child->Value());
@@ -182,12 +190,16 @@ bool Options::readFromFile(const std::string& filename)
 bool Options::writeToFile(const std::string& filename)
 {
 	TiXmlDocument doc;
-	TiXmlDeclaration * decl = new TiXmlDeclaration( "1.0", "", "" );
+	TiXmlDeclaration * decl = new TiXmlDeclaration( "1.0", "UTF-8", "" );
 	doc.LinkEndChild( decl );
 	
+	TiXmlElement* root;
+	root = new TiXmlElement("Options");
+	doc.LinkEndChild(root);
+
 	TiXmlElement * element;
 	element = new TiXmlElement( "Shortkeys" );
-	doc.LinkEndChild(element);
+	root->LinkEndChild(element);
 	
 	TiXmlElement * subele;
 	ShortkeyMap::iterator it;
@@ -200,24 +212,28 @@ bool Options::writeToFile(const std::string& filename)
 	}
 	
 	element = new TiXmlElement( "Gameplay" );
-	doc.LinkEndChild(element);
+	root->LinkEndChild(element);
 	element->SetAttribute("difficulty",getDifficulty());
 	element->SetDoubleAttribute("text_speed",getTextSpeed());
 	
 	element = new TiXmlElement( "Music" );
-	doc.LinkEndChild(element);
+	root->LinkEndChild(element);
 	element->SetDoubleAttribute("volume",getMusicVolume());
 	
 	element = new TiXmlElement( "Sound" );
 	element->SetDoubleAttribute("volume",getSoundVolume());
-	doc.LinkEndChild(element);
+	root->LinkEndChild(element);
+
+	element = new TiXmlElement("Graphic");
+	root->LinkEndChild(element);
+	element->SetAttribute("ehl_color", getEnemyHighlightColor().c_str());
 
 	element = new TiXmlElement( "Language" );
-	doc.LinkEndChild(element);
+	root->LinkEndChild(element);
 	element->SetAttribute("locale",getLocale().c_str());
 
 	element = new TiXmlElement( "Network" );
-	doc.LinkEndChild(element);
+	root->LinkEndChild(element);
 	element->SetAttribute("host",getServerHost().c_str());
 	element->SetAttribute("port",getPort());
 	element->SetAttribute("max_players",getMaxNumberPlayers());
