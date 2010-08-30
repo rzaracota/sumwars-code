@@ -23,7 +23,7 @@ particle_system SlugSpit
 
     affector LinearForce
 {
-        force_vector      0 0 -100
+        force_vector      0 0 -2
         force_application add
 }
     // Fader
@@ -234,7 +234,7 @@ particle_system Black_Smoke
         emission_rate   600
         time_to_live    0.2
         direction       0 1 0
-        velocity        10
+        velocity        0.2
         colour_range_start 0 0 0 
         colour_range_end 0 0 0 0.2
         width           9.0
@@ -246,7 +246,7 @@ particle_system Black_Smoke
     // Make em float upwards
     affector LinearForce
 {
-        force_vector      0 100 0
+        force_vector      0 2 0
         force_application add
 }
 
@@ -375,7 +375,7 @@ particle_system SummonRing
         emission_rate   2000
         time_to_live    0.06
         direction       0 1 0
-        velocity        30
+        velocity        0.6
         colour_range_start 0.6 0.6 1
         colour_range_end 0.2 0.2 0.6
         width           0.8

@@ -27,7 +27,7 @@ particle_system TestRing
     // Make em float upwards
     affector LinearForce
 {
-        force_vector      0 -200 0
+        force_vector      0 -4 0
         force_application add
 }
 
@@ -308,7 +308,7 @@ particle_system Firering
     // Make em float upwards
     affector LinearForce
 {
-        force_vector      0 100 0
+        force_vector      0 2 0
         force_application add
 }
 
@@ -348,7 +348,7 @@ particle_system Firewall
     // Make em float upwards
     affector LinearForce
 {
-        force_vector      0 100 0
+        force_vector      0 2 0
         force_application add
 }
 
@@ -390,7 +390,7 @@ particle_system Firewave
     // Make em float upwards
     affector LinearForce
 {
-        force_vector      0 100 0
+        force_vector      0 2 0
         force_application add
 }
 
@@ -434,7 +434,7 @@ particle_system FireAura
     // Make em float upwards
     affector LinearForce
 {
-        force_vector      0 70 0
+        force_vector      0 1.4 0
         force_application add
 }
 
@@ -553,7 +553,7 @@ particle_system LichDeadColumn
     // Make em float upwards
     affector LinearForce
 {
-        force_vector      0 100 0
+        force_vector      0 2 0
         force_application add
 }
 
@@ -676,7 +676,7 @@ particle_system Blizzard
         emission_rate   600
         time_to_live    1.5
         direction       0 -1 0
-        velocity        50
+        velocity        1
         colour_range_start  0.6 0.6 1
         colour_range_end    0.2 0.2 0.6
         width           6.0
@@ -687,7 +687,7 @@ particle_system Blizzard
     // Make em float upwards
     affector LinearForce
 {
-        force_vector      50 -100 0
+        force_vector      1 -2 0
         force_application add
 }
 
@@ -727,7 +727,7 @@ particle_system Icering
     // Make em float upwards
     affector LinearForce
 {
-        force_vector      0 100 0
+        force_vector      0 2 0
         force_application add
 }
 
@@ -796,7 +796,7 @@ particle_system Frostwave
     // Make em float upwards
     affector LinearForce
 {
-        force_vector      0 100 0
+        force_vector      0 2 0
         force_application add
 }
 
@@ -901,7 +901,7 @@ particle_system Thunderstorm
         emission_rate   100
         time_to_live    5
         direction       0 -10 0
-        velocity        100
+        velocity        2
         colour_range_start  0.3 1 0.3
         colour_range_end    0.7 1 0.7
         width           20.0
@@ -912,7 +912,7 @@ particle_system Thunderstorm
     // Gravity
     affector LinearForce
 {
-        force_vector      0 -200 0
+        force_vector      0 -4 0
         force_application add
 }
 }
@@ -997,7 +997,7 @@ particle_system EarthAura
     // Make em float upwards
     affector LinearForce
 {
-        force_vector      0 100 0
+        force_vector      0 2 0
         force_application add
 }
 
@@ -1122,7 +1122,7 @@ particle_system Explosion
         emission_rate   600
         time_to_live    0.2
         direction       0 1 0
-        velocity        10
+        velocity        0.2
         colour_range_start  1 0 0
         colour_range_end    0.5 0.5 0
         width           4.0
@@ -1134,7 +1134,7 @@ particle_system Explosion
     // Make em float upwards
     affector LinearForce
 {
-        force_vector      0 100 0
+        force_vector      0 2 0
         force_application add
 }
 
@@ -1163,7 +1163,7 @@ particle_system Fire_Explosion
         emission_rate   600
         time_to_live    0.2
         direction       0 1 0
-        velocity        10
+        velocity        0.2
         colour_range_start  1 0 0
         colour_range_end    0.5 0.5 0
         width           4.0
@@ -1175,7 +1175,7 @@ particle_system Fire_Explosion
     // Make em float upwards
     affector LinearForce
 {
-        force_vector      0 100 0
+        force_vector      0 2 0
         force_application add
 }
 
@@ -1203,7 +1203,7 @@ particle_system Ice_Explosion
         emission_rate   600
         time_to_live    0.2
         direction       0 1 0
-        velocity        10
+        velocity        0.2
         colour_range_start 0.6 0.6 1
         colour_range_end 0.2 0.2 0.6
         width           4.0
@@ -1227,7 +1227,7 @@ particle_system Wind_Explosion
         emission_rate   600
         time_to_live    0.2
         direction       0 1 0
-        velocity        10
+        velocity        0.2
         colour_range_start 1 1 0.1 
         colour_range_end 0.5 0.5 0
         width           4.0
@@ -1443,7 +1443,7 @@ particle_system CastCureBurnParty
 
     affector LinearForce
 {
-        force_vector      0 -50 0
+        force_vector      0 -1 0
         force_application add
 }
 }
@@ -1518,7 +1518,7 @@ particle_system CastHealParty
 
     affector LinearForce
 {
-        force_vector      0 -50 0
+        force_vector      0 -1 0
         force_application add
 }
 }

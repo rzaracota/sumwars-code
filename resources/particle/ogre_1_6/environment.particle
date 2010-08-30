@@ -26,7 +26,7 @@ particle_system FirewallBlock
     // Make em float upwards
     affector LinearForce
 {
-        force_vector      0 100 0
+        force_vector      0 2 0
         force_application add
 }
 
@@ -66,7 +66,7 @@ particle_system FireCage
     // Make em float upwards
     affector LinearForce
 {
-        force_vector      0 100 0
+        force_vector      0 2 0
         force_application add
 }
 
@@ -107,7 +107,7 @@ particle_system Bomb
     // Make em float upwards
     affector LinearForce
 {
-        force_vector      0 100 0
+        force_vector      0 2 0
         force_application add
 }
 
@@ -163,7 +163,7 @@ particle_system CampFireBase
         emission_rate   200
         time_to_live    0.1
         direction       0 1 0
-        velocity        30
+        velocity        0.6
         colour_range_start  0.9 0 0
         colour_range_end    0.6 0.3 0
         width           1.0
@@ -198,7 +198,7 @@ particle_system Smoke
         emission_rate   300
         time_to_live    2
         direction       0 -1 0
-        velocity        100
+        velocity        2
         colour_range_start  1 1 1 0.2
         width           4.0
         height          4.0
@@ -230,7 +230,7 @@ particle_system Smoke_Explosion
         emission_rate   600
         time_to_live    0.2
         direction       0 1 0
-        velocity        10
+        velocity        0.2
         colour_range_start  1  1 1 0.2
         width           4.0
         height          4.0
@@ -241,7 +241,7 @@ particle_system Smoke_Explosion
     // Make em float upwards
     affector LinearForce
 {
-        force_vector      0 100 0
+        force_vector      0 2 0
         force_application add
 }
 
@@ -271,7 +271,7 @@ particle_system Smoke_Cube
         emission_rate   600
         time_to_live    0.4
         direction       0 1 0
-        velocity        10
+        velocity        0.2
         colour_range_start  1  1 1 0.2
         width           4.0
         height          8.0
@@ -282,7 +282,7 @@ particle_system Smoke_Cube
     // Make em float upwards
     affector LinearForce
 {
-        force_vector      0 20 0
+        force_vector      0 0.4 0
         force_application add
 }
 
@@ -325,7 +325,7 @@ particle_system EarthGeysir
     // Make em float downwards
     affector LinearForce
 {
-        force_vector      0 -100 0
+        force_vector      0 -2 0
         force_application add
 }
 
@@ -362,7 +362,7 @@ particle_system EarthGush
     // Make em float downwards
     affector LinearForce
 {
-        force_vector      0 -100 0
+        force_vector      0 -2 0
         force_application add
 }
 
