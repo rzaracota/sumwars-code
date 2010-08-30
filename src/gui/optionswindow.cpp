@@ -189,13 +189,13 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard)
 	misc->addChildWindow(label);
 	label->setProperty("FrameEnabled", "true");
 	label->setProperty("BackgroundEnabled", "true");
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.8)));
+	label->setPosition(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.3)));
 	label->setSize(CEGUI::UVector2(cegui_reldim(0.3f), cegui_reldim( 0.06f)));
 
 	CEGUI::Combobox* cbo = static_cast<CEGUI::Combobox*>(win_mgr.createWindow("TaharezLook/Combobox","LanguageBox"));
 	misc->addChildWindow(cbo);
-	cbo->setPosition(CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim( 0.8f)));
-	cbo->setSize(CEGUI::UVector2(cegui_reldim(0.4f), cegui_reldim( 0.3f)));
+	cbo->setPosition(CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim( 0.3f)));
+	cbo->setSize(CEGUI::UVector2(cegui_reldim(0.4f), cegui_reldim( 0.5f)));
 
 	cbo->addItem(new StrListItem("System default","",0));
 	cbo->addItem(new StrListItem("German","de_DE",0));
