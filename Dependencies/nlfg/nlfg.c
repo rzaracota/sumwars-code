@@ -24,6 +24,8 @@ THE SOFTWARE.
 
 #include <enet/enet.h>
 #include <string.h>
+#include <sys/types.h>
+#include <stdint.h>
 
 const int MAX_QUEUE_SIZE = 32;
 
@@ -81,7 +83,7 @@ int nlfg_init_client()
     enet_initialize();
     atexit(enet_deinitialize);
     peer = 0;
-    
+
 #ifdef ENET_VERSION
     // enet 1.3
     host = enet_host_create (NULL,
@@ -96,7 +98,7 @@ int nlfg_init_client()
                     1 /* only allow 1 outgoing connection */,
                     57600 / 8 /* 56K modem with 56 Kbps downstream bandwidth */,
                     14400 / 8 /* 56K modem with 14 Kbps upstream bandwidth */);
-    nlfgQueue.head = 0; 
+    nlfgQueue.head = 0;
 #endif
     return 1;
 }
@@ -109,7 +111,7 @@ int nlfg_init_server(unsigned int port)
     ENetAddress addr;
     addr.host = ENET_HOST_ANY;
     addr.port = port;
-    
+
 #ifdef ENET_VERSION
     // enet 1.3
     host = enet_host_create (&addr,
@@ -121,7 +123,7 @@ int nlfg_init_server(unsigned int port)
                     32 /* only allow 32 incoming connections */,
                     0, 0);
 #endif
-    
+
     nlfgQueue.head = 0;
     return 1;
 }

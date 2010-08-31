@@ -6,7 +6,7 @@
 
 #include "networkpacket.h"
 #include <nlfg.h>
-
+#include <time.h>
 /**
  * Class for data sent or received with NLFG
  */
@@ -18,13 +18,13 @@ class NLFGNetworkPacket : public NetworkPacket
 		 * Creates a new packet and writes the current time as timestamp
 		 */
 		NLFGNetworkPacket();
-		
+
 		/**
 		* \brief Creates a new packet from a RakNet::Packet
 		* \param packet RakNet Packet
 		*/
 		NLFGNetworkPacket(NLFG_Message* packet);
-		
+
 		/**
 		* \brief writes raw data to the buffer
 		* \param data raw data
@@ -34,8 +34,8 @@ class NLFGNetworkPacket : public NetworkPacket
 		{
 			nlfg_writeStringWithSize(m_packet, data, size);
 		}
-			
-			
+
+
 		/**
 		* \brief reads raw data from buffer
 		* \param data output buffer for raw data
@@ -45,7 +45,7 @@ class NLFGNetworkPacket : public NetworkPacket
 		{
 			nlfg_readStringWithSize(m_packet, data, size);
 		}
-			
+
 		/**
 		* \brief writes a string to the buffer
 		* \param s String
@@ -55,8 +55,8 @@ class NLFGNetworkPacket : public NetworkPacket
 			toBuffer(static_cast<int>(s.size()));
 			toBuffer(s.data(),s.size());
 		}
-			
-			
+
+
 		/**
 		* \brief reads a string from the buffer
 		* \param s String
@@ -65,13 +65,13 @@ class NLFGNetworkPacket : public NetworkPacket
 		{
 			int len;
 			fromBuffer(len);
-			
+
 			char * data = new char[len];
 			fromBuffer(data,len);
 			s.assign(data,len);
 			delete data;
 		}
-			
+
 		/**
 		* \brief writes a double to the buffer
 		* \param d double
@@ -80,8 +80,8 @@ class NLFGNetworkPacket : public NetworkPacket
 		{
 			nlfg_writeDouble(m_packet, d);
 		}
-			
-			
+
+
 		/**
 		* \brief reads a double from the buffer
 		* \param d double
@@ -90,7 +90,7 @@ class NLFGNetworkPacket : public NetworkPacket
 		{
 			d = nlfg_readDouble(m_packet);
 		}
-			
+
 		/**
 		* \brief writes a float to the buffer
 		* \param f float
@@ -99,8 +99,8 @@ class NLFGNetworkPacket : public NetworkPacket
 		{
 			nlfg_writeFloat(m_packet, f);
 		}
-			
-			
+
+
 		/**
 		* \brief reads a float from the buffer
 		* \param f float
@@ -109,7 +109,7 @@ class NLFGNetworkPacket : public NetworkPacket
 		{
 			f = nlfg_readFloat(m_packet);
 		}
-			
+
 		/**
 		* \brief writes an int to the buffer
 		* \param i int
@@ -118,8 +118,8 @@ class NLFGNetworkPacket : public NetworkPacket
 		{
 			nlfg_writeInteger(m_packet, i);
 		}
-			
-			
+
+
 		/**
 		* \brief reads an int from the buffer
 		* \param i int
@@ -128,7 +128,7 @@ class NLFGNetworkPacket : public NetworkPacket
 		{
 			i = nlfg_readInteger(m_packet);
 		}
-			
+
 		/**
 		* \brief writes a short to the buffer
 		* \param s short
@@ -137,8 +137,8 @@ class NLFGNetworkPacket : public NetworkPacket
 		{
 			nlfg_writeShort(m_packet, s);
 		}
-			
-			
+
+
 		/**
 		* \brief reads a short from the buffer
 		* \param s short
@@ -147,7 +147,7 @@ class NLFGNetworkPacket : public NetworkPacket
 		{
 			s = nlfg_readShort(m_packet);
 		}
-			
+
 		/**
 		* \brief writes a char to the buffer
 		* \param c char
@@ -156,8 +156,8 @@ class NLFGNetworkPacket : public NetworkPacket
 		{
 			nlfg_writeByte(m_packet, c);
 		}
-			
-			
+
+
 		/**
 		* \brief reads a char from the buffer
 		* \param c char
@@ -166,7 +166,7 @@ class NLFGNetworkPacket : public NetworkPacket
 		{
 			c = nlfg_readByte(m_packet);
 		}
-    
+
         /**
         * \brief writes a char to the buffer
         * \param c char
@@ -175,8 +175,8 @@ class NLFGNetworkPacket : public NetworkPacket
         {
             nlfg_writeByte(m_packet, c);
         }
-    
-    
+
+
         /**
         * \brief reads a char from the buffer
         * \param c char
@@ -185,7 +185,7 @@ class NLFGNetworkPacket : public NetworkPacket
         {
             c = nlfg_readByte(m_packet);
         }
-		
+
 		/**
 		* \brief returns the number of bits read from stream so far
 		*/
@@ -194,8 +194,8 @@ class NLFGNetworkPacket : public NetworkPacket
 			// the offset is for counteracting prepended internal data
 			return nlfg_getPosition(m_packet) - 13;
 		}
-		
-		
+
+
 		/**
 		* \brief returns the number of bits written to stream so far
 		*/
@@ -204,7 +204,7 @@ class NLFGNetworkPacket : public NetworkPacket
 			// the offset is for counteracting prepended internal data
 			return nlfg_getPosition(m_packet) - 9;
 		}
-		
+
 		/**
 		* \brief returns the delay of the packet in milliseconds
 		*/
@@ -212,7 +212,7 @@ class NLFGNetworkPacket : public NetworkPacket
 		{
 			return std::max(0.0f,static_cast<float>(time(NULL))-static_cast<float>(m_timestamp));
 		}
-		
+
 		/**
 		 * \brief Returns the NLFG packet that was used to create the object
 		 */
@@ -220,7 +220,7 @@ class NLFGNetworkPacket : public NetworkPacket
 		{
 			return m_packet;
 		}
-		
+
 		/**
 		 * \brief Returns the underlying bitstream (for internal use only)
 		 */
@@ -234,12 +234,12 @@ class NLFGNetworkPacket : public NetworkPacket
 		*/
 		char *m_data;
 		int m_length;
-		
+
 		/**
 		 * \brief Time when the packet was created
 		 */
 		unsigned int m_timestamp;
-		
+
 		/**
 		 * \brief Pointer to the RakNet Packet that was used to create this object
 		 */
