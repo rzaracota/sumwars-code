@@ -1476,11 +1476,19 @@ msgid "Nar'Asoroth"
 msgstr ""
 
 #: npc.xml
-msgid "Leere Schriftrollen kaufen"
+msgid "Buy empty scrolls"
+msgstr ""
+
+#: npc.xml
+msgid "Access stash"
 msgstr ""
 
 #: npc.xml
 msgid "The Lost Trader"
+msgstr ""
+
+#: npc.xml
+msgid "Leere Schriftrollen kaufen"
 msgstr ""
 
 #: cursedCaves.xml
@@ -1825,10 +1833,6 @@ msgstr ""
 
 #: undeadStats.xml
 msgid "Maylon"
-msgstr ""
-
-#: undeadStats.xml
-msgid "lich"
 msgstr ""
 
 #: undeadStats.xml
