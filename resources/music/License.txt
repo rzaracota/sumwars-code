@@ -12,8 +12,12 @@ Files:
 Artwork provided by: West
 Default license: CC-BY
 Files:
+	battle_at_dwarfenwall.ogg
+	battle_intro.ogg
 	dark_descent.ogg
 	main_title.ogg
 	the_prophecy.ogg
 	treacherous_paths.ogg
 	tread_lightly.ogg
+	
+	

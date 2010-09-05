@@ -1,3 +1,0 @@
-Illustrates use of the autopatcher to match certain files between the server and client.
-
-See AutopatcherTest.cpp for an illustration of how to use it.

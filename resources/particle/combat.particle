@@ -26,7 +26,7 @@ Hit
     // Make em float upwards
     affector LinearForce
 {
-        force_vector      0 -200 0
+        force_vector      0 -4 0
         force_application add
 }
 
@@ -148,7 +148,7 @@ FireSword
 
     affector LinearForce
 {
-        force_vector      0 0 100
+        force_vector      0 0 2
         force_application add
 }
     // Fader
@@ -185,7 +185,7 @@ BurningBlade
 
     affector LinearForce
 {
-        force_vector      0 30 100
+        force_vector      0 0.6 2
         force_application add
 }
     // Fader
@@ -222,7 +222,7 @@ FrostBlade
 
     affector LinearForce
 {
-        force_vector      0 30 100
+        force_vector      0 0.6 2
         force_application add
 }
     // Fader
@@ -259,7 +259,7 @@ BurningBladeShort
 
     affector LinearForce
 {
-        force_vector      0 30 100
+        force_vector      0 0.6 2
         force_application add
 }
     // Fader
@@ -311,7 +311,7 @@ BurningAxeRing
         emission_rate   1200
         time_to_live    0.06
         direction       0 1 0
-        velocity    	30
+        velocity    	0.6
         colour_range_start  0.9 0 0
         colour_range_end    0.6 0.3 0
         width           0.8
@@ -349,7 +349,7 @@ BlindShot
 		position		0 0.0 0.0
         time_to_live    0.05
         direction       0 1 0
-        velocity    	30
+        velocity    	0.6
         colour_range_start  0 0 0
 		colour_range_end  0 0 0 0.2
 		width           0.1

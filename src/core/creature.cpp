@@ -265,7 +265,7 @@ void Creature::initAction()
 
 	m_action.m_elapsed_time = 0;
 	Action::ActionInfo* aci = Action::getActionInfo(m_action.m_type);
-
+	
 	// Stumm behandeln
 	if (m_dyn_attr.m_status_mod_time[Damage::MUTE]>0 )
 	{
@@ -334,6 +334,29 @@ void Creature::initAction()
 
 	// setzen der Standarddauer der Aktion
 	m_action.m_time = getActionTime(m_action.m_type);
+	
+	if (getBaseAttrMod()->m_abilities.count(m_action.m_type) == 0 && m_action.m_type!= "noaction" && m_action.m_type!= "die"  && m_action.m_type != "walk")
+	{
+			// this happens, when action is not present due to berserk
+			// TODO: better strategy for berserk
+			std::map<std::string, AbilityInfo>::iterator it;
+			for (it = getBaseAttrMod()->m_abilities.begin(); it != getBaseAttrMod()->m_abilities.end(); ++it)
+			{
+				if (it->first == "noaction" || it->first == "die" || it->first == "walk")
+					continue;
+				
+				Action::ActionInfo* aci2 = Action::getActionInfo(it->first);
+				if (aci2 != 0 && aci->m_timer_nr == 0)
+				{
+					m_action.m_type = it->first;
+					m_action.m_time = getActionTime(m_action.m_type);
+					
+					DEBUGX("set berserk action to %s",m_action.m_type.c_str());
+					
+					break;
+				}
+			}
+	}
 
 	Action::ActionType baseact = "noaction";
 	Action::ActionInfo* ainfo = Action::getActionInfo(m_action.m_type);

@@ -336,7 +336,7 @@
 		
 		<Event trigger="object_use" once="true">
 			<Condition>
-				return ((trigger.used_object == getObjectByNameRef("doorGrave"))and (maylons_grave.freed~=false));
+				return ((trigger.used_object == getObjectByNameRef("doorGrave"))and (maylons_grave.freed~=true));
 			</Condition>
 			<Effect>
 				-- when opening the door to maylons grave chamber, his mummy will appear

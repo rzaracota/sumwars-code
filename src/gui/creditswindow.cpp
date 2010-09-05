@@ -36,39 +36,50 @@ CreditsWindow::CreditsWindow(Document* doc)
 	std::string content = CEGUIUtility::getColourizedString(CEGUIUtility::Red, "Programming:", CEGUIUtility::White);
 	content += "\n Hans Wulf (Lastmerlin) \
 			\n Stefan Stammberger (fusion44) \
-			\n Nicholas Cosens (gnemo)";
-	content += CEGUIUtility::getColourizedString(CEGUIUtility::Red, "Conversion to Mac:", CEGUIUtility::White);
-	content += "\n David Athay (trapdoor) \
-		    \n Ben Anderman (crimson_penguin)";
+			\n Nicholas Cosens (gnemo)\
+                        \n Network Library For Games (NLFG): \
+                        \n David Athay (trapdoor) \
+                        \n Mac conversion: \
+                        \n David Athay (trapdoor)\
+                        \n Ben Anderman (crimson_penguin)";
 	
 	content += CEGUIUtility::getColourizedString(CEGUIUtility::Red, "\n\nGraphics:", CEGUIUtility::White);
 	content +="\n Andreas Schönefeldt \
 			\n\nGraphics: \
 			\n Andreas Schönefeldt \
-			\n Steffen Schönefeldt (Nori) \
+			\n Steffen Schönefeldt (Kalimgard) \
 			\n Christian Wittmann (psycho)\
 			\n Francesco Miglietta (hal9000)";
 	content += CEGUIUtility::getColourizedString(CEGUIUtility::Red, "\n\n Scripting:", CEGUIUtility::White);
-	content += "\n Steffen Schönefeldt (Nori) \
+	content += "\n Steffen Schönefeldt (Kalimgard) \
 			\n Hans Wulf (Lastmerlin)";
 	content += CEGUIUtility::getColourizedString(CEGUIUtility::Red, "\n\nStory:", CEGUIUtility::White);
-	content += "\n Steffen Schönefeldt (Nori) \
+	content += "\n Steffen Schönefeldt (Kalimgard) \
 			\n Andreas Schönefeldt";
 	content += CEGUIUtility::getColourizedString(CEGUIUtility::Red, "\n\nSounds:", CEGUIUtility::White);
 	content += "\n Michael Kempf (Hangman) \
-				\n artisticdude";
-	content += CEGUIUtility::getColourizedString(CEGUIUtility::Red, "\n\n Translation:", CEGUIUtility::White);
-	content +="\n Steffen Schönefeldt (Nori) \
+				\n artisticdude \
+				\n quobodup \ ";
+	content += "\n\nMusic: \
+			\n Mattias Westlund (West) \
+			\n Cheeselord \
+			\n\nTranslation: \
+			\n Steffen Schönefeldt (Kalimgard) \
 			\n Michael Kempf (Hangman) \
 			\n kroni \
 			\n Brian Jeffears (getter77) \
-			\n Nicholas Cosens (gnemo)";
-	content += CEGUIUtility::getColourizedString(CEGUIUtility::Red, "\n\n Build System:", CEGUIUtility::White);
-	content +="\n Michael Kempf (Hangman) \
+			\n Nicholas Cosens (gnemo) \
+			\n axander \
+			\n Build system: \
 			\n Stefan Stammberger (fusion44)";
 	content += CEGUIUtility::getColourizedString(CEGUIUtility::Red, "\n\n Website:", CEGUIUtility::White);
 	content += "\n Andreas Schönefeldt \
+			\n Michael Kempf (Hangman) \
+			\n fusion44 \
+			\n\nWebsite: \
+			\n Andreas Schönefeldt \
 			\n Michael Kempf (Hangman)";
+	
 	credits->setText((CEGUI::utf8*) content.c_str());
 	credits->setProperty("BackgroundColours", "tl:99000000 tr:99000000 bl:99000000 br:99000000");
 	credits->setAlpha(0.9);

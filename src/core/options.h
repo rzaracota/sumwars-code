@@ -248,9 +248,26 @@ class Options
 			m_text_speed = text_speed;
 		}
 		
+		/**
+		 * \brief Returns enemy highlight color
+		 */
+		std::string getEnemyHighlightColor()
+		{
+			return m_enemy_highlight_color;
+		}
+
+		/**
+		 * \brief Sets the highlight color for enemies
+		 * \param color color (i.e. red, blue, green)
+		 */
+		void setEnemyHighlightColor(std::string color)
+		{
+			m_enemy_highlight_color = color;
+		}
+
 	private:
 		/**
-		 * Konstructor
+		 * Constructor
 		 */
 		Options();
 		
@@ -294,4 +311,9 @@ class Options
 		 */
 		float m_text_speed;
 		
+		/**
+		 *\brief Enemy highlight color
+		 */
+		std::string m_enemy_highlight_color;
+
 };

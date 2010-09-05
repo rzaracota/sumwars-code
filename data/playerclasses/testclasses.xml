@@ -1,3 +1,4 @@
+<!--
 <PlayerClass type="_testclass" name="_testclass">
 	<BasicAttributes
 					max_health="200"
@@ -55,3 +56,4 @@
 	<LearnableAbility type="teststatushealer" skilltree_tab="1" skilltree_posx="0.200000" skilltree_posy="0.650000" required_level="1"/>
 		
 </PlayerClass>
+-->

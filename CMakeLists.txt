@@ -26,9 +26,12 @@ PROJECT(SUMWARS)
 
 project(sumwars)
 
-IF(NOT WIN32)
-	ADD_SUBDIRECTORY(${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/Raknet2_0) #For WIN32 RakNet comes with the dependency package included
-ENDIF()
+SET(VERSION_MAJOR "0")
+SET(VERSION_MINOR "5")
+SET(VERSION_PATCH "2")
+SET(VERSION "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}")
+
+
 	
 SET(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/CMakeModules/;${CMAKE_MODULE_PATH}")
 
@@ -61,116 +64,39 @@ FIND_PACKAGE(Lua51 REQUIRED)
 FIND_PACKAGE(CEGUI REQUIRED)
 FIND_PACKAGE(CEGUIOGRE REQUIRED)
 FIND_PACKAGE(OpenAL REQUIRED)
+FIND_PACKAGE(Enet REQUIRED)
+FIND_PACKAGE(Pthreads REQUIRED)
 FIND_PACKAGE(ALUT REQUIRED)
 FIND_PACKAGE(Ogg REQUIRED)
 FIND_PACKAGE(Vorbis REQUIRED)
 
-SET(HDRS
-  # CORE FILES
-  ./src/core/action.h
-  ./src/core/charconv.h
-  ./src/core/clientnetwork.h
-  ./src/core/command.h
-  ./src/core/creature.h
-  ./src/core/creaturestruct.h
-  ./src/core/damage.h
-  ./src/core/debug.h
-  ./src/core/dialogue.h
-  ./src/core/document.h
-  ./src/core/dropitem.h
-  ./src/core/dropslot.h
-  ./src/core/elementattrib.h
-  ./src/core/event.h
-  ./src/core/eventsystem.h
-  ./src/core/fixedbase.h
-  ./src/core/fixedobject.h
-  ./src/core/fraction.h
-  ./src/core/gameobject.h
-  ./src/core/geometry.h
-  ./src/core/gettext.h
-  ./src/core/gridunit.h
-  ./src/core/hybridimplementation.h
-  ./src/core/item.h
-  ./src/core/itemfactory.h
-  ./src/core/itemlist.h
-  ./src/core/itemloader.h
-  ./src/core/logger.h
-  ./src/core/mapgenerator.h
-  ./src/core/matrix2d.h
-  ./src/core/mathhelper.h
-  ./src/core/minimap.h
-  ./src/core/monster.h
-  ./src/core/monsterbase.h
-  ./src/core/network.h
-  ./src/core/networkstruct.h
-  ./src/core/objectfactory.h
-  ./src/core/objectloader.h
-  ./src/core/options.h
-  ./src/core/party.h
-  ./src/core/pathfind.h
-  ./src/core/player.h
-  ./src/core/playerbase.h
-  ./src/core/projectile.h
-  ./src/core/projectilebase.h
-  ./src/core/quest.h
-  ./src/core/random.h
-  ./src/core/region.h
-  ./src/core/scriptobject.h
-  ./src/core/servernetwork.h
-  ./src/core/spawnpoint.h
-  ./src/core/templateloader.h
-  ./src/core/timer.h
-  ./src/core/treasure.h
-  ./src/core/treasurebase.h
-  ./src/core/unionfindtree.h
-  ./src/core/waypoint.h
-  ./src/core/world.h
-  ./src/core/worldloader.h
-  ./src/core/worldobject.h
-  # GUI FILES
-  ./src/gui/debugpanel/debugpanel.h
-  ./src/gui/debugpanel/debugtab.h
-  ./src/gui/debugpanel/guidebugtab.h
-  ./src/gui/debugpanel/luascripttab.h
-  ./src/gui/debugpanel/textfileeditwindow.h
-  ./src/gui/application.h
-  ./src/gui/ceguiutility.h
-  ./src/gui/charcreate.h
-  ./src/gui/charinfo.h
-  ./src/gui/chatline.h
-  ./src/gui/controlpanel.h
-  ./src/gui/creditswindow.h
-  ./src/gui/dialoguewindow.h
-  ./src/gui/graphicmanager.h
-  ./src/gui/graphicobject.h
-  ./src/gui/graphicobjectrenderinfo.h
-  ./src/gui/inventory.h
-  ./src/gui/itemwindow.h
-  ./src/gui/listitem.h
-  ./src/gui/mainmenu.h
-  ./src/gui/mainwindow.h
-  ./src/gui/messageboxes.h
-  ./src/gui/minimapwindow.h
-  ./src/gui/music.h
-  ./src/gui/networkwindows.h
-  ./src/gui/ogg.h
-  ./src/gui/optionswindow.h
-  ./src/gui/partyinfo.h
-  ./src/gui/questinfo.h
-  ./src/gui/savegamelist.h
-  ./src/gui/scene.h
-  ./src/gui/skilltree.h
-  ./src/gui/sound.h
-  ./src/gui/tooltipmanager.h
-  ./src/gui/tradewindow.h
-  ./src/gui/window.h
-  ./src/gui/worldmap.h
-  # TINYXML FILES
-  ./src/tinyxml/tinystr.h
-  ./src/tinyxml/tinyxml.h
-)
+INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/tinyxml)
+INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/core)
+INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/gui)
+INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/gui/debugpanel)
+INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/Dependencies/nlfg )
+INCLUDE_DIRECTORIES(${OGRE_INCLUDE_DIRS})
+INCLUDE_DIRECTORIES(${OIS_INCLUDE_DIRS})
+INCLUDE_DIRECTORIES(${LUA_INCLUDE_DIR})
+INCLUDE_DIRECTORIES(${CEGUI_INCLUDE_DIRS})
+INCLUDE_DIRECTORIES(${CEGUIOGRE_INCLUDE_DIRS})
+INCLUDE_DIRECTORIES(${OPENAL_INCLUDE_DIR})
+INCLUDE_DIRECTORIES(${ALUT_INCLUDES})
+INCLUDE_DIRECTORIES(${ENET_INCLUDES})
+INCLUDE_DIRECTORIES(${PTHREADS_INCLUDE_DIR})
+IF(WIN32)
+	INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/boost_1_42/)
+	INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/gettext/include/)
+	INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/pthreads/)
+	ADD_DEFINITIONS( "/W3 /D_CRT_SECURE_NO_WARNINGS /wd4800 /wd4244 /wd4305 /nologo" )
+	MESSAGE("WARNING: Compiler warnings 4800, 4244 and 4305 disabled!")
+ENDIF()
+
+
+
 
 SET(SRCS
+  ./Dependencies/nlfg/nlfg.c
   ./src/core/worldobject.cpp
   ./src/core/itemloader.cpp
   ./src/core/itemlist.cpp
@@ -204,9 +130,9 @@ SET(SRCS
   ./src/core/action.cpp
   ./src/core/creaturestruct.cpp
   ./src/core/servernetwork.cpp
-  ./src/core/rakservernetwork.cpp
-  ./src/core/rakclientnetwork.cpp
-  ./src/core/raknetworkpacket.cpp
+  ./src/core/nlfgservernetwork.cpp
+  ./src/core/nlfgclientnetwork.cpp
+  ./src/core/nlfgnetworkpacket.cpp
   ./src/core/pathfind.cpp
   ./src/core/damage.cpp
   ./src/core/waypoint.cpp
@@ -270,24 +196,7 @@ SET(SRCS
   ./src/tinyxml/tinyxmlparser.cpp
 )
  
-INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/tinyxml ${PROJECT_SOURCE_DIR}/src/core ${PROJECT_SOURCE_DIR}/src/gui ${PROJECT_SOURCE_DIR}/src/gui/debugpanel)
-INCLUDE_DIRECTORIES(${OGRE_INCLUDE_DIRS})
-INCLUDE_DIRECTORIES(${OIS_INCLUDE_DIRS})
-INCLUDE_DIRECTORIES(${LUA_INCLUDE_DIR})
-INCLUDE_DIRECTORIES(${CEGUI_INCLUDE_DIR})
-INCLUDE_DIRECTORIES(${CEGUIOGRE_INCLUDE_DIRS})
-INCLUDE_DIRECTORIES(${OPENAL_INCLUDE_DIR})
-INCLUDE_DIRECTORIES(${ALUT_INCLUDE_DIR})
-INCLUDE_DIRECTORIES(${OGG_INCLUDE_DIR})
-INCLUDE_DIRECTORIES(${VORBIS_INCLUDE_DIR})
-INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/Raknet2_0/Include)
-IF(WIN32)
-	INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/boost_1_42/)
-	INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/gettext/include/)
-	INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/pthreads/)
-	ADD_DEFINITIONS( "/W3 /D_CRT_SECURE_NO_WARNINGS /wd4800 /wd4244 /wd4305 /nologo" )
-	MESSAGE("WARNING: Compiler warnings 4800, 4244 and 4305 disabled!")
-ENDIF()
+
 
 ADD_EXECUTABLE(sumwars ${HDRS} ${SRCS})
 
@@ -302,6 +211,7 @@ SET(LINK_LIBS
 	${RakNet_LIBRARY} 
 	${VORBIS_LIBRARIES} 
 	${VORBIS_LIBRARIES}
+	${Enet_LIBRARY}
 )
 
 IF(WIN32)
@@ -314,11 +224,10 @@ IF(WIN32)
 		#${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/boost_1_42/lib/libboost_date_time-vc90-mt-gd-1_42.lib
 		${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/boost_1_42/lib/libboost_thread-vc90-mt-1_42.lib
 		${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/boost_1_42/lib/libboost_date_time-vc90-mt-1_42.lib
-		${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/Raknet2_0/Lib/RakNetLibStatic.lib
 		ws2_32.lib )
 ENDIF()
 
-TARGET_LINK_LIBRARIES(sumwars ${LINK_LIBS} /home/stefan/Dev/s07c/cegui07transition/build/Dependencies/Raknet2_0/libRakNet.a)
+TARGET_LINK_LIBRARIES(sumwars ${LINK_LIBS})
 
 
 

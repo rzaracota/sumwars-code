@@ -21,7 +21,7 @@ void Options::init()
 	m_shortkey_map[OIS::KC_RETURN] =  SHOW_CHATBOX_NO_TOGGLE;
 	m_shortkey_map[OIS::KC_TAB] =  SHOW_MINIMAP;
 	m_shortkey_map[OIS::KC_F10] =  SHOW_OPTIONS;
-	
+
 	m_shortkey_map[OIS::KC_1] =  USE_POTION;
 	m_shortkey_map[OIS::KC_2] =  (ShortkeyDestination) (USE_POTION+1);
 	m_shortkey_map[OIS::KC_3] =  (ShortkeyDestination) (USE_POTION+2);
@@ -32,7 +32,7 @@ void Options::init()
 	m_shortkey_map[OIS::KC_8] =  (ShortkeyDestination) (USE_POTION+7);
 	m_shortkey_map[OIS::KC_9] =  (ShortkeyDestination) (USE_POTION+8);
 	m_shortkey_map[OIS::KC_0] =  (ShortkeyDestination) (USE_POTION+9);
-	
+
 	// special keys that may not be used as shortkeys
 	m_special_keys.insert(OIS::KC_ESCAPE);
 	m_special_keys.insert(OIS::KC_LSHIFT);
@@ -54,9 +54,10 @@ void Options::init()
 	m_special_keys.insert(OIS::KC_7);
 	m_special_keys.insert(OIS::KC_8);
 	m_special_keys.insert(OIS::KC_9);
-	
+
 	m_difficulty = NORMAL;
 	m_text_speed = 1.0;
+	m_enemy_highlight_color = "red";
 }
 
 Options* Options::getInstance()
@@ -68,7 +69,7 @@ Options* Options::getInstance()
 void Options::setToDefaultOptions()
 {
 	init();
-	
+
 	// shortkeys that may be changed
 	m_shortkey_map[OIS::KC_I] = SHOW_INVENTORY ;
 	m_shortkey_map[OIS::KC_C] =  SHOW_CHARINFO;
@@ -78,11 +79,11 @@ void Options::setToDefaultOptions()
 	m_shortkey_map[OIS::KC_Q] =  SHOW_QUESTINFO;
 	m_shortkey_map[OIS::KC_W] =  SWAP_EQUIP;
 	m_shortkey_map[OIS::KC_LMENU] =  SHOW_ITEMLABELS;
-	
-	
+
+
 	setSoundVolume(1.0);
 	setMusicVolume(1.0);
-	
+
 	setMaxNumberPlayers(8);
 	setPort(5331);
 	setServerHost("127.0.0.1");
@@ -90,86 +91,104 @@ void Options::setToDefaultOptions()
 
 bool Options::readFromFile(const std::string& filename)
 {
-	
+
 	TiXmlDocument doc(filename.c_str());
 	bool loadOkay = doc.LoadFile();
 
 	ElementAttrib attr;
-	
+
 	if (loadOkay)
 	{
-		TiXmlNode* child, *child2;
-		for ( child = doc.FirstChild(); child != 0; child = child->NextSibling())
+		TiXmlNode* child;
+		TiXmlNode* child2;
+		TiXmlNode* root;
+
+		root = doc.FirstChild();
+		if (root->Type() == TiXmlNode::ELEMENT && !strcmp(root->Value(), "Options"))
 		{
-			if (child->Type()==TiXmlNode::ELEMENT)
+			for ( child = root->FirstChild(); child != 0; child = child->NextSibling())
 			{
-				attr.parseElement(child->ToElement());
-				std::string env,defstr,objname;
-				if (!strcmp(child->Value(), "Shortkeys"))
+				if (child->Type()==TiXmlNode::ELEMENT)
 				{
-					for ( child2 = child->FirstChild(); child2 != 0; child2 = child2->NextSibling())
+					attr.parseElement(child->ToElement());
+					std::string env,defstr,objname;
+					if (!strcmp(child->Value(), "Shortkeys"))
 					{
-						if (child2->Type()==TiXmlNode::ELEMENT && !strcmp(child2->Value(), "Shortkey"))
+						for ( child2 = child->FirstChild(); child2 != 0; child2 = child2->NextSibling())
 						{
-							attr.parseElement(child2->ToElement());
-							
-							int key, target;
-							attr.getInt("key",key);
-							attr.getInt("target",target);
-							if (key != 0 && target != 0)
+							if (child2->Type()==TiXmlNode::ELEMENT && !strcmp(child2->Value(), "Shortkey"))
 							{
-								setShortkey(key, (ShortkeyDestination) target);
+								attr.parseElement(child2->ToElement());
+
+								int key, target;
+								attr.getInt("key",key);
+								attr.getInt("target",target);
+								if (key != 0 && target != 0)
+								{
+									setShortkey(key, (ShortkeyDestination) target);
+								}
 							}
 						}
 					}
-				}
-				else if (!strcmp(child->Value(), "Music"))
-				{
-					float volume;
-					attr.getFloat("volume",volume,1.0);
-					setMusicVolume(volume);
-				}
-				else if (!strcmp(child->Value(), "Sound"))
-				{
-					float volume;
-					attr.getFloat("volume",volume,1.0);
-					setSoundVolume(volume);
-				}
-				else if (!strcmp(child->Value(), "Language"))
-				{
-					std::string locale;
-					attr.getString("locale",locale);
-					setLocale(locale);
-				}
-				else if (!strcmp(child->Value(), "Gameplay"))
-				{
-					int diff;
-					attr.getInt("difficulty",diff);
-					setDifficulty( static_cast<Difficulty>(diff));
-					float text_speed;
-					attr.getFloat("text_speed",text_speed);
-					setTextSpeed( text_speed);
-				}
-				else if (!strcmp(child->Value(), "Network"))
-				{
-					std::string host;
-					int port;
-					int max_players;
-					attr.getString("host",host,"127.0.0.1");
-					attr.getInt("port",port,5331);
-					attr.getInt("max_players",max_players,8);
-					
-					setPort(port);
-					setServerHost(host);
-					setMaxNumberPlayers(max_players);
-				}
-				else if (child->Type()!=TiXmlNode::COMMENT)
-				{
-					WARNING("unexpected element in options.xml: %s",child->Value());
+					else if (!strcmp(child->Value(), "Music"))
+					{
+						float volume;
+						attr.getFloat("volume",volume,1.0);
+						setMusicVolume(volume);
+					}
+					else if (!strcmp(child->Value(), "Sound"))
+					{
+						float volume;
+						attr.getFloat("volume",volume,1.0);
+						setSoundVolume(volume);
+					}
+					else if (!strcmp(child->Value(), "Language"))
+					{
+						std::string locale;
+						attr.getString("locale",locale);
+						setLocale(locale);
+					}
+					else if (!strcmp(child->Value(), "Gameplay"))
+					{
+						int diff;
+						attr.getInt("difficulty",diff);
+						setDifficulty( static_cast<Difficulty>(diff));
+						float text_speed;
+						attr.getFloat("text_speed",text_speed);
+						setTextSpeed( text_speed);
+					}
+					else if (!strcmp(child->Value(), "Network"))
+					{
+						std::string host;
+						int port;
+						int max_players;
+						attr.getString("host",host,"127.0.0.1");
+						attr.getInt("port",port,5331);
+						attr.getInt("max_players",max_players,8);
+
+						setPort(port);
+						setServerHost(host);
+						setMaxNumberPlayers(max_players);
+					}
+					else if (!strcmp(child->Value(), "Graphic"))
+					{
+						std::string color = getEnemyHighlightColor();
+						attr.getString("ehl_color", color);
+						setEnemyHighlightColor(color);
+					}
+					else if (child->Type()!=TiXmlNode::COMMENT)
+					{
+						WARNING("unexpected element in options.xml: %s",child->Value());
+					}
 				}
 			}
+		}  // if root == <Options>
+		else
+		{
+			setToDefaultOptions();
+			return false;
 		}
-	}
+	}  // if (loadOkay)
 	else
 	{
 		setToDefaultOptions();
@@ -181,13 +200,17 @@ bool Options::readFromFile(const std::string& filename)
 bool Options::writeToFile(const std::string& filename)
 {
 	TiXmlDocument doc;
-	TiXmlDeclaration * decl = new TiXmlDeclaration( "1.0", "", "" );
+	TiXmlDeclaration * decl = new TiXmlDeclaration( "1.0", "UTF-8", "" );
 	doc.LinkEndChild( decl );
-	
+
+	TiXmlElement* root;
+	root = new TiXmlElement("Options");
+	doc.LinkEndChild(root);
+
 	TiXmlElement * element;
 	element = new TiXmlElement( "Shortkeys" );
-	doc.LinkEndChild(element);
-	
+	root->LinkEndChild(element);
+
 	TiXmlElement * subele;
 	ShortkeyMap::iterator it;
 	for (it = m_shortkey_map.begin(); it != m_shortkey_map.end(); ++it)
@@ -197,26 +220,30 @@ bool Options::writeToFile(const std::string& filename)
 		subele->SetAttribute("target",it->second);
 		element->LinkEndChild(subele);
 	}
-	
+
 	element = new TiXmlElement( "Gameplay" );
-	doc.LinkEndChild(element);
+	root->LinkEndChild(element);
 	element->SetAttribute("difficulty",getDifficulty());
 	element->SetDoubleAttribute("text_speed",getTextSpeed());
-	
+
 	element = new TiXmlElement( "Music" );
-	doc.LinkEndChild(element);
+	root->LinkEndChild(element);
 	element->SetDoubleAttribute("volume",getMusicVolume());
-	
+
 	element = new TiXmlElement( "Sound" );
 	element->SetDoubleAttribute("volume",getSoundVolume());
-	doc.LinkEndChild(element);
+	root->LinkEndChild(element);
+
+	element = new TiXmlElement("Graphic");
+	root->LinkEndChild(element);
+	element->SetAttribute("ehl_color", getEnemyHighlightColor().c_str());
 
 	element = new TiXmlElement( "Language" );
-	doc.LinkEndChild(element);
+	root->LinkEndChild(element);
 	element->SetAttribute("locale",getLocale().c_str());
 
 	element = new TiXmlElement( "Network" );
-	doc.LinkEndChild(element);
+	root->LinkEndChild(element);
 	element->SetAttribute("host",getServerHost().c_str());
 	element->SetAttribute("port",getPort());
 	element->SetAttribute("max_players",getMaxNumberPlayers());
@@ -246,7 +273,7 @@ ShortkeyDestination Options::getMappedDestination(KeyCode key)
 
 	if (it != m_shortkey_map.end())
 		return it->second;
-	
+
 	return NO_KEY;
 }
 
@@ -299,7 +326,7 @@ std::string Options::getLocale()
 	}
 	if (locstr == "")
 		locstr = "#default#";
-	
+
 	return locstr;
 }
 

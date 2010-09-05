@@ -28,14 +28,8 @@
 #include "templateloader.h"
 #include "objectloader.h"
 
-#if NO_RAKNET
 #include "nlfgclientnetwork.h"
 #include "nlfgservernetwork.h"
-#else
-#include "rakservernetwork.h"
-#include "rakclientnetwork.h"
-#include "raknetworkpacket.h"
-#endif
 
 #include "options.h"
 
@@ -99,6 +93,7 @@ bool World::init(int port)
 	std::string file;
 
 	EventSystem::init();
+	EventSystem::pushGettextDomain("sumwars-xml");
 	Dialogue::init();
 
 	files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("lua","*.lua");
@@ -158,9 +153,11 @@ bool World::init(int port)
 		ObjectLoader::loadObjectData(file.c_str());
 
 	}
-
+	EventSystem::popGettextDomain();
+	
 	if (m_server)
 	{
+		EventSystem::pushGettextDomain("sumwars-xml");
 		WorldLoader worldloader;
 		std::list<RegionData*> region_list;
 		files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("world","*.xml");
@@ -190,6 +187,7 @@ bool World::init(int port)
 			file += it->filename;
 			worldloader.loadNPCData(file.c_str());
 		}
+		EventSystem::popGettextDomain();
 
 		files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("quests","*.xml");
 		for (it = files->begin(); it != files->end(); ++it)
@@ -209,11 +207,7 @@ bool World::init(int port)
 		if (m_server)
 		{
 			ServerNetwork* snet;
-#ifdef NO_RAKNET
             m_network = snet = new NLFGServerNetwork(m_max_nr_players);
-#else
-			m_network = snet = new RakServerNetwork(m_max_nr_players);
-#endif
 			if (snet->init(port) !=NET_OK )
 			{
 				ERRORMSG( "Error occured in network" );
@@ -222,12 +216,9 @@ bool World::init(int port)
 		}
 		else
 		{
-#ifdef NO_RAKNET
             m_network = new NLFGClientNetwork();
-#else
-			m_network = new RakClientNetwork();
-#endif
 		}
+		m_network->setPacketVersion(m_version);
 	}
 
 	m_timer[0] =0;
@@ -932,7 +923,7 @@ void World::handleSavegame(CharConv *cv, int slot)
 				NetworkPacket* msg3 = m_network->createPacket();
 				header3.toString(msg3);
 
-
+				DEBUGX("sending waypoint info");
 				for (lt = winfos.begin(); lt != winfos.end(); ++lt)
 				{
 					msg3->toBuffer(lt->first);
@@ -962,7 +953,7 @@ void World::handleSavegame(CharConv *cv, int slot)
 				{
 					if (m_parties[i].getNrMembers() > 0)
 					{
-						DEBUG("sending data for party %i",i);
+						DEBUGX("sending data for party %i",i);
 						header4.m_number =i;
 						NetworkPacket* msg4 = m_network->createPacket();
 						header4.toString(msg4);
@@ -1373,7 +1364,7 @@ void World::updatePlayers()
 			}
 
 
-			DEBUGX("player %i has quit",pl->getId());
+			DEBUG("player %i has quit",pl->getId());
 
 			delete pl;
 			continue;
@@ -1500,7 +1491,7 @@ void World::updatePlayers()
 		if (m_network->getSlotStatus()!=NET_CONNECTED)
 		{
 			// disconnect
-			if (m_network->getSlotStatus() == NET_TIMEOUT)
+			if (m_network->getSlotStatus() == NET_TIMEOUT && m_local_player != 0)
 			{
 				m_local_player->setState(GameObject::STATE_QUIT,false);
 			}
@@ -1550,7 +1541,6 @@ void World::updatePlayers()
 
 						// Daten aktualisieren
 						player->fromString(cv);
-
 					}
 
 				}
@@ -1590,8 +1580,8 @@ void World::updatePlayers()
 				{
 					int id;
 					cv->fromBuffer(id);
-					DEBUG("ID at server %i",id);
-					m_players->clear();
+					DEBUG("ID at server %i (old ID %i)",id, m_local_player->getId());
+					m_players->erase(m_local_player->getId());
 					m_local_player->setId(id);
 
 					int frac;
@@ -1942,6 +1932,10 @@ bool World::writeNetEvent(Region* region,NetEvent* event, CharConv* cv)
 			if (dia != 0)
 			{
 				dia->toString(cv);
+			}
+			else
+			{
+				return false;
 			}
 		}
 		else if (event->m_type == NetEvent::DIALOGUE_STAT_CHANGED)

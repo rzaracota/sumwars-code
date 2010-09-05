@@ -451,6 +451,8 @@
 				return (defend_dwall.siegeEnded ~= true);
 			</Condition>
 			<Effect>
+				playMusic("battle_intro.ogg")
+			
 				--the number of penalty-points accumulated during battle
 				defend_dwall_tmp.penalty=0;
 			
@@ -1182,6 +1184,7 @@
 		</Event>
 		<Event trigger="siegeBegins" once="true">
 			<Effect>
+				playMusic("battle_at_dwarfenwall.ogg")
 				addUnitCommand(defend_dwall_tmp.general,"guard","locEntryGeneral",9,"secondary");
 				addUnitCommand(defend_dwall_tmp.council,"guard","locCouncilMage",5,"secondary");
 			
@@ -2231,6 +2234,7 @@
 				return(defend_dwall_tmp.phase=="aftermath");
 			</Condition>
 			<Effect>
+				playMusic("the_prophecy.ogg");
 				initDialog()
 				addImportantSpeakers();
 				
@@ -2554,7 +2558,7 @@
 		<Event trigger="lichTalkEnd" once="true">
 			<Effect>
 				setCutsceneMode(false)
-				
+				playMusic("battle_at_dwarfenwall.ogg");
 				unitSpeak("lich",_("And now I will find a way to kill Branded Ones."), "angry")
 			</Effect>
 		</Event>
@@ -2675,6 +2679,7 @@
 		</Event>
 		<Event trigger="demoFinished" once="true">
 			<Effect>
+				playMusic("the_prophecy.ogg");
 				addCameraPosition(1500,"locParty",-90, 55, 14);
 				--speaker1 => erklaerbaer
 				local speaker1 = getPlayers()[1]

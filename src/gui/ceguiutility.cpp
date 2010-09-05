@@ -1,5 +1,5 @@
 #include "ceguiutility.h"
-#include "CEGUI.h"
+#include "CEGUI/CEGUI.h"
 #include <iostream>
 #include <algorithm>
 

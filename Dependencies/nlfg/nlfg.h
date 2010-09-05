@@ -47,7 +47,7 @@ typedef struct _NLFG_Message
     unsigned int reliability;
     struct NLFG_Address addr;
     char *data;
-    struct _NLFG_Message *parent;
+    struct _NLFG_Message *child;
 } NLFG_Message;
 
 /* NLFG Initialisation

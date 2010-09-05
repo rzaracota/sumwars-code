@@ -15,21 +15,21 @@ Files:
 	vanilla.tga
 
 Artwork provided by: Michael Kempf (kemic)
-Default License:
+Default License: CC-BY-SA
 Files:
 	TaharezLook.tga 
 	
 Artwork provided by: Andreas Schönefeld
-Default License:
+Default License: CC-BY-SA
 Files:
 	startscreen.png
 
 Artwork provided by: Andreas Schönefeld, Michael Kempf (kemic), Francesco (hal9000)
-Default License:
+Default License: CC-BY-SA
 Files:
 	skills.png
 	
 Artwork provided by: Psycho
-Default License:
+Default License: CC-BY-SA
 Files:
 	worldMap.png

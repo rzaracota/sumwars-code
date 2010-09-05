@@ -296,7 +296,7 @@
 		<DirectionalLight red="0.3" green="0.3" blue="0.3" />
 		
 		<Music>
-			<Track source="tread_lightly.ogg" />
+			<Track source="the_prophecy.ogg" />
 		</Music>
 		
 		<Settings dimx="32" dimy="36" region_template = "dwarfenwallRampart"  ground="grass1"/>

@@ -71,10 +71,12 @@ int main (int argc, char *argv[]) {
 	delete app;
 
 	}
+	/*
 	catch (std::exception& e)
 	{
 		DEBUG("Programm died with exception %s",e.what());
 	}
+	*/
 	catch (CEGUI::Exception& e)
 	{
 		DEBUG("Programm died with exception %s",e.getMessage().c_str());

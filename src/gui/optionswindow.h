@@ -99,11 +99,21 @@ class OptionsWindow : public Window
 		bool onMusicVolumeChanged(const CEGUI::EventArgs& evt);
 		
 		/**
+		 * \brief Handles change of enemy highlight color setting
+		 */
+		bool onEnemyHighlightChanged(const CEGUI::EventArgs& evt);
+
+		/**
 		 * \fn bool onLanguageSelected(const CEGUI::EventArgs& evt)
 		 * \brief Behandelt Auswahl einer neuen Sprache
 		 */
 		bool onLanguageSelected(const CEGUI::EventArgs& evt);
 		
+		/**
+		 * \brief returns index of highlight color
+		 */
+		unsigned int getColorSelectionIndex(std::string name);
+
 		/**
 		 * \var OIS::Keyboard *m_keyboard
 		 * \brief Repraesentation der Tastatur

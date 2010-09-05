@@ -1,7 +1,7 @@
 #ifndef DEBUGTAB_H
 #define DEBUGTAB_H
 
-#include <CEGUIString.h>
+#include <CEGUI/CEGUIString.h>
 
 class DebugTab
 {

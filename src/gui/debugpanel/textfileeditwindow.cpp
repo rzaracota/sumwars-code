@@ -1,5 +1,5 @@
 #include "textfileeditwindow.h"
-#include "CEGUI.h"
+#include "CEGUI/CEGUI.h"
 #include <iostream>
 #include <fstream>
 #include <string>

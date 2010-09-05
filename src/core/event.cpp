@@ -135,6 +135,8 @@ bool Event::checkCondition()
 
 void Event::doEffect()
 {
+	EventSystem::pushGettextDomain(m_gettext_domain);
 	EventSystem::executeCodeReference(m_effect);
+	EventSystem::popGettextDomain();
 }
 

@@ -2,7 +2,7 @@
 #define DEBUGPANEL_H
 
 #include <OgreSingleton.h>
-#include "CEGUI.h"
+#include "CEGUI/CEGUI.h"
 #include "debugtab.h"
 
 #include <map>

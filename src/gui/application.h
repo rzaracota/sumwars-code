@@ -10,16 +10,16 @@
 #include "OgreMeshManager.h"
 
 // needed to be able to create the CEGUI renderer interface
-#include "RendererModules/Ogre/CEGUIOgreRenderer.h"
+#include "CEGUI/RendererModules/Ogre/CEGUIOgreRenderer.h"
 
 // CEGUI includes
-#include "CEGUISystem.h"
-#include "CEGUIInputEvent.h"
-#include "CEGUIWindow.h"
-#include "CEGUIWindowManager.h"
-#include "CEGUISchemeManager.h"
-#include "CEGUIFontManager.h"
-#include "elements/CEGUIFrameWindow.h"
+#include "CEGUI/CEGUISystem.h"
+#include "CEGUI/CEGUIInputEvent.h"
+#include "CEGUI/CEGUIWindow.h"
+#include "CEGUI/CEGUIWindowManager.h"
+#include "CEGUI/CEGUISchemeManager.h"
+#include "CEGUI/CEGUIFontManager.h"
+#include "CEGUI/elements/CEGUIFrameWindow.h"
 
 #include <stdio.h>
 

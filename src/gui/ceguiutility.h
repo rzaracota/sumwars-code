@@ -1,8 +1,8 @@
 #ifndef CEGUIUTILITY_H
 #define CEGUIUTILITY_H
 
-#include "CEGUIUDim.h"
-#include "CEGUIFont.h"
+#include "CEGUI/CEGUIUDim.h"
+#include "CEGUI/CEGUIFont.h"
 #include <list>
 #include <string>
 

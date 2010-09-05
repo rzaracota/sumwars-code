@@ -24,12 +24,14 @@ THE SOFTWARE.
 
 #include <enet/enet.h>
 #include <string.h>
+#include <sys/types.h>
+#include <stdint.h>
 
 const int MAX_QUEUE_SIZE = 32;
 
 struct NLFG_Queue
 {
-    NLFG_Message *tail;
+    NLFG_Message *head;
 } nlfgQueue;
 
 ENetHost *host;
@@ -43,7 +45,10 @@ void nlfg_expand(NLFG_Message *msg, int size)
         char *tempData;
         int oldSize = msg->size;
 
-        msg->size = msg->size << 1;
+        while (msg->size < size)
+        {
+            msg->size = msg->size << 1;
+        }
         tempData = (char*)malloc(oldSize);
         memcpy(tempData, msg->data, oldSize);
         free(msg->data);
@@ -55,20 +60,20 @@ void nlfg_expand(NLFG_Message *msg, int size)
 
 int nlfg_addMessage(NLFG_Message *msg)
 {
-    /* Add a packet to the message queue.
-       Returns -1 if unable (due to full queue)
-       TODO: Have dynamic sized queue
-    */
-
-    if (nlfgQueue.tail == 0)
+    if (nlfgQueue.head == 0)
     {
-        nlfgQueue.tail = msg;
-        msg->parent = 0;
+        nlfgQueue.head = msg;
+        msg->child = 0;
     }
     else
     {
-        msg->parent = nlfgQueue.tail;
-        nlfgQueue.tail = msg;
+        NLFG_Message *next = nlfgQueue.head;
+        while (next->child != 0)
+        {
+            next = next->child;
+        }
+        next->child = msg;
+		msg->child = 0;
     }
     return 0;
 }
@@ -79,11 +84,22 @@ int nlfg_init_client()
     atexit(enet_deinitialize);
     peer = 0;
 
+#ifdef ENET_VERSION
+    // enet 1.3
+    host = enet_host_create (NULL,
+                    1 /* only allow 1 outgoing connection */,
+		    0,
+                    57600 / 8 /* 56K modem with 56 Kbps downstream bandwidth */,
+                    14400 / 8 /* 56K modem with 14 Kbps upstream bandwidth */);
+    nlfgQueue.head = 0;
+#else
+    // enet 1.2
     host = enet_host_create (NULL,
                     1 /* only allow 1 outgoing connection */,
                     57600 / 8 /* 56K modem with 56 Kbps downstream bandwidth */,
                     14400 / 8 /* 56K modem with 14 Kbps upstream bandwidth */);
-    nlfgQueue.tail = 0;
+    nlfgQueue.head = 0;
+#endif
     return 1;
 }
 
@@ -96,10 +112,19 @@ int nlfg_init_server(unsigned int port)
     addr.host = ENET_HOST_ANY;
     addr.port = port;
 
+#ifdef ENET_VERSION
+    // enet 1.3
+    host = enet_host_create (&addr,
+                    32 /* only allow 32 incoming connections */,
+                    0, 0, 0);
+#else
+    // enet 1.2
     host = enet_host_create (&addr,
                     32 /* only allow 32 incoming connections */,
                     0, 0);
-    nlfgQueue.tail = 0;
+#endif
+
+    nlfgQueue.head = 0;
     return 1;
 }
 
@@ -110,6 +135,7 @@ void nlfg_init_packet(NLFG_Message *msg)
     msg->position = 0;
     msg->id = 0;
     msg->reliability = RELIABLE;
+    msg->child = 0;
 }
 
 unsigned int nlfg_connect(const char *hostname, unsigned int port)
@@ -117,7 +143,13 @@ unsigned int nlfg_connect(const char *hostname, unsigned int port)
     ENetAddress address;
     enet_address_set_host(&address, hostname);
     address.port = port;
+#ifdef ENET_VERSION
+    // enet 1.3
+    peer = enet_host_connect(host, &address, 0, 1);
+#else
+    // enet 1.2
     peer = enet_host_connect(host, &address, 1);
+#endif
     if (peer)
         return 1;
     return 0;
@@ -125,7 +157,7 @@ unsigned int nlfg_connect(const char *hostname, unsigned int port)
 
 void nlfg_disconnect()
 {
-    if (!peer)
+    if (peer)
         enet_peer_disconnect(peer, 0);
 }
 
@@ -195,10 +227,10 @@ int nlfg_process()
 
 NLFG_Message* nlfg_getMessage()
 {
-    if (nlfgQueue.tail == 0)
+    if (nlfgQueue.head == 0)
         return NULL;
-    NLFG_Message *msg = nlfgQueue.tail;
-    nlfgQueue.tail = msg->parent;
+    NLFG_Message *msg = nlfgQueue.head;
+    nlfgQueue.head = msg->child;
     return msg;
 }
 

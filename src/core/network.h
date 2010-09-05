@@ -2,21 +2,6 @@
 #else
 #define NETWORK_H
 
-/*
-#include "raknet/MessageIdentifiers.h"
-#include "raknet/RakNetworkFactory.h"
-#include "raknet/RakPeerInterface.h"
-#include "raknet/RakNetTypes.h"
-#include "raknet/BitStream.h"
-*/
-#include "PacketEnumerations.h"
-#include "RakNetworkFactory.h"
-#include "RakPeerInterface.h"
-#include "NetworkTypes.h"
-#include "BitStream.h"
-#include "RakClientInterface.h"
-#include "RakServerInterface.h"
-
 #define ID_USER_PACKET_ENUM  80
 
 

@@ -1,8 +1,8 @@
 #ifndef TEXTFILEEDITWINDOW_H
 #define TEXTFILEEDITWINDOW_H
 
-#include <CEGUIWindow.h>
-#include <CEGUIEvent.h>
+#include <CEGUI/CEGUIWindow.h>
+#include <CEGUI/CEGUIEvent.h>
 
 class TextFileEditWindow : public CEGUI::Window
 {

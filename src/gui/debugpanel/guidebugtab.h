@@ -2,7 +2,7 @@
 #define GUIDEBUGTAB_H
 
 #include "debugtab.h"
-#include "CEGUIWindow.h"
+#include "CEGUI/CEGUIWindow.h"
 
 class GuiDebugTab : public CEGUI::Window, public DebugTab
 {

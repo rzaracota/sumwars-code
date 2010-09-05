@@ -25,7 +25,7 @@ MainMenu::MainMenu (Document* doc)
 	btn->setSize(CEGUI::UVector2(cegui_reldim(0.8f), cegui_reldim( 0.12f)));
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MainMenu::onStartSinglePlayer, this));
 	btn->setWantsMultiClickEvents(false);
-#ifndef NO_RAKNET
+
 		// Button Server beitreten
 	btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", "ServerJoinButton"));
 	start_menu->addChildWindow(btn);
@@ -41,7 +41,7 @@ MainMenu::MainMenu (Document* doc)
 	btn->setSize(CEGUI::UVector2(cegui_reldim(0.8f), cegui_reldim( 0.12f)));
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MainMenu::onStartMultiPlayerHost, this));
 	btn->setWantsMultiClickEvents(false);
-#endif
+
 	
 	// Button Server aufsetzen
 	btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", "CreditsButton"));
@@ -75,13 +75,12 @@ void MainMenu::updateTranslation()
 	
 	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("SinglePlayerButton"));
 	btn->setText((CEGUI::utf8*) gettext("Single player"));
-#ifndef NO_RAKNET
+
 	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("ServerJoinButton"));
 	btn->setText((CEGUI::utf8*) gettext("Join game"));
 	
 	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("ServerHostButton"));
 	btn->setText((CEGUI::utf8*) gettext("Host game"));
-#endif
 	
 	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("CreditsButton"));
 	btn->setText((CEGUI::utf8*) gettext("Credits"));

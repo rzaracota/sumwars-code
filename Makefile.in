@@ -37,7 +37,7 @@ subdir = .
 DIST_COMMON = README $(am__configure_deps) $(srcdir)/Makefile.am \
 	$(srcdir)/Makefile.in $(srcdir)/config.h.in \
 	$(top_srcdir)/configure AUTHORS COPYING ChangeLog INSTALL NEWS \
-	depcomp install-sh missing
+	compile depcomp install-sh missing
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
@@ -51,7 +51,8 @@ CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
 am__dirstamp = $(am__leading_dot)dirstamp
-am_sumwars_OBJECTS = src/core/sumwars-world.$(OBJEXT) \
+am_sumwars_OBJECTS = ./Dependencies/nlfg/sumwars-nlfg.$(OBJEXT) \
+	src/core/sumwars-world.$(OBJEXT) \
 	src/core/sumwars-gameobject.$(OBJEXT) \
 	src/core/sumwars-charconv.$(OBJEXT) \
 	src/core/sumwars-stdstreamconv.$(OBJEXT) \
@@ -62,9 +63,9 @@ am_sumwars_OBJECTS = src/core/sumwars-world.$(OBJEXT) \
 	src/core/sumwars-itemlist.$(OBJEXT) \
 	src/core/sumwars-gridunit.$(OBJEXT) \
 	src/core/sumwars-servernetwork.$(OBJEXT) \
-	src/core/sumwars-rakservernetwork.$(OBJEXT) \
-	src/core/sumwars-rakclientnetwork.$(OBJEXT) \
-	src/core/sumwars-raknetworkpacket.$(OBJEXT) \
+	src/core/sumwars-nlfgservernetwork.$(OBJEXT) \
+	src/core/sumwars-nlfgclientnetwork.$(OBJEXT) \
+	src/core/sumwars-nlfgnetworkpacket.$(OBJEXT) \
 	src/core/sumwars-worldobject.$(OBJEXT) \
 	src/core/sumwars-networkstruct.$(OBJEXT) \
 	src/core/sumwars-projectile.$(OBJEXT) \
@@ -147,6 +148,10 @@ DEFAULT_INCLUDES = -I.@am__isrc@
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
 am__mv = mv -f
+COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
+	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
+CCLD = $(CC)
+LINK = $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
 CXXCOMPILE = $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
 	$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
 CXXLD = $(CXX)
@@ -263,11 +268,12 @@ top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 AUTOMAKE_OPTIONS = subdir-objects
-sumwars_CPPFLAGS = -DDEBUG_LEVEL=5 -Wall -g -I./src/core -I./src/gui -I./src/tinyxml -I./src/raknet/Include
+sumwars_CPPFLAGS = -DDEBUG_LEVEL=5 -Wall -g -I./src/core -I./src/gui -I./src/tinyxml -I./Dependencies/nlfg
 sumwars_CXXFLAGS = $(DEPS_CFLAGS) $(LUA_CFLAGS)
 sumwars_LDFLAGS = -lm -lrt
 sumwars_LDADD = $(DEPS_LIBS) $(LUA_LIBS)
-sumwars_SOURCES = src/core/world.cpp \
+sumwars_SOURCES = ./Dependencies/nlfg/nlfg.c \
+	src/core/world.cpp \
 	src/core/gameobject.cpp \
 	src/core/charconv.cpp \
 	src/core/stdstreamconv.cpp \
@@ -278,9 +284,9 @@ sumwars_SOURCES = src/core/world.cpp \
 	src/core/itemlist.cpp \
 	src/core/gridunit.cpp \
 	src/core/servernetwork.cpp \
-	src/core/rakservernetwork.cpp \
-	src/core/rakclientnetwork.cpp \
-	src/core/raknetworkpacket.cpp \
+	src/core/nlfgservernetwork.cpp \
+	src/core/nlfgclientnetwork.cpp \
+	src/core/nlfgnetworkpacket.cpp \
 	src/core/worldobject.cpp \
 	src/core/networkstruct.cpp \
 	src/core/projectile.cpp \
@@ -360,7 +366,7 @@ all: config.h
 	$(MAKE) $(AM_MAKEFLAGS) all-am
 
 .SUFFIXES:
-.SUFFIXES: .cpp .o .obj
+.SUFFIXES: .c .cpp .o .obj
 am--refresh:
 	@:
 $(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
@@ -449,6 +455,15 @@ uninstall-binPROGRAMS:
 
 clean-binPROGRAMS:
 	-test -z "$(bin_PROGRAMS)" || rm -f $(bin_PROGRAMS)
+Dependencies/nlfg/$(am__dirstamp):
+	@$(MKDIR_P) ./Dependencies/nlfg
+	@: > Dependencies/nlfg/$(am__dirstamp)
+Dependencies/nlfg/$(DEPDIR)/$(am__dirstamp):
+	@$(MKDIR_P) ./Dependencies/nlfg/$(DEPDIR)
+	@: > Dependencies/nlfg/$(DEPDIR)/$(am__dirstamp)
+./Dependencies/nlfg/sumwars-nlfg.$(OBJEXT):  \
+	Dependencies/nlfg/$(am__dirstamp) \
+	Dependencies/nlfg/$(DEPDIR)/$(am__dirstamp)
 src/core/$(am__dirstamp):
 	@$(MKDIR_P) src/core
 	@: > src/core/$(am__dirstamp)
@@ -477,12 +492,12 @@ src/core/sumwars-gridunit.$(OBJEXT): src/core/$(am__dirstamp) \
 	src/core/$(DEPDIR)/$(am__dirstamp)
 src/core/sumwars-servernetwork.$(OBJEXT): src/core/$(am__dirstamp) \
 	src/core/$(DEPDIR)/$(am__dirstamp)
-src/core/sumwars-rakservernetwork.$(OBJEXT): src/core/$(am__dirstamp) \
-	src/core/$(DEPDIR)/$(am__dirstamp)
-src/core/sumwars-rakclientnetwork.$(OBJEXT): src/core/$(am__dirstamp) \
-	src/core/$(DEPDIR)/$(am__dirstamp)
-src/core/sumwars-raknetworkpacket.$(OBJEXT): src/core/$(am__dirstamp) \
-	src/core/$(DEPDIR)/$(am__dirstamp)
+src/core/sumwars-nlfgservernetwork.$(OBJEXT):  \
+	src/core/$(am__dirstamp) src/core/$(DEPDIR)/$(am__dirstamp)
+src/core/sumwars-nlfgclientnetwork.$(OBJEXT):  \
+	src/core/$(am__dirstamp) src/core/$(DEPDIR)/$(am__dirstamp)
+src/core/sumwars-nlfgnetworkpacket.$(OBJEXT):  \
+	src/core/$(am__dirstamp) src/core/$(DEPDIR)/$(am__dirstamp)
 src/core/sumwars-worldobject.$(OBJEXT): src/core/$(am__dirstamp) \
 	src/core/$(DEPDIR)/$(am__dirstamp)
 src/core/sumwars-networkstruct.$(OBJEXT): src/core/$(am__dirstamp) \
@@ -651,6 +666,7 @@ sumwars$(EXEEXT): $(sumwars_OBJECTS) $(sumwars_DEPENDENCIES)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
+	-rm -f ./Dependencies/nlfg/sumwars-nlfg.$(OBJEXT)
 	-rm -f src/core/sumwars-action.$(OBJEXT)
 	-rm -f src/core/sumwars-charconv.$(OBJEXT)
 	-rm -f src/core/sumwars-command.$(OBJEXT)
@@ -679,6 +695,9 @@ mostlyclean-compile:
 	-rm -f src/core/sumwars-minimap.$(OBJEXT)
 	-rm -f src/core/sumwars-monster.$(OBJEXT)
 	-rm -f src/core/sumwars-networkstruct.$(OBJEXT)
+	-rm -f src/core/sumwars-nlfgclientnetwork.$(OBJEXT)
+	-rm -f src/core/sumwars-nlfgnetworkpacket.$(OBJEXT)
+	-rm -f src/core/sumwars-nlfgservernetwork.$(OBJEXT)
 	-rm -f src/core/sumwars-objectfactory.$(OBJEXT)
 	-rm -f src/core/sumwars-objectloader.$(OBJEXT)
 	-rm -f src/core/sumwars-options.$(OBJEXT)
@@ -688,9 +707,6 @@ mostlyclean-compile:
 	-rm -f src/core/sumwars-playerbase.$(OBJEXT)
 	-rm -f src/core/sumwars-projectile.$(OBJEXT)
 	-rm -f src/core/sumwars-quest.$(OBJEXT)
-	-rm -f src/core/sumwars-rakclientnetwork.$(OBJEXT)
-	-rm -f src/core/sumwars-raknetworkpacket.$(OBJEXT)
-	-rm -f src/core/sumwars-rakservernetwork.$(OBJEXT)
 	-rm -f src/core/sumwars-random.$(OBJEXT)
 	-rm -f src/core/sumwars-region.$(OBJEXT)
 	-rm -f src/core/sumwars-scriptobject.$(OBJEXT)
@@ -743,6 +759,7 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
+@AMDEP_TRUE@@am__include@ @am__quote@./Dependencies/nlfg/$(DEPDIR)/sumwars-nlfg.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/core/$(DEPDIR)/sumwars-action.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/core/$(DEPDIR)/sumwars-charconv.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/core/$(DEPDIR)/sumwars-command.Po@am__quote@
@@ -771,6 +788,9 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@src/core/$(DEPDIR)/sumwars-minimap.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/core/$(DEPDIR)/sumwars-monster.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/core/$(DEPDIR)/sumwars-networkstruct.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@src/core/$(DEPDIR)/sumwars-nlfgclientnetwork.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@src/core/$(DEPDIR)/sumwars-nlfgnetworkpacket.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@src/core/$(DEPDIR)/sumwars-nlfgservernetwork.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/core/$(DEPDIR)/sumwars-objectfactory.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/core/$(DEPDIR)/sumwars-objectloader.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/core/$(DEPDIR)/sumwars-options.Po@am__quote@
@@ -780,9 +800,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@src/core/$(DEPDIR)/sumwars-playerbase.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/core/$(DEPDIR)/sumwars-projectile.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/core/$(DEPDIR)/sumwars-quest.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@src/core/$(DEPDIR)/sumwars-rakclientnetwork.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@src/core/$(DEPDIR)/sumwars-raknetworkpacket.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@src/core/$(DEPDIR)/sumwars-rakservernetwork.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/core/$(DEPDIR)/sumwars-random.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/core/$(DEPDIR)/sumwars-region.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/core/$(DEPDIR)/sumwars-scriptobject.Po@am__quote@
@@ -831,6 +848,36 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@src/tinyxml/$(DEPDIR)/sumwars-tinyxml.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/tinyxml/$(DEPDIR)/sumwars-tinyxmlerror.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/tinyxml/$(DEPDIR)/sumwars-tinyxmlparser.Po@am__quote@
+
+.c.o:
+@am__fastdepCC_TRUE@	depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.o$$||'`;\
+@am__fastdepCC_TRUE@	$(COMPILE) -MT $@ -MD -MP -MF $$depbase.Tpo -c -o $@ $< &&\
+@am__fastdepCC_TRUE@	$(am__mv) $$depbase.Tpo $$depbase.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(COMPILE) -c -o $@ $<
+
+.c.obj:
+@am__fastdepCC_TRUE@	depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.obj$$||'`;\
+@am__fastdepCC_TRUE@	$(COMPILE) -MT $@ -MD -MP -MF $$depbase.Tpo -c -o $@ `$(CYGPATH_W) '$<'` &&\
+@am__fastdepCC_TRUE@	$(am__mv) $$depbase.Tpo $$depbase.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(COMPILE) -c -o $@ `$(CYGPATH_W) '$<'`
+
+./Dependencies/nlfg/sumwars-nlfg.o: ./Dependencies/nlfg/nlfg.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(sumwars_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT ./Dependencies/nlfg/sumwars-nlfg.o -MD -MP -MF ./Dependencies/nlfg/$(DEPDIR)/sumwars-nlfg.Tpo -c -o ./Dependencies/nlfg/sumwars-nlfg.o `test -f './Dependencies/nlfg/nlfg.c' || echo '$(srcdir)/'`./Dependencies/nlfg/nlfg.c
+@am__fastdepCC_TRUE@	$(am__mv) ./Dependencies/nlfg/$(DEPDIR)/sumwars-nlfg.Tpo ./Dependencies/nlfg/$(DEPDIR)/sumwars-nlfg.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='./Dependencies/nlfg/nlfg.c' object='./Dependencies/nlfg/sumwars-nlfg.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(sumwars_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o ./Dependencies/nlfg/sumwars-nlfg.o `test -f './Dependencies/nlfg/nlfg.c' || echo '$(srcdir)/'`./Dependencies/nlfg/nlfg.c
+
+./Dependencies/nlfg/sumwars-nlfg.obj: ./Dependencies/nlfg/nlfg.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(sumwars_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT ./Dependencies/nlfg/sumwars-nlfg.obj -MD -MP -MF ./Dependencies/nlfg/$(DEPDIR)/sumwars-nlfg.Tpo -c -o ./Dependencies/nlfg/sumwars-nlfg.obj `if test -f './Dependencies/nlfg/nlfg.c'; then $(CYGPATH_W) './Dependencies/nlfg/nlfg.c'; else $(CYGPATH_W) '$(srcdir)/./Dependencies/nlfg/nlfg.c'; fi`
+@am__fastdepCC_TRUE@	$(am__mv) ./Dependencies/nlfg/$(DEPDIR)/sumwars-nlfg.Tpo ./Dependencies/nlfg/$(DEPDIR)/sumwars-nlfg.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='./Dependencies/nlfg/nlfg.c' object='./Dependencies/nlfg/sumwars-nlfg.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(sumwars_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o ./Dependencies/nlfg/sumwars-nlfg.obj `if test -f './Dependencies/nlfg/nlfg.c'; then $(CYGPATH_W) './Dependencies/nlfg/nlfg.c'; else $(CYGPATH_W) '$(srcdir)/./Dependencies/nlfg/nlfg.c'; fi`
 
 .cpp.o:
 @am__fastdepCXX_TRUE@	depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.o$$||'`;\
@@ -1002,47 +1049,47 @@ src/core/sumwars-servernetwork.obj: src/core/servernetwork.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(sumwars_CPPFLAGS) $(CPPFLAGS) $(sumwars_CXXFLAGS) $(CXXFLAGS) -c -o src/core/sumwars-servernetwork.obj `if test -f 'src/core/servernetwork.cpp'; then $(CYGPATH_W) 'src/core/servernetwork.cpp'; else $(CYGPATH_W) '$(srcdir)/src/core/servernetwork.cpp'; fi`
 
-src/core/sumwars-rakservernetwork.o: src/core/rakservernetwork.cpp
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(sumwars_CPPFLAGS) $(CPPFLAGS) $(sumwars_CXXFLAGS) $(CXXFLAGS) -MT src/core/sumwars-rakservernetwork.o -MD -MP -MF src/core/$(DEPDIR)/sumwars-rakservernetwork.Tpo -c -o src/core/sumwars-rakservernetwork.o `test -f 'src/core/rakservernetwork.cpp' || echo '$(srcdir)/'`src/core/rakservernetwork.cpp
-@am__fastdepCXX_TRUE@	$(am__mv) src/core/$(DEPDIR)/sumwars-rakservernetwork.Tpo src/core/$(DEPDIR)/sumwars-rakservernetwork.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='src/core/rakservernetwork.cpp' object='src/core/sumwars-rakservernetwork.o' libtool=no @AMDEPBACKSLASH@
+src/core/sumwars-nlfgservernetwork.o: src/core/nlfgservernetwork.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(sumwars_CPPFLAGS) $(CPPFLAGS) $(sumwars_CXXFLAGS) $(CXXFLAGS) -MT src/core/sumwars-nlfgservernetwork.o -MD -MP -MF src/core/$(DEPDIR)/sumwars-nlfgservernetwork.Tpo -c -o src/core/sumwars-nlfgservernetwork.o `test -f 'src/core/nlfgservernetwork.cpp' || echo '$(srcdir)/'`src/core/nlfgservernetwork.cpp
+@am__fastdepCXX_TRUE@	$(am__mv) src/core/$(DEPDIR)/sumwars-nlfgservernetwork.Tpo src/core/$(DEPDIR)/sumwars-nlfgservernetwork.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='src/core/nlfgservernetwork.cpp' object='src/core/sumwars-nlfgservernetwork.o' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(sumwars_CPPFLAGS) $(CPPFLAGS) $(sumwars_CXXFLAGS) $(CXXFLAGS) -c -o src/core/sumwars-rakservernetwork.o `test -f 'src/core/rakservernetwork.cpp' || echo '$(srcdir)/'`src/core/rakservernetwork.cpp
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(sumwars_CPPFLAGS) $(CPPFLAGS) $(sumwars_CXXFLAGS) $(CXXFLAGS) -c -o src/core/sumwars-nlfgservernetwork.o `test -f 'src/core/nlfgservernetwork.cpp' || echo '$(srcdir)/'`src/core/nlfgservernetwork.cpp
 
-src/core/sumwars-rakservernetwork.obj: src/core/rakservernetwork.cpp
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(sumwars_CPPFLAGS) $(CPPFLAGS) $(sumwars_CXXFLAGS) $(CXXFLAGS) -MT src/core/sumwars-rakservernetwork.obj -MD -MP -MF src/core/$(DEPDIR)/sumwars-rakservernetwork.Tpo -c -o src/core/sumwars-rakservernetwork.obj `if test -f 'src/core/rakservernetwork.cpp'; then $(CYGPATH_W) 'src/core/rakservernetwork.cpp'; else $(CYGPATH_W) '$(srcdir)/src/core/rakservernetwork.cpp'; fi`
-@am__fastdepCXX_TRUE@	$(am__mv) src/core/$(DEPDIR)/sumwars-rakservernetwork.Tpo src/core/$(DEPDIR)/sumwars-rakservernetwork.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='src/core/rakservernetwork.cpp' object='src/core/sumwars-rakservernetwork.obj' libtool=no @AMDEPBACKSLASH@
+src/core/sumwars-nlfgservernetwork.obj: src/core/nlfgservernetwork.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(sumwars_CPPFLAGS) $(CPPFLAGS) $(sumwars_CXXFLAGS) $(CXXFLAGS) -MT src/core/sumwars-nlfgservernetwork.obj -MD -MP -MF src/core/$(DEPDIR)/sumwars-nlfgservernetwork.Tpo -c -o src/core/sumwars-nlfgservernetwork.obj `if test -f 'src/core/nlfgservernetwork.cpp'; then $(CYGPATH_W) 'src/core/nlfgservernetwork.cpp'; else $(CYGPATH_W) '$(srcdir)/src/core/nlfgservernetwork.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(am__mv) src/core/$(DEPDIR)/sumwars-nlfgservernetwork.Tpo src/core/$(DEPDIR)/sumwars-nlfgservernetwork.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='src/core/nlfgservernetwork.cpp' object='src/core/sumwars-nlfgservernetwork.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(sumwars_CPPFLAGS) $(CPPFLAGS) $(sumwars_CXXFLAGS) $(CXXFLAGS) -c -o src/core/sumwars-rakservernetwork.obj `if test -f 'src/core/rakservernetwork.cpp'; then $(CYGPATH_W) 'src/core/rakservernetwork.cpp'; else $(CYGPATH_W) '$(srcdir)/src/core/rakservernetwork.cpp'; fi`
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(sumwars_CPPFLAGS) $(CPPFLAGS) $(sumwars_CXXFLAGS) $(CXXFLAGS) -c -o src/core/sumwars-nlfgservernetwork.obj `if test -f 'src/core/nlfgservernetwork.cpp'; then $(CYGPATH_W) 'src/core/nlfgservernetwork.cpp'; else $(CYGPATH_W) '$(srcdir)/src/core/nlfgservernetwork.cpp'; fi`
 
-src/core/sumwars-rakclientnetwork.o: src/core/rakclientnetwork.cpp
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(sumwars_CPPFLAGS) $(CPPFLAGS) $(sumwars_CXXFLAGS) $(CXXFLAGS) -MT src/core/sumwars-rakclientnetwork.o -MD -MP -MF src/core/$(DEPDIR)/sumwars-rakclientnetwork.Tpo -c -o src/core/sumwars-rakclientnetwork.o `test -f 'src/core/rakclientnetwork.cpp' || echo '$(srcdir)/'`src/core/rakclientnetwork.cpp
-@am__fastdepCXX_TRUE@	$(am__mv) src/core/$(DEPDIR)/sumwars-rakclientnetwork.Tpo src/core/$(DEPDIR)/sumwars-rakclientnetwork.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='src/core/rakclientnetwork.cpp' object='src/core/sumwars-rakclientnetwork.o' libtool=no @AMDEPBACKSLASH@
+src/core/sumwars-nlfgclientnetwork.o: src/core/nlfgclientnetwork.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(sumwars_CPPFLAGS) $(CPPFLAGS) $(sumwars_CXXFLAGS) $(CXXFLAGS) -MT src/core/sumwars-nlfgclientnetwork.o -MD -MP -MF src/core/$(DEPDIR)/sumwars-nlfgclientnetwork.Tpo -c -o src/core/sumwars-nlfgclientnetwork.o `test -f 'src/core/nlfgclientnetwork.cpp' || echo '$(srcdir)/'`src/core/nlfgclientnetwork.cpp
+@am__fastdepCXX_TRUE@	$(am__mv) src/core/$(DEPDIR)/sumwars-nlfgclientnetwork.Tpo src/core/$(DEPDIR)/sumwars-nlfgclientnetwork.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='src/core/nlfgclientnetwork.cpp' object='src/core/sumwars-nlfgclientnetwork.o' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(sumwars_CPPFLAGS) $(CPPFLAGS) $(sumwars_CXXFLAGS) $(CXXFLAGS) -c -o src/core/sumwars-rakclientnetwork.o `test -f 'src/core/rakclientnetwork.cpp' || echo '$(srcdir)/'`src/core/rakclientnetwork.cpp
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(sumwars_CPPFLAGS) $(CPPFLAGS) $(sumwars_CXXFLAGS) $(CXXFLAGS) -c -o src/core/sumwars-nlfgclientnetwork.o `test -f 'src/core/nlfgclientnetwork.cpp' || echo '$(srcdir)/'`src/core/nlfgclientnetwork.cpp
 
-src/core/sumwars-rakclientnetwork.obj: src/core/rakclientnetwork.cpp
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(sumwars_CPPFLAGS) $(CPPFLAGS) $(sumwars_CXXFLAGS) $(CXXFLAGS) -MT src/core/sumwars-rakclientnetwork.obj -MD -MP -MF src/core/$(DEPDIR)/sumwars-rakclientnetwork.Tpo -c -o src/core/sumwars-rakclientnetwork.obj `if test -f 'src/core/rakclientnetwork.cpp'; then $(CYGPATH_W) 'src/core/rakclientnetwork.cpp'; else $(CYGPATH_W) '$(srcdir)/src/core/rakclientnetwork.cpp'; fi`
-@am__fastdepCXX_TRUE@	$(am__mv) src/core/$(DEPDIR)/sumwars-rakclientnetwork.Tpo src/core/$(DEPDIR)/sumwars-rakclientnetwork.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='src/core/rakclientnetwork.cpp' object='src/core/sumwars-rakclientnetwork.obj' libtool=no @AMDEPBACKSLASH@
+src/core/sumwars-nlfgclientnetwork.obj: src/core/nlfgclientnetwork.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(sumwars_CPPFLAGS) $(CPPFLAGS) $(sumwars_CXXFLAGS) $(CXXFLAGS) -MT src/core/sumwars-nlfgclientnetwork.obj -MD -MP -MF src/core/$(DEPDIR)/sumwars-nlfgclientnetwork.Tpo -c -o src/core/sumwars-nlfgclientnetwork.obj `if test -f 'src/core/nlfgclientnetwork.cpp'; then $(CYGPATH_W) 'src/core/nlfgclientnetwork.cpp'; else $(CYGPATH_W) '$(srcdir)/src/core/nlfgclientnetwork.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(am__mv) src/core/$(DEPDIR)/sumwars-nlfgclientnetwork.Tpo src/core/$(DEPDIR)/sumwars-nlfgclientnetwork.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='src/core/nlfgclientnetwork.cpp' object='src/core/sumwars-nlfgclientnetwork.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(sumwars_CPPFLAGS) $(CPPFLAGS) $(sumwars_CXXFLAGS) $(CXXFLAGS) -c -o src/core/sumwars-rakclientnetwork.obj `if test -f 'src/core/rakclientnetwork.cpp'; then $(CYGPATH_W) 'src/core/rakclientnetwork.cpp'; else $(CYGPATH_W) '$(srcdir)/src/core/rakclientnetwork.cpp'; fi`
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(sumwars_CPPFLAGS) $(CPPFLAGS) $(sumwars_CXXFLAGS) $(CXXFLAGS) -c -o src/core/sumwars-nlfgclientnetwork.obj `if test -f 'src/core/nlfgclientnetwork.cpp'; then $(CYGPATH_W) 'src/core/nlfgclientnetwork.cpp'; else $(CYGPATH_W) '$(srcdir)/src/core/nlfgclientnetwork.cpp'; fi`
 
-src/core/sumwars-raknetworkpacket.o: src/core/raknetworkpacket.cpp
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(sumwars_CPPFLAGS) $(CPPFLAGS) $(sumwars_CXXFLAGS) $(CXXFLAGS) -MT src/core/sumwars-raknetworkpacket.o -MD -MP -MF src/core/$(DEPDIR)/sumwars-raknetworkpacket.Tpo -c -o src/core/sumwars-raknetworkpacket.o `test -f 'src/core/raknetworkpacket.cpp' || echo '$(srcdir)/'`src/core/raknetworkpacket.cpp
-@am__fastdepCXX_TRUE@	$(am__mv) src/core/$(DEPDIR)/sumwars-raknetworkpacket.Tpo src/core/$(DEPDIR)/sumwars-raknetworkpacket.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='src/core/raknetworkpacket.cpp' object='src/core/sumwars-raknetworkpacket.o' libtool=no @AMDEPBACKSLASH@
+src/core/sumwars-nlfgnetworkpacket.o: src/core/nlfgnetworkpacket.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(sumwars_CPPFLAGS) $(CPPFLAGS) $(sumwars_CXXFLAGS) $(CXXFLAGS) -MT src/core/sumwars-nlfgnetworkpacket.o -MD -MP -MF src/core/$(DEPDIR)/sumwars-nlfgnetworkpacket.Tpo -c -o src/core/sumwars-nlfgnetworkpacket.o `test -f 'src/core/nlfgnetworkpacket.cpp' || echo '$(srcdir)/'`src/core/nlfgnetworkpacket.cpp
+@am__fastdepCXX_TRUE@	$(am__mv) src/core/$(DEPDIR)/sumwars-nlfgnetworkpacket.Tpo src/core/$(DEPDIR)/sumwars-nlfgnetworkpacket.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='src/core/nlfgnetworkpacket.cpp' object='src/core/sumwars-nlfgnetworkpacket.o' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(sumwars_CPPFLAGS) $(CPPFLAGS) $(sumwars_CXXFLAGS) $(CXXFLAGS) -c -o src/core/sumwars-raknetworkpacket.o `test -f 'src/core/raknetworkpacket.cpp' || echo '$(srcdir)/'`src/core/raknetworkpacket.cpp
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(sumwars_CPPFLAGS) $(CPPFLAGS) $(sumwars_CXXFLAGS) $(CXXFLAGS) -c -o src/core/sumwars-nlfgnetworkpacket.o `test -f 'src/core/nlfgnetworkpacket.cpp' || echo '$(srcdir)/'`src/core/nlfgnetworkpacket.cpp
 
-src/core/sumwars-raknetworkpacket.obj: src/core/raknetworkpacket.cpp
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(sumwars_CPPFLAGS) $(CPPFLAGS) $(sumwars_CXXFLAGS) $(CXXFLAGS) -MT src/core/sumwars-raknetworkpacket.obj -MD -MP -MF src/core/$(DEPDIR)/sumwars-raknetworkpacket.Tpo -c -o src/core/sumwars-raknetworkpacket.obj `if test -f 'src/core/raknetworkpacket.cpp'; then $(CYGPATH_W) 'src/core/raknetworkpacket.cpp'; else $(CYGPATH_W) '$(srcdir)/src/core/raknetworkpacket.cpp'; fi`
-@am__fastdepCXX_TRUE@	$(am__mv) src/core/$(DEPDIR)/sumwars-raknetworkpacket.Tpo src/core/$(DEPDIR)/sumwars-raknetworkpacket.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='src/core/raknetworkpacket.cpp' object='src/core/sumwars-raknetworkpacket.obj' libtool=no @AMDEPBACKSLASH@
+src/core/sumwars-nlfgnetworkpacket.obj: src/core/nlfgnetworkpacket.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(sumwars_CPPFLAGS) $(CPPFLAGS) $(sumwars_CXXFLAGS) $(CXXFLAGS) -MT src/core/sumwars-nlfgnetworkpacket.obj -MD -MP -MF src/core/$(DEPDIR)/sumwars-nlfgnetworkpacket.Tpo -c -o src/core/sumwars-nlfgnetworkpacket.obj `if test -f 'src/core/nlfgnetworkpacket.cpp'; then $(CYGPATH_W) 'src/core/nlfgnetworkpacket.cpp'; else $(CYGPATH_W) '$(srcdir)/src/core/nlfgnetworkpacket.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(am__mv) src/core/$(DEPDIR)/sumwars-nlfgnetworkpacket.Tpo src/core/$(DEPDIR)/sumwars-nlfgnetworkpacket.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='src/core/nlfgnetworkpacket.cpp' object='src/core/sumwars-nlfgnetworkpacket.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(sumwars_CPPFLAGS) $(CPPFLAGS) $(sumwars_CXXFLAGS) $(CXXFLAGS) -c -o src/core/sumwars-raknetworkpacket.obj `if test -f 'src/core/raknetworkpacket.cpp'; then $(CYGPATH_W) 'src/core/raknetworkpacket.cpp'; else $(CYGPATH_W) '$(srcdir)/src/core/raknetworkpacket.cpp'; fi`
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(sumwars_CPPFLAGS) $(CPPFLAGS) $(sumwars_CXXFLAGS) $(CXXFLAGS) -c -o src/core/sumwars-nlfgnetworkpacket.obj `if test -f 'src/core/nlfgnetworkpacket.cpp'; then $(CYGPATH_W) 'src/core/nlfgnetworkpacket.cpp'; else $(CYGPATH_W) '$(srcdir)/src/core/nlfgnetworkpacket.cpp'; fi`
 
 src/core/sumwars-worldobject.o: src/core/worldobject.cpp
 @am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(sumwars_CPPFLAGS) $(CPPFLAGS) $(sumwars_CXXFLAGS) $(CXXFLAGS) -MT src/core/sumwars-worldobject.o -MD -MP -MF src/core/$(DEPDIR)/sumwars-worldobject.Tpo -c -o src/core/sumwars-worldobject.o `test -f 'src/core/worldobject.cpp' || echo '$(srcdir)/'`src/core/worldobject.cpp
@@ -2307,6 +2354,8 @@ clean-generic:
 distclean-generic:
 	-test -z "$(CONFIG_CLEAN_FILES)" || rm -f $(CONFIG_CLEAN_FILES)
 	-test . = "$(srcdir)" || test -z "$(CONFIG_CLEAN_VPATH_FILES)" || rm -f $(CONFIG_CLEAN_VPATH_FILES)
+	-rm -f Dependencies/nlfg/$(DEPDIR)/$(am__dirstamp)
+	-rm -f Dependencies/nlfg/$(am__dirstamp)
 	-rm -f src/core/$(DEPDIR)/$(am__dirstamp)
 	-rm -f src/core/$(am__dirstamp)
 	-rm -f src/gui/$(DEPDIR)/$(am__dirstamp)
@@ -2323,7 +2372,7 @@ clean-am: clean-binPROGRAMS clean-generic mostlyclean-am
 
 distclean: distclean-am
 	-rm -f $(am__CONFIG_DISTCLEAN_FILES)
-	-rm -rf src/core/$(DEPDIR) src/gui/$(DEPDIR) src/tinyxml/$(DEPDIR)
+	-rm -rf ./Dependencies/nlfg/$(DEPDIR) src/core/$(DEPDIR) src/gui/$(DEPDIR) src/tinyxml/$(DEPDIR)
 	-rm -f Makefile
 distclean-am: clean-am distclean-compile distclean-generic \
 	distclean-hdr distclean-tags
@@ -2371,7 +2420,7 @@ installcheck-am:
 maintainer-clean: maintainer-clean-am
 	-rm -f $(am__CONFIG_DISTCLEAN_FILES)
 	-rm -rf $(top_srcdir)/autom4te.cache
-	-rm -rf src/core/$(DEPDIR) src/gui/$(DEPDIR) src/tinyxml/$(DEPDIR)
+	-rm -rf ./Dependencies/nlfg/$(DEPDIR) src/core/$(DEPDIR) src/gui/$(DEPDIR) src/tinyxml/$(DEPDIR)
 	-rm -f Makefile
 maintainer-clean-am: distclean-am maintainer-clean-generic
 

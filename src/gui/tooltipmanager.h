@@ -4,7 +4,7 @@
 #include <list>
 #include <map>
 
-#include "CEGUI.h"
+#include "CEGUI/CEGUI.h"
 #include "OgreSingleton.h"
 
 class Tooltip

@@ -15,7 +15,7 @@
 Ogre::String userPath()
 {
     Ogre::String path = PHYSFS_getUserDir();
-    path.append("Library/Application\\ Support/Sumwars");
+    path.append("Library/Application Support/Sumwars");
     return path;
 }
 #endif
@@ -56,9 +56,9 @@ bool Application::init(char *argv)
         printf("setWriteDir failed: %s\n", PHYSFS_getLastError());
         return false;
     }
-    if (!PHYSFS_exists("Library/Application\\ Support/Sumwars"))
+    if (!PHYSFS_exists("Library/Application Support/Sumwars"))
     {
-        if (PHYSFS_mkdir("Library/Application\\ Support/Sumwars") == 0)
+        if (PHYSFS_mkdir("Library/Application Support/Sumwars") == 0)
         {
             printf("mkdir failed: %s\n", PHYSFS_getLastError());
             return false;

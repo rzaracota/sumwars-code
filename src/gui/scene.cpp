@@ -1,11 +1,11 @@
 #include "scene.h"
 
-#include "RendererModules/Ogre/CEGUIOgreRenderer.h"
-#include "RendererModules/Ogre/CEGUIOgreTexture.h"
-#include "RendererModules/Ogre/CEGUIOgreResourceProvider.h"
+#include "CEGUI/RendererModules/Ogre/CEGUIOgreRenderer.h"
+#include "CEGUI/RendererModules/Ogre/CEGUIOgreTexture.h"
+#include "CEGUI/RendererModules/Ogre/CEGUIOgreResourceProvider.h"
 #include <OgrePanelOverlayElement.h>
 
-#include "CEGUI.h"
+#include "CEGUI/CEGUI.h"
 
 #include "graphicmanager.h"
 

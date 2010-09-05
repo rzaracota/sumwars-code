@@ -91,12 +91,12 @@ void Document::startGame(bool server)
 	int port = Options::getInstance()->getPort();
 	int max_players = Options::getInstance()->getMaxNumberPlayers();
 	std::string host = Options::getInstance()->getServerHost();
-	
+
 	if (m_single_player)
 	{
 		max_players = 1;
 	}
-	
+
 	World::createWorld(server,port, true,max_players);
 
 	if (server)
@@ -202,11 +202,17 @@ void Document::loadSavegame()
 		std::stringstream sstream;
 		StdStreamConv cv2(&sstream);
 
+		Timer t;
+		t.start();
+		while (t.getTime() < 200)
+		{
+		}
+
 		m_temp_player->toSavegame(&cv2);
-		DEBUGX("sending savegame");
+		DEBUG("sending savegame");
 		World::getWorld()->handleSavegame(&cv2);
 		DEBUGX("sent savegame");
-		
+
 		// read shortkeys from the savegame
 		m_ability_shortkey_map.clear();
 		short key,dest;
@@ -283,7 +289,7 @@ void Document::createNewCharacter(std::string name)
 		m_save_file = "./save/";
 #else
         std::string path = PHYSFS_getUserDir();
-        path.append("Library/Application\\ Support/Sumwars/");
+        path.append("Library/Application Support/Sumwars/");
         m_save_file = path;
 #endif
 		m_save_file += name;
@@ -463,7 +469,7 @@ void Document::onLeftMouseButtonClick(Vector pos)
 	Player* pl = static_cast<Player*> (World::getWorld()->getLocalPlayer());
 	if (pl==0)
 		return;
-	
+
 	// Dialog is open, each klick is interpreted as *skip this text*
 	if (pl->getDialogueId() != 0)
 	{
@@ -1224,7 +1230,7 @@ bool Document::onKeyPress(KeyCode key)
 	// determine action mapped to the key
 	ShortkeyDestination dest;
 	dest = Options::getInstance()->getMappedDestination(key);
-	
+
 	if (m_gui_state.m_shown_windows & SKILLTREE && dest==0)
 	{
 		// Skilltree is displayed
@@ -1233,7 +1239,7 @@ bool Document::onKeyPress(KeyCode key)
 		Action::ActionType act = getGUIState()->m_hover_ability;
 		if (act != "noaction" && getLocalPlayer()->checkAbility(act))
 		{
-			// Action exists and is available 
+			// Action exists and is available
 			Action::ActionInfo* aci = Action::getActionInfo(act);
 
 			// determine if the shortkey should map the ability for left or right mouse button
@@ -1276,7 +1282,7 @@ bool Document::onKeyPress(KeyCode key)
 
 	}
 
-	
+
 	// if key was not mapped to a shortkey
 	// check ability shortkeys
 	if (dest == 0)
@@ -1285,7 +1291,7 @@ bool Document::onKeyPress(KeyCode key)
 		if (it != m_ability_shortkey_map.end())
 			dest = it->second;
 	}
-	
+
 
 	// execute the action, if any mapping was found
 	if (dest != 0)
@@ -1332,7 +1338,7 @@ bool Document::onKeyPress(KeyCode key)
 			if (player != 0)
 			{
 				std::map<int,LearnableAbility> &ablts = player->getLearnableAbilities();
-	
+
 				if (ablts.count(dest-USE_SKILL_LEFT) >0)
 				{
 					setLeftAction(ablts[dest-USE_SKILL_LEFT].m_type);
@@ -1623,7 +1629,7 @@ void Document::updateContent(float time)
 				command.m_button=LEFT_SHIFT_MOUSE_BUTTON;
 			}
 			updateClickedObjectId();
-			
+
 			command.m_goal = m_gui_state.m_clicked;
 			command.m_id = m_gui_state.m_clicked_object_id;
 			command.m_action = player->getLeftAction();
@@ -1670,7 +1676,7 @@ void Document::updateClickedObjectId()
 	Region* reg = player->getRegion();
 	if (reg == 0)
 		return;
-	
+
 	// select new target if the old one is gone or inactive
 	if (m_gui_state.m_clicked_object_id != 0 && m_gui_state.m_cursor_object_id != 0)
 	{
@@ -1697,10 +1703,10 @@ void Document::writeSavegame()
 	CharConv* save;
 
 
-	
+
 	std::stringstream* pstr = new std::stringstream;
 	save = new StdStreamConv(pstr);
-	
+
 	getLocalPlayer()->toSavegame(save);
 
 	// Shortkeys hinzufuegen
@@ -1743,10 +1749,10 @@ void* Document::writeSaveFile(void* doc_data_ptr)
 	char* bp=0;
 	int len=0;
 	char bin ='0';
-	
+
 	// binary savegames are not used anymore
-	
-	
+
+
 	// Daten byteweise in Datei schreiben
 	std::ofstream file;
 	if (bin =='1')
@@ -1792,7 +1798,7 @@ void Document::saveSettings()
 {
 #ifdef __APPLE__
     std::string path = PHYSFS_getUserDir();
-    path.append("/Library/Application\\ Support/Sumwars/");
+    path.append("/Library/Application Support/Sumwars/");
     Options::getInstance()->writeToFile(path + "options.xml");
 #else
 	Options::getInstance()->writeToFile("options.xml");
@@ -1805,7 +1811,7 @@ void Document::loadSettings()
     std::string path = PHYSFS_getUserDir();
     path.append("/Library/Application Support/Sumwars/");
     Options::getInstance()->readFromFile(path + "options.xml");
-#else    
+#else
 	Options::getInstance()->readFromFile("options.xml");
 #endif
 }

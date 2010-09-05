@@ -57,22 +57,27 @@
 			<Add directory="$(OGRE_HOME)\samples\refapp\include" />
 			<Add directory=".\core" />
 			<Add directory=".\gui" />
+			<Add directory="..\Dependencies\nlfg" />
 		</Compiler>
 		<Linker>
-			<Add library="libRakNet.a" />
+			<Add library="libenet.a" />
 			<Add library="libwsock32.a" />
 			<Add library="alut" />
 			<Add library="OpenAL32" />
 			<Add library="lua51" />
-			<Add library="libintl" />
 			<Add library="ogg" />
 			<Add library="vorbis" />
 			<Add library="vorbisfile" />
 			<Add library="libpthreadGC2.a" />
+			<Add library="..\..\..\..\..\MinGW\lib\libintl.lib" />
 			<Add directory="$(OGRE_HOME)\lib" />
 			<Add directory="$(OGRE_HOME)\bin\Debug" />
 			<Add directory="$(OGRE_HOME)\bin\Release" />
 		</Linker>
+		<Unit filename="..\Dependencies\nlfg\nlfg.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\Dependencies\nlfg\nlfg.h" />
 		<Unit filename="core\action.cpp" />
 		<Unit filename="core\action.h" />
 		<Unit filename="core\charconv.cpp" />
@@ -135,6 +140,12 @@
 		<Unit filename="core\network.h" />
 		<Unit filename="core\networkstruct.cpp" />
 		<Unit filename="core\networkstruct.h" />
+		<Unit filename="core\nlfgclientnetwork.cpp" />
+		<Unit filename="core\nlfgclientnetwork.h" />
+		<Unit filename="core\nlfgnetworkpacket.cpp" />
+		<Unit filename="core\nlfgnetworkpacket.h" />
+		<Unit filename="core\nlfgservernetwork.cpp" />
+		<Unit filename="core\nlfgservernetwork.h" />
 		<Unit filename="core\objectfactory.cpp" />
 		<Unit filename="core\objectfactory.h" />
 		<Unit filename="core\objectloader.cpp" />
@@ -153,12 +164,6 @@
 		<Unit filename="core\projectile.h" />
 		<Unit filename="core\quest.cpp" />
 		<Unit filename="core\quest.h" />
-		<Unit filename="core\rakclientnetwork.cpp" />
-		<Unit filename="core\rakclientnetwork.h" />
-		<Unit filename="core\raknetworkpacket.cpp" />
-		<Unit filename="core\raknetworkpacket.h" />
-		<Unit filename="core\rakservernetwork.cpp" />
-		<Unit filename="core\rakservernetwork.h" />
 		<Unit filename="core\random.cpp" />
 		<Unit filename="core\random.h" />
 		<Unit filename="core\region.cpp" />
