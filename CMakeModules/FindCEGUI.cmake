@@ -34,8 +34,9 @@ INCLUDE(HandleLibraryTypes)
 
 FIND_PATH(CEGUI_INCLUDE_DIR CEGUI.h
   PATHS $ENV{CEGUIDIR}
-  PATH_SUFFIXES include cegui/include include/CEGUI CEGUI.framework/Headers
+  PATH_SUFFIXES /include /cegui/include /include/CEGUI CEGUI.framework/Headers
 )
+
 FIND_LIBRARY(CEGUI_LIBRARY_OPTIMIZED
   NAMES CEGUIBase CEGUI
   PATHS $ENV{CEGUIDIR}

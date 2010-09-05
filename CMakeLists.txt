@@ -64,30 +64,41 @@ FIND_PACKAGE(Lua51 REQUIRED)
 FIND_PACKAGE(CEGUI REQUIRED)
 FIND_PACKAGE(CEGUIOGRE REQUIRED)
 FIND_PACKAGE(OpenAL REQUIRED)
-FIND_PACKAGE(Enet REQUIRED)
-FIND_PACKAGE(Pthreads REQUIRED)
 FIND_PACKAGE(ALUT REQUIRED)
 FIND_PACKAGE(Ogg REQUIRED)
 FIND_PACKAGE(Vorbis REQUIRED)
+IF(!WIN32)
+	FIND_PACKAGE(Pthreads REQUIRED)
+ENDIF()
 
+INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/enet/include)
 INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/tinyxml)
 INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/core)
 INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/gui)
 INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/gui/debugpanel)
-INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/Dependencies/nlfg )
 INCLUDE_DIRECTORIES(${OGRE_INCLUDE_DIRS})
 INCLUDE_DIRECTORIES(${OIS_INCLUDE_DIRS})
 INCLUDE_DIRECTORIES(${LUA_INCLUDE_DIR})
-INCLUDE_DIRECTORIES(${CEGUI_INCLUDE_DIRS})
+INCLUDE_DIRECTORIES(${CEGUI_INCLUDE_DIR})
 INCLUDE_DIRECTORIES(${CEGUIOGRE_INCLUDE_DIRS})
 INCLUDE_DIRECTORIES(${OPENAL_INCLUDE_DIR})
-INCLUDE_DIRECTORIES(${ALUT_INCLUDES})
-INCLUDE_DIRECTORIES(${ENET_INCLUDES})
+INCLUDE_DIRECTORIES(${ALUT_INCLUDE_DIR})
+INCLUDE_DIRECTORIES(${OGG_INCLUDE_DIR})
+INCLUDE_DIRECTORIES(${VORBIS_INCLUDE_DIR})
+
+
+
+MESSAGE(${CEGUIOGRE_INCLUDE_DIRS})
+
+IF(!WIN32)
 INCLUDE_DIRECTORIES(${PTHREADS_INCLUDE_DIR})
+ENDIF()
+
 IF(WIN32)
 	INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/boost_1_42/)
 	INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/gettext/include/)
 	INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/pthreads/)
+	INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/other/) #this is for stdint.h wich isn't included with visual studio until version 2010
 	ADD_DEFINITIONS( "/W3 /D_CRT_SECURE_NO_WARNINGS /wd4800 /wd4244 /wd4305 /nologo" )
 	MESSAGE("WARNING: Compiler warnings 4800, 4244 and 4305 disabled!")
 ENDIF()
@@ -96,7 +107,7 @@ ENDIF()
 
 
 SET(SRCS
-  ./Dependencies/nlfg/nlfg.c
+  ./src/core/nlfg.cpp
   ./src/core/worldobject.cpp
   ./src/core/itemloader.cpp
   ./src/core/itemlist.cpp
@@ -194,6 +205,15 @@ SET(SRCS
   ./src/tinyxml/tinyxmlerror.cpp
   ./src/tinyxml/tinyxml.cpp
   ./src/tinyxml/tinyxmlparser.cpp
+  ./src/enet/callbacks.c
+  ./src/enet/compress.c
+  ./src/enet/host.c
+  ./src/enet/list.c
+  ./src/enet/packet.c
+  ./src/enet/peer.c
+  ./src/enet/protocol.c
+  ./src/enet/unix.c
+  ./src/enet/win32.c
 )
  
 
@@ -214,17 +234,21 @@ SET(LINK_LIBS
 	${Enet_LIBRARY}
 )
 
+MESSAGE(${LINK_LIBS})
+
 IF(WIN32)
 	SET(LINK_LIBS
+		ws2_32.lib
+		winmm.lib
 		${LINK_LIBS}	
 		${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/gettext/libgettextlib.lib
 		${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/gettext/libintl.lib
 		${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/pthreads/pthreadVC2.lib
-		#${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/boost_1_42/lib/libboost_thread-vc90-mt-gd-1_42.lib
-		#${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/boost_1_42/lib/libboost_date_time-vc90-mt-gd-1_42.lib
+		${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/boost_1_42/lib/libboost_thread-vc90-mt-gd-1_42.lib
+		${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/boost_1_42/lib/libboost_date_time-vc90-mt-gd-1_42.lib
 		${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/boost_1_42/lib/libboost_thread-vc90-mt-1_42.lib
 		${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/boost_1_42/lib/libboost_date_time-vc90-mt-1_42.lib
-		ws2_32.lib )
+		)
 ENDIF()
 
 TARGET_LINK_LIBRARIES(sumwars ${LINK_LIBS})
