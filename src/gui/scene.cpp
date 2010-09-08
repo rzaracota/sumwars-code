@@ -748,15 +748,6 @@ void Scene::createScene()
 		//DEBUG("camera up %f %f %f",up.x, up.y, up.z);
 
 
-
-		m_scene_manager->setAmbientLight(Ogre::ColourValue(1.0,1.0,1.0));
-		target->update();
-
-		colour= region->getLight().getAmbientLight();
-		m_scene_manager->setAmbientLight(Ogre::ColourValue(colour[0], colour[1], colour[2]));
-		DEBUGX("ambient light %f %f %f",colour[0], colour[1], colour[2]);
-		//m_scene_manager->setAmbientLight(Ogre::ColourValue(0.0,0.0,0.0));
-
 		// Boden erstellen
 		if (region->getGroundMaterial() != "")
 		{
@@ -790,6 +781,14 @@ void Scene::createScene()
 				}
 			}
 		}
+
+		m_scene_manager->setAmbientLight(Ogre::ColourValue(0.4,0.4,0.4));
+		target->update();
+
+		colour= region->getLight().getAmbientLight();
+		m_scene_manager->setAmbientLight(Ogre::ColourValue(colour[0], colour[1], colour[2]));
+		DEBUGX("ambient light %f %f %f",colour[0], colour[1], colour[2]);
+		//m_scene_manager->setAmbientLight(Ogre::ColourValue(0.0,0.0,0.0));
 
 		// Schatten
 		//m_scene_manager->setAmbientLight(Ogre::ColourValue(0.0,0.0,0.0));
