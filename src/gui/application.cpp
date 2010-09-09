@@ -9,6 +9,8 @@
 #include "luascripttab.h"
 #include "textfileeditwindow.h"
 
+#include "OgreConfigFile.h"
+
 #ifdef __APPLE__
 #include <physfs.h>
 // Return the path to where files should be stored on mac
@@ -375,55 +377,42 @@ bool Application::setupResources()
 #else
     path = ".";
 #endif
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/resources/models", "FileSystem", "General");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/resources/materials/scripts", "FileSystem", "General");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/resources/materials/programs", "FileSystem", "General");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/resources/materials/textures", "FileSystem", "General");
 	
-	if (OGRE_VERSION >= ((1 << 16) | (6 << 8)))
+	
+	
+	Ogre::ConfigFile cf;
+	cf.load("resources.cfg");
+
+
+	// Go through all sections & settings in the file
+	Ogre::ConfigFile::SectionIterator seci = cf.getSectionIterator();
+ 
+	Ogre::String secName, typeName, archName;
+	while (seci.hasMoreElements())
 	{
-		Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/resources/particle/ogre_1_6", "FileSystem", "General");
-	}
-	else
-	{
-		Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/resources/particle", "FileSystem", "General");
+		secName = seci.peekNextKey();
+		Ogre::ConfigFile::SettingsMultiMap *settings = seci.getNext();
+		Ogre::ConfigFile::SettingsMultiMap::iterator i;
+		for (i = settings->begin(); i != settings->end(); ++i)
+		{
+			typeName = i->first;
+			archName = i->second;
+			Ogre::ResourceGroupManager::getSingleton().addResourceLocation(
+				path + archName, typeName, secName);
+			
+			std::cout << path + archName << " - " << typeName << " - " << secName << std::endl;
+		}
 	}
 	
-	// CEGUI Resourcen laden
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/resources/gui/configs", "FileSystem", "GUI");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/resources/gui/fonts", "FileSystem", "GUI");
+	
 
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/resources/gui/imagesets", "FileSystem", "GUI");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/resources/emotionsets", "FileSystem", "emotionsets");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/resources/gui/layouts", "FileSystem", "GUI");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/resources/gui/looknfeel", "FileSystem", "GUI");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/resources/gui/schemes", "FileSystem", "GUI");
-
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/resources/gui/schemes", "FileSystem", "GUI");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/resources/itempictures", "FileSystem", "itempictures");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/resources/sound", "FileSystem", "sound");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/resources/music", "FileSystem", "music");
-
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/data/world", "FileSystem", "world");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/data/npc", "FileSystem", "npc");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/data/quests", "FileSystem", "quests");
 #ifndef __APPLE__
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("./save", "FileSystem", "Savegame");
 #else
     Ogre::String homePath = userPath();
     Ogre::ResourceGroupManager::getSingleton().addResourceLocation(homePath, "FileSystem", "Savegame");
 #endif
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/data/items", "FileSystem", "items");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/data/abilities", "FileSystem", "abilities");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/data/monsters", "FileSystem", "monsters");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/data/playerclasses", "FileSystem", "playerclasses");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/data/projectiles", "FileSystem", "projectiles");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/data/objects", "FileSystem", "objects");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/data/obj_templates", "FileSystem", "obj_templates");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/data/object_groups", "FileSystem", "object_groups");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/data/renderinfo", "FileSystem", "renderinfo");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/data/lua", "FileSystem", "lua");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/data/sound", "FileSystem", "sounddata");
+
 
 
 #if defined(WIN32)
