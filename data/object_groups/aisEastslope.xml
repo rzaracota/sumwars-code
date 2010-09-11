@@ -455,7 +455,7 @@
     <Object subtype="$barrel" 
             center_x="-23.05217507" 
             center_y="-7.767708" 
-           height="4.857225733e-016" 
+           height="8.187894807e-016" 
             angle="0" 
             probability="1" 
             prob_angle="false" 
@@ -470,7 +470,7 @@
     <Object subtype="$barrel" 
             center_x="-24.5" 
             center_y="-7.5" 
-           height="4.857225733e-016" 
+           height="8.187894807e-016" 
             angle="0" 
             probability="1" 
             prob_angle="false" 
@@ -478,7 +478,7 @@
     <Object subtype="$barrel" 
             center_x="-25.5" 
             center_y="-7" 
-           height="4.857225733e-016" 
+           height="8.187894807e-016" 
             angle="0" 
             probability="1" 
             prob_angle="false" 
@@ -486,7 +486,7 @@
     <Object subtype="$barrel" 
             center_x="-24.38289933" 
             center_y="-6.139010563" 
-           height="4.857225733e-016" 
+           height="8.187894807e-016" 
             angle="0" 
             probability="1" 
             prob_angle="false" 
@@ -494,7 +494,7 @@
     <Object subtype="$barrel" 
             center_x="-23.68120827" 
             center_y="-8.966694824" 
-           height="4.857225733e-016" 
+           height="8.187894807e-016" 
             angle="0" 
             probability="1" 
             prob_angle="false" 
@@ -615,13 +615,6 @@
             prob_angle="true" 
     />
     <Object subtype="$single_deb_l" 
-            center_x="-6.943857537" 
-            center_y="20.06764385" 
-            angle="-38.78626454" 
-            probability="1" 
-            prob_angle="false" 
-    />
-    <Object subtype="$single_deb_l" 
             center_x="3.571345613" 
             center_y="23.23462936" 
             angle="50.45003042" 
@@ -629,23 +622,16 @@
             prob_angle="false" 
     />
     <Object subtype="$single_debris" 
-            center_x="-3.5" 
-            center_y="23" 
-            angle="0" 
-            probability="1" 
-            prob_angle="false" 
-    />
-    <Object subtype="$single_debris" 
-            center_x="-5.740301266" 
-            center_y="24.32655041" 
-            angle="0" 
-            probability="1" 
-            prob_angle="false" 
-    />
-    <Object subtype="$single_debris" 
             center_x="-0.1325463785" 
             center_y="22.60164878" 
             angle="0" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="$single_deb_l" name="blockade" 
+            center_x="-6.070117954" 
+            center_y="20.81369148" 
+            angle="-251.5785085" 
             probability="1" 
             prob_angle="false" 
     />
@@ -1039,6 +1025,13 @@
             prob_angle="false" 
     />
     <Object subtype="fence4" 
+            center_x="-10" 
+            center_y="26" 
+            angle="0" 
+            probability="1" 
+            prob_angle="false" 
+    />
+    <Object subtype="fence4" 
             center_x="26.6659193" 
             center_y="0.6303637946" 
             angle="-45" 
@@ -1061,7 +1054,7 @@
     />
     <Object subtype="fence4" 
             center_x="-10" 
-            center_y="26" 
+            center_y="34" 
             angle="0" 
             probability="1" 
             prob_angle="false" 
@@ -1518,8 +1511,10 @@
 
   <Locations>
     <Location name="entry_east" pos_x="30" pos_y="8" />
+    <Location name="entry_south" pos_x="-5.5" pos_y="17.5" />
     <Location name="entry_west" pos_x="-29" pos_y="4.5" />
     <Location name="exit_east" pos_x="38" pos_y="8" />
+    <Location name="exit_south" pos_x="-5" pos_y="29" />
     <Location name="exit_west" pos_x="-37.5" pos_y="4.5" />
     <Location name="locGroup1" pos_x="-18.5" pos_y="-7" />
     <Location name="locGroup2" pos_x="-10" pos_y="-14.5" />
