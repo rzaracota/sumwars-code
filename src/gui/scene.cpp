@@ -750,15 +750,9 @@ void Scene::createScene()
 		//m_minimap_camera->setFrustumExtents (0,dimx*200,0,dimy*200);
 		//DEBUG("camera up %f %f %f",up.x, up.y, up.z);
 
-		target->update();
-
-		colour= region->getLight().getAmbientLight();
-        //m_scene_manager->setAmbientLight(Ogre::ColourValue(colour[0], colour[1], colour[2]));
         m_scene_manager->setAmbientLight(Ogre::ColourValue(1.0f,1.0f,1.0f));
         
         std::cout << colour[0] << " + " << colour[1] << " + " << colour[2] << std::endl;
-		DEBUGX("ambient light %f %f %f",colour[0], colour[1], colour[2]);
-
 		// Boden erstellen
 		if (region->getGroundMaterial() != "")
 		{
@@ -792,6 +786,14 @@ void Scene::createScene()
 				}
 			}
 		}
+
+		m_scene_manager->setAmbientLight(Ogre::ColourValue(0.4,0.4,0.4));
+		target->update();
+
+		colour= region->getLight().getAmbientLight();
+		m_scene_manager->setAmbientLight(Ogre::ColourValue(colour[0], colour[1], colour[2]));
+		DEBUGX("ambient light %f %f %f",colour[0], colour[1], colour[2]);
+		//m_scene_manager->setAmbientLight(Ogre::ColourValue(0.0,0.0,0.0));
 	}
 }
 
