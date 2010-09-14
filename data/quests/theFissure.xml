@@ -498,7 +498,7 @@
 		<!-- Lich erzeugen und zum Nec schicken -->
 		<Event trigger="entryLich" once="true">
 			<Effect>
-				fissure_tmp.lich = createObject("lich","entry_fissure");
+				fissure_tmp.lich = createObject("asoroth","entry_fissure");
 				setRefName(fissure_tmp.lich, _("Unknown Lich"));
 				addUnitCommand(fissure_tmp.lich,"walk","locLich")
 			</Effect>
