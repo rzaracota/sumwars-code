@@ -13,6 +13,15 @@
 
 #define NR_EFFECTS 1
 
+
+enum NrTimers
+{
+	/**
+	 * \brief Number of Timers for actions
+	 */
+	NR_TIMERS = 9
+};
+
 class Item;
 
 /**

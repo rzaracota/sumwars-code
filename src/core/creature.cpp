@@ -102,10 +102,11 @@ bool Creature::init()
 	m_pathfind_counter =0;
 
 	// Timer nullen
-	m_timer1 =0;
-	m_timer2 =0;
-	m_timer1_max =0;
-	m_timer2_max =0;
+	for (int i=0; i<NR_TIMERS; i++)
+	{
+		m_timers[i] = 0;
+		m_timers_max[i] = 0;
+	}
 
 	m_dyn_attr.m_last_attacker_id=0;
 	m_dyn_attr.m_experience=0;
@@ -298,13 +299,13 @@ void Creature::initAction()
 
 	// Testen ob der benoetigte Timer frei ist
 	// Wenn der benoetigte Timer noch laeuft wird die Basisaktion ausgefuehrt
-	if (timernr==1)
+	if (timernr != 0)
 	{
-		if (m_timer1==0)
+		if (m_timers[timernr-1] ==0)
 		{
 			// Timer ist frei, Timer starten
-			m_timer1 = timer;
-			m_timer1_max = timer;
+			m_timers[timernr-1] = timer;
+			m_timers_max[timernr-1] = timer;
 			addToNetEventMask(NetEvent::DATA_TIMER);
 		}
 		else
@@ -313,22 +314,6 @@ void Creature::initAction()
 			m_action.m_type = aci->m_base_action;
 			aci = Action::getActionInfo(m_action.m_type);
 
-		}
-	}
-	else if (timernr==2)
-	{
-		if (m_timer2==0)
-		{
-			// Timer ist frei, Timer starten
-			m_timer2 = timer;
-			m_timer2_max = timer;
-			addToNetEventMask( NetEvent::DATA_TIMER);
-		}
-		else
-		{
-			// Timer laeuft noch, Basisaktion verwenden
-			m_action.m_type = aci->m_base_action;
-			aci = Action::getActionInfo(m_action.m_type);
 		}
 	}
 
@@ -2247,19 +2232,12 @@ bool Creature::update (float time)
 
 
 	// Timer herunterzaehlen lassen
-	m_timer1 -=time;
-	if (m_timer1<0)
+	for (int i=0; i<NR_TIMERS; i++)
 	{
-		m_timer1=0;
+		m_timers[i] -= time;
+		if (m_timers[i] < 0)
+			m_timers[i] = 0;
 	}
-
-	m_timer2 -=time;
-	if (m_timer2<0)
-	{
-		m_timer2=0;
-	}
-
-	DEBUGX("timer1 %f timer2 %f",m_timer1,m_timer2);
 
 
 	// Timer fuer Wegsucheinfo inkrementieren
@@ -3903,10 +3881,16 @@ void Creature::toString(CharConv* cv)
 	cv->toBuffer(getBaseAttr()->m_step_length);
 	cv->toBuffer(getBaseAttrMod()->m_attack_speed);
 	cv->toBuffer(getBaseAttrMod()->m_walk_speed);
-	cv->toBuffer(m_timer1);
-	cv->toBuffer(m_timer1_max);
-	cv->toBuffer(m_timer2);
-	cv->toBuffer(m_timer2_max);
+	int nr_timers = NR_TIMERS;
+	if (cv->getVersion() < 17)
+	{
+		nr_timers = 2;
+	}
+	for (int i=0; i< nr_timers; i++)
+	{
+		cv->toBuffer(m_timers[i]);
+		cv->toBuffer(m_timers_max[i]);
+	}
 
 	cv->toBuffer(static_cast<short>(getBaseAttrMod()->m_abilities.size()));
 	std::map<std::string, AbilityInfo>::iterator it;
@@ -3960,10 +3944,16 @@ void Creature::fromString(CharConv* cv)
 	cv->fromBuffer(getBaseAttr()->m_step_length);
 	cv->fromBuffer(getBaseAttrMod()->m_attack_speed);
 	cv->fromBuffer(getBaseAttrMod()->m_walk_speed);
-	cv->fromBuffer(m_timer1);
-	cv->fromBuffer(m_timer1_max);
-	cv->fromBuffer(m_timer2);
-	cv->fromBuffer(m_timer2_max);
+	int nr_timers = NR_TIMERS;
+	if (cv->getVersion() < 17)
+	{
+		nr_timers = 2;
+	}
+	for (int i=0; i<nr_timers; i++)
+	{
+		cv->fromBuffer(m_timers[i]);
+		cv->fromBuffer(m_timers_max[i]);
+	}
 
 	short nr;
 	cv->fromBuffer(nr);
@@ -4001,20 +3991,12 @@ bool Creature::checkAbility(Action::ActionType act)
 
 float Creature::getTimerPercent(int timer)
 {
-	if (timer ==1)
+	if (timer != 0)
 	{
-		if (m_timer1_max ==0)
+		if (m_timers_max[timer-1] ==0)
 			return 0;
 
-		return m_timer1 / m_timer1_max;
-	}
-
-	if (timer ==2)
-	{
-		if (m_timer2_max ==0)
-			return 0;
-
-		return m_timer2 / m_timer2_max;
+		return m_timers[timer-1] / m_timers_max[timer-1];
 	}
 
 	return 0;
@@ -4091,10 +4073,17 @@ void Creature::writeNetEvent(NetEvent* event, CharConv* cv)
 
 	if (event->m_data & NetEvent::DATA_TIMER)
 	{
-		cv->toBuffer(m_timer1);
-		cv->toBuffer(m_timer2);
-		cv->toBuffer(m_timer1_max);
-		cv->toBuffer(m_timer2_max);
+		int nr_timers = NR_TIMERS;
+		if (cv->getVersion() < 17)
+			nr_timers = 2;
+		for (int i=0; i<nr_timers; i++)
+		{
+			cv->toBuffer(m_timers[i]);
+		}
+		for (int i=0; i<nr_timers; i++)
+		{
+			cv->toBuffer(m_timers_max[i]);
+		}
 	}
 
 	if (event->m_data & NetEvent::DATA_STATE)
@@ -4262,10 +4251,17 @@ void Creature::processNetEvent(NetEvent* event, CharConv* cv)
 
 	if (event->m_data & NetEvent::DATA_TIMER)
 	{
-		cv->fromBuffer(m_timer1);
-		cv->fromBuffer(m_timer2);
-		cv->fromBuffer(m_timer1_max);
-		cv->fromBuffer(m_timer2_max);
+		int nr_timers = NR_TIMERS;
+		if (cv->getVersion() < 17)
+			nr_timers = 2;
+		for (int i=0; i<nr_timers; i++)
+		{
+			cv->fromBuffer(m_timers[i]);
+		}
+		for (int i=0; i<nr_timers; i++)
+		{
+			cv->fromBuffer(m_timers_max[i]);
+		}
 	}
 
 	if (event->m_data & NetEvent::DATA_STATE)
@@ -4467,15 +4463,18 @@ int Creature::getValue(std::string valname)
 		lua_pushstring(EventSystem::getLuaState() , m_emotion_set.c_str() );
 		return 1;
 	}
-	else if (valname == "timer1")
+	else if (valname.substr(0,5) == "timer")
 	{
-		lua_pushnumber(EventSystem::getLuaState(),	m_timer1);
-		return 1;
-	}
-	else if (valname == "timer2")
-	{
-		lua_pushnumber(EventSystem::getLuaState(),	m_timer2);
-		return 1;
+		std::string number = valname.substr(5);
+		std::stringstream stream(number);
+		int timer = 0;
+		stream >> timer;
+		if (timer > 0 && timer <= NR_TIMERS)
+		{
+			lua_pushnumber(EventSystem::getLuaState(),	m_timers[timer-1]);
+			return 1;
+		}
+		return 0;
 	}
 	else if (valname == "ignored_by_ai")
 	{
@@ -4519,17 +4518,20 @@ bool Creature::setValue(std::string valname)
 		addToNetEventMask(NetEvent::DATA_SPEAK_TEXT);
 		return true;
 	}
-	else if (valname == "timer1")
+	else if (valname.substr(0,5) == "timer")
 	{
-		m_timer1 =  lua_tonumber(EventSystem::getLuaState(),-1);
-		lua_pop(EventSystem::getLuaState(), 1);
-		return true;
-	}
-	else if (valname == "timer2")
-	{
-		m_timer2 = lua_tonumber(EventSystem::getLuaState(),-1);
-		lua_pop(EventSystem::getLuaState(), 1);
-		return true;
+		std::string number = valname.substr(5);
+		std::stringstream stream(number);
+		int timer = 0;
+		stream >> timer;
+		if (timer > 0 && timer < NR_TIMERS)
+		{
+			m_timers[timer-1] =  lua_tonumber(EventSystem::getLuaState(),-1);
+			lua_pop(EventSystem::getLuaState(), 1);
+			addToNetEventMask(NetEvent::DATA_TIMER);
+			return true;
+		}
+		return false;
 	}
 	else if (valname == "ignored_by_ai")
 	{

@@ -248,10 +248,11 @@ void  Player::revive()
 	m_path_info=0;
 
 	// Timer nullen
-	m_timer1 =0;
-	m_timer2 =0;
-	m_timer1_max =0;
-	m_timer2_max =0;
+	for (int i=0; i<NR_TIMERS; i++)
+	{
+		m_timers[i] = 0;
+		m_timers_max[i] = 0;
+	}	
 
 	getDynAttr()->m_last_attacker_id=0;
 
@@ -1483,16 +1484,10 @@ void Player::abortAction()
 	}
 
 	// Timer wieder zuruecksetzen
-	if (aci->m_timer_nr==1)
+	if (aci->m_timer_nr!=0)
 	{
-		 m_timer1=0;
-		 m_timer1_max=0;
-	}
-
-	if (aci->m_timer_nr==2)
-	{
-		m_timer2=0;
-		m_timer2_max=0;
+		m_timers[aci->m_timer_nr-1] =0;
+		m_timers_max[aci->m_timer_nr-1] =0;
 	}
 
 	addToNetEventMask(NetEvent::DATA_ACTION);
